@@ -83,7 +83,7 @@ void BosPcFldEnableObject(Task* task, u8 a) {
     }
 }
 
-void BosPcFldResetShake(void) {
+void BosPcFldResetShake() {
     sBosPcFldShakeActive = 0;
     sBosPcFldShakePattern = 0;
     sBosPcFldShakeStep = 0;
@@ -97,7 +97,7 @@ void BosPcFldStartShake(s16 a) {
     sBosPcFldShakeOffset = 0;
 }
 
-void BosPcFldUpdateShake(void) {
+void BosPcFldUpdateShake() {
     const s8* p;
 
     if (sBosPcFldShakeActive != 0) {
@@ -112,7 +112,7 @@ void BosPcFldUpdateShake(void) {
     }
 }
 
-s32 BosPcFldGetShake(void) {
+s32 BosPcFldGetShake() {
     return sBosPcFldShakeOffset;
 }
 

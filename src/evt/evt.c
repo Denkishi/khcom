@@ -150,7 +150,7 @@ void task_evt_shadow_0(EvtShadowWork* work, EvtObj* obj) {
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 }
 
-s32 task_evt_shadow_1(void) {
+s32 task_evt_shadow_1() {
     return 1;
 }
 

@@ -2041,7 +2041,7 @@ u8 GetCardHelpTextCount(u16 a) {
     return gCardHelpDefs[a]->textCount;
 }
 
-u8 IsLevelUpStockUnlocked(void) {
+u8 IsLevelUpStockUnlocked() {
     if (gGameState.progression.level >= sLevelUpStockLevels[gGameState.progression.levelMilestone]) {
         return 1;
     }

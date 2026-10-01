@@ -57,7 +57,7 @@ void ApplySaveSystem(SaveFileLarge* data);
 void ApplySaveFileLarge(SaveFileLarge* data);
 void ApplySaveFileSmall(SaveFileSmall* data);
 
-void SaveWriteSystem(void);
+void SaveWriteSystem();
 
 void SaveWriteFileSmall(u16 file);
 

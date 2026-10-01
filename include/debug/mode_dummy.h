@@ -9,8 +9,8 @@ typedef struct DummyEntry {
 } DummyEntry;
 
 void mode_dummy_0(u32 arg);
-void DummyUpdateExit(void);
-void mode_dummy_1(void);
-void mode_dummy_2(void);
+void DummyUpdateExit();
+void mode_dummy_1();
+void mode_dummy_2();
 
 #endif /* GUARD_MODE_DUMMY_H */

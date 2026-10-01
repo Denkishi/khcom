@@ -257,105 +257,105 @@ void BeginRikuReloadDeal(CardBattleWork* w);
 u8 StockRikuCard(CardBattleWork* w);
 void UseRikuStock(CardBattleWork* w);
 u8 UseRikuHeartlessCard(CardBattleWork* w);
-void TickRikuHcEffectOnCardUse(void);
+void TickRikuHcEffectOnCardUse();
 void ResetRikuReloadGauge(CardBattleWork* w);
 void LoadRikuCardDisplayGfx2(CardDisplayWork* p);
-void TickRikuHcEffectOnPlayEnd(void);
+void TickRikuHcEffectOnPlayEnd();
 u8 func_080827E0(CardDisplayWork* p, void* a);
 void UpdateRikuReloadGauge(CardDisplayWork* p);
 void LookupRikuCardDef(CardDisplayArgs* a, CardDef** out, u8 index);
-void TickRikuHcEffectOnAttackEnd(void);
+void TickRikuHcEffectOnAttackEnd();
 u8 func_08082AE4(CardDisplayWork* p);
 u8 func_08082FF0(CardDisplayWork* p);
 void RefreshRikuCardDisplayGfx(CardDisplayWork* p);
 s32 func_08083ADC(BossCardWork* w);
 void func_08082BF8(CardDisplayWork* p);
 
-void RequestRikuPotion(void) {
+void RequestRikuPotion() {
     gRikuCardReloadRequest = 17;
 }
 
-void RequestRikuHiPotion(void) {
+void RequestRikuHiPotion() {
     gRikuCardReloadRequest = 18;
 }
 
-void RequestRikuMegaPotion(void) {
+void RequestRikuMegaPotion() {
     gRikuCardReloadRequest = 19;
 }
 
-void RequestRikuEther(void) {
+void RequestRikuEther() {
     gRikuCardReloadRequest = 21;
 }
 
-void RequestRikuMegaEther(void) {
+void RequestRikuMegaEther() {
     gRikuCardReloadRequest = 22;
 }
 
-void RequestRikuElixir(void) {
+void RequestRikuElixir() {
     gRikuCardReloadRequest = 23;
 }
 
-void RequestRikuMegalixir(void) {
+void RequestRikuMegalixir() {
     gRikuCardReloadRequest = 24;
 }
 
-void RequestRikuNextCard(void) {
+void RequestRikuNextCard() {
     gRikuCardRequest = 1;
 }
 
-void RequestRikuPrevCard(void) {
+void RequestRikuPrevCard() {
     gRikuCardRequest = 2;
 }
 
-void RequestRikuCardUse(void) {
+void RequestRikuCardUse() {
     gRikuCardRequest = 3;
 }
 
-void RequestRikuCardStock(void) {
+void RequestRikuCardStock() {
     gRikuCardRequest = 4;
 }
 
-void RequestRikuStockUse(void) {
+void RequestRikuStockUse() {
     gRikuCardRequest = 5;
 }
 
-void func_0807E230(void) {
+void func_0807E230() {
     gRikuCardRequest = 8;
 }
 
-void RequestOpenRikuCards(void) {
+void RequestOpenRikuCards() {
     gRikuCardRequest = 6;
 }
 
-void RequestCloseRikuCards(void) {
+void RequestCloseRikuCards() {
     gRikuCardRequest = 7;
 }
 
-void RequestCycleRikuCardList(void) {
+void RequestCycleRikuCardList() {
     gRikuCardRequest = 9;
 }
 
-void RequestSwitchRikuCardList(void) {
+void RequestSwitchRikuCardList() {
     gRikuCardRequest = 10;
 }
 
-void func_0807E26C(void) {
+void func_0807E26C() {
     gRikuCardRequest = 11;
 }
 
-void func_0807E278(void) {
+void func_0807E278() {
     gRikuCardRequest = 12;
 }
 
-void func_0807E284(void) {
+void func_0807E284() {
     gRikuCardRequest = 13;
 }
 
-void ClearRikuCardRequest(void) {
+void ClearRikuCardRequest() {
     gRikuCardRequest = 0;
 }
 
-u8 IsRikuReloadCardSelected(void) {
+u8 IsRikuReloadCardSelected() {
     if (gRikuSelectedCard != NULL) {
         if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) {
             return 1;
@@ -365,7 +365,7 @@ u8 IsRikuReloadCardSelected(void) {
     return 0;
 }
 
-s32 GetRikuSelectedMove(void) {
+s32 GetRikuSelectedMove() {
     CardDef* d;
 
     if (gRikuSelectedCard != NULL) {
@@ -384,7 +384,7 @@ s32 GetRikuSelectedMove(void) {
     return 145;
 }
 
-void SetRikuReloadCharging(void) {
+void SetRikuReloadCharging() {
     // @bug Called before the card battle state exists (NULL write).
     if (gRikuSelectedCard != NULL) {
         if ((gRikuSelectedCard->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) {
@@ -397,12 +397,12 @@ void SetRikuReloadCharging(void) {
     }
 }
 
-u8 GetRikuCardsLeft(void) {
+u8 GetRikuCardsLeft() {
     // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->rikuCardsLeft;
 }
 
-u8 IsRikuSelectionEmpty(void) {
+u8 IsRikuSelectionEmpty() {
     if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD;
     }
@@ -2678,22 +2678,22 @@ void ApplyRikuHcEffect(CardBattleWork* w) {
 #endif
 }
 
-u8 func_08081828(void) {
+u8 func_08081828() {
     // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->unk_0ED;
 }
 
-u8 GetRikuCardListIndex(void) {
+u8 GetRikuCardListIndex() {
     // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->rikuListIndex;
 }
 
-u8 GetActiveCardValue(void) {
+u8 GetActiveCardValue() {
     // @bug Polled before the card battle state exists (NULL read).
     return gCardBattleState->activeValue;
 }
 
-s32 func_08081858(void) {
+s32 func_08081858() {
     if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->cardDef->move;
     }
@@ -2701,7 +2701,7 @@ s32 func_08081858(void) {
     return 145;
 }
 
-u8 GetRikuSelectedCardValue(void) {
+u8 GetRikuSelectedCardValue() {
     if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->value;
     }
@@ -2709,7 +2709,7 @@ u8 GetRikuSelectedCardValue(void) {
     return 0xFF;
 }
 
-u8 CanUseRikuSelectedCard(void) {
+u8 CanUseRikuSelectedCard() {
     if (gRikuBtlWork->hcEffect == 38) {
         if (gRikuSelectedCard->cardDef->category != 1) {
             return 1;
@@ -2735,7 +2735,7 @@ u8 CanUseRikuSelectedCard(void) {
     return 1;
 }
 
-void TickRikuHcEffectOnReload(void) {
+void TickRikuHcEffectOnReload() {
     switch (gRikuBtlWork->hcEffect) {
     case 1:
     case 3:
@@ -2773,7 +2773,7 @@ void TickRikuHcEffectOnReload(void) {
     }
 }
 
-void TickRikuHcEffectOnCardUse(void) {
+void TickRikuHcEffectOnCardUse() {
     if (gRikuBtlWork->hcEffect == 50) {
         gRikuBtlWork->hcEffectCount--;
     }
@@ -3993,7 +3993,7 @@ void UpdateRikuCardValue(CardDisplayWork* p) {
     }
 }
 
-void TickRikuHcEffectOnPlayEnd(void) {
+void TickRikuHcEffectOnPlayEnd() {
     BtlWork* p;
 
     p = gRikuBtlWork;
@@ -4007,23 +4007,23 @@ void TickRikuHcEffectOnPlayEnd(void) {
     }
 }
 
-void TickRikuHcEffectOnAttackEnd(void) {
+void TickRikuHcEffectOnAttackEnd() {
     if (gRikuBtlWork->hcEffect == 2) {
         gRikuBtlWork->hcEffectCount--;
     }
 }
 
-void func_080838E8(void) {
+void func_080838E8() {
 }
 
-void RequestBossCardClose(void) {
+void RequestBossCardClose() {
     gBossCardRequest = 7;
 }
 
-void func_080838F8(void) {
+void func_080838F8() {
 }
 
-void func_080838FC(void) {
+void func_080838FC() {
 }
 
 void RequestBossCardValue(u8 a) {
@@ -4031,11 +4031,11 @@ void RequestBossCardValue(u8 a) {
     gBossCardRequestValue = a;
 }
 
-void RequestBossCardRandom(void) {
+void RequestBossCardRandom() {
     gBossCardRequest = 2;
 }
 
-u8 func_08083920(void) {
+u8 func_08083920() {
     return GetBossCardValue();
 }
 
@@ -4120,10 +4120,10 @@ s32 func_08083ADC(BossCardWork* w) {
     return 1;
 }
 
-void Bosscard_2(void) {
+void Bosscard_2() {
 }
 
-void Bosscard_3(void) {
+void Bosscard_3() {
 }
 
 u8 FlipBossCard(BossCardWork* w, u8 b) {

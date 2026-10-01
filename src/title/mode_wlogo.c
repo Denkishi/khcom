@@ -20,7 +20,7 @@
 #include "text_types.h"
 #include "types.h"
 
-void WLogoInitWorldSelect(void);
+void WLogoInitWorldSelect();
 void WLogoStartLogo(u8 a);
 
 static u8* sWorldNames[13] = {
@@ -105,7 +105,7 @@ void mode_wLogo_0(s32 arg) {
     WLogoInitWorldSelect();
 }
 
-void mode_wLogo_1(void) {
+void mode_wLogo_1() {
     u8* p;
 
     switch (sWLogoState) {
@@ -177,7 +177,7 @@ void mode_wLogo_1(void) {
     }
 }
 
-void mode_wLogo_2(void) {
+void mode_wLogo_2() {
     FreeTextSlots(sWLogoNameSlots, 20);
     ReleaseObjPalette(sWLogoNamePalette);
 
@@ -188,7 +188,7 @@ void mode_wLogo_2(void) {
     }
 }
 
-void WLogoInitWorldSelect(void) {
+void WLogoInitWorldSelect() {
     u8* p;
     FadeStartIn(FADE_MODE_BLACK, 16);
     SetBgMode0();

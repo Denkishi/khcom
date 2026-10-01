@@ -79,7 +79,7 @@ void AdvanceLevelExpThreshold(PlayerProgression* p) {
     }
 }
 
-void InitPlayerProgression(void) {
+void InitPlayerProgression() {
     PlayerProgression* p = &gGameState.progression;
 
     p->maxHp = 0x50;
@@ -111,7 +111,7 @@ void InitPlayerProgression(void) {
     ClearMoogleShopFlags();
 }
 
-u8 LevelUp(void) {
+u8 LevelUp() {
     PlayerProgression* p = &gGameState.progression;
 
     if (p->level + gBtlWork->pendingLevelUps + 1 <= 99) {
@@ -124,7 +124,7 @@ u8 LevelUp(void) {
     }
 }
 
-s32 LevelUpMaxHp(void) {
+s32 LevelUpMaxHp() {
     gGameState.progression.maxHp += 15;
 
     if (gGameState.progression.maxHp > 560) {
@@ -134,7 +134,7 @@ s32 LevelUpMaxHp(void) {
     return 15;
 }
 
-s32 LevelUpCp(void) {
+s32 LevelUpCp() {
     gGameState.progression.cp += 25;
 
     if (gGameState.progression.cp > 9999) {
@@ -144,7 +144,7 @@ s32 LevelUpCp(void) {
     return 25;
 }
 
-s32 LevelUpDp(void) {
+s32 LevelUpDp() {
     gGameState.progression.dp += 2;
 
     if (gGameState.progression.dp > 999) {
@@ -154,7 +154,7 @@ s32 LevelUpDp(void) {
     return 2;
 }
 
-s32 LevelUpAp(void) {
+s32 LevelUpAp() {
     gGameState.progression.ap += 1;
 
     if (gGameState.progression.ap > 999) {
@@ -170,7 +170,7 @@ void AddExp(u16 a) {
     p->exp += a;
 }
 
-u8 CanLevelUp(void) {
+u8 CanLevelUp() {
     PlayerProgression* p = &gGameState.progression;
 
     if (p->exp >= p->nextExp) {

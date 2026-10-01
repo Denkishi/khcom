@@ -403,15 +403,15 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a);
 void FreeCollectionEntries(DeckMenuWork* w);
 void DrawValueCount(u8 a, u16 b);
 void DrawDeckCategoryCount(u8 a, u8 b);
-u16 CountCollectionCards(void);
-u16 CountCardsInDecks(void);
+u16 CountCollectionCards();
+u16 CountCardsInDecks();
 void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode);
 s32 CreateCollectionGridCards(DeckMenuWork* w, u8 kind, u8 c);
 void ScrollGridDown(DeckMenuWork* w);
 DeckCard2Work* GetCardAtCursor(DeckMenuWork* w);
 void DrawDeckEquipMarker(u8 mode);
 void DrawDeckCpCost(u8 mode);
-void DrawCardTotals(void);
+void DrawCardTotals();
 void DrawSelectedValueCpCost(DeckMenuWork* w);
 s32 MoveValueCursor(DeckMenuWork* w, u16 keys);
 s32 AddSelectedValueCardToDeck(DeckMenuWork* w);
@@ -540,7 +540,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* 
     return count;
 }
 
-void func_08084FA8(void) {
+void func_08084FA8() {
 }
 
 u16 CountCollectionCardsOfCategory(u8 slot) {
@@ -627,7 +627,7 @@ u8 CollectionHasCard(u16 id) {
     return 0;
 }
 
-void InitDecks(void) {
+void InitDecks() {
     u16 i;
     u16 j;
 
@@ -791,7 +791,7 @@ void RemoveCardFromDeck(u16* p, u8 deck) {
     *p = 0xFFFF;
 }
 
-void RecalculateInactiveDeckCpCosts(void) {
+void RecalculateInactiveDeckCpCosts() {
     u8 i;
     u16 total;
     s32 j;
@@ -827,7 +827,7 @@ void ConvertActiveDeckCardToPremium(u16 index) {
     RecalculateInactiveDeckCpCosts();
 }
 
-u8 HasNonPremiumCardsInActiveDeck(void) {
+u8 HasNonPremiumCardsInActiveDeck() {
     Deck* deck;
     s32 count;
     s32 i;
@@ -850,7 +850,7 @@ u8 HasNonPremiumCardsInActiveDeck(void) {
     return 1;
 }
 
-Deck* GetActiveDeck(void) {
+Deck* GetActiveDeck() {
     return &gDecks[gActiveDeck];
 }
 
@@ -1054,7 +1054,7 @@ u8 GetCollectionCardCategory(u16 index) {
     return gCardDefs[gCardCollection[index] & CARD_ID_MASK].category;
 }
 
-u8 IsActiveDeckAllPremium(void) {
+u8 IsActiveDeckAllPremium() {
     Deck* deck;
     s32 a;
     s32 b;
@@ -1092,7 +1092,7 @@ u8 IsActiveDeckAllPremium(void) {
 #ifdef VERSION_JP
 #include "deck_names_shift_jis.inc"
 #endif
-void InitSoraDecks(void) {
+void InitSoraDecks() {
     gActiveDeck = 0;
     InitCardCollection();
     InitDecks();
@@ -1124,7 +1124,7 @@ void InitSoraDecks(void) {
 #endif
 }
 
-void InitDebugDecks(void) {
+void InitDebugDecks() {
     gActiveDeck = 0;
     InitCardCollection();
     InitDecks();
@@ -1284,11 +1284,11 @@ void BuildRikuDeck(u8 a) {
     }
 }
 
-u8 GetActiveDeckIndex(void) {
+u8 GetActiveDeckIndex() {
     return gActiveDeck;
 }
 
-void func_08085FB0(void) {
+void func_08085FB0() {
 }
 
 #ifdef VERSION_EU
@@ -5185,7 +5185,7 @@ void DrawCollectionFilterTab(u8 kind, u8 slot) {
     }
 }
 
-void DrawCardTotals(void) {
+void DrawCardTotals() {
     u8 d1[3];
     u8 d2[3];
     u16 a;

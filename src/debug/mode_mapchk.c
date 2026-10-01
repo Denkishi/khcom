@@ -512,7 +512,7 @@ void MapChkEditMaxDepth(MapChkWork* p) {
     }
 }
 
-void Mode_MapChk_0(void) {
+void Mode_MapChk_0() {
     const u8* t;
     s32 n;
 
@@ -559,7 +559,7 @@ void Mode_MapChk_0(void) {
     m4aMPlayAllStop();
 }
 
-void Mode_MapChk_1(void) {
+void Mode_MapChk_1() {
     MapChkWork* e;
 
     DebugTextPrint(12, gMapChkWork->cursor * 12 + 32, 2, sMapChkCursorBlankText);
@@ -641,7 +641,7 @@ void Mode_MapChk_1(void) {
     }
 }
 
-void Mode_MapChk_2(void) {
+void Mode_MapChk_2() {
     DebugTextDestroy();
     EwramFree(gMapChkWork);
 }

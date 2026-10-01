@@ -140,7 +140,7 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
 }
 
-void BtlWorkInit(void) {
+void BtlWorkInit() {
     s32 zero = 0;
     u8* d;
     u8* p;
@@ -157,7 +157,7 @@ void BtlWorkInit(void) {
     ListPoolInit(&gBtlWork->pool2);
 }
 
-void UpdateEnemyCardUse(void) {
+void UpdateEnemyCardUse() {
     BtlObj* p;
 
     if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
@@ -186,7 +186,7 @@ void UpdateEnemyCardUse(void) {
     UseEnemyCard(p->kind);
 }
 
-void HandleSoraCardInput(void) {
+void HandleSoraCardInput() {
     BtlObj* p;
     u16 t;
     u16 a;
@@ -306,7 +306,7 @@ void HandleSoraCardInput(void) {
     }
 }
 
-void HandleRikuCardInput(void) {
+void HandleRikuCardInput() {
     BtlObj* p;
     u16 t;
     u16 a;
@@ -412,7 +412,7 @@ void HandleRikuCardInput(void) {
     }
 }
 
-void HandleTutorialCardInput(void) {
+void HandleTutorialCardInput() {
     BtlObj* p;
     u16 a;
     u16 pressed;
@@ -527,7 +527,7 @@ void HandleTutorialCardInput(void) {
     }
 }
 
-void MakeOpponentsHittable(void) {
+void MakeOpponentsHittable() {
     BtlWork* w = gBtlWork;
     BtlObj* p;
 
@@ -633,7 +633,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
     }
 }
 
-void EndCardPlay(void) {
+void EndCardPlay() {
     gBtlWork->phase = 1;
 
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
@@ -644,7 +644,7 @@ void EndCardPlay(void) {
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
 
-void _08019CB4(void) {
+void _08019CB4() {
     BtlObj* player;
     s32 i;
     s32 changed;
@@ -1359,7 +1359,7 @@ void BeginBossDefeat(BtlObj* actor) {
     gBtlWork->enemyCount = 0;
 }
 
-void EndBossDefeat(void) {
+void EndBossDefeat() {
     gBtlWork->flags &= ~BTL_FLAG_BOSS_DEFEATING;
 }
 
@@ -2145,7 +2145,7 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
     return 1;
 }
 
-void AllocBattleTiles(void) {
+void AllocBattleTiles() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         gBtlWork->tiles = AllocObjTiles(0x840, 0);
     } else {
@@ -2160,7 +2160,7 @@ void AllocBattleTiles(void) {
     gBtlWork->flags |= BTL_FLAG_TILES_ALLOCATED;
 }
 
-void ReleaseBattleTiles(void) {
+void ReleaseBattleTiles() {
     if (gBtlWork->flags & BTL_FLAG_TILES_ALLOCATED) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             ReleaseObjTiles(gBtlWork->tiles);
@@ -2250,7 +2250,7 @@ void SetBtlObjUnhittable(BtlObj* p, u8 f) {
     }
 }
 
-void ExitBattle(void) {
+void ExitBattle() {
     m4aMPlayAllStop();
 
     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
@@ -2667,7 +2667,7 @@ u8 StepHitFlashSolid(BtlObj* p) {
     return 1;
 }
 
-void InitGameState(void) {
+void InitGameState() {
     s32 zero = 0;
     CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
 
@@ -2686,15 +2686,15 @@ void InitGameState(void) {
     gGameState.roomEffect = 0;
 }
 
-void ClearFieldResume(void) {
+void ClearFieldResume() {
     gGameState.fieldResume = 0;
 }
 
-void RequestFieldResume(void) {
+void RequestFieldResume() {
     gGameState.fieldResume = 1;
 }
 
-void SeedGameRandom(void) {
+void SeedGameRandom() {
     if (gGameState.fieldResume != 0) {
         SeedRandom(gGameState.randomSeed);
     } else {
@@ -2703,7 +2703,7 @@ void SeedGameRandom(void) {
     }
 }
 
-void ResetGameState(void) {
+void ResetGameState() {
     SeedRandom(gFrameCounter);
     InitGameState();
     ClearFieldResume();

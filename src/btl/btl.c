@@ -278,7 +278,7 @@ void task_btl_lockon_0(BtlLockonWork* work) {
     gBtlWork->actor2 = 0;
 }
 
-void SelectLockonTarget(void) {
+void SelectLockonTarget() {
     BtlObj* p;
     BtlObj* e;
     s32 min;

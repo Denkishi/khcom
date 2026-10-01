@@ -3095,7 +3095,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateEventSeqSkip(void) {
+u8 UpdateEventSeqSkip() {
     u8 r = FadeIsActive();
     u8 v;
 
@@ -7354,7 +7354,7 @@ void msgwait_yesno_3(MsgWaitWork* p) {
     FreeTextSlots(p->textSlots2, 10);
 }
 
-void HBlankIntrEventScanlineScroll(void) {
+void HBlankIntrEventScanlineScroll() {
     vu16 v;
 
     v = REG_VCOUNT;
@@ -7368,7 +7368,7 @@ void HBlankIntrEventScanlineScroll(void) {
     }
 }
 
-void HBlankIntrEventBgWave(void) {
+void HBlankIntrEventBgWave() {
     gIntrCheck |= 2;
     HBlankIntrEventScanlineScroll();
 }
@@ -7432,7 +7432,7 @@ void view_0(EventCameraWork* p, u8* arg) {
     }
 }
 
-void ClearEventObjPaletteExclusions(void) {
+void ClearEventObjPaletteExclusions() {
     u8 i;
 
     for (i = 0; i < 16; i++) {
@@ -7714,10 +7714,10 @@ u8 view_1(EventCameraWork* p, Task* task) {
     return 1;
 }
 
-void view_2(void) {
+void view_2() {
 }
 
-void view_3(void) {
+void view_3() {
 }
 
 void SetEventCameraCenter(EventCameraWork* p) {

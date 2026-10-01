@@ -47,11 +47,11 @@ void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
     RequestDma3Copy(b, sTitlePaletteBuffer + a * 32, c);
 }
 
-void TitleLoadPaletteBuffer(void) {
+void TitleLoadPaletteBuffer() {
     LoadPalette(sTitlePaletteBuffer, (void*)PLTT, 0x400);
 }
 
-void TitleExitToChoice(void) {
+void TitleExitToChoice() {
     if (sTitleCancelled != 0) {
         ModeRequest(&gModeTitle, 0);
         return;
@@ -109,7 +109,7 @@ void TitleShowLogo(u16 a) {
     FadeStartIn(FADE_MODE_ADD_WHITE, a);
 }
 
-void TitleFinishIntro(void) {
+void TitleFinishIntro() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -133,14 +133,14 @@ void TitleFinishIntro(void) {
     m4aSongNumStart(SONG_BGM_TITLE);
 }
 
-void TitleFadeOut(void) {
+void TitleFadeOut() {
     m4aMPlayFadeOut(gMPlayTable[gSongTable[6].ms].info, 5);
     FadeStartOut(FADE_MODE_BLACK, 90);
     BackdropFadeStartOut(0, 90);
     sTitleState = 9;
 }
 
-void mode_title_0(void) {
+void mode_title_0() {
     sTitleCancelled = 0;
     ResetGameState();
     SaveLoadHeader();
@@ -210,7 +210,7 @@ void mode_title_0(void) {
     sTitleTimer = 0x1E;
 }
 
-void mode_title_1(void) {
+void mode_title_1() {
     switch (sTitleState) {
     case 0:
         if (FadeIsActive()) {
@@ -419,7 +419,7 @@ void mode_title_1(void) {
     }
 }
 
-void mode_title_2(void) {
+void mode_title_2() {
     TaskPoolDestroy(&sTitleTaskPool);
     REG_IME = 0;
     REG_IE &= ~INTR_FLAG_VCOUNT;
@@ -429,7 +429,7 @@ void mode_title_2(void) {
     EwramFree(sTitlePaletteBuffer);
 }
 
-u8 IsTitleLogoShown(void) {
+u8 IsTitleLogoShown() {
     if (sTitleState > 2) {
         return 1;
     }
@@ -437,7 +437,7 @@ u8 IsTitleLogoShown(void) {
     return 0;
 }
 
-u8 IsTitleIntroDone(void) {
+u8 IsTitleIntroDone() {
     if (sTitleState > 4) {
         return 1;
     }

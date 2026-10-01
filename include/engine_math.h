@@ -15,9 +15,9 @@ s32 GetHalfStepDivisor(u16 steps);
 void ApproachValueHalfSteps(s32* value, s32 target, u16 steps);
 void ApproachValueHalf(s32* value, s32 target);
 void SeedRand(u32 seed);
-u32 Rand(void);
+u32 Rand();
 void SeedRandom(u32 seed);
-u16 GetRandom(void);
+u16 GetRandom();
 
 s32 Sqrt8(s32 a);
 

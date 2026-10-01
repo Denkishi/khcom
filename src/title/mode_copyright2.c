@@ -26,7 +26,7 @@ void mode_copyright2_0(s32 arg) {
     gCopyright2Timer = 60;
 }
 
-void mode_copyright2_1(void) {
+void mode_copyright2_1() {
     if (!FadeIsActive()) {
         if (gCopyright2Timer != 0) {
             if (--gCopyright2Timer == 0) {
@@ -38,7 +38,7 @@ void mode_copyright2_1(void) {
     }
 }
 
-void mode_copyright2_2(void) {
+void mode_copyright2_2() {
 }
 
 u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
@@ -75,7 +75,7 @@ u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
     return dst;
 }
 
-void LoadStatusNumberTiles(void) {
+void LoadStatusNumberTiles() {
     u8* p;
 
     p = GetBgCharBase(2) + 0x40;

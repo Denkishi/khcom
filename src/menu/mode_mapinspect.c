@@ -183,15 +183,15 @@ s16 GetMapInspectTabStart(s16 a) {
     return r;
 }
 
-s16 GetMapInspectSelectedIndex(void) {
+s16 GetMapInspectSelectedIndex() {
     return GetMapInspectTabStart(sMapInspectTab) + (sMapInspectGridScroll + sMapInspectGridRow) * 3 + sMapInspectGridCol;
 }
 
-MapCardInventoryEntry* GetMapInspectSelectedEntry(void) {
+MapCardInventoryEntry* GetMapInspectSelectedEntry() {
     return &sMapCardInventoryEntries[GetMapInspectSelectedIndex()];
 }
 
-void MapInspectSelectFirstValue(void) {
+void MapInspectSelectFirstValue() {
     MapCardInventoryEntry* p;
     s16 i;
 
@@ -231,7 +231,7 @@ s16 GetMapInspectTabCount(s16 a) {
     return r;
 }
 
-u8 MapInspectCanDelete(void) {
+u8 MapInspectCanDelete() {
     if (sMapInspectCardTotal > 20) {
         return 1;
     }
@@ -239,7 +239,7 @@ u8 MapInspectCanDelete(void) {
     return 0;
 }
 
-void MapInspectLoadGrid(void) {
+void MapInspectLoadGrid() {
     s16 a;
     s16 k;
     s16 i;
@@ -279,7 +279,7 @@ void MapInspectLoadGrid(void) {
     }
 }
 
-void MapInspectLoadSelectedCard(void) {
+void MapInspectLoadSelectedCard() {
     MapCardInventoryEntry* p;
     u16 idx;
     u16 k;
@@ -349,16 +349,16 @@ s16 GetMapInspectValueIndex(s16 a, s16 b) {
     return b + a * 5;
 }
 
-s16 GetMapInspectSelectedValue(void) {
+s16 GetMapInspectSelectedValue() {
     return GetMapInspectValueIndex(sMapInspectValueCol, sMapInspectValueRow);
 }
 
-void MapInspectDrawCardTotal(void) {
+void MapInspectDrawCardTotal() {
     LoadDecimalDigitTiles(sMapInspectCardTotal, gUnk_09A0693C, (u8*)GetBgCharBase(0) + 0x3A0, 32, 2);
     LoadDecimalDigitTiles(99, gUnk_09A0693C, (u8*)GetBgCharBase(0) + 0x3E0, 32, 2);
 }
 
-void MapInspectDrawCategoryCounts(void) {
+void MapInspectDrawCategoryCounts() {
     s16 i;
     s16 v;
 
@@ -373,7 +373,7 @@ void MapInspectDrawCategoryCounts(void) {
     }
 }
 
-void MapInspectDrawValueCounts(void) {
+void MapInspectDrawValueCounts() {
     MapCardInventoryEntry* p;
     s16 i;
     s32 v;
@@ -431,7 +431,7 @@ void MapInspectDrawTab(s16 a) {
     RequestTilemapRectCopy(gUnk_09A34D9C, GetBgScreenBase(0), 0, sMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
 }
 
-void MapInspectDeleteCard(void) {
+void MapInspectDeleteCard() {
     MapCardInventoryEntry* p;
     u16 card;
 
@@ -544,7 +544,7 @@ void MapInspectRemoveEntry(MapCardInventoryEntry* p) {
     MapInspectDrawValueCounts();
 }
 
-void MapInspectBuildInventory(void) {
+void MapInspectBuildInventory() {
     s16* pd;
     vu32* dma;
     vu16 zero;
@@ -614,7 +614,7 @@ void MapInspectBuildInventory(void) {
     }
 }
 
-u16 MapInspectReadMenuKeys(void) {
+u16 MapInspectReadMenuKeys() {
     u16 keys;
 
     keys = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
@@ -622,7 +622,7 @@ u16 MapInspectReadMenuKeys(void) {
     return keys;
 }
 
-void MapInspectHandleGridInput(void) {
+void MapInspectHandleGridInput() {
     s16 a;
     s16 b;
     s16 c;
@@ -708,7 +708,7 @@ void MapInspectHandleGridInput(void) {
     }
 }
 
-void MapInspectHandleTabInput(void) {
+void MapInspectHandleTabInput() {
     s16 old;
     u16 keys;
 
@@ -787,7 +787,7 @@ void MapInspectSelectValueInColumn(MapCardInventoryEntry* p, u16 row) {
     }
 }
 
-void MapInspectHandleValueInput(void) {
+void MapInspectHandleValueInput() {
     MapCardInventoryEntry* p;
     s16 a;
     s16 b;
@@ -858,7 +858,7 @@ void MapInspectHandleValueInput(void) {
     }
 }
 
-void MapInspectHandleConfirmInput(void) {
+void MapInspectHandleConfirmInput() {
     MapCardInventoryEntry* p;
     s16 old;
     u16 keys;
@@ -924,7 +924,7 @@ void MapInspectHandleConfirmInput(void) {
     }
 }
 
-void MapInspectHandleNoticeInput(void) {
+void MapInspectHandleNoticeInput() {
     u16 keys;
 
     keys = MapInspectReadMenuKeys();
@@ -942,7 +942,7 @@ void MapInspectHandleNoticeInput(void) {
     }
 }
 
-void MapInspectDraw(void) {
+void MapInspectDraw() {
     s32 i;
     s32 j;
     s16 n;
@@ -1080,7 +1080,7 @@ void MapInspectDraw(void) {
     }
 }
 
-void mode_mapinspect_0(void) {
+void mode_mapinspect_0() {
     s16 i;
     s16 j;
     s16 v;
@@ -1284,7 +1284,7 @@ void mode_mapinspect_0(void) {
     DisableBg(3);
 }
 
-void mode_mapinspect_1(void) {
+void mode_mapinspect_1() {
     UpdatePlayTime();
 
     switch (sMapInspectState) {
@@ -1361,7 +1361,7 @@ void mode_mapinspect_1(void) {
     MapInspectDraw();
 }
 
-void mode_mapinspect_2(void) {
+void mode_mapinspect_2() {
     s32 i;
     s32 j;
 

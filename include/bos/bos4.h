@@ -85,10 +85,10 @@ typedef struct UrsulaThunderWork {
 
 void BosUrsulaStartAttack(s32 a);
 
-u8 BosUrsulaIsAttacking(void);
-u8 BosUrsulaIsCharging(void);
+u8 BosUrsulaIsAttacking();
+u8 BosUrsulaIsCharging();
 
-u16 BosUrsulaGetCardInterval(void);
+u16 BosUrsulaGetCardInterval();
 u8 BosBoogieExplosiondiceIsHeld(BoogieExplosiondiceWork* work);
 u8 BosMapanimeIsAtEnd(BosMapanimeState* p);
 void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work);
@@ -288,15 +288,15 @@ typedef struct BoogieKaihukuWork {
 } BoogieKaihukuWork;
 
 u16 BosMapanimeGetFrameIndex(BosMapanimeState* p);
-u8 BosUrsulaIsFacingLeft(void);
-u8 BosUrsulaIsGimmickActive(void);
-u8 BosUrsulaObjectsGone(void);
-u8 BosUrsulaIsGimmickStarting(void);
-u8 func_080DC5B0(void);
-u32 BosUrsulaGetHpPhase(void);
-u8 BosBoogieIsActorPastSaku(void);
+u8 BosUrsulaIsFacingLeft();
+u8 BosUrsulaIsGimmickActive();
+u8 BosUrsulaObjectsGone();
+u8 BosUrsulaIsGimmickStarting();
+u8 func_080DC5B0();
+u32 BosUrsulaGetHpPhase();
+u8 BosBoogieIsActorPastSaku();
 u8 BosBoogieKnifeIsLanded(BoogieKnifeWork* work);
-u8 BosUrsulaIsDefeated(void);
+u8 BosUrsulaIsDefeated();
 s32 BosUrsulaGetTakoPlatformRadius(u8 a);
 void task_bos_ursula_border_0(UrsulaBorderWork* work);
 void task_bos_ursula_border_3(UrsulaBorderWork* work);
@@ -312,12 +312,12 @@ void task_bos_boogie_kaihuku_3(BoogieKaihukuWork* work);
 void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work);
 void task_bos_boogie_knifereader_2(BoogieKnifereaderWork* work);
 void task_bos_boogie_knifereader_3(BoogieKnifereaderWork* work);
-void task_bos_boogie_mapanime_2(void);
-void task_bos_boogie_mapanime_3(void);
-void task_bos_ursula_thunder_2(void);
-void task_bos_ursula_thunder_3(void);
-void task_bos_ursula_map_3(void);
-s32 task_bos_ursula_border_1(void);
+void task_bos_boogie_mapanime_2();
+void task_bos_boogie_mapanime_3();
+void task_bos_ursula_thunder_2();
+void task_bos_ursula_thunder_3();
+void task_bos_ursula_map_3();
+s32 task_bos_ursula_border_1();
 void BosUrsulaBubblePop(UrsulaBubbleSingleWork* work);
 u8 task_bos_ursula_bubble_1(UrsulaBubbleWork* work);
 void task_bos_ursula_bubble_2(UrsulaBubbleWork* work);
@@ -362,7 +362,7 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
 extern u8 gUnk_0979666A[];
 extern u8 gUnk_0984AF98[];
 
-u8 task_bos_boogie_map_1(void);
+u8 task_bos_boogie_map_1();
 
 void task_bos_boogie_dice_2(BoogieDiceWork* work);
 u8 BosBoogieDiceIsHeld(BoogieDiceWork* work);

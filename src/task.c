@@ -61,7 +61,7 @@ u8 GetAngle(s32 x0, s32 y0, s32 x1, s32 y1) {
     return angle;
 }
 
-void UpdatePlayTime(void) {
+void UpdatePlayTime() {
     if (gFrameCounter % 60 == 0) {
         if (gGameState.playTime <= 0x57E3E) {
             gGameState.playTime++;
@@ -69,7 +69,7 @@ void UpdatePlayTime(void) {
     }
 }
 
-void SetupRikuNewGame(void) {
+void SetupRikuNewGame() {
     InitStartFloor(0, 0);
     gGameState.progression.unk_82 = 0xE7FF;
     gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
@@ -85,7 +85,7 @@ void SetupRikuNewGame(void) {
     SetJiminyFlag(0xF3);
 }
 
-void SetupSoraNewGame(void) {
+void SetupSoraNewGame() {
     gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
     InitSoraDecks();
     gGameState.flags &= ~GAME_FLAG_RIKU;

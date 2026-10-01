@@ -205,7 +205,7 @@ u16* GetPaletteBufferBank(u8 bank) {
     return &gPaletteBuffer->colors[bank * 32];
 }
 
-void ResetPaletteEffect(void) {
+void ResetPaletteEffect() {
     gPaletteEffect = 0;
     gPaletteEffectSaved = 0;
 }
@@ -222,7 +222,7 @@ u16* LoadPaletteWithEffect(void* src, u16* dst, u16 size) {
     return BrightenPalette(src, dst, size, gPaletteEffect);
 }
 
-s16 GetPaletteEffect(void) {
+s16 GetPaletteEffect() {
     return gPaletteEffect;
 }
 
@@ -235,11 +235,11 @@ void PushPaletteEffect(s32 a) {
     gPaletteEffect = a;
 }
 
-void PopPaletteEffect(void) {
+void PopPaletteEffect() {
     gPaletteEffect = gPaletteEffectSaved;
 }
 
-void PalletInit(void) {
+void PalletInit() {
     s32 zero;
 
     SetIwramHeapName(sPalletHeapName);
@@ -249,11 +249,11 @@ void PalletInit(void) {
     PalletClear();
 }
 
-void PalletFree(void) {
+void PalletFree() {
     IwramFree(gPaletteBuffer);
 }
 
-void PalletClear(void) {
+void PalletClear() {
     s32 i;
 
     for (i = 0; i < 512; i++) {
@@ -363,7 +363,7 @@ u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
     return gPaletteBuffer->colors;
 }
 
-void StartBgWave(void (*callback)(void)) {
+void StartBgWave(void (*callback)()) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -406,7 +406,7 @@ void StopBgWave(s32 a) {
     DisableHBlankIntr();
 }
 
-void HBlankIntrBgWave(void) {
+void HBlankIntrBgWave() {
     vu16 line;
     s32 i;
 
@@ -422,7 +422,7 @@ void HBlankIntrBgWave(void) {
     }
 }
 
-void StopAllBgWaves(void) {
+void StopAllBgWaves() {
     s32 i;
 
     for (i = 0; i < 4; i++) {

@@ -17,7 +17,7 @@ u8 LayoutMsgGlyphsSjis(s32 a, s32 b, u8* c);
 s32 GetMsgTextWidth(TextChar* a);
 u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s);
 void DrawMsgGlyphs(u8 n);
-void FreeMsgGlyphSprites(void);
+void FreeMsgGlyphSprites();
 #ifdef VERSION_EU
 s16 eu_0806629C(TextSlot* p, u8 n);
 #endif
@@ -37,7 +37,7 @@ s32 CopySjisGlyphsToVramAt(TextChar* str, u16 tile);
 #endif
 u8 CopyLatinGlyphsToVram(TextChar* str, u16* widths, u16 tile);
 void DrawCardMsgGlyphs(u8 n);
-void FreeCardMsgGlyphSprites(void);
+void FreeCardMsgGlyphSprites();
 
 extern const u16 gMsgwinClosedScrollX[4];
 extern const u16 gMsgwinOpenScrollX[4];

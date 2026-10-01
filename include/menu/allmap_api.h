@@ -5,7 +5,7 @@
 
 struct TaskPool;
 
-void ClearStockMesDispWork(void);
+void ClearStockMesDispWork();
 u8 TestAllmapRoomFlag(u8 a, u16 b);
 void* CreateAllmapRoomTask(struct TaskPool* pool);
 

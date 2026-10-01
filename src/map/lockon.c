@@ -308,7 +308,7 @@ void func_0805F728(s32* x, s32* y) {
     }
 }
 
-void DebugTextClearBg(void) {
+void DebugTextClearBg() {
     s32 a;
     s32 b;
     void* charBase = GetBgCharBase(0);
@@ -324,7 +324,7 @@ void func_0805F7B0(s32 a) {
     gUnk_02034A24 = a;
 }
 
-void func_0805F7BC(void) {
+void func_0805F7BC() {
     DebugTextClearBg();
 }
 
@@ -360,7 +360,7 @@ u8 func_0805F8F0(u8 a) {
     return a * 4 % 32;
 }
 
-void DebugTextClearLines(void) {
+void DebugTextClearLines() {
     u8 i;
     u8 j;
 
@@ -736,7 +736,7 @@ void func_08060470(u8 bg) {
     }
 }
 
-void DebugTextClear(void) {
+void DebugTextClear() {
     gDebugTextLineCount = 0;
 }
 
@@ -823,11 +823,11 @@ void DebugTextDraw(u8 bg) {
     DebugTextClearLines();
 }
 
-void DebugTextFree(void) {
+void DebugTextFree() {
     EwramFree(gDebugTextLines);
 }
 
-void DebugTextDestroy(void) {
+void DebugTextDestroy() {
     DebugTextFree();
 }
 

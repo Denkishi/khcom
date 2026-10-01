@@ -637,7 +637,7 @@ u8 task_bos_jf_map_1(JfMapWork* work) {
     return 1;
 }
 
-void BosJfDrawPillars(void) {
+void BosJfDrawPillars() {
     RequestMapRowsCopy(gBosJfPillarMaps[0][gBosJfLeftPillarLevel], gBosJfMapBuffer + 0x24c, 7, 0x17);
     RequestMapRowsCopy(gBosJfPillarMaps[1][gBosJfMiddlePillarLevel], gBosJfMapBuffer + 0x25a, 7, 0x17);
     RequestMapRowsCopy(gBosJfPillarMaps[0][gBosJfRightPillarLevel], gBosJfMapBuffer + 0x268, 7, 0x17);
@@ -652,7 +652,7 @@ void BosJfStartShake(s16 a) {
     gBosJfShakeOffset = 0;
 }
 
-s32 BosJfUpdateShake(void) {
+s32 BosJfUpdateShake() {
     if (gBosJfShakeActive == 1) {
         gBosJfShakeTimer++;
 

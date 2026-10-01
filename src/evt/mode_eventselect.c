@@ -105,7 +105,7 @@ s16 GetEventListLength(u8 a) {
     return n;
 }
 
-void mode_eventselect_0(void) {
+void mode_eventselect_0() {
     SetBgMode0();
     func_08085FB0();
     InitSoraDecks();
@@ -116,7 +116,7 @@ void mode_eventselect_0(void) {
     DebugTextLoadPalette(0, gUnk_08F70990, 0x20, 0);
 }
 
-void mode_eventselect_1(void) {
+void mode_eventselect_1() {
     if (GetKeysRepeat() & DPAD_UP) {
         if (sEventSelectList != 0) {
             sEventSelectList--;
@@ -203,7 +203,7 @@ void mode_eventselect_1(void) {
     DebugTextClear();
 }
 
-void mode_eventselect_2(void) {
+void mode_eventselect_2() {
     DebugTextDestroy();
 }
 
@@ -788,10 +788,10 @@ s32 EV_SOUND_1(EvSoundWork* w) {
     return 1;
 }
 
-void EV_SOUND_2(void) {
+void EV_SOUND_2() {
 }
 
-void EV_SOUND_3(void) {
+void EV_SOUND_3() {
     EwramFree(gEventSoundMix);
 }
 

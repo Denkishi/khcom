@@ -149,7 +149,7 @@ const u8 gUnk_09C43708[4096] = {
     63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63, 63,
 };
 
-static inline void ShiftInByte(void) {
+static inline void ShiftInByte() {
     gAudioCodecBitBuffer = (u32)gAudioCodecBitBuffer << 8;
     gAudioCodecBitBuffer |= *gAudioCodecSrc++;
 }
@@ -165,7 +165,7 @@ static inline s32 ReadBits(s32 n) {
     return (gAudioCodecBitBuffer >> gAudioCodecBitCount) & ((1 << n) - 1);
 }
 
-static inline s32 PeekByte(void) {
+static inline s32 PeekByte() {
     if (gAudioCodecBitCount < 8) {
         ShiftInByte();
         gAudioCodecBitCount += 8;
@@ -499,7 +499,7 @@ void DecodeAudioBlock(u8* src, s32* a1, s32 dst) {
     }
 }
 
-s32 PeekAudioBits8(void) {
+s32 PeekAudioBits8() {
     if (gAudioCodecBitCount < 8) {
         ShiftInByte();
         gAudioCodecBitCount += 8;

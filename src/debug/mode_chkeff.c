@@ -28,7 +28,7 @@ static const char sChkEffNumLabel[4] = "num";
 static const char sChkEffPicLabel[4] = "pic";
 static const char sChkEffFrameLabel[8] = "frame";
 
-void mode_chkeff_0(void) {
+void mode_chkeff_0() {
     gChkEffWork = EwramAlloc(sizeof(ChkEffWork));
     SetBgMode1();
     SetupBg(0, 0, 7, 0);
@@ -69,7 +69,7 @@ void mode_chkeff_0(void) {
     BgAnimStart(gChkEffBgAnimations[0], 0x78, 0x50);
 }
 
-void mode_chkeff_1(void) {
+void mode_chkeff_1() {
     ChkEffWork** wp;
     void* obj;
     s16 prev;
@@ -184,7 +184,7 @@ void mode_chkeff_1(void) {
     }
 }
 
-void mode_chkeff_2(void) {
+void mode_chkeff_2() {
     TaskPoolDestroy(&gChkEffWork->pool);
     EwramFree(gChkEffWork);
 }

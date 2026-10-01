@@ -4,12 +4,12 @@
 #include "card_types.h"
 #include "types.h"
 
-u8 GetActiveDeckIndex(void);
+u8 GetActiveDeckIndex();
 u16 CountCardsById(u16 cardId);
-Deck* CreateLinkSendDeck(void);
-Deck* CreateLinkPartnerDeck(void);
-u8 IsActiveDeckAllPremium(void);
-u8 HasNonPremiumCardsInActiveDeck(void);
-u8 IsCardCollectionFull(void);
+Deck* CreateLinkSendDeck();
+Deck* CreateLinkPartnerDeck();
+u8 IsActiveDeckAllPremium();
+u8 HasNonPremiumCardsInActiveDeck();
+u8 IsCardCollectionFull();
 
 #endif

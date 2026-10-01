@@ -18,8 +18,8 @@ typedef struct ChkEffWork {
     u16 alphaB;
 } ChkEffWork;
 
-void mode_chkeff_0(void);
-void mode_chkeff_1(void);
-void mode_chkeff_2(void);
+void mode_chkeff_0();
+void mode_chkeff_1();
+void mode_chkeff_2();
 
 #endif /* GUARD_MODE_CHKEFF_H */

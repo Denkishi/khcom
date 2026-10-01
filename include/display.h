@@ -3,10 +3,10 @@
 
 #include "types.h"
 
-void SetBgMode0(void);
-void SetBgMode1(void);
-void SetBgMode2(void);
-void SetBgMode3(void);
+void SetBgMode0();
+void SetBgMode1();
+void SetBgMode2();
+void SetBgMode3();
 void EnableBg(s32 bg);
 void DisableBg(s32 bg);
 void SetupBg(s32 bg, u8 charBase, u8 screenBase, u8 palette);
@@ -40,22 +40,22 @@ void eu_080059F4(s32 bg, void* src);
 
 struct BgAnimationDef;
 
-void MosaicReset(void);
+void MosaicReset();
 void BgAnimSetTransform(u8 a, s32 b, s32 c);
 void BgAnimSetLoopStartFrame(u16 a);
-void BgAnimStop(void);
+void BgAnimStop();
 void MosaicStartIn(u16 frames, u16 size);
 void MosaicStartOut(u16 frames, u16 size);
-u8 MosaicIsActive(void);
-u8 BgAnimIsStopped(void);
+u8 MosaicIsActive();
+u8 BgAnimIsStopped();
 void BgAnimGetFrameState(u16* a, u16* b);
 u32 BgAnimGetDuration(struct BgAnimationDef* p);
-struct BgAnimationDef* BgAnimGetCurrent(void);
-void VTransReset(void);
-void BgReset(void);
+struct BgAnimationDef* BgAnimGetCurrent();
+void VTransReset();
+void BgReset();
 u8 RequestTilemapRectCopy(void* src, void* dst, u8 x, u8 y, u8 w, u8 h, s8 sw, s8 sh);
 void BgAnimSetPosition(s16 x, s16 y);
-void BgAnimUpdate(void);
+void BgAnimUpdate();
 void BgAnimInit(s32 bg, u16 b, u16 c);
 void BgAnimStart(struct BgAnimationDef* a, s32 x, s32 y);
 u8 RequestDma3Clear(void* a, u16 b);
@@ -109,11 +109,11 @@ extern u32 gBg3Y;
 extern vu16 gBldAlpha;
 extern struct FadeWork* gFadeWork;
 
-void CommitDisplayRegs(void);
-void FlushDma3Queue(void);
-u8 QueueVTransCallback(void (*a)(void));
-void FlushDma3QueueWithCpu(void);
-void MosaicUpdate(void);
-void SortSprites(void);
+void CommitDisplayRegs();
+void FlushDma3Queue();
+u8 QueueVTransCallback(void (*a)());
+void FlushDma3QueueWithCpu();
+void MosaicUpdate();
+void SortSprites();
 
 #endif

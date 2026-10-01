@@ -397,7 +397,7 @@ void WorldInspectLoadFloorTiles(s16 index) {
     RequestDma3Copy(src, (u8*)GetBgCharBase(0) + 32, 0x100);
 }
 
-s32 WorldInspectReadMenuKeys(void) {
+s32 WorldInspectReadMenuKeys() {
     s32 keys;
 
     keys = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
@@ -405,7 +405,7 @@ s32 WorldInspectReadMenuKeys(void) {
     return keys;
 }
 
-void WorldInspectHandleInput(void) {
+void WorldInspectHandleInput() {
     u16 keys;
     s16 old;
     s16 i;
@@ -536,7 +536,7 @@ void WorldInspectHandleInput(void) {
     }
 }
 
-void WorldInspectHandleDetailInput(void) {
+void WorldInspectHandleDetailInput() {
     u16 keys;
     s32 i;
 
@@ -588,7 +588,7 @@ void WorldInspectHandleDetailInput(void) {
     }
 }
 
-void WorldInspectDraw(void) {
+void WorldInspectDraw() {
     s32 i;
     u16 prio;
 #ifdef VERSION_EU
@@ -721,7 +721,7 @@ void WorldInspectDraw(void) {
     }
 }
 
-void mode_worldinspect_0(void) {
+void mode_worldinspect_0() {
     s16 i;
     s32 floor;
     s16 id;
@@ -931,7 +931,7 @@ void mode_worldinspect_0(void) {
     DisableBg(3);
 }
 
-void mode_worldinspect_1(void) {
+void mode_worldinspect_1() {
     UpdatePlayTime();
     sWorldInspectBobPhase += 2;
 
@@ -1005,7 +1005,7 @@ void mode_worldinspect_1(void) {
     WorldInspectDraw();
 }
 
-void mode_worldinspect_2(void) {
+void mode_worldinspect_2() {
     s32 i;
 
     ReleaseObjPalette(sWorldInspectBarPalette);

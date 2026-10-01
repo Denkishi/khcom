@@ -322,7 +322,7 @@ void mode_sio_battle_0(s32 a) {
     gSioDebugMode = 0;
 }
 
-void mode_sio_battle_1(void) {
+void mode_sio_battle_1() {
     switch ((s8)sSioBattleWork->state) {
     case 0:
         if ((s16)sSioBattleWork->stateFrames == 0) {
@@ -478,7 +478,7 @@ void mode_sio_battle_1(void) {
     DrawSprite(64, sSioBattleWork->cursorY >> 8, sSioBattleWork->gfx, sSioBattleWork->tiles4, sSioBattleWork->palette4, 0, SPRITE_PRIORITY(1), -48);
 }
 
-void mode_sio_battle_2(void) {
+void mode_sio_battle_2() {
     ReleaseObjTiles(sSioBattleWork->tiles);
     ReleaseObjPalette(sSioBattleWork->palette);
     ReleaseObjTiles(sSioBattleWork->tiles2);
@@ -490,7 +490,7 @@ void mode_sio_battle_2(void) {
     EwramFree(sSioBattleWork);
 }
 
-void ClearSioBattleFileLoaded(void) {
+void ClearSioBattleFileLoaded() {
     gSioBattleFileLoaded = 0;
 }
 
@@ -531,7 +531,7 @@ void mode_sio_btl_connect_0(s32 arg) {
 #endif
 }
 
-void mode_sio_btl_connect_1(void) {
+void mode_sio_btl_connect_1() {
     s32 i;
     s32 j;
 
@@ -631,23 +631,23 @@ void mode_sio_btl_connect_1(void) {
 #endif
 }
 
-void mode_sio_btl_connect_2(void) {
+void mode_sio_btl_connect_2() {
     ReleaseObjPalette(gSioBtlConnectWork->palette);
     FreeTextSlots(gSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
     EwramFree(gSioBtlConnectWork);
 }
 
-void SioBtlConnectOnConnect(void) {
+void SioBtlConnectOnConnect() {
     m4aSongNumStart(SONG_SYS_ITEMGET);
     gSioBtlConnectWork->state++;
 }
 
-void SioBtlConnectOnCancel(void) {
+void SioBtlConnectOnCancel() {
     m4aSongNumStart(SONG_SYS_CLOSE);
     ModeRequest(&gModeSioBattle, 2);
 }
 
-void SioInitWorldList(void) {
+void SioInitWorldList() {
     s32 i;
     s32 flags;
     gSioWorldCount = 0;
@@ -717,7 +717,7 @@ void mode_sio_btl_option_0(s32 arg) {
     gSioBtlOptionWork->state = 0;
 }
 
-void SioBtlOptionLoadBg(void) {
+void SioBtlOptionLoadBg() {
     RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(0) + 0x2000, 0x800);
 
 #ifdef VERSION_EU
@@ -756,7 +756,7 @@ void SioBtlOptionLoadBg(void) {
     gSioBtlOptionWork->state = 1;
 }
 
-void SioBtlOptionInitObjs(void) {
+void SioBtlOptionInitObjs() {
     s32 i;
 
 #ifdef VERSION_EU
@@ -904,7 +904,7 @@ void SioBtlOptionInitObjs(void) {
     gSioBtlOptionWork->state = 2;
 }
 
-void SioBtlOptionLoadWorld(void) {
+void SioBtlOptionLoadWorld() {
     s8 i = gSioWorldList[gSioWorldCursor];
     RequestDma3Copy(gSioWorldEntries[i].tiles, GetBgCharBase(2), 0x2000);
     LoadBgPalette(2, gSioWorldEntries[i].palette, gSioWorldEntries[i].paletteSize);
@@ -919,7 +919,7 @@ void SioBtlOptionLoadWorld(void) {
     gSioBtlOptionWork->state++;
 }
 
-void SioBtlOptionFadeIn(void) {
+void SioBtlOptionFadeIn() {
     s8 i = gSioWorldList[gSioWorldCursor];
     FadeStartIn(FADE_MODE_BLACK, 16);
     RequestDma3Copy((u8*)gSioWorldEntries[i].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[i].tilesSize - 0x2000);
@@ -931,7 +931,7 @@ void SioBtlOptionFadeIn(void) {
     gSioBtlOptionWork->state = 4;
 }
 
-void mode_sio_btl_option_1(void) {
+void mode_sio_btl_option_1() {
     switch (gSioBtlOptionWork->state) {
     case 0:
         SioBtlOptionLoadBg();
@@ -999,7 +999,7 @@ void mode_sio_btl_option_1(void) {
     }
 }
 
-void SioBtlOptionDraw(void) {
+void SioBtlOptionDraw() {
 #ifdef VERSION_EU
     s16 width;
     s32 multiline;
@@ -1063,7 +1063,7 @@ void SioBtlOptionDraw(void) {
     gSioBtlOptionWork->frameCount++;
 }
 
-void SioBtlOptionWaitStart(void) {
+void SioBtlOptionWaitStart() {
     if (gSioBtlOptionWork->timer > 4) {
         gSioBtlOptionWork->timer = 0;
 
@@ -1082,7 +1082,7 @@ void SioBtlOptionWaitStart(void) {
     SioBtlOptionSyncDeckNames();
 }
 
-void SioBtlOptionHandleIdle(void) {
+void SioBtlOptionHandleIdle() {
     s8 v = 0;
 
 #ifdef VERSION_EU
@@ -1220,7 +1220,7 @@ void SioBtlOptionHandleIdle(void) {
 #endif
 }
 
-void SioBtlOptionHandleMenu(void) {
+void SioBtlOptionHandleMenu() {
     s8 v;
 
 #ifdef VERSION_EU
@@ -1419,7 +1419,7 @@ void SioBtlOptionHandleMenu(void) {
 #endif
 }
 
-void SioBtlOptionSetHandicap(void) {
+void SioBtlOptionSetHandicap() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -1507,7 +1507,7 @@ void SioBtlOptionSetHandicap(void) {
 #endif
 }
 
-void SioBtlOptionChangeWorld(void) {
+void SioBtlOptionChangeWorld() {
     s8 a = gSioWorldList[gSioPrevWorldCursor];
     s8 b = gSioWorldList[gSioWorldCursor];
 
@@ -1580,7 +1580,7 @@ void SioBtlOptionChangeWorld(void) {
     SioBtlOptionSyncDeckNames();
 }
 
-void SioBtlOptionWaitReady(void) {
+void SioBtlOptionWaitReady() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -1618,7 +1618,7 @@ void SioBtlOptionWaitReady(void) {
     SioBtlOptionSyncDeckNames();
 }
 
-void SioBtlOptionConfirm(void) {
+void SioBtlOptionConfirm() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -1662,7 +1662,7 @@ void SioBtlOptionConfirm(void) {
 #endif
 }
 
-void SioBtlOptionStartDeckExchange(void) {
+void SioBtlOptionStartDeckExchange() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
         gSioBtlOptionWork->timer++;
@@ -1693,7 +1693,7 @@ void SioBtlOptionStartDeckExchange(void) {
 #endif
 }
 
-void SioBtlOptionWaitDeckExchange(void) {
+void SioBtlOptionWaitDeckExchange() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
         if (gSioLinkResult == 2) {
@@ -1722,7 +1722,7 @@ void SioBtlOptionWaitDeckExchange(void) {
 #endif
 }
 
-void SioBtlOptionResumeCommands(void) {
+void SioBtlOptionResumeCommands() {
     gSioBtlOptionWork->timer++;
 
     if (gSioBtlOptionWork->timer > 4) {
@@ -1733,7 +1733,7 @@ void SioBtlOptionResumeCommands(void) {
     }
 }
 
-void func_080B041C(void) {
+void func_080B041C() {
     gSioBtlOptionWork->timer++;
 
     if (gSioBtlOptionWork->timer > 30) {
@@ -1742,7 +1742,7 @@ void func_080B041C(void) {
     }
 }
 
-void SioBtlOptionSyncStart(void) {
+void SioBtlOptionSyncStart() {
     gSioBtlOptionWork->timer++;
 
     if (gSioBtlOptionWork->timer > 20) {
@@ -1756,7 +1756,7 @@ void SioBtlOptionSyncStart(void) {
     }
 }
 
-void SioBtlOptionStartBattle(void) {
+void SioBtlOptionStartBattle() {
     gSioBtlOptionWork->timer++;
 
     if (gSioBtlOptionWork->timer > 4) {
@@ -1772,7 +1772,7 @@ void SioBtlOptionStartBattle(void) {
     }
 }
 
-void mode_sio_btl_option_2(void) {
+void mode_sio_btl_option_2() {
     ReleaseObjTiles(gSioBtlOptionWork->unk_008[0]);
     ReleaseObjPalette(gSioBtlOptionWork->unk_008[2]);
     ReleaseObjTiles(gSioBtlOptionWork->unk_008[1]);
@@ -1807,7 +1807,7 @@ void mode_sio_btl_option_2(void) {
     EwramFree(gSioBtlOptionWork);
 }
 
-void SioBtlOptionCheckReady(void) {
+void SioBtlOptionCheckReady() {
 #ifdef VERSION_EU
     if (gSioDebugMode == 0) {
 #endif
@@ -1855,7 +1855,7 @@ void SioBtlOptionCheckReady(void) {
 #endif
 }
 
-void SioBtlOptionRecvWorld(void) {
+void SioBtlOptionRecvWorld() {
     s8 x;
     s8 y;
 
@@ -1890,7 +1890,7 @@ void SioBtlOptionRecvWorld(void) {
     }
 }
 
-void SioBtlOptionRecvSettings(void) {
+void SioBtlOptionRecvSettings() {
     u8 buf[2];
     s8 x;
     s8 y;
@@ -1953,7 +1953,7 @@ void SioBtlOptionRecvSettings(void) {
     }
 }
 
-void SioBtlOptionSyncDeckNames(void) {
+void SioBtlOptionSyncDeckNames() {
     s32 deck;
     s32 i;
 
@@ -2003,7 +2003,7 @@ void SioBtlOptionSyncDeckNames(void) {
     }
 }
 
-void SioBtlOptionDrawStats(void) {
+void SioBtlOptionDrawStats() {
     s16 digits[4];
     s16 a, b, c, d, e, f, g, h;
 
@@ -2138,7 +2138,7 @@ void SioBtlOptionDrawStats(void) {
     RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)0x060005C0, 32);
 }
 
-void SioApplyBattleSettings(void) {
+void SioApplyBattleSettings() {
     s8* base;
     s8* p;
     GameState* gs;
@@ -2175,7 +2175,7 @@ void SioApplyBattleSettings(void) {
     gGameState.linkPartnerLearnedStocks2 = gCharaLinkRecv.learnedStocks2;
 }
 
-void SioBtlOptionSyncHandicaps(void) {
+void SioBtlOptionSyncHandicaps() {
     u8 buf[2];
 
 #ifdef VERSION_EU
@@ -2265,7 +2265,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     }
 }
 
-void SioBtlOptionCancelReady(void) {
+void SioBtlOptionCancelReady() {
     gSioBtlOptionWork->messageVisible = 0;
     RequestDma3Copy(gUnk_096B2664, (void*)0x06000020, 0xC0);
     RequestDma3Copy(gUnk_096B2664 + 0x400, (void*)0x06000300, 0xC0);
@@ -2275,7 +2275,7 @@ void SioBtlOptionCancelReady(void) {
     SetSioBtlOptionAnimation(1, 0, 0);
 }
 
-void SioBtlOptionPlayWorldBgm(void) {
+void SioBtlOptionPlayWorldBgm() {
     s8 i = gSioWorldList[gSioWorldCursor];
 
     switch (i) {
@@ -2349,11 +2349,11 @@ void mode_sio_btl_cardget_0(s32 arg) {
     gSioBtlCardgetWork->state = 0;
 }
 
-void SioBtlCardgetLoadBgTiles(void) {
+void SioBtlCardgetLoadBgTiles() {
     RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(1) + 0x2000, 0x2000);
 }
 
-void SioBtlCardgetLoadBg(void) {
+void SioBtlCardgetLoadBg() {
 #ifdef VERSION_EU
     RequestDma3Copy(gUnk_096B1744, (u8*)GetBgCharBase(1) + 0x4000, 0x2000);
 #else
@@ -2386,7 +2386,7 @@ void SioBtlCardgetLoadBg(void) {
     DisableBg(1);
 }
 
-void SioBtlCardgetShowResult(void) {
+void SioBtlCardgetShowResult() {
     FadeStartIn(FADE_MODE_BLACK, 16);
     DisableBg(0);
     EnableBg(1);
@@ -2441,7 +2441,7 @@ void SioBtlCardgetShowResult(void) {
     gGameState.world = gSioSavedWorld;
 }
 
-void mode_sio_btl_cardget_1(void) {
+void mode_sio_btl_cardget_1() {
 #ifdef VERSION_EU
     SioBtlCardgetWork* work;
 #endif
@@ -2584,10 +2584,10 @@ void mode_sio_btl_cardget_1(void) {
     }
 }
 
-void mode_sio_btl_cardget_2(void) {
+void mode_sio_btl_cardget_2() {
 }
 
-void SioBtlCardgetDraw(void) {
+void SioBtlCardgetDraw() {
     DrawSprite(60, 116, gSioBtlCardgetWork->gfx, gSioBtlCardgetWork->tiles, gSioBtlCardgetWork->palette, 0, 0, 0xFFF0);
     DrawSprite(180, 116, gSioBtlCardgetWork->gfx2, gSioBtlCardgetWork->tiles2, gSioBtlCardgetWork->palette2, 0, 0, 0xFFF0);
 #ifdef VERSION_JP
@@ -2602,7 +2602,7 @@ void SioBtlCardgetDraw(void) {
 #endif
 }
 
-void SioBtlCardgetLoad1PWin(void) {
+void SioBtlCardgetLoad1PWin() {
     LoadBgMap(2, gUnk_096F8C64, 0x800);
     gSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1ff00Tiles);
     gSioBtlCardgetWork->gfx = gSor1ff00Frames[18];
@@ -2663,7 +2663,7 @@ void SioBtlCardgetLoad1PWin(void) {
 #endif
 }
 
-void SioBtlCardgetLoad2PWin(void) {
+void SioBtlCardgetLoad2PWin() {
     LoadBgMap(2, gUnk_096F8464, 0x800);
     gSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1fl26Tiles);
     gSioBtlCardgetWork->gfx = gSor1fl26Frames[6];
@@ -2752,7 +2752,7 @@ void mode_sio_chg_connect_0(s32 arg) {
 #endif
 
 #ifndef VERSION_EU
-void mode_sio_chg_connect_1(void) {
+void mode_sio_chg_connect_1() {
     switch (gSioChgConnectWork->state) {
     case 0:
         SioConnectUpdate();
@@ -2778,7 +2778,7 @@ void mode_sio_chg_connect_1(void) {
 #endif
 
 #ifndef VERSION_EU
-void mode_sio_chg_connect_2(void) {
+void mode_sio_chg_connect_2() {
     ReleaseObjPalette(gSioChgConnectWork->palette);
     FreeTextSlots(gSioChgConnectWork->textSlots, 0x5A);
     EwramFree(gSioChgConnectWork);
@@ -2786,21 +2786,21 @@ void mode_sio_chg_connect_2(void) {
 #endif
 
 #ifndef VERSION_EU
-void SioChgConnectOnConnect(void) {
+void SioChgConnectOnConnect() {
     m4aSongNumStart(SONG_SYS_ITEMGET);
     gSioChgConnectWork->state++;
 }
 #endif
 
 #ifndef VERSION_EU
-void SioChgConnectOnCancel(void) {
+void SioChgConnectOnCancel() {
     m4aSongNumStart(SONG_SYS_CLOSE);
     ModeRequest(&gModeSioBattle, 3);
 }
 #endif
 
 #ifndef VERSION_EU
-void SioChgConnectStartTrade(void) {
+void SioChgConnectStartTrade() {
     s32 i;
 
     if (gSioPlayerId == 0) {
@@ -2861,7 +2861,7 @@ void mode_sio_chg_card_0(s32 arg) {
 #endif
 
 #ifndef VERSION_EU
-void SioChgCardLoadBg(void) {
+void SioChgCardLoadBg() {
     RequestDma3Copy(gUnk_096B4BE4, (u8*)GetBgCharBase(0) + 0x2000, 0x11C0);
     LoadBgPalette(0, gUnk_096FBE24, 0xE0);
     LoadBgMap(0, gUnk_096FA464, 0x800);
@@ -2874,7 +2874,7 @@ void SioChgCardLoadBg(void) {
 #endif
 
 #ifndef VERSION_EU
-void SioChgCardInitObjs(void) {
+void SioChgCardInitObjs() {
     s32 i;
     s16 n;
     FadeStartIn(FADE_MODE_BLACK, 16);
@@ -2967,7 +2967,7 @@ void SioChgCardInitObjs(void) {
 #endif
 
 #ifndef VERSION_EU
-void mode_sio_chg_card_1(void) {
+void mode_sio_chg_card_1() {
     switch (gSioChgCardWork->state) {
     case 0:
         SioChgCardLoadBg();
@@ -3026,7 +3026,7 @@ void mode_sio_chg_card_1(void) {
     }
 }
 
-void SioChgCardWaitStart(void) {
+void SioChgCardWaitStart() {
     gSioChgCardWork->timer++;
 
     if (gSioChgCardWork->timer > 5) {
@@ -3038,7 +3038,7 @@ void SioChgCardWaitStart(void) {
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((gSioChgCardWork->offeredCard + 1) & 0x0FFF);
 }
 
-void SioChgCardSelect(void) {
+void SioChgCardSelect() {
     gSioCommandSend[2] = (GetKeysPressed() & 0x0FFF) | 0x5000;
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((gSioChgCardWork->offeredCard + 1) & 0x0FFF);
 
@@ -3129,7 +3129,7 @@ void SioChgCardSelect(void) {
     }
 }
 
-void SioChgCardConfirm(void) {
+void SioChgCardConfirm() {
     if (GetKeysPressed() & A_BUTTON) {
         gSioCommandSend[1] = 0xEF01;
     } else if (GetKeysPressed() & B_BUTTON) {
@@ -3155,7 +3155,7 @@ void SioChgCardConfirm(void) {
     SioChgCardDrawPointTotals();
 }
 
-void SioChgCardTryTrade(void) {
+void SioChgCardTryTrade() {
     SioChgCardBackupCollection();
     gSioChgCardWork->receiveOk = SioChgCardReceiveCards();
 
@@ -3168,7 +3168,7 @@ void SioChgCardTryTrade(void) {
     gSioChgCardWork->state++;
 }
 
-void SioChgCardWaitTradeResult(void) {
+void SioChgCardWaitTradeResult() {
     if (gSioChgCardWork->receiveOk == 1) {
         gSioCommandSend[1] = 0xEF23;
     } else {
@@ -3193,7 +3193,7 @@ void SioChgCardWaitTradeResult(void) {
     }
 }
 
-void SioChgCardTradeFailed(void) {
+void SioChgCardTradeFailed() {
     if (gSioChgCardWork->timer > 179) {
         gSioChgCardWork->timer = 0;
         SioChgCardCancelReady();
@@ -3203,13 +3203,13 @@ void SioChgCardTradeFailed(void) {
     }
 }
 
-void SioChgCardStartMove(void) {
+void SioChgCardStartMove() {
     SioChgCardCreateMoveTasks();
     gSioChgCardWork->timer = 0;
     gSioChgCardWork->state++;
 }
 
-void SioChgCardSave(void) {
+void SioChgCardSave() {
     TaskPoolUpdate(&gSioChgCardWork->tasks);
 
     if (SioHasError() == 0) {
@@ -3229,7 +3229,7 @@ void SioChgCardSave(void) {
     gSioChgCardWork->state++;
 }
 
-void SioChgCardWaitMove(void) {
+void SioChgCardWaitMove() {
     TaskPoolUpdate(&gSioChgCardWork->tasks);
 
     if (gSioChgCardWork->timer == 80) {
@@ -3248,7 +3248,7 @@ void SioChgCardWaitMove(void) {
     }
 }
 
-void func_080B2AE8(void) {
+void func_080B2AE8() {
     gSioChgCardWork->timer++;
 
     if (gSioChgCardWork->timer > 119) {
@@ -3260,7 +3260,7 @@ void func_080B2AE8(void) {
     }
 }
 
-void func_080B2B48(void) {
+void func_080B2B48() {
     gSioChgCardWork->timer++;
 
     if (gSioChgCardWork->timer > 119) {
@@ -3270,7 +3270,7 @@ void func_080B2B48(void) {
     }
 }
 
-void SioChgCardRestart(void) {
+void SioChgCardRestart() {
     s32 i;
     gSioCommandSend[1] = 0x25FD;
 
@@ -3291,7 +3291,7 @@ void SioChgCardRestart(void) {
     }
 }
 
-void mode_sio_chg_card_2(void) {
+void mode_sio_chg_card_2() {
     s32 i;
     ReleaseObjTiles(gSioChgCardWork->unk_008[0]);
     ReleaseObjTiles(gSioChgCardWork->unk_008[1]);
@@ -3316,7 +3316,7 @@ void mode_sio_chg_card_2(void) {
     EwramFree(gSioChgCardWork);
 }
 
-void SioChgCardDraw(void) {
+void SioChgCardDraw() {
     s32 i;
     ObjAffine* aff;
     gSioChgCardWork->gfx[0] = AnimUpdate(&gSioChgCardWork->anim[0]);
@@ -3353,7 +3353,7 @@ void SioChgCardDraw(void) {
     }
 }
 
-void SioChgCardRecvSlots(void) {
+void SioChgCardRecvSlots() {
     if (gSioCommandRecv[0][0] == 0xACD) {
         SioChgCardSetSlot(gSioCommandRecv[3][0]);
     }
@@ -3400,7 +3400,7 @@ void SioChgCardSetSlot(u16 a) {
     }
 }
 
-void SioChgCardRecvSlotIds(void) {
+void SioChgCardRecvSlotIds() {
     gSioCommandSend[2] = 0x6000;
 
     if (gSioCommandRecv[0][0] == 0xACD) {
@@ -3429,7 +3429,7 @@ void SioChgCardSetSlotId(u16 a) {
     }
 }
 
-void SioChgCardDrawPointTotals(void) {
+void SioChgCardDrawPointTotals() {
     u16 sum;
     s32 lim;
     s32 x;
@@ -3478,7 +3478,7 @@ void SioChgCardDrawPointTotals(void) {
     RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)0x06000240, 32);
 }
 
-void SioChgCardHandleInput(void) {
+void SioChgCardHandleInput() {
     u16 k1;
     u16 k2;
     s16 v;
@@ -3634,7 +3634,7 @@ void SioChgCardHandleInput(void) {
     }
 }
 
-void SioChgCardReturnCard(void) {
+void SioChgCardReturnCard() {
     AddCardToCollection(gSioChgCardSlots[gSioChgCardWork->cursor]);
     gSioChgCardSlots[gSioChgCardWork->cursor] = 0x800;
     gSioChgCardCursor = gSioChgCardWork->cursor;
@@ -3642,7 +3642,7 @@ void SioChgCardReturnCard(void) {
     gSioCommandSend[3] = ((gSioChgCardCursor & 15) << 12) | ((gSioChgCardWork->offeredCard + 1) & 0x0FFF);
 }
 
-s8 SioChgCardHasOwnCards(void) {
+s8 SioChgCardHasOwnCards() {
     s32 i;
 
     if (gSioPlayerId == 0) {
@@ -3662,7 +3662,7 @@ s8 SioChgCardHasOwnCards(void) {
     return 0;
 }
 
-s8 SioChgCardSlotsEmpty(void) {
+s8 SioChgCardSlotsEmpty() {
     s32 i;
 
     for (i = 0; i < 10; i++) {
@@ -3674,7 +3674,7 @@ s8 SioChgCardSlotsEmpty(void) {
     return 1;
 }
 
-void SioChgCardShowInfo(void) {
+void SioChgCardShowInfo() {
     s16 n;
     u32 off;
     u16 nameId;
@@ -3694,12 +3694,12 @@ void SioChgCardShowInfo(void) {
     gSioChgCardWork->cardInfoVisible = 1;
 }
 
-void SioChgCardHideInfo(void) {
+void SioChgCardHideInfo() {
     DisableBg(0);
     gSioChgCardWork->cardInfoVisible = 0;
 }
 
-void SioChgCardCancelReady(void) {
+void SioChgCardCancelReady() {
     s8 v;
     gSioChgCardWork->ready = 0;
 
@@ -3725,7 +3725,7 @@ void SioChgCardCancelReady(void) {
     gSioChgCardWork->messageVisible = 0;
 }
 
-void SioChgCardCreateMoveTasks(void) {
+void SioChgCardCreateMoveTasks() {
     SioCardTaskArg arg;
     s32 i;
 
@@ -3760,7 +3760,7 @@ void SioChgCardCreateMoveTasks(void) {
     }
 }
 
-void SioChgCardBackupCollection(void) {
+void SioChgCardBackupCollection() {
     u16 i;
 
     for (i = 0; i <= 0x3E6; i++) {
@@ -3770,7 +3770,7 @@ void SioChgCardBackupCollection(void) {
     gSioChgCardWork->obtainedCardKindsBackup = gGameState.progression.obtainedCardKinds;
 }
 
-void SioChgCardRestoreCollection(void) {
+void SioChgCardRestoreCollection() {
     u16 i;
 
     for (i = 0; i <= 0x3E6; i++) {
@@ -3780,7 +3780,7 @@ void SioChgCardRestoreCollection(void) {
     gGameState.progression.obtainedCardKinds = gSioChgCardWork->obtainedCardKindsBackup;
 }
 
-s16 SioChgCardReceiveCards(void) {
+s16 SioChgCardReceiveCards() {
     s32 i;
     s32 t;
 
@@ -3809,7 +3809,7 @@ s16 SioChgCardReceiveCards(void) {
     return 1;
 }
 
-void SioChgCardReturnOwnCards(void) {
+void SioChgCardReturnOwnCards() {
     s32 i;
 
     if (gSioPlayerId == 0) {
@@ -3827,7 +3827,7 @@ void SioChgCardReturnOwnCards(void) {
     }
 }
 
-void func_080B3DF8(void) {
+void func_080B3DF8() {
 }
 #endif
 
@@ -3883,11 +3883,11 @@ void mode_sioError_0(s32 arg) {
     gSioErrorWork->palette = LoadObjPalette(gUnk_096FBAA4, 32);
 }
 
-void mode_sioError_1(void) {
+void mode_sioError_1() {
     SioErrorDraw();
 }
 
-void SioErrorDraw(void) {
+void SioErrorDraw() {
 #ifdef VERSION_JP
     DrawTextSlots(58, 62, gSioErrorWork->textSlots, gSioErrorWork->palette, 20, gSioErrorWork->textSlotCount);
 #else
@@ -3895,7 +3895,7 @@ void SioErrorDraw(void) {
 #endif
 }
 
-void mode_sioError_2(void) {
+void mode_sioError_2() {
     ReleaseObjPalette(gSioErrorWork->palette);
     FreeTextSlots(gSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
     EwramFree(gSioErrorWork);

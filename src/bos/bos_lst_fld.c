@@ -401,7 +401,7 @@ s32 BosLstFldSquare2(s32 x) {
     return x * x;
 }
 
-void BosLstFldResetShake(void) {
+void BosLstFldResetShake() {
     gBosLstFldShakeActive = 0;
     gBosLstFldShakePattern = 0;
     gBosLstFldShakeStep = 0;
@@ -414,7 +414,7 @@ void BosLstFldSetShake(s16 a) {
     gBosLstFldShakeOffset = 0;
 }
 
-void BosLstFldUpdateShake(void) {
+void BosLstFldUpdateShake() {
     const s8* p;
 
     if (gBosLstFldShakeActive != 0) {
@@ -429,7 +429,7 @@ void BosLstFldUpdateShake(void) {
     }
 }
 
-s32 BosLstFldGetShake(void) {
+s32 BosLstFldGetShake() {
     return gBosLstFldShakeOffset;
 }
 
@@ -712,7 +712,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     return 1;
 }
 
-void task_bos_lst_fld_2(void) {
+void task_bos_lst_fld_2() {
 }
 
 void task_bos_lst_fld_3(LstFldWork* work) {

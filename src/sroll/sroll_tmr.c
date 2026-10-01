@@ -84,7 +84,7 @@ void task_sroll_tmr_3(SrollTmrWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void func_0811549C(void) {
+void func_0811549C() {
 }
 
 void func_081154A0(u32* dst, u8* src, u32* pal, s32 x) {
@@ -305,7 +305,7 @@ u32 SrollTextBlit1bpp(SrollBlit* w) {
     return r;
 }
 
-void func_081159AC(void) {
+void func_081159AC() {
 }
 
 void func_081159B0(u32* dst, u16* src, u32* pal, s32 x) {
@@ -969,7 +969,7 @@ void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
     }
 }
 
-void func_081167CC(void) {
+void func_081167CC() {
 }
 
 u16 ParseLowercaseHexDigit(u16 c) {
@@ -1192,7 +1192,7 @@ u16 SrollTextMapSingleByteChar(u8 c) {
     return gUnk_09A5B470[c];
 }
 
-void ScanlineDmaReset(void) {
+void ScanlineDmaReset() {
     vu16* dma;
 
     dma = (vu16*)REG_ADDR_DMA0;
@@ -1209,7 +1209,7 @@ void ScanlineDmaReset(void) {
     sDmaStream.cnt = 0;
 }
 
-void ScanlineDmaUpdate(void) {
+void ScanlineDmaUpdate() {
     vu16* dma;
     vu32* dma32;
     u8* src;
@@ -1251,11 +1251,11 @@ void ScanlineDmaUpdate(void) {
     }
 }
 
-void ScanlineDmaPrime32Bit(void) {
+void ScanlineDmaPrime32Bit() {
     *sDmaStream.dst = *(u32*)sDmaStream.src[sDmaStream.srcIdx];
 }
 
-void ScanlineDmaPrime16Bit(void) {
+void ScanlineDmaPrime16Bit() {
     *sDmaStream.dst = *(u16*)sDmaStream.src[sDmaStream.srcIdx];
 }
 
@@ -1288,15 +1288,15 @@ void ScanlineDmaQueueBuffer(u8* src) {
     sDmaStream.swapPending = 1;
 }
 
-void ScanlineDmaEnable(void) {
+void ScanlineDmaEnable() {
     sDmaStream.enabled = 1;
 }
 
-void ScanlineDmaDisable(void) {
+void ScanlineDmaDisable() {
     sDmaStream.enabled = 0;
 }
 
-void BlockAudioStart(void) {
+void BlockAudioStart() {
     sBlockAudioPlaying = 1;
     AudioBlockStreamInit(GetBlockAudioData());
     PcmPlaybackInit(GetBlockAudioSampleRate());
@@ -1304,7 +1304,7 @@ void BlockAudioStart(void) {
     PcmPlaybackStart();
 }
 
-void BlockAudioUpdate(void) {
+void BlockAudioUpdate() {
     if (sBlockAudioPlaying == 1) {
         sBlockAudioPlaying = AudioBlockStreamUpdate();
 
@@ -1314,24 +1314,24 @@ void BlockAudioUpdate(void) {
     }
 }
 
-void BlockAudioVBlank(void) {
+void BlockAudioVBlank() {
     if (sBlockAudioPlaying == 1) {
         PcmPlaybackUpdate();
     }
 }
 
-void BlockAudioStop(void) {
+void BlockAudioStop() {
     ResetVBlankCallback();
     PcmPlaybackStop();
     m4aSoundInit();
     m4aSoundVSyncOn();
 }
 
-u16 GetBlockAudioSampleRate(void) {
+u16 GetBlockAudioSampleRate() {
     return 21024;
 }
 
-u32* GetBlockAudioData(void) {
+u32* GetBlockAudioData() {
     return gBlockAudioData;
 }
 
@@ -1378,7 +1378,7 @@ s32 AudioBlockStreamInit(u32* src) {
     return sAudioBlockNext != NULL;
 }
 
-s32 AudioBlockStreamUpdate(void) {
+s32 AudioBlockStreamUpdate() {
     u8* q;
 
     if (sDecodedAudioReadPosition > sDecodedAudioWritePosition + 0x200 || sDecodedAudioReadPosition < sDecodedAudioWritePosition) {
@@ -1396,11 +1396,11 @@ s32 AudioBlockStreamUpdate(void) {
     return sAudioBlockNext != NULL;
 }
 
-s32* GetDecodedAudioBuffer(void) {
+s32* GetDecodedAudioBuffer() {
     return sDecodedAudioBuffer;
 }
 
-s32 GetDecodedAudioReadPosition(void) {
+s32 GetDecodedAudioReadPosition() {
     return sDecodedAudioReadPosition;
 }
 

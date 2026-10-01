@@ -59,8 +59,8 @@ extern u8 gUnk_0203C7C8[8];
 extern MovieHeap gMovieHeap;
 
 void MovieSetHeapCallbacks(MovieAllocFunc a, MovieAllocFunc b, MovieFreeFunc c, MovieFreeFunc d);
-void MovieAdvanceTicks(void);
-u8* MovieGetTicks(void);
+void MovieAdvanceTicks();
+u8* MovieGetTicks();
 float MovieTicksToSeconds(s32 a);
 void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 h);
 void MovieSetupAudioCodec(MoviePlayer* p, void* a, s32 b);
@@ -80,8 +80,8 @@ void MovieGetSize(MoviePlayer* a, s32* w, s32* h);
 void MovieSetCallbacks(MovieAllocFunc a, MovieAllocFunc b, MovieFreeFunc c, MovieFreeFunc d);
 s32 MovieStart(void* a);
 void MoviePlay(s32 (*a)(s32), s32 b);
-void MovieClose(void);
-void MovieUpdate(void);
+void MovieClose();
+void MovieUpdate();
 
 extern u8 MovieAudioCodecAdpcm[];
 extern u8 MovieAudioCodecAdpcmSteps[];

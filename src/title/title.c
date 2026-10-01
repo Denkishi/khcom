@@ -183,7 +183,7 @@ void func_080D6548(u8* src, u16* dst, u16 size) {
     }
 }
 
-u8 IsTitleLogoScaleDone(void) {
+u8 IsTitleLogoScaleDone() {
     return gTitleLogoScaleDone;
 }
 
@@ -359,7 +359,7 @@ void task_title_obj_3(TitleObjWork* work) {
     }
 }
 
-u8 IsTitleObjSlideDone(void) {
+u8 IsTitleObjSlideDone() {
     return gTitleObjSlideDone;
 }
 

@@ -57,7 +57,7 @@ void RikuTutorialModeInit(s32 a) {
     gRikuDeckTutorialState = 0;
 }
 
-void Mode_riku_btlTutorial_1(void) {
+void Mode_riku_btlTutorial_1() {
     u16 t;
 
     t = gGameState.progression.unk_82 | 0x1000;
@@ -67,7 +67,7 @@ void Mode_riku_btlTutorial_1(void) {
     TaskPoolDraw(&gRikuTutorialTasks);
 }
 
-void Mode_riku_deckTutorial_1(void) {
+void Mode_riku_deckTutorial_1() {
     if (!FadeIsActive()) {
         switch (gRikuDeckTutorialState) {
         case 0:
@@ -91,7 +91,7 @@ void Mode_riku_deckTutorial_1(void) {
     TaskPoolDraw(&gRikuTutorialTasks);
 }
 
-void RikuTutorialModeDestroy(void) {
+void RikuTutorialModeDestroy() {
     TaskPoolDestroy(&gRikuTutorialTasks);
 }
 
@@ -427,7 +427,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
     }
 }
 
-u8 GetStockMoveCount(void) {
+u8 GetStockMoveCount() {
     // @bug Still called after the card battle frees gCardBattleState (NULL read).
     if (gCardBattleState->soraStockActive || gCardBattleState->rikuStockActive) {
         return gCardBattleState->stockMoveCount;
@@ -2025,7 +2025,7 @@ s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
 }
 
 #ifdef VERSION_EU
-void eu_080AB9FC(void) {
+void eu_080AB9FC() {
     gTextCheckMessageId = 0;
     SetBgMode0();
     SetupBg(0, 0, 28, 14);
@@ -2033,7 +2033,7 @@ void eu_080AB9FC(void) {
     CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
 }
 
-void eu_080ABA38(void) {
+void eu_080ABA38() {
     if (IsMessageWindowOpen() == 0) {
         gTextCheckMessageId++;
 
@@ -2048,7 +2048,7 @@ void eu_080ABA38(void) {
     TaskPoolDraw(&gTextCheckTasks);
 }
 
-void eu_080ABA7C(void) {
+void eu_080ABA7C() {
     TaskPoolDestroy(&gTextCheckTasks);
 }
 #endif

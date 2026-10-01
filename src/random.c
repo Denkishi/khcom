@@ -7,7 +7,7 @@ void SeedRand(u32 seed) {
     sRandSeed = seed;
 }
 
-u32 Rand(void) {
+u32 Rand() {
     sRandSeed = (sRandSeed * 0x41C64E6D + 12345) & 0x7FFF;
     return sRandSeed;
 }
@@ -20,7 +20,7 @@ void SeedRandom(u32 seed) {
     sRandomState[3] = Rand();
 }
 
-u16 GetRandom(void) {
+u16 GetRandom() {
     u32 x;
 
     x = sRandomState[1];

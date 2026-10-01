@@ -171,15 +171,15 @@ s16 GetMsChargeTabCount(s16 a) {
     return v;
 }
 
-s16 GetMsChargeSelectedIndex(void) {
+s16 GetMsChargeSelectedIndex() {
     return GetMsChargeTabStart(sMsChargeTab) + (sMsChargeGridScroll + sMsChargeGridRow) * 3 + sMsChargeGridCol;
 }
 
-MsCard* GetMsChargeSelectedCard(void) {
+MsCard* GetMsChargeSelectedCard() {
     return gMsCards + GetMsChargeSelectedIndex();
 }
 
-void MsChargeSelectFirstValue(void) {
+void MsChargeSelectFirstValue() {
     MsCard* card;
     s16 i;
 
@@ -200,7 +200,7 @@ void MsChargeSelectFirstValue(void) {
     }
 }
 
-void MsChargeLoadGrid(void) {
+void MsChargeLoadGrid() {
     s16 i;
     s16 k;
     s16 idx;
@@ -240,7 +240,7 @@ void MsChargeLoadGrid(void) {
     }
 }
 
-void MsChargeLoadSelectedCard(void) {
+void MsChargeLoadSelectedCard() {
     MsCard* card;
     u8* p;
     u8* q;
@@ -293,7 +293,7 @@ s16 GetMsChargeValueIndex(s16 a, s16 b) {
     return b + a * 5;
 }
 
-s16 GetMsChargeSelectedValue(void) {
+s16 GetMsChargeSelectedValue() {
     return GetMsChargeValueIndex(sMsChargeValueCol, sMsChargeValueRow);
 }
 
@@ -311,7 +311,7 @@ u16 GetMsChargeCardPoints(u16 index) {
     return 0;
 }
 
-void MsChargeDrawPoints(void) {
+void MsChargeDrawPoints() {
     u32 v;
 
     v = GetMooglePoints();
@@ -326,12 +326,12 @@ void MsChargeDrawPoints(void) {
     LoadDecimalDigitTiles(v, gUnk_09A1DCDC, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
 }
 
-void MsChargeDrawCardCounts(void) {
+void MsChargeDrawCardCounts() {
     LoadDecimalDigitTiles(sMsChargeDeckCardCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0xC0, 0x20, 3);
     LoadDecimalDigitTiles(sMsChargeCollectionCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x120, 0x20, 3);
 }
 
-void MsChargeDrawCategoryCounts(void) {
+void MsChargeDrawCategoryCounts() {
     s16 i;
     s32 v;
 
@@ -346,7 +346,7 @@ void MsChargeDrawCategoryCounts(void) {
     }
 }
 
-void MsChargeDrawValueCounts(void) {
+void MsChargeDrawValueCounts() {
     MsCard* card;
     s16 i;
     s32 v;
@@ -421,7 +421,7 @@ void MsChargeDrawTab(s16 a) {
 #endif
 }
 
-void MsChargeSellCard(void) {
+void MsChargeSellCard() {
     MsCard* card;
     u16 id;
     s16 i;
@@ -559,7 +559,7 @@ s32 FindMsCard(u16 id, u8 flag, s16 count) {
     return -1;
 }
 
-void MsChargeBuildCardList(void) {
+void MsChargeBuildCardList() {
     MsCard tmp;
     vu32* dma;
     u16* p;
@@ -660,14 +660,14 @@ void MsChargeBuildCardList(void) {
     }
 }
 
-s32 MsChargeReadMenuKeys(void) {
+s32 MsChargeReadMenuKeys() {
     s32 keys;
 
     keys = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
     return keys | (GetKeysRepeat() & (DPAD_ANY | L_BUTTON | R_BUTTON));
 }
 
-void MsChargeHandleGridInput(void) {
+void MsChargeHandleGridInput() {
     s16 oldCE0;
     s16 oldCE2;
     s16 oldCE4;
@@ -752,7 +752,7 @@ void MsChargeHandleGridInput(void) {
     }
 }
 
-void MsChargeHandleTabInput(void) {
+void MsChargeHandleTabInput() {
     s16 old;
     u16 keys;
 
@@ -835,7 +835,7 @@ s32 MsChargeSelectValueInColumn(MsCard* card, u16 col) {
     return found;
 }
 
-void MsChargeHandleValueInput(void) {
+void MsChargeHandleValueInput() {
     MsCard* card;
     s16 oldCol;
     s16 oldRow;
@@ -914,7 +914,7 @@ void MsChargeHandleValueInput(void) {
     }
 }
 
-void MsChargeHandleConfirmInput(void) {
+void MsChargeHandleConfirmInput() {
     MsCard* card;
     s16 old;
     u16 keys;
@@ -986,7 +986,7 @@ void MsChargeHandleConfirmInput(void) {
     }
 }
 
-void MsChargeHandleNoticeInput(void) {
+void MsChargeHandleNoticeInput() {
     u16 keys;
 
     keys = MsChargeReadMenuKeys();
@@ -1003,7 +1003,7 @@ void MsChargeHandleNoticeInput(void) {
     }
 }
 
-void MsChargeDraw(void) {
+void MsChargeDraw() {
     MsCard* card;
     void* anim;
     s32 sine;
@@ -1121,7 +1121,7 @@ void MsChargeDraw(void) {
     }
 }
 
-void mode_ms_charge_0(void) {
+void mode_ms_charge_0() {
     s16 i;
     s16 j;
     u8* pb;
@@ -1381,7 +1381,7 @@ void mode_ms_charge_0(void) {
     DisableBg(3);
 }
 
-void mode_ms_charge_1(void) {
+void mode_ms_charge_1() {
     UpdatePlayTime();
     sMsChargeBobPhase += 2;
 
@@ -1451,7 +1451,7 @@ void mode_ms_charge_1(void) {
     MsChargeDraw();
 }
 
-void mode_ms_charge_2(void) {
+void mode_ms_charge_2() {
     s32 i;
     s32 j;
 

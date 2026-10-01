@@ -112,7 +112,7 @@ void task_bos_dsd_circle_2(DsdCircleWork* work) {
     DrawSprite(x, y, work->gfx, work->dsd->tiles, work->dsd->palette, 0, SPRITE_PRIORITY(3), 0xFFFF);
 }
 
-void task_bos_dsd_circle_3(void) {
+void task_bos_dsd_circle_3() {
 }
 
 void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
@@ -228,7 +228,7 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
     }
 }
 
-void task_bos_dsd_energy1_3(void) {
+void task_bos_dsd_energy1_3() {
 }
 
 void BosDsdEnergy1UpdateArc(DsdEnergy1Work* work) {
@@ -467,7 +467,7 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
     }
 }
 
-void task_bos_dsd_energy2_3(void) {
+void task_bos_dsd_energy2_3() {
 }
 
 const s8 gBosDsdCirclePaletteDurations[10] = { 6, 12, 10, 9, 7, 8, 9, 10, 0, 0 };

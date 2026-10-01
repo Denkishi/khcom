@@ -235,7 +235,7 @@ static s32 sMoogleShopCursorX;
 static s32 sMoogleShopCursorY;
 static u8 sMoogleShopBackToTop;
 
-void MoogleShopClearFlags(void) {
+void MoogleShopClearFlags() {
     s32 i;
 
     for (i = 0; i < 32; i++) {
@@ -322,7 +322,7 @@ u8 GetMoogleFreePackFlag(u16 a) {
     return 0;
 }
 
-void ClearMoogleRoomFlags(void) {
+void ClearMoogleRoomFlags() {
     s16 i;
     s16 j;
 
@@ -428,7 +428,7 @@ void DrawMoogleShopPacks(s16 a) {
     LoadBgMap(2, sMoogleShopTilemap, 0x500);
 }
 
-s32 MoogleShopReadMenuKeys(void) {
+s32 MoogleShopReadMenuKeys() {
     s32 k;
 
     k = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
@@ -499,7 +499,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
     sMooglePackCards[0].timer = 15;
 }
 
-void ReleaseMooglePackOpening(void) {
+void ReleaseMooglePackOpening() {
     s16 i;
 
     for (i = 0; i < 5; i++) {
@@ -533,7 +533,7 @@ void ReleaseMooglePackOpening(void) {
     }
 }
 
-void DrawMooglePackOpening(void) {
+void DrawMooglePackOpening() {
     s16 i;
     ObjAffine* affine;
     void* obj;
@@ -861,7 +861,7 @@ void LoadMooglePackSelectionTilemap(s16 a) {
     LoadBgMap(1, sMooglePackMenuEntries[a].selectionTilemap, sMooglePackMenuEntries[a].selectionTilemapSize);
 }
 
-void MoogleShopHandleSoldOutInput(void) {
+void MoogleShopHandleSoldOutInput() {
     u16 keys;
     keys = MoogleShopReadMenuKeys();
 
@@ -880,7 +880,7 @@ void MoogleShopHandleSoldOutInput(void) {
     }
 }
 
-void MoogleShopHandleRowInput(void) {
+void MoogleShopHandleRowInput() {
     u16 keys;
     s16 old;
     s16 i;
@@ -944,7 +944,7 @@ void MoogleShopHandleRowInput(void) {
     }
 }
 
-u16 RollMoogleCardValue(void) {
+u16 RollMoogleCardValue() {
     s16 i;
     u16 r;
     u16 acc;
@@ -1062,7 +1062,7 @@ void RollMooglePackCards(s16 a, s16 b) {
     EwramFree(list);
 }
 
-void MoogleShopHandlePackInput(void) {
+void MoogleShopHandlePackInput() {
     u16 keys;
     s16 old;
 
@@ -1118,7 +1118,7 @@ void MoogleShopHandlePackInput(void) {
     }
 }
 
-void MoogleShopDraw(void) {
+void MoogleShopDraw() {
     s32 i;
     s16 v;
 
@@ -1149,7 +1149,7 @@ void MoogleShopDraw(void) {
     }
 }
 
-void mode_ms_shop_0(void) {
+void mode_ms_shop_0() {
     s16 i;
     s32 size;
     u16** p;
@@ -1205,7 +1205,7 @@ void mode_ms_shop_0(void) {
     DisableBg(3);
 }
 
-void mode_ms_shop_1(void) {
+void mode_ms_shop_1() {
     UpdatePlayTime();
 
     switch (sMoogleShopState) {
@@ -1287,7 +1287,7 @@ void mode_ms_shop_1(void) {
     MoogleShopDraw();
 }
 
-void mode_ms_shop_2(void) {
+void mode_ms_shop_2() {
     s32 i;
 
     ReleaseObjPalette(sMoogleShopCursorPalette);

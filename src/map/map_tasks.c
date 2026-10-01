@@ -2145,7 +2145,7 @@ void Task_MapGmk_Dmy_0(MapGmkDmyWork* w) {
     w->tiles = AllocObjTiles(MapGmkGetFreeTiles() << 5, 0);
 }
 
-s32 Task_MapGmk_Dmy_1(void) {
+s32 Task_MapGmk_Dmy_1() {
     if ((u8)IsMapInterrupted() != 0) {
         return 0;
     }

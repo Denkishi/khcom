@@ -14,7 +14,7 @@ static TaskPool sStatusTaskPool;
 static Task* sStatusBarTask;
 static u8 sStatusReturnToMenu;
 
-void mode_status_0(void) {
+void mode_status_0() {
     BgReset();
     SetBgMode0();
     SetupBg(0, 0, 0x1F, 0);
@@ -64,7 +64,7 @@ void mode_status_0(void) {
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 }
 
-void mode_status_1(void) {
+void mode_status_1() {
     UpdatePlayTime();
     TaskPoolUpdate(&sStatusTaskPool);
     TaskPoolDraw(&sStatusTaskPool);
@@ -74,7 +74,7 @@ void mode_status_1(void) {
     }
 }
 
-void mode_status_2(void) {
+void mode_status_2() {
     TaskPoolDestroy(&sStatusTaskPool);
 }
 

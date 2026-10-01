@@ -21,7 +21,7 @@ void task_bos_jf_shadow_0(JfShadowWork* work, BtlObj* obj) {
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 }
 
-s32 task_bos_jf_shadow_1(void) {
+s32 task_bos_jf_shadow_1() {
     return 1;
 }
 
@@ -73,7 +73,7 @@ void task_bos_jf_shadow_3(JfShadowWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void func_080C6FF8(void) {
+void func_080C6FF8() {
     gUnk_0203C3C0 = 0;
     gUnk_0203C3BC = 0;
 }

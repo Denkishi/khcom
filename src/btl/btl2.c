@@ -41,7 +41,7 @@ void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 }
 
-s32 task_btl_shadow_1(void) {
+s32 task_btl_shadow_1() {
     return 1;
 }
 

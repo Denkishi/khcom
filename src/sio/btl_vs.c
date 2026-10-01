@@ -92,7 +92,7 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
     return ret;
 }
 
-void VsBtlWorkInit(void) {
+void VsBtlWorkInit() {
     s32 a;
     s32 b;
 
@@ -119,7 +119,7 @@ void VsBtlWorkInit(void) {
     gUnk_020348E2 = 0;
 }
 
-void HandleVsRikuCardInput(void) {
+void HandleVsRikuCardInput() {
     BtlWork* w;
     BtlObj* o;
     u16 held;
@@ -249,7 +249,7 @@ void HandleVsRikuCardInput(void) {
     }
 }
 
-void HandleVsSoraCardInput(void) {
+void HandleVsSoraCardInput() {
     BtlWork* w;
     BtlObj* o;
     u16 held;
@@ -379,7 +379,7 @@ void HandleVsSoraCardInput(void) {
     }
 }
 
-void VsEndCardPlay(void) {
+void VsEndCardPlay() {
     gBtlWork->phase = 1;
 
     if (!(gBtlWork->flags & BTL_FLAG_CARD_BREAK)) {
@@ -390,7 +390,7 @@ void VsEndCardPlay(void) {
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
 
-void VsBattleUpdate(void) {
+void VsBattleUpdate() {
     BtlObj* player = gBtlWork->actor;
     BtlObj* other = gRikuBtlWork->actor;
     s32 entered;

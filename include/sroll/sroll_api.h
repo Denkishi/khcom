@@ -14,17 +14,17 @@ void SrollTextInit(struct SrollWork* w, struct SrollInit* a);
 void SrollTextSetColors(struct SrollWork* w, u16 a, u16 b, u16 c, u16 d);
 void SrollTextClearRect(struct SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush);
 void SrollTextDrawStringAtPixelX(struct SrollWork* w, u16 x, u16 y, u8* s, u8 flush);
-void ScanlineDmaReset(void);
+void ScanlineDmaReset();
 void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt);
 void ScanlineDmaQueueBuffer(u8* src);
-void ScanlineDmaEnable(void);
-void ScanlineDmaDisable(void);
-void BlockAudioStart(void);
-void BlockAudioUpdate(void);
-void BlockAudioStop(void);
+void ScanlineDmaEnable();
+void ScanlineDmaDisable();
+void BlockAudioStart();
+void BlockAudioUpdate();
+void BlockAudioStop();
 
-s32* GetDecodedAudioBuffer(void);
-s32 GetDecodedAudioReadPosition(void);
+s32* GetDecodedAudioBuffer();
+s32 GetDecodedAudioReadPosition();
 void SetDecodedAudioReadPosition(s32 pos);
 
 #endif

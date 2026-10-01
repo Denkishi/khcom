@@ -257,7 +257,7 @@ static const ChkBtlWorld sChkBtlWorlds[13] = {
 
 const char gWhitePalette[32] = "\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff\xff";
 
-void mode_chkbtl_0(void) {
+void mode_chkbtl_0() {
     FadeStartIn(FADE_MODE_BLACK, 8);
     SetBgMode0();
     SetupBg(0, 0, 15, 0);
@@ -289,7 +289,7 @@ void mode_chkbtl_0(void) {
     }
 }
 
-void mode_chkbtl_1(void) {
+void mode_chkbtl_1() {
     s32 i;
 
     if (GetKeysRepeat() & DPAD_UP) {
@@ -443,11 +443,11 @@ void mode_chkbtl_1(void) {
     DebugTextClear();
 }
 
-void mode_chkbtl_2(void) {
+void mode_chkbtl_2() {
     DebugTextDestroy();
 }
 
-void ChkBtlSpawnEnemy(void) {
+void ChkBtlSpawnEnemy() {
     ChkBtlEntry* entry;
     ChkBtlPos pos;
 
@@ -461,7 +461,7 @@ void ChkBtlSpawnEnemy(void) {
     }
 }
 
-void ChkBtlReset(void) {
+void ChkBtlReset() {
     gChkBtlWork->cursor = 0;
     gChkBtlWork->bg = 0;
     gChkBtlWork->enemy = 0;

@@ -137,7 +137,7 @@ s32 HandleMovieFrame(s32 arg) {
     return 0;
 }
 
-void MovieVBlankIntr(void) {
+void MovieVBlankIntr() {
     u16* oam;
 #ifndef VERSION_JP
     s16 x;
@@ -319,7 +319,7 @@ void MovieVBlankIntr(void) {
     *(vu16*)0x03007FF8 |= 1;
 }
 
-void mode_movie_1(void) {
+void mode_movie_1() {
     void* p;
 
     switch (sMovieModeState) {
@@ -545,7 +545,7 @@ void mode_movie_1(void) {
     }
 }
 
-void mode_movie_2(void) {
+void mode_movie_2() {
     gVBlankHandlerOverride = 0;
 }
 

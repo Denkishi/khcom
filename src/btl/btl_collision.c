@@ -948,7 +948,7 @@ void FldObjUnregister(FldObj* p) {
     ListPoolRemove(&p->node, &gFieldState->actor.pool);
 }
 
-void func_08012214(void) {
+void func_08012214() {
 }
 
 void* ColliderGetPool(u32 type) {
@@ -972,7 +972,7 @@ void* ColliderGetPool(u32 type) {
     return &gUnk_02034918;
 }
 
-void ColliderPoolsInit(void) {
+void ColliderPoolsInit() {
     ListPoolInit(&gUnk_020348E8);
     ListPoolInit(&gUnk_020348F8);
     ListPoolInit(&gUnk_02034908);
@@ -1144,7 +1144,7 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
     }
 }
 
-void ColliderUpdateAll(void) {
+void ColliderUpdateAll() {
     ColliderClearPoolContacts(&gUnk_020348E8);
     ColliderClearPoolContacts(&gUnk_020348F8);
     ColliderClearPoolContacts(&gUnk_02034908);

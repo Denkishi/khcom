@@ -979,7 +979,7 @@ void TutorialOpenPersistentMessage(u16 a) {
     CreatePersistentSysmsgwinTask(&gBtlWork->taskPools[1], a);
 }
 
-void TutorialRestoreBgMode(void) {
+void TutorialRestoreBgMode() {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
@@ -997,7 +997,7 @@ void TutorialQueuePersistentMessage(TutorialWork* p, u16 b, u32 c) {
     p->message = b;
 }
 
-void TutorialCloseMessage(void) {
+void TutorialCloseMessage() {
     CloseMessageWindow();
 }
 

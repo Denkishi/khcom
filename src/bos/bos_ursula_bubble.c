@@ -187,15 +187,15 @@ void eu_080DA80C(u16 a, u16 b) {
     AnimChange(&gUrsulaBubbleWork->anim, a, b);
 }
 
-u16 eu_080DA830(void) {
+u16 eu_080DA830() {
     return AnimGetId(&gUrsulaBubbleWork->anim);
 }
 
-u8 eu_080DA848(void) {
+u8 eu_080DA848() {
     return AnimIsFinished(&gUrsulaBubbleWork->anim);
 }
 
-void* eu_080DA860(void) {
+void* eu_080DA860() {
     return AnimGetGfx(&gUrsulaBubbleWork->anim);
 }
 #endif
@@ -369,10 +369,10 @@ u8 task_bos_ursula_thunder_1(UrsulaThunderWork* work) {
     return 1;
 }
 
-void task_bos_ursula_thunder_2(void) {
+void task_bos_ursula_thunder_2() {
 }
 
-void task_bos_ursula_thunder_3(void) {
+void task_bos_ursula_thunder_3() {
 }
 
 void BosMapanimeInit(BosMapanimeState* p, const BosMapanimeDef* q) {
@@ -423,7 +423,7 @@ u16 BosMapanimeGetFrameIndex(BosMapanimeState* p) {
     return p->frameIndex;
 }
 
-void ResetPooState(void) {
+void ResetPooState() {
     InitPooState();
 }
 

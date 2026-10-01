@@ -400,7 +400,7 @@ extern u8 gUnk_05000080[];
 void BosPcDraw(PcWork* work);
 void BosPcLoadPaletteCycle(PcWork* work);
 
-s32 BosPcFldGetShake(void);
+s32 BosPcFldGetShake();
 void BosPcFldResetPaletteCycle(PcFldWork* work);
 void BosPcFldStopPaletteCycle(PcFldWork* work);
 void BosPcAcdSetOff(Task* task, u8 v);
@@ -432,9 +432,9 @@ u8 BosLstAnyBitAlive(BosLstWork* work);
 void BosLstHoverBits(BosLstWork* work);
 void BosLstReturnBits(BosLstWork* work);
 
-void BosPcFldResetShake(void);
+void BosPcFldResetShake();
 void BosPcFldStartShake(s16 a);
-void BosPcFldUpdateShake(void);
+void BosPcFldUpdateShake();
 void BosPcFldUpdatePaletteCycle(PcFldWork* work);
 
 void BosPcFltUpdateSinkEnd(PcFltWork* work);

@@ -178,7 +178,7 @@ u8 task_romcri_eff_1(RomcriEffWork* work) {
     return 1;
 }
 
-void task_romcri_eff_3(void) {
+void task_romcri_eff_3() {
     DisableBg(1);
 }
 
@@ -267,7 +267,7 @@ u8 task_romcri_eff2_1(RomcriEff2Work* work) {
     return 1;
 }
 
-void task_romcri_eff2_3(void) {
+void task_romcri_eff2_3() {
     DisableBg(1);
 }
 

@@ -5,10 +5,10 @@
 #include "chara_types.h"
 
 void mode_sio_battle_0(s32 a);
-void mode_sio_battle_1(void);
-void mode_sio_battle_2(void);
-void ClearSioBattleFileLoaded(void);
-void SioChgCardRecvSlotIds(void);
+void mode_sio_battle_1();
+void mode_sio_battle_2();
+void ClearSioBattleFileLoaded();
+void SioChgCardRecvSlotIds();
 
 extern s8 gSioDebugMode;
 extern u8 gSioBattleFileLoaded;

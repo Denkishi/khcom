@@ -3,26 +3,26 @@
 
 #include "types.h"
 
-typedef void (*IntrFunc)(void);
+typedef void (*IntrFunc)();
 
 extern vu16 gIntrCheck;
 
-void EnableVBlankIntr(void);
-void DisableVBlankIntr(void);
-void EnableHBlankIntr(void);
+void EnableVBlankIntr();
+void DisableVBlankIntr();
+void EnableHBlankIntr();
 void SetVBlankCallback(IntrFunc fn);
-void ResetVBlankCallback(void);
+void ResetVBlankCallback();
 void SetHBlankCallback(IntrFunc fn);
 void SetVCountCallback(IntrFunc fn);
-void ResetVCountCallback(void);
+void ResetVCountCallback();
 void SetSerialCallback(IntrFunc fn);
-void ResetSerialCallback(void);
+void ResetSerialCallback();
 void SetTimer3Callback(IntrFunc fn);
-void ResetTimer3Callback(void);
-void ApplyIntrCallbacks(void);
+void ResetTimer3Callback();
+void ApplyIntrCallbacks();
 
-void ResetHBlankCallback(void);
+void ResetHBlankCallback();
 
-void DisableHBlankIntr(void);
+void DisableHBlankIntr();
 
 #endif

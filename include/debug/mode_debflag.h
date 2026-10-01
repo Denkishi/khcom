@@ -10,7 +10,7 @@ typedef struct DebugFlag {
 extern u8 gDebflagReturnToMap;
 
 void mode_debflag_0(s32 arg);
-void mode_debflag_1(void);
-void mode_debflag_2(void);
+void mode_debflag_1();
+void mode_debflag_2();
 
 #endif /* GUARD_MODE_DEBFLAG_H */

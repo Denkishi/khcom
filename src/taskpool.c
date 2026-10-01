@@ -22,14 +22,14 @@
 #include "types.h"
 
 Mode* gCurrentMode;
-void (*gCurrentModeUpdate)(void);
+void (*gCurrentModeUpdate)();
 u16 gDebugModeIndex;
 Mode* gPendingMode;
 s32 gPendingModeArg;
 vu8 gModeFlags;
 u16 gModeBlankColor;
-void (*gModeTransitionCallback)(void);
-void (*gModeVBlankCallback)(void);
+void (*gModeTransitionCallback)();
+void (*gModeVBlankCallback)();
 
 #ifdef VERSION_EU
 u32 gUnkEu_030074AC;
@@ -215,11 +215,11 @@ void SetTaskUpdate(Task* task, TaskUpdateFunc update) {
     task->update = update;
 }
 
-s32 func_08000F90(void) {
+s32 func_08000F90() {
     return 0;
 }
 
-void ModeBlankDisplay(void) {
+void ModeBlankDisplay() {
     REG_DISPCNT &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
     *(vu16*)PLTT = gModeBlankColor;
 }
@@ -244,7 +244,7 @@ void ModeStart(Mode* mode, s32 arg) {
 #ifdef VERSION_EU
 void ModeInit(u8 a) {
 #else
-void ModeInit(void) {
+void ModeInit() {
 #endif
     gModeFlags = (MODE_FLAG_BLANK_PENDING | MODE_FLAG_DISPLAY_HELD);
     gModeBlankColor = 0;
@@ -264,7 +264,7 @@ void ModeInit(void) {
     gModeVBlankCallback = 0;
 }
 
-void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
+void ModeSetTransitionCallback(void (*a)(), void (*b)()) {
     if (a != NULL) {
         a();
     }
@@ -273,20 +273,20 @@ void ModeSetTransitionCallback(void (*a)(void), void (*b)(void)) {
     gModeFlags |= MODE_FLAG_TRANSITION_ACTIVE;
 }
 
-void ModeClearTransitionCallback(void) {
+void ModeClearTransitionCallback() {
     gModeFlags &= ~MODE_FLAG_TRANSITION_ACTIVE;
     gModeTransitionCallback = 0;
 }
 
-void ModeSetVBlankCallback(void (*fn)(void)) {
+void ModeSetVBlankCallback(void (*fn)()) {
     gModeVBlankCallback = fn;
 }
 
-void ModeClearVBlankCallback(void) {
+void ModeClearVBlankCallback() {
     gModeVBlankCallback = 0;
 }
 
-u8 IsModeStarted(void) {
+u8 IsModeStarted() {
     if (gModeFlags & MODE_FLAG_STARTED) {
         return 1;
     }
@@ -306,13 +306,13 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 }
 
 #ifdef VERSION_EU
-void eu_0800115C(void) {
+void eu_0800115C() {
     gSoftResetMarker[0] = 0xFEDCBA98;
     SoftReset(RESET_ALL & ~RESET_IWRAM);
 }
 #endif
 
-void ModeUpdate(void) {
+void ModeUpdate() {
     u8 v;
 
     if ((((GetKeysPressed() & START_BUTTON) && (GetKeysHeld() & SELECT_BUTTON) && (GetKeysHeld() & A_BUTTON) &&
@@ -372,11 +372,11 @@ void ModeUpdate(void) {
     }
 }
 
-void SetModeUpdate(void (*fn)(void)) {
+void SetModeUpdate(void (*fn)()) {
     gCurrentModeUpdate = fn;
 }
 
-void ModeFlushDisplay(void) {
+void ModeFlushDisplay() {
     if (gModeFlags & MODE_FLAG_BLANK_PENDING) {
         ModeBlankDisplay();
         gModeFlags &= ~MODE_FLAG_BLANK_PENDING;
@@ -394,7 +394,7 @@ void ModeFlushDisplay(void) {
     }
 }
 
-void ModeRunVBlankCallbacks(void) {
+void ModeRunVBlankCallbacks() {
     if ((gModeFlags & MODE_FLAG_DISPLAY_HELD) && gModeTransitionCallback != NULL) {
         gModeTransitionCallback();
     }
@@ -404,17 +404,17 @@ void ModeRunVBlankCallbacks(void) {
     }
 }
 
-void ModeCallExit(void) {
+void ModeCallExit() {
     if (gCurrentMode->exit != NULL) {
         gCurrentMode->exit();
     }
 }
 
-const char* GetModeName(void) {
+const char* GetModeName() {
     return gCurrentMode->name;
 }
 
-void UpdateDebugModeSelect(void) {
+void UpdateDebugModeSelect() {
     if (GetKeysHeld() & SELECT_BUTTON) {
         if (GetKeysPressed() & L_BUTTON) {
             gDebugModeIndex--;

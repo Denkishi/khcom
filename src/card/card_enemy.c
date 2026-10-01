@@ -994,7 +994,7 @@ void func_08091978(u16 a, u8 b) {
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
 }
 
-void ResetBossCardValue(void) {
+void ResetBossCardValue() {
     gBossCardValue = -1;
 }
 
@@ -1002,7 +1002,7 @@ void SetBossCardValue(u16 a) {
     gBossCardValue = a;
 }
 
-u16 GetBossCardValue(void) {
+u16 GetBossCardValue() {
     if (gBossCardValue != -1) {
         return gBossCardValue;
     }

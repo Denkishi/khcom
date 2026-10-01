@@ -14,7 +14,7 @@ static const u8 sSpriteHeapName[8] = "SPRITE";
 
 SpriteWork* gSpriteWork;
 
-void SpriteInit(void) {
+void SpriteInit() {
     u32 zero;
 
     SetIwramHeapName(sSpriteHeapName);
@@ -23,7 +23,7 @@ void SpriteInit(void) {
     CpuSet(&zero, gSpriteWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(SpriteWork) / 4));
 }
 
-void SpriteFree(void) {
+void SpriteFree() {
     IwramFree(gSpriteWork);
 }
 
@@ -92,11 +92,11 @@ void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi) {
     }
 }
 
-void EnableObj(void) {
+void EnableObj() {
     gDispCnt |= DISPCNT_OBJ_ON;
 }
 
-void DisableObj(void) {
+void DisableObj() {
     gDispCnt &= ~DISPCNT_OBJ_ON;
 }
 
@@ -124,7 +124,7 @@ void SetObjPaletteRange(u16 a, u16 b) {
     }
 }
 
-void SpriteReset(void) {
+void SpriteReset() {
     s32 i;
 
     EnableObj();

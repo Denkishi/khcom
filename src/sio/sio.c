@@ -11,10 +11,10 @@ u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);
 u16 gSioRecvFrame[4][2] EWRAM_COMMON(16);
 u32 gSioErrorStatus EWRAM_COMMON(4);
-s32 (*gSioLinkRecvCallback)(void) EWRAM_COMMON(8);
+s32 (*gSioLinkRecvCallback)() EWRAM_COMMON(8);
 u8 gSioPlayerCount EWRAM_COMMON(4);
 u8 gSioLastRecvCount EWRAM_COMMON(4);
-s32 (*gSioLinkSendCallback)(void) EWRAM_COMMON(4);
+s32 (*gSioLinkSendCallback)() EWRAM_COMMON(4);
 u16 gSioCommandRecv[4][2] EWRAM_COMMON(16);
 u32 gSioStatus EWRAM_COMMON(4);
 u8 gUnk_02039824 EWRAM_COMMON(4);
@@ -35,7 +35,7 @@ s8 gSioAutoStartDone;
 u16 gSioSendNonzero;
 u16 gSioRecvNonzero;
 
-u16 IsVBlankIntrLive(void) {
+u16 IsVBlankIntrLive() {
     if (REG_IME & 1) {
         if (REG_DISPSTAT & DISPSTAT_VBLANK_INTR) {
             if (REG_IE & INTR_FLAG_VBLANK) {
@@ -57,7 +57,7 @@ void SetVBlankCallback(IntrFunc fn) {
     }
 }
 
-void ResetVBlankCallback(void) {
+void ResetVBlankCallback() {
     *gIntrTableVBlank = VBlankIntr;
     gVBlankCallback = VBlankIntr;
 }
@@ -70,7 +70,7 @@ void SetVCountCallback(IntrFunc fn) {
     }
 }
 
-void ResetVCountCallback(void) {
+void ResetVCountCallback() {
     *gIntrTableVCount = VCountIntrDummy;
     gVCountCallback = VCountIntrDummy;
 }
@@ -83,7 +83,7 @@ void SetHBlankCallback(IntrFunc fn) {
     }
 }
 
-void ResetHBlankCallback(void) {
+void ResetHBlankCallback() {
     *gIntrTableHBlank = HBlankIntrDummy;
     gHBlankCallback = HBlankIntrDummy;
 }
@@ -92,7 +92,7 @@ void SetSerialCallback(IntrFunc fn) {
     *gIntrTableSerial = fn;
 }
 
-void ResetSerialCallback(void) {
+void ResetSerialCallback() {
     *gIntrTableSerial = SerialIntrDummy;
 }
 
@@ -100,11 +100,11 @@ void SetTimer3Callback(IntrFunc fn) {
     *gIntrTableTimer3 = fn;
 }
 
-void ResetTimer3Callback(void) {
+void ResetTimer3Callback() {
     *gIntrTableTimer3 = SerialIntrDummy;
 }
 
-void SioInit(void) {
+void SioInit() {
     u16* p;
     u16 ime;
     u32 zero;
@@ -149,15 +149,15 @@ void SioInit(void) {
     gSioLinkRecvCallback = 0;
 }
 
-void SioReset(void) {
+void SioReset() {
     SioInit();
     SioStop();
 }
 
-void func_08006E70(void) {
+void func_08006E70() {
 }
 
-void SioStop(void) {
+void SioStop() {
     u32 zero;
 
     gSioSavedIme = REG_IME;
@@ -296,7 +296,7 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
     return w;
 }
 
-void SioCheckParent(void) {
+void SioCheckParent() {
     if (((*(vu32*)REG_ADDR_SIOCNT) & (SIO_MULTI_SI | SIO_MULTI_SD)) == SIO_MULTI_SD && gSioWork.playerId == 0) {
         gSioWork.isParent = 8;
     } else {
@@ -304,7 +304,7 @@ void SioCheckParent(void) {
     }
 }
 
-void SioInitTimer(void) {
+void SioInitTimer() {
     if (gSioWork.isParent != 0) {
         REG_TM3CNT_L = 0xFF2D;
         REG_TM3CNT_H = (TIMER_INTR_ENABLE | TIMER_64CLK);
@@ -383,7 +383,7 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
     REG_IME = gSioSavedIme;
 }
 
-void SioVBlankUpdate(void) {
+void SioVBlankUpdate() {
     if (gSioWork.paused != 0) {
         gSioPauseTimer--;
 
@@ -426,12 +426,12 @@ void SioVBlankUpdate(void) {
     }
 }
 
-void SioTimer3Intr(void) {
+void SioTimer3Intr() {
     SioStopTimer();
     SioStartTransfer();
 }
 
-void SioSerialIntr(void) {
+void SioSerialIntr() {
     u32 cnt;
 
     cnt = (*(vu32*)REG_ADDR_SIOCNT);
@@ -468,11 +468,11 @@ void SioSerialIntr(void) {
     }
 }
 
-void SioStartTransfer(void) {
+void SioStartTransfer() {
     REG_SIOCNT |= SIO_START;
 }
 
-u8 SioHandshake(void) {
+u8 SioHandshake() {
     u8 count;
     u16 min;
     u8 i;
@@ -526,7 +526,7 @@ u8 SioHandshake(void) {
     return 0;
 }
 
-void SioRecvWord(void) {
+void SioRecvWord() {
     u16 buf[4];
     u8 i;
     u8 idx;
@@ -573,7 +573,7 @@ void SioRecvWord(void) {
     }
 }
 
-void SioSendWord(void) {
+void SioSendWord() {
     if (gSioWork.sendWordIdx == 4) {
         REG_SIOMLT_SEND = gSioWork.checksum;
 
@@ -606,14 +606,14 @@ void SioSendWord(void) {
     }
 }
 
-void SioStopTimer(void) {
+void SioStopTimer() {
     if (gSioWork.isParent != 0) {
         REG_TM3CNT_H &= ~TIMER_ENABLE;
         REG_TM3CNT_L = 0xFF2D;
     }
 }
 
-void SioFinishTransfer(void) {
+void SioFinishTransfer() {
     if (gSioWork.recvWordIdx == 4) {
         gSioWork.sendWordIdx = 0;
         gSioWork.recvWordIdx = 0;
@@ -622,7 +622,7 @@ void SioFinishTransfer(void) {
     }
 }
 
-void SioResetSendQueue(void) {
+void SioResetSendQueue() {
     u8 i;
     u8 j;
 
@@ -636,7 +636,7 @@ void SioResetSendQueue(void) {
     }
 }
 
-void SioResetRecvQueue(void) {
+void SioResetRecvQueue() {
     u8 i;
     u8 j;
     u8 k;
@@ -653,7 +653,7 @@ void SioResetRecvQueue(void) {
     }
 }
 
-void SioClearRegs(void) {
+void SioClearRegs() {
     REG_RCNT = 0;
     REG_SIOCNT = 0;
     REG_SIODATA8 = 0;
@@ -666,7 +666,7 @@ void SioClearRegs(void) {
     REG_SIOMULTI3 = 0;
 }
 
-void SioShutdown(void) {
+void SioShutdown() {
     SioClearRegs();
     REG_IME = 0;
     ResetVBlankCallback();
@@ -678,7 +678,7 @@ void SioShutdown(void) {
     SioStop();
 }
 
-u8 SioIsConnected(void) {
+u8 SioIsConnected() {
     if (gSioWork.state == 4) {
         return 1;
     }

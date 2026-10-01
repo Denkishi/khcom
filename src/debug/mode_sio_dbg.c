@@ -152,7 +152,7 @@ void mode_sio_dbg_flg_0(s32 arg) {
 #endif
 }
 
-void mode_sio_dbg_flg_1(void) {
+void mode_sio_dbg_flg_1() {
     u8 prev;
 
     prev = sSioDbgCursor;
@@ -415,12 +415,12 @@ void mode_sio_dbg_flg_1(void) {
     }
 }
 
-void mode_sio_dbg_flg_2(void) {
+void mode_sio_dbg_flg_2() {
     DebugTextDestroy();
 }
 
 #ifdef VERSION_EU
-void SioDbgApplySettings(void) {
+void SioDbgApplySettings() {
     gCharaLinkSend.level = gSioDbgLevel1P;
     gCharaLinkSend.maxHp = gCharaLinkSend.hp = gUnk_0203C3C4;
     gGameState.progression.cp = gSioDbgCp;
@@ -442,7 +442,7 @@ void SioDbgApplySettings(void) {
     gCharaLinkRecv.worldFlags = 0x1FFE;
 }
 #else
-void SioDbgApplySettings(void) {
+void SioDbgApplySettings() {
     gCharaLinkSend.level = gUnk_0203C3C8;
     gCharaLinkSend.maxHp = gUnk_0203C3CC;
 }

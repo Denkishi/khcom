@@ -590,20 +590,20 @@ void ShowPersistentCardMessage(void* pool, u32 a, u16 b) {
     }
 }
 
-void ResetMessageWindowFlags(void) {
+void ResetMessageWindowFlags() {
     gMessageWindowOpen = 0;
     gMessageWindowAnswerYes = 0;
 }
 
-u8 IsMessageWindowOpen(void) {
+u8 IsMessageWindowOpen() {
     return gMessageWindowOpen;
 }
 
-u8 IsMessageWindowAnswerYes(void) {
+u8 IsMessageWindowAnswerYes() {
     return gMessageWindowAnswerYes;
 }
 
-u8 CloseMessageWindow(void) {
+u8 CloseMessageWindow() {
     if (gActiveCardMsgwin != NULL) {
         gActiveCardMsgwin->keepOpen = 0;
         return 1;

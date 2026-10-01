@@ -48,7 +48,7 @@ void task_ms_shop_hosi_3(MsShopHosiWork* work) {
     ReleaseObjTiles(work->tiles);
 }
 
-void ClearMoogleShopFlags(void) {
+void ClearMoogleShopFlags() {
     MoogleShopClearFlags();
 }
 

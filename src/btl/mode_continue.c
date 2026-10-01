@@ -9,7 +9,7 @@
 TaskPool gContinueTaskPool;
 Task* gContinueTask;
 
-static void Continue_0(void) {
+static void Continue_0() {
     TaskPoolInit(&gContinueTaskPool, 2);
 
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
@@ -19,7 +19,7 @@ static void Continue_0(void) {
     }
 }
 
-void ContinueModeUpdate(void) {
+void ContinueModeUpdate() {
     ContinueWork* w;
 
     TaskPoolUpdate(&gContinueTaskPool);
@@ -42,7 +42,7 @@ void ContinueModeUpdate(void) {
     }
 }
 
-static void Continue_2(void) {
+static void Continue_2() {
     TaskPoolDestroy(&gContinueTaskPool);
 }
 

@@ -129,7 +129,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     }
 }
 
-void MovieClose(void) {
+void MovieClose() {
     if (MovieGetChannels(gMoviePlayer)) {
         SndStreamClose();
     }
@@ -137,7 +137,7 @@ void MovieClose(void) {
     MovieFree(gMoviePlayer);
 }
 
-void MovieUpdate(void) {
+void MovieUpdate() {
     SndStreamUpdate();
     MovieAdvanceTicks();
 }
@@ -150,11 +150,11 @@ void MovieSetHeapCallbacks(MovieAllocFunc a, MovieAllocFunc b, MovieFreeFunc c, 
     gMovieHeap.ticks = 0;
 }
 
-void MovieAdvanceTicks(void) {
+void MovieAdvanceTicks() {
     gMovieHeap.ticks = gMovieHeap.ticks + MOVIE_TICKS_PER_FRAME;
 }
 
-u8* MovieGetTicks(void) {
+u8* MovieGetTicks() {
     u8* t;
     u16 vc;
 

@@ -153,7 +153,7 @@ s32 MapClampCameraY(s32 y) {
     return y;
 }
 
-void MapSnapCamera(void) {
+void MapSnapCamera() {
     s16 sx;
     s16 sy;
 
@@ -293,11 +293,11 @@ u8 IsHitByMapAttack(FldPos* p, s16 a, s16 b) {
     return 0;
 }
 
-u8 GetCurrentRoomCardValue(void) {
+u8 GetCurrentRoomCardValue() {
     return GetMapRoomCardValue(gMapFloorState.room);
 }
 
-s32 IsMapInterrupted(void) {
+s32 IsMapInterrupted() {
     if ((gFieldState->flags & (FIELD_FLAG_MENU_OPEN | FIELD_FLAG_ROOM_CREATE)) || (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN)) {
         return 1;
     }
@@ -325,11 +325,11 @@ s32 IsFldObjTalkTarget(FldObj* obj) {
     return gFieldState->lockonTarget == obj;
 }
 
-void MapFreezeBg1(void) {
+void MapFreezeBg1() {
     gMapRoomState->flags |= ROOM_FLAG_BG1_FROZEN;
 }
 
-void MapRestoreBg1(void) {
+void MapRestoreBg1() {
     MapFixedDef* p;
     MapRoomDef* q;
     s16 x;
@@ -353,11 +353,11 @@ void MapRestoreBg1(void) {
     }
 }
 
-FldObj* GetMapRoomDoor(void) {
+FldObj* GetMapRoomDoor() {
     return gMapRoomState->door;
 }
 
-void RequestMapMode(void) {
+void RequestMapMode() {
     switch (gMapFloorState.room) {
     case MAP_ROOM_TUTORIAL:
     case MAP_ROOM_EXIT_HALL:
@@ -384,7 +384,7 @@ void ReturnToMap(u8 a) {
     RequestMapMode();
 }
 
-void InitFieldState(void) {
+void InitFieldState() {
     gFieldState->x = 0;
     gFieldState->y = 0;
     gFieldState->x2 = 0;
@@ -408,7 +408,7 @@ void InitFieldState(void) {
     TaskPoolInit(&gMapRoomState->tasks, 1);
 }
 
-void CreateMapRndTask(void) {
+void CreateMapRndTask() {
     LoadMapRoomState(gMapRoomState, gMapFloorState.room);
 
     if (gMapRoomState->roomType == 5) {
@@ -418,7 +418,7 @@ void CreateMapRndTask(void) {
     TaskCreate(&gFieldState->tasks, &gTaskDescMapRnd, 0);
 }
 
-void SpawnMapPlayer(void) {
+void SpawnMapPlayer() {
     MapDoor* e;
     s32 x;
     s32 y;
@@ -462,7 +462,7 @@ void SpawnMapPlayer(void) {
     }
 }
 
-void UpdateMapField(void) {
+void UpdateMapField() {
     if (gFieldState->lockonDelay > 0) {
         gFieldState->flags |= FIELD_FLAG_NO_LOCKON;
         gFieldState->lockonDelay--;
@@ -486,7 +486,7 @@ void UpdateMapField(void) {
     TaskPoolUpdate(&gFieldState->tasks5);
 }
 
-void DrawMapField(void) {
+void DrawMapField() {
     TaskPoolDraw(&gFieldState->tasks);
 
     if ((gMapRoomState->flags & ROOM_FLAG_HIDE_PLAYER) == 0) {
@@ -501,7 +501,7 @@ void DrawMapField(void) {
     TaskPoolDraw(&gFieldState->tasks5);
 }
 
-void DestroyMapField(void) {
+void DestroyMapField() {
     TaskPoolDestroy(&gFieldState->tasks);
     TaskPoolDestroy(&gFieldState->tasks2);
     TaskPoolDestroy(&gFieldState->tasks3);
@@ -856,7 +856,7 @@ void MapFindPlatformStairs(MapPlatform* p) {
     }
 }
 
-void MapPlacePlatformStairs(void) {
+void MapPlacePlatformStairs() {
     s32 i;
 
     for (i = 11; i >= 0; i--) {
@@ -940,7 +940,7 @@ s16 MapOutlineNextRowRightToLeft(u8 a, u8 b, s16 c) {
     return c;
 }
 
-void MapFillOutlineCells(void) {
+void MapFillOutlineCells() {
     s32 i;
     s32 j;
     s32 dir;
@@ -1010,7 +1010,7 @@ void MapFillOutlineCells(void) {
     }
 }
 
-void func_080E13B0(void) {
+void func_080E13B0() {
     u16 y = gMapBottomRow;
     u16 n = y - gMapTopRow + 1;
     s32 j;
@@ -1070,7 +1070,7 @@ void func_080E13B0(void) {
     }
 }
 
-void MapMarkCellEdges(void) {
+void MapMarkCellEdges() {
     s32 x;
     s32 y;
 
@@ -1164,7 +1164,7 @@ void MapMarkCellEdges(void) {
     }
 }
 
-void MapAssignCellPieces(void) {
+void MapAssignCellPieces() {
     s32 i;
     s32 j;
     MapCell* e;
@@ -1584,7 +1584,7 @@ void MapAssignRightBorderPiece(s16 j) {
     }
 }
 
-void MapAssignBg1Pieces(void) {
+void MapAssignBg1Pieces() {
     s32 i;
     s32 j;
 
@@ -1601,7 +1601,7 @@ void MapAssignBg1Pieces(void) {
     }
 }
 
-void MapComputeCellHeights(void) {
+void MapComputeCellHeights() {
     s16 i;
     s16 j;
     s32 z;
@@ -1779,7 +1779,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
     }
 }
 
-s32 MapPlaceLastPlatformDoor(void) {
+s32 MapPlaceLastPlatformDoor() {
     s32 r = 5;
     MapPlatform* p = &gMapPlatforms[11];
 
@@ -1859,7 +1859,7 @@ void MapPlaceLeftPlatformDoor(u8 a) {
     MapPlaceDoorOnPlatform(p, a);
 }
 
-void MapPlaceDoorsOnLastPlatform(void) {
+void MapPlaceDoorsOnLastPlatform() {
     MapPlatform* p = &gMapPlatforms[11];
 
     while (p->z == 0x100000) {
@@ -1872,7 +1872,7 @@ void MapPlaceDoorsOnLastPlatform(void) {
     MapPlaceDoorOnPlatform(p, 3);
 }
 
-void MapPlaceDoors(void) {
+void MapPlaceDoors() {
     s32 i;
     MapDoor* e;
 
@@ -1919,7 +1919,7 @@ void MapPlaceDoors(void) {
     }
 }
 
-void MapComputeRowBounds(void) {
+void MapComputeRowBounds() {
     s32 i;
     s32 j;
 
@@ -2556,7 +2556,7 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
     return 0;
 }
 
-void func_080E3EFC(void) {
+void func_080E3EFC() {
     s16 a;
     s16 b;
     s16 c;
@@ -2575,7 +2575,7 @@ void func_080E3EFC(void) {
     MapTracePlatformRightToLeft(1, 0, a + 1, v + b, 0);
 }
 
-void func_080E3FD4(void) {
+void func_080E3FD4() {
     s16 a;
     s16 b;
     s16 c;
@@ -2612,7 +2612,7 @@ void func_080E3FD4(void) {
     }
 }
 
-void func_080E4244(void) {
+void func_080E4244() {
     s16 a;
     s16 b;
     s16 c;
@@ -2648,7 +2648,7 @@ void func_080E4244(void) {
     }
 }
 
-void func_080E44A8(void) {
+void func_080E44A8() {
     s16 a;
     s16 b;
     s16 c;
@@ -2684,7 +2684,7 @@ void func_080E44A8(void) {
     }
 }
 
-void func_080E470C(void) {
+void func_080E470C() {
     s16 a;
     s16 b;
     s16 c;
@@ -2732,7 +2732,7 @@ void MapAddLowerPlatforms(u8 a, u8 b) {
     }
 }
 
-void MapGenerateLayout(void) {
+void MapGenerateLayout() {
     switch (gMapForm.layout) {
     case 0:
         MapSetPlatform(0, 0, gMapCols, 0);
@@ -2824,7 +2824,7 @@ void MapGenerateRoom(u16 a, u16 b) {
     gMapRoomState->bottomRow = gMapBottomRow;
 }
 
-void MapFreeRoom(void) {
+void MapFreeRoom() {
     EwramFree(gMapBgBuffer);
 
     if (gGameState.fieldResume == 0) {
@@ -3169,7 +3169,7 @@ u8* GetMapRoomEvent(u8 a) {
     return (u8*)(gMapRoomDefs[gMapFloorState.world]->soraEvents + a);
 }
 
-void* GetMapBgBuffer(void) {
+void* GetMapBgBuffer() {
     return gMapBgBuffer;
 }
 
@@ -3181,7 +3181,7 @@ void LoadMapForm(u8 a) {
     }
 }
 
-u16 GetRandomMapWidth(void) {
+u16 GetRandomMapWidth() {
     return gMapForm.minWidth + GetRandom() % (gMapForm.maxWidth - gMapForm.minWidth + 1);
 }
 
@@ -3303,7 +3303,7 @@ void MapFixCreateGimmicks(void* a) {
     }
 }
 
-void MapFixSnapCamera(void) {
+void MapFixSnapCamera() {
     u16 sx;
     u16 sy;
 
@@ -3337,7 +3337,7 @@ void MapFixInitCells(MapFixedDef* p) {
     MapFixLoadCellTypes(p->cellTypes);
 }
 
-void MapFixFreeCells(void) {
+void MapFixFreeCells() {
     EwramFree(gMapFixCells);
 }
 

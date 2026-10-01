@@ -121,6 +121,6 @@ typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
 
 extern GameState gGameState;
 
-void UpdatePlayTime(void);
+void UpdatePlayTime();
 
 #endif

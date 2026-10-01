@@ -149,7 +149,7 @@ void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) 
     }
 }
 
-void BgAnimUpdate(void) {
+void BgAnimUpdate() {
     u8* src;
     u16 q;
     u16 off;
@@ -229,13 +229,13 @@ void BgAnimSetStopFrame(u16 a) {
     gBgAnimStopFrame = a;
 }
 
-void BgAnimStop(void) {
+void BgAnimStop() {
     gBgAnimCurrent = 0;
     gBgAnimStopped = 1;
     DisableBg(gBgAnimBg);
 }
 
-u8 BgAnimIsStopped(void) {
+u8 BgAnimIsStopped() {
     return gBgAnimStopped;
 }
 
@@ -253,6 +253,6 @@ u32 BgAnimGetDuration(BgAnimationDef* p) {
     return (u32)p->frameCount * p->frameDuration;
 }
 
-BgAnimationDef* BgAnimGetCurrent(void) {
+BgAnimationDef* BgAnimGetCurrent() {
     return gBgAnimCurrent;
 }

@@ -27,14 +27,14 @@ static u8 sModeDeckExchangeResult;
 #endif
 
 #ifndef VERSION_EU
-void Mode_DeckExchange_0(void) {
+void Mode_DeckExchange_0() {
     sModeDeckExchangeResult = 0;
     gSioTradeCardId = 2048;
     TaskPoolInit(&sModeDeckExchangeTasks, 1);
     TaskCreate(&sModeDeckExchangeTasks, &gTaskDescDeckexchange, &sModeDeckExchangeResult);
 }
 
-void Mode_DeckExchange_1(void) {
+void Mode_DeckExchange_1() {
     if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioChgCardRecvSlotIds();
     } else {
@@ -49,7 +49,7 @@ void Mode_DeckExchange_1(void) {
     }
 }
 
-void Mode_DeckExchange_2(void) {
+void Mode_DeckExchange_2() {
     TaskPoolDestroy(&sModeDeckExchangeTasks);
 }
 #endif
@@ -100,7 +100,7 @@ void AddCardToDeckViaActive(u8 a, u16 b) {
     SetActiveDeckIndex(saved);
 }
 
-void FillDebugCardCollection(void) {
+void FillDebugCardCollection() {
 #ifdef VERSION_EU
     u16 i;
     u16 n;
@@ -326,7 +326,7 @@ void func_080AB4AC(u8 a) {
     AddCardToDeckViaActive(a, 522);
 }
 
-void ObtainStarterCards(void) {
+void ObtainStarterCards() {
     ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 7));
     ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 6));
     ObtainCard(CARD_ID(CARD_KINGDOM_KEY, 5));
@@ -344,7 +344,7 @@ void ObtainStarterCards(void) {
     ObtainCard(CARD_ID(CARD_CURE, 7));
 }
 
-void FillStarterDeck(void) {
+void FillStarterDeck() {
     AddCardToDeckViaActive(0, 0);
     AddCardToDeckViaActive(0, 1);
     AddCardToDeckViaActive(0, 2);
@@ -362,10 +362,10 @@ void FillStarterDeck(void) {
     AddCardToDeckViaActive(0, 14);
 }
 
-void func_080AB964(void) {
+void func_080AB964() {
 }
 
-void func_080AB968(void) {
+void func_080AB968() {
 }
 
 #ifndef VERSION_EU

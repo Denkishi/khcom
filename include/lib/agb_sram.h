@@ -9,7 +9,7 @@ extern u32 (*VerifySramFast)(const u8* src, u8* dest, u32 size);
 void ReadSramFast_Core(const u8* src, u8* dest, u32 size);
 void WriteSramFast(const u8* src, u8* dest, u32 size);
 u32 VerifySramFast_Core(const u8* src, u8* dest, u32 size);
-void SetSramFastFunc(void);
+void SetSramFastFunc();
 u32 WriteAndVerifySramFast(const u8* src, u8* dest, u32 size);
 
 #endif

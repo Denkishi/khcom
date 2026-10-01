@@ -649,7 +649,7 @@ static ChkSndEntry sChkSndEntries[] = {
     { "SND_970", SONG_SND_970 },
 };
 
-void mode_chksnd_0(void) {
+void mode_chksnd_0() {
     SetBgMode0();
     gChkSndIndex = 0;
     TaskPoolInit(&gChkSndPool, 10);
@@ -661,7 +661,7 @@ static const char sChkSndBlankText[0x20] = "                              ";
 static const char sChkSndSeparatorText[4] = ": ";
 #endif
 
-void mode_chksnd_1(void) {
+void mode_chksnd_1() {
     u16 keys;
 
     keys = GetKeysPressed() & B_BUTTON;
@@ -716,7 +716,7 @@ void mode_chksnd_1(void) {
     }
 }
 
-void mode_chksnd_2(void) {
+void mode_chksnd_2() {
     m4aMPlayAllStop();
     TaskPoolDestroy(&gChkSndPool);
 }

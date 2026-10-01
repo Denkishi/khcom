@@ -357,7 +357,7 @@ void MapEnmUpdateAnim(MapEnmWork* p) {
     p->gfx = AnimUpdate(&p->anim);
 }
 
-u8 GetRandomBattleId(void) {
+u8 GetRandomBattleId() {
     const u8* q = gUnk_0984D134[gMapRoomState->roomType];
     u8 v = q[3] + GetRandom() % (q[4] - q[3] + 1);
 
@@ -433,7 +433,7 @@ void MapEnmSaveToCache(MapEnmWork* p) {
     }
 }
 
-void MapEnmRestoreFromCache(void) {
+void MapEnmRestoreFromCache() {
     MapEnmCache* q;
     MapEnmArgs w;
     const MapEnmDef* d;
@@ -459,7 +459,7 @@ void MapEnmRestoreFromCache(void) {
     }
 }
 
-void MapEnmSpawnRoomSet(void) {
+void MapEnmSpawnRoomSet() {
     MapEnmArgs w;
     s32 i;
 
@@ -483,7 +483,7 @@ void MapEnmSpawnRoomSet(void) {
     }
 }
 
-void MapEnmInitRoom(void) {
+void MapEnmInitRoom() {
     MapEnmCache* q;
     MapEnmArgs w;
     const MapEnmDef* d;
@@ -530,7 +530,7 @@ void MapEnmInitRoom(void) {
     }
 }
 
-void MapEnmUpdateSpawner(void) {
+void MapEnmUpdateSpawner() {
     const u8* t;
     MapFloorRoom* e;
     const MapEnmDef* d;
@@ -1451,7 +1451,7 @@ s32 MapGmkNeedsTiles(u8 flag, void* a) {
     return 1;
 }
 
-void MapGmkReserveJump(void) {
+void MapGmkReserveJump() {
     s32 i;
 
     for (i = 0; i < 12; i++) {
@@ -1465,7 +1465,7 @@ void MapGmkReserveJump(void) {
     }
 }
 
-void MapGmkPlaceGmk01(void) {
+void MapGmkPlaceGmk01() {
     FldPos w;
     MapFloorRoom* e;
     const MapGmkDef* q;
@@ -1523,7 +1523,7 @@ void MapGmkPlaceGmk01(void) {
     }
 }
 
-void MapGmkPlaceGmk04(void) {
+void MapGmkPlaceGmk04() {
     FldPos w;
 
     if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 0x17) {
@@ -1537,7 +1537,7 @@ void MapGmkPlaceGmk04(void) {
     }
 }
 
-void MapGmkPlaceMoogle(void) {
+void MapGmkPlaceMoogle() {
     FldPos w;
 
     if (gMapRoomState->roomType == 11) {
@@ -1551,7 +1551,7 @@ void MapGmkPlaceMoogle(void) {
     }
 }
 
-void MapGmkPlaceWorldGimmicks(void) {
+void MapGmkPlaceWorldGimmicks() {
     FldPos w;
     const MapGmkDef* t;
     s32 i;
@@ -1613,7 +1613,7 @@ void MapGmkPlaceWorldGimmicks(void) {
     }
 }
 
-void MapGmkPlaceRandomGimmicks(void) {
+void MapGmkPlaceRandomGimmicks() {
     s32 i;
 
     for (i = gMapGmkCount; i < 16; i++) {
@@ -1666,7 +1666,7 @@ u8 FldObjIsOutOfView(FldObj* p) {
     return 0;
 }
 
-u16 MapGmkGetFreeTiles(void) {
+u16 MapGmkGetFreeTiles() {
     return 512 - gMapGmkTileCount;
 }
 
@@ -1716,7 +1716,7 @@ void DropMapGmkPrize(FldPos* p) {
     }
 }
 
-void MapGmkInitRoom(void) {
+void MapGmkInitRoom() {
     if (gGameState.fieldResume == 0) {
         gMapGmkPlacements = EwramAlloc(sizeof(MapGmkPlacement) * 16);
         gMapGmkCount = 0;
@@ -1733,7 +1733,7 @@ void MapGmkInitRoom(void) {
     MapGmkCreateTasks();
 }
 
-void MapGmkCreateTasks(void) {
+void MapGmkCreateTasks() {
     s32 i;
     MapPlatform* p;
     const MapGmkDef* d;
@@ -1757,7 +1757,7 @@ void MapGmkCreateTasks(void) {
     TaskCreate(&gFieldState->tasks, &gTaskDescMapGmkDmy, 0);
 }
 
-void MapGmkFree(void) {
+void MapGmkFree() {
     if (gGameState.fieldResume == 0) {
         EwramFree(gMapGmkPlacements);
     }
@@ -1988,7 +1988,7 @@ void MapApplyLayer2DecorRules(MapDecorRule* p) {
     }
 }
 
-void MapApplyRoomDecor(void) {
+void MapApplyRoomDecor() {
     if (gGameState.fieldResume == 0) {
         MapRoomDef* p = gMapRoomDefs[gMapFloorState.world];
 
@@ -2126,7 +2126,7 @@ u8 SelectEventDoor(u8 a, u8 b) {
     return 0;
 }
 
-u8 CountRemainingEventKeys(void) {
+u8 CountRemainingEventKeys() {
     return gEventKeyList->count - gEventKeyProgress->paid;
 }
 
@@ -2236,7 +2236,7 @@ UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
     return 0;
 }
 
-u8 RollCardValue(void) {
+u8 RollCardValue() {
     u16 acc = 0;
     u16 r = GetRandom() % 10000;
     s32 i;
@@ -2420,7 +2420,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
     }
 }
 
-u8 AreWorldPrizesCollected(void) {
+u8 AreWorldPrizesCollected() {
     s32 i;
     u8* p;
 
@@ -2493,7 +2493,7 @@ void MapDbgSetUpdateAndRun(ModeFunc a) {
     gMapDbgUpdate();
 }
 
-void MapDbgFreeCameraInput(void) {
+void MapDbgFreeCameraInput() {
     s32 y = 0;
     s32 x = 0;
     u16 m1 = DISPCNT_BG1_ON;
@@ -2526,7 +2526,7 @@ void MapDbgFreeCameraInput(void) {
     }
 }
 
-void MapDbgMain(void) {
+void MapDbgMain() {
     if (gMapRoomState->flags & ROOM_FLAG_START_BATTLE) {
         gMapRoomState->flags &= ~ROOM_FLAG_START_BATTLE;
         gMapRoomState->flags &= ~ROOM_FLAG_ENEMY_STRUCK;
@@ -2576,7 +2576,7 @@ void MapDbgMain(void) {
     }
 }
 
-void MapDbgExitRoom(void) {
+void MapDbgExitRoom() {
     DrawMapField();
 
     if (FadeIsActive() == 0) {
@@ -2590,7 +2590,7 @@ void MapDbgExitRoom(void) {
     }
 }
 
-void MapDbgFreeCameraMode(void) {
+void MapDbgFreeCameraMode() {
     if (gMapDbgEditing != 0) {
         MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
@@ -2613,7 +2613,7 @@ void MapDbgFreeCameraMode(void) {
     }
 }
 
-void MapDbgWaitEdit(void) {
+void MapDbgWaitEdit() {
     DrawMapField();
 
     if (gMapDbgEditing == 0) {
@@ -2621,7 +2621,7 @@ void MapDbgWaitEdit(void) {
     }
 }
 
-void MapDbgWaitMenu(void) {
+void MapDbgWaitMenu() {
     if ((gFieldState->flags & FIELD_FLAG_MENU_OPEN) == 0 && (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) == 0) {
         gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapGmkCreateTasks();
@@ -2632,7 +2632,7 @@ void MapDbgWaitMenu(void) {
     }
 }
 
-void MapDbgWaitRoomCreate(void) {
+void MapDbgWaitRoomCreate() {
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         MapDbgSetUpdateAndRun(MapDbgExitRoom);
@@ -2649,7 +2649,7 @@ void MapDbgWaitRoomCreate(void) {
     }
 }
 
-void Mode_MapDbg_0(void) {
+void Mode_MapDbg_0() {
     MapRoomDef* p;
 
     gFieldState = EwramAlloc(sizeof(FieldState));
@@ -2696,14 +2696,14 @@ void Mode_MapDbg_0(void) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
-void Mode_MapDbg_1(void) {
+void Mode_MapDbg_1() {
     TaskPoolUpdate(&gMapDbgTasks);
     TaskPoolDraw(&gMapDbgTasks);
     gMapDbgUpdate();
     UpdatePlayTime();
 }
 
-void Mode_MapDbg_2(void) {
+void Mode_MapDbg_2() {
     DestroyMapField();
     MapGmkFree();
     EwramFree(gFieldState);
@@ -2720,7 +2720,7 @@ void MapFldSetUpdateAndRun(ModeFunc a) {
     gMapFldUpdate();
 }
 
-void MapFldCreateWorldLogo(void) {
+void MapFldCreateWorldLogo() {
     switch (gMapFloorState.world) {
     case WORLD_ATLANTICA:
         gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)2);
@@ -2761,14 +2761,14 @@ void MapFldCreateWorldLogo(void) {
     }
 }
 
-void MapFldDestroyAllmapRoom(void) {
+void MapFldDestroyAllmapRoom() {
     if (gMapFldAllmapRoomTask != NULL) {
         TaskKill(&gFieldState->tasks, gMapFldAllmapRoomTask);
         gMapFldAllmapRoomTask = 0;
     }
 }
 
-void StartWorldBossBattle(void) {
+void StartWorldBossBattle() {
     switch (gGameState.world) {
     case WORLD_TRAVERSE_TOWN:
         ModeRequest(&gModeBattle, 0x94);
@@ -2797,7 +2797,7 @@ void StartWorldBossBattle(void) {
     }
 }
 
-void MapFldShowWorldLogo(void) {
+void MapFldShowWorldLogo() {
     u8 r = IsTaskActive(gMapFldWorldLogoTask);
 
     if (r != 0) {
@@ -2816,7 +2816,7 @@ void MapFldShowWorldLogo(void) {
     }
 }
 
-void MapFldMain(void) {
+void MapFldMain() {
     if (gMapRoomState->flags & ROOM_FLAG_START_BATTLE) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
@@ -2867,7 +2867,7 @@ void MapFldMain(void) {
     MapEnmUpdateSpawner();
 }
 
-void MapFldExitRoom(void) {
+void MapFldExitRoom() {
     u8 r;
     u8* e;
     MapEventDoor* d;
@@ -2927,7 +2927,7 @@ void MapFldExitRoom(void) {
     }
 }
 
-void MapFldStartBattle(void) {
+void MapFldStartBattle() {
     DrawMapField();
 
     if (FadeIsActive() == 0) {
@@ -2945,7 +2945,7 @@ void MapFldStartBattle(void) {
     }
 }
 
-void MapFldOpenAllmap(void) {
+void MapFldOpenAllmap() {
     DrawMapField();
 
     if (FadeIsActive() == 0) {
@@ -2954,7 +2954,7 @@ void MapFldOpenAllmap(void) {
     }
 }
 
-void MapFldWaitMenu(void) {
+void MapFldWaitMenu() {
     if ((gFieldState->flags & FIELD_FLAG_MENU_OPEN) == 0 && (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) == 0) {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
@@ -2967,7 +2967,7 @@ void MapFldWaitMenu(void) {
     }
 }
 
-void MapFldWaitRoomCreate(void) {
+void MapFldWaitRoomCreate() {
     u16 t;
 
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
@@ -2992,7 +2992,7 @@ void MapFldWaitRoomCreate(void) {
     }
 }
 
-void func_080E9F30(void) {
+void func_080E9F30() {
     DrawMapField();
 
     if (gUnk_02034FBC == 0) {
@@ -3000,7 +3000,7 @@ void func_080E9F30(void) {
     }
 }
 
-void Mode_MapFld_0(void) {
+void Mode_MapFld_0() {
     MapRoomDef* p;
 
     if ((gMapFloorState.flags & FLOOR_FLAG_LOGO_SHOWN) && gGameState.fieldResume == 0) {
@@ -3083,12 +3083,12 @@ void Mode_MapFld_0(void) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
-void Mode_MapFld_1(void) {
+void Mode_MapFld_1() {
     gMapFldUpdate();
     UpdatePlayTime();
 }
 
-void Mode_MapFld_2(void) {
+void Mode_MapFld_2() {
     DestroyMapField();
     MapGmkFree();
     EwramFree(gFieldState);
@@ -3104,7 +3104,7 @@ void MapFixSetUpdateAndRun(ModeFunc a) {
     gMapFixUpdate();
 }
 
-MapFixedDef* GetMapFixedDef(void) {
+MapFixedDef* GetMapFixedDef() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             return gMapFixedDefs[2];
@@ -3138,7 +3138,7 @@ MapFixedDef* GetMapFixedDef(void) {
     return gMapFixedDefs[4];
 }
 
-void MapFixCreateCharaTasks(void) {
+void MapFixCreateCharaTasks() {
     if (gMapFloorState.room == MAP_ROOM_TUTORIAL) {
         return;
     }
@@ -3195,7 +3195,7 @@ void MapFixCreateCharaTasks(void) {
     }
 }
 
-u8 GetWorldEntryEventId(void) {
+u8 GetWorldEntryEventId() {
     if (gMapFloorState.flags & FLOOR_FLAG_ENTRY_EVENT_DONE) {
         return 0xFF;
     }
@@ -3234,7 +3234,7 @@ u8 GetWorldEntryEventId(void) {
     return gWorldEntryEvents[gMapFloorState.world];
 }
 
-u8 GetFloorEventId(void) {
+u8 GetFloorEventId() {
     if (gMapFloorState.flags & FLOOR_FLAG_CLEARED) {
         return 0xFF;
     }
@@ -3246,7 +3246,7 @@ u8 GetFloorEventId(void) {
     return gSoraFloorEvents[gGameState.floor];
 }
 
-void MapFixMain(void) {
+void MapFixMain() {
     if (gMapRoomState->flags & ROOM_FLAG_WALK_OUT) {
         MapFixSetUpdateAndRun(MapFixWaitWalkOut);
         return;
@@ -3288,7 +3288,7 @@ void MapFixMain(void) {
     }
 }
 
-void MapFixEnterMapFld(void) {
+void MapFixEnterMapFld() {
     DrawMapField();
 
     if (FadeIsActive() == 0) {
@@ -3297,7 +3297,7 @@ void MapFixEnterMapFld(void) {
     }
 }
 
-void func_080EA5CC(void) {
+void func_080EA5CC() {
     DrawMapField();
 
     if (FadeIsActive() != 0) {
@@ -3333,7 +3333,7 @@ void func_080EA5CC(void) {
     }
 }
 
-void func_080EA694(void) {
+void func_080EA694() {
     u8 v;
     u16 t;
 
@@ -3374,7 +3374,7 @@ void func_080EA694(void) {
     RequestMapMode();
 }
 
-void MapFixWaitMenu(void) {
+void MapFixWaitMenu() {
     if ((gFieldState->flags & FIELD_FLAG_MENU_OPEN) == 0 && (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) == 0) {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
@@ -3386,7 +3386,7 @@ void MapFixWaitMenu(void) {
     }
 }
 
-void MapFixWaitWalkOut(void) {
+void MapFixWaitWalkOut() {
     if ((gMapRoomState->flags & ROOM_FLAG_WALK_OUT) == 0) {
         FadeStartOut(FADE_MODE_ADD_WHITE, 60);
         FadeLock();
@@ -3398,7 +3398,7 @@ void MapFixWaitWalkOut(void) {
     }
 }
 
-void MapFixWaitWorldEvent(void) {
+void MapFixWaitWorldEvent() {
     if (gMapFixEventDelay != 0) {
         gMapFixEventDelay--;
     } else {
@@ -3406,7 +3406,7 @@ void MapFixWaitWorldEvent(void) {
     }
 }
 
-void MapFixWaitRoomCreate(void) {
+void MapFixWaitRoomCreate() {
     if (gFieldState->flags & FIELD_FLAG_EXIT_ROOM) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         MapFixSetUpdateAndRun(MapFixEnterMapFld);
@@ -3422,7 +3422,7 @@ void MapFixWaitRoomCreate(void) {
     }
 }
 
-void Mode_MapFix_0(void) {
+void Mode_MapFix_0() {
     MapFixedDef* p;
     u16 t;
 
@@ -3509,12 +3509,12 @@ void Mode_MapFix_0(void) {
     }
 }
 
-void Mode_MapFix_1(void) {
+void Mode_MapFix_1() {
     gMapFixUpdate();
     UpdatePlayTime();
 }
 
-void Mode_MapFix_2(void) {
+void Mode_MapFix_2() {
     DestroyMapField();
     EwramFree(gFieldState);
     EwramFree(gMapRoomState);
@@ -3744,7 +3744,7 @@ void NewGameSlotMenuDeselectSlot(u8 a) {
     gNewGameSlotMenuWork->textSlotCount = 0;
 }
 
-void NewGameSlotMenuDraw(void) {
+void NewGameSlotMenuDraw() {
     s32 t;
     s32 u;
 
@@ -3867,7 +3867,7 @@ void NewGameSlotMenuExit(NewGameSlotMenuWork* w) {
     }
 }
 
-void Mode_MenuNew_0(void) {
+void Mode_MenuNew_0() {
     u8 v;
     u8 u;
 
@@ -3966,7 +3966,7 @@ void Mode_MenuNew_0(void) {
     FadeStartIn(FADE_MODE_BLACK, 8);
 }
 
-void Mode_MenuNew_1(void) {
+void Mode_MenuNew_1() {
     if (gNewGameSlotMenuWork->update != NULL) {
         gNewGameSlotMenuWork->update(gNewGameSlotMenuWork);
     }
@@ -3974,7 +3974,7 @@ void Mode_MenuNew_1(void) {
     NewGameSlotMenuDraw();
 }
 
-void Mode_MenuNew_2(void) {
+void Mode_MenuNew_2() {
     ReleaseObjPalette(gNewGameSlotMenuWork->palette2);
     ReleaseObjTiles(gNewGameSlotMenuWork->tiles2);
     ReleaseObjPalette(gNewGameSlotMenuWork->palette3);
@@ -4229,7 +4229,7 @@ void LoadGameMenuDeselectSlot(u8 a) {
     gLoadGameMenuWork->textSlotCount = 0;
 }
 
-void LoadGameMenuDraw(void) {
+void LoadGameMenuDraw() {
     s32 t;
     s32 u;
 
@@ -4596,7 +4596,7 @@ void Mode_MenuLoad_0(s32 arg) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
-void Mode_MenuLoad_1(void) {
+void Mode_MenuLoad_1() {
     if (gLoadGameMenuWork->update != NULL) {
         gLoadGameMenuWork->update(gLoadGameMenuWork);
     }
@@ -4604,7 +4604,7 @@ void Mode_MenuLoad_1(void) {
     LoadGameMenuDraw();
 }
 
-void Mode_MenuLoad_2(void) {
+void Mode_MenuLoad_2() {
     ReleaseObjPalette(gLoadGameMenuWork->palette2);
     ReleaseObjTiles(gLoadGameMenuWork->tiles2);
     ReleaseObjPalette(gLoadGameMenuWork->palette);
@@ -4675,14 +4675,14 @@ void Mode_MenuMsg_0(s32 arg) {
     gMenuMsgWork->update = MenuMsgWaitMessage;
 }
 
-void Mode_MenuMsg_1(void) {
+void Mode_MenuMsg_1() {
     gMenuMsgWork->update(gMenuMsgWork);
     TaskPoolUpdate(&gMenuMsgWork->tasks);
     TaskPoolDraw(&gMenuMsgWork->tasks);
     BackdropFadeUpdate();
 }
 
-void Mode_MenuMsg_2(void) {
+void Mode_MenuMsg_2() {
     TaskPoolDestroy(&gMenuMsgWork->tasks);
     EwramFree(gMenuMsgWork);
 }

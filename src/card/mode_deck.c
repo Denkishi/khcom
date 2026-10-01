@@ -20,7 +20,7 @@
 static TaskPool sModeDeckTasks;
 static u8 sModeDeckResult;
 
-void Mode_Deck_0(void) {
+void Mode_Deck_0() {
     sModeDeckResult = 0;
     TaskPoolInit(&sModeDeckTasks, 1);
 
@@ -35,7 +35,7 @@ void Mode_Deck_0(void) {
     }
 }
 
-void Mode_Deck_1(void) {
+void Mode_Deck_1() {
     if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioBtlOptionRecvSettings();
     } else {
@@ -66,7 +66,7 @@ void Mode_Deck_1(void) {
     }
 }
 
-void Mode_Deck_2(void) {
+void Mode_Deck_2() {
     TaskPoolDestroy(&sModeDeckTasks);
 }
 

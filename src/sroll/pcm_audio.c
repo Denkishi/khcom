@@ -65,18 +65,18 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     return 1;
 }
 
-void PcmPlaybackStart(void) {
+void PcmPlaybackStart() {
     REG_TM0CNT_H = TIMER_ENABLE;
     REG_DMA1CNT |= DMA_ENABLE << 16;
 }
 
-void PcmPlaybackStop(void) {
+void PcmPlaybackStop() {
     REG_DMA1CNT = 0;
     REG_TM0CNT_H = 0;
     REG_SOUNDCNT_H |= SOUND_A_FIFO_RESET;
 }
 
-void PcmPlaybackUpdate(void) {
+void PcmPlaybackUpdate() {
     s32* src;
     s8* dst;
     s32 pos;

@@ -7,8 +7,8 @@ typedef struct ChkSndEntry {
     u16 songNum;
 } ChkSndEntry;
 
-void mode_chksnd_0(void);
-void mode_chksnd_1(void);
-void mode_chksnd_2(void);
+void mode_chksnd_0();
+void mode_chksnd_1();
+void mode_chksnd_2();
 
 #endif /* GUARD_MODE_CHKSND_H */

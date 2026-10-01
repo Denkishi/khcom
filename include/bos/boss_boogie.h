@@ -76,8 +76,8 @@ void task_bos_boogie_0(BoogieWork* work);
 u8 task_bos_boogie_1(BoogieWork* work);
 void task_bos_boogie_2(BoogieWork* work);
 void task_bos_boogie_3(BoogieWork* work);
-void BosBoogieRemoveOtherEnemies(void);
-void BosBoogieApplyGimmick(void);
-u32 GetBoogieDiceState(void);
+void BosBoogieRemoveOtherEnemies();
+void BosBoogieApplyGimmick();
+u32 GetBoogieDiceState();
 
 #endif

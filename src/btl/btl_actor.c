@@ -152,7 +152,7 @@ void HumDraw(HumWork* work) {
     TaskPoolDraw(&work->tasks);
 }
 
-void HandleRikuAiCardInput(void) {
+void HandleRikuAiCardInput() {
     BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
     u16 t;
@@ -226,7 +226,7 @@ void HandleRikuAiCardInput(void) {
 }
 
 #ifdef VERSION_EU
-void eu_08013190(void) {
+void eu_08013190() {
     BtlObj* c = gRikuBtlWork->actor;
     u8 keys;
     keys = gBtlWork->rikuKeys;

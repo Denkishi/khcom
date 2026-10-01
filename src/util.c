@@ -332,7 +332,7 @@ void KeyStateUpdate(KeyState* k, u16 keys) {
     }
 }
 
-void SioKeyInit(void) {
+void SioKeyInit() {
     SetIwramHeapName(sSioKeyHeapName);
     gSioKeyStateA = IwramAlloc(sizeof(KeyState));
     gSioKeyStateB = IwramAlloc(sizeof(KeyState));
@@ -341,32 +341,32 @@ void SioKeyInit(void) {
     gUnk_02034084 = 0;
 }
 
-void SioKeyFree(void) {
+void SioKeyFree() {
     IwramFree(gSioKeyStateB);
     IwramFree(gSioKeyStateA);
 }
 
-u16 SioKeyGetHeldA(void) {
+u16 SioKeyGetHeldA() {
     return KeyGetHeld(gSioKeyStateA);
 }
 
-u16 SioKeyGetHeldB(void) {
+u16 SioKeyGetHeldB() {
     return KeyGetHeld(gSioKeyStateB);
 }
 
-u16 SioKeyGetPressedA(void) {
+u16 SioKeyGetPressedA() {
     return KeyGetPressed(gSioKeyStateA);
 }
 
-u16 SioKeyGetPressedB(void) {
+u16 SioKeyGetPressedB() {
     return KeyGetPressed(gSioKeyStateB);
 }
 
-u16 SioKeyGetRepeatA(void) {
+u16 SioKeyGetRepeatA() {
     return KeyGetRepeat(gSioKeyStateA);
 }
 
-u16 SioKeyGetRepeatB(void) {
+u16 SioKeyGetRepeatB() {
     return KeyGetRepeat(gSioKeyStateB);
 }
 

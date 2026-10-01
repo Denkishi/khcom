@@ -464,7 +464,7 @@ s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
     return 0;
 }
 
-s32 CloseSysmsgwin(void) {
+s32 CloseSysmsgwin() {
     if (sActiveSysmsgwin != NULL) {
         sActiveSysmsgwin->unk_146[0] = 0;
         return 1;

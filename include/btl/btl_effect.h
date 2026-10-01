@@ -4,12 +4,12 @@
 #include "battle_actor_types.h"
 #include "types.h"
 
-u8 BgFxIsActive(void);
+u8 BgFxIsActive();
 void BgFxSetPosition(s32 x, s32 y, s32 z);
 
 void BgFxInit(u16 a, u16 bg);
-void BgFxFree(void);
-void BgFxUpdate(void);
+void BgFxFree();
+void BgFxUpdate();
 void BgFxStartCure(u16 a, s32 x, s32 y, s32 z);
 void BgFxStartFire(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w);
 void BgFxStartFireAtPlayer(s32 x, s32 y, s32 z, u8 f, s32 unused, s32 w, u16 a);
@@ -44,7 +44,7 @@ void BgFxStartGravityStrike(s32 x, s32 y, s32 z, s32 w);
 void BgFxStartShockwave(s32 x, s32 y, u8 f);
 void BgFxStartGas(s32 x, s32 y, s32 z, u8 f);
 void BgFxStartBoogieKaihuku(s32 x, s32 y, s32 z, s32 s);
-void BgFxStartBossDeathFlash(void);
+void BgFxStartBossDeathFlash();
 void BgFxStartPcShot(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s, u16 a, s32 t);
 void BgFxStartThunderStrike(s32 x, s32 y, s32 z, s32 w);
 void BgFxStartThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, s32 s);

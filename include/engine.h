@@ -66,7 +66,7 @@ typedef struct Dma3Queue {
     Dma3Request requests[256];
     Dma3Blit blits[64];
     Dma3Fill fills[8];
-    void (*callbacks[8])(void);
+    void (*callbacks[8])();
     Dma3Pending pending[4];
 #ifdef VERSION_EU
     Dma3Request lz77Requests[32];
@@ -134,10 +134,10 @@ void ReleaseSpriteFrameTiles(ObjTiles* p);
 void ReleaseObjPaletteRef(ObjPalette* p);
 void SetSpriteMosaicEnabled(u8 a);
 void BgAnimSetStopFrame(u16 a);
-void VTransFree(void);
-void BgFree(void);
+void VTransFree();
+void BgFree();
 void SetBgMosaic(s32 bg, u8 on);
-void FadeFree(void);
+void FadeFree();
 u8 GetBgScrollX(u32 a);
 u8 GetBgScrollY(u32 a);
 void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src);
@@ -146,9 +146,9 @@ void SetSpriteOamUpdatesPaused(u8 a);
 void SetBgMosaicSize(u8 a, u8 b);
 s32 Lerp8(s32 a, s32 b, s32 t);
 
-void VTransInit(void);
-void BgInit(void);
-void FadeInit(void);
-void InitDisplayRegs(void);
+void VTransInit();
+void BgInit();
+void FadeInit();
+void InitDisplayRegs();
 
 #endif /* GUARD_ENGINE_H */

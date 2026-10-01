@@ -13,7 +13,7 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-static inline s32 GetSrollCurtainOffset(void) {
+static inline s32 GetSrollCurtainOffset() {
     return (GetRandom() % 9) * 256 - 0x400;
 }
 

@@ -5,11 +5,11 @@
 #include "types.h"
 
 s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r);
-void ColliderPoolsInit(void);
+void ColliderPoolsInit();
 void ColliderInit(Collider* p, u32 type, u16 r, u16 h);
 void ColliderUnregister(Collider* p);
 void ColliderSetPosition(Collider* p, s32 x, s32 y, s32 z);
-void ColliderUpdateAll(void);
+void ColliderUpdateAll();
 void ColliderSetDisabled(Collider* p, u8 b);
 void ColliderSetRadius(Collider* p, u16 r);
 void ColliderSetHeight(Collider* p, u16 h);

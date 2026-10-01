@@ -4,20 +4,20 @@
 #include "types.h"
 #include "sio_types.h"
 
-void SioReset(void);
+void SioReset();
 u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]);
 u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]);
-void SioShutdown(void);
-u8 SioIsConnected(void);
+void SioShutdown();
+u8 SioIsConnected();
 
 extern u8 gSioLastSendCount;
 extern s16 gSioErrorFrameCount;
 extern u16 gSioRecvFrame[4][2];
 extern u32 gSioErrorStatus;
-extern s32 (*gSioLinkRecvCallback)(void);
+extern s32 (*gSioLinkRecvCallback)();
 extern u8 gSioPlayerCount;
 extern u8 gSioLastRecvCount;
-extern s32 (*gSioLinkSendCallback)(void);
+extern s32 (*gSioLinkSendCallback)();
 extern u16 gSioCommandRecv[4][2];
 extern u32 gSioStatus;
 extern u8 gUnk_02039824;

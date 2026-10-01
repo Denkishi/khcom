@@ -15,7 +15,7 @@ void _08117674(s32 offset);
 void _08117A4C(s32 offset);
 void DecodeAudioSubblock(s32 offset);
 void DecodeAudioBlock(u8* src, s32* samples, s32 offset);
-s32 PeekAudioBits8(void);
+s32 PeekAudioBits8();
 
 void func_081213C4(s32* a, s32* b, const s32* c);
 void func_081213CC(s32* a, s32* b);

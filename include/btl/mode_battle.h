@@ -10,7 +10,7 @@ struct ObjTiles;
 #include "battle_localized_assets.h"
 #endif
 
-void _08019CB4(void);
+void _08019CB4();
 
 #ifdef VERSION_EU
 enum LangFlag {

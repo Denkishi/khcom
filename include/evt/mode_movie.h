@@ -33,9 +33,9 @@ extern MovieSub gUnk_0886AC70[];
 extern u8 sMovieHeapName[];
 extern u8 gUnk_09614718[];
 
-void* GetIwramHeapStart(void);
-u32 GetIwramHeapSize(void);
-void MovieVBlankIntr(void);
+void* GetIwramHeapStart();
+u32 GetIwramHeapSize();
+void MovieVBlankIntr();
 s32 HandleMovieFrame(s32 arg);
 
 #ifdef VERSION_EU

@@ -553,7 +553,7 @@ void MovePooh(PoohWork* w, s32 b, u8 c) {
     w->pos.y += -gSineTable[w->angle + 0x40] * w->speed >> 8;
 }
 
-u8 IsPoohNearScreenEdge(void) {
+u8 IsPoohNearScreenEdge() {
     s16 x;
     s16 y;
 
@@ -1197,7 +1197,7 @@ void UpdatePoohGauge(PoohWork* w) {
     }
 }
 
-u8 IsPoohOffScreen(void) {
+u8 IsPoohOffScreen() {
     s32 x;
     s32 y;
 
@@ -1352,7 +1352,7 @@ void task_poo_pooh_3(PoohWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-u8 IsPoohDescendingWithOwl(void) {
+u8 IsPoohDescendingWithOwl() {
     if (sPoohAction == 22) {
         return 1;
     }
@@ -1360,7 +1360,7 @@ u8 IsPoohDescendingWithOwl(void) {
     return 0;
 }
 
-u8 IsPoohOnOwlBalloon(void) {
+u8 IsPoohOnOwlBalloon() {
     if (sPoohAction == 39) {
         return 1;
     }
@@ -1368,7 +1368,7 @@ u8 IsPoohOnOwlBalloon(void) {
     return 0;
 }
 
-u8 IsPoohWalkingToTarget(void) {
+u8 IsPoohWalkingToTarget() {
     if (sPoohAction == 3) {
         return 1;
     }
@@ -1376,7 +1376,7 @@ u8 IsPoohWalkingToTarget(void) {
     return 0;
 }
 
-u8 IsPoohBeeChaseOver(void) {
+u8 IsPoohBeeChaseOver() {
     if (sPoohAction == 14) {
         return 1;
     }
@@ -1384,7 +1384,7 @@ u8 IsPoohBeeChaseOver(void) {
     return 0;
 }
 
-u8 IsPoohWaitingOnWagon(void) {
+u8 IsPoohWaitingOnWagon() {
     if (sPoohAction == 13) {
         return 1;
     }
@@ -1392,7 +1392,7 @@ u8 IsPoohWaitingOnWagon(void) {
     return 0;
 }
 
-u8 IsPoohOnWagon(void) {
+u8 IsPoohOnWagon() {
     PoohWork* w;
 
     if (sPoohAction == 13) {
@@ -1436,7 +1436,7 @@ u8 IsPoohOnWagon(void) {
     return 1;
 }
 
-u8 IsPoohAtLowerExit(void) {
+u8 IsPoohAtLowerExit() {
     if (GetPooExitAt(gPoohPos) == 2) {
         return 1;
     }
@@ -1444,7 +1444,7 @@ u8 IsPoohAtLowerExit(void) {
     return 0;
 }
 
-u16 GetPoohHoneyAnim(void) {
+u16 GetPoohHoneyAnim() {
     if (sPoohAction == 0x21) {
         return 0;
     }
@@ -1460,7 +1460,7 @@ u16 GetPoohHoneyAnim(void) {
     return 3;
 }
 
-u8 IsPoohLookingAtHoneycomb(void) {
+u8 IsPoohLookingAtHoneycomb() {
     if (sPoohAction == 12) {
         return 1;
     }
@@ -1513,7 +1513,7 @@ void SetPooCameraFocus(s32 a, s32 b) {
     gPooCameraFocusY = b;
 }
 
-void UpdatePooCameraCenter(void) {
+void UpdatePooCameraCenter() {
     s32 y;
 
     if (sPooCameraFrozen != 0) {
@@ -1537,19 +1537,19 @@ void UpdatePooCameraCenter(void) {
     }
 }
 
-void FreezePooCamera(void) {
+void FreezePooCamera() {
     sPooCameraFrozen = 1;
 }
 
-void UnfreezePooCamera(void) {
+void UnfreezePooCamera() {
     sPooCameraFrozen = 0;
 }
 
-void StartPooCameraFollowPooh(void) {
+void StartPooCameraFollowPooh() {
     sPooCameraFollowPooh = 1;
 }
 
-void StopPooCameraFollowPooh(void) {
+void StopPooCameraFollowPooh() {
     sPooCameraFollowPooh = 0;
 }
 
@@ -1654,7 +1654,7 @@ void ScrollPooCamera(PooMapWork* w) {
     gFieldState->y = gPooScrollY << 8;
 }
 
-void func_080CA35C(void) {
+void func_080CA35C() {
     gUnk_0203C3F4 = 0;
 }
 
@@ -2708,7 +2708,7 @@ void task_poo_sora_3(PooSoraWork* w) {
     RemovePooNode(&w->node);
 }
 
-u8 IsPooSoraCallStarting(void) {
+u8 IsPooSoraCallStarting() {
     if (sPooSoraWork->state == 8 && sPooSoraWork->timer == 0) {
         return 1;
     }
@@ -2716,7 +2716,7 @@ u8 IsPooSoraCallStarting(void) {
     return 0;
 }
 
-u8 IsPooSoraCalling(void) {
+u8 IsPooSoraCalling() {
     if (sPooSoraWork->state == 8) {
         return 1;
     }
@@ -2724,7 +2724,7 @@ u8 IsPooSoraCalling(void) {
     return 0;
 }
 
-u8 AreAllPooEventsDone(void) {
+u8 AreAllPooEventsDone() {
     s32 i;
 
     for (i = 0; i < 6; i++) {
@@ -2798,7 +2798,7 @@ u16 CheckPooSoraExit(PooPos* p) {
     return r;
 }
 
-u16 GetPooSoraPriority(void) {
+u16 GetPooSoraPriority() {
     return sPooSoraPriority - 1;
 }
 
@@ -3425,7 +3425,7 @@ void RemovePooNode(PooNode* p) {
     ListPoolRemove(&p->node, &sPooNodes);
 }
 
-void InitPooNodes(void) {
+void InitPooNodes() {
     ListPoolInit(&sPooNodes);
 }
 
@@ -3460,7 +3460,7 @@ s32 GetPooNodeScore(PooNode* n) {
     return (r << 8) / (((s16)dx * (s16)dx + (s16)dy * (s16)dy) << 8);
 }
 
-PooNode* FindPoohTargetNode(void) {
+PooNode* FindPoohTargetNode() {
     PooNode* best;
     PooNode* n;
 
@@ -3663,7 +3663,7 @@ void task_poo_mapanime_2(void* w) {
 void task_poo_mapanime_3(void* w) {
 }
 
-s32 GetRandomPooPileStage(void) {
+s32 GetRandomPooPileStage() {
     switch (GetRandom() % 40 / 10) {
     case 0:
         return 0;
@@ -5024,11 +5024,11 @@ void task_poo_roo_3(PooRooWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-u8 IsPooRooAnimFrameEnding(void) {
+u8 IsPooRooAnimFrameEnding() {
     return AnimIsFrameEnding(&((PooRooWork*)gStockMesDispWork)->anim);
 }
 
-u8 IsPooRooAnimFinished(void) {
+u8 IsPooRooAnimFinished() {
     return AnimIsFinished(&((PooRooWork*)gStockMesDispWork)->anim);
 }
 
@@ -5376,7 +5376,7 @@ void task_poo_eeyoretail_3(PooEeyoreTailWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-u8 IsPooEeyoreTailLanded(void) {
+u8 IsPooEeyoreTailLanded() {
     if (sPooEeyoreTailTimer == 0) {
         return 1;
     }
@@ -5490,7 +5490,7 @@ void task_poo_honeycomb_3(PooHoneycombWork* w) {
     }
 }
 
-u8 IsPooHoneycombShaken(void) {
+u8 IsPooHoneycombShaken() {
     if (sPooHoneycombState == 2) {
         return 1;
     }
@@ -5618,7 +5618,7 @@ s32 IsInPooWagonAreaForPooh(PooPos* p) {
     return 1;
 }
 
-u8 IsPooSoraOnWagon(void) {
+u8 IsPooSoraOnWagon() {
     if (gPooActor.pos.z < 0) {
         return 0;
     }
@@ -5626,7 +5626,7 @@ u8 IsPooSoraOnWagon(void) {
     return IsInPooWagonArea(&gPooActor.pos);
 }
 
-u8 IsPooSoraOverWagon(void) {
+u8 IsPooSoraOverWagon() {
     if (gPooActor.pos.z < -0x2000) {
         return 0;
     }
@@ -5956,11 +5956,11 @@ void task_poo_wagon_3(PooWagonWork* w) {
     }
 }
 
-u16 GetPooWagonPriority2(void) {
+u16 GetPooWagonPriority2() {
     return sPooWagonPriority2;
 }
 
-u16 GetPooWagonPriority(void) {
+u16 GetPooWagonPriority() {
     return sPooWagonPriority;
 }
 
@@ -6226,7 +6226,7 @@ void task_poo_bee_3(PooBeeWork* w) {
     }
 }
 
-u8 AreAllPooBeesOut(void) {
+u8 AreAllPooBeesOut() {
     if (sPooBeeCount <= 3) {
         return 0;
     }
@@ -6294,7 +6294,7 @@ void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* w) {
     }
 }
 
-u8 IsPooBeeAfterEventVisible(void) {
+u8 IsPooBeeAfterEventVisible() {
     if (IsPooEventDone(2) != 0) {
         if (sPooBeeAfterEventWork->palette != NULL) {
             return 1;
@@ -6533,7 +6533,7 @@ void task_poo_cabbageborn_0(PooCabbageBornWork* w) {
     sPooCabbageLandedCount = 0;
 }
 
-u8 CanSpawnPooCabbage(void) {
+u8 CanSpawnPooCabbage() {
     if (IsPooEventDone(6) != 0 && IsPoohOffScreen() == 0 && gPooScrollX > 0x9EB && gPooScrollX <= 0xA8A && gPooScrollY <= 0x548 && gPooScrollY > 0x4F9) {
         return 1;
     }
@@ -6563,25 +6563,25 @@ void task_poo_cabbageborn_3(PooCabbageBornWork* w) {
     TaskPoolDestroy(&w->tasks);
 }
 
-void IncPooCabbageCount(void) {
+void IncPooCabbageCount() {
     if (sPooCabbageCount <= 13) {
         sPooCabbageCount++;
     }
 }
 
-u16 GetPooCabbageCount(void) {
+u16 GetPooCabbageCount() {
     return sPooCabbageCount;
 }
 
-void IncPooCabbageLandedCount(void) {
+void IncPooCabbageLandedCount() {
     sPooCabbageLandedCount++;
 }
 
-u16 GetPooCabbageLandedCount(void) {
+u16 GetPooCabbageLandedCount() {
     return sPooCabbageLandedCount;
 }
 
-u8 func_080D1738(void) {
+u8 func_080D1738() {
     if (IsPooEventDone(4) == 0) {
         if (IsPooEventDone(6) != 0) {
             if (gPooScrollY > 0x4F9) {
@@ -7437,7 +7437,7 @@ void task_poo_cabbageAfterEvent_3(PooCabbageAfterEventWork* w) {
     }
 }
 
-void ClearPooPrizesDropped(void) {
+void ClearPooPrizesDropped() {
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -7468,7 +7468,7 @@ u8 IsPooPrizeDropped(u16 a) {
     return 0;
 }
 
-void ResetPooProgress(void) {
+void ResetPooProgress() {
     ClearPooPrizesDropped();
     gPooState.eventsDone = 0;
     gPooState.gauge = 3;
@@ -7477,7 +7477,7 @@ void ResetPooProgress(void) {
     gPoohGaugeTimer = 0x73B;
 }
 
-void InitPooState(void) {
+void InitPooState() {
     gPooState.flags = 0;
     ResetPooProgress();
 }
@@ -7556,7 +7556,7 @@ void SetPooState(const void* p) {
     memcpy(&gPooState, p, sizeof(gPooState));
 }
 
-u8 func_080D2DD8(void) {
+u8 func_080D2DD8() {
     s32 v[6];
     u32 i;
     s32 n;
@@ -7597,11 +7597,11 @@ void SetPoohInteractionEnabled(u16 a, u8 b) {
     ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[a].enabled = b;
 }
 
-void FreePoohInteractions(void) {
+void FreePoohInteractions() {
     EwramFree(gUnk_0203C4B4);
 }
 
-void InitPoohInteractions(void) {
+void InitPoohInteractions() {
     void** state = &gUnk_0203C4B4;
 
     *state = EwramAlloc(sizeof(PoohInteractionRegistry));
@@ -7609,7 +7609,7 @@ void InitPoohInteractions(void) {
     SetPooRabbitTalkBlocked(0);
 }
 
-u16 FindPoohInteractionMessage(void) {
+u16 FindPoohInteractionMessage() {
     s32 i;
 
     for (i = 0; i < ((PoohInteractionRegistry*)gUnk_0203C4B4)->count; i++) {
@@ -7639,7 +7639,7 @@ void SetPooRabbitTalkBlocked(u8 a) {
     ((PoohInteractionRegistry*)gUnk_0203C4B4)->rabbitTalkBlocked = a;
 }
 
-void AllmapVCountCallback(void) {
+void AllmapVCountCallback() {
     while ((REG_DISPSTAT & DISPSTAT_HBLANK) == 0) {
     }
 
@@ -7648,7 +7648,7 @@ void AllmapVCountCallback(void) {
     REG_BG2HOFS = 0;
 }
 
-void AllmapAllocBgMaps(void) {
+void AllmapAllocBgMaps() {
     u32 i;
     u16 j;
     u16 k;
@@ -7669,7 +7669,7 @@ void AllmapAllocBgMaps(void) {
     }
 }
 
-void AllmapDimPalette10(void) {
+void AllmapDimPalette10() {
     s32 i;
 
     for (i = 0; i < 32; i++) {

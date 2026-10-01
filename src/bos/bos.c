@@ -36,7 +36,7 @@ void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 
-s32 task_bos_map_1(void) {
+s32 task_bos_map_1() {
     s32 dx;
     s32 dy;
     s32 y;
@@ -82,7 +82,7 @@ void task_bos_shadow_0(BosShadowWork* work, BtlObj* obj) {
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 }
 
-s32 task_bos_shadow_1(void) {
+s32 task_bos_shadow_1() {
     return 1;
 }
 

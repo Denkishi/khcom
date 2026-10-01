@@ -3,31 +3,31 @@
 
 #include "types.h"
 
-u16 IsVBlankIntrLive(void);
-void SioInit(void);
-void func_08006E70(void);
-void SioStop(void);
-void SioCheckParent(void);
-void SioInitTimer(void);
+u16 IsVBlankIntrLive();
+void SioInit();
+void func_08006E70();
+void SioStop();
+void SioCheckParent();
+void SioInitTimer();
 void SioQueueSendFrame(u16* frame);
 void SioReadRecvFrame(u16 (*frame)[2]);
-void SioVBlankUpdate(void);
-void SioTimer3Intr(void);
-void SioSerialIntr(void);
-void SioStartTransfer(void);
-u8 SioHandshake(void);
-void SioRecvWord(void);
-void SioSendWord(void);
-void SioStopTimer(void);
-void SioFinishTransfer(void);
-void SioResetSendQueue(void);
-void SioResetRecvQueue(void);
-void SioClearRegs(void);
+void SioVBlankUpdate();
+void SioTimer3Intr();
+void SioSerialIntr();
+void SioStartTransfer();
+u8 SioHandshake();
+void SioRecvWord();
+void SioSendWord();
+void SioStopTimer();
+void SioFinishTransfer();
+void SioResetSendQueue();
+void SioResetRecvQueue();
+void SioClearRegs();
 
-void VBlankIntr(void);
-void HBlankIntrDummy(void);
-void VCountIntrDummy(void);
-void SerialIntrDummy(void);
-void VBlankIntrSio(void);
+void VBlankIntr();
+void HBlankIntrDummy();
+void VCountIntrDummy();
+void SerialIntrDummy();
+void VBlankIntrSio();
 
 #endif /* GUARD_SIO_H */

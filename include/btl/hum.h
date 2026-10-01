@@ -511,7 +511,7 @@ s32 __modsi3(s32 a, s32 b);
 u16 GetJiminyTextLength(u16* p);
 void JiminyLoadHiddenRow(s32 a, u16** b);
 void JiminyInitCursor(s16 a, s16 b, s16 c);
-void JiminyReloadRows(void);
+void JiminyReloadRows();
 void JiminyUpdateCursor(s16 a, s16 b, s16 c);
 void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h);
 

@@ -298,7 +298,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
     DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, affine, prio, h);
 }
 
-void task_bos_dsd_rock_3(void) {
+void task_bos_dsd_rock_3() {
 }
 
 const s16 gBosDsdItaDipSteps[6] = { 3, 2, 1, 1, 0, 0 };

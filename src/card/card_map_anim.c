@@ -79,13 +79,13 @@ u8 map_anim_1(MapTileAnimationWork* w) {
     return 1;
 }
 
-void map_anim_2(void) {
+void map_anim_2() {
 }
 
-void map_anim_3(void) {
+void map_anim_3() {
 }
 
-Deck* CreateLinkSendDeck(void) {
+Deck* CreateLinkSendDeck() {
     Deck* active;
     s32 i;
 
@@ -113,11 +113,11 @@ Deck* CreateLinkSendDeck(void) {
     return gLinkSendDeck;
 }
 
-void FreeLinkSendDeck(void) {
+void FreeLinkSendDeck() {
     EwramFree(gLinkSendDeck);
 }
 
-Deck* CreateLinkPartnerDeck(void) {
+Deck* CreateLinkPartnerDeck() {
     s32 i;
 
     gLinkPartnerDeck = EwramAlloc(sizeof(Deck));
@@ -135,11 +135,11 @@ Deck* CreateLinkPartnerDeck(void) {
     return gLinkPartnerDeck;
 }
 
-void FreeLinkPartnerDeck(void) {
+void FreeLinkPartnerDeck() {
     EwramFree(gLinkPartnerDeck);
 }
 
-u16 GetLinkPartnerDeckCardCount(void) {
+u16 GetLinkPartnerDeckCardCount() {
     return gLinkPartnerDeck->cardCount;
 }
 
@@ -199,7 +199,7 @@ u16 CountLinkPartnerDeckCards(u8 mode) {
     return count;
 }
 
-Deck* GetLinkPartnerDeck(void) {
+Deck* GetLinkPartnerDeck() {
     return gLinkPartnerDeck;
 }
 
@@ -241,7 +241,7 @@ void ObtainCardIntoActiveDeck(u16 a) {
     }
 }
 
-void InitCardCollection(void) {
+void InitCardCollection() {
     u16 i;
 
     for (i = 0; i < 999; i++) {
@@ -293,7 +293,7 @@ s16 AddCardToCollection(u16 cardId) {
     return i;
 }
 
-u8 IsCardCollectionFull(void) {
+u8 IsCardCollectionFull() {
     s32 count;
     s32 i;
 
@@ -1009,7 +1009,7 @@ void SetRikuCardKindObtained(u16 a) {
     }
 }
 
-u16 CountCollectionCards(void) {
+u16 CountCollectionCards() {
     u16 count;
     u16 i;
 
@@ -1024,7 +1024,7 @@ u16 CountCollectionCards(void) {
     return count;
 }
 
-u16 CountCardsInDecks(void) {
+u16 CountCardsInDecks() {
     u16 count;
     u16 i;
 

@@ -56,7 +56,7 @@ static const GlyphWidthTable sLatinGlyphWidths = {
     },
 };
 
-void InitSpriteTextLines(void) {
+void InitSpriteTextLines() {
     u8 i;
     u8 j;
 
@@ -268,7 +268,7 @@ void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
     }
 }
 
-void DrawSpriteTextLines(void) {
+void DrawSpriteTextLines() {
     s32 x;
     s32 y;
     s32 step;
@@ -301,7 +301,7 @@ void DrawSpriteTextLines(void) {
     sTextEntryCount = 0;
 }
 
-void ClearSpriteTextLines(void) {
+void ClearSpriteTextLines() {
     u8 i;
     u8 j;
 
@@ -318,7 +318,7 @@ void ClearSpriteTextLines(void) {
     sTextEntryCount = 0;
 }
 
-void FreeSpriteTextLines(void) {
+void FreeSpriteTextLines() {
     ClearSpriteTextLines();
 
     if (gSpriteTextLines != NULL) {
@@ -877,7 +877,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
 #endif
 
 #ifndef VERSION_EU
-void DrawSpriteTextSlots(void) {
+void DrawSpriteTextSlots() {
     s32 x;
     s32 y;
     void* g;
@@ -931,7 +931,7 @@ void SetSpriteTextSlotPosition(s32 x, s32 y, u8 i) {
 #endif
 
 #ifndef VERSION_EU
-void FreeSpriteTextSlots(void) {
+void FreeSpriteTextSlots() {
     u8 i;
     u8 j;
 
@@ -1111,7 +1111,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
 #endif
 
 #ifndef VERSION_EU
-void DrawBgTextLines(void) {
+void DrawBgTextLines() {
     u8* screen;
     u8 n;
     u8 k;
@@ -1328,7 +1328,7 @@ void DrawBgTextLines(void) {
 #endif
 
 #ifndef VERSION_EU
-void FreeBgTextLines(void) {
+void FreeBgTextLines() {
     EwramFree(gBgTextLines);
     gBgTextLines = NULL;
 }
@@ -2013,7 +2013,7 @@ void DrawMsgGlyphs(u8 n) {
     }
 }
 
-void FreeMsgGlyphSprites(void) {
+void FreeMsgGlyphSprites() {
     u8 i;
 
     for (i = 0; i < 128; i++) {
@@ -2033,7 +2033,7 @@ void FreeMsgGlyphSprites(void) {
     EwramFree(sMsgGlyphSprites);
 }
 
-void HideMsgGlyphs(void) {
+void HideMsgGlyphs() {
     u8 i;
 
     for (i = 0; i < 128; i++) {
@@ -2923,11 +2923,11 @@ void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u1
     }
 }
 
-void* LoadSmallFontTiles(void) {
+void* LoadSmallFontTiles() {
     return LoadObjTiles(gUnk_090D4180, 0x5A0);
 }
 
-void* LoadSmallFontPalette(void) {
+void* LoadSmallFontPalette() {
     return LoadObjPalette(gUnk_08F69BE4, 0x20);
 }
 
@@ -6683,7 +6683,7 @@ void DrawCardMsgGlyphs(u8 n) {
     }
 }
 
-void FreeCardMsgGlyphSprites(void) {
+void FreeCardMsgGlyphSprites() {
     u8 i;
 
     for (i = 0; i < 128; i++) {

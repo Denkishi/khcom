@@ -154,7 +154,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     work->palette = LoadObjPalette(pal, 32);
 }
 
-s32 task_allmap_room_1(void) {
+s32 task_allmap_room_1() {
     return 1;
 }
 
@@ -395,7 +395,7 @@ void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg) {
     work->x = AllmapDrawRoomnameFrame(GetTextSlotsWidth(work->textSlots, work->textSlotCount));
 }
 
-s32 task_allmap_roomname_1(void) {
+s32 task_allmap_roomname_1() {
     return 1;
 }
 
@@ -408,7 +408,7 @@ void task_allmap_roomname_3(AllmapRoomnameWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void AllmapClearRoomnameFrame(void) {
+void AllmapClearRoomnameFrame() {
     u8* base;
     u8* p;
     u8* dst;
@@ -886,7 +886,7 @@ void task_allmap_pusha_3(AllmapPushaWork* work) {
     ClearStockMesDispWork();
 }
 
-u8 IsStockMesDispActive(void) {
+u8 IsStockMesDispActive() {
     if (gStockMesDispWork == NULL || IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task) == 0) {
         return 0;
     }
@@ -894,7 +894,7 @@ u8 IsStockMesDispActive(void) {
     return 1;
 }
 
-void ClearStockMesDispWork(void) {
+void ClearStockMesDispWork() {
     gStockMesDispWork = 0;
 }
 
@@ -945,7 +945,7 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
     }
 }
 
-void InitAllmap(void) {
+void InitAllmap() {
     s32 i;
     s32 j;
     AllmapCursorPos arg;
@@ -1036,7 +1036,7 @@ void AllmapUpdateCamera(AllmapState* s) {
     gAllmapCameraY = sAllmapCameraFixedY >> 8;
 }
 
-void UpdateAllmap(void) {
+void UpdateAllmap() {
     s16 x;
     s16 y;
 
@@ -1073,12 +1073,12 @@ void UpdateAllmap(void) {
     TaskPoolDraw(&((AllmapState*)gUnk_0203C4B4)->tasks);
 }
 
-void DestroyAllmap(void) {
+void DestroyAllmap() {
     TaskPoolDestroy(&((AllmapState*)gUnk_0203C4B4)->tasks);
     EwramFree(gUnk_0203C4B4);
 }
 
-u16 func_080D53C4(void) {
+u16 func_080D53C4() {
     if ((GetKeysHeld() & R_BUTTON) != 0) {
         return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 7;
     }
@@ -1086,7 +1086,7 @@ u16 func_080D53C4(void) {
     return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 8;
 }
 
-void func_080D53F8(void) {
+void func_080D53F8() {
     AllmapRoomWork* w;
     AllmapCursorWork* c;
     s32 base;
@@ -1125,7 +1125,7 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
     return MAP_ROOM_NONE;
 }
 
-void AllmapCenterOnRoom(void) {
+void AllmapCenterOnRoom() {
     AllmapRoomWork* w;
 
     w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[gAllmapCursorRoom]->work;
@@ -1150,7 +1150,7 @@ void AllmapCenterOnRoom(void) {
     }
 }
 
-void AllmapHandleInput(void) {
+void AllmapHandleInput() {
     AllmapCursorWork* c;
     AllmapCursorPos p;
     MapFloorRoom* d;

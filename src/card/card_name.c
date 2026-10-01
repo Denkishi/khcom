@@ -112,7 +112,7 @@ void CardName_0(CardNameWork* w) {
     FadeSetPaletteExcluded(w->textPalette->index + 16, 1);
 }
 
-s32 CardName_1(void) {
+s32 CardName_1() {
     return 1;
 }
 
@@ -283,7 +283,7 @@ void InitPrintLayer(u8 bg) {
     *p = EwramAlloc(sizeof(PrintLine) * 32);
 }
 
-void FreePrintLayer(void) {
+void FreePrintLayer() {
     EwramFree(gPrintLines);
 }
 
@@ -333,11 +333,11 @@ void PrintString(u8 a, u8 b, u8 c, u8* s) {
     }
 }
 
-void ResetPrintLines(void) {
+void ResetPrintLines() {
     gPrintLineCount = 0;
 }
 
-void ClearPrintLines(void) {
+void ClearPrintLines() {
     s16 i;
 
     for (i = 0; i < gPrintLineCount; i++) {

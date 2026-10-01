@@ -7,12 +7,12 @@
 struct Task;
 
 void func_08000F30(TaskPool* a);
-s32 func_08000F90(void);
+s32 func_08000F90();
 
-void InitSystem(void);
-void InitIntrTable(void);
+void InitSystem();
+void InitIntrTable();
 
-void* GetEwramHeapStart(void);
-u32 GetEwramHeapSize(void);
+void* GetEwramHeapStart();
+u32 GetEwramHeapSize();
 
 #endif /* GUARD_MAIN_H */

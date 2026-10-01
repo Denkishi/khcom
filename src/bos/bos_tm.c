@@ -229,7 +229,7 @@ void task_bos_tm_3(TmWork* w) {
     TaskPoolDestroy(&gBosTmTaskPool);
 }
 
-void BosTmDestroyParts(void) {
+void BosTmDestroyParts() {
     TaskKill(&gBtlWork->taskPools[1], gBosTmTblTask);
     TaskKill(&gBosTmTaskPool, gBosTmBodyTask);
     TaskKill(&gBosTmTaskPool, gBosTmFootTask);

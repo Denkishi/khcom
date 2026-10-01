@@ -7,33 +7,33 @@
 struct CharaObjParam;
 struct CharaObjParam2;
 
-u8 SioConnectUpdate(void);
-u8 SioLinkUpdate(void);
-void FreeLinkDecks(void);
-void SioLinkClose(void);
-u8 SioHasError(void);
-void SioConnectInit(void (*a)(void), void (*b)(void), u8 c);
-void SioCommandReset(void);
-s32 SioCommandSend(void);
-s32 SioCommandRecv(void);
-void SioSetLinkCallbacks(s32 (*a)(void), s32 (*b)(void));
-s32 SioKeySyncSend(void);
-s32 SioKeySyncRecv(void);
-void SioPrepareDeckExchange(void);
-s32 SioExchangeSend(void);
-s32 SioExchangeRecv(void);
-void SioPrepareCharaLinkExchange(void);
+u8 SioConnectUpdate();
+u8 SioLinkUpdate();
+void FreeLinkDecks();
+void SioLinkClose();
+u8 SioHasError();
+void SioConnectInit(void (*a)(), void (*b)(), u8 c);
+void SioCommandReset();
+s32 SioCommandSend();
+s32 SioCommandRecv();
+void SioSetLinkCallbacks(s32 (*a)(), s32 (*b)());
+s32 SioKeySyncSend();
+s32 SioKeySyncRecv();
+void SioPrepareDeckExchange();
+s32 SioExchangeSend();
+s32 SioExchangeRecv();
+void SioPrepareCharaLinkExchange();
 void CharaObjInitDefeat2(struct CharaObjParam2* param);
-u8 CharaObjUpdateDefeat2(void);
+u8 CharaObjUpdateDefeat2();
 void CharaObjInitDefeat(struct CharaObjParam* param);
-u8 CharaObjUpdateDefeat(void);
+u8 CharaObjUpdateDefeat();
 void RequestMapRowsCopy(u8* src, u8* dst, u16 size, s16 count);
 
 extern u32 gDebugLogC[100];
 extern u32 gVBlankTimerElapsed;
 extern s16 gSioCancelTimer;
 extern s16 gSioAutoConnectTimer;
-extern void (*gSioCancelCallback)(void);
+extern void (*gSioCancelCallback)();
 extern u32 gVBlankTimerBase;
 extern s16 gSioAutoConnectState;
 extern u32 gDebugLogSeq;
@@ -64,15 +64,15 @@ extern u16 gRandomPartnerDpad;
 #endif
 extern s8 gSioHandshakeAck;
 extern s8 gSioConnected;
-extern void (*gSioConnectCallback)(void);
+extern void (*gSioConnectCallback)();
 extern u16 gSioConnectId;
 extern u16 gSioRelayKeysA;
 extern u16 gUnk_0203C3B8;
 
 #ifdef VERSION_EU
-void eu_080C24D8(void);
-s32 eu_080C273C(void);
-s32 eu_080C2740(void);
+void eu_080C24D8();
+s32 eu_080C273C();
+s32 eu_080C2740();
 #endif
 
 #endif

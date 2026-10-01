@@ -1129,7 +1129,7 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
     RequestEnemyCardUse(a);
 }
 
-void task_bos_dsd_map_0(void) {
+void task_bos_dsd_map_0() {
     LoadBgTiles(0, gUnk_096874E4, 0x8000);
     LoadBgPalette(0, gUnk_096FB744, 0x120);
     SetBgMapBlocks(0, gBosDsdMapBlocks, 2, 2);
@@ -1149,7 +1149,7 @@ void task_bos_dsd_map_0(void) {
     ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 
-u8 task_bos_dsd_map_1(void) {
+u8 task_bos_dsd_map_1() {
     s32 dx;
     s32 dy;
 

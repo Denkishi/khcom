@@ -53,7 +53,7 @@ void SndStreamInit(u32 rate, u32 channels) {
     }
 }
 
-void SndStreamUpdate(void) {
+void SndStreamUpdate() {
     if (gSndStream.playing != 0) {
         gSndStream.dmaOffset += gSndStream.samplesPerFrame;
 
@@ -121,7 +121,7 @@ void SndStreamSetCallbacks(void* (*a)(u32), void* (*b)(u32), void (*c)(void*),
     gSndStream.free = d;
 }
 
-void SndStreamClose(void) {
+void SndStreamClose() {
     u32 i;
 
     SndStreamStop();
@@ -131,13 +131,13 @@ void SndStreamClose(void) {
     }
 }
 
-void SndStreamStart(void) {
+void SndStreamStart() {
     REG_TM0CNT_L = gSndStream.timerReload;
     REG_TM0CNT_H = TIMER_ENABLE;
     gSndStream.playing = 1;
 }
 
-void SndStreamStop(void) {
+void SndStreamStop() {
     if (gSndStream.playing != 0) {
         REG_TM0CNT_H = 0;
         gSndStream.playing = 0;

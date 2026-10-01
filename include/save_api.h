@@ -3,11 +3,11 @@
 
 #include "types.h"
 
-void SaveClearSystem(void);
-int SaveLoadSystem(void);
+void SaveClearSystem();
+int SaveLoadSystem();
 void SaveWriteHeader(s16 slot);
-int SaveLoadHeader(void);
-int SaveRepairHeader(void);
+int SaveLoadHeader();
+int SaveRepairHeader();
 int SaveRepairFileLarge(u16 file);
 int SaveRepairFileSmall(u16 file);
 int SaveLoadFileLarge(u16 file);
@@ -20,12 +20,12 @@ void SaveSetHeaderState(s16 slot, s16 state);
 void SaveSetSystemState(s16 slot, s16 state);
 void SaveSetFileLargeState(s16 file, s16 slot, s16 state);
 void SaveSetFileSmallState(s16 file, s16 slot, s16 state);
-void SaveClearHeader(void);
+void SaveClearHeader();
 void SaveClearFileLarge(u16 file);
 void SaveClearFileSmall(u16 file);
 void SaveWriteFileLarge(u16 file);
-int SaveRepairSystem(void);
+int SaveRepairSystem();
 
-void SaveInitSram(void);
+void SaveInitSram();
 
 #endif

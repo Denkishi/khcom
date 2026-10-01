@@ -939,7 +939,7 @@ void BosGaEntryRelease(GaEntryWork* e) {
     }
 }
 
-void BosGaReleaseBody(void) {
+void BosGaReleaseBody() {
     BosGaEntryRelease(&gGaWork->entries[1]);
     BosGaEntryRelease(&gGaWork->entries[0]);
 }
@@ -4887,7 +4887,7 @@ void WorldselectDrawName(s16 model, s16 n) {
     RequestDma3Copy(gWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);
 }
 
-void WorldselectHandleInput(void) {
+void WorldselectHandleInput() {
     s16 i;
     s16 j;
     s16 k;
@@ -5127,7 +5127,7 @@ void WorldselectHandleInput(void) {
     }
 }
 
-void WorldselectDraw(void) {
+void WorldselectDraw() {
     s16 i;
     ObjAffine* sprite;
     s16 x;
@@ -5241,7 +5241,7 @@ void WorldselectDraw(void) {
     TaskPoolDraw(&gWorldselectTaskPool);
 }
 
-void WorldselectSetBgMode0(void) {
+void WorldselectSetBgMode0() {
     SetBgMode0();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -5251,7 +5251,7 @@ void WorldselectSetBgMode0(void) {
     SetBgPriority(2, 0);
 }
 
-void WorldselectSetBgMode1(void) {
+void WorldselectSetBgMode1() {
     SetBgMode1();
     SetupBg(0, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -5263,7 +5263,7 @@ void WorldselectSetBgMode1(void) {
     gBldAlpha = BLDALPHA_BLEND(16, 16);
 }
 
-void WorldselectCyclePalette(void) {
+void WorldselectCyclePalette() {
     gWorldselectPaletteTimer++;
 
     if (gWorldselectPaletteTimer > 6) {
@@ -5278,7 +5278,7 @@ void WorldselectCyclePalette(void) {
     }
 }
 
-void mode_worldselect_0(void) {
+void mode_worldselect_0() {
     s16 i;
     s16 j;
     void** p;
@@ -5378,7 +5378,7 @@ void mode_worldselect_0(void) {
     }
 }
 
-void mode_worldselect_1(void) {
+void mode_worldselect_1() {
     s16 a;
     s16 b;
 
@@ -5531,7 +5531,7 @@ void mode_worldselect_1(void) {
     WorldselectDraw();
 }
 
-void mode_worldselect_2(void) {
+void mode_worldselect_2() {
     s16 i;
 
     EwramFree(gWorldselectNameBuffer);

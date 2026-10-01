@@ -348,15 +348,15 @@ void task_status_3(StatusWork* work) {
     TaskPoolDestroy(&work->pool);
 }
 
-u8 IsStatusMesWindowOpen(void) {
+u8 IsStatusMesWindowOpen() {
     return sStatusMesWindowOpen;
 }
 
-s16 GetStatusSelectedIndex(void) {
+s16 GetStatusSelectedIndex() {
     return sStatusSelectedIndex;
 }
 
-s16 GetStatusScroll(void) {
+s16 GetStatusScroll() {
     return gStatusWork->scroll;
 }
 
@@ -500,7 +500,7 @@ void task_status_bar_3(StatusBarWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-u8 IsStatusBarIdle(void) {
+u8 IsStatusBarIdle() {
     if (gStatusBarState == 2) {
         return 1;
     }
@@ -782,7 +782,7 @@ void task_status_stocklist_3(StatusStocklistWork* work) {
     ReleaseObjPalette(work->palette2);
 }
 
-u16 GetStatusVisibleRowCount(void) {
+u16 GetStatusVisibleRowCount() {
     if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count <= 7) {
         return gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count;
     }
@@ -790,7 +790,7 @@ u16 GetStatusVisibleRowCount(void) {
     return 8;
 }
 
-u16 GetStatusMaxScroll(void) {
+u16 GetStatusMaxScroll() {
     s16 v = gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count - 8;
 
     if (v <= 0) {
@@ -800,7 +800,7 @@ u16 GetStatusMaxScroll(void) {
     return v;
 }
 
-u8 StatusTabHasItems(void) {
+u8 StatusTabHasItems() {
     if (gStatusStocklistWork->entries[*gStatusStocklistWork->tab].count == 0) {
         return 0;
     }
@@ -808,7 +808,7 @@ u8 StatusTabHasItems(void) {
     return 1;
 }
 
-void StatusStocklistScrollDown(void) {
+void StatusStocklistScrollDown() {
     s32 i;
 
     ReleaseObjTiles(gStatusStocklistWork->tiles2[0]);
@@ -821,7 +821,7 @@ void StatusStocklistScrollDown(void) {
     gStatusStocklistWork->tiles2[7] = LoadStockNameTiles(GetStatusItemStockIndex(gStatusStocklistWork->entries[*gStatusStocklistWork->tab].items[gStatusStocklistWork->scroll + 7]));
 }
 
-void StatusStocklistScrollUp(void) {
+void StatusStocklistScrollUp() {
     s32 i;
 
     ReleaseObjTiles(gStatusStocklistWork->tiles2[7]);

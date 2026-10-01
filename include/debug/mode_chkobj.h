@@ -12,9 +12,9 @@ typedef struct ChkObjEntry {
 } ChkObjEntry;
 
 void ChkObjLoadDef(ObjDef* def);
-void mode_chkobj_0(void);
-void mode_chkobj_1(void);
-void mode_chkobj_2(void);
+void mode_chkobj_0();
+void mode_chkobj_1();
+void mode_chkobj_2();
 
 extern ChkObjWork* gChkObjWork;
 extern u8 gSor1ff00Frame0[];

@@ -190,12 +190,12 @@ extern u8 gSor1ll51Tiles[];
 extern u8 gUnk_097A1C54[];
 extern u8 gUnk_097A2394[];
 
-u8 IsStatusBarIdle(void);
+u8 IsStatusBarIdle();
 void StatusHandleInput(StatusWork* work);
-s16 GetStatusScroll(void);
-u16 GetStatusVisibleRowCount(void);
-u16 GetStatusMaxScroll(void);
-u8 StatusTabHasItems(void);
+s16 GetStatusScroll();
+u16 GetStatusVisibleRowCount();
+u16 GetStatusMaxScroll();
+u8 StatusTabHasItems();
 void StatusStocklistLoadRows(u16 a);
 s32 GetStatusListItem(s16 a);
 void StatusEntryClear(StatusEntry* e);
@@ -206,13 +206,13 @@ u8 GetCardHelpTextCount(u16 a);
 void* LoadStockNameTiles(u16 a);
 s32 GetStatusItemStockIndex(s32 a);
 s16 GetStatusScrollcursorY(StatusScrollcursorWork* work);
-void StatusStocklistScrollDown(void);
+void StatusStocklistScrollDown();
 void* CreateStockMesDispTask(void* a, u16 b, u8 c, u16 d, s32 e);
 u8 GetStockMesDispTextIndex(void* a);
 
 void StatusBarStartClose(StatusBarWork* work);
-u8 IsStatusMesWindowOpen(void);
-void StatusStocklistScrollUp(void);
+u8 IsStatusMesWindowOpen();
+void StatusStocklistScrollUp();
 
 void task_status_0(StatusWork* work);
 u8 task_status_1(StatusWork* work);

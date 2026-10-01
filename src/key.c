@@ -27,19 +27,19 @@ u8 gKeyReleaseR;
 u8 gKeyReleaseStart;
 u8 gKeyReleaseSelect;
 
-u16 GetKeysHeld(void) {
+u16 GetKeysHeld() {
     return gKeysHeld;
 }
 
-u16 GetKeysPressed(void) {
+u16 GetKeysPressed() {
     return gKeysPressed;
 }
 
-u16 GetKeysRepeat(void) {
+u16 GetKeysRepeat() {
     return gKeysRepeat;
 }
 
-void ResetKeyState(void) {
+void ResetKeyState() {
     gKeysHeld = 0;
     gKeysPressed = 0;
     gKeysRepeat = 0;
@@ -151,7 +151,7 @@ u16 ReadKeyChord(u16 a, u16 b) {
     return r;
 }
 
-u16 ReadDpadChord(void) {
+u16 ReadDpadChord() {
     u16 r = 0;
     u8 up = GetKeyReleaseTime(DPAD_UP);
     u8 down = GetKeyReleaseTime(DPAD_DOWN);
@@ -225,7 +225,7 @@ u16 ReadDpadChord(void) {
     return r;
 }
 
-void UpdateKeyState(void) {
+void UpdateKeyState() {
     u16 keys;
 
     keys = REG_KEYINPUT ^ KEYS_MASK;

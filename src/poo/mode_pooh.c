@@ -207,7 +207,7 @@ static s32 sPooAttackX;
 static s32 sPooAttackY;
 static s32 sPooAttackZ;
 
-void BackdropFadeReset(void) {
+void BackdropFadeReset() {
     sBackdropFadeAmount = 0;
     sBackdropFadeTarget = 0;
     sBackdropFadeLastAmount = 0;
@@ -221,7 +221,7 @@ void BackdropFadeSetColor(u16 r, u16 g, u16 b) {
     sBackdropFadeColor = (b << 10) | (g << 5) | r;
 }
 
-void BackdropFadeUpdate(void) {
+void BackdropFadeUpdate() {
     u16 amt;
     u16 r;
     u16 g;
@@ -384,7 +384,7 @@ void BackdropFadeToAmount(u32 a, u16 b, u16 c) {
     sBackdropFadeMode = a;
 }
 
-u8 BackdropFadeIsActive(void) {
+u8 BackdropFadeIsActive() {
     return sBackdropFadeActive;
 }
 
@@ -432,7 +432,7 @@ u8 PooAttackHitsCollider(Collider* p) {
     return 0;
 }
 
-void SetPooStartPositions(void) {
+void SetPooStartPositions() {
     PooPos p;
 
     p.x = 0x13000;
@@ -445,7 +445,7 @@ void SetPooStartPositions(void) {
     SetPooStatePooh(&p, 0);
 }
 
-void SetPooReentryPositions(void) {
+void SetPooReentryPositions() {
     PooPos p;
 
     p.x = 0xB5400;
@@ -557,7 +557,7 @@ void mode_pooh_0(s32 arg) {
 #endif
 }
 
-void mode_pooh_1(void) {
+void mode_pooh_1() {
     UpdatePlayTime();
     SetPooMapBeeVisible(0);
 
@@ -624,7 +624,7 @@ void mode_pooh_1(void) {
     BackdropFadeUpdate();
 }
 
-void mode_pooh_2(void) {
+void mode_pooh_2() {
     TaskPoolDestroy(&sModePoohTasks);
     TaskPoolDestroy(&sModePoohMessageTasks);
     TaskPoolDestroy(&sModePoohWLogoTasks);
@@ -684,7 +684,7 @@ u16 SpawnPooPrizes(u8 kind, u8 count, s32 x, s32 y, s32 z) {
     return made;
 }
 
-u16 CountPooPrizes(void) {
+u16 CountPooPrizes() {
     u16 n;
     s32 i;
 
@@ -703,7 +703,7 @@ void SetPooMapBeeVisible(u8 a) {
     sPooMapBeeVisible = a;
 }
 
-u8 IsPooMapBeeVisible(void) {
+u8 IsPooMapBeeVisible() {
     return sPooMapBeeVisible;
 }
 

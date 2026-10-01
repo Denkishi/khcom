@@ -14,8 +14,8 @@ static u16 gRawKeys;
 static u16 gRawKeysPrev;
 static u8 gSramErrorTilemapBuf[0x800];
 
-void WaitSramErrorInput(void);
-void ReadKeysRaw(void);
+void WaitSramErrorInput();
+void ReadKeysRaw();
 
 void ZeroFill(void* dst, s16 size) {
     u16 zero;
@@ -90,11 +90,11 @@ int SaveVerifyBlock(u8* sram, u8* hdr, u8* buf, s16 size) {
     return ret;
 }
 
-void SaveInitSram(void) {
+void SaveInitSram() {
     SetSramFastFunc();
 }
 
-void SaveClearHeader(void) {
+void SaveClearHeader() {
     u8* buf;
     s16 i;
 
@@ -119,7 +119,7 @@ int SaveCheckHeaderSlot(s16 slot) {
     return ret;
 }
 
-int SaveRepairHeader(void) {
+int SaveRepairHeader() {
     int results[2];
     int good;
     int bad;
@@ -161,7 +161,7 @@ int SaveRepairHeader(void) {
     return ret;
 }
 
-int SaveLoadHeader(void) {
+int SaveLoadHeader() {
     u8* buf;
     int ret;
     s16 i;
@@ -229,7 +229,7 @@ void SaveSetHeaderState(s16 slot, s16 state) {
     EwramFree(hdr);
 }
 
-void SaveClearSystem(void) {
+void SaveClearSystem() {
     u8* buf;
     s16 i;
 
@@ -254,7 +254,7 @@ int SaveCheckSystemSlot(s16 slot) {
     return ret;
 }
 
-int SaveRepairSystem(void) {
+int SaveRepairSystem() {
     int results[2];
     int good;
     int bad;
@@ -295,7 +295,7 @@ int SaveRepairSystem(void) {
     return ret;
 }
 
-int SaveLoadSystem(void) {
+int SaveLoadSystem() {
     u8* buf;
     int ret;
     s16 i;
@@ -318,7 +318,7 @@ int SaveLoadSystem(void) {
     return ret;
 }
 
-void SaveWriteSystem(void) {
+void SaveWriteSystem() {
     SaveBlockLarge* blk;
     s16 i;
 
@@ -677,7 +677,7 @@ void SaveSetFileSmallState(s16 file, s16 slot, s16 state) {
     EwramFree(blk);
 }
 
-void ShowSramErrorScreen(void) {
+void ShowSramErrorScreen() {
     vu16* ime;
     vu16* ie;
     vu16* dispstat;
@@ -730,7 +730,7 @@ void ShowSramErrorScreen(void) {
     *dispcnt = 0;
 }
 
-void WaitSramErrorInput(void) {
+void WaitSramErrorInput() {
     vu16* bldy;
     vu16* bldy2;
     vu32* dma;
@@ -793,7 +793,7 @@ void WaitSramErrorInput(void) {
     }
 }
 
-void ReadKeysRaw(void) {
+void ReadKeysRaw() {
     u16 keys = KEYS_MASK ^ REG_KEYINPUT;
 
     gRawKeysPrev = gRawKeys;

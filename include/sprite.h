@@ -45,8 +45,8 @@ typedef char ObjListPool_size[(sizeof(ObjListPool) == 0x14) ? 1 : -1];
 typedef char SpriteEntry_size[(sizeof(SpriteEntry) == 0x18) ? 1 : -1];
 typedef char ObjAffine_size[(sizeof(ObjAffine) == 0x18) ? 1 : -1];
 
-void SpriteInit(void);
-void SpriteFree(void);
+void SpriteInit();
+void SpriteFree();
 void SortSpriteEntries(SpriteEntry** arr, s32 lo, s32 hi);
 
 #endif

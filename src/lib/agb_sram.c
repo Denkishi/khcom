@@ -35,7 +35,7 @@ u32 VerifySramFast_Core(const u8* src, u8* dest, u32 size) {
     return 0;
 }
 
-void SetSramFastFunc(void) {
+void SetSramFastFunc() {
     u16* src;
     u16* dest;
     u16 size;

@@ -4,9 +4,9 @@
 #include "types.h"
 
 void mode_sio_dbg_flg_0(s32 arg);
-void mode_sio_dbg_flg_1(void);
-void mode_sio_dbg_flg_2(void);
-void SioDbgApplySettings(void);
+void mode_sio_dbg_flg_1();
+void mode_sio_dbg_flg_2();
+void SioDbgApplySettings();
 
 #ifdef VERSION_EU
 extern u16 gUnk_0203C3C4;

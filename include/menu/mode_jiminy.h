@@ -17,12 +17,12 @@ extern u8 gCard00Palette[];
 extern u8 gTalk0600Palette[];
 extern u8 gTalk2700Palette[];
 
-void JiminyFreeRows(void);
-u8 JiminyHandleListInput(void);
-void JiminyReloadPlainRows(void);
+void JiminyFreeRows();
+u8 JiminyHandleListInput();
+void JiminyReloadPlainRows();
 void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
 
-void JiminyDetailUpdate(void);
+void JiminyDetailUpdate();
 void JiminyOpenPlainList(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
@@ -30,6 +30,6 @@ void SplitThreeDecimalDigits(s16 a, u8* out);
 extern u8 gUnkEu_099FBE00[];
 #endif
 
-void mode_jiminy_1(void);
+void mode_jiminy_1();
 
 #endif

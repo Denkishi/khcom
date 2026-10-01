@@ -3,19 +3,19 @@
 #include "card.h"
 #include "types.h"
 
-void task_print_0(void) {
+void task_print_0() {
     InitPrintLayer(0);
 }
 
-s32 task_print_1(void) {
+s32 task_print_1() {
     return 1;
 }
 
-void task_print_2(void) {
+void task_print_2() {
     ResetPrintLines();
 }
 
-void task_print_3(void) {
+void task_print_3() {
     FreePrintLayer();
 }
 

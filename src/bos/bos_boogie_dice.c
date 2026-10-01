@@ -986,7 +986,7 @@ void task_bos_boogie_explosiondice_3(BoogieExplosiondiceWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-u8 BosBoogieIsActorPastSaku(void) {
+u8 BosBoogieIsActorPastSaku() {
     if (gBtlWork->actor->y <= 0x23EFF) {
         return 1;
     }
@@ -1111,7 +1111,7 @@ void task_bos_boogie_map_0(BoogieMapWork* work, BattleBackgroundDef* arg) {
     ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
 }
 
-u8 task_bos_boogie_map_1(void) {
+u8 task_bos_boogie_map_1() {
     s32 a;
     s32 b;
 
@@ -1165,10 +1165,10 @@ u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {
     return 1;
 }
 
-void task_bos_boogie_mapanime_2(void) {
+void task_bos_boogie_mapanime_2() {
 }
 
-void task_bos_boogie_mapanime_3(void) {
+void task_bos_boogie_mapanime_3() {
 }
 
 u8 ClampBoogieDiskPosition(s32* x, s32* y, s16 w, s16 h, s32 z) {
@@ -1980,7 +1980,7 @@ void BosUrsulaUpdateTakoRecovery(UrsulaWork* work) {
     }
 }
 
-u16 BosUrsulaGetCardInterval(void) {
+u16 BosUrsulaGetCardInterval() {
     switch (BosUrsulaGetHpPhase()) {
     case 0:
         return 150;
@@ -2257,11 +2257,11 @@ void task_bos_ursula_3(UrsulaWork* work) {
     gDispCnt &= ~DISPCNT_WIN0_ON;
 }
 
-u8 BosUrsulaIsFacingLeft(void) {
+u8 BosUrsulaIsFacingLeft() {
     return gUrsulaWork->obj.flags & BTLOBJ_FLAG_FACING_LEFT;
 }
 
-u8 BosUrsulaIsGimmickActive(void) {
+u8 BosUrsulaIsGimmickActive() {
     if (gUrsulaWork->gimmickTimer == 0) {
         return 0;
     }
@@ -2269,7 +2269,7 @@ u8 BosUrsulaIsGimmickActive(void) {
     return 1;
 }
 
-u8 BosUrsulaObjectsGone(void) {
+u8 BosUrsulaObjectsGone() {
     BtlObj* p;
     u8 r = 1;
 
@@ -2283,7 +2283,7 @@ u8 BosUrsulaObjectsGone(void) {
     return r;
 }
 
-u8 BosUrsulaIsGimmickStarting(void) {
+u8 BosUrsulaIsGimmickStarting() {
     if (BosUrsulaObjectsGone() != 0 || BosUrsulaIsGimmickActive() == 0 || gUrsulaWork->gimmickDelay == 0) {
         return 0;
     }
@@ -2291,7 +2291,7 @@ u8 BosUrsulaIsGimmickStarting(void) {
     return 1;
 }
 
-u8 func_080DC5B0(void) {
+u8 func_080DC5B0() {
     if (BosUrsulaIsGimmickActive() != 0 && (gUrsulaWork->sinkSteps != 0 || gUrsulaWork->riseSteps != 0 || gUrsulaWork->unk_15C != 0)) {
         return 1;
     }
@@ -2299,7 +2299,7 @@ u8 func_080DC5B0(void) {
     return 0;
 }
 
-u32 BosUrsulaGetHpPhase(void) {
+u32 BosUrsulaGetHpPhase() {
     UrsulaWork* work = gUrsulaWork;
 
     if (work->obj.hp > (s16)(work->obj.maxHp / 3) * 2) {
@@ -2313,7 +2313,7 @@ u32 BosUrsulaGetHpPhase(void) {
     return 2;
 }
 
-u8 BosUrsulaIsDefeated(void) {
+u8 BosUrsulaIsDefeated() {
     if (gUrsulaWork->state == 4) {
         return 1;
     }
@@ -2422,7 +2422,7 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     return 1;
 }
 
-void task_bos_ursula_map_3(void) {
+void task_bos_ursula_map_3() {
 }
 
 void task_bos_ursula_border_0(UrsulaBorderWork* work) {
@@ -2431,7 +2431,7 @@ void task_bos_ursula_border_0(UrsulaBorderWork* work) {
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
 }
 
-s32 task_bos_ursula_border_1(void) {
+s32 task_bos_ursula_border_1() {
     return 1;
 }
 
@@ -2939,7 +2939,7 @@ void BosUrsulaStartAttack(s32 a) {
     }
 }
 
-u8 BosUrsulaIsAttacking(void) {
+u8 BosUrsulaIsAttacking() {
     if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeBubble || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeWindup) {
         return 1;
     }
@@ -2947,7 +2947,7 @@ u8 BosUrsulaIsAttacking(void) {
     return IsTaskActive(gUrsulaMapanimeWork->task);
 }
 
-u8 BosUrsulaIsCharging(void) {
+u8 BosUrsulaIsCharging() {
     if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&gUrsulaMapanimeWork->anim) == 2) {
         return 1;
     }

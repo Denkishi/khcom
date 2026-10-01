@@ -15,7 +15,7 @@
 
 FieldTransitionWork* gFieldTransitionWork;
 
-void FieldTransitionInit(void) {
+void FieldTransitionInit() {
     FieldTransitionWork* p;
     FieldTransitionWork** pp = &gFieldTransitionWork;
     p = EwramAlloc(sizeof(FieldTransitionWork));
@@ -26,7 +26,7 @@ void FieldTransitionInit(void) {
     p->flipped = 0;
 }
 
-void FieldTransitionUpdate(void) {
+void FieldTransitionUpdate() {
     void* gfx;
 
     if (IsModeStarted()) {
@@ -142,7 +142,7 @@ void FieldTransitionUpdate(void) {
     UpdateSpriteOam();
 }
 
-void StartFieldTransition(void) {
+void StartFieldTransition() {
     ModeSetTransitionCallback(FieldTransitionInit, FieldTransitionUpdate);
 }
 

@@ -933,10 +933,10 @@ u8 scrollbar_1(ScrollBarWork* w) {
     return w->active;
 }
 
-void scrollbar_2(void) {
+void scrollbar_2() {
 }
 
-void scrollbar_3(void) {
+void scrollbar_3() {
 }
 
 void ScrollbarRequestClose(ScrollBarWork* w) {

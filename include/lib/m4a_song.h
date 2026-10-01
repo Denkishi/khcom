@@ -12,6 +12,6 @@ void m4aSongNumContinue(u16 song);
 struct MusicPlayerInfo;
 
 void m4aMPlayVolumeControl(struct MusicPlayerInfo* mplayInfo, u16 trackBits, u16 volume);
-void m4aMPlayAllStop(void);
+void m4aMPlayAllStop();
 
 #endif

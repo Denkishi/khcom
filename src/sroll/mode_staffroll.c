@@ -3076,7 +3076,7 @@ void StaffRollRunScript(StaffRollWork* w) {
     w->scriptFrame++;
 }
 
-void mode_StaffRoll_0(void) {
+void mode_StaffRoll_0() {
     StaffRollWork* w;
     StaffRollWork** p;
 
@@ -4202,7 +4202,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
     return result;
 }
 
-void mode_StaffRoll_1(void) {
+void mode_StaffRoll_1() {
     StaffRollWork* w;
     u16 tmp;
 
@@ -4606,7 +4606,7 @@ void mode_StaffRoll_1(void) {
     w->musicFrames++;
 }
 
-void mode_StaffRoll_2(void) {
+void mode_StaffRoll_2() {
     StaffRollWork* w;
 
     w = gStaffRollWork;

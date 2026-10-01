@@ -12,7 +12,7 @@ u16 LoadTextSlots(u16* text, TextSlot* slots);
 void* LoadTextPalette(s32 palette);
 void DrawTextSlots(s16 x, s16 y, TextSlot* slots, void* palette, u16 priority, u8 count);
 void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* slots, void* palette, s32 priority, u8 count);
-void* LoadSmallFontTiles(void);
-void* LoadSmallFontPalette(void);
+void* LoadSmallFontTiles();
+void* LoadSmallFontPalette();
 
 #endif

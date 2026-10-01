@@ -202,7 +202,7 @@ void WorldWarpLoadFloorTiles(s16 a, u8* b, void* c) {
     RequestDma3Copy(b + a * 256, c, 0x100);
 }
 
-u16 WorldWarpReadMenuKeys(void) {
+u16 WorldWarpReadMenuKeys() {
     s32 keys;
 
     keys = GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON);
@@ -210,7 +210,7 @@ u16 WorldWarpReadMenuKeys(void) {
     return keys;
 }
 
-void WorldWarpHandleInput(void) {
+void WorldWarpHandleInput() {
     s16 prev;
     u16 keys;
 
@@ -333,7 +333,7 @@ void WorldWarpHandleInput(void) {
     }
 }
 
-void WorldWarpDraw(void) {
+void WorldWarpDraw() {
     s32 i;
 #ifdef VERSION_EU
     u8* tile0;
@@ -439,7 +439,7 @@ void WorldWarpDraw(void) {
     }
 }
 
-void mode_worldwarp_0(void) {
+void mode_worldwarp_0() {
     s32 i;
     void** p;
     vu32* dma;
@@ -691,7 +691,7 @@ void mode_worldwarp_0(void) {
     DisableBg(3);
 }
 
-void mode_worldwarp_1(void) {
+void mode_worldwarp_1() {
     UpdatePlayTime();
 
     switch (sWorldWarpState) {
@@ -752,7 +752,7 @@ void mode_worldwarp_1(void) {
     WorldWarpDraw();
 }
 
-void mode_worldwarp_2(void) {
+void mode_worldwarp_2() {
     s32 i;
 
     ReleaseObjPalette(sWorldWarpBarPalette);

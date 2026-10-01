@@ -17,14 +17,14 @@ extern u8 gUnk_05000140[];
 extern u8 gUnk_0984A0F8[];
 extern u8 gUnk_09849F78[];
 
-void InitAllmap(void);
-void UpdateAllmap(void);
-void DestroyAllmap(void);
+void InitAllmap();
+void UpdateAllmap();
+void DestroyAllmap();
 
 void mode_allmap_0(s32 a);
-void func_080D3370(void);
-void mode_allmap_1(void);
-void mode_allmap_2(void);
+void func_080D3370();
+void mode_allmap_1();
+void mode_allmap_2();
 u8 func_080D3538(u8 a, u8 b);
 
 #endif /* GUARD_MODE_ALLMAP_H */

@@ -27,6 +27,6 @@ typedef struct RoomCreateWork {
 struct Task;
 
 void CreateMapCardSelection(TaskPool* pool, u8* p);
-void MapRestoreBg1(void);
+void MapRestoreBg1();
 
 #endif /* GUARD_ROOMCREATE_H */

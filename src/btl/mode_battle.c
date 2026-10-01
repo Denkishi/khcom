@@ -72,7 +72,7 @@ void eu_08009CD0(s32 arg) {
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
-void eu_08009E10(void) {
+void eu_08009E10() {
     switch (gLangWork->state) {
     case 0:
         if (!FadeIsActive()) {
@@ -185,7 +185,7 @@ void eu_08009E10(void) {
     }
 }
 
-void eu_0800A0DC(void) {
+void eu_0800A0DC() {
     ReleaseObjTiles(gLangWork->tiles);
     ReleaseObjPalette(gLangWork->palette);
     EwramFree(gLangWork);
@@ -539,7 +539,7 @@ void mode_battle_0(u32 mode) {
     gGameState.battleCount++;
 }
 
-void mode_battle_1(void) {
+void mode_battle_1() {
     TaskPoolUpdate(&gBtlWork->taskPools[2]);
     TaskPoolDraw(&gBtlWork->taskPools[2]);
 
@@ -577,7 +577,7 @@ void mode_battle_1(void) {
     }
 }
 
-void mode_battle_2(void) {
+void mode_battle_2() {
     gGameState.flags &= ~GAME_FLAG_FIRST_STRIKE;
     BgFxFree();
     TaskPoolDestroy(&gBtlWork->taskPools[2]);

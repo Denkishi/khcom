@@ -64,7 +64,7 @@ void MarkEventRoomDone(MapEventDoor* p) {
     }
 }
 
-void SetHallDefaultSpawn(void) {
+void SetHallDefaultSpawn() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gGameState.floor) {
         case 1:
@@ -83,7 +83,7 @@ void SetHallDefaultSpawn(void) {
     }
 }
 
-void UpdateWorldFriendFlags(void) {
+void UpdateWorldFriendFlags() {
     u16 t;
 
     if (gGameState.floor != GetProgressFloor() || gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL
@@ -236,7 +236,7 @@ u16 GetMapDoorFlags(u8 a, u8 b) {
     return r;
 }
 
-void UpdateGameWorld(void) {
+void UpdateGameWorld() {
     u16 t;
 
     switch (gMapFloorState.room) {
@@ -298,7 +298,7 @@ void UpdateGameWorld(void) {
     }
 }
 
-void SetWorldJiminyFlags(void) {
+void SetWorldJiminyFlags() {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.world) {
         case WORLD_AGRABAH:
@@ -402,7 +402,7 @@ void SetWorldJiminyFlags(void) {
     }
 }
 
-void SetFloorJiminyFlags(void) {
+void SetFloorJiminyFlags() {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         switch (gGameState.floor) {
         case 0:
@@ -457,7 +457,7 @@ void SetFloorJiminyFlags(void) {
     }
 }
 
-void AdvanceFloorStory(void) {
+void AdvanceFloorStory() {
     u8* e = GetMapRoomEvent(gMapFloorState.eventStep);
     MapEventDoor* p;
     MapFloorRoom* q;
@@ -518,12 +518,12 @@ void AdvanceFloorStory(void) {
     }
 }
 
-void AdvanceToExitHall(void) {
+void AdvanceToExitHall() {
     gMapFloorState.progress++;
     SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
 }
 
-u8 func_080DF49C(void) {
+u8 func_080DF49C() {
     u8* e = GetMapRoomEvent(gMapFloorState.eventStep);
     EventKeyList* t = &gEventKeyLists[GetMapEventDoor(*e)->keyList];
     EventKey* q;
@@ -538,7 +538,7 @@ u8 func_080DF49C(void) {
     return q->kind;
 }
 
-u8 GetCurrentEventDoorKeyKind(void) {
+u8 GetCurrentEventDoorKeyKind() {
     if (SelectEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide) != 0) {
         return GetEventKey(0)->kind;
     }
@@ -546,7 +546,7 @@ u8 GetCurrentEventDoorKeyKind(void) {
     return 0xFF;
 }
 
-u8 SelectCurrentEventDoor(void) {
+u8 SelectCurrentEventDoor() {
     return SelectEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide);
 }
 
@@ -612,7 +612,7 @@ void SetCardlessRoomType(u8 a) {
     e->roomType = 23;
 }
 
-u8 GetRandomRoomType(void) {
+u8 GetRandomRoomType() {
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
         return GetRandom() % 21 + 1;
     }
@@ -677,7 +677,7 @@ void SetCurrentMapRoom(u8 a, u8 b) {
     UpdateWorldFriendFlags();
 }
 
-u8 GetProgressFloor(void) {
+u8 GetProgressFloor() {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         if (gMapFloorState.progress > 0x16) {
             return 11;
@@ -785,12 +785,12 @@ void* GetMapWorldName(u8 index) {
 #endif
 }
 
-void EnterEntranceHall(void) {
+void EnterEntranceHall() {
     SetCurrentMapRoom(MAP_ROOM_ENTRANCE_HALL, 1);
     RequestMapMode();
 }
 
-void EnterExitHall(void) {
+void EnterExitHall() {
     u8 v;
     u16 f;
 
@@ -855,7 +855,7 @@ void InitMapFloorState(u8 a, u8 b) {
     gMapFloorState.flags = t;
 }
 
-void MarkPastEventRoomsDone(void) {
+void MarkPastEventRoomsDone() {
     s32 i;
 
     for (i = 0; i < gMapFloorState.eventStep; i++) {
@@ -868,12 +868,12 @@ void GoToFloor(u8 a) {
     InitMapFloorState(0xFE, 0);
 }
 
-void GoToNextFloor(void) {
+void GoToNextFloor() {
     gGameState.floor++;
     InitMapFloorState(0xFE, 1);
 }
 
-void GoToPreviousFloor(void) {
+void GoToPreviousFloor() {
     gGameState.floor--;
     InitMapFloorState(0xFD, 0);
 }
@@ -896,7 +896,7 @@ void SetFloorWorld(u8 a) {
     gGameState.floors[gGameState.floor].world = a;
 }
 
-void EnterFloorWorld(void) {
+void EnterFloorWorld() {
     MapFloorDef* e = GetMapFloorDef(gGameState.floor);
     MapFloorRoom* p;
     u16 t;
@@ -922,7 +922,7 @@ void EnterFloorWorld(void) {
     CreateMapRoom(gMapFloorState.room, 0);
 }
 
-void StoreMapFloorState(void) {
+void StoreMapFloorState() {
     gGameState.floors[gGameState.floor].flags = gMapFloorState.flags;
     gGameState.floors[gGameState.floor].world = gMapFloorState.world;
     gGameState.floors[gGameState.floor].eventStep = gMapFloorState.eventStep;
@@ -938,7 +938,7 @@ void InitStartFloor(u8 a, u8 b) {
     }
 }
 
-void ResetMapFloors(void) {
+void ResetMapFloors() {
     s32 i;
 
     for (i = 0; i < 13; i++) {
@@ -986,7 +986,7 @@ u8 IsFldPosBlocked(FldPos* p) {
     return MapCellMaskBitAt(q, p->x, y);
 }
 
-u8 GetMapWalkOutMode(void) {
+u8 GetMapWalkOutMode() {
     if (gMapRoomState->flags & ROOM_FLAG_WALK_OUT) {
         if (gMapFloorState.world != 0) {
             return 2;
@@ -1003,7 +1003,7 @@ u8 GetMapWalkOutMode(void) {
     return 0;
 }
 
-void EndMapWalkOut(void) {
+void EndMapWalkOut() {
     gMapRoomState->flags &= ~ROOM_FLAG_WALK_OUT;
 }
 

@@ -227,10 +227,10 @@ extern u8 gUnk_08F69BC4[];
 extern u8 gUnk_09C5C4E2[];
 extern u8 gUnk_09C5C704[];
 
-void BosLstFldUpdateShake(void);
-void BosLstFldResetShake(void);
+void BosLstFldUpdateShake();
+void BosLstFldResetShake();
 void BosLstFldSetShake(s16 a);
-s32 BosLstFldGetShake(void);
+s32 BosLstFldGetShake();
 
 void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg);
 u8 task_bos_lst_fld_1(LstFldWork* work);
@@ -253,7 +253,7 @@ void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg);
 u8 task_bos_lst_snp_1(LstSnpWork* work);
 void task_bos_lst_snp_2(LstSnpWork* work);
 void task_bos_lst_snp_3(LstSnpWork* work);
-void task_bos_lst_fld_2(void);
+void task_bos_lst_fld_2();
 void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg);
 u8 task_bos_lst_edg_1(LstEdgWork* work);
 void task_bos_lst_edg_2(LstEdgWork* work);

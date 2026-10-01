@@ -1334,7 +1334,7 @@ void ChkObjLoadDef(ObjDef* def) {
     gChkObjWork->palette = LoadObjPalette(def->palette, def->paletteSize);
 }
 
-void mode_chkobj_0(void) {
+void mode_chkobj_0() {
     SetBgMode0();
     gChkObjWork = EwramAlloc(sizeof(ChkObjWork));
     TaskPoolInit(&gChkObjWork->pool, 1);
@@ -1357,7 +1357,7 @@ void mode_chkobj_0(void) {
     DebugTextPrint(166, 0, 2, sChkObjEntries[0].name);
 }
 
-void mode_chkobj_1(void) {
+void mode_chkobj_1() {
     ObjDef* def;
     u16 keys;
     s16 v;
@@ -1525,7 +1525,7 @@ void mode_chkobj_1(void) {
     }
 }
 
-void mode_chkobj_2(void) {
+void mode_chkobj_2() {
     TaskPoolDestroy(&gChkObjWork->pool);
     ReleaseObjTiles(gChkObjWork->tiles);
     ReleaseObjPalette(gChkObjWork->palette);

@@ -48,23 +48,23 @@ u32 gLanguage;
 #endif
 IntrFunc gVBlankHandlerOverride;
 
-void* GetEwramHeapStart(void) {
+void* GetEwramHeapStart() {
     return gEwramHeapStart;
 }
 
-u32 GetEwramHeapSize(void) {
+u32 GetEwramHeapSize() {
     return EWRAM_HEAP_SIZE;
 }
 
-void* GetIwramHeapStart(void) {
+void* GetIwramHeapStart() {
     return gIwramHeapStart;
 }
 
-u32 GetIwramHeapSize(void) {
+u32 GetIwramHeapSize() {
     return IWRAM_HEAP_SIZE;
 }
 
-void EnableVBlankIntr(void) {
+void EnableVBlankIntr() {
     REG_IME = 0;
     REG_IE |= INTR_FLAG_VBLANK;
     REG_DISPSTAT |= DISPSTAT_VBLANK_INTR;
@@ -72,7 +72,7 @@ void EnableVBlankIntr(void) {
     REG_IME = 1;
 }
 
-void DisableVBlankIntr(void) {
+void DisableVBlankIntr() {
     REG_IME = 0;
     REG_IE &= ~INTR_FLAG_VBLANK;
     REG_DISPSTAT &= ~DISPSTAT_VBLANK_INTR;
@@ -80,14 +80,14 @@ void DisableVBlankIntr(void) {
     REG_IME = 1;
 }
 
-void EnableHBlankIntr(void) {
+void EnableHBlankIntr() {
     REG_IME = 0;
     REG_IE |= INTR_FLAG_HBLANK;
     REG_DISPSTAT |= DISPSTAT_HBLANK_INTR;
     REG_IME = 1;
 }
 
-void DisableHBlankIntr(void) {
+void DisableHBlankIntr() {
     REG_IME = 0;
     REG_IE &= ~INTR_FLAG_HBLANK;
     REG_DISPSTAT &= ~DISPSTAT_HBLANK_INTR;
@@ -95,7 +95,7 @@ void DisableHBlankIntr(void) {
 }
 
 #ifdef VERSION_EU
-void ClearSystemMemory(void) {
+void ClearSystemMemory() {
     u32 a;
     u32 b;
     u32 c;
@@ -110,7 +110,7 @@ void ClearSystemMemory(void) {
 }
 #endif
 
-void InitSystem(void) {
+void InitSystem() {
     vu32* dma;
 #ifdef VERSION_EU
     u32 flag;
@@ -181,7 +181,7 @@ void InitSystem(void) {
 #endif
 }
 
-void AgbMain(void) {
+void AgbMain() {
     gFrameCounter = 0;
     gVBlankCounter = 0;
     gSystemFlags = 0;
@@ -216,7 +216,7 @@ void AgbMain(void) {
     }
 }
 
-void VBlankIntr(void) {
+void VBlankIntr() {
     if (gVBlankHandlerOverride != NULL) {
         gVBlankHandlerOverride();
         return;
@@ -254,13 +254,13 @@ void VBlankIntr(void) {
     gVBlankCounter++;
 }
 
-void HBlankIntrDummy(void) {
+void HBlankIntrDummy() {
 }
 
-void VCountIntrDummy(void) {
+void VCountIntrDummy() {
 }
 
-void SerialIntrDummy(void) {
+void SerialIntrDummy() {
 }
 
 static IntrFunc sIntrTableTemplate[14] = {
@@ -268,7 +268,7 @@ static IntrFunc sIntrTableTemplate[14] = {
     SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
 };
 
-void InitIntrTable(void) {
+void InitIntrTable() {
     s32 i;
 
     for (i = 0; i < 14; i++) {
@@ -287,13 +287,13 @@ void InitIntrTable(void) {
     ResetTimer3Callback();
 }
 
-void ApplyIntrCallbacks(void) {
+void ApplyIntrCallbacks() {
     *gIntrTableVBlank = gVBlankCallback;
     *gIntrTableVCount = gVCountCallback;
     *gIntrTableHBlank = gHBlankCallback;
 }
 
-void VBlankIntrSio(void) {
+void VBlankIntrSio() {
     if (gFrameSyncFlags & FRAME_SYNC_IN_VBLANK) {
         gFrameSyncFlags |= FRAME_SYNC_VBLANK_OVERRUN;
         return;
@@ -326,7 +326,7 @@ void VBlankIntrSio(void) {
     gVBlankCounter++;
 }
 
-void VBlankIntrBlockAudio(void) {
+void VBlankIntrBlockAudio() {
     if (gFrameSyncFlags & FRAME_SYNC_IN_VBLANK) {
         gFrameSyncFlags |= FRAME_SYNC_VBLANK_OVERRUN;
         return;

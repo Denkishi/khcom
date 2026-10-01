@@ -64,7 +64,7 @@ void mode_dummy_0(u32 arg) {
     }
 }
 
-void DummyUpdateExit(void) {
+void DummyUpdateExit() {
     const DummyEntry* entry;
 
     if (!FadeIsActive()) {
@@ -117,7 +117,7 @@ void DummyUpdateExit(void) {
     }
 }
 
-void mode_dummy_1(void) {
+void mode_dummy_1() {
     if (!FadeIsActive() && (GetKeysPressed() & (A_BUTTON | START_BUTTON))) {
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         SetModeUpdate(DummyUpdateExit);
@@ -129,7 +129,7 @@ void mode_dummy_1(void) {
     UpdatePlayTime();
 }
 
-void mode_dummy_2(void) {
+void mode_dummy_2() {
     DebugTextDestroy();
 }
 

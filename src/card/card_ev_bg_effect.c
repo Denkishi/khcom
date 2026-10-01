@@ -300,10 +300,10 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* w) {
     return 1;
 }
 
-void EV_BG_EFFECT_2(void) {
+void EV_BG_EFFECT_2() {
 }
 
-void EV_BG_EFFECT_3(void) {
+void EV_BG_EFFECT_3() {
 }
 
 void CreateEVBGEFFECTTask(u8* work) {

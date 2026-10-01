@@ -26,7 +26,7 @@ void eu_0800C76C(s32 arg) {
     TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, 0);
 }
 
-void eu_0800C7A0(void) {
+void eu_0800C7A0() {
     u16 cancel = GetKeysPressed() & B_BUTTON;
 
     if (cancel) {
@@ -63,7 +63,7 @@ void eu_0800C7A0(void) {
     TaskPoolDraw(&gMovieDebugWorkEu->pool);
 }
 
-void eu_0800C898(void) {
+void eu_0800C898() {
     TaskPoolDestroy(&gMovieDebugWorkEu->pool);
     EwramFree(gMovieDebugWorkEu);
 }

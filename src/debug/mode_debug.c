@@ -36,7 +36,7 @@ const char gVersionString[12] = "J041001a";
 const char gVersionString[12] = "E041220b";
 #endif
 
-void mode_debug_0(void) {
+void mode_debug_0() {
     m4aMPlayAllStop();
 #ifdef VERSION_EU
     SaveLoadHeader();
@@ -90,7 +90,7 @@ void mode_debug_0(void) {
     gDebugWork->page = -1;
 }
 
-void mode_debug_1(void) {
+void mode_debug_1() {
     s16 v;
     s8 old;
     void* gfx;
@@ -407,7 +407,7 @@ void mode_debug_1(void) {
                gDebugWork->palette, 0, 0, 0);
 }
 
-void mode_debug_2(void) {
+void mode_debug_2() {
     DebugTextDestroy();
     ReleaseObjTiles(gDebugWork->tiles);
     ReleaseObjPalette(gDebugWork->palette);

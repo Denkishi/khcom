@@ -134,7 +134,7 @@ Mode gModeMsTop = {
     mode_ms_top_2,
 };
 
-u32 GetMooglePoints(void) {
+u32 GetMooglePoints() {
     return gGameState.progression.mooglePoints;
 }
 
@@ -176,7 +176,7 @@ void LoadDecimalDigitTiles(u32 value, u8* glyphs, u8* dst, u16 stride, u16 count
     }
 }
 
-void UpdateMsTopMooglePalette(void) {
+void UpdateMsTopMooglePalette() {
     s32 flag;
     s16 x;
     s32 v;
@@ -195,7 +195,7 @@ void UpdateMsTopMooglePalette(void) {
     sMsTopMooglePalette = LoadObjPalette(flag == 0 ? gMoguPalette : gUnk_09A3D77C, 0x20);
 }
 
-void UpdateMsTopWarpGfx(void) {
+void UpdateMsTopWarpGfx() {
     s16 i;
     s32 flag;
     s16 x;
@@ -231,7 +231,7 @@ void SetMsTopWarpAnim(s16 a) {
     AnimStart(&gWorldwarpAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
 }
 
-void QueueMsTopIntroMessage(void) {
+void QueueMsTopIntroMessage() {
     if (sMsTopPendingMessage < 0) {
         if (sMsTopIntroIndex <= 2) {
             sMsTopPendingMessage = sMsTopIntroMessages[sMsTopIntroIndex];
@@ -240,7 +240,7 @@ void QueueMsTopIntroMessage(void) {
     }
 }
 
-void MsTopHandleInput(void) {
+void MsTopHandleInput() {
     s16 prev;
     u16 keys;
 
@@ -305,7 +305,7 @@ void MsTopHandleInput(void) {
     }
 }
 
-void MsTopDraw(void) {
+void MsTopDraw() {
     s32 i;
     u16 flags;
 
@@ -470,7 +470,7 @@ void mode_ms_top_0(u32 a) {
     DisableBg(3);
 }
 
-void mode_ms_top_1(void) {
+void mode_ms_top_1() {
     UpdatePlayTime();
 
     switch (sMsTopState) {
@@ -678,7 +678,7 @@ void mode_ms_top_1(void) {
     MsTopDraw();
 }
 
-void mode_ms_top_2(void) {
+void mode_ms_top_2() {
     s32 i;
 
     ReleaseObjPalette(sMsTopBarPalette);

@@ -25,7 +25,7 @@ static s32 sTestFrame;
 #endif
 
 #ifndef VERSION_EU
-void mode_test_0(void) {
+void mode_test_0() {
     sTestFrame = 0;
     sTestTiles = LoadObjTiles(gBHpgagETiles, 0x7C0);
     sTestPalette = LoadObjPalette(gBStatesPalette, 0x20);
@@ -33,7 +33,7 @@ void mode_test_0(void) {
 #endif
 
 #ifndef VERSION_EU
-void mode_test_1(void) {
+void mode_test_1() {
     if (GetKeysRepeat() & DPAD_LEFT) {
         sTestFrame--;
     } else if (GetKeysRepeat() & DPAD_RIGHT) {
@@ -53,7 +53,7 @@ void mode_test_1(void) {
 #endif
 
 #ifndef VERSION_EU
-void mode_test_2(void) {
+void mode_test_2() {
     ReleaseObjTiles(sTestTiles);
     ReleaseObjPalette(sTestPalette);
 }

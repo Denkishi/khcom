@@ -43,12 +43,12 @@ void SetDeckExchangeGridRowCount(DeckExchangeWork* w, s16 n);
 u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* w, void* a);
 s32 TakeTradeCard(DeckExchangeWork* w);
 void DrawDeckExchangeEquipMarker(u8 a);
-void DrawDeckExchangeCardTotals(void);
+void DrawDeckExchangeCardTotals();
 u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a);
-u16 CountCollectionCards(void);
-u16 CountCardsInDecks(void);
+u16 CountCollectionCards();
+u16 CountCardsInDecks();
 void ClearCardCollectionSlot(u16* p);
-u8 GetActiveDeckIndex(void);
+u8 GetActiveDeckIndex();
 void CreateDeckExchangeDeckGridCards(DeckExchangeWork* w, u8 kind);
 s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* w, u8 kind, u8 c);
 s32 GetCardIdForKind(s32 a);
@@ -1471,7 +1471,7 @@ void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
     }
 }
 
-void DrawDeckExchangeCardTotals(void) {
+void DrawDeckExchangeCardTotals() {
     u8 d1[3];
     u8 d2[3];
     u16 a;

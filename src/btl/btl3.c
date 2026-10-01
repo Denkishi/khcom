@@ -172,7 +172,7 @@ u8 task_btl_form_1(BtlFormWork* work) {
     return 1;
 }
 
-void task_btl_form_3(void) {
+void task_btl_form_3() {
     gBtlWork->flags &= ~BTL_FLAG_FORMATION_ACTIVE;
 }
 

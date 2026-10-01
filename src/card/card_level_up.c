@@ -34,8 +34,8 @@
 
 extern u8 gUnk_09618CD8[];
 extern u8 gUnk_09613E98[];
-u8 UpdateLevelUpWaitFade(void);
-s32 IsLevelUpApUnlocked(void);
+u8 UpdateLevelUpWaitFade();
+s32 IsLevelUpApUnlocked();
 struct LevelUpWork;
 u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);
@@ -239,7 +239,7 @@ void Level_Up_0(LevelUpWork* w) {
 #else
 #define CARD_E7A4_DST 0x2480
 #endif
-void LoadLevelUpRikuBgTiles(void) {
+void LoadLevelUpRikuBgTiles() {
     u8* base;
 
     if (gBtlWork->battleId == 151) {
@@ -1075,7 +1075,7 @@ u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpWaitFade(void) {
+u8 UpdateLevelUpWaitFade() {
     if (FadeIsActive() == 0) {
         return 0;
     }
@@ -1866,7 +1866,7 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
     return 1;
 }
 
-s32 IsLevelUpApUnlocked(void) {
+s32 IsLevelUpApUnlocked() {
     if (gGameState.progression.level >= sLevelUpApLevels[gGameState.progression.levelMilestone]) {
         return 1;
     }

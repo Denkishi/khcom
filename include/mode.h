@@ -12,7 +12,7 @@ enum ModeFlag {
 };
 
 typedef void (*ModeInitFunc)(s32 arg);
-typedef void (*ModeFunc)(void);
+typedef void (*ModeFunc)();
 
 typedef struct Mode {
     const char* name;
@@ -22,11 +22,11 @@ typedef struct Mode {
 } Mode;
 
 void ModeRequest(Mode* mode, s32 arg);
-void ModeUpdate(void);
+void ModeUpdate();
 void ModeRequestHeapReset(Mode* mode, s32 arg);
 void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d);
-void DebugTextClear(void);
-void DebugTextDestroy(void);
+void DebugTextClear();
+void DebugTextDestroy();
 
 extern Mode gModeDebug;
 extern Mode gModeChkobj;
@@ -35,20 +35,20 @@ extern Mode gModeDummy;
 extern Mode gModeDebflag;
 extern Mode gModeVsbattle;
 
-u8 IsModeStarted(void);
-void ModeClearTransitionCallback(void);
-void SetModeUpdate(void (*fn)(void));
+u8 IsModeStarted();
+void ModeClearTransitionCallback();
+void SetModeUpdate(void (*fn)());
 #ifdef VERSION_EU
-void eu_0800115C(void);
+void eu_0800115C();
 #endif
-void ModeSetTransitionCallback(void (*a)(void), void (*b)(void));
-void ModeFlushDisplay(void);
-void ModeRunVBlankCallbacks(void);
+void ModeSetTransitionCallback(void (*a)(), void (*b)());
+void ModeFlushDisplay();
+void ModeRunVBlankCallbacks();
 
 #ifdef VERSION_EU
 void ModeInit(u8 a);
 #else
-void ModeInit(void);
+void ModeInit();
 #endif
 
 #endif

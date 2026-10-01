@@ -21,27 +21,27 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount);
 u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount);
 u16* LoadPaletteBuffered(void* src, u16* dst, u16 size);
 u16* GetPaletteBufferBank(u8 bank);
-void ResetPaletteEffect(void);
-void PalletFree(void);
-void PalletClear(void);
+void ResetPaletteEffect();
+void PalletFree();
+void PalletClear();
 void SetPaletteBankFadeEnabled(u16 bank, u8 a);
 u16* FadeAllPalettesToBlack(u16* src, u16 amount);
 u16* FadeAllPalettesToWhite(u16* src, u16 amount);
 void DisableBgWave(s32 a);
-void HBlankIntrBgWave(void);
-void StopAllBgWaves(void);
+void HBlankIntrBgWave();
+void StopAllBgWaves();
 
-void PalletInit(void);
-s16 GetPaletteEffect(void);
+void PalletInit();
+s16 GetPaletteEffect();
 void SetPaletteEffect(s16 a);
 u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount);
 u16* LoadPaletteWithEffect(void* src, u16* dst, u16 size);
-void StartBgWave(void (*callback)(void));
+void StartBgWave(void (*callback)());
 void SetBgWaveParams(s32 a, u8 b, u8 c);
 void EnableBgWave(s32 a);
 void HBlankIntrBgWave1(s32 a);
 void StopBgWave(s32 a);
 void PushPaletteEffect(s32 a);
-void PopPaletteEffect(void);
+void PopPaletteEffect();
 
 #endif /* GUARD_PALLET_H */

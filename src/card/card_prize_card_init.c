@@ -937,7 +937,7 @@ u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
     }
 }
 
-u16 PickPrizeMapCardValue(void) {
+u16 PickPrizeMapCardValue() {
     u16 i;
 
     do {
@@ -1013,7 +1013,7 @@ void DispCardname_0(DispCardnameWork* work, u16* a) {
     work->x = v;
 }
 
-s32 DispCardname_1(void) {
+s32 DispCardname_1() {
     return 1;
 }
 
@@ -1042,7 +1042,7 @@ void Version_0(VersionWork* work) {
     work->textLength = EncodeSmallFontString(gVersionString, work->text);
 }
 
-s32 Version_1(void) {
+s32 Version_1() {
     return 1;
 }
 
@@ -1459,10 +1459,10 @@ s32 UpdateSpotLightFadeOut(SpotlightWork* w) {
     return 1;
 }
 
-void SpotLight_2(void) {
+void SpotLight_2() {
 }
 
-void SpotLight_3(void) {
+void SpotLight_3() {
     FadeSetPaletteExcluded(13, 0);
 }
 

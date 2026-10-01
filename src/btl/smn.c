@@ -1331,7 +1331,7 @@ void task_smn_tink_3(SmnTinkWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-static inline s32 GetTinkEffectOffset(void) {
+static inline s32 GetTinkEffectOffset() {
     return ((u16)(GetRandom() % 9) << 8) - 0x400;
 }
 

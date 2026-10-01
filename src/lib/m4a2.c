@@ -54,7 +54,7 @@ u32 MidiKeyToFreq(WaveData* wav, u8 key, u8 fineAdjust) {
     return umul3232H32(wav->freq, val1 + umul3232H32(val2 - val1, fineAdjustShifted));
 }
 
-void UnusedDummyFunc(void) {
+void UnusedDummyFunc() {
 }
 
 void MPlayContinue(MusicPlayerInfo* mplayInfo) {
@@ -75,7 +75,7 @@ void MPlayFadeOut(MusicPlayerInfo* mplayInfo, u16 speed) {
     }
 }
 
-void m4aSoundInit(void) {
+void m4aSoundInit() {
     s32 i;
 
     CpuCopy32((void*)((s32)SoundMainRAM & ~1), SoundMainRAM_Buffer, sizeof(SoundMainRAM_Buffer));
@@ -96,7 +96,7 @@ void m4aSoundInit(void) {
     }
 }
 
-void m4aSoundMain(void) {
+void m4aSoundMain() {
     SoundMain();
 }
 
@@ -159,7 +159,7 @@ void m4aSongNumContinue(u16 n) {
         MPlayContinue(mplay->info);
 }
 
-void m4aMPlayAllStop(void) {
+void m4aMPlayAllStop() {
     s32 i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
@@ -171,7 +171,7 @@ void m4aMPlayContinue(MusicPlayerInfo* mplayInfo) {
     MPlayContinue(mplayInfo);
 }
 
-void m4aMPlayAllContinue(void) {
+void m4aMPlayAllContinue() {
     s32 i;
 
     for (i = 0; i < NUM_MUSIC_PLAYERS; i++)
@@ -287,7 +287,7 @@ void MPlayExtender(CgbChannel* cgbChans) {
     soundInfo->ident = ident;
 }
 
-static void MusicPlayerJumpTableCopy(void) {
+static void MusicPlayerJumpTableCopy() {
     asm("swi 0x2A");
 }
 
@@ -408,7 +408,7 @@ void m4aSoundMode(u32 mode) {
     soundInfo->ident = ID_NUMBER;
 }
 
-void SoundClear(void) {
+void SoundClear() {
     SoundInfo* soundInfo = gSoundInfoPtr;
     s32 i;
     void* chan;
@@ -443,7 +443,7 @@ void SoundClear(void) {
     soundInfo->ident = ID_NUMBER;
 }
 
-void m4aSoundVSyncOff(void) {
+void m4aSoundVSyncOff() {
     SoundInfo* soundInfo = gSoundInfoPtr;
 
     if (soundInfo->ident >= ID_NUMBER && soundInfo->ident <= ID_NUMBER + 1) {
@@ -464,7 +464,7 @@ void m4aSoundVSyncOff(void) {
     }
 }
 
-void m4aSoundVSyncOn(void) {
+void m4aSoundVSyncOn() {
     SoundInfo* soundInfo = gSoundInfoPtr;
     u32 ident = soundInfo->ident;
 
@@ -487,7 +487,7 @@ void m4aSoundVSyncOn(void) {
     REG_TM0CNT_H = TIMER_ENABLE;
 }
 
-void m4aSoundVSync(void) {
+void m4aSoundVSync() {
     SoundInfo* soundInfo = gSoundInfoPtr;
 
     if (soundInfo->ident < ID_NUMBER || soundInfo->ident > ID_NUMBER + 1)
@@ -826,7 +826,7 @@ void CgbModVol(CgbChannel* chan) {
     chan->pan &= chan->panMask;
 }
 
-void CgbSound(void) {
+void CgbSound() {
     s32 ch;
     CgbChannel* channels;
     s32 prevC15;
@@ -1443,5 +1443,5 @@ void ply_xswee(MusicPlayerInfo* mplayInfo, MusicPlayerTrack* track) {
     track->cmdPtr++;
 }
 
-void DummyFunc(void) {
+void DummyFunc() {
 }

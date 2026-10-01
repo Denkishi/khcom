@@ -102,7 +102,7 @@ void Event_0(s32 arg) {
     gEventEndStep = 0;
 }
 
-void EventDebugUpdate(void) {
+void EventDebugUpdate() {
     if (gEventState == NULL) {
         ModeRequest(&gModeEventselect, 0);
     }
@@ -133,7 +133,7 @@ void EventDebugUpdate(void) {
     }
 }
 
-void EventUpdate(void) {
+void EventUpdate() {
     EventSequenceDef* p = gEventSequenceDefs[gEventId];
     UpdatePlayTime();
     TaskPoolUpdate(&gEventTaskPool);
@@ -334,7 +334,7 @@ void EventUpdate(void) {
     }
 }
 
-void Event_2(void) {
+void Event_2() {
     TaskPoolDestroy(&gEventTaskPool);
     EwramFree(gEventState);
     gEventState = 0;
@@ -349,7 +349,7 @@ void RequestEventMode(u16 a) {
 #define MSG_CODE(n) (n)
 #endif
 
-void ShowEventEndMessage(void) {
+void ShowEventEndMessage() {
     SetBackdropColor(0, 0, 0);
 
     switch (gEventId & 0x7FFF) {
@@ -594,7 +594,7 @@ void ShowEventEndMessage(void) {
     }
 }
 
-void func_08061FC8(void) {
+void func_08061FC8() {
     switch (gEventId) {
     case 0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
@@ -732,7 +732,7 @@ void func_08061FC8(void) {
     }
 }
 
-void func_0806250C(void) {
+void func_0806250C() {
     switch (gEventId) {
     case 0:
         gGameState.availableWorlds = 0x200;
@@ -843,7 +843,7 @@ void func_0806250C(void) {
     }
 }
 
-void func_0806297C(void) {
+void func_0806297C() {
     EventSequenceDef* m = gEventSequenceDefs[gEventId];
 
     switch (gEventId) {
@@ -858,7 +858,7 @@ void func_0806297C(void) {
     }
 }
 
-u8 func_080629CC(void) {
+u8 func_080629CC() {
     switch (gEventId) {
     case 0x44:
     case 0x53:
@@ -870,7 +870,7 @@ u8 func_080629CC(void) {
     return 0;
 }
 
-void func_080629F8(void) {
+void func_080629F8() {
     switch (gEventId) {
     case 2:
         SetCardKindObtained(0);
@@ -935,7 +935,7 @@ void func_080629F8(void) {
 #define MSG_SAVE_ID_LO 0x8F
 #endif
 
-void SaveAfterEvent(void) {
+void SaveAfterEvent() {
     switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
@@ -954,7 +954,7 @@ void SaveAfterEvent(void) {
     }
 }
 
-void func_08062D20(void) {
+void func_08062D20() {
     switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
@@ -967,7 +967,7 @@ void func_08062D20(void) {
     }
 }
 
-void func_08062D3C(void) {
+void func_08062D3C() {
     switch (gEventId) {
     case 0x43:
         SetJiminyFlag(16);

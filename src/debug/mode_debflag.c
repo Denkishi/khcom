@@ -78,7 +78,7 @@ void mode_debflag_0(s32 arg) {
     }
 }
 
-void mode_debflag_1(void) {
+void mode_debflag_1() {
     u8 prev;
     const DebugFlag* entry;
 
@@ -126,7 +126,7 @@ void mode_debflag_1(void) {
     }
 }
 
-void mode_debflag_2(void) {
+void mode_debflag_2() {
     DebugTextDestroy();
 }
 

@@ -25,9 +25,9 @@ void MapChkEditMinHeight(MapChkWork* p);
 void MapChkEditMaxHeight(MapChkWork* p);
 void MapChkEditMinDepth(MapChkWork* p);
 void MapChkEditMaxDepth(MapChkWork* p);
-void Mode_MapChk_0(void);
-void Mode_MapChk_1(void);
-void Mode_MapChk_2(void);
+void Mode_MapChk_0();
+void Mode_MapChk_1();
+void Mode_MapChk_2();
 
 extern const u8 gUnk_0984B458[][8];
 

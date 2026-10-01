@@ -197,7 +197,7 @@ void DeckErrorDeckFullInit(DeckConfirmWork* w, u8* a) {
     a[0] = 1;
 }
 
-s32 DeckConfirmUpdate(void) {
+s32 DeckConfirmUpdate() {
     if ((GetKeysPressed() & A_BUTTON) || (GetKeysPressed() & START_BUTTON) ||
         (GetKeysPressed() & B_BUTTON)) {
         return 0;
@@ -261,7 +261,7 @@ void Deck_Yes_No_0(DeckConfirmWork* w, u8* a) {
     a[0] = 1;
 }
 
-s32 DeckConfirmYesNoUpdate(void) {
+s32 DeckConfirmYesNoUpdate() {
     if ((GetKeysPressed() & A_BUTTON) || (GetKeysPressed() & B_BUTTON)) {
         return 0;
     }

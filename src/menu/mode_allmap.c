@@ -125,7 +125,7 @@ static u8 sUnk_02034E40[0x40];
 static u8 sAllmapReturnToMenu;
 static u8 sAllmapLowerBgm;
 
-void AllmapCyclePalette(void) {
+void AllmapCyclePalette() {
     PooPalStep t[9];
 
     memcpy(t, sAllmapPalSteps, sizeof(t));
@@ -145,13 +145,13 @@ void AllmapCyclePalette(void) {
     LoadPalette(&gUnk_0984A138[t[sAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
 }
 
-void AllmapLoadWorldBg(void) {
+void AllmapLoadWorldBg() {
     RequestDma3Copy(sAllmapWorldBgs[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
     RequestDma3Copy(sAllmapWorldBgs[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
     LoadPalette(sAllmapWorldBgs[gGameState.world].palette, (void*)0x05000140, 0x20);
 }
 
-void AllmapLoadFloorTiles(void) {
+void AllmapLoadFloorTiles() {
     u8* src;
     void* dst;
 
@@ -235,13 +235,13 @@ void mode_allmap_0(s32 a) {
     sAllmapPalStep = 0;
 }
 
-void func_080D3370(void) {
+void func_080D3370() {
     FadeSetPaletteExcluded(10, 1);
     CpuSet(gUnk_05000140, sUnk_02034E40, 16);
     LoadPalette(sUnk_02034E40, gUnk_05000140, 32);
 }
 
-void mode_allmap_1(void) {
+void mode_allmap_1() {
     UpdatePlayTime();
     TaskPoolUpdate(&gAllmapTaskPool);
     TaskPoolDraw(&gAllmapTaskPool);
@@ -294,7 +294,7 @@ void mode_allmap_1(void) {
     }
 }
 
-void mode_allmap_2(void) {
+void mode_allmap_2() {
     DestroyAllmap();
     TaskPoolDestroy(&gAllmapTaskPool);
     REG_IME = 0;

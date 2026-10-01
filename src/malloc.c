@@ -249,11 +249,11 @@ s32 HeapGetFreeTotal(Heap* heap) {
     return total;
 }
 
-s32 EwramGetFreeTotal(void) {
+s32 EwramGetFreeTotal() {
     return HeapGetFreeTotal(&gEwramHeap);
 }
 
-s32 IwramGetFreeTotal(void) {
+s32 IwramGetFreeTotal() {
     return HeapGetFreeTotal(&gIwramHeap);
 }
 
@@ -265,11 +265,11 @@ void func_08000A60(Heap* heap) {
     }
 }
 
-void func_08000A70(void) {
+void func_08000A70() {
     func_08000A60(&gEwramHeap);
 }
 
-void func_08000A80(void) {
+void func_08000A80() {
     func_08000A60(&gIwramHeap);
 }
 
@@ -289,11 +289,11 @@ void func_08000AA8(Heap* heap) {
     }
 }
 
-void func_08000AB8(void) {
+void func_08000AB8() {
     func_08000AA8(&gEwramHeap);
 }
 
-void func_08000AC8(void) {
+void func_08000AC8() {
     func_08000AA8(&gIwramHeap);
 }
 
@@ -305,11 +305,11 @@ void SetIwramHeapName(const void* name) {
     gIwramHeap.name = name;
 }
 
-const void* GetEwramHeapName(void) {
+const void* GetEwramHeapName() {
     return gEwramHeap.name;
 }
 
-const void* GetIwramHeapName(void) {
+const void* GetIwramHeapName() {
     return gIwramHeap.name;
 }
 
@@ -548,7 +548,7 @@ void* ListPoolFirstFree(void* pool) {
     return 0;
 }
 
-void func_08000D1C(void) {
+void func_08000D1C() {
 }
 
 void ListNodeInit(void* p, void* pool, void* owner) {

@@ -644,7 +644,7 @@ ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     return e;
 }
 
-void SortSprites(void) {
+void SortSprites() {
     if (gSpriteWork->entryCount > 1) {
         SortSpriteEntries(gSpriteWork->sortPtrs, gSpriteWork->sortLo,
                       gSpriteWork->entryCount - 1);
@@ -712,7 +712,7 @@ static inline void EngineObjSize(u16 a, u16 b, u16* w, u16* h) {
 }
 
 #undef ENGINE_SET_SQUARE_SIZE
-void UpdateSpriteOam(void) {
+void UpdateSpriteOam() {
     SpriteEntry** entries;
     SpriteEntry* entry;
     ObjAffine* affine;
@@ -1523,7 +1523,7 @@ void SplineFreeBuffers(Spline2D* p) {
     EwramFree(p->yCoefficients);
 }
 
-void InitDisplayRegs(void) {
+void InitDisplayRegs() {
     gDispCnt = DISPCNT_OBJ_1D_MAP;
     gMosaic = 0;
     gBldCnt = 0;
@@ -1561,7 +1561,7 @@ void InitDisplayRegs(void) {
     gBg3Y = 0;
 }
 
-void CommitDisplayRegs(void) {
+void CommitDisplayRegs() {
     REG_MOSAIC = gMosaic;
     REG_BLDCNT = gBldCnt;
     REG_BLDALPHA = gBldAlpha;
@@ -1600,7 +1600,7 @@ void CommitDisplayRegs(void) {
     *(vu16*)PLTT = gBackdropColor;
 }
 
-void VTransInit(void) {
+void VTransInit() {
     u32 zero;
 
     SetIwramHeapName(sVTransHeapName);
@@ -1609,11 +1609,11 @@ void VTransInit(void) {
     CpuSet(&zero, gDma3Requests, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(Dma3Queue) / 4));
 }
 
-void VTransFree(void) {
+void VTransFree() {
     IwramFree(gDma3Requests);
 }
 
-void VTransReset(void) {
+void VTransReset() {
     Dma3Queue* q = gDma3Requests;
 
     q->requestCount = 0;
@@ -1731,7 +1731,7 @@ u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e) {
     return 1;
 }
 
-u8 QueueVTransCallback(void (*a)(void)) {
+u8 QueueVTransCallback(void (*a)()) {
     Dma3Queue* q = gDma3Requests;
 
     if (q->callbackCount > 7) {
@@ -1744,13 +1744,13 @@ u8 QueueVTransCallback(void (*a)(void)) {
     return 1;
 }
 
-u32 GetVTransTransferredBytes(void) {
+u32 GetVTransTransferredBytes() {
     Dma3Queue* q = gDma3Requests;
 
     return q->transferredBytes;
 }
 
-void FlushDma3Queue(void) {
+void FlushDma3Queue() {
     Dma3Queue* q;
     Dma3Request* req;
     Dma3Blit* blits;
@@ -1761,7 +1761,7 @@ void FlushDma3Queue(void) {
     s32 sy;
     s32 dy;
     Dma3Pending* pend;
-    void (**cb)(void);
+    void (**cb)();
     u16 n;
     s32 i;
     s32 mask;
@@ -1863,7 +1863,7 @@ void FlushDma3Queue(void) {
     gDma3Requests->count = 0;
 }
 
-void FlushDma3QueueWithCpu(void) {
+void FlushDma3QueueWithCpu() {
     Dma3Queue* q;
     Dma3Request* req;
     Dma3Blit* blits;
@@ -1872,8 +1872,8 @@ void FlushDma3QueueWithCpu(void) {
     s32 sy;
     s32 dy;
     Dma3Pending* pend;
-    void (**cb)(void);
-    void (**p)(void);
+    void (**cb)();
+    void (**p)();
     u16 n;
     s32 i;
     Dma3Pending* current;
@@ -1996,7 +1996,7 @@ void FlushDma3QueueWithCpu(void) {
     gDma3Requests->count = 0;
 }
 
-void BgInit(void) {
+void BgInit() {
     BgWork** p;
     u32 zero;
 
@@ -2007,7 +2007,7 @@ void BgInit(void) {
     CpuSet(&zero, *p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
 }
 
-void BgFree(void) {
+void BgFree() {
     IwramFree(gBgWork);
 }
 
@@ -2060,7 +2060,7 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
     RequestTilemapRectCopy(GetBgMapBlock(e, x2, y2), dst, 0, 0, sx2, sy2, w2, h2);
 }
 
-void BgReset(void) {
+void BgReset() {
 #ifdef VERSION_EU
     u32 zero;
     zero = 0;
@@ -2075,7 +2075,7 @@ void BgReset(void) {
     gBldCnt = 0;
 }
 
-void SetBgMode0(void) {
+void SetBgMode0() {
     s32 i;
 
     gDispCnt = gDispCnt & ~DISPCNT_MODE_MASK;
@@ -2097,7 +2097,7 @@ void SetBgMode0(void) {
     }
 }
 
-void SetBgMode1(void) {
+void SetBgMode1() {
     s32 i;
 
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
@@ -2116,7 +2116,7 @@ void SetBgMode1(void) {
     }
 }
 
-void SetBgMode2(void) {
+void SetBgMode2() {
     s32 i;
 
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
@@ -2132,7 +2132,7 @@ void SetBgMode2(void) {
     }
 }
 
-void SetBgMode3(void) {
+void SetBgMode3() {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_3;
     SetBgScroll(2, 0, 0);
 }
@@ -2858,7 +2858,7 @@ void AnimReset(AnimState* a) {
     a->flags &= ~ANIM_FLAG_FINISHED;
 }
 
-void FadeInit(void) {
+void FadeInit() {
     u32 zero;
 
     SetIwramHeapName(sFadeHeapName);
@@ -2867,11 +2867,11 @@ void FadeInit(void) {
     CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
 }
 
-void FadeFree(void) {
+void FadeFree() {
     IwramFree(gFadeWork);
 }
 
-void FadeReset(void) {
+void FadeReset() {
     u32 zero = 0;
 
     CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
@@ -2902,7 +2902,7 @@ void FadeClearPaletteSlot(u16 a) {
     p->src = 0;
 }
 
-void FadeUpdate(void) {
+void FadeUpdate() {
     s32 i;
     s32 j;
     s32 changed;
@@ -3199,7 +3199,7 @@ void FadeSetPaletteExcluded(u16 slot, u8 value) {
     p->excluded = value;
 }
 
-u8 FadeIsActive(void) {
+u8 FadeIsActive() {
     if (gFadeWork->flags & FADE_FLAG_ACTIVE) {
         return 1;
     }
@@ -3207,7 +3207,7 @@ u8 FadeIsActive(void) {
     return 0;
 }
 
-u16 FadeGetColor(void) {
+u16 FadeGetColor() {
     switch (gFadeWork->mode) {
     case FADE_MODE_WHITE:
     case FADE_MODE_ADD_WHITE:
@@ -3224,11 +3224,11 @@ u16 FadeGetColor(void) {
     }
 }
 
-u16 FadeGetAmount(void) {
+u16 FadeGetAmount() {
     return gFadeWork->amount >> 8;
 }
 
-void FadeLock(void) {
+void FadeLock() {
     u16 v = gFadeWork->flags | FADE_FLAG_LOCKED;
 
     gFadeWork->flags = v;
@@ -3244,14 +3244,14 @@ void FadeSetPaused(u8 on) {
     }
 }
 
-void MosaicReset(void) {
+void MosaicReset() {
     gMosaicSize = 0;
     gMosaicTarget = 0;
     gMosaicTimer = 0;
     gMosaicActive = 0;
 }
 
-void MosaicUpdate(void) {
+void MosaicUpdate() {
     s16 t;
     u8 v;
 
@@ -3291,7 +3291,7 @@ void MosaicStartOut(u16 a, u16 b) {
     SetSpriteMosaicEnabled(1);
 }
 
-u8 MosaicIsActive(void) {
+u8 MosaicIsActive() {
     return gMosaicActive;
 }
 

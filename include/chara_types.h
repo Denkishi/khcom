@@ -27,7 +27,7 @@ typedef struct CharaObjParam {
     u32 x;
     u32 y;
     u32 z;
-    void (*callback)(void);
+    void (*callback)();
     struct BtlObj* prizeObj;
     u16 flags;
 } CharaObjParam;
@@ -42,7 +42,7 @@ typedef struct CharaObjParam2 {
     u32 x;
     u32 y;
     u32 z;
-    void (*callback)(void);
+    void (*callback)();
     struct BtlObj* prizeObj;
 } CharaObjParam2;
 

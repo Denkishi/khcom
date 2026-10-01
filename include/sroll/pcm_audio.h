@@ -11,8 +11,8 @@ typedef struct SoundEntry {
 
 u8 LookupPcmPlaybackConfig(u32 sampleRate, u16* timerReload, u32* samplesPerBuffer);
 u8 PcmPlaybackInit(u32 sampleRate);
-void PcmPlaybackStart(void);
-void PcmPlaybackStop(void);
-void PcmPlaybackUpdate(void);
+void PcmPlaybackStart();
+void PcmPlaybackStop();
+void PcmPlaybackUpdate();
 
 #endif

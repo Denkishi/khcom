@@ -33,7 +33,7 @@ u8 gUnk_02034AF4[4];
 u8 IsHcEffectNameShuffling(HcEffectNameWork* w);
 u8 UpdateHcEffectNameShuffle(HcEffectNameWork* w, void* a);
 
-void Mode_Premire_0(void) {
+void Mode_Premire_0() {
     func_08085FB0();
     InitSoraDecks();
     SetBgMode2();
@@ -54,12 +54,12 @@ void Mode_Premire_0(void) {
     TaskCreate(&gModePremireTasks, &gTaskDescLevelUp, 0);
 }
 
-void Mode_Premire_1(void) {
+void Mode_Premire_1() {
     TaskPoolUpdate(&gModePremireTasks);
     TaskPoolDraw(&gModePremireTasks);
 }
 
-void Mode_Premire_2(void) {
+void Mode_Premire_2() {
     TaskPoolDestroy(&gModePremireTasks);
 }
 

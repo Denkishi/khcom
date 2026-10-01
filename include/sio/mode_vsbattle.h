@@ -16,17 +16,17 @@ extern u16 gVsBattleHalfWidth;
 extern u8 gUnk_02039B98;
 extern u8 gUnk_08F69BC4[];
 
-void VsBattleUpdate(void);
-void VsBtlWorkInit(void);
+void VsBattleUpdate();
+void VsBtlWorkInit();
 
-void SetRikuReloadCharging(void);
+void SetRikuReloadCharging();
 
 void mode_vsbattle_0(u32 mode);
-void mode_vsbattle_1(void);
-void mode_vsbattle_2(void);
-void func_0800C6B0(void);
-void func_0800C6B4(void);
-void PlayVsBattleBgm(void);
+void mode_vsbattle_1();
+void mode_vsbattle_2();
+void func_0800C6B0();
+void func_0800C6B4();
+void PlayVsBattleBgm();
 void EmyStartKnockback(EmyWork* work);
 void HumSubReleaseGraphics(HumSub* sub);
 void HumStartKnockback(HumWork* work);

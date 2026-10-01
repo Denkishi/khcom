@@ -86,22 +86,22 @@ typedef struct LockonWork {
 } LockonWork;
 
 s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e);
-void SioBtlOptionRecvSettings(void);
+void SioBtlOptionRecvSettings();
 
 #ifndef VERSION_EU
 extern Mode gModeTest;
 #endif
-void mode_test_0(void);
-void mode_test_1(void);
-void mode_test_2(void);
+void mode_test_0();
+void mode_test_1();
+void mode_test_2();
 void LockonClearTargets(LockonWork* w);
 void func_0805F728(s32* x, s32* y);
-void DebugTextClearBg(void);
+void DebugTextClearBg();
 void func_0805F7B0(s32 a);
-void func_0805F7BC(void);
+void func_0805F7BC();
 void func_0805F7C8(u8 a);
 u8 func_0805F8F0(u8 a);
-void DebugTextClearLines(void);
+void DebugTextClearLines();
 void func_0805FB78(s32 a);
 void func_0805FB84(u8 x, u8 y, u32 c, u8 v);
 void task_lockon_0(LockonWork* w);
@@ -112,7 +112,7 @@ void task_lockon_2(LockonWork* w);
 void task_lockon_3(LockonWork* w);
 void DebugTextPrintFont2(u8 x, u8 y, u16* s);
 void func_08060470(u8 bg);
-void DebugTextFree(void);
+void DebugTextFree();
 
 extern u8* gDebugFont2Banks[2];
 extern u8* gUnk_09EE26F4;

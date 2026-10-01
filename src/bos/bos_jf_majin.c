@@ -240,7 +240,7 @@ void task_bos_jf_majin_3(JfMajinWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-s32 BosJfGetActorPillar(void) {
+s32 BosJfGetActorPillar() {
     s32 v = gBtlWork->actor->x;
 
     if (v < 0x1EA00) {

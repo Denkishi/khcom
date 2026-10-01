@@ -77,7 +77,7 @@ void mode_vsbattle_0(u32 mode) {
     FadeStartIn(FADE_MODE_BLACK, 60);
 }
 
-void mode_vsbattle_1(void) {
+void mode_vsbattle_1() {
     if (gBtlWork->paused == 0) {
         VsBattleUpdate();
 
@@ -99,7 +99,7 @@ void mode_vsbattle_1(void) {
     TaskPoolDraw(&gBtlWork->taskPools[0]);
 }
 
-void mode_vsbattle_2(void) {
+void mode_vsbattle_2() {
     BgFxFree();
     TaskPoolDestroy(&gBtlWork->taskPools[1]);
     TaskPoolDestroy(&gBtlWork->taskPools[0]);
@@ -108,13 +108,13 @@ void mode_vsbattle_2(void) {
     EwramFree(gBtlWork);
 }
 
-void func_0800C6B0(void) {
+void func_0800C6B0() {
 }
 
-void func_0800C6B4(void) {
+void func_0800C6B4() {
 }
 
-void PlayVsBattleBgm(void) {
+void PlayVsBattleBgm() {
     switch (gGameState.battleStage) {
     case BATTLE_STAGE_WONDERLAND:
         m4aSongNumStart(SONG_BGM_ALICE_BTL);

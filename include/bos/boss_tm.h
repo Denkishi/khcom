@@ -289,7 +289,7 @@ void task_bos_tm_0(TmWork* w, BtlObj* arg);
 u8 task_bos_tm_1(TmWork* w);
 void task_bos_tm_2(TmWork* w);
 void task_bos_tm_3(TmWork* w);
-void BosTmDestroyParts(void);
+void BosTmDestroyParts();
 void BosTmArmUpdateArm1(TmArmWork* work);
 void BosTmArmUpdateArm0(TmArmWork* work);
 u8 task_bos_tm_clb_1(TmClbWork* work);

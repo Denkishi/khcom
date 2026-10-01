@@ -557,7 +557,7 @@ void task_wlogo_atl_3(WlogoAtlWork* work) {
     StopBgWave(0);
 }
 
-void WlogoAtlHBlankIntr(void) {
+void WlogoAtlHBlankIntr() {
     gIntrCheck |= 2;
     HBlankIntrBgWave1(0);
 }
@@ -1992,12 +1992,12 @@ void task_wlogo_tt_3(WlogoTtWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void WlogoEnableHBlank(void) {
+void WlogoEnableHBlank() {
     SetHBlankCallback(WlogoHBlankIntr);
     EnableHBlankIntr();
 }
 
-void WlogoHBlankIntr(void) {
+void WlogoHBlankIntr() {
     vu16 line;
 
     gIntrCheck |= 2;
@@ -2011,7 +2011,7 @@ void WlogoHBlankIntr(void) {
     }
 }
 
-void WlogoDisableHBlank(void) {
+void WlogoDisableHBlank() {
     ResetHBlankCallback();
     DisableHBlankIntr();
 }
@@ -2279,7 +2279,7 @@ void task_wlogo_bks_3(WlogoBksWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void WlogoBksHBlankIntr(void) {
+void WlogoBksHBlankIntr() {
     gIntrCheck |= 2;
     HBlankIntrBgWave1(0);
 }

@@ -96,7 +96,7 @@ void SetReloadGageIdleFrames(ReloadGauge* p, CardDisplayWork* w);
 void AdvanceReloadGageAnim(ReloadGauge* p, CardDisplayWork* w);
 void ResetReloadGageAnim(ReloadGauge* p);
 
-void WORLDSELECT_0(void) {
+void WORLDSELECT_0() {
     SetBgMode2();
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
@@ -115,12 +115,12 @@ void WORLDSELECT_0(void) {
     TaskCreate(&gModeWorldselectTasks, &gTaskDescPremireChance, 0);
 }
 
-void WORLDSELECT_1(void) {
+void WORLDSELECT_1() {
     TaskPoolUpdate(&gModeWorldselectTasks);
     TaskPoolDraw(&gModeWorldselectTasks);
 }
 
-void WORLDSELECT_2(void) {
+void WORLDSELECT_2() {
     TaskPoolDestroy(&gModeWorldselectTasks);
 }
 
@@ -958,7 +958,7 @@ void CreateMapSelectCards(MapSelectWork* w) {
     }
 }
 
-u16 CountOwnedMapCardKinds(void) {
+u16 CountOwnedMapCardKinds() {
     u16 count;
     u16 i;
     u16 j;
@@ -1252,7 +1252,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* w) {
     return 0;
 }
 
-u16 CountMapCards(void) {
+u16 CountMapCards() {
     u8 sum;
     s32 i;
 
@@ -1388,7 +1388,7 @@ s32 RemoveMapCard(u16 a) {
     return 0;
 }
 
-s32 AddRandomMapCard(void) {
+s32 AddRandomMapCard() {
     AddMapCard(GetRandom() % 270);
 }
 
@@ -1405,7 +1405,7 @@ u16 CountMapCardsOfKind(u16 a) {
     return sum;
 }
 
-u16 CountRegularMapCards(void) {
+u16 CountRegularMapCards() {
     u16 sum;
     s32 i;
 
@@ -1418,7 +1418,7 @@ u16 CountRegularMapCards(void) {
     return sum;
 }
 
-u16 CountZeroValueMapCards(void) {
+u16 CountZeroValueMapCards() {
     u16 sum;
     s32 i;
 
@@ -1435,7 +1435,7 @@ void CreateMapCardSelection(TaskPool* pool, u8* p) {
     TaskCreate(pool, &gTaskDescMapSelect, p);
 }
 
-void ClearMapCardInventory(void) {
+void ClearMapCardInventory() {
     u16 i;
 
     for (i = 0; i < 270; i++) {
@@ -1443,7 +1443,7 @@ void ClearMapCardInventory(void) {
     }
 }
 
-void InitMapCardInventory(void) {
+void InitMapCardInventory() {
     ClearMapCardInventory();
 
     if (gDebugFlags & DEBUG_FLAG_ALL_MAP_CARD) {
@@ -1469,11 +1469,11 @@ void InitMapCardInventory(void) {
     }
 }
 
-u8 IsMapCardDelivered(void) {
+u8 IsMapCardDelivered() {
     return gMapCardDelivered;
 }
 
-void SetMapCardDelivered(void) {
+void SetMapCardDelivered() {
     gMapCardDelivered = 1;
 }
 
@@ -1481,11 +1481,11 @@ void SetSelectedMapCard(void* a) {
     gSelectedMapCard = a;
 }
 
-void* GetSelectedMapCard(void) {
+void* GetSelectedMapCard() {
     return gSelectedMapCard;
 }
 
-void ResetSelectedMapCard(void) {
+void ResetSelectedMapCard() {
     gSelectedMapCard = 0;
     gMapCardDelivered = 0;
 }

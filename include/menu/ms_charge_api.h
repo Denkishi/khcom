@@ -13,20 +13,20 @@ typedef struct MsCard {
     u32 sortKey;
 } MsCard;
 
-MsCard* GetMsChargeSelectedCard(void);
-void MsChargeLoadGrid(void);
-void MsChargeLoadSelectedCard(void);
-void MsChargeDrawPoints(void);
-void MsChargeDrawCardCounts(void);
-void MsChargeDrawCategoryCounts(void);
-void MsChargeDrawValueCounts(void);
+MsCard* GetMsChargeSelectedCard();
+void MsChargeLoadGrid();
+void MsChargeLoadSelectedCard();
+void MsChargeDrawPoints();
+void MsChargeDrawCardCounts();
+void MsChargeDrawCategoryCounts();
+void MsChargeDrawValueCounts();
 void MsChargeDrawTab(s16 a);
-void MsChargeBuildCardList(void);
-void MsChargeHandleGridInput(void);
-void MsChargeHandleTabInput(void);
-void MsChargeHandleValueInput(void);
-void MsChargeHandleConfirmInput(void);
-void MsChargeHandleNoticeInput(void);
-void MsChargeDraw(void);
+void MsChargeBuildCardList();
+void MsChargeHandleGridInput();
+void MsChargeHandleTabInput();
+void MsChargeHandleValueInput();
+void MsChargeHandleConfirmInput();
+void MsChargeHandleNoticeInput();
+void MsChargeDraw();
 
 #endif

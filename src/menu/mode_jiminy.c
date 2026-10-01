@@ -1186,7 +1186,7 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #include "jiminy_placeholders.inc"
 JiminyWork* gJiminyWork;
 
-void JiminyFreeRows(void) {
+void JiminyFreeRows() {
     s32 i;
     s32 j;
 
@@ -1370,7 +1370,7 @@ void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s1
     }
 }
 
-void JiminyReloadRows(void) {
+void JiminyReloadRows() {
     s16 t;
 
     t = gJiminyWork->cursor - gJiminyWork->cursorRow;
@@ -1387,7 +1387,7 @@ void JiminyReloadRows(void) {
     }
 }
 
-void JiminyReloadPlainRows(void) {
+void JiminyReloadPlainRows() {
     s16 t;
 
     t = gJiminyWork->cursor - gJiminyWork->cursorRow;
@@ -1430,7 +1430,7 @@ void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s1
     gJiminyWork->frame = 0;
 }
 
-u8 JiminyHandleListInput(void) {
+u8 JiminyHandleListInput() {
     if (FadeIsActive()) {
         return 1;
     }
@@ -1501,7 +1501,7 @@ u8 JiminyHandleListInput(void) {
     return 0;
 }
 
-void mode_jiminy_0(void) {
+void mode_jiminy_0() {
     s32 i;
     s32 j;
     JiminyEntry* e;
@@ -1636,7 +1636,7 @@ void mode_jiminy_0(void) {
     }
 }
 
-void mode_jiminy_1(void) {
+void mode_jiminy_1() {
     s32 i;
     u16 c;
     u16 t;
@@ -2061,7 +2061,7 @@ void SplitThreeDecimalDigits(s16 a, u8* out) {
     out[2] = a % 10;
 }
 
-void JiminyDetailUpdate(void) {
+void JiminyDetailUpdate() {
     s32 count;
     JiminyDetail* entries;
     s16 i;
@@ -2646,7 +2646,7 @@ void JiminyDetailUpdate(void) {
     gJiminyWork->frame++;
 }
 
-void mode_jiminy_2(void) {
+void mode_jiminy_2() {
     FreeMsgGlyphSprites();
     ReleaseObjTiles(gJiminyWork->tiles);
     ReleaseObjPalette(gJiminyWork->palette);

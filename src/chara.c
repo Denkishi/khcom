@@ -36,7 +36,7 @@ u32 gDebugLogC[100] EWRAM_COMMON(16);
 u32 gVBlankTimerElapsed EWRAM_COMMON(4);
 s16 gSioCancelTimer EWRAM_COMMON(4);
 s16 gSioAutoConnectTimer EWRAM_COMMON(4);
-void (*gSioCancelCallback)(void) EWRAM_COMMON(4);
+void (*gSioCancelCallback)() EWRAM_COMMON(4);
 u32 gVBlankTimerBase EWRAM_COMMON(4);
 s16 gSioAutoConnectState EWRAM_COMMON(8);
 u32 gDebugLogSeq EWRAM_COMMON(4);
@@ -67,7 +67,7 @@ u16 gRandomPartnerDpad EWRAM_COMMON(4);
 #endif
 s8 gSioHandshakeAck EWRAM_COMMON(4);
 s8 gSioConnected EWRAM_COMMON(4);
-void (*gSioConnectCallback)(void) EWRAM_COMMON(4);
+void (*gSioConnectCallback)() EWRAM_COMMON(4);
 u16 gSioConnectId EWRAM_COMMON(4);
 u16 gSioRelayKeysA EWRAM_COMMON(4);
 u16 gUnk_0203C3B8 EWRAM_COMMON(4);
@@ -210,10 +210,10 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
     return 1;
 }
 
-void task_chara_mask_fade_2(void) {
+void task_chara_mask_fade_2() {
 }
 
-void task_chara_mask_fade_3(void) {
+void task_chara_mask_fade_3() {
 }
 
 void task_chgCardObj_0(ChgCardObjWork* work, ChgCardObjParam* param) {
@@ -320,13 +320,13 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
     return 1;
 }
 
-void task_chgCardObj_2(void) {
+void task_chgCardObj_2() {
 }
 
-void task_chgCardObj_3(void) {
+void task_chgCardObj_3() {
 }
 
-u8 SioConnectUpdate(void) {
+u8 SioConnectUpdate() {
     u32* p;
 
     p = &gSioStatus;
@@ -379,7 +379,7 @@ u8 SioConnectUpdate(void) {
     return gSioLinkResult;
 }
 
-u8 SioLinkUpdate(void) {
+u8 SioLinkUpdate() {
     u32* p;
 
     p = &gSioStatus;
@@ -414,7 +414,7 @@ u8 SioLinkUpdate(void) {
     return gSioLinkResult;
 }
 
-u8 SioConnectUpdateAuto(void) {
+u8 SioConnectUpdateAuto() {
     u32* p;
 
     p = &gSioStatus;
@@ -451,12 +451,12 @@ u8 SioConnectUpdateAuto(void) {
     return gSioLinkResult;
 }
 
-void FreeLinkDecks(void) {
+void FreeLinkDecks() {
     FreeLinkSendDeck();
     FreeLinkPartnerDeck();
 }
 
-void SioLinkClose(void) {
+void SioLinkClose() {
     if (gSystemFlags & SYSTEM_FLAG_LINK_ACTIVE) {
         SioShutdown();
         gSystemFlags &= ~SYSTEM_FLAG_LINK_ACTIVE;
@@ -472,7 +472,7 @@ void SioLinkClose(void) {
     }
 }
 
-void DebugLogClear(void) {
+void DebugLogClear() {
     s32 i;
 
     for (i = 0; i < 100; i++) {
@@ -500,24 +500,24 @@ void DebugLogAdd(u16 a, u16 b, u16 c, u16 d) {
     DebugLogNextSeq();
 }
 
-void DebugLogResetSeq(void) {
+void DebugLogResetSeq() {
     gDebugLogSeq = 0;
 }
 
-void DebugLogNextSeq(void) {
+void DebugLogNextSeq() {
     gDebugLogSeq = (gDebugLogSeq + 1) & 0xFF;
 }
 
-void VBlankTimerStart(void) {
+void VBlankTimerStart() {
     gVBlankTimerElapsed = 0;
     gVBlankTimerBase = gVBlankCounter;
 }
 
-void VBlankTimerUpdate(void) {
+void VBlankTimerUpdate() {
     gVBlankTimerElapsed = (gVBlankCounter - gVBlankTimerBase) & 0xFFFF;
 }
 
-u8 SioHasError(void) {
+u8 SioHasError() {
     if (gSioStatus & 0x7F0000) {
         return 1;
     }
@@ -525,14 +525,14 @@ u8 SioHasError(void) {
     return 0;
 }
 
-void SioAutoConnectStart(void) {
+void SioAutoConnectStart() {
     SioReset();
     SioConnectInit(SioAutoConnectOnConnect, 0, 0);
     gSioAutoConnectState = 0;
     gSioAutoConnectTimer = 0;
 }
 
-u8 SioAutoConnectUpdate(void) {
+u8 SioAutoConnectUpdate() {
     switch (gSioAutoConnectState) {
     case 0:
         SioConnectUpdateAuto();
@@ -569,11 +569,11 @@ u8 SioAutoConnectUpdate(void) {
     return 0;
 }
 
-void SioAutoConnectOnConnect(void) {
+void SioAutoConnectOnConnect() {
     gSioAutoConnectState = 1;
 }
 
-void SioConnectInit(void (*a)(void), void (*b)(void), u8 c) {
+void SioConnectInit(void (*a)(), void (*b)(), u8 c) {
 #ifdef VERSION_JP
     gSioConnectId = (c & 0xF) | 0xC0F0;
 #else
@@ -593,7 +593,7 @@ void SioConnectInit(void (*a)(void), void (*b)(void), u8 c) {
     gSioSendFrame[1] = 0xDDDD;
 }
 
-s32 SioConnectSend(void) {
+s32 SioConnectSend() {
     u16* param;
     u16* send;
     s32 i;
@@ -630,7 +630,7 @@ s32 SioConnectSend(void) {
     return 0;
 }
 
-s32 SioConnectRecv(void) {
+s32 SioConnectRecv() {
     u16 c;
     u16 v;
 
@@ -672,7 +672,7 @@ s32 SioConnectRecv(void) {
     return 0;
 }
 
-s32 SioConnectSendAuto(void) {
+s32 SioConnectSendAuto() {
     s32 i;
 
     if (gSioConnected == 0) {
@@ -690,7 +690,7 @@ s32 SioConnectSendAuto(void) {
     return 0;
 }
 
-s32 SioConnectRecvAuto(void) {
+s32 SioConnectRecvAuto() {
     if (gSioConnected == 0) {
         if (gSioConnectAccepted == 0) {
             if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
@@ -714,12 +714,12 @@ s32 SioConnectRecvAuto(void) {
     return 0;
 }
 
-void SioCommandReset(void) {
+void SioCommandReset() {
     SioCommandClearSend();
     SioCommandClearRecv();
 }
 
-void SioCommandClearSend(void) {
+void SioCommandClearSend() {
     s32 i;
 
     for (i = 0; i < 4; i++) {
@@ -727,7 +727,7 @@ void SioCommandClearSend(void) {
     }
 }
 
-void SioCommandClearRecv(void) {
+void SioCommandClearRecv() {
     s32 i;
     s32 j;
 
@@ -738,7 +738,7 @@ void SioCommandClearRecv(void) {
     }
 }
 
-s32 SioCommandSend(void) {
+s32 SioCommandSend() {
     gSioCommandSend[0] = 0xACD;
     gSioSendFrame[0] = gSioCommandSend[0];
     gSioSendFrame[1] = gSioCommandSend[1];
@@ -748,7 +748,7 @@ s32 SioCommandSend(void) {
     return 0;
 }
 
-s32 SioCommandRecv(void) {
+s32 SioCommandRecv() {
     if (gSioRecvFrame[0][0] == 0xACD) {
         gSioCommandRecv[0][0] = gSioRecvFrame[0][0];
         gSioCommandRecv[1][0] = gSioRecvFrame[1][0];
@@ -766,13 +766,13 @@ s32 SioCommandRecv(void) {
     return 0;
 }
 
-void SioSetLinkCallbacks(s32 (*a)(void), s32 (*b)(void)) {
+void SioSetLinkCallbacks(s32 (*a)(), s32 (*b)()) {
     s32 i;
     s32 j;
-    s32 (**pb)(void);
+    s32 (**pb)();
     u16* p1;
     u16* p2;
-    s32 (**pa)(void);
+    s32 (**pa)();
 
     gSioConnectRetries = 0;
     gSioErrorStatus = 0;
@@ -798,7 +798,7 @@ void SioSetLinkCallbacks(s32 (*a)(void), s32 (*b)(void)) {
     *p2 = 0;
 }
 
-s32 SioKeySyncSend(void) {
+s32 SioKeySyncSend() {
     if (gSioPlayerId == 0) {
         gSioSendFrame[0] = 0xACD;
         gSioSendFrame[1] = GetKeysHeld() & KEYS_MASK;
@@ -814,7 +814,7 @@ s32 SioKeySyncSend(void) {
     return 0;
 }
 
-s32 SioKeySyncRecv(void) {
+s32 SioKeySyncRecv() {
     if (gSioPlayerId == 0) {
         if (gSioRecvFrame[0][0] == 0xACD && gSioRecvFrame[0][1] == gSioRecvFrame[0][0]) {
             gSioRelayKeysA = gSioRecvFrame[1][0];
@@ -844,7 +844,7 @@ s32 SioKeySyncRecv(void) {
     return 0;
 }
 
-void SioPrepareDeckExchange(void) {
+void SioPrepareDeckExchange() {
     Deck* a;
     Deck* b;
 
@@ -863,7 +863,7 @@ void SioPrepareDeckExchange(void) {
     gSioExchangeRecvData = (u16*)gSioRecvDeck;
 }
 
-s32 SioExchangeSend(void) {
+s32 SioExchangeSend() {
     u16 n;
 
     if (gSioHandshakeDone == 0) {
@@ -897,7 +897,7 @@ s32 SioExchangeSend(void) {
     return 0;
 }
 
-s32 SioExchangeRecv(void) {
+s32 SioExchangeRecv() {
     u16 n;
 
     if (gSioHandshakeDone == 0) {
@@ -935,7 +935,7 @@ s32 SioExchangeRecv(void) {
 }
 
 #ifdef VERSION_EU
-void eu_080C24D8(void) {
+void eu_080C24D8() {
     s32 i;
     s16 count;
     count = 112;
@@ -946,7 +946,7 @@ void eu_080C24D8(void) {
 }
 #endif
 
-void SioPrepareCharaLinkExchange(void) {
+void SioPrepareCharaLinkExchange() {
     s32 i;
     CharaLinkData* send;
     u16* recv;
@@ -985,14 +985,14 @@ void SioPrepareCharaLinkExchange(void) {
     gSioExchangeRecvData = recv;
 }
 
-void SioSyncInit(void (*a)(void)) {
+void SioSyncInit(void (*a)()) {
     gSioHandshakeAck = 0;
     gSioHandshakeDone = 0;
     gSioHandshakeConfirm = 0;
     gSioConnectCallback = a;
 }
 
-s32 SioSyncSend(void) {
+s32 SioSyncSend() {
     if (gSioHandshakeDone == 0) {
         if (gSioHandshakeAck == 0) {
             gSioSendFrame[0] = 0xFEFE;
@@ -1006,7 +1006,7 @@ s32 SioSyncSend(void) {
     return 0;
 }
 
-s32 SioSyncRecv(void) {
+s32 SioSyncRecv() {
     if (gSioHandshakeDone == 0) {
         if (gSioHandshakeAck == 0) {
             if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
@@ -1030,11 +1030,11 @@ s32 SioSyncRecv(void) {
 }
 
 #ifdef VERSION_EU
-s32 eu_080C273C(void) {
+s32 eu_080C273C() {
     return 0;
 }
 
-s32 eu_080C2740(void) {
+s32 eu_080C2740() {
     u16 held;
     u16 keys;
     u16 r;
@@ -1127,7 +1127,7 @@ void CharaObjInitDefeat2(CharaObjParam2* param) {
     TaskPoolInit(&gCharaTaskPool, 2);
 }
 
-u8 CharaObjUpdateDefeat2(void) {
+u8 CharaObjUpdateDefeat2() {
     CharaPrizeArgs prize;
     MaskFadeArgs fade;
 
@@ -1306,7 +1306,7 @@ u8 CharaObjUpdateDefeat2(void) {
     return 1;
 }
 
-void CharaObjFree(void) {
+void CharaObjFree() {
     EwramFree(gCharaObj);
     TaskPoolDestroy(&gCharaTaskPool);
 }
@@ -1364,7 +1364,7 @@ void CharaObjSetBankFadeEnabled(u16 a, u8 b) {
     }
 }
 
-u8 CharaObjUpdateDefeat(void) {
+u8 CharaObjUpdateDefeat() {
     s32 i;
     CharaPrizeArgs prize;
     MaskFadeArgs fade0;

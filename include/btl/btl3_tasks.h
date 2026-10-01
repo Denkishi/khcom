@@ -14,7 +14,7 @@ struct BtlRaidWork;
 
 void task_btl_form_0(struct BtlFormWork* work, const struct BtlFormList* list);
 u8 task_btl_form_1(struct BtlFormWork* work);
-void task_btl_form_3(void);
+void task_btl_form_3();
 void task_btl_born_0(struct BtlBornWork* work, struct BtlBornArgs* args);
 u8 task_btl_born_1(struct BtlBornWork* work);
 void task_btl_raid_0(struct BtlRaidWork* work, struct BtlRaidArgs* args);

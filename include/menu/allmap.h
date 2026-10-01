@@ -133,14 +133,14 @@ typedef struct AllmapPushaWork {
 } AllmapPushaWork;
 
 void AllmapUpdateCamera(AllmapState* s);
-void AllmapHandleInput(void);
-void func_080D53F8(void);
+void AllmapHandleInput();
+void func_080D53F8();
 void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d);
 u8 func_080D3A70(u8 a, u8 b);
 u8 func_080D3AB8(u8 a, u8 b);
 s16 AllmapDrawRoomnameFrame(u16 a);
 s32 GetAllmapRoomnamePaletteOffset(u8 a);
-void AllmapClearRoomnameFrame(void);
+void AllmapClearRoomnameFrame();
 void AllmapBarStartClose(AllmapBarWork* work);
 void AllmapBarFadeOut(AllmapBarWork* work);
 u8 AllmapHasDoorInfo(AllmapCursorPos a);
@@ -148,7 +148,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work);
 void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work);
 void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work);
 void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work);
-u8 IsStockMesDispActive(void);
+u8 IsStockMesDispActive();
 s32 GetAllmapRoomAt(AllmapCursorPos a);
 void AllmapAddRoom(u8 a, u16 b, u16 c);
 
@@ -169,7 +169,7 @@ extern s16 gAllmapCameraY;
 extern s16 gAllmapCameraX;
 
 void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg);
-s32 task_allmap_room_1(void);
+s32 task_allmap_room_1();
 void task_allmap_room_2(AllmapRoomWork* work);
 void task_allmap_room_3(AllmapRoomWork* work);
 void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg);
@@ -177,7 +177,7 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work);
 void task_allmap_cursor_2(AllmapCursorWork* work);
 void task_allmap_cursor_3(AllmapCursorWork* work);
 void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg);
-s32 task_allmap_roomname_1(void);
+s32 task_allmap_roomname_1();
 void task_allmap_roomname_2(AllmapRoomnameWork* work);
 void task_allmap_roomname_3(AllmapRoomnameWork* work);
 void task_allmap_bar_0(AllmapBarWork* work);

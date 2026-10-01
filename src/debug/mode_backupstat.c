@@ -28,7 +28,7 @@ s8 gBackupStatCount;
 const BackupStatEntry* gBackupStatEntries;
 s16 gBackupStatStates[12];
 
-void mode_backupstat_0(void) {
+void mode_backupstat_0() {
     s32 i;
     s32 j;
 
@@ -83,7 +83,7 @@ void mode_backupstat_0(void) {
     }
 }
 
-void BackupStatApplyState(void) {
+void BackupStatApplyState() {
     u16 slot;
 
     slot = gBackupStatCursor % 2;
@@ -112,7 +112,7 @@ void BackupStatApplyState(void) {
     DebugTextPrint(120, gBackupStatCursor * 9, 2, sBackupStatStateNames[gBackupStatStates[gBackupStatCursor]]);
 }
 
-void mode_backupstat_1(void) {
+void mode_backupstat_1() {
     u8 prev;
 
     prev = gBackupStatCursor;
@@ -156,7 +156,7 @@ void mode_backupstat_1(void) {
     }
 }
 
-void mode_backupstat_2(void) {
+void mode_backupstat_2() {
     DebugTextDestroy();
 }
 

@@ -596,7 +596,7 @@ void task_bos_boogie_3(BoogieWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void BosBoogieRemoveOtherEnemies(void) {
+void BosBoogieRemoveOtherEnemies() {
     BtlObj* t;
 
     t = ListPoolFirst(&gBtlWork->pool);
@@ -611,7 +611,7 @@ void BosBoogieRemoveOtherEnemies(void) {
     }
 }
 
-void BosBoogieApplyGimmick(void) {
+void BosBoogieApplyGimmick() {
     BosBoogieRemoveOtherEnemies();
     gBosBoogieGimmickCardDropped = 0;
 
@@ -621,7 +621,7 @@ void BosBoogieApplyGimmick(void) {
     }
 }
 
-u32 GetBoogieDiceState(void) {
+u32 GetBoogieDiceState() {
     if (IsTaskActive(gBoogieWork->dice) != 0) {
         return ((BoogieDiceWork*)gBoogieWork->dice->work)->state;
     }

@@ -300,19 +300,19 @@ void task_btl_map_0(BtlMapWork* work) {
                 gBtlWork->viewY + 0x2800);
 }
 
-void BtlMapResetShake(void) {
+void BtlMapResetShake() {
     gBtlMapShakeActive = 0;
     gBtlMapShakeStep = 0;
     gBtlMapShakeOffset = 0;
 }
 
-void BtlMapStartShake(void) {
+void BtlMapStartShake() {
     gBtlMapShakeActive = 1;
     gBtlMapShakeStep = 0;
     gBtlMapShakeOffset = 0;
 }
 
-void BtlMapUpdateShake(void) {
+void BtlMapUpdateShake() {
     if (gBtlMapShakeActive != 0) {
         gBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)gBtlMapShakeStep] << 12) - gBtlMapShakeOffset) >> 3;
         gBtlMapShakeStep++;
@@ -325,7 +325,7 @@ void BtlMapUpdateShake(void) {
     }
 }
 
-s32 BtlMapGetShake(void) {
+s32 BtlMapGetShake() {
     return gBtlMapShakeOffset;
 }
 

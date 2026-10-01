@@ -48,9 +48,9 @@ void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w);
 void FreeRikuCollectionEntries(RikuDeckMenuWork* w);
 void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind);
 void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode);
-u16 CountCollectionCards(void);
-u16 CountCardsInDecks(void);
-u8 GetActiveDeckIndex(void);
+u16 CountCollectionCards();
+u16 CountCardsInDecks();
+u8 GetActiveDeckIndex();
 
 #ifdef VERSION_EU
 static const u16 sRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };
@@ -809,7 +809,7 @@ void DrawRikuDeckCardCount(u8 deck) {
 #endif
 }
 
-void DrawRikuCardTotals(void) {
+void DrawRikuCardTotals() {
     u8 d[3];
     u8 e[3];
     u16 a;

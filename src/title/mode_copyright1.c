@@ -90,7 +90,7 @@ void mode_copyright1_0(s32 arg) {
     gCopyright1Timer = 60;
 }
 
-void mode_copyright1_1(void) {
+void mode_copyright1_1() {
     if (gCopyrightSaveCorrupted != 0) {
         ModeRequest(&gModeMenuMsg, 0);
     } else if (!FadeIsActive()) {
@@ -110,7 +110,7 @@ void mode_copyright1_1(void) {
     }
 }
 
-void mode_copyright1_2(void) {
+void mode_copyright1_2() {
 }
 
 Mode gModeCopyright1 = {

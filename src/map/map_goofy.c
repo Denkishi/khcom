@@ -571,7 +571,7 @@ void Task_MapMickey_3(MapMickeyWork* w) {
     TaskPoolDestroy(&w->tasks2);
 }
 
-void MapTutorialStartBattle(void) {
+void MapTutorialStartBattle() {
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     gMapRoomState->battleId = 10;
     gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
@@ -1053,7 +1053,7 @@ void Task_MapDmg_3(MapDmgWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void* GetFloorName(void) {
+void* GetFloorName() {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return eu_0805E924(gBasementFloorNames[(s8)gGameState.floor]);

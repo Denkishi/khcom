@@ -8,9 +8,9 @@ typedef struct BackupStatEntry {
     s32 unk_04;
 } BackupStatEntry;
 
-void mode_backupstat_0(void);
-void mode_backupstat_1(void);
-void mode_backupstat_2(void);
-void BackupStatApplyState(void);
+void mode_backupstat_0();
+void mode_backupstat_1();
+void mode_backupstat_2();
+void BackupStatApplyState();
 
 #endif /* GUARD_MODE_BACKUPSTAT_H */

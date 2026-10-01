@@ -42,7 +42,15 @@ btl.c
 btl_sora.c
 btl_riku.c
 btl_map.c
-btl2.c
+btl_shadow.c
+btl_hpply.c
+btl_hpenm.c
+btl_pause.c
+btl_pop.c
+btl_escape.c
+btl_prize.c
+btl_premire.c
+btl_start.c
 fld_sora.c
 fld_riku.c
 fld_shadow.c

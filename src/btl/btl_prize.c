@@ -1,0 +1,360 @@
+#include "m4a_song.h"
+#include "btl2.h"
+#include "sprites_btl.h"
+#include "songs.h"
+#include <stdlib.h>
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "engine_math.h"
+#include "game_state.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "player_progression_types.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
+
+void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
+    u8 angle;
+    s32 spd;
+
+    work->x = src->x;
+    work->y = src->y;
+    work->z = src->z;
+    work->groundZ = 0;
+
+    if (gBtlWork->boundsCallback != NULL) {
+        gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
+    }
+
+    work->vz = -(GetRandom() % 897 + 768);
+    angle = GetRandom();
+
+    work->tiles = LoadObjTiles(gBPuraizuTiles, 0x340);
+    work->palette = LoadObjPalette(gBStatesPalette, 0x20);
+    work->timer = 0;
+    work->gfx2 = gBPuraizuFrame0;
+    work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW);
+
+    if (src->noTimeout != 0) {
+        work->flags = (BTL_PRIZE_FLAG_SPRITE_VISIBLE | BTL_PRIZE_FLAG_DRAW_SHADOW | BTL_PRIZE_FLAG_NO_TIMEOUT);
+    }
+
+    switch (src->kind) {
+    case 0:
+        work->gfx = gBPuraizuFrame1;
+        work->healAmount = 0;
+        work->exp = 1400;
+        work->bounceSpeed = 1280;
+        spd = 384;
+        break;
+    case 1:
+        work->gfx = gBPuraizuFrame2;
+        work->healAmount = 3;
+        work->exp = 0;
+        work->bounceSpeed = 0x300;
+        spd = 76;
+        break;
+    case 2:
+        work->gfx = gBPuraizuFrame3;
+        work->healAmount = 10;
+        work->exp = 0;
+        work->bounceSpeed = 0x300;
+        spd = 76;
+        break;
+    case 3:
+        work->gfx = gBPuraizuFrame4;
+        work->healAmount = 0;
+        work->exp = 1;
+        work->bounceSpeed = 0x400;
+        spd = 128;
+        break;
+    case 4:
+        work->gfx = gBPuraizuFrame5;
+        work->healAmount = 0;
+        work->exp = 10;
+        work->bounceSpeed = 0x400;
+        spd = 128;
+        break;
+    case 5:
+        work->gfx = gBPuraizuFrame6;
+        work->healAmount = 0;
+        work->exp = 60;
+        work->bounceSpeed = 0x400;
+        spd = 128;
+        break;
+    case 6:
+        work->gfx = gBPuraizuFrame7;
+        work->healAmount = 0;
+        work->exp = 5;
+        work->bounceSpeed = 0x400;
+        spd = 179;
+        break;
+    case 7:
+        work->gfx = gBPuraizuFrame8;
+        work->healAmount = 0;
+        work->exp = 30;
+        work->bounceSpeed = 0x400;
+        spd = 179;
+        break;
+    case 8:
+    default:
+        work->gfx = gBPuraizuFrame9;
+        work->healAmount = 0;
+        work->exp = 199;
+        work->bounceSpeed = 0x400;
+        spd = 179;
+        break;
+    }
+
+    work->collected = 0;
+    work->orbitRadius = 0x100;
+    gBtlWork->prizeCount++;
+    work->vx = (gSineTable[angle] * spd) >> 8;
+    work->vy = (-gSineTable[angle + 64] * spd) >> 8;
+
+    if (abs(work->vx) <= 50) {
+        if (work->vx < 0) {
+            work->vx = -(GetRandom() % 78 + 51);
+        } else {
+            work->vx = GetRandom() % 78 + 51;
+        }
+    }
+
+    work->actor = gBtlWork->actor;
+}
+
+#define DIST(a, b) ((a) - (b) >= 0 ? (a) - (b) : (b) - (a))
+s32 task_btl_prize_1(BtlPrizeWork* work) {
+    s32 hit;
+    s32 near;
+    s32 range;
+    s32 d1;
+    s32 d2;
+    s32 vz;
+    s32 tx;
+    s32 ty;
+    s32 tz;
+    u64 f;
+    u64 bit;
+
+    if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
+        return 0;
+    }
+
+    if (work->collected == 0) {
+        if (!(work->flags & BTL_PRIZE_FLAG_NO_MOVE)) {
+            if (gBtlWork->boundsCallback != NULL) {
+                gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);
+            }
+
+            work->z += work->vz;
+            vz = work->vz - 15;
+            work->vz = vz + gBtlWork->gravity;
+
+            switch (ClampBattlePosition(&work->x, &work->y, 0, 0)) {
+            case 1:
+            case 2:
+                work->vx = -work->vx;
+                break;
+            case 3:
+            case 4:
+                work->vy = -work->vy;
+                break;
+            }
+
+            work->x += work->vx;
+            work->y += work->vy;
+
+            if (work->z > work->groundZ) {
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
+                work->z = work->groundZ;
+                work->vz = -((work->bounceSpeed >> 1) + GetRandom() % (work->bounceSpeed - (work->bounceSpeed >> 1) + 1));
+            } else {
+                work->flags |= BTL_PRIZE_FLAG_DRAW_SHADOW;
+            }
+        }
+
+        if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
+            hit = 0;
+            f = gBtlWork->flags;
+
+            if (f & BTL_FLAG_VS_BATTLE) {
+                d1 = DIST(work->x, gBtlWork->actor->x);
+                d2 = DIST(work->x, gRikuBtlWork->actor->x);
+
+                if (d1 == d2) {
+                    bit = f & BTL_FLAG_VS_LINK_PARENT;
+                    near = bit != 0;
+                } else {
+                    near = 1;
+
+                    if (d1 < d2) {
+                        near = 0;
+                    }
+                }
+
+                if (near) {
+                    if (gRikuBtlWork->hcEffect == 6) {
+                        range = 0x10000;
+                    } else {
+                        range = 0x2800;
+                    }
+
+                    if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                        DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                        DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                        work->actor = gRikuBtlWork->actor;
+                        hit = 1;
+                    } else {
+                        if (gBtlWork->hcEffect == 6) {
+                            range = 0x10000;
+                        } else {
+                            range = 0x2800;
+                        }
+
+                        if (DIST(gBtlWork->actor->x, work->x) < range &&
+                            DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
+                            DIST(gBtlWork->actor->z, work->z) < 12800) {
+                            hit = 1;
+                        }
+                    }
+                } else {
+                    if (gBtlWork->hcEffect == 6) {
+                        range = 0x10000;
+                    } else {
+                        range = 0x2800;
+                    }
+
+                    if (DIST(gBtlWork->actor->x, work->x) < range &&
+                        DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
+                        DIST(gBtlWork->actor->z, work->z) < 12800) {
+                        hit = 1;
+                    } else {
+                        if (gRikuBtlWork->hcEffect == 6) {
+                            range = 0x10000;
+                        } else {
+                            range = 0x2800;
+                        }
+
+                        if (DIST(gRikuBtlWork->actor->x, work->x) < range &&
+                            DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
+                            DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
+                            work->actor = gRikuBtlWork->actor;
+                            hit = 1;
+                        }
+                    }
+                }
+            } else {
+                if (gBtlWork->hcEffect == 6) {
+                    range = 0x10000;
+                } else {
+                    range = 0x2800;
+                }
+
+                if (DIST(gBtlWork->actor->x, work->x) < range &&
+                    DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
+                    DIST(gBtlWork->actor->z, work->z) < 12800) {
+                    hit = 1;
+                }
+            }
+
+            if (hit) {
+                m4aSongNumStart(SONG_SYS_POWER_GET);
+
+                if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
+                    work->actor->hp += work->healAmount;
+
+                    if (work->actor->hp > work->actor->maxHp) {
+                        work->actor->hp = work->actor->maxHp;
+                    }
+                } else {
+                    work->actor->hp += work->healAmount;
+
+                    if (work->actor->hp > work->actor->maxHp) {
+                        work->actor->hp = work->actor->maxHp;
+                    }
+
+                    gGameState.progression.exp += work->exp;
+                }
+
+                work->collected = 1;
+                work->timer = 0;
+                work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
+                work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;
+                work->flags |= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
+                work->spinSpeed = GetRandom() % 6 + 5;
+                return 1;
+            }
+
+            if (!(work->flags & BTL_PRIZE_FLAG_NO_TIMEOUT)) {
+                if (work->timer > 360 && (work->timer & 3) == 0) {
+                    work->flags ^= BTL_PRIZE_FLAG_SPRITE_VISIBLE;
+                }
+
+                if (work->timer > 420) {
+                    return 0;
+                }
+            }
+        } else {
+            if (work->timer > 10) {
+                work->flags |= BTL_PRIZE_FLAG_CAN_COLLECT;
+            }
+        }
+
+        work->timer++;
+    } else {
+        tx = work->actor->x + ((gSineTable[work->angle] * (work->orbitRadius << 5)) >> 8);
+        ty = work->actor->y + ((-gSineTable[work->angle + 64] * (work->orbitRadius << 4)) >> 8);
+        tz = work->actor->z - ((work->timer >> 1) << 8);
+        work->angle += work->spinSpeed;
+        work->x += (tx - work->x) >> 2;
+        work->y += (ty - work->y) >> 2;
+        work->z += (tz - work->z) >> 2;
+        work->orbitRadius -= 2;
+
+        if (work->timer > 60) {
+            return 0;
+        }
+
+        work->timer++;
+    }
+
+    return 1;
+}
+
+void task_btl_prize_2(BtlPrizeWork* work) {
+    s16 x;
+    s16 y;
+    ObjAffine* aff;
+
+    if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
+        s32 pri = 0x800;
+
+        WorldToScreen(&x, &y, work->x, work->y, work->z);
+        aff = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, pri,
+                   -4100 - (work->y >> 8) * 4);
+
+        if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
+            WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
+            DrawSprite(x, y, work->gfx2, work->tiles, work->palette, aff, pri, 0xFFFF);
+        }
+    }
+}
+
+void task_btl_prize_3(BtlPrizeWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    gBtlWork->prizeCount--;
+}
+
+TaskDesc gTaskDescBtlPrize = {
+    "task_btl_prize",
+    (TaskInitFunc)task_btl_prize_0,
+    (TaskUpdateFunc)task_btl_prize_1,
+    (TaskDrawFunc)task_btl_prize_2,
+    (TaskDestroyFunc)task_btl_prize_3,
+    sizeof(BtlPrizeWork),
+};

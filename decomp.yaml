@@ -73,6 +73,7 @@ tools:
             - src/sprite
             - src/engine
             - src/random
+            - src/bg_anim
             - src/sio
             - src/pallet
             - src/util

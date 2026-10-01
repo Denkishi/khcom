@@ -7,6 +7,7 @@ key.c
 sprite.c
 engine.c
 random.c
+bg_anim.c
 sio.c
 pallet.c
 util.c

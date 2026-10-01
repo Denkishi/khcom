@@ -314,7 +314,7 @@ void Task_MapDmg_0(MapDmgWork* w);
 s32 Task_MapDmg_1(MapDmgWork* w);
 void Task_MapDmg_2(MapDmgWork* w);
 void Task_MapDmg_3(MapDmgWork* w);
-void* GetFloorName();
+const void* GetFloorName();
 void Task_MapFloor_0(MapFloorWork* w);
 s32 Task_MapFloor_1(MapFloorWork* w);
 void Task_MapFloor_2(MapFloorWork* w);

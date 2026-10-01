@@ -179,7 +179,7 @@ void DrawRikuCardDescription(RikuDeckMenuWork* w) {
 }
 
 void LoadRikuCardDescriptionText(RikuDeckMenuWork* w, u16 card) {
-    CardDef* d;
+    const CardDef* d;
     void* s;
 
     d = &gCardDefs[card];

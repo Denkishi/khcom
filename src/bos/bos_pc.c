@@ -5125,11 +5125,11 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-PcAnimStep* BosPcGetAnimStep(PcWork* work) {
+const PcAnimStep* BosPcGetAnimStep(PcWork* work) {
     return work->animSteps != NULL ? &work->animSteps[work->animFrame] : gBosPcIdleAnim;
 }
 
-PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
+const PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
     const PcAnimStep* step;
 
     if (work->animSteps == NULL) {
@@ -5496,8 +5496,8 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
 }
 
 void BosPcPlaceBodies(PcWork* work) {
-    PcSpriteCmd* step;
-    PcAnimStep* anim;
+    const PcSpriteCmd* step;
+    const PcAnimStep* anim;
     BtlObj* p;
     BtlObj* q;
     s16 x;
@@ -5568,8 +5568,8 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
 
 u8 BosPcUpdateAttack(PcWork* work, Task* task) {
     BtlObj* p;
-    PcAnimStep* anim;
-    PcSpriteCmd* steps;
+    const PcAnimStep* anim;
+    const PcSpriteCmd* steps;
     s32 x;
     s32 y;
     s32 sel;

@@ -2037,7 +2037,7 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* w, s16 x, s16 y, u16 dir) {
 }
 
 void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* w, u16 index) {
-    CardDef* d;
+    const CardDef* d;
 
     d = &gCardDefs[index];
     w->textSlotCount5 = LoadTextSlots((void*)gCardKindDescriptions[d->kind], w->textSlots5);

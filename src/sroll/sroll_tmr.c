@@ -1208,7 +1208,7 @@ void ScanlineDmaPrime16Bit() {
     *sDmaStream.dst = *(u16*)sDmaStream.src[sDmaStream.srcIdx];
 }
 
-void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt) {
+void ScanlineDmaInit(vu16* dst, void* src, u32 cnt) {
     ScanlineDmaReset();
     sDmaStream.src[0] = src;
     sDmaStream.src[1] = src;
@@ -1232,7 +1232,7 @@ void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt) {
     sDmaStream.cnt = cnt;
 }
 
-void ScanlineDmaQueueBuffer(u8* src) {
+void ScanlineDmaQueueBuffer(void* src) {
     sDmaStream.src[sDmaStream.srcIdx ^ 1] = src;
     sDmaStream.swapPending = 1;
 }

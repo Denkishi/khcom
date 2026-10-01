@@ -598,7 +598,7 @@ static const CardHelpDef sUnk_0903BFB4 = {
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-CardHelpText* gUnk_09EE79EC[] = {
+const CardHelpText* gUnk_09EE79EC[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090381F8,
     gCardHelpTextUs_09038260,
@@ -609,7 +609,7 @@ CardHelpText* gUnk_09EE79EC[] = {
 };
 #endif
 
-CardHelpText* gUnk_09EE79F4[] = {
+const CardHelpText* gUnk_09EE79F4[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090382DC,
     gCardHelpTextUs_0903835A,
@@ -625,7 +625,7 @@ CardHelpText* gUnk_09EE79F4[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-CardHelpText* gUnk_09EE7A00[] = {
+const CardHelpText* gUnk_09EE7A00[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038440,
     gCardHelpTextUs_0903848E,
@@ -636,7 +636,7 @@ CardHelpText* gUnk_09EE7A00[] = {
 };
 #endif
 
-CardHelpText* gUnk_09EE7A08[] = {
+const CardHelpText* gUnk_09EE7A08[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090384DC,
     gCardHelpTextUs_0903857A,
@@ -650,7 +650,7 @@ CardHelpText* gUnk_09EE7A08[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-CardHelpText* gUnk_09EE7A10[] = {
+const CardHelpText* gUnk_09EE7A10[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090385CC,
     gCardHelpTextUs_09038646,
@@ -660,7 +660,7 @@ CardHelpText* gUnk_09EE7A10[] = {
 #endif
 };
 
-CardHelpText* gUnk_09EE7A18[] = {
+const CardHelpText* gUnk_09EE7A18[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038694,
     gCardHelpTextUs_090386F0,
@@ -670,7 +670,7 @@ CardHelpText* gUnk_09EE7A18[] = {
 #endif
 };
 
-CardHelpText* gUnk_09EE7A20[] = {
+const CardHelpText* gUnk_09EE7A20[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038736,
     gCardHelpTextUs_090387A4,
@@ -680,7 +680,7 @@ CardHelpText* gUnk_09EE7A20[] = {
 #endif
 };
 
-CardHelpText* gUnk_09EE7A28[] = {
+const CardHelpText* gUnk_09EE7A28[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903881C,
     gCardHelpTextUs_0903887A,
@@ -690,7 +690,7 @@ CardHelpText* gUnk_09EE7A28[] = {
 #endif
 };
 
-CardHelpText* gUnk_09EE7A30[] = {
+const CardHelpText* gUnk_09EE7A30[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090388F2,
     gCardHelpTextUs_0903897C,
@@ -701,7 +701,7 @@ CardHelpText* gUnk_09EE7A30[] = {
 };
 #endif
 
-CardHelpText* gUnk_09EE7A38[] = {
+const CardHelpText* gUnk_09EE7A38[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090389D2,
     gCardHelpTextUs_09038A32,
@@ -1429,37 +1429,37 @@ const CardHelpText* gUnk_09EE7AA0[] = {
     gCardHelpTextJp_0900BD08,
 };
 
-CardHelpText* gUnk_09EE79EC[] = {
+const CardHelpText* gUnk_09EE79EC[] = {
     gCardHelpTextJp_0900B684,
     gCardHelpTextJp_0900B6B0,
 };
 
-CardHelpText* gUnk_09EE7A00[] = {
+const CardHelpText* gUnk_09EE7A00[] = {
     gCardHelpTextJp_0900B76C,
     gCardHelpTextJp_0900B78C,
 };
 
-CardHelpText* gUnk_09EE7A10[] = {
+const CardHelpText* gUnk_09EE7A10[] = {
     gCardHelpTextJp_0900B81C,
     gCardHelpTextJp_0900B83C,
 };
 
-CardHelpText* gUnk_09EE7A18[] = {
+const CardHelpText* gUnk_09EE7A18[] = {
     gCardHelpTextJp_0900B864,
     gCardHelpTextJp_0900B8A0,
 };
 
-CardHelpText* gUnk_09EE7A20[] = {
+const CardHelpText* gUnk_09EE7A20[] = {
     gCardHelpTextJp_0900B8C8,
     gCardHelpTextJp_0900B8F0,
 };
 
-CardHelpText* gUnk_09EE7A28[] = {
+const CardHelpText* gUnk_09EE7A28[] = {
     gCardHelpTextJp_0900B928,
     gCardHelpTextJp_0900B950,
 };
 
-CardHelpText* gUnk_09EE7A30[] = {
+const CardHelpText* gUnk_09EE7A30[] = {
     gCardHelpTextJp_0900B988,
     gCardHelpTextJp_0900B9C4,
 };

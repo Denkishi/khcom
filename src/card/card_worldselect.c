@@ -1489,7 +1489,7 @@ void ResetSelectedMapCard() {
     gMapCardDelivered = 0;
 }
 
-void* GetRoomName(u16 a) {
+const void* GetRoomName(u16 a) {
 #ifdef VERSION_EU
     return eu_0805E924(gRoomNames[a]);
 #else

@@ -1433,7 +1433,7 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 a) {
     return sMsgGlyphSprites->palette->index;
 }
 
-s32 GetMsgTextWidth(TextChar* a) {
+s32 GetMsgTextWidth(const TextChar* a) {
     u16 sum;
     s32 v;
 
@@ -1641,7 +1641,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
     return sTextEntryCount;
 }
 
-u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s) {
+u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -1767,7 +1767,7 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s) {
 }
 
 #ifndef VERSION_EU
-u8 LayoutMsgGlyphsSjis(s32 x, s32 y, u8* s) {
+u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
     u16 w;
     u8 t;
     s32 cx;
@@ -2205,16 +2205,16 @@ s16 eu_0806629C(TextSlot* p, u8 n) {
 #define MSG_CHAR(p) (*(p))
 #endif
 
-s32 GetTextLength(u16* s) {
+s32 GetTextLength(const void* s) {
 #ifdef VERSION_JP
-    u16* p = s;
+    const u16* p = s;
     u16 n = 0;
 #elif defined(VERSION_EU)
     u16 n = 0;
-    u8* p = (u8*)s;
+    const u8* p = s;
 #else
     u16 n = 0;
-    u16* p = s;
+    const u16* p = s;
 #endif
 
     while (MSG_CHAR(p) != 0) {
@@ -2225,7 +2225,7 @@ s32 GetTextLength(u16* s) {
     return n;
 }
 
-u16 LoadTextSlots(u16* a, TextSlot* b) {
+u16 LoadTextSlots(const void* a, TextSlot* b) {
 #ifdef VERSION_JP
     return LoadJapaneseTextSlots(a, b);
 #else
@@ -2233,7 +2233,7 @@ u16 LoadTextSlots(u16* a, TextSlot* b) {
 #endif
 }
 
-s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
+s32 LoadLatinTextSlots(const u16* a, TextSlot* b) {
     s32 n;
 
     n = 0;
@@ -2351,7 +2351,7 @@ s32 LoadLatinTextSlots(u16* a, TextSlot* b) {
 }
 
 #ifndef VERSION_EU
-s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
+s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -2932,7 +2932,7 @@ void FreeSmallFontResources(void* a, void* b) {
     ReleaseObjPalette(b);
 }
 
-u16 EncodeSmallFontString(u8* s, u16* out) {
+u16 EncodeSmallFontString(const u8* s, u16* out) {
     u16 g = 0;
     u8 n;
     u8 i;

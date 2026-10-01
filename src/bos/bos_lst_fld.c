@@ -669,11 +669,11 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
         switch (work->nextBgMode) {
         case 0:
             LoadBgMap(0, gUnk_09D4B274, 0x800);
-            ScanlineDmaInit(REG_ADDR_BG0HOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
+            ScanlineDmaInit(&REG_BG0HOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case 1:
             LoadBgMap(0, gUnk_09D4BA74, 0x800);
-            ScanlineDmaInit(REG_ADDR_BG0HOFS, work->hofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
+            ScanlineDmaInit(&REG_BG0HOFS, work->hofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case 2:
             work->scrollX = -(work->nextScrollDir * 120);
@@ -684,12 +684,12 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
                 LoadBgMap(0, gUnk_09D4CA74, 0x800);
             }
 
-            ScanlineDmaInit(REG_ADDR_BG0VOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
+            ScanlineDmaInit(&REG_BG0VOFS, work->scanlineBuf[work->frameCount & 1], ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         case 3:
             work->scrollSpeed = 0;
             LoadBgMap(0, gUnk_09D4C274, 0x800);
-            ScanlineDmaInit(REG_ADDR_BG0VOFS, work->vofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
+            ScanlineDmaInit(&REG_BG0VOFS, work->vofsTable, ((DMA_ENABLE | DMA_REPEAT | DMA_START_HBLANK | DMA_DEST_RELOAD) << 16) | 0x1);
             break;
         default:
             LoadBgMap(0, gUnk_09D4D274, 0x800);
@@ -699,7 +699,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
 
     if (work->fadeStep <= 63) {
         BosLstFldDarkenPalette(work->paletteBuf, gUnk_09D694F4, 80, sBosLstFldFadeLevels[work->fadeStep]);
-        LoadPalette(work->paletteBuf, BG_PLTT + 5 * PLTT_SIZE_4BPP, 160);
+        LoadPalette(work->paletteBuf, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 160);
         work->fadeStep++;
     }
 

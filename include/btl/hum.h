@@ -508,12 +508,12 @@ void RikuSaveAfterimage(RikuWork* work, RikuSpawn* dst);
 void BgFxStartAnsemWave(s32 x, s32 y, s32 z, u8 f, s32 w);
 void LexceusHover(HumWork* work, s32 a);
 s32 __modsi3(s32 a, s32 b);
-u16 GetJiminyTextLength(u16* p);
-void JiminyLoadHiddenRow(s32 a, u16** b);
+u16 GetJiminyTextLength(const u16* p);
+void JiminyLoadHiddenRow(s32 a, const u16** b);
 void JiminyInitCursor(s16 a, s16 b, s16 c);
 void JiminyReloadRows();
 void JiminyUpdateCursor(s16 a, s16 b, s16 c);
-void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h);
+void JiminyLoadRows(s16 a, s16 b, const u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h);
 
 s32 GetJiminyEntryState(s32 idx);
 

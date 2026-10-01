@@ -4,7 +4,7 @@
 #include "types.h"
 
 typedef void* (*MovieAllocFunc)(u32);
-typedef void (*MovieFreeFunc)(void*);
+typedef void (*MovieFreeFunc)(const void*);
 
 typedef struct MovieHeap {
     MovieAllocFunc iwramAlloc;

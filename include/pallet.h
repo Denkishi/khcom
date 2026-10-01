@@ -16,9 +16,9 @@ typedef struct PaletteWave {
 
 extern PaletteWave gBgWaves[];
 
-u16* FadePaletteToGray(u16* src, u16* dst, u16 size, u16 amount);
+u16* FadePaletteToGray(const u16* src, u16* dst, u16 size, u16 amount);
 u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount);
-u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount);
+u16* BrightenPalette(const u16* src, u16* dst, u16 size, u16 amount);
 u16* LoadPaletteBuffered(const void* src, u16* dst, u16 size);
 u16* GetPaletteBufferBank(u8 bank);
 void ResetPaletteEffect();

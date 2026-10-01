@@ -36,8 +36,8 @@
 #include "types.h"
 #include <stddef.h>
 
-extern MapNameText* gFloorNames[13];
-extern MapNameText* gBasementFloorNames[12];
+extern const MapNameText* gFloorNames[13];
+extern const MapNameText* gBasementFloorNames[12];
 
 void MapGoofyCheckTalk(MapGoofyWork* w) {
     if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
@@ -1053,7 +1053,7 @@ void Task_MapDmg_3(MapDmgWork* w) {
     ReleaseObjPalette(w->palette);
 }
 
-void* GetFloorName() {
+const void* GetFloorName() {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return eu_0805E924(gBasementFloorNames[gGameState.floor]);
@@ -1192,7 +1192,7 @@ TaskDesc gTaskDescMapDmg = {
     sizeof(MapDmgWork),
 };
 
-MapNameText* gFloorNames[13] = {
+const MapNameText* gFloorNames[13] = {
 #if defined(VERSION_US)
     gMapNameTextUs_0815B5F6,
     gMapNameTextUs_0815B630,
@@ -1238,7 +1238,7 @@ MapNameText* gFloorNames[13] = {
 #endif
 };
 
-MapNameText* gBasementFloorNames[12] = {
+const MapNameText* gBasementFloorNames[12] = {
 #if defined(VERSION_US)
     gMapNameTextUs_0815B906,
     gMapNameTextUs_0815B948,

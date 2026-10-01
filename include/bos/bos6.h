@@ -492,7 +492,7 @@ void task_bos_pc_fld_2(PcFldWork* work);
 
 extern u8 gUnk_09C489E4[];
 
-PcAnimStep* BosPcGetAnimStep(PcWork* work);
+const PcAnimStep* BosPcGetAnimStep(PcWork* work);
 void BosPcUpdatePaletteCycle(PcWork* work);
 u8 BosPcUpdateAttack(PcWork* work, Task* task);
 u8 task_bos_pc_1(PcWork* work, Task* task);
@@ -537,7 +537,7 @@ u8 BosLstUpdateDefeat(BosLstWork* work);
 extern EventState* gEventState;
 void task_bos_pc_acd_2(PcAcdWork* work);
 
-PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work);
+const PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work);
 
 void BosPcPlaceBodies(PcWork* work);
 void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg);

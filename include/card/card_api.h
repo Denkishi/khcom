@@ -58,7 +58,7 @@ s32 AddMapCard(u16 a);
 u16 CountRegularMapCards();
 void InitMapCardInventory();
 void ResetSelectedMapCard();
-void* GetRoomName(u16 a);
+const void* GetRoomName(u16 a);
 void CreatePrizeCardTask(struct TaskPool* pool, struct BtlPrizeSrc* src);
 void CreateBossPrizeCardTask(void* a, void* b);
 void DrawLayeredCardSprite(struct LayeredCardSprite* p, u16 a);

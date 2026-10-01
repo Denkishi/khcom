@@ -35,8 +35,8 @@ static u16 sUnk_02034940;
 static volatile s16 sMovieFrame;
 static volatile s16 sMovieSubIndex;
 static volatile u16 sMovieSubCount;
-static MovieSub* volatile sMovieSubUpper;
-static MovieSub* volatile sMovieSubLower;
+static const MovieSub* volatile sMovieSubUpper;
+static const MovieSub* volatile sMovieSubLower;
 static const MovieSub* sMovieSubs;
 static volatile s16 sMovieSubUpperTimer;
 static volatile u16 sMovieSubUpperLength;
@@ -393,7 +393,7 @@ s32 HandleMovieFrame(s32 arg) {
         for (i = 0; i < 2; i++) {
             if (sMovieSubs[sMovieSubIndex].frame == sMovieFrame) {
                 if (sMovieSubs[sMovieSubIndex].line == 0) {
-                    MovieSub* e;
+                    const MovieSub* e;
 
                     sMovieSubUpper = e = &sMovieSubs[sMovieSubIndex];
                     sMovieFlags |= MOVIE_FLAG_UPPER_SUB_PENDING;
@@ -409,7 +409,7 @@ s32 HandleMovieFrame(s32 arg) {
                         sMovieSubUpperLength = MOVIE_SUB_MAX_CHARS;
                     }
                 } else {
-                    MovieSub* e;
+                    const MovieSub* e;
 
                     sMovieSubLower = e = &sMovieSubs[sMovieSubIndex];
                     sMovieFlags |= MOVIE_FLAG_LOWER_SUB_PENDING;
@@ -520,7 +520,7 @@ void MovieVBlankIntr() {
                     u16 tile;
                     u16 palette;
 #ifdef VERSION_JP
-                    MovieSub* sub;
+                    const MovieSub* sub;
                     s16 x;
 #endif
 
@@ -555,7 +555,7 @@ void MovieVBlankIntr() {
                     u16 tile;
                     u16 palette;
 #ifdef VERSION_JP
-                    MovieSub* sub;
+                    const MovieSub* sub;
                     s16 x;
 #endif
 

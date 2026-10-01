@@ -12,7 +12,7 @@ typedef u8 MapNameText;
 typedef LocalizedText MapNameText;
 #endif
 
-extern MapNameText* gRoomNames[28];
+extern const MapNameText* gRoomNames[28];
 
 #ifdef VERSION_EU
 

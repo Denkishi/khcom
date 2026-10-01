@@ -12,10 +12,10 @@ u16 InitMsgGlyphSprites(s32 a);
 u16 InitMsgGlyphSpritesAltPalette5(s32 a);
 u16 InitMsgGlyphSpritesAltPalette3(s32 a);
 #ifndef VERSION_EU
-u8 LayoutMsgGlyphsSjis(s32 a, s32 b, u8* c);
+u8 LayoutMsgGlyphsSjis(s32 a, s32 b, const u8* c);
 #endif
-s32 GetMsgTextWidth(TextChar* a);
-u8 LayoutMsgGlyphs(s32 x, s32 y, MsgLatinChar* s);
+s32 GetMsgTextWidth(const TextChar* a);
+u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s);
 void DrawMsgGlyphs(u8 n);
 void FreeMsgGlyphSprites();
 #ifdef VERSION_EU
@@ -23,7 +23,7 @@ s16 eu_0806629C(TextSlot* p, u8 n);
 #endif
 s32 LoadTextTileArray(TextChar* a, void** p);
 void FreeSmallFontResources(void* a, void* b);
-u16 EncodeSmallFontString(u8* s, u16* out);
+u16 EncodeSmallFontString(const u8* s, u16* out);
 u16 FormatSmallFontDecimal(s32 v, u16* out);
 u16 FormatSmallFontHex(s32 v, u16* out);
 s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n);

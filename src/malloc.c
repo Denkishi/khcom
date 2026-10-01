@@ -208,7 +208,7 @@ void EwramFree(const void* p) {
     HeapFree(p, &gEwramHeap);
 }
 
-void IwramFree(void* p) {
+void IwramFree(const void* p) {
     HeapFree(p, &gIwramHeap);
 }
 

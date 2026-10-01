@@ -12,7 +12,7 @@
 #include "taskpool.h"
 #include "types.h"
 
-MapNameText* gRoomNames[28] = {
+const MapNameText* gRoomNames[28] = {
 #if defined(VERSION_US)
     gUnk_0815ADD2,
     gUnk_0815ADF4,

@@ -4240,7 +4240,7 @@ void SyncCardDisplayGfx(CardDisplayWork* p) {
 }
 
 void LoadCardDisplayGfx(CardDisplayWork* p) {
-    CardDef* d;
+    const CardDef* d;
     void* tiles;
     void* pal;
     u32 f;

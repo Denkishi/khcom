@@ -1220,9 +1220,9 @@ void JiminyUpdateCursor(s16 a, s16 b, s16 c) {
     }
 }
 
-u16 GetJiminyTextLength(u16* p) {
+u16 GetJiminyTextLength(const u16* p) {
     s32 n;
-    u16* q;
+    const u16* q;
 
     q = p;
     n = 0;
@@ -1316,7 +1316,7 @@ s32 GetJiminyEntryState(s32 idx) {
     return 0;
 }
 
-void JiminyLoadHiddenRow(s32 a, u16** b) {
+void JiminyLoadHiddenRow(s32 a, const u16** b) {
     s16 t;
 
     t = GetJiminyTextLength(b[a]);
@@ -1333,7 +1333,7 @@ void JiminyLoadHiddenRow(s32 a, u16** b) {
     gJiminyWork->textSlotCounts[a] = LoadTextSlots(gJiminyHiddenTexts[t], gJiminyWork->lines[a].textSlots);
 }
 
-void JiminyLoadRows(s16 a, s16 b, u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyLoadRows(s16 a, s16 b, const u16** d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
     s16 n;
     s32 i;
 
@@ -1398,7 +1398,7 @@ void JiminyReloadPlainRows() {
         gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
 }
 
-void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
+void JiminyOpenList(s16 a, s16 b, const u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
 #ifdef VERSION_EU
     s32 i;
 #endif
@@ -2038,7 +2038,7 @@ void mode_jiminy_1() {
     gJiminyWork->frame++;
 }
 
-void JiminyOpenPlainList(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f) {
+void JiminyOpenPlainList(s16 a, s16 b, const u16** c, s16 d, s16 e, s16 f) {
     gJiminyWork->listX = d;
     gJiminyWork->listY = e;
     gJiminyWork->rowHeight = f;

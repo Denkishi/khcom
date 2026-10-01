@@ -29,7 +29,7 @@ void* eu_0805E924(const void* strings) {
 }
 
 void* eu_0805E968(const void* text) {
-    void** s = text;
+    void* const* s = text;
 
     switch (gLanguage) {
     case LANGUAGE_ITALIAN:
@@ -47,7 +47,7 @@ void* eu_0805E968(const void* text) {
 }
 
 s32 eu_0805E9AC(const void* text) {
-    u16* s = text;
+    const u16* s = text;
 
     switch (gLanguage) {
     case LANGUAGE_ITALIAN:

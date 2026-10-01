@@ -71,7 +71,7 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
     return &gPaletteBuffer->colors[base];
 }
 
-u16* FadePaletteToGray(u16* src, u16* dst, u16 size, u16 amount) {
+u16* FadePaletteToGray(const u16* src, u16* dst, u16 size, u16 amount) {
     s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     s16 inv = 31 - amount;
@@ -144,7 +144,7 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
     return &gPaletteBuffer->colors[base];
 }
 
-u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
+u16* BrightenPalette(const u16* src, u16* dst, u16 size, u16 amount) {
     s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     u16 i;

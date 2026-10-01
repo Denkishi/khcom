@@ -5250,7 +5250,7 @@ void LoadCardNameText(DeckMenuWork* w, s32 id) {
 }
 
 void LoadCardDescriptionText(DeckMenuWork* w, u16 index) {
-    CardDef* d;
+    const CardDef* d;
     void* s;
 
     d = &gCardDefs[index];

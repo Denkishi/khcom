@@ -116,7 +116,7 @@ typedef struct JiminyWork {
     s16 listX;
     s16 listY;
     s16 rowHeight;
-    u16** itemTexts;
+    const u16** itemTexts;
     const u16* itemFlags;
     const u16* itemChildren;
     s16 moveDelay;

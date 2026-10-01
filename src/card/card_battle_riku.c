@@ -367,7 +367,7 @@ u8 IsRikuReloadCardSelected() {
 }
 
 s32 GetRikuSelectedMove() {
-    CardDef* d;
+    const CardDef* d;
 
     if (gRikuSelectedCard != NULL) {
         if (!(gRikuSelectedCard->flags & (CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE))) {

@@ -2918,7 +2918,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     s32 flag;
 #endif
     EventBackgroundDef* u;
-    EventSequenceDef* t;
+    const EventSequenceDef* t;
 #ifndef VERSION_EU
     const EventCameraKeyframe* q;
     u16 i;
@@ -3105,7 +3105,7 @@ u8 UpdateEventSeqSkip() {
 }
 
 u8 UpdateEventSeq(EventSeqWork* p, void* a) {
-    EventSequenceDef* t;
+    const EventSequenceDef* t;
     u8 i;
 
     if (gEventState == NULL) {
@@ -6365,7 +6365,7 @@ void SetupEventCharaShadow(EventCharaWork* p) {
 #endif
 
 static void msgwin_0(MsgWinWork* p, u8* arg) {
-    EventSequenceDef* t;
+    const EventSequenceDef* t;
 
     p->eventId = arg[0];
 
@@ -7368,7 +7368,7 @@ void HBlankIntrEventBgWave() {
 }
 
 void view_0(EventCameraWork* p, u8* arg) {
-    EventSequenceDef* t;
+    const EventSequenceDef* t;
     EventBackgroundDef* u;
     const EventCameraKeyframe* q;
     EvtObj* obj;
@@ -7774,7 +7774,7 @@ void EventCameraApproach(EventCameraWork* a) {
 }
 
 u8 FindEventCameraTarget(EventCameraWork* p) {
-    EventSequenceDef* t = gEventSequenceDefs[p->eventId];
+    const EventSequenceDef* t = gEventSequenceDefs[p->eventId];
     u8 n = t->charaCount;
     const EventCharaTrack* q = t->charaTracks;
     const EventCameraKeyframe* e = &p->keyframes[p->keyframe];
@@ -7790,7 +7790,7 @@ u8 FindEventCameraTarget(EventCameraWork* p) {
 }
 
 u8 FindEventCharaTrack(EventCameraWork* p, u8 v) {
-    EventSequenceDef* t = gEventSequenceDefs[p->eventId];
+    const EventSequenceDef* t = gEventSequenceDefs[p->eventId];
     u8 n = t->charaCount;
     const EventCharaTrack* q = t->charaTracks;
     u8 i;

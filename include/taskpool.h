@@ -11,7 +11,7 @@ typedef struct TaskPool {
 
 struct Task;
 
-typedef void (*TaskInitFunc)(void* work, void* arg);
+typedef void (*TaskInitFunc)(void* work, const void* arg);
 typedef u8 (*TaskUpdateFunc)(void* work, struct Task* task);
 typedef void (*TaskDrawFunc)(void* work);
 typedef void (*TaskDestroyFunc)(void* work);

@@ -20,10 +20,10 @@ extern u8 gTalk2700Palette[];
 void JiminyFreeRows();
 u8 JiminyHandleListInput();
 void JiminyReloadPlainRows();
-void JiminyOpenList(s16 a, s16 b, u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
+void JiminyOpenList(s16 a, s16 b, const u16** c, const u16* d, const u16* e, s16 f, s16 g, s16 h);
 
 void JiminyDetailUpdate();
-void JiminyOpenPlainList(s16 a, s16 b, u16** c, s16 d, s16 e, s16 f);
+void JiminyOpenPlainList(s16 a, s16 b, const u16** c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
 #ifdef VERSION_EU

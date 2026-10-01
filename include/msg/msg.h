@@ -86,7 +86,7 @@ typedef struct EventSeqWork {
     u8 unk_31;
     u8 hasBoss;
     u8 unk_33;
-    struct EventSequenceDef* seqDef;
+    const struct EventSequenceDef* seqDef;
     u16 timer;
 #ifdef VERSION_EU
     u8 bg3MapUnpacked;
@@ -189,12 +189,12 @@ void RequestMsgfaceSlideIn(MsgFaceControl* p);
 void RequestMsgfaceSlideOut(MsgFaceControl* p);
 void view_2();
 void view_3();
-s32 LoadLatinTextSlots(u16* a, TextSlot* b);
-s32 LoadJapaneseTextSlots(u16* a, TextSlot* b);
+s32 LoadLatinTextSlots(const u16* a, TextSlot* b);
+s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b);
 void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f);
 void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a);
 void DrawBgTextLines();
-u8 GetStringLength(u8* s);
+u8 GetStringLength(const u8* s);
 u8 _0806E9DC(EventCharaWork* p, void* a);
 void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c);
 u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);

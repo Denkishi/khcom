@@ -1757,7 +1757,7 @@ void MapGmkFree() {
     }
 }
 
-u8* GetCellMaskBlock(void* a, u16 b, u16 c) {
+const u8* GetCellMaskBlock(void* a, u16 b, u16 c) {
     u8* p = a;
 
     return gCellMasks[p[(u8)(b >> 3) + (u8)(c >> 3) * 4]];
@@ -1799,7 +1799,7 @@ u8 MapCellMaskBitAt(MapCell* p, s32 x, s32 y) {
     u16 cy;
     u8 bx;
     u8 by;
-    u8* t;
+    const u8* t;
 
     if (p == NULL) {
         return 1;
@@ -2198,13 +2198,13 @@ s32 PayEventKey(UnkStruct_080E8E24* p) {
     return 1;
 }
 
-UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
+const UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
     u16 v = GetRandom() % 10000;
     PrzCardChance** t = gWorldPrzCardChances;
     PrzCardChance* p = t[gGameState.world];
 
     while (p->cardIndex != 41) {
-        UnkStruct_080E8E24* q = &gPrzCardKinds[p->cardIndex];
+        const UnkStruct_080E8E24* q = &gPrzCardKinds[p->cardIndex];
         u16 n = a != 0 ? p->weight2 : p->weight;
 
         if (v < n) {
@@ -2247,7 +2247,7 @@ u8 RollCardValue() {
     return 0;
 }
 
-s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
+s32 CreateMapPrzCardTask(const UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
     MapPrizeArgs w;
 
     w.worldPrize = b;
@@ -2269,7 +2269,7 @@ s32 CreateMapPrzCardTask(UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
 }
 
 u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
-    UnkStruct_080E8E24* q;
+    const UnkStruct_080E8E24* q;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return 0;
@@ -2316,7 +2316,7 @@ void CreateMapPrizeTasks(u8 a, u8 b, s32 c, s32 d, s32 e) {
 
 void CreateWorldPrize(s32 x, s32 y, s32 z) {
     UnkStruct_080E8E24* p = gWorldPrizeLists[gGameState.world];
-    UnkStruct_080E8E24* e;
+    const UnkStruct_080E8E24* e;
 
     for (; p->unk_00[0] != 4; p++) {
         switch (p->unk_00[0]) {

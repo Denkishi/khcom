@@ -377,7 +377,7 @@ const MapFixedDef* gMapFixedDefs[6] = {
     &gUnk_09856F64,
 };
 
-PrzCardChance* gWorldPrzCardChances[14] = {
+const PrzCardChance* gWorldPrzCardChances[14] = {
     gUnk_09857B44,
     gPrzCardChancesAgrabah,
     gPrzCardChancesAtlantica,
@@ -394,7 +394,7 @@ PrzCardChance* gWorldPrzCardChances[14] = {
     gUnk_09857B44,
 };
 
-UnkStruct_080E8E24* gWorldPrizeLists[14] = {
+const UnkStruct_080E8E24* gWorldPrizeLists[14] = {
     gUnk_0985824C,
     gPrizeListAgrabah,
     gPrizeListAtlantica,

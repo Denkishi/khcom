@@ -33,7 +33,7 @@ void IwramHeapInit(void* addr, u32 size);
 void* EwramAlloc(u32 size);
 void* IwramAlloc(u32 size);
 void EwramFree(const void* p);
-void IwramFree(void* p);
+void IwramFree(const void* p);
 void SetEwramHeapName(const void* name);
 void SetIwramHeapName(const void* name);
 

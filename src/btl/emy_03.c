@@ -1,0 +1,113 @@
+#include "task_descriptors.h"
+#include "display.h"
+#include "emy.h"
+#include "sprites_emy.h"
+#include "enemy_common.h"
+#include "songs.h"
+#include "emy_tasks.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "btl_effect.h"
+#include "enemy_types.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "mode_chkobj_assets.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
+
+static const AnimDef sEmy03CommonAnimDefs[3] = {
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
+};
+
+static const AnimDef sEmy03AnimDefs[2] = {
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 7, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 5, { 0, 0, 0 } },
+};
+
+static const EmyDef sEmy03Def = { gEmy03Palette, sEmy03CommonAnimDefs, 512, 130, 20, 20, 64, 32, 32, 10, 0, { 3, 36, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };
+
+TaskDesc gTaskDescEmy03 = {
+    "task_emy_03",
+    (TaskInitFunc)task_emy_03_0,
+    (TaskUpdateFunc)task_emy_03_1,
+    (TaskDrawFunc)task_emy_03_2,
+    (TaskDestroyFunc)task_emy_03_3,
+    sizeof(Emy03Work),
+};
+
+void task_emy_03_0(EmyWork* work, void* obj) {
+    EmyInit(work, &sEmy03Def, obj);
+    work->idleState = 7;
+}
+
+u8 task_emy_03_1(Emy03Work* work) {
+    Emy03Work* w;
+    BtlObj* act;
+    u16 r;
+
+    w = work;
+    act = &work->base.actor;
+
+    if (EmyUpdateReaction(&work->base)) {
+        r = GetRandom();
+
+        switch (r & 1) {
+        case 0:
+            work->base.state = 0x12;
+            break;
+        case 1:
+            work->base.state = 0x13;
+            break;
+        }
+    }
+
+    switch (work->base.state) {
+    case 0x12:
+        if (work->base.stateTimer == 0) {
+            work->base.vz = -0x480;
+            AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
+        } else if (work->base.stateTimer == 1) {
+            BgFxStartActorThunder(act);
+            m4aSongNumStart(SONG_BTL_YELLOW_MOV);
+        }
+
+        if (EmyLungeAttack(&work->base, 0x11, 0x17, 0x0A, 0xAB, 0x50, SONG_BTL_YELLOW_HIT, 0, 0, 0x0A) == 2) {
+            BgAnimStop();
+        }
+
+        break;
+    case 0x13:
+        if (work->base.stateTimer == 0) {
+            AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
+        } else if (work->base.stateTimer == 1) {
+            GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
+            w->unk_18C = 0;
+            BgFxStartThunder(0, act->x, act->y, act->z - 0x1000, w->targetX,
+                w->targetY, 0, 0xAC);
+        }
+
+        work->base.vz = 0;
+
+        if (AnimIsFinished(&work->base.anim) && !BgFxIsActive()) {
+            EmyReturnToIdle(&work->base);
+        } else {
+            work->base.stateTimer++;
+        }
+
+        break;
+    }
+
+    return EmyUpdateCommonStates(&work->base);
+}
+
+void task_emy_03_2(EmyWork* work) {
+    EmyDraw(work);
+}
+
+void task_emy_03_3(EmyWork* work) {
+    EmyReleaseResources(work);
+}

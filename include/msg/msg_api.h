@@ -5,7 +5,7 @@
 #include "text_types.h"
 #include "msg_types.h"
 
-extern const void* gUnk_09EE4724[4];
+extern const void* gMsgwinMapBlocks[4];
 
 void RequestEventMode(u16 a);
 u16 InitMsgGlyphSprites(s32 a);

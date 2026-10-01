@@ -134,7 +134,7 @@ void LoadEventBgEffect(EventBgEffectWork* w) {
     }
 
     SetBgBlend(0, 16, 16);
-    gEventState->unk_80 = 1;
+    gEventState->bgEffectActive = 1;
     w->frame = w->frameTimer = w->fadingIn = 0;
 }
 
@@ -234,7 +234,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
 
         if (cur->flags & 2) {
             ClearEventBgEffect(w);
-            gEventState->unk_80 = 0;
+            gEventState->bgEffectActive = 0;
             gBldCnt = gEventState->bldCnt;
             gBldAlpha = gEventState->bldAlpha;
         }

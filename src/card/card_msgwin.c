@@ -147,7 +147,7 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* w, void* a) {
 static u8 msgwin_1(CardMsgWinWork* w, void* a) {
     LoadBgTiles(w->args.bg, gUnk_094233B8, 1280);
     LoadBgPalette(w->args.bg, gUnk_096148D8, 32);
-    SetBgMapBlocks(w->args.bg, gUnk_09EE4724[w->messageDef->positionIndex], 2, 1);
+    SetBgMapBlocks(w->args.bg, gMsgwinMapBlocks[w->messageDef->positionIndex], 2, 1);
     ScrollBgMapTo(w->args.bg, w->x, 0);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinLoadText);
     return 1;

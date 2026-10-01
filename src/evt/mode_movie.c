@@ -49,7 +49,7 @@ static volatile u16 sMovieSubLowerAlpha;
 #ifdef VERSION_US
 #include "movie_subtitles_1.inc"
 
-const MovieSub gUnk_0886AB40[3] = {
+const MovieSub gMovieSubsOpening[3] = {
     { 673, 0, gMovieSubTextUs_0886A6D4, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextUs_0886A712, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextUs_0886A752, 1, 0, 50, 1, 0 },
@@ -63,7 +63,7 @@ const MovieSub gUnk_0886AB80[1] = {
     { 30, 20, gMovieSubTextUs_0886AB3A, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnk_0886AB90[14] = {
+const MovieSub gMovieSubsEnding[14] = {
     { 337, 0, gMovieSubTextUs_0886A78A, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextUs_0886A798, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextUs_0886A7B8, 1, 0, 10, 0, 0 },
@@ -80,7 +80,7 @@ const MovieSub gUnk_0886AB90[14] = {
     { 810, 0, gMovieSubTextUs_0886A988, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnk_0886AC70[10] = {
+const MovieSub gMovieSubsRikuEnding[10] = {
     { 405, 0, gMovieSubTextUs_0886A9BA, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextUs_0886A9E8, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextUs_0886AA00, 1, 0, 30, 1, 0 },
@@ -95,7 +95,7 @@ const MovieSub gUnk_0886AC70[10] = {
 #endif
 
 #ifdef VERSION_JP
-const MovieSub gUnk_0886AB40[3] = {
+const MovieSub gMovieSubsOpening[3] = {
     { 673, 35, gMovieSubTextJp_0885DFE4, 1, 0, 45, 1, 0 },
     { 825, 50, gMovieSubTextJp_0885DFC4, 1, 0, 43, 1, 0 },
     { 872, 60, gMovieSubTextJp_0885DFA8, 1, 0, 45, 1, 0 },
@@ -113,7 +113,7 @@ const MovieSub gUnk_0886AB80[1] = {
     { 30, 20, gMovieSubTextJp_0885E018, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnk_0886AB90[12] = {
+const MovieSub gMovieSubsEnding[12] = {
     { 337, 100, gMovieSubTextJp_0885E1CC, 1, 0, 8, 0, 0 },
     { 405, 95, gMovieSubTextJp_0885E1C0, 1, 0, 30, 0, 0 },
     { 450, 95, gMovieSubTextJp_0885E1B4, 1, 0, 10, 0, 0 },
@@ -130,7 +130,7 @@ const MovieSub gUnk_0886AB90[12] = {
 
 #include "movie_subtitles_3.inc"
 
-const MovieSub gUnk_0886AC70[8] = {
+const MovieSub gMovieSubsRikuEnding[8] = {
     { 405, 60, gMovieSubTextJp_0885E2DC, 1, 0, 35, 1, 0 },
     { 450, 85, gMovieSubTextJp_0885E2CC, 1, 0, 30, 1, 0 },
     { 490, 95, gMovieSubTextJp_0885E2C0, 1, 0, 30, 1, 0 },
@@ -147,13 +147,13 @@ const MovieSub gUnk_0886AC70[8] = {
 #ifdef VERSION_EU
 #include "movie_subtitles_1.inc"
 
-const MovieSub gUnkEu_0883E040[3] = {
+const MovieSub gMovieSubsOpeningEn[3] = {
     { 673, 0, gMovieSubTextEu_0883DE0C, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883DE2B, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883DE4B, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnkEu_0883E070[14] = {
+const MovieSub gMovieSubsEndingEn[14] = {
     { 337, 0, gMovieSubTextEu_0883DE67, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextEu_0883DE6E, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextEu_0883DE7E, 1, 0, 10, 0, 0 },
@@ -170,7 +170,7 @@ const MovieSub gUnkEu_0883E070[14] = {
     { 810, 0, gMovieSubTextEu_0883DF66, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnkEu_0883E150[10] = {
+const MovieSub gMovieSubsRikuEndingEn[10] = {
     { 405, 0, gMovieSubTextEu_0883DF7F, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextEu_0883DF96, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextEu_0883DFA2, 1, 0, 30, 1, 0 },
@@ -185,14 +185,14 @@ const MovieSub gUnkEu_0883E150[10] = {
 
 #include "movie_subtitles_2.inc"
 
-const MovieSub gUnkEu_0883E454[4] = {
+const MovieSub gMovieSubsOpeningFr[4] = {
     { 673, 0, gMovieSubTextEu_0883E1F0, 0, 0, 45, 1, 0 },
     { 673, 0, gMovieSubTextEu_0883E205, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883E21B, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883E23A, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnkEu_0883E494[14] = {
+const MovieSub gMovieSubsEndingFr[14] = {
     { 337, 0, gMovieSubTextEu_0883E255, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextEu_0883E25D, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextEu_0883E26C, 1, 0, 10, 0, 0 },
@@ -209,7 +209,7 @@ const MovieSub gUnkEu_0883E494[14] = {
     { 810, 0, gMovieSubTextEu_0883E354, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnkEu_0883E574[12] = {
+const MovieSub gMovieSubsRikuEndingFr[12] = {
     { 405, 0, gMovieSubTextEu_0883E36D, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextEu_0883E385, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextEu_0883E392, 0, 0, 30, 1, 0 },
@@ -226,14 +226,14 @@ const MovieSub gUnkEu_0883E574[12] = {
 
 #include "movie_subtitles_3.inc"
 
-const MovieSub gUnkEu_0883E8D4[4] = {
+const MovieSub gMovieSubsOpeningDe[4] = {
     { 673, 0, gMovieSubTextEu_0883E634, 0, 0, 45, 1, 0 },
     { 673, 0, gMovieSubTextEu_0883E649, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883E65B, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883E676, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnkEu_0883E914[14] = {
+const MovieSub gMovieSubsEndingDe[14] = {
     { 337, 0, gMovieSubTextEu_0883E69A, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextEu_0883E6A1, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextEu_0883E6B5, 1, 0, 10, 0, 0 },
@@ -250,7 +250,7 @@ const MovieSub gUnkEu_0883E914[14] = {
     { 810, 0, gMovieSubTextEu_0883E7CA, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnkEu_0883E9F4[11] = {
+const MovieSub gMovieSubsRikuEndingDe[11] = {
     { 405, 0, gMovieSubTextEu_0883E7EA, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextEu_0883E802, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextEu_0883E815, 1, 0, 30, 1, 0 },
@@ -266,14 +266,14 @@ const MovieSub gUnkEu_0883E9F4[11] = {
 
 #include "movie_subtitles_4.inc"
 
-const MovieSub gUnkEu_0883ECE8[4] = {
+const MovieSub gMovieSubsOpeningIt[4] = {
     { 673, 0, gMovieSubTextEu_0883EAA4, 0, 0, 45, 1, 0 },
     { 673, 0, gMovieSubTextEu_0883EAC1, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883EAD7, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883EAF2, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnkEu_0883ED28[14] = {
+const MovieSub gMovieSubsEndingIt[14] = {
     { 337, 0, gMovieSubTextEu_0883EB0A, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextEu_0883EB11, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextEu_0883EB27, 1, 0, 10, 0, 0 },
@@ -290,7 +290,7 @@ const MovieSub gUnkEu_0883ED28[14] = {
     { 810, 0, gMovieSubTextEu_0883EC0C, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnkEu_0883EE08[10] = {
+const MovieSub gMovieSubsRikuEndingIt[10] = {
     { 405, 0, gMovieSubTextEu_0883EC29, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextEu_0883EC36, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextEu_0883EC48, 1, 0, 30, 1, 0 },
@@ -305,14 +305,14 @@ const MovieSub gUnkEu_0883EE08[10] = {
 
 #include "movie_subtitles_5.inc"
 
-const MovieSub gUnkEu_0883F0F8[4] = {
+const MovieSub gMovieSubsOpeningEs[4] = {
     { 673, 0, gMovieSubTextEu_0883EEA8, 0, 0, 45, 1, 0 },
     { 673, 0, gMovieSubTextEu_0883EEC1, 1, 0, 45, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883EECC, 0, 0, 50, 1, 0 },
     { 825, 0, gMovieSubTextEu_0883EEE6, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnkEu_0883F138[14] = {
+const MovieSub gMovieSubsEndingEs[14] = {
     { 337, 0, gMovieSubTextEu_0883EEFF, 1, 0, 8, 0, 0 },
     { 405, 0, gMovieSubTextEu_0883EF07, 1, 0, 30, 0, 0 },
     { 450, 0, gMovieSubTextEu_0883EF19, 1, 0, 10, 0, 0 },
@@ -329,7 +329,7 @@ const MovieSub gUnkEu_0883F138[14] = {
     { 810, 0, gMovieSubTextEu_0883F003, 1, 0, 45, 0, 0 },
 };
 
-const MovieSub gUnkEu_0883F218[11] = {
+const MovieSub gMovieSubsRikuEndingEs[11] = {
     { 405, 0, gMovieSubTextEu_0883F01E, 0, 0, 35, 1, 0 },
     { 405, 0, gMovieSubTextEu_0883F029, 1, 0, 35, 1, 0 },
     { 450, 0, gMovieSubTextEu_0883F039, 1, 0, 30, 1, 0 },
@@ -655,29 +655,29 @@ void mode_movie_1() {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                sMovieSubs = gUnkEu_0883E040;
+                sMovieSubs = gMovieSubsOpeningEn;
                 sMovieSubCount = 3;
                 break;
             case LANGUAGE_FRENCH:
-                sMovieSubs = gUnkEu_0883E454;
+                sMovieSubs = gMovieSubsOpeningFr;
                 sMovieSubCount = 4;
                 break;
             case LANGUAGE_GERMAN:
-                sMovieSubs = gUnkEu_0883E8D4;
+                sMovieSubs = gMovieSubsOpeningDe;
                 sMovieSubCount = 4;
                 break;
             case LANGUAGE_ITALIAN:
-                sMovieSubs = gUnkEu_0883ECE8;
+                sMovieSubs = gMovieSubsOpeningIt;
                 sMovieSubCount = 4;
                 break;
             case LANGUAGE_SPANISH:
             default:
-                sMovieSubs = gUnkEu_0883F0F8;
+                sMovieSubs = gMovieSubsOpeningEs;
                 sMovieSubCount = 4;
                 break;
             }
 #else
-            sMovieSubs = gUnk_0886AB40;
+            sMovieSubs = gMovieSubsOpening;
             sMovieSubCount = 3;
 #endif
             break;
@@ -697,29 +697,29 @@ void mode_movie_1() {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                sMovieSubs = gUnkEu_0883E070;
+                sMovieSubs = gMovieSubsEndingEn;
                 sMovieSubCount = 14;
                 break;
             case LANGUAGE_FRENCH:
-                sMovieSubs = gUnkEu_0883E494;
+                sMovieSubs = gMovieSubsEndingFr;
                 sMovieSubCount = 14;
                 break;
             case LANGUAGE_GERMAN:
-                sMovieSubs = gUnkEu_0883E914;
+                sMovieSubs = gMovieSubsEndingDe;
                 sMovieSubCount = 14;
                 break;
             case LANGUAGE_ITALIAN:
-                sMovieSubs = gUnkEu_0883ED28;
+                sMovieSubs = gMovieSubsEndingIt;
                 sMovieSubCount = 14;
                 break;
             case LANGUAGE_SPANISH:
             default:
-                sMovieSubs = gUnkEu_0883F138;
+                sMovieSubs = gMovieSubsEndingEs;
                 sMovieSubCount = 14;
                 break;
             }
 #else
-            sMovieSubs = gUnk_0886AB90;
+            sMovieSubs = gMovieSubsEnding;
 #ifdef VERSION_JP
             sMovieSubCount = 12;
 #else
@@ -736,29 +736,29 @@ void mode_movie_1() {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                sMovieSubs = gUnkEu_0883E150;
+                sMovieSubs = gMovieSubsRikuEndingEn;
                 sMovieSubCount = 10;
                 break;
             case LANGUAGE_FRENCH:
-                sMovieSubs = gUnkEu_0883E574;
+                sMovieSubs = gMovieSubsRikuEndingFr;
                 sMovieSubCount = 12;
                 break;
             case LANGUAGE_GERMAN:
-                sMovieSubs = gUnkEu_0883E9F4;
+                sMovieSubs = gMovieSubsRikuEndingDe;
                 sMovieSubCount = 11;
                 break;
             case LANGUAGE_ITALIAN:
-                sMovieSubs = gUnkEu_0883EE08;
+                sMovieSubs = gMovieSubsRikuEndingIt;
                 sMovieSubCount = 10;
                 break;
             case LANGUAGE_SPANISH:
             default:
-                sMovieSubs = gUnkEu_0883F218;
+                sMovieSubs = gMovieSubsRikuEndingEs;
                 sMovieSubCount = 11;
                 break;
             }
 #else
-            sMovieSubs = gUnk_0886AC70;
+            sMovieSubs = gMovieSubsRikuEnding;
 #ifdef VERSION_JP
             sMovieSubCount = 8;
 #else
@@ -769,7 +769,7 @@ void mode_movie_1() {
 #ifndef VERSION_EU
         default:
             p = gUnk_0855CCB4;
-            sMovieSubs = gUnk_0886AB40;
+            sMovieSubs = gMovieSubsOpening;
             sMovieSubCount = 3;
             break;
 #endif

@@ -280,8 +280,8 @@ void EventUpdate() {
         return;
     }
 
-    if (p->unk_28 != 0xFFFF) {
-        switch (p->unk_28) {
+    if (p->exitCode != 0xFFFF) {
+        switch (p->exitCode) {
         case 2:
             ModeRequest(&gModeBattle, 178);
             break;
@@ -311,7 +311,7 @@ void EventUpdate() {
             RequestMapMode();
             break;
         default:
-            ModeRequest(&gModeDummy, p->unk_28);
+            ModeRequest(&gModeDummy, p->exitCode);
             break;
         }
 

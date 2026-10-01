@@ -63,12 +63,12 @@ typedef struct EventState {
     u8 hasBg1Map;
     u8 running;
     u8 talking;
-    u8 unk_7C;
+    u8 focusSpeaker;
     u8 msgWaitActive;
     u8 unk_7E;
-    u8 unk_7F;
-    u8 unk_80;
-    u8 unk_81;
+    u8 fadedOut;
+    u8 bgEffectActive;
+    u8 msgWinOpen;
     u8 ending;
     u8 endRequest;
     u8 answerYes;
@@ -76,9 +76,9 @@ typedef struct EventState {
     u8 particleCount;
     u8 msgWinPosition;
     u8 speaker;
-    u8 unk_89;
+    u8 focusSteps;
     u8 skipHoldTime;
-    u8 unk_8B;
+    u8 msgWinCentered;
 } EventState;
 
 #endif

@@ -44,7 +44,7 @@ typedef struct MsgFaceWork {
     s32 y;
     s32 scaleX;
     u8 steps;
-    u8 unk_31;
+    u8 arrived;
     u8 talking;
     u8 flipX;
     u8 visible;
@@ -56,7 +56,7 @@ typedef struct MsgWinWork {
     TaskPool tasks;
     ObjPalette* palette;
     s32 scrollX;
-    u16 unk_1C;
+    u16 glyphPaletteIndex;
     u8 steps;
     u8 unk_1F;
     u32 position;
@@ -113,7 +113,7 @@ typedef struct EventCameraWork {
     u16 steps;
     u16 angle;
     u8 approachMode;
-    u8 unk_15;
+    u8 effectStarted;
     u16 wavePhase;
     EventScanlineScroll scanline;
 } EventCameraWork;
@@ -140,7 +140,7 @@ typedef struct MsgWaitWork {
     u8 cursor;
     u8 unk_101;
     u8 timer;
-    u8 unk_103;
+    u8 nextPosition;
     u8 choiceShown;
     u8 unk_105[3];
 } MsgWaitWork;

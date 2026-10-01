@@ -103,7 +103,7 @@ typedef struct EventCharaKeyframe {
     s32 x;
     s32 y;
     s32 z;
-    u16 unk_14;
+    u16 motionArg;
     u8 unk_16[2];
     u32 flags;
     void* update;
@@ -156,9 +156,9 @@ typedef struct EventSequenceDef {
     u8 unk_1F;
     u16 battleId;
     u16 nextEvent;
-    u16 unk_24;
+    u16 startDelay;
     u8 unk_26[2];
-    u16 unk_28;
+    u16 exitCode;
     u8 unk_2A;
     u8 unk_2B;
     u8 unk_2C;
@@ -170,9 +170,9 @@ typedef struct MsgFaceControl {
     u8 portraitId;
     u8 expressionId;
     u8 command;
-    u8 unk_03;
+    u8 silhouette;
     u32 positionIndex;
-    u8 unk_08;
+    u8 shown;
 } MsgFaceControl;
 
 typedef struct GlyphWidthTable {

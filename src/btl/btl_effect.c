@@ -3981,7 +3981,7 @@ void BgFxUpdateGround() {
     if (k <= 4) {
         t = (gBgFx->scaleX * 5) >> 5;
 
-        if (ApplyAttackBox(0x13D, gBgFx->x, gBgFx->y, gBgFx->z, (s16)t, (s16)t >> 1, 1)) {
+        if (ApplyAttackBox(0x13D, gBgFx->x, gBgFx->y, gBgFx->z, t, (s16)t >> 1, 1)) {
             m4aSongNumStart(SONG_BTL_MARL_GROUNDHIT);
         }
     }

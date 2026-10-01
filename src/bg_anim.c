@@ -88,7 +88,7 @@ void BgAnimSetTransform(u8 a, s32 b, s32 c) {
 
 void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     gBgAnimCurrent = a;
-    BgAnimSetPosition((s16)x, (s16)y);
+    BgAnimSetPosition(x, y);
 
     if (gBgAnimAffine != 0) {
         gBgAnimFrameBytes = a->tilesPerFrame << 6;

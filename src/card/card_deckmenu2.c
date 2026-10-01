@@ -878,7 +878,7 @@ void SetDeckName(u8 index, const void* src) {
 
     deck = (u8*)&gDecks;
     offset = index * (sizeof(Deck) / sizeof(u16));
-    s = (const u8*)src;
+    s = src;
     offset *= sizeof(u16);
     d = deck + offsetof(Deck, name);
     d += offset;
@@ -900,7 +900,7 @@ void SetDeckName(u8 index, const void* src) {
         s++;
         d++;
 #endif
-    } while (*(const u8*)s != 0);
+    } while (*s != 0);
 #endif
 }
 
@@ -2340,9 +2340,9 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode) {
     TaskPoolUpdate(&w->taskpool);
     ShowCollectionCardPreview(w);
 #ifdef VERSION_EU
-    SetGridRowCount(w, (s16)w->gridEntryCount);
+    SetGridRowCount(w, w->gridEntryCount);
 #else
-    SetGridRowCount(w, (s16)w->entryCount);
+    SetGridRowCount(w, w->entryCount);
 #endif
     UpdateGridScrollBar(w);
 }
@@ -2467,10 +2467,10 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* w, void* a) {
             w->deckMagicCount = CountDeckCardsOfCategory(1, w->deckIndex);
             w->deckItemCount = CountDeckCardsOfCategory(2, w->deckIndex);
             w->deckEnemyCount = CountDeckCardsOfCategory(3, w->deckIndex);
-            DrawDeckCategoryCount((u8)w->deckAttackCount, 0);
-            DrawDeckCategoryCount((u8)w->deckMagicCount, 1);
-            DrawDeckCategoryCount((u8)w->deckItemCount, 2);
-            DrawDeckCategoryCount((u8)w->deckEnemyCount, 3);
+            DrawDeckCategoryCount(w->deckAttackCount, 0);
+            DrawDeckCategoryCount(w->deckMagicCount, 1);
+            DrawDeckCategoryCount(w->deckItemCount, 2);
+            DrawDeckCategoryCount(w->deckEnemyCount, 3);
             DrawCardTotals();
             CountCardsNotInDeckByCategory(w->deckIndex, w->collectionCategoryCounts);
             DrawCollectionCategoryCount(w->collectionCategoryCounts[0], 0);
@@ -2791,7 +2791,7 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
     w->gfx2 = AnimUpdate(&w->anim3);
 
 #ifdef VERSION_EU
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return 1;
     }
 #endif
@@ -2841,10 +2841,10 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
             w->deckMagicCount = CountDeckCardsOfCategory(1, w->deckIndex);
             w->deckItemCount = CountDeckCardsOfCategory(2, w->deckIndex);
             w->deckEnemyCount = CountDeckCardsOfCategory(3, w->deckIndex);
-            DrawDeckCategoryCount((u8)w->deckAttackCount, 0);
-            DrawDeckCategoryCount((u8)w->deckMagicCount, 1);
-            DrawDeckCategoryCount((u8)w->deckItemCount, 2);
-            DrawDeckCategoryCount((u8)w->deckEnemyCount, 3);
+            DrawDeckCategoryCount(w->deckAttackCount, 0);
+            DrawDeckCategoryCount(w->deckMagicCount, 1);
+            DrawDeckCategoryCount(w->deckItemCount, 2);
+            DrawDeckCategoryCount(w->deckEnemyCount, 3);
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -2860,10 +2860,10 @@ u8 UpdateDeckMenuDeckSelect(DeckMenuWork* w, void* a) {
             w->deckMagicCount = CountDeckCardsOfCategory(1, w->deckIndex);
             w->deckItemCount = CountDeckCardsOfCategory(2, w->deckIndex);
             w->deckEnemyCount = CountDeckCardsOfCategory(3, w->deckIndex);
-            DrawDeckCategoryCount((u8)w->deckAttackCount, 0);
-            DrawDeckCategoryCount((u8)w->deckMagicCount, 1);
-            DrawDeckCategoryCount((u8)w->deckItemCount, 2);
-            DrawDeckCategoryCount((u8)w->deckEnemyCount, 3);
+            DrawDeckCategoryCount(w->deckAttackCount, 0);
+            DrawDeckCategoryCount(w->deckMagicCount, 1);
+            DrawDeckCategoryCount(w->deckItemCount, 2);
+            DrawDeckCategoryCount(w->deckEnemyCount, 3);
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -3306,7 +3306,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
     u16 i;
 
 #ifdef VERSION_EU
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return 1;
     }
 #endif
@@ -3341,7 +3341,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
         switch (GetKeysRepeat()) {
         case DPAD_UP:
             if (w->cursorRow > 0) {
-                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, w->cursorRow - 1) != 0) {
                     w->cursorRow--;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3366,13 +3366,13 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
             break;
         case DPAD_DOWN:
             if (w->cursorRow <= 2) {
-                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
                     w->cursorRow++;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                 }
             } else {
-                if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+                if (IsCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
                     ScrollGridDown(w);
                 }
             }
@@ -3381,7 +3381,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
             break;
         case DPAD_LEFT:
             if (w->cursorCol > 0) {
-                if (IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
+                if (IsCardAt(w, w->cursorCol - 1, w->cursorRow) != 0) {
                     w->cursorCol--;
                     w->timer = 1;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3396,7 +3396,7 @@ u8 UpdateDeckMenuAddGrid(DeckMenuWork* w, void* a) {
                 return 1;
             }
 
-            if (IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
+            if (IsCardAt(w, w->cursorCol + 1, w->cursorRow) != 0) {
                 w->cursorCol++;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3524,7 +3524,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         OBJ_PLTT),
-                (u16)(w->palette4->count << 5));
+                w->palette4->count << 5);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -3646,7 +3646,7 @@ u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* w, void* a) {
     w->gfx2 = AnimUpdate(&w->anim3);
 
 #ifdef VERSION_EU
-    if ((u8)FadeIsActive() != 0) {
+    if (FadeIsActive() != 0) {
         return 1;
     }
 #endif
@@ -3828,7 +3828,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* w, void* a) {
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         OBJ_PLTT),
-                (u16)(w->palette4->count << 5));
+                w->palette4->count << 5);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -3966,7 +3966,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
     switch (GetKeysRepeat()) {
     case DPAD_UP:
         if (w->cursorRow > 0) {
-            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow - 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, w->cursorRow - 1) != 0) {
                 w->cursorRow--;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -3991,13 +3991,13 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
         break;
     case DPAD_DOWN:
         if (w->cursorRow <= 2) {
-            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
                 w->cursorRow++;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if (IsCardAt(w, w->cursorCol, (s16)(w->cursorRow + 1)) != 0) {
+            if (IsCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
                 ScrollGridDown(w);
             }
         }
@@ -4006,7 +4006,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
         break;
     case DPAD_LEFT:
         if (w->cursorCol > 0) {
-            if (IsCardAt(w, (s16)(w->cursorCol - 1), w->cursorRow) != 0) {
+            if (IsCardAt(w, w->cursorCol - 1, w->cursorRow) != 0) {
                 w->cursorCol--;
                 w->timer = 1;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -4021,7 +4021,7 @@ u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* w, void* a) {
             return 1;
         }
 
-        if (IsCardAt(w, (s16)(w->cursorCol + 1), w->cursorRow) != 0) {
+        if (IsCardAt(w, w->cursorCol + 1, w->cursorRow) != 0) {
             w->cursorCol++;
             w->timer = 1;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -4141,7 +4141,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a) {
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
                         OBJ_PLTT),
-                (u16)(w->palette4->count << 5));
+                w->palette4->count << 5);
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;
@@ -4192,11 +4192,11 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* w, void* a) {
 
 u8 UpdateDeckMenuSlideOut(DeckMenuWork* w, void* a) {
     if ((s8)w->bannerSlideTimer > 0) {
-        ApproachValue(&w->x7, -0x8000, (u16)(s8)w->bannerSlideTimer);
+        ApproachValue(&w->x7, -0x8000, (s8)w->bannerSlideTimer);
         w->bannerSlideTimer--;
     } else if ((s8)w->barSlideTimer > 0) {
-        ApproachValue(&w->y5, -0x800, (u16)(s8)w->barSlideTimer);
-        ApproachValue(&w->y6, 0xA000, (u16)(s8)w->barSlideTimer);
+        ApproachValue(&w->y5, -0x800, (s8)w->barSlideTimer);
+        ApproachValue(&w->y6, 0xA000, (s8)w->barSlideTimer);
         w->barSlideTimer--;
     } else {
         FadeStartOut(FADE_MODE_BLACK, 4);
@@ -4842,13 +4842,13 @@ void DrawDeckCategoryCount(u8 a, u8 b) {
     u8* base;
 
     if (a == 0) {
-        base = (u8*)GetBgCharBase(3);
+        base = GetBgCharBase(3);
         RequestDma3Copy(gUnk_0940F918, base + (b * 64 + 0x360), 32);
         RequestDma3Copy(gUnk_0940F918, base + (b * 64 + 0x360) + 32, 32);
     } else {
         d[0] = a / 10;
         d[1] = a - (u8)(a / 10) * 10;
-        base = (u8*)GetBgCharBase(3);
+        base = GetBgCharBase(3);
         RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
         RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
     }
@@ -4859,7 +4859,7 @@ void DrawCollectionCategoryCount(u16 a, u8 b) {
     u8* base;
 
     if (a == 0) {
-        base = (u8*)GetBgCharBase(3);
+        base = GetBgCharBase(3);
         RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120), 32);
         RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120) + 32, 32);
         RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120) + 64, 32);
@@ -4867,7 +4867,7 @@ void DrawCollectionCategoryCount(u16 a, u8 b) {
         d[0] = a / 100;
         d[1] = a / 10 - d[0] * 10;
         d[2] = a - d[0] * 100 - d[1] * 10;
-        base = (u8*)GetBgCharBase(3);
+        base = GetBgCharBase(3);
         RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 96 + 0x120), 32);
         RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 96 + 0x120) + 32, 32);
         RequestDma3Copy(&gUnk_0940F7B8[(d[2] + 1) * 32], base + (b * 96 + 0x120) + 64, 32);
@@ -4987,21 +4987,21 @@ void DrawDeckCardCount(u8 deck) {
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(0) + 0x2BE0;
 #else
-        base = (u8*)GetBgCharBase(0);
+        base = GetBgCharBase(0);
 #endif
         break;
     case 1:
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(1) + 0x2F40;
 #else
-        base = (u8*)GetBgCharBase(1);
+        base = GetBgCharBase(1);
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(2) + 0x32A0;
 #else
-        base = (u8*)GetBgCharBase(2);
+        base = GetBgCharBase(2);
 #endif
         break;
     }
@@ -5046,9 +5046,9 @@ void DrawDeckEquipMarker(u8 mode) {
     u8* bg1;
     u8* bg2;
 
-    bg0 = (u8*)GetBgCharBase(0);
-    bg1 = (u8*)GetBgCharBase(1);
-    bg2 = (u8*)GetBgCharBase(2);
+    bg0 = GetBgCharBase(0);
+    bg1 = GetBgCharBase(1);
+    bg2 = GetBgCharBase(2);
 
     switch (mode) {
     case 0:
@@ -5094,21 +5094,21 @@ void DrawDeckCpCost(u8 mode) {
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(0) + 0x2BE0;
 #else
-        base = (u8*)GetBgCharBase(0);
+        base = GetBgCharBase(0);
 #endif
         break;
     case 1:
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(1) + 0x2F40;
 #else
-        base = (u8*)GetBgCharBase(1);
+        base = GetBgCharBase(1);
 #endif
         break;
     case 2:
 #ifdef VERSION_EU
         base = (u8*)GetBgCharBase(2) + 0x32A0;
 #else
-        base = (u8*)GetBgCharBase(2);
+        base = GetBgCharBase(2);
 #endif
         break;
     }
@@ -5202,7 +5202,7 @@ void DrawCardTotals() {
     d2[0] = b / 100;
     d2[1] = b / 10 - d2[0] * 10;
     d2[2] = b - d2[0] * 100 - d2[1] * 10;
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
     RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0x2A0, 32);
     RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0x2C0, 32);
     RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0x2E0, 32);
@@ -5235,25 +5235,25 @@ void LoadCardNameText(DeckMenuWork* w, s32 id) {
         LoadPalette(gUnk_09614458,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 1:
         LoadPalette(gUnk_09614478,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 2:
         LoadPalette(gUnk_09614498,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 3:
         LoadPalette(gUnk_096144B8,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     }
 }
@@ -5331,7 +5331,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
         LoadPalette(&gUnk_09614318[def->category * 32], dst, 32);
 
         for (j = 0; j <= 9; j++) {
-            DrawValueCount((u8)w->entries[i].valueCounts[j], j);
+            DrawValueCount(w->entries[i].valueCounts[j], j);
         }
 
         v = id & 0xFFF;
@@ -5341,7 +5341,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
         if (w->view >= 9 &&w->view <= 12) {
             if (def->kind > 46) {
                 LoadBgMap(2, gUnk_09518AB8, 0x800);
-                DrawCpCost((u8)GetCardCpCost(id));
+                DrawCpCost(GetCardCpCost(id));
                 return id;
             }
 
@@ -5463,7 +5463,7 @@ void DrawValueCount(u8 a, u16 b) {
     u8 v[2];
     u8* base;
 
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
 
     if (a != 0) {
         u8* dst;
@@ -5492,7 +5492,7 @@ void DrawCpCost(u8 a) {
     u8 d[2];
     u8* base;
 
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
 
     if (a != 0) {
         d[0] = a / 10;
@@ -6196,13 +6196,13 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
 
         if (q != NULL) {
             while (p != q) {
-                n = (DeckCard2Work*)ListPoolPrev(&q->node);
+                n = ListPoolPrev(&q->node);
 
                 if (n != NULL) {
                     *q->args.slot = *n->args.slot;
                 }
 
-                q = (DeckCard2Work*)ListPoolPrev(&q->node);
+                q = ListPoolPrev(&q->node);
             }
 
             *p->args.slot = 0xFFFF;
@@ -6318,7 +6318,7 @@ u8 SwapHeldDeckCard(DeckMenuWork* w) {
             }
         }
     } else {
-        prev = (DeckCard2Work*)ListPoolRemove(&p->node, &w->pool);
+        prev = ListPoolRemove(&p->node, &w->pool);
         ListPoolInsertBefore(&p->node, &w->pool, &q->node);
         ListPoolRemove(&q->node, &w->pool);
 
@@ -6625,7 +6625,7 @@ u8 func_eu_0808E94C(DeckMenuWork* w, u16 keys) {
 void DrawKeyboardDeckNumber(u8 a) {
     u8* base;
 
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
     RequestDma3Copy(&gUnk_09417378[a * 64], base + 32, 64);
 }
 
@@ -7052,7 +7052,7 @@ u8 func_jp_0808F638(DeckMenuWork* w, void* a) {
     w->handVisible = 1;
 #endif
 
-    switch ((u16)GetKeysRepeat()) {
+    switch (GetKeysRepeat()) {
     case DPAD_RIGHT:
 #ifdef VERSION_EU
         w->keyCursorSteps = 1;
@@ -7170,7 +7170,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
             break;
 #ifdef VERSION_EU
         case 3:
-            if ((u8)func_eu_0808E94C(w, 32) != 0) {
+            if (func_eu_0808E94C(w, 32) != 0) {
                 AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
@@ -7204,7 +7204,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
             break;
 #ifdef VERSION_EU
         case 3:
-            if ((u8)func_eu_0808E94C(w, 16) != 0) {
+            if (func_eu_0808E94C(w, 16) != 0) {
                 AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
@@ -7248,7 +7248,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
             break;
 #ifdef VERSION_EU
         case 3:
-            if ((u8)func_eu_0808E94C(w, 64) != 0) {
+            if (func_eu_0808E94C(w, 64) != 0) {
                 AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }
@@ -7282,7 +7282,7 @@ u8 UpdateDeckMenuKeyboard(DeckMenuWork* w, void* a) {
             break;
 #ifdef VERSION_EU
         case 3:
-            if ((u8)func_eu_0808E94C(w, 128) != 0) {
+            if (func_eu_0808E94C(w, 128) != 0) {
                 AnimStart(&w->anim4, 0, ANIM_FLAG_LOOP);
                 w->onEndKey = 0;
             }

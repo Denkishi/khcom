@@ -592,7 +592,7 @@ void TitleMenuDrawBasic(TitleMenuWork* work) {
 
     for (i = 0; i < count; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)sTitleMenuEntrySpritesEu[gLanguage];
+        void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
         DrawSprite(work->x, y, spr[i], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
 #else
@@ -620,7 +620,7 @@ void TitleMenuDrawFull(TitleMenuWork* work) {
 
     for (i = 0; i < 4; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)sTitleMenuEntrySpritesEu[gLanguage];
+        void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
         DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
 #else
@@ -644,7 +644,7 @@ void TitleMenuDrawNewGame(TitleMenuWork* work) {
 
     for (i = 0; i < 2; i++) {
 #ifdef VERSION_EU
-        void** spr = (void**)sTitleMenuEntrySpritesEu[gLanguage];
+        void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
         DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
 #else
@@ -668,7 +668,7 @@ void TitleMenuDrawSingle(TitleMenuWork* work) {
 
 #ifdef VERSION_EU
     {
-        void** spr = (void**)sTitleMenuEntrySpritesEu[gLanguage];
+        void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
         DrawSprite(work->x, y, spr[work->choice[0]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 100);
     }
@@ -850,8 +850,8 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
 
 #ifdef VERSION_EU
     {
-        void** a = (void**)gTitleLumiSpritesEu[gLanguage];
-        void** b = (void**)gTitleLumiSpritesAltEu[gLanguage];
+        void** a = gTitleLumiSpritesEu[gLanguage];
+        void** b = gTitleLumiSpritesAltEu[gLanguage];
 
         tbl = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? b : a;
     }

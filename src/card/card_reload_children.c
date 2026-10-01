@@ -634,7 +634,7 @@ void PrizeBoss_2(BossPrizeWork* w) {
     affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     def = &gCardDefs[w->cardId];
     DrawSprite(w->x, (u16)w->y - 8, def->gfx, w->tiles, w->palette, affine, pal,
-               (u16)(w->priority + 1));
+               w->priority + 1);
     back = &gCardBacks[w->stat.category];
     DrawSprite(w->x, (u16)w->y - 8, back->gfx, w->tiles2, w->palette2, affine, pal,
                w->priority);
@@ -642,7 +642,7 @@ void PrizeBoss_2(BossPrizeWork* w) {
 
     if (def->category != 3) {
         DrawSprite(w->x, (u16)w->y - 8, gfx, w->tiles4, w->palette2, affine, pal,
-                   (u16)(w->priority - 1));
+                   w->priority - 1);
     }
 
     if (w->collected == 0) {
@@ -653,7 +653,7 @@ void PrizeBoss_2(BossPrizeWork* w) {
         }
 
         DrawSprite(w->x2, w->y2, gUnk_09EE1380[0], w->tiles5, w->palette3,
-                   AllocObjAffine(0, v, v, 0), pal, (u16)(w->priority + 2));
+                   AllocObjAffine(0, v, v, 0), pal, w->priority + 2);
     }
 
     TaskPoolDraw(&w->tasks);

@@ -2512,9 +2512,9 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
+    AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     work->state = 0;
-    ColliderInit(&work->collider, 7, (u16)BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
+    ColliderInit(&work->collider, 7, BosUrsulaGetTakoPlatformRadius(work->isLeft), 1);
     ColliderSetPosition(&work->collider, work->obj.x, work->obj.y + 0x1000, -0x3800);
     SetEnemyHpFromStats(&work->obj, 35, 51);
 }
@@ -2563,11 +2563,11 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
 
     switch (work->state) {
     case 0:
-        AnimChange(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
+        AnimChange(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
         break;
     case 1:
         if (work->timer == 0) {
-            AnimChange(&work->anim, (u16)(work->animBase + 7), 0);
+            AnimChange(&work->anim, work->animBase + 7, 0);
         }
 
         work->timer++;
@@ -2582,7 +2582,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
     case 2:
         if (AnimGetId(&work->anim) == (s16)work->animBase + 4) {
             if (AnimGetFrame(&work->anim) == 0 && AnimIsFrameEnding(&work->anim)) {
-                AnimStart(&work->anim, (u16)(work->animBase + 5), ANIM_FLAG_LOOP);
+                AnimStart(&work->anim, work->animBase + 5, ANIM_FLAG_LOOP);
                 SetBtlObjUnhittable(p, 1);
 
                 if ((u16)(GetRandom() % 100) <= 19) {
@@ -2596,7 +2596,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
                 work->timer = 0;
             }
         } else {
-            AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
+            AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
         }
 
         break;
@@ -2611,7 +2611,7 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
         break;
     case 4:
         if (work->timer > 180) {
-            AnimStart(&work->anim, (u16)(work->animBase + 6), 0);
+            AnimStart(&work->anim, work->animBase + 6, 0);
             work->state = 5;
             work->offsetZ = 0x800;
 
@@ -2661,11 +2661,11 @@ u8 task_bos_ursula_tako_1(UrsulaTakoWork* work) {
 
         break;
     case 7:
-        AnimChange(&work->anim, (u16)(work->animBase + 6), 0);
+        AnimChange(&work->anim, work->animBase + 6, 0);
 
         if (AnimIsFinished(&work->anim) || BosUrsulaIsGimmickActive()) {
             work->state = 0;
-            AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
+            AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
             ClearBtlObjActionFlags(p);
         } else {
             if (AnimGetFrame(&work->anim) == 1) {
@@ -2811,7 +2811,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6860, 8), gUnk_0979E344);
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     AnimInit(&work->anim, gUnk_09EF68A0, gUnk_09EF6860);
-    AnimStart(&work->anim, (u16)(work->animBase + 4), ANIM_FLAG_LOOP);
+    AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);
 }
 

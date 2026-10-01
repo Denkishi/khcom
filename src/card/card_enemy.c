@@ -130,18 +130,18 @@ void EnemyCardDraw(CardDisplayWork* p) {
                 flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                            gEnemyCardBacks[0].gfx, gCardBattleState->tiles[p->cardDef->category],
-                           gCardBattleState->palette, affine, flags, (u16)(p->priority - 1));
+                           gCardBattleState->palette, affine, flags, p->priority - 1);
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                            gfx, p->tiles, p->palette, affine, flags, p->priority);
 
                 if (p->valueModified != 0) {
                     DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                                gUnk_09EE981C[p->value], gCardBattleState->tiles7,
-                               gCardBattleState->palette2, affine, flags, (u16)(p->priority - 2));
+                               gCardBattleState->palette2, affine, flags, p->priority - 2);
                 } else {
                     DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                                gUnk_09EE981C[p->value], gCardBattleState->tiles5,
-                               gCardBattleState->palette, affine, flags, (u16)(p->priority - 2));
+                               gCardBattleState->palette, affine, flags, p->priority - 2);
                 }
             }
         }

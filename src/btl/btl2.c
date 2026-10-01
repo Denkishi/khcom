@@ -1651,7 +1651,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         aff = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, pri,
-                   (u16)(-4100 - (work->y >> 8) * 4));
+                   -4100 - (work->y >> 8) * 4);
 
         if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);
@@ -1883,7 +1883,7 @@ void task_btl_premire_2(BtlPremireWork* work) {
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         aff = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);
         DrawSprite(x, y, work->gfx, work->tiles, work->palette, aff, anim,
-                   (u16)(-4100 - (work->y >> 8) * 4));
+                   -4100 - (work->y >> 8) * 4);
 
         if (work->flags & BTL_PRIZE_FLAG_DRAW_SHADOW) {
             WorldToScreen(&x, &y, work->x, work->y, work->groundZ);

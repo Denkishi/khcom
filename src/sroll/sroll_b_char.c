@@ -37,7 +37,7 @@ void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
     w->motion = 0;
     w->motionTimer = 0;
     w->obj = a->obj;
-    w->tiles = AllocObjTiles((u16)(res->tileCount * 32), 0);
+    w->tiles = AllocObjTiles(res->tileCount * 32, 0);
     w->palette = LoadObjPalette(res->palette, 32);
     anim = &w->anim;
     AnimInit(anim, 0, 0);

@@ -398,7 +398,7 @@ void Ev_mapObj_2(EventMapObjectWork* w) {
 
     for (i = 0; i < q->placementCount; i++) {
         e = &entries[i];
-        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], 0, SPRITE_PRIORITY(2), (u16)(-0x1004 - e->y * 4));
+        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], 0, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
     }
 }
 

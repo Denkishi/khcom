@@ -1500,7 +1500,7 @@ s32 GetMsgTextWidth(TextChar* a) {
                 }
             }
 
-            sum = (u16)(sLatinGlyphWidths.widths[v] + ((sum << 16) >> 16));
+            sum = sLatinGlyphWidths.widths[v] + ((sum << 16) >> 16);
         }
 
         a++;

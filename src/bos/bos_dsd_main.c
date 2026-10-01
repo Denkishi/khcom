@@ -179,9 +179,9 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
         GetBattleSpritePriorityFlags(d->body[0].y);
         WorldToScreen(&x, &y, d->body[0].x, d->body[0].y, -0x6400);
         DrawSprite(x - 96, y + 20, work->gfx, work->tiles, gfx, 0, SPRITE_PRIORITY(1),
-                   (u16)(-4101 - (d->body[0].y >> 8) * 4));
+                   -4101 - (d->body[0].y >> 8) * 4);
         DrawSprite(x - 96, y + 20, work->gfx2, work->tiles2, gfx, 0, SPRITE_PRIORITY(2),
-                   (u16)(-4099 - (d->body[0].y >> 8) * 4));
+                   -4099 - (d->body[0].y >> 8) * 4);
     }
 
     TaskPoolDraw(&work->tasks);

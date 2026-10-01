@@ -1274,7 +1274,7 @@ u8 BosLstAttackGround(BosLstWork* work) {
         if (work->timer <= 19) {
             if (ApplyAttackBox(268, gBtlWork->actor->x,
                               gBtlWork->actor->y, 0,
-                              32, 32, (s16)(((v * 8) >> 8) + 8)) != 0) {
+                              32, 32, ((v * 8) >> 8) + 8) != 0) {
                 m4aSongNumStart(SONG_BTL_MARL_GROUNDHIT);
             }
         }
@@ -2712,7 +2712,7 @@ void task_bos_lst_2(BosLstWork* work) {
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
     DrawSprite(sx + sLstAnimDefs[anim].spriteX, sy + sLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)),
-               (u16)(-0x1004 - (((work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)) >> 8) << 2)));
+               -0x1004 - (((work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)) >> 8) << 2));
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
     k = idx;
     v = work->sub[k].hurtTimer;
@@ -2724,7 +2724,7 @@ void task_bos_lst_2(BosLstWork* work) {
     sub = &work->sub[k];
     DrawSprite(sx + sLstAnimDefs[anim].subSpriteX, sy + sLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY),
-               (u16)(-0x1004 - (((work->y + work->offsetY) >> 8) << 2)));
+               -0x1004 - (((work->y + work->offsetY) >> 8) << 2));
     j = idx ^ 1;
     w = work->sub[j].hurtTimer;
 
@@ -2735,7 +2735,7 @@ void task_bos_lst_2(BosLstWork* work) {
     sub = &work->sub[j];
     DrawSprite(sx + sLstAnimDefs[anim].sub2SpriteX, sy + sLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, 0,
                GetBattleSpritePriorityFlags(work->y + work->offsetY - 0x1100),
-               (u16)(-0x1004 - (((work->y + work->offsetY - 0x1100) >> 8) << 2)));
+               -0x1004 - (((work->y + work->offsetY - 0x1100) >> 8) << 2));
 }
 
 void task_bos_lst_3(BosLstWork* work) {

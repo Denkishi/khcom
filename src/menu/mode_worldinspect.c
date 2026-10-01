@@ -669,8 +669,8 @@ void WorldInspectDraw() {
     }
 
     if (sWorldInspectState == 2) {
-        DrawSprite((s16)(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22),
-                      (s16)(sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12),
+        DrawSprite(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22,
+                      sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12,
                       AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, gUnk_02035124, 0, prio, 2013);
         ApproachValueHalf(&sWorldInspectCursorX,
                       (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000);
@@ -682,9 +682,9 @@ void WorldInspectDraw() {
 
     for (i = 0; i < 12; i++) {
         if (sWorldInspectIconSprites[i] != NULL && sWorldInspectIconPalettes[i] != NULL) {
-            DrawSprite((s16)(sWorldinspectNavs[i].x * 8 + 16), (s16)(sWorldinspectNavs[i].y * 8 + 16),
+            DrawSprite(sWorldinspectNavs[i].x * 8 + 16, sWorldinspectNavs[i].y * 8 + 16,
                           sWorldInspectIconSprites[i], sWorldInspectIconTiles[i], sWorldInspectIconPalettes[i], 0, prio,
-                          (u16)(i + 2001));
+                          i + 2001);
         }
     }
 

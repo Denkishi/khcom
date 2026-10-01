@@ -3085,7 +3085,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 0) {
 #ifdef VERSION_EU
-            SetBtlSoraAnimation(work, (u16)(a->animId + work->swingSpeed), 0);
+            SetBtlSoraAnimation(work, a->animId + work->swingSpeed, 0);
 #else
             SetBtlSoraAnimation(work, a->animId + work->swingSpeed, 0);
 #endif
@@ -10088,7 +10088,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if ((s16)work->stateTimer == 0) {
             MakeOpponentsHittable();
-            SetBtlRikuAnimation(work, (u16)a->animId, 0);
+            SetBtlRikuAnimation(work, a->animId, 0);
 
             if (work->comboCount == 2) {
                 m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK05);

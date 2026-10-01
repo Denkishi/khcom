@@ -476,7 +476,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
 
 void task_status_bar_2(StatusBarWork* work) {
 #ifdef VERSION_EU
-    DrawSprite(work->x >> 8, 0, ((void**)sStatusBarSprites[gLanguage])[2], work->tiles,
+    DrawSprite(work->x >> 8, 0, (sStatusBarSprites[gLanguage])[2], work->tiles,
         work->palette, 0, SPRITE_PRIORITY(3), 29);
 #else
     DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 29);
@@ -484,9 +484,9 @@ void task_status_bar_2(StatusBarWork* work) {
 
     if (gStatusBarState != 2) {
 #ifdef VERSION_EU
-        DrawSprite(128, work->y >> 8, ((void**)sStatusBarSprites[gLanguage])[0], work->tiles,
+        DrawSprite(128, work->y >> 8, (sStatusBarSprites[gLanguage])[0], work->tiles,
             work->palette, 0, SPRITE_PRIORITY(3), 30);
-        DrawSprite(128, work->y2 >> 8, ((void**)sStatusBarSprites[gLanguage])[1], work->tiles,
+        DrawSprite(128, work->y2 >> 8, (sStatusBarSprites[gLanguage])[1], work->tiles,
             work->palette, 0, SPRITE_PRIORITY(3), 31);
 #else
         DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 30);
@@ -518,7 +518,7 @@ void task_status_tab_0(StatusTabWork* work, s32* arg) {
 #endif
     work->palette = LoadObjPalette(gUnk_0984B218, 0x20);
 #ifdef VERSION_EU
-    work->gfx = ((void**)sStatusTabSprites[gLanguage])[*work->tab];
+    work->gfx = (sStatusTabSprites[gLanguage])[*work->tab];
 #else
     work->gfx = gUnk_09EF6920[*work->tab];
 #endif
@@ -529,7 +529,7 @@ void task_status_tab_0(StatusTabWork* work, s32* arg) {
 
 u8 task_status_tab_1(StatusTabWork* work) {
 #ifdef VERSION_EU
-    work->gfx = ((void**)sStatusTabSprites[gLanguage])[*work->tab];
+    work->gfx = (sStatusTabSprites[gLanguage])[*work->tab];
 #else
     work->gfx = gUnk_09EF6920[*work->tab];
 #endif

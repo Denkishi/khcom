@@ -125,13 +125,13 @@ s16 EmyLungeAttack(EmyWork* work, s16 a, s16 b, s16 c, s32 d, s16 e, u16 f, s16 
 
             if (!(work->flags & EMY_FLAG_LUNGE_HIT)) {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    if (ApplyAttackBox(d, actor->x - (g << 8), actor->y, actor->z + (h << 8), (s16)i, i / 2, (s16)i) != 0) {
+                    if (ApplyAttackBox(d, actor->x - (g << 8), actor->y, actor->z + (h << 8), i, i / 2, i) != 0) {
                         m4aSongNumStart(f);
                         work->flags |= EMY_FLAG_LUNGE_HIT;
                         ret = 1;
                     }
                 } else {
-                    if (ApplyAttackBox(d, actor->x + (g << 8), actor->y, actor->z + (h << 8), (s16)i, i / 2, (s16)i) != 0) {
+                    if (ApplyAttackBox(d, actor->x + (g << 8), actor->y, actor->z + (h << 8), i, i / 2, i) != 0) {
                         m4aSongNumStart(f);
                         ret = 1;
                         work->flags |= EMY_FLAG_LUNGE_HIT;

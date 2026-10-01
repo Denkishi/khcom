@@ -1309,7 +1309,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
     DrawSprite(w->x, (u16)w->y2 - 8,
                *w->cardDef->sprites,
                w->tiles, w->palette, affine, pal,
-               (u16)(w->priority + 1));
+               w->priority + 1);
 
     if (w->cardDef->backIndex == 4) {
         gfx = w->cardBack->sprites[w->backFrame];
@@ -1325,7 +1325,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
         gfx = gUnk_09EE981C[w->value];
         DrawSprite(w->x, (u16)w->y2 - 8, gfx,
                    w->tiles4, w->palette2, affine, pal,
-                   (u16)(w->priority - 1));
+                   w->priority - 1);
     }
 
     if (w->collected == 0) {
@@ -1338,7 +1338,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
         DrawSprite(w->x2, w->y, gUnk_09EE1380[0],
                    w->tiles5, w->palette3,
                    AllocObjAffine(0, v, v, 0), pal,
-                   (u16)(w->priority + 2));
+                   w->priority + 2);
     }
 
     TaskPoolDraw(&w->tasks);
@@ -1477,7 +1477,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     work->keyCount = CountRemainingEventKeys();
 
     for (i = 0; i < work->keyCount; i++) {
-        InitEventKeyCard(&work->cards[i], GetEventKey((u8)i));
+        InitEventKeyCard(&work->cards[i], GetEventKey(i));
 
         if (work->cards[i].sprite.palette != NULL) {
             FadeSetPaletteExcluded(work->cards[i].sprite.palette->index + 16, 1);
@@ -1679,7 +1679,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     u8* q;
 
     zero = 0;
-    CpuSet((void*)&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(EventKeyCard) / 4);
+    CpuSet(&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(EventKeyCard) / 4);
 
     if (key->kind != 255) {
         c = &gMapCardDefs[key->kind * 10];

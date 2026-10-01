@@ -254,7 +254,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
                     WorldToScreen(&sx, &sy, x, y, z);
                     DrawSprite(sx, sy, gUnk_09EFBEB8, work->tiles,
                         work->palette, 0, GetBattleSpritePriorityFlags(y),
-                        (u16)(-0x1004 - (s32)(y >> 6)));
+                        -0x1004 - (s32)(y >> 6));
                 }
             }
         }

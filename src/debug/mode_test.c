@@ -370,7 +370,7 @@ void eu_08061588(FrdPoohWork* work) {
     }
 
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
-               (u16)(-4100 - ((body->y >> 8) * 4)));
+               -4100 - ((body->y >> 8) * 4));
     body->depth = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);
 }

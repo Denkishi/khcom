@@ -384,8 +384,8 @@ void WorldWarpDraw() {
 #endif
 
     if (sWorldWarpState == 2) {
-        DrawSprite((s16)(sWarpIcons[sWorldWarpCursor].x * 8 + 22),
-            (s16)(sWarpIcons[sWorldWarpCursor].y * 8 + 12),
+        DrawSprite(sWarpIcons[sWorldWarpCursor].x * 8 + 22,
+            sWarpIcons[sWorldWarpCursor].y * 8 + 12,
             AnimUpdate(&sWorldWarpHighlightAnim), gUnk_02035518, gUnk_0203551C, 0, SPRITE_PRIORITY(2), 0x898);
         ApproachValueHalf(&sWorldWarpCursorX, (sWarpIcons[sWorldWarpCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldWarpCursorY, (sWarpIcons[sWorldWarpCursor].y << 11) + 0xFFFFFA00);
@@ -395,8 +395,8 @@ void WorldWarpDraw() {
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpIconSprites[i] != NULL) {
-            DrawSprite((s16)(sWarpIcons[i].x * 8 + 16), (s16)(sWarpIcons[i].y * 8 + 16),
-                sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, SPRITE_PRIORITY(2), (u16)(i + 0x834));
+            DrawSprite(sWarpIcons[i].x * 8 + 16, sWarpIcons[i].y * 8 + 16,
+                sWorldWarpIconSprites[i], sWorldWarpIconTiles[i], sWorldWarpIconPalettes[i], 0, SPRITE_PRIORITY(2), i + 0x834);
         }
     }
 

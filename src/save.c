@@ -188,7 +188,7 @@ void SaveWriteHeader(s16 slot) {
 
     hdr = EwramAlloc(SAVE_HEADER_SIZE);
     ZeroFill(hdr, SAVE_HEADER_SIZE);
-    MakeSaveHeaderData(&hdr->data, (s16)(u16)slot);
+    MakeSaveHeaderData(&hdr->data, (u16)slot);
     CopyBytes(gSaveSignature, (u8*)hdr, SAVE_SIGNATURE_SIZE);
     hdr->checksum = 0;
     hdr->checksum = SaveChecksum((u16*)hdr, SAVE_HEADER_SIZE);
@@ -411,7 +411,7 @@ int SaveRepairFileLarge(u16 file) {
     bad = -1;
 
     for (i = 0; i < SAVE_SLOTS; i++) {
-        ret = results[i] = SaveCheckFileLargeSlot((s16)file, i);
+        ret = results[i] = SaveCheckFileLargeSlot(file, i);
 
         if (ret == SAVE_OK) {
             if (good < 0) {
@@ -487,7 +487,7 @@ void SaveWriteFileLarge(u16 file) {
     }
 
     EwramFree(blk);
-    SaveWriteHeader((s16)file);
+    SaveWriteHeader(file);
 }
 
 void SaveSetFileLargeState(s16 file, s16 slot, s16 state) {
@@ -567,7 +567,7 @@ int SaveRepairFileSmall(u16 file) {
     bad = -1;
 
     for (i = 0; i < SAVE_SLOTS; i++) {
-        ret = results[i] = SaveCheckFileSmallSlot((s16)file, i);
+        ret = results[i] = SaveCheckFileSmallSlot(file, i);
 
         if (ret == SAVE_OK) {
             if (good < 0) {

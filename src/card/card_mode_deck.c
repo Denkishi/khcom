@@ -65,7 +65,7 @@ s32 DarkPoint_1(DarkPointWork* w) {
     SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
 
     if (w->slideTimer > 0) {
-        ApproachValue(&w->x, 0, (u16)w->slideTimer);
+        ApproachValue(&w->x, 0, w->slideTimer);
         w->slideTimer--;
     }
 

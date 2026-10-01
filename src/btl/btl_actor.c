@@ -491,14 +491,14 @@ u8 HumChooseCardAction(HumWork* work, u16 interval, u16 offset, u16 width, u16 d
     }
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-        if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
+        if (HumIsTargetInReach(work, offset, width, depth)) {
             if (GetActiveCardValue() <= value || value == 0) {
                 gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
             }
         } else if (GetActiveCardValue() == value) {
             gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
         }
-    } else if (HumIsTargetInReach(work, (s16)offset, width, depth)) {
+    } else if (HumIsTargetInReach(work, offset, width, depth)) {
         gBtlWork->rikuKeys |= RIKU_KEY_USE_CARD;
     }
 

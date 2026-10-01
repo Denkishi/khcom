@@ -302,13 +302,13 @@ static void PrizeCard_2(PrizeCardWork* w) {
 
     def = &gCardDefs[w->cardId];
     DrawSprite(w->x, (u16)w->y2 - 8, def->gfx, w->tiles, w->palette,
-               affine, pal, (u16)(w->priority + 1));
+               affine, pal, w->priority + 1);
     back = &gCardBacks[w->stat.category];
     DrawSprite(w->x, (u16)w->y2 - 8, back->gfx, w->tiles2, w->palette2,
-               affine, pal, (u16)w->priority);
+               affine, pal, w->priority);
     gfx = gUnk_09EE981C[w->stat.value];
     DrawSprite(w->x, (u16)w->y2 - 8, gfx, w->tiles4, w->palette2, affine,
-               pal, (u16)(w->priority - 1));
+               pal, w->priority - 1);
 
     if (w->collected[0] == 0) {
         v = 204 - ((w->pos.ground - w->pos.z) >> 7);
@@ -319,7 +319,7 @@ static void PrizeCard_2(PrizeCardWork* w) {
 
         DrawSprite(w->x2, w->y, gUnk_09EE1380[0],
                    w->tiles5, w->palette3, AllocObjAffine(0, v, v, 0), pal,
-                   (u16)(w->priority + 2));
+                   w->priority + 2);
     }
 
     TaskPoolDraw(&w->tasks);

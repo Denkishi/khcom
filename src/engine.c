@@ -944,7 +944,7 @@ u16 GetSpriteTileBytes(u16* p) {
         p += 3;
     }
 
-    return (u16)(total << 5);
+    return total << 5;
 }
 
 u8 IsRectOutsideScreen(s16 x, s16 y, s32 a, s32 b, s32 c, s32 d) {
@@ -1223,7 +1223,7 @@ ObjPalette* AllocObjPalette(u16 size) {
 
 void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
     if (t->type == 2) {
-        LoadPalette(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), (u16)(t->count << 5));
+        LoadPalette(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), t->count << 5);
     }
 }
 

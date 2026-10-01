@@ -495,12 +495,12 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             break;
     }
 
-    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[slot]);
+    p = ListPoolFirst(&w->cardDisplays[slot]);
 
     while (p != NULL) {
         // @bug A "not have" display has no slot (NULL write).
         p->args.slot->unk_06 = 0;
-        p = (CardDisplayWork*)ListPoolNext(&p->node);
+        p = ListPoolNext(&p->node);
     }
 
     w->selectedCards[slot] = ListPoolFirst(&w->cardDisplays[slot]);
@@ -1968,11 +1968,11 @@ void AddPickedCardToSoraDeck(CardBattleWork* w) {
 
     if (w->listIndex == 0) {
         w->cursors[0] = gSoraSelectedCard->args.index;
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[0]);
+        node = ListPoolFirst(&w->cardDisplays[0]);
 
         while (node != NULL) {
             node->command = 7;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
 
         TaskPoolUpdate(&w->tasks);
@@ -1989,7 +1989,7 @@ void SelectOtherSoraCard(CardBattleWork* w, u8 kind, u8 c) {
     CardDisplayWork* node;
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[kind]);
+    node = ListPoolFirst(&w->cardDisplays[kind]);
 
     while (node != NULL) {
         switch (node->ringIndex) {
@@ -2013,7 +2013,7 @@ void SelectOtherSoraCard(CardBattleWork* w, u8 kind, u8 c) {
             node->flags |= CARD_DISP_FLAG_SELECTED;
         }
 
-        node = (CardDisplayWork*)ListPoolNext(&node->node);
+        node = ListPoolNext(&node->node);
     }
 }
 
@@ -2030,7 +2030,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
     prev = gSoraSelectedCard->args.index;
-    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[b]);
+    p = ListPoolFirst(&w->cardDisplays[b]);
 
     while (p != NULL) {
         if (p->ringIndex == 0) {
@@ -2038,7 +2038,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
             break;
         }
 
-        p = (CardDisplayWork*)ListPoolNext(&p->node);
+        p = ListPoolNext(&p->node);
     }
 
     gSoraSelectedCard->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
@@ -2075,7 +2075,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
         }
     }
 
-    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[b]);
+    p = ListPoolFirst(&w->cardDisplays[b]);
 
     while (p != NULL) {
         p->ringIndex++;
@@ -2087,7 +2087,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
         p->priority += 4;
         p->unk_80 = gSoraCardRingAngles[p->ringIndex];
         p->timer = c;
-        p = (CardDisplayWork*)ListPoolNext(&p->node);
+        p = ListPoolNext(&p->node);
     }
 
     gSoraSelectedCard->priority = 50;
@@ -2106,7 +2106,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
     m4aSongNumStart(SONG_SYS_CLICKI04B);
     gSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
     prev = gSoraSelectedCard->args.index;
-    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[b]);
+    p = ListPoolFirst(&w->cardDisplays[b]);
 
     while (p != NULL) {
         if (p->ringIndex == 2) {
@@ -2114,7 +2114,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
             break;
         }
 
-        p = (CardDisplayWork*)ListPoolNext(&p->node);
+        p = ListPoolNext(&p->node);
     }
 
     gSoraSelectedCard->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
@@ -2151,7 +2151,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
         }
     }
 
-    p = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[b]);
+    p = ListPoolFirst(&w->cardDisplays[b]);
 
     while (p != NULL) {
         p->ringIndex--;
@@ -2163,7 +2163,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
         p->priority += 4;
         p->unk_80 = gSoraCardRingAngles[p->ringIndex];
         p->timer = 4;
-        p = (CardDisplayWork*)ListPoolNext(&p->node);
+        p = ListPoolNext(&p->node);
     }
 
     gSoraSelectedCard->priority = 50;
@@ -2473,7 +2473,7 @@ s32 UseSoraCard(CardBattleWork* w) {
     found = 0;
     gSoraSelectedCard = 0;
 
-    e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+    e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
     while (e != NULL) {
         if (e->ringIndex == 2) {
@@ -2486,11 +2486,11 @@ s32 UseSoraCard(CardBattleWork* w) {
             break;
         }
 
-        e = (CardDisplayWork*)ListPoolNext(&e->node);
+        e = ListPoolNext(&e->node);
     }
 
     if (gSoraSelectedCard == NULL) {
-        e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (e != NULL) {
             if (e->ringIndex == 0) {
@@ -2502,7 +2502,7 @@ s32 UseSoraCard(CardBattleWork* w) {
                 break;
             }
 
-            e = (CardDisplayWork*)ListPoolNext(&e->node);
+            e = ListPoolNext(&e->node);
         }
     }
 
@@ -2514,7 +2514,7 @@ s32 UseSoraCard(CardBattleWork* w) {
             id = 0;
         }
 
-        for (e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = (CardDisplayWork*)ListPoolNext(&e->node)) {
+        for (e = ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = ListPoolNext(&e->node)) {
             if (e->ringIndex == 0) {
                 other = e->args.index;
                 break;
@@ -2608,7 +2608,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
     found = 0;
     gSoraSelectedCard = 0;
 
-    e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+    e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
     while (e != NULL) {
         if (e->ringIndex == 2) {
@@ -2621,11 +2621,11 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
             break;
         }
 
-        e = (CardDisplayWork*)ListPoolNext(&e->node);
+        e = ListPoolNext(&e->node);
     }
 
     if (gSoraSelectedCard == NULL) {
-        e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (e != NULL) {
             if (e->ringIndex == 0) {
@@ -2637,7 +2637,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
                 break;
             }
 
-            e = (CardDisplayWork*)ListPoolNext(&e->node);
+            e = ListPoolNext(&e->node);
         }
     }
 
@@ -2663,7 +2663,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
             id = 0;
         }
 
-        for (e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = (CardDisplayWork*)ListPoolNext(&e->node)) {
+        for (e = ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = ListPoolNext(&e->node)) {
             if (e->ringIndex == 0) {
                 other = e->args.index;
                 break;
@@ -2725,7 +2725,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
     found = 0;
     gSoraSelectedCard = 0;
 
-    e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+    e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
     while (e != NULL) {
         if (e->ringIndex == 2) {
@@ -2738,11 +2738,11 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
             break;
         }
 
-        e = (CardDisplayWork*)ListPoolNext(&e->node);
+        e = ListPoolNext(&e->node);
     }
 
     if (gSoraSelectedCard == NULL) {
-        e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (e != NULL) {
             if (e->ringIndex == 0) {
@@ -2754,7 +2754,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
                 break;
             }
 
-            e = (CardDisplayWork*)ListPoolNext(&e->node);
+            e = ListPoolNext(&e->node);
         }
     }
 
@@ -2766,7 +2766,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
             id = 0;
         }
 
-        for (e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = (CardDisplayWork*)ListPoolNext(&e->node)) {
+        for (e = ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = ListPoolNext(&e->node)) {
             if (e->ringIndex == 0) {
                 other = e->args.index;
                 break;
@@ -2895,7 +2895,7 @@ s32 StockSoraCard(CardBattleWork* w) {
     found = 0;
     gSoraSelectedCard = 0;
 
-    e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+    e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
     while (e != NULL) {
         if (e->ringIndex == 2) {
@@ -2908,11 +2908,11 @@ s32 StockSoraCard(CardBattleWork* w) {
             break;
         }
 
-        e = (CardDisplayWork*)ListPoolNext(&e->node);
+        e = ListPoolNext(&e->node);
     }
 
     if (gSoraSelectedCard == NULL) {
-        e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (e != NULL) {
             if (e->ringIndex == 0) {
@@ -2924,7 +2924,7 @@ s32 StockSoraCard(CardBattleWork* w) {
                 break;
             }
 
-            e = (CardDisplayWork*)ListPoolNext(&e->node);
+            e = ListPoolNext(&e->node);
         }
     }
 
@@ -2936,7 +2936,7 @@ s32 StockSoraCard(CardBattleWork* w) {
             id = 0;
         }
 
-        for (e = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = (CardDisplayWork*)ListPoolNext(&e->node)) {
+        for (e = ListPoolFirst(&w->cardDisplays[w->listIndex]); e != NULL; e = ListPoolNext(&e->node)) {
             if (e->ringIndex == 0) {
                 other = e->args.index;
                 break;
@@ -2990,14 +2990,14 @@ void RemoveSoraCardDisplays(CardBattleWork* w) {
     u8 i;
 
     for (i = 0; i < 4; i++) {
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[i]);
+        node = ListPoolFirst(&w->cardDisplays[i]);
 
         while (node != NULL) {
             if (node->command < 5 || node->command > 6) {
                 node->command = 7;
             }
 
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     }
 
@@ -3011,14 +3011,14 @@ void func_0807A684(CardBattleWork* w) {
     u8 i;
 
     for (i = 0; i < 4; i++) {
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[i]);
+        node = ListPoolFirst(&w->cardDisplays[i]);
 
         while (node != NULL) {
             if (node->command == 0) {
                 node->command = 7;
             }
 
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     }
 }
@@ -3032,11 +3032,11 @@ void OpenSoraCards(CardBattleWork* w) {
     }
 
     for (i = 0; i < 4; i++) {
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[i]);
+        node = ListPoolFirst(&w->cardDisplays[i]);
 
         while (node != NULL) {
             node->flags |= CARD_DISP_FLAG_OPEN;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     }
 
@@ -3054,11 +3054,11 @@ void CloseSoraCards(CardBattleWork* w) {
     }
 
     for (i = 0; i < 4; i++) {
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[i]);
+        node = ListPoolFirst(&w->cardDisplays[i]);
 
         while (node != NULL) {
             node->flags &= ~CARD_DISP_FLAG_OPEN;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     }
 
@@ -3361,11 +3361,11 @@ u8 func_0807AEC4(CardBattleWork* w, u8 n) {
     u8 count;
 
     count = 0;
-    node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[n]);
+    node = ListPoolFirst(&w->cardDisplays[n]);
 
     while (node != NULL) {
         count++;
-        node = (CardDisplayWork*)ListPoolNext(&node->node);
+        node = ListPoolNext(&node->node);
     }
 
     return count;
@@ -3376,7 +3376,7 @@ u8 func_0807AEF4(CardBattleWork* w, u8 kind) {
     u8 count;
 
     count = 0;
-    node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[kind]);
+    node = ListPoolFirst(&w->cardDisplays[kind]);
 
     while (node != NULL) {
         if ((node->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_RELOAD_GAUGE)) == 0) {
@@ -3387,7 +3387,7 @@ u8 func_0807AEF4(CardBattleWork* w, u8 kind) {
             }
         }
 
-        node = (CardDisplayWork*)ListPoolNext(&node->node);
+        node = ListPoolNext(&node->node);
     }
 
     return count;
@@ -3410,14 +3410,14 @@ void SwitchSoraCardList(CardBattleWork* w) {
 
     if (w->reloadPending[w->listIndex] == 0) {
         w->cursors[w->listIndex] = gSoraSelectedCard->args.index;
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        node = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (node != NULL) {
             node->swingSteps = 4;
             node->swingAngleTarget = gSoraCardSwingAngles[3];
             node->command = 7;
             node->flags &= ~CARD_DISP_FLAG_SELECTED;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     } else {
         w->selectedCards[w->listIndex] = gSoraSelectedCard;
@@ -3436,15 +3436,15 @@ void SwitchSoraCardList(CardBattleWork* w) {
     }
 
     if (w->reloadPending[w->listIndex] == 0) {
-        CreateSoraCardRing(w, (u8)w->listIndex);
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        CreateSoraCardRing(w, w->listIndex);
+        node = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (node != NULL) {
             node->swingAngleTarget = gSoraCardSwingAngles[0];
             node->swingAngle = gSoraCardSwingAngles[0];
             node->swingSteps = 1;
             node->timer = 1;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
 
         if (w->revCountShown[w->listIndex] == 0) {
@@ -3483,13 +3483,13 @@ void CycleSoraCardList(CardBattleWork* w) {
 
     if (w->reloadPending[w->listIndex] == 0) {
         w->cursors[w->listIndex] = gSoraSelectedCard->args.index;
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        node = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (node != NULL) {
             node->swingSteps = 12;
             node->swingAngleTarget = gSoraCardSwingAngles[1];
             node->command = 7;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
     } else {
         w->selectedCards[w->listIndex] = gSoraSelectedCard;
@@ -3514,15 +3514,15 @@ void CycleSoraCardList(CardBattleWork* w) {
     }
 
     if (w->reloadPending[w->listIndex] == 0) {
-        CreateSoraCardRing(w, (u8)w->listIndex);
-        node = (CardDisplayWork*)ListPoolFirst(&w->cardDisplays[w->listIndex]);
+        CreateSoraCardRing(w, w->listIndex);
+        node = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
         while (node != NULL) {
             node->swingSteps = 12;
             node->swingAngleTarget = gSoraCardSwingAngles[0];
             node->swingAngle = gSoraCardSwingAngles[0];
             node->timer = 12;
-            node = (CardDisplayWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
 
         if (w->revCountShown[w->listIndex] == 0 && w->cardsLeft[w->listIndex] > 0) {
@@ -3601,7 +3601,7 @@ void CreateBosscardTask(TaskPool* pool) {
     BtlObj* t;
     u32 v;
 
-    t = (BtlObj*)ListPoolFirst(&gBtlWork->pool);
+    t = ListPoolFirst(&gBtlWork->pool);
 
     while (t != NULL) {
         v = t->kind;
@@ -3620,7 +3620,7 @@ void CreateBosscardTask(TaskPool* pool) {
             return;
         }
 
-        t = (BtlObj*)ListPoolNext(&t->node);
+        t = ListPoolNext(&t->node);
     }
 }
 
@@ -4030,7 +4030,7 @@ void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     v = p->args.index;
 
     if ((s16)v != -1) {
-        LookupSoraCardDef(&p->args, &p->cardDef, (u8)v);
+        LookupSoraCardDef(&p->args, &p->cardDef, v);
 
         if (p->args.slot->cardId == CARD_ID_RELOAD) {
             p->flags |= CARD_DISP_FLAG_RELOAD_CARD;
@@ -4174,7 +4174,7 @@ static void card_2(CardDisplayWork* p) {
 
     if (!(p->flags & CARD_DISP_FLAG_STOCKED)) {
         aff = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 0);
-        DrawSprite(p->x >> 8, y, gCardBacks[p->cardDef->category].gfx, gCardBattleState->tiles[p->cardDef->category], gCardBattleState->palette, aff, attr, (u16)(p->priority - 1));
+        DrawSprite(p->x >> 8, y, gCardBacks[p->cardDef->category].gfx, gCardBattleState->tiles[p->cardDef->category], gCardBattleState->palette, aff, attr, p->priority - 1);
         DrawSprite(p->x >> 8, y, gfx, p->tiles, p->palette, aff, attr, p->priority);
         j = p->value;
 
@@ -4183,15 +4183,15 @@ static void card_2(CardDisplayWork* p) {
         }
 
         if (p->valueModified != 0) {
-            DrawSprite(p->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, p->priority - 2);
         } else if (p->premium != 0) {
-            DrawSprite(p->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, p->priority - 2);
         } else {
-            DrawSprite(p->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, p->priority - 2);
         }
 
         if (p->premium != 0) {
-            DrawSprite(p->x >> 8, y, gCardBattleState->gfx, gCardBattleState->premiumTiles, gCardBattleState->palette, aff, attr, (u16)(p->priority - 3));
+            DrawSprite(p->x >> 8, y, gCardBattleState->gfx, gCardBattleState->premiumTiles, gCardBattleState->palette, aff, attr, p->priority - 3);
         }
 
         return;
@@ -4206,16 +4206,16 @@ static void card_2(CardDisplayWork* p) {
     }
 
     if (p->valueModified != 0) {
-        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, (u16)(p->priority - 10));
+        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, p->priority - 10);
 
         if (p->premium != 0) {
-            DrawSprite(p->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, (u16)(p->priority - 11));
+            DrawSprite(p->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, p->priority - 11);
         }
     } else if (p->premium != 0) {
-        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, (u16)(p->priority - 10));
-        DrawSprite(p->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, (u16)(p->priority - 11));
+        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, p->priority - 10);
+        DrawSprite(p->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, p->priority - 11);
     } else {
-        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, (u16)(p->priority - 10));
+        DrawSprite((p->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, p->priority - 10);
     }
 }
 
@@ -4232,7 +4232,7 @@ void card_not_have_2(CardDisplayWork* p) {
     }
 
     if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
-        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 1));
+        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 1);
     }
 }
 
@@ -5327,7 +5327,7 @@ void card_reload_2(CardDisplayWork* p) {
 
         if (!(gGameState.flags & GAME_FLAG_RIKU) && w->gfx3 != NULL) {
             DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
-                       gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 2));
+                       gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 2);
         }
 
         if ((s32)gCardBattleState->soraReloadGauge > 0) {
@@ -5336,13 +5336,13 @@ void card_reload_2(CardDisplayWork* p) {
             if (w->gfx != NULL) {
                 DrawSprite(p->x >> 8, y + 17, w->gfx, p->tiles3,
                            gCardBattleState->palette, affine, SPRITE_PRIORITY(1),
-                           (u16)(p->priority - 1));
+                           p->priority - 1);
             }
 
             if (gCardBattleState->reloadGaugeFull[0] == 1 && w->gfx2 != NULL) {
                 DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
                            gCardBattleState->palette, 0, SPRITE_PRIORITY(1),
-                           (u16)(p->priority - 1));
+                           p->priority - 1);
             }
         }
     }
@@ -5362,7 +5362,7 @@ void AdvanceSoraReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
         gCardBattleState->soraGaugeAnim++;
     }
 
-    AnimStart(&p->anim3, (u16)gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
+    AnimStart(&p->anim3, gCardBattleState->soraGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
 void ResetSoraReloadGaugeAnim(ReloadGauge* p) {

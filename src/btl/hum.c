@@ -3194,9 +3194,9 @@ u8 task_hum_hades_1(HadesWork* work) {
 
         if (work->base.steps > 0) {
             if (w->flags & HADES_FLAG_FLAMES_ENDING) {
-                ApproachValue(&w->scale, 10, (u16)work->base.steps);
+                ApproachValue(&w->scale, 10, work->base.steps);
             } else {
-                ApproachValue(&w->scale, 0x100, (u16)work->base.steps);
+                ApproachValue(&w->scale, 0x100, work->base.steps);
             }
 
             work->base.steps--;
@@ -3939,7 +3939,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         }
 
         act->y += (y - act->y) >> 2;
-        n = (u16)work->base.stateTimer;
+        n = work->base.stateTimer;
 
         if ((s16)n > 60) {
             work->base.state = 24;
@@ -4043,7 +4043,7 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
             }
         }
 
-        n = (u16)work->base.stateTimer;
+        n = work->base.stateTimer;
 
         if ((s16)n > 60) {
             work->base.state = 30;
@@ -4430,9 +4430,9 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
             AnimChangeWithDef(sHumLaxeneAnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
         }
 
-        ApproachValue(&act->x, work->base.targetX, (u16)work->base.steps);
-        ApproachValue(&act->y, work->base.targetY, (u16)work->base.steps);
-        ApproachValue(&act->z, work->base.targetZ, (u16)work->base.steps);
+        ApproachValue(&act->x, work->base.targetX, work->base.steps);
+        ApproachValue(&act->y, work->base.targetY, work->base.steps);
+        ApproachValue(&act->z, work->base.targetZ, work->base.steps);
         work->base.steps--;
 
         if (work->base.steps <= 0) {
@@ -5356,7 +5356,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             work->base.targetX = x + 0x6E00;
         }
 
-        ApproachValueHalfSteps(&act->x, work->base.targetX, (u16)work->base.steps);
+        ApproachValueHalfSteps(&act->x, work->base.targetX, work->base.steps);
         work->base.steps--;
         HumFaceTarget(&work->base, 1);
 
@@ -8667,7 +8667,7 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         work->base.vz = 0;
         BtlMapFollowPosition(gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-        ApproachValue(&work->base.scaleX, 256, (u16)work->base.steps);
+        ApproachValue(&work->base.scaleX, 256, work->base.steps);
         work->base.steps--;
 
         if (work->base.steps <= 0) {
@@ -8714,9 +8714,9 @@ u8 task_hum_riku_1(RikuWork* work) {
         }
 
         if (work->base.steps > 0) {
-            ApproachValue(&act->x, act->originX, (u16)work->base.steps);
-            ApproachValue(&act->y, act->originY, (u16)work->base.steps);
-            ApproachValue(&act->z, act->originZ, (u16)work->base.steps);
+            ApproachValue(&act->x, act->originX, work->base.steps);
+            ApproachValue(&act->y, act->originY, work->base.steps);
+            ApproachValue(&act->z, act->originZ, work->base.steps);
             work->base.steps--;
 
             if (work->base.steps <= 0) {

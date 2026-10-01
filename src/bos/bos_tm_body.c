@@ -973,16 +973,16 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     s3 = &work->body4;
     WorldToScreen(&x, &y, s0->x, s0->y, s0->z);
     DrawSprite(x, y, work->gfx, work->tiles, pal, a1, SPRITE_PRIORITY(2),
-               (u16)(-4101 - (s0->y >> 8) * 4));
+               -4101 - (s0->y >> 8) * 4);
     WorldToScreen(&x, &y, s1->x, s1->y, s1->z - 0x1900);
     DrawSprite(x, y, work->gfx2, work->tiles, pal, a2, SPRITE_PRIORITY(2),
-               (u16)(-4100 - (s1->y >> 8) * 4));
+               -4100 - (s1->y >> 8) * 4);
     WorldToScreen(&x, &y, s2->x, s2->y, s2->z);
     DrawSprite(x, y, work->gfx3, work->tiles, pal, 0, mode,
-               (u16)(-4100 - (s2->y >> 8) * 4));
+               -4100 - (s2->y >> 8) * 4);
     WorldToScreen(&x, &y, s3->x, s3->y, s3->z);
     DrawSprite(x, y, work->gfx4, work->tiles, pal, 0, mode,
-               (u16)(-4100 - (s3->y >> 8) * 4));
+               -4100 - (s3->y >> 8) * 4);
 }
 
 void task_bos_tm_body_3(TmBodyWork* work) {

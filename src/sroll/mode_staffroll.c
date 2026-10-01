@@ -3032,10 +3032,10 @@ void StaffRollRunScript(StaffRollWork* w) {
             w->opDuration = w->script[w->scriptPos + 4];
             break;
         case 9:
-            FadeStartIn(FADE_MODE_BLACK, (u16)w->script[w->scriptPos + 4]);
+            FadeStartIn(FADE_MODE_BLACK, w->script[w->scriptPos + 4]);
             break;
         case 10:
-            FadeStartOut(FADE_MODE_BLACK, (u16)w->script[w->scriptPos + 4]);
+            FadeStartOut(FADE_MODE_BLACK, w->script[w->scriptPos + 4]);
             break;
         case 11:
             e = StaffRollGetScriptObj(w);

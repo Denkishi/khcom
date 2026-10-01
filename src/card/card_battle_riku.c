@@ -557,7 +557,7 @@ void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n) {
         break;
     }
 
-    count = FillCardSlotsFromIds(slots, deck->cards, n, (u8)kind);
+    count = FillCardSlotsFromIds(slots, deck->cards, n, kind);
 
     if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         ShuffleCardSlots(w->slots[kind], count);
@@ -685,7 +685,7 @@ static void cardbattle_0(CardBattleWork* w) {
     u8 i;
 
     zero = 0;
-    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
+    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
     gCardBattleState->rikuWork = w;
     w->tiles = AllocSpriteFrameTiles(0x80);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
@@ -1690,7 +1690,7 @@ void SwitchRikuCardList(CardBattleWork* w) {
         }
 
         if (w->reloadPending[w->listIndex] == 0) {
-            CreateRikuCardDisplay(w, (u8)w->listIndex);
+            CreateRikuCardDisplay(w, w->listIndex);
             gRikuSelectedCard->x = gRikuCardLayout[5][0];
             gRikuSelectedCard->y = gRikuCardLayout[5][1];
             gRikuSelectedCard->swingSteps = 1;
@@ -1748,7 +1748,7 @@ void CycleRikuCardList(CardBattleWork* w) {
     }
 
     if (w->reloadPending[w->listIndex] == 0) {
-        CreateRikuCardDisplay(w, (u8)w->listIndex);
+        CreateRikuCardDisplay(w, w->listIndex);
         gRikuSelectedCard->x = 0x10400;
         gRikuSelectedCard->y = 0x8C00;
         gRikuSelectedCard->timer = 12;
@@ -2807,7 +2807,7 @@ void RikuCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     v = p->args.index;
 
     if ((s16)v != -1) {
-        LookupRikuCardDef(&p->args, &p->cardDef, (u8)v);
+        LookupRikuCardDef(&p->args, &p->cardDef, v);
 
         if (p->args.slot->cardId == CARD_ID_RELOAD) {
             p->flags |= CARD_DISP_FLAG_RELOAD_CARD;
@@ -2940,7 +2940,7 @@ static void card_2(CardDisplayWork* p) {
 
         aff = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 0);
         flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
-        DrawSprite(p->x >> 8, y, gCardBacks[p->cardDef->category].gfx, gCardBattleState->tiles[p->cardDef->category], gCardBattleState->palette, aff, flags, (u16)(p->priority - 1));
+        DrawSprite(p->x >> 8, y, gCardBacks[p->cardDef->category].gfx, gCardBattleState->tiles[p->cardDef->category], gCardBattleState->palette, aff, flags, p->priority - 1);
         DrawSprite(p->x >> 8, y, gfx, p->tiles, p->palette, aff, flags, p->priority);
         j = p->value;
 
@@ -2949,15 +2949,15 @@ static void card_2(CardDisplayWork* p) {
         }
 
         if (p->valueModified != 0) {
-            DrawSprite(p->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, p->priority - 2);
         } else if (p->premium != 0) {
-            DrawSprite(p->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, p->priority - 2);
         } else {
-            DrawSprite(p->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, (u16)(p->priority - 2));
+            DrawSprite(p->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, p->priority - 2);
         }
 
         if (p->premium != 0) {
-            DrawSprite(p->x >> 8, y, gCardBattleState->gfx, gCardBattleState->premiumTiles, gCardBattleState->palette, aff, flags, (u16)(p->priority - 3));
+            DrawSprite(p->x >> 8, y, gCardBattleState->gfx, gCardBattleState->premiumTiles, gCardBattleState->palette, aff, flags, p->priority - 3);
         }
 
         return;
@@ -2978,16 +2978,16 @@ static void card_2(CardDisplayWork* p) {
     }
 
     if (p->valueModified != 0) {
-        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, (u16)(p->priority - 10));
+        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, p->priority - 10);
 
         if (p->premium != 0) {
-            DrawSprite(p->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, (u16)(p->priority - 11));
+            DrawSprite(p->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, p->priority - 11);
         }
     } else if (p->premium != 0) {
-        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, (u16)(p->priority - 10));
-        DrawSprite(p->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, (u16)(p->priority - 11));
+        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, p->priority - 10);
+        DrawSprite(p->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, p->priority - 11);
     } else {
-        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, (u16)(p->priority - 10));
+        DrawSprite((p->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, p->priority - 10);
     }
 }
 
@@ -3007,7 +3007,7 @@ void NO_Card_2(CardDisplayWork* p) {
         if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
             if (p->scaleX != 0) {
                 if (gRikuBtlWork->hcEffect != 7) {
-                    DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, (u16)(p->priority - 1));
+                    DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 1);
                 }
             }
         }
@@ -3768,7 +3768,7 @@ void AdvanceRikuReloadGaugeAnim(ReloadGauge* p, CardDisplayWork* w) {
         gCardBattleState->rikuGaugeAnim++;
     }
 
-    AnimStart(&p->anim3, (u16)gCardBattleState->rikuGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
+    AnimStart(&p->anim3, gCardBattleState->rikuGaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
 void ResetRikuReloadGaugeAnim(ReloadGauge* p) {
@@ -3845,7 +3845,7 @@ void UpdateRikuReloadGauge(CardDisplayWork* p) {
 #ifndef VERSION_EU
                         m4aSongNumStart(SONG_SYS_CHAGEF1);
 #endif
-                        SetRikuReloadCounterAnim(p->reloadGauge, (s16)gCardBattleState->rikuReloadCounter);
+                        SetRikuReloadCounterAnim(p->reloadGauge, gCardBattleState->rikuReloadCounter);
                     }
                 }
 
@@ -3911,7 +3911,7 @@ void Reload_Card_2(CardDisplayWork* p) {
             if (w->gfx3 != NULL) {
                 DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
                            gCardBattleState->palette, affine, attr,
-                           (u16)(p->priority - 2));
+                           p->priority - 2);
             }
 
             if ((s32)gCardBattleState->rikuReloadGauge > 0) {
@@ -3920,13 +3920,13 @@ void Reload_Card_2(CardDisplayWork* p) {
                 if (w->gfx != NULL) {
                     DrawSprite(p->x >> 8, y + 17, w->gfx,
                                p->tiles3, gCardBattleState->palette, affine2, SPRITE_PRIORITY(1),
-                               (u16)(p->priority - 1));
+                               p->priority - 1);
                 }
 
                 if (gCardBattleState->reloadGaugeFull[1] == 1 && w->gfx2 != NULL) {
                     DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
                                gCardBattleState->palette, affine, SPRITE_PRIORITY(1),
-                               (u16)(p->priority - 1));
+                               p->priority - 1);
                 }
             }
         }

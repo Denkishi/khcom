@@ -144,7 +144,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->valueRow = 0;
     w->scrollBarVisible = 0;
     w->isEventDoor = SelectCurrentEventDoor();
-    n = (u8)GetCurrentRoomCardValue() + 1;
+    n = GetCurrentRoomCardValue() + 1;
     w->requiredValue = n;
 
     if (n == 10) {
@@ -168,12 +168,12 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
 
         w->tiles2 = LoadObjTiles(gCardBacks[4].tiles2, 0x300);
         w->palette = LoadObjPalette(gUnk_09618D38, 32);
-        FadeSetPaletteExcluded((u16)(w->palette->index + 16), 1);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
     } else {
         w->tiles4 = 0;
         w->tiles2 = 0;
         w->palette = LoadObjPalette(gUnk_09618D38, 32);
-        FadeSetPaletteExcluded((u16)(w->palette->index + 16), 1);
+        FadeSetPaletteExcluded(w->palette->index + 16, 1);
     }
 
     gMapCardUiResources.tiles = AllocObjTiles(0x280, 0);
@@ -254,10 +254,10 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     }
 
     w->nameY = 0x19100;
-    FadeSetPaletteExcluded((u16)(w->palette3->index + 16), 1);
-    FadeSetPaletteExcluded((u16)(w->palette2->index + 16), 1);
+    FadeSetPaletteExcluded(w->palette3->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
     FadeSetPaletteExcluded(15, 1);
-    FadeSetPaletteExcluded((u16)(w->palette4->index + 16), 1);
+    FadeSetPaletteExcluded(w->palette4->index + 16, 1);
     w->unk_1E4 = 0;
     w->mosaicX = 9;
     w->mosaicY = 9;
@@ -635,14 +635,14 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* w, void* a) {
     }
 
     if (w->card->steps == 0) {
-        node = (MapcardWork*)ListPoolFirst(&w->cards);
+        node = ListPoolFirst(&w->cards);
 
         while (node != NULL) {
             if (w->card != node) {
                 node->flags |= MAPCARD_FLAG_RAISED;
             }
 
-            node = (MapcardWork*)ListPoolNext(&node->node);
+            node = ListPoolNext(&node->node);
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
@@ -850,7 +850,7 @@ u8 UpdateMapSelectClose(MapSelectWork* w) {
 
 void MapSelect_2(MapSelectWork* w) {
     if (w->tiles3 != NULL && w->palette3 != NULL) {
-        DrawSprite((s16)(w->x3 >> 8), (s16)(w->titleY >> 8),
+        DrawSprite(w->x3 >> 8, w->titleY >> 8,
 #ifdef VERSION_EU
                    gMapSelectTitleSpritesByLanguage[gLanguage][0],
 #else
@@ -864,13 +864,13 @@ void MapSelect_2(MapSelectWork* w) {
         case 0:
             break;
         case 2:
-            DrawSprite((s16)((w->card->x >> 8) + 4), (s16)((w->card->y >> 8) - 32), gMapCardUiResources.sprites[3], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[3], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
             break;
         case 3:
-            DrawSprite((s16)((w->card->x >> 8) + 4), (s16)((w->card->y >> 8) - 32), gMapCardUiResources.sprites[7], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[7], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
             break;
         case 1:
-            DrawSprite((s16)((w->card->x >> 8) + 4), (s16)((w->card->y >> 8) - 32), gMapCardUiResources.sprites[5], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[5], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
             break;
         case 4:
             break;
@@ -878,16 +878,16 @@ void MapSelect_2(MapSelectWork* w) {
     }
 
     if (IsMessageWindowOpen() == 0) {
-        DrawSprite((s16)((w->x >> 8) - 23), (s16)((w->y >> 8) - 27), w->gfx, w->tiles, w->palette2, 0, 0, 41);
-        DrawSprite((s16)((w->x2 >> 8) - 16), (s16)((w->y2 >> 8) - 12), w->gfx2, w->tiles5, w->palette3, 0, 0, 40);
+        DrawSprite((w->x >> 8) - 23, (w->y >> 8) - 27, w->gfx, w->tiles, w->palette2, 0, 0, 41);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 12, w->gfx2, w->tiles5, w->palette3, 0, 0, 40);
     }
 
     if (w->scrollBarVisible != 0) {
         DrawSprite(224,
 #ifdef VERSION_EU
-                   (s16)((18 / w->lastPage) * w->page + 108),
+                   (18 / w->lastPage) * w->page + 108,
 #else
-                   (s16)((17 / w->lastPage) * w->page + 108),
+                   (17 / w->lastPage) * w->page + 108,
 #endif
                    gUnk_09EEB000, w->tiles6, w->palette, 0, 0, 40);
     }
@@ -897,9 +897,9 @@ void MapSelect_2(MapSelectWork* w) {
         DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, 0, SPRITE_FLAG_MOSAIC, 60);
     }
 
-    DrawSprite(128, (s16)(w->y3 >> 8), gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
-    DrawSprite(128, (s16)(w->y4 >> 8), gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
-    DrawTextSlots(16, (s16)(w->nameY >> 8), w->textSlots, w->palette4, 50, w->textSlotCounts[0]);
+    DrawSprite(128, w->y3 >> 8, gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, w->y4 >> 8, gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
+    DrawTextSlots(16, w->nameY >> 8, w->textSlots, w->palette4, 50, w->textSlotCounts[0]);
     TaskPoolDraw(&w->tasks);
 }
 
@@ -1015,13 +1015,13 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
     switch (GetKeysRepeat() & DPAD_ANY) {
     case DPAD_RIGHT:
-        p = (MapcardWork*)ListPoolNext(&work->card->node);
+        p = ListPoolNext(&work->card->node);
 
         if (p != NULL && (p->flags & MAPCARD_FLAG_GFX_LOADED)) {
             work->cursorTargetX = p->x;
             work->steps2 = 4;
             work->card->flags &= ~MAPCARD_FLAG_CURSOR;
-            work->card = (MapcardWork*)ListPoolNext(&work->card->node);
+            work->card = ListPoolNext(&work->card->node);
             work->card->flags |= MAPCARD_FLAG_CURSOR;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
@@ -1041,7 +1041,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
 
         break;
     case DPAD_DOWN:
-        a = (MapcardWork*)ListPoolFirst(&work->cards);
+        a = ListPoolFirst(&work->cards);
         b = 0;
         found = 0;
         cnt = 0;
@@ -1052,14 +1052,14 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
                 break;
             }
 
-            a = (MapcardWork*)ListPoolNext(&a->node);
+            a = ListPoolNext(&a->node);
         }
 
         for (;;) {
             if (b != NULL) {
                 if (b->flags & MAPCARD_FLAG_GFX_LOADED) {
                     cnt++;
-                    b = (MapcardWork*)ListPoolNext(&b->node);
+                    b = ListPoolNext(&b->node);
                     continue;
                 }
 
@@ -1080,7 +1080,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
                     if (a->flags & MAPCARD_FLAG_GFX_LOADED) {
                         a->x = -0x6400;
                         a->flags &= ~MAPCARD_FLAG_CURSOR;
-                        a = (MapcardWork*)ListPoolNext(&a->node);
+                        a = ListPoolNext(&a->node);
                     } else {
                         break;
                     }
@@ -1090,19 +1090,19 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
 
-        b = (MapcardWork*)ListPoolFirst(&work->cards);
+        b = ListPoolFirst(&work->cards);
 
         while (b != NULL) {
             if (b->x == -0x6400) {
                 a->flags &= ~MAPCARD_FLAG_CURSOR;
             }
 
-            b = (MapcardWork*)ListPoolNext(&b->node);
+            b = ListPoolNext(&b->node);
         }
 
         break;
     case DPAD_UP:
-        a = (MapcardWork*)ListPoolFirst(&work->cards);
+        a = ListPoolFirst(&work->cards);
         b = 0;
 
         while (a != NULL) {
@@ -1111,7 +1111,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
                 break;
             }
 
-            a = (MapcardWork*)ListPoolNext(&a->node);
+            a = ListPoolNext(&a->node);
         }
 
         if (ListPoolPrev(&a->node) != NULL) {
@@ -1127,21 +1127,21 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
                     }
 
                     b->x = -0x6400;
-                    b = c = (MapcardWork*)ListPoolNext(&b->node);
+                    b = c = ListPoolNext(&b->node);
                 } while (b != NULL);
             }
 
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
 
-        b = (MapcardWork*)ListPoolFirst(&work->cards);
+        b = ListPoolFirst(&work->cards);
 
         while (b != NULL) {
             if (b->x == -0x6400) {
                 a->flags &= ~MAPCARD_FLAG_CURSOR;
             }
 
-            b = (MapcardWork*)ListPoolNext(&b->node);
+            b = ListPoolNext(&b->node);
         }
 
         break;
@@ -1220,7 +1220,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* w) {
     void* z;
     void* q;
 
-    node = (MapcardWork*)ListPoolFirst(&w->cards);
+    node = ListPoolFirst(&w->cards);
     best = 0x100;
     z = 0;
     w->card = z;
@@ -1236,7 +1236,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* w) {
             }
         }
 
-        node = (MapcardWork*)ListPoolNext(&node->node);
+        node = ListPoolNext(&node->node);
     }
 
     q = w->card;
@@ -1787,12 +1787,12 @@ u8 UpdateMapSelectTutorial(MapSelectWork* w, void* a) {
                 CreateSysmsgwinTask(&w->tasks, w->tutorialMessage);
                 w->tutorialMessage++;
             } else {
-                n = (MapcardWork*)ListPoolFirst(&w->cards);
+                n = ListPoolFirst(&w->cards);
                 SetBgMapBlocks(1, gMapSelectBgMapBlocks, 1, 2);
 
                 while (n != NULL) {
                     n->flags |= MAPCARD_FLAG_RAISED;
-                    n = (MapcardWork*)ListPoolNext(&n->node);
+                    n = ListPoolNext(&n->node);
                 }
 
                 if (w->kindCount <= 6) {
@@ -1928,10 +1928,10 @@ void RemoveMapSelectCard(MapSelectWork* w) {
             i++;
         }
 
-        n = (MapcardWork*)ListPoolNext(&n->node);
+        n = ListPoolNext(&n->node);
     }
 
-    for (n = (MapcardWork*)ListPoolFirst(&w->cards); n != NULL; n = (MapcardWork*)ListPoolNext(&n->node)) {
+    for (n = ListPoolFirst(&w->cards); n != NULL; n = ListPoolNext(&n->node)) {
         n->flags |= MAPCARD_FLAG_RAISED;
     }
 
@@ -2195,13 +2195,13 @@ void Mapcard_2(MapcardWork* w) {
 
             if (gMapCardDefs[w->args.baseCardId].backIndex == 4) {
                 DrawSprite(w->x >> 8, y, gMapCardUiResources.gfx, gMapCardUiResources.tiles, w->palette2, aff, 0,
-                           (u16)(w->priority - 2));
+                           w->priority - 2);
             }
 
             sprite = w->cardBack->sprites[0];
             DrawSprite(w->x >> 8, y, sprite, w->tiles3, w->palette2, aff, 0, w->priority);
             sprite = w->cardDef->sprites[0];
-            DrawSprite(w->x >> 8, y, sprite, w->tiles2, w->palette, aff, 0, (u16)(w->priority + 1));
+            DrawSprite(w->x >> 8, y, sprite, w->tiles2, w->palette, aff, 0, w->priority + 1);
         }
     }
 }
@@ -2452,11 +2452,11 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                     break;
                 }
 
-                node = (ReloadChildWork*)ListPoolFirst(w->children);
+                node = ListPoolFirst(w->children);
 
                 while (node != NULL) {
                     node->args.flags &= ~RELOAD_CHILD_FLAG_IDLE;
-                    node = (ReloadChildWork*)ListPoolNext(&node->node);
+                    node = ListPoolNext(&node->node);
                 }
 
                 if (w->stockIndex == 0) {
@@ -2474,12 +2474,12 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                         w->priority = 4;
                         w->scaleY = 0;
                         w->stockIndex = 0;
-                        child = (ReloadChildWork*)ListPoolFirst(w->children);
+                        child = ListPoolFirst(w->children);
 
                         while (child != NULL) {
                             child->args.flags |= RELOAD_CHILD_FLAG_SHIFTED;
                             child->args.index--;
-                            child = (ReloadChildWork*)ListPoolNext(&child->node);
+                            child = ListPoolNext(&child->node);
                         }
 
                         p->unk_64--;
@@ -2547,11 +2547,11 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                 break;
             }
 
-            node = (ReloadChildWork*)ListPoolFirst(w->children);
+            node = ListPoolFirst(w->children);
 
             while (node != NULL) {
                 node->args.flags |= RELOAD_CHILD_FLAG_IDLE;
-                node = (ReloadChildWork*)ListPoolNext(&node->node);
+                node = ListPoolNext(&node->node);
             }
         }
     }
@@ -2749,7 +2749,7 @@ void InitReloadGageCounterAnim(ReloadGauge* p, void* a, u8 b, s32 count) {
     AnimInit(&p->anim, gReloadCounterAnims[b], gReloadCounterFrames[b]);
 
     if ((s8)c >= 0) {
-        AnimStart(&p->anim, (u16)(s8)c, 0);
+        AnimStart(&p->anim, (s8)c, 0);
     } else {
         AnimStart(&p->anim, 0, 0);
     }

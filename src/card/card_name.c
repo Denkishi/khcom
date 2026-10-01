@@ -328,7 +328,7 @@ void PrintString(u8 a, u8 b, u8 c, u8* s) {
         RequestTilemapRectCopy(gPrintLines[gPrintLineCount].tilemap, GetBgScreenBase(gPrintBg), 0, 0,
                       gPrintLines[gPrintLineCount].x,
                       gPrintLines[gPrintLineCount].y,
-                      (s8)gPrintLines[gPrintLineCount].length, 1);
+                      gPrintLines[gPrintLineCount].length, 1);
         gPrintLineCount++;
     }
 }

@@ -666,11 +666,11 @@ void PickupCardDraw(PickupCardWork* w) {
                    w->spriteFlags, w->priority);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
-                   w->spriteFlags, (u16)(w->priority + 1));
+                   w->spriteFlags, w->priority + 1);
         kind = w->cardDef->value;
         DrawSprite(x, (u16)y - 8, gUnk_09EE981C[kind],
                    w->tiles3, w->palette, affine,
-                   w->spriteFlags, (u16)(w->priority - 2));
+                   w->spriteFlags, w->priority - 2);
         v = 204 - ((w->floor - w->posZ) >> 7);
 
         if (v <= 2) {
@@ -684,7 +684,7 @@ void PickupCardDraw(PickupCardWork* w) {
             DrawSprite(w->x, w->y,
                        gUnk_09EE1380[0], w->tiles4,
                        w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->spriteFlags, (u16)(w->priority + 2));
+                       w->spriteFlags, w->priority + 2);
         }
 
         TaskPoolDraw(&w->tasks);
@@ -716,7 +716,7 @@ void Heartless_card_2(PickupCardWork* w) {
                    w->spriteFlags, w->priority);
         DrawSprite(x, (u16)y - 8, w->cardDef->gfx,
                    w->tiles2, w->palette2, affine,
-                   w->spriteFlags, (u16)(w->priority + 1));
+                   w->spriteFlags, w->priority + 1);
         v = 204 - ((w->floor - w->posZ) >> 7);
 
         if (v <= 2) {
@@ -730,7 +730,7 @@ void Heartless_card_2(PickupCardWork* w) {
             DrawSprite(w->x, w->y,
                        gUnk_09EE1380[0], w->tiles4,
                        w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->spriteFlags, (u16)(w->priority + 2));
+                       w->spriteFlags, w->priority + 2);
         }
 
         TaskPoolDraw(&w->tasks);
@@ -1077,10 +1077,10 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
     w->palette4 = LoadObjPalette(gBStatesPalette, 32);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
-    FadeSetPaletteExcluded((u16)(w->palette->index + 16), 1);
-    FadeSetPaletteExcluded((u16)(w->palette3->index + 16), 1);
-    FadeSetPaletteExcluded((u16)(w->palette2->index + 16), 1);
-    FadeSetPaletteExcluded((u16)(w->palette4->index + 16), 1);
+    FadeSetPaletteExcluded(w->palette->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette3->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+    FadeSetPaletteExcluded(w->palette4->index + 16, 1);
 
 #ifdef VERSION_EU
     for (i = 0, n = 0; i < DECK_SIZE; i++) {
@@ -1165,12 +1165,12 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
             w->titleSteps = 16;
             w->slideSteps = 16;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
-            n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
+            n = ListPoolFirst(&gCardListWork->cards);
 
             while (n != NULL) {
                 n->state |= 0xFF;
                 w->resultPending = 0;
-                n = (PremireChanceCardWork*)ListPoolNext(&n->node);
+                n = ListPoolNext(&n->node);
             }
 
             TaskPoolUpdate(&w->tasks);
@@ -1182,7 +1182,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
         }
     }
 
-    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
+    n = ListPoolFirst(&gCardListWork->cards);
 
     if (w->stopped == 0) {
         while (n != NULL) {
@@ -1201,7 +1201,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
                 w->advanced = 1;
             }
 
-            n = (PremireChanceCardWork*)ListPoolNext(&n->node);
+            n = ListPoolNext(&n->node);
         }
     } else {
         w->unk_87 = 1;
@@ -1234,7 +1234,7 @@ u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
     u8* p;
     PremireChanceCardWork* n;
 
-    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
+    n = ListPoolFirst(&gCardListWork->cards);
 
     if (n != NULL && n->state == 1) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceSpin);
@@ -1316,7 +1316,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     u8 t;
     u8* q;
 
-    n = (PremireChanceCardWork*)ListPoolFirst(&gCardListWork->cards);
+    n = ListPoolFirst(&gCardListWork->cards);
     w->gfx = AnimUpdate(&w->anim);
     w->gfx2 = AnimUpdate(&w->anim2);
     w->spinDelay = 0;
@@ -1336,7 +1336,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
                 w->resultPending = 0;
             }
 
-            n = (PremireChanceCardWork*)ListPoolNext(&n->node);
+            n = ListPoolNext(&n->node);
         }
     }
 

@@ -5307,8 +5307,8 @@ void BosPcDraw(PcWork* work) {
             }
 
             y = t;
-            y = (s16)(y + cmd->y);
-            y = (s16)(y + sy);
+            y = y + cmd->y;
+            y = y + sy;
 
             if ((u16)(y + 7) <= 0xAE) {
                 oam->attr[oam->count * 3 + 1] = (def->attr0 & 0xFF00) | (((u16)(def->attr0 + 0x40) + cmd->y) & mask);
@@ -5555,7 +5555,7 @@ u8 BosPcUpdateIdle(PcWork* work, Task* task) {
         }
     } else if (work->cardDelay % (work->shared.hpRatio >> 4) == 0) {
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-            t = (((s32)work->shared.hpRatio * 5) >> 3) + 96;
+            t = ((work->shared.hpRatio * 5) >> 3) + 96;
 
             if (GetRandom() >> 7 > t) {
                 RequestEnemyCardUse(&work->body);

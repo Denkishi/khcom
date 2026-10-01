@@ -1997,7 +1997,7 @@ void StockInfo_0(StockInfoWork* w, u8* active) {
 
 u8 StockInfo_1(StockInfoWork* w, void* a) {
     if (w->timer > 0) {
-        ApproachValue(&w->y, 0x6C00, (u16)w->timer);
+        ApproachValue(&w->y, 0x6C00, w->timer);
         w->timer--;
     } else {
         m4aSongNumStart(SONG_SYS_CHAGEF2);

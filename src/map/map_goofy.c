@@ -1056,16 +1056,16 @@ void Task_MapDmg_3(MapDmgWork* w) {
 void* GetFloorName() {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return eu_0805E924(gBasementFloorNames[(s8)gGameState.floor]);
+        return eu_0805E924(gBasementFloorNames[gGameState.floor]);
     }
 
-    return eu_0805E924(gFloorNames[(s8)gGameState.floor]);
+    return eu_0805E924(gFloorNames[gGameState.floor]);
 #else
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return gBasementFloorNames[(s8)gGameState.floor];
+        return gBasementFloorNames[gGameState.floor];
     }
 
-    return gFloorNames[(s8)gGameState.floor];
+    return gFloorNames[gGameState.floor];
 #endif
 }
 

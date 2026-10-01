@@ -547,17 +547,17 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
         BosTmFootSetPartPos(&work->body4, (s16)(work->tm->x - 2),
                       (s16)(work->tm->y - 2), (s16)(work->tm->z + 43));
     } else {
-        BosTmFootInitPart(&work->body, (s16)(work->tm->x + 1),
-                      (s16)(work->tm->y + 2), (s16)(work->tm->z - 4), 4, 32, f,
+        BosTmFootInitPart(&work->body, work->tm->x + 1,
+                      work->tm->y + 2, work->tm->z - 4, 4, 32, f,
                       4);
-        BosTmFootInitPart(&work->body2, (s16)(work->tm->x - 6),
-                      (s16)(work->tm->y - 2), (s16)(work->tm->z - 4), 4, 32, f,
+        BosTmFootInitPart(&work->body2, work->tm->x - 6,
+                      work->tm->y - 2, work->tm->z - 4, 4, 32, f,
                       5);
-        BosTmFootInitPart(&work->body3, (s16)(work->tm->x + 6),
-                      (s16)(work->tm->y + 5), (s16)(work->tm->z + 40), 20, 140,
+        BosTmFootInitPart(&work->body3, work->tm->x + 6,
+                      work->tm->y + 5, work->tm->z + 40, 20, 140,
                       f, 6);
-        BosTmFootInitPart(&work->body4, (s16)(work->tm->x - 2),
-                      (s16)(work->tm->y - 2), (s16)(work->tm->z + 43), 20, 140,
+        BosTmFootInitPart(&work->body4, work->tm->x - 2,
+                      work->tm->y - 2, work->tm->z + 43, 20, 140,
                       f, 7);
     }
 }
@@ -620,10 +620,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 BosTmFootApplyThrowStep(work, work->tm->step);
             } else if (n >= 66 && n <= 74) {
                 n -= 62;
-                BosTmFootApplyThrowStep(work, (s16)n);
+                BosTmFootApplyThrowStep(work, n);
             } else if (n >= 98 && n <= 100) {
                 n -= 85;
-                BosTmFootApplyThrowStep(work, (s16)n);
+                BosTmFootApplyThrowStep(work, n);
             } else {
                 break;
             }
@@ -640,10 +640,10 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 BosTmFootApplyThrowStep(work, work->tm->step);
             } else if (n >= 96 && n <= 104) {
                 n -= 92;
-                BosTmFootApplyThrowStep(work, (s16)n);
+                BosTmFootApplyThrowStep(work, n);
             } else if (n >= 128 && n <= 130) {
                 n -= 115;
-                BosTmFootApplyThrowStep(work, (s16)n);
+                BosTmFootApplyThrowStep(work, n);
             } else {
                 break;
             }
@@ -660,7 +660,7 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
                 func_080BA8C8(work, work->tm->step);
             } else if (n >= 41 && n <= 46) {
                 n -= 38;
-                func_080BA8C8(work, (s16)n);
+                func_080BA8C8(work, n);
             } else {
                 break;
             }
@@ -759,13 +759,13 @@ void task_bos_tm_foot_2(TmFootWork* work) {
     s2 = &work->body3;
     s3 = &work->body4;
     WorldToScreen(&x, &y, s0->x, s0->y, s0->z);
-    DrawSprite(x, y, work->gfx, work->tiles2, pal, 0, mode, (u16)(-4100 - (s0->y >> 8) * 4));
+    DrawSprite(x, y, work->gfx, work->tiles2, pal, 0, mode, -4100 - (s0->y >> 8) * 4);
     WorldToScreen(&x, &y, s1->x, s1->y, s1->z);
-    DrawSprite(x, y, work->gfx2, work->tiles3, pal, 0, mode, (u16)(-4100 - (s1->y >> 8) * 4));
+    DrawSprite(x, y, work->gfx2, work->tiles3, pal, 0, mode, -4100 - (s1->y >> 8) * 4);
     WorldToScreen(&x, &y, s2->x, s2->y, s2->z);
-    DrawSprite(x, y, work->gfx3, work->tiles, pal, 0, mode, (u16)(-4100 - (s2->y >> 8) * 4));
+    DrawSprite(x, y, work->gfx3, work->tiles, pal, 0, mode, -4100 - (s2->y >> 8) * 4);
     WorldToScreen(&x, &y, s3->x, s3->y, s3->z);
-    DrawSprite(x, y, work->gfx4, work->tiles, pal, 0, mode, (u16)(-4100 - (s3->y >> 8) * 4));
+    DrawSprite(x, y, work->gfx4, work->tiles, pal, 0, mode, -4100 - (s3->y >> 8) * 4);
 }
 
 void task_bos_tm_foot_3(TmFootWork* work) {
@@ -897,11 +897,11 @@ void task_bos_tm_clb_2(TmClbWork* work) {
     p = AllocObjAffineAngle(work->angle, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, SPRITE_PRIORITY(2),
-               (u16)(-0x1002 - (work->y >> 8) * 4));
+               -0x1002 - (work->y >> 8) * 4);
     // @bug AllocObjAffineAngle returns NULL at angle 0 (NULL write).
     p->doubleSize = 1;
     DrawSprite(x, y, work->arg->gfx, work->arg->tiles, work->palette, p, SPRITE_PRIORITY(2),
-               (u16)(-0x1003 - (work->y >> 8) * 4));
+               -0x1003 - (work->y >> 8) * 4);
 }
 
 void task_bos_tm_clb_3(TmClbWork* work) {

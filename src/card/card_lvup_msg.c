@@ -63,7 +63,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
 #endif
     }
 
-    w->textSlotCount2 = LoadTwoDigitTextSlots((u8)w->amount, w->textSlots2);
+    w->textSlotCount2 = LoadTwoDigitTextSlots(w->amount, w->textSlots2);
 
 #ifdef VERSION_EU
     if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == LANGUAGE_SPANISH) {

@@ -310,7 +310,7 @@ void task_poo_pooh_0(PoohWork* w) {
     w->targetX = w->pos.x;
     w->targetY = w->pos.y;
     gPoohPos = &w->pos;
-    w->tiles = AllocObjTiles((u16)(gPoohHitBox.tileCount * 32), 0);
+    w->tiles = AllocObjTiles(gPoohHitBox.tileCount * 32, 0);
     w->palette = LoadObjPalette(gPoohHitBox.palette, 32);
     AnimInit(&w->anim, 0, 0);
     SetPoohAction(w, sPoohAction);
@@ -3464,7 +3464,7 @@ PooNode* FindPoohTargetNode() {
     PooNode* best;
     PooNode* n;
 
-    best = (PooNode*)ListPoolFirst(&sPooNodes);
+    best = ListPoolFirst(&sPooNodes);
     n = best;
     sPooBestNodeScore = 0;
 
@@ -3476,7 +3476,7 @@ PooNode* FindPoohTargetNode() {
             best = n;
         }
 
-        n = (PooNode*)ListPoolNext(&n->node);
+        n = ListPoolNext(&n->node);
     }
 
     if (sPooBestNodeScore == 0 && best == (PooNode*)ListPoolFirst(&sPooNodes)) {
@@ -3773,7 +3773,7 @@ u8 task_poo_pile_1(PooPileWork* w) {
         w->colliderActive = 0;
         RemovePooNode(&w->node);
     } else {
-        ColliderSetHeight(&w->collider, (u16)GetPooPileHeight(w->stage));
+        ColliderSetHeight(&w->collider, GetPooPileHeight(w->stage));
     }
 
     return 1;
@@ -3814,7 +3814,7 @@ void task_poo_pile_2(PooPileWork* w) {
             z = -0x1004 - (w->pos.y >> 8) * 4;
 
             if (w->colliderActive == 0) {
-                ColliderInit(&w->collider, 7, 4, (u16)GetPooPileHeight(w->stage));
+                ColliderInit(&w->collider, 7, 4, GetPooPileHeight(w->stage));
                 AddPooNode(&w->node, 0x240, &w->pos);
                 w->colliderActive = 1;
             }

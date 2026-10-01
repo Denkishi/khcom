@@ -1062,12 +1062,12 @@ u8 func_080E7088(FldPos* p) {
                     continue;
                 }
 
-                a = func_080E6A14(rx, (s16)(sy + 2));
-                b = func_080E6A14((s16)(rx + 2), sy);
+                a = func_080E6A14(rx, sy + 2);
+                b = func_080E6A14(rx + 2, sy);
 
                 if (a == b && a > 8) {
                     MapReserveArea(rx, sy, 3, 3);
-                    FldPosPlaceAtCell(p, rx, (s16)(a + sy), 3, 3);
+                    FldPosPlaceAtCell(p, rx, a + sy, 3, 3);
                     p->z -= a << 12;
                     return 1;
                 }
@@ -1109,11 +1109,11 @@ u8 func_080E71F0(FldPos* p) {
                 }
 
                 a = func_080E6A14(rx, sy);
-                b = func_080E6A14((s16)(rx + 2), (s16)(sy + 2));
+                b = func_080E6A14(rx + 2, sy + 2);
 
                 if (a == b && a > 8) {
                     MapReserveArea(rx, sy, 3, 3);
-                    FldPosPlaceAtCell(p, rx, (s16)(a + sy), 3, 3);
+                    FldPosPlaceAtCell(p, rx, a + sy, 3, 3);
                     p->z -= a << 12;
                     return 1;
                 }
@@ -1147,15 +1147,15 @@ u8 func_080E7358(FldPos* p) {
 
         for (i = 0; i < w; i++) {
             if ((u8)MapGmkIsAreaSparse(rx, sy) != 0 && MapCellIsFreeOfType(rx, sy, 0) != 0) {
-                if (MapCellIsFreeOfType(rx, (s16)(sy + 1), 3) != 0) {
-                    if (MapCellIsFreeOfType((s16)(rx + 1), sy, 3) != 0 &&
-                        MapCellIsFreeOfType((s16)(rx + 1), (s16)(sy + 1), 8) != 0) {
-                        u16 a = func_080E6A14(rx, (s16)(sy + 1));
-                        u16 b = func_080E6A14((s16)(rx + 1), sy);
+                if (MapCellIsFreeOfType(rx, sy + 1, 3) != 0) {
+                    if (MapCellIsFreeOfType(rx + 1, sy, 3) != 0 &&
+                        MapCellIsFreeOfType(rx + 1, sy + 1, 8) != 0) {
+                        u16 a = func_080E6A14(rx, sy + 1);
+                        u16 b = func_080E6A14(rx + 1, sy);
 
                         if (a == b && a > 8) {
                             MapReserveArea(rx, sy, 2, 2);
-                            FldPosPlaceAtCell(p, rx, (s16)(a + sy), 2, 2);
+                            FldPosPlaceAtCell(p, rx, a + sy, 2, 2);
                             p->z -= a << 12;
                             return 1;
                         }
@@ -1238,14 +1238,14 @@ u8 func_080E7620(FldPos* p) {
                 s32 y1 = (s16)(sy + 1);
 
                 if (MapCellIsFreeOfType(rx, y1, 9) != 0) {
-                    if (MapCellIsFreeOfType((s16)(rx + 1), sy, 0) != 0 &&
-                        MapCellIsFreeOfType((s16)(rx + 1), y1, 5) != 0) {
+                    if (MapCellIsFreeOfType(rx + 1, sy, 0) != 0 &&
+                        MapCellIsFreeOfType(rx + 1, y1, 5) != 0) {
                         u16 a = func_080E6A14(rx, sy);
-                        u16 b = func_080E6A14((s16)(rx + 1), y1);
+                        u16 b = func_080E6A14(rx + 1, y1);
 
                         if (a == b && a > 8) {
                             MapReserveArea(rx, sy, 2, 2);
-                            FldPosPlaceAtCell(p, rx, (s16)(a + sy), 2, 2);
+                            FldPosPlaceAtCell(p, rx, a + sy, 2, 2);
                             p->z -= a << 12;
                             return 1;
                         }
@@ -4508,7 +4508,7 @@ void Mode_MenuLoad_0(s32 arg) {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy((void*)gUnk_09961A64, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy(gUnk_09961A64, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     case LANGUAGE_SPANISH:
         RequestDma3Copy((void*)gUnkEu_09953BF0, (u8*)GetBgCharBase(1) + 0xC00, 0x800);

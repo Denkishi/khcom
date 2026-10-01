@@ -132,7 +132,7 @@ void task_evt_obj_2(EvtObjWork* work) {
     gfx = AnimGetGfx(&work->anim);
     DrawSprite(x, y, gfx, work->tiles, work->palette,
         AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->drawFlags,
-        (u16)(-0x1002 - (obj->y >> 8) * 4));
+        -0x1002 - (obj->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
 

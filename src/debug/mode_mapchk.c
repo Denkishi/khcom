@@ -516,7 +516,7 @@ void Mode_MapChk_0() {
     const u8* t;
     s32 n;
 
-    gMapChkWork = (MapChkWork*)EwramAlloc(8);
+    gMapChkWork = EwramAlloc(8);
     SaveLoadHeader();
     gMapChkUseParams = 0;
     gMapChkWork->cursor = 0;

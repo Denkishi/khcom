@@ -971,11 +971,11 @@ void BosGaEntryDraw(GaWork* work, GaEntryWork* e) {
     }
 
     WorldToScreen(&sx, &sy, q->actor.x, q->actor.y, q->actor.z);
-    DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), e->gfx, e->tiles, pal, f, g,
+    DrawSprite(sx + e->x2, sy + e->y2, e->gfx, e->tiles, pal, f, g,
                0xEFFC - ((q->actor.y >> 8) << 2));
 
     if (e->index == 0 && work->state != 7 && work->state != 8 && work->state != 9) {
-        DrawSprite((s16)(sx + e->x2), (s16)(sy + e->y2), work->gfx, work->tiles, pal, f, g,
+        DrawSprite(sx + e->x2, sy + e->y2, work->gfx, work->tiles, pal, f, g,
                    0xEFFC - ((q->actor.y >> 8) << 2));
     }
 
@@ -4210,7 +4210,7 @@ void task_bos_md_2(MdWork* work) {
         WorldToScreen(&x, &y, wx, wy, work->gfx[i].z * 256);
         frame = GetBattleSpritePriorityFlags(wy);
         DrawSprite(x, y, work->gfx[i].sprite, work->gfx[i].tiles, pal, 0, frame,
-                   (u16)(-4100 - (wy >> 6)));
+                   -4100 - (wy >> 6));
     }
 
     TaskPoolDraw(p0);
@@ -4574,7 +4574,7 @@ void task_bos_md_fire_2(MdFireWork* work) {
     }
 
     DrawSprite(x, y, AnimUpdate(&work->anim), work->tiles, gfx,
-                  sprite, frame, (u16)(-4100 - (work->y >> 8) * 4));
+                  sprite, frame, -4100 - (work->y >> 8) * 4);
 }
 
 void task_bos_md_fire_3(MdFireWork* work) {
@@ -4697,11 +4697,11 @@ void task_bos_md_dai_2(MdDaiWork* work) {
 
     if (work->state <= 2) {
         DrawSprite(x, y + 24, gUnk_09999E0C, work->tiles, work->palette, 0,
-                      frame, (u16)(-4100 - (work->y >> 8) * 4));
+                      frame, -4100 - (work->y >> 8) * 4);
         DrawSprite(x, y, gUnk_09999E1C, work->tiles, work->palette, 0, frame,
-                      (u16)(-4100 - (work->y >> 8) * 4));
+                      -4100 - (work->y >> 8) * 4);
         DrawSprite(x + 8, y - 16, gUnk_09999E0C, work->tiles, work->palette, 0,
-                      frame, (u16)(-4100 - (work->y >> 8) * 4));
+                      frame, -4100 - (work->y >> 8) * 4);
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
@@ -4710,7 +4710,7 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     if (work->level > 0) {
         DrawSprite(x, y, gUnk_09EF9740[work->level + 1], work->tiles,
                       work->palette, 0, frame,
-                      (u16)(-4100 - (work->y >> 8) * 4));
+                      -4100 - (work->y >> 8) * 4);
     }
 }
 
@@ -4785,7 +4785,7 @@ void task_bos_md_hahen_2(MdHahenWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
     DrawSprite(x, y, work->gfx, work->tiles, work->palette,
-                  0, frame, (u16)(-4100 - (work->y >> 8) * 4));
+                  0, frame, -4100 - (work->y >> 8) * 4);
 }
 
 void task_bos_md_hahen_3(MdHahenWork* work) {

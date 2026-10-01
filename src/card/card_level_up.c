@@ -223,7 +223,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->applied = 0;
     LevelUpSplitDigits3(gGameState.progression.level, w->levelDigits);
     LevelUpSplitDigits3(gGameState.progression.maxHp, w->maxHpDigits);
-    LevelUpSplitDigits4((u16)gGameState.progression.cp, w->cpDigits);
+    LevelUpSplitDigits4(gGameState.progression.cp, w->cpDigits);
     LevelUpSplitDigits3(gGameState.progression.dp, w->dpDigits);
     LevelUpSplitDigits2(gGameState.progression.ap, w->apDigits);
     w->timer = 0;
@@ -244,29 +244,29 @@ void LoadLevelUpRikuBgTiles() {
 
     if (gBtlWork->battleId == 151) {
         base = GetBgCharBase(0);
-        RequestDma3Copy(gUnk_093FEEB8, (void*)(base + CARD_E7A4_DST), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x400], (void*)(base + CARD_E7A4_DST + 0x120), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x800], (void*)(base + CARD_E7A4_DST + 0x240), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[288], (void*)(base + CARD_E7A4_DST + 0x360), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x520], (void*)(base + CARD_E7A4_DST + 0x480), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x920], (void*)(base + CARD_E7A4_DST + 0x5A0), 288);
+        RequestDma3Copy(gUnk_093FEEB8, base + CARD_E7A4_DST, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x400], base + CARD_E7A4_DST + 0x120, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x800], base + CARD_E7A4_DST + 0x240, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[288], base + CARD_E7A4_DST + 0x360, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x520], base + CARD_E7A4_DST + 0x480, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
 #ifdef VERSION_EU
-        RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, (void*)(base + 0x800), 0xA80);
+        RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, base + 0x800, 0xA80);
 #else
-        RequestDma3Copy(gUnk_093FD438, (void*)(base + 0x2C00), 0xA80);
+        RequestDma3Copy(gUnk_093FD438, base + 0x2C00, 0xA80);
 #endif
     } else {
         base = GetBgCharBase(1);
-        RequestDma3Copy(gUnk_093FEEB8, (void*)(base + CARD_E7A4_DST), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x400], (void*)(base + CARD_E7A4_DST + 0x120), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x800], (void*)(base + CARD_E7A4_DST + 0x240), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[288], (void*)(base + CARD_E7A4_DST + 0x360), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x520], (void*)(base + CARD_E7A4_DST + 0x480), 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x920], (void*)(base + CARD_E7A4_DST + 0x5A0), 288);
+        RequestDma3Copy(gUnk_093FEEB8, base + CARD_E7A4_DST, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x400], base + CARD_E7A4_DST + 0x120, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x800], base + CARD_E7A4_DST + 0x240, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[288], base + CARD_E7A4_DST + 0x360, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x520], base + CARD_E7A4_DST + 0x480, 288);
+        RequestDma3Copy(&gUnk_093FEEB8[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
 #ifdef VERSION_EU
-        RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, (void*)(base + 0x800), 0xA80);
+        RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, base + 0x800, 0xA80);
 #else
-        RequestDma3Copy(gUnk_093FD438, (void*)(base + 0x2C00), 0xA80);
+        RequestDma3Copy(gUnk_093FD438, base + 0x2C00, 0xA80);
 #endif
     }
 }
@@ -305,20 +305,20 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                 case LANGUAGE_ENGLISH:
                     break;
                 case LANGUAGE_FRENCH:
-                    RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                    RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_GERMAN:
-                    RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                    RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_ITALIAN:
-                    RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                    RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_SPANISH:
-                    RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                    RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 }
 #endif
@@ -342,20 +342,20 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
-                        RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(0) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(0) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     }
 #endif
@@ -377,20 +377,20 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gUnkEu_094D53C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
-                        RequestDma3Copy(gUnkEu_094D6BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gUnkEu_094D63C4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gUnkEu_094D5BC4, (void*)(GetBgCharBase(1) + 0x2400), 0x800);
-                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], (void*)(GetBgCharBase(1) + 0x800), 0xC00);
+                        RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     }
 #endif
@@ -529,9 +529,9 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
         ApproachValue(&x4, 0, w->slideSteps);
 
         if (gBtlWork->battleId == 151) {
-            ScrollBgMapTo(0, (u16)(x3 >> 8), 0);
+            ScrollBgMapTo(0, x3 >> 8, 0);
         } else {
-            ScrollBgMapTo(1, (u16)(x3 >> 8), 0);
+            ScrollBgMapTo(1, x3 >> 8, 0);
         }
 
         w->bgScrollX = x3 >> 8;
@@ -963,7 +963,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             }
 
             LevelUpSplitDigits3(gGameState.progression.maxHp, w->maxHpDigits);
-            LevelUpSplitDigits4((u16)gGameState.progression.cp, w->cpDigits);
+            LevelUpSplitDigits4(gGameState.progression.cp, w->cpDigits);
             LevelUpSplitDigits3(gGameState.progression.dp, w->dpDigits);
             LevelUpSplitDigits2(gGameState.progression.ap, w->apDigits);
             w->applied = 1;

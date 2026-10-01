@@ -191,7 +191,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
 
     if (done != 0) {
 #ifdef VERSION_EU
-        SplitFourDigits((s16)gBtlWork->hcEffectCount, &w->countThousands);
+        SplitFourDigits(gBtlWork->hcEffectCount, &w->countThousands);
 #endif
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateHcEffectNameShuffle);
         return 1;
@@ -225,7 +225,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
             return 0;
         }
 
-        SplitFourDigits((s16)gBtlWork->hcEffectCount, &w->countThousands);
+        SplitFourDigits(gBtlWork->hcEffectCount, &w->countThousands);
         break;
     case 2:
         div = gHcEffectDefs[gRikuBtlWork->hcEffect].count << 8;
@@ -254,7 +254,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
             return 0;
         }
 
-        SplitFourDigits((s16)gRikuBtlWork->hcEffectCount, &w->countThousands);
+        SplitFourDigits(gRikuBtlWork->hcEffectCount, &w->countThousands);
         break;
     }
 

@@ -236,7 +236,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
     u8* base;
     u16* pal;
 
-    base = (u8*)GetBgCharBase(1);
+    base = GetBgCharBase(1);
     pal = (u16*)0x05000100;
     LoadPalette(gUnk_096142F8, pal, 32);
 #ifdef VERSION_EU
@@ -482,14 +482,14 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* w, void* a) {
     p = &w->bannerSlideTimer;
 
     if ((s8)*p > 0) {
-        ApproachValue(&w->x7, -0x8000, (u16)(s8)*p);
+        ApproachValue(&w->x7, -0x8000, (s8)*p);
         (*p)--;
     } else {
         p = &w->barSlideTimer;
 
         if ((s8)*p > 0) {
-            ApproachValue(&w->y5, -0x800, (u16)(s8)*p);
-            ApproachValue(&w->y6, 0xA000, (u16)(s8)*p);
+            ApproachValue(&w->y5, -0x800, (s8)*p);
+            ApproachValue(&w->y6, 0xA000, (s8)*p);
             (*p)--;
         } else {
             FadeStartOut(FADE_MODE_BLACK, 4);
@@ -740,7 +740,7 @@ void DrawRikuDeckCategoryCount(u8 a, u8 b) {
 
     d[0] = a / 10;
     d[1] = a - (u8)(a / 10) * 10;
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
     RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
     RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
 }
@@ -786,13 +786,13 @@ void DrawRikuDeckCardCount(u8 deck) {
 
     switch (deck) {
     case 0:
-        base = (u8*)GetBgCharBase(1);
+        base = GetBgCharBase(1);
         break;
     case 1:
-        base = (u8*)GetBgCharBase(1);
+        base = GetBgCharBase(1);
         break;
     case 2:
-        base = (u8*)GetBgCharBase(1);
+        base = GetBgCharBase(1);
         break;
     }
 
@@ -824,7 +824,7 @@ void DrawRikuCardTotals() {
     e[0] = b / 100;
     e[1] = b / 10 - e[0] * 10;
     e[2] = b - e[0] * 100 - e[1] * 10;
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
     RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x2A0, 32);
     RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x2C0, 32);
     RequestDma3Copy(&gUnk_0940F938[(d[2] + 1) * 32], base + 0x2E0, 32);
@@ -857,25 +857,25 @@ void LoadRikuCardNameText(RikuDeckMenuWork* w, s32 id) {
         LoadPalette(gUnk_09614458,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 1:
         LoadPalette(gUnk_09614478,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 2:
         LoadPalette(gUnk_09614498,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     case 3:
         LoadPalette(gUnk_096144B8,
                     (void*)(w->palette4->index * 32 +
                             OBJ_PLTT),
-                    (u16)(w->palette4->count << 5));
+                    w->palette4->count << 5);
         break;
     }
 }
@@ -964,7 +964,7 @@ void DrawRikuCpCost(u8 a) {
     u8 v[2];
     u8* base;
 
-    base = (u8*)GetBgCharBase(3);
+    base = GetBgCharBase(3);
 
     if (a != 0) {
         v[0] = a / 10;

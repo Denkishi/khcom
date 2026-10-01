@@ -227,7 +227,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
 
         WorldToScreen(&x, &y, jf->body.x, jf->body.y, jf->body.z);
         DrawSprite(x, work->y + (y - 61), work->gfx, work->tiles, gfx, 0, pal,
-                   (u16)(-4100 - (jf->body.y >> 8) * 4));
+                   -4100 - (jf->body.y >> 8) * 4);
     }
 
     TaskPoolDraw(&work->tasks);

@@ -323,7 +323,7 @@ void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
 void task_bos_ursula_bubble_single_3(UrsulaBubbleSingleWork* work) {
     ReleaseEnemyBtlObj(&work->obj);
 #ifndef VERSION_EU
-    ReleaseObjTiles((void*)work->tiles);
+    ReleaseObjTiles(work->tiles);
 #endif
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);

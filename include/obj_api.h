@@ -7,10 +7,10 @@
 struct ObjTiles;
 struct ObjPalette;
 
-struct ObjTiles* LoadObjTiles(void* src, u16 size);
-struct ObjTiles* AllocObjTiles(u16 size, void* owner);
+struct ObjTiles* LoadObjTiles(const void* src, u16 size);
+struct ObjTiles* AllocObjTiles(u16 size, const void* owner);
 void ReleaseObjTiles(void* tiles);
-struct ObjPalette* LoadObjPalette(void* src, u16 size);
+struct ObjPalette* LoadObjPalette(const void* src, u16 size);
 struct ObjPalette* AllocObjPalette(u16 size);
 void ReleaseObjPalette(struct ObjPalette* palette);
 u8 DrawSprite(s16 x, s16 y, void* sprite, void* tiles, void* palette, ObjAffine* affine, u16 flags, u16 priority);
@@ -19,7 +19,7 @@ ObjAffine* AllocObjAffine(u8 angle, s32 sx, s32 sy, u8 flags);
 ObjAffine* AllocObjAffineAngle(u8 angle, u8 flags);
 u8 CanAllocObjTiles(u16 size);
 void SpriteReset();
-void SetObjTileSource(struct ObjTiles* tiles, void* src);
+void SetObjTileSource(struct ObjTiles* tiles, const void* src);
 u16 GetMaxSpriteTileBytes(void** sprites, u16 count);
 u16 GetSpriteTileBytes(u16* sprite);
 struct ObjTiles* AllocSpriteFrameTiles(u16 size);

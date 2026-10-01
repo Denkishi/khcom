@@ -80,7 +80,7 @@ Task* CreateEvtObjTaskWithDesc(void* pool, void* desc, EvtObj* obj, s32 res, s32
 void EvtObjChangeAnim(EvtObjWork* work) {
     EvtObj* obj;
     const EvtObjAnim* anim;
-    EvtAnimDef* def;
+    const EvtAnimDef* def;
 
     obj = work->obj;
     anim = obj->animEntry;
@@ -91,7 +91,7 @@ void EvtObjChangeAnim(EvtObjWork* work) {
 }
 
 void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
-    EvtObjRes* res;
+    const EvtObjRes* res;
 
     res = param->res;
     work->obj = param->obj;

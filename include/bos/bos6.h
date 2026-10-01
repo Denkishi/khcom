@@ -207,7 +207,7 @@ typedef struct PcWork {
     s32 x;
     s32 y;
     s32 z;
-    PcAnimStep* animSteps;
+    const PcAnimStep* animSteps;
     s16 animIndex;
     s16 animFrame;
     s16 animTimer;

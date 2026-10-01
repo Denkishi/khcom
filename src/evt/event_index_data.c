@@ -11,7 +11,7 @@
 #include "event_022_data_text.inc"
 #endif
 
-EventBackgroundDef* gEventBackgroundDefs[] = {
+const EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7EE70,
     &gUnk_08F7EFD8,
     &gUnk_08F7F4E8,
@@ -213,7 +213,7 @@ EventBackgroundDef* gEventBackgroundDefs[] = {
     &gUnk_08F7EF4C,
 };
 
-EventSequenceDef* gEventSequenceDefs[] = {
+const EventSequenceDef* gEventSequenceDefs[] = {
     &gEvent000,
     &gEvent001,
     &gEvent002,

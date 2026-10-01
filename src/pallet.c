@@ -188,7 +188,7 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
     return &gPaletteBuffer->colors[base];
 }
 
-u16* LoadPaletteBuffered(void* src, u16* dst, u16 size) {
+u16* LoadPaletteBuffered(const void* src, u16* dst, u16 size) {
     s32 base = ((s32)dst - PLTT) >> 1;
 
     CpuCopy16(src, &gPaletteBuffer->colors[base], size);
@@ -211,7 +211,7 @@ void ResetPaletteEffect() {
     gPaletteEffectSaved = 0;
 }
 
-u16* LoadPaletteWithEffect(void* src, u16* dst, u16 size) {
+u16* LoadPaletteWithEffect(const void* src, u16* dst, u16 size) {
     if (gPaletteEffect == 0) {
         return LoadPaletteBuffered(src, dst, size);
     }
@@ -412,7 +412,7 @@ void HBlankIntrBgWave() {
     line = (line + 1) % 228;
 
     for (i = 0; i < 4; i++) {
-        s16* sine = gSineTable;
+        const s16* sine = gSineTable;
 
         if (gBgWaves[i].enabled == 1) {
             REG_BGHOFS(i) = sine[((line + gFrameCounter) * gBgWaves[i].frequency) & 0xFF] * gBgWaves[i].amplitude / 256;

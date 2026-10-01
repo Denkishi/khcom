@@ -37,7 +37,7 @@ static volatile s16 sMovieSubIndex;
 static volatile u16 sMovieSubCount;
 static MovieSub* volatile sMovieSubUpper;
 static MovieSub* volatile sMovieSubLower;
-static MovieSub* sMovieSubs;
+static const MovieSub* sMovieSubs;
 static volatile s16 sMovieSubUpperTimer;
 static volatile u16 sMovieSubUpperLength;
 static volatile u16 sMovieFlags;

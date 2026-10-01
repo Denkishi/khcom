@@ -32,7 +32,7 @@ static const s32 sEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,
 };
 
-void LookupEnemyCardDef(CardDisplayArgs* a, CardDef** b, u8 c) {
+void LookupEnemyCardDef(CardDisplayArgs* a, const CardDef** b, u8 c) {
     CardSlot* t;
     s32 v;
     s32 id;

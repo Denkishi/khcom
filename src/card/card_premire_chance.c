@@ -25,7 +25,7 @@ static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 
 static const u8 sPremireChanceCardPriorities[9] = { 6, 4, 2, 0, 2, 4, 6, 8, 12 };
 
 void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
-    CardDef* def;
+    const CardDef* def;
 
     w->gfxLoaded = 0;
     w->tiles4 = NULL;

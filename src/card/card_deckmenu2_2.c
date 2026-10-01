@@ -837,7 +837,7 @@ void LoadRikuDeckNameTexts(RikuDeckMenuWork* w) {
 }
 
 void LoadRikuCardNameText(RikuDeckMenuWork* w, s32 id) {
-    CardDef* def;
+    const CardDef* def;
 
     def = &gCardDefs[id];
 #ifdef VERSION_EU
@@ -900,7 +900,7 @@ void ReleaseRikuCardPreview(RikuDeckMenuWork* w) {
 
 void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
     DeckCard2Work* node;
-    CardDef* def;
+    const CardDef* def;
     void* dst;
     u16 id;
     u32 t;

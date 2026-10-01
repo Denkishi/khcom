@@ -1239,7 +1239,7 @@ static const s32* sStaffRollRikuScripts[17] = {
 };
 
 static u8* sStaffRollSpaceText = gUnkUs_09A516B8;
-static u8* sStaffRollTildeText = gStaffRollTildeUs;
+static const u8* sStaffRollTildeText = gStaffRollTildeUs;
 #endif
 #ifdef VERSION_JP
 static u8* sStaffRollLines[704] = {
@@ -1990,7 +1990,7 @@ static const s32* sStaffRollRikuScripts[17] = {
 };
 
 static u8* sStaffRollSpaceText = gUnkJp_09A06548;
-static u8* sStaffRollTildeText = gStaffRollTildeJp;
+static const u8* sStaffRollTildeText = gStaffRollTildeJp;
 #endif
 
 #ifdef VERSION_EU
@@ -2726,7 +2726,7 @@ static const s32* sStaffRollRikuScripts[17] = {
 };
 
 static u8* sStaffRollSpaceText = gUnkEu_09AAF3F0;
-static u8* sStaffRollTildeText = gStaffRollTildeEu;
+static const u8* sStaffRollTildeText = gStaffRollTildeEu;
 #endif
 #ifdef VERSION_JP
 static const StaffRollScene sStaffRollSoraScenes[22] = {

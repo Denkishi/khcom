@@ -56,7 +56,7 @@ typedef struct MapEnmDef {
 
 typedef struct MapGmkDef {
     void* palette;
-    void* tiles;
+    const void* tiles;
     u16 tilesSize;
     u8 unk_0A;
     u8 unk_0B;
@@ -75,7 +75,7 @@ typedef struct MapGmkDef {
 } MapGmkDef;
 
 typedef struct MapAnmSlot {
-    void* tiles;
+    const void* tiles;
     u16 frameSize;
     u8 unk_06[0x02];
     u8* dest;
@@ -1183,7 +1183,7 @@ void NewGameSlotMenuSelectSlot(u8 a);
 u8 GetRandomMapGmkIndex(u8 a);
 u8 MapGmkFindSpot(FldPos* a, u8 b);
 s32 MapGmkIsPaletteUnused(void* a);
-s32 MapGmkNeedsTiles(u8 flag, void* a);
+s32 MapGmkNeedsTiles(u8 flag, const void* a);
 void MapGmkReserveJump();
 void MapGmkPlaceGmk01();
 void MapGmkPlaceGmk04();

@@ -1033,7 +1033,7 @@ void DispCardname_3(DispCardnameWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void CreateCardNameDisplay(void* a, void* b) {
+void CreateCardNameDisplay(void* a, const void* b) {
     TaskCreate(a, &gTaskDescDispCardname, b);
 }
 
@@ -1670,7 +1670,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     MapCardDef* c;
     MapCardBackDef* b;
     MapCardBackDef* d;
-    CardBack* cb;
+    const CardBack* cb;
     u8 n;
     void* z;
     u8 t;

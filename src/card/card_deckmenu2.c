@@ -975,7 +975,7 @@ s16 CountActiveDeckCards(s32 index) {
     return count;
 }
 
-s16 CountDeckCards(s32 mode, Deck* d) {
+s16 CountDeckCards(s32 mode, const Deck* d) {
     s16 count;
     s16 i;
 
@@ -5212,7 +5212,7 @@ void LoadDeckNameTexts(DeckMenuWork* w) {
 }
 
 void LoadCardNameText(DeckMenuWork* w, s32 id) {
-    CardDef* def;
+    const CardDef* def;
 
     def = &gCardDefs[id];
 #ifdef VERSION_EU
@@ -5260,7 +5260,7 @@ void LoadCardDescriptionText(DeckMenuWork* w, u16 index) {
 
 s32 ShowCollectionCardPreview(DeckMenuWork* w) {
     DeckCard2Work* t;
-    CardDef* def;
+    const CardDef* def;
     void* dst;
     u16 id;
     u16 flag;
@@ -5400,7 +5400,7 @@ void ReleaseCardPreview(DeckMenuWork* w) {
 
 void ShowDeckCardPreview(DeckMenuWork* w) {
     DeckCard2Work* node;
-    CardDef* def;
+    const CardDef* def;
     void* dst;
     u16 id;
 
@@ -5709,7 +5709,7 @@ s32 AddSelectedValueCardToDeck(DeckMenuWork* w) {
     u16 card;
     u16 v;
     u32 id;
-    CardDef* def;
+    const CardDef* def;
 
     mask = 0;
     idx = w->cursorCol * 5 + w->cursorRow;
@@ -5832,7 +5832,7 @@ u8 CheckCardDeletable(DeckMenuWork* w) {
     u16 i;
     u16 id;
     u16 c;
-    CardDef* def;
+    const CardDef* def;
 
     idx = w->cursorCol * 5 + w->cursorRow;
     e = &w->entries[w->entryIndex];
@@ -5896,7 +5896,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* w) {
     u16 i;
     u16 card;
     u16 id;
-    CardDef* def;
+    const CardDef* def;
 
     idx = w->cursorCol * 5 + w->cursorRow;
     e = &w->entries[w->entryIndex];

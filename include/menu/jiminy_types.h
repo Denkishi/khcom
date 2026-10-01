@@ -31,8 +31,8 @@ typedef struct JiminyPair {
 } JiminyPair;
 
 typedef struct JiminyDetail {
-    void* name;
-    void* text;
+    const void* name;
+    const void* text;
 #ifndef VERSION_EU
     s16 lineCount;
     u16 padding;
@@ -58,7 +58,7 @@ typedef struct JiminyLine {
 
 typedef struct JiminyEntry {
     void* map;
-    void* names;
+    const void* names;
     s16 count;
     s16 parent;
     const u16* children;
@@ -125,7 +125,7 @@ typedef struct JiminyWork {
     s16 x2;
     s16 y2;
     u8 unk_CCA[0x02];
-    JiminyDetail* detail;
+    const JiminyDetail* detail;
     u16 detailCount;
     s16 detailIndex;
     s16 nextDetail;

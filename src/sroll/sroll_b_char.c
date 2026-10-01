@@ -21,7 +21,7 @@ void SrollBCharSetMotion(Task* task, s32 v) {
 
 void SrollBCharChangeAnim(SrollBCharWork* w) {
     const EvtObjAnim* def;
-    EvtAnimDef* gfx;
+    const EvtAnimDef* gfx;
 
     def = w->obj->animEntry;
     gfx = def->animDef;
@@ -31,7 +31,7 @@ void SrollBCharChangeAnim(SrollBCharWork* w) {
 }
 
 void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
-    EvtObjRes* res;
+    const EvtObjRes* res;
     AnimState* anim;
 
     res = a->res;

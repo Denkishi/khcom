@@ -1497,9 +1497,9 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
 }
 
 s32 func_080ADD04(CardDisplayWork** p, u8 b) {
-    CardDef* d0;
-    CardDef* d1;
-    CardDef* d2;
+    const CardDef* d0;
+    const CardDef* d1;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u16 c2;
@@ -1522,9 +1522,9 @@ s32 func_080ADD04(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080ADD58(CardDisplayWork** p, u8 b) {
-    CardDef* d0;
-    CardDef* d1;
-    CardDef* d2;
+    const CardDef* d0;
+    const CardDef* d1;
+    const CardDef* d2;
 
     if (b == 3) {
         d0 = p[0]->cardDef;
@@ -1541,7 +1541,7 @@ s32 func_080ADD58(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
-    CardDef* d0;
+    const CardDef* d0;
     u16 c0;
     u16 c1;
     u16 c2;
@@ -1617,8 +1617,8 @@ s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d) {
 }
 
 s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b) {
-    CardDef* d1;
-    CardDef* d2;
+    const CardDef* d1;
+    const CardDef* d2;
     u16 c0;
     u8 s1;
     u8 s2;
@@ -1639,8 +1639,8 @@ s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b) {
 }
 
 s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b) {
-    CardDef* d1;
-    CardDef* d2;
+    const CardDef* d1;
+    const CardDef* d2;
     u16 c0;
     u8 s1;
     u8 s2;
@@ -1713,7 +1713,7 @@ s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c) {
 }
 
 s32 func_080ADFD4(CardDisplayWork** p, u8 b) {
-    CardDef* d2;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
 
@@ -1734,7 +1734,7 @@ s32 func_080ADFD4(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE014(CardDisplayWork** p, u8 b) {
-    CardDef* d1;
+    const CardDef* d1;
     u16 e0;
     u16 e1;
 
@@ -1776,7 +1776,7 @@ s32 func_080AE080(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE0B4(CardDisplayWork** p, u8 b) {
-    CardDef* d2;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u8 s2;
@@ -1796,7 +1796,7 @@ s32 func_080AE0B4(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE0F4(CardDisplayWork** p, u8 b) {
-    CardDef* d2;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u8 s2;
@@ -1834,7 +1834,7 @@ s32 func_080AE134(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE168(CardDisplayWork** p, u8 b) {
-    CardDef* d2;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u8 s2;
@@ -1854,7 +1854,7 @@ s32 func_080AE168(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE1A8(CardDisplayWork** p, u8 b) {
-    CardDef* d2;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u8 s2;
@@ -1874,9 +1874,9 @@ s32 func_080AE1A8(CardDisplayWork** p, u8 b) {
 }
 
 s32 func_080AE1E8(CardDisplayWork** p, u8 b) {
-    CardDef* d0;
-    CardDef* d1;
-    CardDef* d2;
+    const CardDef* d0;
+    const CardDef* d1;
+    const CardDef* d2;
     u16 c0;
     u16 c1;
     u16 c2;

@@ -877,7 +877,7 @@ s32 GetStatusItemTab(u32 a) {
 }
 
 void* LoadStockNameTiles(u16 a) {
-    SpriteFrameResourceDef* d;
+    const SpriteFrameResourceDef* d;
     void* t;
 
     d = &gStockNameSprites[a];
@@ -1184,7 +1184,7 @@ void task_status_friend_3(StatusFriendWork* work) {
 
 u16 LoadFriendCardSprites(void** a, void** b, void** c) {
     StatusFriendTable table;
-    CardDef* card;
+    const CardDef* card;
     const void* data;
     u16 count;
     u16 index;

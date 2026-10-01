@@ -237,7 +237,7 @@ void DrawSpriteUnsortedAffine(u16 a, u16 b, void* c, void* d, void* e, ObjAffine
     p->sortLo += 1;
 }
 
-ObjTiles* LoadObjTiles(void* src, u16 size) {
+ObjTiles* LoadObjTiles(const void* src, u16 size) {
     ObjTiles* node;
     ObjTiles* cur;
     ObjTiles* next;
@@ -370,7 +370,7 @@ void ReleaseObjTiles(void* a) {
     }
 }
 
-ObjTiles* AllocObjTiles(u16 size, void* owner) {
+ObjTiles* AllocObjTiles(u16 size, const void* owner) {
     ObjTiles* node;
     ObjTiles* cur;
     ObjTiles* next;
@@ -439,11 +439,11 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     return NULL;
 }
 
-void SetObjTileSource(ObjTiles* a, void* b) {
+void SetObjTileSource(ObjTiles* a, const void* b) {
     a->src = b;
 }
 
-ObjPalette* LoadObjPalette(void* src, u16 size) {
+ObjPalette* LoadObjPalette(const void* src, u16 size) {
     ObjPalette* node;
     ObjPalette* cur;
     ObjPalette* next;
@@ -1625,7 +1625,7 @@ void VTransReset() {
     q->transferredBytes = 0;
 }
 
-u8 RequestDma3Copy(void* src, void* dst, u16 size) {
+u8 RequestDma3Copy(const void* src, void* dst, u16 size) {
     Dma3Queue* q;
 
     if (size == 0) {
@@ -2156,7 +2156,7 @@ void LoadBgPalette(s32 bg, void* src, u16 size) {
     LoadPalette(src, (void*)((gBgPaletteBank[bg] << 5) + PLTT), size);
 }
 
-void LoadBgMap(s32 bg, void* src, u16 size) {
+void LoadBgMap(s32 bg, const void* src, u16 size) {
     EnableBg(bg);
     RequestDma3Copy(src, GetBgScreenBase(bg), size);
 }
@@ -2169,7 +2169,7 @@ void* GetBgScreenBase(s32 bg) {
     return (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + VRAM);
 }
 
-void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
+void SetBgMapBlocks(s32 bg, const void* src, u8 w, u8 h) {
     if (gDispCnt & DISPCNT_MODE_MASK) {
         if (bg == 2 || bg == 3) {
             return;
@@ -2505,7 +2505,7 @@ u32 eu_08005A14(u32* src) {
     return *src >> 8;
 }
 
-u8 eu_08005A1C(s32 bg, void* src, u8 w, u8 h) {
+u8 eu_08005A1C(s32 bg, const void* src, u8 w, u8 h) {
     BgEntry* e;
     s32 count;
     s32 i;
@@ -2839,7 +2839,7 @@ void FadeReset() {
     CpuFill32(0, gFadeWork, sizeof(FadeWork));
 }
 
-void LoadPalette(void* src, void* dst, u16 size) {
+void LoadPalette(const void* src, void* dst, u16 size) {
     PaletteSlot* base;
     s32 idx;
     s32 count;

@@ -1687,7 +1687,7 @@ JiminyTextChar* gJiminyEntry16Names[22] = {
     gUnk_0815ACD6, gUnk_0815AD9A,
 };
 
-JiminyTextChar* gJiminyHiddenTexts[13] = {
+const JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnk_08159D14, gUnk_08159D18, gUnk_08159D1E, gUnk_08159D26,
     gUnk_08159D30, gUnk_08159D3C, gUnk_08159D4A, gUnk_08159D5A,
     gUnk_08159D6C, gUnk_08159D80, gUnk_08159D96, gUnk_08159DAE,
@@ -3253,7 +3253,7 @@ JiminyTextChar* gJiminyEntry16Names[22] = {
     gUnkJp_0814EC58, gUnkJp_0814EE88,
 };
 
-JiminyTextChar* gJiminyHiddenTexts[13] = {
+const JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnkJp_0814E56C, gUnkJp_0814E564, gUnkJp_0814E55C, gUnkJp_0814E550,
     gUnkJp_0814E544, gUnkJp_0814E534, gUnkJp_0814E524, gUnkJp_0814E510,
     gUnkJp_0814E4FC, gUnkJp_0814E4E4, gUnkJp_0814E4CC, gUnkJp_0814E4B0,
@@ -3262,7 +3262,7 @@ JiminyTextChar* gJiminyHiddenTexts[13] = {
 
 #elif defined(VERSION_EU)
 
-JiminyTextChar* gUnk_09EDB7EC[22] = {
+const JiminyTextChar* gUnk_09EDB7EC[22] = {
     gUnkEu_0883F2DC, gUnkEu_0883F2EF, gUnkEu_0883F2F5, gUnkEu_0883F2F7,
     gUnkEu_0883F30B, gUnkEu_0883F321, gUnkEu_0883F337, gUnkEu_0883F346,
     gUnkEu_0883F348, gUnkEu_0883F35E, gUnkEu_0883F375, gUnkEu_0883F38C,
@@ -3271,7 +3271,7 @@ JiminyTextChar* gUnk_09EDB7EC[22] = {
     gUnkEu_0883F42D, gUnkEu_0883F442,
 };
 
-JiminyTextChar* gUnk_09EDB7ECFr[25] = {
+const JiminyTextChar* gUnk_09EDB7ECFr[25] = {
     gUnkEu_0883F44A, gUnkEu_0883F45E, gUnkEu_0883F46D, gUnkEu_0883F46F,
     gUnkEu_0883F486, gUnkEu_0883F49B, gUnkEu_0883F4AE, gUnkEu_0883F4C4,
     gUnkEu_0883F4D8, gUnkEu_0883F4DA, gUnkEu_0883F4EE, gUnkEu_0883F501,
@@ -3281,7 +3281,7 @@ JiminyTextChar* gUnk_09EDB7ECFr[25] = {
     gUnkEu_0883F5E1,
 };
 
-JiminyTextChar* gUnk_09EDB7ECDe[27] = {
+const JiminyTextChar* gUnk_09EDB7ECDe[27] = {
     gUnkEu_0883F5F3, gUnkEu_0883F60A, gUnkEu_0883F617, gUnkEu_0883F619,
     gUnkEu_0883F630, gUnkEu_0883F647, gUnkEu_0883F65E, gUnkEu_0883F672,
     gUnkEu_0883F67C, gUnkEu_0883F67E, gUnkEu_0883F697, gUnkEu_0883F6AF,
@@ -3291,7 +3291,7 @@ JiminyTextChar* gUnk_09EDB7ECDe[27] = {
     gUnkEu_0883F79C, gUnkEu_0883F7B4, gUnkEu_0883F7C9,
 };
 
-JiminyTextChar* gUnk_09EDB7ECIt[27] = {
+const JiminyTextChar* gUnk_09EDB7ECIt[27] = {
     gUnkEu_0883F7D7, gUnkEu_0883F7F1, gUnkEu_0883F7FF, gUnkEu_0883F801,
     gUnkEu_0883F816, gUnkEu_0883F82B, gUnkEu_0883F843, gUnkEu_0883F856,
     gUnkEu_0883F863, gUnkEu_0883F865, gUnkEu_0883F878, gUnkEu_0883F88F,
@@ -3301,7 +3301,7 @@ JiminyTextChar* gUnk_09EDB7ECIt[27] = {
     gUnkEu_0883F94C, gUnkEu_0883F95C, gUnkEu_0883F96E,
 };
 
-JiminyTextChar* gUnk_09EDB7ECEs[25] = {
+const JiminyTextChar* gUnk_09EDB7ECEs[25] = {
     gUnkEu_0883F97C, gUnkEu_0883F98C, gUnkEu_0883F9A0, gUnkEu_0883F9A2,
     gUnkEu_0883F9B5, gUnkEu_0883F9CA, gUnkEu_0883F9DB, gUnkEu_0883F9EE,
     gUnkEu_0883F9F0, gUnkEu_0883F9FE, gUnkEu_0883FA13, gUnkEu_0883FA27,
@@ -3311,7 +3311,7 @@ JiminyTextChar* gUnk_09EDB7ECEs[25] = {
     gUnkEu_0883FB0A,
 };
 
-JiminyTextChar* gUnk_09EDB844[19] = {
+const JiminyTextChar* gUnk_09EDB844[19] = {
     gUnkEu_0883FB3C, gUnkEu_0883FB52, gUnkEu_0883FB69, gUnkEu_0883FB7E,
     gUnkEu_0883FB96, gUnkEu_0883FBAB, gUnkEu_0883FBC2, gUnkEu_0883FBC4,
     gUnkEu_0883FBDA, gUnkEu_0883FBEF, gUnkEu_0883FC03, gUnkEu_0883FC19,
@@ -3319,7 +3319,7 @@ JiminyTextChar* gUnk_09EDB844[19] = {
     gUnkEu_0883FC73, gUnkEu_0883FC84, gUnkEu_0883FC86,
 };
 
-JiminyTextChar* gUnk_09EDB844Fr[20] = {
+const JiminyTextChar* gUnk_09EDB844Fr[20] = {
     gUnkEu_0883FC8E, gUnkEu_0883FCA1, gUnkEu_0883FCB1, gUnkEu_0883FCC8,
     gUnkEu_0883FCDA, gUnkEu_0883FCED, gUnkEu_0883FD01, gUnkEu_0883FD15,
     gUnkEu_0883FD29, gUnkEu_0883FD2B, gUnkEu_0883FD40, gUnkEu_0883FD53,
@@ -3327,7 +3327,7 @@ JiminyTextChar* gUnk_09EDB844Fr[20] = {
     gUnkEu_0883FDB0, gUnkEu_0883FDC6, gUnkEu_0883FDDD, gUnkEu_0883FDDF,
 };
 
-JiminyTextChar* gUnk_09EDB844De[24] = {
+const JiminyTextChar* gUnk_09EDB844De[24] = {
     gUnkEu_0883FDE7, gUnkEu_0883FDFE, gUnkEu_0883FE16, gUnkEu_0883FE2A,
     gUnkEu_0883FE3F, gUnkEu_0883FE52, gUnkEu_0883FE66, gUnkEu_0883FE79,
     gUnkEu_0883FE8D, gUnkEu_0883FEA0, gUnkEu_0883FEA2, gUnkEu_0883FEB3,
@@ -3336,7 +3336,7 @@ JiminyTextChar* gUnk_09EDB844De[24] = {
     gUnkEu_0883FF6C, gUnkEu_0883FF84, gUnkEu_0883FF8B, gUnkEu_0883FF8D,
 };
 
-JiminyTextChar* gUnk_09EDB844It[24] = {
+const JiminyTextChar* gUnk_09EDB844It[24] = {
     gUnkEu_0883FF95, gUnkEu_0883FFAA, gUnkEu_0883FFBE, gUnkEu_0883FFCF,
     gUnkEu_0883FFE6, gUnkEu_0883FFFB, gUnkEu_08840011, gUnkEu_0884002C,
     gUnkEu_08840041, gUnkEu_08840043, gUnkEu_08840056, gUnkEu_0884006D,
@@ -3345,7 +3345,7 @@ JiminyTextChar* gUnk_09EDB844It[24] = {
     gUnkEu_08840112, gUnkEu_08840129, gUnkEu_0884013B, gUnkEu_0884013D,
 };
 
-JiminyTextChar* gUnk_09EDB844Es[20] = {
+const JiminyTextChar* gUnk_09EDB844Es[20] = {
     gUnkEu_08840145, gUnkEu_08840158, gUnkEu_0884016E, gUnkEu_08840186,
     gUnkEu_0884019C, gUnkEu_088401AF, gUnkEu_088401C6, gUnkEu_088401D7,
     gUnkEu_088401D9, gUnkEu_088401EB, gUnkEu_088401FE, gUnkEu_0884020C,
@@ -3353,7 +3353,7 @@ JiminyTextChar* gUnk_09EDB844Es[20] = {
     gUnkEu_0884026B, gUnkEu_08840281, gUnkEu_0884029A, gUnkEu_0884029C,
 };
 
-JiminyTextChar* gUnk_09EDD46C[18] = {
+const JiminyTextChar* gUnk_09EDD46C[18] = {
     gUnkEu_088402C4, gUnkEu_088402DB, gUnkEu_088402F2, gUnkEu_0884030A,
     gUnkEu_0884031F, gUnkEu_08840336, gUnkEu_08840340, gUnkEu_08840342,
     gUnkEu_08840359, gUnkEu_08840370, gUnkEu_08840389, gUnkEu_0884039A,
@@ -3361,7 +3361,7 @@ JiminyTextChar* gUnk_09EDD46C[18] = {
     gUnkEu_088403DE, gUnkEu_088403F4,
 };
 
-JiminyTextChar* gUnk_09EDD46CFr[19] = {
+const JiminyTextChar* gUnk_09EDD46CFr[19] = {
     gUnkEu_0884040A, gUnkEu_08840421, gUnkEu_08840435, gUnkEu_0884044B,
     gUnkEu_0884045D, gUnkEu_0884046F, gUnkEu_08840471, gUnkEu_08840486,
     gUnkEu_0884049E, gUnkEu_088404B5, gUnkEu_088404CE, gUnkEu_088404E4,
@@ -3369,7 +3369,7 @@ JiminyTextChar* gUnk_09EDD46CFr[19] = {
     gUnkEu_0884053C, gUnkEu_0884053E, gUnkEu_08840556,
 };
 
-JiminyTextChar* gUnk_09EDD46CDe[26] = {
+const JiminyTextChar* gUnk_09EDD46CDe[26] = {
     gUnkEu_0884056C, gUnkEu_08840582, gUnkEu_08840594, gUnkEu_088405AD,
     gUnkEu_088405C5, gUnkEu_088405DC, gUnkEu_088405F0, gUnkEu_088405F7,
     gUnkEu_088405F9, gUnkEu_0884060F, gUnkEu_08840623, gUnkEu_08840632,
@@ -3379,7 +3379,7 @@ JiminyTextChar* gUnk_09EDD46CDe[26] = {
     gUnkEu_088406FB, gUnkEu_08840715,
 };
 
-JiminyTextChar* gUnk_09EDD46CIt[22] = {
+const JiminyTextChar* gUnk_09EDD46CIt[22] = {
     gUnkEu_08840728, gUnkEu_0884073D, gUnkEu_08840754, gUnkEu_0884076D,
     gUnkEu_08840780, gUnkEu_08840793, gUnkEu_088407A1, gUnkEu_088407AB,
     gUnkEu_088407AD, gUnkEu_088407C2, gUnkEu_088407DB, gUnkEu_088407F7,
@@ -3388,7 +3388,7 @@ JiminyTextChar* gUnk_09EDD46CIt[22] = {
     gUnkEu_0884087F, gUnkEu_08840895,
 };
 
-JiminyTextChar* gUnk_09EDD46CEs[20] = {
+const JiminyTextChar* gUnk_09EDD46CEs[20] = {
     gUnkEu_088408B2, gUnkEu_088408C7, gUnkEu_088408DB, gUnkEu_088408F1,
     gUnkEu_08840906, gUnkEu_0884091B, gUnkEu_0884092E, gUnkEu_08840937,
     gUnkEu_08840939, gUnkEu_08840951, gUnkEu_08840969, gUnkEu_0884097F,
@@ -3396,7 +3396,7 @@ JiminyTextChar* gUnk_09EDD46CEs[20] = {
     gUnkEu_088409DC, gUnkEu_088409DE, gUnkEu_088409F5, gUnkEu_08840A0B,
 };
 
-JiminyTextChar* gUnk_09EDB890[22] = {
+const JiminyTextChar* gUnk_09EDB890[22] = {
     gUnkEu_08840A34, gUnkEu_08840A4A, gUnkEu_08840A5D, gUnkEu_08840A5F,
     gUnkEu_08840A76, gUnkEu_08840A8D, gUnkEu_08840AA0, gUnkEu_08840AB6,
     gUnkEu_08840ACE, gUnkEu_08840ADF, gUnkEu_08840AE1, gUnkEu_08840AF5,
@@ -3405,7 +3405,7 @@ JiminyTextChar* gUnk_09EDB890[22] = {
     gUnkEu_08840B9E, gUnkEu_08840BB4,
 };
 
-JiminyTextChar* gUnk_09EDB890Fr[23] = {
+const JiminyTextChar* gUnk_09EDB890Fr[23] = {
     gUnkEu_08840BCC, gUnkEu_08840BDD, gUnkEu_08840BF1, gUnkEu_08840BFF,
     gUnkEu_08840C01, gUnkEu_08840C12, gUnkEu_08840C28, gUnkEu_08840C3B,
     gUnkEu_08840C4A, gUnkEu_08840C5E, gUnkEu_08840C6D, gUnkEu_08840C6F,
@@ -3414,7 +3414,7 @@ JiminyTextChar* gUnk_09EDB890Fr[23] = {
     gUnkEu_08840D13, gUnkEu_08840D2D, gUnkEu_08840D45,
 };
 
-JiminyTextChar* gUnk_09EDB890De[30] = {
+const JiminyTextChar* gUnk_09EDB890De[30] = {
     gUnkEu_08840D4D, gUnkEu_08840D60, gUnkEu_08840D77, gUnkEu_08840D8E,
     gUnkEu_08840D90, gUnkEu_08840DA7, gUnkEu_08840DBE, gUnkEu_08840DD5,
     gUnkEu_08840DED, gUnkEu_08840E04, gUnkEu_08840E06, gUnkEu_08840E1A,
@@ -3425,7 +3425,7 @@ JiminyTextChar* gUnk_09EDB890De[30] = {
     gUnkEu_08840F54, gUnkEu_08840F67,
 };
 
-JiminyTextChar* gUnk_09EDB890It[30] = {
+const JiminyTextChar* gUnk_09EDB890It[30] = {
     gUnkEu_08840F7B, gUnkEu_08840F8F, gUnkEu_08840F9E, gUnkEu_08840FAD,
     gUnkEu_08840FAF, gUnkEu_08840FC3, gUnkEu_08840FD7, gUnkEu_08840FE9,
     gUnkEu_08840FF9, gUnkEu_0884100B, gUnkEu_0884101C, gUnkEu_08841032,
@@ -3436,7 +3436,7 @@ JiminyTextChar* gUnk_09EDB890It[30] = {
     gUnkEu_0884114A, gUnkEu_08841159,
 };
 
-JiminyTextChar* gUnk_09EDB890Es[26] = {
+const JiminyTextChar* gUnk_09EDB890Es[26] = {
     gUnkEu_0884116D, gUnkEu_08841182, gUnkEu_08841198, gUnkEu_0884119A,
     gUnkEu_088411AE, gUnkEu_088411C2, gUnkEu_088411D9, gUnkEu_088411EE,
     gUnkEu_08841205, gUnkEu_0884121B, gUnkEu_0884122C, gUnkEu_0884122E,
@@ -3446,7 +3446,7 @@ JiminyTextChar* gUnk_09EDB890Es[26] = {
     gUnkEu_08841330, gUnkEu_08841341,
 };
 
-JiminyTextChar* gUnk_09EDD3B4[20] = {
+const JiminyTextChar* gUnk_09EDD3B4[20] = {
     gUnkEu_08841370, gUnkEu_08841384, gUnkEu_0884139B, gUnkEu_088413B0,
     gUnkEu_088413C6, gUnkEu_088413DC, gUnkEu_088413EB, gUnkEu_088413ED,
     gUnkEu_08841402, gUnkEu_0884141A, gUnkEu_08841430, gUnkEu_08841448,
@@ -3454,7 +3454,7 @@ JiminyTextChar* gUnk_09EDD3B4[20] = {
     gUnkEu_08841494, gUnkEu_088414AB, gUnkEu_088414C4, gUnkEu_088414DD,
 };
 
-JiminyTextChar* gUnk_09EDD3B4Fr[21] = {
+const JiminyTextChar* gUnk_09EDD3B4Fr[21] = {
     gUnkEu_088414EC, gUnkEu_08841500, gUnkEu_08841512, gUnkEu_08841523,
     gUnkEu_08841536, gUnkEu_08841545, gUnkEu_0884155B, gUnkEu_08841573,
     gUnkEu_08841575, gUnkEu_0884158E, gUnkEu_088415A5, gUnkEu_088415B9,
@@ -3463,7 +3463,7 @@ JiminyTextChar* gUnk_09EDD3B4Fr[21] = {
     gUnkEu_08841663,
 };
 
-JiminyTextChar* gUnk_09EDD3B4De[25] = {
+const JiminyTextChar* gUnk_09EDD3B4De[25] = {
     gUnkEu_0884167B, gUnkEu_08841693, gUnkEu_088416A9, gUnkEu_088416C0,
     gUnkEu_088416D3, gUnkEu_088416E8, gUnkEu_088416FB, gUnkEu_0884170B,
     gUnkEu_0884170D, gUnkEu_08841723, gUnkEu_0884173B, gUnkEu_08841752,
@@ -3473,7 +3473,7 @@ JiminyTextChar* gUnk_09EDD3B4De[25] = {
     gUnkEu_08841856,
 };
 
-JiminyTextChar* gUnk_09EDD3B4It[25] = {
+const JiminyTextChar* gUnk_09EDD3B4It[25] = {
     gUnkEu_0884186C, gUnkEu_08841882, gUnkEu_08841897, gUnkEu_088418AD,
     gUnkEu_088418C2, gUnkEu_088418D3, gUnkEu_088418E6, gUnkEu_088418F4,
     gUnkEu_088418F6, gUnkEu_08841908, gUnkEu_0884191A, gUnkEu_0884192E,
@@ -3483,7 +3483,7 @@ JiminyTextChar* gUnk_09EDD3B4It[25] = {
     gUnkEu_08841A15,
 };
 
-JiminyTextChar* gUnk_09EDD3B4Es[23] = {
+const JiminyTextChar* gUnk_09EDD3B4Es[23] = {
     gUnkEu_08841A29, gUnkEu_08841A3F, gUnkEu_08841A55, gUnkEu_08841A6B,
     gUnkEu_08841A7B, gUnkEu_08841A93, gUnkEu_08841AAC, gUnkEu_08841ABA,
     gUnkEu_08841ABC, gUnkEu_08841ACA, gUnkEu_08841ADF, gUnkEu_08841AF5,
@@ -3492,7 +3492,7 @@ JiminyTextChar* gUnk_09EDD3B4Es[23] = {
     gUnkEu_08841B96, gUnkEu_08841BA9, gUnkEu_08841BC0,
 };
 
-JiminyTextChar* gUnk_09EDD404[26] = {
+const JiminyTextChar* gUnk_09EDD404[26] = {
     gUnkEu_08841BF8, gUnkEu_08841C0D, gUnkEu_08841C22, gUnkEu_08841C3B,
     gUnkEu_08841C45, gUnkEu_08841C47, gUnkEu_08841C5B, gUnkEu_08841C6C,
     gUnkEu_08841C80, gUnkEu_08841C95, gUnkEu_08841C9C, gUnkEu_08841C9E,
@@ -3502,7 +3502,7 @@ JiminyTextChar* gUnk_09EDD404[26] = {
     gUnkEu_08841D7F, gUnkEu_08841D94,
 };
 
-JiminyTextChar* gUnk_09EDD404Fr[29] = {
+const JiminyTextChar* gUnk_09EDD404Fr[29] = {
     gUnkEu_08841DAC, gUnkEu_08841DC4, gUnkEu_08841DD7, gUnkEu_08841DEE,
     gUnkEu_08841DFB, gUnkEu_08841DFD, gUnkEu_08841E0E, gUnkEu_08841E24,
     gUnkEu_08841E33, gUnkEu_08841E49, gUnkEu_08841E5F, gUnkEu_08841E61,
@@ -3513,7 +3513,7 @@ JiminyTextChar* gUnk_09EDD404Fr[29] = {
     gUnkEu_08841F8F,
 };
 
-JiminyTextChar* gUnk_09EDD404De[32] = {
+const JiminyTextChar* gUnk_09EDD404De[32] = {
     gUnkEu_08841F99, gUnkEu_08841FAC, gUnkEu_08841FC0, gUnkEu_08841FD7,
     gUnkEu_08841FF0, gUnkEu_08842004, gUnkEu_08842006, gUnkEu_08842016,
     gUnkEu_0884202A, gUnkEu_08842040, gUnkEu_08842053, gUnkEu_08842067,
@@ -3524,7 +3524,7 @@ JiminyTextChar* gUnk_09EDD404De[32] = {
     gUnkEu_08842187, gUnkEu_0884219D, gUnkEu_088421B4, gUnkEu_088421CD,
 };
 
-JiminyTextChar* gUnk_09EDD404It[31] = {
+const JiminyTextChar* gUnk_09EDD404It[31] = {
     gUnkEu_088421D3, gUnkEu_088421E6, gUnkEu_088421FA, gUnkEu_0884220D,
     gUnkEu_08842223, gUnkEu_08842225, gUnkEu_08842238, gUnkEu_08842252,
     gUnkEu_0884226A, gUnkEu_0884227C, gUnkEu_08842285, gUnkEu_08842287,
@@ -3535,7 +3535,7 @@ JiminyTextChar* gUnk_09EDD404It[31] = {
     gUnkEu_088423A5, gUnkEu_088423BD, gUnkEu_088423CD,
 };
 
-JiminyTextChar* gUnk_09EDD404Es[26] = {
+const JiminyTextChar* gUnk_09EDD404Es[26] = {
     gUnkEu_088423DE, gUnkEu_088423F0, gUnkEu_08842407, gUnkEu_0884241D,
     gUnkEu_08842431, gUnkEu_08842433, gUnkEu_08842449, gUnkEu_08842463,
     gUnkEu_0884247C, gUnkEu_08842493, gUnkEu_08842495, gUnkEu_088424AA,
@@ -3545,7 +3545,7 @@ JiminyTextChar* gUnk_09EDD404Es[26] = {
     gUnkEu_088425AA, gUnkEu_088425BF,
 };
 
-JiminyTextChar* gUnk_09EDB8E8[17] = {
+const JiminyTextChar* gUnk_09EDB8E8[17] = {
     gUnkEu_088425F4, gUnkEu_0884260B, gUnkEu_0884261F, gUnkEu_08842635,
     gUnkEu_08842640, gUnkEu_08842642, gUnkEu_08842654, gUnkEu_08842669,
     gUnkEu_08842681, gUnkEu_08842699, gUnkEu_088426AF, gUnkEu_088426C7,
@@ -3553,7 +3553,7 @@ JiminyTextChar* gUnk_09EDB8E8[17] = {
     gUnkEu_0884271C,
 };
 
-JiminyTextChar* gUnk_09EDB8E8Fr[18] = {
+const JiminyTextChar* gUnk_09EDB8E8Fr[18] = {
     gUnkEu_08842732, gUnkEu_0884274A, gUnkEu_08842760, gUnkEu_08842778,
     gUnkEu_08842782, gUnkEu_08842784, gUnkEu_0884279C, gUnkEu_088427B1,
     gUnkEu_088427C6, gUnkEu_088427DC, gUnkEu_088427F0, gUnkEu_08842806,
@@ -3561,7 +3561,7 @@ JiminyTextChar* gUnk_09EDB8E8Fr[18] = {
     gUnkEu_08842864, gUnkEu_0884287C,
 };
 
-JiminyTextChar* gUnk_09EDB8E8De[24] = {
+const JiminyTextChar* gUnk_09EDB8E8De[24] = {
     gUnkEu_08842882, gUnkEu_08842899, gUnkEu_088428B0, gUnkEu_088428C8,
     gUnkEu_088428DE, gUnkEu_088428F6, gUnkEu_088428F8, gUnkEu_0884290A,
     gUnkEu_08842921, gUnkEu_08842938, gUnkEu_0884294E, gUnkEu_08842967,
@@ -3570,7 +3570,7 @@ JiminyTextChar* gUnk_09EDB8E8De[24] = {
     gUnkEu_08842A0A, gUnkEu_08842A1B, gUnkEu_08842A2F, gUnkEu_08842A41,
 };
 
-JiminyTextChar* gUnk_09EDB8E8It[20] = {
+const JiminyTextChar* gUnk_09EDB8E8It[20] = {
     gUnkEu_08842A55, gUnkEu_08842A69, gUnkEu_08842A7E, gUnkEu_08842A8B,
     gUnkEu_08842AA2, gUnkEu_08842AA4, gUnkEu_08842AB8, gUnkEu_08842ACE,
     gUnkEu_08842AE5, gUnkEu_08842AFB, gUnkEu_08842B11, gUnkEu_08842B27,
@@ -3578,7 +3578,7 @@ JiminyTextChar* gUnk_09EDB8E8It[20] = {
     gUnkEu_08842B6E, gUnkEu_08842B84, gUnkEu_08842B99, gUnkEu_08842BAB,
 };
 
-JiminyTextChar* gUnk_09EDB8E8Es[19] = {
+const JiminyTextChar* gUnk_09EDB8E8Es[19] = {
     gUnkEu_08842BB9, gUnkEu_08842BD2, gUnkEu_08842BE8, gUnkEu_08842BFF,
     gUnkEu_08842C13, gUnkEu_08842C15, gUnkEu_08842C24, gUnkEu_08842C3A,
     gUnkEu_08842C50, gUnkEu_08842C5F, gUnkEu_08842C75, gUnkEu_08842C8C,
@@ -3586,7 +3586,7 @@ JiminyTextChar* gUnk_09EDB8E8Es[19] = {
     gUnkEu_08842CD7, gUnkEu_08842CEE, gUnkEu_08842D02,
 };
 
-JiminyTextChar* gUnk_09EDB92C[32] = {
+const JiminyTextChar* gUnk_09EDB92C[32] = {
     gUnkEu_08842D2C, gUnkEu_08842D40, gUnkEu_08842D55, gUnkEu_08842D6A,
     gUnkEu_08842D81, gUnkEu_08842D98, gUnkEu_08842DA4, gUnkEu_08842DA6,
     gUnkEu_08842DBA, gUnkEu_08842DD1, gUnkEu_08842DE5, gUnkEu_08842DF4,
@@ -3597,7 +3597,7 @@ JiminyTextChar* gUnk_09EDB92C[32] = {
     gUnkEu_08842F12, gUnkEu_08842F29, gUnkEu_08842F3E, gUnkEu_08842F50,
 };
 
-JiminyTextChar* gUnk_09EDB92CFr[32] = {
+const JiminyTextChar* gUnk_09EDB92CFr[32] = {
     gUnkEu_08842F6A, gUnkEu_08842F82, gUnkEu_08842F94, gUnkEu_08842FAD,
     gUnkEu_08842FBF, gUnkEu_08842FD5, gUnkEu_08842FE0, gUnkEu_08842FE2,
     gUnkEu_08842FF7, gUnkEu_0884300B, gUnkEu_08843020, gUnkEu_08843022,
@@ -3608,7 +3608,7 @@ JiminyTextChar* gUnk_09EDB92CFr[32] = {
     gUnkEu_0884315F, gUnkEu_08843174, gUnkEu_08843189, gUnkEu_0884319D,
 };
 
-JiminyTextChar* gUnk_09EDB92CDe[43] = {
+const JiminyTextChar* gUnk_09EDB92CDe[43] = {
     gUnkEu_088431B3, gUnkEu_088431CA, gUnkEu_088431DE, gUnkEu_088431F2,
     gUnkEu_08843206, gUnkEu_0884321D, gUnkEu_08843234, gUnkEu_08843248,
     gUnkEu_0884324A, gUnkEu_0884325F, gUnkEu_08843275, gUnkEu_0884328A,
@@ -3622,7 +3622,7 @@ JiminyTextChar* gUnk_09EDB92CDe[43] = {
     gUnkEu_0884349F, gUnkEu_088434B6, gUnkEu_088434CB,
 };
 
-JiminyTextChar* gUnk_09EDB92CIt[43] = {
+const JiminyTextChar* gUnk_09EDB92CIt[43] = {
     gUnkEu_088434D5, gUnkEu_088434EB, gUnkEu_088434FD, gUnkEu_08843511,
     gUnkEu_08843526, gUnkEu_0884353C, gUnkEu_08843550, gUnkEu_08843565,
     gUnkEu_0884357D, gUnkEu_0884357F, gUnkEu_08843592, gUnkEu_088435A4,
@@ -3636,7 +3636,7 @@ JiminyTextChar* gUnk_09EDB92CIt[43] = {
     gUnkEu_088437BA, gUnkEu_088437CE, gUnkEu_088437DF,
 };
 
-JiminyTextChar* gUnk_09EDB92CEs[34] = {
+const JiminyTextChar* gUnk_09EDB92CEs[34] = {
     gUnkEu_088437E8, gUnkEu_088437FC, gUnkEu_0884380A, gUnkEu_08843820,
     gUnkEu_0884382F, gUnkEu_08843843, gUnkEu_08843857, gUnkEu_0884386A,
     gUnkEu_08843876, gUnkEu_08843878, gUnkEu_0884388F, gUnkEu_088438A6,
@@ -3648,7 +3648,7 @@ JiminyTextChar* gUnk_09EDB92CEs[34] = {
     gUnkEu_08843A43, gUnkEu_08843A59,
 };
 
-JiminyTextChar* gUnk_09EDD4B4[22] = {
+const JiminyTextChar* gUnk_09EDD4B4[22] = {
     gUnkEu_08843A90, gUnkEu_08843AA9, gUnkEu_08843AC0, gUnkEu_08843AD6,
     gUnkEu_08843AEC, gUnkEu_08843AFC, gUnkEu_08843AFE, gUnkEu_08843B13,
     gUnkEu_08843B29, gUnkEu_08843B3F, gUnkEu_08843B56, gUnkEu_08843B6C,
@@ -3657,7 +3657,7 @@ JiminyTextChar* gUnk_09EDD4B4[22] = {
     gUnkEu_08843BFF, gUnkEu_08843C15,
 };
 
-JiminyTextChar* gUnk_09EDD4B4Fr[27] = {
+const JiminyTextChar* gUnk_09EDD4B4Fr[27] = {
     gUnkEu_08843C24, gUnkEu_08843C3B, gUnkEu_08843C50, gUnkEu_08843C67,
     gUnkEu_08843C7D, gUnkEu_08843C96, gUnkEu_08843CA9, gUnkEu_08843CBF,
     gUnkEu_08843CC1, gUnkEu_08843CD6, gUnkEu_08843CE8, gUnkEu_08843D00,
@@ -3667,7 +3667,7 @@ JiminyTextChar* gUnk_09EDD4B4Fr[27] = {
     gUnkEu_08843DF1, gUnkEu_08843E07, gUnkEu_08843E1D,
 };
 
-JiminyTextChar* gUnk_09EDD4B4De[28] = {
+const JiminyTextChar* gUnk_09EDD4B4De[28] = {
     gUnkEu_08843E35, gUnkEu_08843E4F, gUnkEu_08843E65, gUnkEu_08843E7D,
     gUnkEu_08843E91, gUnkEu_08843EAA, gUnkEu_08843EC0, gUnkEu_08843ECE,
     gUnkEu_08843ED0, gUnkEu_08843EEA, gUnkEu_08843F03, gUnkEu_08843F1C,
@@ -3677,7 +3677,7 @@ JiminyTextChar* gUnk_09EDD4B4De[28] = {
     gUnkEu_08844009, gUnkEu_0884401B, gUnkEu_0884402D, gUnkEu_08844043,
 };
 
-JiminyTextChar* gUnk_09EDD4B4It[27] = {
+const JiminyTextChar* gUnk_09EDD4B4It[27] = {
     gUnkEu_08844051, gUnkEu_0884406D, gUnkEu_08844081, gUnkEu_0884409A,
     gUnkEu_088440AE, gUnkEu_088440BF, gUnkEu_088440D4, gUnkEu_088440E2,
     gUnkEu_088440E4, gUnkEu_088440FD, gUnkEu_08844110, gUnkEu_08844123,
@@ -3687,7 +3687,7 @@ JiminyTextChar* gUnk_09EDD4B4It[27] = {
     gUnkEu_0884420C, gUnkEu_08844220, gUnkEu_08844232,
 };
 
-JiminyTextChar* gUnk_09EDD4B4Es[24] = {
+const JiminyTextChar* gUnk_09EDD4B4Es[24] = {
     gUnkEu_08844245, gUnkEu_0884425D, gUnkEu_08844275, gUnkEu_0884428B,
     gUnkEu_0884429C, gUnkEu_088442B0, gUnkEu_088442BE, gUnkEu_088442C0,
     gUnkEu_088442D7, gUnkEu_088442F0, gUnkEu_08844308, gUnkEu_08844321,
@@ -3696,7 +3696,7 @@ JiminyTextChar* gUnk_09EDD4B4Es[24] = {
     gUnkEu_088443BA, gUnkEu_088443BC, gUnkEu_088443D4, gUnkEu_088443E3,
 };
 
-JiminyTextChar* gUnk_09EDB9AC[25] = {
+const JiminyTextChar* gUnk_09EDB9AC[25] = {
     gUnkEu_0884441C, gUnkEu_0884442E, gUnkEu_08844444, gUnkEu_08844459,
     gUnkEu_0884446F, gUnkEu_08844485, gUnkEu_088444A1, gUnkEu_088444A3,
     gUnkEu_088444BA, gUnkEu_088444CD, gUnkEu_088444E3, gUnkEu_088444FC,
@@ -3706,7 +3706,7 @@ JiminyTextChar* gUnk_09EDB9AC[25] = {
     gUnkEu_088445E6,
 };
 
-JiminyTextChar* gUnk_09EDB9ACFr[27] = {
+const JiminyTextChar* gUnk_09EDB9ACFr[27] = {
     gUnkEu_088445EE, gUnkEu_08844604, gUnkEu_0884461A, gUnkEu_08844631,
     gUnkEu_08844649, gUnkEu_08844664, gUnkEu_0884467D, gUnkEu_08844683,
     gUnkEu_08844685, gUnkEu_0884469C, gUnkEu_088446B0, gUnkEu_088446C4,
@@ -3716,7 +3716,7 @@ JiminyTextChar* gUnk_09EDB9ACFr[27] = {
     gUnkEu_088447AA, gUnkEu_088447C3, gUnkEu_088447DA,
 };
 
-JiminyTextChar* gUnk_09EDB9ACDe[35] = {
+const JiminyTextChar* gUnk_09EDB9ACDe[35] = {
     gUnkEu_088447EA, gUnkEu_088447FF, gUnkEu_08844813, gUnkEu_08844826,
     gUnkEu_0884483C, gUnkEu_08844853, gUnkEu_0884486C, gUnkEu_08844884,
     gUnkEu_0884488F, gUnkEu_08844891, gUnkEu_088448AA, gUnkEu_088448BF,
@@ -3728,7 +3728,7 @@ JiminyTextChar* gUnk_09EDB9ACDe[35] = {
     gUnkEu_08844A5D, gUnkEu_08844A73, gUnkEu_08844A88,
 };
 
-JiminyTextChar* gUnk_09EDB9ACIt[31] = {
+const JiminyTextChar* gUnk_09EDB9ACIt[31] = {
     gUnkEu_08844A9B, gUnkEu_08844AAA, gUnkEu_08844ABE, gUnkEu_08844ACB,
     gUnkEu_08844AE5, gUnkEu_08844AFC, gUnkEu_08844B11, gUnkEu_08844B24,
     gUnkEu_08844B36, gUnkEu_08844B38, gUnkEu_08844B4D, gUnkEu_08844B61,
@@ -3739,7 +3739,7 @@ JiminyTextChar* gUnk_09EDB9ACIt[31] = {
     gUnkEu_08844C9F, gUnkEu_08844CB4, gUnkEu_08844CC9,
 };
 
-JiminyTextChar* gUnk_09EDB9ACEs[25] = {
+const JiminyTextChar* gUnk_09EDB9ACEs[25] = {
     gUnkEu_08844CD7, gUnkEu_08844CEF, gUnkEu_08844D04, gUnkEu_08844D14,
     gUnkEu_08844D2C, gUnkEu_08844D44, gUnkEu_08844D58, gUnkEu_08844D5A,
     gUnkEu_08844D6C, gUnkEu_08844D80, gUnkEu_08844D97, gUnkEu_08844DAE,
@@ -3749,7 +3749,7 @@ JiminyTextChar* gUnk_09EDB9ACEs[25] = {
     gUnkEu_08844E7B,
 };
 
-JiminyTextChar* gUnk_09EDDD48[25] = {
+const JiminyTextChar* gUnk_09EDDD48[25] = {
     gUnkEu_08844EAC, gUnkEu_08844EBF, gUnkEu_08844ED6, gUnkEu_08844EEE,
     gUnkEu_08844F00, gUnkEu_08844F15, gUnkEu_08844F17, gUnkEu_08844F2C,
     gUnkEu_08844F44, gUnkEu_08844F5B, gUnkEu_08844F74, gUnkEu_08844F89,
@@ -3759,7 +3759,7 @@ JiminyTextChar* gUnk_09EDDD48[25] = {
     gUnkEu_08845078,
 };
 
-JiminyTextChar* gUnk_09EDDD48Fr[30] = {
+const JiminyTextChar* gUnk_09EDDD48Fr[30] = {
     gUnkEu_0884508A, gUnkEu_088450A0, gUnkEu_088450B4, gUnkEu_088450CB,
     gUnkEu_088450E2, gUnkEu_088450E4, gUnkEu_088450F7, gUnkEu_0884510A,
     gUnkEu_08845119, gUnkEu_0884512D, gUnkEu_08845143, gUnkEu_08845157,
@@ -3770,7 +3770,7 @@ JiminyTextChar* gUnk_09EDDD48Fr[30] = {
     gUnkEu_08845293, gUnkEu_088452A5,
 };
 
-JiminyTextChar* gUnk_09EDDD48De[33] = {
+const JiminyTextChar* gUnk_09EDDD48De[33] = {
     gUnkEu_088452AF, gUnkEu_088452C7, gUnkEu_088452DD, gUnkEu_088452F3,
     gUnkEu_08845308, gUnkEu_08845318, gUnkEu_0884531A, gUnkEu_0884532D,
     gUnkEu_08845344, gUnkEu_0884535C, gUnkEu_08845375, gUnkEu_0884538C,
@@ -3782,7 +3782,7 @@ JiminyTextChar* gUnk_09EDDD48De[33] = {
     gUnkEu_088454F3,
 };
 
-JiminyTextChar* gUnk_09EDDD48It[34] = {
+const JiminyTextChar* gUnk_09EDDD48It[34] = {
     gUnkEu_08845506, gUnkEu_0884551C, gUnkEu_0884552E, gUnkEu_08845541,
     gUnkEu_08845556, gUnkEu_0884556A, gUnkEu_0884557B, gUnkEu_08845585,
     gUnkEu_08845587, gUnkEu_0884559D, gUnkEu_088455B2, gUnkEu_088455C3,
@@ -3794,7 +3794,7 @@ JiminyTextChar* gUnk_09EDDD48It[34] = {
     gUnkEu_0884573E, gUnkEu_0884574F,
 };
 
-JiminyTextChar* gUnk_09EDDD48Es[27] = {
+const JiminyTextChar* gUnk_09EDDD48Es[27] = {
     gUnkEu_08845761, gUnkEu_08845774, gUnkEu_0884578A, gUnkEu_088457A1,
     gUnkEu_088457B5, gUnkEu_088457C7, gUnkEu_088457D5, gUnkEu_088457D7,
     gUnkEu_088457F0, gUnkEu_08845807, gUnkEu_08845816, gUnkEu_08845831,
@@ -3804,7 +3804,7 @@ JiminyTextChar* gUnk_09EDDD48Es[27] = {
     gUnkEu_08845933, gUnkEu_08845949, gUnkEu_0884595F,
 };
 
-JiminyTextChar* gUnk_09EDBA10[27] = {
+const JiminyTextChar* gUnk_09EDBA10[27] = {
     gUnkEu_08845998, gUnkEu_088459AE, gUnkEu_088459C5, gUnkEu_088459DB,
     gUnkEu_088459E2, gUnkEu_088459E4, gUnkEu_088459FA, gUnkEu_08845A10,
     gUnkEu_08845A26, gUnkEu_08845A3C, gUnkEu_08845A3E, gUnkEu_08845A52,
@@ -3814,7 +3814,7 @@ JiminyTextChar* gUnk_09EDBA10[27] = {
     gUnkEu_08845B3D, gUnkEu_08845B4E, gUnkEu_08845B66,
 };
 
-JiminyTextChar* gUnk_09EDBA10Fr[30] = {
+const JiminyTextChar* gUnk_09EDBA10Fr[30] = {
     gUnkEu_08845B7D, gUnkEu_08845B8D, gUnkEu_08845BA4, gUnkEu_08845BB9,
     gUnkEu_08845BCF, gUnkEu_08845BD1, gUnkEu_08845BE6, gUnkEu_08845BFE,
     gUnkEu_08845C15, gUnkEu_08845C2F, gUnkEu_08845C38, gUnkEu_08845C3A,
@@ -3825,7 +3825,7 @@ JiminyTextChar* gUnk_09EDBA10Fr[30] = {
     gUnkEu_08845D69, gUnkEu_08845D81,
 };
 
-JiminyTextChar* gUnk_09EDBA10De[35] = {
+const JiminyTextChar* gUnk_09EDBA10De[35] = {
     gUnkEu_08845D94, gUnkEu_08845DAB, gUnkEu_08845DC3, gUnkEu_08845DD9,
     gUnkEu_08845DEA, gUnkEu_08845DEC, gUnkEu_08845DFF, gUnkEu_08845E17,
     gUnkEu_08845E2E, gUnkEu_08845E40, gUnkEu_08845E47, gUnkEu_08845E49,
@@ -3837,7 +3837,7 @@ JiminyTextChar* gUnk_09EDBA10De[35] = {
     gUnkEu_08845FC1, gUnkEu_08845FD7, gUnkEu_08845FED,
 };
 
-JiminyTextChar* gUnk_09EDBA10It[33] = {
+const JiminyTextChar* gUnk_09EDBA10It[33] = {
     gUnkEu_08846003, gUnkEu_08846014, gUnkEu_0884602B, gUnkEu_0884603F,
     gUnkEu_08846052, gUnkEu_08846065, gUnkEu_08846077, gUnkEu_08846079,
     gUnkEu_0884608D, gUnkEu_088460A3, gUnkEu_088460B6, gUnkEu_088460C9,
@@ -3849,7 +3849,7 @@ JiminyTextChar* gUnk_09EDBA10It[33] = {
     gUnkEu_0884623A,
 };
 
-JiminyTextChar* gUnk_09EDBA10Es[27] = {
+const JiminyTextChar* gUnk_09EDBA10Es[27] = {
     gUnkEu_08846243, gUnkEu_0884625B, gUnkEu_08846274, gUnkEu_08846289,
     gUnkEu_0884628B, gUnkEu_088462A2, gUnkEu_088462B9, gUnkEu_088462D1,
     gUnkEu_088462DA, gUnkEu_088462DC, gUnkEu_088462F1, gUnkEu_0884630B,
@@ -3859,7 +3859,7 @@ JiminyTextChar* gUnk_09EDBA10Es[27] = {
     gUnkEu_088463E6, gUnkEu_088463FB, gUnkEu_08846413,
 };
 
-JiminyTextChar* gUnk_09EDBA7C[25] = {
+const JiminyTextChar* gUnk_09EDBA7C[25] = {
     gUnkEu_0884644C, gUnkEu_0884645E, gUnkEu_08846470, gUnkEu_08846487,
     gUnkEu_088464A0, gUnkEu_088464B7, gUnkEu_088464C8, gUnkEu_088464CA,
     gUnkEu_088464E2, gUnkEu_088464F8, gUnkEu_0884650E, gUnkEu_08846524,
@@ -3869,7 +3869,7 @@ JiminyTextChar* gUnk_09EDBA7C[25] = {
     gUnkEu_0884660C,
 };
 
-JiminyTextChar* gUnk_09EDBA7CFr[27] = {
+const JiminyTextChar* gUnk_09EDBA7CFr[27] = {
     gUnkEu_08846624, gUnkEu_08846636, gUnkEu_0884664C, gUnkEu_08846663,
     gUnkEu_0884667B, gUnkEu_08846690, gUnkEu_088466A5, gUnkEu_088466AC,
     gUnkEu_088466AE, gUnkEu_088466C5, gUnkEu_088466DD, gUnkEu_088466F4,
@@ -3879,7 +3879,7 @@ JiminyTextChar* gUnk_09EDBA7CFr[27] = {
     gUnkEu_088467E4, gUnkEu_088467F8, gUnkEu_0884680E,
 };
 
-JiminyTextChar* gUnk_09EDBA7CDe[31] = {
+const JiminyTextChar* gUnk_09EDBA7CDe[31] = {
     gUnkEu_08846815, gUnkEu_0884682B, gUnkEu_0884683E, gUnkEu_08846851,
     gUnkEu_08846863, gUnkEu_08846876, gUnkEu_0884688E, gUnkEu_088468A4,
     gUnkEu_088468B1, gUnkEu_088468B3, gUnkEu_088468CA, gUnkEu_088468E2,
@@ -3890,7 +3890,7 @@ JiminyTextChar* gUnk_09EDBA7CDe[31] = {
     gUnkEu_08846A28, gUnkEu_08846A3B, gUnkEu_08846A53,
 };
 
-JiminyTextChar* gUnk_09EDBA7CIt[29] = {
+const JiminyTextChar* gUnk_09EDBA7CIt[29] = {
     gUnkEu_08846A64, gUnkEu_08846A7A, gUnkEu_08846A8E, gUnkEu_08846AA6,
     gUnkEu_08846ABB, gUnkEu_08846ACE, gUnkEu_08846AE4, gUnkEu_08846AF5,
     gUnkEu_08846AF7, gUnkEu_08846B0B, gUnkEu_08846B1B, gUnkEu_08846B33,
@@ -3901,7 +3901,7 @@ JiminyTextChar* gUnk_09EDBA7CIt[29] = {
     gUnkEu_08846C7B,
 };
 
-JiminyTextChar* gUnk_09EDBA7CEs[26] = {
+const JiminyTextChar* gUnk_09EDBA7CEs[26] = {
     gUnkEu_08846C84, gUnkEu_08846C9C, gUnkEu_08846CB3, gUnkEu_08846CCA,
     gUnkEu_08846CDB, gUnkEu_08846CF1, gUnkEu_08846D07, gUnkEu_08846D1E,
     gUnkEu_08846D20, gUnkEu_08846D35, gUnkEu_08846D4B, gUnkEu_08846D63,
@@ -3911,51 +3911,51 @@ JiminyTextChar* gUnk_09EDBA7CEs[26] = {
     gUnkEu_08846E49, gUnkEu_08846E55,
 };
 
-JiminyTextChar* gUnk_09EDDDAC[9] = {
+const JiminyTextChar* gUnk_09EDDDAC[9] = {
     gUnkEu_08846E8C, gUnkEu_08846EA0, gUnkEu_08846EB5, gUnkEu_08846ECA,
     gUnkEu_08846ED4, gUnkEu_08846ED6, gUnkEu_08846EE5, gUnkEu_08846EFD,
     gUnkEu_08846F16,
 };
 
-JiminyTextChar* gUnk_09EDDDACFr[10] = {
+const JiminyTextChar* gUnk_09EDDDACFr[10] = {
     gUnkEu_08846F27, gUnkEu_08846F3A, gUnkEu_08846F50, gUnkEu_08846F61,
     gUnkEu_08846F75, gUnkEu_08846F84, gUnkEu_08846F86, gUnkEu_08846F97,
     gUnkEu_08846FAB, gUnkEu_08846FBE,
 };
 
-JiminyTextChar* gUnk_09EDDDACDe[12] = {
+const JiminyTextChar* gUnk_09EDDDACDe[12] = {
     gUnkEu_08846FCF, gUnkEu_08846FE1, gUnkEu_08846FF1, gUnkEu_08847003,
     gUnkEu_08847012, gUnkEu_0884702A, gUnkEu_0884703F, gUnkEu_08847041,
     gUnkEu_08847058, gUnkEu_08847072, gUnkEu_08847088, gUnkEu_0884709D,
 };
 
-JiminyTextChar* gUnk_09EDDDACIt[9] = {
+const JiminyTextChar* gUnk_09EDDDACIt[9] = {
     gUnkEu_088470B6, gUnkEu_088470C7, gUnkEu_088470DB, gUnkEu_088470F0,
     gUnkEu_08847108, gUnkEu_0884710A, gUnkEu_08847124, gUnkEu_08847137,
     gUnkEu_0884714D,
 };
 
-JiminyTextChar* gUnk_09EDDDACEs[11] = {
+const JiminyTextChar* gUnk_09EDDDACEs[11] = {
     gUnkEu_0884715E, gUnkEu_08847174, gUnkEu_08847187, gUnkEu_0884719D,
     gUnkEu_088471B2, gUnkEu_088471BC, gUnkEu_088471BE, gUnkEu_088471D1,
     gUnkEu_088471E6, gUnkEu_088471FC, gUnkEu_08847210,
 };
 
-JiminyTextChar* gUnk_09EDBAE0[15] = {
+const JiminyTextChar* gUnk_09EDBAE0[15] = {
     gUnkEu_0884723C, gUnkEu_08847253, gUnkEu_08847269, gUnkEu_08847278,
     gUnkEu_0884727A, gUnkEu_08847290, gUnkEu_088472A7, gUnkEu_088472BA,
     gUnkEu_088472BC, gUnkEu_088472CF, gUnkEu_088472E5, gUnkEu_088472F9,
     gUnkEu_0884730F, gUnkEu_08847322, gUnkEu_08847338,
 };
 
-JiminyTextChar* gUnk_09EDBAE0Fr[16] = {
+const JiminyTextChar* gUnk_09EDBAE0Fr[16] = {
     gUnkEu_0884733F, gUnkEu_08847356, gUnkEu_0884736C, gUnkEu_08847380,
     gUnkEu_0884738A, gUnkEu_0884738C, gUnkEu_088473A5, gUnkEu_088473BB,
     gUnkEu_088473D3, gUnkEu_088473E0, gUnkEu_088473E2, gUnkEu_088473FB,
     gUnkEu_08847411, gUnkEu_08847424, gUnkEu_08847438, gUnkEu_0884744F,
 };
 
-JiminyTextChar* gUnk_09EDBAE0De[21] = {
+const JiminyTextChar* gUnk_09EDBAE0De[21] = {
     gUnkEu_08847468, gUnkEu_08847480, gUnkEu_08847496, gUnkEu_088474B1,
     gUnkEu_088474C9, gUnkEu_088474D1, gUnkEu_088474D3, gUnkEu_088474E9,
     gUnkEu_088474FD, gUnkEu_08847513, gUnkEu_08847524, gUnkEu_08847537,
@@ -3964,7 +3964,7 @@ JiminyTextChar* gUnk_09EDBAE0De[21] = {
     gUnkEu_088475DB,
 };
 
-JiminyTextChar* gUnk_09EDBAE0It[17] = {
+const JiminyTextChar* gUnk_09EDBAE0It[17] = {
     gUnkEu_088475E6, gUnkEu_088475FC, gUnkEu_08847611, gUnkEu_08847627,
     gUnkEu_08847639, gUnkEu_0884763B, gUnkEu_08847650, gUnkEu_08847660,
     gUnkEu_08847671, gUnkEu_08847685, gUnkEu_08847694, gUnkEu_08847696,
@@ -3972,28 +3972,28 @@ JiminyTextChar* gUnk_09EDBAE0It[17] = {
     gUnkEu_088476F2,
 };
 
-JiminyTextChar* gUnk_09EDBAE0Es[16] = {
+const JiminyTextChar* gUnk_09EDBAE0Es[16] = {
     gUnkEu_0884770C, gUnkEu_08847723, gUnkEu_0884773A, gUnkEu_0884774F,
     gUnkEu_0884775D, gUnkEu_0884775F, gUnkEu_08847771, gUnkEu_08847783,
     gUnkEu_08847795, gUnkEu_088477AB, gUnkEu_088477AD, gUnkEu_088477C2,
     gUnkEu_088477DB, gUnkEu_088477F3, gUnkEu_08847809, gUnkEu_08847821,
 };
 
-JiminyTextChar* gUnk_09EDD50C[16] = {
+const JiminyTextChar* gUnk_09EDD50C[16] = {
     gUnkEu_0884785C, gUnkEu_08847871, gUnkEu_08847886, gUnkEu_0884788F,
     gUnkEu_08847891, gUnkEu_088478A3, gUnkEu_088478BB, gUnkEu_088478CE,
     gUnkEu_088478E6, gUnkEu_088478FD, gUnkEu_08847902, gUnkEu_08847904,
     gUnkEu_08847916, gUnkEu_0884792F, gUnkEu_08847945, gUnkEu_0884795A,
 };
 
-JiminyTextChar* gUnk_09EDD50CFr[15] = {
+const JiminyTextChar* gUnk_09EDD50CFr[15] = {
     gUnkEu_08847969, gUnkEu_08847980, gUnkEu_08847996, gUnkEu_0884799F,
     gUnkEu_088479A1, gUnkEu_088479B7, gUnkEu_088479CC, gUnkEu_088479DE,
     gUnkEu_088479F3, gUnkEu_08847A03, gUnkEu_08847A05, gUnkEu_08847A1B,
     gUnkEu_08847A33, gUnkEu_08847A4C, gUnkEu_08847A5E,
 };
 
-JiminyTextChar* gUnk_09EDD50CDe[17] = {
+const JiminyTextChar* gUnk_09EDD50CDe[17] = {
     gUnkEu_08847A76, gUnkEu_08847A8E, gUnkEu_08847AA6, gUnkEu_08847AA8,
     gUnkEu_08847ABF, gUnkEu_08847AD6, gUnkEu_08847AEA, gUnkEu_08847AFD,
     gUnkEu_08847B0E, gUnkEu_08847B20, gUnkEu_08847B22, gUnkEu_08847B39,
@@ -4001,7 +4001,7 @@ JiminyTextChar* gUnk_09EDD50CDe[17] = {
     gUnkEu_08847B9F,
 };
 
-JiminyTextChar* gUnk_09EDD50CIt[18] = {
+const JiminyTextChar* gUnk_09EDD50CIt[18] = {
     gUnkEu_08847BA8, gUnkEu_08847BBA, gUnkEu_08847BCF, gUnkEu_08847BE7,
     gUnkEu_08847BE9, gUnkEu_08847BF8, gUnkEu_08847C10, gUnkEu_08847C26,
     gUnkEu_08847C35, gUnkEu_08847C4A, gUnkEu_08847C64, gUnkEu_08847C7D,
@@ -4009,14 +4009,14 @@ JiminyTextChar* gUnk_09EDD50CIt[18] = {
     gUnkEu_08847CD6, gUnkEu_08847CEC,
 };
 
-JiminyTextChar* gUnk_09EDD50CEs[15] = {
+const JiminyTextChar* gUnk_09EDD50CEs[15] = {
     gUnkEu_08847CFD, gUnkEu_08847D15, gUnkEu_08847D2F, gUnkEu_08847D38,
     gUnkEu_08847D3A, gUnkEu_08847D4F, gUnkEu_08847D64, gUnkEu_08847D72,
     gUnkEu_08847D85, gUnkEu_08847D91, gUnkEu_08847D93, gUnkEu_08847DA7,
     gUnkEu_08847DC0, gUnkEu_08847DD7, gUnkEu_08847DEE,
 };
 
-JiminyTextChar* gUnk_09EDDE38[24] = {
+const JiminyTextChar* gUnk_09EDDE38[24] = {
     gUnkEu_08847E24, gUnkEu_08847E3B, gUnkEu_08847E50, gUnkEu_08847E67,
     gUnkEu_08847E7E, gUnkEu_08847E95, gUnkEu_08847EA8, gUnkEu_08847EAA,
     gUnkEu_08847EBB, gUnkEu_08847ED1, gUnkEu_08847EE6, gUnkEu_08847EFF,
@@ -4025,7 +4025,7 @@ JiminyTextChar* gUnk_09EDDE38[24] = {
     gUnkEu_08847F98, gUnkEu_08847F9A, gUnkEu_08847FAA, gUnkEu_08847FC1,
 };
 
-JiminyTextChar* gUnk_09EDDE38Fr[28] = {
+const JiminyTextChar* gUnk_09EDDE38Fr[28] = {
     gUnkEu_08847FD5, gUnkEu_08847FE9, gUnkEu_08848000, gUnkEu_08848017,
     gUnkEu_0884802B, gUnkEu_0884803B, gUnkEu_08848051, gUnkEu_08848057,
     gUnkEu_08848059, gUnkEu_0884806F, gUnkEu_08848084, gUnkEu_08848098,
@@ -4035,7 +4035,7 @@ JiminyTextChar* gUnk_09EDDE38Fr[28] = {
     gUnkEu_08848174, gUnkEu_08848186, gUnkEu_0884819B, gUnkEu_088481AE,
 };
 
-JiminyTextChar* gUnk_09EDDE38De[32] = {
+const JiminyTextChar* gUnk_09EDDE38De[32] = {
     gUnkEu_088481B9, gUnkEu_088481CF, gUnkEu_088481E4, gUnkEu_088481FA,
     gUnkEu_08848213, gUnkEu_08848229, gUnkEu_0884823E, gUnkEu_08848251,
     gUnkEu_08848262, gUnkEu_08848264, gUnkEu_0884827B, gUnkEu_08848290,
@@ -4046,7 +4046,7 @@ JiminyTextChar* gUnk_09EDDE38De[32] = {
     gUnkEu_088483B3, gUnkEu_088483C9, gUnkEu_088483DC, gUnkEu_088483F1,
 };
 
-JiminyTextChar* gUnk_09EDDE38It[29] = {
+const JiminyTextChar* gUnk_09EDDE38It[29] = {
     gUnkEu_088483FC, gUnkEu_08848411, gUnkEu_08848428, gUnkEu_0884843C,
     gUnkEu_08848453, gUnkEu_08848465, gUnkEu_08848479, gUnkEu_0884848F,
     gUnkEu_0884849F, gUnkEu_088484A1, gUnkEu_088484B2, gUnkEu_088484C4,
@@ -4057,7 +4057,7 @@ JiminyTextChar* gUnk_09EDDE38It[29] = {
     gUnkEu_088485F3,
 };
 
-JiminyTextChar* gUnk_09EDDE38Es[29] = {
+const JiminyTextChar* gUnk_09EDDE38Es[29] = {
     gUnkEu_088485FE, gUnkEu_08848616, gUnkEu_08848631, gUnkEu_08848648,
     gUnkEu_08848659, gUnkEu_0884866E, gUnkEu_08848685, gUnkEu_08848698,
     gUnkEu_088486A1, gUnkEu_088486A3, gUnkEu_088486B3, gUnkEu_088486CB,
@@ -4068,7 +4068,7 @@ JiminyTextChar* gUnk_09EDDE38Es[29] = {
     gUnkEu_088487FA,
 };
 
-JiminyTextChar* gUnk_09EDD698[41] = {
+const JiminyTextChar* gUnk_09EDD698[41] = {
     gUnkEu_08848828, gUnkEu_08848840, gUnkEu_08848859, gUnkEu_08848871,
     gUnkEu_08848873, gUnkEu_08848888, gUnkEu_0884889A, gUnkEu_088488B1,
     gUnkEu_088488C5, gUnkEu_088488D4, gUnkEu_088488D6, gUnkEu_088488EC,
@@ -4082,7 +4082,7 @@ JiminyTextChar* gUnk_09EDD698[41] = {
     gUnkEu_08848B05,
 };
 
-JiminyTextChar* gUnk_09EDD698Fr[42] = {
+const JiminyTextChar* gUnk_09EDD698Fr[42] = {
     gUnkEu_08848B12, gUnkEu_08848B23, gUnkEu_08848B30, gUnkEu_08848B47,
     gUnkEu_08848B58, gUnkEu_08848B5A, gUnkEu_08848B6B, gUnkEu_08848B7B,
     gUnkEu_08848B8B, gUnkEu_08848B9B, gUnkEu_08848BA5, gUnkEu_08848BA7,
@@ -4096,7 +4096,7 @@ JiminyTextChar* gUnk_09EDD698Fr[42] = {
     gUnkEu_08848D71, gUnkEu_08848D7E,
 };
 
-JiminyTextChar* gUnk_09EDD698De[54] = {
+const JiminyTextChar* gUnk_09EDD698De[54] = {
     gUnkEu_08848D8F, gUnkEu_08848DA4, gUnkEu_08848DB9, gUnkEu_08848DCC,
     gUnkEu_08848DE2, gUnkEu_08848DF3, gUnkEu_08848DF5, gUnkEu_08848E08,
     gUnkEu_08848E1C, gUnkEu_08848E2E, gUnkEu_08848E43, gUnkEu_08848E56,
@@ -4113,7 +4113,7 @@ JiminyTextChar* gUnk_09EDD698De[54] = {
     gUnkEu_0884914A, gUnkEu_08849161,
 };
 
-JiminyTextChar* gUnk_09EDD698It[47] = {
+const JiminyTextChar* gUnk_09EDD698It[47] = {
     gUnkEu_08849176, gUnkEu_0884918B, gUnkEu_088491A0, gUnkEu_088491B4,
     gUnkEu_088491C1, gUnkEu_088491C3, gUnkEu_088491D6, gUnkEu_088491E8,
     gUnkEu_08849200, gUnkEu_08849213, gUnkEu_08849222, gUnkEu_08849224,
@@ -4128,7 +4128,7 @@ JiminyTextChar* gUnk_09EDD698It[47] = {
     gUnkEu_08849449, gUnkEu_0884944B, gUnkEu_08849457,
 };
 
-JiminyTextChar* gUnk_09EDD698Es[43] = {
+const JiminyTextChar* gUnk_09EDD698Es[43] = {
     gUnkEu_0884946A, gUnkEu_0884947E, gUnkEu_08849492, gUnkEu_088494A8,
     gUnkEu_088494BA, gUnkEu_088494BC, gUnkEu_088494D0, gUnkEu_088494E6,
     gUnkEu_088494FE, gUnkEu_08849517, gUnkEu_08849519, gUnkEu_0884952F,
@@ -4142,7 +4142,7 @@ JiminyTextChar* gUnk_09EDD698Es[43] = {
     gUnkEu_0884973E, gUnkEu_08849740, gUnkEu_08849756,
 };
 
-JiminyTextChar* gUnk_09EDBB1C[26] = {
+const JiminyTextChar* gUnk_09EDBB1C[26] = {
     gUnkEu_08849788, gUnkEu_0884979C, gUnkEu_088497B5, gUnkEu_088497C7,
     gUnkEu_088497DC, gUnkEu_088497F0, gUnkEu_088497F2, gUnkEu_08849805,
     gUnkEu_08849819, gUnkEu_08849831, gUnkEu_08849849, gUnkEu_08849861,
@@ -4152,7 +4152,7 @@ JiminyTextChar* gUnk_09EDBB1C[26] = {
     gUnkEu_0884992B, gUnkEu_08849942,
 };
 
-JiminyTextChar* gUnk_09EDBB1CFr[34] = {
+const JiminyTextChar* gUnk_09EDBB1CFr[34] = {
     gUnkEu_08849957, gUnkEu_08849965, gUnkEu_08849977, gUnkEu_08849988,
     gUnkEu_0884999A, gUnkEu_088499AE, gUnkEu_088499C0, gUnkEu_088499CA,
     gUnkEu_088499CC, gUnkEu_088499E2, gUnkEu_088499F7, gUnkEu_08849A08,
@@ -4164,7 +4164,7 @@ JiminyTextChar* gUnk_09EDBB1CFr[34] = {
     gUnkEu_08849B3E, gUnkEu_08849B4E,
 };
 
-JiminyTextChar* gUnk_09EDBB1CDe[35] = {
+const JiminyTextChar* gUnk_09EDBB1CDe[35] = {
     gUnkEu_08849B58, gUnkEu_08849B6B, gUnkEu_08849B7B, gUnkEu_08849B8F,
     gUnkEu_08849BA7, gUnkEu_08849BBE, gUnkEu_08849BD4, gUnkEu_08849BE7,
     gUnkEu_08849BF9, gUnkEu_08849BFB, gUnkEu_08849C10, gUnkEu_08849C24,
@@ -4176,7 +4176,7 @@ JiminyTextChar* gUnk_09EDBB1CDe[35] = {
     gUnkEu_08849D9E, gUnkEu_08849DB7, gUnkEu_08849DCB,
 };
 
-JiminyTextChar* gUnk_09EDBB1CIt[32] = {
+const JiminyTextChar* gUnk_09EDBB1CIt[32] = {
     gUnkEu_08849DD6, gUnkEu_08849DEA, gUnkEu_08849DFB, gUnkEu_08849E0C,
     gUnkEu_08849E1E, gUnkEu_08849E33, gUnkEu_08849E3B, gUnkEu_08849E3D,
     gUnkEu_08849E50, gUnkEu_08849E62, gUnkEu_08849E74, gUnkEu_08849E8A,
@@ -4187,7 +4187,7 @@ JiminyTextChar* gUnk_09EDBB1CIt[32] = {
     gUnkEu_08849F9A, gUnkEu_08849FAB, gUnkEu_08849FC1, gUnkEu_08849FD6,
 };
 
-JiminyTextChar* gUnk_09EDBB1CEs[28] = {
+const JiminyTextChar* gUnk_09EDBB1CEs[28] = {
     gUnkEu_08849FDE, gUnkEu_08849FF5, gUnkEu_0884A00E, gUnkEu_0884A023,
     gUnkEu_0884A03A, gUnkEu_0884A045, gUnkEu_0884A047, gUnkEu_0884A059,
     gUnkEu_0884A06F, gUnkEu_0884A086, gUnkEu_0884A09C, gUnkEu_0884A0AF,
@@ -4197,7 +4197,7 @@ JiminyTextChar* gUnk_09EDBB1CEs[28] = {
     gUnkEu_0884A188, gUnkEu_0884A18A, gUnkEu_0884A1A0, gUnkEu_0884A1B6,
 };
 
-JiminyTextChar* gUnk_09EDBB84[20] = {
+const JiminyTextChar* gUnk_09EDBB84[20] = {
     gUnkEu_0884A1E8, gUnkEu_0884A1FB, gUnkEu_0884A212, gUnkEu_0884A227,
     gUnkEu_0884A23F, gUnkEu_0884A252, gUnkEu_0884A269, gUnkEu_0884A277,
     gUnkEu_0884A279, gUnkEu_0884A28F, gUnkEu_0884A2A4, gUnkEu_0884A2BD,
@@ -4205,7 +4205,7 @@ JiminyTextChar* gUnk_09EDBB84[20] = {
     gUnkEu_0884A313, gUnkEu_0884A329, gUnkEu_0884A33C, gUnkEu_0884A351,
 };
 
-JiminyTextChar* gUnk_09EDBB84Fr[22] = {
+const JiminyTextChar* gUnk_09EDBB84Fr[22] = {
     gUnkEu_0884A35A, gUnkEu_0884A36E, gUnkEu_0884A385, gUnkEu_0884A399,
     gUnkEu_0884A3A8, gUnkEu_0884A3B6, gUnkEu_0884A3C9, gUnkEu_0884A3CB,
     gUnkEu_0884A3E1, gUnkEu_0884A3F2, gUnkEu_0884A405, gUnkEu_0884A416,
@@ -4214,7 +4214,7 @@ JiminyTextChar* gUnk_09EDBB84Fr[22] = {
     gUnkEu_0884A49E, gUnkEu_0884A4AE,
 };
 
-JiminyTextChar* gUnk_09EDBB84De[29] = {
+const JiminyTextChar* gUnk_09EDBB84De[29] = {
     gUnkEu_0884A4C4, gUnkEu_0884A4D5, gUnkEu_0884A4E7, gUnkEu_0884A4FB,
     gUnkEu_0884A511, gUnkEu_0884A524, gUnkEu_0884A539, gUnkEu_0884A54E,
     gUnkEu_0884A561, gUnkEu_0884A56F, gUnkEu_0884A571, gUnkEu_0884A587,
@@ -4225,7 +4225,7 @@ JiminyTextChar* gUnk_09EDBB84De[29] = {
     gUnkEu_0884A6D9,
 };
 
-JiminyTextChar* gUnk_09EDBB84It[24] = {
+const JiminyTextChar* gUnk_09EDBB84It[24] = {
     gUnkEu_0884A6F0, gUnkEu_0884A709, gUnkEu_0884A71D, gUnkEu_0884A735,
     gUnkEu_0884A74C, gUnkEu_0884A75D, gUnkEu_0884A772, gUnkEu_0884A774,
     gUnkEu_0884A784, gUnkEu_0884A799, gUnkEu_0884A7AF, gUnkEu_0884A7C0,
@@ -4234,7 +4234,7 @@ JiminyTextChar* gUnk_09EDBB84It[24] = {
     gUnkEu_0884A858, gUnkEu_0884A86F, gUnkEu_0884A883, gUnkEu_0884A8A0,
 };
 
-JiminyTextChar* gUnk_09EDBB84Es[21] = {
+const JiminyTextChar* gUnk_09EDBB84Es[21] = {
     gUnkEu_0884A8A8, gUnkEu_0884A8BC, gUnkEu_0884A8D3, gUnkEu_0884A8EA,
     gUnkEu_0884A901, gUnkEu_0884A919, gUnkEu_0884A92C, gUnkEu_0884A940,
     gUnkEu_0884A942, gUnkEu_0884A953, gUnkEu_0884A969, gUnkEu_0884A982,
@@ -4243,7 +4243,7 @@ JiminyTextChar* gUnk_09EDBB84Es[21] = {
     gUnkEu_0884AA15,
 };
 
-JiminyTextChar* gUnk_09EDD73C[20] = {
+const JiminyTextChar* gUnk_09EDD73C[20] = {
     gUnkEu_0884AA40, gUnkEu_0884AA57, gUnkEu_0884AA6E, gUnkEu_0884AA87,
     gUnkEu_0884AA9D, gUnkEu_0884AA9F, gUnkEu_0884AAB2, gUnkEu_0884AAC9,
     gUnkEu_0884AAE1, gUnkEu_0884AAF6, gUnkEu_0884AAF8, gUnkEu_0884AB0C,
@@ -4251,7 +4251,7 @@ JiminyTextChar* gUnk_09EDD73C[20] = {
     gUnkEu_0884AB5D, gUnkEu_0884AB73, gUnkEu_0884AB8A, gUnkEu_0884ABA1,
 };
 
-JiminyTextChar* gUnk_09EDD73CFr[22] = {
+const JiminyTextChar* gUnk_09EDD73CFr[22] = {
     gUnkEu_0884ABAF, gUnkEu_0884ABC5, gUnkEu_0884ABD9, gUnkEu_0884ABEF,
     gUnkEu_0884AC00, gUnkEu_0884AC13, gUnkEu_0884AC19, gUnkEu_0884AC1B,
     gUnkEu_0884AC2F, gUnkEu_0884AC3E, gUnkEu_0884AC52, gUnkEu_0884AC54,
@@ -4260,7 +4260,7 @@ JiminyTextChar* gUnk_09EDD73CFr[22] = {
     gUnkEu_0884ACE5, gUnkEu_0884ACFC,
 };
 
-JiminyTextChar* gUnk_09EDD73CDe[23] = {
+const JiminyTextChar* gUnk_09EDD73CDe[23] = {
     gUnkEu_0884AD13, gUnkEu_0884AD2B, gUnkEu_0884AD43, gUnkEu_0884AD5C,
     gUnkEu_0884AD68, gUnkEu_0884AD6A, gUnkEu_0884AD80, gUnkEu_0884AD95,
     gUnkEu_0884ADAB, gUnkEu_0884ADBE, gUnkEu_0884ADC0, gUnkEu_0884ADD9,
@@ -4269,7 +4269,7 @@ JiminyTextChar* gUnk_09EDD73CDe[23] = {
     gUnkEu_0884AE87, gUnkEu_0884AE9C, gUnkEu_0884AEAD,
 };
 
-JiminyTextChar* gUnk_09EDD73CIt[20] = {
+const JiminyTextChar* gUnk_09EDD73CIt[20] = {
     gUnkEu_0884AEB8, gUnkEu_0884AECF, gUnkEu_0884AEE9, gUnkEu_0884AEFE,
     gUnkEu_0884AF0C, gUnkEu_0884AF0E, gUnkEu_0884AF1F, gUnkEu_0884AF34,
     gUnkEu_0884AF4C, gUnkEu_0884AF64, gUnkEu_0884AF66, gUnkEu_0884AF76,
@@ -4277,7 +4277,7 @@ JiminyTextChar* gUnk_09EDD73CIt[20] = {
     gUnkEu_0884AFD5, gUnkEu_0884AFEA, gUnkEu_0884AFFD, gUnkEu_0884B011,
 };
 
-JiminyTextChar* gUnk_09EDD73CEs[23] = {
+const JiminyTextChar* gUnk_09EDD73CEs[23] = {
     gUnkEu_0884B024, gUnkEu_0884B03C, gUnkEu_0884B051, gUnkEu_0884B067,
     gUnkEu_0884B07E, gUnkEu_0884B088, gUnkEu_0884B08A, gUnkEu_0884B0A0,
     gUnkEu_0884B0B1, gUnkEu_0884B0C6, gUnkEu_0884B0D0, gUnkEu_0884B0D2,
@@ -4286,7 +4286,7 @@ JiminyTextChar* gUnk_09EDD73CEs[23] = {
     gUnkEu_0884B16E, gUnkEu_0884B183, gUnkEu_0884B197,
 };
 
-JiminyTextChar* gUnk_09EDBBD4[23] = {
+const JiminyTextChar* gUnk_09EDBBD4[23] = {
     gUnkEu_0884B1CC, gUnkEu_0884B1E3, gUnkEu_0884B1FC, gUnkEu_0884B214,
     gUnkEu_0884B22B, gUnkEu_0884B237, gUnkEu_0884B239, gUnkEu_0884B251,
     gUnkEu_0884B26A, gUnkEu_0884B281, gUnkEu_0884B29A, gUnkEu_0884B29C,
@@ -4295,7 +4295,7 @@ JiminyTextChar* gUnk_09EDBBD4[23] = {
     gUnkEu_0884B351, gUnkEu_0884B367, gUnkEu_0884B37D,
 };
 
-JiminyTextChar* gUnk_09EDBBD4Fr[26] = {
+const JiminyTextChar* gUnk_09EDBBD4Fr[26] = {
     gUnkEu_0884B383, gUnkEu_0884B398, gUnkEu_0884B3AA, gUnkEu_0884B3BC,
     gUnkEu_0884B3CC, gUnkEu_0884B3DE, gUnkEu_0884B3F0, gUnkEu_0884B404,
     gUnkEu_0884B406, gUnkEu_0884B418, gUnkEu_0884B42B, gUnkEu_0884B441,
@@ -4305,7 +4305,7 @@ JiminyTextChar* gUnk_09EDBBD4Fr[26] = {
     gUnkEu_0884B521, gUnkEu_0884B534,
 };
 
-JiminyTextChar* gUnk_09EDBBD4De[31] = {
+const JiminyTextChar* gUnk_09EDBBD4De[31] = {
     gUnkEu_0884B53C, gUnkEu_0884B553, gUnkEu_0884B56D, gUnkEu_0884B586,
     gUnkEu_0884B59D, gUnkEu_0884B5B6, gUnkEu_0884B5C3, gUnkEu_0884B5C5,
     gUnkEu_0884B5DD, gUnkEu_0884B5F4, gUnkEu_0884B609, gUnkEu_0884B620,
@@ -4316,7 +4316,7 @@ JiminyTextChar* gUnk_09EDBBD4De[31] = {
     gUnkEu_0884B74B, gUnkEu_0884B761, gUnkEu_0884B778,
 };
 
-JiminyTextChar* gUnk_09EDBBD4It[27] = {
+const JiminyTextChar* gUnk_09EDBBD4It[27] = {
     gUnkEu_0884B77F, gUnkEu_0884B78B, gUnkEu_0884B79F, gUnkEu_0884B7B3,
     gUnkEu_0884B7C8, gUnkEu_0884B7E0, gUnkEu_0884B7F9, gUnkEu_0884B7FB,
     gUnkEu_0884B80F, gUnkEu_0884B825, gUnkEu_0884B838, gUnkEu_0884B850,
@@ -4326,7 +4326,7 @@ JiminyTextChar* gUnk_09EDBBD4It[27] = {
     gUnkEu_0884B934, gUnkEu_0884B948, gUnkEu_0884B95A,
 };
 
-JiminyTextChar* gUnk_09EDBBD4Es[26] = {
+const JiminyTextChar* gUnk_09EDBBD4Es[26] = {
     gUnkEu_0884B96E, gUnkEu_0884B984, gUnkEu_0884B99A, gUnkEu_0884B9AE,
     gUnkEu_0884B9C2, gUnkEu_0884B9D6, gUnkEu_0884B9D8, gUnkEu_0884B9EA,
     gUnkEu_0884BA01, gUnkEu_0884BA12, gUnkEu_0884BA24, gUnkEu_0884BA37,
@@ -4336,7 +4336,7 @@ JiminyTextChar* gUnk_09EDBBD4Es[26] = {
     gUnkEu_0884BB1E, gUnkEu_0884BB33,
 };
 
-JiminyTextChar* gUnk_09EDD78C[31] = {
+const JiminyTextChar* gUnk_09EDD78C[31] = {
     gUnkEu_0884BB60, gUnkEu_0884BB77, gUnkEu_0884BB8F, gUnkEu_0884BBA7,
     gUnkEu_0884BBAE, gUnkEu_0884BBB0, gUnkEu_0884BBC8, gUnkEu_0884BBDF,
     gUnkEu_0884BBF6, gUnkEu_0884BC0D, gUnkEu_0884BC1E, gUnkEu_0884BC20,
@@ -4347,7 +4347,7 @@ JiminyTextChar* gUnk_09EDD78C[31] = {
     gUnkEu_0884BD6A, gUnkEu_0884BD83, gUnkEu_0884BD9A,
 };
 
-JiminyTextChar* gUnk_09EDD78CFr[35] = {
+const JiminyTextChar* gUnk_09EDD78CFr[35] = {
     gUnkEu_0884BDA7, gUnkEu_0884BDB9, gUnkEu_0884BDC8, gUnkEu_0884BDDA,
     gUnkEu_0884BDF0, gUnkEu_0884BDF7, gUnkEu_0884BDF9, gUnkEu_0884BE03,
     gUnkEu_0884BE16, gUnkEu_0884BE28, gUnkEu_0884BE3C, gUnkEu_0884BE50,
@@ -4359,7 +4359,7 @@ JiminyTextChar* gUnk_09EDD78CFr[35] = {
     gUnkEu_0884BF9C, gUnkEu_0884BFA3, gUnkEu_0884BFB7,
 };
 
-JiminyTextChar* gUnk_09EDD78CDe[42] = {
+const JiminyTextChar* gUnk_09EDD78CDe[42] = {
     gUnkEu_0884BFC7, gUnkEu_0884BFDE, gUnkEu_0884BFF3, gUnkEu_0884C008,
     gUnkEu_0884C01C, gUnkEu_0884C033, gUnkEu_0884C046, gUnkEu_0884C05B,
     gUnkEu_0884C063, gUnkEu_0884C065, gUnkEu_0884C07D, gUnkEu_0884C098,
@@ -4373,7 +4373,7 @@ JiminyTextChar* gUnk_09EDD78CDe[42] = {
     gUnkEu_0884C2B1, gUnkEu_0884C2C6,
 };
 
-JiminyTextChar* gUnk_09EDD78CIt[39] = {
+const JiminyTextChar* gUnk_09EDD78CIt[39] = {
     gUnkEu_0884C2DA, gUnkEu_0884C2F0, gUnkEu_0884C306, gUnkEu_0884C31D,
     gUnkEu_0884C32E, gUnkEu_0884C341, gUnkEu_0884C343, gUnkEu_0884C358,
     gUnkEu_0884C36D, gUnkEu_0884C384, gUnkEu_0884C399, gUnkEu_0884C3AF,
@@ -4386,7 +4386,7 @@ JiminyTextChar* gUnk_09EDD78CIt[39] = {
     gUnkEu_0884C537, gUnkEu_0884C54B, gUnkEu_0884C560,
 };
 
-JiminyTextChar* gUnk_09EDD78CEs[33] = {
+const JiminyTextChar* gUnk_09EDD78CEs[33] = {
     gUnkEu_0884C576, gUnkEu_0884C58C, gUnkEu_0884C5A3, gUnkEu_0884C5B8,
     gUnkEu_0884C5CA, gUnkEu_0884C5E0, gUnkEu_0884C5E2, gUnkEu_0884C5F9,
     gUnkEu_0884C610, gUnkEu_0884C625, gUnkEu_0884C63B, gUnkEu_0884C643,
@@ -4398,2448 +4398,2448 @@ JiminyTextChar* gUnk_09EDD78CEs[33] = {
     gUnkEu_0884C7AB,
 };
 
-JiminyTextChar* gUnk_09EDD928[12] = {
+const JiminyTextChar* gUnk_09EDD928[12] = {
     gUnkEu_0884C7E0, gUnkEu_0884C7EC, gUnkEu_0884C7F8, gUnkEu_0884C80A,
     gUnkEu_0884C81A, gUnkEu_0884C82D, gUnkEu_0884C840, gUnkEu_0884C850,
     gUnkEu_0884C852, gUnkEu_0884C866, gUnkEu_0884C87D, gUnkEu_0884C892,
 };
 
-JiminyTextChar* gUnk_09EDD928Fr[11] = {
+const JiminyTextChar* gUnk_09EDD928Fr[11] = {
     gUnkEu_0884C89A, gUnkEu_0884C8A5, gUnkEu_0884C8B4, gUnkEu_0884C8C2,
     gUnkEu_0884C8D5, gUnkEu_0884C8E8, gUnkEu_0884C8F9, gUnkEu_0884C907,
     gUnkEu_0884C909, gUnkEu_0884C91E, gUnkEu_0884C934,
 };
 
-JiminyTextChar* gUnk_09EDD928De[13] = {
+const JiminyTextChar* gUnk_09EDD928De[13] = {
     gUnkEu_0884C941, gUnkEu_0884C94A, gUnkEu_0884C953, gUnkEu_0884C967,
     gUnkEu_0884C976, gUnkEu_0884C988, gUnkEu_0884C999, gUnkEu_0884C9AA,
     gUnkEu_0884C9AC, gUnkEu_0884C9BF, gUnkEu_0884C9D6, gUnkEu_0884C9EB,
     gUnkEu_0884CA02,
 };
 
-JiminyTextChar* gUnk_09EDD928It[13] = {
+const JiminyTextChar* gUnk_09EDD928It[13] = {
     gUnkEu_0884CA0D, gUnkEu_0884CA18, gUnkEu_0884CA25, gUnkEu_0884CA37,
     gUnkEu_0884CA44, gUnkEu_0884CA56, gUnkEu_0884CA6E, gUnkEu_0884CA7F,
     gUnkEu_0884CA81, gUnkEu_0884CA94, gUnkEu_0884CAAD, gUnkEu_0884CAC2,
     gUnkEu_0884CAD4,
 };
 
-JiminyTextChar* gUnk_09EDD928Es[12] = {
+const JiminyTextChar* gUnk_09EDD928Es[12] = {
     gUnkEu_0884CAE1, gUnkEu_0884CAEC, gUnkEu_0884CAFB, gUnkEu_0884CB0C,
     gUnkEu_0884CB1E, gUnkEu_0884CB30, gUnkEu_0884CB3F, gUnkEu_0884CB51,
     gUnkEu_0884CB53, gUnkEu_0884CB65, gUnkEu_0884CB79, gUnkEu_0884CB90,
 };
 
-JiminyTextChar* gUnk_09EDD958[11] = {
+const JiminyTextChar* gUnk_09EDD958[11] = {
     gUnkEu_0884CBBC, gUnkEu_0884CBC8, gUnkEu_0884CBD4, gUnkEu_0884CBE5,
     gUnkEu_0884CBF5, gUnkEu_0884CC08, gUnkEu_0884CC1B, gUnkEu_0884CC2B,
     gUnkEu_0884CC2D, gUnkEu_0884CC42, gUnkEu_0884CC57,
 };
 
-JiminyTextChar* gUnk_09EDD958Fr[11] = {
+const JiminyTextChar* gUnk_09EDD958Fr[11] = {
     gUnkEu_0884CC63, gUnkEu_0884CC6E, gUnkEu_0884CC7D, gUnkEu_0884CC8A,
     gUnkEu_0884CC9D, gUnkEu_0884CCB0, gUnkEu_0884CCC1, gUnkEu_0884CCCF,
     gUnkEu_0884CCD1, gUnkEu_0884CCE2, gUnkEu_0884CCF2,
 };
 
-JiminyTextChar* gUnk_09EDD958De[11] = {
+const JiminyTextChar* gUnk_09EDD958De[11] = {
     gUnkEu_0884CCFD, gUnkEu_0884CD06, gUnkEu_0884CD0F, gUnkEu_0884CD22,
     gUnkEu_0884CD31, gUnkEu_0884CD43, gUnkEu_0884CD54, gUnkEu_0884CD65,
     gUnkEu_0884CD67, gUnkEu_0884CD7C, gUnkEu_0884CD94,
 };
 
-JiminyTextChar* gUnk_09EDD958It[11] = {
+const JiminyTextChar* gUnk_09EDD958It[11] = {
     gUnkEu_0884CDAA, gUnkEu_0884CDB5, gUnkEu_0884CDC2, gUnkEu_0884CDD3,
     gUnkEu_0884CDE0, gUnkEu_0884CDF2, gUnkEu_0884CE0A, gUnkEu_0884CE1B,
     gUnkEu_0884CE1D, gUnkEu_0884CE32, gUnkEu_0884CE44,
 };
 
-JiminyTextChar* gUnk_09EDD958Es[11] = {
+const JiminyTextChar* gUnk_09EDD958Es[11] = {
     gUnkEu_0884CE59, gUnkEu_0884CE64, gUnkEu_0884CE73, gUnkEu_0884CE83,
     gUnkEu_0884CE95, gUnkEu_0884CEA7, gUnkEu_0884CEB6, gUnkEu_0884CEC8,
     gUnkEu_0884CECA, gUnkEu_0884CEDF, gUnkEu_0884CEF6,
 };
 
-JiminyTextChar* gUnk_09EDD984[12] = {
+const JiminyTextChar* gUnk_09EDD984[12] = {
     gUnkEu_0884CF2C, gUnkEu_0884CF37, gUnkEu_0884CF42, gUnkEu_0884CF54,
     gUnkEu_0884CF64, gUnkEu_0884CF77, gUnkEu_0884CF8A, gUnkEu_0884CF9A,
     gUnkEu_0884CF9C, gUnkEu_0884CFB3, gUnkEu_0884CFCA, gUnkEu_0884CFDE,
 };
 
-JiminyTextChar* gUnk_09EDD984Fr[11] = {
+const JiminyTextChar* gUnk_09EDD984Fr[11] = {
     gUnkEu_0884CFF6, gUnkEu_0884D000, gUnkEu_0884D00E, gUnkEu_0884D01C,
     gUnkEu_0884D02F, gUnkEu_0884D042, gUnkEu_0884D053, gUnkEu_0884D061,
     gUnkEu_0884D063, gUnkEu_0884D076, gUnkEu_0884D08E,
 };
 
-JiminyTextChar* gUnk_09EDD984De[13] = {
+const JiminyTextChar* gUnk_09EDD984De[13] = {
     gUnkEu_0884D0A3, gUnkEu_0884D0AB, gUnkEu_0884D0B3, gUnkEu_0884D0C7,
     gUnkEu_0884D0D6, gUnkEu_0884D0E8, gUnkEu_0884D0F9, gUnkEu_0884D10A,
     gUnkEu_0884D10C, gUnkEu_0884D123, gUnkEu_0884D138, gUnkEu_0884D14E,
     gUnkEu_0884D15E,
 };
 
-JiminyTextChar* gUnk_09EDD984It[13] = {
+const JiminyTextChar* gUnk_09EDD984It[13] = {
     gUnkEu_0884D16B, gUnkEu_0884D175, gUnkEu_0884D181, gUnkEu_0884D193,
     gUnkEu_0884D1A0, gUnkEu_0884D1B2, gUnkEu_0884D1CA, gUnkEu_0884D1DB,
     gUnkEu_0884D1DD, gUnkEu_0884D1F4, gUnkEu_0884D207, gUnkEu_0884D21D,
     gUnkEu_0884D233,
 };
 
-JiminyTextChar* gUnk_09EDD984Es[12] = {
+const JiminyTextChar* gUnk_09EDD984Es[12] = {
     gUnkEu_0884D23E, gUnkEu_0884D248, gUnkEu_0884D256, gUnkEu_0884D267,
     gUnkEu_0884D279, gUnkEu_0884D28A, gUnkEu_0884D299, gUnkEu_0884D2AB,
     gUnkEu_0884D2AD, gUnkEu_0884D2C4, gUnkEu_0884D2DA, gUnkEu_0884D2F1,
 };
 
-JiminyTextChar* gUnk_09EDD9B4[12] = {
+const JiminyTextChar* gUnk_09EDD9B4[12] = {
     gUnkEu_0884D324, gUnkEu_0884D330, gUnkEu_0884D33C, gUnkEu_0884D34E,
     gUnkEu_0884D35E, gUnkEu_0884D371, gUnkEu_0884D384, gUnkEu_0884D394,
     gUnkEu_0884D396, gUnkEu_0884D3AC, gUnkEu_0884D3C2, gUnkEu_0884D3D7,
 };
 
-JiminyTextChar* gUnk_09EDD9B4Fr[12] = {
+const JiminyTextChar* gUnk_09EDD9B4Fr[12] = {
     gUnkEu_0884D3EB, gUnkEu_0884D3F6, gUnkEu_0884D405, gUnkEu_0884D413,
     gUnkEu_0884D426, gUnkEu_0884D439, gUnkEu_0884D44A, gUnkEu_0884D458,
     gUnkEu_0884D45A, gUnkEu_0884D470, gUnkEu_0884D487, gUnkEu_0884D49B,
 };
 
-JiminyTextChar* gUnk_09EDD9B4De[14] = {
+const JiminyTextChar* gUnk_09EDD9B4De[14] = {
     gUnkEu_0884D4AA, gUnkEu_0884D4B3, gUnkEu_0884D4BC, gUnkEu_0884D4D0,
     gUnkEu_0884D4DF, gUnkEu_0884D4F1, gUnkEu_0884D502, gUnkEu_0884D513,
     gUnkEu_0884D515, gUnkEu_0884D521, gUnkEu_0884D531, gUnkEu_0884D546,
     gUnkEu_0884D55A, gUnkEu_0884D56D,
 };
 
-JiminyTextChar* gUnk_09EDD9B4It[13] = {
+const JiminyTextChar* gUnk_09EDD9B4It[13] = {
     gUnkEu_0884D574, gUnkEu_0884D57F, gUnkEu_0884D58C, gUnkEu_0884D59E,
     gUnkEu_0884D5AB, gUnkEu_0884D5BD, gUnkEu_0884D5D5, gUnkEu_0884D5E6,
     gUnkEu_0884D5E8, gUnkEu_0884D5FD, gUnkEu_0884D60D, gUnkEu_0884D622,
     gUnkEu_0884D637,
 };
 
-JiminyTextChar* gUnk_09EDD9B4Es[12] = {
+const JiminyTextChar* gUnk_09EDD9B4Es[12] = {
     gUnkEu_0884D64D, gUnkEu_0884D658, gUnkEu_0884D667, gUnkEu_0884D678,
     gUnkEu_0884D68A, gUnkEu_0884D69C, gUnkEu_0884D6AB, gUnkEu_0884D6BD,
     gUnkEu_0884D6BF, gUnkEu_0884D6D5, gUnkEu_0884D6E8, gUnkEu_0884D6FE,
 };
 
-JiminyTextChar* gUnk_09EDD9E4[11] = {
+const JiminyTextChar* gUnk_09EDD9E4[11] = {
     gUnkEu_0884D728, gUnkEu_0884D734, gUnkEu_0884D740, gUnkEu_0884D751,
     gUnkEu_0884D761, gUnkEu_0884D774, gUnkEu_0884D787, gUnkEu_0884D797,
     gUnkEu_0884D799, gUnkEu_0884D7B1, gUnkEu_0884D7C7,
 };
 
-JiminyTextChar* gUnk_09EDD9E4Fr[12] = {
+const JiminyTextChar* gUnk_09EDD9E4Fr[12] = {
     gUnkEu_0884D7DF, gUnkEu_0884D7EA, gUnkEu_0884D7F9, gUnkEu_0884D806,
     gUnkEu_0884D819, gUnkEu_0884D82C, gUnkEu_0884D83D, gUnkEu_0884D84B,
     gUnkEu_0884D84D, gUnkEu_0884D85B, gUnkEu_0884D871, gUnkEu_0884D884,
 };
 
-JiminyTextChar* gUnk_09EDD9E4De[13] = {
+const JiminyTextChar* gUnk_09EDD9E4De[13] = {
     gUnkEu_0884D88F, gUnkEu_0884D898, gUnkEu_0884D8A1, gUnkEu_0884D8B4,
     gUnkEu_0884D8C3, gUnkEu_0884D8D5, gUnkEu_0884D8E6, gUnkEu_0884D8F7,
     gUnkEu_0884D8F9, gUnkEu_0884D905, gUnkEu_0884D911, gUnkEu_0884D922,
     gUnkEu_0884D934,
 };
 
-JiminyTextChar* gUnk_09EDD9E4It[11] = {
+const JiminyTextChar* gUnk_09EDD9E4It[11] = {
     gUnkEu_0884D941, gUnkEu_0884D94C, gUnkEu_0884D959, gUnkEu_0884D96A,
     gUnkEu_0884D977, gUnkEu_0884D989, gUnkEu_0884D9A1, gUnkEu_0884D9B2,
     gUnkEu_0884D9B4, gUnkEu_0884D9CC, gUnkEu_0884D9E3,
 };
 
-JiminyTextChar* gUnk_09EDD9E4Es[12] = {
+const JiminyTextChar* gUnk_09EDD9E4Es[12] = {
     gUnkEu_0884D9F3, gUnkEu_0884D9FE, gUnkEu_0884DA0D, gUnkEu_0884DA1D,
     gUnkEu_0884DA2F, gUnkEu_0884DA41, gUnkEu_0884DA50, gUnkEu_0884DA62,
     gUnkEu_0884DA64, gUnkEu_0884DA77, gUnkEu_0884DA8D, gUnkEu_0884DAA3,
 };
 
-JiminyTextChar* gUnk_09EDDA10[11] = {
+const JiminyTextChar* gUnk_09EDDA10[11] = {
     gUnkEu_0884DAD0, gUnkEu_0884DADB, gUnkEu_0884DAE6, gUnkEu_0884DAF8,
     gUnkEu_0884DB08, gUnkEu_0884DB1B, gUnkEu_0884DB2E, gUnkEu_0884DB3E,
     gUnkEu_0884DB40, gUnkEu_0884DB55, gUnkEu_0884DB6C,
 };
 
-JiminyTextChar* gUnk_09EDDA10Fr[11] = {
+const JiminyTextChar* gUnk_09EDDA10Fr[11] = {
     gUnkEu_0884DB81, gUnkEu_0884DB8B, gUnkEu_0884DB99, gUnkEu_0884DBA7,
     gUnkEu_0884DBBA, gUnkEu_0884DBCD, gUnkEu_0884DBDE, gUnkEu_0884DBEC,
     gUnkEu_0884DBEE, gUnkEu_0884DC04, gUnkEu_0884DC17,
 };
 
-JiminyTextChar* gUnk_09EDDA10De[12] = {
+const JiminyTextChar* gUnk_09EDDA10De[12] = {
     gUnkEu_0884DC26, gUnkEu_0884DC2E, gUnkEu_0884DC36, gUnkEu_0884DC4A,
     gUnkEu_0884DC59, gUnkEu_0884DC6B, gUnkEu_0884DC7C, gUnkEu_0884DC8D,
     gUnkEu_0884DC8F, gUnkEu_0884DCA4, gUnkEu_0884DCBC, gUnkEu_0884DCD1,
 };
 
-JiminyTextChar* gUnk_09EDDA10It[12] = {
+const JiminyTextChar* gUnk_09EDDA10It[12] = {
     gUnkEu_0884DCE8, gUnkEu_0884DCF2, gUnkEu_0884DCFE, gUnkEu_0884DD10,
     gUnkEu_0884DD1D, gUnkEu_0884DD2F, gUnkEu_0884DD47, gUnkEu_0884DD58,
     gUnkEu_0884DD5A, gUnkEu_0884DD71, gUnkEu_0884DD86, gUnkEu_0884DD95,
 };
 
-JiminyTextChar* gUnk_09EDDA10Es[11] = {
+const JiminyTextChar* gUnk_09EDDA10Es[11] = {
     gUnkEu_0884DDA2, gUnkEu_0884DDAC, gUnkEu_0884DDBA, gUnkEu_0884DDCB,
     gUnkEu_0884DDDD, gUnkEu_0884DDEF, gUnkEu_0884DDFE, gUnkEu_0884DE10,
     gUnkEu_0884DE12, gUnkEu_0884DE28, gUnkEu_0884DE3D,
 };
 
-JiminyTextChar* gUnk_09EDDA3C[11] = {
+const JiminyTextChar* gUnk_09EDDA3C[11] = {
     gUnkEu_0884DE6C, gUnkEu_0884DE78, gUnkEu_0884DE83, gUnkEu_0884DE95,
     gUnkEu_0884DEA5, gUnkEu_0884DEB9, gUnkEu_0884DECC, gUnkEu_0884DEDC,
     gUnkEu_0884DEDE, gUnkEu_0884DEF4, gUnkEu_0884DF09,
 };
 
-JiminyTextChar* gUnk_09EDDA3CFr[11] = {
+const JiminyTextChar* gUnk_09EDDA3CFr[11] = {
     gUnkEu_0884DF12, gUnkEu_0884DF1D, gUnkEu_0884DF2B, gUnkEu_0884DF39,
     gUnkEu_0884DF4C, gUnkEu_0884DF5F, gUnkEu_0884DF70, gUnkEu_0884DF7E,
     gUnkEu_0884DF80, gUnkEu_0884DF8F, gUnkEu_0884DF9F,
 };
 
-JiminyTextChar* gUnk_09EDDA3CDe[12] = {
+const JiminyTextChar* gUnk_09EDDA3CDe[12] = {
     gUnkEu_0884DFB5, gUnkEu_0884DFBE, gUnkEu_0884DFC6, gUnkEu_0884DFDA,
     gUnkEu_0884DFE9, gUnkEu_0884DFF8, gUnkEu_0884E009, gUnkEu_0884E01A,
     gUnkEu_0884E01C, gUnkEu_0884E02B, gUnkEu_0884E03D, gUnkEu_0884E04D,
 };
 
-JiminyTextChar* gUnk_09EDDA3CIt[12] = {
+const JiminyTextChar* gUnk_09EDDA3CIt[12] = {
     gUnkEu_0884E058, gUnkEu_0884E063, gUnkEu_0884E06F, gUnkEu_0884E081,
     gUnkEu_0884E08E, gUnkEu_0884E0A1, gUnkEu_0884E0B9, gUnkEu_0884E0CA,
     gUnkEu_0884E0CC, gUnkEu_0884E0E2, gUnkEu_0884E0F9, gUnkEu_0884E110,
 };
 
-JiminyTextChar* gUnk_09EDDA3CEs[11] = {
+const JiminyTextChar* gUnk_09EDDA3CEs[11] = {
     gUnkEu_0884E119, gUnkEu_0884E124, gUnkEu_0884E132, gUnkEu_0884E143,
     gUnkEu_0884E155, gUnkEu_0884E165, gUnkEu_0884E174, gUnkEu_0884E186,
     gUnkEu_0884E188, gUnkEu_0884E19B, gUnkEu_0884E1B2,
 };
 
-JiminyTextChar* gUnk_09EDDA68[12] = {
+const JiminyTextChar* gUnk_09EDDA68[12] = {
     gUnkEu_0884E1E4, gUnkEu_0884E1F0, gUnkEu_0884E1FC, gUnkEu_0884E20E,
     gUnkEu_0884E21E, gUnkEu_0884E230, gUnkEu_0884E243, gUnkEu_0884E253,
     gUnkEu_0884E255, gUnkEu_0884E26B, gUnkEu_0884E282, gUnkEu_0884E298,
 };
 
-JiminyTextChar* gUnk_09EDDA68Fr[12] = {
+const JiminyTextChar* gUnk_09EDDA68Fr[12] = {
     gUnkEu_0884E2B1, gUnkEu_0884E2BC, gUnkEu_0884E2CB, gUnkEu_0884E2D9,
     gUnkEu_0884E2EC, gUnkEu_0884E2FD, gUnkEu_0884E30E, gUnkEu_0884E31C,
     gUnkEu_0884E31E, gUnkEu_0884E335, gUnkEu_0884E34C, gUnkEu_0884E360,
 };
 
-JiminyTextChar* gUnk_09EDDA68De[13] = {
+const JiminyTextChar* gUnk_09EDDA68De[13] = {
     gUnkEu_0884E36E, gUnkEu_0884E377, gUnkEu_0884E380, gUnkEu_0884E394,
     gUnkEu_0884E3A3, gUnkEu_0884E3B4, gUnkEu_0884E3C5, gUnkEu_0884E3D6,
     gUnkEu_0884E3D8, gUnkEu_0884E3E7, gUnkEu_0884E3FA, gUnkEu_0884E411,
     gUnkEu_0884E429,
 };
 
-JiminyTextChar* gUnk_09EDDA68It[13] = {
+const JiminyTextChar* gUnk_09EDDA68It[13] = {
     gUnkEu_0884E43B, gUnkEu_0884E446, gUnkEu_0884E453, gUnkEu_0884E465,
     gUnkEu_0884E472, gUnkEu_0884E484, gUnkEu_0884E49C, gUnkEu_0884E4AD,
     gUnkEu_0884E4AF, gUnkEu_0884E4C5, gUnkEu_0884E4D9, gUnkEu_0884E4ED,
     gUnkEu_0884E502,
 };
 
-JiminyTextChar* gUnk_09EDDA68Es[12] = {
+const JiminyTextChar* gUnk_09EDDA68Es[12] = {
     gUnkEu_0884E50F, gUnkEu_0884E51A, gUnkEu_0884E529, gUnkEu_0884E53A,
     gUnkEu_0884E54C, gUnkEu_0884E55E, gUnkEu_0884E56D, gUnkEu_0884E57F,
     gUnkEu_0884E581, gUnkEu_0884E594, gUnkEu_0884E5AC, gUnkEu_0884E5BF,
 };
 
-JiminyTextChar* gUnk_09EDDA98[12] = {
+const JiminyTextChar* gUnk_09EDDA98[12] = {
     gUnkEu_0884E5F0, gUnkEu_0884E5FC, gUnkEu_0884E608, gUnkEu_0884E619,
     gUnkEu_0884E629, gUnkEu_0884E63C, gUnkEu_0884E64F, gUnkEu_0884E65F,
     gUnkEu_0884E661, gUnkEu_0884E675, gUnkEu_0884E68E, gUnkEu_0884E6A5,
 };
 
-JiminyTextChar* gUnk_09EDDA98Fr[12] = {
+const JiminyTextChar* gUnk_09EDDA98Fr[12] = {
     gUnkEu_0884E6B2, gUnkEu_0884E6BD, gUnkEu_0884E6CC, gUnkEu_0884E6D9,
     gUnkEu_0884E6EC, gUnkEu_0884E6FF, gUnkEu_0884E710, gUnkEu_0884E71E,
     gUnkEu_0884E720, gUnkEu_0884E734, gUnkEu_0884E749, gUnkEu_0884E75D,
 };
 
-JiminyTextChar* gUnk_09EDDA98De[14] = {
+const JiminyTextChar* gUnk_09EDDA98De[14] = {
     gUnkEu_0884E76C, gUnkEu_0884E775, gUnkEu_0884E77E, gUnkEu_0884E791,
     gUnkEu_0884E7A0, gUnkEu_0884E7B2, gUnkEu_0884E7C3, gUnkEu_0884E7D4,
     gUnkEu_0884E7D6, gUnkEu_0884E7E6, gUnkEu_0884E7F8, gUnkEu_0884E80C,
     gUnkEu_0884E81B, gUnkEu_0884E82E,
 };
 
-JiminyTextChar* gUnk_09EDDA98It[12] = {
+const JiminyTextChar* gUnk_09EDDA98It[12] = {
     gUnkEu_0884E83D, gUnkEu_0884E848, gUnkEu_0884E855, gUnkEu_0884E866,
     gUnkEu_0884E873, gUnkEu_0884E885, gUnkEu_0884E89D, gUnkEu_0884E8AE,
     gUnkEu_0884E8B0, gUnkEu_0884E8C3, gUnkEu_0884E8D7, gUnkEu_0884E8F0,
 };
 
-JiminyTextChar* gUnk_09EDDA98Es[12] = {
+const JiminyTextChar* gUnk_09EDDA98Es[12] = {
     gUnkEu_0884E909, gUnkEu_0884E914, gUnkEu_0884E923, gUnkEu_0884E933,
     gUnkEu_0884E945, gUnkEu_0884E957, gUnkEu_0884E966, gUnkEu_0884E978,
     gUnkEu_0884E97A, gUnkEu_0884E991, gUnkEu_0884E9A8, gUnkEu_0884E9BF,
 };
 
-JiminyTextChar* gUnk_09EDDAC8[11] = {
+const JiminyTextChar* gUnk_09EDDAC8[11] = {
     gUnkEu_0884E9F4, gUnkEu_0884E9FF, gUnkEu_0884EA0A, gUnkEu_0884EA1B,
     gUnkEu_0884EA2B, gUnkEu_0884EA3A, gUnkEu_0884EA4D, gUnkEu_0884EA5D,
     gUnkEu_0884EA5F, gUnkEu_0884EA75, gUnkEu_0884EA85,
 };
 
-JiminyTextChar* gUnk_09EDDAC8Fr[11] = {
+const JiminyTextChar* gUnk_09EDDAC8Fr[11] = {
     gUnkEu_0884EA8E, gUnkEu_0884EA98, gUnkEu_0884EAA6, gUnkEu_0884EAB3,
     gUnkEu_0884EAC6, gUnkEu_0884EAD4, gUnkEu_0884EAE5, gUnkEu_0884EAF3,
     gUnkEu_0884EAF5, gUnkEu_0884EB05, gUnkEu_0884EB14,
 };
 
-JiminyTextChar* gUnk_09EDDAC8De[12] = {
+const JiminyTextChar* gUnk_09EDDAC8De[12] = {
     gUnkEu_0884EB25, gUnkEu_0884EB2D, gUnkEu_0884EB35, gUnkEu_0884EB48,
     gUnkEu_0884EB57, gUnkEu_0884EB66, gUnkEu_0884EB77, gUnkEu_0884EB88,
     gUnkEu_0884EB8A, gUnkEu_0884EB99, gUnkEu_0884EBAB, gUnkEu_0884EBBB,
 };
 
-JiminyTextChar* gUnk_09EDDAC8It[12] = {
+const JiminyTextChar* gUnk_09EDDAC8It[12] = {
     gUnkEu_0884EBC6, gUnkEu_0884EBD0, gUnkEu_0884EBDC, gUnkEu_0884EBED,
     gUnkEu_0884EBFA, gUnkEu_0884EC0B, gUnkEu_0884EC23, gUnkEu_0884EC34,
     gUnkEu_0884EC36, gUnkEu_0884EC4C, gUnkEu_0884EC63, gUnkEu_0884EC7A,
 };
 
-JiminyTextChar* gUnk_09EDDAC8Es[11] = {
+const JiminyTextChar* gUnk_09EDDAC8Es[11] = {
     gUnkEu_0884EC81, gUnkEu_0884EC8B, gUnkEu_0884EC99, gUnkEu_0884ECA9,
     gUnkEu_0884ECBB, gUnkEu_0884ECCC, gUnkEu_0884ECDB, gUnkEu_0884ECED,
     gUnkEu_0884ECEF, gUnkEu_0884ED02, gUnkEu_0884ED15,
 };
 
-JiminyTextChar* gUnk_09EDDAF4[11] = {
+const JiminyTextChar* gUnk_09EDDAF4[11] = {
     gUnkEu_0884ED48, gUnkEu_0884ED54, gUnkEu_0884ED60, gUnkEu_0884ED71,
     gUnkEu_0884ED81, gUnkEu_0884ED94, gUnkEu_0884EDA7, gUnkEu_0884EDB7,
     gUnkEu_0884EDB9, gUnkEu_0884EDD1, gUnkEu_0884EDE3,
 };
 
-JiminyTextChar* gUnk_09EDDAF4Fr[11] = {
+const JiminyTextChar* gUnk_09EDDAF4Fr[11] = {
     gUnkEu_0884EDFB, gUnkEu_0884EE06, gUnkEu_0884EE15, gUnkEu_0884EE22,
     gUnkEu_0884EE35, gUnkEu_0884EE48, gUnkEu_0884EE59, gUnkEu_0884EE67,
     gUnkEu_0884EE69, gUnkEu_0884EE7D, gUnkEu_0884EE92,
 };
 
-JiminyTextChar* gUnk_09EDDAF4De[12] = {
+const JiminyTextChar* gUnk_09EDDAF4De[12] = {
     gUnkEu_0884EEA6, gUnkEu_0884EEAF, gUnkEu_0884EEB8, gUnkEu_0884EECB,
     gUnkEu_0884EEDA, gUnkEu_0884EEEC, gUnkEu_0884EEFD, gUnkEu_0884EF0E,
     gUnkEu_0884EF10, gUnkEu_0884EF28, gUnkEu_0884EF3B, gUnkEu_0884EF50,
 };
 
-JiminyTextChar* gUnk_09EDDAF4It[12] = {
+const JiminyTextChar* gUnk_09EDDAF4It[12] = {
     gUnkEu_0884EF5C, gUnkEu_0884EF67, gUnkEu_0884EF74, gUnkEu_0884EF85,
     gUnkEu_0884EF92, gUnkEu_0884EFA4, gUnkEu_0884EFBC, gUnkEu_0884EFCD,
     gUnkEu_0884EFCF, gUnkEu_0884EFE2, gUnkEu_0884EFF6, gUnkEu_0884F00C,
 };
 
-JiminyTextChar* gUnk_09EDDAF4Es[12] = {
+const JiminyTextChar* gUnk_09EDDAF4Es[12] = {
     gUnkEu_0884F01B, gUnkEu_0884F026, gUnkEu_0884F035, gUnkEu_0884F045,
     gUnkEu_0884F057, gUnkEu_0884F069, gUnkEu_0884F078, gUnkEu_0884F08A,
     gUnkEu_0884F08C, gUnkEu_0884F0A3, gUnkEu_0884F0B7, gUnkEu_0884F0CF,
 };
 
-JiminyTextChar* gUnk_09EDDB20[12] = {
+const JiminyTextChar* gUnk_09EDDB20[12] = {
     gUnkEu_0884F0F8, gUnkEu_0884F103, gUnkEu_0884F10F, gUnkEu_0884F120,
     gUnkEu_0884F130, gUnkEu_0884F143, gUnkEu_0884F156, gUnkEu_0884F166,
     gUnkEu_0884F168, gUnkEu_0884F17B, gUnkEu_0884F190, gUnkEu_0884F1A4,
 };
 
-JiminyTextChar* gUnk_09EDDB20Fr[12] = {
+const JiminyTextChar* gUnk_09EDDB20Fr[12] = {
     gUnkEu_0884F1B0, gUnkEu_0884F1BA, gUnkEu_0884F1C9, gUnkEu_0884F1D6,
     gUnkEu_0884F1E9, gUnkEu_0884F1FC, gUnkEu_0884F20D, gUnkEu_0884F21B,
     gUnkEu_0884F21D, gUnkEu_0884F22B, gUnkEu_0884F23F, gUnkEu_0884F250,
 };
 
-JiminyTextChar* gUnk_09EDDB20De[12] = {
+const JiminyTextChar* gUnk_09EDDB20De[12] = {
     gUnkEu_0884F25D, gUnkEu_0884F265, gUnkEu_0884F26E, gUnkEu_0884F281,
     gUnkEu_0884F290, gUnkEu_0884F2A2, gUnkEu_0884F2B3, gUnkEu_0884F2C4,
     gUnkEu_0884F2C6, gUnkEu_0884F2D9, gUnkEu_0884F2E2, gUnkEu_0884F2F5,
 };
 
-JiminyTextChar* gUnk_09EDDB20It[11] = {
+const JiminyTextChar* gUnk_09EDDB20It[11] = {
     gUnkEu_0884F30C, gUnkEu_0884F316, gUnkEu_0884F323, gUnkEu_0884F334,
     gUnkEu_0884F341, gUnkEu_0884F353, gUnkEu_0884F36B, gUnkEu_0884F37C,
     gUnkEu_0884F37E, gUnkEu_0884F396, gUnkEu_0884F3AE,
 };
 
-JiminyTextChar* gUnk_09EDDB20Es[12] = {
+const JiminyTextChar* gUnk_09EDDB20Es[12] = {
     gUnkEu_0884F3B8, gUnkEu_0884F3C2, gUnkEu_0884F3D1, gUnkEu_0884F3E1,
     gUnkEu_0884F3F3, gUnkEu_0884F405, gUnkEu_0884F414, gUnkEu_0884F426,
     gUnkEu_0884F428, gUnkEu_0884F43C, gUnkEu_0884F44D, gUnkEu_0884F460,
 };
 
-JiminyTextChar* gUnk_09EDDB50[11] = {
+const JiminyTextChar* gUnk_09EDDB50[11] = {
     gUnkEu_0884F498, gUnkEu_0884F4A3, gUnkEu_0884F4AE, gUnkEu_0884F4C0,
     gUnkEu_0884F4D0, gUnkEu_0884F4E3, gUnkEu_0884F4F6, gUnkEu_0884F506,
     gUnkEu_0884F508, gUnkEu_0884F518, gUnkEu_0884F52B,
 };
 
-JiminyTextChar* gUnk_09EDDB50Fr[11] = {
+const JiminyTextChar* gUnk_09EDDB50Fr[11] = {
     gUnkEu_0884F53C, gUnkEu_0884F546, gUnkEu_0884F554, gUnkEu_0884F562,
     gUnkEu_0884F575, gUnkEu_0884F588, gUnkEu_0884F599, gUnkEu_0884F5A7,
     gUnkEu_0884F5A9, gUnkEu_0884F5BE, gUnkEu_0884F5D2,
 };
 
-JiminyTextChar* gUnk_09EDDB50De[11] = {
+const JiminyTextChar* gUnk_09EDDB50De[11] = {
     gUnkEu_0884F5DE, gUnkEu_0884F5E6, gUnkEu_0884F5EE, gUnkEu_0884F602,
     gUnkEu_0884F611, gUnkEu_0884F623, gUnkEu_0884F634, gUnkEu_0884F645,
     gUnkEu_0884F647, gUnkEu_0884F660, gUnkEu_0884F677,
 };
 
-JiminyTextChar* gUnk_09EDDB50It[11] = {
+const JiminyTextChar* gUnk_09EDDB50It[11] = {
     gUnkEu_0884F68E, gUnkEu_0884F698, gUnkEu_0884F6A4, gUnkEu_0884F6B6,
     gUnkEu_0884F6C3, gUnkEu_0884F6D5, gUnkEu_0884F6ED, gUnkEu_0884F6FE,
     gUnkEu_0884F700, gUnkEu_0884F718, gUnkEu_0884F72A,
 };
 
-JiminyTextChar* gUnk_09EDDB50Es[10] = {
+const JiminyTextChar* gUnk_09EDDB50Es[10] = {
     gUnkEu_0884F73B, gUnkEu_0884F745, gUnkEu_0884F753, gUnkEu_0884F764,
     gUnkEu_0884F776, gUnkEu_0884F788, gUnkEu_0884F797, gUnkEu_0884F7A9,
     gUnkEu_0884F7AB, gUnkEu_0884F7BC,
 };
 
-JiminyTextChar* gUnk_09EDDB7C[12] = {
+const JiminyTextChar* gUnk_09EDDB7C[12] = {
     gUnkEu_0884F7F4, gUnkEu_0884F7FF, gUnkEu_0884F80A, gUnkEu_0884F81B,
     gUnkEu_0884F82B, gUnkEu_0884F83D, gUnkEu_0884F850, gUnkEu_0884F860,
     gUnkEu_0884F862, gUnkEu_0884F878, gUnkEu_0884F88F, gUnkEu_0884F8A2,
 };
 
-JiminyTextChar* gUnk_09EDDB7CFr[12] = {
+const JiminyTextChar* gUnk_09EDDB7CFr[12] = {
     gUnkEu_0884F8B8, gUnkEu_0884F8C2, gUnkEu_0884F8D0, gUnkEu_0884F8DD,
     gUnkEu_0884F8F0, gUnkEu_0884F901, gUnkEu_0884F912, gUnkEu_0884F920,
     gUnkEu_0884F922, gUnkEu_0884F938, gUnkEu_0884F94B, gUnkEu_0884F95B,
 };
 
-JiminyTextChar* gUnk_09EDDB7CDe[14] = {
+const JiminyTextChar* gUnk_09EDDB7CDe[14] = {
     gUnkEu_0884F96F, gUnkEu_0884F977, gUnkEu_0884F97F, gUnkEu_0884F992,
     gUnkEu_0884F9A1, gUnkEu_0884F9B2, gUnkEu_0884F9C3, gUnkEu_0884F9D4,
     gUnkEu_0884F9D6, gUnkEu_0884F9E5, gUnkEu_0884F9F8, gUnkEu_0884FA0A,
     gUnkEu_0884FA1E, gUnkEu_0884FA32,
 };
 
-JiminyTextChar* gUnk_09EDDB7CIt[13] = {
+const JiminyTextChar* gUnk_09EDDB7CIt[13] = {
     gUnkEu_0884FA40, gUnkEu_0884FA4A, gUnkEu_0884FA56, gUnkEu_0884FA67,
     gUnkEu_0884FA74, gUnkEu_0884FA86, gUnkEu_0884FA9E, gUnkEu_0884FAAF,
     gUnkEu_0884FAB1, gUnkEu_0884FAC7, gUnkEu_0884FADB, gUnkEu_0884FAEF,
     gUnkEu_0884FB07,
 };
 
-JiminyTextChar* gUnk_09EDDB7CEs[12] = {
+const JiminyTextChar* gUnk_09EDDB7CEs[12] = {
     gUnkEu_0884FB14, gUnkEu_0884FB1E, gUnkEu_0884FB2C, gUnkEu_0884FB3C,
     gUnkEu_0884FB4E, gUnkEu_0884FB60, gUnkEu_0884FB6F, gUnkEu_0884FB81,
     gUnkEu_0884FB83, gUnkEu_0884FB96, gUnkEu_0884FBAF, gUnkEu_0884FBC2,
 };
 
-JiminyTextChar* gUnk_09EDDBAC[12] = {
+const JiminyTextChar* gUnk_09EDDBAC[12] = {
     gUnkEu_0884FBF8, gUnkEu_0884FC04, gUnkEu_0884FC10, gUnkEu_0884FC21,
     gUnkEu_0884FC31, gUnkEu_0884FC3F, gUnkEu_0884FC52, gUnkEu_0884FC62,
     gUnkEu_0884FC64, gUnkEu_0884FC7A, gUnkEu_0884FC92, gUnkEu_0884FCA3,
 };
 
-JiminyTextChar* gUnk_09EDDBACFr[12] = {
+const JiminyTextChar* gUnk_09EDDBACFr[12] = {
     gUnkEu_0884FCB6, gUnkEu_0884FCC1, gUnkEu_0884FCD0, gUnkEu_0884FCDD,
     gUnkEu_0884FCF0, gUnkEu_0884FD00, gUnkEu_0884FD11, gUnkEu_0884FD1F,
     gUnkEu_0884FD21, gUnkEu_0884FD31, gUnkEu_0884FD46, gUnkEu_0884FD5A,
 };
 
-JiminyTextChar* gUnk_09EDDBACDe[14] = {
+const JiminyTextChar* gUnk_09EDDBACDe[14] = {
     gUnkEu_0884FD6C, gUnkEu_0884FD75, gUnkEu_0884FD7E, gUnkEu_0884FD91,
     gUnkEu_0884FDA0, gUnkEu_0884FDAD, gUnkEu_0884FDBE, gUnkEu_0884FDCF,
     gUnkEu_0884FDD1, gUnkEu_0884FDE0, gUnkEu_0884FDF7, gUnkEu_0884FE0C,
     gUnkEu_0884FE20, gUnkEu_0884FE37,
 };
 
-JiminyTextChar* gUnk_09EDDBACIt[14] = {
+const JiminyTextChar* gUnk_09EDDBACIt[14] = {
     gUnkEu_0884FE4A, gUnkEu_0884FE55, gUnkEu_0884FE62, gUnkEu_0884FE73,
     gUnkEu_0884FE80, gUnkEu_0884FE94, gUnkEu_0884FEAC, gUnkEu_0884FEBD,
     gUnkEu_0884FEBF, gUnkEu_0884FED5, gUnkEu_0884FEEC, gUnkEu_0884FF03,
     gUnkEu_0884FF17, gUnkEu_0884FF26,
 };
 
-JiminyTextChar* gUnk_09EDDBACEs[12] = {
+const JiminyTextChar* gUnk_09EDDBACEs[12] = {
     gUnkEu_0884FF33, gUnkEu_0884FF3E, gUnkEu_0884FF4D, gUnkEu_0884FF5D,
     gUnkEu_0884FF6F, gUnkEu_0884FF80, gUnkEu_0884FF8F, gUnkEu_0884FFA1,
     gUnkEu_0884FFA3, gUnkEu_0884FFB6, gUnkEu_0884FFC9, gUnkEu_0884FFE0,
 };
 
-JiminyTextChar* gUnk_09EDDBDC[12] = {
+const JiminyTextChar* gUnk_09EDDBDC[12] = {
     gUnkEu_08850018, gUnkEu_08850023, gUnkEu_0885002E, gUnkEu_0885003F,
     gUnkEu_0885004F, gUnkEu_0885005E, gUnkEu_08850071, gUnkEu_08850081,
     gUnkEu_08850083, gUnkEu_08850099, gUnkEu_088500A9, gUnkEu_088500BF,
 };
 
-JiminyTextChar* gUnk_09EDDBDCFr[12] = {
+const JiminyTextChar* gUnk_09EDDBDCFr[12] = {
     gUnkEu_088500CD, gUnkEu_088500D7, gUnkEu_088500E5, gUnkEu_088500F2,
     gUnkEu_08850105, gUnkEu_08850113, gUnkEu_08850124, gUnkEu_08850132,
     gUnkEu_08850134, gUnkEu_08850144, gUnkEu_08850159, gUnkEu_0885016E,
 };
 
-JiminyTextChar* gUnk_09EDDBDCDe[13] = {
+const JiminyTextChar* gUnk_09EDDBDCDe[13] = {
     gUnkEu_08850183, gUnkEu_0885018B, gUnkEu_08850193, gUnkEu_088501A6,
     gUnkEu_088501B5, gUnkEu_088501C4, gUnkEu_088501D5, gUnkEu_088501E6,
     gUnkEu_088501E8, gUnkEu_088501F7, gUnkEu_08850209, gUnkEu_08850219,
     gUnkEu_08850230,
 };
 
-JiminyTextChar* gUnk_09EDDBDCIt[13] = {
+const JiminyTextChar* gUnk_09EDDBDCIt[13] = {
     gUnkEu_08850241, gUnkEu_0885024B, gUnkEu_08850257, gUnkEu_08850268,
     gUnkEu_08850275, gUnkEu_08850286, gUnkEu_0885029E, gUnkEu_088502AF,
     gUnkEu_088502B1, gUnkEu_088502C7, gUnkEu_088502DE, gUnkEu_088502F5,
     gUnkEu_0885030A,
 };
 
-JiminyTextChar* gUnk_09EDDBDCEs[14] = {
+const JiminyTextChar* gUnk_09EDDBDCEs[14] = {
     gUnkEu_0885031E, gUnkEu_08850328, gUnkEu_08850336, gUnkEu_08850346,
     gUnkEu_08850358, gUnkEu_08850369, gUnkEu_08850378, gUnkEu_0885038A,
     gUnkEu_0885038C, gUnkEu_0885039C, gUnkEu_088503B0, gUnkEu_088503C3,
     gUnkEu_088503D6, gUnkEu_088503EB,
 };
 
-JiminyTextChar* gUnk_09EDDE98[10] = {
+const JiminyTextChar* gUnk_09EDDE98[10] = {
     gUnkEu_08850420, gUnkEu_0885042B, gUnkEu_08850436, gUnkEu_08850447,
     gUnkEu_08850457, gUnkEu_0885046A, gUnkEu_0885047D, gUnkEu_0885048D,
     gUnkEu_0885048F, gUnkEu_088504A4,
 };
 
-JiminyTextChar* gUnk_09EDDE98Fr[10] = {
+const JiminyTextChar* gUnk_09EDDE98Fr[10] = {
     gUnkEu_088504B6, gUnkEu_088504C0, gUnkEu_088504CE, gUnkEu_088504DB,
     gUnkEu_088504EE, gUnkEu_08850501, gUnkEu_08850512, gUnkEu_08850520,
     gUnkEu_08850522, gUnkEu_08850534,
 };
 
-JiminyTextChar* gUnk_09EDDE98De[11] = {
+const JiminyTextChar* gUnk_09EDDE98De[11] = {
     gUnkEu_0885054A, gUnkEu_08850552, gUnkEu_0885055A, gUnkEu_0885056D,
     gUnkEu_0885057C, gUnkEu_0885058E, gUnkEu_0885059F, gUnkEu_088505B0,
     gUnkEu_088505B2, gUnkEu_088505BF, gUnkEu_088505CD,
 };
 
-JiminyTextChar* gUnk_09EDDE98It[10] = {
+const JiminyTextChar* gUnk_09EDDE98It[10] = {
     gUnkEu_088505D8, gUnkEu_088505E2, gUnkEu_088505EE, gUnkEu_088505FF,
     gUnkEu_0885060C, gUnkEu_0885061E, gUnkEu_08850636, gUnkEu_08850647,
     gUnkEu_08850649, gUnkEu_0885065E,
 };
 
-JiminyTextChar* gUnk_09EDDE98Es[11] = {
+const JiminyTextChar* gUnk_09EDDE98Es[11] = {
     gUnkEu_08850677, gUnkEu_08850681, gUnkEu_0885068F, gUnkEu_0885069F,
     gUnkEu_088506B1, gUnkEu_088506C3, gUnkEu_088506D2, gUnkEu_088506E4,
     gUnkEu_088506E6, gUnkEu_088506FA, gUnkEu_0885070E,
 };
 
-JiminyTextChar* gUnk_09EDCCAC[4] = {
+const JiminyTextChar* gUnk_09EDCCAC[4] = {
     gUnkEu_08850744, gUnkEu_0885075A, gUnkEu_08850771, gUnkEu_0885078A,
 };
 
-JiminyTextChar* gUnk_09EDCCACFr[4] = {
+const JiminyTextChar* gUnk_09EDCCACFr[4] = {
     gUnkEu_08850792, gUnkEu_088507A1, gUnkEu_088507B5, gUnkEu_088507C5,
 };
 
-JiminyTextChar* gUnk_09EDCCACDe[5] = {
+const JiminyTextChar* gUnk_09EDCCACDe[5] = {
     gUnkEu_088507D7, gUnkEu_088507E9, gUnkEu_088507FD, gUnkEu_08850814,
     gUnkEu_08850828,
 };
 
-JiminyTextChar* gUnk_09EDCCACIt[6] = {
+const JiminyTextChar* gUnk_09EDCCACIt[6] = {
     gUnkEu_08850836, gUnkEu_08850849, gUnkEu_0885085B, gUnkEu_0885086D,
     gUnkEu_08850880, gUnkEu_08850894,
 };
 
-JiminyTextChar* gUnk_09EDCCACEs[5] = {
+const JiminyTextChar* gUnk_09EDCCACEs[5] = {
     gUnkEu_0885089D, gUnkEu_088508B1, gUnkEu_088508C4, gUnkEu_088508DA,
     gUnkEu_088508F1,
 };
 
-JiminyTextChar* gUnk_09EDCCBC[4] = {
+const JiminyTextChar* gUnk_09EDCCBC[4] = {
     gUnkEu_0885091C, gUnkEu_08850931, gUnkEu_08850948, gUnkEu_08850961,
 };
 
-JiminyTextChar* gUnk_09EDCCBCFr[4] = {
+const JiminyTextChar* gUnk_09EDCCBCFr[4] = {
     gUnkEu_0885096F, gUnkEu_08850980, gUnkEu_08850994, gUnkEu_088509A4,
 };
 
-JiminyTextChar* gUnk_09EDCCBCDe[4] = {
+const JiminyTextChar* gUnk_09EDCCBCDe[4] = {
     gUnkEu_088509B6, gUnkEu_088509CC, gUnkEu_088509E4, gUnkEu_088509FE,
 };
 
-JiminyTextChar* gUnk_09EDCCBCIt[6] = {
+const JiminyTextChar* gUnk_09EDCCBCIt[6] = {
     gUnkEu_08850A11, gUnkEu_08850A24, gUnkEu_08850A36, gUnkEu_08850A4B,
     gUnkEu_08850A5E, gUnkEu_08850A71,
 };
 
-JiminyTextChar* gUnk_09EDCCBCEs[5] = {
+const JiminyTextChar* gUnk_09EDCCBCEs[5] = {
     gUnkEu_08850A7F, gUnkEu_08850A93, gUnkEu_08850AA6, gUnkEu_08850ABC,
     gUnkEu_08850AD4,
 };
 
-JiminyTextChar* gUnk_09EDCCCC[5] = {
+const JiminyTextChar* gUnk_09EDCCCC[5] = {
     gUnkEu_08850B00, gUnkEu_08850B11, gUnkEu_08850B2A, gUnkEu_08850B3F,
     gUnkEu_08850B4F,
 };
 
-JiminyTextChar* gUnk_09EDCCCCFr[4] = {
+const JiminyTextChar* gUnk_09EDCCCCFr[4] = {
     gUnkEu_08850B59, gUnkEu_08850B6D, gUnkEu_08850B81, gUnkEu_08850B90,
 };
 
-JiminyTextChar* gUnk_09EDCCCCDe[5] = {
+const JiminyTextChar* gUnk_09EDCCCCDe[5] = {
     gUnkEu_08850BA1, gUnkEu_08850BB3, gUnkEu_08850BC7, gUnkEu_08850BDE,
     gUnkEu_08850BF4,
 };
 
-JiminyTextChar* gUnk_09EDCCCCIt[6] = {
+const JiminyTextChar* gUnk_09EDCCCCIt[6] = {
     gUnkEu_08850C04, gUnkEu_08850C17, gUnkEu_08850C29, gUnkEu_08850C3D,
     gUnkEu_08850C50, gUnkEu_08850C60,
 };
 
-JiminyTextChar* gUnk_09EDCCCCEs[5] = {
+const JiminyTextChar* gUnk_09EDCCCCEs[5] = {
     gUnkEu_08850C6D, gUnkEu_08850C81, gUnkEu_08850C93, gUnkEu_08850CA9,
     gUnkEu_08850CBE,
 };
 
-JiminyTextChar* gUnk_09EDCCE0[3] = {
+const JiminyTextChar* gUnk_09EDCCE0[3] = {
     gUnkEu_08850CF0, gUnkEu_08850D08, gUnkEu_08850D1F,
 };
 
-JiminyTextChar* gUnk_09EDCCE0Fr[4] = {
+const JiminyTextChar* gUnk_09EDCCE0Fr[4] = {
     gUnkEu_08850D37, gUnkEu_08850D47, gUnkEu_08850D5B, gUnkEu_08850D6F,
 };
 
-JiminyTextChar* gUnk_09EDCCE0De[5] = {
+const JiminyTextChar* gUnk_09EDCCE0De[5] = {
     gUnkEu_08850D77, gUnkEu_08850D85, gUnkEu_08850D97, gUnkEu_08850DA9,
     gUnkEu_08850DBD,
 };
 
-JiminyTextChar* gUnk_09EDCCE0It[4] = {
+const JiminyTextChar* gUnk_09EDCCE0It[4] = {
     gUnkEu_08850DCB, gUnkEu_08850DE3, gUnkEu_08850DF8, gUnkEu_08850E0E,
 };
 
-JiminyTextChar* gUnk_09EDCCE0Es[4] = {
+const JiminyTextChar* gUnk_09EDCCE0Es[4] = {
     gUnkEu_08850E26, gUnkEu_08850E3C, gUnkEu_08850E53, gUnkEu_08850E6A,
 };
 
-JiminyTextChar* gUnk_09EDCCEC[5] = {
+const JiminyTextChar* gUnk_09EDCCEC[5] = {
     gUnkEu_08850EA0, gUnkEu_08850EB8, gUnkEu_08850ED0, gUnkEu_08850EE7,
     gUnkEu_08850EFD,
 };
 
-JiminyTextChar* gUnk_09EDCCECFr[5] = {
+const JiminyTextChar* gUnk_09EDCCECFr[5] = {
     gUnkEu_08850F12, gUnkEu_08850F26, gUnkEu_08850F37, gUnkEu_08850F4B,
     gUnkEu_08850F5B,
 };
 
-JiminyTextChar* gUnk_09EDCCECDe[7] = {
+const JiminyTextChar* gUnk_09EDCCECDe[7] = {
     gUnkEu_08850F6D, gUnkEu_08850F80, gUnkEu_08850F96, gUnkEu_08850FAC,
     gUnkEu_08850FC1, gUnkEu_08850FD8, gUnkEu_08850FEA,
 };
 
-JiminyTextChar* gUnk_09EDCCECIt[7] = {
+const JiminyTextChar* gUnk_09EDCCECIt[7] = {
     gUnkEu_08850FFF, gUnkEu_08851016, gUnkEu_08851029, gUnkEu_0885103D,
     gUnkEu_08851052, gUnkEu_08851067, gUnkEu_0885107A,
 };
 
-JiminyTextChar* gUnk_09EDCCECEs[6] = {
+const JiminyTextChar* gUnk_09EDCCECEs[6] = {
     gUnkEu_08851088, gUnkEu_0885109B, gUnkEu_088510B2, gUnkEu_088510C9,
     gUnkEu_088510E1, gUnkEu_088510F7,
 };
 
-JiminyTextChar* gUnk_09EDCD00[5] = {
+const JiminyTextChar* gUnk_09EDCD00[5] = {
     gUnkEu_08851128, gUnkEu_0885113F, gUnkEu_08851152, gUnkEu_08851168,
     gUnkEu_0885117F,
 };
 
-JiminyTextChar* gUnk_09EDCD00Fr[5] = {
+const JiminyTextChar* gUnk_09EDCD00Fr[5] = {
     gUnkEu_08851191, gUnkEu_088511A7, gUnkEu_088511B5, gUnkEu_088511C9,
     gUnkEu_088511DD,
 };
 
-JiminyTextChar* gUnk_09EDCD00De[7] = {
+const JiminyTextChar* gUnk_09EDCD00De[7] = {
     gUnkEu_088511E5, gUnkEu_088511FB, gUnkEu_08851210, gUnkEu_08851223,
     gUnkEu_08851236, gUnkEu_08851249, gUnkEu_0885125D,
 };
 
-JiminyTextChar* gUnk_09EDCD00It[6] = {
+const JiminyTextChar* gUnk_09EDCD00It[6] = {
     gUnkEu_08851265, gUnkEu_08851279, gUnkEu_0885128D, gUnkEu_0885129F,
     gUnkEu_088512B0, gUnkEu_088512C4,
 };
 
-JiminyTextChar* gUnk_09EDCD00Es[6] = {
+const JiminyTextChar* gUnk_09EDCD00Es[6] = {
     gUnkEu_088512DA, gUnkEu_088512F2, gUnkEu_0885130B, gUnkEu_08851320,
     gUnkEu_08851336, gUnkEu_0885134D,
 };
 
-JiminyTextChar* gUnk_09EDCD14[5] = {
+const JiminyTextChar* gUnk_09EDCD14[5] = {
     gUnkEu_08851378, gUnkEu_0885138E, gUnkEu_088513A1, gUnkEu_088513BB,
     gUnkEu_088513D2,
 };
 
-JiminyTextChar* gUnk_09EDCD14Fr[5] = {
+const JiminyTextChar* gUnk_09EDCD14Fr[5] = {
     gUnkEu_088513E4, gUnkEu_088513F7, gUnkEu_0885140C, gUnkEu_08851420,
     gUnkEu_0885142F,
 };
 
-JiminyTextChar* gUnk_09EDCD14De[7] = {
+const JiminyTextChar* gUnk_09EDCD14De[7] = {
     gUnkEu_08851440, gUnkEu_08851455, gUnkEu_08851468, gUnkEu_0885147D,
     gUnkEu_08851493, gUnkEu_088514A6, gUnkEu_088514BA,
 };
 
-JiminyTextChar* gUnk_09EDCD14It[6] = {
+const JiminyTextChar* gUnk_09EDCD14It[6] = {
     gUnkEu_088514C2, gUnkEu_088514D9, gUnkEu_088514F3, gUnkEu_0885150C,
     gUnkEu_08851521, gUnkEu_08851536,
 };
 
-JiminyTextChar* gUnk_09EDCD14Es[6] = {
+const JiminyTextChar* gUnk_09EDCD14Es[6] = {
     gUnkEu_0885153E, gUnkEu_08851552, gUnkEu_08851567, gUnkEu_0885157D,
     gUnkEu_08851593, gUnkEu_088515AA,
 };
 
-JiminyTextChar* gUnk_09EDCD28[6] = {
+const JiminyTextChar* gUnk_09EDCD28[6] = {
     gUnkEu_088515D4, gUnkEu_088515EC, gUnkEu_08851603, gUnkEu_0885161A,
     gUnkEu_08851630, gUnkEu_08851646,
 };
 
-JiminyTextChar* gUnk_09EDCD28Fr[6] = {
+const JiminyTextChar* gUnk_09EDCD28Fr[6] = {
     gUnkEu_08851659, gUnkEu_08851669, gUnkEu_08851677, gUnkEu_0885168E,
     gUnkEu_088516A1, gUnkEu_088516B7,
 };
 
-JiminyTextChar* gUnk_09EDCD28De[8] = {
+const JiminyTextChar* gUnk_09EDCD28De[8] = {
     gUnkEu_088516CB, gUnkEu_088516DF, gUnkEu_088516F5, gUnkEu_08851709,
     gUnkEu_0885171B, gUnkEu_0885172D, gUnkEu_08851741, gUnkEu_08851752,
 };
 
-JiminyTextChar* gUnk_09EDCD28It[6] = {
+const JiminyTextChar* gUnk_09EDCD28It[6] = {
     gUnkEu_0885175A, gUnkEu_08851770, gUnkEu_08851789, gUnkEu_088517A3,
     gUnkEu_088517B9, gUnkEu_088517D0,
 };
 
-JiminyTextChar* gUnk_09EDCD28Es[8] = {
+const JiminyTextChar* gUnk_09EDCD28Es[8] = {
     gUnkEu_088517EA, gUnkEu_088517FA, gUnkEu_0885180F, gUnkEu_08851824,
     gUnkEu_0885183B, gUnkEu_08851851, gUnkEu_08851867, gUnkEu_08851881,
 };
 
-JiminyTextChar* gUnk_09EDCD7C[5] = {
+const JiminyTextChar* gUnk_09EDCD7C[5] = {
     gUnkEu_088518AC, gUnkEu_088518C2, gUnkEu_088518D6, gUnkEu_088518EA,
     gUnkEu_088518FE,
 };
 
-JiminyTextChar* gUnk_09EDCD7CFr[5] = {
+const JiminyTextChar* gUnk_09EDCD7CFr[5] = {
     gUnkEu_0885190F, gUnkEu_08851921, gUnkEu_08851936, gUnkEu_08851949,
     gUnkEu_0885195D,
 };
 
-JiminyTextChar* gUnk_09EDCD7CDe[7] = {
+const JiminyTextChar* gUnk_09EDCD7CDe[7] = {
     gUnkEu_08851972, gUnkEu_08851989, gUnkEu_0885199D, gUnkEu_088519B3,
     gUnkEu_088519C2, gUnkEu_088519D5, gUnkEu_088519E4,
 };
 
-JiminyTextChar* gUnk_09EDCD7CIt[5] = {
+const JiminyTextChar* gUnk_09EDCD7CIt[5] = {
     gUnkEu_088519F9, gUnkEu_08851A11, gUnkEu_08851A24, gUnkEu_08851A38,
     gUnkEu_08851A51,
 };
 
-JiminyTextChar* gUnk_09EDCD7CEs[6] = {
+const JiminyTextChar* gUnk_09EDCD7CEs[6] = {
     gUnkEu_08851A64, gUnkEu_08851A77, gUnkEu_08851A8B, gUnkEu_08851A9F,
     gUnkEu_08851AB4, gUnkEu_08851ACA,
 };
 
-JiminyTextChar* gUnk_09EDCD58[4] = {
+const JiminyTextChar* gUnk_09EDCD58[4] = {
     gUnkEu_08851AFC, gUnkEu_08851B10, gUnkEu_08851B23, gUnkEu_08851B3B,
 };
 
-JiminyTextChar* gUnk_09EDCD58Fr[4] = {
+const JiminyTextChar* gUnk_09EDCD58Fr[4] = {
     gUnkEu_08851B54, gUnkEu_08851B6A, gUnkEu_08851B7C, gUnkEu_08851B8E,
 };
 
-JiminyTextChar* gUnk_09EDCD58De[5] = {
+const JiminyTextChar* gUnk_09EDCD58De[5] = {
     gUnkEu_08851BA1, gUnkEu_08851BB5, gUnkEu_08851BC8, gUnkEu_08851BDE,
     gUnkEu_08851BF0,
 };
 
-JiminyTextChar* gUnk_09EDCD58It[5] = {
+const JiminyTextChar* gUnk_09EDCD58It[5] = {
     gUnkEu_08851C06, gUnkEu_08851C1D, gUnkEu_08851C36, gUnkEu_08851C4C,
     gUnkEu_08851C65,
 };
 
-JiminyTextChar* gUnk_09EDCD58Es[5] = {
+const JiminyTextChar* gUnk_09EDCD58Es[5] = {
     gUnkEu_08851C76, gUnkEu_08851C8C, gUnkEu_08851C9F, gUnkEu_08851CAD,
     gUnkEu_08851CC3,
 };
 
-JiminyTextChar* gUnk_09EDCD40[6] = {
+const JiminyTextChar* gUnk_09EDCD40[6] = {
     gUnkEu_08851CFC, gUnkEu_08851D11, gUnkEu_08851D27, gUnkEu_08851D40,
     gUnkEu_08851D54, gUnkEu_08851D68,
 };
 
-JiminyTextChar* gUnk_09EDCD40Fr[6] = {
+const JiminyTextChar* gUnk_09EDCD40Fr[6] = {
     gUnkEu_08851D74, gUnkEu_08851D83, gUnkEu_08851D92, gUnkEu_08851DA3,
     gUnkEu_08851DB5, gUnkEu_08851DC6,
 };
 
-JiminyTextChar* gUnk_09EDCD40De[7] = {
+const JiminyTextChar* gUnk_09EDCD40De[7] = {
     gUnkEu_08851DDA, gUnkEu_08851DEE, gUnkEu_08851E03, gUnkEu_08851E13,
     gUnkEu_08851E25, gUnkEu_08851E38, gUnkEu_08851E4E,
 };
 
-JiminyTextChar* gUnk_09EDCD40It[6] = {
+const JiminyTextChar* gUnk_09EDCD40It[6] = {
     gUnkEu_08851E5B, gUnkEu_08851E70, gUnkEu_08851E85, gUnkEu_08851E9C,
     gUnkEu_08851EB4, gUnkEu_08851ECD,
 };
 
-JiminyTextChar* gUnk_09EDCD40Es[7] = {
+const JiminyTextChar* gUnk_09EDCD40Es[7] = {
     gUnkEu_08851EE5, gUnkEu_08851EF5, gUnkEu_08851F09, gUnkEu_08851F1C,
     gUnkEu_08851F30, gUnkEu_08851F46, gUnkEu_08851F59,
 };
 
-JiminyTextChar* gUnk_09EDCD90[4] = {
+const JiminyTextChar* gUnk_09EDCD90[4] = {
     gUnkEu_08851F84, gUnkEu_08851F9C, gUnkEu_08851FB4, gUnkEu_08851FCB,
 };
 
-JiminyTextChar* gUnk_09EDCD90Fr[4] = {
+const JiminyTextChar* gUnk_09EDCD90Fr[4] = {
     gUnkEu_08851FDD, gUnkEu_08851FEC, gUnkEu_08851FFD, gUnkEu_08852010,
 };
 
-JiminyTextChar* gUnk_09EDCD90De[5] = {
+const JiminyTextChar* gUnk_09EDCD90De[5] = {
     gUnkEu_08852027, gUnkEu_0885203C, gUnkEu_08852053, gUnkEu_08852068,
     gUnkEu_08852080,
 };
 
-JiminyTextChar* gUnk_09EDCD90It[5] = {
+const JiminyTextChar* gUnk_09EDCD90It[5] = {
     gUnkEu_0885208D, gUnkEu_088520A5, gUnkEu_088520BD, gUnkEu_088520D1,
     gUnkEu_088520E6,
 };
 
-JiminyTextChar* gUnk_09EDCD90Es[4] = {
+const JiminyTextChar* gUnk_09EDCD90Es[4] = {
     gUnkEu_088520FC, gUnkEu_08852113, gUnkEu_08852126, gUnkEu_0885213B,
 };
 
-JiminyTextChar* gUnk_09EDCD68[5] = {
+const JiminyTextChar* gUnk_09EDCD68[5] = {
     gUnkEu_08852170, gUnkEu_08852187, gUnkEu_0885219F, gUnkEu_088521B3,
     gUnkEu_088521C7,
 };
 
-JiminyTextChar* gUnk_09EDCD68Fr[4] = {
+const JiminyTextChar* gUnk_09EDCD68Fr[4] = {
     gUnkEu_088521D3, gUnkEu_088521E2, gUnkEu_088521F4, gUnkEu_08852205,
 };
 
-JiminyTextChar* gUnk_09EDCD68De[8] = {
+const JiminyTextChar* gUnk_09EDCD68De[8] = {
     gUnkEu_08852219, gUnkEu_0885222C, gUnkEu_0885223E, gUnkEu_0885224D,
     gUnkEu_08852261, gUnkEu_08852275, gUnkEu_08852284, gUnkEu_0885229A,
 };
 
-JiminyTextChar* gUnk_09EDCD68It[6] = {
+const JiminyTextChar* gUnk_09EDCD68It[6] = {
     gUnkEu_088522A7, gUnkEu_088522BA, gUnkEu_088522CF, gUnkEu_088522E4,
     gUnkEu_088522F9, gUnkEu_0885230E,
 };
 
-JiminyTextChar* gUnk_09EDCD68Es[6] = {
+const JiminyTextChar* gUnk_09EDCD68Es[6] = {
     gUnkEu_08852326, gUnkEu_0885233A, gUnkEu_08852350, gUnkEu_08852364,
     gUnkEu_0885237A, gUnkEu_0885238E,
 };
 
-JiminyTextChar* gUnk_09EDCDA0[4] = {
+const JiminyTextChar* gUnk_09EDCDA0[4] = {
     gUnkEu_088523B8, gUnkEu_088523CC, gUnkEu_088523DD, gUnkEu_088523F5,
 };
 
-JiminyTextChar* gUnk_09EDCDA0Fr[4] = {
+const JiminyTextChar* gUnk_09EDCDA0Fr[4] = {
     gUnkEu_08852407, gUnkEu_0885241B, gUnkEu_0885242B, gUnkEu_08852441,
 };
 
-JiminyTextChar* gUnk_09EDCDA0De[6] = {
+const JiminyTextChar* gUnk_09EDCDA0De[6] = {
     gUnkEu_0885244C, gUnkEu_08852463, gUnkEu_08852479, gUnkEu_08852490,
     gUnkEu_088524A5, gUnkEu_088524B8,
 };
 
-JiminyTextChar* gUnk_09EDCDA0It[4] = {
+const JiminyTextChar* gUnk_09EDCDA0It[4] = {
     gUnkEu_088524C0, gUnkEu_088524D5, gUnkEu_088524EB, gUnkEu_08852500,
 };
 
-JiminyTextChar* gUnk_09EDCDA0Es[5] = {
+const JiminyTextChar* gUnk_09EDCDA0Es[5] = {
     gUnkEu_08852515, gUnkEu_0885252C, gUnkEu_0885253E, gUnkEu_08852552,
     gUnkEu_08852568,
 };
 
-JiminyTextChar* gUnk_09EDCDB0[5] = {
+const JiminyTextChar* gUnk_09EDCDB0[5] = {
     gUnkEu_08852594, gUnkEu_088525AB, gUnkEu_088525C0, gUnkEu_088525D8,
     gUnkEu_088525EF,
 };
 
-JiminyTextChar* gUnk_09EDCDB0Fr[5] = {
+const JiminyTextChar* gUnk_09EDCDB0Fr[5] = {
     gUnkEu_08852603, gUnkEu_08852617, gUnkEu_0885262B, gUnkEu_0885263D,
     gUnkEu_08852651,
 };
 
-JiminyTextChar* gUnk_09EDCDB0De[7] = {
+const JiminyTextChar* gUnk_09EDCDB0De[7] = {
     gUnkEu_08852669, gUnkEu_0885267F, gUnkEu_08852694, gUnkEu_088526A7,
     gUnkEu_088526BF, gUnkEu_088526D5, gUnkEu_088526E9,
 };
 
-JiminyTextChar* gUnk_09EDCDB0It[7] = {
+const JiminyTextChar* gUnk_09EDCDB0It[7] = {
     gUnkEu_088526F1, gUnkEu_08852706, gUnkEu_0885271F, gUnkEu_08852737,
     gUnkEu_0885274F, gUnkEu_08852764, gUnkEu_08852773,
 };
 
-JiminyTextChar* gUnk_09EDCDB0Es[5] = {
+const JiminyTextChar* gUnk_09EDCDB0Es[5] = {
     gUnkEu_0885277F, gUnkEu_08852794, gUnkEu_088527A9, gUnkEu_088527BA,
     gUnkEu_088527D2,
 };
 
-JiminyTextChar* gUnk_09EDCDC4[5] = {
+const JiminyTextChar* gUnk_09EDCDC4[5] = {
     gUnkEu_08852804, gUnkEu_0885281B, gUnkEu_08852830, gUnkEu_08852845,
     gUnkEu_0885285B,
 };
 
-JiminyTextChar* gUnk_09EDCDC4Fr[5] = {
+const JiminyTextChar* gUnk_09EDCDC4Fr[5] = {
     gUnkEu_0885286F, gUnkEu_08852883, gUnkEu_08852897, gUnkEu_088528AB,
     gUnkEu_088528C2,
 };
 
-JiminyTextChar* gUnk_09EDCDC4De[7] = {
+const JiminyTextChar* gUnk_09EDCDC4De[7] = {
     gUnkEu_088528D4, gUnkEu_088528EA, gUnkEu_088528FF, gUnkEu_08852912,
     gUnkEu_08852928, gUnkEu_08852940, gUnkEu_08852954,
 };
 
-JiminyTextChar* gUnk_09EDCDC4It[7] = {
+const JiminyTextChar* gUnk_09EDCDC4It[7] = {
     gUnkEu_0885295C, gUnkEu_08852971, gUnkEu_0885298A, gUnkEu_088529A2,
     gUnkEu_088529B6, gUnkEu_088529CD, gUnkEu_088529E2,
 };
 
-JiminyTextChar* gUnk_09EDCDC4Es[5] = {
+const JiminyTextChar* gUnk_09EDCDC4Es[5] = {
     gUnkEu_088529F0, gUnkEu_08852A05, gUnkEu_08852A1A, gUnkEu_08852A2A,
     gUnkEu_08852A3E,
 };
 
-JiminyTextChar* gUnk_09EDCDD8[6] = {
+const JiminyTextChar* gUnk_09EDCDD8[6] = {
     gUnkEu_08852A70, gUnkEu_08852A87, gUnkEu_08852A9C, gUnkEu_08852AB0,
     gUnkEu_08852AC6, gUnkEu_08852ADC,
 };
 
-JiminyTextChar* gUnk_09EDCDD8Fr[6] = {
+const JiminyTextChar* gUnk_09EDCDD8Fr[6] = {
     gUnkEu_08852AF0, gUnkEu_08852B04, gUnkEu_08852B18, gUnkEu_08852B2C,
     gUnkEu_08852B43, gUnkEu_08852B55,
 };
 
-JiminyTextChar* gUnk_09EDCDD8De[8] = {
+const JiminyTextChar* gUnk_09EDCDD8De[8] = {
     gUnkEu_08852B6C, gUnkEu_08852B82, gUnkEu_08852B97, gUnkEu_08852BAD,
     gUnkEu_08852BC2, gUnkEu_08852BD7, gUnkEu_08852BEC, gUnkEu_08852C00,
 };
 
-JiminyTextChar* gUnk_09EDCDD8It[8] = {
+const JiminyTextChar* gUnk_09EDCDD8It[8] = {
     gUnkEu_08852C16, gUnkEu_08852C2B, gUnkEu_08852C44, gUnkEu_08852C5C,
     gUnkEu_08852C74, gUnkEu_08852C8A, gUnkEu_08852CA0, gUnkEu_08852CB6,
 };
 
-JiminyTextChar* gUnk_09EDCDD8Es[6] = {
+const JiminyTextChar* gUnk_09EDCDD8Es[6] = {
     gUnkEu_08852CCD, gUnkEu_08852CE2, gUnkEu_08852CF7, gUnkEu_08852D0D,
     gUnkEu_08852D23, gUnkEu_08852D39,
 };
 
-JiminyTextChar* gUnk_09EDCDF0[5] = {
+const JiminyTextChar* gUnk_09EDCDF0[5] = {
     gUnkEu_08852D70, gUnkEu_08852D86, gUnkEu_08852D9B, gUnkEu_08852DB3,
     gUnkEu_08852DCA,
 };
 
-JiminyTextChar* gUnk_09EDCDF0Fr[5] = {
+const JiminyTextChar* gUnk_09EDCDF0Fr[5] = {
     gUnkEu_08852DDE, gUnkEu_08852DF2, gUnkEu_08852E04, gUnkEu_08852E16,
     gUnkEu_08852E2A,
 };
 
-JiminyTextChar* gUnk_09EDCDF0De[7] = {
+const JiminyTextChar* gUnk_09EDCDF0De[7] = {
     gUnkEu_08852E42, gUnkEu_08852E58, gUnkEu_08852E6A, gUnkEu_08852E7D,
     gUnkEu_08852E95, gUnkEu_08852EAB, gUnkEu_08852EBF,
 };
 
-JiminyTextChar* gUnk_09EDCDF0It[7] = {
+const JiminyTextChar* gUnk_09EDCDF0It[7] = {
     gUnkEu_08852EC7, gUnkEu_08852EDC, gUnkEu_08852EF3, gUnkEu_08852F0B,
     gUnkEu_08852F23, gUnkEu_08852F38, gUnkEu_08852F47,
 };
 
-JiminyTextChar* gUnk_09EDCDF0Es[5] = {
+const JiminyTextChar* gUnk_09EDCDF0Es[5] = {
     gUnkEu_08852F53, gUnkEu_08852F68, gUnkEu_08852F7B, gUnkEu_08852F8D,
     gUnkEu_08852FA5,
 };
 
-JiminyTextChar* gUnk_09EDCE04[6] = {
+const JiminyTextChar* gUnk_09EDCE04[6] = {
     gUnkEu_08852FD8, gUnkEu_08852FEE, gUnkEu_08853003, gUnkEu_08853017,
     gUnkEu_0885302D, gUnkEu_08853043,
 };
 
-JiminyTextChar* gUnk_09EDCE04Fr[6] = {
+const JiminyTextChar* gUnk_09EDCE04Fr[6] = {
     gUnkEu_08853057, gUnkEu_0885306B, gUnkEu_0885307D, gUnkEu_08853091,
     gUnkEu_088530A8, gUnkEu_088530BA,
 };
 
-JiminyTextChar* gUnk_09EDCE04De[8] = {
+const JiminyTextChar* gUnk_09EDCE04De[8] = {
     gUnkEu_088530D1, gUnkEu_088530E7, gUnkEu_088530FE, gUnkEu_08853115,
     gUnkEu_0885312C, gUnkEu_08853142, gUnkEu_0885315A, gUnkEu_0885316E,
 };
 
-JiminyTextChar* gUnk_09EDCE04It[8] = {
+const JiminyTextChar* gUnk_09EDCE04It[8] = {
     gUnkEu_08853176, gUnkEu_0885318B, gUnkEu_088531A2, gUnkEu_088531BA,
     gUnkEu_088531D2, gUnkEu_088531E8, gUnkEu_088531FE, gUnkEu_08853214,
 };
 
-JiminyTextChar* gUnk_09EDCE04Es[6] = {
+const JiminyTextChar* gUnk_09EDCE04Es[6] = {
     gUnkEu_0885322B, gUnkEu_08853240, gUnkEu_08853255, gUnkEu_0885326D,
     gUnkEu_08853282, gUnkEu_08853297,
 };
 
-JiminyTextChar* gUnk_09EDCE1C[4] = {
+const JiminyTextChar* gUnk_09EDCE1C[4] = {
     gUnkEu_088532C8, gUnkEu_088532DF, gUnkEu_088532F6, gUnkEu_08853309,
 };
 
-JiminyTextChar* gUnk_09EDCE1CFr[5] = {
+const JiminyTextChar* gUnk_09EDCE1CFr[5] = {
     gUnkEu_0885331D, gUnkEu_08853331, gUnkEu_08853343, gUnkEu_08853358,
     gUnkEu_08853368,
 };
 
-JiminyTextChar* gUnk_09EDCE1CDe[5] = {
+const JiminyTextChar* gUnk_09EDCE1CDe[5] = {
     gUnkEu_08853377, gUnkEu_0885338D, gUnkEu_088533A1, gUnkEu_088533B3,
     gUnkEu_088533CB,
 };
 
-JiminyTextChar* gUnk_09EDCE1CIt[5] = {
+const JiminyTextChar* gUnk_09EDCE1CIt[5] = {
     gUnkEu_088533E2, gUnkEu_088533FA, gUnkEu_08853412, gUnkEu_08853425,
     gUnkEu_0885343B,
 };
 
-JiminyTextChar* gUnk_09EDCE1CEs[4] = {
+const JiminyTextChar* gUnk_09EDCE1CEs[4] = {
     gUnkEu_08853452, gUnkEu_08853467, gUnkEu_0885347C, gUnkEu_0885348F,
 };
 
-JiminyTextChar* gUnk_09EDCE2C[6] = {
+const JiminyTextChar* gUnk_09EDCE2C[6] = {
     gUnkEu_088534C4, gUnkEu_088534DB, gUnkEu_088534F2, gUnkEu_08853505,
     gUnkEu_08853519, gUnkEu_0885352F,
 };
 
-JiminyTextChar* gUnk_09EDCE2CFr[6] = {
+const JiminyTextChar* gUnk_09EDCE2CFr[6] = {
     gUnkEu_0885353B, gUnkEu_0885354F, gUnkEu_08853561, gUnkEu_08853576,
     gUnkEu_08853586, gUnkEu_08853595,
 };
 
-JiminyTextChar* gUnk_09EDCE2CDe[8] = {
+const JiminyTextChar* gUnk_09EDCE2CDe[8] = {
     gUnkEu_088535AC, gUnkEu_088535C2, gUnkEu_088535D6, gUnkEu_088535E8,
     gUnkEu_088535FA, gUnkEu_0885360F, gUnkEu_08853626, gUnkEu_0885363D,
 };
 
-JiminyTextChar* gUnk_09EDCE2CIt[7] = {
+const JiminyTextChar* gUnk_09EDCE2CIt[7] = {
     gUnkEu_08853646, gUnkEu_0885365E, gUnkEu_08853677, gUnkEu_0885368A,
     gUnkEu_088536A0, gUnkEu_088536B7, gUnkEu_088536CC,
 };
 
-JiminyTextChar* gUnk_09EDCE2CEs[6] = {
+const JiminyTextChar* gUnk_09EDCE2CEs[6] = {
     gUnkEu_088536D9, gUnkEu_088536EE, gUnkEu_08853703, gUnkEu_08853716,
     gUnkEu_0885372A, gUnkEu_0885373D,
 };
 
-JiminyTextChar* gUnk_09EDCE44[5] = {
+const JiminyTextChar* gUnk_09EDCE44[5] = {
     gUnkEu_08853774, gUnkEu_0885378A, gUnkEu_088537A3, gUnkEu_088537B8,
     gUnkEu_088537CD,
 };
 
-JiminyTextChar* gUnk_09EDCE44Fr[4] = {
+const JiminyTextChar* gUnk_09EDCE44Fr[4] = {
     gUnkEu_088537DD, gUnkEu_088537EF, gUnkEu_08853807, gUnkEu_0885381D,
 };
 
-JiminyTextChar* gUnk_09EDCE44De[6] = {
+const JiminyTextChar* gUnk_09EDCE44De[6] = {
     gUnkEu_08853834, gUnkEu_08853849, gUnkEu_0885385B, gUnkEu_08853871,
     gUnkEu_08853880, gUnkEu_08853896,
 };
 
-JiminyTextChar* gUnk_09EDCE44It[5] = {
+const JiminyTextChar* gUnk_09EDCE44It[5] = {
     gUnkEu_088538A5, gUnkEu_088538BC, gUnkEu_088538D5, gUnkEu_088538EC,
     gUnkEu_08853903,
 };
 
-JiminyTextChar* gUnk_09EDCE44Es[5] = {
+const JiminyTextChar* gUnk_09EDCE44Es[5] = {
     gUnkEu_0885390D, gUnkEu_08853924, gUnkEu_0885393B, gUnkEu_0885394F,
     gUnkEu_08853965,
 };
 
-JiminyTextChar* gUnk_09EDCE58[4] = {
+const JiminyTextChar* gUnk_09EDCE58[4] = {
     gUnkEu_088539A0, gUnkEu_088539B8, gUnkEu_088539CD, gUnkEu_088539E4,
 };
 
-JiminyTextChar* gUnk_09EDCE58Fr[4] = {
+const JiminyTextChar* gUnk_09EDCE58Fr[4] = {
     gUnkEu_088539F7, gUnkEu_08853A09, gUnkEu_08853A1F, gUnkEu_08853A34,
 };
 
-JiminyTextChar* gUnk_09EDCE58De[7] = {
+const JiminyTextChar* gUnk_09EDCE58De[7] = {
     gUnkEu_08853A4B, gUnkEu_08853A5D, gUnkEu_08853A6F, gUnkEu_08853A7F,
     gUnkEu_08853A8F, gUnkEu_08853AA1, gUnkEu_08853AB0,
 };
 
-JiminyTextChar* gUnk_09EDCE58It[5] = {
+const JiminyTextChar* gUnk_09EDCE58It[5] = {
     gUnkEu_08853AC3, gUnkEu_08853ADB, gUnkEu_08853AEF, gUnkEu_08853B06,
     gUnkEu_08853B1E,
 };
 
-JiminyTextChar* gUnk_09EDCE58Es[6] = {
+const JiminyTextChar* gUnk_09EDCE58Es[6] = {
     gUnkEu_08853B25, gUnkEu_08853B3B, gUnkEu_08853B50, gUnkEu_08853B65,
     gUnkEu_08853B76, gUnkEu_08853B8E,
 };
 
-JiminyTextChar* gUnk_09EDCE68[5] = {
+const JiminyTextChar* gUnk_09EDCE68[5] = {
     gUnkEu_08853BB8, gUnkEu_08853BCB, gUnkEu_08853BDE, gUnkEu_08853BF6,
     gUnkEu_08853C0B,
 };
 
-JiminyTextChar* gUnk_09EDCE68Fr[4] = {
+const JiminyTextChar* gUnk_09EDCE68Fr[4] = {
     gUnkEu_08853C1D, gUnkEu_08853C2D, gUnkEu_08853C42, gUnkEu_08853C57,
 };
 
-JiminyTextChar* gUnk_09EDCE68De[7] = {
+const JiminyTextChar* gUnk_09EDCE68De[7] = {
     gUnkEu_08853C60, gUnkEu_08853C76, gUnkEu_08853C89, gUnkEu_08853C9B,
     gUnkEu_08853CAA, gUnkEu_08853CBD, gUnkEu_08853CD1,
 };
 
-JiminyTextChar* gUnk_09EDCE68It[5] = {
+const JiminyTextChar* gUnk_09EDCE68It[5] = {
     gUnkEu_08853CD8, gUnkEu_08853CE8, gUnkEu_08853D00, gUnkEu_08853D17,
     gUnkEu_08853D30,
 };
 
-JiminyTextChar* gUnk_09EDCE68Es[5] = {
+const JiminyTextChar* gUnk_09EDCE68Es[5] = {
     gUnkEu_08853D46, gUnkEu_08853D5C, gUnkEu_08853D72, gUnkEu_08853D85,
     gUnkEu_08853D96,
 };
 
-JiminyTextChar* gUnk_09EDCE90[5] = {
+const JiminyTextChar* gUnk_09EDCE90[5] = {
     gUnkEu_08853DCC, gUnkEu_08853DE4, gUnkEu_08853DF9, gUnkEu_08853E0E,
     gUnkEu_08853E23,
 };
 
-JiminyTextChar* gUnk_09EDCE90Fr[4] = {
+const JiminyTextChar* gUnk_09EDCE90Fr[4] = {
     gUnkEu_08853E33, gUnkEu_08853E49, gUnkEu_08853E5D, gUnkEu_08853E71,
 };
 
-JiminyTextChar* gUnk_09EDCE90De[8] = {
+const JiminyTextChar* gUnk_09EDCE90De[8] = {
     gUnkEu_08853E88, gUnkEu_08853E9E, gUnkEu_08853EAF, gUnkEu_08853EC0,
     gUnkEu_08853ED7, gUnkEu_08853EE6, gUnkEu_08853EF9, gUnkEu_08853F0C,
 };
 
-JiminyTextChar* gUnk_09EDCE90It[5] = {
+const JiminyTextChar* gUnk_09EDCE90It[5] = {
     gUnkEu_08853F13, gUnkEu_08853F2C, gUnkEu_08853F44, gUnkEu_08853F59,
     gUnkEu_08853F6E,
 };
 
-JiminyTextChar* gUnk_09EDCE90Es[5] = {
+const JiminyTextChar* gUnk_09EDCE90Es[5] = {
     gUnkEu_08853F82, gUnkEu_08853F96, gUnkEu_08853FA7, gUnkEu_08853FBB,
     gUnkEu_08853FCC,
 };
 
-JiminyTextChar* gUnk_09EDCE7C[5] = {
+const JiminyTextChar* gUnk_09EDCE7C[5] = {
     gUnkEu_08854004, gUnkEu_08854015, gUnkEu_0885402B, gUnkEu_08854040,
     gUnkEu_08854055,
 };
 
-JiminyTextChar* gUnk_09EDCE7CFr[4] = {
+const JiminyTextChar* gUnk_09EDCE7CFr[4] = {
     gUnkEu_08854063, gUnkEu_08854079, gUnkEu_0885408C, gUnkEu_088540A0,
 };
 
-JiminyTextChar* gUnk_09EDCE7CDe[7] = {
+const JiminyTextChar* gUnk_09EDCE7CDe[7] = {
     gUnkEu_088540B7, gUnkEu_088540CA, gUnkEu_088540E1, gUnkEu_088540F6,
     gUnkEu_08854105, gUnkEu_08854118, gUnkEu_0885412B,
 };
 
-JiminyTextChar* gUnk_09EDCE7CIt[5] = {
+const JiminyTextChar* gUnk_09EDCE7CIt[5] = {
     gUnkEu_08854132, gUnkEu_08854145, gUnkEu_0885415D, gUnkEu_08854174,
     gUnkEu_0885418C,
 };
 
-JiminyTextChar* gUnk_09EDCE7CEs[5] = {
+const JiminyTextChar* gUnk_09EDCE7CEs[5] = {
     gUnkEu_08854192, gUnkEu_088541AB, gUnkEu_088541BF, gUnkEu_088541D3,
     gUnkEu_088541E6,
 };
 
-JiminyTextChar* gUnk_09EDCEA4[4] = {
+const JiminyTextChar* gUnk_09EDCEA4[4] = {
     gUnkEu_08854218, gUnkEu_0885422F, gUnkEu_08854247, gUnkEu_0885425C,
 };
 
-JiminyTextChar* gUnk_09EDCEA4Fr[4] = {
+const JiminyTextChar* gUnk_09EDCEA4Fr[4] = {
     gUnkEu_0885426C, gUnkEu_08854280, gUnkEu_08854298, gUnkEu_088542AA,
 };
 
-JiminyTextChar* gUnk_09EDCEA4De[6] = {
+const JiminyTextChar* gUnk_09EDCEA4De[6] = {
     gUnkEu_088542BD, gUnkEu_088542D2, gUnkEu_088542E5, gUnkEu_088542F8,
     gUnkEu_0885430B, gUnkEu_0885431F,
 };
 
-JiminyTextChar* gUnk_09EDCEA4It[5] = {
+const JiminyTextChar* gUnk_09EDCEA4It[5] = {
     gUnkEu_08854326, gUnkEu_0885433A, gUnkEu_08854351, gUnkEu_08854364,
     gUnkEu_0885437D,
 };
 
-JiminyTextChar* gUnk_09EDCEA4Es[4] = {
+const JiminyTextChar* gUnk_09EDCEA4Es[4] = {
     gUnkEu_08854387, gUnkEu_0885439C, gUnkEu_088543AF, gUnkEu_088543C0,
 };
 
-JiminyTextChar* gUnk_09EDCEB4[5] = {
+const JiminyTextChar* gUnk_09EDCEB4[5] = {
     gUnkEu_088543F8, gUnkEu_0885440C, gUnkEu_08854423, gUnkEu_0885443A,
     gUnkEu_0885444F,
 };
 
-JiminyTextChar* gUnk_09EDCEB4Fr[4] = {
+const JiminyTextChar* gUnk_09EDCEB4Fr[4] = {
     gUnkEu_08854457, gUnkEu_0885446F, gUnkEu_08854483, gUnkEu_08854495,
 };
 
-JiminyTextChar* gUnk_09EDCEB4De[5] = {
+const JiminyTextChar* gUnk_09EDCEB4De[5] = {
     gUnkEu_088544A8, gUnkEu_088544BD, gUnkEu_088544D1, gUnkEu_088544E8,
     gUnkEu_08854501,
 };
 
-JiminyTextChar* gUnk_09EDCEB4It[7] = {
+const JiminyTextChar* gUnk_09EDCEB4It[7] = {
     gUnkEu_08854514, gUnkEu_08854525, gUnkEu_0885453C, gUnkEu_08854551,
     gUnkEu_08854562, gUnkEu_08854575, gUnkEu_08854584,
 };
 
-JiminyTextChar* gUnk_09EDCEB4Es[5] = {
+const JiminyTextChar* gUnk_09EDCEB4Es[5] = {
     gUnkEu_0885459C, gUnkEu_088545AB, gUnkEu_088545BB, gUnkEu_088545D1,
     gUnkEu_088545E1,
 };
 
-JiminyTextChar* gUnk_09EDCEC8[5] = {
+const JiminyTextChar* gUnk_09EDCEC8[5] = {
     gUnkEu_08854618, gUnkEu_08854626, gUnkEu_0885463C, gUnkEu_0885464C,
     gUnkEu_0885464E,
 };
 
-JiminyTextChar* gUnk_09EDCEC8Fr[5] = {
+const JiminyTextChar* gUnk_09EDCEC8Fr[5] = {
     gUnkEu_08854663, gUnkEu_08854672, gUnkEu_08854682, gUnkEu_08854695,
     gUnkEu_08854697,
 };
 
-JiminyTextChar* gUnk_09EDCEC8De[5] = {
+const JiminyTextChar* gUnk_09EDCEC8De[5] = {
     gUnkEu_088546AD, gUnkEu_088546BA, gUnkEu_088546D0, gUnkEu_088546DD,
     gUnkEu_088546DF,
 };
 
-JiminyTextChar* gUnk_09EDCEC8It[6] = {
+const JiminyTextChar* gUnk_09EDCEC8It[6] = {
     gUnkEu_088546F5, gUnkEu_08854703, gUnkEu_08854716, gUnkEu_08854729,
     gUnkEu_08854733, gUnkEu_08854735,
 };
 
-JiminyTextChar* gUnk_09EDCEC8Es[5] = {
+const JiminyTextChar* gUnk_09EDCEC8Es[5] = {
     gUnkEu_0885474A, gUnkEu_08854758, gUnkEu_0885476C, gUnkEu_08854783,
     gUnkEu_08854785,
 };
 
-JiminyTextChar* gUnk_09EDCF08[5] = {
+const JiminyTextChar* gUnk_09EDCF08[5] = {
     gUnkEu_088547BC, gUnkEu_088547C9, gUnkEu_088547DF, gUnkEu_088547F2,
     gUnkEu_088547F4,
 };
 
-JiminyTextChar* gUnk_09EDCF08Fr[5] = {
+const JiminyTextChar* gUnk_09EDCF08Fr[5] = {
     gUnkEu_08854808, gUnkEu_08854816, gUnkEu_0885482C, gUnkEu_0885483D,
     gUnkEu_0885483F,
 };
 
-JiminyTextChar* gUnk_09EDCF08De[6] = {
+const JiminyTextChar* gUnk_09EDCF08De[6] = {
     gUnkEu_08854854, gUnkEu_0885485E, gUnkEu_0885486E, gUnkEu_0885487E,
     gUnkEu_08854889, gUnkEu_0885488B,
 };
 
-JiminyTextChar* gUnk_09EDCF08It[5] = {
+const JiminyTextChar* gUnk_09EDCF08It[5] = {
     gUnkEu_088548A1, gUnkEu_088548AB, gUnkEu_088548C1, gUnkEu_088548D4,
     gUnkEu_088548D6,
 };
 
-JiminyTextChar* gUnk_09EDCF08Es[6] = {
+const JiminyTextChar* gUnk_09EDCF08Es[6] = {
     gUnkEu_088548EA, gUnkEu_088548F6, gUnkEu_0885490A, gUnkEu_08854921,
     gUnkEu_08854927, gUnkEu_08854929,
 };
 
-JiminyTextChar* gUnk_09EDCF1C[5] = {
+const JiminyTextChar* gUnk_09EDCF1C[5] = {
     gUnkEu_08854960, gUnkEu_08854971, gUnkEu_08854987, gUnkEu_0885499E,
     gUnkEu_088549A0,
 };
 
-JiminyTextChar* gUnk_09EDCF1CFr[5] = {
+const JiminyTextChar* gUnk_09EDCF1CFr[5] = {
     gUnkEu_088549B4, gUnkEu_088549C4, gUnkEu_088549DA, gUnkEu_088549ED,
     gUnkEu_088549EF,
 };
 
-JiminyTextChar* gUnk_09EDCF1CDe[5] = {
+const JiminyTextChar* gUnk_09EDCF1CDe[5] = {
     gUnkEu_08854A04, gUnkEu_08854A0D, gUnkEu_08854A26, gUnkEu_08854A36,
     gUnkEu_08854A38,
 };
 
-JiminyTextChar* gUnk_09EDCF1CIt[5] = {
+const JiminyTextChar* gUnk_09EDCF1CIt[5] = {
     gUnkEu_08854A4E, gUnkEu_08854A5B, gUnkEu_08854A71, gUnkEu_08854A87,
     gUnkEu_08854A89,
 };
 
-JiminyTextChar* gUnk_09EDCF1CEs[6] = {
+const JiminyTextChar* gUnk_09EDCF1CEs[6] = {
     gUnkEu_08854A9D, gUnkEu_08854AA6, gUnkEu_08854ABA, gUnkEu_08854AD1,
     gUnkEu_08854AD8, gUnkEu_08854ADA,
 };
 
-JiminyTextChar* gUnk_09EDCF30[5] = {
+const JiminyTextChar* gUnk_09EDCF30[5] = {
     gUnkEu_08854B10, gUnkEu_08854B20, gUnkEu_08854B36, gUnkEu_08854B4C,
     gUnkEu_08854B4E,
 };
 
-JiminyTextChar* gUnk_09EDCF30Fr[5] = {
+const JiminyTextChar* gUnk_09EDCF30Fr[5] = {
     gUnkEu_08854B62, gUnkEu_08854B71, gUnkEu_08854B87, gUnkEu_08854B9D,
     gUnkEu_08854B9F,
 };
 
-JiminyTextChar* gUnk_09EDCF30De[6] = {
+const JiminyTextChar* gUnk_09EDCF30De[6] = {
     gUnkEu_08854BB4, gUnkEu_08854BBE, gUnkEu_08854BCE, gUnkEu_08854BDE,
     gUnkEu_08854BE9, gUnkEu_08854BEB,
 };
 
-JiminyTextChar* gUnk_09EDCF30It[5] = {
+const JiminyTextChar* gUnk_09EDCF30It[5] = {
     gUnkEu_08854C01, gUnkEu_08854C0D, gUnkEu_08854C23, gUnkEu_08854C38,
     gUnkEu_08854C3A,
 };
 
-JiminyTextChar* gUnk_09EDCF30Es[6] = {
+const JiminyTextChar* gUnk_09EDCF30Es[6] = {
     gUnkEu_08854C4E, gUnkEu_08854C59, gUnkEu_08854C6D, gUnkEu_08854C84,
     gUnkEu_08854C8D, gUnkEu_08854C8F,
 };
 
-JiminyTextChar* gUnk_09EDCF44[5] = {
+const JiminyTextChar* gUnk_09EDCF44[5] = {
     gUnkEu_08854CC4, gUnkEu_08854CD1, gUnkEu_08854CE6, gUnkEu_08854CF9,
     gUnkEu_08854CFB,
 };
 
-JiminyTextChar* gUnk_09EDCF44Fr[5] = {
+const JiminyTextChar* gUnk_09EDCF44Fr[5] = {
     gUnkEu_08854D0F, gUnkEu_08854D1E, gUnkEu_08854D34, gUnkEu_08854D3F,
     gUnkEu_08854D41,
 };
 
-JiminyTextChar* gUnk_09EDCF44De[6] = {
+const JiminyTextChar* gUnk_09EDCF44De[6] = {
     gUnkEu_08854D56, gUnkEu_08854D5F, gUnkEu_08854D6F, gUnkEu_08854D7E,
     gUnkEu_08854D89, gUnkEu_08854D8B,
 };
 
-JiminyTextChar* gUnk_09EDCF44It[5] = {
+const JiminyTextChar* gUnk_09EDCF44It[5] = {
     gUnkEu_08854DA1, gUnkEu_08854DAA, gUnkEu_08854DBC, gUnkEu_08854DC9,
     gUnkEu_08854DCB,
 };
 
-JiminyTextChar* gUnk_09EDCF44Es[6] = {
+const JiminyTextChar* gUnk_09EDCF44Es[6] = {
     gUnkEu_08854DDF, gUnkEu_08854DEE, gUnkEu_08854E02, gUnkEu_08854E19,
     gUnkEu_08854E1F, gUnkEu_08854E21,
 };
 
-JiminyTextChar* gUnk_09EDCFE0[5] = {
+const JiminyTextChar* gUnk_09EDCFE0[5] = {
     gUnkEu_08854E58, gUnkEu_08854E68, gUnkEu_08854E7D, gUnkEu_08854E8F,
     gUnkEu_08854E91,
 };
 
-JiminyTextChar* gUnk_09EDCFE0Fr[6] = {
+const JiminyTextChar* gUnk_09EDCFE0Fr[6] = {
     gUnkEu_08854EA5, gUnkEu_08854EB4, gUnkEu_08854EC9, gUnkEu_08854EDB,
     gUnkEu_08854EE6, gUnkEu_08854EE8,
 };
 
-JiminyTextChar* gUnk_09EDCFE0De[6] = {
+const JiminyTextChar* gUnk_09EDCFE0De[6] = {
     gUnkEu_08854EFD, gUnkEu_08854F0B, gUnkEu_08854F22, gUnkEu_08854F34,
     gUnkEu_08854F3E, gUnkEu_08854F40,
 };
 
-JiminyTextChar* gUnk_09EDCFE0It[5] = {
+const JiminyTextChar* gUnk_09EDCFE0It[5] = {
     gUnkEu_08854F56, gUnkEu_08854F63, gUnkEu_08854F7B, gUnkEu_08854F8F,
     gUnkEu_08854F91,
 };
 
-JiminyTextChar* gUnk_09EDCFE0Es[6] = {
+const JiminyTextChar* gUnk_09EDCFE0Es[6] = {
     gUnkEu_08854FA5, gUnkEu_08854FAE, gUnkEu_08854FC1, gUnkEu_08854FD7,
     gUnkEu_08854FE1, gUnkEu_08854FE3,
 };
 
-JiminyTextChar* gUnk_09EDD0D4[6] = {
+const JiminyTextChar* gUnk_09EDD0D4[6] = {
     gUnkEu_08855018, gUnkEu_08855028, gUnkEu_0885503E, gUnkEu_08855054,
     gUnkEu_0885505A, gUnkEu_0885505C,
 };
 
-JiminyTextChar* gUnk_09EDD0D4Fr[6] = {
+const JiminyTextChar* gUnk_09EDD0D4Fr[6] = {
     gUnkEu_08855071, gUnkEu_0885507F, gUnkEu_0885508E, gUnkEu_088550A3,
     gUnkEu_088550B4, gUnkEu_088550B6,
 };
 
-JiminyTextChar* gUnk_09EDD0D4De[7] = {
+const JiminyTextChar* gUnk_09EDD0D4De[7] = {
     gUnkEu_088550CC, gUnkEu_088550D7, gUnkEu_088550EA, gUnkEu_088550FF,
     gUnkEu_08855113, gUnkEu_08855127, gUnkEu_08855129,
 };
 
-JiminyTextChar* gUnk_09EDD0D4It[6] = {
+const JiminyTextChar* gUnk_09EDD0D4It[6] = {
     gUnkEu_0885513F, gUnkEu_0885514A, gUnkEu_0885515F, gUnkEu_08855177,
     gUnkEu_0885518E, gUnkEu_08855190,
 };
 
-JiminyTextChar* gUnk_09EDD0D4Es[6] = {
+const JiminyTextChar* gUnk_09EDD0D4Es[6] = {
     gUnkEu_088551A5, gUnkEu_088551B7, gUnkEu_088551CB, gUnkEu_088551E0,
     gUnkEu_088551EE, gUnkEu_088551F0,
 };
 
-JiminyTextChar* gUnk_09EDD0EC[5] = {
+const JiminyTextChar* gUnk_09EDD0EC[5] = {
     gUnkEu_08855228, gUnkEu_08855237, gUnkEu_08855249, gUnkEu_0885525C,
     gUnkEu_0885525E,
 };
 
-JiminyTextChar* gUnk_09EDD0ECFr[5] = {
+const JiminyTextChar* gUnk_09EDD0ECFr[5] = {
     gUnkEu_08855272, gUnkEu_08855283, gUnkEu_08855294, gUnkEu_088552A5,
     gUnkEu_088552A7,
 };
 
-JiminyTextChar* gUnk_09EDD0ECDe[6] = {
+const JiminyTextChar* gUnk_09EDD0ECDe[6] = {
     gUnkEu_088552BC, gUnkEu_088552C6, gUnkEu_088552D8, gUnkEu_088552EE,
     gUnkEu_088552FE, gUnkEu_08855300,
 };
 
-JiminyTextChar* gUnk_09EDD0ECIt[5] = {
+const JiminyTextChar* gUnk_09EDD0ECIt[5] = {
     gUnkEu_08855316, gUnkEu_08855324, gUnkEu_0885533B, gUnkEu_0885534D,
     gUnkEu_0885534F,
 };
 
-JiminyTextChar* gUnk_09EDD0ECEs[5] = {
+const JiminyTextChar* gUnk_09EDD0ECEs[5] = {
     gUnkEu_08855363, gUnkEu_0885536E, gUnkEu_08855380, gUnkEu_0885538F,
     gUnkEu_08855391,
 };
 
-JiminyTextChar* gUnk_09EDCEDC[5] = {
+const JiminyTextChar* gUnk_09EDCEDC[5] = {
     gUnkEu_088553C8, gUnkEu_088553D5, gUnkEu_088553E9, gUnkEu_088553F8,
     gUnkEu_088553FA,
 };
 
-JiminyTextChar* gUnk_09EDCEDCFr[5] = {
+const JiminyTextChar* gUnk_09EDCEDCFr[5] = {
     gUnkEu_0885540F, gUnkEu_0885541C, gUnkEu_08855430, gUnkEu_08855443,
     gUnkEu_08855445,
 };
 
-JiminyTextChar* gUnk_09EDCEDCDe[6] = {
+const JiminyTextChar* gUnk_09EDCEDCDe[6] = {
     gUnkEu_0885545B, gUnkEu_08855464, gUnkEu_08855479, gUnkEu_0885548F,
     gUnkEu_08855496, gUnkEu_08855498,
 };
 
-JiminyTextChar* gUnk_09EDCEDCIt[5] = {
+const JiminyTextChar* gUnk_09EDCEDCIt[5] = {
     gUnkEu_088554AE, gUnkEu_088554BB, gUnkEu_088554CC, gUnkEu_088554E0,
     gUnkEu_088554E2,
 };
 
-JiminyTextChar* gUnk_09EDCEDCEs[5] = {
+const JiminyTextChar* gUnk_09EDCEDCEs[5] = {
     gUnkEu_088554F7, gUnkEu_08855502, gUnkEu_08855517, gUnkEu_0885552E,
     gUnkEu_08855530,
 };
 
-JiminyTextChar* gUnk_09EDCF58[8] = {
+const JiminyTextChar* gUnk_09EDCF58[8] = {
     gUnkEu_08855568, gUnkEu_08855575, gUnkEu_0885558B, gUnkEu_088555A4,
     gUnkEu_088555B6, gUnkEu_088555CD, gUnkEu_088555DB, gUnkEu_088555DD,
 };
 
-JiminyTextChar* gUnk_09EDCF58Fr[8] = {
+const JiminyTextChar* gUnk_09EDCF58Fr[8] = {
     gUnkEu_088555F1, gUnkEu_088555FD, gUnkEu_08855613, gUnkEu_08855628,
     gUnkEu_0885563E, gUnkEu_08855655, gUnkEu_0885566B, gUnkEu_0885566D,
 };
 
-JiminyTextChar* gUnk_09EDCF58De[8] = {
+const JiminyTextChar* gUnk_09EDCF58De[8] = {
     gUnkEu_08855682, gUnkEu_08855694, gUnkEu_088556A9, gUnkEu_088556C1,
     gUnkEu_088556D3, gUnkEu_088556E9, gUnkEu_088556FE, gUnkEu_08855700,
 };
 
-JiminyTextChar* gUnk_09EDCF58It[8] = {
+const JiminyTextChar* gUnk_09EDCF58It[8] = {
     gUnkEu_08855716, gUnkEu_08855724, gUnkEu_08855736, gUnkEu_0885574B,
     gUnkEu_08855763, gUnkEu_0885577A, gUnkEu_0885578E, gUnkEu_08855790,
 };
 
-JiminyTextChar* gUnk_09EDCF58Es[8] = {
+const JiminyTextChar* gUnk_09EDCF58Es[8] = {
     gUnkEu_088557A4, gUnkEu_088557B0, gUnkEu_088557C5, gUnkEu_088557DD,
     gUnkEu_088557EE, gUnkEu_08855804, gUnkEu_0885581C, gUnkEu_0885581E,
 };
 
-JiminyTextChar* gUnk_09EDCF78[6] = {
+const JiminyTextChar* gUnk_09EDCF78[6] = {
     gUnkEu_08855854, gUnkEu_0885585B, gUnkEu_08855870, gUnkEu_08855883,
     gUnkEu_0885588E, gUnkEu_08855890,
 };
 
-JiminyTextChar* gUnk_09EDCF78Fr[5] = {
+const JiminyTextChar* gUnk_09EDCF78Fr[5] = {
     gUnkEu_088558A5, gUnkEu_088558AE, gUnkEu_088558C3, gUnkEu_088558D6,
     gUnkEu_088558D8,
 };
 
-JiminyTextChar* gUnk_09EDCF78De[7] = {
+const JiminyTextChar* gUnk_09EDCF78De[7] = {
     gUnkEu_088558EE, gUnkEu_088558F8, gUnkEu_08855909, gUnkEu_08855919,
     gUnkEu_0885592C, gUnkEu_08855941, gUnkEu_08855943,
 };
 
-JiminyTextChar* gUnk_09EDCF78It[6] = {
+const JiminyTextChar* gUnk_09EDCF78It[6] = {
     gUnkEu_08855959, gUnkEu_08855964, gUnkEu_0885597D, gUnkEu_08855994,
     gUnkEu_0885599C, gUnkEu_0885599E,
 };
 
-JiminyTextChar* gUnk_09EDCF78Es[7] = {
+const JiminyTextChar* gUnk_09EDCF78Es[7] = {
     gUnkEu_088559B3, gUnkEu_088559BA, gUnkEu_088559CD, gUnkEu_088559E0,
     gUnkEu_088559EE, gUnkEu_088559FB, gUnkEu_088559FD,
 };
 
-JiminyTextChar* gUnk_09EDCF90[4] = {
+const JiminyTextChar* gUnk_09EDCF90[4] = {
     gUnkEu_08855A34, gUnkEu_08855A45, gUnkEu_08855A5D, gUnkEu_08855A5F,
 };
 
-JiminyTextChar* gUnk_09EDCF90Fr[5] = {
+const JiminyTextChar* gUnk_09EDCF90Fr[5] = {
     gUnkEu_08855A74, gUnkEu_08855A84, gUnkEu_08855A99, gUnkEu_08855AA9,
     gUnkEu_08855AAB,
 };
 
-JiminyTextChar* gUnk_09EDCF90De[6] = {
+const JiminyTextChar* gUnk_09EDCF90De[6] = {
     gUnkEu_08855AC1, gUnkEu_08855AD4, gUnkEu_08855AEC, gUnkEu_08855B02,
     gUnkEu_08855B0B, gUnkEu_08855B0D,
 };
 
-JiminyTextChar* gUnk_09EDCF90It[5] = {
+const JiminyTextChar* gUnk_09EDCF90It[5] = {
     gUnkEu_08855B23, gUnkEu_08855B35, gUnkEu_08855B4C, gUnkEu_08855B63,
     gUnkEu_08855B65,
 };
 
-JiminyTextChar* gUnk_09EDCF90Es[6] = {
+const JiminyTextChar* gUnk_09EDCF90Es[6] = {
     gUnkEu_08855B7A, gUnkEu_08855B8A, gUnkEu_08855B9E, gUnkEu_08855BAC,
     gUnkEu_08855BB8, gUnkEu_08855BBA,
 };
 
-JiminyTextChar* gUnk_09EDCFA0[6] = {
+const JiminyTextChar* gUnk_09EDCFA0[6] = {
     gUnkEu_08855BF0, gUnkEu_08855BFF, gUnkEu_08855C16, gUnkEu_08855C2F,
     gUnkEu_08855C35, gUnkEu_08855C37,
 };
 
-JiminyTextChar* gUnk_09EDCFA0Fr[6] = {
+const JiminyTextChar* gUnk_09EDCFA0Fr[6] = {
     gUnkEu_08855C4B, gUnkEu_08855C56, gUnkEu_08855C6E, gUnkEu_08855C80,
     gUnkEu_08855C93, gUnkEu_08855C95,
 };
 
-JiminyTextChar* gUnk_09EDCFA0De[7] = {
+const JiminyTextChar* gUnk_09EDCFA0De[7] = {
     gUnkEu_08855CAA, gUnkEu_08855CBB, gUnkEu_08855CD0, gUnkEu_08855CE6,
     gUnkEu_08855CFC, gUnkEu_08855D09, gUnkEu_08855D0B,
 };
 
-JiminyTextChar* gUnk_09EDCFA0It[6] = {
+const JiminyTextChar* gUnk_09EDCFA0It[6] = {
     gUnkEu_08855D21, gUnkEu_08855D30, gUnkEu_08855D45, gUnkEu_08855D5B,
     gUnkEu_08855D6C, gUnkEu_08855D6E,
 };
 
-JiminyTextChar* gUnk_09EDCFA0Es[6] = {
+const JiminyTextChar* gUnk_09EDCFA0Es[6] = {
     gUnkEu_08855D82, gUnkEu_08855D90, gUnkEu_08855DA6, gUnkEu_08855DBC,
     gUnkEu_08855DCD, gUnkEu_08855DCF,
 };
 
-JiminyTextChar* gUnk_09EDCFD0[4] = {
+const JiminyTextChar* gUnk_09EDCFD0[4] = {
     gUnkEu_08855E04, gUnkEu_08855E10, gUnkEu_08855E28, gUnkEu_08855E2A,
 };
 
-JiminyTextChar* gUnk_09EDCFD0Fr[5] = {
+const JiminyTextChar* gUnk_09EDCFD0Fr[5] = {
     gUnkEu_08855E3F, gUnkEu_08855E4F, gUnkEu_08855E63, gUnkEu_08855E6F,
     gUnkEu_08855E71,
 };
 
-JiminyTextChar* gUnk_09EDCFD0De[5] = {
+const JiminyTextChar* gUnk_09EDCFD0De[5] = {
     gUnkEu_08855E87, gUnkEu_08855E9C, gUnkEu_08855EB2, gUnkEu_08855EBF,
     gUnkEu_08855EC1,
 };
 
-JiminyTextChar* gUnk_09EDCFD0It[5] = {
+const JiminyTextChar* gUnk_09EDCFD0It[5] = {
     gUnkEu_08855ED7, gUnkEu_08855EE6, gUnkEu_08855EF8, gUnkEu_08855F05,
     gUnkEu_08855F07,
 };
 
-JiminyTextChar* gUnk_09EDCFD0Es[5] = {
+const JiminyTextChar* gUnk_09EDCFD0Es[5] = {
     gUnkEu_08855F1C, gUnkEu_08855F2D, gUnkEu_08855F40, gUnkEu_08855F52,
     gUnkEu_08855F54,
 };
 
-JiminyTextChar* gUnk_09EDDDD0[7] = {
+const JiminyTextChar* gUnk_09EDDDD0[7] = {
     gUnkEu_08855F8C, gUnkEu_08855F94, gUnkEu_08855FA9, gUnkEu_08855FBE,
     gUnkEu_08855FD6, gUnkEu_08855FE8, gUnkEu_08855FEA,
 };
 
-JiminyTextChar* gUnk_09EDDDD0Fr[7] = {
+const JiminyTextChar* gUnk_09EDDDD0Fr[7] = {
     gUnkEu_08855FFE, gUnkEu_08856008, gUnkEu_0885601A, gUnkEu_08856032,
     gUnkEu_08856046, gUnkEu_0885605F, gUnkEu_08856061,
 };
 
-JiminyTextChar* gUnk_09EDDDD0De[8] = {
+const JiminyTextChar* gUnk_09EDDDD0De[8] = {
     gUnkEu_08856076, gUnkEu_08856081, gUnkEu_08856098, gUnkEu_088560AE,
     gUnkEu_088560C4, gUnkEu_088560D7, gUnkEu_088560ED, gUnkEu_088560EF,
 };
 
-JiminyTextChar* gUnk_09EDDDD0It[8] = {
+const JiminyTextChar* gUnk_09EDDDD0It[8] = {
     gUnkEu_08856105, gUnkEu_08856111, gUnkEu_08856126, gUnkEu_08856139,
     gUnkEu_08856150, gUnkEu_08856162, gUnkEu_08856177, gUnkEu_08856179,
 };
 
-JiminyTextChar* gUnk_09EDDDD0Es[8] = {
+const JiminyTextChar* gUnk_09EDDDD0Es[8] = {
     gUnkEu_0885618D, gUnkEu_08856197, gUnkEu_088561A9, gUnkEu_088561BA,
     gUnkEu_088561D1, gUnkEu_088561DF, gUnkEu_088561EC, gUnkEu_088561EE,
 };
 
-JiminyTextChar* gUnk_09EDCFF4[5] = {
+const JiminyTextChar* gUnk_09EDCFF4[5] = {
     gUnkEu_08856224, gUnkEu_08856232, gUnkEu_08856249, gUnkEu_08856259,
     gUnkEu_0885625B,
 };
 
-JiminyTextChar* gUnk_09EDCFF4Fr[5] = {
+const JiminyTextChar* gUnk_09EDCFF4Fr[5] = {
     gUnkEu_0885626F, gUnkEu_0885627D, gUnkEu_0885628E, gUnkEu_088562A1,
     gUnkEu_088562A3,
 };
 
-JiminyTextChar* gUnk_09EDCFF4De[5] = {
+const JiminyTextChar* gUnk_09EDCFF4De[5] = {
     gUnkEu_088562B8, gUnkEu_088562C5, gUnkEu_088562DB, gUnkEu_088562E7,
     gUnkEu_088562E9,
 };
 
-JiminyTextChar* gUnk_09EDCFF4It[5] = {
+const JiminyTextChar* gUnk_09EDCFF4It[5] = {
     gUnkEu_088562FF, gUnkEu_08856311, gUnkEu_0885632A, gUnkEu_08856344,
     gUnkEu_08856346,
 };
 
-JiminyTextChar* gUnk_09EDCFF4Es[5] = {
+const JiminyTextChar* gUnk_09EDCFF4Es[5] = {
     gUnkEu_0885635A, gUnkEu_08856365, gUnkEu_0885637B, gUnkEu_08856392,
     gUnkEu_08856394,
 };
 
-JiminyTextChar* gUnk_09EDD020[5] = {
+const JiminyTextChar* gUnk_09EDD020[5] = {
     gUnkEu_088563CC, gUnkEu_088563D4, gUnkEu_088563E5, gUnkEu_088563FF,
     gUnkEu_08856401,
 };
 
-JiminyTextChar* gUnk_09EDD020Fr[5] = {
+const JiminyTextChar* gUnk_09EDD020Fr[5] = {
     gUnkEu_08856416, gUnkEu_08856423, gUnkEu_08856439, gUnkEu_08856444,
     gUnkEu_08856446,
 };
 
-JiminyTextChar* gUnk_09EDD020De[8] = {
+const JiminyTextChar* gUnk_09EDD020De[8] = {
     gUnkEu_0885645C, gUnkEu_08856465, gUnkEu_08856475, gUnkEu_08856485,
     gUnkEu_08856498, gUnkEu_088564AA, gUnkEu_088564B2, gUnkEu_088564B4,
 };
 
-JiminyTextChar* gUnk_09EDD020It[6] = {
+const JiminyTextChar* gUnk_09EDD020It[6] = {
     gUnkEu_088564CA, gUnkEu_088564D3, gUnkEu_088564E6, gUnkEu_088564F9,
     gUnkEu_0885650F, gUnkEu_08856511,
 };
 
-JiminyTextChar* gUnk_09EDD020Es[6] = {
+const JiminyTextChar* gUnk_09EDD020Es[6] = {
     gUnkEu_08856526, gUnkEu_0885652F, gUnkEu_08856544, gUnkEu_08856559,
     gUnkEu_08856563, gUnkEu_08856565,
 };
 
-JiminyTextChar* gUnk_09EDD034[6] = {
+const JiminyTextChar* gUnk_09EDD034[6] = {
     gUnkEu_0885659C, gUnkEu_088565A5, gUnkEu_088565BA, gUnkEu_088565D1,
     gUnkEu_088565DC, gUnkEu_088565DE,
 };
 
-JiminyTextChar* gUnk_09EDD034Fr[6] = {
+const JiminyTextChar* gUnk_09EDD034Fr[6] = {
     gUnkEu_088565F2, gUnkEu_08856601, gUnkEu_08856615, gUnkEu_08856628,
     gUnkEu_08856637, gUnkEu_08856639,
 };
 
-JiminyTextChar* gUnk_09EDD034De[6] = {
+const JiminyTextChar* gUnk_09EDD034De[6] = {
     gUnkEu_0885664E, gUnkEu_08856657, gUnkEu_0885666C, gUnkEu_08856682,
     gUnkEu_0885668E, gUnkEu_08856690,
 };
 
-JiminyTextChar* gUnk_09EDD034It[6] = {
+const JiminyTextChar* gUnk_09EDD034It[6] = {
     gUnkEu_088566A6, gUnkEu_088566AF, gUnkEu_088566C9, gUnkEu_088566E2,
     gUnkEu_088566EB, gUnkEu_088566ED,
 };
 
-JiminyTextChar* gUnk_09EDD034Es[6] = {
+const JiminyTextChar* gUnk_09EDD034Es[6] = {
     gUnkEu_08856701, gUnkEu_0885670D, gUnkEu_08856721, gUnkEu_08856738,
     gUnkEu_08856749, gUnkEu_0885674B,
 };
 
-JiminyTextChar* gUnk_09EDD04C[5] = {
+const JiminyTextChar* gUnk_09EDD04C[5] = {
     gUnkEu_08856780, gUnkEu_0885678C, gUnkEu_088567A1, gUnkEu_088567B1,
     gUnkEu_088567B3,
 };
 
-JiminyTextChar* gUnk_09EDD04CFr[5] = {
+const JiminyTextChar* gUnk_09EDD04CFr[5] = {
     gUnkEu_088567C7, gUnkEu_088567D7, gUnkEu_088567EB, gUnkEu_08856801,
     gUnkEu_08856803,
 };
 
-JiminyTextChar* gUnk_09EDD04CDe[5] = {
+const JiminyTextChar* gUnk_09EDD04CDe[5] = {
     gUnkEu_08856818, gUnkEu_08856826, gUnkEu_0885683B, gUnkEu_08856847,
     gUnkEu_08856849,
 };
 
-JiminyTextChar* gUnk_09EDD04CIt[5] = {
+const JiminyTextChar* gUnk_09EDD04CIt[5] = {
     gUnkEu_0885685F, gUnkEu_0885686C, gUnkEu_08856885, gUnkEu_08856897,
     gUnkEu_08856899,
 };
 
-JiminyTextChar* gUnk_09EDD04CEs[5] = {
+const JiminyTextChar* gUnk_09EDD04CEs[5] = {
     gUnkEu_088568AD, gUnkEu_088568BA, gUnkEu_088568CF, gUnkEu_088568E6,
     gUnkEu_088568E8,
 };
 
-JiminyTextChar* gUnk_09EDD060[6] = {
+const JiminyTextChar* gUnk_09EDD060[6] = {
     gUnkEu_08856920, gUnkEu_0885692E, gUnkEu_08856940, gUnkEu_08856958,
     gUnkEu_0885695D, gUnkEu_0885695F,
 };
 
-JiminyTextChar* gUnk_09EDD060Fr[6] = {
+const JiminyTextChar* gUnk_09EDD060Fr[6] = {
     gUnkEu_08856974, gUnkEu_08856982, gUnkEu_08856996, gUnkEu_088569AB,
     gUnkEu_088569BC, gUnkEu_088569BE,
 };
 
-JiminyTextChar* gUnk_09EDD060De[6] = {
+const JiminyTextChar* gUnk_09EDD060De[6] = {
     gUnkEu_088569D4, gUnkEu_088569E1, gUnkEu_088569F8, gUnkEu_08856A0A,
     gUnkEu_08856A1C, gUnkEu_08856A1E,
 };
 
-JiminyTextChar* gUnk_09EDD060It[6] = {
+const JiminyTextChar* gUnk_09EDD060It[6] = {
     gUnkEu_08856A34, gUnkEu_08856A46, gUnkEu_08856A5B, gUnkEu_08856A71,
     gUnkEu_08856A80, gUnkEu_08856A82,
 };
 
-JiminyTextChar* gUnk_09EDD060Es[6] = {
+const JiminyTextChar* gUnk_09EDD060Es[6] = {
     gUnkEu_08856A97, gUnkEu_08856AAA, gUnkEu_08856AC0, gUnkEu_08856AD3,
     gUnkEu_08856AE4, gUnkEu_08856AE6,
 };
 
-JiminyTextChar* gUnk_09EDD078[5] = {
+const JiminyTextChar* gUnk_09EDD078[5] = {
     gUnkEu_08856B1C, gUnkEu_08856B28, gUnkEu_08856B40, gUnkEu_08856B53,
     gUnkEu_08856B55,
 };
 
-JiminyTextChar* gUnk_09EDD078Fr[5] = {
+const JiminyTextChar* gUnk_09EDD078Fr[5] = {
     gUnkEu_08856B6A, gUnkEu_08856B78, gUnkEu_08856B8D, gUnkEu_08856B9F,
     gUnkEu_08856BA1,
 };
 
-JiminyTextChar* gUnk_09EDD078De[5] = {
+const JiminyTextChar* gUnk_09EDD078De[5] = {
     gUnkEu_08856BB7, gUnkEu_08856BC3, gUnkEu_08856BDC, gUnkEu_08856BF2,
     gUnkEu_08856BF4,
 };
 
-JiminyTextChar* gUnk_09EDD078It[5] = {
+const JiminyTextChar* gUnk_09EDD078It[5] = {
     gUnkEu_08856C0A, gUnkEu_08856C1A, gUnkEu_08856C2C, gUnkEu_08856C41,
     gUnkEu_08856C43,
 };
 
-JiminyTextChar* gUnk_09EDD078Es[6] = {
+const JiminyTextChar* gUnk_09EDD078Es[6] = {
     gUnkEu_08856C58, gUnkEu_08856C69, gUnkEu_08856C7E, gUnkEu_08856C91,
     gUnkEu_08856C9B, gUnkEu_08856C9D,
 };
 
-JiminyTextChar* gUnk_09EDDDEC[6] = {
+const JiminyTextChar* gUnk_09EDDDEC[6] = {
     gUnkEu_08856CD4, gUnkEu_08856CE2, gUnkEu_08856CF1, gUnkEu_08856D09,
     gUnkEu_08856D12, gUnkEu_08856D14,
 };
 
-JiminyTextChar* gUnk_09EDDDECFr[5] = {
+const JiminyTextChar* gUnk_09EDDDECFr[5] = {
     gUnkEu_08856D29, gUnkEu_08856D39, gUnkEu_08856D49, gUnkEu_08856D60,
     gUnkEu_08856D62,
 };
 
-JiminyTextChar* gUnk_09EDDDECDe[7] = {
+const JiminyTextChar* gUnk_09EDDDECDe[7] = {
     gUnkEu_08856D78, gUnkEu_08856D83, gUnkEu_08856D9A, gUnkEu_08856DAE,
     gUnkEu_08856DC2, gUnkEu_08856DD5, gUnkEu_08856DD7,
 };
 
-JiminyTextChar* gUnk_09EDDDECIt[6] = {
+const JiminyTextChar* gUnk_09EDDDECIt[6] = {
     gUnkEu_08856DED, gUnkEu_08856DFB, gUnkEu_08856E13, gUnkEu_08856E2A,
     gUnkEu_08856E37, gUnkEu_08856E39,
 };
 
-JiminyTextChar* gUnk_09EDDDECEs[6] = {
+const JiminyTextChar* gUnk_09EDDDECEs[6] = {
     gUnkEu_08856E4E, gUnkEu_08856E5D, gUnkEu_08856E71, gUnkEu_08856E84,
     gUnkEu_08856E99, gUnkEu_08856E9B,
 };
 
-JiminyTextChar* gUnk_09EDD0A8[6] = {
+const JiminyTextChar* gUnk_09EDD0A8[6] = {
     gUnkEu_08856ED4, gUnkEu_08856EE2, gUnkEu_08856EF6, gUnkEu_08856F0C,
     gUnkEu_08856F13, gUnkEu_08856F15,
 };
 
-JiminyTextChar* gUnk_09EDD0A8Fr[6] = {
+const JiminyTextChar* gUnk_09EDD0A8Fr[6] = {
     gUnkEu_08856F29, gUnkEu_08856F39, gUnkEu_08856F4C, gUnkEu_08856F5E,
     gUnkEu_08856F76, gUnkEu_08856F78,
 };
 
-JiminyTextChar* gUnk_09EDD0A8De[8] = {
+const JiminyTextChar* gUnk_09EDD0A8De[8] = {
     gUnkEu_08856F8D, gUnkEu_08856F94, gUnkEu_08856FA7, gUnkEu_08856FBF,
     gUnkEu_08856FD4, gUnkEu_08856FE5, gUnkEu_08856FF0, gUnkEu_08856FF2,
 };
 
-JiminyTextChar* gUnk_09EDD0A8It[7] = {
+const JiminyTextChar* gUnk_09EDD0A8It[7] = {
     gUnkEu_08857008, gUnkEu_08857012, gUnkEu_08857028, gUnkEu_0885703E,
     gUnkEu_08857053, gUnkEu_0885705C, gUnkEu_0885705E,
 };
 
-JiminyTextChar* gUnk_09EDD0A8Es[7] = {
+const JiminyTextChar* gUnk_09EDD0A8Es[7] = {
     gUnkEu_08857072, gUnkEu_0885707F, gUnkEu_08857091, gUnkEu_088570A3,
     gUnkEu_088570B8, gUnkEu_088570C1, gUnkEu_088570C3,
 };
 
-JiminyTextChar* gUnk_09EDD0C0[5] = {
+const JiminyTextChar* gUnk_09EDD0C0[5] = {
     gUnkEu_088570F8, gUnkEu_088570FE, gUnkEu_08857113, gUnkEu_08857123,
     gUnkEu_08857125,
 };
 
-JiminyTextChar* gUnk_09EDD0C0Fr[5] = {
+const JiminyTextChar* gUnk_09EDD0C0Fr[5] = {
     gUnkEu_08857139, gUnkEu_08857143, gUnkEu_08857156, gUnkEu_0885715E,
     gUnkEu_08857160,
 };
 
-JiminyTextChar* gUnk_09EDD0C0De[5] = {
+const JiminyTextChar* gUnk_09EDD0C0De[5] = {
     gUnkEu_08857175, gUnkEu_0885717A, gUnkEu_0885718F, gUnkEu_088571A2,
     gUnkEu_088571A4,
 };
 
-JiminyTextChar* gUnk_09EDD0C0It[5] = {
+const JiminyTextChar* gUnk_09EDD0C0It[5] = {
     gUnkEu_088571BA, gUnkEu_088571C0, gUnkEu_088571D3, gUnkEu_088571E1,
     gUnkEu_088571E3,
 };
 
-JiminyTextChar* gUnk_09EDD0C0Es[6] = {
+const JiminyTextChar* gUnk_09EDD0C0Es[6] = {
     gUnkEu_088571F7, gUnkEu_088571FD, gUnkEu_0885720E, gUnkEu_0885721C,
     gUnkEu_0885722A, gUnkEu_0885722C,
 };
 
-JiminyTextChar* gUnk_09EDCEF0[6] = {
+const JiminyTextChar* gUnk_09EDCEF0[6] = {
     gUnkEu_08857264, gUnkEu_0885726C, gUnkEu_08857285, gUnkEu_0885729C,
     gUnkEu_088572AC, gUnkEu_088572AE,
 };
 
-JiminyTextChar* gUnk_09EDCEF0Fr[6] = {
+const JiminyTextChar* gUnk_09EDCEF0Fr[6] = {
     gUnkEu_088572C2, gUnkEu_088572CB, gUnkEu_088572DF, gUnkEu_088572F3,
     gUnkEu_08857309, gUnkEu_0885730B,
 };
 
-JiminyTextChar* gUnk_09EDCEF0De[6] = {
+const JiminyTextChar* gUnk_09EDCEF0De[6] = {
     gUnkEu_08857320, gUnkEu_0885732B, gUnkEu_08857343, gUnkEu_0885735A,
     gUnkEu_08857369, gUnkEu_0885736B,
 };
 
-JiminyTextChar* gUnk_09EDCEF0It[6] = {
+const JiminyTextChar* gUnk_09EDCEF0It[6] = {
     gUnkEu_08857381, gUnkEu_0885738F, gUnkEu_088573A6, gUnkEu_088573BC,
     gUnkEu_088573D1, gUnkEu_088573D3,
 };
 
-JiminyTextChar* gUnk_09EDCEF0Es[7] = {
+const JiminyTextChar* gUnk_09EDCEF0Es[7] = {
     gUnkEu_088573E7, gUnkEu_088573F1, gUnkEu_08857406, gUnkEu_0885741A,
     gUnkEu_08857430, gUnkEu_0885743A, gUnkEu_0885743C,
 };
 
-JiminyTextChar* gUnk_09EDCFB8[6] = {
+const JiminyTextChar* gUnk_09EDCFB8[6] = {
     gUnkEu_08857474, gUnkEu_08857482, gUnkEu_08857497, gUnkEu_088574AD,
     gUnkEu_088574B5, gUnkEu_088574B7,
 };
 
-JiminyTextChar* gUnk_09EDCFB8Fr[6] = {
+const JiminyTextChar* gUnk_09EDCFB8Fr[6] = {
     gUnkEu_088574CC, gUnkEu_088574D7, gUnkEu_088574EA, gUnkEu_08857500,
     gUnkEu_0885750E, gUnkEu_08857510,
 };
 
-JiminyTextChar* gUnk_09EDCFB8De[6] = {
+const JiminyTextChar* gUnk_09EDCFB8De[6] = {
     gUnkEu_08857526, gUnkEu_08857535, gUnkEu_08857549, gUnkEu_0885755D,
     gUnkEu_08857572, gUnkEu_08857574,
 };
 
-JiminyTextChar* gUnk_09EDCFB8It[6] = {
+const JiminyTextChar* gUnk_09EDCFB8It[6] = {
     gUnkEu_0885758A, gUnkEu_08857598, gUnkEu_088575B0, gUnkEu_088575C8,
     gUnkEu_088575D5, gUnkEu_088575D7,
 };
 
-JiminyTextChar* gUnk_09EDCFB8Es[6] = {
+const JiminyTextChar* gUnk_09EDCFB8Es[6] = {
     gUnkEu_088575EC, gUnkEu_088575FE, gUnkEu_08857611, gUnkEu_08857628,
     gUnkEu_08857638, gUnkEu_0885763A,
 };
 
-JiminyTextChar* gUnk_09EDD008[6] = {
+const JiminyTextChar* gUnk_09EDD008[6] = {
     gUnkEu_08857670, gUnkEu_0885767E, gUnkEu_08857693, gUnkEu_088576A7,
     gUnkEu_088576AC, gUnkEu_088576AE,
 };
 
-JiminyTextChar* gUnk_09EDD008Fr[6] = {
+const JiminyTextChar* gUnk_09EDD008Fr[6] = {
     gUnkEu_088576C2, gUnkEu_088576D2, gUnkEu_088576E7, gUnkEu_088576FC,
     gUnkEu_08857707, gUnkEu_08857709,
 };
 
-JiminyTextChar* gUnk_09EDD008De[7] = {
+const JiminyTextChar* gUnk_09EDD008De[7] = {
     gUnkEu_0885771E, gUnkEu_08857730, gUnkEu_08857746, gUnkEu_08857758,
     gUnkEu_08857769, gUnkEu_0885777C, gUnkEu_0885777E,
 };
 
-JiminyTextChar* gUnk_09EDD008It[6] = {
+const JiminyTextChar* gUnk_09EDD008It[6] = {
     gUnkEu_08857794, gUnkEu_088577A3, gUnkEu_088577BC, gUnkEu_088577CC,
     gUnkEu_088577D7, gUnkEu_088577D9,
 };
 
-JiminyTextChar* gUnk_09EDD008Es[6] = {
+const JiminyTextChar* gUnk_09EDD008Es[6] = {
     gUnkEu_088577ED, gUnkEu_088577FC, gUnkEu_0885780F, gUnkEu_0885781F,
     gUnkEu_08857831, gUnkEu_08857833,
 };
 
-JiminyTextChar* gUnk_09EDD08C[7] = {
+const JiminyTextChar* gUnk_09EDD08C[7] = {
     gUnkEu_08857868, gUnkEu_08857872, gUnkEu_08857887, gUnkEu_0885789F,
     gUnkEu_088578B7, gUnkEu_088578C9, gUnkEu_088578CB,
 };
 
-JiminyTextChar* gUnk_09EDD08CFr[8] = {
+const JiminyTextChar* gUnk_09EDD08CFr[8] = {
     gUnkEu_088578DF, gUnkEu_088578EA, gUnkEu_088578FE, gUnkEu_08857914,
     gUnkEu_0885792C, gUnkEu_08857941, gUnkEu_0885794D, gUnkEu_0885794F,
 };
 
-JiminyTextChar* gUnk_09EDD08CDe[8] = {
+const JiminyTextChar* gUnk_09EDD08CDe[8] = {
     gUnkEu_08857964, gUnkEu_0885796C, gUnkEu_08857983, gUnkEu_0885799B,
     gUnkEu_088579B0, gUnkEu_088579CA, gUnkEu_088579D2, gUnkEu_088579D4,
 };
 
-JiminyTextChar* gUnk_09EDD08CIt[7] = {
+const JiminyTextChar* gUnk_09EDD08CIt[7] = {
     gUnkEu_088579EA, gUnkEu_088579F2, gUnkEu_08857A0C, gUnkEu_08857A21,
     gUnkEu_08857A37, gUnkEu_08857A48, gUnkEu_08857A4A,
 };
 
-JiminyTextChar* gUnk_09EDD08CEs[7] = {
+const JiminyTextChar* gUnk_09EDD08CEs[7] = {
     gUnkEu_08857A5E, gUnkEu_08857A67, gUnkEu_08857A79, gUnkEu_08857A8F,
     gUnkEu_08857AA4, gUnkEu_08857ABB, gUnkEu_08857ABD,
 };
 
-JiminyTextChar* gUnk_09EDDE04[5] = {
+const JiminyTextChar* gUnk_09EDDE04[5] = {
     gUnkEu_08857AF4, gUnkEu_08857B03, gUnkEu_08857B17, gUnkEu_08857B27,
     gUnkEu_08857B29,
 };
 
-JiminyTextChar* gUnk_09EDDE04Fr[5] = {
+const JiminyTextChar* gUnk_09EDDE04Fr[5] = {
     gUnkEu_08857B3D, gUnkEu_08857B4D, gUnkEu_08857B60, gUnkEu_08857B77,
     gUnkEu_08857B79,
 };
 
-JiminyTextChar* gUnk_09EDDE04De[5] = {
+const JiminyTextChar* gUnk_09EDDE04De[5] = {
     gUnkEu_08857B8E, gUnkEu_08857B9E, gUnkEu_08857BB5, gUnkEu_08857BC5,
     gUnkEu_08857BC7,
 };
 
-JiminyTextChar* gUnk_09EDDE04It[5] = {
+const JiminyTextChar* gUnk_09EDDE04It[5] = {
     gUnkEu_08857BDD, gUnkEu_08857BF0, gUnkEu_08857C06, gUnkEu_08857C19,
     gUnkEu_08857C1B,
 };
 
-JiminyTextChar* gUnk_09EDDE04Es[5] = {
+const JiminyTextChar* gUnk_09EDDE04Es[5] = {
     gUnkEu_08857C2F, gUnkEu_08857C3C, gUnkEu_08857C50, gUnkEu_08857C5D,
     gUnkEu_08857C5F,
 };
 
-JiminyTextChar* gUnk_09EDD118[6] = {
+const JiminyTextChar* gUnk_09EDD118[6] = {
     gUnkEu_08857C94, gUnkEu_08857CA3, gUnkEu_08857CBA, gUnkEu_08857CCD,
     gUnkEu_08857CD4, gUnkEu_08857CD6,
 };
 
-JiminyTextChar* gUnk_09EDD118Fr[6] = {
+const JiminyTextChar* gUnk_09EDD118Fr[6] = {
     gUnkEu_08857CEA, gUnkEu_08857CFA, gUnkEu_08857D0D, gUnkEu_08857D22,
     gUnkEu_08857D39, gUnkEu_08857D3B,
 };
 
-JiminyTextChar* gUnk_09EDD118De[8] = {
+const JiminyTextChar* gUnk_09EDD118De[8] = {
     gUnkEu_08857D50, gUnkEu_08857D5C, gUnkEu_08857D6F, gUnkEu_08857D85,
     gUnkEu_08857D95, gUnkEu_08857DA8, gUnkEu_08857DB8, gUnkEu_08857DBA,
 };
 
-JiminyTextChar* gUnk_09EDD118It[7] = {
+const JiminyTextChar* gUnk_09EDD118It[7] = {
     gUnkEu_08857DD0, gUnkEu_08857DE0, gUnkEu_08857DF6, gUnkEu_08857E08,
     gUnkEu_08857E1A, gUnkEu_08857E2A, gUnkEu_08857E2C,
 };
 
-JiminyTextChar* gUnk_09EDD118Es[6] = {
+const JiminyTextChar* gUnk_09EDD118Es[6] = {
     gUnkEu_08857E40, gUnkEu_08857E4A, gUnkEu_08857E62, gUnkEu_08857E79,
     gUnkEu_08857E8C, gUnkEu_08857E8E,
 };
 
-JiminyTextChar* gUnk_09EDD100[6] = {
+const JiminyTextChar* gUnk_09EDD100[6] = {
     gUnkEu_08857EC4, gUnkEu_08857ED2, gUnkEu_08857EE4, gUnkEu_08857EFC,
     gUnkEu_08857F05, gUnkEu_08857F07,
 };
 
-JiminyTextChar* gUnk_09EDD100Fr[6] = {
+const JiminyTextChar* gUnk_09EDD100Fr[6] = {
     gUnkEu_08857F1B, gUnkEu_08857F2A, gUnkEu_08857F3E, gUnkEu_08857F53,
     gUnkEu_08857F63, gUnkEu_08857F65,
 };
 
-JiminyTextChar* gUnk_09EDD100De[6] = {
+const JiminyTextChar* gUnk_09EDD100De[6] = {
     gUnkEu_08857F7A, gUnkEu_08857F8A, gUnkEu_08857FA1, gUnkEu_08857FB3,
     gUnkEu_08857FC5, gUnkEu_08857FC7,
 };
 
-JiminyTextChar* gUnk_09EDD100It[6] = {
+const JiminyTextChar* gUnk_09EDD100It[6] = {
     gUnkEu_08857FDD, gUnkEu_08857FEC, gUnkEu_08858001, gUnkEu_08858017,
     gUnkEu_08858029, gUnkEu_0885802B,
 };
 
-JiminyTextChar* gUnk_09EDD100Es[6] = {
+const JiminyTextChar* gUnk_09EDD100Es[6] = {
     gUnkEu_0885803F, gUnkEu_08858052, gUnkEu_08858068, gUnkEu_0885807F,
     gUnkEu_08858096, gUnkEu_08858098,
 };
 
-JiminyTextChar* gUnk_09EDD130[5] = {
+const JiminyTextChar* gUnk_09EDD130[5] = {
     gUnkEu_088580D0, gUnkEu_088580DE, gUnkEu_088580F2, gUnkEu_08858109,
     gUnkEu_0885810B,
 };
 
-JiminyTextChar* gUnk_09EDD130Fr[5] = {
+const JiminyTextChar* gUnk_09EDD130Fr[5] = {
     gUnkEu_08858121, gUnkEu_0885812F, gUnkEu_08858143, gUnkEu_0885815B,
     gUnkEu_0885815D,
 };
 
-JiminyTextChar* gUnk_09EDD130De[6] = {
+const JiminyTextChar* gUnk_09EDD130De[6] = {
     gUnkEu_08858171, gUnkEu_0885817F, gUnkEu_08858194, gUnkEu_088581A8,
     gUnkEu_088581B6, gUnkEu_088581B8,
 };
 
-JiminyTextChar* gUnk_09EDD130It[6] = {
+const JiminyTextChar* gUnk_09EDD130It[6] = {
     gUnkEu_088581CB, gUnkEu_088581D9, gUnkEu_088581EF, gUnkEu_08858206,
     gUnkEu_08858211, gUnkEu_08858213,
 };
 
-JiminyTextChar* gUnk_09EDD130Es[6] = {
+const JiminyTextChar* gUnk_09EDD130Es[6] = {
     gUnkEu_08858228, gUnkEu_08858238, gUnkEu_0885824C, gUnkEu_08858261,
     gUnkEu_0885826C, gUnkEu_0885826E,
 };
 
-JiminyTextChar* gUnk_09EDDCA8[5] = {
+const JiminyTextChar* gUnk_09EDDCA8[5] = {
     gUnkEu_088582A4, gUnkEu_088582B3, gUnkEu_088582C6, gUnkEu_088582DD,
     gUnkEu_088582DF,
 };
 
-JiminyTextChar* gUnk_09EDDCA8Fr[5] = {
+const JiminyTextChar* gUnk_09EDDCA8Fr[5] = {
     gUnkEu_088582F5, gUnkEu_08858304, gUnkEu_0885831B, gUnkEu_08858332,
     gUnkEu_08858334,
 };
 
-JiminyTextChar* gUnk_09EDDCA8De[5] = {
+const JiminyTextChar* gUnk_09EDDCA8De[5] = {
     gUnkEu_08858348, gUnkEu_08858357, gUnkEu_0885836E, gUnkEu_08858384,
     gUnkEu_08858386,
 };
 
-JiminyTextChar* gUnk_09EDDCA8It[5] = {
+const JiminyTextChar* gUnk_09EDDCA8It[5] = {
     gUnkEu_08858399, gUnkEu_088583AB, gUnkEu_088583BF, gUnkEu_088583D6,
     gUnkEu_088583D8,
 };
 
-JiminyTextChar* gUnk_09EDDCA8Es[7] = {
+const JiminyTextChar* gUnk_09EDDCA8Es[7] = {
     gUnkEu_088583ED, gUnkEu_088583FC, gUnkEu_0885840A, gUnkEu_08858420,
     gUnkEu_08858431, gUnkEu_08858439, gUnkEu_0885843B,
 };
 
-JiminyTextChar* gUnk_09EDD144[9] = {
+const JiminyTextChar* gUnk_09EDD144[9] = {
     gUnkEu_08858474, gUnkEu_0885847E, gUnkEu_08858491, gUnkEu_088584A7,
     gUnkEu_088584BD, gUnkEu_088584CF, gUnkEu_088584D1, gUnkEu_088584E7,
     gUnkEu_088584FB,
 };
 
-JiminyTextChar* gUnk_09EDD144Fr[8] = {
+const JiminyTextChar* gUnk_09EDD144Fr[8] = {
     gUnkEu_0885850C, gUnkEu_08858514, gUnkEu_08858528, gUnkEu_0885853A,
     gUnkEu_08858552, gUnkEu_08858554, gUnkEu_08858568, gUnkEu_0885857B,
 };
 
-JiminyTextChar* gUnk_09EDD144De[12] = {
+const JiminyTextChar* gUnk_09EDD144De[12] = {
     gUnkEu_08858592, gUnkEu_0885859D, gUnkEu_088585AF, gUnkEu_088585C2,
     gUnkEu_088585D2, gUnkEu_088585E3, gUnkEu_088585F3, gUnkEu_08858604,
     gUnkEu_08858611, gUnkEu_08858613, gUnkEu_08858626, gUnkEu_0885863E,
 };
 
-JiminyTextChar* gUnk_09EDD144It[11] = {
+const JiminyTextChar* gUnk_09EDD144It[11] = {
     gUnkEu_08858652, gUnkEu_0885865A, gUnkEu_0885866C, gUnkEu_0885867B,
     gUnkEu_0885868E, gUnkEu_088586A5, gUnkEu_088586B1, gUnkEu_088586B3,
     gUnkEu_088586C8, gUnkEu_088586DD, gUnkEu_088586F5,
 };
 
-JiminyTextChar* gUnk_09EDD144Es[10] = {
+const JiminyTextChar* gUnk_09EDD144Es[10] = {
     gUnkEu_0885870D, gUnkEu_08858716, gUnkEu_0885872A, gUnkEu_0885873E,
     gUnkEu_08858751, gUnkEu_08858767, gUnkEu_08858771, gUnkEu_08858773,
     gUnkEu_08858789, gUnkEu_0885879B,
 };
 
-JiminyTextChar* gUnk_09EDDC70[8] = {
+const JiminyTextChar* gUnk_09EDDC70[8] = {
     gUnkEu_088587D0, gUnkEu_088587DE, gUnkEu_088587F3, gUnkEu_0885880B,
     gUnkEu_08858822, gUnkEu_08858834, gUnkEu_08858841, gUnkEu_08858843,
 };
 
-JiminyTextChar* gUnk_09EDDC70Fr[8] = {
+const JiminyTextChar* gUnk_09EDDC70Fr[8] = {
     gUnkEu_08858858, gUnkEu_08858867, gUnkEu_0885887B, gUnkEu_08858894,
     gUnkEu_088588A8, gUnkEu_088588C0, gUnkEu_088588D4, gUnkEu_088588D6,
 };
 
-JiminyTextChar* gUnk_09EDDC70De[10] = {
+const JiminyTextChar* gUnk_09EDDC70De[10] = {
     gUnkEu_088588E7, gUnkEu_088588F5, gUnkEu_08858908, gUnkEu_0885891A,
     gUnkEu_0885892A, gUnkEu_0885893C, gUnkEu_08858949, gUnkEu_08858956,
     gUnkEu_08858967, gUnkEu_08858969,
 };
 
-JiminyTextChar* gUnk_09EDDC70It[8] = {
+const JiminyTextChar* gUnk_09EDDC70It[8] = {
     gUnkEu_08858980, gUnkEu_0885898C, gUnkEu_088589A3, gUnkEu_088589BB,
     gUnkEu_088589D1, gUnkEu_088589E6, gUnkEu_088589F0, gUnkEu_088589F2,
 };
 
-JiminyTextChar* gUnk_09EDDC70Es[8] = {
+const JiminyTextChar* gUnk_09EDDC70Es[8] = {
     gUnkEu_08858A09, gUnkEu_08858A17, gUnkEu_08858A28, gUnkEu_08858A3D,
     gUnkEu_08858A55, gUnkEu_08858A6A, gUnkEu_08858A79, gUnkEu_08858A7B,
 };
 
-JiminyTextChar* gUnk_09EDDC90[6] = {
+const JiminyTextChar* gUnk_09EDDC90[6] = {
     gUnkEu_08858AAC, gUnkEu_08858ABC, gUnkEu_08858ACE, gUnkEu_08858AE4,
     gUnkEu_08858AED, gUnkEu_08858AEF,
 };
 
-JiminyTextChar* gUnk_09EDDC90Fr[6] = {
+const JiminyTextChar* gUnk_09EDDC90Fr[6] = {
     gUnkEu_08858B05, gUnkEu_08858B15, gUnkEu_08858B2B, gUnkEu_08858B41,
     gUnkEu_08858B52, gUnkEu_08858B54,
 };
 
-JiminyTextChar* gUnk_09EDDC90De[7] = {
+const JiminyTextChar* gUnk_09EDDC90De[7] = {
     gUnkEu_08858B68, gUnkEu_08858B79, gUnkEu_08858B8A, gUnkEu_08858B9D,
     gUnkEu_08858BAE, gUnkEu_08858BB6, gUnkEu_08858BB8,
 };
 
-JiminyTextChar* gUnk_09EDDC90It[6] = {
+const JiminyTextChar* gUnk_09EDDC90It[6] = {
     gUnkEu_08858BCB, gUnkEu_08858BDD, gUnkEu_08858BF2, gUnkEu_08858C08,
     gUnkEu_08858C19, gUnkEu_08858C1B,
 };
 
-JiminyTextChar* gUnk_09EDDC90Es[6] = {
+const JiminyTextChar* gUnk_09EDDC90Es[6] = {
     gUnkEu_08858C30, gUnkEu_08858C3B, gUnkEu_08858C51, gUnkEu_08858C66,
     gUnkEu_08858C77, gUnkEu_08858C79,
 };
 
-JiminyTextChar* gUnk_09EDD168[7] = {
+const JiminyTextChar* gUnk_09EDD168[7] = {
     gUnkEu_08858CB0, gUnkEu_08858CB8, gUnkEu_08858CCE, gUnkEu_08858CE5,
     gUnkEu_08858CFA, gUnkEu_08858D0E, gUnkEu_08858D10,
 };
 
-JiminyTextChar* gUnk_09EDD168Fr[8] = {
+const JiminyTextChar* gUnk_09EDD168Fr[8] = {
     gUnkEu_08858D28, gUnkEu_08858D33, gUnkEu_08858D48, gUnkEu_08858D5A,
     gUnkEu_08858D6E, gUnkEu_08858D85, gUnkEu_08858D90, gUnkEu_08858D92,
 };
 
-JiminyTextChar* gUnk_09EDD168De[10] = {
+const JiminyTextChar* gUnk_09EDD168De[10] = {
     gUnkEu_08858DA8, gUnkEu_08858DB1, gUnkEu_08858DC6, gUnkEu_08858DD4,
     gUnkEu_08858DDF, gUnkEu_08858DF3, gUnkEu_08858E06, gUnkEu_08858E15,
     gUnkEu_08858E17, gUnkEu_08858E2A,
 };
 
-JiminyTextChar* gUnk_09EDD168It[7] = {
+const JiminyTextChar* gUnk_09EDD168It[7] = {
     gUnkEu_08858E3E, gUnkEu_08858E48, gUnkEu_08858E5F, gUnkEu_08858E76,
     gUnkEu_08858E8D, gUnkEu_08858EA3, gUnkEu_08858EA5,
 };
 
-JiminyTextChar* gUnk_09EDD168Es[8] = {
+const JiminyTextChar* gUnk_09EDD168Es[8] = {
     gUnkEu_08858EBD, gUnkEu_08858EC6, gUnkEu_08858EDC, gUnkEu_08858EEF,
     gUnkEu_08858F01, gUnkEu_08858F13, gUnkEu_08858F21, gUnkEu_08858F23,
 };
 
-JiminyTextChar* gUnk_09EDDC24[6] = {
+const JiminyTextChar* gUnk_09EDDC24[6] = {
     gUnkEu_08858F58, gUnkEu_08858F60, gUnkEu_08858F76, gUnkEu_08858F8D,
     gUnkEu_08858F97, gUnkEu_08858F99,
 };
 
-JiminyTextChar* gUnk_09EDDC24Fr[6] = {
+const JiminyTextChar* gUnk_09EDDC24Fr[6] = {
     gUnkEu_08858FAC, gUnkEu_08858FBB, gUnkEu_08858FD2, gUnkEu_08858FE9,
     gUnkEu_08858FFF, gUnkEu_08859001,
 };
 
-JiminyTextChar* gUnk_09EDDC24De[7] = {
+const JiminyTextChar* gUnk_09EDDC24De[7] = {
     gUnkEu_08859019, gUnkEu_08859027, gUnkEu_0885903B, gUnkEu_08859053,
     gUnkEu_0885906A, gUnkEu_08859084, gUnkEu_08859086,
 };
 
-JiminyTextChar* gUnk_09EDDC24It[8] = {
+const JiminyTextChar* gUnk_09EDDC24It[8] = {
     gUnkEu_0885909C, gUnkEu_088590A5, gUnkEu_088590B8, gUnkEu_088590CD,
     gUnkEu_088590DF, gUnkEu_088590EE, gUnkEu_088590FB, gUnkEu_088590FD,
 };
 
-JiminyTextChar* gUnk_09EDDC24Es[7] = {
+const JiminyTextChar* gUnk_09EDDC24Es[7] = {
     gUnkEu_0885910D, gUnkEu_08859119, gUnkEu_08859127, gUnkEu_08859135,
     gUnkEu_0885914D, gUnkEu_08859164, gUnkEu_08859166,
 };
 
-JiminyTextChar* gUnk_09EDDC3C[6] = {
+const JiminyTextChar* gUnk_09EDDC3C[6] = {
     gUnkEu_0885919C, gUnkEu_088591A5, gUnkEu_088591B9, gUnkEu_088591D2,
     gUnkEu_088591E5, gUnkEu_088591FA,
 };
 
-JiminyTextChar* gUnk_09EDDC3CFr[6] = {
+const JiminyTextChar* gUnk_09EDDC3CFr[6] = {
     gUnkEu_0885920E, gUnkEu_0885921C, gUnkEu_08859233, gUnkEu_08859246,
     gUnkEu_08859256, gUnkEu_08859269,
 };
 
-JiminyTextChar* gUnk_09EDDC3CDe[9] = {
+const JiminyTextChar* gUnk_09EDDC3CDe[9] = {
     gUnkEu_08859278, gUnkEu_08859280, gUnkEu_08859296, gUnkEu_088592AD,
     gUnkEu_088592C3, gUnkEu_088592D9, gUnkEu_088592EF, gUnkEu_08859306,
     gUnkEu_08859308,
 };
 
-JiminyTextChar* gUnk_09EDDC3CIt[6] = {
+const JiminyTextChar* gUnk_09EDDC3CIt[6] = {
     gUnkEu_0885931E, gUnkEu_0885932A, gUnkEu_08859343, gUnkEu_0885935B,
     gUnkEu_08859372, gUnkEu_0885938C,
 };
 
-JiminyTextChar* gUnk_09EDDC3CEs[6] = {
+const JiminyTextChar* gUnk_09EDDC3CEs[6] = {
     gUnkEu_088593A2, gUnkEu_088593AE, gUnkEu_088593C4, gUnkEu_088593D9,
     gUnkEu_088593EF, gUnkEu_08859406,
 };
 
-JiminyTextChar* gUnk_09EDD184[8] = {
+const JiminyTextChar* gUnk_09EDD184[8] = {
     gUnkEu_08859430, gUnkEu_08859440, gUnkEu_08859454, gUnkEu_0885946F,
     gUnkEu_08859487, gUnkEu_08859489, gUnkEu_0885949B, gUnkEu_088594B4,
 };
 
-JiminyTextChar* gUnk_09EDD184Fr[9] = {
+const JiminyTextChar* gUnk_09EDD184Fr[9] = {
     gUnkEu_088594C6, gUnkEu_088594D7, gUnkEu_088594ED, gUnkEu_08859505,
     gUnkEu_0885951C, gUnkEu_0885952E, gUnkEu_08859530, gUnkEu_08859547,
     gUnkEu_0885955F,
 };
 
-JiminyTextChar* gUnk_09EDD184De[10] = {
+const JiminyTextChar* gUnk_09EDD184De[10] = {
     gUnkEu_08859574, gUnkEu_0885957F, gUnkEu_08859595, gUnkEu_088595AE,
     gUnkEu_088595C3, gUnkEu_088595D9, gUnkEu_088595E5, gUnkEu_088595E7,
     gUnkEu_088595FC, gUnkEu_08859614,
 };
 
-JiminyTextChar* gUnk_09EDD184It[10] = {
+const JiminyTextChar* gUnk_09EDD184It[10] = {
     gUnkEu_08859628, gUnkEu_08859638, gUnkEu_0885964D, gUnkEu_0885965F,
     gUnkEu_08859674, gUnkEu_08859685, gUnkEu_08859687, gUnkEu_08859696,
     gUnkEu_088596AD, gUnkEu_088596C2,
 };
 
-JiminyTextChar* gUnk_09EDD184Es[8] = {
+const JiminyTextChar* gUnk_09EDD184Es[8] = {
     gUnkEu_088596DA, gUnkEu_088596EC, gUnkEu_08859700, gUnkEu_08859715,
     gUnkEu_08859729, gUnkEu_0885972B, gUnkEu_0885973E, gUnkEu_08859753,
 };
 
-JiminyTextChar* gUnk_09EDD1A4[6] = {
+const JiminyTextChar* gUnk_09EDD1A4[6] = {
     gUnkEu_08859788, gUnkEu_08859794, gUnkEu_088597AB, gUnkEu_088597BE,
     gUnkEu_088597C5, gUnkEu_088597C7,
 };
 
-JiminyTextChar* gUnk_09EDD1A4Fr[6] = {
+const JiminyTextChar* gUnk_09EDD1A4Fr[6] = {
     gUnkEu_088597DD, gUnkEu_088597E9, gUnkEu_088597FB, gUnkEu_0885980E,
     gUnkEu_08859825, gUnkEu_08859827,
 };
 
-JiminyTextChar* gUnk_09EDD1A4De[7] = {
+const JiminyTextChar* gUnk_09EDD1A4De[7] = {
     gUnkEu_0885983B, gUnkEu_08859848, gUnkEu_08859859, gUnkEu_0885986B,
     gUnkEu_08859881, gUnkEu_08859894, gUnkEu_08859896,
 };
 
-JiminyTextChar* gUnk_09EDD1A4It[7] = {
+const JiminyTextChar* gUnk_09EDD1A4It[7] = {
     gUnkEu_088598A9, gUnkEu_088598B4, gUnkEu_088598CA, gUnkEu_088598DD,
     gUnkEu_088598F1, gUnkEu_088598FC, gUnkEu_088598FE,
 };
 
-JiminyTextChar* gUnk_09EDD1A4Es[6] = {
+const JiminyTextChar* gUnk_09EDD1A4Es[6] = {
     gUnkEu_08859913, gUnkEu_0885991B, gUnkEu_08859932, gUnkEu_08859945,
     gUnkEu_08859959, gUnkEu_0885995B,
 };
 
-JiminyTextChar* gUnk_09EDDC0C[6] = {
+const JiminyTextChar* gUnk_09EDDC0C[6] = {
     gUnkEu_08859994, gUnkEu_0885999C, gUnkEu_088599B0, gUnkEu_088599C8,
     gUnkEu_088599DB, gUnkEu_088599F0,
 };
 
-JiminyTextChar* gUnk_09EDDC0CFr[6] = {
+const JiminyTextChar* gUnk_09EDDC0CFr[6] = {
     gUnkEu_08859A04, gUnkEu_08859A0C, gUnkEu_08859A21, gUnkEu_08859A34,
     gUnkEu_08859A44, gUnkEu_08859A57,
 };
 
-JiminyTextChar* gUnk_09EDDC0CDe[9] = {
+const JiminyTextChar* gUnk_09EDDC0CDe[9] = {
     gUnkEu_08859A66, gUnkEu_08859A6F, gUnkEu_08859A82, gUnkEu_08859A96,
     gUnkEu_08859AA9, gUnkEu_08859ABD, gUnkEu_08859AD3, gUnkEu_08859AEA,
     gUnkEu_08859AEC,
 };
 
-JiminyTextChar* gUnk_09EDDC0CIt[6] = {
+const JiminyTextChar* gUnk_09EDDC0CIt[6] = {
     gUnkEu_08859B02, gUnkEu_08859B0F, gUnkEu_08859B22, gUnkEu_08859B38,
     gUnkEu_08859B4D, gUnkEu_08859B62,
 };
 
-JiminyTextChar* gUnk_09EDDC0CEs[6] = {
+const JiminyTextChar* gUnk_09EDDC0CEs[6] = {
     gUnkEu_08859B74, gUnkEu_08859B7D, gUnkEu_08859B94, gUnkEu_08859BA9,
     gUnkEu_08859BC0, gUnkEu_08859BD4,
 };
 
-JiminyTextChar* gUnk_09EDD1F8[7] = {
+const JiminyTextChar* gUnk_09EDD1F8[7] = {
     gUnkEu_08859C00, gUnkEu_08859C07, gUnkEu_08859C1F, gUnkEu_08859C21,
     gUnkEu_08859C35, gUnkEu_08859C4B, gUnkEu_08859C62,
 };
 
-JiminyTextChar* gUnk_09EDD1F8Fr[9] = {
+const JiminyTextChar* gUnk_09EDD1F8Fr[9] = {
     gUnkEu_08859C6C, gUnkEu_08859C78, gUnkEu_08859C8C, gUnkEu_08859C9C,
     gUnkEu_08859C9E, gUnkEu_08859CB0, gUnkEu_08859CC7, gUnkEu_08859CD5,
     gUnkEu_08859CE7,
 };
 
-JiminyTextChar* gUnk_09EDD1F8De[8] = {
+const JiminyTextChar* gUnk_09EDD1F8De[8] = {
     gUnkEu_08859CFC, gUnkEu_08859D04, gUnkEu_08859D17, gUnkEu_08859D28,
     gUnkEu_08859D2A, gUnkEu_08859D3B, gUnkEu_08859D4F, gUnkEu_08859D5F,
 };
 
-JiminyTextChar* gUnk_09EDD1F8It[7] = {
+const JiminyTextChar* gUnk_09EDD1F8It[7] = {
     gUnkEu_08859D71, gUnkEu_08859D7A, gUnkEu_08859D91, gUnkEu_08859D93,
     gUnkEu_08859DA5, gUnkEu_08859DB8, gUnkEu_08859DCB,
 };
 
-JiminyTextChar* gUnk_09EDD1F8Es[8] = {
+const JiminyTextChar* gUnk_09EDD1F8Es[8] = {
     gUnkEu_08859DDF, gUnkEu_08859DE6, gUnkEu_08859DFB, gUnkEu_08859E07,
     gUnkEu_08859E09, gUnkEu_08859E1E, gUnkEu_08859E2F, gUnkEu_08859E46,
 };
 
-JiminyTextChar* gUnk_09EDD1BC[8] = {
+const JiminyTextChar* gUnk_09EDD1BC[8] = {
     gUnkEu_08859E74, gUnkEu_08859E83, gUnkEu_08859E96, gUnkEu_08859EAD,
     gUnkEu_08859EB8, gUnkEu_08859EBA, gUnkEu_08859ED0, gUnkEu_08859EEA,
 };
 
-JiminyTextChar* gUnk_09EDD1BCFr[8] = {
+const JiminyTextChar* gUnk_09EDD1BCFr[8] = {
     gUnkEu_08859EFA, gUnkEu_08859F08, gUnkEu_08859F1C, gUnkEu_08859F31,
     gUnkEu_08859F41, gUnkEu_08859F43, gUnkEu_08859F53, gUnkEu_08859F67,
 };
 
-JiminyTextChar* gUnk_09EDD1BCDe[9] = {
+const JiminyTextChar* gUnk_09EDD1BCDe[9] = {
     gUnkEu_08859F7C, gUnkEu_08859F91, gUnkEu_08859FA7, gUnkEu_08859FBA,
     gUnkEu_08859FD0, gUnkEu_08859FDA, gUnkEu_08859FDC, gUnkEu_08859FF3,
     gUnkEu_0885A005,
 };
 
-JiminyTextChar* gUnk_09EDD1BCIt[8] = {
+const JiminyTextChar* gUnk_09EDD1BCIt[8] = {
     gUnkEu_0885A01C, gUnkEu_0885A02B, gUnkEu_0885A040, gUnkEu_0885A059,
     gUnkEu_0885A070, gUnkEu_0885A072, gUnkEu_0885A085, gUnkEu_0885A09B,
 };
 
-JiminyTextChar* gUnk_09EDD1BCEs[9] = {
+const JiminyTextChar* gUnk_09EDD1BCEs[9] = {
     gUnkEu_0885A0B0, gUnkEu_0885A0BD, gUnkEu_0885A0D0, gUnkEu_0885A0E3,
     gUnkEu_0885A0F7, gUnkEu_0885A100, gUnkEu_0885A102, gUnkEu_0885A116,
     gUnkEu_0885A12D,
 };
 
-JiminyTextChar* gUnk_09EDD1DC[7] = {
+const JiminyTextChar* gUnk_09EDD1DC[7] = {
     gUnkEu_0885A15C, gUnkEu_0885A16D, gUnkEu_0885A182, gUnkEu_0885A19A,
     gUnkEu_0885A19C, gUnkEu_0885A1B5, gUnkEu_0885A1C6,
 };
 
-JiminyTextChar* gUnk_09EDD1DCFr[9] = {
+const JiminyTextChar* gUnk_09EDD1DCFr[9] = {
     gUnkEu_0885A1D7, gUnkEu_0885A1E7, gUnkEu_0885A1FE, gUnkEu_0885A214,
     gUnkEu_0885A222, gUnkEu_0885A224, gUnkEu_0885A23B, gUnkEu_0885A252,
     gUnkEu_0885A25B,
 };
 
-JiminyTextChar* gUnk_09EDD1DCDe[9] = {
+const JiminyTextChar* gUnk_09EDD1DCDe[9] = {
     gUnkEu_0885A272, gUnkEu_0885A284, gUnkEu_0885A29B, gUnkEu_0885A2B2,
     gUnkEu_0885A2C8, gUnkEu_0885A2CA, gUnkEu_0885A2DE, gUnkEu_0885A2F2,
     gUnkEu_0885A306,
 };
 
-JiminyTextChar* gUnk_09EDD1DCIt[9] = {
+const JiminyTextChar* gUnk_09EDD1DCIt[9] = {
     gUnkEu_0885A31A, gUnkEu_0885A32C, gUnkEu_0885A341, gUnkEu_0885A354,
     gUnkEu_0885A36B, gUnkEu_0885A36D, gUnkEu_0885A386, gUnkEu_0885A397,
     gUnkEu_0885A3AF,
 };
 
-JiminyTextChar* gUnk_09EDD1DCEs[8] = {
+const JiminyTextChar* gUnk_09EDD1DCEs[8] = {
     gUnkEu_0885A3C7, gUnkEu_0885A3D3, gUnkEu_0885A3E8, gUnkEu_0885A3FE,
     gUnkEu_0885A412, gUnkEu_0885A414, gUnkEu_0885A429, gUnkEu_0885A43B,
 };
 
-JiminyTextChar* gUnk_09EDD214[9] = {
+const JiminyTextChar* gUnk_09EDD214[9] = {
     gUnkEu_0885A470, gUnkEu_0885A47C, gUnkEu_0885A491, gUnkEu_0885A4A7,
     gUnkEu_0885A4BE, gUnkEu_0885A4CE, gUnkEu_0885A4D0, gUnkEu_0885A4E1,
     gUnkEu_0885A4F1,
 };
 
-JiminyTextChar* gUnk_09EDD214Fr[9] = {
+const JiminyTextChar* gUnk_09EDD214Fr[9] = {
     gUnkEu_0885A503, gUnkEu_0885A50D, gUnkEu_0885A51F, gUnkEu_0885A533,
     gUnkEu_0885A548, gUnkEu_0885A54A, gUnkEu_0885A560, gUnkEu_0885A577,
     gUnkEu_0885A582,
 };
 
-JiminyTextChar* gUnk_09EDD214De[11] = {
+const JiminyTextChar* gUnk_09EDD214De[11] = {
     gUnkEu_0885A597, gUnkEu_0885A5A4, gUnkEu_0885A5B9, gUnkEu_0885A5CE,
     gUnkEu_0885A5E3, gUnkEu_0885A5F7, gUnkEu_0885A60C, gUnkEu_0885A61D,
     gUnkEu_0885A61F, gUnkEu_0885A635, gUnkEu_0885A647,
 };
 
-JiminyTextChar* gUnk_09EDD214It[10] = {
+const JiminyTextChar* gUnk_09EDD214It[10] = {
     gUnkEu_0885A65D, gUnkEu_0885A669, gUnkEu_0885A677, gUnkEu_0885A687,
     gUnkEu_0885A69B, gUnkEu_0885A6A9, gUnkEu_0885A6AB, gUnkEu_0885A6BA,
     gUnkEu_0885A6CE, gUnkEu_0885A6E3,
 };
 
-JiminyTextChar* gUnk_09EDD214Es[10] = {
+const JiminyTextChar* gUnk_09EDD214Es[10] = {
     gUnkEu_0885A6FB, gUnkEu_0885A708, gUnkEu_0885A71C, gUnkEu_0885A72D,
     gUnkEu_0885A746, gUnkEu_0885A75C, gUnkEu_0885A769, gUnkEu_0885A76B,
     gUnkEu_0885A77C, gUnkEu_0885A78E,
 };
 
-JiminyTextChar* gUnk_09EDD37C[14] = {
+const JiminyTextChar* gUnk_09EDD37C[14] = {
     gUnkEu_0885A7C4, gUnkEu_0885A7D1, gUnkEu_0885A7E9, gUnkEu_0885A801,
     gUnkEu_0885A813, gUnkEu_0885A829, gUnkEu_0885A840, gUnkEu_0885A854,
     gUnkEu_0885A856, gUnkEu_0885A86C, gUnkEu_0885A87C, gUnkEu_0885A894,
     gUnkEu_0885A89E, gUnkEu_0885A8B5,
 };
 
-JiminyTextChar* gUnk_09EDD37CFr[13] = {
+const JiminyTextChar* gUnk_09EDD37CFr[13] = {
     gUnkEu_0885A8BF, gUnkEu_0885A8CC, gUnkEu_0885A8E2, gUnkEu_0885A8FA,
     gUnkEu_0885A912, gUnkEu_0885A929, gUnkEu_0885A92B, gUnkEu_0885A93F,
     gUnkEu_0885A956, gUnkEu_0885A961, gUnkEu_0885A971, gUnkEu_0885A986,
     gUnkEu_0885A998,
 };
 
-JiminyTextChar* gUnk_09EDD37CDe[16] = {
+const JiminyTextChar* gUnk_09EDD37CDe[16] = {
     gUnkEu_0885A9AE, gUnkEu_0885A9BA, gUnkEu_0885A9CF, gUnkEu_0885A9E2,
     gUnkEu_0885A9F6, gUnkEu_0885AA09, gUnkEu_0885AA1B, gUnkEu_0885AA31,
     gUnkEu_0885AA44, gUnkEu_0885AA4C, gUnkEu_0885AA4E, gUnkEu_0885AA61,
     gUnkEu_0885AA73, gUnkEu_0885AA85, gUnkEu_0885AA9A, gUnkEu_0885AAAA,
 };
 
-JiminyTextChar* gUnk_09EDD37CIt[14] = {
+const JiminyTextChar* gUnk_09EDD37CIt[14] = {
     gUnkEu_0885AABC, gUnkEu_0885AAC8, gUnkEu_0885AADE, gUnkEu_0885AAF4,
     gUnkEu_0885AB0B, gUnkEu_0885AB1E, gUnkEu_0885AB36, gUnkEu_0885AB44,
     gUnkEu_0885AB46, gUnkEu_0885AB5B, gUnkEu_0885AB6F, gUnkEu_0885AB81,
     gUnkEu_0885AB93, gUnkEu_0885ABA6,
 };
 
-JiminyTextChar* gUnk_09EDD37CEs[15] = {
+const JiminyTextChar* gUnk_09EDD37CEs[15] = {
     gUnkEu_0885ABBA, gUnkEu_0885ABC6, gUnkEu_0885ABD8, gUnkEu_0885ABEF,
     gUnkEu_0885AC03, gUnkEu_0885AC1A, gUnkEu_0885AC2F, gUnkEu_0885AC42,
     gUnkEu_0885AC4C, gUnkEu_0885AC4E, gUnkEu_0885AC64, gUnkEu_0885AC76,
     gUnkEu_0885AC88, gUnkEu_0885AC9A, gUnkEu_0885ACB1,
 };
 
-JiminyTextChar* gUnk_09EDDC54[7] = {
+const JiminyTextChar* gUnk_09EDDC54[7] = {
     gUnkEu_0885ACE0, gUnkEu_0885ACEF, gUnkEu_0885AD04, gUnkEu_0885AD1A,
     gUnkEu_0885AD1C, gUnkEu_0885AD33, gUnkEu_0885AD4D,
 };
 
-JiminyTextChar* gUnk_09EDDC54Fr[7] = {
+const JiminyTextChar* gUnk_09EDDC54Fr[7] = {
     gUnkEu_0885AD5D, gUnkEu_0885AD6C, gUnkEu_0885AD81, gUnkEu_0885AD92,
     gUnkEu_0885AD94, gUnkEu_0885ADA5, gUnkEu_0885ADB9,
 };
 
-JiminyTextChar* gUnk_09EDDC54De[10] = {
+const JiminyTextChar* gUnk_09EDDC54De[10] = {
     gUnkEu_0885ADCD, gUnkEu_0885ADE0, gUnkEu_0885ADF5, gUnkEu_0885AE06,
     gUnkEu_0885AE15, gUnkEu_0885AE28, gUnkEu_0885AE2A, gUnkEu_0885AE3D,
     gUnkEu_0885AE50, gUnkEu_0885AE62,
 };
 
-JiminyTextChar* gUnk_09EDDC54It[8] = {
+const JiminyTextChar* gUnk_09EDDC54It[8] = {
     gUnkEu_0885AE79, gUnkEu_0885AE87, gUnkEu_0885AE9B, gUnkEu_0885AEB1,
     gUnkEu_0885AEBB, gUnkEu_0885AEBD, gUnkEu_0885AED1, gUnkEu_0885AEE7,
 };
 
-JiminyTextChar* gUnk_09EDDC54Es[8] = {
+const JiminyTextChar* gUnk_09EDDC54Es[8] = {
     gUnkEu_0885AEFC, gUnkEu_0885AF0D, gUnkEu_0885AF24, gUnkEu_0885AF3A,
     gUnkEu_0885AF47, gUnkEu_0885AF49, gUnkEu_0885AF5E, gUnkEu_0885AF75,
 };
 
-JiminyTextChar* gUnk_09EDD238[13] = {
+const JiminyTextChar* gUnk_09EDD238[13] = {
     gUnkEu_0885AFA4, gUnkEu_0885AFB5, gUnkEu_0885AFCB, gUnkEu_0885AFE4,
     gUnkEu_0885AFFB, gUnkEu_0885B013, gUnkEu_0885B023, gUnkEu_0885B025,
     gUnkEu_0885B03B, gUnkEu_0885B055, gUnkEu_0885B06E, gUnkEu_0885B078,
     gUnkEu_0885B090,
 };
 
-JiminyTextChar* gUnk_09EDD238Fr[13] = {
+const JiminyTextChar* gUnk_09EDD238Fr[13] = {
     gUnkEu_0885B09A, gUnkEu_0885B0A9, gUnkEu_0885B0BC, gUnkEu_0885B0D2,
     gUnkEu_0885B0E9, gUnkEu_0885B0FE, gUnkEu_0885B116, gUnkEu_0885B118,
     gUnkEu_0885B128, gUnkEu_0885B141, gUnkEu_0885B158, gUnkEu_0885B164,
     gUnkEu_0885B176,
 };
 
-JiminyTextChar* gUnk_09EDD238De[17] = {
+const JiminyTextChar* gUnk_09EDD238De[17] = {
     gUnkEu_0885B18B, gUnkEu_0885B19F, gUnkEu_0885B1B5, gUnkEu_0885B1C8,
     gUnkEu_0885B1D8, gUnkEu_0885B1E9, gUnkEu_0885B1FA, gUnkEu_0885B20D,
     gUnkEu_0885B21F, gUnkEu_0885B232, gUnkEu_0885B249, gUnkEu_0885B24B,
@@ -6847,611 +6847,611 @@ JiminyTextChar* gUnk_09EDD238De[17] = {
     gUnkEu_0885B2AE,
 };
 
-JiminyTextChar* gUnk_09EDD238It[14] = {
+const JiminyTextChar* gUnk_09EDD238It[14] = {
     gUnkEu_0885B2C3, gUnkEu_0885B2D2, gUnkEu_0885B2E7, gUnkEu_0885B2FE,
     gUnkEu_0885B319, gUnkEu_0885B32F, gUnkEu_0885B347, gUnkEu_0885B35D,
     gUnkEu_0885B35F, gUnkEu_0885B372, gUnkEu_0885B388, gUnkEu_0885B39E,
     gUnkEu_0885B3B7, gUnkEu_0885B3CA,
 };
 
-JiminyTextChar* gUnk_09EDD238Es[14] = {
+const JiminyTextChar* gUnk_09EDD238Es[14] = {
     gUnkEu_0885B3DC, gUnkEu_0885B3EA, gUnkEu_0885B3FB, gUnkEu_0885B40E,
     gUnkEu_0885B422, gUnkEu_0885B438, gUnkEu_0885B44F, gUnkEu_0885B459,
     gUnkEu_0885B45B, gUnkEu_0885B46F, gUnkEu_0885B486, gUnkEu_0885B49E,
     gUnkEu_0885B4AB, gUnkEu_0885B4C2,
 };
 
-JiminyTextChar* gUnk_09EDBC30[4] = {
+const JiminyTextChar* gUnk_09EDBC30[4] = {
     gUnkEu_0885B4EC, gUnkEu_0885B502, gUnkEu_0885B515, gUnkEu_0885B52B,
 };
 
-JiminyTextChar* gUnk_09EDBC30Fr[4] = {
+const JiminyTextChar* gUnk_09EDBC30Fr[4] = {
     gUnkEu_0885B53F, gUnkEu_0885B554, gUnkEu_0885B562, gUnkEu_0885B56E,
 };
 
-JiminyTextChar* gUnk_09EDBC30De[5] = {
+const JiminyTextChar* gUnk_09EDBC30De[5] = {
     gUnkEu_0885B581, gUnkEu_0885B595, gUnkEu_0885B5A9, gUnkEu_0885B5BE,
     gUnkEu_0885B5D0,
 };
 
-JiminyTextChar* gUnk_09EDBC30It[5] = {
+const JiminyTextChar* gUnk_09EDBC30It[5] = {
     gUnkEu_0885B5DF, gUnkEu_0885B5F2, gUnkEu_0885B608, gUnkEu_0885B61B,
     gUnkEu_0885B632,
 };
 
-JiminyTextChar* gUnk_09EDBC30Es[5] = {
+const JiminyTextChar* gUnk_09EDBC30Es[5] = {
     gUnkEu_0885B640, gUnkEu_0885B658, gUnkEu_0885B66D, gUnkEu_0885B682,
     gUnkEu_0885B698,
 };
 
-JiminyTextChar* gUnk_09EDDD38[4] = {
+const JiminyTextChar* gUnk_09EDDD38[4] = {
     gUnkEu_0885B6CC, gUnkEu_0885B6E2, gUnkEu_0885B6F2, gUnkEu_0885B709,
 };
 
-JiminyTextChar* gUnk_09EDDD38Fr[4] = {
+const JiminyTextChar* gUnk_09EDDD38Fr[4] = {
     gUnkEu_0885B71C, gUnkEu_0885B72C, gUnkEu_0885B741, gUnkEu_0885B753,
 };
 
-JiminyTextChar* gUnk_09EDDD38De[5] = {
+const JiminyTextChar* gUnk_09EDDD38De[5] = {
     gUnkEu_0885B765, gUnkEu_0885B77B, gUnkEu_0885B78D, gUnkEu_0885B7A3,
     gUnkEu_0885B7B9,
 };
 
-JiminyTextChar* gUnk_09EDDD38It[4] = {
+const JiminyTextChar* gUnk_09EDDD38It[4] = {
     gUnkEu_0885B7BF, gUnkEu_0885B7D5, gUnkEu_0885B7ED, gUnkEu_0885B804,
 };
 
-JiminyTextChar* gUnk_09EDDD38Es[4] = {
+const JiminyTextChar* gUnk_09EDDD38Es[4] = {
     gUnkEu_0885B819, gUnkEu_0885B82F, gUnkEu_0885B845, gUnkEu_0885B85B,
 };
 
-JiminyTextChar* gUnk_09EDDCBC[4] = {
+const JiminyTextChar* gUnk_09EDDCBC[4] = {
     gUnkEu_0885B890, gUnkEu_0885B8A2, gUnkEu_0885B8B4, gUnkEu_0885B8CC,
 };
 
-JiminyTextChar* gUnk_09EDDCBCFr[4] = {
+const JiminyTextChar* gUnk_09EDDCBCFr[4] = {
     gUnkEu_0885B8E1, gUnkEu_0885B8F7, gUnkEu_0885B90D, gUnkEu_0885B923,
 };
 
-JiminyTextChar* gUnk_09EDDCBCDe[4] = {
+const JiminyTextChar* gUnk_09EDDCBCDe[4] = {
     gUnkEu_0885B931, gUnkEu_0885B948, gUnkEu_0885B95D, gUnkEu_0885B973,
 };
 
-JiminyTextChar* gUnk_09EDDCBCIt[6] = {
+const JiminyTextChar* gUnk_09EDDCBCIt[6] = {
     gUnkEu_0885B98B, gUnkEu_0885B99F, gUnkEu_0885B9B3, gUnkEu_0885B9C5,
     gUnkEu_0885B9D7, gUnkEu_0885B9E7,
 };
 
-JiminyTextChar* gUnk_09EDDCBCEs[5] = {
+const JiminyTextChar* gUnk_09EDDCBCEs[5] = {
     gUnkEu_0885B9F1, gUnkEu_0885BA04, gUnkEu_0885BA1A, gUnkEu_0885BA30,
     gUnkEu_0885BA47,
 };
 
-JiminyTextChar* gUnk_09EDD26C[2] = {
+const JiminyTextChar* gUnk_09EDD26C[2] = {
     gUnkEu_0885BA70, gUnkEu_0885BA84,
 };
 
-JiminyTextChar* gUnk_09EDD26CFr[2] = {
+const JiminyTextChar* gUnk_09EDD26CFr[2] = {
     gUnkEu_0885BA9A, gUnkEu_0885BAAF,
 };
 
-JiminyTextChar* gUnk_09EDD26CDe[3] = {
+const JiminyTextChar* gUnk_09EDD26CDe[3] = {
     gUnkEu_0885BABD, gUnkEu_0885BACE, gUnkEu_0885BAE2,
 };
 
-JiminyTextChar* gUnk_09EDD26CIt[3] = {
+const JiminyTextChar* gUnk_09EDD26CIt[3] = {
     gUnkEu_0885BAEE, gUnkEu_0885BB02, gUnkEu_0885BB11,
 };
 
-JiminyTextChar* gUnk_09EDD26CEs[3] = {
+const JiminyTextChar* gUnk_09EDD26CEs[3] = {
     gUnkEu_0885BB1C, gUnkEu_0885BB2F, gUnkEu_0885BB40,
 };
 
-JiminyTextChar* gUnk_09EDD274[3] = {
+const JiminyTextChar* gUnk_09EDD274[3] = {
     gUnkEu_0885BB6C, gUnkEu_0885BB79, gUnkEu_0885BB8D,
 };
 
-JiminyTextChar* gUnk_09EDD274Fr[3] = {
+const JiminyTextChar* gUnk_09EDD274Fr[3] = {
     gUnkEu_0885BB9B, gUnkEu_0885BBB3, gUnkEu_0885BBC7,
 };
 
-JiminyTextChar* gUnk_09EDD274De[3] = {
+const JiminyTextChar* gUnk_09EDD274De[3] = {
     gUnkEu_0885BBCD, gUnkEu_0885BBE2, gUnkEu_0885BBF7,
 };
 
-JiminyTextChar* gUnk_09EDD274It[3] = {
+const JiminyTextChar* gUnk_09EDD274It[3] = {
     gUnkEu_0885BC05, gUnkEu_0885BC1D, gUnkEu_0885BC33,
 };
 
-JiminyTextChar* gUnk_09EDD274Es[3] = {
+const JiminyTextChar* gUnk_09EDD274Es[3] = {
     gUnkEu_0885BC3E, gUnkEu_0885BC51, gUnkEu_0885BC60,
 };
 
-JiminyTextChar* gUnk_09EDDCCC[5] = {
+const JiminyTextChar* gUnk_09EDDCCC[5] = {
     gUnkEu_0885BC98, gUnkEu_0885BCA5, gUnkEu_0885BCB6, gUnkEu_0885BCC4,
     gUnkEu_0885BCDC,
 };
 
-JiminyTextChar* gUnk_09EDDCCCFr[4] = {
+const JiminyTextChar* gUnk_09EDDCCCFr[4] = {
     gUnkEu_0885BCF1, gUnkEu_0885BD05, gUnkEu_0885BD1C, gUnkEu_0885BD31,
 };
 
-JiminyTextChar* gUnk_09EDDCCCDe[5] = {
+const JiminyTextChar* gUnk_09EDDCCCDe[5] = {
     gUnkEu_0885BD38, gUnkEu_0885BD4D, gUnkEu_0885BD61, gUnkEu_0885BD73,
     gUnkEu_0885BD8B,
 };
 
-JiminyTextChar* gUnk_09EDDCCCIt[6] = {
+const JiminyTextChar* gUnk_09EDDCCCIt[6] = {
     gUnkEu_0885BD9A, gUnkEu_0885BDAE, gUnkEu_0885BDC6, gUnkEu_0885BDD7,
     gUnkEu_0885BDEB, gUnkEu_0885BE00,
 };
 
-JiminyTextChar* gUnk_09EDDCCCEs[5] = {
+const JiminyTextChar* gUnk_09EDDCCCEs[5] = {
     gUnkEu_0885BE10, gUnkEu_0885BE27, gUnkEu_0885BE3D, gUnkEu_0885BE4F,
     gUnkEu_0885BE61,
 };
 
-JiminyTextChar* gUnk_09EDD280[3] = {
+const JiminyTextChar* gUnk_09EDD280[3] = {
     gUnkEu_0885BE94, gUnkEu_0885BEA1, gUnkEu_0885BEB6,
 };
 
-JiminyTextChar* gUnk_09EDD280Fr[2] = {
+const JiminyTextChar* gUnk_09EDD280Fr[2] = {
     gUnkEu_0885BECA, gUnkEu_0885BEDF,
 };
 
-JiminyTextChar* gUnk_09EDD280De[4] = {
+const JiminyTextChar* gUnk_09EDD280De[4] = {
     gUnkEu_0885BEF7, gUnkEu_0885BF0C, gUnkEu_0885BF20, gUnkEu_0885BF36,
 };
 
-JiminyTextChar* gUnk_09EDD280It[3] = {
+const JiminyTextChar* gUnk_09EDD280It[3] = {
     gUnkEu_0885BF42, gUnkEu_0885BF5A, gUnkEu_0885BF6E,
 };
 
-JiminyTextChar* gUnk_09EDD280Es[4] = {
+const JiminyTextChar* gUnk_09EDD280Es[4] = {
     gUnkEu_0885BF80, gUnkEu_0885BF93, gUnkEu_0885BFA6, gUnkEu_0885BFBA,
 };
 
-JiminyTextChar* gUnk_09EDD28C[2] = {
+const JiminyTextChar* gUnk_09EDD28C[2] = {
     gUnkEu_0885BFE4, gUnkEu_0885BFF9,
 };
 
-JiminyTextChar* gUnk_09EDD28CFr[2] = {
+const JiminyTextChar* gUnk_09EDD28CFr[2] = {
     gUnkEu_0885C00D, gUnkEu_0885C020,
 };
 
-JiminyTextChar* gUnk_09EDD28CDe[5] = {
+const JiminyTextChar* gUnk_09EDD28CDe[5] = {
     gUnkEu_0885C034, gUnkEu_0885C049, gUnkEu_0885C05C, gUnkEu_0885C06E,
     gUnkEu_0885C083,
 };
 
-JiminyTextChar* gUnk_09EDD28CIt[3] = {
+const JiminyTextChar* gUnk_09EDD28CIt[3] = {
     gUnkEu_0885C08E, gUnkEu_0885C0A2, gUnkEu_0885C0B6,
 };
 
-JiminyTextChar* gUnk_09EDD28CEs[3] = {
+const JiminyTextChar* gUnk_09EDD28CEs[3] = {
     gUnkEu_0885C0CA, gUnkEu_0885C0DD, gUnkEu_0885C0F0,
 };
 
-JiminyTextChar* gUnk_09EDD294[3] = {
+const JiminyTextChar* gUnk_09EDD294[3] = {
     gUnkEu_0885C128, gUnkEu_0885C135, gUnkEu_0885C149,
 };
 
-JiminyTextChar* gUnk_09EDD294Fr[2] = {
+const JiminyTextChar* gUnk_09EDD294Fr[2] = {
     gUnkEu_0885C157, gUnkEu_0885C16A,
 };
 
-JiminyTextChar* gUnk_09EDD294De[3] = {
+const JiminyTextChar* gUnk_09EDD294De[3] = {
     gUnkEu_0885C17E, gUnkEu_0885C193, gUnkEu_0885C1A7,
 };
 
-JiminyTextChar* gUnk_09EDD294It[3] = {
+const JiminyTextChar* gUnk_09EDD294It[3] = {
     gUnkEu_0885C1B5, gUnkEu_0885C1C9, gUnkEu_0885C1DC,
 };
 
-JiminyTextChar* gUnk_09EDD294Es[3] = {
+const JiminyTextChar* gUnk_09EDD294Es[3] = {
     gUnkEu_0885C1F4, gUnkEu_0885C207, gUnkEu_0885C21B,
 };
 
-JiminyTextChar* gUnk_09EDDCE0[5] = {
+const JiminyTextChar* gUnk_09EDDCE0[5] = {
     gUnkEu_0885C250, gUnkEu_0885C25D, gUnkEu_0885C273, gUnkEu_0885C281,
     gUnkEu_0885C299,
 };
 
-JiminyTextChar* gUnk_09EDDCE0Fr[5] = {
+const JiminyTextChar* gUnk_09EDDCE0Fr[5] = {
     gUnkEu_0885C2AE, gUnkEu_0885C2C4, gUnkEu_0885C2D4, gUnkEu_0885C2E4,
     gUnkEu_0885C2F4,
 };
 
-JiminyTextChar* gUnk_09EDDCE0De[5] = {
+const JiminyTextChar* gUnk_09EDDCE0De[5] = {
     gUnkEu_0885C308, gUnkEu_0885C31D, gUnkEu_0885C333, gUnkEu_0885C34B,
     gUnkEu_0885C362,
 };
 
-JiminyTextChar* gUnk_09EDDCE0It[6] = {
+const JiminyTextChar* gUnk_09EDDCE0It[6] = {
     gUnkEu_0885C36A, gUnkEu_0885C37E, gUnkEu_0885C391, gUnkEu_0885C3A8,
     gUnkEu_0885C3BC, gUnkEu_0885C3CE,
 };
 
-JiminyTextChar* gUnk_09EDDCE0Es[6] = {
+const JiminyTextChar* gUnk_09EDDCE0Es[6] = {
     gUnkEu_0885C3DE, gUnkEu_0885C3F1, gUnkEu_0885C405, gUnkEu_0885C41A,
     gUnkEu_0885C42C, gUnkEu_0885C43F,
 };
 
-JiminyTextChar* gUnk_09EDD2A0[2] = {
+const JiminyTextChar* gUnk_09EDD2A0[2] = {
     gUnkEu_0885C470, gUnkEu_0885C482,
 };
 
-JiminyTextChar* gUnk_09EDD2A0Fr[1] = {
+const JiminyTextChar* gUnk_09EDD2A0Fr[1] = {
     gUnkEu_0885C48C,
 };
 
-JiminyTextChar* gUnk_09EDD2A0De[2] = {
+const JiminyTextChar* gUnk_09EDD2A0De[2] = {
     gUnkEu_0885C49D, gUnkEu_0885C4B3,
 };
 
-JiminyTextChar* gUnk_09EDD2A0It[2] = {
+const JiminyTextChar* gUnk_09EDD2A0It[2] = {
     gUnkEu_0885C4C8, gUnkEu_0885C4D9,
 };
 
-JiminyTextChar* gUnk_09EDD2A0Es[2] = {
+const JiminyTextChar* gUnk_09EDD2A0Es[2] = {
     gUnkEu_0885C4ED, gUnkEu_0885C500,
 };
 
-JiminyTextChar* gUnk_09EDD2A8[4] = {
+const JiminyTextChar* gUnk_09EDD2A8[4] = {
     gUnkEu_0885C534, gUnkEu_0885C54A, gUnkEu_0885C562, gUnkEu_0885C574,
 };
 
-JiminyTextChar* gUnk_09EDD2A8Fr[4] = {
+const JiminyTextChar* gUnk_09EDD2A8Fr[4] = {
     gUnkEu_0885C58D, gUnkEu_0885C5A1, gUnkEu_0885C5B8, gUnkEu_0885C5CC,
 };
 
-JiminyTextChar* gUnk_09EDD2A8De[4] = {
+const JiminyTextChar* gUnk_09EDD2A8De[4] = {
     gUnkEu_0885C5E3, gUnkEu_0885C5F8, gUnkEu_0885C60F, gUnkEu_0885C623,
 };
 
-JiminyTextChar* gUnk_09EDD2A8It[5] = {
+const JiminyTextChar* gUnk_09EDD2A8It[5] = {
     gUnkEu_0885C63B, gUnkEu_0885C64F, gUnkEu_0885C665, gUnkEu_0885C67D,
     gUnkEu_0885C693,
 };
 
-JiminyTextChar* gUnk_09EDD2A8Es[4] = {
+const JiminyTextChar* gUnk_09EDD2A8Es[4] = {
     gUnkEu_0885C6A8, gUnkEu_0885C6BB, gUnkEu_0885C6D2, gUnkEu_0885C6E6,
 };
 
-JiminyTextChar* gUnk_09EDD2B8[3] = {
+const JiminyTextChar* gUnk_09EDD2B8[3] = {
     gUnkEu_0885C71C, gUnkEu_0885C733, gUnkEu_0885C74A,
 };
 
-JiminyTextChar* gUnk_09EDD2B8Fr[3] = {
+const JiminyTextChar* gUnk_09EDD2B8Fr[3] = {
     gUnkEu_0885C75E, gUnkEu_0885C770, gUnkEu_0885C785,
 };
 
-JiminyTextChar* gUnk_09EDD2B8De[3] = {
+const JiminyTextChar* gUnk_09EDD2B8De[3] = {
     gUnkEu_0885C799, gUnkEu_0885C7AD, gUnkEu_0885C7C4,
 };
 
-JiminyTextChar* gUnk_09EDD2B8It[4] = {
+const JiminyTextChar* gUnk_09EDD2B8It[4] = {
     gUnkEu_0885C7DB, gUnkEu_0885C7EF, gUnkEu_0885C801, gUnkEu_0885C814,
 };
 
-JiminyTextChar* gUnk_09EDD2B8Es[4] = {
+const JiminyTextChar* gUnk_09EDD2B8Es[4] = {
     gUnkEu_0885C828, gUnkEu_0885C83B, gUnkEu_0885C850, gUnkEu_0885C864,
 };
 
-JiminyTextChar* gUnk_09EDD2C4[3] = {
+const JiminyTextChar* gUnk_09EDD2C4[3] = {
     gUnkEu_0885C88C, gUnkEu_0885C89F, gUnkEu_0885C8AE,
 };
 
-JiminyTextChar* gUnk_09EDD2C4Fr[3] = {
+const JiminyTextChar* gUnk_09EDD2C4Fr[3] = {
     gUnkEu_0885C8B9, gUnkEu_0885C8CA, gUnkEu_0885C8DB,
 };
 
-JiminyTextChar* gUnk_09EDD2C4De[3] = {
+const JiminyTextChar* gUnk_09EDD2C4De[3] = {
     gUnkEu_0885C8E8, gUnkEu_0885C8FF, gUnkEu_0885C916,
 };
 
-JiminyTextChar* gUnk_09EDD2C4It[3] = {
+const JiminyTextChar* gUnk_09EDD2C4It[3] = {
     gUnkEu_0885C920, gUnkEu_0885C934, gUnkEu_0885C945,
 };
 
-JiminyTextChar* gUnk_09EDD2C4Es[3] = {
+const JiminyTextChar* gUnk_09EDD2C4Es[3] = {
     gUnkEu_0885C957, gUnkEu_0885C96A, gUnkEu_0885C97D,
 };
 
-JiminyTextChar* gUnk_09EDD2D0[3] = {
+const JiminyTextChar* gUnk_09EDD2D0[3] = {
     gUnkEu_0885C9B0, gUnkEu_0885C9C4, gUnkEu_0885C9D3,
 };
 
-JiminyTextChar* gUnk_09EDD2D0Fr[3] = {
+const JiminyTextChar* gUnk_09EDD2D0Fr[3] = {
     gUnkEu_0885C9DE, gUnkEu_0885C9EF, gUnkEu_0885C9FE,
 };
 
-JiminyTextChar* gUnk_09EDD2D0De[3] = {
+const JiminyTextChar* gUnk_09EDD2D0De[3] = {
     gUnkEu_0885CA0F, gUnkEu_0885CA26, gUnkEu_0885CA38,
 };
 
-JiminyTextChar* gUnk_09EDD2D0It[3] = {
+const JiminyTextChar* gUnk_09EDD2D0It[3] = {
     gUnkEu_0885CA4A, gUnkEu_0885CA5E, gUnkEu_0885CA71,
 };
 
-JiminyTextChar* gUnk_09EDD2D0Es[3] = {
+const JiminyTextChar* gUnk_09EDD2D0Es[3] = {
     gUnkEu_0885CA83, gUnkEu_0885CA96, gUnkEu_0885CAAB,
 };
 
-JiminyTextChar* gUnk_09EDD2DC[3] = {
+const JiminyTextChar* gUnk_09EDD2DC[3] = {
     gUnkEu_0885CAE0, gUnkEu_0885CAF2, gUnkEu_0885CB01,
 };
 
-JiminyTextChar* gUnk_09EDD2DCFr[3] = {
+const JiminyTextChar* gUnk_09EDD2DCFr[3] = {
     gUnkEu_0885CB0C, gUnkEu_0885CB1D, gUnkEu_0885CB2E,
 };
 
-JiminyTextChar* gUnk_09EDD2DCDe[3] = {
+const JiminyTextChar* gUnk_09EDD2DCDe[3] = {
     gUnkEu_0885CB3B, gUnkEu_0885CB52, gUnkEu_0885CB69,
 };
 
-JiminyTextChar* gUnk_09EDD2DCIt[3] = {
+const JiminyTextChar* gUnk_09EDD2DCIt[3] = {
     gUnkEu_0885CB73, gUnkEu_0885CB87, gUnkEu_0885CB98,
 };
 
-JiminyTextChar* gUnk_09EDD2DCEs[3] = {
+const JiminyTextChar* gUnk_09EDD2DCEs[3] = {
     gUnkEu_0885CBAA, gUnkEu_0885CBBD, gUnkEu_0885CBCF,
 };
 
-JiminyTextChar* gUnk_09EDD2E8[5] = {
+const JiminyTextChar* gUnk_09EDD2E8[5] = {
     gUnkEu_0885CC04, gUnkEu_0885CC1A, gUnkEu_0885CC2E, gUnkEu_0885CC47,
     gUnkEu_0885CC5C,
 };
 
-JiminyTextChar* gUnk_09EDD2E8Fr[4] = {
+const JiminyTextChar* gUnk_09EDD2E8Fr[4] = {
     gUnkEu_0885CC67, gUnkEu_0885CC7B, gUnkEu_0885CC8F, gUnkEu_0885CCA5,
 };
 
-JiminyTextChar* gUnk_09EDD2E8De[5] = {
+const JiminyTextChar* gUnk_09EDD2E8De[5] = {
     gUnkEu_0885CCBA, gUnkEu_0885CCCE, gUnkEu_0885CCE3, gUnkEu_0885CCF6,
     gUnkEu_0885CD0C,
 };
 
-JiminyTextChar* gUnk_09EDD2E8It[5] = {
+const JiminyTextChar* gUnk_09EDD2E8It[5] = {
     gUnkEu_0885CD23, gUnkEu_0885CD38, gUnkEu_0885CD50, gUnkEu_0885CD65,
     gUnkEu_0885CD7E,
 };
 
-JiminyTextChar* gUnk_09EDD2E8Es[6] = {
+const JiminyTextChar* gUnk_09EDD2E8Es[6] = {
     gUnkEu_0885CD89, gUnkEu_0885CD9C, gUnkEu_0885CDAF, gUnkEu_0885CDC5,
     gUnkEu_0885CDD6, gUnkEu_0885CDE6,
 };
 
-JiminyTextChar* gUnk_09EDD2FC[2] = {
+const JiminyTextChar* gUnk_09EDD2FC[2] = {
     gUnkEu_0885CE10, gUnkEu_0885CE26,
 };
 
-JiminyTextChar* gUnk_09EDD2FCFr[1] = {
+const JiminyTextChar* gUnk_09EDD2FCFr[1] = {
     gUnkEu_0885CE34,
 };
 
-JiminyTextChar* gUnk_09EDD2FCDe[2] = {
+const JiminyTextChar* gUnk_09EDD2FCDe[2] = {
     gUnkEu_0885CE4C, gUnkEu_0885CE63,
 };
 
-JiminyTextChar* gUnk_09EDD2FCIt[2] = {
+const JiminyTextChar* gUnk_09EDD2FCIt[2] = {
     gUnkEu_0885CE73, gUnkEu_0885CE87,
 };
 
-JiminyTextChar* gUnk_09EDD2FCEs[3] = {
+const JiminyTextChar* gUnk_09EDD2FCEs[3] = {
     gUnkEu_0885CE9B, gUnkEu_0885CEAE, gUnkEu_0885CEBD,
 };
 
-JiminyTextChar* gUnk_09EDD304[4] = {
+const JiminyTextChar* gUnk_09EDD304[4] = {
     gUnkEu_0885CEEC, gUnkEu_0885CF02, gUnkEu_0885CF1A, gUnkEu_0885CF2F,
 };
 
-JiminyTextChar* gUnk_09EDD304Fr[3] = {
+const JiminyTextChar* gUnk_09EDD304Fr[3] = {
     gUnkEu_0885CF3A, gUnkEu_0885CF4A, gUnkEu_0885CF5E,
 };
 
-JiminyTextChar* gUnk_09EDD304De[4] = {
+const JiminyTextChar* gUnk_09EDD304De[4] = {
     gUnkEu_0885CF76, gUnkEu_0885CF8B, gUnkEu_0885CF9E, gUnkEu_0885CFAF,
 };
 
-JiminyTextChar* gUnk_09EDD304It[4] = {
+const JiminyTextChar* gUnk_09EDD304It[4] = {
     gUnkEu_0885CFC2, gUnkEu_0885CFD9, gUnkEu_0885CFF0, gUnkEu_0885D008,
 };
 
-JiminyTextChar* gUnk_09EDD304Es[5] = {
+const JiminyTextChar* gUnk_09EDD304Es[5] = {
     gUnkEu_0885D019, gUnkEu_0885D02C, gUnkEu_0885D040, gUnkEu_0885D050,
     gUnkEu_0885D060,
 };
 
-JiminyTextChar* gUnk_09EDD314[4] = {
+const JiminyTextChar* gUnk_09EDD314[4] = {
     gUnkEu_0885D08C, gUnkEu_0885D0A2, gUnkEu_0885D0BB, gUnkEu_0885D0D3,
 };
 
-JiminyTextChar* gUnk_09EDD314Fr[3] = {
+const JiminyTextChar* gUnk_09EDD314Fr[3] = {
     gUnkEu_0885D0DF, gUnkEu_0885D0EF, gUnkEu_0885D100,
 };
 
-JiminyTextChar* gUnk_09EDD314De[5] = {
+const JiminyTextChar* gUnk_09EDD314De[5] = {
     gUnkEu_0885D112, gUnkEu_0885D127, gUnkEu_0885D13A, gUnkEu_0885D150,
     gUnkEu_0885D163,
 };
 
-JiminyTextChar* gUnk_09EDD314It[5] = {
+const JiminyTextChar* gUnk_09EDD314It[5] = {
     gUnkEu_0885D175, gUnkEu_0885D18C, gUnkEu_0885D1A6, gUnkEu_0885D1BE,
     gUnkEu_0885D1D3,
 };
 
-JiminyTextChar* gUnk_09EDD314Es[5] = {
+const JiminyTextChar* gUnk_09EDD314Es[5] = {
     gUnkEu_0885D1E5, gUnkEu_0885D1FC, gUnkEu_0885D215, gUnkEu_0885D22B,
     gUnkEu_0885D241,
 };
 
-JiminyTextChar* gUnk_09EDD324[2] = {
+const JiminyTextChar* gUnk_09EDD324[2] = {
     gUnkEu_0885D274, gUnkEu_0885D285,
 };
 
-JiminyTextChar* gUnk_09EDD324Fr[2] = {
+const JiminyTextChar* gUnk_09EDD324Fr[2] = {
     gUnkEu_0885D29C, gUnkEu_0885D2B1,
 };
 
-JiminyTextChar* gUnk_09EDD324De[3] = {
+const JiminyTextChar* gUnk_09EDD324De[3] = {
     gUnkEu_0885D2BF, gUnkEu_0885D2D0, gUnkEu_0885D2E4,
 };
 
-JiminyTextChar* gUnk_09EDD324It[3] = {
+const JiminyTextChar* gUnk_09EDD324It[3] = {
     gUnkEu_0885D2ED, gUnkEu_0885D305, gUnkEu_0885D31A,
 };
 
-JiminyTextChar* gUnk_09EDD324Es[3] = {
+const JiminyTextChar* gUnk_09EDD324Es[3] = {
     gUnkEu_0885D326, gUnkEu_0885D339, gUnkEu_0885D34B,
 };
 
-JiminyTextChar* gUnk_09EDD32C[3] = {
+const JiminyTextChar* gUnk_09EDD32C[3] = {
     gUnkEu_0885D384, gUnkEu_0885D399, gUnkEu_0885D3B0,
 };
 
-JiminyTextChar* gUnk_09EDD32CFr[3] = {
+const JiminyTextChar* gUnk_09EDD32CFr[3] = {
     gUnkEu_0885D3B9, gUnkEu_0885D3CD, gUnkEu_0885D3DE,
 };
 
-JiminyTextChar* gUnk_09EDD32CDe[4] = {
+const JiminyTextChar* gUnk_09EDD32CDe[4] = {
     gUnkEu_0885D3EF, gUnkEu_0885D405, gUnkEu_0885D418, gUnkEu_0885D42E,
 };
 
-JiminyTextChar* gUnk_09EDD32CIt[4] = {
+const JiminyTextChar* gUnk_09EDD32CIt[4] = {
     gUnkEu_0885D435, gUnkEu_0885D449, gUnkEu_0885D45D, gUnkEu_0885D46D,
 };
 
-JiminyTextChar* gUnk_09EDD32CEs[3] = {
+const JiminyTextChar* gUnk_09EDD32CEs[3] = {
     gUnkEu_0885D476, gUnkEu_0885D489, gUnkEu_0885D499,
 };
 
-JiminyTextChar* gUnk_09EDD338[5] = {
+const JiminyTextChar* gUnk_09EDD338[5] = {
     gUnkEu_0885D4D0, gUnkEu_0885D4E2, gUnkEu_0885D4F2, gUnkEu_0885D504,
     gUnkEu_0885D51A,
 };
 
-JiminyTextChar* gUnk_09EDD338Fr[4] = {
+const JiminyTextChar* gUnk_09EDD338Fr[4] = {
     gUnkEu_0885D524, gUnkEu_0885D539, gUnkEu_0885D54C, gUnkEu_0885D563,
 };
 
-JiminyTextChar* gUnk_09EDD338De[5] = {
+const JiminyTextChar* gUnk_09EDD338De[5] = {
     gUnkEu_0885D575, gUnkEu_0885D58A, gUnkEu_0885D5A0, gUnkEu_0885D5B4,
     gUnkEu_0885D5C8,
 };
 
-JiminyTextChar* gUnk_09EDD338It[4] = {
+const JiminyTextChar* gUnk_09EDD338It[4] = {
     gUnkEu_0885D5DA, gUnkEu_0885D5EE, gUnkEu_0885D603, gUnkEu_0885D618,
 };
 
-JiminyTextChar* gUnk_09EDD338Es[5] = {
+const JiminyTextChar* gUnk_09EDD338Es[5] = {
     gUnkEu_0885D62F, gUnkEu_0885D642, gUnkEu_0885D656, gUnkEu_0885D664,
     gUnkEu_0885D67A,
 };
 
-JiminyTextChar* gUnk_09EDD34C[4] = {
+const JiminyTextChar* gUnk_09EDD34C[4] = {
     gUnkEu_0885D6A8, gUnkEu_0885D6BA, gUnkEu_0885D6D1, gUnkEu_0885D6E2,
 };
 
-JiminyTextChar* gUnk_09EDD34CFr[4] = {
+const JiminyTextChar* gUnk_09EDD34CFr[4] = {
     gUnkEu_0885D6F7, gUnkEu_0885D70C, gUnkEu_0885D71E, gUnkEu_0885D735,
 };
 
-JiminyTextChar* gUnk_09EDD34CDe[4] = {
+const JiminyTextChar* gUnk_09EDD34CDe[4] = {
     gUnkEu_0885D748, gUnkEu_0885D75D, gUnkEu_0885D774, gUnkEu_0885D788,
 };
 
-JiminyTextChar* gUnk_09EDD34CIt[5] = {
+const JiminyTextChar* gUnk_09EDD34CIt[5] = {
     gUnkEu_0885D7A1, gUnkEu_0885D7B5, gUnkEu_0885D7CA, gUnkEu_0885D7DC,
     gUnkEu_0885D7EA,
 };
 
-JiminyTextChar* gUnk_09EDD34CEs[5] = {
+const JiminyTextChar* gUnk_09EDD34CEs[5] = {
     gUnkEu_0885D7FB, gUnkEu_0885D80E, gUnkEu_0885D823, gUnkEu_0885D830,
     gUnkEu_0885D847,
 };
 
-JiminyTextChar* gUnk_09EDD35C[2] = {
+const JiminyTextChar* gUnk_09EDD35C[2] = {
     gUnkEu_0885D87C, gUnkEu_0885D890,
 };
 
-JiminyTextChar* gUnk_09EDD35CFr[1] = {
+const JiminyTextChar* gUnk_09EDD35CFr[1] = {
     gUnkEu_0885D8A0,
 };
 
-JiminyTextChar* gUnk_09EDD35CDe[3] = {
+const JiminyTextChar* gUnk_09EDD35CDe[3] = {
     gUnkEu_0885D8B5, gUnkEu_0885D8CA, gUnkEu_0885D8DF,
 };
 
-JiminyTextChar* gUnk_09EDD35CIt[3] = {
+const JiminyTextChar* gUnk_09EDD35CIt[3] = {
     gUnkEu_0885D8E5, gUnkEu_0885D8F9, gUnkEu_0885D90C,
 };
 
-JiminyTextChar* gUnk_09EDD35CEs[3] = {
+const JiminyTextChar* gUnk_09EDD35CEs[3] = {
     gUnkEu_0885D914, gUnkEu_0885D927, gUnkEu_0885D939,
 };
 
-JiminyTextChar* gUnk_09EDD364[2] = {
+const JiminyTextChar* gUnk_09EDD364[2] = {
     gUnkEu_0885D970, gUnkEu_0885D984,
 };
 
-JiminyTextChar* gUnk_09EDD364Fr[2] = {
+const JiminyTextChar* gUnk_09EDD364Fr[2] = {
     gUnkEu_0885D994, gUnkEu_0885D9A3,
 };
 
-JiminyTextChar* gUnk_09EDD364De[3] = {
+const JiminyTextChar* gUnk_09EDD364De[3] = {
     gUnkEu_0885D9AD, gUnkEu_0885D9C2, gUnkEu_0885D9D7,
 };
 
-JiminyTextChar* gUnk_09EDD364It[3] = {
+const JiminyTextChar* gUnk_09EDD364It[3] = {
     gUnkEu_0885D9DD, gUnkEu_0885D9F1, gUnkEu_0885DA04,
 };
 
-JiminyTextChar* gUnk_09EDD364Es[3] = {
+const JiminyTextChar* gUnk_09EDD364Es[3] = {
     gUnkEu_0885DA0C, gUnkEu_0885DA1F, gUnkEu_0885DA31,
 };
 
-JiminyTextChar* gUnk_09EDD36C[2] = {
+const JiminyTextChar* gUnk_09EDD36C[2] = {
     gUnkEu_0885DA68, gUnkEu_0885DA7C,
 };
 
-JiminyTextChar* gUnk_09EDD36CFr[2] = {
+const JiminyTextChar* gUnk_09EDD36CFr[2] = {
     gUnkEu_0885DA8C, gUnkEu_0885DA9B,
 };
 
-JiminyTextChar* gUnk_09EDD36CDe[3] = {
+const JiminyTextChar* gUnk_09EDD36CDe[3] = {
     gUnkEu_0885DAA5, gUnkEu_0885DABA, gUnkEu_0885DACF,
 };
 
-JiminyTextChar* gUnk_09EDD36CIt[3] = {
+const JiminyTextChar* gUnk_09EDD36CIt[3] = {
     gUnkEu_0885DAD5, gUnkEu_0885DAE9, gUnkEu_0885DAFC,
 };
 
-JiminyTextChar* gUnk_09EDD36CEs[3] = {
+const JiminyTextChar* gUnk_09EDD36CEs[3] = {
     gUnkEu_0885DB04, gUnkEu_0885DB17, gUnkEu_0885DB29,
 };
 
-JiminyTextChar* gUnk_09EDD374[2] = {
+const JiminyTextChar* gUnk_09EDD374[2] = {
     gUnkEu_0885DB60, gUnkEu_0885DB72,
 };
 
-JiminyTextChar* gUnk_09EDD374Fr[2] = {
+const JiminyTextChar* gUnk_09EDD374Fr[2] = {
     gUnkEu_0885DB84, gUnkEu_0885DB9A,
 };
 
-JiminyTextChar* gUnk_09EDD374De[3] = {
+const JiminyTextChar* gUnk_09EDD374De[3] = {
     gUnkEu_0885DBA3, gUnkEu_0885DBB8, gUnkEu_0885DBC8,
 };
 
-JiminyTextChar* gUnk_09EDD374It[2] = {
+const JiminyTextChar* gUnk_09EDD374It[2] = {
     gUnkEu_0885DBD7, gUnkEu_0885DBE8,
 };
 
-JiminyTextChar* gUnk_09EDD374Es[3] = {
+const JiminyTextChar* gUnk_09EDD374Es[3] = {
     gUnkEu_0885DC01, gUnkEu_0885DC14, gUnkEu_0885DC26,
 };
 
-JiminyTextChar* gUnk_09EDDCF4[17] = {
+const JiminyTextChar* gUnk_09EDDCF4[17] = {
     gUnkEu_0885DC50, gUnkEu_0885DC64, gUnkEu_0885DC72, gUnkEu_0885DC74,
     gUnkEu_0885DC8A, gUnkEu_0885DCA2, gUnkEu_0885DCB8, gUnkEu_0885DCCB,
     gUnkEu_0885DCD4, gUnkEu_0885DCD6, gUnkEu_0885DCEC, gUnkEu_0885DCFF,
@@ -7459,7 +7459,7 @@ JiminyTextChar* gUnk_09EDDCF4[17] = {
     gUnkEu_0885DD3F,
 };
 
-JiminyTextChar* gUnk_09EDDCF4Fr[17] = {
+const JiminyTextChar* gUnk_09EDDCF4Fr[17] = {
     gUnkEu_0885DD56, gUnkEu_0885DD6C, gUnkEu_0885DD7F, gUnkEu_0885DD81,
     gUnkEu_0885DD97, gUnkEu_0885DDAE, gUnkEu_0885DDC4, gUnkEu_0885DDD4,
     gUnkEu_0885DDEB, gUnkEu_0885DDED, gUnkEu_0885DDFF, gUnkEu_0885DE13,
@@ -7467,7 +7467,7 @@ JiminyTextChar* gUnk_09EDDCF4Fr[17] = {
     gUnkEu_0885DE5E,
 };
 
-JiminyTextChar* gUnk_09EDDCF4De[18] = {
+const JiminyTextChar* gUnk_09EDDCF4De[18] = {
     gUnkEu_0885DE6F, gUnkEu_0885DE85, gUnkEu_0885DE96, gUnkEu_0885DE98,
     gUnkEu_0885DEAA, gUnkEu_0885DEBE, gUnkEu_0885DED3, gUnkEu_0885DEE7,
     gUnkEu_0885DEFB, gUnkEu_0885DF10, gUnkEu_0885DF12, gUnkEu_0885DF24,
@@ -7475,7 +7475,7 @@ JiminyTextChar* gUnk_09EDDCF4De[18] = {
     gUnkEu_0885DF64, gUnkEu_0885DF79,
 };
 
-JiminyTextChar* gUnk_09EDDCF4It[19] = {
+const JiminyTextChar* gUnk_09EDDCF4It[19] = {
     gUnkEu_0885DF8B, gUnkEu_0885DF9D, gUnkEu_0885DFB2, gUnkEu_0885DFBB,
     gUnkEu_0885DFBD, gUnkEu_0885DFCE, gUnkEu_0885DFE4, gUnkEu_0885DFF6,
     gUnkEu_0885E009, gUnkEu_0885E01D, gUnkEu_0885E033, gUnkEu_0885E035,
@@ -7483,7 +7483,7 @@ JiminyTextChar* gUnk_09EDDCF4It[19] = {
     gUnkEu_0885E083, gUnkEu_0885E097, gUnkEu_0885E0A9,
 };
 
-JiminyTextChar* gUnk_09EDDCF4Es[19] = {
+const JiminyTextChar* gUnk_09EDDCF4Es[19] = {
     gUnkEu_0885E0BB, gUnkEu_0885E0D0, gUnkEu_0885E0E6, gUnkEu_0885E0E8,
     gUnkEu_0885E0F9, gUnkEu_0885E10D, gUnkEu_0885E11E, gUnkEu_0885E131,
     gUnkEu_0885E144, gUnkEu_0885E151, gUnkEu_0885E153, gUnkEu_0885E163,
@@ -7491,14 +7491,14 @@ JiminyTextChar* gUnk_09EDDCF4Es[19] = {
     gUnkEu_0885E1A1, gUnkEu_0885E1B4, gUnkEu_0885E1C9,
 };
 
-JiminyTextChar* gUnk_09EDBC40[15] = {
+const JiminyTextChar* gUnk_09EDBC40[15] = {
     gUnkEu_0885E1F8, gUnkEu_0885E20E, gUnkEu_0885E220, gUnkEu_0885E237,
     gUnkEu_0885E242, gUnkEu_0885E244, gUnkEu_0885E254, gUnkEu_0885E26B,
     gUnkEu_0885E283, gUnkEu_0885E296, gUnkEu_0885E298, gUnkEu_0885E2A6,
     gUnkEu_0885E2BD, gUnkEu_0885E2D4, gUnkEu_0885E2E4,
 };
 
-JiminyTextChar* gUnk_09EDBC40Fr[19] = {
+const JiminyTextChar* gUnk_09EDBC40Fr[19] = {
     gUnkEu_0885E2EE, gUnkEu_0885E2FF, gUnkEu_0885E30F, gUnkEu_0885E31D,
     gUnkEu_0885E32B, gUnkEu_0885E339, gUnkEu_0885E344, gUnkEu_0885E346,
     gUnkEu_0885E358, gUnkEu_0885E369, gUnkEu_0885E37E, gUnkEu_0885E393,
@@ -7506,7 +7506,7 @@ JiminyTextChar* gUnk_09EDBC40Fr[19] = {
     gUnkEu_0885E3DE, gUnkEu_0885E3F6, gUnkEu_0885E404,
 };
 
-JiminyTextChar* gUnk_09EDBC40De[19] = {
+const JiminyTextChar* gUnk_09EDBC40De[19] = {
     gUnkEu_0885E40F, gUnkEu_0885E424, gUnkEu_0885E43A, gUnkEu_0885E44F,
     gUnkEu_0885E461, gUnkEu_0885E475, gUnkEu_0885E481, gUnkEu_0885E483,
     gUnkEu_0885E499, gUnkEu_0885E4B0, gUnkEu_0885E4C6, gUnkEu_0885E4DD,
@@ -7514,7 +7514,7 @@ JiminyTextChar* gUnk_09EDBC40De[19] = {
     gUnkEu_0885E535, gUnkEu_0885E545, gUnkEu_0885E558,
 };
 
-JiminyTextChar* gUnk_09EDBC40It[18] = {
+const JiminyTextChar* gUnk_09EDBC40It[18] = {
     gUnkEu_0885E569, gUnkEu_0885E57B, gUnkEu_0885E590, gUnkEu_0885E5A4,
     gUnkEu_0885E5B7, gUnkEu_0885E5C2, gUnkEu_0885E5C4, gUnkEu_0885E5D6,
     gUnkEu_0885E5E9, gUnkEu_0885E5FE, gUnkEu_0885E616, gUnkEu_0885E62A,
@@ -7522,35 +7522,35 @@ JiminyTextChar* gUnk_09EDBC40It[18] = {
     gUnkEu_0885E677, gUnkEu_0885E68E,
 };
 
-JiminyTextChar* gUnk_09EDBC40Es[15] = {
+const JiminyTextChar* gUnk_09EDBC40Es[15] = {
     gUnkEu_0885E6A2, gUnkEu_0885E6BA, gUnkEu_0885E6CF, gUnkEu_0885E6E1,
     gUnkEu_0885E6FA, gUnkEu_0885E6FC, gUnkEu_0885E713, gUnkEu_0885E728,
     gUnkEu_0885E73E, gUnkEu_0885E755, gUnkEu_0885E757, gUnkEu_0885E764,
     gUnkEu_0885E77C, gUnkEu_0885E78D, gUnkEu_0885E7A4,
 };
 
-JiminyTextChar* gUnk_09EDBC7C[16] = {
+const JiminyTextChar* gUnk_09EDBC7C[16] = {
     gUnkEu_0885E7D8, gUnkEu_0885E7EF, gUnkEu_0885E807, gUnkEu_0885E81E,
     gUnkEu_0885E82D, gUnkEu_0885E82F, gUnkEu_0885E840, gUnkEu_0885E858,
     gUnkEu_0885E870, gUnkEu_0885E877, gUnkEu_0885E879, gUnkEu_0885E88D,
     gUnkEu_0885E8A3, gUnkEu_0885E8B8, gUnkEu_0885E8CC, gUnkEu_0885E8DF,
 };
 
-JiminyTextChar* gUnk_09EDBC7CFr[16] = {
+const JiminyTextChar* gUnk_09EDBC7CFr[16] = {
     gUnkEu_0885E8E9, gUnkEu_0885E900, gUnkEu_0885E914, gUnkEu_0885E92C,
     gUnkEu_0885E943, gUnkEu_0885E945, gUnkEu_0885E95B, gUnkEu_0885E972,
     gUnkEu_0885E986, gUnkEu_0885E996, gUnkEu_0885E998, gUnkEu_0885E9AD,
     gUnkEu_0885E9C4, gUnkEu_0885E9DA, gUnkEu_0885E9EC, gUnkEu_0885EA00,
 };
 
-JiminyTextChar* gUnk_09EDBC7CDe[16] = {
+const JiminyTextChar* gUnk_09EDBC7CDe[16] = {
     gUnkEu_0885EA14, gUnkEu_0885EA2B, gUnkEu_0885EA42, gUnkEu_0885EA57,
     gUnkEu_0885EA6D, gUnkEu_0885EA7E, gUnkEu_0885EA80, gUnkEu_0885EA94,
     gUnkEu_0885EAAD, gUnkEu_0885EAC3, gUnkEu_0885EAD7, gUnkEu_0885EAD9,
     gUnkEu_0885EAEB, gUnkEu_0885EB03, gUnkEu_0885EB1A, gUnkEu_0885EB31,
 };
 
-JiminyTextChar* gUnk_09EDBC7CIt[18] = {
+const JiminyTextChar* gUnk_09EDBC7CIt[18] = {
     gUnkEu_0885EB3D, gUnkEu_0885EB4E, gUnkEu_0885EB5F, gUnkEu_0885EB6F,
     gUnkEu_0885EB81, gUnkEu_0885EB8C, gUnkEu_0885EB8E, gUnkEu_0885EBA4,
     gUnkEu_0885EBB7, gUnkEu_0885EBC8, gUnkEu_0885EBD4, gUnkEu_0885EBD6,
@@ -7558,82 +7558,82 @@ JiminyTextChar* gUnk_09EDBC7CIt[18] = {
     gUnkEu_0885EC36, gUnkEu_0885EC49,
 };
 
-JiminyTextChar* gUnk_09EDBC7CEs[15] = {
+const JiminyTextChar* gUnk_09EDBC7CEs[15] = {
     gUnkEu_0885EC51, gUnkEu_0885EC68, gUnkEu_0885EC7F, gUnkEu_0885EC98,
     gUnkEu_0885ECAE, gUnkEu_0885ECB0, gUnkEu_0885ECC4, gUnkEu_0885ECD5,
     gUnkEu_0885ECEB, gUnkEu_0885ECED, gUnkEu_0885ECFD, gUnkEu_0885ED0F,
     gUnkEu_0885ED25, gUnkEu_0885ED39, gUnkEu_0885ED4B,
 };
 
-JiminyTextChar* gUnk_09EDBCBC[12] = {
+const JiminyTextChar* gUnk_09EDBCBC[12] = {
     gUnkEu_0885ED84, gUnkEu_0885ED9A, gUnkEu_0885EDB0, gUnkEu_0885EDC7,
     gUnkEu_0885EDD8, gUnkEu_0885EDE7, gUnkEu_0885EDE9, gUnkEu_0885EE02,
     gUnkEu_0885EE1B, gUnkEu_0885EE28, gUnkEu_0885EE2A, gUnkEu_0885EE3D,
 };
 
-JiminyTextChar* gUnk_09EDBCBCFr[13] = {
+const JiminyTextChar* gUnk_09EDBCBCFr[13] = {
     gUnkEu_0885EE56, gUnkEu_0885EE67, gUnkEu_0885EE7C, gUnkEu_0885EE8C,
     gUnkEu_0885EEA2, gUnkEu_0885EEB7, gUnkEu_0885EEBF, gUnkEu_0885EEC1,
     gUnkEu_0885EED8, gUnkEu_0885EEEE, gUnkEu_0885EEFE, gUnkEu_0885EF00,
     gUnkEu_0885EF13,
 };
 
-JiminyTextChar* gUnk_09EDBCBCDe[16] = {
+const JiminyTextChar* gUnk_09EDBCBCDe[16] = {
     gUnkEu_0885EF26, gUnkEu_0885EF34, gUnkEu_0885EF47, gUnkEu_0885EF5A,
     gUnkEu_0885EF6D, gUnkEu_0885EF80, gUnkEu_0885EF92, gUnkEu_0885EFA0,
     gUnkEu_0885EFA2, gUnkEu_0885EFB6, gUnkEu_0885EFCA, gUnkEu_0885EFE1,
     gUnkEu_0885EFEA, gUnkEu_0885EFEC, gUnkEu_0885EFFB, gUnkEu_0885F00A,
 };
 
-JiminyTextChar* gUnk_09EDBCBCIt[13] = {
+const JiminyTextChar* gUnk_09EDBCBCIt[13] = {
     gUnkEu_0885F018, gUnkEu_0885F025, gUnkEu_0885F039, gUnkEu_0885F04A,
     gUnkEu_0885F05D, gUnkEu_0885F06F, gUnkEu_0885F077, gUnkEu_0885F079,
     gUnkEu_0885F08F, gUnkEu_0885F0A3, gUnkEu_0885F0B7, gUnkEu_0885F0B9,
     gUnkEu_0885F0CB,
 };
 
-JiminyTextChar* gUnk_09EDBCBCEs[12] = {
+const JiminyTextChar* gUnk_09EDBCBCEs[12] = {
     gUnkEu_0885F0E2, gUnkEu_0885F0F3, gUnkEu_0885F109, gUnkEu_0885F11E,
     gUnkEu_0885F135, gUnkEu_0885F14E, gUnkEu_0885F150, gUnkEu_0885F167,
     gUnkEu_0885F17A, gUnkEu_0885F187, gUnkEu_0885F189, gUnkEu_0885F19B,
 };
 
-JiminyTextChar* gUnk_09EDBCEC[7] = {
+const JiminyTextChar* gUnk_09EDBCEC[7] = {
     gUnkEu_0885F1CC, gUnkEu_0885F1E4, gUnkEu_0885F1FD, gUnkEu_0885F214,
     gUnkEu_0885F216, gUnkEu_0885F230, gUnkEu_0885F245,
 };
 
-JiminyTextChar* gUnk_09EDBCECFr[10] = {
+const JiminyTextChar* gUnk_09EDBCECFr[10] = {
     gUnkEu_0885F25C, gUnkEu_0885F270, gUnkEu_0885F284, gUnkEu_0885F295,
     gUnkEu_0885F2A4, gUnkEu_0885F2A6, gUnkEu_0885F2B7, gUnkEu_0885F2C5,
     gUnkEu_0885F2DB, gUnkEu_0885F2ED,
 };
 
-JiminyTextChar* gUnk_09EDBCECDe[10] = {
+const JiminyTextChar* gUnk_09EDBCECDe[10] = {
     gUnkEu_0885F2F5, gUnkEu_0885F30C, gUnkEu_0885F321, gUnkEu_0885F33A,
     gUnkEu_0885F353, gUnkEu_0885F355, gUnkEu_0885F36B, gUnkEu_0885F380,
     gUnkEu_0885F399, gUnkEu_0885F3AE,
 };
 
-JiminyTextChar* gUnk_09EDBCECIt[12] = {
+const JiminyTextChar* gUnk_09EDBCECIt[12] = {
     gUnkEu_0885F3BD, gUnkEu_0885F3D2, gUnkEu_0885F3D4, gUnkEu_0885F3EA,
     gUnkEu_0885F3FE, gUnkEu_0885F410, gUnkEu_0885F426, gUnkEu_0885F428,
     gUnkEu_0885F438, gUnkEu_0885F44F, gUnkEu_0885F45F, gUnkEu_0885F476,
 };
 
-JiminyTextChar* gUnk_09EDBCECEs[8] = {
+const JiminyTextChar* gUnk_09EDBCECEs[8] = {
     gUnkEu_0885F483, gUnkEu_0885F498, gUnkEu_0885F4AF, gUnkEu_0885F4C3,
     gUnkEu_0885F4C5, gUnkEu_0885F4D5, gUnkEu_0885F4E3, gUnkEu_0885F4F9,
 };
 
-JiminyTextChar* gUnk_09EDBD08[16] = {
+const JiminyTextChar* gUnk_09EDBD08[16] = {
     gUnkEu_0885F538, gUnkEu_0885F551, gUnkEu_0885F553, gUnkEu_0885F56A,
     gUnkEu_0885F581, gUnkEu_0885F596, gUnkEu_0885F5AB, gUnkEu_0885F5AD,
     gUnkEu_0885F5C2, gUnkEu_0885F5D9, gUnkEu_0885F5F1, gUnkEu_0885F606,
     gUnkEu_0885F61A, gUnkEu_0885F627, gUnkEu_0885F629, gUnkEu_0885F63E,
 };
 
-JiminyTextChar* gUnk_09EDBD08Fr[22] = {
+const JiminyTextChar* gUnk_09EDBD08Fr[22] = {
     gUnkEu_0885F655, gUnkEu_0885F666, gUnkEu_0885F66C, gUnkEu_0885F66E,
     gUnkEu_0885F67D, gUnkEu_0885F68E, gUnkEu_0885F69F, gUnkEu_0885F6B4,
     gUnkEu_0885F6C8, gUnkEu_0885F6DB, gUnkEu_0885F6E1, gUnkEu_0885F6E3,
@@ -7642,7 +7642,7 @@ JiminyTextChar* gUnk_09EDBD08Fr[22] = {
     gUnkEu_0885F779, gUnkEu_0885F78B,
 };
 
-JiminyTextChar* gUnk_09EDBD08De[21] = {
+const JiminyTextChar* gUnk_09EDBD08De[21] = {
     gUnkEu_0885F799, gUnkEu_0885F7AB, gUnkEu_0885F7B7, gUnkEu_0885F7C7,
     gUnkEu_0885F7C9, gUnkEu_0885F7E0, gUnkEu_0885F7F8, gUnkEu_0885F80E,
     gUnkEu_0885F825, gUnkEu_0885F83B, gUnkEu_0885F851, gUnkEu_0885F853,
@@ -7651,7 +7651,7 @@ JiminyTextChar* gUnk_09EDBD08De[21] = {
     gUnkEu_0885F90D,
 };
 
-JiminyTextChar* gUnk_09EDBD08It[17] = {
+const JiminyTextChar* gUnk_09EDBD08It[17] = {
     gUnkEu_0885F91D, gUnkEu_0885F92E, gUnkEu_0885F937, gUnkEu_0885F939,
     gUnkEu_0885F950, gUnkEu_0885F966, gUnkEu_0885F979, gUnkEu_0885F988,
     gUnkEu_0885F995, gUnkEu_0885F997, gUnkEu_0885F9AE, gUnkEu_0885F9C0,
@@ -7659,21 +7659,21 @@ JiminyTextChar* gUnk_09EDBD08It[17] = {
     gUnkEu_0885FA0C,
 };
 
-JiminyTextChar* gUnk_09EDBD08Es[16] = {
+const JiminyTextChar* gUnk_09EDBD08Es[16] = {
     gUnkEu_0885FA22, gUnkEu_0885FA37, gUnkEu_0885FA40, gUnkEu_0885FA42,
     gUnkEu_0885FA55, gUnkEu_0885FA6C, gUnkEu_0885FA82, gUnkEu_0885FA9B,
     gUnkEu_0885FA9D, gUnkEu_0885FAB5, gUnkEu_0885FACB, gUnkEu_0885FAE3,
     gUnkEu_0885FAF6, gUnkEu_0885FB0A, gUnkEu_0885FB0C, gUnkEu_0885FB21,
 };
 
-JiminyTextChar* gUnk_09EDD54C[15] = {
+const JiminyTextChar* gUnk_09EDD54C[15] = {
     gUnkEu_0885FB54, gUnkEu_0885FB6D, gUnkEu_0885FB6F, gUnkEu_0885FB84,
     gUnkEu_0885FB9B, gUnkEu_0885FBB0, gUnkEu_0885FBC6, gUnkEu_0885FBDD,
     gUnkEu_0885FBDF, gUnkEu_0885FBF6, gUnkEu_0885FC0C, gUnkEu_0885FC23,
     gUnkEu_0885FC3B, gUnkEu_0885FC3D, gUnkEu_0885FC51,
 };
 
-JiminyTextChar* gUnk_09EDD54CFr[19] = {
+const JiminyTextChar* gUnk_09EDD54CFr[19] = {
     gUnkEu_0885FC69, gUnkEu_0885FC7B, gUnkEu_0885FC81, gUnkEu_0885FC83,
     gUnkEu_0885FC97, gUnkEu_0885FCAA, gUnkEu_0885FCC1, gUnkEu_0885FCD7,
     gUnkEu_0885FCEA, gUnkEu_0885FCFF, gUnkEu_0885FD01, gUnkEu_0885FD17,
@@ -7681,7 +7681,7 @@ JiminyTextChar* gUnk_09EDD54CFr[19] = {
     gUnkEu_0885FD64, gUnkEu_0885FD7B, gUnkEu_0885FD92,
 };
 
-JiminyTextChar* gUnk_09EDD54CDe[23] = {
+const JiminyTextChar* gUnk_09EDD54CDe[23] = {
     gUnkEu_0885FDA6, gUnkEu_0885FDB5, gUnkEu_0885FDC6, gUnkEu_0885FDD6,
     gUnkEu_0885FDD9, gUnkEu_0885FDEB, gUnkEu_0885FE00, gUnkEu_0885FE16,
     gUnkEu_0885FE2A, gUnkEu_0885FE3F, gUnkEu_0885FE55, gUnkEu_0885FE66,
@@ -7690,7 +7690,7 @@ JiminyTextChar* gUnk_09EDD54CDe[23] = {
     gUnkEu_0885FEE7, gUnkEu_0885FEF9, gUnkEu_0885FF0B,
 };
 
-JiminyTextChar* gUnk_09EDD54CIt[17] = {
+const JiminyTextChar* gUnk_09EDD54CIt[17] = {
     gUnkEu_0885FF21, gUnkEu_0885FF32, gUnkEu_0885FF3B, gUnkEu_0885FF3D,
     gUnkEu_0885FF55, gUnkEu_0885FF6C, gUnkEu_0885FF7D, gUnkEu_0885FF8E,
     gUnkEu_0885FFA9, gUnkEu_0885FFAB, gUnkEu_0885FFC1, gUnkEu_0885FFD4,
@@ -7698,166 +7698,166 @@ JiminyTextChar* gUnk_09EDD54CIt[17] = {
     gUnkEu_0886002C,
 };
 
-JiminyTextChar* gUnk_09EDD54CEs[16] = {
+const JiminyTextChar* gUnk_09EDD54CEs[16] = {
     gUnkEu_08860040, gUnkEu_08860055, gUnkEu_0886005E, gUnkEu_08860060,
     gUnkEu_08860078, gUnkEu_0886008F, gUnkEu_088600A2, gUnkEu_088600B6,
     gUnkEu_088600CD, gUnkEu_088600CF, gUnkEu_088600E1, gUnkEu_088600F7,
     gUnkEu_0886010B, gUnkEu_08860123, gUnkEu_08860125, gUnkEu_0886013B,
 };
 
-JiminyTextChar* gUnk_09EDBD48[7] = {
+const JiminyTextChar* gUnk_09EDBD48[7] = {
     gUnkEu_08860174, gUnkEu_0886018C, gUnkEu_088601A2, gUnkEu_088601A9,
     gUnkEu_088601AB, gUnkEu_088601C3, gUnkEu_088601D9,
 };
 
-JiminyTextChar* gUnk_09EDBD48Fr[8] = {
+const JiminyTextChar* gUnk_09EDBD48Fr[8] = {
     gUnkEu_088601EC, gUnkEu_08860203, gUnkEu_08860219, gUnkEu_0886022A,
     gUnkEu_0886022C, gUnkEu_08860242, gUnkEu_08860256, gUnkEu_08860269,
 };
 
-JiminyTextChar* gUnk_09EDBD48De[9] = {
+const JiminyTextChar* gUnk_09EDBD48De[9] = {
     gUnkEu_08860270, gUnkEu_08860282, gUnkEu_08860297, gUnkEu_088602AC,
     gUnkEu_088602AE, gUnkEu_088602BF, gUnkEu_088602D3, gUnkEu_088602E8,
     gUnkEu_088602FB,
 };
 
-JiminyTextChar* gUnk_09EDBD48It[7] = {
+const JiminyTextChar* gUnk_09EDBD48It[7] = {
     gUnkEu_08860313, gUnkEu_08860325, gUnkEu_0886033A, gUnkEu_08860353,
     gUnkEu_08860355, gUnkEu_08860367, gUnkEu_0886037B,
 };
 
-JiminyTextChar* gUnk_09EDBD48Es[7] = {
+const JiminyTextChar* gUnk_09EDBD48Es[7] = {
     gUnkEu_0886038D, gUnkEu_088603A3, gUnkEu_088603B9, gUnkEu_088603CE,
     gUnkEu_088603D0, gUnkEu_088603E5, gUnkEu_088603FC,
 };
 
-JiminyTextChar* gUnk_09EDBD64[11] = {
+const JiminyTextChar* gUnk_09EDBD64[11] = {
     gUnkEu_0886042C, gUnkEu_08860445, gUnkEu_0886044F, gUnkEu_08860451,
     gUnkEu_08860463, gUnkEu_0886047C, gUnkEu_08860493, gUnkEu_088604AA,
     gUnkEu_088604B6, gUnkEu_088604B8, gUnkEu_088604D2,
 };
 
-JiminyTextChar* gUnk_09EDBD64Fr[13] = {
+const JiminyTextChar* gUnk_09EDBD64Fr[13] = {
     gUnkEu_088604E6, gUnkEu_088604F8, gUnkEu_08860508, gUnkEu_0886050A,
     gUnkEu_08860520, gUnkEu_08860531, gUnkEu_08860548, gUnkEu_0886055C,
     gUnkEu_08860573, gUnkEu_08860589, gUnkEu_0886058B, gUnkEu_0886059E,
     gUnkEu_088605AE,
 };
 
-JiminyTextChar* gUnk_09EDBD64De[15] = {
+const JiminyTextChar* gUnk_09EDBD64De[15] = {
     gUnkEu_088605BB, gUnkEu_088605D0, gUnkEu_088605E4, gUnkEu_088605F3,
     gUnkEu_088605F5, gUnkEu_08860607, gUnkEu_08860619, gUnkEu_0886062D,
     gUnkEu_08860642, gUnkEu_08860658, gUnkEu_0886066A, gUnkEu_0886067B,
     gUnkEu_0886067D, gUnkEu_08860691, gUnkEu_088606AA,
 };
 
-JiminyTextChar* gUnk_09EDBD64It[12] = {
+const JiminyTextChar* gUnk_09EDBD64It[12] = {
     gUnkEu_088606B6, gUnkEu_088606C6, gUnkEu_088606D4, gUnkEu_088606D6,
     gUnkEu_088606EF, gUnkEu_08860706, gUnkEu_0886071F, gUnkEu_08860735,
     gUnkEu_0886074D, gUnkEu_0886074F, gUnkEu_08860762, gUnkEu_08860773,
 };
 
-JiminyTextChar* gUnk_09EDBD64Es[12] = {
+const JiminyTextChar* gUnk_09EDBD64Es[12] = {
     gUnkEu_0886077E, gUnkEu_08860795, gUnkEu_088607A9, gUnkEu_088607AB,
     gUnkEu_088607BE, gUnkEu_088607CE, gUnkEu_088607E0, gUnkEu_088607F1,
     gUnkEu_08860803, gUnkEu_0886081D, gUnkEu_0886081F, gUnkEu_08860831,
 };
 
-JiminyTextChar* gUnk_09EDBD90[6] = {
+const JiminyTextChar* gUnk_09EDBD90[6] = {
     gUnkEu_08860868, gUnkEu_0886087C, gUnkEu_08860894, gUnkEu_088608A0,
     gUnkEu_088608A2, gUnkEu_088608B9,
 };
 
-JiminyTextChar* gUnk_09EDBD90Fr[7] = {
+const JiminyTextChar* gUnk_09EDBD90Fr[7] = {
     gUnkEu_088608CB, gUnkEu_088608DD, gUnkEu_088608F1, gUnkEu_08860902,
     gUnkEu_08860904, gUnkEu_08860916, gUnkEu_08860925,
 };
 
-JiminyTextChar* gUnk_09EDBD90De[7] = {
+const JiminyTextChar* gUnk_09EDBD90De[7] = {
     gUnkEu_08860934, gUnkEu_08860949, gUnkEu_0886095C, gUnkEu_0886096C,
     gUnkEu_0886096E, gUnkEu_0886097E, gUnkEu_08860991,
 };
 
-JiminyTextChar* gUnk_09EDBD90It[7] = {
+const JiminyTextChar* gUnk_09EDBD90It[7] = {
     gUnkEu_08860999, gUnkEu_088609AA, gUnkEu_088609BE, gUnkEu_088609D2,
     gUnkEu_088609D4, gUnkEu_088609E6, gUnkEu_088609F7,
 };
 
-JiminyTextChar* gUnk_09EDBD90Es[6] = {
+const JiminyTextChar* gUnk_09EDBD90Es[6] = {
     gUnkEu_08860A0A, gUnkEu_08860A1F, gUnkEu_08860A34, gUnkEu_08860A48,
     gUnkEu_08860A4A, gUnkEu_08860A60,
 };
 
-JiminyTextChar* gUnk_09EDBDA8[8] = {
+const JiminyTextChar* gUnk_09EDBDA8[8] = {
     gUnkEu_08860A98, gUnkEu_08860AAF, gUnkEu_08860AC4, gUnkEu_08860ADA,
     gUnkEu_08860AEE, gUnkEu_08860AFC, gUnkEu_08860AFE, gUnkEu_08860B18,
 };
 
-JiminyTextChar* gUnk_09EDBDA8Fr[9] = {
+const JiminyTextChar* gUnk_09EDBDA8Fr[9] = {
     gUnkEu_08860B29, gUnkEu_08860B3E, gUnkEu_08860B56, gUnkEu_08860B68,
     gUnkEu_08860B7C, gUnkEu_08860B94, gUnkEu_08860B96, gUnkEu_08860BA9,
     gUnkEu_08860BB7,
 };
 
-JiminyTextChar* gUnk_09EDBDA8De[10] = {
+const JiminyTextChar* gUnk_09EDBDA8De[10] = {
     gUnkEu_08860BC5, gUnkEu_08860BDA, gUnkEu_08860BED, gUnkEu_08860C03,
     gUnkEu_08860C19, gUnkEu_08860C2D, gUnkEu_08860C43, gUnkEu_08860C4B,
     gUnkEu_08860C4D, gUnkEu_08860C65,
 };
 
-JiminyTextChar* gUnk_09EDBDA8It[11] = {
+const JiminyTextChar* gUnk_09EDBDA8It[11] = {
     gUnkEu_08860C7E, gUnkEu_08860C90, gUnkEu_08860CA1, gUnkEu_08860CB5,
     gUnkEu_08860CC5, gUnkEu_08860CD5, gUnkEu_08860CE9, gUnkEu_08860CFF,
     gUnkEu_08860D01, gUnkEu_08860D14, gUnkEu_08860D25,
 };
 
-JiminyTextChar* gUnk_09EDBDA8Es[8] = {
+const JiminyTextChar* gUnk_09EDBDA8Es[8] = {
     gUnkEu_08860D2C, gUnkEu_08860D43, gUnkEu_08860D59, gUnkEu_08860D6D,
     gUnkEu_08860D81, gUnkEu_08860D8D, gUnkEu_08860D8F, gUnkEu_08860D9E,
 };
 
-JiminyTextChar* gUnk_09EDBDC8[8] = {
+const JiminyTextChar* gUnk_09EDBDC8[8] = {
     gUnkEu_08860DD4, gUnkEu_08860DE8, gUnkEu_08860DFD, gUnkEu_08860E0D,
     gUnkEu_08860E0F, gUnkEu_08860E27, gUnkEu_08860E39, gUnkEu_08860E4E,
 };
 
-JiminyTextChar* gUnk_09EDBDC8Fr[11] = {
+const JiminyTextChar* gUnk_09EDBDC8Fr[11] = {
     gUnkEu_08860E61, gUnkEu_08860E71, gUnkEu_08860E84, gUnkEu_08860E94,
     gUnkEu_08860E96, gUnkEu_08860EA5, gUnkEu_08860EB8, gUnkEu_08860EC5,
     gUnkEu_08860ED8, gUnkEu_08860EE6, gUnkEu_08860EFA,
 };
 
-JiminyTextChar* gUnk_09EDBDC8De[9] = {
+const JiminyTextChar* gUnk_09EDBDC8De[9] = {
     gUnkEu_08860F11, gUnkEu_08860F29, gUnkEu_08860F41, gUnkEu_08860F52,
     gUnkEu_08860F54, gUnkEu_08860F63, gUnkEu_08860F75, gUnkEu_08860F89,
     gUnkEu_08860F9D,
 };
 
-JiminyTextChar* gUnk_09EDBDC8It[8] = {
+const JiminyTextChar* gUnk_09EDBDC8It[8] = {
     gUnkEu_08860FA9, gUnkEu_08860FBB, gUnkEu_08860FCE, gUnkEu_08860FD0,
     gUnkEu_08860FE8, gUnkEu_08860FFC, gUnkEu_08861011, gUnkEu_08861022,
 };
 
-JiminyTextChar* gUnk_09EDBDC8Es[10] = {
+const JiminyTextChar* gUnk_09EDBDC8Es[10] = {
     gUnkEu_08861031, gUnkEu_08861045, gUnkEu_0886105D, gUnkEu_08861073,
     gUnkEu_0886107A, gUnkEu_0886107C, gUnkEu_08861091, gUnkEu_088610A8,
     gUnkEu_088610BF, gUnkEu_088610D4,
 };
 
-JiminyTextChar* gUnk_09EDBDE8[13] = {
+const JiminyTextChar* gUnk_09EDBDE8[13] = {
     gUnkEu_08861108, gUnkEu_0886111D, gUnkEu_08861132, gUnkEu_08861148,
     gUnkEu_0886115F, gUnkEu_08861161, gUnkEu_08861177, gUnkEu_08861188,
     gUnkEu_0886119B, gUnkEu_088611B1, gUnkEu_088611CA, gUnkEu_088611DF,
     gUnkEu_088611F6,
 };
 
-JiminyTextChar* gUnk_09EDBDE8Fr[12] = {
+const JiminyTextChar* gUnk_09EDBDE8Fr[12] = {
     gUnkEu_0886120C, gUnkEu_08861221, gUnkEu_08861232, gUnkEu_08861244,
     gUnkEu_08861255, gUnkEu_08861267, gUnkEu_08861269, gUnkEu_08861283,
     gUnkEu_08861293, gUnkEu_088612A9, gUnkEu_088612BB, gUnkEu_088612CF,
 };
 
-JiminyTextChar* gUnk_09EDBDE8De[17] = {
+const JiminyTextChar* gUnk_09EDBDE8De[17] = {
     gUnkEu_088612E3, gUnkEu_088612F4, gUnkEu_08861304, gUnkEu_08861317,
     gUnkEu_0886131E, gUnkEu_0886132F, gUnkEu_08861344, gUnkEu_08861346,
     gUnkEu_0886135A, gUnkEu_08861370, gUnkEu_08861384, gUnkEu_08861398,
@@ -7865,235 +7865,235 @@ JiminyTextChar* gUnk_09EDBDE8De[17] = {
     gUnkEu_08861401,
 };
 
-JiminyTextChar* gUnk_09EDBDE8It[16] = {
+const JiminyTextChar* gUnk_09EDBDE8It[16] = {
     gUnkEu_0886140B, gUnkEu_0886141E, gUnkEu_08861433, gUnkEu_08861447,
     gUnkEu_0886145A, gUnkEu_08861464, gUnkEu_08861466, gUnkEu_08861476,
     gUnkEu_0886148A, gUnkEu_088614A0, gUnkEu_088614B5, gUnkEu_088614CD,
     gUnkEu_088614E2, gUnkEu_088614F9, gUnkEu_0886150A, gUnkEu_0886151D,
 };
 
-JiminyTextChar* gUnk_09EDBDE8Es[14] = {
+const JiminyTextChar* gUnk_09EDBDE8Es[14] = {
     gUnkEu_08861527, gUnkEu_0886153C, gUnkEu_08861552, gUnkEu_0886155F,
     gUnkEu_08861571, gUnkEu_08861573, gUnkEu_0886158B, gUnkEu_088615A2,
     gUnkEu_088615B7, gUnkEu_088615C9, gUnkEu_088615E0, gUnkEu_088615F0,
     gUnkEu_08861607, gUnkEu_0886161E,
 };
 
-JiminyTextChar* gUnk_09EDBE1C[11] = {
+const JiminyTextChar* gUnk_09EDBE1C[11] = {
     gUnkEu_08861644, gUnkEu_0886165A, gUnkEu_08861671, gUnkEu_08861689,
     gUnkEu_088616A1, gUnkEu_088616B6, gUnkEu_088616C3, gUnkEu_088616C5,
     gUnkEu_088616DC, gUnkEu_088616F0, gUnkEu_08861705,
 };
 
-JiminyTextChar* gUnk_09EDBE1CFr[13] = {
+const JiminyTextChar* gUnk_09EDBE1CFr[13] = {
     gUnkEu_08861715, gUnkEu_08861721, gUnkEu_08861737, gUnkEu_0886174A,
     gUnkEu_0886175A, gUnkEu_0886176F, gUnkEu_0886177F, gUnkEu_0886178A,
     gUnkEu_0886178C, gUnkEu_0886179F, gUnkEu_088617AF, gUnkEu_088617C3,
     gUnkEu_088617D3,
 };
 
-JiminyTextChar* gUnk_09EDBE1CDe[13] = {
+const JiminyTextChar* gUnk_09EDBE1CDe[13] = {
     gUnkEu_088617E2, gUnkEu_088617F6, gUnkEu_0886180E, gUnkEu_08861825,
     gUnkEu_0886183E, gUnkEu_08861856, gUnkEu_0886186E, gUnkEu_0886187E,
     gUnkEu_08861880, gUnkEu_08861899, gUnkEu_088618B0, gUnkEu_088618C5,
     gUnkEu_088618DC,
 };
 
-JiminyTextChar* gUnk_09EDBE1CIt[11] = {
+const JiminyTextChar* gUnk_09EDBE1CIt[11] = {
     gUnkEu_088618EF, gUnkEu_08861904, gUnkEu_08861916, gUnkEu_0886192B,
     gUnkEu_08861940, gUnkEu_08861957, gUnkEu_08861962, gUnkEu_08861964,
     gUnkEu_08861978, gUnkEu_0886198A, gUnkEu_0886199D,
 };
 
-JiminyTextChar* gUnk_09EDBE1CEs[11] = {
+const JiminyTextChar* gUnk_09EDBE1CEs[11] = {
     gUnkEu_088619AE, gUnkEu_088619C0, gUnkEu_088619D4, gUnkEu_088619E8,
     gUnkEu_08861A00, gUnkEu_08861A16, gUnkEu_08861A24, gUnkEu_08861A26,
     gUnkEu_08861A3B, gUnkEu_08861A52, gUnkEu_08861A66,
 };
 
-JiminyTextChar* gUnk_09EDBE48[12] = {
+const JiminyTextChar* gUnk_09EDBE48[12] = {
     gUnkEu_08861A98, gUnkEu_08861AAA, gUnkEu_08861AC0, gUnkEu_08861AD8,
     gUnkEu_08861AED, gUnkEu_08861AEF, gUnkEu_08861B01, gUnkEu_08861B15,
     gUnkEu_08861B29, gUnkEu_08861B3C, gUnkEu_08861B54, gUnkEu_08861B68,
 };
 
-JiminyTextChar* gUnk_09EDBE48Fr[12] = {
+const JiminyTextChar* gUnk_09EDBE48Fr[12] = {
     gUnkEu_08861B70, gUnkEu_08861B7C, gUnkEu_08861B91, gUnkEu_08861BA6,
     gUnkEu_08861BB6, gUnkEu_08861BB8, gUnkEu_08861BC8, gUnkEu_08861BDC,
     gUnkEu_08861BF2, gUnkEu_08861C07, gUnkEu_08861C1D, gUnkEu_08861C31,
 };
 
-JiminyTextChar* gUnk_09EDBE48De[16] = {
+const JiminyTextChar* gUnk_09EDBE48De[16] = {
     gUnkEu_08861C3A, gUnkEu_08861C4B, gUnkEu_08861C5F, gUnkEu_08861C73,
     gUnkEu_08861C84, gUnkEu_08861C96, gUnkEu_08861CA7, gUnkEu_08861CAF,
     gUnkEu_08861CB1, gUnkEu_08861CC6, gUnkEu_08861CDE, gUnkEu_08861CF7,
     gUnkEu_08861D0C, gUnkEu_08861D24, gUnkEu_08861D39, gUnkEu_08861D51,
 };
 
-JiminyTextChar* gUnk_09EDBE48It[14] = {
+const JiminyTextChar* gUnk_09EDBE48It[14] = {
     gUnkEu_08861D69, gUnkEu_08861D7B, gUnkEu_08861D8B, gUnkEu_08861DA1,
     gUnkEu_08861DB6, gUnkEu_08861DCC, gUnkEu_08861DCE, gUnkEu_08861DE2,
     gUnkEu_08861DF8, gUnkEu_08861E0B, gUnkEu_08861E1D, gUnkEu_08861E31,
     gUnkEu_08861E45, gUnkEu_08861E59,
 };
 
-JiminyTextChar* gUnk_09EDBE48Es[12] = {
+const JiminyTextChar* gUnk_09EDBE48Es[12] = {
     gUnkEu_08861E6E, gUnkEu_08861E83, gUnkEu_08861E97, gUnkEu_08861EA9,
     gUnkEu_08861EC0, gUnkEu_08861EC2, gUnkEu_08861ED5, gUnkEu_08861EE6,
     gUnkEu_08861EF8, gUnkEu_08861F0D, gUnkEu_08861F21, gUnkEu_08861F38,
 };
 
-JiminyTextChar* gUnk_09EDBE78[8] = {
+const JiminyTextChar* gUnk_09EDBE78[8] = {
     gUnkEu_08861F6C, gUnkEu_08861F7F, gUnkEu_08861F92, gUnkEu_08861FA2,
     gUnkEu_08861FB6, gUnkEu_08861FCA, gUnkEu_08861FCC, gUnkEu_08861FE2,
 };
 
-JiminyTextChar* gUnk_09EDBE78Fr[8] = {
+const JiminyTextChar* gUnk_09EDBE78Fr[8] = {
     gUnkEu_08861FEC, gUnkEu_08861FFF, gUnkEu_08862011, gUnkEu_08862025,
     gUnkEu_0886203A, gUnkEu_0886204A, gUnkEu_0886204C, gUnkEu_08862060,
 };
 
-JiminyTextChar* gUnk_09EDBE78De[9] = {
+const JiminyTextChar* gUnk_09EDBE78De[9] = {
     gUnkEu_0886206D, gUnkEu_08862083, gUnkEu_08862094, gUnkEu_088620A4,
     gUnkEu_088620B7, gUnkEu_088620CB, gUnkEu_088620D9, gUnkEu_088620DB,
     gUnkEu_088620F1,
 };
 
-JiminyTextChar* gUnk_09EDBE78It[7] = {
+const JiminyTextChar* gUnk_09EDBE78It[7] = {
     gUnkEu_08862101, gUnkEu_08862118, gUnkEu_08862130, gUnkEu_08862146,
     gUnkEu_0886215F, gUnkEu_08862161, gUnkEu_08862174,
 };
 
-JiminyTextChar* gUnk_09EDBE78Es[8] = {
+const JiminyTextChar* gUnk_09EDBE78Es[8] = {
     gUnkEu_08862184, gUnkEu_0886219A, gUnkEu_088621B1, gUnkEu_088621C8,
     gUnkEu_088621DE, gUnkEu_088621EA, gUnkEu_088621EC, gUnkEu_08862202,
 };
 
-JiminyTextChar* gUnk_09EDBE98[10] = {
+const JiminyTextChar* gUnk_09EDBE98[10] = {
     gUnkEu_08862234, gUnkEu_08862249, gUnkEu_0886225B, gUnkEu_08862272,
     gUnkEu_08862287, gUnkEu_08862291, gUnkEu_08862293, gUnkEu_088622A9,
     gUnkEu_088622C1, gUnkEu_088622D5,
 };
 
-JiminyTextChar* gUnk_09EDBE98Fr[12] = {
+const JiminyTextChar* gUnk_09EDBE98Fr[12] = {
     gUnkEu_088622E0, gUnkEu_088622F7, gUnkEu_0886230C, gUnkEu_08862320,
     gUnkEu_08862337, gUnkEu_0886234E, gUnkEu_0886235A, gUnkEu_0886235C,
     gUnkEu_08862368, gUnkEu_08862380, gUnkEu_08862391, gUnkEu_088623A4,
 };
 
-JiminyTextChar* gUnk_09EDBE98De[15] = {
+const JiminyTextChar* gUnk_09EDBE98De[15] = {
     gUnkEu_088623B0, gUnkEu_088623C4, gUnkEu_088623D8, gUnkEu_088623E9,
     gUnkEu_08862401, gUnkEu_08862419, gUnkEu_0886242C, gUnkEu_0886243A,
     gUnkEu_0886243C, gUnkEu_0886244F, gUnkEu_0886245F, gUnkEu_08862471,
     gUnkEu_08862485, gUnkEu_0886249B, gUnkEu_088624A9,
 };
 
-JiminyTextChar* gUnk_09EDBE98It[11] = {
+const JiminyTextChar* gUnk_09EDBE98It[11] = {
     gUnkEu_088624B8, gUnkEu_088624CC, gUnkEu_088624E0, gUnkEu_088624F5,
     gUnkEu_0886250C, gUnkEu_08862525, gUnkEu_0886252E, gUnkEu_08862530,
     gUnkEu_08862547, gUnkEu_0886255D, gUnkEu_08862573,
 };
 
-JiminyTextChar* gUnk_09EDBE98Es[10] = {
+const JiminyTextChar* gUnk_09EDBE98Es[10] = {
     gUnkEu_08862586, gUnkEu_0886259C, gUnkEu_088625AB, gUnkEu_088625C3,
     gUnkEu_088625D6, gUnkEu_088625EA, gUnkEu_088625EC, gUnkEu_08862601,
     gUnkEu_08862613, gUnkEu_08862624,
 };
 
-JiminyTextChar* gUnk_09EDD588[9] = {
+const JiminyTextChar* gUnk_09EDD588[9] = {
     gUnkEu_08862654, gUnkEu_08862665, gUnkEu_0886267B, gUnkEu_08862691,
     gUnkEu_088626A1, gUnkEu_088626A3, gUnkEu_088626B9, gUnkEu_088626CF,
     gUnkEu_088626E7,
 };
 
-JiminyTextChar* gUnk_09EDD588Fr[9] = {
+const JiminyTextChar* gUnk_09EDD588Fr[9] = {
     gUnkEu_088626FC, gUnkEu_08862714, gUnkEu_0886272A, gUnkEu_08862735,
     gUnkEu_08862737, gUnkEu_0886274B, gUnkEu_08862761, gUnkEu_08862779,
     gUnkEu_0886278C,
 };
 
-JiminyTextChar* gUnk_09EDD588De[10] = {
+const JiminyTextChar* gUnk_09EDD588De[10] = {
     gUnkEu_08862796, gUnkEu_088627AE, gUnkEu_088627C4, gUnkEu_088627D8,
     gUnkEu_088627F1, gUnkEu_088627F3, gUnkEu_08862807, gUnkEu_0886281B,
     gUnkEu_0886282F, gUnkEu_08862845,
 };
 
-JiminyTextChar* gUnk_09EDD588It[8] = {
+const JiminyTextChar* gUnk_09EDD588It[8] = {
     gUnkEu_08862855, gUnkEu_0886286E, gUnkEu_08862884, gUnkEu_08862898,
     gUnkEu_0886289A, gUnkEu_088628B3, gUnkEu_088628C8, gUnkEu_088628DC,
 };
 
-JiminyTextChar* gUnk_09EDD588Es[9] = {
+const JiminyTextChar* gUnk_09EDD588Es[9] = {
     gUnkEu_088628EB, gUnkEu_088628FC, gUnkEu_08862912, gUnkEu_08862929,
     gUnkEu_08862940, gUnkEu_08862942, gUnkEu_08862958, gUnkEu_08862969,
     gUnkEu_0886297E,
 };
 
-JiminyTextChar* gUnk_09EDD5AC[7] = {
+const JiminyTextChar* gUnk_09EDD5AC[7] = {
     gUnkEu_088629A4, gUnkEu_088629B6, gUnkEu_088629BF, gUnkEu_088629C1,
     gUnkEu_088629D3, gUnkEu_088629EB, gUnkEu_08862A02,
 };
 
-JiminyTextChar* gUnk_09EDD5ACFr[8] = {
+const JiminyTextChar* gUnk_09EDD5ACFr[8] = {
     gUnkEu_08862A0F, gUnkEu_08862A26, gUnkEu_08862A2F, gUnkEu_08862A31,
     gUnkEu_08862A44, gUnkEu_08862A5A, gUnkEu_08862A6A, gUnkEu_08862A80,
 };
 
-JiminyTextChar* gUnk_09EDD5ACDe[8] = {
+const JiminyTextChar* gUnk_09EDD5ACDe[8] = {
     gUnkEu_08862A8F, gUnkEu_08862AA7, gUnkEu_08862AC0, gUnkEu_08862AC2,
     gUnkEu_08862ADB, gUnkEu_08862AF1, gUnkEu_08862B03, gUnkEu_08862B16,
 };
 
-JiminyTextChar* gUnk_09EDD5ACIt[7] = {
+const JiminyTextChar* gUnk_09EDD5ACIt[7] = {
     gUnkEu_08862B2A, gUnkEu_08862B3E, gUnkEu_08862B52, gUnkEu_08862B54,
     gUnkEu_08862B65, gUnkEu_08862B7D, gUnkEu_08862B94,
 };
 
-JiminyTextChar* gUnk_09EDD5ACEs[7] = {
+const JiminyTextChar* gUnk_09EDD5ACEs[7] = {
     gUnkEu_08862BA9, gUnkEu_08862BBA, gUnkEu_08862BD0, gUnkEu_08862BD2,
     gUnkEu_08862BE9, gUnkEu_08862C00, gUnkEu_08862C17,
 };
 
-JiminyTextChar* gUnk_09EDD5C8[8] = {
+const JiminyTextChar* gUnk_09EDD5C8[8] = {
     gUnkEu_08862C50, gUnkEu_08862C69, gUnkEu_08862C72, gUnkEu_08862C74,
     gUnkEu_08862C89, gUnkEu_08862C9B, gUnkEu_08862CB1, gUnkEu_08862CC9,
 };
 
-JiminyTextChar* gUnk_09EDD5C8Fr[7] = {
+const JiminyTextChar* gUnk_09EDD5C8Fr[7] = {
     gUnkEu_08862CCF, gUnkEu_08862CE5, gUnkEu_08862CFD, gUnkEu_08862CFF,
     gUnkEu_08862D14, gUnkEu_08862D28, gUnkEu_08862D3B,
 };
 
-JiminyTextChar* gUnk_09EDD5C8De[8] = {
+const JiminyTextChar* gUnk_09EDD5C8De[8] = {
     gUnkEu_08862D4C, gUnkEu_08862D63, gUnkEu_08862D76, gUnkEu_08862D89,
     gUnkEu_08862D8B, gUnkEu_08862D9E, gUnkEu_08862DB3, gUnkEu_08862DCA,
 };
 
-JiminyTextChar* gUnk_09EDD5C8It[8] = {
+const JiminyTextChar* gUnk_09EDD5C8It[8] = {
     gUnkEu_08862DDC, gUnkEu_08862DEB, gUnkEu_08862DFF, gUnkEu_08862E01,
     gUnkEu_08862E1A, gUnkEu_08862E2E, gUnkEu_08862E44, gUnkEu_08862E58,
 };
 
-JiminyTextChar* gUnk_09EDD5C8Es[8] = {
+const JiminyTextChar* gUnk_09EDD5C8Es[8] = {
     gUnkEu_08862E69, gUnkEu_08862E7C, gUnkEu_08862E94, gUnkEu_08862E9D,
     gUnkEu_08862E9F, gUnkEu_08862EB4, gUnkEu_08862ECA, gUnkEu_08862EE0,
 };
 
-JiminyTextChar* gUnk_09EDBEC0[15] = {
+const JiminyTextChar* gUnk_09EDBEC0[15] = {
     gUnkEu_08862F0C, gUnkEu_08862F1F, gUnkEu_08862F31, gUnkEu_08862F48,
     gUnkEu_08862F5A, gUnkEu_08862F5C, gUnkEu_08862F71, gUnkEu_08862F87,
     gUnkEu_08862F9E, gUnkEu_08862FB6, gUnkEu_08862FCA, gUnkEu_08862FE3,
     gUnkEu_08862FE5, gUnkEu_08862FFC, gUnkEu_0886300E,
 };
 
-JiminyTextChar* gUnk_09EDBEC0Fr[16] = {
+const JiminyTextChar* gUnk_09EDBEC0Fr[16] = {
     gUnkEu_08863026, gUnkEu_08863035, gUnkEu_08863047, gUnkEu_0886305B,
     gUnkEu_0886306F, gUnkEu_08863071, gUnkEu_08863083, gUnkEu_08863095,
     gUnkEu_088630A9, gUnkEu_088630BF, gUnkEu_088630D2, gUnkEu_088630E3,
     gUnkEu_088630F3, gUnkEu_088630F5, gUnkEu_08863108, gUnkEu_0886311D,
 };
 
-JiminyTextChar* gUnk_09EDBEC0De[19] = {
+const JiminyTextChar* gUnk_09EDBEC0De[19] = {
     gUnkEu_0886312E, gUnkEu_08863143, gUnkEu_08863158, gUnkEu_0886316C,
     gUnkEu_0886317F, gUnkEu_08863191, gUnkEu_08863193, gUnkEu_088631AA,
     gUnkEu_088631C1, gUnkEu_088631DB, gUnkEu_088631F2, gUnkEu_0886320C,
@@ -8101,188 +8101,188 @@ JiminyTextChar* gUnk_09EDBEC0De[19] = {
     gUnkEu_08863252, gUnkEu_08863263, gUnkEu_08863276,
 };
 
-JiminyTextChar* gUnk_09EDBEC0It[13] = {
+const JiminyTextChar* gUnk_09EDBEC0It[13] = {
     gUnkEu_08863285, gUnkEu_08863298, gUnkEu_088632B1, gUnkEu_088632B3,
     gUnkEu_088632CD, gUnkEu_088632E3, gUnkEu_088632F6, gUnkEu_08863307,
     gUnkEu_0886331D, gUnkEu_08863333, gUnkEu_08863335, gUnkEu_0886334D,
     gUnkEu_08863364,
 };
 
-JiminyTextChar* gUnk_09EDBEC0Es[15] = {
+const JiminyTextChar* gUnk_09EDBEC0Es[15] = {
     gUnkEu_08863379, gUnkEu_0886338E, gUnkEu_088633A1, gUnkEu_088633B6,
     gUnkEu_088633CD, gUnkEu_088633D6, gUnkEu_088633D8, gUnkEu_088633E8,
     gUnkEu_088633FD, gUnkEu_08863412, gUnkEu_08863429, gUnkEu_08863440,
     gUnkEu_0886344A, gUnkEu_0886344C, gUnkEu_08863463,
 };
 
-JiminyTextChar* gUnk_09EDBEFC[12] = {
+const JiminyTextChar* gUnk_09EDBEFC[12] = {
     gUnkEu_0886349C, gUnkEu_088634AE, gUnkEu_088634C4, gUnkEu_088634DA,
     gUnkEu_088634DC, gUnkEu_088634ED, gUnkEu_08863502, gUnkEu_08863516,
     gUnkEu_0886352D, gUnkEu_08863540, gUnkEu_08863542, gUnkEu_08863558,
 };
 
-JiminyTextChar* gUnk_09EDBEFCFr[14] = {
+const JiminyTextChar* gUnk_09EDBEFCFr[14] = {
     gUnkEu_08863564, gUnkEu_08863578, gUnkEu_0886358B, gUnkEu_088635A3,
     gUnkEu_088635A5, gUnkEu_088635B8, gUnkEu_088635CF, gUnkEu_088635E2,
     gUnkEu_088635F1, gUnkEu_08863604, gUnkEu_08863614, gUnkEu_08863616,
     gUnkEu_0886362A, gUnkEu_0886363F,
 };
 
-JiminyTextChar* gUnk_09EDBEFCDe[13] = {
+const JiminyTextChar* gUnk_09EDBEFCDe[13] = {
     gUnkEu_08863648, gUnkEu_0886365E, gUnkEu_08863673, gUnkEu_0886368B,
     gUnkEu_0886369C, gUnkEu_0886369E, gUnkEu_088636B6, gUnkEu_088636CC,
     gUnkEu_088636E2, gUnkEu_088636FA, gUnkEu_08863706, gUnkEu_08863708,
     gUnkEu_0886371D,
 };
 
-JiminyTextChar* gUnk_09EDBEFCIt[12] = {
+const JiminyTextChar* gUnk_09EDBEFCIt[12] = {
     gUnkEu_08863730, gUnkEu_08863745, gUnkEu_0886375C, gUnkEu_08863771,
     gUnkEu_08863773, gUnkEu_08863785, gUnkEu_0886379D, gUnkEu_088637AF,
     gUnkEu_088637C4, gUnkEu_088637C6, gUnkEu_088637DF, gUnkEu_088637F3,
 };
 
-JiminyTextChar* gUnk_09EDBEFCEs[13] = {
+const JiminyTextChar* gUnk_09EDBEFCEs[13] = {
     gUnkEu_088637FB, gUnkEu_0886380C, gUnkEu_0886381F, gUnkEu_08863839,
     gUnkEu_0886383B, gUnkEu_0886384A, gUnkEu_08863857, gUnkEu_0886386A,
     gUnkEu_0886387E, gUnkEu_08863890, gUnkEu_088638A3, gUnkEu_088638A5,
     gUnkEu_088638BC,
 };
 
-JiminyTextChar* gUnk_09EDBF2C[11] = {
+const JiminyTextChar* gUnk_09EDBF2C[11] = {
     gUnkEu_088638F4, gUnkEu_08863908, gUnkEu_0886391D, gUnkEu_08863923,
     gUnkEu_08863925, gUnkEu_0886393C, gUnkEu_08863954, gUnkEu_08863967,
     gUnkEu_0886397C, gUnkEu_08863994, gUnkEu_088639A7,
 };
 
-JiminyTextChar* gUnk_09EDBF2CFr[12] = {
+const JiminyTextChar* gUnk_09EDBF2CFr[12] = {
     gUnkEu_088639B5, gUnkEu_088639C9, gUnkEu_088639E0, gUnkEu_088639E9,
     gUnkEu_088639EB, gUnkEu_088639FC, gUnkEu_08863A0F, gUnkEu_08863A24,
     gUnkEu_08863A38, gUnkEu_08863A47, gUnkEu_08863A58, gUnkEu_08863A6B,
 };
 
-JiminyTextChar* gUnk_09EDBF2CDe[12] = {
+const JiminyTextChar* gUnk_09EDBF2CDe[12] = {
     gUnkEu_08863A7E, gUnkEu_08863A97, gUnkEu_08863AAB, gUnkEu_08863ABE,
     gUnkEu_08863AC0, gUnkEu_08863AD8, gUnkEu_08863AEF, gUnkEu_08863B08,
     gUnkEu_08863B20, gUnkEu_08863B35, gUnkEu_08863B48, gUnkEu_08863B5A,
 };
 
-JiminyTextChar* gUnk_09EDBF2CIt[12] = {
+const JiminyTextChar* gUnk_09EDBF2CIt[12] = {
     gUnkEu_08863B6C, gUnkEu_08863B83, gUnkEu_08863B95, gUnkEu_08863B9D,
     gUnkEu_08863B9F, gUnkEu_08863BB5, gUnkEu_08863BCC, gUnkEu_08863BE3,
     gUnkEu_08863BFA, gUnkEu_08863C0D, gUnkEu_08863C1F, gUnkEu_08863C30,
 };
 
-JiminyTextChar* gUnk_09EDBF2CEs[11] = {
+const JiminyTextChar* gUnk_09EDBF2CEs[11] = {
     gUnkEu_08863C3F, gUnkEu_08863C54, gUnkEu_08863C6B, gUnkEu_08863C7B,
     gUnkEu_08863C7D, gUnkEu_08863C90, gUnkEu_08863CA6, gUnkEu_08863CBC,
     gUnkEu_08863CCE, gUnkEu_08863CDE, gUnkEu_08863CF2,
 };
 
-JiminyTextChar* gUnk_09EDD5E8[13] = {
+const JiminyTextChar* gUnk_09EDD5E8[13] = {
     gUnkEu_08863D24, gUnkEu_08863D3A, gUnkEu_08863D4F, gUnkEu_08863D59,
     gUnkEu_08863D5B, gUnkEu_08863D70, gUnkEu_08863D87, gUnkEu_08863D9B,
     gUnkEu_08863DA8, gUnkEu_08863DAA, gUnkEu_08863DBF, gUnkEu_08863DD3,
     gUnkEu_08863DE6,
 };
 
-JiminyTextChar* gUnk_09EDD5E8Fr[12] = {
+const JiminyTextChar* gUnk_09EDD5E8Fr[12] = {
     gUnkEu_08863DF5, gUnkEu_08863E06, gUnkEu_08863E1D, gUnkEu_08863E27,
     gUnkEu_08863E29, gUnkEu_08863E39, gUnkEu_08863E4D, gUnkEu_08863E61,
     gUnkEu_08863E76, gUnkEu_08863E78, gUnkEu_08863E8F, gUnkEu_08863EA1,
 };
 
-JiminyTextChar* gUnk_09EDD5E8De[14] = {
+const JiminyTextChar* gUnk_09EDD5E8De[14] = {
     gUnkEu_08863EB3, gUnkEu_08863EC4, gUnkEu_08863ED9, gUnkEu_08863EF0,
     gUnkEu_08863EFE, gUnkEu_08863F00, gUnkEu_08863F18, gUnkEu_08863F28,
     gUnkEu_08863F3D, gUnkEu_08863F51, gUnkEu_08863F53, gUnkEu_08863F6C,
     gUnkEu_08863F82, gUnkEu_08863F98,
 };
 
-JiminyTextChar* gUnk_09EDD5E8It[13] = {
+const JiminyTextChar* gUnk_09EDD5E8It[13] = {
     gUnkEu_08863FAC, gUnkEu_08863FBE, gUnkEu_08863FCE, gUnkEu_08863FE4,
     gUnkEu_08863FF0, gUnkEu_08863FF2, gUnkEu_08864006, gUnkEu_0886401A,
     gUnkEu_08864034, gUnkEu_08864036, gUnkEu_0886404D, gUnkEu_08864065,
     gUnkEu_0886407C,
 };
 
-JiminyTextChar* gUnk_09EDD5E8Es[13] = {
+const JiminyTextChar* gUnk_09EDD5E8Es[13] = {
     gUnkEu_08864086, gUnkEu_08864098, gUnkEu_088640B1, gUnkEu_088640BD,
     gUnkEu_088640BF, gUnkEu_088640D6, gUnkEu_088640EC, gUnkEu_08864102,
     gUnkEu_08864110, gUnkEu_08864112, gUnkEu_0886412A, gUnkEu_0886413C,
     gUnkEu_08864150,
 };
 
-JiminyTextChar* gUnk_09EDBF58[11] = {
+const JiminyTextChar* gUnk_09EDBF58[11] = {
     gUnkEu_08864180, gUnkEu_08864196, gUnkEu_088641AA, gUnkEu_088641BB,
     gUnkEu_088641BD, gUnkEu_088641D4, gUnkEu_088641ED, gUnkEu_08864201,
     gUnkEu_08864215, gUnkEu_0886422C, gUnkEu_0886423F,
 };
 
-JiminyTextChar* gUnk_09EDBF58Fr[12] = {
+const JiminyTextChar* gUnk_09EDBF58Fr[12] = {
     gUnkEu_0886424B, gUnkEu_08864260, gUnkEu_08864274, gUnkEu_08864285,
     gUnkEu_08864287, gUnkEu_0886429B, gUnkEu_088642B2, gUnkEu_088642C3,
     gUnkEu_088642D7, gUnkEu_088642E9, gUnkEu_088642FC, gUnkEu_08864310,
 };
 
-JiminyTextChar* gUnk_09EDBF58De[14] = {
+const JiminyTextChar* gUnk_09EDBF58De[14] = {
     gUnkEu_08864326, gUnkEu_08864339, gUnkEu_0886434B, gUnkEu_08864360,
     gUnkEu_08864375, gUnkEu_08864377, gUnkEu_0886438E, gUnkEu_088643A4,
     gUnkEu_088643BA, gUnkEu_088643CF, gUnkEu_088643E8, gUnkEu_088643FE,
     gUnkEu_08864414, gUnkEu_08864426,
 };
 
-JiminyTextChar* gUnk_09EDBF58It[14] = {
+const JiminyTextChar* gUnk_09EDBF58It[14] = {
     gUnkEu_08864438, gUnkEu_0886444E, gUnkEu_0886445F, gUnkEu_08864473,
     gUnkEu_08864488, gUnkEu_0886448A, gUnkEu_0886449D, gUnkEu_088644AC,
     gUnkEu_088644C1, gUnkEu_088644D3, gUnkEu_088644E4, gUnkEu_088644FA,
     gUnkEu_0886450C, gUnkEu_0886451F,
 };
 
-JiminyTextChar* gUnk_09EDBF58Es[10] = {
+const JiminyTextChar* gUnk_09EDBF58Es[10] = {
     gUnkEu_08864530, gUnkEu_08864545, gUnkEu_0886455C, gUnkEu_08864571,
     gUnkEu_08864573, gUnkEu_0886458B, gUnkEu_0886459E, gUnkEu_088645B6,
     gUnkEu_088645CE, gUnkEu_088645E8,
 };
 
-JiminyTextChar* gUnk_09EDBF84[10] = {
+const JiminyTextChar* gUnk_09EDBF84[10] = {
     gUnkEu_0886461C, gUnkEu_08864634, gUnkEu_08864648, gUnkEu_08864656,
     gUnkEu_08864658, gUnkEu_0886466F, gUnkEu_08864688, gUnkEu_088646A0,
     gUnkEu_088646B6, gUnkEu_088646CD,
 };
 
-JiminyTextChar* gUnk_09EDBF84Fr[11] = {
+const JiminyTextChar* gUnk_09EDBF84Fr[11] = {
     gUnkEu_088646E4, gUnkEu_088646F7, gUnkEu_0886470A, gUnkEu_0886471D,
     gUnkEu_0886471F, gUnkEu_08864732, gUnkEu_08864746, gUnkEu_08864759,
     gUnkEu_0886476F, gUnkEu_08864783, gUnkEu_08864796,
 };
 
-JiminyTextChar* gUnk_09EDBF84De[14] = {
+const JiminyTextChar* gUnk_09EDBF84De[14] = {
     gUnkEu_088647A0, gUnkEu_088647B3, gUnkEu_088647CA, gUnkEu_088647DF,
     gUnkEu_088647ED, gUnkEu_088647EF, gUnkEu_088647FF, gUnkEu_08864816,
     gUnkEu_0886482C, gUnkEu_08864844, gUnkEu_08864857, gUnkEu_0886486D,
     gUnkEu_08864883, gUnkEu_08864899,
 };
 
-JiminyTextChar* gUnk_09EDBF84It[11] = {
+const JiminyTextChar* gUnk_09EDBF84It[11] = {
     gUnkEu_088648A1, gUnkEu_088648B6, gUnkEu_088648CA, gUnkEu_088648DF,
     gUnkEu_088648E1, gUnkEu_088648F6, gUnkEu_0886490D, gUnkEu_08864922,
     gUnkEu_08864935, gUnkEu_0886494B, gUnkEu_08864960,
 };
 
-JiminyTextChar* gUnk_09EDBF84Es[11] = {
+const JiminyTextChar* gUnk_09EDBF84Es[11] = {
     gUnkEu_08864978, gUnkEu_0886498F, gUnkEu_088649A3, gUnkEu_088649B4,
     gUnkEu_088649B6, gUnkEu_088649C8, gUnkEu_088649D5, gUnkEu_088649E9,
     gUnkEu_088649FF, gUnkEu_08864A17, gUnkEu_08864A2C,
 };
 
-JiminyTextChar* gUnk_09EDBFAC[16] = {
+const JiminyTextChar* gUnk_09EDBFAC[16] = {
     gUnkEu_08864A54, gUnkEu_08864A6A, gUnkEu_08864A80, gUnkEu_08864A94,
     gUnkEu_08864A9D, gUnkEu_08864A9F, gUnkEu_08864AB6, gUnkEu_08864ACB,
     gUnkEu_08864ADB, gUnkEu_08864ADD, gUnkEu_08864AF5, gUnkEu_08864B0C,
     gUnkEu_08864B24, gUnkEu_08864B3A, gUnkEu_08864B52, gUnkEu_08864B66,
 };
 
-JiminyTextChar* gUnk_09EDBFACFr[19] = {
+const JiminyTextChar* gUnk_09EDBFACFr[19] = {
     gUnkEu_08864B71, gUnkEu_08864B81, gUnkEu_08864B92, gUnkEu_08864BA8,
     gUnkEu_08864BBB, gUnkEu_08864BBD, gUnkEu_08864BCF, gUnkEu_08864BE2,
     gUnkEu_08864BF0, gUnkEu_08864BFF, gUnkEu_08864C01, gUnkEu_08864C13,
@@ -8290,7 +8290,7 @@ JiminyTextChar* gUnk_09EDBFACFr[19] = {
     gUnkEu_08864C78, gUnkEu_08864C8C, gUnkEu_08864C99,
 };
 
-JiminyTextChar* gUnk_09EDBFACDe[19] = {
+const JiminyTextChar* gUnk_09EDBFACDe[19] = {
     gUnkEu_08864CA7, gUnkEu_08864CB8, gUnkEu_08864CCC, gUnkEu_08864CDF,
     gUnkEu_08864CF1, gUnkEu_08864CFE, gUnkEu_08864D00, gUnkEu_08864D0E,
     gUnkEu_08864D21, gUnkEu_08864D37, gUnkEu_08864D49, gUnkEu_08864D4B,
@@ -8298,7 +8298,7 @@ JiminyTextChar* gUnk_09EDBFACDe[19] = {
     gUnkEu_08864DC2, gUnkEu_08864DD4, gUnkEu_08864DE8,
 };
 
-JiminyTextChar* gUnk_09EDBFACIt[19] = {
+const JiminyTextChar* gUnk_09EDBFACIt[19] = {
     gUnkEu_08864DF5, gUnkEu_08864E09, gUnkEu_08864E1D, gUnkEu_08864E2D,
     gUnkEu_08864E42, gUnkEu_08864E44, gUnkEu_08864E57, gUnkEu_08864E69,
     gUnkEu_08864E79, gUnkEu_08864E8A, gUnkEu_08864E8C, gUnkEu_08864EA0,
@@ -8306,280 +8306,280 @@ JiminyTextChar* gUnk_09EDBFACIt[19] = {
     gUnkEu_08864EFD, gUnkEu_08864F11, gUnkEu_08864F23,
 };
 
-JiminyTextChar* gUnk_09EDBFACEs[16] = {
+const JiminyTextChar* gUnk_09EDBFACEs[16] = {
     gUnkEu_08864F2C, gUnkEu_08864F41, gUnkEu_08864F54, gUnkEu_08864F65,
     gUnkEu_08864F76, gUnkEu_08864F78, gUnkEu_08864F8C, gUnkEu_08864FA2,
     gUnkEu_08864FB5, gUnkEu_08864FB7, gUnkEu_08864FCD, gUnkEu_08864FE5,
     gUnkEu_08864FFB, gUnkEu_08865013, gUnkEu_08865029, gUnkEu_0886503E,
 };
 
-JiminyTextChar* gUnk_09EDBFEC[11] = {
+const JiminyTextChar* gUnk_09EDBFEC[11] = {
     gUnkEu_08865070, gUnkEu_08865085, gUnkEu_0886508B, gUnkEu_0886508D,
     gUnkEu_088650A2, gUnkEu_088650B6, gUnkEu_088650BE, gUnkEu_088650C0,
     gUnkEu_088650D6, gUnkEu_088650ED, gUnkEu_08865104,
 };
 
-JiminyTextChar* gUnk_09EDBFECFr[13] = {
+const JiminyTextChar* gUnk_09EDBFECFr[13] = {
     gUnkEu_08865112, gUnkEu_08865129, gUnkEu_08865132, gUnkEu_08865134,
     gUnkEu_0886514B, gUnkEu_0886515E, gUnkEu_08865174, gUnkEu_08865176,
     gUnkEu_08865189, gUnkEu_08865198, gUnkEu_088651A9, gUnkEu_088651BB,
     gUnkEu_088651CA,
 };
 
-JiminyTextChar* gUnk_09EDBFECDe[14] = {
+const JiminyTextChar* gUnk_09EDBFECDe[14] = {
     gUnkEu_088651E2, gUnkEu_088651F1, gUnkEu_088651FE, gUnkEu_08865200,
     gUnkEu_08865212, gUnkEu_08865227, gUnkEu_0886523A, gUnkEu_08865244,
     gUnkEu_08865246, gUnkEu_08865259, gUnkEu_0886526D, gUnkEu_08865281,
     gUnkEu_08865291, gUnkEu_088652A2,
 };
 
-JiminyTextChar* gUnk_09EDBFECIt[14] = {
+const JiminyTextChar* gUnk_09EDBFECIt[14] = {
     gUnkEu_088652B8, gUnkEu_088652CB, gUnkEu_088652DB, gUnkEu_088652DD,
     gUnkEu_088652EE, gUnkEu_088652FB, gUnkEu_0886530F, gUnkEu_08865320,
     gUnkEu_08865322, gUnkEu_08865339, gUnkEu_0886534D, gUnkEu_0886535E,
     gUnkEu_0886536F, gUnkEu_08865384,
 };
 
-JiminyTextChar* gUnk_09EDBFECEs[13] = {
+const JiminyTextChar* gUnk_09EDBFECEs[13] = {
     gUnkEu_0886538F, gUnkEu_088653A1, gUnkEu_088653B5, gUnkEu_088653B7,
     gUnkEu_088653C7, gUnkEu_088653DC, gUnkEu_088653EE, gUnkEu_088653F7,
     gUnkEu_088653F9, gUnkEu_0886540C, gUnkEu_0886541C, gUnkEu_08865431,
     gUnkEu_08865443,
 };
 
-JiminyTextChar* gUnk_09EDC018[6] = {
+const JiminyTextChar* gUnk_09EDC018[6] = {
     gUnkEu_08865470, gUnkEu_08865485, gUnkEu_08865487, gUnkEu_0886549C,
     gUnkEu_088654B1, gUnkEu_088654C7,
 };
 
-JiminyTextChar* gUnk_09EDC018Fr[6] = {
+const JiminyTextChar* gUnk_09EDC018Fr[6] = {
     gUnkEu_088654DA, gUnkEu_088654EF, gUnkEu_088654F1, gUnkEu_08865503,
     gUnkEu_0886551B, gUnkEu_0886552F,
 };
 
-JiminyTextChar* gUnk_09EDC018De[7] = {
+const JiminyTextChar* gUnk_09EDC018De[7] = {
     gUnkEu_08865541, gUnkEu_08865559, gUnkEu_0886555B, gUnkEu_08865570,
     gUnkEu_08865585, gUnkEu_08865599, gUnkEu_088655AF,
 };
 
-JiminyTextChar* gUnk_09EDC018It[7] = {
+const JiminyTextChar* gUnk_09EDC018It[7] = {
     gUnkEu_088655BE, gUnkEu_088655D6, gUnkEu_088655D8, gUnkEu_088655EB,
     gUnkEu_08865600, gUnkEu_08865613, gUnkEu_0886562A,
 };
 
-JiminyTextChar* gUnk_09EDC018Es[6] = {
+const JiminyTextChar* gUnk_09EDC018Es[6] = {
     gUnkEu_08865637, gUnkEu_0886564C, gUnkEu_0886564E, gUnkEu_08865662,
     gUnkEu_0886567B, gUnkEu_08865692,
 };
 
-JiminyTextChar* gUnk_09EDC030[7] = {
+const JiminyTextChar* gUnk_09EDC030[7] = {
     gUnkEu_088656C0, gUnkEu_088656D5, gUnkEu_088656DD, gUnkEu_088656DF,
     gUnkEu_088656F0, gUnkEu_08865704, gUnkEu_0886571A,
 };
 
-JiminyTextChar* gUnk_09EDC030Fr[6] = {
+const JiminyTextChar* gUnk_09EDC030Fr[6] = {
     gUnkEu_08865724, gUnkEu_08865735, gUnkEu_08865742, gUnkEu_08865744,
     gUnkEu_0886575B, gUnkEu_0886576E,
 };
 
-JiminyTextChar* gUnk_09EDC030De[7] = {
+const JiminyTextChar* gUnk_09EDC030De[7] = {
     gUnkEu_08865785, gUnkEu_0886579B, gUnkEu_088657B2, gUnkEu_088657B4,
     gUnkEu_088657CB, gUnkEu_088657DB, gUnkEu_088657EE,
 };
 
-JiminyTextChar* gUnk_09EDC030It[7] = {
+const JiminyTextChar* gUnk_09EDC030It[7] = {
     gUnkEu_088657F9, gUnkEu_0886580A, gUnkEu_0886581C, gUnkEu_0886581E,
     gUnkEu_08865835, gUnkEu_08865849, gUnkEu_0886585E,
 };
 
-JiminyTextChar* gUnk_09EDC030Es[7] = {
+const JiminyTextChar* gUnk_09EDC030Es[7] = {
     gUnkEu_08865865, gUnkEu_08865877, gUnkEu_08865885, gUnkEu_08865887,
     gUnkEu_08865896, gUnkEu_088658A9, gUnkEu_088658BD,
 };
 
-JiminyTextChar* gUnk_09EDC04C[8] = {
+const JiminyTextChar* gUnk_09EDC04C[8] = {
     gUnkEu_088658EC, gUnkEu_088658FB, gUnkEu_08865913, gUnkEu_08865915,
     gUnkEu_0886592B, gUnkEu_08865942, gUnkEu_08865956, gUnkEu_08865968,
 };
 
-JiminyTextChar* gUnk_09EDC04CFr[9] = {
+const JiminyTextChar* gUnk_09EDC04CFr[9] = {
     gUnkEu_0886597A, gUnkEu_08865991, gUnkEu_0886599C, gUnkEu_0886599E,
     gUnkEu_088659B2, gUnkEu_088659C4, gUnkEu_088659DB, gUnkEu_088659EE,
     gUnkEu_088659FE,
 };
 
-JiminyTextChar* gUnk_09EDC04CDe[10] = {
+const JiminyTextChar* gUnk_09EDC04CDe[10] = {
     gUnkEu_08865A13, gUnkEu_08865A24, gUnkEu_08865A39, gUnkEu_08865A40,
     gUnkEu_08865A42, gUnkEu_08865A53, gUnkEu_08865A67, gUnkEu_08865A77,
     gUnkEu_08865A8E, gUnkEu_08865AA5,
 };
 
-JiminyTextChar* gUnk_09EDC04CIt[7] = {
+const JiminyTextChar* gUnk_09EDC04CIt[7] = {
     gUnkEu_08865AB7, gUnkEu_08865AD0, gUnkEu_08865AD2, gUnkEu_08865AE8,
     gUnkEu_08865AFD, gUnkEu_08865B13, gUnkEu_08865B28,
 };
 
-JiminyTextChar* gUnk_09EDC04CEs[9] = {
+const JiminyTextChar* gUnk_09EDC04CEs[9] = {
     gUnkEu_08865B41, gUnkEu_08865B57, gUnkEu_08865B69, gUnkEu_08865B75,
     gUnkEu_08865B77, gUnkEu_08865B87, gUnkEu_08865B9B, gUnkEu_08865BAE,
     gUnkEu_08865BC0,
 };
 
-JiminyTextChar* gUnk_09EDC06C[7] = {
+const JiminyTextChar* gUnk_09EDC06C[7] = {
     gUnkEu_08865BF8, gUnkEu_08865C0C, gUnkEu_08865C0E, gUnkEu_08865C25,
     gUnkEu_08865C3E, gUnkEu_08865C54, gUnkEu_08865C6C,
 };
 
-JiminyTextChar* gUnk_09EDC06CFr[9] = {
+const JiminyTextChar* gUnk_09EDC06CFr[9] = {
     gUnkEu_08865C76, gUnkEu_08865C8C, gUnkEu_08865C98, gUnkEu_08865C9A,
     gUnkEu_08865CAE, gUnkEu_08865CBF, gUnkEu_08865CD0, gUnkEu_08865CE5,
     gUnkEu_08865CF9,
 };
 
-JiminyTextChar* gUnk_09EDC06CDe[11] = {
+const JiminyTextChar* gUnk_09EDC06CDe[11] = {
     gUnkEu_08865D09, gUnkEu_08865D1E, gUnkEu_08865D27, gUnkEu_08865D29,
     gUnkEu_08865D3C, gUnkEu_08865D4C, gUnkEu_08865D5D, gUnkEu_08865D6B,
     gUnkEu_08865D7F, gUnkEu_08865D95, gUnkEu_08865DAC,
 };
 
-JiminyTextChar* gUnk_09EDC06CIt[9] = {
+const JiminyTextChar* gUnk_09EDC06CIt[9] = {
     gUnkEu_08865DBE, gUnkEu_08865DD0, gUnkEu_08865DDB, gUnkEu_08865DDD,
     gUnkEu_08865DF0, gUnkEu_08865E02, gUnkEu_08865E1A, gUnkEu_08865E30,
     gUnkEu_08865E45,
 };
 
-JiminyTextChar* gUnk_09EDC06CEs[8] = {
+const JiminyTextChar* gUnk_09EDC06CEs[8] = {
     gUnkEu_08865E5C, gUnkEu_08865E70, gUnkEu_08865E77, gUnkEu_08865E79,
     gUnkEu_08865E8F, gUnkEu_08865EA2, gUnkEu_08865EB6, gUnkEu_08865ECD,
 };
 
-JiminyTextChar* gUnk_09EDC088[7] = {
+const JiminyTextChar* gUnk_09EDC088[7] = {
     gUnkEu_08865F04, gUnkEu_08865F15, gUnkEu_08865F2C, gUnkEu_08865F2E,
     gUnkEu_08865F45, gUnkEu_08865F5B, gUnkEu_08865F72,
 };
 
-JiminyTextChar* gUnk_09EDC088Fr[9] = {
+const JiminyTextChar* gUnk_09EDC088Fr[9] = {
     gUnkEu_08865F87, gUnkEu_08865F9C, gUnkEu_08865FB2, gUnkEu_08865FB4,
     gUnkEu_08865FC4, gUnkEu_08865FD2, gUnkEu_08865FE7, gUnkEu_08865FF5,
     gUnkEu_08866000,
 };
 
-JiminyTextChar* gUnk_09EDC088De[8] = {
+const JiminyTextChar* gUnk_09EDC088De[8] = {
     gUnkEu_0886600E, gUnkEu_0886601E, gUnkEu_08866034, gUnkEu_08866036,
     gUnkEu_0886604E, gUnkEu_08866063, gUnkEu_08866076, gUnkEu_0886608C,
 };
 
-JiminyTextChar* gUnk_09EDC088It[7] = {
+const JiminyTextChar* gUnk_09EDC088It[7] = {
     gUnkEu_0886609C, gUnkEu_088660B3, gUnkEu_088660CD, gUnkEu_088660CF,
     gUnkEu_088660E6, gUnkEu_088660FC, gUnkEu_08866112,
 };
 
-JiminyTextChar* gUnk_09EDC088Es[7] = {
+const JiminyTextChar* gUnk_09EDC088Es[7] = {
     gUnkEu_0886612D, gUnkEu_08866142, gUnkEu_0886615A, gUnkEu_0886615C,
     gUnkEu_08866172, gUnkEu_08866188, gUnkEu_0886619D,
 };
 
-JiminyTextChar* gUnk_09EDC0A4[7] = {
+const JiminyTextChar* gUnk_09EDC0A4[7] = {
     gUnkEu_088661D0, gUnkEu_088661E9, gUnkEu_08866201, gUnkEu_08866217,
     gUnkEu_08866221, gUnkEu_08866223, gUnkEu_0886623D,
 };
 
-JiminyTextChar* gUnk_09EDC0A4Fr[7] = {
+const JiminyTextChar* gUnk_09EDC0A4Fr[7] = {
     gUnkEu_08866248, gUnkEu_08866259, gUnkEu_08866270, gUnkEu_08866287,
     gUnkEu_08866298, gUnkEu_0886629A, gUnkEu_088662B0,
 };
 
-JiminyTextChar* gUnk_09EDC0A4De[8] = {
+const JiminyTextChar* gUnk_09EDC0A4De[8] = {
     gUnkEu_088662C3, gUnkEu_088662D4, gUnkEu_088662E3, gUnkEu_088662F8,
     gUnkEu_0886630E, gUnkEu_08866315, gUnkEu_08866317, gUnkEu_0886632B,
 };
 
-JiminyTextChar* gUnk_09EDC0A4It[8] = {
+const JiminyTextChar* gUnk_09EDC0A4It[8] = {
     gUnkEu_0886633D, gUnkEu_08866353, gUnkEu_08866367, gUnkEu_0886637C,
     gUnkEu_0886638F, gUnkEu_08866397, gUnkEu_08866399, gUnkEu_088663AE,
 };
 
-JiminyTextChar* gUnk_09EDC0A4Es[7] = {
+const JiminyTextChar* gUnk_09EDC0A4Es[7] = {
     gUnkEu_088663C2, gUnkEu_088663D5, gUnkEu_088663EB, gUnkEu_08866403,
     gUnkEu_0886641A, gUnkEu_0886641C, gUnkEu_0886642B,
 };
 
-JiminyTextChar* gUnk_09EDC0C0[10] = {
+const JiminyTextChar* gUnk_09EDC0C0[10] = {
     gUnkEu_08866460, gUnkEu_08866475, gUnkEu_0886648B, gUnkEu_088664A2,
     gUnkEu_088664B3, gUnkEu_088664B5, gUnkEu_088664CF, gUnkEu_088664E8,
     gUnkEu_088664FF, gUnkEu_08866517,
 };
 
-JiminyTextChar* gUnk_09EDC0C0Fr[12] = {
+const JiminyTextChar* gUnk_09EDC0C0Fr[12] = {
     gUnkEu_08866528, gUnkEu_08866539, gUnkEu_0886654C, gUnkEu_08866561,
     gUnkEu_08866571, gUnkEu_0886657B, gUnkEu_0886657D, gUnkEu_08866591,
     gUnkEu_088665A4, gUnkEu_088665B6, gUnkEu_088665CA, gUnkEu_088665DC,
 };
 
-JiminyTextChar* gUnk_09EDC0C0De[16] = {
+const JiminyTextChar* gUnk_09EDC0C0De[16] = {
     gUnkEu_088665EA, gUnkEu_088665FA, gUnkEu_0886660E, gUnkEu_0886661E,
     gUnkEu_08866637, gUnkEu_0886664D, gUnkEu_0886665E, gUnkEu_08866660,
     gUnkEu_08866678, gUnkEu_0886668F, gUnkEu_088666A2, gUnkEu_088666B7,
     gUnkEu_088666CB, gUnkEu_088666DE, gUnkEu_088666F2, gUnkEu_08866703,
 };
 
-JiminyTextChar* gUnk_09EDC0C0It[12] = {
+const JiminyTextChar* gUnk_09EDC0C0It[12] = {
     gUnkEu_08866711, gUnkEu_08866725, gUnkEu_0886673F, gUnkEu_08866752,
     gUnkEu_08866767, gUnkEu_08866769, gUnkEu_0886677C, gUnkEu_0886678F,
     gUnkEu_088667A3, gUnkEu_088667B4, gUnkEu_088667C8, gUnkEu_088667DB,
 };
 
-JiminyTextChar* gUnk_09EDC0C0Es[11] = {
+const JiminyTextChar* gUnk_09EDC0C0Es[11] = {
     gUnkEu_088667E2, gUnkEu_088667FC, gUnkEu_08866814, gUnkEu_08866829,
     gUnkEu_08866842, gUnkEu_08866844, gUnkEu_0886685A, gUnkEu_08866869,
     gUnkEu_0886687D, gUnkEu_08866892, gUnkEu_088668A0,
 };
 
-JiminyTextChar* gUnk_09EDC0E8[9] = {
+const JiminyTextChar* gUnk_09EDC0E8[9] = {
     gUnkEu_088668D0, gUnkEu_088668E7, gUnkEu_088668FE, gUnkEu_08866900,
     gUnkEu_08866913, gUnkEu_0886692C, gUnkEu_08866943, gUnkEu_08866958,
     gUnkEu_08866970,
 };
 
-JiminyTextChar* gUnk_09EDC0E8Fr[10] = {
+const JiminyTextChar* gUnk_09EDC0E8Fr[10] = {
     gUnkEu_08866979, gUnkEu_08866991, gUnkEu_088669A7, gUnkEu_088669A9,
     gUnkEu_088669BD, gUnkEu_088669CA, gUnkEu_088669DA, gUnkEu_088669ED,
     gUnkEu_08866A01, gUnkEu_08866A17,
 };
 
-JiminyTextChar* gUnk_09EDC0E8De[13] = {
+const JiminyTextChar* gUnk_09EDC0E8De[13] = {
     gUnkEu_08866A2E, gUnkEu_08866A3B, gUnkEu_08866A4D, gUnkEu_08866A5B,
     gUnkEu_08866A6A, gUnkEu_08866A6C, gUnkEu_08866A81, gUnkEu_08866A94,
     gUnkEu_08866AA7, gUnkEu_08866ABC, gUnkEu_08866AD1, gUnkEu_08866AE4,
     gUnkEu_08866AF9,
 };
 
-JiminyTextChar* gUnk_09EDC0E8It[10] = {
+const JiminyTextChar* gUnk_09EDC0E8It[10] = {
     gUnkEu_08866B0D, gUnkEu_08866B27, gUnkEu_08866B3D, gUnkEu_08866B3F,
     gUnkEu_08866B51, gUnkEu_08866B64, gUnkEu_08866B79, gUnkEu_08866B8F,
     gUnkEu_08866BA4, gUnkEu_08866BB9,
 };
 
-JiminyTextChar* gUnk_09EDC0E8Es[8] = {
+const JiminyTextChar* gUnk_09EDC0E8Es[8] = {
     gUnkEu_08866BC0, gUnkEu_08866BD7, gUnkEu_08866BEF, gUnkEu_08866BF1,
     gUnkEu_08866C00, gUnkEu_08866C14, gUnkEu_08866C2A, gUnkEu_08866C3E,
 };
 
-JiminyTextChar* gUnk_09EDC10C[13] = {
+const JiminyTextChar* gUnk_09EDC10C[13] = {
     gUnkEu_08866C74, gUnkEu_08866C84, gUnkEu_08866C9B, gUnkEu_08866CB6,
     gUnkEu_08866CB8, gUnkEu_08866CCE, gUnkEu_08866CE5, gUnkEu_08866CFC,
     gUnkEu_08866D05, gUnkEu_08866D07, gUnkEu_08866D1C, gUnkEu_08866D32,
     gUnkEu_08866D48,
 };
 
-JiminyTextChar* gUnk_09EDC10CFr[16] = {
+const JiminyTextChar* gUnk_09EDC10CFr[16] = {
     gUnkEu_08866D5F, gUnkEu_08866D73, gUnkEu_08866D89, gUnkEu_08866D9F,
     gUnkEu_08866DAF, gUnkEu_08866DB1, gUnkEu_08866DC1, gUnkEu_08866DD4,
     gUnkEu_08866DE3, gUnkEu_08866DFA, gUnkEu_08866E0C, gUnkEu_08866E19,
     gUnkEu_08866E1B, gUnkEu_08866E33, gUnkEu_08866E47, gUnkEu_08866E5B,
 };
 
-JiminyTextChar* gUnk_09EDC10CDe[17] = {
+const JiminyTextChar* gUnk_09EDC10CDe[17] = {
     gUnkEu_08866E72, gUnkEu_08866E86, gUnkEu_08866E9D, gUnkEu_08866EB4,
     gUnkEu_08866EC6, gUnkEu_08866ECD, gUnkEu_08866ECF, gUnkEu_08866EE6,
     gUnkEu_08866EF6, gUnkEu_08866F0A, gUnkEu_08866F1D, gUnkEu_08866F25,
@@ -8587,35 +8587,35 @@ JiminyTextChar* gUnk_09EDC10CDe[17] = {
     gUnkEu_08866F76,
 };
 
-JiminyTextChar* gUnk_09EDC10CIt[15] = {
+const JiminyTextChar* gUnk_09EDC10CIt[15] = {
     gUnkEu_08866F81, gUnkEu_08866F97, gUnkEu_08866FAC, gUnkEu_08866FC4,
     gUnkEu_08866FD4, gUnkEu_08866FD6, gUnkEu_08866FED, gUnkEu_08867005,
     gUnkEu_0886701E, gUnkEu_08867030, gUnkEu_08867032, gUnkEu_08867048,
     gUnkEu_08867062, gUnkEu_0886707A, gUnkEu_08867090,
 };
 
-JiminyTextChar* gUnk_09EDC10CEs[13] = {
+const JiminyTextChar* gUnk_09EDC10CEs[13] = {
     gUnkEu_0886709E, gUnkEu_088670B2, gUnkEu_088670C5, gUnkEu_088670DF,
     gUnkEu_088670E1, gUnkEu_088670F6, gUnkEu_08867109, gUnkEu_0886711D,
     gUnkEu_08867136, gUnkEu_08867138, gUnkEu_0886714D, gUnkEu_08867166,
     gUnkEu_0886717C,
 };
 
-JiminyTextChar* gUnk_09EDC140[14] = {
+const JiminyTextChar* gUnk_09EDC140[14] = {
     gUnkEu_088671B0, gUnkEu_088671C5, gUnkEu_088671DB, gUnkEu_088671F2,
     gUnkEu_088671FB, gUnkEu_088671FD, gUnkEu_0886720A, gUnkEu_08867220,
     gUnkEu_08867234, gUnkEu_0886724D, gUnkEu_0886724F, gUnkEu_08867265,
     gUnkEu_0886727D, gUnkEu_08867292,
 };
 
-JiminyTextChar* gUnk_09EDC140Fr[15] = {
+const JiminyTextChar* gUnk_09EDC140Fr[15] = {
     gUnkEu_08867298, gUnkEu_088672AA, gUnkEu_088672C1, gUnkEu_088672D3,
     gUnkEu_088672E4, gUnkEu_088672E6, gUnkEu_088672FB, gUnkEu_0886730F,
     gUnkEu_08867324, gUnkEu_08867339, gUnkEu_0886733B, gUnkEu_08867351,
     gUnkEu_08867366, gUnkEu_0886737B, gUnkEu_0886738D,
 };
 
-JiminyTextChar* gUnk_09EDC140De[17] = {
+const JiminyTextChar* gUnk_09EDC140De[17] = {
     gUnkEu_08867395, gUnkEu_088673AA, gUnkEu_088673BF, gUnkEu_088673D1,
     gUnkEu_088673E1, gUnkEu_088673F1, gUnkEu_088673F3, gUnkEu_08867402,
     gUnkEu_08867415, gUnkEu_08867427, gUnkEu_08867437, gUnkEu_0886744C,
@@ -8623,280 +8623,280 @@ JiminyTextChar* gUnk_09EDC140De[17] = {
     gUnkEu_0886749F,
 };
 
-JiminyTextChar* gUnk_09EDC140It[15] = {
+const JiminyTextChar* gUnk_09EDC140It[15] = {
     gUnkEu_088674B2, gUnkEu_088674C6, gUnkEu_088674D8, gUnkEu_088674E9,
     gUnkEu_088674FA, gUnkEu_088674FC, gUnkEu_08867514, gUnkEu_08867529,
     gUnkEu_0886753F, gUnkEu_08867553, gUnkEu_0886755E, gUnkEu_08867560,
     gUnkEu_08867575, gUnkEu_08867588, gUnkEu_0886759C,
 };
 
-JiminyTextChar* gUnk_09EDC140Es[14] = {
+const JiminyTextChar* gUnk_09EDC140Es[14] = {
     gUnkEu_088675AA, gUnkEu_088675B8, gUnkEu_088675CD, gUnkEu_088675E2,
     gUnkEu_088675ED, gUnkEu_088675EF, gUnkEu_08867601, gUnkEu_08867614,
     gUnkEu_0886762A, gUnkEu_0886763C, gUnkEu_0886763E, gUnkEu_08867653,
     gUnkEu_08867667, gUnkEu_0886767B,
 };
 
-JiminyTextChar* gUnk_09EDC178[10] = {
+const JiminyTextChar* gUnk_09EDC178[10] = {
     gUnkEu_088676B0, gUnkEu_088676C5, gUnkEu_088676DD, gUnkEu_088676E6,
     gUnkEu_088676E8, gUnkEu_088676FE, gUnkEu_08867712, gUnkEu_0886772B,
     gUnkEu_0886772D, gUnkEu_08867742,
 };
 
-JiminyTextChar* gUnk_09EDC178Fr[12] = {
+const JiminyTextChar* gUnk_09EDC178Fr[12] = {
     gUnkEu_08867756, gUnkEu_0886776C, gUnkEu_08867782, gUnkEu_08867799,
     gUnkEu_0886779F, gUnkEu_088677A1, gUnkEu_088677B2, gUnkEu_088677C5,
     gUnkEu_088677D9, gUnkEu_088677EC, gUnkEu_088677EE, gUnkEu_08867802,
 };
 
-JiminyTextChar* gUnk_09EDC178De[12] = {
+const JiminyTextChar* gUnk_09EDC178De[12] = {
     gUnkEu_08867817, gUnkEu_0886782C, gUnkEu_08867842, gUnkEu_0886784D,
     gUnkEu_0886784F, gUnkEu_08867867, gUnkEu_08867879, gUnkEu_0886788F,
     gUnkEu_088678A0, gUnkEu_088678A2, gUnkEu_088678B9, gUnkEu_088678CF,
 };
 
-JiminyTextChar* gUnk_09EDC178It[10] = {
+const JiminyTextChar* gUnk_09EDC178It[10] = {
     gUnkEu_088678D9, gUnkEu_088678F0, gUnkEu_08867902, gUnkEu_08867904,
     gUnkEu_0886791A, gUnkEu_0886792F, gUnkEu_08867944, gUnkEu_08867951,
     gUnkEu_08867953, gUnkEu_08867967,
 };
 
-JiminyTextChar* gUnk_09EDC178Es[10] = {
+const JiminyTextChar* gUnk_09EDC178Es[10] = {
     gUnkEu_0886796F, gUnkEu_08867984, gUnkEu_08867999, gUnkEu_088679B0,
     gUnkEu_088679B2, gUnkEu_088679C6, gUnkEu_088679D7, gUnkEu_088679EF,
     gUnkEu_088679F1, gUnkEu_08867A05,
 };
 
-JiminyTextChar* gUnk_09EDC1A0[7] = {
+const JiminyTextChar* gUnk_09EDC1A0[7] = {
     gUnkEu_08867A40, gUnkEu_08867A55, gUnkEu_08867A67, gUnkEu_08867A71,
     gUnkEu_08867A73, gUnkEu_08867A8A, gUnkEu_08867A9F,
 };
 
-JiminyTextChar* gUnk_09EDC1A0Fr[7] = {
+const JiminyTextChar* gUnk_09EDC1A0Fr[7] = {
     gUnkEu_08867AAA, gUnkEu_08867AC0, gUnkEu_08867AD1, gUnkEu_08867ADF,
     gUnkEu_08867AE1, gUnkEu_08867AF9, gUnkEu_08867B0E,
 };
 
-JiminyTextChar* gUnk_09EDC1A0De[7] = {
+const JiminyTextChar* gUnk_09EDC1A0De[7] = {
     gUnkEu_08867B21, gUnkEu_08867B34, gUnkEu_08867B45, gUnkEu_08867B58,
     gUnkEu_08867B5A, gUnkEu_08867B72, gUnkEu_08867B86,
 };
 
-JiminyTextChar* gUnk_09EDC1A0It[7] = {
+const JiminyTextChar* gUnk_09EDC1A0It[7] = {
     gUnkEu_08867B8E, gUnkEu_08867B9C, gUnkEu_08867BAF, gUnkEu_08867BC2,
     gUnkEu_08867BC4, gUnkEu_08867BD4, gUnkEu_08867BE0,
 };
 
-JiminyTextChar* gUnk_09EDC1A0Es[7] = {
+const JiminyTextChar* gUnk_09EDC1A0Es[7] = {
     gUnkEu_08867BF3, gUnkEu_08867C07, gUnkEu_08867C1D, gUnkEu_08867C30,
     gUnkEu_08867C32, gUnkEu_08867C47, gUnkEu_08867C5A,
 };
 
-JiminyTextChar* gUnk_09EDC1BC[9] = {
+const JiminyTextChar* gUnk_09EDC1BC[9] = {
     gUnkEu_08867C88, gUnkEu_08867C95, gUnkEu_08867CA1, gUnkEu_08867CA3,
     gUnkEu_08867CB5, gUnkEu_08867CCB, gUnkEu_08867CE2, gUnkEu_08867CF9,
     gUnkEu_08867D0E,
 };
 
-JiminyTextChar* gUnk_09EDC1BCFr[8] = {
+const JiminyTextChar* gUnk_09EDC1BCFr[8] = {
     gUnkEu_08867D1C, gUnkEu_08867D31, gUnkEu_08867D33, gUnkEu_08867D4A,
     gUnkEu_08867D5E, gUnkEu_08867D72, gUnkEu_08867D84, gUnkEu_08867D98,
 };
 
-JiminyTextChar* gUnk_09EDC1BCDe[12] = {
+const JiminyTextChar* gUnk_09EDC1BCDe[12] = {
     gUnkEu_08867DB0, gUnkEu_08867DBE, gUnkEu_08867DC9, gUnkEu_08867DCB,
     gUnkEu_08867DDF, gUnkEu_08867DF0, gUnkEu_08867E02, gUnkEu_08867E16,
     gUnkEu_08867E29, gUnkEu_08867E3F, gUnkEu_08867E53, gUnkEu_08867E6A,
 };
 
-JiminyTextChar* gUnk_09EDC1BCIt[8] = {
+const JiminyTextChar* gUnk_09EDC1BCIt[8] = {
     gUnkEu_08867E7D, gUnkEu_08867E94, gUnkEu_08867E96, gUnkEu_08867EA7,
     gUnkEu_08867EBD, gUnkEu_08867ECE, gUnkEu_08867EE6, gUnkEu_08867EF6,
 };
 
-JiminyTextChar* gUnk_09EDC1BCEs[9] = {
+const JiminyTextChar* gUnk_09EDC1BCEs[9] = {
     gUnkEu_08867F0D, gUnkEu_08867F19, gUnkEu_08867F29, gUnkEu_08867F2B,
     gUnkEu_08867F3E, gUnkEu_08867F51, gUnkEu_08867F60, gUnkEu_08867F73,
     gUnkEu_08867F8A,
 };
 
-JiminyTextChar* gUnk_09EDC1E0[11] = {
+const JiminyTextChar* gUnk_09EDC1E0[11] = {
     gUnkEu_08867FC0, gUnkEu_08867FD8, gUnkEu_08867FED, gUnkEu_08867FFE,
     gUnkEu_08868000, gUnkEu_08868012, gUnkEu_0886802A, gUnkEu_0886803C,
     gUnkEu_08868055, gUnkEu_0886806B, gUnkEu_08868080,
 };
 
-JiminyTextChar* gUnk_09EDC1E0Fr[13] = {
+const JiminyTextChar* gUnk_09EDC1E0Fr[13] = {
     gUnkEu_08868086, gUnkEu_0886809C, gUnkEu_088680B2, gUnkEu_088680C6,
     gUnkEu_088680D6, gUnkEu_088680D8, gUnkEu_088680EC, gUnkEu_08868104,
     gUnkEu_08868114, gUnkEu_08868125, gUnkEu_0886813D, gUnkEu_0886814E,
     gUnkEu_08868161,
 };
 
-JiminyTextChar* gUnk_09EDC1E0De[13] = {
+const JiminyTextChar* gUnk_09EDC1E0De[13] = {
     gUnkEu_0886816C, gUnkEu_0886817C, gUnkEu_0886818F, gUnkEu_088681A2,
     gUnkEu_088681B7, gUnkEu_088681B9, gUnkEu_088681D1, gUnkEu_088681E6,
     gUnkEu_088681FE, gUnkEu_08868215, gUnkEu_08868229, gUnkEu_08868241,
     gUnkEu_08868259,
 };
 
-JiminyTextChar* gUnk_09EDC1E0It[13] = {
+const JiminyTextChar* gUnk_09EDC1E0It[13] = {
     gUnkEu_08868270, gUnkEu_08868280, gUnkEu_08868292, gUnkEu_088682A8,
     gUnkEu_088682B8, gUnkEu_088682C4, gUnkEu_088682C6, gUnkEu_088682D8,
     gUnkEu_088682EE, gUnkEu_08868300, gUnkEu_08868317, gUnkEu_08868329,
     gUnkEu_0886833C,
 };
 
-JiminyTextChar* gUnk_09EDC1E0Es[10] = {
+const JiminyTextChar* gUnk_09EDC1E0Es[10] = {
     gUnkEu_08868349, gUnkEu_0886835B, gUnkEu_08868373, gUnkEu_08868386,
     gUnkEu_08868388, gUnkEu_08868399, gUnkEu_088683B0, gUnkEu_088683C2,
     gUnkEu_088683D4, gUnkEu_088683E6,
 };
 
-JiminyTextChar* gUnk_09EDC20C[8] = {
+const JiminyTextChar* gUnk_09EDC20C[8] = {
     gUnkEu_0886841C, gUnkEu_08868430, gUnkEu_08868444, gUnkEu_08868453,
     gUnkEu_08868455, gUnkEu_0886846B, gUnkEu_0886847F, gUnkEu_08868495,
 };
 
-JiminyTextChar* gUnk_09EDC20CFr[10] = {
+const JiminyTextChar* gUnk_09EDC20CFr[10] = {
     gUnkEu_088684A7, gUnkEu_088684BA, gUnkEu_088684CB, gUnkEu_088684DB,
     gUnkEu_088684E4, gUnkEu_088684E6, gUnkEu_088684F8, gUnkEu_0886850E,
     gUnkEu_08868526, gUnkEu_0886853C,
 };
 
-JiminyTextChar* gUnk_09EDC20CDe[10] = {
+const JiminyTextChar* gUnk_09EDC20CDe[10] = {
     gUnkEu_08868548, gUnkEu_0886855A, gUnkEu_08868570, gUnkEu_08868586,
     gUnkEu_08868591, gUnkEu_08868593, gUnkEu_088685A9, gUnkEu_088685C0,
     gUnkEu_088685D4, gUnkEu_088685EB,
 };
 
-JiminyTextChar* gUnk_09EDC20CIt[9] = {
+const JiminyTextChar* gUnk_09EDC20CIt[9] = {
     gUnkEu_08868604, gUnkEu_08868617, gUnkEu_08868626, gUnkEu_08868638,
     gUnkEu_08868642, gUnkEu_08868644, gUnkEu_08868659, gUnkEu_0886866C,
     gUnkEu_0886867E,
 };
 
-JiminyTextChar* gUnk_09EDC20CEs[8] = {
+const JiminyTextChar* gUnk_09EDC20CEs[8] = {
     gUnkEu_0886868F, gUnkEu_088686A4, gUnkEu_088686BC, gUnkEu_088686CF,
     gUnkEu_088686D1, gUnkEu_088686E2, gUnkEu_088686F3, gUnkEu_08868707,
 };
 
-JiminyTextChar* gUnk_09EDC22C[7] = {
+const JiminyTextChar* gUnk_09EDC22C[7] = {
     gUnkEu_0886873C, gUnkEu_08868754, gUnkEu_08868765, gUnkEu_08868767,
     gUnkEu_0886877D, gUnkEu_08868794, gUnkEu_088687A9,
 };
 
-JiminyTextChar* gUnk_09EDC22CFr[6] = {
+const JiminyTextChar* gUnk_09EDC22CFr[6] = {
     gUnkEu_088687AD, gUnkEu_088687C3, gUnkEu_088687D2, gUnkEu_088687D4,
     gUnkEu_088687E8, gUnkEu_088687FF,
 };
 
-JiminyTextChar* gUnk_09EDC22CDe[6] = {
+const JiminyTextChar* gUnk_09EDC22CDe[6] = {
     gUnkEu_08868814, gUnkEu_0886882D, gUnkEu_0886883A, gUnkEu_0886883C,
     gUnkEu_08868856, gUnkEu_0886886F,
 };
 
-JiminyTextChar* gUnk_09EDC22CIt[6] = {
+const JiminyTextChar* gUnk_09EDC22CIt[6] = {
     gUnkEu_0886887E, gUnkEu_08868890, gUnkEu_088688A8, gUnkEu_088688AA,
     gUnkEu_088688BC, gUnkEu_088688D1,
 };
 
-JiminyTextChar* gUnk_09EDC22CEs[6] = {
+const JiminyTextChar* gUnk_09EDC22CEs[6] = {
     gUnkEu_088688EA, gUnkEu_08868901, gUnkEu_08868918, gUnkEu_0886891A,
     gUnkEu_0886892D, gUnkEu_08868942,
 };
 
-JiminyTextChar* gUnk_09EDC248[6] = {
+const JiminyTextChar* gUnk_09EDC248[6] = {
     gUnkEu_08868974, gUnkEu_0886898A, gUnkEu_088689A2, gUnkEu_088689A4,
     gUnkEu_088689B9, gUnkEu_088689CE,
 };
 
-JiminyTextChar* gUnk_09EDC248Fr[7] = {
+const JiminyTextChar* gUnk_09EDC248Fr[7] = {
     gUnkEu_088689DA, gUnkEu_088689EF, gUnkEu_08868A01, gUnkEu_08868A03,
     gUnkEu_08868A15, gUnkEu_08868A2A, gUnkEu_08868A41,
 };
 
-JiminyTextChar* gUnk_09EDC248De[6] = {
+const JiminyTextChar* gUnk_09EDC248De[6] = {
     gUnkEu_08868A4D, gUnkEu_08868A60, gUnkEu_08868A71, gUnkEu_08868A73,
     gUnkEu_08868A86, gUnkEu_08868A9C,
 };
 
-JiminyTextChar* gUnk_09EDC248It[6] = {
+const JiminyTextChar* gUnk_09EDC248It[6] = {
     gUnkEu_08868AAE, gUnkEu_08868AC2, gUnkEu_08868ADA, gUnkEu_08868ADC,
     gUnkEu_08868AEE, gUnkEu_08868B00,
 };
 
-JiminyTextChar* gUnk_09EDC248Es[6] = {
+const JiminyTextChar* gUnk_09EDC248Es[6] = {
     gUnkEu_08868B11, gUnkEu_08868B28, gUnkEu_08868B3C, gUnkEu_08868B3E,
     gUnkEu_08868B54, gUnkEu_08868B68,
 };
 
-JiminyTextChar* gUnk_09EDC260[6] = {
+const JiminyTextChar* gUnk_09EDC260[6] = {
     gUnkEu_08868B98, gUnkEu_08868BAE, gUnkEu_08868BC6, gUnkEu_08868BC8,
     gUnkEu_08868BDD, gUnkEu_08868BF2,
 };
 
-JiminyTextChar* gUnk_09EDC260Fr[7] = {
+const JiminyTextChar* gUnk_09EDC260Fr[7] = {
     gUnkEu_08868BFE, gUnkEu_08868C13, gUnkEu_08868C25, gUnkEu_08868C27,
     gUnkEu_08868C39, gUnkEu_08868C4E, gUnkEu_08868C65,
 };
 
-JiminyTextChar* gUnk_09EDC260De[6] = {
+const JiminyTextChar* gUnk_09EDC260De[6] = {
     gUnkEu_08868C71, gUnkEu_08868C84, gUnkEu_08868C95, gUnkEu_08868C97,
     gUnkEu_08868CAA, gUnkEu_08868CC0,
 };
 
-JiminyTextChar* gUnk_09EDC260It[6] = {
+const JiminyTextChar* gUnk_09EDC260It[6] = {
     gUnkEu_08868CD2, gUnkEu_08868CE6, gUnkEu_08868CFE, gUnkEu_08868D00,
     gUnkEu_08868D12, gUnkEu_08868D24,
 };
 
-JiminyTextChar* gUnk_09EDC260Es[6] = {
+const JiminyTextChar* gUnk_09EDC260Es[6] = {
     gUnkEu_08868D35, gUnkEu_08868D4C, gUnkEu_08868D60, gUnkEu_08868D62,
     gUnkEu_08868D78, gUnkEu_08868D8C,
 };
 
-JiminyTextChar* gUnk_09EDC278[8] = {
+const JiminyTextChar* gUnk_09EDC278[8] = {
     gUnkEu_08868DBC, gUnkEu_08868DD3, gUnkEu_08868DEB, gUnkEu_08868DF4,
     gUnkEu_08868DF6, gUnkEu_08868E0A, gUnkEu_08868E1F, gUnkEu_08868E33,
 };
 
-JiminyTextChar* gUnk_09EDC278Fr[9] = {
+const JiminyTextChar* gUnk_09EDC278Fr[9] = {
     gUnkEu_08868E3F, gUnkEu_08868E52, gUnkEu_08868E68, gUnkEu_08868E7A,
     gUnkEu_08868E83, gUnkEu_08868E85, gUnkEu_08868E9A, gUnkEu_08868EAE,
     gUnkEu_08868EC5,
 };
 
-JiminyTextChar* gUnk_09EDC278De[8] = {
+const JiminyTextChar* gUnk_09EDC278De[8] = {
     gUnkEu_08868ED0, gUnkEu_08868EE6, gUnkEu_08868EFB, gUnkEu_08868F0F,
     gUnkEu_08868F11, gUnkEu_08868F25, gUnkEu_08868F3B, gUnkEu_08868F4D,
 };
 
-JiminyTextChar* gUnk_09EDC278It[7] = {
+const JiminyTextChar* gUnk_09EDC278It[7] = {
     gUnkEu_08868F5D, gUnkEu_08868F73, gUnkEu_08868F88, gUnkEu_08868FA0,
     gUnkEu_08868FA2, gUnkEu_08868FB5, gUnkEu_08868FCF,
 };
 
-JiminyTextChar* gUnk_09EDC278Es[8] = {
+const JiminyTextChar* gUnk_09EDC278Es[8] = {
     gUnkEu_08868FE0, gUnkEu_08868FF6, gUnkEu_0886900E, gUnkEu_08869023,
     gUnkEu_08869025, gUnkEu_08869038, gUnkEu_0886904B, gUnkEu_08869058,
 };
 
-JiminyTextChar* gUnk_09EDD61C[15] = {
+const JiminyTextChar* gUnk_09EDD61C[15] = {
     gUnkEu_08869090, gUnkEu_088690A5, gUnkEu_088690B9, gUnkEu_088690D0,
     gUnkEu_088690D2, gUnkEu_088690E9, gUnkEu_088690FE, gUnkEu_08869114,
     gUnkEu_0886912A, gUnkEu_0886913A, gUnkEu_0886913C, gUnkEu_08869151,
     gUnkEu_08869166, gUnkEu_0886917B, gUnkEu_08869190,
 };
 
-JiminyTextChar* gUnk_09EDD61CFr[16] = {
+const JiminyTextChar* gUnk_09EDD61CFr[16] = {
     gUnkEu_088691A2, gUnkEu_088691BA, gUnkEu_088691D0, gUnkEu_088691DF,
     gUnkEu_088691E1, gUnkEu_088691F8, gUnkEu_0886920E, gUnkEu_08869225,
     gUnkEu_08869238, gUnkEu_08869248, gUnkEu_0886924A, gUnkEu_08869260,
     gUnkEu_08869277, gUnkEu_0886928D, gUnkEu_088692A2, gUnkEu_088692B3,
 };
 
-JiminyTextChar* gUnk_09EDD61CDe[18] = {
+const JiminyTextChar* gUnk_09EDD61CDe[18] = {
     gUnkEu_088692BD, gUnkEu_088692D0, gUnkEu_088692E8, gUnkEu_088692FD,
     gUnkEu_0886930F, gUnkEu_08869311, gUnkEu_08869322, gUnkEu_08869333,
     gUnkEu_08869349, gUnkEu_08869361, gUnkEu_08869377, gUnkEu_0886938A,
@@ -8904,7 +8904,7 @@ JiminyTextChar* gUnk_09EDD61CDe[18] = {
     gUnkEu_088693D3, gUnkEu_088693E3,
 };
 
-JiminyTextChar* gUnk_09EDD61CIt[18] = {
+const JiminyTextChar* gUnk_09EDD61CIt[18] = {
     gUnkEu_088693F6, gUnkEu_0886940D, gUnkEu_08869421, gUnkEu_08869432,
     gUnkEu_08869434, gUnkEu_08869444, gUnkEu_08869454, gUnkEu_08869467,
     gUnkEu_08869479, gUnkEu_0886948C, gUnkEu_0886949E, gUnkEu_088694A9,
@@ -8912,1259 +8912,1259 @@ JiminyTextChar* gUnk_09EDD61CIt[18] = {
     gUnkEu_088694F6, gUnkEu_0886950A,
 };
 
-JiminyTextChar* gUnk_09EDD61CEs[15] = {
+const JiminyTextChar* gUnk_09EDD61CEs[15] = {
     gUnkEu_08869515, gUnkEu_08869530, gUnkEu_08869543, gUnkEu_0886954D,
     gUnkEu_0886954F, gUnkEu_08869561, gUnkEu_08869577, gUnkEu_0886958D,
     gUnkEu_088695A1, gUnkEu_088695B6, gUnkEu_088695B8, gUnkEu_088695CB,
     gUnkEu_088695DE, gUnkEu_088695F7, gUnkEu_08869606,
 };
 
-JiminyTextChar* gUnk_09EDC298[8] = {
+const JiminyTextChar* gUnk_09EDC298[8] = {
     gUnkEu_0886963C, gUnkEu_08869654, gUnkEu_0886966A, gUnkEu_0886966C,
     gUnkEu_08869684, gUnkEu_0886969B, gUnkEu_088696AF, gUnkEu_088696C6,
 };
 
-JiminyTextChar* gUnk_09EDC298Fr[9] = {
+const JiminyTextChar* gUnk_09EDC298Fr[9] = {
     gUnkEu_088696D2, gUnkEu_088696EA, gUnkEu_088696FB, gUnkEu_08869704,
     gUnkEu_08869706, gUnkEu_0886971B, gUnkEu_08869731, gUnkEu_08869745,
     gUnkEu_0886975B,
 };
 
-JiminyTextChar* gUnk_09EDC298De[8] = {
+const JiminyTextChar* gUnk_09EDC298De[8] = {
     gUnkEu_08869771, gUnkEu_0886978A, gUnkEu_088697A3, gUnkEu_088697A5,
     gUnkEu_088697B8, gUnkEu_088697D1, gUnkEu_088697E8, gUnkEu_088697FC,
 };
 
-JiminyTextChar* gUnk_09EDC298It[11] = {
+const JiminyTextChar* gUnk_09EDC298It[11] = {
     gUnkEu_08869812, gUnkEu_0886982B, gUnkEu_08869842, gUnkEu_0886984D,
     gUnkEu_0886984F, gUnkEu_08869861, gUnkEu_08869875, gUnkEu_08869884,
     gUnkEu_08869897, gUnkEu_088698A9, gUnkEu_088698BD,
 };
 
-JiminyTextChar* gUnk_09EDC298Es[8] = {
+const JiminyTextChar* gUnk_09EDC298Es[8] = {
     gUnkEu_088698C8, gUnkEu_088698DC, gUnkEu_088698E4, gUnkEu_088698E6,
     gUnkEu_088698F8, gUnkEu_08869911, gUnkEu_08869927, gUnkEu_08869937,
 };
 
-JiminyTextChar* gUnk_09EDC2B8[10] = {
+const JiminyTextChar* gUnk_09EDC2B8[10] = {
     gUnkEu_08869964, gUnkEu_08869972, gUnkEu_08869974, gUnkEu_0886998C,
     gUnkEu_088699A4, gUnkEu_088699B7, gUnkEu_088699B9, gUnkEu_088699CA,
     gUnkEu_088699E2, gUnkEu_088699FA,
 };
 
-JiminyTextChar* gUnk_09EDC2B8Fr[12] = {
+const JiminyTextChar* gUnk_09EDC2B8Fr[12] = {
     gUnkEu_08869A0D, gUnkEu_08869A1C, gUnkEu_08869A1E, gUnkEu_08869A34,
     gUnkEu_08869A4A, gUnkEu_08869A5F, gUnkEu_08869A68, gUnkEu_08869A6A,
     gUnkEu_08869A7A, gUnkEu_08869A92, gUnkEu_08869AA8, gUnkEu_08869ABE,
 };
 
-JiminyTextChar* gUnk_09EDC2B8De[11] = {
+const JiminyTextChar* gUnk_09EDC2B8De[11] = {
     gUnkEu_08869ACA, gUnkEu_08869ADC, gUnkEu_08869ADE, gUnkEu_08869AF2,
     gUnkEu_08869B06, gUnkEu_08869B1D, gUnkEu_08869B25, gUnkEu_08869B27,
     gUnkEu_08869B3E, gUnkEu_08869B55, gUnkEu_08869B6E,
 };
 
-JiminyTextChar* gUnk_09EDC2B8It[9] = {
+const JiminyTextChar* gUnk_09EDC2B8It[9] = {
     gUnkEu_08869B7A, gUnkEu_08869B8C, gUnkEu_08869B8E, gUnkEu_08869BA3,
     gUnkEu_08869BB9, gUnkEu_08869BCF, gUnkEu_08869BD1, gUnkEu_08869BE6,
     gUnkEu_08869BFC,
 };
 
-JiminyTextChar* gUnk_09EDC2B8Es[10] = {
+const JiminyTextChar* gUnk_09EDC2B8Es[10] = {
     gUnkEu_08869C12, gUnkEu_08869C23, gUnkEu_08869C25, gUnkEu_08869C37,
     gUnkEu_08869C51, gUnkEu_08869C61, gUnkEu_08869C63, gUnkEu_08869C78,
     gUnkEu_08869C8E, gUnkEu_08869C9F,
 };
 
-JiminyTextChar* gUnk_09EDC2E0[9] = {
+const JiminyTextChar* gUnk_09EDC2E0[9] = {
     gUnkEu_08869CD0, gUnkEu_08869CE4, gUnkEu_08869CFE, gUnkEu_08869D13,
     gUnkEu_08869D21, gUnkEu_08869D23, gUnkEu_08869D39, gUnkEu_08869D52,
     gUnkEu_08869D69,
 };
 
-JiminyTextChar* gUnk_09EDC2E0Fr[10] = {
+const JiminyTextChar* gUnk_09EDC2E0Fr[10] = {
     gUnkEu_08869D74, gUnkEu_08869D8B, gUnkEu_08869DA3, gUnkEu_08869DBB,
     gUnkEu_08869DCF, gUnkEu_08869DE0, gUnkEu_08869DE2, gUnkEu_08869DF7,
     gUnkEu_08869E0F, gUnkEu_08869E25,
 };
 
-JiminyTextChar* gUnk_09EDC2E0De[9] = {
+const JiminyTextChar* gUnk_09EDC2E0De[9] = {
     gUnkEu_08869E34, gUnkEu_08869E4C, gUnkEu_08869E63, gUnkEu_08869E7B,
     gUnkEu_08869E91, gUnkEu_08869E93, gUnkEu_08869EAB, gUnkEu_08869EC3,
     gUnkEu_08869ED7,
 };
 
-JiminyTextChar* gUnk_09EDC2E0It[8] = {
+const JiminyTextChar* gUnk_09EDC2E0It[8] = {
     gUnkEu_08869EEC, gUnkEu_08869F00, gUnkEu_08869F13, gUnkEu_08869F2A,
     gUnkEu_08869F41, gUnkEu_08869F43, gUnkEu_08869F58, gUnkEu_08869F70,
 };
 
-JiminyTextChar* gUnk_09EDC2E0Es[9] = {
+const JiminyTextChar* gUnk_09EDC2E0Es[9] = {
     gUnkEu_08869F85, gUnkEu_08869F9A, gUnkEu_08869FB2, gUnkEu_08869FC6,
     gUnkEu_08869FD5, gUnkEu_08869FD7, gUnkEu_08869FE6, gUnkEu_08869FFE,
     gUnkEu_0886A013,
 };
 
-JiminyTextChar* gUnk_09EDC304[13] = {
+const JiminyTextChar* gUnk_09EDC304[13] = {
     gUnkEu_0886A044, gUnkEu_0886A057, gUnkEu_0886A06C, gUnkEu_0886A07F,
     gUnkEu_0886A081, gUnkEu_0886A098, gUnkEu_0886A0AB, gUnkEu_0886A0BB,
     gUnkEu_0886A0BD, gUnkEu_0886A0CF, gUnkEu_0886A0DF, gUnkEu_0886A0F5,
     gUnkEu_0886A10A,
 };
 
-JiminyTextChar* gUnk_09EDC304Fr[13] = {
+const JiminyTextChar* gUnk_09EDC304Fr[13] = {
     gUnkEu_0886A114, gUnkEu_0886A12A, gUnkEu_0886A142, gUnkEu_0886A155,
     gUnkEu_0886A157, gUnkEu_0886A16D, gUnkEu_0886A183, gUnkEu_0886A19A,
     gUnkEu_0886A19C, gUnkEu_0886A1B0, gUnkEu_0886A1BF, gUnkEu_0886A1D3,
     gUnkEu_0886A1E7,
 };
 
-JiminyTextChar* gUnk_09EDC304De[15] = {
+const JiminyTextChar* gUnk_09EDC304De[15] = {
     gUnkEu_0886A1F8, gUnkEu_0886A20E, gUnkEu_0886A222, gUnkEu_0886A232,
     gUnkEu_0886A234, gUnkEu_0886A24A, gUnkEu_0886A260, gUnkEu_0886A272,
     gUnkEu_0886A27B, gUnkEu_0886A27D, gUnkEu_0886A291, gUnkEu_0886A2A7,
     gUnkEu_0886A2BC, gUnkEu_0886A2D0, gUnkEu_0886A2E5,
 };
 
-JiminyTextChar* gUnk_09EDC304It[13] = {
+const JiminyTextChar* gUnk_09EDC304It[13] = {
     gUnkEu_0886A2EB, gUnkEu_0886A2FC, gUnkEu_0886A30F, gUnkEu_0886A321,
     gUnkEu_0886A336, gUnkEu_0886A338, gUnkEu_0886A349, gUnkEu_0886A35F,
     gUnkEu_0886A376, gUnkEu_0886A378, gUnkEu_0886A38E, gUnkEu_0886A3A3,
     gUnkEu_0886A3BA,
 };
 
-JiminyTextChar* gUnk_09EDC304Es[12] = {
+const JiminyTextChar* gUnk_09EDC304Es[12] = {
     gUnkEu_0886A3CF, gUnkEu_0886A3E7, gUnkEu_0886A3FC, gUnkEu_0886A410,
     gUnkEu_0886A412, gUnkEu_0886A427, gUnkEu_0886A439, gUnkEu_0886A442,
     gUnkEu_0886A444, gUnkEu_0886A455, gUnkEu_0886A46B, gUnkEu_0886A482,
 };
 
-JiminyTextChar* gUnk_09EDC338[4] = {
+const JiminyTextChar* gUnk_09EDC338[4] = {
     gUnkEu_0886A4BC, gUnkEu_0886A4D3, gUnkEu_0886A4EB, gUnkEu_0886A500,
 };
 
-JiminyTextChar* gUnk_09EDC338Fr[4] = {
+const JiminyTextChar* gUnk_09EDC338Fr[4] = {
     gUnkEu_0886A510, gUnkEu_0886A522, gUnkEu_0886A536, gUnkEu_0886A546,
 };
 
-JiminyTextChar* gUnk_09EDC338De[5] = {
+const JiminyTextChar* gUnk_09EDC338De[5] = {
     gUnkEu_0886A559, gUnkEu_0886A56D, gUnkEu_0886A57E, gUnkEu_0886A593,
     gUnkEu_0886A5A9,
 };
 
-JiminyTextChar* gUnk_09EDC338It[4] = {
+const JiminyTextChar* gUnk_09EDC338It[4] = {
     gUnkEu_0886A5C1, gUnkEu_0886A5D7, gUnkEu_0886A5EB, gUnkEu_0886A5FE,
 };
 
-JiminyTextChar* gUnk_09EDC338Es[4] = {
+const JiminyTextChar* gUnk_09EDC338Es[4] = {
     gUnkEu_0886A607, gUnkEu_0886A61A, gUnkEu_0886A62D, gUnkEu_0886A63F,
 };
 
-JiminyTextChar* gUnk_09EDC348[7] = {
+const JiminyTextChar* gUnk_09EDC348[7] = {
     gUnkEu_0886A674, gUnkEu_0886A68B, gUnkEu_0886A6A0, gUnkEu_0886A6B3,
     gUnkEu_0886A6B5, gUnkEu_0886A6C8, gUnkEu_0886A6DE,
 };
 
-JiminyTextChar* gUnk_09EDC348Fr[8] = {
+const JiminyTextChar* gUnk_09EDC348Fr[8] = {
     gUnkEu_0886A6F5, gUnkEu_0886A70D, gUnkEu_0886A725, gUnkEu_0886A739,
     gUnkEu_0886A745, gUnkEu_0886A747, gUnkEu_0886A75D, gUnkEu_0886A772,
 };
 
-JiminyTextChar* gUnk_09EDC348De[8] = {
+const JiminyTextChar* gUnk_09EDC348De[8] = {
     gUnkEu_0886A788, gUnkEu_0886A798, gUnkEu_0886A7AC, gUnkEu_0886A7BE,
     gUnkEu_0886A7D6, gUnkEu_0886A7D8, gUnkEu_0886A7EE, gUnkEu_0886A804,
 };
 
-JiminyTextChar* gUnk_09EDC348It[9] = {
+const JiminyTextChar* gUnk_09EDC348It[9] = {
     gUnkEu_0886A81B, gUnkEu_0886A82E, gUnkEu_0886A845, gUnkEu_0886A85C,
     gUnkEu_0886A876, gUnkEu_0886A878, gUnkEu_0886A88C, gUnkEu_0886A8A1,
     gUnkEu_0886A8B5,
 };
 
-JiminyTextChar* gUnk_09EDC348Es[7] = {
+const JiminyTextChar* gUnk_09EDC348Es[7] = {
     gUnkEu_0886A8C4, gUnkEu_0886A8D9, gUnkEu_0886A8ED, gUnkEu_0886A905,
     gUnkEu_0886A907, gUnkEu_0886A91D, gUnkEu_0886A932,
 };
 
-JiminyTextChar* gUnk_09EDC364[12] = {
+const JiminyTextChar* gUnk_09EDC364[12] = {
     gUnkEu_0886A96C, gUnkEu_0886A981, gUnkEu_0886A996, gUnkEu_0886A99B,
     gUnkEu_0886A99D, gUnkEu_0886A9B2, gUnkEu_0886A9C5, gUnkEu_0886A9C7,
     gUnkEu_0886A9DC, gUnkEu_0886A9F0, gUnkEu_0886AA05, gUnkEu_0886AA18,
 };
 
-JiminyTextChar* gUnk_09EDC364Fr[12] = {
+const JiminyTextChar* gUnk_09EDC364Fr[12] = {
     gUnkEu_0886AA22, gUnkEu_0886AA37, gUnkEu_0886AA49, gUnkEu_0886AA4B,
     gUnkEu_0886AA60, gUnkEu_0886AA74, gUnkEu_0886AA85, gUnkEu_0886AA87,
     gUnkEu_0886AA9A, gUnkEu_0886AAAE, gUnkEu_0886AAC4, gUnkEu_0886AAD8,
 };
 
-JiminyTextChar* gUnk_09EDC364De[13] = {
+const JiminyTextChar* gUnk_09EDC364De[13] = {
     gUnkEu_0886AAEF, gUnkEu_0886AB0A, gUnkEu_0886AB20, gUnkEu_0886AB22,
     gUnkEu_0886AB38, gUnkEu_0886AB49, gUnkEu_0886AB5C, gUnkEu_0886AB5E,
     gUnkEu_0886AB70, gUnkEu_0886AB84, gUnkEu_0886AB9D, gUnkEu_0886ABB5,
     gUnkEu_0886ABCC,
 };
 
-JiminyTextChar* gUnk_09EDC364It[12] = {
+const JiminyTextChar* gUnk_09EDC364It[12] = {
     gUnkEu_0886ABE2, gUnkEu_0886ABF3, gUnkEu_0886AC08, gUnkEu_0886AC0A,
     gUnkEu_0886AC1C, gUnkEu_0886AC31, gUnkEu_0886AC40, gUnkEu_0886AC42,
     gUnkEu_0886AC57, gUnkEu_0886AC6C, gUnkEu_0886AC82, gUnkEu_0886AC96,
 };
 
-JiminyTextChar* gUnk_09EDC364Es[12] = {
+const JiminyTextChar* gUnk_09EDC364Es[12] = {
     gUnkEu_0886ACA6, gUnkEu_0886ACBC, gUnkEu_0886ACCC, gUnkEu_0886ACE0,
     gUnkEu_0886ACE2, gUnkEu_0886ACF4, gUnkEu_0886AD09, gUnkEu_0886AD0B,
     gUnkEu_0886AD1A, gUnkEu_0886AD2C, gUnkEu_0886AD3E, gUnkEu_0886AD52,
 };
 
-JiminyTextChar* gUnk_09EDC394[10] = {
+const JiminyTextChar* gUnk_09EDC394[10] = {
     gUnkEu_0886AD84, gUnkEu_0886AD99, gUnkEu_0886ADB1, gUnkEu_0886ADC2,
     gUnkEu_0886ADD9, gUnkEu_0886ADF0, gUnkEu_0886ADF2, gUnkEu_0886AE04,
     gUnkEu_0886AE1B, gUnkEu_0886AE33,
 };
 
-JiminyTextChar* gUnk_09EDC394Fr[11] = {
+const JiminyTextChar* gUnk_09EDC394Fr[11] = {
     gUnkEu_0886AE42, gUnkEu_0886AE54, gUnkEu_0886AE69, gUnkEu_0886AE79,
     gUnkEu_0886AE8E, gUnkEu_0886AE9F, gUnkEu_0886AEA1, gUnkEu_0886AEB4,
     gUnkEu_0886AECB, gUnkEu_0886AEE1, gUnkEu_0886AEF2,
 };
 
-JiminyTextChar* gUnk_09EDC394De[13] = {
+const JiminyTextChar* gUnk_09EDC394De[13] = {
     gUnkEu_0886AEFB, gUnkEu_0886AF10, gUnkEu_0886AF26, gUnkEu_0886AF3B,
     gUnkEu_0886AF4F, gUnkEu_0886AF65, gUnkEu_0886AF7B, gUnkEu_0886AF91,
     gUnkEu_0886AF93, gUnkEu_0886AFA9, gUnkEu_0886AFBC, gUnkEu_0886AFCD,
     gUnkEu_0886AFE4,
 };
 
-JiminyTextChar* gUnk_09EDC394It[11] = {
+const JiminyTextChar* gUnk_09EDC394It[11] = {
     gUnkEu_0886AFFB, gUnkEu_0886B010, gUnkEu_0886B026, gUnkEu_0886B03A,
     gUnkEu_0886B052, gUnkEu_0886B062, gUnkEu_0886B064, gUnkEu_0886B074,
     gUnkEu_0886B08A, gUnkEu_0886B0A3, gUnkEu_0886B0BA,
 };
 
-JiminyTextChar* gUnk_09EDC394Es[10] = {
+const JiminyTextChar* gUnk_09EDC394Es[10] = {
     gUnkEu_0886B0C7, gUnkEu_0886B0DE, gUnkEu_0886B0F2, gUnkEu_0886B101,
     gUnkEu_0886B113, gUnkEu_0886B128, gUnkEu_0886B12A, gUnkEu_0886B13F,
     gUnkEu_0886B157, gUnkEu_0886B16A,
 };
 
-JiminyTextChar* gUnk_09EDC3BC[11] = {
+const JiminyTextChar* gUnk_09EDC3BC[11] = {
     gUnkEu_0886B198, gUnkEu_0886B1AA, gUnkEu_0886B1BE, gUnkEu_0886B1D0,
     gUnkEu_0886B1DA, gUnkEu_0886B1DC, gUnkEu_0886B1F1, gUnkEu_0886B209,
     gUnkEu_0886B21D, gUnkEu_0886B233, gUnkEu_0886B244,
 };
 
-JiminyTextChar* gUnk_09EDC3BCFr[11] = {
+const JiminyTextChar* gUnk_09EDC3BCFr[11] = {
     gUnkEu_0886B253, gUnkEu_0886B265, gUnkEu_0886B276, gUnkEu_0886B282,
     gUnkEu_0886B284, gUnkEu_0886B29C, gUnkEu_0886B2B1, gUnkEu_0886B2C8,
     gUnkEu_0886B2DE, gUnkEu_0886B2F4, gUnkEu_0886B301,
 };
 
-JiminyTextChar* gUnk_09EDC3BCDe[12] = {
+const JiminyTextChar* gUnk_09EDC3BCDe[12] = {
     gUnkEu_0886B30D, gUnkEu_0886B322, gUnkEu_0886B335, gUnkEu_0886B34A,
     gUnkEu_0886B359, gUnkEu_0886B35B, gUnkEu_0886B36F, gUnkEu_0886B385,
     gUnkEu_0886B39F, gUnkEu_0886B3B3, gUnkEu_0886B3C5, gUnkEu_0886B3D7,
 };
 
-JiminyTextChar* gUnk_09EDC3BCIt[12] = {
+const JiminyTextChar* gUnk_09EDC3BCIt[12] = {
     gUnkEu_0886B3E4, gUnkEu_0886B3F6, gUnkEu_0886B408, gUnkEu_0886B41C,
     gUnkEu_0886B433, gUnkEu_0886B435, gUnkEu_0886B449, gUnkEu_0886B45D,
     gUnkEu_0886B472, gUnkEu_0886B486, gUnkEu_0886B49A, gUnkEu_0886B4AD,
 };
 
-JiminyTextChar* gUnk_09EDC3BCEs[11] = {
+const JiminyTextChar* gUnk_09EDC3BCEs[11] = {
     gUnkEu_0886B4B5, gUnkEu_0886B4C5, gUnkEu_0886B4D6, gUnkEu_0886B4E4,
     gUnkEu_0886B4F7, gUnkEu_0886B4F9, gUnkEu_0886B50B, gUnkEu_0886B525,
     gUnkEu_0886B535, gUnkEu_0886B54B, gUnkEu_0886B560,
 };
 
-JiminyTextChar* gUnk_09EDC3E8[11] = {
+const JiminyTextChar* gUnk_09EDC3E8[11] = {
     gUnkEu_0886B594, gUnkEu_0886B5A9, gUnkEu_0886B5BD, gUnkEu_0886B5D2,
     gUnkEu_0886B5E5, gUnkEu_0886B5ED, gUnkEu_0886B5EF, gUnkEu_0886B607,
     gUnkEu_0886B61B, gUnkEu_0886B630, gUnkEu_0886B645,
 };
 
-JiminyTextChar* gUnk_09EDC3E8Fr[10] = {
+const JiminyTextChar* gUnk_09EDC3E8Fr[10] = {
     gUnkEu_0886B64B, gUnkEu_0886B661, gUnkEu_0886B676, gUnkEu_0886B68E,
     gUnkEu_0886B6A0, gUnkEu_0886B6A2, gUnkEu_0886B6B9, gUnkEu_0886B6CD,
     gUnkEu_0886B6E1, gUnkEu_0886B6F7,
 };
 
-JiminyTextChar* gUnk_09EDC3E8De[11] = {
+const JiminyTextChar* gUnk_09EDC3E8De[11] = {
     gUnkEu_0886B70B, gUnkEu_0886B723, gUnkEu_0886B738, gUnkEu_0886B74D,
     gUnkEu_0886B763, gUnkEu_0886B76D, gUnkEu_0886B76F, gUnkEu_0886B786,
     gUnkEu_0886B79D, gUnkEu_0886B7B6, gUnkEu_0886B7CD,
 };
 
-JiminyTextChar* gUnk_09EDC3E8It[12] = {
+const JiminyTextChar* gUnk_09EDC3E8It[12] = {
     gUnkEu_0886B7D4, gUnkEu_0886B7E7, gUnkEu_0886B7F3, gUnkEu_0886B7F5,
     gUnkEu_0886B80B, gUnkEu_0886B819, gUnkEu_0886B833, gUnkEu_0886B835,
     gUnkEu_0886B84C, gUnkEu_0886B864, gUnkEu_0886B879, gUnkEu_0886B890,
 };
 
-JiminyTextChar* gUnk_09EDC3E8Es[11] = {
+const JiminyTextChar* gUnk_09EDC3E8Es[11] = {
     gUnkEu_0886B8A5, gUnkEu_0886B8BB, gUnkEu_0886B8CF, gUnkEu_0886B8E3,
     gUnkEu_0886B8F6, gUnkEu_0886B90A, gUnkEu_0886B90C, gUnkEu_0886B91F,
     gUnkEu_0886B937, gUnkEu_0886B94C, gUnkEu_0886B961,
 };
 
-JiminyTextChar* gUnk_09EDC414[8] = {
+const JiminyTextChar* gUnk_09EDC414[8] = {
     gUnkEu_0886B994, gUnkEu_0886B9A8, gUnkEu_0886B9AE, gUnkEu_0886B9B0,
     gUnkEu_0886B9C0, gUnkEu_0886B9D6, gUnkEu_0886B9E9, gUnkEu_0886B9FB,
 };
 
-JiminyTextChar* gUnk_09EDC414Fr[8] = {
+const JiminyTextChar* gUnk_09EDC414Fr[8] = {
     gUnkEu_0886BA0D, gUnkEu_0886BA22, gUnkEu_0886BA2D, gUnkEu_0886BA2F,
     gUnkEu_0886BA43, gUnkEu_0886BA58, gUnkEu_0886BA6D, gUnkEu_0886BA7E,
 };
 
-JiminyTextChar* gUnk_09EDC414De[10] = {
+const JiminyTextChar* gUnk_09EDC414De[10] = {
     gUnkEu_0886BA8A, gUnkEu_0886BA9E, gUnkEu_0886BAA7, gUnkEu_0886BAA9,
     gUnkEu_0886BABD, gUnkEu_0886BAD2, gUnkEu_0886BAE6, gUnkEu_0886BAF7,
     gUnkEu_0886BB0F, gUnkEu_0886BB23,
 };
 
-JiminyTextChar* gUnk_09EDC414It[7] = {
+const JiminyTextChar* gUnk_09EDC414It[7] = {
     gUnkEu_0886BB2C, gUnkEu_0886BB3B, gUnkEu_0886BB4C, gUnkEu_0886BB4E,
     gUnkEu_0886BB61, gUnkEu_0886BB7A, gUnkEu_0886BB8C,
 };
 
-JiminyTextChar* gUnk_09EDC414Es[8] = {
+const JiminyTextChar* gUnk_09EDC414Es[8] = {
     gUnkEu_0886BBA4, gUnkEu_0886BBB9, gUnkEu_0886BBC4, gUnkEu_0886BBC6,
     gUnkEu_0886BBDA, gUnkEu_0886BBEF, gUnkEu_0886BC08, gUnkEu_0886BC1D,
 };
 
-JiminyTextChar* gUnk_09EDD658[9] = {
+const JiminyTextChar* gUnk_09EDD658[9] = {
     gUnkEu_0886BC4C, gUnkEu_0886BC64, gUnkEu_0886BC7A, gUnkEu_0886BC8D,
     gUnkEu_0886BC8F, gUnkEu_0886BCA3, gUnkEu_0886BCBB, gUnkEu_0886BCD1,
     gUnkEu_0886BCE6,
 };
 
-JiminyTextChar* gUnk_09EDD658Fr[9] = {
+const JiminyTextChar* gUnk_09EDD658Fr[9] = {
     gUnkEu_0886BCEE, gUnkEu_0886BD04, gUnkEu_0886BD1B, gUnkEu_0886BD32,
     gUnkEu_0886BD34, gUnkEu_0886BD49, gUnkEu_0886BD5A, gUnkEu_0886BD74,
     gUnkEu_0886BD8A,
 };
 
-JiminyTextChar* gUnk_09EDD658De[9] = {
+const JiminyTextChar* gUnk_09EDD658De[9] = {
     gUnkEu_0886BD94, gUnkEu_0886BDA9, gUnkEu_0886BDB9, gUnkEu_0886BDCF,
     gUnkEu_0886BDD1, gUnkEu_0886BDEA, gUnkEu_0886BE01, gUnkEu_0886BE17,
     gUnkEu_0886BE2D,
 };
 
-JiminyTextChar* gUnk_09EDD658It[8] = {
+const JiminyTextChar* gUnk_09EDD658It[8] = {
     gUnkEu_0886BE41, gUnkEu_0886BE59, gUnkEu_0886BE71, gUnkEu_0886BE85,
     gUnkEu_0886BE87, gUnkEu_0886BE9C, gUnkEu_0886BEB3, gUnkEu_0886BECA,
 };
 
-JiminyTextChar* gUnk_09EDD658Es[8] = {
+const JiminyTextChar* gUnk_09EDD658Es[8] = {
     gUnkEu_0886BEDF, gUnkEu_0886BEF5, gUnkEu_0886BF09, gUnkEu_0886BF1B,
     gUnkEu_0886BF1D, gUnkEu_0886BF31, gUnkEu_0886BF42, gUnkEu_0886BF56,
 };
 
-JiminyTextChar* gUnk_09EDC434[6] = {
+const JiminyTextChar* gUnk_09EDC434[6] = {
     gUnkEu_0886BF8C, gUnkEu_0886BFA3, gUnkEu_0886BFA5, gUnkEu_0886BFBD,
     gUnkEu_0886BFD4, gUnkEu_0886BFE9,
 };
 
-JiminyTextChar* gUnk_09EDC434Fr[6] = {
+const JiminyTextChar* gUnk_09EDC434Fr[6] = {
     gUnkEu_0886BFFA, gUnkEu_0886C012, gUnkEu_0886C014, gUnkEu_0886C02B,
     gUnkEu_0886C043, gUnkEu_0886C057,
 };
 
-JiminyTextChar* gUnk_09EDC434De[7] = {
+const JiminyTextChar* gUnk_09EDC434De[7] = {
     gUnkEu_0886C06C, gUnkEu_0886C081, gUnkEu_0886C083, gUnkEu_0886C099,
     gUnkEu_0886C0AB, gUnkEu_0886C0BC, gUnkEu_0886C0CD,
 };
 
-JiminyTextChar* gUnk_09EDC434It[6] = {
+const JiminyTextChar* gUnk_09EDC434It[6] = {
     gUnkEu_0886C0E0, gUnkEu_0886C0FB, gUnkEu_0886C0FD, gUnkEu_0886C114,
     gUnkEu_0886C12A, gUnkEu_0886C13E,
 };
 
-JiminyTextChar* gUnk_09EDC434Es[6] = {
+const JiminyTextChar* gUnk_09EDC434Es[6] = {
     gUnkEu_0886C152, gUnkEu_0886C16A, gUnkEu_0886C16C, gUnkEu_0886C17D,
     gUnkEu_0886C193, gUnkEu_0886C1A8,
 };
 
-JiminyTextChar* gUnk_09EDC44C[6] = {
+const JiminyTextChar* gUnk_09EDC44C[6] = {
     gUnkEu_0886C1D8, gUnkEu_0886C1F1, gUnkEu_0886C204, gUnkEu_0886C206,
     gUnkEu_0886C21C, gUnkEu_0886C232,
 };
 
-JiminyTextChar* gUnk_09EDC44CFr[7] = {
+const JiminyTextChar* gUnk_09EDC44CFr[7] = {
     gUnkEu_0886C23A, gUnkEu_0886C24E, gUnkEu_0886C25E, gUnkEu_0886C26B,
     gUnkEu_0886C26D, gUnkEu_0886C27F, gUnkEu_0886C291,
 };
 
-JiminyTextChar* gUnk_09EDC44CDe[6] = {
+const JiminyTextChar* gUnk_09EDC44CDe[6] = {
     gUnkEu_0886C2A3, gUnkEu_0886C2B7, gUnkEu_0886C2C8, gUnkEu_0886C2CA,
     gUnkEu_0886C2DB, gUnkEu_0886C2F2,
 };
 
-JiminyTextChar* gUnk_09EDC44CIt[6] = {
+const JiminyTextChar* gUnk_09EDC44CIt[6] = {
     gUnkEu_0886C307, gUnkEu_0886C31C, gUnkEu_0886C335, gUnkEu_0886C337,
     gUnkEu_0886C34A, gUnkEu_0886C361,
 };
 
-JiminyTextChar* gUnk_09EDC44CEs[5] = {
+const JiminyTextChar* gUnk_09EDC44CEs[5] = {
     gUnkEu_0886C372, gUnkEu_0886C38A, gUnkEu_0886C3A3, gUnkEu_0886C3A5,
     gUnkEu_0886C3BD,
 };
 
-JiminyTextChar* gUnk_09EDC464[6] = {
+const JiminyTextChar* gUnk_09EDC464[6] = {
     gUnkEu_0886C3F4, gUnkEu_0886C406, gUnkEu_0886C41C, gUnkEu_0886C41E,
     gUnkEu_0886C432, gUnkEu_0886C44A,
 };
 
-JiminyTextChar* gUnk_09EDC464Fr[6] = {
+const JiminyTextChar* gUnk_09EDC464Fr[6] = {
     gUnkEu_0886C455, gUnkEu_0886C46B, gUnkEu_0886C480, gUnkEu_0886C482,
     gUnkEu_0886C494, gUnkEu_0886C4A7,
 };
 
-JiminyTextChar* gUnk_09EDC464De[6] = {
+const JiminyTextChar* gUnk_09EDC464De[6] = {
     gUnkEu_0886C4B5, gUnkEu_0886C4CA, gUnkEu_0886C4DA, gUnkEu_0886C4DC,
     gUnkEu_0886C4ED, gUnkEu_0886C500,
 };
 
-JiminyTextChar* gUnk_09EDC464It[6] = {
+const JiminyTextChar* gUnk_09EDC464It[6] = {
     gUnkEu_0886C513, gUnkEu_0886C528, gUnkEu_0886C53B, gUnkEu_0886C53D,
     gUnkEu_0886C552, gUnkEu_0886C568,
 };
 
-JiminyTextChar* gUnk_09EDC464Es[6] = {
+const JiminyTextChar* gUnk_09EDC464Es[6] = {
     gUnkEu_0886C574, gUnkEu_0886C588, gUnkEu_0886C59C, gUnkEu_0886C59E,
     gUnkEu_0886C5B5, gUnkEu_0886C5C6,
 };
 
-JiminyTextChar* gUnk_09EDC47C[8] = {
+const JiminyTextChar* gUnk_09EDC47C[8] = {
     gUnkEu_0886C600, gUnkEu_0886C616, gUnkEu_0886C62D, gUnkEu_0886C63F,
     gUnkEu_0886C641, gUnkEu_0886C655, gUnkEu_0886C66B, gUnkEu_0886C684,
 };
 
-JiminyTextChar* gUnk_09EDC47CFr[9] = {
+const JiminyTextChar* gUnk_09EDC47CFr[9] = {
     gUnkEu_0886C68A, gUnkEu_0886C69F, gUnkEu_0886C6B5, gUnkEu_0886C6C7,
     gUnkEu_0886C6D8, gUnkEu_0886C6DA, gUnkEu_0886C6F1, gUnkEu_0886C708,
     gUnkEu_0886C71A,
 };
 
-JiminyTextChar* gUnk_09EDC47CDe[9] = {
+const JiminyTextChar* gUnk_09EDC47CDe[9] = {
     gUnkEu_0886C72C, gUnkEu_0886C742, gUnkEu_0886C753, gUnkEu_0886C765,
     gUnkEu_0886C767, gUnkEu_0886C77C, gUnkEu_0886C790, gUnkEu_0886C7A4,
     gUnkEu_0886C7B4,
 };
 
-JiminyTextChar* gUnk_09EDC47CIt[7] = {
+const JiminyTextChar* gUnk_09EDC47CIt[7] = {
     gUnkEu_0886C7C0, gUnkEu_0886C7D6, gUnkEu_0886C7ED, gUnkEu_0886C802,
     gUnkEu_0886C804, gUnkEu_0886C819, gUnkEu_0886C830,
 };
 
-JiminyTextChar* gUnk_09EDC47CEs[8] = {
+const JiminyTextChar* gUnk_09EDC47CEs[8] = {
     gUnkEu_0886C83B, gUnkEu_0886C850, gUnkEu_0886C862, gUnkEu_0886C87A,
     gUnkEu_0886C87C, gUnkEu_0886C88D, gUnkEu_0886C8A1, gUnkEu_0886C8B5,
 };
 
-JiminyTextChar* gUnk_09EDC49C[8] = {
+const JiminyTextChar* gUnk_09EDC49C[8] = {
     gUnkEu_0886C8F0, gUnkEu_0886C902, gUnkEu_0886C918, gUnkEu_0886C930,
     gUnkEu_0886C932, gUnkEu_0886C94A, gUnkEu_0886C95B, gUnkEu_0886C971,
 };
 
-JiminyTextChar* gUnk_09EDC49CFr[10] = {
+const JiminyTextChar* gUnk_09EDC49CFr[10] = {
     gUnkEu_0886C97D, gUnkEu_0886C992, gUnkEu_0886C9A8, gUnkEu_0886C9B8,
     gUnkEu_0886C9C1, gUnkEu_0886C9C3, gUnkEu_0886C9D8, gUnkEu_0886C9F0,
     gUnkEu_0886CA06, gUnkEu_0886CA18,
 };
 
-JiminyTextChar* gUnk_09EDC49CDe[9] = {
+const JiminyTextChar* gUnk_09EDC49CDe[9] = {
     gUnkEu_0886CA2A, gUnkEu_0886CA36, gUnkEu_0886CA4B, gUnkEu_0886CA5D,
     gUnkEu_0886CA73, gUnkEu_0886CA75, gUnkEu_0886CA86, gUnkEu_0886CA9C,
     gUnkEu_0886CAB3,
 };
 
-JiminyTextChar* gUnk_09EDC49CIt[9] = {
+const JiminyTextChar* gUnk_09EDC49CIt[9] = {
     gUnkEu_0886CAC1, gUnkEu_0886CAD7, gUnkEu_0886CAED, gUnkEu_0886CB09,
     gUnkEu_0886CB0B, gUnkEu_0886CB22, gUnkEu_0886CB36, gUnkEu_0886CB4A,
     gUnkEu_0886CB5F,
 };
 
-JiminyTextChar* gUnk_09EDC49CEs[8] = {
+const JiminyTextChar* gUnk_09EDC49CEs[8] = {
     gUnkEu_0886CB72, gUnkEu_0886CB85, gUnkEu_0886CB99, gUnkEu_0886CBAF,
     gUnkEu_0886CBB1, gUnkEu_0886CBC6, gUnkEu_0886CBDD, gUnkEu_0886CBF0,
 };
 
-JiminyTextChar* gUnk_09EDC4BC[9] = {
+const JiminyTextChar* gUnk_09EDC4BC[9] = {
     gUnkEu_0886CC20, gUnkEu_0886CC34, gUnkEu_0886CC4B, gUnkEu_0886CC5B,
     gUnkEu_0886CC5D, gUnkEu_0886CC73, gUnkEu_0886CC87, gUnkEu_0886CC9E,
     gUnkEu_0886CCB4,
 };
 
-JiminyTextChar* gUnk_09EDC4BCFr[9] = {
+const JiminyTextChar* gUnk_09EDC4BCFr[9] = {
     gUnkEu_0886CCBC, gUnkEu_0886CCD0, gUnkEu_0886CCE5, gUnkEu_0886CCF2,
     gUnkEu_0886CCF4, gUnkEu_0886CD08, gUnkEu_0886CD1B, gUnkEu_0886CD30,
     gUnkEu_0886CD44,
 };
 
-JiminyTextChar* gUnk_09EDC4BCDe[9] = {
+const JiminyTextChar* gUnk_09EDC4BCDe[9] = {
     gUnkEu_0886CD51, gUnkEu_0886CD69, gUnkEu_0886CD7E, gUnkEu_0886CD92,
     gUnkEu_0886CD94, gUnkEu_0886CDA8, gUnkEu_0886CDBD, gUnkEu_0886CDCD,
     gUnkEu_0886CDDE,
 };
 
-JiminyTextChar* gUnk_09EDC4BCIt[9] = {
+const JiminyTextChar* gUnk_09EDC4BCIt[9] = {
     gUnkEu_0886CDF1, gUnkEu_0886CE05, gUnkEu_0886CE18, gUnkEu_0886CE28,
     gUnkEu_0886CE2A, gUnkEu_0886CE3A, gUnkEu_0886CE4E, gUnkEu_0886CE62,
     gUnkEu_0886CE77,
 };
 
-JiminyTextChar* gUnk_09EDC4BCEs[9] = {
+const JiminyTextChar* gUnk_09EDC4BCEs[9] = {
     gUnkEu_0886CE84, gUnkEu_0886CE9A, gUnkEu_0886CEB1, gUnkEu_0886CEC3,
     gUnkEu_0886CEC5, gUnkEu_0886CED0, gUnkEu_0886CEE3, gUnkEu_0886CEF8,
     gUnkEu_0886CF09,
 };
 
-JiminyTextChar* gUnk_09EDC4E0[6] = {
+const JiminyTextChar* gUnk_09EDC4E0[6] = {
     gUnkEu_0886CF38, gUnkEu_0886CF49, gUnkEu_0886CF5F, gUnkEu_0886CF61,
     gUnkEu_0886CF76, gUnkEu_0886CF8A,
 };
 
-JiminyTextChar* gUnk_09EDC4E0Fr[9] = {
+const JiminyTextChar* gUnk_09EDC4E0Fr[9] = {
     gUnkEu_0886CF9D, gUnkEu_0886CFB0, gUnkEu_0886CFC1, gUnkEu_0886CFCB,
     gUnkEu_0886CFCD, gUnkEu_0886CFDB, gUnkEu_0886CFED, gUnkEu_0886CFFD,
     gUnkEu_0886D012,
 };
 
-JiminyTextChar* gUnk_09EDC4E0De[8] = {
+const JiminyTextChar* gUnk_09EDC4E0De[8] = {
     gUnkEu_0886D01C, gUnkEu_0886D032, gUnkEu_0886D045, gUnkEu_0886D059,
     gUnkEu_0886D05B, gUnkEu_0886D06F, gUnkEu_0886D086, gUnkEu_0886D09B,
 };
 
-JiminyTextChar* gUnk_09EDC4E0It[7] = {
+const JiminyTextChar* gUnk_09EDC4E0It[7] = {
     gUnkEu_0886D0AE, gUnkEu_0886D0BF, gUnkEu_0886D0D1, gUnkEu_0886D0DB,
     gUnkEu_0886D0DD, gUnkEu_0886D0F0, gUnkEu_0886D105,
 };
 
-JiminyTextChar* gUnk_09EDC4E0Es[8] = {
+const JiminyTextChar* gUnk_09EDC4E0Es[8] = {
     gUnkEu_0886D11B, gUnkEu_0886D131, gUnkEu_0886D141, gUnkEu_0886D143,
     gUnkEu_0886D158, gUnkEu_0886D169, gUnkEu_0886D17B, gUnkEu_0886D18C,
 };
 
-JiminyTextChar* gUnk_09EDC4F8[10] = {
+const JiminyTextChar* gUnk_09EDC4F8[10] = {
     gUnkEu_0886D1B8, gUnkEu_0886D1C9, gUnkEu_0886D1E1, gUnkEu_0886D1E3,
     gUnkEu_0886D1F8, gUnkEu_0886D20F, gUnkEu_0886D224, gUnkEu_0886D23D,
     gUnkEu_0886D24F, gUnkEu_0886D265,
 };
 
-JiminyTextChar* gUnk_09EDC4F8Fr[12] = {
+const JiminyTextChar* gUnk_09EDC4F8Fr[12] = {
     gUnkEu_0886D277, gUnkEu_0886D28C, gUnkEu_0886D295, gUnkEu_0886D297,
     gUnkEu_0886D2AE, gUnkEu_0886D2BF, gUnkEu_0886D2D2, gUnkEu_0886D2E0,
     gUnkEu_0886D2ED, gUnkEu_0886D2F9, gUnkEu_0886D30B, gUnkEu_0886D319,
 };
 
-JiminyTextChar* gUnk_09EDC4F8De[12] = {
+const JiminyTextChar* gUnk_09EDC4F8De[12] = {
     gUnkEu_0886D322, gUnkEu_0886D338, gUnkEu_0886D350, gUnkEu_0886D352,
     gUnkEu_0886D363, gUnkEu_0886D378, gUnkEu_0886D38A, gUnkEu_0886D39D,
     gUnkEu_0886D3B2, gUnkEu_0886D3C8, gUnkEu_0886D3DE, gUnkEu_0886D3F2,
 };
 
-JiminyTextChar* gUnk_09EDC4F8It[10] = {
+const JiminyTextChar* gUnk_09EDC4F8It[10] = {
     gUnkEu_0886D3F9, gUnkEu_0886D40A, gUnkEu_0886D421, gUnkEu_0886D423,
     gUnkEu_0886D436, gUnkEu_0886D44B, gUnkEu_0886D45F, gUnkEu_0886D474,
     gUnkEu_0886D486, gUnkEu_0886D498,
 };
 
-JiminyTextChar* gUnk_09EDC4F8Es[9] = {
+const JiminyTextChar* gUnk_09EDC4F8Es[9] = {
     gUnkEu_0886D4AF, gUnkEu_0886D4C7, gUnkEu_0886D4D4, gUnkEu_0886D4D6,
     gUnkEu_0886D4EE, gUnkEu_0886D505, gUnkEu_0886D51C, gUnkEu_0886D533,
     gUnkEu_0886D54A,
 };
 
-JiminyTextChar* gUnk_09EDC520[8] = {
+const JiminyTextChar* gUnk_09EDC520[8] = {
     gUnkEu_0886D580, gUnkEu_0886D591, gUnkEu_0886D5A7, gUnkEu_0886D5BD,
     gUnkEu_0886D5C5, gUnkEu_0886D5C7, gUnkEu_0886D5DF, gUnkEu_0886D5F3,
 };
 
-JiminyTextChar* gUnk_09EDC520Fr[10] = {
+const JiminyTextChar* gUnk_09EDC520Fr[10] = {
     gUnkEu_0886D60B, gUnkEu_0886D61C, gUnkEu_0886D634, gUnkEu_0886D645,
     gUnkEu_0886D654, gUnkEu_0886D656, gUnkEu_0886D669, gUnkEu_0886D675,
     gUnkEu_0886D686, gUnkEu_0886D69D,
 };
 
-JiminyTextChar* gUnk_09EDC520De[11] = {
+const JiminyTextChar* gUnk_09EDC520De[11] = {
     gUnkEu_0886D6A9, gUnkEu_0886D6BF, gUnkEu_0886D6D4, gUnkEu_0886D6ED,
     gUnkEu_0886D6F4, gUnkEu_0886D6F6, gUnkEu_0886D70D, gUnkEu_0886D723,
     gUnkEu_0886D738, gUnkEu_0886D74C, gUnkEu_0886D765,
 };
 
-JiminyTextChar* gUnk_09EDC520It[10] = {
+const JiminyTextChar* gUnk_09EDC520It[10] = {
     gUnkEu_0886D76C, gUnkEu_0886D781, gUnkEu_0886D799, gUnkEu_0886D7A9,
     gUnkEu_0886D7C0, gUnkEu_0886D7C2, gUnkEu_0886D7DA, gUnkEu_0886D7EE,
     gUnkEu_0886D800, gUnkEu_0886D812,
 };
 
-JiminyTextChar* gUnk_09EDC520Es[11] = {
+const JiminyTextChar* gUnk_09EDC520Es[11] = {
     gUnkEu_0886D81D, gUnkEu_0886D831, gUnkEu_0886D846, gUnkEu_0886D85F,
     gUnkEu_0886D875, gUnkEu_0886D889, gUnkEu_0886D88B, gUnkEu_0886D8A1,
     gUnkEu_0886D8AF, gUnkEu_0886D8C5, gUnkEu_0886D8DC,
 };
 
-JiminyTextChar* gUnk_09EDD67C[7] = {
+const JiminyTextChar* gUnk_09EDD67C[7] = {
     gUnkEu_0886D910, gUnkEu_0886D923, gUnkEu_0886D939, gUnkEu_0886D94A,
     gUnkEu_0886D94C, gUnkEu_0886D962, gUnkEu_0886D979,
 };
 
-JiminyTextChar* gUnk_09EDD67CFr[9] = {
+const JiminyTextChar* gUnk_09EDD67CFr[9] = {
     gUnkEu_0886D991, gUnkEu_0886D9A4, gUnkEu_0886D9B9, gUnkEu_0886D9D0,
     gUnkEu_0886D9D2, gUnkEu_0886D9E4, gUnkEu_0886D9F8, gUnkEu_0886DA09,
     gUnkEu_0886DA1B,
 };
 
-JiminyTextChar* gUnk_09EDD67CDe[10] = {
+const JiminyTextChar* gUnk_09EDD67CDe[10] = {
     gUnkEu_0886DA2A, gUnkEu_0886DA43, gUnkEu_0886DA5B, gUnkEu_0886DA75,
     gUnkEu_0886DA77, gUnkEu_0886DA8A, gUnkEu_0886DA9E, gUnkEu_0886DAB2,
     gUnkEu_0886DAC6, gUnkEu_0886DAD6,
 };
 
-JiminyTextChar* gUnk_09EDD67CIt[7] = {
+const JiminyTextChar* gUnk_09EDD67CIt[7] = {
     gUnkEu_0886DAE2, gUnkEu_0886DAF3, gUnkEu_0886DB09, gUnkEu_0886DB24,
     gUnkEu_0886DB26, gUnkEu_0886DB38, gUnkEu_0886DB4E,
 };
 
-JiminyTextChar* gUnk_09EDD67CEs[7] = {
+const JiminyTextChar* gUnk_09EDD67CEs[7] = {
     gUnkEu_0886DB68, gUnkEu_0886DB7F, gUnkEu_0886DB98, gUnkEu_0886DBAF,
     gUnkEu_0886DBB1, gUnkEu_0886DBC7, gUnkEu_0886DBE0,
 };
 
-JiminyTextChar* gUnk_09EDC540[9] = {
+const JiminyTextChar* gUnk_09EDC540[9] = {
     gUnkEu_0886DC18, gUnkEu_0886DC2E, gUnkEu_0886DC49, gUnkEu_0886DC4B,
     gUnkEu_0886DC5D, gUnkEu_0886DC70, gUnkEu_0886DC88, gUnkEu_0886DCA0,
     gUnkEu_0886DCB8,
 };
 
-JiminyTextChar* gUnk_09EDC540Fr[9] = {
+const JiminyTextChar* gUnk_09EDC540Fr[9] = {
     gUnkEu_0886DCC2, gUnkEu_0886DCD3, gUnkEu_0886DCEA, gUnkEu_0886DCEE,
     gUnkEu_0886DCF0, gUnkEu_0886DD06, gUnkEu_0886DD1D, gUnkEu_0886DD30,
     gUnkEu_0886DD43,
 };
 
-JiminyTextChar* gUnk_09EDC540De[11] = {
+const JiminyTextChar* gUnk_09EDC540De[11] = {
     gUnkEu_0886DD51, gUnkEu_0886DD67, gUnkEu_0886DD7D, gUnkEu_0886DD88,
     gUnkEu_0886DD8A, gUnkEu_0886DD9E, gUnkEu_0886DDB4, gUnkEu_0886DDCC,
     gUnkEu_0886DDE3, gUnkEu_0886DDF7, gUnkEu_0886DE0C,
 };
 
-JiminyTextChar* gUnk_09EDC540It[9] = {
+const JiminyTextChar* gUnk_09EDC540It[9] = {
     gUnkEu_0886DE18, gUnkEu_0886DE29, gUnkEu_0886DE39, gUnkEu_0886DE3B,
     gUnkEu_0886DE4F, gUnkEu_0886DE5F, gUnkEu_0886DE74, gUnkEu_0886DE8C,
     gUnkEu_0886DE9C,
 };
 
-JiminyTextChar* gUnk_09EDC540Es[10] = {
+const JiminyTextChar* gUnk_09EDC540Es[10] = {
     gUnkEu_0886DEAB, gUnkEu_0886DEC0, gUnkEu_0886DED6, gUnkEu_0886DEDD,
     gUnkEu_0886DEDF, gUnkEu_0886DEF4, gUnkEu_0886DF08, gUnkEu_0886DF14,
     gUnkEu_0886DF2A, gUnkEu_0886DF3F,
 };
 
-JiminyTextChar* gUnk_09EDC564[7] = {
+const JiminyTextChar* gUnk_09EDC564[7] = {
     gUnkEu_0886DF6C, gUnkEu_0886DF7B, gUnkEu_0886DF92, gUnkEu_0886DFAD,
     gUnkEu_0886DFAF, gUnkEu_0886DFC4, gUnkEu_0886DFDD,
 };
 
-JiminyTextChar* gUnk_09EDC564Fr[9] = {
+const JiminyTextChar* gUnk_09EDC564Fr[9] = {
     gUnkEu_0886DFF1, gUnkEu_0886E003, gUnkEu_0886E018, gUnkEu_0886E027,
     gUnkEu_0886E029, gUnkEu_0886E037, gUnkEu_0886E04D, gUnkEu_0886E05E,
     gUnkEu_0886E06F,
 };
 
-JiminyTextChar* gUnk_09EDC564De[9] = {
+const JiminyTextChar* gUnk_09EDC564De[9] = {
     gUnkEu_0886E077, gUnkEu_0886E089, gUnkEu_0886E09E, gUnkEu_0886E0AF,
     gUnkEu_0886E0C2, gUnkEu_0886E0C4, gUnkEu_0886E0DC, gUnkEu_0886E0F2,
     gUnkEu_0886E107,
 };
 
-JiminyTextChar* gUnk_09EDC564It[7] = {
+const JiminyTextChar* gUnk_09EDC564It[7] = {
     gUnkEu_0886E10F, gUnkEu_0886E126, gUnkEu_0886E13B, gUnkEu_0886E152,
     gUnkEu_0886E154, gUnkEu_0886E16B, gUnkEu_0886E17E,
 };
 
-JiminyTextChar* gUnk_09EDC564Es[7] = {
+const JiminyTextChar* gUnk_09EDC564Es[7] = {
     gUnkEu_0886E191, gUnkEu_0886E1A2, gUnkEu_0886E1B3, gUnkEu_0886E1C6,
     gUnkEu_0886E1C8, gUnkEu_0886E1D6, gUnkEu_0886E1EC,
 };
 
-JiminyTextChar* gUnk_09EDC580[10] = {
+const JiminyTextChar* gUnk_09EDC580[10] = {
     gUnkEu_0886E21C, gUnkEu_0886E230, gUnkEu_0886E232, gUnkEu_0886E248,
     gUnkEu_0886E261, gUnkEu_0886E26F, gUnkEu_0886E271, gUnkEu_0886E289,
     gUnkEu_0886E29B, gUnkEu_0886E2B1,
 };
 
-JiminyTextChar* gUnk_09EDC580Fr[12] = {
+const JiminyTextChar* gUnk_09EDC580Fr[12] = {
     gUnkEu_0886E2C1, gUnkEu_0886E2D2, gUnkEu_0886E2E0, gUnkEu_0886E2E2,
     gUnkEu_0886E2F8, gUnkEu_0886E307, gUnkEu_0886E31B, gUnkEu_0886E31D,
     gUnkEu_0886E32D, gUnkEu_0886E343, gUnkEu_0886E359, gUnkEu_0886E36C,
 };
 
-JiminyTextChar* gUnk_09EDC580De[14] = {
+const JiminyTextChar* gUnk_09EDC580De[14] = {
     gUnkEu_0886E377, gUnkEu_0886E387, gUnkEu_0886E392, gUnkEu_0886E394,
     gUnkEu_0886E3A6, gUnkEu_0886E3BA, gUnkEu_0886E3CA, gUnkEu_0886E3CC,
     gUnkEu_0886E3E1, gUnkEu_0886E3F6, gUnkEu_0886E407, gUnkEu_0886E419,
     gUnkEu_0886E42B, gUnkEu_0886E43C,
 };
 
-JiminyTextChar* gUnk_09EDC580It[11] = {
+const JiminyTextChar* gUnk_09EDC580It[11] = {
     gUnkEu_0886E446, gUnkEu_0886E45F, gUnkEu_0886E461, gUnkEu_0886E476,
     gUnkEu_0886E48D, gUnkEu_0886E4A6, gUnkEu_0886E4A8, gUnkEu_0886E4C2,
     gUnkEu_0886E4D5, gUnkEu_0886E4F0, gUnkEu_0886E505,
 };
 
-JiminyTextChar* gUnk_09EDC580Es[13] = {
+const JiminyTextChar* gUnk_09EDC580Es[13] = {
     gUnkEu_0886E518, gUnkEu_0886E52B, gUnkEu_0886E53B, gUnkEu_0886E53D,
     gUnkEu_0886E550, gUnkEu_0886E564, gUnkEu_0886E57B, gUnkEu_0886E586,
     gUnkEu_0886E588, gUnkEu_0886E59B, gUnkEu_0886E5AF, gUnkEu_0886E5C8,
     gUnkEu_0886E5DD,
 };
 
-JiminyTextChar* gUnk_09EDC5A8[9] = {
+const JiminyTextChar* gUnk_09EDC5A8[9] = {
     gUnkEu_0886E60C, gUnkEu_0886E61D, gUnkEu_0886E633, gUnkEu_0886E64A,
     gUnkEu_0886E663, gUnkEu_0886E665, gUnkEu_0886E675, gUnkEu_0886E68E,
     gUnkEu_0886E6A4,
 };
 
-JiminyTextChar* gUnk_09EDC5A8Fr[9] = {
+const JiminyTextChar* gUnk_09EDC5A8Fr[9] = {
     gUnkEu_0886E6B1, gUnkEu_0886E6C6, gUnkEu_0886E6DB, gUnkEu_0886E6EC,
     gUnkEu_0886E6FD, gUnkEu_0886E714, gUnkEu_0886E716, gUnkEu_0886E72A,
     gUnkEu_0886E73F,
 };
 
-JiminyTextChar* gUnk_09EDC5A8De[12] = {
+const JiminyTextChar* gUnk_09EDC5A8De[12] = {
     gUnkEu_0886E756, gUnkEu_0886E76A, gUnkEu_0886E77F, gUnkEu_0886E791,
     gUnkEu_0886E7A7, gUnkEu_0886E7BC, gUnkEu_0886E7D3, gUnkEu_0886E7D5,
     gUnkEu_0886E7ED, gUnkEu_0886E802, gUnkEu_0886E818, gUnkEu_0886E82F,
 };
 
-JiminyTextChar* gUnk_09EDC5A8It[11] = {
+const JiminyTextChar* gUnk_09EDC5A8It[11] = {
     gUnkEu_0886E836, gUnkEu_0886E84E, gUnkEu_0886E86A, gUnkEu_0886E881,
     gUnkEu_0886E897, gUnkEu_0886E8A2, gUnkEu_0886E8A4, gUnkEu_0886E8BB,
     gUnkEu_0886E8CE, gUnkEu_0886E8E4, gUnkEu_0886E8F8,
 };
 
-JiminyTextChar* gUnk_09EDC5A8Es[9] = {
+const JiminyTextChar* gUnk_09EDC5A8Es[9] = {
     gUnkEu_0886E8FF, gUnkEu_0886E917, gUnkEu_0886E92A, gUnkEu_0886E941,
     gUnkEu_0886E957, gUnkEu_0886E959, gUnkEu_0886E96C, gUnkEu_0886E981,
     gUnkEu_0886E998,
 };
 
-JiminyTextChar* gUnk_09EDC5CC[9] = {
+const JiminyTextChar* gUnk_09EDC5CC[9] = {
     gUnkEu_0886E9CC, gUnkEu_0886E9DD, gUnkEu_0886E9F3, gUnkEu_0886EA04,
     gUnkEu_0886EA06, gUnkEu_0886EA18, gUnkEu_0886EA2E, gUnkEu_0886EA46,
     gUnkEu_0886EA5B,
 };
 
-JiminyTextChar* gUnk_09EDC5CCFr[10] = {
+const JiminyTextChar* gUnk_09EDC5CCFr[10] = {
     gUnkEu_0886EA63, gUnkEu_0886EA75, gUnkEu_0886EA86, gUnkEu_0886EA9D,
     gUnkEu_0886EAAE, gUnkEu_0886EAB7, gUnkEu_0886EAB9, gUnkEu_0886EACD,
     gUnkEu_0886EAE4, gUnkEu_0886EAF5,
 };
 
-JiminyTextChar* gUnk_09EDC5CCDe[9] = {
+const JiminyTextChar* gUnk_09EDC5CCDe[9] = {
     gUnkEu_0886EAFD, gUnkEu_0886EB11, gUnkEu_0886EB26, gUnkEu_0886EB38,
     gUnkEu_0886EB3A, gUnkEu_0886EB51, gUnkEu_0886EB67, gUnkEu_0886EB7B,
     gUnkEu_0886EB8E,
 };
 
-JiminyTextChar* gUnk_09EDC5CCIt[8] = {
+const JiminyTextChar* gUnk_09EDC5CCIt[8] = {
     gUnkEu_0886EBA4, gUnkEu_0886EBBC, gUnkEu_0886EBD8, gUnkEu_0886EBDA,
     gUnkEu_0886EBEF, gUnkEu_0886EC05, gUnkEu_0886EC1A, gUnkEu_0886EC2E,
 };
 
-JiminyTextChar* gUnk_09EDC5CCEs[8] = {
+const JiminyTextChar* gUnk_09EDC5CCEs[8] = {
     gUnkEu_0886EC38, gUnkEu_0886EC50, gUnkEu_0886EC63, gUnkEu_0886EC6B,
     gUnkEu_0886EC6D, gUnkEu_0886EC7E, gUnkEu_0886EC95, gUnkEu_0886ECAC,
 };
 
-JiminyTextChar* gUnk_09EDC5F0[9] = {
+const JiminyTextChar* gUnk_09EDC5F0[9] = {
     gUnkEu_0886ECE0, gUnkEu_0886ECF1, gUnkEu_0886ED07, gUnkEu_0886ED18,
     gUnkEu_0886ED1A, gUnkEu_0886ED31, gUnkEu_0886ED46, gUnkEu_0886ED5C,
     gUnkEu_0886ED73,
 };
 
-JiminyTextChar* gUnk_09EDC5F0Fr[8] = {
+const JiminyTextChar* gUnk_09EDC5F0Fr[8] = {
     gUnkEu_0886ED7B, gUnkEu_0886ED90, gUnkEu_0886EDA4, gUnkEu_0886EDA6,
     gUnkEu_0886EDBD, gUnkEu_0886EDD2, gUnkEu_0886EDE6, gUnkEu_0886EDFE,
 };
 
-JiminyTextChar* gUnk_09EDC5F0De[9] = {
+const JiminyTextChar* gUnk_09EDC5F0De[9] = {
     gUnkEu_0886EE0A, gUnkEu_0886EE1E, gUnkEu_0886EE33, gUnkEu_0886EE45,
     gUnkEu_0886EE47, gUnkEu_0886EE60, gUnkEu_0886EE76, gUnkEu_0886EE8E,
     gUnkEu_0886EEA5,
 };
 
-JiminyTextChar* gUnk_09EDC5F0It[8] = {
+const JiminyTextChar* gUnk_09EDC5F0It[8] = {
     gUnkEu_0886EEBA, gUnkEu_0886EED2, gUnkEu_0886EEEE, gUnkEu_0886EEF0,
     gUnkEu_0886EF07, gUnkEu_0886EF21, gUnkEu_0886EF35, gUnkEu_0886EF4B,
 };
 
-JiminyTextChar* gUnk_09EDC5F0Es[8] = {
+const JiminyTextChar* gUnk_09EDC5F0Es[8] = {
     gUnkEu_0886EF60, gUnkEu_0886EF78, gUnkEu_0886EF8B, gUnkEu_0886EF93,
     gUnkEu_0886EF95, gUnkEu_0886EFA9, gUnkEu_0886EFC1, gUnkEu_0886EFD7,
 };
 
-JiminyTextChar* gUnk_09EDC614[11] = {
+const JiminyTextChar* gUnk_09EDC614[11] = {
     gUnkEu_0886F008, gUnkEu_0886F019, gUnkEu_0886F02F, gUnkEu_0886F044,
     gUnkEu_0886F05B, gUnkEu_0886F071, gUnkEu_0886F082, gUnkEu_0886F084,
     gUnkEu_0886F099, gUnkEu_0886F0B3, gUnkEu_0886F0CA,
 };
 
-JiminyTextChar* gUnk_09EDC614Fr[12] = {
+const JiminyTextChar* gUnk_09EDC614Fr[12] = {
     gUnkEu_0886F0DB, gUnkEu_0886F0E8, gUnkEu_0886F0FB, gUnkEu_0886F10D,
     gUnkEu_0886F120, gUnkEu_0886F131, gUnkEu_0886F137, gUnkEu_0886F139,
     gUnkEu_0886F151, gUnkEu_0886F15F, gUnkEu_0886F175, gUnkEu_0886F18B,
 };
 
-JiminyTextChar* gUnk_09EDC614De[13] = {
+const JiminyTextChar* gUnk_09EDC614De[13] = {
     gUnkEu_0886F197, gUnkEu_0886F1AB, gUnkEu_0886F1C0, gUnkEu_0886F1DC,
     gUnkEu_0886F1F4, gUnkEu_0886F20C, gUnkEu_0886F222, gUnkEu_0886F22D,
     gUnkEu_0886F22F, gUnkEu_0886F245, gUnkEu_0886F25A, gUnkEu_0886F26D,
     gUnkEu_0886F284,
 };
 
-JiminyTextChar* gUnk_09EDC614It[11] = {
+const JiminyTextChar* gUnk_09EDC614It[11] = {
     gUnkEu_0886F293, gUnkEu_0886F2AB, gUnkEu_0886F2C1, gUnkEu_0886F2D4,
     gUnkEu_0886F2E8, gUnkEu_0886F2FD, gUnkEu_0886F2FF, gUnkEu_0886F30F,
     gUnkEu_0886F320, gUnkEu_0886F337, gUnkEu_0886F34A,
 };
 
-JiminyTextChar* gUnk_09EDC614Es[10] = {
+const JiminyTextChar* gUnk_09EDC614Es[10] = {
     gUnkEu_0886F35D, gUnkEu_0886F374, gUnkEu_0886F388, gUnkEu_0886F39C,
     gUnkEu_0886F3AF, gUnkEu_0886F3B1, gUnkEu_0886F3C5, gUnkEu_0886F3DC,
     gUnkEu_0886F3F2, gUnkEu_0886F407,
 };
 
-JiminyTextChar* gUnk_09EDC640[7] = {
+const JiminyTextChar* gUnk_09EDC640[7] = {
     gUnkEu_0886F430, gUnkEu_0886F448, gUnkEu_0886F45B, gUnkEu_0886F45D,
     gUnkEu_0886F470, gUnkEu_0886F486, gUnkEu_0886F497,
 };
 
-JiminyTextChar* gUnk_09EDC640Fr[6] = {
+const JiminyTextChar* gUnk_09EDC640Fr[6] = {
     gUnkEu_0886F4A6, gUnkEu_0886F4B6, gUnkEu_0886F4C2, gUnkEu_0886F4C4,
     gUnkEu_0886F4D9, gUnkEu_0886F4EA,
 };
 
-JiminyTextChar* gUnk_09EDC640De[9] = {
+const JiminyTextChar* gUnk_09EDC640De[9] = {
     gUnkEu_0886F501, gUnkEu_0886F518, gUnkEu_0886F530, gUnkEu_0886F543,
     gUnkEu_0886F545, gUnkEu_0886F558, gUnkEu_0886F56E, gUnkEu_0886F582,
     gUnkEu_0886F593,
 };
 
-JiminyTextChar* gUnk_09EDC640It[8] = {
+const JiminyTextChar* gUnk_09EDC640It[8] = {
     gUnkEu_0886F5A6, gUnkEu_0886F5B3, gUnkEu_0886F5C4, gUnkEu_0886F5D5,
     gUnkEu_0886F5D7, gUnkEu_0886F5EE, gUnkEu_0886F609, gUnkEu_0886F61F,
 };
 
-JiminyTextChar* gUnk_09EDC640Es[8] = {
+const JiminyTextChar* gUnk_09EDC640Es[8] = {
     gUnkEu_0886F633, gUnkEu_0886F646, gUnkEu_0886F656, gUnkEu_0886F667,
     gUnkEu_0886F669, gUnkEu_0886F67B, gUnkEu_0886F690, gUnkEu_0886F6A5,
 };
 
-JiminyTextChar* gUnk_09EDC65C[6] = {
+const JiminyTextChar* gUnk_09EDC65C[6] = {
     gUnkEu_0886F6D4, gUnkEu_0886F6E8, gUnkEu_0886F6EA, gUnkEu_0886F700,
     gUnkEu_0886F712, gUnkEu_0886F727,
 };
 
-JiminyTextChar* gUnk_09EDC65CFr[8] = {
+const JiminyTextChar* gUnk_09EDC65CFr[8] = {
     gUnkEu_0886F73F, gUnkEu_0886F74F, gUnkEu_0886F759, gUnkEu_0886F75B,
     gUnkEu_0886F76B, gUnkEu_0886F781, gUnkEu_0886F793, gUnkEu_0886F7A6,
 };
 
-JiminyTextChar* gUnk_09EDC65CDe[10] = {
+const JiminyTextChar* gUnk_09EDC65CDe[10] = {
     gUnkEu_0886F7B0, gUnkEu_0886F7C1, gUnkEu_0886F7CC, gUnkEu_0886F7CE,
     gUnkEu_0886F7E0, gUnkEu_0886F7F1, gUnkEu_0886F804, gUnkEu_0886F819,
     gUnkEu_0886F82D, gUnkEu_0886F844,
 };
 
-JiminyTextChar* gUnk_09EDC65CIt[7] = {
+const JiminyTextChar* gUnk_09EDC65CIt[7] = {
     gUnkEu_0886F84E, gUnkEu_0886F85B, gUnkEu_0886F867, gUnkEu_0886F869,
     gUnkEu_0886F87D, gUnkEu_0886F893, gUnkEu_0886F8A9,
 };
 
-JiminyTextChar* gUnk_09EDC65CEs[8] = {
+const JiminyTextChar* gUnk_09EDC65CEs[8] = {
     gUnkEu_0886F8C1, gUnkEu_0886F8D6, gUnkEu_0886F8E0, gUnkEu_0886F8E2,
     gUnkEu_0886F8F7, gUnkEu_0886F908, gUnkEu_0886F920, gUnkEu_0886F936,
 };
 
-JiminyTextChar* gUnk_09EDC674[10] = {
+const JiminyTextChar* gUnk_09EDC674[10] = {
     gUnkEu_0886F96C, gUnkEu_0886F980, gUnkEu_0886F994, gUnkEu_0886F9AC,
     gUnkEu_0886F9C1, gUnkEu_0886F9D6, gUnkEu_0886F9DC, gUnkEu_0886F9DE,
     gUnkEu_0886F9F8, gUnkEu_0886FA10,
 };
 
-JiminyTextChar* gUnk_09EDC674Fr[10] = {
+const JiminyTextChar* gUnk_09EDC674Fr[10] = {
     gUnkEu_0886FA1B, gUnkEu_0886FA2B, gUnkEu_0886FA40, gUnkEu_0886FA4F,
     gUnkEu_0886FA60, gUnkEu_0886FA6F, gUnkEu_0886FA7A, gUnkEu_0886FA7C,
     gUnkEu_0886FA8F, gUnkEu_0886FAA0,
 };
 
-JiminyTextChar* gUnk_09EDC674De[14] = {
+const JiminyTextChar* gUnk_09EDC674De[14] = {
     gUnkEu_0886FAB2, gUnkEu_0886FAC2, gUnkEu_0886FACD, gUnkEu_0886FACF,
     gUnkEu_0886FAE2, gUnkEu_0886FAF6, gUnkEu_0886FB0A, gUnkEu_0886FB1A,
     gUnkEu_0886FB2C, gUnkEu_0886FB3D, gUnkEu_0886FB4E, gUnkEu_0886FB50,
     gUnkEu_0886FB6A, gUnkEu_0886FB7B,
 };
 
-JiminyTextChar* gUnk_09EDC674It[9] = {
+const JiminyTextChar* gUnk_09EDC674It[9] = {
     gUnkEu_0886FB8F, gUnkEu_0886FBA3, gUnkEu_0886FBB9, gUnkEu_0886FBCC,
     gUnkEu_0886FBE3, gUnkEu_0886FBF7, gUnkEu_0886FBF9, gUnkEu_0886FC0C,
     gUnkEu_0886FC1F,
 };
 
-JiminyTextChar* gUnk_09EDC674Es[8] = {
+const JiminyTextChar* gUnk_09EDC674Es[8] = {
     gUnkEu_0886FC38, gUnkEu_0886FC50, gUnkEu_0886FC65, gUnkEu_0886FC78,
     gUnkEu_0886FC8C, gUnkEu_0886FC98, gUnkEu_0886FC9A, gUnkEu_0886FCAF,
 };
 
-JiminyTextChar* gUnk_09EDC69C[7] = {
+const JiminyTextChar* gUnk_09EDC69C[7] = {
     gUnkEu_0886FCE4, gUnkEu_0886FCFC, gUnkEu_0886FD10, gUnkEu_0886FD12,
     gUnkEu_0886FD24, gUnkEu_0886FD3B, gUnkEu_0886FD52,
 };
 
-JiminyTextChar* gUnk_09EDC69CFr[10] = {
+const JiminyTextChar* gUnk_09EDC69CFr[10] = {
     gUnkEu_0886FD69, gUnkEu_0886FD77, gUnkEu_0886FD84, gUnkEu_0886FD93,
     gUnkEu_0886FD9E, gUnkEu_0886FDA0, gUnkEu_0886FDB3, gUnkEu_0886FDC7,
     gUnkEu_0886FDD6, gUnkEu_0886FDE4,
 };
 
-JiminyTextChar* gUnk_09EDC69CDe[10] = {
+const JiminyTextChar* gUnk_09EDC69CDe[10] = {
     gUnkEu_0886FDEF, gUnkEu_0886FE02, gUnkEu_0886FE13, gUnkEu_0886FE26,
     gUnkEu_0886FE28, gUnkEu_0886FE3E, gUnkEu_0886FE54, gUnkEu_0886FE69,
     gUnkEu_0886FE82, gUnkEu_0886FE97,
 };
 
-JiminyTextChar* gUnk_09EDC69CIt[7] = {
+const JiminyTextChar* gUnk_09EDC69CIt[7] = {
     gUnkEu_0886FEA5, gUnkEu_0886FEBB, gUnkEu_0886FED3, gUnkEu_0886FED5,
     gUnkEu_0886FEF0, gUnkEu_0886FF03, gUnkEu_0886FF15,
 };
 
-JiminyTextChar* gUnk_09EDC69CEs[9] = {
+const JiminyTextChar* gUnk_09EDC69CEs[9] = {
     gUnkEu_0886FF2E, gUnkEu_0886FF3E, gUnkEu_0886FF51, gUnkEu_0886FF5D,
     gUnkEu_0886FF5F, gUnkEu_0886FF73, gUnkEu_0886FF85, gUnkEu_0886FF9E,
     gUnkEu_0886FFB6,
 };
 
-JiminyTextChar* gUnk_09EDC6B8[7] = {
+const JiminyTextChar* gUnk_09EDC6B8[7] = {
     gUnkEu_0886FFE8, gUnkEu_08870000, gUnkEu_08870014, gUnkEu_08870016,
     gUnkEu_0887002C, gUnkEu_08870045, gUnkEu_0887005C,
 };
 
-JiminyTextChar* gUnk_09EDC6B8Fr[9] = {
+const JiminyTextChar* gUnk_09EDC6B8Fr[9] = {
     gUnkEu_08870067, gUnkEu_08870077, gUnkEu_08870087, gUnkEu_08870098,
     gUnkEu_0887009A, gUnkEu_088700AC, gUnkEu_088700BF, gUnkEu_088700D5,
     gUnkEu_088700EA,
 };
 
-JiminyTextChar* gUnk_09EDC6B8De[8] = {
+const JiminyTextChar* gUnk_09EDC6B8De[8] = {
     gUnkEu_088700F2, gUnkEu_08870105, gUnkEu_08870116, gUnkEu_08870129,
     gUnkEu_0887012B, gUnkEu_0887013D, gUnkEu_08870151, gUnkEu_08870164,
 };
 
-JiminyTextChar* gUnk_09EDC6B8It[8] = {
+const JiminyTextChar* gUnk_09EDC6B8It[8] = {
     gUnkEu_0887017A, gUnkEu_08870190, gUnkEu_088701A8, gUnkEu_088701AA,
     gUnkEu_088701C2, gUnkEu_088701DC, gUnkEu_088701F5, gUnkEu_0887020A,
 };
 
-JiminyTextChar* gUnk_09EDC6B8Es[8] = {
+const JiminyTextChar* gUnk_09EDC6B8Es[8] = {
     gUnkEu_0887021A, gUnkEu_0887022A, gUnkEu_0887023D, gUnkEu_08870249,
     gUnkEu_0887024B, gUnkEu_0887025F, gUnkEu_08870275, gUnkEu_0887028C,
 };
 
-JiminyTextChar* gUnk_09EDC6D4[9] = {
+const JiminyTextChar* gUnk_09EDC6D4[9] = {
     gUnkEu_088702B8, gUnkEu_088702CB, gUnkEu_088702E1, gUnkEu_088702F5,
     gUnkEu_08870300, gUnkEu_08870302, gUnkEu_08870319, gUnkEu_0887032D,
     gUnkEu_08870345,
 };
 
-JiminyTextChar* gUnk_09EDC6D4Fr[8] = {
+const JiminyTextChar* gUnk_09EDC6D4Fr[8] = {
     gUnkEu_08870356, gUnkEu_08870369, gUnkEu_0887037A, gUnkEu_08870391,
     gUnkEu_08870393, gUnkEu_088703A1, gUnkEu_088703B6, gUnkEu_088703C7,
 };
 
-JiminyTextChar* gUnk_09EDC6D4De[12] = {
+const JiminyTextChar* gUnk_09EDC6D4De[12] = {
     gUnkEu_088703CE, gUnkEu_088703E5, gUnkEu_088703FB, gUnkEu_08870410,
     gUnkEu_08870423, gUnkEu_08870435, gUnkEu_08870437, gUnkEu_0887044B,
     gUnkEu_0887045D, gUnkEu_08870476, gUnkEu_0887048F, gUnkEu_088704A5,
 };
 
-JiminyTextChar* gUnk_09EDC6D4It[9] = {
+const JiminyTextChar* gUnk_09EDC6D4It[9] = {
     gUnkEu_088704B5, gUnkEu_088704CA, gUnkEu_088704E1, gUnkEu_088704F8,
     gUnkEu_08870503, gUnkEu_08870505, gUnkEu_0887051D, gUnkEu_08870535,
     gUnkEu_0887054E,
 };
 
-JiminyTextChar* gUnk_09EDC6D4Es[9] = {
+const JiminyTextChar* gUnk_09EDC6D4Es[9] = {
     gUnkEu_08870564, gUnkEu_08870576, gUnkEu_0887058A, gUnkEu_0887059A,
     gUnkEu_088705A6, gUnkEu_088705A8, gUnkEu_088705BB, gUnkEu_088705CD,
     gUnkEu_088705DD,
 };
 
-JiminyTextChar* gUnk_09EDC6F8[7] = {
+const JiminyTextChar* gUnk_09EDC6F8[7] = {
     gUnkEu_08870610, gUnkEu_08870624, gUnkEu_08870626, gUnkEu_0887063B,
     gUnkEu_08870652, gUnkEu_0887066A, gUnkEu_08870680,
 };
 
-JiminyTextChar* gUnk_09EDC6F8Fr[8] = {
+const JiminyTextChar* gUnk_09EDC6F8Fr[8] = {
     gUnkEu_0887068A, gUnkEu_0887069D, gUnkEu_0887069F, gUnkEu_088706B2,
     gUnkEu_088706C9, gUnkEu_088706D7, gUnkEu_088706EA, gUnkEu_088706FD,
 };
 
-JiminyTextChar* gUnk_09EDC6F8De[10] = {
+const JiminyTextChar* gUnk_09EDC6F8De[10] = {
     gUnkEu_08870709, gUnkEu_0887071C, gUnkEu_08870727, gUnkEu_08870729,
     gUnkEu_0887073C, gUnkEu_08870751, gUnkEu_08870763, gUnkEu_08870774,
     gUnkEu_08870788, gUnkEu_088707A1,
 };
 
-JiminyTextChar* gUnk_09EDC6F8It[8] = {
+const JiminyTextChar* gUnk_09EDC6F8It[8] = {
     gUnkEu_088707B4, gUnkEu_088707CB, gUnkEu_088707CD, gUnkEu_088707DF,
     gUnkEu_088707F0, gUnkEu_08870805, gUnkEu_0887081A, gUnkEu_0887082C,
 };
 
-JiminyTextChar* gUnk_09EDC6F8Es[8] = {
+const JiminyTextChar* gUnk_09EDC6F8Es[8] = {
     gUnkEu_0887083F, gUnkEu_08870853, gUnkEu_0887085E, gUnkEu_08870860,
     gUnkEu_08870874, gUnkEu_08870889, gUnkEu_088708A0, gUnkEu_088708B6,
 };
 
-JiminyTextChar* gUnk_09EDDE18[8] = {
+const JiminyTextChar* gUnk_09EDDE18[8] = {
     gUnkEu_088708E4, gUnkEu_088708F5, gUnkEu_08870900, gUnkEu_08870902,
     gUnkEu_0887091B, gUnkEu_08870933, gUnkEu_0887094B, gUnkEu_08870960,
 };
 
-JiminyTextChar* gUnk_09EDDE18Fr[9] = {
+const JiminyTextChar* gUnk_09EDDE18Fr[9] = {
     gUnkEu_08870972, gUnkEu_08870986, gUnkEu_08870994, gUnkEu_08870996,
     gUnkEu_088709A0, gUnkEu_088709AF, gUnkEu_088709C0, gUnkEu_088709D5,
     gUnkEu_088709E7,
 };
 
-JiminyTextChar* gUnk_09EDDE18De[11] = {
+const JiminyTextChar* gUnk_09EDDE18De[11] = {
     gUnkEu_088709F1, gUnkEu_08870A04, gUnkEu_08870A0F, gUnkEu_08870A11,
     gUnkEu_08870A26, gUnkEu_08870A3A, gUnkEu_08870A4C, gUnkEu_08870A64,
     gUnkEu_08870A7D, gUnkEu_08870A91, gUnkEu_08870AA8,
 };
 
-JiminyTextChar* gUnk_09EDDE18It[8] = {
+const JiminyTextChar* gUnk_09EDDE18It[8] = {
     gUnkEu_08870AB7, gUnkEu_08870ACB, gUnkEu_08870ADA, gUnkEu_08870ADC,
     gUnkEu_08870AEF, gUnkEu_08870B01, gUnkEu_08870B18, gUnkEu_08870B2D,
 };
 
-JiminyTextChar* gUnk_09EDDE18Es[8] = {
+const JiminyTextChar* gUnk_09EDDE18Es[8] = {
     gUnkEu_08870B42, gUnkEu_08870B57, gUnkEu_08870B62, gUnkEu_08870B64,
     gUnkEu_08870B7B, gUnkEu_08870B8D, gUnkEu_08870BA2, gUnkEu_08870BB3,
 };
 
-JiminyTextChar* gUnk_09EDC714[6] = {
+const JiminyTextChar* gUnk_09EDC714[6] = {
     gUnkEu_08870BE4, gUnkEu_08870BFB, gUnkEu_08870C0F, gUnkEu_08870C19,
     gUnkEu_08870C1B, gUnkEu_08870C33,
 };
 
-JiminyTextChar* gUnk_09EDC714Fr[7] = {
+const JiminyTextChar* gUnk_09EDC714Fr[7] = {
     gUnkEu_08870C4B, gUnkEu_08870C5C, gUnkEu_08870C70, gUnkEu_08870C72,
     gUnkEu_08870C83, gUnkEu_08870C96, gUnkEu_08870CA8,
 };
 
-JiminyTextChar* gUnk_09EDC714De[8] = {
+const JiminyTextChar* gUnk_09EDC714De[8] = {
     gUnkEu_08870CB3, gUnkEu_08870CCD, gUnkEu_08870CE6, gUnkEu_08870CF0,
     gUnkEu_08870CF2, gUnkEu_08870D09, gUnkEu_08870D1F, gUnkEu_08870D33,
 };
 
-JiminyTextChar* gUnk_09EDC714It[7] = {
+const JiminyTextChar* gUnk_09EDC714It[7] = {
     gUnkEu_08870D3B, gUnkEu_08870D54, gUnkEu_08870D68, gUnkEu_08870D77,
     gUnkEu_08870D79, gUnkEu_08870D94, gUnkEu_08870DAA,
 };
 
-JiminyTextChar* gUnk_09EDC714Es[7] = {
+const JiminyTextChar* gUnk_09EDC714Es[7] = {
     gUnkEu_08870DB6, gUnkEu_08870DCC, gUnkEu_08870DE1, gUnkEu_08870DF0,
     gUnkEu_08870DF2, gUnkEu_08870E07, gUnkEu_08870E1B,
 };
 
-JiminyTextChar* gUnk_09EDC72C[8] = {
+const JiminyTextChar* gUnk_09EDC72C[8] = {
     gUnkEu_08870E4C, gUnkEu_08870E62, gUnkEu_08870E7A, gUnkEu_08870E7F,
     gUnkEu_08870E81, gUnkEu_08870E96, gUnkEu_08870EA9, gUnkEu_08870EC3,
 };
 
-JiminyTextChar* gUnk_09EDC72CFr[8] = {
+const JiminyTextChar* gUnk_09EDC72CFr[8] = {
     gUnkEu_08870ECA, gUnkEu_08870EDD, gUnkEu_08870EF0, gUnkEu_08870EF2,
     gUnkEu_08870F05, gUnkEu_08870F1A, gUnkEu_08870F2A, gUnkEu_08870F38,
 };
 
-JiminyTextChar* gUnk_09EDC72CDe[9] = {
+const JiminyTextChar* gUnk_09EDC72CDe[9] = {
     gUnkEu_08870F42, gUnkEu_08870F5B, gUnkEu_08870F71, gUnkEu_08870F81,
     gUnkEu_08870F83, gUnkEu_08870F9A, gUnkEu_08870FAD, gUnkEu_08870FC4,
     gUnkEu_08870FD8,
 };
 
-JiminyTextChar* gUnk_09EDC72CIt[7] = {
+const JiminyTextChar* gUnk_09EDC72CIt[7] = {
     gUnkEu_08870FE0, gUnkEu_08870FF4, gUnkEu_0887100C, gUnkEu_08871016,
     gUnkEu_08871018, gUnkEu_0887102F, gUnkEu_08871045,
 };
 
-JiminyTextChar* gUnk_09EDC72CEs[7] = {
+const JiminyTextChar* gUnk_09EDC72CEs[7] = {
     gUnkEu_0887105B, gUnkEu_08871070, gUnkEu_08871080, gUnkEu_08871098,
     gUnkEu_0887109A, gUnkEu_088710AF, gUnkEu_088710C3,
 };
 
-JiminyTextChar* gUnk_09EDC74C[7] = {
+const JiminyTextChar* gUnk_09EDC74C[7] = {
     gUnkEu_088710EC, gUnkEu_08871103, gUnkEu_08871116, gUnkEu_08871122,
     gUnkEu_08871124, gUnkEu_0887113C, gUnkEu_0887114F,
 };
 
-JiminyTextChar* gUnk_09EDC74CFr[6] = {
+const JiminyTextChar* gUnk_09EDC74CFr[6] = {
     gUnkEu_08871166, gUnkEu_0887117B, gUnkEu_08871191, gUnkEu_08871193,
     gUnkEu_088711A3, gUnkEu_088711B4,
 };
 
-JiminyTextChar* gUnk_09EDC74CDe[11] = {
+const JiminyTextChar* gUnk_09EDC74CDe[11] = {
     gUnkEu_088711C4, gUnkEu_088711D7, gUnkEu_088711E8, gUnkEu_088711F7,
     gUnkEu_088711FF, gUnkEu_08871201, gUnkEu_0887121A, gUnkEu_08871231,
     gUnkEu_08871245, gUnkEu_0887125A, gUnkEu_08871274,
 };
 
-JiminyTextChar* gUnk_09EDC74CIt[10] = {
+const JiminyTextChar* gUnk_09EDC74CIt[10] = {
     gUnkEu_0887127C, gUnkEu_0887128D, gUnkEu_088712A3, gUnkEu_088712B4,
     gUnkEu_088712C7, gUnkEu_088712C9, gUnkEu_088712DD, gUnkEu_088712F1,
     gUnkEu_08871307, gUnkEu_0887131F,
 };
 
-JiminyTextChar* gUnk_09EDC74CEs[8] = {
+const JiminyTextChar* gUnk_09EDC74CEs[8] = {
     gUnkEu_0887132E, gUnkEu_08871345, gUnkEu_08871357, gUnkEu_0887136C,
     gUnkEu_0887136E, gUnkEu_08871379, gUnkEu_0887138C, gUnkEu_0887139A,
 };
 
-JiminyTextChar* gUnk_09EDC768[7] = {
+const JiminyTextChar* gUnk_09EDC768[7] = {
     gUnkEu_088713CC, gUnkEu_088713DF, gUnkEu_088713F6, gUnkEu_08871406,
     gUnkEu_08871408, gUnkEu_0887141D, gUnkEu_0887142C,
 };
 
-JiminyTextChar* gUnk_09EDC768Fr[8] = {
+const JiminyTextChar* gUnk_09EDC768Fr[8] = {
     gUnkEu_08871437, gUnkEu_08871446, gUnkEu_08871453, gUnkEu_08871467,
     gUnkEu_0887147D, gUnkEu_0887147F, gUnkEu_08871493, gUnkEu_088714A6,
 };
 
-JiminyTextChar* gUnk_09EDC768De[8] = {
+const JiminyTextChar* gUnk_09EDC768De[8] = {
     gUnkEu_088714AB, gUnkEu_088714C1, gUnkEu_088714D7, gUnkEu_088714E9,
     gUnkEu_088714F9, gUnkEu_088714FB, gUnkEu_0887150B, gUnkEu_08871521,
 };
 
-JiminyTextChar* gUnk_09EDC768It[7] = {
+const JiminyTextChar* gUnk_09EDC768It[7] = {
     gUnkEu_08871536, gUnkEu_0887154D, gUnkEu_08871564, gUnkEu_0887157E,
     gUnkEu_08871580, gUnkEu_08871593, gUnkEu_088715A6,
 };
 
-JiminyTextChar* gUnk_09EDC768Es[8] = {
+const JiminyTextChar* gUnk_09EDC768Es[8] = {
     gUnkEu_088715B6, gUnkEu_088715CB, gUnkEu_088715E2, gUnkEu_088715EF,
     gUnkEu_088715FA, gUnkEu_088715FC, gUnkEu_08871612, gUnkEu_08871626,
 };
 
-JiminyTextChar* gUnk_09EDC784[10] = {
+const JiminyTextChar* gUnk_09EDC784[10] = {
     gUnkEu_08871654, gUnkEu_0887166C, gUnkEu_08871682, gUnkEu_08871684,
     gUnkEu_08871699, gUnkEu_088716B2, gUnkEu_088716C7, gUnkEu_088716DC,
     gUnkEu_088716F2, gUnkEu_08871708,
 };
 
-JiminyTextChar* gUnk_09EDC784Fr[12] = {
+const JiminyTextChar* gUnk_09EDC784Fr[12] = {
     gUnkEu_08871713, gUnkEu_0887171D, gUnkEu_0887172F, gUnkEu_0887173C,
     gUnkEu_0887174D, gUnkEu_0887174F, gUnkEu_0887175B, gUnkEu_0887176D,
     gUnkEu_08871781, gUnkEu_08871793, gUnkEu_088717A6, gUnkEu_088717BD,
 };
 
-JiminyTextChar* gUnk_09EDC784De[14] = {
+const JiminyTextChar* gUnk_09EDC784De[14] = {
     gUnkEu_088717CE, gUnkEu_088717E1, gUnkEu_088717F2, gUnkEu_08871801,
     gUnkEu_08871810, gUnkEu_08871812, gUnkEu_08871825, gUnkEu_08871834,
     gUnkEu_0887184A, gUnkEu_08871861, gUnkEu_08871876, gUnkEu_0887188B,
     gUnkEu_0887189F, gUnkEu_088718B2,
 };
 
-JiminyTextChar* gUnk_09EDC784It[12] = {
+const JiminyTextChar* gUnk_09EDC784It[12] = {
     gUnkEu_088718C7, gUnkEu_088718DD, gUnkEu_088718F4, gUnkEu_08871901,
     gUnkEu_08871903, gUnkEu_08871918, gUnkEu_08871928, gUnkEu_0887193A,
     gUnkEu_0887194E, gUnkEu_08871964, gUnkEu_0887197A, gUnkEu_08871992,
 };
 
-JiminyTextChar* gUnk_09EDC784Es[11] = {
+const JiminyTextChar* gUnk_09EDC784Es[11] = {
     gUnkEu_088719AA, gUnkEu_088719BD, gUnkEu_088719CF, gUnkEu_088719D6,
     gUnkEu_088719D8, gUnkEu_088719ED, gUnkEu_08871A04, gUnkEu_08871A1A,
     gUnkEu_08871A30, gUnkEu_08871A42, gUnkEu_08871A59,
 };
 
-JiminyTextChar* gUnk_09EDC7AC[9] = {
+const JiminyTextChar* gUnk_09EDC7AC[9] = {
     gUnkEu_08871A8C, gUnkEu_08871A9F, gUnkEu_08871AB5, gUnkEu_08871AC1,
     gUnkEu_08871AC3, gUnkEu_08871ADA, gUnkEu_08871AEE, gUnkEu_08871B05,
     gUnkEu_08871B18,
 };
 
-JiminyTextChar* gUnk_09EDC7ACFr[10] = {
+const JiminyTextChar* gUnk_09EDC7ACFr[10] = {
     gUnkEu_08871B30, gUnkEu_08871B40, gUnkEu_08871B56, gUnkEu_08871B6A,
     gUnkEu_08871B6C, gUnkEu_08871B7C, gUnkEu_08871B8F, gUnkEu_08871B9E,
     gUnkEu_08871BB3, gUnkEu_08871BC6,
 };
 
-JiminyTextChar* gUnk_09EDC7ACDe[11] = {
+const JiminyTextChar* gUnk_09EDC7ACDe[11] = {
     gUnkEu_08871BD1, gUnkEu_08871BE7, gUnkEu_08871BFD, gUnkEu_08871C14,
     gUnkEu_08871C23, gUnkEu_08871C25, gUnkEu_08871C39, gUnkEu_08871C4F,
     gUnkEu_08871C67, gUnkEu_08871C7E, gUnkEu_08871C92,
 };
 
-JiminyTextChar* gUnk_09EDC7ACIt[10] = {
+const JiminyTextChar* gUnk_09EDC7ACIt[10] = {
     gUnkEu_08871CA1, gUnkEu_08871CB4, gUnkEu_08871CC9, gUnkEu_08871CE1,
     gUnkEu_08871CE3, gUnkEu_08871CF4, gUnkEu_08871D05, gUnkEu_08871D1B,
     gUnkEu_08871D32, gUnkEu_08871D48,
 };
 
-JiminyTextChar* gUnk_09EDC7ACEs[9] = {
+const JiminyTextChar* gUnk_09EDC7ACEs[9] = {
     gUnkEu_08871D60, gUnkEu_08871D75, gUnkEu_08871D8B, gUnkEu_08871DA0,
     gUnkEu_08871DA7, gUnkEu_08871DA9, gUnkEu_08871DC0, gUnkEu_08871DD4,
     gUnkEu_08871DED,
 };
 
-JiminyTextChar* gUnk_09EDC7D0[9] = {
+const JiminyTextChar* gUnk_09EDC7D0[9] = {
     gUnkEu_08871E20, gUnkEu_08871E36, gUnkEu_08871E4A, gUnkEu_08871E54,
     gUnkEu_08871E56, gUnkEu_08871E6A, gUnkEu_08871E80, gUnkEu_08871E94,
     gUnkEu_08871EAB,
 };
 
-JiminyTextChar* gUnk_09EDC7D0Fr[8] = {
+const JiminyTextChar* gUnk_09EDC7D0Fr[8] = {
     gUnkEu_08871EB7, gUnkEu_08871ECA, gUnkEu_08871EDA, gUnkEu_08871EE4,
     gUnkEu_08871EE6, gUnkEu_08871EFC, gUnkEu_08871F11, gUnkEu_08871F1F,
 };
 
-JiminyTextChar* gUnk_09EDC7D0De[12] = {
+const JiminyTextChar* gUnk_09EDC7D0De[12] = {
     gUnkEu_08871F2C, gUnkEu_08871F43, gUnkEu_08871F58, gUnkEu_08871F6D,
     gUnkEu_08871F83, gUnkEu_08871F85, gUnkEu_08871F96, gUnkEu_08871FAA,
     gUnkEu_08871FC0, gUnkEu_08871FD5, gUnkEu_08871FE6, gUnkEu_08871FF7,
 };
 
-JiminyTextChar* gUnk_09EDC7D0It[9] = {
+const JiminyTextChar* gUnk_09EDC7D0It[9] = {
     gUnkEu_0887200C, gUnkEu_08872024, gUnkEu_08872037, gUnkEu_0887204C,
     gUnkEu_0887204E, gUnkEu_08872066, gUnkEu_08872080, gUnkEu_08872097,
     gUnkEu_088720AF,
 };
 
-JiminyTextChar* gUnk_09EDC7D0Es[9] = {
+const JiminyTextChar* gUnk_09EDC7D0Es[9] = {
     gUnkEu_088720B8, gUnkEu_088720CF, gUnkEu_088720E2, gUnkEu_088720FA,
     gUnkEu_088720FC, gUnkEu_08872110, gUnkEu_08872124, gUnkEu_0887213B,
     gUnkEu_0887214F,
 };
 
-JiminyTextChar* gUnk_09EDC7F4[13] = {
+const JiminyTextChar* gUnk_09EDC7F4[13] = {
     gUnkEu_0887217C, gUnkEu_0887218D, gUnkEu_088721A2, gUnkEu_088721B2,
     gUnkEu_088721B4, gUnkEu_088721CB, gUnkEu_088721E3, gUnkEu_088721FB,
     gUnkEu_08872206, gUnkEu_08872208, gUnkEu_0887221F, gUnkEu_08872236,
     gUnkEu_0887224E,
 };
 
-JiminyTextChar* gUnk_09EDC7F4Fr[14] = {
+const JiminyTextChar* gUnk_09EDC7F4Fr[14] = {
     gUnkEu_08872264, gUnkEu_08872274, gUnkEu_08872288, gUnkEu_0887228A,
     gUnkEu_0887229E, gUnkEu_088722B4, gUnkEu_088722CA, gUnkEu_088722DC,
     gUnkEu_088722EB, gUnkEu_088722ED, gUnkEu_088722FE, gUnkEu_08872311,
     gUnkEu_08872321, gUnkEu_08872332,
 };
 
-JiminyTextChar* gUnk_09EDC7F4De[17] = {
+const JiminyTextChar* gUnk_09EDC7F4De[17] = {
     gUnkEu_08872343, gUnkEu_08872356, gUnkEu_0887236E, gUnkEu_08872381,
     gUnkEu_08872383, gUnkEu_0887239B, gUnkEu_088723B4, gUnkEu_088723C7,
     gUnkEu_088723DD, gUnkEu_088723F0, gUnkEu_08872402, gUnkEu_08872415,
@@ -10172,239 +10172,239 @@ JiminyTextChar* gUnk_09EDC7F4De[17] = {
     gUnkEu_0887246E,
 };
 
-JiminyTextChar* gUnk_09EDC7F4It[15] = {
+const JiminyTextChar* gUnk_09EDC7F4It[15] = {
     gUnkEu_08872481, gUnkEu_0887249A, gUnkEu_088724B0, gUnkEu_088724C1,
     gUnkEu_088724C3, gUnkEu_088724D4, gUnkEu_088724EA, gUnkEu_08872505,
     gUnkEu_0887251B, gUnkEu_08872522, gUnkEu_08872524, gUnkEu_0887253A,
     gUnkEu_0887254F, gUnkEu_08872567, gUnkEu_0887257B,
 };
 
-JiminyTextChar* gUnk_09EDC7F4Es[13] = {
+const JiminyTextChar* gUnk_09EDC7F4Es[13] = {
     gUnkEu_08872593, gUnkEu_088725A5, gUnkEu_088725B4, gUnkEu_088725B6,
     gUnkEu_088725CA, gUnkEu_088725DF, gUnkEu_088725F2, gUnkEu_08872606,
     gUnkEu_0887261D, gUnkEu_0887261F, gUnkEu_08872637, gUnkEu_0887264E,
     gUnkEu_08872663,
 };
 
-JiminyTextChar* gUnk_09EDC828[10] = {
+const JiminyTextChar* gUnk_09EDC828[10] = {
     gUnkEu_08872698, gUnkEu_088726AE, gUnkEu_088726C5, gUnkEu_088726D5,
     gUnkEu_088726D7, gUnkEu_088726EB, gUnkEu_08872703, gUnkEu_08872719,
     gUnkEu_0887272C, gUnkEu_08872742,
 };
 
-JiminyTextChar* gUnk_09EDC828Fr[8] = {
+const JiminyTextChar* gUnk_09EDC828Fr[8] = {
     gUnkEu_0887274C, gUnkEu_08872758, gUnkEu_0887276A, gUnkEu_0887276C,
     gUnkEu_08872784, gUnkEu_08872799, gUnkEu_088727AC, gUnkEu_088727BD,
 };
 
-JiminyTextChar* gUnk_09EDC828De[10] = {
+const JiminyTextChar* gUnk_09EDC828De[10] = {
     gUnkEu_088727C5, gUnkEu_088727DD, gUnkEu_088727F3, gUnkEu_08872808,
     gUnkEu_0887280A, gUnkEu_08872821, gUnkEu_0887283A, gUnkEu_08872852,
     gUnkEu_0887286A, gUnkEu_08872882,
 };
 
-JiminyTextChar* gUnk_09EDC828It[9] = {
+const JiminyTextChar* gUnk_09EDC828It[9] = {
     gUnkEu_0887289C, gUnkEu_088728B0, gUnkEu_088728C7, gUnkEu_088728C9,
     gUnkEu_088728DB, gUnkEu_088728F1, gUnkEu_08872907, gUnkEu_0887291F,
     gUnkEu_08872938,
 };
 
-JiminyTextChar* gUnk_09EDC828Es[11] = {
+const JiminyTextChar* gUnk_09EDC828Es[11] = {
     gUnkEu_0887294C, gUnkEu_0887295F, gUnkEu_08872970, gUnkEu_08872983,
     gUnkEu_08872992, gUnkEu_08872994, gUnkEu_088729A9, gUnkEu_088729BD,
     gUnkEu_088729D3, gUnkEu_088729E5, gUnkEu_088729F7,
 };
 
-JiminyTextChar* gUnk_09EDC850[8] = {
+const JiminyTextChar* gUnk_09EDC850[8] = {
     gUnkEu_08872A20, gUnkEu_08872A37, gUnkEu_08872A41, gUnkEu_08872A43,
     gUnkEu_08872A53, gUnkEu_08872A67, gUnkEu_08872A7F, gUnkEu_08872A99,
 };
 
-JiminyTextChar* gUnk_09EDC850Fr[7] = {
+const JiminyTextChar* gUnk_09EDC850Fr[7] = {
     gUnkEu_08872AA9, gUnkEu_08872ABD, gUnkEu_08872ABF, gUnkEu_08872ACD,
     gUnkEu_08872AE0, gUnkEu_08872AF3, gUnkEu_08872B07,
 };
 
-JiminyTextChar* gUnk_09EDC850De[7] = {
+const JiminyTextChar* gUnk_09EDC850De[7] = {
     gUnkEu_08872B14, gUnkEu_08872B25, gUnkEu_08872B3B, gUnkEu_08872B3D,
     gUnkEu_08872B54, gUnkEu_08872B6C, gUnkEu_08872B84,
 };
 
-JiminyTextChar* gUnk_09EDC850It[8] = {
+const JiminyTextChar* gUnk_09EDC850It[8] = {
     gUnkEu_08872B94, gUnkEu_08872BA9, gUnkEu_08872BBD, gUnkEu_08872BBF,
     gUnkEu_08872BD5, gUnkEu_08872BEB, gUnkEu_08872BFF, gUnkEu_08872C13,
 };
 
-JiminyTextChar* gUnk_09EDC850Es[7] = {
+const JiminyTextChar* gUnk_09EDC850Es[7] = {
     gUnkEu_08872C1C, gUnkEu_08872C2E, gUnkEu_08872C3A, gUnkEu_08872C3C,
     gUnkEu_08872C53, gUnkEu_08872C6A, gUnkEu_08872C82,
 };
 
-JiminyTextChar* gUnk_09EDDEC0[3] = {
+const JiminyTextChar* gUnk_09EDDEC0[3] = {
     gUnkEu_08872CAC, gUnkEu_08872CC4, gUnkEu_08872CD6,
 };
 
-JiminyTextChar* gUnk_09EDDEC0Fr[5] = {
+const JiminyTextChar* gUnk_09EDDEC0Fr[5] = {
     gUnkEu_08872CDF, gUnkEu_08872CF4, gUnkEu_08872D0B, gUnkEu_08872D0D,
     gUnkEu_08872D21,
 };
 
-JiminyTextChar* gUnk_09EDDEC0De[4] = {
+const JiminyTextChar* gUnk_09EDDEC0De[4] = {
     gUnkEu_08872D32, gUnkEu_08872D4D, gUnkEu_08872D64, gUnkEu_08872D7B,
 };
 
-JiminyTextChar* gUnk_09EDDEC0It[2] = {
+const JiminyTextChar* gUnk_09EDDEC0It[2] = {
     gUnkEu_08872D82, gUnkEu_08872D99,
 };
 
-JiminyTextChar* gUnk_09EDDEC0Es[3] = {
+const JiminyTextChar* gUnk_09EDDEC0Es[3] = {
     gUnkEu_08872DB1, gUnkEu_08872DC6, gUnkEu_08872DDA,
 };
 
-JiminyTextChar* gUnk_09EDC870[8] = {
+const JiminyTextChar* gUnk_09EDC870[8] = {
     gUnkEu_08872E04, gUnkEu_08872E18, gUnkEu_08872E2D, gUnkEu_08872E35,
     gUnkEu_08872E37, gUnkEu_08872E4A, gUnkEu_08872E61, gUnkEu_08872E75,
 };
 
-JiminyTextChar* gUnk_09EDC870Fr[9] = {
+const JiminyTextChar* gUnk_09EDC870Fr[9] = {
     gUnkEu_08872E8B, gUnkEu_08872E98, gUnkEu_08872EA6, gUnkEu_08872EA8,
     gUnkEu_08872EBC, gUnkEu_08872ECD, gUnkEu_08872EDA, gUnkEu_08872EEB,
     gUnkEu_08872EFB,
 };
 
-JiminyTextChar* gUnk_09EDC870De[9] = {
+const JiminyTextChar* gUnk_09EDC870De[9] = {
     gUnkEu_08872F0D, gUnkEu_08872F20, gUnkEu_08872F33, gUnkEu_08872F4B,
     gUnkEu_08872F63, gUnkEu_08872F65, gUnkEu_08872F7E, gUnkEu_08872F96,
     gUnkEu_08872FAB,
 };
 
-JiminyTextChar* gUnk_09EDC870It[9] = {
+const JiminyTextChar* gUnk_09EDC870It[9] = {
     gUnkEu_08872FB2, gUnkEu_08872FC9, gUnkEu_08872FD5, gUnkEu_08872FD7,
     gUnkEu_08872FEC, gUnkEu_08873000, gUnkEu_08873012, gUnkEu_08873027,
     gUnkEu_0887303C,
 };
 
-JiminyTextChar* gUnk_09EDC870Es[8] = {
+const JiminyTextChar* gUnk_09EDC870Es[8] = {
     gUnkEu_08873043, gUnkEu_08873056, gUnkEu_0887306B, gUnkEu_08873078,
     gUnkEu_0887307A, gUnkEu_0887308C, gUnkEu_0887309F, gUnkEu_088730B3,
 };
 
-JiminyTextChar* gUnk_09EDC890[12] = {
+const JiminyTextChar* gUnk_09EDC890[12] = {
     gUnkEu_088730E4, gUnkEu_088730F3, gUnkEu_08873108, gUnkEu_08873120,
     gUnkEu_08873134, gUnkEu_08873136, gUnkEu_0887314D, gUnkEu_08873162,
     gUnkEu_08873175, gUnkEu_08873177, gUnkEu_0887318F, gUnkEu_088731A2,
 };
 
-JiminyTextChar* gUnk_09EDC890Fr[13] = {
+const JiminyTextChar* gUnk_09EDC890Fr[13] = {
     gUnkEu_088731AE, gUnkEu_088731C3, gUnkEu_088731D1, gUnkEu_088731E2,
     gUnkEu_088731F3, gUnkEu_08873200, gUnkEu_08873202, gUnkEu_08873211,
     gUnkEu_08873222, gUnkEu_0887322F, gUnkEu_08873231, gUnkEu_08873246,
     gUnkEu_0887325C,
 };
 
-JiminyTextChar* gUnk_09EDC890De[13] = {
+const JiminyTextChar* gUnk_09EDC890De[13] = {
     gUnkEu_08873269, gUnkEu_08873280, gUnkEu_08873296, gUnkEu_088732AD,
     gUnkEu_088732C3, gUnkEu_088732C5, gUnkEu_088732DF, gUnkEu_088732F7,
     gUnkEu_08873310, gUnkEu_08873312, gUnkEu_0887332A, gUnkEu_08873340,
     gUnkEu_08873355,
 };
 
-JiminyTextChar* gUnk_09EDC890It[13] = {
+const JiminyTextChar* gUnk_09EDC890It[13] = {
     gUnkEu_08873369, gUnkEu_0887337A, gUnkEu_08873390, gUnkEu_088733A0,
     gUnkEu_088733B5, gUnkEu_088733BD, gUnkEu_088733BF, gUnkEu_088733D7,
     gUnkEu_088733EF, gUnkEu_088733F6, gUnkEu_088733F8, gUnkEu_0887340B,
     gUnkEu_08873424,
 };
 
-JiminyTextChar* gUnk_09EDC890Es[12] = {
+const JiminyTextChar* gUnk_09EDC890Es[12] = {
     gUnkEu_0887342F, gUnkEu_08873447, gUnkEu_0887345F, gUnkEu_08873472,
     gUnkEu_0887347C, gUnkEu_0887347E, gUnkEu_08873493, gUnkEu_088734A5,
     gUnkEu_088734BC, gUnkEu_088734BE, gUnkEu_088734D6, gUnkEu_088734E9,
 };
 
-JiminyTextChar* gUnk_09EDC8C0[8] = {
+const JiminyTextChar* gUnk_09EDC8C0[8] = {
     gUnkEu_08873520, gUnkEu_08873539, gUnkEu_0887353B, gUnkEu_08873555,
     gUnkEu_0887356A, gUnkEu_08873581, gUnkEu_08873593, gUnkEu_088735AA,
 };
 
-JiminyTextChar* gUnk_09EDC8C0Fr[8] = {
+const JiminyTextChar* gUnk_09EDC8C0Fr[8] = {
     gUnkEu_088735BB, gUnkEu_088735CD, gUnkEu_088735CF, gUnkEu_088735E0,
     gUnkEu_088735F3, gUnkEu_08873609, gUnkEu_0887361D, gUnkEu_08873632,
 };
 
-JiminyTextChar* gUnk_09EDC8C0De[12] = {
+const JiminyTextChar* gUnk_09EDC8C0De[12] = {
     gUnkEu_0887363B, gUnkEu_08873652, gUnkEu_08873659, gUnkEu_0887365B,
     gUnkEu_08873674, gUnkEu_08873688, gUnkEu_0887369F, gUnkEu_088736B9,
     gUnkEu_088736CC, gUnkEu_088736E0, gUnkEu_088736F5, gUnkEu_08873705,
 };
 
-JiminyTextChar* gUnk_09EDC8C0It[9] = {
+const JiminyTextChar* gUnk_09EDC8C0It[9] = {
     gUnkEu_08873715, gUnkEu_08873729, gUnkEu_08873736, gUnkEu_08873738,
     gUnkEu_0887374A, gUnkEu_08873761, gUnkEu_0887377A, gUnkEu_0887378F,
     gUnkEu_088737A7,
 };
 
-JiminyTextChar* gUnk_09EDC8C0Es[8] = {
+const JiminyTextChar* gUnk_09EDC8C0Es[8] = {
     gUnkEu_088737B2, gUnkEu_088737C7, gUnkEu_088737D0, gUnkEu_088737D2,
     gUnkEu_088737E4, gUnkEu_088737F8, gUnkEu_0887380D, gUnkEu_08873821,
 };
 
-JiminyTextChar* gUnk_09EDC8E0[9] = {
+const JiminyTextChar* gUnk_09EDC8E0[9] = {
     gUnkEu_08873858, gUnkEu_0887386F, gUnkEu_08873889, gUnkEu_0887389B,
     gUnkEu_0887389D, gUnkEu_088738AF, gUnkEu_088738C6, gUnkEu_088738DD,
     gUnkEu_088738F4,
 };
 
-JiminyTextChar* gUnk_09EDC8E0Fr[9] = {
+const JiminyTextChar* gUnk_09EDC8E0Fr[9] = {
     gUnkEu_088738FB, gUnkEu_08873912, gUnkEu_08873926, gUnkEu_08873935,
     gUnkEu_08873937, gUnkEu_0887394A, gUnkEu_08873959, gUnkEu_0887396E,
     gUnkEu_08873982,
 };
 
-JiminyTextChar* gUnk_09EDC8E0De[11] = {
+const JiminyTextChar* gUnk_09EDC8E0De[11] = {
     gUnkEu_08873995, gUnkEu_088739A8, gUnkEu_088739B7, gUnkEu_088739CA,
     gUnkEu_088739E0, gUnkEu_088739E2, gUnkEu_088739F7, gUnkEu_08873A0B,
     gUnkEu_08873A22, gUnkEu_08873A38, gUnkEu_08873A4D,
 };
 
-JiminyTextChar* gUnk_09EDC8E0It[9] = {
+const JiminyTextChar* gUnk_09EDC8E0It[9] = {
     gUnkEu_08873A62, gUnkEu_08873A7B, gUnkEu_08873A95, gUnkEu_08873AA2,
     gUnkEu_08873AA4, gUnkEu_08873ABB, gUnkEu_08873AD0, gUnkEu_08873AE4,
     gUnkEu_08873AF6,
 };
 
-JiminyTextChar* gUnk_09EDC8E0Es[10] = {
+const JiminyTextChar* gUnk_09EDC8E0Es[10] = {
     gUnkEu_08873B01, gUnkEu_08873B14, gUnkEu_08873B25, gUnkEu_08873B3A,
     gUnkEu_08873B44, gUnkEu_08873B46, gUnkEu_08873B58, gUnkEu_08873B67,
     gUnkEu_08873B7D, gUnkEu_08873B89,
 };
 
-JiminyTextChar* gUnk_09EDC904[6] = {
+const JiminyTextChar* gUnk_09EDC904[6] = {
     gUnkEu_08873BB4, gUnkEu_08873BC9, gUnkEu_08873BD4, gUnkEu_08873BD6,
     gUnkEu_08873BEC, gUnkEu_08873C03,
 };
 
-JiminyTextChar* gUnk_09EDC904Fr[7] = {
+const JiminyTextChar* gUnk_09EDC904Fr[7] = {
     gUnkEu_08873C14, gUnkEu_08873C28, gUnkEu_08873C39, gUnkEu_08873C3B,
     gUnkEu_08873C4D, gUnkEu_08873C62, gUnkEu_08873C79,
 };
 
-JiminyTextChar* gUnk_09EDC904De[6] = {
+const JiminyTextChar* gUnk_09EDC904De[6] = {
     gUnkEu_08873C7F, gUnkEu_08873C95, gUnkEu_08873CA0, gUnkEu_08873CA2,
     gUnkEu_08873CB8, gUnkEu_08873CCC,
 };
 
-JiminyTextChar* gUnk_09EDC904It[6] = {
+const JiminyTextChar* gUnk_09EDC904It[6] = {
     gUnkEu_08873CDE, gUnkEu_08873CF6, gUnkEu_08873D08, gUnkEu_08873D0A,
     gUnkEu_08873D21, gUnkEu_08873D32,
 };
 
-JiminyTextChar* gUnk_09EDC904Es[6] = {
+const JiminyTextChar* gUnk_09EDC904Es[6] = {
     gUnkEu_08873D45, gUnkEu_08873D59, gUnkEu_08873D6E, gUnkEu_08873D70,
     gUnkEu_08873D81, gUnkEu_08873D99,
 };
 
-JiminyTextChar* gUnk_09EDD808[24] = {
+const JiminyTextChar* gUnk_09EDD808[24] = {
     gUnkEu_08873DD0, gUnkEu_08873DE3, gUnkEu_08873DF9, gUnkEu_08873E0B,
     gUnkEu_08873E0D, gUnkEu_08873E23, gUnkEu_08873E38, gUnkEu_08873E47,
     gUnkEu_08873E5B, gUnkEu_08873E70, gUnkEu_08873E7D, gUnkEu_08873E7F,
@@ -10413,7 +10413,7 @@ JiminyTextChar* gUnk_09EDD808[24] = {
     gUnkEu_08873F36, gUnkEu_08873F38, gUnkEu_08873F4F, gUnkEu_08873F68,
 };
 
-JiminyTextChar* gUnk_09EDD808Fr[25] = {
+const JiminyTextChar* gUnk_09EDD808Fr[25] = {
     gUnkEu_08873F71, gUnkEu_08873F87, gUnkEu_08873F99, gUnkEu_08873F9B,
     gUnkEu_08873FAD, gUnkEu_08873FBD, gUnkEu_08873FD3, gUnkEu_08873FE8,
     gUnkEu_08873FFE, gUnkEu_08874000, gUnkEu_08874012, gUnkEu_08874024,
@@ -10423,7 +10423,7 @@ JiminyTextChar* gUnk_09EDD808Fr[25] = {
     gUnkEu_088740EA,
 };
 
-JiminyTextChar* gUnk_09EDD808De[28] = {
+const JiminyTextChar* gUnk_09EDD808De[28] = {
     gUnkEu_088740F3, gUnkEu_08874106, gUnkEu_0887411B, gUnkEu_0887412E,
     gUnkEu_08874140, gUnkEu_08874142, gUnkEu_08874156, gUnkEu_08874167,
     gUnkEu_08874179, gUnkEu_08874189, gUnkEu_0887419E, gUnkEu_088741B2,
@@ -10433,7 +10433,7 @@ JiminyTextChar* gUnk_09EDD808De[28] = {
     gUnkEu_0887429F, gUnkEu_088742A1, gUnkEu_088742B4, gUnkEu_088742C6,
 };
 
-JiminyTextChar* gUnk_09EDD808It[25] = {
+const JiminyTextChar* gUnk_09EDD808It[25] = {
     gUnkEu_088742D6, gUnkEu_088742EE, gUnkEu_08874308, gUnkEu_0887430A,
     gUnkEu_0887431E, gUnkEu_08874332, gUnkEu_08874340, gUnkEu_08874353,
     gUnkEu_08874366, gUnkEu_08874375, gUnkEu_08874377, gUnkEu_0887438E,
@@ -10443,7 +10443,7 @@ JiminyTextChar* gUnk_09EDD808It[25] = {
     gUnkEu_08874495,
 };
 
-JiminyTextChar* gUnk_09EDD808Es[25] = {
+const JiminyTextChar* gUnk_09EDD808Es[25] = {
     gUnkEu_0887449E, gUnkEu_088744B1, gUnkEu_088744C7, gUnkEu_088744C9,
     gUnkEu_088744DC, gUnkEu_088744EC, gUnkEu_088744FD, gUnkEu_08874511,
     gUnkEu_08874522, gUnkEu_08874534, gUnkEu_0887454B, gUnkEu_0887454D,
@@ -10453,21 +10453,21 @@ JiminyTextChar* gUnk_09EDD808Es[25] = {
     gUnkEu_08874643,
 };
 
-JiminyTextChar* gUnk_09EDD868[15] = {
+const JiminyTextChar* gUnk_09EDD868[15] = {
     gUnkEu_08874678, gUnkEu_0887468C, gUnkEu_088746A0, gUnkEu_088746A2,
     gUnkEu_088746B6, gUnkEu_088746CC, gUnkEu_088746E0, gUnkEu_088746F6,
     gUnkEu_088746F8, gUnkEu_08874710, gUnkEu_08874727, gUnkEu_0887473B,
     gUnkEu_08874751, gUnkEu_08874764, gUnkEu_08874779,
 };
 
-JiminyTextChar* gUnk_09EDD868Fr[16] = {
+const JiminyTextChar* gUnk_09EDD868Fr[16] = {
     gUnkEu_08874781, gUnkEu_08874796, gUnkEu_088747A9, gUnkEu_088747AB,
     gUnkEu_088747C3, gUnkEu_088747D9, gUnkEu_088747EE, gUnkEu_088747FD,
     gUnkEu_08874807, gUnkEu_08874809, gUnkEu_0887481A, gUnkEu_0887482E,
     gUnkEu_08874843, gUnkEu_08874859, gUnkEu_0887486C, gUnkEu_08874881,
 };
 
-JiminyTextChar* gUnk_09EDD868De[19] = {
+const JiminyTextChar* gUnk_09EDD868De[19] = {
     gUnkEu_08874896, gUnkEu_088748A1, gUnkEu_088748B4, gUnkEu_088748C4,
     gUnkEu_088748C6, gUnkEu_088748DD, gUnkEu_088748EE, gUnkEu_08874900,
     gUnkEu_08874915, gUnkEu_0887492B, gUnkEu_08874939, gUnkEu_0887493B,
@@ -10475,62 +10475,62 @@ JiminyTextChar* gUnk_09EDD868De[19] = {
     gUnkEu_088749A5, gUnkEu_088749BA, gUnkEu_088749D1,
 };
 
-JiminyTextChar* gUnk_09EDD868It[14] = {
+const JiminyTextChar* gUnk_09EDD868It[14] = {
     gUnkEu_088749D9, gUnkEu_088749F1, gUnkEu_088749F3, gUnkEu_08874A05,
     gUnkEu_08874A17, gUnkEu_08874A2D, gUnkEu_08874A3F, gUnkEu_08874A48,
     gUnkEu_08874A4A, gUnkEu_08874A5C, gUnkEu_08874A75, gUnkEu_08874A8E,
     gUnkEu_08874AA8, gUnkEu_08874AC1,
 };
 
-JiminyTextChar* gUnk_09EDD868Es[16] = {
+const JiminyTextChar* gUnk_09EDD868Es[16] = {
     gUnkEu_08874ACB, gUnkEu_08874ADD, gUnkEu_08874AF4, gUnkEu_08874AF6,
     gUnkEu_08874B08, gUnkEu_08874B1C, gUnkEu_08874B2F, gUnkEu_08874B41,
     gUnkEu_08874B4C, gUnkEu_08874B4E, gUnkEu_08874B5C, gUnkEu_08874B71,
     gUnkEu_08874B82, gUnkEu_08874B99, gUnkEu_08874BA9, gUnkEu_08874BBC,
 };
 
-JiminyTextChar* gUnk_09EDC91C[13] = {
+const JiminyTextChar* gUnk_09EDC91C[13] = {
     gUnkEu_08874BE8, gUnkEu_08874BFF, gUnkEu_08874C15, gUnkEu_08874C2C,
     gUnkEu_08874C41, gUnkEu_08874C4B, gUnkEu_08874C4D, gUnkEu_08874C64,
     gUnkEu_08874C79, gUnkEu_08874C8E, gUnkEu_08874CA3, gUnkEu_08874CBA,
     gUnkEu_08874CD0,
 };
 
-JiminyTextChar* gUnk_09EDC91CFr[13] = {
+const JiminyTextChar* gUnk_09EDC91CFr[13] = {
     gUnkEu_08874CE2, gUnkEu_08874CF8, gUnkEu_08874D0C, gUnkEu_08874D20,
     gUnkEu_08874D31, gUnkEu_08874D43, gUnkEu_08874D45, gUnkEu_08874D5C,
     gUnkEu_08874D71, gUnkEu_08874D81, gUnkEu_08874D8F, gUnkEu_08874D9F,
     gUnkEu_08874DB5,
 };
 
-JiminyTextChar* gUnk_09EDC91CDe[14] = {
+const JiminyTextChar* gUnk_09EDC91CDe[14] = {
     gUnkEu_08874DBF, gUnkEu_08874DD5, gUnkEu_08874DEE, gUnkEu_08874DFD,
     gUnkEu_08874E13, gUnkEu_08874E2A, gUnkEu_08874E2C, gUnkEu_08874E41,
     gUnkEu_08874E56, gUnkEu_08874E6E, gUnkEu_08874E84, gUnkEu_08874E97,
     gUnkEu_08874EAD, gUnkEu_08874EC3,
 };
 
-JiminyTextChar* gUnk_09EDC91CIt[11] = {
+const JiminyTextChar* gUnk_09EDC91CIt[11] = {
     gUnkEu_08874ED3, gUnkEu_08874EEA, gUnkEu_08874F03, gUnkEu_08874F1B,
     gUnkEu_08874F32, gUnkEu_08874F34, gUnkEu_08874F47, gUnkEu_08874F5F,
     gUnkEu_08874F73, gUnkEu_08874F8A, gUnkEu_08874F9E,
 };
 
-JiminyTextChar* gUnk_09EDC91CEs[13] = {
+const JiminyTextChar* gUnk_09EDC91CEs[13] = {
     gUnkEu_08874FB6, gUnkEu_08874FCE, gUnkEu_08874FE5, gUnkEu_08874FFA,
     gUnkEu_0887500C, gUnkEu_08875023, gUnkEu_08875025, gUnkEu_0887503B,
     gUnkEu_0887504C, gUnkEu_08875063, gUnkEu_08875073, gUnkEu_08875087,
     gUnkEu_0887509F,
 };
 
-JiminyTextChar* gUnk_09EDD8A4[16] = {
+const JiminyTextChar* gUnk_09EDD8A4[16] = {
     gUnkEu_088750D8, gUnkEu_088750EF, gUnkEu_088750FB, gUnkEu_088750FD,
     gUnkEu_08875111, gUnkEu_08875129, gUnkEu_0887513F, gUnkEu_08875152,
     gUnkEu_08875169, gUnkEu_0887516B, gUnkEu_08875182, gUnkEu_08875198,
     gUnkEu_088751AF, gUnkEu_088751C7, gUnkEu_088751C9, gUnkEu_088751DD,
 };
 
-JiminyTextChar* gUnk_09EDD8A4Fr[19] = {
+const JiminyTextChar* gUnk_09EDD8A4Fr[19] = {
     gUnkEu_088751F5, gUnkEu_08875209, gUnkEu_08875217, gUnkEu_08875219,
     gUnkEu_0887522F, gUnkEu_08875242, gUnkEu_08875259, gUnkEu_0887526D,
     gUnkEu_08875283, gUnkEu_08875285, gUnkEu_08875291, gUnkEu_088752A0,
@@ -10538,7 +10538,7 @@ JiminyTextChar* gUnk_09EDD8A4Fr[19] = {
     gUnkEu_088752D5, gUnkEu_088752E6, gUnkEu_088752F7,
 };
 
-JiminyTextChar* gUnk_09EDD8A4De[21] = {
+const JiminyTextChar* gUnk_09EDD8A4De[21] = {
     gUnkEu_0887530A, gUnkEu_08875323, gUnkEu_08875339, gUnkEu_08875345,
     gUnkEu_08875347, gUnkEu_0887535E, gUnkEu_08875377, gUnkEu_0887538E,
     gUnkEu_088753A3, gUnkEu_088753B5, gUnkEu_088753C7, gUnkEu_088753C9,
@@ -10547,7 +10547,7 @@ JiminyTextChar* gUnk_09EDD8A4De[21] = {
     gUnkEu_08875460,
 };
 
-JiminyTextChar* gUnk_09EDD8A4It[18] = {
+const JiminyTextChar* gUnk_09EDD8A4It[18] = {
     gUnkEu_08875476, gUnkEu_0887548D, gUnkEu_088754A4, gUnkEu_088754A6,
     gUnkEu_088754BD, gUnkEu_088754D6, gUnkEu_088754F1, gUnkEu_08875503,
     gUnkEu_08875516, gUnkEu_08875524, gUnkEu_08875526, gUnkEu_0887553C,
@@ -10555,7 +10555,7 @@ JiminyTextChar* gUnk_09EDD8A4It[18] = {
     gUnkEu_08875581, gUnkEu_08875596,
 };
 
-JiminyTextChar* gUnk_09EDD8A4Es[18] = {
+const JiminyTextChar* gUnk_09EDD8A4Es[18] = {
     gUnkEu_088755AA, gUnkEu_088755C2, gUnkEu_088755CF, gUnkEu_088755D1,
     gUnkEu_088755E3, gUnkEu_088755F7, gUnkEu_0887560D, gUnkEu_08875624,
     gUnkEu_08875635, gUnkEu_08875645, gUnkEu_0887564F, gUnkEu_08875651,
@@ -10563,14 +10563,14 @@ JiminyTextChar* gUnk_09EDD8A4Es[18] = {
     gUnkEu_088756A4, gUnkEu_088756BA,
 };
 
-JiminyTextChar* gUnk_09EDC950[16] = {
+const JiminyTextChar* gUnk_09EDC950[16] = {
     gUnkEu_088756F4, gUnkEu_0887570A, gUnkEu_0887571F, gUnkEu_08875721,
     gUnkEu_08875737, gUnkEu_0887574C, gUnkEu_0887575F, gUnkEu_08875776,
     gUnkEu_0887578D, gUnkEu_088757A4, gUnkEu_088757B5, gUnkEu_088757BD,
     gUnkEu_088757BF, gUnkEu_088757D4, gUnkEu_088757E3, gUnkEu_088757F9,
 };
 
-JiminyTextChar* gUnk_09EDC950Fr[20] = {
+const JiminyTextChar* gUnk_09EDC950Fr[20] = {
     gUnkEu_0887580F, gUnkEu_0887581E, gUnkEu_08875832, gUnkEu_08875841,
     gUnkEu_08875843, gUnkEu_08875851, gUnkEu_08875861, gUnkEu_08875876,
     gUnkEu_08875888, gUnkEu_0887589A, gUnkEu_088758B0, gUnkEu_088758B2,
@@ -10578,7 +10578,7 @@ JiminyTextChar* gUnk_09EDC950Fr[20] = {
     gUnkEu_088758FC, gUnkEu_0887590C, gUnkEu_0887591C, gUnkEu_0887592D,
 };
 
-JiminyTextChar* gUnk_09EDC950De[23] = {
+const JiminyTextChar* gUnk_09EDC950De[23] = {
     gUnkEu_08875943, gUnkEu_08875954, gUnkEu_08875969, gUnkEu_0887597E,
     gUnkEu_08875984, gUnkEu_08875986, gUnkEu_0887599B, gUnkEu_088759B1,
     gUnkEu_088759C3, gUnkEu_088759D5, gUnkEu_088759E6, gUnkEu_088759FC,
@@ -10587,7 +10587,7 @@ JiminyTextChar* gUnk_09EDC950De[23] = {
     gUnkEu_08875A8F, gUnkEu_08875AA6, gUnkEu_08875ABD,
 };
 
-JiminyTextChar* gUnk_09EDC950It[20] = {
+const JiminyTextChar* gUnk_09EDC950It[20] = {
     gUnkEu_08875ACC, gUnkEu_08875ADF, gUnkEu_08875AF4, gUnkEu_08875AFF,
     gUnkEu_08875B01, gUnkEu_08875B15, gUnkEu_08875B2A, gUnkEu_08875B43,
     gUnkEu_08875B5A, gUnkEu_08875B61, gUnkEu_08875B63, gUnkEu_08875B79,
@@ -10595,7 +10595,7 @@ JiminyTextChar* gUnk_09EDC950It[20] = {
     gUnkEu_08875BC4, gUnkEu_08875BDA, gUnkEu_08875BEE, gUnkEu_08875C03,
 };
 
-JiminyTextChar* gUnk_09EDC950Es[18] = {
+const JiminyTextChar* gUnk_09EDC950Es[18] = {
     gUnkEu_08875C0C, gUnkEu_08875C22, gUnkEu_08875C2F, gUnkEu_08875C3A,
     gUnkEu_08875C3C, gUnkEu_08875C4F, gUnkEu_08875C64, gUnkEu_08875C7C,
     gUnkEu_08875C8B, gUnkEu_08875C9E, gUnkEu_08875CB3, gUnkEu_08875CC7,
@@ -10603,64 +10603,64 @@ JiminyTextChar* gUnk_09EDC950Es[18] = {
     gUnkEu_08875D13, gUnkEu_08875D26,
 };
 
-JiminyTextChar* gUnk_09EDC990[8] = {
+const JiminyTextChar* gUnk_09EDC990[8] = {
     gUnkEu_08875D50, gUnkEu_08875D62, gUnkEu_08875D78, gUnkEu_08875D8E,
     gUnkEu_08875D90, gUnkEu_08875DA9, gUnkEu_08875DC1, gUnkEu_08875DD8,
 };
 
-JiminyTextChar* gUnk_09EDC990Fr[9] = {
+const JiminyTextChar* gUnk_09EDC990Fr[9] = {
     gUnkEu_08875DF1, gUnkEu_08875E05, gUnkEu_08875E1B, gUnkEu_08875E30,
     gUnkEu_08875E32, gUnkEu_08875E49, gUnkEu_08875E5A, gUnkEu_08875E6C,
     gUnkEu_08875E80,
 };
 
-JiminyTextChar* gUnk_09EDC990De[12] = {
+const JiminyTextChar* gUnk_09EDC990De[12] = {
     gUnkEu_08875E94, gUnkEu_08875EAA, gUnkEu_08875EBF, gUnkEu_08875ED1,
     gUnkEu_08875EE8, gUnkEu_08875EEA, gUnkEu_08875EFF, gUnkEu_08875F15,
     gUnkEu_08875F2B, gUnkEu_08875F3E, gUnkEu_08875F51, gUnkEu_08875F60,
 };
 
-JiminyTextChar* gUnk_09EDC990It[10] = {
+const JiminyTextChar* gUnk_09EDC990It[10] = {
     gUnkEu_08875F73, gUnkEu_08875F88, gUnkEu_08875F9B, gUnkEu_08875FB4,
     gUnkEu_08875FB6, gUnkEu_08875FCC, gUnkEu_08875FE5, gUnkEu_08875FFE,
     gUnkEu_08876016, gUnkEu_0887602D,
 };
 
-JiminyTextChar* gUnk_09EDC990Es[11] = {
+const JiminyTextChar* gUnk_09EDC990Es[11] = {
     gUnkEu_08876042, gUnkEu_08876053, gUnkEu_08876066, gUnkEu_08876080,
     gUnkEu_08876082, gUnkEu_08876098, gUnkEu_088760AF, gUnkEu_088760BE,
     gUnkEu_088760D1, gUnkEu_088760E7, gUnkEu_088760F8,
 };
 
-JiminyTextChar* gUnk_09EDC9B0[14] = {
+const JiminyTextChar* gUnk_09EDC9B0[14] = {
     gUnkEu_08876120, gUnkEu_08876135, gUnkEu_08876137, gUnkEu_0887614B,
     gUnkEu_08876160, gUnkEu_08876177, gUnkEu_08876189, gUnkEu_0887618B,
     gUnkEu_088761A1, gUnkEu_088761BA, gUnkEu_088761C0, gUnkEu_088761C2,
     gUnkEu_088761D7, gUnkEu_088761EE,
 };
 
-JiminyTextChar* gUnk_09EDC9B0Fr[14] = {
+const JiminyTextChar* gUnk_09EDC9B0Fr[14] = {
     gUnkEu_08876206, gUnkEu_0887621C, gUnkEu_08876230, gUnkEu_08876245,
     gUnkEu_0887625A, gUnkEu_08876265, gUnkEu_08876267, gUnkEu_0887627A,
     gUnkEu_0887628F, gUnkEu_088762A1, gUnkEu_088762A3, gUnkEu_088762B9,
     gUnkEu_088762CE, gUnkEu_088762E3,
 };
 
-JiminyTextChar* gUnk_09EDC9B0De[16] = {
+const JiminyTextChar* gUnk_09EDC9B0De[16] = {
     gUnkEu_088762EC, gUnkEu_088762FA, gUnkEu_0887630A, gUnkEu_0887630C,
     gUnkEu_08876323, gUnkEu_08876335, gUnkEu_0887634B, gUnkEu_0887635B,
     gUnkEu_0887636D, gUnkEu_0887636F, gUnkEu_08876383, gUnkEu_0887639A,
     gUnkEu_088763A6, gUnkEu_088763A8, gUnkEu_088763BD, gUnkEu_088763D0,
 };
 
-JiminyTextChar* gUnk_09EDC9B0It[16] = {
+const JiminyTextChar* gUnk_09EDC9B0It[16] = {
     gUnkEu_088763D8, gUnkEu_088763F2, gUnkEu_088763F4, gUnkEu_08876402,
     gUnkEu_08876419, gUnkEu_0887642A, gUnkEu_08876442, gUnkEu_0887644D,
     gUnkEu_0887644F, gUnkEu_08876461, gUnkEu_08876473, gUnkEu_08876485,
     gUnkEu_08876487, gUnkEu_0887649C, gUnkEu_088764AD, gUnkEu_088764C0,
 };
 
-JiminyTextChar* gUnk_09EDC9B0Es[17] = {
+const JiminyTextChar* gUnk_09EDC9B0Es[17] = {
     gUnkEu_088764C9, gUnkEu_088764DB, gUnkEu_088764E6, gUnkEu_088764E8,
     gUnkEu_088764FF, gUnkEu_08876515, gUnkEu_08876529, gUnkEu_08876539,
     gUnkEu_08876549, gUnkEu_0887654B, gUnkEu_08876562, gUnkEu_08876573,
@@ -10668,14 +10668,14 @@ JiminyTextChar* gUnk_09EDC9B0Es[17] = {
     gUnkEu_088765CB,
 };
 
-JiminyTextChar* gUnk_09EDC9E8[16] = {
+const JiminyTextChar* gUnk_09EDC9E8[16] = {
     gUnkEu_088765F4, gUnkEu_08876601, gUnkEu_0887660F, gUnkEu_08876611,
     gUnkEu_08876629, gUnkEu_08876640, gUnkEu_08876659, gUnkEu_0887666F,
     gUnkEu_08876680, gUnkEu_08876699, gUnkEu_0887669B, gUnkEu_088766B0,
     gUnkEu_088766C6, gUnkEu_088766DD, gUnkEu_088766F5, gUnkEu_0887670D,
 };
 
-JiminyTextChar* gUnk_09EDC9E8Fr[18] = {
+const JiminyTextChar* gUnk_09EDC9E8Fr[18] = {
     gUnkEu_08876716, gUnkEu_0887671F, gUnkEu_0887672F, gUnkEu_08876731,
     gUnkEu_08876740, gUnkEu_08876758, gUnkEu_08876769, gUnkEu_0887677C,
     gUnkEu_08876792, gUnkEu_088767A1, gUnkEu_088767AB, gUnkEu_088767AD,
@@ -10683,14 +10683,14 @@ JiminyTextChar* gUnk_09EDC9E8Fr[18] = {
     gUnkEu_08876811, gUnkEu_0887681E,
 };
 
-JiminyTextChar* gUnk_09EDC9E8De[16] = {
+const JiminyTextChar* gUnk_09EDC9E8De[16] = {
     gUnkEu_08876834, gUnkEu_0887684C, gUnkEu_0887684E, gUnkEu_08876865,
     gUnkEu_0887687C, gUnkEu_08876893, gUnkEu_088768A8, gUnkEu_088768BB,
     gUnkEu_088768CF, gUnkEu_088768D1, gUnkEu_088768E3, gUnkEu_088768FB,
     gUnkEu_08876910, gUnkEu_08876927, gUnkEu_0887693B, gUnkEu_08876950,
 };
 
-JiminyTextChar* gUnk_09EDC9E8It[18] = {
+const JiminyTextChar* gUnk_09EDC9E8It[18] = {
     gUnkEu_08876968, gUnkEu_0887697F, gUnkEu_08876994, gUnkEu_08876996,
     gUnkEu_088769A4, gUnkEu_088769B5, gUnkEu_088769CD, gUnkEu_088769E3,
     gUnkEu_088769F6, gUnkEu_08876A0C, gUnkEu_08876A23, gUnkEu_08876A32,
@@ -10698,14 +10698,14 @@ JiminyTextChar* gUnk_09EDC9E8It[18] = {
     gUnkEu_08876A8A, gUnkEu_08876AA2,
 };
 
-JiminyTextChar* gUnk_09EDC9E8Es[16] = {
+const JiminyTextChar* gUnk_09EDC9E8Es[16] = {
     gUnkEu_08876AB9, gUnkEu_08876ACC, gUnkEu_08876ADD, gUnkEu_08876ADF,
     gUnkEu_08876AF3, gUnkEu_08876B05, gUnkEu_08876B19, gUnkEu_08876B2F,
     gUnkEu_08876B41, gUnkEu_08876B4B, gUnkEu_08876B4D, gUnkEu_08876B62,
     gUnkEu_08876B77, gUnkEu_08876B90, gUnkEu_08876BA5, gUnkEu_08876BBC,
 };
 
-JiminyTextChar* gUnk_09EDD8E4[17] = {
+const JiminyTextChar* gUnk_09EDD8E4[17] = {
     gUnkEu_08876BE4, gUnkEu_08876BF1, gUnkEu_08876BFF, gUnkEu_08876C01,
     gUnkEu_08876C11, gUnkEu_08876C26, gUnkEu_08876C3C, gUnkEu_08876C46,
     gUnkEu_08876C48, gUnkEu_08876C5E, gUnkEu_08876C77, gUnkEu_08876C8D,
@@ -10713,7 +10713,7 @@ JiminyTextChar* gUnk_09EDD8E4[17] = {
     gUnkEu_08876CEC,
 };
 
-JiminyTextChar* gUnk_09EDD8E4Fr[18] = {
+const JiminyTextChar* gUnk_09EDD8E4Fr[18] = {
     gUnkEu_08876CF6, gUnkEu_08876CFF, gUnkEu_08876D0F, gUnkEu_08876D11,
     gUnkEu_08876D26, gUnkEu_08876D39, gUnkEu_08876D4F, gUnkEu_08876D51,
     gUnkEu_08876D63, gUnkEu_08876D76, gUnkEu_08876D89, gUnkEu_08876D9A,
@@ -10721,7 +10721,7 @@ JiminyTextChar* gUnk_09EDD8E4Fr[18] = {
     gUnkEu_08876DE2, gUnkEu_08876DF8,
 };
 
-JiminyTextChar* gUnk_09EDD8E4De[19] = {
+const JiminyTextChar* gUnk_09EDD8E4De[19] = {
     gUnkEu_08876E06, gUnkEu_08876E1E, gUnkEu_08876E20, gUnkEu_08876E36,
     gUnkEu_08876E48, gUnkEu_08876E5A, gUnkEu_08876E64, gUnkEu_08876E66,
     gUnkEu_08876E78, gUnkEu_08876E8B, gUnkEu_08876EA0, gUnkEu_08876EB7,
@@ -10729,7 +10729,7 @@ JiminyTextChar* gUnk_09EDD8E4De[19] = {
     gUnkEu_08876F0B, gUnkEu_08876F1F, gUnkEu_08876F33,
 };
 
-JiminyTextChar* gUnk_09EDD8E4It[18] = {
+const JiminyTextChar* gUnk_09EDD8E4It[18] = {
     gUnkEu_08876F3E, gUnkEu_08876F55, gUnkEu_08876F6A, gUnkEu_08876F6C,
     gUnkEu_08876F83, gUnkEu_08876F97, gUnkEu_08876FAC, gUnkEu_08876FAE,
     gUnkEu_08876FC3, gUnkEu_08876FD9, gUnkEu_08876FED, gUnkEu_08877007,
@@ -10737,7 +10737,7 @@ JiminyTextChar* gUnk_09EDD8E4It[18] = {
     gUnkEu_08877059, gUnkEu_0887706B,
 };
 
-JiminyTextChar* gUnk_09EDD8E4Es[19] = {
+const JiminyTextChar* gUnk_09EDD8E4Es[19] = {
     gUnkEu_08877080, gUnkEu_08877093, gUnkEu_088770A4, gUnkEu_088770A6,
     gUnkEu_088770BD, gUnkEu_088770CE, gUnkEu_088770DF, gUnkEu_088770E1,
     gUnkEu_088770F6, gUnkEu_0887710C, gUnkEu_08877123, gUnkEu_08877137,
@@ -10745,7 +10745,7 @@ JiminyTextChar* gUnk_09EDD8E4Es[19] = {
     gUnkEu_0887717B, gUnkEu_08877191, gUnkEu_088771A5,
 };
 
-JiminyTextChar* gUnk_09EDCA28[17] = {
+const JiminyTextChar* gUnk_09EDCA28[17] = {
     gUnkEu_088771D0, gUnkEu_088771DD, gUnkEu_088771EB, gUnkEu_088771ED,
     gUnkEu_08877205, gUnkEu_0887721C, gUnkEu_08877231, gUnkEu_08877247,
     gUnkEu_0887725F, gUnkEu_08877275, gUnkEu_0887728D, gUnkEu_0887728F,
@@ -10753,7 +10753,7 @@ JiminyTextChar* gUnk_09EDCA28[17] = {
     gUnkEu_088772FE,
 };
 
-JiminyTextChar* gUnk_09EDCA28Fr[18] = {
+const JiminyTextChar* gUnk_09EDCA28Fr[18] = {
     gUnkEu_08877305, gUnkEu_0887730E, gUnkEu_0887731E, gUnkEu_08877320,
     gUnkEu_0887732E, gUnkEu_08877343, gUnkEu_08877357, gUnkEu_08877365,
     gUnkEu_0887737A, gUnkEu_0887738D, gUnkEu_088773A0, gUnkEu_088773A2,
@@ -10761,7 +10761,7 @@ JiminyTextChar* gUnk_09EDCA28Fr[18] = {
     gUnkEu_088773FD, gUnkEu_0887740C,
 };
 
-JiminyTextChar* gUnk_09EDCA28De[19] = {
+const JiminyTextChar* gUnk_09EDCA28De[19] = {
     gUnkEu_08877416, gUnkEu_0887742E, gUnkEu_08877430, gUnkEu_08877444,
     gUnkEu_0887745B, gUnkEu_0887746E, gUnkEu_0887747F, gUnkEu_08877491,
     gUnkEu_088774A3, gUnkEu_088774B6, gUnkEu_088774CB, gUnkEu_088774E2,
@@ -10769,7 +10769,7 @@ JiminyTextChar* gUnk_09EDCA28De[19] = {
     gUnkEu_0887753A, gUnkEu_08877550, gUnkEu_08877568,
 };
 
-JiminyTextChar* gUnk_09EDCA28It[17] = {
+const JiminyTextChar* gUnk_09EDCA28It[17] = {
     gUnkEu_0887757A, gUnkEu_08877590, gUnkEu_088775A5, gUnkEu_088775A7,
     gUnkEu_088775BD, gUnkEu_088775D2, gUnkEu_088775E8, gUnkEu_088775FF,
     gUnkEu_08877614, gUnkEu_08877627, gUnkEu_0887763D, gUnkEu_0887764C,
@@ -10777,7 +10777,7 @@ JiminyTextChar* gUnk_09EDCA28It[17] = {
     gUnkEu_088776A9,
 };
 
-JiminyTextChar* gUnk_09EDCA28Es[20] = {
+const JiminyTextChar* gUnk_09EDCA28Es[20] = {
     gUnkEu_088776BC, gUnkEu_088776CF, gUnkEu_088776E0, gUnkEu_088776E2,
     gUnkEu_088776F7, gUnkEu_0887770B, gUnkEu_08877721, gUnkEu_08877732,
     gUnkEu_08877746, gUnkEu_08877759, gUnkEu_0887776C, gUnkEu_08877774,
@@ -10785,7 +10785,7 @@ JiminyTextChar* gUnk_09EDCA28Es[20] = {
     gUnkEu_088777CC, gUnkEu_088777E3, gUnkEu_088777F6, gUnkEu_0887780A,
 };
 
-JiminyTextChar* gUnk_09EDCA6C[19] = {
+const JiminyTextChar* gUnk_09EDCA6C[19] = {
     gUnkEu_0887783C, gUnkEu_08877849, gUnkEu_08877857, gUnkEu_08877859,
     gUnkEu_0887786E, gUnkEu_08877885, gUnkEu_0887789A, gUnkEu_0887789C,
     gUnkEu_088778AF, gUnkEu_088778C7, gUnkEu_088778DE, gUnkEu_088778F3,
@@ -10793,7 +10793,7 @@ JiminyTextChar* gUnk_09EDCA6C[19] = {
     gUnkEu_0887794D, gUnkEu_08877964, gUnkEu_08877975,
 };
 
-JiminyTextChar* gUnk_09EDCA6CFr[17] = {
+const JiminyTextChar* gUnk_09EDCA6CFr[17] = {
     gUnkEu_0887798C, gUnkEu_08877995, gUnkEu_088779A5, gUnkEu_088779A7,
     gUnkEu_088779BA, gUnkEu_088779CC, gUnkEu_088779CE, gUnkEu_088779E5,
     gUnkEu_088779FC, gUnkEu_08877A15, gUnkEu_08877A29, gUnkEu_08877A3F,
@@ -10801,7 +10801,7 @@ JiminyTextChar* gUnk_09EDCA6CFr[17] = {
     gUnkEu_08877A89,
 };
 
-JiminyTextChar* gUnk_09EDCA6CDe[20] = {
+const JiminyTextChar* gUnk_09EDCA6CDe[20] = {
     gUnkEu_08877A9A, gUnkEu_08877AB2, gUnkEu_08877AB4, gUnkEu_08877ACB,
     gUnkEu_08877AE2, gUnkEu_08877AF7, gUnkEu_08877B0B, gUnkEu_08877B21,
     gUnkEu_08877B23, gUnkEu_08877B37, gUnkEu_08877B4B, gUnkEu_08877B60,
@@ -10809,7 +10809,7 @@ JiminyTextChar* gUnk_09EDCA6CDe[20] = {
     gUnkEu_08877BA5, gUnkEu_08877BB7, gUnkEu_08877BC8, gUnkEu_08877BD9,
 };
 
-JiminyTextChar* gUnk_09EDCA6CIt[19] = {
+const JiminyTextChar* gUnk_09EDCA6CIt[19] = {
     gUnkEu_08877BEF, gUnkEu_08877C06, gUnkEu_08877C1B, gUnkEu_08877C1D,
     gUnkEu_08877C33, gUnkEu_08877C47, gUnkEu_08877C5B, gUnkEu_08877C5D,
     gUnkEu_08877C73, gUnkEu_08877C8A, gUnkEu_08877CA0, gUnkEu_08877CB2,
@@ -10817,7 +10817,7 @@ JiminyTextChar* gUnk_09EDCA6CIt[19] = {
     gUnkEu_08877CFB, gUnkEu_08877D11, gUnkEu_08877D27,
 };
 
-JiminyTextChar* gUnk_09EDCA6CEs[20] = {
+const JiminyTextChar* gUnk_09EDCA6CEs[20] = {
     gUnkEu_08877D3D, gUnkEu_08877D50, gUnkEu_08877D61, gUnkEu_08877D63,
     gUnkEu_08877D74, gUnkEu_08877D88, gUnkEu_08877D97, gUnkEu_08877DA4,
     gUnkEu_08877DA6, gUnkEu_08877DBD, gUnkEu_08877DD3, gUnkEu_08877DE9,
@@ -10825,7 +10825,7 @@ JiminyTextChar* gUnk_09EDCA6CEs[20] = {
     gUnkEu_08877E3E, gUnkEu_08877E53, gUnkEu_08877E6B, gUnkEu_08877E80,
 };
 
-JiminyTextChar* gUnk_09EDCAB8[19] = {
+const JiminyTextChar* gUnk_09EDCAB8[19] = {
     gUnkEu_08877EAC, gUnkEu_08877EBA, gUnkEu_08877EC8, gUnkEu_08877ECA,
     gUnkEu_08877EE1, gUnkEu_08877EFA, gUnkEu_08877F10, gUnkEu_08877F28,
     gUnkEu_08877F2A, gUnkEu_08877F3F, gUnkEu_08877F56, gUnkEu_08877F6C,
@@ -10833,7 +10833,7 @@ JiminyTextChar* gUnk_09EDCAB8[19] = {
     gUnkEu_08877FDA, gUnkEu_08877FDC, gUnkEu_08877FF4,
 };
 
-JiminyTextChar* gUnk_09EDCAB8Fr[21] = {
+const JiminyTextChar* gUnk_09EDCAB8Fr[21] = {
     gUnkEu_08878007, gUnkEu_08878011, gUnkEu_08878021, gUnkEu_08878023,
     gUnkEu_0887803A, gUnkEu_0887804E, gUnkEu_08878060, gUnkEu_08878076,
     gUnkEu_08878086, gUnkEu_08878088, gUnkEu_0887809A, gUnkEu_088780AA,
@@ -10842,7 +10842,7 @@ JiminyTextChar* gUnk_09EDCAB8Fr[21] = {
     gUnkEu_0887813E,
 };
 
-JiminyTextChar* gUnk_09EDCAB8De[26] = {
+const JiminyTextChar* gUnk_09EDCAB8De[26] = {
     gUnkEu_08878150, gUnkEu_08878169, gUnkEu_0887816B, gUnkEu_08878180,
     gUnkEu_08878195, gUnkEu_088781AE, gUnkEu_088781C4, gUnkEu_088781D7,
     gUnkEu_088781EF, gUnkEu_08878204, gUnkEu_0887820D, gUnkEu_0887820F,
@@ -10852,7 +10852,7 @@ JiminyTextChar* gUnk_09EDCAB8De[26] = {
     gUnkEu_088782F9, gUnkEu_0887830E,
 };
 
-JiminyTextChar* gUnk_09EDCAB8It[22] = {
+const JiminyTextChar* gUnk_09EDCAB8It[22] = {
     gUnkEu_08878315, gUnkEu_08878326, gUnkEu_08878330, gUnkEu_08878345,
     gUnkEu_08878347, gUnkEu_0887835C, gUnkEu_08878375, gUnkEu_0887838C,
     gUnkEu_088783A4, gUnkEu_088783BA, gUnkEu_088783CF, gUnkEu_088783D1,
@@ -10861,7 +10861,7 @@ JiminyTextChar* gUnk_09EDCAB8It[22] = {
     gUnkEu_08878466, gUnkEu_0887847C,
 };
 
-JiminyTextChar* gUnk_09EDCAB8Es[20] = {
+const JiminyTextChar* gUnk_09EDCAB8Es[20] = {
     gUnkEu_0887848F, gUnkEu_088784A3, gUnkEu_088784B4, gUnkEu_088784B6,
     gUnkEu_088784CD, gUnkEu_088784E5, gUnkEu_088784FA, gUnkEu_08878510,
     gUnkEu_08878525, gUnkEu_08878527, gUnkEu_08878539, gUnkEu_0887854F,
@@ -10869,21 +10869,21 @@ JiminyTextChar* gUnk_09EDCAB8Es[20] = {
     gUnkEu_088785B6, gUnkEu_088785BE, gUnkEu_088785C0, gUnkEu_088785D8,
 };
 
-JiminyTextChar* gUnk_09EDCB04[13] = {
+const JiminyTextChar* gUnk_09EDCB04[13] = {
     gUnkEu_08878610, gUnkEu_0887861E, gUnkEu_0887862C, gUnkEu_0887862E,
     gUnkEu_08878645, gUnkEu_0887865B, gUnkEu_08878673, gUnkEu_0887868C,
     gUnkEu_0887868E, gUnkEu_088786A5, gUnkEu_088786BB, gUnkEu_088786D1,
     gUnkEu_088786E8,
 };
 
-JiminyTextChar* gUnk_09EDCB04Fr[15] = {
+const JiminyTextChar* gUnk_09EDCB04Fr[15] = {
     gUnkEu_088786FB, gUnkEu_08878705, gUnkEu_08878715, gUnkEu_08878717,
     gUnkEu_0887872B, gUnkEu_08878741, gUnkEu_08878758, gUnkEu_08878770,
     gUnkEu_08878782, gUnkEu_08878790, gUnkEu_08878792, gUnkEu_088787A9,
     gUnkEu_088787BF, gUnkEu_088787D5, gUnkEu_088787EA,
 };
 
-JiminyTextChar* gUnk_09EDCB04De[17] = {
+const JiminyTextChar* gUnk_09EDCB04De[17] = {
     gUnkEu_088787F3, gUnkEu_0887880C, gUnkEu_0887880E, gUnkEu_08878822,
     gUnkEu_08878837, gUnkEu_0887884C, gUnkEu_0887885F, gUnkEu_08878872,
     gUnkEu_08878888, gUnkEu_0887889E, gUnkEu_088788A0, gUnkEu_088788B3,
@@ -10891,7 +10891,7 @@ JiminyTextChar* gUnk_09EDCB04De[17] = {
     gUnkEu_08878917,
 };
 
-JiminyTextChar* gUnk_09EDCB04It[18] = {
+const JiminyTextChar* gUnk_09EDCB04It[18] = {
     gUnkEu_08878932, gUnkEu_08878943, gUnkEu_0887894D, gUnkEu_08878962,
     gUnkEu_08878964, gUnkEu_0887897A, gUnkEu_08878990, gUnkEu_088789A0,
     gUnkEu_088789B6, gUnkEu_088789C8, gUnkEu_088789DD, gUnkEu_088789E9,
@@ -10899,321 +10899,321 @@ JiminyTextChar* gUnk_09EDCB04It[18] = {
     gUnkEu_08878A3E, gUnkEu_08878A53,
 };
 
-JiminyTextChar* gUnk_09EDCB04Es[15] = {
+const JiminyTextChar* gUnk_09EDCB04Es[15] = {
     gUnkEu_08878A6B, gUnkEu_08878A7F, gUnkEu_08878A90, gUnkEu_08878A92,
     gUnkEu_08878AA8, gUnkEu_08878ABD, gUnkEu_08878ACB, gUnkEu_08878AE2,
     gUnkEu_08878AF6, gUnkEu_08878B00, gUnkEu_08878B02, gUnkEu_08878B18,
     gUnkEu_08878B2F, gUnkEu_08878B47, gUnkEu_08878B57,
 };
 
-JiminyTextChar* gUnk_09EDCB38[11] = {
+const JiminyTextChar* gUnk_09EDCB38[11] = {
     gUnkEu_08878B84, gUnkEu_08878B95, gUnkEu_08878B97, gUnkEu_08878BAB,
     gUnkEu_08878BC0, gUnkEu_08878BD6, gUnkEu_08878BED, gUnkEu_08878C05,
     gUnkEu_08878C0C, gUnkEu_08878C0E, gUnkEu_08878C24,
 };
 
-JiminyTextChar* gUnk_09EDCB38Fr[13] = {
+const JiminyTextChar* gUnk_09EDCB38Fr[13] = {
     gUnkEu_08878C33, gUnkEu_08878C45, gUnkEu_08878C47, gUnkEu_08878C5D,
     gUnkEu_08878C72, gUnkEu_08878C86, gUnkEu_08878C98, gUnkEu_08878CAC,
     gUnkEu_08878CBE, gUnkEu_08878CC4, gUnkEu_08878CC6, gUnkEu_08878CD9,
     gUnkEu_08878CEB,
 };
 
-JiminyTextChar* gUnk_09EDCB38De[13] = {
+const JiminyTextChar* gUnk_09EDCB38De[13] = {
     gUnkEu_08878CFC, gUnkEu_08878D15, gUnkEu_08878D1E, gUnkEu_08878D20,
     gUnkEu_08878D38, gUnkEu_08878D4B, gUnkEu_08878D65, gUnkEu_08878D7C,
     gUnkEu_08878D92, gUnkEu_08878DA1, gUnkEu_08878DA3, gUnkEu_08878DB8,
     gUnkEu_08878DCF,
 };
 
-JiminyTextChar* gUnk_09EDCB38It[11] = {
+const JiminyTextChar* gUnk_09EDCB38It[11] = {
     gUnkEu_08878DE0, gUnkEu_08878DF1, gUnkEu_08878DF3, gUnkEu_08878E05,
     gUnkEu_08878E17, gUnkEu_08878E29, gUnkEu_08878E3C, gUnkEu_08878E4F,
     gUnkEu_08878E56, gUnkEu_08878E58, gUnkEu_08878E6C,
 };
 
-JiminyTextChar* gUnk_09EDCB38Es[11] = {
+const JiminyTextChar* gUnk_09EDCB38Es[11] = {
     gUnkEu_08878E81, gUnkEu_08878E94, gUnkEu_08878E96, gUnkEu_08878EAC,
     gUnkEu_08878EC1, gUnkEu_08878ED5, gUnkEu_08878EEB, gUnkEu_08878F02,
     gUnkEu_08878F1A, gUnkEu_08878F1C, gUnkEu_08878F30,
 };
 
-JiminyTextChar* gUnk_09EDCB64[13] = {
+const JiminyTextChar* gUnk_09EDCB64[13] = {
     gUnkEu_08878F60, gUnkEu_08878F75, gUnkEu_08878F83, gUnkEu_08878F85,
     gUnkEu_08878F99, gUnkEu_08878FB0, gUnkEu_08878FC3, gUnkEu_08878FCD,
     gUnkEu_08878FCF, gUnkEu_08878FE6, gUnkEu_08878FFF, gUnkEu_08879017,
     gUnkEu_0887902E,
 };
 
-JiminyTextChar* gUnk_09EDCB64Fr[13] = {
+const JiminyTextChar* gUnk_09EDCB64Fr[13] = {
     gUnkEu_0887903C, gUnkEu_0887904D, gUnkEu_08879064, gUnkEu_08879066,
     gUnkEu_0887907A, gUnkEu_08879090, gUnkEu_088790A4, gUnkEu_088790AE,
     gUnkEu_088790B0, gUnkEu_088790C4, gUnkEu_088790DC, gUnkEu_088790F1,
     gUnkEu_08879106,
 };
 
-JiminyTextChar* gUnk_09EDCB64De[14] = {
+const JiminyTextChar* gUnk_09EDCB64De[14] = {
     gUnkEu_0887911A, gUnkEu_08879132, gUnkEu_08879147, gUnkEu_08879149,
     gUnkEu_08879161, gUnkEu_08879177, gUnkEu_08879190, gUnkEu_0887919E,
     gUnkEu_088791A0, gUnkEu_088791B4, gUnkEu_088791CA, gUnkEu_088791DF,
     gUnkEu_088791F6, gUnkEu_0887920D,
 };
 
-JiminyTextChar* gUnk_09EDCB64It[13] = {
+const JiminyTextChar* gUnk_09EDCB64It[13] = {
     gUnkEu_08879223, gUnkEu_08879236, gUnkEu_08879242, gUnkEu_08879244,
     gUnkEu_08879259, gUnkEu_0887926D, gUnkEu_08879283, gUnkEu_0887929B,
     gUnkEu_0887929D, gUnkEu_088792B5, gUnkEu_088792CE, gUnkEu_088792E4,
     gUnkEu_088792FC,
 };
 
-JiminyTextChar* gUnk_09EDCB64Es[15] = {
+const JiminyTextChar* gUnk_09EDCB64Es[15] = {
     gUnkEu_08879308, gUnkEu_0887931B, gUnkEu_08879332, gUnkEu_08879334,
     gUnkEu_08879345, gUnkEu_0887935B, gUnkEu_0887936B, gUnkEu_08879381,
     gUnkEu_08879383, gUnkEu_08879397, gUnkEu_088793A8, gUnkEu_088793BD,
     gUnkEu_088793D0, gUnkEu_088793E0, gUnkEu_088793F1,
 };
 
-JiminyTextChar* gUnk_09EDCB98[8] = {
+const JiminyTextChar* gUnk_09EDCB98[8] = {
     gUnkEu_0887941C, gUnkEu_08879430, gUnkEu_08879448, gUnkEu_0887945E,
     gUnkEu_08879460, gUnkEu_08879476, gUnkEu_0887948D, gUnkEu_088794A7,
 };
 
-JiminyTextChar* gUnk_09EDCB98Fr[8] = {
+const JiminyTextChar* gUnk_09EDCB98Fr[8] = {
     gUnkEu_088794AE, gUnkEu_088794C4, gUnkEu_088794DB, gUnkEu_088794F1,
     gUnkEu_088794F3, gUnkEu_08879509, gUnkEu_0887951F, gUnkEu_08879534,
 };
 
-JiminyTextChar* gUnk_09EDCB98De[9] = {
+const JiminyTextChar* gUnk_09EDCB98De[9] = {
     gUnkEu_08879548, gUnkEu_08879559, gUnkEu_0887956E, gUnkEu_08879585,
     gUnkEu_08879597, gUnkEu_08879599, gUnkEu_088795B0, gUnkEu_088795C7,
     gUnkEu_088795E0,
 };
 
-JiminyTextChar* gUnk_09EDCB98It[7] = {
+const JiminyTextChar* gUnk_09EDCB98It[7] = {
     gUnkEu_088795F2, gUnkEu_0887960B, gUnkEu_08879624, gUnkEu_08879626,
     gUnkEu_0887963B, gUnkEu_08879651, gUnkEu_08879669,
 };
 
-JiminyTextChar* gUnk_09EDCB98Es[8] = {
+const JiminyTextChar* gUnk_09EDCB98Es[8] = {
     gUnkEu_08879674, gUnkEu_08879688, gUnkEu_0887969E, gUnkEu_088796B5,
     gUnkEu_088796B7, gUnkEu_088796C9, gUnkEu_088796DC, gUnkEu_088796F0,
 };
 
-JiminyTextChar* gUnk_09EDCBB8[9] = {
+const JiminyTextChar* gUnk_09EDCBB8[9] = {
     gUnkEu_08879720, gUnkEu_08879732, gUnkEu_08879749, gUnkEu_0887975E,
     gUnkEu_08879769, gUnkEu_0887976B, gUnkEu_08879782, gUnkEu_08879799,
     gUnkEu_088797B3,
 };
 
-JiminyTextChar* gUnk_09EDCBB8Fr[10] = {
+const JiminyTextChar* gUnk_09EDCBB8Fr[10] = {
     gUnkEu_088797BA, gUnkEu_088797CD, gUnkEu_088797DF, gUnkEu_088797F6,
     gUnkEu_08879806, gUnkEu_0887981D, gUnkEu_0887981F, gUnkEu_08879835,
     gUnkEu_0887984B, gUnkEu_08879860,
 };
 
-JiminyTextChar* gUnk_09EDCBB8De[10] = {
+const JiminyTextChar* gUnk_09EDCBB8De[10] = {
     gUnkEu_08879874, gUnkEu_0887988B, gUnkEu_088798A1, gUnkEu_088798B6,
     gUnkEu_088798C9, gUnkEu_088798D6, gUnkEu_088798D8, gUnkEu_088798F1,
     gUnkEu_08879907, gUnkEu_0887991D,
 };
 
-JiminyTextChar* gUnk_09EDCBB8It[9] = {
+const JiminyTextChar* gUnk_09EDCBB8It[9] = {
     gUnkEu_0887992F, gUnkEu_0887993F, gUnkEu_08879951, gUnkEu_08879964,
     gUnkEu_0887997E, gUnkEu_08879980, gUnkEu_08879996, gUnkEu_088799AC,
     gUnkEu_088799C4,
 };
 
-JiminyTextChar* gUnk_09EDCBB8Es[9] = {
+const JiminyTextChar* gUnk_09EDCBB8Es[9] = {
     gUnkEu_088799CF, gUnkEu_088799E5, gUnkEu_088799FC, gUnkEu_08879A0F,
     gUnkEu_08879A1D, gUnkEu_08879A1F, gUnkEu_08879A31, gUnkEu_08879A45,
     gUnkEu_08879A5D,
 };
 
-JiminyTextChar* gUnk_09EDCBDC[8] = {
+const JiminyTextChar* gUnk_09EDCBDC[8] = {
     gUnkEu_08879A8C, gUnkEu_08879AA2, gUnkEu_08879AB9, gUnkEu_08879ABE,
     gUnkEu_08879AC0, gUnkEu_08879AD6, gUnkEu_08879AED, gUnkEu_08879B07,
 };
 
-JiminyTextChar* gUnk_09EDCBDCFr[8] = {
+const JiminyTextChar* gUnk_09EDCBDCFr[8] = {
     gUnkEu_08879B0E, gUnkEu_08879B23, gUnkEu_08879B35, gUnkEu_08879B3F,
     gUnkEu_08879B41, gUnkEu_08879B56, gUnkEu_08879B6C, gUnkEu_08879B81,
 };
 
-JiminyTextChar* gUnk_09EDCBDCDe[8] = {
+const JiminyTextChar* gUnk_09EDCBDCDe[8] = {
     gUnkEu_08879B95, gUnkEu_08879BA9, gUnkEu_08879BBC, gUnkEu_08879BCD,
     gUnkEu_08879BCF, gUnkEu_08879BE3, gUnkEu_08879BF6, gUnkEu_08879C0F,
 };
 
-JiminyTextChar* gUnk_09EDCBDCIt[8] = {
+const JiminyTextChar* gUnk_09EDCBDCIt[8] = {
     gUnkEu_08879C26, gUnkEu_08879C3B, gUnkEu_08879C4F, gUnkEu_08879C56,
     gUnkEu_08879C58, gUnkEu_08879C6B, gUnkEu_08879C81, gUnkEu_08879C99,
 };
 
-JiminyTextChar* gUnk_09EDCBDCEs[8] = {
+const JiminyTextChar* gUnk_09EDCBDCEs[8] = {
     gUnkEu_08879CA4, gUnkEu_08879CB9, gUnkEu_08879CCF, gUnkEu_08879CD8,
     gUnkEu_08879CDA, gUnkEu_08879CEC, gUnkEu_08879D00, gUnkEu_08879D18,
 };
 
-JiminyTextChar* gUnk_09EDCBFC[8] = {
+const JiminyTextChar* gUnk_09EDCBFC[8] = {
     gUnkEu_08879D44, gUnkEu_08879D5B, gUnkEu_08879D6E, gUnkEu_08879D7E,
     gUnkEu_08879D80, gUnkEu_08879D93, gUnkEu_08879DAA, gUnkEu_08879DC4,
 };
 
-JiminyTextChar* gUnk_09EDCBFCFr[9] = {
+const JiminyTextChar* gUnk_09EDCBFCFr[9] = {
     gUnkEu_08879DCB, gUnkEu_08879DDD, gUnkEu_08879DF2, gUnkEu_08879E03,
     gUnkEu_08879E0E, gUnkEu_08879E10, gUnkEu_08879E26, gUnkEu_08879E3A,
     gUnkEu_08879E50,
 };
 
-JiminyTextChar* gUnk_09EDCBFCDe[8] = {
+const JiminyTextChar* gUnk_09EDCBFCDe[8] = {
     gUnkEu_08879E5E, gUnkEu_08879E72, gUnkEu_08879E81, gUnkEu_08879E9A,
     gUnkEu_08879E9C, gUnkEu_08879EB1, gUnkEu_08879EC7, gUnkEu_08879EDD,
 };
 
-JiminyTextChar* gUnk_09EDCBFCIt[8] = {
+const JiminyTextChar* gUnk_09EDCBFCIt[8] = {
     gUnkEu_08879EF0, gUnkEu_08879F02, gUnkEu_08879F17, gUnkEu_08879F25,
     gUnkEu_08879F27, gUnkEu_08879F38, gUnkEu_08879F4C, gUnkEu_08879F60,
 };
 
-JiminyTextChar* gUnk_09EDCBFCEs[8] = {
+const JiminyTextChar* gUnk_09EDCBFCEs[8] = {
     gUnkEu_08879F6F, gUnkEu_08879F86, gUnkEu_08879F99, gUnkEu_08879FB1,
     gUnkEu_08879FB3, gUnkEu_08879FC5, gUnkEu_08879FD8, gUnkEu_08879FEF,
 };
 
-JiminyTextChar* gUnk_09EDCC1C[6] = {
+const JiminyTextChar* gUnk_09EDCC1C[6] = {
     gUnkEu_0887A01C, gUnkEu_0887A034, gUnkEu_0887A036, gUnkEu_0887A04B,
     gUnkEu_0887A062, gUnkEu_0887A07C,
 };
 
-JiminyTextChar* gUnk_09EDCC1CFr[7] = {
+const JiminyTextChar* gUnk_09EDCC1CFr[7] = {
     gUnkEu_0887A083, gUnkEu_0887A095, gUnkEu_0887A0A1, gUnkEu_0887A0A3,
     gUnkEu_0887A0BB, gUnkEu_0887A0D1, gUnkEu_0887A0E6,
 };
 
-JiminyTextChar* gUnk_09EDCC1CDe[6] = {
+const JiminyTextChar* gUnk_09EDCC1CDe[6] = {
     gUnkEu_0887A0FA, gUnkEu_0887A114, gUnkEu_0887A116, gUnkEu_0887A12D,
     gUnkEu_0887A143, gUnkEu_0887A159,
 };
 
-JiminyTextChar* gUnk_09EDCC1CIt[7] = {
+const JiminyTextChar* gUnk_09EDCC1CIt[7] = {
     gUnkEu_0887A16C, gUnkEu_0887A17E, gUnkEu_0887A18B, gUnkEu_0887A18D,
     gUnkEu_0887A19E, gUnkEu_0887A1B3, gUnkEu_0887A1CC,
 };
 
-JiminyTextChar* gUnk_09EDCC1CEs[7] = {
+const JiminyTextChar* gUnk_09EDCC1CEs[7] = {
     gUnkEu_0887A1DB, gUnkEu_0887A1EC, gUnkEu_0887A201, gUnkEu_0887A203,
     gUnkEu_0887A215, gUnkEu_0887A229, gUnkEu_0887A241,
 };
 
-JiminyTextChar* gUnk_09EDCC34[7] = {
+const JiminyTextChar* gUnk_09EDCC34[7] = {
     gUnkEu_0887A270, gUnkEu_0887A281, gUnkEu_0887A297, gUnkEu_0887A299,
     gUnkEu_0887A2AC, gUnkEu_0887A2C3, gUnkEu_0887A2DD,
 };
 
-JiminyTextChar* gUnk_09EDCC34Fr[7] = {
+const JiminyTextChar* gUnk_09EDCC34Fr[7] = {
     gUnkEu_0887A2E4, gUnkEu_0887A2F1, gUnkEu_0887A307, gUnkEu_0887A309,
     gUnkEu_0887A31F, gUnkEu_0887A333, gUnkEu_0887A346,
 };
 
-JiminyTextChar* gUnk_09EDCC34De[8] = {
+const JiminyTextChar* gUnk_09EDCC34De[8] = {
     gUnkEu_0887A35A, gUnkEu_0887A370, gUnkEu_0887A383, gUnkEu_0887A397,
     gUnkEu_0887A399, gUnkEu_0887A3AE, gUnkEu_0887A3C4, gUnkEu_0887A3DA,
 };
 
-JiminyTextChar* gUnk_09EDCC34It[7] = {
+const JiminyTextChar* gUnk_09EDCC34It[7] = {
     gUnkEu_0887A3EC, gUnkEu_0887A403, gUnkEu_0887A416, gUnkEu_0887A418,
     gUnkEu_0887A42B, gUnkEu_0887A441, gUnkEu_0887A45A,
 };
 
-JiminyTextChar* gUnk_09EDCC34Es[7] = {
+const JiminyTextChar* gUnk_09EDCC34Es[7] = {
     gUnkEu_0887A469, gUnkEu_0887A47F, gUnkEu_0887A48F, gUnkEu_0887A491,
     gUnkEu_0887A4A4, gUnkEu_0887A4B6, gUnkEu_0887A4CC,
 };
 
-JiminyTextChar* gUnk_09EDCC50[7] = {
+const JiminyTextChar* gUnk_09EDCC50[7] = {
     gUnkEu_0887A4F8, gUnkEu_0887A509, gUnkEu_0887A521, gUnkEu_0887A523,
     gUnkEu_0887A536, gUnkEu_0887A54D, gUnkEu_0887A567,
 };
 
-JiminyTextChar* gUnk_09EDCC50Fr[7] = {
+const JiminyTextChar* gUnk_09EDCC50Fr[7] = {
     gUnkEu_0887A56E, gUnkEu_0887A57B, gUnkEu_0887A584, gUnkEu_0887A586,
     gUnkEu_0887A59C, gUnkEu_0887A5B0, gUnkEu_0887A5C3,
 };
 
-JiminyTextChar* gUnk_09EDCC50De[7] = {
+const JiminyTextChar* gUnk_09EDCC50De[7] = {
     gUnkEu_0887A5D7, gUnkEu_0887A5ED, gUnkEu_0887A605, gUnkEu_0887A607,
     gUnkEu_0887A61C, gUnkEu_0887A632, gUnkEu_0887A648,
 };
 
-JiminyTextChar* gUnk_09EDCC50It[7] = {
+const JiminyTextChar* gUnk_09EDCC50It[7] = {
     gUnkEu_0887A65A, gUnkEu_0887A66B, gUnkEu_0887A682, gUnkEu_0887A684,
     gUnkEu_0887A697, gUnkEu_0887A6AD, gUnkEu_0887A6C6,
 };
 
-JiminyTextChar* gUnk_09EDCC50Es[8] = {
+const JiminyTextChar* gUnk_09EDCC50Es[8] = {
     gUnkEu_0887A6D5, gUnkEu_0887A6E4, gUnkEu_0887A6F0, gUnkEu_0887A6FA,
     gUnkEu_0887A6FC, gUnkEu_0887A70F, gUnkEu_0887A721, gUnkEu_0887A737,
 };
 
-JiminyTextChar* gUnk_09EDCC6C[8] = {
+const JiminyTextChar* gUnk_09EDCC6C[8] = {
     gUnkEu_0887A764, gUnkEu_0887A777, gUnkEu_0887A78D, gUnkEu_0887A794,
     gUnkEu_0887A796, gUnkEu_0887A7A9, gUnkEu_0887A7C0, gUnkEu_0887A7DA,
 };
 
-JiminyTextChar* gUnk_09EDCC6CFr[9] = {
+const JiminyTextChar* gUnk_09EDCC6CFr[9] = {
     gUnkEu_0887A7E1, gUnkEu_0887A7F1, gUnkEu_0887A804, gUnkEu_0887A817,
     gUnkEu_0887A81E, gUnkEu_0887A820, gUnkEu_0887A836, gUnkEu_0887A84A,
     gUnkEu_0887A85D,
 };
 
-JiminyTextChar* gUnk_09EDCC6CDe[8] = {
+const JiminyTextChar* gUnk_09EDCC6CDe[8] = {
     gUnkEu_0887A871, gUnkEu_0887A888, gUnkEu_0887A89D, gUnkEu_0887A8A6,
     gUnkEu_0887A8A8, gUnkEu_0887A8BD, gUnkEu_0887A8D3, gUnkEu_0887A8E9,
 };
 
-JiminyTextChar* gUnk_09EDCC6CIt[8] = {
+const JiminyTextChar* gUnk_09EDCC6CIt[8] = {
     gUnkEu_0887A8FB, gUnkEu_0887A90B, gUnkEu_0887A91F, gUnkEu_0887A937,
     gUnkEu_0887A939, gUnkEu_0887A94C, gUnkEu_0887A962, gUnkEu_0887A97B,
 };
 
-JiminyTextChar* gUnk_09EDCC6CEs[8] = {
+const JiminyTextChar* gUnk_09EDCC6CEs[8] = {
     gUnkEu_0887A98A, gUnkEu_0887A99F, gUnkEu_0887A9B2, gUnkEu_0887A9C2,
     gUnkEu_0887A9C4, gUnkEu_0887A9D7, gUnkEu_0887A9E9, gUnkEu_0887A9FF,
 };
 
-JiminyTextChar* gUnk_09EDCC8C[8] = {
+const JiminyTextChar* gUnk_09EDCC8C[8] = {
     gUnkEu_0887AA2C, gUnkEu_0887AA3F, gUnkEu_0887AA55, gUnkEu_0887AA6A,
     gUnkEu_0887AA7F, gUnkEu_0887AA88, gUnkEu_0887AA8A, gUnkEu_0887AAA1,
 };
 
-JiminyTextChar* gUnk_09EDCC8CFr[10] = {
+const JiminyTextChar* gUnk_09EDCC8CFr[10] = {
     gUnkEu_0887AABA, gUnkEu_0887AACF, gUnkEu_0887AAE3, gUnkEu_0887AAFA,
     gUnkEu_0887AB0D, gUnkEu_0887AB1B, gUnkEu_0887AB1D, gUnkEu_0887AB2F,
     gUnkEu_0887AB44, gUnkEu_0887AB52,
 };
 
-JiminyTextChar* gUnk_09EDCC8CDe[9] = {
+const JiminyTextChar* gUnk_09EDCC8CDe[9] = {
     gUnkEu_0887AB61, gUnkEu_0887AB74, gUnkEu_0887AB8B, gUnkEu_0887ABA0,
     gUnkEu_0887ABB4, gUnkEu_0887ABC8, gUnkEu_0887ABD0, gUnkEu_0887ABD2,
     gUnkEu_0887ABEA,
 };
 
-JiminyTextChar* gUnk_09EDCC8CIt[8] = {
+const JiminyTextChar* gUnk_09EDCC8CIt[8] = {
     gUnkEu_0887AC02, gUnkEu_0887AC15, gUnkEu_0887AC2C, gUnkEu_0887AC44,
     gUnkEu_0887AC5D, gUnkEu_0887AC75, gUnkEu_0887AC77, gUnkEu_0887AC8F,
 };
 
-JiminyTextChar* gUnk_09EDCC8CEs[10] = {
+const JiminyTextChar* gUnk_09EDCC8CEs[10] = {
     gUnkEu_0887ACA4, gUnkEu_0887ACB9, gUnkEu_0887ACD0, gUnkEu_0887ACE2,
     gUnkEu_0887ACF5, gUnkEu_0887ACFD, gUnkEu_0887ACFF, gUnkEu_0887AD14,
     gUnkEu_0887AD26, gUnkEu_0887AD33,
 };
 
-JiminyLocalizedName* gJiminyRootNames[3] = {
+const JiminyLocalizedName* gJiminyRootNames[3] = {
     &gUnkEu_088925D8, &gUnkEu_08892620, &gUnkEu_0889266C,
 };
 
-JiminyLocalizedName* gJiminyEntry01Names[17] = {
+const JiminyLocalizedName* gJiminyEntry01Names[17] = {
     &gUnkEu_08892450, &gUnkEu_088924BC, &gUnkEu_0889252C, &gUnkEu_08892598,
     &gUnkEu_0888E364, &gUnkEu_08895F4C, &gUnkEu_0888E530, &gUnkEu_0888E3A0,
     &gUnkEu_0888E4C0, &gUnkEu_0888E450, &gUnkEu_0888E578, &gUnkEu_0888E5DC,
@@ -11221,16 +11221,16 @@ JiminyLocalizedName* gJiminyEntry01Names[17] = {
     &gUnkEu_08896038,
 };
 
-JiminyLocalizedName* gJiminyEntry02Names[7] = {
+const JiminyLocalizedName* gJiminyEntry02Names[7] = {
     &gUnkEu_0889211C, &gUnkEu_08892170, &gUnkEu_088921C4, &gUnkEu_08892220,
     &gUnkEu_08892278, &gUnkEu_088922C8, &gUnkEu_088957DC,
 };
 
-JiminyLocalizedName* gUnk_09EDDF38[3] = {
+const JiminyLocalizedName* gUnk_09EDDF38[3] = {
     &gUnkEu_0889238C, &gUnkEu_088923E8, &gUnkEu_0888F840,
 };
 
-JiminyLocalizedName* gJiminyEntry04Names[17] = {
+const JiminyLocalizedName* gJiminyEntry04Names[17] = {
     &gUnkEu_0888E860, &gUnkEu_0888E8B4, &gUnkEu_0888E904, &gUnkEu_0888E964,
     &gUnkEu_0888E9B8, &gUnkEu_0888EA14, &gUnkEu_0888EA64, &gUnkEu_0888EAC0,
     &gUnkEu_0888EB00, &gUnkEu_0888EB4C, &gUnkEu_0888EBA4, &gUnkEu_0888EBF0,
@@ -11238,24 +11238,24 @@ JiminyLocalizedName* gJiminyEntry04Names[17] = {
     &gUnkEu_0888ECE8,
 };
 
-JiminyLocalizedName* gJiminyEntry05Names[14] = {
+const JiminyLocalizedName* gJiminyEntry05Names[14] = {
     &gUnkEu_0888EDE0, &gUnkEu_0888EE18, &gUnkEu_0888EE50, &gUnkEu_0888EE80,
     &gUnkEu_0888EEC0, &gUnkEu_0888EEF0, &gUnkEu_0888EF20, &gUnkEu_0888EF54,
     &gUnkEu_0888EFF4, &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888EF8C,
     &gUnkEu_0888F03C, &gUnkEu_0888F0A4,
 };
 
-JiminyLocalizedName* gJiminyEntry06Names[7] = {
+const JiminyLocalizedName* gJiminyEntry06Names[7] = {
     &gUnkEu_0888F0DC, &gUnkEu_0888F128, &gUnkEu_0888F178, &gUnkEu_0888F1AC,
     &gUnkEu_0888F1F4, &gUnkEu_0888F22C, &gUnkEu_0888F278,
 };
 
-JiminyLocalizedName* gJiminyEntry07Names[7] = {
+const JiminyLocalizedName* gJiminyEntry07Names[7] = {
     &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F394, &gUnkEu_0888F3F8,
     &gUnkEu_0888F3C8, &gUnkEu_0888F440, &gUnkEu_0888F484,
 };
 
-JiminyLocalizedName* gJiminyEntry08Names[49] = {
+const JiminyLocalizedName* gJiminyEntry08Names[49] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11271,7 +11271,7 @@ JiminyLocalizedName* gJiminyEntry08Names[49] = {
     &gUnkEu_08890FB0,
 };
 
-JiminyLocalizedName* gJiminyEntry09Names[26] = {
+const JiminyLocalizedName* gJiminyEntry09Names[26] = {
     &gUnkEu_088929B0, &gUnkEu_088960A0, &gUnkEu_08892BB0, &gUnkEu_08896168,
     &gUnkEu_08892AE0, &gUnkEu_08896100, &gUnkEu_088930B0, &gUnkEu_08893108,
     &gUnkEu_0889315C, &gUnkEu_08892DEC, &gUnkEu_08892D88, &gUnkEu_088961D0,
@@ -11281,11 +11281,11 @@ JiminyLocalizedName* gJiminyEntry09Names[26] = {
     &gUnkEu_08896440, &gUnkEu_088964AC,
 };
 
-JiminyLocalizedName* gJiminyEntry10Names[1] = {
+const JiminyLocalizedName* gJiminyEntry10Names[1] = {
     &gUnkEu_08895850,
 };
 
-JiminyLocalizedName* gJiminyEntry11Names[25] = {
+const JiminyLocalizedName* gJiminyEntry11Names[25] = {
     &gUnkEu_0888F4FC, &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F358,
     &gUnkEu_0888F52C, &gUnkEu_0888F560, &gUnkEu_0888EF54, &gUnkEu_0888EFF4,
     &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888F4CC, &gUnkEu_0888F66C,
@@ -11295,7 +11295,7 @@ JiminyLocalizedName* gJiminyEntry11Names[25] = {
     &gUnkEu_0888F7E8,
 };
 
-JiminyLocalizedName* gJiminyEntry12Names[40] = {
+const JiminyLocalizedName* gJiminyEntry12Names[40] = {
     &gUnkEu_088908E4, &gUnkEu_08890950, &gUnkEu_088909B4, &gUnkEu_08890A80,
     &gUnkEu_08890A18, &gUnkEu_08890AE0, &gUnkEu_08890864, &gUnkEu_088908B0,
     &gUnkEu_08890230, &gUnkEu_0888F394, &gUnkEu_0888EF8C, &gUnkEu_08890678,
@@ -11308,7 +11308,7 @@ JiminyLocalizedName* gJiminyEntry12Names[40] = {
     &gUnkEu_08890D48, &gUnkEu_08890D80, &gUnkEu_08890DB8, &gUnkEu_08890DF4,
 };
 
-JiminyLocalizedName* gJiminyEntry13Names[35] = {
+const JiminyLocalizedName* gJiminyEntry13Names[35] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11320,24 +11320,24 @@ JiminyLocalizedName* gJiminyEntry13Names[35] = {
     &gUnkEu_088903AC, &gUnkEu_08890290, &gUnkEu_08890484,
 };
 
-JiminyLocalizedName* gJiminyEntry15Names[6] = {
+const JiminyLocalizedName* gJiminyEntry15Names[6] = {
     &gUnkEu_088954F4, &gUnkEu_08895560, &gUnkEu_088955D0, &gUnkEu_0889563C,
     &gUnkEu_088956A4, &gUnkEu_08895710,
 };
 
-JiminyLocalizedName* gJiminyEntry18Names[14] = {
+const JiminyLocalizedName* gJiminyEntry18Names[14] = {
     &gUnkEu_0888F52C, &gUnkEu_08890FEC, &gUnkEu_0888F4FC, &gUnkEu_0888F560,
     &gUnkEu_0888F598, &gUnkEu_0889575C, &gUnkEu_08890FB0, &gUnkEu_0888F7A4,
     &gUnkEu_08890F7C, &gUnkEu_0889548C, &gUnkEu_0888F770, &gUnkEu_0888F7E8,
     &gUnkEu_0888F740, &gUnkEu_08895784,
 };
 
-JiminyLocalizedName* gJiminyEntry19Names[6] = {
+const JiminyLocalizedName* gJiminyEntry19Names[6] = {
     &gUnkEu_08890C48, &gUnkEu_08890700, &gUnkEu_08890300, &gUnkEu_08890230,
     &gUnkEu_08890354, &gUnkEu_08890BD0,
 };
 
-JiminyLocalizedName* gJiminyEntry20Names[33] = {
+const JiminyLocalizedName* gJiminyEntry20Names[33] = {
     &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
     &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
     &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
@@ -11349,7 +11349,7 @@ JiminyLocalizedName* gJiminyEntry20Names[33] = {
     &gUnkEu_08890484,
 };
 
-JiminyLocalizedName* gJiminyEntry16Names[22] = {
+const JiminyLocalizedName* gJiminyEntry16Names[22] = {
     &gUnkEu_0889103C, &gUnkEu_08890FEC, &gUnkEu_0888F880, &gUnkEu_0888F9AC,
     &gUnkEu_0888F910, &gUnkEu_0888FA00, &gUnkEu_0888FE74, &gUnkEu_0888FA4C,
     &gUnkEu_0888FD80, &gUnkEu_0888FACC, &gUnkEu_0888FFCC, &gUnkEu_08890200,
@@ -11358,7 +11358,7 @@ JiminyLocalizedName* gJiminyEntry16Names[22] = {
     &gUnkEu_0889043C, &gUnkEu_08890F7C,
 };
 
-JiminyTextChar* gJiminyHiddenTexts[13] = {
+const JiminyTextChar* gJiminyHiddenTexts[13] = {
     gUnkEu_0887F2CC, gUnkEu_0887F2CE, gUnkEu_0887F2D1, gUnkEu_0887F2D5,
     gUnkEu_0887F2DA, gUnkEu_0887F2E0, gUnkEu_0887F2E7, gUnkEu_0887F2EF,
     gUnkEu_0887F2F8, gUnkEu_0887F302, gUnkEu_0887F30D, gUnkEu_0887F319,

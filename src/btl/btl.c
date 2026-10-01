@@ -5453,7 +5453,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         {
-            s16* sine = gSineTable;
+            const s16* sine = gSineTable;
             u16 uv = work->unk_158;
             work->unk_158 = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
@@ -5500,7 +5500,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         {
-            s16* sine = gSineTable;
+            const s16* sine = gSineTable;
             u16 uv = work->unk_158;
             work->unk_158 = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
@@ -5539,7 +5539,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->vz = 0;
 
         {
-            s16* sine = gSineTable;
+            const s16* sine = gSineTable;
             u16 uv = work->unk_158;
             work->unk_158 = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
@@ -5613,7 +5613,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         {
-            s16* sine = gSineTable;
+            const s16* sine = gSineTable;
             u16 uv = work->unk_158;
             work->unk_158 = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
@@ -5660,7 +5660,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         t3 = p->z;
 
         {
-            s16* sine = gSineTable;
+            const s16* sine = gSineTable;
             u16 uv = work->unk_158;
             work->unk_158 = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;

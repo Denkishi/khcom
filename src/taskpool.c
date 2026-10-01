@@ -91,7 +91,7 @@ void TaskKill(TaskPool* a, Task* t) {
     ListPoolRelease(&t->node, a);
 }
 
-Task* TaskCreate(TaskPool* a, TaskDesc* desc, void* arg) {
+Task* TaskCreate(TaskPool* a, TaskDesc* desc, const void* arg) {
     Task* task;
 
     task = ListPoolFirstFree(a);

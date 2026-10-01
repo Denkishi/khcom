@@ -248,7 +248,7 @@ static const UnkStruct_080ABA80 sUnk_090352FC = {
 u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a);
 void SelectNextRikuCard(CardBattleWork* w, u8 n);
 void SelectPrevRikuCard(CardBattleWork* w, u8 n);
-u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind);
+u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind);
 void func_08081740(CardBattleWork* w, u16 n);
 void func_08081744(CardBattleWork* w);
 void SwitchRikuCardList(CardBattleWork* w);
@@ -264,7 +264,7 @@ void LoadRikuCardDisplayGfx2(CardDisplayWork* p);
 void TickRikuHcEffectOnPlayEnd();
 u8 func_080827E0(CardDisplayWork* p, void* a);
 void UpdateRikuReloadGauge(CardDisplayWork* p);
-void LookupRikuCardDef(CardDisplayArgs* a, CardDef** out, u8 index);
+void LookupRikuCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
 void TickRikuHcEffectOnAttackEnd();
 u8 func_08082AE4(CardDisplayWork* p);
 u8 func_08082FF0(CardDisplayWork* p);
@@ -463,7 +463,7 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
 }
 
 void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n) {
-    Deck* deck;
+    const Deck* deck;
     u32 count;
 
     switch (gBtlWork->battleId) {
@@ -573,7 +573,7 @@ void LoadRikuDeckCardSlots(CardBattleWork* w, CardSlot* slots, s8 kind, s32 n) {
     }
 }
 
-u16 FillCardSlotsFromIds(CardSlot* out, u16* ids, u16 n, u8 kind) {
+u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind) {
     u16 count = 0;
     s32 i;
 
@@ -3524,7 +3524,7 @@ u8 DispatchRikuCardCommand(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-void LookupRikuCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
+void LookupRikuCardDef(CardDisplayArgs* a, const CardDef** out, u8 index) {
     u32* q;
 
     if (a->slot != NULL) {

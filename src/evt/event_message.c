@@ -2621,7 +2621,7 @@ static const u16* sUnk_09EE4704[4][2] = {
     {gUnk_0951EAB8, gUnk_08125E24},
 };
 
-void* gUnk_09EE4724[4] = {
+const void* gUnk_09EE4724[4] = {
     sUnk_09EE4704[0],
     sUnk_09EE4704[1],
     sUnk_09EE4704[2],

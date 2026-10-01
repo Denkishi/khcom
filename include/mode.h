@@ -24,7 +24,7 @@ typedef struct Mode {
 void ModeRequest(Mode* mode, s32 arg);
 void ModeUpdate();
 void ModeRequestHeapReset(Mode* mode, s32 arg);
-void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d);
+void DebugTextLoadPalette(s32 a, const void* b, s32 c, u8 d);
 void DebugTextClear();
 void DebugTextDestroy();
 

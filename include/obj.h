@@ -52,7 +52,7 @@ typedef struct ObjAffine {
 } ObjAffine;
 
 typedef struct ObjPalette {
-    void* src;
+    const void* src;
     u16 refCount;
     u16 index;
     u16 count;

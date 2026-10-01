@@ -1245,7 +1245,7 @@ u16 GetJiminyTextLength(u16* p) {
 }
 
 s32 GetJiminyEntryState(s32 idx) {
-    JiminyEntry* e;
+    const JiminyEntry* e;
     s32 a;
     s32 b;
     s32 c;
@@ -1505,7 +1505,7 @@ u8 JiminyHandleListInput() {
 void mode_jiminy_0() {
     s32 i;
     s32 j;
-    JiminyEntry* e;
+    const JiminyEntry* e;
 
     gJiminyWork = EwramAlloc(sizeof(JiminyWork));
     SetBgMode0();
@@ -1641,9 +1641,9 @@ void mode_jiminy_1() {
     s32 i;
     u16 c;
     u16 t;
-    JiminyEntry* e;
+    const JiminyEntry* e;
     JiminyPair* p;
-    JiminyEntry* e2;
+    const JiminyEntry* e2;
     JiminyPair* p2;
 
     switch (gJiminyWork->state) {
@@ -2064,7 +2064,7 @@ void SplitThreeDecimalDigits(s16 a, u8* out) {
 
 void JiminyDetailUpdate() {
     s32 count;
-    JiminyDetail* entries;
+    const JiminyDetail* entries;
     s16 i;
     s16 unlocked;
     s16 selected;

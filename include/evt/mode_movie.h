@@ -7,7 +7,7 @@
 typedef struct MovieSub {
     s16 frame;
     s16 x;
-    TextChar* text;
+    const TextChar* text;
     u8 line;
     u8 unk_09;
     u16 duration;

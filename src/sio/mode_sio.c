@@ -3678,8 +3678,8 @@ void SioChgCardShowInfo() {
     s16 n;
     u32 off;
     u16 nameId;
-    CardDef* defs;
-    CardDef* def;
+    const CardDef* defs;
+    const CardDef* def;
     n = gSioChgCardSlots[gSioChgCardWork->cursor];
     defs = gCardDefs;
     def = &defs[n];

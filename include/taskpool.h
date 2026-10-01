@@ -36,7 +36,7 @@ typedef struct Task {
 typedef char TaskPool_size[(sizeof(TaskPool) == 0x14) ? 1 : -1];
 typedef char Task_size[(sizeof(Task) == 0x24) ? 1 : -1];
 
-Task* TaskCreate(TaskPool* pool, TaskDesc* desc, void* arg);
+Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg);
 Task* TaskDestroy(TaskPool* pool, Task* task);
 void TaskKill(TaskPool* pool, Task* task);
 u8 IsTaskActive(Task* task);

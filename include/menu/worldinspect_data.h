@@ -33,7 +33,7 @@ typedef struct WorldinspectMsg {
     u16 tilesSize2;
     u8 unk_26[0x02];
     void* sprite2;
-    void* text;
+    const void* text;
     u16 descId;
     u16 descId2;
 } WorldinspectMsg;

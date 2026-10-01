@@ -9,7 +9,7 @@
 #include "evt_types.h"
 
 typedef struct EvtObjParam {
-    EvtObjRes* res;
+    const EvtObjRes* res;
     EvtObj* obj;
 } EvtObjParam;
 

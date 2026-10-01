@@ -28,7 +28,7 @@ void* eu_0805E924(const void* strings) {
     }
 }
 
-void* eu_0805E968(void* text) {
+void* eu_0805E968(const void* text) {
     void** s = text;
 
     switch (gLanguage) {
@@ -46,7 +46,7 @@ void* eu_0805E968(void* text) {
     }
 }
 
-s32 eu_0805E9AC(void* text) {
+s32 eu_0805E9AC(const void* text) {
     u16* s = text;
 
     switch (gLanguage) {

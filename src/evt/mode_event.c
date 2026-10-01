@@ -134,7 +134,7 @@ void EventDebugUpdate() {
 }
 
 void EventUpdate() {
-    EventSequenceDef* p = gEventSequenceDefs[gEventId];
+    const EventSequenceDef* p = gEventSequenceDefs[gEventId];
     UpdatePlayTime();
     TaskPoolUpdate(&gEventTaskPool);
     TaskPoolDraw(&gEventTaskPool);
@@ -844,7 +844,7 @@ void func_0806250C() {
 }
 
 void func_0806297C() {
-    EventSequenceDef* m = gEventSequenceDefs[gEventId];
+    const EventSequenceDef* m = gEventSequenceDefs[gEventId];
 
     switch (gEventId) {
     case 68:

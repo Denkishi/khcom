@@ -62,7 +62,7 @@ typedef struct StaffRollWork {
     s32 sceneIndex;
     s32 nextScene;
     s32 sceneScroll;
-    StaffRollScene* scene;
+    const StaffRollScene* scene;
     u8 creditsEnded;
     u8 unk_0A1[0x3];
     s32 creditsState;

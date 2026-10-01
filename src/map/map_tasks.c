@@ -4356,7 +4356,7 @@ void MapPrzCardShrink(MapPrzCardWork* w) {
 
 void Task_MapPrzCard_0(MapPrzCardWork* w, MapPrizeArgs* p) {
     CardDef* d;
-    CardBack* q;
+    const CardBack* q;
 
     gMapRoomState->flags |= ROOM_FLAG_PRIZE_CARD_ACTIVE;
     w->cardId = p->id;
@@ -4421,7 +4421,7 @@ s32 Task_MapPrzCard_1(MapPrzCardWork* w) {
 
 void Task_MapPrzCard_2(MapPrzCardWork* w) {
     CardDef* d;
-    CardBack* q;
+    const CardBack* q;
     void* t;
     ObjAffine* affine;
     s16 x;

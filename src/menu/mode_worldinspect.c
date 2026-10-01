@@ -326,7 +326,7 @@ u8 WorldInspectLoadDesc(s16 id) {
 
 #ifdef VERSION_EU
         {
-            u8** langs = (*p)->strings;
+            const u8** langs = (*p)->strings;
 
             return LoadTextSlots((void*)langs[gLanguage], sWorldInspectDescText);
         }

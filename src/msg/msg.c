@@ -6747,7 +6747,7 @@ u16 FormatSmallFontHex16(s16 v, u16* out) {
 }
 
 #ifndef VERSION_EU
-s32 CopySjisGlyphsToVram(TextChar* a) {
+s32 CopySjisGlyphsToVram(const TextChar* a) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -6931,7 +6931,7 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
 #endif
 
 #ifndef VERSION_EU
-s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
+s32 CopySjisGlyphsToVramAt(const TextChar* a, u16 b) {
     u8 buf[2];
     u16* c;
     u16 w;
@@ -7114,7 +7114,7 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
 }
 #endif
 
-u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
+u8 CopyLatinGlyphsToVram(const TextChar* a, u16* b, u16 tile) {
     u8* dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
     s32 flag = 0;
     sTextEntryCount = 0;

@@ -1503,7 +1503,7 @@ const s32 gPlayedCardAngles[3] = {
 
 u8 IsCardDisplayOffScreen(CardDisplayWork* p);
 void ReleaseCardDisplayGfx(CardDisplayWork* p);
-void LookupSoraCardDef(CardDisplayArgs* a, CardDef** out, u8 index);
+void LookupSoraCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
 void LinkSoraCardDisplay(CardDisplayWork* p);
 void LoadSoraCardDisplayGfx2(CardDisplayWork* p);
 void UpdateSoraCardValue(CardDisplayWork* w);
@@ -4912,7 +4912,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
     return 1;
 }
 
-void LookupSoraCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
+void LookupSoraCardDef(CardDisplayArgs* a, const CardDef** out, u8 index) {
     u32* q;
 
     if (a->slot != NULL) {

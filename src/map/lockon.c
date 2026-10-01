@@ -425,7 +425,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     return 1;
 }
 
-void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d) {
+void DebugTextLoadPalette(s32 a, const void* b, s32 c, u8 d) {
     if (b != NULL) {
         LoadPalette(b, (void*)(d * 32 + PLTT), 32);
     }
@@ -872,7 +872,7 @@ TaskDesc gTaskDescLockon = {
 };
 
 u8* gDebugFont2Banks[2] = { gUnk_08F6E190, gUnk_08F6F190 };
-u8* gUnk_09EE26F4 = gWhiteStarText;
-u8* gUnk_09EE26F8 = gBlackStarText;
-u8* gUnk_09EE26FC = gWhiteCircleText;
-u8* gUnk_09EE2700 = gBlackCircleText;
+const u8* gUnk_09EE26F4 = gWhiteStarText;
+const u8* gUnk_09EE26F8 = gBlackStarText;
+const u8* gUnk_09EE26FC = gWhiteCircleText;
+const u8* gUnk_09EE2700 = gBlackCircleText;

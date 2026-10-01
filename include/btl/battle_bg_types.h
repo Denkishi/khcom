@@ -10,7 +10,7 @@ typedef struct BattleBackgroundDef {
     void* palette;
     u16 paletteSize;
     u8 unk_0E[0x2];
-    void* map[4];
+    const void* map[4];
 } BattleBackgroundDef;
 
 typedef struct PcBattleBackgroundDef {

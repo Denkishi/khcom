@@ -10,7 +10,7 @@ typedef u8 TextChar;
 #endif
 
 typedef struct LocalizedText {
-    u8* strings[5];
+    const u8* strings[5];
 } LocalizedText;
 
 typedef struct TextSlot {

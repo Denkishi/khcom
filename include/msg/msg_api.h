@@ -5,7 +5,7 @@
 #include "text_types.h"
 #include "msg_types.h"
 
-extern void* gUnk_09EE4724[4];
+extern const void* gUnk_09EE4724[4];
 
 void RequestEventMode(u16 a);
 u16 InitMsgGlyphSprites(s32 a);
@@ -32,10 +32,10 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag);
 u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d);
 #ifndef VERSION_EU
 u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d);
-s32 CopySjisGlyphsToVram(TextChar* str);
-s32 CopySjisGlyphsToVramAt(TextChar* str, u16 tile);
+s32 CopySjisGlyphsToVram(const TextChar* str);
+s32 CopySjisGlyphsToVramAt(const TextChar* str, u16 tile);
 #endif
-u8 CopyLatinGlyphsToVram(TextChar* str, u16* widths, u16 tile);
+u8 CopyLatinGlyphsToVram(const TextChar* str, u16* widths, u16 tile);
 void DrawCardMsgGlyphs(u8 n);
 void FreeCardMsgGlyphSprites();
 

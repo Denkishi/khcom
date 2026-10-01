@@ -524,8 +524,8 @@ void RELOAD_3(ReloadWork* w) {
 }
 
 void PrizeBoss_0(BossPrizeWork* w, PrizeCardTaskArgs* args) {
-    CardDef* def;
-    CardBack* back;
+    const CardDef* def;
+    const CardBack* back;
     Collider* p;
 
     w->cardId = args->cardId;
@@ -625,8 +625,8 @@ void PrizeBoss_2(BossPrizeWork* w) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
-    CardBack* back;
-    CardDef* def;
+    const CardBack* back;
+    const CardDef* def;
     s16 v;
 
     pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;

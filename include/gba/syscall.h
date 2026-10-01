@@ -39,14 +39,14 @@ typedef struct BgAffineDstData {
 
 void BgAffineSet(BgAffineSrcData* src, BgAffineDstData* dst, s32 count);
 void SoftReset(s32 flags);
-void CpuSet(void* src, void* dst, u32 ctrl);
+void CpuSet(const void* src, void* dst, u32 ctrl);
 void CpuFastSet(void* src, void* dst, s32 ctrl);
 void RegisterRamReset(u32 flags);
 void VBlankIntrWait();
 u32 Sqrt(u32 value);
 
 #ifdef VERSION_EU
-void LZ77UnCompVram(void* src, void* dst);
+void LZ77UnCompVram(const void* src, void* dst);
 void LZ77UnCompWram(void* src, void* dst);
 #endif
 

@@ -35,8 +35,8 @@ const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 
 static void PrizeCard_0(PrizeCardWork* w, PrizeCardTaskArgs* p) {
     PrizeCardTaskArgs args;
-    CardDef* def;
-    CardBack* back;
+    const CardDef* def;
+    const CardBack* back;
     Collider* q;
 
     args = *p;
@@ -283,8 +283,8 @@ static void PrizeCard_2(PrizeCardWork* w) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
-    CardBack* back;
-    CardDef* def;
+    const CardBack* back;
+    const CardDef* def;
     s16 v;
     s32 t;
 

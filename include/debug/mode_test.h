@@ -115,10 +115,10 @@ void func_08060470(u8 bg);
 void DebugTextFree();
 
 extern u8* gDebugFont2Banks[2];
-extern u8* gUnk_09EE26F4;
-extern u8* gUnk_09EE26F8;
-extern u8* gUnk_09EE26FC;
-extern u8* gUnk_09EE2700;
+extern const u8* gUnk_09EE26F4;
+extern const u8* gUnk_09EE26F8;
+extern const u8* gUnk_09EE26FC;
+extern const u8* gUnk_09EE2700;
 
 extern s32* gLockonDoorPosition;
 extern EventState* gEventState;

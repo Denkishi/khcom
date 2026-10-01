@@ -13,7 +13,7 @@
 #include "map_rooms.h"
 #include "types.h"
 
-MapRoomDef* gMapRoomDefs[14] = {
+const MapRoomDef* gMapRoomDefs[14] = {
     &gUnk_0984D2D8,
     &gUnk_0984DFD8,
     &gUnk_0984E734,
@@ -368,7 +368,7 @@ const void* gUnk_09EF8358[6] = {
     gUnk_095C4AB8,
 };
 
-MapFixedDef* gMapFixedDefs[6] = {
+const MapFixedDef* gMapFixedDefs[6] = {
     &gUnk_09856C90,
     &gUnk_09856D34,
     &gUnk_09856DE4,

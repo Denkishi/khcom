@@ -15,7 +15,7 @@ void HeapUnlinkFreeBlock(HeapBlock* b) {
     b->nextFree->prevFree = b->prevFree;
 }
 
-u8 HeapContains(void* p, Heap* heap) {
+u8 HeapContains(const void* p, Heap* heap) {
     if (p != NULL && (u8*)p > (u8*)heap->start && (u8*)p < (u8*)heap->end) {
         return 1;
     }
@@ -146,7 +146,7 @@ void* IwramAlloc(u32 size) {
     return HeapAlloc(size, &gIwramHeap);
 }
 
-void HeapFree(void* p, Heap* heap) {
+void HeapFree(const void* p, Heap* heap) {
     HeapBlock* b;
     HeapBlock* n;
     HeapBlock* head;
@@ -204,7 +204,7 @@ void HeapFree(void* p, Heap* heap) {
     b->self = NULL;
 }
 
-void EwramFree(void* p) {
+void EwramFree(const void* p) {
     HeapFree(p, &gEwramHeap);
 }
 

@@ -7,6 +7,6 @@
 #ifndef VERSION_JP
 s16 GetCenteredTextX(u16* widths, u16 count);
 #endif
-u16 CountNonSpaceChars(TextChar* str);
+u16 CountNonSpaceChars(const TextChar* str);
 
 #endif

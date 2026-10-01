@@ -45,7 +45,7 @@ typedef struct SioWorldEntry {
     void* palette;
     u16 paletteSize;
     u16 unk_16;
-    void* text;
+    const void* text;
     u8 world;
     u8 unk_1D;
     u16 textX;

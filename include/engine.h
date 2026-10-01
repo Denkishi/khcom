@@ -13,7 +13,7 @@ typedef struct ObjTileListEntry {
 } ObjTileListEntry;
 
 typedef struct Dma3Request {
-    void* src;
+    const void* src;
     void* dst;
     u16 size;
 } Dma3Request;

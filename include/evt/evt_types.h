@@ -16,7 +16,7 @@ typedef struct EvtAnimDef {
 } EvtAnimDef;
 
 typedef struct EvtObjAnim {
-    EvtAnimDef* animDef;
+    const EvtAnimDef* animDef;
     u8 unk_04[0x08];
     u16 animId;
     u16 flags;

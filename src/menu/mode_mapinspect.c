@@ -324,7 +324,7 @@ void MapInspectLoadSelectedCard() {
 
 #ifdef VERSION_EU
         {
-            u8** strings = gMapCardDescriptions[p->cardType]->strings;
+            const u8** strings = gMapCardDescriptions[p->cardType]->strings;
             q = &sMapInspectDescTextCount;
             *q = LoadTextSlots((void*)strings[gLanguage], sMapInspectDescText);
         }

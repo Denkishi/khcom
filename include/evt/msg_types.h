@@ -164,7 +164,7 @@ typedef struct EventSequenceDef {
     u8 unk_2C;
 } EventSequenceDef;
 
-extern EventSequenceDef* gEventSequenceDefs[];
+extern const EventSequenceDef* gEventSequenceDefs[];
 
 typedef struct MsgFaceControl {
     u8 portraitId;

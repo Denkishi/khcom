@@ -1504,7 +1504,7 @@ void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* w) {
 }
 
 void LoadDeckExchangeCardNameText(DeckExchangeWork* w, s32 id) {
-    CardDef* def;
+    const CardDef* def;
 
     def = &gCardDefs[id];
     w->textSlotCount4 = LoadTextSlots(def->name, w->textSlots4);
@@ -1531,7 +1531,7 @@ void LoadDeckExchangeCardNameText(DeckExchangeWork* w, s32 id) {
 
 void ShowDeckExchangeCardPreview(DeckExchangeWork* w) {
     DeckCard2Work* node;
-    CardDef* def;
+    const CardDef* def;
     s32 id;
     u8 i;
     u8 j;
@@ -1885,7 +1885,7 @@ s32 TakeTradeCard(DeckExchangeWork* w) {
     u16 i;
     s32 card;
     u16 id;
-    CardDef* def;
+    const CardDef* def;
     u16 kind;
 
     idx = w->cursorCol * 5 + w->cursorRow;

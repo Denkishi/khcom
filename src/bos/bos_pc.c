@@ -27,7 +27,7 @@
 
 void task_bos_pc_3(PcWork* work);
 
-static PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
+static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gUnk_09A42BD8,
     gUnk_09A410FC,
     gUnk_09A41360,
@@ -126,7 +126,7 @@ static PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gUnk_09A4AAD4,
 };
 
-static PcAnimStep* sBosPcAnims[14] = {
+static const PcAnimStep* sBosPcAnims[14] = {
     gBosPcIdleAnim,
     gUnk_09A4B174,
     gUnk_09A4B3B4,
@@ -5130,7 +5130,7 @@ PcAnimStep* BosPcGetAnimStep(PcWork* work) {
 }
 
 PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
-    PcAnimStep* step;
+    const PcAnimStep* step;
 
     if (work->animSteps == NULL) {
         return gUnk_09A3DF34;
@@ -5151,7 +5151,7 @@ void BosPcSetAnim(PcWork* work, s32 a) {
 }
 
 void BosPcUpdateAnim(PcWork* work) {
-    PcAnimStep* step;
+    const PcAnimStep* step;
     s32 cont;
     s32 v;
 
@@ -5222,9 +5222,9 @@ static inline s32 PcLayerDepth(s32 index) {
 }
 
 void BosPcDraw(PcWork* work) {
-    PcAnimStep* step;
-    PcSpriteCmd* cmd;
-    PcSpriteCmd* cmds;
+    const PcAnimStep* step;
+    const PcSpriteCmd* cmd;
+    const PcSpriteCmd* cmds;
     PcSpriteDef* def;
     PcOam* oam;
     void* gfx;
@@ -5347,7 +5347,7 @@ void BosPcDraw(PcWork* work) {
 }
 
 u8 BosPcIsAnimDone(PcWork* work) {
-    PcAnimStep* step;
+    const PcAnimStep* step;
 
     if (work->animSteps != NULL) {
         step = &work->animSteps[work->animIndex];

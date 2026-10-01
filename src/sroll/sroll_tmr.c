@@ -570,7 +570,7 @@ u8 SrollTextGetGlyphWidth(u16 c, u8* font, u8* widths, u32 count) {
     return w;
 }
 
-s32 SrollTextMeasureWidth(SrollWork* w, u8* s) {
+s32 SrollTextMeasureWidth(SrollWork* w, const u8* s) {
     s32 total;
     u16 c;
     s32 hi;

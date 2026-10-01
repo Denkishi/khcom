@@ -448,7 +448,7 @@ void mode_chkbtl_2() {
 }
 
 void ChkBtlSpawnEnemy() {
-    ChkBtlEntry* entry;
+    const ChkBtlEntry* entry;
     ChkBtlPos pos;
 
     entry = &sChkBtlEntries[gChkBtlWork->enemy];

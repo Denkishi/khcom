@@ -11,7 +11,7 @@ typedef struct WorldSelectDef {
     u16 tilesSize;
     u8 unk_0E[0x02];
     void* sprite;
-    void* name;
+    const void* name;
 } WorldSelectDef;
 
 enum WorldId {

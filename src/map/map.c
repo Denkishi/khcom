@@ -1429,7 +1429,7 @@ s32 MapGmkIsPaletteUnused(void* a) {
     return 1;
 }
 
-s32 MapGmkNeedsTiles(u8 flag, void* a) {
+s32 MapGmkNeedsTiles(u8 flag, const void* a) {
     s32 i;
 
     if (flag != 0) {

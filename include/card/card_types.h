@@ -30,7 +30,7 @@ typedef struct CardDef {
     void* gfx;
     void* tiles;
     void* palette;
-    void* name;
+    const void* name;
     void* gfx2;
     void* tiles2;
     void* palette2;

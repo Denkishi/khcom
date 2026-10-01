@@ -439,12 +439,12 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work);
 
 void BosPcFltUpdateSinkEnd(PcFltWork* work);
 void BosPcFltUpdateRise(PcFltWork* work);
-void func_0810BA14(PcFltWork* work);
+void BosPcFltUpdateState6(PcFltWork* work);
 
 void BosPcFltUpdateSink(PcFltWork* work);
 void BosPcFltUpdateSubmerged(PcFltWork* work);
-void func_0810B9DC(PcFltWork* work);
-void func_0810BA3C(PcFltWork* work);
+void BosPcFltUpdateState5(PcFltWork* work);
+void BosPcFltUpdateState7(PcFltWork* work);
 void BosPcFltUpdateGimmick(PcFltWork* work);
 void BosPcFltSyncCollider(PcFltWork* work);
 
@@ -462,7 +462,7 @@ void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c);
 
 void BosPcFldEnableObject(Task* task, u8 a);
 u8 BosLstUpdateHurt(BosLstWork* work);
-u8 func_0810E984(BosLstWork* work);
+u8 BosLstUpdateState5(BosLstWork* work);
 void BosLstInterruptBits(BosLstWork* work);
 
 u8 BosPcIsAnimDone(PcWork* work);

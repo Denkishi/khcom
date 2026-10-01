@@ -2875,7 +2875,7 @@ BosJfMajinUpdateRockAttack	0x080bedf4	876	0x080bb0f8	global
 BosJfMajinUpdateSlam	0x080bf160	916	0x080bb464	global
 BosJfMajinUpdateBeam	0x080bf4f4	976	0x080bb7f8	global
 BosJfMajinUpdateSweepBeam	0x080bf8c4	1296	0x080bbbc8	global
-func_080BFDD4	0x080bfdd4	4	0x080bc0d8	body
+BosJfMajinUpdateState8	0x080bfdd4	4	0x080bc0d8	body
 BosJfMajinUpdateBreak	0x080bfdd8	280	0x080bc0dc	global
 BosJfMajinUpdateGimmick	0x080bfef0	264	0x080bc1f4	global
 BosJfMajinUpdateDefeat	0x080bfff8	608	0x080bc2fc	near
@@ -2918,7 +2918,7 @@ BosDsdMainUpdateCircleAttack	0x080c3188	892	0x080bf48c	global
 BosDsdMainLoopMapFrames	0x080c3504	112	0x080bf808	global
 BosDsdMainUpdateEnergy1Attack	0x080c3574	480	0x080bf878	global
 BosDsdMainUpdateEnergy2Attack	0x080c3754	276	0x080bfa58	global
-func_080C3868	0x080c3868	4	0x080bfb6c	body
+BosDsdMainUpdateState10	0x080c3868	4	0x080bfb6c	body
 BosDsdMainUpdateBreak	0x080c386c	188	0x080bfb70	global
 BosDsdMainUpdateDefeat	0x080c3928	780	0x080bfc2c	global
 BosDsdMainUpdateEventIdle	0x080c3c34	12	0x080bff38	body
@@ -4716,9 +4716,9 @@ BosPcFltUpdateSink	0x0810b8f8	56	0x08109fac	global
 BosPcFltUpdateSinkEnd	0x0810b930	44	0x08109fe4	global
 BosPcFltUpdateSubmerged	0x0810b95c	76	0x0810a010	global
 BosPcFltUpdateRise	0x0810b9a8	52	0x0810a05c	global
-func_0810B9DC	0x0810b9dc	56	0x0810a090	global
-func_0810BA14	0x0810ba14	40	0x0810a0c8	global
-func_0810BA3C	0x0810ba3c	56	0x0810a0f0	global
+BosPcFltUpdateState5	0x0810b9dc	56	0x0810a090	global
+BosPcFltUpdateState6	0x0810ba14	40	0x0810a0c8	global
+BosPcFltUpdateState7	0x0810ba3c	56	0x0810a0f0	global
 BosPcFltUpdateGimmick	0x0810ba74	112	0x0810a128	global
 BosPcFltUpdateMotion	0x0810bae4	496	0x0810a198	global
 BosPcFltSyncCollider	0x0810bcd4	72	0x0810a388	global
@@ -4770,7 +4770,7 @@ BosLstAttackBits	0x0810e524	536	0x0810cc54	global
 BosLstAttackHanabira	0x0810e73c	264	0x0810ce6c	global
 BosLstUpdateAttack	0x0810e844	268	0x0810cf74	global
 BosLstUpdateHurt	0x0810e950	52	0x0810d080	global
-func_0810E984	0x0810e984	24	0x0810d0b4	global
+BosLstUpdateState5	0x0810e984	24	0x0810d0b4	global
 BosLstUpdateBreak	0x0810e99c	516	0x0810d0cc	global
 BosLstUpdateDefeat	0x0810eba0	1012	0x0810d2d0	global
 BosLstUpdateEvent	0x0810ef94	208	0x0810d6c4	global

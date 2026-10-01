@@ -1914,7 +1914,7 @@ u8 BosLstUpdateHurt(BosLstWork* work) {
     return 1;
 }
 
-u8 func_0810E984(BosLstWork* work) {
+u8 BosLstUpdateState5(BosLstWork* work) {
     ClearBtlObjActionFlags(&work->body);
     work->state = 0;
     work->step = 0;
@@ -2483,7 +2483,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
         BosLstUpdateHurt(work);
         break;
     case 5:
-        func_0810E984(work);
+        BosLstUpdateState5(work);
         break;
     case 2:
         BosLstUpdateBreak(work);

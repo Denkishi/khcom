@@ -23,7 +23,7 @@ typedef struct BgFx {
     s32 bg;
     void (*update)();
     s16 timer;
-    s16 unk_0A;
+    s16 steps;
     s16 unk_0C;
     s16 unk_0E;
     s32 x;

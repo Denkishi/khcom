@@ -159,7 +159,7 @@ u8 task_bos_jf_majin_1(JfMajinWork* work) {
         BosJfMajinUpdateSweepBeam(work);
         break;
     case 8:
-        func_080BFDD4(work);
+        BosJfMajinUpdateState8(work);
         break;
     case 6:
         BosJfMajinUpdatePillars(work);
@@ -989,7 +989,7 @@ void BosJfMajinUpdateSweepBeam(JfMajinWork* work) {
     }
 }
 
-void func_080BFDD4(JfMajinWork* work) {
+void BosJfMajinUpdateState8(JfMajinWork* work) {
 }
 
 void BosJfMajinUpdateBreak(JfMajinWork* work) {

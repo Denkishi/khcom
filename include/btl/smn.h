@@ -132,7 +132,7 @@ typedef struct SmnMushuWork {
     u32 state;
     BtlObj body;
     s16 stateTimer;
-    s16 unk_14A;
+    s16 scaleSteps;
     s32 scale;
     u16 unk_150;
     u8 variant;

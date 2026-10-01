@@ -214,7 +214,7 @@ void BosPcFltUpdateRise(PcFltWork* work) {
     }
 }
 
-void func_0810B9DC(PcFltWork* work) {
+void BosPcFltUpdateState5(PcFltWork* work) {
     AnimState* anim;
 
     work->z = work->baseZ;
@@ -228,7 +228,7 @@ void func_0810B9DC(PcFltWork* work) {
     }
 }
 
-void func_0810BA14(PcFltWork* work) {
+void BosPcFltUpdateState6(PcFltWork* work) {
     work->z = work->baseZ;
 
     if (work->shared->unk_02 == 0) {
@@ -238,7 +238,7 @@ void func_0810BA14(PcFltWork* work) {
     }
 }
 
-void func_0810BA3C(PcFltWork* work) {
+void BosPcFltUpdateState7(PcFltWork* work) {
     AnimState* anim;
 
     work->z = work->baseZ;
@@ -354,13 +354,13 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         BosPcFltUpdateRise(work);
         break;
     case 5:
-        func_0810B9DC(work);
+        BosPcFltUpdateState5(work);
         break;
     case 6:
-        func_0810BA14(work);
+        BosPcFltUpdateState6(work);
         break;
     case 7:
-        func_0810BA3C(work);
+        BosPcFltUpdateState7(work);
         break;
     case 8:
         BosPcFltUpdateGimmick(work);

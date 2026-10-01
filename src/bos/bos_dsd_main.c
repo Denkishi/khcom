@@ -136,7 +136,7 @@ u8 task_bos_dsd_main_1(DsdMainWork* work) {
         BosDsdMainUpdateEventIdle(work);
         break;
     case 10:
-        func_080C3868(work);
+        BosDsdMainUpdateState10(work);
         break;
     case 11:
         BosDsdMainUpdateDefeat(work);
@@ -929,7 +929,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
     }
 }
 
-void func_080C3868(DsdMainWork* work) {
+void BosDsdMainUpdateState10(DsdMainWork* work) {
 }
 
 void BosDsdMainUpdateBreak(DsdMainWork* work) {

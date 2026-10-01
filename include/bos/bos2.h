@@ -442,7 +442,7 @@ void BosDsdSetBgMap(u8 index);
 void BosDsdSetBgFrame(u8 index, u16 a);
 void BosDsdItaMoveToward(s32* p, s32 target);
 
-void func_080C3868(DsdMainWork* work);
+void BosDsdMainUpdateState10(DsdMainWork* work);
 void BosDsdMainUpdateEventIdle(DsdMainWork* work);
 void task_bos_dsd_energy1_3();
 void task_bos_jf_lamp_3(JfLampWork* work);
@@ -466,7 +466,7 @@ void BosJfMajinUpdateEventIdle(JfMajinWork* work);
 void BosJfMajinUpdateGimmick(JfMajinWork* work);
 void BosJfMajinChooseAttack(JfMajinWork* work);
 void BosJfMajinUpdateIdle(JfMajinWork* work);
-void func_080BFDD4(JfMajinWork* work);
+void BosJfMajinUpdateState8(JfMajinWork* work);
 void BosJfMajinUpdateBreak(JfMajinWork* work);
 void BosJfMajinUpdateSwitchSide(JfMajinWork* work);
 void BosJfMajinUpdateRockAttack(JfMajinWork* work);

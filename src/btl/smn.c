@@ -1663,7 +1663,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
-    work->unk_14A = 0;
+    work->scaleSteps = 0;
     work->scale = 10;
     work->animating = 0;
     work->unk_150 = 0;
@@ -1714,16 +1714,16 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
     switch (work->state) {
     case 0:
         if (work->stateTimer == 0) {
-            work->unk_14A = 30;
+            work->scaleSteps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_UP);
         }
 
-        ApproachValue(&work->scale, 256, work->unk_14A);
+        ApproachValue(&work->scale, 256, work->scaleSteps);
 
-        if (work->unk_14A > 0) {
+        if (work->scaleSteps > 0) {
             work->stateTimer++;
-            work->unk_14A--;
+            work->scaleSteps--;
         } else {
             work->state = 3;
             work->stateTimer = 0;
@@ -1733,19 +1733,19 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         break;
     case 1:
         if (work->stateTimer == 0) {
-            work->unk_14A = 30;
+            work->scaleSteps = 30;
             BgFxStartSummon(body->x, body->y, body->z);
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
-        ApproachValue(&work->scale, 25, work->unk_14A);
+        ApproachValue(&work->scale, 25, work->scaleSteps);
 
-        if (work->unk_14A <= 0) {
+        if (work->scaleSteps <= 0) {
             return 0;
         }
 
         work->stateTimer++;
-        work->unk_14A--;
+        work->scaleSteps--;
         break;
     case 3:
         AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 2, 0, work->tiles);
@@ -1762,14 +1762,14 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
             switch (work->variant) {
             case 0:
-                work->unk_14A = 0x78;
+                work->scaleSteps = 0x78;
                 break;
             case 1:
-                work->unk_14A = 0xF0;
+                work->scaleSteps = 0xF0;
                 break;
             case 2:
             default:
-                work->unk_14A = 0x1E0;
+                work->scaleSteps = 0x1E0;
                 break;
             }
         }
@@ -1815,7 +1815,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
             BgFxAddPosition(body->x - px, body->y - py, body->z - pz);
         }
 
-        if (work->stateTimer > work->unk_14A) {
+        if (work->stateTimer > work->scaleSteps) {
             work->state = 1;
             work->stateTimer = 0;
         } else {

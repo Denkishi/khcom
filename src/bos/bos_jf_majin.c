@@ -26,8 +26,8 @@
 #include "types.h"
 #include <stddef.h>
 
-void* gBosJfMajinMapBlockTable[4] EWRAM_COMMON(16);
-void* gBosJfMajinMapBlocks EWRAM_COMMON(4);
+const void* gBosJfMajinMapBlockTable[4] EWRAM_COMMON(16);
+const void* gBosJfMajinMapBlocks EWRAM_COMMON(4);
 u8 gUnk_0203B504[12] EWRAM_COMMON(4);
 u8 gBosJfMajinMapBuffer[0x800] EWRAM_COMMON(16);
 

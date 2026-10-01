@@ -154,7 +154,7 @@ typedef struct RikuSpawn {
     u16 flags;
     u16 unk_0E;
     AnimState anim;
-    void* tileSrc;
+    const void* tileSrc;
     s32 scale;
 } RikuSpawn;
 

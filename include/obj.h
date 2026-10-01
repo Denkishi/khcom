@@ -24,7 +24,7 @@ typedef struct PaletteSlot {
 } PaletteSlot;
 
 typedef struct ObjTiles {
-    u8* src;
+    const u8* src;
     u16 refCount;
     u16 index;
     u16 count;

@@ -114,8 +114,8 @@ void SndStreamLock(u32 ch, u32 len, void** dst1, u32* len1, void** dst2,
     }
 }
 
-void SndStreamSetCallbacks(void* (*a)(u32), void* (*b)(u32), void (*c)(void*),
-                   void (*d)(void*)) {
+void SndStreamSetCallbacks(void* (*a)(u32), void* (*b)(u32), void (*c)(const void*),
+                   void (*d)(const void*)) {
     gSndStream.iwramAlloc = a;
     gSndStream.alloc = b;
     gSndStream.iwramFree = c;

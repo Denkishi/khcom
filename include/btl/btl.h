@@ -37,7 +37,7 @@ typedef struct BtlDrawInfo {
     u16 flags;
     u8 unk_0E[0x2];
     AnimState anim;
-    void* tileSrc;
+    const void* tileSrc;
     s32 scale;
 } BtlDrawInfo;
 

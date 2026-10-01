@@ -287,7 +287,7 @@ void FreePrintLayer() {
     EwramFree(gPrintLines);
 }
 
-u8 GetStringLength(u8* p) {
+u8 GetStringLength(const u8* p) {
     u8 n;
 
     n = 0;
@@ -305,7 +305,7 @@ u8 GetStringLength(u8* p) {
     return n + 1;
 }
 
-void PrintString(u8 a, u8 b, u8 c, u8* s) {
+void PrintString(u8 a, u8 b, u8 c, const u8* s) {
     u8 n;
     u8 i;
 

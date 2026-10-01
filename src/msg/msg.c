@@ -1788,10 +1788,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
         u16 v;
         w = 0;
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
-
-        do {
-            sMsgGlyphSprites[sTextEntryCount].y = y + cy;
-        } while (0);
+        sMsgGlyphSprites[sTextEntryCount].y = y + cy;
 
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
@@ -1932,7 +1929,8 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
                     (v == 0x8141 || v == 0x8142 || v > 0x8177 || v == 0x8144 ||
                      (v == 0x8148 || v == 0x8149)) &&
                     cx == 0 && cy > 0) {
-                    cx = px + 0xA00;
+                    cx = px;
+                    cx += 0xA00;
                     cy -= 0xC00;
                     sMsgGlyphSprites[sTextEntryCount].x = x + cx;
                     sMsgGlyphSprites[sTextEntryCount].y = y + cy;

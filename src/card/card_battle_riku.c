@@ -3403,11 +3403,8 @@ u8 RikuCardClosed(CardDisplayWork* p, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)fn);
             return fn(p, a);
         } else {
-            do {
-                fn = RikuCardUpdate;
-                SetTaskUpdate(a, (TaskUpdateFunc)fn);
-            } while (0);
-
+            SetTaskUpdate(a, (TaskUpdateFunc)RikuCardUpdate);
+            fn = RikuCardUpdate;
             return fn(p, a);
         }
     }

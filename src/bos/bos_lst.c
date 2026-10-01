@@ -442,15 +442,11 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     obj = &work->sub[0].body;
     InitEnemyBtlObj(obj, tbl, work->x, work->y, work->z);
 
-    do {
-        work->sub[0].body.flags |= 0x400;
-        SetEnemyHpFromStats(obj, 40, 0x100);
-    } while (0);
-
-    obj = &work->sub[1].body;
-    InitEnemyBtlObj(obj, tbl, work->x, work->y, work->z);
-    work->sub[1].body.flags |= 0x400;
+    work->sub[0].body.flags |= 0x400;
     SetEnemyHpFromStats(obj, 40, 0x100);
+    InitEnemyBtlObj(&work->sub[1].body, tbl, work->x, work->y, work->z);
+    work->sub[1].body.flags |= 0x400;
+    SetEnemyHpFromStats(&work->sub[1].body, 40, 0x100);
     ColliderInit(&work->collider, 8, 20, 20);
     p = &work->collider2;
     ColliderInit(p, 8, 28, 64);

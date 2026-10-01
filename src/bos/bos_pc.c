@@ -5153,12 +5153,13 @@ void BosPcSetAnim(PcWork* work, s32 a) {
 void BosPcUpdateAnim(PcWork* work) {
     const PcAnimStep* step;
     s32 cont;
-    s32 v;
+    s16 index;
 
     cont = work->animTimer >= 0;
 
     while (cont) {
-        step = &work->animSteps[work->animIndex];
+        index = work->animIndex;
+        step = &work->animSteps[index];
 
         switch (step->op) {
         case 0:
@@ -5166,10 +5167,7 @@ void BosPcUpdateAnim(PcWork* work) {
 
             if (work->animTimer > step->duration) {
                 work->animIndex++;
-
-                do {
-                    work->animTimer = 0;
-                } while (0);
+                work->animTimer = 0;
             } else {
                 work->animFrame = work->animIndex;
                 cont = 0;
@@ -5191,13 +5189,11 @@ void BosPcUpdateAnim(PcWork* work) {
 
     if (step->op == 0) {
         if (work->animTimer == 0) {
-            v = work->shared.hpRatio;
-
-            if (v < 0x20) {
+            if (work->shared.hpRatio < 0x20) {
                 work->animTimer += step->duration / 2;
-            } else if (v < 0x40) {
+            } else if (work->shared.hpRatio < 0x40) {
                 work->animTimer += step->duration / 4;
-            } else if (v < 0x80) {
+            } else if (work->shared.hpRatio < 0x80) {
                 work->animTimer += step->duration / 8;
             }
         }

@@ -615,7 +615,7 @@ void MapInspectHandleGridInput() {
     c = sMapInspectGridScroll;
     keys = MapInspectReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         if (GetMapInspectSelectedEntry()->category != 3) {
             MapInspectSelectFirstValue();
             m4aSongNumStart(SONG_SYS_KETTEI);
@@ -624,26 +624,26 @@ void MapInspectHandleGridInput() {
         } else {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 1;
         sMapInspectSteps = 16;
         sMapInspectState = 3;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMapInspectState = 5;
-    } else if (keys & 4) {
+    } else if (keys & SELECT_BUTTON) {
         sMapInspectGridCol = 0;
         sMapInspectGridRow = 0;
         sMapInspectGridScroll = 0;
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         sMapInspectMenuState = 1;
         MapInspectDrawValueCounts();
-    } else if (keys & 0x40) {
+    } else if (keys & DPAD_UP) {
         if (sMapInspectGridRow > 0) {
             sMapInspectGridRow--;
         } else if (sMapInspectGridScroll > 0) {
@@ -653,7 +653,7 @@ void MapInspectHandleGridInput() {
             sMapInspectMenuState = 1;
             MapInspectDrawValueCounts();
         }
-    } else if (keys & 0x80) {
+    } else if (keys & DPAD_DOWN) {
         if ((sMapInspectGridScroll + sMapInspectGridRow + 1) * 3 + sMapInspectGridCol < GetMapInspectTabCount(sMapInspectTab)) {
             if (sMapInspectGridRow > 2) {
                 sMapInspectGridScroll++;
@@ -666,11 +666,11 @@ void MapInspectHandleGridInput() {
                 sMapInspectGridScroll++;
             }
         }
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         if (sMapInspectGridCol > 0) {
             sMapInspectGridCol--;
         }
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         if ((sMapInspectGridScroll + sMapInspectGridRow) * 3 + sMapInspectGridCol + 1 < GetMapInspectTabCount(sMapInspectTab)) {
             if (sMapInspectGridCol <= 1) {
                 sMapInspectGridCol++;
@@ -697,14 +697,14 @@ void MapInspectHandleTabInput() {
     old = sMapInspectTab;
     keys = MapInspectReadMenuKeys();
 
-    if ((keys & 1) == 0) {
-        if (keys & 8) {
+    if ((keys & A_BUTTON) == 0) {
+        if (keys & START_BUTTON) {
             LoadBgMap(0, gUnk_09A3439C, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMapInspectState = 5;
-        } else if (keys & 0x82) {
+        } else if (keys & (B_BUTTON | DPAD_DOWN)) {
             if (GetMapInspectTabCount(sMapInspectTab) > 0) {
                 sMapInspectGridCol = 0;
                 sMapInspectGridRow = 0;
@@ -716,18 +716,18 @@ void MapInspectHandleTabInput() {
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
                 sMapInspectMenuState = 0;
                 MapInspectDrawValueCounts();
-            } else if (keys & 2) {
+            } else if (keys & B_BUTTON) {
                 LoadBgMap(0, gUnk_09A3439C, 0x500);
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMapInspectReturnToMenu = 1;
                 sMapInspectSteps = 16;
                 sMapInspectState = 3;
-            } else if (keys & 0x80) {
+            } else if (keys & DPAD_DOWN) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
-        } else if (keys & 0x20) {
+        } else if (keys & DPAD_LEFT) {
             sMapInspectTab = sMapCardCategoryDefs[sMapInspectTab].leftCategory;
-        } else if (keys & 0x10) {
+        } else if (keys & DPAD_RIGHT) {
             sMapInspectTab = sMapCardCategoryDefs[sMapInspectTab].rightCategory;
         }
     }
@@ -783,7 +783,7 @@ void MapInspectHandleValueInput() {
     trg = MapInspectReadMenuKeys();
     keys = trg;
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         if (MapInspectCanDelete()) {
             sMapInspectConfirmCursor = 1;
             sMapInspectCursorX = 0x7400;
@@ -798,21 +798,21 @@ void MapInspectHandleValueInput() {
             sMapInspectMenuState = 4;
         }
     } else {
-        if (keys & 2) {
+        if (keys & B_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
             sMapInspectMenuState = 0;
-        } else if (keys & 8) {
+        } else if (keys & START_BUTTON) {
             LoadBgMap(0, gUnk_09A3439C, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
             sMapInspectState = 5;
-        } else if (keys & 0x20) {
+        } else if (keys & DPAD_LEFT) {
             MapInspectSelectValueInColumn(p, 0);
-        } else if (keys & 0x10) {
+        } else if (keys & DPAD_RIGHT) {
             MapInspectSelectValueInColumn(p, 1);
-        } else if (keys & 0x40) {
+        } else if (keys & DPAD_UP) {
             for (i = 0; i <= 4; i++) {
                 if (--sMapInspectValueRow < 0) {
                     sMapInspectValueRow = 4;
@@ -822,7 +822,7 @@ void MapInspectHandleValueInput() {
                     break;
                 }
             }
-        } else if (keys & 0x80) {
+        } else if (keys & DPAD_DOWN) {
             for (i = 0; i <= 4; i++) {
                 if (++sMapInspectValueRow > 4) {
                     sMapInspectValueRow = 0;
@@ -849,7 +849,7 @@ void MapInspectHandleConfirmInput() {
     old = sMapInspectConfirmCursor;
     keys = MapInspectReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         sMapInspectCursorX = sMapInspectValueCol * 12288 + 0x9200;
         sMapInspectCursorY = sMapInspectValueRow * 2048 + 0x1000;
         AnimStart(&sMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
@@ -881,7 +881,7 @@ void MapInspectHandleConfirmInput() {
             AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
             sMapInspectMenuState = 2;
         }
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         sMapInspectCursorX = sMapInspectValueCol * 12288 + 0x9200;
         sMapInspectCursorY = sMapInspectValueRow * 2048 + 0x1000;
         AnimStart(&sMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
@@ -889,15 +889,15 @@ void MapInspectHandleConfirmInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
         sMapInspectMenuState = 2;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sMapInspectState = 5;
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         sMapInspectConfirmCursor = 0;
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         sMapInspectConfirmCursor = 1;
     }
 
@@ -911,11 +911,11 @@ void MapInspectHandleNoticeInput() {
 
     keys = MapInspectReadMenuKeys();
 
-    if (keys & 3) {
+    if (keys & (A_BUTTON | B_BUTTON)) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectMenuState = 2;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         LoadBgMap(0, gUnk_09A3439C, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;

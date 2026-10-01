@@ -414,7 +414,7 @@ void WorldInspectHandleInput() {
     old = sWorldInspectCursor;
     keys = WorldInspectReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         if (sWorldInspectWorlds[sWorldInspectCursor] != 0) {
 #ifdef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
@@ -462,7 +462,7 @@ void WorldInspectHandleInput() {
             m4aSongNumStart(SONG_SYS_KETTEI);
             sWorldInspectDetailOpen = 1;
         }
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         LoadBgMap(0, gUnk_09A324DC, 0x500);
 #ifndef VERSION_EU
@@ -471,7 +471,7 @@ void WorldInspectHandleInput() {
         sWorldInspectReturnToMenu = 1;
         sWorldInspectSteps = 16;
         sWorldInspectState = 3;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         LoadBgMap(0, gUnk_09A324DC, 0x500);
 #ifndef VERSION_EU
@@ -480,7 +480,7 @@ void WorldInspectHandleInput() {
         sWorldInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
         sWorldInspectState = 5;
-    } else if (keys & 0x40) {
+    } else if (keys & DPAD_UP) {
         while (1) {
             sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].up;
 
@@ -492,7 +492,7 @@ void WorldInspectHandleInput() {
                 break;
             }
         }
-    } else if (keys & 0x80) {
+    } else if (keys & DPAD_DOWN) {
         while (1) {
             sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].down;
 
@@ -504,7 +504,7 @@ void WorldInspectHandleInput() {
                 break;
             }
         }
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         while (1) {
             sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].left;
 
@@ -516,7 +516,7 @@ void WorldInspectHandleInput() {
                 break;
             }
         }
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         while (1) {
             sWorldInspectCursor = sWorldinspectNavs[sWorldInspectCursor].right;
 
@@ -543,7 +543,7 @@ void WorldInspectHandleDetailInput() {
 
     keys = WorldInspectReadMenuKeys();
 
-    if (keys & 10) {
+    if (keys & (B_BUTTON | START_BUTTON)) {
         m4aSongNumStart(SONG_SYS_CLOSE);
 
         for (i = 0; i < 2; i++) {
@@ -577,7 +577,7 @@ void WorldInspectHandleDetailInput() {
         sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 32);
 #endif
 
-        if (keys & 8) {
+        if (keys & START_BUTTON) {
             LoadBgMap(0, gUnk_09A324DC, 0x500);
 #ifndef VERSION_EU
             sWorldInspectBarPalette = LoadObjPalette(gUnk_09A3D07C, 32);

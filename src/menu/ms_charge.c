@@ -651,24 +651,24 @@ void MsChargeHandleGridInput() {
     oldCE4 = sMsChargeGridScroll;
     keys = MsChargeReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         MsChargeSelectFirstValue();
         m4aSongNumStart(SONG_SYS_KETTEI);
         AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 1;
         sMsChargeMenuState = 2;
         MsChargeDrawPoints();
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 1;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
-    } else if (keys & 4) {
+    } else if (keys & SELECT_BUTTON) {
         sMsChargeGridCol = 0;
         sMsChargeGridRow = 0;
         sMsChargeGridScroll = 0;
@@ -676,7 +676,7 @@ void MsChargeHandleGridInput() {
         m4aSongNumStart(SONG_SYS_CLICKI04B);
         sMsChargeMenuState = 1;
         MsChargeDrawValueCounts();
-    } else if (keys & 0x40) {
+    } else if (keys & DPAD_UP) {
         if (sMsChargeGridRow > 0) {
             sMsChargeGridRow--;
         } else if (sMsChargeGridScroll > 0) {
@@ -687,7 +687,7 @@ void MsChargeHandleGridInput() {
             sMsChargeMenuState = 1;
             MsChargeDrawValueCounts();
         }
-    } else if (keys & 0x80) {
+    } else if (keys & DPAD_DOWN) {
         if ((sMsChargeGridScroll + sMsChargeGridRow + 1) * 3 + sMsChargeGridCol < GetMsChargeTabCount(sMsChargeTab)) {
             if (sMsChargeGridRow <= 2) {
                 sMsChargeGridRow++;
@@ -700,11 +700,11 @@ void MsChargeHandleGridInput() {
                 sMsChargeGridScroll++;
             }
         }
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         if (sMsChargeGridCol > 0) {
             sMsChargeGridCol--;
         }
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         if ((sMsChargeGridScroll + sMsChargeGridRow) * 3 + sMsChargeGridCol + 1 < GetMsChargeTabCount(sMsChargeTab)) {
             if (sMsChargeGridCol <= 1) {
                 sMsChargeGridCol++;
@@ -732,13 +732,13 @@ void MsChargeHandleTabInput() {
     old = sMsChargeTab;
     keys = MsChargeReadMenuKeys();
 
-    if ((keys & 1) == 0) {
-        if (keys & 8) {
+    if ((keys & A_BUTTON) == 0) {
+        if (keys & START_BUTTON) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMsChargeBackToTop = 0;
             FadeStartOut(FADE_MODE_BLACK, 0x10);
             sMsChargeState = 2;
-        } else if (keys & 0x82) {
+        } else if (keys & (B_BUTTON | DPAD_DOWN)) {
             if (GetMsChargeTabCount(sMsChargeTab) > 0) {
                 sMsChargeGridCol = 0;
                 sMsChargeGridRow = 0;
@@ -750,19 +750,19 @@ void MsChargeHandleTabInput() {
                 MsChargeSelectFirstValue();
                 MsChargeDrawValueCounts();
                 MsChargeLoadSelectedCard();
-            } else if (keys & 2) {
+            } else if (keys & B_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMsChargeBackToTop = 1;
                 FadeStartOut(FADE_MODE_BLACK, 0x10);
                 sMsChargeState = 2;
-            } else if (keys & 0x80) {
+            } else if (keys & DPAD_DOWN) {
                 m4aSongNumStart(SONG_SYS_BEEP);
             }
-        } else if (keys & 0x20) {
+        } else if (keys & DPAD_LEFT) {
             if (sMsChargeTab > 0) {
                 sMsChargeTab--;
             }
-        } else if (keys & 0x10) {
+        } else if (keys & DPAD_RIGHT) {
             if (sMsChargeTab <= 3) {
                 sMsChargeTab++;
             }
@@ -820,7 +820,7 @@ void MsChargeHandleValueInput() {
     oldRow = sMsChargeValueRow;
     keys = MsChargeReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         if (GetMooglePoints() + GetMsChargeCardPoints(GetMsChargeSelectedIndex()) > 99999) {
             m4aSongNumStart(SONG_SYS_BEEP);
         } else if (sMsChargeCollectionCount <= 1) {
@@ -835,22 +835,22 @@ void MsChargeHandleValueInput() {
             m4aSongNumStart(SONG_SYS_CANSEL);
             sMsChargeMenuState = 3;
         }
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 0;
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeMenuState = 0;
         MsChargeDrawPoints();
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         MsChargeSelectValueInColumn(card, 0);
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         MsChargeSelectValueInColumn(card, 1);
-    } else if (keys & 0x40) {
+    } else if (keys & DPAD_UP) {
         for (i = 0; i <= 4; i++) {
             sMsChargeValueRow--;
 
@@ -862,7 +862,7 @@ void MsChargeHandleValueInput() {
                 break;
             }
         }
-    } else if (keys & 0x80) {
+    } else if (keys & DPAD_DOWN) {
         for (i = 0; i <= 4; i++) {
             sMsChargeValueRow++;
 
@@ -896,7 +896,7 @@ void MsChargeHandleConfirmInput() {
     old = sMsChargeConfirmCursor;
     keys = MsChargeReadMenuKeys();
 
-    if (keys & 1) {
+    if (keys & A_BUTTON) {
         DisableBg(2);
 
         if (sMsChargeConfirmCursor == 0) {
@@ -937,20 +937,20 @@ void MsChargeHandleConfirmInput() {
             sMsChargeMoogleAnimId = 1;
             sMsChargeMenuState = 2;
         }
-    } else if (keys & 2) {
+    } else if (keys & B_BUTTON) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
         AnimStart(&sMsChargeHighlightAnim, 0, ANIM_FLAG_LOOP);
         sMsChargeMoogleAnimId = 1;
         sMsChargeMenuState = 2;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
         FadeStartOut(FADE_MODE_BLACK, 0x10);
         sMsChargeState = 2;
-    } else if (keys & 0x20) {
+    } else if (keys & DPAD_LEFT) {
         sMsChargeConfirmCursor = 0;
-    } else if (keys & 0x10) {
+    } else if (keys & DPAD_RIGHT) {
         sMsChargeConfirmCursor = 1;
     }
 
@@ -964,11 +964,11 @@ void MsChargeHandleNoticeInput() {
 
     keys = MsChargeReadMenuKeys();
 
-    if (keys & 3) {
+    if (keys & (A_BUTTON | B_BUTTON)) {
         DisableBg(2);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeMenuState = 2;
-    } else if (keys & 8) {
+    } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsChargeBackToTop = 0;
         FadeStartOut(FADE_MODE_BLACK, 0x10);

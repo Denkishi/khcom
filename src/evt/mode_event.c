@@ -182,7 +182,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->unk_1A != 0) {
+    if (p->toMap != 0) {
 #ifdef VERSION_EU
         if (gEventId == 148) {
 #else
@@ -274,7 +274,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->unk_1E != 0) {
+    if (p->toMapFld != 0) {
         AdvanceFloorStory();
         ModeRequest(&gModeMapFld, 0);
         return;

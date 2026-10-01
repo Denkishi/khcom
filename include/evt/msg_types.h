@@ -148,11 +148,11 @@ typedef struct EventSequenceDef {
     const EvSoundCue* soundCues;
     const EventBgEffectEntry* bgEffects;
     u16 endFrame;
-    u8 unk_1A;
+    u8 toMap;
     u8 startsBattle;
     u8 toTitle;
     u8 toCopyright;
-    u8 unk_1E;
+    u8 toMapFld;
     u8 unk_1F;
     u16 battleId;
     u16 nextEvent;

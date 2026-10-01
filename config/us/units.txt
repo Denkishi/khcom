@@ -114,7 +114,10 @@ jiminy_records_index_data.c
 mode_jiminy.c
 common_text.s
 monsgage.c
-btl4.c
+btl_pop_cb.c
+btl_exp.c
+btl_vslockon.c
+btl_hpoth.c
 tutorial.c
 movies.s
 movie_text.c

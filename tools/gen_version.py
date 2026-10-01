@@ -1987,7 +1987,10 @@ TARGET_DATA_SIZE = {
 TARGET_DATA_ADDR = {
     "jp": {
         ("monsgage.c", ".rodata"): 0x0814fc14,
-        ("btl4.c", ".rodata"): 0x0814fc24,
+        ("btl_pop_cb.c", ".rodata"): 0x0814fc24,
+        ("btl_exp.c", ".rodata"): 0x0814fc34,
+        ("btl_vslockon.c", ".rodata"): 0x0814fc44,
+        ("btl_hpoth.c", ".rodata"): 0x0814fc58,
         ("tutorial.c", ".rodata"): 0x0814fc68,
         ("mode_movie.c", ".rodata"): 0x0885df78,
         ("card_stock_info.c", ".rodata"): 0x0900ba1c,
@@ -2011,7 +2014,10 @@ TARGET_DATA_ADDR = {
         ("jiminy_inline_text_data.c", ".rodata"): 0x0888e310,
         ("localized_names_eu.c", ".rodata"): 0x0888e4d4,
         ("monsgage.c", ".rodata"): 0x088964c0,
-        ("btl4.c", ".rodata"): 0x088964d0,
+        ("btl_pop_cb.c", ".rodata"): 0x088964d0,
+        ("btl_exp.c", ".rodata"): 0x088964e0,
+        ("btl_vslockon.c", ".rodata"): 0x088964f0,
+        ("btl_hpoth.c", ".rodata"): 0x08896504,
         ("tutorial.c", ".rodata"): 0x08896514,
         ("mode_test.c", ".rodata"): 0x08896524,
         ("frd_pooh.c", ".rodata"): 0x08896524,

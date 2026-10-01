@@ -119,7 +119,10 @@ save_data.c
 jiminy_inline_text_data.c
 localized_names_eu.c
 monsgage.c
-btl4.c
+btl_pop_cb.c
+btl_exp.c
+btl_vslockon.c
+btl_hpoth.c
 tutorial.c
 mode_test.c
 frd_pooh.c

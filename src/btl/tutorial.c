@@ -2,7 +2,7 @@
 #include "gba/keys.h"
 #include "sprites_btl_hud.h"
 #include "system_state.h"
-#include "btl4_api.h"
+#include "btl_hpoth_api.h"
 #include "anim.h"
 #include "battle_work.h"
 #include "btl_effect.h"

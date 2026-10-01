@@ -1,5 +1,5 @@
-#ifndef GUARD_BTL4_API_H
-#define GUARD_BTL4_API_H
+#ifndef GUARD_BTL_HPOTH_API_H
+#define GUARD_BTL_HPOTH_API_H
 
 #include "types.h"
 

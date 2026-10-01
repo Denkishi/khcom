@@ -22,9 +22,9 @@ void UpdateAllmap();
 void DestroyAllmap();
 
 void mode_allmap_0(s32 a);
-void func_080D3370();
+void AllmapFreezePalette10();
 void mode_allmap_1();
 void mode_allmap_2();
-u8 func_080D3538(u8 a, u8 b);
+u8 AllmapDoorLeadsToHall(u8 a, u8 b);
 
 #endif /* GUARD_MODE_ALLMAP_H */

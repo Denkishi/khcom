@@ -2086,87 +2086,87 @@ void JiminyDetailUpdate() {
         case 1:
             count = 17;
             entries = sJiminyEntry01Details;
-            gJiminyWork->unk_D30 = 0;
+            gJiminyWork->detailLayout = 0;
             break;
         case 2:
             count = 17;
             entries = sJiminyEntry04Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 3:
             count = 14;
             entries = sJiminyEntry05Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 4:
             count = 7;
             entries = sJiminyEntry06Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 5:
             count = 7;
             entries = sJiminyEntry07Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 6:
             count = 49;
             entries = sJiminyEntry08Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 7:
             count = 26;
             entries = sJiminyEntry09Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 8:
             count = 1;
             entries = sJiminyEntry10Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 9:
             count = 25;
             entries = sJiminyEntry11Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         case 10:
             count = 40;
             entries = sJiminyEntry12Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         case 11:
             count = 35;
             entries = sJiminyEntry13Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         case 12:
             count = 6;
             entries = sJiminyEntry15Details;
-            gJiminyWork->unk_D30 = 0;
+            gJiminyWork->detailLayout = 0;
             break;
         case 13:
             count = 22;
             entries = sJiminyEntry16Details;
-            gJiminyWork->unk_D30 = 1;
+            gJiminyWork->detailLayout = 1;
             break;
         case 14:
             count = 14;
             entries = sJiminyEntry18Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         case 15:
             count = 6;
             entries = sJiminyEntry19Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         case 16:
             count = 33;
             entries = sJiminyEntry20Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         default:
             count = 25;
             entries = sJiminyEntry11Details;
-            gJiminyWork->unk_D30 = 2;
+            gJiminyWork->detailLayout = 2;
             break;
         }
 
@@ -2248,7 +2248,7 @@ void JiminyDetailUpdate() {
             }
         }
 
-        switch (gJiminyWork->unk_D30) {
+        switch (gJiminyWork->detailLayout) {
         case 0:
             map0 = gUnk_08F64384;
             map1 = gUnk_08F60384;
@@ -2345,7 +2345,7 @@ void JiminyDetailUpdate() {
             SetObjTileSource(gJiminyWork->tiles8, gJiminyWork->detail->tiles2);
         }
 
-        if (gJiminyWork->unk_D30 == 2) {
+        if (gJiminyWork->detailLayout == 2) {
             source = gUnk_08F63B84;
             dest = (u8*)GetBgScreenBase(0) + 0x8E;
         } else {
@@ -2353,7 +2353,7 @@ void JiminyDetailUpdate() {
             dest = (u8*)GetBgScreenBase(0) + 0x80;
         }
 
-        if (gJiminyWork->unk_D30 < 2) {
+        if (gJiminyWork->detailLayout < 2) {
 #ifdef VERSION_JP
             switch (gJiminyWork->charCount) {
             case 1: source += 0xC0; break;
@@ -2605,7 +2605,7 @@ void JiminyDetailUpdate() {
             gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
     }
 
-    switch (gJiminyWork->unk_D30) {
+    switch (gJiminyWork->detailLayout) {
     case 0:
         if (gJiminyWork->detail->tiles != NULL) {
             DrawSprite(gJiminyWork->detail->x + 0xC8, gJiminyWork->detail->y + 0x5C,

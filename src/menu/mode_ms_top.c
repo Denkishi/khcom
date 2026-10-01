@@ -34,8 +34,8 @@ static s16 sMsTopCursor;
 static void* sMsTopNextMode;
 static struct ObjTiles* sMsTopBarTiles;
 static struct ObjPalette* sMsTopBarPalette;
-static struct ObjTiles* gUnk_020357D0;
-static struct ObjPalette* gUnk_020357D4;
+static struct ObjTiles* sMsTopWorldwarpTiles;
+static struct ObjPalette* sMsTopWorldwarpPalette;
 static AnimState gWorldwarpAnim;
 static struct ObjTiles* sMsTopSoraTiles;
 static struct ObjPalette* sMsTopSoraPalette;
@@ -53,7 +53,7 @@ static s16 sMsTopScrollSteps;
 static s16 sMsTopMoogleWalkDir;
 static s32 sMsTopBg1ScrollX;
 static s32 sMsTopBg0ScrollX;
-static s32 gUnk_02035888;
+static s32 sMsTopObjScrollX;
 static s32 sMsTopMoogleX;
 static s16 sMsTopState;
 static s16 sMsTopSteps;
@@ -339,13 +339,13 @@ void MsTopDraw() {
 
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, NULL, flags, 0x834);
-    DrawSprite((gUnk_02035888 >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
-        AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, NULL, SPRITE_PRIORITY(2), 0x7D0);
+    DrawSprite((sMsTopObjScrollX >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
+        AnimUpdate(&gWorldwarpAnim), sMsTopWorldwarpTiles, sMsTopWorldwarpPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
 
-    DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
+    DrawSprite(sWarpDefs[0].x2 + (sMsTopObjScrollX >> 8), sWarpDefs[0].y2,
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D0);
-    DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
+    DrawSprite(sWarpDefs[0].x2 + (sMsTopObjScrollX >> 8), sWarpDefs[0].y2,
         gUnk_08B22BA8, sMsTopShadowTiles, sMsTopShadowPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D1);
 
@@ -404,12 +404,12 @@ void mode_ms_top_0(u32 a) {
     if (sMsTopCursor == 0) {
         sMsTopBg1ScrollX = 0;
         sMsTopBg0ScrollX = 0;
-        gUnk_02035888 = 0;
+        sMsTopObjScrollX = 0;
         sMsTopMoogleX = 0;
     } else {
         sMsTopBg1ScrollX = -0x6100;
         sMsTopBg0ScrollX = 0x2100;
-        gUnk_02035888 = -0x1C00;
+        sMsTopObjScrollX = -0x1C00;
         sMsTopMoogleX = 0xBC00;
     }
 
@@ -447,8 +447,8 @@ void mode_ms_top_0(u32 a) {
 
     sMsTopBarPalette = LoadObjPalette(gUnk_09A3D7FC, 0x20);
     sMsTopBarTiles = LoadObjTiles(gUnk_099A2B62, 0x400);
-    gUnk_020357D4 = LoadObjPalette(gUnk_09A3D85C, 0x20);
-    gUnk_020357D0 = LoadObjTiles(gUnk_099A36F8, 0x500);
+    sMsTopWorldwarpPalette = LoadObjPalette(gUnk_09A3D85C, 0x20);
+    sMsTopWorldwarpTiles = LoadObjTiles(gUnk_099A36F8, 0x500);
     AnimInit(&gWorldwarpAnim, gUnk_09EF99D0, gUnk_09EF99A8);
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, 0x20);
     sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
@@ -601,7 +601,7 @@ void mode_ms_top_1() {
         UpdateMsTopWarpGfx();
         ApproachValue(&sMsTopBg1ScrollX, 0, sMsTopScrollSteps);
         ApproachValue(&sMsTopBg0ScrollX, 0, sMsTopScrollSteps);
-        ApproachValue(&gUnk_02035888, 0, sMsTopScrollSteps);
+        ApproachValue(&sMsTopObjScrollX, 0, sMsTopScrollSteps);
 
         if (--sMsTopScrollSteps <= 0) {
             sMsTopScrollDir = 0;
@@ -612,7 +612,7 @@ void mode_ms_top_1() {
         UpdateMsTopWarpGfx();
         ApproachValue(&sMsTopBg1ScrollX, -0x6100, sMsTopScrollSteps);
         ApproachValue(&sMsTopBg0ScrollX, 0x2100, sMsTopScrollSteps);
-        ApproachValue(&gUnk_02035888, -0x1C00, sMsTopScrollSteps);
+        ApproachValue(&sMsTopObjScrollX, -0x1C00, sMsTopScrollSteps);
 
         if (--sMsTopScrollSteps <= 0) {
             sMsTopScrollDir = 0;
@@ -683,8 +683,8 @@ void mode_ms_top_2() {
 
     ReleaseObjPalette(sMsTopBarPalette);
     ReleaseObjTiles(sMsTopBarTiles);
-    ReleaseObjPalette(gUnk_020357D4);
-    ReleaseObjTiles(gUnk_020357D0);
+    ReleaseObjPalette(sMsTopWorldwarpPalette);
+    ReleaseObjTiles(sMsTopWorldwarpTiles);
     ReleaseObjPalette(sMsTopSoraPalette);
     ReleaseObjTiles(sMsTopSoraTiles);
     ReleaseObjPalette(sMsTopShadowPalette);

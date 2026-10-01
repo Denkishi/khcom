@@ -124,7 +124,7 @@ u16 gAllmapScrollInTimer EWRAM_COMMON(4);
 static u16 sAllmapPalTimer;
 static u16 sAllmapPalStep;
 static s16 sAllmapBlendTimer;
-static u8 sUnk_02034E40[0x40];
+static u8 sAllmapPalette10Copy[0x40];
 static u8 sAllmapReturnToMenu;
 static u8 sAllmapLowerBgm;
 
@@ -238,10 +238,10 @@ void mode_allmap_0(s32 a) {
     sAllmapPalStep = 0;
 }
 
-void func_080D3370() {
+void AllmapFreezePalette10() {
     FadeSetPaletteExcluded(10, 1);
-    CpuCopy16(gUnk_05000140, sUnk_02034E40, 32);
-    LoadPalette(sUnk_02034E40, gUnk_05000140, 32);
+    CpuCopy16(gUnk_05000140, sAllmapPalette10Copy, 32);
+    LoadPalette(sAllmapPalette10Copy, gUnk_05000140, 32);
 }
 
 void mode_allmap_1() {
@@ -276,7 +276,7 @@ void mode_allmap_1() {
             AllmapSetBlend(sAllmapBlendTimer);
 
             if (sAllmapBlendTimer == 0) {
-                func_080D3370();
+                AllmapFreezePalette10();
             }
         }
 
@@ -318,7 +318,7 @@ void SetAllmapReturnToMenu(u8 a) {
     sAllmapReturnToMenu = a;
 }
 
-u8 func_080D3538(u8 a, u8 b) {
+u8 AllmapDoorLeadsToHall(u8 a, u8 b) {
     u8* p = GetMapRoomLinks(a);
 
     if ((u8)(p[b] + 3) <= 1) {
@@ -328,7 +328,7 @@ u8 func_080D3538(u8 a, u8 b) {
     return 0;
 }
 
-u8 func_080D3564(u8 a, u8 b) {
+u8 AllmapDoorExists(u8 a, u8 b) {
     u16 v = GetMapDoorFlags(a, b);
 
     if (v == 0 || (v & 8) != 0) {
@@ -338,7 +338,7 @@ u8 func_080D3564(u8 a, u8 b) {
     return 1;
 }
 
-u8 func_080D358C(u8 a, u8 b) {
+u8 AllmapDoorIsOpen(u8 a, u8 b) {
     u16 v = GetMapDoorFlags(a, b);
 
     if ((v & 2) != 0) {
@@ -374,13 +374,13 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     mask = 0;
 
     for (i = 0; i < 4; i++) {
-        if (func_080D3564(work->room, i) == 0) {
+        if (AllmapDoorExists(work->room, i) == 0) {
             continue;
         }
 
         mask += 1 << i;
 
-        if (func_080D3538(work->room, i) != 0) {
+        if (AllmapDoorLeadsToHall(work->room, i) != 0) {
             AnimInit(&work->anim[i], gUnk_09EF653C, gUnk_09EF64FC);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
@@ -390,7 +390,7 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
             } else {
                 work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF64FC, 16), gUnk_0976DEDC);
             }
-        } else if (func_080D358C(work->room, i) == 0) {
+        } else if (AllmapDoorIsOpen(work->room, i) == 0) {
             AnimInit(&work->anim[i], gUnk_09EF658C, gUnk_09EF654C);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);

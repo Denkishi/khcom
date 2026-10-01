@@ -192,11 +192,11 @@ static const s16 sMooglePackPrices[4][4] = {
 };
 
 static MooglePackCardWork sMooglePackCards[5];
-static struct ObjPalette* gUnk_02035A30;
-static struct ObjTiles* gUnk_02035A34;
-static struct ObjPalette* gUnk_02035A38;
-static struct ObjTiles* gUnk_02035A3C;
-static struct ObjPalette* gUnk_02035A40;
+static struct ObjPalette* sMooglePackCard00Palette;
+static struct ObjTiles* sMooglePackValueTiles;
+static struct ObjPalette* sMooglePackPremiumValuePalette;
+static struct ObjTiles* sMooglePackPremiumValueTiles;
+static struct ObjPalette* sMooglePackCategoryPalette;
 static TextSlot* sMooglePackNameText;
 static u8 sMooglePackNameTextCount;
 static TextSlot* sMooglePackDescText;
@@ -207,7 +207,7 @@ static TaskPool sMooglePackHosiTasks[5];
 static s32 sMooglePackCursorX;
 static s32 sMooglePackCursorY;
 static struct ObjTiles* sMooglePackCursorTiles;
-static struct ObjPalette* gUnk_02035AE0;
+static struct ObjPalette* sMooglePackCursorPalette;
 static AnimState sMooglePackCursorAnim;
 static u8 sMoogleShopHasPacks;
 static s16 sMoogleShopState;
@@ -457,19 +457,19 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].timer = 0;
     }
 
-    gUnk_02035A30 = LoadObjPalette(gCard00Palette, 0x20);
-    FadeSetPaletteExcluded(gUnk_02035A30->index + 0x10, 1);
-    gUnk_02035A34 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    gUnk_02035A38 = LoadObjPalette(gBStatesPalette, 0x20);
-    FadeSetPaletteExcluded(gUnk_02035A38->index + 0x10, 1);
-    gUnk_02035A3C = LoadObjTiles(gUnk_0905ED36, 0x140);
-    gUnk_02035AE0 = LoadObjPalette(gUnk_09A3DA7C, 0x20);
+    sMooglePackCard00Palette = LoadObjPalette(gCard00Palette, 0x20);
+    FadeSetPaletteExcluded(sMooglePackCard00Palette->index + 0x10, 1);
+    sMooglePackValueTiles = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    sMooglePackPremiumValuePalette = LoadObjPalette(gBStatesPalette, 0x20);
+    FadeSetPaletteExcluded(sMooglePackPremiumValuePalette->index + 0x10, 1);
+    sMooglePackPremiumValueTiles = LoadObjTiles(gUnk_0905ED36, 0x140);
+    sMooglePackCursorPalette = LoadObjPalette(gUnk_09A3DA7C, 0x20);
     sMooglePackCursorTiles = LoadObjTiles(gUnk_099A3CE4, 0x1C0);
     AnimInit(&sMooglePackCursorAnim, gUnk_09EF99F8, gUnk_09EF99D8);
     AnimStart(&sMooglePackCursorAnim, 0, ANIM_FLAG_LOOP);
-    FadeSetPaletteExcluded(gUnk_02035AE0->index + 0x10, 1);
-    gUnk_02035A40 = LoadObjPalette(gUnk_09A3DB7C, 0x20);
-    FadeSetPaletteExcluded(gUnk_02035A40->index + 0x10, 1);
+    FadeSetPaletteExcluded(sMooglePackCursorPalette->index + 0x10, 1);
+    sMooglePackCategoryPalette = LoadObjPalette(gUnk_09A3DB7C, 0x20);
+    FadeSetPaletteExcluded(sMooglePackCategoryPalette->index + 0x10, 1);
     p = &sMooglePackNameText;
     *p = EwramAlloc(0x24 * sizeof(TextSlot));
     InitTextSlots(sMooglePackNameText, 0x24);
@@ -499,21 +499,21 @@ void ReleaseMooglePackOpening() {
         ReleaseObjTiles(sMooglePackCards[i].tiles2);
     }
 
-    FadeSetPaletteExcluded(gUnk_02035AE0->index + 0x10, 0);
-    ReleaseObjPalette(gUnk_02035AE0);
+    FadeSetPaletteExcluded(sMooglePackCursorPalette->index + 0x10, 0);
+    ReleaseObjPalette(sMooglePackCursorPalette);
     ReleaseObjTiles(sMooglePackCursorTiles);
-    FadeSetPaletteExcluded(gUnk_02035A40->index + 0x10, 0);
-    ReleaseObjPalette(gUnk_02035A40);
+    FadeSetPaletteExcluded(sMooglePackCategoryPalette->index + 0x10, 0);
+    ReleaseObjPalette(sMooglePackCategoryPalette);
     FreeTextSlots(sMooglePackNameText, 0x24);
     EwramFree(sMooglePackNameText);
     FreeTextSlots(sMooglePackDescText, 0x5A);
     EwramFree(sMooglePackDescText);
-    FadeSetPaletteExcluded(gUnk_02035A30->index + 0x10, 0);
-    ReleaseObjPalette(gUnk_02035A30);
-    ReleaseObjTiles(gUnk_02035A34);
-    FadeSetPaletteExcluded(gUnk_02035A38->index + 0x10, 0);
-    ReleaseObjPalette(gUnk_02035A38);
-    ReleaseObjTiles(gUnk_02035A3C);
+    FadeSetPaletteExcluded(sMooglePackCard00Palette->index + 0x10, 0);
+    ReleaseObjPalette(sMooglePackCard00Palette);
+    ReleaseObjTiles(sMooglePackValueTiles);
+    FadeSetPaletteExcluded(sMooglePackPremiumValuePalette->index + 0x10, 0);
+    ReleaseObjPalette(sMooglePackPremiumValuePalette);
+    ReleaseObjTiles(sMooglePackPremiumValueTiles);
     ReleaseObjTiles(sMooglePackPremiumTiles);
 
     for (i = 0; i < 5; i++) {
@@ -548,20 +548,20 @@ void DrawMooglePackOpening() {
                 DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, sMooglePackCards[i].gfx, sMooglePackCards[i].tiles, sMooglePackCards[i].palette, affine, 0, 0x58);
 
                 if (sMooglePackCards[i].premium != 0) {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE9894[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], gUnk_02035A3C, gUnk_02035A38, affine, 0, 0x48);
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, anim, sMooglePackPremiumTiles, gUnk_02035A30, affine, 0, 0x40);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE9894[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, anim, sMooglePackPremiumTiles, sMooglePackCard00Palette, affine, 0, 0x40);
                 } else {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE981C[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], gUnk_02035A34, gUnk_02035A30, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE981C[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackValueTiles, sMooglePackCard00Palette, affine, 0, 0x48);
                 }
             }
         }
 
         if (sMooglePackCards[i].state == 9) {
-            DrawTextSlots(0x30, 0x63, sMooglePackNameText, gUnk_02035A40, 0, sMooglePackNameTextCount);
-            DrawTextSlots(0x31, 0x72, sMooglePackDescText, gUnk_02035AE0, 0, sMooglePackDescTextCount);
+            DrawTextSlots(0x30, 0x63, sMooglePackNameText, sMooglePackCategoryPalette, 0, sMooglePackNameTextCount);
+            DrawTextSlots(0x31, 0x72, sMooglePackDescText, sMooglePackCursorPalette, 0, sMooglePackDescTextCount);
             ApproachValueHalf(&sMooglePackCursorX, sMooglePackCards[sMooglePackCardCursor].x - 0x1000);
             ApproachValueHalf(&sMooglePackCursorY, sMooglePackCards[sMooglePackCardCursor].y - 0x2000);
-            DrawSprite(sMooglePackCursorX >> 8, sMooglePackCursorY >> 8, AnimUpdate(&sMooglePackCursorAnim), sMooglePackCursorTiles, gUnk_02035AE0, NULL, 0, 0);
+            DrawSprite(sMooglePackCursorX >> 8, sMooglePackCursorY >> 8, AnimUpdate(&sMooglePackCursorAnim), sMooglePackCursorTiles, sMooglePackCursorPalette, NULL, 0, 0);
         }
     }
 
@@ -708,7 +708,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 for (k = 0; k < 8; k++) {
                     arg0.x = sMooglePackCards[i].x >> 8;
                     arg0.y = sMooglePackCards[i].y >> 8;
-                    arg0.palette = gUnk_02035A40;
+                    arg0.palette = sMooglePackCategoryPalette;
                     arg0.angle = GetRandom() % 96 - 48;
                     arg0.speed = GetRandom() % 256 + 0x1C0;
                     TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg0);
@@ -723,7 +723,7 @@ u8 UpdateMooglePackOpening(u16 a) {
             if (f == 0) {
                 arg0.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                 arg0.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                arg0.palette = gUnk_02035A40;
+                arg0.palette = sMooglePackCategoryPalette;
                 arg0.angle = 0x80;
                 arg0.speed = f;
                 TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg0);
@@ -753,7 +753,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 if (g == 0) {
                     arg1.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                     arg1.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                    arg1.palette = gUnk_02035A40;
+                    arg1.palette = sMooglePackCategoryPalette;
                     arg1.angle = 0x80;
                     arg1.speed = g;
                     TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg1);
@@ -775,7 +775,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                     LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                     sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                     sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                    LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                    LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
                     EnableBg(3);
                     sMooglePackCards[i].state = 9;
                 }
@@ -789,7 +789,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 if (h == 0) {
                     arg2.x = (sMooglePackCards[i].x >> 8) + GetRandom() % 32 - 16;
                     arg2.y = (sMooglePackCards[i].y >> 8) + GetRandom() % 32 - 16;
-                    arg2.palette = gUnk_02035A40;
+                    arg2.palette = sMooglePackCategoryPalette;
                     arg2.angle = 0x80;
                     arg2.speed = h;
                     TaskCreate(&sMooglePackHosiTasks[i], &gTaskDescMsShopHosi, &arg2);
@@ -820,7 +820,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                 LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                 sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                 sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
 

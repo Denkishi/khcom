@@ -133,8 +133,8 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
 
     work->x = arg->x;
     work->y = arg->y;
-    work->unk_090 = -arg->y << 8;
-    work->unk_094 = arg->y << 8;
+    work->dropY = -arg->y << 8;
+    work->dropTargetY = arg->y << 8;
     work->room = arg->room;
     work->asSprite = arg->asSprite;
     work->shape = SetupAllmapRoomDoors(work);
@@ -230,7 +230,7 @@ void* CreateAllmapRoomTask(TaskPool* pool) {
     return TaskCreate(pool, &sTaskDescAllmapRoom, &arg);
 }
 
-u8 func_080D3A70(u8 a, u8 b) {
+u8 AllmapDoorHasCardInfo(u8 a, u8 b) {
     if (GetEventRoomKind(a) != 0) {
         if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_EVENT_DONE) != 0) {
             return 0;
@@ -238,13 +238,13 @@ u8 func_080D3A70(u8 a, u8 b) {
     }
 
     if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) != 0) {
-        return func_080D3564(a, b);
+        return AllmapDoorExists(a, b);
     }
 
     return 0;
 }
 
-u8 func_080D3AB8(u8 a, u8 b) {
+u8 AllmapDoorHasKeyInfo(u8 a, u8 b) {
     if (GetEventRoomKind(a) == 0) {
         if (TestAllmapRoomFlag(a, FLOOR_ROOM_FLAG_VISITED) == 0) {
             return 0;
@@ -259,8 +259,8 @@ u8 func_080D3AB8(u8 a, u8 b) {
         }
     }
 
-    if (func_080D3564(a, b) != 0) {
-        return func_080D358C(a, b) == 0;
+    if (AllmapDoorExists(a, b) != 0) {
+        return AllmapDoorIsOpen(a, b) == 0;
     }
 
     return 0;
@@ -598,9 +598,9 @@ u8 AllmapHasDoorInfo(AllmapCursorPos a) {
 
         if (r != 255) {
             if (GetEventRoomKind(GetAllmapRoomAt(a)) == 2) {
-                v = func_080D3AB8(r, sAllmapReverseDoors[i]);
+                v = AllmapDoorHasKeyInfo(r, sAllmapReverseDoors[i]);
             } else {
-                v = func_080D3A70(r, sAllmapReverseDoors[i]);
+                v = AllmapDoorHasCardInfo(r, sAllmapReverseDoors[i]);
             }
 
             if (v != 0) {
@@ -625,7 +625,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
         pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != MAP_ROOM_NONE && func_080D3A70(room, sAllmapReverseDoors[i])) {
+        if (room != MAP_ROOM_NONE && AllmapDoorHasCardInfo(room, sAllmapReverseDoors[i])) {
             n = GetMapRoomCardValue(room) + 1;
 
             if (n == 10) {
@@ -676,7 +676,7 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         pos.y = work->pos.y + sAllmapDirDeltas[i][1];
         room = GetAllmapRoomAt(pos);
 
-        if (room != MAP_ROOM_NONE && func_080D3AB8(room, sAllmapReverseDoors[i])) {
+        if (room != MAP_ROOM_NONE && AllmapDoorHasKeyInfo(room, sAllmapReverseDoors[i])) {
             break;
         }
     }
@@ -957,7 +957,7 @@ void InitAllmap() {
 
     *state = EwramAlloc(sizeof(AllmapState));
     sAllmapState->lastRoom = MAP_ROOM_NONE;
-    sAllmapState->unk_BC = 0x400;
+    sAllmapState->moveSpeed = 0x400;
     gAllmapCursorRoom = gMapFloorState.room;
     TaskPoolInit(&sAllmapState->tasks, 35);
     sAllmapState->pushaTask = NULL;
@@ -993,7 +993,7 @@ void InitAllmap() {
     arg.x = c->x;
     arg.y = c->y;
     sAllmapState->cursorTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapCursor, &arg);
-    func_080D53F8();
+    AllmapInitDropOffsets();
 }
 
 void AllmapUpdateCamera(AllmapState* s) {
@@ -1080,15 +1080,15 @@ void DestroyAllmap() {
     EwramFree(gUnk_0203C4B4);
 }
 
-u16 func_080D53C4() {
+u16 GetAllmapMoveSpeed() {
     if ((GetKeysHeld() & R_BUTTON) != 0) {
-        return sAllmapState->unk_BC >> 7;
+        return sAllmapState->moveSpeed >> 7;
     }
 
-    return sAllmapState->unk_BC >> 8;
+    return sAllmapState->moveSpeed >> 8;
 }
 
-void func_080D53F8() {
+void AllmapInitDropOffsets() {
     AllmapRoomWork* w;
     AllmapCursorWork* c;
     s32 base;
@@ -1099,8 +1099,8 @@ void func_080D53F8() {
     for (i = 0; i < 32; i++) {
         if (IsTaskActive(sAllmapState->roomTasks[i]) != 0) {
             w = sAllmapState->roomTasks[i]->work;
-            w->unk_094 = (w->y * 24 - gAllmapCameraY) << 8;
-            w->unk_090 = w->unk_094 - base;
+            w->dropTargetY = (w->y * 24 - gAllmapCameraY) << 8;
+            w->dropY = w->dropTargetY - base;
         }
     }
 

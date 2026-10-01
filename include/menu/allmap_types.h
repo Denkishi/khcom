@@ -13,8 +13,8 @@ typedef struct AllmapRoomWork {
     AnimState anim[4];
     s16 x;
     s16 y;
-    s32 unk_090;
-    s32 unk_094;
+    s32 dropY;
+    s32 dropTargetY;
     u8 room;
     u8 unk_099;
     u16 shape;

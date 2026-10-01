@@ -90,7 +90,7 @@ typedef struct AllmapState {
     u16 maxX;
     u16 minY;
     u16 maxY;
-    s32 unk_BC;
+    s32 moveSpeed;
     u8 lastRoom;
     u8 unk_C1[0x03];
 } AllmapState;
@@ -134,10 +134,10 @@ typedef struct AllmapPushaWork {
 
 void AllmapUpdateCamera(AllmapState* s);
 void AllmapHandleInput();
-void func_080D53F8();
+void AllmapInitDropOffsets();
 void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d);
-u8 func_080D3A70(u8 a, u8 b);
-u8 func_080D3AB8(u8 a, u8 b);
+u8 AllmapDoorHasCardInfo(u8 a, u8 b);
+u8 AllmapDoorHasKeyInfo(u8 a, u8 b);
 s16 AllmapDrawRoomnameFrame(u16 a);
 s32 GetAllmapRoomnamePaletteOffset(u8 a);
 void AllmapClearRoomnameFrame();

@@ -52,7 +52,7 @@ static s16 sWorldInspectDetailOpen;
 static u8 sWorldInspectBobPhase;
 static struct ObjPalette* sWorldInspectBarPalette;
 static struct ObjTiles* sWorldInspectBarTiles;
-static struct ObjPalette* gUnk_02035124;
+static struct ObjPalette* sWorldInspectHighlightPalette;
 static struct ObjTiles* sWorldInspectHighlightTiles;
 static AnimState sWorldInspectHighlightAnim;
 static struct ObjPalette* sWorldInspectCursorPalette;
@@ -672,7 +672,7 @@ void WorldInspectDraw() {
     if (sWorldInspectState == 2) {
         DrawSprite(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22,
                       sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12,
-                      AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, gUnk_02035124, NULL, prio, 2013);
+                      AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, sWorldInspectHighlightPalette, NULL, prio, 2013);
         ApproachValueHalf(&sWorldInspectCursorX,
                       (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldInspectCursorY,
@@ -712,7 +712,7 @@ void WorldInspectDraw() {
 
     if (sWorldInspectDetailOpen == 1) {
         if (sWorldInspectDescTextCount != 0) {
-            DrawTextSlots(97, 56, sWorldInspectDescText, gUnk_02035124, 0, sWorldInspectDescTextCount);
+            DrawTextSlots(97, 56, sWorldInspectDescText, sWorldInspectHighlightPalette, 0, sWorldInspectDescTextCount);
         }
 
         DrawSprite(47, (-gSineTable[sWorldInspectBobPhase + 0x40] >> 5) + 84, sWorldInspectDetailSprites[0],
@@ -876,7 +876,7 @@ void mode_worldinspect_0() {
     LoadBgMap(2, gUnk_09A33E9C, 0x500);
     LoadBgMap(3, gUnk_09A3399C, 0x500);
     WorldInspectLoadFloorTiles(sWorldInspectCursor);
-    gUnk_02035124 = LoadObjPalette(gUnk_09A3D09C, 0x20);
+    sWorldInspectHighlightPalette = LoadObjPalette(gUnk_09A3D09C, 0x20);
     sWorldInspectHighlightTiles = LoadObjTiles(gUnk_0999D41A, 0x400);
     AnimInit(&sWorldInspectHighlightAnim, gUnk_09EF97C4, gUnk_09EF97B0);
     AnimStart(&sWorldInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
@@ -1006,7 +1006,7 @@ void mode_worldinspect_2() {
 
     ReleaseObjPalette(sWorldInspectBarPalette);
     ReleaseObjTiles(sWorldInspectBarTiles);
-    ReleaseObjPalette(gUnk_02035124);
+    ReleaseObjPalette(sWorldInspectHighlightPalette);
     ReleaseObjTiles(sWorldInspectHighlightTiles);
     ReleaseObjPalette(sWorldInspectCursorPalette);
     ReleaseObjTiles(sWorldInspectCursorTiles);

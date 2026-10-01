@@ -132,7 +132,7 @@ typedef struct JiminyWork {
     s16 prevDetail;
     JiminyPair pairs[21];
     s32 entry;
-    u32 unk_D30;
+    u32 detailLayout;
     s32 detailTable;
     s32 unk_D38;
     u16 unk_D3C;

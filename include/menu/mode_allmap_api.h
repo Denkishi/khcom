@@ -6,8 +6,8 @@
 struct AllmapRoomWork;
 
 void SetAllmapReturnToMenu(u8 a);
-u8 func_080D3564(u8 a, u8 b);
-u8 func_080D358C(u8 a, u8 b);
+u8 AllmapDoorExists(u8 a, u8 b);
+u8 AllmapDoorIsOpen(u8 a, u8 b);
 s32 SetupAllmapRoomDoors(struct AllmapRoomWork* work);
 s32 GetAllmapRoomPaletteOffset(u8 a);
 

@@ -35,8 +35,8 @@ static s16 sWorldWarpTarget;
 static void* sWorldWarpTilemap;
 static struct ObjTiles* sWorldWarpBarTiles;
 static struct ObjPalette* sWorldWarpBarPalette;
-static struct ObjTiles* gUnk_02035518;
-static struct ObjPalette* gUnk_0203551C;
+static struct ObjTiles* sWorldWarpHighlightTiles;
+static struct ObjPalette* sWorldWarpHighlightPalette;
 static AnimState sWorldWarpHighlightAnim;
 static AnimState gUnk_02035538;
 static struct ObjTiles* sWorldWarpCursorTiles;
@@ -387,7 +387,7 @@ void WorldWarpDraw() {
     if (sWorldWarpState == 2) {
         DrawSprite(sWarpIcons[sWorldWarpCursor].x * 8 + 22,
             sWarpIcons[sWorldWarpCursor].y * 8 + 12,
-            AnimUpdate(&sWorldWarpHighlightAnim), gUnk_02035518, gUnk_0203551C, NULL, SPRITE_PRIORITY(2), 0x898);
+            AnimUpdate(&sWorldWarpHighlightAnim), sWorldWarpHighlightTiles, sWorldWarpHighlightPalette, NULL, SPRITE_PRIORITY(2), 0x898);
         ApproachValueHalf(&sWorldWarpCursorX, (sWarpIcons[sWorldWarpCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldWarpCursorY, (sWarpIcons[sWorldWarpCursor].y << 11) + 0xFFFFFA00);
         DrawSprite(sWorldWarpCursorX >> 8, sWorldWarpCursorY >> 8, AnimUpdate(&sWorldWarpCursorAnim),
@@ -413,13 +413,13 @@ void WorldWarpDraw() {
 
     if (sWorldWarpCurrentNameCount != 0) {
 #ifdef VERSION_EU
-        DrawTextSlots(0x78, 0x0C, sWorldWarpCurrentName, gUnk_0203551C, 0, sWorldWarpCurrentNameCount);
+        DrawTextSlots(0x78, 0x0C, sWorldWarpCurrentName, sWorldWarpHighlightPalette, 0, sWorldWarpCurrentNameCount);
 #else
-        DrawTextSlots(0x80, 0x0C, sWorldWarpCurrentName, gUnk_0203551C, 0, sWorldWarpCurrentNameCount);
+        DrawTextSlots(0x80, 0x0C, sWorldWarpCurrentName, sWorldWarpHighlightPalette, 0, sWorldWarpCurrentNameCount);
 #endif
     }
 
-    DrawSprite(0xB0, 0x1A, AnimUpdate(&gUnk_02035538), gUnk_02035518, gUnk_0203551C, NULL, 0, 2);
+    DrawSprite(0xB0, 0x1A, AnimUpdate(&gUnk_02035538), sWorldWarpHighlightTiles, sWorldWarpHighlightPalette, NULL, 0, 2);
 
     if (sWorldWarpIconSprites[sWorldWarpCursor] != NULL) {
 #ifdef VERSION_EU
@@ -662,8 +662,8 @@ void mode_worldwarp_0() {
 #else
     sWorldWarpBarTiles = LoadObjTiles(gUnk_0999F488, 0x500);
 #endif
-    gUnk_0203551C = LoadObjPalette(gUnk_09A3D59C, 32);
-    gUnk_02035518 = LoadObjTiles(gUnk_0999FA20, 0x680);
+    sWorldWarpHighlightPalette = LoadObjPalette(gUnk_09A3D59C, 32);
+    sWorldWarpHighlightTiles = LoadObjTiles(gUnk_0999FA20, 0x680);
     AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
     AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
     AnimInit(&gUnk_02035538, gUnk_09EF9898, gUnk_09EF9870);
@@ -753,8 +753,8 @@ void mode_worldwarp_2() {
 
     ReleaseObjPalette(sWorldWarpBarPalette);
     ReleaseObjTiles(sWorldWarpBarTiles);
-    ReleaseObjPalette(gUnk_0203551C);
-    ReleaseObjTiles(gUnk_02035518);
+    ReleaseObjPalette(sWorldWarpHighlightPalette);
+    ReleaseObjTiles(sWorldWarpHighlightTiles);
     ReleaseObjPalette(sWorldWarpCursorPalette);
     ReleaseObjTiles(sWorldWarpCursorTiles);
 

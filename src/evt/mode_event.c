@@ -156,27 +156,27 @@ void EventUpdate() {
         return;
     }
 
-    func_08062D3C();
+    SetJiminyFlagsAfterEvent();
 
     if (IsMessageWindowAnswerYes() == 1) {
-        func_0806250C();
+        GrantRewardsAfterEvent();
         SaveAfterEvent();
         return;
     }
 
-    func_08061FC8();
-    func_0806250C();
-    func_080629F8();
-    func_08062D20();
+    SetFriendsAfterEvent();
+    GrantRewardsAfterEvent();
+    UnlockCardKindsAfterEvent();
+    EnterExitHallAfterEvent();
 
     if (gEventState->askedYesNo != 0) {
         if (gEventState->answerYes == 0) {
-            if (func_080629CC() == 0) {
+            if (HandleNoAnswerAfterEvent() == 0) {
                 AdvanceFloorStory();
                 RequestMapMode();
             }
         } else {
-            func_0806297C();
+            HandleYesAnswerAfterEvent();
         }
 
         return;
@@ -594,7 +594,7 @@ void ShowEventEndMessage() {
     }
 }
 
-void func_08061FC8() {
+void SetFriendsAfterEvent() {
     switch (gEventId) {
     case 0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
@@ -732,7 +732,7 @@ void func_08061FC8() {
     }
 }
 
-void func_0806250C() {
+void GrantRewardsAfterEvent() {
     switch (gEventId) {
     case 0:
         gGameState.availableWorlds = 0x200;
@@ -843,7 +843,7 @@ void func_0806250C() {
     }
 }
 
-void func_0806297C() {
+void HandleYesAnswerAfterEvent() {
     const EventSequenceDef* m = gEventSequenceDefs[gEventId];
 
     switch (gEventId) {
@@ -858,7 +858,7 @@ void func_0806297C() {
     }
 }
 
-u8 func_080629CC() {
+u8 HandleNoAnswerAfterEvent() {
     switch (gEventId) {
     case 0x44:
     case 0x53:
@@ -870,7 +870,7 @@ u8 func_080629CC() {
     return 0;
 }
 
-void func_080629F8() {
+void UnlockCardKindsAfterEvent() {
     switch (gEventId) {
     case 2:
         SetCardKindObtained(0);
@@ -954,7 +954,7 @@ void SaveAfterEvent() {
     }
 }
 
-void func_08062D20() {
+void EnterExitHallAfterEvent() {
     switch (gEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
@@ -967,7 +967,7 @@ void func_08062D20() {
     }
 }
 
-void func_08062D3C() {
+void SetJiminyFlagsAfterEvent() {
     switch (gEventId) {
     case 0x43:
         SetJiminyFlag(16);

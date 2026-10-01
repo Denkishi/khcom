@@ -2763,9 +2763,9 @@ void event_seq_0(EventSeqWork* work, u8* a) {
 
                 SetBgAffine(2, 0, 256, 256, 0, 0);
             } else {
-                eu_0806C734(work);
-                eu_0806C7C8(work);
-                eu_0806C848(work);
+                LoadEventBg3(work);
+                LoadEventBg2Map(work);
+                LoadEventBg1(work);
             }
         }
 
@@ -2776,13 +2776,13 @@ void event_seq_0(EventSeqWork* work, u8* a) {
         }
 
         work->timer = 0;
-        eu_0806C974(work);
+        InitEventState(work);
 #endif
     }
 }
 
 #ifdef VERSION_EU
-u8 eu_0806C734(EventSeqWork* work) {
+u8 LoadEventBg3(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
 
     if (u != NULL) {
@@ -2810,7 +2810,7 @@ u8 eu_0806C734(EventSeqWork* work) {
     return 1;
 }
 
-u8 eu_0806C7C8(EventSeqWork* work) {
+u8 LoadEventBg2Map(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
 
     if (u != NULL) {
@@ -2833,7 +2833,7 @@ u8 eu_0806C7C8(EventSeqWork* work) {
     return 1;
 }
 
-u8 eu_0806C848(EventSeqWork* work) {
+u8 LoadEventBg1(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
 
     if (u != NULL) {
@@ -2877,7 +2877,7 @@ u8 eu_0806C848(EventSeqWork* work) {
     return 1;
 }
 
-u8 eu_0806C974(EventSeqWork* work) {
+u8 InitEventState(EventSeqWork* work) {
     EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
     const EventCameraKeyframe* q = work->seqDef->keyframes;
     u16 i;
@@ -3749,17 +3749,17 @@ void SetEventCharaEndAnim(EventCharaWork* p) {
     EvtObjSetAnim(&p->obj, e->unk_14);
 }
 
-u8 _0806E9DC(EventCharaWork* p, void* a) {
+u8 EventCharaHop(EventCharaWork* p, void* a) {
     p->unk_188 = 0x800;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
     p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806EA28);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopUpdate);
     return 1;
 }
 
-u8 func_0806EA28(EventCharaWork* p, void* a) {
+u8 EventCharaHopUpdate(EventCharaWork* p, void* a) {
     u16 x;
     u16 y;
     u8 t;
@@ -3813,17 +3813,17 @@ u8 func_0806EA28(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806EB94(EventCharaWork* p, void* a) {
+u8 EventCharaHopHigh(EventCharaWork* p, void* a) {
     p->unk_188 = 0xC00;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
     p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806EBE0);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopHighUpdate);
     return 1;
 }
 
-u8 func_0806EBE0(EventCharaWork* p, void* a) {
+u8 EventCharaHopHighUpdate(EventCharaWork* p, void* a) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(p);
@@ -3866,17 +3866,17 @@ u8 func_0806EBE0(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806ECE0(EventCharaWork* p, void* a) {
+u8 EventCharaHopLow(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
     p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806ED2C);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopLowUpdate);
     return 1;
 }
 
-u8 func_0806ED2C(EventCharaWork* p, void* a) {
+u8 EventCharaHopLowUpdate(EventCharaWork* p, void* a) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(p);
@@ -3919,17 +3919,17 @@ u8 func_0806ED2C(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806EE20(EventCharaWork* p, void* a) {
+u8 EventCharaDrop(EventCharaWork* p, void* a) {
     p->unk_188 = 0x300;
     p->unk_18C = 0;
     p->unk_1A8 = 0;
     p->unk_198 = p->obj.z;
     TaskPoolUpdate(&p->tasks);
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806EE6C);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaDropUpdate);
     return 1;
 }
 
-u8 func_0806EE6C(EventCharaWork* p, void* a) {
+u8 EventCharaDropUpdate(EventCharaWork* p, void* a) {
     u8 t;
 
     t = AdvanceEventCharaKeyframe(p);
@@ -4134,7 +4134,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806F2EC(void* work, void* a) {
+u8 EventCharaBlendUp(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4161,12 +4161,12 @@ u8 func_0806F2EC(void* work, void* a) {
     gBldAlpha = 16;
     p->unk_1AA = 0;
     p->unk_1A9 = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806F3A8);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendUpUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 func_0806F3A8(EventCharaWork* p, void* a) {
+u8 EventCharaBlendUpUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
@@ -4200,7 +4200,7 @@ u8 func_0806F3A8(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806F47C(void* work, void* a) {
+u8 EventCharaBlendDown(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4227,12 +4227,12 @@ u8 func_0806F47C(void* work, void* a) {
     gBldAlpha = 0x1010;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806F53C);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendDownUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 func_0806F53C(EventCharaWork* p, void* a) {
+u8 EventCharaBlendDownUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
@@ -4266,16 +4266,16 @@ u8 func_0806F53C(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806F610(EventCharaWork* p, void* a) {
+u8 EventCharaCircleSlow(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
     p->unk_190 = p->obj.x;
     p->unk_194 = p->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806F64C);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleSlowUpdate);
     return 1;
 }
 
-u8 func_0806F64C(EventCharaWork* p, void* a) {
+u8 EventCharaCircleSlowUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
@@ -4305,16 +4305,16 @@ u8 func_0806F64C(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806F734(EventCharaWork* p, void* a) {
+u8 EventCharaCircleFast(EventCharaWork* p, void* a) {
     p->unk_18C = 0;
     p->unk_198 = 0;
     p->unk_190 = p->obj.x;
     p->unk_194 = p->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806F770);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleFastUpdate);
     return 1;
 }
 
-u8 func_0806F770(EventCharaWork* p, void* a) {
+u8 EventCharaCircleFastUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
@@ -4344,16 +4344,16 @@ u8 func_0806F770(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806F858(EventCharaWork* p, void* a) {
+u8 EventCharaJitter(EventCharaWork* p, void* a) {
     p->unk_18C = 1;
     p->unk_198 = 0;
     p->unk_190 = p->obj.x;
     p->unk_194 = p->obj.z;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806F898);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaJitterUpdate);
     return 1;
 }
 
-u8 func_0806F898(EventCharaWork* p, void* a) {
+u8 EventCharaJitterUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
@@ -4433,15 +4433,15 @@ void ApplyEventCharaDrawFlags(EventCharaWork* p) {
     }
 }
 
-u8 func_0806FA84(EventCharaWork* p, void* a) {
+u8 EventCharaToggleAnim(EventCharaWork* p, void* a) {
     p->unk_1AA = 0;
     p->unk_1A9 = 0;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806FAB8);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaToggleAnimUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 func_0806FAB8(EventCharaWork* p, void* a) {
+u8 EventCharaToggleAnimUpdate(EventCharaWork* p, void* a) {
     u16 buf[2];
 
     memcpy(buf, sUnk_09033C8C, 4);
@@ -4476,7 +4476,7 @@ u8 func_0806FAB8(EventCharaWork* p, void* a) {
     return 1;
 }
 
-u8 func_0806FB6C(void* work, void* a) {
+u8 EventCharaFadeToBlack(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4503,12 +4503,12 @@ u8 func_0806FB6C(void* work, void* a) {
     gBldAlpha = 16;
     p->unk_1AA = 0;
     p->unk_1A9 = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806FC28);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaFadeToBlackUpdate);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 func_0806FC28(EventCharaWork* p, void* a) {
+u8 EventCharaFadeToBlackUpdate(EventCharaWork* p, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
     p->unk_1AA++;
@@ -7697,7 +7697,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
     }
 
     if (gEventState->flags & EVENT_FLAG_PLAYER_CONTROL) {
-        SetTaskUpdate(task, (TaskUpdateFunc)_08074EC8);
+        SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventCameraFollowPlayer);
     }
 
     if (u != NULL && (u->flags & EVENT_BG_FLAG_POOH_MAP)) {
@@ -7804,7 +7804,7 @@ u8 FindEventCharaTrack(EventCameraWork* p, u8 v) {
     return 0xFF;
 }
 
-u8 _08074EC8(EventCameraWork* p) {
+u8 UpdateEventCameraFollowPlayer(EventCameraWork* p) {
     EventBackgroundDef* t;
     EvtObj* q;
     u8 n;

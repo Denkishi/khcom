@@ -19,7 +19,7 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s);
 void DrawMsgGlyphs(u8 n);
 void FreeMsgGlyphSprites();
 #ifdef VERSION_EU
-s16 eu_0806629C(TextSlot* p, u8 n);
+s16 GetTextSlotsMaxLineWidth(TextSlot* p, u8 n);
 #endif
 s32 LoadTextTileArray(TextChar* a, void** p);
 void FreeSmallFontResources(void* a, void* b);

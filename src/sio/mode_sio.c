@@ -615,7 +615,7 @@ void mode_sio_btl_connect_1() {
         ModeRequest(&gModeSioBtlOption, 0);
     }
 
-    width = eu_0806629C(gSioBtlConnectWork->textSlots, gSioBtlConnectWork->textSlotCount);
+    width = GetTextSlotsMaxLineWidth(gSioBtlConnectWork->textSlots, gSioBtlConnectWork->textSlotCount);
 
     if (gLanguage == LANGUAGE_FRENCH) {
         x = 120 - (width >> 1);
@@ -1033,7 +1033,7 @@ void SioBtlOptionDraw() {
     if (gSioBtlOptionWork->messageVisible == 1) {
         DrawSprite(120, 131, gSioBtlOptionWork->gfx3, gSioBtlOptionWork->tiles3, gSioBtlOptionWork->palette3, NULL, 0, 0xF000);
 #ifdef VERSION_EU
-        width = eu_0806629C(gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->textSlotCount4);
+        width = GetTextSlotsMaxLineWidth(gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->textSlotCount4);
         multiline = 0;
 
         for (i = 0; i < gSioBtlOptionWork->textSlotCount4; i++) {

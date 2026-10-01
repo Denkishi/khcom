@@ -19,13 +19,13 @@ extern u32 gEventId;
 extern u8 gEventEndStep;
 
 void ShowEventEndMessage();
-void func_08061FC8();
-void func_0806250C();
-void func_0806297C();
-u8 func_080629CC();
-void func_080629F8();
+void SetFriendsAfterEvent();
+void GrantRewardsAfterEvent();
+void HandleYesAnswerAfterEvent();
+u8 HandleNoAnswerAfterEvent();
+void UnlockCardKindsAfterEvent();
 void SaveAfterEvent();
-void func_08062D20();
-void func_08062D3C();
+void EnterExitHallAfterEvent();
+void SetJiminyFlagsAfterEvent();
 
 #endif

@@ -91,7 +91,7 @@ void DeckErrorCpInit(DeckConfirmWork* w, u8* a) {
     w->x2 = (207 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
     w->y2 = 62;
 #elif defined(VERSION_EU)
-    w->x2 = (240 - eu_0806629C(w->textSlots2, w->textSlotCount2)) / 2;
+    w->x2 = (240 - GetTextSlotsMaxLineWidth(w->textSlots2, w->textSlotCount2)) / 2;
     w->y2 = 68;
 #else
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
@@ -125,7 +125,7 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* w, u8* a) {
 #ifdef VERSION_JP
     w->x2 = (219 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
 #elif defined(VERSION_EU)
-    w->x2 = (240 - eu_0806629C(w->textSlots2, w->textSlotCount2)) / 2;
+    w->x2 = (240 - GetTextSlotsMaxLineWidth(w->textSlots2, w->textSlotCount2)) / 2;
 #else
     w->x2 = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
 #endif

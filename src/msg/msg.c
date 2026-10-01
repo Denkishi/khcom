@@ -2170,7 +2170,7 @@ s16 GetTextSlotsWidth(TextSlot* p, u8 n) {
 }
 
 #ifdef VERSION_EU
-s16 eu_0806629C(TextSlot* p, u8 n) {
+s16 GetTextSlotsMaxLineWidth(TextSlot* p, u8 n) {
     s16 max = 0;
     s16 x = 0;
     s32 i;

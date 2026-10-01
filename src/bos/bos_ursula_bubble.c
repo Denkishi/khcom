@@ -16,6 +16,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "bos_ursula.h"
 
 #ifdef VERSION_EU
 static UrsulaBubbleWork* sUrsulaBubbleWork;

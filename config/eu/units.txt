@@ -273,6 +273,7 @@ mode_status.c
 status.c
 bos_boogie.c
 bos_boogie_dice.c
+bos_ursula.c
 bos_ursula_bubble.c
 sprites_pooh_frames_1.s
 sprites_evt_frames_5.s

@@ -65,8 +65,9 @@ TaskDesc gTaskDescTitleMenu = {
 
 static const s16 sTitleLumiLevels[3] = {-7, 0, 3};
 
-u8 gTitleLogoScaleDone;
-u8 gTitleObjSlideDone __attribute__((aligned(4)));
+static u8 sTitleLogoScaleDone;
+static u16 sUnk_02034ECE;
+static u8 sTitleObjSlideDone;
 
 void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->sprites[0].tiles = LoadObjTiles(gUnk_0976E9F4, 0x240);
@@ -98,7 +99,7 @@ void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->scale = 0;
     work->unk_48 = 0xC00;
     work->unk_50 = 0;
-    gTitleLogoScaleDone = 0;
+    sTitleLogoScaleDone = 0;
 }
 
 void task_title_logo_0(TitleLogoWork* work) {
@@ -106,14 +107,14 @@ void task_title_logo_0(TitleLogoWork* work) {
 }
 
 u8 task_title_logo_1(TitleLogoWork* work) {
-    if (IsTitleLogoShown() && gTitleLogoScaleDone == 0) {
+    if (IsTitleLogoShown() && sTitleLogoScaleDone == 0) {
         work->unk_48 -= 76;
         work->scale += 6;
 
         if (work->scale > 255) {
             work->scale = 0x100;
             work->unk_48 = 0;
-            gTitleLogoScaleDone = 1;
+            sTitleLogoScaleDone = 1;
         }
     }
 
@@ -185,7 +186,7 @@ void func_080D6548(u8* src, u16* dst, u16 size) {
 }
 
 u8 IsTitleLogoScaleDone() {
-    return gTitleLogoScaleDone;
+    return sTitleLogoScaleDone;
 }
 
 void task_title_obj_0(TitleObjWork* work) {
@@ -312,7 +313,7 @@ void task_title_obj_0(TitleObjWork* work) {
     work->sprites[2].targetX = 0xB800;
     work->sprites[2].y = 0x91;
     work->slideTimer = 30;
-    gTitleObjSlideDone = 0;
+    sTitleObjSlideDone = 0;
     work->slideDelay = 0;
 }
 
@@ -326,7 +327,7 @@ u8 task_title_obj_1(TitleObjWork* work) {
             work->slideTimer--;
 
             if (work->slideTimer == 0) {
-                gTitleObjSlideDone = 1;
+                sTitleObjSlideDone = 1;
             }
         }
     }
@@ -361,7 +362,7 @@ void task_title_obj_3(TitleObjWork* work) {
 }
 
 u8 IsTitleObjSlideDone() {
-    return gTitleObjSlideDone;
+    return sTitleObjSlideDone;
 }
 
 void task_title_menu_0(TitleMenuWork* work, s16* arg) {

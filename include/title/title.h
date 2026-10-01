@@ -43,7 +43,6 @@ typedef struct TitleLumiChangeWork {
     void* gfx;
 } TitleLumiChangeWork;
 
-extern u8 gTitleLogoScaleDone;
 
 u8 IsTitleLogoShown();
 u8 IsTitleIntroDone();

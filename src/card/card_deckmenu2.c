@@ -1388,8 +1388,8 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->palette3 = NULL;
     w->cursorCol = 0;
     w->cursorRow = 0;
-    w->unk_8B3[0] = 0;
-    w->unk_8B3[1] = 0;
+    w->prevCursor[0] = 0;
+    w->prevCursor[1] = 0;
     w->timer = 16;
     w->commandCursor = 0;
     w->cursorCard = NULL;
@@ -1906,8 +1906,8 @@ u8 UpdateDeckMenuDeckGrid(DeckMenuWork* w, void* a) {
     }
 
     w->prevCursorCard = w->cursorCard;
-    w->unk_8B3[0] = w->cursorCol;
-    w->unk_8B3[1] = w->cursorRow;
+    w->prevCursor[0] = w->cursorCol;
+    w->prevCursor[1] = w->cursorRow;
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;

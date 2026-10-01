@@ -46,7 +46,7 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* w, void* a);
 
 static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
     CpuFill32(0, w, sizeof(CardMsgWinWork));
-    w->unk_13C = InitCardMsgGlyphSprites(0, 0);
+    w->glyphPaletteIndex = InitCardMsgGlyphSprites(0, 0);
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
     w->tiles3 = NULL;
@@ -67,7 +67,7 @@ static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
     w->gfx2 = NULL;
     w->gfx3 = NULL;
     w->nextText = NULL;
-    w->unk_13C = 0;
+    w->glyphPaletteIndex = 0;
     w->closeTimer = 0;
     w->steps = 8;
     w->shownChars = 0;

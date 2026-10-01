@@ -2686,7 +2686,7 @@ u8 GetActiveCardValue() {
     return gCardBattleState->activeValue;
 }
 
-s32 GetRikuSelectedCardMove() {
+s32 GetRikuSelectedCardMoveRaw() {
     if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->cardDef->move;
     }
@@ -4036,7 +4036,7 @@ void Bosscard_0(BossCardWork* w, u32* a) {
     w->flipScale = 0x100;
     w->unk_2F = 1;
     w->unk_30 = 1;
-    w->unk_2E = 0;
+    w->bobAngle = 0;
     w->slideSteps = 8;
     w->flipShrinking = 1;
     w->flipTimer = 0;
@@ -4052,7 +4052,7 @@ u8 Bosscard_1(BossCardWork* w, void* a) {
     s32 v;
     u8 z;
 
-    w->unk_2E += 4;
+    w->bobAngle += 4;
 
     if (gCardBattleState->enemyCardUsed == 1) {
         z = 0;

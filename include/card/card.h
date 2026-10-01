@@ -632,7 +632,7 @@ typedef struct DeckMenuWork {
     u8 handVisible;
     u8 view;
     u8 prevView;
-    u8 unk_8B3[2];
+    u8 prevCursor[2];
     s8 savedCol;
     s8 savedRow;
     u8 timer;
@@ -730,8 +730,8 @@ typedef struct RikuDeckMenuWork {
     u8 unk_4DE[8];
     u8 view;
     u8 unk_4E7;
-    u8 unk_4E8;
-    u8 unk_4E9;
+    u8 prevCursorCol;
+    u8 prevCursorRow;
     u8 unk_4EA[2];
     u8 timer;
     u8 unk_4ED;
@@ -1620,7 +1620,7 @@ typedef struct CardMsgWinWork {
     void* gfx2;
     void* gfx3;
     TextChar* nextText;
-    u16 unk_13C;
+    u16 glyphPaletteIndex;
     s16 closeTimer;
     u8 steps;
     u8 shownChars;
@@ -1649,7 +1649,7 @@ typedef struct BossCardWork {
     s16 x;
     u16 y;
     s16 flipScale;
-    u8 unk_2E;
+    u8 bobAngle;
     u8 unk_2F;
     u8 unk_30;
     u8 slideSteps;

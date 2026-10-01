@@ -56,13 +56,13 @@ static const s16 sRikuDeckTabPointerY[3] = { 56, 104, 148 };
 
 const s16 gUnk_09041EC0[5] = { 12, 28, 42, 56, 70 };
 
-const s16 gUnk_09041ECA[6] = { 172, 172, 188, 202, 216, 230 };
+const s16 gRikuDeckFilterTabX[6] = { 172, 172, 188, 202, 216, 230 };
 
 const s16 gUnk_09041ED6[5] = { 64, 82, 100, 118, 136 };
 
-const s16 gUnk_09041EE0[2] = { 80, 128 };
+const s16 gRikuDeckValueGridX[2] = { 80, 128 };
 
-const s16 gUnk_09041EE4[5] = { 80, 88, 96, 104, 112 };
+const s16 gRikuDeckValueGridY[5] = { 80, 88, 96, 104, 112 };
 
 static const u16 sUnk_09041EEE[4] = { 45, 93, 141, 30 };
 
@@ -118,8 +118,8 @@ static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     w->palette2 = NULL;
     w->cursorCol = 0;
     w->cursorRow = 0;
-    w->unk_4E8 = 0;
-    w->unk_4E9 = 0;
+    w->prevCursorCol = 0;
+    w->prevCursorRow = 0;
     w->timer = 4;
     w->unk_500 = 0;
     w->cursorCard = NULL;
@@ -431,9 +431,9 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
 
     w->prevCursorCard = w->cursorCard;
     x = w->cursorCol;
-    w->unk_4E8 = x;
+    w->prevCursorCol = x;
     x = w->cursorRow;
-    w->unk_4E9 = x;
+    w->prevCursorRow = x;
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
     return 1;

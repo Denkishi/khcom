@@ -1824,7 +1824,7 @@ ApplyRikuHcEffect	0x08081760	200	0x08080bf0	xref
 func_08081828	0x08081828	16	0x08080cf4	body
 GetRikuCardListIndex	0x08081838	16	0x08080d04	body
 GetActiveCardValue	0x08081848	16	0x08080d14	body
-GetRikuSelectedCardMove	0x08081858	24	0x08080d24	global
+GetRikuSelectedCardMoveRaw	0x08081858	24	0x08080d24	global
 GetRikuSelectedCardValue	0x08081870	24	0x08080d3c	global
 CanUseRikuSelectedCard	0x08081888	92	0x08080d54	body
 TickRikuHcEffectOnReload	0x080818e4	260	0x08080db0	body

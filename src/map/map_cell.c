@@ -29,20 +29,16 @@ MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);
 struct MapGmkPlacement* gMapGmkPlacements EWRAM_COMMON(4);
 
-MapCell* gMapCells;
-MapPlatform* gMapPlatforms;
-MapDoor* gMapDoors;
-u16 gMapCols;
-u16 gMapRows;
-u16 gMapTopRow;
-u16 gMapBottomRow;
-void* gMapBgBuffer;
-MapRoomDef* gMapRoomDef;
-MapCell* gMapFixCells;
-
-#ifndef VERSION_EU
-u8 gUnk_02034F3C[4];
-#endif
+static MapCell* sMapCells;
+static MapPlatform* sMapPlatforms;
+static MapDoor* sMapDoors;
+static u16 sMapCols;
+static u16 sMapRows;
+static u16 sMapTopRow;
+static u16 sMapBottomRow;
+static void* sMapBgBuffer;
+static MapRoomDef* sMapRoomDef;
+static MapCell* sMapFixCells;
 
 s32 FieldGroundAt(s32 x, s32 y, s32 z) {
     MapCell* p = FieldCellAt(x, y);
@@ -511,15 +507,15 @@ void DestroyMapField() {
 }
 
 MapCell* MapGetCell(s16 x, s16 y) {
-    if (y < 0 || y >= gMapRows) {
+    if (y < 0 || y >= sMapRows) {
         return NULL;
     }
 
-    if (x < 0 || x >= gMapCols) {
+    if (x < 0 || x >= sMapCols) {
         return NULL;
     }
 
-    return &gMapCells[gMapCols * y + x];
+    return &sMapCells[sMapCols * y + x];
 }
 
 void MapCellSetType(MapCell* p, s32 a, s32 b) {
@@ -543,7 +539,7 @@ u8 GetRandomPieceVariant(u8 a) {
 
 void MapCellSetBg3Piece(MapCell* p, s32 n) {
     if (p != NULL) {
-        u16* base = gMapRoomDef->map3;
+        u16* base = sMapRoomDef->map3;
         const u8* q = gUnk_0984D314[n];
         u8 m = GetRandom() % q[3];
         s32 u = ((m & 7) + q[1]) * 4;
@@ -561,11 +557,11 @@ void MapCellSetBg2Piece(MapCell* p, u8 n, u8 v) {
 
         switch (q[0]) {
         case 1:
-            base = gMapRoomDef->map2;
+            base = sMapRoomDef->map2;
             break;
         case 0:
         default:
-            base = gMapRoomDef->map3;
+            base = sMapRoomDef->map3;
             break;
         }
 
@@ -610,7 +606,7 @@ void MapCellSetBg2EdgePiece(MapCell* p, s32 n) {
         return;
     }
 
-    base = gMapRoomDef->map3;
+    base = sMapRoomDef->map3;
     t = gUnk_0984D32C[n];
     r = GetRandom() % t[3];
     off = (r % 8 + t[1]) * 4 + (r / 8 + t[2]) * 64;
@@ -639,7 +635,7 @@ void MapCellSetBg2CornerPiece(MapCell* p, s32 n) {
 
     t = gUnk_0984D32C[n];
     off = t[1] * 4 + t[2] * 64;
-    base = gMapRoomDef->map2;
+    base = sMapRoomDef->map2;
 
     switch (n) {
     case 26:
@@ -672,7 +668,7 @@ void MapCellSetBg2CornerPiece(MapCell* p, s32 n) {
 
 void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v) {
     if (p != NULL) {
-        u16* base = gMapRoomDef->map2;
+        u16* base = sMapRoomDef->map2;
         const u8* q = gUnk_0984D32C[n];
         s32 t;
 
@@ -812,9 +808,9 @@ void MapFindPlatformStairs(MapPlatform* p) {
     x = p->left;
 
     while (x < p->right) {
-        y = gMapTopRow;
+        y = sMapTopRow;
 
-        while (y < gMapBottomRow) {
+        while (y < sMapBottomRow) {
             e = MapGetCell(x, y);
 
             if (e->type == 4 || e->type == 6) {
@@ -860,7 +856,7 @@ void MapPlacePlatformStairs() {
     s32 i;
 
     for (i = 11; i >= 0; i--) {
-        MapPlatform* e = &gMapPlatforms[i];
+        MapPlatform* e = &sMapPlatforms[i];
 
         if (e->z != 0x100000) {
             MapFindPlatformStairs(e);
@@ -946,10 +942,10 @@ void MapFillOutlineCells() {
     s32 dir;
     MapCell* p;
 
-    for (i = 0; i < gMapCols; i++) {
+    for (i = 0; i < sMapCols; i++) {
         dir = 10;
 
-        for (j = 0; j < gMapRows; j++) {
+        for (j = 0; j < sMapRows; j++) {
             p = MapGetCell(i, j);
 
             switch (p->type) {
@@ -977,16 +973,16 @@ void MapFillOutlineCells() {
         }
 
         if (dir == 11) {
-            for (j = 0; j < gMapRows; j++) {
+            for (j = 0; j < sMapRows; j++) {
                 MapCellSetType(MapGetCell(i, j), 7, 0);
             }
         }
     }
 
-    for (i = 0; i < gMapCols; i++) {
+    for (i = 0; i < sMapCols; i++) {
         dir = 10;
 
-        for (j = gMapRows - 1; j >= 0; j--) {
+        for (j = sMapRows - 1; j >= 0; j--) {
             p = MapGetCell(i, j);
 
             switch (p->type) {
@@ -1011,14 +1007,14 @@ void MapFillOutlineCells() {
 }
 
 void MapMarkFloorVariants() {
-    u16 y = gMapBottomRow;
-    u16 n = y - gMapTopRow + 1;
+    u16 y = sMapBottomRow;
+    u16 n = y - sMapTopRow + 1;
     s32 j;
 
     for (j = 0; j < n; j++) {
         u16 x;
 
-        for (x = 0; x < gMapCols; x++) {
+        for (x = 0; x < sMapCols; x++) {
             MapCell* c = MapGetCell(x, y);
             s32 v;
             s32 ok;
@@ -1048,8 +1044,8 @@ void MapMarkFloorVariants() {
             ok = 1;
 
             for (k = 11; k >= 0; k--) {
-                if (gMapPlatforms[k].z != v) {
-                    if (gMapPlatforms[k].z != 0x100000) {
+                if (sMapPlatforms[k].z != v) {
+                    if (sMapPlatforms[k].z != 0x100000) {
                         ok = 0;
                     }
                 } else {
@@ -1074,8 +1070,8 @@ void MapMarkCellEdges() {
     s32 x;
     s32 y;
 
-    for (y = 0; y < gMapRows; y++) {
-        for (x = 0; x < gMapCols - 1; x++) {
+    for (y = 0; y < sMapRows; y++) {
+        for (x = 0; x < sMapCols - 1; x++) {
             MapCell* a = MapGetCell(x, y);
             MapCell* b = MapGetCell(x + 1, y);
             s32 flag = 0;
@@ -1170,8 +1166,8 @@ void MapAssignCellPieces() {
     MapCell* e;
     u8 v;
 
-    for (i = 0; i < gMapCols; i++) {
-        for (j = 0; j < gMapRows; j++) {
+    for (i = 0; i < sMapCols; i++) {
+        for (j = 0; j < sMapRows; j++) {
             e = MapGetCell(i, j);
 
             if (e->bg3Piece != 7) {
@@ -1345,7 +1341,7 @@ void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
     MapCell* p = MapGetCell(x, y);
 
     if (p != NULL) {
-        u16* base = gMapRoomDef->map;
+        u16* base = sMapRoomDef->map;
         const u8* q = gUnk_0984D3F8[n];
         s32 t = q[1] * 4 + q[2] * 64;
         p->bg1Piece = n;
@@ -1562,7 +1558,7 @@ void MapAssignLeftBorderPiece(s16 y) {
 }
 
 void MapAssignRightBorderPiece(s16 j) {
-    s16 x = gMapCols - 1;
+    s16 x = sMapCols - 1;
     MapCell* q = MapGetCell(x, j);
 
     switch (q->bg1Piece) {
@@ -1588,14 +1584,14 @@ void MapAssignBg1Pieces() {
     s32 i;
     s32 j;
 
-    for (i = 0; i < gMapCols; i++) {
-        for (j = 0; j < gMapRows; j++) {
+    for (i = 0; i < sMapCols; i++) {
+        for (j = 0; j < sMapRows; j++) {
             MapAssignWallTopPieces(i, j);
             MapAssignLedgePieces(i, j);
         }
     }
 
-    for (j = 0; j < gMapRows; j++) {
+    for (j = 0; j < sMapRows; j++) {
         MapAssignLeftBorderPiece(j);
         MapAssignRightBorderPiece(j);
     }
@@ -1607,10 +1603,10 @@ void MapComputeCellHeights() {
     s32 z;
     MapCell* p;
 
-    for (i = 0; i < gMapCols; i++) {
+    for (i = 0; i < sMapCols; i++) {
         z = 0x100000;
 
-        for (j = gMapRows - 1; j >= 0; j--) {
+        for (j = sMapRows - 1; j >= 0; j--) {
             p = MapGetCell(i, j);
 
             switch (p->type) {
@@ -1639,10 +1635,10 @@ void MapComputeCellHeights() {
         }
     }
 
-    for (i = 0; i < gMapCols; i++) {
+    for (i = 0; i < sMapCols; i++) {
         z = -0x100000;
 
-        for (j = 0; j < gMapRows; j++) {
+        for (j = 0; j < sMapRows; j++) {
             p = MapGetCell(i, j);
 
             switch (p->type) {
@@ -1686,7 +1682,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
         x = p->left + w * 5 / 8 + GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
+            for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
                 if (q->type == 6 && q->lowerZ == p->z && q->upperZ == -0x100000 && (q->flags & MAP_CELL_FLAG_STAIRS) == 0) {
@@ -1712,7 +1708,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
         x = p->left + w * 5 / 8 + GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
+            for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
                 if (q->type == 3 && q->upperZ == p->z && q->lowerZ == 0x100000 && (q->flags & MAP_CELL_FLAG_STAIRS) == 0) {
@@ -1734,7 +1730,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
         x = p->left + w * 3 / 8 - GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
+            for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
                 if (q->type == 5 && q->upperZ == p->z && q->lowerZ == 0x100000 && (q->flags & MAP_CELL_FLAG_STAIRS) == 0) {
@@ -1756,7 +1752,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
         x = p->left + w * 3 / 8 - GetRandom() % (w >> 2);
 
         for (i = 0; i < w; i++) {
-            for (y = gMapTopRow; y <= gMapBottomRow; y++) {
+            for (y = sMapTopRow; y <= sMapBottomRow; y++) {
                 q = MapGetCell(x, y);
 
                 if (q->type == 4 && q->lowerZ == p->z && q->upperZ == -0x100000 && (q->flags & MAP_CELL_FLAG_STAIRS) == 0) {
@@ -1781,7 +1777,7 @@ void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a) {
 
 s32 MapPlaceLastPlatformDoor() {
     s32 r = 5;
-    MapPlatform* p = &gMapPlatforms[11];
+    MapPlatform* p = &sMapPlatforms[11];
 
     while (p->z == 0x100000) {
         p--;
@@ -1795,7 +1791,7 @@ s32 MapPlaceLastPlatformDoor() {
         r = 2;
         break;
     case 0x6000000:
-        if (p->right == gMapCols) {
+        if (p->right == sMapCols) {
             r = 2;
         } else if (p->left == 0) {
             r = 1;
@@ -1816,7 +1812,7 @@ s32 MapPlaceLastPlatformDoor() {
 }
 
 u8 MapPlaceFirstPlatformDoor(u8 a) {
-    MapPlatform* p = gMapPlatforms;
+    MapPlatform* p = sMapPlatforms;
 
     switch (gMapRoomState->flags & (ROOM_FLAG_DOOR(0) | ROOM_FLAG_DOOR(3))) {
     case 0x1000000:
@@ -1840,9 +1836,9 @@ u8 MapPlaceFirstPlatformDoor(u8 a) {
 }
 
 void MapPlaceRightPlatformDoor(u8 a) {
-    MapPlatform* p = gMapPlatforms;
+    MapPlatform* p = sMapPlatforms;
 
-    while (p->right != gMapCols) {
+    while (p->right != sMapCols) {
         p++;
     }
 
@@ -1850,7 +1846,7 @@ void MapPlaceRightPlatformDoor(u8 a) {
 }
 
 void MapPlaceLeftPlatformDoor(u8 a) {
-    MapPlatform* p = gMapPlatforms;
+    MapPlatform* p = sMapPlatforms;
 
     while (p->left != 0) {
         p++;
@@ -1860,7 +1856,7 @@ void MapPlaceLeftPlatformDoor(u8 a) {
 }
 
 void MapPlaceDoorsOnLastPlatform() {
-    MapPlatform* p = &gMapPlatforms[11];
+    MapPlatform* p = &sMapPlatforms[11];
 
     while (p->z == 0x100000) {
         p--;
@@ -1923,25 +1919,25 @@ void MapComputeRowBounds() {
     s32 i;
     s32 j;
 
-    gMapTopRow = gMapRows;
-    gMapBottomRow = 0;
+    sMapTopRow = sMapRows;
+    sMapBottomRow = 0;
 
-    for (i = 0; i < gMapCols; i++) {
-        for (j = 0; j < gMapRows; j++) {
+    for (i = 0; i < sMapCols; i++) {
+        for (j = 0; j < sMapRows; j++) {
             switch (MapGetCell(i, j)->type) {
             case 2:
             case 4:
             case 6:
-                if (j < gMapTopRow) {
-                    gMapTopRow = j;
+                if (j < sMapTopRow) {
+                    sMapTopRow = j;
                 }
 
                 break;
             case 1:
             case 3:
             case 5:
-                if (j > gMapBottomRow) {
-                    gMapBottomRow = j;
+                if (j > sMapBottomRow) {
+                    sMapBottomRow = j;
                 }
 
                 break;
@@ -2063,10 +2059,10 @@ s32 GetTopEdgeTypeBelowLedge(u8 d, s16 x, s16 y) {
 }
 
 void MapSetPlatform(u8 i, u16 a, u16 b, s16 c) {
-    if (gMapPlatforms[i].z == 0x100000) {
-        gMapPlatforms[i].left = a;
-        gMapPlatforms[i].right = b;
-        gMapPlatforms[i].z = c << 12;
+    if (sMapPlatforms[i].z == 0x100000) {
+        sMapPlatforms[i].left = a;
+        sMapPlatforms[i].right = b;
+        sMapPlatforms[i].z = c << 12;
     }
 }
 
@@ -2084,7 +2080,7 @@ void MapTracePlatformLeftToRight(u8 i, s16 a, s16 b, s16 c, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gMapPlatforms[i].z;
+    v = sMapPlatforms[i].z;
     buf = EwramAlloc(96);
     y = c;
     k = 4;
@@ -2155,7 +2151,7 @@ void MapTracePlatformLeftToRight(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = PickRandomBottomEdgeType(a, b, x);
         }
 
-        if (yn >= gMapRows - 1 && t == 5) {
+        if (yn >= sMapRows - 1 && t == 5) {
             t = 1;
         }
 
@@ -2188,7 +2184,7 @@ void MapTracePlatformRightToLeft(u8 i, s16 a, s16 b, s16 c, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gMapPlatforms[i].z;
+    v = sMapPlatforms[i].z;
     buf = EwramAlloc(96);
     y = c;
     k = 6;
@@ -2259,7 +2255,7 @@ void MapTracePlatformRightToLeft(u8 i, s16 a, s16 b, s16 c, u8 e) {
             t = PickRandomBottomEdgeType(a, b, x);
         }
 
-        if (yn >= gMapRows - 1 && t == 3) {
+        if (yn >= sMapRows - 1 && t == 3) {
             t = 1;
         }
 
@@ -2292,7 +2288,7 @@ void MapTracePlatformOutward(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
     MapCell* q;
     s32 m;
 
-    v = gMapPlatforms[i].z;
+    v = sMapPlatforms[i].z;
     buf = EwramAlloc(96);
     w = buf + c;
     y = d;
@@ -2400,7 +2396,7 @@ void MapTracePlatformOutward(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e) {
             t = PickRandomBottomEdgeType(a, b, x);
         }
 
-        if (yn >= gMapRows - 1 && t == 5) {
+        if (yn >= sMapRows - 1 && t == 5) {
             t = 1;
         }
 
@@ -2426,7 +2422,7 @@ void MapFindLowestEdgeRightward(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi
     for (n = 0; n < -lo + hi; n++) {
         s32 j;
 
-        for (j = gMapRows - 1; j >= 0; j--) {
+        for (j = sMapRows - 1; j >= 0; j--) {
             MapCell* p = MapGetCell(x, j);
 
             if (p->type == a) {
@@ -2460,7 +2456,7 @@ void MapFindLowestEdgeLeftward(s32 a, s16* px, s16* py, s16* pz, s16 e, s16 f) {
     x = e + GetRandom() % (-e + f);
 
     for (i = 0; i < n; i++) {
-        for (j = gMapRows - 1; j >= 0; j--) {
+        for (j = sMapRows - 1; j >= 0; j--) {
             q = MapGetCell(x, j);
 
             if (q->type == a) {
@@ -2491,8 +2487,8 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
     s32 y;
     MapCell* p;
 
-    for (x = 0; x < gMapCols; x++) {
-        for (y = gMapRows - 1; y >= 0; y--) {
+    for (x = 0; x < sMapCols; x++) {
+        for (y = sMapRows - 1; y >= 0; y--) {
             p = MapGetCell(x, y);
 
             if (p->type == 3) {
@@ -2515,8 +2511,8 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
 
     found = 0;
 
-    for (x = gMapCols - 1; x >= 0; x--) {
-        for (y = gMapRows - 1; y >= 0; y--) {
+    for (x = sMapCols - 1; x >= 0; x--) {
+        for (y = sMapRows - 1; y >= 0; y--) {
             p = MapGetCell(x, y);
 
             if (p->type == 5) {
@@ -2537,8 +2533,8 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
         }
     }
 
-    if ((s16)y1 <= gMapRows - gMapRows / 4 &&
-        (s16)y2 <= gMapRows - gMapRows / 4 && (s16)x2 - (s16)x1 > 4) {
+    if ((s16)y1 <= sMapRows - sMapRows / 4 &&
+        (s16)y2 <= sMapRows - sMapRows / 4 && (s16)x2 - (s16)x1 > 4) {
         *a = x1;
         *b = x2;
 
@@ -2563,13 +2559,13 @@ void MapGenerateLayout1() {
     s16 d;
     s16 v;
 
-    d = gMapCols / 2;
-    b = gMapRows / 4;
-    d = gMapCols - d;
-    a = gMapCols;
+    d = sMapCols / 2;
+    b = sMapRows / 4;
+    d = sMapCols - d;
+    a = sMapCols;
     MapSetPlatform(0, d, a, 0);
     MapTracePlatformLeftToRight(0, d, a, b, 2);
-    MapFindLowestEdgeLeftward(5, &a, &b, &c, 0, gMapCols);
+    MapFindLowestEdgeLeftward(5, &a, &b, &c, 0, sMapCols);
     v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
     MapSetPlatform(1, 0, a + 1, v + c);
     MapTracePlatformRightToLeft(1, 0, a + 1, v + b, 0);
@@ -2584,31 +2580,31 @@ void MapGenerateLayout2() {
     s16 v;
     s32 k;
 
-    t = GetRandom() % (gMapCols - 7) + 4;
-    a = GetRandom() % (gMapCols - t - 3) + 2;
+    t = GetRandom() % (sMapCols - 7) + 4;
+    a = GetRandom() % (sMapCols - t - 3) + 2;
     d = a + t;
-    b = gMapRows / 4;
+    b = sMapRows / 4;
     MapSetPlatform(0, a, d, 0);
     MapTracePlatformLeftToRight(0, a, d, b, k = 0);
 
     if (GetRandom() % 100 < 50) {
-        MapFindLowestEdgeRightward(3, &a, &b, &c, k, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, k, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-        MapSetPlatform(1, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, k);
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, gMapCols);
+        MapSetPlatform(1, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, sMapCols, v + b, k);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
         MapSetPlatform(2, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(2, 0, d + 1, v + b, k);
     } else {
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, gMapCols);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, k, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
         MapSetPlatform(1, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(1, 0, d + 1, v + b, k);
-        MapFindLowestEdgeRightward(3, &a, &b, &c, k, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, k, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-        MapSetPlatform(2, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, k);
+        MapSetPlatform(2, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, sMapCols, v + b, k);
     }
 }
 
@@ -2620,31 +2616,31 @@ void MapGenerateLayout4() {
     s16 t;
     s16 v;
 
-    t = GetRandom() % (gMapCols - 9) + 6;
-    a = (gMapCols - t) / 2;
+    t = GetRandom() % (sMapCols - 9) + 6;
+    a = (sMapCols - t) / 2;
     d = a + t;
-    b = gMapRows / 4;
+    b = sMapRows / 4;
     MapSetPlatform(0, a, d, 0);
     MapTracePlatformLeftToRight(0, a, d, b, 2);
 
     if (GetRandom() % 100 < 50) {
-        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1) + 10;
-        MapSetPlatform(1, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, 2);
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        MapSetPlatform(1, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, sMapCols, v + b, 2);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
         MapSetPlatform(2, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(2, 0, d + 1, v + b, 2);
     } else {
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1) + 10;
         MapSetPlatform(1, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(1, 0, d + 1, v + b, 2);
-        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-        MapSetPlatform(2, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, 2);
+        MapSetPlatform(2, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, sMapCols, v + b, 2);
     }
 }
 
@@ -2656,31 +2652,31 @@ void MapGenerateLayout5() {
     s16 t;
     s16 v;
 
-    t = GetRandom() % (gMapCols - 9) + 6;
-    a = (gMapCols - t) / 2;
+    t = GetRandom() % (sMapCols - 9) + 6;
+    a = (sMapCols - t) / 2;
     d = a + t;
-    b = gMapRows / 4;
+    b = sMapRows / 4;
     MapSetPlatform(0, a, d, 0);
     MapTracePlatformLeftToRight(0, a, d, b, 3);
 
     if (GetRandom() % 100 < 50) {
-        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-        MapSetPlatform(1, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(1, a, gMapCols, v + b, 3);
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        MapSetPlatform(1, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(1, a, sMapCols, v + b, 3);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
         MapSetPlatform(2, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(2, 0, d + 1, v + b, 3);
     } else {
-        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeLeftward(5, &d, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
         MapSetPlatform(1, 0, d + 1, v + c);
         MapTracePlatformRightToLeft(1, 0, d + 1, v + b, 3);
-        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+        MapFindLowestEdgeRightward(3, &a, &b, &c, 0, sMapCols);
         v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-        MapSetPlatform(2, a, gMapCols, v + c);
-        MapTracePlatformLeftToRight(2, a, gMapCols, v + b, 3);
+        MapSetPlatform(2, a, sMapCols, v + c);
+        MapTracePlatformLeftToRight(2, a, sMapCols, v + b, 3);
     }
 }
 
@@ -2693,16 +2689,16 @@ void MapGenerateLayout6() {
     s16 v;
     s32 k;
 
-    t = (gMapCols * 5) / 8;
-    a = (gMapCols - t) / 2;
+    t = (sMapCols * 5) / 8;
+    a = (sMapCols - t) / 2;
     d = a + t;
-    b = gMapRows / 4;
+    b = sMapRows / 4;
     MapSetPlatform(0, a, d, 0);
     MapTracePlatformLeftToRight(0, a, d, b, k = 3);
-    MapFindLowestEdgeRightward(3, &a, &b, &c, 0, gMapCols);
+    MapFindLowestEdgeRightward(3, &a, &b, &c, 0, sMapCols);
     v = gMapForm.minHeight + GetRandom() % (gMapForm.maxHeight - gMapForm.minHeight + 1);
-    MapSetPlatform(1, 0, gMapCols, v + c);
-    MapTracePlatformOutward(1, 0, gMapCols, a, v + b, k);
+    MapSetPlatform(1, 0, sMapCols, v + c);
+    MapTracePlatformOutward(1, 0, sMapCols, a, v + b, k);
 }
 
 void MapAddLowerPlatforms(u8 a, u8 b) {
@@ -2735,8 +2731,8 @@ void MapAddLowerPlatforms(u8 a, u8 b) {
 void MapGenerateLayout() {
     switch (gMapForm.layout) {
     case 0:
-        MapSetPlatform(0, 0, gMapCols, 0);
-        MapTracePlatformLeftToRight(0, 0, gMapCols, gMapRows / 4, 0);
+        MapSetPlatform(0, 0, sMapCols, 0);
+        MapTracePlatformLeftToRight(0, 0, sMapCols, sMapRows / 4, 0);
         break;
     case 1:
         MapGenerateLayout1();
@@ -2756,8 +2752,8 @@ void MapGenerateLayout() {
         MapGenerateLayout6();
         break;
     case 7:
-        MapSetPlatform(0, 0, gMapCols, 0);
-        MapTracePlatformLeftToRight(0, 0, gMapCols, gMapRows / 4, 3);
+        MapSetPlatform(0, 0, sMapCols, 0);
+        MapTracePlatformLeftToRight(0, 0, sMapCols, sMapRows / 4, 3);
         MapAddLowerPlatforms(1, 12);
         break;
     case 3:
@@ -2773,39 +2769,39 @@ void MapGenerateRoom(u16 a, u16 b) {
     s32 n;
     void** p;
 
-    gMapRoomDef = gMapRoomDefs[gMapFloorState.world];
-    gMapCols = a;
-    gMapRows = b;
-    p = &gMapBgBuffer;
+    sMapRoomDef = gMapRoomDefs[gMapFloorState.world];
+    sMapCols = a;
+    sMapRows = b;
+    p = &sMapBgBuffer;
     *p = EwramAlloc(0x1800);
 
     if (gGameState.fieldResume == 0) {
-        gMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
-        gMapPlatforms = EwramAlloc(0x120);
-        gMapDoors = EwramAlloc(sizeof(MapDoor) * 4);
-        n = gMapCols * gMapRows;
+        sMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
+        sMapPlatforms = EwramAlloc(0x120);
+        sMapDoors = EwramAlloc(sizeof(MapDoor) * 4);
+        n = sMapCols * sMapRows;
 
         for (i = 0; i < n; i++) {
-            gMapCells[i].flags = 0;
-            gMapCells[i].type = 11;
-            gMapCells[i].bg3Piece = 7;
-            gMapCells[i].bg2Piece = 0;
-            gMapCells[i].bg1Piece = 0;
-            gMapCells[i].bg3Map = NULL;
-            gMapCells[i].bg2Map = NULL;
-            gMapCells[i].bg1Map = NULL;
+            sMapCells[i].flags = 0;
+            sMapCells[i].type = 11;
+            sMapCells[i].bg3Piece = 7;
+            sMapCells[i].bg2Piece = 0;
+            sMapCells[i].bg1Piece = 0;
+            sMapCells[i].bg3Map = NULL;
+            sMapCells[i].bg2Map = NULL;
+            sMapCells[i].bg1Map = NULL;
         }
 
         for (i = 0; i < 12; i++) {
-            gMapPlatforms[i].left = 0;
-            gMapPlatforms[i].right = 0;
-            gMapPlatforms[i].z = 0x100000;
-            gMapPlatforms[i].hasStairs = 0;
-            gMapPlatforms[i].x = 0;
-            gMapPlatforms[i].y = 0;
-            gMapPlatforms[i].spotType = 11;
-            gMapPlatforms[i].spotUpperZ = -0x100000;
-            gMapPlatforms[i].spotLowerZ = 0x100000;
+            sMapPlatforms[i].left = 0;
+            sMapPlatforms[i].right = 0;
+            sMapPlatforms[i].z = 0x100000;
+            sMapPlatforms[i].hasStairs = 0;
+            sMapPlatforms[i].x = 0;
+            sMapPlatforms[i].y = 0;
+            sMapPlatforms[i].spotType = 11;
+            sMapPlatforms[i].spotUpperZ = -0x100000;
+            sMapPlatforms[i].spotLowerZ = 0x100000;
         }
 
         MapGenerateLayout();
@@ -2820,17 +2816,17 @@ void MapGenerateRoom(u16 a, u16 b) {
         MapPlaceDoors();
     }
 
-    gMapRoomState->topRow = gMapTopRow;
-    gMapRoomState->bottomRow = gMapBottomRow;
+    gMapRoomState->topRow = sMapTopRow;
+    gMapRoomState->bottomRow = sMapBottomRow;
 }
 
 void MapFreeRoom() {
-    EwramFree(gMapBgBuffer);
+    EwramFree(sMapBgBuffer);
 
     if (gGameState.fieldResume == 0) {
-        EwramFree(gMapCells);
-        EwramFree(gMapPlatforms);
-        EwramFree(gMapDoors);
+        EwramFree(sMapCells);
+        EwramFree(sMapPlatforms);
+        EwramFree(sMapDoors);
     }
 }
 
@@ -2842,9 +2838,9 @@ void MapDrawBgs(s16 x, s16 y) {
     s16 yy;
     s32 i;
 
-    p0 = gMapBgBuffer;
-    p1 = (u16*)((u8*)gMapBgBuffer + 0x800);
-    p2 = (u16*)((u8*)gMapBgBuffer + 0x1000);
+    p0 = sMapBgBuffer;
+    p1 = (u16*)((u8*)sMapBgBuffer + 0x800);
+    p2 = (u16*)((u8*)sMapBgBuffer + 0x1000);
     x0 = x - 1;
     yy = y - 1;
 
@@ -2893,8 +2889,8 @@ void MapDrawBgs(s16 x, s16 y) {
                 }
             } else {
                 p0[ya * 32 + xa] = 0;
-                p1[ya * 32 + xa] = gMapRoomDef->map2[0x340];
-                p2[ya * 32 + xa] = gMapRoomDef->map[0x110];
+                p1[ya * 32 + xa] = sMapRoomDef->map2[0x340];
+                p2[ya * 32 + xa] = sMapRoomDef->map[0x110];
             }
 
             xx++;
@@ -2914,7 +2910,7 @@ void MapDrawBg1(s32 x, s32 y) {
     s16 yy;
     s32 i;
 
-    dst = (u16*)((u8*)gMapBgBuffer + 0x1000);
+    dst = (u16*)((u8*)sMapBgBuffer + 0x1000);
     x0 = x;
     x0--;
     yy = y;
@@ -2956,7 +2952,7 @@ void MapDrawBg1(s32 x, s32 y) {
                     dst[ya * 32 + xa] = 0;
                 }
             } else {
-                dst[ya * 32 + xa] = gMapRoomDef->map[0x110];
+                dst[ya * 32 + xa] = sMapRoomDef->map[0x110];
             }
 
             xx++;
@@ -3000,8 +2996,8 @@ void MapBuildBgColumn(u16* a, u16* b, u16* c, s16 d, s16 e) {
             }
         } else {
             a[i] = 0;
-            b[i] = gMapRoomDef->map2[0x340];
-            c[i] = gMapRoomDef->map[0x110];
+            b[i] = sMapRoomDef->map2[0x340];
+            c[i] = sMapRoomDef->map[0x110];
         }
 
         e++;
@@ -3055,8 +3051,8 @@ void MapBuildBgRow(u16* a, u16* b, u16* c, s16 d, s16 e) {
             }
         } else {
             a[i] = 0;
-            b[i] = gMapRoomDef->map2[0x340];
-            c[i] = gMapRoomDef->map[0x110];
+            b[i] = sMapRoomDef->map2[0x340];
+            c[i] = sMapRoomDef->map[0x110];
         }
 
         d++;
@@ -3080,13 +3076,13 @@ u8 MapPickFreeFloorPos(FldPos* a, s32* b) {
     s32 i;
     s32 j;
 
-    h = gMapBottomRow - gMapTopRow;
-    x = GetRandom() % gMapCols;
+    h = sMapBottomRow - sMapTopRow;
+    x = GetRandom() % sMapCols;
     y = GetRandom() % h;
 
     for (i = 0; i < h; i++) {
-        for (j = 0; j < gMapCols; j++) {
-            u16 yy = y + gMapTopRow;
+        for (j = 0; j < sMapCols; j++) {
+            u16 yy = y + sMapTopRow;
 
             if ((*(u32*)MapGetCell(x, yy) & 0xFF0340) == 0) {
                 a->x = (x << 13) + 0x1000;
@@ -3095,7 +3091,7 @@ u8 MapPickFreeFloorPos(FldPos* a, s32* b) {
             }
 
             x++;
-            x %= gMapCols;
+            x %= sMapCols;
         }
 
         y++;
@@ -3158,7 +3154,7 @@ MapCell* MapCellAt(s16 x, s16 y) {
 }
 
 MapPlatform* GetMapPlatform(u8 a) {
-    return &gMapPlatforms[a];
+    return &sMapPlatforms[a];
 }
 
 u8* GetMapRoomEvent(u8 a) {
@@ -3170,7 +3166,7 @@ u8* GetMapRoomEvent(u8 a) {
 }
 
 void* GetMapBgBuffer() {
-    return gMapBgBuffer;
+    return sMapBgBuffer;
 }
 
 void LoadMapForm(u8 a) {
@@ -3186,7 +3182,7 @@ u16 GetRandomMapWidth() {
 }
 
 MapDoor* MapGetDoor(u8 a) {
-    return &gMapDoors[a];
+    return &sMapDoors[a];
 }
 
 MapCell* MapFixGetCell(s16 x, s16 y) {
@@ -3194,7 +3190,7 @@ MapCell* MapFixGetCell(s16 x, s16 y) {
         return NULL;
     }
 
-    return &gMapFixCells[gMapRoomState->cols * y + x];
+    return &sMapFixCells[gMapRoomState->cols * y + x];
 }
 
 void MapFixLoadCellTypes(const u8* src) {
@@ -3320,25 +3316,25 @@ void MapFixInitCells(MapFixedDef* p) {
     s32 i;
     s32 n;
 
-    gMapFixCells = EwramAlloc(sizeof(MapCell) * 0xC00);
+    sMapFixCells = EwramAlloc(sizeof(MapCell) * 0xC00);
     n = gMapRoomState->cols * gMapRoomState->rows;
 
     for (i = 0; i < n; i++) {
-        gMapFixCells[i].flags = 0;
-        gMapFixCells[i].type = 11;
-        gMapFixCells[i].bg3Piece = 7;
-        gMapFixCells[i].bg2Piece = 0;
-        gMapFixCells[i].bg1Piece = 0;
-        gMapFixCells[i].bg3Map = NULL;
-        gMapFixCells[i].bg2Map = NULL;
-        gMapFixCells[i].bg1Map = NULL;
+        sMapFixCells[i].flags = 0;
+        sMapFixCells[i].type = 11;
+        sMapFixCells[i].bg3Piece = 7;
+        sMapFixCells[i].bg2Piece = 0;
+        sMapFixCells[i].bg1Piece = 0;
+        sMapFixCells[i].bg3Map = NULL;
+        sMapFixCells[i].bg2Map = NULL;
+        sMapFixCells[i].bg1Map = NULL;
     }
 
     MapFixLoadCellTypes(p->cellTypes);
 }
 
 void MapFixFreeCells() {
-    EwramFree(gMapFixCells);
+    EwramFree(sMapFixCells);
 }
 
 MapCell* MapFixCellAt(s16 a, s16 b) {

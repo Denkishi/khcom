@@ -66,33 +66,31 @@ extern u8 (*gMapGmkSpotFuncs[])(FldPos*);
 extern u8 (*gMapAnmCmds[])(MapAnmSlot*);
 extern u8 gWorldEntryEvents[];
 
-u8 gMapEnmCount;
-u8 gMapEnmTileCount;
-u8 gMapEnmSpawnTimer;
-u32 gUnk_02034F44;
-FldPos gMapEnmSpawnPositions[3];
-u8 gMapGmkCount;
-u8 gMapGmkPaletteCount;
-u16 gMapGmkTileCount;
-EventKeyList* gEventKeyList;
-EventKey gEventKey;
-EventKeyProgress* gEventKeyProgress;
-ModeFunc gMapDbgUpdate;
-u32 gUnk_02034F8C;
-TaskPool gMapDbgTasks;
-u8 gMapDbgEditing;
-void* gMapDbgAllmapRoomTask;
-u32 gUnk_02034FAC;
-ModeFunc gMapFldUpdate;
-Task* gMapFldWorldLogoTask;
-void* gMapFldAllmapRoomTask;
-u8 gUnk_02034FBC;
-u8 gUnk_02034FBD[0x17];
-ModeFunc gMapFixUpdate;
-u8 gMapFixEventDelay;
-NewGameSlotMenuWork* gNewGameSlotMenuWork;
-LoadGameMenuWork* gLoadGameMenuWork;
-MenuMsgWork* gMenuMsgWork;
+static u8 sMapEnmCount;
+static u8 sMapEnmTileCount;
+static u8 sMapEnmSpawnTimer;
+static FldPos sMapEnmSpawnPositions[3];
+static u8 sMapGmkCount;
+static u8 sMapGmkPaletteCount;
+static u16 sMapGmkTileCount;
+static EventKeyList* sEventKeyList;
+static EventKey sEventKey;
+static EventKeyProgress* sEventKeyProgress;
+static ModeFunc sMapDbgUpdate;
+static TaskPool sMapDbgTasks;
+static u8 sMapDbgEditing;
+static void* sMapDbgAllmapRoomTask;
+static u32 sUnk_02034FAC;
+static ModeFunc sMapFldUpdate;
+static Task* sMapFldWorldLogoTask;
+static void* sMapFldAllmapRoomTask;
+static u8 sUnk_02034FBC;
+static u8 sUnk_02034FC0[0x14];
+static ModeFunc sMapFixUpdate;
+static u8 sMapFixEventDelay;
+static NewGameSlotMenuWork* sNewGameSlotMenuWork;
+static LoadGameMenuWork* sLoadGameMenuWork;
+static MenuMsgWork* sMenuMsgWork;
 
 void MapEnmPlaceInView(MapEnmArgs* p) {
     FldPos* q = &p->pos;
@@ -130,8 +128,8 @@ s32 MapEnmPlaceInRoom(MapEnmArgs* p) {
         q->z = t;
         q->y -= t;
 
-        for (i = 0; i < gMapEnmCount; i++) {
-            if (gMapEnmSpawnPositions[i].x >> 8 == q->x >> 8 && gMapEnmSpawnPositions[i].y >> 8 == q->y >> 8) {
+        for (i = 0; i < sMapEnmCount; i++) {
+            if (sMapEnmSpawnPositions[i].x >> 8 == q->x >> 8 && sMapEnmSpawnPositions[i].y >> 8 == q->y >> 8) {
                 return 0;
             }
         }
@@ -257,11 +255,11 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
     t = gUnk_0984D134[gMapRoomState->roomType];
     e = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gMapEnmCount >= t[1]) {
+    if (sMapEnmCount >= t[1]) {
         return;
     }
 
-    if (e->enemiesLeft - gMapEnmCount <= 0) {
+    if (e->enemiesLeft - sMapEnmCount <= 0) {
         return;
     }
 
@@ -282,7 +280,7 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
     }
 
     if (ok) {
-        gMapEnmSpawnPositions[gMapEnmCount] = w->pos;
+        sMapEnmSpawnPositions[sMapEnmCount] = w->pos;
         w->speed = 0;
         w->def = d;
         w->update = NULL;
@@ -484,9 +482,9 @@ void MapEnmInitRoom() {
     MapFloorRoom* e;
     s32 i;
 
-    gMapEnmCount = 0;
-    gMapEnmTileCount = 0;
-    gMapEnmSpawnTimer = 46;
+    sMapEnmCount = 0;
+    sMapEnmTileCount = 0;
+    sMapEnmSpawnTimer = 46;
 
     if (gGameState.fieldResume != 0) {
         q = ListPoolFirst(&gGameState.enemyCachePool);
@@ -533,18 +531,18 @@ void MapEnmUpdateSpawner() {
     t = gUnk_0984D134[gMapRoomState->roomType];
     gFieldState->flags &= ~FIELD_FLAG_ENEMY_FRAME_CHANGED;
 
-    if (gMapEnmSpawnTimer != 0) {
-        gMapEnmSpawnTimer--;
+    if (sMapEnmSpawnTimer != 0) {
+        sMapEnmSpawnTimer--;
         return;
     }
 
     e = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gMapEnmCount >= t[1]) {
+    if (sMapEnmCount >= t[1]) {
         return;
     }
 
-    if (e->enemiesLeft - gMapEnmCount <= 0) {
+    if (e->enemiesLeft - sMapEnmCount <= 0) {
         return;
     }
 
@@ -575,11 +573,11 @@ void MapEnmUpdateSpawner() {
         break;
     }
 
-    if (gMapEnmTileCount + d->tileCount > 256) {
+    if (sMapEnmTileCount + d->tileCount > 256) {
         return;
     }
 
-    gMapEnmSpawnTimer = 30;
+    sMapEnmSpawnTimer = 30;
     MapEnmSetupArgs(&w, d);
     TaskCreate(&gFieldState->tasks4, d->desc, &w);
 }
@@ -605,8 +603,8 @@ void MapEnmInit(MapEnmWork* p, MapEnmArgs* q) {
     p->targetX = e->fieldPosition.x;
     p->targetY = e->fieldPosition.y;
     p->targetZ = e->fieldPosition.z;
-    gMapEnmCount++;
-    gMapEnmTileCount += d->tileCount;
+    sMapEnmCount++;
+    sMapEnmTileCount += d->tileCount;
     p->tiles = AllocObjTiles(d->tileCount * 32, NULL);
     p->palette = LoadObjPalette(d->palette, 32);
     p->gfx = NULL;
@@ -679,8 +677,8 @@ void MapEnmDestroy(MapEnmWork* p) {
         }
     }
 
-    gMapEnmCount--;
-    gMapEnmTileCount -= p->def->tileCount;
+    sMapEnmCount--;
+    sMapEnmTileCount -= p->def->tileCount;
     ColliderUnregister(&p->collider);
     ReleaseObjTiles(p->tiles);
     ReleaseObjPalette(p->palette);
@@ -763,7 +761,7 @@ s32 MapGmkIsAreaSparse(s16 x, s16 y) {
 
     n = 0;
 
-    for (i = 0; i < gMapGmkCount; i++) {
+    for (i = 0; i < sMapGmkCount; i++) {
         cx = (gMapGmkPlacements[i].pos.x >> 8) / 32;
         cy = ((gMapGmkPlacements[i].pos.y + gMapGmkPlacements[i].pos.z) >> 8) / 16;
 
@@ -1420,7 +1418,7 @@ u8 MapGmkFindSpot(FldPos* a, u8 b) {
 s32 MapGmkIsPaletteUnused(void* a) {
     s32 i;
 
-    for (i = 0; i < gMapGmkCount; i++) {
+    for (i = 0; i < sMapGmkCount; i++) {
         if (gMapGmkPlacements[i].def->palette == a) {
             return 0;
         }
@@ -1436,7 +1434,7 @@ s32 MapGmkNeedsTiles(u8 flag, const void* a) {
         return 1;
     }
 
-    for (i = 0; i < gMapGmkCount; i++) {
+    for (i = 0; i < sMapGmkCount; i++) {
         if (gMapGmkPlacements[i].def->tiles == a) {
             return 0;
         }
@@ -1452,8 +1450,8 @@ void MapGmkReserveJump() {
         MapPlatform* p = GetMapPlatform(i);
 
         if (p->hasStairs == 0 && p->spotLowerZ != 0x100000) {
-            gMapGmkTileCount += 0x4C;
-            gMapGmkPaletteCount++;
+            sMapGmkTileCount += 0x4C;
+            sMapGmkPaletteCount++;
             break;
         }
     }
@@ -1471,7 +1469,7 @@ void MapGmkPlaceGmk01() {
         u8* n;
 
         q = &gMapGmk01Def;
-        n = &gMapGmkCount;
+        n = &sMapGmkCount;
 
         for (i = 1; i >= 0; i--) {
             s32 size;
@@ -1486,8 +1484,8 @@ void MapGmkPlaceGmk01() {
 
             gMapGmkPlacements[*n].def = q;
             gMapGmkPlacements[*n].pos = w;
-            gMapGmkTileCount += (size = q->tilesSize) / 32;
-            gMapGmkPaletteCount++;
+            sMapGmkTileCount += (size = q->tilesSize) / 32;
+            sMapGmkPaletteCount++;
             (*n)++;
         }
     }
@@ -1502,16 +1500,16 @@ void MapGmkPlaceGmk01() {
         v = e->flags & FLOOR_ROOM_FLAG_CHEST_OPENED;
 
         if (v != 0) {
-            gMapGmkPlacements[gMapGmkCount].flags = GMK_FLAG_USED;
+            gMapGmkPlacements[sMapGmkCount].flags = GMK_FLAG_USED;
         } else {
-            gMapGmkPlacements[gMapGmkCount].flags = 0;
+            gMapGmkPlacements[sMapGmkCount].flags = 0;
         }
 
-        gMapGmkPlacements[gMapGmkCount].def = q;
-        gMapGmkPlacements[gMapGmkCount].pos = w;
-        gMapGmkTileCount += q->tilesSize >> 5;
-        gMapGmkPaletteCount++;
-        gMapGmkCount++;
+        gMapGmkPlacements[sMapGmkCount].def = q;
+        gMapGmkPlacements[sMapGmkCount].pos = w;
+        sMapGmkTileCount += q->tilesSize >> 5;
+        sMapGmkPaletteCount++;
+        sMapGmkCount++;
         p = MapCellAtPos(w.x, w.y + w.z);
         p->flags |= MAP_CELL_FLAG_CHEST;
     }
@@ -1522,12 +1520,12 @@ void MapGmkPlaceGmk04() {
 
     if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 0x17) {
         MapGmkFindSpot(&w, gMapGmk04Def.spotFinder);
-        gMapGmkPlacements[gMapGmkCount].flags = 0;
-        gMapGmkPlacements[gMapGmkCount].def = &gMapGmk04Def;
-        gMapGmkPlacements[gMapGmkCount].pos = w;
-        gMapGmkTileCount += gMapGmk04Def.tilesSize >> 5;
-        gMapGmkPaletteCount++;
-        gMapGmkCount++;
+        gMapGmkPlacements[sMapGmkCount].flags = 0;
+        gMapGmkPlacements[sMapGmkCount].def = &gMapGmk04Def;
+        gMapGmkPlacements[sMapGmkCount].pos = w;
+        sMapGmkTileCount += gMapGmk04Def.tilesSize >> 5;
+        sMapGmkPaletteCount++;
+        sMapGmkCount++;
     }
 }
 
@@ -1536,12 +1534,12 @@ void MapGmkPlaceMoogle() {
 
     if (gMapRoomState->roomType == 11) {
         MapGmkFindSpot(&w, gMapGmk05Def.spotFinder);
-        gMapGmkPlacements[gMapGmkCount].flags = 0;
-        gMapGmkPlacements[gMapGmkCount].def = &gMapGmk05Def;
-        gMapGmkPlacements[gMapGmkCount].pos = w;
-        gMapGmkTileCount += gMapGmk05Def.tilesSize >> 5;
-        gMapGmkPaletteCount++;
-        gMapGmkCount++;
+        gMapGmkPlacements[sMapGmkCount].flags = 0;
+        gMapGmkPlacements[sMapGmkCount].def = &gMapGmk05Def;
+        gMapGmkPlacements[sMapGmkCount].pos = w;
+        sMapGmkTileCount += gMapGmk05Def.tilesSize >> 5;
+        sMapGmkPaletteCount++;
+        sMapGmkCount++;
     }
 }
 
@@ -1556,7 +1554,7 @@ void MapGmkPlaceWorldGimmicks() {
         return;
     }
 
-    for (i = gMapGmkCount; i <= 15; i++) {
+    for (i = sMapGmkCount; i <= 15; i++) {
         switch (gMapFloorState.world) {
         case WORLD_TRAVERSE_TOWN:
             t = &gWorldMapGmkDefs[0];
@@ -1581,13 +1579,13 @@ void MapGmkPlaceWorldGimmicks() {
             break;
         }
 
-        if (gMapGmkTileCount + t->tilesSize / 32 > 0x200) {
+        if (sMapGmkTileCount + t->tilesSize / 32 > 0x200) {
             return;
         }
 
         f = (u8)MapGmkIsPaletteUnused(t->palette);
 
-        if (f != 0 && gMapGmkPaletteCount > 5) {
+        if (f != 0 && sMapGmkPaletteCount > 5) {
             return;
         }
 
@@ -1595,14 +1593,14 @@ void MapGmkPlaceWorldGimmicks() {
             return;
         }
 
-        gMapGmkPlacements[gMapGmkCount].flags = 0;
-        gMapGmkPlacements[gMapGmkCount].def = t;
-        gMapGmkPlacements[gMapGmkCount].pos = w;
-        gMapGmkTileCount += t->tilesSize >> 5;
-        gMapGmkCount++;
+        gMapGmkPlacements[sMapGmkCount].flags = 0;
+        gMapGmkPlacements[sMapGmkCount].def = t;
+        gMapGmkPlacements[sMapGmkCount].pos = w;
+        sMapGmkTileCount += t->tilesSize >> 5;
+        sMapGmkCount++;
 
         if (f != 0) {
-            gMapGmkPaletteCount++;
+            sMapGmkPaletteCount++;
         }
     }
 }
@@ -1610,14 +1608,14 @@ void MapGmkPlaceWorldGimmicks() {
 void MapGmkPlaceRandomGimmicks() {
     s32 i;
 
-    for (i = gMapGmkCount; i < 16; i++) {
+    for (i = sMapGmkCount; i < 16; i++) {
         FldPos w;
         const MapGmkDef* e = &gMapGmkDefs[GetRandomMapGmkIndex(i)];
         u8 f = MapGmkNeedsTiles(e->ownTiles, e->tiles);
         u8 g;
 
         if (f != 0) {
-            if ((e->tilesSize >> 5) + gMapGmkTileCount > 512) {
+            if ((e->tilesSize >> 5) + sMapGmkTileCount > 512) {
                 continue;
             }
         }
@@ -1625,7 +1623,7 @@ void MapGmkPlaceRandomGimmicks() {
         g = MapGmkIsPaletteUnused(e->palette);
 
         if (g != 0) {
-            if (gMapGmkPaletteCount > 5) {
+            if (sMapGmkPaletteCount > 5) {
                 continue;
             }
         }
@@ -1634,17 +1632,17 @@ void MapGmkPlaceRandomGimmicks() {
             continue;
         }
 
-        gMapGmkPlacements[gMapGmkCount].flags = 0;
-        gMapGmkPlacements[gMapGmkCount].def = e;
-        gMapGmkPlacements[gMapGmkCount].pos = w;
-        gMapGmkCount++;
+        gMapGmkPlacements[sMapGmkCount].flags = 0;
+        gMapGmkPlacements[sMapGmkCount].def = e;
+        gMapGmkPlacements[sMapGmkCount].pos = w;
+        sMapGmkCount++;
 
         if (f != 0) {
-            gMapGmkTileCount += e->tilesSize >> 5;
+            sMapGmkTileCount += e->tilesSize >> 5;
         }
 
         if (g != 0) {
-            gMapGmkPaletteCount++;
+            sMapGmkPaletteCount++;
         }
     }
 }
@@ -1661,7 +1659,7 @@ u8 FldObjIsOutOfView(FldObj* p) {
 }
 
 u16 MapGmkGetFreeTiles() {
-    return 512 - gMapGmkTileCount;
+    return 512 - sMapGmkTileCount;
 }
 
 void CreateRandomMapPrizes(s32 a, s32 b, s32 c) {
@@ -1713,9 +1711,9 @@ void DropMapGmkPrize(FldPos* p) {
 void MapGmkInitRoom() {
     if (gGameState.fieldResume == 0) {
         gMapGmkPlacements = EwramAlloc(sizeof(MapGmkPlacement) * 16);
-        gMapGmkCount = 0;
-        gMapGmkPaletteCount = 0;
-        gMapGmkTileCount = 0;
+        sMapGmkCount = 0;
+        sMapGmkPaletteCount = 0;
+        sMapGmkTileCount = 0;
         MapGmkReserveJump();
         MapGmkPlaceGmk01();
         MapGmkPlaceGmk04();
@@ -1740,7 +1738,7 @@ void MapGmkCreateTasks() {
         }
     }
 
-    for (i = 0; i < gMapGmkCount; i++) {
+    for (i = 0; i < sMapGmkCount; i++) {
         d = gMapGmkPlacements[i].def;
 
         if ((gMapGmkPlacements[i].flags & GMK_FLAG_DESTROYED) == 0) {
@@ -2108,8 +2106,8 @@ u8 SelectEventDoor(u8 a, u8 b) {
 
     while (p->kind != 5) {
         if (p->keyList != 0xFF && p->room == a && p->side == b) {
-            gEventKeyList = &gEventKeyLists[p->keyList];
-            gEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
+            sEventKeyList = &gEventKeyLists[p->keyList];
+            sEventKeyProgress = &gMapFloorState.eventKeyProgress[i];
             return 1;
         }
 
@@ -2121,20 +2119,20 @@ u8 SelectEventDoor(u8 a, u8 b) {
 }
 
 u8 CountRemainingEventKeys() {
-    return gEventKeyList->count - gEventKeyProgress->paid;
+    return sEventKeyList->count - sEventKeyProgress->paid;
 }
 
 EventKey* GetEventKey(u8 a) {
-    EventKey* p = &gEventKeyList->keys[gEventKeyProgress->paid];
+    EventKey* p = &sEventKeyList->keys[sEventKeyProgress->paid];
     EventKey* q = &p[a];
 
-    gEventKey = *q;
+    sEventKey = *q;
 
-    if (a == 0 && q->rule == 4 && gEventKeyProgress->remaining != 0) {
-        gEventKey.value = gEventKeyProgress->remaining;
+    if (a == 0 && q->rule == 4 && sEventKeyProgress->remaining != 0) {
+        sEventKey.value = sEventKeyProgress->remaining;
     }
 
-    return &gEventKey;
+    return &sEventKey;
 }
 
 u8 DoorAcceptsMapCard(MapCardAttributes* p) {
@@ -2185,16 +2183,16 @@ u8 DoorAcceptsMapCard(MapCardAttributes* p) {
 
 s32 PayEventKey(UnkStruct_080E8E24* p) {
     if (GetEventKey(0)->rule == 4) {
-        if (gEventKey.value > p->unk_02) {
-            gEventKey.value -= p->unk_02;
-            gEventKeyProgress->remaining = gEventKey.value;
+        if (sEventKey.value > p->unk_02) {
+            sEventKey.value -= p->unk_02;
+            sEventKeyProgress->remaining = sEventKey.value;
             return 0;
         }
 
-        gEventKeyProgress->remaining = 0;
+        sEventKeyProgress->remaining = 0;
     }
 
-    gEventKeyProgress->paid++;
+    sEventKeyProgress->paid++;
     return 1;
 }
 
@@ -2479,12 +2477,12 @@ void RestoreMapProgress(MapProgress* p) {
 }
 
 void MapDbgSetUpdate(ModeFunc a) {
-    gMapDbgUpdate = a;
+    sMapDbgUpdate = a;
 }
 
 void MapDbgSetUpdateAndRun(ModeFunc a) {
     MapDbgSetUpdate(a);
-    gMapDbgUpdate();
+    sMapDbgUpdate();
 }
 
 void MapDbgFreeCameraInput() {
@@ -2534,20 +2532,20 @@ void MapDbgMain() {
     }
 
     if (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) {
-        TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
-        gMapDbgAllmapRoomTask = NULL;
+        TaskKill(&gFieldState->tasks, sMapDbgAllmapRoomTask);
+        sMapDbgAllmapRoomTask = NULL;
         MapDbgSetUpdateAndRun(MapDbgWaitMenu);
         return;
     }
 
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
-        TaskKill(&gFieldState->tasks, gMapDbgAllmapRoomTask);
-        gMapDbgAllmapRoomTask = NULL;
+        TaskKill(&gFieldState->tasks, sMapDbgAllmapRoomTask);
+        sMapDbgAllmapRoomTask = NULL;
         MapDbgSetUpdateAndRun(MapDbgWaitRoomCreate);
         return;
     }
 
-    if (gMapDbgEditing != 0) {
+    if (sMapDbgEditing != 0) {
         MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
@@ -2585,7 +2583,7 @@ void MapDbgExitRoom() {
 }
 
 void MapDbgFreeCameraMode() {
-    if (gMapDbgEditing != 0) {
+    if (sMapDbgEditing != 0) {
         MapDbgSetUpdateAndRun(MapDbgWaitEdit);
         return;
     }
@@ -2610,14 +2608,14 @@ void MapDbgFreeCameraMode() {
 void MapDbgWaitEdit() {
     DrawMapField();
 
-    if (gMapDbgEditing == 0) {
+    if (sMapDbgEditing == 0) {
         ModeRequest(&gModeMapDbg, 0);
     }
 }
 
 void MapDbgWaitMenu() {
     if ((gFieldState->flags & FIELD_FLAG_MENU_OPEN) == 0 && (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) == 0) {
-        gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapGmkCreateTasks();
         MapDbgSetUpdateAndRun(MapDbgMain);
     } else {
@@ -2633,7 +2631,7 @@ void MapDbgWaitRoomCreate() {
     } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gBldCnt = 0;
         SetBgPriority(0, 0);
-        gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapGmkCreateTasks();
         MapEnmRestoreFromCache();
         MapDbgSetUpdateAndRun(MapDbgMain);
@@ -2671,7 +2669,7 @@ void Mode_MapDbg_0() {
     p = gMapRoomDefs[gMapFloorState.world];
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, NULL);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
-    gMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+    sMapDbgAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
     MapDbgSetUpdate(MapDbgMain);
 
     if (gGameState.fieldResume != 0) {
@@ -2684,16 +2682,16 @@ void Mode_MapDbg_0() {
     ClearFieldResume();
     SeedRandom(gFrameCounter);
     m4aSongNumStartOrContinue(p->song);
-    TaskPoolInit(&gMapDbgTasks, 1);
-    TaskCreate(&gMapDbgTasks, &gTaskDescMapDbg, &gMapDbgEditing);
+    TaskPoolInit(&sMapDbgTasks, 1);
+    TaskCreate(&sMapDbgTasks, &gTaskDescMapDbg, &sMapDbgEditing);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapDmg, NULL);
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void Mode_MapDbg_1() {
-    TaskPoolUpdate(&gMapDbgTasks);
-    TaskPoolDraw(&gMapDbgTasks);
-    gMapDbgUpdate();
+    TaskPoolUpdate(&sMapDbgTasks);
+    TaskPoolDraw(&sMapDbgTasks);
+    sMapDbgUpdate();
     UpdatePlayTime();
 }
 
@@ -2702,63 +2700,63 @@ void Mode_MapDbg_2() {
     MapGmkFree();
     EwramFree(gFieldState);
     EwramFree(gMapRoomState);
-    TaskPoolDestroy(&gMapDbgTasks);
+    TaskPoolDestroy(&sMapDbgTasks);
 }
 
 void MapFldSetUpdate(ModeFunc a) {
-    gMapFldUpdate = a;
+    sMapFldUpdate = a;
 }
 
 void MapFldSetUpdateAndRun(ModeFunc a) {
     MapFldSetUpdate(a);
-    gMapFldUpdate();
+    sMapFldUpdate();
 }
 
 void MapFldCreateWorldLogo() {
     switch (gMapFloorState.world) {
     case WORLD_ATLANTICA:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)2);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)2);
         break;
     case WORLD_HALLOWEEN_TOWN:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)6);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)6);
         break;
     case WORLD_MONSTRO:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)5);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)5);
         break;
     case WORLD_NEVER_LAND:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)7);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)7);
         break;
     case WORLD_OLYMPUS_COLISEUM:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)3);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)3);
         break;
     case WORLD_HOLLOW_BASTION:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)8);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)8);
         break;
     case WORLD_DESTINY_ISLANDS:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)9);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)9);
         break;
     case WORLD_AGRABAH:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)1);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)1);
         break;
     case WORLD_TRAVERSE_TOWN:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)10);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)10);
         break;
     case WORLD_TWILIGHT_TOWN:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)11);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)11);
         break;
     case WORLD_CASTLE_OBLIVION:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)12);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)12);
         break;
     default:
-        gMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)4);
+        sMapFldWorldLogoTask = TaskCreate(&gMapRoomState->tasks, &gTaskDescWLogo, (void*)4);
         break;
     }
 }
 
 void MapFldDestroyAllmapRoom() {
-    if (gMapFldAllmapRoomTask != NULL) {
-        TaskKill(&gFieldState->tasks, gMapFldAllmapRoomTask);
-        gMapFldAllmapRoomTask = NULL;
+    if (sMapFldAllmapRoomTask != NULL) {
+        TaskKill(&gFieldState->tasks, sMapFldAllmapRoomTask);
+        sMapFldAllmapRoomTask = NULL;
     }
 }
 
@@ -2792,7 +2790,7 @@ void StartWorldBossBattle() {
 }
 
 void MapFldShowWorldLogo() {
-    u8 r = IsTaskActive(gMapFldWorldLogoTask);
+    u8 r = IsTaskActive(sMapFldWorldLogoTask);
 
     if (r != 0) {
         TaskPoolUpdate(&gMapRoomState->tasks);
@@ -2802,8 +2800,8 @@ void MapFldShowWorldLogo() {
     } else {
         u16 t = gMapFloorState.flags | FLOOR_FLAG_LOGO_SHOWN;
         gMapFloorState.flags = t;
-        gMapFldWorldLogoTask = NULL;
-        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapFldWorldLogoTask = NULL;
+        sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         gFieldState->flags &= ~FIELD_FLAG_NO_ENEMY_SPAWN;
         gFieldState->flags &= ~FIELD_FLAG_NO_LOCKON;
         MapFldSetUpdateAndRun(MapFldMain);
@@ -2953,7 +2951,7 @@ void MapFldWaitMenu() {
         SetupBg(0, 3, 31, 14);
         SetBgPriority(0, 0);
         MapGmkCreateTasks();
-        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapFldSetUpdateAndRun(MapFldMain);
     } else {
         UpdateMapField();
@@ -2978,7 +2976,7 @@ void MapFldWaitRoomCreate() {
         SetBgPriority(0, 0);
         MapGmkCreateTasks();
         MapEnmRestoreFromCache();
-        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapFldSetUpdateAndRun(MapFldMain);
     } else {
         UpdateMapField();
@@ -2989,7 +2987,7 @@ void MapFldWaitRoomCreate() {
 void func_080E9F30() {
     DrawMapField();
 
-    if (gUnk_02034FBC == 0) {
+    if (sUnk_02034FBC == 0) {
         ModeRequest(&gModeMapFld, 0);
     }
 }
@@ -3018,8 +3016,8 @@ void Mode_MapFld_0() {
 
     gFieldState = EwramAlloc(sizeof(FieldState));
     gMapRoomState = EwramAlloc(sizeof(MapRoomState));
-    gMapFldWorldLogoTask = NULL;
-    gMapFldAllmapRoomTask = NULL;
+    sMapFldWorldLogoTask = NULL;
+    sMapFldAllmapRoomTask = NULL;
     UpdateGameWorld();
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
@@ -3061,11 +3059,11 @@ void Mode_MapFld_0() {
             TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, NULL);
             MapFldSetUpdate(MapFldWaitMenu);
         } else {
-            gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+            sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
             MapFldSetUpdate(MapFldMain);
         }
     } else {
-        gMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
+        sMapFldAllmapRoomTask = CreateAllmapRoomTask(&gFieldState->tasks);
         MapSetCameraTarget(gFieldState->spawnX, gFieldState->spawnY);
         MapFldSetUpdate(MapFldMain);
     }
@@ -3078,7 +3076,7 @@ void Mode_MapFld_0() {
 }
 
 void Mode_MapFld_1() {
-    gMapFldUpdate();
+    sMapFldUpdate();
     UpdatePlayTime();
 }
 
@@ -3090,12 +3088,12 @@ void Mode_MapFld_2() {
 }
 
 void MapFixSetUpdate(ModeFunc a) {
-    gMapFixUpdate = a;
+    sMapFixUpdate = a;
 }
 
 void MapFixSetUpdateAndRun(ModeFunc a) {
     MapFixSetUpdate(a);
-    gMapFixUpdate();
+    sMapFixUpdate();
 }
 
 MapFixedDef* GetMapFixedDef() {
@@ -3314,7 +3312,7 @@ void MapFixLeaveEntranceHall() {
             RequestEventMode(0x87);
 #endif
         } else if (GetWorldEntryEventId() != 0xFF) {
-            gMapFixEventDelay = 60;
+            sMapFixEventDelay = 60;
             MapFixSetUpdateAndRun(MapFixWaitWorldEvent);
         } else {
             EnterFloorWorld();
@@ -3393,8 +3391,8 @@ void MapFixWaitWalkOut() {
 }
 
 void MapFixWaitWorldEvent() {
-    if (gMapFixEventDelay != 0) {
-        gMapFixEventDelay--;
+    if (sMapFixEventDelay != 0) {
+        sMapFixEventDelay--;
     } else {
         RequestEventMode(GetWorldEntryEventId());
     }
@@ -3504,7 +3502,7 @@ void Mode_MapFix_0() {
 }
 
 void Mode_MapFix_1() {
-    gMapFixUpdate();
+    sMapFixUpdate();
     UpdatePlayTime();
 }
 
@@ -3689,25 +3687,25 @@ s32 NewGameSlotMenuShowSummary(u8 i) {
 
 void NewGameSlotMenuSelectSlot(u8 a) {
     SaveFileSummary* e;
-    u8 i = gNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
+    u8 i = sNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
     e = &gGameState.fileSummaries[i];
 
     if (e->level != 0) {
         NewGameSlotMenuLoadFloorTiles(i, 1, e->floor);
-        gNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gNewGameSlotMenuWork->textSlots);
+        sNewGameSlotMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), sNewGameSlotMenuWork->textSlots);
 
-        if (gNewGameSlotMenuWork->isRiku == 0) {
-            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, gUnk_09991C04);
+        if (sNewGameSlotMenuWork->isRiku == 0) {
+            LoadObjPaletteBank(sNewGameSlotMenuWork->palette8->index, gUnk_09991C04);
         } else {
-            LoadObjPaletteBank(gNewGameSlotMenuWork->palette8->index, gUnk_09991C44);
+            LoadObjPaletteBank(sNewGameSlotMenuWork->palette8->index, gUnk_09991C44);
         }
     } else {
         NewGameSlotMenuLoadFloorTiles(i, 1, 13);
-        gNewGameSlotMenuWork->textSlotCount = 0;
+        sNewGameSlotMenuWork->textSlotCount = 0;
     }
 
-    if (gNewGameSlotMenuWork->selectedSlot == 0) {
-        if (gNewGameSlotMenuWork->isRiku != 0) {
+    if (sNewGameSlotMenuWork->selectedSlot == 0) {
+        if (sNewGameSlotMenuWork->isRiku != 0) {
             LoadBgMap(1, &gUnk_09985F44[0x8800], 0x800);
         } else {
             LoadBgMap(1, &gUnk_09985F44[0x7800], 0x800);
@@ -3715,7 +3713,7 @@ void NewGameSlotMenuSelectSlot(u8 a) {
 
         SetBgScroll(1, 0, (u16)-9);
     } else {
-        if (gNewGameSlotMenuWork->isRiku != 0) {
+        if (sNewGameSlotMenuWork->isRiku != 0) {
             LoadBgMap(1, &gUnk_09985F44[0x9000], 0x800);
         } else {
             LoadBgMap(1, &gUnk_09985F44[0x8000], 0x800);
@@ -3726,7 +3724,7 @@ void NewGameSlotMenuSelectSlot(u8 a) {
 }
 
 void NewGameSlotMenuDeselectSlot(u8 a) {
-    u8 idx = gNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
+    u8 idx = sNewGameSlotMenuWork->isRiku != 0 ? a + 2 : a;
     SaveFileSummary* e = &gGameState.fileSummaries[idx];
 
     if (e->level != 0) {
@@ -3735,41 +3733,41 @@ void NewGameSlotMenuDeselectSlot(u8 a) {
         NewGameSlotMenuLoadFloorTiles(idx, 0, 13);
     }
 
-    gNewGameSlotMenuWork->textSlotCount = 0;
+    sNewGameSlotMenuWork->textSlotCount = 0;
 }
 
 void NewGameSlotMenuDraw() {
     s32 t;
     s32 u;
 
-    DrawSprite(128, gNewGameSlotMenuWork->y >> 8, gUnk_09EF8D68[1], gNewGameSlotMenuWork->tiles2,
-        gNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(128, gNewGameSlotMenuWork->y2 >> 8, gUnk_09EF8D68[2], gNewGameSlotMenuWork->tiles2,
-        gNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+    DrawSprite(128, sNewGameSlotMenuWork->y >> 8, gUnk_09EF8D68[1], sNewGameSlotMenuWork->tiles2,
+        sNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+    DrawSprite(128, sNewGameSlotMenuWork->y2 >> 8, gUnk_09EF8D68[2], sNewGameSlotMenuWork->tiles2,
+        sNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
 
-    if (gNewGameSlotMenuWork->isRiku == 0) {
-        DrawSprite(56, 112, gSor1ff00Frames[0], gNewGameSlotMenuWork->tiles4,
-            gNewGameSlotMenuWork->palette4, NULL, SPRITE_PRIORITY(1), 80);
-        DrawSprite(72, 96, gDona2Fl00Frames[0], gNewGameSlotMenuWork->tiles5, gNewGameSlotMenuWork->palette5, NULL,
+    if (sNewGameSlotMenuWork->isRiku == 0) {
+        DrawSprite(56, 112, gSor1ff00Frames[0], sNewGameSlotMenuWork->tiles4,
+            sNewGameSlotMenuWork->palette4, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(72, 96, gDona2Fl00Frames[0], sNewGameSlotMenuWork->tiles5, sNewGameSlotMenuWork->palette5, NULL,
             SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
-        DrawSprite(40, 96, gGoofy2Fl00Frames[0], gNewGameSlotMenuWork->tiles6, gNewGameSlotMenuWork->palette6, NULL,
+        DrawSprite(40, 96, gGoofy2Fl00Frames[0], sNewGameSlotMenuWork->tiles6, sNewGameSlotMenuWork->palette6, NULL,
             SPRITE_PRIORITY(1), 81);
     } else {
-        DrawSprite(56, 112, gRikuFf00Frames[0], gNewGameSlotMenuWork->tiles7, gNewGameSlotMenuWork->palette7, NULL,
+        DrawSprite(56, 112, gRikuFf00Frames[0], sNewGameSlotMenuWork->tiles7, sNewGameSlotMenuWork->palette7, NULL,
             SPRITE_PRIORITY(1), 81);
     }
 
-    DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, gNewGameSlotMenuWork->tiles3, gNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
     t = 45;
-    u = gNewGameSlotMenuWork->selectedSlot * t;
-    ApproachValueHalf(&gNewGameSlotMenuWork->y3, (gNewGameSlotMenuWork->slotBaseY + u) << 8);
-    DrawSprite(76, gNewGameSlotMenuWork->y3 >> 8, AnimGetGfx(&gNewGameSlotMenuWork->anim),
-        gNewGameSlotMenuWork->tiles, gNewGameSlotMenuWork->palette, NULL, 0, 70);
-    DrawTextSlots(100, u + (gNewGameSlotMenuWork->slotBaseY + 22), gNewGameSlotMenuWork->textSlots,
-        gNewGameSlotMenuWork->palette8, 50, gNewGameSlotMenuWork->textSlotCount);
+    u = sNewGameSlotMenuWork->selectedSlot * t;
+    ApproachValueHalf(&sNewGameSlotMenuWork->y3, (sNewGameSlotMenuWork->slotBaseY + u) << 8);
+    DrawSprite(76, sNewGameSlotMenuWork->y3 >> 8, AnimGetGfx(&sNewGameSlotMenuWork->anim),
+        sNewGameSlotMenuWork->tiles, sNewGameSlotMenuWork->palette, NULL, 0, 70);
+    DrawTextSlots(100, u + (sNewGameSlotMenuWork->slotBaseY + 22), sNewGameSlotMenuWork->textSlots,
+        sNewGameSlotMenuWork->palette8, 50, sNewGameSlotMenuWork->textSlotCount);
     DrawTextSlots(
-        (240 - GetTextSlotsWidth(gNewGameSlotMenuWork->textSlots2, gNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
-        gNewGameSlotMenuWork->textSlots2, gNewGameSlotMenuWork->palette9, 50, gNewGameSlotMenuWork->textSlotCount2);
+        (240 - GetTextSlotsWidth(sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->textSlotCount2)) / 2, 134,
+        sNewGameSlotMenuWork->textSlots2, sNewGameSlotMenuWork->palette9, 50, sNewGameSlotMenuWork->textSlotCount2);
 }
 
 void NewGameSlotMenuMoveCursor(NewGameSlotMenuWork* w) {
@@ -3865,12 +3863,12 @@ void Mode_MenuNew_0() {
     u8 v;
     u8 u;
 
-    gNewGameSlotMenuWork = EwramAlloc(sizeof(NewGameSlotMenuWork));
-    gNewGameSlotMenuWork->confirmed = 0;
-    gNewGameSlotMenuWork->isRiku = (gGameState.flags >> 3) & 1;
-    gNewGameSlotMenuWork->slotBaseY = 33;
-    gNewGameSlotMenuWork->timer = 16;
-    gNewGameSlotMenuWork->update = NewGameSlotMenuSlideIn;
+    sNewGameSlotMenuWork = EwramAlloc(sizeof(NewGameSlotMenuWork));
+    sNewGameSlotMenuWork->confirmed = 0;
+    sNewGameSlotMenuWork->isRiku = (gGameState.flags >> 3) & 1;
+    sNewGameSlotMenuWork->slotBaseY = 33;
+    sNewGameSlotMenuWork->timer = 16;
+    sNewGameSlotMenuWork->update = NewGameSlotMenuSlideIn;
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(1, 0, 29, 0);
@@ -3912,36 +3910,36 @@ void Mode_MenuNew_0() {
     LoadBgMap(0, gUnk_0998F744, 0x800);
 #endif
     SetBgScroll(0, 0, 0xFFFC);
-    gNewGameSlotMenuWork->palette2 = LoadObjPalette(gUnk_09991D04, 32);
-    gNewGameSlotMenuWork->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
-    gNewGameSlotMenuWork->y = -0x800;
-    gNewGameSlotMenuWork->y2 = 0xA000;
-    gNewGameSlotMenuWork->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
-    gNewGameSlotMenuWork->palette4 = LoadObjPalette(gSoraPalette, 32);
-    gNewGameSlotMenuWork->tiles5 = AllocObjTiles(0x280, gDona2Fl00Tiles);
-    gNewGameSlotMenuWork->palette5 = LoadObjPalette(gDonald2Palette, 32);
-    gNewGameSlotMenuWork->tiles6 = AllocObjTiles(0x400, gGoofy2Fl00Tiles);
-    gNewGameSlotMenuWork->palette6 = LoadObjPalette(gGoofy2Palette, 32);
-    gNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
-    gNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, 32);
-    gNewGameSlotMenuWork->palette3 = LoadObjPalette(gUnk_09991D24, 32);
-    gNewGameSlotMenuWork->tiles3 = LoadObjTiles(gUnk_098A8F8A, 0x4C0);
-    gNewGameSlotMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
-    gNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
-    AnimInit(&gNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
-    AnimStart(&gNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
-    gNewGameSlotMenuWork->palette8 = LoadObjPalette(gUnk_09991C04, 32);
-    gNewGameSlotMenuWork->textSlotCount = 0;
-    InitTextSlots(gNewGameSlotMenuWork->textSlots, 36);
-    InitTextSlots(gNewGameSlotMenuWork->textSlots2, 54);
-    gNewGameSlotMenuWork->palette9 = LoadObjPalette(gUnk_09991BE4, 32);
+    sNewGameSlotMenuWork->palette2 = LoadObjPalette(gUnk_09991D04, 32);
+    sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
+    sNewGameSlotMenuWork->y = -0x800;
+    sNewGameSlotMenuWork->y2 = 0xA000;
+    sNewGameSlotMenuWork->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
+    sNewGameSlotMenuWork->palette4 = LoadObjPalette(gSoraPalette, 32);
+    sNewGameSlotMenuWork->tiles5 = AllocObjTiles(0x280, gDona2Fl00Tiles);
+    sNewGameSlotMenuWork->palette5 = LoadObjPalette(gDonald2Palette, 32);
+    sNewGameSlotMenuWork->tiles6 = AllocObjTiles(0x400, gGoofy2Fl00Tiles);
+    sNewGameSlotMenuWork->palette6 = LoadObjPalette(gGoofy2Palette, 32);
+    sNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
+    sNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, 32);
+    sNewGameSlotMenuWork->palette3 = LoadObjPalette(gUnk_09991D24, 32);
+    sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gUnk_098A8F8A, 0x4C0);
+    sNewGameSlotMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
+    sNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
+    AnimInit(&sNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
+    AnimStart(&sNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
+    sNewGameSlotMenuWork->palette8 = LoadObjPalette(gUnk_09991C04, 32);
+    sNewGameSlotMenuWork->textSlotCount = 0;
+    InitTextSlots(sNewGameSlotMenuWork->textSlots, 36);
+    InitTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
+    sNewGameSlotMenuWork->palette9 = LoadObjPalette(gUnk_09991BE4, 32);
 #ifdef VERSION_EU
-    gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892780), gNewGameSlotMenuWork->textSlots2);
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892780), sNewGameSlotMenuWork->textSlots2);
 #else
-    gNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, gNewGameSlotMenuWork->textSlots2);
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, sNewGameSlotMenuWork->textSlots2);
 #endif
 
-    if (gNewGameSlotMenuWork->isRiku != 0) {
+    if (sNewGameSlotMenuWork->isRiku != 0) {
         v = NewGameSlotMenuShowSummary(2);
         u = NewGameSlotMenuShowSummary(3);
     } else {
@@ -3950,44 +3948,44 @@ void Mode_MenuNew_0() {
     }
 
     if (v != 0) {
-        gNewGameSlotMenuWork->selectedSlot = u == 0 ? 1 : 0;
+        sNewGameSlotMenuWork->selectedSlot = u == 0 ? 1 : 0;
     } else {
-        gNewGameSlotMenuWork->selectedSlot = 0;
+        sNewGameSlotMenuWork->selectedSlot = 0;
     }
 
-    NewGameSlotMenuSelectSlot(gNewGameSlotMenuWork->selectedSlot);
-    gNewGameSlotMenuWork->y3 = (gNewGameSlotMenuWork->slotBaseY + gNewGameSlotMenuWork->selectedSlot * 45) << 8;
+    NewGameSlotMenuSelectSlot(sNewGameSlotMenuWork->selectedSlot);
+    sNewGameSlotMenuWork->y3 = (sNewGameSlotMenuWork->slotBaseY + sNewGameSlotMenuWork->selectedSlot * 45) << 8;
     FadeStartIn(FADE_MODE_BLACK, 8);
 }
 
 void Mode_MenuNew_1() {
-    if (gNewGameSlotMenuWork->update != NULL) {
-        gNewGameSlotMenuWork->update(gNewGameSlotMenuWork);
+    if (sNewGameSlotMenuWork->update != NULL) {
+        sNewGameSlotMenuWork->update(sNewGameSlotMenuWork);
     }
 
     NewGameSlotMenuDraw();
 }
 
 void Mode_MenuNew_2() {
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette2);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles2);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette3);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles3);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette4);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles4);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette5);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles5);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette6);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles6);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette7);
-    ReleaseObjTiles(gNewGameSlotMenuWork->tiles7);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette8);
-    FreeTextSlots(gNewGameSlotMenuWork->textSlots, 36);
-    ReleaseObjPalette(gNewGameSlotMenuWork->palette9);
-    FreeTextSlots(gNewGameSlotMenuWork->textSlots2, 54);
-    EwramFree(gNewGameSlotMenuWork);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette2);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles2);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette3);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles3);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette4);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles4);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette5);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles5);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette6);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles6);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette7);
+    ReleaseObjTiles(sNewGameSlotMenuWork->tiles7);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette8);
+    FreeTextSlots(sNewGameSlotMenuWork->textSlots, 36);
+    ReleaseObjPalette(sNewGameSlotMenuWork->palette9);
+    FreeTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
+    EwramFree(sNewGameSlotMenuWork);
 }
 
 s32 LoadGameMenuLoadFile(u8 a) {
@@ -4198,16 +4196,16 @@ void LoadGameMenuSelectSlot(u8 a) {
 
     if (e->level != 0) {
         LoadGameMenuLoadFloorTiles(a, 1, e->floor);
-        gLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), gLoadGameMenuWork->textSlots);
+        sLoadGameMenuWork->textSlotCount = LoadTextSlots(GetMapWorldName(e->world), sLoadGameMenuWork->textSlots);
 
         if (a <= 1) {
-            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, gUnk_09991C04);
+            LoadObjPaletteBank(sLoadGameMenuWork->palette7->index, gUnk_09991C04);
         } else {
-            LoadObjPaletteBank(gLoadGameMenuWork->palette7->index, gUnk_09991C44);
+            LoadObjPaletteBank(sLoadGameMenuWork->palette7->index, gUnk_09991C44);
         }
     } else {
         LoadGameMenuLoadFloorTiles(a, 1, 13);
-        gLoadGameMenuWork->textSlotCount = 0;
+        sLoadGameMenuWork->textSlotCount = 0;
     }
 }
 
@@ -4220,7 +4218,7 @@ void LoadGameMenuDeselectSlot(u8 a) {
         LoadGameMenuLoadFloorTiles(a, 0, 13);
     }
 
-    gLoadGameMenuWork->textSlotCount = 0;
+    sLoadGameMenuWork->textSlotCount = 0;
 }
 
 void LoadGameMenuDraw() {
@@ -4230,80 +4228,80 @@ void LoadGameMenuDraw() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_FRENCH:
-        DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843D8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843D8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843D8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843D8[1], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843D8[2], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843D8[0], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_SPANISH:
-        DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843E8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843E8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843E8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843E8[1], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843E8[2], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843E8[0], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_ITALIAN:
-        DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F843F8[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F843F8[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843F8[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843F8[1], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843F8[2], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843F8[0], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_GERMAN:
     default:
-        DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnkEu_09F84408[1], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnkEu_09F84408[2], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnkEu_09F84408[0], gLoadGameMenuWork->tiles2,
-            gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F84408[1], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F84408[2], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F84408[0], sLoadGameMenuWork->tiles2,
+            sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     }
 #else
-    DrawSprite(128, gLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(128, gLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(gLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], gLoadGameMenuWork->tiles2,
-        gLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
+    DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], sLoadGameMenuWork->tiles2,
+        sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+    DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], sLoadGameMenuWork->tiles2,
+        sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
+    DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], sLoadGameMenuWork->tiles2,
+        sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
 #endif
 
-    if (gLoadGameMenuWork->selectedSlot <= 1) {
-        DrawSprite(56, 112, gSor1ff00Frames[0], gLoadGameMenuWork->tiles3,
-            gLoadGameMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 80);
-        DrawSprite(72, 96, gDonaFl00Frames[0], gLoadGameMenuWork->tiles4,
-            gLoadGameMenuWork->palette4, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
-        DrawSprite(40, 96, gGoofyFl00Frames[0], gLoadGameMenuWork->tiles5,
-            gLoadGameMenuWork->palette5, NULL, SPRITE_PRIORITY(1), 81);
+    if (sLoadGameMenuWork->selectedSlot <= 1) {
+        DrawSprite(56, 112, gSor1ff00Frames[0], sLoadGameMenuWork->tiles3,
+            sLoadGameMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(72, 96, gDonaFl00Frames[0], sLoadGameMenuWork->tiles4,
+            sLoadGameMenuWork->palette4, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 81);
+        DrawSprite(40, 96, gGoofyFl00Frames[0], sLoadGameMenuWork->tiles5,
+            sLoadGameMenuWork->palette5, NULL, SPRITE_PRIORITY(1), 81);
     } else {
-        DrawSprite(56, 112, gRikuFf00Frames[0], gLoadGameMenuWork->tiles6, gLoadGameMenuWork->palette6, NULL,
+        DrawSprite(56, 112, gRikuFf00Frames[0], sLoadGameMenuWork->tiles6, sLoadGameMenuWork->palette6, NULL,
             SPRITE_PRIORITY(1), 81);
     }
 
-    if (gLoadGameMenuWork->showRikuSlots != 0) {
+    if (sLoadGameMenuWork->showRikuSlots != 0) {
         t = 32;
     } else {
         t = 45;
     }
 
-    u = t * gLoadGameMenuWork->selectedSlot;
-    ApproachValueHalf(&gLoadGameMenuWork->y3, (gLoadGameMenuWork->slotBaseY + u) << 8);
-    DrawSprite(76, gLoadGameMenuWork->y3 >> 8, AnimGetGfx(&gLoadGameMenuWork->anim),
-        gLoadGameMenuWork->tiles, gLoadGameMenuWork->palette, NULL, SPRITE_PRIORITY(1), 70);
-    DrawTextSlots(100, u + (gLoadGameMenuWork->slotBaseY + 22), gLoadGameMenuWork->textSlots,
-        gLoadGameMenuWork->palette7, 50, gLoadGameMenuWork->textSlotCount);
+    u = t * sLoadGameMenuWork->selectedSlot;
+    ApproachValueHalf(&sLoadGameMenuWork->y3, (sLoadGameMenuWork->slotBaseY + u) << 8);
+    DrawSprite(76, sLoadGameMenuWork->y3 >> 8, AnimGetGfx(&sLoadGameMenuWork->anim),
+        sLoadGameMenuWork->tiles, sLoadGameMenuWork->palette, NULL, SPRITE_PRIORITY(1), 70);
+    DrawTextSlots(100, u + (sLoadGameMenuWork->slotBaseY + 22), sLoadGameMenuWork->textSlots,
+        sLoadGameMenuWork->palette7, 50, sLoadGameMenuWork->textSlotCount);
 }
 
 void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
@@ -4468,30 +4466,30 @@ void LoadGameMenuExit(LoadGameMenuWork* work) {
 void Mode_MenuLoad_0(s32 arg) {
     s32 i;
 
-    gLoadGameMenuWork = EwramAlloc(sizeof(LoadGameMenuWork));
-    gLoadGameMenuWork->forSioBattle = arg != 0;
+    sLoadGameMenuWork = EwramAlloc(sizeof(LoadGameMenuWork));
+    sLoadGameMenuWork->forSioBattle = arg != 0;
 
-    if (gLoadGameMenuWork->forSioBattle != 0) {
-        gLoadGameMenuWork->showRikuSlots = 0;
+    if (sLoadGameMenuWork->forSioBattle != 0) {
+        sLoadGameMenuWork->showRikuSlots = 0;
     } else {
-        gLoadGameMenuWork->showRikuSlots = (gGameState.flags >> 5) & 1;
+        sLoadGameMenuWork->showRikuSlots = (gGameState.flags >> 5) & 1;
     }
 
-    gLoadGameMenuWork->loaded = 0;
-    gLoadGameMenuWork->selectedSlot = 0;
+    sLoadGameMenuWork->loaded = 0;
+    sLoadGameMenuWork->selectedSlot = 0;
 
-    if (gLoadGameMenuWork->showRikuSlots != 0) {
-        gLoadGameMenuWork->lastSlot = 3;
-        gLoadGameMenuWork->slotBaseY = 17;
-        gLoadGameMenuWork->y3 = gLoadGameMenuWork->slotBaseY << 8;
+    if (sLoadGameMenuWork->showRikuSlots != 0) {
+        sLoadGameMenuWork->lastSlot = 3;
+        sLoadGameMenuWork->slotBaseY = 17;
+        sLoadGameMenuWork->y3 = sLoadGameMenuWork->slotBaseY << 8;
     } else {
-        gLoadGameMenuWork->lastSlot = 1;
-        gLoadGameMenuWork->slotBaseY = 43;
-        gLoadGameMenuWork->y3 = gLoadGameMenuWork->slotBaseY << 8;
+        sLoadGameMenuWork->lastSlot = 1;
+        sLoadGameMenuWork->slotBaseY = 43;
+        sLoadGameMenuWork->y3 = sLoadGameMenuWork->slotBaseY << 8;
     }
 
-    gLoadGameMenuWork->timer = 16;
-    gLoadGameMenuWork->update = LoadGameMenuSlideInY;
+    sLoadGameMenuWork->timer = 16;
+    sLoadGameMenuWork->update = LoadGameMenuSlideInY;
     SetBgMode0();
     SetupBg(3, 0, 28, 0);
     SetupBg(2, 0, 29, 0);
@@ -4531,7 +4529,7 @@ void Mode_MenuLoad_0(s32 arg) {
     LoadBgPalette(1, gUnk_099919C4, 0x200);
 #endif
 
-    if (gLoadGameMenuWork->showRikuSlots != 0) {
+    if (sLoadGameMenuWork->showRikuSlots != 0) {
         LoadBgMap(1, gUnk_09988F44, 0x800);
         SetBgScroll(1, 0, 0xFFFF);
     } else {
@@ -4539,81 +4537,81 @@ void Mode_MenuLoad_0(s32 arg) {
         SetBgScroll(1, 0, 0xFFFD);
     }
 
-    gLoadGameMenuWork->palette2 = LoadObjPalette(gUnk_09991BC4, 32);
+    sLoadGameMenuWork->palette2 = LoadObjPalette(gUnk_09991BC4, 32);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
         break;
     case LANGUAGE_FRENCH:
-        gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988519C, 0x300);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988519C, 0x300);
         break;
     case LANGUAGE_SPANISH:
-        gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988551E, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988551E, 0x2C0);
         break;
     case LANGUAGE_ITALIAN:
-        gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885862, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885862, 0x2C0);
         break;
     case LANGUAGE_GERMAN:
     default:
-        gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885BA6, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885BA6, 0x2C0);
         break;
     }
 #else
-    gLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
+    sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
 #endif
-    gLoadGameMenuWork->y = -0x800;
-    gLoadGameMenuWork->y2 = 0xA000;
-    gLoadGameMenuWork->x = -0x8000;
-    gLoadGameMenuWork->tiles3 = AllocObjTiles(0x340, gSor1ff00Tiles);
-    gLoadGameMenuWork->palette3 = LoadObjPalette(gSoraPalette, 32);
-    gLoadGameMenuWork->tiles4 = AllocObjTiles(0x280, gDonaFl00Tiles);
-    gLoadGameMenuWork->palette4 = LoadObjPalette(gDonaldPalette, 32);
-    gLoadGameMenuWork->tiles5 = AllocObjTiles(0x400, gGoofyFl00Tiles);
-    gLoadGameMenuWork->palette5 = LoadObjPalette(gGoofyPalette, 32);
-    gLoadGameMenuWork->tiles6 = AllocObjTiles(0x400, gRikuFf00Tiles);
-    gLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, 32);
-    gLoadGameMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
-    gLoadGameMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
-    AnimInit(&gLoadGameMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
-    AnimStart(&gLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
-    gLoadGameMenuWork->palette7 = LoadObjPalette(gUnk_09991C04, 32);
-    gLoadGameMenuWork->textSlotCount = 0;
-    InitTextSlots(gLoadGameMenuWork->textSlots, 36);
+    sLoadGameMenuWork->y = -0x800;
+    sLoadGameMenuWork->y2 = 0xA000;
+    sLoadGameMenuWork->x = -0x8000;
+    sLoadGameMenuWork->tiles3 = AllocObjTiles(0x340, gSor1ff00Tiles);
+    sLoadGameMenuWork->palette3 = LoadObjPalette(gSoraPalette, 32);
+    sLoadGameMenuWork->tiles4 = AllocObjTiles(0x280, gDonaFl00Tiles);
+    sLoadGameMenuWork->palette4 = LoadObjPalette(gDonaldPalette, 32);
+    sLoadGameMenuWork->tiles5 = AllocObjTiles(0x400, gGoofyFl00Tiles);
+    sLoadGameMenuWork->palette5 = LoadObjPalette(gGoofyPalette, 32);
+    sLoadGameMenuWork->tiles6 = AllocObjTiles(0x400, gRikuFf00Tiles);
+    sLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, 32);
+    sLoadGameMenuWork->palette = LoadObjPalette(gUnk_09991BE4, 32);
+    sLoadGameMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
+    AnimInit(&sLoadGameMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
+    AnimStart(&sLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
+    sLoadGameMenuWork->palette7 = LoadObjPalette(gUnk_09991C04, 32);
+    sLoadGameMenuWork->textSlotCount = 0;
+    InitTextSlots(sLoadGameMenuWork->textSlots, 36);
 
     for (i = 0; i < 4; i++) {
         LoadGameMenuShowSummary(i);
     }
 
-    LoadGameMenuSelectSlot(gLoadGameMenuWork->selectedSlot);
+    LoadGameMenuSelectSlot(sLoadGameMenuWork->selectedSlot);
     FadeStartIn(FADE_MODE_BLACK, 16);
 }
 
 void Mode_MenuLoad_1() {
-    if (gLoadGameMenuWork->update != NULL) {
-        gLoadGameMenuWork->update(gLoadGameMenuWork);
+    if (sLoadGameMenuWork->update != NULL) {
+        sLoadGameMenuWork->update(sLoadGameMenuWork);
     }
 
     LoadGameMenuDraw();
 }
 
 void Mode_MenuLoad_2() {
-    ReleaseObjPalette(gLoadGameMenuWork->palette2);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles2);
-    ReleaseObjPalette(gLoadGameMenuWork->palette);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles);
-    ReleaseObjPalette(gLoadGameMenuWork->palette3);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles3);
-    ReleaseObjPalette(gLoadGameMenuWork->palette4);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles4);
-    ReleaseObjPalette(gLoadGameMenuWork->palette5);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles5);
-    ReleaseObjPalette(gLoadGameMenuWork->palette6);
-    ReleaseObjTiles(gLoadGameMenuWork->tiles6);
-    ReleaseObjPalette(gLoadGameMenuWork->palette7);
-    FreeTextSlots(gLoadGameMenuWork->textSlots, 36);
-    EwramFree(gLoadGameMenuWork);
+    ReleaseObjPalette(sLoadGameMenuWork->palette2);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles2);
+    ReleaseObjPalette(sLoadGameMenuWork->palette);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles);
+    ReleaseObjPalette(sLoadGameMenuWork->palette3);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles3);
+    ReleaseObjPalette(sLoadGameMenuWork->palette4);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles4);
+    ReleaseObjPalette(sLoadGameMenuWork->palette5);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles5);
+    ReleaseObjPalette(sLoadGameMenuWork->palette6);
+    ReleaseObjTiles(sLoadGameMenuWork->tiles6);
+    ReleaseObjPalette(sLoadGameMenuWork->palette7);
+    FreeTextSlots(sLoadGameMenuWork->textSlots, 36);
+    EwramFree(sLoadGameMenuWork);
 }
 
 void MenuMsgWaitMessage(MenuMsgWork* w) {
@@ -4641,13 +4639,13 @@ void MenuMsgWaitFade(MenuMsgWork* w) {
 }
 
 void Mode_MenuMsg_0(s32 arg) {
-    gMenuMsgWork = EwramAlloc(sizeof(MenuMsgWork));
-    gMenuMsgWork->toTitle = arg;
+    sMenuMsgWork = EwramAlloc(sizeof(MenuMsgWork));
+    sMenuMsgWork->toTitle = arg;
     SetBgMode0();
-    TaskPoolInit(&gMenuMsgWork->tasks, 1);
+    TaskPoolInit(&sMenuMsgWork->tasks, 1);
 
-    if (gMenuMsgWork->toTitle == 0) {
-        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB0);
+    if (sMenuMsgWork->toTitle == 0) {
+        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB0);
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
         BackdropFadeStartIn(1, 16);
@@ -4655,9 +4653,9 @@ void Mode_MenuMsg_0(s32 arg) {
         FadeLock();
     } else {
 #ifdef VERSION_EU
-        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB2);
+        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB2);
 #else
-        CreateSysmsgwinTask(&gMenuMsgWork->tasks, 0xB3);
+        CreateSysmsgwinTask(&sMenuMsgWork->tasks, 0xB3);
 #endif
         BackdropFadeReset();
         BackdropFadeSetColor(0, 0, 0);
@@ -4666,19 +4664,19 @@ void Mode_MenuMsg_0(s32 arg) {
         FadeLock();
     }
 
-    gMenuMsgWork->update = MenuMsgWaitMessage;
+    sMenuMsgWork->update = MenuMsgWaitMessage;
 }
 
 void Mode_MenuMsg_1() {
-    gMenuMsgWork->update(gMenuMsgWork);
-    TaskPoolUpdate(&gMenuMsgWork->tasks);
-    TaskPoolDraw(&gMenuMsgWork->tasks);
+    sMenuMsgWork->update(sMenuMsgWork);
+    TaskPoolUpdate(&sMenuMsgWork->tasks);
+    TaskPoolDraw(&sMenuMsgWork->tasks);
     BackdropFadeUpdate();
 }
 
 void Mode_MenuMsg_2() {
-    TaskPoolDestroy(&gMenuMsgWork->tasks);
-    EwramFree(gMenuMsgWork);
+    TaskPoolDestroy(&sMenuMsgWork->tasks);
+    EwramFree(sMenuMsgWork);
 }
 
 void Task_MapRnd_0(MapRndWork* w) {

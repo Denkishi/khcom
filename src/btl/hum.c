@@ -1650,14 +1650,14 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 1;
-                    args.unk_14 = 1;
+                    args.facingLeft = 1;
+                    args.variant = 1;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 0;
-                    args.unk_14 = 1;
+                    args.facingLeft = 0;
+                    args.variant = 1;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -1702,14 +1702,14 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 1;
-                    args.unk_14 = 0;
+                    args.facingLeft = 1;
+                    args.variant = 0;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 0;
-                    args.unk_14 = 0;
+                    args.facingLeft = 0;
+                    args.variant = 0;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -1753,14 +1753,14 @@ u8 task_hum_hook_1(HookWork* work) {
                     args.x = act->x - 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 1;
-                    args.unk_14 = 2;
+                    args.facingLeft = 1;
+                    args.variant = 2;
                 } else {
                     args.x = act->x + 0x3200;
                     args.y = act->y;
                     args.z = act->z - 0x1C00;
-                    args.unk_12 = 0;
-                    args.unk_14 = 2;
+                    args.facingLeft = 0;
+                    args.variant = 2;
                 }
 
                 w->bombTask = TaskCreate(&w->tasks, &sTaskDescHumHookBomb, &args);
@@ -2094,7 +2094,7 @@ void task_hum_hook_moon_3(HookMoonWork* work) {
 }
 
 void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
-    if (args->unk_12 != 0) {
+    if (args->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -2107,7 +2107,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
     work->x = args->x;
     work->y = args->y;
     work->z = args->z;
-    work->variant = args->unk_14;
+    work->variant = args->variant;
     work->timer = 0;
     work->bounceCount = 0;
     work->speed = GetRandom() % 0x201 + 0x14C;
@@ -4305,10 +4305,10 @@ void CreateHumLaxeneKnfTask(LaxeneWork* work, s16 a, s16 b) {
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         args.x = act->x + (a << 8);
-        args.unk_12 = 1;
+        args.facingLeft = 1;
     } else {
         args.x = act->x - (a << 8);
-        args.unk_12 = 0;
+        args.facingLeft = 0;
     }
 
     args.z = act->z + (b << 8);
@@ -5062,7 +5062,7 @@ void task_hum_laxene_knf_0(LaxeneKnfWork* work, VixenNdlArgs* args) {
     AnimInit(&work->anim, gLaxineKnifeAnims, gLaxineKnifeFrames);
     AnimStart(&work->anim, 0, 0);
 
-    if (args->unk_12 != 0) {
+    if (args->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -6471,7 +6471,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
                 args.x = work->needleX;
                 args.y = work->needleY;
                 args.z = 0;
-                args.unk_12 = work->needleCount % 8;
+                args.facingLeft = work->needleCount % 8;
                 args.tiles = &work->needleTiles;
                 work->needleCount++;
                 TaskCreate(&work->tasks, &sTaskDescHumVixenNdl, &args);
@@ -6692,7 +6692,7 @@ void task_hum_vixen_ndl_0(VixenNdlWork* work, VixenNdlArgs* args) {
     work->tiles = args->tiles;
     AnimInit(&work->anim, gVixenE1Anims, gVixenE1Frames);
     AnimStart(&work->anim, 0, 0);
-    work->hitPhase = args->unk_12;
+    work->hitPhase = args->facingLeft;
     work->x = args->x;
     work->y = args->y + (GetRandom() % 11 - 5) * 256;
     work->z = args->z;
@@ -7349,10 +7349,10 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (work->base.anim.timer == 0) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a1.x = act->x - 0x2000;
-                    a1.unk_12 = 1;
+                    a1.facingLeft = 1;
                 } else {
                     a1.x = act->x + 0x2000;
-                    a1.unk_12 = 0;
+                    a1.facingLeft = 0;
                 }
 
                 a1.y = act->y;
@@ -7402,10 +7402,10 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (work->base.anim.timer == 2) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a1.x = act->x - 0x1800;
-                    a1.unk_12 = 1;
+                    a1.facingLeft = 1;
                 } else {
                     a1.x = act->x + 0x1800;
-                    a1.unk_12 = 0;
+                    a1.facingLeft = 0;
                 }
 
                 a1.y = act->y;
@@ -7434,10 +7434,10 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             if (work->base.anim.timer == 10) {
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     a2.x = act->x - 0x700;
-                    a2.unk_12 = 1;
+                    a2.facingLeft = 1;
                 } else {
                     a2.x = act->x + 0x700;
-                    a2.unk_12 = 0;
+                    a2.facingLeft = 0;
                 }
 
                 a2.y = act->y;
@@ -7723,7 +7723,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     AnimInit(&work->anim, gRexeusTmhAxAnims, gRexeusTmhAxFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 
-    if (args->unk_12 != 0) {
+    if (args->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -7865,7 +7865,7 @@ void task_hum_lex_tmh0_0(LexTmh0Work* work, VixenNdlArgs* args) {
     AnimInit(&work->anim, gRexeusTmhAnims, gRexeusTmhFrames);
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
 
-    if (args->unk_12 != 0) {
+    if (args->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -7931,7 +7931,7 @@ void task_hum_lex_tmh0_3(LexTmh0Work* work) {
 }
 
 void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
-    if (args->unk_12 != 0) {
+    if (args->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;

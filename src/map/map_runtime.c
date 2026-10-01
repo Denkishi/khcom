@@ -1042,7 +1042,7 @@ u8 MapFindOpenDoor(FldPos* p) {
         return 0;
     }
 
-    if ((gGameState.progression.unk_82 & 0x200) == 0) {
+    if ((gGameState.progression.tutorialFlags & 0x200) == 0) {
         return 0;
     }
 

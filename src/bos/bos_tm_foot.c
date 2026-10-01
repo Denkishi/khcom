@@ -77,7 +77,7 @@ static TmFootStep sBosTmFootWalkSteps[10] = {
     { 0, 0, 0, 6, 0, 0, 0, 1, -4, -7, { 0, 0, 0, 0 }, 0, 10, { 0, 0, 0, 0 } },
 };
 
-static TmFootStep sUnk_09EF25A4[9] = {
+static TmFootStep sBosTmFootSpinSteps[9] = {
     { 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 6, 0, 1, 0, 6, 0, 1, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
     { 0, 9, 0, 0, 0, 9, 0, 0, 0, 0, { 0, 0, 0, 0 }, 0, 0, { 0, 0, 0, 0 } },
@@ -506,10 +506,10 @@ void BosTmFootWalk(TmFootWork* work) {
 }
 
 void BosTmFootApplySpinStep(TmFootWork* work, s16 a) {
-    work->gfx = gUnk_09EF39DC[sUnk_09EF25A4[a].gfxIndex];
-    work->gfx2 = gUnk_09EF39DC[sUnk_09EF25A4[a].gfx2Index];
-    work->body.z += sUnk_09EF25A4[a].dz << 8;
-    work->body2.z += sUnk_09EF25A4[a].dz2 << 8;
+    work->gfx = gUnk_09EF39DC[sBosTmFootSpinSteps[a].gfxIndex];
+    work->gfx2 = gUnk_09EF39DC[sBosTmFootSpinSteps[a].gfx2Index];
+    work->body.z += sBosTmFootSpinSteps[a].dz << 8;
+    work->body2.z += sBosTmFootSpinSteps[a].dz2 << 8;
 }
 
 void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {

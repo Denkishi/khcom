@@ -3218,7 +3218,7 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
             }
 
             arg.kind = t;
-            arg.unk_02 = w->scene[w->sceneIndex].unk_30;
+            arg.animId = w->scene[w->sceneIndex].animId;
             arg.nameIndex = t;
             arg.x = 0x14000;
             arg.y = w->scene[w->sceneIndex].targetY;
@@ -3226,14 +3226,14 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
             arg.targetY = w->scene[w->sceneIndex].targetY;
             w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
             arg.kind = 1;
-            arg.unk_02 = 1;
+            arg.animId = 1;
             arg.nameIndex = w->scene[w->sceneIndex].nameIndex;
             arg.x = -0x5000;
             z = 0x7800;
             arg.targetX = z;
             w->subTasks[1] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);
             arg.kind = 2;
-            arg.unk_02 = w->scene[w->sceneIndex].unk_30;
+            arg.animId = w->scene[w->sceneIndex].animId;
             arg.nameIndex = w->scene[w->sceneIndex].nameIndex;
             arg.x = z;
             w->subTasks[2] = TaskCreate(&w->tasks, &gTaskDescSrollAName, &arg);

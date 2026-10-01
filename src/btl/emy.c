@@ -1711,8 +1711,8 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
 
         if (w->successCount == 2 && gFrameCounter % 10 == 0) {
-            spawn.unk_12 = 1;
-            spawn.unk_14 = 0;
+            spawn.facingLeft = 1;
+            spawn.hitPhase = 0;
             spawn.x = act->x;
             spawn.y = act->y;
             spawn.z = act->z - (act->height << 8);
@@ -2189,12 +2189,12 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.x = act->x - 0x1000;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x1000;
-                spawn.unk_12 = 1;
+                spawn.facingLeft = 1;
             } else {
                 spawn.x = act->x + 0x1000;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x1000;
-                spawn.unk_12 = 0;
+                spawn.facingLeft = 0;
             }
 
             w->pTask = TaskCreate(&w->tasks, &sTaskDescEmy16P, &spawn);
@@ -2216,12 +2216,12 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.x = act->x - 0xC00;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x200;
-                spawn.unk_12 = 1;
+                spawn.facingLeft = 1;
             } else {
                 spawn.x = act->x + 0xC00;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x200;
-                spawn.unk_12 = 0;
+                spawn.facingLeft = 0;
             }
 
             w->bTask = TaskCreate(&w->tasks, &sTaskDescEmy16B, &spawn);
@@ -2249,7 +2249,7 @@ void task_emy_16_3(Emy16Work* work) {
 }
 
 void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
-    if (spawn->unk_12 != 0) {
+    if (spawn->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -2400,7 +2400,7 @@ void task_emy_16_b_3(Emy16bWork* work) {
 }
 
 void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
-    if (spawn->unk_12 != 0) {
+    if (spawn->facingLeft != 0) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -5811,19 +5811,19 @@ u8 task_emy_83_1(Emy83Work* work) {
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 spawn.x = act->x - 0x1000;
-                spawn.unk_12 = 1;
+                spawn.facingLeft = 1;
             } else {
                 spawn.x = act->x + 0x1000;
-                spawn.unk_12 = 0;
+                spawn.facingLeft = 0;
             }
 
             spawn.y = act->y;
             spawn.z = act->z - 0x1200;
-            spawn.unk_14 = 0;
+            spawn.hitPhase = 0;
             TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
-            spawn.unk_14 = 1;
+            spawn.hitPhase = 1;
             TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
-            spawn.unk_14 = 2;
+            spawn.hitPhase = 2;
             TaskCreate(&w->tasks, &sTaskDescEmy83S, &spawn);
             w->shotCount++;
         }
@@ -5967,14 +5967,14 @@ void task_emy_83_s_0(Emy83sWork* work, EmySpawn* spawn) {
     work->vz = 0;
     work->frameCount = 0;
 
-    if (spawn->unk_12 != 0) {
+    if (spawn->facingLeft != 0) {
         work->vx = -(GetRandom() % 0x4CE + 0x133);
     } else {
         work->vx = GetRandom() % 0x4CE + 0x133;
     }
 
     work->vy = GetRandom() % 0x201 - 0x100;
-    work->hitPhase = spawn->unk_14;
+    work->hitPhase = spawn->hitPhase;
 }
 
 u8 task_emy_83_s_1(Emy83sWork* work) {

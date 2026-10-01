@@ -5251,7 +5251,7 @@ void mode_worldselect_0() {
     void** p;
 
     SpriteReset();
-    gWorldselectFirstVisit = (gGameState.progression.unk_82 ^ 1) & 1;
+    gWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
     gWorldselectBgAnimActive = 0;
     gWorldselectCancelled = 0;
     FadeStartIn(FADE_MODE_ADD_WHITE, 16);
@@ -5392,7 +5392,7 @@ void mode_worldselect_1() {
                 CreateCardMessageTask(&gWorldselectTaskPool, 2, 71);
                 gWorldselectTutorialStep++;
             } else {
-                gGameState.progression.unk_82 |= 1;
+                gGameState.progression.tutorialFlags |= 1;
                 WorldselectSetBgMode1();
                 BgAnimInit(2, 0x8000, 128);
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);

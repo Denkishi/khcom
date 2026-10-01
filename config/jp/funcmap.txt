@@ -667,7 +667,7 @@ HandleTutorialCardInput	0x080197ac	644	0x080197ac	global
 MakeOpponentsHittable	0x08019a30	156	0x08019a30	global
 DropFriendCard	0x08019acc	400	0x08019acc	global
 EndCardPlay	0x08019c5c	88	0x08019c5c	body
-UpdateBattlePhase	0x08019cb4	3056	0x08019cb4	global
+UpdateBattleState	0x08019cb4	3056	0x08019cb4	global
 ClampBattlePosition	0x0801a8a4	124	0x0801a8a4	global
 SetBattleBounds	0x0801a920	88	0x0801a920	global
 ApplyBtlObjHit	0x0801a978	1008	0x0801a978	global
@@ -3005,9 +3005,9 @@ task_bos_jf_shadow_0	0x080c6ee0	52	0x080c6f94	named
 task_bos_jf_shadow_1	0x080c6f14	4	0x080c6fc8	named
 task_bos_jf_shadow_2	0x080c6f18	200	0x080c6fcc	named
 task_bos_jf_shadow_3	0x080c6fe0	24	0x080c7094	named
-func_080C6FF8	0x080c6ff8	20	0x080c70ac	body
-func_080C700C	0x080c700c	24	0x080c70c0	global
-func_080C7024	0x080c7024	24	0x080c70d8	global
+ResetSaveSliceE6C	0x080c6ff8	20	0x080c70ac	body
+WriteSaveSliceE6C	0x080c700c	24	0x080c70c0	global
+ReadSaveSliceE6C	0x080c7024	24	0x080c70d8	global
 mode_sio_dbg_flg_0	0x080c703c	308	0x080c70f0	named
 mode_sio_dbg_flg_1	0x080c7170	468	0x080c7224	named
 mode_sio_dbg_flg_2	0x080c7344	12	0x080c73f8	named

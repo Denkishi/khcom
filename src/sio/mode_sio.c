@@ -669,7 +669,7 @@ void SioInitWorldList() {
 void SetSioBtlOptionAnimation(u16 a, u16 b, u16 c) {
     const SioAnimDef* def = &sSioBtlOptionAnimDefs[b];
     AnimChangeWithTables(&gSioBtlOptionWork->anim2[a], def->animId, c, def->anims, def->gfxTable);
-    SetObjTileSource(gSioBtlOptionWork->unk_008[a], def->tiles);
+    SetObjTileSource(gSioBtlOptionWork->playerTilesPalettes[a], def->tiles);
 }
 
 void mode_sio_btl_option_0(s32 arg) {
@@ -784,18 +784,18 @@ void SioBtlOptionInitObjs() {
     SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
 
     for (i = 0; i < 2; i++) {
-        gSioBtlOptionWork->unk_008[i] = AllocObjTiles(0xC80, NULL);
+        gSioBtlOptionWork->playerTilesPalettes[i] = AllocObjTiles(0xC80, NULL);
         AnimInit(&gSioBtlOptionWork->anim2[i], NULL, NULL);
         SetSioBtlOptionAnimation(i, 0, 0);
         gSioBtlOptionWork->gfx6[i] = AnimGetGfx(&gSioBtlOptionWork->anim2[i]);
     }
 
     if (gSioPlayerId == 0) {
-        gSioBtlOptionWork->unk_008[2] = LoadObjPalette(gSoraPalette, 32);
-        gSioBtlOptionWork->unk_008[3] = LoadObjPalette(gUnk_096FAC64, 32);
+        gSioBtlOptionWork->playerTilesPalettes[2] = LoadObjPalette(gSoraPalette, 32);
+        gSioBtlOptionWork->playerTilesPalettes[3] = LoadObjPalette(gUnk_096FAC64, 32);
     } else {
-        gSioBtlOptionWork->unk_008[2] = LoadObjPalette(gUnk_096FAC64, 32);
-        gSioBtlOptionWork->unk_008[3] = LoadObjPalette(gSoraPalette, 32);
+        gSioBtlOptionWork->playerTilesPalettes[2] = LoadObjPalette(gUnk_096FAC64, 32);
+        gSioBtlOptionWork->playerTilesPalettes[3] = LoadObjPalette(gSoraPalette, 32);
     }
 
 #ifdef VERSION_EU
@@ -1008,8 +1008,8 @@ void SioBtlOptionDraw() {
     gSioBtlOptionWork->gfx6[0] = AnimUpdate(&gSioBtlOptionWork->anim2[0]);
     gSioBtlOptionWork->gfx6[1] = AnimUpdate(&gSioBtlOptionWork->anim2[1]);
     gSioBtlOptionWork->gfx2 = AnimUpdate(&gSioBtlOptionWork->anim);
-    DrawSprite(60, 88, gSioBtlOptionWork->gfx6[0], gSioBtlOptionWork->unk_008[0], gSioBtlOptionWork->unk_008[2], NULL, SPRITE_FLAG_HFLIP, 0xFFF0);
-    DrawSprite(180, 88, gSioBtlOptionWork->gfx6[1], gSioBtlOptionWork->unk_008[1], gSioBtlOptionWork->unk_008[3], NULL, 0, 0xFFF0);
+    DrawSprite(60, 88, gSioBtlOptionWork->gfx6[0], gSioBtlOptionWork->playerTilesPalettes[0], gSioBtlOptionWork->playerTilesPalettes[2], NULL, SPRITE_FLAG_HFLIP, 0xFFF0);
+    DrawSprite(180, 88, gSioBtlOptionWork->gfx6[1], gSioBtlOptionWork->playerTilesPalettes[1], gSioBtlOptionWork->playerTilesPalettes[3], NULL, 0, 0xFFF0);
 #ifdef VERSION_EU
     width = GetTextSlotsWidth(gSioBtlOptionWork->textSlots, gSioBtlOptionWork->textSlotCount);
     DrawTextSlots(162 - width / 2, 4, gSioBtlOptionWork->textSlots, gSioBtlOptionWork->palette7, 20, gSioBtlOptionWork->textSlotCount);
@@ -1773,10 +1773,10 @@ void SioBtlOptionStartBattle() {
 }
 
 void mode_sio_btl_option_2() {
-    ReleaseObjTiles(gSioBtlOptionWork->unk_008[0]);
-    ReleaseObjPalette(gSioBtlOptionWork->unk_008[2]);
-    ReleaseObjTiles(gSioBtlOptionWork->unk_008[1]);
-    ReleaseObjPalette(gSioBtlOptionWork->unk_008[3]);
+    ReleaseObjTiles(gSioBtlOptionWork->playerTilesPalettes[0]);
+    ReleaseObjPalette(gSioBtlOptionWork->playerTilesPalettes[2]);
+    ReleaseObjTiles(gSioBtlOptionWork->playerTilesPalettes[1]);
+    ReleaseObjPalette(gSioBtlOptionWork->playerTilesPalettes[3]);
     ReleaseObjPalette(gSioBtlOptionWork->palette7);
     ReleaseObjPalette(gSioBtlOptionWork->palette8);
     ReleaseObjPalette(gSioBtlOptionWork->palette9);
@@ -2825,7 +2825,7 @@ void SioChgConnectStartTrade() {
 void SetSioChgCardAnimation(u16 a, u16 b, u16 c) {
     const SioAnimDef* def = &gSioChgCardAnimDefs[b];
     AnimChangeWithTables(&gSioChgCardWork->anim[a], def->animId, c, def->anims, def->gfxTable);
-    SetObjTileSource(gSioChgCardWork->unk_008[a], def->tiles);
+    SetObjTileSource(gSioChgCardWork->playerTilesPalettes[a], def->tiles);
 }
 #endif
 
@@ -2890,7 +2890,7 @@ void SioChgCardInitObjs() {
     gSioChgCardWork->cursorVisible = 1;
 
     for (i = 0; i < 2; i++) {
-        gSioChgCardWork->unk_008[i] = AllocObjTiles(0xC80, NULL);
+        gSioChgCardWork->playerTilesPalettes[i] = AllocObjTiles(0xC80, NULL);
         AnimInit(&gSioChgCardWork->anim[i], NULL, NULL);
 
         if (gSioChgCardReady[i] == 0) {
@@ -2903,11 +2903,11 @@ void SioChgCardInitObjs() {
     }
 
     if (gSioPlayerId == 0) {
-        gSioChgCardWork->unk_008[2] = LoadObjPalette(gSoraPalette, 32);
-        gSioChgCardWork->unk_008[3] = LoadObjPalette(gUnk_096FAC64, 32);
+        gSioChgCardWork->playerTilesPalettes[2] = LoadObjPalette(gSoraPalette, 32);
+        gSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gUnk_096FAC64, 32);
     } else {
-        gSioChgCardWork->unk_008[2] = LoadObjPalette(gUnk_096FAC64, 32);
-        gSioChgCardWork->unk_008[3] = LoadObjPalette(gSoraPalette, 32);
+        gSioChgCardWork->playerTilesPalettes[2] = LoadObjPalette(gUnk_096FAC64, 32);
+        gSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gSoraPalette, 32);
     }
 
     gSioChgCardWork->tiles = LoadObjTiles(gUnk_0962DEA8, 0x780);
@@ -3293,10 +3293,10 @@ void SioChgCardRestart() {
 
 void mode_sio_chg_card_2() {
     s32 i;
-    ReleaseObjTiles(gSioChgCardWork->unk_008[0]);
-    ReleaseObjTiles(gSioChgCardWork->unk_008[1]);
-    ReleaseObjPalette(gSioChgCardWork->unk_008[2]);
-    ReleaseObjPalette(gSioChgCardWork->unk_008[3]);
+    ReleaseObjTiles(gSioChgCardWork->playerTilesPalettes[0]);
+    ReleaseObjTiles(gSioChgCardWork->playerTilesPalettes[1]);
+    ReleaseObjPalette(gSioChgCardWork->playerTilesPalettes[2]);
+    ReleaseObjPalette(gSioChgCardWork->playerTilesPalettes[3]);
     ReleaseObjTiles(gSioChgCardWork->tiles);
     ReleaseObjPalette(gSioChgCardWork->palette);
     ReleaseObjTiles(gSioChgCardWork->tiles2);
@@ -3323,8 +3323,8 @@ void SioChgCardDraw() {
     gSioChgCardWork->gfx[1] = AnimUpdate(&gSioChgCardWork->anim[1]);
     gSioChgCardWork->gfx2 = AnimUpdate(&gSioChgCardWork->anim2);
     gSioChgCardWork->gfx3 = AnimUpdate(&gSioChgCardWork->anim3);
-    DrawSprite(72, 72, gSioChgCardWork->gfx[0], gSioChgCardWork->unk_008[0], gSioChgCardWork->unk_008[2], NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 0xFFFF);
-    DrawSprite(168, 72, gSioChgCardWork->gfx[1], gSioChgCardWork->unk_008[1], gSioChgCardWork->unk_008[3], NULL, SPRITE_PRIORITY(1), 0xFFFF);
+    DrawSprite(72, 72, gSioChgCardWork->gfx[0], gSioChgCardWork->playerTilesPalettes[0], gSioChgCardWork->playerTilesPalettes[2], NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 0xFFFF);
+    DrawSprite(168, 72, gSioChgCardWork->gfx[1], gSioChgCardWork->playerTilesPalettes[1], gSioChgCardWork->playerTilesPalettes[3], NULL, SPRITE_PRIORITY(1), 0xFFFF);
 
     if (gSioChgCardWork->cursorVisible == 1) {
         DrawSprite(gSioChgCardWork->x, gSioChgCardWork->y, gSioChgCardWork->gfx2, gSioChgCardWork->tiles, gSioChgCardWork->palette, NULL, SPRITE_PRIORITY(1), 0xFFC0);

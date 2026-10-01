@@ -19,11 +19,11 @@ static s16 sBosPcFldShakePattern;
 static s16 sBosPcFldShakeStep;
 static s32 sBosPcFldShakeOffset;
 
-static const s8 sUnk_09A4CA94[33] = {
+static const s8 sBosPcFldShakePattern0[33] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1, 0,
 };
 
-static const s8 sUnk_09A4CAB5[9] = {
+static const s8 sBosPcFldShakePattern1[9] = {
     1, 2, 2, 1, -1, -2, -2, -1, 0,
 };
 
@@ -35,7 +35,7 @@ static const s16 sBosPcFldPaletteCycleFrames[3] = {
     6, 6, 6,
 };
 
-static const s8* sBosPcFldShakePatterns[2] = { sUnk_09A4CA94, sUnk_09A4CAB5 };
+static const s8* sBosPcFldShakePatterns[2] = { sBosPcFldShakePattern0, sBosPcFldShakePattern1 };
 
 TaskDesc gTaskDescBosPcFld = {
     "task_bos_pc_fld",

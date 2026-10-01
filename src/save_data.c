@@ -71,7 +71,7 @@ void MakeSaveSystem(SaveFileLarge* save) {
     save->common.playTime = gGameState.playTime;
     CopyMapProgress(&save->shared);
     WriteCardSaveSlice(&save->large);
-    func_080C700C(&save->unk_E6C);
+    WriteSaveSliceE6C(&save->unk_E6C);
     SavePooState(save->pooState);
     SaveMoogleShopFlags(&save->moogleShop);
 }
@@ -86,7 +86,7 @@ void MakeSaveFileLarge(SaveFileLarge* save) {
     save->common.playTime = gGameState.playTime;
     CopyMapProgress(&save->shared);
     WriteCardSaveSlice(&save->large);
-    func_080C700C(&save->unk_E6C);
+    WriteSaveSliceE6C(&save->unk_E6C);
     SavePooState(save->pooState);
     SaveMoogleShopFlags(&save->moogleShop);
 
@@ -209,7 +209,7 @@ void ApplySaveSystem(SaveFileLarge* save) {
     gGameState.playTime = save->common.playTime;
     RestoreMapProgress(&save->shared);
     ReadCardSaveSlice(&save->large);
-    func_080C7024(&save->unk_E6C);
+    ReadSaveSliceE6C(&save->unk_E6C);
     LoadPooState(save->pooState);
     LoadMoogleShopFlags(&save->moogleShop);
 }
@@ -228,7 +228,7 @@ void ApplySaveFileLarge(SaveFileLarge* save) {
     gGameState.playTime = save->common.playTime;
     RestoreMapProgress(&save->shared);
     ReadCardSaveSlice(&save->large);
-    func_080C7024(&save->unk_E6C);
+    ReadSaveSliceE6C(&save->unk_E6C);
     LoadPooState(save->pooState);
     LoadMoogleShopFlags(&save->moogleShop);
     gGameState.flags &= ~GAME_FLAG_RIKU;

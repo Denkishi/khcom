@@ -24,7 +24,7 @@ static s16 sBosTmBodyIdleZ[8] = { 8, -8, -12, 12, 8, -8, -12, 12 };
 
 static s16 sBosTmBodyWalkZ[10] = { -11, -8, -10, 10, 19, -11, -8, -10, 10, 19 };
 
-static TmBodyStep sUnk_09EF1D88[3] = {
+static TmBodyStep sBosTmBodyRecoilSteps[3] = {
     { -8, 0, 246, { 0, 0, 0 }, -3, 2, 246, { 0, 0, 0 }, -6, 2, { 0, 0 }, 0, -6, 2, { 0, 0 }, 0 },
     { -6, 8, 246, { 0, 0, 0 }, -2, 7, 246, { 0, 0, 0 }, -6, 6, { 0, 0 }, 0, -6, 6, { 0, 0 }, 0 },
     { -4, 0, 246, { 0, 0, 0 }, 0, 0, 246, { 0, 0, 0 }, -3, 0, { 0, 0 }, 0, -3, 0, { 0, 0 }, 0 },
@@ -32,7 +32,7 @@ static TmBodyStep sUnk_09EF1D88[3] = {
 
 TmBodyStep gUnk_09EF1DE8 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-static s16 sUnk_09EF1E08[3] = { 15, 6, 0 };
+static s16 sBosTmBodyRecoilZ[3] = { 15, 6, 0 };
 
 s16 gUnk_09EF1E0E = -8;
 
@@ -61,7 +61,7 @@ static TmBodyStep sBosTmBodyThrowSteps[16] = {
 
 TmBodyStep gUnk_09EF2014 = { 0, 0, 0, { 0, 0, 0 }, 0, 0, 0, { 0, 0, 0 }, 0, 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0 };
 
-static TmBodyStep sUnk_09EF2034[9] = {
+static TmBodyStep sBosTmBodySpinSteps[9] = {
     { 0, 2, 0, { 0, 0, 0 }, 0, 2, 0, { 0, 0, 0 }, 0, 2, { 0, 0 }, 0, 0, 2, { 0, 0 }, 0 },
     { -8, 6, 246, { 0, 0, 0 }, -3, 7, 246, { 0, 0, 0 }, -6, 7, { 0, 0 }, 0, -6, 7, { 0, 0 }, 0 },
     { -6, 8, 246, { 0, 0, 0 }, -2, 9, 246, { 0, 0, 0 }, -6, 9, { 0, 0 }, 0, -6, 9, { 0, 0 }, 0 },
@@ -291,113 +291,113 @@ void BosTmBodyUpdateRecoil(TmBodyWork* p) {
         p->tm->stepTimer = 0;
 
         if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-            p->angle = sUnk_09EF1D88[p->tm->step].dAngle;
-            p->angle2 = sUnk_09EF1D88[p->tm->step].dAngle2;
-            p->body.x = p->tm->baseX + ((sUnk_09EF1D88[p->tm->step].dx + 4) << 8);
-            p->body2.x = p->tm->baseX + (sUnk_09EF1D88[p->tm->step].dx2 << 8);
-            p->body3.x = p->tm->baseX + ((sUnk_09EF1D88[p->tm->step].dx3 + 12) << 8);
-            p->body4.x = p->tm->baseX + ((sUnk_09EF1D88[p->tm->step].dx4 - 1) << 8);
-            p->tm->x2 = p->tm->baseX + (sUnk_09EF1D88[p->tm->step].dx3 << 8);
+            p->angle = sBosTmBodyRecoilSteps[p->tm->step].dAngle;
+            p->angle2 = sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
+            p->body.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx + 4) << 8);
+            p->body2.x = p->tm->baseX + (sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8);
+            p->body3.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx3 + 12) << 8);
+            p->body4.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx4 - 1) << 8);
+            p->tm->x2 = p->tm->baseX + (sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8);
         } else {
-            p->angle = sUnk_09EF1D88[p->tm->step].dAngle;
-            p->angle2 = sUnk_09EF1D88[p->tm->step].dAngle2;
-            p->body.x = p->tm->baseX + ((-4 - sUnk_09EF1D88[p->tm->step].dx) << 8);
-            p->body2.x = p->tm->baseX - (sUnk_09EF1D88[p->tm->step].dx2 << 8);
-            p->body3.x = p->tm->baseX + ((-12 - sUnk_09EF1D88[p->tm->step].dx3) << 8);
-            p->body4.x = p->tm->baseX + ((1 - sUnk_09EF1D88[p->tm->step].dx4) << 8);
-            p->tm->x2 = p->tm->baseX - (sUnk_09EF1D88[p->tm->step].dx3 << 8);
+            p->angle = sBosTmBodyRecoilSteps[p->tm->step].dAngle;
+            p->angle2 = sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
+            p->body.x = p->tm->baseX + ((-4 - sBosTmBodyRecoilSteps[p->tm->step].dx) << 8);
+            p->body2.x = p->tm->baseX - (sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8);
+            p->body3.x = p->tm->baseX + ((-12 - sBosTmBodyRecoilSteps[p->tm->step].dx3) << 8);
+            p->body4.x = p->tm->baseX + ((1 - sBosTmBodyRecoilSteps[p->tm->step].dx4) << 8);
+            p->tm->x2 = p->tm->baseX - (sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8);
         }
 
-        p->body.z = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz - 34 + sUnk_09EF1E08[2]) << 8);
-        p->body2.z = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz2 + 9 + sUnk_09EF1E08[2]) << 8);
-        p->body3.z = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz3 - 33 + sUnk_09EF1E08[2]) << 8);
-        p->body4.z = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz4 - 30 + sUnk_09EF1E08[2]) << 8);
-        p->tm->z2 = p->tm->baseZ + ((sUnk_09EF1D88[p->tm->step].dz2 + 0 + sUnk_09EF1E08[2]) << 8);
+        p->body.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz - 34 + sBosTmBodyRecoilZ[2]) << 8);
+        p->body2.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz2 + 9 + sBosTmBodyRecoilZ[2]) << 8);
+        p->body3.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz3 - 33 + sBosTmBodyRecoilZ[2]) << 8);
+        p->body4.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz4 - 30 + sBosTmBodyRecoilZ[2]) << 8);
+        p->tm->z2 = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz2 + 0 + sBosTmBodyRecoilZ[2]) << 8);
     } else {
         if (p->tm->step < 3) {
             if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                p->angle += sUnk_09EF1D88[p->tm->step].dAngle;
-                p->angle2 += sUnk_09EF1D88[p->tm->step].dAngle2;
-                p->body.x += sUnk_09EF1D88[p->tm->step].dx << 8;
-                p->body2.x += sUnk_09EF1D88[p->tm->step].dx2 << 8;
-                p->body3.x += sUnk_09EF1D88[p->tm->step].dx3 << 8;
-                p->body4.x += sUnk_09EF1D88[p->tm->step].dx4 << 8;
-                p->tm->x2 += sUnk_09EF1D88[p->tm->step].dx3 << 8;
+                p->angle += sBosTmBodyRecoilSteps[p->tm->step].dAngle;
+                p->angle2 += sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
+                p->body.x += sBosTmBodyRecoilSteps[p->tm->step].dx << 8;
+                p->body2.x += sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8;
+                p->body3.x += sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
+                p->body4.x += sBosTmBodyRecoilSteps[p->tm->step].dx4 << 8;
+                p->tm->x2 += sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
             } else {
-                p->angle += sUnk_09EF1D88[p->tm->step].dAngle;
-                p->angle2 += sUnk_09EF1D88[p->tm->step].dAngle2;
-                p->body.x -= sUnk_09EF1D88[p->tm->step].dx << 8;
-                p->body2.x -= sUnk_09EF1D88[p->tm->step].dx2 << 8;
-                p->body3.x -= sUnk_09EF1D88[p->tm->step].dx3 << 8;
-                p->body4.x -= sUnk_09EF1D88[p->tm->step].dx4 << 8;
-                p->tm->x2 -= sUnk_09EF1D88[p->tm->step].dx3 << 8;
+                p->angle += sBosTmBodyRecoilSteps[p->tm->step].dAngle;
+                p->angle2 += sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
+                p->body.x -= sBosTmBodyRecoilSteps[p->tm->step].dx << 8;
+                p->body2.x -= sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8;
+                p->body3.x -= sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
+                p->body4.x -= sBosTmBodyRecoilSteps[p->tm->step].dx4 << 8;
+                p->tm->x2 -= sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
             }
 
             j = 2 - p->tm->step;
-            p->body.z += (sUnk_09EF1D88[p->tm->step].dz + sUnk_09EF1E08[j]) << 8;
-            p->body2.z += (sUnk_09EF1D88[p->tm->step].dz2 + sUnk_09EF1E08[j]) << 8;
-            p->body3.z += (sUnk_09EF1D88[p->tm->step].dz3 + sUnk_09EF1E08[j]) << 8;
-            p->body4.z += (sUnk_09EF1D88[p->tm->step].dz4 + sUnk_09EF1E08[j]) << 8;
-            p->tm->z2 += (sUnk_09EF1D88[p->tm->step].dz2 + sUnk_09EF1E08[j]) << 8;
+            p->body.z += (sBosTmBodyRecoilSteps[p->tm->step].dz + sBosTmBodyRecoilZ[j]) << 8;
+            p->body2.z += (sBosTmBodyRecoilSteps[p->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            p->body3.z += (sBosTmBodyRecoilSteps[p->tm->step].dz3 + sBosTmBodyRecoilZ[j]) << 8;
+            p->body4.z += (sBosTmBodyRecoilSteps[p->tm->step].dz4 + sBosTmBodyRecoilZ[j]) << 8;
+            p->tm->z2 += (sBosTmBodyRecoilSteps[p->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
         }
 
         if (p->tm->hurtTimer < 3) {
             i = p->tm->hurtTimer;
 
             if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                p->angle -= sUnk_09EF1D88[i].dAngle;
-                p->angle2 -= sUnk_09EF1D88[i].dAngle2;
-                p->body.x -= sUnk_09EF1D88[i].dx << 8;
-                p->body2.x -= sUnk_09EF1D88[i].dx2 << 8;
-                p->body3.x -= sUnk_09EF1D88[i].dx3 << 8;
-                p->body4.x -= sUnk_09EF1D88[i].dx4 << 8;
-                p->tm->x2 -= sUnk_09EF1D88[i].dx3 << 8;
+                p->angle -= sBosTmBodyRecoilSteps[i].dAngle;
+                p->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
+                p->body.x -= sBosTmBodyRecoilSteps[i].dx << 8;
+                p->body2.x -= sBosTmBodyRecoilSteps[i].dx2 << 8;
+                p->body3.x -= sBosTmBodyRecoilSteps[i].dx3 << 8;
+                p->body4.x -= sBosTmBodyRecoilSteps[i].dx4 << 8;
+                p->tm->x2 -= sBosTmBodyRecoilSteps[i].dx3 << 8;
             } else {
-                p->angle -= sUnk_09EF1D88[i].dAngle;
-                p->angle2 -= sUnk_09EF1D88[i].dAngle2;
-                p->body.x += sUnk_09EF1D88[i].dx << 8;
-                p->body2.x += sUnk_09EF1D88[i].dx2 << 8;
-                p->body3.x += sUnk_09EF1D88[i].dx3 << 8;
-                p->body4.x += sUnk_09EF1D88[i].dx4 << 8;
-                p->tm->x2 += sUnk_09EF1D88[i].dx3 << 8;
+                p->angle -= sBosTmBodyRecoilSteps[i].dAngle;
+                p->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
+                p->body.x += sBosTmBodyRecoilSteps[i].dx << 8;
+                p->body2.x += sBosTmBodyRecoilSteps[i].dx2 << 8;
+                p->body3.x += sBosTmBodyRecoilSteps[i].dx3 << 8;
+                p->body4.x += sBosTmBodyRecoilSteps[i].dx4 << 8;
+                p->tm->x2 += sBosTmBodyRecoilSteps[i].dx3 << 8;
             }
 
             j = 2 - i;
-            p->body.z -= (sUnk_09EF1D88[i].dz + sUnk_09EF1E08[j]) << 8;
-            p->body2.z -= (sUnk_09EF1D88[i].dz2 + sUnk_09EF1E08[j]) << 8;
-            p->body3.z -= (sUnk_09EF1D88[i].dz3 + sUnk_09EF1E08[j]) << 8;
-            p->body4.z -= (sUnk_09EF1D88[i].dz4 + sUnk_09EF1E08[j]) << 8;
-            p->tm->z2 -= (sUnk_09EF1D88[i].dz2 + sUnk_09EF1E08[j]) << 8;
+            p->body.z -= (sBosTmBodyRecoilSteps[i].dz + sBosTmBodyRecoilZ[j]) << 8;
+            p->body2.z -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            p->body3.z -= (sBosTmBodyRecoilSteps[i].dz3 + sBosTmBodyRecoilZ[j]) << 8;
+            p->body4.z -= (sBosTmBodyRecoilSteps[i].dz4 + sBosTmBodyRecoilZ[j]) << 8;
+            p->tm->z2 -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
         }
     }
 }
 
 void BosTmBodyApplySpinStep(TmBodyWork* p, s16 a) {
     if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-        p->angle += sUnk_09EF2034[a].dAngle;
-        p->angle2 += sUnk_09EF2034[a].dAngle2;
-        p->body.x += sUnk_09EF2034[a].dx << 8;
-        p->body2.x += sUnk_09EF2034[a].dx2 << 8;
-        p->body3.x += sUnk_09EF2034[a].dx3 << 8;
-        p->body4.x += sUnk_09EF2034[a].dx4 << 8;
-        p->tm->x2 += sUnk_09EF2034[a].dx3 << 8;
+        p->angle += sBosTmBodySpinSteps[a].dAngle;
+        p->angle2 += sBosTmBodySpinSteps[a].dAngle2;
+        p->body.x += sBosTmBodySpinSteps[a].dx << 8;
+        p->body2.x += sBosTmBodySpinSteps[a].dx2 << 8;
+        p->body3.x += sBosTmBodySpinSteps[a].dx3 << 8;
+        p->body4.x += sBosTmBodySpinSteps[a].dx4 << 8;
+        p->tm->x2 += sBosTmBodySpinSteps[a].dx3 << 8;
     } else {
-        p->angle += sUnk_09EF2034[a].dAngle;
-        p->angle2 += sUnk_09EF2034[a].dAngle2;
-        p->body.x -= sUnk_09EF2034[a].dx << 8;
-        p->body2.x -= sUnk_09EF2034[a].dx2 << 8;
-        p->body3.x -= sUnk_09EF2034[a].dx3 << 8;
-        p->body4.x -= sUnk_09EF2034[a].dx4 << 8;
-        p->tm->x2 -= sUnk_09EF2034[a].dx3 << 8;
+        p->angle += sBosTmBodySpinSteps[a].dAngle;
+        p->angle2 += sBosTmBodySpinSteps[a].dAngle2;
+        p->body.x -= sBosTmBodySpinSteps[a].dx << 8;
+        p->body2.x -= sBosTmBodySpinSteps[a].dx2 << 8;
+        p->body3.x -= sBosTmBodySpinSteps[a].dx3 << 8;
+        p->body4.x -= sBosTmBodySpinSteps[a].dx4 << 8;
+        p->tm->x2 -= sBosTmBodySpinSteps[a].dx3 << 8;
     }
 
-    p->body.z += sUnk_09EF2034[a].dz << 8;
-    p->body2.z += sUnk_09EF2034[a].dz2 << 8;
-    p->body3.z += sUnk_09EF2034[a].dz3 << 8;
-    p->body4.z += sUnk_09EF2034[a].dz4 << 8;
-    p->tm->z2 += sUnk_09EF2034[a].dz2 << 8;
-    p->gfx3 = gUnk_09EF397C[sUnk_09EF2034[a].gfx3Index];
-    p->gfx4 = gUnk_09EF3960[sUnk_09EF2034[a].gfx4Index];
+    p->body.z += sBosTmBodySpinSteps[a].dz << 8;
+    p->body2.z += sBosTmBodySpinSteps[a].dz2 << 8;
+    p->body3.z += sBosTmBodySpinSteps[a].dz3 << 8;
+    p->body4.z += sBosTmBodySpinSteps[a].dz4 << 8;
+    p->tm->z2 += sBosTmBodySpinSteps[a].dz2 << 8;
+    p->gfx3 = gUnk_09EF397C[sBosTmBodySpinSteps[a].gfx3Index];
+    p->gfx4 = gUnk_09EF3960[sBosTmBodySpinSteps[a].gfx4Index];
 }
 
 s32 GetAbsoluteDifference(s32 a, s32 b) {

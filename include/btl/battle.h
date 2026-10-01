@@ -22,7 +22,7 @@ enum BgFxFlag {
 typedef struct BgFx {
     s32 bg;
     void (*update)();
-    s16 unk_08;
+    s16 timer;
     s16 unk_0A;
     s16 unk_0C;
     s16 unk_0E;
@@ -33,7 +33,7 @@ typedef struct BgFx {
     s32 scaleY;
     u8 angle;
     u8 unk_25;
-    u16 unk_26;
+    u16 state;
     s32 unk_28;
     s32 unk_2C;
     s32 unk_30;
@@ -102,8 +102,8 @@ extern u16 gVsKeyHoldR[2];
 extern u16 gVsKeyReleaseL[2];
 extern u16 gVsKeyReleaseR[2];
 extern u16 gVsKeyChordLatch[2];
-extern u16 gUnk_020348E0;
-extern u16 gUnk_020348E2;
+extern u16 gVsSoraReloadTimer;
+extern u16 gVsRikuReloadTimer;
 extern BgFx* gBgFx;
 
 void* ColliderGetPool(u32 type);

@@ -17,8 +17,8 @@ s32 task_bos_jf_shadow_1();
 void task_bos_jf_shadow_2(JfShadowWork* work);
 void task_bos_jf_shadow_3(JfShadowWork* work);
 
-void func_080C6FF8();
-void func_080C700C(SaveSliceE6C* out);
-void func_080C7024(SaveSliceE6C* in);
+void ResetSaveSliceE6C();
+void WriteSaveSliceE6C(SaveSliceE6C* out);
+void ReadSaveSliceE6C(SaveSliceE6C* in);
 
 #endif /* GUARD_BOS3_H */

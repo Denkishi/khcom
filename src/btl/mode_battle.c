@@ -549,7 +549,7 @@ void mode_battle_1() {
         gBtlWork->freezeTimer--;
     } else {
         if (gBtlWork->paused == 0) {
-            UpdateBattlePhase();
+            UpdateBattleState();
 
             if (gBtlWork->hitStop <= 0) {
                 TaskPoolUpdate(&gBtlWork->taskPools[0]);

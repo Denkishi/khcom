@@ -499,7 +499,7 @@ void mode_ms_top_1() {
 
         break;
     case 2:
-        if ((gGameState.progression.unk_82 & 0x80) == 0) {
+        if ((gGameState.progression.tutorialFlags & 0x80) == 0) {
             sMsTopIntroIndex = 0;
             sMsTopState = 3;
         } else {
@@ -512,7 +512,7 @@ void mode_ms_top_1() {
 
         if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && IsMessageWindowOpen() == 0) {
             SetJiminyFlag(27);
-            gGameState.progression.unk_82 |= 0x80;
+            gGameState.progression.tutorialFlags |= 0x80;
             sMsTopState = 4;
         }
 

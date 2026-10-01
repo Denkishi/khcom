@@ -5610,8 +5610,8 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             k = anim->anchorCmd;
             steps = BosPcGetSpriteCmds(work);
             ApplyAttackBox(0xF6, work->x + ((anim->hitX + steps[k].x) << 8),
-                          work->y + ((anim->hitY + steps[k].y + steps[k].unk_08) << 8),
-                          (anim->hitZ - steps[k].unk_08) << 8, anim->hitHalfX, anim->hitHalfY, anim->hitHalfZ);
+                          work->y + ((anim->hitY + steps[k].y + steps[k].height) << 8),
+                          (anim->hitZ - steps[k].height) << 8, anim->hitHalfX, anim->hitHalfY, anim->hitHalfZ);
         }
 
         switch (anim->event) {
@@ -5622,7 +5622,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
                 k = anim->anchorCmd;
                 steps = BosPcGetSpriteCmds(work);
                 BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
-                              work->y + ((anim->hitY + steps[k].y + steps[k].unk_08 - 24) << 8));
+                              work->y + ((anim->hitY + steps[k].y + steps[k].height - 24) << 8));
             }
 
             break;
@@ -5633,7 +5633,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
                 k = anim->anchorCmd;
                 steps = BosPcGetSpriteCmds(work);
                 BgFxStartGroundImpact(work->x + ((anim->hitX + steps[k].x) << 8),
-                              work->y + ((anim->hitY + steps[k].y + steps[k].unk_08 - 24) << 8));
+                              work->y + ((anim->hitY + steps[k].y + steps[k].height - 24) << 8));
             }
 
             break;

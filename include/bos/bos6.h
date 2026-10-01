@@ -56,7 +56,7 @@ typedef struct PcSpriteCmd {
     s16 layer;
     s16 x;
     s16 y;
-    s16 unk_08;
+    s16 height;
     u16 unk_0A;
 } PcSpriteCmd;
 

@@ -71,7 +71,7 @@ void UpdatePlayTime() {
 
 void SetupRikuNewGame() {
     InitStartFloor(0, 0);
-    gGameState.progression.unk_82 = 0xE7FF;
+    gGameState.progression.tutorialFlags = 0xE7FF;
     gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
     InitRikuDeckForWorld(0);
     gGameState.flags |= GAME_FLAG_RIKU;

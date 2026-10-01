@@ -32,7 +32,7 @@ typedef struct PlayerProgression {
     u64 jiminyFlags[8];
     u32 mooglePoints;
     u16 levelMilestone;
-    u16 unk_82;
+    u16 tutorialFlags;
     u16 friendFlags;
     u16 savedFriendFlags;
 } PlayerProgression;

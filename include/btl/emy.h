@@ -12,8 +12,8 @@ typedef struct EmySpawn {
     s32 y;
     s32 z;
     u8 unk_0C[0x06];
-    s16 unk_12;
-    u16 unk_14;
+    s16 facingLeft;
+    u16 hitPhase;
     u8 unk_16[0x0A];
 } EmySpawn;
 

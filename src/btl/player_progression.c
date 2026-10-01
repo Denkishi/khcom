@@ -103,10 +103,10 @@ void InitPlayerProgression() {
     p->jiminyFlags[7] = 0;
     p->mooglePoints = 0;
     p->levelMilestone = 0;
-    p->unk_82 = 0;
+    p->tutorialFlags = 0;
     p->friendFlags = 0;
     p->nextExp = 0x19;
-    func_080C6FF8();
+    ResetSaveSliceE6C();
     ResetPooState();
     ClearMoogleShopFlags();
 }

@@ -59,8 +59,8 @@ typedef struct VixenNdlArgs {
     s32 y;
     s32 z;
     u8 unk_0C[0x06];
-    s16 unk_12;
-    u16 unk_14;
+    s16 facingLeft;
+    u16 variant;
     u16 unk_16;
     void* tiles;
     u8 unk_1C[0x04];

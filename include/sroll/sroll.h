@@ -57,7 +57,7 @@ typedef struct SrollANameWork {
 
 typedef struct SrollANameArg {
     s16 kind;
-    u16 unk_02;
+    u16 animId;
     u16 nameIndex;
     u8 unk_06[0x2];
     s32 x;

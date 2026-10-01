@@ -2825,7 +2825,7 @@ void MapFldMain() {
         return;
     }
 
-    if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
+    if (FadeIsActive() == 0 && (gGameState.progression.tutorialFlags & 0x200) != 0 &&
         (gFieldState->flags & (FIELD_FLAG_FREEZE_PLAYER | FIELD_FLAG_ROOM_CREATE)) == 0 && (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0) {
         if (GetKeysPressed() & SELECT_BUTTON) {
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -2928,7 +2928,7 @@ void MapFldStartBattle() {
         RequestFieldResume();
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            if (gGameState.progression.unk_82 & 0x1000) {
+            if (gGameState.progression.tutorialFlags & 0x1000) {
                 ModeRequest(&gModeBattle, gMapRoomState->battleId);
             } else {
                 ModeRequest(&gModeRikuBtlTutorial, gMapRoomState->battleId);
@@ -2969,9 +2969,9 @@ void MapFldWaitRoomCreate() {
         FadeLock();
         MapFldSetUpdateAndRun(MapFldExitRoom);
 
-        if ((gGameState.progression.unk_82 & 0x200) == 0) {
-            t = gGameState.progression.unk_82 | 0x200;
-            gGameState.progression.unk_82 = t;
+        if ((gGameState.progression.tutorialFlags & 0x200) == 0) {
+            t = gGameState.progression.tutorialFlags | 0x200;
+            gGameState.progression.tutorialFlags = t;
         }
     } else if ((gFieldState->flags & FIELD_FLAG_ROOM_CREATE) == 0) {
         gBldCnt = 0;
@@ -3043,7 +3043,7 @@ void Mode_MapFld_0() {
     TaskCreate(&gFieldState->tasks, &gTaskDescLockon, NULL);
     TaskCreate(&gFieldState->tasks, &gTaskDescMapAnm, p->tileAnims);
 
-    if ((gGameState.progression.unk_82 & 0x20) == 0) {
+    if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapTutorial, NULL);
     }
 
@@ -3270,7 +3270,7 @@ void MapFixMain() {
 
     if (gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) {
         MapFixSetUpdateAndRun(MapFixWaitMenu);
-    } else if (FadeIsActive() == 0 && (gGameState.progression.unk_82 & 0x200) != 0 &&
+    } else if (FadeIsActive() == 0 && (gGameState.progression.tutorialFlags & 0x200) != 0 &&
                (gFieldState->flags & (FIELD_FLAG_FREEZE_PLAYER | FIELD_FLAG_ROOM_CREATE)) == 0 && (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) == 0 &&
                (GetKeysPressed() & START_BUTTON) != 0) {
         TaskCreate(&gFieldState->tasks, &gTaskDescMapMenu, NULL);
@@ -5581,7 +5581,7 @@ s32 MapMenuOpenSubMode(MapMenuWork* w) {
     switch (w->cursor) {
     case 0:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            if (gGameState.progression.unk_82 & 0x800) {
+            if (gGameState.progression.tutorialFlags & 0x800) {
                 ModeRequest(&gModeDeck, 0);
             } else {
                 ModeRequest(&gModeRikuDeckTutorial, 0);

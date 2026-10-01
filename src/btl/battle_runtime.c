@@ -644,7 +644,7 @@ void EndCardPlay() {
     gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_ACTION;
 }
 
-void UpdateBattlePhase() {
+void UpdateBattleState() {
     BtlObj* player;
     s32 i;
     s32 changed;
@@ -840,7 +840,7 @@ void UpdateBattlePhase() {
                 default:
                     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
-                    } else if (gGameState.progression.unk_82 & 0x20) {
+                    } else if (gGameState.progression.tutorialFlags & 0x20) {
                         TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
                     }
 
@@ -1644,9 +1644,9 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     p->btl = NULL;
     p->badStatus = BAD_STATUS_NONE;
     p->badStatusTimer = 0;
-    p->unk_0F0 = gBtlWork->actor->x;
-    p->unk_0F4 = gBtlWork->actor->y;
-    p->unk_0F8 = gBtlWork->actor->z;
+    p->confuseTargetX = gBtlWork->actor->x;
+    p->confuseTargetY = gBtlWork->actor->y;
+    p->confuseTargetZ = gBtlWork->actor->z;
     p->vx = 0;
     p->vy = 0;
     p->popCooldown = 0;
@@ -2462,15 +2462,15 @@ void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
 
     if (a->badStatus == BAD_STATUS_CONFUSE) {
         if (b != NULL) {
-            *b = a->unk_0F0;
+            *b = a->confuseTargetX;
         }
 
         if (c != NULL) {
-            *c = a->unk_0F4;
+            *c = a->confuseTargetY;
         }
 
         if (d != NULL) {
-            *d = a->unk_0F8;
+            *d = a->confuseTargetZ;
         }
 
         n = GetRandom() % 6;

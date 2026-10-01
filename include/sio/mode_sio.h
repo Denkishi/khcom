@@ -125,7 +125,7 @@ typedef struct SioChgCardWork {
     s16 blinkPhase;
     s16 timer;
     u8 unk_006[2];
-    void* unk_008[4];
+    void* playerTilesPalettes[4];
     void* gfx[2];
     AnimState anim[2];
     void* tiles;
@@ -209,7 +209,7 @@ typedef struct SioBtlOptionWork {
     u8 unk_003;
     s16 fadeLevel;
     s16 timer;
-    void* unk_008[4];
+    void* playerTilesPalettes[4];
     void* gfx6[2];
     AnimState anim2[2];
     u8 textSlotCount;

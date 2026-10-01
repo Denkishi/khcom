@@ -3710,7 +3710,7 @@ void MapGmk04WaitFirstTalkEnd(MapGmk04Work* w) {
     if (IsMessageWindowOpen() == 0) {
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
-        gGameState.progression.unk_82 |= 0x10;
+        gGameState.progression.tutorialFlags |= 0x10;
         w->update = MapGmk04CheckTalk;
     }
 }
@@ -3724,7 +3724,7 @@ void Task_MapGmk04_0(MapGmk04Work* w, MapGmkPlacement* arg) {
     e->height = d->height;
     e->kind = 3;
 
-    if (gGameState.progression.unk_82 & 0x10) {
+    if (gGameState.progression.tutorialFlags & 0x10) {
         w->update = MapGmk04CheckTalk;
     } else {
         w->update = MapGmk04CheckFirstTalk;
@@ -3890,7 +3890,7 @@ void Task_MapGmk05_3(MapGmk05Work* w) {
 }
 
 void MapGmk06CheckTalk(MapGmk06Work* w) {
-    if (gFieldState->lockonTarget == &w->obj && (gGameState.progression.unk_82 & 0x100) == 0) {
+    if (gFieldState->lockonTarget == &w->obj && (gGameState.progression.tutorialFlags & 0x100) == 0) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
         CreateCardMessageTask(&w->tasks, 0, 0x84);
@@ -3916,7 +3916,7 @@ void MapGmk06WaitMessage(MapGmk06Work* w) {
     if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
-        gGameState.progression.unk_82 |= 0x100;
+        gGameState.progression.tutorialFlags |= 0x100;
         w->update = MapGmk06CheckTalk;
     } else {
         gFieldState->lockonDelay = 30;

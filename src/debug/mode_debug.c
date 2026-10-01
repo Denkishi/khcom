@@ -266,7 +266,7 @@ void mode_debug_1() {
     case 17:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
             gGameState.availableWorlds = 0xFFFF;
-            gGameState.progression.unk_82 = -1;
+            gGameState.progression.tutorialFlags = -1;
             ModeRequest(&gModeWorldselect, 0);
         }
 

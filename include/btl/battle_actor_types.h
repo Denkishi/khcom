@@ -233,9 +233,9 @@ typedef struct BtlObj {
     s32 badStatus;
     s16 badStatusTimer;
     u8 unk_0EE[0x02];
-    s32 unk_0F0;
-    s32 unk_0F4;
-    s32 unk_0F8;
+    s32 confuseTargetX;
+    s32 confuseTargetY;
+    s32 confuseTargetZ;
     s32 prevX;
     s32 prevY;
     s16 popCooldown;

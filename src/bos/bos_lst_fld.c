@@ -365,11 +365,11 @@ static const u16 sBosLstFldHofsTable[1184] = {
     3, 2, 2, 2, 2, 1, 1, 1, 0, 0, 0, 0, 511, 511, 511, 511,
 };
 
-static const s8 sUnk_09A4FBF4[33] = {
+static const s8 sBosLstFldShakePattern0[33] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1, 0,
 };
 
-static const s8 sUnk_09A4FC15[9] = {
+static const s8 sBosLstFldShakePattern1[9] = {
     1, 2, 2, 1, -1, -2, -2, -1, 0,
 };
 
@@ -379,7 +379,7 @@ static const s32 sBosLstFldFadeLevels[64] = {
 
 const s32 gUnk_09A4FD20 = 0;
 
-static const s8* sBosLstFldShakePatterns[2] = { sUnk_09A4FBF4, sUnk_09A4FC15 };
+static const s8* sBosLstFldShakePatterns[2] = { sBosLstFldShakePattern0, sBosLstFldShakePattern1 };
 
 TaskDesc gTaskDescBosLstFld = {
     "task_bos_lst_fld",

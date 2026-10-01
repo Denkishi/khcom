@@ -24,8 +24,8 @@ u16 gVsKeyHoldR[2];
 u16 gVsKeyReleaseL[2];
 u16 gVsKeyReleaseR[2];
 u16 gVsKeyChordLatch[2];
-u16 gUnk_020348E0;
-u16 gUnk_020348E2;
+u16 gVsSoraReloadTimer;
+u16 gVsRikuReloadTimer;
 
 void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
     if (keys & L_BUTTON) {
@@ -112,8 +112,8 @@ void VsBtlWorkInit() {
     gVsKeyReleaseR[1] = 0;
     gVsKeyChordLatch[0] = 0;
     gVsKeyChordLatch[1] = 0;
-    gUnk_020348E0 = 0;
-    gUnk_020348E2 = 0;
+    gVsSoraReloadTimer = 0;
+    gVsRikuReloadTimer = 0;
 }
 
 void HandleVsRikuCardInput() {
@@ -143,7 +143,7 @@ void HandleVsRikuCardInput() {
     }
 
     if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
-        gUnk_020348E2 = 5;
+        gVsRikuReloadTimer = 5;
         return;
     }
 
@@ -155,8 +155,8 @@ void HandleVsRikuCardInput() {
         return;
     }
 
-    if ((s16)gUnk_020348E2 > 0) {
-        gUnk_020348E2--;
+    if ((s16)gVsRikuReloadTimer > 0) {
+        gVsRikuReloadTimer--;
     }
 
     res = (u16)ReadVsKeyChord(held, pressed, 1);
@@ -273,7 +273,7 @@ void HandleVsSoraCardInput() {
     }
 
     if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
-        gUnk_020348E0 = 5;
+        gVsSoraReloadTimer = 5;
         return;
     }
 
@@ -285,8 +285,8 @@ void HandleVsSoraCardInput() {
         return;
     }
 
-    if ((s16)gUnk_020348E0 > 0) {
-        gUnk_020348E0--;
+    if ((s16)gVsSoraReloadTimer > 0) {
+        gVsSoraReloadTimer--;
     }
 
     res = (u16)ReadVsKeyChord(held, pressed, 0);

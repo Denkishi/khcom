@@ -675,11 +675,11 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
     s32 v;
 
     if (w->spawned == 0) {
-        if ((gGameState.progression.unk_82 & 0x20) == 0) {
+        if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
             *(PrizeCardArgs*)args = w->args;
             args[8] = 2;
             CreatePrizeMapCardTask(&w->tasks, args);
-            gGameState.progression.unk_82 |= 0x20;
+            gGameState.progression.tutorialFlags |= 0x20;
         } else if (gGameState.floor == 0) {
             if (CountZeroValueMapCards() == 0) {
                 *(PrizeCardArgs*)args = w->args;

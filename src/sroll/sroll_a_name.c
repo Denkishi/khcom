@@ -38,18 +38,18 @@ void task_sroll_a_name_0(SrollANameWork* w, SrollANameArg* a) {
 #endif
         anim = &w->anim;
         AnimInit(anim, gUnk_09EFB200, gUnk_09EFB1F8);
-        AnimStart(anim, a->unk_02, 0);
+        AnimStart(anim, a->animId, 0);
         break;
     case 1:
         w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
         anim = &w->anim;
         AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
-        AnimStart(anim, a->unk_02, 0);
+        AnimStart(anim, a->animId, 0);
         break;
     case 2:
         w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
 
-        if (a->unk_02 == 1) {
+        if (a->animId == 1) {
             anim = &w->anim;
             AnimInit(anim, gUnk_09EFB5EC, gUnk_09EFB5B0);
         } else {

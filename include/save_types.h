@@ -61,7 +61,7 @@ typedef struct SaveLargeSlice {
 } SaveLargeSlice;
 
 typedef struct SaveSmallSlice {
-    u8 unk_000[0x10E];
+    u8 mapCardCounts[0x10E];
     u8 unk_10E[2];
 } SaveSmallSlice;
 

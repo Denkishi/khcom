@@ -342,7 +342,7 @@ void CopyMapCardInventory(SaveSmallSlice* p) {
     s32 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        p->unk_000[i] = gMapCardCounts[i];
+        p->mapCardCounts[i] = gMapCardCounts[i];
     }
 }
 
@@ -350,7 +350,7 @@ void RestoreMapCardInventory(SaveSmallSlice* p) {
     u16 i;
 
     for (i = 0; i <= 0x10D; i++) {
-        gMapCardCounts[i] = p->unk_000[i];
+        gMapCardCounts[i] = p->mapCardCounts[i];
     }
 }
 

@@ -349,16 +349,16 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* w, void* a) {
         if (w->slideSteps != 0) {
             w->slideSteps--;
         } else {
-            if ((gGameState.progression.unk_82 & 8) == 0) {
+            if ((gGameState.progression.tutorialFlags & 8) == 0) {
                 w->inTutorial = 1;
                 ResetMessageWindowFlags();
                 w->tutorialMessage = 95;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectTutorial);
-            } else if ((gGameState.progression.unk_82 & 0x40) == 0 && w->isEventDoor == 1) {
+            } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && w->isEventDoor == 1) {
                 ResetMessageWindowFlags();
                 w->tutorialMessage = 109;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
-                gGameState.progression.unk_82 |= 0x40;
+                gGameState.progression.tutorialFlags |= 0x40;
             } else {
                 n = ListPoolFirst(&w->cards);
                 SetBgMapBlocks(1, gMapSelectBgMapBlocks, 1, 2);
@@ -471,7 +471,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
     keys = GetKeysPressed();
     sel = w->valueColumn + w->valueRow * 5;
 
-    if ((gGameState.progression.unk_82 & 8) == 0) {
+    if ((gGameState.progression.tutorialFlags & 8) == 0) {
         if (w->steps == 0) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueTutorial);
             TaskPoolUpdate(&w->tasks);
@@ -1831,7 +1831,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* w, void* a) {
                 CreateSysmsgwinTask(&w->tasks, w->tutorialMessage);
                 w->tutorialMessage++;
             } else {
-                gGameState.progression.unk_82 |= 8;
+                gGameState.progression.tutorialFlags |= 8;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
             }
         } else {

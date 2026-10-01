@@ -584,7 +584,7 @@ void MapTutorialWaitStart(MapTutorialWork* w) {
     if (gFieldState->lockonTarget == NULL) {
         flags = gFieldState->flags;
 
-        if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.unk_82 & 0x10)) {
+        if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.tutorialFlags & 0x10)) {
             gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
             gFieldState->flags = flags | FIELD_FLAG_FREEZE_PLAYER;
             CreateCardMessageTask(&w->tasks, 0, 0x6A);
@@ -659,7 +659,7 @@ void MapTutorialBarrelBreak(MapTutorialWork* w) {
 
 void MapTutorialWaitPrizeCard(MapTutorialWork* w) {
     if ((gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) == 0) {
-        gGameState.progression.unk_82 |= 0x2000;
+        gGameState.progression.tutorialFlags |= 0x2000;
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         CreateCardMessageTask(&w->tasks, 0, 0x6B);
         w->update = MapTutorialSpawnEnemy;
@@ -765,7 +765,7 @@ void Task_MapTutorial_0(MapTutorialWork* w) {
     w->tiles = NULL;
     w->palette = NULL;
     w->flip = 0;
-    t = gGameState.progression.unk_82 & 0x2000;
+    t = gGameState.progression.tutorialFlags & 0x2000;
 
     if (t == 0) {
         w->shadowVisible = 0;
@@ -899,7 +899,7 @@ void MapStairWaitMessage(MapStairWork* w) {
     if (IsMessageWindowOpen() == 0) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
-        gGameState.progression.unk_82 |= 0x400;
+        gGameState.progression.tutorialFlags |= 0x400;
         w->update = func_080F74E8;
     }
 }
@@ -919,7 +919,7 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
 
     switch (w->obj.angle) {
     case 0x2D:
-        if ((gGameState.progression.unk_82 & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
+        if ((gGameState.progression.tutorialFlags & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             w->update = MapStairWaitApproach;
         } else {
             w->update = func_080F74E8;

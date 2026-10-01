@@ -586,7 +586,7 @@ void Mode_MapChk_1() {
         gMapChkUseParams = gMapChkWork->useParams;
         gGameState.progression.friendFlags |= FRIEND_FLAG_DONALD_DUCK;
         gGameState.progression.friendFlags |= FRIEND_FLAG_GOOFY;
-        gGameState.progression.unk_82 |= 0x778;
+        gGameState.progression.tutorialFlags |= 0x778;
         e = gMapChkWork;
 
         switch (e->mode) {

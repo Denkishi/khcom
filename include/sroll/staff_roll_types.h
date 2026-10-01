@@ -22,7 +22,7 @@ typedef struct StaffRollScene {
     u16 unk_26;
     s32 targetX;
     s32 targetY;
-    u16 unk_30;
+    u16 animId;
     u16 nameIndex;
 } StaffRollScene;
 

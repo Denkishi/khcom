@@ -3,7 +3,7 @@
 #include "player_progression.h"
 #include "battle.h"
 #include "battle_work.h"
-#include "bos3.h"
+#include "bos_jf_shadow.h"
 #include "bos4_api.h"
 #include "game_state.h"
 #include "player_progression_types.h"

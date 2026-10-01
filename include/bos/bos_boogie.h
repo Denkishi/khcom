@@ -1,5 +1,5 @@
-#ifndef GUARD_BOSS_BOOGIE_H
-#define GUARD_BOSS_BOOGIE_H
+#ifndef GUARD_BOS_BOOGIE_H
+#define GUARD_BOS_BOOGIE_H
 
 #include "anim.h"
 #include "obj.h"

@@ -1,5 +1,5 @@
-#ifndef GUARD_BOS3_H
-#define GUARD_BOS3_H
+#ifndef GUARD_BOS_JF_SHADOW_H
+#define GUARD_BOS_JF_SHADOW_H
 
 #include "types.h"
 #include "save_types.h"
@@ -21,4 +21,4 @@ void ResetSaveSliceE6C();
 void WriteSaveSliceE6C(SaveSliceE6C* out);
 void ReadSaveSliceE6C(SaveSliceE6C* in);
 
-#endif /* GUARD_BOS3_H */
+#endif /* GUARD_BOS_JF_SHADOW_H */

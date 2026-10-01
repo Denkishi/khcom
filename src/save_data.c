@@ -1,6 +1,6 @@
 #include "save.h"
 #include "types.h"
-#include "bos3.h"
+#include "bos_jf_shadow.h"
 #include "bos4_api.h"
 #include "card_api.h"
 #include "game_state.h"

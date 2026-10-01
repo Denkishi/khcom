@@ -1,5 +1,5 @@
 #include "macros.h"
-#include "bos3.h"
+#include "bos_jf_shadow.h"
 #include "sprites_btl.h"
 #include "battle_actor.h"
 #include "battle_actor_types.h"

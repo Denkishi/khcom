@@ -15,7 +15,7 @@
 #include "battle_bg_types.h"
 #include "battle_work.h"
 #include "bos4_api.h"
-#include "boss_boogie.h"
+#include "bos_boogie.h"
 #include "btl_collision.h"
 #include "btl_effect.h"
 #include "card_api.h"

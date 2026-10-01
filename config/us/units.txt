@@ -235,7 +235,7 @@ bos_dsd_main.c
 bos_dsd_ita.c
 bos_dsd_circle.c
 chara.c
-bos3.c
+bos_jf_shadow.c
 mode_sio_dbg.c
 sprites_wlogo_frames.s
 sprites_boss_tm_frames.s
@@ -267,7 +267,7 @@ mode_copyright1.c
 mode_copyright2.c
 mode_status.c
 status.c
-boss_boogie.c
+bos_boogie.c
 bos_boogie_dice.c
 bos_ursula_bubble.c
 sprites_pooh_frames_1.s

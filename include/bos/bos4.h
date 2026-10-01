@@ -2,7 +2,7 @@
 #define GUARD_BOS4_H
 
 #include "battle_actor_types.h"
-#include "boss_boogie.h"
+#include "bos_boogie.h"
 #include "battle_bg_types.h"
 #include "map_types.h"
 #include "types.h"

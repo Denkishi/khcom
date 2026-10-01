@@ -5989,7 +5989,7 @@ void task_poo_wagonwheel_0(PooWheelWork* w) {
     AnimInit(&w->anim, gRaWagonAnims, gRaWagonFrames);
     AnimStart(&w->anim, w->animId, ANIM_FLAG_LOOP);
     w->speed = 0;
-    w->unk_40 = 0;
+    w->removeWhenOffscreen = 0;
 }
 
 u8 task_poo_wagonwheel_1(PooWheelWork* w) {
@@ -6013,7 +6013,7 @@ u8 task_poo_wagonwheel_1(PooWheelWork* w) {
         }
     }
 
-    if (w->unk_40 != 0 && w->palette == NULL) {
+    if (w->removeWhenOffscreen != 0 && w->palette == NULL) {
         return 0;
     }
 

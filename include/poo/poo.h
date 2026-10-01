@@ -585,7 +585,7 @@ typedef struct PooWheelWork {
     u16 animId;
     s32 speed;
     s32 startX;
-    u8 unk_40;
+    u8 removeWhenOffscreen;
     u8 unk_41[0x03];
 } PooWheelWork;
 

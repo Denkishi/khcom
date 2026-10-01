@@ -26,10 +26,10 @@
 #include "types.h"
 #include <stddef.h>
 
-TaskPool gEventTaskPool;
-u8 gEventPaused;
-u32 gEventId;
-u8 gEventEndStep;
+static TaskPool sEventTaskPool;
+static u8 sEventPaused;
+static u32 sEventId;
+static u8 sEventEndStep;
 
 void Event_0(s32 arg) {
     EvtArg cfg;
@@ -39,8 +39,8 @@ void Event_0(s32 arg) {
     e = gEventBackgroundDefs[arg & 0x7FFF];
     gBldCnt = 0;
     gBldAlpha = 0;
-    gEventId = arg;
-    gEventPaused = 0;
+    sEventId = arg;
+    sEventPaused = 0;
 
     if (e != NULL) {
         if (e->isAffine != 0) {
@@ -92,14 +92,14 @@ void Event_0(s32 arg) {
     }
 
     // @bug? Should mask with 0x7FFF.
-    if (gEventSequenceDefs[gEventId & 0x8000]->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
+    if (gEventSequenceDefs[sEventId & 0x8000]->keyframes->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
         FadeStartIn(FADE_MODE_WHITE, 999);
     }
 
-    TaskPoolInit(&gEventTaskPool, 2);
-    TaskCreate(&gEventTaskPool, &gTaskDescEventSeq, &cfg);
+    TaskPoolInit(&sEventTaskPool, 2);
+    TaskCreate(&sEventTaskPool, &gTaskDescEventSeq, &cfg);
     ResetMessageWindowFlags();
-    gEventEndStep = 0;
+    sEventEndStep = 0;
 }
 
 void EventDebugUpdate() {
@@ -107,21 +107,21 @@ void EventDebugUpdate() {
         ModeRequest(&gModeEventselect, 0);
     }
 
-    if (gEventPaused == 0) {
-        TaskPoolUpdate(&gEventTaskPool);
+    if (sEventPaused == 0) {
+        TaskPoolUpdate(&sEventTaskPool);
     } else if (GetKeysRepeat() & SELECT_BUTTON) {
-        TaskPoolUpdate(&gEventTaskPool);
+        TaskPoolUpdate(&sEventTaskPool);
     }
 
-    TaskPoolDraw(&gEventTaskPool);
+    TaskPoolDraw(&sEventTaskPool);
 
     if (gEventState->running == 0) {
-        if (gEventEndStep == 0) {
+        if (sEventEndStep == 0) {
             ShowEventEndMessage();
-            gEventEndStep = 1;
+            sEventEndStep = 1;
         }
 
-        if (gEventEndStep == 1) {
+        if (sEventEndStep == 1) {
             if (IsMessageWindowOpen() == 0) {
                 ModeRequest(&gModeEventselect, 0);
             }
@@ -129,26 +129,26 @@ void EventDebugUpdate() {
     }
 
     if (GetKeysPressed() & START_BUTTON) {
-        gEventPaused = 0;
+        sEventPaused = 0;
     }
 }
 
 void EventUpdate() {
-    const EventSequenceDef* p = gEventSequenceDefs[gEventId];
+    const EventSequenceDef* p = gEventSequenceDefs[sEventId];
     UpdatePlayTime();
-    TaskPoolUpdate(&gEventTaskPool);
-    TaskPoolDraw(&gEventTaskPool);
+    TaskPoolUpdate(&sEventTaskPool);
+    TaskPoolDraw(&sEventTaskPool);
 
     if (gEventState->running != 0) {
         return;
     }
 
-    if (gEventEndStep == 0) {
+    if (sEventEndStep == 0) {
         ShowEventEndMessage();
-        gEventEndStep = 1;
+        sEventEndStep = 1;
     }
 
-    if (gEventEndStep != 1) {
+    if (sEventEndStep != 1) {
         return;
     }
 
@@ -184,9 +184,9 @@ void EventUpdate() {
 
     if (p->toMap != 0) {
 #ifdef VERSION_EU
-        if (gEventId == 148) {
+        if (sEventId == 148) {
 #else
-        if (gEventId == 150) {
+        if (sEventId == 150) {
 #endif
             ModeRequest(&gModeWorldselect, 0);
         } else {
@@ -335,7 +335,7 @@ void EventUpdate() {
 }
 
 void Event_2() {
-    TaskPoolDestroy(&gEventTaskPool);
+    TaskPoolDestroy(&sEventTaskPool);
     EwramFree(gEventState);
     gEventState = NULL;
 }
@@ -352,7 +352,7 @@ void RequestEventMode(u16 a) {
 void ShowEventEndMessage() {
     SetBackdropColor(0, 0, 0);
 
-    switch (gEventId & 0x7FFF) {
+    switch (sEventId & 0x7FFF) {
     case 41:
     case 49:
     case MSG_CODE(176):
@@ -363,7 +363,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 173);
+        CreateSysmsgwinTask(&sEventTaskPool, 173);
         break;
     case 34:
         DisableBg(0);
@@ -372,7 +372,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 133);
+        CreateSysmsgwinTask(&sEventTaskPool, 133);
         break;
     case 88:
         DisableBg(0);
@@ -381,7 +381,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 134);
+        CreateSysmsgwinTask(&sEventTaskPool, 134);
         break;
     case MSG_CODE(136):
         DisableBg(0);
@@ -390,7 +390,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 139);
+        CreateSysmsgwinTask(&sEventTaskPool, 139);
         break;
     case MSG_CODE(137):
         DisableBg(0);
@@ -399,7 +399,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 160);
+        CreateSysmsgwinTask(&sEventTaskPool, 160);
         break;
     case MSG_CODE(139):
         DisableBg(0);
@@ -408,7 +408,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 159);
+        CreateSysmsgwinTask(&sEventTaskPool, 159);
         break;
     case MSG_CODE(140):
         DisableBg(0);
@@ -417,7 +417,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 136);
+        CreateSysmsgwinTask(&sEventTaskPool, 136);
         break;
     case MSG_CODE(141):
         DisableBg(0);
@@ -426,7 +426,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 137);
+        CreateSysmsgwinTask(&sEventTaskPool, 137);
         break;
     case MSG_CODE(142):
         DisableBg(0);
@@ -435,7 +435,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 135);
+        CreateSysmsgwinTask(&sEventTaskPool, 135);
         break;
     case 61:
         DisableBg(0);
@@ -444,7 +444,7 @@ void ShowEventEndMessage() {
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        CreateSysmsgwinTask(&gEventTaskPool, 138);
+        CreateSysmsgwinTask(&sEventTaskPool, 138);
         break;
     case 126:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -453,7 +453,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 162);
+        CreateSysmsgwinTask(&sEventTaskPool, 162);
         break;
     case 114:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -462,7 +462,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 161);
+        CreateSysmsgwinTask(&sEventTaskPool, 161);
         break;
     case 57:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -471,7 +471,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 163);
+        CreateSysmsgwinTask(&sEventTaskPool, 163);
         break;
     case MSG_CODE(143):
     case MSG_CODE(144):
@@ -481,7 +481,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 165);
+        CreateSysmsgwinTask(&sEventTaskPool, 165);
         break;
     case MSG_CODE(145):
     case MSG_CODE(146):
@@ -492,7 +492,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 166);
+        CreateSysmsgwinTask(&sEventTaskPool, 166);
         break;
     case 3:
     case 44:
@@ -514,7 +514,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 168);
+        CreateSysmsgwinTask(&sEventTaskPool, 168);
         break;
     case 54:
     case 75:
@@ -533,7 +533,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 169);
+        CreateSysmsgwinTask(&sEventTaskPool, 169);
         break;
     case 5:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -542,7 +542,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 175);
+        CreateSysmsgwinTask(&sEventTaskPool, 175);
         break;
     case 6:
     case 80:
@@ -560,7 +560,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 170);
+        CreateSysmsgwinTask(&sEventTaskPool, 170);
         break;
     case 119:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -569,7 +569,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 172);
+        CreateSysmsgwinTask(&sEventTaskPool, 172);
         break;
     case 60:
         m4aSongNumStart(SONG_SYS_ITEMGET);
@@ -578,7 +578,7 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 164);
+        CreateSysmsgwinTask(&sEventTaskPool, 164);
         break;
     case 27:
     case MSG_CODE(156):
@@ -589,13 +589,13 @@ void ShowEventEndMessage() {
         DisableBg(2);
         DisableBg(3);
         FadeStartIn(FADE_MODE_BLACK, 1);
-        CreateSysmsgwinTask(&gEventTaskPool, 174);
+        CreateSysmsgwinTask(&sEventTaskPool, 174);
         break;
     }
 }
 
 void SetFriendsAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case 0:
         gGameState.progression.friendFlags = (FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
         LearnStock(57);
@@ -733,7 +733,7 @@ void SetFriendsAfterEvent() {
 }
 
 void GrantRewardsAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case 0:
         gGameState.availableWorlds = 0x200;
         break;
@@ -844,9 +844,9 @@ void GrantRewardsAfterEvent() {
 }
 
 void HandleYesAnswerAfterEvent() {
-    const EventSequenceDef* m = gEventSequenceDefs[gEventId];
+    const EventSequenceDef* m = gEventSequenceDefs[sEventId];
 
-    switch (gEventId) {
+    switch (sEventId) {
     case 68:
         ModeRequest(&gModeEvent, 69);
         break;
@@ -859,7 +859,7 @@ void HandleYesAnswerAfterEvent() {
 }
 
 u8 HandleNoAnswerAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case 0x44:
     case 0x53:
     case 0x54:
@@ -871,7 +871,7 @@ u8 HandleNoAnswerAfterEvent() {
 }
 
 void UnlockCardKindsAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case 2:
         SetCardKindObtained(0);
         break;
@@ -936,7 +936,7 @@ void UnlockCardKindsAfterEvent() {
 #endif
 
 void SaveAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
     case MSG_SAVE_ID_LO + 2:
@@ -955,7 +955,7 @@ void SaveAfterEvent() {
 }
 
 void EnterExitHallAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case MSG_SAVE_ID_LO + 0:
     case MSG_SAVE_ID_LO + 1:
     case MSG_SAVE_ID_LO + 2:
@@ -968,7 +968,7 @@ void EnterExitHallAfterEvent() {
 }
 
 void SetJiminyFlagsAfterEvent() {
-    switch (gEventId) {
+    switch (sEventId) {
     case 0x43:
         SetJiminyFlag(16);
         break;

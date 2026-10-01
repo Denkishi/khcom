@@ -7,25 +7,25 @@
 #include <stddef.h>
 #include "taskpool.h"
 
-TaskPool gContinueTaskPool;
-Task* gContinueTask;
+static TaskPool sContinueTaskPool;
+static Task* sContinueTask;
 
 static void Continue_0() {
-    TaskPoolInit(&gContinueTaskPool, 2);
+    TaskPoolInit(&sContinueTaskPool, 2);
 
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueSora, NULL);
+        sContinueTask = TaskCreate(&sContinueTaskPool, &gTaskDescContinueSora, NULL);
     } else {
-        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueRiku, NULL);
+        sContinueTask = TaskCreate(&sContinueTaskPool, &gTaskDescContinueRiku, NULL);
     }
 }
 
 void ContinueModeUpdate() {
     ContinueWork* w;
 
-    TaskPoolUpdate(&gContinueTaskPool);
-    TaskPoolDraw(&gContinueTaskPool);
-    w = gContinueTask->work;
+    TaskPoolUpdate(&sContinueTaskPool);
+    TaskPoolDraw(&sContinueTaskPool);
+    w = sContinueTask->work;
 
     if (w->state == 3) {
         switch (w->cursor) {
@@ -44,7 +44,7 @@ void ContinueModeUpdate() {
 }
 
 static void Continue_2() {
-    TaskPoolDestroy(&gContinueTaskPool);
+    TaskPoolDestroy(&sContinueTaskPool);
 }
 
 Mode gModeContinue = {

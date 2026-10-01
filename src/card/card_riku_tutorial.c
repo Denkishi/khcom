@@ -17,13 +17,13 @@
 #include "types.h"
 #include <stddef.h>
 
-TaskPool gRikuTutorialTasks;
+static TaskPool sRikuTutorialTasks;
 
-s32 gRikuTutorialModeArg;
+static s32 sRikuTutorialModeArg;
 #ifdef VERSION_EU
-TaskPool gTextCheckTasks;
+static TaskPool sTextCheckTasks;
 
-u32 gTextCheckMessageId;
+static u32 sTextCheckMessageId;
 #endif
 
 u8 gRikuDeckTutorialState EWRAM_COMMON(4);
@@ -52,8 +52,8 @@ u8 IsLinkSideStockLearned(s32 a, s32 b);
 
 void RikuTutorialModeInit(s32 a) {
     FadeStartIn(FADE_MODE_BLACK, 16);
-    gRikuTutorialModeArg = a;
-    TaskPoolInit(&gRikuTutorialTasks, 1);
+    sRikuTutorialModeArg = a;
+    TaskPoolInit(&sRikuTutorialTasks, 1);
     gRikuDeckTutorialState = 0;
 }
 
@@ -62,9 +62,9 @@ void Mode_riku_btlTutorial_1() {
 
     t = gGameState.progression.tutorialFlags | 0x1000;
     gGameState.progression.tutorialFlags = t;
-    ModeRequest(&gModeBattle, gRikuTutorialModeArg);
-    TaskPoolUpdate(&gRikuTutorialTasks);
-    TaskPoolDraw(&gRikuTutorialTasks);
+    ModeRequest(&gModeBattle, sRikuTutorialModeArg);
+    TaskPoolUpdate(&sRikuTutorialTasks);
+    TaskPoolDraw(&sRikuTutorialTasks);
 }
 
 void Mode_riku_deckTutorial_1() {
@@ -72,7 +72,7 @@ void Mode_riku_deckTutorial_1() {
         switch (gRikuDeckTutorialState) {
         case 0:
             if (!IsMessageWindowOpen() && gRikuDeckTutorialState == 0) {
-                CreateSysmsgwinTask(&gRikuTutorialTasks, 0xB1);
+                CreateSysmsgwinTask(&sRikuTutorialTasks, 0xB1);
                 gRikuDeckTutorialState = 1;
             }
 
@@ -80,19 +80,19 @@ void Mode_riku_deckTutorial_1() {
         case 1:
             if (!IsMessageWindowOpen()) {
                 gGameState.progression.tutorialFlags |= 0x800;
-                ModeRequest(&gModeDeck, gRikuTutorialModeArg);
+                ModeRequest(&gModeDeck, sRikuTutorialModeArg);
             }
 
             break;
         }
     }
 
-    TaskPoolUpdate(&gRikuTutorialTasks);
-    TaskPoolDraw(&gRikuTutorialTasks);
+    TaskPoolUpdate(&sRikuTutorialTasks);
+    TaskPoolDraw(&sRikuTutorialTasks);
 }
 
 void RikuTutorialModeDestroy() {
-    TaskPoolDestroy(&gRikuTutorialTasks);
+    TaskPoolDestroy(&sRikuTutorialTasks);
 }
 
 s32 ResolveActiveCardsMove(s32* out) {
@@ -2026,30 +2026,30 @@ s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
 
 #ifdef VERSION_EU
 void eu_080AB9FC() {
-    gTextCheckMessageId = 0;
+    sTextCheckMessageId = 0;
     SetBgMode0();
     SetupBg(0, 0, 28, 14);
-    TaskPoolInit(&gTextCheckTasks, 1);
-    CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
+    TaskPoolInit(&sTextCheckTasks, 1);
+    CreateCardMessageTask(&sTextCheckTasks, 0, sTextCheckMessageId);
 }
 
 void eu_080ABA38() {
     if (IsMessageWindowOpen() == 0) {
-        gTextCheckMessageId++;
+        sTextCheckMessageId++;
 
-        if (gTextCheckMessageId == 179) {
-            gTextCheckMessageId = 0;
+        if (sTextCheckMessageId == 179) {
+            sTextCheckMessageId = 0;
         }
 
-        CreateCardMessageTask(&gTextCheckTasks, 0, gTextCheckMessageId);
+        CreateCardMessageTask(&sTextCheckTasks, 0, sTextCheckMessageId);
     }
 
-    TaskPoolUpdate(&gTextCheckTasks);
-    TaskPoolDraw(&gTextCheckTasks);
+    TaskPoolUpdate(&sTextCheckTasks);
+    TaskPoolDraw(&sTextCheckTasks);
 }
 
 void eu_080ABA7C() {
-    TaskPoolDestroy(&gTextCheckTasks);
+    TaskPoolDestroy(&sTextCheckTasks);
 }
 #endif
 

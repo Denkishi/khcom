@@ -2,117 +2,117 @@
 #include "gba/io_reg.h"
 #include "types.h"
 
-u16 gKeysHeld;
-u16 gKeysPressed;
-u16 gKeysRepeat;
-u16 gKeyChordLatch;
-u8 gKeyHoldLeft;
-u8 gKeyHoldRight;
-u8 gKeyHoldUp;
-u8 gKeyHoldDown;
-u8 gKeyHoldA;
-u8 gKeyHoldB;
-u8 gKeyHoldL;
-u8 gKeyHoldR;
-u8 gKeyHoldStart;
-u8 gKeyHoldSelect;
-u8 gKeyReleaseLeft;
-u8 gKeyReleaseRight;
-u8 gKeyReleaseUp;
-u8 gKeyReleaseDown;
-u8 gKeyReleaseA;
-u8 gKeyReleaseB;
-u8 gKeyReleaseL;
-u8 gKeyReleaseR;
-u8 gKeyReleaseStart;
-u8 gKeyReleaseSelect;
+static u16 sKeysHeld;
+static u16 sKeysPressed;
+static u16 sKeysRepeat;
+static u16 sKeyChordLatch;
+static u8 sKeyHoldLeft;
+static u8 sKeyHoldRight;
+static u8 sKeyHoldUp;
+static u8 sKeyHoldDown;
+static u8 sKeyHoldA;
+static u8 sKeyHoldB;
+static u8 sKeyHoldL;
+static u8 sKeyHoldR;
+static u8 sKeyHoldStart;
+static u8 sKeyHoldSelect;
+static u8 sKeyReleaseLeft;
+static u8 sKeyReleaseRight;
+static u8 sKeyReleaseUp;
+static u8 sKeyReleaseDown;
+static u8 sKeyReleaseA;
+static u8 sKeyReleaseB;
+static u8 sKeyReleaseL;
+static u8 sKeyReleaseR;
+static u8 sKeyReleaseStart;
+static u8 sKeyReleaseSelect;
 
 u16 GetKeysHeld() {
-    return gKeysHeld;
+    return sKeysHeld;
 }
 
 u16 GetKeysPressed() {
-    return gKeysPressed;
+    return sKeysPressed;
 }
 
 u16 GetKeysRepeat() {
-    return gKeysRepeat;
+    return sKeysRepeat;
 }
 
 void ResetKeyState() {
-    gKeysHeld = 0;
-    gKeysPressed = 0;
-    gKeysRepeat = 0;
-    gKeyChordLatch = 0;
-    gKeyHoldLeft = 0;
-    gKeyHoldRight = 0;
-    gKeyHoldUp = 0;
-    gKeyHoldDown = 0;
-    gKeyHoldL = 0;
-    gKeyHoldR = 0;
-    gKeyHoldA = 0;
-    gKeyHoldB = 0;
-    gKeyHoldStart = 0;
-    gKeyHoldSelect = 0;
-    gKeyReleaseLeft = 0xFF;
-    gKeyReleaseRight = 0xFF;
-    gKeyReleaseUp = 0xFF;
-    gKeyReleaseDown = 0xFF;
-    gKeyReleaseL = 0xFF;
-    gKeyReleaseR = 0xFF;
-    gKeyReleaseA = 0xFF;
-    gKeyReleaseB = 0xFF;
-    gKeyReleaseStart = 0xFF;
-    gKeyReleaseSelect = 0xFF;
+    sKeysHeld = 0;
+    sKeysPressed = 0;
+    sKeysRepeat = 0;
+    sKeyChordLatch = 0;
+    sKeyHoldLeft = 0;
+    sKeyHoldRight = 0;
+    sKeyHoldUp = 0;
+    sKeyHoldDown = 0;
+    sKeyHoldL = 0;
+    sKeyHoldR = 0;
+    sKeyHoldA = 0;
+    sKeyHoldB = 0;
+    sKeyHoldStart = 0;
+    sKeyHoldSelect = 0;
+    sKeyReleaseLeft = 0xFF;
+    sKeyReleaseRight = 0xFF;
+    sKeyReleaseUp = 0xFF;
+    sKeyReleaseDown = 0xFF;
+    sKeyReleaseL = 0xFF;
+    sKeyReleaseR = 0xFF;
+    sKeyReleaseA = 0xFF;
+    sKeyReleaseB = 0xFF;
+    sKeyReleaseStart = 0xFF;
+    sKeyReleaseSelect = 0xFF;
 }
 
 u8 GetKeyHoldTime(u16 key) {
     switch (key) {
     case DPAD_LEFT:
-        return gKeyHoldLeft;
+        return sKeyHoldLeft;
     case DPAD_RIGHT:
-        return gKeyHoldRight;
+        return sKeyHoldRight;
     case DPAD_UP:
-        return gKeyHoldUp;
+        return sKeyHoldUp;
     case DPAD_DOWN:
-        return gKeyHoldDown;
+        return sKeyHoldDown;
     case L_BUTTON:
-        return gKeyHoldL;
+        return sKeyHoldL;
     case R_BUTTON:
-        return gKeyHoldR;
+        return sKeyHoldR;
     case A_BUTTON:
-        return gKeyHoldA;
+        return sKeyHoldA;
     case B_BUTTON:
-        return gKeyHoldB;
+        return sKeyHoldB;
     case START_BUTTON:
-        return gKeyHoldStart;
+        return sKeyHoldStart;
     case SELECT_BUTTON:
-        return gKeyHoldSelect;
+        return sKeyHoldSelect;
     }
 }
 
 u8 GetKeyReleaseTime(u16 key) {
     switch (key) {
     case DPAD_LEFT:
-        return gKeyReleaseLeft;
+        return sKeyReleaseLeft;
     case DPAD_RIGHT:
-        return gKeyReleaseRight;
+        return sKeyReleaseRight;
     case DPAD_UP:
-        return gKeyReleaseUp;
+        return sKeyReleaseUp;
     case DPAD_DOWN:
-        return gKeyReleaseDown;
+        return sKeyReleaseDown;
     case L_BUTTON:
-        return gKeyReleaseL;
+        return sKeyReleaseL;
     case R_BUTTON:
-        return gKeyReleaseR;
+        return sKeyReleaseR;
     case A_BUTTON:
-        return gKeyReleaseA;
+        return sKeyReleaseA;
     case B_BUTTON:
-        return gKeyReleaseB;
+        return sKeyReleaseB;
     case START_BUTTON:
-        return gKeyReleaseStart;
+        return sKeyReleaseStart;
     case SELECT_BUTTON:
-        return gKeyReleaseSelect;
+        return sKeyReleaseSelect;
     }
 }
 
@@ -122,28 +122,28 @@ u16 ReadKeyChord(u16 a, u16 b) {
     u8 vb = GetKeyReleaseTime(b);
 
     if (va == 2) {
-        gKeyChordLatch &= ~a;
+        sKeyChordLatch &= ~a;
     }
 
     if (vb == 2) {
-        gKeyChordLatch &= ~b;
+        sKeyChordLatch &= ~b;
     }
 
     if (((GetKeysPressed() & a) && (GetKeysHeld() & b)) || ((GetKeysPressed() & b) && (GetKeysHeld() & a))) {
-        gKeyChordLatch |= a | b;
+        sKeyChordLatch |= a | b;
         r = a | b;
     }
 
-    if ((gKeyChordLatch & a) == 0) {
+    if ((sKeyChordLatch & a) == 0) {
         if (GetKeyHoldTime(a) == 5 || va == 1) {
-            gKeyChordLatch |= a;
+            sKeyChordLatch |= a;
             r = a;
         }
     }
 
-    if ((gKeyChordLatch & b) == 0) {
+    if ((sKeyChordLatch & b) == 0) {
         if (GetKeyHoldTime(b) == 5 || vb == 1) {
-            gKeyChordLatch |= b;
+            sKeyChordLatch |= b;
             r = b;
         }
     }
@@ -159,65 +159,65 @@ u16 ReadDpadChord() {
     u8 right = GetKeyReleaseTime(DPAD_RIGHT);
 
     if (up == 2) {
-        gKeyChordLatch &= ~DPAD_UP;
+        sKeyChordLatch &= ~DPAD_UP;
     }
 
     if (down == 2) {
-        gKeyChordLatch &= ~DPAD_DOWN;
+        sKeyChordLatch &= ~DPAD_DOWN;
     }
 
     if (left == 2) {
-        gKeyChordLatch &= ~DPAD_LEFT;
+        sKeyChordLatch &= ~DPAD_LEFT;
     }
 
     if (right == 2) {
-        gKeyChordLatch &= ~DPAD_RIGHT;
+        sKeyChordLatch &= ~DPAD_RIGHT;
     }
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_UP))) {
-        gKeyChordLatch |= (DPAD_UP | DPAD_LEFT);
+        sKeyChordLatch |= (DPAD_UP | DPAD_LEFT);
         r = (DPAD_UP | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_UP) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_UP))) {
-        gKeyChordLatch |= (DPAD_UP | DPAD_RIGHT);
+        sKeyChordLatch |= (DPAD_UP | DPAD_RIGHT);
         r = (DPAD_UP | DPAD_RIGHT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_LEFT)) || ((GetKeysPressed() & DPAD_LEFT) && (GetKeysHeld() & DPAD_DOWN))) {
-        gKeyChordLatch |= (DPAD_DOWN | DPAD_LEFT);
+        sKeyChordLatch |= (DPAD_DOWN | DPAD_LEFT);
         r = (DPAD_DOWN | DPAD_LEFT);
     }
 
     if (((GetKeysPressed() & DPAD_DOWN) && (GetKeysHeld() & DPAD_RIGHT)) || ((GetKeysPressed() & DPAD_RIGHT) && (GetKeysHeld() & DPAD_DOWN))) {
-        gKeyChordLatch |= (DPAD_DOWN | DPAD_RIGHT);
+        sKeyChordLatch |= (DPAD_DOWN | DPAD_RIGHT);
         r = (DPAD_DOWN | DPAD_RIGHT);
     }
 
-    if ((gKeyChordLatch & DPAD_UP) == 0) {
+    if ((sKeyChordLatch & DPAD_UP) == 0) {
         if (GetKeyHoldTime(DPAD_UP) == 10 || up == 1) {
-            gKeyChordLatch |= DPAD_UP;
+            sKeyChordLatch |= DPAD_UP;
             r = DPAD_UP;
         }
     }
 
-    if ((gKeyChordLatch & DPAD_DOWN) == 0) {
+    if ((sKeyChordLatch & DPAD_DOWN) == 0) {
         if (GetKeyHoldTime(DPAD_DOWN) == 10 || down == 1) {
-            gKeyChordLatch |= DPAD_DOWN;
+            sKeyChordLatch |= DPAD_DOWN;
             r = DPAD_DOWN;
         }
     }
 
-    if ((gKeyChordLatch & DPAD_LEFT) == 0) {
+    if ((sKeyChordLatch & DPAD_LEFT) == 0) {
         if (GetKeyHoldTime(DPAD_LEFT) == 10 || left == 1) {
-            gKeyChordLatch |= DPAD_LEFT;
+            sKeyChordLatch |= DPAD_LEFT;
             r = DPAD_LEFT;
         }
     }
 
-    if ((gKeyChordLatch & DPAD_RIGHT) == 0) {
+    if ((sKeyChordLatch & DPAD_RIGHT) == 0) {
         if (GetKeyHoldTime(DPAD_RIGHT) == 10 || right == 1) {
-            gKeyChordLatch |= DPAD_RIGHT;
+            sKeyChordLatch |= DPAD_RIGHT;
             r = DPAD_RIGHT;
         }
     }
@@ -229,198 +229,198 @@ void UpdateKeyState() {
     u16 keys;
 
     keys = REG_KEYINPUT ^ KEYS_MASK;
-    gKeysPressed = keys & ~gKeysHeld;
-    gKeysHeld = keys;
+    sKeysPressed = keys & ~sKeysHeld;
+    sKeysHeld = keys;
 
-    if (gKeysHeld & DPAD_LEFT) {
-        gKeyHoldLeft++;
-        gKeyReleaseLeft = 0;
+    if (sKeysHeld & DPAD_LEFT) {
+        sKeyHoldLeft++;
+        sKeyReleaseLeft = 0;
 
-        if (gKeyHoldLeft > 32) {
-            gKeyHoldLeft = 29;
+        if (sKeyHoldLeft > 32) {
+            sKeyHoldLeft = 29;
         }
     } else {
-        gKeyHoldLeft = 0;
+        sKeyHoldLeft = 0;
 
-        if (gKeyReleaseLeft < 255) {
-            gKeyReleaseLeft++;
+        if (sKeyReleaseLeft < 255) {
+            sKeyReleaseLeft++;
         }
     }
 
-    if (gKeysHeld & DPAD_RIGHT) {
-        gKeyHoldRight++;
-        gKeyReleaseRight = 0;
+    if (sKeysHeld & DPAD_RIGHT) {
+        sKeyHoldRight++;
+        sKeyReleaseRight = 0;
 
-        if (gKeyHoldRight > 32) {
-            gKeyHoldRight = 29;
-        }
-    } else {
-        gKeyHoldRight = 0;
-
-        if (gKeyReleaseRight < 255) {
-            gKeyReleaseRight++;
-        }
-    }
-
-    if (gKeysHeld & DPAD_UP) {
-        gKeyHoldUp++;
-        gKeyReleaseUp = 0;
-
-        if (gKeyHoldUp > 32) {
-            gKeyHoldUp = 29;
+        if (sKeyHoldRight > 32) {
+            sKeyHoldRight = 29;
         }
     } else {
-        gKeyHoldUp = 0;
+        sKeyHoldRight = 0;
 
-        if (gKeyReleaseUp < 255) {
-            gKeyReleaseUp++;
+        if (sKeyReleaseRight < 255) {
+            sKeyReleaseRight++;
         }
     }
 
-    if (gKeysHeld & DPAD_DOWN) {
-        gKeyHoldDown++;
-        gKeyReleaseDown = 0;
+    if (sKeysHeld & DPAD_UP) {
+        sKeyHoldUp++;
+        sKeyReleaseUp = 0;
 
-        if (gKeyHoldDown > 32) {
-            gKeyHoldDown = 29;
-        }
-    } else {
-        gKeyHoldDown = 0;
-
-        if (gKeyReleaseDown < 255) {
-            gKeyReleaseDown++;
-        }
-    }
-
-    if (gKeysHeld & L_BUTTON) {
-        gKeyHoldL++;
-        gKeyReleaseL = 0;
-
-        if (gKeyHoldL > 32) {
-            gKeyHoldL = 29;
+        if (sKeyHoldUp > 32) {
+            sKeyHoldUp = 29;
         }
     } else {
-        gKeyHoldL = 0;
+        sKeyHoldUp = 0;
 
-        if (gKeyReleaseL < 255) {
-            gKeyReleaseL++;
+        if (sKeyReleaseUp < 255) {
+            sKeyReleaseUp++;
         }
     }
 
-    if (gKeysHeld & R_BUTTON) {
-        gKeyHoldR++;
-        gKeyReleaseR = 0;
+    if (sKeysHeld & DPAD_DOWN) {
+        sKeyHoldDown++;
+        sKeyReleaseDown = 0;
 
-        if (gKeyHoldR > 32) {
-            gKeyHoldR = 29;
-        }
-    } else {
-        gKeyHoldR = 0;
-
-        if (gKeyReleaseR < 255) {
-            gKeyReleaseR++;
-        }
-    }
-
-    if (gKeysHeld & A_BUTTON) {
-        gKeyHoldA++;
-        gKeyReleaseA = 0;
-
-        if (gKeyHoldA > 32) {
-            gKeyHoldA = 29;
+        if (sKeyHoldDown > 32) {
+            sKeyHoldDown = 29;
         }
     } else {
-        gKeyHoldA = 0;
+        sKeyHoldDown = 0;
 
-        if (gKeyReleaseA < 255) {
-            gKeyReleaseA++;
+        if (sKeyReleaseDown < 255) {
+            sKeyReleaseDown++;
         }
     }
 
-    if (gKeysHeld & B_BUTTON) {
-        gKeyHoldB++;
-        gKeyReleaseB = 0;
+    if (sKeysHeld & L_BUTTON) {
+        sKeyHoldL++;
+        sKeyReleaseL = 0;
 
-        if (gKeyHoldB > 32) {
-            gKeyHoldB = 29;
-        }
-    } else {
-        gKeyHoldB = 0;
-
-        if (gKeyReleaseB < 255) {
-            gKeyReleaseB++;
-        }
-    }
-
-    if (gKeysHeld & START_BUTTON) {
-        gKeyHoldStart++;
-        gKeyReleaseStart = 0;
-
-        if (gKeyHoldStart > 32) {
-            gKeyHoldStart = 29;
+        if (sKeyHoldL > 32) {
+            sKeyHoldL = 29;
         }
     } else {
-        gKeyHoldStart = 0;
+        sKeyHoldL = 0;
 
-        if (gKeyReleaseStart < 255) {
-            gKeyReleaseStart++;
+        if (sKeyReleaseL < 255) {
+            sKeyReleaseL++;
         }
     }
 
-    if (gKeysHeld & SELECT_BUTTON) {
-        gKeyHoldSelect++;
-        gKeyReleaseSelect = 0;
+    if (sKeysHeld & R_BUTTON) {
+        sKeyHoldR++;
+        sKeyReleaseR = 0;
 
-        if (gKeyHoldSelect > 32) {
-            gKeyHoldSelect = 29;
+        if (sKeyHoldR > 32) {
+            sKeyHoldR = 29;
         }
     } else {
-        gKeyHoldSelect = 0;
+        sKeyHoldR = 0;
 
-        if (gKeyReleaseSelect < 255) {
-            gKeyReleaseSelect++;
+        if (sKeyReleaseR < 255) {
+            sKeyReleaseR++;
         }
     }
 
-    gKeysRepeat = 0;
+    if (sKeysHeld & A_BUTTON) {
+        sKeyHoldA++;
+        sKeyReleaseA = 0;
 
-    if (gKeyHoldLeft == 1 || gKeyHoldLeft == 32) {
-        gKeysRepeat |= DPAD_LEFT;
+        if (sKeyHoldA > 32) {
+            sKeyHoldA = 29;
+        }
+    } else {
+        sKeyHoldA = 0;
+
+        if (sKeyReleaseA < 255) {
+            sKeyReleaseA++;
+        }
     }
 
-    if (gKeyHoldRight == 1 || gKeyHoldRight == 32) {
-        gKeysRepeat |= DPAD_RIGHT;
+    if (sKeysHeld & B_BUTTON) {
+        sKeyHoldB++;
+        sKeyReleaseB = 0;
+
+        if (sKeyHoldB > 32) {
+            sKeyHoldB = 29;
+        }
+    } else {
+        sKeyHoldB = 0;
+
+        if (sKeyReleaseB < 255) {
+            sKeyReleaseB++;
+        }
     }
 
-    if (gKeyHoldUp == 1 || gKeyHoldUp == 32) {
-        gKeysRepeat |= DPAD_UP;
+    if (sKeysHeld & START_BUTTON) {
+        sKeyHoldStart++;
+        sKeyReleaseStart = 0;
+
+        if (sKeyHoldStart > 32) {
+            sKeyHoldStart = 29;
+        }
+    } else {
+        sKeyHoldStart = 0;
+
+        if (sKeyReleaseStart < 255) {
+            sKeyReleaseStart++;
+        }
     }
 
-    if (gKeyHoldDown == 1 || gKeyHoldDown == 32) {
-        gKeysRepeat |= DPAD_DOWN;
+    if (sKeysHeld & SELECT_BUTTON) {
+        sKeyHoldSelect++;
+        sKeyReleaseSelect = 0;
+
+        if (sKeyHoldSelect > 32) {
+            sKeyHoldSelect = 29;
+        }
+    } else {
+        sKeyHoldSelect = 0;
+
+        if (sKeyReleaseSelect < 255) {
+            sKeyReleaseSelect++;
+        }
     }
 
-    if (gKeyHoldL == 1 || gKeyHoldL == 32) {
-        gKeysRepeat |= L_BUTTON;
+    sKeysRepeat = 0;
+
+    if (sKeyHoldLeft == 1 || sKeyHoldLeft == 32) {
+        sKeysRepeat |= DPAD_LEFT;
     }
 
-    if (gKeyHoldR == 1 || gKeyHoldR == 32) {
-        gKeysRepeat |= R_BUTTON;
+    if (sKeyHoldRight == 1 || sKeyHoldRight == 32) {
+        sKeysRepeat |= DPAD_RIGHT;
     }
 
-    if (gKeyHoldA == 1 || gKeyHoldA == 32) {
-        gKeysRepeat |= A_BUTTON;
+    if (sKeyHoldUp == 1 || sKeyHoldUp == 32) {
+        sKeysRepeat |= DPAD_UP;
     }
 
-    if (gKeyHoldB == 1 || gKeyHoldB == 32) {
-        gKeysRepeat |= B_BUTTON;
+    if (sKeyHoldDown == 1 || sKeyHoldDown == 32) {
+        sKeysRepeat |= DPAD_DOWN;
     }
 
-    if (gKeyHoldStart == 1 || gKeyHoldStart == 32) {
-        gKeysRepeat |= START_BUTTON;
+    if (sKeyHoldL == 1 || sKeyHoldL == 32) {
+        sKeysRepeat |= L_BUTTON;
     }
 
-    if (gKeyHoldSelect == 1 || gKeyHoldSelect == 32) {
-        gKeysRepeat |= SELECT_BUTTON;
+    if (sKeyHoldR == 1 || sKeyHoldR == 32) {
+        sKeysRepeat |= R_BUTTON;
+    }
+
+    if (sKeyHoldA == 1 || sKeyHoldA == 32) {
+        sKeysRepeat |= A_BUTTON;
+    }
+
+    if (sKeyHoldB == 1 || sKeyHoldB == 32) {
+        sKeysRepeat |= B_BUTTON;
+    }
+
+    if (sKeyHoldStart == 1 || sKeyHoldStart == 32) {
+        sKeysRepeat |= START_BUTTON;
+    }
+
+    if (sKeyHoldSelect == 1 || sKeyHoldSelect == 32) {
+        sKeysRepeat |= SELECT_BUTTON;
     }
 }

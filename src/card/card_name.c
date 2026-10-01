@@ -20,11 +20,11 @@
 #include "types.h"
 #include <stddef.h>
 
-PrintLine* gPrintLines;
+static PrintLine* sPrintLines;
 
-u8 gPrintLineCount;
+static u8 sPrintLineCount;
 
-u8 gPrintBg;
+static u8 sPrintBg;
 
 
 void PremireEffectSetOrbitPos(PremiumCardEffectWork* w);
@@ -277,13 +277,13 @@ void InitPrintLayer(u8 bg) {
     LoadBgMap(bg, gUnk_08125E24, 0x800);
     LoadBgPalette(bg, gUnk_09036300, 0x80);
     EnableBg(bg);
-    gPrintBg = bg;
-    p = &gPrintLines;
+    sPrintBg = bg;
+    p = &sPrintLines;
     *p = EwramAlloc(sizeof(PrintLine) * 32);
 }
 
 void FreePrintLayer() {
-    EwramFree(gPrintLines);
+    EwramFree(sPrintLines);
 }
 
 u8 GetStringLength(const u8* p) {
@@ -308,7 +308,7 @@ void PrintString(u8 a, u8 b, u8 c, const u8* s) {
     u8 n;
     u8 i;
 
-    if (gPrintLineCount < 32) {
+    if (sPrintLineCount < 32) {
         n = GetStringLength(s);
 
         if (n > 32) {
@@ -316,38 +316,38 @@ void PrintString(u8 a, u8 b, u8 c, const u8* s) {
         }
 
         for (i = 0; i < n; i++) {
-            gPrintLines[gPrintLineCount].tilemap[i] = s[i];
-            gPrintLines[gPrintLineCount].tilemap[i] |= c << 12;
+            sPrintLines[sPrintLineCount].tilemap[i] = s[i];
+            sPrintLines[sPrintLineCount].tilemap[i] |= c << 12;
         }
 
-        gPrintLines[gPrintLineCount].x = a;
-        gPrintLines[gPrintLineCount].y = b;
-        gPrintLines[gPrintLineCount].palette = c;
-        gPrintLines[gPrintLineCount].length = n;
-        RequestTilemapRectCopy(gPrintLines[gPrintLineCount].tilemap, GetBgScreenBase(gPrintBg), 0, 0,
-                      gPrintLines[gPrintLineCount].x,
-                      gPrintLines[gPrintLineCount].y,
-                      gPrintLines[gPrintLineCount].length, 1);
-        gPrintLineCount++;
+        sPrintLines[sPrintLineCount].x = a;
+        sPrintLines[sPrintLineCount].y = b;
+        sPrintLines[sPrintLineCount].palette = c;
+        sPrintLines[sPrintLineCount].length = n;
+        RequestTilemapRectCopy(sPrintLines[sPrintLineCount].tilemap, GetBgScreenBase(sPrintBg), 0, 0,
+                      sPrintLines[sPrintLineCount].x,
+                      sPrintLines[sPrintLineCount].y,
+                      sPrintLines[sPrintLineCount].length, 1);
+        sPrintLineCount++;
     }
 }
 
 void ResetPrintLines() {
-    gPrintLineCount = 0;
+    sPrintLineCount = 0;
 }
 
 void ClearPrintLines() {
     s16 i;
 
-    for (i = 0; i < gPrintLineCount; i++) {
-        gPrintLines[i].length = 0;
-        gPrintLines[i].x = 0;
-        gPrintLines[i].y = 0;
-        gPrintLines[i].palette = 0;
-        gPrintLines[i].tilemap[0] = 0;
+    for (i = 0; i < sPrintLineCount; i++) {
+        sPrintLines[i].length = 0;
+        sPrintLines[i].x = 0;
+        sPrintLines[i].y = 0;
+        sPrintLines[i].palette = 0;
+        sPrintLines[i].tilemap[0] = 0;
     }
 
-    gPrintLineCount = 0;
+    sPrintLineCount = 0;
 }
 
 void PrintNumber(u16 x, u16 y, u16 color, s32 value) {

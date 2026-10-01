@@ -177,7 +177,6 @@ void task_bos_boogie_dice_3(BoogieDiceWork* work);
 extern const u8 gUnk_0984D134[][8];
 extern u8 gSakuTiles[];
 extern u8 gBoss02objPalette[];
-extern UrsulaWork* gUrsulaWork;
 
 void BosUrsulaUpdateMapBlocks(UrsulaWork* work);
 void task_bos_ursula_2(UrsulaWork* work);

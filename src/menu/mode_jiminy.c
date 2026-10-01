@@ -1185,38 +1185,38 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #endif
 
 #include "jiminy_placeholders.inc"
-JiminyWork* gJiminyWork;
+static JiminyWork* sJiminyWork;
 
 void JiminyFreeRows() {
     s32 i;
     s32 j;
 
     for (i = 0; i < 8; i++) {
-        gJiminyWork->rowStates[i] = 0;
-        FreeTextSlots(gJiminyWork->lines[i].textSlots, 48);
+        sJiminyWork->rowStates[i] = 0;
+        FreeTextSlots(sJiminyWork->lines[i].textSlots, 48);
 
         for (j = 0; j < 48; j++) {
-            if (gJiminyWork->lines[i].textSlots[j].tiles != NULL) {
-                gJiminyWork->lines[i].textSlots[j].tiles = NULL;
+            if (sJiminyWork->lines[i].textSlots[j].tiles != NULL) {
+                sJiminyWork->lines[i].textSlots[j].tiles = NULL;
             }
         }
     }
 }
 
 void JiminyInitCursor(s16 a, s16 b, s16 c) {
-    gJiminyWork->moveDelay = 0;
-    gJiminyWork->x4 = a << 8;
-    gJiminyWork->y5 = (b + gJiminyWork->cursorRow * c) << 8;
+    sJiminyWork->moveDelay = 0;
+    sJiminyWork->x4 = a << 8;
+    sJiminyWork->y5 = (b + sJiminyWork->cursorRow * c) << 8;
 }
 
 void JiminyUpdateCursor(s16 a, s16 b, s16 c) {
     s32 v;
 
-    v = (b + gJiminyWork->cursorRow * c) << 8;
-    ApproachValueHalf(&gJiminyWork->y5, v);
+    v = (b + sJiminyWork->cursorRow * c) << 8;
+    ApproachValueHalf(&sJiminyWork->y5, v);
 
-    if (gJiminyWork->moveDelay > 0) {
-        gJiminyWork->moveDelay--;
+    if (sJiminyWork->moveDelay > 0) {
+        sJiminyWork->moveDelay--;
     }
 }
 
@@ -1330,7 +1330,7 @@ void JiminyLoadHiddenRow(s32 a, const u16* const* b) {
         t = 12;
     }
 
-    gJiminyWork->textSlotCounts[a] = LoadTextSlots(gJiminyHiddenTexts[t], gJiminyWork->lines[a].textSlots);
+    sJiminyWork->textSlotCounts[a] = LoadTextSlots(gJiminyHiddenTexts[t], sJiminyWork->lines[a].textSlots);
 }
 
 void JiminyLoadRows(s16 a, s16 b, const u16* const* d, const u16* c, const u16* e, s16 f, s16 g, s16 h) {
@@ -1342,27 +1342,27 @@ void JiminyLoadRows(s16 a, s16 b, const u16* const* d, const u16* c, const u16* 
     if (c == NULL) {
         for (i = 0; i < n; i++) {
             if (e != NULL) {
-                gJiminyWork->rowStates[i] = GetJiminyEntryState(e[i]);
+                sJiminyWork->rowStates[i] = GetJiminyEntryState(e[i]);
 
-                if (gJiminyWork->rowStates[i] == 3) {
+                if (sJiminyWork->rowStates[i] == 3) {
                     JiminyLoadHiddenRow(i, d);
                 } else {
-                    gJiminyWork->textSlotCounts[i] =
-                        LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
+                    sJiminyWork->textSlotCounts[i] =
+                        LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
                 }
             } else {
-                gJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
+                sJiminyWork->textSlotCounts[i] =
+                    LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
             }
         }
     } else {
         for (i = 0; i < n; i++) {
             if (IsJiminyFlagSet(c[i])) {
-                gJiminyWork->textSlotCounts[i] =
-                    LoadTextSlots(d[i], gJiminyWork->lines[i].textSlots);
+                sJiminyWork->textSlotCounts[i] =
+                    LoadTextSlots(d[i], sJiminyWork->lines[i].textSlots);
 
                 if (IsJiminyFlagNew(c[i])) {
-                    gJiminyWork->rowStates[i] = 1;
+                    sJiminyWork->rowStates[i] = 1;
                 }
             } else {
                 JiminyLoadHiddenRow(i, d);
@@ -1374,61 +1374,61 @@ void JiminyLoadRows(s16 a, s16 b, const u16* const* d, const u16* c, const u16* 
 void JiminyReloadRows() {
     s16 t;
 
-    t = gJiminyWork->cursor - gJiminyWork->cursorRow;
+    t = sJiminyWork->cursor - sJiminyWork->cursorRow;
     JiminyFreeRows();
 
-    if (gJiminyWork->itemFlags != NULL) {
-        JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
-            gJiminyWork->itemTexts + t, gJiminyWork->itemFlags + t, NULL,
-            gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
+    if (sJiminyWork->itemFlags != NULL) {
+        JiminyLoadRows(sJiminyWork->visibleRows, sJiminyWork->itemCount,
+            sJiminyWork->itemTexts + t, sJiminyWork->itemFlags + t, NULL,
+            sJiminyWork->listX, sJiminyWork->listY, sJiminyWork->rowHeight);
     } else {
-        JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
-            gJiminyWork->itemTexts + t, NULL, gJiminyWork->itemChildren + t,
-            gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
+        JiminyLoadRows(sJiminyWork->visibleRows, sJiminyWork->itemCount,
+            sJiminyWork->itemTexts + t, NULL, sJiminyWork->itemChildren + t,
+            sJiminyWork->listX, sJiminyWork->listY, sJiminyWork->rowHeight);
     }
 }
 
 void JiminyReloadPlainRows() {
     s16 t;
 
-    t = gJiminyWork->cursor - gJiminyWork->cursorRow;
+    t = sJiminyWork->cursor - sJiminyWork->cursorRow;
     JiminyFreeRows();
-    JiminyLoadRows(gJiminyWork->visibleRows, gJiminyWork->itemCount,
-        gJiminyWork->itemTexts + t, NULL, NULL,
-        gJiminyWork->listX, gJiminyWork->listY, gJiminyWork->rowHeight);
+    JiminyLoadRows(sJiminyWork->visibleRows, sJiminyWork->itemCount,
+        sJiminyWork->itemTexts + t, NULL, NULL,
+        sJiminyWork->listX, sJiminyWork->listY, sJiminyWork->rowHeight);
 }
 
 void JiminyOpenList(s16 a, s16 b, const u16* const* c, const u16* d, const u16* e, s16 f, s16 g, s16 h) {
 #ifdef VERSION_EU
     s32 i;
 #endif
-    gJiminyWork->listX = f;
-    gJiminyWork->listY = g;
-    gJiminyWork->rowHeight = h;
-    gJiminyWork->itemCount = b;
-    gJiminyWork->visibleRows = a;
+    sJiminyWork->listX = f;
+    sJiminyWork->listY = g;
+    sJiminyWork->rowHeight = h;
+    sJiminyWork->itemCount = b;
+    sJiminyWork->visibleRows = a;
 
 #ifdef VERSION_EU
     for (i = 0; i < b; i++) {
-        gJiminyWork->resolvedTexts[i] = eu_0805E924(c[i]);
+        sJiminyWork->resolvedTexts[i] = eu_0805E924(c[i]);
     }
 
-    gJiminyWork->itemTexts = gJiminyWork->resolvedTexts;
+    sJiminyWork->itemTexts = sJiminyWork->resolvedTexts;
 #else
-    gJiminyWork->itemTexts = c;
+    sJiminyWork->itemTexts = c;
 #endif
-    gJiminyWork->itemFlags = d;
-    gJiminyWork->itemChildren = e;
-    gJiminyWork->x = f + 56;
-    gJiminyWork->x2 = f + 56;
-    gJiminyWork->y = g - 10;
-    gJiminyWork->y2 = g + h * (a - 1) + 12;
-    gJiminyWork->flags = (gJiminyWork->flags & ~(JIMINY_FLAG_SHOW_TITLE | JIMINY_FLAG_SCROLL_UP | JIMINY_FLAG_SCROLL_DOWN)) | JIMINY_FLAG_SHOW_CURSOR;
-    gJiminyWork->shownChars = 0;
-    JiminyInitCursor(gJiminyWork->listX - 24, gJiminyWork->listY - 4,
-        gJiminyWork->rowHeight);
+    sJiminyWork->itemFlags = d;
+    sJiminyWork->itemChildren = e;
+    sJiminyWork->x = f + 56;
+    sJiminyWork->x2 = f + 56;
+    sJiminyWork->y = g - 10;
+    sJiminyWork->y2 = g + h * (a - 1) + 12;
+    sJiminyWork->flags = (sJiminyWork->flags & ~(JIMINY_FLAG_SHOW_TITLE | JIMINY_FLAG_SCROLL_UP | JIMINY_FLAG_SCROLL_DOWN)) | JIMINY_FLAG_SHOW_CURSOR;
+    sJiminyWork->shownChars = 0;
+    JiminyInitCursor(sJiminyWork->listX - 24, sJiminyWork->listY - 4,
+        sJiminyWork->rowHeight);
     JiminyReloadRows();
-    gJiminyWork->frame = 0;
+    sJiminyWork->frame = 0;
 }
 
 u8 JiminyHandleListInput() {
@@ -1436,52 +1436,52 @@ u8 JiminyHandleListInput() {
         return 1;
     }
 
-    if (gJiminyWork->shownChars < gJiminyWork->charCount) {
-        AnimChange(&gJiminyWork->anim, 1, ANIM_FLAG_LOOP);
+    if (sJiminyWork->shownChars < sJiminyWork->charCount) {
+        AnimChange(&sJiminyWork->anim, 1, ANIM_FLAG_LOOP);
 
         if (!FadeIsActive()) {
-            if (gJiminyWork->stateTimer % 5 == 0) {
-                gJiminyWork->shownChars++;
+            if (sJiminyWork->stateTimer % 5 == 0) {
+                sJiminyWork->shownChars++;
             }
         }
     } else {
-        AnimChange(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
+        AnimChange(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
-    if (gJiminyWork->cursorRow < gJiminyWork->cursor) {
-        gJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
+    if (sJiminyWork->cursorRow < sJiminyWork->cursor) {
+        sJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
     } else {
-        gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
+        sJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
     }
 
-    if (gJiminyWork->visibleRows - gJiminyWork->cursorRow <
-        gJiminyWork->itemCount - gJiminyWork->cursor) {
-        gJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
+    if (sJiminyWork->visibleRows - sJiminyWork->cursorRow <
+        sJiminyWork->itemCount - sJiminyWork->cursor) {
+        sJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
     } else {
-        gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
+        sJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
     }
 
-    if (gJiminyWork->moveDelay <= 0) {
+    if (sJiminyWork->moveDelay <= 0) {
         if (GetKeysRepeat() & DPAD_UP) {
-            if (gJiminyWork->cursor > 0) {
-                gJiminyWork->moveDelay = 1;
-                gJiminyWork->cursor--;
+            if (sJiminyWork->cursor > 0) {
+                sJiminyWork->moveDelay = 1;
+                sJiminyWork->cursor--;
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (gJiminyWork->cursorRow > 0) {
-                    gJiminyWork->cursorRow--;
+                if (sJiminyWork->cursorRow > 0) {
+                    sJiminyWork->cursorRow--;
                 } else {
                     JiminyReloadRows();
                 }
             }
         } else if (GetKeysRepeat() & DPAD_DOWN) {
-            if (gJiminyWork->cursor < gJiminyWork->itemCount - 1) {
-                gJiminyWork->moveDelay = 1;
-                gJiminyWork->cursor++;
+            if (sJiminyWork->cursor < sJiminyWork->itemCount - 1) {
+                sJiminyWork->moveDelay = 1;
+                sJiminyWork->cursor++;
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (gJiminyWork->cursorRow < gJiminyWork->visibleRows - 1) {
-                    gJiminyWork->cursorRow++;
+                if (sJiminyWork->cursorRow < sJiminyWork->visibleRows - 1) {
+                    sJiminyWork->cursorRow++;
                 } else {
                     JiminyReloadRows();
                 }
@@ -1489,12 +1489,12 @@ u8 JiminyHandleListInput() {
         }
     }
 
-    JiminyUpdateCursor(gJiminyWork->listX - 24, gJiminyWork->listY - 4,
-        gJiminyWork->rowHeight);
+    JiminyUpdateCursor(sJiminyWork->listX - 24, sJiminyWork->listY - 4,
+        sJiminyWork->rowHeight);
 
     if (GetKeysPressed() & START_BUTTON) {
-        gJiminyWork->stateTimer = 0;
-        gJiminyWork->state = 5;
+        sJiminyWork->stateTimer = 0;
+        sJiminyWork->state = 5;
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     }
@@ -1507,7 +1507,7 @@ void mode_jiminy_0() {
     s32 j;
     const JiminyEntry* e;
 
-    gJiminyWork = EwramAlloc(sizeof(JiminyWork));
+    sJiminyWork = EwramAlloc(sizeof(JiminyWork));
     SetBgMode0();
     SetupBg(0, 0, 0x1D, 0);
     SetupBg(1, 0, 0x1E, 0);
@@ -1545,95 +1545,95 @@ void mode_jiminy_0() {
 
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_ENGLISH) {
-        gJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
+        sJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
     } else {
-        gJiminyWork->tiles = LoadObjTiles(gUnkEu_08C9A5E2, 0x1780);
+        sJiminyWork->tiles = LoadObjTiles(gUnkEu_08C9A5E2, 0x1780);
     }
 #else
-    gJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
+    sJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
 #endif
-    gJiminyWork->palette = LoadObjPalette(gUnk_08F6DD64, 0x20);
-    FadeSetPaletteExcluded(gJiminyWork->palette->index + 0x10, 1);
-    gJiminyWork->tiles2 = LoadObjTiles(gUnk_08C6A88C, 0x40);
-    gJiminyWork->palette2 = LoadObjPalette(gUnk_08F6DDE4, 0x20);
-    gJiminyWork->palette3 = LoadObjPalette(gUnk_08F6DD84, 0x20);
-    gJiminyWork->tiles5 = LoadObjTiles(gUnk_08C6A54E, 0x140);
-    gJiminyWork->palette6 = LoadObjPalette(gUnk_08F6DDA4, 0x20);
+    sJiminyWork->palette = LoadObjPalette(gUnk_08F6DD64, 0x20);
+    FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, 1);
+    sJiminyWork->tiles2 = LoadObjTiles(gUnk_08C6A88C, 0x40);
+    sJiminyWork->palette2 = LoadObjPalette(gUnk_08F6DDE4, 0x20);
+    sJiminyWork->palette3 = LoadObjPalette(gUnk_08F6DD84, 0x20);
+    sJiminyWork->tiles5 = LoadObjTiles(gUnk_08C6A54E, 0x140);
+    sJiminyWork->palette6 = LoadObjPalette(gUnk_08F6DDA4, 0x20);
 #ifdef VERSION_EU
-    gJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x340);
+    sJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x340);
 #else
-    gJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x1C0);
+    sJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x1C0);
 #endif
-    gJiminyWork->palette7 = LoadObjPalette(gUnk_08F6DDC4, 0x20);
-    gJiminyWork->x3 = -0x8000;
-    gJiminyWork->y3 = -0x800;
-    gJiminyWork->y4 = 0xA000;
-    gJiminyWork->state = 0;
-    gJiminyWork->stateTimer = 0;
-    gJiminyWork->shownChars = 0;
-    gJiminyWork->cursor = 0;
-    gJiminyWork->cursorRow = 0;
+    sJiminyWork->palette7 = LoadObjPalette(gUnk_08F6DDC4, 0x20);
+    sJiminyWork->x3 = -0x8000;
+    sJiminyWork->y3 = -0x800;
+    sJiminyWork->y4 = 0xA000;
+    sJiminyWork->state = 0;
+    sJiminyWork->stateTimer = 0;
+    sJiminyWork->shownChars = 0;
+    sJiminyWork->cursor = 0;
+    sJiminyWork->cursorRow = 0;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
-        gJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, 0x20);
-        AnimInit(&gJiminyWork->anim, gTalk2700Anims, gTalk2700Frames);
-        AnimStart(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
+        sJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk2700Tiles);
+        sJiminyWork->palette4 = LoadObjPalette(gTalk2700Palette, 0x20);
+        AnimInit(&sJiminyWork->anim, gTalk2700Anims, gTalk2700Frames);
+        AnimStart(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     } else {
-        gJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk0600Tiles);
-        gJiminyWork->palette4 = LoadObjPalette(gTalk0600Palette, 0x20);
-        AnimInit(&gJiminyWork->anim, gTalk0600Anims, gTalk0600Frames);
-        AnimStart(&gJiminyWork->anim, 0, ANIM_FLAG_LOOP);
+        sJiminyWork->tiles3 = AllocObjTiles(0x1000, gTalk0600Tiles);
+        sJiminyWork->palette4 = LoadObjPalette(gTalk0600Palette, 0x20);
+        AnimInit(&sJiminyWork->anim, gTalk0600Anims, gTalk0600Frames);
+        AnimStart(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
     if (FadeIsActive() == 0) {
-        gJiminyWork->tiles4 = AllocObjTiles(0x200, gUnk_08C6A958);
-        gJiminyWork->palette5 = LoadObjPalette(gUnk_08F6DE04, 0x20);
-        AnimInit(&gJiminyWork->anim2, gUnk_09EE2678, gUnk_09EE2668);
-        AnimStart(&gJiminyWork->anim2, 2, ANIM_FLAG_LOOP);
+        sJiminyWork->tiles4 = AllocObjTiles(0x200, gUnk_08C6A958);
+        sJiminyWork->palette5 = LoadObjPalette(gUnk_08F6DE04, 0x20);
+        AnimInit(&sJiminyWork->anim2, gUnk_09EE2678, gUnk_09EE2668);
+        AnimStart(&sJiminyWork->anim2, 2, ANIM_FLAG_LOOP);
     }
 
-    gJiminyWork->tiles7 = AllocObjTiles(0x2000, NULL);
+    sJiminyWork->tiles7 = AllocObjTiles(0x2000, NULL);
 #ifdef VERSION_EU
-    gJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CDDC, 0x40);
+    sJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CDDC, 0x40);
 #else
-    gJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CC9C, 0x20);
+    sJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CC9C, 0x20);
 #endif
-    gJiminyWork->tiles8 = AllocObjTiles(0x800, NULL);
-    gJiminyWork->palette9 = LoadObjPalette(gCard00Palette, 0x20);
-    gJiminyWork->unk_D3C = 0;
-    gJiminyWork->unk_D38 = 0x100;
+    sJiminyWork->tiles8 = AllocObjTiles(0x800, NULL);
+    sJiminyWork->palette9 = LoadObjPalette(gCard00Palette, 0x20);
+    sJiminyWork->unk_D3C = 0;
+    sJiminyWork->unk_D38 = 0x100;
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 
     for (i = 0; i < 8; i++) {
-        InitTextSlots(gJiminyWork->lines[i].textSlots, 0x30);
+        InitTextSlots(sJiminyWork->lines[i].textSlots, 0x30);
     }
 
     InitMsgGlyphSprites(0);
 #ifdef VERSION_JP
-    gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
+    sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #elif defined(VERSION_EU)
-    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
+    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
 #else
-    gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
+    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
 
     for (j = 0; j <= 0x14; j++) {
-        gJiminyWork->pairs[j].cursor = 0;
-        gJiminyWork->pairs[j].cursorRow = 0;
+        sJiminyWork->pairs[j].cursor = 0;
+        sJiminyWork->pairs[j].cursorRow = 0;
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        gJiminyWork->entry = 14;
+        sJiminyWork->entry = 14;
         e = sJiminyEntries;
         e += 14;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
-        gJiminyWork->flags = JIMINY_FLAG_SHOW_TITLE;
+        sJiminyWork->flags = JIMINY_FLAG_SHOW_TITLE;
     } else {
-        gJiminyWork->entry = 0;
+        sJiminyWork->entry = 0;
         e = sJiminyEntries;
         JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
-        gJiminyWork->flags = (JIMINY_FLAG_SHOW_MESSAGE | JIMINY_FLAG_SHOW_TITLE);
+        sJiminyWork->flags = (JIMINY_FLAG_SHOW_MESSAGE | JIMINY_FLAG_SHOW_TITLE);
     }
 }
 
@@ -1646,78 +1646,78 @@ void mode_jiminy_1() {
     const JiminyEntry* e2;
     JiminyPair* p2;
 
-    switch (gJiminyWork->state) {
+    switch (sJiminyWork->state) {
     case 0:
-        if (gJiminyWork->stateTimer == 0) {
-            gJiminyWork->steps = 16;
+        if (sJiminyWork->stateTimer == 0) {
+            sJiminyWork->steps = 16;
         }
 
-        ApproachValue(&gJiminyWork->y3, 0, gJiminyWork->steps);
-        ApproachValue(&gJiminyWork->y4, 0x9800, gJiminyWork->steps);
-        gJiminyWork->steps--;
+        ApproachValue(&sJiminyWork->y3, 0, sJiminyWork->steps);
+        ApproachValue(&sJiminyWork->y4, 0x9800, sJiminyWork->steps);
+        sJiminyWork->steps--;
 
-        if (gJiminyWork->steps <= 0) {
-            gJiminyWork->state = 1;
-            gJiminyWork->stateTimer = 0;
+        if (sJiminyWork->steps <= 0) {
+            sJiminyWork->state = 1;
+            sJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->stateTimer++;
+            sJiminyWork->stateTimer++;
         }
 
         break;
     case 1:
-        if (gJiminyWork->stateTimer == 0) {
-            gJiminyWork->steps = 16;
+        if (sJiminyWork->stateTimer == 0) {
+            sJiminyWork->steps = 16;
         }
 
-        ApproachValue(&gJiminyWork->x3, 0, gJiminyWork->steps);
-        gJiminyWork->steps--;
+        ApproachValue(&sJiminyWork->x3, 0, sJiminyWork->steps);
+        sJiminyWork->steps--;
 
-        if (gJiminyWork->steps <= 0) {
-            gJiminyWork->state = 6;
-            gJiminyWork->stateTimer = 0;
+        if (sJiminyWork->steps <= 0) {
+            sJiminyWork->state = 6;
+            sJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->stateTimer++;
+            sJiminyWork->stateTimer++;
         }
 
         break;
     case 2:
-        if (gJiminyWork->stateTimer == 0) {
-            c = gJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
-            gJiminyWork->flags = c & ~JIMINY_FLAG_SHOW_CURSOR;
-            gJiminyWork->steps = 16;
+        if (sJiminyWork->stateTimer == 0) {
+            c = sJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
+            sJiminyWork->flags = c & ~JIMINY_FLAG_SHOW_CURSOR;
+            sJiminyWork->steps = 16;
             LoadBgMap(1, gUnk_08F61B84, 0x800);
         }
 
-        ApproachValue(&gJiminyWork->x3, -0x8000, gJiminyWork->steps);
-        gJiminyWork->steps--;
+        ApproachValue(&sJiminyWork->x3, -0x8000, sJiminyWork->steps);
+        sJiminyWork->steps--;
 
-        if (gJiminyWork->steps <= 0) {
-            gJiminyWork->state = 3;
-            gJiminyWork->stateTimer = 0;
+        if (sJiminyWork->steps <= 0) {
+            sJiminyWork->state = 3;
+            sJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->stateTimer++;
+            sJiminyWork->stateTimer++;
         }
 
         break;
     case 3:
-        if (gJiminyWork->stateTimer == 0) {
-            gJiminyWork->steps = 16;
+        if (sJiminyWork->stateTimer == 0) {
+            sJiminyWork->steps = 16;
         }
 
-        ApproachValue(&gJiminyWork->y3, -0x800, gJiminyWork->steps);
-        ApproachValue(&gJiminyWork->y4, 0xA000, gJiminyWork->steps);
-        gJiminyWork->steps--;
+        ApproachValue(&sJiminyWork->y3, -0x800, sJiminyWork->steps);
+        ApproachValue(&sJiminyWork->y4, 0xA000, sJiminyWork->steps);
+        sJiminyWork->steps--;
 
-        if (gJiminyWork->steps <= 0) {
-            gJiminyWork->state = 4;
-            gJiminyWork->stateTimer = 0;
+        if (sJiminyWork->steps <= 0) {
+            sJiminyWork->state = 4;
+            sJiminyWork->stateTimer = 0;
         } else {
-            gJiminyWork->stateTimer++;
+            sJiminyWork->stateTimer++;
         }
 
         break;
     case 4:
-        if (gJiminyWork->stateTimer == 0) {
+        if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
@@ -1728,7 +1728,7 @@ void mode_jiminy_1() {
 
         break;
     case 5:
-        if (gJiminyWork->stateTimer == 0) {
+        if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
@@ -1739,34 +1739,34 @@ void mode_jiminy_1() {
 
         break;
     case 6:
-        e = &sJiminyEntries[gJiminyWork->entry];
-        p = &gJiminyWork->pairs[gJiminyWork->entry];
+        e = &sJiminyEntries[sJiminyWork->entry];
+        p = &sJiminyWork->pairs[sJiminyWork->entry];
 #ifdef VERSION_JP
-        gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
+        sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #else
 #ifdef VERSION_EU
-        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
 #else
-        gJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
 #endif
         DisableBg(3);
         DisableBg(0);
-        gJiminyWork->cursor = p->cursor;
-        gJiminyWork->cursorRow = p->cursorRow;
+        sJiminyWork->cursor = p->cursor;
+        sJiminyWork->cursorRow = p->cursorRow;
 
-        if (gJiminyWork->entry == 0 || gJiminyWork->entry == 14) {
+        if (sJiminyWork->entry == 0 || sJiminyWork->entry == 14) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 LoadBgMap(1, gUnk_08F62B84, 0x800);
             } else {
                 LoadBgMap(1, e->map, 0x800);
             }
 
-            LoadObjPaletteBank(gJiminyWork->palette3->index, gUnk_08F6DD84);
+            LoadObjPaletteBank(sJiminyWork->palette3->index, gUnk_08F6DD84);
             JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         } else {
             LoadBgMap(1, e->map, 0x800);
-            LoadObjPaletteBank(gJiminyWork->palette3->index, gUnk_08F6DDC4);
+            LoadObjPaletteBank(sJiminyWork->palette3->index, gUnk_08F6DDC4);
 #ifdef VERSION_JP
             JiminyOpenList(8, e->count, e->names, e->flags, e->children, 0x70, 0x1A, 0x10);
 #else
@@ -1774,26 +1774,26 @@ void mode_jiminy_1() {
 #endif
         }
 
-        gJiminyWork->state = 7;
+        sJiminyWork->state = 7;
     case 7:
-        e2 = &sJiminyEntries[gJiminyWork->entry];
-        p2 = &gJiminyWork->pairs[gJiminyWork->entry];
+        e2 = &sJiminyEntries[sJiminyWork->entry];
+        p2 = &sJiminyWork->pairs[sJiminyWork->entry];
 
         if (JiminyHandleListInput() != 0) {
             break;
         }
 
-        p2->cursor = gJiminyWork->cursor;
-        p2->cursorRow = gJiminyWork->cursorRow;
+        p2->cursor = sJiminyWork->cursor;
+        p2->cursorRow = sJiminyWork->cursorRow;
 
         if (GetKeysPressed() & B_BUTTON) {
-            gJiminyWork->stateTimer = 0;
+            sJiminyWork->stateTimer = 0;
 
             if (e2->parent == -1) {
-                gJiminyWork->state = 2;
+                sJiminyWork->state = 2;
             } else {
-                gJiminyWork->state = 6;
-                gJiminyWork->entry = e2->parent;
+                sJiminyWork->state = 6;
+                sJiminyWork->entry = e2->parent;
                 FadeStartIn(FADE_MODE_BLACK, 5);
                 FadeLock();
             }
@@ -1808,9 +1808,9 @@ void mode_jiminy_1() {
             ok = 1;
 
             if (e2->flags != NULL) {
-                ok = IsJiminyFlagSet(e2->flags[gJiminyWork->cursor]) != 0;
+                ok = IsJiminyFlagSet(e2->flags[sJiminyWork->cursor]) != 0;
             } else {
-                if (gJiminyWork->rowStates[gJiminyWork->cursorRow] == 3) {
+                if (sJiminyWork->rowStates[sJiminyWork->cursorRow] == 3) {
                     ok = 0;
                 }
             }
@@ -1819,215 +1819,215 @@ void mode_jiminy_1() {
                 m4aSongNumStart(SONG_SYS_KETTEI);
 
                 if (e2->children != NULL) {
-                    gJiminyWork->state = 6;
-                    gJiminyWork->entry = e2->children[gJiminyWork->cursor];
-                    gJiminyWork->stateTimer = 0;
+                    sJiminyWork->state = 6;
+                    sJiminyWork->entry = e2->children[sJiminyWork->cursor];
+                    sJiminyWork->stateTimer = 0;
                     FadeStartIn(FADE_MODE_BLACK, 5);
                     FadeLock();
                     break;
                 } else {
                     FadeStartIn(FADE_MODE_BLACK, 5);
                     FadeLock();
-                    gJiminyWork->stateTimer = 0;
-                    gJiminyWork->state = 8;
-                    gJiminyWork->detailIndex = gJiminyWork->cursor;
-                    gJiminyWork->detailTable = e2->detail;
+                    sJiminyWork->stateTimer = 0;
+                    sJiminyWork->state = 8;
+                    sJiminyWork->detailIndex = sJiminyWork->cursor;
+                    sJiminyWork->detailTable = e2->detail;
                     SetModeUpdate(JiminyDetailUpdate);
                     break;
                 }
             }
         }
 
-        gJiminyWork->stateTimer++;
+        sJiminyWork->stateTimer++;
         break;
     }
 
-    t = abs(gSineTable[(gJiminyWork->frame * 2) & 0xFF]) * 15 >> 8;
+    t = abs(gSineTable[(sJiminyWork->frame * 2) & 0xFF]) * 15 >> 8;
     gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     SetBlendAlpha(t, 16 - t);
 
-    if (gJiminyWork->flags & JIMINY_FLAG_SHOW_MESSAGE) {
+    if (sJiminyWork->flags & JIMINY_FLAG_SHOW_MESSAGE) {
         EnableBg(2);
-        DrawMsgGlyphs(gJiminyWork->shownChars);
-        DrawSprite(0x23, 0x76, AnimUpdate(&gJiminyWork->anim), gJiminyWork->tiles3,
-            gJiminyWork->palette4, NULL, 0, 0);
+        DrawMsgGlyphs(sJiminyWork->shownChars);
+        DrawSprite(0x23, 0x76, AnimUpdate(&sJiminyWork->anim), sJiminyWork->tiles3,
+            sJiminyWork->palette4, NULL, 0, 0);
     } else {
         DisableBg(2);
     }
 
-    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != NULL; i++) {
-        if (i >= gJiminyWork->visibleRows) {
+    for (i = 0; sJiminyWork->lines[i].textSlots[0].tiles != NULL; i++) {
+        if (i >= sJiminyWork->visibleRows) {
             break;
         }
 
-        DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
-            gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
+        DrawTextSlots(sJiminyWork->listX, sJiminyWork->listY + sJiminyWork->rowHeight * i,
+            sJiminyWork->lines[i].textSlots, sJiminyWork->palette3, 0, sJiminyWork->textSlotCounts[i]);
 
-        if (gJiminyWork->state == 7) {
-            switch (gJiminyWork->rowStates[i]) {
+        if (sJiminyWork->state == 7) {
+            switch (sJiminyWork->rowStates[i]) {
             case 1:
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
-                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnk_08C6A6A4,
+                        sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_FRENCH:
-                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
+                        sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_SPANISH:
-                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
+                        sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_ITALIAN:
-                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
+                        sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_GERMAN:
                 default:
-                    DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
-                        gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
+                        sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 }
 #else
-                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i, gUnk_08C6A6A4,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnk_08C6A6A4,
+                    sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
             case 2:
 #ifdef VERSION_EU
-                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
+                    sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
 #else
-                DrawSprite(0xD9, gJiminyWork->listY + gJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
-                    gJiminyWork->tiles6, gJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
+                    sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
             }
         }
     }
 
-    if (gJiminyWork->flags & JIMINY_FLAG_SHOW_TITLE) {
+    if (sJiminyWork->flags & JIMINY_FLAG_SHOW_TITLE) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C76, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C76, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C04, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C04, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnk_08C69C20, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnk_08C69C54, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnk_08C69C20, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnk_08C69C54, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A538, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A538, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A4CC, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A4CC, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A564, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A564, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A554, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A554, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A590, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A590, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A57A, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A57A, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_GERMAN:
         default:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5C2, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5C2, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(gJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5A6, gJiminyWork->tiles,
-                    gJiminyWork->palette, NULL, 0, 0);
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5A6, sJiminyWork->tiles,
+                    sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnkEu_08C9A516, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 1);
             break;
         }
 #else
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C76, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 0);
+            DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C76, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 0);
         } else {
-            DrawSprite(gJiminyWork->x3 >> 8, 0, gUnk_08C69C04, gJiminyWork->tiles,
-                gJiminyWork->palette, NULL, 0, 0);
+            DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C04, sJiminyWork->tiles,
+                sJiminyWork->palette, NULL, 0, 0);
         }
 
-        DrawSprite(0x58, 0x98, gUnk_08C6A878, gJiminyWork->tiles2, gJiminyWork->palette2, NULL, 0, 0);
-        DrawSprite(0x80, gJiminyWork->y3 >> 8, gUnk_08C69C20, gJiminyWork->tiles,
-            gJiminyWork->palette, NULL, 0, 1);
-        DrawSprite(0x80, gJiminyWork->y4 >> 8, gUnk_08C69C54, gJiminyWork->tiles,
-            gJiminyWork->palette, NULL, 0, 1);
+        DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+        DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnk_08C69C20, sJiminyWork->tiles,
+            sJiminyWork->palette, NULL, 0, 1);
+        DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnk_08C69C54, sJiminyWork->tiles,
+            sJiminyWork->palette, NULL, 0, 1);
 #endif
     }
 
-    if (gJiminyWork->state == 7) {
-        if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
-            DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3),
-                gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
+    if (sJiminyWork->state == 7) {
+        if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
+            DrawSprite(sJiminyWork->x, sJiminyWork->y - ((sJiminyWork->frame >> 3) & 3),
+                gUnk_08C6A51C, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
         }
 
-        if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
-            DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
-                gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
+        if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
+            DrawSprite(sJiminyWork->x2, sJiminyWork->y2 + ((sJiminyWork->frame >> 3) & 3),
+                gUnk_08C6A526, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
         }
 
         if (FadeIsActive() == 0) {
-            if (gJiminyWork->flags & JIMINY_FLAG_SHOW_CURSOR) {
-                if (gJiminyWork->moveDelay <= 0) {
-                    DrawSprite(gJiminyWork->x4 >> 8, gJiminyWork->y5 >> 8,
-                        AnimUpdate(&gJiminyWork->anim2), gJiminyWork->tiles4,
-                        gJiminyWork->palette5, NULL, 0, 0);
+            if (sJiminyWork->flags & JIMINY_FLAG_SHOW_CURSOR) {
+                if (sJiminyWork->moveDelay <= 0) {
+                    DrawSprite(sJiminyWork->x4 >> 8, sJiminyWork->y5 >> 8,
+                        AnimUpdate(&sJiminyWork->anim2), sJiminyWork->tiles4,
+                        sJiminyWork->palette5, NULL, 0, 0);
                 } else {
-                    DrawSprite(gJiminyWork->x4 >> 8, gJiminyWork->y5 >> 8, gUnk_08C6A8F8,
-                        gJiminyWork->tiles4, gJiminyWork->palette5, NULL, 0, 0);
+                    DrawSprite(sJiminyWork->x4 >> 8, sJiminyWork->y5 >> 8, gUnk_08C6A8F8,
+                        sJiminyWork->tiles4, sJiminyWork->palette5, NULL, 0, 0);
 
-                    if (gJiminyWork->moveDelay == 1) {
-                        AnimReset(&gJiminyWork->anim2);
+                    if (sJiminyWork->moveDelay == 1) {
+                        AnimReset(&sJiminyWork->anim2);
                     }
                 }
             }
@@ -2035,24 +2035,24 @@ void mode_jiminy_1() {
     }
 
     UpdatePlayTime();
-    gJiminyWork->frame++;
+    sJiminyWork->frame++;
 }
 
 void JiminyOpenPlainList(s16 a, s16 b, const u16* const* c, s16 d, s16 e, s16 f) {
-    gJiminyWork->listX = d;
-    gJiminyWork->listY = e;
-    gJiminyWork->rowHeight = f;
-    gJiminyWork->itemCount = b;
-    gJiminyWork->visibleRows = a;
-    gJiminyWork->itemTexts = c;
-    gJiminyWork->x = d + 0x38;
-    gJiminyWork->x2 = d + 0x38;
-    gJiminyWork->y = e - 10;
-    gJiminyWork->y2 = e + f * (a - 1) + 12;
-    gJiminyWork->cursor = 0;
-    gJiminyWork->cursorRow = 0;
-    gJiminyWork->moveDelay = 0;
-    gJiminyWork->frame = 0;
+    sJiminyWork->listX = d;
+    sJiminyWork->listY = e;
+    sJiminyWork->rowHeight = f;
+    sJiminyWork->itemCount = b;
+    sJiminyWork->visibleRows = a;
+    sJiminyWork->itemTexts = c;
+    sJiminyWork->x = d + 0x38;
+    sJiminyWork->x2 = d + 0x38;
+    sJiminyWork->y = e - 10;
+    sJiminyWork->y2 = e + f * (a - 1) + 12;
+    sJiminyWork->cursor = 0;
+    sJiminyWork->cursorRow = 0;
+    sJiminyWork->moveDelay = 0;
+    sJiminyWork->frame = 0;
     JiminyReloadPlainRows();
 }
 
@@ -2080,112 +2080,112 @@ void JiminyDetailUpdate() {
     s32 wide = 0;
 #endif
 
-    switch ((u32)gJiminyWork->state) {
+    switch ((u32)sJiminyWork->state) {
     case 8:
-        switch ((u32)gJiminyWork->detailTable) {
+        switch ((u32)sJiminyWork->detailTable) {
         case 1:
             count = 17;
             entries = sJiminyEntry01Details;
-            gJiminyWork->detailLayout = 0;
+            sJiminyWork->detailLayout = 0;
             break;
         case 2:
             count = 17;
             entries = sJiminyEntry04Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 3:
             count = 14;
             entries = sJiminyEntry05Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 4:
             count = 7;
             entries = sJiminyEntry06Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 5:
             count = 7;
             entries = sJiminyEntry07Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 6:
             count = 49;
             entries = sJiminyEntry08Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 7:
             count = 26;
             entries = sJiminyEntry09Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 8:
             count = 1;
             entries = sJiminyEntry10Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 9:
             count = 25;
             entries = sJiminyEntry11Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         case 10:
             count = 40;
             entries = sJiminyEntry12Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         case 11:
             count = 35;
             entries = sJiminyEntry13Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         case 12:
             count = 6;
             entries = sJiminyEntry15Details;
-            gJiminyWork->detailLayout = 0;
+            sJiminyWork->detailLayout = 0;
             break;
         case 13:
             count = 22;
             entries = sJiminyEntry16Details;
-            gJiminyWork->detailLayout = 1;
+            sJiminyWork->detailLayout = 1;
             break;
         case 14:
             count = 14;
             entries = sJiminyEntry18Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         case 15:
             count = 6;
             entries = sJiminyEntry19Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         case 16:
             count = 33;
             entries = sJiminyEntry20Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         default:
             count = 25;
             entries = sJiminyEntry11Details;
-            gJiminyWork->detailLayout = 2;
+            sJiminyWork->detailLayout = 2;
             break;
         }
 
-        gJiminyWork->detailCount = count;
+        sJiminyWork->detailCount = count;
 
-        if (gJiminyWork->detailIndex >= (s16)count) {
-            gJiminyWork->detailIndex = 0;
+        if (sJiminyWork->detailIndex >= (s16)count) {
+            sJiminyWork->detailIndex = 0;
         }
 
-        gJiminyWork->detail = &entries[gJiminyWork->detailIndex];
+        sJiminyWork->detail = &entries[sJiminyWork->detailIndex];
 
-        if (gJiminyWork->itemFlags != NULL) {
-            ClearJiminyFlagNew(gJiminyWork->itemFlags[gJiminyWork->detailIndex]);
+        if (sJiminyWork->itemFlags != NULL) {
+            ClearJiminyFlagNew(sJiminyWork->itemFlags[sJiminyWork->detailIndex]);
             unlocked = 0;
             selected = 0;
 
             for (i = 0; i < count; i++) {
-                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
-                    if (gJiminyWork->detailIndex == i) {
+                if (IsJiminyFlagSet(sJiminyWork->itemFlags[i])) {
+                    if (sJiminyWork->detailIndex == i) {
                         selected = unlocked;
                     }
 
@@ -2193,40 +2193,40 @@ void JiminyDetailUpdate() {
                 }
             }
 
-            gJiminyWork->nextDetail = gJiminyWork->detailIndex;
-            gJiminyWork->prevDetail = gJiminyWork->detailIndex;
-            i = gJiminyWork->detailIndex + 1;
+            sJiminyWork->nextDetail = sJiminyWork->detailIndex;
+            sJiminyWork->prevDetail = sJiminyWork->detailIndex;
+            i = sJiminyWork->detailIndex + 1;
 
             for (;;) {
                 if (i >= count) {
                     i = 0;
                 }
 
-                if (i == gJiminyWork->detailIndex) {
+                if (i == sJiminyWork->detailIndex) {
                     break;
                 }
 
-                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
-                    gJiminyWork->nextDetail = i;
+                if (IsJiminyFlagSet(sJiminyWork->itemFlags[i])) {
+                    sJiminyWork->nextDetail = i;
                     break;
                 }
 
                 i++;
             }
 
-            i = gJiminyWork->detailIndex - 1;
+            i = sJiminyWork->detailIndex - 1;
 
             for (;;) {
                 if (i < 0) {
                     i = count - 1;
                 }
 
-                if (i == gJiminyWork->detailIndex) {
+                if (i == sJiminyWork->detailIndex) {
                     break;
                 }
 
-                if (IsJiminyFlagSet(gJiminyWork->itemFlags[i])) {
-                    gJiminyWork->prevDetail = i;
+                if (IsJiminyFlagSet(sJiminyWork->itemFlags[i])) {
+                    sJiminyWork->prevDetail = i;
                     break;
                 }
 
@@ -2234,41 +2234,41 @@ void JiminyDetailUpdate() {
             }
         } else {
             unlocked = count;
-            selected = gJiminyWork->detailIndex;
-            gJiminyWork->nextDetail = gJiminyWork->detailIndex + 1;
+            selected = sJiminyWork->detailIndex;
+            sJiminyWork->nextDetail = sJiminyWork->detailIndex + 1;
 
-            if (gJiminyWork->nextDetail >= count) {
-                gJiminyWork->nextDetail = 0;
+            if (sJiminyWork->nextDetail >= count) {
+                sJiminyWork->nextDetail = 0;
             }
 
-            gJiminyWork->prevDetail = gJiminyWork->detailIndex - 1;
+            sJiminyWork->prevDetail = sJiminyWork->detailIndex - 1;
 
-            if (gJiminyWork->prevDetail < 0) {
-                gJiminyWork->prevDetail = count - 1;
+            if (sJiminyWork->prevDetail < 0) {
+                sJiminyWork->prevDetail = count - 1;
             }
         }
 
-        switch (gJiminyWork->detailLayout) {
+        switch (sJiminyWork->detailLayout) {
         case 0:
             map0 = gUnk_08F64384;
             map1 = gUnk_08F60384;
 #ifdef VERSION_JP
-            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
-                0x1800, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
+                0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, eu_0805E924(gJiminyWork->detail->name));
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
+                0x1600, eu_0805E924(sJiminyWork->detail->name));
 #else
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
+                0x1600, sJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(sJiminyWork->detail->text), GetLocalizedLines(sJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
+            JiminyOpenPlainList(7, sJiminyWork->detail->lineCount, sJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            JiminyOpenPlainList(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
+            JiminyOpenPlainList(4, sJiminyWork->detail->lineCount, sJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2276,22 +2276,22 @@ void JiminyDetailUpdate() {
             map0 = gUnk_08F64384;
             map1 = gUnk_08F5EB84;
 #ifdef VERSION_JP
-            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
-                0x1800, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
+                0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, eu_0805E924(gJiminyWork->detail->name));
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
+                0x1600, eu_0805E924(sJiminyWork->detail->name));
 #else
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
+                0x1600, sJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(sJiminyWork->detail->text), GetLocalizedLines(sJiminyWork->detail->text), 8, 0x3A, 16);
 #else
 #ifdef VERSION_JP
-            JiminyOpenPlainList(7, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x2A, 16);
+            JiminyOpenPlainList(7, sJiminyWork->detail->lineCount, sJiminyWork->detail->text, 8, 0x2A, 16);
 #else
-            JiminyOpenPlainList(4, gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
+            JiminyOpenPlainList(4, sJiminyWork->detail->lineCount, sJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
 #endif
             break;
@@ -2300,17 +2300,17 @@ void JiminyDetailUpdate() {
             map0 = gUnk_08F63384;
             map1 = gUnk_08F5FB84;
 #ifdef VERSION_JP
-            gJiminyWork->charCount = LayoutMsgGlyphsSjis(0x2800,
-                0x1800, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x2800,
+                0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
-                0x1600, eu_0805E924(gJiminyWork->detail->name));
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
+                0x1600, eu_0805E924(sJiminyWork->detail->name));
 #else
-            gJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
-                0x1600, gJiminyWork->detail->name);
+            sJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
+                0x1600, sJiminyWork->detail->name);
 #endif
 #ifdef VERSION_EU
-            JiminyOpenPlainList(4, GetLocalizedLineCount(gJiminyWork->detail->text), GetLocalizedLines(gJiminyWork->detail->text), 8, 0x3A, 16);
+            JiminyOpenPlainList(4, GetLocalizedLineCount(sJiminyWork->detail->text), GetLocalizedLines(sJiminyWork->detail->text), 8, 0x3A, 16);
 #else
             JiminyOpenPlainList(
 #ifdef VERSION_JP
@@ -2318,7 +2318,7 @@ void JiminyDetailUpdate() {
 #else
                 4,
 #endif
-                gJiminyWork->detail->lineCount, gJiminyWork->detail->text, 8, 0x3A, 16);
+                sJiminyWork->detail->lineCount, sJiminyWork->detail->text, 8, 0x3A, 16);
 #endif
             break;
         }
@@ -2326,26 +2326,26 @@ void JiminyDetailUpdate() {
         LoadBgMap(0, map0, 0x800);
         LoadBgMap(1, map1, 0x800);
 
-        if (gJiminyWork->detail->tiles != NULL) {
+        if (sJiminyWork->detail->tiles != NULL) {
 #ifdef VERSION_EU
-            if (gJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
-                LoadObjPaletteBank(gJiminyWork->palette8->index, gUnk_09A3CDDC);
-                LoadObjPaletteBank(gJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x20);
-                SetObjTileSource(gJiminyWork->tiles7, gUnk_099EDE7C);
+            if (sJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
+                LoadObjPaletteBank(sJiminyWork->palette8->index, gUnk_09A3CDDC);
+                LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x20);
+                SetObjTileSource(sJiminyWork->tiles7, gUnk_099EDE7C);
             } else
 #endif
             {
-                LoadObjPaletteBank(gJiminyWork->palette8->index, gJiminyWork->detail->palette);
-                SetObjTileSource(gJiminyWork->tiles7, gJiminyWork->detail->tiles);
+                LoadObjPaletteBank(sJiminyWork->palette8->index, sJiminyWork->detail->palette);
+                SetObjTileSource(sJiminyWork->tiles7, sJiminyWork->detail->tiles);
             }
         }
 
-        if (gJiminyWork->detail->tiles2 != NULL) {
-            LoadObjPaletteBank(gJiminyWork->palette9->index, gJiminyWork->detail->palette2);
-            SetObjTileSource(gJiminyWork->tiles8, gJiminyWork->detail->tiles2);
+        if (sJiminyWork->detail->tiles2 != NULL) {
+            LoadObjPaletteBank(sJiminyWork->palette9->index, sJiminyWork->detail->palette2);
+            SetObjTileSource(sJiminyWork->tiles8, sJiminyWork->detail->tiles2);
         }
 
-        if (gJiminyWork->detailLayout == 2) {
+        if (sJiminyWork->detailLayout == 2) {
             source = gUnk_08F63B84;
             dest = (u8*)GetBgScreenBase(0) + 0x8E;
         } else {
@@ -2353,9 +2353,9 @@ void JiminyDetailUpdate() {
             dest = (u8*)GetBgScreenBase(0) + 0x80;
         }
 
-        if (gJiminyWork->detailLayout < 2) {
+        if (sJiminyWork->detailLayout < 2) {
 #ifdef VERSION_JP
-            switch (gJiminyWork->charCount) {
+            switch (sJiminyWork->charCount) {
             case 1: source += 0xC0; break;
             case 2: source += 0x240; break;
             case 3: source += 0x300; break;
@@ -2371,9 +2371,9 @@ void JiminyDetailUpdate() {
 #else
             width = GetMsgTextWidth(
 #ifdef VERSION_EU
-                eu_0805E924(gJiminyWork->detail->name)
+                eu_0805E924(sJiminyWork->detail->name)
 #else
-                gJiminyWork->detail->name
+                sJiminyWork->detail->name
 #endif
             );
 
@@ -2403,13 +2403,13 @@ void JiminyDetailUpdate() {
 #endif
         } else {
 #ifdef VERSION_JP
-            width = gJiminyWork->charCount;
+            width = sJiminyWork->charCount;
 #else
             width = (s16)GetMsgTextWidth(
 #ifdef VERSION_EU
-                eu_0805E924(gJiminyWork->detail->name)
+                eu_0805E924(sJiminyWork->detail->name)
 #else
-                gJiminyWork->detail->name
+                sJiminyWork->detail->name
 #endif
             ) / 8;
 #endif
@@ -2470,106 +2470,106 @@ void JiminyDetailUpdate() {
         RequestDma3Copy(source + digits[1] * 0x20, dest, 0x20);
         dest = (u8*)GetBgCharBase(0) + 0xC0;
         RequestDma3Copy(source + digits[2] * 0x20, dest, 0x20);
-        gJiminyWork->state = 9;
+        sJiminyWork->state = 9;
         DisableBg(2);
 
-        if (gJiminyWork->detail->bgTiles != NULL) {
+        if (sJiminyWork->detail->bgTiles != NULL) {
             EnableBg(3);
-            RequestDma3Copy(gJiminyWork->detail->bgTiles,
-                (u8*)GetBgCharBase(3) + 0x4000, gJiminyWork->detail->tileSize);
+            RequestDma3Copy(sJiminyWork->detail->bgTiles,
+                (u8*)GetBgCharBase(3) + 0x4000, sJiminyWork->detail->tileSize);
 
-            switch ((u16)gJiminyWork->detail->paletteSize) {
+            switch ((u16)sJiminyWork->detail->paletteSize) {
             case 0x60:
                 paletteDest = (u16*)(BG_PLTT + 13 * PLTT_SIZE_4BPP);
-                LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x60);
+                LoadPalette(sJiminyWork->detail->bgPalette, paletteDest, 0x60);
                 break;
             case 0x40:
                 paletteDest = (u16*)(BG_PLTT + 14 * PLTT_SIZE_4BPP);
-                LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x40);
+                LoadPalette(sJiminyWork->detail->bgPalette, paletteDest, 0x40);
                 break;
             case 0x20:
             default:
                 paletteDest = (u16*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-                LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x20);
+                LoadPalette(sJiminyWork->detail->bgPalette, paletteDest, 0x20);
                 break;
             }
 
-            LoadBgMap(3, gJiminyWork->detail->bgMap, 0x800);
+            LoadBgMap(3, sJiminyWork->detail->bgMap, 0x800);
         } else {
             DisableBg(3);
         }
 
-        gJiminyWork->unk_D3C = 5;
+        sJiminyWork->unk_D3C = 5;
         SetBlendAlpha(0, 16);
     case 9:
-        if (gJiminyWork->cursor > 0) {
-            gJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
+        if (sJiminyWork->cursor > 0) {
+            sJiminyWork->flags |= JIMINY_FLAG_SCROLL_UP;
         } else {
-            gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
+            sJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_UP;
         }
 
-        if (gJiminyWork->visibleRows < gJiminyWork->itemCount - gJiminyWork->cursor) {
-            gJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
+        if (sJiminyWork->visibleRows < sJiminyWork->itemCount - sJiminyWork->cursor) {
+            sJiminyWork->flags |= JIMINY_FLAG_SCROLL_DOWN;
         } else {
-            gJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
+            sJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
         }
 
         if (FadeIsActive() != 0) {
             break;
         }
 
-        if (gJiminyWork->moveDelay <= 0) {
+        if (sJiminyWork->moveDelay <= 0) {
             if (GetKeysRepeat() & DPAD_UP) {
-                if (gJiminyWork->cursor > 0) {
-                    gJiminyWork->moveDelay = 1;
-                    gJiminyWork->cursor--;
+                if (sJiminyWork->cursor > 0) {
+                    sJiminyWork->moveDelay = 1;
+                    sJiminyWork->cursor--;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                     JiminyReloadPlainRows();
                 }
             } else if (GetKeysRepeat() & DPAD_DOWN) {
-                if (gJiminyWork->visibleRows < gJiminyWork->itemCount - gJiminyWork->cursor) {
-                    gJiminyWork->moveDelay = 1;
-                    gJiminyWork->cursor++;
+                if (sJiminyWork->visibleRows < sJiminyWork->itemCount - sJiminyWork->cursor) {
+                    sJiminyWork->moveDelay = 1;
+                    sJiminyWork->cursor++;
                     m4aSongNumStart(SONG_SYS_CLICKI04B);
                     JiminyReloadPlainRows();
                 }
             }
         } else {
-            gJiminyWork->moveDelay = 0;
+            sJiminyWork->moveDelay = 0;
         }
 
-        if (gJiminyWork->detailIndex != gJiminyWork->nextDetail) {
+        if (sJiminyWork->detailIndex != sJiminyWork->nextDetail) {
             if (GetKeysRepeat() & L_BUTTON) {
-                gJiminyWork->state = 8;
-                gJiminyWork->stateTimer = 0;
-                gJiminyWork->detailIndex = gJiminyWork->prevDetail;
+                sJiminyWork->state = 8;
+                sJiminyWork->stateTimer = 0;
+                sJiminyWork->detailIndex = sJiminyWork->prevDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             } else if (GetKeysRepeat() & R_BUTTON) {
-                gJiminyWork->state = 8;
-                gJiminyWork->stateTimer = 0;
-                gJiminyWork->detailIndex = gJiminyWork->nextDetail;
+                sJiminyWork->state = 8;
+                sJiminyWork->stateTimer = 0;
+                sJiminyWork->detailIndex = sJiminyWork->nextDetail;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             }
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            gJiminyWork->stateTimer = 0;
-            gJiminyWork->state = 6;
+            sJiminyWork->stateTimer = 0;
+            sJiminyWork->state = 6;
             FadeStartIn(FADE_MODE_BLACK, 5);
             FadeLock();
             SetModeUpdate(mode_jiminy_1);
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else if (GetKeysPressed() & START_BUTTON) {
-            gJiminyWork->stateTimer = 0;
-            gJiminyWork->state = 5;
+            sJiminyWork->stateTimer = 0;
+            sJiminyWork->state = 5;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         break;
     case 5:
-        if (gJiminyWork->stateTimer == 0) {
+        if (sJiminyWork->stateTimer == 0) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             FadeLock();
         }
@@ -2581,93 +2581,93 @@ void JiminyDetailUpdate() {
         break;
     }
 
-    DrawMsgGlyphs(gJiminyWork->charCount);
+    DrawMsgGlyphs(sJiminyWork->charCount);
 
-    for (i = 0; gJiminyWork->lines[i].textSlots[0].tiles != NULL && i < gJiminyWork->visibleRows; i++) {
-        DrawTextSlots(gJiminyWork->listX, gJiminyWork->listY + gJiminyWork->rowHeight * i,
-            gJiminyWork->lines[i].textSlots, gJiminyWork->palette3, 0, gJiminyWork->textSlotCounts[i]);
+    for (i = 0; sJiminyWork->lines[i].textSlots[0].tiles != NULL && i < sJiminyWork->visibleRows; i++) {
+        DrawTextSlots(sJiminyWork->listX, sJiminyWork->listY + sJiminyWork->rowHeight * i,
+            sJiminyWork->lines[i].textSlots, sJiminyWork->palette3, 0, sJiminyWork->textSlotCounts[i]);
     }
 
-    if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
-        DrawSprite(gJiminyWork->x, gJiminyWork->y - ((gJiminyWork->frame >> 3) & 3) + 4,
-            gUnk_08C6A51C, gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
+    if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
+        DrawSprite(sJiminyWork->x, sJiminyWork->y - ((sJiminyWork->frame >> 3) & 3) + 4,
+            gUnk_08C6A51C, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 
-    if (gJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
-        DrawSprite(gJiminyWork->x2, gJiminyWork->y2 + ((gJiminyWork->frame >> 3) & 3),
-            gUnk_08C6A526, gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
+    if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
+        DrawSprite(sJiminyWork->x2, sJiminyWork->y2 + ((sJiminyWork->frame >> 3) & 3),
+            gUnk_08C6A526, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 
-    if (gJiminyWork->detailIndex != gJiminyWork->nextDetail) {
-        DrawSprite(-((gJiminyWork->frame >> 3) & 3) + 0x9A, 5, gUnk_08C6A530,
-            gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
-        DrawSprite(0xE0 + ((gJiminyWork->frame >> 3) & 3), 5, gUnk_08C6A53A,
-            gJiminyWork->tiles5, gJiminyWork->palette6, NULL, 0, 0);
+    if (sJiminyWork->detailIndex != sJiminyWork->nextDetail) {
+        DrawSprite(-((sJiminyWork->frame >> 3) & 3) + 0x9A, 5, gUnk_08C6A530,
+            sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
+        DrawSprite(0xE0 + ((sJiminyWork->frame >> 3) & 3), 5, gUnk_08C6A53A,
+            sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 
-    switch (gJiminyWork->detailLayout) {
+    switch (sJiminyWork->detailLayout) {
     case 0:
-        if (gJiminyWork->detail->tiles != NULL) {
-            DrawSprite(gJiminyWork->detail->x + 0xC8, gJiminyWork->detail->y + 0x5C,
-                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
+        if (sJiminyWork->detail->tiles != NULL) {
+            DrawSprite(sJiminyWork->detail->x + 0xC8, sJiminyWork->detail->y + 0x5C,
+                sJiminyWork->detail->sprite, sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
         }
 
         break;
     case 1:
-        if (gJiminyWork->detail->tiles != NULL) {
-            DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite,
-                gJiminyWork->tiles7, gJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
+        if (sJiminyWork->detail->tiles != NULL) {
+            DrawSprite(0xC2, 0x5E, sJiminyWork->detail->sprite,
+                sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
         }
 
-        if (gJiminyWork->detail->tiles2 != NULL && gJiminyWork->detail->sprite2 != NULL) {
-            DrawSprite(0xC2, 0x5E, gJiminyWork->detail->sprite2,
-                gJiminyWork->tiles8, gJiminyWork->palette9, NULL, SPRITE_FLAG_BLEND, 0);
+        if (sJiminyWork->detail->tiles2 != NULL && sJiminyWork->detail->sprite2 != NULL) {
+            DrawSprite(0xC2, 0x5E, sJiminyWork->detail->sprite2,
+                sJiminyWork->tiles8, sJiminyWork->palette9, NULL, SPRITE_FLAG_BLEND, 0);
         }
 
         break;
     case 2:
-        if (gJiminyWork->detail->tiles != NULL) {
-            DrawSprite(gJiminyWork->detail->x + 0xC4, gJiminyWork->detail->y + 0x74,
-                gJiminyWork->detail->sprite, gJiminyWork->tiles7, gJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
+        if (sJiminyWork->detail->tiles != NULL) {
+            DrawSprite(sJiminyWork->detail->x + 0xC4, sJiminyWork->detail->y + 0x74,
+                sJiminyWork->detail->sprite, sJiminyWork->tiles7, sJiminyWork->palette8, NULL, SPRITE_FLAG_BLEND, 1);
         }
 
-        if (gJiminyWork->detail->tiles2 != NULL) {
-            DrawSprite(0x14, 0x25, gJiminyWork->detail->sprite2,
-                gJiminyWork->tiles8, gJiminyWork->palette9, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_BLEND, 0);
+        if (sJiminyWork->detail->tiles2 != NULL) {
+            DrawSprite(0x14, 0x25, sJiminyWork->detail->sprite2,
+                sJiminyWork->tiles8, sJiminyWork->palette9, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_BLEND, 0);
         }
 
         break;
     }
 
-    if ((s16)gJiminyWork->unk_D3C > 0) {
-        gJiminyWork->unk_D3C--;
+    if ((s16)sJiminyWork->unk_D3C > 0) {
+        sJiminyWork->unk_D3C--;
     }
 
     UpdatePlayTime();
-    gJiminyWork->frame++;
+    sJiminyWork->frame++;
 }
 
 void mode_jiminy_2() {
     FreeMsgGlyphSprites();
-    ReleaseObjTiles(gJiminyWork->tiles);
-    ReleaseObjPalette(gJiminyWork->palette);
-    ReleaseObjTiles(gJiminyWork->tiles2);
-    ReleaseObjPalette(gJiminyWork->palette2);
-    ReleaseObjPalette(gJiminyWork->palette3);
-    ReleaseObjTiles(gJiminyWork->tiles3);
-    ReleaseObjPalette(gJiminyWork->palette4);
-    ReleaseObjTiles(gJiminyWork->tiles4);
-    ReleaseObjPalette(gJiminyWork->palette5);
-    ReleaseObjTiles(gJiminyWork->tiles5);
-    ReleaseObjPalette(gJiminyWork->palette6);
-    ReleaseObjTiles(gJiminyWork->tiles6);
-    ReleaseObjPalette(gJiminyWork->palette7);
-    ReleaseObjTiles(gJiminyWork->tiles7);
-    ReleaseObjPalette(gJiminyWork->palette8);
-    ReleaseObjTiles(gJiminyWork->tiles8);
-    ReleaseObjPalette(gJiminyWork->palette9);
+    ReleaseObjTiles(sJiminyWork->tiles);
+    ReleaseObjPalette(sJiminyWork->palette);
+    ReleaseObjTiles(sJiminyWork->tiles2);
+    ReleaseObjPalette(sJiminyWork->palette2);
+    ReleaseObjPalette(sJiminyWork->palette3);
+    ReleaseObjTiles(sJiminyWork->tiles3);
+    ReleaseObjPalette(sJiminyWork->palette4);
+    ReleaseObjTiles(sJiminyWork->tiles4);
+    ReleaseObjPalette(sJiminyWork->palette5);
+    ReleaseObjTiles(sJiminyWork->tiles5);
+    ReleaseObjPalette(sJiminyWork->palette6);
+    ReleaseObjTiles(sJiminyWork->tiles6);
+    ReleaseObjPalette(sJiminyWork->palette7);
+    ReleaseObjTiles(sJiminyWork->tiles7);
+    ReleaseObjPalette(sJiminyWork->palette8);
+    ReleaseObjTiles(sJiminyWork->tiles8);
+    ReleaseObjPalette(sJiminyWork->palette9);
     JiminyFreeRows();
-    EwramFree(gJiminyWork);
+    EwramFree(sJiminyWork);
 }
 
 Mode gModeJiminy = {

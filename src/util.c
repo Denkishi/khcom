@@ -7,9 +7,9 @@
 
 static const u8 sSioKeyHeapName[8] = "SIOKEY";
 
-KeyState* gSioKeyStateA;
-KeyState* gSioKeyStateB;
-u16 gUnk_02034084;
+static KeyState* sSioKeyStateA;
+static KeyState* sSioKeyStateB;
+static u16 sUnk_02034084;
 
 u16 KeyGetHeld(KeyState* k) {
     return k->held;
@@ -335,56 +335,56 @@ void KeyStateUpdate(KeyState* k, u16 keys) {
 
 void SioKeyInit() {
     SetIwramHeapName(sSioKeyHeapName);
-    gSioKeyStateA = IwramAlloc(sizeof(KeyState));
-    gSioKeyStateB = IwramAlloc(sizeof(KeyState));
-    KeyStateClear(gSioKeyStateA);
-    KeyStateClear(gSioKeyStateB);
-    gUnk_02034084 = 0;
+    sSioKeyStateA = IwramAlloc(sizeof(KeyState));
+    sSioKeyStateB = IwramAlloc(sizeof(KeyState));
+    KeyStateClear(sSioKeyStateA);
+    KeyStateClear(sSioKeyStateB);
+    sUnk_02034084 = 0;
 }
 
 void SioKeyFree() {
-    IwramFree(gSioKeyStateB);
-    IwramFree(gSioKeyStateA);
+    IwramFree(sSioKeyStateB);
+    IwramFree(sSioKeyStateA);
 }
 
 u16 SioKeyGetHeldA() {
-    return KeyGetHeld(gSioKeyStateA);
+    return KeyGetHeld(sSioKeyStateA);
 }
 
 u16 SioKeyGetHeldB() {
-    return KeyGetHeld(gSioKeyStateB);
+    return KeyGetHeld(sSioKeyStateB);
 }
 
 u16 SioKeyGetPressedA() {
-    return KeyGetPressed(gSioKeyStateA);
+    return KeyGetPressed(sSioKeyStateA);
 }
 
 u16 SioKeyGetPressedB() {
-    return KeyGetPressed(gSioKeyStateB);
+    return KeyGetPressed(sSioKeyStateB);
 }
 
 u16 SioKeyGetRepeatA() {
-    return KeyGetRepeat(gSioKeyStateA);
+    return KeyGetRepeat(sSioKeyStateA);
 }
 
 u16 SioKeyGetRepeatB() {
-    return KeyGetRepeat(gSioKeyStateB);
+    return KeyGetRepeat(sSioKeyStateB);
 }
 
 u16 SioKeyReadChordA(u16 a, u16 b) {
-    return KeyReadChord(gSioKeyStateA, a, b);
+    return KeyReadChord(sSioKeyStateA, a, b);
 }
 
 u16 SioKeyReadChordB(u16 a, u16 b) {
-    return KeyReadChord(gSioKeyStateB, a, b);
+    return KeyReadChord(sSioKeyStateB, a, b);
 }
 
 void SioKeyStateUpdateA(u16 keys) {
-    KeyStateUpdate(gSioKeyStateA, keys);
+    KeyStateUpdate(sSioKeyStateA, keys);
 }
 
 void SioKeyStateUpdateB(u16 keys) {
-    KeyStateUpdate(gSioKeyStateB, keys);
+    KeyStateUpdate(sSioKeyStateB, keys);
 }
 
 u8 IsSongPlaying(u16 songNum) {

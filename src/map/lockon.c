@@ -20,14 +20,14 @@
 #include "gba/macro.h"
 #include <stddef.h>
 
-u8* gDebugTextTileDest;
-u8 gDebugTextPaletteBank;
-DebugTextLine* gDebugTextLines;
-u8 gDebugTextLineCount;
-u8 gUnk_02034A21;
-s32 gUnk_02034A24;
-s32 gDebugTextMergeFirstGlyph;
-void* gUnk_02034A2C;
+static u8* sDebugTextTileDest;
+static u8 sDebugTextPaletteBank;
+static DebugTextLine* sDebugTextLines;
+static u8 sDebugTextLineCount;
+static u8 sUnk_02034A21;
+static s32 sUnk_02034A24;
+static s32 sDebugTextMergeFirstGlyph;
+static void* sUnk_02034A2C;
 
 void task_lockon_0(LockonWork* w) {
     s32 i;
@@ -318,7 +318,7 @@ void DebugTextClearBg() {
 }
 
 void func_0805F7B0(s32 a) {
-    gUnk_02034A24 = a;
+    sUnk_02034A24 = a;
 }
 
 void func_0805F7BC() {
@@ -326,7 +326,7 @@ void func_0805F7BC() {
 }
 
 void func_0805F7C8(u8 a) {
-    gUnk_02034A2C = (u8*)GetBgCharBase(0) + (a << 12);
+    sUnk_02034A2C = (u8*)GetBgCharBase(0) + (a << 12);
 }
 
 void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
@@ -339,18 +339,18 @@ void DebugTextPrintFont2(u8 x, u8 y, u16* s) {
 
         switch (c & 0xFF00) {
         case 0x8100:
-            gDebugTextLines[gDebugTextLineCount].glyphs[i] = c + 0x7EC0;
+            sDebugTextLines[sDebugTextLineCount].glyphs[i] = c + 0x7EC0;
             break;
         case 0x8200:
-            gDebugTextLines[gDebugTextLineCount].glyphs[i] = (c + 0x7DC0) | 0x400;
+            sDebugTextLines[sDebugTextLineCount].glyphs[i] = (c + 0x7DC0) | 0x400;
             break;
         }
     }
 
-    gDebugTextLines[gDebugTextLineCount].x = x;
-    gDebugTextLines[gDebugTextLineCount].y = y;
-    gDebugTextLines[gDebugTextLineCount].length = i;
-    gDebugTextLineCount++;
+    sDebugTextLines[sDebugTextLineCount].x = x;
+    sDebugTextLines[sDebugTextLineCount].y = y;
+    sDebugTextLines[sDebugTextLineCount].length = i;
+    sDebugTextLineCount++;
 }
 
 u8 DebugTextGetPixelShift(u8 a) {
@@ -363,7 +363,7 @@ void DebugTextClearLines() {
 
     for (i = 0; i <= 19; i++) {
         for (j = 0; j <= 60; j++) {
-            gDebugTextLines[i].glyphs[j] = 0;
+            sDebugTextLines[i].glyphs[j] = 0;
         }
     }
 }
@@ -384,7 +384,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     s32 n;
 
     j = 0;
-    gDebugTextTileDest = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
+    sDebugTextTileDest = (u8*)GetBgCharBase(bg) + c * 0x400 + (b + 1) * 32;
     b = ((b + d) >> 3) + 1;
     n = (s8)d + b;
     d = n;
@@ -397,7 +397,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
             ko = k * 4;
             co = col * 4;
             ko4 = ko + 4;
-            p = gDebugTextTileDest + i * 32 + j * 1024;
+            p = sDebugTextTileDest + i * 32 + j * 1024;
             dst = (u32*)(p + ko + co);
             src = (u32*)(p + ko4 + co);
 
@@ -430,7 +430,7 @@ void DebugTextLoadPalette(s32 a, const void* b, s32 c, u8 d) {
         LoadPalette(b, (void*)(d * 32 + PLTT), 32);
     }
 
-    gDebugTextPaletteBank = d;
+    sDebugTextPaletteBank = d;
 }
 
 void DebugTextInit(u8 bg, u16 b, u16 c) {
@@ -442,28 +442,28 @@ void DebugTextInit(u8 bg, u16 b, u16 c) {
     CpuFill32(0, charBase, b);
     CpuFill32(0, screenBase, c);
 
-    gDebugTextLines = EwramAlloc(sizeof(DebugTextLine) * 20);
-    gDebugTextLineCount = 0;
+    sDebugTextLines = EwramAlloc(sizeof(DebugTextLine) * 20);
+    sDebugTextLineCount = 0;
 
     for (i = 0; i <= 19; i++) {
         for (j = 0; j <= 60; j++) {
-            gDebugTextLines[i].glyphs[j] = 0;
+            sDebugTextLines[i].glyphs[j] = 0;
         }
 
-        gDebugTextLines[i].x = 0;
-        gDebugTextLines[i].y = 0;
-        gDebugTextLines[i].unk_7C = 0;
-        gDebugTextLines[i].length = 0;
+        sDebugTextLines[i].x = 0;
+        sDebugTextLines[i].y = 0;
+        sDebugTextLines[i].unk_7C = 0;
+        sDebugTextLines[i].length = 0;
     }
 
     func_0805F7B0(0);
-    gUnk_02034A21 = 0;
-    gDebugTextPaletteBank = 0;
+    sUnk_02034A21 = 0;
+    sDebugTextPaletteBank = 0;
     EnableBg(bg);
 }
 
 void DebugTextSetMergeFirstGlyph(s32 a) {
-    gDebugTextMergeFirstGlyph = a;
+    sDebugTextMergeFirstGlyph = a;
 }
 
 void DebugTextPrintXNumber(u8 x, u8 y, u32 c, u8 v) {
@@ -510,12 +510,12 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
         shift = 0;
         break;
     case 2:
-        gDebugTextLines[gDebugTextLineCount].font = c;
+        sDebugTextLines[sDebugTextLineCount].font = c;
         DebugTextPrintFont2(x, y, (u16*)s);
         return;
     }
 
-    if (gDebugTextLineCount > 19) {
+    if (sDebugTextLineCount > 19) {
         return;
     }
 
@@ -526,156 +526,156 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
         switch (character & 0xFF00) {
         case 0x8100:
             if (character > 0x8146) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8146 + (0x42 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8146 + (0x42 >> shift);
             }
 
             switch (character) {
             case 0x8140:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 0;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 0;
                 break;
             case 0x815E:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 1;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 1;
                 break;
             case 0x815B:
             case 0x815C:
             case 0x815D:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 2;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 2;
                 break;
             case 0x8151:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 3;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 3;
                 break;
             case 0x8144:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 4;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 4;
                 break;
             case 0x817B:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 5;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 5;
                 break;
             case 0x8149:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 6;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 6;
                 break;
             case 0x8148:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 7;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 7;
                 break;
             case 0x8194:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 8;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 8;
                 break;
             case 0x8193:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 9;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 9;
                 break;
             case 0x818D:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 10;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 10;
                 break;
             case 0x818B:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 11;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 11;
                 break;
             case 0x8196:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 12;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 12;
                 break;
             case 0x8168:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 13;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 13;
                 break;
             case 0x8190:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 14;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 14;
                 break;
             case 0x8195:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 15;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 15;
                 break;
             case 0x8166:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 16;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 16;
                 break;
             case 0x8169:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 17;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 17;
                 break;
             case 0x816A:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 18;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 18;
                 break;
             case 0x8181:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 19;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 19;
                 break;
             case 0x8160:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 20;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 20;
                 break;
             case 0x8162:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 21;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 21;
                 break;
             case 0x8197:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 22;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 22;
                 break;
             case 0x8165:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 23;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 23;
                 break;
             case 0x8175:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 24;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 24;
                 break;
             case 0x8176:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 25;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 25;
                 break;
             case 0x816F:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 26;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 26;
                 break;
             case 0x8170:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 27;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 27;
                 break;
             case 0x8141:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 28;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 28;
                 break;
             case 0x8142:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 29;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 29;
                 break;
             case 0x8183:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 30;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 30;
                 break;
             case 0x8184:
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = 31;
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = 31;
                 break;
             }
 
             break;
         case 0x8200:
             if ((u16)(character - 0x824F) <= 9) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x824F + (0x80 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x824F + (0x80 >> shift);
             }
 
             if ((u16)(character - 0x8260) <= 25) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8260 + (0xC0 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8260 + (0xC0 >> shift);
             }
 
             if ((u16)(character - 0x8281) <= 25) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8281 + (0x100 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8281 + (0x100 >> shift);
             }
 
             if ((u16)(character - 0x829F) <= 31) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x829F + (0x140 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x829F + (0x140 >> shift);
             }
 
             if ((u16)(character - 0x82BF) <= 31) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82BF + (0x180 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x82BF + (0x180 >> shift);
             }
 
             if ((u16)(character - 0x82DF) <= 31) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x82DF + (0x1C0 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x82DF + (0x1C0 >> shift);
             }
 
             break;
         case 0x8300:
             if ((u16)(character - 0x8340) <= 31) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8340 + ((0x200 - shift * 192) >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8340 + ((0x200 - shift * 192) >> shift);
             }
 
             if ((u16)(character - 0x8360) <= 30) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8360 + ((0x240 - shift * 192) >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8360 + ((0x240 - shift * 192) >> shift);
             }
 
             if (character == 0x8380) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = ((0x25F - shift * 192) >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = ((0x25F - shift * 192) >> shift);
             }
 
             if ((u16)(character - 0x8381) <= 21) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x8381 + ((0x280 - shift * 192) >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x8381 + ((0x280 - shift * 192) >> shift);
             }
 
             if ((u16)(character - 0x83BF) <= 1) {
-                gDebugTextLines[gDebugTextLineCount].glyphs[i] = character - 0x83BF + (0x40 >> shift);
+                sDebugTextLines[sDebugTextLineCount].glyphs[i] = character - 0x83BF + (0x40 >> shift);
             }
 
             break;
@@ -689,11 +689,11 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
         }
     }
 
-    gDebugTextLines[gDebugTextLineCount].x = x;
-    gDebugTextLines[gDebugTextLineCount].y = y;
-    gDebugTextLines[gDebugTextLineCount].length = i;
-    gDebugTextLines[gDebugTextLineCount].font = c;
-    gDebugTextLineCount++;
+    sDebugTextLines[sDebugTextLineCount].x = x;
+    sDebugTextLines[sDebugTextLineCount].y = y;
+    sDebugTextLines[sDebugTextLineCount].length = i;
+    sDebugTextLines[sDebugTextLineCount].font = c;
+    sDebugTextLineCount++;
 }
 
 void DebugTextDrawAligned(u8 bg) {
@@ -708,13 +708,13 @@ void DebugTextDrawAligned(u8 bg) {
 
     screen = GetBgScreenBase(bg);
 
-    for (n = 0; n < gDebugTextLineCount; n++) {
+    for (n = 0; n < sDebugTextLineCount; n++) {
         tiles = (u32*)((u8*)GetBgCharBase(bg) + (n * 0x1000 + 0x2000));
-        x = gDebugTextLines[n].x;
-        y = gDebugTextLines[n].y;
+        x = sDebugTextLines[n].x;
+        y = sDebugTextLines[n].y;
 
-        for (i = 0; i < gDebugTextLines[n].length; i++) {
-            src = (u32*)&gUnk_0941DD38[gDebugTextLines[n].glyphs[i] * 32];
+        for (i = 0; i < sDebugTextLines[n].length; i++) {
+            src = (u32*)&gUnk_0941DD38[sDebugTextLines[n].glyphs[i] * 32];
 
             for (k = 0; k < 8; k++) {
                 tiles[k] = src[0];
@@ -730,7 +730,7 @@ void DebugTextDrawAligned(u8 bg) {
 }
 
 void DebugTextClear() {
-    gDebugTextLineCount = 0;
+    sDebugTextLineCount = 0;
 }
 
 void DebugTextDraw(u8 bg) {
@@ -751,64 +751,64 @@ void DebugTextDraw(u8 bg) {
     u8 sourceRow;
 
     charBase = GetBgCharBase(bg);
-    gDebugTextTileDest = charBase;
+    sDebugTextTileDest = charBase;
     screen = GetBgScreenBase(bg);
 
-    for (n = 0; n < gDebugTextLineCount; n++) {
-        tileX = gDebugTextLines[n].x >> 3;
-        tileY = gDebugTextLines[n].y >> 3;
-        offsetX = gDebugTextLines[n].x - tileX * 8;
-        offsetY = gDebugTextLines[n].y - tileY * 8;
-        gDebugTextTileDest = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
+    for (n = 0; n < sDebugTextLineCount; n++) {
+        tileX = sDebugTextLines[n].x >> 3;
+        tileY = sDebugTextLines[n].y >> 3;
+        offsetX = sDebugTextLines[n].x - tileX * 8;
+        offsetY = sDebugTextLines[n].y - tileY * 8;
+        sDebugTextTileDest = (u8*)GetBgCharBase(bg) + (tileX + 1 + tileY * 32) * 32;
 
-        for (i = 0; i < gDebugTextLines[n].length; i++) {
-            destination = gDebugTextTileDest + i * 32;
+        for (i = 0; i < sDebugTextLines[n].length; i++) {
+            destination = sDebugTextTileDest + i * 32;
 
-            switch (gDebugTextLines[n].font) {
+            switch (sDebugTextLines[n].font) {
             case 0:
-                font = gUnk_0941BEB8 + gDebugTextLines[n].glyphs[i] * 32;
+                font = gUnk_0941BEB8 + sDebugTextLines[n].glyphs[i] * 32;
                 height = 8;
                 break;
             case 1:
-                font = gUnk_0941DD38 + gDebugTextLines[n].glyphs[i] * 32;
+                font = gUnk_0941DD38 + sDebugTextLines[n].glyphs[i] * 32;
                 height = 10;
                 break;
             case 2:
-                font = gDebugFont2Banks[gDebugTextLines[n].glyphs[i] >> 10];
+                font = gDebugFont2Banks[sDebugTextLines[n].glyphs[i] >> 10];
                 height = 8;
                 break;
             }
 
             for (row = offsetY, sourceRow = 0; row < offsetY + height; row++, sourceRow++) {
                 if (offsetX == 0) {
-                    if (gDebugTextLines[n].font != 2) {
+                    if (sDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
                     }
-                } else if (i != 0 || gDebugTextMergeFirstGlyph == 1) {
+                } else if (i != 0 || sDebugTextMergeFirstGlyph == 1) {
                     v = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
 
-                    if (gDebugTextLines[n].font != 2) {
+                    if (sDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) >> (32 - offsetX * 4);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = v | *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
                     }
                 } else {
-                    if (gDebugTextLines[n].font != 2) {
+                    if (sDebugTextLines[n].font != 2) {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) << (offsetX * 4);
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sourceRow >> 3) * 0x400) >> (32 - offsetX * 4);
                     } else {
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
-                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) << (offsetX * 4);
+                        ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))[1].rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (sDebugTextLines[n].glyphs[i] & 0x3FF) * 32) >> (32 - offsetX * 4);
                     }
                 }
 
                 mapRow = (tileY + (u8)(row >> 3)) * 32;
-                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2) = (tileX + 1 + i + mapRow) | (gDebugTextPaletteBank << 12);
-                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2 + 2) = (tileX + 2 + i + mapRow) | (gDebugTextPaletteBank << 12);
+                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2) = (tileX + 1 + i + mapRow) | (sDebugTextPaletteBank << 12);
+                *(u16*)(screen + tileX * 2 + i * 2 + mapRow * 2 + 2) = (tileX + 2 + i + mapRow) | (sDebugTextPaletteBank << 12);
             }
         }
     }
@@ -817,7 +817,7 @@ void DebugTextDraw(u8 bg) {
 }
 
 void DebugTextFree() {
-    EwramFree(gDebugTextLines);
+    EwramFree(sDebugTextLines);
 }
 
 void DebugTextDestroy() {

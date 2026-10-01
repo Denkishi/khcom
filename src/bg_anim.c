@@ -5,63 +5,63 @@
 #include "display.h"
 #include "types.h"
 
-BgAnimationDef* gBgAnimCurrent;
-u16 gBgAnimFrameTimer;
-u16 gBgAnimFrame;
-s32 gBgAnimBg;
-u16 gBgAnimFrameBytes;
-u16 gBgAnimFramesPerChunk;
-s16 gBgAnimScrollX;
-s16 gBgAnimScrollY;
-u8 gBgAnimStopped;
-u16 gBgAnimMapSize;
-u8 gBgAnimAffine;
-u32 gBgAnimScaleX;
-u32 gBgAnimScaleY;
-u8 gBgAnimRotation;
-s16 gBgAnimLoopStartFrame;
-s16 gBgAnimStopFrame;
-u16 gBgAnimFrameDuration;
+static BgAnimationDef* sBgAnimCurrent;
+static u16 sBgAnimFrameTimer;
+static u16 sBgAnimFrame;
+static s32 sBgAnimBg;
+static u16 sBgAnimFrameBytes;
+static u16 sBgAnimFramesPerChunk;
+static s16 sBgAnimScrollX;
+static s16 sBgAnimScrollY;
+static u8 sBgAnimStopped;
+static u16 sBgAnimMapSize;
+static u8 sBgAnimAffine;
+static u32 sBgAnimScaleX;
+static u32 sBgAnimScaleY;
+static u8 sBgAnimRotation;
+static s16 sBgAnimLoopStartFrame;
+static s16 sBgAnimStopFrame;
+static u16 sBgAnimFrameDuration;
 
 void BgAnimInit(s32 bg, u16 b, u16 c) {
-    gBgAnimBg = bg;
-    gBgAnimCurrent = NULL;
-    gBgAnimScrollX = 0;
-    gBgAnimScrollY = 0;
-    gBgAnimStopped = 1;
+    sBgAnimBg = bg;
+    sBgAnimCurrent = NULL;
+    sBgAnimScrollX = 0;
+    sBgAnimScrollY = 0;
+    sBgAnimStopped = 1;
 
     if (c == 0) {
-        gBgAnimAffine = 0;
+        sBgAnimAffine = 0;
 
         switch (b) {
         case 0x4000:
         case 0x8000:
-            gBgAnimMapSize = 0x1000;
+            sBgAnimMapSize = 0x1000;
             break;
         case 0xC000:
-            gBgAnimMapSize = 0x2000;
+            sBgAnimMapSize = 0x2000;
             break;
         case 0:
         default:
-            gBgAnimMapSize = 0x800;
+            sBgAnimMapSize = 0x800;
             break;
         }
     } else {
-        gBgAnimAffine = 1;
+        sBgAnimAffine = 1;
 
         switch (b) {
         case 0x4000:
-            gBgAnimMapSize = 0x400;
+            sBgAnimMapSize = 0x400;
             break;
         case 0x8000:
-            gBgAnimMapSize = 0x1000;
+            sBgAnimMapSize = 0x1000;
             break;
         case 0xC000:
-            gBgAnimMapSize = 0x4000;
+            sBgAnimMapSize = 0x4000;
             break;
         case 0:
         default:
-            gBgAnimMapSize = 0x100;
+            sBgAnimMapSize = 0x100;
             break;
         }
     }
@@ -71,57 +71,57 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
 }
 
 void BgAnimSetPosition(s16 x, s16 y) {
-    if (gBgAnimAffine != 0) {
-        gBgAnimScrollX = -x;
-        gBgAnimScrollY = -y;
+    if (sBgAnimAffine != 0) {
+        sBgAnimScrollX = -x;
+        sBgAnimScrollY = -y;
     } else {
-        gBgAnimScrollX = (gBgAnimCurrent->originX << 2) - x;
-        gBgAnimScrollY = (gBgAnimCurrent->originY << 2) - y;
+        sBgAnimScrollX = (sBgAnimCurrent->originX << 2) - x;
+        sBgAnimScrollY = (sBgAnimCurrent->originY << 2) - y;
     }
 }
 
 void BgAnimSetTransform(u8 a, s32 b, s32 c) {
-    gBgAnimRotation = a;
-    gBgAnimScaleX = b;
-    gBgAnimScaleY = c;
+    sBgAnimRotation = a;
+    sBgAnimScaleX = b;
+    sBgAnimScaleY = c;
 }
 
 void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
-    gBgAnimCurrent = a;
+    sBgAnimCurrent = a;
     BgAnimSetPosition(x, y);
 
-    if (gBgAnimAffine != 0) {
-        gBgAnimFrameBytes = a->tilesPerFrame << 6;
+    if (sBgAnimAffine != 0) {
+        sBgAnimFrameBytes = a->tilesPerFrame << 6;
     } else {
-        gBgAnimFrameBytes = a->tilesPerFrame << 5;
+        sBgAnimFrameBytes = a->tilesPerFrame << 5;
     }
 
-    gBgAnimFramesPerChunk = 0x8000 / gBgAnimFrameBytes;
-    gBgAnimLoopStartFrame = -1;
-    gBgAnimStopFrame = -1;
-    gBgAnimFrameTimer = 0;
-    gBgAnimFrame = 0;
-    gBgAnimStopped = 0;
-    gBgAnimFrameDuration = a->frameDuration;
+    sBgAnimFramesPerChunk = 0x8000 / sBgAnimFrameBytes;
+    sBgAnimLoopStartFrame = -1;
+    sBgAnimStopFrame = -1;
+    sBgAnimFrameTimer = 0;
+    sBgAnimFrame = 0;
+    sBgAnimStopped = 0;
+    sBgAnimFrameDuration = a->frameDuration;
 
-    if (gBgAnimAffine != 0) {
-        gBgAnimScaleX = 0x100;
-        gBgAnimScaleY = 0x100;
-        gBgAnimRotation = 0;
+    if (sBgAnimAffine != 0) {
+        sBgAnimScaleX = 0x100;
+        sBgAnimScaleY = 0x100;
+        sBgAnimRotation = 0;
     }
 
     PushPaletteEffect(0);
-    LoadBgPalette(gBgAnimBg, a->palette, a->paletteSize);
+    LoadBgPalette(sBgAnimBg, a->palette, a->paletteSize);
     PopPaletteEffect();
-    LoadBgMap(gBgAnimBg, a->tilemap, gBgAnimMapSize);
+    LoadBgMap(sBgAnimBg, a->tilemap, sBgAnimMapSize);
 }
 
 void BgAnimApplyAffineTransform(s32 bg, u8 rot, s32 sx, s32 sy, s16 cx, s16 cy) {
     BgAffineSrcData src;
     BgAffineDstData dst;
 
-    src.texX = gBgAnimCurrent->originX << 10;
-    src.texY = gBgAnimCurrent->originY << 10;
+    src.texX = sBgAnimCurrent->originX << 10;
+    src.texY = sBgAnimCurrent->originY << 10;
     src.scrX = -cx;
     src.scrY = -cy;
     src.sx = 0x10000 / sx;
@@ -157,14 +157,14 @@ void BgAnimUpdate() {
     s16 over;
     s32 vis;
 
-    if (gBgAnimCurrent == NULL) {
+    if (sBgAnimCurrent == NULL) {
         return;
     }
 
-    if (gBgAnimFrame >= gBgAnimCurrent->frameCount) {
-        if (gBgAnimLoopStartFrame >= 0) {
-            gBgAnimFrame = gBgAnimLoopStartFrame;
-            gBgAnimFrameTimer = 0;
+    if (sBgAnimFrame >= sBgAnimCurrent->frameCount) {
+        if (sBgAnimLoopStartFrame >= 0) {
+            sBgAnimFrame = sBgAnimLoopStartFrame;
+            sBgAnimFrameTimer = 0;
         } else {
             BgAnimStop();
         }
@@ -172,13 +172,13 @@ void BgAnimUpdate() {
         return;
     }
 
-    if (gBgAnimAffine != 0) {
-        BgAnimApplyAffineTransform(gBgAnimBg, gBgAnimRotation, gBgAnimScaleX, gBgAnimScaleY, gBgAnimScrollX, gBgAnimScrollY);
+    if (sBgAnimAffine != 0) {
+        BgAnimApplyAffineTransform(sBgAnimBg, sBgAnimRotation, sBgAnimScaleX, sBgAnimScaleY, sBgAnimScrollX, sBgAnimScrollY);
         vis = 1;
     } else {
-        SetBgScroll(gBgAnimBg, (u16)gBgAnimScrollX, (u16)gBgAnimScrollY);
+        SetBgScroll(sBgAnimBg, (u16)sBgAnimScrollX, (u16)sBgAnimScrollY);
 
-        if (gBgAnimScrollX > -256 && gBgAnimScrollX < 128 && gBgAnimScrollY < 128 && gBgAnimScrollY > -256) {
+        if (sBgAnimScrollX > -256 && sBgAnimScrollX < 128 && sBgAnimScrollY < 128 && sBgAnimScrollY > -256) {
             vis = 1;
         } else {
             vis = 0;
@@ -186,66 +186,66 @@ void BgAnimUpdate() {
     }
 
     if (vis != 0) {
-        EnableBg(gBgAnimBg);
+        EnableBg(sBgAnimBg);
 
-        if (gBgAnimFrameTimer == 0) {
-            q = gBgAnimFrame / gBgAnimFramesPerChunk;
-            off = gBgAnimFrame % gBgAnimFramesPerChunk * gBgAnimFrameBytes;
-            src = (u8*)gBgAnimCurrent->chunks[q].data + off;
-            over = off + gBgAnimFrameBytes - gBgAnimCurrent->chunks[q].size;
+        if (sBgAnimFrameTimer == 0) {
+            q = sBgAnimFrame / sBgAnimFramesPerChunk;
+            off = sBgAnimFrame % sBgAnimFramesPerChunk * sBgAnimFrameBytes;
+            src = (u8*)sBgAnimCurrent->chunks[q].data + off;
+            over = off + sBgAnimFrameBytes - sBgAnimCurrent->chunks[q].size;
 
             if (over > 0) {
-                len = gBgAnimFrameBytes - over;
-                RequestDma3Copy(src, GetBgCharBase(gBgAnimBg), len);
-                RequestDma3Clear((u8*)GetBgCharBase(gBgAnimBg) + len, over);
+                len = sBgAnimFrameBytes - over;
+                RequestDma3Copy(src, GetBgCharBase(sBgAnimBg), len);
+                RequestDma3Clear((u8*)GetBgCharBase(sBgAnimBg) + len, over);
             } else {
-                RequestDma3Copy(src, GetBgCharBase(gBgAnimBg), gBgAnimFrameBytes);
+                RequestDma3Copy(src, GetBgCharBase(sBgAnimBg), sBgAnimFrameBytes);
             }
         }
     } else {
-        DisableBg(gBgAnimBg);
+        DisableBg(sBgAnimBg);
     }
 
-    gBgAnimFrameTimer++;
+    sBgAnimFrameTimer++;
 
-    if (gBgAnimFrameTimer >= gBgAnimFrameDuration) {
-        gBgAnimFrameTimer = 0;
+    if (sBgAnimFrameTimer >= sBgAnimFrameDuration) {
+        sBgAnimFrameTimer = 0;
 
-        if (gBgAnimFrame != gBgAnimStopFrame) {
-            gBgAnimFrame++;
+        if (sBgAnimFrame != sBgAnimStopFrame) {
+            sBgAnimFrame++;
         }
     }
 }
 
 void BgAnimSetFrameDuration(u16 a) {
-    gBgAnimFrameDuration = a;
+    sBgAnimFrameDuration = a;
 }
 
 void BgAnimSetLoopStartFrame(u16 a) {
-    gBgAnimLoopStartFrame = a;
+    sBgAnimLoopStartFrame = a;
 }
 
 void BgAnimSetStopFrame(u16 a) {
-    gBgAnimStopFrame = a;
+    sBgAnimStopFrame = a;
 }
 
 void BgAnimStop() {
-    gBgAnimCurrent = NULL;
-    gBgAnimStopped = 1;
-    DisableBg(gBgAnimBg);
+    sBgAnimCurrent = NULL;
+    sBgAnimStopped = 1;
+    DisableBg(sBgAnimBg);
 }
 
 u8 BgAnimIsStopped() {
-    return gBgAnimStopped;
+    return sBgAnimStopped;
 }
 
 void BgAnimGetFrameState(u16* a, u16* b) {
     if (a != NULL) {
-        *a = gBgAnimFrame;
+        *a = sBgAnimFrame;
     }
 
     if (b != NULL) {
-        *b = gBgAnimFrameTimer;
+        *b = sBgAnimFrameTimer;
     }
 }
 
@@ -254,5 +254,5 @@ u32 BgAnimGetDuration(BgAnimationDef* p) {
 }
 
 BgAnimationDef* BgAnimGetCurrent() {
-    return gBgAnimCurrent;
+    return sBgAnimCurrent;
 }

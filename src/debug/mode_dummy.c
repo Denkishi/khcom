@@ -16,7 +16,7 @@
 #include "system_state.h"
 #include "types.h"
 
-u16 gDummyEntryIndex;
+static u16 sDummyEntryIndex;
 
 static const DummyEntry sDummyEntries[10] = {
     { "\x83\x49\x81\x5b\x83\x76\x83\x6a\x83\x93\x83\x4f", "\x83\x80\x81\x5b\x83\x72\x81\x5b\x81\x40\x91\x90\x8c\xb4\x81\x60\x8f\xe9\x8a\x4f\x8a\xcf", 0 },
@@ -51,13 +51,13 @@ void mode_dummy_0(u32 arg) {
     LoadBgMap(1, gUnk_08EEE384, 0x800);
 #endif
     EnableBg(1);
-    gDummyEntryIndex = arg;
+    sDummyEntryIndex = arg;
 
     if (arg > 9) {
-        gDummyEntryIndex = 0;
+        sDummyEntryIndex = 0;
         DebugTextPrint(0, 0, 2, "\x83\x47\x83\x89\x81\x5b\x81\x46\x96\xb3\x8c\xf8\x82\xc8\x88\xf8\x90\x94");
     } else {
-        gDummyEntryIndex = arg;
+        sDummyEntryIndex = arg;
         entry = &sDummyEntries[arg];
         DebugTextPrint(0, 0, 2, entry->name);
         DebugTextPrint(0x10, 0x18, 2, entry->desc);
@@ -68,7 +68,7 @@ void DummyUpdateExit() {
     const DummyEntry* entry;
 
     if (!FadeIsActive()) {
-        entry = &sDummyEntries[gDummyEntryIndex];
+        entry = &sDummyEntries[sDummyEntryIndex];
 
         switch (entry->action) {
         case 0:

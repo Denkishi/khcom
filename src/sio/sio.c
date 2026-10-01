@@ -27,15 +27,15 @@ u16 gSioCommandSend[4] EWRAM_COMMON(8);
 u8 gSioLinkResult EWRAM_COMMON(4);
 u16 gSioSendFrame[4] EWRAM_COMMON(8);
 
-u8 gSioChecksumReady;
-u16 gSioSavedIme;
-u8 gSioIdleVBlanks;
-u8 gSioSendEmpty;
-u8 gSioPauseTimer;
-u8 gSioPrevPlayerCount;
-s8 gSioAutoStartDone;
-u16 gSioSendNonzero;
-u16 gSioRecvNonzero;
+static u8 sSioChecksumReady;
+static u16 sSioSavedIme;
+static u8 sSioIdleVBlanks;
+static u8 sSioSendEmpty;
+static u8 sSioPauseTimer;
+static u8 sSioPrevPlayerCount;
+static s8 sSioAutoStartDone;
+static u16 sSioSendNonzero;
+static u16 sSioRecvNonzero;
 
 u16 IsVBlankIntrLive() {
     if (REG_IME & 1) {
@@ -110,7 +110,7 @@ void SioInit() {
     u16* p;
     u16 ime;
 
-    p = &gSioSavedIme;
+    p = &sSioSavedIme;
     ime = REG_IME;
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -128,9 +128,9 @@ void SioInit() {
     REG_SIOMLT_SEND = 0;
     *(u64*)REG_ADDR_SIOMULTI0 = 0;
     CpuFill32(0, &gSioWork, sizeof(SioWork));
-    gSioIdleVBlanks = 0;
-    gSioSendEmpty = 0;
-    gSioPrevPlayerCount = 0;
+    sSioIdleVBlanks = 0;
+    sSioSendEmpty = 0;
+    sSioPrevPlayerCount = 0;
     gSioLastSendCount = 0;
     gSioLastRecvCount = 0;
     gSioStatus = 0;
@@ -141,10 +141,10 @@ void SioInit() {
     gUnk_02039824 = 0;
     gSioHandshakeRequest = 0;
     gSioLinkResult = 0;
-    gSioAutoStartDone = 0;
-    gSioChecksumReady = 0;
-    gSioSendNonzero = 0;
-    gSioRecvNonzero = 0;
+    sSioAutoStartDone = 0;
+    sSioChecksumReady = 0;
+    sSioSendNonzero = 0;
+    sSioRecvNonzero = 0;
     gSioLinkSendCallback = NULL;
     gSioLinkRecvCallback = NULL;
 }
@@ -158,10 +158,10 @@ void func_08006E70() {
 }
 
 void SioStop() {
-    gSioSavedIme = REG_IME;
+    sSioSavedIme = REG_IME;
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-    REG_IME = gSioSavedIme;
+    REG_IME = sSioSavedIme;
     REG_SIOCNT = 0;
     REG_TM3CNT_H = 0;
     REG_IF = (INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -188,10 +188,10 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
         default:
             SioCheckParent();
 
-            if (gSioAutoStartDone == 0) {
+            if (sSioAutoStartDone == 0) {
                 if (gSioWork.isParent != 0 && gSioWork.playerCount == 2) {
                     gSioWork.startPending = 1;
-                    gSioAutoStartDone = -1;
+                    sSioAutoStartDone = -1;
                 }
             }
 
@@ -201,7 +201,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
                 gSioWork.startPending = 1;
             }
 
-            gSioAutoStartDone = -1;
+            sSioAutoStartDone = -1;
             break;
         case 2:
             gSioWork.state = 0;
@@ -305,10 +305,10 @@ void SioInitTimer() {
     if (gSioWork.isParent != 0) {
         REG_TM3CNT_L = 0xFF2D;
         REG_TM3CNT_H = (TIMER_INTR_ENABLE | TIMER_64CLK);
-        gSioSavedIme = REG_IME;
+        sSioSavedIme = REG_IME;
         REG_IME = 0;
         REG_IE |= INTR_FLAG_TIMER3;
-        REG_IME = gSioSavedIme;
+        REG_IME = sSioSavedIme;
     }
 }
 
@@ -316,7 +316,7 @@ void SioQueueSendFrame(u16* frame) {
     u8 idx;
     u8 i;
 
-    gSioSavedIme = REG_IME;
+    sSioSavedIme = REG_IME;
     REG_IME = 0;
 
     if (gSioWork.sendCount < 32) {
@@ -327,7 +327,7 @@ void SioQueueSendFrame(u16* frame) {
         }
 
         for (i = 0; i < 4; i++) {
-            gSioSendNonzero |= *frame;
+            sSioSendNonzero |= *frame;
             gSioWork.sendBuf[i][idx] = *frame;
             *frame = 0;
             frame++;
@@ -336,12 +336,12 @@ void SioQueueSendFrame(u16* frame) {
         gSioWork.queueFull |= 1;
     }
 
-    if (gSioSendNonzero != 0) {
+    if (sSioSendNonzero != 0) {
         gSioWork.sendCount++;
-        gSioSendNonzero = 0;
+        sSioSendNonzero = 0;
     }
 
-    REG_IME = gSioSavedIme;
+    REG_IME = sSioSavedIme;
     gSioLastSendCount = gSioWork.sendCount;
 }
 
@@ -349,7 +349,7 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
     u8 i;
     u8 j;
 
-    gSioSavedIme = REG_IME;
+    sSioSavedIme = REG_IME;
     REG_IME = 0;
 
     if (gSioWork.recvCount == 0) {
@@ -377,14 +377,14 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
         gSioWork.recvEmpty = 0;
     }
 
-    REG_IME = gSioSavedIme;
+    REG_IME = sSioSavedIme;
 }
 
 void SioVBlankUpdate() {
     if (gSioWork.paused != 0) {
-        gSioPauseTimer--;
+        sSioPauseTimer--;
 
-        if (gSioPauseTimer != 0) {
+        if (sSioPauseTimer != 0) {
             return;
         }
 
@@ -407,9 +407,9 @@ void SioVBlankUpdate() {
             }
         }
     } else if (gSioWork.state == 4 || gSioWork.state == 2) {
-        gSioIdleVBlanks++;
+        sSioIdleVBlanks++;
 
-        if (gSioIdleVBlanks > 6) {
+        if (sSioIdleVBlanks > 6) {
             if (gSioWork.state == 4) {
                 gSioWork.timeout = 2;
             }
@@ -458,7 +458,7 @@ void SioSerialIntr() {
     }
 
     gSioWork.transferCount++;
-    gSioIdleVBlanks = 0;
+    sSioIdleVBlanks = 0;
 
     if (gSioWork.transferCount == 4) {
         gSioLastRecvCount = gSioWork.recvCount;
@@ -506,7 +506,7 @@ u8 SioHandshake() {
     gSioWork.playerCount = count;
 
     if (gSioWork.playerCount == 2) {
-        if (gSioWork.playerCount == gSioPrevPlayerCount && gSioWork.recv[0] == 0x8FFF) {
+        if (gSioWork.playerCount == sSioPrevPlayerCount && gSioWork.recv[0] == 0x8FFF) {
             return 1;
         }
 
@@ -519,7 +519,7 @@ u8 SioHandshake() {
         gSioWork.unk_11 = 0;
     }
 
-    gSioPrevPlayerCount = gSioWork.playerCount;
+    sSioPrevPlayerCount = gSioWork.playerCount;
     return 0;
 }
 
@@ -532,13 +532,13 @@ void SioRecvWord() {
 
     if (gSioWork.sendWordIdx == 0) {
         for (i = 0; i < gSioWork.playerCount; i++) {
-            if (gSioWork.checksum != buf[i] && gSioChecksumReady != 0) {
+            if (gSioWork.checksum != buf[i] && sSioChecksumReady != 0) {
                 gSioWork.checksumError = 1;
             }
         }
 
         gSioWork.checksum = 0;
-        gSioChecksumReady = 1;
+        sSioChecksumReady = 1;
     } else {
         idx = gSioWork.recvReadIdx + gSioWork.recvCount;
 
@@ -549,12 +549,12 @@ void SioRecvWord() {
         if (gSioWork.recvCount < 32) {
             for (i = 0; i < gSioWork.playerCount; i++) {
                 gSioWork.checksum += buf[i];
-                gSioRecvNonzero |= buf[i];
+                sSioRecvNonzero |= buf[i];
                 gSioWork.recvBuf[i][gSioWork.recvWordIdx][idx] = buf[i];
 
                 if (gSioWork.sendWordIdx == 1 && gSioWork.paused == 0 && (buf[i] & 0x1000)) {
                     gSioWork.paused = 1;
-                    gSioPauseTimer = 5;
+                    sSioPauseTimer = 5;
                 }
             }
         } else {
@@ -563,9 +563,9 @@ void SioRecvWord() {
 
         gSioWork.recvWordIdx++;
 
-        if (gSioWork.recvWordIdx == 4 && gSioRecvNonzero != 0) {
+        if (gSioWork.recvWordIdx == 4 && sSioRecvNonzero != 0) {
             gSioWork.recvCount++;
-            gSioRecvNonzero = 0;
+            sSioRecvNonzero = 0;
         }
     }
 }
@@ -574,7 +574,7 @@ void SioSendWord() {
     if (gSioWork.sendWordIdx == 4) {
         REG_SIOMLT_SEND = gSioWork.checksum;
 
-        if (gSioSendEmpty == 0) {
+        if (sSioSendEmpty == 0) {
             gSioWork.sendCount--;
             gSioWork.sendReadIdx++;
 
@@ -582,14 +582,14 @@ void SioSendWord() {
                 gSioWork.sendReadIdx = 0;
             }
         } else {
-            gSioSendEmpty = 0;
+            sSioSendEmpty = 0;
         }
     } else {
         if (gSioWork.sendWordIdx == 0 && gSioWork.sendCount == 0) {
-            gSioSendEmpty = 1;
+            sSioSendEmpty = 1;
         }
 
-        if (gSioSendEmpty != 0) {
+        if (sSioSendEmpty != 0) {
             REG_SIOMLT_SEND = 0;
         } else {
             REG_SIOMLT_SEND = gSioWork.sendBuf[gSioWork.sendWordIdx][gSioWork.sendReadIdx];

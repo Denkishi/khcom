@@ -500,7 +500,6 @@ extern u8 gVixenReitouHahenTiles[];
 extern u8 gHadesFramespreadHiTiles[];
 extern u8 gPBakudanPalette[];
 extern u8 gPBakudanTiles[];
-extern JiminyWork* gJiminyWork;
 
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);
 void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p);

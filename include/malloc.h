@@ -37,9 +37,7 @@ void IwramFree(const void* p);
 void SetEwramHeapName(const void* name);
 void SetIwramHeapName(const void* name);
 
-extern Heap gEwramHeap;
 
-extern Heap gIwramHeap;
 
 #define EWRAM_HEAP_SIZE 0x34000
 #define IWRAM_HEAP_SIZE 0x6800

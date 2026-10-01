@@ -7,8 +7,8 @@ static const u8 sEwramHeapName[12] = "HEAP_SYSTEM";
 
 static const u8 sIwramHeapName[16] = "HEAPCPU_SYSTEM";
 
-Heap gEwramHeap;
-Heap gIwramHeap;
+static Heap sEwramHeap;
+static Heap sIwramHeap;
 
 void HeapUnlinkFreeBlock(HeapBlock* b) {
     b->prevFree->nextFree = b->nextFree;
@@ -84,12 +84,12 @@ void HeapInit(void* addr, u32 size, Heap* heap) {
 
 void EwramHeapInit(void* addr, u32 size) {
     SetEwramHeapName(sEwramHeapName);
-    HeapInit(addr, size, &gEwramHeap);
+    HeapInit(addr, size, &sEwramHeap);
 }
 
 void IwramHeapInit(void* addr, u32 size) {
     SetIwramHeapName(sIwramHeapName);
-    HeapInit(addr, size, &gIwramHeap);
+    HeapInit(addr, size, &sIwramHeap);
 }
 
 void* HeapAlloc(u32 size, Heap* heap) {
@@ -139,11 +139,11 @@ void* HeapAlloc(u32 size, Heap* heap) {
 }
 
 void* EwramAlloc(u32 size) {
-    return HeapAlloc(size, &gEwramHeap);
+    return HeapAlloc(size, &sEwramHeap);
 }
 
 void* IwramAlloc(u32 size) {
-    return HeapAlloc(size, &gIwramHeap);
+    return HeapAlloc(size, &sIwramHeap);
 }
 
 void HeapFree(const void* p, Heap* heap) {
@@ -205,11 +205,11 @@ void HeapFree(const void* p, Heap* heap) {
 }
 
 void EwramFree(const void* p) {
-    HeapFree(p, &gEwramHeap);
+    HeapFree(p, &sEwramHeap);
 }
 
 void IwramFree(const void* p) {
-    HeapFree(p, &gIwramHeap);
+    HeapFree(p, &sIwramHeap);
 }
 
 s32 HeapGetBlockSize(void* p, Heap* heap) {
@@ -227,11 +227,11 @@ s32 HeapGetBlockSize(void* p, Heap* heap) {
 }
 
 s32 EwramGetBlockSize(void* p) {
-    return HeapGetBlockSize(p, &gEwramHeap);
+    return HeapGetBlockSize(p, &sEwramHeap);
 }
 
 s32 IwramGetBlockSize(void* p) {
-    return HeapGetBlockSize(p, &gIwramHeap);
+    return HeapGetBlockSize(p, &sIwramHeap);
 }
 
 s32 HeapGetFreeTotal(Heap* heap) {
@@ -250,11 +250,11 @@ s32 HeapGetFreeTotal(Heap* heap) {
 }
 
 s32 EwramGetFreeTotal() {
-    return HeapGetFreeTotal(&gEwramHeap);
+    return HeapGetFreeTotal(&sEwramHeap);
 }
 
 s32 IwramGetFreeTotal() {
-    return HeapGetFreeTotal(&gIwramHeap);
+    return HeapGetFreeTotal(&sIwramHeap);
 }
 
 void func_08000A60(Heap* heap) {
@@ -266,19 +266,19 @@ void func_08000A60(Heap* heap) {
 }
 
 void func_08000A70() {
-    func_08000A60(&gEwramHeap);
+    func_08000A60(&sEwramHeap);
 }
 
 void func_08000A80() {
-    func_08000A60(&gIwramHeap);
+    func_08000A60(&sIwramHeap);
 }
 
 void SetEwramHeapAllocFlag(u8 v) {
-    gEwramHeap.allocFlag = v;
+    sEwramHeap.allocFlag = v;
 }
 
 void SetIwramHeapAllocFlag(u8 v) {
-    gIwramHeap.allocFlag = v;
+    sIwramHeap.allocFlag = v;
 }
 
 void func_08000AA8(Heap* heap) {
@@ -290,27 +290,27 @@ void func_08000AA8(Heap* heap) {
 }
 
 void func_08000AB8() {
-    func_08000AA8(&gEwramHeap);
+    func_08000AA8(&sEwramHeap);
 }
 
 void func_08000AC8() {
-    func_08000AA8(&gIwramHeap);
+    func_08000AA8(&sIwramHeap);
 }
 
 void SetEwramHeapName(const void* name) {
-    gEwramHeap.name = name;
+    sEwramHeap.name = name;
 }
 
 void SetIwramHeapName(const void* name) {
-    gIwramHeap.name = name;
+    sIwramHeap.name = name;
 }
 
 const void* GetEwramHeapName() {
-    return gEwramHeap.name;
+    return sEwramHeap.name;
 }
 
 const void* GetIwramHeapName() {
-    return gIwramHeap.name;
+    return sIwramHeap.name;
 }
 
 void ListAppend(ListNode* node, ListNode** head, ListNode** tail) {

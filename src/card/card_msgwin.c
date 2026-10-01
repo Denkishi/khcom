@@ -33,7 +33,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 
-CardMsgWinWork* gActiveCardMsgwin;
+static CardMsgWinWork* sActiveCardMsgwin;
 
 u8 gMessageWindowOpen EWRAM_COMMON(4);
 
@@ -111,7 +111,7 @@ static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
         break;
     }
 
-    gActiveCardMsgwin = w;
+    sActiveCardMsgwin = w;
 }
 
 u8 UpdateCardMsgwinOpen(CardMsgWinWork* w, void* a) {
@@ -282,7 +282,7 @@ static void msgwin_3(CardMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    gActiveCardMsgwin = NULL;
+    sActiveCardMsgwin = NULL;
 }
 
 u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
@@ -512,9 +512,9 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* w, void* a) {
 }
 
 s32 ReplaceCardMsgwinMessage(CardMessageArgs* src) {
-    if (gActiveCardMsgwin != NULL) {
-        gActiveCardMsgwin->args = *src;
-        gActiveCardMsgwin->messagePending = 1;
+    if (sActiveCardMsgwin != NULL) {
+        sActiveCardMsgwin->args = *src;
+        sActiveCardMsgwin->messagePending = 1;
 
         return 1;
     }
@@ -596,8 +596,8 @@ u8 IsMessageWindowAnswerYes() {
 }
 
 u8 CloseMessageWindow() {
-    if (gActiveCardMsgwin != NULL) {
-        gActiveCardMsgwin->keepOpen = 0;
+    if (sActiveCardMsgwin != NULL) {
+        sActiveCardMsgwin->keepOpen = 0;
         return 1;
     }
 

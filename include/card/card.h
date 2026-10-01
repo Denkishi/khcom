@@ -2282,24 +2282,11 @@ extern Mode gModeTextCheck;
 extern Mode gModeDeckExchange;
 #endif
 
-extern u32 gRikuCardRequest;
-extern u32 gRikuCardReloadRequest;
-extern CardDisplayWork* gRikuSelectedCard;
 extern u8 gActiveDeck;
 extern u8 gUnk_02034AB1[3];
-extern s16 gBossCardValue;
-extern PrintLine* gPrintLines;
-extern u8 gPrintLineCount;
-extern u8 gPrintBg;
 #ifndef VERSION_EU
 #endif
-extern u8 gLvupLogoActive;
-extern CardMsgWinWork* gActiveCardMsgwin;
-extern TaskPool gRikuTutorialTasks;
-extern s32 gRikuTutorialModeArg;
 #ifdef VERSION_EU
-extern TaskPool gTextCheckTasks;
-extern u32 gTextCheckMessageId;
 #endif
 extern u8 gBossCardRequestValue;
 extern u8 gBossCardRequest;

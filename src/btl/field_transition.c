@@ -14,11 +14,11 @@
 #include "system_state.h"
 #include "types.h"
 
-FieldTransitionWork* gFieldTransitionWork;
+static FieldTransitionWork* sFieldTransitionWork;
 
 void FieldTransitionInit() {
     FieldTransitionWork* p;
-    FieldTransitionWork** pp = &gFieldTransitionWork;
+    FieldTransitionWork** pp = &sFieldTransitionWork;
     p = EwramAlloc(sizeof(FieldTransitionWork));
     *pp = p;
     p->initialized = 0;
@@ -31,9 +31,9 @@ void FieldTransitionUpdate() {
     void* gfx;
 
     if (IsModeStarted()) {
-        ReleaseObjTiles(gFieldTransitionWork->tiles);
-        ReleaseObjPalette(gFieldTransitionWork->palette);
-        EwramFree(gFieldTransitionWork);
+        ReleaseObjTiles(sFieldTransitionWork->tiles);
+        ReleaseObjPalette(sFieldTransitionWork->palette);
+        EwramFree(sFieldTransitionWork);
         ModeClearTransitionCallback();
         return;
     }
@@ -41,102 +41,102 @@ void FieldTransitionUpdate() {
     REG_DISPCNT |= DISPCNT_OBJ_ON;
     gSystemFlags |= SYSTEM_FLAG_DMA3_IMMEDIATE;
 
-    if (gFieldTransitionWork->initialized == 0) {
-        gFieldTransitionWork->tiles = AllocObjTiles(0xA00, NULL);
+    if (sFieldTransitionWork->initialized == 0) {
+        sFieldTransitionWork->tiles = AllocObjTiles(0xA00, NULL);
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            gFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
-            AnimInit(&gFieldTransitionWork->anim, NULL, NULL);
+            sFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
+            AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
             case 0:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF514, gUnk_09EDF4F4);
-                SetObjTileSource(gFieldTransitionWork->tiles, gUnk_08935BC2);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF514, gUnk_09EDF4F4);
+                SetObjTileSource(sFieldTransitionWork->tiles, gUnk_08935BC2);
                 break;
             case 45:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1bl01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1bl01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 64:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1ll01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1ll01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 83:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1fl01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1fl01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 128:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF4F0, gUnk_09EDF4D0);
-                SetObjTileSource(gFieldTransitionWork->tiles, gUnk_0893416A);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF4F0, gUnk_09EDF4D0);
+                SetObjTileSource(sFieldTransitionWork->tiles, gUnk_0893416A);
                 break;
             case 173:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1fl01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1fl01Tiles);
                 break;
             case 192:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1ll01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1ll01Tiles);
                 break;
             default:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gRik1bl01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1bl01Tiles);
                 break;
             }
         } else {
-            gFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
-            AnimInit(&gFieldTransitionWork->anim, NULL, NULL);
+            sFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
+            AnimInit(&sFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
             case 0:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bb01Anims, gSor1bb01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1bb01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bb01Anims, gSor1bb01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1bb01Tiles);
                 break;
             case 45:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1bl01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1bl01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 64:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1ll01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1ll01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 83:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1fl01Tiles);
-                gFieldTransitionWork->flipped = 1;
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1fl01Tiles);
+                sFieldTransitionWork->flipped = 1;
                 break;
             case 128:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ff01Anims, gSor1ff01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1ff01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ff01Anims, gSor1ff01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1ff01Tiles);
                 break;
             case 173:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1fl01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1fl01Tiles);
                 break;
             case 192:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1ll01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1ll01Tiles);
                 break;
             default:
-                AnimChangeWithTables(&gFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
-                SetObjTileSource(gFieldTransitionWork->tiles, gSor1bl01Tiles);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gSor1bl01Tiles);
                 break;
             }
         }
 
-        gFieldTransitionWork->initialized++;
+        sFieldTransitionWork->initialized++;
     }
 
-    gfx = AnimUpdate(&gFieldTransitionWork->anim);
+    gfx = AnimUpdate(&sFieldTransitionWork->anim);
 
-    if (gFieldTransitionWork->flipped != 0) {
-        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, NULL, SPRITE_FLAG_HFLIP, 0);
+    if (sFieldTransitionWork->flipped != 0) {
+        DrawSprite(120, 96, gfx, sFieldTransitionWork->tiles, sFieldTransitionWork->palette, NULL, SPRITE_FLAG_HFLIP, 0);
     } else {
-        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, NULL, 0, 0);
+        DrawSprite(120, 96, gfx, sFieldTransitionWork->tiles, sFieldTransitionWork->palette, NULL, 0, 0);
     }
 
     gSystemFlags &= ~SYSTEM_FLAG_DMA3_IMMEDIATE;

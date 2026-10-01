@@ -37,7 +37,7 @@
 #include "taskpool.h"
 #include "types.h"
 
-ChkObjWork* gChkObjWork;
+static ChkObjWork* sChkObjWork;
 
 static ObjDef sChkObjSoraDefs[] = {
     { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 2, 0, gSoraPalette, "sor1ff00.aob", "sora.acl", 32, 0 },
@@ -1329,27 +1329,27 @@ static const ChkObjEntry sChkObjEntries[10] = {
 };
 
 void ChkObjLoadDef(ObjDef* def) {
-    AnimChangeWithTables(&gChkObjWork->anim, gChkObjWork->animId, 0, def->anims, def->gfxTable);
-    SetObjTileSource(gChkObjWork->tiles, def->tiles);
-    ReleaseObjPalette(gChkObjWork->palette);
-    gChkObjWork->palette = LoadObjPalette(def->palette, def->paletteSize);
+    AnimChangeWithTables(&sChkObjWork->anim, sChkObjWork->animId, 0, def->anims, def->gfxTable);
+    SetObjTileSource(sChkObjWork->tiles, def->tiles);
+    ReleaseObjPalette(sChkObjWork->palette);
+    sChkObjWork->palette = LoadObjPalette(def->palette, def->paletteSize);
 }
 
 void mode_chkobj_0() {
     SetBgMode0();
-    gChkObjWork = EwramAlloc(sizeof(ChkObjWork));
-    TaskPoolInit(&gChkObjWork->pool, 1);
-    TaskCreate(&gChkObjWork->pool, &gTaskDescPrint, NULL);
-    gChkObjWork->defIndex = 0;
-    gChkObjWork->animId = 0;
-    gChkObjWork->category = 0;
-    gChkObjWork->tiles = AllocObjTiles(0x2000, NULL);
-    gChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
-    gChkObjWork->gfx = gSor1ff00Frame0;
-    gChkObjWork->paused = 0;
-    gChkObjWork->angle = 0x80A0;
-    gChkObjWork->maxTiles = 0;
-    gChkObjWork->y = 0;
+    sChkObjWork = EwramAlloc(sizeof(ChkObjWork));
+    TaskPoolInit(&sChkObjWork->pool, 1);
+    TaskCreate(&sChkObjWork->pool, &gTaskDescPrint, NULL);
+    sChkObjWork->defIndex = 0;
+    sChkObjWork->animId = 0;
+    sChkObjWork->category = 0;
+    sChkObjWork->tiles = AllocObjTiles(0x2000, NULL);
+    sChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
+    sChkObjWork->gfx = gSor1ff00Frame0;
+    sChkObjWork->paused = 0;
+    sChkObjWork->angle = 0x80A0;
+    sChkObjWork->maxTiles = 0;
+    sChkObjWork->y = 0;
     ChkObjLoadDef(sChkObjEntries[0].defs);
     SetupBg(1, 0, 15, 0);
     EnableBg(0);
@@ -1367,128 +1367,128 @@ void mode_chkobj_1() {
         ModeRequest(&gModeDebug, 0);
     } else {
         if (GetKeysPressed() & START_BUTTON) {
-            gChkObjWork->paused = !gChkObjWork->paused;
+            sChkObjWork->paused = !sChkObjWork->paused;
         }
 
-        if (AnimIsFinished(&gChkObjWork->anim) && (GetKeysHeld() & A_BUTTON)) {
-            AnimStart(&gChkObjWork->anim, gChkObjWork->animId, 0);
+        if (AnimIsFinished(&sChkObjWork->anim) && (GetKeysHeld() & A_BUTTON)) {
+            AnimStart(&sChkObjWork->anim, sChkObjWork->animId, 0);
         }
 
         if (GetKeysRepeat() & (DPAD_RIGHT | DPAD_LEFT)) {
             if (GetKeysRepeat() & DPAD_LEFT) {
-                gChkObjWork->animId--;
+                sChkObjWork->animId--;
             }
 
             if (GetKeysRepeat() & DPAD_RIGHT) {
-                gChkObjWork->animId++;
+                sChkObjWork->animId++;
             }
 
-            gChkObjWork->y = 0;
-            gChkObjWork->paused = 0;
-            gChkObjWork->maxTiles = 0;
-            def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+            sChkObjWork->y = 0;
+            sChkObjWork->paused = 0;
+            sChkObjWork->maxTiles = 0;
+            def = &sChkObjEntries[sChkObjWork->category].defs[sChkObjWork->defIndex];
 
-            if (gChkObjWork->animId < 0) {
-                gChkObjWork->defIndex--;
+            if (sChkObjWork->animId < 0) {
+                sChkObjWork->defIndex--;
 
-                if (gChkObjWork->defIndex < 0) {
-                    gChkObjWork->category--;
+                if (sChkObjWork->defIndex < 0) {
+                    sChkObjWork->category--;
 
-                    if (gChkObjWork->category < 0) {
-                        gChkObjWork->category = 9;
+                    if (sChkObjWork->category < 0) {
+                        sChkObjWork->category = 9;
                     }
 
-                    gChkObjWork->defIndex = sChkObjEntries[gChkObjWork->category].count - 1;
+                    sChkObjWork->defIndex = sChkObjEntries[sChkObjWork->category].count - 1;
                 }
 
-                def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
-                gChkObjWork->animId = def->animCount - 1;
+                def = &sChkObjEntries[sChkObjWork->category].defs[sChkObjWork->defIndex];
+                sChkObjWork->animId = def->animCount - 1;
                 ChkObjLoadDef(def);
-            } else if (gChkObjWork->animId >= def->animCount) {
-                gChkObjWork->defIndex++;
+            } else if (sChkObjWork->animId >= def->animCount) {
+                sChkObjWork->defIndex++;
 
-                if (gChkObjWork->defIndex >= sChkObjEntries[gChkObjWork->category].count) {
-                    gChkObjWork->category++;
+                if (sChkObjWork->defIndex >= sChkObjEntries[sChkObjWork->category].count) {
+                    sChkObjWork->category++;
 
-                    if ((u16)gChkObjWork->category > 9) {
-                        gChkObjWork->category = 0;
+                    if ((u16)sChkObjWork->category > 9) {
+                        sChkObjWork->category = 0;
                     }
 
-                    gChkObjWork->defIndex = 0;
+                    sChkObjWork->defIndex = 0;
                 }
 
-                def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
-                gChkObjWork->animId = 0;
+                def = &sChkObjEntries[sChkObjWork->category].defs[sChkObjWork->defIndex];
+                sChkObjWork->animId = 0;
                 ChkObjLoadDef(def);
             } else {
-                AnimStart(&gChkObjWork->anim, gChkObjWork->animId, 0);
+                AnimStart(&sChkObjWork->anim, sChkObjWork->animId, 0);
             }
 
-            DebugTextPrint(166, 0, 2, sChkObjEntries[gChkObjWork->category].name);
+            DebugTextPrint(166, 0, 2, sChkObjEntries[sChkObjWork->category].name);
         }
 
         keys = GetKeysHeld() & SELECT_BUTTON;
 
         if (keys != 0) {
             if (GetKeysHeld() & L_BUTTON) {
-                gChkObjWork->angle--;
+                sChkObjWork->angle--;
             }
 
             if (GetKeysHeld() & R_BUTTON) {
-                gChkObjWork->angle++;
+                sChkObjWork->angle++;
             }
         } else if (GetKeysRepeat() & (L_BUTTON | R_BUTTON)) {
-            gChkObjWork->y = 0;
-            gChkObjWork->paused = 0;
-            gChkObjWork->maxTiles = 0;
+            sChkObjWork->y = 0;
+            sChkObjWork->paused = 0;
+            sChkObjWork->maxTiles = 0;
 
             if (GetKeysRepeat() & L_BUTTON) {
-                gChkObjWork->category--;
+                sChkObjWork->category--;
             }
 
             if (GetKeysRepeat() & R_BUTTON) {
-                gChkObjWork->category++;
+                sChkObjWork->category++;
             }
 
-            if (gChkObjWork->category < 0) {
-                gChkObjWork->category = 9;
-            } else if ((u16)gChkObjWork->category > 9) {
-                gChkObjWork->category = 0;
+            if (sChkObjWork->category < 0) {
+                sChkObjWork->category = 9;
+            } else if ((u16)sChkObjWork->category > 9) {
+                sChkObjWork->category = 0;
             }
 
-            gChkObjWork->animId = 0;
-            gChkObjWork->defIndex = 0;
-            def = sChkObjEntries[gChkObjWork->category].defs;
+            sChkObjWork->animId = 0;
+            sChkObjWork->defIndex = 0;
+            def = sChkObjEntries[sChkObjWork->category].defs;
             ChkObjLoadDef(def);
-            DebugTextPrint(166, 0, 2, sChkObjEntries[gChkObjWork->category].name);
+            DebugTextPrint(166, 0, 2, sChkObjEntries[sChkObjWork->category].name);
         }
 
-        SetBackdropColor((u16)abs(gSineTable[gChkObjWork->angle & 0xFF] * 5 >> 6),
-                      (u16)abs(gSineTable[(gChkObjWork->angle / 2) & 0xFF] * 5 >> 6),
-                      (u16)abs(gSineTable[(gChkObjWork->angle / 4) & 0xFF] * 5 >> 6));
+        SetBackdropColor((u16)abs(gSineTable[sChkObjWork->angle & 0xFF] * 5 >> 6),
+                      (u16)abs(gSineTable[(sChkObjWork->angle / 2) & 0xFF] * 5 >> 6),
+                      (u16)abs(gSineTable[(sChkObjWork->angle / 4) & 0xFF] * 5 >> 6));
 
         if (GetKeysHeld() & DPAD_UP) {
-            gChkObjWork->y--;
+            sChkObjWork->y--;
         } else if (GetKeysHeld() & DPAD_DOWN) {
-            gChkObjWork->y++;
+            sChkObjWork->y++;
         }
 
-        TaskPoolUpdate(&gChkObjWork->pool);
-        TaskPoolDraw(&gChkObjWork->pool);
+        TaskPoolUpdate(&sChkObjWork->pool);
+        TaskPoolDraw(&sChkObjWork->pool);
 
-        if (gChkObjWork->paused == 0 || (GetKeysRepeat() & A_BUTTON)) {
-            AnimUpdate(&gChkObjWork->anim);
+        if (sChkObjWork->paused == 0 || (GetKeysRepeat() & A_BUTTON)) {
+            AnimUpdate(&sChkObjWork->anim);
         }
 
-        gChkObjWork->gfx = AnimGetGfx(&gChkObjWork->anim);
+        sChkObjWork->gfx = AnimGetGfx(&sChkObjWork->anim);
 
-        if (gChkObjWork->paused != 0) {
+        if (sChkObjWork->paused != 0) {
             PrintString(0, 1, 0, "PAUSE");
         } else {
             PrintString(0, 1, 0, "     ");
         }
 
-        def = &sChkObjEntries[gChkObjWork->category].defs[gChkObjWork->defIndex];
+        def = &sChkObjEntries[sChkObjWork->category].defs[sChkObjWork->defIndex];
         PrintString(0, 12, 0, "                                      ");
         PrintString(0, 13, 0, "                                      ");
         PrintString(0, 14, 0, "                                      ");
@@ -1498,39 +1498,39 @@ void mode_chkobj_1() {
         PrintString(0, 18, 0, "                                      ");
         PrintString(0, 19, 0, "                                      ");
         PrintString(0, 0, 0, "    ");
-        PrintNumber(0, 0, 0, gChkObjWork->defIndex);
+        PrintNumber(0, 0, 0, sChkObjWork->defIndex);
         PrintString(0, 12, 0, def->aobName);
         PrintString(0, 13, 0, "aob");
-        PrintNumber(6, 13, 0, AnimGetGfxIndex(&gChkObjWork->anim));
+        PrintNumber(6, 13, 0, AnimGetGfxIndex(&sChkObjWork->anim));
         PrintString(0, 14, 0, def->aclName);
         PrintString(0, 15, 0, "anime");
-        PrintNumber(6, 15, 0, gChkObjWork->animId);
+        PrintNumber(6, 15, 0, sChkObjWork->animId);
         PrintString(0, 16, 0, "pic");
-        PrintNumber(6, 16, 0, gChkObjWork->anim.frame);
+        PrintNumber(6, 16, 0, sChkObjWork->anim.frame);
         PrintString(0, 17, 0, "frame");
-        PrintNumber(6, 17, 0, gChkObjWork->anim.timer);
-        v = GetSpriteTileBytes(gChkObjWork->gfx) >> 5;
+        PrintNumber(6, 17, 0, sChkObjWork->anim.timer);
+        v = GetSpriteTileBytes(sChkObjWork->gfx) >> 5;
         PrintString(0, 18, 0, "chara");
         PrintNumber(6, 18, 0, v);
 
-        if (gChkObjWork->maxTiles < v) {
-            gChkObjWork->maxTiles = v;
+        if (sChkObjWork->maxTiles < v) {
+            sChkObjWork->maxTiles = v;
         }
 
         PrintString(0, 19, 0, "maxChr");
-        PrintNumber(6, 19, 0, gChkObjWork->maxTiles);
-        DrawSprite(120, gChkObjWork->y + 96, gChkObjWork->gfx, gChkObjWork->tiles,
-                   gChkObjWork->palette, NULL, 0, 0);
+        PrintNumber(6, 19, 0, sChkObjWork->maxTiles);
+        DrawSprite(120, sChkObjWork->y + 96, sChkObjWork->gfx, sChkObjWork->tiles,
+                   sChkObjWork->palette, NULL, 0, 0);
         DebugTextDraw(1);
         DebugTextClear();
     }
 }
 
 void mode_chkobj_2() {
-    TaskPoolDestroy(&gChkObjWork->pool);
-    ReleaseObjTiles(gChkObjWork->tiles);
-    ReleaseObjPalette(gChkObjWork->palette);
-    EwramFree(gChkObjWork);
+    TaskPoolDestroy(&sChkObjWork->pool);
+    ReleaseObjTiles(sChkObjWork->tiles);
+    ReleaseObjPalette(sChkObjWork->palette);
+    EwramFree(sChkObjWork);
     DebugTextDestroy();
 }
 

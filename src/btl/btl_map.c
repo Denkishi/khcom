@@ -10,9 +10,9 @@
 #include "event_backgrounds.h"
 #include <stddef.h>
 
-u8 gBtlMapShakeActive;
-u16 gBtlMapShakeStep;
-s32 gBtlMapShakeOffset;
+static u8 sBtlMapShakeActive;
+static u16 sBtlMapShakeStep;
+static s32 sBtlMapShakeOffset;
 
 static const s8 sBtlMapShakePattern[32] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1,
@@ -300,32 +300,32 @@ void task_btl_map_0(BtlMapWork* work) {
 }
 
 void BtlMapResetShake() {
-    gBtlMapShakeActive = 0;
-    gBtlMapShakeStep = 0;
-    gBtlMapShakeOffset = 0;
+    sBtlMapShakeActive = 0;
+    sBtlMapShakeStep = 0;
+    sBtlMapShakeOffset = 0;
 }
 
 void BtlMapStartShake() {
-    gBtlMapShakeActive = 1;
-    gBtlMapShakeStep = 0;
-    gBtlMapShakeOffset = 0;
+    sBtlMapShakeActive = 1;
+    sBtlMapShakeStep = 0;
+    sBtlMapShakeOffset = 0;
 }
 
 void BtlMapUpdateShake() {
-    if (gBtlMapShakeActive != 0) {
-        gBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)gBtlMapShakeStep] << 12) - gBtlMapShakeOffset) >> 3;
-        gBtlMapShakeStep++;
+    if (sBtlMapShakeActive != 0) {
+        sBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)sBtlMapShakeStep] << 12) - sBtlMapShakeOffset) >> 3;
+        sBtlMapShakeStep++;
 
-        if (gBtlMapShakeStep > 0x1F) {
-            gBtlMapShakeActive = 0;
-            gBtlMapShakeOffset = 0;
+        if (sBtlMapShakeStep > 0x1F) {
+            sBtlMapShakeActive = 0;
+            sBtlMapShakeOffset = 0;
             gBtlWork->rotation = 0;
         }
     }
 }
 
 s32 BtlMapGetShake() {
-    return gBtlMapShakeOffset;
+    return sBtlMapShakeOffset;
 }
 
 void BtlMapSetCameraTarget(s32 a, s32 b) {
@@ -400,8 +400,8 @@ s32 task_btl_map_1(BtlMapWork* work) {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlMapShakeActive != 0) {
-        gBtlWork->rotation = (gBtlMapShakeOffset >> 8) / 3;
+    if (sBtlMapShakeActive != 0) {
+        gBtlWork->rotation = (sBtlMapShakeOffset >> 8) / 3;
     }
 
     if (gBtlWork->viewX - 0x7800 < work->xMin) {

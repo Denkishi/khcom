@@ -18,7 +18,7 @@
 #include "types.h"
 
 #ifdef VERSION_EU
-UrsulaBubbleWork* gUrsulaBubbleWork;
+static UrsulaBubbleWork* sUrsulaBubbleWork;
 #endif
 
 TaskDesc gTaskDescBosUrsulaBubble = {
@@ -116,7 +116,7 @@ u16 BosUrsulaSpawnTenBubbles(UrsulaBubbleWork* work) {
 
 void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
 #ifdef VERSION_EU
-    gUrsulaBubbleWork = work;
+    sUrsulaBubbleWork = work;
     AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68C0, 6), gUnk_097A0DE4);
@@ -185,19 +185,19 @@ void BosUrsulaPopBubbles(UrsulaBubbleWork* work) {
 
 #ifdef VERSION_EU
 void BosUrsulaBubbleAnimChange(u16 a, u16 b) {
-    AnimChange(&gUrsulaBubbleWork->anim, a, b);
+    AnimChange(&sUrsulaBubbleWork->anim, a, b);
 }
 
 u16 BosUrsulaBubbleAnimGetId() {
-    return AnimGetId(&gUrsulaBubbleWork->anim);
+    return AnimGetId(&sUrsulaBubbleWork->anim);
 }
 
 u8 BosUrsulaBubbleAnimIsFinished() {
-    return AnimIsFinished(&gUrsulaBubbleWork->anim);
+    return AnimIsFinished(&sUrsulaBubbleWork->anim);
 }
 
 void* BosUrsulaBubbleAnimGetGfx() {
-    return AnimGetGfx(&gUrsulaBubbleWork->anim);
+    return AnimGetGfx(&sUrsulaBubbleWork->anim);
 }
 #endif
 

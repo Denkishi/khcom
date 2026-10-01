@@ -19,42 +19,42 @@
 #include "types.h"
 #include "util.h"
 
-u16 gVsKeyHoldL[2];
-u16 gVsKeyHoldR[2];
-u16 gVsKeyReleaseL[2];
-u16 gVsKeyReleaseR[2];
-u16 gVsKeyChordLatch[2];
-u16 gVsSoraReloadTimer;
-u16 gVsRikuReloadTimer;
+static u16 sVsKeyHoldL[2];
+static u16 sVsKeyHoldR[2];
+static u16 sVsKeyReleaseL[2];
+static u16 sVsKeyReleaseR[2];
+static u16 sVsKeyChordLatch[2];
+static u16 sVsSoraReloadTimer;
+static u16 sVsRikuReloadTimer;
 
 void UpdateVsKeyHoldTimes(u16 keys, s32 i) {
     if (keys & L_BUTTON) {
-        gVsKeyHoldL[i]++;
-        gVsKeyReleaseL[i] = 0;
+        sVsKeyHoldL[i]++;
+        sVsKeyReleaseL[i] = 0;
 
-        if (gVsKeyHoldL[i] > 32) {
-            gVsKeyHoldL[i] = 29;
+        if (sVsKeyHoldL[i] > 32) {
+            sVsKeyHoldL[i] = 29;
         }
     } else {
-        gVsKeyHoldL[i] = 0;
+        sVsKeyHoldL[i] = 0;
 
-        if (gVsKeyReleaseL[i] < 255) {
-            gVsKeyReleaseL[i]++;
+        if (sVsKeyReleaseL[i] < 255) {
+            sVsKeyReleaseL[i]++;
         }
     }
 
     if (keys & R_BUTTON) {
-        gVsKeyHoldR[i]++;
-        gVsKeyReleaseR[i] = 0;
+        sVsKeyHoldR[i]++;
+        sVsKeyReleaseR[i] = 0;
 
-        if (gVsKeyHoldR[i] > 32) {
-            gVsKeyHoldR[i] = 29;
+        if (sVsKeyHoldR[i] > 32) {
+            sVsKeyHoldR[i] = 29;
         }
     } else {
-        gVsKeyHoldR[i] = 0;
+        sVsKeyHoldR[i] = 0;
 
-        if (gVsKeyReleaseR[i] < 255) {
-            gVsKeyReleaseR[i]++;
+        if (sVsKeyReleaseR[i] < 255) {
+            sVsKeyReleaseR[i]++;
         }
     }
 }
@@ -64,29 +64,29 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
 
     UpdateVsKeyHoldTimes(a, i);
 
-    if (gVsKeyReleaseL[i] == 2) {
-        gVsKeyChordLatch[i] &= ~L_BUTTON;
+    if (sVsKeyReleaseL[i] == 2) {
+        sVsKeyChordLatch[i] &= ~L_BUTTON;
     }
 
-    if (gVsKeyReleaseR[i] == 2) {
-        gVsKeyChordLatch[i] &= ~R_BUTTON;
+    if (sVsKeyReleaseR[i] == 2) {
+        sVsKeyChordLatch[i] &= ~R_BUTTON;
     }
 
     if (((b & L_BUTTON) && (a & R_BUTTON)) || ((b & R_BUTTON) && (a & L_BUTTON))) {
-        gVsKeyChordLatch[i] |= (L_BUTTON | R_BUTTON);
+        sVsKeyChordLatch[i] |= (L_BUTTON | R_BUTTON);
         ret = L_BUTTON | R_BUTTON;
     }
 
-    if (!(gVsKeyChordLatch[i] & L_BUTTON)) {
-        if (gVsKeyHoldL[i] == 5 || gVsKeyReleaseL[i] == 1) {
-            gVsKeyChordLatch[i] |= L_BUTTON;
+    if (!(sVsKeyChordLatch[i] & L_BUTTON)) {
+        if (sVsKeyHoldL[i] == 5 || sVsKeyReleaseL[i] == 1) {
+            sVsKeyChordLatch[i] |= L_BUTTON;
             ret = L_BUTTON;
         }
     }
 
-    if (!(gVsKeyChordLatch[i] & R_BUTTON)) {
-        if (gVsKeyHoldR[i] == 5 || gVsKeyReleaseR[i] == 1) {
-            gVsKeyChordLatch[i] |= R_BUTTON;
+    if (!(sVsKeyChordLatch[i] & R_BUTTON)) {
+        if (sVsKeyHoldR[i] == 5 || sVsKeyReleaseR[i] == 1) {
+            sVsKeyChordLatch[i] |= R_BUTTON;
             ret = R_BUTTON;
         }
     }
@@ -102,18 +102,18 @@ void VsBtlWorkInit() {
     gBtlWork->gravity = 66;
     gBtlWork->fadeAmount = 10;
     gBtlWork->flags |= BTL_FLAG_VS_BATTLE;
-    gVsKeyHoldL[0] = 0;
-    gVsKeyHoldR[0] = 0;
-    gVsKeyReleaseL[0] = 0;
-    gVsKeyReleaseR[0] = 0;
-    gVsKeyHoldL[1] = 0;
-    gVsKeyHoldR[1] = 0;
-    gVsKeyReleaseL[1] = 0;
-    gVsKeyReleaseR[1] = 0;
-    gVsKeyChordLatch[0] = 0;
-    gVsKeyChordLatch[1] = 0;
-    gVsSoraReloadTimer = 0;
-    gVsRikuReloadTimer = 0;
+    sVsKeyHoldL[0] = 0;
+    sVsKeyHoldR[0] = 0;
+    sVsKeyReleaseL[0] = 0;
+    sVsKeyReleaseR[0] = 0;
+    sVsKeyHoldL[1] = 0;
+    sVsKeyHoldR[1] = 0;
+    sVsKeyReleaseL[1] = 0;
+    sVsKeyReleaseR[1] = 0;
+    sVsKeyChordLatch[0] = 0;
+    sVsKeyChordLatch[1] = 0;
+    sVsSoraReloadTimer = 0;
+    sVsRikuReloadTimer = 0;
 }
 
 void HandleVsRikuCardInput() {
@@ -143,7 +143,7 @@ void HandleVsRikuCardInput() {
     }
 
     if (gRikuBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
-        gVsRikuReloadTimer = 5;
+        sVsRikuReloadTimer = 5;
         return;
     }
 
@@ -155,8 +155,8 @@ void HandleVsRikuCardInput() {
         return;
     }
 
-    if ((s16)gVsRikuReloadTimer > 0) {
-        gVsRikuReloadTimer--;
+    if ((s16)sVsRikuReloadTimer > 0) {
+        sVsRikuReloadTimer--;
     }
 
     res = (u16)ReadVsKeyChord(held, pressed, 1);
@@ -273,7 +273,7 @@ void HandleVsSoraCardInput() {
     }
 
     if (gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) {
-        gVsSoraReloadTimer = 5;
+        sVsSoraReloadTimer = 5;
         return;
     }
 
@@ -285,8 +285,8 @@ void HandleVsSoraCardInput() {
         return;
     }
 
-    if ((s16)gVsSoraReloadTimer > 0) {
-        gVsSoraReloadTimer--;
+    if ((s16)sVsSoraReloadTimer > 0) {
+        sVsSoraReloadTimer--;
     }
 
     res = (u16)ReadVsKeyChord(held, pressed, 0);

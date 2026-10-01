@@ -17,7 +17,7 @@
 #include "types.h"
 #include <stddef.h>
 
-s16 gBossCardValue;
+static s16 sBossCardValue;
 
 
 u8 EnemyCardDeal(CardDisplayWork* p, void* a);
@@ -664,7 +664,7 @@ void UseEnemyCard(u16 arg) {
     args.pool = NULL;
     args.slot = NULL;
     args.variant = arg;
-    args.index = gBossCardValue;
+    args.index = sBossCardValue;
     args.listIndex = 0;
     p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
@@ -991,16 +991,16 @@ void func_08091978(u16 a, u8 b) {
 }
 
 void ResetBossCardValue() {
-    gBossCardValue = -1;
+    sBossCardValue = -1;
 }
 
 void SetBossCardValue(u16 a) {
-    gBossCardValue = a;
+    sBossCardValue = a;
 }
 
 u16 GetBossCardValue() {
-    if (gBossCardValue != -1) {
-        return gBossCardValue;
+    if (sBossCardValue != -1) {
+        return sBossCardValue;
     }
 
     return gCardBattleState->nextEnemyCardIndex;

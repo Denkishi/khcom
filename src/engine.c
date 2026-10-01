@@ -99,10 +99,10 @@ static const u8 sBgHeapName[] = "BG";
 
 static const u8 sFadeHeapName[8] = "FADE";
 
-u32 gMosaicSize;
-u32 gMosaicTarget;
-u16 gMosaicTimer;
-u8 gMosaicActive;
+static u32 sMosaicSize;
+static u32 sMosaicTarget;
+static u16 sMosaicTimer;
+static u8 sMosaicActive;
 
 u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h) {
     SpriteWork* p;
@@ -3207,33 +3207,33 @@ void FadeSetPaused(u8 on) {
 }
 
 void MosaicReset() {
-    gMosaicSize = 0;
-    gMosaicTarget = 0;
-    gMosaicTimer = 0;
-    gMosaicActive = 0;
+    sMosaicSize = 0;
+    sMosaicTarget = 0;
+    sMosaicTimer = 0;
+    sMosaicActive = 0;
 }
 
 void MosaicUpdate() {
     s16 t;
     u8 v;
 
-    if (gMosaicTimer != 0) {
-        ApproachValue((s32*)&gMosaicSize, gMosaicTarget, gMosaicTimer--);
-        t = gMosaicSize >> 8;
+    if (sMosaicTimer != 0) {
+        ApproachValue((s32*)&sMosaicSize, sMosaicTarget, sMosaicTimer--);
+        t = sMosaicSize >> 8;
         v = t;
         SetBgMosaicSize(v, v);
         SetObjMosaicSize(v, v);
-    } else if (gMosaicActive != 0) {
-        gMosaicActive = 0;
+    } else if (sMosaicActive != 0) {
+        sMosaicActive = 0;
         SetSpriteMosaicEnabled(0);
     }
 }
 
 void MosaicStartIn(u16 a, u16 b) {
-    gMosaicTimer = a;
-    gMosaicSize = b << 8;
-    gMosaicTarget = 0;
-    gMosaicActive = 1;
+    sMosaicTimer = a;
+    sMosaicSize = b << 8;
+    sMosaicTarget = 0;
+    sMosaicActive = 1;
     SetBgMosaic(0, 1);
     SetBgMosaic(1, 1);
     SetBgMosaic(2, 1);
@@ -3242,10 +3242,10 @@ void MosaicStartIn(u16 a, u16 b) {
 }
 
 void MosaicStartOut(u16 a, u16 b) {
-    gMosaicTimer = a;
-    gMosaicSize = 0;
-    gMosaicTarget = b << 8;
-    gMosaicActive = 1;
+    sMosaicTimer = a;
+    sMosaicSize = 0;
+    sMosaicTarget = b << 8;
+    sMosaicActive = 1;
     SetBgMosaic(0, 1);
     SetBgMosaic(1, 1);
     SetBgMosaic(2, 1);
@@ -3254,7 +3254,7 @@ void MosaicStartOut(u16 a, u16 b) {
 }
 
 u8 MosaicIsActive() {
-    return gMosaicActive;
+    return sMosaicActive;
 }
 
 Dma3Queue* gDma3Requests IWRAM_COMMON(4);

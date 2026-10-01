@@ -468,7 +468,7 @@ static TaskDesc sTaskDescBosMdHahen = {
 };
 
 
-GaWork* gGaWork;
+static GaWork* sGaWork;
 
 u16 Bos5Atan(s32 a) {
     u16 i;
@@ -747,8 +747,8 @@ void BosGaEntryRelease(GaEntryWork* e) {
 }
 
 void BosGaReleaseBody() {
-    BosGaEntryRelease(&gGaWork->entries[1]);
-    BosGaEntryRelease(&gGaWork->entries[0]);
+    BosGaEntryRelease(&sGaWork->entries[1]);
+    BosGaEntryRelease(&sGaWork->entries[0]);
 }
 
 void BosGaEntryDraw(GaWork* work, GaEntryWork* e) {
@@ -3109,7 +3109,7 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     u32 i;
     GaEntryWork* p;
 
-    gGaWork = work;
+    sGaWork = work;
 
     if (arg == 0) {
         work->state = 1;

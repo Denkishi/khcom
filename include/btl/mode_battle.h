@@ -27,7 +27,6 @@ typedef struct LangWork {
     struct ObjPalette* palette;
 } LangWork;
 
-extern LangWork* gLangWork;
 extern u8 gUnkEu_08F6A6DC[];
 extern u8 gUnkEu_08F6A6FC[];
 extern u8 gUnkEu_08F77180[];

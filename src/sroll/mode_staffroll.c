@@ -2845,7 +2845,7 @@ const u8 gStaffRollTildeJp[2] = "~";
 const u8 gStaffRollTildeEu[2] = "~";
 #endif
 
-StaffRollWork* gStaffRollWork;
+static StaffRollWork* sStaffRollWork;
 
 static s32 Square(s32 x) {
     return x * x;
@@ -3078,7 +3078,7 @@ void mode_StaffRoll_0() {
     StaffRollWork* w;
     StaffRollWork** p;
 
-    p = &gStaffRollWork;
+    p = &sStaffRollWork;
     w = EwramAlloc(sizeof(StaffRollWork));
     *p = w;
     SetBackdropColor(0, 0, 0);
@@ -4203,7 +4203,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
 void mode_StaffRoll_1() {
     StaffRollWork* w;
 
-    w = gStaffRollWork;
+    w = sStaffRollWork;
     w->unk_004 = 0;
     w->flags = 0;
 
@@ -4435,13 +4435,13 @@ void mode_StaffRoll_1() {
 void mode_StaffRoll_2() {
     StaffRollWork* w;
 
-    w = gStaffRollWork;
+    w = sStaffRollWork;
     ReleaseObjPalette(w->palette);
     TaskPoolDestroy(&w->tasks);
 
-    if (gStaffRollWork != NULL) {
+    if (sStaffRollWork != NULL) {
         EwramFree(w);
-        gStaffRollWork = NULL;
+        sStaffRollWork = NULL;
     }
 }
 

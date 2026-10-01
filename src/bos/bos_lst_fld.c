@@ -390,10 +390,10 @@ TaskDesc gTaskDescBosLstFld = {
     sizeof(LstFldWork),
 };
 
-u8 gBosLstFldShakeActive;
-s16 gBosLstFldShakePattern;
-s16 gBosLstFldShakeStep;
-s32 gBosLstFldShakeOffset;
+static u8 sBosLstFldShakeActive;
+static s16 sBosLstFldShakePattern;
+static s16 sBosLstFldShakeStep;
+static s32 sBosLstFldShakeOffset;
 
 s32 BosLstFldSquare(s32 x) {
     return x * x;
@@ -404,35 +404,35 @@ s32 BosLstFldSquare2(s32 x) {
 }
 
 void BosLstFldResetShake() {
-    gBosLstFldShakeActive = 0;
-    gBosLstFldShakePattern = 0;
-    gBosLstFldShakeStep = 0;
-    gBosLstFldShakeOffset = 0;
+    sBosLstFldShakeActive = 0;
+    sBosLstFldShakePattern = 0;
+    sBosLstFldShakeStep = 0;
+    sBosLstFldShakeOffset = 0;
 }
 
 void BosLstFldSetShake(s16 a) {
-    gBosLstFldShakePattern = a;
-    gBosLstFldShakeStep = 0;
-    gBosLstFldShakeOffset = 0;
+    sBosLstFldShakePattern = a;
+    sBosLstFldShakeStep = 0;
+    sBosLstFldShakeOffset = 0;
 }
 
 void BosLstFldUpdateShake() {
     const s8* p;
 
-    if (gBosLstFldShakeActive != 0) {
-        p = sBosLstFldShakePatterns[gBosLstFldShakePattern];
-        gBosLstFldShakeOffset += ((p[gBosLstFldShakeStep] << 12) - gBosLstFldShakeOffset) >> 3;
-        gBosLstFldShakeStep++;
+    if (sBosLstFldShakeActive != 0) {
+        p = sBosLstFldShakePatterns[sBosLstFldShakePattern];
+        sBosLstFldShakeOffset += ((p[sBosLstFldShakeStep] << 12) - sBosLstFldShakeOffset) >> 3;
+        sBosLstFldShakeStep++;
 
-        if (p[gBosLstFldShakeStep] == 0) {
-            gBosLstFldShakeActive = 0;
-            gBosLstFldShakeOffset = 0;
+        if (p[sBosLstFldShakeStep] == 0) {
+            sBosLstFldShakeActive = 0;
+            sBosLstFldShakeOffset = 0;
         }
     }
 }
 
 s32 BosLstFldGetShake() {
-    return gBosLstFldShakeOffset;
+    return sBosLstFldShakeOffset;
 }
 
 void BosLstFldSetBgMode(Task* t, s32 a, s32 b) {

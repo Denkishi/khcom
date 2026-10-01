@@ -33,11 +33,11 @@ u8 gBossCardRequestValue EWRAM_COMMON(4);
 
 u8 gBossCardRequest EWRAM_COMMON(4);
 
-u32 gRikuCardRequest;
+static u32 sRikuCardRequest;
 
-u32 gRikuCardReloadRequest;
+static u32 sRikuCardReloadRequest;
 
-CardDisplayWork* gRikuSelectedCard;
+static CardDisplayWork* sRikuSelectedCard;
 
 #include "riku_deck_names.inc"
 static const Deck sRikuDecks[21] = {
@@ -273,92 +273,92 @@ s32 BosscardSlideOut(BossCardWork* w);
 void UpdateRikuPlayedCardPosition(CardDisplayWork* p);
 
 void RequestRikuPotion() {
-    gRikuCardReloadRequest = 17;
+    sRikuCardReloadRequest = 17;
 }
 
 void RequestRikuHiPotion() {
-    gRikuCardReloadRequest = 18;
+    sRikuCardReloadRequest = 18;
 }
 
 void RequestRikuMegaPotion() {
-    gRikuCardReloadRequest = 19;
+    sRikuCardReloadRequest = 19;
 }
 
 void RequestRikuEther() {
-    gRikuCardReloadRequest = 21;
+    sRikuCardReloadRequest = 21;
 }
 
 void RequestRikuMegaEther() {
-    gRikuCardReloadRequest = 22;
+    sRikuCardReloadRequest = 22;
 }
 
 void RequestRikuElixir() {
-    gRikuCardReloadRequest = 23;
+    sRikuCardReloadRequest = 23;
 }
 
 void RequestRikuMegalixir() {
-    gRikuCardReloadRequest = 24;
+    sRikuCardReloadRequest = 24;
 }
 
 void RequestRikuNextCard() {
-    gRikuCardRequest = 1;
+    sRikuCardRequest = 1;
 }
 
 void RequestRikuPrevCard() {
-    gRikuCardRequest = 2;
+    sRikuCardRequest = 2;
 }
 
 void RequestRikuCardUse() {
-    gRikuCardRequest = 3;
+    sRikuCardRequest = 3;
 }
 
 void RequestRikuCardStock() {
-    gRikuCardRequest = 4;
+    sRikuCardRequest = 4;
 }
 
 void RequestRikuStockUse() {
-    gRikuCardRequest = 5;
+    sRikuCardRequest = 5;
 }
 
 void func_0807E230() {
-    gRikuCardRequest = 8;
+    sRikuCardRequest = 8;
 }
 
 void RequestOpenRikuCards() {
-    gRikuCardRequest = 6;
+    sRikuCardRequest = 6;
 }
 
 void RequestCloseRikuCards() {
-    gRikuCardRequest = 7;
+    sRikuCardRequest = 7;
 }
 
 void RequestCycleRikuCardList() {
-    gRikuCardRequest = 9;
+    sRikuCardRequest = 9;
 }
 
 void RequestSwitchRikuCardList() {
-    gRikuCardRequest = 10;
+    sRikuCardRequest = 10;
 }
 
 void func_0807E26C() {
-    gRikuCardRequest = 11;
+    sRikuCardRequest = 11;
 }
 
 void func_0807E278() {
-    gRikuCardRequest = 12;
+    sRikuCardRequest = 12;
 }
 
 void func_0807E284() {
-    gRikuCardRequest = 13;
+    sRikuCardRequest = 13;
 }
 
 void ClearRikuCardRequest() {
-    gRikuCardRequest = 0;
+    sRikuCardRequest = 0;
 }
 
 u8 IsRikuReloadCardSelected() {
-    if (gRikuSelectedCard != NULL) {
-        if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) {
+    if (sRikuSelectedCard != NULL) {
+        if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) {
             return 1;
         }
     }
@@ -369,10 +369,10 @@ u8 IsRikuReloadCardSelected() {
 s32 GetRikuSelectedMove() {
     const CardDef* d;
 
-    if (gRikuSelectedCard != NULL) {
-        if (!(gRikuSelectedCard->flags & (CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE))) {
+    if (sRikuSelectedCard != NULL) {
+        if (!(sRikuSelectedCard->flags & (CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE))) {
             // @bug The opponent's empty slot has no cardDef (NULL read).
-            d = gRikuSelectedCard->cardDef;
+            d = sRikuSelectedCard->cardDef;
 
             if (d->category == 3) {
                 return d->move + 0xFFFF;
@@ -387,8 +387,8 @@ s32 GetRikuSelectedMove() {
 
 void SetRikuReloadCharging() {
     // @bug Called before the card battle state exists (NULL write).
-    if (gRikuSelectedCard != NULL) {
-        if ((gRikuSelectedCard->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) {
+    if (sRikuSelectedCard != NULL) {
+        if ((sRikuSelectedCard->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_RELOAD_GAUGE)) {
             gCardBattleState->rikuReloadCharging = 1;
         } else {
             gCardBattleState->rikuReloadCharging = 0;
@@ -404,8 +404,8 @@ u8 GetRikuCardsLeft() {
 }
 
 u8 IsRikuSelectionEmpty() {
-    if (gRikuSelectedCard != NULL) {
-        return gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD;
+    if (sRikuSelectedCard != NULL) {
+        return sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD;
     }
 
     return 0;
@@ -432,9 +432,9 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
             args.reloadCount = w->reloadCounts[slot];
 
             if (card->cardId == CARD_ID_RELOAD) {
-                gRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
+                sRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescReloadCard, &args)->work;
             } else {
-                gRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
+                sRikuSelectedCard = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
             }
 
             count++;
@@ -452,12 +452,12 @@ void CreateRikuCardDisplay(CardBattleWork* w, u8 slot) {
         node->ringIndex = 0;
         node->priority = 50;
         node->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_VISIBLE);
-        gRikuSelectedCard = node;
+        sRikuSelectedCard = node;
         break;
     case 1:
-        gRikuSelectedCard->swingAngleTarget = gRikuSelectedCard->swingAngle = sRikuCardSwingAngles[0];
-        gRikuSelectedCard->priority = 50;
-        gRikuSelectedCard->flags |= CARD_DISP_FLAG_VISIBLE;
+        sRikuSelectedCard->swingAngleTarget = sRikuSelectedCard->swingAngle = sRikuCardSwingAngles[0];
+        sRikuSelectedCard->priority = 50;
+        sRikuSelectedCard->flags |= CARD_DISP_FLAG_VISIBLE;
         break;
     }
 }
@@ -857,9 +857,9 @@ static void cardbattle_0(CardBattleWork* w) {
     w->cursors[1] = 0;
     w->cursors[2] = 0;
     w->cursors[3] = 0;
-    gRikuSelectedCard = NULL;
+    sRikuSelectedCard = NULL;
     CreateRikuCardDisplay(w, w->listIndex);
-    gRikuCardRequest = 0;
+    sRikuCardRequest = 0;
     gCardBattleState->rikuListIndex = w->listIndex;
 }
 
@@ -893,11 +893,11 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         w->unk_C4[3]--;
     }
 
-    if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-        if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_DONE) {
+    if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+        if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_DONE) {
             if (gRikuBtlWork->hcEffect == 9) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
-                gRikuSelectedCard->command = 7;
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+                sRikuSelectedCard->command = 7;
 
                 if (gRikuBtlWork->hcEffect != 25) {
                     IncrementReloadCount(w);
@@ -921,7 +921,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                 CreateRikuCardDisplay(w, 0);
                 TickRikuHcEffectOnReload();
             } else {
-                gRikuSelectedCard->command = 7;
+                sRikuSelectedCard->command = 7;
 
                 if (gRikuBtlWork->hcEffect != 25) {
                     IncrementReloadCount(w);
@@ -942,35 +942,35 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                 w->cursors[w->listIndex] = 0;
                 w->cardsLeft[w->listIndex] = 0;
                 w->reloadPending[w->listIndex] = 1;
-                gRikuSelectedCard = NULL;
-                gRikuCardRequest = 0;
+                sRikuSelectedCard = NULL;
+                sRikuCardRequest = 0;
                 w->revCountShown[w->listIndex] = 0;
             }
         }
     }
 
-    switch (gRikuCardRequest) {
+    switch (sRikuCardRequest) {
     case 0:
         break;
     case 1:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
 
-        if (gRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
+        if (sRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
             SelectNextRikuCard(w, w->listIndex);
         }
 
         break;
     case 2:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
 
-        if (gRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
+        if (sRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) {
             SelectPrevRikuCard(w, w->listIndex);
         }
 
         break;
     case 4:
-        gRikuCardRequest = 0;
-        p = gRikuSelectedCard;
+        sRikuCardRequest = 0;
+        p = sRikuSelectedCard;
         flags = p->flags;
 
         if (!(flags & CARD_DISP_FLAG_RELOAD_CARD)) {
@@ -986,7 +986,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
                         if (w->stockCount <= 2 && gCardBattleState->rikuStockActive == 0) {
                             StockRikuCard(w);
                         }
-                    } else if (gRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
+                    } else if (sRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
 #ifndef VERSION_EU
                         m4aSongNumStart(SONG_SYS_BEEP);
 #endif
@@ -1007,31 +1007,31 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 
         break;
     case 3:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
 
-        if (gRikuSelectedCard->cardDef->category != 3) {
-            if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->reloadPending[w->listIndex] == 0) {
-                if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
+        if (sRikuSelectedCard->cardDef->category != 3) {
+            if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->reloadPending[w->listIndex] == 0) {
+                if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
                     if (CanUseRikuSelectedCard() != 0) {
                         UseRikuCard(w);
-                    } else if (gRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
+                    } else if (sRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
 #ifndef VERSION_EU
                         m4aSongNumStart(SONG_SYS_BEEP);
 #endif
                     }
-                } else if (gRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
+                } else if (sRikuSelectedCard->flags & CARD_DISP_FLAG_OPEN) {
 #ifndef VERSION_EU
                     m4aSongNumStart(SONG_SYS_BEEP);
 #endif
                 }
             }
-        } else if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
+        } else if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
             UseRikuHeartlessCard(w);
         }
 
         break;
     case 5:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
 
         if (w->stockCount != 0) {
             UseRikuStock(w);
@@ -1043,7 +1043,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
 
         break;
     case 6:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
         OpenRikuCards(w);
         break;
     case 7:
@@ -1052,38 +1052,38 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         CloseRikuCards(w);
         break;
     case 8:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
         break;
     case 9:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
         CycleRikuCardList(w);
         break;
     case 10:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
         SwitchRikuCardList(w);
         break;
     default:
-        gRikuCardRequest = 0;
+        sRikuCardRequest = 0;
         break;
     }
 
-    switch (gRikuCardReloadRequest) {
+    switch (sRikuCardReloadRequest) {
     case 17:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForPotion(w);
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1098,21 +1098,21 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 18:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForHiPotion(w);
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1127,23 +1127,23 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 19:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForMegaPotion(w);
         ResetRikuReloadGauge(w);
         w->reloadCounts[0] = 0;
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1158,21 +1158,21 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 21:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForEther(w);
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1187,23 +1187,23 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 22:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForMegaEther(w);
         ResetRikuReloadGauge(w);
         w->reloadCounts[0] = 0;
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1218,21 +1218,21 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 23:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForElixir(w);
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1247,23 +1247,23 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
         TickRikuHcEffectOnReload();
         break;
     case 24:
-        gRikuCardReloadRequest = 0;
+        sRikuCardReloadRequest = 0;
         RestoreCardsForElixir(w);
         ResetRikuReloadGauge(w);
         w->reloadCounts[0] = 0;
 
         if (w->listIndex == 0) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
         } else {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
             }
 
-            gRikuSelectedCard->command = 7;
+            sRikuSelectedCard->command = 7;
             w->listIndex = 0;
 #ifdef VERSION_EU
             gCardBattleState->rikuListIndex = 0;
@@ -1280,15 +1280,15 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
     }
 
     if (w->reloadPending[w->listIndex] != 0) {
-        if (gRikuSelectedCard != NULL) {
-            if (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_DONE) {
-                gRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
+        if (sRikuSelectedCard != NULL) {
+            if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_DONE) {
+                sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
                 BeginRikuReloadDeal(w);
                 w->reloadPending[w->listIndex] = 0;
                 w->unk_C4[0] = 1;
                 gRikuBtlWork->flags |= BTL_FLAG_RELOADING;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuReloadDeal);
-                gRikuSelectedCard->flags = (gRikuSelectedCard->flags | (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_VISIBLE)) & ~CARD_DISP_FLAG_FROZEN;
+                sRikuSelectedCard->flags = (sRikuSelectedCard->flags | (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_VISIBLE)) & ~CARD_DISP_FLAG_FROZEN;
                 TaskPoolUpdate(&w->tasks);
 #ifndef VERSION_EU
                 m4aSongNumStart(SONG_SYS_RELOAD);
@@ -1305,18 +1305,18 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
             w->reloadPending[w->listIndex] = 0;
             gRikuBtlWork->flags |= BTL_FLAG_RELOADING;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuReloadDeal);
-            gRikuSelectedCard->flags = (gRikuSelectedCard->flags | (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_VISIBLE)) & ~CARD_DISP_FLAG_FROZEN;
+            sRikuSelectedCard->flags = (sRikuSelectedCard->flags | (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_VISIBLE)) & ~CARD_DISP_FLAG_FROZEN;
             TaskPoolUpdate(&w->tasks);
 #ifndef VERSION_EU
             m4aSongNumStart(SONG_SYS_RELOAD);
 #endif
             return 1;
         }
-    } else if (gRikuSelectedCard != NULL && (gRikuSelectedCard->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED) &&
+    } else if (sRikuSelectedCard != NULL && (sRikuSelectedCard->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SETTLED) &&
                CountAvailableCardSlots(w, w->listIndex) != 0) {
         w->reloadPending[w->listIndex] = 1;
         w->cardsLeft[0] = 0;
-        gRikuSelectedCard->command = 7;
+        sRikuSelectedCard->command = 7;
 
         if (gRikuBtlWork->hcEffect != 40) {
             if (gRikuBtlWork->actor->hp > 3) {
@@ -1324,7 +1324,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
             }
 
             w->selectedCards[w->listIndex] = NULL;
-            gRikuSelectedCard = NULL;
+            sRikuSelectedCard = NULL;
 
             if (gRikuBtlWork->hcEffect != 25) {
                 IncrementReloadCount(w);
@@ -1347,7 +1347,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
             }
         } else {
             w->selectedCards[w->listIndex] = NULL;
-            gRikuSelectedCard = NULL;
+            sRikuSelectedCard = NULL;
             w->reloadPending[w->listIndex] = 1;
             w->cardsLeft[0] = 0;
         }
@@ -1473,8 +1473,8 @@ void CloseRikuCards(CardBattleWork* w) {
         w->stock[i]->flags &= ~CARD_DISP_FLAG_OPEN;
     }
 
-    if (gRikuSelectedCard != NULL) {
-        gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_OPEN;
+    if (sRikuSelectedCard != NULL) {
+        sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_OPEN;
     }
 
     gCardBattleState->soraHcEffect = 0;
@@ -1491,8 +1491,8 @@ void OpenRikuCards(CardBattleWork* w) {
         w->stock[i]->flags |= CARD_DISP_FLAG_OPEN;
     }
 
-    if (gRikuSelectedCard != NULL) {
-        gRikuSelectedCard->flags |= CARD_DISP_FLAG_OPEN;
+    if (sRikuSelectedCard != NULL) {
+        sRikuSelectedCard->flags |= CARD_DISP_FLAG_OPEN;
     }
 
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
@@ -1515,10 +1515,10 @@ u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a) {
         return 0;
     }
 
-    if ((s16)gRikuSelectedCard->timer == 0) {
+    if ((s16)sRikuSelectedCard->timer == 0) {
         if (CountAvailableCardSlots(w, w->listIndex) > w->unk_C4[2]) {
-            gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
-            v = gRikuSelectedCard->args.index - 1;
+            sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+            v = sRikuSelectedCard->args.index - 1;
             c = FindPrevAvailableSlot(w, w->listIndex, &v);
 
             if (c != NULL) {
@@ -1533,7 +1533,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a) {
                 p->x = p->ringCenterX;
                 p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
-                gRikuSelectedCard = p;
+                sRikuSelectedCard = p;
                 w->unk_C4[2]++;
                 w->cardsLeft[w->listIndex]++;
             }
@@ -1542,12 +1542,12 @@ u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a) {
             gRikuBtlWork->flags &= ~0x100;
             w->unk_C4[0] = 0;
             m4aSongNumStop(SONG_SYS_RELOAD);
-            gRikuCardRequest = 0;
+            sRikuCardRequest = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)cardbattle_1);
         }
     }
 
-    if (gRikuCardRequest == 7) {
+    if (sRikuCardRequest == 7) {
         w->revCountShown[w->listIndex] = 0;
         w->unk_C4[0] = 0;
         CloseRikuCards(w);
@@ -1564,11 +1564,11 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
     CardSlot* c;
     u16 v;
 
-    if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
+    if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
         if (w->cardsLeft[w->listIndex] != 1) {
-            gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
-            gRikuSelectedCard->timer = 4;
-            v = gRikuSelectedCard->args.index + 1;
+            sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+            sRikuSelectedCard->timer = 4;
+            v = sRikuSelectedCard->args.index + 1;
 
             if ((s16)v >= w->slotCounts[n]) {
                 v = 0;
@@ -1596,7 +1596,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
                 p->x = p->ringCenterX;
                 p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-                gRikuSelectedCard = p;
+                sRikuSelectedCard = p;
             }
         }
     }
@@ -1608,12 +1608,12 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
     CardSlot* c;
     u16 v;
 
-    if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
+    if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
         if (w->cardsLeft[w->listIndex] != 1) {
-            gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
-            gRikuSelectedCard->scaleX = 0;
-            gRikuSelectedCard->timer = 4;
-            v = gRikuSelectedCard->args.index - 1;
+            sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+            sRikuSelectedCard->scaleX = 0;
+            sRikuSelectedCard->timer = 4;
+            v = sRikuSelectedCard->args.index - 1;
 
             if ((s16)v < 0) {
                 v = w->slotCounts[n] - 1;
@@ -1641,14 +1641,14 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
                 p->x = p->ringCenterX;
                 p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-                gRikuSelectedCard = p;
+                sRikuSelectedCard = p;
             }
         }
     }
 }
 
 void SwitchRikuCardList(CardBattleWork* w) {
-    if ((gRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) != 0) {
+    if ((sRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED) != 0) {
 #ifndef VERSION_EU
         m4aSongNumStart(SONG_SYS_CANSEL);
 #endif
@@ -1660,17 +1660,17 @@ void SwitchRikuCardList(CardBattleWork* w) {
         w->revCountShown[w->listIndex] = 0;
 
         if (w->reloadPending[w->listIndex] == 0) {
-            w->cursors[w->listIndex] = gRikuSelectedCard->args.index;
-            gRikuSelectedCard->ringCenterX = 0x10400;
-            gRikuSelectedCard->ringCenterY = 0x8C00;
-            gRikuSelectedCard->timer = 4;
-            gRikuSelectedCard->command = 7;
-            gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+            w->cursors[w->listIndex] = sRikuSelectedCard->args.index;
+            sRikuSelectedCard->ringCenterX = 0x10400;
+            sRikuSelectedCard->ringCenterY = 0x8C00;
+            sRikuSelectedCard->timer = 4;
+            sRikuSelectedCard->command = 7;
+            sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
         } else {
-            w->selectedCards[w->listIndex] = gRikuSelectedCard;
-            gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
-            gRikuSelectedCard->swingSteps = 4;
-            gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+            w->selectedCards[w->listIndex] = sRikuSelectedCard;
+            sRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
+            sRikuSelectedCard->swingSteps = 4;
+            sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
         }
 
         switch (w->listIndex) {
@@ -1684,17 +1684,17 @@ void SwitchRikuCardList(CardBattleWork* w) {
 
         if (w->reloadPending[w->listIndex] == 0) {
             CreateRikuCardDisplay(w, w->listIndex);
-            gRikuSelectedCard->x = gRikuCardLayout[5][0];
-            gRikuSelectedCard->y = gRikuCardLayout[5][1];
-            gRikuSelectedCard->swingSteps = 1;
-            gRikuSelectedCard->timer = 1;
+            sRikuSelectedCard->x = gRikuCardLayout[5][0];
+            sRikuSelectedCard->y = gRikuCardLayout[5][1];
+            sRikuSelectedCard->swingSteps = 1;
+            sRikuSelectedCard->timer = 1;
         } else {
-            gRikuSelectedCard = w->selectedCards[w->listIndex];
-            gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
-            gRikuSelectedCard->swingAngle = gRikuSelectedCard->swingAngleTarget;
-            gRikuSelectedCard->swingSteps = 1;
-            gRikuSelectedCard->timer = 1;
-            gRikuSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
+            sRikuSelectedCard = w->selectedCards[w->listIndex];
+            sRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
+            sRikuSelectedCard->swingAngle = sRikuSelectedCard->swingAngleTarget;
+            sRikuSelectedCard->swingSteps = 1;
+            sRikuSelectedCard->timer = 1;
+            sRikuSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
         }
 
         gCardBattleState->rikuListIndex = w->listIndex;
@@ -1713,16 +1713,16 @@ void CycleRikuCardList(CardBattleWork* w) {
     w->revCountShown[w->listIndex] = 0;
 
     if (w->reloadPending[w->listIndex] == 0) {
-        w->cursors[w->listIndex] = gRikuSelectedCard->args.index;
-        gRikuSelectedCard->ringCenterX = 0xC800;
-        gRikuSelectedCard->ringCenterY = 0xB400;
-        gRikuSelectedCard->timer = 12;
-        gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+        w->cursors[w->listIndex] = sRikuSelectedCard->args.index;
+        sRikuSelectedCard->ringCenterX = 0xC800;
+        sRikuSelectedCard->ringCenterY = 0xB400;
+        sRikuSelectedCard->timer = 12;
+        sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
     } else {
-        w->selectedCards[w->listIndex] = gRikuSelectedCard;
-        gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
-        gRikuSelectedCard->swingSteps = 12;
-        gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
+        w->selectedCards[w->listIndex] = sRikuSelectedCard;
+        sRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[3];
+        sRikuSelectedCard->swingSteps = 12;
+        sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
     }
 
     switch (w->listIndex) {
@@ -1742,16 +1742,16 @@ void CycleRikuCardList(CardBattleWork* w) {
 
     if (w->reloadPending[w->listIndex] == 0) {
         CreateRikuCardDisplay(w, w->listIndex);
-        gRikuSelectedCard->x = 0x10400;
-        gRikuSelectedCard->y = 0x8C00;
-        gRikuSelectedCard->timer = 12;
+        sRikuSelectedCard->x = 0x10400;
+        sRikuSelectedCard->y = 0x8C00;
+        sRikuSelectedCard->timer = 12;
     } else {
-        gRikuSelectedCard = w->selectedCards[w->listIndex];
-        gRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
-        gRikuSelectedCard->swingAngle = sRikuCardSwingAngles[1];
-        gRikuSelectedCard->swingSteps = 12;
-        gRikuSelectedCard->timer = 12;
-        gRikuSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
+        sRikuSelectedCard = w->selectedCards[w->listIndex];
+        sRikuSelectedCard->swingAngleTarget = sRikuCardSwingAngles[0];
+        sRikuSelectedCard->swingAngle = sRikuCardSwingAngles[1];
+        sRikuSelectedCard->swingSteps = 12;
+        sRikuSelectedCard->timer = 12;
+        sRikuSelectedCard->flags |= CARD_DISP_FLAG_SELECTED;
     }
 
     gCardBattleState->rikuListIndex = w->listIndex;
@@ -1759,8 +1759,8 @@ void CycleRikuCardList(CardBattleWork* w) {
 
 void func_08080228(CardBattleWork* w) {
     if (gBtlWork->hcEffect == 0x30) {
-        if (gRikuSelectedCard->value != 0) {
-            gRikuSelectedCard->value -= gCardBattleState->activeValue;
+        if (sRikuSelectedCard->value != 0) {
+            sRikuSelectedCard->value -= gCardBattleState->activeValue;
         }
 
         gBtlWork->hcEffectCount--;
@@ -1809,7 +1809,7 @@ void TryRikuCardBreak(CardBattleWork* w) {
     f = gRikuBtlWork->hcEffect;
 
     if (f == 1) {
-        t = gRikuSelectedCard->value;
+        t = sRikuSelectedCard->value;
         n = t + 1;
 
         if (n > 9) {
@@ -1817,24 +1817,24 @@ void TryRikuCardBreak(CardBattleWork* w) {
         }
 
         if (t <= 8) {
-            TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &gRikuSelectedCard->cardDef);
+            TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &sRikuSelectedCard->cardDef);
         }
 
-        gRikuSelectedCard->value = n;
-        gRikuSelectedCard->valueModified = 1;
+        sRikuSelectedCard->value = n;
+        sRikuSelectedCard->valueModified = 1;
     } else if (f == 21) {
-        u = gRikuSelectedCard->value;
+        u = sRikuSelectedCard->value;
 
         if (u != 0) {
             n = u - 1;
-            gRikuSelectedCard->value = u - 1;
-            gRikuSelectedCard->valueModified = 1;
+            sRikuSelectedCard->value = u - 1;
+            sRikuSelectedCard->valueModified = 1;
         } else {
             n = 0;
-            gRikuSelectedCard->valueModified = 1;
+            sRikuSelectedCard->valueModified = 1;
         }
     } else {
-        n = gRikuSelectedCard->value;
+        n = sRikuSelectedCard->value;
     }
 
     if (gCardBattleState->activeValue > n && n != 0) {
@@ -1902,11 +1902,11 @@ void TryRikuCardBreak(CardBattleWork* w) {
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-        gRikuSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
+        sRikuSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
         func_08080228(w);
-        gCardBattleState->activeCards[0] = gRikuSelectedCard;
+        gCardBattleState->activeCards[0] = sRikuSelectedCard;
         gCardBattleState->activeCardCount = 1;
-        gCardBattleState->activeValue = gRikuSelectedCard->value;
+        gCardBattleState->activeValue = sRikuSelectedCard->value;
         gBtlWork->soraOwnsPlay = 0;
         AddBreakDarkPoints();
     } else {
@@ -1917,9 +1917,9 @@ void TryRikuCardBreak(CardBattleWork* w) {
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
         m4aSongNumStart(SONG_SYS_DROW);
         gBtlWork->soraOwnsPlay = 0;
-        gCardBattleState->activeCards[0] = gRikuSelectedCard;
+        gCardBattleState->activeCards[0] = sRikuSelectedCard;
         gCardBattleState->activeCardCount = 1;
-        gCardBattleState->activeValue = gRikuSelectedCard->value;
+        gCardBattleState->activeValue = sRikuSelectedCard->value;
     }
 }
 
@@ -1931,44 +1931,44 @@ u8 UseRikuCard(CardBattleWork* w) {
     u16 t;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
-        gCardBattleState->activeCards[0] = gRikuSelectedCard;
+        gCardBattleState->activeCards[0] = sRikuSelectedCard;
 
         if (gRikuBtlWork->hcEffect == 1) {
-            gCardBattleState->activeValue = gRikuSelectedCard->value + 1;
-            gRikuSelectedCard->value++;
-            gRikuSelectedCard->valueModified = 1;
+            gCardBattleState->activeValue = sRikuSelectedCard->value + 1;
+            sRikuSelectedCard->value++;
+            sRikuSelectedCard->valueModified = 1;
 
-            if (gRikuSelectedCard->value > 9) {
-                gRikuSelectedCard->value = 9;
+            if (sRikuSelectedCard->value > 9) {
+                sRikuSelectedCard->value = 9;
             }
 
             if (gCardBattleState->activeValue > 9) {
                 gCardBattleState->activeValue = 9;
             }
 
-            TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &gRikuSelectedCard->cardDef);
+            TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &sRikuSelectedCard->cardDef);
         } else if (gRikuBtlWork->hcEffect == 21) {
-            if (gRikuSelectedCard->value != 0) {
-                gCardBattleState->activeValue = gRikuSelectedCard->value - 1;
-                gRikuSelectedCard->value--;
-                gRikuSelectedCard->valueModified = 1;
+            if (sRikuSelectedCard->value != 0) {
+                gCardBattleState->activeValue = sRikuSelectedCard->value - 1;
+                sRikuSelectedCard->value--;
+                sRikuSelectedCard->valueModified = 1;
             } else {
                 gCardBattleState->activeValue = 0;
-                gRikuSelectedCard->valueModified = 1;
+                sRikuSelectedCard->valueModified = 1;
             }
         } else {
-            gCardBattleState->activeValue = gRikuSelectedCard->value;
+            gCardBattleState->activeValue = sRikuSelectedCard->value;
         }
 
         gCardBattleState->activeCardCount = 1;
-        gRikuSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
+        sRikuSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
         gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
     } else {
         if (gBtlWork->soraOwnsPlay == 0) {
-            gRikuSelectedCard->command = 0;
+            sRikuSelectedCard->command = 0;
             return 1;
         }
 
@@ -1983,27 +1983,27 @@ u8 UseRikuCard(CardBattleWork* w) {
 
     w->cardsLeft[w->listIndex]--;
 
-    if ((gRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_ITEM) && (gRikuSelectedCard->flags & CARD_DISP_FLAG_IN_PLAY)) {
-        gRikuSelectedCard->args.slot->removed = 1;
+    if ((sRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_ITEM) && (sRikuSelectedCard->flags & CARD_DISP_FLAG_IN_PLAY)) {
+        sRikuSelectedCard->args.slot->removed = 1;
     }
 
-    if (gRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        gRikuSelectedCard->args.slot->removed = 1;
+    if (sRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
+        sRikuSelectedCard->args.slot->removed = 1;
     }
 
-    if (gRikuSelectedCard->premium == 1) {
-        gRikuSelectedCard->args.slot->removed = 1;
+    if (sRikuSelectedCard->premium == 1) {
+        sRikuSelectedCard->args.slot->removed = 1;
 
         if (CountRemainingAttackCards(w, 0) == 0) {
-            gRikuSelectedCard->args.slot->removed = 0;
+            sRikuSelectedCard->args.slot->removed = 0;
         }
     }
 
-    w->playedCards[0] = gRikuSelectedCard;
-    gRikuSelectedCard->command = 5;
-    gRikuSelectedCard->priority = 50;
-    gRikuSelectedCard->args.slot->used = 1;
-    v = gRikuSelectedCard->args.index + 1;
+    w->playedCards[0] = sRikuSelectedCard;
+    sRikuSelectedCard->command = 5;
+    sRikuSelectedCard->priority = 50;
+    sRikuSelectedCard->args.slot->used = 1;
+    v = sRikuSelectedCard->args.index + 1;
 
     if ((s16)v >= w->slotCounts[w->listIndex]) {
         v = 0;
@@ -2022,8 +2022,8 @@ u8 UseRikuCard(CardBattleWork* w) {
         gRikuBtlWork->hcEffectCount = gHcEffectDefs[gRikuBtlWork->hcEffect].count;
     }
 
-    gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
-    gRikuSelectedCard = NULL;
+    sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
+    sRikuSelectedCard = NULL;
     c = FindNextAvailableSlot(w, w->listIndex, &v);
 
     if (c != NULL) {
@@ -2046,15 +2046,15 @@ u8 UseRikuCard(CardBattleWork* w) {
         p->x = p->ringCenterX;
         p->y = p->ringCenterY;
         p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-        gRikuSelectedCard = p;
+        sRikuSelectedCard = p;
     }
 
-    if (gRikuBtlWork->hcEffect == 40 && (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) &&
+    if (gRikuBtlWork->hcEffect == 40 && (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) &&
         w->cardsLeft[w->listIndex] == 1) {
         w->cardsLeft[w->listIndex] = 0;
-        gRikuSelectedCard->command = 7;
+        sRikuSelectedCard->command = 7;
         w->selectedCards[w->listIndex] = NULL;
-        gRikuSelectedCard = NULL;
+        sRikuSelectedCard = NULL;
         w->reloadPending[0] = 1;
 
 #ifndef VERSION_EU
@@ -2104,7 +2104,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
             p->y = p->ringCenterY;
             p->timer = 8;
             p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
-            gRikuSelectedCard = p;
+            sRikuSelectedCard = p;
             w->unk_C4[2]++;
             w->cardsLeft[w->listIndex]++;
         }
@@ -2120,7 +2120,7 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
         q->y = q->ringCenterY;
         q->priority = 50;
         q->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-        gRikuSelectedCard = q;
+        sRikuSelectedCard = q;
     }
 
     TickRikuHcEffectOnReload();
@@ -2134,11 +2134,11 @@ u8 StockRikuCard(CardBattleWork* w) {
     CardDisplayWork* p;
     u16 v;
 
-    if (!(gRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED)) {
+    if (!(sRikuSelectedCard->flags & CARD_DISP_FLAG_SETTLED)) {
         return 1;
     }
 
-    if (gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD) {
+    if (sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD) {
         return 1;
     }
 
@@ -2155,35 +2155,35 @@ u8 StockRikuCard(CardBattleWork* w) {
 #ifndef VERSION_EU
     m4aSongNumStart(SONG_SYS_KETEI2);
 #endif
-    gRikuSelectedCard->flags = (gRikuSelectedCard->flags & ~CARD_DISP_FLAG_SETTLED) | CARD_DISP_FLAG_STOCKED;
-    gRikuSelectedCard->command = 6;
-    gRikuSelectedCard->stockIndex = w->stockCount;
-    gRikuSelectedCard->priority = (3 - w->stockCount) * 4 + 50;
-    w->stock[w->stockCount] = gRikuSelectedCard;
-    gCardBattleState->rikuStockedCards[gCardBattleState->rikuStockedCount] = gRikuSelectedCard;
-    gRikuSelectedCard->args.slot->stocked = 1;
+    sRikuSelectedCard->flags = (sRikuSelectedCard->flags & ~CARD_DISP_FLAG_SETTLED) | CARD_DISP_FLAG_STOCKED;
+    sRikuSelectedCard->command = 6;
+    sRikuSelectedCard->stockIndex = w->stockCount;
+    sRikuSelectedCard->priority = (3 - w->stockCount) * 4 + 50;
+    w->stock[w->stockCount] = sRikuSelectedCard;
+    gCardBattleState->rikuStockedCards[gCardBattleState->rikuStockedCount] = sRikuSelectedCard;
+    sRikuSelectedCard->args.slot->stocked = 1;
 
     if (gRikuBtlWork->hcEffect == 1) {
-        n = gRikuSelectedCard->value + 1;
+        n = sRikuSelectedCard->value + 1;
 
         if (n > 9) {
             n = 9;
         }
 
-        gRikuSelectedCard->value = n;
-        gRikuSelectedCard->valueModified = 1;
-        TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &gRikuSelectedCard->cardDef);
+        sRikuSelectedCard->value = n;
+        sRikuSelectedCard->valueModified = 1;
+        TaskCreate(&gCardBattleState->tasks, &gTaskDescNumberPlus, &sRikuSelectedCard->cardDef);
     } else if (gRikuBtlWork->hcEffect == 21) {
-        if (gRikuSelectedCard->value != 0) {
-            n = gRikuSelectedCard->value - 1;
-            gRikuSelectedCard->value--;
-            gRikuSelectedCard->valueModified = 1;
+        if (sRikuSelectedCard->value != 0) {
+            n = sRikuSelectedCard->value - 1;
+            sRikuSelectedCard->value--;
+            sRikuSelectedCard->valueModified = 1;
         } else {
             n = 0;
-            gRikuSelectedCard->valueModified = 1;
+            sRikuSelectedCard->valueModified = 1;
         }
     } else {
-        n = gRikuSelectedCard->value;
+        n = sRikuSelectedCard->value;
     }
 
     w->stockValue += n;
@@ -2197,19 +2197,19 @@ u8 StockRikuCard(CardBattleWork* w) {
 
     w->cardsLeft[w->listIndex]--;
 
-    if (gRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        gRikuSelectedCard->args.slot->removed = 1;
+    if (sRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
+        sRikuSelectedCard->args.slot->removed = 1;
     }
 
-    gRikuSelectedCard->args.slot->used = 1;
-    v = gRikuSelectedCard->args.index + 1;
+    sRikuSelectedCard->args.slot->used = 1;
+    v = sRikuSelectedCard->args.index + 1;
 
     if ((s16)v >= w->slotCounts[w->listIndex]) {
         v = 0;
     }
 
-    gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
-    gRikuSelectedCard = NULL;
+    sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
+    sRikuSelectedCard = NULL;
 
     if (gRikuBtlWork->hcEffect == 37) {
         t = GetRandomHcEffect();
@@ -2242,15 +2242,15 @@ u8 StockRikuCard(CardBattleWork* w) {
         p->x = p->ringCenterX;
         p->y = p->ringCenterY;
         p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-        gRikuSelectedCard = p;
+        sRikuSelectedCard = p;
     }
 
-    if (gRikuBtlWork->hcEffect == 40 && (gRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) &&
+    if (gRikuBtlWork->hcEffect == 40 && (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) &&
         w->cardsLeft[w->listIndex] == 1) {
         w->cardsLeft[w->listIndex] = 0;
-        gRikuSelectedCard->command = 7;
+        sRikuSelectedCard->command = 7;
         w->selectedCards[w->listIndex] = NULL;
-        gRikuSelectedCard = NULL;
+        sRikuSelectedCard = NULL;
         w->reloadPending[0] = 1;
 
 #ifndef VERSION_EU
@@ -2535,33 +2535,33 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
     u16 v;
     CardDisplayWork** pp;
 
-    if ((gRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD) == 0) {
+    if ((sRikuSelectedCard->flags & CARD_DISP_FLAG_NO_CARD) == 0) {
         if (gCardBattleState->rikuHcEffect == 0) {
-            gCardBattleState->rikuHcEffect = gRikuSelectedCard->cardDef->move;
+            gCardBattleState->rikuHcEffect = sRikuSelectedCard->cardDef->move;
             func_08081740(w, gCardBattleState->rikuHcEffect);
             ApplyRikuHcEffect(w);
-            pp = &gRikuSelectedCard;
+            pp = &sRikuSelectedCard;
         } else {
             SyncRikuHcEffect(w);
-            gCardBattleState->rikuHcEffect = gRikuSelectedCard->cardDef->move;
+            gCardBattleState->rikuHcEffect = sRikuSelectedCard->cardDef->move;
             func_08081740(w, gCardBattleState->rikuHcEffect);
             ApplyRikuHcEffect(w);
             gCardBattleState->rikuHcEffectReplaced = 1;
-            pp = &gRikuSelectedCard;
+            pp = &sRikuSelectedCard;
         }
 
-        gRikuSelectedCard->args.slot->removed = 1;
-        gRikuSelectedCard->command = 10;
-        gRikuSelectedCard->priority = 50;
-        gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
+        sRikuSelectedCard->args.slot->removed = 1;
+        sRikuSelectedCard->command = 10;
+        sRikuSelectedCard->priority = 50;
+        sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
         if (w->stockValue > 1) {
             UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((w->stockValue - 1) << 7));
             w->unk_C4[3] = 8;
         }
 
-        gRikuSelectedCard->args.slot->used = 1;
-        q = gRikuSelectedCard;
+        sRikuSelectedCard->args.slot->used = 1;
+        q = sRikuSelectedCard;
         v = q->args.index + 1;
 
         if ((s16)v >= w->slotCounts[w->listIndex]) {
@@ -2569,7 +2569,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
         }
 
         q->flags &= ~CARD_DISP_FLAG_SETTLED;
-        gRikuSelectedCard = NULL;
+        sRikuSelectedCard = NULL;
         w->cardsLeft[w->listIndex]--;
         c = FindNextAvailableSlot(w, w->listIndex, &v);
 
@@ -2593,7 +2593,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             p->x = p->ringCenterX;
             p->y = p->ringCenterY;
             p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_VISIBLE);
-            gRikuSelectedCard = p;
+            sRikuSelectedCard = p;
         } else {
             args.pool = &w->cardDisplays[w->listIndex];
             args.index = 0xFFFF;
@@ -2605,7 +2605,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             p->priority = 50;
             p->timer = 4;
             p->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_VISIBLE);
-            gRikuSelectedCard = p;
+            sRikuSelectedCard = p;
         }
 
         if (*pp == NULL) {
@@ -2687,16 +2687,16 @@ u8 GetActiveCardValue() {
 }
 
 s32 GetRikuSelectedCardMoveRaw() {
-    if (gRikuSelectedCard != NULL) {
-        return gRikuSelectedCard->cardDef->move;
+    if (sRikuSelectedCard != NULL) {
+        return sRikuSelectedCard->cardDef->move;
     }
 
     return 145;
 }
 
 u8 GetRikuSelectedCardValue() {
-    if (gRikuSelectedCard != NULL) {
-        return gRikuSelectedCard->value;
+    if (sRikuSelectedCard != NULL) {
+        return sRikuSelectedCard->value;
     }
 
     return 0xFF;
@@ -2704,21 +2704,21 @@ u8 GetRikuSelectedCardValue() {
 
 u8 CanUseRikuSelectedCard() {
     if (gRikuBtlWork->hcEffect == 38) {
-        if (gRikuSelectedCard->cardDef->category != 1) {
+        if (sRikuSelectedCard->cardDef->category != 1) {
             return 1;
         }
 
-        if (!(gRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON)) {
+        if (!(sRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON)) {
             return 1;
         }
 
         return 0;
     } else if (gRikuBtlWork->hcEffect == 39) {
-        if (gRikuSelectedCard->cardDef->category != 1) {
+        if (sRikuSelectedCard->cardDef->category != 1) {
             return 1;
         }
 
-        if (gRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON) {
+        if (sRikuSelectedCard->cardDef->flags & CARD_DEF_FLAG_SUMMON) {
             return 1;
         }
 

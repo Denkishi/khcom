@@ -17,7 +17,7 @@
 
 extern BgAnimationDef* gChkEffBgAnimations[83];
 
-ChkEffWork* gChkEffWork;
+static ChkEffWork* sChkEffWork;
 
 static const char sChkEffPauseText[8] = "PAUSE";
 static const char sChkEffPauseBlankText[8] = "     ";
@@ -30,7 +30,7 @@ static const char sChkEffPicLabel[4] = "pic";
 static const char sChkEffFrameLabel[8] = "frame";
 
 void mode_chkeff_0() {
-    gChkEffWork = EwramAlloc(sizeof(ChkEffWork));
+    sChkEffWork = EwramAlloc(sizeof(ChkEffWork));
     SetBgMode1();
     SetupBg(0, 0, 7, 0);
     SetupBg(1, 1, 12, 8);
@@ -57,16 +57,16 @@ void mode_chkeff_0() {
     FadeSetPaletteExcluded(14, 1);
     FadeSetPaletteExcluded(15, 1);
     BgAnimInit(2, 0x8000, 0x80);
-    TaskPoolInit(&gChkEffWork->pool, 1);
-    TaskCreate(&gChkEffWork->pool, &gTaskDescPrint, NULL);
-    gChkEffWork->effectIndex = 0;
-    gChkEffWork->paused = 0;
-    gChkEffWork->scrollX = 0;
-    gChkEffWork->scrollY = 0;
-    gChkEffWork->scale = 0x100;
-    gChkEffWork->rotation = 0;
-    gChkEffWork->alphaA = 16;
-    gChkEffWork->alphaB = 16;
+    TaskPoolInit(&sChkEffWork->pool, 1);
+    TaskCreate(&sChkEffWork->pool, &gTaskDescPrint, NULL);
+    sChkEffWork->effectIndex = 0;
+    sChkEffWork->paused = 0;
+    sChkEffWork->scrollX = 0;
+    sChkEffWork->scrollY = 0;
+    sChkEffWork->scale = 0x100;
+    sChkEffWork->rotation = 0;
+    sChkEffWork->alphaA = 16;
+    sChkEffWork->alphaB = 16;
     BgAnimStart(gChkEffBgAnimations[0], 0x78, 0x50);
 }
 
@@ -81,74 +81,74 @@ void mode_chkeff_1() {
         ModeRequest(&gModeDebug, 0);
     } else {
         if (GetKeysPressed() & START_BUTTON) {
-            gChkEffWork->paused = !gChkEffWork->paused;
+            sChkEffWork->paused = !sChkEffWork->paused;
         }
 
-        prev = gChkEffWork->effectIndex;
+        prev = sChkEffWork->effectIndex;
 
         if (GetKeysRepeat() & DPAD_LEFT) {
-            gChkEffWork->effectIndex--;
+            sChkEffWork->effectIndex--;
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            gChkEffWork->effectIndex++;
+            sChkEffWork->effectIndex++;
         }
 
-        if (gChkEffWork->effectIndex < 0) {
-            gChkEffWork->effectIndex = 82;
+        if (sChkEffWork->effectIndex < 0) {
+            sChkEffWork->effectIndex = 82;
         }
 
-        if ((u16)gChkEffWork->effectIndex > 82) {
-            gChkEffWork->effectIndex = 0;
+        if ((u16)sChkEffWork->effectIndex > 82) {
+            sChkEffWork->effectIndex = 0;
         }
 
-        obj = gChkEffBgAnimations[gChkEffWork->effectIndex];
+        obj = gChkEffBgAnimations[sChkEffWork->effectIndex];
 
-        if (prev != gChkEffWork->effectIndex) {
-            gChkEffWork->paused = 0;
+        if (prev != sChkEffWork->effectIndex) {
+            sChkEffWork->paused = 0;
             BgAnimStart(obj, 120, 80);
         }
 
         if (GetKeysRepeat() & DPAD_UP) {
-            gChkEffWork->scale += 8;
+            sChkEffWork->scale += 8;
         } else if (GetKeysRepeat() & DPAD_DOWN) {
-            gChkEffWork->scale -= 8;
+            sChkEffWork->scale -= 8;
         }
 
         if (GetKeysPressed() & SELECT_BUTTON) {
-            gChkEffWork->scale = 0x100;
-            gChkEffWork->rotation = 0;
+            sChkEffWork->scale = 0x100;
+            sChkEffWork->rotation = 0;
         }
 
         if (GetKeysRepeat() & L_BUTTON) {
-            gChkEffWork->alphaA++;
-            gChkEffWork->alphaA %= 17;
+            sChkEffWork->alphaA++;
+            sChkEffWork->alphaA %= 17;
         }
 
         if (GetKeysRepeat() & R_BUTTON) {
-            gChkEffWork->alphaB++;
-            gChkEffWork->alphaB %= 17;
+            sChkEffWork->alphaB++;
+            sChkEffWork->alphaB %= 17;
         }
 
-        if (gChkEffWork->scale <= 9) {
-            gChkEffWork->scale = 10;
+        if (sChkEffWork->scale <= 9) {
+            sChkEffWork->scale = 10;
         }
 
-        if (gChkEffWork->scale > 0xA00) {
-            gChkEffWork->scale = 0xA00;
+        if (sChkEffWork->scale > 0xA00) {
+            sChkEffWork->scale = 0xA00;
         }
 
         if (BgAnimIsStopped() && (GetKeysHeld() & A_BUTTON)) {
             BgAnimStart(obj, 120, 80);
         }
 
-        if (gChkEffWork->paused != 0) {
+        if (sChkEffWork->paused != 0) {
             PrintString(0, 0, 0, sChkEffPauseText);
         } else {
             PrintString(0, 0, 0, sChkEffPauseBlankText);
         }
 
-        wp = &gChkEffWork;
+        wp = &sChkEffWork;
         PrintString(0, 14, 0, sChkEffBlankLineText);
         PrintString(0, 15, 0, sChkEffBlankLineText);
         PrintString(0, 16, 0, sChkEffBlankLineText);
@@ -177,17 +177,17 @@ void mode_chkeff_1() {
             BgAnimUpdate();
         }
 
-        SetBgScroll(1, gChkEffWork->scrollX, gChkEffWork->scrollY);
+        SetBgScroll(1, sChkEffWork->scrollX, sChkEffWork->scrollY);
 
         if ((gFrameCounter & 3) == 0) {
-            gChkEffWork->scrollY--;
+            sChkEffWork->scrollY--;
         }
     }
 }
 
 void mode_chkeff_2() {
-    TaskPoolDestroy(&gChkEffWork->pool);
-    EwramFree(gChkEffWork);
+    TaskPoolDestroy(&sChkEffWork->pool);
+    EwramFree(sChkEffWork);
 }
 
 BgAnimationDef* gChkEffBgAnimations[83] = {

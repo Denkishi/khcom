@@ -86,7 +86,6 @@ typedef struct CardBattleState {
 
 typedef char CardBattleState_size[(sizeof(CardBattleState) == 0x10C) ? 1 : -1];
 
-extern struct CardDisplayWork* gSoraSelectedCard;
 extern CardBattleState* gCardBattleState;
 
 void SetSoraReloadCharging();

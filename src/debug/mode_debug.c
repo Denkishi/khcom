@@ -27,7 +27,7 @@
 #include <stddef.h>
 #include "types.h"
 
-DebugWork* gDebugWork;
+static DebugWork* sDebugWork;
 
 #ifdef VERSION_US
 const char gVersionString[12] = "N041001a";
@@ -42,7 +42,7 @@ void mode_debug_0() {
 #ifdef VERSION_EU
     SaveLoadHeader();
 #endif
-    gDebugWork = EwramAlloc(sizeof(DebugWork));
+    sDebugWork = EwramAlloc(sizeof(DebugWork));
     FadeStartIn(FADE_MODE_WHITE, 16);
     ResetGameState();
 #ifdef VERSION_EU
@@ -67,10 +67,10 @@ void mode_debug_0() {
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
     DebugTextLoadPalette(0, gUnk_08F68604, 0x20, 0x0F);
-    gDebugWork->tiles = LoadObjTiles(gUnk_08950902, 0x2E0);
-    gDebugWork->palette = LoadObjPalette(gUnk_08F685E4, 0x20);
-    AnimInit(&gDebugWork->anim, gUnk_09EDF774, gUnk_09EDF764);
-    AnimStart(&gDebugWork->anim, 0, ANIM_FLAG_LOOP);
+    sDebugWork->tiles = LoadObjTiles(gUnk_08950902, 0x2E0);
+    sDebugWork->palette = LoadObjPalette(gUnk_08F685E4, 0x20);
+    AnimInit(&sDebugWork->anim, gUnk_09EDF774, gUnk_09EDF764);
+    AnimStart(&sDebugWork->anim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_JP
     DebugTextPrint(0, 0, 2, "\x82\x69\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");
 #elif defined(VERSION_EU)
@@ -87,8 +87,8 @@ void mode_debug_0() {
         DebugTextPrint(144, 150, 2, "\x82\x61\x82\x71\x82\x68\x82\x66\x82\x67\x82\x73\x82\x6d\x82\x64\x82\x72\x82\x72");
     }
 
-    gDebugWork->cursor = 0;
-    gDebugWork->page = -1;
+    sDebugWork->cursor = 0;
+    sDebugWork->page = -1;
 }
 
 void mode_debug_1() {
@@ -118,16 +118,16 @@ void mode_debug_1() {
     }
 
     if (GetKeysRepeat() & DPAD_UP) {
-        gDebugWork->cursor--;
+        sDebugWork->cursor--;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        gDebugWork->cursor++;
+        sDebugWork->cursor++;
         m4aSongNumStart(SONG_SYS_CLICK);
     }
 
-    switch (gDebugWork->cursor) {
+    switch (sDebugWork->cursor) {
     case 0:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
 #ifdef VERSION_EU
@@ -278,10 +278,10 @@ void mode_debug_1() {
 
         break;
     case 19:
-        gDebugWork->cursor = 0;
+        sDebugWork->cursor = 0;
         break;
     case -1:
-        gDebugWork->cursor = 18;
+        sDebugWork->cursor = 18;
         break;
 #else
     case 13:
@@ -315,37 +315,37 @@ void mode_debug_1() {
 
         break;
     case 18:
-        gDebugWork->cursor = 0;
+        sDebugWork->cursor = 0;
         break;
     case -1:
-        gDebugWork->cursor = 17;
+        sDebugWork->cursor = 17;
         break;
 #endif
     }
 
-    old = gDebugWork->page;
-    gDebugWork->page = gDebugWork->cursor / 9;
+    old = sDebugWork->page;
+    sDebugWork->page = sDebugWork->cursor / 9;
 
     if (GetKeysRepeat() & DPAD_LEFT) {
-        gDebugWork->page--;
+        sDebugWork->page--;
 
-        if (gDebugWork->page < 0) {
-            gDebugWork->page = 2;
+        if (sDebugWork->page < 0) {
+            sDebugWork->page = 2;
         }
 
-        gDebugWork->cursor = gDebugWork->page * 9;
+        sDebugWork->cursor = sDebugWork->page * 9;
     } else if (GetKeysRepeat() & DPAD_RIGHT) {
-        gDebugWork->page++;
+        sDebugWork->page++;
 
-        if (gDebugWork->page > 2) {
-            gDebugWork->page = 0;
+        if (sDebugWork->page > 2) {
+            sDebugWork->page = 0;
         }
 
-        gDebugWork->cursor = gDebugWork->page * 9;
+        sDebugWork->cursor = sDebugWork->page * 9;
     }
 
-    if (old != gDebugWork->page) {
-        switch (gDebugWork->page) {
+    if (old != sDebugWork->page) {
+        switch (sDebugWork->page) {
         case 0:
             DebugTextPrint(24, 12, 2, "\x82\x6c\x82\x60\x82\x68\x82\x6d\x81\x40\x81\x40\x81\x40\x81\x40");
             DebugTextPrint(24, 28, 2, "\x82\x6e\x82\x61\x82\x69\x82\x64\x82\x62\x82\x73\x81\x40\x81\x40");
@@ -403,16 +403,16 @@ void mode_debug_1() {
 
     DebugTextDraw(0);
     DebugTextClear();
-    gfx = AnimUpdate(&gDebugWork->anim);
-    DrawSprite(9, gDebugWork->cursor % 9 * 16 + 13, gfx, gDebugWork->tiles,
-               gDebugWork->palette, NULL, 0, 0);
+    gfx = AnimUpdate(&sDebugWork->anim);
+    DrawSprite(9, sDebugWork->cursor % 9 * 16 + 13, gfx, sDebugWork->tiles,
+               sDebugWork->palette, NULL, 0, 0);
 }
 
 void mode_debug_2() {
     DebugTextDestroy();
-    ReleaseObjTiles(gDebugWork->tiles);
-    ReleaseObjPalette(gDebugWork->palette);
-    EwramFree(gDebugWork);
+    ReleaseObjTiles(sDebugWork->tiles);
+    ReleaseObjPalette(sDebugWork->palette);
+    EwramFree(sDebugWork);
 }
 
 Mode gModeDebug = { "mode_debug", mode_debug_0, mode_debug_1, mode_debug_2 };

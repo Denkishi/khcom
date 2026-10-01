@@ -12,7 +12,7 @@
 
 #ifdef VERSION_EU
 
-MovieDebugWork* gMovieDebugWorkEu;
+static MovieDebugWork* sMovieDebugWorkEu;
 
 extern const char gMovieDebugTextEu_0812F6D4[];
 extern const char gMovieDebugTextEu_0812F6F4[];
@@ -20,11 +20,11 @@ extern const char gMovieDebugTextEu_0812F6F4[];
 extern const MovieDebugEntry gMovieDebugEntriesEu[5];
 
 void eu_0800C76C(s32 arg) {
-    gMovieDebugWorkEu = EwramAlloc(sizeof(MovieDebugWork));
+    sMovieDebugWorkEu = EwramAlloc(sizeof(MovieDebugWork));
     SetBgMode0();
-    gMovieDebugWorkEu->index = 0;
-    TaskPoolInit(&gMovieDebugWorkEu->pool, 10);
-    TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, NULL);
+    sMovieDebugWorkEu->index = 0;
+    TaskPoolInit(&sMovieDebugWorkEu->pool, 10);
+    TaskCreate(&sMovieDebugWorkEu->pool, &gTaskDescPrint, NULL);
 }
 
 void mode_chkmov_1() {
@@ -36,37 +36,37 @@ void mode_chkmov_1() {
     }
 
     if (GetKeysRepeat() & DPAD_LEFT) {
-        gMovieDebugWorkEu->index--;
+        sMovieDebugWorkEu->index--;
     }
 
     if (GetKeysRepeat() & DPAD_RIGHT) {
-        gMovieDebugWorkEu->index++;
+        sMovieDebugWorkEu->index++;
     }
 
-    if (gMovieDebugWorkEu->index < 0) {
-        gMovieDebugWorkEu->index = 4;
+    if (sMovieDebugWorkEu->index < 0) {
+        sMovieDebugWorkEu->index = 4;
     }
 
-    if (gMovieDebugWorkEu->index > 4) {
-        gMovieDebugWorkEu->index = 0;
+    if (sMovieDebugWorkEu->index > 4) {
+        sMovieDebugWorkEu->index = 0;
     }
 
     if (GetKeysPressed() & A_BUTTON) {
-        ModeRequestHeapReset(&gModeMovie, gMovieDebugEntriesEu[gMovieDebugWorkEu->index].movie);
+        ModeRequestHeapReset(&gModeMovie, gMovieDebugEntriesEu[sMovieDebugWorkEu->index].movie);
         return;
     }
 
     PrintString(0, 0, 0, gMovieDebugTextEu_0812F6D4);
-    PrintNumber(0, 0, 0, gMovieDebugWorkEu->index);
+    PrintNumber(0, 0, 0, sMovieDebugWorkEu->index);
     PrintString(5, 0, 0, gMovieDebugTextEu_0812F6F4);
-    PrintString(7, 0, 0, gMovieDebugEntriesEu[gMovieDebugWorkEu->index].label);
-    TaskPoolUpdate(&gMovieDebugWorkEu->pool);
-    TaskPoolDraw(&gMovieDebugWorkEu->pool);
+    PrintString(7, 0, 0, gMovieDebugEntriesEu[sMovieDebugWorkEu->index].label);
+    TaskPoolUpdate(&sMovieDebugWorkEu->pool);
+    TaskPoolDraw(&sMovieDebugWorkEu->pool);
 }
 
 void mode_chkmov_2() {
-    TaskPoolDestroy(&gMovieDebugWorkEu->pool);
-    EwramFree(gMovieDebugWorkEu);
+    TaskPoolDestroy(&sMovieDebugWorkEu->pool);
+    EwramFree(sMovieDebugWorkEu);
 }
 
 const MovieDebugEntry gMovieDebugEntriesEu[5] = {

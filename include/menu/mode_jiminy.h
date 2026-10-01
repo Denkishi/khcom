@@ -8,7 +8,6 @@
 extern u8 gUnk_09A3CDDC[];
 #endif
 
-extern JiminyWork* gJiminyWork;
 
 extern TextChar gUnk_08159FE0[];
 extern u8 gTalk0600Tiles[];

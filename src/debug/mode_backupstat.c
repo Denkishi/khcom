@@ -23,10 +23,10 @@ static const BackupStatEntry sBackupStatEntryTable[6] = {
     {"\x82\x72\x82\x74\x82\x72\x82\x6F\x82\x64\x82\x6D\x82\x63", 4},
 };
 
-s8 gBackupStatCursor;
-s8 gBackupStatCount;
-const BackupStatEntry* gBackupStatEntries;
-s16 gBackupStatStates[12];
+static s8 sBackupStatCursor;
+static s8 sBackupStatCount;
+static const BackupStatEntry* sBackupStatEntries;
+static s16 sBackupStatStates[12];
 
 void mode_backupstat_0() {
     s32 i;
@@ -37,38 +37,38 @@ void mode_backupstat_0() {
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
     DebugTextLoadPalette(0, gWhitePalette, 32, 15);
-    gBackupStatCursor = 0;
+    sBackupStatCursor = 0;
     DebugTextPrint(0, 0, 2, "\x81\x84");
-    gBackupStatCount = 6;
-    gBackupStatEntries = sBackupStatEntryTable;
+    sBackupStatCount = 6;
+    sBackupStatEntries = sBackupStatEntryTable;
 
-    for (i = 0; i < gBackupStatCount; i++) {
+    for (i = 0; i < sBackupStatCount; i++) {
         for (j = 0; j <= 1; j++) {
             switch (i) {
             case 0:
-                gBackupStatStates[i * 2 + j] = SaveCheckHeaderSlot(j);
+                sBackupStatStates[i * 2 + j] = SaveCheckHeaderSlot(j);
                 break;
             case 1:
-                gBackupStatStates[i * 2 + j] = SaveCheckFileLargeSlot(0, j);
+                sBackupStatStates[i * 2 + j] = SaveCheckFileLargeSlot(0, j);
                 break;
             case 2:
-                gBackupStatStates[i * 2 + j] = SaveCheckFileLargeSlot(1, j);
+                sBackupStatStates[i * 2 + j] = SaveCheckFileLargeSlot(1, j);
                 break;
             case 3:
-                gBackupStatStates[i * 2 + j] = SaveCheckFileSmallSlot(0, j);
+                sBackupStatStates[i * 2 + j] = SaveCheckFileSmallSlot(0, j);
                 break;
             case 4:
-                gBackupStatStates[i * 2 + j] = SaveCheckFileSmallSlot(1, j);
+                sBackupStatStates[i * 2 + j] = SaveCheckFileSmallSlot(1, j);
                 break;
             case 5:
-                gBackupStatStates[i * 2 + j] = SaveCheckSystemSlot(j);
+                sBackupStatStates[i * 2 + j] = SaveCheckSystemSlot(j);
                 break;
             }
         }
     }
 
-    for (i = 0; i < gBackupStatCount * 2; i++) {
-        DebugTextPrint(12, i * 9, 2, gBackupStatEntries[i / 2].name);
+    for (i = 0; i < sBackupStatCount * 2; i++) {
+        DebugTextPrint(12, i * 9, 2, sBackupStatEntries[i / 2].name);
 
         switch (i % 2) {
         case 0:
@@ -79,70 +79,70 @@ void mode_backupstat_0() {
             break;
         }
 
-        DebugTextPrint(120, i * 9, 2, sBackupStatStateNames[gBackupStatStates[i]]);
+        DebugTextPrint(120, i * 9, 2, sBackupStatStateNames[sBackupStatStates[i]]);
     }
 }
 
 void BackupStatApplyState() {
     u16 slot;
 
-    slot = gBackupStatCursor % 2;
+    slot = sBackupStatCursor % 2;
 
-    switch (gBackupStatCursor / 2) {
+    switch (sBackupStatCursor / 2) {
     case 0:
-        SaveSetHeaderState(slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetHeaderState(slot, sBackupStatStates[sBackupStatCursor]);
         break;
     case 1:
-        SaveSetFileLargeState(0, slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetFileLargeState(0, slot, sBackupStatStates[sBackupStatCursor]);
         break;
     case 2:
-        SaveSetFileLargeState(1, slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetFileLargeState(1, slot, sBackupStatStates[sBackupStatCursor]);
         break;
     case 3:
-        SaveSetFileSmallState(0, slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetFileSmallState(0, slot, sBackupStatStates[sBackupStatCursor]);
         break;
     case 4:
-        SaveSetFileSmallState(1, slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetFileSmallState(1, slot, sBackupStatStates[sBackupStatCursor]);
         break;
     case 5:
-        SaveSetSystemState(slot, gBackupStatStates[gBackupStatCursor]);
+        SaveSetSystemState(slot, sBackupStatStates[sBackupStatCursor]);
         break;
     }
 
-    DebugTextPrint(120, gBackupStatCursor * 9, 2, sBackupStatStateNames[gBackupStatStates[gBackupStatCursor]]);
+    DebugTextPrint(120, sBackupStatCursor * 9, 2, sBackupStatStateNames[sBackupStatStates[sBackupStatCursor]]);
 }
 
 void mode_backupstat_1() {
     u8 prev;
 
-    prev = gBackupStatCursor;
+    prev = sBackupStatCursor;
 
     if (GetKeysRepeat() & DPAD_UP) {
-        gBackupStatCursor--;
+        sBackupStatCursor--;
     } else if (GetKeysRepeat() & DPAD_DOWN) {
-        gBackupStatCursor++;
+        sBackupStatCursor++;
     }
 
-    if (prev != gBackupStatCursor) {
-        if (gBackupStatCursor < 0) {
-            gBackupStatCursor = gBackupStatCount * 2 - 1;
-        } else if (gBackupStatCursor >= gBackupStatCount * 2) {
-            gBackupStatCursor = 0;
+    if (prev != sBackupStatCursor) {
+        if (sBackupStatCursor < 0) {
+            sBackupStatCursor = sBackupStatCount * 2 - 1;
+        } else if (sBackupStatCursor >= sBackupStatCount * 2) {
+            sBackupStatCursor = 0;
         }
 
         DebugTextPrint(0, prev * 9, 2, "\x81\x40");
-        DebugTextPrint(0, gBackupStatCursor * 9, 2, "\x81\x84");
+        DebugTextPrint(0, sBackupStatCursor * 9, 2, "\x81\x84");
     }
 
     if ((GetKeysPressed() & DPAD_LEFT) != 0) {
-        if (--gBackupStatStates[gBackupStatCursor] < 0) {
-            gBackupStatStates[gBackupStatCursor] = 2;
+        if (--sBackupStatStates[sBackupStatCursor] < 0) {
+            sBackupStatStates[sBackupStatCursor] = 2;
         }
 
         BackupStatApplyState();
     } else if (GetKeysPressed() & DPAD_RIGHT) {
-        if (++gBackupStatStates[gBackupStatCursor] > 2) {
-            gBackupStatStates[gBackupStatCursor] = 0;
+        if (++sBackupStatStates[sBackupStatCursor] > 2) {
+            sBackupStatStates[sBackupStatCursor] = 0;
         }
 
         BackupStatApplyState();

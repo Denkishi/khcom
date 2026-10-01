@@ -430,9 +430,9 @@ static TaskDesc sTaskDescBosUrsulaMapanime = {
     sizeof(UrsulaMapanimeWork),
 };
 
-UrsulaWork* gUrsulaWork;
+static UrsulaWork* sUrsulaWork;
 
-UrsulaMapanimeWork* gUrsulaMapanimeWork;
+static UrsulaMapanimeWork* sUrsulaMapanimeWork;
 
 u8 ClampBoogieDicePosition(s32* a, s32* b, s16 c, u16 d) {
     u8 r;
@@ -1828,7 +1828,7 @@ u8 BosUrsulaIsGuarded(UrsulaWork* work) {
 void task_bos_ursula_0(UrsulaWork* work) {
     u8 v;
 
-    gUrsulaWork = work;
+    sUrsulaWork = work;
     gBosUrsulaActive = 1;
     TaskCreate(&gBtlWork->taskPools[1], &sTaskDescBosUrsulaMap, (void*)&sBosUrsulaBattleBackgroundDef);
     TaskCreate(&gBtlWork->taskPools[0], &sTaskDescBosUrsulaBorder, NULL);
@@ -2258,11 +2258,11 @@ void task_bos_ursula_3(UrsulaWork* work) {
 }
 
 u8 BosUrsulaIsFacingLeft() {
-    return gUrsulaWork->obj.flags & BTLOBJ_FLAG_FACING_LEFT;
+    return sUrsulaWork->obj.flags & BTLOBJ_FLAG_FACING_LEFT;
 }
 
 u8 BosUrsulaIsGimmickActive() {
-    if (gUrsulaWork->gimmickTimer == 0) {
+    if (sUrsulaWork->gimmickTimer == 0) {
         return 0;
     }
 
@@ -2284,7 +2284,7 @@ u8 BosUrsulaObjectsGone() {
 }
 
 u8 BosUrsulaIsGimmickStarting() {
-    if (BosUrsulaObjectsGone() != 0 || BosUrsulaIsGimmickActive() == 0 || gUrsulaWork->gimmickDelay == 0) {
+    if (BosUrsulaObjectsGone() != 0 || BosUrsulaIsGimmickActive() == 0 || sUrsulaWork->gimmickDelay == 0) {
         return 0;
     }
 
@@ -2292,7 +2292,7 @@ u8 BosUrsulaIsGimmickStarting() {
 }
 
 u8 func_080DC5B0() {
-    if (BosUrsulaIsGimmickActive() != 0 && (gUrsulaWork->sinkSteps != 0 || gUrsulaWork->riseSteps != 0 || gUrsulaWork->unk_15C != 0)) {
+    if (BosUrsulaIsGimmickActive() != 0 && (sUrsulaWork->sinkSteps != 0 || sUrsulaWork->riseSteps != 0 || sUrsulaWork->unk_15C != 0)) {
         return 1;
     }
 
@@ -2300,7 +2300,7 @@ u8 func_080DC5B0() {
 }
 
 u32 BosUrsulaGetHpPhase() {
-    UrsulaWork* work = gUrsulaWork;
+    UrsulaWork* work = sUrsulaWork;
 
     if (work->obj.hp > (s16)(work->obj.maxHp / 3) * 2) {
         return 0;
@@ -2314,7 +2314,7 @@ u32 BosUrsulaGetHpPhase() {
 }
 
 u8 BosUrsulaIsDefeated() {
-    if (gUrsulaWork->state == 4) {
+    if (sUrsulaWork->state == 4) {
         return 1;
     }
 
@@ -2850,7 +2850,7 @@ void task_bos_ursula_backtako_3(UrsulaBacktakoWork* work) {
 }
 
 void task_bos_ursula_mapanime_0(UrsulaMapanimeWork* work) {
-    gUrsulaMapanimeWork = work;
+    sUrsulaMapanimeWork = work;
     TaskPoolInit(&work->tasks, 1);
     work->task = NULL;
     work->attack = 4;
@@ -2915,40 +2915,40 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work) {
 }
 
 void BosUrsulaStartAttack(s32 a) {
-    if (IsTaskActive(gUrsulaMapanimeWork->task) != 0) {
-        if (strcmp(GetTaskName(gUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
-            BosUrsulaPopBubbles(gUrsulaMapanimeWork->task->work);
+    if (IsTaskActive(sUrsulaMapanimeWork->task) != 0) {
+        if (strcmp(GetTaskName(sUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
+            BosUrsulaPopBubbles(sUrsulaMapanimeWork->task->work);
         } else {
-            TaskKill(&gUrsulaMapanimeWork->tasks, gUrsulaMapanimeWork->task);
+            TaskKill(&sUrsulaMapanimeWork->tasks, sUrsulaMapanimeWork->task);
         }
     }
 
     if (a == 3) {
-        gUrsulaMapanimeWork->task = TaskCreate(&gUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, NULL);
-    } else if (gUrsulaMapanimeWork->attack != a) {
-        gUrsulaMapanimeWork->attack = a;
+        sUrsulaMapanimeWork->task = TaskCreate(&sUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, NULL);
+    } else if (sUrsulaMapanimeWork->attack != a) {
+        sUrsulaMapanimeWork->attack = a;
 
         if (a == 0) {
-            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeRecover);
-            gUrsulaMapanimeWork->attackSpawned = 1;
+            BosMapanimeInit(&sUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeRecover);
+            sUrsulaMapanimeWork->attackSpawned = 1;
         } else {
-            BosMapanimeInit(&gUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeWindup);
-            gUrsulaMapanimeWork->attackSpawned = 0;
+            BosMapanimeInit(&sUrsulaMapanimeWork->anim, &sBosUrsulaMapanimeWindup);
+            sUrsulaMapanimeWork->attackSpawned = 0;
             m4aSongNumStart(SONG_VO_UR_ATTACK00);
         }
     }
 }
 
 u8 BosUrsulaIsAttacking() {
-    if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeBubble || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge || gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeWindup) {
+    if (sUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeBubble || sUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge || sUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeWindup) {
         return 1;
     }
 
-    return IsTaskActive(gUrsulaMapanimeWork->task);
+    return IsTaskActive(sUrsulaMapanimeWork->task);
 }
 
 u8 BosUrsulaIsCharging() {
-    if (gUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&gUrsulaMapanimeWork->anim) == 2) {
+    if (sUrsulaMapanimeWork->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&sUrsulaMapanimeWork->anim) == 2) {
         return 1;
     }
 

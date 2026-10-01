@@ -223,7 +223,6 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot);
 void WorldselectLoadSlotTiles(s16 model, s16 slot);
 s16 WorldselectSetSlotGfx(s16 model, s16 slot);
 
-extern GaWork* gGaWork;
 
 void task_bos_ga_2(GaWork* work);
 void task_bos_ga_3(GaWork* work);

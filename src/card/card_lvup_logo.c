@@ -19,7 +19,7 @@
 #include "types.h"
 #include <stddef.h>
 
-u8 gLvupLogoActive;
+static u8 sLvupLogoActive;
 
 void TrackLevelUpEffectTarget(LevelUpEffectWork* w) {
     s16 x;
@@ -86,14 +86,14 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->gatherSteps = 24;
     TaskPoolInit(&w->tasks, 4);
 
-    if (w->target != NULL && gLvupLogoActive == 0) {
+    if (w->target != NULL && sLvupLogoActive == 0) {
         args.x = w->x[0];
         args.y = w->y[0];
         args.target = w->target;
         args.tiles = w->tiles;
         args.palette = w->palette;
         TaskCreate(&w->tasks, &gTaskDescLvupLogo, &args);
-        gLvupLogoActive = 1;
+        sLvupLogoActive = 1;
     }
 }
 
@@ -307,13 +307,13 @@ void Lvup_Logo_2(LevelUpEffectWork* w) {
 void Lvup_Logo_3(LevelUpEffectWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gLvupLogoActive = 0;
+    sLvupLogoActive = 0;
 }
 
 u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
     LevelUpEffectArgs args;
 
-    gLvupLogoActive = 0;
+    sLvupLogoActive = 0;
 
     if (gBtlWork->flags & BTL_FLAG_LEVEL_UP_EFFECT) {
         return 0;

@@ -11,8 +11,8 @@
 #include "taskpool.h"
 #include "types.h"
 
-TaskPool gChkSndPool;
-s16 gChkSndIndex;
+static TaskPool sChkSndPool;
+static s16 sChkSndIndex;
 
 static ChkSndEntry sChkSndEntries[] = {
     { "BGM_ALICE_BTL", SONG_BGM_ALICE_BTL },
@@ -652,9 +652,9 @@ static ChkSndEntry sChkSndEntries[] = {
 
 void mode_chksnd_0() {
     SetBgMode0();
-    gChkSndIndex = 0;
-    TaskPoolInit(&gChkSndPool, 10);
-    TaskCreate(&gChkSndPool, &gTaskDescPrint, NULL);
+    sChkSndIndex = 0;
+    TaskPoolInit(&sChkSndPool, 10);
+    TaskCreate(&sChkSndPool, &gTaskDescPrint, NULL);
 }
 
 #ifdef VERSION_EU
@@ -671,55 +671,55 @@ void mode_chksnd_1() {
         ModeRequest(&gModeDebug, 0);
     } else {
         if (GetKeysRepeat() & DPAD_LEFT) {
-            gChkSndIndex--;
+            sChkSndIndex--;
         }
 
         if (GetKeysRepeat() & DPAD_RIGHT) {
-            gChkSndIndex++;
+            sChkSndIndex++;
         }
 
 #ifdef VERSION_EU
-        if (gChkSndIndex < 0) {
-            gChkSndIndex = 632;
+        if (sChkSndIndex < 0) {
+            sChkSndIndex = 632;
         }
 
-        if ((u16)gChkSndIndex > 632) {
-            gChkSndIndex = 0;
+        if ((u16)sChkSndIndex > 632) {
+            sChkSndIndex = 0;
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(sChkSndEntries[gChkSndIndex].songNum);
+            m4aSongNumStart(sChkSndEntries[sChkSndIndex].songNum);
         }
 
         PrintString(0, 0, 0, sChkSndBlankText);
-        PrintNumber(0, 0, 0, sChkSndEntries[gChkSndIndex].songNum);
+        PrintNumber(0, 0, 0, sChkSndEntries[sChkSndIndex].songNum);
         PrintString(5, 0, 0, sChkSndSeparatorText);
 #else
         if (GetKeysPressed() & A_BUTTON) {
-            m4aSongNumStart(sChkSndEntries[gChkSndIndex].songNum);
+            m4aSongNumStart(sChkSndEntries[sChkSndIndex].songNum);
         }
 
-        if (gChkSndIndex < 0) {
-            gChkSndIndex = 632;
+        if (sChkSndIndex < 0) {
+            sChkSndIndex = 632;
         }
 
-        if ((u16)gChkSndIndex > 632) {
-            gChkSndIndex = 0;
+        if ((u16)sChkSndIndex > 632) {
+            sChkSndIndex = 0;
         }
 
         PrintString(0, 0, 0, "                              ");
-        PrintNumber(0, 0, 0, sChkSndEntries[gChkSndIndex].songNum);
+        PrintNumber(0, 0, 0, sChkSndEntries[sChkSndIndex].songNum);
         PrintString(5, 0, 0, ": ");
 #endif
-        PrintString(7, 0, 0, sChkSndEntries[gChkSndIndex].name);
-        TaskPoolUpdate(&gChkSndPool);
-        TaskPoolDraw(&gChkSndPool);
+        PrintString(7, 0, 0, sChkSndEntries[sChkSndIndex].name);
+        TaskPoolUpdate(&sChkSndPool);
+        TaskPoolDraw(&sChkSndPool);
     }
 }
 
 void mode_chksnd_2() {
     m4aMPlayAllStop();
-    TaskPoolDestroy(&gChkSndPool);
+    TaskPoolDestroy(&sChkSndPool);
 }
 
 Mode gModeChksnd = { "mode_chksnd", (ModeInitFunc)mode_chksnd_0, mode_chksnd_1, mode_chksnd_2 };

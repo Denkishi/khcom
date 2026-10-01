@@ -96,15 +96,6 @@ typedef struct BattleAttackDef {
 extern s32 gUnk_02039DC0;
 extern u8 gUnk_08F69BC4[];
 
-extern FieldTransitionWork* gFieldTransitionWork;
-extern u16 gVsKeyHoldL[2];
-extern u16 gVsKeyHoldR[2];
-extern u16 gVsKeyReleaseL[2];
-extern u16 gVsKeyReleaseR[2];
-extern u16 gVsKeyChordLatch[2];
-extern u16 gVsSoraReloadTimer;
-extern u16 gVsRikuReloadTimer;
-extern BgFx* gBgFx;
 
 void* ColliderGetPool(u32 type);
 void HandleSoraCardInput();

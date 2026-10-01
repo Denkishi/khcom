@@ -24,10 +24,9 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "bos4.h"
+#include "btl.h"
 #include <stddef.h>
-
-extern u8 gBoss02objPalette[];
-extern u8 gUnk_08F69BC4[];
 
 static BoogieWork* gBoogieWork;
 

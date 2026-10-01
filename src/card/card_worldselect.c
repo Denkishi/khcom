@@ -49,6 +49,7 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/macro.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 
 TaskPool gModeWorldselectTasks;
@@ -61,8 +62,6 @@ MapCardUiResources gMapCardUiResources EWRAM_COMMON(16);
 
 u8 gMapCardCounts[270] EWRAM_COMMON(16);
 
-extern u8 gUnk_09618CD8[];
-extern u8 gUnk_09618D18[];
 u16 CountMapCardsOfKind(u16 a);
 u8 UpdateReloadGageIdle(CardDisplayWork* w, void* a);
 u8 UpdateMapSelectSetup(MapSelectWork* w, void* a);

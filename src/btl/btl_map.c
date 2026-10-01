@@ -7,6 +7,7 @@
 #include "game_state.h"
 #include "taskpool.h"
 #include "types.h"
+#include "event_backgrounds.h"
 #include <stddef.h>
 
 u8 gBtlMapShakeActive;
@@ -18,8 +19,6 @@ static const s8 sBtlMapShakePattern[32] = {
 };
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_08F7042C[];
-extern u8 gUnkEu_08F7D724[];
 #endif
 
 void task_btl_map_0(BtlMapWork* work) {

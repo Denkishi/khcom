@@ -17,13 +17,9 @@
 #include "battle.h"
 #include "continue_types.h"
 #include "obj.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 #include "taskpool.h"
-
-extern u8 gUnk_096145D8[];
-extern u8 gUnk_09614618[];
-extern u8 gUnk_09614658[];
-extern u8 gUnk_096146F8[];
 
 static const s32 sContinueCursorY[2] = {
     0x4000, 0x5600,

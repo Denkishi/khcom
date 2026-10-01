@@ -40,13 +40,11 @@
 #include "card_ui_types.h"
 #include "types.h"
 #include "gba/macro.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 
-extern u8 gUnk_09618CD8[];
-extern u8 gUnk_09613E98[];
-extern u8 gUnk_09618D18[];
 void CreatePremireChanceCardTasks(PremireChanceWork* w);
 
 static const u32 sFriendCardIds[8] = {

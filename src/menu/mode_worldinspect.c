@@ -33,14 +33,12 @@
 #include "poo_api.h"
 #include "text_types.h"
 #include "gba/macro.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 
 static s16 sWorldInspectCursor;
 static s16 sWorldInspectFloorCount;
 static s16 sWorldInspectWorlds[12];
-
-extern u8 gUnk_09A3CE7C[];
-extern u8 gUnk_09A3D07C[];
 
 static const WorldinspectConn sWorldinspectConns[3] = {
     { 2, 1, 20, 2 },

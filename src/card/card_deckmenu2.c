@@ -38,6 +38,7 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/macro.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 
 const u16 gRikuDeckCards0[21] = {
@@ -385,7 +386,6 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* w, void* a);
 u8 UpdateDeckMenuDeckFilter(DeckMenuWork* w, void* a);
 s32 ShowCollectionCardPreview(DeckMenuWork* w);
-extern u8 gUnk_09614318[];
 void SetGridRowCount(DeckMenuWork* w, s16 n);
 void UpdateGridScrollBar(DeckMenuWork* w);
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* w, void* a);
@@ -6914,9 +6914,6 @@ void func_jp_0808F34C(DeckMenuWork* w) {
     func_jp_0808F240(w);
 }
 #endif
-
-extern u8 gUnk_096145B8[];
-extern u8 gUnk_09614518[];
 
 u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
     FadeStartIn(FADE_MODE_BLACK, 16);

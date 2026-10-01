@@ -31,10 +31,9 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/defines.h"
+#include "sprite_palettes.h"
 #include <stddef.h>
 
-extern u8 gUnk_09618CD8[];
-extern u8 gUnk_09613E98[];
 u8 UpdateLevelUpWaitFade();
 s32 IsLevelUpApUnlocked();
 struct LevelUpWork;
@@ -272,19 +271,7 @@ void LoadLevelUpRikuBgTiles() {
     }
 }
 
-extern u16* gLevelUpSoraTexts[];
-extern u16* gLevelUpRikuTexts[];
-extern u8 gUnk_09613EB8[];
-extern u8 gUnk_09613ED8[];
-extern u8 gUnk_09613F18[];
-extern u8 gUnk_09613F38[];
-extern u8 gUnk_09613F98[];
-extern u8 gUnk_09613FB8[];
-extern u8 gUnk_09613FD8[];
-extern u8 gUnk_09613FF8[];
 u8 UpdateLevelUpSelect(LevelUpWork* w, void* a);
-extern u8 gUnk_09614018[];
-extern u8 gUnk_09614098[];
 
 u8 Level_Up_1(LevelUpWork* w, void* a) {
     s32 x[3];

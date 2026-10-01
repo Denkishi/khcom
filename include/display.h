@@ -111,6 +111,7 @@ extern struct FadeWork* gFadeWork;
 
 void CommitDisplayRegs(void);
 void FlushDma3Queue(void);
+u8 QueueVTransCallback(void (*a)(void));
 void FlushDma3QueueWithCpu(void);
 void MosaicUpdate(void);
 void SortSprites(void);

@@ -1730,7 +1730,7 @@ u8 RequestTilemapStripCopy(void* a, void* b, u8 c, u8 d, u8 e) {
     return 1;
 }
 
-u8 QueueVTransCallback(void* a) {
+u8 QueueVTransCallback(void (*a)(void)) {
     Dma3Queue* q = gDma3Requests;
 
     if (q->callbackCount > 7) {
@@ -1775,7 +1775,7 @@ void FlushDma3Queue(void) {
     req = q->requests;
     blits = q->blits;
     fills = q->fills;
-    cb = (void (**)(void))q->callbacks;
+    cb = q->callbacks;
     pend = q->pending;
 #ifdef VERSION_EU
     compressed = q->lz77Requests;
@@ -1891,7 +1891,7 @@ void FlushDma3QueueWithCpu(void) {
     req = q->requests;
     blits = q->blits;
     fills = q->fills;
-    cb = (void (**)(void))q->callbacks;
+    cb = q->callbacks;
     pend = q->pending;
 #ifdef VERSION_EU
     compressed = q->lz77Requests;

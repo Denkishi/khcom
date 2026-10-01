@@ -66,7 +66,7 @@ typedef struct Dma3Queue {
     Dma3Request requests[256];
     Dma3Blit blits[64];
     Dma3Fill fills[8];
-    void* callbacks[8];
+    void (*callbacks[8])(void);
     Dma3Pending pending[4];
 #ifdef VERSION_EU
     Dma3Request lz77Requests[32];

@@ -194,7 +194,6 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b);
 void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f);
 void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a);
 void DrawBgTextLines(void);
-u8 QueueVTransCallback(void* a);
 u8 GetStringLength(u8* s);
 u8 _0806E9DC(EventCharaWork* p, void* a);
 void CreateMsgfaceTask(void* pool, MsgFaceControl* p, u8 a, u8 b, u8 c);

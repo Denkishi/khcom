@@ -2209,7 +2209,7 @@ const u16 gBosJfPillarPatterns[16][3] = {
     { 0, 0, 0 },
 };
 
-void* gBosJfMajinFrameMaps[48] __attribute__((aligned(4))) = {
+void* gBosJfMajinFrameMaps[48] = {
     gUnk_096D5C64,
     gUnk_096D6464,
     gUnk_096D6C64,
@@ -2260,9 +2260,9 @@ void* gBosJfMajinFrameMaps[48] __attribute__((aligned(4))) = {
     gUnk_096E2464,
 };
 
-const u16* gUnk_09EF28CC __attribute__((aligned(4))) = gUnk_08125E24;
+const u16* gUnk_09EF28CC = gUnk_08125E24;
 
-void* gBosJfMajinFrameTiles[48] __attribute__((aligned(4))) = {
+void* gBosJfMajinFrameTiles[48] = {
     gUnk_09671DE4,
     gUnk_09672CE4,
     gUnk_09673964,
@@ -2313,25 +2313,25 @@ void* gBosJfMajinFrameTiles[48] __attribute__((aligned(4))) = {
     gUnk_09681C64,
 };
 
-void* gUnk_09EF2990 __attribute__((aligned(4))) = NULL;
+void* gUnk_09EF2990 = NULL;
 
-u32 gBosJfMajinBeamScales[27] __attribute__((aligned(4))) = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
+u32 gBosJfMajinBeamScales[27] = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
 
-u32 gUnk_09EF2A00 __attribute__((aligned(4))) = 578;
+u32 gUnk_09EF2A00 = 578;
 
-u32 gUnk_09EF2A04 __attribute__((aligned(4))) = 593;
+u32 gUnk_09EF2A04 = 593;
 
-u32 gUnk_09EF2A08 __attribute__((aligned(4))) = 609;
+u32 gUnk_09EF2A08 = 609;
 
-u32 gUnk_09EF2A0C __attribute__((aligned(4))) = 622;
+u32 gUnk_09EF2A0C = 622;
 
-u32 gUnk_09EF2A10 __attribute__((aligned(4))) = 637;
+u32 gUnk_09EF2A10 = 637;
 
-u32 gUnk_09EF2A14 __attribute__((aligned(4))) = 652;
+u32 gUnk_09EF2A14 = 652;
 
-u32 gUnk_09EF2A18 __attribute__((aligned(4))) = 668;
+u32 gUnk_09EF2A18 = 668;
 
-u32 gUnk_09EF2A1C __attribute__((aligned(4))) = 683;
+u32 gUnk_09EF2A1C = 683;
 
 TaskDesc gTaskDescBosJfMajin = {
     "task_bos_jf_majin",
@@ -2342,11 +2342,11 @@ TaskDesc gTaskDescBosJfMajin = {
     sizeof(JfMajinWork),
 };
 
-s8 gBosJfRockAnims[9] __attribute__((aligned(1))) = { 9, 10, 11, 12, 13, 14, 15, 26, 0 };
+s8 gBosJfRockAnims[9] = { 9, 10, 11, 12, 13, 14, 15, 26, 0 };
 
-s8 gUnk_09EF2A41 __attribute__((aligned(1))) = -1;
+s8 gUnk_09EF2A41 = -1;
 
-s16 gBosJfRockGfx2Frames[12] __attribute__((aligned(2))) = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 55 };
+s16 gBosJfRockGfx2Frames[12] = { 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 55 };
 
 TaskDesc gTaskDescBosJfRock = {
     "task_bos_jf_rock",

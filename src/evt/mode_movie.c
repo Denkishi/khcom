@@ -328,7 +328,7 @@ void mode_movie_1() {
     case 0: {
         InitDisplayRegs();
         gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
-        CpuFill32(0, (void*)VRAM, 0x18000);
+        CpuFill32(0, (void*)VRAM, VRAM_SIZE);
         sMovieModeState++;
         break;
     }
@@ -343,7 +343,7 @@ void mode_movie_1() {
         SetEwramHeapName(sMovieHeapName);
         SetIwramHeapName(sMovieHeapName);
         CpuCopy16(gUnk_08F69C04, (void*)OBJ_PLTT, 32);
-        CpuCopy16(gUnk_09614718, (void*)0x05000220, 32);
+        CpuCopy16(gUnk_09614718, (void*)(OBJ_PLTT + PLTT_SIZE_4BPP), 32);
         MovieSetCallbacks(IwramAlloc, EwramAlloc, IwramFree, EwramFree);
 
         switch (sMovieId) {
@@ -500,7 +500,7 @@ void mode_movie_1() {
         sMovieModeState++;
         break;
     case 3: {
-        CpuFill32(0, (void*)VRAM, 0x18000);
+        CpuFill32(0, (void*)VRAM, VRAM_SIZE);
 
         if (sMovieFlags & MOVIE_FLAG_SOFT_RESET) {
 #ifdef VERSION_EU

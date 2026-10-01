@@ -1812,7 +1812,7 @@ void SioBtlOptionCheckReady() {
     if (gSioDebugMode == 0) {
 #endif
     if (gSioCommandRecv[1][0] == 0x2FCF) {
-        RequestDma3Copy(gUnk_096B2724, (void*)0x06000020, 0xC0);
+        RequestDma3Copy(gUnk_096B2724, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
 
         if (gSioBtlOptionWork->player1Ready == 0) {
             SetSioBtlOptionAnimation(0, 1, 1);
@@ -1822,7 +1822,7 @@ void SioBtlOptionCheckReady() {
     }
 
     if (gSioCommandRecv[1][1] == 0x6AD6) {
-        RequestDma3Copy(gUnk_096B2B24, (void*)0x06000300, 0xC0);
+        RequestDma3Copy(gUnk_096B2B24, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
 
         if (gSioBtlOptionWork->player2Ready == 0) {
             SetSioBtlOptionAnimation(1, 1, 1);
@@ -1833,7 +1833,7 @@ void SioBtlOptionCheckReady() {
 #ifdef VERSION_EU
     } else {
     if (gSioDebugReady[0] == 1) {
-        RequestDma3Copy(gUnk_096B2724, (void*)0x06000020, 0xC0);
+        RequestDma3Copy(gUnk_096B2724, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
 
         if (gSioBtlOptionWork->player1Ready == 0) {
             SetSioBtlOptionAnimation(0, 1, 1);
@@ -1843,7 +1843,7 @@ void SioBtlOptionCheckReady() {
     }
 
     if (gSioDebugReady[1] == 1) {
-        RequestDma3Copy(gUnk_096B2B24, (void*)0x06000300, 0xC0);
+        RequestDma3Copy(gUnk_096B2B24, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
 
         if (gSioBtlOptionWork->player2Ready == 0) {
             SetSioBtlOptionAnimation(1, 1, 1);
@@ -2054,20 +2054,20 @@ void SioBtlOptionDrawStats() {
     digits[1] = a / 10;
     a %= 10;
     digits[2] = a;
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)0x06000100, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)0x06000120, 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 8 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 9 * TILE_SIZE_4BPP), 32);
 
     digits[0] = c / 100;
     c %= 100;
     digits[1] = c / 10;
     c %= 10;
     digits[2] = c;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)0x06000140, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)0x06000160, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)0x06000180, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)0x060001A0, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)0x060001C0, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)0x060001E0, 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 10 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 11 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 12 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
 
     digits[0] = e / 1000;
     e %= 1000;
@@ -2076,10 +2076,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = e / 10;
     e %= 10;
     digits[3] = e;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)0x06000200, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)0x06000220, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)0x06000240, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)0x06000260, 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)(BG_VRAM + 19 * TILE_SIZE_4BPP), 32);
 
     digits[0] = g / 1000;
     g %= 1000;
@@ -2088,30 +2088,30 @@ void SioBtlOptionDrawStats() {
     digits[2] = g / 10;
     g %= 10;
     digits[3] = g;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)0x06000280, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)0x060002A0, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)0x060002C0, 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)0x060002E0, 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 20 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 21 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 22 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)(BG_VRAM + 23 * TILE_SIZE_4BPP), 32);
 
     digits[0] = b / 100;
     b %= 100;
     digits[1] = b / 10;
     b %= 10;
     digits[2] = b;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)0x060003E0, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x06000400, 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 31 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 32 * TILE_SIZE_4BPP), 32);
 
     digits[0] = d / 100;
     d %= 100;
     digits[1] = d / 10;
     d %= 10;
     digits[2] = d;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)0x06000420, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)0x06000440, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x06000460, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)0x06000480, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)0x060004A0, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x060004C0, 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 33 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 34 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 35 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 36 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 37 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 38 * TILE_SIZE_4BPP), 32);
 
     digits[0] = f / 1000;
     f %= 1000;
@@ -2120,10 +2120,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = f / 10;
     f %= 10;
     digits[3] = f;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)0x060004E0, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)0x06000500, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x06000520, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)0x06000540, 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 39 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 40 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 41 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 42 * TILE_SIZE_4BPP), 32);
 
     digits[0] = h / 1000;
     h %= 1000;
@@ -2132,10 +2132,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = h / 10;
     h %= 10;
     digits[3] = h;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)0x06000560, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)0x06000580, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)0x060005A0, 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)0x060005C0, 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 43 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 44 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 45 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 46 * TILE_SIZE_4BPP), 32);
 }
 
 void SioApplyBattleSettings() {
@@ -2227,7 +2227,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 4:
     case 5:
         LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x22, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x05000202), (6 - a) * 2);
+        LoadPalette(gUnk_096FBD64 + 0x22, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
         break;
     case 6:
         LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
@@ -2238,7 +2238,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x2C, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x0500020C), (a - 6) * 2);
+        LoadPalette(gUnk_096FBD64 + 0x2C, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
         break;
     }
 
@@ -2249,7 +2249,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 4:
     case 5:
         LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x22, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x05000202), (6 - b) * 2);
+        LoadPalette(gUnk_096FBDA4 + 0x22, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
         break;
     case 6:
         LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
@@ -2260,15 +2260,15 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x2C, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x0500020C), (b - 6) * 2);
+        LoadPalette(gUnk_096FBDA4 + 0x2C, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
         break;
     }
 }
 
 void SioBtlOptionCancelReady() {
     gSioBtlOptionWork->messageVisible = 0;
-    RequestDma3Copy(gUnk_096B2664, (void*)0x06000020, 0xC0);
-    RequestDma3Copy(gUnk_096B2664 + 0x400, (void*)0x06000300, 0xC0);
+    RequestDma3Copy(gUnk_096B2664, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gUnk_096B2664 + 0x400, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
     gSioBtlOptionWork->player1Ready = 0;
     gSioBtlOptionWork->player2Ready = 0;
     SetSioBtlOptionAnimation(0, 0, 0);
@@ -3055,7 +3055,7 @@ void SioChgCardSelect() {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
 
-        RequestDma3Copy(gUnk_096B5FA4, (void*)0x06000020, 0xC0);
+        RequestDma3Copy(gUnk_096B5FA4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[0] = 1;
     } else if (gSioCommandRecv[1][0] == 0x2B9A) {
         if (gSioChgCardReady[0] == 1) {
@@ -3064,7 +3064,7 @@ void SioChgCardSelect() {
             gSioChgCardWork->messageVisible = 0;
         }
 
-        RequestDma3Copy(gUnk_096B5EE4, (void*)0x06000020, 0xC0);
+        RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[0] = 0;
     }
 
@@ -3074,7 +3074,7 @@ void SioChgCardSelect() {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
 
-        RequestDma3Copy(gUnk_096B63A4, (void*)0x060000E0, 0xC0);
+        RequestDma3Copy(gUnk_096B63A4, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[1] = 1;
     } else if (gSioCommandRecv[1][1] == 0x2B9A) {
         if (gSioChgCardReady[1] == 1) {
@@ -3083,7 +3083,7 @@ void SioChgCardSelect() {
             gSioChgCardWork->messageVisible = 0;
         }
 
-        RequestDma3Copy(gUnk_096B62E4, (void*)0x060000E0, 0xC0);
+        RequestDma3Copy(gUnk_096B62E4, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[1] = 0;
     }
 
@@ -3454,9 +3454,9 @@ void SioChgCardDrawPointTotals() {
     digits[1] = v / 10;
     v = v % 10;
     digits[2] = v;
-    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)0x060001A0, 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)0x060001C0, 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)0x060001E0, 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
     sum = 0;
 
     for (j = 5; j < 10; j++) {
@@ -3473,9 +3473,9 @@ void SioChgCardDrawPointTotals() {
     digits[1] = v / 10;
     v = v % 10;
     digits[2] = v;
-    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)0x06000200, 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)0x06000220, 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)0x06000240, 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
 }
 
 void SioChgCardHandleInput() {
@@ -3617,20 +3617,20 @@ void SioChgCardHandleInput() {
         gSioChgCardWork->cursorVisible = 0;
 
         if (gFrameCounter % 10 == 0) {
-            RequestDma3Copy(&gUnk_096B5EE4[gSioChgCardWork->blinkPhase * 192], (void*)0x06000020, 0xC0);
+            RequestDma3Copy(&gUnk_096B5EE4[gSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
             gSioChgCardWork->blinkPhase = 1 - gSioChgCardWork->blinkPhase;
         }
     } else if (gSioChgCardWork->cursor == 11) {
         gSioChgCardWork->cursorVisible = 0;
 
         if (gFrameCounter % 10 == 0) {
-            RequestDma3Copy(&gUnk_096B62E4[gSioChgCardWork->blinkPhase * 192], (void*)0x060000E0, 0xC0);
+            RequestDma3Copy(&gUnk_096B62E4[gSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
             gSioChgCardWork->blinkPhase = 1 - gSioChgCardWork->blinkPhase;
         }
     } else {
         gSioChgCardWork->cursorVisible = 1;
-        RequestDma3Copy(gUnk_096B5EE4, (void*)0x06000020, 0xC0);
-        RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)0x060000E0, 0xC0);
+        RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     }
 }
 
@@ -3684,7 +3684,7 @@ void SioChgCardShowInfo() {
     defs = gCardDefs;
     def = &defs[n];
     off = def->category << 5;
-    LoadPalette(gUnk_096FBF84 + off, (void*)0x050000A0, 32);
+    LoadPalette(gUnk_096FBF84 + off, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 32);
     LoadObjPaletteBank(gSioChgCardWork->palette->index, gUnk_096FBF04 + off);
     nameId = def->kind;
     defs = (CardDef*)&defs->name;
@@ -3718,8 +3718,8 @@ void SioChgCardCancelReady() {
     gSioChgCardWork->offeredCard = gSioChgCardSlots[gSioChgCardWork->cursor];
     SetSioChgCardAnimation(0, 0, 0);
     SetSioChgCardAnimation(1, 0, 0);
-    RequestDma3Copy(gUnk_096B5EE4, (void*)0x06000020, 0xC0);
-    RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)0x060000E0, 0xC0);
+    RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     gSioChgCardReady[0] = 0;
     gSioChgCardReady[1] = 0;
     gSioChgCardWork->messageVisible = 0;

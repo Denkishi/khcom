@@ -1281,11 +1281,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* w, u8 b) {
 
     switch (b) {
     case 0:
-        pal = (u16*)0x05000100;
+        pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
-        pal = (u16*)0x05000120;
+        pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x120, pal, 32);
-        pal = (u16*)0x05000140;
+        pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x140, pal, 32);
         LoadBgMap(0, gUnk_09519AB8 + 0x180, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
@@ -1301,11 +1301,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* w, u8 b) {
         w->y6 = 122;
         break;
     case 1:
-        pal = (u16*)0x05000120;
+        pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
-        pal = (u16*)0x05000100;
+        pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x100, pal, 32);
-        pal = (u16*)0x05000140;
+        pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x140, pal, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8 + 0x180, 0x180);
@@ -1321,11 +1321,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* w, u8 b) {
         w->y6 = 122;
         break;
     case 2:
-        pal = (u16*)0x05000140;
+        pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
-        pal = (u16*)0x05000100;
+        pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x100, pal, 32);
-        pal = (u16*)0x05000120;
+        pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_09614118 + 0x120, pal, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);

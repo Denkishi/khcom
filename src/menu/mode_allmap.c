@@ -13,6 +13,7 @@
 #include "anim.h"
 #include "display.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include "gba/syscall.h"
 #include "intr.h"
@@ -143,13 +144,13 @@ void AllmapCyclePalette() {
         sAllmapPalStep = 0;
     }
 
-    LoadPalette(&gUnk_0984A138[t[sAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
+    LoadPalette(&gUnk_0984A138[t[sAllmapPalStep].palette * 0x20], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 0x20);
 }
 
 void AllmapLoadWorldBg() {
     RequestDma3Copy(sAllmapWorldBgs[gGameState.world].map, (u8*)GetBgScreenBase(2) + 0x200, 0x300);
     RequestDma3Copy(sAllmapWorldBgs[gGameState.world].tiles, (u8*)GetBgCharBase(2) + 0x2000, 0x2000);
-    LoadPalette(sAllmapWorldBgs[gGameState.world].palette, (void*)0x05000140, 0x20);
+    LoadPalette(sAllmapWorldBgs[gGameState.world].palette, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x20);
 }
 
 void AllmapLoadFloorTiles() {

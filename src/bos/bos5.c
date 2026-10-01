@@ -5241,7 +5241,7 @@ void WorldselectCyclePalette() {
             gWorldselectPaletteFrame = 0;
         }
 
-        LoadPalette(sWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)0x05000040, 32);
+        LoadPalette(sWorldselectPaletteCycle[(s16)gWorldselectPaletteFrame], (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 32);
     }
 }
 

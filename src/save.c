@@ -695,8 +695,8 @@ void ShowSramErrorScreen() {
     dispcnt = (vu16*)REG_ADDR_DISPCNT;
     *dispcnt = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     VBlankIntrWait();
-    DmaCopy16(3, gSramErrorTiles, 0x06008000, 0x4000);
-    DmaCopy16(3, gSramErrorPalette, PLTT, 0x200);
+    DmaCopy16(3, gSramErrorTiles, BG_CHAR_ADDR(2), 0x4000);
+    DmaCopy16(3, gSramErrorPalette, BG_PLTT, BG_PLTT_SIZE);
     DmaCopy16(3, gSramErrorTilemap, gSramErrorTilemapBuf, 0x500);
     DmaCopy16(3, gSramErrorTilemapBuf, VRAM, 0x800);
     WaitSramErrorInput();

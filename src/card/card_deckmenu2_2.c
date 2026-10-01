@@ -237,7 +237,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
     u16* pal;
 
     base = GetBgCharBase(1);
-    pal = (u16*)0x05000100;
+    pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
     LoadPalette(gUnk_096142F8, pal, 32);
 #ifdef VERSION_EU
     RequestDma3Copy(gRikuDeckEquipMarkerTiles[gLanguage] + 0x20, base + 0x2D80, 0x1E0);

@@ -30,6 +30,7 @@
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/defines.h"
 #include <stddef.h>
 
 extern u8 gUnk_09618CD8[];
@@ -324,10 +325,10 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
 #endif
 
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                    LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
+                    LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                 } else {
                     LoadLevelUpRikuBgTiles();
-                    LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
+                    LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                 }
 
                 LoadBgMap(1, gUnk_0950F2B8, mapSize);
@@ -361,10 +362,10 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
+                        LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
+                        LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     }
 
                     SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
@@ -396,10 +397,10 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gUnk_09614018, (void*)0x05000140, 0x80);
+                        LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gUnk_09614098, (void*)0x05000140, 0x80);
+                        LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     }
 
                     SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);

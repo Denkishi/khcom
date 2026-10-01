@@ -50,6 +50,7 @@
 #include "text.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/defines.h"
 #include <stddef.h>
 
 static const JiminyEntry sJiminyEntries[21] = {
@@ -2479,16 +2480,16 @@ void JiminyDetailUpdate() {
 
             switch ((u16)gJiminyWork->detail->paletteSize) {
             case 0x60:
-                paletteDest = (u16*)0x050001A0;
+                paletteDest = (u16*)(BG_PLTT + 13 * PLTT_SIZE_4BPP);
                 LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x60);
                 break;
             case 0x40:
-                paletteDest = (u16*)0x050001C0;
+                paletteDest = (u16*)(BG_PLTT + 14 * PLTT_SIZE_4BPP);
                 LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x40);
                 break;
             case 0x20:
             default:
-                paletteDest = (u16*)0x050001E0;
+                paletteDest = (u16*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
                 LoadPalette(gJiminyWork->detail->bgPalette, paletteDest, 0x20);
                 break;
             }

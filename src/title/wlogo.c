@@ -9,6 +9,7 @@
 #include "anim.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "obj.h"
 #include "obj_api.h"
 #include "taskpool.h"
@@ -108,11 +109,11 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
 
             if (work->paletteStep <= 4) {
                 LoadObjPaletteBank(work->palette->index, &gUnk_096FACC4[work->paletteStep * 32]);
-                LoadPaletteWithEffect(&gUnk_096FACC4[work->paletteStep * 32], (void*)0x050001C0, 0x20);
+                LoadPaletteWithEffect(&gUnk_096FACC4[work->paletteStep * 32], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
             } else if (work->paletteStep > 11) {
                 if (work->paletteStep <= 15) {
                     LoadObjPaletteBank(work->palette->index, &gUnk_096FACC4[(15 - work->paletteStep) * 32]);
-                    LoadPaletteWithEffect(&gUnk_096FACC4[(15 - work->paletteStep) * 32], (void*)0x050001C0, 0x20);
+                    LoadPaletteWithEffect(&gUnk_096FACC4[(15 - work->paletteStep) * 32], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
                 } else if (work->paletteStep == 20) {
                     work->visible = 0;
                     RequestDma3Copy(gUnk_096B7464, GetBgScreenBase(0), 0x800);
@@ -1660,7 +1661,7 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
     LoadBgPalette(0, gUnk_096FAE84, 0x20);
     LoadBgTiles(0, gUnk_09648EA4, 0x1260);
     LoadBgMap(0, gUnk_096BE464, 0x800);
-    LoadPalette(&gUnk_096FAEA4[15 * 32], (void*)0x050001E0, 0x20);
+    LoadPalette(&gUnk_096FAEA4[15 * 32], (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
     work->timer = 0;
     work->subStep = 0;
     work->state = 0;
@@ -1874,7 +1875,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
     case 9:
         work->visible[6] = 0;
         LoadBgMap(0, gUnk_096BDC64, 0x800);
-        LoadPalette(gUnk_096FAFA4, (void*)0x050001C0, 0x20);
+        LoadPalette(gUnk_096FAFA4, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
         EnableBg(0);
         work->blend = 16;
         SetBgBlend(0, 0, 16);
@@ -1905,7 +1906,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         } else if (work->subStep > 1) {
             work->subStep = 0;
             work->paletteStep--;
-            LoadPalette(&gUnk_096FAEA4[work->paletteStep * 32], (void*)0x050001C0, 0x20);
+            LoadPalette(&gUnk_096FAEA4[work->paletteStep * 32], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
         } else {
             work->subStep++;
         }
@@ -2214,7 +2215,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
         if (work->paletteStep <= 6) {
             if (++work->timer >= gWlogoBksPaletteDurations[work->paletteStep]) {
                 work->timer = 0;
-                LoadPalette(&gUnk_096FB0C4[gWlogoBksPaletteIndices[work->paletteStep] * 32], (void*)0x050001C0, 0x20);
+                LoadPalette(&gUnk_096FB0C4[gWlogoBksPaletteIndices[work->paletteStep] * 32], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
                 work->paletteStep++;
             }
         }
@@ -2223,7 +2224,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
             StopBgWave(0);
             work->timer = 0;
             work->visible = 0;
-            LoadPalette(gUnk_096FB0C4, (void*)0x050001C0, 0x20);
+            LoadPalette(gUnk_096FB0C4, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
             LoadBgMap(0, gUnk_096BF464, 0x800);
             work->state++;
         } else {

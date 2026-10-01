@@ -4229,9 +4229,9 @@ void mode_StaffRoll_1() {
         w->phase = 2;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4249,9 +4249,9 @@ void mode_StaffRoll_1() {
         w->phase = 3;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4267,9 +4267,9 @@ void mode_StaffRoll_1() {
         }
 
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4296,9 +4296,9 @@ void mode_StaffRoll_1() {
         w->phase = 10;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         w->endState = 0;
         w->endTimer = 0;
         break;
@@ -4312,9 +4312,9 @@ void mode_StaffRoll_1() {
         w->phase = 6;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4332,9 +4332,9 @@ void mode_StaffRoll_1() {
         w->phase = 4;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4352,9 +4352,9 @@ void mode_StaffRoll_1() {
         w->phase = 8;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4372,9 +4372,9 @@ void mode_StaffRoll_1() {
         w->phase = 9;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4392,9 +4392,9 @@ void mode_StaffRoll_1() {
         w->phase = 4;
         w->phaseTimer = 0;
         DmaFill16(3, 0, VRAM, 0x40);
-        DmaFill16(3, 0, 0x06004000, 0x40);
-        DmaFill16(3, 0, 0x06008000, 0x40);
-        DmaFill16(3, 0, 0x0600C000, 0x4000);
+        DmaFill16(3, 0, BG_CHAR_ADDR(1), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(2), 0x40);
+        DmaFill16(3, 0, BG_CHAR_ADDR(3), 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);

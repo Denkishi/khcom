@@ -25,6 +25,7 @@
 #include "card_types.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include "key.h"
 #include "m4a_song.h"
@@ -778,7 +779,7 @@ u8 UpdateMooglePackOpening(u16 a) {
                     sMooglePackCardCursor = 0;
                     sMooglePackCursorX = sMooglePackCards[0].x - 0x1000;
                     sMooglePackCursorY = sMooglePackCards[0].y - 0x2000;
-                    LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)0x050001A0, 0x20);
+                    LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                     sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                     sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
                     LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
@@ -823,7 +824,7 @@ u8 UpdateMooglePackOpening(u16 a) {
             }
 
             if (sMooglePackCardCursor != old) {
-                LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)0x050001A0, 0x20);
+                LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                 sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                 sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
                 LoadObjPaletteBank(gUnk_02035A40->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);

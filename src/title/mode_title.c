@@ -48,7 +48,7 @@ void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
 }
 
 void TitleLoadPaletteBuffer() {
-    LoadPalette(sTitlePaletteBuffer, (void*)PLTT, 0x400);
+    LoadPalette(sTitlePaletteBuffer, (void*)PLTT, PLTT_SIZE);
 }
 
 void TitleExitToChoice() {

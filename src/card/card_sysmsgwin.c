@@ -26,6 +26,7 @@
 #include "common_text.h"
 #include "card_message_data.h"
 #include "types.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
 
@@ -567,7 +568,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
     switch (w->args.mode) {
     case 0:
     case 1:
-        pal = (void*)0x050001E0;
+        pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
         LoadBgTiles(w->args.bg, gUnk_099597E4, 0x140);
         LoadBgMap(w->args.bg, gUnk_09985F44, 0x800);
         LoadPalette(gCard00Palette, pal, 32);

@@ -33,6 +33,7 @@
 #include "registration_data.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
 
@@ -355,13 +356,13 @@ void MsChargeDrawValueCounts() {
     card = GetMsChargeSelectedCard();
 
     if (GetMsChargeTabCount(sMsChargeTab) > 0) {
-        LoadPalette(gUnk_09A3DD7C + card->category * 0x20, (void*)0x050000E0, 0x0C);
+        LoadPalette(gUnk_09A3DD7C + card->category * 0x20, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP), 0x0C);
     }
 
     if (sMsChargeMenuState == 1) {
         for (i = 0; i < 10; i++) {
             LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-            LoadPalette(gUnk_09A3DE08, (void*)(0x050000EC + i * 2), 2);
+            LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
         }
     } else if (card->category == 3) {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
@@ -377,14 +378,14 @@ void MsChargeDrawValueCounts() {
 
             if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-                LoadPalette(gUnk_09A3DD88, (void*)0x050000EC, 2);
+                LoadPalette(gUnk_09A3DD88, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
                 break;
             }
         }
 
         if (i > 9) {
             LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-            LoadPalette(gUnk_09A3DE08, (void*)0x050000EC, 2);
+            LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
         }
     } else {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
@@ -400,10 +401,10 @@ void MsChargeDrawValueCounts() {
 
             if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gUnk_09A3DD88, (void*)(0x050000EC + i * 2), 2);
+                LoadPalette(gUnk_09A3DD88, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
             } else {
                 LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gUnk_09A3DE08, (void*)(0x050000EC + i * 2), 2);
+                LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
             }
         }
     }

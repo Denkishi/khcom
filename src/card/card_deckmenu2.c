@@ -4904,11 +4904,11 @@ void HighlightDeckTab(DeckMenuWork* w, u8 b) {
 
     switch (b) {
     case 0:
-        dst = (void*)0x05000100;
+        dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
-        dst = (void*)0x05000120;
+        dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x120], dst, 32);
-        dst = (void*)0x05000140;
+        dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x140], dst, 32);
         LoadBgMap(0, &gUnk_09519AB8[0x180], 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
@@ -4924,11 +4924,11 @@ void HighlightDeckTab(DeckMenuWork* w, u8 b) {
         w->deckName3Y = 122;
         break;
     case 1:
-        dst = (void*)0x05000120;
+        dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
-        dst = (void*)0x05000100;
+        dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x100], dst, 32);
-        dst = (void*)0x05000140;
+        dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x140], dst, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, &gUnk_0951A2B8[0x180], 0x180);
@@ -4944,11 +4944,11 @@ void HighlightDeckTab(DeckMenuWork* w, u8 b) {
         w->deckName3Y = 122;
         break;
     case 2:
-        dst = (void*)0x05000140;
+        dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
-        dst = (void*)0x05000100;
+        dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x100], dst, 32);
-        dst = (void*)0x05000120;
+        dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(&gUnk_09614118[0x120], dst, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
@@ -5474,7 +5474,7 @@ void DrawValueCount(u8 a, u16 b) {
 
         RequestDma3Copy(gUnk_0940FAD8, dst = base + (b * 64 + 0xD20), 32);
         RequestDma3Copy(gUnk_0940FAD8, dst += 32, 32);
-        LoadPalette(gUnk_09614406, (void*)(b * 2 + 0x0500016C), 2);
+        LoadPalette(gUnk_09614406, (void*)(b * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), 2);
     }
 }
 

@@ -400,14 +400,14 @@ void MapInspectDrawValueCounts() {
 
             if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A067FC, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-                LoadPalette(gUnk_09A3D248, (void*)0x0500000C, 2);
+                LoadPalette(gUnk_09A3D248, (void*)(BG_PLTT + 0xC), 2);
                 break;
             }
         }
 
         if (i > 9) {
             LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-            LoadPalette(gUnk_09A3D2C8, (void*)0x0500000C, 2);
+            LoadPalette(gUnk_09A3D2C8, (void*)(BG_PLTT + 0xC), 2);
         }
     } else {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {

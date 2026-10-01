@@ -6442,7 +6442,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                 if (e->portraitId == 62) {
                     void* pal;
 
-                    pal = (void*)0x050001E0;
+                    pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
                     LoadBgTiles(p->bg, gUnk_0950E2F8, 0x140);
                     LoadBgMap(p->bg, gUnk_096112B8, 0x800);
                     LoadPalette(gCard00Palette, pal, 32);
@@ -6498,7 +6498,7 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
         if (e->portraitId == 62) {
             void* pal;
 
-            pal = (void*)0x050001E0;
+            pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
             LoadBgTiles(p->bg, gUnk_0950E2F8, 0x140);
             LoadBgMap(p->bg, gUnk_096112B8, 0x800);
             LoadPalette(gCard00Palette, pal, 32);

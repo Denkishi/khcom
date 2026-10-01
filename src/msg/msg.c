@@ -11,6 +11,7 @@
 #include "text.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
 #include "system_state.h"
@@ -6760,7 +6761,7 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
     u8* dst;
     u8 n;
     w = 0;
-    dst = (u8*)0x06014000;
+    dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP);
     t = 0;
     n = 0;
 
@@ -6944,7 +6945,7 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
     u8* dst;
     u8 n;
     w = 0;
-    dst = (u8*)0x06014000 + b * 32;
+    dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + b * 32;
     t = 0;
     n = 0;
 
@@ -7120,7 +7121,7 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
 #endif
 
 u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
-    u8* dst = (u8*)0x06014000 + tile * 32;
+    u8* dst = (u8*)(OBJ_VRAM0 + 512 * TILE_SIZE_4BPP) + tile * 32;
     s32 flag = 0;
     sTextEntryCount = 0;
     *b = 0;

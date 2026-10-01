@@ -601,7 +601,7 @@ u8 task_bos_jf_map_1(JfMapWork* work) {
             work->paletteFrame = 0;
         }
 
-        LoadPalette(gUnk_096FB484 + work->paletteFrame * 32, (void*)0x05000020, 0x20);
+        LoadPalette(gUnk_096FB484 + work->paletteFrame * 32, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 0x20);
     }
 
     BtlMapUpdateShake();

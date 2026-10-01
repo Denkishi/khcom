@@ -8,6 +8,7 @@
 #include "battle_work.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "gba/macro.h"
 #include "taskpool.h"
 #include "types.h"
@@ -698,7 +699,7 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
 
     if (work->fadeStep <= 63) {
         BosLstFldDarkenPalette(work->paletteBuf, gUnk_09D694F4, 80, sBosLstFldFadeLevels[work->fadeStep]);
-        LoadPalette(work->paletteBuf, 0x050000A0, 160);
+        LoadPalette(work->paletteBuf, BG_PLTT + 5 * PLTT_SIZE_4BPP, 160);
         work->fadeStep++;
     }
 

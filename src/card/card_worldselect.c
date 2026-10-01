@@ -293,8 +293,8 @@ u8 MapSelect_1(MapSelectWork* w, void* a) {
     w->tiles3 = LoadObjTiles(gUnk_093F7172, 0x400);
     LoadBgTiles(1, gUnk_09508098, 0x2020);
 #endif
-    LoadPalette(gUnk_09618C58, (void*)0x05000180, 32);
-    LoadPalette(&gUnk_09618C58[0x40], (void*)0x050001C0, 64);
+    LoadPalette(gUnk_09618C58, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(&gUnk_09618C58[0x40], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 64);
     FadeSetPaletteExcluded(12, 1);
     FadeSetPaletteExcluded(14, 1);
     FadeSetPaletteExcluded(15, 1);
@@ -1542,7 +1542,7 @@ void LoadMapSelectKindPalette(u16 a, MapSelectWork* w) {
         }
     }
 
-    LoadPalette(w->paletteBuffer, (void*)0x050001C0, 32);
+    LoadPalette(w->paletteBuffer, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 32);
 }
 
 void LoadMapSelectGridPalette(u16 a, MapSelectWork* w) {
@@ -1592,7 +1592,7 @@ void LoadMapSelectGridPalette(u16 a, MapSelectWork* w) {
         }
     }
 
-    LoadPalette(w->paletteBuffer, (void*)0x05000180, 32);
+    LoadPalette(w->paletteBuffer, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
 }
 
 s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* w) {

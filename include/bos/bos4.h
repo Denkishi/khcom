@@ -47,7 +47,7 @@ typedef struct BoogieDiskWork {
 
 typedef struct UrsulaWork {
     u32 state;
-    u16 timer;
+    s16 timer;
     u8 unk_006[0x2];
     TaskPool tasks;
     Task* tako;

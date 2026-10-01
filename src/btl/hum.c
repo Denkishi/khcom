@@ -836,8 +836,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
     case 26: {
         s32 d;
 
-        act->x += ((s32)work->base.targetX - act->x) >> 4;
-        act->y += ((s32)work->base.targetY - act->y) >> 4;
+        act->x += (work->base.targetX - act->x) >> 4;
+        act->y += (work->base.targetY - act->y) >> 4;
         d = work->base.vz;
 
         if (d < 0) {
@@ -892,7 +892,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
         }
 
-        if ((s32)work->base.vz > 0) {
+        if (work->base.vz > 0) {
             work->base.stateTimer = 0;
             work->base.state = 34;
         } else {
@@ -923,7 +923,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 w->unk_188 = 0x800;
             }
 
-            d = ((s32)work->base.targetX - act->x) >> 3;
+            d = (work->base.targetX - act->x) >> 3;
 
             if (d < 0) {
                 d = -d;
@@ -939,7 +939,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             act->z += (v - act->z) >> 3;
             }
 
-            if (act->x < (s32)work->base.targetX) {
+            if (act->x < work->base.targetX) {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -1157,7 +1157,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
         }
 
-        if ((s32)work->base.vz > 0) {
+        if (work->base.vz > 0) {
             work->base.stateTimer = 0;
             work->base.state = 29;
             w->state = 0;
@@ -1183,8 +1183,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
 
         work->base.vz = 0;
-        act->x += ((s32)work->base.targetX - act->x) >> 4;
-        act->y += ((s32)work->base.targetY - act->y) >> 4;
+        act->x += (work->base.targetX - act->x) >> 4;
+        act->y += (work->base.targetY - act->y) >> 4;
 
         {
             s32 v;
@@ -1235,7 +1235,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 break;
             }
 
-            if (act->x < (s32)work->base.targetX) {
+            if (act->x < work->base.targetX) {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -1243,8 +1243,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
         }
 
         work->base.vz = 0;
-        act->x += ((s32)work->base.targetX - act->x) >> 3;
-        act->y += ((s32)work->base.targetY - act->y) >> 3;
+        act->x += (work->base.targetX - act->x) >> 3;
+        act->y += (work->base.targetY - act->y) >> 3;
         act->z += (work->base.targetZ - act->z) >> 3;
 
         if (work->base.anim.timer == 0) {
@@ -1881,8 +1881,8 @@ u8 task_hum_hook_1(HookWork* work) {
                 MakeOpponentsHittable();
             }
 
-            act->x += ((s32)work->base.targetX - act->x) >> 3;
-            act->y += ((s32)work->base.targetY - act->y) >> 3;
+            act->x += (work->base.targetX - act->x) >> 3;
+            act->y += (work->base.targetY - act->y) >> 3;
 
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                 ? ApplyAttackBox(278, act->x - 0x1000, act->y, act->z, 32, 24, 70)
@@ -1919,8 +1919,8 @@ u8 task_hum_hook_1(HookWork* work) {
     case 23: {
         s32 d;
 
-        act->x += ((s32)work->base.targetX - act->x) >> 4;
-        act->y += ((s32)work->base.targetY - act->y) >> 4;
+        act->x += (work->base.targetX - act->x) >> 4;
+        act->y += (work->base.targetY - act->y) >> 4;
         d = work->base.vz;
 
         if (d < 0) {
@@ -3021,13 +3021,13 @@ u8 task_hum_hades_1(HadesWork* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                if ((s32)work->base.targetX < act->x) {
+                if (work->base.targetX < act->x) {
                     AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
                 } else {
                     AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
                 }
             } else {
-                if ((s32)work->base.targetX < act->x) {
+                if (work->base.targetX < act->x) {
                     AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 1, ANIM_FLAG_LOOP, w->base.tiles);
                 } else {
                     AnimChangeWithDef(sHumHadesAnimDefs, &w->base.anim, 0, ANIM_FLAG_LOOP, w->base.tiles);
@@ -3861,13 +3861,13 @@ u8 task_hum_mahluxia_1(MahluxiaWork* work) {
         break;
     case 20:
         AnimChangeWithDef(sHumMahluxiaAnimDefs, &w->base.anim, 1, 0, w->base.tiles);
-        act->x += ((s32)work->base.targetX - act->x) >> 4;
-        act->y += ((s32)work->base.targetY - act->y) >> 4;
+        act->x += (work->base.targetX - act->x) >> 4;
+        act->y += (work->base.targetY - act->y) >> 4;
 
         if ((work->base.flags & HUM_FLAG_AT_FIELD_EDGE)
-                || ((s32)work->base.targetX - act->x >= 0
-                    ? (s32)work->base.targetX - act->x <= 0x7FF
-                    : act->x - (s32)work->base.targetX <= 0x7FF)) {
+                || (work->base.targetX - act->x >= 0
+                    ? work->base.targetX - act->x <= 0x7FF
+                    : act->x - work->base.targetX <= 0x7FF)) {
             work->base.stateTimer = 0;
             work->base.state = 0;
             break;
@@ -4444,7 +4444,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
 
         work->base.vz = 0;
 
-        if (act->x < (s32)work->base.targetX) {
+        if (act->x < work->base.targetX) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -5417,18 +5417,18 @@ u8 task_hum_axcel_1(AxcelWork* work) {
             m4aSongNumStart(SONG_BTL_MON_SWORD01);
         }
 
-        if ((s16)w->steps == 19) {
+        if (w->steps == 19) {
             AxcelScaleTo(w, 12, 0x200, 8);
         }
 
-        if ((s16)w->steps == 11) {
+        if (w->steps == 11) {
             act->x = work->base.targetX;
             act->y = work->base.targetY;
             act->flags ^= BTLOBJ_FLAG_FACING_LEFT;
             AxcelScaleTo(w, 0x100, 0x100, 8);
         }
 
-        if ((s16)w->steps <= 4) {
+        if (w->steps <= 4) {
             work->base.state = 25;
             work->base.stateTimer = 0;
         } else {
@@ -5675,7 +5675,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         AxcelSpawnParticle(w, sub);
         AxcelSpawnParticle(w, sub2);
 
-        if ((s16)w->steps <= 0) {
+        if (w->steps <= 0) {
             work->base.stateTimer = 0;
             work->base.state = 30;
         } else {
@@ -5701,7 +5701,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         ApproachValue(&sub2->z, -0x5A00, w->steps);
         w->steps--;
 
-        if ((s16)w->steps <= 0) {
+        if (w->steps <= 0) {
             sub->flags |= HUM_SUB_FLAG_HIDDEN;
             sub2->flags |= HUM_SUB_FLAG_HIDDEN;
             work->base.stateTimer = 0;
@@ -6199,7 +6199,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         break;
     }
 
-    switch ((u32)gBtlWork->battleId) {
+    switch (gBtlWork->battleId) {
     case 164:
         if (HumChooseCardAction(&w->base, 30, 40, 40, 24)) {
             w->base.stockMoves = sHumVixenStockMovesA;
@@ -6305,9 +6305,9 @@ u8 task_hum_vixen_1(VixenWork* work) {
             act->y -= work->slideSpeed;
         }
 
-        d = act->x - (s32)w->base.targetX;
+        d = act->x - w->base.targetX;
 
-        if ((d >= 0) ? d <= 0xBFF : (s32)w->base.targetX - act->x <= 0xBFF) {
+        if ((d >= 0) ? d <= 0xBFF : w->base.targetX - act->x <= 0xBFF) {
             w->base.state = 0;
             w->base.stateTimer = 0;
         } else {
@@ -9066,8 +9066,8 @@ u8 task_hum_riku_1(RikuWork* work) {
         act->x += (x - act->x) >> 4;
         act->y += (y - act->y) >> 4;
 
-        if ((s32)work->base.vz < 0) {
-            if ((s32)work->base.vz > -0x200) {
+        if (work->base.vz < 0) {
+            if (work->base.vz > -0x200) {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
@@ -9116,7 +9116,7 @@ u8 task_hum_riku_1(RikuWork* work) {
             }
         }
 
-        act->x += ((s32)work->base.targetX - act->x) >> 3;
+        act->x += (work->base.targetX - act->x) >> 3;
 
         if (AnimIsFinished(&work->base.anim) && act->z >= act->groundZ) {
             ClearBtlObjActionFlags(act);
@@ -9142,16 +9142,16 @@ u8 task_hum_riku_1(RikuWork* work) {
 
         break;
     case 20:
-        act->x += ((s32)work->base.targetX - act->x) >> 4;
-        act->y += ((s32)work->base.targetY - act->y) >> 4;
+        act->x += (work->base.targetX - act->x) >> 4;
+        act->y += (work->base.targetY - act->y) >> 4;
 
-        if ((s32)work->base.vz < 0) {
-            if ((s32)work->base.vz <= -0x200) {
+        if (work->base.vz < 0) {
+            if (work->base.vz <= -0x200) {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 4, 0, w->base.tiles);
             } else {
                 AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             }
-        } else if ((s32)work->base.vz <= 0x1FF) {
+        } else if (work->base.vz <= 0x1FF) {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sHumRikuAnimDefs, &w->base.anim, 6, 0, w->base.tiles);

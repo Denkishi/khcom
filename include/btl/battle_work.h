@@ -138,7 +138,7 @@ typedef struct BtlWork {
     s32 gimmickX;
     s32 gimmickY;
     s32 gimmickZ;
-    s32 battleId;
+    u32 battleId;
     void* tiles;
     void* tiles2;
     void* tiles3;

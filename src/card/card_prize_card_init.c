@@ -1743,15 +1743,15 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
 
         break;
@@ -1760,15 +1760,15 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
 
         break;
@@ -1777,15 +1777,15 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         }
 
         break;
@@ -1794,13 +1794,13 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
             work->sprite.gfx3 = z;
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
-            RequestDma3Copy((u8*)work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
+            RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
         }
 
         t = key->value;
@@ -1829,13 +1829,13 @@ void UpdateEventKeyTotal(EventKeyCard* w) {
         z = 0;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
         w->sprite.gfx3 = z;
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy(w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
     } else {
         z = 0;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
         w->sprite.gfx3 = z;
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
-        RequestDma3Copy((u8*)w->sprite.tiles3->src + (w->total - (u16)(w->total / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
+        RequestDma3Copy(w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
+        RequestDma3Copy(w->sprite.tiles3->src + (w->total - (u16)(w->total / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
     }
 
     w->drawnTotal = w->total;
@@ -1884,8 +1884,8 @@ ObjTiles* AllocKeyValueTiles(u8 a) {
     if (a != 0) {
         obj = AllocSpriteFrameTiles(256);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[1], gUnk_0950C478);
-        RequestDma3Copy(&((u8*)obj->src)[a * 128], (void*)(OBJ_VRAM0 + (obj->index + 4) * 32), 128);
-        RequestDma3Copy(&((u8*)obj->src)[0x500], (void*)(OBJ_VRAM0 + obj->index * 32), 128);
+        RequestDma3Copy(&(obj->src)[a * 128], (void*)(OBJ_VRAM0 + (obj->index + 4) * 32), 128);
+        RequestDma3Copy(&(obj->src)[0x500], (void*)(OBJ_VRAM0 + obj->index * 32), 128);
     } else {
         obj = AllocSpriteFrameTiles(128);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[0], gUnk_0950C478);

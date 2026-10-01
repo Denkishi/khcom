@@ -138,7 +138,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
         LoadBgMap(w->args.bg, gUnk_096112B8, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
-        switch ((u32)w->messageDef->positionIndex) {
+        switch (w->messageDef->positionIndex) {
         case 0:
         case 2:
             SetBgScroll(w->args.bg, (u16)-24, 0);
@@ -155,7 +155,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
         break;
     case 2:
     case 3:
-        switch ((u32)w->messageDef->positionIndex) {
+        switch (w->messageDef->positionIndex) {
         case 0:
         case 2:
             w->frameX = 0x7800;
@@ -573,7 +573,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
         LoadBgMap(w->args.bg, gUnk_09985F44, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
-        switch ((u32)w->messageDef->positionIndex) {
+        switch (w->messageDef->positionIndex) {
         case 0:
         case 2:
             SetBgScroll(w->args.bg, 0, 0);
@@ -590,7 +590,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
         break;
     case 2:
     case 3:
-        switch ((u32)w->messageDef->positionIndex) {
+        switch (w->messageDef->positionIndex) {
         case 0:
         case 2:
             w->frameX = 0x7800;

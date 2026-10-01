@@ -92,7 +92,7 @@ static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
     w->messagePending = 0;
     w->keepOpen = 1;
 
-    switch ((u32)w->messageDef->positionIndex) {
+    switch (w->messageDef->positionIndex) {
     case 0:
     case 1:
         w->faceFlip = 1;

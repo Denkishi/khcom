@@ -2326,11 +2326,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     switch (work->state) {
     case 0:
         if ((s16)work->stateTimer == 0) {
-            if ((s16)work->steps == 0) {
+            if (work->steps == 0) {
                 SetBtlSoraAnimation(work, 0, 0);
             }
 
-            if ((s16)work->steps <= 29) {
+            if (work->steps <= 29) {
                 AnimReset(&work->anim);
             }
 
@@ -2750,7 +2750,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             work->vz = -460;
             m4aSongNumStart(SONG_VO_SR_ATTACK09);
-        } else if ((s16)work->stateTimer > 4 && (s16)work->steps != 0) {
+        } else if ((s16)work->stateTimer > 4 && work->steps != 0) {
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= work->unk_194;
             } else {
@@ -2773,10 +2773,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
 #ifndef VERSION_EU
-            if ((s16)work->steps == 8) {
+            if (work->steps == 8) {
             } else
 #endif
-            if ((s16)work->steps == 0) {
+            if (work->steps == 0) {
                 DisableBtlSoraPassThrough(work);
 
                 if (work->state != 22) {
@@ -3670,7 +3670,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         ApproachValue(&work->scaleX, 10, work->steps);
         ApproachValue(&work->scaleY, 512, work->steps);
 
-        if ((s16)--work->steps > 0) {
+        if (--work->steps > 0) {
             work->stateTimer++;
         } else {
             work->state = 75;
@@ -3705,7 +3705,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         ApproachValue(&work->scaleX, 256, work->steps);
         ApproachValue(&work->scaleY, 256, work->steps);
 
-        if ((s16)--work->steps <= 0) {
+        if (--work->steps <= 0) {
             FadeStartIn(FADE_MODE_GRAY, 1);
             MakeOpponentsHittable();
             SetBtlSoraState(work, 1);
@@ -4422,7 +4422,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             ApproachValueHalfSteps(&p->x, p->originX, work->steps);
             work->steps--;
         }
@@ -4539,7 +4539,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if ((s16)work->stateTimer >= (s16)work->steps) {
+        if ((s16)work->stateTimer >= work->steps) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
@@ -4655,9 +4655,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValue(&work->scaleY, 64, (*(s16*)&work->steps)--);
+        ApproachValue(&work->scaleY, 64, (* &work->steps)--);
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             work->stateTimer++;
         } else {
             work->stateTimer = 0;
@@ -4687,9 +4687,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 10;
         }
 
-        ApproachValueHalfSteps(&work->scaleY, 256, (*(s16*)&work->steps)--);
+        ApproachValueHalfSteps(&work->scaleY, 256, (* &work->steps)--);
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             work->stateTimer++;
         } else {
             p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
@@ -5172,7 +5172,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if ((s16)work->steps <= 0) {
+        if (work->steps <= 0) {
             work->state = 61;
             work->stateTimer = 0;
             break;
@@ -5914,7 +5914,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimGetFrame(&work->anim) > 1 && (s16)work->steps > 0) {
+        if (AnimGetFrame(&work->anim) > 1 && work->steps > 0) {
             s32 target_x = 0x10000;
 
             t = (gBtlWork->yMin + gBtlWork->yMax) << 7;
@@ -5926,7 +5926,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (p->z >= p->groundZ && (s16)work->steps == 0) {
+        if (p->z >= p->groundZ && work->steps == 0) {
             t2 = (gBtlWork->yMin + gBtlWork->yMax) << 7;
 
             if (p->groundZ != 0 || p->x != 0x10000 || p->y != t2) {
@@ -7822,7 +7822,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 49:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 26, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
             m4aSongNumStart(SONG_BTL_AN_STANDENTRY);
@@ -7843,7 +7843,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 50:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 27, 0);
         }
 
@@ -7879,7 +7879,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 51:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 28, 0);
             p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
         }
@@ -7909,7 +7909,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             e = PickBtlRikuTarget(work);
 
             if (e != NULL) {
@@ -7978,7 +7978,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->vz = 0;
         ApproachValue(&work->scaleX, 256, work->steps);
 
-        if ((s16)--work->steps <= 0) {
+        if (--work->steps <= 0) {
             work->state = 53;
             work->stateTimer = 0;
             break;
@@ -7990,7 +7990,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 53:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(SONG_EF_RK_LIMITMOV);
         }
 
@@ -8004,7 +8004,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->vz = 0;
 
-        if ((s16)work->stateTimer == 15 && (s16)work->unk_1B0 > 4) {
+        if (work->stateTimer == 15 && (s16)work->unk_1B0 > 4) {
             work->state = 54;
             work->stateTimer = 0;
             break;
@@ -8012,7 +8012,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer <= 30) {
+        if (work->stateTimer <= 30) {
             work->stateTimer = uv + 1;
             break;
         }
@@ -8024,22 +8024,22 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 54:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 32, 0);
             work->steps = 40;
         }
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             ApproachValue(&p->x, p->originX, work->steps);
             ApproachValue(&p->y, p->originY, work->steps);
             ApproachValue(&p->z, p->originZ, work->steps);
 
-            if ((s16)--work->steps <= 0) {
+            if (--work->steps <= 0) {
                 BgFxStartRikuLimitFinish(p->x, p->y - 8192, 0);
             }
         }
 
-        if (BgFxIsActive() == 0 && (s16)work->steps <= 0 && AnimIsFinished(&work->anim) != 0) {
+        if (BgFxIsActive() == 0 && work->steps <= 0 && AnimIsFinished(&work->anim) != 0) {
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(p);
             work->state = 35;
@@ -8053,7 +8053,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 42:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 22, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
         }
@@ -8146,7 +8146,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 48:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             FocusBtlRikuCameraOnTarget(work);
             SetBtlRikuAnimation(work, 25, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK08);
@@ -8236,7 +8236,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 41:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 21, 0);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             work->vz = -384;
@@ -8341,7 +8341,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 40:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 20, 0);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
         }
@@ -8444,7 +8444,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 60:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 33, 0);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             MakeOpponentsHittable();
@@ -8587,7 +8587,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 34, 0);
             m4aSongNumStart(GetRandom() % 2 + SONG_VO_RK_ATTACK04);
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
@@ -8713,7 +8713,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             SetBtlRikuAnimation(work, 15, 0);
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
@@ -8733,7 +8733,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->target = FindHighestEnemy(work);
         }
 
@@ -8763,7 +8763,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         break;
     }
     case 45:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 23, 0);
             work->vz = 1792;
             work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
@@ -8792,7 +8792,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if ((work->flags & BTL_RIKU_FLAG_SWING_HIT) != 0 || p->z >= p->groundZ) {
             work->stateTimer = 0;
 
-            if ((s16)work->steps > 4) {
+            if (work->steps > 4) {
                 work->state = 47;
                 break;
             }
@@ -8807,7 +8807,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 46: {
         BtlObj* e;
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->target = FindHighestEnemy(work);
             SetBtlRikuAnimation(work, 24, 0);
             work->vz = -2176;
@@ -8833,7 +8833,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 47:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 24, 0);
             work->vz = -1536;
 
@@ -8860,7 +8860,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 37:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 15, 0);
 
             if ((held & DPAD_ANY) == 0) {
@@ -8993,7 +8993,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 39:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             work->speed = 0;
             SetBtlRikuAnimation(work, 19, 0);
@@ -9051,7 +9051,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->originX = p->x;
         p->originY = p->y;
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 14, 0);
             gBtlWork->hitStop = gBtlWork->pendingHitStop;
@@ -9064,7 +9064,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 work->steps = 15;
             }
-        } else if ((s16)work->stateTimer == 6) {
+        } else if (work->stateTimer == 6) {
             switch (GetRandom() % 3) {
             case 0:
                 m4aSongNumStart(SONG_VO_RK_DAMAGE00);
@@ -9079,7 +9079,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->stateTimer >= (s16)work->steps && gBtlWork->darkPoints > 0) {
+        if (work->stateTimer >= work->steps && gBtlWork->darkPoints > 0) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
@@ -9173,7 +9173,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 0, 1);
             FadeToAmount(FADE_MODE_DARK_MAGENTA, 17, 16);
             m4aSongNumStart(SONG_SND_702);
@@ -9184,12 +9184,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->vz = 0;
 
-        if ((s16)work->stateTimer > 35 && (s16)work->steps != 0) {
+        if (work->stateTimer > 35 && work->steps != 0) {
             ApproachValue(&work->scaleY, 5, work->steps);
             work->steps--;
         }
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             work->stateTimer++;
             break;
         }
@@ -9201,7 +9201,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 32:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 24, 0);
             work->paletteData = gUnk_08F6DD04;
             LoadObjPaletteBank(work->palette->index, gUnk_08F6DD04);
@@ -9231,12 +9231,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         }
 
-        if ((s16)work->steps != 0) {
+        if (work->steps != 0) {
             ApproachValue(&work->scaleY, 256, work->steps);
             work->steps--;
         }
 
-        if ((s16)work->steps <= 0 && p->z >= p->groundZ) {
+        if (work->steps <= 0 && p->z >= p->groundZ) {
             FadeToOriginal(FADE_MODE_DARK_MAGENTA, 10);
             ClearBtlObjActionFlags(p);
             work->state = 35;
@@ -9260,7 +9260,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 14, 0);
             m4aSongNumStart(SONG_SND_716);
             BgFxStartRikuDarkModeFlash(p->x, p->y, p->z);
@@ -9270,12 +9270,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->vz = 0;
 
-        if ((s16)work->stateTimer > 20 && (s16)work->steps != 0) {
+        if (work->stateTimer > 20 && work->steps != 0) {
             ApproachValue(&work->scaleY, 5, work->steps);
             work->steps--;
         }
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             work->stateTimer++;
             break;
         }
@@ -9287,7 +9287,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 34:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             EndRikuDarkMode(work);
             SetBtlRikuAnimation(work, 0, 1);
             work->scaleY = 5;
@@ -9298,12 +9298,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         }
 
-        if ((s16)work->steps != 0) {
+        if (work->steps != 0) {
             ApproachValue(&work->scaleY, 256, work->steps);
             work->steps--;
         }
 
-        if ((s16)work->steps <= 0) {
+        if (work->steps <= 0) {
             p->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             work->state = 1;
             work->steps = 0;
@@ -9314,12 +9314,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 0:
-        if ((s16)work->stateTimer == 0) {
-            if ((s16)work->steps == 0) {
+        if (work->stateTimer == 0) {
+            if (work->steps == 0) {
                 SetBtlRikuAnimation(work, 11, 0);
             }
 
-            if ((s16)work->steps <= 69) {
+            if (work->steps <= 69) {
                 AnimReset(&work->anim);
             }
 
@@ -9389,7 +9389,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 2:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuDirAnimation(work, 1, 1);
 
             if ((held & DPAD_ANY) == 0) {
@@ -9405,7 +9405,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer <= 3) {
+        if (work->stateTimer <= 3) {
             work->stateTimer = uv + 1;
             break;
         }
@@ -9418,14 +9418,14 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->speed <<= 1;
         break;
     case 30:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             p->flags |= BTLOBJ_FLAG_INTANGIBLE;
             p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
             work->flags |= BTL_RIKU_FLAG_HIDDEN;
         }
 
-        if ((s16)work->stateTimer > 285) {
+        if (work->stateTimer > 285) {
             gBtlWork->flags |= 0x100000;
         } else {
             if (pressed & DPAD_ANY) {
@@ -9452,7 +9452,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 300) {
+        if (work->stateTimer > 300) {
             p->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->flags &= ~BTL_RIKU_FLAG_HIDDEN;
@@ -9565,7 +9565,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 4:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             work->speed = 0;
             SetBtlRikuDirAnimation(work, 5, 0);
@@ -9597,7 +9597,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer <= 6) {
+        if (work->stateTimer <= 6) {
             work->stateTimer = uv + 1;
             break;
         }
@@ -9620,7 +9620,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     case 10:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 10, 0);
         }
 
@@ -9638,7 +9638,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 9, 0);
         }
 
@@ -9661,7 +9661,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 14, 0);
         }
 
@@ -9680,7 +9680,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 56:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->actor2 = PickBtlRikuTarget(work);
             SetBtlRikuAnimation(work, 24, 0);
             EnableBtlRikuPassThrough(work);
@@ -9733,7 +9733,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 22:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->speed = 0;
             work->unk_194 = 0x880;
             work->steps = 20;
@@ -9765,12 +9765,12 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuDirAnimation(work, 4, 1);
         }
 
-        if ((s16)work->stateTimer == 4) {
+        if (work->stateTimer == 4) {
             EnableBtlRikuPassThrough(work);
             p->flags |= BTLOBJ_FLAG_HIT_LOCKED;
         }
 
-        if ((s16)work->steps != 0) {
+        if (work->steps != 0) {
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x += work->unk_194;
             } else {
@@ -9789,7 +9789,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->steps == 0 && p->z >= p->groundZ) {
+        if (work->steps == 0 && p->z >= p->groundZ) {
             p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
             DisableBtlRikuPassThrough(work);
             work->state = 23;
@@ -9801,7 +9801,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 23:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             SetBtlRikuDirAnimation(work, 5, 0);
         }
@@ -9819,7 +9819,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 57:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->speed = 0;
             work->unk_194 = 0x1080;
             work->steps = 20;
@@ -9839,13 +9839,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 18, 0);
         }
 
-        if ((s16)work->stateTimer == 4) {
+        if (work->stateTimer == 4) {
             EnableBtlRikuPassThrough(work);
         }
 
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-        if ((s16)work->steps != 0) {
+        if (work->steps != 0) {
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x += work->unk_194;
             } else {
@@ -9864,7 +9864,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->steps == 0 && p->z >= p->groundZ) {
+        if (work->steps == 0 && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
             work->state = 59;
             work->steps = 0;
@@ -9875,7 +9875,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 59:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             m4aSongNumStart(work->groundSongs[3]);
             SetBtlRikuAnimation(work, 19, 0);
         }
@@ -9892,7 +9892,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 58:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->speed = 0;
             work->unk_194 = 0x580;
             work->steps = 20;
@@ -9912,13 +9912,13 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 18, 0);
         }
 
-        if ((s16)work->stateTimer == 4) {
+        if (work->stateTimer == 4) {
             EnableBtlRikuPassThrough(work);
         }
 
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
 
-        if ((s16)work->steps != 0) {
+        if (work->steps != 0) {
             if (work->flags & BTL_RIKU_FLAG_DASH_UP) {
                 p->y -= work->unk_194;
             } else {
@@ -9937,7 +9937,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->steps == 0 && p->z >= p->groundZ) {
+        if (work->steps == 0 && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
             work->state = 59;
             work->steps = 0;
@@ -9950,7 +9950,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 12:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 9, 0);
         }
 
@@ -9979,15 +9979,15 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 #endif
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 10, 0);
         }
 
-        if ((s16)work->stateTimer == 23) {
+        if (work->stateTimer == 23) {
             BgFxStartPotion(p->x, p->y, p->z);
         }
 
-        if ((s16)work->stateTimer > 23 && BgFxIsActive() == 0) {
+        if (work->stateTimer > 23 && BgFxIsActive() == 0) {
             switch (work->variant[0]) {
             case 0:
                 if (work->mainSide != 0) {
@@ -10086,7 +10086,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             MakeOpponentsHittable();
             SetBtlRikuAnimation(work, a->animId, 0);
 
@@ -10107,7 +10107,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->btl->hcEffectCount--;
                 break;
             }
-        } else if ((s16)work->stateTimer == a->hitFrame) {
+        } else if (work->stateTimer == a->hitFrame) {
             if (p->btl->hcEffect == 34) {
                 switch (a->animId) {
                 case 5:
@@ -10192,7 +10192,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 work->flags &= ~BTL_RIKU_FLAG_SWING_HIT;
             }
-        } else if ((s16)work->stateTimer == a->hitFrame + 2) {
+        } else if (work->stateTimer == a->hitFrame + 2) {
             if (a->flags & COMBO_FLAG_ZOOM_ON_HIT) {
                 SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             }
@@ -10285,7 +10285,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             p->btl->actor2 = 0;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
@@ -10303,7 +10303,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 3) {
+        if (work->stateTimer > 3) {
             work->state = 25;
             work->steps = 0;
             work->stateTimer = 0;
@@ -10314,7 +10314,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     case 25:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->steps = 20;
             ColliderSetDisabled(&p->collider, 1);
             p->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
@@ -10322,7 +10322,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->originZ = p->z;
         }
 
-        switch ((s16)work->stateTimer) {
+        switch (work->stateTimer) {
         case 0:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 SetBtlRikuAnimation(work, 16, 0);
@@ -10349,7 +10349,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->steps--;
 
-        if ((s16)work->steps == 0) {
+        if (work->steps == 0) {
             work->state = 26;
             work->steps = 0;
             work->stateTimer = 0;
@@ -10359,7 +10359,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 26:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->flags |= BTL_RIKU_FLAG_HIDDEN;
             ReleaseBtlRikuPalette(work);
             spawn.mainSide = work->mainSide;
@@ -10401,11 +10401,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     case 27:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             work->steps = 20;
         }
 
-        switch ((s16)work->stateTimer) {
+        switch (work->stateTimer) {
         case 0:
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 SetBtlRikuAnimation(work, 17, 0);
@@ -10429,7 +10429,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        if ((s16)work->steps > 0) {
+        if (work->steps > 0) {
             ApproachValueHalfSteps(&p->x, p->originX, work->steps);
             work->steps--;
         }
@@ -10444,7 +10444,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->stateTimer++;
         break;
     case 28:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             ColliderSetDisabled(&p->collider, 0);
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             p->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
@@ -10458,7 +10458,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 6) {
+        if (work->stateTimer > 6) {
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 SetBtlRikuState(work, 35);
             } else {
@@ -10475,7 +10475,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             FadeFromAmount(FADE_MODE_RED, 4, 10);
             SetBtlRikuAnimation(work, 7, 0);
             p->flags |= BTLOBJ_FLAG_HURT;
@@ -10502,7 +10502,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 24) {
+        if (work->stateTimer > 24) {
             p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 1;
             work->steps = 0;
@@ -10518,7 +10518,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             FadeFromAmount(FADE_MODE_RED, 4, 10);
             SetBtlRikuAnimation(work, 14, 0);
             p->flags |= BTLOBJ_FLAG_HURT;
@@ -10545,7 +10545,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 24) {
+        if (work->stateTimer > 24) {
             p->flags &= ~BTLOBJ_FLAG_HURT;
             work->state = 35;
             work->steps = 0;
@@ -10561,7 +10561,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->originX = p->x;
         p->originY = p->y;
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 7, 0);
             gBtlWork->hitStop = gBtlWork->pendingHitStop;
@@ -10573,7 +10573,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             } else {
                 work->steps = 15;
             }
-        } else if ((s16)work->stateTimer == 6) {
+        } else if (work->stateTimer == 6) {
             switch (GetRandom() % 3) {
             case 0:
                 m4aSongNumStart(SONG_VO_RK_DAMAGE00);
@@ -10588,7 +10588,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if ((s16)work->stateTimer >= (s16)work->steps) {
+        if (work->stateTimer >= work->steps) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
@@ -10622,7 +10622,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     case 20:
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             StartBtlRikuKnockback(work);
             work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
             SetBtlRikuAnimation(work, 8, 0);
@@ -10676,7 +10676,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         SetBtlRikuAnimation(work, 0, 0);
         uv = work->stateTimer;
 
-        if ((s16)work->stateTimer > 60) {
+        if (work->stateTimer > 60) {
             gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
             work->state = 1;
             work->steps = 0;
@@ -10690,7 +10690,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 7:
         FocusBtlRikuCameraOnTarget(work);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             gBtlWork->flags |= BTL_FLAG_PLAYER_DEFEATED;
             StartBtlRikuKnockback(work);
             work->flags |= BTL_RIKU_FLAG_PASS_THROUGH;
@@ -10734,7 +10734,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 13:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 7, 0);
             work->stateTimer++;
@@ -10762,7 +10762,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case 62:
         BtlMapFollowPosition(p->x, p->y, p->z);
 
-        if ((s16)work->stateTimer == 0) {
+        if (work->stateTimer == 0) {
             AnimReset(&work->anim);
             SetBtlRikuAnimation(work, 14, 0);
             work->stateTimer++;

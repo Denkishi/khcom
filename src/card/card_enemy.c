@@ -684,9 +684,9 @@ void UseEnemyCard(u16 arg) {
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->activeValue <= p->value || p->value == 0) {
+        if (gCardBattleState->activeValue <= p->value || p->value == 0) {
 #else
-        if ((s16)gCardBattleState->activeValue <= p->value) {
+        if (gCardBattleState->activeValue <= p->value) {
 #endif
             found = 0;
 
@@ -746,7 +746,7 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
 
-                if ((s16)gCardBattleState->activeValue != p->value) {
+                if (gCardBattleState->activeValue != p->value) {
                     if (p->value == 0) {
                         gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
@@ -767,7 +767,7 @@ void UseEnemyCard(u16 arg) {
                             gCardBattleState->activeValue = 0;
                         }
 
-                        if ((s16)gCardBattleState->activeValue < 0) {
+                        if (gCardBattleState->activeValue < 0) {
                             gCardBattleState->activeValue = 0;
                         }
 
@@ -791,9 +791,9 @@ void UseEnemyCard(u16 arg) {
         }
     } else {
 #ifdef VERSION_EU
-        if ((s16)gCardBattleState->activeValue <= p->value || p->value == 0) {
+        if (gCardBattleState->activeValue <= p->value || p->value == 0) {
 #else
-        if ((s16)gCardBattleState->activeValue <= p->value) {
+        if (gCardBattleState->activeValue <= p->value) {
 #endif
             flag = 0;
 
@@ -852,7 +852,7 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
 
-                if ((s16)gCardBattleState->activeValue != p->value) {
+                if (gCardBattleState->activeValue != p->value) {
                     if (p->value == 0) {
                         gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
@@ -874,7 +874,7 @@ void UseEnemyCard(u16 arg) {
                             gCardBattleState->activeValue = 0;
                         }
 
-                        if ((s16)gCardBattleState->activeValue < 0) {
+                        if (gCardBattleState->activeValue < 0) {
                             gCardBattleState->activeValue = 0;
                         }
 
@@ -927,7 +927,7 @@ void func_080917C8(u16 a, u8 b) {
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
         if (gCardBattleState->soraHcEffect != 2) {
-            if ((s16)gCardBattleState->activeValue < p->cardDef->value) {
+            if (gCardBattleState->activeValue < p->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
@@ -972,7 +972,7 @@ void func_08091978(u16 a, u8 b) {
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         if (gBtlWork->hcEffect == 2) {
-            if ((s16)gCardBattleState->activeValue < p->cardDef->value) {
+            if (gCardBattleState->activeValue < p->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }

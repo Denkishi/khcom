@@ -762,7 +762,7 @@ void _08019CB4() {
             gBtlWork->phase = 4;
             gBtlWork->phaseStep = 0;
 
-            switch ((u32)gBtlWork->battleId) {
+            switch (gBtlWork->battleId) {
             case 120:
             case 124:
                 pos.x = 0x10000;
@@ -824,7 +824,7 @@ void _08019CB4() {
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlExp, 0);
 
             if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) && !(gBtlWork->flags & BTL_FLAG_HUM_BATTLE)) {
-                switch ((u32)gBtlWork->battleId) {
+                switch (gBtlWork->battleId) {
                 case 120:
                 case 122:
                 case 123:
@@ -989,7 +989,7 @@ void _08019CB4() {
                 memcpy(&state->progression.maxHp, gBtlWork->savedProgression, 0x88);
                 state->flags |= GAME_FLAG_BATTLE_NOT_WON;
 
-                switch ((u32)gBtlWork->battleId) {
+                switch (gBtlWork->battleId) {
                 case 166:
                     state->progression.friendFlags = 0;
                     break;

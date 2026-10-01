@@ -33,7 +33,7 @@ typedef struct BoogieWork {
 
 typedef struct BoogieDiceWork {
     u32 state;
-    u16 timer;
+    s16 timer;
     u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;

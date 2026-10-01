@@ -655,7 +655,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 #endif
 
-        if ((s16)work->timer == 0 && work->follower == 0) {
+        if (work->timer == 0 && work->follower == 0) {
             ClearBtlObjActionFlags(p);
             gBosBoogieDiceBreakCount++;
             work->counted = 1;
@@ -683,7 +683,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         break;
     case 1:
-        if ((s16)work->timer > 59) {
+        if (work->timer > 59) {
             work->state = 6;
             break;
         }
@@ -727,7 +727,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         break;
     case 5:
-        if ((s16)work->timer > 20) {
+        if (work->timer > 20) {
             work->state = 6;
             break;
         }
@@ -747,7 +747,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         break;
     case 7:
-        if ((s16)work->timer > 10) {
+        if (work->timer > 10) {
             work->state = 8;
             work->timer = 0;
             break;
@@ -778,7 +778,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         break;
     case 10:
-        if ((s16)work->timer > 30) {
+        if (work->timer > 30) {
             return 0;
         }
 
@@ -2082,7 +2082,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
 
     switch (work->state) {
     case 1:
-        if ((s16)work->timer == 0) {
+        if (work->timer == 0) {
             BosUrsulaStartAttack(BosUrsulaChooseAttack(work));
             work->timer = 1;
         } else {
@@ -2103,7 +2103,7 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
         BosUrsulaStartAttack(0);
         break;
     case 3:
-        if ((s16)work->timer > 20) {
+        if (work->timer > 20) {
             ClearBtlObjActionFlags(p);
 
             if (BosUrsulaGetHpPhase() == 1 && !BosUrsulaIsGimmickActive()) {
@@ -2119,13 +2119,13 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
 
         break;
     case 4:
-        if ((s16)work->timer == 0) {
+        if (work->timer == 0) {
             BeginBossDefeat(p);
             BosUrsulaUpdateMapBlocks(work);
             work->timer++;
-        } else if ((s16)work->timer == 1) {
+        } else if (work->timer == 1) {
             work->timer++;
-        } else if ((s16)work->timer == 2) {
+        } else if (work->timer == 2) {
             if (BosUrsulaIsFacingLeft()) {
                 x = p->x + 0x1400;
             } else {
@@ -2135,14 +2135,14 @@ u8 task_bos_ursula_1(UrsulaWork* work) {
             BgFxStartBossDeath(x, p->y + p->z + 0x1C00);
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
             work->timer++;
-        } else if ((s16)work->timer == 3) {
+        } else if (work->timer == 3) {
             if (!FadeIsActive()) {
                 work->timer++;
             }
-        } else if ((s16)work->timer < 124) {
+        } else if (work->timer < 124) {
             work->timer++;
 
-            if ((s16)work->timer == 124) {
+            if (work->timer == 124) {
                 BgFxStartBossDeathFlash();
             }
         } else if (!BgFxIsActive()) {

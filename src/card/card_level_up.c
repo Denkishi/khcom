@@ -164,7 +164,7 @@ void Level_Up_0(LevelUpWork* w) {
     } else {
         w->unk_7C6 = 1;
 
-        switch ((u32)gBtlWork->battleId) {
+        switch (gBtlWork->battleId) {
         case 151:
             SetBgSize(0, 0);
             SetupBg(0, 0, 26, 0);

@@ -1837,7 +1837,7 @@ void TryRikuCardBreak(CardBattleWork* w) {
         n = gRikuSelectedCard->value;
     }
 
-    if ((s16)gCardBattleState->activeValue > n && n != 0) {
+    if (gCardBattleState->activeValue > n && n != 0) {
         return;
     }
 
@@ -1883,9 +1883,9 @@ void TryRikuCardBreak(CardBattleWork* w) {
 
     gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
-    if ((s16)gCardBattleState->activeValue != n) {
+    if (gCardBattleState->activeValue != n) {
         if (n == 0) {
-            if ((s16)gCardBattleState->activeValue > 9) {
+            if (gCardBattleState->activeValue > 9) {
                 gBtlWork->breakDifference = 9;
             } else {
                 gBtlWork->breakDifference = gCardBattleState->activeValue;
@@ -1942,7 +1942,7 @@ u8 UseRikuCard(CardBattleWork* w) {
                 gRikuSelectedCard->value = 9;
             }
 
-            if ((s16)gCardBattleState->activeValue > 9) {
+            if (gCardBattleState->activeValue > 9) {
                 gCardBattleState->activeValue = 9;
             }
 
@@ -2284,7 +2284,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
     s32 k;
 #endif
 
-    if ((s16)gCardBattleState->activeValue > n && n != 0) {
+    if (gCardBattleState->activeValue > n && n != 0) {
         return;
     }
 
@@ -2334,7 +2334,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
 
     gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
-    if ((s16)gCardBattleState->activeValue != n) {
+    if (gCardBattleState->activeValue != n) {
         if (n == 0) {
             gBtlWork->breakDifference = -(u8)gCardBattleState->activeValue;
 

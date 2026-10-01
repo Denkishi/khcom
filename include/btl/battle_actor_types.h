@@ -49,7 +49,7 @@ typedef struct Collider {
     u16 standFlags;
     u16 flags;
     u8 unk_32[0x02];
-    s32 otherType;
+    u32 otherType;
     s32 pushX;
     s32 pushY;
     s32 platformZ;

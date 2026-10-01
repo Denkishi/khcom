@@ -137,7 +137,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
 
             do {
                 cnt = GetObjTileCount(((ObjTileListEntry*)c)->attr0, ((ObjTileListEntry*)c)->attr1);
-                RequestDma3Copy((u8*)((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), cnt << 5);
+                RequestDma3Copy(((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), cnt << 5);
                 base += cnt;
                 c = (u16*)c + 3;
             } while (--i);
@@ -1144,7 +1144,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
 
                 do {
                     n = GetObjTileCount(b[0], b[1]);
-                    RequestDma3Copy((u8*)a->src + ((b[2] & 0x3FF) << 5),
+                    RequestDma3Copy(a->src + ((b[2] & 0x3FF) << 5),
                                     (void*)(((a->index + acc) << 5) + OBJ_VRAM0), n * 32);
                     acc = acc + n;
                     b += 3;

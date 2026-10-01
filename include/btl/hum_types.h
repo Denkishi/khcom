@@ -63,9 +63,9 @@ typedef struct HumWork {
     s16 stateTimer;
     s16 steps;
     u32 flags;
-    u32 vz;
-    u32 targetX;
-    u32 targetY;
+    s32 vz;
+    s32 targetX;
+    s32 targetY;
     s32 targetZ;
     s32 scaleX;
     s32 scaleY;

@@ -1347,8 +1347,8 @@ typedef struct MapSelectWork {
     u8 mosaicX;
     u8 mosaicY;
     u8 mosaicTimer;
-    u8 valueColumn;
-    u8 valueRow;
+    s8 valueColumn;
+    s8 valueRow;
     u8 paletteBuffer[0x20];
     u8 isEventDoor;
     u8 cancelled;

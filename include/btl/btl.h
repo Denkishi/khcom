@@ -110,7 +110,7 @@ typedef struct BtlSoraWork {
     BtlObj actor;
     s32 vz;
     u16 stateTimer;
-    u16 steps;
+    s16 steps;
     u16 unk_158;
     u16 flags;
     s32 speed;
@@ -166,8 +166,8 @@ typedef struct BtlRikuWork {
     u32 unk_040;
     BtlObj actor;
     s32 vz;
-    u16 stateTimer;
-    u16 steps;
+    s16 stateTimer;
+    s16 steps;
     u16 unk_15C;
     u16 flags;
     s32 speed;

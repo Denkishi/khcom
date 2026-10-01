@@ -3653,7 +3653,7 @@ u8 BosMdUpdateBite(MdWork* work) {
 
             break;
         case 1:
-            switch ((s16)work->anim.frames[work->anim.frame].gfxIndex) {
+            switch (work->anim.frames[work->anim.frame].gfxIndex) {
             case 33:
             case 34:
             case 36:
@@ -3717,7 +3717,7 @@ u8 BosMdUpdateQuake(MdWork* work) {
         case 1:
             switch (work->step) {
             case 0:
-                v = (s16)work->anim.frames[work->anim.frame].gfxIndex;
+                v = work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 18) {
                     ApplyAttackBox(252, gBtlWork->viewX, gBtlWork->viewY, 0,
@@ -3737,7 +3737,7 @@ u8 BosMdUpdateQuake(MdWork* work) {
 
                 break;
             case 1:
-                v = (s16)work->anim.frames[work->anim.frame].gfxIndex;
+                v = work->anim.frames[work->anim.frame].gfxIndex;
 
                 if (v == 22) {
                     MakeOpponentsHittable();
@@ -4147,13 +4147,13 @@ s32 task_bos_md_1(MdWork* work) {
 
     for (i = 0; i < 1; i++) {
         work->sub[i].x = gBtlWork->bossX
-            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].x * 256;
         work->sub[i].y = gBtlWork->bossY
-            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].y * 256;
         work->sub[i].z = gBtlWork->bossZ
-            + sMdFrameDefs[(s16)work->anim.frames[work->anim.frame].gfxIndex]
+            + sMdFrameDefs[work->anim.frames[work->anim.frame].gfxIndex]
                   .pos[i].z * 256;
         ColliderSetPosition(&work->sub[i].collider, work->sub[i].x, work->sub[i].y,
                       work->sub[i].z);

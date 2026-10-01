@@ -2252,7 +2252,7 @@ void TrySoraCardBreak(CardBattleWork* w) {
         n = gSoraSelectedCard->value;
     }
 
-    if ((s16)gCardBattleState->activeValue > n && n != 0) {
+    if (gCardBattleState->activeValue > n && n != 0) {
         return;
     }
 
@@ -2304,17 +2304,17 @@ void TrySoraCardBreak(CardBattleWork* w) {
 
     gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
-    if ((s16)gCardBattleState->activeValue != n) {
+    if (gCardBattleState->activeValue != n) {
         if (n == 0) {
-            if ((s16)gCardBattleState->activeValue > 9) {
+            if (gCardBattleState->activeValue > 9) {
                 gBtlWork->breakDifference = 9;
             } else {
                 gBtlWork->breakDifference = gCardBattleState->activeValue;
             }
-        } else if (n - (s16)gCardBattleState->activeValue > 9) {
+        } else if (n - gCardBattleState->activeValue > 9) {
             gBtlWork->breakDifference = 9;
         } else {
-            gBtlWork->breakDifference = n - (s16)gCardBattleState->activeValue;
+            gBtlWork->breakDifference = n - gCardBattleState->activeValue;
         }
 
         m4aSongNumStart(SONG_BTL_GARD);
@@ -2377,7 +2377,7 @@ s32 UseSoraCard(CardBattleWork* w) {
                 gSoraSelectedCard->value = 9;
             }
 
-            if ((s16)gCardBattleState->activeValue > 9) {
+            if (gCardBattleState->activeValue > 9) {
                 gCardBattleState->activeValue = 9;
             }
 
@@ -3076,7 +3076,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
     total = 0;
     arr = gUnk_09033FD0;
 
-    if ((s16)gCardBattleState->activeValue > n && n != 0) {
+    if (gCardBattleState->activeValue > n && n != 0) {
         return;
     }
 
@@ -3128,15 +3128,15 @@ void TrySoraStockBreak(CardBattleWork* w) {
 
     gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
-    if ((s16)gCardBattleState->activeValue != n) {
+    if (gCardBattleState->activeValue != n) {
         if (n == 0) {
-            if ((s16)gCardBattleState->activeValue > 9) {
+            if (gCardBattleState->activeValue > 9) {
                 gBtlWork->breakDifference = 9;
             } else {
                 gBtlWork->breakDifference = gCardBattleState->activeValue;
             }
         } else {
-            if (n - (s16)gCardBattleState->activeValue > 9) {
+            if (n - gCardBattleState->activeValue > 9) {
                 gBtlWork->breakDifference = 9;
             } else {
                 gBtlWork->breakDifference = n - (u8)gCardBattleState->activeValue;

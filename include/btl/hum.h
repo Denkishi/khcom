@@ -447,7 +447,7 @@ typedef struct AxcelWork {
     HumSub sub;
     HumSub sub2;
     s32 hoverZ;
-    u16 steps;
+    s16 steps;
     u16 flags;
     u16 scaleSteps;
     u16 unk_20A;

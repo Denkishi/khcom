@@ -37,7 +37,7 @@ typedef struct MdFrameDef {
 } MdFrameDef;
 
 typedef struct MdAnimFrame {
-    u16 gfxIndex;
+    s16 gfxIndex;
     u16 duration;
 } MdAnimFrame;
 

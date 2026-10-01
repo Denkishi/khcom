@@ -20,7 +20,7 @@ enum CardMessageFlag {
 
 typedef struct CardMessageDef {
     s32 portraitId;
-    s32 positionIndex;
+    u32 positionIndex;
     u16 expressionId;
     u8 charDelay;
     u8 unk_0B;

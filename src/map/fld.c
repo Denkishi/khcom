@@ -733,7 +733,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     }
 
     if (work->collider.colliding != 0) {
-        switch ((u32)work->collider.otherType) {
+        switch (work->collider.otherType) {
         case 3:
         case 5:
         case 11:
@@ -1412,7 +1412,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
     }
 
     if (work->collider.colliding != 0) {
-        switch ((u32)work->collider.otherType) {
+        switch (work->collider.otherType) {
         case 5:
         case 3:
         case 11:
@@ -1573,7 +1573,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
         }
 
         if (work->collider.colliding != 0) {
-            switch ((u32)work->collider.otherType) {
+            switch (work->collider.otherType) {
             case 3:
             case 5:
             case 11:
@@ -2444,7 +2444,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
     }
 
     if (work->collider.colliding != 0) {
-        switch ((u32)work->collider.otherType) {
+        switch (work->collider.otherType) {
         case 3:
         case 5:
         case 11:
@@ -3117,7 +3117,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
     }
 
     if (work->collider.colliding != 0) {
-        switch ((u32)work->collider.otherType) {
+        switch (work->collider.otherType) {
         case 5:
         case 3:
         case 11:
@@ -3278,7 +3278,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
         }
 
         if (work->collider.colliding != 0) {
-            switch ((u32)work->collider.otherType) {
+            switch (work->collider.otherType) {
             case 3:
             case 5:
             case 11:

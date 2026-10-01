@@ -33,7 +33,7 @@ typedef struct CardBattleState {
     u32 pickedFriendCardId;
     u32 pickedGimmickCardId;
     u16 unk_0C0;
-    u16 activeValue;
+    s16 activeValue;
     u16 soraStockName;
     u16 rikuStockName;
     u16 unk_0C8;

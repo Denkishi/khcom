@@ -159,9 +159,9 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
         } else {
             w->tiles4 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[1], gUnk_0950C478);
-            RequestDma3Copy((u8*)w->tiles4->src + (w->requiredValue << 7),
+            RequestDma3Copy(w->tiles4->src + (w->requiredValue << 7),
                            (void*)(OBJ_VRAM0 + ((w->tiles4->index + 4) << 5)), 0x80);
-            RequestDma3Copy((u8*)w->tiles4->src + 0x500,
+            RequestDma3Copy(w->tiles4->src + 0x500,
                            (void*)(OBJ_VRAM0 + (w->tiles4->index << 5)), 0x80);
         }
 
@@ -469,7 +469,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* w, void* a) {
     u8 n;
 
     keys = GetKeysPressed();
-    sel = (s8)w->valueColumn + (s8)w->valueRow * 5;
+    sel = w->valueColumn + w->valueRow * 5;
 
     if ((gGameState.progression.unk_82 & 8) == 0) {
         if (w->steps == 0) {
@@ -1639,7 +1639,7 @@ s32 FindLastMapSelectValueInRow(MapSelectWork* w) {
     u8 i;
 
     i = 4;
-    base = (s8)w->valueRow * 5;
+    base = w->valueRow * 5;
     p = w->valueCounts;
 
     do {
@@ -1665,25 +1665,25 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
     switch (GetKeysRepeat() & DPAD_ANY) {
     case DPAD_RIGHT:
         do {
-            if ((s8)w->valueColumn <= 3) {
+            if (w->valueColumn <= 3) {
                 w->valueColumn++;
             } else {
                 w->valueColumn = 0;
                 w->valueRow ^= 1;
             }
-        } while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0);
+        } while (w->valueCounts[w->valueColumn + w->valueRow * 5] == 0);
 
         w->steps2 = 4;
         break;
     case DPAD_LEFT:
         do {
-            if ((s8)w->valueColumn > 0) {
+            if (w->valueColumn > 0) {
                 w->valueColumn--;
             } else {
                 w->valueColumn = 4;
                 w->valueRow ^= 1;
             }
-        } while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0);
+        } while (w->valueCounts[w->valueColumn + w->valueRow * 5] == 0);
 
         w->steps2 = 4;
         break;
@@ -1691,8 +1691,8 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         w->valueRow ^= 1;
         c0 = w->valueColumn;
 
-        while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0) {
-            if ((s8)w->valueColumn > 3) {
+        while (w->valueCounts[w->valueColumn + w->valueRow * 5] == 0) {
+            if (w->valueColumn > 3) {
                 z = 1;
                 break;
             }
@@ -1704,7 +1704,7 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         if (z == 1) {
             w->valueColumn = FindLastMapSelectValueInRow(w);
 
-            if ((s8)w->valueColumn == -1) {
+            if (w->valueColumn == -1) {
                 w->valueRow ^= 1;
                 w->valueColumn = c0;
             }
@@ -1716,8 +1716,8 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         w->valueRow ^= 1;
         c0 = w->valueColumn;
 
-        while (w->valueCounts[(s8)w->valueColumn + (s8)w->valueRow * 5] == 0) {
-            if ((s8)w->valueColumn > 3) {
+        while (w->valueCounts[w->valueColumn + w->valueRow * 5] == 0) {
+            if (w->valueColumn > 3) {
                 z = 1;
                 break;
             }
@@ -1729,7 +1729,7 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         if (z == 1) {
             w->valueColumn = FindLastMapSelectValueInRow(w);
 
-            if ((s8)w->valueColumn == -1) {
+            if (w->valueColumn == -1) {
                 w->valueRow ^= 1;
                 w->valueColumn = c0;
             }
@@ -1739,14 +1739,14 @@ void HandleMapSelectValueCursor(MapSelectWork* w) {
         break;
     }
 
-    if (c0 != (s8)w->valueColumn || y0 != (s8)w->valueRow) {
+    if (c0 != w->valueColumn || y0 != w->valueRow) {
         m4aSongNumStart(SONG_SYS_CLICKI04B);
     }
 
-    ApproachValue(&w->x2, gMapSelectValueColumnX[(s8)w->valueColumn] << 8, w->steps2);
-    ApproachValue(&w->y2, gMapSelectValueRowY[(s8)w->valueRow] << 8, w->steps2);
-    ApproachValue(&w->x, gMapSelectValueColumnX[(s8)w->valueColumn] << 8, w->steps);
-    ApproachValue(&w->y, (gMapSelectValueRowY[(s8)w->valueRow] + 34) << 8,
+    ApproachValue(&w->x2, gMapSelectValueColumnX[w->valueColumn] << 8, w->steps2);
+    ApproachValue(&w->y2, gMapSelectValueRowY[w->valueRow] << 8, w->steps2);
+    ApproachValue(&w->x, gMapSelectValueColumnX[w->valueColumn] << 8, w->steps);
+    ApproachValue(&w->y, (gMapSelectValueRowY[w->valueRow] + 34) << 8,
                   w->steps);
 
     if (w->steps != 0) {

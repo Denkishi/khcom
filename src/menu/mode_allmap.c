@@ -118,32 +118,31 @@ u16* gAllmapBg1MapBlocks[8] EWRAM_COMMON(16);
 u16* gAllmapBg0Map EWRAM_COMMON(4);
 u16 gAllmapScrollInTimer EWRAM_COMMON(4);
 
-u16 gAllmapPalTimer;
-u16 gAllmapPalStep;
-s16 gAllmapBlendTimer;
-s16 gUnk_02034E3E;
-u8 gUnk_02034E40[0x40];
-u8 gAllmapReturnToMenu;
-u8 gAllmapLowerBgm;
+static u16 sAllmapPalTimer;
+static u16 sAllmapPalStep;
+static s16 sAllmapBlendTimer;
+static u8 sUnk_02034E40[0x40];
+static u8 sAllmapReturnToMenu;
+static u8 sAllmapLowerBgm;
 
 void AllmapCyclePalette(void) {
     PooPalStep t[9];
 
     memcpy(t, sAllmapPalSteps, sizeof(t));
-    gAllmapPalTimer++;
+    sAllmapPalTimer++;
 
-    if (gAllmapPalTimer < t[gAllmapPalStep].duration) {
+    if (sAllmapPalTimer < t[sAllmapPalStep].duration) {
         return;
     }
 
-    gAllmapPalTimer = 0;
-    gAllmapPalStep++;
+    sAllmapPalTimer = 0;
+    sAllmapPalStep++;
 
-    if (t[gAllmapPalStep].palette == 0xFF) {
-        gAllmapPalStep = 0;
+    if (t[sAllmapPalStep].palette == 0xFF) {
+        sAllmapPalStep = 0;
     }
 
-    LoadPalette(&gUnk_0984A138[t[gAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
+    LoadPalette(&gUnk_0984A138[t[sAllmapPalStep].palette * 0x20], (void*)0x05000040, 0x20);
 }
 
 void AllmapLoadWorldBg(void) {
@@ -182,10 +181,10 @@ void AllmapLoadFloorTiles(void) {
 }
 
 void mode_allmap_0(s32 a) {
-    gAllmapLowerBgm = 0;
+    sAllmapLowerBgm = 0;
 
     if (a == 1) {
-        gAllmapLowerBgm = a;
+        sAllmapLowerBgm = a;
     }
 
     SetObjPaletteRange(0, 14);
@@ -226,20 +225,20 @@ void mode_allmap_0(s32 a) {
     REG_IME = 1;
     FadeStartIn(FADE_MODE_BLACK, 16);
 
-    if (gAllmapLowerBgm != 0) {
+    if (sAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
     }
 
     gAllmapScrollInTimer = 30;
     gAllmapCursorDropTimer = 30;
-    gAllmapPalTimer = 0;
-    gAllmapPalStep = 0;
+    sAllmapPalTimer = 0;
+    sAllmapPalStep = 0;
 }
 
 void func_080D3370(void) {
     FadeSetPaletteExcluded(10, 1);
-    CpuSet(gUnk_05000140, gUnk_02034E40, 16);
-    LoadPalette(gUnk_02034E40, gUnk_05000140, 32);
+    CpuSet(gUnk_05000140, sUnk_02034E40, 16);
+    LoadPalette(sUnk_02034E40, gUnk_05000140, 32);
 }
 
 void mode_allmap_1(void) {
@@ -250,9 +249,9 @@ void mode_allmap_1(void) {
     if (gAllmapModeState == 0 && !FadeIsActive()) {
         if (gAllmapScrollInTimer != 0 && gAllmapCursorDropTimer != 0) {
             gAllmapModeState = 1;
-            gAllmapBlendTimer = 16;
+            sAllmapBlendTimer = 16;
         } else {
-            ReturnToMap(gAllmapReturnToMenu);
+            ReturnToMap(sAllmapReturnToMenu);
         }
     }
 
@@ -265,15 +264,15 @@ void mode_allmap_1(void) {
             gAllmapCursorDropTimer--;
         }
 
-        if (gAllmapBlendTimer > 0) {
-            if (gAllmapBlendTimer == 16) {
+        if (sAllmapBlendTimer > 0) {
+            if (sAllmapBlendTimer == 16) {
                 AllmapDimPalette10();
             }
 
-            gAllmapBlendTimer--;
-            AllmapSetBlend(gAllmapBlendTimer);
+            sAllmapBlendTimer--;
+            AllmapSetBlend(sAllmapBlendTimer);
 
-            if (gAllmapBlendTimer == 0) {
+            if (sAllmapBlendTimer == 0) {
                 func_080D3370();
             }
         }
@@ -304,7 +303,7 @@ void mode_allmap_2(void) {
     REG_IME = 1;
     ResetVCountCallback();
 
-    if (gAllmapLowerBgm != 0) {
+    if (sAllmapLowerBgm != 0) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
     }
 
@@ -313,7 +312,7 @@ void mode_allmap_2(void) {
 }
 
 void SetAllmapReturnToMenu(u8 a) {
-    gAllmapReturnToMenu = a;
+    sAllmapReturnToMenu = a;
 }
 
 u8 func_080D3538(u8 a, u8 b) {

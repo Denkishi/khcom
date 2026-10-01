@@ -116,7 +116,6 @@ static void* gUnk_02035D98;
 static struct ObjTiles* sMsChargePremiumTiles;
 static AnimState sMsChargePremiumAnim;
 static struct ObjTiles* sMsChargeGridPremiumTiles;
-static u32 gUnk_02035DBC;
 static AnimState sMsChargeGridPremiumAnim;
 static u8 sMsChargeCardPremium;
 static TextSlot* sMsChargeNameText;

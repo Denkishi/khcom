@@ -17,13 +17,12 @@
 #include "taskpool.h"
 #include "types.h"
 
-DmaStream gDmaStream __attribute__((aligned(8)));
-u8 gBlockAudioPlaying;
-u32 gUnk_0203604C;
-s32 gDecodedAudioBuffer[0x810];
-u32* gAudioBlockNext;
-s32 gDecodedAudioWritePosition;
-s32 gDecodedAudioReadPosition;
+static DmaStream sDmaStream;
+static u8 sBlockAudioPlaying;
+static s32 sDecodedAudioBuffer[0x810];
+static u32* sAudioBlockNext;
+static s32 sDecodedAudioWritePosition;
+static s32 sDecodedAudioReadPosition;
 
 static s32 Square(s32 x) {
     return x * x;
@@ -1200,14 +1199,14 @@ void ScanlineDmaReset(void) {
     dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
     dma[5] &= ~DMA_ENABLE;
     dma[5];
-    gDmaStream.enabled = 0;
-    gDmaStream.swapPending = 0;
-    gDmaStream.update = 0;
-    gDmaStream.dst = 0;
-    gDmaStream.srcIdx = 0;
-    gDmaStream.src[0] = 0;
-    gDmaStream.src[1] = 0;
-    gDmaStream.cnt = 0;
+    sDmaStream.enabled = 0;
+    sDmaStream.swapPending = 0;
+    sDmaStream.update = 0;
+    sDmaStream.dst = 0;
+    sDmaStream.srcIdx = 0;
+    sDmaStream.src[0] = 0;
+    sDmaStream.src[1] = 0;
+    sDmaStream.cnt = 0;
 }
 
 void ScanlineDmaUpdate(void) {
@@ -1220,85 +1219,85 @@ void ScanlineDmaUpdate(void) {
     dma[5] &= ~DMA_ENABLE;
     dma[5];
 
-    if (gDmaStream.enabled != 0) {
-        if (gDmaStream.swapPending != 0) {
-            gDmaStream.srcIdx ^= 1;
-            src = gDmaStream.src[gDmaStream.srcIdx];
-            gDmaStream.dmaSrc = src;
+    if (sDmaStream.enabled != 0) {
+        if (sDmaStream.swapPending != 0) {
+            sDmaStream.srcIdx ^= 1;
+            src = sDmaStream.src[sDmaStream.srcIdx];
+            sDmaStream.dmaSrc = src;
 
-            if (!(gDmaStream.cnt & CPU_SET_SRC_FIXED)) {
-                if (gDmaStream.cnt & CPU_SET_32BIT) {
-                    gDmaStream.dmaSrc = src + 4;
+            if (!(sDmaStream.cnt & CPU_SET_SRC_FIXED)) {
+                if (sDmaStream.cnt & CPU_SET_32BIT) {
+                    sDmaStream.dmaSrc = src + 4;
                 } else {
-                    gDmaStream.dmaSrc = src + 2;
+                    sDmaStream.dmaSrc = src + 2;
                 }
             }
 
-            gDmaStream.swapPending = 0;
+            sDmaStream.swapPending = 0;
         }
 
-        if (gDmaStream.src[gDmaStream.srcIdx] != NULL && gDmaStream.dst != NULL &&
-            gDmaStream.cnt != 0) {
+        if (sDmaStream.src[sDmaStream.srcIdx] != NULL && sDmaStream.dst != NULL &&
+            sDmaStream.cnt != 0) {
             dma32 = (vu32*)REG_ADDR_DMA0;
-            dma32[0] = (u32)gDmaStream.dmaSrc;
-            dma32[1] = (u32)gDmaStream.dst;
-            dma32[2] = gDmaStream.cnt;
+            dma32[0] = (u32)sDmaStream.dmaSrc;
+            dma32[1] = (u32)sDmaStream.dst;
+            dma32[2] = sDmaStream.cnt;
             dma32[2];
         }
 
-        if (gDmaStream.update != NULL) {
-            gDmaStream.update();
+        if (sDmaStream.update != NULL) {
+            sDmaStream.update();
         }
     }
 }
 
 void ScanlineDmaPrime32Bit(void) {
-    *gDmaStream.dst = *(u32*)gDmaStream.src[gDmaStream.srcIdx];
+    *sDmaStream.dst = *(u32*)sDmaStream.src[sDmaStream.srcIdx];
 }
 
 void ScanlineDmaPrime16Bit(void) {
-    *gDmaStream.dst = *(u16*)gDmaStream.src[gDmaStream.srcIdx];
+    *sDmaStream.dst = *(u16*)sDmaStream.src[sDmaStream.srcIdx];
 }
 
 void ScanlineDmaInit(vu16* dst, u8* src, u32 cnt) {
     ScanlineDmaReset();
-    gDmaStream.src[0] = src;
-    gDmaStream.src[1] = src;
-    gDmaStream.dmaSrc = src;
+    sDmaStream.src[0] = src;
+    sDmaStream.src[1] = src;
+    sDmaStream.dmaSrc = src;
 
     if (cnt & CPU_SET_32BIT) {
-        gDmaStream.update = ScanlineDmaPrime32Bit;
+        sDmaStream.update = ScanlineDmaPrime32Bit;
 
         if (!(cnt & CPU_SET_SRC_FIXED)) {
-            gDmaStream.dmaSrc = src + 4;
+            sDmaStream.dmaSrc = src + 4;
         }
     } else {
-        gDmaStream.update = ScanlineDmaPrime16Bit;
+        sDmaStream.update = ScanlineDmaPrime16Bit;
 
         if (!(cnt & CPU_SET_SRC_FIXED)) {
-            gDmaStream.dmaSrc = src + 2;
+            sDmaStream.dmaSrc = src + 2;
         }
     }
 
-    gDmaStream.dst = dst;
-    gDmaStream.cnt = cnt;
+    sDmaStream.dst = dst;
+    sDmaStream.cnt = cnt;
 }
 
 void ScanlineDmaQueueBuffer(u8* src) {
-    gDmaStream.src[gDmaStream.srcIdx ^ 1] = src;
-    gDmaStream.swapPending = 1;
+    sDmaStream.src[sDmaStream.srcIdx ^ 1] = src;
+    sDmaStream.swapPending = 1;
 }
 
 void ScanlineDmaEnable(void) {
-    gDmaStream.enabled = 1;
+    sDmaStream.enabled = 1;
 }
 
 void ScanlineDmaDisable(void) {
-    gDmaStream.enabled = 0;
+    sDmaStream.enabled = 0;
 }
 
 void BlockAudioStart(void) {
-    gBlockAudioPlaying = 1;
+    sBlockAudioPlaying = 1;
     AudioBlockStreamInit(GetBlockAudioData());
     PcmPlaybackInit(GetBlockAudioSampleRate());
     SetVBlankCallback(VBlankIntrBlockAudio);
@@ -1306,17 +1305,17 @@ void BlockAudioStart(void) {
 }
 
 void BlockAudioUpdate(void) {
-    if (gBlockAudioPlaying == 1) {
-        gBlockAudioPlaying = AudioBlockStreamUpdate();
+    if (sBlockAudioPlaying == 1) {
+        sBlockAudioPlaying = AudioBlockStreamUpdate();
 
-        if (gBlockAudioPlaying == 0) {
+        if (sBlockAudioPlaying == 0) {
             BlockAudioStop();
         }
     }
 }
 
 void BlockAudioVBlank(void) {
-    if (gBlockAudioPlaying == 1) {
+    if (sBlockAudioPlaying == 1) {
         PcmPlaybackUpdate();
     }
 }
@@ -1358,55 +1357,55 @@ s32 AudioBlockStreamInit(u32* src) {
     s32* p;
     u8* q;
 
-    for (p = gDecodedAudioBuffer; p < gDecodedAudioBuffer + 0x810;) {
+    for (p = sDecodedAudioBuffer; p < sDecodedAudioBuffer + 0x810;) {
         *p++ = 0;
     }
 
-    gAudioBlockNext = src;
+    sAudioBlockNext = src;
 
-    for (gDecodedAudioWritePosition = 0; gDecodedAudioWritePosition <= 0x7FF; gDecodedAudioWritePosition += 0x200) {
-        if (gAudioBlockNext != NULL) {
-            q = ReadNextAudioBlock(&gAudioBlockNext);
+    for (sDecodedAudioWritePosition = 0; sDecodedAudioWritePosition <= 0x7FF; sDecodedAudioWritePosition += 0x200) {
+        if (sAudioBlockNext != NULL) {
+            q = ReadNextAudioBlock(&sAudioBlockNext);
 
             if (q != NULL) {
-                DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
+                DecodeAudioBlock(q, sDecodedAudioBuffer, sDecodedAudioWritePosition);
             }
         }
     }
 
-    gDecodedAudioWritePosition &= 0x7FF;
-    gDecodedAudioReadPosition = 0;
-    return gAudioBlockNext != NULL;
+    sDecodedAudioWritePosition &= 0x7FF;
+    sDecodedAudioReadPosition = 0;
+    return sAudioBlockNext != NULL;
 }
 
 s32 AudioBlockStreamUpdate(void) {
     u8* q;
 
-    if (gDecodedAudioReadPosition > gDecodedAudioWritePosition + 0x200 || gDecodedAudioReadPosition < gDecodedAudioWritePosition) {
-        if (gAudioBlockNext != NULL) {
-            q = ReadNextAudioBlock(&gAudioBlockNext);
+    if (sDecodedAudioReadPosition > sDecodedAudioWritePosition + 0x200 || sDecodedAudioReadPosition < sDecodedAudioWritePosition) {
+        if (sAudioBlockNext != NULL) {
+            q = ReadNextAudioBlock(&sAudioBlockNext);
 
             if (q != NULL) {
-                DecodeAudioBlock(q, gDecodedAudioBuffer, gDecodedAudioWritePosition);
+                DecodeAudioBlock(q, sDecodedAudioBuffer, sDecodedAudioWritePosition);
             }
 
-            gDecodedAudioWritePosition = (gDecodedAudioWritePosition + 0x200) & 0x7FF;
+            sDecodedAudioWritePosition = (sDecodedAudioWritePosition + 0x200) & 0x7FF;
         }
     }
 
-    return gAudioBlockNext != NULL;
+    return sAudioBlockNext != NULL;
 }
 
 s32* GetDecodedAudioBuffer(void) {
-    return gDecodedAudioBuffer;
+    return sDecodedAudioBuffer;
 }
 
 s32 GetDecodedAudioReadPosition(void) {
-    return gDecodedAudioReadPosition;
+    return sDecodedAudioReadPosition;
 }
 
 void SetDecodedAudioReadPosition(s32 pos) {
-    gDecodedAudioReadPosition = pos;
+    sDecodedAudioReadPosition = pos;
 }
 
 TaskDesc gTaskDescSrollTmr = {

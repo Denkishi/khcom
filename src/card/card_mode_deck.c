@@ -20,19 +20,18 @@
 #include "types.h"
 
 #ifndef VERSION_EU
-TaskPool gModeDeckExchangeTasks;
+static TaskPool sModeDeckExchangeTasks;
 
-u8 gModeDeckExchangeResult;
+static u8 sModeDeckExchangeResult;
 
-u8 gUnk_02034B1D[3];
 #endif
 
 #ifndef VERSION_EU
 void Mode_DeckExchange_0(void) {
-    gModeDeckExchangeResult = 0;
+    sModeDeckExchangeResult = 0;
     gSioTradeCardId = 2048;
-    TaskPoolInit(&gModeDeckExchangeTasks, 1);
-    TaskCreate(&gModeDeckExchangeTasks, &gTaskDescDeckexchange, &gModeDeckExchangeResult);
+    TaskPoolInit(&sModeDeckExchangeTasks, 1);
+    TaskCreate(&sModeDeckExchangeTasks, &gTaskDescDeckexchange, &sModeDeckExchangeResult);
 }
 
 void Mode_DeckExchange_1(void) {
@@ -42,16 +41,16 @@ void Mode_DeckExchange_1(void) {
         UpdatePlayTime();
     }
 
-    TaskPoolUpdate(&gModeDeckExchangeTasks);
-    TaskPoolDraw(&gModeDeckExchangeTasks);
+    TaskPoolUpdate(&sModeDeckExchangeTasks);
+    TaskPoolDraw(&sModeDeckExchangeTasks);
 
-    if (gModeDeckExchangeResult == 6) {
+    if (sModeDeckExchangeResult == 6) {
         ModeRequest(&gModeSioChgCard, gSioTradeCardId);
     }
 }
 
 void Mode_DeckExchange_2(void) {
-    TaskPoolDestroy(&gModeDeckExchangeTasks);
+    TaskPoolDestroy(&sModeDeckExchangeTasks);
 }
 #endif
 

@@ -2305,13 +2305,6 @@ extern u8 gUnk_02034AF4[4];
 #endif
 extern u8 gLvupLogoActive;
 extern CardMsgWinWork* gActiveCardMsgwin;
-extern SysMsgWinWork* gActiveSysmsgwin;
-#ifndef VERSION_EU
-extern u8 gUnk_02034B04[4];
-extern TaskPool gModeDeckExchangeTasks;
-extern u8 gModeDeckExchangeResult;
-extern u8 gUnk_02034B1D[3];
-#endif
 extern TaskPool gRikuTutorialTasks;
 extern s32 gRikuTutorialModeArg;
 #ifdef VERSION_EU

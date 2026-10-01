@@ -215,35 +215,34 @@ static const PooPoint sPoohStumpCircle[4] = {
     { 602624, 320256 },
 };
 
-PoohWork* gPooWork;
-u32 gPoohAction;
-PooSpawnArgs gPooSpawnArgs;
-u32 gUnk_02034DC4;
-PooPos gPooSpawnPos;
-s32 gPooMoveAdjustX;
-s32 gPooMoveAdjustY;
-u8 gPooCameraFrozen;
-u8 gPooCameraFollowPooh;
-s32 gPooCameraMaxY;
-PooSoraWork* gPooSoraWork;
-u16 gPooSoraPriority;
-s32 gPooBestNodeScore;
-s32 gPooNodeScore;
-ListPool gPooNodes;
-PooPos gPooOwlBalloonPos;
-u16 gPooEeyoreTailTimer;
-u32 gPooHoneycombState;
-PooWagonWork* gPooWagon;
-u16 gPooWagonPriority2;
-u16 gPooWagonPriority;
-u16 gPooWagonWheelPriority;
-u32 gPooBeeCount;
-PooBeeAfterEventWork* gPooBeeAfterEventWork;
-u16 gPooCabbageCount;
-u16 gPooCabbageLandedCount;
+static PoohWork* sPooWork;
+static u32 sPoohAction;
+static PooSpawnArgs sPooSpawnArgs;
+static PooPos sPooSpawnPos;
+static s32 sPooMoveAdjustX;
+static s32 sPooMoveAdjustY;
+static u8 sPooCameraFrozen;
+static u8 sPooCameraFollowPooh;
+static s32 sPooCameraMaxY;
+static PooSoraWork* sPooSoraWork;
+static u16 sPooSoraPriority;
+static s32 sPooBestNodeScore;
+static s32 sPooNodeScore;
+static ListPool sPooNodes;
+static PooPos sPooOwlBalloonPos;
+static u16 sPooEeyoreTailTimer;
+static u32 sPooHoneycombState;
+static PooWagonWork* sPooWagon;
+static u16 sPooWagonPriority2;
+static u16 sPooWagonPriority;
+static u16 sPooWagonWheelPriority;
+static u32 sPooBeeCount;
+static PooBeeAfterEventWork* sPooBeeAfterEventWork;
+static u16 sPooCabbageCount;
+static u16 sPooCabbageLandedCount;
 
 void SetPoohAction(PoohWork* w, u32 b) {
-    gPoohAction = b;
+    sPoohAction = b;
 
     if (b == 0) {
         gPoohRequest = 0;
@@ -291,7 +290,7 @@ void SetPoohAction(PoohWork* w, u32 b) {
 void task_poo_pooh_0(PoohWork* w) {
     PooShadowArgs args;
 
-    gPooWork = w;
+    sPooWork = w;
     w->unk_CC = 0;
     GetPooStateGauge(&gPoohGauge, &gPoohGaugeTimer);
     w->targetNode = 0;
@@ -306,7 +305,7 @@ void task_poo_pooh_0(PoohWork* w) {
     w->speed = 0;
     w->flipped = 0;
     w->animAction = 0xFFFF;
-    GetPooStatePooh(&w->pos, &gPoohAction);
+    GetPooStatePooh(&w->pos, &sPoohAction);
     w->pos.ground = 0;
     w->targetX = w->pos.x;
     w->targetY = w->pos.y;
@@ -314,9 +313,9 @@ void task_poo_pooh_0(PoohWork* w) {
     w->tiles = AllocObjTiles((u16)(gPoohHitBox.tileCount * 32), 0);
     w->palette = LoadObjPalette(gPoohHitBox.palette, 32);
     AnimInit(&w->anim, 0, 0);
-    SetPoohAction(w, gPoohAction);
+    SetPoohAction(w, sPoohAction);
     w->hideShadow = 0;
-    SetPoohAnimation(w, gPoohAction);
+    SetPoohAnimation(w, sPoohAction);
     w->gfx = AnimGetGfx(&w->anim);
     ColliderInit(&w->collider, 9, gPoohHitBox.radius, gPoohHitBox.height);
     ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
@@ -576,7 +575,7 @@ void UpdatePoohAction(PoohWork* w, PooNode* n) {
     u16 c;
     s32 b;
 
-    switch (gPoohAction) {
+    switch (sPoohAction) {
     case 3:
         if (AnimGetGfxIndex(&w->anim) == 8 && gPoohPos->y > 0x1BD00 && (GetKeysPressed() & A_BUTTON) != 0) {
             v = 128;
@@ -692,7 +691,7 @@ void UpdatePoohAction(PoohWork* w, PooNode* n) {
 
         ChoosePoohTarget(w, n);
 
-        if (gPoohAction != 0) {
+        if (sPoohAction != 0) {
             break;
         }
 
@@ -1177,7 +1176,7 @@ void UpdatePoohAction(PoohWork* w, PooNode* n) {
 }
 
 void UpdatePoohGauge(PoohWork* w) {
-    if (gPoohAction == 3) {
+    if (sPoohAction == 3) {
         if (gPoohGauge != 0) {
             gPoohGaugeTimer--;
         }
@@ -1226,10 +1225,10 @@ u8 task_poo_pooh_1(PoohWork* w) {
     w->hideShadow = 0;
     UpdatePoohAction(w, n);
     UpdatePoohGauge(w);
-    SetPoohAnimation(w, gPoohAction);
+    SetPoohAnimation(w, sPoohAction);
     w->gfx = AnimUpdate(&w->anim);
 
-    if (gPoohAction == 3 || gPoohAction == 7) {
+    if (sPoohAction == 3 || sPoohAction == 7) {
         if (w->anim.timer == 0) {
             switch (AnimGetFrame(&w->anim)) {
             case 9:
@@ -1262,7 +1261,7 @@ void task_poo_pooh_2(PoohWork* w) {
         f = SPRITE_PRIORITY(2);
     }
 
-    if (gPoohAction == 20 && w->dirIndex == 1) {
+    if (sPoohAction == 20 && w->dirIndex == 1) {
         if (AnimGetFrame(&w->anim) <= 4) {
             p = -0x1003 - ((gPoohRequestY - 0x500) >> 8) * 4;
             w->shadowInfo.z = 0;
@@ -1275,7 +1274,7 @@ void task_poo_pooh_2(PoohWork* w) {
         w->shadowInfo.priority = p + 1;
         w->shadowInfo.z = 0;
     } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) != 0) {
-        if (gPoohAction == 21 && w->dirIndex == 1 && w->leavingWagon != 0) {
+        if (sPoohAction == 21 && w->dirIndex == 1 && w->leavingWagon != 0) {
             p = GetPooWagonPriority2() - 3;
         } else if ((u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 83 || (u8)GetPooWagonSide(gPoohPos->x, gPoohPos->y) == 173) {
             if (gPoohPos->y < gPooActor.pos.y) {
@@ -1334,18 +1333,18 @@ void task_poo_pooh_2(PoohWork* w) {
 }
 
 void task_poo_pooh_3(PoohWork* w) {
-    if (gPoohAction == 22) {
-        gPoohAction = 0;
+    if (sPoohAction == 22) {
+        sPoohAction = 0;
         w->pos.z = 0;
         w->pos.y += 0x2000;
-    } else if (gPoohAction == 14) {
-        gPoohAction = 0;
+    } else if (sPoohAction == 14) {
+        sPoohAction = 0;
         w->pos.x = 0x7F700;
         w->pos.y = 0x47E00;
         w->pos.z = 0;
     }
 
-    SetPooStatePooh(&w->pos, gPoohAction);
+    SetPooStatePooh(&w->pos, sPoohAction);
     SetPooStateGauge(gPoohGauge, gPoohGaugeTimer);
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
@@ -1354,7 +1353,7 @@ void task_poo_pooh_3(PoohWork* w) {
 }
 
 u8 IsPoohDescendingWithOwl(void) {
-    if (gPoohAction == 22) {
+    if (sPoohAction == 22) {
         return 1;
     }
 
@@ -1362,7 +1361,7 @@ u8 IsPoohDescendingWithOwl(void) {
 }
 
 u8 IsPoohOnOwlBalloon(void) {
-    if (gPoohAction == 39) {
+    if (sPoohAction == 39) {
         return 1;
     }
 
@@ -1370,7 +1369,7 @@ u8 IsPoohOnOwlBalloon(void) {
 }
 
 u8 IsPoohWalkingToTarget(void) {
-    if (gPoohAction == 3) {
+    if (sPoohAction == 3) {
         return 1;
     }
 
@@ -1378,7 +1377,7 @@ u8 IsPoohWalkingToTarget(void) {
 }
 
 u8 IsPoohBeeChaseOver(void) {
-    if (gPoohAction == 14) {
+    if (sPoohAction == 14) {
         return 1;
     }
 
@@ -1386,7 +1385,7 @@ u8 IsPoohBeeChaseOver(void) {
 }
 
 u8 IsPoohWaitingOnWagon(void) {
-    if (gPoohAction == 13) {
+    if (sPoohAction == 13) {
         return 1;
     }
 
@@ -1396,23 +1395,23 @@ u8 IsPoohWaitingOnWagon(void) {
 u8 IsPoohOnWagon(void) {
     PoohWork* w;
 
-    if (gPoohAction == 13) {
+    if (sPoohAction == 13) {
         return 1;
     }
 
-    if (gPoohAction == 2) {
-        if (gPooWork->leavingWagon != 0) {
+    if (sPoohAction == 2) {
+        if (sPooWork->leavingWagon != 0) {
             return 0;
         }
 
         return 1;
     }
 
-    if (gPoohAction != 21) {
+    if (sPoohAction != 21) {
         return 0;
     }
 
-    w = gPooWork;
+    w = sPooWork;
 
     if (w->leavingWagon != 0) {
         if (w->dirIndex != 1) {
@@ -1446,15 +1445,15 @@ u8 IsPoohAtLowerExit(void) {
 }
 
 u16 GetPoohHoneyAnim(void) {
-    if (gPoohAction == 0x21) {
+    if (sPoohAction == 0x21) {
         return 0;
     }
 
-    if (gPoohAction == 0x22) {
+    if (sPoohAction == 0x22) {
         return 1;
     }
 
-    if (gPoohAction == 0x23) {
+    if (sPoohAction == 0x23) {
         return 2;
     }
 
@@ -1462,7 +1461,7 @@ u16 GetPoohHoneyAnim(void) {
 }
 
 u8 IsPoohLookingAtHoneycomb(void) {
-    if (gPoohAction == 12) {
+    if (sPoohAction == 12) {
         return 1;
     }
 
@@ -1492,17 +1491,17 @@ u16 CreatePooSpawnTasks(void* pool, u16 b) {
     u32 i;
 
     for (i = 0; i < 85; i++) {
-        gPooSpawnPos.x = gPooSpawns[i].x;
-        gPooSpawnPos.y = gPooSpawns[i].y;
-        gPooSpawnPos.z = 0;
+        sPooSpawnPos.x = gPooSpawns[i].x;
+        sPooSpawnPos.y = gPooSpawns[i].y;
+        sPooSpawnPos.z = 0;
 
         if (gPooSpawns[i].desc == &gTaskDescPooTanpopo || gPooSpawns[i].desc == &gTaskDescPooLeaf) {
-            gPooSpawnArgs.pos = gPooSpawnPos;
-            gPooSpawnArgs.prizeId = b;
-            TaskCreate(pool, gPooSpawns[i].desc, &gPooSpawnArgs);
+            sPooSpawnArgs.pos = sPooSpawnPos;
+            sPooSpawnArgs.prizeId = b;
+            TaskCreate(pool, gPooSpawns[i].desc, &sPooSpawnArgs);
             b++;
         } else {
-            TaskCreate(pool, gPooSpawns[i].desc, &gPooSpawnPos);
+            TaskCreate(pool, gPooSpawns[i].desc, &sPooSpawnPos);
         }
     }
 
@@ -1517,11 +1516,11 @@ void SetPooCameraFocus(s32 a, s32 b) {
 void UpdatePooCameraCenter(void) {
     s32 y;
 
-    if (gPooCameraFrozen != 0) {
+    if (sPooCameraFrozen != 0) {
         return;
     }
 
-    if (gPooCameraFollowPooh != 0) {
+    if (sPooCameraFollowPooh != 0) {
         SetPooCameraFocus(gPoohPos->x, gPoohPos->y + gPoohPos->z);
     }
 
@@ -1539,19 +1538,19 @@ void UpdatePooCameraCenter(void) {
 }
 
 void FreezePooCamera(void) {
-    gPooCameraFrozen = 1;
+    sPooCameraFrozen = 1;
 }
 
 void UnfreezePooCamera(void) {
-    gPooCameraFrozen = 0;
+    sPooCameraFrozen = 0;
 }
 
 void StartPooCameraFollowPooh(void) {
-    gPooCameraFollowPooh = 1;
+    sPooCameraFollowPooh = 1;
 }
 
 void StopPooCameraFollowPooh(void) {
-    gPooCameraFollowPooh = 0;
+    sPooCameraFollowPooh = 0;
 }
 
 void task_poo_map_0(PooMapWork* w) {
@@ -1563,7 +1562,7 @@ void task_poo_map_0(PooMapWork* w) {
     GetPooStatePooh(&p, &n);
     gPoohPos = &p;
     UpdatePooCameraCenter();
-    gPooCameraMaxY = gPooCameraY;
+    sPooCameraMaxY = gPooCameraY;
     gPooScrollX = (gPooCameraX >> 8) - 120;
     gPooScrollY = (gPooCameraY >> 8) - 80;
     gFieldState->x = gPooScrollX << 8;
@@ -1794,21 +1793,21 @@ u8 ConstrainPooActorMove(PooActor* a, s32 x, s32 y) {
     s16 sx;
     s16 sy;
 
-    if (GetPooWallSlide(a, x, y, &gPooMoveAdjustX, &gPooMoveAdjustY) != 0) {
-        a->pos.x = x + gPooMoveAdjustX;
-        a->pos.y = y + gPooMoveAdjustY;
+    if (GetPooWallSlide(a, x, y, &sPooMoveAdjustX, &sPooMoveAdjustY) != 0) {
+        a->pos.x = x + sPooMoveAdjustX;
+        a->pos.y = y + sPooMoveAdjustY;
     }
 
     sx = (x >> 8) - gPooScrollX;
     sy = (y >> 8) - gPooScrollY;
 
-    if (GetPooScreenOverflow(sx, sy, 48, 0, 18, 18, &gPooMoveAdjustX, &gPooMoveAdjustY) == 0) {
+    if (GetPooScreenOverflow(sx, sy, 48, 0, 18, 18, &sPooMoveAdjustX, &sPooMoveAdjustY) == 0) {
         sx = (a->pos.x >> 8) - gPooScrollX;
         sy = (a->pos.y >> 8) - gPooScrollY;
 
-        if (GetPooScreenOverflow(sx, sy, 48, 0, 18, 18, &gPooMoveAdjustX, &gPooMoveAdjustY) != 0) {
-            a->pos.x -= gPooMoveAdjustX;
-            a->pos.y -= gPooMoveAdjustY;
+        if (GetPooScreenOverflow(sx, sy, 48, 0, 18, 18, &sPooMoveAdjustX, &sPooMoveAdjustY) != 0) {
+            a->pos.x -= sPooMoveAdjustX;
+            a->pos.y -= sPooMoveAdjustY;
         }
     } else {
         a->pos.x = x;
@@ -1842,8 +1841,8 @@ void MovePooCamera(s32 a, s32 b) {
     gPooCameraX += a;
     gPooCameraY += b;
 
-    if (gPooCameraMaxY < gPooCameraY) {
-        gPooCameraY = gPooCameraMaxY;
+    if (sPooCameraMaxY < gPooCameraY) {
+        gPooCameraY = sPooCameraMaxY;
     }
 
     gPooScrollX = (gPooCameraX >> 8) - 120;
@@ -2054,7 +2053,7 @@ void task_poo_sora_0(PooSoraWork* w) {
 
     gPooSoraCollider = &w->collider;
     gPooSoraNode = &w->node;
-    gPooSoraWork = w;
+    sPooSoraWork = w;
     w->tiles = AllocObjTiles(0xA00, 0);
     w->palette = LoadObjPalette(gSoraPalette, 32);
     a->height = 16;
@@ -2668,34 +2667,34 @@ void task_poo_sora_2(PooSoraWork* w) {
     ac = w->onCollider;
 
     if (ac != 0) {
-        gPooSoraPriority = -0x1008 - (w->collider.platformY >> 8) * 4;
+        sPooSoraPriority = -0x1008 - (w->collider.platformY >> 8) * 4;
 
         if (w->collider.penetration <= w->collider.radius || w->collider.other->radius == 0x400) {
             if (w->collider.platformZ != 0) {
                 a->shadowPriority = 0;
             } else {
-                a->shadowPriority = gPooSoraPriority + 1;
+                a->shadowPriority = sPooSoraPriority + 1;
             }
 
             a->shadowZ = 0;
         } else {
             a->shadowZ = w->collider.platformZ;
-            a->shadowPriority = gPooSoraPriority + 1;
+            a->shadowPriority = sPooSoraPriority + 1;
         }
     } else {
-        gPooSoraPriority = -0x1008 - (a->pos.y >> 8) * 4;
+        sPooSoraPriority = -0x1008 - (a->pos.y >> 8) * 4;
         a->shadowZ = 0;
 
         if (ac != a->pos.ground) {
             a->shadowPriority = 0;
         } else {
-            a->shadowPriority = gPooSoraPriority + 1;
+            a->shadowPriority = sPooSoraPriority + 1;
         }
     }
 
     x = (a->pos.x >> 8) - gPooScrollX;
     y = (a->pos.y >> 8) + (a->pos.z >> 8) - gPooScrollY;
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, prio, gPooSoraPriority - 1);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, prio, sPooSoraPriority - 1);
     TaskPoolDraw(&w->tasks);
 }
 
@@ -2710,7 +2709,7 @@ void task_poo_sora_3(PooSoraWork* w) {
 }
 
 u8 IsPooSoraCallStarting(void) {
-    if (gPooSoraWork->state == 8 && gPooSoraWork->timer == 0) {
+    if (sPooSoraWork->state == 8 && sPooSoraWork->timer == 0) {
         return 1;
     }
 
@@ -2718,7 +2717,7 @@ u8 IsPooSoraCallStarting(void) {
 }
 
 u8 IsPooSoraCalling(void) {
-    if (gPooSoraWork->state == 8) {
+    if (sPooSoraWork->state == 8) {
         return 1;
     }
 
@@ -2800,7 +2799,7 @@ u16 CheckPooSoraExit(PooPos* p) {
 }
 
 u16 GetPooSoraPriority(void) {
-    return gPooSoraPriority - 1;
+    return sPooSoraPriority - 1;
 }
 
 void task_poo_trap_0(PooTrapWork* w, PooPos* p) {
@@ -3418,16 +3417,16 @@ void AddPooNode(PooNode* n, u16 v, void* p) {
     SetPooNodeBaseWeight(n, v);
     n->pos = p;
     n->unk_04 = 0;
-    ListNodeInit(&n->node, &gPooNodes, n);
-    ListPoolAppend(&n->node, &gPooNodes);
+    ListNodeInit(&n->node, &sPooNodes, n);
+    ListPoolAppend(&n->node, &sPooNodes);
 }
 
 void RemovePooNode(PooNode* p) {
-    ListPoolRemove(&p->node, &gPooNodes);
+    ListPoolRemove(&p->node, &sPooNodes);
 }
 
 void InitPooNodes(void) {
-    ListPoolInit(&gPooNodes);
+    ListPoolInit(&sPooNodes);
 }
 
 s32 GetPooNodeScore(PooNode* n) {
@@ -3465,22 +3464,22 @@ PooNode* FindPoohTargetNode(void) {
     PooNode* best;
     PooNode* n;
 
-    best = (PooNode*)ListPoolFirst(&gPooNodes);
+    best = (PooNode*)ListPoolFirst(&sPooNodes);
     n = best;
-    gPooBestNodeScore = 0;
+    sPooBestNodeScore = 0;
 
     while (n != NULL) {
-        gPooNodeScore = GetPooNodeScore(n);
+        sPooNodeScore = GetPooNodeScore(n);
 
-        if (gPooNodeScore > gPooBestNodeScore) {
-            gPooBestNodeScore = gPooNodeScore;
+        if (sPooNodeScore > sPooBestNodeScore) {
+            sPooBestNodeScore = sPooNodeScore;
             best = n;
         }
 
         n = (PooNode*)ListPoolNext(&n->node);
     }
 
-    if (gPooBestNodeScore == 0 && best == (PooNode*)ListPoolFirst(&gPooNodes)) {
+    if (sPooBestNodeScore == 0 && best == (PooNode*)ListPoolFirst(&sPooNodes)) {
         return 0;
     }
 
@@ -4319,10 +4318,10 @@ void task_poo_owl_0(PooOwlWork* w) {
     AnimInit(&w->anim, gOwlFl00Anims, gOwlFl00Frames);
     w->flying = 0;
     w->descending = 0;
-    gPooOwlBalloonPos.x = 0x3FD00;
-    gPooOwlBalloonPos.y = 0x21B00;
+    sPooOwlBalloonPos.x = 0x3FD00;
+    sPooOwlBalloonPos.y = 0x21B00;
     TaskPoolInit(&w->tasks, 1);
-    TaskCreate(&w->tasks, &gTaskDescPooOwlballoon, &gPooOwlBalloonPos);
+    TaskCreate(&w->tasks, &gTaskDescPooOwlballoon, &sPooOwlBalloonPos);
 }
 
 u8 task_poo_owl_1(PooOwlWork* w) {
@@ -5310,18 +5309,18 @@ void task_poo_eeyoretail_0(PooEeyoreTailWork* w) {
     w->gfx = gEeyoreFl00Frame15;
     TaskPoolInit(&w->tasks, 1);
     CreatePooShadowscaleTask(&w->tasks, &w->x, 0x66);
-    gPooEeyoreTailTimer = 0x1E;
+    sPooEeyoreTailTimer = 0x1E;
     w->height = -w->z;
 }
 
 u8 task_poo_eeyoretail_1(PooEeyoreTailWork* w) {
     if (IsPoohBeeChaseOver() != 0) {
-        if (gPooEeyoreTailTimer != 0) {
-            ApproachValue(&w->x, 0x7FD00, gPooEeyoreTailTimer);
-            ApproachValue(&w->y, 0x49300, gPooEeyoreTailTimer);
-            ApproachValue(&w->height, 0, gPooEeyoreTailTimer);
+        if (sPooEeyoreTailTimer != 0) {
+            ApproachValue(&w->x, 0x7FD00, sPooEeyoreTailTimer);
+            ApproachValue(&w->y, 0x49300, sPooEeyoreTailTimer);
+            ApproachValue(&w->height, 0, sPooEeyoreTailTimer);
             w->z = -w->height;
-            gPooEeyoreTailTimer--;
+            sPooEeyoreTailTimer--;
             SetPooCameraFocus(w->x, w->y + w->z);
         }
 
@@ -5378,7 +5377,7 @@ void task_poo_eeyoretail_3(PooEeyoreTailWork* w) {
 }
 
 u8 IsPooEeyoreTailLanded(void) {
-    if (gPooEeyoreTailTimer == 0) {
+    if (sPooEeyoreTailTimer == 0) {
         return 1;
     }
 
@@ -5395,7 +5394,7 @@ void task_poo_honeycomb_0(PooHoneycombWork* w) {
     w->gfx = gEeHoneycombFrame0;
     ColliderSetPosition(&w->collider, w->x, w->y, 0);
     w->colliderActive = 0;
-    gPooHoneycombState = 0;
+    sPooHoneycombState = 0;
     w->shakeX = 0;
     w->angle = 0;
 }
@@ -5404,7 +5403,7 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* w) {
     u8 c;
 
     if (w->colliderActive != 0) {
-        switch (gPooHoneycombState) {
+        switch (sPooHoneycombState) {
         case 2:
             break;
         case 0:
@@ -5415,7 +5414,7 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* w) {
                     gPoohRequest = 9;
 
                     if (IsPoohLookingAtHoneycomb() != 0) {
-                        gPooHoneycombState = 1;
+                        sPooHoneycombState = 1;
                         w->shakeTimer = c;
                     }
                 } else {
@@ -5431,7 +5430,7 @@ u8 task_poo_honeycomb_1(PooHoneycombWork* w) {
 
             if (w->shakeTimer > 60) {
                 w->shakeX = 0;
-                gPooHoneycombState = 2;
+                sPooHoneycombState = 2;
                 m4aSongNumStart(SONG_SND_371);
             }
 
@@ -5492,7 +5491,7 @@ void task_poo_honeycomb_3(PooHoneycombWork* w) {
 }
 
 u8 IsPooHoneycombShaken(void) {
-    if (gPooHoneycombState == 2) {
+    if (sPooHoneycombState == 2) {
         return 1;
     }
 
@@ -5564,8 +5563,8 @@ s32 IsInPooWagonArea(PooPos* p) {
         k = 0x2100;
     }
 
-    x = p->x - gPooWagon->pos.x;
-    y = p->y - gPooWagon->pos.y;
+    x = p->x - sPooWagon->pos.x;
+    y = p->y - sPooWagon->pos.y;
 
     if (y + x < -0x1A00) {
         return 0;
@@ -5597,8 +5596,8 @@ s32 IsInPooWagonAreaForPooh(PooPos* p) {
         k = 0x2100;
     }
 
-    x = p->x - gPooWagon->pos.x;
-    y = p->y - gPooWagon->pos.y;
+    x = p->x - sPooWagon->pos.x;
+    y = p->y - sPooWagon->pos.y;
 
     if (y + x < -0x1A00) {
         return 0;
@@ -5639,7 +5638,7 @@ void SnapToPooWagonLine(u32* a, u32* b, u16 c) {
     s32 d;
     s32 e;
 
-    d = *a - gPooWagon->pos.x;
+    d = *a - sPooWagon->pos.x;
 
     if (d < -0x600) {
         d = -0x600;
@@ -5648,8 +5647,8 @@ void SnapToPooWagonLine(u32* a, u32* b, u16 c) {
     }
 
     e = d / 2 - 0x300;
-    ApproachValue(a, d + gPooWagon->pos.x, c);
-    ApproachValue(b, e + gPooWagon->pos.y, c);
+    ApproachValue(a, d + sPooWagon->pos.x, c);
+    ApproachValue(b, e + sPooWagon->pos.y, c);
 }
 
 void func_080CFFC0(s32* a, s32* b) {
@@ -5698,8 +5697,8 @@ void ClampToPooWagonArea(u32* a, u32* b, u16 c) {
     s32 x;
     s32 y;
 
-    x = *a - gPooWagon->pos.x;
-    y = *b - gPooWagon->pos.y;
+    x = *a - sPooWagon->pos.x;
+    y = *b - sPooWagon->pos.y;
 
     if (x < -0xB00 && y < -0xD00) {
         func_080CFFC0(&x, &y);
@@ -5735,16 +5734,16 @@ void ClampToPooWagonArea(u32* a, u32* b, u16 c) {
         }
     }
 
-    ApproachValue(a, x + gPooWagon->pos.x, c);
-    ApproachValue(b, y + gPooWagon->pos.y, c);
+    ApproachValue(a, x + sPooWagon->pos.x, c);
+    ApproachValue(b, y + sPooWagon->pos.y, c);
 }
 
 s32 func_080D01BC(s32 x, s32 y) {
     s32 dx;
     s32 dy;
 
-    dx = x - gPooWagon->pos.x;
-    dy = y - gPooWagon->pos.y;
+    dx = x - sPooWagon->pos.x;
+    dy = y - sPooWagon->pos.y;
 
     if (dx < -0xB00 && dy < -0xD00) {
         return 0x53;
@@ -5765,8 +5764,8 @@ s32 GetPooWagonSide(s32 a, s32 b) {
     s32 x;
     s32 y;
 
-    x = a - gPooWagon->pos.x;
-    y = b - gPooWagon->pos.y;
+    x = a - sPooWagon->pos.x;
+    y = b - sPooWagon->pos.y;
 
     if (x < -0x3D00 || x > 0x4300 || y < -0x1F00 || y > 0x3800) {
         return 0;
@@ -5788,7 +5787,7 @@ s32 GetPooWagonSide(s32 a, s32 b) {
 }
 
 void task_poo_wagon_0(PooWagonWork* w) {
-    gPooWagon = w;
+    sPooWagon = w;
     w->pos.x = 0x2AE00;
     w->pos.y = 0x17700;
     w->pos.z = 0;
@@ -5911,14 +5910,14 @@ void task_poo_wagon_2(PooWagonWork* w) {
     n = GetPooSoraPriority();
 
     if (IsPooSoraOverWagon() != 0) {
-        gPooWagonPriority = n + 3;
-        gPooWagonPriority2 = n - 1;
+        sPooWagonPriority = n + 3;
+        sPooWagonPriority2 = n - 1;
 
         if (IsPoohOnWagon() != 0) {
             if (gPooActor.pos.y >= gPoohPos->y) {
-                gPooWagonPriority += 6;
+                sPooWagonPriority += 6;
             } else {
-                gPooWagonPriority2 += 0xFFFC;
+                sPooWagonPriority2 += 0xFFFC;
             }
         }
     } else {
@@ -5926,19 +5925,19 @@ void task_poo_wagon_2(PooWagonWork* w) {
 
         if (d == 0) {
             k = w->pos.y + 0x300;
-            gPooWagonPriority = -0x1004 - (k >> 8) * 4;
-            gPooWagonPriority2 = -0x1009 - (k >> 8) * 4;
+            sPooWagonPriority = -0x1004 - (k >> 8) * 4;
+            sPooWagonPriority2 = -0x1009 - (k >> 8) * 4;
         } else if (d == 83 || d == 173) {
-            gPooWagonPriority = n - 3;
-            gPooWagonPriority2 = n - 8;
+            sPooWagonPriority = n - 3;
+            sPooWagonPriority2 = n - 8;
         } else {
-            gPooWagonPriority2 = n + 4;
-            gPooWagonPriority = n + 9;
+            sPooWagonPriority2 = n + 4;
+            sPooWagonPriority = n + 9;
         }
     }
 
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), gPooWagonPriority);
-    DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, 0, SPRITE_PRIORITY(2), gPooWagonPriority2);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonPriority);
+    DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonPriority2);
     p = -0x1002 - ((w->pos.y - 0xE00) >> 8) * 4;
 
     if (IsPooSoraOverWagon() == 0 && n > p && (d == 83 || d == 173)) {
@@ -5958,11 +5957,11 @@ void task_poo_wagon_3(PooWagonWork* w) {
 }
 
 u16 GetPooWagonPriority2(void) {
-    return gPooWagonPriority2;
+    return sPooWagonPriority2;
 }
 
 u16 GetPooWagonPriority(void) {
-    return gPooWagonPriority;
+    return sPooWagonPriority;
 }
 
 void task_poo_wagonwheel_0(PooWheelWork* w) {
@@ -6047,13 +6046,13 @@ void task_poo_wagonwheel_2(PooWheelWork* w) {
         }
 
         if (IsPooEventDone(6) == 0) {
-            p = &gPooWagonWheelPriority;
+            p = &sPooWagonWheelPriority;
             *p = GetPooWagonPriority2() - 1;
         } else {
-            gPooWagonWheelPriority = -0x1004 - (w->y >> 8) * 4;
+            sPooWagonWheelPriority = -0x1004 - (w->y >> 8) * 4;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), gPooWagonWheelPriority);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonWheelPriority);
     }
 }
 
@@ -6124,7 +6123,7 @@ void task_poo_bee_0(PooBeeWork* w) {
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     w->palette = 0;
-    gPooBeeCount = 0;
+    sPooBeeCount = 0;
     w->releaseTimer = 8;
     w->setupPending = 1;
 }
@@ -6145,16 +6144,16 @@ u8 task_poo_bee_1(PooBeeWork* w) {
             }
         }
 
-        if (gPooBeeCount <= 3) {
-            ApproachValue(&w->sub[gPooBeeCount].x, w->sub[gPooBeeCount].targetX, w->releaseTimer);
-            ApproachValue(&w->sub[gPooBeeCount].y, w->sub[gPooBeeCount].targetY, w->releaseTimer);
+        if (sPooBeeCount <= 3) {
+            ApproachValue(&w->sub[sPooBeeCount].x, w->sub[sPooBeeCount].targetX, w->releaseTimer);
+            ApproachValue(&w->sub[sPooBeeCount].y, w->sub[sPooBeeCount].targetY, w->releaseTimer);
             w->releaseTimer--;
 
             if (w->releaseTimer == 0) {
                 w->releaseTimer = 8;
-                gPooBeeCount++;
+                sPooBeeCount++;
 
-                if (gPooBeeCount > 3) {
+                if (sPooBeeCount > 3) {
                     w->x = gPoohPos->x + 0x2000;
                     w->y = gPoohPos->y - 0x2000;
                     w->dx = w->dy = 0;
@@ -6213,7 +6212,7 @@ void task_poo_bee_2(PooBeeWork* w) {
         w->tiles = LoadObjTiles(gEeBeeTiles, 0x180);
     }
 
-    for (i = 0; i < gPooBeeCount + 1 && i <= 3; i++) {
+    for (i = 0; i < sPooBeeCount + 1 && i <= 3; i++) {
         u = (w->sub[i].x >> 8) - gPooScrollX;
         v = (w->sub[i].y >> 8) + (w->sub[i].z >> 8) - gPooScrollY;
         DrawSprite(u, v, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), i - ((w->y >> 8) * 4 + 0x1003));
@@ -6228,7 +6227,7 @@ void task_poo_bee_3(PooBeeWork* w) {
 }
 
 u8 AreAllPooBeesOut(void) {
-    if (gPooBeeCount <= 3) {
+    if (sPooBeeCount <= 3) {
         return 0;
     }
 
@@ -6236,7 +6235,7 @@ u8 AreAllPooBeesOut(void) {
 }
 
 void task_poo_beeAfterEvent_0(PooBeeAfterEventWork* w) {
-    gPooBeeAfterEventWork = w;
+    sPooBeeAfterEventWork = w;
     w->x = 0x8DE00;
     w->y = 0x46600;
     w->z = -0xA00;
@@ -6297,7 +6296,7 @@ void task_poo_beeAfterEvent_3(PooBeeAfterEventWork* w) {
 
 u8 IsPooBeeAfterEventVisible(void) {
     if (IsPooEventDone(2) != 0) {
-        if (gPooBeeAfterEventWork->palette != NULL) {
+        if (sPooBeeAfterEventWork->palette != NULL) {
             return 1;
         }
     }
@@ -6530,8 +6529,8 @@ void task_poo_cabbageborn_0(PooCabbageBornWork* w) {
     TaskPoolInit(&w->tasks, 0x20);
     w->unk_14 = 0;
     w->timer = 0;
-    gPooCabbageCount = 0;
-    gPooCabbageLandedCount = 0;
+    sPooCabbageCount = 0;
+    sPooCabbageLandedCount = 0;
 }
 
 u8 CanSpawnPooCabbage(void) {
@@ -6565,21 +6564,21 @@ void task_poo_cabbageborn_3(PooCabbageBornWork* w) {
 }
 
 void IncPooCabbageCount(void) {
-    if (gPooCabbageCount <= 13) {
-        gPooCabbageCount++;
+    if (sPooCabbageCount <= 13) {
+        sPooCabbageCount++;
     }
 }
 
 u16 GetPooCabbageCount(void) {
-    return gPooCabbageCount;
+    return sPooCabbageCount;
 }
 
 void IncPooCabbageLandedCount(void) {
-    gPooCabbageLandedCount++;
+    sPooCabbageLandedCount++;
 }
 
 u16 GetPooCabbageLandedCount(void) {
-    return gPooCabbageLandedCount;
+    return sPooCabbageLandedCount;
 }
 
 u8 func_080D1738(void) {

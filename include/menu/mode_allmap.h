@@ -12,8 +12,6 @@ typedef struct AllmapRoomDirs {
     s32 animIds[4];
 } AllmapRoomDirs;
 
-extern u16 gAllmapPalTimer;
-extern u16 gAllmapPalStep;
 extern TaskPool gAllmapTaskPool;
 extern u8 gUnk_05000140[];
 extern u8 gUnk_0984A0F8[];

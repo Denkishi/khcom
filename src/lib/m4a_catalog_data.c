@@ -3,57 +3,57 @@
 #include "m4a_songs.h"
 #include "m4a.h"
 
-MusicPlayerTrack gMPlayTracks0[14] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks1[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks2[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks3[2] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks4[4] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks5[6] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks6[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks7[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks8[2] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks9[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks10[3] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks11[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks12[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks16[2] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks17[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks18[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks19[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks20[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks21[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks22[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks23[1] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks24[2] __attribute__((aligned(8)));
-MusicPlayerTrack gMPlayTracks25[2] __attribute__((aligned(8)));
+static MusicPlayerTrack sMPlayTracks0[14];
+static MusicPlayerTrack sMPlayTracks1[1];
+static MusicPlayerTrack sMPlayTracks2[1];
+static MusicPlayerTrack sMPlayTracks3[2];
+static MusicPlayerTrack sMPlayTracks4[4];
+static MusicPlayerTrack sMPlayTracks5[6];
+static MusicPlayerTrack sMPlayTracks6[1];
+static MusicPlayerTrack sMPlayTracks7[1];
+static MusicPlayerTrack sMPlayTracks8[2];
+static MusicPlayerTrack sMPlayTracks9[1];
+static MusicPlayerTrack sMPlayTracks10[3];
+static MusicPlayerTrack sMPlayTracks11[1];
+static MusicPlayerTrack sMPlayTracks12[1];
+static MusicPlayerTrack sMPlayTracks16[2];
+static MusicPlayerTrack sMPlayTracks17[1];
+static MusicPlayerTrack sMPlayTracks18[1];
+static MusicPlayerTrack sMPlayTracks19[1];
+static MusicPlayerTrack sMPlayTracks20[1];
+static MusicPlayerTrack sMPlayTracks21[1];
+static MusicPlayerTrack sMPlayTracks22[1];
+static MusicPlayerTrack sMPlayTracks23[1];
+static MusicPlayerTrack sMPlayTracks24[2];
+static MusicPlayerTrack sMPlayTracks25[2];
 
 const MusicPlayer gMPlayTable[26] = {
-    {&gMPlayInfo_BGM, gMPlayTracks0, 14, 0},
-    {&gMPlayInfo1, gMPlayTracks1, 1, 0},
-    {&gMPlayInfo2, gMPlayTracks2, 1, 0},
-    {&gMPlayInfo3, gMPlayTracks3, 2, 0},
-    {&gMPlayInfo4, gMPlayTracks4, 4, 0},
-    {&gMPlayInfo5, gMPlayTracks5, 6, 0},
-    {&gMPlayInfo6, gMPlayTracks6, 1, 0},
-    {&gMPlayInfo7, gMPlayTracks7, 1, 0},
-    {&gMPlayInfo8, gMPlayTracks8, 2, 0},
-    {&gMPlayInfo9, gMPlayTracks9, 1, 0},
-    {&gMPlayInfo10, gMPlayTracks10, 3, 0},
-    {&gMPlayInfo11, gMPlayTracks11, 1, 0},
-    {&gMPlayInfo12, gMPlayTracks12, 1, 0},
+    {&gMPlayInfo_BGM, sMPlayTracks0, 14, 0},
+    {&gMPlayInfo1, sMPlayTracks1, 1, 0},
+    {&gMPlayInfo2, sMPlayTracks2, 1, 0},
+    {&gMPlayInfo3, sMPlayTracks3, 2, 0},
+    {&gMPlayInfo4, sMPlayTracks4, 4, 0},
+    {&gMPlayInfo5, sMPlayTracks5, 6, 0},
+    {&gMPlayInfo6, sMPlayTracks6, 1, 0},
+    {&gMPlayInfo7, sMPlayTracks7, 1, 0},
+    {&gMPlayInfo8, sMPlayTracks8, 2, 0},
+    {&gMPlayInfo9, sMPlayTracks9, 1, 0},
+    {&gMPlayInfo10, sMPlayTracks10, 3, 0},
+    {&gMPlayInfo11, sMPlayTracks11, 1, 0},
+    {&gMPlayInfo12, sMPlayTracks12, 1, 0},
     {NULL, NULL, 0, 0},
     {NULL, NULL, 0, 0},
     {NULL, NULL, 0, 0},
-    {&gMPlayInfo16, gMPlayTracks16, 2, 0},
-    {&gMPlayInfo17, gMPlayTracks17, 1, 0},
-    {&gMPlayInfo18, gMPlayTracks18, 1, 0},
-    {&gMPlayInfo19, gMPlayTracks19, 1, 0},
-    {&gMPlayInfo20, gMPlayTracks20, 1, 0},
-    {&gMPlayInfo21, gMPlayTracks21, 1, 0},
-    {&gMPlayInfo22, gMPlayTracks22, 1, 0},
-    {&gMPlayInfo23, gMPlayTracks23, 1, 0},
-    {&gMPlayInfo24, gMPlayTracks24, 2, 0},
-    {&gMPlayInfo25, gMPlayTracks25, 2, 0},
+    {&gMPlayInfo16, sMPlayTracks16, 2, 0},
+    {&gMPlayInfo17, sMPlayTracks17, 1, 0},
+    {&gMPlayInfo18, sMPlayTracks18, 1, 0},
+    {&gMPlayInfo19, sMPlayTracks19, 1, 0},
+    {&gMPlayInfo20, sMPlayTracks20, 1, 0},
+    {&gMPlayInfo21, sMPlayTracks21, 1, 0},
+    {&gMPlayInfo22, sMPlayTracks22, 1, 0},
+    {&gMPlayInfo23, sMPlayTracks23, 1, 0},
+    {&gMPlayInfo24, sMPlayTracks24, 2, 0},
+    {&gMPlayInfo25, sMPlayTracks25, 2, 0},
 };
 
 const Song gSongTable[962] = {

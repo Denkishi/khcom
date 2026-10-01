@@ -4,8 +4,6 @@
 #include "types.h"
 #include "pooh_actor_types.h"
 
-extern u32 gPoohAction;
-
 extern u8 gPoohPalette[];
 extern u8 gTrap0001Palette[];
 extern u8 gTrap0002Palette[];

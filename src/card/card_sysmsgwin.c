@@ -28,10 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 
-SysMsgWinWork* gActiveSysmsgwin;
-#ifndef VERSION_EU
-u8 gUnk_02034B04[4];
-#endif
+static SysMsgWinWork* sActiveSysmsgwin;
 
 #ifdef VERSION_EU
 
@@ -127,7 +124,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
         break;
     }
 
-    gActiveSysmsgwin = w;
+    sActiveSysmsgwin = w;
 }
 
 u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
@@ -412,7 +409,7 @@ void sysmsgwin_3(SysMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    gActiveSysmsgwin = 0;
+    sActiveSysmsgwin = 0;
 }
 
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
@@ -457,9 +454,9 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
 }
 
 s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
-    if (gActiveSysmsgwin != NULL) {
-        gActiveSysmsgwin->args = *src;
-        gActiveSysmsgwin->messagePending = 1;
+    if (sActiveSysmsgwin != NULL) {
+        sActiveSysmsgwin->args = *src;
+        sActiveSysmsgwin->messagePending = 1;
 
         return 1;
     }
@@ -468,8 +465,8 @@ s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
 }
 
 s32 CloseSysmsgwin(void) {
-    if (gActiveSysmsgwin != NULL) {
-        gActiveSysmsgwin->unk_146[0] = 0;
+    if (sActiveSysmsgwin != NULL) {
+        sActiveSysmsgwin->unk_146[0] = 0;
         return 1;
     }
 
@@ -564,7 +561,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
     w->unk_138[1] = w->unk_138[3];
-    gActiveSysmsgwin = w;
+    sActiveSysmsgwin = w;
 }
 
 u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
@@ -801,7 +798,7 @@ void sysmsgwinChoice_3(SysMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    gActiveSysmsgwin = 0;
+    sActiveSysmsgwin = 0;
 }
 
 TaskDesc gTaskDescSysmsgwin = {

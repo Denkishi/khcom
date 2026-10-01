@@ -15,18 +15,6 @@ typedef struct MovieSub {
     u16 unk_0E;
 } MovieSub;
 
-extern vu16 gMovieModeState;
-extern s32 gMovieId;
-extern u16 gUnk_02034940;
-extern volatile s16 gMovieFrame;
-extern volatile s16 gMovieSubIndex;
-extern volatile u16 gMovieSubCount;
-extern MovieSub* volatile gMovieSubUpper;
-extern MovieSub* volatile gMovieSubLower;
-extern MovieSub* gMovieSubs;
-extern volatile s16 gMovieSubUpperTimer;
-extern volatile u16 gMovieSubUpperLength;
-
 enum MovieFlag {
     MOVIE_FLAG_UPPER_SUB_PENDING = 0x1,
     MOVIE_FLAG_LOWER_SUB_PENDING = 0x2,
@@ -34,11 +22,6 @@ enum MovieFlag {
     MOVIE_FLAG_PLAYING = 0x8
 };
 
-extern volatile u16 gMovieFlags;
-extern volatile u16 gMovieSubUpperAlpha;
-extern volatile s16 gMovieSubLowerTimer;
-extern volatile u16 gMovieSubLowerLength;
-extern volatile u16 gMovieSubLowerAlpha;
 extern u8 gUnk_0815C3EC[];
 extern u8 gUnk_084E0F34[];
 extern u8 gUnk_084F4660[];
@@ -54,11 +37,6 @@ void* GetIwramHeapStart(void);
 u32 GetIwramHeapSize(void);
 void MovieVBlankIntr(void);
 s32 HandleMovieFrame(s32 arg);
-
-#ifndef VERSION_JP
-extern u16 gMovieSubUpperWidths[];
-extern u16 gMovieSubLowerWidths[];
-#endif
 
 #ifdef VERSION_EU
 extern MovieSub gUnkEu_0883E040[];

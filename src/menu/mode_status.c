@@ -10,9 +10,9 @@
 #include "taskpool.h"
 #include "types.h"
 
-TaskPool gStatusTaskPool __attribute__((aligned(8)));
-Task* gStatusBarTask;
-u8 gStatusReturnToMenu;
+static TaskPool sStatusTaskPool;
+static Task* sStatusBarTask;
+static u8 sStatusReturnToMenu;
 
 void mode_status_0(void) {
     BgReset();
@@ -58,28 +58,28 @@ void mode_status_0(void) {
     LoadBgMap(0, gUnk_09848B98, 0x500);
     DisableBg(0);
     LoadStatusNumberTiles();
-    TaskPoolInit(&gStatusTaskPool, 4);
-    gStatusBarTask = TaskCreate(&gStatusTaskPool, &gTaskDescStatusBar, 0);
-    TaskCreate(&gStatusTaskPool, &gTaskDescStatus, 0);
+    TaskPoolInit(&sStatusTaskPool, 4);
+    sStatusBarTask = TaskCreate(&sStatusTaskPool, &gTaskDescStatusBar, 0);
+    TaskCreate(&sStatusTaskPool, &gTaskDescStatus, 0);
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 }
 
 void mode_status_1(void) {
     UpdatePlayTime();
-    TaskPoolUpdate(&gStatusTaskPool);
-    TaskPoolDraw(&gStatusTaskPool);
+    TaskPoolUpdate(&sStatusTaskPool);
+    TaskPoolDraw(&sStatusTaskPool);
 
-    if (!IsTaskActive(gStatusBarTask) && !FadeIsActive()) {
-        ReturnToMap(gStatusReturnToMenu);
+    if (!IsTaskActive(sStatusBarTask) && !FadeIsActive()) {
+        ReturnToMap(sStatusReturnToMenu);
     }
 }
 
 void mode_status_2(void) {
-    TaskPoolDestroy(&gStatusTaskPool);
+    TaskPoolDestroy(&sStatusTaskPool);
 }
 
 void SetStatusReturnToMenu(u8 a) {
-    gStatusReturnToMenu = a;
+    sStatusReturnToMenu = a;
 }
 
 Mode gModeStatus = {

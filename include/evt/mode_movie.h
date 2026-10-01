@@ -22,38 +22,11 @@ enum MovieFlag {
     MOVIE_FLAG_PLAYING = 0x8
 };
 
-extern u8 gUnk_0815C3EC[];
-extern u8 gUnk_084E0F34[];
-extern u8 gUnk_084F4660[];
-extern u8 gUnk_0855CCB4[];
-extern u8 gUnk_086FBA14[];
-extern MovieSub gUnk_0886AB40[];
-extern MovieSub gUnk_0886AB90[];
-extern MovieSub gUnk_0886AC70[];
-extern u8 sMovieHeapName[];
 extern u8 gUnk_09614718[];
 
 void* GetIwramHeapStart();
 u32 GetIwramHeapSize();
 void MovieVBlankIntr();
 s32 HandleMovieFrame(s32 arg);
-
-#ifdef VERSION_EU
-extern MovieSub gUnkEu_0883E040[];
-extern MovieSub gUnkEu_0883E070[];
-extern MovieSub gUnkEu_0883E150[];
-extern MovieSub gUnkEu_0883E454[];
-extern MovieSub gUnkEu_0883E494[];
-extern MovieSub gUnkEu_0883E574[];
-extern MovieSub gUnkEu_0883E8D4[];
-extern MovieSub gUnkEu_0883E914[];
-extern MovieSub gUnkEu_0883E9F4[];
-extern MovieSub gUnkEu_0883ECE8[];
-extern MovieSub gUnkEu_0883ED28[];
-extern MovieSub gUnkEu_0883EE08[];
-extern MovieSub gUnkEu_0883F0F8[];
-extern MovieSub gUnkEu_0883F138[];
-extern MovieSub gUnkEu_0883F218[];
-#endif
 
 #endif

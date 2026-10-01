@@ -24,8 +24,7 @@ mode_chkmov.c
 mode_dummy.c
 mode_debflag.c
 mode_vsbattle.c
-asset_movie_opening.s
-asset_gfx.s
+movies.s
 movie_text.c
 mode_movie.c
 jiminy_data.c

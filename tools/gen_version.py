@@ -26,7 +26,6 @@ import struct
 from pathlib import Path
 
 from rom_data_evidence import data_symbol_map, load_evidence
-from movie_assets import apply_movie_regions, load_movie_assets
 from function_pointer_evidence import literal_pointer_pairs, load_literal_loads, load_function_modes, trace_literal_loads
 import assetgen
 import baserom
@@ -131,12 +130,6 @@ TARGET_ANCHORS = {
         0x0999E69E: 0x099A9E42,
         0x09EF9858: 0x09F85444,
         0x09EF9830: 0x09F8541C,
-        0x0815C3EC: 0x0812FB24,
-        0x084E0F34: 0x084B466C,
-        0x084F4660: 0x084C7D98,
-        0x0855CCB4: 0x085303EC,
-        0x086FBA14: 0x086CF14C,
-        0x0886AD10: 0x0883F2C8,
         0x08C6A6A4: 0x08C9BD78,
         0x08C6A69A: 0x08C9BD6E,
         0x08C6A878: 0x08C9C274,
@@ -1710,21 +1703,6 @@ TARGET_ABSENT_SYMBOLS = {
 
 TARGET_ONLY_SYMBOLS = {
     "eu": {
-        "gUnkEu_0883E040": 0x0883E040,
-        "gUnkEu_0883E454": 0x0883E454,
-        "gUnkEu_0883E8D4": 0x0883E8D4,
-        "gUnkEu_0883ECE8": 0x0883ECE8,
-        "gUnkEu_0883F0F8": 0x0883F0F8,
-        "gUnkEu_0883E070": 0x0883E070,
-        "gUnkEu_0883E494": 0x0883E494,
-        "gUnkEu_0883E914": 0x0883E914,
-        "gUnkEu_0883ED28": 0x0883ED28,
-        "gUnkEu_0883F138": 0x0883F138,
-        "gUnkEu_0883E150": 0x0883E150,
-        "gUnkEu_0883E574": 0x0883E574,
-        "gUnkEu_0883E9F4": 0x0883E9F4,
-        "gUnkEu_0883EE08": 0x0883EE08,
-        "gUnkEu_0883F218": 0x0883F218,
         "gUnkEu_099AABA4": 0x099AABA4,
         "gUnkEu_099AABBA": 0x099AABBA,
         "gUnkEu_099AABEE": 0x099AABEE,
@@ -1919,6 +1897,7 @@ TARGET_DATA_SIZE = {
         ("mode_chkobj.c", ".data"): 0x9A90,
         ("mode_sio.c", ".data"): 0x214,
         ("mode_battle.c", ".rodata"): 0x18,
+        ("mode_movie.c", ".rodata"): 0x14CF,
         ("formation_data.c", ".data"): 0x940,
         ("mode_debug.c", ".rodata"): 0x1F4,
         ("mode_chkobj.c", ".rodata"): 0x6350,
@@ -1994,6 +1973,7 @@ TARGET_DATA_SIZE = {
         ("card_deckmenu2.c", ".rodata"): 0x646,
         ("card_name.c", ".rodata"): 0x44,
         ("card_lvup_msg.c", ".rodata"): 0x9,
+        ("mode_movie.c", ".rodata"): 0x393,
     },
 }
 
@@ -2002,6 +1982,7 @@ TARGET_DATA_ADDR = {
         ("monsgage.c", ".rodata"): 0x0814fc14,
         ("btl4.c", ".rodata"): 0x0814fc24,
         ("tutorial.c", ".rodata"): 0x0814fc68,
+        ("mode_movie.c", ".rodata"): 0x0885df78,
         ("card_stock_info.c", ".rodata"): 0x0900ba1c,
         ("mode_staffroll.c", ".rodata"): 0x09a06558,
         ("sroll_b_crtn.c", ".rodata"): 0x09a09398,
@@ -2018,6 +1999,7 @@ TARGET_DATA_ADDR = {
     },
     "eu": {
         ("mode_chkmov.c", ".rodata"): 0x0812f680,
+        ("mode_movie.c", ".rodata"): 0x0883de0c,
         ("jiminy_inline_text_data.c", ".rodata"): 0x0888e310,
         ("localized_names_eu.c", ".rodata"): 0x0888e4d4,
         ("monsgage.c", ".rodata"): 0x088964c0,
@@ -2704,7 +2686,6 @@ def main():
         found.append((ROM_BASE + i, base, how))
     found.extend((address, name, "explicit")
                  for address, name in TARGET_BLOB_REGIONS.get(ver, ()))
-    found = apply_movie_regions(found, cdata, load_movie_assets("config/movie_assets.yaml", ver, ot))
     regions = []
     last = None
 
@@ -2798,7 +2779,10 @@ def main():
     for old in Path(f"asm/{ver}").glob("*.s"):
         if old.name not in fresh and ".global data_" in old.read_text():
             old.unlink()
-    print("  " + "  ".join(f"{nm} {lo:#x}..{hi:#x}" for nm, lo, hi in bounds))
+    if not any(Path(f"asm/{ver}").iterdir()):
+        Path(f"asm/{ver}").rmdir()
+    if bounds:
+        print("  " + "  ".join(f"{nm} {lo:#x}..{hi:#x}" for nm, lo, hi in bounds))
 
     Path(f"config/{ver}/units.txt").write_text("\n".join(units) + "\n")
     print(f"  units.txt: {len(units)} entries")

@@ -59,9 +59,7 @@ common_text.s
 monsgage.c
 btl4.c
 tutorial.c
-asset_movie_opening.s
-asset_movie_opening_pad.s
-asset_gfx.s
+movies.s
 movie_text.c
 mode_movie.c
 mode_test.c

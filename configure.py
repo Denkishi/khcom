@@ -87,12 +87,6 @@ parser.add_argument(
     default="arm-none-eabi-",
     help="binutils tool prefix (default: %(default)s)",
 )
-parser.add_argument(
-    "--asset-gfx-mode",
-    choices=("slice", "built"),
-    default="slice",
-    help="asset_gfx path: baserom slice (default) or MovieOpen demux/remux built pack (us/jp/eu)",
-)
 args = parser.parse_args()
 
 legacy_assembler = Path("tools/legacy/bin/arm-elf-as")
@@ -108,7 +102,6 @@ version = args.version
 code, sha1 = VERSIONS[version]
 prefix = args.binutils_prefix
 raw_as_flags = software_fp_flags(f"{prefix}as")
-asset_gfx_mode = args.asset_gfx_mode
 
 build_dir = f"build/{version}"
 name = f"com_{version}"
@@ -213,36 +206,6 @@ for line in units_file.read_text().splitlines():
     linked.add(obj)
     units.append((src, obj, flags))
 
-asset_gfx_build = f"{build_dir}/assets/asset_gfx.bin"
-asset_gfx_asm = f"{build_dir}/asm/asset_gfx.s"
-asset_gfx_unit = "asset_gfx.s"
-asset_gfx_sym = {
-    "us": "data_084E0B04",
-    "jp": "data_084D4390",
-    "eu": "data_084B423C",
-}[version]
-asset_gfx_extract = {
-    "us": "assets/us/084E0B04-0886AD18.bin",
-    "jp": "assets/jp/084D4390-0885E300.bin",
-    "eu": "assets/eu/084B423C-0883F2D0.bin",
-}[version]
-asset_gfx_manifest = f"config/asset_gfx_{version}.yaml"
-if asset_gfx_mode == "built":
-    Path(f"{build_dir}/asm").mkdir(parents=True, exist_ok=True)
-    Path(asset_gfx_asm).write_text(
-        "\t.section .rodata\n"
-        f"\t.global {asset_gfx_sym}\n"
-        f"{asset_gfx_sym}:\n"
-        f'\t.incbin "{asset_gfx_build}"\n'
-    )
-    rewritten = []
-    for src, obj, flags in units:
-        if src is not None and src.name == asset_gfx_unit:
-            rewritten.append((Path(asset_gfx_asm), obj, flags))
-        else:
-            rewritten.append((src, obj, flags))
-    units = rewritten
-
 units = materialize_assets(regional_plan, units, version, build_dir)
 
 include_dirs = ["include"] + sorted(str(p) for p in Path("include").iterdir() if p.is_dir() and p.name != "gba")
@@ -285,40 +248,13 @@ for src, obj, flags in units:
     if any(dep.startswith("assets/") for dep in deps):
         deps.append(assets_stamp)
     edges.append((obj, rule, src, deps, variables))
-if asset_gfx_mode == "built":
-    asset_gfx_obj_suffix = "/asset_gfx.o"
-    patched = []
-    for obj, rule, src, deps, variables in edges:
-        if obj.endswith(asset_gfx_obj_suffix):
-            deps = [d for d in deps if not d.startswith("assets/")]
-            if asset_gfx_build not in deps:
-                deps.append(asset_gfx_build)
-            if asset_gfx_asm not in deps:
-                deps.append(asset_gfx_asm)
-        patched.append((obj, rule, src, deps, variables))
-    edges = patched
-    missing_assets.difference_update(
-        p for p in list(missing_assets)
-        if p.startswith("assets/") and Path(p).name == Path(asset_gfx_extract).name
-    )
 
 if any(dep.startswith("assets/") for edge in edges for dep in edge[3]) and not Path(assets_stamp).exists():
     missing_assets.add(assets_stamp)
-pending_build_assets = sorted(p for p in missing_assets if p.startswith("build/"))
-missing_extract = sorted(p for p in missing_assets if not p.startswith("build/"))
-if missing_extract:
-    first = missing_extract[0]
-    sys.exit(f"error: {len(missing_extract)} extracted asset files for {version} are missing (first: {first});"
+if missing_assets:
+    first = sorted(missing_assets)[0]
+    sys.exit(f"error: {len(missing_assets)} extracted asset files for {version} are missing (first: {first});"
              f" run python3 tools/extract_assets.py {version}")
-allowed_build_assets = set()
-if asset_gfx_mode == "built":
-    allowed_build_assets.add(asset_gfx_build)
-pending_uncovered = [p for p in pending_build_assets if p not in allowed_build_assets]
-if pending_uncovered:
-    first = pending_uncovered[0]
-    sys.exit(
-        f"error: build asset {first} is missing; use --asset-gfx-mode=built or extract slice assets"
-    )
 
 objs_linked = [obj for _src, obj, _flags in units]
 Path(build_dir).mkdir(parents=True, exist_ok=True)
@@ -429,30 +365,11 @@ with out.open("w") as f:
                 + " && touch $out",
         description=f"CHECK {rom}",
     )
-    if asset_gfx_mode == "built":
-        n.rule(
-            "asset_gfx_pack",
-            command=f"python3 tools/gfx/asset_gfx_pack.py --mode built --version {version} && test -f $out",
-            description="ASSET_GFX $out",
-        )
     n.newline()
 
     for path, member, obj in archives:
         n.build(obj, "arx", implicit=[path],
                 variables={"archive": path, "member": member})
-    if asset_gfx_mode == "built":
-        n.build(
-            asset_gfx_build,
-            "asset_gfx_pack",
-            implicit=[
-                "tools/gfx/asset_gfx_pack.py",
-                "tools/gfx/asset_gfx_layout.py",
-                "tools/movie_assets.py",
-                asset_gfx_manifest,
-                f"config/asset_inventory_{version}_gfx.yaml",
-                asset_gfx_extract,
-            ],
-        )
     manifests = sorted(rel(group["manifest"].path) for group in groups.values())
     for group_name, group in groups.items():
         outputs = [rel(unit["source"]) for unit in group["objects"].values()] + [rel(group["header"])]

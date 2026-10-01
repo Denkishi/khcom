@@ -39,7 +39,7 @@ docs/*
 CLAUDE.md
 permuter/tmp
 
-# Optional pret gbagfx (Phase 1 asset_gfx dual-path)
+# Fetched pret gbagfx
 tools/gbagfx/
 
 # Local-only MovieOpen encoder RE (not matching path)

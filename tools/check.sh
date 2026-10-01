@@ -10,22 +10,20 @@ if [ -n "$missing" ]; then
     exit 1
 fi
 
-python3 tools/movie_assets.py
-
 python3 tools/extract_assets.py us
-python3 configure.py --version us --asset-gfx-mode=built >/dev/null
+python3 configure.py --version us >/dev/null
 ninja
 
 python3 tools/version_align.py jp B8CJ
 python3 tools/gen_version.py jp B8CJ -q > build/gen_version_jp.log
 sed 's/^ */  /' build/gen_version_jp.log
 python3 tools/extract_assets.py jp
-python3 configure.py --version jp --asset-gfx-mode=built >/dev/null
+python3 configure.py --version jp >/dev/null
 ninja
 
 python3 tools/version_align.py eu B8CP
 python3 tools/gen_version.py eu B8CP -q > build/gen_version_eu.log
 sed 's/^ */  /' build/gen_version_eu.log
 python3 tools/extract_assets.py eu
-python3 configure.py --version eu --asset-gfx-mode=built >/dev/null
+python3 configure.py --version eu >/dev/null
 ninja

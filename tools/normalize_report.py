@@ -15,11 +15,10 @@ import argparse
 import json
 from pathlib import Path
 
-# Regions that can never be defined in a translation unit, header, or hand
-# written asm: compressed art and audio, FMV, and 0xFF filler. They are real
-# cartridge bytes and the build needs them, but they are not decompilation work,
-# so counting them as unmatched data would report 31 MB as outstanding forever.
-EXCLUDED_UNITS = ("asm/asset_",)
+# FMV and the streamed staff roll song, which the build copies from extracted
+# files. They are real cartridge data and the build needs them, but they are not
+# decompilation work, so they count as neither matched nor unmatched data.
+EXCLUDED_UNITS = ("gen/movies", "gen/staff_roll_audio")
 UNATTRIBUTED_UNITS = ("asm/rodata_",)
 
 DIMENSIONS = {

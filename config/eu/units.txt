@@ -98,7 +98,10 @@ emy_test.c
 bos.c
 roomcreate.c
 romcri.c
-btl3.c
+btl_form.c
+btl_born.c
+btl_raid.c
+btl_badstatus.c
 smn.c
 frd.c
 pc_acddmg.c

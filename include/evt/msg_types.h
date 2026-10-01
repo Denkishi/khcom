@@ -61,12 +61,14 @@ typedef struct MessageScriptEntry {
     u32 positionIndex;
     u8 charDelay;
     u8 unk_0D[3];
-    u32 text;
+    const void* text;
     u16 flags;
     u16 frame;
 } MessageScriptEntry;
 
-typedef void (*EventCharaKeyframeFunc)(void*);
+struct EventCharaWork;
+
+typedef void (*EventCharaKeyframeFunc)(struct EventCharaWork*);
 
 enum EventCharaMotion {
     CHARA_MOTION_SET_POSITION = 2,

@@ -3,7 +3,7 @@
 #include "msg_api.h"
 #include "display.h"
 #include "fade.h"
-#include "bos5.h"
+#include "mode_worldselect.h"
 #include "worldinspect_assets.h"
 #include "sprites_bos5.h"
 #include "sprites_worldinspect.h"

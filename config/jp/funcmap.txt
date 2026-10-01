@@ -4442,8 +4442,8 @@ task_room_name_0	0x080f7bf8	148	0x080f7c18	named
 task_room_name_1	0x080f7c8c	184	0x080f7cac	named
 task_room_name_2	0x080f7d44	108	0x080f7d64	named
 task_room_name_3	0x080f7db0	40	0x080f7dd0	named
-Bos5Atan	0x080f7dd8	52	0x080f7df8	global
-Bos5GetAngle	0x080f7e0c	120	0x080f7e2c	global
+BosGaAtan	0x080f7dd8	52	0x080f7df8	global
+BosGaGetAngle	0x080f7e0c	120	0x080f7e2c	global
 BosGaEntryUpdateFall	0x080f7e84	208	0x080f7ea4	global
 BosGaRequestState	0x080f7f54	28	0x080f7f74	global
 BosGaEntryOffsetX	0x080f7f70	36	0x080f7f90	global

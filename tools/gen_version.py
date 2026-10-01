@@ -1896,7 +1896,6 @@ TARGET_DATA_SIZE = {
     "eu": {
         ("mode_sio.c", ".rodata"): 0x92,
         ("sroll_b_secn.c", ".rodata"): 0x162,
-        ("bos5.c", ".rodata"): 0x102A,
         ("mode_worldselect.c", ".rodata"): 0x189,
         ("actor_localized_data.c", ".data"): 0x124,
         ("mode_jiminy.c", ".rodata"): 0x4338,
@@ -1944,7 +1943,7 @@ TARGET_DATA_SIZE = {
         ("title.c", ".data"): 0x9c,
         ("status.c", ".rodata"): 0x137,
         ("status.c", ".data"): 0x198,
-        ("bos5.c", ".data"): 0x168,
+        ("bos_md.c", ".data"): 0x150,
         ("mode_ms_top.c", ".data"): 0x74,
         ("mode_ms.c", ".data"): 0x4c,
         ("ms_charge.c", ".data"): 0x60,

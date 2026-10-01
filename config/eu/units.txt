@@ -340,7 +340,8 @@ sprites_evt_palettes_2.s
 sprite_palettes_14.s
 sprites_map_palettes.s
 map_room_maps_2.s
-bos5.c
+bos_ga.c
+bos_md.c
 mode_worldselect.c
 mode_worldinspect.c
 mode_worldwarp.c

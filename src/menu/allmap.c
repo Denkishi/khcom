@@ -33,6 +33,8 @@
 #include "types.h"
 #include <stddef.h>
 
+#define sAllmapState ((AllmapState*)gUnk_0203C4B4)
+
 u8 gAllmapCursorRoom EWRAM_COMMON(4);
 s16 gAllmapCameraY EWRAM_COMMON(4);
 s16 gAllmapCameraX EWRAM_COMMON(4);
@@ -915,8 +917,8 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
         map = gAllmapBg1Map;
     }
 
-    x8 = (a * 24 - ((AllmapState*)gUnk_0203C4B4)->originX) / 8;
-    y8 = (b * 24 - ((AllmapState*)gUnk_0203C4B4)->originY) / 8;
+    x8 = (a * 24 - sAllmapState->originX) / 8;
+    y8 = (b * 24 - sAllmapState->originY) / 8;
     p.x = a;
     p.y = b;
     room = GetAllmapRoomAt(p);
@@ -954,43 +956,43 @@ void InitAllmap() {
     void** state = &gUnk_0203C4B4;
 
     *state = EwramAlloc(sizeof(AllmapState));
-    ((AllmapState*)gUnk_0203C4B4)->lastRoom = MAP_ROOM_NONE;
-    ((AllmapState*)gUnk_0203C4B4)->unk_BC = 0x400;
+    sAllmapState->lastRoom = MAP_ROOM_NONE;
+    sAllmapState->unk_BC = 0x400;
     gAllmapCursorRoom = gMapFloorState.room;
-    TaskPoolInit(&((AllmapState*)gUnk_0203C4B4)->tasks, 35);
-    ((AllmapState*)gUnk_0203C4B4)->pushaTask = 0;
-    ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;
+    TaskPoolInit(&sAllmapState->tasks, 35);
+    sAllmapState->pushaTask = 0;
+    sAllmapState->roomnameTask = 0;
 
     for (i = 0; i < 32; i++) {
-        ((AllmapState*)gUnk_0203C4B4)->roomTasks[i] = 0;
+        sAllmapState->roomTasks[i] = 0;
     }
 
-    ((AllmapState*)gUnk_0203C4B4)->minX = ((AllmapState*)gUnk_0203C4B4)->maxX = 32;
-    ((AllmapState*)gUnk_0203C4B4)->minY = ((AllmapState*)gUnk_0203C4B4)->maxY = 32;
+    sAllmapState->minX = sAllmapState->maxX = 32;
+    sAllmapState->minY = sAllmapState->maxY = 32;
     AllmapAddRoom(0, 32, 32);
-    ((AllmapState*)gUnk_0203C4B4)->scrollX = 0;
-    ((AllmapState*)gUnk_0203C4B4)->scrollY = 0;
-    AllmapSetBounds(((AllmapState*)gUnk_0203C4B4)->minX, ((AllmapState*)gUnk_0203C4B4)->maxX, ((AllmapState*)gUnk_0203C4B4)->minY, ((AllmapState*)gUnk_0203C4B4)->maxY);
-    ((AllmapState*)gUnk_0203C4B4)->introScrollY = (((AllmapState*)gUnk_0203C4B4)->scrollY + 160) << 8;
-    ((AllmapState*)gUnk_0203C4B4)->introTargetY = ((AllmapState*)gUnk_0203C4B4)->scrollY << 8;
-    gAllmapCameraX = ((AllmapState*)gUnk_0203C4B4)->originX + ((AllmapState*)gUnk_0203C4B4)->scrollX;
-    gAllmapCameraY = ((AllmapState*)gUnk_0203C4B4)->originY + ((AllmapState*)gUnk_0203C4B4)->scrollY;
-    sAllmapCameraFixedX = (((AllmapState*)gUnk_0203C4B4)->originX + ((AllmapState*)gUnk_0203C4B4)->scrollX) << 8;
-    sAllmapCameraFixedY = (((AllmapState*)gUnk_0203C4B4)->originY + ((AllmapState*)gUnk_0203C4B4)->scrollY) << 8;
+    sAllmapState->scrollX = 0;
+    sAllmapState->scrollY = 0;
+    AllmapSetBounds(sAllmapState->minX, sAllmapState->maxX, sAllmapState->minY, sAllmapState->maxY);
+    sAllmapState->introScrollY = (sAllmapState->scrollY + 160) << 8;
+    sAllmapState->introTargetY = sAllmapState->scrollY << 8;
+    gAllmapCameraX = sAllmapState->originX + sAllmapState->scrollX;
+    gAllmapCameraY = sAllmapState->originY + sAllmapState->scrollY;
+    sAllmapCameraFixedX = (sAllmapState->originX + sAllmapState->scrollX) << 8;
+    sAllmapCameraFixedY = (sAllmapState->originY + sAllmapState->scrollY) << 8;
 
     for (j = 0; j < 32; j++) {
-        if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomTasks[j])) {
-            w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[j]->work;
+        if (IsTaskActive(sAllmapState->roomTasks[j])) {
+            w = sAllmapState->roomTasks[j]->work;
             AllmapDrawRoomTiles(w->x, w->y, w->shape, j == gAllmapCursorRoom);
         }
     }
 
-    RedrawBgMapAt(0, ((AllmapState*)gUnk_0203C4B4)->scrollX - ((AllmapState*)gUnk_0203C4B4)->originX % 8, ((AllmapState*)gUnk_0203C4B4)->scrollY - ((AllmapState*)gUnk_0203C4B4)->originY % 8);
-    RedrawBgMapAt(1, ((AllmapState*)gUnk_0203C4B4)->scrollX - ((AllmapState*)gUnk_0203C4B4)->originX % 8, ((AllmapState*)gUnk_0203C4B4)->scrollY - ((AllmapState*)gUnk_0203C4B4)->originY % 8);
-    c = ((AllmapState*)gUnk_0203C4B4)->roomTasks[gAllmapCursorRoom]->work;
+    RedrawBgMapAt(0, sAllmapState->scrollX - sAllmapState->originX % 8, sAllmapState->scrollY - sAllmapState->originY % 8);
+    RedrawBgMapAt(1, sAllmapState->scrollX - sAllmapState->originX % 8, sAllmapState->scrollY - sAllmapState->originY % 8);
+    c = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
     arg.x = c->x;
     arg.y = c->y;
-    ((AllmapState*)gUnk_0203C4B4)->cursorTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapCursor, &arg);
+    sAllmapState->cursorTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapCursor, &arg);
     func_080D53F8();
 }
 
@@ -1046,44 +1048,44 @@ void UpdateAllmap() {
 
     if (gAllmapModeState == 2) {
         if (gAllmapScrollInTimer > 6) {
-            ApproachValue(&((AllmapState*)gUnk_0203C4B4)->introScrollY, ((AllmapState*)gUnk_0203C4B4)->introTargetY - 0x200, gAllmapScrollInTimer - 7);
+            ApproachValue(&sAllmapState->introScrollY, sAllmapState->introTargetY - 0x200, gAllmapScrollInTimer - 7);
         } else if (gAllmapScrollInTimer & 1) {
-            ApproachValue(&((AllmapState*)gUnk_0203C4B4)->introScrollY, ((AllmapState*)gUnk_0203C4B4)->introTargetY, 1);
+            ApproachValue(&sAllmapState->introScrollY, sAllmapState->introTargetY, 1);
         } else {
-            ApproachValue(&((AllmapState*)gUnk_0203C4B4)->introScrollY, ((AllmapState*)gUnk_0203C4B4)->introTargetY - 0x200, 1);
+            ApproachValue(&sAllmapState->introScrollY, sAllmapState->introTargetY - 0x200, 1);
         }
 
-        ((AllmapState*)gUnk_0203C4B4)->scrollY = ((AllmapState*)gUnk_0203C4B4)->introScrollY >> 8;
+        sAllmapState->scrollY = sAllmapState->introScrollY >> 8;
     }
 
     if (gAllmapModeState == 3) {
-        AllmapUpdateCamera(gUnk_0203C4B4);
+        AllmapUpdateCamera(sAllmapState);
     } else {
-        gAllmapCameraX = ((AllmapState*)gUnk_0203C4B4)->originX + ((AllmapState*)gUnk_0203C4B4)->scrollX;
-        gAllmapCameraY = ((AllmapState*)gUnk_0203C4B4)->originY + ((AllmapState*)gUnk_0203C4B4)->scrollY;
-        sAllmapCameraFixedX = (((AllmapState*)gUnk_0203C4B4)->originX + ((AllmapState*)gUnk_0203C4B4)->scrollX) << 8;
-        sAllmapCameraFixedY = (((AllmapState*)gUnk_0203C4B4)->originY + ((AllmapState*)gUnk_0203C4B4)->scrollY) << 8;
+        gAllmapCameraX = sAllmapState->originX + sAllmapState->scrollX;
+        gAllmapCameraY = sAllmapState->originY + sAllmapState->scrollY;
+        sAllmapCameraFixedX = (sAllmapState->originX + sAllmapState->scrollX) << 8;
+        sAllmapCameraFixedY = (sAllmapState->originY + sAllmapState->scrollY) << 8;
     }
 
-    x = gAllmapCameraX - ((AllmapState*)gUnk_0203C4B4)->originX;
-    y = gAllmapCameraY - ((AllmapState*)gUnk_0203C4B4)->originY;
-    ScrollBgMapTo(0, x - ((AllmapState*)gUnk_0203C4B4)->originX % 8, y - ((AllmapState*)gUnk_0203C4B4)->originY % 8);
-    ScrollBgMapTo(1, x - ((AllmapState*)gUnk_0203C4B4)->originX % 8, y - ((AllmapState*)gUnk_0203C4B4)->originY % 8);
-    TaskPoolUpdate(&((AllmapState*)gUnk_0203C4B4)->tasks);
-    TaskPoolDraw(&((AllmapState*)gUnk_0203C4B4)->tasks);
+    x = gAllmapCameraX - sAllmapState->originX;
+    y = gAllmapCameraY - sAllmapState->originY;
+    ScrollBgMapTo(0, x - sAllmapState->originX % 8, y - sAllmapState->originY % 8);
+    ScrollBgMapTo(1, x - sAllmapState->originX % 8, y - sAllmapState->originY % 8);
+    TaskPoolUpdate(&sAllmapState->tasks);
+    TaskPoolDraw(&sAllmapState->tasks);
 }
 
 void DestroyAllmap() {
-    TaskPoolDestroy(&((AllmapState*)gUnk_0203C4B4)->tasks);
+    TaskPoolDestroy(&sAllmapState->tasks);
     EwramFree(gUnk_0203C4B4);
 }
 
 u16 func_080D53C4() {
     if ((GetKeysHeld() & R_BUTTON) != 0) {
-        return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 7;
+        return sAllmapState->unk_BC >> 7;
     }
 
-    return ((AllmapState*)gUnk_0203C4B4)->unk_BC >> 8;
+    return sAllmapState->unk_BC >> 8;
 }
 
 void func_080D53F8() {
@@ -1092,18 +1094,18 @@ void func_080D53F8() {
     s32 base;
     u8 i;
 
-    base = (((AllmapState*)gUnk_0203C4B4)->maxY * 24 - gAllmapCameraY) << 9;
+    base = (sAllmapState->maxY * 24 - gAllmapCameraY) << 9;
 
     for (i = 0; i < 32; i++) {
-        if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomTasks[i]) != 0) {
-            w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[i]->work;
+        if (IsTaskActive(sAllmapState->roomTasks[i]) != 0) {
+            w = sAllmapState->roomTasks[i]->work;
             w->unk_094 = (w->y * 24 - gAllmapCameraY) << 8;
             w->unk_090 = w->unk_094 - base;
         }
     }
 
-    if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->cursorTask) != 0) {
-        c = ((AllmapState*)gUnk_0203C4B4)->cursorTask->work;
+    if (IsTaskActive(sAllmapState->cursorTask) != 0) {
+        c = sAllmapState->cursorTask->work;
         c->dropY = c->dropTargetY - base;
     }
 }
@@ -1113,8 +1115,8 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
     u8 i;
 
     for (i = 0; i < 32; i++) {
-        if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomTasks[i]) != 0) {
-            w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[i]->work;
+        if (IsTaskActive(sAllmapState->roomTasks[i]) != 0) {
+            w = sAllmapState->roomTasks[i]->work;
 
             if (a.x == w->x && a.y == w->y) {
                 return i;
@@ -1128,25 +1130,25 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
 void AllmapCenterOnRoom() {
     AllmapRoomWork* w;
 
-    w = ((AllmapState*)gUnk_0203C4B4)->roomTasks[gAllmapCursorRoom]->work;
-    ((AllmapState*)gUnk_0203C4B4)->scrollY = w->y * 24 - ((AllmapState*)gUnk_0203C4B4)->originY - 69;
+    w = sAllmapState->roomTasks[gAllmapCursorRoom]->work;
+    sAllmapState->scrollY = w->y * 24 - sAllmapState->originY - 69;
 
-    if (((AllmapState*)gUnk_0203C4B4)->scrollY < 0 || ((AllmapState*)gUnk_0203C4B4)->height <= 159) {
-        ((AllmapState*)gUnk_0203C4B4)->scrollY = 0;
-    } else if (((AllmapState*)gUnk_0203C4B4)->scrollY > ((AllmapState*)gUnk_0203C4B4)->height - 160) {
-        ((AllmapState*)gUnk_0203C4B4)->scrollY = ((AllmapState*)gUnk_0203C4B4)->height - 160;
+    if (sAllmapState->scrollY < 0 || sAllmapState->height <= 159) {
+        sAllmapState->scrollY = 0;
+    } else if (sAllmapState->scrollY > sAllmapState->height - 160) {
+        sAllmapState->scrollY = sAllmapState->height - 160;
     }
 
-    if ((s16)(w->y * 24 - ((AllmapState*)gUnk_0203C4B4)->originY) <= 15) {
-        ((AllmapState*)gUnk_0203C4B4)->scrollY -= 16;
+    if ((s16)(w->y * 24 - sAllmapState->originY) <= 15) {
+        sAllmapState->scrollY -= 16;
     }
 
-    ((AllmapState*)gUnk_0203C4B4)->scrollX = w->x * 24 - ((AllmapState*)gUnk_0203C4B4)->originX - 104;
+    sAllmapState->scrollX = w->x * 24 - sAllmapState->originX - 104;
 
-    if (((AllmapState*)gUnk_0203C4B4)->scrollX < 0 || ((AllmapState*)gUnk_0203C4B4)->width <= 239) {
-        ((AllmapState*)gUnk_0203C4B4)->scrollX = 0;
-    } else if (((AllmapState*)gUnk_0203C4B4)->scrollX > ((AllmapState*)gUnk_0203C4B4)->width - 240) {
-        ((AllmapState*)gUnk_0203C4B4)->scrollX = ((AllmapState*)gUnk_0203C4B4)->width - 240;
+    if (sAllmapState->scrollX < 0 || sAllmapState->width <= 239) {
+        sAllmapState->scrollX = 0;
+    } else if (sAllmapState->scrollX > sAllmapState->width - 240) {
+        sAllmapState->scrollX = sAllmapState->width - 240;
     }
 }
 
@@ -1158,7 +1160,7 @@ void AllmapHandleInput() {
     u8 r;
 
     moved = 0;
-    c = ((AllmapState*)gUnk_0203C4B4)->cursorTask->work;
+    c = sAllmapState->cursorTask->work;
     p = c->pos;
 
     switch (GetKeysRepeat()) {
@@ -1192,11 +1194,11 @@ void AllmapHandleInput() {
 
     c->pos = p;
 
-    if (((AllmapState*)gUnk_0203C4B4)->lastRoom == r) {
+    if (sAllmapState->lastRoom == r) {
         return;
     }
 
-    ((AllmapState*)gUnk_0203C4B4)->lastRoom = r;
+    sAllmapState->lastRoom = r;
     gAllmapCursorRoom = r;
 
     if (moved != 0) {
@@ -1204,25 +1206,25 @@ void AllmapHandleInput() {
         AllmapCenterOnRoom();
     }
 
-    if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomnameTask) != 0) {
-        TaskKill(gUnk_0203C4B4, ((AllmapState*)gUnk_0203C4B4)->roomnameTask);
+    if (IsTaskActive(sAllmapState->roomnameTask) != 0) {
+        TaskKill(&sAllmapState->tasks, sAllmapState->roomnameTask);
     }
 
     d = GetMapFloorRoom(r);
 
     if (d->nameId != 26 && (TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
-        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoomname, &d->nameId);
+        sAllmapState->roomnameTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoomname, &d->nameId);
     } else {
-        ((AllmapState*)gUnk_0203C4B4)->roomnameTask = 0;
+        sAllmapState->roomnameTask = 0;
         AllmapClearRoomnameFrame();
     }
 
-    if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->pushaTask) != 0) {
-        TaskKill(gUnk_0203C4B4, ((AllmapState*)gUnk_0203C4B4)->pushaTask);
+    if (IsTaskActive(sAllmapState->pushaTask) != 0) {
+        TaskKill(&sAllmapState->tasks, sAllmapState->pushaTask);
     }
 
     if (AllmapHasDoorInfo(c->pos) != 0) {
-        ((AllmapState*)gUnk_0203C4B4)->pushaTask = TaskCreate(gUnk_0203C4B4, &gTaskDescAllmapPusha, c);
+        sAllmapState->pushaTask = TaskCreate(&sAllmapState->tasks, &gTaskDescAllmapPusha, c);
     }
 }
 
@@ -1233,31 +1235,31 @@ void AllmapAddRoom(u8 a, u16 b, u16 c) {
 
     d = GetMapRoomLinks(a);
 
-    if (IsTaskActive(((AllmapState*)gUnk_0203C4B4)->roomTasks[a]) != 0) {
+    if (IsTaskActive(sAllmapState->roomTasks[a]) != 0) {
         return;
     }
 
-    if (((AllmapState*)gUnk_0203C4B4)->maxX < b) {
-        ((AllmapState*)gUnk_0203C4B4)->maxX = b;
+    if (sAllmapState->maxX < b) {
+        sAllmapState->maxX = b;
     }
 
-    if (((AllmapState*)gUnk_0203C4B4)->minX > b) {
-        ((AllmapState*)gUnk_0203C4B4)->minX = b;
+    if (sAllmapState->minX > b) {
+        sAllmapState->minX = b;
     }
 
-    if (((AllmapState*)gUnk_0203C4B4)->maxY < c) {
-        ((AllmapState*)gUnk_0203C4B4)->maxY = c;
+    if (sAllmapState->maxY < c) {
+        sAllmapState->maxY = c;
     }
 
-    if (((AllmapState*)gUnk_0203C4B4)->minY > c) {
-        ((AllmapState*)gUnk_0203C4B4)->minY = c;
+    if (sAllmapState->minY > c) {
+        sAllmapState->minY = c;
     }
 
     arg.x = b;
     arg.y = c;
     arg.room = a;
     arg.asSprite = 0;
-    ((AllmapState*)gUnk_0203C4B4)->roomTasks[a] = TaskCreate(gUnk_0203C4B4, &sTaskDescAllmapRoom, &arg);
+    sAllmapState->roomTasks[a] = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoom, &arg);
 
     room = d[0];
 
@@ -1288,24 +1290,24 @@ void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d) {
     u16 dx;
     u16 dy;
 
-    ((AllmapState*)gUnk_0203C4B4)->height = (d - c) * 24 + 32;
+    sAllmapState->height = (d - c) * 24 + 32;
 
-    if (((AllmapState*)gUnk_0203C4B4)->height <= 159) {
-        dy = (160 - ((AllmapState*)gUnk_0203C4B4)->height) / 2;
+    if (sAllmapState->height <= 159) {
+        dy = (160 - sAllmapState->height) / 2;
     } else {
         dy = 0;
     }
 
-    ((AllmapState*)gUnk_0203C4B4)->width = (b - a) * 24 + 32;
+    sAllmapState->width = (b - a) * 24 + 32;
 
-    if (((AllmapState*)gUnk_0203C4B4)->width <= 239) {
-        dx = (240 - ((AllmapState*)gUnk_0203C4B4)->width) / 2;
+    if (sAllmapState->width <= 239) {
+        dx = (240 - sAllmapState->width) / 2;
     } else {
         dx = 0;
     }
 
-    ((AllmapState*)gUnk_0203C4B4)->originX = a * 24 - dx;
-    ((AllmapState*)gUnk_0203C4B4)->originY = c * 24 - dy;
+    sAllmapState->originX = a * 24 - dx;
+    sAllmapState->originY = c * 24 - dy;
     AllmapCenterOnRoom();
 }
 
@@ -1314,7 +1316,7 @@ u8 TestAllmapRoomFlag(u8 a, u16 b) {
 }
 
 void* GetAllmapRoomWork(u8 a) {
-    return ((AllmapState*)gUnk_0203C4B4)->roomTasks[a]->work;
+    return sAllmapState->roomTasks[a]->work;
 }
 
 TaskDesc gTaskDescAllmapDoorinfo = {

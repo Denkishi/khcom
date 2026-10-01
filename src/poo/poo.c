@@ -65,6 +65,8 @@ void* gStockMesDispWork EWRAM_COMMON(4);
 PooState gPooState EWRAM_COMMON(16);
 void* gUnk_0203C4B4 EWRAM_COMMON(4);
 
+#define sPoohInteractions ((PoohInteractionRegistry*)gUnk_0203C4B4)
+
 extern AnimDef gTrap01AnimDefs[5];
 
 static const PooSpot sPooh04FrameOffsets[55] = {
@@ -7583,18 +7585,18 @@ u8 func_080D2DD8() {
 }
 
 u16 AddPoohInteraction(Collider* a, u16 b) {
-    if (((PoohInteractionRegistry*)gUnk_0203C4B4)->count > 5) {
+    if (sPoohInteractions->count > 5) {
         return 0xFFFF;
     }
 
-    ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[((PoohInteractionRegistry*)gUnk_0203C4B4)->count].collider = a;
-    ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[((PoohInteractionRegistry*)gUnk_0203C4B4)->count].message = b;
-    ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[((PoohInteractionRegistry*)gUnk_0203C4B4)->count].enabled = 1;
-    return ((PoohInteractionRegistry*)gUnk_0203C4B4)->count++;
+    sPoohInteractions->entries[sPoohInteractions->count].collider = a;
+    sPoohInteractions->entries[sPoohInteractions->count].message = b;
+    sPoohInteractions->entries[sPoohInteractions->count].enabled = 1;
+    return sPoohInteractions->count++;
 }
 
 void SetPoohInteractionEnabled(u16 a, u8 b) {
-    ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[a].enabled = b;
+    sPoohInteractions->entries[a].enabled = b;
 }
 
 void FreePoohInteractions() {
@@ -7612,20 +7614,20 @@ void InitPoohInteractions() {
 u16 FindPoohInteractionMessage() {
     s32 i;
 
-    for (i = 0; i < ((PoohInteractionRegistry*)gUnk_0203C4B4)->count; i++) {
-        if (((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[i].message == 0x3B && ((PoohInteractionRegistry*)gUnk_0203C4B4)->rabbitTalkBlocked != 0) {
+    for (i = 0; i < sPoohInteractions->count; i++) {
+        if (sPoohInteractions->entries[i].message == 0x3B && sPoohInteractions->rabbitTalkBlocked != 0) {
             continue;
         }
 
-        if (((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[i].enabled == 0) {
+        if (sPoohInteractions->entries[i].enabled == 0) {
             continue;
         }
 
-        if (PooAttackHitsCollider(((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[i].collider) == 0) {
+        if (PooAttackHitsCollider(sPoohInteractions->entries[i].collider) == 0) {
             continue;
         }
 
-        return ((PoohInteractionRegistry*)gUnk_0203C4B4)->entries[i].message;
+        return sPoohInteractions->entries[i].message;
     }
 
 #ifdef VERSION_EU
@@ -7636,7 +7638,7 @@ u16 FindPoohInteractionMessage() {
 }
 
 void SetPooRabbitTalkBlocked(u8 a) {
-    ((PoohInteractionRegistry*)gUnk_0203C4B4)->rabbitTalkBlocked = a;
+    sPoohInteractions->rabbitTalkBlocked = a;
 }
 
 void AllmapVCountCallback() {

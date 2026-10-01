@@ -4878,8 +4878,8 @@ StaffRollShowRikuImage3	0x0811411c	220	0x081128dc	body
 StaffRollShowEndScreen	0x081141f8	300	0x081129b8	match
 mode_StaffRoll_1	0x08114324	1008	0x08112b9c	named
 mode_StaffRoll_2	0x08114714	52	0x08112f88	named
-func_08114748	0x08114748	8	0x08112fbc	body
-func_08114750	0x08114750	8	0x08112fc4	body
+SrollANameSquare	0x08114748	8	0x08112fbc	body
+SrollANameSquare2	0x08114750	8	0x08112fc4	body
 task_sroll_a_name_0	0x08114758	284	0x08112fcc	named
 task_sroll_a_name_1	0x08114874	96	0x081130e8	named
 task_sroll_a_name_2	0x081148d4	188	0x08113148	named

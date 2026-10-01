@@ -10,11 +10,11 @@
 #include "taskpool.h"
 #include "types.h"
 
-s32 func_08114748(s32 x) {
+s32 SrollANameSquare(s32 x) {
     return x * x;
 }
 
-s32 func_08114750(s32 x) {
+s32 SrollANameSquare2(s32 x) {
     return x * x;
 }
 

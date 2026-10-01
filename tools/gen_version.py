@@ -1943,7 +1943,7 @@ TARGET_DATA_SIZE = {
         ("title.c", ".data"): 0x9c,
         ("status.c", ".rodata"): 0x137,
         ("status.c", ".data"): 0x198,
-        ("bos_md.c", ".data"): 0x150,
+        ("mode_worldselect.c", ".data"): 0xD8,
         ("mode_ms_top.c", ".data"): 0x74,
         ("mode_ms.c", ".data"): 0x4c,
         ("ms_charge.c", ".data"): 0x60,
@@ -2006,6 +2006,7 @@ TARGET_DATA_ADDR = {
     },
     "eu": {
         ("mode_chkmov.c", ".rodata"): 0x0812f680,
+        ("mode_worldselect.c", ".data"): 0x09f847d4,
         ("mode_movie.c", ".rodata"): 0x0883de0c,
         ("jiminy_inline_text_data.c", ".rodata"): 0x0888e310,
         ("localized_names_eu.c", ".rodata"): 0x0888e4d4,

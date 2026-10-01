@@ -30,7 +30,7 @@ const MapRoomDef* gMapRoomDefs[14] = {
     &gUnk_0984D2D8,
 };
 
-u8 gUnk_09EF7108[1536] = {
+u8 gMapFixed0CellTypes[1536] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,
@@ -81,7 +81,7 @@ u8 gUnk_09EF7108[1536] = {
     8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9,
 };
 
-u8 gUnk_09EF7708[768] = {
+u8 gMapFixed1CellTypes[768] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 7, 7, 7, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 7, 7, 7, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 7, 7, 7, 9, 9, 9,
@@ -116,7 +116,7 @@ u8 gUnk_09EF7708[768] = {
     8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9,
 };
 
-u8 gUnk_09EF7A08[768] = {
+u8 gMapFixed2CellTypes[768] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 7, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 7, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 7, 9, 7, 9, 9, 9, 9, 9, 9,
@@ -151,7 +151,7 @@ u8 gUnk_09EF7A08[768] = {
     8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 7, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9,
 };
 
-u8 gUnk_09EF7D08[768] = {
+u8 gMapFixed3CellTypes[768] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 9,
@@ -186,7 +186,7 @@ u8 gUnk_09EF7D08[768] = {
     8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9,
 };
 
-u8 gUnk_09EF8008[512] = {
+u8 gMapFixed4CellTypes[512] = {
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
     8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 9, 9,
@@ -221,7 +221,7 @@ u8 gUnk_09EF8008[512] = {
     9, 9, 9, 9, 9, 9, 8, 8, 8, 8, 8, 8, 8, 8, 8, 8,
 };
 
-const void* gUnk_09EF8208[12] = {
+const void* gMapFixed0Bg3Blocks[12] = {
     gUnk_095A72B8,
     gUnk_095A7AB8,
     gUnk_095A82B8,
@@ -236,7 +236,7 @@ const void* gUnk_09EF8208[12] = {
     gUnk_095ACAB8,
 };
 
-const void* gUnk_09EF8238[12] = {
+const void* gMapFixed0Bg2Blocks[12] = {
     gUnk_095AF2B8,
     gUnk_095AFAB8,
     gUnk_095B02B8,
@@ -251,7 +251,7 @@ const void* gUnk_09EF8238[12] = {
     gUnk_095B6AB8,
 };
 
-const void* gUnk_09EF8268[12] = {
+const void* gMapFixed0Bg1Blocks[12] = {
 #ifdef VERSION_EU
     gUnkEu_08125144,
     gUnkEu_08125144,
@@ -284,7 +284,7 @@ const void* gUnk_09EF8268[12] = {
 #endif
 };
 
-const void* gUnk_09EF8298[6] = {
+const void* gMapFixed1Bg3Blocks[6] = {
     gUnk_095B9AB8,
     gUnk_095BA2B8,
     gUnk_095BAAB8,
@@ -293,7 +293,7 @@ const void* gUnk_09EF8298[6] = {
     gUnk_095BCAB8,
 };
 
-const void* gUnk_09EF82B0[6] = {
+const void* gMapFixed1Bg2Blocks[6] = {
     gUnk_095C1AB8,
     gUnk_095C22B8,
     gUnk_095C2AB8,
@@ -302,7 +302,7 @@ const void* gUnk_09EF82B0[6] = {
     gUnk_095C4AB8,
 };
 
-const void* gUnk_09EF82C8[6] = {
+const void* gMapFixed2Bg3Blocks[6] = {
     gUnk_095CAAB8,
     gUnk_095CB2B8,
     gUnk_095CBAB8,
@@ -311,7 +311,7 @@ const void* gUnk_09EF82C8[6] = {
     gUnk_095CDAB8,
 };
 
-const void* gUnk_09EF82E0[6] = {
+const void* gMapFixed2Bg2Blocks[6] = {
     gUnk_095D2AB8,
     gUnk_095D32B8,
     gUnk_095D3AB8,
@@ -320,7 +320,7 @@ const void* gUnk_09EF82E0[6] = {
     gUnk_095D5AB8,
 };
 
-const void* gUnk_09EF82F8[6] = {
+const void* gMapFixed3Bg3Blocks[6] = {
     gUnk_095E92B8,
     gUnk_095E9AB8,
     gUnk_095EA2B8,
@@ -329,7 +329,7 @@ const void* gUnk_09EF82F8[6] = {
     gUnk_095EC2B8,
 };
 
-const void* gUnk_09EF8310[6] = {
+const void* gMapFixed3Bg2Blocks[6] = {
     gUnk_095F12B8,
     gUnk_095F1AB8,
     gUnk_095F22B8,
@@ -338,28 +338,28 @@ const void* gUnk_09EF8310[6] = {
     gUnk_095F52B8,
 };
 
-const void* gUnk_09EF8328[4] = {
+const void* gMapFixed4Bg3Blocks[4] = {
     gUnk_09522AB8,
     gUnk_095232B8,
     gUnk_09523AB8,
     gUnk_095242B8,
 };
 
-const void* gUnk_09EF8338[4] = {
+const void* gMapFixed4Bg2Blocks[4] = {
     gUnk_09524AB8,
     gUnk_095252B8,
     gUnk_09525AB8,
     gUnk_095262B8,
 };
 
-const void* gUnk_09EF8348[4] = {
+const void* gMapFixed4Bg1Blocks[4] = {
     gUnk_09526AB8,
     gUnk_095272B8,
     gUnk_09527AB8,
     gUnk_095282B8,
 };
 
-const void* gUnk_09EF8358[6] = {
+const void* gMapFixed5Bg2Blocks[6] = {
     gUnk_095C1AB8,
     gUnk_095C22B8,
     gUnk_095C2AB8,
@@ -378,7 +378,7 @@ const MapFixedDef* gMapFixedDefs[6] = {
 };
 
 const PrzCardChance* gWorldPrzCardChances[14] = {
-    gUnk_09857B44,
+    gPrzCardChancesDefault,
     gPrzCardChancesAgrabah,
     gPrzCardChancesAtlantica,
     gPrzCardChancesOlympusColiseum,
@@ -391,11 +391,11 @@ const PrzCardChance* gWorldPrzCardChances[14] = {
     gPrzCardChancesTraverseTown,
     gPrzCardChancesTwilightTown,
     gPrzCardChancesCastleOblivion,
-    gUnk_09857B44,
+    gPrzCardChancesDefault,
 };
 
 const UnkStruct_080E8E24* gWorldPrizeLists[14] = {
-    gUnk_0985824C,
+    gPrizeListEmpty,
     gPrizeListAgrabah,
     gPrizeListAtlantica,
     gPrizeListOlympusColiseum,
@@ -408,7 +408,7 @@ const UnkStruct_080E8E24* gWorldPrizeLists[14] = {
     gPrizeListTraverseTown,
     gPrizeListTwilightTown,
     gPrizeListCastleOblivion,
-    gUnk_0985824C,
+    gPrizeListEmpty,
 };
 
 const MapEnmDef* gMapEnmDefs[7] = {
@@ -665,7 +665,7 @@ const MapGmkDef gWorldMapGmkDefs[7] = {
 };
 #endif
 
-const PrzCardChance gUnk_09857B44[7] = {
+const PrzCardChance gPrzCardChancesDefault[7] = {
     { 0, 0, 2500, 2500, { 0, 0 } },
     { 20, 0, 500, 500, { 0, 0 } },
     { 17, 0, 1500, 1500, { 0, 0 } },
@@ -964,7 +964,7 @@ const UnkStruct_080E8E24 gPrzStocks[19] = {
 
 const u16 gCardValueWeights[10] = { 500, 1500, 1500, 1600, 1400, 1000, 1000, 600, 500, 400 };
 
-const UnkStruct_080E8E24 gUnk_0985824C[1] = {
+const UnkStruct_080E8E24 gPrizeListEmpty[1] = {
     { { 4, 0 }, 0 },
 };
 

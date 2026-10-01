@@ -12724,13 +12724,13 @@ entries:
     tiles2: gUnk_094B9798
     tilesSize2: 28256
     unk_16: [0, 0]
-    map3: gUnk_09EF8208
-    map2: gUnk_09EF8238
-    map: gUnk_09EF8268
+    map3: gMapFixed0Bg3Blocks
+    map2: gMapFixed0Bg2Blocks
+    map: gMapFixed0Bg1Blocks
     mapWidth: 4
     mapHeight: 3
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF7108
+    cellTypes: gMapFixed0CellTypes
     gimmicks: gUnk_09856BE8
     colliders: gUnk_09856C48
     unk_34: 30
@@ -12792,13 +12792,13 @@ entries:
     tiles2: 0
     tilesSize2: 0
     unk_16: [0, 0]
-    map3: gUnk_09EF8298
-    map2: gUnk_09EF82B0
+    map3: gMapFixed1Bg3Blocks
+    map2: gMapFixed1Bg2Blocks
     map: 0
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF7708
+    cellTypes: gMapFixed1CellTypes
     gimmicks: gUnk_09856CE0
     colliders: gUnk_09856D04
     unk_34: 30
@@ -12860,13 +12860,13 @@ entries:
     tiles2: 0
     tilesSize2: 0
     unk_16: [0, 0]
-    map3: gUnk_09EF82C8
-    map2: gUnk_09EF82E0
+    map3: gMapFixed2Bg3Blocks
+    map2: gMapFixed2Bg2Blocks
     map: 0
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF7A08
+    cellTypes: gMapFixed2CellTypes
     gimmicks: gUnk_09856D84
     colliders: gUnk_09856DA8
     unk_34: 30
@@ -12927,13 +12927,13 @@ entries:
     tiles2: 0
     tilesSize2: 0
     unk_16: [0, 0]
-    map3: gUnk_09EF82F8
-    map2: gUnk_09EF8310
+    map3: gMapFixed3Bg3Blocks
+    map2: gMapFixed3Bg2Blocks
     map: 0
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF7D08
+    cellTypes: gMapFixed3CellTypes
     gimmicks: gUnk_09856E34
     colliders: gUnk_09856E40
     unk_34: 30
@@ -12982,13 +12982,13 @@ entries:
     tiles2: gUnk_099211C4
     tilesSize2: 12224
     unk_16: [0, 0]
-    map3: gUnk_09EF8328
-    map2: gUnk_09EF8338
-    map: gUnk_09EF8348
+    map3: gMapFixed4Bg3Blocks
+    map2: gMapFixed4Bg2Blocks
+    map: gMapFixed4Bg1Blocks
     mapWidth: 2
     mapHeight: 2
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF8008
+    cellTypes: gMapFixed4CellTypes
     gimmicks: gUnk_09856ED8
     colliders: 0
     unk_34: 28
@@ -13021,13 +13021,13 @@ entries:
     tiles2: 0
     tilesSize2: 0
     unk_16: [0, 0]
-    map3: gUnk_09EF8298
-    map2: gUnk_09EF8358
+    map3: gMapFixed1Bg3Blocks
+    map2: gMapFixed5Bg2Blocks
     map: 0
     mapWidth: 3
     mapHeight: 2
     unk_26: [0, 0]
-    cellTypes: gUnk_09EF7708
+    cellTypes: gMapFixed1CellTypes
     gimmicks: gUnk_09856CE0
     colliders: gUnk_09856D04
     unk_34: 30

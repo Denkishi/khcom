@@ -3,29 +3,29 @@
 
 #include "types.h"
 
-extern u8 gUnk_09EF7108[1536];
-extern u8 gUnk_09EF7708[768];
-extern u8 gUnk_09EF7A08[768];
-extern u8 gUnk_09EF7D08[768];
-extern u8 gUnk_09EF8008[512];
+extern u8 gMapFixed0CellTypes[1536];
+extern u8 gMapFixed1CellTypes[768];
+extern u8 gMapFixed2CellTypes[768];
+extern u8 gMapFixed3CellTypes[768];
+extern u8 gMapFixed4CellTypes[512];
 
 struct MapFixedDef;
 struct PrzCardChance;
 struct UnkStruct_080E8E24;
 
-extern const void* gUnk_09EF8208[12];
-extern const void* gUnk_09EF8238[12];
-extern const void* gUnk_09EF8268[12];
-extern const void* gUnk_09EF8298[6];
-extern const void* gUnk_09EF82B0[6];
-extern const void* gUnk_09EF82C8[6];
-extern const void* gUnk_09EF82E0[6];
-extern const void* gUnk_09EF82F8[6];
-extern const void* gUnk_09EF8310[6];
-extern const void* gUnk_09EF8328[4];
-extern const void* gUnk_09EF8338[4];
-extern const void* gUnk_09EF8348[4];
-extern const void* gUnk_09EF8358[6];
+extern const void* gMapFixed0Bg3Blocks[12];
+extern const void* gMapFixed0Bg2Blocks[12];
+extern const void* gMapFixed0Bg1Blocks[12];
+extern const void* gMapFixed1Bg3Blocks[6];
+extern const void* gMapFixed1Bg2Blocks[6];
+extern const void* gMapFixed2Bg3Blocks[6];
+extern const void* gMapFixed2Bg2Blocks[6];
+extern const void* gMapFixed3Bg3Blocks[6];
+extern const void* gMapFixed3Bg2Blocks[6];
+extern const void* gMapFixed4Bg3Blocks[4];
+extern const void* gMapFixed4Bg2Blocks[4];
+extern const void* gMapFixed4Bg1Blocks[4];
+extern const void* gMapFixed5Bg2Blocks[6];
 extern struct MapFixedDef* gMapFixedDefs[6];
 extern struct PrzCardChance* gWorldPrzCardChances[14];
 extern struct UnkStruct_080E8E24* gWorldPrizeLists[14];

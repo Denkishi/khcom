@@ -713,6 +713,7 @@ entries:
     size: 2048
 - name: gUnk_09D694F4
   format: palette
+  ctype: u16
   us:
     address: 0x09D694F4
     size: 160

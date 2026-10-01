@@ -977,6 +977,9 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
                 lines.append(f"extern u8 {symbol}[];")
             elif name.endswith(".s") and "type" in entry:
                 lines.append(f"extern {entry['type']} {symbol};")
+            elif name.endswith(".s") and "ctype" in entry:
+                ctype = entry["ctype"]
+                lines.append(f"extern {ctype} {symbol}[{entry[version]['size'] // SCALAR_SIZES[ctype]}];")
             elif name.endswith(".s"):
                 lines.append(f"extern u8 {symbol}[{entry[version]['size']}];")
     lines += ["", "#endif"]

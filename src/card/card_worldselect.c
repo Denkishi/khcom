@@ -40,6 +40,7 @@
 #include "card_ui_types.h"
 #include "field_state.h"
 #include "fld_types.h"
+#include "gba/defines.h"
 #include "map.h"
 #include "map_runtime.h"
 #include "map_text_data.h"
@@ -160,9 +161,9 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
             w->tiles4 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[1], gUnk_0950C478);
             RequestDma3Copy((u8*)w->tiles4->src + (w->requiredValue << 7),
-                           (void*)(0x06010000 + ((w->tiles4->index + 4) << 5)), 0x80);
+                           (void*)(OBJ_VRAM0 + ((w->tiles4->index + 4) << 5)), 0x80);
             RequestDma3Copy((u8*)w->tiles4->src + 0x500,
-                           (void*)(0x06010000 + (w->tiles4->index << 5)), 0x80);
+                           (void*)(OBJ_VRAM0 + (w->tiles4->index << 5)), 0x80);
         }
 
         w->tiles2 = LoadObjTiles(gCardBacks[4].tiles2, 0x300);

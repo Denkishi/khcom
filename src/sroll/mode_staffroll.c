@@ -17,6 +17,7 @@
 #include "display.h"
 #include "evt_object_types.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "gba/syscall.h"
 #include "key.h"
 #include "m4a_song.h"
@@ -4232,7 +4233,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4271,7 +4272,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4308,7 +4309,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4356,7 +4357,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4391,7 +4392,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4430,7 +4431,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4469,7 +4470,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4508,7 +4509,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;
@@ -4547,7 +4548,7 @@ void mode_StaffRoll_1(void) {
         tmp = 0;
         dma = (vu32*)REG_ADDR_DMA3;
         dma[0] = (vu32)&tmp;
-        dma[1] = 0x06000000;
+        dma[1] = VRAM;
         dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
         dma[2];
         tmp = 0;

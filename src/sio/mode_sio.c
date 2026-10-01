@@ -38,6 +38,7 @@
 #include "chara_types.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "jiminy_inline_text_data.h"
 #include "key.h"
 #include "mode.h"
@@ -1522,13 +1523,13 @@ void SioBtlOptionChangeWorld(void) {
                 gSioBtlOptionWork->worldChangeState++;
             } else {
                 gSioBtlOptionWork->fadeLevel += 8;
-                FadePaletteToBlack(gSioWorldEntries[a].palette, (u16*)0x05000000, gSioWorldEntries[a].paletteSize, gSioBtlOptionWork->fadeLevel);
+                FadePaletteToBlack(gSioWorldEntries[a].palette, (u16*)PLTT, gSioWorldEntries[a].paletteSize, gSioBtlOptionWork->fadeLevel);
             }
         }
 
         break;
     case 1:
-        FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)0x05000000, gSioWorldEntries[b].paletteSize, 32);
+        FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, 32);
 #ifdef VERSION_EU
         eu_080059F4(2, gSioWorldEntries[b].map);
 #else
@@ -1561,9 +1562,9 @@ void SioBtlOptionChangeWorld(void) {
                 gSioBtlOptionWork->fadeLevel -= 8;
 
                 if (gSioBtlOptionWork->fadeLevel == 0) {
-                    LoadPaletteWithEffect(gSioWorldEntries[b].palette, (u16*)0x05000000, gSioWorldEntries[b].paletteSize);
+                    LoadPaletteWithEffect(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize);
                 } else {
-                    FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)0x05000000, gSioWorldEntries[b].paletteSize, gSioBtlOptionWork->fadeLevel);
+                    FadePaletteToBlack(gSioWorldEntries[b].palette, (u16*)PLTT, gSioWorldEntries[b].paletteSize, gSioBtlOptionWork->fadeLevel);
                 }
             }
         }
@@ -2225,18 +2226,18 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
         LoadPalette(gUnk_096FBD64 + 0x22, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x05000202), (6 - a) * 2);
         break;
     case 6:
-        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBD64, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
         LoadPalette(gUnk_096FBD64 + 0x2C, (void*)(gSioBtlOptionWork->palette5[0]->index * 32 + 0x0500020C), (a - 6) * 2);
         break;
     }
@@ -2247,18 +2248,18 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
         LoadPalette(gUnk_096FBDA4 + 0x22, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x05000202), (6 - b) * 2);
         break;
     case 6:
-        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x05000200), 32);
+        LoadPalette(gUnk_096FBDA4, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
         LoadPalette(gUnk_096FBDA4 + 0x2C, (void*)(gSioBtlOptionWork->palette5[1]->index * 32 + 0x0500020C), (b - 6) * 2);
         break;
     }

@@ -32,6 +32,7 @@
 #include "engine_math.h"
 #include "ga_types.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "key.h"
 #include "m4a_song.h"
 #include "map_runtime.h"
@@ -2929,9 +2930,9 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
                 switch (i) {
                 case 0:
-                    param.tilesAddr = 0x06010000 + (e->tiles->index << 5);
+                    param.tilesAddr = OBJ_VRAM0 + (e->tiles->index << 5);
                     param.tileCount = e->tiles->count;
-                    param.tilesAddr2 = 0x06010000 + (work->tiles->index << 5);
+                    param.tilesAddr2 = OBJ_VRAM0 + (work->tiles->index << 5);
                     param.tileCount2 = work->tiles->count;
                     param.x = e->baseX + (work->flipped == 0 ? -0x700 : 0x700);
                     param.y = e->baseY;
@@ -2939,13 +2940,13 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                     param.prizeObj = &e->actor;
                     break;
                 case 1:
-                    param.tilesAddr3 = 0x06010000 + (e->tiles->index << 5);
+                    param.tilesAddr3 = OBJ_VRAM0 + (e->tiles->index << 5);
                     param.tileCount3 = e->tiles->count;
                     break;
                 }
             }
 
-            param.paletteAddr = 0x05000200 + (work->palette->index << 5);
+            param.paletteAddr = OBJ_PLTT + (work->palette->index << 5);
             param.paletteSize = work->palette->count << 5;
             param.tilesAddr4 = 0;
             param.tileCount4 = 0;
@@ -4089,7 +4090,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     BosMdSetFrame(work, 0);
     MdAnimStart(work, 0);
-    LoadPalette(gUnk_09A3C97C, (void*)0x05000000, 32);
+    LoadPalette(gUnk_09A3C97C, (void*)PLTT, 32);
     SetBtlPaletteFadeExcluded(0, 1);
     work->bgPalette = gUnk_09A3C97C;
     work->palette = LoadObjPalette(gUnk_09A3C97C, 32);
@@ -4178,14 +4179,14 @@ void task_bos_md_2(MdWork* work) {
 
     if (StepHitFlash(&work->sub[0]) != 0) {
         if (work->bgPalette != gUnk_08F69BC4) {
-            LoadPalette(gUnk_08F69BC4, (void*)0x05000000, 32);
+            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
             work->bgPalette = gUnk_08F69BC4;
         }
 
         pal = work->palette2;
     } else {
         if (work->bgPalette != gUnk_09A3C97C) {
-            LoadPalette(gUnk_09A3C97C, (void*)0x05000000, 32);
+            LoadPalette(gUnk_09A3C97C, (void*)PLTT, 32);
             work->bgPalette = gUnk_09A3C97C;
         }
 

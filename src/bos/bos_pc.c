@@ -17,6 +17,7 @@
 #include "engine_math.h"
 #include "evt_types.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "m4a_song.h"
 #include "obj_api.h"
 #include "registration_data.h"
@@ -5272,9 +5273,9 @@ void BosPcDraw(PcWork* work) {
 
     if (work->flash != work->prevFlash) {
         if (work->flash == 0) {
-            LoadPalette(gBosPcBgPalette, (void*)0x05000000, 32);
+            LoadPalette(gBosPcBgPalette, (void*)PLTT, 32);
         } else {
-            LoadPalette(gUnk_08F69BC4, (void*)0x05000000, 32);
+            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
         }
 
         work->prevFlash = work->flash;

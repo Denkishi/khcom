@@ -9,6 +9,7 @@
 #include "battle_actor_types.h"
 #include "battle_bg_types.h"
 #include "battle_work.h"
+#include "gba/defines.h"
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
@@ -167,9 +168,9 @@ u8 task_bos_tm_1(TmWork* w) {
                 return 0;
             }
         } else {
-            param.tilesAddr = 0x06010000 + (w->tileIndex << 5);
+            param.tilesAddr = OBJ_VRAM0 + (w->tileIndex << 5);
             param.tileCount = w->tileCount;
-            param.paletteAddr = 0x05000200 + (w->paletteIndex << 5);
+            param.paletteAddr = OBJ_PLTT + (w->paletteIndex << 5);
             param.paletteSize = 0x60;
             param.x = w->x2;
             param.y = w->y2;

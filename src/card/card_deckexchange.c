@@ -22,6 +22,7 @@
 #include "card_api.h"
 #include "card_def_data.h"
 #include "card_types.h"
+#include "gba/defines.h"
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
@@ -1513,19 +1514,19 @@ void LoadDeckExchangeCardNameText(DeckExchangeWork* w, s32 id) {
 
     switch (def->category) {
     case 0:
-        LoadPalette(gUnk_09614458, (void*)(w->palette4->index * 32 + 0x05000200),
+        LoadPalette(gUnk_09614458, (void*)(w->palette4->index * 32 + OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 1:
-        LoadPalette(gUnk_09614478, (void*)(w->palette4->index * 32 + 0x05000200),
+        LoadPalette(gUnk_09614478, (void*)(w->palette4->index * 32 + OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 2:
-        LoadPalette(gUnk_09614498, (void*)(w->palette4->index * 32 + 0x05000200),
+        LoadPalette(gUnk_09614498, (void*)(w->palette4->index * 32 + OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 3:
-        LoadPalette(gUnk_096144B8, (void*)(w->palette4->index * 32 + 0x05000200),
+        LoadPalette(gUnk_096144B8, (void*)(w->palette4->index * 32 + OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     }

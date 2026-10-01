@@ -1,0 +1,15 @@
+#ifndef GUARD_GBA_DEFINES_H
+#define GUARD_GBA_DEFINES_H
+
+#define PLTT 0x05000000
+#define OBJ_PLTT (PLTT + 0x200)
+
+#define VRAM 0x06000000
+#define OBJ_VRAM0 (VRAM + 0x10000)
+
+#define OAM 0x07000000
+
+#define TILE_SIZE_4BPP 32
+#define PLTT_SIZE_4BPP 32
+
+#endif

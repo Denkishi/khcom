@@ -22,6 +22,7 @@
 #include "card_types.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "gba/syscall.h"
 #include "key.h"
 #include "m4a_song.h"
@@ -1145,14 +1146,14 @@ u8 CharaObjUpdateDefeat2(void) {
 
         break;
     case 2:
-        CpuSet((void*)0x05000000, gCharaObj->savedPalette, 0x200);
+        CpuSet((void*)PLTT, gCharaObj->savedPalette, 0x200);
         BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
         gCharaObj->state++;
         break;
     case 3:
         gCharaObj->fadeLevel++;
-        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)PLTT, 320, gCharaObj->fadeLevel);
 
         if (++gCharaObj->timer > 9) {
             gCharaObj->timer = 0;
@@ -1162,7 +1163,7 @@ u8 CharaObjUpdateDefeat2(void) {
         break;
     case 4:
         gCharaObj->fadeLevel = 0;
-        CpuSet((void*)0x05000000, gCharaObj->fadedPalette, 0x200);
+        CpuSet((void*)PLTT, gCharaObj->fadedPalette, 0x200);
         gCharaObj->state++;
         break;
     case 5:
@@ -1240,7 +1241,7 @@ u8 CharaObjUpdateDefeat2(void) {
         break;
     case 11:
         gCharaObj->fadeLevel -= 2;
-        FadePaletteToWhite(gCharaObj->fadedPalette, (u16*)0x05000000, 1024, gCharaObj->fadeLevel);
+        FadePaletteToWhite(gCharaObj->fadedPalette, (u16*)PLTT, 1024, gCharaObj->fadeLevel);
 
         if (++gCharaObj->timer > 8) {
             gCharaObj->timer = 0;
@@ -1287,7 +1288,7 @@ u8 CharaObjUpdateDefeat2(void) {
         break;
     case 17:
         gCharaObj->fadeLevel--;
-        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)0x05000000, 320, gCharaObj->fadeLevel);
+        FadePaletteToBlack(gCharaObj->savedPalette, (u16*)PLTT, 320, gCharaObj->fadeLevel);
 
         if (++gCharaObj->timer > 10) {
             gCharaObj->timer = 0;
@@ -1396,7 +1397,7 @@ u8 CharaObjUpdateDefeat(void) {
         gCharaObj->state++;
         break;
     case 3:
-        CpuSet((void*)0x05000000, gCharaObj->savedPalette, 0x200);
+        CpuSet((void*)PLTT, gCharaObj->savedPalette, 0x200);
         gCharaObj->state++;
         break;
     case 4:

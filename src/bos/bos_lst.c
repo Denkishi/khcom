@@ -15,6 +15,7 @@
 #include "btl_effect.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "gba/syscall.h"
 #include "m4a_song.h"
 #include "obj.h"
@@ -2604,13 +2605,13 @@ void task_bos_lst_2(BosLstWork* work) {
 
     if ((s16)work->flash != (s16)work->prevFlash) {
         if ((s16)work->flash == 0) {
-            LoadPalette(gUnk_09D69454, (void*)0x05000000, 0x60);
-            LoadPalette(gUnk_09D69594, (void*)(0x05000200 + ((work->palette->index & 15) << 5)), 0x60);
+            LoadPalette(gUnk_09D69454, (void*)PLTT, 0x60);
+            LoadPalette(gUnk_09D69594, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 0x60);
         } else {
-            LoadPalette(gUnk_08F69BC4, (void*)0x05000000, 32);
+            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
             LoadPalette(gUnk_08F69BC4, (void*)0x05000020, 32);
             LoadPalette(gUnk_08F69BC4, (void*)0x05000040, 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(0x05000200 + ((work->palette->index & 15) << 5)), 32);
+            LoadPalette(gUnk_08F69BC4, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 32);
             LoadPalette(gUnk_08F69BC4, (void*)(0x05000220 + ((work->palette->index & 15) << 5)), 32);
             LoadPalette(gUnk_08F69BC4, (void*)(0x05000240 + ((work->palette->index & 15) << 5)), 32);
         }

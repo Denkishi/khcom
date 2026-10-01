@@ -13,6 +13,7 @@
 #include "sprite.h"
 #include "types.h"
 #include "system_state.h"
+#include "gba/defines.h"
 #include "gba/io_reg.h"
 #include "gba/oam.h"
 #include "obj.h"
@@ -135,7 +136,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine
 
             do {
                 cnt = GetObjTileCount(((ObjTileListEntry*)c)->attr0, ((ObjTileListEntry*)c)->attr1);
-                RequestDma3Copy((u8*)((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + 0x06010000), cnt << 5);
+                RequestDma3Copy((u8*)((ObjTiles*)obj)->src + ((((ObjTileListEntry*)c)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), cnt << 5);
                 base += cnt;
                 c = (u16*)c + 3;
             } while (--i);
@@ -278,7 +279,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
 
     if (cur == NULL) {
         node->index = gSpriteWork->tilePool.rangeStart;
-        RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
+        RequestDma3Copy(src, (void*)(OBJ_VRAM0 + node->index * TILE_SIZE_4BPP), size);
         ListPoolActivate(&node->node, &gSpriteWork->tilePool);
         return node;
     }
@@ -287,7 +288,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     avail = cur->index - gSpriteWork->tilePool.rangeStart;
 
     if (node->count <= (s16)avail) {
-        RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
+        RequestDma3Copy(src, (void*)(OBJ_VRAM0 + node->index * TILE_SIZE_4BPP), size);
         ListPoolActivateBefore(&node->node, &gSpriteWork->tilePool, &cur->node);
         return node;
     }
@@ -311,7 +312,7 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
         }
 
         if (node->count <= end) {
-            RequestDma3Copy(src, (void*)((node->index << 5) + 0x06010000), size);
+            RequestDma3Copy(src, (void*)(OBJ_VRAM0 + node->index * TILE_SIZE_4BPP), size);
             ListPoolActivateAfter(&node->node, &gSpriteWork->tilePool, &cur->node);
             return node;
         }
@@ -478,7 +479,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
 
     if (cur == NULL) {
         node->index = gSpriteWork->palettePool.rangeStart;
-        LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
+        LoadPalette(src, (void*)(OBJ_PLTT + node->index * PLTT_SIZE_4BPP), size);
         ListPoolActivate(&node->node, &gSpriteWork->palettePool);
         return node;
     }
@@ -487,7 +488,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     avail = cur->index - gSpriteWork->palettePool.rangeStart;
 
     if (node->count <= (s16)avail) {
-        LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
+        LoadPalette(src, (void*)(OBJ_PLTT + node->index * PLTT_SIZE_4BPP), size);
         ListPoolActivateBefore(&node->node, &gSpriteWork->palettePool, &cur->node);
         return node;
     }
@@ -511,7 +512,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
         }
 
         if (node->count <= end) {
-            LoadPalette(src, (void*)((node->index << 5) + 0x05000200), size);
+            LoadPalette(src, (void*)(OBJ_PLTT + node->index * PLTT_SIZE_4BPP), size);
             ListPoolActivateAfter(&node->node, &gSpriteWork->palettePool, &cur->node);
             return node;
         }
@@ -523,7 +524,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
 }
 
 void LoadObjPaletteBank(u16 bank, void* src) {
-    LoadPalette(src, (void*)((bank << 5) + 0x05000200), 32);
+    LoadPalette(src, (void*)(OBJ_PLTT + bank * PLTT_SIZE_4BPP), 32);
 }
 
 void ReleaseObjPaletteRef(ObjPalette* p) {
@@ -745,7 +746,7 @@ void UpdateSpriteOam(void) {
         return;
     }
 
-    oam = (u16*)0x07000000;
+    oam = (u16*)OAM;
 
     for (i = 0; i < gSpriteWork->affineCount; i++) {
         oam += 3;
@@ -761,7 +762,7 @@ void UpdateSpriteOam(void) {
 
     gSpriteWork->affineCount = 0;
     emitted = 0;
-    oam = (u16*)0x07000000;
+    oam = (u16*)OAM;
     count = gSpriteWork->entryCount;
     entries = gSpriteWork->sortPtrs;
     mosaic = gSpriteWork->mosaicEnabled;
@@ -1086,7 +1087,7 @@ void InitObjTilesAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
         t->sprite = 0;
         t->allocated = 0;
         t->index = slot;
-        RequestDma3Copy(src, (void*)((t->index << 5) + 0x06010000), size);
+        RequestDma3Copy(src, (void*)(OBJ_VRAM0 + t->index * TILE_SIZE_4BPP), size);
     }
 }
 
@@ -1109,7 +1110,7 @@ void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
         t->src = src;
         t->refCount = 0;
         t->index = slot;
-        RequestDma3Copy(src, (void*)((t->index << 5) + 0x05000200), size);
+        RequestDma3Copy(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), size);
     }
 }
 
@@ -1143,7 +1144,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* a, u16* b, void* c) {
                 do {
                     n = GetObjTileCount(b[0], b[1]);
                     RequestDma3Copy((u8*)a->src + ((b[2] & 0x3FF) << 5),
-                                    (void*)(((a->index + acc) << 5) + 0x06010000), n * 32);
+                                    (void*)(((a->index + acc) << 5) + OBJ_VRAM0), n * 32);
                     acc = acc + n;
                     b += 3;
                     j--;
@@ -1222,7 +1223,7 @@ ObjPalette* AllocObjPalette(u16 size) {
 
 void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
     if (t->type == 2) {
-        LoadPalette(src, (void*)((t->index << 5) + 0x05000200), (u16)(t->count << 5));
+        LoadPalette(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), (u16)(t->count << 5));
     }
 }
 
@@ -1596,7 +1597,7 @@ void CommitDisplayRegs(void) {
     REG_BG3X = gBg3X;
     REG_BG3Y = gBg3Y;
     REG_DISPCNT = gDispCnt;
-    *(vu16*)0x05000000 = gBackdropColor;
+    *(vu16*)PLTT = gBackdropColor;
 }
 
 void VTransInit(void) {
@@ -2185,7 +2186,7 @@ void LoadBgTiles(s32 bg, void* src, u16 size) {
 
 void LoadBgPalette(s32 bg, void* src, u16 size) {
     EnableBg(bg);
-    LoadPalette(src, (void*)((gBgPaletteBank[bg] << 5) + 0x05000000), size);
+    LoadPalette(src, (void*)((gBgPaletteBank[bg] << 5) + PLTT), size);
 }
 
 void LoadBgMap(s32 bg, void* src, u16 size) {
@@ -2194,11 +2195,11 @@ void LoadBgMap(s32 bg, void* src, u16 size) {
 }
 
 void* GetBgCharBase(s32 bg) {
-    return (void*)(((*sBgControl[bg] & BGCNT_CHARBASE_MASK) << 12) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & BGCNT_CHARBASE_MASK) << 12) + VRAM);
 }
 
 void* GetBgScreenBase(s32 bg) {
-    return (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000);
+    return (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + VRAM);
 }
 
 void SetBgMapBlocks(s32 bg, void* src, u8 w, u8 h) {
@@ -2226,7 +2227,7 @@ void RedrawBgMapAt(s32 bg, u16 x, u16 y) {
 
     e->x = x;
     e->y = y;
-    CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000), 0, 0, 0x1F, 0x15);
+    CopyBgMapRect(x, y, e, (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + VRAM), 0, 0, 0x1F, 0x15);
     SetBgScroll(bg, x & 7, y & 7);
     e->dirty = 0;
 }
@@ -2272,7 +2273,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         return;
     }
 
-    dst = (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + 0x06000000);
+    dst = (void*)(((*sBgControl[bg] & BGCNT_SCREENBASE_MASK) << 3) + VRAM);
     tx = sx >> 3;
     ty = sy >> 3;
     cx = GetBgScrollX(bg) >> 3;
@@ -2884,7 +2885,7 @@ void LoadPalette(void* src, void* dst, u16 size) {
 
     base = gFadeWork->slots;
     count = size / 32;
-    idx = ((s32)dst - 0x05000000) / 32;
+    idx = ((s32)dst - PLTT) / 32;
     src = LoadPaletteWithEffect(src, dst, size);
 
     for (i = 0; i < count; i++) {

@@ -32,6 +32,7 @@
 #include "field_state.h"
 #include "fld_types.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "key.h"
 #include "listpool.h"
 #include "m4a_catalog_data.h"
@@ -5189,7 +5190,7 @@ void MapMenuWriteDigits3(ObjTiles* p, u8 a, u16 v) {
     d[2] = v - d[0] * 100 - d[1] * 10;
 
     for (i = 0, q = d; i < 3; i++) {
-        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(0x06010000 + (p->index + a + i) * 32), 0x20);
+        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
         q++;
     }
 }
@@ -5206,7 +5207,7 @@ void MapMenuWriteDigits5(ObjTiles* p, u8 a, u32 v) {
     d[4] = v - d[0] * 10000 - d[1] * 1000 - d[2] * 100 - d[3] * 10;
 
     for (i = 0, q = d; i < 5; i++) {
-        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(0x06010000 + (p->index + a + i) * 32), 0x20);
+        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
         q++;
     }
 }

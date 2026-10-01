@@ -1,6 +1,7 @@
 #include "macros.h"
 #include "snd_stream.h"
 #include "movie.h"
+#include "gba/defines.h"
 #include "gba/io_reg.h"
 #include <stddef.h>
 #include "types.h"
@@ -79,7 +80,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     MovieGetSize(gMoviePlayer, &w, &h);
     x = (240 - w) >> 1;
     y = (160 - h) >> 1;
-    MovieDrawFrame(gMoviePlayer, (u16*)0x06000000 + (y * 240 + x));
+    MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * 240 + x));
     MovieAdvanceFrame(gMoviePlayer);
     SndStreamStart();
     channels = MovieGetChannels(gMoviePlayer);
@@ -94,7 +95,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
         while (MovieSyncFrame(gMoviePlayer) == 0) {
         }
 
-        MovieDrawFrame(gMoviePlayer, (u16*)0x06000000 + (y * 240 + x));
+        MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * 240 + x));
 
         if (MovieAdvanceFrame(gMoviePlayer) == 0) {
             break;

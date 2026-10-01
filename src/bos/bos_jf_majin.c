@@ -15,6 +15,7 @@
 #include "card_api.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "m4a_song.h"
 #include "mode_battle_data.h"
 #include "obj.h"
@@ -199,17 +200,17 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     if (gBtlWork->paused == 0) {
         if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
-                LoadPaletteWithEffect(gUnk_08F69BC4, (void*)0x05000000, 32);
+                LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
                 gfx = work->palette2;
             } else {
-                LoadPaletteWithEffect(gUnk_096FB584, (void*)0x05000000, 32);
+                LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
                 gfx = work->palette;
             }
         } else {
             gfx = work->palette;
         }
     } else {
-        LoadPaletteWithEffect(gUnk_096FB584, (void*)0x05000000, 32);
+        LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
         gfx = work->palette;
     }
 
@@ -2115,7 +2116,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
         if ((s16)work->timer <= 0) {
             work->unk_34C = 0;
             work->flags &= ~DSD_FLAG_HURT;
-            LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
+            LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
             ClearBtlObjActionFlags(b);
 
             if (b->hp > 0) {

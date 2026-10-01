@@ -20,6 +20,7 @@
 #include "display.h"
 #include "engine_math.h"
 #include "game.h"
+#include "gba/defines.h"
 #include "listpool.h"
 #include "m4a_song.h"
 #include "mode_battle_data.h"
@@ -157,14 +158,14 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     s16 y;
 
     if (gBtlWork->paused != 0) {
-        LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
+        LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
         gfx = work->palette;
     } else if (d->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
-            LoadPaletteWithEffect(gUnk_08F69BC4, (void*)0x05000000, 32);
+            LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
             gfx = work->palette2;
         } else {
-            LoadPaletteWithEffect(gUnk_096FB744, (void*)0x05000000, 32);
+            LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
             gfx = work->palette;
         }
     } else {
@@ -903,7 +904,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         break;
     case 2:
         BosDsdMainLoopMapFrames(work);
-        LoadPalette(gUnk_096FB744, (void*)0x05000000, 32);
+        LoadPalette(gUnk_096FB744, (void*)PLTT, 32);
         work->energy2Task = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy2, work->dsd);
         work->dsd->stateStep++;
         break;
@@ -1033,9 +1034,9 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         param.tileCount3 = 0;
         param.paletteAddr = 0;
         param.paletteSize = 0;
-        param.tilesAddr4 = 0x6000000;
+        param.tilesAddr4 = VRAM;
         param.tileCount4 = 0xE0;
-        param.paletteAddr2 = 0x5000000;
+        param.paletteAddr2 = PLTT;
         param.paletteSize2 = 32;
         param.x = d->body[0].x - 0x1400;
         param.y = d->body[0].y;

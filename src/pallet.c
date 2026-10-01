@@ -8,6 +8,7 @@
 #include "gba/io_reg.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 
 static const s32 sBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,
@@ -24,7 +25,7 @@ static s16 gPaletteEffectSaved;
 PaletteWave gBgWaves[5] EWRAM_COMMON(16);
 
 u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
-    s32 base = ((s32)dst - 0x05000000) >> 1;
+    s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     u16 i;
     u16 b[2];
@@ -70,7 +71,7 @@ u16* FadePaletteToBlack(u16* src, u16* dst, u16 size, u16 amount) {
 }
 
 u16* FadePaletteToGray(u16* src, u16* dst, u16 size, u16 amount) {
-    s32 base = ((s32)dst - 0x05000000) >> 1;
+    s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     s16 inv = 31 - amount;
     u16 i;
@@ -97,7 +98,7 @@ u16* FadePaletteToGray(u16* src, u16* dst, u16 size, u16 amount) {
 }
 
 u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
-    s32 base = ((s32)dst - 0x05000000) >> 1;
+    s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     u16 i;
     u16 b[2];
@@ -143,7 +144,7 @@ u16* FadePaletteToWhite(u16* src, u16* dst, u16 size, u16 amount) {
 }
 
 u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
-    s32 base = ((s32)dst - 0x05000000) >> 1;
+    s32 base = ((s32)dst - PLTT) >> 1;
     u16 count = size >> 1;
     u16 i;
 
@@ -187,7 +188,7 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
 }
 
 u16* LoadPaletteBuffered(void* src, u16* dst, u16 size) {
-    s32 base = ((s32)dst - 0x05000000) >> 1;
+    s32 base = ((s32)dst - PLTT) >> 1;
 
     CpuSet(src, &gPaletteBuffer->colors[base], size >> 1);
 
@@ -271,7 +272,7 @@ void SetPaletteBankFadeEnabled(u16 bank, u8 a) {
 u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
     u16 bank;
     u16 j;
-    u16* pal = (u16*)0x05000000;
+    u16* pal = (u16*)PLTT;
     u16 b[2];
     u16 g[2];
     u16 r[2];
@@ -316,7 +317,7 @@ u16* FadeAllPalettesToBlack(u16* src, u16 amount) {
 }
 
 u16* FadeAllPalettesToWhite(u16* src, u16 amount) {
-    u16* pal = (u16*)0x05000000;
+    u16* pal = (u16*)PLTT;
     u16 bank;
     u16 j;
     u16 b[2];

@@ -24,6 +24,7 @@
 #include "display.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "key.h"
 #include "m4a_song.h"
 #include "mode.h"
@@ -380,13 +381,13 @@ void MapInspectDrawValueCounts(void) {
     p = GetMapInspectSelectedEntry();
 
     if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-        LoadPalette(gUnk_09A3D23C + p->category * 32, (void*)0x05000000, 12);
+        LoadPalette(gUnk_09A3D23C + p->category * 32, (void*)PLTT, 12);
     }
 
     if (sMapInspectMenuState == 1) {
         for (i = 0; i <= 9; i++) {
             LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-            LoadPalette(gUnk_09A3D2C8, (void*)(0x05000000 + (i + 6) * 2), 2);
+            LoadPalette(gUnk_09A3D2C8, (void*)(PLTT + (i + 6) * 2), 2);
         }
     } else if (p->category == 3) {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
@@ -417,10 +418,10 @@ void MapInspectDrawValueCounts(void) {
 
             if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
                 LoadDecimalDigitTiles(v, gUnk_09A067FC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gUnk_09A3D248, (void*)(0x05000000 + (i + 6) * 2), 2);
+                LoadPalette(gUnk_09A3D248, (void*)(PLTT + (i + 6) * 2), 2);
             } else {
                 LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gUnk_09A3D2C8, (void*)(0x05000000 + (i + 6) * 2), 2);
+                LoadPalette(gUnk_09A3D2C8, (void*)(PLTT + (i + 6) * 2), 2);
             }
         }
     }

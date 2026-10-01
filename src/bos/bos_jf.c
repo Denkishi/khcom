@@ -14,6 +14,7 @@
 #include "display.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/defines.h"
 #include "m4a_song.h"
 #include "obj.h"
 #include "obj_api.h"
@@ -184,7 +185,7 @@ u8 task_bos_jf_1(JfWork* work) {
         if (--work->hurtTimer <= 0) {
             work->unk_240 = 0;
             work->flags &= ~JF_FLAG_HURT;
-            LoadPaletteWithEffect(gUnk_096FB584, (void*)0x05000000, 32);
+            LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
             ClearBtlObjActionFlags(sub);
 
             if (sub->hp > 0) {

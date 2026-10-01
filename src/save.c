@@ -4,6 +4,7 @@
 #include "gba/io_reg.h"
 #include "gba/keys.h"
 #include "sram_error_screen.h"
+#include "gba/defines.h"
 #include "malloc.h"
 #include "save_types.h"
 #include "system_state.h"
@@ -710,7 +711,7 @@ void ShowSramErrorScreen(void) {
     dma[2] = (DMA_ENABLE << 16) | 0x2000;
     dma[2];
     dma[0] = (u32)gSramErrorPalette;
-    dma[1] = 0x05000000;
+    dma[1] = PLTT;
     dma[2] = (DMA_ENABLE << 16) | 0x100;
     dma[2];
     dma[0] = (u32)gSramErrorTilemap;
@@ -718,7 +719,7 @@ void ShowSramErrorScreen(void) {
     dma[2] = (DMA_ENABLE << 16) | 0x280;
     dma[2];
     dma[0] = (u32)gSramErrorTilemapBuf;
-    dma[1] = 0x06000000;
+    dma[1] = VRAM;
     dma[2] = (DMA_ENABLE << 16) | 0x400;
     dma[2];
     WaitSramErrorInput();
@@ -770,7 +771,7 @@ void WaitSramErrorInput(void) {
             i++;
             VBlankIntrWait();
             dma[0] = (u32)gSramErrorTilemapBuf;
-            dma[1] = 0x06000000;
+            dma[1] = VRAM;
             dma[2] = ((DMA_ENABLE | DMA_32BIT) << 16) | 0x200;
             dma[2];
         } while (i <= 19);

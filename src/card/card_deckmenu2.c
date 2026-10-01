@@ -33,6 +33,7 @@
 #include "card_def_data.h"
 #include "card_types.h"
 #include "card_ui_types.h"
+#include "gba/defines.h"
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
@@ -3522,7 +3523,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* w, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
-                        0x05000200),
+                        OBJ_PLTT),
                 (u16)(w->palette4->count << 5));
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
@@ -3826,7 +3827,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* w, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
-                        0x05000200),
+                        OBJ_PLTT),
                 (u16)(w->palette4->count << 5));
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
@@ -4139,7 +4140,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* w, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
     LoadPalette(gUnk_09614438,
                 (void*)(w->palette4->index * 32 +
-                        0x05000200),
+                        OBJ_PLTT),
                 (u16)(w->palette4->count << 5));
     TaskPoolUpdate(&w->taskpool);
     TaskPoolUpdate(&w->cardpool);
@@ -5233,25 +5234,25 @@ void LoadCardNameText(DeckMenuWork* w, s32 id) {
     case 0:
         LoadPalette(gUnk_09614458,
                     (void*)(w->palette4->index * 32 +
-                            0x05000200),
+                            OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 1:
         LoadPalette(gUnk_09614478,
                     (void*)(w->palette4->index * 32 +
-                            0x05000200),
+                            OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 2:
         LoadPalette(gUnk_09614498,
                     (void*)(w->palette4->index * 32 +
-                            0x05000200),
+                            OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     case 3:
         LoadPalette(gUnk_096144B8,
                     (void*)(w->palette4->index * 32 +
-                            0x05000200),
+                            OBJ_PLTT),
                     (u16)(w->palette4->count << 5));
         break;
     }

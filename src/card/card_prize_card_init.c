@@ -33,6 +33,7 @@
 #include "card_def_data.h"
 #include "card_types.h"
 #include "card_ui_types.h"
+#include "gba/defines.h"
 #include "map_types.h"
 #include "player_progression_types.h"
 #include "types.h"
@@ -1886,8 +1887,8 @@ ObjTiles* AllocKeyValueTiles(u8 a) {
     if (a != 0) {
         obj = AllocSpriteFrameTiles(256);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[1], gUnk_0950C478);
-        RequestDma3Copy(&((u8*)obj->src)[a * 128], (void*)(0x06010000 + (obj->index + 4) * 32), 128);
-        RequestDma3Copy(&((u8*)obj->src)[0x500], (void*)(0x06010000 + obj->index * 32), 128);
+        RequestDma3Copy(&((u8*)obj->src)[a * 128], (void*)(OBJ_VRAM0 + (obj->index + 4) * 32), 128);
+        RequestDma3Copy(&((u8*)obj->src)[0x500], (void*)(OBJ_VRAM0 + obj->index * 32), 128);
     } else {
         obj = AllocSpriteFrameTiles(128);
         UpdateSpriteFrameTiles(obj, gUnk_09EF1198[0], gUnk_0950C478);

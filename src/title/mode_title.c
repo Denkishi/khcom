@@ -16,6 +16,7 @@
 #include "battle_actor.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "intr.h"
 #include "key.h"
 #include "m4a.h"
@@ -47,7 +48,7 @@ void TitleCopyToPaletteBuffer(u16 a, void* b, u16 c) {
 }
 
 void TitleLoadPaletteBuffer(void) {
-    LoadPalette(sTitlePaletteBuffer, (void*)0x05000000, 0x400);
+    LoadPalette(sTitlePaletteBuffer, (void*)PLTT, 0x400);
 }
 
 void TitleExitToChoice(void) {

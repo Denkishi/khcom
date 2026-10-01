@@ -15,6 +15,7 @@
 #include "mode.h"
 #include "gba/keys.h"
 #include "sroll_api.h"
+#include "gba/defines.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
 #include <stddef.h>
@@ -220,7 +221,7 @@ s32 func_08000F90(void) {
 
 void ModeBlankDisplay(void) {
     REG_DISPCNT &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
-    *(vu16*)0x05000000 = gModeBlankColor;
+    *(vu16*)PLTT = gModeBlankColor;
 }
 
 void ModeStart(Mode* mode, s32 arg) {

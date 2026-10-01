@@ -10,6 +10,7 @@
 #include "engine_math.h"
 #include "field_state.h"
 #include "fld_types.h"
+#include "gba/defines.h"
 #include "gba/syscall.h"
 #include "listpool.h"
 #include "obj.h"
@@ -429,7 +430,7 @@ s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
 
 void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d) {
     if (b != NULL) {
-        LoadPalette(b, (void*)(d * 32 + 0x05000000), 32);
+        LoadPalette(b, (void*)(d * 32 + PLTT), 32);
     }
 
     gDebugTextPaletteBank = d;

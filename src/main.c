@@ -19,6 +19,7 @@
 #include "save_api.h"
 #include <stddef.h>
 #include "engine_math.h"
+#include "gba/defines.h"
 #include "types.h"
 
 #define INTR_VECTOR (*(void**)0x03007FFC)
@@ -105,7 +106,7 @@ void ClearSystemMemory(void) {
     b = 0;
     CpuSet(&b, (void*)0x03000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x1F80);
     c = 0;
-    CpuSet(&c, (void*)0x06000000, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
+    CpuSet(&c, (void*)VRAM, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
 }
 #endif
 

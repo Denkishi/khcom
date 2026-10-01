@@ -39,6 +39,7 @@
 #include "evt_data.h"
 #include "evt_object_types.h"
 #include "evt_types.h"
+#include "gba/defines.h"
 #include "key.h"
 #include "listpool.h"
 #include "mode_battle_data.h"
@@ -3649,9 +3650,9 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     }
 
     if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(&gUnk_096148D8[0x100], (void*)(p->obj.paletteIndex * 32 + 0x05000200), 32);
+        LoadPalette(&gUnk_096148D8[0x100], (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     } else if ((p->keyframes[p->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(gEvtObjResources[p->arg.chara].res.palette, (void*)(p->obj.paletteIndex * 32 + 0x05000200), 32);
+        LoadPalette(gEvtObjResources[p->arg.chara].res.palette, (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     }
 
     if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) != 0) {

@@ -17,6 +17,11 @@ the ROM's bytes at an address the link already fixes, and the readable
 disassembly to decompile from lives on the US side. A chunk's extent comes
 from the next function's address in this version, not from the US size, so
 a function that is a different length here still tiles correctly.
+
+A source file that config/us/units.txt does not list joins this version's
+link order when it defines functions named <version>_<address>; it goes
+where those addresses fall, and its .rodata and .data come from
+TARGET_DATA_ADDR and TARGET_DATA_SIZE.
 """
 
 import argparse
@@ -2648,15 +2653,26 @@ def main():
     for key, here in TARGET_DATA_ADDR.get(ver, {}).items():
         if key not in placed:
             cdata.append((here, TARGET_DATA_SIZE.get(ver, {})[key], f"{key[0]}({key[1]})"))
+    own = []
+    for src in sorted(Path("src").rglob("*.c"), key=lambda path: path.name):
+        key = None if src.name in us_units else unit_key(src.name)
+        if isinstance(key, int):
+            own.append((key, src.name))
+            print(f"  unit added: {src.name}")
     dropped = [l for k, l in body if k == "absent"]
     for l in dropped:
         print(f"  unit dropped: {l}")
     body = [(k, l) for k, l in body if k != "absent"]
     body += [(at, nm) for at, nm in fillers]
-    ordered = [l for k, l in sorted(body, key=lambda kl: (kl[0] is None, kl[0] or 0))]
-    moved = [l for (k, l), l2 in zip(body, ordered) if l != l2]
+
+    def rank(kl):
+        return kl[0] is None, kl[0] or 0
+
+    ranked = sorted(body, key=rank)
+    moved = [l for (k, l), (k2, l2) in zip(body, ranked) if l != l2]
     if moved:
         print(f"  units reordered: {len(moved)}")
+    ordered = [l for k, l in sorted(ranked + own, key=rank)]
 
     pad = len(ot)
 

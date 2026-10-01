@@ -54,15 +54,15 @@ const UnkStruct_080ABA80 gUnk_09033FD0 = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
-void func_08076284() {
+void RequestSoraKingReload0() {
     gSoraCardReloadRequest = 14;
 }
 
-void func_08076290() {
+void RequestSoraKingReload1() {
     gSoraCardReloadRequest = 15;
 }
 
-void func_0807629C() {
+void RequestSoraKingReload2() {
     gSoraCardReloadRequest = 16;
 }
 
@@ -98,7 +98,7 @@ void RequestSoraMegalixir() {
     gSoraCardReloadRequest = 24;
 }
 
-void func_0807630C() {
+void RequestSoraRemoveItemCards() {
     gSoraCardReloadRequest = 20;
 }
 
@@ -144,15 +144,15 @@ void RequestSwitchSoraCardList() {
     gSoraCardRequest = 10;
 }
 
-void func_080763A0() {
+void RequestSoraAutoCycle60() {
     gSoraCardRequest = 11;
 }
 
-void func_080763AC() {
+void RequestSoraAutoCycle180() {
     gSoraCardRequest = 12;
 }
 
-void func_080763B8() {
+void RequestSoraAutoCycle300() {
     gSoraCardRequest = 13;
 }
 
@@ -239,9 +239,9 @@ void CreateCardBattleState() {
     gCardBattleState->soraHcEffectReplaced = 0;
     gCardBattleState->rikuHcEffectReplaced = 0;
     gCardBattleState->unk_0ED = 0;
-    gCardBattleState->unk_0DE = 0;
-    gCardBattleState->unk_0DF = 0;
-    gCardBattleState->unk_0EE = 0;
+    gCardBattleState->soraStockedCount = 0;
+    gCardBattleState->rikuStockedCount = 0;
+    gCardBattleState->darkModeReady = 0;
     gCardBattleState->rikuCardsLeft = 0;
     gCardBattleState->soraReloadGauge = 0;
     gCardBattleState->rikuReloadGauge = 0;
@@ -443,7 +443,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             arg.listIndex = slot;
             TaskCreate(&w->tasks, &gTaskDescCardNotHave, &arg);
             e = ListPoolFirst(&w->cardDisplays[slot]);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 1;
             e->priority = 50;
@@ -451,7 +451,7 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             break;
         case 1:
             e = ListPoolFirst(&w->cardDisplays[slot]);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 1;
             e->priority = 50;
@@ -459,13 +459,13 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             break;
         case 2:
             e = ListPoolFirst(&w->cardDisplays[slot]);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 50;
             e->ringIndex = 1;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[0];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[0];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 60;
             e->ringIndex = 0;
@@ -473,19 +473,19 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
             break;
         case 3:
             e = ListPoolFirst(&w->cardDisplays[slot]);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 50;
             e->ringIndex = 1;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[2];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[2];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 60;
             e->ringIndex = 2;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
             e = ListPoolNext(&e->node);
-            e->unk_80 = e->unk_7C = gSoraCardRingAngles[0];
+            e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[0];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->priority = 60;
             e->ringIndex = 0;
@@ -519,7 +519,7 @@ static void cardbattle_0(CardBattleWork* w) {
     gCardBattleState->soraWork = w;
     gBtlWork->hcEffect = 0;
     ResetBossCardValue();
-    func_080782EC();
+    ClearSoraCardPlayFlags();
     w->tiles = AllocSpriteFrameTiles(128);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8);
@@ -804,17 +804,17 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
         case 11:
             w->timer = 60;
             gSoraCardRequest = 0;
-            SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
         case 12:
             w->timer = 180;
             gSoraCardRequest = 0;
-            SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
         case 13:
             w->timer = 300;
             gSoraCardRequest = 0;
-            SetTaskUpdate(task, (TaskUpdateFunc)func_0807B578);
+            SetTaskUpdate(task, (TaskUpdateFunc)UpdateSoraAutoCycle);
             break;
         default:
             gSoraCardRequest = 0;
@@ -1368,7 +1368,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
 
             while (e != NULL) {
                 e->ringIndex++;
-                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
                 e->timer = 4;
                 e->priority += 4;
                 e = ListPoolNext(&e->node);
@@ -1390,7 +1390,7 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;
                 }
 
-                e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+                e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
                 e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
                 e->ringIndex = 1;
                 e->timer = 8;
@@ -1433,10 +1433,10 @@ s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task) {
                     e = TaskCreate(&w->tasks, &gTaskDescCardSora, &arg)->work;
                 }
 
-                e->unk_7C = gSoraCardRingAngles[3];
+                e->ringAngle = gSoraCardRingAngles[3];
                 e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
                 e->ringIndex = 0;
-                e->unk_80 = gSoraCardRingAngles[0];
+                e->ringAngleTarget = gSoraCardRingAngles[0];
                 e->priority = 60;
                 e->flags |= CARD_DISP_FLAG_VISIBLE;
             }
@@ -1512,20 +1512,20 @@ void RemoveSoraCardDisplays(CardBattleWork* w);
 void ClearStockedCardSlots(CardBattleWork* w);
 void TickSoraHcEffectOnCardUse();
 void LoadCardDisplayGfx(CardDisplayWork* p);
-u8 func_0807C934(CardDisplayWork* p, void* a);
-u8 func_0807D810(CardDisplayWork* p);
+u8 SoraStockMoveToSlot(CardDisplayWork* p, void* a);
+u8 SoraStockVanish(CardDisplayWork* p);
 void RefreshSoraCardDisplayGfx(CardDisplayWork* p);
 void func_0807B458(CardBattleWork* w, u16 value);
-void func_0807B45C(CardBattleWork* w);
+void SyncSoraHcEffect(CardBattleWork* w);
 void ApplySoraHcEffect(CardBattleWork* w);
 void UpdateSoraCardRingPosition(CardDisplayWork* p);
 u8 DispatchSoraCardCommand(CardDisplayWork* p, void* a);
-u8 func_0807D584(CardDisplayWork* p, void* a);
-u8 func_0807D7B0(CardDisplayWork* p);
+u8 SoraGimmickCardLaunch(CardDisplayWork* p, void* a);
+u8 SoraGimmickCardHit(CardDisplayWork* p);
 void UpdateSoraReloadGauge(CardDisplayWork* p);
 void TickSoraHcEffectOnAttackEnd();
-u8 func_0807CE04(CardDisplayWork* p);
-void func_0807D0F4(CardDisplayWork* p);
+u8 SoraCardShrinkAway(CardDisplayWork* p);
+void UpdateSoraPlayedCardPosition(CardDisplayWork* p);
 
 u8 AreCardsSettled(CardDisplayWork** p, u8 n) {
     u8 count;
@@ -1547,7 +1547,7 @@ u8 AreCardsSettled(CardDisplayWork** p, u8 n) {
     return 0;
 }
 
-void func_080782EC() {
+void ClearSoraCardPlayFlags() {
     gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
     gBtlWork->flags &= ~0x100;
     gBtlWork->flags &= ~0x200;
@@ -1886,7 +1886,7 @@ void BeginSoraReloadDeal(CardBattleWork* w) {
                 p = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            p->unk_80 = p->unk_7C = gSoraCardRingAngles[1];
+            p->ringAngleTarget = p->ringAngle = gSoraCardRingAngles[1];
             p->swingAngleTarget = p->swingAngle = gSoraCardSwingAngles[0];
             p->ringIndex = 1;
             p->timer = 8;
@@ -1904,7 +1904,7 @@ void BeginSoraReloadDeal(CardBattleWork* w) {
         args.slot = w->slots[w->listIndex];
         args.listIndex = w->listIndex;
         p = TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args)->work;
-        p->unk_80 = p->unk_7C = gSoraCardRingAngles[1];
+        p->ringAngleTarget = p->ringAngle = gSoraCardRingAngles[1];
         p->swingAngleTarget = p->swingAngle = gSoraCardSwingAngles[0];
         p->priority = 50;
         p->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
@@ -1989,7 +1989,7 @@ void SelectOtherSoraCard(CardBattleWork* w, u8 kind, u8 c) {
             break;
         }
 
-        node->unk_80 = gSoraCardRingAngles[node->ringIndex];
+        node->ringAngleTarget = gSoraCardRingAngles[node->ringIndex];
         node->timer = c;
         node->flags &= ~CARD_DISP_FLAG_SELECTED;
 
@@ -2052,7 +2052,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
                 q = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            q->unk_80 = q->unk_7C = gSoraCardRingAngles[3];
+            q->ringAngleTarget = q->ringAngle = gSoraCardRingAngles[3];
             q->swingAngleTarget = q->swingAngle = gSoraCardSwingAngles[0];
             q->ringIndex = 3;
             q->priority = 60;
@@ -2070,7 +2070,7 @@ void SelectPrevSoraCard(CardBattleWork* w, u8 b, u8 c) {
         }
 
         p->priority += 4;
-        p->unk_80 = gSoraCardRingAngles[p->ringIndex];
+        p->ringAngleTarget = gSoraCardRingAngles[p->ringIndex];
         p->timer = c;
         p = ListPoolNext(&p->node);
     }
@@ -2128,7 +2128,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
                 q = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            q->unk_80 = q->unk_7C = gSoraCardRingAngles[3];
+            q->ringAngleTarget = q->ringAngle = gSoraCardRingAngles[3];
             q->swingAngleTarget = q->swingAngle = gSoraCardSwingAngles[0];
             q->ringIndex = 3;
             q->priority = 60;
@@ -2146,7 +2146,7 @@ void SelectNextSoraCard(CardBattleWork* w, u8 b) {
         }
 
         p->priority += 4;
-        p->unk_80 = gSoraCardRingAngles[p->ringIndex];
+        p->ringAngleTarget = gSoraCardRingAngles[p->ringIndex];
         p->timer = 4;
         p = ListPoolNext(&p->node);
     }
@@ -2329,7 +2329,7 @@ void TrySoraCardBreak(CardBattleWork* w) {
         gBtlWork->soraOwnsPlay = 1;
 
         if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            gCardBattleState->unk_0EE = 1;
+            gCardBattleState->darkModeReady = 1;
         }
     } else {
         func_080791C0(w);
@@ -2446,7 +2446,7 @@ s32 UseSoraCard(CardBattleWork* w) {
 
     if (gBtlWork->hcEffect == 37) {
         u16 v = GetRandomHcEffect();
-        func_0807B45C(w);
+        SyncSoraHcEffect(w);
         gCardBattleState->soraHcEffect = v;
         func_0807B458(w, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(w);
@@ -2464,7 +2464,7 @@ s32 UseSoraCard(CardBattleWork* w) {
         if (e->ringIndex == 2) {
             e->ringIndex--;
             e->timer = 4;
-            e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+            e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
             e->priority = 50;
             gSoraSelectedCard = e;
             found = 1;
@@ -2481,7 +2481,7 @@ s32 UseSoraCard(CardBattleWork* w) {
             if (e->ringIndex == 0) {
                 e->ringIndex++;
                 e->timer = 4;
-                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
                 e->priority = 50;
                 gSoraSelectedCard = e;
                 break;
@@ -2521,10 +2521,10 @@ s32 UseSoraCard(CardBattleWork* w) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            e->unk_7C = gSoraCardRingAngles[3];
+            e->ringAngle = gSoraCardRingAngles[3];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 2;
-            e->unk_80 = gSoraCardRingAngles[2];
+            e->ringAngleTarget = gSoraCardRingAngles[2];
             e->priority = 60;
             e->timer = 4;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
@@ -2569,7 +2569,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
         func_0807B458(w, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(w);
     } else {
-        func_0807B45C(w);
+        SyncSoraHcEffect(w);
         gCardBattleState->soraHcEffect = gSoraSelectedCard->cardDef->move;
         func_0807B458(w, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(w);
@@ -2599,7 +2599,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
         if (e->ringIndex == 2) {
             e->ringIndex--;
             e->timer = 4;
-            e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+            e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
             e->priority = 50;
             gSoraSelectedCard = e;
             found = 1;
@@ -2616,7 +2616,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
             if (e->ringIndex == 0) {
                 e->ringIndex++;
                 e->timer = 4;
-                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
                 e->priority = 50;
                 gSoraSelectedCard = e;
                 break;
@@ -2632,7 +2632,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
         args.slot = w->slots[w->listIndex];
         args.listIndex = w->listIndex;
         e = TaskCreate(&w->tasks, &gTaskDescCardNotHave, &args)->work;
-        e->unk_80 = e->unk_7C = gSoraCardRingAngles[1];
+        e->ringAngleTarget = e->ringAngle = gSoraCardRingAngles[1];
         e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
         e->priority = 50;
         e->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
@@ -2670,10 +2670,10 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            e->unk_7C = gSoraCardRingAngles[3];
+            e->ringAngle = gSoraCardRingAngles[3];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 2;
-            e->unk_80 = gSoraCardRingAngles[2];
+            e->ringAngleTarget = gSoraCardRingAngles[2];
             e->priority = 60;
             e->timer = 4;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
@@ -2716,7 +2716,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
         if (e->ringIndex == 2) {
             e->ringIndex--;
             e->timer = 4;
-            e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+            e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
             e->priority = 50;
             gSoraSelectedCard = e;
             found = 1;
@@ -2733,7 +2733,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
             if (e->ringIndex == 0) {
                 e->ringIndex++;
                 e->timer = 4;
-                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
                 e->priority = 50;
                 gSoraSelectedCard = e;
                 break;
@@ -2773,10 +2773,10 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            e->unk_7C = gSoraCardRingAngles[3];
+            e->ringAngle = gSoraCardRingAngles[3];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 2;
-            e->unk_80 = gSoraCardRingAngles[2];
+            e->ringAngleTarget = gSoraCardRingAngles[2];
             e->priority = 60;
             e->timer = 4;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
@@ -2821,7 +2821,7 @@ s32 StockSoraCard(CardBattleWork* w) {
     gSoraSelectedCard->stockIndex = w->stockCount;
     gSoraSelectedCard->priority = 50 - (3 - w->stockCount) * 4;
     w->stock[w->stockCount] = gSoraSelectedCard;
-    gCardBattleState->unk_018[gCardBattleState->unk_0DE] = gSoraSelectedCard;
+    gCardBattleState->soraStockedCards[gCardBattleState->soraStockedCount] = gSoraSelectedCard;
     gSoraSelectedCard->args.slot->stocked = active = 1;
     gSoraSelectedCard->args.slot->used = active;
 
@@ -2853,7 +2853,7 @@ s32 StockSoraCard(CardBattleWork* w) {
 
     w->stockValue += n;
     w->stockCount++;
-    gCardBattleState->unk_0DE++;
+    gCardBattleState->soraStockedCount++;
 
     if (w->stockValue != 0) {
         UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((w->stockValue - 1) << 7));
@@ -2868,7 +2868,7 @@ s32 StockSoraCard(CardBattleWork* w) {
 
     if (gBtlWork->hcEffect == 37) {
         u16 v = GetRandomHcEffect();
-        func_0807B45C(w);
+        SyncSoraHcEffect(w);
         gCardBattleState->soraHcEffect = v;
         func_0807B458(w, gCardBattleState->soraHcEffect);
         ApplySoraHcEffect(w);
@@ -2886,7 +2886,7 @@ s32 StockSoraCard(CardBattleWork* w) {
         if (e->ringIndex == 2) {
             e->ringIndex--;
             e->timer = 4;
-            e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+            e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
             e->priority = 50;
             gSoraSelectedCard = e;
             found = 1;
@@ -2903,7 +2903,7 @@ s32 StockSoraCard(CardBattleWork* w) {
             if (e->ringIndex == 0) {
                 e->ringIndex++;
                 e->timer = 4;
-                e->unk_80 = gSoraCardRingAngles[e->ringIndex];
+                e->ringAngleTarget = gSoraCardRingAngles[e->ringIndex];
                 e->priority = 50;
                 gSoraSelectedCard = e;
                 break;
@@ -2943,10 +2943,10 @@ s32 StockSoraCard(CardBattleWork* w) {
                 e = TaskCreate(&w->tasks, &gTaskDescCardSora, &args)->work;
             }
 
-            e->unk_7C = gSoraCardRingAngles[3];
+            e->ringAngle = gSoraCardRingAngles[3];
             e->swingAngleTarget = e->swingAngle = gSoraCardSwingAngles[0];
             e->ringIndex = 2;
-            e->unk_80 = gSoraCardRingAngles[2];
+            e->ringAngleTarget = gSoraCardRingAngles[2];
             e->priority = 60;
             e->timer = 4;
             e->flags |= CARD_DISP_FLAG_VISIBLE;
@@ -2991,7 +2991,7 @@ void RemoveSoraCardDisplays(CardBattleWork* w) {
     }
 }
 
-void func_0807A684(CardBattleWork* w) {
+void RemoveIdleSoraCardDisplays(CardBattleWork* w) {
     CardDisplayWork* node;
     u8 i;
 
@@ -3144,7 +3144,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
         }
 
         if (!(gGameState.flags & GAME_FLAG_DARK_POINTS_LOCKED) && AddBreakDarkPoints() != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            gCardBattleState->unk_0EE = 1;
+            gCardBattleState->darkModeReady = 1;
         }
 
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
@@ -3320,7 +3320,7 @@ void UseSoraStock(CardBattleWork* w) {
 
     TickSoraHcEffectOnCardUse();
     w->stockCount = 0;
-    gCardBattleState->unk_0DE = 0;
+    gCardBattleState->soraStockedCount = 0;
     w->stockValue = 0;
     ClearStockedCardSlots(w);
     w->unk_C4[1] = 0;
@@ -3341,7 +3341,7 @@ void ClearStockedCardSlots(CardBattleWork* w) {
     }
 }
 
-u8 func_0807AEC4(CardBattleWork* w, u8 n) {
+u8 CountSoraCardDisplays(CardBattleWork* w, u8 n) {
     CardDisplayWork* node;
     u8 count;
 
@@ -3356,7 +3356,7 @@ u8 func_0807AEC4(CardBattleWork* w, u8 n) {
     return count;
 }
 
-u8 func_0807AEF4(CardBattleWork* w, u8 kind) {
+u8 CountSoraCardDisplaysByCategory(CardBattleWork* w, u8 kind) {
     CardDisplayWork* node;
     u8 count;
 
@@ -3612,7 +3612,7 @@ void CreateBosscardTask(TaskPool* pool) {
 void func_0807B458(CardBattleWork* w, u16 value) {
 }
 
-void func_0807B45C(CardBattleWork* w) {
+void SyncSoraHcEffect(CardBattleWork* w) {
     gBtlWork->hcEffect = gCardBattleState->soraHcEffect;
 }
 
@@ -3673,7 +3673,7 @@ void ApplySoraHcEffect(CardBattleWork* w) {
     }
 }
 
-u8 func_0807B578(CardBattleWork* w, void* a) {
+u8 UpdateSoraAutoCycle(CardBattleWork* w, void* a) {
     s16 v;
 
     v = w->cardsLeft[w->listIndex];
@@ -4033,21 +4033,21 @@ void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     p->scaleY = 0x100;
     p->bobAngle = 0;
     p->angle = 0;
-    p->unk_7C = 0;
-    p->unk_80 = 0;
-    p->unk_84 = 0;
-    p->unk_88 = 0;
+    p->ringAngle = 0;
+    p->ringAngleTarget = 0;
+    p->ringRadius = 0;
+    p->ringRadiusTarget = 0;
     p->swingAngle = 0;
     p->swingAngleTarget = 0;
     p->command = 0;
     p->priority = 60;
     p->timer = 4;
-    p->unk_A2 = 0;
-    p->unk_84 = 0;
-    p->unk_88 = 0x2400;
+    p->phase = 0;
+    p->ringRadius = 0;
+    p->ringRadiusTarget = 0x2400;
     p->swingSteps = 0;
-    p->unk_8C = gSoraCardLayout[0][0];
-    p->unk_90 = gSoraCardLayout[0][1];
+    p->ringCenterX = gSoraCardLayout[0][0];
+    p->ringCenterY = gSoraCardLayout[0][1];
     p->x = gSoraCardLayout[4][0];
     p->y = gSoraCardLayout[4][1];
 
@@ -4075,7 +4075,7 @@ u8 SoraCardUpdate(CardDisplayWork* p, void* a) {
         if (p->flags & CARD_DISP_FLAG_DEALING) {
             p->timer = 8;
             UpdateSoraCardValue(p);
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0807CB24);
+            SetTaskUpdate(a, (TaskUpdateFunc)SoraCardDeal);
             return 1;
         }
     }
@@ -4089,7 +4089,7 @@ u8 SoraCardUpdate(CardDisplayWork* p, void* a) {
         if (!(p->flags & CARD_DISP_FLAG_GFX_LOADED)) {
             LoadCardDisplayGfx(p);
             p->flags |= CARD_DISP_FLAG_GFX_LOADED;
-            fn = func_0807BE54;
+            fn = SoraCardUpdateLoaded;
             SetTaskUpdate(a, (TaskUpdateFunc)fn);
             return fn(p, a);
         }
@@ -4101,7 +4101,7 @@ u8 SoraCardUpdate(CardDisplayWork* p, void* a) {
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CBC0);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardClosed);
     }
 
     UpdateSoraCardRingPosition(p);
@@ -4109,7 +4109,7 @@ u8 SoraCardUpdate(CardDisplayWork* p, void* a) {
     return DispatchSoraCardCommand(p, a);
 }
 
-u8 func_0807BE54(CardDisplayWork* p, void* a) {
+u8 SoraCardUpdateLoaded(CardDisplayWork* p, void* a) {
     if (IsCardDisplayOffScreen(p)) {
         ListPoolRemove(&p->node, p->args.pool);
         return 0;
@@ -4121,7 +4121,7 @@ u8 func_0807BE54(CardDisplayWork* p, void* a) {
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CBC0);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardClosed);
     }
 
     UpdateSoraCardRingPosition(p);
@@ -4291,10 +4291,10 @@ void ReleaseCardDisplayGfx(CardDisplayWork* p) {
     p->tiles4 = NULL;
 }
 
-u8 func_0807C3E8(CardDisplayWork* p, void* a) {
+u8 SoraCardWaitPlayEnd(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         p->timer = 8;
-        p->unk_9E = 8;
+        p->spinSpeed = 8;
         gCardBattleState->activeCardCount = 0;
         gCardBattleState->activeValue = 0;
         gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
@@ -4305,20 +4305,20 @@ u8 func_0807C3E8(CardDisplayWork* p, void* a) {
             TickSoraHcEffectOnAttackEnd();
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE04);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardShrinkAway);
     } else if (p->flags & CARD_DISP_FLAG_BROKEN) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = -16;
-        p->unk_9E = 0xFF;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D3A0);
+        p->ringAngle = -16;
+        p->spinSpeed = 0xFF;
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardBreakFall);
     }
 
     return 1;
 }
 
-u8 func_0807C4BC(CardDisplayWork* p, void* a) {
+u8 SoraCardMoveToPlay(CardDisplayWork* p, void* a) {
     ApproachValue(&p->x, 0x7800, p->timer);
     ApproachValue(&p->y, 0x8400, p->timer);
 
@@ -4331,16 +4331,16 @@ u8 func_0807C4BC(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) {
         if (p->flags & CARD_DISP_FLAG_IN_PLAY) {
             if ((s16)p->timer == 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)func_0807C3E8);
+                SetTaskUpdate(a, (TaskUpdateFunc)SoraCardWaitPlayEnd);
             }
         } else if ((s16)p->timer <= 2) {
             p->priority -= 4;
-            p->unk_84 = 0x500;
+            p->ringRadius = 0x500;
             p->timer = 0x100;
-            p->unk_7C = -16;
-            p->unk_9E = 0xFF;
+            p->ringAngle = -16;
+            p->spinSpeed = 0xFF;
             p->flags |= CARD_DISP_FLAG_IN_PLAY;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE9C);
+            SetTaskUpdate(a, (TaskUpdateFunc)SoraCardFlyOff);
 
             if (p->cardDef->flags & CARD_DEF_FLAG_ITEM) {
                 p->args.slot->unk_06 = 0;
@@ -4350,20 +4350,20 @@ u8 func_0807C4BC(CardDisplayWork* p, void* a) {
         }
     } else if ((s16)p->timer <= 2) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = -16;
-        p->unk_9E = 0xFF;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE9C);
+        p->ringAngle = -16;
+        p->spinSpeed = 0xFF;
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardFlyOff);
     }
 
     return 1;
 }
 
-u8 func_0807C5D8(CardDisplayWork* w, void* a) {
-    ApproachValue(&w->unk_8C, gPlayedCardCenter[0], w->timer);
-    ApproachValue(&w->unk_90, gPlayedCardCenter[1], w->timer);
-    ApproachValue(&w->unk_84, w->unk_88, w->timer);
+u8 SoraStockWaitPlayEnd(CardDisplayWork* w, void* a) {
+    ApproachValue(&w->ringCenterX, gPlayedCardCenter[0], w->timer);
+    ApproachValue(&w->ringCenterY, gPlayedCardCenter[1], w->timer);
+    ApproachValue(&w->ringRadius, w->ringRadiusTarget, w->timer);
     ApproachValue(&w->scaleX, 0x100, w->timer);
     ApproachValue(&w->scaleY, 0x100, w->timer);
 
@@ -4373,7 +4373,7 @@ u8 func_0807C5D8(CardDisplayWork* w, void* a) {
         w->timer = 0;
     }
 
-    func_0807D0F4(w);
+    UpdateSoraPlayedCardPosition(w);
 
     switch (w->stockIndex) {
     case 0:
@@ -4389,17 +4389,17 @@ u8 func_0807C5D8(CardDisplayWork* w, void* a) {
 
     if (w->flags & CARD_DISP_FLAG_BROKEN) {
         w->priority -= 4;
-        w->unk_84 = 0x500;
+        w->ringRadius = 0x500;
         w->timer = 0x100;
-        w->unk_7C = -16;
-        w->unk_9E = 0xFF;
+        w->ringAngle = -16;
+        w->spinSpeed = 0xFF;
         gCardBattleState->soraStockActive = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D3A0);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardBreakFall);
     }
 
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         w->timer = 8;
-        w->unk_9E = 8;
+        w->spinSpeed = 8;
         gCardBattleState->activeCardCount--;
         gCardBattleState->activeValue = 0;
 
@@ -4411,48 +4411,48 @@ u8 func_0807C5D8(CardDisplayWork* w, void* a) {
 
         gCardBattleState->soraStockActive = 0;
         gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_BUSY;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE04);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardShrinkAway);
     }
 
     return 1;
 }
 
-u8 func_0807C75C(CardDisplayWork* p, void* a) {
+u8 SoraStockHold(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
 
     SyncCardDisplayGfx(p);
 
     if (!(p->flags & CARD_DISP_FLAG_STOCK_NAMED)) {
-        fn = func_0807C934;
+        fn = SoraStockMoveToSlot;
         SetTaskUpdate(a, (TaskUpdateFunc)fn);
         return fn(p, a);
     }
 
     if (p->flags & 0x40000000) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D810);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraStockVanish);
         return 1;
     }
 
     if (p->command == 5) {
         if (p->flags & CARD_DISP_FLAG_UNOPPOSED) {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            fn = func_0807C5D8;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            fn = SoraStockWaitPlayEnd;
         } else {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
             p->priority += p->stockIndex * 3;
-            fn = func_0807CFA8;
+            fn = SoraStockMoveToPlay;
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)fn);
@@ -4467,13 +4467,13 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
     }
 
     if (p->flags & CARD_DISP_FLAG_OPEN) {
-        switch (p->unk_A2) {
+        switch (p->phase) {
         case 0:
             p->y -= 0x80;
 
             if (p->y <= gSoraCardLayout[3 - p->stockIndex][1] - 0x200) {
                 p->y = gSoraCardLayout[3 - p->stockIndex][1] - 0x200;
-                p->unk_A2 = 1;
+                p->phase = 1;
             }
 
             break;
@@ -4482,7 +4482,7 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
 
             if (p->y >= gSoraCardLayout[3 - p->stockIndex][1]) {
                 p->y = gSoraCardLayout[3 - p->stockIndex][1];
-                p->unk_A2 = 0;
+                p->phase = 0;
                 p->timer = 16;
             }
 
@@ -4497,7 +4497,7 @@ u8 func_0807C75C(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_0807C934(CardDisplayWork* p, void* a) {
+u8 SoraStockMoveToSlot(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
     u16 t;
 
@@ -4530,36 +4530,36 @@ u8 func_0807C934(CardDisplayWork* p, void* a) {
 
         if (p->flags & CARD_DISP_FLAG_STOCK_NAMED) {
             p->timer = p->stockIndex * 8;
-            fn = func_0807C75C;
+            fn = SoraStockHold;
             SetTaskUpdate(a, (TaskUpdateFunc)fn);
             return fn(p, a);
         }
     }
 
     if (p->flags & 0x40000000) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D810);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraStockVanish);
         return 1;
     }
 
     if (p->command == 5) {
         if (p->flags & CARD_DISP_FLAG_UNOPPOSED) {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            fn = func_0807C5D8;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            fn = SoraStockWaitPlayEnd;
         } else {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            fn = func_0807CFA8;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            fn = SoraStockMoveToPlay;
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)fn);
@@ -4572,14 +4572,14 @@ u8 func_0807C934(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_0807CB24(CardDisplayWork* p, void* a) {
+u8 SoraCardDeal(CardDisplayWork* p, void* a) {
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         if (p->flags & CARD_DISP_FLAG_RELOAD_CARD) {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0807D930);
-            return func_0807D930(p, a);
+            SetTaskUpdate(a, (TaskUpdateFunc)SoraReloadCardClosed);
+            return SoraReloadCardClosed(p, a);
         } else {
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0807CBC0);
-            return func_0807CBC0(p, a);
+            SetTaskUpdate(a, (TaskUpdateFunc)SoraCardClosed);
+            return SoraCardClosed(p, a);
         }
     }
 
@@ -4600,14 +4600,14 @@ u8 func_0807CB24(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_0807CBC0(CardDisplayWork* p, void* a) {
+u8 SoraCardClosed(CardDisplayWork* p, void* a) {
     u8 (*f)(CardDisplayWork*, void*);
 
     if (p->command == 7) {
         return 0;
     }
 
-    p->unk_84 += (0 - p->unk_84) >> 1;
+    p->ringRadius += (0 - p->ringRadius) >> 1;
     p->x += (gSoraCardLayout[4][0] - p->x) >> 1;
     p->y += (gSoraCardLayout[4][1] - p->y) >> 1;
 
@@ -4629,10 +4629,10 @@ void UpdateSoraCardRingPosition(CardDisplayWork* p) {
         p->swingSteps--;
     }
 
-    p->unk_84 += (p->unk_88 - p->unk_84) >> 1;
+    p->ringRadius += (p->ringRadiusTarget - p->ringRadius) >> 1;
 
     if ((s16)p->timer > 0) {
-        ApproachValue(&p->unk_7C, p->unk_80, p->timer);
+        ApproachValue(&p->ringAngle, p->ringAngleTarget, p->timer);
         p->timer--;
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
         gCardBattleState->soraReloadCharging = 0;
@@ -4640,11 +4640,11 @@ void UpdateSoraCardRingPosition(CardDisplayWork* p) {
         p->flags |= CARD_DISP_FLAG_SETTLED;
     }
 
-    p->unk_8C = gSineTable[(p->swingAngle >> 8) & 0xFF] * 80 + gSoraCardLayout[0][0];
-    p->unk_90 = -gSineTable[((p->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gSoraCardLayout[0][1];
-    angle = ((p->unk_7C >> 8) + 0x20) & 0xFF;
-    p->x = gSineTable[angle] * (p->unk_84 >> 8) + p->unk_8C;
-    p->y = -gSineTable[angle + 0x40] * (p->unk_84 >> 8) + p->unk_90;
+    p->ringCenterX = gSineTable[(p->swingAngle >> 8) & 0xFF] * 80 + gSoraCardLayout[0][0];
+    p->ringCenterY = -gSineTable[((p->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gSoraCardLayout[0][1];
+    angle = ((p->ringAngle >> 8) + 0x20) & 0xFF;
+    p->x = gSineTable[angle] * (p->ringRadius >> 8) + p->ringCenterX;
+    p->y = -gSineTable[angle + 0x40] * (p->ringRadius >> 8) + p->ringCenterY;
 }
 
 void UpdateCardDisplayFlip(CardDisplayWork* p) {
@@ -4709,7 +4709,7 @@ void UpdateCardDisplayFlip(CardDisplayWork* p) {
     }
 }
 
-u8 func_0807CE04(CardDisplayWork* p) {
+u8 SoraCardShrinkAway(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
 
     if ((s16)p->timer > 0) {
@@ -4720,8 +4720,8 @@ u8 func_0807CE04(CardDisplayWork* p) {
 
     if ((s16)p->timer == 0) {
         p->timer = 0;
-        p->angle += p->unk_9E;
-        p->unk_9E++;
+        p->angle += p->spinSpeed;
+        p->spinSpeed++;
 
         if (p->scaleX <= 25) {
             return 0;
@@ -4754,13 +4754,13 @@ u8 IsCardDisplayOffScreen(CardDisplayWork* p) {
     return 0;
 }
 
-u8 func_0807CE9C(CardDisplayWork* p) {
+u8 SoraCardFlyOff(CardDisplayWork* p) {
     p->command = 0;
-    p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->timer;
+    p->y -= p->ringRadius;
+    p->ringRadius -= (s16)p->timer;
     p->timer++;
-    p->x -= gSineTable[(p->unk_7C & 0xFF) + 0x40];
-    p->angle += p->unk_9E;
+    p->x -= gSineTable[(p->ringAngle & 0xFF) + 0x40];
+    p->angle += p->spinSpeed;
     p->scaleX -= 5;
     p->scaleY -= 5;
 
@@ -4775,25 +4775,25 @@ u8 func_0807CE9C(CardDisplayWork* p) {
     return 1;
 }
 
-u8 func_0807CF4C(CardDisplayWork* p, void* a) {
+u8 SoraStockStartUnopposedPlay(CardDisplayWork* p, void* a) {
     s32 z;
 
     p->timer = 15;
     z = 0;
-    p->unk_88 = 0x800;
-    p->unk_84 = z;
-    p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-    p->unk_7C = z;
-    p->unk_8C = p->x;
-    p->unk_90 = p->y;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0807C5D8);
+    p->ringRadiusTarget = 0x800;
+    p->ringRadius = z;
+    p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+    p->ringAngle = z;
+    p->ringCenterX = p->x;
+    p->ringCenterY = p->y;
+    SetTaskUpdate(a, (TaskUpdateFunc)SoraStockWaitPlayEnd);
     return 1;
 }
 
-u8 func_0807CFA8(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->unk_8C, gPlayedCardCenter[0], p->timer);
-    ApproachValue(&p->unk_90, gPlayedCardCenter[1], p->timer);
-    ApproachValue(&p->unk_84, p->unk_88, p->timer);
+u8 SoraStockMoveToPlay(CardDisplayWork* p, void* a) {
+    ApproachValue(&p->ringCenterX, gPlayedCardCenter[0], p->timer);
+    ApproachValue(&p->ringCenterY, gPlayedCardCenter[1], p->timer);
+    ApproachValue(&p->ringRadius, p->ringRadiusTarget, p->timer);
     ApproachValue(&p->scaleX, 0x100, p->timer);
     ApproachValue(&p->scaleY, 0x100, p->timer);
 
@@ -4803,54 +4803,54 @@ u8 func_0807CFA8(CardDisplayWork* p, void* a) {
         p->timer = 0;
     }
 
-    func_0807D0F4(p);
+    UpdateSoraPlayedCardPosition(p);
 
     if (gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) {
         if (p->flags & CARD_DISP_FLAG_IN_PLAY) {
             if ((s16)p->timer == 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)func_0807C5D8);
+                SetTaskUpdate(a, (TaskUpdateFunc)SoraStockWaitPlayEnd);
             }
         } else if ((s16)p->timer <= 2) {
             p->priority -= 4;
-            p->unk_84 = 0x500;
+            p->ringRadius = 0x500;
             p->timer = 0x100;
-            p->unk_7C = -16;
-            p->unk_9E = 0xFF;
+            p->ringAngle = -16;
+            p->spinSpeed = 0xFF;
             gCardBattleState->unk_0C0 = 0;
             gCardBattleState->soraStockActive = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE9C);
+            SetTaskUpdate(a, (TaskUpdateFunc)SoraCardFlyOff);
         }
     } else if ((s16)p->timer <= 2) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = -16;
-        p->unk_9E = 0xFF;
+        p->ringAngle = -16;
+        p->spinSpeed = 0xFF;
         gCardBattleState->soraStockActive = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE9C);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardFlyOff);
     }
 
     return 1;
 }
 
-void func_0807D0F4(CardDisplayWork* p) {
+void UpdateSoraPlayedCardPosition(CardDisplayWork* p) {
     s32 t;
 
-    if (p->unk_80 - p->unk_7C > 0x7F00) {
-        p->unk_7C += 0x10000;
+    if (p->ringAngleTarget - p->ringAngle > 0x7F00) {
+        p->ringAngle += 0x10000;
     }
 
-    if (p->unk_80 - p->unk_7C <= 255) {
-        t = p->unk_7C - 0x10000;
+    if (p->ringAngleTarget - p->ringAngle <= 255) {
+        t = p->ringAngle - 0x10000;
 
-        if (p->unk_80 - t < p->unk_7C - p->unk_80) {
-            p->unk_7C = t;
+        if (p->ringAngleTarget - t < p->ringAngle - p->ringAngleTarget) {
+            p->ringAngle = t;
         }
     }
 
-    p->unk_7C += (p->unk_80 - p->unk_7C) >> 2;
-    p->x = gSineTable[(p->unk_7C >> 8) & 0xFF] * (p->unk_84 >> 8) + p->unk_8C;
-    p->y = -gSineTable[((p->unk_7C >> 8) & 0xFF) + 64] * (p->unk_84 >> 8) + p->unk_90;
+    p->ringAngle += (p->ringAngleTarget - p->ringAngle) >> 2;
+    p->x = gSineTable[(p->ringAngle >> 8) & 0xFF] * (p->ringRadius >> 8) + p->ringCenterX;
+    p->y = -gSineTable[((p->ringAngle >> 8) & 0xFF) + 64] * (p->ringRadius >> 8) + p->ringCenterY;
 }
 
 u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
@@ -4865,7 +4865,7 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
         w->timer = 10;
         w->priority -= 4;
         ListPoolRemove(&w->node, w->args.pool);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807C4BC);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardMoveToPlay);
         return 1;
     case 6:
         if (!(w->flags & CARD_DISP_FLAG_GFX_LOADED)) {
@@ -4879,18 +4879,18 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
         w->flags |= CARD_DISP_FLAG_STOCKED;
         w->flags |= CARD_DISP_FLAG_GFX_LOADED;
         ListPoolRemove(&w->node, w->args.pool);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807C934);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraStockMoveToSlot);
         return 1;
     case 8:
         w->priority -= 4;
-        w->unk_84 = 0x500;
+        w->ringRadius = 0x500;
         w->timer = 0x100;
-        w->unk_7C = -16;
-        w->unk_9E = 0xFF;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CE9C);
+        w->ringAngle = -16;
+        w->spinSpeed = 0xFF;
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardFlyOff);
         break;
     case 7:
-        w->unk_84 = 0x500;
+        w->ringRadius = 0x500;
         w->timer = 0x100;
         ListPoolRemove(&w->node, w->args.pool);
         return 0;
@@ -4898,13 +4898,13 @@ u8 DispatchSoraCardCommand(CardDisplayWork* w, void* a) {
         w->timer = 10;
         w->priority -= 4;
         ListPoolRemove(&w->node, w->args.pool);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D4E4);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraHeartlessCardShow);
         return 1;
     case 11:
         w->timer = 10;
         w->priority -= 4;
         ListPoolRemove(&w->node, w->args.pool);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D584);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraGimmickCardLaunch);
         return 1;
     }
 
@@ -4937,10 +4937,10 @@ void LinkSoraCardDisplay(CardDisplayWork* p) {
     ListPoolAppend(&p->node, p->args.pool);
 }
 
-u8 func_0807D3A0(CardDisplayWork* p, void* a) {
+u8 SoraCardBreakFall(CardDisplayWork* p, void* a) {
     p->command = 0;
-    p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->timer >> 1;
+    p->y -= p->ringRadius;
+    p->ringRadius -= (s16)p->timer >> 1;
     p->timer++;
     p->x -= 0x200;
     p->angle += 16;
@@ -5005,7 +5005,7 @@ void RefreshSoraCardDisplayGfx(CardDisplayWork* p) {
     LoadCardDisplayGfx(p);
 }
 
-u8 func_0807D4E4(CardDisplayWork* p) {
+u8 SoraHeartlessCardShow(CardDisplayWork* p) {
     u8 arg;
 
     p->command = 0;
@@ -5025,7 +5025,7 @@ u8 func_0807D4E4(CardDisplayWork* p) {
     return 0;
 }
 
-u8 func_0807D584(CardDisplayWork* p, void* a) {
+u8 SoraGimmickCardLaunch(CardDisplayWork* p, void* a) {
     s16 sx;
     s16 sy;
     s32 dx;
@@ -5044,24 +5044,24 @@ u8 func_0807D584(CardDisplayWork* p, void* a) {
         y = sy;
         dx = (x << 8) - p->x;
         dy = (y << 8) - p->y;
-        p->unk_84 = NormalizeVector2D8(&dx, &dy);
-        p->unk_8C = -dx;
-        p->unk_90 = -dy;
-        p->unk_88 = 0x300;
+        p->ringRadius = NormalizeVector2D8(&dx, &dy);
+        p->ringCenterX = -dx;
+        p->ringCenterY = -dy;
+        p->ringRadiusTarget = 0x300;
         p->angle = 0;
-        p->unk_80 = 25;
+        p->ringAngleTarget = 25;
         gBtlWork->hitStop = 10000;
         FadeStartOut(FADE_MODE_WHITE_BLEND, 1);
         m4aSongNumStart(SONG_BTL_GMIC_OK);
         FadeLock();
         gBtlWork->flags |= BTL_FLAG_BGFX_PAUSED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D68C);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraGimmickCardFly);
     }
 
     return 1;
 }
 
-u8 func_0807D68C(CardDisplayWork* p, void* a) {
+u8 SoraGimmickCardFly(CardDisplayWork* p, void* a) {
     s16 sx;
     s16 sy;
     s32 dx;
@@ -5073,12 +5073,12 @@ u8 func_0807D68C(CardDisplayWork* p, void* a) {
     x = sx;
     y = sy;
 
-    if (p->unk_88 < 0) {
+    if (p->ringRadiusTarget < 0) {
         dx = (x << 8) - p->x;
         dy = (y << 8) - p->y;
         NormalizeVector2D8(&dx, &dy);
-        p->unk_8C = -dx;
-        p->unk_90 = -dy;
+        p->ringCenterX = -dx;
+        p->ringCenterY = -dy;
     }
 
     p->angle += 24;
@@ -5091,23 +5091,23 @@ u8 func_0807D68C(CardDisplayWork* p, void* a) {
         p->scaleY = 25;
     }
 
-    p->x += (p->unk_8C * p->unk_88) >> 8;
-    p->y += (p->unk_90 * p->unk_88) >> 8;
-    p->unk_84 = VectorLength2D((x << 8) - p->x, (y << 8) - p->y);
-    p->unk_88 -= p->unk_80;
-    p->unk_80 += 2;
+    p->x += (p->ringCenterX * p->ringRadiusTarget) >> 8;
+    p->y += (p->ringCenterY * p->ringRadiusTarget) >> 8;
+    p->ringRadius = VectorLength2D((x << 8) - p->x, (y << 8) - p->y);
+    p->ringRadiusTarget -= p->ringAngleTarget;
+    p->ringAngleTarget += 2;
 
-    if (p->unk_84 <= 0x800) {
+    if (p->ringRadius <= 0x800) {
         gBtlWork->freezeTimer = 15;
         gBtlWork->hitStop = 15;
         m4aSongNumStart(SONG_SYS_CLICKI04);
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D7B0);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraGimmickCardHit);
     }
 
     return 1;
 }
 
-u8 func_0807D7B0(CardDisplayWork* p) {
+u8 SoraGimmickCardHit(CardDisplayWork* p) {
     if (gBtlWork->hitStop == 0) {
         FadeStartIn(FADE_MODE_WHITE_BLEND, 8);
         FadeLock();
@@ -5124,7 +5124,7 @@ u8 func_0807D7B0(CardDisplayWork* p) {
     return 1;
 }
 
-u8 func_0807D810(CardDisplayWork* p) {
+u8 SoraStockVanish(CardDisplayWork* p) {
     s32 r;
 
     if (p->scaleX <= 25) {
@@ -5163,19 +5163,19 @@ void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->bobAngle = 0;
     p->angle = 0;
     p->stockIndex = 0;
-    p->unk_7C = 0;
-    p->unk_80 = 0;
+    p->ringAngle = 0;
+    p->ringAngleTarget = 0;
     p->swingAngle = 0;
     p->swingAngleTarget = 0;
     p->command = 0;
     p->priority = 60;
     p->timer = 4;
-    p->unk_A2 = 0;
-    p->unk_84 = 0;
-    p->unk_88 = 0x2400;
+    p->phase = 0;
+    p->ringRadius = 0;
+    p->ringRadiusTarget = 0x2400;
     p->swingSteps = 0;
-    p->unk_8C = gSoraCardLayout[0][0];
-    p->unk_90 = gSoraCardLayout[0][1];
+    p->ringCenterX = gSoraCardLayout[0][0];
+    p->ringCenterY = gSoraCardLayout[0][1];
     p->x = gSoraCardLayout[4][0];
     p->y = gSoraCardLayout[4][1];
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
@@ -5183,14 +5183,14 @@ void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
     LinkSoraCardDisplay(p);
 }
 
-u8 func_0807D930(CardDisplayWork* p, void* a) {
+u8 SoraReloadCardClosed(CardDisplayWork* p, void* a) {
     u8 (*f)(CardDisplayWork*, void*);
 
     if (p->command == 7) {
         return 0;
     }
 
-    p->unk_84 += (0 - p->unk_84) >> 1;
+    p->ringRadius += (0 - p->ringRadius) >> 1;
     p->x += (gSoraCardLayout[4][0] - p->x) >> 1;
     p->y += (gSoraCardLayout[4][1] - p->y) >> 1;
 
@@ -5206,7 +5206,7 @@ u8 func_0807D930(CardDisplayWork* p, void* a) {
 u8 card_reload_1(CardDisplayWork* p, void* a) {
     if (p->flags & CARD_DISP_FLAG_DEALING) {
         p->timer = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807CB24);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraCardDeal);
         return 1;
     }
 
@@ -5228,7 +5228,7 @@ u8 card_reload_1(CardDisplayWork* p, void* a) {
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_0807D930);
+        SetTaskUpdate(a, (TaskUpdateFunc)SoraReloadCardClosed);
     }
 
     UpdateSoraReloadGauge(p);
@@ -5348,12 +5348,12 @@ void ResetSoraReloadGaugeAnim(ReloadGauge* p) {
     AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
-void func_0807DDCC(ReloadGauge* p, CardDisplayWork* w) {
+void SetSoraReloadGaugeIdleFrames(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = gRiCardF0RedFrames[3];
     p->gfx2 = gRiCardF0RedFrames[gCardBattleState->soraGaugeFullFrame + 2];
 }
 
-void func_0807DDF4(ReloadGauge* p, CardDisplayWork* w) {
+void UpdateSoraReloadGaugeAnims(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = AnimUpdate(&p->anim2);
     p->gfx2 = AnimUpdate(&p->anim3);
 }
@@ -5397,7 +5397,7 @@ void UpdateSoraReloadGauge(CardDisplayWork* p) {
                         gCardBattleState->soraReloadGauge = 0;
                         gCardBattleState->reloadGaugeFull[0] = 0;
                         gCardBattleState->soraReloadCounter--;
-                        p->unk_A2 = v;
+                        p->phase = v;
                         ResetSoraReloadGaugeAnim(p->reloadGauge);
                         m4aSongNumStart(SONG_SYS_CHAGEF1);
                         SetSoraReloadCounterAnim(p->reloadGauge, (s16)gCardBattleState->soraReloadCounter);
@@ -5407,10 +5407,10 @@ void UpdateSoraReloadGauge(CardDisplayWork* p) {
                 w->chargeTick = 0;
             }
 
-            func_0807DDF4(p->reloadGauge, p);
+            UpdateSoraReloadGaugeAnims(p->reloadGauge, p);
             w->chargeTick++;
         } else {
-            func_0807DDCC(p->reloadGauge, p);
+            SetSoraReloadGaugeIdleFrames(p->reloadGauge, p);
             w->chargeTick = 0;
             m4aSongNumStop(SONG_SYS_CHAGE);
             gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;

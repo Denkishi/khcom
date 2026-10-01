@@ -11,8 +11,8 @@ struct CardBattleWork;
 
 typedef struct CardBattleState {
     struct CardDisplayWork* activeCards[6];
-    struct CardDisplayWork* unk_018[3];
-    struct CardDisplayWork* unk_024[3];
+    struct CardDisplayWork* soraStockedCards[3];
+    struct CardDisplayWork* rikuStockedCards[3];
     void* tiles[4];
     void* premiumTiles;
     void* tiles5;
@@ -53,8 +53,8 @@ typedef struct CardBattleState {
     u8 addedFriendCards[0x02];
     u8 gimmickCardCount;
     u8 stockMoveCount;
-    u8 unk_0DE;
-    u8 unk_0DF;
+    u8 soraStockedCount;
+    u8 rikuStockedCount;
     u8 enemyCardUsed;
     u8 soraStockActive;
     u8 rikuStockActive;
@@ -69,7 +69,7 @@ typedef struct CardBattleState {
     u8 soraHcEffectReplaced;
     u8 rikuHcEffectReplaced;
     u8 unk_0ED;
-    u8 unk_0EE;
+    u8 darkModeReady;
     u8 unk_0EF;
     u16 rikuCardsLeft;
     u8 unk_0F2[0x02];
@@ -107,10 +107,10 @@ void RequestSoraMegaPotion();
 void RequestSoraEther();
 void RequestSoraMegaEther();
 void RequestSoraElixir();
-void func_08076284();
-void func_08076290();
-void func_0807629C();
-void func_0807630C();
+void RequestSoraKingReload0();
+void RequestSoraKingReload1();
+void RequestSoraKingReload2();
+void RequestSoraRemoveItemCards();
 s32 cardbattleSora_1(struct CardBattleWork* w, Task* task);
 struct CardSlot* FindNextAvailableSlot(struct CardBattleWork* w, u8 slot, u16* n);
 struct CardSlot* FindPrevAvailableSlot(struct CardBattleWork* w, u8 slot, u16* n);

@@ -2687,16 +2687,16 @@ u8 task_smn_king_1(SmnKingWork* work) {
             switch (work->variant) {
             case 0:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp / 5;
-                func_08076284();
+                RequestSoraKingReload0();
                 break;
             case 1:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp / 2;
-                func_08076290();
+                RequestSoraKingReload1();
                 break;
             case 2:
             default:
                 gBtlWork->actor->hp += gBtlWork->actor->maxHp;
-                func_0807629C();
+                RequestSoraKingReload2();
                 break;
             }
 

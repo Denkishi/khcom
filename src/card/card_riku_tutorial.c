@@ -141,8 +141,8 @@ s32 ResolveActiveCardsMove(s32* out) {
         gCardBattleState->stockMoveCount = 1;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay == 1 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
-                gCardBattleState->unk_0EE = 0;
+            if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
+                gCardBattleState->darkModeReady = 0;
                 return 46;
             }
         }
@@ -306,8 +306,8 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
         gCardBattleState->stockMoveCount = 1;
 
         if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-            if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
-                gCardBattleState->unk_0EE = 0;
+            if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
+                gCardBattleState->darkModeReady = 0;
                 return 46;
             }
         }
@@ -764,8 +764,8 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-        if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
-            gCardBattleState->unk_0EE = 0;
+        if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
+            gCardBattleState->darkModeReady = 0;
             return 108;
         }
     }
@@ -1137,8 +1137,8 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
-        if (gCardBattleState->unk_0EE == 1 || gBtlWork->darkPoints > 29) {
-            gCardBattleState->unk_0EE = 0;
+        if (gCardBattleState->darkModeReady == 1 || gBtlWork->darkPoints > 29) {
+            gCardBattleState->darkModeReady = 0;
             return 108;
         }
     }

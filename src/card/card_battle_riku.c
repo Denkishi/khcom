@@ -250,7 +250,7 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n);
 void SelectPrevRikuCard(CardBattleWork* w, u8 n);
 u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind);
 void func_08081740(CardBattleWork* w, u16 n);
-void func_08081744(CardBattleWork* w);
+void SyncRikuHcEffect(CardBattleWork* w);
 void SwitchRikuCardList(CardBattleWork* w);
 void CycleRikuCardList(CardBattleWork* w);
 u8 UseRikuCard(CardBattleWork* w);
@@ -262,15 +262,15 @@ void TickRikuHcEffectOnCardUse();
 void ResetRikuReloadGauge(CardBattleWork* w);
 void LoadRikuCardDisplayGfx2(CardDisplayWork* p);
 void TickRikuHcEffectOnPlayEnd();
-u8 func_080827E0(CardDisplayWork* p, void* a);
+u8 RikuStockMoveToSlot(CardDisplayWork* p, void* a);
 void UpdateRikuReloadGauge(CardDisplayWork* p);
 void LookupRikuCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
 void TickRikuHcEffectOnAttackEnd();
-u8 func_08082AE4(CardDisplayWork* p);
-u8 func_08082FF0(CardDisplayWork* p);
+u8 RikuCardShrinkAway(CardDisplayWork* p);
+u8 RikuStockVanish(CardDisplayWork* p);
 void RefreshRikuCardDisplayGfx(CardDisplayWork* p);
-s32 func_08083ADC(BossCardWork* w);
-void func_08082BF8(CardDisplayWork* p);
+s32 BosscardSlideOut(BossCardWork* w);
+void UpdateRikuPlayedCardPosition(CardDisplayWork* p);
 
 void RequestRikuPotion() {
     gRikuCardReloadRequest = 17;
@@ -1527,11 +1527,11 @@ u8 UpdateRikuReloadDeal(CardBattleWork* w, void* a) {
                 args.listIndex = w->listIndex;
                 args.slot = c;
                 p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
-                p->unk_80 = p->unk_7C = 0;
+                p->ringAngleTarget = p->ringAngle = 0;
                 p->priority = 50;
                 p->timer = 8;
-                p->x = p->unk_8C;
-                p->y = p->unk_90;
+                p->x = p->ringCenterX;
+                p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
                 gRikuSelectedCard = p;
                 w->unk_C4[2]++;
@@ -1593,8 +1593,8 @@ void SelectNextRikuCard(CardBattleWork* w, u8 n) {
                 p->ringIndex = 0;
                 p->priority = 60;
                 p->timer = 4;
-                p->x = p->unk_8C;
-                p->y = p->unk_90;
+                p->x = p->ringCenterX;
+                p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
                 gRikuSelectedCard = p;
             }
@@ -1638,8 +1638,8 @@ void SelectPrevRikuCard(CardBattleWork* w, u8 n) {
                 p->ringIndex = 0;
                 p->priority = 60;
                 p->timer = 4;
-                p->x = p->unk_8C;
-                p->y = p->unk_90;
+                p->x = p->ringCenterX;
+                p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
                 gRikuSelectedCard = p;
             }
@@ -1661,8 +1661,8 @@ void SwitchRikuCardList(CardBattleWork* w) {
 
         if (w->reloadPending[w->listIndex] == 0) {
             w->cursors[w->listIndex] = gRikuSelectedCard->args.index;
-            gRikuSelectedCard->unk_8C = 0x10400;
-            gRikuSelectedCard->unk_90 = 0x8C00;
+            gRikuSelectedCard->ringCenterX = 0x10400;
+            gRikuSelectedCard->ringCenterY = 0x8C00;
             gRikuSelectedCard->timer = 4;
             gRikuSelectedCard->command = 7;
             gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
@@ -1714,8 +1714,8 @@ void CycleRikuCardList(CardBattleWork* w) {
 
     if (w->reloadPending[w->listIndex] == 0) {
         w->cursors[w->listIndex] = gRikuSelectedCard->args.index;
-        gRikuSelectedCard->unk_8C = 0xC800;
-        gRikuSelectedCard->unk_90 = 0xB400;
+        gRikuSelectedCard->ringCenterX = 0xC800;
+        gRikuSelectedCard->ringCenterY = 0xB400;
         gRikuSelectedCard->timer = 12;
         gRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
     } else {
@@ -2015,7 +2015,7 @@ u8 UseRikuCard(CardBattleWork* w) {
 
     if (gRikuBtlWork->hcEffect == 37) {
         t = GetRandomHcEffect();
-        func_08081744(w);
+        SyncRikuHcEffect(w);
         gCardBattleState->rikuHcEffect = t;
         func_08081740(w, gCardBattleState->rikuHcEffect);
         ApplyRikuHcEffect(w);
@@ -2043,8 +2043,8 @@ u8 UseRikuCard(CardBattleWork* w) {
         p->ringIndex = 0;
         p->priority = 60;
         p->timer = 4;
-        p->x = p->unk_8C;
-        p->y = p->unk_90;
+        p->x = p->ringCenterX;
+        p->y = p->ringCenterY;
         p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
         gRikuSelectedCard = p;
     }
@@ -2096,12 +2096,12 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
                 p = TaskCreate(&w->tasks, &gTaskDescCardRiku, &args)->work;
             }
 
-            p->unk_80 = p->unk_7C = 0;
+            p->ringAngleTarget = p->ringAngle = 0;
             p->swingAngleTarget = p->swingAngle = sRikuCardSwingAngles[0];
             p->ringIndex = 0;
             p->priority = 50;
-            p->x = p->unk_8C;
-            p->y = p->unk_90;
+            p->x = p->ringCenterX;
+            p->y = p->ringCenterY;
             p->timer = 8;
             p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
             gRikuSelectedCard = p;
@@ -2114,10 +2114,10 @@ void BeginRikuReloadDeal(CardBattleWork* w) {
         args.slot = w->slots[w->listIndex];
         args.listIndex = w->listIndex;
         q = TaskCreate(&w->tasks, &gTaskDescNOCard, &args)->work;
-        q->unk_80 = q->unk_7C = 0;
+        q->ringAngleTarget = q->ringAngle = 0;
         q->swingAngleTarget = q->swingAngle = sRikuCardSwingAngles[0];
-        q->x = q->unk_8C;
-        q->y = q->unk_90;
+        q->x = q->ringCenterX;
+        q->y = q->ringCenterY;
         q->priority = 50;
         q->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
         gRikuSelectedCard = q;
@@ -2160,7 +2160,7 @@ u8 StockRikuCard(CardBattleWork* w) {
     gRikuSelectedCard->stockIndex = w->stockCount;
     gRikuSelectedCard->priority = (3 - w->stockCount) * 4 + 50;
     w->stock[w->stockCount] = gRikuSelectedCard;
-    gCardBattleState->unk_024[gCardBattleState->unk_0DF] = gRikuSelectedCard;
+    gCardBattleState->rikuStockedCards[gCardBattleState->rikuStockedCount] = gRikuSelectedCard;
     gRikuSelectedCard->args.slot->stocked = 1;
 
     if (gRikuBtlWork->hcEffect == 1) {
@@ -2188,7 +2188,7 @@ u8 StockRikuCard(CardBattleWork* w) {
 
     w->stockValue += n;
     w->stockCount++;
-    gCardBattleState->unk_0DF++;
+    gCardBattleState->rikuStockedCount++;
 
     if (w->stockValue != 0) {
         UpdateSpriteFrameTiles(w->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((w->stockValue - 1) << 7));
@@ -2213,7 +2213,7 @@ u8 StockRikuCard(CardBattleWork* w) {
 
     if (gRikuBtlWork->hcEffect == 37) {
         t = GetRandomHcEffect();
-        func_08081744(w);
+        SyncRikuHcEffect(w);
         gCardBattleState->rikuHcEffect = t;
         func_08081740(w, gCardBattleState->rikuHcEffect);
         ApplyRikuHcEffect(w);
@@ -2239,8 +2239,8 @@ u8 StockRikuCard(CardBattleWork* w) {
         p->ringIndex = 0;
         p->priority = 60;
         p->timer = 4;
-        p->x = p->unk_8C;
-        p->y = p->unk_90;
+        p->x = p->ringCenterX;
+        p->y = p->ringCenterY;
         p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
         gRikuSelectedCard = p;
     }
@@ -2521,7 +2521,7 @@ void UseRikuStock(CardBattleWork* w) {
 
     TickRikuHcEffectOnCardUse();
     w->stockCount = 0;
-    gCardBattleState->unk_0DF = 0;
+    gCardBattleState->rikuStockedCount = 0;
     w->stockValue = 0;
     ClearStockedCardSlots(w);
     w->unk_C4[1] = 0;
@@ -2542,7 +2542,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             ApplyRikuHcEffect(w);
             pp = &gRikuSelectedCard;
         } else {
-            func_08081744(w);
+            SyncRikuHcEffect(w);
             gCardBattleState->rikuHcEffect = gRikuSelectedCard->cardDef->move;
             func_08081740(w, gCardBattleState->rikuHcEffect);
             ApplyRikuHcEffect(w);
@@ -2590,8 +2590,8 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
             p->ringIndex = 0;
             p->priority = 60;
             p->timer = 4;
-            p->x = p->unk_8C;
-            p->y = p->unk_90;
+            p->x = p->ringCenterX;
+            p->y = p->ringCenterY;
             p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED | CARD_DISP_FLAG_VISIBLE);
             gRikuSelectedCard = p;
         } else {
@@ -2619,7 +2619,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* w) {
 void func_08081740(CardBattleWork* w, u16 n) {
 }
 
-void func_08081744(CardBattleWork* w) {
+void SyncRikuHcEffect(CardBattleWork* w) {
     gRikuBtlWork->hcEffect = gCardBattleState->rikuHcEffect;
 }
 
@@ -2686,7 +2686,7 @@ u8 GetActiveCardValue() {
     return gCardBattleState->activeValue;
 }
 
-s32 func_08081858() {
+s32 GetRikuSelectedCardMove() {
     if (gRikuSelectedCard != NULL) {
         return gRikuSelectedCard->cardDef->move;
     }
@@ -2817,19 +2817,19 @@ void RikuCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     p->scaleY = 0x100;
     p->bobAngle = 0;
     p->angle = 0;
-    p->unk_7C = 0;
-    p->unk_80 = 0;
+    p->ringAngle = 0;
+    p->ringAngleTarget = 0;
     p->swingAngle = 0;
     p->swingAngleTarget = 0;
     p->command = 0;
     p->priority = 80;
     p->timer = 4;
-    p->unk_A2 = 0;
-    p->unk_84 = 0x2400;
-    p->unk_88 = 0x2400;
+    p->phase = 0;
+    p->ringRadius = 0x2400;
+    p->ringRadiusTarget = 0x2400;
     p->swingSteps = 0;
-    p->unk_8C = gRikuCardLayout[5][0];
-    p->unk_90 = gRikuCardLayout[5][1];
+    p->ringCenterX = gRikuCardLayout[5][0];
+    p->ringCenterY = gRikuCardLayout[5][1];
     p->x = gRikuCardLayout[4][0];
     p->y = gRikuCardLayout[4][1];
 
@@ -2852,7 +2852,7 @@ u8 RikuCardUpdate(CardDisplayWork* p, void* a) {
 
     if (p->flags & CARD_DISP_FLAG_DEALING) {
         p->timer = 4;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080829D0);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardDeal);
         return 1;
     }
 
@@ -2882,13 +2882,13 @@ u8 RikuCardUpdate(CardDisplayWork* p, void* a) {
         return 1;
     }
 
-    ApproachValue(&p->x, p->unk_8C, p->timer);
-    ApproachValue(&p->y, p->unk_90, p->timer);
+    ApproachValue(&p->x, p->ringCenterX, p->timer);
+    ApproachValue(&p->y, p->ringCenterY, p->timer);
     p->bobAngle += 4;
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082A64);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardClosed);
     }
 
     return DispatchRikuCardCommand(p, a);
@@ -3013,7 +3013,7 @@ void RikuCardDestroy(CardDisplayWork* p) {
     }
 }
 
-void func_0808210C(CardDisplayWork* p) {
+void SyncRikuCardDisplayGfx(CardDisplayWork* p) {
     if (p->command == 6) {
         return;
     }
@@ -3031,10 +3031,10 @@ void func_0808210C(CardDisplayWork* p) {
     }
 }
 
-u8 func_08082154(CardDisplayWork* p, void* a) {
+u8 RikuCardWaitPlayEnd(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         p->timer = 8;
-        p->unk_9E = 8;
+        p->spinSpeed = 8;
         gCardBattleState->activeCardCount = 0;
         gCardBattleState->activeValue = 0;
         gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
@@ -3045,20 +3045,20 @@ u8 func_08082154(CardDisplayWork* p, void* a) {
             TickRikuHcEffectOnAttackEnd();
         }
 
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082AE4);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardShrinkAway);
     } else if (p->flags & CARD_DISP_FLAG_BROKEN) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = 16;
-        p->unk_9E = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082E0C);
+        p->ringAngle = 16;
+        p->spinSpeed = 1;
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardBreakFall);
     }
 
     return 1;
 }
 
-u8 func_08082224(CardDisplayWork* p, void* a) {
+u8 RikuCardMoveToPlay(CardDisplayWork* p, void* a) {
     ApproachValue(&p->x, 0x7800, p->timer);
     ApproachValue(&p->y, 0x8400, p->timer);
     p->priority = 80;
@@ -3072,16 +3072,16 @@ u8 func_08082224(CardDisplayWork* p, void* a) {
     if (gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) {
         if (p->flags & CARD_DISP_FLAG_IN_PLAY) {
             if ((s16)p->timer == 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)func_08082154);
+                SetTaskUpdate(a, (TaskUpdateFunc)RikuCardWaitPlayEnd);
             }
         } else if ((s16)p->timer <= 2) {
             p->priority -= 4;
-            p->unk_84 = 0x500;
+            p->ringRadius = 0x500;
             p->timer = 0x100;
-            p->unk_7C = 16;
-            p->unk_9E = 1;
+            p->ringAngle = 16;
+            p->spinSpeed = 1;
             p->flags |= CARD_DISP_FLAG_IN_PLAY;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_08082B48);
+            SetTaskUpdate(a, (TaskUpdateFunc)RikuCardFlyOff);
 
             if (p->cardDef->flags & CARD_DEF_FLAG_ITEM) {
                 p->args.slot->unk_06 = 0;
@@ -3091,20 +3091,20 @@ u8 func_08082224(CardDisplayWork* p, void* a) {
         }
     } else if ((s16)p->timer <= 2) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = 16;
-        p->unk_9E = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082B48);
+        p->ringAngle = 16;
+        p->spinSpeed = 1;
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardFlyOff);
     }
 
     return 1;
 }
 
-u8 func_08082348(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->unk_8C, gPlayedCardCenter[0], p->timer);
-    ApproachValue(&p->unk_90, gPlayedCardCenter[1], p->timer);
-    ApproachValue(&p->unk_84, p->unk_88, p->timer);
+u8 RikuStockWaitPlayEnd(CardDisplayWork* p, void* a) {
+    ApproachValue(&p->ringCenterX, gPlayedCardCenter[0], p->timer);
+    ApproachValue(&p->ringCenterY, gPlayedCardCenter[1], p->timer);
+    ApproachValue(&p->ringRadius, p->ringRadiusTarget, p->timer);
     ApproachValue(&p->scaleX, 0x100, p->timer);
     ApproachValue(&p->scaleY, 0x100, p->timer);
 
@@ -3114,7 +3114,7 @@ u8 func_08082348(CardDisplayWork* p, void* a) {
         p->timer = 0;
     }
 
-    func_08082BF8(p);
+    UpdateRikuPlayedCardPosition(p);
 
     switch (p->stockIndex) {
     case 0:
@@ -3130,17 +3130,17 @@ u8 func_08082348(CardDisplayWork* p, void* a) {
 
     if (p->flags & CARD_DISP_FLAG_BROKEN) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = 16;
-        p->unk_9E = 1;
+        p->ringAngle = 16;
+        p->spinSpeed = 1;
         gCardBattleState->rikuStockActive = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082E0C);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardBreakFall);
     }
 
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         p->timer = 8;
-        p->unk_9E = 8;
+        p->spinSpeed = 8;
         gCardBattleState->activeCardCount--;
         gCardBattleState->activeValue = 0;
 
@@ -3152,16 +3152,16 @@ u8 func_08082348(CardDisplayWork* p, void* a) {
 
         gCardBattleState->rikuStockActive = 0;
         gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_BUSY;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082AE4);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardShrinkAway);
     }
 
     return 1;
 }
 
-u8 func_080824C8(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->unk_8C, gPlayedCardCenter[0], p->timer);
-    ApproachValue(&p->unk_90, gPlayedCardCenter[1], p->timer);
-    ApproachValue(&p->unk_84, p->unk_88, p->timer);
+u8 RikuStockMoveToPlay(CardDisplayWork* p, void* a) {
+    ApproachValue(&p->ringCenterX, gPlayedCardCenter[0], p->timer);
+    ApproachValue(&p->ringCenterY, gPlayedCardCenter[1], p->timer);
+    ApproachValue(&p->ringRadius, p->ringRadiusTarget, p->timer);
     ApproachValue(&p->scaleX, 0x100, p->timer);
     ApproachValue(&p->scaleY, 0x100, p->timer);
 
@@ -3171,73 +3171,73 @@ u8 func_080824C8(CardDisplayWork* p, void* a) {
         p->timer = 0;
     }
 
-    func_08082BF8(p);
+    UpdateRikuPlayedCardPosition(p);
 
     if (gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) {
         if (p->flags & CARD_DISP_FLAG_IN_PLAY) {
             if ((s16)p->timer == 0) {
-                SetTaskUpdate(a, (TaskUpdateFunc)func_08082348);
+                SetTaskUpdate(a, (TaskUpdateFunc)RikuStockWaitPlayEnd);
             }
         } else if ((s16)p->timer <= 2) {
             p->priority -= 4;
-            p->unk_84 = 0x500;
+            p->ringRadius = 0x500;
             p->timer = 0x100;
-            p->unk_7C = 16;
-            p->unk_9E = 1;
+            p->ringAngle = 16;
+            p->spinSpeed = 1;
             gCardBattleState->unk_0C0 = 0;
             gCardBattleState->rikuStockActive = 0;
-            SetTaskUpdate(a, (TaskUpdateFunc)func_08082B48);
+            SetTaskUpdate(a, (TaskUpdateFunc)RikuCardFlyOff);
             m4aSongNumStart(SONG_SYS_DROW);
         }
     } else if ((s16)p->timer <= 2) {
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = 16;
-        p->unk_9E = 1;
+        p->ringAngle = 16;
+        p->spinSpeed = 1;
         gCardBattleState->rikuStockActive = 0;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082B48);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardFlyOff);
     }
 
     return 1;
 }
 
-u8 func_08082618(CardDisplayWork* p, void* a) {
+u8 RikuStockHold(CardDisplayWork* p, void* a) {
     u8 (*f)(CardDisplayWork*, void*);
     s32 v;
 
     SyncCardDisplayGfx(p);
 
     if (!(p->flags & CARD_DISP_FLAG_STOCK_NAMED)) {
-        f = func_080827E0;
+        f = RikuStockMoveToSlot;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
         return f(p, a);
     }
 
     if (p->flags & 0x40000000) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082FF0);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuStockVanish);
         return 1;
     }
 
     if (p->command == 5) {
         if (p->flags & CARD_DISP_FLAG_UNOPPOSED) {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            f = func_08082348;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            f = RikuStockWaitPlayEnd;
         } else {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            f = func_080824C8;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            f = RikuStockMoveToPlay;
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)f);
@@ -3252,14 +3252,14 @@ u8 func_08082618(CardDisplayWork* p, void* a) {
     }
 
     if (p->flags & CARD_DISP_FLAG_OPEN) {
-        switch (p->unk_A2) {
+        switch (p->phase) {
         case 0:
             p->y -= 0x80;
             v = gRikuCardLayout[3 - p->stockIndex][1] - 0x200;
 
             if (p->y <= v) {
                 p->y = v;
-                p->unk_A2 = 1;
+                p->phase = 1;
             }
 
             break;
@@ -3269,7 +3269,7 @@ u8 func_08082618(CardDisplayWork* p, void* a) {
 
             if (p->y >= v) {
                 p->y = v;
-                p->unk_A2 = 0;
+                p->phase = 0;
                 p->timer = 16;
             }
 
@@ -3284,7 +3284,7 @@ u8 func_08082618(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_080827E0(CardDisplayWork* p, void* a) {
+u8 RikuStockMoveToSlot(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
     u16 t;
 
@@ -3317,36 +3317,36 @@ u8 func_080827E0(CardDisplayWork* p, void* a) {
 
         if (p->flags & CARD_DISP_FLAG_STOCK_NAMED) {
             p->timer = p->stockIndex * 8;
-            fn = func_08082618;
+            fn = RikuStockHold;
             SetTaskUpdate(a, (TaskUpdateFunc)fn);
             return fn(p, a);
         }
     }
 
     if (p->flags & 0x40000000) {
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082FF0);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuStockVanish);
         return 1;
     }
 
     if (p->command == 5) {
         if (p->flags & CARD_DISP_FLAG_UNOPPOSED) {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            fn = func_08082348;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            fn = RikuStockWaitPlayEnd;
         } else {
             p->timer = 15;
-            p->unk_88 = 0x800;
-            p->unk_84 = 0;
-            p->unk_80 = gPlayedCardAngles[p->stockIndex] * 2;
-            p->unk_7C = 0;
-            p->unk_8C = p->x;
-            p->unk_90 = p->y;
-            fn = func_080824C8;
+            p->ringRadiusTarget = 0x800;
+            p->ringRadius = 0;
+            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
+            p->ringAngle = 0;
+            p->ringCenterX = p->x;
+            p->ringCenterY = p->y;
+            fn = RikuStockMoveToPlay;
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)fn);
@@ -3359,11 +3359,11 @@ u8 func_080827E0(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_080829D0(CardDisplayWork* p, void* a) {
+u8 RikuCardDeal(CardDisplayWork* p, void* a) {
     u8 (*f)(CardDisplayWork*, void*);
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
-        f = func_08082A64;
+        f = RikuCardClosed;
         SetTaskUpdate(a, (TaskUpdateFunc)f);
         return f(p, a);
     }
@@ -3386,14 +3386,14 @@ u8 func_080829D0(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_08082A64(CardDisplayWork* p, void* a) {
+u8 RikuCardClosed(CardDisplayWork* p, void* a) {
     u8 (*fn)(CardDisplayWork*, void*);
 
     if (p->command == 7) {
         return 0;
     }
 
-    p->unk_84 += -p->unk_84 >> 1;
+    p->ringRadius += -p->ringRadius >> 1;
     p->x += (gRikuCardLayout[4][0] - p->x) >> 1;
     p->y += (gRikuCardLayout[4][1] - p->y) >> 1;
 
@@ -3415,7 +3415,7 @@ u8 func_08082A64(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-u8 func_08082AE4(CardDisplayWork* p) {
+u8 RikuCardShrinkAway(CardDisplayWork* p) {
     ApproachValue(&p->y, 0x8200, p->timer);
 
     if ((s16)p->timer > 0) {
@@ -3426,8 +3426,8 @@ u8 func_08082AE4(CardDisplayWork* p) {
 
     if ((s16)p->timer == 0) {
         p->timer = 0;
-        p->angle += p->unk_9E;
-        p->unk_9E++;
+        p->angle += p->spinSpeed;
+        p->spinSpeed++;
 
         if (p->scaleX <= 25) {
             return 0;
@@ -3440,13 +3440,13 @@ u8 func_08082AE4(CardDisplayWork* p) {
     return 1;
 }
 
-u8 func_08082B48(CardDisplayWork* p) {
+u8 RikuCardFlyOff(CardDisplayWork* p) {
     p->command = 0;
-    p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->timer;
+    p->y -= p->ringRadius;
+    p->ringRadius -= (s16)p->timer;
     p->timer++;
-    p->x -= gSineTable[(p->unk_7C & 0xFF) + 0x40];
-    p->angle += p->unk_9E;
+    p->x -= gSineTable[(p->ringAngle & 0xFF) + 0x40];
+    p->angle += p->spinSpeed;
     p->scaleX -= 5;
     p->scaleY -= 5;
 
@@ -3461,24 +3461,24 @@ u8 func_08082B48(CardDisplayWork* p) {
     return 1;
 }
 
-void func_08082BF8(CardDisplayWork* p) {
+void UpdateRikuPlayedCardPosition(CardDisplayWork* p) {
     s32 t;
 
-    if (p->unk_80 - p->unk_7C > 0x7F00) {
-        p->unk_7C += 0x10000;
+    if (p->ringAngleTarget - p->ringAngle > 0x7F00) {
+        p->ringAngle += 0x10000;
     }
 
-    if (p->unk_80 - p->unk_7C <= 255) {
-        t = p->unk_7C - 0x10000;
+    if (p->ringAngleTarget - p->ringAngle <= 255) {
+        t = p->ringAngle - 0x10000;
 
-        if (p->unk_80 - t < p->unk_7C - p->unk_80) {
-            p->unk_7C = t;
+        if (p->ringAngleTarget - t < p->ringAngle - p->ringAngleTarget) {
+            p->ringAngle = t;
         }
     }
 
-    p->unk_7C += (p->unk_80 - p->unk_7C) >> 2;
-    p->x = gSineTable[(p->unk_7C >> 8) & 0xFF] * (p->unk_84 >> 8) + p->unk_8C;
-    p->y = -gSineTable[((p->unk_7C >> 8) & 0xFF) + 64] * (p->unk_84 >> 8) + p->unk_90;
+    p->ringAngle += (p->ringAngleTarget - p->ringAngle) >> 2;
+    p->x = gSineTable[(p->ringAngle >> 8) & 0xFF] * (p->ringRadius >> 8) + p->ringCenterX;
+    p->y = -gSineTable[((p->ringAngle >> 8) & 0xFF) + 64] * (p->ringRadius >> 8) + p->ringCenterY;
 }
 
 u8 DispatchRikuCardCommand(CardDisplayWork* p, void* a) {
@@ -3487,7 +3487,7 @@ u8 DispatchRikuCardCommand(CardDisplayWork* p, void* a) {
         p->timer = 10;
         p->priority -= 4;
         p->scaleX = 0x100;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082224);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardMoveToPlay);
         return 1;
     case 6:
         p->timer = 8;
@@ -3496,24 +3496,24 @@ u8 DispatchRikuCardCommand(CardDisplayWork* p, void* a) {
         p->flags |= CARD_DISP_FLAG_STOCKED;
         p->flags |= CARD_DISP_FLAG_GFX_LOADED;
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080827E0);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuStockMoveToSlot);
         return 1;
     case 8:
         p->priority -= 4;
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
-        p->unk_7C = 16;
-        p->unk_9E = 1;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082B48);
+        p->ringAngle = 16;
+        p->spinSpeed = 1;
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardFlyOff);
         return 1;
     case 7:
-        p->unk_84 = 0x500;
+        p->ringRadius = 0x500;
         p->timer = 0x100;
         return 0;
     case 10:
         p->timer = 10;
         p->priority -= 4;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082F50);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuHeartlessCardShow);
         return 1;
     case 9:
     default:
@@ -3544,10 +3544,10 @@ void LookupRikuCardDef(CardDisplayArgs* a, const CardDef** out, u8 index) {
     }
 }
 
-u8 func_08082E0C(CardDisplayWork* p, void* a) {
+u8 RikuCardBreakFall(CardDisplayWork* p, void* a) {
     p->command = 0;
-    p->y -= p->unk_84;
-    p->unk_84 -= (s16)p->timer >> 1;
+    p->y -= p->ringRadius;
+    p->ringRadius -= (s16)p->timer >> 1;
     p->timer++;
     p->x -= 0x200;
     p->angle += 16;
@@ -3612,7 +3612,7 @@ void RefreshRikuCardDisplayGfx(CardDisplayWork* p) {
     LoadCardDisplayGfx(p);
 }
 
-u8 func_08082F50(CardDisplayWork* p) {
+u8 RikuHeartlessCardShow(CardDisplayWork* p) {
     u8 arg;
 
     p->command = 0;
@@ -3632,7 +3632,7 @@ u8 func_08082F50(CardDisplayWork* p) {
     return 0;
 }
 
-u8 func_08082FF0(CardDisplayWork* p) {
+u8 RikuStockVanish(CardDisplayWork* p) {
     s32 r;
 
     if (p->scaleX <= 24) {
@@ -3671,19 +3671,19 @@ void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->bobAngle = 0;
     p->angle = 0;
     p->stockIndex = 0;
-    p->unk_7C = 0;
-    p->unk_80 = 0;
+    p->ringAngle = 0;
+    p->ringAngleTarget = 0;
     p->swingAngle = 0;
     p->swingAngleTarget = 0;
     p->command = 0;
     p->priority = 80;
     p->timer = 4;
-    p->unk_A2 = 0;
-    p->unk_84 = 0x2400;
-    p->unk_88 = 0x2400;
+    p->phase = 0;
+    p->ringRadius = 0x2400;
+    p->ringRadiusTarget = 0x2400;
     p->swingSteps = 0;
-    p->unk_8C = gRikuCardLayout[5][0];
-    p->unk_90 = gRikuCardLayout[5][1];
+    p->ringCenterX = gRikuCardLayout[5][0];
+    p->ringCenterY = gRikuCardLayout[5][1];
     p->x = gRikuCardLayout[4][0];
     p->y = gRikuCardLayout[4][1];
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
@@ -3695,7 +3695,7 @@ void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
 u8 Reload_Card_1(CardDisplayWork* p, void* a) {
     if (p->flags & CARD_DISP_FLAG_DEALING) {
         p->timer = 4;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_080829D0);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardDeal);
         return 1;
     }
 
@@ -3725,13 +3725,13 @@ u8 Reload_Card_1(CardDisplayWork* p, void* a) {
         return 1;
     }
 
-    ApproachValue(&p->x, p->unk_8C, p->timer);
-    ApproachValue(&p->y, p->unk_90, p->timer);
+    ApproachValue(&p->x, p->ringCenterX, p->timer);
+    ApproachValue(&p->y, p->ringCenterY, p->timer);
     p->bobAngle += 4;
 
     if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
         p->flags &= ~CARD_DISP_FLAG_SETTLED;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08082A64);
+        SetTaskUpdate(a, (TaskUpdateFunc)RikuCardClosed);
     }
 
     return DispatchRikuCardCommand(p, a);
@@ -3762,12 +3762,12 @@ void ResetRikuReloadGaugeAnim(ReloadGauge* p) {
     AnimStart(&p->anim3, 2, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
-void func_080832D0(ReloadGauge* p, CardDisplayWork* w) {
+void SetRikuReloadGaugeIdleFrames(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = gRiCardF0RedFrames[3];
     p->gfx2 = gRiCardF0RedFrames[gCardBattleState->rikuGaugeFullFrame + 2];
 }
 
-void func_080832F8(ReloadGauge* p, CardDisplayWork* w) {
+void UpdateRikuReloadGaugeAnims(ReloadGauge* p, CardDisplayWork* w) {
     p->gfx = AnimUpdate(&p->anim2);
     p->gfx2 = AnimUpdate(&p->anim3);
 }
@@ -3826,7 +3826,7 @@ void UpdateRikuReloadGauge(CardDisplayWork* p) {
                         gCardBattleState->rikuReloadGauge = 0;
                         gCardBattleState->reloadGaugeFull[1] = 0;
                         gCardBattleState->rikuReloadCounter--;
-                        p->unk_A2 = v;
+                        p->phase = v;
                         ResetRikuReloadGaugeAnim(p->reloadGauge);
 #ifndef VERSION_EU
                         m4aSongNumStart(SONG_SYS_CHAGEF1);
@@ -3838,10 +3838,10 @@ void UpdateRikuReloadGauge(CardDisplayWork* p) {
                 w->chargeTick = 0;
             }
 
-            func_080832F8(p->reloadGauge, p);
+            UpdateRikuReloadGaugeAnims(p->reloadGauge, p);
             w->chargeTick++;
         } else {
-            func_080832D0(p->reloadGauge, p);
+            SetRikuReloadGaugeIdleFrames(p->reloadGauge, p);
             w->chargeTick = 0;
             m4aSongNumStop(SONG_SYS_CHAGE);
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
@@ -4070,7 +4070,7 @@ u8 Bosscard_1(BossCardWork* w, void* a) {
 
     if (gBossCardRequest == 7) {
         w->slideSteps = 8;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08083ADC);
+        SetTaskUpdate(a, (TaskUpdateFunc)BosscardSlideOut);
     }
 
     if (gBossCardRequest == 1) {
@@ -4093,7 +4093,7 @@ u8 Bosscard_1(BossCardWork* w, void* a) {
     return 1;
 }
 
-s32 func_08083ADC(BossCardWork* w) {
+s32 BosscardSlideOut(BossCardWork* w) {
     s32 v;
 
     if (w->slideSteps != 0) {

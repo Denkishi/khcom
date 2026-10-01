@@ -9208,7 +9208,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             gBtlWork->flags |= BTL_FLAG_DARK_MODE;
             gBtlWork->flags |= BTL_FLAG_DARK_MODE_CHANGED;
             gBtlWork->darkPoints = gGameState.progression.dp;
-            func_0807630C();
+            RequestSoraRemoveItemCards();
             work->scaleY = 5;
             work->steps = 6;
             work->vz = -1536;

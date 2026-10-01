@@ -2319,43 +2319,43 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     w->args = *a;
     w->flags = 0;
     w->timer = 16;
-    w->unk_84 = 0;
+    w->ringRadius = 0;
     w->stockIndex = 0;
     w->priority = 4;
-    w->unk_88 = 0x2400;
-    w->unk_80 = 0;
-    w->unk_7C = 0;
+    w->ringRadiusTarget = 0x2400;
+    w->ringAngleTarget = 0;
+    w->ringAngle = 0;
     w->reloadGauge = EwramAlloc(sizeof(ReloadGauge));
-    w->unk_A2 = 0;
+    w->phase = 0;
     w->swingSteps = 0;
     d = w->reloadGauge;
     v = a->index;
 
     if ((s16)v >= 0) {
-        d->unk_64 = v;
+        d->reloadCounter = v;
     } else {
-        d->unk_64 = -1;
+        d->reloadCounter = -1;
     }
 
-    if (d->unk_64 > 17) {
-        d->unk_64 = 18;
+    if (d->reloadCounter > 17) {
+        d->reloadCounter = 18;
     }
 
     d->chargeTick = 0;
     w->children = EwramAlloc(sizeof(ListPool));
 
-    switch (w->args.unk_08) {
+    switch (w->args.variant) {
     case 1:
-        w->unk_8C = gSoraCardLayout[0][0];
-        w->unk_90 = gSoraCardLayout[0][1];
+        w->ringCenterX = gSoraCardLayout[0][0];
+        w->ringCenterY = gSoraCardLayout[0][1];
         w->x = gSoraCardLayout[4][0];
         w->y = gSoraCardLayout[4][1];
         w->swingAngle = w->swingAngleTarget = 0x2000;
         w->flags |= 0x8000000;
         break;
     case 2:
-        w->unk_8C = gRikuCardLayout[0][0];
-        w->unk_90 = gRikuCardLayout[0][1];
+        w->ringCenterX = gRikuCardLayout[0][0];
+        w->ringCenterY = gRikuCardLayout[0][1];
         w->x = gRikuCardLayout[4][0];
         w->y = gRikuCardLayout[4][1];
         w->swingAngle = w->swingAngleTarget = -0x2000;
@@ -2377,14 +2377,14 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     w->palette = LoadObjPalette(gBStatesPalette, 32);
     w->tiles5 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(w->tiles5, gReloadCounterTiles[w->args.listIndex]);
-    InitReloadGageCounterAnim(w->reloadGauge, w->tiles5, w->args.listIndex, d->unk_64);
+    InitReloadGageCounterAnim(w->reloadGauge, w->tiles5, w->args.listIndex, d->reloadCounter);
     w->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_GAUGE);
 
-    if (d->unk_64 >= 0) {
-        TaskPoolInit(&w->tasks, d->unk_64 + 1);
-        n = d->unk_64;
+    if (d->reloadCounter >= 0) {
+        TaskPoolInit(&w->tasks, d->reloadCounter + 1);
+        n = d->reloadCounter;
 
-        if (d->unk_64 > 3) {
+        if (d->reloadCounter > 3) {
             n = 3;
         }
 
@@ -2395,7 +2395,7 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
             args.parentY = &w->y;
             args.flags = 0;
             args.listIndex = w->args.listIndex;
-            args.side = w->args.unk_08;
+            args.side = w->args.variant;
             TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args);
         }
     } else {
@@ -2414,7 +2414,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
     p = w->reloadGauge;
     v = 0;
 
-    switch (w->args.unk_08) {
+    switch (w->args.variant) {
     case 1:
         if (gCardBattleState->soraListIndex == w->args.listIndex) {
             v = gCardBattleState->soraReloadCharging;
@@ -2434,7 +2434,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
     if ((w->flags & (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED)) == (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_SETTLED)) {
         if (v == 1) {
             if ((s8)p->chargeTick == 2) {
-                switch (w->args.unk_08) {
+                switch (w->args.variant) {
                 case 1:
                     if ((gBtlWork->flags & BTL_FLAG_RELOAD_CHARGING) == 0) {
                         m4aSongNumStart(SONG_SYS_CHAGE);
@@ -2481,16 +2481,16 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                             child = ListPoolNext(&child->node);
                         }
 
-                        p->unk_64--;
+                        p->reloadCounter--;
 
-                        if (p->unk_64 > 2) {
+                        if (p->reloadCounter > 2) {
                             args.pool = w->children;
                             args.index = 3;
                             args.parentX = &w->x;
                             args.parentY = &w->y;
                             args.flags = 0;
                             args.listIndex = w->args.listIndex;
-                            args.side = w->args.unk_08;
+                            args.side = w->args.variant;
                             child = TaskCreate(&w->tasks, &gTaskDescReloadChildren, &args)->work;
                             flags = child->args.flags | RELOAD_CHILD_FLAG_SHIFTED;
                             flags &= 0xFFFD;
@@ -2499,13 +2499,13 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
                         }
 
                         w->timer = 8;
-                        w->unk_A2 = 1;
+                        w->phase = 1;
                         ResetReloadGageAnim(w->reloadGauge);
                         m4aSongNumStart(SONG_SYS_CHAGEF1);
                     }
                 }
 
-                switch (w->args.unk_08) {
+                switch (w->args.variant) {
                 case 1:
                     if (gBtlWork->hcEffect == 9) {
                         p->chargeTick = 1;
@@ -2537,7 +2537,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
             w->flags |= 0x8000000;
             m4aSongNumStop(SONG_SYS_CHAGE);
 
-            switch (w->args.unk_08) {
+            switch (w->args.variant) {
             case 1:
                 gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
                 break;
@@ -2555,7 +2555,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
         }
     }
 
-    if (p->unk_64 < 0) {
+    if (p->reloadCounter < 0) {
         if ((w->flags & CARD_DISP_FLAG_RELOAD_DONE) == 0) {
             w->flags |= CARD_DISP_FLAG_RELOAD_DONE;
             m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -2570,8 +2570,8 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
 
     UpdateReloadGageSlide(w->reloadGauge, w);
 
-    if (w->unk_A2 == 1 && (s16)w->timer == 1) {
-        SetReloadGageCounterAnim(w->reloadGauge, p->unk_64);
+    if (w->phase == 1 && (s16)w->timer == 1) {
+        SetReloadGageCounterAnim(w->reloadGauge, p->reloadCounter);
     }
 
     UpdateReloadGageRingPosition(w);
@@ -2587,7 +2587,7 @@ u8 Reload_Gage_1(CardDisplayWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateReloadGageIdle);
         m4aSongNumStop(SONG_SYS_CHAGE);
 
-        switch (w->args.unk_08) {
+        switch (w->args.variant) {
         case 1:
             gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
             break;
@@ -2606,7 +2606,7 @@ u8 UpdateReloadGageIdle(CardDisplayWork* w, void* a) {
         return 0;
     }
 
-    w->unk_84 += -w->unk_84 >> 1;
+    w->ringRadius += -w->ringRadius >> 1;
     w->x += (gSoraCardLayout[4][0] - w->x) >> 1;
     w->y += (gSoraCardLayout[4][1] - w->y) >> 1;
 
@@ -2666,7 +2666,7 @@ void Reload_Gage_3(CardDisplayWork* p) {
     EwramFree(p->children);
     EwramFree(p->reloadGauge);
 
-    switch (p->args.unk_08) {
+    switch (p->args.variant) {
     case 1:
         gBtlWork->flags &= ~BTL_FLAG_RELOAD_CHARGING;
 
@@ -2711,7 +2711,7 @@ void UpdateReloadGageRingPosition(CardDisplayWork* w) {
         w->swingSteps--;
     }
 
-    w->unk_84 += (w->unk_88 - w->unk_84) >> 1;
+    w->ringRadius += (w->ringRadiusTarget - w->ringRadius) >> 1;
 
     if ((s16)w->timer > 0) {
         w->timer--;
@@ -2721,18 +2721,18 @@ void UpdateReloadGageRingPosition(CardDisplayWork* w) {
         w->flags |= CARD_DISP_FLAG_SETTLED;
     }
 
-    switch (w->args.unk_08) {
+    switch (w->args.variant) {
     case 1:
-        w->unk_8C = gSineTable[(w->swingAngle >> 8) & 0xFF] * 80 + gSoraCardLayout[0][0];
-        w->unk_90 = -gSineTable[((w->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gSoraCardLayout[0][1];
-        w->x = gSineTable[0x20] * (w->unk_84 >> 8) + w->unk_8C;
-        w->y = -gSineTable[0x60] * (w->unk_84 >> 8) + w->unk_90;
+        w->ringCenterX = gSineTable[(w->swingAngle >> 8) & 0xFF] * 80 + gSoraCardLayout[0][0];
+        w->ringCenterY = -gSineTable[((w->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gSoraCardLayout[0][1];
+        w->x = gSineTable[0x20] * (w->ringRadius >> 8) + w->ringCenterX;
+        w->y = -gSineTable[0x60] * (w->ringRadius >> 8) + w->ringCenterY;
         break;
     case 2:
-        w->unk_8C = gSineTable[(w->swingAngle >> 8) & 0xFF] * 80 + gRikuCardLayout[0][0];
-        w->unk_90 = -gSineTable[((w->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gRikuCardLayout[0][1];
-        w->x = gSineTable[0xE0] * (w->unk_84 >> 8) + w->unk_8C;
-        w->y = -gSineTable[0x120] * (w->unk_84 >> 8) + w->unk_90;
+        w->ringCenterX = gSineTable[(w->swingAngle >> 8) & 0xFF] * 80 + gRikuCardLayout[0][0];
+        w->ringCenterY = -gSineTable[((w->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gRikuCardLayout[0][1];
+        w->x = gSineTable[0xE0] * (w->ringRadius >> 8) + w->ringCenterX;
+        w->y = -gSineTable[0x120] * (w->ringRadius >> 8) + w->ringCenterY;
         break;
     }
 }
@@ -2770,8 +2770,8 @@ void SetReloadGageCounterAnim(ReloadGauge* p, s32 count) {
 }
 
 s32 UpdateReloadGageSlide(ReloadGauge* p, CardDisplayWork* w) {
-    if ((s16)w->timer > 0 && w->unk_A2 == 1) {
-        switch (w->args.unk_08) {
+    if ((s16)w->timer > 0 && w->phase == 1) {
+        switch (w->args.variant) {
         case 1:
             ApproachValue(&p->offsetX, -0x3000, w->timer);
             break;
@@ -2785,7 +2785,7 @@ s32 UpdateReloadGageSlide(ReloadGauge* p, CardDisplayWork* w) {
 }
 
 void InitReloadGageAnims(ReloadGauge* p, CardDisplayWork* w, u8 idx) {
-    p->unk_0D = 2;
+    p->gaugeAnim = 2;
     AnimInit(&p->anim2, gReloadGaugeAnims[idx], gReloadGaugeFrames[idx]);
     AnimStart(&p->anim2, 1, ANIM_FLAG_LOOP);
     p->gfx = gReloadGaugeFrames[idx][3];
@@ -2805,15 +2805,15 @@ void SetReloadGageIdleFrames(ReloadGauge* p, CardDisplayWork* w) {
 }
 
 void AdvanceReloadGageAnim(ReloadGauge* p, CardDisplayWork* w) {
-    if (p->unk_0D <= 3) {
-        p->unk_0D++;
+    if (p->gaugeAnim <= 3) {
+        p->gaugeAnim++;
     }
 
-    AnimStart(&p->anim3, p->unk_0D, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
+    AnimStart(&p->anim3, p->gaugeAnim, ANIM_FLAG_LOOP | ANIM_FLAG_KEEP_FRAME);
 }
 
 void ResetReloadGageAnim(ReloadGauge* p) {
-    p->unk_0D = 2;
+    p->gaugeAnim = 2;
 }
 
 void* CreateReloadGageTask(CardBattleWork* w, u16 b, void* pool, u8 mode) {
@@ -2841,7 +2841,7 @@ void* CreateReloadGageTask(CardBattleWork* w, u16 b, void* pool, u8 mode) {
         break;
     }
 
-    args.unk_08 = mode;
+    args.variant = mode;
     args.listIndex = w->listIndex;
     return TaskCreate(pool, &gTaskDescReloadGage, &args)->work;
 }

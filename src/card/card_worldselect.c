@@ -113,7 +113,7 @@ void WORLDSELECT_0() {
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
     TaskPoolInit(&gModeWorldselectTasks, 1);
-    TaskCreate(&gModeWorldselectTasks, &gTaskDescPremireChance, 0);
+    TaskCreate(&gModeWorldselectTasks, &gTaskDescPremireChance, NULL);
 }
 
 void WORLDSELECT_1() {
@@ -137,7 +137,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->messageTimer = 0;
     w->cancelled = 0;
     w->pageScroll = 0;
-    w->card2 = 0;
+    w->card2 = NULL;
     gMapCardDelivered = 0;
     w->valueColumn = 0;
     w->valueRow = 0;
@@ -150,7 +150,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
         w->requiredValue = 0;
     }
 
-    w->tiles3 = 0;
+    w->tiles3 = NULL;
 
     if (w->isEventDoor == 0) {
         if (w->requiredValue == 0) {
@@ -169,24 +169,24 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
         w->palette = LoadObjPalette(gUnk_09618D38, 32);
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
     } else {
-        w->tiles4 = 0;
-        w->tiles2 = 0;
+        w->tiles4 = NULL;
+        w->tiles2 = NULL;
         w->palette = LoadObjPalette(gUnk_09618D38, 32);
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
     }
 
-    gMapCardUiResources.tiles = AllocObjTiles(0x280, 0);
+    gMapCardUiResources.tiles = AllocObjTiles(0x280, NULL);
     SetObjTileSource(gMapCardUiResources.tiles, gUnk_0908B1B4);
     AnimInit(&gMapCardUiResources.anim, gUnk_09EEA164, gUnk_09EEA148);
     AnimStart(&gMapCardUiResources.anim, 0, ANIM_FLAG_LOOP);
     gMapCardUiResources.gfx = AnimGetGfx(&gMapCardUiResources.anim);
-    w->tiles = AllocObjTiles(0x3C0, 0);
+    w->tiles = AllocObjTiles(0x3C0, NULL);
     w->palette2 = LoadObjPalette(gUnk_09618D18, 32);
     SetObjTileSource(w->tiles, gUnk_093F47E4);
     AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
-    w->tiles5 = AllocObjTiles(0x120, 0);
+    w->tiles5 = AllocObjTiles(0x120, NULL);
     w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
     SetObjTileSource(w->tiles5, gUnk_093F4578);
     AnimInit(&w->anim2, gUnk_09EF1170, gUnk_09EF1150);
@@ -218,9 +218,9 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     w->page = 0;
     w->lastPage = 0;
     w->card = ListPoolFirst(&w->cards);
-    w->prevCard = 0;
+    w->prevCard = NULL;
     m4aSongNumStart(SONG_SYS_CLICKI02);
-    gSelectedMapCard = 0;
+    gSelectedMapCard = NULL;
     w->x2 = 0x1600;
     w->y2 = 0x16400;
     w->unk_28D[0] = 0;
@@ -257,7 +257,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
     FadeSetPaletteExcluded(w->palette2->index + 16, 1);
     FadeSetPaletteExcluded(15, 1);
     FadeSetPaletteExcluded(w->palette4->index + 16, 1);
-    w->unk_1E4 = 0;
+    w->unk_1E4 = NULL;
     w->mosaicX = 9;
     w->mosaicY = 9;
     w->mosaicTimer = 0;
@@ -423,7 +423,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a) {
         v = LoadMapSelectValueCounts(w->card->args.baseCardId, w);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
         ReleaseObjTiles(w->tiles);
-        w->tiles = AllocObjTiles(0x1E0, 0);
+        w->tiles = AllocObjTiles(0x1E0, NULL);
         SetObjTileSource(w->tiles, gUnk_093F556C);
         AnimInit(&w->anim, gUnk_09EF11CC, gUnk_09EF11B8);
         AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -646,7 +646,7 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* w, void* a) {
 
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
         ReleaseObjTiles(w->tiles);
-        w->tiles = AllocObjTiles(0x3C0, 0);
+        w->tiles = AllocObjTiles(0x3C0, NULL);
         SetObjTileSource(w->tiles, gUnk_093F47E4);
         AnimInit(&w->anim, gUnk_09EF1194, gUnk_09EF1180);
         AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -769,7 +769,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* w, void* a) {
             w->barSteps = 16;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectClose);
             m4aSongNumStart(SONG_SYS_CANSEL);
-            gSelectedMapCard = 0;
+            gSelectedMapCard = NULL;
             w->lastPage = 0;
             w->page = 0;
             w->eventKeyArgs.closeMode = 2;
@@ -855,7 +855,7 @@ void MapSelect_2(MapSelectWork* w) {
 #else
                    gUnk_09EF1228[0],
 #endif
-                   w->tiles3, w->palette3, 0, 0, 80);
+                   w->tiles3, w->palette3, NULL, 0, 80);
     }
 
     if (w->isEventDoor == 1) {
@@ -863,13 +863,13 @@ void MapSelect_2(MapSelectWork* w) {
         case 0:
             break;
         case 2:
-            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[3], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[3], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, 0, 20);
             break;
         case 3:
-            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[7], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[7], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, 0, 20);
             break;
         case 1:
-            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[5], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, 0, 20);
+            DrawSprite((w->card->x >> 8) + 4, (w->card->y >> 8) - 32, gMapCardUiResources.sprites[5], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, 0, 20);
             break;
         case 4:
             break;
@@ -877,8 +877,8 @@ void MapSelect_2(MapSelectWork* w) {
     }
 
     if (IsMessageWindowOpen() == 0) {
-        DrawSprite((w->x >> 8) - 23, (w->y >> 8) - 27, w->gfx, w->tiles, w->palette2, 0, 0, 41);
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 12, w->gfx2, w->tiles5, w->palette3, 0, 0, 40);
+        DrawSprite((w->x >> 8) - 23, (w->y >> 8) - 27, w->gfx, w->tiles, w->palette2, NULL, 0, 41);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 12, w->gfx2, w->tiles5, w->palette3, NULL, 0, 40);
     }
 
     if (w->scrollBarVisible != 0) {
@@ -888,16 +888,16 @@ void MapSelect_2(MapSelectWork* w) {
 #else
                    (17 / w->lastPage) * w->page + 108,
 #endif
-                   gUnk_09EEB000, w->tiles6, w->palette, 0, 0, 40);
+                   gUnk_09EEB000, w->tiles6, w->palette, NULL, 0, 40);
     }
 
     if (w->isEventDoor == 0 && w->mosaicX != 9 && w->mosaicY != 9) {
-        DrawSprite(120, 56, 0, w->tiles4, w->palette, 0, SPRITE_FLAG_MOSAIC, 60);
-        DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, 0, SPRITE_FLAG_MOSAIC, 60);
+        DrawSprite(120, 56, NULL, w->tiles4, w->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
+        DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
     }
 
-    DrawSprite(128, w->y3 >> 8, gUnk_09EF11AC[0], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
-    DrawSprite(128, w->y4 >> 8, gUnk_09EF11AC[1], w->tiles7, w->palette3, 0, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, w->y3 >> 8, gUnk_09EF11AC[0], w->tiles7, w->palette3, NULL, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, w->y4 >> 8, gUnk_09EF11AC[1], w->tiles7, w->palette3, NULL, SPRITE_PRIORITY(2), 80);
     DrawTextSlots(16, w->nameY >> 8, w->textSlots, w->palette4, 50, w->textSlotCounts[0]);
     TaskPoolDraw(&w->tasks);
 }
@@ -1041,8 +1041,8 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
         break;
     case DPAD_DOWN:
         a = ListPoolFirst(&work->cards);
-        b = 0;
-        found = 0;
+        b = NULL;
+        found = NULL;
         cnt = 0;
 
         while (a != NULL) {
@@ -1102,7 +1102,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work) {
         break;
     case DPAD_UP:
         a = ListPoolFirst(&work->cards);
-        b = 0;
+        b = NULL;
 
         while (a != NULL) {
             if (a->flags & MAPCARD_FLAG_GFX_LOADED) {
@@ -1221,7 +1221,7 @@ s32 SelectNearestMapSelectCard(MapSelectWork* w) {
 
     node = ListPoolFirst(&w->cards);
     best = 0x100;
-    z = 0;
+    z = NULL;
     w->card = z;
 
     while (node != NULL) {
@@ -1485,7 +1485,7 @@ void* GetSelectedMapCard() {
 }
 
 void ResetSelectedMapCard() {
-    gSelectedMapCard = 0;
+    gSelectedMapCard = NULL;
     gMapCardDelivered = 0;
 }
 
@@ -1948,10 +1948,10 @@ void RemoveMapSelectCard(MapSelectWork* w) {
 }
 
 void Mapcard_0(MapcardWork* w, MapcardArgs* a) {
-    w->tiles = 0;
-    w->unk_04 = 0;
-    w->tiles2 = 0;
-    w->palette = 0;
+    w->tiles = NULL;
+    w->unk_04 = NULL;
+    w->tiles2 = NULL;
+    w->palette = NULL;
     w->args = *a;
     w->x = w->args.index <= 5 ? gMapcardSlotX[w->args.index] << 8 : -0x6400;
     w->y = 0x10500;
@@ -2186,7 +2186,7 @@ void Mapcard_2(MapcardWork* w) {
             } while (0);
 
         draw:
-            aff = 0;
+            aff = NULL;
 
             if (w->flags & MAPCARD_FLAG_CHOSEN) {
                 aff = AllocObjAffine(w->angle, (s16)w->scale, (s16)w->scale, 1);
@@ -2309,12 +2309,12 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     s8 n;
     s8 i;
 
-    w->tiles = 0;
-    w->tiles2 = 0;
-    w->tiles4 = 0;
-    w->tiles3 = 0;
-    w->tiles5 = 0;
-    w->palette = 0;
+    w->tiles = NULL;
+    w->tiles2 = NULL;
+    w->tiles4 = NULL;
+    w->tiles3 = NULL;
+    w->tiles5 = NULL;
+    w->palette = NULL;
     w->command = 0;
     w->args = *a;
     w->flags = 0;
@@ -2368,14 +2368,14 @@ void Reload_Gage_0(CardDisplayWork* w, CardDisplayArgs* a) {
     ListNodeInit(&w->node, w->args.pool, w);
     ListPoolAppend(&w->node, w->args.pool);
     w->tiles2 = LoadObjTiles(gReloadCardTiles[w->args.listIndex], 0x280);
-    w->tiles3 = AllocObjTiles(0x200, 0);
+    w->tiles3 = AllocObjTiles(0x200, NULL);
     SetObjTileSource(w->tiles3, gReloadCardTiles[1]);
-    w->tiles4 = AllocObjTiles(0x80, 0);
+    w->tiles4 = AllocObjTiles(0x80, NULL);
     SetObjTileSource(w->tiles4, gReloadCardTiles[1]);
     InitReloadGageAnims(w->reloadGauge, w, w->args.listIndex);
     w->tiles = LoadObjTiles(gUnk_0905F03C, 0x80);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->tiles5 = AllocObjTiles(0x100, 0);
+    w->tiles5 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(w->tiles5, gReloadCounterTiles[w->args.listIndex]);
     InitReloadGageCounterAnim(w->reloadGauge, w->tiles5, w->args.listIndex, d->unk_64);
     w->flags |= (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_GAUGE);
@@ -2628,7 +2628,7 @@ void Reload_Gage_2(CardDisplayWork* p) {
     DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                gfx, p->tiles2,
-               gCardBattleState->palette, 0, SPRITE_PRIORITY(1), 50);
+               gCardBattleState->palette, NULL, SPRITE_PRIORITY(1), 50);
 
     if (p->scaleY > 0) {
         affine = AllocObjAffine(0, 0x100, p->scaleY, 0);
@@ -2640,7 +2640,7 @@ void Reload_Gage_2(CardDisplayWork* p) {
         if (p->stockIndex == 1) {
             DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                        (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
-                       q->gfx2, p->tiles4, gCardBattleState->palette, 0,
+                       q->gfx2, p->tiles4, gCardBattleState->palette, NULL,
                        SPRITE_PRIORITY(1), 49);
         }
     }
@@ -2649,7 +2649,7 @@ void Reload_Gage_2(CardDisplayWork* p) {
         DrawSprite((p->x >> 8) + (q->offsetX >> 8),
                    (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                    q->gfx3, p->tiles5,
-                   gCardBattleState->palette, 0, SPRITE_PRIORITY(1), 48);
+                   gCardBattleState->palette, NULL, SPRITE_PRIORITY(1), 48);
     }
 
     TaskPoolDraw(&p->tasks);
@@ -2763,7 +2763,7 @@ void SetReloadGageCounterAnim(ReloadGauge* p, s32 count) {
         AnimStart(&p->anim, count, 0);
         gfx = AnimGetGfx(&p->anim);
     } else {
-        gfx = 0;
+        gfx = NULL;
     }
 
     p->gfx3 = gfx;
@@ -2820,7 +2820,7 @@ void* CreateReloadGageTask(CardBattleWork* w, u16 b, void* pool, u8 mode) {
     CardDisplayArgs args;
 
     args.pool = &w->cardDisplays[w->listIndex];
-    args.slot = 0;
+    args.slot = NULL;
 
     switch (mode) {
     case 1:

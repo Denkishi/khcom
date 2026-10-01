@@ -1022,7 +1022,7 @@ void DispCardname_2(DispCardnameWork* work) {
     DrawTextSlots(work->x, 120, work->textSlots, work->textPalette, 50,
                   work->textSlotCount);
     DrawSprite(120, 125, gUnk_09EF126C[0], work->tiles,
-               work->palette, 0, 0, 55);
+               work->palette, NULL, 0, 55);
 }
 
 void DispCardname_3(DispCardnameWork* work) {
@@ -1057,7 +1057,7 @@ void Version_3(VersionWork* work) {
 }
 
 Task* CreateVersionDisplay(TaskPool* pool) {
-    return TaskCreate(pool, &gTaskDescVersion, 0);
+    return TaskCreate(pool, &gTaskDescVersion, NULL);
 }
 
 static void PrizeCard_0(PrizeMapCardWork* w, s32* args) {
@@ -1302,7 +1302,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
     pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;
 
     if (w->scaleX == 0x100 && w->rotation == 0) {
-        affine = 0;
+        affine = NULL;
     } else {
         affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     }
@@ -1492,14 +1492,14 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     }
 
 #ifdef VERSION_EU
-    work->tiles = AllocObjTiles(0x800, 0);
+    work->tiles = AllocObjTiles(0x800, NULL);
     SetObjTileSource(work->tiles, gSelmapEventKeyTitleTilesByLanguage[gLanguage]);
     AnimInit(&work->anim, gSelmapEventKeyTitleAnimsByLanguage[gLanguage], gSelmapEventKeyTitleFramesByLanguage[gLanguage]);
 #else
 #ifdef VERSION_JP
-    work->tiles = AllocObjTiles(0x480, 0);
+    work->tiles = AllocObjTiles(0x480, NULL);
 #else
-    work->tiles = AllocObjTiles(0x6C0, 0);
+    work->tiles = AllocObjTiles(0x6C0, NULL);
 #endif
     SetObjTileSource(work->tiles, gUnk_093F6ACC);
     AnimInit(&work->anim, gUnk_09EF1224, gUnk_09EF1220);
@@ -1622,15 +1622,15 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                 switch (work->cards[i].color) {
                 case 2:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
+                               gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 3:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
+                               gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 1:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
-                               gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, 0, SPRITE_FLAG_MOSAIC, 20);
+                               gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
                 case 0:
                 case 4:
@@ -1653,7 +1653,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
         return;
     }
 
-    DrawSprite(120, 42, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_MOSAIC, 10);
+    DrawSprite(120, 42, work->gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_MOSAIC, 10);
 }
 
 void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
@@ -1687,32 +1687,32 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
         work->sprite.tiles2 = LoadObjTiles(b->tiles, b->tilesSize);
         work->sprite.palette2 = LoadObjPalette(b->palette, b->paletteSize);
         work->sprite.gfx2 = *b->sprites;
-        work->sprite.tiles3 = 0;
-        work->sprite.palette3 = 0;
+        work->sprite.tiles3 = NULL;
+        work->sprite.palette3 = NULL;
         return;
     }
 
-    work->sprite.tiles = 0;
-    work->sprite.palette = 0;
-    work->sprite.gfx = 0;
-    work->sprite.tiles3 = 0;
-    work->sprite.palette3 = 0;
+    work->sprite.tiles = NULL;
+    work->sprite.palette = NULL;
+    work->sprite.gfx = NULL;
+    work->sprite.tiles3 = NULL;
+    work->sprite.palette3 = NULL;
 
     if (key->color == 0) {
         n = key->color;
-        work->sprite.tiles2 = 0;
-        work->sprite.palette2 = 0;
-        work->sprite.gfx2 = 0;
+        work->sprite.tiles2 = NULL;
+        work->sprite.palette2 = NULL;
+        work->sprite.gfx2 = NULL;
     } else {
         d = &gMapCardBackDefs[key->color];
         work->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
         work->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
         work->sprite.gfx2 = *d->sprites2;
-        work->sprite.tiles3 = 0;
-        work->sprite.tiles = 0;
-        work->sprite.palette = 0;
-        work->sprite.gfx = 0;
-        work->sprite.palette3 = 0;
+        work->sprite.tiles3 = NULL;
+        work->sprite.tiles = NULL;
+        work->sprite.palette = NULL;
+        work->sprite.gfx = NULL;
+        work->sprite.palette3 = NULL;
 
         switch (key->color) {
         case 1:
@@ -1731,7 +1731,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     }
 
     q = &work->color;
-    *q = (z = 0, n);
+    *q = (z = NULL, n);
 
     if (key->rule == 0) {
         return;
@@ -1809,9 +1809,9 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
         break;
     }
 
-    work->sprite.tiles = 0;
-    work->sprite.palette = 0;
-    work->sprite.gfx = 0;
+    work->sprite.tiles = NULL;
+    work->sprite.palette = NULL;
+    work->sprite.gfx = NULL;
     work->sprite.palette3 = LoadObjPalette(gUnk_09618D38, 32);
 
     if (work->sprite.tiles2 == NULL) {
@@ -1826,12 +1826,12 @@ void UpdateEventKeyTotal(EventKeyCard* w) {
     void* z;
 
     if (w->total <= 9) {
-        z = 0;
+        z = NULL;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
         w->sprite.gfx3 = z;
         RequestDma3Copy(w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
     } else {
-        z = 0;
+        z = NULL;
         UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
         w->sprite.gfx3 = z;
         RequestDma3Copy(w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
@@ -1866,15 +1866,15 @@ void DrawLayeredCardSpriteScaled(LayeredCardSprite* w, u16 b, s16 c, s16 d) {
 
 void DrawLayeredCardSprite(LayeredCardSprite* p, u16 a) {
     if (p->tiles != NULL) {
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, a, 10);
+        DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, a, 10);
     }
 
     if (p->tiles2 != NULL) {
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, 0, a, 9);
+        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, NULL, a, 9);
     }
 
     if (p->tiles3 != NULL) {
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx3, p->tiles3, p->palette3, 0, a, 8);
+        DrawSprite(p->x >> 8, p->y >> 8, p->gfx3, p->tiles3, p->palette3, NULL, a, 8);
     }
 }
 

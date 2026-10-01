@@ -3110,19 +3110,19 @@ void mode_StaffRoll_0() {
     w->imageTimer = 0;
     w->endState = 0;
     w->endTimer = 0;
-    w->script = 0;
+    w->script = NULL;
     w->scriptPos = 0;
     w->scriptFrame = 0;
     w->activeOp = -1;
     w->opTimer = 0;
     TaskPoolInit(&w->tasks, 32);
     TaskPoolInit(&w->tasks2, 32);
-    w->subTasks[0] = 0;
-    w->subTasks[1] = 0;
-    w->subTasks[2] = 0;
-    w->subTasks[4] = 0;
-    w->subTasks[5] = 0;
-    w->objs[0].animEntry = 0;
+    w->subTasks[0] = NULL;
+    w->subTasks[1] = NULL;
+    w->subTasks[2] = NULL;
+    w->subTasks[4] = NULL;
+    w->subTasks[5] = NULL;
+    w->objs[0].animEntry = NULL;
 }
 
 u8 StaffRollWaitStart(StaffRollWork* w) {
@@ -3563,7 +3563,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
         t = w->creditsTimer;
 
         if (t % STAFFROLL_SCRIPT_PERIOD == 60) {
-            w->script = 0;
+            w->script = NULL;
             idx = t / STAFFROLL_SCRIPT_PERIOD;
 
             if (idx <= 16) {
@@ -3721,7 +3721,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
             if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
                 w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
             } else {
-                w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)0);
+                w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, NULL);
             }
 
             w->imageState = 2;
@@ -4444,7 +4444,7 @@ void mode_StaffRoll_2() {
 
     if (gStaffRollWork != NULL) {
         EwramFree(w);
-        gStaffRollWork = 0;
+        gStaffRollWork = NULL;
     }
 }
 

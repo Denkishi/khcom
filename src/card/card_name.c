@@ -119,7 +119,7 @@ s32 CardName_1() {
 void CardName_2(CardNameWork* w) {
     void** p = &gUnk_09EF1278[2];
 
-    DrawSprite(120, 126, *p, w->tiles, w->palette2, 0, 0, 50);
+    DrawSprite(120, 126, *p, w->tiles, w->palette2, NULL, 0, 50);
 #ifdef VERSION_JP
     DrawTextSlots(w->nameX, 115, w->textSlots, w->textPalette, 30, w->textSlotCount);
 #else
@@ -152,7 +152,7 @@ void CardName_3(CardNameWork* w) {
 }
 
 void PremireEffectInit(PremiumCardEffectWork* w, s16* a) {
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
@@ -172,7 +172,7 @@ void PremireEffectInit(PremiumCardEffectWork* w, s16* a) {
 }
 
 void PremireEffectConvergeInit(PremiumCardEffectWork* w, s16* a) {
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
@@ -229,7 +229,7 @@ s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* w) {
 }
 
 void PremireEffectDraw(PremiumCardEffectWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 0);
+    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, NULL, 0, 0);
 }
 
 void PremireEffectDestroy(PremiumCardEffectWork* w) {

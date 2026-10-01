@@ -528,7 +528,7 @@ u8 SioHasError() {
 
 void SioAutoConnectStart() {
     SioReset();
-    SioConnectInit(SioAutoConnectOnConnect, 0, 0);
+    SioConnectInit(SioAutoConnectOnConnect, NULL, 0);
     gSioAutoConnectState = 0;
     gSioAutoConnectTimer = 0;
 }

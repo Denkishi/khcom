@@ -337,7 +337,7 @@ void EventUpdate() {
 void Event_2() {
     TaskPoolDestroy(&gEventTaskPool);
     EwramFree(gEventState);
-    gEventState = 0;
+    gEventState = NULL;
 }
 
 void RequestEventMode(u16 a) {

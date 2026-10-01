@@ -16,6 +16,7 @@
 #include "m4a_song.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
@@ -46,7 +47,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     actor->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
     t = gEnemyTileCounts[actor->kind];
     work->def = def;
-    work->tiles = AllocObjTiles(t * 32, 0);
+    work->tiles = AllocObjTiles(t * 32, NULL);
     work->palette = LoadObjPalette(def->palette, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->idleState = 0;
@@ -71,7 +72,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->x = 0;
     work->y = 0;
     work->hoverZ = 0;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 3);
@@ -929,7 +930,7 @@ void EmyDraw(EmyWork* work) {
         }
 
         if (sy == 0x100 && sx == sy) {
-            affine = 0;
+            affine = NULL;
         } else if (sy < 256) {
             affine = AllocObjAffine(0, sx, sy, 0);
         } else {
@@ -950,7 +951,7 @@ void EmyReleaseResources(EmyWork* work) {
     gBtlWork->enemyTileCount -= gEnemyTileCounts[work->actor.kind];
 
     if (gBtlWork->actor2 == &work->actor) {
-        gBtlWork->actor2 = 0;
+        gBtlWork->actor2 = NULL;
     }
 
     ReleaseEnemyBtlObj(&work->actor);

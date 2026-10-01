@@ -5,6 +5,7 @@
 #include "sprites_btl_hud.h"
 #include "battle_work.h"
 #include "obj.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -189,7 +190,7 @@ void task_monsgage_2(MonsgageWork* work) {
     ObjAffine* affine;
 
     if (gBtlWork->phase != 0) {
-        DrawSprite(172, 12, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
+        DrawSprite(172, 12, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
 
         if (work->visible != 0) {
             if (work->shownValue * 2 > 4) {

@@ -38,7 +38,7 @@ void HumInit(HumWork* work, const HumDef* def) {
     }
 
     work->def = def;
-    work->tiles = AllocObjTiles(def->tileCount * 32, 0);
+    work->tiles = AllocObjTiles(def->tileCount * 32, NULL);
     work->palette = LoadObjPalette(def->palette, 32);
     work->paletteData = def->palette;
     work->stateTimer = 0;
@@ -52,16 +52,16 @@ void HumInit(HumWork* work, const HumDef* def) {
     work->targetZ = 0;
     work->boundsMargin = 0xFFF0;
     work->unk_17C = 1;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     TaskPoolInit(&work->tasks, 3);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, actor);
     TaskCreate(&work->tasks, &gTaskDescBtlBadstatus, actor);
     work->state = 12;
     work->scaleX = 0x100;
     work->scaleY = 0x100;
-    work->sub = 0;
-    work->sub2 = 0;
-    work->stockMoves = 0;
+    work->sub = NULL;
+    work->sub2 = NULL;
+    work->stockMoves = NULL;
     gRikuBtlWork->actor = actor;
     gBtlWork->actor3 = actor;
     actor->btl = gRikuBtlWork;
@@ -75,13 +75,13 @@ void HumSubInit(HumWork* work, HumSub* sub, const HumSubDef* def) {
         work->sub2 = sub;
     }
 
-    sub->tiles = AllocObjTiles(def->tileCount * 32, 0);
+    sub->tiles = AllocObjTiles(def->tileCount * 32, NULL);
     sub->palette2 = sub->palette = LoadObjPalette(def->palette, 32);
     sub->x = work->actor.x;
     sub->y = work->actor.y;
     sub->z = work->actor.z;
     sub->flags = 0;
-    AnimInit(&sub->anim, 0, 0);
+    AnimInit(&sub->anim, NULL, NULL);
 }
 
 void HumSubReleaseGraphics(HumSub* sub) {
@@ -93,12 +93,12 @@ void HumSubReleaseGraphics(HumSub* sub) {
 
 void HumReleaseResources(HumWork* work) {
     if (gBtlWork->actor2 == &work->actor) {
-        gBtlWork->actor2 = 0;
+        gBtlWork->actor2 = NULL;
     }
 
     HumSubReleaseGraphics(work->sub);
     HumSubReleaseGraphics(work->sub2);
-    gBtlWork->actor3 = 0;
+    gBtlWork->actor3 = NULL;
     ReleaseEnemyBtlObj(&work->actor);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
@@ -192,7 +192,7 @@ s32 HumUpdate(HumWork* work) {
     BtlObj* actor = &work->actor;
     s32 x;
 
-    GetEnemyTargetPosition(actor, &x, 0, 0);
+    GetEnemyTargetPosition(actor, &x, NULL, NULL);
 
     switch (work->state) {
     case 12:

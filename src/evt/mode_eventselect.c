@@ -298,7 +298,7 @@ void Hanabira_c_2(EffectWork* w) {
     x = (w->x >> 8) - (gEventState->x >> 8);
     t = w->y >> 8;
     y = t + (w->z >> 8) - (gEventState->y >> 8);
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - t * 4);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - t * 4);
 }
 
 void Hanabira_c_3(EffectWork* w) {
@@ -313,7 +313,7 @@ void smoke_0(EffectWork* w, EventCharaWork* chara) {
     b = &chara->obj;
     w->x = b->x;
     w->y = b->y - 0x800;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_093215CA);
     AnimInit(&w->anim, gUnk_09EEFD78, gUnk_09EEFD60);
@@ -330,7 +330,7 @@ void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
     b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 
     if (FadeIsActive() == 0) {
@@ -352,7 +352,7 @@ void balloon_0(EffectWork* w, EventCharaWork* chara) {
     b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gFEventTiles);
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
@@ -396,7 +396,7 @@ void EffectDrawObj(EffectWork* w) {
     DrawSprite((w->x >> 8) - (gEventState->x >> 8),
                (y = (w->y >> 8) + gEventCharaParams[w->actor->arg.chara].spriteYOffset) -
                    (gEventState->y >> 8),
-               w->gfx, w->tiles, w->palette, 0, pr, 50);
+               w->gfx, w->tiles, w->palette, NULL, pr, 50);
 }
 
 void EffectReleaseObj(EffectWork* w) {
@@ -411,7 +411,7 @@ void Question_0(EffectWork* w, EventCharaWork* chara) {
     b = &chara->obj;
     w->x = b->x;
     w->y = b->y;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gFEventTiles);
     AnimInit(&w->anim, gFEventAnims, gFEventFrames);
@@ -454,7 +454,7 @@ void TinkerbellParticleInit(EffectWork* w, EventCharaWork* chara) {
     w->y = b->y + d2;
     w->z2 = b->z;
     w->vx = GetRandom() % 232 + 76;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_088A5D7A);
     AnimInit(&w->anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
@@ -488,7 +488,7 @@ void TinkerbellParticleDraw(EffectWork* w) {
 
     DrawSprite((w->x >> 8) - (gEventState->x >> 8),
                ((w->y + w->z2) >> 8) - (gEventState->y >> 8),
-               w->gfx, w->tiles, w->palette, 0, pr,
+               w->gfx, w->tiles, w->palette, NULL, pr,
                -0x1004 - (w->y >> 8) * 4);
 }
 
@@ -505,7 +505,7 @@ void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
     b = &chara->obj;
     w->x = b->x - 1536;
     w->y = b->y + 3072;
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_09321804);
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
@@ -543,7 +543,7 @@ void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
         break;
     }
 
-    w->tiles = AllocObjTiles(128, 0);
+    w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
     SetObjTileSource(w->tiles, gUnk_09321804);
     AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
@@ -635,8 +635,8 @@ s32 down_2(EffectWork* w) {
 
     for (i = 0; i < 8; i++) {
         DrawSprite((s->x[i] >> 8) - (gEventState->x >> 8),
-                   (s->y[i] >> 8) - (gEventState->y >> 8), 0,
-                   w->tiles, w->palette, 0, pr, 50);
+                   (s->y[i] >> 8) - (gEventState->y >> 8), NULL,
+                   w->tiles, w->palette, NULL, pr, 50);
     }
 }
 

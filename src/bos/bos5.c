@@ -2050,7 +2050,7 @@ u8 BosGaUpdateJump(GaWork* work) {
     u32 i;
     s32 t;
 
-    e = 0;
+    e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
         work->statePhase = 2;
@@ -2177,7 +2177,7 @@ u8 BosGaUpdateBodyChase(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
-    e = 0;
+    e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
         work->statePhase = 2;
@@ -2368,7 +2368,7 @@ u8 BosGaUpdateBodyDash(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
-    e = 0;
+    e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
         work->statePhase = 2;
@@ -2543,7 +2543,7 @@ u8 BosGaUpdateBodyJump(GaWork* work) {
     GaEntryWork* e;
     u32 i;
 
-    e = 0;
+    e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
         work->statePhase = 2;
@@ -2727,7 +2727,7 @@ u8 BosGaUpdateGimmick(GaWork* work) {
     u32 i;
     s32 t;
 
-    e = 0;
+    e = NULL;
 
     if (work->flags & GA_FLAG_STATE_REQUESTED) {
         work->statePhase = 2;
@@ -4057,9 +4057,9 @@ void task_bos_md_0(MdWork* work, void* arg) {
     }
 
     for (i = 0; i < 2; i++) {
-        work->gfx[i].tiles = 0;
-        work->gfx[i].src = 0;
-        work->gfx[i].sprite = 0;
+        work->gfx[i].tiles = NULL;
+        work->gfx[i].src = NULL;
+        work->gfx[i].sprite = NULL;
         work->gfx[i].x = 0;
         work->gfx[i].y = 0;
     }
@@ -4210,7 +4210,7 @@ void task_bos_md_2(MdWork* work) {
         wy = (work->gfx[i].y + 256) * 256;
         WorldToScreen(&x, &y, wx, wy, work->gfx[i].z * 256);
         frame = GetBattleSpritePriorityFlags(wy);
-        DrawSprite(x, y, work->gfx[i].sprite, work->gfx[i].tiles, pal, 0, frame,
+        DrawSprite(x, y, work->gfx[i].sprite, work->gfx[i].tiles, pal, NULL, frame,
                    -4100 - (wy >> 6));
     }
 
@@ -4512,7 +4512,7 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->tiles = LoadObjTiles(gUnk_099E367C, 0x800);
     AnimInit(&work->anim, gUnk_09EF9BC0, gUnk_09EF9BB0);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    a.pool = 0;
+    a.pool = NULL;
     a.pattern = arg->pattern;
     a.flags = arg->flags;
 
@@ -4571,7 +4571,7 @@ void task_bos_md_fire_2(MdFireWork* work) {
         ApproachValue(&work->scale, 25, work->scaleSteps);
         sprite = AllocObjAffine(0, work->scale, work->scale, 0);
     } else {
-        sprite = 0;
+        sprite = NULL;
     }
 
     DrawSprite(x, y, AnimUpdate(&work->anim), work->tiles, gfx,
@@ -4697,11 +4697,11 @@ void task_bos_md_dai_2(MdDaiWork* work) {
     frame = GetBattleSpritePriorityFlags(work->y);
 
     if (work->state <= 2) {
-        DrawSprite(x, y + 24, gUnk_09999E0C, work->tiles, work->palette, 0,
+        DrawSprite(x, y + 24, gUnk_09999E0C, work->tiles, work->palette, NULL,
                       frame, -4100 - (work->y >> 8) * 4);
-        DrawSprite(x, y, gUnk_09999E1C, work->tiles, work->palette, 0, frame,
+        DrawSprite(x, y, gUnk_09999E1C, work->tiles, work->palette, NULL, frame,
                       -4100 - (work->y >> 8) * 4);
-        DrawSprite(x + 8, y - 16, gUnk_09999E0C, work->tiles, work->palette, 0,
+        DrawSprite(x + 8, y - 16, gUnk_09999E0C, work->tiles, work->palette, NULL,
                       frame, -4100 - (work->y >> 8) * 4);
     }
 
@@ -4710,7 +4710,7 @@ void task_bos_md_dai_2(MdDaiWork* work) {
 
     if (work->level > 0) {
         DrawSprite(x, y, gUnk_09EF9740[work->level + 1], work->tiles,
-                      work->palette, 0, frame,
+                      work->palette, NULL, frame,
                       -4100 - (work->y >> 8) * 4);
     }
 }
@@ -4786,7 +4786,7 @@ void task_bos_md_hahen_2(MdHahenWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     frame = GetBattleSpritePriorityFlags(work->y);
     DrawSprite(x, y, work->gfx, work->tiles, work->palette,
-                  0, frame, -4100 - (work->y >> 8) * 4);
+                  NULL, frame, -4100 - (work->y >> 8) * 4);
 }
 
 void task_bos_md_hahen_3(MdHahenWork* work) {
@@ -5118,11 +5118,11 @@ void WorldselectDraw() {
 #else
                       gUnk_0999CB90,
 #endif
-                      gWorldselectTitleTiles, gWorldselectOverlayPalette, 0, SPRITE_PRIORITY(1),
+                      gWorldselectTitleTiles, gWorldselectOverlayPalette, NULL, SPRITE_PRIORITY(1),
                       0x3E8);
-        DrawSprite(120, gWorldselectFrameY[0] >> 8, gUnk_0999C394, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
+        DrawSprite(120, gWorldselectFrameY[0] >> 8, gUnk_0999C394, gWorldselectFrameTiles, gWorldselectOverlayPalette, NULL,
                       SPRITE_PRIORITY(1), 0x3E9);
-        DrawSprite(120, gWorldselectFrameY[1] >> 8, gUnk_0999C3C8, gWorldselectFrameTiles, gWorldselectOverlayPalette, 0,
+        DrawSprite(120, gWorldselectFrameY[1] >> 8, gUnk_0999C3C8, gWorldselectFrameTiles, gWorldselectOverlayPalette, NULL,
                       SPRITE_PRIORITY(3), 0xBBA);
     }
 
@@ -5141,7 +5141,7 @@ void WorldselectDraw() {
             y = h + v;
 
             if ((u8)(t - 121) <= 14) {
-                sprite = 0;
+                sprite = NULL;
                 tiles = gWorldselectCardTiles[0];
                 pal = gWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
@@ -5150,12 +5150,12 @@ void WorldselectDraw() {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
             } else if (t <= 61) {
-                sprite = 0;
+                sprite = NULL;
                 tiles = gWorldselectCardTiles[1];
                 pal = gWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(62 - t) / 13];
             } else if (t > 194) {
-                sprite = 0;
+                sprite = NULL;
                 tiles = gWorldselectCardTiles[1];
                 pal = gWorldselectCardPalettes[1];
                 anim = gUnk_09EF9770[(t - 194) / 13];

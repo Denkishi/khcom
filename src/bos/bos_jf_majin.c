@@ -226,7 +226,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
         }
 
         WorldToScreen(&x, &y, jf->body.x, jf->body.y, jf->body.z);
-        DrawSprite(x, work->y + (y - 61), work->gfx, work->tiles, gfx, 0, pal,
+        DrawSprite(x, work->y + (y - 61), work->gfx, work->tiles, gfx, NULL, pal,
                    -4100 - (jf->body.y >> 8) * 4);
     }
 
@@ -1754,7 +1754,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         }
 
         WorldToScreen(&x, &y, work->body.x, work->body.y, work->body.z);
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, pal, prio);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, pal, prio);
     }
 
     if (work->visible2 == 1) {
@@ -1766,7 +1766,7 @@ void task_bos_jf_rock_2(JfRockWork* work) {
         }
 
         WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-        DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, 0, pal, 0xFFF2);
+        DrawSprite(x, y, work->gfx2, work->tiles2, work->palette2, NULL, pal, 0xFFF2);
     }
 
     if (work->shadowVisible == 1) {
@@ -1865,60 +1865,60 @@ void task_bos_jf_borderline_2(JfBorderlineWork* work) {
 
     switch (work->wide) {
     case 0:
-        DrawSprite(sx - 16, sy - 1, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 16, sy - 1, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 16, sy - 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 16, sy - 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx, sy + 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx, sy + 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 16, sy - 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 16, sy - 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 16, sy - 1, work->gfx2, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 16, sy - 1, work->gfx2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 8, sy + 4, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 8, sy + 4, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 8, sy + 4, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 8, sy + 4, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx + 8, sy + 4, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 8, sy + 4, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx + 8, sy + 4, work->gfx2, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 8, sy + 4, work->gfx2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
         break;
     case 1:
-        DrawSprite(sx - 40, sy - 1, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 40, sy - 1, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 40, sy - 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 40, sy - 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 24, sy + 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 24, sy + 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 8, sy + 2, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 8, sy + 2, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 8, sy + 2, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 8, sy + 2, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 24, sy + 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 24, sy + 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 40, sy - 1, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 40, sy - 1, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx + 40, sy - 1, work->gfx2, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 40, sy - 1, work->gfx2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 32, sy + 4, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 32, sy + 4, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
-        DrawSprite(sx - 32, sy + 4, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 32, sy + 4, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx - 16, sy + 6, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx - 16, sy + 6, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx, sy + 7, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx, sy + 7, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx + 16, sy + 6, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 16, sy + 6, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx + 32, sy + 4, work->gfx3, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 32, sy + 4, work->gfx3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFF60);
-        DrawSprite(sx + 32, sy - 4, work->gfx2, work->tiles, work->palette, 0, SPRITE_PRIORITY(1),
+        DrawSprite(sx + 32, sy - 4, work->gfx2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1),
             0xFFF0);
         break;
     }
 
-    DrawSprite(sx, sy - 8, work->gfx5, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 0xFF00);
+    DrawSprite(sx, sy - 8, work->gfx5, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 0xFF00);
 }
 
 void task_bos_jf_borderline_3(JfBorderlineWork* work) {
@@ -2000,7 +2000,7 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     TaskPoolInit(&work->tasks, 4);
 
     if (work->flags & DSD_FLAG_IN_EVENT) {
-        TaskCreate(&work->tasks, &gTaskDescBosDsdMap, 0);
+        TaskCreate(&work->tasks, &gTaskDescBosDsdMap, NULL);
     } else {
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosDsdMap, work);
     }
@@ -2313,7 +2313,7 @@ void* gBosJfMajinFrameTiles[48] __attribute__((aligned(4))) = {
     gUnk_09681C64,
 };
 
-void* gUnk_09EF2990 __attribute__((aligned(4))) = 0;
+void* gUnk_09EF2990 __attribute__((aligned(4))) = NULL;
 
 u32 gBosJfMajinBeamScales[27] __attribute__((aligned(4))) = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
 

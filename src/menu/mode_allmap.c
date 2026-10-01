@@ -27,6 +27,7 @@
 #include "obj_api.h"
 #include "poo_api.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -216,7 +217,7 @@ void mode_allmap_0(s32 a) {
     SetBgPriority(1, 2);
     SetBgMapBlocks(1, gAllmapBg1MapBlocks, 2, 4);
     TaskPoolInit(&gAllmapTaskPool, 1);
-    TaskCreate(&gAllmapTaskPool, &gTaskDescAllmapBar, 0);
+    TaskCreate(&gAllmapTaskPool, &gTaskDescAllmapBar, NULL);
     gAllmapModeState = 0;
     InitAllmap();
     REG_IME = 0;
@@ -354,8 +355,8 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     u8 i;
 
     for (i = 0; i < 4; i++) {
-        work->gfx[i] = 0;
-        work->tiles2[i] = 0;
+        work->gfx[i] = NULL;
+        work->tiles2[i] = NULL;
     }
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {

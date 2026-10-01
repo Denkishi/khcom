@@ -544,7 +544,7 @@ void MPlayOpen(MusicPlayerInfo* mplayInfo, MusicPlayerTrack* tracks, u8 trackCou
     if (soundInfo->MPlayMainHead != NULL) {
         mplayInfo->MPlayMainNext = soundInfo->MPlayMainHead;
         mplayInfo->musicPlayerNext = soundInfo->musicPlayerHead;
-        soundInfo->MPlayMainHead = 0;
+        soundInfo->MPlayMainHead = NULL;
     }
 
     soundInfo->musicPlayerHead = mplayInfo;
@@ -586,7 +586,7 @@ void MPlayStart(MusicPlayerInfo* mplayInfo, SongHeader* songHeader) {
         while (i < songHeader->trackCount && i < mplayInfo->trackCount) {
             TrackStop(mplayInfo, track);
             track->flags = MPT_FLG_EXIST | MPT_FLG_START;
-            track->chan = 0;
+            track->chan = NULL;
             track->cmdPtr = songHeader->part[i];
             i++;
             track++;

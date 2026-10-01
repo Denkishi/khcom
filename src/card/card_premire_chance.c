@@ -28,7 +28,7 @@ void PremireChanceCard_0(PremireChanceCardWork* w, CardSlot* a) {
     CardDef* def;
 
     w->gfxLoaded = 0;
-    w->tiles4 = 0;
+    w->tiles4 = NULL;
 
     if (a->unk_06 <= 8) {
         w->angle = sPremireChanceCardAngles[a->unk_06];
@@ -154,7 +154,7 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
     }
 
     if (w->state == 2 && w->tiles4 != NULL) {
-        DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, 0, SPRITE_PRIORITY(1),
+        DrawSprite(w->x + w->x2, w->y + w->y2, w->gfx, w->tiles4, w->palette3, NULL, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 67);
     }
 }
@@ -235,7 +235,7 @@ u8 UpdatePremireChanceCardToCenter(PremireChanceCardWork* w, void* a) {
 }
 
 u8 StartPremireChanceCardAnim(PremireChanceCardWork* w, void* a) {
-    w->tiles4 = AllocObjTiles(640, 0);
+    w->tiles4 = AllocObjTiles(640, NULL);
     SetObjTileSource(w->tiles4, gUnk_0908B1B4);
     AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);

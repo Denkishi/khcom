@@ -295,7 +295,7 @@ void task_poo_pooh_0(PoohWork* w) {
     sPooWork = w;
     w->unk_CC = 0;
     GetPooStateGauge(&gPoohGauge, &gPoohGaugeTimer);
-    w->targetNode = 0;
+    w->targetNode = NULL;
     w->lookTimer = 0;
     gPoohRequest = 0;
     w->callTimer = 0;
@@ -312,9 +312,9 @@ void task_poo_pooh_0(PoohWork* w) {
     w->targetX = w->pos.x;
     w->targetY = w->pos.y;
     gPoohPos = &w->pos;
-    w->tiles = AllocObjTiles(gPoohHitBox.tileCount * 32, 0);
+    w->tiles = AllocObjTiles(gPoohHitBox.tileCount * 32, NULL);
     w->palette = LoadObjPalette(gPoohHitBox.palette, 32);
-    AnimInit(&w->anim, 0, 0);
+    AnimInit(&w->anim, NULL, NULL);
     SetPoohAction(w, sPoohAction);
     w->hideShadow = 0;
     SetPoohAnimation(w, sPoohAction);
@@ -325,8 +325,8 @@ void task_poo_pooh_0(PoohWork* w) {
     args.pos = &w->pos;
     args.shadowInfo = &w->shadowInfo;
     TaskCreate(&w->tasks, &gTaskDescPooShadowdodai, &args);
-    w->task = 0;
-    w->zzzTask = 0;
+    w->task = NULL;
+    w->zzzTask = NULL;
     w->groundZ = GetPooGroundZ(&w->collider, &w->pos, &w->onCollider);
 }
 
@@ -623,7 +623,7 @@ void UpdatePoohAction(PoohWork* w, PooNode* n) {
 
             w->pos.x += w->collider.pushX;
             w->pos.y += w->collider.pushY;
-            w->targetNode = 0;
+            w->targetNode = NULL;
             ChoosePoohTarget(w, n);
             break;
         }
@@ -1219,7 +1219,7 @@ u8 task_poo_pooh_1(PoohWork* w) {
     w->groundZ = GetPooGroundZ(&w->collider, &w->pos, &w->onCollider);
 
     if (IsPoohNearScreenEdge() != 0) {
-        n = 0;
+        n = NULL;
     } else {
         n = FindPoohTargetNode();
     }
@@ -1330,7 +1330,7 @@ void task_poo_pooh_2(PoohWork* w) {
         w->shadowInfo.priority = 0;
     }
 
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, f, p);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, f, p);
     TaskPoolDraw(&w->tasks);
 }
 
@@ -1574,7 +1574,7 @@ void task_poo_map_0(PooMapWork* w) {
     TaskPoolInit(&w->tasks, 178);
     CreatePooMapobjhitTasks(&w->tasks, CreatePooSpawnTasks(&w->tasks, 0));
     CreatePooPileTasks(&w->tasks);
-    TaskCreate(&w->tasks, &gTaskDescPooMapanime, 0);
+    TaskCreate(&w->tasks, &gTaskDescPooMapanime, NULL);
     LoadBgTiles(3, gPooMapBgDesc.tiles, gPooMapBgDesc.tilesSize);
     LoadBgTiles(2, gPooMapBgDesc.tiles2, gPooMapBgDesc.tilesSize2);
     LoadBgPalette(3, gPooMapBgDesc.palette, gPooMapBgDesc.paletteSize);
@@ -2056,7 +2056,7 @@ void task_poo_sora_0(PooSoraWork* w) {
     gPooSoraCollider = &w->collider;
     gPooSoraNode = &w->node;
     sPooSoraWork = w;
-    w->tiles = AllocObjTiles(0xA00, 0);
+    w->tiles = AllocObjTiles(0xA00, NULL);
     w->palette = LoadObjPalette(gSoraPalette, 32);
     a->height = 16;
     w->onCollider = 0;
@@ -2070,7 +2070,7 @@ void task_poo_sora_0(PooSoraWork* w) {
     a->pos.ground = 0;
     a->speed = 0;
     SetPooCameraFocus(a->pos.x, a->pos.y + a->pos.z);
-    AnimInit(&w->anim, 0, 0);
+    AnimInit(&w->anim, NULL, NULL);
     SetPooSoraAnimation(w, 0, 1);
     w->gfx = AnimGetGfx(&w->anim);
     w->sounds = gPooSoraSounds;
@@ -2696,7 +2696,7 @@ void task_poo_sora_2(PooSoraWork* w) {
 
     x = (a->pos.x >> 8) - gPooScrollX;
     y = (a->pos.y >> 8) + (a->pos.z >> 8) - gPooScrollY;
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, prio, sPooSoraPriority - 1);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, prio, sPooSoraPriority - 1);
     TaskPoolDraw(&w->tasks);
 }
 
@@ -2845,7 +2845,7 @@ void task_poo_trap_2(PooTrapWork* w) {
             w->colliderActive = 1;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0xFFEF);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0xFFEF);
     }
 }
 
@@ -2923,7 +2923,7 @@ void task_poo_balloon_2(PooBalloonObjWork* w) {
 
     if (x >= -16 && x <= 256 && y >= -16 && y <= 176) {
         w->gfx = AnimUpdate(&w->anim);
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->pos->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->pos->y >> 8) * 4);
     }
 }
 
@@ -3116,13 +3116,13 @@ u8 task_poo_freeballoon_1(PooFreeBalloonWork* w) {
     if (IsPooNearScreen(w->x2, w->y2) != 0) {
         w->gfx2 = AnimUpdate(&w->anim2);
     } else {
-        w->gfx2 = 0;
+        w->gfx2 = NULL;
     }
 
     if (IsPooNearScreen(w->x, w->y) != 0) {
         w->gfx = AnimUpdate(&w->anim);
     } else {
-        w->gfx = 0;
+        w->gfx = NULL;
     }
 
     if (w->gfx == NULL && w->gfx2 == NULL) {
@@ -3134,11 +3134,11 @@ u8 task_poo_freeballoon_1(PooFreeBalloonWork* w) {
 
 void task_poo_freeballoon_2(PooFreeBalloonWork* w) {
     if (w->gfx2 != NULL) {
-        DrawSprite(w->x2, w->y2, w->gfx2, w->tiles2, w->palette2, 0, SPRITE_PRIORITY(2), -0x1004 - (w->pos4.y >> 8) * 4);
+        DrawSprite(w->x2, w->y2, w->gfx2, w->tiles2, w->palette2, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->pos4.y >> 8) * 4);
     }
 
     if (w->gfx != NULL) {
-        DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->pos2.y >> 8) * 4);
+        DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->pos2.y >> 8) * 4);
     }
 }
 
@@ -3207,7 +3207,7 @@ u8 task_poo_gauge_1(PooGaugeWork* w) {
 }
 
 void task_poo_gauge_2(PooGaugeWork* w) {
-    DrawSprite(0xDC, 0x18, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 0);
+    DrawSprite(0xDC, 0x18, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 0);
 }
 
 void task_poo_gauge_3(PooGaugeWork* w) {
@@ -3220,13 +3220,13 @@ void task_poo_trapballoon_0(PooBalloonWork* w, PooPos* p) {
     w->pos.z = 0;
     w->pos.ground = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gTrap0006Frames, 4);
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gTrap0006Anims, gTrap0006Frames);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
     TaskPoolInit(&w->tasks, 3);
     w->task = TaskCreate(&w->tasks, &gTaskDescPooShadow, &w->pos);
-    w->freeBalloonTask = 0;
+    w->freeBalloonTask = NULL;
     w->angle = GetRandom();
     ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
 }
@@ -3301,7 +3301,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
             if (w->palette != NULL) {
                 ReleaseObjTiles(w->tiles);
                 ReleaseObjPalette(w->palette);
-                w->palette = 0;
+                w->palette = NULL;
                 ColliderUnregister(&w->collider);
                 RemovePooNode(&w->node);
             }
@@ -3313,7 +3313,7 @@ void task_poo_trapballoon_2(PooBalloonWork* w) {
                 AddPooNode(&w->node, 0x400, &w->pos);
             }
 
-            DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->pos.y >> 8) * 4);
+            DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->pos.y >> 8) * 4);
             TaskPoolUpdate(&w->tasks);
             TaskPoolDraw(&w->tasks);
         }
@@ -3336,7 +3336,7 @@ void task_poo_owlballoon_0(PooOwlBalloonWork* w, PooPos* p) {
     w->pos.z = 0;
     w->pos.ground = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF5E38, 3);
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gUnk_09EF5E44, gUnk_09EF5E38);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
@@ -3371,7 +3371,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
         }
     } else {
@@ -3381,7 +3381,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* w) {
             ColliderInit(&w->collider, 10, 8, 16);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1003 - (w->pos.y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1003 - (w->pos.y >> 8) * 4);
         TaskPoolUpdate(&w->tasks);
         TaskPoolDraw(&w->tasks);
     }
@@ -3482,7 +3482,7 @@ PooNode* FindPoohTargetNode() {
     }
 
     if (sPooBestNodeScore == 0 && best == (PooNode*)ListPoolFirst(&sPooNodes)) {
-        return 0;
+        return NULL;
     }
 
     return best;
@@ -3492,7 +3492,7 @@ void task_poo_honey_0(PooHoneyWork* w, PooPos* p) {
     w->pos.x = p->x;
     w->pos.y = p->y;
     w->pos.z = 0;
-    w->palette = 0;
+    w->palette = NULL;
     w->tileBytes = GetMaxSpriteTileBytes(gPoohHoneyFrames, 14);
     AnimInit(&w->anim, gPoohHoneyAnims, gPoohHoneyFrames);
     AnimStart(&w->anim, 3, ANIM_FLAG_LOOP);
@@ -3612,7 +3612,7 @@ void task_poo_honey_2(PooHoneyWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
             RemovePooNode(&w->node);
         }
@@ -3624,7 +3624,7 @@ void task_poo_honey_2(PooHoneyWork* w) {
             AddPooNode(&w->node, 0x1FA4, &w->pos2);
         }
 
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->pos.y >> 8) * 4);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->pos.y >> 8) * 4);
         TaskPoolUpdate(&w->tasks);
         TaskPoolDraw(&w->tasks);
     }
@@ -3714,7 +3714,7 @@ void task_poo_pile_0(PooPileWork* w, PooPileArgs* a) {
     w->pos.x = a->x;
     w->pos.y = a->y;
     w->pos.z = 0;
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gUnk_09EF5C8C, gUnk_09EF5C6C);
 
     if (a->stage == 8) {
@@ -3728,7 +3728,7 @@ void task_poo_pile_0(PooPileWork* w, PooPileArgs* a) {
     ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
     w->colliderActive = 0;
     TaskPoolInit(&w->tasks, 1);
-    w->task = 0;
+    w->task = NULL;
 }
 
 u8 task_poo_pile_1(PooPileWork* w) {
@@ -3793,7 +3793,7 @@ void task_poo_pile_2(PooPileWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
 
         if (w->colliderActive != 0) {
@@ -3824,7 +3824,7 @@ void task_poo_pile_2(PooPileWork* w) {
             z = 0xFFF1;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), z);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), z);
         TaskPoolUpdate(&w->tasks);
         TaskPoolDraw(&w->tasks);
     }
@@ -3859,7 +3859,7 @@ void task_poo_tigerstump_0(PooStumpWork* w, PooPos* p) {
     w->x = p->x;
     w->y = p->y + 0x800;
     w->unk_2C = 0;
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gUnk_097561D4;
     ColliderSetPosition(&w->collider, w->x, w->y, 0);
 }
@@ -3885,7 +3885,7 @@ void task_poo_tigerstump_2(PooStumpWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
         }
     } else {
@@ -3895,7 +3895,7 @@ void task_poo_tigerstump_2(PooStumpWork* w) {
             ColliderInit(&w->collider, 7, 15, 24);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - ((w->y - 0x700) >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((w->y - 0x700) >> 8) * 4);
     }
 }
 
@@ -3911,7 +3911,7 @@ void task_poo_poohstump_0(PooStumpWork* w, PooPos* p) {
     w->x = p->x;
     w->y = p->y;
     w->unk_2C = 0;
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gUnk_09755F34;
     ColliderSetPosition(&w->collider, w->x, w->y, 0);
 }
@@ -3939,7 +3939,7 @@ void task_poo_poohstump_2(PooStumpWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
         }
     } else {
@@ -3949,7 +3949,7 @@ void task_poo_poohstump_2(PooStumpWork* w) {
             ColliderInit(&w->collider, 7, 7, 14);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - ((w->y - 0x500) >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((w->y - 0x500) >> 8) * 4);
     }
 }
 
@@ -3979,7 +3979,7 @@ void task_poo_piglet_0(PooPigletWork* w) {
     w->z = 0;
     w->state = 0;
     w->timer = 0;
-    w->palette = 0;
+    w->palette = NULL;
     m = 0;
 
     for (i = 0; i < 4; i++) {
@@ -3990,8 +3990,8 @@ void task_poo_piglet_0(PooPigletWork* w) {
         }
     }
 
-    w->tiles = AllocObjTiles(m, 0);
-    AnimInit(&w->anim, 0, 0);
+    w->tiles = AllocObjTiles(m, NULL);
+    AnimInit(&w->anim, NULL, NULL);
     w->animIndex = 4;
     SetPooPigletAnimation(w, 0, 1);
     w->flipped = 0;
@@ -4147,7 +4147,7 @@ void task_poo_piglet_2(PooPigletWork* w) {
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
             SetPoohInteractionEnabled(w->interactionId, 0);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         TaskPoolUpdate(&w->tasks);
@@ -4166,7 +4166,7 @@ void task_poo_piglet_2(PooPigletWork* w) {
 
         ColliderSetPosition(&w->collider, w->x, w->y, w->z);
         pr = w->flipped != 0 ? 0x801 : 0x800;
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, -0x1004 - (w->y >> 8) * 4);
         TaskPoolDraw(&w->tasks);
     }
 }
@@ -4188,8 +4188,8 @@ void task_poo_eeyore_0(PooEeyoreWork* w) {
     w->z = 0;
     w->unk_30 = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gEeyoreFl00Frames, 0x10);
-    w->tiles = 0;
-    w->palette = 0;
+    w->tiles = NULL;
+    w->palette = NULL;
 
     if (IsPooEventDone(2) != 0) {
         w->animId = 0;
@@ -4262,7 +4262,7 @@ void task_poo_eeyore_2(PooEeyoreWork* w) {
     if (IsRectOutsideScreen(x, y, 24, 10, 24, 24) != 0) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ReleaseObjTiles(w->tiles);
         }
 
@@ -4290,7 +4290,7 @@ void task_poo_eeyore_2(PooEeyoreWork* w) {
             w->tiles = AllocObjTiles(w->tileBytes, gEeyoreFl00Tiles);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
         TaskPoolUpdate(&w->tasks);
         TaskPoolDraw(&w->tasks);
     }
@@ -4315,7 +4315,7 @@ void task_poo_owl_0(PooOwlWork* w) {
     w->pos.z = -0x3000;
     w->pos.ground = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gOwlFl00Frames, 18);
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gOwlFl00Frame0;
     AnimInit(&w->anim, gOwlFl00Anims, gOwlFl00Frames);
     w->flying = 0;
@@ -4386,7 +4386,7 @@ void task_poo_owl_2(PooOwlWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -4394,7 +4394,7 @@ void task_poo_owl_2(PooOwlWork* w) {
             w->palette = LoadObjPalette(gOwlPalette, 0x20);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - ((w->pos.y + w->pos.z) >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - ((w->pos.y + w->pos.z) >> 8) * 4);
     }
 }
 
@@ -4424,7 +4424,7 @@ void task_poo_rabbit_0(PooRabbitWork* w) {
     w->y = 0x16E00;
     w->z = 0;
     w->unk_34 = 0;
-    w->palette = 0;
+    w->palette = NULL;
     m = 0;
 
     for (i = 0; i < 2; i++) {
@@ -4435,8 +4435,8 @@ void task_poo_rabbit_0(PooRabbitWork* w) {
         }
     }
 
-    w->tiles = AllocObjTiles(m, 0);
-    AnimInit(&w->anim, 0, 0);
+    w->tiles = AllocObjTiles(m, NULL);
+    AnimInit(&w->anim, NULL, NULL);
     w->animIndex = 7;
     SetPooRabbitAnimation(w, 1, 0);
     w->flipped = 0;
@@ -4546,7 +4546,7 @@ void task_poo_rabbit_2(PooRabbitWork* w) {
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
             SetPoohInteractionEnabled(w->interactionId, 0);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         pool = &w->tasks;
@@ -4560,7 +4560,7 @@ void task_poo_rabbit_2(PooRabbitWork* w) {
 
         ColliderSetPosition(&w->collider, w->x, w->y, w->z);
         pr = w->flipped != 0 ? 0x801 : 0x800;
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, -0x1004 - (w->y >> 8) * 4);
         TaskPoolDraw(pool);
     }
 }
@@ -4731,7 +4731,7 @@ void task_poo_tigger_0(PooTiggerWork* w) {
     w->mode = 2;
     w->heading = 0xAD;
     w->isTigger = 1;
-    w->palette = 0;
+    w->palette = NULL;
     m = 0;
 
     for (i = 0; i < 4; i++) {
@@ -4742,8 +4742,8 @@ void task_poo_tigger_0(PooTiggerWork* w) {
         }
     }
 
-    w->tiles = AllocObjTiles(m, 0);
-    AnimInit(&w->anim, 0, 0);
+    w->tiles = AllocObjTiles(m, NULL);
+    AnimInit(&w->anim, NULL, NULL);
     w->animIndex = 4;
     SetPooTiggerAnimation(w, 0);
     StartPooTiggerHop(w);
@@ -4814,13 +4814,13 @@ void task_poo_tiggerroo_2(PooTiggerWork* w) {
     if (IsRectOutsideScreen(x, y, 56, 8, 24, 24) != 0) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
 
             if (w->isTigger == 0) {
                 if (w->tiles != NULL) {
                     ReleaseObjTiles(w->tiles);
-                    w->tiles = 0;
+                    w->tiles = NULL;
                 }
             }
         }
@@ -4867,7 +4867,7 @@ void task_poo_tiggerroo_2(PooTiggerWork* w) {
             }
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, z);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, z);
         TaskPoolDraw(&w->tasks);
     }
 }
@@ -4891,8 +4891,8 @@ void task_poo_tiggerroo_0(PooTiggerWork* w) {
     w->mode = 2;
     w->heading = 0x2D;
     w->isTigger = 0;
-    w->palette = 0;
-    w->tiles = 0;
+    w->palette = NULL;
+    w->tiles = NULL;
     w->tileBytes = GetMaxSpriteTileBytes(gRooFl00Frames, 18);
     AnimInit(&w->anim, gRooFl00Anims, gRooFl00Frames);
     w->animIndex = 4;
@@ -5012,7 +5012,7 @@ void task_poo_roo_2(PooRooWork* w) {
     t = w->pos.y >> 8;
     y = t + (w->pos.z >> 8) - gPooScrollY;
     pr = w->flipped != 0 ? 0x801 : 0x800;
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, -0x1006 - t * 4);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, -0x1006 - t * 4);
 
     if (w->state != 0) {
         TaskPoolDraw(&w->tasks);
@@ -5039,7 +5039,7 @@ void task_poo_roo_footmark_0(PooFootmarkWork* w) {
     w->y = 0x28E00;
     w->unk_14 = 0;
     w->tiles = LoadObjTiles(gRoFootmarkTiles, 0x500);
-    w->palette = 0;
+    w->palette = NULL;
 
     if (IsPooEventDone(5) == 0) {
         w->gfx = gRoFootmarkFrame0;
@@ -5064,7 +5064,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* w) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             RemovePooNode(&w->node);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -5077,7 +5077,7 @@ void task_poo_roo_footmark_2(PooFootmarkWork* w) {
             }
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0xFFF1);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0xFFF1);
     }
 }
 
@@ -5096,7 +5096,7 @@ void task_poo_leaf_0(PooLeafWork* w, PooSpawnArgs* a) {
     w->z = 0;
     w->prizeId = a->prizeId;
     w->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF610C, 5);
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gUnk_09EF612C, gUnk_09EF610C);
     AnimStart(&w->anim, 0, 0);
     w->gfx = AnimGetGfx(&w->anim);
@@ -5132,7 +5132,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
             w->playing = 0;
         }
@@ -5149,7 +5149,7 @@ void task_poo_leaf_2(PooLeafWork* w) {
             w->gfx = AnimUpdate(&w->anim);
 
             if (AnimIsFinished(&w->anim) == 0) {
-                DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0xFFF1);
+                DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0xFFF1);
             } else if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) == 0) {
                 *p = 0;
             }
@@ -5172,7 +5172,7 @@ void task_poo_tanpopo_0(PooTanpopoWork* w, PooSpawnArgs* a) {
     w->prizeId = a->prizeId;
     w->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF6130, 2);
     w->tileBytes2 = GetMaxSpriteTileBytes(gUnk_09EF613C, 6);
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gUnk_09EF6138, gUnk_09EF6130);
     AnimStart(&w->anim, 0, 0);
     w->gfx = AnimGetGfx(&w->anim);
@@ -5212,7 +5212,7 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjTiles(w->tiles2);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
             w->playing = 0;
         }
@@ -5229,10 +5229,10 @@ void task_poo_tanpopo_2(PooTanpopoWork* w) {
         if (*p != 0) {
             w->gfx = AnimUpdate(&w->anim);
             w->gfx2 = AnimUpdate(&w->anim2);
-            DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0xFFF1);
+            DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0xFFF1);
 
             if (AnimIsFinished(&w->anim2) == 0) {
-                DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, 0, SPRITE_PRIORITY(2), 100);
+                DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, NULL, SPRITE_PRIORITY(2), 100);
             } else if ((w->collider.standFlags & COLLIDER_STAND_STOOD_ON) == 0) {
                 *p = 0;
             }
@@ -5254,7 +5254,7 @@ void task_poo_ti_board_0(PooBoardWork* w, PooPos* p) {
     w->y = p->y;
     w->z = 0;
     w->tiles = LoadObjTiles(gUnk_097565FC, 0x200);
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gUnk_097565E8;
     ColliderSetPosition(&w->collider, w->x, w->y, w->z);
 }
@@ -5279,7 +5279,7 @@ void task_poo_ti_board_2(PooBoardWork* w) {
     if (IsRectOutsideScreen(x, y, 16, 1, 8, 8) != 0) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
         }
     } else {
@@ -5288,7 +5288,7 @@ void task_poo_ti_board_2(PooBoardWork* w) {
             ColliderInit(&w->collider, 7, 8, 16);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
     }
 }
 
@@ -5307,7 +5307,7 @@ void task_poo_eeyoretail_0(PooEeyoreTailWork* w) {
     w->z = -0x2000;
     w->unk_18 = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gEeyoreFl00Frames, 0x10);
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gEeyoreFl00Frame15;
     TaskPoolInit(&w->tasks, 1);
     CreatePooShadowscaleTask(&w->tasks, &w->x, 0x66);
@@ -5345,7 +5345,7 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -5361,7 +5361,7 @@ void task_poo_eeyoretail_2(PooEeyoreTailWork* w) {
             z = 10;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, z);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, z);
 
         if (IsPoohBeeChaseOver() != 0) {
             TaskPoolDraw(&w->tasks);
@@ -5392,7 +5392,7 @@ void task_poo_honeycomb_0(PooHoneycombWork* w) {
     w->z = -0xA00;
     w->unk_30 = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gEeHoneycombFrames, 1);
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gEeHoneycombFrame0;
     ColliderSetPosition(&w->collider, w->x, w->y, 0);
     w->colliderActive = 0;
@@ -5455,7 +5455,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* w) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
-            w->palette = 0;
+            w->palette = NULL;
         }
 
         p = &w->colliderActive;
@@ -5477,7 +5477,7 @@ void task_poo_honeycomb_2(PooHoneycombWork* w) {
             *p = 1;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(3), 0xFFF0);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(3), 0xFFF0);
     }
 }
 
@@ -5506,7 +5506,7 @@ void task_poo_vegetable_0(PooVegetableWork* w) {
     w->z = 0;
     w->unk_30 = 0;
     w->tileBytes = GetMaxSpriteTileBytes(gRaVegetablesFrames, 1);
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gRaVegetablesFrame0;
     ColliderSetPosition(&w->collider, w->x, w->y, w->z);
 }
@@ -5532,7 +5532,7 @@ void task_poo_vegetable_2(PooVegetableWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
             ColliderUnregister(&w->collider);
         }
     } else {
@@ -5542,7 +5542,7 @@ void task_poo_vegetable_2(PooVegetableWork* w) {
             ColliderInit(&w->collider, 7, 0x26, 12);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
     }
 }
 
@@ -5800,7 +5800,7 @@ void task_poo_wagon_0(PooWagonWork* w) {
         w->pos.y += 0xC00;
     }
 
-    w->palette = 0;
+    w->palette = NULL;
     w->gfx = gRaWagonFrame11;
     w->gfx2 = gRaWagonFrame1;
     w->gfx3 = gRaWagonFrame12;
@@ -5896,7 +5896,7 @@ void task_poo_wagon_2(PooWagonWork* w) {
             ReleaseObjTiles(w->tiles2);
             ReleaseObjTiles(w->tiles3);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
 
         return;
@@ -5938,15 +5938,15 @@ void task_poo_wagon_2(PooWagonWork* w) {
         }
     }
 
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonPriority);
-    DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonPriority2);
+    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), sPooWagonPriority);
+    DrawSprite(x, y, w->gfx2, w->tiles2, w->palette, NULL, SPRITE_PRIORITY(2), sPooWagonPriority2);
     p = -0x1002 - ((w->pos.y - 0xE00) >> 8) * 4;
 
     if (IsPooSoraOverWagon() == 0 && n > p && (d == 83 || d == 173)) {
         p = n - 1;
     }
 
-    DrawSprite(x, y, w->gfx3, w->tiles3, w->palette, 0, SPRITE_PRIORITY(2), p);
+    DrawSprite(x, y, w->gfx3, w->tiles3, w->palette, NULL, SPRITE_PRIORITY(2), p);
 }
 
 void task_poo_wagon_3(PooWagonWork* w) {
@@ -5987,7 +5987,7 @@ void task_poo_wagonwheel_0(PooWheelWork* w) {
     w->z = 0;
     w->unk_30 = 0;
     w->tileBytes = 0x180;
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gRaWagonAnims, gRaWagonFrames);
     AnimStart(&w->anim, w->animId, ANIM_FLAG_LOOP);
     w->speed = 0;
@@ -6034,7 +6034,7 @@ void task_poo_wagonwheel_2(PooWheelWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
 
             if (w->animId == 3) {
                 w->animId = 4;
@@ -6054,7 +6054,7 @@ void task_poo_wagonwheel_2(PooWheelWork* w) {
             sPooWagonWheelPriority = -0x1004 - (w->y >> 8) * 4;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), sPooWagonWheelPriority);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), sPooWagonWheelPriority);
     }
 }
 
@@ -6093,7 +6093,7 @@ void task_poo_spark_2(PooSparkWork* w) {
 
     x = (w->pos.x >> 8) - gPooScrollX;
     y = (w->pos.y >> 8) + (w->pos.z >> 8) - gPooScrollY;
-    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 0x50);
+    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 0x50);
 }
 
 void task_poo_spark_3(PooSparkWork* w) {
@@ -6124,7 +6124,7 @@ void task_poo_bee_0(PooBeeWork* w) {
     AnimInit(&w->anim, a, b);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
-    w->palette = 0;
+    w->palette = NULL;
     sPooBeeCount = 0;
     w->releaseTimer = 8;
     w->setupPending = 1;
@@ -6203,7 +6203,7 @@ void task_poo_bee_2(PooBeeWork* w) {
         if (w->palette != NULL) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
-            w->palette = 0;
+            w->palette = NULL;
         }
 
         return;
@@ -6217,7 +6217,7 @@ void task_poo_bee_2(PooBeeWork* w) {
     for (i = 0; i < sPooBeeCount + 1 && i <= 3; i++) {
         u = (w->sub[i].x >> 8) - gPooScrollX;
         v = (w->sub[i].y >> 8) + (w->sub[i].z >> 8) - gPooScrollY;
-        DrawSprite(u, v, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), i - ((w->y >> 8) * 4 + 0x1003));
+        DrawSprite(u, v, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), i - ((w->y >> 8) * 4 + 0x1003));
     }
 }
 
@@ -6248,7 +6248,7 @@ void task_poo_beeAfterEvent_0(PooBeeAfterEventWork* w) {
     AnimInit(&w->anim2, gEeBeeAnims, gEeBeeFrames);
     AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     w->gfx2 = AnimGetGfx(&w->anim2);
-    w->palette = 0;
+    w->palette = NULL;
 }
 
 u8 task_poo_beeAfterEvent_1(PooBeeAfterEventWork* w) {
@@ -6269,7 +6269,7 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* w) {
             ReleaseObjPalette(w->palette);
             ReleaseObjTiles(w->tiles);
             ReleaseObjTiles(w->tiles2);
-            w->palette = 0;
+            w->palette = NULL;
 
             if (IsPooMapBeeVisible() == 0) {
                 m4aSongNumStop(SONG_SND_386);
@@ -6283,8 +6283,8 @@ void task_poo_beeAfterEvent_2(PooBeeAfterEventWork* w) {
             m4aSongNumStart(SONG_SND_386);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1002 - (w->y >> 8) * 4);
-        DrawSprite(x - 5, y + 5, w->gfx2, w->tiles2, w->palette, 0, SPRITE_PRIORITY(2), -0x1003 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1002 - (w->y >> 8) * 4);
+        DrawSprite(x - 5, y + 5, w->gfx2, w->tiles2, w->palette, NULL, SPRITE_PRIORITY(2), -0x1003 - (w->y >> 8) * 4);
     }
 }
 
@@ -6332,7 +6332,7 @@ void task_poo_cabbage_0(PooCabbageWork* w) {
     r = GetRandom();
     w->angle = (r & 15) + 88;
     w->speed = 0x1CC;
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, gRaVegetablesAnims, gRaVegetablesFrames);
     w->state = 2;
     AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
@@ -6342,7 +6342,7 @@ void task_poo_cabbage_0(PooCabbageWork* w) {
     w->colliderActive = 1;
     TaskPoolInit(&w->tasks, 2);
     CreatePooShadowscaleTask(&w->tasks, &w->x, 0x80);
-    w->task = 0;
+    w->task = NULL;
     w->age = 0;
     w->wasOnScreen = 0;
     w->animating = 1;
@@ -6481,7 +6481,7 @@ void task_poo_cabbage_2(PooCabbageWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -6505,7 +6505,7 @@ void task_poo_cabbage_2(PooCabbageWork* w) {
             z = 0xDA38 - t[w->stackIndex - 9];
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), z);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), z);
 
         if (w->state != 4 && w->state != 1) {
             TaskPoolUpdate(&w->tasks);
@@ -6545,7 +6545,7 @@ u8 CanSpawnPooCabbage() {
 
 u8 task_poo_cabbageborn_1(PooCabbageBornWork* w) {
     if (CanSpawnPooCabbage() != 0 && w->timer == 0) {
-        TaskCreate(&w->tasks, &gTaskDescPooCabbage, 0);
+        TaskCreate(&w->tasks, &gTaskDescPooCabbage, NULL);
         w->timer = 40;
     }
 
@@ -6603,7 +6603,7 @@ void task_poo_mapobjhit_0(PooMapObjHitWork* w, PooMapObjHitArgs* a) {
     w->prizeId = a->prizeId;
     w->desc = a->desc;
     w->tileBytes = GetMaxSpriteTileBytes(w->desc->gfxTable, w->desc->gfxCount);
-    w->palette = 0;
+    w->palette = NULL;
     AnimInit(&w->anim, w->desc->anims, w->desc->gfxTable);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
     w->gfx = AnimGetGfx(&w->anim);
@@ -6660,7 +6660,7 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -6669,7 +6669,7 @@ void task_poo_mapobjhit_2(PooMapObjHitWork* w) {
         }
 
         pr = 0x800;
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, pr, 0xFFF1);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, pr, 0xFFF1);
         SetPooRabbitTalkBlocked(1);
     }
 }
@@ -6762,7 +6762,7 @@ void PooPrizeUpdateBounce(PooPrizeWork* w) {
         }
 
         if (w->timer++ > 480) {
-            w->update = 0;
+            w->update = NULL;
         }
     }
 }
@@ -6791,7 +6791,7 @@ void PooPrizeUpdateCollect(PooPrizeWork* w) {
     w->scale -= 2;
 
     if (w->timer > 60) {
-        w->update = 0;
+        w->update = NULL;
     } else {
         w->timer++;
     }
@@ -6874,7 +6874,7 @@ void task_poo_prize_2(PooPrizeWork* w) {
     if (s != 256) {
         aff = AllocObjAffine(0, s, s, 0);
     } else {
-        aff = 0;
+        aff = NULL;
     }
 
     DrawSprite(x, y, w->gfx, w->tiles, w->palette, aff, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
@@ -6923,7 +6923,7 @@ void task_poo_zzz_2(PooZzzWork* w) {
     if (x >= -0x20 && x <= 0x110 && y >= -0x20 && y <= 0xC0) {
         g = AnimUpdate(&w->anim);
         w->gfx = g;
-        DrawSprite(x, y, g, w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 0x0B);
+        DrawSprite(x, y, g, w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 0x0B);
     }
 }
 
@@ -6988,8 +6988,8 @@ void PooBflyPartInit(PooBflyPart* p) {
         p->targetY = p->pointAY;
     }
 
-    p->tiles = AllocObjTiles(0x40, 0);
-    AnimInit(&p->anim, 0, 0);
+    p->tiles = AllocObjTiles(0x40, NULL);
+    AnimInit(&p->anim, NULL, NULL);
     PooBflyPartSetAnimation(p);
     p->gfx = AnimGetGfx(&p->anim);
 }
@@ -7062,7 +7062,7 @@ u8 PooBflyPartDraw(PooBflyPart* p, void* pal) {
 
     pr = p->flipped != 0 ? 0x801 : 0x800;
     PooBflyPartSetAnimation(p);
-    DrawSprite(x, y, p->gfx, p->tiles, pal, 0, pr, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, p->gfx, p->tiles, pal, NULL, pr, -0x1004 - (p->y >> 8) * 4);
     return 1;
 }
 
@@ -7142,7 +7142,7 @@ void task_poo_mapbee_2(PooMapBeeWork* w) {
         w->onScreen = 0;
     } else {
         SetPooMapBeeVisible(1);
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
     }
 }
 
@@ -7166,7 +7166,7 @@ void task_poo_mapbeeborn_0(PooMapBornWork* w, PooPos* p) {
     w->unk_7C = 0;
     w->armed = 0;
     TaskPoolInit(&w->tasks, 1);
-    w->task = 0;
+    w->task = NULL;
 }
 
 u8 task_poo_mapbeeborn_1(PooMapBornWork* w) {
@@ -7255,7 +7255,7 @@ void task_poo_mapbutterfly_2(PooMapButterflyWork* w) {
     if (IsRectOutsideScreen(x, y, 8, 8, 8, 8) != 0) {
         w->onScreen = 0;
     } else {
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
     }
 }
 
@@ -7275,7 +7275,7 @@ void task_poo_mapbutterflyborn_0(PooMapBornWork* w, PooPos* p) {
     w->unk_7C = 0;
     w->armed = 0;
     TaskPoolInit(&w->tasks, 1);
-    w->task = 0;
+    w->task = NULL;
 }
 
 u8 task_poo_mapbutterflyborn_1(PooMapBornWork* w) {
@@ -7331,7 +7331,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* w) {
     w->y = 0x57200;
     w->z = 0;
     w->unk_30 = 0;
-    w->palette = 0;
+    w->palette = NULL;
     w->tileBytes = GetMaxSpriteTileBytes(gRabbitBl00Frames, 15);
     AnimInit(&w->anim, gRabbitBl00Anims, gRabbitBl00Frames);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -7366,7 +7366,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* w) {
             ReleaseObjPalette(w->palette);
             ColliderUnregister(&w->collider);
             SetPoohInteractionEnabled(w->interactionId, 0);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         w->gfx = AnimUpdate(&w->anim);
@@ -7379,7 +7379,7 @@ void task_poo_rabbitAfterEvent_2(PooRabbitAfterEventWork* w) {
             SetPoohInteractionEnabled(w->interactionId, 1);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, -0x1004 - (w->y >> 8) * 4);
         TaskPoolDraw(&w->tasks);
     }
 }
@@ -7399,7 +7399,7 @@ void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* w) {
     w->y = 0x57100;
     w->unk_14 = 0;
     w->unk_18 = 0;
-    w->palette = 0;
+    w->palette = NULL;
     w->tileBytes = GetMaxSpriteTileBytes(gRaVegetablesFrames, 13);
     w->gfx = gRaVegetablesFrame9;
 }
@@ -7420,7 +7420,7 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w) {
         if (w->palette != NULL) {
             ReleaseObjTiles(w->tiles);
             ReleaseObjPalette(w->palette);
-            w->palette = 0;
+            w->palette = NULL;
         }
     } else {
         if (w->palette == NULL) {
@@ -7428,7 +7428,7 @@ void task_poo_cabbageAfterEvent_2(PooCabbageAfterEventWork* w) {
             w->tiles = AllocObjTiles(w->tileBytes, gRaVegetablesTiles);
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - (w->y >> 8) * 4);
     }
 }
 

@@ -3605,7 +3605,7 @@ void event_chara_2(EventCharaWork* p) {
 
         x = GetEventCharaScreenX(p);
         y = (p->unk_184 >> 8) + gEventCharaParams[p->arg.chara].spriteYOffset - (gEventState->y >> 8);
-        DrawSprite(x, y, p->gfx, p->tiles, p->palette, 0, h, 50);
+        DrawSprite(x, y, p->gfx, p->tiles, p->palette, NULL, h, 50);
     }
 
     p->obj.z = save;
@@ -6846,7 +6846,7 @@ void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl) {
     const MsgFaceAnim* anim;
     u32 n;
 
-    p->tiles = AllocObjTiles(0x12C0, 0);
+    p->tiles = AllocObjTiles(0x12C0, NULL);
     p->palette = AllocObjPalette(32);
     p->face = ctl;
     p->steps = 0;
@@ -6979,7 +6979,7 @@ void msgface_2(MsgFaceWork* p) {
             if (v != 0) {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, SPRITE_FLAG_HFLIP, 50);
             } else {
-                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, v, 50);
+                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, v, 50);
             }
         }
     }
@@ -7150,7 +7150,7 @@ void RequestMsgfaceSlideOut(MsgFaceControl* p) {
 
 void msgwait_0(MsgWaitWork* p, u8* arg) {
     p->unk_103 = arg[0];
-    p->tiles = AllocObjTiles(64, 0);
+    p->tiles = AllocObjTiles(64, NULL);
     p->palette = LoadObjPalette(gBStatesPalette, 32);
     LoadObjPaletteBank(p->palette->index, gBStatesPalette);
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
@@ -7201,11 +7201,11 @@ void msgwait_2(MsgWaitWork* p) {
 
     if (v != 0) {
         DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx,
-                   p->tiles, p->palette, 0, 0, 0);
+                   p->tiles, p->palette, NULL, 0, 0);
     } else {
         DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8,
                    gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles,
-                   p->palette, 0, 0, 0);
+                   p->palette, NULL, 0, 0);
     }
 }
 
@@ -7217,7 +7217,7 @@ void msgwait_3(MsgWaitWork* p) {
 
 void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     p->unk_103 = *a;
-    p->tiles = AllocObjTiles(64, 0);
+    p->tiles = AllocObjTiles(64, NULL);
     p->palette = LoadObjPalette(gBStatesPalette, 32);
     LoadObjPaletteBank(p->palette->index, gBStatesPalette);
     FadeSetPaletteExcluded(p->palette->index + 16, 1);
@@ -7225,7 +7225,7 @@ void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
     AnimInit(&p->anim, gFEventAnims, gFEventFrames);
     AnimStart(&p->anim, 2, ANIM_FLAG_LOOP);
     p->timer = 0;
-    p->tiles2 = AllocObjTiles(288, 0);
+    p->tiles2 = AllocObjTiles(288, NULL);
     p->palette2 = LoadObjPalette(gUnk_09614418, 32);
     LoadObjPaletteBank(p->palette2->index, gUnk_09614418);
     SetObjTileSource(p->tiles2, gUnk_090A4664);
@@ -7329,15 +7329,15 @@ void msgwait_yesno_2(MsgWaitWork* p) {
     switch (p->choiceShown) {
     case 0:
         if (gEventState->unk_8B != 0) {
-            DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, 0, 0, 0);
+            DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
         } else {
-            DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, 0, 0, 0);
+            DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
         }
 
         break;
     case 1:
-        DrawSprite(120, 80, gUnk_09EF126C[1], p->tiles3, p->palette3, 0, 0, 10);
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, 0, SPRITE_FLAG_HFLIP, 9);
+        DrawSprite(120, 80, gUnk_09EF126C[1], p->tiles3, p->palette3, NULL, 0, 10);
+        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
         DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots, p->textSlotCount)) >> 1, 67, p->textSlots, p->palette4, 0, p->textSlotCount);
         DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots2, p->textSlotCount2)) >> 1, 82, p->textSlots2, p->palette4, 0, p->textSlotCount2);
         break;

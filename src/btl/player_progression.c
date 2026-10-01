@@ -182,7 +182,7 @@ u8 CanLevelUp() {
 
 const EnemyBaseStats* GetEnemyBaseStats(u16 i) {
     if (i > 0x35) {
-        return 0;
+        return NULL;
     }
 
     return &sEnemyBaseStats[i];

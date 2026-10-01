@@ -320,7 +320,7 @@ void BgFxReset() {
     gBgFx->scaleX = 0x100;
     gBgFx->scaleY = 0x100;
     gBgFx->angle = 0;
-    gBgFx->update = 0;
+    gBgFx->update = NULL;
     gBgFx->unk_08 = 0;
     gBgFx->z = 0;
     gBgFx->flags = BGFX_FLAG_ACTIVE;
@@ -372,7 +372,7 @@ void BgFxInit(u16 a, u16 bg) {
     }
 
     SetBgBlend(bg, 16, 16);
-    gBgFx->update = 0;
+    gBgFx->update = NULL;
     gBgFx->priority = 0xFF;
     gBgFx->bg = bg;
     BgFxReset();
@@ -387,7 +387,7 @@ void BgFxUpdate() {
     if (gBtlWork->flags & BTL_FLAG_STOP_BGFX) {
         gBtlWork->flags &= ~BTL_FLAG_STOP_BGFX;
         gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
-        gBgFx->update = 0;
+        gBgFx->update = NULL;
         BgAnimStop();
         SetBgBlend(gBgFx->bg, 16, 16);
     }
@@ -426,7 +426,7 @@ void BgFxUpdateBase() {
 
     if (BgAnimIsStopped()) {
         SetBgBlend(gBgFx->bg, 16, 16);
-        gBgFx->update = 0;
+        gBgFx->update = NULL;
         gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
 
         if (gBgFx->flags & BGFX_FLAG_SCREEN_DIMMED) {
@@ -1215,7 +1215,7 @@ void BgFxStartWideThunder(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q) {
 
 void BgFxUpdateEnemyDeath() {
     u16 a;
-    BgAnimGetFrameState(&a, 0);
+    BgAnimGetFrameState(&a, NULL);
 
     if (a > 3) {
         gBgFx->scaleX += 12;
@@ -1453,7 +1453,7 @@ void func_08014294() {
 
         if (gBgFx->unk_08 <= 0) {
             BgAnimStop();
-            gBgFx->update = 0;
+            gBgFx->update = NULL;
         }
 
         break;
@@ -2149,7 +2149,7 @@ void BgFxUpdateBossDeathFlash() {
             BgAnimStop();
             FadeStartIn(FADE_MODE_ADD_WHITE, 120);
             FadeLock();
-            gBgFx->update = 0;
+            gBgFx->update = NULL;
             gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
         }
 
@@ -3402,7 +3402,7 @@ void BgFxUpdateFullscreen() {
 
         if (gBgFx->unk_08 > 15) {
             BgAnimStop();
-            gBgFx->update = 0;
+            gBgFx->update = NULL;
             gBgFx->flags &= ~BGFX_FLAG_ACTIVE;
         } else {
             gBgFx->unk_08++;
@@ -3976,7 +3976,7 @@ void BgFxUpdateGround() {
     ApproachValue(&gBgFx->scaleX, 0x300, gBgFx->unk_0A);
     gBgFx->scaleY = gBgFx->scaleX;
     gBgFx->unk_0A--;
-    BgAnimGetFrameState(&k, 0);
+    BgAnimGetFrameState(&k, NULL);
 
     if (k <= 4) {
         t = (gBgFx->scaleX * 5) >> 5;

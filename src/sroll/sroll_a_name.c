@@ -6,6 +6,7 @@
 #include "gba/defines.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -108,7 +109,7 @@ void task_sroll_a_name_2(SrollANameWork* w) {
         LoadPalette(&gUnk_09D6CD74[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((w->palette->index & 15) * 32), 32);
     }
 
-    DrawSprite(x >> 8, y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, flags,
+    DrawSprite(x >> 8, y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, flags,
                0xFF0 - w->kind);
 }
 

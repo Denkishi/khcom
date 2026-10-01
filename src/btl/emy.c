@@ -898,7 +898,7 @@ u8 task_emy_00_1(EmyWork* work) {
         break;
     case 20:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
-            GetEnemyTargetPosition(act, &pos, 0, 0);
+            GetEnemyTargetPosition(act, &pos, NULL, NULL);
             AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             act->x += gSineTable[w->angle] * w->speed >> 8;
             act->y += -gSineTable[w->angle + 64] * w->speed >> 8;
@@ -991,7 +991,7 @@ u8 task_emy_00_1(EmyWork* work) {
         }
 
         if (GetRandom() % w->def->turnInterval == 0) {
-            GetEnemyTargetPosition(act, &pos2, 0, 0);
+            GetEnemyTargetPosition(act, &pos2, NULL, NULL);
 
             if (act->x > pos2) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -1054,7 +1054,7 @@ void task_emy_00_2(EmyWork* work) {
         }
 
         if (scale == 0x100 && rot == scale) {
-            affine = 0;
+            affine = NULL;
         } else if (scale <= 0xFF) {
             affine = AllocObjAffine(0, rot, scale, 0);
         } else {
@@ -1322,7 +1322,7 @@ u8 task_emy_03_1(Emy03Work* work) {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         } else if (work->base.stateTimer == 1) {
-            GetEnemyTargetPosition(act, &w->targetX, &w->targetY, 0);
+            GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
             w->unk_18C = 0;
             BgFxStartThunder(0, act->x, act->y, act->z - 0x1000, w->targetX,
                 w->targetY, 0, 0xAC);
@@ -1383,7 +1383,7 @@ u8 task_emy_04_1(Emy04Work* work) {
         }
 
         if (work->base.stateTimer == 3) {
-            best = 0;
+            best = NULL;
             bestv = 0;
 
             for (p = ListPoolFirst(&gBtlWork->pool); p != NULL;
@@ -1457,7 +1457,7 @@ u8 task_emy_06_1(Emy06Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        GetEnemyTargetPosition(act, 0, &pos, 0);
+        GetEnemyTargetPosition(act, NULL, &pos, NULL);
         d = act->y - pos;
 
         if (d >= 0 ? d <= 0xFFF : pos - act->y <= 0xFFF) {
@@ -1483,7 +1483,7 @@ u8 task_emy_06_1(Emy06Work* work) {
             m &= 3;
 
             if (m == 0) {
-                GetEnemyTargetPosition(act, &tx, &ty, 0);
+                GetEnemyTargetPosition(act, &tx, &ty, NULL);
                 work->base.angle = GetAngle(act->x, act->y, tx, ty);
             }
 
@@ -1636,7 +1636,7 @@ u8 task_emy_07_1(Emy07Work* work) {
     case 18:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
 
         if (act->x < pos) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -1742,7 +1742,7 @@ u8 task_emy_07_1(Emy07Work* work) {
                 w->base.tiles);
         }
 
-        GetEnemyTargetPosition(act, &pos2, 0, 0);
+        GetEnemyTargetPosition(act, &pos2, NULL, NULL);
 
         if (act->x < pos2) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -2016,7 +2016,7 @@ u8 task_emy_14_1(EmyWork* work) {
     act = &work->actor;
 
     if (_0800CBDC(work)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
@@ -2147,8 +2147,8 @@ void task_emy_15_3(EmyWork* work) {
 
 void task_emy_16_0(Emy16Work* work, void* obj) {
     EmyInit(&work->base, &sEmy16Def, obj);
-    work->pTask = 0;
-    work->bTask = 0;
+    work->pTask = NULL;
+    work->bTask = NULL;
     TaskPoolInit(&work->tasks, 2);
 }
 
@@ -2377,7 +2377,7 @@ void task_emy_16_b_2(Emy16bWork* work) {
         angle = gBtlWork->scale;
 
         if (angle == 0x100) {
-            affine = 0;
+            affine = NULL;
 
             if (work->facingLeft == 0) {
                 pri |= 1;
@@ -2456,7 +2456,7 @@ void task_emy_16_p_2(Emy16pWork* work) {
     gfx = AnimGetGfx(&work->anim);
     pri = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, pri,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, pri,
         -0x1004 - ((work->y + 0x1000) >> 8) * 4);
 }
 
@@ -2635,7 +2635,7 @@ u8 task_emy_19_1(Emy19Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x3BFF : pos - act->x <= 0x3BFF) {
@@ -2777,7 +2777,7 @@ u8 task_emy_21_1(Emy21Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = pos - act->x;
 
         if (d >= 0 ? d <= 0x3FFF : act->x - pos <= 0x3FFF) {
@@ -2988,7 +2988,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case 19:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos, 0, 0);
+            GetEnemyTargetPosition(act, &pos, NULL, NULL);
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
 
@@ -3027,7 +3027,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case 20:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos2, 0, 0);
+            GetEnemyTargetPosition(act, &pos2, NULL, NULL);
 
             if (act->x > pos2) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -3053,7 +3053,7 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case 21:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos3, 0, 0);
+            GetEnemyTargetPosition(act, &pos3, NULL, NULL);
 
             if (act->x > pos3) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -3095,7 +3095,7 @@ u8 task_emy_23_1(Emy23Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
@@ -3118,7 +3118,7 @@ u8 task_emy_23_1(Emy23Work* work) {
             break;
         case 3:
             if (work->base.anim.timer == 0) {
-                GetEnemyTargetPosition(act, &t, 0, 0);
+                GetEnemyTargetPosition(act, &t, NULL, NULL);
                 work->base.vz = 0x200;
                 w->targetX = t;
             }
@@ -3463,7 +3463,7 @@ u8 task_emy_27_1(EmyWork* work) {
     act = &work->actor;
 
     if (_0800CBDC(work)) {
-        GetEnemyTargetPosition(act, 0, &y, 0);
+        GetEnemyTargetPosition(act, NULL, &y, NULL);
         d = act->y - y;
 
         if (d >= 0 ? d <= 0xFFF : y - act->y <= 0xFFF) {
@@ -3491,7 +3491,7 @@ u8 task_emy_27_1(EmyWork* work) {
         break;
     case 0x13:
         AnimChangeWithDef(sEmy27AnimDefs, &w->anim, 1, ANIM_FLAG_LOOP, w->tiles);
-        GetEnemyTargetPosition(act, &tx, &ty, 0);
+        GetEnemyTargetPosition(act, &tx, &ty, NULL);
 
         if (work->stateTimer % 6 == 0) {
             work->angle = GetAngle(act->x, act->y, tx, ty);
@@ -3739,7 +3739,7 @@ u8 task_emy_29_1(Emy29Work* work) {
     act = &work->base.actor;
 
     if (_0800CBDC(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x27FF : pos - act->x <= 0x27FF) {
@@ -3842,7 +3842,7 @@ u8 task_emy_30_1(EmyWork* work) {
 
     w = work;
     act = &work->actor;
-    GetEnemyTargetPosition(act, &x, &y, 0);
+    GetEnemyTargetPosition(act, &x, &y, NULL);
 
     if (_0800CBDC(work)) {
         r = GetRandom();
@@ -4415,7 +4415,7 @@ u8 task_emy_37_1(Emy37Work* work) {
 
             AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 2, ANIM_FLAG_LOOP, w->base.tiles);
             w->speed = 0;
-            GetEnemyTargetPosition(act, &x, &y, 0);
+            GetEnemyTargetPosition(act, &x, &y, NULL);
             w->angle = GetAngle(act->x, act->y, x, y);
         }
 
@@ -4424,7 +4424,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 x;
             s32 y;
 
-            GetEnemyTargetPosition(act, &x, &y, 0);
+            GetEnemyTargetPosition(act, &x, &y, NULL);
             angle = GetAngle(act->x, act->y, x, y);
             ApproachAngle(&w->angle, angle, 4);
         }
@@ -4478,7 +4478,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             s32 sample;
             s32 offset;
 
-            GetEnemyTargetPosition(act, &x, &y, 0);
+            GetEnemyTargetPosition(act, &x, &y, NULL);
             AnimChangeWithDef(sEmy37AnimDefs, &w->base.anim, 5, ANIM_FLAG_LOOP, w->base.tiles);
             sample = gSineTable[work->base.angle];
             offset = 70;
@@ -4609,7 +4609,7 @@ u8 task_emy_37_1(Emy37Work* work) {
         if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
             s32 x;
 
-            GetEnemyTargetPosition(act, &x, 0, 0);
+            GetEnemyTargetPosition(act, &x, NULL, NULL);
 
             if (act->x > x) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -4672,7 +4672,7 @@ void task_emy_37_2(Emy37Work* work) {
         if (w->rotation) {
             affine = AllocObjAffine(w->rotation, rot, scale, 1);
         } else if (scale == 0x100 && rot == scale) {
-            affine = 0;
+            affine = NULL;
         } else if (scale <= 0xFF) {
             affine = AllocObjAffine(0, rot, scale, 0);
         } else {
@@ -4970,7 +4970,7 @@ u8 task_emy_41_1(Emy41Work* work) {
     case 0x13:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
-            GetEnemyTargetPosition(act, &w->targetX, &w->targetY, 0);
+            GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
             w->targetZ = 0;
         }
 
@@ -5019,7 +5019,7 @@ u8 task_emy_44_1(EmyWork* work) {
     act = &work->actor;
 
     if (_0800CBDC(work)) {
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
         d = act->x - pos;
 
         if (d >= 0 ? d <= 0x4FFF : pos - act->x <= 0x4FFF) {
@@ -5170,7 +5170,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         break;
     case 21:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &a, &b, 0);
+            GetEnemyTargetPosition(act, &a, &b, NULL);
             AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
             w->targetX = (a * 2) - act->x;
             w->targetY = (b * 2) - act->y;
@@ -5375,7 +5375,7 @@ u8 GetEmyApproachAngle(EmyWork* work) {
     s32 targetY;
 
     act = &work->actor;
-    GetEnemyTargetPosition(act, &x, &y, 0);
+    GetEnemyTargetPosition(act, &x, &y, NULL);
 
     if (x < (gBtlWork->xMin + 0x30) << 8) {
         d = x + 0x28;
@@ -5440,7 +5440,7 @@ u8 task_emy_82_1(Emy82Work* work) {
 
             if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
                 s32 x;
-                GetEnemyTargetPosition(act, &x, 0, 0);
+                GetEnemyTargetPosition(act, &x, NULL, NULL);
 
                 if (act->x > x) {
                     act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -5473,7 +5473,7 @@ u8 task_emy_82_1(Emy82Work* work) {
 
         if ((u16)((u32)GetRandom() % work->base.def->turnInterval) == 0) {
             s32 x;
-            GetEnemyTargetPosition(act, &x, 0, 0);
+            GetEnemyTargetPosition(act, &x, NULL, NULL);
 
             if (act->x > x) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -5586,7 +5586,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                     break;
                 case 4:
                     {
-                        BtlObj* best = 0;
+                        BtlObj* best = NULL;
                         BtlObj* actor;
                         s16 missing = 0;
 
@@ -5726,7 +5726,7 @@ void task_emy_82_3(EmyWork* work) {
 
 void task_emy_83_0(Emy83Work* work, void* obj) {
     EmyInit(&work->base, &sEmy83Def, obj);
-    work->task = 0;
+    work->task = NULL;
     work->base.idleState = 0x16;
     TaskPoolInit(&work->tasks, 4);
 }
@@ -5752,7 +5752,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         switch (r & 1) {
         case 0:
             work->base.state = 0x12;
-            w->task = 0;
+            w->task = NULL;
             break;
         case 1:
             work->base.state = 0x13;
@@ -5765,7 +5765,7 @@ u8 task_emy_83_1(Emy83Work* work) {
     case 0x16:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         TryEnemyCardUse(act);
-        GetEnemyTargetPosition(act, &pos, 0, 0);
+        GetEnemyTargetPosition(act, &pos, NULL, NULL);
 
         if (act->x < pos) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -5781,7 +5781,7 @@ u8 task_emy_83_1(Emy83Work* work) {
         if (c == 0) {
             switch (AnimGetFrame(&work->base.anim)) {
             case 3:
-                GetEnemyTargetPosition(act, &w->targetX, &w->targetY, 0);
+                GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
                 break;
             case 5:
                 spawn.x = w->targetX;
@@ -5948,7 +5948,7 @@ void task_emy_83_b_2(Emy83bWork* work) {
     gfx = AnimGetGfx(&work->anim);
     pri = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, pri,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, pri,
         -0x1004 - ((work->y + 0x400) >> 8) * 4);
 }
 
@@ -6012,10 +6012,10 @@ void task_emy_83_s_2(Emy83sWork* work) {
 
     pri = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gEmy8311bFrame0, work->tiles, work->palette, 0, pri,
+    DrawSprite(x, y, gEmy8311bFrame0, work->tiles, work->palette, NULL, pri,
         -0x1004 - ((work->y + 0x400) >> 8) * 4);
     WorldToScreen(&x, &y, work->x, work->y, 0);
-    DrawSprite(x, y, gEmy8311bFrame1, work->tiles, work->palette, 0, pri, -2);
+    DrawSprite(x, y, gEmy8311bFrame1, work->tiles, work->palette, NULL, pri, -2);
 }
 
 void task_emy_83_s_3(Emy83sWork* work) {

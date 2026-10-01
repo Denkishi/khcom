@@ -128,7 +128,7 @@ void task_bos_lst_fal_2(LstFalWork* work) {
     WorldToScreen(&x, &y, work->x, work->y, work->z);
     gfx = AnimGetGfx(&work->anim);
     prio = GetBattleSpritePriorityFlags(work->y) | 4;
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, prio,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio,
                -0x1004 - (work->y >> 8) * 4);
 }
 

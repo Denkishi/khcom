@@ -258,7 +258,7 @@ void MsTopHandleInput() {
         FadeLock();
         sMsTopState = 11;
     } else if (keys & B_BUTTON) {
-        sMsTopNextMode = 0;
+        sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
@@ -269,7 +269,7 @@ void MsTopHandleInput() {
         sMsTopSteps = 16;
         sMsTopState = 9;
     } else if (keys & START_BUTTON) {
-        sMsTopNextMode = 0;
+        sMsTopNextMode = NULL;
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
@@ -311,13 +311,13 @@ void MsTopDraw() {
 
     if (sMsTopBarVisible != 0) {
 #ifdef VERSION_EU
-        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
 #else
-        DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnk_099A2B24, sMsTopBarTiles, sMsTopBarPalette, 0, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnk_099A2B24, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
 #endif
     }
 
@@ -338,20 +338,20 @@ void MsTopDraw() {
     }
 
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
-        AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, 0, flags, 0x834);
+        AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, NULL, flags, 0x834);
     DrawSprite((gUnk_02035888 >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
-        AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, 0, SPRITE_PRIORITY(2), 0x7D0);
+        AnimUpdate(&gWorldwarpAnim), gUnk_020357D0, gUnk_020357D4, NULL, SPRITE_PRIORITY(2), 0x7D0);
 
     DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
-        AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, 0,
+        AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D0);
     DrawSprite(sWarpDefs[0].x2 + (gUnk_02035888 >> 8), sWarpDefs[0].y2,
-        gUnk_08B22BA8, sMsTopShadowTiles, sMsTopShadowPalette, 0,
+        gUnk_08B22BA8, sMsTopShadowTiles, sMsTopShadowPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D1);
 
     for (i = 0; i <= 1; i++) {
         DrawSprite(sWarpDefs[0].gfx[i].x - (sMsTopBg0ScrollX >> 8), sWarpDefs[0].gfx[i].y,
-            AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], 0, SPRITE_PRIORITY(2), 0x7D0);
+            AnimUpdate(&sMsTopWarpAnims[i]), sMsTopWarpTiles[i], sMsTopWarpPalettes[i], NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     if (sMsTopState == 6) {
@@ -441,8 +441,8 @@ void mode_ms_top_0(u32 a) {
     }
 
     for (i = 0; i < 2; i++) {
-        sMsTopWarpPalettes[i] = 0;
-        sMsTopWarpTiles[i] = 0;
+        sMsTopWarpPalettes[i] = NULL;
+        sMsTopWarpTiles[i] = NULL;
     }
 
     sMsTopBarPalette = LoadObjPalette(gUnk_09A3D7FC, 0x20);

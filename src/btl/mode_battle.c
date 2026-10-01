@@ -21,6 +21,7 @@
 #include "obj_api.h"
 #include "registration_data.h"
 #include "save_api.h"
+#include <stddef.h>
 #include "system_state.h"
 #include "task_descriptors.h"
 #include "taskpool.h"
@@ -168,19 +169,19 @@ void eu_08009E10() {
     if (!(gLangWork->flags & LANG_FLAG_HIDE_CURSOR)) {
         switch (gLangWork->cursor) {
         case 0:
-            DrawSprite(0x60, 0x58, gUnkEu_08C9C97C, gLangWork->tiles, gLangWork->palette, 0, 0, 0);
+            DrawSprite(0x60, 0x58, gUnkEu_08C9C97C, gLangWork->tiles, gLangWork->palette, NULL, 0, 0);
             break;
         case 1:
-            DrawSprite(0x60, 0x68, gUnkEu_08C9C99E, gLangWork->tiles, gLangWork->palette, 0, 0, 0);
+            DrawSprite(0x60, 0x68, gUnkEu_08C9C99E, gLangWork->tiles, gLangWork->palette, NULL, 0, 0);
             break;
         case 2:
-            DrawSprite(0x60, 0x78, gUnkEu_08C9C9C0, gLangWork->tiles, gLangWork->palette, 0, 0, 0);
+            DrawSprite(0x60, 0x78, gUnkEu_08C9C9C0, gLangWork->tiles, gLangWork->palette, NULL, 0, 0);
             break;
         case 3:
-            DrawSprite(0x60, 0x88, gUnkEu_08C9C9E2, gLangWork->tiles, gLangWork->palette, 0, 0, 0);
+            DrawSprite(0x60, 0x88, gUnkEu_08C9C9E2, gLangWork->tiles, gLangWork->palette, NULL, 0, 0);
             break;
         case 4:
-            DrawSprite(0x60, 0x98, gUnkEu_08C9CA04, gLangWork->tiles, gLangWork->palette, 0, 0, 0);
+            DrawSprite(0x60, 0x98, gUnkEu_08C9CA04, gLangWork->tiles, gLangWork->palette, NULL, 0, 0);
             break;
         }
     }
@@ -197,7 +198,7 @@ void mode_battle_0(u32 mode) {
     BtlWork** p;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
-    gRikuBtlWork = 0;
+    gRikuBtlWork = NULL;
     BtlWorkInit();
     AllocBattleTiles();
     gBtlWork->battleId = mode;
@@ -381,9 +382,9 @@ void mode_battle_0(u32 mode) {
     ColliderPoolsInit();
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlRiku, 0);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlRiku, NULL);
     } else {
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, 0);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlSora, NULL);
     }
 
     if (gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) {
@@ -392,12 +393,12 @@ void mode_battle_0(u32 mode) {
         switch (mode) {
         case 0x9A:
             SetBattleBounds(0, 0x100, 0x148, 0x1A8);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosDsd, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosDsd, NULL);
             gBtlWork->fadeAmount = 10;
             break;
         case 0x94:
             SetBattleBounds(-32, 0x120, 0x120, 0x180);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosGa, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosGa, NULL);
             gBtlWork->fadeAmount = 5;
             break;
         case 0x99:
@@ -406,39 +407,39 @@ void mode_battle_0(u32 mode) {
 #else
             SetBattleBounds(0, 0xE0, 0x118, 0x180);
 #endif
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosMd, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosMd, NULL);
             gBtlWork->fadeAmount = 5;
             break;
         case 0x96:
             SetBattleBounds(0x80, 0x180, 0x140, 0x180);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosTm, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosTm, NULL);
             gBtlWork->fadeAmount = 12;
             break;
         case 0x97:
             SetBattleBounds(0, 0x200, 0, 0x200);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsula, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsula, NULL);
             gBtlWork->fadeAmount = 5;
             break;
         case 0x98:
             SetBattleBounds(0x80, 0x1A8, 0x126, 0x180);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPc, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPc, NULL);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescPcAcddmg, gBtlWork->actor);
             gBtlWork->fadeAmount = 12;
             break;
         case 0x9C:
             SetBattleBounds(0x80, 0x170, 0x1E0, 0x200);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosLst, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosLst, NULL);
             gBtlWork->fadeAmount = 10;
             break;
         case 0x9B:
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosBoogie, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosBoogie, NULL);
             gBtlWork->boundsCallback = &ClampBosBoogieBounds;
             gBtlWork->fadeAmount = 5;
             break;
         default:
             SetBattleBounds(0x1A4, 0x264, 0x148, 0x180);
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosJf, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosJf, NULL);
             gBtlWork->boundsCallback = &ClampBosJfBounds;
             gBtlWork->fadeAmount = 10;
             break;
@@ -447,71 +448,71 @@ void mode_battle_0(u32 mode) {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
         if (mode == 0xB2) {
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumRobe, 0);
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumRobe, NULL);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, NULL);
         } else {
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLeon, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLeon, NULL);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, (void*)1);
         }
 
         gGameState.battleStage = BATTLE_STAGE_TRAVERSE_TOWN;
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, NULL);
     } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
 
         switch (mode) {
         case 0x9E:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHook, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHook, NULL);
             SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
             break;
         case 0xA6:
         case 0xB1:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAnsem, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAnsem, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0x9F:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumCloud, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumCloud, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA0:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHades, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHades, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA5:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumMahluxia, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumMahluxia, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA3:
         case 0xAE:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLaxene, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLaxene, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA2:
         case 0xAD:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAxcel, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAxcel, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA4:
         case 0xAF:
         case 0xB0:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumVixen, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumVixen, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0xA7:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLexceus, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLexceus, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         case 0x9D:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLeon, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLeon, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         default:
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumRiku, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumRiku, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
         }
 
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, NULL);
     } else {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
@@ -521,17 +522,17 @@ void mode_battle_0(u32 mode) {
             ChkBtlSpawnEnemy();
         }
 
-        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
+        TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, NULL);
 
         if (mode == 0x79) {
             gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
             gGameState.flags |= GAME_FLAG_MONSGAGE_BATTLE;
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescMonsgage, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescMonsgage, NULL);
         }
     }
 
     if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
-        TaskCreate(&gBtlWork->taskPools[2], &gTaskDescBtlPause, 0);
+        TaskCreate(&gBtlWork->taskPools[2], &gTaskDescBtlPause, NULL);
     }
 
     FadeStartIn(FADE_MODE_BLACK, 60);

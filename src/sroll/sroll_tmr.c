@@ -70,14 +70,14 @@ void task_sroll_tmr_2(SrollTmrWork* w) {
     m = t / 60 % 60;
     s = t % 60;
     z = 0;
-    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(24, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(48, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], w->tiles, w->palette, 0, z, z);
-    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], w->tiles, w->palette, 0, z, z);
+    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(24, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(48, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], w->tiles, w->palette, NULL, z, z);
 }
 
 void task_sroll_tmr_3(SrollTmrWork* w) {
@@ -1159,11 +1159,11 @@ void ScanlineDmaReset() {
     DmaStop(0);
     sDmaStream.enabled = 0;
     sDmaStream.swapPending = 0;
-    sDmaStream.update = 0;
-    sDmaStream.dst = 0;
+    sDmaStream.update = NULL;
+    sDmaStream.dst = NULL;
     sDmaStream.srcIdx = 0;
-    sDmaStream.src[0] = 0;
-    sDmaStream.src[1] = 0;
+    sDmaStream.src[0] = NULL;
+    sDmaStream.src[1] = NULL;
     sDmaStream.cnt = 0;
 }
 
@@ -1294,8 +1294,8 @@ u8* ReadNextAudioBlock(u32** p) {
     v = *q++;
 
     if ((v & 0xFF) != 0x53) {
-        *p = 0;
-        return 0;
+        *p = NULL;
+        return NULL;
     }
 
     *p = (u32*)((u8*)base + (((v >> 8) & 0xFF00) << 2) + ((v >> 24) << 2));

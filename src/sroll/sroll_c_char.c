@@ -2,6 +2,7 @@
 #include "sprites_staff_roll.h"
 #include "anim.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "system_state.h"
 #include "taskpool.h"
 #include "types.h"
@@ -164,7 +165,7 @@ void task_sroll_c_char_2(SrollCCharWork* w) {
     p = w->anim;
 
     for (i = 4; i >= 0; i--) {
-        DrawSprite(120, 80, AnimGetGfx(p), w->tiles, w->palette, 0, flags, 0xFF0);
+        DrawSprite(120, 80, AnimGetGfx(p), w->tiles, w->palette, NULL, flags, 0xFF0);
         p++;
     }
 }

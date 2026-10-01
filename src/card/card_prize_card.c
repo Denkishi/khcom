@@ -22,6 +22,7 @@
 #include "field_state.h"
 #include "fld_types.h"
 #include "map_runtime.h"
+#include <stddef.h>
 #include "types.h"
 
 u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a);
@@ -295,7 +296,7 @@ static void PrizeCard_2(PrizeCardWork* w) {
     }
 
     if (w->scaleX == 0x100 && w->rotation == 0) {
-        affine = 0;
+        affine = NULL;
     } else {
         affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     }

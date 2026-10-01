@@ -2,6 +2,7 @@
 #include "gba/macro.h"
 #include "gba/syscall.h"
 #include "movie.h"
+#include <stddef.h>
 #include "types.h"
 
 static const u8 sMovieVideoCodecConstantsSrc[96] = {
@@ -240,7 +241,7 @@ MoviePlayer* MovieOpen(void* a) {
 
     if ((p->width & 7) != 0 || p->width > 288 || (p->height & 7) != 0) {
         gMovieHeap.iwramFree(p);
-        return 0;
+        return NULL;
     }
 
     MovieSetupVideoCodec(p, &p->decodeKeyFrame, &p->postProcessFrame, &p->decodeDeltaFrame, p->width, p->height);

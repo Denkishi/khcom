@@ -59,10 +59,10 @@ void LinkEnemyCardDisplay(CardDisplayWork* p) {
 }
 
 void card_enemy_0(CardDisplayWork* p, CardDisplayArgs* a) {
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->palette = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->palette = NULL;
     p->command = 0;
     p->args = *a;
     p->flags = 0;
@@ -490,14 +490,14 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
     u8 n;
     s32 id;
 
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->tiles4 = 0;
-    p->tiles5 = 0;
-    p->palette2 = 0;
-    p->palette = 0;
-    p->children = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->tiles4 = NULL;
+    p->tiles5 = NULL;
+    p->palette2 = NULL;
+    p->palette = NULL;
+    p->children = NULL;
     p->command = 0;
     p->args = *a;
     p->flags = 0;
@@ -573,10 +573,10 @@ void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
     u8 n;
     s32 id;
 
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->palette = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->palette = NULL;
     p->command = 0;
     p->args = *a;
     p->flags = 0;
@@ -616,10 +616,10 @@ void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
     u8 n;
     s32 id;
 
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->palette = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->palette = NULL;
     p->command = 0;
     p->args = *a;
     p->flags = 0;
@@ -665,8 +665,8 @@ void UseEnemyCard(u16 arg) {
     s32 k;
 #endif
 
-    args.pool = 0;
-    args.slot = 0;
+    args.pool = NULL;
+    args.slot = NULL;
     args.unk_08 = arg;
     args.index = gBossCardValue;
     args.listIndex = 0;
@@ -909,8 +909,8 @@ void func_080917C8(u16 a, u8 b) {
     CardDisplayWork* p;
     u8 i;
 
-    arg.pool = 0;
-    arg.slot = 0;
+    arg.pool = NULL;
+    arg.slot = NULL;
     arg.unk_08 = a;
     arg.index = b;
     arg.listIndex = 0;
@@ -954,8 +954,8 @@ void func_08091978(u16 a, u8 b) {
     CardDisplayWork* p;
     u8 i;
 
-    arg.pool = 0;
-    arg.slot = 0;
+    arg.pool = NULL;
+    arg.slot = NULL;
     arg.unk_08 = a;
     arg.index = b;
     arg.listIndex = 0;

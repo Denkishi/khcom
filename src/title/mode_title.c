@@ -25,6 +25,7 @@
 #include "mode_sio_api.h"
 #include "save_api.h"
 #include "save_types.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -99,11 +100,11 @@ void TitleShowLogo(u16 a) {
     DisableBg(2);
 
     if (IsTaskActive(sTitleLogoTask) == 0) {
-        sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, 0);
+        sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, NULL);
     }
 
     if (IsTaskActive(sTitleObjTask) == 0) {
-        sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, 0);
+        sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
     }
 
     FadeStartIn(FADE_MODE_ADD_WHITE, a);
@@ -202,8 +203,8 @@ void mode_title_0() {
     gTitleBgScale = 0x1000;
     SetBgAffine(2, 0, gTitleBgScale >> 4, gTitleBgScale >> 4, gTitleBgX, gTitleBgY);
     TaskPoolInit(&sTitleTaskPool, 4);
-    sTitleLogoTask = 0;
-    sTitleObjTask = 0;
+    sTitleLogoTask = NULL;
+    sTitleObjTask = NULL;
     FadeStartIn(FADE_MODE_BLACK, 0x4C);
     sTitleState = 0;
     m4aSongNumStart(SONG_SND_0);
@@ -364,8 +365,8 @@ void mode_title_1() {
         if (sTitleBlendStep > 15) {
             gBldCnt = 0;
             TaskKill(&sTitleTaskPool, sTitleMenuTask);
-            sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, 0);
-            sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, 0);
+            sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, NULL);
+            sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
             EnableBg(0);
             sTitleState = 5;
         }

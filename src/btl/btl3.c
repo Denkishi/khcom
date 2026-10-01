@@ -288,7 +288,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->palette = LoadObjPalette(gUnk_096FAC64, 32);
     }
 
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithTables(&work->anim, 0, ANIM_FLAG_LOOP, gSor1ll68wAnims, gSor1ll68wFrames);
     SetObjTileSource(work->tiles2, gSor1ll68wTiles);
     work->x = args->x;
@@ -377,7 +377,7 @@ BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
         }
 
         if (obj->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return obj;
@@ -618,7 +618,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
         scale = gBtlWork->scale * work->scale >> 8;
 
         if (scale == 256) {
-            affine = 0;
+            affine = NULL;
 
             if (work->facingLeft == 0) {
                 flags |= SPRITE_FLAG_HFLIP;
@@ -634,7 +634,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
         DrawSprite(sx, sy, work->gfx, work->tiles2, work->palette, affine, flags,
                    -4100 - (((work->y + 0x1000) >> 8) * 4));
         WorldToScreen(&sx, &sy, work->x, work->y, 0);
-        DrawSprite(sx, sy, gUnk_08B22CBC, work->tiles, work->palette2, 0, flags, 0xFFFE);
+        DrawSprite(sx, sy, gUnk_08B22CBC, work->tiles, work->palette2, NULL, flags, 0xFFFE);
     }
 }
 
@@ -647,11 +647,11 @@ void task_btl_raid_3(BtlRaidWork* work) {
 void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
     work->status = 0;
     work->actor = obj;
-    work->tiles = AllocObjTiles(128, 0);
+    work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->palette3 = work->palette;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
 }
 
@@ -724,7 +724,7 @@ void task_btl_badstatus_2(BtlBadStatusWork* work) {
 
         WorldToScreen(&sx, &sy, obj->x, obj->y,
                       obj->z - ((obj->height + 8) << 8));
-        DrawSprite(sx, sy, gfx, work->tiles, work->palette3, 0, flags,
+        DrawSprite(sx, sy, gfx, work->tiles, work->palette3, NULL, flags,
                    -4101 - ((obj->y >> 8) * 4));
     }
 }
@@ -748,7 +748,7 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
         }
 
         if (p->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return p;
@@ -771,7 +771,7 @@ BtlObj* SmnCloudNextTarget(SmnCloudWork* work) {
     }
 
     if (count == 0) {
-        return 0;
+        return NULL;
     }
 
     p = list[work->targetIndex % count];
@@ -793,7 +793,7 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
         }
 
         if (p->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return p;
@@ -820,7 +820,7 @@ BtlObj* SmnCloudPickTeleportTarget(SmnCloudWork* work) {
     }
 
     if (count == 0) {
-        return 0;
+        return NULL;
     }
 
     p = list[GetRandom() % count];

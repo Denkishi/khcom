@@ -7,6 +7,7 @@
 #include "key.h"
 #include "mode.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -653,7 +654,7 @@ void mode_chksnd_0() {
     SetBgMode0();
     gChkSndIndex = 0;
     TaskPoolInit(&gChkSndPool, 10);
-    TaskCreate(&gChkSndPool, &gTaskDescPrint, 0);
+    TaskCreate(&gChkSndPool, &gTaskDescPrint, NULL);
 }
 
 #ifdef VERSION_EU

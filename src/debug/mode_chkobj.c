@@ -33,6 +33,7 @@
 #include "mode.h"
 #include "obj_api.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -1338,11 +1339,11 @@ void mode_chkobj_0() {
     SetBgMode0();
     gChkObjWork = EwramAlloc(sizeof(ChkObjWork));
     TaskPoolInit(&gChkObjWork->pool, 1);
-    TaskCreate(&gChkObjWork->pool, &gTaskDescPrint, 0);
+    TaskCreate(&gChkObjWork->pool, &gTaskDescPrint, NULL);
     gChkObjWork->defIndex = 0;
     gChkObjWork->animId = 0;
     gChkObjWork->category = 0;
-    gChkObjWork->tiles = AllocObjTiles(0x2000, 0);
+    gChkObjWork->tiles = AllocObjTiles(0x2000, NULL);
     gChkObjWork->palette = LoadObjPalette(gSoraPalette, 0x20);
     gChkObjWork->gfx = gSor1ff00Frame0;
     gChkObjWork->paused = 0;
@@ -1519,7 +1520,7 @@ void mode_chkobj_1() {
         PrintString(0, 19, 0, "maxChr");
         PrintNumber(6, 19, 0, gChkObjWork->maxTiles);
         DrawSprite(120, gChkObjWork->y + 96, gChkObjWork->gfx, gChkObjWork->tiles,
-                   gChkObjWork->palette, 0, 0, 0);
+                   gChkObjWork->palette, NULL, 0, 0);
         DebugTextDraw(1);
         DebugTextClear();
     }

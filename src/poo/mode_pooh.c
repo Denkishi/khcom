@@ -22,6 +22,7 @@
 #include "poo_api.h"
 #include "pooh_actor_types.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -492,55 +493,55 @@ void mode_pooh_0(s32 arg) {
     TaskPoolInit(&sModePoohTasks, 32);
 
     for (i = 0; i < 12; i++) {
-        sPooPrizeTasks[i] = 0;
+        sPooPrizeTasks[i] = NULL;
     }
 
-    TaskCreate(&sModePoohTasks, &gTaskDescPooSora, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooPiglet, 0);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooSora, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooPiglet, NULL);
 
     if (!IsPooEventDone(2)) {
-        TaskCreate(&sModePoohTasks, &gTaskDescPooEeyoretail, 0);
-        TaskCreate(&sModePoohTasks, &gTaskDescPooBee, 0);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooEeyoretail, NULL);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooBee, NULL);
     } else {
-        TaskCreate(&sModePoohTasks, &gTaskDescPooBeeAfterEvent, 0);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooBeeAfterEvent, NULL);
     }
 
-    TaskCreate(&sModePoohTasks, &gTaskDescPooEeyore, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooHoneycomb, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooOwl, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooWagon, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooWagonwheel, 0);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooEeyore, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooHoneycomb, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooOwl, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooWagon, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooWagonwheel, NULL);
 
     if (!IsPooEventDone(4)) {
-        TaskCreate(&sModePoohTasks, &gTaskDescPooRabbit, 0);
-        TaskCreate(&sModePoohTasks, &gTaskDescPooCabbageborn, 0);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooRabbit, NULL);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooCabbageborn, NULL);
     } else {
-        TaskCreate(&sModePoohTasks, &gTaskDescPooRabbitAfterEvent, 0);
-        TaskCreate(&sModePoohTasks, &gTaskDescPooCabbageAfterEvent, 0);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooRabbitAfterEvent, NULL);
+        TaskCreate(&sModePoohTasks, &gTaskDescPooCabbageAfterEvent, NULL);
     }
 
-    TaskCreate(&sModePoohTasks, &gTaskDescPooVegetable, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooTigger, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooRooFootmark, 0);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooVegetable, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooTigger, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooRooFootmark, NULL);
 
     if (IsPooEventDone(5)) {
         if (!IsPooEventDone(1)) {
-            TaskCreate(&sModePoohTasks, &gTaskDescPooRoo, 0);
+            TaskCreate(&sModePoohTasks, &gTaskDescPooRoo, NULL);
         } else {
-            TaskCreate(&sModePoohTasks, &gTaskDescPooTiggerroo, 0);
+            TaskCreate(&sModePoohTasks, &gTaskDescPooTiggerroo, NULL);
         }
     }
 
-    TaskCreate(&sModePoohTasks, &gTaskDescPooMap, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooPooh, 0);
-    TaskCreate(&sModePoohTasks, &gTaskDescPooGauge, 0);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooMap, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooPooh, NULL);
+    TaskCreate(&sModePoohTasks, &gTaskDescPooGauge, NULL);
 
     TaskPoolInit(&sModePoohWLogoTasks, 1);
 
     if (IsPooFlagSet(2)) {
-        gWLogoTask = 0;
+        gWLogoTask = NULL;
     } else {
-        gWLogoTask = TaskCreate(&sModePoohWLogoTasks, &gTaskDescWLogo, 0);
+        gWLogoTask = TaskCreate(&sModePoohWLogoTasks, &gTaskDescWLogo, NULL);
         SetPooFlag(2);
     }
 

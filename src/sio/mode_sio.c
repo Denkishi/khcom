@@ -469,13 +469,13 @@ void mode_sio_battle_1() {
     }
 
     sSioBattleWork->gfx = AnimUpdate(&sSioBattleWork->anim);
-    DrawSprite(sSioBattleWork->x >> 8, 0, sSioBattleWork->gfx2[0], sSioBattleWork->tiles, sSioBattleWork->palette, 0, SPRITE_PRIORITY(1), -16);
-    DrawSprite(128, sSioBattleWork->y >> 8, sSioBattleWork->gfx2[1], sSioBattleWork->tiles, sSioBattleWork->palette, 0, SPRITE_PRIORITY(1), -1);
-    DrawSprite(128, sSioBattleWork->y2 >> 8, sSioBattleWork->gfx2[2], sSioBattleWork->tiles, sSioBattleWork->palette, 0, SPRITE_PRIORITY(1), -1);
-    DrawSprite(72, 48, sSioBattleWork->gfx3, sSioBattleWork->tiles2, sSioBattleWork->palette2, 0, SPRITE_PRIORITY(1), -32);
-    DrawSprite(72, 48, sSioBattleWork->gfx4, sSioBattleWork->tiles3, sSioBattleWork->palette3, 0, SPRITE_PRIORITY(1), -32);
+    DrawSprite(sSioBattleWork->x >> 8, 0, sSioBattleWork->gfx2[0], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -16);
+    DrawSprite(128, sSioBattleWork->y >> 8, sSioBattleWork->gfx2[1], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
+    DrawSprite(128, sSioBattleWork->y2 >> 8, sSioBattleWork->gfx2[2], sSioBattleWork->tiles, sSioBattleWork->palette, NULL, SPRITE_PRIORITY(1), -1);
+    DrawSprite(72, 48, sSioBattleWork->gfx3, sSioBattleWork->tiles2, sSioBattleWork->palette2, NULL, SPRITE_PRIORITY(1), -32);
+    DrawSprite(72, 48, sSioBattleWork->gfx4, sSioBattleWork->tiles3, sSioBattleWork->palette3, NULL, SPRITE_PRIORITY(1), -32);
     ApproachValueHalf(&sSioBattleWork->cursorY, sSioBattleWork->cursor * 7 * 1024 + 0x3300);
-    DrawSprite(64, sSioBattleWork->cursorY >> 8, sSioBattleWork->gfx, sSioBattleWork->tiles4, sSioBattleWork->palette4, 0, SPRITE_PRIORITY(1), -48);
+    DrawSprite(64, sSioBattleWork->cursorY >> 8, sSioBattleWork->gfx, sSioBattleWork->tiles4, sSioBattleWork->palette4, NULL, SPRITE_PRIORITY(1), -48);
 }
 
 void mode_sio_battle_2() {
@@ -784,8 +784,8 @@ void SioBtlOptionInitObjs() {
     SetBgAffine(2, 0, 256, 256, 0x10000, 0x16800);
 
     for (i = 0; i < 2; i++) {
-        gSioBtlOptionWork->unk_008[i] = AllocObjTiles(0xC80, 0);
-        AnimInit(&gSioBtlOptionWork->anim2[i], 0, 0);
+        gSioBtlOptionWork->unk_008[i] = AllocObjTiles(0xC80, NULL);
+        AnimInit(&gSioBtlOptionWork->anim2[i], NULL, NULL);
         SetSioBtlOptionAnimation(i, 0, 0);
         gSioBtlOptionWork->gfx6[i] = AnimGetGfx(&gSioBtlOptionWork->anim2[i]);
     }
@@ -1008,8 +1008,8 @@ void SioBtlOptionDraw() {
     gSioBtlOptionWork->gfx6[0] = AnimUpdate(&gSioBtlOptionWork->anim2[0]);
     gSioBtlOptionWork->gfx6[1] = AnimUpdate(&gSioBtlOptionWork->anim2[1]);
     gSioBtlOptionWork->gfx2 = AnimUpdate(&gSioBtlOptionWork->anim);
-    DrawSprite(60, 88, gSioBtlOptionWork->gfx6[0], gSioBtlOptionWork->unk_008[0], gSioBtlOptionWork->unk_008[2], 0, SPRITE_FLAG_HFLIP, 0xFFF0);
-    DrawSprite(180, 88, gSioBtlOptionWork->gfx6[1], gSioBtlOptionWork->unk_008[1], gSioBtlOptionWork->unk_008[3], 0, 0, 0xFFF0);
+    DrawSprite(60, 88, gSioBtlOptionWork->gfx6[0], gSioBtlOptionWork->unk_008[0], gSioBtlOptionWork->unk_008[2], NULL, SPRITE_FLAG_HFLIP, 0xFFF0);
+    DrawSprite(180, 88, gSioBtlOptionWork->gfx6[1], gSioBtlOptionWork->unk_008[1], gSioBtlOptionWork->unk_008[3], NULL, 0, 0xFFF0);
 #ifdef VERSION_EU
     width = GetTextSlotsWidth(gSioBtlOptionWork->textSlots, gSioBtlOptionWork->textSlotCount);
     DrawTextSlots(162 - width / 2, 4, gSioBtlOptionWork->textSlots, gSioBtlOptionWork->palette7, 20, gSioBtlOptionWork->textSlotCount);
@@ -1018,20 +1018,20 @@ void SioBtlOptionDraw() {
 #endif
     DrawTextSlots(16, 144, gSioBtlOptionWork->textSlots2, gSioBtlOptionWork->palette8, 0xF200, gSioBtlOptionWork->textSlotCount2);
     DrawTextSlots(136, 144, gSioBtlOptionWork->textSlots3, gSioBtlOptionWork->palette9, 0xF200, gSioBtlOptionWork->textSlotCount3);
-    DrawSprite(-((gSioBtlOptionWork->frameCount >> 3) % 4) + 88, 2, gSioBtlOptionWork->gfx4, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, 0, 0, 0xFF00);
-    DrawSprite(224 + ((gSioBtlOptionWork->frameCount >> 3) % 4), 2, gSioBtlOptionWork->gfx7, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, 0, 0, 0xFF00);
+    DrawSprite(-((gSioBtlOptionWork->frameCount >> 3) % 4) + 88, 2, gSioBtlOptionWork->gfx4, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, NULL, 0, 0xFF00);
+    DrawSprite(224 + ((gSioBtlOptionWork->frameCount >> 3) % 4), 2, gSioBtlOptionWork->gfx7, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, NULL, 0, 0xFF00);
 
     if (gSioBtlOptionWork->menuOpen == 1) {
-        DrawSprite(72, 38, gSioBtlOptionWork->gfx, gSioBtlOptionWork->tiles, gSioBtlOptionWork->palette, 0, 0, 0x200);
+        DrawSprite(72, 38, gSioBtlOptionWork->gfx, gSioBtlOptionWork->tiles, gSioBtlOptionWork->palette, NULL, 0, 0x200);
 
         if (gSioBtlOptionWork->cursorVisible == 1) {
             ApproachValueHalf(&gSioBtlOptionWork->y, gSioBtlOptionWork->cursor * 4608 + 10752);
-            DrawSprite(64, gSioBtlOptionWork->y >> 8, gSioBtlOptionWork->gfx2, gSioBtlOptionWork->tiles2, gSioBtlOptionWork->palette2, 0, 0, 0x100);
+            DrawSprite(64, gSioBtlOptionWork->y >> 8, gSioBtlOptionWork->gfx2, gSioBtlOptionWork->tiles2, gSioBtlOptionWork->palette2, NULL, 0, 0x100);
         }
     }
 
     if (gSioBtlOptionWork->messageVisible == 1) {
-        DrawSprite(120, 131, gSioBtlOptionWork->gfx3, gSioBtlOptionWork->tiles3, gSioBtlOptionWork->palette3, 0, 0, 0xF000);
+        DrawSprite(120, 131, gSioBtlOptionWork->gfx3, gSioBtlOptionWork->tiles3, gSioBtlOptionWork->palette3, NULL, 0, 0xF000);
 #ifdef VERSION_EU
         width = eu_0806629C(gSioBtlOptionWork->textSlots4, gSioBtlOptionWork->textSlotCount4);
         multiline = 0;
@@ -1053,11 +1053,11 @@ void SioBtlOptionDraw() {
 #endif
     }
 
-    DrawSprite(32, 24, gSioBtlOptionWork->gfx5[0], gSioBtlOptionWork->tiles5[0], gSioBtlOptionWork->palette5[0], 0, 0, 0xF100);
-    DrawSprite(132, 24, gSioBtlOptionWork->gfx5[1], gSioBtlOptionWork->tiles5[1], gSioBtlOptionWork->palette5[1], 0, 0, 0xF100);
+    DrawSprite(32, 24, gSioBtlOptionWork->gfx5[0], gSioBtlOptionWork->tiles5[0], gSioBtlOptionWork->palette5[0], NULL, 0, 0xF100);
+    DrawSprite(132, 24, gSioBtlOptionWork->gfx5[1], gSioBtlOptionWork->tiles5[1], gSioBtlOptionWork->palette5[1], NULL, 0, 0xF100);
 
     if (gSioBtlOptionWork->handicapMarkerVisible == 1) {
-        DrawSprite(gSioPlayerId * 101 + 44 + gSioHandicapMarkerX[gSioBtlOptionWork->handicap], -((gSioBtlOptionWork->frameCount >> 3) % 4) / 2 + 22, gSioBtlOptionWork->gfx8, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, 0, 0, 0xF000);
+        DrawSprite(gSioPlayerId * 101 + 44 + gSioHandicapMarkerX[gSioBtlOptionWork->handicap], -((gSioBtlOptionWork->frameCount >> 3) % 4) / 2 + 22, gSioBtlOptionWork->gfx8, gSioBtlOptionWork->tiles4, gSioBtlOptionWork->palette4, NULL, 0, 0xF000);
     }
 
     gSioBtlOptionWork->frameCount++;
@@ -2588,17 +2588,17 @@ void mode_sio_btl_cardget_2() {
 }
 
 void SioBtlCardgetDraw() {
-    DrawSprite(60, 116, gSioBtlCardgetWork->gfx, gSioBtlCardgetWork->tiles, gSioBtlCardgetWork->palette, 0, 0, 0xFFF0);
-    DrawSprite(180, 116, gSioBtlCardgetWork->gfx2, gSioBtlCardgetWork->tiles2, gSioBtlCardgetWork->palette2, 0, 0, 0xFFF0);
+    DrawSprite(60, 116, gSioBtlCardgetWork->gfx, gSioBtlCardgetWork->tiles, gSioBtlCardgetWork->palette, NULL, 0, 0xFFF0);
+    DrawSprite(180, 116, gSioBtlCardgetWork->gfx2, gSioBtlCardgetWork->tiles2, gSioBtlCardgetWork->palette2, NULL, 0, 0xFFF0);
 #ifdef VERSION_JP
-    DrawSprite(28, 36, gSioBtlCardgetWork->gfx3, gSioBtlCardgetWork->tiles3, gSioBtlCardgetWork->palette3, 0, 0, 0xFF00);
+    DrawSprite(28, 36, gSioBtlCardgetWork->gfx3, gSioBtlCardgetWork->tiles3, gSioBtlCardgetWork->palette3, NULL, 0, 0xFF00);
 #else
-    DrawSprite(13, 36, gSioBtlCardgetWork->gfx3, gSioBtlCardgetWork->tiles3, gSioBtlCardgetWork->palette3, 0, 0, 0xFF00);
+    DrawSprite(13, 36, gSioBtlCardgetWork->gfx3, gSioBtlCardgetWork->tiles3, gSioBtlCardgetWork->palette3, NULL, 0, 0xFF00);
 #endif
 #ifdef VERSION_JP
-    DrawSprite(148, 36, gSioBtlCardgetWork->gfx4, gSioBtlCardgetWork->tiles4, gSioBtlCardgetWork->palette4, 0, 0, 0xFF00);
+    DrawSprite(148, 36, gSioBtlCardgetWork->gfx4, gSioBtlCardgetWork->tiles4, gSioBtlCardgetWork->palette4, NULL, 0, 0xFF00);
 #else
-    DrawSprite(135, 36, gSioBtlCardgetWork->gfx4, gSioBtlCardgetWork->tiles4, gSioBtlCardgetWork->palette4, 0, 0, 0xFF00);
+    DrawSprite(135, 36, gSioBtlCardgetWork->gfx4, gSioBtlCardgetWork->tiles4, gSioBtlCardgetWork->palette4, NULL, 0, 0xFF00);
 #endif
 }
 
@@ -2890,8 +2890,8 @@ void SioChgCardInitObjs() {
     gSioChgCardWork->cursorVisible = 1;
 
     for (i = 0; i < 2; i++) {
-        gSioChgCardWork->unk_008[i] = AllocObjTiles(0xC80, 0);
-        AnimInit(&gSioChgCardWork->anim[i], 0, 0);
+        gSioChgCardWork->unk_008[i] = AllocObjTiles(0xC80, NULL);
+        AnimInit(&gSioChgCardWork->anim[i], NULL, NULL);
 
         if (gSioChgCardReady[i] == 0) {
             SetSioChgCardAnimation(i, 0, 0);
@@ -3323,12 +3323,12 @@ void SioChgCardDraw() {
     gSioChgCardWork->gfx[1] = AnimUpdate(&gSioChgCardWork->anim[1]);
     gSioChgCardWork->gfx2 = AnimUpdate(&gSioChgCardWork->anim2);
     gSioChgCardWork->gfx3 = AnimUpdate(&gSioChgCardWork->anim3);
-    DrawSprite(72, 72, gSioChgCardWork->gfx[0], gSioChgCardWork->unk_008[0], gSioChgCardWork->unk_008[2], 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 0xFFFF);
-    DrawSprite(168, 72, gSioChgCardWork->gfx[1], gSioChgCardWork->unk_008[1], gSioChgCardWork->unk_008[3], 0, SPRITE_PRIORITY(1), 0xFFFF);
+    DrawSprite(72, 72, gSioChgCardWork->gfx[0], gSioChgCardWork->unk_008[0], gSioChgCardWork->unk_008[2], NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP, 0xFFFF);
+    DrawSprite(168, 72, gSioChgCardWork->gfx[1], gSioChgCardWork->unk_008[1], gSioChgCardWork->unk_008[3], NULL, SPRITE_PRIORITY(1), 0xFFFF);
 
     if (gSioChgCardWork->cursorVisible == 1) {
-        DrawSprite(gSioChgCardWork->x, gSioChgCardWork->y, gSioChgCardWork->gfx2, gSioChgCardWork->tiles, gSioChgCardWork->palette, 0, SPRITE_PRIORITY(1), 0xFFC0);
-        DrawSprite(gSioChgCardWork->x + 2, gSioChgCardWork->y - 8, gSioChgCardWork->gfx3, gSioChgCardWork->tiles2, gSioChgCardWork->palette2, 0, SPRITE_PRIORITY(1), 0xFFA0);
+        DrawSprite(gSioChgCardWork->x, gSioChgCardWork->y, gSioChgCardWork->gfx2, gSioChgCardWork->tiles, gSioChgCardWork->palette, NULL, SPRITE_PRIORITY(1), 0xFFC0);
+        DrawSprite(gSioChgCardWork->x + 2, gSioChgCardWork->y - 8, gSioChgCardWork->gfx3, gSioChgCardWork->tiles2, gSioChgCardWork->palette2, NULL, SPRITE_PRIORITY(1), 0xFFA0);
     }
 
     for (i = 0; i < 10; i++) {
@@ -3343,7 +3343,7 @@ void SioChgCardDraw() {
     }
 
     if (gSioChgCardWork->messageVisible == 1) {
-        DrawSprite(120, 131, gSioChgCardWork->gfx6, gSioChgCardWork->tiles5, gSioChgCardWork->palette4, 0, 0, 0xFF00);
+        DrawSprite(120, 131, gSioChgCardWork->gfx6, gSioChgCardWork->tiles5, gSioChgCardWork->palette4, NULL, 0, 0xFF00);
         DrawTextSlots(gSioChgCardWork->x3, gSioChgCardWork->y3, gSioChgCardWork->textSlots, gSioChgCardWork->palette2, 20, gSioChgCardWork->textSlotCount);
     }
 

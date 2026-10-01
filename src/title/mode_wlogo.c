@@ -15,6 +15,7 @@
 #include "mode.h"
 #include "obj_api.h"
 #include "poo_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "text.h"
 #include "text_types.h"
@@ -233,7 +234,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF2384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoWon, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
     case 5:
         LoadBgTiles(2, gUnk_08C8C824, 0x4000);
@@ -243,7 +244,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF4384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoMons, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoMons, NULL);
         break;
     case 6:
         LoadBgTiles(2, gUnk_08C94824, 0x4000);
@@ -253,7 +254,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF6384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHwt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHwt, NULL);
         break;
     case 2:
         LoadBgTiles(2, gUnk_08C88824, 0x4000);
@@ -263,7 +264,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF3384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAtl, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAtl, NULL);
         break;
     case 7:
         LoadBgTiles(2, gUnk_08C98824, 0x3EC0);
@@ -273,7 +274,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF7384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoNvl, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoNvl, NULL);
         break;
     case 3:
         LoadBgTiles(2, gUnk_08C7C824, 0x4000);
@@ -283,7 +284,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF0384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoCol, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoCol, NULL);
         break;
     case 8:
         LoadBgTiles(2, gUnk_08CA06E4, 0x4000);
@@ -293,7 +294,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF9384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHlw, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHlw, NULL);
         break;
     case 9:
         LoadBgTiles(2, gUnk_08C9C6E4, 0x4000);
@@ -303,7 +304,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF8384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoDil, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoDil, NULL);
         break;
     case 1:
         LoadBgTiles(2, gUnk_08C90824, 0x4000);
@@ -313,7 +314,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF5384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAgr, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAgr, NULL);
         break;
     case 10:
         LoadBgTiles(2, gUnk_08C78824, 0x4000);
@@ -323,7 +324,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EEF384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTvt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTvt, NULL);
         break;
     case 0:
         LoadBgTiles(2, gUnk_08C84824, 0x4000);
@@ -333,7 +334,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EF2384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoPoo, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoPoo, NULL);
         break;
     case 11:
         LoadBgTiles(2, gUnk_08CA46E4, 0x4000);
@@ -343,7 +344,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EFA384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTt, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTt, NULL);
         break;
     case 12:
         LoadBgTiles(2, gUnk_08CA86E4, 0x4000);
@@ -353,7 +354,7 @@ void WLogoStartLogo(u8 a) {
 #else
         LoadBgMap(2, gUnk_08EFB384, 0x1000);
 #endif
-        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoBks, 0);
+        sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoBks, NULL);
         break;
     }
 
@@ -368,46 +369,46 @@ void task_wLogo_0(WLogoTaskWork* work, u8 arg) {
 
     switch (work->worldId) {
     case 4:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
     case 5:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoMons, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoMons, NULL);
         break;
     case 6:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHwt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHwt, NULL);
         break;
     case 2:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAtl, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAtl, NULL);
         break;
     case 7:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoNvl, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoNvl, NULL);
         break;
     case 3:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoCol, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoCol, NULL);
         break;
     case 8:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHlw, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoHlw, NULL);
         break;
     case 1:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAgr, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoAgr, NULL);
         break;
     case 9:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoDil, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoDil, NULL);
         break;
     case 10:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTvt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTvt, NULL);
         break;
     case 0:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoPoo, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoPoo, NULL);
         break;
     case 11:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTt, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoTt, NULL);
         break;
     case 12:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoBks, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoBks, NULL);
         break;
     default:
-        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, 0);
+        sTaskWLogoTask = TaskCreate(&sTaskWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
     }
 

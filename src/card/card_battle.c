@@ -195,12 +195,12 @@ u8 IsSoraSelectionEmpty() {
 void CreateCardBattleState() {
     gCardBattleState = EwramAlloc(sizeof(CardBattleState));
     CpuFill32(0, gCardBattleState, sizeof(CardBattleState));
-    gCardBattleState->activeCards[0] = 0;
-    gCardBattleState->activeCards[1] = 0;
-    gCardBattleState->activeCards[2] = 0;
-    gCardBattleState->activeCards[3] = 0;
-    gCardBattleState->activeCards[4] = 0;
-    gCardBattleState->activeCards[5] = 0;
+    gCardBattleState->activeCards[0] = NULL;
+    gCardBattleState->activeCards[1] = NULL;
+    gCardBattleState->activeCards[2] = NULL;
+    gCardBattleState->activeCards[3] = NULL;
+    gCardBattleState->activeCards[4] = NULL;
+    gCardBattleState->activeCards[5] = NULL;
     gCardBattleState->unk_0B0 = 145;
     gCardBattleState->unk_0B4 = 145;
     gCardBattleState->pickedFriendCardId = 950;
@@ -306,7 +306,7 @@ CardSlot* FindNextAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
@@ -348,7 +348,7 @@ CardSlot* FindPrevAvailableSlot(CardBattleWork* w, u8 slot, u16* n) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
@@ -540,13 +540,13 @@ static void cardbattle_0(CardBattleWork* w) {
     w->cardsClosed = 0;
 
     for (i = 0; i < 3; i++) {
-        w->playedCards[i] = 0;
-        w->stock[i] = 0;
+        w->playedCards[i] = NULL;
+        w->stock[i] = NULL;
     }
 
     for (i = 0; i < 4; i++) {
-        w->selectedCards[i] = 0;
-        w->slots[i] = 0;
+        w->selectedCards[i] = NULL;
+        w->slots[i] = NULL;
     }
 
     w->unk_C4[1] = 0;
@@ -587,7 +587,7 @@ static void cardbattle_0(CardBattleWork* w) {
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        TaskCreate(&w->tasks, &gTaskDescDarkPoint, 0);
+        TaskCreate(&w->tasks, &gTaskDescDarkPoint, NULL);
     }
 }
 
@@ -677,7 +677,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 w->cursors[w->listIndex] = 0;
                 w->cardsLeft[w->listIndex] = 0;
                 w->reloadPending[w->listIndex] = 1;
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
                 gSoraCardRequest = 0;
             }
             }
@@ -760,7 +760,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                 UseSoraHeartlessCard(w);
             } else if (gGameState.flags & GAME_FLAG_RIKU) {
                 RemoveSoraCardDisplays(w);
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
                 gBtlWork->flags |= BTL_FLAG_RELOADING;
                 w->cardsLeft[w->listIndex] = 0;
                 w->reloadPending[w->listIndex] = 1;
@@ -827,14 +827,14 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
 
             if (w->listIndex == 0) {
                 RemoveSoraCardDisplays(w);
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             } else {
                 RemoveSoraCardDisplays(w);
                 w->listIndex = 0;
 #ifdef VERSION_EU
                 gCardBattleState->soraListIndex = 0;
 #endif
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             }
 
             gBtlWork->flags |= BTL_FLAG_RELOADING;
@@ -852,14 +852,14 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
 
             if (w->listIndex == 0) {
                 RemoveSoraCardDisplays(w);
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             } else {
                 RemoveSoraCardDisplays(w);
                 w->listIndex = 0;
 #ifdef VERSION_EU
                 gCardBattleState->soraListIndex = 0;
 #endif
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             }
 
             m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -877,14 +877,14 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
 
             if (w->listIndex == 0) {
                 RemoveSoraCardDisplays(w);
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             } else {
                 RemoveSoraCardDisplays(w);
                 w->listIndex = 0;
 #ifdef VERSION_EU
                 gCardBattleState->soraListIndex = 0;
 #endif
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             }
 
             m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -1106,14 +1106,14 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
             if (w->listIndex == 0) {
                 w->reloadCounts[0] = 0;
                 RemoveSoraCardDisplays(w);
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             } else {
                 RemoveSoraCardDisplays(w);
                 w->listIndex = 0;
 #ifdef VERSION_EU
                 gCardBattleState->soraListIndex = 0;
 #endif
-                gSoraSelectedCard = 0;
+                gSoraSelectedCard = NULL;
             }
 
             m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -1207,7 +1207,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                         }
 
                         if (gCardBattleState->soraStockNameShown == 0) {
-                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, 0);
+                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, NULL);
                             gCardBattleState->soraStockNameShown = 1;
                         }
                     } else {
@@ -1273,7 +1273,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                         }
 
                         if (gCardBattleState->soraStockNameShown == 0) {
-                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, 0);
+                            TaskCreate(&w->tasks, &gTaskDescStockNameSora, NULL);
                             gCardBattleState->soraStockNameShown = 1;
                         }
                     }
@@ -1302,7 +1302,7 @@ static void cardbattle_2(CardBattleWork* w) {
     gCardBattleState->gfx2 = AnimUpdate(&gCardBattleState->anim2);
 
     if (gCardBattleState->cardsOpen != 0 && w->stockCount != 0 && w->stockValue != 0) {
-        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC,
+        DrawSprite(w->x, 4, gUnk_09EF12E8[0], w->tiles, w->palette, NULL, SPRITE_FLAG_NO_MOSAIC,
                    12);
     }
 
@@ -1334,7 +1334,7 @@ static void cardbattle_3(CardBattleWork* w) {
     ReleaseObjTiles(gCardBattleState->tiles[2]);
     ReleaseObjTiles(gCardBattleState->tiles[3]);
     EwramFree(gCardBattleState);
-    gCardBattleState = 0;
+    gCardBattleState = NULL;
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
 }
@@ -2456,7 +2456,7 @@ s32 UseSoraCard(CardBattleWork* w) {
     other = 0xFF;
     id = other;
     found = 0;
-    gSoraSelectedCard = 0;
+    gSoraSelectedCard = NULL;
 
     e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
@@ -2535,7 +2535,7 @@ s32 UseSoraCard(CardBattleWork* w) {
 
     if (gBtlWork->hcEffect == 40 && (gSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->cardsLeft[w->listIndex] == 1) {
         RemoveSoraCardDisplays(w);
-        gSoraSelectedCard = 0;
+        gSoraSelectedCard = NULL;
         gBtlWork->flags |= BTL_FLAG_RELOADING;
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
@@ -2591,7 +2591,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* w) {
     other = 0xFF;
     id = other;
     found = 0;
-    gSoraSelectedCard = 0;
+    gSoraSelectedCard = NULL;
 
     e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
@@ -2708,7 +2708,7 @@ s32 UseSoraGimmickCard(CardBattleWork* w) {
     other = 0xFF;
     id = other;
     found = 0;
-    gSoraSelectedCard = 0;
+    gSoraSelectedCard = NULL;
 
     e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
@@ -2878,7 +2878,7 @@ s32 StockSoraCard(CardBattleWork* w) {
     other = 0xFF;
     id = other;
     found = 0;
-    gSoraSelectedCard = 0;
+    gSoraSelectedCard = NULL;
 
     e = ListPoolFirst(&w->cardDisplays[w->listIndex]);
 
@@ -2957,7 +2957,7 @@ s32 StockSoraCard(CardBattleWork* w) {
 
     if (gBtlWork->hcEffect == 40 && (gSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD) && w->cardsLeft[w->listIndex] == 1) {
         RemoveSoraCardDisplays(w);
-        gSoraSelectedCard = 0;
+        gSoraSelectedCard = NULL;
         w->cardsLeft[0] = 0;
         w->reloadPending[0] = 1;
         m4aSongNumStart(SONG_SYS_CHAGEF2);
@@ -3309,7 +3309,7 @@ void UseSoraStock(CardBattleWork* w) {
 
     if (i < w->stockCount) {
         do {
-            p = 0;
+            p = NULL;
             n = i;
             w->playedCards[n] = w->stock[n];
             w->stock[n]->command = 5;
@@ -3379,7 +3379,7 @@ u8 func_0807AEF4(CardBattleWork* w, u8 kind) {
 }
 
 void SwitchSoraCardList(CardBattleWork* w) {
-    CardDisplayWork* node = 0;
+    CardDisplayWork* node = NULL;
 
     if (!(gSoraSelectedCard->flags & CARD_DISP_FLAG_SETTLED)) {
         return;
@@ -3456,7 +3456,7 @@ void SwitchSoraCardList(CardBattleWork* w) {
 }
 
 void CycleSoraCardList(CardBattleWork* w) {
-    CardDisplayWork* node = 0;
+    CardDisplayWork* node = NULL;
 
     m4aSongNumStart(SONG_SYS_CANSEL);
 
@@ -3726,12 +3726,12 @@ u8 CanUseSoraSelectedCard() {
 }
 
 void LoadPremiumCardGfx(CardBattleState* p) {
-    p->premiumTiles = AllocObjTiles(0x280, 0);
+    p->premiumTiles = AllocObjTiles(0x280, NULL);
     SetObjTileSource(p->premiumTiles, gUnk_0908B1B4);
     AnimInit(&p->anim, gUnk_09EEA164, gUnk_09EEA148);
     AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
     p->gfx = AnimGetGfx(&p->anim);
-    p->premiumTiles2 = AllocObjTiles(0x100, 0);
+    p->premiumTiles2 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(p->premiumTiles2, gUnk_0908C3CE);
     AnimInit(&p->anim2, gUnk_09EEA198, gUnk_09EEA180);
     AnimStart(&p->anim2, 0, ANIM_FLAG_LOOP);
@@ -4000,14 +4000,14 @@ void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
     u16 v;
 
     CpuFill32(0, p, sizeof(CardDisplayWork));
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->tiles4 = 0;
-    p->tiles5 = 0;
-    p->palette2 = 0;
-    p->palette = 0;
-    p->children = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->tiles4 = NULL;
+    p->tiles5 = NULL;
+    p->palette2 = NULL;
+    p->palette = NULL;
+    p->children = NULL;
     p->args = *a;
     p->flags = 0;
     v = p->args.index;
@@ -4215,7 +4215,7 @@ void card_not_have_2(CardDisplayWork* p) {
     }
 
     if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
-        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 1);
+        DrawSprite(p->x >> 8, y, gfx, p->tiles2, gCardBattleState->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 1);
     }
 }
 
@@ -4248,9 +4248,9 @@ void LoadCardDisplayGfx(CardDisplayWork* p) {
     f = p->flags & CARD_DISP_FLAG_NO_CARD;
 
     if (f != 0) {
-        p->tiles = 0;
-        p->palette = 0;
-        p->palette2 = 0;
+        p->tiles = NULL;
+        p->palette = NULL;
+        p->palette2 = NULL;
         p->tiles2 = LoadObjTiles(gCardBacks[p->args.listIndex].tiles2, 640);
     } else {
         d = p->cardDef;
@@ -4258,7 +4258,7 @@ void LoadCardDisplayGfx(CardDisplayWork* p) {
         pal = d->palette;
         p->tiles = LoadObjTiles(tiles, 512);
         p->palette = LoadObjPalette(pal, 32);
-        p->tiles2 = 0;
+        p->tiles2 = NULL;
     }
 }
 
@@ -4283,12 +4283,12 @@ void ReleaseCardDisplayGfx(CardDisplayWork* p) {
         ReleaseObjTiles(p->tiles4);
     }
 
-    p->tiles = 0;
-    p->palette = 0;
-    p->palette2 = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->tiles4 = 0;
+    p->tiles = NULL;
+    p->palette = NULL;
+    p->palette2 = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->tiles4 = NULL;
 }
 
 u8 func_0807C3E8(CardDisplayWork* p, void* a) {
@@ -4920,10 +4920,10 @@ void LookupSoraCardDef(CardDisplayArgs* a, CardDef** out, u8 index) {
             if (a->slot->cardId != CARD_ID_RELOAD) {
                 *out = &gCardDefs[a->slot->cardId & CARD_ID_MASK];
             } else {
-                *out = 0;
+                *out = NULL;
             }
         } else {
-            *out = 0;
+            *out = NULL;
         }
     } else {
         q = &gCardBattleState->pickedFriendCardId;
@@ -5000,8 +5000,8 @@ void RefreshSoraCardDisplayGfx(CardDisplayWork* p) {
         ReleaseObjPalette(p->palette);
     }
 
-    p->tiles = 0;
-    p->palette = 0;
+    p->tiles = NULL;
+    p->palette = NULL;
     LoadCardDisplayGfx(p);
 }
 
@@ -5144,20 +5144,20 @@ u8 func_0807D810(CardDisplayWork* p) {
 
 void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
     CpuFill32(0, p, sizeof(CardDisplayWork));
-    p->tiles = 0;
-    p->tiles2 = 0;
-    p->tiles3 = 0;
-    p->tiles4 = 0;
-    p->tiles5 = 0;
-    p->palette2 = 0;
-    p->palette = 0;
-    p->children = 0;
+    p->tiles = NULL;
+    p->tiles2 = NULL;
+    p->tiles3 = NULL;
+    p->tiles4 = NULL;
+    p->tiles5 = NULL;
+    p->palette2 = NULL;
+    p->palette = NULL;
+    p->children = NULL;
     p->reloadGauge = EwramAlloc(sizeof(ReloadGauge));
     CpuFill32(0, p->reloadGauge, sizeof(ReloadGauge));
     p->args = *a;
     p->reloadGauge->chargeTick = 0;
     p->flags = (CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE);
-    p->cardDef = 0;
+    p->cardDef = NULL;
     p->scaleX = 0x100;
     p->scaleY = 0x100;
     p->bobAngle = 0;
@@ -5256,7 +5256,7 @@ void SetSoraReloadCounterAnim(ReloadGauge* p, s32 a) {
         AnimStart(&p->anim, a, 0);
         gfx = AnimGetGfx(&p->anim);
     } else {
-        gfx = 0;
+        gfx = NULL;
     }
 
     p->gfx3 = gfx;
@@ -5266,15 +5266,15 @@ void LoadSoraReloadCardGfx(CardDisplayWork* p) {
     ReloadGauge* d;
 
     d = p->reloadGauge;
-    p->tiles = AllocObjTiles(0x80, 0);
+    p->tiles = AllocObjTiles(0x80, NULL);
     SetObjTileSource(p->tiles, gUnk_0909A4E0);
     InitSoraReloadCounterAnim(p->reloadGauge, p->tiles, p->args.listIndex, gCardBattleState->soraReloadCounter);
-    p->palette = 0;
+    p->palette = NULL;
     p->tiles2 = LoadObjTiles(gUnk_0909FDCA, 0x280);
-    p->palette2 = 0;
-    p->tiles3 = AllocObjTiles(0x200, 0);
+    p->palette2 = NULL;
+    p->tiles3 = AllocObjTiles(0x200, NULL);
     SetObjTileSource(p->tiles3, gRiCardF0RedTiles);
-    p->tiles4 = AllocObjTiles(0x80, 0);
+    p->tiles4 = AllocObjTiles(0x80, NULL);
     SetObjTileSource(p->tiles4, gRiCardF0RedTiles);
     AnimInit(&d->anim2, gRiCardF0RedAnims, gRiCardF0RedFrames);
     AnimStart(&d->anim2, 1, ANIM_FLAG_LOOP);
@@ -5301,11 +5301,11 @@ void card_reload_2(CardDisplayWork* p) {
 
         attr = 0x410;
         DrawSprite(p->x >> 8, y, gCardBacks[3].gfx2, p->tiles2,
-                   gCardBattleState->palette, 0, attr, p->priority);
+                   gCardBattleState->palette, NULL, attr, p->priority);
 
         if (!(gGameState.flags & GAME_FLAG_RIKU) && w->gfx3 != NULL) {
             DrawSprite(p->x >> 8, y, w->gfx3, p->tiles,
-                       gCardBattleState->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 2);
+                       gCardBattleState->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, p->priority - 2);
         }
 
         if ((s32)gCardBattleState->soraReloadGauge > 0) {
@@ -5319,7 +5319,7 @@ void card_reload_2(CardDisplayWork* p) {
 
             if (gCardBattleState->reloadGaugeFull[0] == 1 && w->gfx2 != NULL) {
                 DrawSprite(p->x >> 8, y, w->gfx2, p->tiles4,
-                           gCardBattleState->palette, 0, SPRITE_PRIORITY(1),
+                           gCardBattleState->palette, NULL, SPRITE_PRIORITY(1),
                            p->priority - 1);
             }
         }

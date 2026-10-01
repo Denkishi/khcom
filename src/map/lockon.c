@@ -33,7 +33,7 @@ void task_lockon_0(LockonWork* w) {
     s32 i;
 
     gLockonDoorPosition = EwramAlloc(12);
-    w->tiles = AllocObjTiles(0x80, 0);
+    w->tiles = AllocObjTiles(0x80, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
     SetObjTileSource(w->tiles, gUnk_090D7C84);
     AnimInit(&w->anim, gUnk_09EEC66C, gUnk_09EEC660);
@@ -41,7 +41,7 @@ void task_lockon_0(LockonWork* w) {
     w->gfx = AnimGetGfx(&w->anim);
 
     for (i = 0; i < 8; i++) {
-        w->targets[i] = 0;
+        w->targets[i] = NULL;
     }
 
     w->targetCount = 0;
@@ -68,7 +68,7 @@ u8 task_lockon_1(LockonWork* w) {
     o = ListPoolFirst(&gFieldState->actor.pool);
 
     if (gFieldState->flags & FIELD_FLAG_NO_LOCKON) {
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         return 1;
     }
 
@@ -128,7 +128,7 @@ u8 task_lockon_1(LockonWork* w) {
     if (w->selected >= 0) {
         gFieldState->lockonTarget = w->targets[w->selected];
     } else {
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         w->unk_30 = 0;
     }
 
@@ -190,11 +190,11 @@ void task_lockon_2(LockonWork* w) {
         FldObj* obj = w->targets[w->selected];
         s32 projectedY = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, 0, SPRITE_PRIORITY(1), -0x100E - (((s16)projectedY >> 8) << 2));
+        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), -0x100E - (((s16)projectedY >> 8) << 2));
     }
 #else
     obj = w->targets[w->selected];
-    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height + 40, w->gfx, w->tiles, w->palette, 0, 0, -0x100E - ((w->targets[w->selected]->fieldPosition.y >> 8) << 2));
+    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height + 40, w->gfx, w->tiles, w->palette, NULL, 0, -0x100E - ((w->targets[w->selected]->fieldPosition.y >> 8) << 2));
 #endif
 }
 
@@ -202,9 +202,9 @@ void task_lockon_2(LockonWork* w) {
 void task_lockon_3(LockonWork* w) {
     ReleaseObjTiles(w->tiles);
     ReleaseObjPalette(w->palette);
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
     EwramFree(gLockonDoorPosition);
-    gLockonDoorPosition = 0;
+    gLockonDoorPosition = NULL;
 }
 
 s32 VectorLength2D(s32 a, s32 b) {
@@ -263,7 +263,7 @@ void LockonClearTargets(LockonWork* w) {
         w->selected = -1;
 
         for (i = 0; i < 8; i++) {
-            w->targets[i] = 0;
+            w->targets[i] = NULL;
         }
 
         w->targetCount = 0;
@@ -738,7 +738,7 @@ void DebugTextDraw(u8 bg) {
     u32 v;
     u32 mapRow;
     u8* screen;
-    u8* font = 0;
+    u8* font = NULL;
     u8 n;
     u8 tileX;
     u8 tileY;

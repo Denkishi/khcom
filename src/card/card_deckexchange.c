@@ -85,19 +85,19 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     u16 n;
 
     CpuFill32(0, w, sizeof(DeckExchangeWork));
-    w->tiles7 = 0;
-    w->tiles4 = 0;
-    w->tiles5 = 0;
-    w->tiles6 = 0;
-    w->palette2 = 0;
-    w->palette3 = 0;
-    w->tiles8 = 0;
-    w->palette6 = 0;
-    w->palette7 = 0;
-    w->palette4 = 0;
-    w->unk_4C0 = 0;
-    w->unk_4C4 = 0;
-    w->entries = 0;
+    w->tiles7 = NULL;
+    w->tiles4 = NULL;
+    w->tiles5 = NULL;
+    w->tiles6 = NULL;
+    w->palette2 = NULL;
+    w->palette3 = NULL;
+    w->tiles8 = NULL;
+    w->palette6 = NULL;
+    w->palette7 = NULL;
+    w->palette4 = NULL;
+    w->unk_4C0 = NULL;
+    w->unk_4C4 = NULL;
+    w->entries = NULL;
     w->resultOut = a;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
@@ -114,7 +114,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     TaskPoolInit(&w->tasks2, 1);
     w->deckIndex = GetActiveDeckIndex();
     CreateDeckExchangeDeckGridCards(w, 0);
-    w->tiles = AllocObjTiles(0x120, 0);
+    w->tiles = AllocObjTiles(0x120, NULL);
     SetObjTileSource(w->tiles, gUnk_090A4664);
     AnimInit(&w->anim, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -124,7 +124,7 @@ void deckexchange_0(DeckExchangeWork* w, void* a) {
     w->handFlags = 0;
     w->tiles3 = LoadObjTiles(gUnk_090A44C4, 32);
     w->palette = LoadObjPalette(gUnk_09614418, 32);
-    w->tiles2 = AllocObjTiles(0x280, 0);
+    w->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckExchangeFrameCursor(w, 0);
     w->palette4 = LoadObjPalette(gUnk_09614438, 32);
     w->step = 0;
@@ -901,18 +901,18 @@ void DrawDeckExchangeCardDescription(DeckExchangeWork* w) {
 
 void deckexchange_2(DeckExchangeWork* w) {
     if (w->popupActive == 0) {
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 3);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 30, w->gfx, w->tiles, w->palette, NULL, w->handFlags, 3);
     }
 
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEB000, w->tiles3, w->palette, 0, SPRITE_PRIORITY(2), 10);
+    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEB000, w->tiles3, w->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     switch (w->view) {
     case 0:
         if (w->holding != 0) {
-            DrawSprite((w->x3 >> 8) - 16, (w->y3 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+            DrawSprite((w->x3 >> 8) - 16, (w->y3 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         }
 
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
     case 1:
     case 2:
     case 3:
@@ -920,29 +920,29 @@ void deckexchange_2(DeckExchangeWork* w) {
         break;
     case 4:
         DrawDeckExchangeDeckNames(w, 1);
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles4 != NULL) {
             if (w->popupActive == 0) {
-                DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+                DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
             }
 
-            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }
 
         break;
     case 7:
         DrawDeckExchangeDeckNames(w, 1);
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
 
             if (w->tiles6 != NULL) {
-                DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, 0, 0, 19);
+                DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, NULL, 0, 19);
             }
 
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -950,12 +950,12 @@ void deckexchange_2(DeckExchangeWork* w) {
 
         break;
     case 5:
-        DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         DrawDeckExchangeDeckNames(w, 1);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }
 
@@ -964,8 +964,8 @@ void deckexchange_2(DeckExchangeWork* w) {
         DrawDeckExchangeDeckNames(w, 1);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(24, 82, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(24, 82, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }
 
@@ -974,11 +974,11 @@ void deckexchange_2(DeckExchangeWork* w) {
         DrawDeckExchangeDeckNames(w, 1);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(164, 82, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(164, 82, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
 
             if (w->tiles6 != NULL) {
-                DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, 0, 0, 19);
+                DrawSprite(164, 82, w->gfx5, w->tiles6, w->palette2, NULL, 0, 19);
             }
 
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -986,23 +986,23 @@ void deckexchange_2(DeckExchangeWork* w) {
 
         break;
     case 9:
-        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         DrawDeckExchangeCardDescription(w);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }
 
         break;
     case 11:
-        DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x2 >> 8) - 26, (w->y2 >> 8) - 13, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         DrawDeckExchangeCardDescription(w);
 
         if (w->tiles4 != NULL) {
-            DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, 0, 0, 20);
-            DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, 0, 0, 21);
+            DrawSprite(24, 66, w->gfx3, w->tiles4, w->palette2, NULL, 0, 20);
+            DrawSprite(24, 66, w->gfx4, w->tiles5, w->palette3, NULL, 0, 21);
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }
 
@@ -1122,7 +1122,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* w, u8 kind, u8 c) {
                 args.col = x;
                 args.row = y;
                 args.panel = 1;
-                args.slot = 0;
+                args.slot = NULL;
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
             }
@@ -1134,7 +1134,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* w, u8 kind, u8 c) {
                 args.col = x;
                 args.row = y;
                 args.panel = 1;
-                args.slot = 0;
+                args.slot = NULL;
                 TaskCreate(&w->tasks, &gTaskDescDeckCard2, &args);
                 x++;
             }
@@ -1349,7 +1349,7 @@ void DrawDeckExchangeDeckCardCount(u8 deck) {
     u8* base;
     u16 n;
 
-    base = 0;
+    base = NULL;
     n = GetDeckCardCount(deck);
     d[0] = n / 10;
     d[1] = n - (u16)(n / 10) * 10;
@@ -1409,7 +1409,7 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
     u16 n;
     u8* ep;
 
-    base = 0;
+    base = NULL;
     n = GetDeckCpCost(kind);
     d[0] = n / 100;
     d[1] = n / 10 - d[0] * 10;
@@ -1596,7 +1596,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* w) {
 void ReleaseDeckExchangeCardPreview(DeckExchangeWork* w) {
     if (w->tiles7 != NULL) {
         ReleaseObjTiles(w->tiles7);
-        w->tiles7 = 0;
+        w->tiles7 = NULL;
     }
 
     if (w->tiles4 != NULL) {
@@ -1607,13 +1607,13 @@ void ReleaseDeckExchangeCardPreview(DeckExchangeWork* w) {
 
         if (w->tiles6 != NULL) {
             ReleaseObjTiles(w->tiles6);
-            w->tiles6 = 0;
+            w->tiles6 = NULL;
         }
 
-        w->tiles4 = 0;
-        w->palette2 = 0;
-        w->tiles5 = 0;
-        w->palette3 = 0;
+        w->tiles4 = NULL;
+        w->palette2 = NULL;
+        w->tiles5 = NULL;
+        w->palette3 = NULL;
     }
 }
 
@@ -1858,7 +1858,7 @@ void FreeDeckExchangeCollectionEntries(DeckExchangeWork* w) {
         }
 
         EwramFree(w->entries);
-        w->entries = 0;
+        w->entries = NULL;
     }
 }
 

@@ -178,7 +178,7 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     work->variant = args->variant;
     work->palette = LoadObjPalette(gCroudPalette, 32);
     work->unk_15C = 0;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -188,7 +188,7 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     work->scaleY = 10;
     work->animating = 0;
     work->unk_160 = 0;
-    work->target = 0;
+    work->target = NULL;
     work->attackCount = 0;
     work->targetIndex = 0;
     TaskPoolInit(&work->tasks, 2);
@@ -620,7 +620,7 @@ void task_smn_cloud_2(SmnCloudWork* work) {
     }
 
     if (sclY == 256 && sclX == sclY) {
-        affine = 0;
+        affine = NULL;
     } else if (sclY <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -690,7 +690,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     work->variant = args->variant;
     work->palette = LoadObjPalette(gBanbPalette, 32);
     work->vz = 0;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnBambiAnimDef, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -700,7 +700,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     work->scale = 10;
     work->animating = 0;
     work->unk_160 = 0;
-    work->target = 0;
+    work->target = NULL;
     work->targetIndex = 0;
     m4aSongNumStart(SONG_VO_SR_SUMMON00);
     TaskPoolInit(&work->tasks, 2);
@@ -738,7 +738,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
         }
 
         if (p->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return p;
@@ -761,7 +761,7 @@ BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
     }
 
     if (count == 0) {
-        return 0;
+        return NULL;
     }
 
     p = list[work->targetIndex % count];
@@ -1028,7 +1028,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
 
     work->variant = args->variant;
     work->palette = LoadObjPalette(gTinkPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnTinkAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -1375,7 +1375,7 @@ void task_smn_tinkeff_2(SmnTinkeffWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
     WorldToScreen(&sx, &sy, work->x, work->y, work->z);
-    DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2),
+    DrawSprite(sx, sy, gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
                -4100 - ((work->y >> 8) * 4));
 }
 
@@ -1415,7 +1415,7 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
 
     work->variant = args->variant;
     work->palette = LoadObjPalette(gShinbaPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(&sSmnSimbaAnimDef, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -1659,7 +1659,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
 
     work->variant = args->variant;
     work->palette = LoadObjPalette(gMushuPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnMushuAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -1915,7 +1915,7 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
 
     work->variant = args->variant;
     work->palette = LoadObjPalette(gDamboPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnDumboAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -2124,7 +2124,7 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     body->groundZ = obj->originZ;
     work->variant = args->variant;
     work->palette = LoadObjPalette(gGeniePalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;
@@ -2165,7 +2165,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
         }
 
         if (p->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return p;
@@ -2188,7 +2188,7 @@ BtlObj* SmnGenieNextTarget(SmnGenieWork* work) {
     }
 
     if (count == 0) {
-        return 0;
+        return NULL;
     }
 
     p = list[work->targetIndex % count];
@@ -2590,7 +2590,7 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     work->variant = args->variant;
     work->palette = LoadObjPalette(gMickeyPalette, 32);
     work->vz = 0;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnKingAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
     work->stateTimer = 0;

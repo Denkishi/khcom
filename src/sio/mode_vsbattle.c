@@ -15,6 +15,7 @@
 #include "game_state.h"
 #include "m4a_song.h"
 #include "mode.h"
+#include <stddef.h>
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
@@ -72,7 +73,7 @@ void mode_vsbattle_0(u32 mode) {
 
     SetBattleBounds((s16)(0x100 - gVsBattleHalfWidth), (s16)(gVsBattleHalfWidth + 0x100),
                   (s16)gVsBattleMinY, (s16)gVsBattleMaxY);
-    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, 0);
+    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, NULL);
     gUnk_02039B98 = 0;
     FadeStartIn(FADE_MODE_BLACK, 60);
 }

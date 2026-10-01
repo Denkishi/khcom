@@ -1349,7 +1349,7 @@ u8 HookTryJumpAway(CloudWork* work) {
     BtlObj* c;
 
     c = gBtlWork->actor;
-    GetEnemyTargetPosition(&work->base.actor, &x, &y, 0);
+    GetEnemyTargetPosition(&work->base.actor, &x, &y, NULL);
     HumFaceTarget(&work->base, 1);
 
     if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
@@ -1372,7 +1372,7 @@ u8 HookTryJumpAway(CloudWork* work) {
 }
 
 void task_hum_hook_0(HookWork* work, void* arg) {
-    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumHookMoon, 0);
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescHumHookMoon, NULL);
     HumInit(&work->base, &sHumHookDef);
     work->base.actor.flags |= BTLOBJ_FLAG_IMMUNE_THUNDER;
 
@@ -1637,9 +1637,9 @@ u8 task_hum_hook_1(HookWork* work) {
 
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            w->bombTask = 0;
-            w->bombTask2 = 0;
-            w->bombTask3 = 0;
+            w->bombTask = NULL;
+            w->bombTask2 = NULL;
+            w->bombTask3 = NULL;
             w->flags &= ~(HOOK_FLAG_BOMB_THROWN | HOOK_FLAG_POST_THROW_ANIM);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
@@ -1691,7 +1691,7 @@ u8 task_hum_hook_1(HookWork* work) {
     case 25:
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            w->bombTask = 0;
+            w->bombTask = NULL;
             w->flags &= ~(HOOK_FLAG_BOMB_THROWN | HOOK_FLAG_POST_THROW_ANIM);
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
@@ -1740,7 +1740,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if (work->base.stateTimer == 0) {
             AnimReset(&work->base.anim);
             AnimChangeWithDef(sHumHookAnimDefs, &w->base.anim, 12, 0, w->base.tiles);
-            w->bombTask = 0;
+            w->bombTask = NULL;
             w->flags &= ~HOOK_FLAG_BOMB_THROWN;
             m4aSongNumStart(SONG_VO_HO_VOICE00);
         }
@@ -2036,12 +2036,12 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
     y = 208 - (gBtlWork->viewY >> 9);
     s = gSineTable[(u8)work->angle];
     y += s >> 5;
-    DrawSprite(x + 64, y - 28, gUnk_08B5A854, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFF);
-    DrawSprite(x - 144, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x - 88, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x - 32, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 64, y - 28, gUnk_08B5A854, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFF);
+    DrawSprite(x - 144, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 88, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 32, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     v = FadeGetAmount();
 
     if (v != 0) {
@@ -2241,10 +2241,10 @@ void task_hum_hook_bomb_2(HookBombWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
         -0x1004 - ((work->y + 0x800) >> 8) * 4);
     WorldToScreen(&x, &y, work->x, work->y, 0);
-    DrawSprite(x, y, gUnk_08B22CBC, work->tiles2, work->palette2, 0, attr, 0xFFF0);
+    DrawSprite(x, y, gUnk_08B22CBC, work->tiles2, work->palette2, NULL, attr, 0xFFF0);
 }
 
 void task_hum_hook_bomb_3(HookBombWork* work) {
@@ -2301,7 +2301,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
 
     w = work;
     act = &work->base.actor;
-    GetEnemyTargetPosition(act, &x, &y, 0);
+    GetEnemyTargetPosition(act, &x, &y, NULL);
 
     switch (_0800E434(&work->base)) {
     case 5:
@@ -3553,7 +3553,7 @@ void MahluxiaJumpOffset(MahluxiaWork* work, s16 a) {
     BtlObj* act = &w->actor;
     s32 v;
 
-    GetEnemyTargetPosition(act, &v, 0, 0);
+    GetEnemyTargetPosition(act, &v, NULL, NULL);
 
     if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
         w->targetX = act->x - (a << 8);
@@ -3584,7 +3584,7 @@ u8 MahluxiaTryJumpAway(MahluxiaWork* work) {
     BtlObj* c;
 
     c = gBtlWork->actor;
-    GetEnemyTargetPosition(&work->base.actor, &v, 0, 0);
+    GetEnemyTargetPosition(&work->base.actor, &v, NULL, NULL);
     HumFaceTarget(&work->base, 1);
 
     if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
@@ -3661,7 +3661,7 @@ void MahluxiaDrawAfterimage(MahluxiaWork* work, RikuSpawn* p) {
     }
 
     if (sy == 0x100 && sx == sy) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {
@@ -5150,7 +5150,7 @@ void task_hum_laxene_knf_2(LaxeneKnfWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
         -0x1004 - (work->y >> 8) * 4);
 
     if (IsRectOutsideScreen(x, y, 2, 2, 32, 32)) {
@@ -5227,7 +5227,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
     sub = &work->sub;
     sub2 = &work->sub2;
     act = &work->base.actor;
-    GetEnemyTargetPosition(act, &x, &y, 0);
+    GetEnemyTargetPosition(act, &x, &y, NULL);
 
     switch (_0800E434(&work->base)) {
     case 5:
@@ -5999,7 +5999,7 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
 
     if ((sub->flags & HUM_SUB_FLAG_HIDDEN) == 0) {
         if (sub->z >= 0) {
-            affine = 0;
+            affine = NULL;
         } else {
             scale = 0x100 - (-sub->z) / 128;
 
@@ -6071,7 +6071,7 @@ void task_hum_axcel_ptc_2(AxcelPtcWork* work) {
     s16 y;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0,
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL,
         GetBattleSpritePriorityFlags(work->y), -0x1004 - (work->y >> 8) * 4);
 }
 
@@ -6134,7 +6134,7 @@ void task_hum_vixen_0(VixenWork* work) {
     work->base.stockMoves = sHumVixenStockMovesA;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        gBtlWork->tiles2 = AllocObjTiles(0x840, 0);
+        gBtlWork->tiles2 = AllocObjTiles(0x840, NULL);
     }
 }
 
@@ -6633,7 +6633,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
     case 36:
         if (w->base.stateTimer == 0) {
             AnimChangeWithDef(sHumVixenAnimDefs, &work->base.anim, 4, 0, work->base.tiles);
-            work->task = 0;
+            work->task = NULL;
         }
 
         if (AnimGetFrame(&w->base.anim) == 3 && w->base.anim.timer == 0) {
@@ -6749,7 +6749,7 @@ void task_hum_vixen_ndl_2(VixenNdlWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
         -0x1004 - (work->y >> 8) * 4);
 }
 
@@ -6905,7 +6905,7 @@ void task_hum_vixen_frz_0(VixenFrzWork* work, VixenNdlArgs* args) {
         work->variant = 0;
     }
 
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sHumVixenFrzAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;
 
@@ -7087,7 +7087,7 @@ void task_hum_vixen_frz_2(VixenFrzWork* work) {
         gfx = AnimGetGfx(&work->anim);
         attr = GetBattleSpritePriorityFlags(work->y) | work->flipped;
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
+        DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
             -0x1004 - (work->y >> 8) * 4);
     }
 }
@@ -7182,7 +7182,7 @@ void task_hum_vixen_frg_2(VixenFrgWork* work) {
     for (i = 0; i < 15; i++) {
         attr = GetBattleSpritePriorityFlags(p[i].y) | p[i].spriteFlags;
         WorldToScreen(&x, &y, p[i].x, p[i].y, p[i].z);
-        DrawSprite(x, y, p[i].gfx, work->tiles, work->palette, 0, attr,
+        DrawSprite(x, y, p[i].gfx, work->tiles, work->palette, NULL, attr,
             -0x1004 - (p[i].y >> 8) * 4);
     }
 }
@@ -7394,7 +7394,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
             w->hoverZ = 0;
             AnimChangeWithDef(sHumLexceusAnimDefs, &w->base.anim, 5, 0, w->base.tiles);
             w->flags &= ~LEXCEUS_FLAG_WEAPON_THROWN;
-            w->task = 0;
+            w->task = NULL;
             m4aSongNumStart(SONG_SND_287);
         }
 
@@ -7833,11 +7833,11 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, attr,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
         -0x1004 - (work->y >> 8) * 4);
 
     if (work->z >= 0) {
-        affine = 0;
+        affine = NULL;
     } else {
         scale = 0x100 - (-work->z) / 256;
 
@@ -8109,7 +8109,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
         }
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        DrawSprite(x, y, gfx, work->tiles2[0], work->palette2, 0, attr,
+        DrawSprite(x, y, gfx, work->tiles2[0], work->palette2, NULL, attr,
             -0x1006 - (work->y >> 8) * 4);
     } else if (work->rockCount == 12) {
         for (i = 0; i < work->rockCount; i++) {
@@ -8124,10 +8124,10 @@ void task_hum_lex_rock_2(LexRockWork* work) {
 
             WorldToScreen(&x, &y, e->x, e->y,
                 e->z);
-            DrawSprite(x, y, gfx, work->tiles2[i], work->palette2, 0, attr,
+            DrawSprite(x, y, gfx, work->tiles2[i], work->palette2, NULL, attr,
                 -0x1006 - (e->y >> 8) * 4);
             WorldToScreen(&x, &y, e->x, e->y, 0);
-            DrawSprite(x, y, gUnk_08B22CBC, work->tiles, work->palette, 0, attr, 0xFFFE);
+            DrawSprite(x, y, gUnk_08B22CBC, work->tiles, work->palette, NULL, attr, 0xFFFE);
         }
     }
 }
@@ -8205,7 +8205,7 @@ void task_hum_mahluxia_flw_2(MahluxiaFlwWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2),
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
         -0x1004 - (work->y >> 8) * 4);
 }
 
@@ -8247,7 +8247,7 @@ u8 RikuTryJumpAway(RikuWork* work) {
     c = gBtlWork->actor;
 
     if (GetRandom() % 30 == 0) {
-        GetEnemyTargetPosition(&work->base.actor, &v, &w, 0);
+        GetEnemyTargetPosition(&work->base.actor, &v, &w, NULL);
         HumFaceTarget(&work->base, 1);
 
         if (HumIsInPlayerReach(&work->base, 0x100, 0x100, 0x100)) {
@@ -8325,7 +8325,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
     }
 
     if (sy == 0x100 && sx == sy) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {

@@ -22,10 +22,10 @@ const s16 gCollectionGridRowY[4] = { 47, 73, 99, 125 };
 
 void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
     n->args = *a;
-    n->tiles = 0;
-    n->palette = 0;
-    n->tiles2 = 0;
-    n->palette2 = 0;
+    n->tiles = NULL;
+    n->palette = NULL;
+    n->tiles2 = NULL;
+    n->palette2 = NULL;
     n->flags = 0;
 
     switch (n->args.panel) {
@@ -113,15 +113,15 @@ void DeckCard2_2(DeckCard2Work* n) {
     }
 
     if (n->tiles != NULL && n->palette != NULL) {
-        DrawSprite(n->x >> 8, n->y >> 8, n->cardDef->gfx2, n->tiles, n->palette, 0, 0, 0x33);
+        DrawSprite(n->x >> 8, n->y >> 8, n->cardDef->gfx2, n->tiles, n->palette, NULL, 0, 0x33);
 
         if (n->premium != 0) {
-            DrawSprite(n->x >> 8, n->y >> 8, gCardUiSpriteState.gfx, gCardUiSpriteState.tiles, gCardUiSpriteState.palette, 0, 0, 0x28);
+            DrawSprite(n->x >> 8, n->y >> 8, gCardUiSpriteState.gfx, gCardUiSpriteState.tiles, gCardUiSpriteState.palette, NULL, 0, 0x28);
         }
     }
 
     if (n->args.panel == 0 && n->cardDef->category != 3) {
-        DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 4, gUnk_09EE981C[n->cardDef->value], n->tiles2, n->palette2, 0, 0, 0x31);
+        DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 4, gUnk_09EE981C[n->cardDef->value], n->tiles2, n->palette2, NULL, 0, 0x31);
     }
 }
 
@@ -156,10 +156,10 @@ void DeckCard2ReleaseGfx(DeckCard2Work* node) {
         ReleaseObjPalette(node->palette);
         ReleaseObjTiles(node->tiles2);
         node->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
-        node->tiles = 0;
-        node->palette = 0;
-        node->tiles2 = 0;
-        node->palette2 = 0;
+        node->tiles = NULL;
+        node->palette = NULL;
+        node->tiles2 = NULL;
+        node->palette2 = NULL;
     }
 }
 

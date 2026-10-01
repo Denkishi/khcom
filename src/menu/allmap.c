@@ -141,7 +141,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
 
     if (work->asSprite == 0) {
         work->tiles = LoadObjTiles(gUnk_0976B340, 0x2400);
-        work->gfx2 = 0;
+        work->gfx2 = NULL;
     } else {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6424, 17), gUnk_0976B340);
         work->gfx2 = gUnk_09EF6424[work->shape];
@@ -196,13 +196,13 @@ void task_allmap_room_2(AllmapRoomWork* work) {
     }
 
     if (work->gfx2 != NULL) {
-        DrawSprite(x, y, work->gfx2, work->tiles, work->palette, 0, g, h);
+        DrawSprite(x, y, work->gfx2, work->tiles, work->palette, NULL, g, h);
     }
 
     for (i = 0; i < 4; i++) {
         if (work->gfx[i] != NULL) {
             work->gfx[i] = AnimUpdate(&work->anim[i]);
-            DrawSprite(x, y, work->gfx[i], work->tiles2[i], work->palette, 0, g, i - 4 + h);
+            DrawSprite(x, y, work->gfx[i], work->tiles2[i], work->palette, NULL, g, i - 4 + h);
         }
     }
 }
@@ -336,7 +336,7 @@ void task_allmap_cursor_2(AllmapCursorWork* work) {
         y = work->drawY >> 8;
     }
 
-    DrawSprite(x - 15, y - 22, work->gfx, work->tiles, work->palette, 0, 0, 49);
+    DrawSprite(x - 15, y - 22, work->gfx, work->tiles, work->palette, NULL, 0, 49);
 }
 
 void task_allmap_cursor_3(AllmapCursorWork* work) {
@@ -570,13 +570,13 @@ void task_allmap_bar_2(AllmapBarWork* work) {
     }
 
 #ifdef VERSION_EU
-    DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, 0,
+    DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, NULL,
         SPRITE_PRIORITY(3), 1000);
 #else
-    DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 1000);
+    DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 1000);
 #endif
-    DrawSprite(128, work->y >> 8, gUnk_0976DB68, work->tiles2, work->palette, 0, SPRITE_PRIORITY(3), 1001);
-    DrawSprite(128, work->y2 >> 8, gUnk_0976DB9C, work->tiles2, work->palette, 0, SPRITE_PRIORITY(3), 1002);
+    DrawSprite(128, work->y >> 8, gUnk_0976DB68, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1001);
+    DrawSprite(128, work->y2 >> 8, gUnk_0976DB9C, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1002);
 }
 
 void task_allmap_bar_3(AllmapBarWork* work) {
@@ -634,7 +634,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
 
             work->doors[i].sprite.tiles = AllocKeyValueTiles(n);
             work->doors[i].sprite.palette = LoadObjPalette(gUnk_09618D38, 32);
-            work->doors[i].sprite.gfx = 0;
+            work->doors[i].sprite.gfx = NULL;
             work->doors[i].sprite.tiles2 = LoadObjTiles(gUnk_0905E3BA, 0x600);
             work->doors[i].sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
             work->doors[i].sprite.gfx2 = gUnk_09EE97F4[0];
@@ -643,7 +643,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
             work->gfx2[i] = gUnk_09EF64E8[i];
             work->count++;
         } else {
-            work->gfx2[i] = 0;
+            work->gfx2[i] = NULL;
         }
     }
 
@@ -780,15 +780,15 @@ void AllmapDoorinfoDrawDoors(AllmapDoorinfoWork* work) {
 
     for (i = 0; i < 4; i++) {
         if (work->gfx2[i] != NULL && work->steps == 0) {
-            DrawSprite(work->x >> 8, work->y >> 8, work->gfx2[i], work->tiles, work->palette, 0, 0, i + 51);
+            DrawSprite(work->x >> 8, work->y >> 8, work->gfx2[i], work->tiles, work->palette, NULL, 0, i + 51);
             sAllmapDoorOffsetX = sAllmapDoorCardOffsets[i][0];
             sAllmapDoorOffsetY = sAllmapDoorCardOffsets[i][1];
-            DrawSprite(sAllmapDoorOffsetX + (work->x >> 8), sAllmapDoorOffsetY + (work->y >> 8), work->doors[i].sprite.gfx, work->doors[i].sprite.tiles, work->doors[i].sprite.palette, 0, 0, i + 40);
-            DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].sprite.gfx2, work->doors[i].sprite.tiles2, work->doors[i].sprite.palette2, 0, 0, i + 30);
+            DrawSprite(sAllmapDoorOffsetX + (work->x >> 8), sAllmapDoorOffsetY + (work->y >> 8), work->doors[i].sprite.gfx, work->doors[i].sprite.tiles, work->doors[i].sprite.palette, NULL, 0, i + 40);
+            DrawSprite((work->x >> 8) + sAllmapDoorOffsetX, (work->y >> 8) + sAllmapDoorOffsetY, work->doors[i].sprite.gfx2, work->doors[i].sprite.tiles2, work->doors[i].sprite.palette2, NULL, 0, i + 30);
         }
     }
 
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, NULL, 0, 20);
 }
 
 void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work) {
@@ -800,7 +800,7 @@ void AllmapDoorinfoDrawKeys(AllmapDoorinfoWork* work) {
         }
     }
 
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, 0, 0, 20);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles2, work->palette2, NULL, 0, 20);
 }
 
 void task_allmap_doorinfo_2(AllmapDoorinfoWork* work) {
@@ -856,7 +856,7 @@ void task_allmap_pusha_0(AllmapPushaWork* work, AllmapCursorWork* arg) {
     work->gfx = gUnk_0976DC9C;
     work->angle = 0;
     TaskPoolInit(&work->tasks, 1);
-    work->task = 0;
+    work->task = NULL;
 }
 
 s32 task_allmap_pusha_1(AllmapPushaWork* work) {
@@ -877,7 +877,7 @@ void task_allmap_pusha_2(AllmapPushaWork* work) {
     } else {
         work->x = work->cursor->pos.x * 24 - gAllmapCameraX;
         work->y = work->cursor->pos.y * 24 - gAllmapCameraY;
-        DrawSprite(work->x, work->y - work->y2 + 2, work->gfx, work->tiles, work->palette, 0, 0, 48);
+        DrawSprite(work->x, work->y - work->y2 + 2, work->gfx, work->tiles, work->palette, NULL, 0, 48);
     }
 }
 
@@ -897,7 +897,7 @@ u8 IsStockMesDispActive() {
 }
 
 void ClearStockMesDispWork() {
-    gStockMesDispWork = 0;
+    gStockMesDispWork = NULL;
 }
 
 void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
@@ -960,11 +960,11 @@ void InitAllmap() {
     sAllmapState->unk_BC = 0x400;
     gAllmapCursorRoom = gMapFloorState.room;
     TaskPoolInit(&sAllmapState->tasks, 35);
-    sAllmapState->pushaTask = 0;
-    sAllmapState->roomnameTask = 0;
+    sAllmapState->pushaTask = NULL;
+    sAllmapState->roomnameTask = NULL;
 
     for (i = 0; i < 32; i++) {
-        sAllmapState->roomTasks[i] = 0;
+        sAllmapState->roomTasks[i] = NULL;
     }
 
     sAllmapState->minX = sAllmapState->maxX = 32;
@@ -1215,7 +1215,7 @@ void AllmapHandleInput() {
     if (d->nameId != 26 && (TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_VISITED) != 0 || TestAllmapRoomFlag(r, FLOOR_ROOM_FLAG_EVENT_DONE) != 0)) {
         sAllmapState->roomnameTask = TaskCreate(&sAllmapState->tasks, &sTaskDescAllmapRoomname, &d->nameId);
     } else {
-        sAllmapState->roomnameTask = 0;
+        sAllmapState->roomnameTask = NULL;
         AllmapClearRoomnameFrame();
     }
 

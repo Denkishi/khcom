@@ -221,8 +221,8 @@ void task_status_0(StatusWork* work) {
     work->cursor = 0;
     work->scroll = 0;
     TaskPoolInit(&work->pool, 9);
-    TaskCreate(&work->pool, &sTaskDescStatusFriend, 0);
-    TaskCreate(&work->pool, &sTaskDescStatusSora, 0);
+    TaskCreate(&work->pool, &sTaskDescStatusFriend, NULL);
+    TaskCreate(&work->pool, &sTaskDescStatusSora, NULL);
 
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
         TaskCreate(&work->pool, &sTaskDescStatusTab, &work->tab);
@@ -477,20 +477,20 @@ u8 task_status_bar_1(StatusBarWork* work) {
 void task_status_bar_2(StatusBarWork* work) {
 #ifdef VERSION_EU
     DrawSprite(work->x >> 8, 0, (sStatusBarSprites[gLanguage])[2], work->tiles,
-        work->palette, 0, SPRITE_PRIORITY(3), 29);
+        work->palette, NULL, SPRITE_PRIORITY(3), 29);
 #else
-    DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 29);
+    DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 29);
 #endif
 
     if (gStatusBarState != 2) {
 #ifdef VERSION_EU
         DrawSprite(128, work->y >> 8, (sStatusBarSprites[gLanguage])[0], work->tiles,
-            work->palette, 0, SPRITE_PRIORITY(3), 30);
+            work->palette, NULL, SPRITE_PRIORITY(3), 30);
         DrawSprite(128, work->y2 >> 8, (sStatusBarSprites[gLanguage])[1], work->tiles,
-            work->palette, 0, SPRITE_PRIORITY(3), 31);
+            work->palette, NULL, SPRITE_PRIORITY(3), 31);
 #else
-        DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 30);
-        DrawSprite(128, work->y2 >> 8, gUnk_097A1898, work->tiles, work->palette, 0, SPRITE_PRIORITY(3), 31);
+        DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 30);
+        DrawSprite(128, work->y2 >> 8, gUnk_097A1898, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 31);
 #endif
     }
 }
@@ -538,8 +538,8 @@ u8 task_status_tab_1(StatusTabWork* work) {
 }
 
 void task_status_tab_2(StatusTabWork* work) {
-    DrawSprite(0, 16, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 10);
-    DrawSprite(0, 16, work->gfx2, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(2), 11);
+    DrawSprite(0, 16, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+    DrawSprite(0, 16, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(2), 11);
 }
 
 void task_status_tab_3(StatusTabWork* work) {
@@ -551,12 +551,12 @@ void task_status_tab_3(StatusTabWork* work) {
 
 void task_status_sora_0(StatusSoraWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        work->tiles = AllocObjTiles(0x800, 0);
+        work->tiles = AllocObjTiles(0x800, NULL);
         work->palette = LoadObjPalette(gRikuPalette, 0x20);
         SetObjTileSource(work->tiles, gRikuBt00Tiles);
         AnimInit(&work->anim, gRikuBt00Anims, gRikuBt00Frames);
     } else {
-        work->tiles = AllocObjTiles(0x500, 0);
+        work->tiles = AllocObjTiles(0x500, NULL);
         work->palette = LoadObjPalette(gSoraPalette, 0x20);
         SetObjTileSource(work->tiles, gSor1ll51Tiles);
         AnimInit(&work->anim, gSor1ll51Anims, gSor1ll51Frames);
@@ -583,7 +583,7 @@ void task_status_sora_2(StatusSoraWork* work) {
         y = 56;
     }
 
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 12);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 12);
 }
 
 void task_status_sora_3(StatusSoraWork* work) {
@@ -671,10 +671,10 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
 void task_status_cursor_2(StatusCursorWork* work) {
     if (FadeIsActive() == 0) {
         if (!(gGameState.flags & GAME_FLAG_RIKU) || StatusTabHasItems()) {
-            DrawSprite(work->x >> 8, (work->y >> 8) - 16, work->gfx[1], work->tiles2, work->palette2, 0, 0, 0);
+            DrawSprite(work->x >> 8, (work->y >> 8) - 16, work->gfx[1], work->tiles2, work->palette2, NULL, 0, 0);
 
             if (work->lastCursor >= 0) {
-                DrawSprite(1, (work->y >> 8) + 3, work->gfx[0], work->tiles, work->palette, 0, 0, 1);
+                DrawSprite(1, (work->y >> 8) + 3, work->gfx[0], work->tiles, work->palette, NULL, 0, 1);
             }
         }
     }
@@ -716,7 +716,7 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
     }
 
     for (i = 0; i < 8; i++) {
-        work->tiles2[i] = 0;
+        work->tiles2[i] = NULL;
     }
 
     StatusStocklistLoadRows(0);
@@ -757,11 +757,11 @@ void task_status_stocklist_2(StatusStocklistWork* work) {
         if (work->tiles2[i] != NULL) {
             if (work->blink != 0) {
                 if (IsStockNew(GetStatusListItem(GetStatusScroll() + i))) {
-                    DrawSprite(0, y, work->gfx, work->tiles, work->palette2, 0, SPRITE_PRIORITY(2), i + 13);
+                    DrawSprite(0, y, work->gfx, work->tiles, work->palette2, NULL, SPRITE_PRIORITY(2), i + 13);
                 }
             }
 
-            DrawSprite(1, y, 0, work->tiles2[i], work->palette, 0, SPRITE_PRIORITY(2), i + 21);
+            DrawSprite(1, y, NULL, work->tiles2[i], work->palette, NULL, SPRITE_PRIORITY(2), i + 21);
         }
 
         y += 12;
@@ -840,7 +840,7 @@ void StatusStocklistLoadRows(u16 a) {
     for (i = 0; i <= 7; i++) {
         if (gStatusStocklistWork->tiles2[i] != NULL) {
             ReleaseObjTiles(gStatusStocklistWork->tiles2[i]);
-            gStatusStocklistWork->tiles2[i] = 0;
+            gStatusStocklistWork->tiles2[i] = NULL;
         }
     }
 
@@ -1065,7 +1065,7 @@ u8 task_status_scrollcursor_1(StatusScrollcursorWork* work) {
 
 void task_status_scrollcursor_2(StatusScrollcursorWork* work) {
     if (StatusTabHasItems()) {
-        DrawSprite(84, work->y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 6);
+        DrawSprite(84, work->y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 6);
     }
 }
 
@@ -1078,7 +1078,7 @@ void task_status_meswindow_0(StatusMeswindowWork* work, u8* arg) {
     work->open = arg;
     work->item = 72;
     TaskPoolInit(&work->pool, 2);
-    work->task = 0;
+    work->task = NULL;
     work->textIndex = 0;
 }
 
@@ -1168,7 +1168,7 @@ void task_status_friend_2(StatusFriendWork* work) {
     x = (gGameState.flags & GAME_FLAG_RIKU) ? 216 : 186;
 
     for (i = 0; i < work->count; i++) {
-        DrawSprite(x, 45, work->gfx[i], work->tiles[i], work->palette[i], 0, SPRITE_PRIORITY(2), i + 7);
+        DrawSprite(x, 45, work->gfx[i], work->tiles[i], work->palette[i], NULL, SPRITE_PRIORITY(2), i + 7);
         x += 20;
     }
 }
@@ -1273,14 +1273,14 @@ u8 stock_mes_disp_1(StockMesDispWork* work) {
 }
 
 void stock_mes_disp_2(StockMesDispWork* work) {
-    DrawSprite(work->x + 14, work->y - 4, 0, work->tiles, work->palette, 0, 0, 5);
+    DrawSprite(work->x + 14, work->y - 4, NULL, work->tiles, work->palette, NULL, 0, 5);
 
     if (work->textIndex != 0) {
-        DrawSprite(work->x - (work->frame / 8) % 4, work->y, work->gfx, work->tiles2, work->palette2, 0, 0, 2);
+        DrawSprite(work->x - (work->frame / 8) % 4, work->y, work->gfx, work->tiles2, work->palette2, NULL, 0, 2);
     }
 
     if (work->textIndex < work->textCount - 1) {
-        DrawSprite(work->x + ((work->frame / 8) % 4 + 136), work->y, work->gfx2, work->tiles3, work->palette3, 0, 0, 3);
+        DrawSprite(work->x + ((work->frame / 8) % 4 + 136), work->y, work->gfx2, work->tiles3, work->palette3, NULL, 0, 3);
     }
 
     TaskPoolDraw(&work->tasks);

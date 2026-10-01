@@ -13,6 +13,7 @@
 #include "game_state.h"
 #include "key.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "system_state.h"
 #include "taskpool.h"
 #include "types.h"
@@ -237,7 +238,7 @@ u8 menu_1(MenuWork* w) {
 }
 
 void menu_2(MenuWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEC600[w->cursor], w->tiles, w->palette, 0, 0, 80);
+    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEC600[w->cursor], w->tiles, w->palette, NULL, 0, 80);
 }
 
 void menu_3(MenuWork* w) {

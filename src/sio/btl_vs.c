@@ -13,6 +13,7 @@
 #include "mode.h"
 #include "mode_vsbattle.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
@@ -465,7 +466,7 @@ void VsBattleUpdate() {
         break;
     case 0:
         if (gBtlWork->phaseStep == 0) {
-            gBtlWork->task = 0;
+            gBtlWork->task = NULL;
             gBtlWork->phaseStep = 1;
         }
 
@@ -482,16 +483,16 @@ void VsBattleUpdate() {
         if (IsTaskActive(gBtlWork->task)) return;
 
         if (gBtlWork->phaseStep == 2) {
-            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, 0);
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpoth, 0);
+            TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlVslockon, NULL);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, NULL);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpoth, NULL);
 
             if (gBtlWork->flags & BTL_FLAG_VS_LINK_PARENT) {
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, NULL);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, NULL);
             } else {
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, NULL);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, NULL);
             }
 
             RequestOpenCards();

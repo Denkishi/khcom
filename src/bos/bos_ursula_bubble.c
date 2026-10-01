@@ -13,6 +13,7 @@
 #include "m4a_song.h"
 #include "obj_api.h"
 #include "poo_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -314,9 +315,9 @@ void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
     pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 #ifdef VERSION_EU
-    DrawSprite(x, y, eu_080DA860(), work->tiles, pal, 0, v, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, eu_080DA860(), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
 #else
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, v, -0x1004 - (p->y >> 8) * 4);
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
 #endif
 }
 

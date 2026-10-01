@@ -11,6 +11,7 @@
 #include "key.h"
 #include "mode.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -57,7 +58,7 @@ void mode_chkeff_0() {
     FadeSetPaletteExcluded(15, 1);
     BgAnimInit(2, 0x8000, 0x80);
     TaskPoolInit(&gChkEffWork->pool, 1);
-    TaskCreate(&gChkEffWork->pool, &gTaskDescPrint, 0);
+    TaskCreate(&gChkEffWork->pool, &gTaskDescPrint, NULL);
     gChkEffWork->effectIndex = 0;
     gChkEffWork->paused = 0;
     gChkEffWork->scrollX = 0;

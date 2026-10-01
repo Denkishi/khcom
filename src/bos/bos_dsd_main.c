@@ -57,7 +57,7 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->moveSteps = 0;
     work->baseFrame = 0;
     work->spriteVisible = 1;
-    work->energy2Task = 0;
+    work->energy2Task = NULL;
     work->lastBreakDifference = gBtlWork->breakDifference;
     SetBgMapBlocks(1, gBosDsdFrameMaps, 2, 2);
     work->tiles = LoadObjTiles(gUnk_096983E4, 0x12A0);
@@ -178,9 +178,9 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     if (work->spriteVisible == 1) {
         GetBattleSpritePriorityFlags(d->body[0].y);
         WorldToScreen(&x, &y, d->body[0].x, d->body[0].y, -0x6400);
-        DrawSprite(x - 96, y + 20, work->gfx, work->tiles, gfx, 0, SPRITE_PRIORITY(1),
+        DrawSprite(x - 96, y + 20, work->gfx, work->tiles, gfx, NULL, SPRITE_PRIORITY(1),
                    -4101 - (d->body[0].y >> 8) * 4);
-        DrawSprite(x - 96, y + 20, work->gfx2, work->tiles2, gfx, 0, SPRITE_PRIORITY(2),
+        DrawSprite(x - 96, y + 20, work->gfx2, work->tiles2, gfx, NULL, SPRITE_PRIORITY(2),
                    -4099 - (d->body[0].y >> 8) * 4);
     }
 
@@ -1041,7 +1041,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         param.x = d->body[0].x - 0x1400;
         param.y = d->body[0].y;
         param.z = d->body[0].z + 0x3000;
-        param.callback = 0;
+        param.callback = NULL;
         param.prizeObj = a;
         param.flags = 1;
         CharaObjInitDefeat(&param);
@@ -1309,7 +1309,7 @@ void* gUnk_09EF2E44 = gUnk_096A8BA4;
 
 void* gUnk_09EF2E48 = gUnk_096A8BA4;
 
-void* gUnk_09EF2E4C = 0;
+void* gUnk_09EF2E4C = NULL;
 
 TaskDesc gTaskDescBosDsdMain = {
     "task_bos_dsd_main",

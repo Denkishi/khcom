@@ -12,6 +12,7 @@
 #include "gba/defines.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -159,7 +160,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
 
 void task_wlogo_mons_2(WlogoMonsWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
 
@@ -186,7 +187,7 @@ u8 task_wlogo_hwt_1(WlogoHwtWork* work) {
         work->timer++;
 
         if (work->timer == 20) {
-            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)0);
+            TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, NULL);
             TaskCreate(&gWlogoHwtTaskPool, &gTaskDescWlogoHwtObj, (void*)1);
         }
 
@@ -321,7 +322,7 @@ u8 task_wlogo_hwt_obj_1(WlogoHwtObjWork* work) {
 }
 
 void task_wlogo_hwt_obj_2(WlogoHwtObjWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 0);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 0);
 }
 
 void task_wlogo_hwt_obj_3(WlogoHwtObjWork* work) {
@@ -614,7 +615,7 @@ u8 task_wlogo_nvl_1(WlogoNvlWork* work) {
         }
 
         if (work->timer == 1) {
-            TaskCreate(&gWlogoNvlTaskPool, &gTaskDescWlogoNvlMov, (void*)0);
+            TaskCreate(&gWlogoNvlTaskPool, &gTaskDescWlogoNvlMov, NULL);
         }
 
         break;
@@ -763,7 +764,7 @@ u8 task_wlogo_nvl_mov_1(WlogoNvlMovWork* work) {
 
 void task_wlogo_nvl_mov_2(WlogoNvlMovWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
 
@@ -792,7 +793,7 @@ u8 task_wlogo_nvl_obj_1(WlogoNvlObjWork* work) {
 }
 
 void task_wlogo_nvl_obj_2(WlogoNvlObjWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 1);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 1);
 }
 
 void task_wlogo_nvl_obj_3(WlogoNvlObjWork* work) {
@@ -901,7 +902,7 @@ u8 task_wlogo_col_1(WlogoColWork* work) {
 
 void task_wlogo_col_2(WlogoColWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
 
@@ -1087,7 +1088,7 @@ u8 task_wlogo_dil_1(WlogoDilWork* work) {
 
 void task_wlogo_dil_2(WlogoDilWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 0);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 0);
     }
 }
 
@@ -1126,7 +1127,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
         if (work->timer > 29) {
             work->timer = 0;
             work->state++;
-            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash0, (void*)0);
+            TaskCreate(&gWlogoAgrTaskPool, &gTaskDescWlogoAgrFlash0, NULL);
         }
 
         break;
@@ -1276,7 +1277,7 @@ u8 task_wlogo_agr_1(WlogoAgrWork* work) {
 
 void task_wlogo_agr_2(WlogoAgrWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 3);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 3);
     }
 }
 
@@ -1311,7 +1312,7 @@ u8 task_wlogo_agr_smoke_1(WlogoAgrSmokeWork* work) {
 }
 
 void task_wlogo_agr_smoke_2(WlogoAgrSmokeWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 1);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 1);
 }
 
 void task_wlogo_agr_smoke_3(WlogoAgrSmokeWork* work) {
@@ -1340,7 +1341,7 @@ u8 task_wlogo_agr_flash0_1(WlogoAgrFlashWork* work) {
 }
 
 void task_wlogo_agr_flash0_2(WlogoAgrFlashWork* work) {
-    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 2);
+    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 2);
 }
 
 void task_wlogo_agr_flash0_3(WlogoAgrFlashWork* work) {
@@ -1369,7 +1370,7 @@ u8 task_wlogo_agr_flash1_1(WlogoAgrFlashWork* work) {
 }
 
 void task_wlogo_agr_flash1_2(WlogoAgrFlashWork* work) {
-    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 0);
+    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
 }
 
 void task_wlogo_agr_flash1_3(WlogoAgrFlashWork* work) {
@@ -1502,7 +1503,7 @@ u8 task_wlogo_tvt_1(WlogoTvtWork* work) {
 
 void task_wlogo_tvt_2(WlogoTvtWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
 
@@ -1544,7 +1545,7 @@ u8 task_wlogo_poo_1(WlogoPooWork* work) {
 
             if (work->blend > 15) {
                 work->blend = 16;
-                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)0);
+                TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, NULL);
                 TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)1);
                 TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)2);
                 TaskCreate(&gWlogoPooTaskPool, &gTaskDescWlogoPooObj, (void*)3);
@@ -1646,7 +1647,7 @@ u8 task_wlogo_poo_obj_1(WlogoPooObjWork* work) {
 
 void task_wlogo_poo_obj_2(WlogoPooObjWork* work) {
     if (work->visible == 1) {
-        DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 }
 
@@ -1817,7 +1818,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
             work->visible[4] = 1;
             work->visible[5] = 1;
             work->visible[6] = 1;
-            TaskCreate(&work->tasks, &gTaskDescWlogoTtLine, (void*)0);
+            TaskCreate(&work->tasks, &gTaskDescWlogoTtLine, NULL);
             work->timer = 0;
             work->subStep = 0;
             work->state++;
@@ -1951,11 +1952,11 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     ObjAffine* affine;
 
     if (work->visible[4] == 1) {
-        DrawSprite(72, 64, work->gfx5, work->tiles, work->palette, 0, 0, 4);
+        DrawSprite(72, 64, work->gfx5, work->tiles, work->palette, NULL, 0, 4);
     }
 
     if (work->visible[5] == 1) {
-        DrawSprite(96, 80, work->gfx6, work->tiles, work->palette, 0, 0, 6);
+        DrawSprite(96, 80, work->gfx6, work->tiles, work->palette, NULL, 0, 6);
     }
 
     if (work->visible[0] == 1) {
@@ -1964,7 +1965,7 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[2] == 1) {
-        DrawSprite(65, 65, work->gfx3, work->tiles4, work->palette, 0, 0, 20);
+        DrawSprite(65, 65, work->gfx3, work->tiles4, work->palette, NULL, 0, 20);
     }
 
     if (work->visible[1] == 1) {
@@ -1973,11 +1974,11 @@ void task_wlogo_tt_2(WlogoTtWork* work) {
     }
 
     if (work->visible[3] == 1) {
-        DrawSprite(96, 87, work->gfx4, work->tiles4, work->palette, 0, 0, 22);
+        DrawSprite(96, 87, work->gfx4, work->tiles4, work->palette, NULL, 0, 22);
     }
 
     if (work->visible[6] == 1) {
-        DrawSprite(64, 64, work->gfx7, work->tiles5, work->palette, 0, 0, 32);
+        DrawSprite(64, 64, work->gfx7, work->tiles5, work->palette, NULL, 0, 32);
     }
 
     TaskPoolDraw(&work->tasks);
@@ -2041,7 +2042,7 @@ u8 task_wlogo_tt_obj_1(WlogoTtObjWork* work) {
 }
 
 void task_wlogo_tt_obj_2(WlogoTtObjWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, 0, 0, 16);
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 16);
 }
 
 void task_wlogo_tt_obj_3(WlogoTtObjWork* work) {
@@ -2172,7 +2173,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
             break;
         case 30:
             TaskCreate(&work->tasks, &gTaskDescWlogoBksObj, (void*)12);
-            TaskCreate(&work->tasks, &gTaskDescWlogoBksObj, (void*)0);
+            TaskCreate(&work->tasks, &gTaskDescWlogoBksObj, NULL);
             break;
         case 40:
             TaskCreate(&work->tasks, &gTaskDescWlogoBksObj, (void*)11);
@@ -2267,7 +2268,7 @@ u8 task_wlogo_bks_1(WlogoBksWork* work) {
 
 void task_wlogo_bks_2(WlogoBksWork* work) {
     if (work->visible == 1) {
-        DrawSprite(64, 64, work->gfx, work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(64, 64, work->gfx, work->tiles, work->palette, NULL, 0, 0);
     }
 
     TaskPoolDraw(&work->tasks);

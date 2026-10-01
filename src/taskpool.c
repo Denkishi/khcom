@@ -97,17 +97,17 @@ Task* TaskCreate(TaskPool* a, TaskDesc* desc, void* arg) {
     task = ListPoolFirstFree(a);
 
     if (task == NULL) {
-        return 0;
+        return NULL;
     }
 
     if (desc->workSize > 0) {
         task->work = EwramAlloc(desc->workSize);
 
         if (task->work == NULL) {
-            return 0;
+            return NULL;
         }
     } else {
-        task->work = 0;
+        task->work = NULL;
     }
 
     task->desc = desc;
@@ -259,9 +259,9 @@ void ModeInit() {
 #else
     ModeStart(&gModeCopyright1, 0);
 #endif
-    gPendingMode = 0;
-    gModeTransitionCallback = 0;
-    gModeVBlankCallback = 0;
+    gPendingMode = NULL;
+    gModeTransitionCallback = NULL;
+    gModeVBlankCallback = NULL;
 }
 
 void ModeSetTransitionCallback(void (*a)(), void (*b)()) {
@@ -275,7 +275,7 @@ void ModeSetTransitionCallback(void (*a)(), void (*b)()) {
 
 void ModeClearTransitionCallback() {
     gModeFlags &= ~MODE_FLAG_TRANSITION_ACTIVE;
-    gModeTransitionCallback = 0;
+    gModeTransitionCallback = NULL;
 }
 
 void ModeSetVBlankCallback(void (*fn)()) {
@@ -283,7 +283,7 @@ void ModeSetVBlankCallback(void (*fn)()) {
 }
 
 void ModeClearVBlankCallback() {
-    gModeVBlankCallback = 0;
+    gModeVBlankCallback = NULL;
 }
 
 u8 IsModeStarted() {
@@ -359,7 +359,7 @@ void ModeUpdate() {
 
             gModeFlags = (MODE_FLAG_BLANK_PENDING | MODE_FLAG_DISPLAY_HELD);
             ModeStart(gPendingMode, gPendingModeArg);
-            gPendingMode = 0;
+            gPendingMode = NULL;
         } else {
             if (gCurrentModeUpdate != NULL) {
                 gCurrentModeUpdate();

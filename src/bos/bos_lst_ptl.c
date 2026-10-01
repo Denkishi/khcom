@@ -5,6 +5,7 @@
 #include "battle_actor.h"
 #include "engine_math.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -104,7 +105,7 @@ void task_bos_lst_ptl_2(LstPtlWork* work) {
     prio = GetBattleSpritePriorityFlags(0x20100);
     z = 0xE7F8;
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, z);
 }
 
 void task_bos_lst_ptl_3(LstPtlWork* work) {

@@ -695,7 +695,7 @@ void _08019CB4() {
         break;
     }
 
-    gBtlWork->actor4 = 0;
+    gBtlWork->actor4 = NULL;
     TaskPoolUpdate(&gBtlWork->taskPools[1]);
 
     if (gBtlWork->flags & BTL_FLAG_CARD_BREAK) {
@@ -787,7 +787,7 @@ void _08019CB4() {
     case 0:
         if (gBtlWork->phaseStep == 0) {
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
-                gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, 0);
+                gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlStart, NULL);
             }
 
             gBtlWork->phaseStep = 1;
@@ -814,14 +814,14 @@ void _08019CB4() {
         if (gBtlWork->phaseStep == 2) {
             gBtlWork->flags |= BTL_FLAG_ENEMY_MOVE_ENABLED;
             gBtlWork->flags &= ~BTL_FLAG_PAUSE_DISABLED;
-            TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, 0);
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, 0);
+            TaskCreate(gBtlWork->taskPools, &gTaskDescBtlLockon, NULL);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpply, NULL);
 
             if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL)) {
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpenm, 0);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlHpenm, NULL);
             }
 
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlExp, 0);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlExp, NULL);
 
             if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) && !(gBtlWork->flags & BTL_FLAG_HUM_BATTLE)) {
                 switch (gBtlWork->battleId) {
@@ -839,23 +839,23 @@ void _08019CB4() {
                     break;
                 default:
                     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
-                        TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
+                        TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
                     } else if (gGameState.progression.unk_82 & 0x20) {
-                        TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, 0);
+                        TaskCreate(gBtlWork->taskPools, &gTaskDescBtlEscape, NULL);
                     }
 
                     break;
                 }
             }
 
-            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, 0);
+            TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, NULL);
 
             if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
                 if (gBtlWork->battleId == 179) {
-                    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
+                    TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, NULL);
                 }
             } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
-                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, 0);
+                TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, NULL);
             }
 
             RequestOpenCards();
@@ -886,7 +886,7 @@ void _08019CB4() {
 
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
-            gBtlWork->actor2 = 0;
+            gBtlWork->actor2 = NULL;
             gBtlWork->phaseStep = 1;
             gBtlWork->hcEffect = 0;
             gBtlWork->flags |= BTL_FLAG_STOP_SPAWNING;
@@ -908,7 +908,7 @@ void _08019CB4() {
             if (gBtlWork->flags & BTL_FLAG_PREMIRE_COLLECTED) {
                 if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
-                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescPremireChance, 0);
+                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescPremireChance, NULL);
                     gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                     gBtlWork->flags |= BTL_FLAG_FIELD_HIDDEN;
                     gBtlWork->phaseStep = -1;
@@ -927,7 +927,7 @@ void _08019CB4() {
             if (gBtlWork->pendingLevelUps != 0) {
                 if (gBtlWork->phaseStep == 2) {
                     ReleaseBattleTiles();
-                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, 0);
+                    gBtlWork->task = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescLevelUp, NULL);
                     gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
                     gBtlWork->flags |= BTL_FLAG_FIELD_HIDDEN;
                     gBtlWork->phaseStep = -1;
@@ -969,7 +969,7 @@ void _08019CB4() {
             RequestBossCardClose();
             gBtlWork->flags &= ~BTL_FLAG_ENEMY_MOVE_ENABLED;
             gBtlWork->flags |= BTL_FLAG_CARD_PLAY_ENDED;
-            gBtlWork->actor2 = 0;
+            gBtlWork->actor2 = NULL;
             gBtlWork->pendingEnemies = 0;
         }
 
@@ -1637,11 +1637,11 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     p->kind = v;
     p->damage = 0;
     p->floorZ = 0;
-    p->parent = 0;
+    p->parent = NULL;
     p->invincibleTimer = 0;
     p->delayedDamage = 0;
     p->shadowPriority = 0xFFF1;
-    p->btl = 0;
+    p->btl = NULL;
     p->badStatus = BAD_STATUS_NONE;
     p->badStatusTimer = 0;
     p->unk_0F0 = gBtlWork->actor->x;
@@ -1956,7 +1956,7 @@ void TryEnemyCardUse(BtlObj* p) {
         return;
     }
 
-    GetEnemyTargetPosition(p, &x, &y, 0);
+    GetEnemyTargetPosition(p, &x, &y, NULL);
 
     if (p->attackRangeX == 0) {
         gBtlWork->actor4 = p;
@@ -2147,13 +2147,13 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
 
 void AllocBattleTiles() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        gBtlWork->tiles = AllocObjTiles(0x840, 0);
+        gBtlWork->tiles = AllocObjTiles(0x840, NULL);
     } else {
-        gBtlWork->tiles = AllocObjTiles(0xC80, 0);
-        gBtlWork->tiles2 = AllocObjTiles(0xA00, 0);
+        gBtlWork->tiles = AllocObjTiles(0xC80, NULL);
+        gBtlWork->tiles2 = AllocObjTiles(0xA00, NULL);
 
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-            gRikuBtlWork->tiles = AllocObjTiles(0xC80, 0);
+            gRikuBtlWork->tiles = AllocObjTiles(0xC80, NULL);
         }
     }
 

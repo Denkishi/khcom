@@ -8,6 +8,7 @@
 #include "obj.h"
 #include "obj_api.h"
 #include "save_types.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -47,7 +48,7 @@ void task_bos_jf_shadow_2(JfShadowWork* work) {
     frame = GetBattleSpritePriorityFlags(obj->y);
 
     if (obj->z >= 0 && gBtlWork->scale == 0x100) {
-        sprite = 0;
+        sprite = NULL;
     } else {
         size = 0x200 - ((obj->groundZ - obj->z) / 128);
 

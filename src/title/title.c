@@ -14,6 +14,7 @@
 #include "m4a_song.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "title_types.h"
 #include "types.h"
@@ -158,7 +159,7 @@ void task_title_logo_2(TitleLogoWork* work) {
                 y = 87;
             }
         } else {
-            affine = 0;
+            affine = NULL;
         }
 
         DrawSprite(x, y, work->sprites[i].gfx, work->sprites[i].tiles, work->sprites[i].palette, affine, 0, i + 20);
@@ -346,7 +347,7 @@ void task_title_obj_2(TitleObjWork* work) {
 
     for (i = 0; i < TITLE_OBJ_DRAW_COUNT; i++) {
         DrawSprite(work->sprites[i].x >> 8, work->sprites[i].y, work->sprites[i].gfx,
-                   work->sprites[i].tiles, work->sprites[i].palette, 0, 0, i);
+                   work->sprites[i].tiles, work->sprites[i].palette, NULL, 0, i);
     }
 }
 
@@ -493,7 +494,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
     TaskPoolInit(&work->tasks, 1);
-    TaskCreate(&work->tasks, &gTaskDescTitleLumichange, 0);
+    TaskCreate(&work->tasks, &gTaskDescTitleLumichange, NULL);
 }
 
 s16 TitleMenuChoiceRow(s16 a) {
@@ -594,9 +595,9 @@ void TitleMenuDrawBasic(TitleMenuWork* work) {
 #ifdef VERSION_EU
         void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[i], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, spr[i], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #else
-        DrawSprite(work->x, y, gUnk_09EF6668[i], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, gUnk_09EF6668[i], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #endif
         y += 24;
     }
@@ -608,7 +609,7 @@ void TitleMenuDrawBasic(TitleMenuWork* work) {
     }
 
     for (i = 0; i < 3; i++) {
-        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
+        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], NULL, 0, i);
     }
 }
 
@@ -622,9 +623,9 @@ void TitleMenuDrawFull(TitleMenuWork* work) {
 #ifdef VERSION_EU
         void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #else
-        DrawSprite(work->x, y, gUnk_09EF6668[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, gUnk_09EF6668[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #endif
         y += 24;
     }
@@ -632,7 +633,7 @@ void TitleMenuDrawFull(TitleMenuWork* work) {
     y = TitleMenuChoiceRow(work->choice[0]) * 24 + 16;
 
     for (i = 0; i < 3; i++) {
-        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
+        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], NULL, 0, i);
     }
 }
 
@@ -646,9 +647,9 @@ void TitleMenuDrawNewGame(TitleMenuWork* work) {
 #ifdef VERSION_EU
         void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, spr[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #else
-        DrawSprite(work->x, y, gUnk_09EF6668[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), i + 100);
+        DrawSprite(work->x, y, gUnk_09EF6668[sTitleMenuChoiceOrder[i]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), i + 100);
 #endif
         y += 24;
     }
@@ -656,7 +657,7 @@ void TitleMenuDrawNewGame(TitleMenuWork* work) {
     y = TitleMenuChoiceRow(work->choice[0]) * 24 + 48;
 
     for (i = 0; i < 3; i++) {
-        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
+        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], NULL, 0, i);
     }
 }
 
@@ -670,14 +671,14 @@ void TitleMenuDrawSingle(TitleMenuWork* work) {
     {
         void** spr = sTitleMenuEntrySpritesEu[gLanguage];
 
-        DrawSprite(work->x, y, spr[work->choice[0]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 100);
+        DrawSprite(work->x, y, spr[work->choice[0]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 100);
     }
 #else
-    DrawSprite(work->x, y, gUnk_09EF6668[work->choice[0]], work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 100);
+    DrawSprite(work->x, y, gUnk_09EF6668[work->choice[0]], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 100);
 #endif
 
     for (i = 0; i < 3; i++) {
-        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], 0, 0, i);
+        DrawSprite(work->x, y, work->gfx[i], work->tiles2[i], work->palette2[i], NULL, 0, i);
     }
 }
 
@@ -868,7 +869,7 @@ void task_title_lumichange_2(TitleLumiChangeWork* work) {
     }
 
     x = (gGameState.flags & GAME_FLAG_RIKU_TITLE) ? 240 : 0;
-    DrawSprite(x, 0x8F, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1), 100);
+    DrawSprite(x, 0x8F, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 100);
 }
 
 void task_title_lumichange_3(TitleLumiChangeWork* work) {

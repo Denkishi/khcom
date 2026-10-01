@@ -33,6 +33,7 @@
 #include "mode.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "text_types.h"
 #include "types.h"
@@ -453,7 +454,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         sMooglePackCards[i].palette2 = LoadObjPalette(gUnk_09A3DB1C + gCardDefs[id].category * 32, 0x20);
         FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, 1);
         sMooglePackCards[i].tiles2 = LoadObjTiles(gUnk_099A4B9A, 0x1D80);
-        sMooglePackCards[i].backSprite = 0;
+        sMooglePackCards[i].backSprite = NULL;
         AnimInit(&sMooglePackCards[i].anim, gUnk_09EF9A48, gUnk_09EF9A20);
         AnimStart(&sMooglePackCards[i].anim, 0, ANIM_FLAG_LOOP);
         sMooglePackCards[i].x = x << 8;
@@ -568,7 +569,7 @@ void DrawMooglePackOpening() {
             DrawTextSlots(0x31, 0x72, sMooglePackDescText, gUnk_02035AE0, 0, sMooglePackDescTextCount);
             ApproachValueHalf(&sMooglePackCursorX, sMooglePackCards[sMooglePackCardCursor].x - 0x1000);
             ApproachValueHalf(&sMooglePackCursorY, sMooglePackCards[sMooglePackCardCursor].y - 0x2000);
-            DrawSprite(sMooglePackCursorX >> 8, sMooglePackCursorY >> 8, AnimUpdate(&sMooglePackCursorAnim), sMooglePackCursorTiles, gUnk_02035AE0, 0, 0, 0);
+            DrawSprite(sMooglePackCursorX >> 8, sMooglePackCursorY >> 8, AnimUpdate(&sMooglePackCursorAnim), sMooglePackCursorTiles, gUnk_02035AE0, NULL, 0, 0);
         }
     }
 
@@ -1122,14 +1123,14 @@ void MoogleShopDraw() {
         if (sMoogleShopHasPacks != 0) {
             ApproachValueHalf(&sMoogleShopCursorX, 0x400);
             ApproachValueHalf(&sMoogleShopCursorY, sMoogleShopRowCursor * 6144 + 0x800);
-            DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, SPRITE_PRIORITY(1), 0x3E8);
+            DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, NULL, SPRITE_PRIORITY(1), 0x3E8);
         }
 
         break;
     case 3:
         ApproachValueHalf(&sMoogleShopCursorX, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorX << 8);
         ApproachValueHalf(&sMoogleShopCursorY, sMooglePackMenuEntries[sMoogleShopPackCursor].cursorY << 8);
-        DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, 0, SPRITE_PRIORITY(1), 0x3E8);
+        DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, NULL, SPRITE_PRIORITY(1), 0x3E8);
         break;
     case 4:
         DrawMooglePackOpening();
@@ -1139,7 +1140,7 @@ void MoogleShopDraw() {
     for (i = 0; i < 4; i++) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][i][0] >= 0) {
             v = sMoogleShopPacks[sMoogleShopRowCursor][i][1];
-            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], 0, SPRITE_PRIORITY(1), 0x3F2);
+            DrawSprite(sMooglePackMenuEntries[i].spriteX + sMooglePackSpriteDefs[v].xOffset, sMooglePackMenuEntries[i].spriteY + sMooglePackSpriteDefs[v].yOffset, sMooglePackSprites[v], sMooglePackTiles[v], sMooglePackPalettes[v], NULL, SPRITE_PRIORITY(1), 0x3F2);
         }
     }
 }

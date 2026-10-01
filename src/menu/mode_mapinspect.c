@@ -269,9 +269,9 @@ void MapInspectLoadGrid() {
                 sMapInspectGridSprites[i][j] = *gMapCardDefs[idx].sprites2;
                 sUnk_02035F30[i][j] = sMapCardInventoryEntries[a + k].category == 3;
             } else {
-                sMapInspectGridPalettes[i][j] = 0;
-                sMapInspectGridTiles[i][j] = 0;
-                sMapInspectGridSprites[i][j] = 0;
+                sMapInspectGridPalettes[i][j] = NULL;
+                sMapInspectGridTiles[i][j] = NULL;
+                sMapInspectGridSprites[i][j] = NULL;
                 sUnk_02035F30[i][j] = 0;
             }
 
@@ -333,14 +333,14 @@ void MapInspectLoadSelectedCard() {
         *q = LoadTextSlots((void*)gMapCardDescriptions[p->cardType], sMapInspectDescText);
 #endif
     } else {
-        sMapInspectCardPalette = 0;
-        sMapInspectCardTiles = 0;
-        sMapInspectCardSprite = 0;
-        sUnk_02035F48 = 0;
-        sUnk_02035F4C = 0;
-        sUnk_02035F50 = 0;
+        sMapInspectCardPalette = NULL;
+        sMapInspectCardTiles = NULL;
+        sMapInspectCardSprite = NULL;
+        sUnk_02035F48 = NULL;
+        sUnk_02035F4C = NULL;
+        sUnk_02035F50 = NULL;
         sUnk_02035F90 = 0;
-        sMapInspectCategoryPalette = 0;
+        sMapInspectCategoryPalette = NULL;
         sMapInspectNameTextCount = 0;
         sMapInspectDescTextCount = 0;
     }
@@ -938,21 +938,21 @@ void MapInspectDraw() {
 #else
             gUnk_0999D9CA,
 #endif
-            sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB8);
+            sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(3), 0xBB8);
         DrawSprite(128, sMapInspectBarY[0] >> 8,
 #ifdef VERSION_EU
             sUnkEu_09F85030[gLanguage],
 #else
             gUnk_0999D9E6,
 #endif
-            sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB9);
+            sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(128, sMapInspectBarY[1] >> 8,
 #ifdef VERSION_EU
             sUnkEu_09F85044[gLanguage],
 #else
             gUnk_0999DA1A,
 #endif
-            sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(3), 0xBB9);
+            sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 
     n = (GetMapInspectTabCount(sMapInspectTab) + 2) / 3 - 4;
@@ -969,32 +969,32 @@ void MapInspectDraw() {
 #else
             gUnk_0999D9C0,
 #endif
-            sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x898);
+            sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(2), 0x898);
 
     if (sMapInspectState == 2) {
         switch (sMapInspectMenuState) {
         case 1:
             ApproachValueHalf(&sMapInspectCursorX, sMapCardCategoryDefs[sMapInspectTab].displayIndex * 3584 - 256);
             ApproachValueHalf(&sMapInspectCursorY, 0);
-            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
+            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(2), 0x7D0);
             break;
         case 0:
             ApproachValueHalf(&sMapInspectCursorX, (sMapInspectGridCol * 23 - 2) * 256);
             ApproachValueHalf(&sMapInspectCursorY, (sMapInspectGridRow * 26 + 16) * 256);
-            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
-            DrawSprite(sMapInspectGridCol * 23 - 3, sMapInspectGridRow * 26 + 28, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, 0, SPRITE_PRIORITY(2), 0x7DA);
+            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(2), 0x7D0);
+            DrawSprite(sMapInspectGridCol * 23 - 3, sMapInspectGridRow * 26 + 28, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 2:
             GetMapInspectSelectedEntry();
             ApproachValueHalf(&sMapInspectCursorX, sMapInspectValueCol * 12288 + 0x9200);
             ApproachValueHalf(&sMapInspectCursorY, sMapInspectValueRow * 2048 + 0x1000);
-            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, 0, SPRITE_PRIORITY(2), 0x7D0);
-            DrawSprite(sMapInspectValueCol * 48 + 133, sMapInspectValueRow * 8 + 35, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, 0, SPRITE_PRIORITY(2), 0x7DA);
+            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, NULL, SPRITE_PRIORITY(2), 0x7D0);
+            DrawSprite(sMapInspectValueCol * 48 + 133, sMapInspectValueRow * 8 + 35, AnimUpdate(&sMapInspectHighlightAnim), sMapInspectHighlightTiles, sMapInspectCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 3:
             ApproachValueHalf(&sMapInspectCursorX, sMapInspectConfirmCursor == 0 ? 0x3400 : 0x7400);
             ApproachValueHalf(&sMapInspectCursorY, 0x5000);
-            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, 0, 0, 0);
+            DrawSprite(sMapInspectCursorX >> 8, sMapInspectCursorY >> 8, AnimUpdate(&sMapInspectCursorAnim), sUnk_02035E50, sUnk_02035E4C, NULL, 0, 0);
 
             if (sMapInspectConfirmTextCount != 0) {
                 DrawTextSlots(120 - GetTextSlotsWidth(sMapInspectConfirmText, sMapInspectConfirmTextCount) / 2, 64, sMapInspectConfirmText, sUnk_02035E4C, 1, sMapInspectConfirmTextCount);
@@ -1026,10 +1026,10 @@ void MapInspectDraw() {
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
             if (sMapInspectGridSprites[i][j] != NULL) {
-                DrawSprite(j * 23 + 13, i * 26 + 47, sMapInspectGridSprites[i][j], sMapInspectGridTiles[i][j], sMapInspectGridPalettes[i][j], 0, SPRITE_PRIORITY(2), 0x83E);
+                DrawSprite(j * 23 + 13, i * 26 + 47, sMapInspectGridSprites[i][j], sMapInspectGridTiles[i][j], sMapInspectGridPalettes[i][j], NULL, SPRITE_PRIORITY(2), 0x83E);
 
                 if (sUnk_02035F30[i][j] != 0) {
-                    DrawSprite(j * 23 + 13, i * 26 + 47, anim, sUnk_02035F70, sUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x834);
+                    DrawSprite(j * 23 + 13, i * 26 + 47, anim, sUnk_02035F70, sUnk_02035F48, NULL, SPRITE_PRIORITY(2), 0x834);
                 }
             }
         }
@@ -1037,14 +1037,14 @@ void MapInspectDraw() {
 
     if (sMapInspectMenuState != 1) {
         if (sMapInspectCardSprite != NULL) {
-            DrawSprite(112, 56, sMapInspectCardSprite, sMapInspectCardTiles, sMapInspectCardPalette, 0, SPRITE_PRIORITY(2), 0x848);
+            DrawSprite(112, 56, sMapInspectCardSprite, sMapInspectCardTiles, sMapInspectCardPalette, NULL, SPRITE_PRIORITY(2), 0x848);
         }
 
         if (sUnk_02035F50 != NULL) {
-            DrawSprite(112, 56, sUnk_02035F50, sUnk_02035F4C, sUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x83E);
+            DrawSprite(112, 56, sUnk_02035F50, sUnk_02035F4C, sUnk_02035F48, NULL, SPRITE_PRIORITY(2), 0x83E);
 
             if (sUnk_02035F90 != 0) {
-                DrawSprite(112, 56, AnimUpdate(&sUnk_02035F58), sUnk_02035F54, sUnk_02035F48, 0, SPRITE_PRIORITY(2), 0x834);
+                DrawSprite(112, 56, AnimUpdate(&sUnk_02035F58), sUnk_02035F54, sUnk_02035F48, NULL, SPRITE_PRIORITY(2), 0x834);
             }
         }
 
@@ -1103,21 +1103,21 @@ void mode_mapinspect_0() {
 
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 3; j++) {
-            sMapInspectGridPalettes[i][j] = 0;
-            sMapInspectGridTiles[i][j] = 0;
-            sMapInspectGridSprites[i][j] = 0;
+            sMapInspectGridPalettes[i][j] = NULL;
+            sMapInspectGridTiles[i][j] = NULL;
+            sMapInspectGridSprites[i][j] = NULL;
             sUnk_02035F30[i][j] = 0;
         }
     }
 
-    sMapInspectCardPalette = 0;
-    sMapInspectCardTiles = 0;
-    sMapInspectCardSprite = 0;
-    sUnk_02035F48 = 0;
-    sUnk_02035F4C = 0;
-    sUnk_02035F50 = 0;
+    sMapInspectCardPalette = NULL;
+    sMapInspectCardTiles = NULL;
+    sMapInspectCardSprite = NULL;
+    sUnk_02035F48 = NULL;
+    sUnk_02035F4C = NULL;
+    sUnk_02035F50 = NULL;
     sUnk_02035F90 = 0;
-    sMapInspectCategoryPalette = 0;
+    sMapInspectCategoryPalette = NULL;
     sMapInspectValueCol = 0;
     sMapInspectValueRow = 0;
     LoadBgPalette(0, gUnk_09A3D0DC, 0x160);

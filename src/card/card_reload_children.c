@@ -41,7 +41,7 @@ void RELOAD_CHILDREN_0(ReloadChildWork* w, ReloadChildArgs* a) {
     w->args = *a;
     w->tiles = LoadObjTiles(gReloadChildTiles[w->args.listIndex], 128);
     w->palette = LoadObjPalette(gCard00Palette, 32);
-    w->tiles2 = 0;
+    w->tiles2 = NULL;
 
     switch (w->args.side) {
     case 1:
@@ -171,7 +171,7 @@ void RELOAD_CHILDREN_2(ReloadChildWork* w) {
     if (w->args.index <= 3) {
         x = (w->offsetX + *w->args.parentX) >> 8;
         y = (w->offsetY + *w->args.parentY) >> 8;
-        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_09EEA344[0], w->tiles, w->palette, 0, 0, 50);
+        DrawSprite(x, y + (gSineTable[w->angle] >> 8), gUnk_09EEA344[0], w->tiles, w->palette, NULL, 0, 50);
     }
 
     if ((s8)w->args.index < 0) {
@@ -422,7 +422,7 @@ u8 UpdateRevCountEmpty(RevCountWork* w, void* a) {
 #endif
 
 void REV_COUNT_2(RevCountWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, 0, w->tiles, w->palette, 0, REV_COUNT_SPRITE_FLAGS, 15);
+    DrawSprite(w->x >> 8, w->y >> 8, NULL, w->tiles, w->palette, NULL, REV_COUNT_SPRITE_FLAGS, 15);
 }
 
 void REV_COUNT_3(RevCountWork* w) {
@@ -443,7 +443,7 @@ void CreateREVCOUNTTask(void* pool, u8* a, s16* b, u8* c, u8 d) {
 }
 
 void RELOAD_0(ReloadWork* w, ReloadArgs* a) {
-    w->tiles = AllocObjTiles(0xA0, 0);
+    w->tiles = AllocObjTiles(0xA0, NULL);
     w->palette = LoadObjPalette(gCard00Palette, 32);
     w->args = *a;
     SetObjTileSource(w->tiles, gReloadTiles[w->args.slot]);
@@ -515,7 +515,7 @@ u8 UpdateReloadSlideOut(ReloadWork* w) {
 }
 
 void RELOAD_2(ReloadWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, 0, 0, 10);
+    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, NULL, 0, 10);
 }
 
 void RELOAD_3(ReloadWork* w) {
@@ -873,7 +873,7 @@ void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
         w->posZ = 0;
     }
 
-    w->tiles = AllocObjTiles(0x80, 0);
+    w->tiles = AllocObjTiles(0x80, NULL);
     w->palette = LoadObjPalette(gUnk_09619158, 32);
     SetObjTileSource(w->tiles, gUnk_093F762E);
     AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
@@ -908,7 +908,7 @@ void Card_EFFECT_2(CardEffectWork* w) {
     t = -4100 - ((w->y >> 8) * 4);
     z = 0;
     w->priority = t;
-    DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, 0, z, w->priority);
+    DrawSprite(w->x, w->y, w->gfx, w->tiles, w->palette, NULL, z, w->priority);
 }
 
 void Card_EFFECT_3(CardEffectWork* w) {

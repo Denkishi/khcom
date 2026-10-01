@@ -239,7 +239,7 @@ void task_btl_pop_cb_2(BtlPopCbWork* work) {
     s16 y;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 5);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 5);
 }
 
 void task_btl_pop_cb_3(BtlPopCbWork* work) {
@@ -275,7 +275,7 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
         return gUnk_08B25EC8;
     }
 
-    return 0;
+    return NULL;
 }
 
 void BtlExpSetNumber(BtlExpWork* work, u32 value) {
@@ -331,11 +331,11 @@ void task_btl_exp_0(BtlExpWork* work) {
 #else
     work->tiles = AllocObjTiles(0xA0, gUnk_08B25EF0);
 #endif
-    work->gfx = 0;
+    work->gfx = NULL;
 
     for (i = 0; i <= 5; i++) {
         work->tiles2[i] = AllocObjTiles(32, gUnk_08B25EF0);
-        work->gfx2[i] = 0;
+        work->gfx2[i] = NULL;
     }
 
     work->timer = 0;
@@ -517,7 +517,7 @@ void task_btl_exp_2(BtlExpWork* work) {
     if (work->state != 0) {
         y = 40;
         x = 0;
-        DrawSprite(0, y, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, x);
+        DrawSprite(0, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, x);
 
 #ifdef VERSION_JP
         x = 32;
@@ -535,7 +535,7 @@ void task_btl_exp_2(BtlExpWork* work) {
 
         for (i = 0; i <= 5; i++) {
             if (work->gfx2[i] != NULL) {
-                DrawSprite(x, y, work->gfx2[i], work->tiles2[i], work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 0);
+                DrawSprite(x, y, work->gfx2[i], work->tiles2[i], work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 0);
                 x += 8;
             }
         }
@@ -565,13 +565,13 @@ void task_btl_vslockon_0(BtlVslockonWork* work) {
 
 s32 task_btl_vslockon_1(BtlVslockonWork* work) {
     if (gBtlWork->hcEffect == 19) {
-        gRikuBtlWork->actor2 = 0;
+        gRikuBtlWork->actor2 = NULL;
     } else {
         gRikuBtlWork->actor2 = gBtlWork->actor;
     }
 
     if (gRikuBtlWork->hcEffect == 19) {
-        gBtlWork->actor2 = 0;
+        gBtlWork->actor2 = NULL;
     } else {
         gBtlWork->actor2 = gRikuBtlWork->actor;
     }
@@ -589,7 +589,7 @@ void task_btl_vslockon_2(BtlVslockonWork* work) {
 
     if (p != NULL) {
         WorldToScreen(&x, &y, p->x, p->y, p->z - (p->centerHeight << 8));
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, 0, 0x100);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, 0, 0x100);
     }
 }
 
@@ -684,7 +684,7 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
             break;
         }
 
-        work->gfx3 = 0;
+        work->gfx3 = NULL;
     } else {
         AnimStart(&work->anim2, 11, ANIM_FLAG_LOOP);
 
@@ -865,19 +865,19 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
     s32 scale;
     ObjAffine* affine;
 
-    DrawSprite(236, 2, work->gfx, work->tiles, work->palette, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 1);
+    DrawSprite(236, 2, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 1);
 
     switch (work->gaugeMode) {
     case 0:
-        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
+        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
         break;
     case 1:
-        DrawSprite(236, 2, gBHpgagFrame27, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
-        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 3);
+        DrawSprite(236, 2, gBHpgagFrame27, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
+        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 3);
         break;
     case 2:
-        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
-        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, 0, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 5);
+        DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
+        DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 5);
         break;
     }
 

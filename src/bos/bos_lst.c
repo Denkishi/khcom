@@ -121,7 +121,7 @@ void BosLstDestroyTasks(BosLstWork* work) {
             TaskKill(&gBtlWork->taskPools[1], work->lstTasks[i]);
         }
 
-        work->lstTasks[i] = 0;
+        work->lstTasks[i] = NULL;
     }
 }
 
@@ -432,7 +432,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     anim = &work->anim;
 
     for (; i < 32; i++) {
-        work->lstTasks[i] = 0;
+        work->lstTasks[i] = NULL;
     }
 
     tbl = &sBosLstEmyKind;
@@ -2695,7 +2695,7 @@ void task_bos_lst_2(BosLstWork* work) {
     }
 
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
-    DrawSprite(sx + sLstAnimDefs[anim].spriteX, sy + sLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].spriteX, sy + sLstAnimDefs[anim].spriteY, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL,
                GetBattleSpritePriorityFlags(work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)),
                -0x1004 - (((work->y + work->offsetY + (gBtlWork->bossPriorityOffset << 8)) >> 8) << 2));
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);
@@ -2707,7 +2707,7 @@ void task_bos_lst_2(BosLstWork* work) {
     }
 
     sub = &work->sub[k];
-    DrawSprite(sx + sLstAnimDefs[anim].subSpriteX, sy + sLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].subSpriteX, sy + sLstAnimDefs[anim].subSpriteY, AnimGetGfx(&sub->anim), work->sub[0].tiles, work->palette, NULL,
                GetBattleSpritePriorityFlags(work->y + work->offsetY),
                -0x1004 - (((work->y + work->offsetY) >> 8) << 2));
     j = idx ^ 1;
@@ -2718,7 +2718,7 @@ void task_bos_lst_2(BosLstWork* work) {
     }
 
     sub = &work->sub[j];
-    DrawSprite(sx + sLstAnimDefs[anim].sub2SpriteX, sy + sLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, 0,
+    DrawSprite(sx + sLstAnimDefs[anim].sub2SpriteX, sy + sLstAnimDefs[anim].sub2SpriteY, AnimGetGfx(&sub->anim), work->sub[1].tiles, work->palette, NULL,
                GetBattleSpritePriorityFlags(work->y + work->offsetY - 0x1100),
                -0x1004 - (((work->y + work->offsetY - 0x1100) >> 8) << 2));
 }

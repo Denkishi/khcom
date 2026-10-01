@@ -192,9 +192,9 @@ void LVUP_EFFECT_2(LevelUpEffectWork* w) {
     for (i = 0; i < 4; i++) {
         if (w->frame <= 5) {
 #ifdef VERSION_EU
-            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSpritesByLanguage[gLanguage][w->frame], w->tiles, w->palette, 0, 0, 20);
+            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSpritesByLanguage[gLanguage][w->frame], w->tiles, w->palette, NULL, 0, 20);
 #else
-            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSprites[w->frame], w->tiles, w->palette, 0, 0, 20);
+            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSprites[w->frame], w->tiles, w->palette, NULL, 0, 20);
 #endif
         }
     }
@@ -301,7 +301,7 @@ s32 Lvup_Logo_1(LevelUpEffectWork* w) {
 }
 
 void Lvup_Logo_2(LevelUpEffectWork* w) {
-    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->frame], w->tiles, w->palette, 0, 0, 10);
+    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->frame], w->tiles, w->palette, NULL, 0, 10);
 }
 
 void Lvup_Logo_3(LevelUpEffectWork* w) {
@@ -337,8 +337,8 @@ void LoadEventMapObjectGfx(EventMapObjectWork* w, EventBackgroundDef* t) {
     entries = q->placements;
 
     for (i = 0; i < 10; i++) {
-        w->tiles[i] = 0;
-        w->palettes[i] = 0;
+        w->tiles[i] = NULL;
+        w->palettes[i] = NULL;
     }
 
     for (i = 0; i < q->placementCount; i++) {
@@ -398,7 +398,7 @@ void Ev_mapObj_2(EventMapObjectWork* w) {
 
     for (i = 0; i < q->placementCount; i++) {
         e = &entries[i];
-        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], 0, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
+        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], NULL, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
     }
 }
 

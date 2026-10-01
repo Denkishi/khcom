@@ -14,6 +14,7 @@
 #include "m4a_song.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -109,7 +110,7 @@ void task_bos_dsd_circle_2(DsdCircleWork* work) {
     s16 y;
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->dsd->tiles, work->dsd->palette, 0, SPRITE_PRIORITY(3), 0xFFFF);
+    DrawSprite(x, y, work->gfx, work->dsd->tiles, work->dsd->palette, NULL, SPRITE_PRIORITY(3), 0xFFFF);
 }
 
 void task_bos_dsd_circle_3() {
@@ -206,7 +207,7 @@ void task_bos_dsd_energy1_2(DsdEnergy1Work* work) {
 
     if (work->visible == 1) {
         if (work->z >= 0 && gBtlWork->scale == 0x100) {
-            affine = 0;
+            affine = NULL;
         } else {
             scale = 0x200 - -work->z / 128;
 
@@ -445,7 +446,7 @@ void task_bos_dsd_energy2_2(DsdEnergy2Work* work) {
 
     if (work->visible == 1) {
         if (work->z >= 0 && gBtlWork->scale == 0x100) {
-            affine = 0;
+            affine = NULL;
         } else {
             scale = 0x200 - -work->z / 128;
 

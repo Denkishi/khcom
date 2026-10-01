@@ -3,6 +3,7 @@
 #include "types.h"
 #include "snd_stream.h"
 #include "gba/io_reg.h"
+#include <stddef.h>
 
 SoundStream gSndStream EWRAM_COMMON(16);
 
@@ -102,7 +103,7 @@ void SndStreamLock(u32 ch, u32 len, void** dst1, u32* len1, void** dst2,
     } else {
         *dst1 = (u8*)gSndStream.buffers[ch] + gSndStream.writePos[ch];
         *len1 = len;
-        *dst2 = 0;
+        *dst2 = NULL;
         *len2 = 0;
         gSndStream.lockPos[ch] += len;
         gSndStream.lockTotal[ch] += len;

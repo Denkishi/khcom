@@ -418,7 +418,7 @@ void WorldInspectHandleInput() {
         if (sWorldInspectWorlds[sWorldInspectCursor] != 0) {
 #ifdef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
-            sWorldInspectBarPalette = 0;
+            sWorldInspectBarPalette = NULL;
 #endif
             sWorldInspectDetailPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
             sWorldInspectDetailTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
@@ -428,14 +428,14 @@ void WorldInspectHandleInput() {
                 for (i = 10; i < 12; i++) {
                     if (sWorldInspectIconPalettes[i] != NULL) {
                         ReleaseObjPalette(sWorldInspectIconPalettes[i]);
-                        sWorldInspectIconPalettes[i] = 0;
+                        sWorldInspectIconPalettes[i] = NULL;
                     }
                 }
             } else {
                 for (i = 4; i < 6; i++) {
                     if (sWorldInspectIconPalettes[i] != NULL) {
                         ReleaseObjPalette(sWorldInspectIconPalettes[i]);
-                        sWorldInspectIconPalettes[i] = 0;
+                        sWorldInspectIconPalettes[i] = NULL;
                     }
                 }
             }
@@ -638,7 +638,7 @@ void WorldInspectDraw() {
 #else
                       gUnk_0999CF38,
 #endif
-                      sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
+                      sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3000);
 #ifdef VERSION_EU
     }
@@ -651,7 +651,7 @@ void WorldInspectDraw() {
 #else
                       gUnk_0999CF54,
 #endif
-                      sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
+                      sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3001);
         DrawSprite(112, sWorldInspectBarY[1] >> 8,
 #ifdef VERSION_EU
@@ -659,7 +659,7 @@ void WorldInspectDraw() {
 #else
                       gUnk_0999CF88,
 #endif
-                      sWorldInspectBarTiles, sWorldInspectBarPalette, 0,
+                      sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3001);
     }
 
@@ -672,19 +672,19 @@ void WorldInspectDraw() {
     if (sWorldInspectState == 2) {
         DrawSprite(sWorldinspectNavs[sWorldInspectCursor].x * 8 + 22,
                       sWorldinspectNavs[sWorldInspectCursor].y * 8 + 12,
-                      AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, gUnk_02035124, 0, prio, 2013);
+                      AnimUpdate(&sWorldInspectHighlightAnim), sWorldInspectHighlightTiles, gUnk_02035124, NULL, prio, 2013);
         ApproachValueHalf(&sWorldInspectCursorX,
                       (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000);
         ApproachValueHalf(&sWorldInspectCursorY,
                       (sWorldinspectNavs[sWorldInspectCursor].y << 11) + 0xFFFFFA00);
         DrawSprite(sWorldInspectCursorX >> 8, sWorldInspectCursorY >> 8, AnimUpdate(&sWorldInspectCursorAnim),
-                      sWorldInspectCursorTiles, sWorldInspectCursorPalette, 0, prio, 2000);
+                      sWorldInspectCursorTiles, sWorldInspectCursorPalette, NULL, prio, 2000);
     }
 
     for (i = 0; i < 12; i++) {
         if (sWorldInspectIconSprites[i] != NULL && sWorldInspectIconPalettes[i] != NULL) {
             DrawSprite(sWorldinspectNavs[i].x * 8 + 16, sWorldinspectNavs[i].y * 8 + 16,
-                          sWorldInspectIconSprites[i], sWorldInspectIconTiles[i], sWorldInspectIconPalettes[i], 0, prio,
+                          sWorldInspectIconSprites[i], sWorldInspectIconTiles[i], sWorldInspectIconPalettes[i], NULL, prio,
                           i + 2001);
         }
     }
@@ -697,7 +697,7 @@ void WorldInspectDraw() {
                       112,
 #endif
                       32, sWorldInspectIconSprites[sWorldInspectCursor], sWorldInspectIconTiles[sWorldInspectCursor],
-                      sWorldInspectIconPalettes[sWorldInspectCursor], 0, 0, 0);
+                      sWorldInspectIconPalettes[sWorldInspectCursor], NULL, 0, 0);
     }
 
     if (sWorldInspectNameTextCount != 0) {
@@ -716,9 +716,9 @@ void WorldInspectDraw() {
         }
 
         DrawSprite(47, (-gSineTable[sWorldInspectBobPhase + 0x40] >> 5) + 84, sWorldInspectDetailSprites[0],
-                      sWorldInspectDetailTiles[0], sWorldInspectDetailPalettes[0], 0, 0, 1);
+                      sWorldInspectDetailTiles[0], sWorldInspectDetailPalettes[0], NULL, 0, 1);
         DrawSprite(47, (-gSineTable[sWorldInspectBobPhase + 0x40] >> 5) + 84, sWorldInspectDetailSprites[1],
-                      sWorldInspectDetailTiles[1], sWorldInspectDetailPalettes[1], 0, 0, 0);
+                      sWorldInspectDetailTiles[1], sWorldInspectDetailPalettes[1], NULL, 0, 0);
     }
 }
 
@@ -787,9 +787,9 @@ void mode_worldinspect_0() {
             id = sWorldInspectWorlds[i];
             sWorldInspectIconSprites[i] = sWorldinspectMsgs[id].sprite;
         } else {
-            sWorldInspectIconPalettes[i] = 0;
-            sWorldInspectIconTiles[i] = 0;
-            sWorldInspectIconSprites[i] = 0;
+            sWorldInspectIconPalettes[i] = NULL;
+            sWorldInspectIconTiles[i] = NULL;
+            sWorldInspectIconSprites[i] = NULL;
         }
     }
 

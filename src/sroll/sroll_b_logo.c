@@ -4,6 +4,7 @@
 #include "anim.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -52,7 +53,7 @@ void task_sroll_b_logo_2(SrollBLogoWork* w) {
     u16 y;
 
     y = (w->y >> 8) - (*w->scrollY >> 8);
-    DrawSprite(w->x >> 8, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, 0, 0xFF0);
+    DrawSprite(w->x >> 8, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, 0, 0xFF0);
 }
 
 void task_sroll_b_logo_3(SrollBLogoWork* w) {

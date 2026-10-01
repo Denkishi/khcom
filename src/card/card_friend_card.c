@@ -897,7 +897,7 @@ u8 StockNameSora_1(StockNameWork* w) {
 
 void StockNameSora_2(StockNameWork* w) {
     if (w->visible != 0) {
-        DrawSprite(64, 14, 0, w->tiles, w->palette, 0,
+        DrawSprite(64, 14, NULL, w->tiles, w->palette, NULL,
 #ifdef VERSION_EU
                    SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC,
 #else
@@ -999,7 +999,7 @@ u8 StockNameRiku_1(StockNameWork* w) {
 
 void StockNameRiku_2(StockNameWork* w) {
     if (gRikuBtlWork->hcEffect != 28 && w->visible != 0) {
-        DrawSprite(120, 14, 0, w->tiles, w->palette, 0, 0, 10);
+        DrawSprite(120, 14, NULL, w->tiles, w->palette, NULL, 0, 10);
     }
 }
 
@@ -1031,7 +1031,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     CpuFill32(0, gCardListWork, sizeof(CardListWork));
     CpuFill32(0, w->slots, sizeof(CardSlot) * 100);
     cards = GetActiveDeck()->cards;
-    w->tiles2 = AllocObjTiles(0x120, 0);
+    w->tiles2 = AllocObjTiles(0x120, NULL);
     w->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
     SetObjTileSource(w->tiles2, gUnk_093F4578);
     AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
@@ -1064,7 +1064,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
 #endif
     w->palette = LoadObjPalette(gUnk_09613E98, 32);
     w->tiles5 = LoadObjTiles(gUnk_0908BFB2, 0x3C0);
-    w->tiles3 = AllocObjTiles(0x3C0, 0);
+    w->tiles3 = AllocObjTiles(0x3C0, NULL);
     w->palette3 = LoadObjPalette(gUnk_09618D18, 32);
     SetObjTileSource(w->tiles3, gUnk_093F47E4);
     AnimInit(&w->anim2, gUnk_09EF1194, gUnk_09EF1180);
@@ -1127,7 +1127,7 @@ void Premire_Chance_0(PremireChanceWork* w) {
     w->cardCount = n;
     TaskPoolInit(&w->tasks, w->cardCount + 1);
     ListPoolInit(&gCardListWork->cards);
-    gCardListWork->selectedCard = 0;
+    gCardListWork->selectedCard = NULL;
     gCardListWork->effectCount = 0;
     TaskPoolInit(&gCardListWork->effectTasks, 24);
     CreatePremireChanceCardTasks(w);
@@ -1256,21 +1256,21 @@ u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
 
 void Premire_Chance_2(PremireChanceWork* w) {
     if (w->unk_87 == 0) {
-        DrawSprite(62, 50, w->gfx, w->tiles2, w->palette2, 0, 0, 0);
-        DrawSprite(53, 64, w->gfx2, w->tiles3, w->palette3, 0, 0, 0);
+        DrawSprite(62, 50, w->gfx, w->tiles2, w->palette2, NULL, 0, 0);
+        DrawSprite(53, 64, w->gfx2, w->tiles3, w->palette3, NULL, 0, 0);
     }
 
     if (w->inputEnabled != 0) {
-        DrawSprite(88, 70, gUnk_09EE98EC[0], w->tiles4, w->palette4, 0, 0, 0);
+        DrawSprite(88, 70, gUnk_09EE98EC[0], w->tiles4, w->palette4, NULL, 0, 0);
     }
 
 #ifdef VERSION_EU
-    DrawSprite(w->titleX, 0, gPremireChanceTitles[gLanguage][0], w->tiles, w->palette, 0, 0, 0);
+    DrawSprite(w->titleX, 0, gPremireChanceTitles[gLanguage][0], w->tiles, w->palette, NULL, 0, 0);
 #else
-    DrawSprite(w->titleX, 0, gUnk_09EEA16C[0], w->tiles, w->palette, 0, 0, 0);
+    DrawSprite(w->titleX, 0, gUnk_09EEA16C[0], w->tiles, w->palette, NULL, 0, 0);
 #endif
-    DrawSprite(120, w->topY >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, 0, 0, 60);
-    DrawSprite(120, w->bottomY >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, 0, 0, 60);
+    DrawSprite(120, w->topY >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, NULL, 0, 60);
+    DrawSprite(120, w->bottomY >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, NULL, 0, 60);
     TaskPoolDraw(&w->tasks);
     TaskPoolDraw(&gCardListWork->effectTasks);
 }
@@ -1357,7 +1357,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
         FadeSetPaletteExcluded(13, 1);
         FadeSetPaletteExcluded(14, 1);
         FadeSetPaletteExcluded(15, 1);
-        TaskCreate(pool, &gTaskDescCardName, 0);
+        TaskCreate(pool, &gTaskDescCardName, NULL);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceResult);
     }
 

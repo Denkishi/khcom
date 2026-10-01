@@ -275,7 +275,7 @@ void task_btl_lockon_0(BtlLockonWork* work) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->unk_024 = 0;
-    gBtlWork->actor2 = 0;
+    gBtlWork->actor2 = NULL;
 }
 
 void SelectLockonTarget() {
@@ -285,7 +285,7 @@ void SelectLockonTarget() {
 
     p = gBtlWork->actor;
     min = 0x40000;
-    gBtlWork->actor2 = 0;
+    gBtlWork->actor2 = NULL;
     e = ListPoolFirst(&gBtlWork->pool);
 
     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -366,7 +366,7 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
         work->gfx = AnimUpdate(&work->anim);
 
         if (gBtlWork->actor2->flags & BTLOBJ_FLAG_UNHITTABLE) {
-            gBtlWork->actor2 = 0;
+            gBtlWork->actor2 = NULL;
         }
     }
 
@@ -387,7 +387,7 @@ void task_btl_lockon_2(BtlLockonWork* work) {
     if (e != NULL) {
         WorldToScreen(&x, &y, e->x + (e->centerOffsetX << 8), e->y,
                       e->z - (e->centerHeight << 8));
-        DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 16);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 16);
     }
 }
 
@@ -439,24 +439,24 @@ void task_btl_area_2(BtlAreaWork* work) {
 
     WorldToScreen(&x, &y, gBtlWork->x3 - (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 - (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 + (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 - (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 - (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 + (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 + (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 + (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3, gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3,
                   gBtlWork->z3 - (gBtlWork->areaHalfZ << 8));
-    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 0, 0x101);
+    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3,
                   gBtlWork->z3 + (gBtlWork->areaHalfZ << 8));
-    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, SPRITE_FLAG_VFLIP, 0x101);
+    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, SPRITE_FLAG_VFLIP, 0x101);
 
     if (gBtlWork->soraOwnsPlay != 0) {
         e = ListPoolFirst(&gBtlWork->pool);
@@ -464,42 +464,42 @@ void task_btl_area_2(BtlAreaWork* work) {
         while (e != NULL) {
             WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                           e->y - (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                           e->y - (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                           e->y + (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                           e->y + (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x, e->y, e->z);
-            DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x, e->y,
                           e->z - (e->height << 8));
-            DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 0, 0x101);
+            DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
             e = ListPoolNext(&e->node);
         }
     } else {
         e = gBtlWork->actor;
         WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                       e->y - (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                       e->y - (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                       e->y + (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                       e->y + (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x, e->y, e->z);
-        DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x, e->y,
                       e->z - (e->height << 8));
-        DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, 0, 0, 0x101);
+        DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
     }
 }
 
@@ -667,8 +667,8 @@ void ReleaseBtlSoraPalette(BtlSoraWork* work) {
         ReleaseObjPalette(work->palette);
     }
 
-    work->tiles = 0;
-    work->palette = 0;
+    work->tiles = NULL;
+    work->palette = NULL;
 }
 
 void UpdateBtlSoraWalk(BtlSoraWork* work, u16 a) {
@@ -813,7 +813,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     e->kind = 55;
     e->badStatusTimer = 0;
     e->floorZ = 0;
-    e->parent = 0;
+    e->parent = NULL;
     e->badStatus = BAD_STATUS_NONE;
     e->popCooldown = 0;
     e->vx = e->vy = 0;
@@ -830,7 +830,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     gBtlWork->targetZ = e->z;
     LoadBtlSoraPalette(work);
     e->btl->actor = e;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     SetBtlSoraAnimation(work, 1, 1);
     work->gfx = AnimGetGfx(&work->anim);
     work->state = 0;
@@ -845,7 +845,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     work->comboCount = 0;
     work->tapTimers[0] = 0;
     work->tapTimers[1] = 0;
-    work->task = 0;
+    work->task = NULL;
     work->unk_191[0] = 2;
     work->scaleX = work->scaleY = 0x100;
     work->frameCount = 0;
@@ -991,7 +991,7 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
         }
 
         if (e->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return e;
@@ -1017,7 +1017,7 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     }
 
     if (n == 0) {
-        return 0;
+        return NULL;
     }
 
     e = list[GetRandom() % n];
@@ -1060,7 +1060,7 @@ BtlObj* GetBtlSoraActiveOpponent(BtlSoraWork* work) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 s32 task_btl_sora_1(BtlSoraWork* work) {
@@ -3368,7 +3368,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 BtlObj* e2;
 
                 t3 = 0x40000;
-                e2 = 0;
+                e2 = NULL;
                 e = ListPoolFirst(&gBtlWork->pool);
 
                 while (e != NULL) {
@@ -4309,7 +4309,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (st == 0) {
             p->btl->flags |= BTL_FLAG_PLAYER_OFFSCREEN;
-            p->btl->actor2 = 0;
+            p->btl->actor2 = NULL;
             SetBtlSoraDirAnimation(work, 1, 0);
 
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -6259,7 +6259,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             gBtlWork->platform = p->collider.other;
         } else {
             work->flags &= ~BTL_SORA_FLAG_ON_PLATFORM;
-            gBtlWork->platform = 0;
+            gBtlWork->platform = NULL;
         }
 
         work->vz = 0;
@@ -6290,7 +6290,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        gBtlWork->platform = 0;
+        gBtlWork->platform = NULL;
     }
 
     if (p->vx > 0) {
@@ -6447,7 +6447,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
     }
 
     if (sy == 0x100 && sx == 0x100) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {
@@ -6665,7 +6665,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     }
 
     if (p == 256 && q == p) {
-        affine = 0;
+        affine = NULL;
     } else if (p <= 255) {
         affine = AllocObjAffine(0, q, p, 0);
     } else {
@@ -6730,8 +6730,8 @@ void LoadBtlRikuPalette(BtlRikuWork* work) {
 
 void ReleaseBtlRikuPalette(BtlRikuWork* work) {
     ReleaseObjPalette(work->palette);
-    work->tiles2 = 0;
-    work->palette = 0;
+    work->tiles2 = NULL;
+    work->palette = NULL;
 }
 
 void UpdateBtlRikuWalk(BtlRikuWork* work, u16 a) {
@@ -6967,7 +6967,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     e->kind = 55;
     e->badStatusTimer = 0;
     e->floorZ = 0;
-    e->parent = 0;
+    e->parent = NULL;
     e->badStatus = BAD_STATUS_NONE;
     e->popCooldown = 0;
     e->vx = e->vy = 0;
@@ -6983,10 +6983,10 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     gBtlWork->targetY = e->y;
     gBtlWork->targetZ = e->z;
     work->paletteData = gRikuPalette;
-    work->tiles = AllocObjTiles(0x640, 0);
+    work->tiles = AllocObjTiles(0x640, NULL);
     LoadBtlRikuPalette(work);
     e->btl->actor = e;
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     SetBtlRikuAnimation(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
     work->state = 0;
@@ -7142,7 +7142,7 @@ BtlObj* GetBtlRikuActiveOpponent(BtlRikuWork* work) {
         }
     }
 
-    return 0;
+    return NULL;
 }
 
 BtlObj* FindHighestEnemy(BtlRikuWork* work) {
@@ -7152,7 +7152,7 @@ BtlObj* FindHighestEnemy(BtlRikuWork* work) {
     s32 min;
 
     min = 0x10000;
-    best = 0;
+    best = NULL;
     e = ListPoolFirst(&gBtlWork->pool);
 
     while (e != NULL) {
@@ -7188,7 +7188,7 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
         }
 
         if (e->hp <= 0) {
-            return 0;
+            return NULL;
         }
 
         return e;
@@ -7214,7 +7214,7 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     }
 
     if (n == 0) {
-        return 0;
+        return NULL;
     }
 
     e = list[GetRandom() % n];
@@ -10286,7 +10286,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         FocusBtlRikuCameraOnTarget(work);
 
         if (work->stateTimer == 0) {
-            p->btl->actor2 = 0;
+            p->btl->actor2 = NULL;
 
             if (gBtlWork->flags & BTL_FLAG_DARK_MODE) {
                 SetBtlRikuAnimation(work, 15, 0);
@@ -10871,7 +10871,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             gBtlWork->platform = p->collider.other;
         } else {
             work->flags &= ~BTL_RIKU_FLAG_ON_PLATFORM;
-            gBtlWork->platform = 0;
+            gBtlWork->platform = NULL;
         }
 
         work->vz = 0;
@@ -10904,7 +10904,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        gBtlWork->platform = 0;
+        gBtlWork->platform = NULL;
     }
 
     t = p->vx;
@@ -11065,7 +11065,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
     }
 
     if (sy == 0x100 && sx == 0x100) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 255) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {

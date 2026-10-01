@@ -6,6 +6,7 @@
 #include "engine_math.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -100,7 +101,7 @@ u8 task_sroll_b_crtn_1(SrollBCrtnWork* w) {
 }
 
 void task_sroll_b_crtn_2(SrollBCrtnWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(1),
+    DrawSprite(w->x >> 8, w->y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(1),
                0xFE0);
 }
 

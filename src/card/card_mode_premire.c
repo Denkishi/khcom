@@ -17,6 +17,7 @@
 #include "card_api.h"
 #include "card_label_data.h"
 #include "mode.h"
+#include <stddef.h>
 #include "types.h"
 
 TaskPool gModePremireTasks;
@@ -51,7 +52,7 @@ void Mode_Premire_0() {
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
     TaskPoolInit(&gModePremireTasks, 1);
-    TaskCreate(&gModePremireTasks, &gTaskDescLevelUp, 0);
+    TaskCreate(&gModePremireTasks, &gTaskDescLevelUp, NULL);
 }
 
 void Mode_Premire_1() {
@@ -365,21 +366,21 @@ void HCEffectName_2(HcEffectNameWork* w) {
 
     if (w->visible == 1) {
         pri = 0x410;
-        DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, pri, 10);
-        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, pri, 10);
-        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, pri, 10);
+        DrawSprite(w->x, 0x90, NULL, w->tiles2, w->palette, NULL, pri, 10);
+        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, NULL, pri, 10);
+        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, NULL, pri, 10);
+        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, NULL, pri, 10);
+        DrawSprite(w->x + 24, 0x8A, NULL, w->tiles3, w->palette, NULL, pri, 10);
+        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, NULL, pri, 10);
     }
 #else
     if (w->visible == 1) {
-        DrawSprite(w->x, 0x90, 0, w->tiles2, w->palette, 0, SPRITE_PRIORITY(1), 10);
-        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
-        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
-        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
-        DrawSprite(w->x + 24, 0x8A, 0, w->tiles3, w->palette, 0, SPRITE_PRIORITY(1), 10);
-        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, 0, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x, 0x90, NULL, w->tiles2, w->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x, 0x8A, gUnk_09EE1538[15], w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 8, 0x8A, gUnk_09EE1538[w->countTens + 4], w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 16, 0x8A, gUnk_09EE1538[w->countOnes + 4], w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 24, 0x8A, NULL, w->tiles3, w->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(w->x + 32, 0x8A, gUnk_09EE1538[14], w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), 10);
     }
 #endif
 }
@@ -420,7 +421,7 @@ s32 NumberPlus_1(NumberPlusWork* w) {
 }
 
 void NumberPlus_2(NumberPlusWork* w) {
-    DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, 0, SPRITE_FLAG_NO_MOSAIC, 0);
+    DrawSprite(w->x, w->y, gUnk_09EE91A8[0], w->tiles, w->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
 }
 
 void NumberPlus_3(NumberPlusWork* w) {

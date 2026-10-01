@@ -204,7 +204,7 @@ void DrawSpriteUnsorted(s16 a, s16 b, void* c, void* d, void* e, u16 f) {
     p->entries[p->entryCount].y = b;
     p->entries[p->entryCount].tiles = d;
     p->entries[p->entryCount].palette = e;
-    p->entries[p->entryCount].affine = 0;
+    p->entries[p->entryCount].affine = NULL;
     p->entries[p->entryCount].flags = f;
     p->entries[p->entryCount].priority = z;
     p->entries[p->entryCount].sprite = c;
@@ -245,11 +245,11 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     s16 end;
 
     if (size == 0) {
-        return 0;
+        return NULL;
     }
 
     if (src == NULL) {
-        return 0;
+        return NULL;
     }
 
     cur = ListPoolFirst(&gSpriteWork->tilePool);
@@ -266,14 +266,14 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
 
     if (node == NULL) {
-        return 0;
+        return NULL;
     }
 
     node->type = 0;
     node->count = size / 32;
     node->src = src;
     node->refCount = 0;
-    node->sprite = 0;
+    node->sprite = NULL;
     node->allocated = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
@@ -321,25 +321,25 @@ ObjTiles* LoadObjTiles(void* src, u16 size) {
         cur = next;
     }
 
-    return 0;
+    return NULL;
 }
 
 void ReleaseSharedObjTiles(ObjTiles* p) {
     if ((s16)p->refCount > 0) {
         p->refCount -= 1;
     } else {
-        p->self = 0;
+        p->self = NULL;
         ListPoolRelease(&p->node, &gSpriteWork->tilePool);
     }
 }
 
 void ReleaseAllocatedObjTiles(ObjTiles* p) {
-    p->self = 0;
+    p->self = NULL;
     ListPoolRelease(&p->node, &gSpriteWork->tilePool);
 }
 
 void ReleaseSpriteFrameTiles(ObjTiles* p) {
-    p->self = 0;
+    p->self = NULL;
     ListPoolRelease(&p->node, &gSpriteWork->tilePool);
 }
 
@@ -378,20 +378,20 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
     s16 end;
 
     if (size == 0) {
-        return 0;
+        return NULL;
     }
 
     node = ListPoolFirstFree(&gSpriteWork->tilePool);
 
     if (node == NULL) {
-        return 0;
+        return NULL;
     }
 
     node->type = 1;
     node->count = size / 32;
     node->src = owner;
     node->refCount = 0;
-    node->sprite = 0;
+    node->sprite = NULL;
     node->allocated = 1;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->tilePool);
@@ -436,7 +436,7 @@ ObjTiles* AllocObjTiles(u16 size, void* owner) {
         cur = next;
     }
 
-    return 0;
+    return NULL;
 }
 
 void SetObjTileSource(ObjTiles* a, void* b) {
@@ -451,11 +451,11 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     s16 end;
 
     if (size == 0) {
-        return 0;
+        return NULL;
     }
 
     if (src == NULL) {
-        return 0;
+        return NULL;
     }
 
     for (cur = ListPoolFirst(&gSpriteWork->palettePool); cur != NULL; cur = ListPoolNext(&cur->node)) {
@@ -468,7 +468,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
 
     if (node == NULL) {
-        return 0;
+        return NULL;
     }
 
     node->type = 0;
@@ -521,7 +521,7 @@ ObjPalette* LoadObjPalette(void* src, u16 size) {
         cur = next;
     }
 
-    return 0;
+    return NULL;
 }
 
 void LoadObjPaletteBank(u16 bank, void* src) {
@@ -532,7 +532,7 @@ void ReleaseObjPaletteRef(ObjPalette* p) {
     if ((s16)p->refCount > 0) {
         p->refCount -= 1;
     } else {
-        p->self = 0;
+        p->self = NULL;
         FadeClearPaletteSlot(p->index + 0x10);
         ListPoolRelease(&p->node, &gSpriteWork->palettePool);
     }
@@ -566,7 +566,7 @@ ObjAffine* AllocObjAffineAngle(u8 a, u8 b) {
         return e;
     }
 
-    return 0;
+    return NULL;
 }
 
 ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
@@ -575,7 +575,7 @@ ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     s32 cos;
 
     if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
-        return 0;
+        return NULL;
     }
 
     sin = gSineTable[a];
@@ -601,7 +601,7 @@ ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
     s32 cos;
 
     if (gSpriteWork->affineCount > 0x1F || (a == 0 && sx == 0x100 && sy == sx)) {
-        return 0;
+        return NULL;
     }
 
     sin = gSineTable[a];
@@ -626,7 +626,7 @@ ObjAffine* AllocObjAffineMatrix(u16 a, u16 b, u16 c, u16 d, u8 f) {
     u32 z;
 
     if (gSpriteWork->affineCount > 0x1F) {
-        return 0;
+        return NULL;
     }
 
     e = &gSpriteWork->affine[gSpriteWork->affineCount];
@@ -1085,7 +1085,7 @@ void InitObjTilesAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
-        t->sprite = 0;
+        t->sprite = NULL;
         t->allocated = 0;
         t->index = slot;
         RequestDma3Copy(src, (void*)(OBJ_VRAM0 + t->index * TILE_SIZE_4BPP), size);
@@ -1098,7 +1098,7 @@ void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src) {
         t->count = size >> 5;
         t->src = src;
         t->refCount = 0;
-        t->sprite = 0;
+        t->sprite = NULL;
         t->allocated = 1;
         t->index = slot;
     }
@@ -1116,7 +1116,7 @@ void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
 }
 
 ObjTiles* AllocSpriteFrameTiles(u16 a) {
-    ObjTiles* t = AllocObjTiles(a, 0);
+    ObjTiles* t = AllocObjTiles(a, NULL);
 
     if (t != NULL) {
         t->type = 2;
@@ -1169,12 +1169,12 @@ ObjPalette* AllocObjPalette(u16 size) {
     node = ListPoolFirstFree(&gSpriteWork->palettePool);
 
     if (node == NULL) {
-        return 0;
+        return NULL;
     }
 
     node->type = 2;
     node->count = size / 32;
-    node->src = 0;
+    node->src = NULL;
     node->refCount = 0;
     node->self = node;
     cur = ListPoolFirst(&gSpriteWork->palettePool);
@@ -1219,7 +1219,7 @@ ObjPalette* AllocObjPalette(u16 size) {
         cur = next;
     }
 
-    return 0;
+    return NULL;
 }
 
 void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
@@ -2060,7 +2060,7 @@ void SetBgMode0() {
     SetBgScroll(3, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        gBgWork->entries[i].map = 0;
+        gBgWork->entries[i].map = NULL;
     }
 }
 
@@ -2079,7 +2079,7 @@ void SetBgMode1() {
     SetBgAffine(2, 0, 0x100, 0x100, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        gBgWork->entries[i].map = 0;
+        gBgWork->entries[i].map = NULL;
     }
 }
 
@@ -2095,7 +2095,7 @@ void SetBgMode2() {
     SetBgAffine(3, 0, 0x100, 0x100, 0, 0);
 
     for (i = 0; i <= 3; i++) {
-        gBgWork->entries[i].map = 0;
+        gBgWork->entries[i].map = NULL;
     }
 }
 
@@ -2560,7 +2560,7 @@ void eu_08005ADC(s32 bg) {
         }
 
         EwramFree(e->decompressedMap);
-        e->decompressedMap = 0;
+        e->decompressedMap = NULL;
     }
 }
 #endif
@@ -2663,7 +2663,7 @@ s32 Lerp8(s32 a, s32 b, s32 t) {
 void AnimInit(AnimState* a, void* b, void* c) {
     a->gfxTable = c;
     a->anims = b;
-    a->frames = 0;
+    a->frames = NULL;
 }
 
 void AnimChangeWithTables(AnimState* a, u16 animId, u16 flags, void* b, void* c) {
@@ -2680,7 +2680,7 @@ void AnimStart(AnimState* a, u16 animId, u16 flags) {
     a->frameCount = h->frameCount;
 
     if (a->frameCount == 0) {
-        a->frames = 0;
+        a->frames = NULL;
         return;
     }
 
@@ -2711,7 +2711,7 @@ void AnimChange(AnimState* a, u16 id, u16 flags) {
     a->frameCount = h->frameCount;
 
     if (a->frameCount == 0) {
-        a->frames = 0;
+        a->frames = NULL;
         return;
     }
 
@@ -2737,7 +2737,7 @@ void* AnimUpdate(AnimState* a) {
     u16 index;
 
     if (frames == NULL) {
-        return 0;
+        return NULL;
     }
 
     a->timer++;
@@ -2785,7 +2785,7 @@ void* AnimGetGfx(AnimState* a) {
     if (a->frames != NULL) {
         result = a->gfxTable[a->frames[a->frame].gfxIndex];
     } else {
-        result = 0;
+        result = NULL;
     }
 
     return result;
@@ -2861,7 +2861,7 @@ void FadeClearPaletteSlot(u16 a) {
     PaletteSlot* p = gFadeWork->slots;
 
     p += a;
-    p->src = 0;
+    p->src = NULL;
 }
 
 void FadeUpdate() {

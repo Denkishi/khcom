@@ -36,7 +36,7 @@ HeapBlock* HeapFindFreeBlock(s32 size, Heap* heap) {
         b = b->nextFree;
     }
 
-    return 0;
+    return NULL;
 }
 
 void HeapInit(void* addr, u32 size, Heap* heap) {
@@ -58,18 +58,18 @@ void HeapInit(void* addr, u32 size, Heap* heap) {
     heap->end = tail;
     first = head + 1;
     head->size = -32;
-    head->prevFree = 0;
+    head->prevFree = NULL;
     head->nextFree = first;
-    head->prev = 0;
+    head->prev = NULL;
     head->next = first;
     name = heap->name;
     head->name = name;
     head->self = head;
     tail->size = -1;
     tail->prevFree = first;
-    tail->nextFree = 0;
+    tail->nextFree = NULL;
     tail->prev = first;
-    tail->next = 0;
+    tail->next = NULL;
     tail->name = name;
     tail->self = tail;
     first->size = size - 64;
@@ -98,14 +98,14 @@ void* HeapAlloc(u32 size, Heap* heap) {
     s32 rem;
 
     if (size == 0) {
-        return 0;
+        return NULL;
     }
 
     size = (size + 63) & ~31;
     b = HeapFindFreeBlock(size, heap);
 
     if (b == NULL) {
-        return 0;
+        return NULL;
     }
 
     if (b->size < (s32)(size + 64)) {
@@ -123,8 +123,8 @@ void* HeapAlloc(u32 size, Heap* heap) {
     }
 
     b->size = -size;
-    b->prevFree = 0;
-    b->nextFree = 0;
+    b->prevFree = NULL;
+    b->nextFree = NULL;
 
     if (heap->allocFlag != 0) {
         b->allocFlag = 1;
@@ -180,8 +180,8 @@ void HeapFree(void* p, Heap* heap) {
         n->size += size;
         n->next = b->next;
         b->next->prev = n;
-        b->prev = 0;
-        b->next = 0;
+        b->prev = NULL;
+        b->next = NULL;
         b = n;
     }
 
@@ -192,8 +192,8 @@ void HeapFree(void* p, Heap* heap) {
         b->size += n->size;
         b->next = n->next;
         n->next->prev = b;
-        n->prev = 0;
-        n->next = 0;
+        n->prev = NULL;
+        n->next = NULL;
     }
 
     head = heap->start;
@@ -201,7 +201,7 @@ void HeapFree(void* p, Heap* heap) {
     b->nextFree = head->nextFree;
     head->nextFree->prevFree = b;
     head->nextFree = b;
-    b->self = 0;
+    b->self = NULL;
 }
 
 void EwramFree(void* p) {
@@ -324,7 +324,7 @@ void ListAppend(ListNode* node, ListNode** head, ListNode** tail) {
         (*tail)->next = node;
     }
 
-    node->next = 0;
+    node->next = NULL;
     *tail = node;
 }
 
@@ -369,8 +369,8 @@ void ListInsertBefore(ListNode* node, ListNode** head, ListNode** tail, ListNode
 void ListRemove(ListNode* node, ListNode** head, ListNode** tail) {
     if (node->prev == NULL) {
         if (node->next == NULL) {
-            *head = 0;
-            *tail = 0;
+            *head = NULL;
+            *tail = NULL;
         } else {
             node->next->prev = node->prev;
             *head = node->next;
@@ -389,10 +389,10 @@ void ListRemove(ListNode* node, ListNode** head, ListNode** tail) {
 void ListPoolInit(void* pool) {
     ListPool* list = pool;
 
-    list->freeHead = 0;
-    list->freeTail = 0;
-    list->activeHead = 0;
-    list->activeTail = 0;
+    list->freeHead = NULL;
+    list->freeTail = NULL;
+    list->activeHead = NULL;
+    list->activeTail = NULL;
 }
 
 void ListPoolAddFree(void* p, void* pool, void* owner) {
@@ -452,7 +452,7 @@ void* ListPoolRelease(void* p, void* pool) {
         return next->owner;
     }
 
-    return 0;
+    return NULL;
 }
 
 void* ListPoolFirst(void* pool) {
@@ -469,7 +469,7 @@ void* ListPoolFirst(void* pool) {
 
         result = n->owner;
     } else {
-        result = 0;
+        result = NULL;
     }
 
     return result;
@@ -489,7 +489,7 @@ void* ListPoolLast(void* pool) {
 
         result = n->owner;
     } else {
-        result = 0;
+        result = NULL;
     }
 
     return result;
@@ -509,7 +509,7 @@ void* ListPoolNext(void* p) {
 
         result = n->owner;
     } else {
-        result = 0;
+        result = NULL;
     }
 
     return result;
@@ -529,7 +529,7 @@ void* ListPoolPrev(void* p) {
 
         result = n->owner;
     } else {
-        result = 0;
+        result = NULL;
     }
 
     return result;
@@ -545,7 +545,7 @@ void* ListPoolFirstFree(void* pool) {
         return n->owner;
     }
 
-    return 0;
+    return NULL;
 }
 
 void func_08000D1C() {
@@ -600,5 +600,5 @@ void* ListPoolRemove(void* p, void* pool) {
         return next->owner;
     }
 
-    return 0;
+    return NULL;
 }

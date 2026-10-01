@@ -498,7 +498,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* 
             out[i].indices = EwramAlloc(out[i].count * 2);
             count++;
         } else {
-            out[i].indices = 0;
+            out[i].indices = NULL;
         }
 
         out[i].indexCount = 0;
@@ -1346,7 +1346,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     TaskPoolInit(&w->cardpool, 1);
     w->deckIndex = GetActiveDeckIndex();
     CreateDeckGridCards(w, 0);
-    w->tiles = AllocObjTiles(0x120, 0);
+    w->tiles = AllocObjTiles(0x120, NULL);
     SetObjTileSource(w->tiles, gUnk_090A4664);
     AnimInit(&w->anim2, gUnk_09EEB03C, gUnk_09EEB008);
     AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
@@ -1372,34 +1372,34 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->gfx7 = gUnk_09EEAFD4[0];
     w->gfx8 = gUnk_09EEAFD4[1];
 #endif
-    w->tiles2 = AllocObjTiles(0x280, 0);
+    w->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckMenuFrameCursor(w, 0);
     w->palette4 = LoadObjPalette(gUnk_09614438, 32);
-    gCardUiSpriteState.tiles = AllocObjTiles(0x100, 0);
+    gCardUiSpriteState.tiles = AllocObjTiles(0x100, NULL);
     gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, 32);
     SetObjTileSource(gCardUiSpriteState.tiles, gUnk_0908C3CE);
     AnimInit(&gCardUiSpriteState.anim, gUnk_09EEA198, gUnk_09EEA180);
     AnimStart(&gCardUiSpriteState.anim, 0, ANIM_FLAG_LOOP);
     gCardUiSpriteState.gfx = AnimUpdate(&gCardUiSpriteState.anim);
-    w->tiles10 = 0;
-    w->tiles7 = 0;
-    w->tiles8 = 0;
-    w->tiles9 = 0;
-    w->palette5 = 0;
-    w->palette6 = 0;
-    w->tiles3 = 0;
-    w->palette2 = 0;
-    w->tiles12 = 0;
-    w->tiles6 = 0;
-    w->palette3 = 0;
+    w->tiles10 = NULL;
+    w->tiles7 = NULL;
+    w->tiles8 = NULL;
+    w->tiles9 = NULL;
+    w->palette5 = NULL;
+    w->palette6 = NULL;
+    w->tiles3 = NULL;
+    w->palette2 = NULL;
+    w->tiles12 = NULL;
+    w->tiles6 = NULL;
+    w->palette3 = NULL;
     w->cursorCol = 0;
     w->cursorRow = 0;
     w->unk_8B3[0] = 0;
     w->unk_8B3[1] = 0;
     w->timer = 16;
     w->commandCursor = 0;
-    w->cursorCard = 0;
-    w->prevCursorCard = 0;
+    w->cursorCard = NULL;
+    w->prevCursorCard = NULL;
     w->mode = 0;
     w->view = 0;
     w->deckAttackCount = CountActiveDeckCardsOfCategory(0);
@@ -1408,7 +1408,7 @@ static void Deckmenu2_0(DeckMenuWork* w, void* a) {
     w->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
     w->categoryFilter = 0;
     w->entryCount = 0;
-    w->entries = 0;
+    w->entries = NULL;
     w->popupActive = 0;
     w->exitRequested = 0;
     w->barSlideTimer = 16;
@@ -1660,9 +1660,9 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* w, void* a) {
                 ReleaseObjTiles(w->tiles6);
                 ReleaseObjTiles(w->tiles12);
                 ReleaseObjPalette(w->palette3);
-                w->tiles6 = 0;
-                w->tiles12 = 0;
-                w->palette3 = 0;
+                w->tiles6 = NULL;
+                w->tiles12 = NULL;
+                w->palette3 = NULL;
                 w->handVisible = 1;
                 LoadBgMap(3, gUnk_09512AB8, 0x800);
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
@@ -2307,7 +2307,7 @@ void RemoveEmptyCollectionEntry(DeckMenuWork* w, u8 mode) {
     i = 0;
     e = &w->entries[w->entryIndex];
     EwramFree(w->entries[w->entryIndex].indices);
-    w->entries[w->entryIndex].indices = 0;
+    w->entries[w->entryIndex].indices = NULL;
 
     for (i = w->entryIndex; i < w->entryCount - 1; i++) {
         w->entries[i] = w->entries[i + 1];
@@ -3877,7 +3877,7 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a) {
         w->entryCount = 286;
         w->kindEntries = EwramAlloc(w->entryCount * sizeof(CardKindEntry));
         CpuFill32(0, w->kindEntries, w->entryCount * sizeof(CardKindEntry));
-        w->entries = 0;
+        w->entries = NULL;
         w->descriptionX = 7;
         w->descriptionY = 113;
         break;
@@ -4247,17 +4247,17 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
     if (w->popupActive == 0) {
         if (w->handVisible != 0) {
-            DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 3);
+            DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, NULL, w->handFlags, 3);
         }
     }
 
     if (w->view != 13) {
-        DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4, w->palette, 0, SPRITE_PRIORITY(2), 10);
+        DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4, w->palette, NULL, SPRITE_PRIORITY(2), 10);
     }
 
     if (w->tiles6 != NULL) {
-        DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6, w->palette3, 0, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6, w->palette3, 0, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6, w->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6, w->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
     if (w->tiles12 != NULL) {
@@ -4267,59 +4267,59 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 #else
                    gUnk_09EEAFF0,
 #endif
-                   w->tiles12, w->palette3, 0, 0, 10);
+                   w->tiles12, w->palette3, NULL, 0, 10);
     }
 
     switch (w->view) {
     case 0:
         if (w->holding != 0) {
-            DrawSprite((w->x3 >> 8) - 16, (w->y3 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+            DrawSprite((w->x3 >> 8) - 16, (w->y3 >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         }
 
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         DrawDeckNames(w, 0);
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
         break;
     case 3:
 #ifdef VERSION_EU
         if (w->tiles3 != NULL) {
-            DrawSprite(120, 80, gDeckCommandMenuSprites[gLanguage][0], w->tiles3, w->palette2, 0, 0, 8);
+            DrawSprite(120, 80, gDeckCommandMenuSprites[gLanguage][0], w->tiles3, w->palette2, NULL, 0, 8);
         }
 #else
-        DrawSprite(120, 80, gUnk_09EEAFE8, w->tiles3, w->palette2, 0, 0, 8);
+        DrawSprite(120, 80, gUnk_09EEAFE8, w->tiles3, w->palette2, NULL, 0, 8);
 #endif
         DrawDeckNames(w, 0);
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
         break;
     case 2:
         DrawDeckNames(w, 0);
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
         break;
     case 1:
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
         DrawDeckNames(w, 0);
         break;
     case 4:
         DrawDeckNames(w, 1);
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles7 != NULL) {
             if (w->popupActive == 0) {
-                DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+                DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
             }
 
-            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
         }
 
@@ -4330,20 +4330,20 @@ static void Deckmenu2_2(DeckMenuWork* w) {
         break;
     case 7:
         DrawDeckNames(w, 1);
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(164, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(164, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(164, 82, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(164, 82, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(164, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(164, 82, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
 
             if (w->tiles9 != NULL) {
-                DrawSprite(164, 82, w->gfx6, w->tiles9, w->palette5, 0, 0, 19);
+                DrawSprite(164, 82, w->gfx6, w->tiles9, w->palette5, NULL, 0, 19);
             }
 
             DrawTextSlots(100, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -4355,17 +4355,17 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
         break;
     case 5:
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
-        DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
+        DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
         DrawDeckNames(w, 1);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 82, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 82, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 82, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
 
             DrawTextSlots(10, 116, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -4377,23 +4377,23 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
         break;
     case 6:
-        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->removeLabelX, w->removeLabelY, w->gfx7, w->tiles5, w->palette, NULL, 0, 10);
         DrawDeckNames(w, 1);
         break;
     case 8:
-        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, 0, 0, 10);
+        DrawSprite(w->addLabelX, w->addLabelY, w->gfx8, w->tiles5, w->palette, NULL, 0, 10);
         DrawDeckNames(w, 1);
         break;
     case 9:
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
 
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -4405,15 +4405,15 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
         break;
     case 11:
-        DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, 0, 0, 8);
+        DrawSprite((w->x >> 8) - 26, (w->y >> 8) - 13, w->gfx2, w->tiles2, w->palette4, NULL, 0, 8);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
 
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -4425,20 +4425,20 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
         break;
     case 13:
-        DrawSprite(w->x9 >> 8, w->y8 >> 8, w->gfx9, w->tiles11, w->palette7, 0, 0, 20);
-        DrawSprite(w->x10 >> 8, 18, 0, w->tiles13, w->palette7, 0, 0, 21);
+        DrawSprite(w->x9 >> 8, w->y8 >> 8, w->gfx9, w->tiles11, w->palette7, NULL, 0, 20);
+        DrawSprite(w->x10 >> 8, 18, NULL, w->tiles13, w->palette7, NULL, 0, 21);
         DrawTextSlots(138, 16, w->textSlots6, w->palette, 20, w->textSlotCount6);
         break;
     case 12:
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, NULL, w->handFlags, 0);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
 
             DrawTextSlots(10, 100, w->textSlots4, w->palette4, 20, w->textSlotCount4);
@@ -4450,15 +4450,15 @@ static void Deckmenu2_2(DeckMenuWork* w) {
 
         break;
     case 15:
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, 0, w->handFlags, 0);
+        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx, w->tiles, w->palette, NULL, w->handFlags, 0);
 
         if (w->tiles7 != NULL) {
-            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, 0, SPRITE_PRIORITY(1), 100);
-            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, 0, SPRITE_PRIORITY(1), 101);
+            DrawSprite(24, 66, w->gfx4, w->tiles7, w->palette5, NULL, SPRITE_PRIORITY(1), 100);
+            DrawSprite(24, 66, w->gfx5, w->tiles8, w->palette6, NULL, SPRITE_PRIORITY(1), 101);
 
             if (w->tiles10 != NULL) {
                 w->gfx3 = AnimUpdate(&w->anim);
-                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, 0, 0, 1);
+                DrawSprite(24, 66, w->gfx3, w->tiles10, w->palette5, NULL, 0, 1);
             }
         }
 
@@ -4599,7 +4599,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* w, u8 kind, u8 c) {
                     args.col = x;
                     args.row = y;
                     args.panel = 1;
-                    args.slot = 0;
+                    args.slot = NULL;
                     TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
                     x++;
                     count++;
@@ -4613,7 +4613,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* w, u8 kind, u8 c) {
                     args.col = x;
                     args.row = y;
                     args.panel = 1;
-                    args.slot = 0;
+                    args.slot = NULL;
                     TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
                     x++;
                     count++;
@@ -4637,7 +4637,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* w, u8 kind, u8 c) {
                         args.col = x;
                         args.row = y;
                         args.panel = 1;
-                        args.slot = 0;
+                        args.slot = NULL;
                         TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
                         x++;
                         count++;
@@ -4654,7 +4654,7 @@ s32 CreateCollectionGridCards(DeckMenuWork* w, u8 kind, u8 c) {
                         args.col = x;
                         args.row = y;
                         args.panel = 1;
-                        args.slot = 0;
+                        args.slot = NULL;
                         TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
                         x++;
                         count++;
@@ -4831,7 +4831,7 @@ DeckCard2Work* GetCardAtCursor(DeckMenuWork* w) {
         node = ListPoolNext(&node->node);
     }
 
-    return 0;
+    return NULL;
 }
 
 void DrawDeckCategoryCount(u8 a, u8 b) {
@@ -4972,7 +4972,7 @@ void DrawDeckCardCount(u8 deck) {
     u8* base;
     u16 n;
 
-    base = 0;
+    base = NULL;
     n = GetDeckCardCount(deck);
     d[0] = n / 10;
     d[1] = n - (u16)(n / 10) * 10;
@@ -5074,7 +5074,7 @@ void DrawDeckCpCost(u8 mode) {
 
     u8* base;
 
-    base = 0;
+    base = NULL;
     v = GetDeckCpCost(mode);
 
     d1[0] = v / 1000;
@@ -5294,7 +5294,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
         flag = id & 0x8000;
 
         if (flag != 0) {
-            w->tiles10 = AllocObjTiles(0x280, 0);
+            w->tiles10 = AllocObjTiles(0x280, NULL);
             SetObjTileSource(w->tiles10, gUnk_0908B1B4);
             AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
             AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -5383,7 +5383,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* w) {
 void ReleaseCardPreview(DeckMenuWork* w) {
     if (w->tiles10 != NULL) {
         ReleaseObjTiles(w->tiles10);
-        w->tiles10 = 0;
+        w->tiles10 = NULL;
     }
 
     if (w->tiles7 != NULL) {
@@ -5394,13 +5394,13 @@ void ReleaseCardPreview(DeckMenuWork* w) {
 
         if (w->tiles9 != NULL) {
             ReleaseObjTiles(w->tiles9);
-            w->tiles9 = 0;
+            w->tiles9 = NULL;
         }
 
-        w->tiles7 = 0;
-        w->palette5 = 0;
-        w->tiles8 = 0;
-        w->palette6 = 0;
+        w->tiles7 = NULL;
+        w->palette5 = NULL;
+        w->tiles8 = NULL;
+        w->palette6 = NULL;
     }
 }
 
@@ -5426,7 +5426,7 @@ void ShowDeckCardPreview(DeckMenuWork* w) {
 
     if (id != 0xFFFF) {
         if (id & 0x8000) {
-            w->tiles10 = AllocObjTiles(0x280, 0);
+            w->tiles10 = AllocObjTiles(0x280, NULL);
             SetObjTileSource(w->tiles10, gUnk_0908B1B4);
             AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
             AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
@@ -5777,7 +5777,7 @@ void FreeCollectionEntries(DeckMenuWork* w) {
         }
 
         EwramFree(w->entries);
-        w->entries = 0;
+        w->entries = NULL;
     }
 }
 
@@ -5785,8 +5785,8 @@ void ReleaseCommandMenuGfx(DeckMenuWork* w) {
     if (w->tiles3 != NULL) {
         ReleaseObjTiles(w->tiles3);
         ReleaseObjPalette(w->palette2);
-        w->tiles3 = 0;
-        w->palette2 = 0;
+        w->tiles3 = NULL;
+        w->palette2 = NULL;
     }
 }
 
@@ -6015,10 +6015,10 @@ void ResetGridScroll(DeckMenuWork* w) {
             ReleaseObjPalette(node->palette);
             ReleaseObjTiles(node->tiles2);
             node->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
-            node->tiles = 0;
-            node->palette = 0;
-            node->tiles2 = 0;
-            node->palette2 = 0;
+            node->tiles = NULL;
+            node->palette = NULL;
+            node->tiles2 = NULL;
+            node->palette2 = NULL;
         }
 
         if (x > 2) {
@@ -6171,7 +6171,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* w) {
 
     p = ListPoolFirst(&w->pool);
     last = ListPoolLast(&w->pool);
-    q = 0;
+    q = NULL;
 
     while (p != NULL) {
         if (w->cursorCol == p->args.col && w->cursorRow == p->args.row) {
@@ -6940,9 +6940,9 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* w, void* a) {
         DisableBg(1);
         DisableBg(2);
 #ifdef VERSION_EU
-        w->tiles11 = AllocObjTiles(0x400, 0);
+        w->tiles11 = AllocObjTiles(0x400, NULL);
 #else
-        w->tiles11 = AllocObjTiles(0x200, 0);
+        w->tiles11 = AllocObjTiles(0x200, NULL);
 #endif
         w->palette7 = LoadObjPalette(gUnk_096145B8, 32);
         w->tiles13 = AllocSpriteFrameTiles(0x80);

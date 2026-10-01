@@ -7,6 +7,7 @@
 #include "fade.h"
 #include "mode_copyright2.h"
 #include "mode.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -59,8 +60,8 @@ void mode_status_0() {
     DisableBg(0);
     LoadStatusNumberTiles();
     TaskPoolInit(&sStatusTaskPool, 4);
-    sStatusBarTask = TaskCreate(&sStatusTaskPool, &gTaskDescStatusBar, 0);
-    TaskCreate(&sStatusTaskPool, &gTaskDescStatus, 0);
+    sStatusBarTask = TaskCreate(&sStatusTaskPool, &gTaskDescStatusBar, NULL);
+    TaskCreate(&sStatusTaskPool, &gTaskDescStatus, NULL);
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 }
 

@@ -293,7 +293,7 @@ void DrawSpriteTextLines() {
         y = gSpriteTextLines[i].y;
 
         for (j = 0; j < gSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + j * step, y >> 8, NULL, gSpriteTextLines[i].glyphTiles[j], gSpriteTextLines[i].palette, 0, 0, 50);
+            DrawSprite((x >> 8) + j * step, y >> 8, NULL, gSpriteTextLines[i].glyphTiles[j], gSpriteTextLines[i].palette, NULL, 0, 50);
             ReleaseObjTiles(gSpriteTextLines[i].glyphTiles[j]);
         }
 
@@ -903,7 +903,7 @@ void DrawSpriteTextSlots() {
         dx = 0;
 
         for (j = 0; j < gSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + dx, y >> 8, gUnk_09EEB204[0], gSpriteTextLines[i].glyphTiles[j], g, 0, 0, 50);
+            DrawSprite((x >> 8) + dx, y >> 8, gUnk_09EEB204[0], gSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
 
             if (gSpriteTextLines[i].font == 1) {
                 dx += 10;
@@ -2391,7 +2391,7 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
                 ReleaseObjTiles(b->tiles);
             }
 
-            b->tiles = 0;
+            b->tiles = NULL;
             b->advance = 0;
         } else {
             v = *c;
@@ -2533,7 +2533,7 @@ s32 LoadJapaneseTextSlots(u16* a, TextSlot* b) {
 
             if (b->tiles != NULL) {
                 ReleaseObjTiles(b->tiles);
-                b->tiles = 0;
+                b->tiles = NULL;
             }
 
             switch (t) {
@@ -2592,7 +2592,7 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
                 ReleaseObjTiles(*p);
             }
 
-            *p++ = 0;
+            *p++ = NULL;
         } else {
             v = *c;
             v = (v / 256) | (v << 8);
@@ -2729,7 +2729,7 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
 
             if (*p != NULL) {
                 ReleaseObjTiles(*p);
-                *p = 0;
+                *p = NULL;
             }
 
             switch (t) {
@@ -2802,7 +2802,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
             cy += 12;
             x = x0;
         } else if (p->advance != -1) {
-            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, 0, 0, h);
+            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, 0, h);
             x += p->advance;
         } else {
             x += 3;
@@ -2850,7 +2850,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* p, void* d, u16 g, u16 h, u8
             cy += 12;
             x = x0;
         } else if (p->advance != -1) {
-            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, 0, g, h);
+            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, g, h);
             x += p->advance;
         } else {
             x += 3;
@@ -2875,9 +2875,9 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* p, void* d, void* e, u
             x = x0;
         } else if (p->advance != -1) {
             if (p->useAlternatePalette == 0) {
-                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, 0, 0, h);
+                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, 0, h);
             } else {
-                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, e, 0, 0, h);
+                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, e, NULL, 0, h);
             }
 
             x += p->advance;
@@ -2899,7 +2899,7 @@ void DrawTextTileArray(s16 x, s32 y, void** p, void* d, u16 h, u8 n) {
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, 0, 0, h);
+            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, NULL, 0, h);
             x += 10;
         }
 
@@ -2917,7 +2917,7 @@ void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u1
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, 0, 0, h);
+            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, NULL, 0, h);
             x += 10;
         }
 
@@ -3177,7 +3177,7 @@ s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* d, void* e, u16 h, u8 n) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        DrawSprite(x + i * 8, y, gUnk_09EEC538[*s], d, e, 0, 0, h);
+        DrawSprite(x + i * 8, y, gUnk_09EEC538[*s], d, e, NULL, 0, h);
         s++;
     }
 }
@@ -6648,18 +6648,18 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
                 v = *(u16*)s;
 
                 if ((u16)((v / 256) | (v << 8)) == 0x8142) {
-                    *d = 0;
+                    *d = NULL;
                 } else {
                     *d = s;
                     return sTextEntryCount;
                 }
             } else {
-                *d = 0;
+                *d = NULL;
             }
         }
     }
 
-    *d = 0;
+    *d = NULL;
     return sTextEntryCount;
 }
 #endif
@@ -6676,9 +6676,9 @@ void DrawCardMsgGlyphs(u8 n) {
 
             if (b[i].tiles != NULL) {
                 if (b[i].useAlternatePalette == 0) {
-                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].palette, 0, 0, 0);
+                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].palette, NULL, 0, 0);
                 } else {
-                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, 0, 0, 0);
+                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, NULL, 0, 0);
                 }
             }
         }

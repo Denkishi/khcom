@@ -973,7 +973,7 @@ void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
     c = GetBattleSpritePriorityFlags(p->y);
     pal = work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, c,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, c,
         -0x1004 - (p->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
@@ -1002,7 +1002,7 @@ void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
     AnimStart(&work->anim, 0, 0);
     work->openTimer = 0;
     TaskPoolInit(&work->tasks, 1);
-    work->task = 0;
+    work->task = NULL;
     work->closePending = 0;
 }
 
@@ -1073,7 +1073,7 @@ void BosBoogieSakuDrawAt(BoogieSakuWork* work, s32 a, u16 b) {
     s16 y;
 
     WorldToScreen(&x, &y, a, 0x23F00, -0x2000);
-    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, b, 0xE700);
+    DrawSprite(x, y + 1, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, b, 0xE700);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -1552,7 +1552,7 @@ void task_bos_boogie_knifereader_0(BoogieKnifereaderWork* work) {
     TaskPoolInit(&work->tasks, 5);
 
     for (i = 0; i < 5; i++) {
-        work->knives[i] = 0;
+        work->knives[i] = NULL;
     }
 
     InitEnemyBtlObj(&work->obj, &sBosBoogieKnifereaderEmyKind, 0xF800, 0x24000, 0);
@@ -1776,7 +1776,7 @@ void task_bos_boogie_kaihuku_2(BoogieKaihukuWork* work) {
         v = GetBattleSpritePriorityFlags(p->y);
         d = work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, d, 0, v, -0x1004 - (p->y >> 8) * 4);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, d, NULL, v, -0x1004 - (p->y >> 8) * 4);
     }
 }
 
@@ -1831,10 +1831,10 @@ void task_bos_ursula_0(UrsulaWork* work) {
     gUrsulaWork = work;
     gBosUrsulaActive = 1;
     TaskCreate(&gBtlWork->taskPools[1], &sTaskDescBosUrsulaMap, (void*)&sBosUrsulaBattleBackgroundDef);
-    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescBosUrsulaBorder, 0);
+    TaskCreate(&gBtlWork->taskPools[0], &sTaskDescBosUrsulaBorder, NULL);
     work->state = 0;
     work->timer = 0;
-    work->mapBlocks = 0;
+    work->mapBlocks = NULL;
     work->takoRecoverPending = 0;
     work->bobTimer = 0;
     work->bobTarget = 0;
@@ -1861,7 +1861,7 @@ void task_bos_ursula_0(UrsulaWork* work) {
     work->tako = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
     v = 0;
     work->tako2 = TaskCreate(&work->tasks, &sTaskDescBosUrsulaTako, &v);
-    TaskCreate(&work->tasks, &sTaskDescBosUrsulaMapanime, 0);
+    TaskCreate(&work->tasks, &sTaskDescBosUrsulaMapanime, NULL);
     v = 1;
     TaskCreate(&work->tasks, &sTaskDescBosUrsulaBacktako, &v);
     work->gimmickDelay = 0;
@@ -2444,8 +2444,8 @@ void task_bos_ursula_border_2(UrsulaBorderWork* work) {
     GetBattleSpritePriorityFlags(0x19800);
     WorldToScreen(&a, &b, 0x8000, 0x19800, -0x800);
     WorldToScreen(&c, &d, 0x18000, 0x19800, -0x800);
-    DrawSprite(a, b, gUnk_0979D090, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 0xFB00);
-    DrawSprite(c, d, gUnk_0979D8B8, work->tiles, work->palette, 0, SPRITE_PRIORITY(2), 0xFB00);
+    DrawSprite(a, b, gUnk_0979D090, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
+    DrawSprite(c, d, gUnk_0979D8B8, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0xFB00);
 }
 
 void task_bos_ursula_border_3(UrsulaBorderWork* work) {
@@ -2731,7 +2731,7 @@ void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
     if (work->state != 4 && BosUrsulaIsGimmickActive() == 0) {
         pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
-        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, SPRITE_PRIORITY(2), 0xFC00);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, SPRITE_PRIORITY(2), 0xFC00);
     }
 }
 
@@ -2837,10 +2837,10 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, SPRITE_PRIORITY(3),
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(3),
         0xFE00);
     WorldToScreen(&x, &y, work->x2, work->y2, work->z2);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, 0, SPRITE_PRIORITY(3) | SPRITE_FLAG_HFLIP,
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(3) | SPRITE_FLAG_HFLIP,
         0xFE00);
 }
 
@@ -2852,7 +2852,7 @@ void task_bos_ursula_backtako_3(UrsulaBacktakoWork* work) {
 void task_bos_ursula_mapanime_0(UrsulaMapanimeWork* work) {
     gUrsulaMapanimeWork = work;
     TaskPoolInit(&work->tasks, 1);
-    work->task = 0;
+    work->task = NULL;
     work->attack = 4;
     BosUrsulaStartAttack(0);
 }
@@ -2898,7 +2898,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
     if (work->anim.def == &sBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2
             && work->attackSpawned == 0) {
         work->attackSpawned = 1;
-        work->task = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubble, 0);
+        work->task = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubble, NULL);
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -2924,7 +2924,7 @@ void BosUrsulaStartAttack(s32 a) {
     }
 
     if (a == 3) {
-        gUrsulaMapanimeWork->task = TaskCreate(&gUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, 0);
+        gUrsulaMapanimeWork->task = TaskCreate(&gUrsulaMapanimeWork->tasks, &gTaskDescBosUrsulaThunder, NULL);
     } else if (gUrsulaMapanimeWork->attack != a) {
         gUrsulaMapanimeWork->attack = a;
 

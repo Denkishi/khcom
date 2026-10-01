@@ -17,6 +17,7 @@
 #include "save_types.h"
 #include "types.h"
 #include "deck_equip_suffix.inc"
+#include <stddef.h>
 
 void Deck_Equip_0(DeckConfirmWork* w, u8* a) {
     w->textSlotCount = 0;
@@ -210,7 +211,7 @@ void DeckConfirmDraw(DeckConfirmWork* w) {
     DrawTextSlots(w->x, w->y, w->textSlots, w->palette, 1, w->textSlotCount);
     DrawTextSlots(w->x2, w->y2, w->textSlots2, w->palette, 1, w->textSlotCount2);
     DrawTextSlots(w->x3, w->y3, w->textSlots3, w->palette, 1, w->textSlotCount3);
-    DrawSprite(120, 80, gUnk_09EF1278[0], w->tiles, w->palette2, 0, 0, 2);
+    DrawSprite(120, 80, gUnk_09EF1278[0], w->tiles, w->palette2, NULL, 0, 2);
 }
 
 void DeckConfirmDestroy(DeckConfirmWork* w) {

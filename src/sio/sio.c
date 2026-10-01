@@ -6,6 +6,7 @@
 #include "gba/macro.h"
 #include "gba/syscall.h"
 #include "sio_types.h"
+#include <stddef.h>
 #include "types.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
@@ -144,8 +145,8 @@ void SioInit() {
     gSioChecksumReady = 0;
     gSioSendNonzero = 0;
     gSioRecvNonzero = 0;
-    gSioLinkSendCallback = 0;
-    gSioLinkRecvCallback = 0;
+    gSioLinkSendCallback = NULL;
+    gSioLinkRecvCallback = NULL;
 }
 
 void SioReset() {

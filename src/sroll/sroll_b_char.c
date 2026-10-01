@@ -7,6 +7,7 @@
 #include "obj.h"
 #include "obj_api.h"
 #include "registration_data.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -37,10 +38,10 @@ void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
     w->motion = 0;
     w->motionTimer = 0;
     w->obj = a->obj;
-    w->tiles = AllocObjTiles(res->tileCount * 32, 0);
+    w->tiles = AllocObjTiles(res->tileCount * 32, NULL);
     w->palette = LoadObjPalette(res->palette, 32);
     anim = &w->anim;
-    AnimInit(anim, 0, 0);
+    AnimInit(anim, NULL, NULL);
     w->obj->anim = anim;
     w->obj->paletteIndex = w->palette->index;
     SrollBCharChangeAnim(w);

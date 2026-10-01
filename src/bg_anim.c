@@ -25,7 +25,7 @@ u16 gBgAnimFrameDuration;
 
 void BgAnimInit(s32 bg, u16 b, u16 c) {
     gBgAnimBg = bg;
-    gBgAnimCurrent = 0;
+    gBgAnimCurrent = NULL;
     gBgAnimScrollX = 0;
     gBgAnimScrollY = 0;
     gBgAnimStopped = 1;
@@ -230,7 +230,7 @@ void BgAnimSetStopFrame(u16 a) {
 }
 
 void BgAnimStop() {
-    gBgAnimCurrent = 0;
+    gBgAnimCurrent = NULL;
     gBgAnimStopped = 1;
     DisableBg(gBgAnimBg);
 }

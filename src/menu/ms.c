@@ -4,6 +4,7 @@
 #include "engine_math.h"
 #include "ms_types.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -40,7 +41,7 @@ s32 task_ms_shop_hosi_1(MsShopHosiWork* work) {
 
 void task_ms_shop_hosi_2(MsShopHosiWork* work) {
     if (work->timer & 1) {
-        DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EF9A4C[work->frame], work->tiles, work->palette, 0, 0, 0);
+        DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EF9A4C[work->frame], work->tiles, work->palette, NULL, 0, 0);
     }
 }
 

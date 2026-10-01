@@ -14,6 +14,7 @@
 #include "card_help_text.h"
 #include "player_progression_types.h"
 #include "status.h"
+#include <stddef.h>
 #include "types.h"
 
 #ifdef VERSION_EU
@@ -2018,7 +2019,7 @@ s32 UpdateStockInfoMessage(StockInfoWork* w) {
 }
 
 void StockInfo_2(StockInfoWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEA28C, w->tiles, w->palette, 0, 0, 50);
+    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEA28C, w->tiles, w->palette, NULL, 0, 50);
     TaskPoolDraw(&w->tasks);
 }
 
@@ -2034,7 +2035,7 @@ void* GetCardHelpText(u16 a, u8 b) {
         return LANGSTR(gCardHelpDefs[a]->texts[b]);
     }
 
-    return 0;
+    return NULL;
 }
 
 u8 GetCardHelpTextCount(u16 a) {

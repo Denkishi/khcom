@@ -231,9 +231,9 @@ void MsChargeLoadGrid() {
                 sMsChargeGridSprites[i][k] = gCardDefs[defIdx].gfx2;
                 sMsChargeGridPremium[i][k] = gMsCards[a + idx].premium;
             } else {
-                sMsChargeGridPalettes[i][k] = 0;
-                sMsChargeGridTiles[i][k] = 0;
-                sMsChargeGridSprites[i][k] = 0;
+                sMsChargeGridPalettes[i][k] = NULL;
+                sMsChargeGridTiles[i][k] = NULL;
+                sMsChargeGridSprites[i][k] = NULL;
                 sMsChargeGridPremium[i][k] = 0;
             }
 
@@ -280,11 +280,11 @@ void MsChargeLoadSelectedCard() {
         *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
         LoadObjPaletteBank(gUnk_02035C44->index, gUnk_09A3DE7C + card->category * 0x20);
     } else {
-        sMsChargeCardPalette = 0;
-        sMsChargeCardTiles = 0;
-        sMsChargeCardSprite = 0;
-        gUnk_02035D94 = 0;
-        gUnk_02035D98 = 0;
+        sMsChargeCardPalette = NULL;
+        sMsChargeCardTiles = NULL;
+        sMsChargeCardSprite = NULL;
+        gUnk_02035D94 = NULL;
+        gUnk_02035D98 = NULL;
         sMsChargeCardPremium = 0;
         sMsChargeNameTextCount = 0;
         sMsChargeDescTextCount = 0;
@@ -994,7 +994,7 @@ void MsChargeDraw() {
     s32 j;
 
     if (sMsChargeMenuState != 1) {
-        DrawSprite(16, 60, AnimUpdate(&gUnk_02035C50), gUnk_02035C48, gUnk_02035C44, 0, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(16, 60, AnimUpdate(&gUnk_02035C50), gUnk_02035C48, gUnk_02035C44, NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
@@ -1005,21 +1005,21 @@ void MsChargeDraw() {
         v = 0;
     }
 
-    DrawSprite(160, v + 40, gUnk_099A7C64, sMsChargeScrollbarTiles, gUnk_02035D90, 0, SPRITE_PRIORITY(2), 0x898);
-    DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x834);
+    DrawSprite(160, v + 40, gUnk_099A7C64, sMsChargeScrollbarTiles, gUnk_02035D90, NULL, SPRITE_PRIORITY(2), 0x898);
+    DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x834);
 
     if (sMsChargeState == 1) {
         switch (sMsChargeMenuState) {
         case 1:
             sMsChargeCursorX = sMsChargeTab * 3584 + 0xAC00;
             sMsChargeCursorY = 0x1000;
-            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
             break;
         case 0:
             ApproachValueHalf(&sMsChargeCursorX, (sMsChargeGridCol * 23 + 181) << 8);
             ApproachValueHalf(&sMsChargeCursorY, (sMsChargeGridRow * 26 + 40) << 8);
-            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
-            DrawSprite(sMsChargeGridCol * 23 + 165, sMsChargeGridRow * 26 + 27, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, 0, SPRITE_PRIORITY(2), 0x7DA);
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
+            DrawSprite(sMsChargeGridCol * 23 + 165, sMsChargeGridRow * 26 + 27, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 2:
             card = GetMsChargeSelectedCard();
@@ -1034,12 +1034,12 @@ void MsChargeDraw() {
 
             ApproachValueHalf(&sMsChargeCursorX, (col * 48 + 64) << 8);
             ApproachValueHalf(&sMsChargeCursorY, (row * 8 + 64) << 8);
-            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, 0, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
-            DrawSprite(col * 48 + 53, row * 8 + 67, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, 0, SPRITE_PRIORITY(2), 0x7DA);
+            DrawSprite(sMsChargeCursorX >> 8, (sMsChargeCursorY >> 8) + ((sine = gSineTable[sMsChargeBobPhase]) >> 6), AnimUpdate(&sMsChargeCursorAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x7D0);
+            DrawSprite(col * 48 + 53, row * 8 + 67, AnimUpdate(&sMsChargeHighlightAnim), gUnk_02035C48, gUnk_02035C44, NULL, SPRITE_PRIORITY(2), 0x7DA);
             break;
         case 3:
             ApproachValueHalf(&sMsChargeConfirmCursorX, sMsChargeConfirmCursor == 0 ? 0x4800 : 0x8800);
-            DrawSprite(sMsChargeConfirmCursorX >> 8, 98, AnimUpdate(&sMsChargeConfirmCursorAnim), sMsChargeConfirmCursorTiles, sMsChargeConfirmCursorPalette, 0, SPRITE_FLAG_HFLIP, 0);
+            DrawSprite(sMsChargeConfirmCursorX >> 8, 98, AnimUpdate(&sMsChargeConfirmCursorAnim), sMsChargeConfirmCursorTiles, sMsChargeConfirmCursorPalette, NULL, SPRITE_FLAG_HFLIP, 0);
 
             if (sMsChargeConfirmTextCount != 0) {
                 DrawTextSlots(120 - GetTextSlotsWidth(sMsChargeConfirmText, sMsChargeConfirmTextCount) / 2, 60, sMsChargeConfirmText, sMsChargeMooglePalette, 1, sMsChargeConfirmTextCount);
@@ -1068,10 +1068,10 @@ void MsChargeDraw() {
     for (i = 0; i < 4; i++) {
         for (j = 0; j < 3; j++) {
             if (sMsChargeGridSprites[i][j] != NULL) {
-                DrawSprite(j * 23 + 181, i * 26 + 47, sMsChargeGridSprites[i][j], sMsChargeGridTiles[i][j], sMsChargeGridPalettes[i][j], 0, SPRITE_PRIORITY(2), 0x83E);
+                DrawSprite(j * 23 + 181, i * 26 + 47, sMsChargeGridSprites[i][j], sMsChargeGridTiles[i][j], sMsChargeGridPalettes[i][j], NULL, SPRITE_PRIORITY(2), 0x83E);
 
                 if (sMsChargeGridPremium[i][j] != 0) {
-                    DrawSprite(j * 23 + 181, i * 26 + 47, anim, sMsChargeGridPremiumTiles, gUnk_02035D90, 0, SPRITE_PRIORITY(2), 0x834);
+                    DrawSprite(j * 23 + 181, i * 26 + 47, anim, sMsChargeGridPremiumTiles, gUnk_02035D90, NULL, SPRITE_PRIORITY(2), 0x834);
                 }
             }
         }
@@ -1079,14 +1079,14 @@ void MsChargeDraw() {
 
     if (sMsChargeMenuState != 1) {
         if (sMsChargeCardSprite != NULL) {
-            DrawSprite(24, 92, sMsChargeCardSprite, sMsChargeCardTiles, sMsChargeCardPalette, 0, SPRITE_PRIORITY(2), 0x848);
+            DrawSprite(24, 92, sMsChargeCardSprite, sMsChargeCardTiles, sMsChargeCardPalette, NULL, SPRITE_PRIORITY(2), 0x848);
         }
 
         if (gUnk_02035D98 != NULL) {
-            DrawSprite(24, 92, gUnk_02035D98, gUnk_02035D94, gUnk_02035D90, 0, SPRITE_PRIORITY(2), 0x83E);
+            DrawSprite(24, 92, gUnk_02035D98, gUnk_02035D94, gUnk_02035D90, NULL, SPRITE_PRIORITY(2), 0x83E);
 
             if (sMsChargeCardPremium != 0) {
-                DrawSprite(24, 92, AnimUpdate(&sMsChargePremiumAnim), sMsChargePremiumTiles, gUnk_02035D90, 0, SPRITE_PRIORITY(2), 0x834);
+                DrawSprite(24, 92, AnimUpdate(&sMsChargePremiumAnim), sMsChargePremiumTiles, gUnk_02035D90, NULL, SPRITE_PRIORITY(2), 0x834);
             }
         }
 
@@ -1143,18 +1143,18 @@ void mode_ms_charge_0() {
 
     for (i = 0; i <= 3; i++) {
         for (j = 0; j <= 2; j++) {
-            sMsChargeGridPalettes[i][j] = 0;
-            sMsChargeGridTiles[i][j] = 0;
-            sMsChargeGridSprites[i][j] = 0;
+            sMsChargeGridPalettes[i][j] = NULL;
+            sMsChargeGridTiles[i][j] = NULL;
+            sMsChargeGridSprites[i][j] = NULL;
             sMsChargeGridPremium[i][j] = 0;
         }
     }
 
-    sMsChargeCardPalette = 0;
-    sMsChargeCardTiles = 0;
-    sMsChargeCardSprite = 0;
-    gUnk_02035D94 = 0;
-    gUnk_02035D98 = 0;
+    sMsChargeCardPalette = NULL;
+    sMsChargeCardTiles = NULL;
+    sMsChargeCardSprite = NULL;
+    gUnk_02035D94 = NULL;
+    gUnk_02035D98 = NULL;
     sMsChargeCardPremium = 0;
     sMsChargeValueCol = 0;
     sMsChargeValueRow = 0;

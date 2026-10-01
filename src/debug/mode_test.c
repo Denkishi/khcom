@@ -14,6 +14,7 @@
 #include "mode.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
@@ -48,7 +49,7 @@ void mode_test_1() {
         sTestFrame = 13;
     }
 
-    DrawSprite(120, 80, gBHpgagEFrames[sTestFrame], sTestTiles, sTestPalette, 0, 0, 0);
+    DrawSprite(120, 80, gBHpgagEFrames[sTestFrame], sTestTiles, sTestPalette, NULL, 0, 0);
 }
 #endif
 
@@ -136,7 +137,7 @@ void eu_08060C8C(FrdPoohWork* work, FrdPoohArgs* args) {
     work->targetX = work->actor->x;
     work->targetY = work->actor->y;
     work->palette = LoadObjPalette(gPoohPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, 0, work->tiles);
     ColliderInit(body->particles, 3, 10, 32);
     TaskPoolInit(&work->tasks, 1);
@@ -362,7 +363,7 @@ void eu_08061588(FrdPoohWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {

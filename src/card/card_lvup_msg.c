@@ -14,6 +14,7 @@
 #include "jiminy_data.h"
 #include "common_text.h"
 #include "msg.h"
+#include <stddef.h>
 #include "types.h"
 
 u8 UpdateLvupMsgSlideIn(LvupMsgWork* w, void* a);
@@ -167,9 +168,9 @@ void Lvup_msg_2(LvupMsgWork* w) {
     w->x2 = w->x3 + ((GetTextSlotsWidth(w->textSlots3, w->textSlotCount3) + 3) << 8);
 #endif
 #ifdef VERSION_EU
-    DrawSprite(72, w->y >> 8, 0, w->tiles, w->palette, 0, 0, 41);
+    DrawSprite(72, w->y >> 8, NULL, w->tiles, w->palette, NULL, 0, 41);
 #else
-    DrawSprite(72, w->y >> 8, gUnk_09EF126C[0], w->tiles, w->palette, 0, 0, 41);
+    DrawSprite(72, w->y >> 8, gUnk_09EF126C[0], w->tiles, w->palette, NULL, 0, 41);
 #endif
     DrawTextSlots(w->x >> 8, w->y2 >> 8, w->textSlots, w->textPalette, 40, w->textSlotCount);
     DrawTextSlots(w->x2 >> 8, w->y3 >> 8, w->textSlots2, w->textPalette, 40, w->textSlotCount2);

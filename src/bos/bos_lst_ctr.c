@@ -12,6 +12,7 @@
 #include "m4a_song.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -222,7 +223,7 @@ void task_bos_lst_ctr_2(LstCtrWork* work) {
 
     WorldToScreen(&x, &y, work->curX + work->offsetX, work->curY + work->offsetY,
                   work->curZ + work->offsetZ);
-    affine = 0;
+    affine = NULL;
     prio = GetBattleSpritePriorityFlags(work->curY + work->offsetY) | 4;
     z = -0x1004 - ((work->curY + work->offsetY) >> 8) * 4;
 

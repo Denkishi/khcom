@@ -8,6 +8,7 @@
 #include "btl_collision.h"
 #include "engine_math.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -129,7 +130,7 @@ void task_bos_lst_edg_2(LstEdgWork* work) {
     prio = GetBattleSpritePriorityFlags(work->y);
     z = -0x1004 - (work->y >> 8) * 4;
     gfx = AnimGetGfx(&work->anim);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, 0, prio, z);
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, prio, z);
 }
 
 void task_bos_lst_edg_3(LstEdgWork* work) {

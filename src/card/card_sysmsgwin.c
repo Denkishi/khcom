@@ -63,16 +63,16 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
     w->unk_138[2] = 0;
     w->unk_138[3] = 0;
     w->unk_143 = 0;
-    w->nextText = 0;
-    w->tiles3 = 0;
-    w->palette = 0;
-    w->tiles4 = 0;
-    w->palette2 = 0;
-    w->tiles2 = 0;
-    w->palette4 = 0;
-    w->tiles = 0;
-    w->palette3 = 0;
-    w->textPalette = 0;
+    w->nextText = NULL;
+    w->tiles3 = NULL;
+    w->palette = NULL;
+    w->tiles4 = NULL;
+    w->palette2 = NULL;
+    w->tiles2 = NULL;
+    w->palette4 = NULL;
+    w->tiles = NULL;
+    w->palette3 = NULL;
+    w->textPalette = NULL;
     w->unk_142 = 1;
     w->waitIconVisible = 1;
     w->choiceVisible = 0;
@@ -101,7 +101,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
 
     switch (w->args.mode) {
     case 0:
-        w->tiles3 = AllocObjTiles(0x40, 0);
+        w->tiles3 = AllocObjTiles(0x40, NULL);
         w->palette = LoadObjPalette(gBStatesPalette, 32);
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
         SetObjTileSource(w->tiles3, gFEventTiles);
@@ -114,7 +114,7 @@ void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
         SetBgPriority(w->args.bg, 0);
         break;
     case 2:
-        w->tiles3 = AllocObjTiles(0x40, 0);
+        w->tiles3 = AllocObjTiles(0x40, NULL);
         w->palette = LoadObjPalette(gBStatesPalette, 32);
         FadeSetPaletteExcluded(w->palette->index + 16, 1);
         SetObjTileSource(w->tiles3, gFEventTiles);
@@ -224,9 +224,9 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
         } else {
             ReleaseObjTiles(w->tiles3);
             ReleaseObjPalette(w->palette);
-            w->tiles3 = 0;
-            w->palette = 0;
-            w->tiles4 = AllocObjTiles(0x120, 0);
+            w->tiles3 = NULL;
+            w->palette = NULL;
+            w->tiles4 = AllocObjTiles(0x120, NULL);
             pal = gUnk_09614418;
             w->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
@@ -332,10 +332,10 @@ void sysmsgwin_2(SysMsgWinWork* w) {
         if (w->tiles2 != NULL) {
             if (w->unk_146[1] != 0) {
                 DrawSprite(w->frameX >> 8, w->frameY >> 8, (&gUnk_09EF12E8[2])[0],
-                           w->tiles2, w->palette4, 0, 0, 10);
+                           w->tiles2, w->palette4, NULL, 0, 10);
             } else {
                 DrawSprite(w->frameX >> 8, w->frameY >> 8, (&gUnk_09EF1278[2])[0],
-                           w->tiles2, w->palette4, 0, 0, 10);
+                           w->tiles2, w->palette4, NULL, 0, 10);
             }
         }
 
@@ -345,17 +345,17 @@ void sysmsgwin_2(SysMsgWinWork* w) {
     if (w->tiles3 != NULL) {
         if (w->waitIconVisible != 0) {
             DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4,
-                       w->tiles3, w->palette, 0, 0, 5);
+                       w->tiles3, w->palette, NULL, 0, 5);
         }
     }
 
     if (w->tiles4 != NULL) {
         DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx,
-                   w->tiles4, w->palette2, 0, SPRITE_FLAG_HFLIP, 5);
+                   w->tiles4, w->palette2, NULL, SPRITE_FLAG_HFLIP, 5);
     }
 
     if (w->choiceVisible != 0) {
-        DrawSprite(120, 75, gUnk_09EF126C[1], w->tiles, w->palette3, 0, 0, 10);
+        DrawSprite(120, 75, gUnk_09EF126C[1], w->tiles, w->palette3, NULL, 0, 10);
         DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) >> 1, 62, w->textSlots,
                       w->textPalette, 0, w->textSlotCount);
         DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) >> 1, 77, w->textSlots2,
@@ -409,7 +409,7 @@ void sysmsgwin_3(SysMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    sActiveSysmsgwin = 0;
+    sActiveSysmsgwin = NULL;
 }
 
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
@@ -485,16 +485,16 @@ void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
     w->unk_138[2] = 0;
     w->unk_138[3] = 0;
     w->unk_143 = 0;
-    w->nextText = 0;
-    w->tiles3 = 0;
-    w->palette = 0;
-    w->tiles4 = 0;
-    w->palette2 = 0;
-    w->tiles2 = 0;
-    w->palette4 = 0;
-    w->tiles = 0;
-    w->palette3 = 0;
-    w->textPalette = 0;
+    w->nextText = NULL;
+    w->tiles3 = NULL;
+    w->palette = NULL;
+    w->tiles4 = NULL;
+    w->palette2 = NULL;
+    w->tiles2 = NULL;
+    w->palette4 = NULL;
+    w->tiles = NULL;
+    w->palette3 = NULL;
+    w->textPalette = NULL;
     w->unk_142 = 1;
     w->waitIconVisible = 1;
     w->choiceVisible = 0;
@@ -619,7 +619,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
 u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
     u8* pal;
 
-    w->tiles4 = AllocObjTiles(0x120, 0);
+    w->tiles4 = AllocObjTiles(0x120, NULL);
     pal = gUnk_09614418;
     w->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
@@ -732,18 +732,18 @@ void sysmsgwinChoice_2(SysMsgWinWork* w) {
     case 2:
     case 3:
         if (w->tiles2 != NULL) {
-            DrawSprite(w->frameX >> 8, w->frameY >> 8, gUnk_09EF1278[0], w->tiles2, w->palette4, 0, 0, 20);
+            DrawSprite(w->frameX >> 8, w->frameY >> 8, gUnk_09EF1278[0], w->tiles2, w->palette4, NULL, 0, 20);
         }
 
         break;
     }
 
     if (w->tiles3 != NULL && w->waitIconVisible != 0) {
-        DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4, w->tiles3, w->palette, 0, 0, 10);
+        DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4, w->tiles3, w->palette, NULL, 0, 10);
     }
 
     if (w->tiles4 != NULL) {
-        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, 0, SPRITE_FLAG_HFLIP, 10);
+        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, NULL, SPRITE_FLAG_HFLIP, 10);
     }
 
     DrawTextSlots(89, 86, w->textSlots, w->textPalette, 0, w->textSlotCount);
@@ -796,7 +796,7 @@ void sysmsgwinChoice_3(SysMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    sActiveSysmsgwin = 0;
+    sActiveSysmsgwin = NULL;
 }
 
 TaskDesc gTaskDescSysmsgwin = {

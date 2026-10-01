@@ -56,7 +56,7 @@ void HumDrawSub(HumWork* p, HumSub* s) {
     }
 
     if (sy == 0x100 && sx == 0x100) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 0xFF) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {
@@ -121,7 +121,7 @@ void HumDraw(HumWork* work) {
     }
 
     if (sy == 0x100 && sx == 0x100) {
-        affine = 0;
+        affine = NULL;
     } else if (sy <= 0xFF) {
         affine = AllocObjAffine(0, sx, sy, 0);
     } else {
@@ -260,7 +260,7 @@ void eu_08013190() {
 
 void HumFaceTarget(HumWork* p, u16 n) {
     s32 v;
-    GetEnemyTargetPosition(&p->actor, &v, 0, 0);
+    GetEnemyTargetPosition(&p->actor, &v, NULL, NULL);
 
     if (GetRandom() % n == 0) {
         if (p->actor.x > v) {
@@ -297,7 +297,7 @@ u8 HumIsTargetInReach(HumWork* p, s16 a, u16 b, u16 r) {
     s32 bb;
     s32 rr;
 
-    GetEnemyTargetPosition(c, &v0, &v1, 0);
+    GetEnemyTargetPosition(c, &v0, &v1, NULL);
     rr = r << 8;
     d = c->y - v1;
 
@@ -354,7 +354,7 @@ u8 HumIsInPlayerReach(HumWork* p, s16 a, u16 b, u16 r) {
     s32 bb;
     s32 rr;
 
-    GetEnemyTargetPosition(c, &v0, &v1, 0);
+    GetEnemyTargetPosition(c, &v0, &v1, NULL);
     rr = r << 8;
     d = c->y - v1;
 

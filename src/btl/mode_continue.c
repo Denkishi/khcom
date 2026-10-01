@@ -4,6 +4,7 @@
 #include "continue_types.h"
 #include "game_state.h"
 #include "gba/syscall.h"
+#include <stddef.h>
 #include "taskpool.h"
 
 TaskPool gContinueTaskPool;
@@ -13,9 +14,9 @@ static void Continue_0() {
     TaskPoolInit(&gContinueTaskPool, 2);
 
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueSora, 0);
+        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueSora, NULL);
     } else {
-        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueRiku, 0);
+        gContinueTask = TaskCreate(&gContinueTaskPool, &gTaskDescContinueRiku, NULL);
     }
 }
 

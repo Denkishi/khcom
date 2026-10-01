@@ -504,7 +504,7 @@ void AdvanceFloorStory() {
         gMapFloorState.flags = t;
         p = GetMapEventDoor(e[0]);
         MarkEventRoomDone(p);
-        CreateMapRoom(p->returnRoom, 0);
+        CreateMapRoom(p->returnRoom, NULL);
         SetCurrentMapRoom(p->returnRoom, p->returnSide);
         gMapFloorState.eventStep++;
 
@@ -919,7 +919,7 @@ void EnterFloorWorld() {
         p->flags = t;
     }
 
-    CreateMapRoom(gMapFloorState.room, 0);
+    CreateMapRoom(gMapFloorState.room, NULL);
 }
 
 void StoreMapFloorState() {

@@ -7,6 +7,7 @@
 #include "engine_math.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -119,10 +120,10 @@ void task_bos_dsd_ita_2(DsdItaWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, 0, pal, prio);
+    DrawSprite(x, y, work->gfx, work->dsd->tiles2, work->dsd->palette2, NULL, pal, prio);
 
     if (work->z >= 0 && gBtlWork->scale == 0x100) {
-        affine = 0;
+        affine = NULL;
     } else {
         scale = 0x100 - -work->z / 128;
 
@@ -285,7 +286,7 @@ void task_bos_dsd_rock_2(DsdRockWork* work) {
     s16 y;
 
     if (work->front != 0) {
-        affine = 0;
+        affine = NULL;
         h = 10;
         prio = 0x400;
     } else {

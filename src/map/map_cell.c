@@ -391,7 +391,7 @@ void InitFieldState() {
     gFieldState->y2 = 0;
     gFieldState->tileCols = 32;
     gFieldState->tileRows = 32;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
     gFieldState->lockonDelay = 60;
     gFieldState->flags = 0;
     gFieldState->unk_74 = 0;
@@ -415,7 +415,7 @@ void CreateMapRndTask() {
         gFieldState->flags |= FIELD_FLAG_NO_ENEMY_SPAWN;
     }
 
-    TaskCreate(&gFieldState->tasks, &gTaskDescMapRnd, 0);
+    TaskCreate(&gFieldState->tasks, &gTaskDescMapRnd, NULL);
 }
 
 void SpawnMapPlayer() {
@@ -456,9 +456,9 @@ void SpawnMapPlayer() {
     }
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, 0);
+        TaskCreate(&gFieldState->tasks2, &gTaskDescFldRiku, NULL);
     } else {
-        TaskCreate(&gFieldState->tasks2, &gTaskDescFldSora, 0);
+        TaskCreate(&gFieldState->tasks2, &gTaskDescFldSora, NULL);
     }
 }
 
@@ -512,11 +512,11 @@ void DestroyMapField() {
 
 MapCell* MapGetCell(s16 x, s16 y) {
     if (y < 0 || y >= gMapRows) {
-        return 0;
+        return NULL;
     }
 
     if (x < 0 || x >= gMapCols) {
-        return 0;
+        return NULL;
     }
 
     return &gMapCells[gMapCols * y + x];
@@ -2791,9 +2791,9 @@ void MapGenerateRoom(u16 a, u16 b) {
             gMapCells[i].bg3Piece = 7;
             gMapCells[i].bg2Piece = 0;
             gMapCells[i].bg1Piece = 0;
-            gMapCells[i].bg3Map = 0;
-            gMapCells[i].bg2Map = 0;
-            gMapCells[i].bg1Map = 0;
+            gMapCells[i].bg3Map = NULL;
+            gMapCells[i].bg2Map = NULL;
+            gMapCells[i].bg1Map = NULL;
         }
 
         for (i = 0; i < 12; i++) {
@@ -3191,7 +3191,7 @@ MapDoor* MapGetDoor(u8 a) {
 
 MapCell* MapFixGetCell(s16 x, s16 y) {
     if (y < 0 || y >= gMapRoomState->rows || x < 0 || x >= gMapRoomState->cols) {
-        return 0;
+        return NULL;
     }
 
     return &gMapFixCells[gMapRoomState->cols * y + x];
@@ -3329,9 +3329,9 @@ void MapFixInitCells(MapFixedDef* p) {
         gMapFixCells[i].bg3Piece = 7;
         gMapFixCells[i].bg2Piece = 0;
         gMapFixCells[i].bg1Piece = 0;
-        gMapFixCells[i].bg3Map = 0;
-        gMapFixCells[i].bg2Map = 0;
-        gMapFixCells[i].bg1Map = 0;
+        gMapFixCells[i].bg3Map = NULL;
+        gMapFixCells[i].bg2Map = NULL;
+        gMapFixCells[i].bg1Map = NULL;
     }
 
     MapFixLoadCellTypes(p->cellTypes);

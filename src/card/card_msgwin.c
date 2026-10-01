@@ -55,24 +55,24 @@ static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
     w->unk_13C = InitCardMsgGlyphSprites(0, 0);
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
-    w->tiles3 = 0;
-    w->palette = 0;
-    w->tiles4 = 0;
-    w->palette2 = 0;
-    w->tiles = 0;
-    w->palette3 = 0;
-    w->tiles2 = 0;
-    w->palette4 = 0;
-    w->textPalette = 0;
+    w->tiles3 = NULL;
+    w->palette = NULL;
+    w->tiles4 = NULL;
+    w->palette2 = NULL;
+    w->tiles = NULL;
+    w->palette3 = NULL;
+    w->tiles2 = NULL;
+    w->palette4 = NULL;
+    w->textPalette = NULL;
     w->x = gMsgwinClosedScrollX[w->messageDef->positionIndex];
     w->faceX = 0;
     w->faceY = 0;
     w->cursorX = 0;
     w->cursorY = 0;
-    w->gfx = 0;
-    w->gfx2 = 0;
-    w->gfx3 = 0;
-    w->nextText = 0;
+    w->gfx = NULL;
+    w->gfx2 = NULL;
+    w->gfx3 = NULL;
+    w->nextText = NULL;
     w->unk_13C = 0;
     w->closeTimer = 0;
     w->steps = 8;
@@ -197,7 +197,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* w, void* a) {
 
     if (sel->portraitId != 62) {
         e = gMsgFaceAnims[sel->portraitId];
-        w->tiles3 = AllocObjTiles(0xD80, 0);
+        w->tiles3 = AllocObjTiles(0xD80, NULL);
         w->palette = LoadObjPalette(e[w->messageDef->expressionId].palette, 32);
         SetObjTileSource(w->tiles3, e[w->messageDef->expressionId].tiles);
         AnimInit(&w->anim, e[w->messageDef->expressionId].anims, e[w->messageDef->expressionId].gfxTable);
@@ -206,8 +206,8 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* w, void* a) {
         w->faceX = gMsgfaceHiddenX[w->messageDef->positionIndex];
         w->faceY = gMsgfaceY[w->messageDef->positionIndex];
     } else {
-        w->tiles3 = 0;
-        w->palette = 0;
+        w->tiles3 = NULL;
+        w->palette = NULL;
     }
 
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinOpen);
@@ -223,24 +223,24 @@ static void msgwin_2(CardMsgWinWork* w) {
 
     if (w->tiles3 != NULL) {
         if (w->faceFlip != 0) {
-            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, 0, SPRITE_FLAG_HFLIP, 0);
+            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, NULL, SPRITE_FLAG_HFLIP, 0);
         } else {
-            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, 0, 0, 0);
+            DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, NULL, 0, 0);
         }
 
         if (w->tiles4 != NULL && w->waitIconVisible != 0) {
             DrawSprite(gMsgwaitIconPos[w->messageDef->positionIndex][0] >> 8, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8,
-                       w->gfx2, w->tiles4, w->palette2, 0, 0, 10);
+                       w->gfx2, w->tiles4, w->palette2, NULL, 0, 10);
         }
     }
 
     if (w->tiles != NULL) {
-        DrawSprite(w->cursorX >> 8, w->cursorY >> 8, w->gfx3, w->tiles, w->palette3, 0, SPRITE_FLAG_HFLIP, 9);
+        DrawSprite(w->cursorX >> 8, w->cursorY >> 8, w->gfx3, w->tiles, w->palette3, NULL, SPRITE_FLAG_HFLIP, 9);
     }
 
     if (w->tiles2 != NULL) {
         p = gUnk_09EF126C;
-        DrawSprite(120, 80, p[1], w->tiles2, w->palette4, 0, 0, 10);
+        DrawSprite(120, 80, p[1], w->tiles2, w->palette4, NULL, 0, 10);
         DrawTextSlots((240 - w->textSlotCounts[0] * 10) >> 1, 67, w->textSlots, w->textPalette, 0, w->textSlotCounts[0]);
         DrawTextSlots((240 - w->textSlotCounts[1] * 10) >> 1, 82, w->textSlots2, w->textPalette, 0, w->textSlotCounts[1]);
     }
@@ -288,7 +288,7 @@ static void msgwin_3(CardMsgWinWork* w) {
     FreeTextSlots(w->textSlots, 10);
     FreeTextSlots(w->textSlots2, 10);
     gMessageWindowOpen = 0;
-    gActiveCardMsgwin = 0;
+    gActiveCardMsgwin = NULL;
 }
 
 u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
@@ -313,7 +313,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
             AnimStart(&w->anim, 0, e[sel->expressionId].animFlags);
 
             if (w->tiles4 == NULL) {
-                w->tiles4 = AllocObjTiles(0x40, 0);
+                w->tiles4 = AllocObjTiles(0x40, NULL);
                 w->palette2 = LoadObjPalette(gUnk_08F69BE4, 32);
                 SetObjTileSource(w->tiles4, gFEventTiles);
                 AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
@@ -369,9 +369,9 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
         } else {
             ReleaseObjTiles(w->tiles4);
             ReleaseObjPalette(w->palette2);
-            w->tiles4 = 0;
-            w->palette2 = 0;
-            w->tiles = AllocObjTiles(0x120, 0);
+            w->tiles4 = NULL;
+            w->palette2 = NULL;
+            w->tiles = AllocObjTiles(0x120, NULL);
             pal = gUnk_09614418;
             w->palette3 = LoadObjPalette(pal, 32);
             LoadObjPaletteBank(w->palette3->index, pal);

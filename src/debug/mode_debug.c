@@ -24,6 +24,7 @@
 #include "player_progression_types.h"
 #include "registration_data.h"
 #include "save_api.h"
+#include <stddef.h>
 #include "types.h"
 
 DebugWork* gDebugWork;
@@ -404,7 +405,7 @@ void mode_debug_1() {
     DebugTextClear();
     gfx = AnimUpdate(&gDebugWork->anim);
     DrawSprite(9, gDebugWork->cursor % 9 * 16 + 13, gfx, gDebugWork->tiles,
-               gDebugWork->palette, 0, 0, 0);
+               gDebugWork->palette, NULL, 0, 0);
 }
 
 void mode_debug_2() {

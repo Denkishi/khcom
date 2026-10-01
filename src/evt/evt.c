@@ -9,6 +9,7 @@
 #include "evt_types.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -94,9 +95,9 @@ void task_evt_obj_0(EvtObjWork* work, EvtObjParam* param) {
 
     res = param->res;
     work->obj = param->obj;
-    work->tiles = AllocObjTiles(res->tileCount * 32, 0);
+    work->tiles = AllocObjTiles(res->tileCount * 32, NULL);
     work->palette = LoadObjPalette(res->palette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     work->obj->anim = &work->anim;
     work->obj->paletteIndex = work->palette->index;
     EvtObjChangeAnim(work);
@@ -181,7 +182,7 @@ void task_evt_shadow_2(EvtShadowWork* work) {
     }
 
     if (obj->z >= obj->groundZ) {
-        sprite = 0;
+        sprite = NULL;
     } else {
         size = 0x100 - (obj->groundZ - obj->z) / 128;
 

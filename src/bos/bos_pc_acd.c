@@ -8,6 +8,7 @@
 #include "evt_types.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -124,7 +125,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
             WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
         }
 
-        DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
+        DrawSprite(sx, sy, gfx, work->tiles, work->palette, NULL, GetBattleSpritePriorityFlags(work->y),
                    (-0x1004 - ((work->y >> 8) << 2)) | 3);
     } else if (pos->z >= 0) {
         if (((*gp)->flags & BTL_FLAG_PLAYER_CARD_ACTION) && ((*gp)->flags & BTL_FLAG_SUMMON_ACTIVE)) {
@@ -150,11 +151,11 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
                 WorldToScreen(&sx, &sy, work->x - ox + 0x200, work->y - oy, 0);
             }
 
-            DrawSprite(sx, sy, gfx, work->tiles, work->palette, 0, GetBattleSpritePriorityFlags(work->y),
+            DrawSprite(sx, sy, gfx, work->tiles, work->palette, NULL, GetBattleSpritePriorityFlags(work->y),
                        (-0x1004 - ((work->y >> 8) << 2)) | 3);
         } else {
             WorldToScreen(&sx, &sy, work->x - ox, work->y - oy, 0);
-            DrawSprite(sx, sy, AnimGetGfx(anim), work->tiles, work->palette, 0, GetBattleSpritePriorityFlags((*gp)->actor->y),
+            DrawSprite(sx, sy, AnimGetGfx(anim), work->tiles, work->palette, NULL, GetBattleSpritePriorityFlags((*gp)->actor->y),
                        -0x1004 - (((*gp)->actor->y >> 8) << 2));
         }
     }

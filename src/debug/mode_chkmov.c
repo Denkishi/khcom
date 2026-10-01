@@ -7,6 +7,7 @@
 #include "registration_data.h"
 #include "taskpool.h"
 #include "mode.h"
+#include <stddef.h>
 #include "types.h"
 
 #ifdef VERSION_EU
@@ -23,7 +24,7 @@ void eu_0800C76C(s32 arg) {
     SetBgMode0();
     gMovieDebugWorkEu->index = 0;
     TaskPoolInit(&gMovieDebugWorkEu->pool, 10);
-    TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, 0);
+    TaskCreate(&gMovieDebugWorkEu->pool, &gTaskDescPrint, NULL);
 }
 
 void eu_0800C7A0() {

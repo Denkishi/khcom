@@ -134,7 +134,7 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -256,7 +256,7 @@ void Task_MapNamine_2(MapNamineWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->spriteFlags, v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, w->spriteFlags, v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -323,7 +323,7 @@ void MapNiserikuWaitApproach(MapNiserikuWork* w) {
 void MapNiserikuStartEvent(MapNiserikuWork* w) {
     if (FadeIsActive() == 0) {
         RequestEventMode(0x3B);
-        w->update = 0;
+        w->update = NULL;
     }
 }
 
@@ -395,7 +395,7 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
     case 25:
     case 26:
     default:
-        w->update = 0;
+        w->update = NULL;
         w->tiles = AllocObjTiles(0x300, gNiserikuDownFTiles);
         w->palette = LoadObjPalette(gNiserikuPalette, 32);
         AnimInit(&w->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
@@ -440,7 +440,7 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -551,7 +551,7 @@ void Task_MapMickey_2(MapMickeyWork* w) {
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, w->spriteFlags, v);
+        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, w->spriteFlags, v);
         w->obj.shadowZ = p->ground;
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
@@ -762,8 +762,8 @@ void Task_MapTutorial_0(MapTutorialWork* w) {
     TaskPoolInit(&w->tasks, 1);
     TaskPoolInit(&w->tasks2, 1);
     gMapRoomState->flags |= ROOM_FLAG_NO_RANDOM_PRIZE;
-    w->tiles = 0;
-    w->palette = 0;
+    w->tiles = NULL;
+    w->palette = NULL;
     w->flip = 0;
     t = gGameState.progression.unk_82 & 0x2000;
 
@@ -817,7 +817,7 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
             flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, 0, flags, v);
+        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, flags, v);
 
         if (w->shadowVisible != 0) {
             w->obj.shadowZ = w->obj.fieldPosition.ground;
@@ -953,7 +953,7 @@ void Task_MapStair_2(MapStairWork* w) {
     if (w->visible == 1) {
         x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         y = (w->obj.fieldPosition.y >> 8) + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
-        DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+        DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
     }
 }
 
@@ -983,7 +983,7 @@ void Task_MapFaint_2(MapFaintWork* w) {
 
     x = (e->fieldPosition.x >> 8) - (gFieldState->x >> 8);
     y = (e->fieldPosition.y >> 8) + ((e->fieldPosition.z - (e->height + 8) * 0x100) >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, 0, SPRITE_PRIORITY(2), -0x1005 - (e->fieldPosition.y >> 8) * 4);
+    DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1005 - (e->fieldPosition.y >> 8) * 4);
 }
 
 void Task_MapFaint_3(MapFaintWork* w) {
@@ -1029,23 +1029,23 @@ void Task_MapDmg_2(MapDmgWork* w) {
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E974, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gUnk_08B1E974, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E97E, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gUnk_08B1E97E, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E992, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gUnk_08B1E992, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E988, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gUnk_08B1E988, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, 0, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 }
 
 void Task_MapDmg_3(MapDmgWork* w) {
@@ -1098,7 +1098,7 @@ s32 Task_MapFloor_1(MapFloorWork* w) {
 }
 
 void Task_MapFloor_2(MapFloorWork* w) {
-    DrawSprite(120, 138, w->gfx, w->tiles, w->palette, 0, 0, 0x3C);
+    DrawSprite(120, 138, w->gfx, w->tiles, w->palette, NULL, 0, 0x3C);
     DrawTextSlots(w->textX, 0x85, w->textSlots, w->palette2, 50, w->textSlotCount);
 }
 

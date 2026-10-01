@@ -14,6 +14,7 @@
 #include "key.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -566,7 +567,7 @@ void task_tutorial_2(TutorialWork* work) {
             y = work->arrowY;
         }
 
-        DrawSprite(x, y, spr, work->tiles, work->palette, 0, SPRITE_FLAG_NO_MOSAIC, 0);
+        DrawSprite(x, y, spr, work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
     }
 }
 

@@ -457,7 +457,7 @@ void task_bos_pc_flt_2(PcFltWork* work) {
         }
 
         DrawSprite(sx, sy, AnimGetGfx(&work->anim), work->tiles,
-                   work->palette, 0, g, h);
+                   work->palette, NULL, g, h);
     }
 }
 

@@ -5293,7 +5293,7 @@ void BosPcDraw(PcWork* work) {
 
         if (cmd->flags & PC_SPRITE_CMD_STANDALONE) {
             DrawSprite(sx + cmd->x, sy + cmd->y, gUnk_09EFAB18[cmd->gfxIndex],
-                work->tiles2[j], gfx, 0,
+                work->tiles2[j], gfx, NULL,
                 BosPcGetSpritePriority(work, work->y + PcLayerDepth(cmd->layer)),
                 BosPcGetSpriteDepth(work, work->y + PcLayerDepth(cmd->layer), 1));
         } else {
@@ -5323,7 +5323,7 @@ void BosPcDraw(PcWork* work) {
         if (work->oam[i].count != 0) {
             layer = i * 0x400 - 0x3400;
             attributes = PcOamGfx(&work->oam[i]);
-            DrawSprite(sx, sy - 0x40, attributes, work->tiles, gfx, 0,
+            DrawSprite(sx, sy - 0x40, attributes, work->tiles, gfx, NULL,
                 BosPcGetSpritePriority(work, work->y + layer),
                 BosPcGetSpriteDepth(work, work->y + layer, 1));
         }
@@ -5430,7 +5430,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->x = 0x17000;
     work->y = 0x15400;
     work->z = -0x800;
-    work->animSteps = 0;
+    work->animSteps = NULL;
     work->animIndex = 0;
     work->animTimer = 0;
     work->shared.hpRatio = 0;
@@ -5461,10 +5461,10 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     SetBtlPaletteFadeExcluded(0, 1);
-    work->flt[0] = 0;
-    work->flt[1] = 0;
-    work->flt[2] = 0;
-    work->flt[3] = 0;
+    work->flt[0] = NULL;
+    work->flt[1] = NULL;
+    work->flt[2] = NULL;
+    work->flt[3] = NULL;
     zero = 0;
 
     if (pool == NULL) {
@@ -5825,7 +5825,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
     case 0:
         BeginBossDefeat(p);
         ReleaseObjPalette(work->palette2);
-        work->palette2 = 0;
+        work->palette2 = NULL;
         SetBtlObjUnhittable(p, 1);
         SetBtlObjUnhittable(&work->body2, 1);
         gBtlWork->flags |= 0x100000;
@@ -5844,7 +5844,7 @@ u8 BosPcUpdateDefeat(PcWork* work, Task* task) {
                 n++;
             } else if (BosPcFltIsSubmerged(work->flt[i]) == 1) {
                 TaskKill(&gBtlWork->taskPools[0], work->flt[i]);
-                work->flt[i] = 0;
+                work->flt[i] = NULL;
             }
         }
 

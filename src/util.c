@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "m4a.h"
 #include "gba/keys.h"
+#include <stddef.h>
 #include "types.h"
 
 static const u8 sSioKeyHeapName[8] = "SIOKEY";
@@ -407,7 +408,7 @@ void StopSong(u16 songNum) {
     if (header == info->songHeader) {
         if (info->status & MUSICPLAYER_STATUS_TRACK) {
             info->status = MUSICPLAYER_STATUS_PAUSE;
-            info->songHeader = 0;
+            info->songHeader = NULL;
         }
     }
 }

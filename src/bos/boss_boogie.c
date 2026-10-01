@@ -137,7 +137,7 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
             SpawnEnemy(17, 0x15000, 0x24000, 0);
         } else if (gBosBoogieDiceFace == 3) {
             work->state = 8;
-            work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, 0);
+            work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, NULL);
         } else if (gBosBoogieDiceFace == 4) {
             work->state = 6;
             work->timer = 0;
@@ -221,18 +221,18 @@ void task_bos_boogie_0(BoogieWork* work) {
         }
     }
 
-    work->tiles = AllocObjTiles(sz, 0);
-    AnimInit(&work->anim, 0, 0);
+    work->tiles = AllocObjTiles(sz, NULL);
+    AnimInit(&work->anim, NULL, NULL);
     work->animationIndex = 9;
     SetBoogieAnimation(work, 0, 1);
     TaskPoolInit(&work->tasks, 7);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->actor);
-    TaskCreate(&work->tasks, &gTaskDescBosBoogieMapanime, 0);
+    TaskCreate(&work->tasks, &gTaskDescBosBoogieMapanime, NULL);
     TaskCreate(&work->tasks, &gTaskDescBosBoogieSaku, work);
-    work->dice = 0;
-    work->task = 0;
-    work->dice2 = 0;
-    work->dice3 = 0;
+    work->dice = NULL;
+    work->task = NULL;
+    work->dice2 = NULL;
+    work->dice3 = NULL;
     gBtlWork->bossX = work->actor.x;
     gBtlWork->bossY = work->actor.y;
     gBtlWork->bossZ = work->actor.z;
@@ -584,7 +584,7 @@ void task_bos_boogie_2(BoogieWork* work) {
     }
 
     WorldToScreen(&x, &y, a->x, a->y, a->z);
-    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, 0, f, -4100 - (a->y >> 8) * 4);
+    DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, f, -4100 - (a->y >> 8) * 4);
     TaskPoolDraw(&work->tasks);
 }
 

@@ -147,7 +147,7 @@ void MovieSetHeapCallbacks(MovieAllocFunc a, MovieAllocFunc b, MovieFreeFunc c, 
     gMovieHeap.ewramAlloc = b;
     gMovieHeap.iwramFree = c;
     gMovieHeap.ewramFree = d;
-    gMovieHeap.ticks = 0;
+    gMovieHeap.ticks = NULL;
 }
 
 void MovieAdvanceTicks() {

@@ -165,7 +165,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     body->z = -0x5000;
     body->groundZ = 0;
     work->palette = LoadObjPalette(gDonaldPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
@@ -674,7 +674,7 @@ void task_frd_donald_2(FrdDonaldWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -760,7 +760,7 @@ void task_frd_goofy_0(FrdGoofyWork* work, FrdArgs* args) {
     body->z = -0x5000;
     body->groundZ = 0;
     work->palette = LoadObjPalette(gGoofyPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdGoofyAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -969,7 +969,7 @@ void task_frd_goofy_2(FrdGoofyWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -1026,7 +1026,7 @@ void task_frd_ariel_0(FrdArielWork* work, FrdArgs* args) {
     work->hoverZ = -0x1000;
     body->z = -0x1000;
     work->palette = LoadObjPalette(gArielPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdArielAnimDefs, &work->anim, 1, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -1205,7 +1205,7 @@ void task_frd_ariel_2(FrdArielWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -1283,7 +1283,7 @@ void task_frd_jack_0(FrdJackWork* work, FrdArgs* args) {
     body->groundZ = 0;
     work->rotation = 0;
     work->palette = LoadObjPalette(gJackPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdJackAnimDefs, &work->anim, 0, 0, work->tiles);
 
     switch (args->variant) {
@@ -1768,7 +1768,7 @@ void task_frd_jack_2(FrdJackWork* work) {
     if (angle != 0) {
         affine = AllocObjAffine(angle, sclX, sclY, 1);
     } else if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -1838,7 +1838,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     work->hoverZ = -0x2000;
     body->z = -0x2000;
     work->palette = LoadObjPalette(gPeterPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdPanAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 15);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -2123,7 +2123,7 @@ void task_frd_pan_2(FrdPanWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -2205,7 +2205,7 @@ void task_frd_aladdin_0(FrdAladdinWork* work, FrdArgs* args) {
     body->z = -0x5000;
     body->groundZ = 0;
     work->palette = LoadObjPalette(gAladdinPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdAladdinAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -2388,7 +2388,7 @@ void task_frd_aladdin_2(FrdAladdinWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {
@@ -2498,7 +2498,7 @@ void task_frd_beast_0(FrdBeastWork* work, FrdArgs* args) {
     }
 
     work->palette = LoadObjPalette(gBeastPalette, 32);
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sFrdBeastAnimDefs, &work->anim, 0, 0, work->tiles);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
@@ -2620,7 +2620,7 @@ void task_frd_beast_2(FrdBeastWork* work) {
     WorldToScreen(&sx, &sy, body->x, body->y, body->z);
 
     if (gBtlWork->scale == 256) {
-        affine = 0;
+        affine = NULL;
     } else if (gBtlWork->scale <= 255) {
         affine = AllocObjAffine(0, sclX, sclY, 0);
     } else {

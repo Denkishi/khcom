@@ -10,6 +10,7 @@
 #include "anim.h"
 #include "game_state.h"
 #include "obj.h"
+#include <stddef.h>
 #include "system_state.h"
 #include "types.h"
 
@@ -21,8 +22,8 @@ void FieldTransitionInit() {
     p = EwramAlloc(sizeof(FieldTransitionWork));
     *pp = p;
     p->initialized = 0;
-    p->tiles = 0;
-    p->palette = 0;
+    p->tiles = NULL;
+    p->palette = NULL;
     p->flipped = 0;
 }
 
@@ -41,11 +42,11 @@ void FieldTransitionUpdate() {
     gSystemFlags |= SYSTEM_FLAG_DMA3_IMMEDIATE;
 
     if (gFieldTransitionWork->initialized == 0) {
-        gFieldTransitionWork->tiles = AllocObjTiles(0xA00, 0);
+        gFieldTransitionWork->tiles = AllocObjTiles(0xA00, NULL);
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
             gFieldTransitionWork->palette = LoadObjPalette(gRikuPalette, 0x20);
-            AnimInit(&gFieldTransitionWork->anim, 0, 0);
+            AnimInit(&gFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
             case 0:
@@ -86,7 +87,7 @@ void FieldTransitionUpdate() {
             }
         } else {
             gFieldTransitionWork->palette = LoadObjPalette(gSoraPalette, 0x20);
-            AnimInit(&gFieldTransitionWork->anim, 0, 0);
+            AnimInit(&gFieldTransitionWork->anim, NULL, NULL);
 
             switch (gGameState.fieldAngle) {
             case 0:
@@ -133,9 +134,9 @@ void FieldTransitionUpdate() {
     gfx = AnimUpdate(&gFieldTransitionWork->anim);
 
     if (gFieldTransitionWork->flipped != 0) {
-        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, SPRITE_FLAG_HFLIP, 0);
+        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, NULL, SPRITE_FLAG_HFLIP, 0);
     } else {
-        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, 0, 0, 0);
+        DrawSprite(120, 96, gfx, gFieldTransitionWork->tiles, gFieldTransitionWork->palette, NULL, 0, 0);
     }
 
     gSystemFlags &= ~SYSTEM_FLAG_DMA3_IMMEDIATE;

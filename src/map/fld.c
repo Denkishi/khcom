@@ -26,6 +26,7 @@
 #include "map_types.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -326,7 +327,7 @@ void task_fld_sora_0(FldWork* work) {
     FldActor* act;
 
     act = &gFieldState->actor;
-    work->tiles = AllocObjTiles(0x500, 0);
+    work->tiles = AllocObjTiles(0x500, NULL);
     work->palette = LoadObjPalette(gSoraPalette, 32);
     act->height = 16;
     work->onCollider = 0;
@@ -361,7 +362,7 @@ void task_fld_sora_0(FldWork* work) {
         work->vz = 0;
     }
 
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     FldSoraSetAnim(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
 
@@ -449,7 +450,7 @@ u8 FldSoraGmkJump(FldWork* work, void* task) {
     act = &gFieldState->actor;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 13:
@@ -514,7 +515,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     z = FldSoraGetGround(work);
     sx = act->fieldPosition.x;
     sy = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     if ((work->flags & FLD_FLAG_NO_AIR_TURN) == 0) {
         FldSoraTurn(act);
@@ -523,7 +524,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
     switch (work->state) {
     case 12:
         if (work->timer == 0) {
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             FldSoraSetAnim(work, 14, 0);
         }
 
@@ -777,7 +778,7 @@ u8 FldSoraJump(FldWork* work, void* task) {
                 if (FldSoraCheckBlocked(&p1) == 0 && FldSoraCheckBlocked(&p2) != 0) {
                     work->timer = 0;
                     work->state = 8;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraHangLedge);
                 }
             } else {
@@ -818,7 +819,7 @@ u8 FldSoraClimb(FldWork* work, void* task) {
     limit = FldSoraGetGround(work);
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 6:
@@ -957,7 +958,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         work->state = 4;
         work->vz = 0;
         act->angle += 0x80;
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         return 1;
     }
@@ -971,7 +972,7 @@ u8 FldSoraLedgeInput(FldWork* work, void* task) {
         work->vz = -0x5C0;
         work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         return 1;
     }
 
@@ -989,7 +990,7 @@ u8 FldSoraHangLedge(FldWork* work, void* task) {
     ret = 0;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 8:
@@ -1219,7 +1220,7 @@ u8 FldSoraAttack(FldWork* work, void* task) {
         if (work->timer == 0) {
             FldSoraSetAnim(work, 13, 0);
             act->speed = 0;
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             work->steps = 0;
             m4aSongNumStart(SONG_SYS_SR_AT_VO00);
         }
@@ -1476,19 +1477,19 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
         case 5:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             break;
         case 6:
         case 7:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             work->timer = 1;
             break;
         case 8:
         case 9:
         case 10:
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraHangLedge);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             break;
         default:
             work->state = 0;
@@ -1556,7 +1557,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             act->fieldPosition.y += -gSineTable[act->angle + 64] * act->speed >> 8;
 
             if ((GetKeysPressed() & B_BUTTON) != 0) {
-                gFieldState->lockonTarget = 0;
+                gFieldState->lockonTarget = NULL;
                 gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
                 work->timer = 0;
                 work->state = 2;
@@ -1564,7 +1565,7 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                 m4aSongNumStart(work->sounds[2]);
             } else if ((GetKeysPressed() & A_BUTTON) != 0) {
                 work->timer = 0;
-                gFieldState->lockonTarget = 0;
+                gFieldState->lockonTarget = NULL;
                 work->state = 11;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldSoraAttack);
             }
@@ -1600,14 +1601,14 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
                     work->timer = 0;
                     work->state = 6;
                     act->angle = 211;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
                 case 1:
                     work->timer = 0;
                     work->state = 6;
                     act->angle = 45;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldSoraClimb);
                     break;
                 }
@@ -1718,12 +1719,12 @@ u8 task_fld_sora_1(FldWork* work, void* task) {
             act->speed >>= 2;
             work->vz = 0;
             work->timer = 0;
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = 4;
             SetTaskUpdate(task, (TaskUpdateFunc)FldSoraJump);
         } else if (z != act->fieldPosition.ground) {
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
         }
     }
 
@@ -1773,7 +1774,7 @@ void task_fld_sora_2(FldWork* work) {
 
     x = (act->fieldPosition.x >> 8) - (gFieldState->x >> 8);
     y = (act->fieldPosition.y >> 8) + (act->fieldPosition.z >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, pri, depth);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, pri, depth);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -2037,7 +2038,7 @@ void task_fld_riku_0(FldWork* work) {
     FldActor* act;
 
     act = &gFieldState->actor;
-    work->tiles = AllocObjTiles(0xA00, 0);
+    work->tiles = AllocObjTiles(0xA00, NULL);
     work->palette = LoadObjPalette(gRikuPalette, 32);
     act->height = 16;
     work->onCollider = 0;
@@ -2072,7 +2073,7 @@ void task_fld_riku_0(FldWork* work) {
         work->vz = 0;
     }
 
-    AnimInit(&work->anim, 0, 0);
+    AnimInit(&work->anim, NULL, NULL);
     FldRikuSetAnim(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
 
@@ -2160,7 +2161,7 @@ u8 FldRikuGmkJump(FldWork* work, void* task) {
     act = &gFieldState->actor;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 13:
@@ -2226,7 +2227,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
     z = FldRikuGetGround(work);
     sx = act->fieldPosition.x;
     sy = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     if ((work->flags & FLD_FLAG_NO_AIR_TURN) == 0) {
         FldRikuTurn(act);
@@ -2235,7 +2236,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
     switch (work->state) {
     case 12:
         if (work->timer == 0) {
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             FldRikuSetAnim(work, 14, 0);
         }
 
@@ -2488,7 +2489,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
                 if (FldRikuCheckBlocked(&p1) == 0 && FldRikuCheckBlocked(&p2) != 0) {
                     work->timer = 0;
                     work->state = 8;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldRikuHangLedge);
                 }
             } else {
@@ -2528,7 +2529,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
     limit = FldRikuGetGround(work);
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 6:
@@ -2667,7 +2668,7 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
         work->state = 4;
         work->vz = 0;
         act->angle += 0x80;
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
         return 1;
     }
@@ -2681,7 +2682,7 @@ u8 FldRikuLedgeInput(FldWork* work, void* task) {
         work->vz = -0x5C0;
         work->flags |= FLD_FLAG_NO_AIR_TURN;
         m4aSongNumStart(SONG_SYS_SR_CATJP);
-        gFieldState->lockonTarget = 0;
+        gFieldState->lockonTarget = NULL;
         return 1;
     }
 
@@ -2699,7 +2700,7 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
     ret = 0;
     x = act->fieldPosition.x;
     y = act->fieldPosition.y;
-    gFieldState->lockonTarget = 0;
+    gFieldState->lockonTarget = NULL;
 
     switch (work->state) {
     case 8:
@@ -2924,7 +2925,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
         if (work->timer == 0) {
             FldRikuSetAnim(work, 13, 0);
             act->speed = 0;
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             work->steps = 0;
             m4aSongNumStart(SONG_SND_227);
         }
@@ -3181,19 +3182,19 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
         case 4:
         case 5:
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             break;
         case 6:
         case 7:
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             work->timer = 1;
             break;
         case 8:
         case 9:
         case 10:
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuHangLedge);
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             break;
         default:
             work->state = 0;
@@ -3262,14 +3263,14 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
 
             if ((GetKeysPressed() & B_BUTTON) != 0) {
                 gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
-                gFieldState->lockonTarget = 0;
+                gFieldState->lockonTarget = NULL;
                 work->timer = 0;
                 work->state = 2;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
                 m4aSongNumStart(work->sounds[2]);
             } else if ((GetKeysPressed() & A_BUTTON) != 0) {
                 work->timer = 0;
-                gFieldState->lockonTarget = 0;
+                gFieldState->lockonTarget = NULL;
                 work->state = 11;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldRikuAttack);
             }
@@ -3305,14 +3306,14 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                     work->timer = 0;
                     work->state = 6;
                     act->angle = 211;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
                     break;
                 case 1:
                     work->timer = 0;
                     work->state = 6;
                     act->angle = 45;
-                    gFieldState->lockonTarget = 0;
+                    gFieldState->lockonTarget = NULL;
                     SetTaskUpdate(task, (TaskUpdateFunc)FldRikuClimb);
                     break;
                 }
@@ -3423,12 +3424,12 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             act->speed >>= 2;
             work->vz = 0;
             work->timer = 0;
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
             gFieldState->flags |= FIELD_FLAG_PLAYER_JUMPING;
             work->state = 4;
             SetTaskUpdate(task, (TaskUpdateFunc)FldRikuJump);
         } else if (z != act->fieldPosition.ground) {
-            gFieldState->lockonTarget = 0;
+            gFieldState->lockonTarget = NULL;
         }
     }
 
@@ -3478,7 +3479,7 @@ void task_fld_riku_2(FldWork* work) {
 
     x = (act->fieldPosition.x >> 8) - (gFieldState->x >> 8);
     y = (act->fieldPosition.y >> 8) + (act->fieldPosition.z >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, work->gfx, work->tiles, work->palette, 0, pri, depth);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, pri, depth);
     TaskPoolDraw(&work->tasks);
 }
 
@@ -3541,7 +3542,7 @@ void task_fld_shadow_2(FldShadowWork* work) {
     z = obj->shadowZ;
 
     if (obj->fieldPosition.z >= z) {
-        sprite = 0;
+        sprite = NULL;
     } else {
         size = 0x100 - (z - obj->fieldPosition.z) / 128;
 

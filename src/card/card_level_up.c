@@ -63,23 +63,23 @@ void Level_Up_0(LevelUpWork* w) {
     s16 x;
     s16 y;
 
-    w->tiles4 = 0;
-    w->palette5 = 0;
-    w->unk_000[0] = 0;
-    w->unk_000[1] = 0;
-    w->unk_000[2] = 0;
-    w->unk_000[3] = 0;
-    w->unk_000[4] = 0;
-    w->unk_000[5] = 0;
-    w->unk_000[6] = 0;
-    w->unk_000[7] = 0;
-    w->palette = 0;
-    w->palette2 = 0;
-    w->tiles = 0;
-    w->palette3 = 0;
-    w->tiles2 = 0;
-    w->tiles3 = 0;
-    w->palette4 = 0;
+    w->tiles4 = NULL;
+    w->palette5 = NULL;
+    w->unk_000[0] = NULL;
+    w->unk_000[1] = NULL;
+    w->unk_000[2] = NULL;
+    w->unk_000[3] = NULL;
+    w->unk_000[4] = NULL;
+    w->unk_000[5] = NULL;
+    w->unk_000[6] = NULL;
+    w->unk_000[7] = NULL;
+    w->palette = NULL;
+    w->palette2 = NULL;
+    w->tiles = NULL;
+    w->palette3 = NULL;
+    w->tiles2 = NULL;
+    w->tiles3 = NULL;
+    w->palette4 = NULL;
     w->optionEnabled[0] = 1;
     w->optionEnabled[1] = 1;
     w->optionEnabled[2] = 1;
@@ -108,7 +108,7 @@ void Level_Up_0(LevelUpWork* w) {
     TaskPoolInit(&w->pool, 10);
 
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-        w->tiles4 = AllocObjTiles(0x500, 0);
+        w->tiles4 = AllocObjTiles(0x500, NULL);
         w->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(w->palette5, gSoraPalette);
         FadeSetPaletteExcluded(w->palette5->index + 16, 1);
@@ -119,7 +119,7 @@ void Level_Up_0(LevelUpWork* w) {
         AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
         AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
     } else {
-        w->tiles4 = AllocObjTiles(0x800, 0);
+        w->tiles4 = AllocObjTiles(0x800, NULL);
         w->palette5 = AllocObjPalette(32);
         UpdateAllocatedObjPalette(w->palette5, gRikuPalette);
         FadeSetPaletteExcluded(w->palette5->index + 16, 1);
@@ -496,7 +496,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
             FadeSetPaletteExcluded(w->palette4->index + 16, 1);
-            w->tiles = AllocObjTiles(0x3C0, 0);
+            w->tiles = AllocObjTiles(0x3C0, NULL);
             w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
             FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);
@@ -824,7 +824,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_KETTEI);
         ReleaseObjTiles(w->tiles);
         ReleaseObjPalette(w->palette3);
-        w->tiles = AllocObjTiles(128, 0);
+        w->tiles = AllocObjTiles(128, NULL);
         w->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
         FadeSetPaletteExcluded(w->palette3->index + 16, 1);
         SetObjTileSource(w->tiles, gUnk_0908F190);
@@ -876,7 +876,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
         args.x = 192;
         args.y = 60;
         args.unk_08 = 0;
-        args.target = 0;
+        args.target = NULL;
         TaskCreate(&w->pool, &gTaskDescLVUPEFFECT, &args);
         m4aSongNumStart(SONG_SYS_LVUP);
 #endif
@@ -909,7 +909,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
         for (i = 0; i < 3; i++) {
             if (i != w->cursor && w->unk_000[i] != NULL) {
                 ReleaseObjTiles(w->unk_000[i]);
-                w->unk_000[i] = 0;
+                w->unk_000[i] = NULL;
             }
         }
 
@@ -1098,16 +1098,16 @@ void Level_Up_2(LevelUpWork* w) {
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       w->unk_000[6], w->unk_000[7], 0, 0, 50);
+                       w->unk_000[6], w->unk_000[7], NULL, 0, 50);
 
             if (w->unk_000[0] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[0], w->y4[0], gUnk_09EEA2BC[0], w->unk_000[0], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[0], w->y4[0], gUnk_09EEA2BC[0], w->unk_000[0], w->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[0], w->y4[0], gUnkEu_09F7626C[0], w->unk_000[0], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[0], w->y4[0], gUnkEu_09F7626C[0], w->unk_000[0], w->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1116,10 +1116,10 @@ void Level_Up_2(LevelUpWork* w) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[1], w->y4[1], gUnk_09EEA2BC[1], w->unk_000[1], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[1], w->y4[1], gUnk_09EEA2BC[1], w->unk_000[1], w->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[1], w->y4[1], gUnkEu_09F7626C[1], w->unk_000[1], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[1], w->y4[1], gUnkEu_09F7626C[1], w->unk_000[1], w->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1128,29 +1128,29 @@ void Level_Up_2(LevelUpWork* w) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[2], w->y4[2], gUnk_09EEA2BC[2], w->unk_000[2], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[2], w->y4[2], gUnk_09EEA2BC[2], w->unk_000[2], w->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[2], w->y4[2], gUnkEu_09F7626C[2], w->unk_000[2], w->unk_000[4], 0, 0, 50);
+                    DrawSprite(w->x4[2], w->y4[2], gUnkEu_09F7626C[2], w->unk_000[2], w->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
+            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case 1:
             for (; i < 3; i++) {
                 if (i == w->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 5, w->y5[i] - 4, 0, w->tiles5[i], w->palette, 0, 0, 40);
+                    DrawSprite(w->x5[i] + 5, w->y5[i] - 4, NULL, w->tiles5[i], w->palette, NULL, 0, 40);
 #else
                     DrawTextSlots(w->x5[i] + 22, w->y5[i] - 5, w->textSlots[i], w->palette, 40, w->textSlotCounts[i]);
                     DrawTextSlots(w->x5[i] + 4, w->y5[i] + 13, w->textSlots[i + 3], w->palette, 40, w->textSlotCounts[i + 3]);
 #endif
                 } else {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 3, w->y5[i] - 2, 0, w->tiles5[i], w->palette2, 0, 0, 40);
+                    DrawSprite(w->x5[i] + 3, w->y5[i] - 2, NULL, w->tiles5[i], w->palette2, NULL, 0, 40);
 #else
                     DrawTextSlots(w->x5[i] + 20, w->y5[i] - 3, w->textSlots[i], w->palette2, 40, w->textSlotCounts[i]);
                     DrawTextSlots(w->x5[i] + 2, w->y5[i] + 15, w->textSlots[i + 3], w->palette2, 40, w->textSlotCounts[i + 3]);
@@ -1158,22 +1158,22 @@ void Level_Up_2(LevelUpWork* w) {
                 }
             }
 
-            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, 0, 0, 40);
+            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, NULL, 0, 40);
             break;
         case 2:
             for (; i < 3; i++) {
                 if (i == w->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 4, w->y5[i] - 3, 0, w->tiles5[i], w->palette, 0, 0, 40);
+                    DrawSprite(w->x5[i] + 4, w->y5[i] - 3, NULL, w->tiles5[i], w->palette, NULL, 0, 40);
 #else
                     DrawTextSlots(w->x5[i] + 22, w->y5[i] - 5, w->textSlots[i], w->palette, 40, w->textSlotCounts[i]);
                     DrawTextSlots(w->x5[i] + 4, w->y5[i] + 13, w->textSlots[i + 3], w->palette, 40, w->textSlotCounts[i + 3]);
 #endif
-                    DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2D8[i], w->unk_000[i], w->unk_000[5], 0, 0, 50);
+                    DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2D8[i], w->unk_000[i], w->unk_000[5], NULL, 0, 50);
                 } else {
                     if (w->unk_000[i] != NULL) {
 #ifdef VERSION_EU
-                        DrawSprite(w->x5[i] + 2, w->y5[i] - 1, 0, w->tiles5[i], w->palette2, 0, 0, 40);
+                        DrawSprite(w->x5[i] + 2, w->y5[i] - 1, NULL, w->tiles5[i], w->palette2, NULL, 0, 40);
 #else
                         DrawTextSlots(w->x5[i] + 20, w->y5[i] - 3, w->textSlots[i], w->palette2, 40, w->textSlotCounts[i]);
                         DrawTextSlots(w->x5[i] + 2, w->y5[i] + 15, w->textSlots[i + 3], w->palette2, 40, w->textSlotCounts[i + 3]);
@@ -1181,41 +1181,41 @@ void Level_Up_2(LevelUpWork* w) {
 #ifdef VERSION_EU
                         if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                            DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2BC[i], w->unk_000[i], w->unk_000[4], 0, 0, 50);
+                            DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2BC[i], w->unk_000[i], w->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                         } else {
-                            DrawSprite(w->x4[i], w->y4[i], gUnkEu_09F7626C[i], w->unk_000[i], w->unk_000[4], 0, 0, 50);
+                            DrawSprite(w->x4[i], w->y4[i], gUnkEu_09F7626C[i], w->unk_000[i], w->unk_000[4], NULL, 0, 50);
                         }
 #endif
                     }
                 }
             }
 
-            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, 0, 0, 40);
+            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, NULL, 0, 40);
             break;
         case 3:
 #ifdef VERSION_EU
-            DrawSprite(w->x5[w->cursor] + 2, w->y5[w->cursor] - 1, 0, w->tiles5[w->cursor], w->palette, 0, 0, 40);
+            DrawSprite(w->x5[w->cursor] + 2, w->y5[w->cursor] - 1, NULL, w->tiles5[w->cursor], w->palette, NULL, 0, 40);
 #else
             DrawTextSlots(w->x5[w->cursor] + 22, w->y5[w->cursor] - 5, w->textSlots[w->cursor], w->palette, 40, w->textSlotCounts[w->cursor]);
             DrawTextSlots(w->x5[w->cursor] + 4, w->y5[w->cursor] + 13, w->textSlots[w->cursor + 3], w->palette, 40, w->textSlotCounts[w->cursor + 3]);
 #endif
-            DrawSprite(w->x4[w->cursor], w->y4[w->cursor], 0, w->unk_000[w->cursor], w->unk_000[5], 0, 0, 50);
+            DrawSprite(w->x4[w->cursor], w->y4[w->cursor], NULL, w->unk_000[w->cursor], w->unk_000[5], NULL, 0, 50);
             DrawSprite(w->x6, 0,
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       w->unk_000[6], w->unk_000[7], 0, 0, 50);
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], 0, SPRITE_PRIORITY(1), 51);
+                       w->unk_000[6], w->unk_000[7], NULL, 0, 50);
+            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         }
 
 #ifdef VERSION_JP
         if (w->blinkOn != 0) {
-            DrawSprite(192, 82, gUnk_09EEA19C[0], w->tiles3, w->palette4, 0, 0, 10);
+            DrawSprite(192, 82, gUnk_09EEA19C[0], w->tiles3, w->palette4, NULL, 0, 10);
         }
 #endif
 
@@ -1273,7 +1273,7 @@ void Level_Up_2(LevelUpWork* w) {
         }
     }
 
-    DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, 0, SPRITE_PRIORITY(1), 40);
+    DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, NULL, SPRITE_PRIORITY(1), 40);
     TaskPoolDraw(&w->pool);
 }
 
@@ -1369,33 +1369,33 @@ void Level_Up_3(LevelUpWork* w) {
 void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind) {
     switch (kind) {
     case 0:
-        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, 0, 0, 0);
+        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
-        DrawSprite(x, y, gfx[digits[2]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
     case 1:
-        DrawSprite(x, y, gfx[digits[0]], tiles, pal, 0, 0, 0);
-        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
+        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
-        DrawSprite(x, y, gfx[digits[2]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
     case 2:
-        DrawSprite(x, y, gfx[digits[0]], tiles, pal, 0, 0, 0);
-        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, 0, 0, 0);
-        DrawSprite(x + 16, y, gfx[digits[2]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
+        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
+        DrawSprite(x + 16, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         x += 24;
-        DrawSprite(x, y, gfx[digits[3]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[3]], tiles, pal, NULL, 0, 0);
         break;
     case 4:
-        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, 0, 0, 0);
+        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
-        DrawSprite(x, y, gfx[digits[2]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
     case 3:
-        DrawSprite(x, y, gfx[digits[0]], tiles, pal, 0, 0, 0);
-        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[0]], tiles, pal, NULL, 0, 0);
+        DrawSprite(x + 8, y, gfx[digits[1]], tiles, pal, NULL, 0, 0);
         x += 16;
-        DrawSprite(x, y, gfx[digits[2]], tiles, pal, 0, 0, 0);
+        DrawSprite(x, y, gfx[digits[2]], tiles, pal, NULL, 0, 0);
         break;
     }
 }
@@ -1528,7 +1528,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
             FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
             FadeSetPaletteExcluded(w->palette4->index + 16, 1);
-            w->tiles = AllocObjTiles(0x3C0, 0);
+            w->tiles = AllocObjTiles(0x3C0, NULL);
             w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
             FadeSetPaletteExcluded(w->palette3->index + 16, 1);
             SetObjTileSource(w->tiles, gUnk_093F4578);

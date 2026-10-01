@@ -174,8 +174,8 @@ void task_bos_pc_fld_0(PcFldWork* work, PcBattleBackgroundDef* arg) {
     ScrollBgMapTo(0, gBtlWork->viewX >> 8, gBtlWork->viewY >> 8);
     BosPcFldResetPaletteCycle(work);
     BosPcFldUpdatePaletteCycle(work);
-    work->tiles = 0;
-    work->palette = 0;
+    work->tiles = NULL;
+    work->palette = NULL;
     p = &work->collider;
     ColliderInit(p, 6, 40, 8);
     ColliderSetPosition(p, 0x17400, 0x15400, 0);
@@ -253,7 +253,7 @@ void task_bos_pc_fld_2(PcFldWork* work) {
                     z = -0x800;
                     WorldToScreen(&sx, &sy, x, y, z);
                     DrawSprite(sx, sy, gUnk_09EFBEB8, work->tiles,
-                        work->palette, 0, GetBattleSpritePriorityFlags(y),
+                        work->palette, NULL, GetBattleSpritePriorityFlags(y),
                         -0x1004 - (s32)(y >> 6));
                 }
             }

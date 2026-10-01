@@ -10,6 +10,7 @@
 #include "battle_work.h"
 #include "obj.h"
 #include "obj_api.h"
+#include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
 
@@ -978,10 +979,10 @@ void task_bos_tm_body_2(TmBodyWork* work) {
     DrawSprite(x, y, work->gfx2, work->tiles, pal, a2, SPRITE_PRIORITY(2),
                -4100 - (s1->y >> 8) * 4);
     WorldToScreen(&x, &y, s2->x, s2->y, s2->z);
-    DrawSprite(x, y, work->gfx3, work->tiles, pal, 0, mode,
+    DrawSprite(x, y, work->gfx3, work->tiles, pal, NULL, mode,
                -4100 - (s2->y >> 8) * 4);
     WorldToScreen(&x, &y, s3->x, s3->y, s3->z);
-    DrawSprite(x, y, work->gfx4, work->tiles, pal, 0, mode,
+    DrawSprite(x, y, work->gfx4, work->tiles, pal, NULL, mode,
                -4100 - (s3->y >> 8) * 4);
 }
 

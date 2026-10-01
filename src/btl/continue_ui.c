@@ -17,6 +17,7 @@
 #include "battle.h"
 #include "continue_types.h"
 #include "obj.h"
+#include <stddef.h>
 #include "taskpool.h"
 
 extern u8 gUnk_096145D8[];
@@ -80,14 +81,14 @@ void ContinueSora_0(ContinueWork* p) {
     p->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
     p->palette3 = LoadObjPalette(gUnk_096146F8, 32);
     LoadContinueCursorPalette(p->cursor);
-    p->tiles = AllocObjTiles(512, 0);
+    p->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
     p->palette = LoadObjPalette(gUnk_09614658, 160);
     PopPaletteEffect();
     SetObjTileSource(p->tiles, gUnk_090A6B26);
     AnimInit(&p->anim, gUnk_09EEB108, gUnk_09EEB0C4);
     AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
-    p->tiles2 = AllocObjTiles(1024, 0);
+    p->tiles2 = AllocObjTiles(1024, NULL);
     p->palette2 = LoadObjPalette(gSoraPalette, 32);
     SetObjTileSource(p->tiles2, gSoraContinueTiles);
     AnimInit(&p->anim2, gSoraContinueAnims, gSoraContinueFrames);
@@ -150,14 +151,14 @@ void ContinueRiku_0(ContinueWork* p) {
     p->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
     p->palette3 = LoadObjPalette(gUnk_096146F8, 32);
     LoadContinueCursorPalette(p->cursor);
-    p->tiles = AllocObjTiles(512, 0);
+    p->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
     p->palette = LoadObjPalette(gUnk_09614658, 160);
     PopPaletteEffect();
     SetObjTileSource(p->tiles, gUnk_090A6B26);
     AnimInit(&p->anim, gUnk_09EEB108, gUnk_09EEB0C4);
     AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
-    p->tiles2 = AllocObjTiles(1024, 0);
+    p->tiles2 = AllocObjTiles(1024, NULL);
     p->palette2 = LoadObjPalette(gRikuPalette, 32);
     SetObjTileSource(p->tiles2, gRikuContinueTiles);
     AnimInit(&p->anim2, gRikuContinueAnims, gRikuContinueFrames);
@@ -283,8 +284,8 @@ static s32 Continue_1(ContinueWork* p) {
 }
 
 static void Continue_2(ContinueWork* p) {
-    DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, 0, SPRITE_FLAG_BLEND, 100);
-    DrawSprite(120, 120, p->gfx2, p->tiles2, p->palette2, 0, 0, 100);
+    DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, SPRITE_FLAG_BLEND, 100);
+    DrawSprite(120, 120, p->gfx2, p->tiles2, p->palette2, NULL, 0, 100);
 }
 
 static void Continue_3(ContinueWork* p) {

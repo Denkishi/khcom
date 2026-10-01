@@ -898,8 +898,8 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
     }
 
     WorldToScreen(&x, &y, sub->x, sub->y, sub->z);
-    DrawSprite(x, y, work->gfx, work->tiles, pal, 0, mode, -4100 - (sub->y >> 8) * 4);
-    DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, 0, mode,
+    DrawSprite(x, y, work->gfx, work->tiles, pal, NULL, mode, -4100 - (sub->y >> 8) * 4);
+    DrawSprite(x, y - 14, work->gfx2, work->tiles2, work->palette, NULL, mode,
                -4101 - (sub->y >> 8) * 4);
 
     if (work->onFlatGround == 1) {

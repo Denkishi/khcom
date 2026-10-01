@@ -51,16 +51,16 @@ void mode_movie_0(s32 a) {
     sMovieFrame = 0;
     sMovieSubIndex = 0;
     sMovieSubCount = 0;
-    sMovieSubs = 0;
+    sMovieSubs = NULL;
     sMovieFlags = 0;
     sMovieSubUpperTimer = 0;
     sMovieSubUpperLength = 0;
     sMovieSubUpperAlpha = 0;
-    sMovieSubUpper = 0;
+    sMovieSubUpper = NULL;
     sMovieSubLowerTimer = 0;
     sMovieSubLowerLength = 0;
     sMovieSubLowerAlpha = 0;
-    sMovieSubLower = 0;
+    sMovieSubLower = NULL;
 }
 
 #ifdef VERSION_JP
@@ -381,12 +381,12 @@ void mode_movie_1() {
             break;
         case 2:
             p = gUnk_084E0F34;
-            sMovieSubs = 0;
+            sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 3:
             p = gUnk_084F4660;
-            sMovieSubs = 0;
+            sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 4:
@@ -494,7 +494,7 @@ void mode_movie_1() {
         FadeReset();
         MosaicReset();
         InitDisplayRegs();
-        gVBlankHandlerOverride = 0;
+        gVBlankHandlerOverride = NULL;
         m4aSoundInit();
         m4aSoundVSyncOn();
         sMovieModeState++;
@@ -542,7 +542,7 @@ void mode_movie_1() {
 }
 
 void mode_movie_2() {
-    gVBlankHandlerOverride = 0;
+    gVBlankHandlerOverride = NULL;
 }
 
 Mode gModeMovie = {

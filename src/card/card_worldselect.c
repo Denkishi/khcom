@@ -949,8 +949,8 @@ void CreateMapSelectCards(MapSelectWork* w) {
         q = w->kindEntries;
         args.baseCardId = q[i].baseCardId;
         args.index = i;
-        args.unk_02 = w->kindCount;
-        args.unk_03 = q[i].unk_02;
+        args.kindCount = w->kindCount;
+        args.count = q[i].count;
         args.pool = &w->cards;
         args.parent = w;
         CreateMapCard(&args, &w->tasks);
@@ -986,7 +986,7 @@ void ListOwnedMapCardKinds(MapSelectKindEntry* p) {
         while (j < i * 10 + 10) {
             if (gMapCardCounts[j] != 0) {
                 p->baseCardId = i * 10;
-                p->unk_02 = gMapCardCounts[j];
+                p->count = gMapCardCounts[j];
                 p++;
                 break;
             }

@@ -40,7 +40,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 
-const u16 gUnk_090354E8[21] = {
+const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),
     CARD_ID(CARD_SOUL_EATER, 6),
     CARD_ID(CARD_SOUL_EATER, 4),
@@ -64,7 +64,7 @@ const u16 gUnk_090354E8[21] = {
     CARD_ID(CARD_HI_POTION, 7),
 };
 
-const u16 gUnk_09035512[20] = {
+const u16 gRikuDeckCards1[20] = {
     CARD_ID(CARD_SOUL_EATER, 5),
     CARD_ID(CARD_SOUL_EATER, 5),
     CARD_ID(CARD_SOUL_EATER, 5),
@@ -87,7 +87,7 @@ const u16 gUnk_09035512[20] = {
     CARD_ID(CARD_SOUL_EATER, 1),
 };
 
-const u16 gUnk_0903553A[21] = {
+const u16 gRikuDeckCards2[21] = {
     CARD_ID(CARD_SOUL_EATER, 1),
     CARD_ID(CARD_SOUL_EATER, 2),
     CARD_ID(CARD_SOUL_EATER, 3),
@@ -111,7 +111,7 @@ const u16 gUnk_0903553A[21] = {
     CARD_ID(CARD_SOUL_EATER, 0),
 };
 
-const u16 gUnk_09035564[12] = {
+const u16 gRikuDeckCards3[12] = {
     CARD_ID(CARD_SOUL_EATER, 3),
     CARD_ID(CARD_SOUL_EATER, 4),
     CARD_ID(CARD_SOUL_EATER, 5),
@@ -126,7 +126,7 @@ const u16 gUnk_09035564[12] = {
     CARD_ID(CARD_SOUL_EATER, 5),
 };
 
-const u16 gUnk_0903557C[20] = {
+const u16 gRikuDeckCards4[20] = {
     CARD_ID(CARD_SOUL_EATER, 7),
     CARD_ID(CARD_SOUL_EATER, 5),
     CARD_ID(CARD_SOUL_EATER, 4),
@@ -149,7 +149,7 @@ const u16 gUnk_0903557C[20] = {
     CARD_ID(CARD_SOUL_EATER, 1),
 };
 
-const u16 gUnk_090355A4[18] = {
+const u16 gRikuDeckCards5[18] = {
     CARD_ID(CARD_SOUL_EATER, 7),
     CARD_ID(CARD_SOUL_EATER, 7),
     CARD_ID(CARD_SOUL_EATER, 6),
@@ -170,7 +170,7 @@ const u16 gUnk_090355A4[18] = {
     CARD_ID(CARD_SOUL_EATER, 4),
 };
 
-const u16 gUnk_090355C8[17] = {
+const u16 gRikuDeckCards6[17] = {
     CARD_ID(CARD_SOUL_EATER, 7),
     CARD_ID(CARD_SOUL_EATER, 6),
     CARD_ID(CARD_SOUL_EATER, 5),
@@ -190,7 +190,7 @@ const u16 gUnk_090355C8[17] = {
     CARD_ID(CARD_SOUL_EATER, 9),
 };
 
-const u16 gUnk_090355EA[16] = {
+const u16 gRikuDeckCards7[16] = {
     CARD_ID(CARD_SOUL_EATER, 9),
     CARD_ID(CARD_SOUL_EATER, 8),
     CARD_ID(CARD_SOUL_EATER, 7),
@@ -209,7 +209,7 @@ const u16 gUnk_090355EA[16] = {
     CARD_ID(CARD_POTION, 9),
 };
 
-const u16 gUnk_0903560A[19] = {
+const u16 gRikuDeckCards8[19] = {
     CARD_ID(CARD_SOUL_EATER, 0),
     CARD_ID(CARD_SOUL_EATER, 1),
     CARD_ID(CARD_SOUL_EATER, 3),
@@ -231,7 +231,7 @@ const u16 gUnk_0903560A[19] = {
     CARD_ID(CARD_SOUL_EATER, 0),
 };
 
-const u16 gUnk_09035630[5] = {
+const u16 gRikuDeckCards9[5] = {
     CARD_ID(CARD_SOUL_EATER, 4),
     CARD_ID(CARD_SOUL_EATER, 5),
     CARD_ID(CARD_SOUL_EATER, 6),
@@ -239,7 +239,7 @@ const u16 gUnk_09035630[5] = {
     CARD_ID(CARD_SOUL_EATER, 8),
 };
 
-const u16 gUnk_0903563A[25] = {
+const u16 gRikuDeckCards10[25] = {
     CARD_ID(CARD_SOUL_EATER, 9),
     CARD_ID(CARD_SOUL_EATER, 6),
     CARD_ID(CARD_SOUL_EATER, 3),
@@ -267,7 +267,7 @@ const u16 gUnk_0903563A[25] = {
     CARD_ID(CARD_SOUL_EATER, 9),
 };
 
-const u16 gUnk_0903566C[30] = {
+const u16 gRikuDeckCards11[30] = {
     CARD_ID(CARD_SOUL_EATER, 8),
     CARD_ID(CARD_SOUL_EATER, 8),
     CARD_ID(CARD_SOUL_EATER, 8),
@@ -300,23 +300,23 @@ const u16 gUnk_0903566C[30] = {
     CARD_ID(CARD_SOUL_EATER, 0),
 };
 
-const u16 gUnk_090356A8 = CARD_FAT_BANDIT_3;
+const u16 gRikuDeckEnemyCard0 = CARD_FAT_BANDIT_3;
 
-const u16 gUnk_090356AA = 492;
+const u16 gRikuDeckEnemyCard1 = 492;
 
-const u16 gUnk_090356AC = 471;
+const u16 gRikuDeckEnemyCard2 = 471;
 
-const u16 gUnk_090356AE = CARD_LARGE_BODY_1;
+const u16 gRikuDeckEnemyCard3 = CARD_LARGE_BODY_1;
 
-const u16 gUnk_090356B0 = CARD_SEARCH_GHOST_1;
+const u16 gRikuDeckEnemyCard4 = CARD_SEARCH_GHOST_1;
 
-const u16 gUnk_090356B2 = CARD_WIGHT_KNIGHT_2;
+const u16 gRikuDeckEnemyCard5 = CARD_WIGHT_KNIGHT_2;
 
-const u16 gUnk_090356B4 = CARD_PIRATE_1;
+const u16 gRikuDeckEnemyCard6 = CARD_PIRATE_1;
 
-const u16 gUnk_090356B6 = CARD_DEFENDER_5;
+const u16 gRikuDeckEnemyCard7 = CARD_DEFENDER_5;
 
-const u16 gUnk_090356B8 = 450;
+const u16 gRikuDeckEnemyCard9 = 450;
 
 const u16 gRikuDeckCardCounts[12] = {
     21,
@@ -7524,31 +7524,31 @@ void BuildCollectionEntries(DeckMenuWork* w) {
 }
 
 const u16* gRikuDeckCards[12] = {
-    gUnk_090354E8,
-    gUnk_09035512,
-    gUnk_0903553A,
-    gUnk_09035564,
-    gUnk_0903557C,
-    gUnk_090355A4,
-    gUnk_090355C8,
-    gUnk_090355EA,
-    gUnk_0903560A,
-    gUnk_09035630,
-    gUnk_0903563A,
-    gUnk_0903566C,
+    gRikuDeckCards0,
+    gRikuDeckCards1,
+    gRikuDeckCards2,
+    gRikuDeckCards3,
+    gRikuDeckCards4,
+    gRikuDeckCards5,
+    gRikuDeckCards6,
+    gRikuDeckCards7,
+    gRikuDeckCards8,
+    gRikuDeckCards9,
+    gRikuDeckCards10,
+    gRikuDeckCards11,
 };
 
 const u16* gRikuDeckEnemyCards[12] = {
-    &gUnk_090356A8,
-    &gUnk_090356AA,
-    &gUnk_090356AC,
-    &gUnk_090356AE,
-    &gUnk_090356B0,
-    &gUnk_090356B2,
-    &gUnk_090356B4,
-    &gUnk_090356B6,
-    &gUnk_090356B8,
-    &gUnk_090356B8,
+    &gRikuDeckEnemyCard0,
+    &gRikuDeckEnemyCard1,
+    &gRikuDeckEnemyCard2,
+    &gRikuDeckEnemyCard3,
+    &gRikuDeckEnemyCard4,
+    &gRikuDeckEnemyCard5,
+    &gRikuDeckEnemyCard6,
+    &gRikuDeckEnemyCard7,
+    &gRikuDeckEnemyCard9,
+    &gRikuDeckEnemyCard9,
     gRikuDeckCardCounts,
     gRikuDeckCardCounts,
 };

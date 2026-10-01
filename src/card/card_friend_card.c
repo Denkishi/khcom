@@ -69,7 +69,7 @@ void Friend_card_0(PickupCardWork* w, s32* args) {
     w->posZ = args[2];
     w->floor = 0;
     w->moveAngle = GetRandom();
-    w->unk_1A4 = -(GetRandom() % 129 + 0x300);
+    w->vz = -(GetRandom() % 129 + 0x300);
     w->speed = GetRandom() % 129 + 0x80;
     w->flipAngleX = 0;
     w->flipAngleY = 0;
@@ -112,7 +112,7 @@ void Heartless_card_0(PickupCardWork* w, s32* args) {
     w->posZ = args[2];
     w->floor = 0;
     w->moveAngle = GetRandom();
-    w->unk_1A4 = -(GetRandom() % 129 + 0x300);
+    w->vz = -(GetRandom() % 129 + 0x300);
     w->speed = GetRandom() % 129 + 0x80;
     w->flipAngleX = 0;
     w->flipAngleY = 0;
@@ -156,7 +156,7 @@ void Gimmick_card_0(PickupCardWork* w, GimmickCardArgs* args) {
     w->posZ = args->z;
     w->floor = 0;
     w->moveAngle = GetRandom();
-    w->unk_1A4 = -((u16)(GetRandom() % 129) + 0x300);
+    w->vz = -((u16)(GetRandom() % 129) + 0x300);
     w->speed = (u16)(GetRandom() % 129) + 0x80;
     w->flipAngleX = 0;
     w->flipAngleY = 0;
@@ -204,7 +204,7 @@ void StartPickupCardFlight(PickupCardWork* w, u8 kind) {
     w->dirX = -dx;
     w->dirY = -dy;
     w->speed = 0x300;
-    w->unk_1A4 = 2;
+    w->vz = 2;
 }
 
 s32 Friend_card_1(PickupCardWork* w, void* a) {
@@ -217,8 +217,8 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         return 0;
     }
 
-    w->unk_1A4 += gBtlWork->gravity;
-    w->posZ += w->unk_1A4;
+    w->vz += gBtlWork->gravity;
+    w->posZ += w->vz;
     w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
     w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
@@ -228,14 +228,14 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
 
     if (w->posZ - 0x800 > w->floor) {
         w->posZ = w->floor - 0x800;
-        w->unk_1A4 = -((204 * w->unk_1A4) >> 8);
+        w->vz = -((204 * w->vz) >> 8);
         w->moveAngle = GetAngle(w->posX, w->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
         w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
 
-        if (w->unk_1A4 > -0x200) {
-            w->unk_1A4 = -0x200;
+        if (w->vz > -0x200) {
+            w->vz = -0x200;
         }
     }
 
@@ -325,8 +325,8 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         return 0;
     }
 
-    w->unk_1A4 += 56;
-    w->posZ += w->unk_1A4;
+    w->vz += 56;
+    w->posZ += w->vz;
     w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
     w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
@@ -336,14 +336,14 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
 
     if (w->posZ - 0x800 > w->floor) {
         w->posZ = w->floor - 0x800;
-        w->unk_1A4 = -((204 * w->unk_1A4) >> 8);
+        w->vz = -((204 * w->vz) >> 8);
         w->moveAngle = GetAngle(w->posX, w->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
         w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
 
-        if (w->unk_1A4 > -0x200) {
-            w->unk_1A4 = -0x200;
+        if (w->vz > -0x200) {
+            w->vz = -0x200;
         }
     }
 
@@ -453,8 +453,8 @@ u8 FlyPickupCardToDeck(PickupCardWork* w) {
     w->flipAngleY += (64 - w->flipAngleY) >> 4;
     w->flipAngleX = 0;
     w->distance = VectorLength2D(-w->posX, 0xA000 - w->posY);
-    w->speed -= w->unk_1A4;
-    w->unk_1A4 += 2;
+    w->speed -= w->vz;
+    w->vz += 2;
     t = w->scale;
 
     if ((s16)t <= 255) {
@@ -543,8 +543,8 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
     w->flipAngleY += (64 - w->flipAngleY) >> 4;
     w->flipAngleX = 0;
     w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
-    w->speed -= w->unk_1A4;
-    w->unk_1A4 += 2;
+    w->speed -= w->vz;
+    w->vz += 2;
     t = w->scale;
 
     if ((s16)t <= 255) {
@@ -570,8 +570,8 @@ s32 Heartless_card_1(PickupCardWork* w, void* a) {
     s16 x;
     s16 y;
 
-    w->unk_1A4 += 0x38;
-    w->posZ += w->unk_1A4;
+    w->vz += 0x38;
+    w->posZ += w->vz;
     w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
     w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
 
@@ -581,12 +581,12 @@ s32 Heartless_card_1(PickupCardWork* w, void* a) {
 
     if (w->posZ - 0x800 > w->floor) {
         w->posZ = w->floor - 0x800;
-        w->unk_1A4 = -((w->unk_1A4 * 204) >> 8);
+        w->vz = -((w->vz * 204) >> 8);
         w->moveAngle = GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
         w->moveAngle = (u8)(w->moveAngle + 0xE0) + GetRandom() % 65;
 
-        if (w->unk_1A4 > -0x200) {
-            w->unk_1A4 = -0x200;
+        if (w->vz > -0x200) {
+            w->vz = -0x200;
         }
     }
 

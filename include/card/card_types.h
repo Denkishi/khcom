@@ -39,7 +39,7 @@ typedef struct CardDef {
     u8 value;
     u8 unk_21[0x03];
     u32 move;
-    u16 unk_28;
+    u16 catalogNumber;
     u8 category;
     u8 unk_2B;
     u16 cpCost;

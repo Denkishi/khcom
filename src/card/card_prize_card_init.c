@@ -48,28 +48,28 @@ s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-static const PrizeMapCardEntry sUnk_09035A10[1] = {
+static const PrizeMapCardEntry sSoraPrizeTraverseTownTier0[1] = {
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A14[4] = {
+static const PrizeMapCardEntry sSoraPrizeTraverseTownTier1[4] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
     { CARD_ID(CARD_CRABCLAW, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035A24[2] = {
-    { sUnk_09035A10, 1, 30 },
-    { sUnk_09035A14, 4, 100 },
+static const PrizeMapCardGroup sSoraPrizeTraverseTownTiers[2] = {
+    { sSoraPrizeTraverseTownTier0, 1, 30 },
+    { sSoraPrizeTraverseTownTier1, 4, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A34[2] = {
+static const PrizeMapCardEntry sSoraPrizeAgrabahTier0[2] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A3C[7] = {
+static const PrizeMapCardEntry sSoraPrizeAgrabahTier1[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -79,7 +79,7 @@ static const PrizeMapCardEntry sUnk_09035A3C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A58[8] = {
+static const PrizeMapCardEntry sSoraPrizeAgrabahTier2[8] = {
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -90,18 +90,18 @@ static const PrizeMapCardEntry sUnk_09035A58[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035A78[3] = {
-    { sUnk_09035A34, 2, 40 },
-    { sUnk_09035A3C, 7, 85 },
-    { sUnk_09035A58, 8, 100 },
+static const PrizeMapCardGroup sSoraPrizeAgrabahTiers[3] = {
+    { sSoraPrizeAgrabahTier0, 2, 40 },
+    { sSoraPrizeAgrabahTier1, 7, 85 },
+    { sSoraPrizeAgrabahTier2, 8, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A90[2] = {
+static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier0[2] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035A98[7] = {
+static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier1[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -111,7 +111,7 @@ static const PrizeMapCardEntry sUnk_09035A98[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035AB4[8] = {
+static const PrizeMapCardEntry sSoraPrizeHalloweenTownTier2[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
@@ -122,18 +122,18 @@ static const PrizeMapCardEntry sUnk_09035AB4[8] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035AD4[3] = {
-    { sUnk_09035A90, 2, 40 },
-    { sUnk_09035A98, 7, 85 },
-    { sUnk_09035AB4, 8, 100 },
+static const PrizeMapCardGroup sSoraPrizeHalloweenTownTiers[3] = {
+    { sSoraPrizeHalloweenTownTier0, 2, 40 },
+    { sSoraPrizeHalloweenTownTier1, 7, 85 },
+    { sSoraPrizeHalloweenTownTier2, 8, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035AEC[2] = {
+static const PrizeMapCardEntry sSoraPrizeMonstroTier0[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035AF4[7] = {
+static const PrizeMapCardEntry sSoraPrizeMonstroTier1[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -143,7 +143,7 @@ static const PrizeMapCardEntry sUnk_09035AF4[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035B10[7] = {
+static const PrizeMapCardEntry sSoraPrizeMonstroTier2[7] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
@@ -153,18 +153,18 @@ static const PrizeMapCardEntry sUnk_09035B10[7] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035B2C[3] = {
-    { sUnk_09035AEC, 2, 40 },
-    { sUnk_09035AF4, 7, 85 },
-    { sUnk_09035B10, 7, 100 },
+static const PrizeMapCardGroup sSoraPrizeMonstroTiers[3] = {
+    { sSoraPrizeMonstroTier0, 2, 40 },
+    { sSoraPrizeMonstroTier1, 7, 85 },
+    { sSoraPrizeMonstroTier2, 7, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035B44[2] = {
+static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier0[2] = {
     { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035B4C[7] = {
+static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier1[7] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -174,60 +174,60 @@ static const PrizeMapCardEntry sUnk_09035B4C[7] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035B68[8] = {
+static const PrizeMapCardEntry sSoraPrizeOlympusColiseumTier2[8] = {
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
     { CARD_ID(CARD_OATHKEEPER, 0), 0 },
     { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
-    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
-    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
-    { CARD_ID(CARD_OLYMPIA, 0), 0 },
-};
-
-static const PrizeMapCardGroup sUnk_09035B88[3] = {
-    { sUnk_09035B44, 2, 40 },
-    { sUnk_09035B4C, 7, 85 },
-    { sUnk_09035B68, 8, 100 },
-};
-
-static const PrizeMapCardEntry sUnk_09035BA0[2] = {
-    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
-    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
-};
-
-static const PrizeMapCardEntry sUnk_09035BA8[7] = {
-    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
-    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
-    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
-    { CARD_ID(CARD_THUNDER, 0), 0 },
-    { CARD_ID(CARD_CRABCLAW, 0), 0 },
-    { CARD_ID(CARD_GRAVITY, 0), 0 },
-    { CARD_ID(CARD_OBLIVION, 0), 0 },
-};
-
-static const PrizeMapCardEntry sUnk_09035BC4[8] = {
-    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
-    { CARD_ID(CARD_LIONHEART, 0), 0 },
-    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
-    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035BE4[3] = {
-    { sUnk_09035BA0, 2, 40 },
-    { sUnk_09035BA8, 7, 85 },
-    { sUnk_09035BC4, 8, 100 },
+static const PrizeMapCardGroup sSoraPrizeOlympusColiseumTiers[3] = {
+    { sSoraPrizeOlympusColiseumTier0, 2, 40 },
+    { sSoraPrizeOlympusColiseumTier1, 7, 85 },
+    { sSoraPrizeOlympusColiseumTier2, 8, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035BFC[1] = {
+static const PrizeMapCardEntry sSoraPrizeWonderlandTier0[2] = {
+    { CARD_ID(CARD_ULTIMA_WEAPON, 0), 0 },
+    { CARD_ID(CARD_DIAMOND_DUST, 0), 0 },
+};
+
+static const PrizeMapCardEntry sSoraPrizeWonderlandTier1[7] = {
+    { CARD_ID(CARD_THREE_WISHES, 0), 0 },
+    { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
+    { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
+    { CARD_ID(CARD_THUNDER, 0), 0 },
+    { CARD_ID(CARD_CRABCLAW, 0), 0 },
+    { CARD_ID(CARD_GRAVITY, 0), 0 },
+    { CARD_ID(CARD_OBLIVION, 0), 0 },
+};
+
+static const PrizeMapCardEntry sSoraPrizeWonderlandTier2[8] = {
+    { CARD_ID(CARD_LADY_LUCK, 0), 0 },
+    { CARD_ID(CARD_LIONHEART, 0), 0 },
+    { CARD_ID(CARD_DIVINE_ROSE, 0), 0 },
+    { CARD_ID(CARD_OATHKEEPER, 0), 0 },
+    { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
+    { CARD_ID(CARD_SPELLBINDER, 0), 0 },
+    { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
+    { CARD_ID(CARD_OLYMPIA, 0), 0 },
+};
+
+static const PrizeMapCardGroup sSoraPrizeWonderlandTiers[3] = {
+    { sSoraPrizeWonderlandTier0, 2, 40 },
+    { sSoraPrizeWonderlandTier1, 7, 85 },
+    { sSoraPrizeWonderlandTier2, 8, 100 },
+};
+
+static const PrizeMapCardEntry sSoraPrizeAtlanticaTier0[1] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035C00[5] = {
+static const PrizeMapCardEntry sSoraPrizeAtlanticaTier1[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -235,7 +235,7 @@ static const PrizeMapCardEntry sUnk_09035C00[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035C14[9] = {
+static const PrizeMapCardEntry sSoraPrizeAtlanticaTier2[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -247,17 +247,17 @@ static const PrizeMapCardEntry sUnk_09035C14[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035C38[3] = {
-    { sUnk_09035BFC, 1, 20 },
-    { sUnk_09035C00, 5, 80 },
-    { sUnk_09035C14, 9, 100 },
+static const PrizeMapCardGroup sSoraPrizeAtlanticaTiers[3] = {
+    { sSoraPrizeAtlanticaTier0, 1, 20 },
+    { sSoraPrizeAtlanticaTier1, 5, 80 },
+    { sSoraPrizeAtlanticaTier2, 9, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035C50[1] = {
+static const PrizeMapCardEntry sSoraPrizeNeverLandTier0[1] = {
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035C54[5] = {
+static const PrizeMapCardEntry sSoraPrizeNeverLandTier1[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -265,7 +265,7 @@ static const PrizeMapCardEntry sUnk_09035C54[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035C68[9] = {
+static const PrizeMapCardEntry sSoraPrizeNeverLandTier2[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -277,17 +277,17 @@ static const PrizeMapCardEntry sUnk_09035C68[9] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035C8C[3] = {
-    { sUnk_09035C50, 1, 20 },
-    { sUnk_09035C54, 5, 80 },
-    { sUnk_09035C68, 9, 100 },
+static const PrizeMapCardGroup sSoraPrizeNeverLandTiers[3] = {
+    { sSoraPrizeNeverLandTier0, 1, 20 },
+    { sSoraPrizeNeverLandTier1, 5, 80 },
+    { sSoraPrizeNeverLandTier2, 9, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035CA4[1] = {
+static const PrizeMapCardEntry sSoraPrizeHollowBastionTier0[1] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035CA8[5] = {
+static const PrizeMapCardEntry sSoraPrizeHollowBastionTier1[5] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
@@ -295,7 +295,7 @@ static const PrizeMapCardEntry sUnk_09035CA8[5] = {
     { CARD_ID(CARD_GRAVITY, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035CBC[9] = {
+static const PrizeMapCardEntry sSoraPrizeHollowBastionTier2[9] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
     { CARD_ID(CARD_LIONHEART, 0), 0 },
@@ -307,17 +307,17 @@ static const PrizeMapCardEntry sUnk_09035CBC[9] = {
     { CARD_ID(CARD_METAL_CHOCOBO, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035CE0[3] = {
-    { sUnk_09035CA4, 1, 20 },
-    { sUnk_09035CA8, 5, 80 },
-    { sUnk_09035CBC, 9, 100 },
+static const PrizeMapCardGroup sSoraPrizeHollowBastionTiers[3] = {
+    { sSoraPrizeHollowBastionTier0, 1, 20 },
+    { sSoraPrizeHollowBastionTier1, 5, 80 },
+    { sSoraPrizeHollowBastionTier2, 9, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035CF8[1] = {
+static const PrizeMapCardEntry sSoraPrizeTwilightTownTier0[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035CFC[6] = {
+static const PrizeMapCardEntry sSoraPrizeTwilightTownTier1[6] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FAIRY_HARP, 0), 0 },
@@ -326,7 +326,7 @@ static const PrizeMapCardEntry sUnk_09035CFC[6] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035D14[8] = {
+static const PrizeMapCardEntry sSoraPrizeTwilightTownTier2[8] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_LADY_LUCK, 0), 0 },
@@ -337,24 +337,24 @@ static const PrizeMapCardEntry sUnk_09035D14[8] = {
     { CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035D34[3] = {
-    { sUnk_09035CF8, 1, 20 },
-    { sUnk_09035CFC, 6, 80 },
-    { sUnk_09035D14, 8, 100 },
+static const PrizeMapCardGroup sSoraPrizeTwilightTownTiers[3] = {
+    { sSoraPrizeTwilightTownTier0, 1, 20 },
+    { sSoraPrizeTwilightTownTier1, 6, 80 },
+    { sSoraPrizeTwilightTownTier2, 8, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035D4C[1] = {
+static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier0[1] = {
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035D50[4] = {
+static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier1[4] = {
     { CARD_ID(CARD_FIRE, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
     { CARD_ID(CARD_PUMPKINHEAD, 0), 0 },
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035D60[5] = {
+static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier2[5] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_SPELLBINDER, 0), 0 },
@@ -362,13 +362,13 @@ static const PrizeMapCardEntry sUnk_09035D60[5] = {
     { CARD_ID(CARD_OLYMPIA, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035D74[3] = {
-    { sUnk_09035D4C, 1, 30 },
-    { sUnk_09035D50, 4, 80 },
-    { sUnk_09035D60, 5, 100 },
+static const PrizeMapCardGroup sSoraPrizeDestinyIslandsTiers[3] = {
+    { sSoraPrizeDestinyIslandsTier0, 1, 30 },
+    { sSoraPrizeDestinyIslandsTier1, 4, 80 },
+    { sSoraPrizeDestinyIslandsTier2, 5, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035D8C[9] = {
+static const PrizeMapCardEntry sSoraPrizeCastleOblivionTier0[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_FIRE, 0), 0 },
@@ -380,37 +380,37 @@ static const PrizeMapCardEntry sUnk_09035D8C[9] = {
     { CARD_ID(CARD_BLIZZARD, 0), 0 },
 };
 
-static const PrizeMapCardEntry sUnk_09035DB0[3] = {
+static const PrizeMapCardEntry sSoraPrizeCastleOblivionTier1[3] = {
     { CARD_ID(CARD_THUNDER, 0), 0 },
     { CARD_ID(CARD_GRAVITY, 0), 0 },
     { CARD_ID(CARD_CURE, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035DBC[2] = {
-    { sUnk_09035D8C, 9, 85 },
-    { sUnk_09035DB0, 3, 100 },
+static const PrizeMapCardGroup sSoraPrizeCastleOblivionTiers[2] = {
+    { sSoraPrizeCastleOblivionTier0, 9, 85 },
+    { sSoraPrizeCastleOblivionTier1, 3, 100 },
 };
 
 static const PrizeMapCardGroupList sSoraPrizeMapCardGroups[14] = {
-    { sUnk_09035A24, 2 },
-    { sUnk_09035A78, 3 },
-    { sUnk_09035C38, 3 },
-    { sUnk_09035B88, 3 },
-    { sUnk_09035BE4, 3 },
-    { sUnk_09035B2C, 3 },
-    { sUnk_09035AD4, 3 },
-    { sUnk_09035C8C, 3 },
-    { sUnk_09035CE0, 3 },
-    { sUnk_09035D74, 3 },
-    { sUnk_09035A24, 2 },
-    { sUnk_09035D34, 3 },
-    { sUnk_09035DBC, 2 },
-    { sUnk_09035DBC, 2 },
+    { sSoraPrizeTraverseTownTiers, 2 },
+    { sSoraPrizeAgrabahTiers, 3 },
+    { sSoraPrizeAtlanticaTiers, 3 },
+    { sSoraPrizeOlympusColiseumTiers, 3 },
+    { sSoraPrizeWonderlandTiers, 3 },
+    { sSoraPrizeMonstroTiers, 3 },
+    { sSoraPrizeHalloweenTownTiers, 3 },
+    { sSoraPrizeNeverLandTiers, 3 },
+    { sSoraPrizeHollowBastionTiers, 3 },
+    { sSoraPrizeDestinyIslandsTiers, 3 },
+    { sSoraPrizeTraverseTownTiers, 2 },
+    { sSoraPrizeTwilightTownTiers, 3 },
+    { sSoraPrizeCastleOblivionTiers, 2 },
+    { sSoraPrizeCastleOblivionTiers, 2 },
 };
 
 const u16 gUnk_09035E3C[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
-static const PrizeMapCardEntry sUnk_09035E50[11] = {
+static const PrizeMapCardEntry sRikuPrizeTraverseTownCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -424,11 +424,11 @@ static const PrizeMapCardEntry sUnk_09035E50[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035E7C[1] = {
-    { sUnk_09035E50, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeTraverseTownTiers[1] = {
+    { sRikuPrizeTraverseTownCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035E84[11] = {
+static const PrizeMapCardEntry sRikuPrizeAgrabahCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -442,11 +442,11 @@ static const PrizeMapCardEntry sUnk_09035E84[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035EB0[1] = {
-    { sUnk_09035E84, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeAgrabahTiers[1] = {
+    { sRikuPrizeAgrabahCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035EB8[11] = {
+static const PrizeMapCardEntry sRikuPrizeHalloweenTownCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -460,11 +460,11 @@ static const PrizeMapCardEntry sUnk_09035EB8[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035EE4[1] = {
-    { sUnk_09035EB8, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeHalloweenTownTiers[1] = {
+    { sRikuPrizeHalloweenTownCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035EEC[11] = {
+static const PrizeMapCardEntry sRikuPrizeMonstroCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -478,11 +478,11 @@ static const PrizeMapCardEntry sUnk_09035EEC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035F18[1] = {
-    { sUnk_09035EEC, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeMonstroTiers[1] = {
+    { sRikuPrizeMonstroCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035F20[11] = {
+static const PrizeMapCardEntry sRikuPrizeOlympusColiseumCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -496,11 +496,11 @@ static const PrizeMapCardEntry sUnk_09035F20[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035F4C[1] = {
-    { sUnk_09035F20, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeOlympusColiseumTiers[1] = {
+    { sRikuPrizeOlympusColiseumCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035F54[11] = {
+static const PrizeMapCardEntry sRikuPrizeWonderlandCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -514,11 +514,11 @@ static const PrizeMapCardEntry sUnk_09035F54[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035F80[1] = {
-    { sUnk_09035F54, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeWonderlandTiers[1] = {
+    { sRikuPrizeWonderlandCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035F88[11] = {
+static const PrizeMapCardEntry sRikuPrizeAtlanticaCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -532,11 +532,11 @@ static const PrizeMapCardEntry sUnk_09035F88[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035FB4[1] = {
-    { sUnk_09035F88, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeAtlanticaTiers[1] = {
+    { sRikuPrizeAtlanticaCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09035FBC[11] = {
+static const PrizeMapCardEntry sRikuPrizeNeverLandCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -550,12 +550,12 @@ static const PrizeMapCardEntry sUnk_09035FBC[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09035FE8[1] = {
-    { sUnk_09035FBC, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeNeverLandTiers[1] = {
+    { sRikuPrizeNeverLandCards, 11, 100 },
 };
 
 #ifdef VERSION_EU
-static const PrizeMapCardEntry sUnk_09035FF0[9] = {
+static const PrizeMapCardEntry sRikuPrizeHollowBastionCards[9] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -567,7 +567,7 @@ static const PrizeMapCardEntry sUnk_09035FF0[9] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 #else
-static const PrizeMapCardEntry sUnk_09035FF0[10] = {
+static const PrizeMapCardEntry sRikuPrizeHollowBastionCards[10] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -582,16 +582,16 @@ static const PrizeMapCardEntry sUnk_09035FF0[10] = {
 #endif
 
 #ifdef VERSION_EU
-static const PrizeMapCardGroup sUnk_09036018[1] = {
-    { sUnk_09035FF0, 9, 100 },
+static const PrizeMapCardGroup sRikuPrizeHollowBastionTiers[1] = {
+    { sRikuPrizeHollowBastionCards, 9, 100 },
 };
 #else
-static const PrizeMapCardGroup sUnk_09036018[1] = {
-    { sUnk_09035FF0, 10, 100 },
+static const PrizeMapCardGroup sRikuPrizeHollowBastionTiers[1] = {
+    { sRikuPrizeHollowBastionCards, 10, 100 },
 };
 #endif
 
-static const PrizeMapCardEntry sUnk_09036020[11] = {
+static const PrizeMapCardEntry sRikuPrizeTwilightTownCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -605,11 +605,11 @@ static const PrizeMapCardEntry sUnk_09036020[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_0903604C[1] = {
-    { sUnk_09036020, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeTwilightTownTiers[1] = {
+    { sRikuPrizeTwilightTownCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09036054[11] = {
+static const PrizeMapCardEntry sRikuPrizeDestinyIslandsCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -623,11 +623,11 @@ static const PrizeMapCardEntry sUnk_09036054[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_09036080[1] = {
-    { sUnk_09036054, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeDestinyIslandsTiers[1] = {
+    { sRikuPrizeDestinyIslandsCards, 11, 100 },
 };
 
-static const PrizeMapCardEntry sUnk_09036088[11] = {
+static const PrizeMapCardEntry sRikuPrizeCastleOblivionCards[11] = {
     { CARD_ID(CARD_THREE_WISHES, 0), 0 },
     { CARD_ID(CARD_KINGDOM_KEY, 0), 0 },
     { CARD_ID(CARD_WISHING_STAR, 0), 0 },
@@ -641,25 +641,25 @@ static const PrizeMapCardEntry sUnk_09036088[11] = {
     { CARD_ID(CARD_OBLIVION, 0), 0 },
 };
 
-static const PrizeMapCardGroup sUnk_090360B4[1] = {
-    { sUnk_09036088, 11, 100 },
+static const PrizeMapCardGroup sRikuPrizeCastleOblivionTiers[1] = {
+    { sRikuPrizeCastleOblivionCards, 11, 100 },
 };
 
 static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
-    { sUnk_09035E7C, 1 },
-    { sUnk_09035EB0, 1 },
-    { sUnk_09035FB4, 1 },
-    { sUnk_09035F4C, 1 },
-    { sUnk_09035F80, 1 },
-    { sUnk_09035F18, 1 },
-    { sUnk_09035EE4, 1 },
-    { sUnk_09035FE8, 1 },
-    { sUnk_09036018, 1 },
-    { sUnk_09036080, 1 },
-    { sUnk_09035E7C, 1 },
-    { sUnk_0903604C, 1 },
-    { sUnk_090360B4, 1 },
-    { sUnk_090360B4, 1 },
+    { sRikuPrizeTraverseTownTiers, 1 },
+    { sRikuPrizeAgrabahTiers, 1 },
+    { sRikuPrizeAtlanticaTiers, 1 },
+    { sRikuPrizeOlympusColiseumTiers, 1 },
+    { sRikuPrizeWonderlandTiers, 1 },
+    { sRikuPrizeMonstroTiers, 1 },
+    { sRikuPrizeHalloweenTownTiers, 1 },
+    { sRikuPrizeNeverLandTiers, 1 },
+    { sRikuPrizeHollowBastionTiers, 1 },
+    { sRikuPrizeDestinyIslandsTiers, 1 },
+    { sRikuPrizeTraverseTownTiers, 1 },
+    { sRikuPrizeTwilightTownTiers, 1 },
+    { sRikuPrizeCastleOblivionTiers, 1 },
+    { sRikuPrizeCastleOblivionTiers, 1 },
 };
 
 static const u16 sUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };

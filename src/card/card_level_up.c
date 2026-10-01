@@ -42,7 +42,7 @@ u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
 u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);
 
 #ifdef VERSION_EU
-static const u16 sUnkEu_090D1328[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
+static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
 
 const u16 gUnkEu_090D1332[5] = { 0xE80, 0x1140, 0x1280, 0xF00, 0xF60 };
 
@@ -97,7 +97,7 @@ void Level_Up_0(LevelUpWork* w) {
     InitTextSlots(w->textSlots[5], 36);
     w->unk_000[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
 #else
-    w->unk_000[6] = LoadObjTiles(gUnkEu_09F72D1C[gLanguage], sUnkEu_090D1328[gLanguage]);
+    w->unk_000[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
     w->tiles5[0] = AllocSpriteFrameTiles(0x500);
     w->tiles5[1] = AllocSpriteFrameTiles(0x500);
     w->tiles5[2] = AllocSpriteFrameTiles(0x500);
@@ -1877,7 +1877,7 @@ s32 IsLevelUpApUnlocked() {
 
 #ifdef VERSION_EU
 void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gUnkEu_094D72E4, gUnkEu_094DB664, gUnkEu_094D9FE4, gUnkEu_094D8964 };
-void* gUnkEu_09F72D1C[5] = { gUnk_0908CAEC, gUnkEu_09170AA0, gUnkEu_09171B2C, gUnkEu_091715A8, gUnkEu_09171024 };
+void* gLevelUpHeaderTilesByLanguage[5] = { gUnk_0908CAEC, gUnkEu_09170AA0, gUnkEu_09171B2C, gUnkEu_091715A8, gUnkEu_09171024 };
 
 void** gUnk_09EEA1BC[5] = {
     gUnkEu_09F75FF4,

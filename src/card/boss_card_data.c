@@ -1,7 +1,7 @@
 #include "card_ids.h"
 #include "types.h"
 
-static const s32 sUnk_08F7D638[3] = {
+static const s32 sShadowCardIds[3] = {
     450, 451, 452,
 };
 
@@ -29,7 +29,7 @@ static const s32 sLargeBodyCardIds[3] = {
     CARD_LARGE_BODY_1, CARD_LARGE_BODY_3, CARD_LARGE_BODY_4,
 };
 
-static const s32 sUnk_08F7D68C[3] = {
+static const s32 sBarrelSpiderCardIds[3] = {
     486, 487, 488,
 };
 
@@ -37,21 +37,21 @@ static const s32 sWizardCardIds[3] = {
     CARD_WIZARD_3, CARD_WIZARD_1, CARD_WIZARD_7,
 };
 
-const s32 gUnk_08F7D6A4 = 459;
+const s32 gRedNocturneCardId = 459;
 
-static const s32 sUnk_08F7D6A8[10] = {
+static const s32 sBos00CardIds[10] = {
     565, 566, 567, 568, 569, 570, 571, 572, 573, 574,
 };
 
-static const s32 sUnk_08F7D6D0[3] = {
+static const s32 sSeaNeonCardIds[3] = {
     492, 493, 494,
 };
 
-static const s32 sUnk_08F7D6DC[3] = {
+static const s32 sPowerwildCardIds[3] = {
     471, 472, 473,
 };
 
-static const s32 sUnk_08F7D6E8[3] = {
+static const s32 sBouncywildCardIds[3] = {
     474, 475, 476,
 };
 
@@ -95,7 +95,7 @@ static const s32 sDefenderCardIds[3] = {
     CARD_DEFENDER_5, CARD_DEFENDER_1, CARD_DEFENDER_9,
 };
 
-static const s32 sUnk_08F7D76C[10] = {
+static const s32 sBos01CardIds[10] = {
     575, 576, 577, 578, 579, 580, 581, 582, 583, 584,
 };
 
@@ -107,21 +107,21 @@ static const s32 sNeoshadowCardIds[3] = {
     CARD_NEOSHADOW_7, CARD_NEOSHADOW_2, CARD_NEOSHADOW_8,
 };
 
-static const s32 sUnk_08F7D7C8[3] = {
+static const s32 sCardSoldierSpadeCardIds[3] = {
     CARD_CARD_SOLDIER_1, 549, 550,
 };
 
-static const s32 sUnk_08F7D7D4[3] = {
+static const s32 sCardSoldierHeartCardIds[3] = {
     CARD_CARD_SOLDIER_2, 546, 547,
 };
 
 static const s32 sWhiteMushroomCardIds = CARD_WHITE_MUSHROOM_2;
 
-static const s32 sUnk_08F7D7E4[3] = {
+static const s32 sBlackFungusCardIds[3] = {
     529, 530, 531,
 };
 
-static const s32 sUnk_08F7D7F0[3] = {
+static const s32 sBlackFungusCardIds2[3] = {
     529, 530, 531,
 };
 
@@ -149,27 +149,27 @@ static const s32 sCreeperPlantCardIds[3] = {
     CARD_CREEPER_PLANT_2, CARD_CREEPER_PLANT_4, CARD_CREEPER_PLANT_6,
 };
 
-static const s32 sUnk_08F7D844[10] = {
+static const s32 sBos05CardIds[10] = {
     615, 616, 617, 618, 619, 620, 621, 622, 623, 624,
 };
 
-static const s32 sUnk_08F7D86C[10] = {
+static const s32 sBos06CardIds[10] = {
     625, 626, 627, 628, 629, 630, 631, 632, 633, 634,
 };
 
-static const s32 sUnk_08F7D894[10] = {
+static const s32 sBos04CardIds[10] = {
     605, 606, 607, 608, 609, 610, 611, 612, 613, 614,
 };
 
-static const s32 sUnk_08F7D8BC[10] = {
+static const s32 sBos07CardIds[10] = {
     635, 636, 637, 638, 639, 640, 641, 642, 643, 644,
 };
 
-static const s32 sUnk_08F7D8E4[10] = {
+static const s32 sBos02CardIds[10] = {
     585, 586, 587, 588, 589, 590, 591, 592, 593, 594,
 };
 
-static const s32 sUnk_08F7D90C[10] = {
+static const s32 sBos08CardIds[10] = {
     645, 646, 647, 648, 649, 650, 651, 652, 653, 654,
 };
 
@@ -218,21 +218,21 @@ static const s32 sUnk_08F7DAA0[9] = {
 };
 
 const s32* gEnemyCardIds[54] = {
-    sUnk_08F7D638,
+    sShadowCardIds,
     sRedNocturneCardIds,
     sBlueRhapsodyCardIds,
     sYellowOperaCardIds,
     sGreenRequiemCardIds,
-    sUnk_08F7D6D0,
+    sSeaNeonCardIds,
     &sWhiteMushroomCardIds,
-    sUnk_08F7D7E4,
-    sUnk_08F7D7F0,
+    sBlackFungusCardIds,
+    sBlackFungusCardIds2,
     sSoldierCardIds,
-    sUnk_08F7D6DC,
-    sUnk_08F7D6E8,
+    sPowerwildCardIds,
+    sBouncywildCardIds,
     sAirSoldierCardIds,
     sBanditCardIds,
-    sUnk_08F7D68C,
+    sBarrelSpiderCardIds,
     sSearchGhostCardIds,
     sScrewdiverCardIds,
     sWightKnightCardIds,
@@ -250,22 +250,22 @@ const s32* gEnemyCardIds[54] = {
     sTornadoStepCardIds,
     sCrescendoCardIds,
     sCreeperPlantCardIds,
-    sUnk_08F7D76C,
-    sUnk_08F7D844,
+    sBos01CardIds,
+    sBos05CardIds,
     sUnk_08F7D794,
-    sUnk_08F7D86C,
-    sUnk_08F7D894,
-    sUnk_08F7D8BC,
-    sUnk_08F7D6A8,
-    sUnk_08F7D8E4,
-    sUnk_08F7D90C,
+    sBos06CardIds,
+    sBos04CardIds,
+    sBos07CardIds,
+    sBos00CardIds,
+    sBos02CardIds,
+    sBos08CardIds,
     sUnk_08F7D934,
     sUnk_08F7D95C,
     sUnk_08F7D980,
     sUnk_08F7D9A4,
     sUnk_08F7D9C8,
-    sUnk_08F7D7C8,
-    sUnk_08F7D7D4,
+    sCardSoldierSpadeCardIds,
+    sCardSoldierHeartCardIds,
     sUnk_08F7D9EC,
     sUnk_08F7DA10,
     sUnk_08F7DA34,

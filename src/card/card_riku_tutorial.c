@@ -30,24 +30,24 @@ u8 gRikuDeckTutorialState EWRAM_COMMON(4);
 
 u8 FindStockPairsInCombo(s32* a, u8* b);
 s32 GetStockMove(s32 a);
-s32 func_080ADD04(CardDisplayWork** p, u8 b);
-s32 func_080ADD58(CardDisplayWork** p, u8 b);
-s32 func_080ADDA8(CardDisplayWork** p, u8 b);
-s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e);
-s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d);
-s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b);
-s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b);
-s32 func_080ADF60(CardDisplayWork** p, u8 b);
-s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c);
-s32 func_080ADFD4(CardDisplayWork** p, u8 b);
-s32 func_080AE014(CardDisplayWork** p, u8 b);
-s32 func_080AE080(CardDisplayWork** p, u8 b);
-s32 func_080AE0B4(CardDisplayWork** p, u8 b);
-s32 func_080AE0F4(CardDisplayWork** p, u8 b);
-s32 func_080AE134(CardDisplayWork** p, u8 b);
-s32 func_080AE168(CardDisplayWork** p, u8 b);
-s32 func_080AE1A8(CardDisplayWork** p, u8 b);
-s32 func_080AE1E8(CardDisplayWork** p, u8 b);
+s32 IsThreeDistinctAttackCards(CardDisplayWork** p, u8 b);
+s32 IsThreeAttackCardsNoMove18(CardDisplayWork** p, u8 b);
+s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** p, u8 b);
+s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e);
+s32 IsKindPairThenSummon(CardDisplayWork** p, u8 b, u16 c, u16 d);
+s32 IsKindThenTwoAttackCards(CardDisplayWork** p, u16 c, u8 b);
+s32 IsKindThenTwoOfCategory(CardDisplayWork** p, u16 c, u8 e, u8 b);
+s32 IsFireMushuAttack(CardDisplayWork** p, u8 b);
+s32 IsTwoSummonsThenKind(CardDisplayWork** p, u8 b, u16 c);
+s32 IsSimbaMushuItem(CardDisplayWork** p, u8 b);
+s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** p, u8 b);
+s32 IsGenieTinkerBellSummon(CardDisplayWork** p, u8 b);
+s32 IsMegaEtherMegalixirItem(CardDisplayWork** p, u8 b);
+s32 IsFireDonaldMagic(CardDisplayWork** p, u8 b);
+s32 IsCloudStopAttack(CardDisplayWork** p, u8 b);
+s32 IsAeroFireMagic(CardDisplayWork** p, u8 b);
+s32 IsAeroBlizzardMagic(CardDisplayWork** p, u8 b);
+s32 IsTwoMagicThenPeterPan(CardDisplayWork** p, u8 b);
 u8 IsLinkSideStockLearned(s32 a, s32 b);
 
 void RikuTutorialModeInit(s32 a) {
@@ -107,7 +107,7 @@ s32 ResolveActiveCardsMove(s32* out) {
     s32 j;
 #endif
 
-    arr = gUnk_09045188;
+    arr = gTutorialEmptyKeys;
     flag = 0;
     memset(buf, 0, 6);
 
@@ -122,7 +122,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 #endif
 
     for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-        arr.unk_00[i] = gCardBattleState->activeCards[i]->cardDef->unk_28;
+        arr.keys[i] = gCardBattleState->activeCards[i]->cardDef->catalogNumber;
 #ifdef VERSION_EU
         out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
@@ -192,10 +192,10 @@ s32 ResolveActiveCardsMove(s32* out) {
 #ifndef VERSION_EU
             if (out != NULL) {
 #endif
-                FindStockPairsInCombo(arr.unk_00, buf);
+                FindStockPairsInCombo(arr.keys, buf);
 
                 if (buf[0] == 1) {
-                    out[0] = arr.unk_00[0];
+                    out[0] = arr.keys[0];
 #ifdef VERSION_EU
                     out[1] = 145;
 #else
@@ -210,7 +210,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 #else
                     out[1] = -1;
 #endif
-                    out[2] = arr.unk_00[1];
+                    out[2] = arr.keys[1];
                     out[3] = out[0];
                     out[4] = out[1];
                     out[5] = out[2];
@@ -279,7 +279,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
 #endif
 
     for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-        arr.unk_00[i] = gCardBattleState->activeCards[i]->cardDef->unk_28;
+        arr.keys[i] = gCardBattleState->activeCards[i]->cardDef->catalogNumber;
 #ifdef VERSION_EU
         out[i] = gCardBattleState->activeCards[i]->cardDef->move;
 #else
@@ -366,10 +366,10 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
 #ifndef VERSION_EU
             if (out != NULL) {
 #endif
-                FindStockPairsInCombo(arr.unk_00, buf);
+                FindStockPairsInCombo(arr.keys, buf);
 
                 if (buf[0] == 1) {
-                    out[0] = arr.unk_00[0];
+                    out[0] = arr.keys[0];
 #ifdef VERSION_EU
                     out[1] = 145;
 #else
@@ -384,7 +384,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
 #else
                     out[1] = -1;
 #endif
-                    out[2] = arr.unk_00[1];
+                    out[2] = arr.keys[1];
                     out[3] = out[0];
                     out[4] = out[1];
                     out[5] = out[2];
@@ -760,7 +760,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     ret = 0;
 
     for (i = 0; i < count; i++) {
-        v[i] = (*(i + cards))->cardDef->unk_28;
+        v[i] = (*(i + cards))->cardDef->catalogNumber;
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
@@ -835,12 +835,12 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     case 0xC9725C97:
     case 0xCA1284A1:
         if ((u16)(kind - 10) <= 5 && IsStockLearned(0) != 0) {
-            arr->unk_00[0] = 50;
+            arr->keys[0] = 50;
             return 50;
         }
 
         if ((u16)(kind - 20) <= 3 && IsStockLearned(2) != 0) {
-            arr->unk_00[0] = 51;
+            arr->keys[0] = 51;
             return 51;
         }
 
@@ -979,134 +979,134 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
         return 105;
     }
 
-    if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
+    if ((u8)IsTwoSummonsThenKind(cards, count, 43) != 0 || (u8)IsSimbaMushuItem(cards, count) != 0) {
         if (IsStockLearned(42) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && IsStockLearned(41) != 0) {
+    if ((u8)IsGenieTinkerBellSummon(cards, count) != 0 && IsStockLearned(41) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && IsStockLearned(27) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 23, count) != 0 && IsStockLearned(27) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && IsStockLearned(28) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 24, count) != 0 && IsStockLearned(28) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && IsStockLearned(29) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 31, count) != 0 && IsStockLearned(29) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && IsStockLearned(23) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 18, count) != 0 && IsStockLearned(23) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && IsStockLearned(24) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 19, count) != 0 && IsStockLearned(24) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && IsStockLearned(25) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 20, count) != 0 && IsStockLearned(25) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && IsStockLearned(26) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 22, count) != 0 && IsStockLearned(26) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && IsStockLearned(46) != 0) {
+    if ((u8)IsMegaEtherMegalixirItem(cards, count) != 0 && IsStockLearned(46) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && IsStockLearned(58) != 0) {
+    if ((u8)IsFireDonaldMagic(cards, count) != 0 && IsStockLearned(58) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && IsStockLearned(44) != 0) {
+    if ((u8)IsSummonMagicJackOrBambiBlizzardItem(cards, count) != 0 && IsStockLearned(44) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && IsStockLearned(31) != 0) {
+    if ((u8)IsFireMushuAttack(cards, count) != 0 && IsStockLearned(31) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && IsStockLearned(35) != 0) {
+    if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) != 0 && IsStockLearned(35) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && IsStockLearned(50) != 0) {
+    if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) != 0 && IsStockLearned(50) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && IsStockLearned(56) != 0) {
+    if ((u8)IsCloudStopAttack(cards, count) != 0 && IsStockLearned(56) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && IsStockLearned(30) != 0) {
+    if ((u8)IsAeroFireMagic(cards, count) != 0 && IsStockLearned(30) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && IsStockLearned(33) != 0) {
+    if ((u8)IsAeroBlizzardMagic(cards, count) != 0 && IsStockLearned(33) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && IsStockLearned(40) != 0) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) != 0 && IsStockLearned(40) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && IsStockLearned(36) != 0) {
+    if ((u8)IsKindPairThenSummon(cards, count, 24, 22) != 0 && IsStockLearned(36) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && IsStockLearned(37) != 0) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) != 0 && IsStockLearned(37) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && IsStockLearned(45) != 0) {
+    if ((u8)IsTwoMagicThenPeterPan(cards, count) != 0 && IsStockLearned(45) != 0) {
         return 81;
     }
 
-    if ((u8)func_080ADD04(cards, count) != 0) {
+    if ((u8)IsThreeDistinctAttackCards(cards, count) != 0) {
         if ((u16)(kind - 10) <= 5 && IsStockLearned(1) != 0) {
-            arr->unk_00[0] = 46;
+            arr->keys[0] = 46;
             return 46;
         }
 
         if ((u16)(kind - 20) <= 3 && IsStockLearned(5) != 0) {
-            arr->unk_00[0] = 5;
+            arr->keys[0] = 5;
             return 5;
         }
     }
 
-    if ((u8)func_080ADD58(cards, count) != 0) {
+    if ((u8)IsThreeAttackCardsNoMove18(cards, count) != 0) {
         if ((u16)(kind - 1) <= 5 && IsStockLearned(6) != 0) {
-            arr->unk_00[0] = 47;
+            arr->keys[0] = 47;
             return 47;
         }
 
         if ((u16)(kind - 24) <= 2 && IsStockLearned(4) != 0) {
-            arr->unk_00[0] = 6;
+            arr->keys[0] = 6;
             return 6;
         }
 
         if ((u16)(kind - 7) <= 2 && IsStockLearned(7) != 0) {
-            arr->unk_00[0] = 48;
+            arr->keys[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
             if (IsStockLearned(3) != 0) {
-                arr->unk_00[0] = 52;
+                arr->keys[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && IsStockLearned(8) != 0) {
-        arr->unk_00[0] = 49;
+    if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) != 0 && IsStockLearned(8) != 0) {
+        arr->keys[0] = 49;
         return 49;
     }
 
@@ -1117,7 +1117,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     }
 
     if (ret == 1) {
-        return arr->unk_00[0];
+        return arr->keys[0];
     }
 
     return 107;
@@ -1133,7 +1133,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     ret = 0;
 
     for (i = 0; i < count; i++) {
-        v[i] = (*(i + cards))->cardDef->unk_28;
+        v[i] = (*(i + cards))->cardDef->catalogNumber;
     }
 
     if ((gGameState.flags & GAME_FLAG_RIKU) && gBtlWork->soraOwnsPlay != 0 && !(gBtlWork->flags & BTL_FLAG_DARK_MODE)) {
@@ -1208,12 +1208,12 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     case 0xC9725C97:
     case 0xCA1284A1:
         if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(0, b) != 0) {
-            arr->unk_00[0] = 50;
+            arr->keys[0] = 50;
             return 50;
         }
 
         if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(2, b) != 0) {
-            arr->unk_00[0] = 51;
+            arr->keys[0] = 51;
             return 51;
         }
 
@@ -1352,134 +1352,134 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
         return 105;
     }
 
-    if ((u8)func_080ADF94(cards, count, 43) != 0 || (u8)func_080ADFD4(cards, count) != 0) {
+    if ((u8)IsTwoSummonsThenKind(cards, count, 43) != 0 || (u8)IsSimbaMushuItem(cards, count) != 0) {
         if (IsLinkSideStockLearned(42, b) != 0) {
             return 55;
         }
     }
 
-    if ((u8)func_080AE080(cards, count) != 0 && IsLinkSideStockLearned(41, b) != 0) {
+    if ((u8)IsGenieTinkerBellSummon(cards, count) != 0 && IsLinkSideStockLearned(41, b) != 0) {
         return 56;
     }
 
-    if ((u8)func_080ADEAC(cards, 23, count) != 0 && IsLinkSideStockLearned(27, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 23, count) != 0 && IsLinkSideStockLearned(27, b) != 0) {
         return 58;
     }
 
-    if ((u8)func_080ADEAC(cards, 24, count) != 0 && IsLinkSideStockLearned(28, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 24, count) != 0 && IsLinkSideStockLearned(28, b) != 0) {
         return 59;
     }
 
-    if ((u8)func_080ADEAC(cards, 31, count) != 0 && IsLinkSideStockLearned(29, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 31, count) != 0 && IsLinkSideStockLearned(29, b) != 0) {
         return 60;
     }
 
-    if ((u8)func_080ADEAC(cards, 18, count) != 0 && IsLinkSideStockLearned(23, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 18, count) != 0 && IsLinkSideStockLearned(23, b) != 0) {
         return 61;
     }
 
-    if ((u8)func_080ADEAC(cards, 19, count) != 0 && IsLinkSideStockLearned(24, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 19, count) != 0 && IsLinkSideStockLearned(24, b) != 0) {
         return 62;
     }
 
-    if ((u8)func_080ADEAC(cards, 20, count) != 0 && IsLinkSideStockLearned(25, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 20, count) != 0 && IsLinkSideStockLearned(25, b) != 0) {
         return 63;
     }
 
-    if ((u8)func_080ADEAC(cards, 22, count) != 0 && IsLinkSideStockLearned(26, b) != 0) {
+    if ((u8)IsKindThenTwoAttackCards(cards, 22, count) != 0 && IsLinkSideStockLearned(26, b) != 0) {
         return 64;
     }
 
-    if ((u8)func_080AE0B4(cards, count) != 0 && IsLinkSideStockLearned(46, b) != 0) {
+    if ((u8)IsMegaEtherMegalixirItem(cards, count) != 0 && IsLinkSideStockLearned(46, b) != 0) {
         return 66;
     }
 
-    if ((u8)func_080AE0F4(cards, count) != 0 && IsLinkSideStockLearned(58, b) != 0) {
+    if ((u8)IsFireDonaldMagic(cards, count) != 0 && IsLinkSideStockLearned(58, b) != 0) {
         return 67;
     }
 
-    if ((u8)func_080AE014(cards, count) != 0 && IsLinkSideStockLearned(44, b) != 0) {
+    if ((u8)IsSummonMagicJackOrBambiBlizzardItem(cards, count) != 0 && IsLinkSideStockLearned(44, b) != 0) {
         return 69;
     }
 
-    if ((u8)func_080ADF60(cards, count) != 0 && IsLinkSideStockLearned(31, b) != 0) {
+    if ((u8)IsFireMushuAttack(cards, count) != 0 && IsLinkSideStockLearned(31, b) != 0) {
         return 71;
     }
 
-    if ((u8)func_080ADEEC(cards, 25, 0, count) != 0 && IsLinkSideStockLearned(35, b) != 0) {
+    if ((u8)IsKindThenTwoOfCategory(cards, 25, 0, count) != 0 && IsLinkSideStockLearned(35, b) != 0) {
         return 72;
     }
 
-    if ((u8)func_080ADEEC(cards, 27, 0, count) != 0 && IsLinkSideStockLearned(50, b) != 0) {
+    if ((u8)IsKindThenTwoOfCategory(cards, 27, 0, count) != 0 && IsLinkSideStockLearned(50, b) != 0) {
         return 73;
     }
 
-    if ((u8)func_080AE134(cards, count) != 0 && IsLinkSideStockLearned(56, b) != 0) {
+    if ((u8)IsCloudStopAttack(cards, count) != 0 && IsLinkSideStockLearned(56, b) != 0) {
         return 74;
     }
 
-    if ((u8)func_080AE168(cards, count) != 0 && IsLinkSideStockLearned(30, b) != 0) {
+    if ((u8)IsAeroFireMagic(cards, count) != 0 && IsLinkSideStockLearned(30, b) != 0) {
         return 75;
     }
 
-    if ((u8)func_080AE1A8(cards, count) != 0 && IsLinkSideStockLearned(33, b) != 0) {
+    if ((u8)IsAeroBlizzardMagic(cards, count) != 0 && IsLinkSideStockLearned(33, b) != 0) {
         return 76;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 23, 1) != 0 && IsLinkSideStockLearned(40, b) != 0) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 23, 1) != 0 && IsLinkSideStockLearned(40, b) != 0) {
         return 78;
     }
 
-    if ((u8)func_080ADE78(cards, count, 24, 22) != 0 && IsLinkSideStockLearned(36, b) != 0) {
+    if ((u8)IsKindPairThenSummon(cards, count, 24, 22) != 0 && IsLinkSideStockLearned(36, b) != 0) {
         return 79;
     }
 
-    if ((u8)func_080ADE2C(cards, count, 22, 25, 1) != 0 && IsLinkSideStockLearned(37, b) != 0) {
+    if ((u8)IsKindPairThenNonSummonOfCategory(cards, count, 22, 25, 1) != 0 && IsLinkSideStockLearned(37, b) != 0) {
         return 80;
     }
 
-    if ((u8)func_080AE1E8(cards, count) != 0 && IsLinkSideStockLearned(45, b) != 0) {
+    if ((u8)IsTwoMagicThenPeterPan(cards, count) != 0 && IsLinkSideStockLearned(45, b) != 0) {
         return 81;
     }
 
-    if ((u8)func_080ADD04(cards, count) != 0) {
+    if ((u8)IsThreeDistinctAttackCards(cards, count) != 0) {
         if ((u16)(kind - 10) <= 5 && IsLinkSideStockLearned(1, b) != 0) {
-            arr->unk_00[0] = 46;
+            arr->keys[0] = 46;
             return 46;
         }
 
         if ((u16)(kind - 20) <= 3 && IsLinkSideStockLearned(5, b) != 0) {
-            arr->unk_00[0] = 5;
+            arr->keys[0] = 5;
             return 5;
         }
     }
 
-    if ((u8)func_080ADD58(cards, count) != 0) {
+    if ((u8)IsThreeAttackCardsNoMove18(cards, count) != 0) {
         if ((u16)(kind - 1) <= 5 && IsLinkSideStockLearned(6, b) != 0) {
-            arr->unk_00[0] = 47;
+            arr->keys[0] = 47;
             return 47;
         }
 
         if ((u16)(kind - 24) <= 2 && IsLinkSideStockLearned(4, b) != 0) {
-            arr->unk_00[0] = 6;
+            arr->keys[0] = 6;
             return 6;
         }
 
         if ((u16)(kind - 7) <= 2 && IsLinkSideStockLearned(7, b) != 0) {
-            arr->unk_00[0] = 48;
+            arr->keys[0] = 48;
             return 48;
         }
 
         if (kind == 0 || kind == 27) {
             if (IsLinkSideStockLearned(3, b) != 0) {
-                arr->unk_00[0] = 52;
+                arr->keys[0] = 52;
                 return 52;
             }
         }
     }
 
-    if ((u8)func_080ADDA8(cards, count) != 0 && IsLinkSideStockLearned(8, b) != 0) {
-        arr->unk_00[0] = 49;
+    if ((u8)IsAttackDonaldGoofyAnyOrder(cards, count) != 0 && IsLinkSideStockLearned(8, b) != 0) {
+        arr->keys[0] = 49;
         return 49;
     }
 
@@ -1490,13 +1490,13 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_08
     }
 
     if (ret == 1) {
-        return arr->unk_00[0];
+        return arr->keys[0];
     }
 
     return 107;
 }
 
-s32 func_080ADD04(CardDisplayWork** p, u8 b) {
+s32 IsThreeDistinctAttackCards(CardDisplayWork** p, u8 b) {
     const CardDef* d0;
     const CardDef* d1;
     const CardDef* d2;
@@ -1521,7 +1521,7 @@ s32 func_080ADD04(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080ADD58(CardDisplayWork** p, u8 b) {
+s32 IsThreeAttackCardsNoMove18(CardDisplayWork** p, u8 b) {
     const CardDef* d0;
     const CardDef* d1;
     const CardDef* d2;
@@ -1540,7 +1540,7 @@ s32 func_080ADD58(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
+s32 IsAttackDonaldGoofyAnyOrder(CardDisplayWork** p, u8 b) {
     const CardDef* d0;
     u16 c0;
     u16 c1;
@@ -1588,7 +1588,7 @@ s32 func_080ADDA8(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
+s32 IsKindPairThenNonSummonOfCategory(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
     // @bug Outside EU, reads three cards even when fewer are stocked (NULL read).
     if (
 #ifdef VERSION_EU
@@ -1602,7 +1602,7 @@ s32 func_080ADE2C(CardDisplayWork** p, u8 b, u16 c, u16 d, u8 e) {
     return 0;
 }
 
-s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d) {
+s32 IsKindPairThenSummon(CardDisplayWork** p, u8 b, u16 c, u16 d) {
     // @bug Outside EU, reads three cards even when fewer are stocked (NULL read).
     if (
 #ifdef VERSION_EU
@@ -1616,7 +1616,7 @@ s32 func_080ADE78(CardDisplayWork** p, u8 b, u16 c, u16 d) {
     return 0;
 }
 
-s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b) {
+s32 IsKindThenTwoAttackCards(CardDisplayWork** p, u16 c, u8 b) {
     const CardDef* d1;
     const CardDef* d2;
     u16 c0;
@@ -1638,7 +1638,7 @@ s32 func_080ADEAC(CardDisplayWork** p, u16 c, u8 b) {
     return 0;
 }
 
-s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b) {
+s32 IsKindThenTwoOfCategory(CardDisplayWork** p, u16 c, u8 e, u8 b) {
     const CardDef* d1;
     const CardDef* d2;
     u16 c0;
@@ -1661,7 +1661,7 @@ s32 func_080ADEEC(CardDisplayWork** p, u16 c, u8 e, u8 b) {
 }
 
 #ifndef VERSION_EU
-s32 func_080ADF30(CardDisplayWork** p, u8 b) {
+s32 IsAnyThenTwoGenie(CardDisplayWork** p, u8 b) {
     u16 c0;
     u16 c1;
     u16 c2;
@@ -1680,7 +1680,7 @@ s32 func_080ADF30(CardDisplayWork** p, u8 b) {
 }
 #endif
 
-s32 func_080ADF60(CardDisplayWork** p, u8 b) {
+s32 IsFireMushuAttack(CardDisplayWork** p, u8 b) {
     u16 c0;
     u16 c1;
 
@@ -1696,7 +1696,7 @@ s32 func_080ADF60(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c) {
+s32 IsTwoSummonsThenKind(CardDisplayWork** p, u8 b, u16 c) {
     u16 e0;
     u16 e1;
 
@@ -1712,7 +1712,7 @@ s32 func_080ADF94(CardDisplayWork** p, u8 b, u16 c) {
     return 0;
 }
 
-s32 func_080ADFD4(CardDisplayWork** p, u8 b) {
+s32 IsSimbaMushuItem(CardDisplayWork** p, u8 b) {
     const CardDef* d2;
     u16 c0;
     u16 c1;
@@ -1733,7 +1733,7 @@ s32 func_080ADFD4(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE014(CardDisplayWork** p, u8 b) {
+s32 IsSummonMagicJackOrBambiBlizzardItem(CardDisplayWork** p, u8 b) {
     const CardDef* d1;
     u16 e0;
     u16 e1;
@@ -1757,7 +1757,7 @@ s32 func_080AE014(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE080(CardDisplayWork** p, u8 b) {
+s32 IsGenieTinkerBellSummon(CardDisplayWork** p, u8 b) {
     u16 c0;
     u16 c1;
     u16 e2;
@@ -1775,7 +1775,7 @@ s32 func_080AE080(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE0B4(CardDisplayWork** p, u8 b) {
+s32 IsMegaEtherMegalixirItem(CardDisplayWork** p, u8 b) {
     const CardDef* d2;
     u16 c0;
     u16 c1;
@@ -1795,7 +1795,7 @@ s32 func_080AE0B4(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE0F4(CardDisplayWork** p, u8 b) {
+s32 IsFireDonaldMagic(CardDisplayWork** p, u8 b) {
     const CardDef* d2;
     u16 c0;
     u16 c1;
@@ -1815,7 +1815,7 @@ s32 func_080AE0F4(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE134(CardDisplayWork** p, u8 b) {
+s32 IsCloudStopAttack(CardDisplayWork** p, u8 b) {
     u16 c0;
     u16 c1;
     u8 s2;
@@ -1833,7 +1833,7 @@ s32 func_080AE134(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE168(CardDisplayWork** p, u8 b) {
+s32 IsAeroFireMagic(CardDisplayWork** p, u8 b) {
     const CardDef* d2;
     u16 c0;
     u16 c1;
@@ -1853,7 +1853,7 @@ s32 func_080AE168(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE1A8(CardDisplayWork** p, u8 b) {
+s32 IsAeroBlizzardMagic(CardDisplayWork** p, u8 b) {
     const CardDef* d2;
     u16 c0;
     u16 c1;
@@ -1873,7 +1873,7 @@ s32 func_080AE1A8(CardDisplayWork** p, u8 b) {
     return 0;
 }
 
-s32 func_080AE1E8(CardDisplayWork** p, u8 b) {
+s32 IsTwoMagicThenPeterPan(CardDisplayWork** p, u8 b) {
     const CardDef* d0;
     const CardDef* d1;
     const CardDef* d2;
@@ -1923,9 +1923,9 @@ u8 IsLinkSideStockLearned(s32 a, s32 b) {
 s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
     u32 v[6];
 
-    v[0] = cards->unk_00[0];
-    v[1] = cards->unk_00[1];
-    v[2] = cards->unk_00[2];
+    v[0] = cards->keys[0];
+    v[1] = cards->keys[1];
+    v[2] = cards->keys[2];
 
     switch ((v[1] << 10) | v[0] | 0x80000000) {
     case 0x8002ACAB:
@@ -2067,7 +2067,7 @@ Mode gModeRikuDeckTutorial = {
     RikuTutorialModeDestroy,
 };
 
-const UnkStruct_080ABA80 gUnk_09045188 = {
+const UnkStruct_080ABA80 gTutorialEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
 

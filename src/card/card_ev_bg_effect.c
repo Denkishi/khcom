@@ -13,11 +13,11 @@
 
 u8 UpdateEventBgEffectAnim(EventBgEffectWork* w, void* a);
 
-static const EventBgEffectDef sUnk_0903803C = {
+static const EventBgEffectDef sEventBgEffect0Def = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x20, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,
 };
 
-static const EventBgEffectFrame sUnk_09038058[8] = {
+static const EventBgEffectFrame sEventBgEffect1Frames[8] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -28,11 +28,11 @@ static const EventBgEffectFrame sUnk_09038058[8] = {
     { 6, 0x3800 },
 };
 
-static const EventBgEffectDef sUnk_09038078 = {
-    &gEventBgEffectMaps[1], gUnk_094233B8 + 0xDC0, gUnk_096148D8 + 0x40, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_09038058, 8, -1,
+static const EventBgEffectDef sEventBgEffect1Def = {
+    &gEventBgEffectMaps[1], gUnk_094233B8 + 0xDC0, gUnk_096148D8 + 0x40, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect1Frames, 8, -1,
 };
 
-static const EventBgEffectFrame sUnk_09038094[8] = {
+static const EventBgEffectFrame sEventBgEffect2Frames[8] = {
     { 6, 0 },
     { 6, 0xC00 },
     { 6, 0x1800 },
@@ -43,11 +43,11 @@ static const EventBgEffectFrame sUnk_09038094[8] = {
     { 6, 0x5400 },
 };
 
-static const EventBgEffectDef sUnk_090380B4 = {
-    &gEventBgEffectMaps[2], gUnk_094233B8 + 0x4C80, gUnk_096148D8 + 0x60, 0xC00, 0x20, { 1, 1, 0, 0 }, sUnk_09038094, 8, -1,
+static const EventBgEffectDef sEventBgEffect2Def = {
+    &gEventBgEffectMaps[2], gUnk_094233B8 + 0x4C80, gUnk_096148D8 + 0x60, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect2Frames, 8, -1,
 };
 
-static const EventBgEffectFrame sUnk_090380D0[10] = {
+static const EventBgEffectFrame sEventBgEffect3Frames[10] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -60,11 +60,11 @@ static const EventBgEffectFrame sUnk_090380D0[10] = {
     { 6, 0x4800 },
 };
 
-static const EventBgEffectDef sUnk_090380F8 = {
-    &gEventBgEffectMaps[3], gUnk_094233B8 + 0xFAE0, gUnk_096148D8 + 0xA0, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_090380D0, 10, -1,
+static const EventBgEffectDef sEventBgEffect3Def = {
+    &gEventBgEffectMaps[3], gUnk_094233B8 + 0xFAE0, gUnk_096148D8 + 0xA0, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect3Frames, 10, -1,
 };
 
-static const EventBgEffectFrame sUnk_09038114[10] = {
+static const EventBgEffectFrame sEventBgEffect4Frames[10] = {
     { 6, 0 },
     { 6, 0x800 },
     { 6, 0x1000 },
@@ -77,11 +77,11 @@ static const EventBgEffectFrame sUnk_09038114[10] = {
     { 6, 0x4800 },
 };
 
-static const EventBgEffectDef sUnk_0903813C = {
-    &gEventBgEffectMaps[4], gUnk_094233B8 + 0xAAE0, gUnk_096148D8 + 0x80, 0x800, 0x20, { 1, 1, 0, 0 }, sUnk_09038114, 10, -1,
+static const EventBgEffectDef sEventBgEffect4Def = {
+    &gEventBgEffectMaps[4], gUnk_094233B8 + 0xAAE0, gUnk_096148D8 + 0x80, 0x800, 0x20, { 1, 1, 0, 0 }, sEventBgEffect4Frames, 10, -1,
 };
 
-static const EventBgEffectFrame sUnk_09038158[16] = {
+static const EventBgEffectFrame sEventBgEffect5Frames[16] = {
     { 6, 0 },
     { 6, 0xC00 },
     { 6, 0x1800 },
@@ -100,11 +100,11 @@ static const EventBgEffectFrame sUnk_09038158[16] = {
     { 6, 0x4800 },
 };
 
-static const EventBgEffectDef sUnk_09038198 = {
-    &gEventBgEffectMaps[5], gUnk_094233B8 + 0x14AE0, gUnk_096148D8 + 0xC0, 0xC00, 0x20, { 1, 1, 0, 0 }, sUnk_09038158, 16, -1,
+static const EventBgEffectDef sEventBgEffect5Def = {
+    &gEventBgEffectMaps[5], gUnk_094233B8 + 0x14AE0, gUnk_096148D8 + 0xC0, 0xC00, 0x20, { 1, 1, 0, 0 }, sEventBgEffect5Frames, 16, -1,
 };
 
-static const EventBgEffectFrame sUnk_090381B4[6] = {
+static const EventBgEffectFrame sEventBgEffect6Frames[6] = {
     { 6, 0 },
     { 6, 0x1000 },
     { 6, 0x2000 },
@@ -113,8 +113,8 @@ static const EventBgEffectFrame sUnk_090381B4[6] = {
     { 6, 0x5000 },
 };
 
-static const EventBgEffectDef sUnk_090381CC = {
-    &gEventBgEffectMaps[6], gUnk_094233B8 + 0x19D80, gUnk_096148D8 + 0xE0, 0x1000, 0x20, { 1, 1, 0, 0 }, sUnk_090381B4, 6, 2,
+static const EventBgEffectDef sEventBgEffect6Def = {
+    &gEventBgEffectMaps[6], gUnk_094233B8 + 0x19D80, gUnk_096148D8 + 0xE0, 0x1000, 0x20, { 1, 1, 0, 0 }, sEventBgEffect6Frames, 6, 2,
 };
 
 void LoadEventBgEffect(EventBgEffectWork* w) {
@@ -311,13 +311,13 @@ void CreateEVBGEFFECTTask(u8* work) {
 }
 
 const EventBgEffectDef* gEventBgEffectDefs[8] = {
-    &sUnk_0903803C,
-    &sUnk_09038078,
-    &sUnk_090380B4,
-    &sUnk_090380F8,
-    &sUnk_0903813C,
-    &sUnk_09038198,
-    &sUnk_090381CC,
+    &sEventBgEffect0Def,
+    &sEventBgEffect1Def,
+    &sEventBgEffect2Def,
+    &sEventBgEffect3Def,
+    &sEventBgEffect4Def,
+    &sEventBgEffect5Def,
+    &sEventBgEffect6Def,
     NULL,
 };
 

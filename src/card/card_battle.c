@@ -50,7 +50,7 @@ static const u16 sSoraStockValueX[4] = {
     40, 52, 64, 0,
 };
 
-const UnkStruct_080ABA80 gUnk_09033FD0 = {
+const UnkStruct_080ABA80 gSoraEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
@@ -1189,7 +1189,7 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
         }
 
         if (w->unk_C4[1] == 0 && AreCardsSettled(w->stock, w->stockCount) != 0) {
-            data = gUnk_09033FD0;
+            data = gSoraEmptyKeys;
 
             if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
                 result = LookupStockName(w->stock, w->stockCount, w->stockValue, &data, flag);
@@ -1221,12 +1221,12 @@ s32 cardbattleSora_1(CardBattleWork* w, Task* task) {
                         }
                     }
                 } else if (w->stockCount == 3) {
-                    cards = gUnk_09033FD0;
+                    cards = gSoraEmptyKeys;
                     memset(output, 0, sizeof(output));
                     found = 0;
 
                     for (i = 0; i < w->stockCount; i++) {
-                        cards.unk_00[i] = w->stock[i]->cardDef->unk_28;
+                        cards.keys[i] = w->stock[i]->cardDef->catalogNumber;
                     }
 
                     kind = LookupStockPairName(&cards, output, w->stockCount);
@@ -3074,7 +3074,7 @@ void TrySoraStockBreak(CardBattleWork* w) {
 
     n = w->stockValue;
     total = 0;
-    arr = gUnk_09033FD0;
+    arr = gSoraEmptyKeys;
 
     if (gCardBattleState->activeValue > n && n != 0) {
         return;

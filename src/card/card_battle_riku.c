@@ -241,7 +241,7 @@ static const s16 sRikuStockValueX[4] = {
     184, 172, 160, 0,
 };
 
-static const UnkStruct_080ABA80 sUnk_090352FC = {
+static const UnkStruct_080ABA80 sRikuEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
@@ -1354,7 +1354,7 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
     }
 
     if (w->unk_C4[1] == 0 && AreCardsSettled(w->stock, w->stockCount) != 0) {
-        arr = sUnk_090352FC;
+        arr = sRikuEmptyKeys;
 
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
             r = LookupStockName(w->stock, w->stockCount, w->stockValue, &arr, flag);
@@ -1375,12 +1375,12 @@ static u8 cardbattle_1(CardBattleWork* w, void* a) {
             }
         } else {
             if (w->stockCount == 3) {
-                arr2 = sUnk_090352FC;
+                arr2 = sRikuEmptyKeys;
                 memset(buf, 0, 6);
                 done = 0;
 
                 for (i = 0; i < w->stockCount; i++) {
-                    arr2.unk_00[i] = w->stock[i]->cardDef->unk_28;
+                    arr2.keys[i] = w->stock[i]->cardDef->catalogNumber;
                 }
 
                 kind = LookupStockPairName(&arr2, buf, w->stockCount);
@@ -2272,7 +2272,7 @@ void TryRikuStockBreak(CardBattleWork* w) {
 #ifdef VERSION_EU
     CardDisplayWork* previous[3];
 #endif
-    UnkStruct_080ABA80 arr = sUnk_090352FC;
+    UnkStruct_080ABA80 arr = sRikuEmptyKeys;
     u8 flag;
     u8 skip;
     u8 i;

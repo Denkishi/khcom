@@ -1094,85 +1094,85 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     return total;
 }
 
-static const MapTileAnimationFrame sUnk_09035348[4] = {
+static const MapTileAnimationFrame sMapTileAnim0Frames0[4] = {
     {0, 18, 0},
     {1024, 12, 0},
     {2048, 12, 0},
     {1024, 12, 0},
 };
 
-static const MapTileAnimationFrame sUnk_09035358[4] = {
+static const MapTileAnimationFrame sMapTileAnim0Frames1[4] = {
     {0, 15, 0},
     {3232, 15, 0},
     {6464, 15, 0},
     {9696, 15, 0},
 };
 
-static const MapTileAnimationTrack sUnk_09035368[2] = {
-    {sUnk_09035348, gUnk_09468FF8, 4, 0, 3232, 864, {0, 0}},
-    {sUnk_09035358, gUnk_09469B58, 4, 0, 0, 3232, {0, 0}},
+static const MapTileAnimationTrack sMapTileAnim0Tracks[2] = {
+    {sMapTileAnim0Frames0, gUnk_09468FF8, 4, 0, 3232, 864, {0, 0}},
+    {sMapTileAnim0Frames1, gUnk_09469B58, 4, 0, 0, 3232, {0, 0}},
 };
 
-static const MapTileAnimationDef sUnk_09035388 = {
-    sUnk_09035368, 2, 1, 0,
+static const MapTileAnimationDef sMapTileAnim0Def = {
+    sMapTileAnim0Tracks, 2, 1, 0,
 };
 
-static const MapTileAnimationFrame sUnk_09035390[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames0[4] = {
     {0, 70, 0},
     {192, 7, 0},
     {384, 15, 0},
     {192, 7, 0},
 };
 
-static const MapTileAnimationFrame sUnk_090353A0[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames1[4] = {
     {0, 25, 0},
     {192, 7, 0},
     {384, 15, 0},
     {192, 7, 0},
 };
 
-static const MapTileAnimationFrame sUnk_090353B0[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames2[4] = {
     {0, 10, 0},
     {96, 10, 0},
     {192, 10, 0},
     {96, 10, 0},
 };
 
-static const MapTileAnimationFrame sUnk_090353C0[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames3[4] = {
     {0, 50, 0},
     {128, 7, 0},
     {256, 10, 0},
     {128, 10, 0},
 };
 
-static const MapTileAnimationFrame sUnk_090353D0[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames4[4] = {
     {0, 10, 0},
     {352, 20, 0},
     {0, 7, 0},
     {352, 150, 0},
 };
 
-static const MapTileAnimationFrame sUnk_090353E0[4] = {
+static const MapTileAnimationFrame sMapTileAnim1Frames5[4] = {
     {0, 50, 0},
     {128, 5, 0},
     {0, 7, 0},
     {128, 5, 0},
 };
 
-static const MapTileAnimationTrack sUnk_090353F0[6] = {
-    {sUnk_09035390, gUnk_098EA844, 4, 0, 2048, 192, {0, 0}},
-    {sUnk_090353A0, gUnk_098EAA84, 4, 0, 2240, 192, {0, 0}},
-    {sUnk_090353B0, gUnk_098EACC4, 4, 0, 2432, 96, {0, 0}},
-    {sUnk_090353C0, gUnk_098EADE4, 4, 0, 2528, 128, {0, 0}},
-    {sUnk_090353D0, gUnk_098EAF64, 4, 0, 3072, 352, {0, 0}},
-    {sUnk_090353E0, gUnk_098EB224, 4, 0, 3424, 128, {0, 0}},
+static const MapTileAnimationTrack sMapTileAnim1Tracks[6] = {
+    {sMapTileAnim1Frames0, gUnk_098EA844, 4, 0, 2048, 192, {0, 0}},
+    {sMapTileAnim1Frames1, gUnk_098EAA84, 4, 0, 2240, 192, {0, 0}},
+    {sMapTileAnim1Frames2, gUnk_098EACC4, 4, 0, 2432, 96, {0, 0}},
+    {sMapTileAnim1Frames3, gUnk_098EADE4, 4, 0, 2528, 128, {0, 0}},
+    {sMapTileAnim1Frames4, gUnk_098EAF64, 4, 0, 3072, 352, {0, 0}},
+    {sMapTileAnim1Frames5, gUnk_098EB224, 4, 0, 3424, 128, {0, 0}},
 };
 
-static const MapTileAnimationDef sUnk_09035450 = {
-    sUnk_090353F0, 6, 0, 0,
+static const MapTileAnimationDef sMapTileAnim1Def = {
+    sMapTileAnim1Tracks, 6, 0, 0,
 };
 
-static const MapTileAnimationFrame sUnk_09035458[5] = {
+static const MapTileAnimationFrame sMapTileAnim2Frames[5] = {
     {0, 6, 0},
     {1024, 6, 0},
     {2048, 6, 0},
@@ -1180,30 +1180,30 @@ static const MapTileAnimationFrame sUnk_09035458[5] = {
     {4096, 6, 0},
 };
 
-static const MapTileAnimationTrack sUnk_0903546C = {
-    sUnk_09035458, gUnk_0948A918, 5, 0, 3072, 896, {0, 0},
+static const MapTileAnimationTrack sMapTileAnim2Track = {
+    sMapTileAnim2Frames, gUnk_0948A918, 5, 0, 3072, 896, {0, 0},
 };
 
-static const MapTileAnimationDef sUnk_0903547C = {
-    &sUnk_0903546C, 1, 1, 0,
+static const MapTileAnimationDef sMapTileAnim2Def = {
+    &sMapTileAnim2Track, 1, 1, 0,
 };
 
-static const MapTileAnimationFrame sUnk_09035484[4] = {
+static const MapTileAnimationFrame sMapTileAnim3Frames[4] = {
     {0, 30, 0},
     {3072, 30, 0},
     {6144, 30, 0},
     {9216, 30, 0},
 };
 
-static const MapTileAnimationTrack sUnk_09035494 = {
-    sUnk_09035484, gUnk_094EABF8, 4, 0, -15360, 3072, {0, 0},
+static const MapTileAnimationTrack sMapTileAnim3Track = {
+    sMapTileAnim3Frames, gUnk_094EABF8, 4, 0, -15360, 3072, {0, 0},
 };
 
-static const MapTileAnimationDef sUnk_090354A4 = {
-    &sUnk_09035494, 1, 1, 0,
+static const MapTileAnimationDef sMapTileAnim3Def = {
+    &sMapTileAnim3Track, 1, 1, 0,
 };
 
-static const MapTileAnimationFrame sUnk_090354AC[6] = {
+static const MapTileAnimationFrame sMapTileAnim4Frames[6] = {
     {0, 20, 0},
     {1024, 20, 0},
     {2048, 20, 0},
@@ -1212,20 +1212,20 @@ static const MapTileAnimationFrame sUnk_090354AC[6] = {
     {5120, 20, 0},
 };
 
-static const MapTileAnimationTrack sUnk_090354C4 = {
-    sUnk_090354AC, gUnk_094F4238, 6, 0, -5120, 1024, {0, 0},
+static const MapTileAnimationTrack sMapTileAnim4Track = {
+    sMapTileAnim4Frames, gUnk_094F4238, 6, 0, -5120, 1024, {0, 0},
 };
 
-static const MapTileAnimationDef sUnk_090354D4 = {
-    &sUnk_090354C4, 1, 1, 0,
+static const MapTileAnimationDef sMapTileAnim4Def = {
+    &sMapTileAnim4Track, 1, 1, 0,
 };
 
 const MapTileAnimationDef* gMapTileAnimationDefs[6] = {
-    &sUnk_09035388,
-    &sUnk_09035450,
-    &sUnk_0903547C,
-    &sUnk_090354A4,
-    &sUnk_090354D4,
+    &sMapTileAnim0Def,
+    &sMapTileAnim1Def,
+    &sMapTileAnim2Def,
+    &sMapTileAnim3Def,
+    &sMapTileAnim4Def,
     NULL,
 };
 

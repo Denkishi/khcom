@@ -595,7 +595,7 @@ void MsChargeBuildCardList() {
                 gMsCards[idx].values[raw][1] = id;
             } else {
                 gMsCards[n].kind = kind;
-                gMsCards[n].cardId = gCardDefs[id].unk_28;
+                gMsCards[n].cardId = gCardDefs[id].catalogNumber;
                 gMsCards[n].category = j;
                 raw = gCardDefs[id].value;
                 gMsCards[n].values[raw][0]++;

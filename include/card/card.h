@@ -250,7 +250,7 @@ typedef struct PickupCardWork {
     u8 unk_48[0xFC];
     Collider collider;
     s32 cardId;
-    s32 unk_1A4;
+    s32 vz;
     s32 speed;
     s32 distance;
     s32 dirX;
@@ -905,8 +905,8 @@ typedef char DarkPointWork_sizechk[(sizeof(struct DarkPointWork) == 0x10) ? 1 : 
 typedef struct MapcardArgs {
     u8 baseCardId;
     u8 index;
-    u8 unk_02;
-    u8 unk_03;
+    u8 kindCount;
+    u8 count;
     struct MapSelectWork* parent;
     ListPool* pool;
     u8 unk_0C[0x0C];
@@ -1160,7 +1160,7 @@ extern u8 gUnk_06010000[];
 
 typedef struct MapSelectKindEntry {
     u16 baseCardId;
-    u16 unk_02;
+    u16 count;
 } MapSelectKindEntry;
 
 typedef struct SpotlightWork {
@@ -1466,11 +1466,11 @@ typedef struct StockInfoWork {
 } StockInfoWork;
 
 typedef struct UnkStruct_080ABA80 {
-    s32 unk_00[6];
+    s32 keys[6];
 } UnkStruct_080ABA80;
 
-extern const UnkStruct_080ABA80 gUnk_09045188;
-extern const UnkStruct_080ABA80 gUnk_09033FD0;
+extern const UnkStruct_080ABA80 gTutorialEmptyKeys;
+extern const UnkStruct_080ABA80 gSoraEmptyKeys;
 
 typedef struct GimmickCardArgs {
     s32 x;
@@ -2146,7 +2146,7 @@ extern Mode gModePremire;
 extern void* gHcEffectCountUnitTilesByLanguage[5];
 extern void** gHcEffectCountUnitSpritesByLanguage[5];
 extern void* gLevelUpBgTilesByLanguage[5];
-extern void* gUnkEu_09F72D1C[5];
+extern void* gLevelUpHeaderTilesByLanguage[5];
 extern void** gLvupEffectSpritesByLanguage[5];
 extern u8 gUnkEu_094CE490[];
 extern u8 gUnkEu_094CE820[];
@@ -2435,7 +2435,7 @@ extern TaskDesc gTaskDescHCEffectName;
 extern TaskDesc gTaskDescNumberPlus;
 #ifdef VERSION_EU
 extern void* gLevelUpBgTilesByLanguage[5];
-extern void* gUnkEu_09F72D1C[5];
+extern void* gLevelUpHeaderTilesByLanguage[5];
 extern void** gUnk_09EEA1BC[5];
 extern void* gLevelUpOptionTilesByLanguage[5];
 extern void** gLevelUpOptionSpritesByLanguage[5];

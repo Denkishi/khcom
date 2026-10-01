@@ -558,7 +558,7 @@ void task_wlogo_atl_3(WlogoAtlWork* work) {
 }
 
 void WlogoAtlHBlankIntr() {
-    gIntrCheck |= 2;
+    gIntrCheck |= INTR_FLAG_HBLANK;
     HBlankIntrBgWave1(0);
 }
 
@@ -2000,7 +2000,7 @@ void WlogoEnableHBlank() {
 void WlogoHBlankIntr() {
     vu16 line;
 
-    gIntrCheck |= 2;
+    gIntrCheck |= INTR_FLAG_HBLANK;
     line = REG_VCOUNT;
     line = (line + 1) % 228;
 
@@ -2280,7 +2280,7 @@ void task_wlogo_bks_3(WlogoBksWork* work) {
 }
 
 void WlogoBksHBlankIntr() {
-    gIntrCheck |= 2;
+    gIntrCheck |= INTR_FLAG_HBLANK;
     HBlankIntrBgWave1(0);
 }
 

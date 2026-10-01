@@ -307,7 +307,7 @@ void ModeRequestHeapReset(Mode* mode, s32 arg) {
 
 #ifdef VERSION_EU
 void eu_0800115C() {
-    gSoftResetMarker[0] = 0xFEDCBA98;
+    gSoftResetMarker[0] = SOFT_RESET_MAGIC;
     SoftReset(RESET_ALL & ~RESET_IWRAM);
 }
 #endif

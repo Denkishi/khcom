@@ -1,6 +1,8 @@
 #ifndef GUARD_GBA_DEFINES_H
 #define GUARD_GBA_DEFINES_H
 
+#define INTR_VECTOR (*(void**)0x03007FFC)
+
 #define EWRAM_START 0x02000000
 #define EWRAM_SIZE 0x40000
 

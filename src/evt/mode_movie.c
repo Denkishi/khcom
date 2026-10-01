@@ -19,6 +19,7 @@
 #include "engine.h"
 #include "gba/defines.h"
 #include "gba/syscall.h"
+#include "intr.h"
 #include "m4a.h"
 #include "obj_api.h"
 #include "sprite.h"
@@ -316,7 +317,7 @@ void MovieVBlankIntr() {
         }
     }
 
-    *(vu16*)0x03007FF8 |= 1;
+    gIntrCheck |= INTR_FLAG_VBLANK;
 }
 
 void mode_movie_1() {

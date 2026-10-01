@@ -5,6 +5,8 @@
 
 typedef void (*IntrFunc)();
 
+#define INTR_COUNT 14
+
 extern vu16 gIntrCheck;
 
 void EnableVBlankIntr();

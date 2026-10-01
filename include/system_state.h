@@ -37,13 +37,15 @@ enum FrameSyncFlag {
     FRAME_SYNC_VBLANK_OVERRUN = 0x8
 };
 
+#define SOFT_RESET_MAGIC 0xFEDCBA98
+
 extern vu16 gFrameSyncFlags;
 extern u16 gVBlankEndVCount;
 extern u32 gUnk_03006C04[3];
 extern u32 gDebugFlags;
 extern IntrFunc* gIntrTableSerial;
 extern u32 gSoftResetMarker[2];
-extern IntrFunc gIntrTable[14];
+extern IntrFunc gIntrTable[INTR_COUNT];
 extern IntrFunc* gIntrTableVCount;
 extern IntrFunc* gIntrTableVBlank;
 extern IntrFunc* gIntrTableTimer3;

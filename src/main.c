@@ -23,15 +23,13 @@
 #include "gba/macro.h"
 #include "types.h"
 
-#define INTR_VECTOR (*(void**)0x03007FFC)
-
 vu16 gFrameSyncFlags;
 u16 gVBlankEndVCount;
 u32 gUnk_03006C04[3];
 u32 gDebugFlags;
 IntrFunc* gIntrTableSerial;
 u32 gSoftResetMarker[2];
-IntrFunc gIntrTable[14];
+IntrFunc gIntrTable[INTR_COUNT];
 IntrFunc* gIntrTableVCount;
 IntrFunc* gIntrTableVBlank;
 IntrFunc* gIntrTableTimer3;
@@ -98,7 +96,7 @@ void DisableHBlankIntr() {
 #ifdef VERSION_EU
 void ClearSystemMemory() {
     RegisterRamReset(RESET_ALL);
-    REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
+    REG_WAITCNT = WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE;
     CpuFill32(0, (void*)EWRAM_START, EWRAM_SIZE);
     CpuFill32(0, (void*)IWRAM_START, IWRAM_SIZE - 0x200);
     CpuFill32(0, (void*)VRAM, VRAM_SIZE);
@@ -107,24 +105,24 @@ void ClearSystemMemory() {
 
 void InitSystem() {
 #ifdef VERSION_EU
-    u32 flag;
+    u32 softReset;
 
-    if (gSoftResetMarker[0] == 0xFEDCBA98) {
+    if (gSoftResetMarker[0] == SOFT_RESET_MAGIC) {
         ClearSystemMemory();
-        flag = 1;
+        softReset = 1;
     } else {
         ClearSystemMemory();
-        flag = 0;
+        softReset = 0;
     }
 #else
     RegisterRamReset(RESET_ALL);
-    REG_WAITCNT = (WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE);
+    REG_WAITCNT = WAITCNT_SRAM_2 | WAITCNT_WS0_N_3 | WAITCNT_WS0_S_1 | WAITCNT_WS1_N_3 | WAITCNT_WS1_S_1 | WAITCNT_WS2_N_3 | WAITCNT_WS2_S_1 | WAITCNT_PREFETCH_ENABLE;
     DmaFill32(3, 0, EWRAM_START, EWRAM_SIZE);
     DmaFill32(3, 0, IWRAM_START, IWRAM_SIZE - 0x200);
 #endif
     gVBlankEndVCount = 0;
     gFrameSyncFlags = 0;
-    gVBlankHandlerOverride = 0;
+    gVBlankHandlerOverride = NULL;
 #ifdef VERSION_EU
     gLanguage = LANGUAGE_ENGLISH;
 #endif
@@ -147,12 +145,12 @@ void InitSystem() {
     SioKeyInit();
     ResetPaletteEffect();
     ResetKeyState();
-    SeedRandom(0x12D687);
+    SeedRandom(1234567);
     InitDisplayRegs();
     SaveInitSram();
     ScanlineDmaReset();
 #ifdef VERSION_EU
-    ModeInit(flag);
+    ModeInit(softReset);
 #else
     ModeInit();
 #endif
@@ -210,7 +208,7 @@ void VBlankIntr() {
         m4aSoundVSync();
     }
 
-    gIntrCheck |= 1;
+    gIntrCheck |= INTR_FLAG_VBLANK;
 
     if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();
@@ -240,7 +238,7 @@ void VCountIntrDummy() {
 void SerialIntrDummy() {
 }
 
-static IntrFunc sIntrTableTemplate[14] = {
+static IntrFunc sIntrTableTemplate[INTR_COUNT] = {
     SerialIntrDummy, VBlankIntr, HBlankIntrDummy, VCountIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
     SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy, SerialIntrDummy,
 };
@@ -248,14 +246,14 @@ static IntrFunc sIntrTableTemplate[14] = {
 void InitIntrTable() {
     s32 i;
 
-    for (i = 0; i < 14; i++) {
+    for (i = 0; i < INTR_COUNT; i++) {
         gIntrTable[i] = sIntrTableTemplate[i];
     }
 
     gIntrTableVBlank = &gIntrTable[1];
     gIntrTableVCount = &gIntrTable[3];
     gIntrTableHBlank = &gIntrTable[2];
-    gIntrTableSerial = gIntrTable;
+    gIntrTableSerial = &gIntrTable[0];
     gIntrTableTimer3 = &gIntrTable[7];
     ResetVBlankCallback();
     ResetVCountCallback();
@@ -283,7 +281,7 @@ void VBlankIntrSio() {
         m4aSoundVSync();
     }
 
-    gIntrCheck |= 1;
+    gIntrCheck |= INTR_FLAG_VBLANK;
 
     if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();
@@ -313,7 +311,7 @@ void VBlankIntrBlockAudio() {
     REG_IME = 0;
     BlockAudioVBlank();
     REG_IME = 1;
-    gIntrCheck |= 1;
+    gIntrCheck |= INTR_FLAG_VBLANK;
 
     if (gFrameSyncFlags & FRAME_SYNC_FRAME_READY) {
         ModeFlushDisplay();

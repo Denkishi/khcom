@@ -7369,7 +7369,7 @@ void HBlankIntrEventScanlineScroll() {
 }
 
 void HBlankIntrEventBgWave() {
-    gIntrCheck |= 2;
+    gIntrCheck |= INTR_FLAG_HBLANK;
     HBlankIntrEventScanlineScroll();
 }
 

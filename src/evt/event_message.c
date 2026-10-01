@@ -3644,7 +3644,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
     }
 
     if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(&gUnk_096148D8[0x100], (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
+        LoadPalette(&gUnk_096148D8[0x80], (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     } else if ((p->keyframes[p->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
         LoadPalette(gEvtObjResources[p->arg.chara].res.palette, (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     }
@@ -6900,7 +6900,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
 
         if (anim != NULL) {
             if (p->face->silhouette == 1) {
-                UpdateAllocatedObjPalette(p->palette, &gUnk_096148D8[0x100]);
+                UpdateAllocatedObjPalette(p->palette, &gUnk_096148D8[0x80]);
             } else {
                 UpdateAllocatedObjPalette(p->palette, anim[p->face->expressionId].palette);
             }

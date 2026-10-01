@@ -36,21 +36,21 @@ extern u8 gUnkEu_0979B7E0[];
 extern u8 gUnkEu_0979C820[];
 extern u8 gUnkEu_0979D860[];
 extern u8 gUnkEu_0979E8A0[];
-extern u8 gUnkEu_0980F840[];
-extern u8 gUnkEu_0980FD40[];
-extern u8 gUnkEu_09810240[];
-extern u8 gUnkEu_09810740[];
-extern u8 gUnkEu_09810C40[];
+extern u16 gUnkEu_0980F840[];
+extern u16 gUnkEu_0980FD40[];
+extern u16 gUnkEu_09810240[];
+extern u16 gUnkEu_09810740[];
+extern u16 gUnkEu_09810C40[];
 extern u8 gUnkEu_09A96B20[];
 extern u8 gUnkEu_09A97020[];
-extern u8 gUnkEu_09A97A20[];
-extern u8 gUnkEu_09A97F20[];
-extern u8 gUnkEu_09A98420[];
-extern u8 gUnkEu_09A98920[];
-extern u8 gUnkEu_09A98E20[];
-extern u8 gUnkEu_09A99320[];
-extern u8 gUnkEu_09A99820[];
-extern u8 gUnkEu_09A99D20[];
+extern u16 gUnkEu_09A97A20[];
+extern u16 gUnkEu_09A97F20[];
+extern u16 gUnkEu_09A98420[];
+extern u16 gUnkEu_09A98920[];
+extern u16 gUnkEu_09A98E20[];
+extern u16 gUnkEu_09A99320[];
+extern u16 gUnkEu_09A99820[];
+extern u16 gUnkEu_09A99D20[];
 #endif
 
 #endif

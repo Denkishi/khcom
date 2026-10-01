@@ -3706,17 +3706,17 @@ void NewGameSlotMenuSelectSlot(u8 a) {
 
     if (sNewGameSlotMenuWork->selectedSlot == 0) {
         if (sNewGameSlotMenuWork->isRiku != 0) {
-            LoadBgMap(1, &gUnk_09985F44[0x8800], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x4400], 0x800);
         } else {
-            LoadBgMap(1, &gUnk_09985F44[0x7800], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x3C00], 0x800);
         }
 
         SetBgScroll(1, 0, (u16)-9);
     } else {
         if (sNewGameSlotMenuWork->isRiku != 0) {
-            LoadBgMap(1, &gUnk_09985F44[0x9000], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x4800], 0x800);
         } else {
-            LoadBgMap(1, &gUnk_09985F44[0x8000], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x4000], 0x800);
         }
 
         SetBgScroll(1, 0, (u16)-6);
@@ -4334,20 +4334,20 @@ void LoadGameMenuMoveCursor(LoadGameMenuWork* w) {
             break;
         case 1:
             if (w->showRikuSlots != 0) {
-                LoadBgMap(1, &gUnk_09985F44[0x3800], 0x800);
+                LoadBgMap(1, &gUnk_09985F44[0x1C00], 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
-                LoadBgMap(1, &gUnk_09985F44[0x2800], 0x800);
+                LoadBgMap(1, &gUnk_09985F44[0x1400], 0x800);
                 SetBgScroll(1, 0, 0);
             }
 
             break;
         case 2:
-            LoadBgMap(1, &gUnk_09985F44[0x4000], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x2000], 0x800);
             SetBgScroll(1, 0, (u16)-1);
             break;
         case 3:
-            LoadBgMap(1, &gUnk_09985F44[0x4800], 0x800);
+            LoadBgMap(1, &gUnk_09985F44[0x2400], 0x800);
             SetBgScroll(1, 0, (u16)-1);
             break;
         }

@@ -3503,6 +3503,7 @@ entries:
     size: 64
 - name: gUnk_0984A778
   format: palette
+  ctype: u8
   us:
     address: 0x0984A778
     size: 64
@@ -3514,6 +3515,7 @@ entries:
     size: 64
 - name: gUnk_0984A7B8
   format: palette
+  ctype: u8
   us:
     address: 0x0984A7B8
     size: 32

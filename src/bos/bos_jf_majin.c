@@ -1539,7 +1539,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
         }
 
         if (work->riseSteps > 0) {
@@ -1611,7 +1611,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
         }
 
         work->throwTimer++;
@@ -1655,7 +1655,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 5));
+            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
         }
 
         work->body.x += work->vx;

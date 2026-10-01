@@ -147,7 +147,7 @@ static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
 
 static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
     gUnk_09C91754, 0x3340, { 0, 0 }, gBosPcBgPalette, 0x100, { 0, 0 },
-    { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x800, gUnk_09D33A74 + 0x800 }
+    { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x400, gUnk_09D33A74 + 0x400 }
 };
 
 const PcSpriteCmd gUnk_09A3DF34[51] = {
@@ -5379,7 +5379,7 @@ void BosPcUpdatePaletteCycle(PcWork* work) {
 
 void BosPcLoadPaletteCycle(PcWork* work) {
     if (work->paletteCycle != 0) {
-        LoadPalette(&gUnk_09D69374[work->paletteIndex * 32], gUnk_05000080, 32);
+        LoadPalette(&gUnk_09D69374[work->paletteIndex * 16], gUnk_05000080, 32);
     }
 }
 

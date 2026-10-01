@@ -94,7 +94,7 @@ typedef struct BattleAttackDef {
 } BattleAttackDef;
 
 extern s32 gUnk_02039DC0;
-extern u8 gUnk_08F69BC4[];
+extern u16 gUnk_08F69BC4[];
 
 
 void* ColliderGetPool(u32 type);
@@ -160,8 +160,8 @@ extern u8 gSor1bl01Tiles[];
 extern u8 gSor1ll01Tiles[];
 extern u8 gSor1fl01Tiles[];
 extern u8 gSor1ff01Tiles[];
-extern u8 gRikuPalette[];
-extern u8 gSoraPalette[];
+extern u16 gRikuPalette[];
+extern u16 gSoraPalette[];
 
 u8 TryStartCardAction(BtlObj* p);
 void VsEndCardPlay();

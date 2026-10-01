@@ -213,9 +213,9 @@ extern u8 gEmy8311bFrame0[];
 extern u8 gEmy8311bFrame1[];
 extern u8 gEmy8311bTiles[];
 extern u8 gEmy8310bTiles[];
-extern u8 gEmy07mPalette[];
-extern u8 gEmy16Palette[];
-extern u8 gEmy83Palette[];
+extern u16 gEmy07mPalette[];
+extern u16 gEmy16Palette[];
+extern u16 gEmy83Palette[];
 
 void Emy29MoveToPose(Emy29Work* work, s16 anim, s16 dx, s16 dy, s16 dz);
 u8 GetEmyApproachAngle(EmyWork* work);

@@ -3,16 +3,16 @@
 
 #include "types.h"
 
-extern u8 gSoraPalette[];
-extern u8 gUnk_09617F78[];
-extern u8 gUnk_09618398[];
-extern u8 gUnk_096183D8[];
-extern u8 gUnk_09618418[];
+extern u16 gSoraPalette[];
+extern u16 gUnk_09617F78[];
+extern u16 gUnk_09618398[];
+extern u16 gUnk_096183D8[];
+extern u16 gUnk_09618418[];
 extern u8 gUnk_09742FD8[];
 extern u8 gUnk_097430EC[];
 extern u8 gUnk_09743262[];
 extern u8 gUnk_09743ADA[];
-extern u8 gUnk_09849C18[];
+extern u16 gUnk_09849C18[];
 extern u8 gUnk_098A364E[];
 
 #endif

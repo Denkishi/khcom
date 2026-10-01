@@ -223,7 +223,7 @@ typedef struct LstPtlArg {
 } LstPtlArg;
 
 extern const EmyKind gBosLstCtrEmyKind;
-extern u8 gUnk_08F69BC4[];
+extern u16 gUnk_08F69BC4[];
 extern u8 gUnk_09C5C4E2[];
 extern u8 gUnk_09C5C704[];
 

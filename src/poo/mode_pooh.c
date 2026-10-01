@@ -1089,7 +1089,7 @@ s32 GetPooManhattanDistance(PooPos* a, PooPos* b) {
 }
 
 void SetPoohPalette(PoohWork* w, u32 b) {
-    u8* pal;
+    u16* pal;
 
     switch (b) {
     case 16:

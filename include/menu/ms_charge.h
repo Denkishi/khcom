@@ -4,7 +4,7 @@
 #include "ms_charge_api.h"
 #include "types.h"
 
-extern u8 gUnk_09A3DE7C[];
+extern u16 gUnk_09A3DE7C[];
 
 u16 CountCollectionCards();
 u16 CountCardsInDecks();
@@ -27,8 +27,8 @@ s32 MsChargeReadMenuKeys();
 s32 MsChargeSelectValueInColumn(MsCard* card, u16 col);
 
 extern u8 gMoguFl00Tiles[];
-extern u8 gCard00Palette[];
-extern u8 gMoguPalette[];
+extern u16 gCard00Palette[];
+extern u16 gMoguPalette[];
 void mode_ms_charge_1();
 void mode_ms_charge_2();
 void mode_ms_charge_0();

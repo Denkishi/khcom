@@ -58,7 +58,7 @@ typedef struct EffectWork {
 } EffectWork;
 
 extern EventState* gEventState;
-extern u8 gMaruxhaBtEffPalette[];
+extern u16 gMaruxhaBtEffPalette[];
 extern u8 gMaruxhaBtEff2Tiles[];
 extern const EventCharaParams gEventCharaParams[];
 extern const char gUnk_08F70990[];

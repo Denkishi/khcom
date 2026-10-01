@@ -27,11 +27,11 @@ typedef struct LangWork {
     struct ObjPalette* palette;
 } LangWork;
 
-extern u8 gUnkEu_08F6A6DC[];
-extern u8 gUnkEu_08F6A6FC[];
+extern u16 gUnkEu_08F6A6DC[];
+extern u16 gUnkEu_08F6A6FC[];
 extern u8 gUnkEu_08F77180[];
-extern u8 gUnkEu_08F7EBF8[];
-extern u8 gUnkEu_08F7EFB0[];
+extern u16 gUnkEu_08F7EBF8[];
+extern u16 gUnkEu_08F7EFB0[];
 #endif
 
 #endif /* GUARD_MODE_BATTLE_H */

@@ -82,8 +82,8 @@ extern u8 gUnk_08B1FD3C[];
 extern u8 gUnk_08B1FD4C[];
 extern u8 gUnk_08B1FD66[];
 extern u8 gUnk_08B25EF0[];
-extern u8 gBStatesPalette[];
-extern u8 gUnk_096FAC64[];
+extern u16 gBStatesPalette[];
+extern u16 gUnk_096FAC64[];
 
 void CreatePersistentSysmsgwinTask(void* a, u16 b);
 

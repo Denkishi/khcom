@@ -204,8 +204,8 @@ extern u8 gBHpgagEFrame11[];
 extern u8 gBHpgagEFrame12[];
 extern u8 gBHpgagEFrame13[];
 extern u8 gBHpgagETiles[];
-extern u8 gSoraPalette[];
-extern u8 gBStatesPalette[];
-extern u8 gRikuPalette[];
+extern u16 gSoraPalette[];
+extern u16 gBStatesPalette[];
+extern u16 gRikuPalette[];
 
 #endif /* GUARD_BTL2_H */

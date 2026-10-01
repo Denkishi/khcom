@@ -22,7 +22,7 @@ enum MovieFlag {
     MOVIE_FLAG_PLAYING = 0x8
 };
 
-extern u8 gUnk_09614718[];
+extern u16 gUnk_09614718[];
 
 void* GetIwramHeapStart();
 u32 GetIwramHeapSize();

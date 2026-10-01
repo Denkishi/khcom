@@ -25,7 +25,7 @@ void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
     w->animStep = 0;
     w->animTimer = 0;
     w->risenCount = 0;
-    UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 5]);
+    UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 4]);
     FadeSetPaletteExcluded(w->palette->index + 16, 1);
     FadeSetPaletteExcluded(w->palette2->index + 16, 1);
 
@@ -62,7 +62,7 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
         } while (0);
 
         w->animTimer = 0;
-        UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 5]);
+        UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 4]);
     }
 
     return 1;

@@ -148,7 +148,7 @@ typedef struct CardBattleWork {
 } CardBattleWork;
 
 typedef char CardBattleWork_size[(sizeof(CardBattleWork) == 0xCC) ? 1 : -1];
-extern u8 gUnk_096148D8[];
+extern u16 gUnk_096148D8[];
 extern u8 gRiCardF0RedTiles[];
 
 typedef struct CardListWork {
@@ -162,11 +162,11 @@ typedef struct CardListWork {
 
 typedef char CardListWork_size[(sizeof(CardListWork) == 0x2C) ? 1 : -1];
 
-extern u8 gUnk_09614118[];
-extern u8 gUnk_096142F8[];
+extern u16 gUnk_09614118[];
+extern u16 gUnk_096142F8[];
 extern u8 gUnk_05000160[];
 extern void* gLvupEffectSprites[];
-extern u8 gUnk_09613F78[];
+extern u16 gUnk_09613F78[];
 
 typedef struct EventMapObjectWork {
     u8 background;
@@ -314,7 +314,7 @@ extern const s32 gLvupEffectStartOffsetX[];
 extern const s32 gLvupEffectStartOffsetY[];
 extern const u16 gLvupEffectStartAngles[];
 extern u16 gRandomHcEffects[47];
-extern u8 gUnk_09619178[];
+extern u16 gUnk_09619178[];
 
 typedef struct WorldSelAnim {
     u8 palette;
@@ -323,13 +323,13 @@ typedef struct WorldSelAnim {
 } WorldSelAnim;
 
 extern WorldSelAnim gWorldSelAnims[30];
-extern u8 gUnk_09619378[];
+extern u16 gUnk_09619378[];
 extern const s32 gSysmsgwinChoiceCursorX[];
 extern u8 gUnk_0815C1C2[];
-extern u8 gUnk_09614418[];
-extern u8 gUnk_09614438[];
+extern u16 gUnk_09614418[];
+extern u16 gUnk_09614438[];
 extern u8 gFEventTiles[];
-extern u8 gUnk_08F69BE4[];
+extern u16 gUnk_08F69BE4[];
 
 typedef struct CardMessageArgs {
     u32 bg;
@@ -1107,15 +1107,15 @@ extern Deck gUnk_09041FA0;
 extern u16 gUnk_09041F70[];
 extern u8 gRikuBt00Tiles[];
 extern u8 gSor1ll51Tiles[];
-extern u8 gUnk_09618D38[];
+extern u16 gUnk_09618D38[];
 extern const s32 gSoraCardLayout[][2];
 extern const s32 gSoraCardRingAngles[];
 extern const s32 gSoraCardSwingAngles[];
 extern const s32 gRikuCardLayout[][2];
 extern const s32 gPlayedCardCenter[];
 extern const s32 gPlayedCardAngles[];
-extern u8 gUnk_096144D8[];
-extern u8 gUnk_096FBA04[];
+extern u16 gUnk_096144D8[];
+extern u16 gUnk_096FBA04[];
 extern u8 gUnk_09628DC0[];
 
 #ifdef VERSION_EU
@@ -1141,18 +1141,18 @@ typedef struct PromptChoiceLayout {
 extern u8 gUnk_09618C58[];
 extern u8 gUnk_09619098[];
 extern u8 gUnk_090A3E46[];
-extern u8 gUnk_096144F8[];
-extern u8 gUnk_09619158[];
-extern u8 gUnk_09614458[];
-extern u8 gUnk_09614478[];
-extern u8 gUnk_09614498[];
-extern u8 gUnk_096144B8[];
-extern u8 gUnk_09614406[];
-extern u8 gCard00Palette[];
+extern u16 gUnk_096144F8[];
+extern u16 gUnk_09619158[];
+extern u16 gUnk_09614458[];
+extern u16 gUnk_09614478[];
+extern u16 gUnk_09614498[];
+extern u16 gUnk_096144B8[];
+extern u16 gUnk_09614406[];
+extern u16 gCard00Palette[];
 extern u8 gSor1ff00Tiles[];
 extern u8 gRikuFf00Tiles[];
-extern u8 gUnk_09614798[];
-extern u8 gUnk_09618C38[];
+extern u16 gUnk_09614798[];
+extern u16 gUnk_09618C38[];
 extern u8 gUnk_050001A0[];
 extern u8 gUnk_050001C0[];
 extern u8 gUnk_0500016C[];

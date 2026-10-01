@@ -153,13 +153,13 @@ typedef struct FrdBeastWork {
     s32 attack;
 } FrdBeastWork;
 
-extern u8 gDonaldPalette[];
-extern u8 gGoofyPalette[];
-extern u8 gArielPalette[];
-extern u8 gJackPalette[];
-extern u8 gPeterPalette[];
-extern u8 gAladdinPalette[];
-extern u8 gBeastPalette[];
+extern u16 gDonaldPalette[];
+extern u16 gGoofyPalette[];
+extern u16 gArielPalette[];
+extern u16 gJackPalette[];
+extern u16 gPeterPalette[];
+extern u16 gAladdinPalette[];
+extern u16 gBeastPalette[];
 
 u8 FrdJackApplyGravity(FrdJackWork* work);
 void FrdPanHover(FrdPanWork* work);

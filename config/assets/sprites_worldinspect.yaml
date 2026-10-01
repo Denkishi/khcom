@@ -4882,7 +4882,6 @@ entries:
     size: 1280
 - name: gUnk_09A333DC
   format: tilemap
-  ctype: u16
   us:
     address: 0x09A333DC
     size: 1472
@@ -5004,7 +5003,6 @@ entries:
     size: 1280
 - name: gUnk_09A3691C
   format: tilemap
-  ctype: u16
   us:
     address: 0x09A3691C
     size: 1472

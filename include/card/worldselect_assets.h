@@ -20,8 +20,8 @@ extern u16 gUnk_09A3CBDC[16];
 extern u16 gUnk_09A3CBFC[16];
 extern u16 gUnk_09A3CC1C[16];
 
-extern u8 gUnk_09A3CDDC[];
-extern u8 gUnk_09A3CC3C[];
+extern u16 gUnk_09A3CDDC[];
+extern u16 gUnk_09A3CC3C[];
 
 #ifdef VERSION_EU
 extern u16 gUnkEu_09A840A0[640];

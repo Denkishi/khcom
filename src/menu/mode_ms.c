@@ -443,7 +443,7 @@ void InitMooglePackOpening(s16 x, s16 y) {
         FadeSetPaletteExcluded(sMooglePackCards[i].palette->index + 0x10, 1);
         sMooglePackCards[i].tiles = LoadObjTiles(gCardDefs[id].tiles, 0x200);
         sMooglePackCards[i].gfx = gCardDefs[id].gfx;
-        sMooglePackCards[i].palette2 = LoadObjPalette(gUnk_09A3DB1C + gCardDefs[id].category * 32, 0x20);
+        sMooglePackCards[i].palette2 = LoadObjPalette(gUnk_09A3DB1C + gCardDefs[id].category * 16, 0x20);
         FadeSetPaletteExcluded(sMooglePackCards[i].palette2->index + 0x10, 1);
         sMooglePackCards[i].tiles2 = LoadObjTiles(gUnk_099A4B9A, 0x1D80);
         sMooglePackCards[i].backSprite = NULL;
@@ -772,10 +772,10 @@ u8 UpdateMooglePackOpening(u16 a) {
                     sMooglePackCardCursor = 0;
                     sMooglePackCursorX = sMooglePackCards[0].x - 0x1000;
                     sMooglePackCursorY = sMooglePackCards[0].y - 0x2000;
-                    LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
+                    LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                     sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                     sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                    LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                    LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16);
                     EnableBg(3);
                     sMooglePackCards[i].state = 9;
                 }
@@ -817,10 +817,10 @@ u8 UpdateMooglePackOpening(u16 a) {
             }
 
             if (sMooglePackCardCursor != old) {
-                LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
+                LoadPalette(gUnk_09A3DA1C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 0x20);
                 sMooglePackNameTextCount = LoadTextSlots(LANGSEL(gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].name), sMooglePackNameText);
                 sMooglePackDescTextCount = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].kind]), sMooglePackDescText);
-                LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 32);
+                LoadObjPaletteBank(sMooglePackCategoryPalette->index, gUnk_09A3DB7C + gCardDefs[sMooglePackCardIds[sMooglePackCardCursor] & 0xFFF].category * 16);
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
 

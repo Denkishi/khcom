@@ -101,7 +101,7 @@ void Level_Up_0(LevelUpWork* w) {
     w->tiles5[1] = AllocSpriteFrameTiles(0x500);
     w->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    w->unk_000[7] = LoadObjPalette(gUnk_09613E98 + 0x60, 32);
+    w->unk_000[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
     FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[7])->index + 16, 1);
     w->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
     TaskPoolInit(&w->pool, 10);
@@ -737,9 +737,9 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
     s8 i;
     u8* q;
 #ifdef VERSION_EU
-    enum { mapOffset = 0x20C0, mapSize = 0x500, palOffset = 0x2320 };
+    enum { mapOffset = 0x20C0, mapSize = 0x500, palOffset = 0x1190 };
 #else
-    enum { mapOffset = 0x7C0, mapSize = 0x800, palOffset = 0x24A0 };
+    enum { mapOffset = 0x7C0, mapSize = 0x800, palOffset = 0x1250 };
 #endif
 
     if (GetKeysRepeat() & DPAD_DOWN) {

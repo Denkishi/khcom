@@ -1991,7 +1991,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* w, MapPlatform* arg) {
     }
 
     w->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
-    w->palette = LoadObjPalette(&gUnk_099910C4[0x240], 32);
+    w->palette = LoadObjPalette(&gUnk_099910C4[0x120], 32);
     w->tiles = LoadObjTiles(gUnk_0985A3EA, 0x980);
     a = &w->anim;
     AnimInit(a, gUnk_09EF8488, gUnk_09EF8468);
@@ -4523,7 +4523,7 @@ void Task_MapPrzStock_3(MapPrzStockWork* w) {
 
 void MapMsgInit(MapMsgWork* w, void* text) {
     LoadBgTiles(0, &gUnk_099597E4[0x140], 0x140);
-    LoadBgMap(0, &gUnk_09985F44[0x800], 0x800);
+    LoadBgMap(0, &gUnk_09985F44[0x400], 0x800);
     SetBgScroll(0, 0, (u16)-46);
     LoadPalette(gCard00Palette, &gUnk_050001C0[0x20], 32);
     InitTextSlots(w->textSlots, 48);

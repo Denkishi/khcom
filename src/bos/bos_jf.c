@@ -601,7 +601,7 @@ u8 task_bos_jf_map_1(JfMapWork* work) {
             work->paletteFrame = 0;
         }
 
-        LoadPalette(gUnk_096FB484 + work->paletteFrame * 32, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 0x20);
+        LoadPalette(gUnk_096FB484 + work->paletteFrame * 16, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 0x20);
     }
 
     BtlMapUpdateShake();
@@ -1004,37 +1004,37 @@ TaskDesc gTaskDescBosJf = {
 void* gBosJfPillarMaps[2][15] = {
     {
         gUnk_096C6C64,
+        gUnk_096C6C64 + 7,
         gUnk_096C6C64 + 14,
-        gUnk_096C6C64 + 28,
-        gUnk_096C6C64 + 42,
+        gUnk_096C6C64 + 21,
         gUnk_096C7464,
+        gUnk_096C7464 + 7,
         gUnk_096C7464 + 14,
-        gUnk_096C7464 + 28,
-        gUnk_096C7464 + 42,
+        gUnk_096C7464 + 21,
         gUnk_096C7C64,
+        gUnk_096C7C64 + 7,
         gUnk_096C7C64 + 14,
-        gUnk_096C7C64 + 28,
-        gUnk_096C7C64 + 42,
+        gUnk_096C7C64 + 21,
         gUnk_096C8464,
+        gUnk_096C8464 + 7,
         gUnk_096C8464 + 14,
-        gUnk_096C8464 + 28,
     },
     {
         gUnk_096C8C64,
+        gUnk_096C8C64 + 7,
         gUnk_096C8C64 + 14,
-        gUnk_096C8C64 + 28,
-        gUnk_096C8C64 + 42,
+        gUnk_096C8C64 + 21,
         gUnk_096C9464,
+        gUnk_096C9464 + 7,
         gUnk_096C9464 + 14,
-        gUnk_096C9464 + 28,
-        gUnk_096C9464 + 42,
+        gUnk_096C9464 + 21,
         gUnk_096C9C64,
+        gUnk_096C9C64 + 7,
         gUnk_096C9C64 + 14,
-        gUnk_096C9C64 + 28,
-        gUnk_096C9C64 + 42,
+        gUnk_096C9C64 + 21,
         gUnk_096CA464,
+        gUnk_096CA464 + 7,
         gUnk_096CA464 + 14,
-        gUnk_096CA464 + 28,
     },
 };
 

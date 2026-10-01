@@ -327,7 +327,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* w, void* a) {
 
 u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* w, void* a) {
     const MsgFaceAnim* e;
-    u8* pal;
+    u16* pal;
 
     w->gfx2 = AnimUpdate(&w->anim2);
     w->gfx = AnimUpdate(&w->anim);

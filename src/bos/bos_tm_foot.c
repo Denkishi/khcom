@@ -1648,7 +1648,7 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
         work->clb2.gfx = gfx;
 
         if (gFrameCounter % 5 == 0) {
-            LoadObjPaletteBank(work->palette->index + 1, gUnk_096FB304 + work->paletteStep * 32);
+            LoadObjPaletteBank(work->palette->index + 1, gUnk_096FB304 + work->paletteStep * 16);
             work->paletteStep = (work->paletteStep + 1) & 7;
         }
     }
@@ -1765,32 +1765,32 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         case 0:
             m4aSongNumStart(SONG_BTL_TABLE_U);
             EnableBg(1);
-            LoadBgMap(1, &gUnk_096BF464[0x5000], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
             ColliderSetDisabled(&work->collider, 0);
             break;
         case 2:
-            LoadBgMap(1, &gUnk_096BF464[0x4800], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x2400], 0x800);
             break;
         case 4:
-            LoadBgMap(1, &gUnk_096BF464[0x4000], 0x800);
-            break;
-        case 6:
-            LoadBgMap(1, &gUnk_096BF464[0x3800], 0x800);
-            break;
-        case 8:
-            LoadBgMap(1, &gUnk_096BF464[0x3000], 0x800);
-            break;
-        case 10:
-            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
-            break;
-        case 12:
             LoadBgMap(1, &gUnk_096BF464[0x2000], 0x800);
             break;
-        case 14:
+        case 6:
+            LoadBgMap(1, &gUnk_096BF464[0x1C00], 0x800);
+            break;
+        case 8:
             LoadBgMap(1, &gUnk_096BF464[0x1800], 0x800);
             break;
-        case 16:
+        case 10:
+            LoadBgMap(1, &gUnk_096BF464[0x1400], 0x800);
+            break;
+        case 12:
             LoadBgMap(1, &gUnk_096BF464[0x1000], 0x800);
+            break;
+        case 14:
+            LoadBgMap(1, &gUnk_096BF464[0xC00], 0x800);
+            break;
+        case 16:
+            LoadBgMap(1, &gUnk_096BF464[0x800], 0x800);
             break;
         }
 
@@ -1810,30 +1810,30 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
     case 3:
         switch (work->frame) {
         case 0:
-            LoadBgMap(1, &gUnk_096BF464[0x1800], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0xC00], 0x800);
             ColliderSetDisabled(&work->collider, 1);
             work->height = 0;
             break;
         case 1:
-            LoadBgMap(1, &gUnk_096BF464[0x2000], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x1000], 0x800);
             break;
         case 2:
-            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x1400], 0x800);
             break;
         case 3:
-            LoadBgMap(1, &gUnk_096BF464[0x3000], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x1800], 0x800);
             break;
         case 4:
-            LoadBgMap(1, &gUnk_096BF464[0x3800], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x1C00], 0x800);
             break;
         case 5:
-            LoadBgMap(1, &gUnk_096BF464[0x4000], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x2000], 0x800);
             break;
         case 6:
-            LoadBgMap(1, &gUnk_096BF464[0x4800], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x2400], 0x800);
             break;
         case 7:
-            LoadBgMap(1, &gUnk_096BF464[0x5000], 0x800);
+            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
             break;
         case 8:
             DisableBg(1);

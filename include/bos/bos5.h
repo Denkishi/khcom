@@ -207,7 +207,7 @@ typedef struct MdWork {
     u8 unk_1B6[0x2];
 } MdWork;
 
-extern u8 gUnk_09A3C9BC[];
+extern u16 gUnk_09A3C9BC[];
 
 void BosMdFireHandleReaction(MdFireWork* work);
 u8 BosMdFireUpdateMotion(MdFireWork* work);
@@ -250,7 +250,7 @@ void task_bos_ga_0(GaWork* work, s32 arg);
 s32 task_bos_md_dai_1(MdDaiWork* work);
 void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg);
 void BosMdFirePlace(MdFireWork* work);
-extern u8 gUnk_09A3C99C[];
+extern u16 gUnk_09A3C99C[];
 void task_bos_md_dai_2(MdDaiWork* work);
 u8 task_bos_ga_1(GaWork* work);
 u16 Bos5Atan(s32 a);
@@ -281,7 +281,7 @@ u8 BosGaUpdateBodyJump(GaWork* work);
 u8 BosGaUpdateGimmick(GaWork* work);
 u8 BosGaUpdateDefeat(GaWork* work);
 void BosGaEntryUpdate(GaWork* work, GaEntryWork* p);
-extern u8 gBoss01objPalette[];
+extern u16 gBoss01objPalette[];
 void BosMdSetFrame(MdWork* work, u16 id);
 void BosMdRequestState(MdWork* work, s32 state);
 void MdAnimStart(MdWork* work, s16 id);
@@ -297,19 +297,19 @@ void mode_worldselect_1();
 void WorldselectHandleInput();
 void WorldselectDraw();
 void mode_worldselect_0();
-extern u8 gUnk_09A3C9DC[];
-extern u8 gUnk_09A3CC5C[];
-extern u8 gUnk_09A3CC7C[];
+extern u16 gUnk_09A3C9DC[];
+extern u16 gUnk_09A3CC5C[];
+extern u16 gUnk_09A3CC7C[];
 
 void WorldselectDrawName(s16 model, s16 n);
 void mode_worldselect_2();
 void WorldselectSetBgMode1();
 
 void WorldselectCyclePalette();
-extern u8 gUnk_09A3C8BC[];
+extern u16 gUnk_09A3C8BC[];
 void MdAnimUpdate(MdWork* work);
-extern u8 gUnk_08F69BC4[];
-extern u8 gUnk_09A3C97C[];
+extern u16 gUnk_08F69BC4[];
+extern u16 gUnk_09A3C97C[];
 void task_bos_md_2(MdWork* work);
 void BosMdEndHurt(MdWork* work);
 void BosMdHandleReaction(MdWork* work);

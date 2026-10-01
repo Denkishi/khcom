@@ -708,8 +708,8 @@ void mode_sio_btl_option_0(s32 arg) {
     sSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], sSioBtlOptionWork->textSlots3);
 #endif
     sSioBtlOptionWork->palette7 = LoadObjPalette(gUnk_096FBCC4, 32);
-    sSioBtlOptionWork->palette8 = LoadObjPalette(gUnk_096FBCC4 + 64, 32);
-    sSioBtlOptionWork->palette9 = LoadObjPalette(gUnk_096FBCC4 + 32, 32);
+    sSioBtlOptionWork->palette8 = LoadObjPalette(gUnk_096FBCC4 + 32, 32);
+    sSioBtlOptionWork->palette9 = LoadObjPalette(gUnk_096FBCC4 + 16, 32);
     sSioBtlOptionWork->worldEntry = gSioWorldList[gSioWorldCursor];
     DisableBg(0);
     DisableBg(1);
@@ -2227,7 +2227,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 4:
     case 5:
         LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x22, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
+        LoadPalette(gUnk_096FBD64 + 0x11, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
         break;
     case 6:
         LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
@@ -2238,7 +2238,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x2C, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
+        LoadPalette(gUnk_096FBD64 + 0x16, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
         break;
     }
 
@@ -2249,7 +2249,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 4:
     case 5:
         LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x22, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
+        LoadPalette(gUnk_096FBDA4 + 0x11, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
         break;
     case 6:
         LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
@@ -2260,7 +2260,7 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 10:
     case 11:
         LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x2C, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
+        LoadPalette(gUnk_096FBDA4 + 0x16, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
         break;
     }
 }
@@ -3683,7 +3683,7 @@ void SioChgCardShowInfo() {
     n = gSioChgCardSlots[sSioChgCardWork->cursor];
     defs = gCardDefs;
     def = &defs[n];
-    off = def->category << 5;
+    off = def->category << 4;
     LoadPalette(gUnk_096FBF84 + off, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 32);
     LoadObjPaletteBank(sSioChgCardWork->palette->index, gUnk_096FBF04 + off);
     nameId = def->kind;

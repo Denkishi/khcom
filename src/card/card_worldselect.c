@@ -417,7 +417,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* w, void* a) {
         }
 #endif
 
-        LoadBgMap(1, &gUnk_0960F2B8[0x1800], 0x800);
+        LoadBgMap(1, &gUnk_0960F2B8[0xC00], 0x800);
         LoadMapSelectGridPalette(w->card->args.baseCardId, w);
         v = LoadMapSelectValueCounts(w->card->args.baseCardId, w);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);

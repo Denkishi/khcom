@@ -13,14 +13,14 @@ extern u8 gUnk_0904B1BC[];
 extern u8 gUnk_0904B3D0[];
 extern u8 gUnk_0904B5E4[];
 extern u8 gUnk_09054124[];
-extern u8 gUnk_09612BB8[];
-extern u8 gUnk_09613898[];
-extern u8 gUnk_09613938[];
-extern u8 gUnk_09613958[];
-extern u8 gUnk_09613978[];
-extern u8 gUnk_096139D8[];
-extern u8 gUnk_09613A78[];
-extern u8 gUnk_09613A98[];
+extern u16 gUnk_09612BB8[];
+extern u16 gUnk_09613898[];
+extern u16 gUnk_09613938[];
+extern u16 gUnk_09613958[];
+extern u16 gUnk_09613978[];
+extern u16 gUnk_096139D8[];
+extern u16 gUnk_09613A78[];
+extern u16 gUnk_09613A98[];
 
 #ifdef VERSION_EU
 extern u8 gUnkEu_090F1EE8[];

@@ -6,11 +6,11 @@
 
 extern Mode gModeBattle;
 
-extern const u16 gUnk_08125E24[1024];
+extern u16 gUnk_08125E24[1024];
 
 #ifdef VERSION_EU
 extern Mode gModeLang;
-extern const u8 gUnkEu_08125144[0xFC];
+extern u16 gUnkEu_08125144[0x7E];
 #endif
 
 #endif

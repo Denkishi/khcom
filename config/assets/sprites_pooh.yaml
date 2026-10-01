@@ -8280,6 +8280,7 @@ entries:
     size: 62816
 - name: gUnk_0983BC18
   format: tilemap
+  ctype: u8
   us:
     address: 0x0983BC18
     size: 10112

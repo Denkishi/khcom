@@ -4,10 +4,10 @@
 #include "types.h"
 #include "pooh_actor_types.h"
 
-extern u8 gPoohPalette[];
-extern u8 gTrap0001Palette[];
-extern u8 gTrap0002Palette[];
-extern u8 gTrap0003Palette[];
+extern u16 gPoohPalette[];
+extern u16 gTrap0001Palette[];
+extern u16 gTrap0002Palette[];
+extern u16 gTrap0003Palette[];
 
 void BackdropFadeToOriginal(u32 a, u16 b);
 void BackdropFadeToAmount(u32 a, u16 b, u16 c);

@@ -29,6 +29,7 @@ GLYPH_GREYS = {1: [(0, 0, 0), (255, 255, 255)], 2: [(0, 0, 0), (85, 85, 85), (17
 GBAGFX_MAX_COLORS = 256
 ASM_KINDS = ("sprite", "anim", "array", "string")
 SCALAR_SIZES = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
+FORMAT_CTYPES = {"tilemap": "u16", "palette": "u16"}
 DIRECTIVES = {1: ".byte", 2: ".hword", 4: ".4byte"}
 VALUES_PER_LINE = {1: 16, 2: 8, 4: 4}
 
@@ -977,11 +978,12 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
                 lines.append(f"extern u8 {symbol}[];")
             elif name.endswith(".s") and "type" in entry:
                 lines.append(f"extern {entry['type']} {symbol};")
-            elif name.endswith(".s") and "ctype" in entry:
-                ctype = entry["ctype"]
-                lines.append(f"extern {ctype} {symbol}[{entry[version]['size'] // SCALAR_SIZES[ctype]}];")
             elif name.endswith(".s"):
-                lines.append(f"extern u8 {symbol}[{entry[version]['size']}];")
+                ctype = entry.get("ctype", FORMAT_CTYPES.get(entry.get("format"), "u8"))
+                size = entry[version]["size"]
+                if size % SCALAR_SIZES[ctype]:
+                    raise ManifestError(f"{manifest.group}: {entry['name']} is {size} bytes in {version}, not a whole number of {ctype}")
+                lines.append(f"extern {ctype} {symbol}[{size // SCALAR_SIZES[ctype]}];")
     lines += ["", "#endif"]
     write_if_changed(out_path, "\n".join(lines) + "\n")
 

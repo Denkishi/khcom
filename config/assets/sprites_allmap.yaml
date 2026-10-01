@@ -973,6 +973,7 @@ entries:
     size: 1124
 - name: gUnk_0984A1F8
   format: palette
+  ctype: u8
   us:
     address: 0x0984A1F8
     size: 32

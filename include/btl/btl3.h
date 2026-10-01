@@ -109,10 +109,10 @@ typedef struct BtlBadStatusWork {
 } BtlBadStatusWork;
 
 extern u8 gSor1ll68wTiles[];
-extern u8 gSoraPalette[];
-extern u8 gBStatesPalette[];
-extern u8 gCard00Palette[];
-extern u8 gUnk_096FAC64[];
+extern u16 gSoraPalette[];
+extern u16 gBStatesPalette[];
+extern u16 gCard00Palette[];
+extern u16 gUnk_096FAC64[];
 
 void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ);
 BtlObj* BtlRaidGetTarget(BtlRaidWork* work);

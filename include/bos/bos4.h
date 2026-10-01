@@ -159,7 +159,7 @@ typedef struct UrsulaTakoWork {
 } UrsulaTakoWork;
 
 extern u8 gUnk_0979D0B6[];
-extern u8 gUnk_0984B0D8[];
+extern u16 gUnk_0984B0D8[];
 
 extern EventKeyList gEventKeyLists[];
 
@@ -176,7 +176,7 @@ void task_bos_boogie_dice_3(BoogieDiceWork* work);
 
 extern const u8 gUnk_0984D134[][8];
 extern u8 gSakuTiles[];
-extern u8 gBoss02objPalette[];
+extern u16 gBoss02objPalette[];
 
 void BosUrsulaUpdateMapBlocks(UrsulaWork* work);
 void task_bos_ursula_2(UrsulaWork* work);
@@ -350,7 +350,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work);
 
 void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg);
 extern u8 gKnifeTiles[];
-extern u8 gKnifePalette[];
+extern u16 gKnifePalette[];
 
 void task_bos_boogie_disk_0(BoogieDiskWork* work, BtlObj* arg);
 u8 task_bos_boogie_disk_1(BoogieDiskWork* work);
@@ -359,7 +359,7 @@ u8 task_bos_boogie_knife_1(BoogieKnifeWork* work);
 void task_bos_boogie_knife_2(BoogieKnifeWork* work);
 void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* arg);
 extern u8 gUnk_0979666A[];
-extern u8 gUnk_0984AF98[];
+extern u16 gUnk_0984AF98[];
 
 u8 task_bos_boogie_map_1();
 
@@ -369,7 +369,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg);
 extern u8 gUnk_0979E344[];
 void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg);
 extern u8 gUnk_097A0DE4[];
-extern u8 gUnk_0984B0F8[];
+extern u16 gUnk_0984B0F8[];
 void task_bos_ursula_border_2(UrsulaBorderWork* work);
 extern u8 gUnk_0979D090[];
 extern u8 gUnk_0979D8B8[];
@@ -381,12 +381,12 @@ extern u8 gUnk_0979833C[];
 extern u8 gUnk_0979896C[];
 extern u8 gUnk_09798F9C[];
 extern u8 gUnk_097995CC[];
-extern u8 gUnk_0984AFF8[];
+extern u16 gUnk_0984AFF8[];
 
 void task_bos_boogie_kaihuku_0(BoogieKaihukuWork* work, BoogieWork* arg);
 extern u8 gKaifukuTiles[];
-extern u8 gKaifukuPalette[];
-extern u8 gUnk_08F69BC4[];
+extern u16 gKaifukuPalette[];
+extern u16 gUnk_08F69BC4[];
 void BosBoogieSpawnKnives(BoogieKnifereaderWork* work);
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
 void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d);

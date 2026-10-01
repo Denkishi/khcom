@@ -105,7 +105,7 @@ void task_sroll_a_name_2(SrollANameWork* w) {
 
     if (w->kind == 2) {
         flags = SPRITE_FLAG_BLEND;
-        ofs = AnimGetFrame(&w->anim) * 32 + 32;
+        ofs = AnimGetFrame(&w->anim) * 16 + 16;
         LoadPalette(&gUnk_09D6CD74[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((w->palette->index & 15) * 32), 32);
     }
 

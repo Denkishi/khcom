@@ -157,26 +157,26 @@ typedef struct TextGlyphSprite {
 } TextGlyphSprite;
 
 extern EventState* gEventState;
-extern u8 gBStatesPalette[];
+extern u16 gBStatesPalette[];
 extern u8 gFEventTiles[];
 
-extern u8 gUnk_09614718[];
-extern u8 gUnk_09614738[];
-extern u8 gUnk_09614758[];
-extern u8 gUnk_09614778[];
-extern u8 gUnk_09614798[];
-extern u8 gUnk_096147B8[];
+extern u16 gUnk_09614718[];
+extern u16 gUnk_09614738[];
+extern u16 gUnk_09614758[];
+extern u16 gUnk_09614778[];
+extern u16 gUnk_09614798[];
+extern u16 gUnk_096147B8[];
 extern u8 gUnk_050001C0[];
-extern u8 gUnk_096148D8[];
-extern u8 gUnk_08F69BE4[];
+extern u16 gUnk_096148D8[];
+extern u16 gUnk_08F69BE4[];
 extern u8 gUnk_090AA506[];
 extern u8 gUnk_090B3FBE[];
 extern u8 gUnk_090BC9CA[];
 extern u8 gUnk_090C51A6[];
-extern u8 gSoraPalette[];
-extern u8 gRikuPalette[];
-extern u8 gUnk_09614418[];
-extern u8 gCard00Palette[];
+extern u16 gSoraPalette[];
+extern u16 gRikuPalette[];
+extern u16 gUnk_09614418[];
+extern u16 gCard00Palette[];
 extern u8 gUnk_090CBFB2[];
 extern const EventCharaParams gEventCharaParams[];
 

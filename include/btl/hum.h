@@ -479,26 +479,26 @@ typedef struct RobeWork {
 
 extern u8 gMaruxhaBtEff2Tiles[];
 extern u8 gVixenE2Tiles[];
-extern u8 gMaruxhaBtEffPalette[];
-extern u8 gRexeusPalette[];
+extern u16 gMaruxhaBtEffPalette[];
+extern u16 gRexeusPalette[];
 extern u8 gRexeusTmhTiles[];
 extern u8 gLaxineKnifeTiles[];
-extern u8 gLaxinePalette[];
-extern u8 gUnk_08F6DC64[];
+extern u16 gLaxinePalette[];
+extern u16 gUnk_08F6DC64[];
 extern u8 gRexeusTmhAxTiles[];
-extern u8 gHadesPalette[];
-extern u8 gHadesAngryPalette[];
+extern u16 gHadesPalette[];
+extern u16 gHadesAngryPalette[];
 
-extern u8 gVixEPalette[];
-extern u8 gRexeusRock01Palette[];
-extern u8 gRexeusRock02Palette[];
+extern u16 gVixEPalette[];
+extern u16 gRexeusRock01Palette[];
+extern u16 gRexeusRock02Palette[];
 extern u8 gRexeusRock01Tiles[];
 extern u8 gRexeusRock02Tiles[];
-extern u8 gBStatesPalette[];
+extern u16 gBStatesPalette[];
 extern u8 gVixenE1Tiles[];
 extern u8 gVixenReitouHahenTiles[];
 extern u8 gHadesFramespreadHiTiles[];
-extern u8 gPBakudanPalette[];
+extern u16 gPBakudanPalette[];
 extern u8 gPBakudanTiles[];
 
 void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub);

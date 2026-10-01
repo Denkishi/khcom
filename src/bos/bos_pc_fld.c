@@ -143,7 +143,7 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
 
 void BosPcFldLoadPaletteCycle(PcFldWork* work) {
     if (work->paletteCycle != 0) {
-        LoadPalette(gUnk_09D69374 + work->paletteIndex * 32, gUnk_05000080, 32);
+        LoadPalette(gUnk_09D69374 + work->paletteIndex * 16, gUnk_05000080, 32);
     }
 }
 

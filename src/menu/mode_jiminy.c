@@ -2070,9 +2070,10 @@ void JiminyDetailUpdate() {
     s16 selected;
     s16 width;
     u8 digits[3];
-    u8* map0;
-    u8* map1;
+    u16* map0;
+    u16* map1;
     u8* source;
+    u16* nameMap;
     u8* dest;
     u16* paletteDest;
 
@@ -2330,7 +2331,7 @@ void JiminyDetailUpdate() {
 #ifdef VERSION_EU
             if (sJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
                 LoadObjPaletteBank(sJiminyWork->palette8->index, gUnk_09A3CDDC);
-                LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x20);
+                LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x10);
                 SetObjTileSource(sJiminyWork->tiles7, gUnk_099EDE7C);
             } else
 #endif
@@ -2346,27 +2347,27 @@ void JiminyDetailUpdate() {
         }
 
         if (sJiminyWork->detailLayout == 2) {
-            source = gUnk_08F63B84;
+            nameMap = gUnk_08F63B84;
             dest = (u8*)GetBgScreenBase(0) + 0x8E;
         } else {
-            source = gUnk_08F64B84;
+            nameMap = gUnk_08F64B84;
             dest = (u8*)GetBgScreenBase(0) + 0x80;
         }
 
         if (sJiminyWork->detailLayout < 2) {
 #ifdef VERSION_JP
             switch (sJiminyWork->charCount) {
-            case 1: source += 0xC0; break;
-            case 2: source += 0x240; break;
-            case 3: source += 0x300; break;
-            case 4: source += 0x480; break;
-            case 5: source += 0x540; break;
-            case 6: source += 0x600; break;
-            case 7: source += 0x6C0; break;
-            case 8: source += 0xE0; break;
-            case 9: source += 0x1A0; break;
-            case 10: source += 0x260; break;
-            default: source += 0x320; break;
+            case 1: nameMap += 0x60; break;
+            case 2: nameMap += 0x120; break;
+            case 3: nameMap += 0x180; break;
+            case 4: nameMap += 0x240; break;
+            case 5: nameMap += 0x2A0; break;
+            case 6: nameMap += 0x300; break;
+            case 7: nameMap += 0x360; break;
+            case 8: nameMap += 0x70; break;
+            case 9: nameMap += 0xD0; break;
+            case 10: nameMap += 0x130; break;
+            default: nameMap += 0x190; break;
             }
 #else
             width = GetMsgTextWidth(
@@ -2378,26 +2379,26 @@ void JiminyDetailUpdate() {
             );
 
             switch ((width + 12) / 8) {
-            case 0: source += 0x240; break;
-            case 1: source += 0x240; break;
-            case 2: source += 0x240; break;
-            case 3: source += 0x240; break;
-            case 4: source += 0x300; break;
-            case 5: source += 0x3C0; break;
-            case 6: source += 0x480; break;
-            case 7: source += 0x540; break;
-            case 8: source += 0x600; break;
-            case 9: source += 0x6C0; break;
-            case 10: source += 0x20; break;
-            case 11: source += 0xE0; break;
-            case 12: source += 0x1A0; break;
-            case 13: source += 0x260; break;
+            case 0: nameMap += 0x120; break;
+            case 1: nameMap += 0x120; break;
+            case 2: nameMap += 0x120; break;
+            case 3: nameMap += 0x120; break;
+            case 4: nameMap += 0x180; break;
+            case 5: nameMap += 0x1E0; break;
+            case 6: nameMap += 0x240; break;
+            case 7: nameMap += 0x2A0; break;
+            case 8: nameMap += 0x300; break;
+            case 9: nameMap += 0x360; break;
+            case 10: nameMap += 0x10; break;
+            case 11: nameMap += 0x70; break;
+            case 12: nameMap += 0xD0; break;
+            case 13: nameMap += 0x130; break;
 #ifdef VERSION_EU
-            case 14: source += 0x320; break;
-            case 15: source += 0x3E0; break;
-            default: source += 0x3E0; wide = 1; break;
+            case 14: nameMap += 0x190; break;
+            case 15: nameMap += 0x1F0; break;
+            default: nameMap += 0x1F0; wide = 1; break;
 #else
-            default: source += 0x320; break;
+            default: nameMap += 0x190; break;
 #endif
             }
 #endif
@@ -2417,41 +2418,41 @@ void JiminyDetailUpdate() {
             switch (width) {
             case 0: break;
             case 1: break;
-            case 2: source += 0xC0; break;
-            case 3: source += 0x180; break;
-            case 4: source += 0x240; break;
-            case 5: source += 0x300; break;
-            case 6: source += 0x3C0; break;
+            case 2: nameMap += 0x60; break;
+            case 3: nameMap += 0xC0; break;
+            case 4: nameMap += 0x120; break;
+            case 5: nameMap += 0x180; break;
+            case 6: nameMap += 0x1E0; break;
 #ifdef VERSION_JP
-            case 7: source += 0x540; break;
-            case 8: source += 0x600; break;
-            case 9: source += 0x6C0; break;
-            case 10: source += 0x20; break;
-            case 11: source += 0x1A0; break;
-            case 12: source += 0x1A0; break;
-            case 13: source += 0x1A0; break;
+            case 7: nameMap += 0x2A0; break;
+            case 8: nameMap += 0x300; break;
+            case 9: nameMap += 0x360; break;
+            case 10: nameMap += 0x10; break;
+            case 11: nameMap += 0xD0; break;
+            case 12: nameMap += 0xD0; break;
+            case 13: nameMap += 0xD0; break;
 #else
-            case 7: source += 0x480; break;
-            case 8: source += 0x540; break;
-            case 9: source += 0x600; break;
-            case 10: source += 0x6C0; break;
-            case 11: source += 0x20; break;
-            case 12: source += 0xE0; break;
-            case 13: source += 0x1A0; break;
+            case 7: nameMap += 0x240; break;
+            case 8: nameMap += 0x2A0; break;
+            case 9: nameMap += 0x300; break;
+            case 10: nameMap += 0x360; break;
+            case 11: nameMap += 0x10; break;
+            case 12: nameMap += 0x70; break;
+            case 13: nameMap += 0xD0; break;
 #endif
-            default: source += 0x260; break;
+            default: nameMap += 0x130; break;
             }
         }
 
-        RequestDma3Copy(source, dest, 0x20);
-        RequestDma3Copy(source + 0x40, dest + 0x40, 0x20);
-        RequestDma3Copy(source + 0x80, dest + 0x80, 0x20);
+        RequestDma3Copy(nameMap, dest, 0x20);
+        RequestDma3Copy(nameMap + 0x20, dest + 0x40, 0x20);
+        RequestDma3Copy(nameMap + 0x40, dest + 0x80, 0x20);
 
 #ifdef VERSION_EU
         if (wide) {
-            RequestDma3Copy(source, dest + 2, 0x20);
-            RequestDma3Copy(source + 0x40, dest + 0x42, 0x20);
-            RequestDma3Copy(source + 0x80, dest + 0x82, 0x20);
+            RequestDma3Copy(nameMap, dest + 2, 0x20);
+            RequestDma3Copy(nameMap + 0x20, dest + 0x42, 0x20);
+            RequestDma3Copy(nameMap + 0x40, dest + 0x82, 0x20);
         }
 #endif
 

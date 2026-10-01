@@ -3,7 +3,7 @@
 
 #include "types.h"
 
-extern u8 gBoss03objPalette[];
-extern u8 gUnk_08F69BC4[];
+extern u16 gBoss03objPalette[];
+extern u16 gUnk_08F69BC4[];
 
 #endif

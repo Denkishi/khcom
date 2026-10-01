@@ -272,7 +272,7 @@ void MsChargeLoadSelectedCard() {
 #endif
         q = &sMsChargeDescTextCount;
         *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
-        LoadObjPaletteBank(sMsChargeCategoryPalette->index, gUnk_09A3DE7C + card->category * 0x20);
+        LoadObjPaletteBank(sMsChargeCategoryPalette->index, gUnk_09A3DE7C + card->category * 0x10);
     } else {
         sMsChargeCardPalette = NULL;
         sMsChargeCardTiles = NULL;
@@ -350,7 +350,7 @@ void MsChargeDrawValueCounts() {
     card = GetMsChargeSelectedCard();
 
     if (GetMsChargeTabCount(sMsChargeTab) > 0) {
-        LoadPalette(gUnk_09A3DD7C + card->category * 0x20, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP), 0x0C);
+        LoadPalette(gUnk_09A3DD7C + card->category * 0x10, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP), 0x0C);
     }
 
     if (sMsChargeMenuState == 1) {

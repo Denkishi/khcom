@@ -346,7 +346,7 @@ void task_allmap_cursor_3(AllmapCursorWork* work) {
 
 s16 AllmapDrawRoomnameFrame(u16 a) {
     u8* base;
-    u8* p;
+    u16* p;
     s16 v;
     s16 q;
     u8* dst;
@@ -360,13 +360,13 @@ s16 AllmapDrawRoomnameFrame(u16 a) {
     q = v / 8;
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gUnk_0983B7B4 - q * 2;
+    p = gUnk_0983B7B4 - q;
     RequestDma3Copy(p, dst, 32);
     dst = base + 92;
-    p += 64;
+    p += 32;
     RequestDma3Copy(p, dst, 32);
     dst = base + 156;
-    p += 64;
+    p += 32;
     RequestDma3Copy(p, dst, 32);
     return v - v % 8 / 2;
 }
@@ -412,18 +412,18 @@ void task_allmap_roomname_3(AllmapRoomnameWork* work) {
 
 void AllmapClearRoomnameFrame() {
     u8* base;
-    u8* p;
+    u16* p;
     u8* dst;
 
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = (u8*)gUnk_08125E24;
+    p = gUnk_08125E24;
     RequestDma3Copy(p, dst, 32);
     dst = base + 92;
-    p += 64;
+    p += 32;
     RequestDma3Copy(p, dst, 32);
     dst = base + 156;
-    p += 64;
+    p += 32;
     RequestDma3Copy(p, dst, 32);
 }
 

@@ -191,7 +191,7 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
 }
 
 u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
-    u8* pal;
+    u16* pal;
 
     if (w->tiles3 != NULL) {
         w->gfx4 = AnimUpdate(&w->anim2);
@@ -611,7 +611,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
 }
 
 u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
-    u8* pal;
+    u16* pal;
 
     w->tiles4 = AllocObjTiles(0x120, NULL);
     pal = gUnk_09614418;

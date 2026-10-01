@@ -318,7 +318,7 @@ void MapInspectLoadSelectedCard() {
         sMapInspectCardBackTiles = LoadObjTiles(gMapCardBackDefs[k].tiles, gMapCardBackDefs[k].tilesSize);
         sMapInspectCardBackSprite = *gMapCardBackDefs[k].sprites;
         sMapInspectCardPremium = p->category == 3;
-        sMapInspectCategoryPalette = LoadObjPalette(gUnk_09A3D2FC + p->category * 32, 32);
+        sMapInspectCategoryPalette = LoadObjPalette(gUnk_09A3D2FC + p->category * 16, 32);
         q = &sMapInspectNameTextCount;
         *q = LoadTextSlots(GetRoomName(p->cardType), sMapInspectNameText);
 
@@ -382,7 +382,7 @@ void MapInspectDrawValueCounts() {
     p = GetMapInspectSelectedEntry();
 
     if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-        LoadPalette(gUnk_09A3D23C + p->category * 32, (void*)PLTT, 12);
+        LoadPalette(gUnk_09A3D23C + p->category * 16, (void*)PLTT, 12);
     }
 
     if (sMapInspectMenuState == 1) {

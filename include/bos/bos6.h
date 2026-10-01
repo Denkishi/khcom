@@ -232,7 +232,7 @@ typedef struct PcWork {
     PcOam oam[24];
 } PcWork;
 
-extern u8 gBosPcBgPalette[];
+extern u16 gBosPcBgPalette[];
 
 u16 BosPcGetSpritePriority(PcWork* work, s32 a);
 u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b);
@@ -501,7 +501,7 @@ void BosPcStartPaletteCycle(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
 
-extern u8 gUnk_08F69BC4[];
+extern u16 gUnk_08F69BC4[];
 extern u8 gUnk_09C53724[];
 extern u8 gUnk_09C58590[];
 

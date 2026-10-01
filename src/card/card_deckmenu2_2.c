@@ -239,8 +239,8 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
     LoadBgMap(1, gUnk_09516AB8, 0x800);
 #else
     RequestDma3Copy(gUnk_0940FC58, base + 0x1A0, 0x1E0);
-    LoadBgMap(0, gUnk_09516AB8 + 0x800, 0x800);
-    LoadBgMap(1, gUnk_0951B2B8 + 0x800, 0x800);
+    LoadBgMap(0, gUnk_09516AB8 + 0x400, 0x800);
+    LoadBgMap(1, gUnk_0951B2B8 + 0x400, 0x800);
 #endif
     DrawRikuDeckCategoryCount(w->deckAttackCount, 0);
     DrawRikuDeckCategoryCount(w->deckMagicCount, 1);
@@ -944,7 +944,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
 
         DrawRikuCpCost(def->cpCost);
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614118[def->category * 32 + 0x200], dst, 32);
+        LoadPalette(&gUnk_09614118[def->category * 16 + 0x100], dst, 32);
         LoadRikuCardNameText(w, t);
         LoadRikuCardDescriptionText(w, t);
         w->previewShown = 1;

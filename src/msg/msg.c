@@ -196,7 +196,7 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
         k++;
     }
 
-    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(&gUnk_096147B8[0x40], 32);
+    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(&gUnk_096147B8[0x20], 32);
     sTextEntryCount++;
 }
 #endif

@@ -14,7 +14,7 @@ extern u16 gVsBattleMinY;
 extern u16 gVsBattleMaxY;
 extern u16 gVsBattleHalfWidth;
 extern u8 gUnk_02039B98;
-extern u8 gUnk_08F69BC4[];
+extern u16 gUnk_08F69BC4[];
 
 void VsBattleUpdate();
 void VsBtlWorkInit();

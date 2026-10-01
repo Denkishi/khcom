@@ -26,7 +26,7 @@ DebugTextLine* gDebugTextLines;
 u8 gDebugTextLineCount;
 u8 gUnk_02034A21;
 s32 gUnk_02034A24;
-s32 gUnk_02034A28;
+s32 gDebugTextMergeFirstGlyph;
 void* gUnk_02034A2C;
 
 void task_lockon_0(LockonWork* w) {
@@ -299,7 +299,7 @@ u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
     return 0;
 }
 
-void func_0805F728(s32* x, s32* y) {
+void LockonGetDoorScreenPos(s32* x, s32* y) {
     if (gLockonDoorPosition != NULL) {
         *x = (gLockonDoorPosition[0] >> 8) - (gFieldState->x >> 8);
         *y = (gLockonDoorPosition[1] >> 8) + (gLockonDoorPosition[2] >> 8) - (gFieldState->y >> 8) - 24;
@@ -462,11 +462,11 @@ void DebugTextInit(u8 bg, u16 b, u16 c) {
     EnableBg(bg);
 }
 
-void func_0805FB78(s32 a) {
-    gUnk_02034A28 = a;
+void DebugTextSetMergeFirstGlyph(s32 a) {
+    gDebugTextMergeFirstGlyph = a;
 }
 
-void func_0805FB84(u8 x, u8 y, u32 c, u8 v) {
+void DebugTextPrintTimes(u8 x, u8 y, u32 c, u8 v) {
     u8 buf[8];
 
     buf[3] = v / 10;
@@ -696,7 +696,7 @@ void DebugTextPrint(u8 x, u8 y, u32 c, const char* s) {
     gDebugTextLineCount++;
 }
 
-void func_08060470(u8 bg) {
+void DebugTextDrawAligned(u8 bg) {
     u8 n;
     u8 i;
     u8 k;
@@ -786,7 +786,7 @@ void DebugTextDraw(u8 bg) {
                     } else {
                         ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0] = *(u32*)(font + (sourceRow & 7) * 4 + (gDebugTextLines[n].glyphs[i] & 0x3FF) * 32);
                     }
-                } else if (i != 0 || gUnk_02034A28 == 1) {
+                } else if (i != 0 || gDebugTextMergeFirstGlyph == 1) {
                     v = ((CharTile*)(destination + (row & 7) * 4 + (row >> 3) * 0x400))->rows[0];
 
                     if (gDebugTextLines[n].font != 2) {

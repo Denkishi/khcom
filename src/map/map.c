@@ -804,7 +804,7 @@ s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 n) {
     return 1;
 }
 
-s32 func_080E6968(s16 a, s16 b, u8 c) {
+s32 MapCellHeightExceeds(s16 a, s16 b, u8 c) {
     u16 d;
     MapCell* p = MapCellAt(a, b);
     d = (p->lowerZ - p->upperZ) >> 8;
@@ -822,7 +822,7 @@ void MapReserveArea(s16 x, s16 y, u8 w, u8 h) {
     }
 }
 
-s16 func_080E6A14(s16 x, s16 y) {
+s16 MapRowsToWallBase(s16 x, s16 y) {
     u16 n = gMapRoomState->rows - y;
     s32 i;
 
@@ -841,7 +841,7 @@ s16 func_080E6A14(s16 x, s16 y) {
     return 0;
 }
 
-s32 func_080E6A80(s16 x, s16 y, u16 n) {
+s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 n) {
     s32 i;
     u16 h;
     s32 j;
@@ -922,7 +922,7 @@ u8 func_080E6C2C(FldPos* p) {
                         s32 x1 = (s16)(rx + 1);
 
                         if (MapCellIsFreeOfType(x1, sy, 4) != 0 && MapCellIsFreeOfType(x1, y1, 0) != 0 &&
-                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)MapCellHeightExceeds(rx, sy, 3) != 0) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
@@ -963,7 +963,7 @@ u8 func_080E6DB0(FldPos* p) {
                     if (MapCellIsFreeOfType(x, cy + 1, 0) != 0) {
                         if (MapCellIsFreeOfType(x, cy + 2, 0) != 0) {
                             if (MapCellIsFreeOfType(x, cy + 3, 0) != 0) {
-                                if ((u8)func_080E6968(x, cy, 3) != 0) {
+                                if ((u8)MapCellHeightExceeds(x, cy, 3) != 0) {
                                     MapReserveArea(x, cy, 1, 4);
                                     FldPosPlaceAtCell(p, x, cy, 1, 4);
                                     return 1;
@@ -1012,7 +1012,7 @@ u8 func_080E6F04(FldPos* p) {
                         s32 x1 = (s16)(rx + 1);
 
                         if (MapCellIsFreeOfType(x1, sy, 9) != 0 && MapCellIsFreeOfType(x1, y1, 6) != 0 &&
-                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)MapCellHeightExceeds(rx, sy, 3) != 0) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
@@ -1052,12 +1052,12 @@ u8 func_080E7088(FldPos* p) {
                 u16 a;
                 u16 b;
 
-                if ((u8)func_080E6A80(rx, sy, 3) == 0) {
+                if ((u8)MapWallFaceIsUnreserved(rx, sy, 3) == 0) {
                     continue;
                 }
 
-                a = func_080E6A14(rx, sy + 2);
-                b = func_080E6A14(rx + 2, sy);
+                a = MapRowsToWallBase(rx, sy + 2);
+                b = MapRowsToWallBase(rx + 2, sy);
 
                 if (a == b && a > 8) {
                     MapReserveArea(rx, sy, 3, 3);
@@ -1098,12 +1098,12 @@ u8 func_080E71F0(FldPos* p) {
                 u16 a;
                 u16 b;
 
-                if ((u8)func_080E6A80(rx, sy, 3) == 0) {
+                if ((u8)MapWallFaceIsUnreserved(rx, sy, 3) == 0) {
                     continue;
                 }
 
-                a = func_080E6A14(rx, sy);
-                b = func_080E6A14(rx + 2, sy + 2);
+                a = MapRowsToWallBase(rx, sy);
+                b = MapRowsToWallBase(rx + 2, sy + 2);
 
                 if (a == b && a > 8) {
                     MapReserveArea(rx, sy, 3, 3);
@@ -1144,8 +1144,8 @@ u8 func_080E7358(FldPos* p) {
                 if (MapCellIsFreeOfType(rx, sy + 1, 3) != 0) {
                     if (MapCellIsFreeOfType(rx + 1, sy, 3) != 0 &&
                         MapCellIsFreeOfType(rx + 1, sy + 1, 8) != 0) {
-                        u16 a = func_080E6A14(rx, sy + 1);
-                        u16 b = func_080E6A14(rx + 1, sy);
+                        u16 a = MapRowsToWallBase(rx, sy + 1);
+                        u16 b = MapRowsToWallBase(rx + 1, sy);
 
                         if (a == b && a > 8) {
                             MapReserveArea(rx, sy, 2, 2);
@@ -1188,7 +1188,7 @@ u8 func_080E74D8(FldPos* p) {
             if ((u8)MapGmkIsAreaSparse(x, cy) != 0) {
                 if (MapCellIsFreeOfType(x, cy, 1) != 0) {
                     if (MapCellIsFreeOfType(x, cy + 1, 7) != 0) {
-                        h = func_080E6A14(x, cy);
+                        h = MapRowsToWallBase(x, cy);
 
                         if (h > 8) {
                             MapReserveArea(x, cy, 1, 2);
@@ -1234,8 +1234,8 @@ u8 func_080E7620(FldPos* p) {
                 if (MapCellIsFreeOfType(rx, y1, 9) != 0) {
                     if (MapCellIsFreeOfType(rx + 1, sy, 0) != 0 &&
                         MapCellIsFreeOfType(rx + 1, y1, 5) != 0) {
-                        u16 a = func_080E6A14(rx, sy);
-                        u16 b = func_080E6A14(rx + 1, y1);
+                        u16 a = MapRowsToWallBase(rx, sy);
+                        u16 b = MapRowsToWallBase(rx + 1, y1);
 
                         if (a == b && a > 8) {
                             MapReserveArea(rx, sy, 2, 2);
@@ -1284,7 +1284,7 @@ u8 func_080E77A4(FldPos* p) {
                         s32 x1 = (s16)(rx + 1);
 
                         if (MapCellIsFreeOfType(x1, sy, 2) != 0 && MapCellIsFreeOfType(x1, y1, 0) != 0 &&
-                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)func_080E6968(rx, sy, 3) != 0) {
+                            MapCellIsFreeOfType(x1, y2, 0) != 0 && (u8)MapCellHeightExceeds(rx, sy, 3) != 0) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(p, rx, sy, 2, 3);
                             return 1;
@@ -1383,7 +1383,7 @@ u8 MapGmkFindFloor5x5(FldPos* p) {
     return 0;
 }
 
-u8 func_080E7C40(FldPos* p) {
+u8 MapGmkFindBaseFloor2x2(FldPos* p) {
     MapPlatform* e = GetMapPlatform(0);
     u16 w = e->right - e->left - 2;
     u16 h = gMapRoomState->bottomRow - gMapRoomState->topRow - 2;
@@ -1853,7 +1853,7 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
     MapCell* q;
     s32 v;
 
-    while (p->unk_04 != 0xFF) {
+    while (p->bg3Piece != 0xFF) {
         // @bug MapCellAt returns NULL past the room edge (NULL read).
         q = MapCellAt(x + p->dx, y + p->dy);
 
@@ -1861,11 +1861,11 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
             return 0;
         }
 
-        if (p->unk_04 != 7 && q->bg3Piece != p->unk_04) {
+        if (p->bg3Piece != 7 && q->bg3Piece != p->bg3Piece) {
             return 0;
         }
 
-        if (q->bg2Piece != p->unk_05) {
+        if (q->bg2Piece != p->bg2Piece) {
             return 0;
         }
 
@@ -1876,9 +1876,9 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p) {
         }
 
         v = q->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT);
-        v = v & ~p->unk_08;
+        v = v & ~p->edgeIgnoreMask;
 
-        if (v != p->unk_06) {
+        if (v != p->edgeFlags) {
             return 0;
         }
 
@@ -2453,7 +2453,7 @@ void CopyMapProgress(MapProgress* p) {
 
     p->world = gGameState.world;
     p->floor = gGameState.floor;
-    memcpy(p->unk_04, &gMapFloorState, 0x21C);
+    memcpy(p->floorState, &gMapFloorState, 0x21C);
     src = (u32*)gGameState.floors;
     dst = (u32*)p->floors;
 
@@ -2469,7 +2469,7 @@ void RestoreMapProgress(MapProgress* p) {
 
     gGameState.world = p->world;
     gGameState.floor = p->floor;
-    memcpy(&gMapFloorState, p->unk_04, 0x21C);
+    memcpy(&gMapFloorState, p->floorState, 0x21C);
     src = (u32*)p->floors;
     dst = (u32*)gGameState.floors;
 
@@ -3250,12 +3250,12 @@ void MapFixMain() {
         FadeStartOut(FADE_MODE_BLACK, 16);
 
         if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
-            MapFixSetUpdateAndRun(func_080EA5CC);
+            MapFixSetUpdateAndRun(MapFixLeaveEntranceHall);
             return;
         }
 
         if (gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
-            MapFixSetUpdateAndRun(func_080EA694);
+            MapFixSetUpdateAndRun(MapFixLeaveExitHall);
             return;
         }
 
@@ -3291,7 +3291,7 @@ void MapFixEnterMapFld() {
     }
 }
 
-void func_080EA5CC() {
+void MapFixLeaveEntranceHall() {
     DrawMapField();
 
     if (FadeIsActive() != 0) {
@@ -3327,7 +3327,7 @@ void func_080EA5CC() {
     }
 }
 
-void func_080EA694() {
+void MapFixLeaveExitHall() {
     u8 v;
     u16 t;
 
@@ -3385,7 +3385,7 @@ void MapFixWaitWalkOut() {
         FadeStartOut(FADE_MODE_ADD_WHITE, 60);
         FadeLock();
         gMapRoomState->flags |= ROOM_FLAG_ENTER_WORLD;
-        MapFixSetUpdateAndRun(func_080EA5CC);
+        MapFixSetUpdateAndRun(MapFixLeaveEntranceHall);
     } else {
         UpdateMapField();
         DrawMapField();
@@ -5007,32 +5007,32 @@ void Task_MapDoor_0(MapDoorWork* w, MapDoor* p) {
     switch (p->side) {
     case 0:
         w->sprite = gMapUiSpriteUs_098A94A0;
-        w->openSrc = q->unk_08;
-        w->closedSrc = q->unk_04;
+        w->openSrc = q->side0Open;
+        w->closedSrc = q->side0Closed;
         e->angle = 173;
         w->obj.fieldPosition.x = (p->cellX << 5) + 16;
         e->fieldPosition.y = (p->cellY << 4) + 10;
         break;
     case 1:
         w->sprite = gMapUiSpriteUs_098A94B4;
-        w->openSrc = q->unk_20;
-        w->closedSrc = q->unk_1C;
+        w->openSrc = q->side1Open;
+        w->closedSrc = q->side1Closed;
         e->angle = 45;
         w->obj.fieldPosition.x = (p->cellX << 5) + 16;
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 2:
         w->sprite = gMapUiSpriteUs_098A94C8;
-        w->openSrc = q->unk_18;
-        w->closedSrc = q->unk_14;
+        w->openSrc = q->side2Open;
+        w->closedSrc = q->side2Closed;
         e->angle = 211;
         w->obj.fieldPosition.x = (p->cellX << 5) + 16;
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 3:
         w->sprite = gMapUiSpriteUs_098A948C;
-        w->openSrc = q->unk_10;
-        w->closedSrc = q->unk_0C;
+        w->openSrc = q->side3Open;
+        w->closedSrc = q->side3Closed;
         e->angle = 83;
         w->obj.fieldPosition.x = (p->cellX << 5) + 16;
         e->fieldPosition.y = (p->cellY << 4) + 10;
@@ -6761,7 +6761,7 @@ u8 (*gMapGmkSpotFuncs[14])(FldPos*) = {
     func_080E6DB0,
     MapGmkFindFloor4x4,
     MapGmkFindFloor5x5,
-    func_080E7C40,
+    MapGmkFindBaseFloor2x2,
 };
 
 u8 (*gMapAnmCmds[2])(MapAnmSlot*) = {

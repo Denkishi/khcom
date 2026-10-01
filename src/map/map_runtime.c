@@ -1096,7 +1096,7 @@ u8 IsAtTargetDoor(FldPos* p) {
     return 0;
 }
 
-u8 _080DFE1C(FldPos* p) {
+u8 GetFldPosClimbDir(FldPos* p) {
     MapCell* q = FieldCellAt(p->x, p->y + p->ground);
 
     if (q->flags & MAP_CELL_FLAG_STAIRS) {

@@ -31,7 +31,7 @@ typedef struct MapProgress {
     u8 world;
     u8 floor;
     u8 unk_02[0x02];
-    u8 unk_04[0x21C];
+    u8 floorState[0x21C];
     GameFloor floors[13];
 } MapProgress;
 
@@ -103,10 +103,10 @@ typedef struct MapGmkPlacement {
 typedef struct MapCellPattern {
     s16 dx;
     s16 dy;
-    u8 unk_04;
-    u8 unk_05;
-    u16 unk_06;
-    u16 unk_08;
+    u8 bg3Piece;
+    u8 bg2Piece;
+    u16 edgeFlags;
+    u16 edgeIgnoreMask;
     u8 unk_0A[0x02];
 } MapCellPattern;
 
@@ -877,14 +877,14 @@ typedef struct MapFixWork {
 
 typedef struct MapDoorGfx {
     void* palette;
-    void* unk_04;
-    void* unk_08;
-    void* unk_0C;
-    void* unk_10;
-    void* unk_14;
-    void* unk_18;
-    void* unk_1C;
-    void* unk_20;
+    void* side0Closed;
+    void* side0Open;
+    void* side3Closed;
+    void* side3Open;
+    void* side2Closed;
+    void* side2Open;
+    void* side1Closed;
+    void* side1Open;
 } MapDoorGfx;
 
 typedef struct MapDoorWork {
@@ -1056,7 +1056,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z);
 MapCell* MapGetCell(s16 x, s16 y);
 void MapComputeRowBounds();
 void MapCellSetBg3Piece(MapCell* p, s32 n);
-void sub_080E0B00(MapCell* p, s32 n);
+void MapCellSetBg2CornerPiece(MapCell* p, s32 n);
 void MapPlaceDoorOnPlatform(MapPlatform* p, s32 a);
 void MapBuildBgColumn(u16* a, u16* b, u16* c, s16 d, s16 e);
 void MapBuildBgRow(u16* a, u16* b, u16* c, s16 d, s16 e);
@@ -1113,9 +1113,9 @@ u8 FldPosHeightExceeds(FldPos* p, u16 a);
 u8 GetRandomPieceVariant(u8 a);
 void MapCellSetBg2Piece(MapCell* p, u8 n, u8 v);
 void MapCellSetFloorBg3Piece(MapCell* p);
-void func_080E0A70(MapCell* p, s32 n);
+void MapCellSetBg2EdgePiece(MapCell* p, s32 n);
 void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v);
-void func_080E0BF4(s16 x, s16 y, s32 a, s32 b);
+void MapSetCornerCellPieces(s16 x, s16 y, s32 a, s32 b);
 s16 MapOutlineNextRowRightToLeft(u8 a, u8 b, s16 c);
 u8 MapCellHasType(s16 x, s16 y, u8 n);
 s16 MapOutlineNextRowLeftToRight(u8 a, u8 b, s16 c);
@@ -1141,7 +1141,7 @@ void MapSetPlatform(u8 i, u16 a, u16 b, s16 c);
 void MapTracePlatformLeftToRight(u8 i, s16 a, s16 b, s16 c, u8 e);
 void MapTracePlatformOutward(u8 i, s16 a, s16 b, s16 c, s16 d, u8 e);
 void MapTracePlatformRightToLeft(u8 i, s16 a, s16 b, s16 c, u8 e);
-void func_080E3EFC();
+void MapGenerateLayout1();
 void MapDrawBgColumn(void* p, s16 a, s16 b);
 void MapDrawBgRow(void* p, s16 a, s16 b);
 MapPlatform* GetMapPlatform(u8 a);
@@ -1165,12 +1165,12 @@ void MapEnmUpdateSpawner();
 MapCell* MapCellAtPos(s32 x, s32 y);
 u8 MapCellIsFreeOfType(s16 x, s16 y, u8 n);
 s32 MapAreaIsFreeOfType(s16 x, s16 y, u8 w, u8 h, u8 n);
-s32 func_080E6968(s16 a, s16 b, u8 c);
-s32 func_080E6A80(s16 x, s16 y, u16 n);
+s32 MapCellHeightExceeds(s16 a, s16 b, u8 c);
+s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 n);
 void MapEnmDestroy(MapEnmWork* p);
 s32 MapGmkIsAreaSparse(s16 x, s16 y);
 void MapReserveArea(s16 x, s16 y, u8 w, u8 h);
-s16 func_080E6A14(s16 x, s16 y);
+s16 MapRowsToWallBase(s16 x, s16 y);
 void MapAnmSetupSlot(MapAnmSlot* p, const MapGmkDef* q);
 void MapAnmStepScript(MapAnmSlot* p);
 void MapAnmFlushSlot(MapAnmSlot* p);
@@ -1236,8 +1236,8 @@ u8 GetWorldEntryEventId();
 u8 GetFloorEventId();
 void MapFixMain();
 void MapFixEnterMapFld();
-void func_080EA5CC();
-void func_080EA694();
+void MapFixLeaveEntranceHall();
+void MapFixLeaveExitHall();
 void MapFixWaitMenu();
 void MapFixWaitWalkOut();
 void MapFixWaitRoomCreate();

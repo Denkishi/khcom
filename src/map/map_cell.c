@@ -594,7 +594,7 @@ void MapCellSetFloorBg3Piece(MapCell* p) {
     }
 }
 
-void func_080E0A70(MapCell* p, s32 n) {
+void MapCellSetBg2EdgePiece(MapCell* p, s32 n) {
     u16* base;
     const u8* t;
     u8 r;
@@ -628,7 +628,7 @@ void func_080E0A70(MapCell* p, s32 n) {
     p->bg2Map = base + off;
 }
 
-void sub_080E0B00(MapCell* p, s32 n) {
+void MapCellSetBg2CornerPiece(MapCell* p, s32 n) {
     const u8* t;
     u16* base;
     u16 off;
@@ -686,11 +686,11 @@ void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v) {
     }
 }
 
-void func_080E0BF4(s16 x, s16 y, s32 a, s32 b) {
+void MapSetCornerCellPieces(s16 x, s16 y, s32 a, s32 b) {
     MapCell* p = MapGetCell(x, y);
 
     MapCellSetBg3Piece(p, a);
-    sub_080E0B00(p, b);
+    MapCellSetBg2CornerPiece(p, b);
 }
 
 void MapBuildStairs(u16 x, u16 y) {
@@ -1010,7 +1010,7 @@ void MapFillOutlineCells() {
     }
 }
 
-void func_080E13B0() {
+void MapMarkFloorVariants() {
     u16 y = gMapBottomRow;
     u16 n = y - gMapTopRow + 1;
     s32 j;
@@ -1184,15 +1184,15 @@ void MapAssignCellPieces() {
                 break;
             case 7:
                 MapCellSetBg3Piece(e, 3);
-                func_080E0A70(e, 4);
+                MapCellSetBg2EdgePiece(e, 4);
                 break;
             case 8:
                 MapCellSetBg3Piece(e, 4);
-                func_080E0A70(e, 5);
+                MapCellSetBg2EdgePiece(e, 5);
                 break;
             case 9:
                 MapCellSetBg3Piece(e, 5);
-                func_080E0A70(e, 6);
+                MapCellSetBg2EdgePiece(e, 6);
                 break;
             case 2:
                 v = GetRandomPieceVariant(10);
@@ -1225,12 +1225,12 @@ void MapAssignCellPieces() {
             case 3:
                 if (e->flags & MAP_CELL_FLAG_CORNER) {
                     MapCellSetFloorBg3Piece(e);
-                    sub_080E0B00(e, 23);
+                    MapCellSetBg2CornerPiece(e, 23);
 
                     if (FldPosHeightExceeds((FldPos*)e, 2)) {
-                        func_080E0BF4(i, j + 1, 4, 24);
+                        MapSetCornerCellPieces(i, j + 1, 4, 24);
                     } else {
-                        func_080E0BF4(i, j + 1, 4, 25);
+                        MapSetCornerCellPieces(i, j + 1, 4, 25);
 
                         if ((MapGetCell(i, j + 2)->flags & MAP_CELL_FLAG_CORNER) == 0) {
                             MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
@@ -1258,12 +1258,12 @@ void MapAssignCellPieces() {
             case 5:
                 if (e->flags & MAP_CELL_FLAG_CORNER) {
                     MapCellSetFloorBg3Piece(e);
-                    sub_080E0B00(e, 29);
+                    MapCellSetBg2CornerPiece(e, 29);
 
                     if (FldPosHeightExceeds((FldPos*)e, 2)) {
-                        func_080E0BF4(i, j + 1, 5, 30);
+                        MapSetCornerCellPieces(i, j + 1, 5, 30);
                     } else {
-                        func_080E0BF4(i, j + 1, 5, 31);
+                        MapSetCornerCellPieces(i, j + 1, 5, 31);
 
                         if ((MapGetCell(i, j + 2)->flags & MAP_CELL_FLAG_CORNER) == 0) {
                             MapCellSetFloorBg3Piece(MapGetCell(i, j + 2));
@@ -1291,14 +1291,14 @@ void MapAssignCellPieces() {
             case 4:
                 if (e->flags & MAP_CELL_FLAG_CORNER) {
                     MapCellSetFloorBg3Piece(e);
-                    sub_080E0B00(e, 26);
+                    MapCellSetBg2CornerPiece(e, 26);
 
                     if (FldPosHeightExceeds((FldPos*)e, 2)) {
-                        func_080E0BF4(i, j - 1, 4, 27);
+                        MapSetCornerCellPieces(i, j - 1, 4, 27);
                     } else if ((MapGetCell(i, j - 2)->flags & MAP_CELL_FLAG_CORNER) == 0) {
-                        func_080E0BF4(i, j - 1, 4, 28);
+                        MapSetCornerCellPieces(i, j - 1, 4, 28);
                     } else {
-                        func_080E0BF4(i, j - 1, 4, 35);
+                        MapSetCornerCellPieces(i, j - 1, 4, 35);
                     }
                 } else {
                     v = GetRandomPieceVariant(15);
@@ -1315,14 +1315,14 @@ void MapAssignCellPieces() {
             case 6:
                 if (e->flags & MAP_CELL_FLAG_CORNER) {
                     MapCellSetFloorBg3Piece(e);
-                    sub_080E0B00(e, 32);
+                    MapCellSetBg2CornerPiece(e, 32);
 
                     if (FldPosHeightExceeds((FldPos*)e, 2)) {
-                        func_080E0BF4(i, j - 1, 5, 33);
+                        MapSetCornerCellPieces(i, j - 1, 5, 33);
                     } else if ((MapGetCell(i, j - 2)->flags & MAP_CELL_FLAG_CORNER) == 0) {
-                        func_080E0BF4(i, j - 1, 5, 34);
+                        MapSetCornerCellPieces(i, j - 1, 5, 34);
                     } else {
-                        func_080E0BF4(i, j - 1, 5, 36);
+                        MapSetCornerCellPieces(i, j - 1, 5, 36);
                     }
                 } else {
                     v = GetRandomPieceVariant(20);
@@ -2556,7 +2556,7 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
     return 0;
 }
 
-void func_080E3EFC() {
+void MapGenerateLayout1() {
     s16 a;
     s16 b;
     s16 c;
@@ -2575,7 +2575,7 @@ void func_080E3EFC() {
     MapTracePlatformRightToLeft(1, 0, a + 1, v + b, 0);
 }
 
-void func_080E3FD4() {
+void MapGenerateLayout2() {
     s16 a;
     s16 b;
     s16 c;
@@ -2612,7 +2612,7 @@ void func_080E3FD4() {
     }
 }
 
-void func_080E4244() {
+void MapGenerateLayout4() {
     s16 a;
     s16 b;
     s16 c;
@@ -2648,7 +2648,7 @@ void func_080E4244() {
     }
 }
 
-void func_080E44A8() {
+void MapGenerateLayout5() {
     s16 a;
     s16 b;
     s16 c;
@@ -2684,7 +2684,7 @@ void func_080E44A8() {
     }
 }
 
-void func_080E470C() {
+void MapGenerateLayout6() {
     s16 a;
     s16 b;
     s16 c;
@@ -2739,21 +2739,21 @@ void MapGenerateLayout() {
         MapTracePlatformLeftToRight(0, 0, gMapCols, gMapRows / 4, 0);
         break;
     case 1:
-        func_080E3EFC();
+        MapGenerateLayout1();
         break;
     case 2:
-        func_080E3FD4();
+        MapGenerateLayout2();
         break;
     case 4:
-        func_080E4244();
+        MapGenerateLayout4();
         MapAddLowerPlatforms(3, 4);
         break;
     case 5:
-        func_080E44A8();
+        MapGenerateLayout5();
         MapAddLowerPlatforms(3, 4);
         break;
     case 6:
-        func_080E470C();
+        MapGenerateLayout6();
         break;
     case 7:
         MapSetPlatform(0, 0, gMapCols, 0);
@@ -2762,7 +2762,7 @@ void MapGenerateLayout() {
         break;
     case 3:
     default:
-        func_080E3FD4();
+        MapGenerateLayout2();
         MapAddLowerPlatforms(3, 12);
         break;
     }
@@ -2813,7 +2813,7 @@ void MapGenerateRoom(u16 a, u16 b) {
         MapComputeCellHeights();
         MapComputeRowBounds();
         MapMarkCellEdges();
-        func_080E13B0();
+        MapMarkFloorVariants();
         MapAssignCellPieces();
         MapAssignBg1Pieces();
         MapPlacePlatformStairs();

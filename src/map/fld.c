@@ -198,7 +198,7 @@ u8 FldSoraCheckClimb(FldPos* p, FldWork* work) {
     a.y -= 1536;
     b.y += 1536;
 
-    r = _080DFE1C(&a);
+    r = GetFldPosClimbDir(&a);
 
     if (r != 0) {
         work->targetX = a.x;
@@ -206,7 +206,7 @@ u8 FldSoraCheckClimb(FldPos* p, FldWork* work) {
         return r;
     }
 
-    r = _080DFE1C(&b);
+    r = GetFldPosClimbDir(&b);
 
     if (r != 0) {
         work->targetX = b.x;
@@ -1907,7 +1907,7 @@ u8 FldRikuCheckClimb(FldPos* p, FldWork* work) {
     a.y -= 0x600;
     b.y += 0x600;
 
-    hit = _080DFE1C(&a);
+    hit = GetFldPosClimbDir(&a);
 
     if (hit != 0) {
         work->targetX = a.x;
@@ -1915,7 +1915,7 @@ u8 FldRikuCheckClimb(FldPos* p, FldWork* work) {
         return hit;
     }
 
-    hit = _080DFE1C(&b);
+    hit = GetFldPosClimbDir(&b);
 
     if (hit != 0) {
         work->targetX = b.x;

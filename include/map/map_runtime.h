@@ -68,7 +68,7 @@ void EndMapWalkOut();
 u8 FldPosRevertIfBlocked(FldPos* p, s32 x, s32 y);
 u8 MapFindOpenDoor(FldPos* p);
 u8 IsAtTargetDoor(FldPos* p);
-u8 _080DFE1C(FldPos* p);
+u8 GetFldPosClimbDir(FldPos* p);
 s32 func_080DFE7C(s32 x, s32 y, s32 z);
 
 #ifdef VERSION_EU

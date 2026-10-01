@@ -860,7 +860,7 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
     return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? 1 : 0;
 }
 
-void func_080F74E8(MapStairWork* w) {
+void MapStairWaitStepOn(MapStairWork* w) {
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800) != 0) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
@@ -872,7 +872,7 @@ void func_080F74E8(MapStairWork* w) {
     }
 }
 
-void func_080F753C(MapStairWork* w) {
+void MapStairWaitStepOn2(MapStairWork* w) {
     s32 k = 0x800;
 
     if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k) != 0) {
@@ -900,7 +900,7 @@ void MapStairWaitMessage(MapStairWork* w) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
         gGameState.progression.tutorialFlags |= 0x400;
-        w->update = func_080F74E8;
+        w->update = MapStairWaitStepOn;
     }
 }
 
@@ -922,12 +922,12 @@ void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
         if ((gGameState.progression.tutorialFlags & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             w->update = MapStairWaitApproach;
         } else {
-            w->update = func_080F74E8;
+            w->update = MapStairWaitStepOn;
         }
 
         break;
     case 0xAD:
-        w->update = func_080F753C;
+        w->update = MapStairWaitStepOn2;
         break;
     }
 

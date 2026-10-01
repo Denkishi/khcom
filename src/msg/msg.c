@@ -2120,7 +2120,7 @@ u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
     }
 #endif
 
-    return LoadTextSlots((u16*)buf, out);
+    return LoadTextSlots(buf, out);
 }
 
 void InitTextSlots(TextSlot* p, s32 n) {

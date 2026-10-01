@@ -56,7 +56,7 @@ void CardName_0(CardNameWork* w) {
     w->textSlotCount3 = LoadTextSlots((u16*)gUnkJp_09009748, w->textSlots3);
     w->textSlotCount2 = LoadTextSlots((u16*)gUnkJp_0900974C, w->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots((u16*)gUnk_090362A4, w->textSlots2);
+    w->textSlotCount2 = LoadTextSlots(gUnk_090362A4, w->textSlots2);
 #endif
 #endif
 #ifndef VERSION_JP

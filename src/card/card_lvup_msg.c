@@ -33,7 +33,7 @@ void Lvup_msg_0(LvupMsgWork* w, StatIncreaseDisplayArgs* a) {
     InitTextSlots(w->textSlots3, 20);
 #ifndef VERSION_JP
     InitTextSlots(w->textSlots4, 20);
-    w->textSlotCount4 = LoadTextSlots((u16*)sLvupMsgPeriod, w->textSlots4);
+    w->textSlotCount4 = LoadTextSlots(sLvupMsgPeriod, w->textSlots4);
 #endif
     w->amount = a->amount;
     w->active = a->done;

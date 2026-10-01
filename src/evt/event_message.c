@@ -2758,7 +2758,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
                 if (u->compression[0] == 2 || u->compression[0] == 3) {
                     LoadBgMapLz77(2, (void*)*u->maps);
                 } else {
-                    LoadBgMap(2, (void*)*u->maps, 0x1000);
+                    LoadBgMap(2, *u->maps, 0x1000);
                 }
 
                 SetBgAffine(2, 0, 256, 256, 0, 0);
@@ -2951,7 +2951,7 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
             LoadBgPalette(2, u->palette, u->paletteSize);
             SetBgColorMode(2, BGCNT_256COLOR);
             SetBgSize(2, 0x8000);
-            LoadBgMap(2, (void*)*u->maps, 0x1000);
+            LoadBgMap(2, *u->maps, 0x1000);
             SetBgAffine(2, 0, 256, 256, 0, 0);
         } else {
             LoadBgTiles(3, u->tiles, u->tilesSize);

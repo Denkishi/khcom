@@ -12,6 +12,7 @@
 #include "display.h"
 #include "formation_data.h"
 #include "game_state.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "key.h"
 #include "m4a_song.h"
@@ -194,7 +195,6 @@ void eu_0800A0DC() {
 
 void mode_battle_0(u32 mode) {
     BtlWork** p;
-    vu32 zero;
 
     gBtlWork = EwramAlloc(sizeof(BtlWork));
     gRikuBtlWork = 0;
@@ -213,8 +213,7 @@ void mode_battle_0(u32 mode) {
         gBtlWork->flags |= BTL_FLAG_HUM_BATTLE;
         p = &gRikuBtlWork;
         *p = EwramAlloc(sizeof(BtlWork));
-        zero = 0;
-        CpuSet((void*)&zero, gRikuBtlWork, CPU_SET_32BIT | CPU_SET_SRC_FIXED | (sizeof(BtlWork) / 4));
+        CpuFill32(0, gRikuBtlWork, sizeof(BtlWork));
         break;
     }
 

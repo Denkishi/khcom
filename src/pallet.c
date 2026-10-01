@@ -9,6 +9,7 @@
 #include "display.h"
 #include "engine_math.h"
 #include "gba/defines.h"
+#include "gba/macro.h"
 
 static const s32 sBrightenSteps[32] = {
        0,    8,   16,   24,   33,   41,   49,   57,   66,   74,   82,   90,
@@ -190,7 +191,7 @@ u16* BrightenPalette(u16* src, u16* dst, u16 size, u16 amount) {
 u16* LoadPaletteBuffered(void* src, u16* dst, u16 size) {
     s32 base = ((s32)dst - PLTT) >> 1;
 
-    CpuSet(src, &gPaletteBuffer->colors[base], size >> 1);
+    CpuCopy16(src, &gPaletteBuffer->colors[base], size);
 
     if (base == 0) {
         RequestDma3Copy(&gPaletteBuffer->colors[1], dst + 1, size - 2);
@@ -240,12 +241,9 @@ void PopPaletteEffect() {
 }
 
 void PalletInit() {
-    s32 zero;
-
     SetIwramHeapName(sPalletHeapName);
     gPaletteBuffer = IwramAlloc(0x440);
-    zero = 0;
-    CpuSet(&zero, gPaletteBuffer, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x110);
+    CpuFill32(0, gPaletteBuffer, 0x440);
     PalletClear();
 }
 

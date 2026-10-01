@@ -7,6 +7,7 @@
 #include <stddef.h>
 #include "gba/oam.h"
 #include "engine.h"
+#include "gba/macro.h"
 #include "obj.h"
 #include "types.h"
 
@@ -15,12 +16,9 @@ static const u8 sSpriteHeapName[8] = "SPRITE";
 SpriteWork* gSpriteWork;
 
 void SpriteInit() {
-    u32 zero;
-
     SetIwramHeapName(sSpriteHeapName);
     gSpriteWork = IwramAlloc(sizeof(SpriteWork));
-    zero = 0;
-    CpuSet(&zero, gSpriteWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(SpriteWork) / 4));
+    CpuFill32(0, gSpriteWork, sizeof(SpriteWork));
 }
 
 void SpriteFree() {

@@ -28,6 +28,7 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 s32 UpdateSoraReloadDeal(CardBattleWork* w, Task* task);
@@ -192,11 +193,8 @@ u8 IsSoraSelectionEmpty() {
 }
 
 void CreateCardBattleState() {
-    u32 zero;
-
     gCardBattleState = EwramAlloc(sizeof(CardBattleState));
-    zero = 0;
-    CpuSet(&zero, gCardBattleState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleState) / 4);
+    CpuFill32(0, gCardBattleState, sizeof(CardBattleState));
     gCardBattleState->activeCards[0] = 0;
     gCardBattleState->activeCards[1] = 0;
     gCardBattleState->activeCards[2] = 0;
@@ -514,10 +512,9 @@ void CreateSoraCardRing(CardBattleWork* w, u8 slot) {
 }
 
 static void cardbattle_0(CardBattleWork* w) {
-    u32 zero = 0;
     u8 i;
 
-    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
+    CpuFill32(0, w, sizeof(CardBattleWork));
     // @bug gCardBattleState is only allocated further down (NULL write).
     gCardBattleState->soraWork = w;
     gBtlWork->hcEffect = 0;
@@ -1559,14 +1556,12 @@ void func_080782EC() {
 
 void LoadActiveDeckCardSlots(CardSlot* slots, s32 deckIndex) {
     u16* buf;
-    vu16 zero;
     u16 n;
     u16 i;
 
     n = CountActiveDeckCards(deckIndex);
     buf = EwramAlloc(n * 2);
-    zero = 0;
-    CpuSet((void*)&zero, buf, n | 0x1000000);
+    CpuFill16(0, buf, n * 2);
     CopyActiveDeckCards(deckIndex, buf);
 
     for (i = 0; i < n; i++) {
@@ -1639,13 +1634,11 @@ void InitSoraTutorialCardList(CardBattleWork* w, s32 mode) {
     switch (mode) {
     case 0: {
         CardSlot* slots;
-        vu32 zero;
         u16 i;
 
         slots = EwramAlloc((n + 15) * sizeof(CardSlot));
         w->slots[0] = slots;
-        zero = 0;
-        CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+        CpuFill32(0, slots, (n + 15) * sizeof(CardSlot));
 
         for (i = 0; i < n + 1; i++) {
             w->slots[0][i].unk_06 = 0;
@@ -1669,12 +1662,10 @@ void InitSoraTutorialCardList(CardBattleWork* w, s32 mode) {
         CardSlot* slot;
         u16* q;
         s32 k;
-        vu32 zero;
 
         slot = EwramAlloc(sizeof(CardSlot));
         w->slots[3] = slot;
-        zero = 0;
-        CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+        CpuFill32(0, slot, sizeof(CardSlot));
         w->slots[3]->cardId = 0x30FF;
         q = &w->cursors[3];
         k = 0xFFFF;
@@ -1691,13 +1682,11 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
     case 0:
         if (n != 0) {
             CardSlot* slots;
-            vu32 zero;
             u8 i;
 
             slots = EwramAlloc((n + 15) * sizeof(CardSlot));
             w->slots[0] = slots;
-            zero = 0;
-            CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+            CpuFill32(0, slots, (n + 15) * sizeof(CardSlot));
 
             for (i = 0; i < n + 1; i++) {
                 w->slots[0][i].unk_06 = 0;
@@ -1719,14 +1708,12 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
             w->cursors[0] = 0;
         } else {
             CardSlot* slot;
-            vu32 zero;
             u16* q;
             s32 k;
 
             slot = EwramAlloc(sizeof(CardSlot));
             w->slots[0] = slot;
-            zero = 0;
-            CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+            CpuFill32(0, slot, sizeof(CardSlot));
             w->slots[0]->cardId = 0xFF;
             q = &w->cursors[0];
             k = 0xFFFF;
@@ -1754,14 +1741,12 @@ void InitSoraCardList(CardBattleWork* w, s32 mode) {
             w->cursors[3] = 0;
         } else {
             CardSlot* slot;
-            vu32 zero;
             u16* q;
             s32 k;
 
             slot = EwramAlloc(sizeof(CardSlot));
             w->slots[3] = slot;
-            zero = 0;
-            CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+            CpuFill32(0, slot, sizeof(CardSlot));
             w->slots[3]->cardId = 0x30FF;
             q = &w->cursors[3];
             k = 0xFFFF;
@@ -4012,11 +3997,9 @@ void TickSoraHcEffectOnCardUse() {
 }
 
 void SoraCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
-    vu32 zero;
     u16 v;
 
-    zero = 0;
-    CpuSet((void*)&zero, p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardDisplayWork) / 4);
+    CpuFill32(0, p, sizeof(CardDisplayWork));
     p->tiles = 0;
     p->tiles2 = 0;
     p->tiles3 = 0;
@@ -5160,11 +5143,7 @@ u8 func_0807D810(CardDisplayWork* p) {
 }
 
 void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
-    vu32 zero;
-    vu32 zero2;
-
-    zero = 0;
-    CpuSet((void*)&zero, p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardDisplayWork) / 4);
+    CpuFill32(0, p, sizeof(CardDisplayWork));
     p->tiles = 0;
     p->tiles2 = 0;
     p->tiles3 = 0;
@@ -5174,8 +5153,7 @@ void card_reload_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->palette = 0;
     p->children = 0;
     p->reloadGauge = EwramAlloc(sizeof(ReloadGauge));
-    zero2 = 0;
-    CpuSet((void*)&zero2, p->reloadGauge, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(ReloadGauge) / 4);
+    CpuFill32(0, p->reloadGauge, sizeof(ReloadGauge));
     p->args = *a;
     p->reloadGauge->chargeTick = 0;
     p->flags = (CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE);

@@ -26,6 +26,7 @@
 #include "common_text.h"
 #include "card_message_data.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static SysMsgWinWork* sActiveSysmsgwin;
@@ -44,9 +45,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a);
 static const s32 sSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 
 void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
-    vu32 zero = 0;
-
-    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
+    CpuFill32(0, w, sizeof(SysMsgWinWork));
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
 
@@ -474,9 +473,7 @@ s32 CloseSysmsgwin() {
 }
 
 void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
-    vu32 zero = 0;
-
-    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SysMsgWinWork) / 4);
+    CpuFill32(0, w, sizeof(SysMsgWinWork));
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];
     w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);

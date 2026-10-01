@@ -25,6 +25,7 @@
 #include "card_types.h"
 #include "engine_math.h"
 #include "game_state.h"
+#include "gba/macro.h"
 #include "key.h"
 #include "m4a_song.h"
 #include "map_types.h"
@@ -403,16 +404,9 @@ void MoogleShopCopyTilemapRect(u16 w, s16 h, u16* src, s16 sx, s16 sy, u16* dst,
 }
 
 void DrawMoogleShopPacks(s16 a) {
-    vu32* dma;
-    vu16 zero;
     s32 j;
 
-    zero = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)&zero;
-    dma[1] = (u32)sMoogleShopTilemap;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x280;
-    dma[2];
+    DmaFill16(3, 0, sMoogleShopTilemap, 0x500);
 
     for (j = 0; j < 4; j++) {
         if (sMoogleShopPacks[a][j][0] >= 0) {

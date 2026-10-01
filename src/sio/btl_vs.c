@@ -8,6 +8,7 @@
 #include "battle_work.h"
 #include "card_api.h"
 #include "card_battle.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "mode.h"
 #include "mode_vsbattle.h"
@@ -93,13 +94,8 @@ s32 ReadVsKeyChord(u16 a, u16 b, s32 i) {
 }
 
 void VsBtlWorkInit() {
-    s32 a;
-    s32 b;
-
-    a = 0;
-    CpuSet(&a, gBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
-    b = 0;
-    CpuSet(&b, gRikuBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
+    CpuFill32(0, gBtlWork, sizeof(BtlWork));
+    CpuFill32(0, gRikuBtlWork, sizeof(BtlWork));
     gBtlWork->phase = 0;
     gBtlWork->fadeExcludedPalettes = -0x10000;
     gBtlWork->gravity = 66;

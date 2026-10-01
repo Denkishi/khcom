@@ -1,4 +1,5 @@
 #include <string.h>
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "movie.h"
 #include "types.h"
@@ -325,7 +326,7 @@ s32 MovieDrawFrame(MoviePlayer* a, void* dst) {
     MovieDecodeFrame(p);
 
     if (p->framePresent != 0) {
-        CpuFastSet(p->frameBuf, dst, (p->width * p->height / 2) & 0x1FFFFF);
+        CpuFastCopy(p->frameBuf, dst, p->width * p->height * 2);
     }
 
     return p->framePresent;
@@ -345,7 +346,7 @@ u32 MovieDrawFrameRect(MoviePlayer* a, u32 x, u32 y, u32 w, u32 rows, void* dst,
         s = (u8*)p->frameBuf + x * 2 + (p->width << 1) * y;
 
         for (i = 0; i < rows; i++) {
-            CpuFastSet(s, d, ((w << 1) >> 2) & 0x1FFFFF);
+            CpuFastCopy(s, d, w << 1);
             d = d + dstStride;
             s = s + (p->width << 1);
         }
@@ -364,7 +365,7 @@ u32 MovieCopyFrameRect(MoviePlayer* a, u32 x, u32 y, u32 w, u32 rows, void* dst,
     s = (u8*)p->frameBuf + x * 2 + (p->width << 1) * y;
 
     for (i = 0; i < rows; i++) {
-        CpuFastSet(s, d, ((w << 1) >> 2) & 0x1FFFFF);
+        CpuFastCopy(s, d, w << 1);
         d = d + dstStride;
         s = s + (p->width << 1);
     }
@@ -416,27 +417,27 @@ void MovieDecodeAudioBlock(MoviePlayer* a, void* dstA1, s32 lenA1, void* dstA2, 
     if (p->channels == 1) {
         q = (u8*)p->decodeBuf + 4;
         p->decodeAudio(q, p->audioBuf, n);
-        CpuFastSet(p->audioBuf, dstA1, (lenA1 / 4) & 0x1FFFFF);
+        CpuFastCopy(p->audioBuf, dstA1, lenA1);
 
         if (lenA2 != 0) {
-            CpuFastSet((u8*)p->audioBuf + lenA1, dstA2, (lenA2 / 4) & 0x1FFFFF);
+            CpuFastCopy((u8*)p->audioBuf + lenA1, dstA2, lenA2);
         }
     } else {
         n >>= 1;
         q = (u8*)p->decodeBuf + 4;
         p->decodeAudio(q, p->audioBuf, n);
         q = (u8*)q + ((*(p->audioBlockSizes + p->audioBlockIndex) - 4) >> 1);
-        CpuFastSet(p->audioBuf, dstA1, (lenA1 / 4) & 0x1FFFFF);
+        CpuFastCopy(p->audioBuf, dstA1, lenA1);
 
         if (lenA2 != 0) {
-            CpuFastSet((u8*)p->audioBuf + lenA1, dstA2, (lenA2 / 4) & 0x1FFFFF);
+            CpuFastCopy((u8*)p->audioBuf + lenA1, dstA2, lenA2);
         }
 
         p->decodeAudio(q, p->audioBuf, n);
-        CpuFastSet(p->audioBuf, dstB1, (lenB1 / 4) & 0x1FFFFF);
+        CpuFastCopy(p->audioBuf, dstB1, lenB1);
 
         if (lenB2 != 0) {
-            CpuFastSet((u8*)p->audioBuf + lenB1, dstB2, (lenB2 / 4) & 0x1FFFFF);
+            CpuFastCopy((u8*)p->audioBuf + lenB1, dstB2, lenB2);
         }
     }
 }

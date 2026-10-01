@@ -16,6 +16,7 @@
 #include "map_animation_types.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 Deck gDecks[3] EWRAM_COMMON(16);
@@ -1045,12 +1046,10 @@ u16 ListCardKindsNotInDeck(u8 deck, u8 mode, u16* out) {
     u16 mask;
     u16* present;
     u16 i;
-    u32 zero;
 
     mask = total = count = 0;
     present = EwramAlloc(0x23C);
-    zero = 0;
-    CpuSet(&zero, present, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x8F);
+    CpuFill32(0, present, 0x23C);
 
     if (mode == 1) {
         switch (deck) {

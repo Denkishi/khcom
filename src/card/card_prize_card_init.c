@@ -37,6 +37,7 @@
 #include "map_types.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
@@ -1467,11 +1468,9 @@ void SpotLight_3() {
 }
 
 void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
-    s32 zero;
     s32 i;
 
-    zero = 0;
-    CpuSet(&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(SelmapEventKeyWork) / 4);
+    CpuFill32(0, work, sizeof(SelmapEventKeyWork));
     work->args = a;
     work->unk_F8 = a->unk_04;
     work->keyCount = CountRemainingEventKeys();
@@ -1668,7 +1667,6 @@ void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
 }
 
 void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
-    s32 zero;
     MapCardDef* c;
     MapCardBackDef* b;
     MapCardBackDef* d;
@@ -1678,8 +1676,7 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     u8 t;
     u8* q;
 
-    zero = 0;
-    CpuSet(&zero, work, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(EventKeyCard) / 4);
+    CpuFill32(0, work, sizeof(EventKeyCard));
 
     if (key->kind != 255) {
         c = &gMapCardDefs[key->kind * 10];

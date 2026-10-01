@@ -5,6 +5,7 @@
 #include "gba/keys.h"
 #include "sram_error_screen.h"
 #include "gba/defines.h"
+#include "gba/macro.h"
 #include "malloc.h"
 #include "save_types.h"
 #include "system_state.h"
@@ -18,21 +19,11 @@ void WaitSramErrorInput();
 void ReadKeysRaw();
 
 void ZeroFill(void* dst, s16 size) {
-    u16 zero;
-    u16* p;
-    vu32* dma;
-
     if (size & 1) {
         ((u8*)dst)[size - 1] = 0;
     }
 
-    p = &zero;
-    *p = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)p;
-    dma[1] = (u32)dst;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | (size / 2);
-    dma[2];
+    DmaFill16(3, 0, dst, size);
 }
 
 void CopyBytes(const u8* src, u8* dst, s16 len) {
@@ -683,7 +674,6 @@ void ShowSramErrorScreen() {
     vu16* dispstat;
     vu16* dispcnt;
     vu16* p;
-    vu32* dma;
 
     ime = (vu16*)REG_ADDR_IME;
     *ime = 0;
@@ -705,23 +695,10 @@ void ShowSramErrorScreen() {
     dispcnt = (vu16*)REG_ADDR_DISPCNT;
     *dispcnt = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     VBlankIntrWait();
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)gSramErrorTiles;
-    dma[1] = 0x06008000;
-    dma[2] = (DMA_ENABLE << 16) | 0x2000;
-    dma[2];
-    dma[0] = (u32)gSramErrorPalette;
-    dma[1] = PLTT;
-    dma[2] = (DMA_ENABLE << 16) | 0x100;
-    dma[2];
-    dma[0] = (u32)gSramErrorTilemap;
-    dma[1] = (u32)gSramErrorTilemapBuf;
-    dma[2] = (DMA_ENABLE << 16) | 0x280;
-    dma[2];
-    dma[0] = (u32)gSramErrorTilemapBuf;
-    dma[1] = VRAM;
-    dma[2] = (DMA_ENABLE << 16) | 0x400;
-    dma[2];
+    DmaCopy16(3, gSramErrorTiles, 0x06008000, 0x4000);
+    DmaCopy16(3, gSramErrorPalette, PLTT, 0x200);
+    DmaCopy16(3, gSramErrorTilemap, gSramErrorTilemapBuf, 0x500);
+    DmaCopy16(3, gSramErrorTilemapBuf, VRAM, 0x800);
     WaitSramErrorInput();
     *ime = 0;
     *ie &= ~INTR_FLAG_VBLANK;
@@ -733,7 +710,6 @@ void ShowSramErrorScreen() {
 void WaitSramErrorInput() {
     vu16* bldy;
     vu16* bldy2;
-    vu32* dma;
     s32 i;
     u32 j;
     s32 prev;
@@ -754,8 +730,6 @@ void WaitSramErrorInput() {
     } while (j <= 16);
 
     if (i <= 19) {
-        dma = (vu32*)REG_ADDR_DMA3;
-
         do {
             ReadKeysRaw();
 
@@ -770,10 +744,7 @@ void WaitSramErrorInput() {
 
             i++;
             VBlankIntrWait();
-            dma[0] = (u32)gSramErrorTilemapBuf;
-            dma[1] = VRAM;
-            dma[2] = ((DMA_ENABLE | DMA_32BIT) << 16) | 0x200;
-            dma[2];
+            DmaCopy32(3, gSramErrorTilemapBuf, VRAM, 0x800);
         } while (i <= 19);
     }
 

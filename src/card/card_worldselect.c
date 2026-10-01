@@ -48,6 +48,7 @@
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 TaskPool gModeWorldselectTasks;
@@ -127,12 +128,10 @@ void WORLDSELECT_2() {
 void CreateMapSelectCards(MapSelectWork* w);
 
 void MapSelect_0(MapSelectWork* w, u8* a) {
-    u32 zero;
     s32 n;
 
     ResetMessageWindowFlags();
-    zero = 0;
-    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(MapSelectWork) / 4);
+    CpuFill32(0, w, sizeof(MapSelectWork));
     w->status = a;
     *a = 0;
     w->messageTimer = 0;

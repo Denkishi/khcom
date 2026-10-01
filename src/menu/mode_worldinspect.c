@@ -32,6 +32,7 @@
 #include "obj.h"
 #include "poo_api.h"
 #include "text_types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static s16 sWorldInspectCursor;
@@ -728,7 +729,6 @@ void mode_worldinspect_0() {
     void** p;
     u32 floorKeep;
     s16 fa;
-    vu32* dma;
 
     p = &sWorldInspectTilemap;
     *p = EwramAlloc(0x500);
@@ -830,11 +830,7 @@ void mode_worldinspect_0() {
 #endif
 
     LoadBgMap(0, gUnk_09A324DC, 0x500);
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)gUnk_09A32EDC;
-    dma[1] = (u32)sWorldInspectTilemap;
-    dma[2] = (DMA_ENABLE << 16) | 0x280;
-    dma[2];
+    DmaCopy16(3, gUnk_09A32EDC, sWorldInspectTilemap, 0x500);
 
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {

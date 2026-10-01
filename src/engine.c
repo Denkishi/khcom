@@ -15,6 +15,7 @@
 #include "system_state.h"
 #include "gba/defines.h"
 #include "gba/io_reg.h"
+#include "gba/macro.h"
 #include "gba/oam.h"
 #include "obj.h"
 #include <stddef.h>
@@ -1601,12 +1602,9 @@ void CommitDisplayRegs() {
 }
 
 void VTransInit() {
-    u32 zero;
-
     SetIwramHeapName(sVTransHeapName);
     gDma3Requests = IwramAlloc(sizeof(Dma3Queue));
-    zero = 0;
-    CpuSet(&zero, gDma3Requests, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(Dma3Queue) / 4));
+    CpuFill32(0, gDma3Requests, sizeof(Dma3Queue));
 }
 
 void VTransFree() {
@@ -1629,7 +1627,6 @@ void VTransReset() {
 
 u8 RequestDma3Copy(void* src, void* dst, u16 size) {
     Dma3Queue* q;
-    vu32* dma;
 
     if (size == 0) {
         return 0;
@@ -1647,11 +1644,7 @@ u8 RequestDma3Copy(void* src, void* dst, u16 size) {
         q->requests[q->requestCount].size = size;
         q->requestCount = q->requestCount + 1;
     } else {
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (u32)src;
-        dma[1] = (u32)dst;
-        dma[2] = (DMA_ENABLE << 16) | (size / 2);
-        dma[2];
+        DmaCopy16(3, src, dst, size);
     }
 
     return 1;
@@ -1767,7 +1760,6 @@ void FlushDma3Queue() {
     s32 mask;
     s32 row;
     s32 col;
-    vu16 zero;
 #ifdef VERSION_EU
     Dma3Request* compressed;
 #endif
@@ -1792,11 +1784,7 @@ void FlushDma3Queue() {
     n = gDma3Requests->requestCount;
 
     for (i = 0; i < n; i++) {
-        vu32* dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (u32)req[i].src;
-        dma[1] = (u32)req[i].dst;
-        dma[2] = (req[i].size / 2) | (DMA_ENABLE << 16);
-        dma[2];
+        DmaCopy16(3, req[i].src, req[i].dst, req[i].size);
         gDma3Requests->transferredBytes += req[i].size;
     }
 
@@ -1850,13 +1838,7 @@ void FlushDma3Queue() {
     n = gDma3Requests->count;
 
     for (i = 0; i < n; i++) {
-        vu32* dma;
-        zero = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (u32)&zero;
-        dma[1] = (u32)pend[i].dst;
-        dma[2] = (pend[i].size >> 1) | ((DMA_ENABLE | DMA_SRC_FIXED) << 16);
-        dma[2];
+        DmaFill16(3, 0, pend[i].dst, pend[i].size);
         gDma3Requests->transferredBytes += pend[i].size;
     }
 
@@ -1876,13 +1858,10 @@ void FlushDma3QueueWithCpu() {
     void (**p)();
     u16 n;
     s32 i;
-    Dma3Pending* current;
     s32 mask;
     s32 row;
     s32 col;
     s32 sourceIndex;
-    vu16 zero;
-    vu16* zeroPtr;
 #ifdef VERSION_EU
     Dma3Request* compressed;
     Dma3Request* currentCompressed;
@@ -1916,7 +1895,7 @@ void FlushDma3QueueWithCpu() {
         i = n;
 
         do {
-            CpuSet(req->src, req->dst, req->size >> 1);
+            CpuCopy16(req->src, req->dst, req->size);
             gDma3Requests->transferredBytes += req->size;
             req++;
         } while (--i);
@@ -1980,17 +1959,9 @@ void FlushDma3QueueWithCpu() {
     gDma3Requests->blitCount = 0;
     n = gDma3Requests->count;
 
-    if (n != 0) {
-        current = pend;
-        zeroPtr = &zero;
-        i = n;
-
-        do {
-            *zeroPtr = 0;
-            CpuSet((void*)&zero, current->dst, (current->size >> 1) | CPU_SET_SRC_FIXED);
-            gDma3Requests->transferredBytes += current->size;
-            current++;
-        } while (--i);
+    for (i = 0; i < n; i++) {
+        CpuFill16(0, pend[i].dst, pend[i].size);
+        gDma3Requests->transferredBytes += pend[i].size;
     }
 
     gDma3Requests->count = 0;
@@ -1998,13 +1969,11 @@ void FlushDma3QueueWithCpu() {
 
 void BgInit() {
     BgWork** p;
-    u32 zero;
 
     SetIwramHeapName(sBgHeapName);
     p = &gBgWork;
     *p = IwramAlloc(sizeof(BgWork));
-    zero = 0;
-    CpuSet(&zero, *p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
+    CpuFill32(0, *p, sizeof(BgWork));
 }
 
 void BgFree() {
@@ -2062,9 +2031,7 @@ void CopyBgMapRect(u16 x, u16 y, BgEntry* e, void* dst, u8 sx, u8 sy, u8 w, u8 h
 
 void BgReset() {
 #ifdef VERSION_EU
-    u32 zero;
-    zero = 0;
-    CpuSet(&zero, gBgWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(BgWork) / 4));
+    CpuFill32(0, gBgWork, sizeof(BgWork));
 #endif
     gBackdropColor = 0;
     DisableBg(0);
@@ -2859,12 +2826,9 @@ void AnimReset(AnimState* a) {
 }
 
 void FadeInit() {
-    u32 zero;
-
     SetIwramHeapName(sFadeHeapName);
     gFadeWork = IwramAlloc(sizeof(FadeWork));
-    zero = 0;
-    CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
+    CpuFill32(0, gFadeWork, sizeof(FadeWork));
 }
 
 void FadeFree() {
@@ -2872,9 +2836,7 @@ void FadeFree() {
 }
 
 void FadeReset() {
-    u32 zero = 0;
-
-    CpuSet(&zero, gFadeWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | (sizeof(FadeWork) / 4));
+    CpuFill32(0, gFadeWork, sizeof(FadeWork));
 }
 
 void LoadPalette(void* src, void* dst, u16 size) {

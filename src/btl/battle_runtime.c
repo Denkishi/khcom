@@ -39,6 +39,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
@@ -141,10 +142,9 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
 }
 
 void BtlWorkInit() {
-    s32 zero = 0;
     u8* d;
     u8* p;
-    CpuSet(&zero, gBtlWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(BtlWork) / 4);
+    CpuFill32(0, gBtlWork, sizeof(BtlWork));
     gBtlWork->phase = 0;
     gBtlWork->fadeExcludedPalettes = 0xFFFF0000;
     gBtlWork->gravity = 0x42;
@@ -2668,8 +2668,7 @@ u8 StepHitFlashSolid(BtlObj* p) {
 }
 
 void InitGameState() {
-    s32 zero = 0;
-    CpuSet(&zero, &gGameState, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(GameState) / 4);
+    CpuFill32(0, &gGameState, sizeof(GameState));
 
     if (gDebugFlags & DEBUG_FLAG_RIKU) {
         gGameState.flags |= GAME_FLAG_RIKU;

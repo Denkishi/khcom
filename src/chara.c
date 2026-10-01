@@ -30,6 +30,7 @@
 #include "player_progression_types.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 u32 gDebugLogC[100] EWRAM_COMMON(16);
@@ -190,13 +191,13 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
         work->timer = 0;
 
         for (i = 0; i < work->tileCount; i++) {
-            CpuFastSet(work->tiles + i * 32, work->tileBuffer, 8);
+            CpuFastCopy(work->tiles + i * 32, work->tileBuffer, 32);
 
             for (j = 0; j <= 31; j++) {
                 work->maskedTile[j] = work->tileBuffer[j] & sMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
             }
 
-            CpuFastSet(work->maskedTile, work->tiles + i * 32, 8);
+            CpuFastCopy(work->maskedTile, work->tiles + i * 32, 32);
         }
 
         work->step++;
@@ -1146,7 +1147,7 @@ u8 CharaObjUpdateDefeat2() {
 
         break;
     case 2:
-        CpuSet((void*)PLTT, gCharaObj->savedPalette, 0x200);
+        CpuCopy16((void*)PLTT, gCharaObj->savedPalette, 0x400);
         BgFxStartCharaDefeat(gCharaObj->x, gCharaObj->y + gCharaObj->z - 0x1000);
         m4aSongNumStart(SONG_EF_BOSS_DEAD1);
         gCharaObj->state++;
@@ -1163,7 +1164,7 @@ u8 CharaObjUpdateDefeat2() {
         break;
     case 4:
         gCharaObj->fadeLevel = 0;
-        CpuSet((void*)PLTT, gCharaObj->fadedPalette, 0x200);
+        CpuCopy16((void*)PLTT, gCharaObj->fadedPalette, 0x400);
         gCharaObj->state++;
         break;
     case 5:
@@ -1397,7 +1398,7 @@ u8 CharaObjUpdateDefeat() {
         gCharaObj->state++;
         break;
     case 3:
-        CpuSet((void*)PLTT, gCharaObj->savedPalette, 0x200);
+        CpuCopy16((void*)PLTT, gCharaObj->savedPalette, 0x400);
         gCharaObj->state++;
         break;
     case 4:

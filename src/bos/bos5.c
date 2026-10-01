@@ -45,6 +45,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static const EmyKind sBosGaEmyKind =
@@ -4829,21 +4830,10 @@ s16 WorldselectSetSlotGfx(s16 model, s16 slot) {
 }
 
 void WorldselectDrawName(s16 model, s16 n) {
-    vu32* dma;
-    u16 zero;
     u8* src;
     u8* src2;
-    u8* dst;
-    u32 ctrl;
-    u16* zp;
 
-    zp = &zero;
-    zero = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (vu32)zp;
-    dma[1] = (vu32)gWorldselectNameBuffer;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x360;
-    dma[2];
+    DmaFill16(3, 0, gWorldselectNameBuffer, 0x6C0);
 
     if (n > 0) {
 #ifdef VERSION_EU
@@ -4852,36 +4842,13 @@ void WorldselectDrawName(s16 model, s16 n) {
 #else
         src = sWorldselectWorldDefs[model].nameTiles;
 #endif
-        dma[0] = (vu32)src;
-        dst = (u8*)gWorldselectNameBuffer + (9 - n) * 32;
-        dma[1] = (vu32)dst;
-        ctrl = (n << 4) | (DMA_ENABLE << 16);
-        dma[2] = ctrl;
-        dma[2];
+        DmaCopy16(3, src, (u8*)gWorldselectNameBuffer + (9 - n) * 32, n * 32);
         src2 = src + (18 - n) * 32;
-        dma[0] = (vu32)src2;
-        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 288);
-        dma[2] = ctrl;
-        dma[2];
-        dma[0] = (vu32)(src + 576);
-        dma[1] = (vu32)(dst + 576);
-        dma[2] = ctrl;
-        dma[2];
-        dma[0] = (vu32)(src2 + 576);
-        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 864);
-        dma[2] = ctrl;
-        dma[2];
-        src += 1152;
-        dma[0] = (vu32)src;
-        dst += 1152;
-        dma[1] = (vu32)dst;
-        dma[2] = ctrl;
-        dma[2];
-        src2 += 1152;
-        dma[0] = (vu32)src2;
-        dma[1] = (vu32)((u8*)gWorldselectNameBuffer + 1440);
-        dma[2] = ctrl;
-        dma[2];
+        DmaCopy16(3, src2, (u8*)gWorldselectNameBuffer + 288, n * 32);
+        DmaCopy16(3, src + 576, (u8*)gWorldselectNameBuffer + (9 - n) * 32 + 576, n * 32);
+        DmaCopy16(3, src2 + 576, (u8*)gWorldselectNameBuffer + 864, n * 32);
+        DmaCopy16(3, src + 1152, (u8*)gWorldselectNameBuffer + (9 - n) * 32 + 1152, n * 32);
+        DmaCopy16(3, src2 + 1152, (u8*)gWorldselectNameBuffer + 1440, n * 32);
     }
 
     RequestDma3Copy(gWorldselectNameBuffer, (u8*)GetBgCharBase(0) + 1024, 0x6C0);

@@ -32,6 +32,7 @@
 #include "obj_api.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 #ifdef VERSION_EU
@@ -496,25 +497,13 @@ void MapInspectSelectNextValue(MapCardInventoryEntry* p) {
 }
 
 void MapInspectRemoveEntry(MapCardInventoryEntry* p) {
-    vu32* dma;
-    vu16 zero;
-    MapCardInventoryEntry* q;
     u16 row;
     s16 j;
 
     row = p->category;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)(p + 1);
-    dma[1] = (u32)p;
-    dma[2] = ((26 - GetMapInspectSelectedIndex()) * 14) | (DMA_ENABLE << 16);
-    dma[2];
-    zero = 0;
-    dma[0] = (u32)&zero;
-    q = &sMapCardInventoryEntries[26];
-    dma[1] = (u32)q;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0xE;
-    dma[2];
-    q->cardType = 27;
+    DmaCopy16(3, p + 1, p, (26 - GetMapInspectSelectedIndex()) * 28);
+    DmaFill16(3, 0, &sMapCardInventoryEntries[26], 0x1C);
+    sMapCardInventoryEntries[26].cardType = 27;
 
     for (j = row + 1; j <= 3; j++) {
         sMapInspectCategoryStart[j]--;
@@ -546,8 +535,6 @@ void MapInspectRemoveEntry(MapCardInventoryEntry* p) {
 
 void MapInspectBuildInventory() {
     s16* pd;
-    vu32* dma;
-    vu16 zero;
     s32 w;
     s16 k;
     s16 j;
@@ -557,12 +544,7 @@ void MapInspectBuildInventory() {
     u16 n;
     u16 t;
 
-    zero = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)&zero;
-    dma[1] = (u32)sMapCardInventoryEntries;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x17A;
-    dma[2];
+    DmaFill16(3, 0, sMapCardInventoryEntries, 0x2F4);
 
     for (i = 0; i <= 26; i++) {
         sMapCardInventoryEntries[i].cardType = 27;

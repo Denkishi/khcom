@@ -13,6 +13,7 @@
 #include "anim.h"
 #include "display.h"
 #include "game_state.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "intr.h"
 #include "m4a_catalog_data.h"
@@ -237,7 +238,7 @@ void mode_allmap_0(s32 a) {
 
 void func_080D3370() {
     FadeSetPaletteExcluded(10, 1);
-    CpuSet(gUnk_05000140, sUnk_02034E40, 16);
+    CpuCopy16(gUnk_05000140, sUnk_02034E40, 32);
     LoadPalette(sUnk_02034E40, gUnk_05000140, 32);
 }
 

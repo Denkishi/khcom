@@ -9,6 +9,7 @@
 #include "fade.h"
 #include <stddef.h>
 #include "display.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "intr.h"
 #include "key.h"
@@ -599,8 +600,6 @@ u8* SrollTextGetGlyphAddress(u16 c, u8* font, u8* base, u16 a, u16 b) {
 u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
     SrollBlit b;
     u32 pal[16];
-    u32 fill;
-    u32* q;
     u32 bg;
     u32 r;
     u16 c;
@@ -622,12 +621,9 @@ u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
     n = w->glyphHeight;
 
     if (n-- != 0) {
-        q = &fill;
-
         do {
             if (b.x == 0) {
-                *q = bg;
-                CpuFastSet(q, b.dst, CPU_SET_SRC_FIXED | 8);
+                CpuFastFill(bg, b.dst, 32);
             }
 
             switch (w->glyphBpp) {
@@ -754,15 +750,13 @@ void SrollTextSetColors(SrollWork* w, u16 a, u16 b, u16 c, u16 d) {
 }
 
 void SrollTextClearWindow(SrollWork* w, u8 flush) {
-    u16 fill[1];
     u16* p;
     u16 i;
 
     p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
 
     for (i = 0; i < w->windowHeight; i++) {
-        fill[0] = w->clearTile;
-        CpuSet(fill, p, w->windowWidth | CPU_SET_SRC_FIXED);
+        CpuFill16(w->clearTile, p, w->windowWidth * 2);
         p += w->mapWidth;
     }
 
@@ -772,119 +766,90 @@ void SrollTextClearWindow(SrollWork* w, u8 flush) {
 }
 
 void SrollTextDrawFrame(SrollWork* w) {
-    u16 a;
-    u16 b;
-    u16 c;
     u16* p;
-    u16* q;
     u16 i;
     u16 t;
 
     p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
     t = w->frameTileBase + 1;
-    q = &a;
-    a = t + 2;
-    CpuSet(q, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 2, p + 1, (u32)(w->windowWidth - 2) << 1);
     p[0] = t + 1;
     p[w->windowWidth - 1] = t + 3;
     p += w->mapWidth;
 
     for (i = 1; i < w->windowHeight - 1; i++) {
-        b = t;
-        CpuSet(&b, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuFill16(t, p + 1, (u32)(w->windowWidth - 2) << 1);
         p[0] = t + 4;
         p[w->windowWidth - 1] = t + 5;
         p += w->mapWidth;
     }
 
-    c = t + 7;
-    CpuSet(&c, p + 1, (((u32)(w->windowWidth - 2) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 7, p + 1, (u32)(w->windowWidth - 2) << 1);
     p[0] = t + 6;
     p[w->windowWidth - 1] = t + 8;
 }
 
 void SrollTextDrawFrameTailLeft(SrollWork* w) {
-    u16 a;
-    u16 b;
-    u16 c;
-    u16 d;
     u16* p;
-    u16* q;
     u16 i;
     u16 t;
 
     p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
     t = w->frameTileBase + 1;
-    q = &a;
-    a = t + 2;
-    CpuSet(q, p + 2, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 2, p + 2, (u32)(w->windowWidth - 3) << 1);
     p[1] = t + 1;
     p[w->windowWidth - 1] = t + 3;
     p += w->mapWidth;
 
     for (i = 1; i < w->windowHeight - 2; i++) {
-        b = t;
-        CpuSet(&b, p + 2, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuFill16(t, p + 2, (u32)(w->windowWidth - 3) << 1);
         p[1] = t + 4;
         p[w->windowWidth - 1] = t + 5;
         p += w->mapWidth;
     }
 
-    c = t;
-    CpuSet(&c, p + 2, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuFill16(t, p + 2, (u32)(w->windowWidth - 3) << 1);
     p[0] = t + 10;
     p[1] = t + 11;
     p[w->windowWidth - 1] = t + 5;
     p += w->mapWidth;
 
-    d = t + 7;
-    CpuSet(&d, p + 2, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 7, p + 2, (u32)(w->windowWidth - 3) << 1);
     p[1] = t + 6;
     p[w->windowWidth - 1] = t + 8;
 }
 
 void SrollTextDrawFrameTailRight(SrollWork* w) {
-    u16 a;
-    u16 b;
-    u16 c;
-    u16 d;
     u16* p;
-    u16* q;
     u16 i;
     u16 t;
 
     p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
     t = w->frameTileBase + 1;
-    q = &a;
-    a = t + 2;
-    CpuSet(q, p + 1, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 2, p + 1, (u32)(w->windowWidth - 3) << 1);
     p[0] = t + 1;
     p[w->windowWidth - 2] = t + 3;
     p += w->mapWidth;
 
     for (i = 1; i < w->windowHeight - 2; i++) {
-        b = t;
-        CpuSet(&b, p + 1, (((u32)(w->windowWidth - 3) << 11) >> 11) | CPU_SET_SRC_FIXED);
+        CpuFill16(t, p + 1, (u32)(w->windowWidth - 3) << 1);
         p[0] = t + 4;
         p[w->windowWidth - 2] = t + 5;
         p += w->mapWidth;
     }
 
-    c = t;
-    CpuSet(&c, p + 1, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuFill16(t, p + 1, (u32)(w->windowWidth - 3) << 1);
     p[0] = t + 4;
     p[w->windowWidth - 2] = (t | 0x400) + 11;
     p[w->windowWidth - 1] = (t | 0x400) + 10;
     p += w->mapWidth;
 
-    d = t + 7;
-    CpuSet(&d, p + 1, ((((u32)(w->windowWidth - 3) << 1) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+    CpuFill16(t + 7, p + 1, (u32)(w->windowWidth - 3) << 1);
     p[0] = t + 6;
     p[w->windowWidth - 2] = t + 8;
 }
 
 void SrollTextClearTextArea(SrollWork* w) {
-    u16 fill;
     u16* p;
     u16 i;
     u16 t;
@@ -893,8 +858,7 @@ void SrollTextClearTextArea(SrollWork* w) {
     t = w->frameTileBase + 1;
 
     for (i = 0; i < w->textHeight; i++) {
-        fill = t;
-        CpuSet(&fill, p, w->textWidth | CPU_SET_SRC_FIXED);
+        CpuFill16(t, p, w->textWidth * 2);
         p += w->mapWidth;
     }
 }
@@ -928,7 +892,6 @@ void SrollTextResetWindow(SrollWork* w, u8 flush) {
 }
 
 void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
-    u16 fill;
     u16* p;
     u16 i;
     u16 t;
@@ -955,8 +918,7 @@ void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
     i = 0;
 
     while (i < ch) {
-        fill = v;
-        CpuSet(&fill, p, (((u32)(cw * 2) >> 1) & 0x1FFFFF) | CPU_SET_SRC_FIXED);
+        CpuFill16(v, p, (u32)(cw << 1));
         p += w->mapWidth;
         i++;
     }
@@ -1193,12 +1155,8 @@ u16 SrollTextMapSingleByteChar(u8 c) {
 }
 
 void ScanlineDmaReset() {
-    vu16* dma;
 
-    dma = (vu16*)REG_ADDR_DMA0;
-    dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
-    dma[5] &= ~DMA_ENABLE;
-    dma[5];
+    DmaStop(0);
     sDmaStream.enabled = 0;
     sDmaStream.swapPending = 0;
     sDmaStream.update = 0;
@@ -1210,14 +1168,9 @@ void ScanlineDmaReset() {
 }
 
 void ScanlineDmaUpdate() {
-    vu16* dma;
-    vu32* dma32;
     u8* src;
 
-    dma = (vu16*)REG_ADDR_DMA0;
-    dma[5] &= ~(DMA_START_MASK | DMA_DREQ_ON | DMA_REPEAT);
-    dma[5] &= ~DMA_ENABLE;
-    dma[5];
+    DmaStop(0);
 
     if (sDmaStream.enabled != 0) {
         if (sDmaStream.swapPending != 0) {
@@ -1238,11 +1191,7 @@ void ScanlineDmaUpdate() {
 
         if (sDmaStream.src[sDmaStream.srcIdx] != NULL && sDmaStream.dst != NULL &&
             sDmaStream.cnt != 0) {
-            dma32 = (vu32*)REG_ADDR_DMA0;
-            dma32[0] = (u32)sDmaStream.dmaSrc;
-            dma32[1] = (u32)sDmaStream.dst;
-            dma32[2] = sDmaStream.cnt;
-            dma32[2];
+            DmaSet(0, sDmaStream.dmaSrc, sDmaStream.dst, sDmaStream.cnt);
         }
 
         if (sDmaStream.update != NULL) {

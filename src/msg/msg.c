@@ -11,6 +11,7 @@
 #include "text.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 #include "system_state.h"
 
@@ -6908,19 +6909,19 @@ s32 CopySjisGlyphsToVram(TextChar* a) {
             switch (t) {
         case 0:
             w = ((u16*)gUnk_09EEB204[w])[3];
-            CpuSet(&gUnk_090AB5B2[w * 32], dst, 0x40);
+            CpuCopy16(&gUnk_090AB5B2[w * 32], dst, 0x80);
             break;
         case 1:
             w = ((u16*)gUnk_09EEB608[w])[3];
-            CpuSet(&gUnk_090B3FBE[w * 32], dst, 0x40);
+            CpuCopy16(&gUnk_090B3FBE[w * 32], dst, 0x80);
             break;
         case 2:
             w = ((u16*)gUnk_09EEBA0C[w])[3];
-            CpuSet(&gUnk_090BC9CA[w * 32], dst, 0x40);
+            CpuCopy16(&gUnk_090BC9CA[w * 32], dst, 0x80);
             break;
         case 3:
             w = ((u16*)gUnk_09EEBE10[w])[3];
-            CpuSet(&gUnk_090C51A6[w * 32], dst, 0x40);
+            CpuCopy16(&gUnk_090C51A6[w * 32], dst, 0x80);
             break;
             }
 
@@ -7092,19 +7093,19 @@ s32 CopySjisGlyphsToVramAt(TextChar* a, u16 b) {
             switch (t) {
             case 0:
                 w = ((u16*)gUnk_09EEB204[w])[3];
-                CpuSet(&gUnk_090AB5B2[w * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090AB5B2[w * 32], dst, 0x80);
                 break;
             case 1:
                 w = ((u16*)gUnk_09EEB608[w])[3];
-                CpuSet(&gUnk_090B3FBE[w * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090B3FBE[w * 32], dst, 0x80);
                 break;
             case 2:
                 w = ((u16*)gUnk_09EEBA0C[w])[3];
-                CpuSet(&gUnk_090BC9CA[w * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090BC9CA[w * 32], dst, 0x80);
                 break;
             case 3:
                 w = ((u16*)gUnk_09EEBE10[w])[3];
-                CpuSet(&gUnk_090C51A6[w * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090C51A6[w * 32], dst, 0x80);
                 break;
             }
 
@@ -7201,10 +7202,10 @@ u8 CopyLatinGlyphsToVram(TextChar* a, u16* b, u16 tile) {
                 *b = sLatinGlyphWidths.widths[v];
 #ifdef VERSION_EU
                 v = ((u16*)gUnk_09EEB204[v])[3];
-                CpuSet(&gUnk_090AB5B2[v * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090AB5B2[v * 32], dst, 0x80);
 #else
                 v = ((u16*)gUnk_09EEC134[v])[3];
-                CpuSet(&gUnk_090CBFB2[v * 32], dst, 0x40);
+                CpuCopy16(&gUnk_090CBFB2[v * 32], dst, 0x80);
 #endif
                 dst += 128;
                 sTextEntryCount++;

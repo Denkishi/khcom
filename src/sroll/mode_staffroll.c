@@ -25,6 +25,7 @@
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static const s32 sStaffRollSoraScript0[46] = {
@@ -4204,7 +4205,6 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
 
 void mode_StaffRoll_1() {
     StaffRollWork* w;
-    u16 tmp;
 
     w = gStaffRollWork;
     w->unk_004 = 0;
@@ -4222,35 +4222,16 @@ void mode_StaffRoll_1() {
         BlockAudioStart();
     case 1:
     {
-        vu32* dma;
-
         if (StaffRollRunScenes(w) != 0) {
             break;
         }
 
         w->phase = 2;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4261,35 +4242,16 @@ void mode_StaffRoll_1() {
     }
     case 2:
     {
-        vu32* dma;
-
         if (StaffRollRunCredits(w) != 0) {
             break;
         }
 
         w->phase = 3;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4300,33 +4262,14 @@ void mode_StaffRoll_1() {
     }
     case 3:
     {
-        vu32* dma;
-
         if (StaffRollShowTitleBg(w) != 0) {
             break;
         }
 
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4346,70 +4289,32 @@ void mode_StaffRoll_1() {
     }
     case 4:
     {
-        vu32* dma;
-
         if (StaffRollShowCharacter(w) != 0) {
             break;
         }
 
         w->phase = 10;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         w->endState = 0;
         w->endTimer = 0;
         break;
     }
     case 5:
     {
-        vu32* dma;
-
         if (StaffRollShowSoraImage1(w) != 0) {
             break;
         }
 
         w->phase = 6;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4420,35 +4325,16 @@ void mode_StaffRoll_1() {
     }
     case 6:
     {
-        vu32* dma;
-
         if (StaffRollShowSoraImage2(w) != 0) {
             break;
         }
 
         w->phase = 4;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4459,35 +4345,16 @@ void mode_StaffRoll_1() {
     }
     case 7:
     {
-        vu32* dma;
-
         if (StaffRollShowRikuImage1(w) != 0) {
             break;
         }
 
         w->phase = 8;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4498,35 +4365,16 @@ void mode_StaffRoll_1() {
     }
     case 8:
     {
-        vu32* dma;
-
         if (StaffRollShowRikuImage2(w) != 0) {
             break;
         }
 
         w->phase = 9;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);
@@ -4537,35 +4385,16 @@ void mode_StaffRoll_1() {
     }
     case 9:
     {
-        vu32* dma;
-
         if (StaffRollShowRikuImage3(w) != 0) {
             break;
         }
 
         w->phase = 4;
         w->phaseTimer = 0;
-        tmp = 0;
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (vu32)&tmp;
-        dma[1] = VRAM;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06004000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x06008000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x20;
-        dma[2];
-        tmp = 0;
-        dma[0] = (vu32)&tmp;
-        dma[1] = 0x0600C000;
-        dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x2000;
-        dma[2];
+        DmaFill16(3, 0, VRAM, 0x40);
+        DmaFill16(3, 0, 0x06004000, 0x40);
+        DmaFill16(3, 0, 0x06008000, 0x40);
+        DmaFill16(3, 0, 0x0600C000, 0x4000);
         DisableBg(0);
         DisableBg(1);
         DisableBg(2);

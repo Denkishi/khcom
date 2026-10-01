@@ -8,6 +8,7 @@
 #include "battle_work.h"
 #include "display.h"
 #include "engine_math.h"
+#include "gba/macro.h"
 #include "taskpool.h"
 #include "types.h"
 
@@ -456,7 +457,6 @@ void BosLstFldSetScrollSpeed(Task* t, s32 a) {
 }
 
 void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
-    vu32* dma;
     s32 i;
 
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
@@ -475,15 +475,8 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
     gBtlWork->rotation = 0;
     BtlMapResetShake();
     BosLstFldResetShake();
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (vu32)sBosLstFldVofsTable;
-    dma[1] = (vu32)work->vofsTable;
-    dma[2] = (DMA_ENABLE << 16) | 0x340;
-    dma[2];
-    dma[0] = (vu32)sBosLstFldHofsTable;
-    dma[1] = (vu32)work->hofsTable;
-    dma[2] = (DMA_ENABLE << 16) | 0x4A0;
-    dma[2];
+    DmaCopy16(3, sBosLstFldVofsTable, work->vofsTable, 0x680);
+    DmaCopy16(3, sBosLstFldHofsTable, work->hofsTable, 0x940);
 
     for (i = 0; i < 0x1A0; i++) {
         work->vofsTable[i] = (gSineTable[(i + 64) & 255] >> 1) & 0x1FF;

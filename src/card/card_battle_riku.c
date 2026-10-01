@@ -26,6 +26,7 @@
 #include "card_label_data.h"
 #include "card_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
@@ -614,13 +615,11 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
     if (n != 0) {
         if (idx == 0) {
             CardSlot* slots;
-            vu32 zero;
             u8 i;
 
             slots = EwramAlloc((n + 15) * sizeof(CardSlot));
             w->slots[idx] = slots;
-            zero = 0;
-            CpuSet((void*)&zero, slots, (n + 15) * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+            CpuFill32(0, slots, (n + 15) * sizeof(CardSlot));
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
@@ -641,13 +640,11 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
             }
         } else {
             CardSlot* slots;
-            vu32 zero;
             u8 i;
 
             slots = EwramAlloc(n * sizeof(CardSlot));
             w->slots[idx] = slots;
-            zero = 0;
-            CpuSet((void*)&zero, slots, n * (sizeof(CardSlot) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+            CpuFill32(0, slots, n * sizeof(CardSlot));
 
             for (i = 0; i < n; i++) {
                 w->slots[idx][i].unk_06 = 0;
@@ -663,14 +660,12 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
         w->cursors[idx] = 0;
     } else {
         CardSlot* slot;
-        vu32 zero;
         u16* q;
         s32 k;
 
         slot = EwramAlloc(sizeof(CardSlot));
         w->slots[idx] = slot;
-        zero = 0;
-        CpuSet((void*)&zero, slot, sizeof(CardSlot) / 4 | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+        CpuFill32(0, slot, sizeof(CardSlot));
         w->slots[idx]->cardId = (idx << 12) | 0xFF;
         w->slots[idx]->restoreOnReload = 0;
         q = w->cursors;
@@ -681,11 +676,9 @@ void InitRikuCardList(CardBattleWork* w, s8 idx) {
 }
 
 static void cardbattle_0(CardBattleWork* w) {
-    s32 zero;
     u8 i;
 
-    zero = 0;
-    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardBattleWork) / 4);
+    CpuFill32(0, w, sizeof(CardBattleWork));
     gCardBattleState->rikuWork = w;
     w->tiles = AllocSpriteFrameTiles(0x80);
     w->palette = LoadObjPalette(gBStatesPalette, 32);
@@ -2788,11 +2781,9 @@ void ResetRikuReloadGauge(CardBattleWork* w) {
 }
 
 void RikuCardInit(CardDisplayWork* p, CardDisplayArgs* a) {
-    vu32 zero;
     u16 v;
 
-    zero = 0;
-    CpuSet((void*)&zero, p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardDisplayWork) / 4);
+    CpuFill32(0, p, sizeof(CardDisplayWork));
     p->tiles = 0;
     p->tiles2 = 0;
     p->tiles3 = 0;
@@ -3660,11 +3651,7 @@ u8 func_08082FF0(CardDisplayWork* p) {
 }
 
 void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
-    vu32 zero;
-    vu32 zero2;
-
-    zero = 0;
-    CpuSet((void*)&zero, p, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardDisplayWork) / 4);
+    CpuFill32(0, p, sizeof(CardDisplayWork));
     p->tiles = 0;
     p->tiles2 = 0;
     p->tiles3 = 0;
@@ -3674,8 +3661,7 @@ void Reload_Card_0(CardDisplayWork* p, CardDisplayArgs* a) {
     p->palette = 0;
     p->children = 0;
     p->reloadGauge = EwramAlloc(sizeof(ReloadGauge));
-    zero2 = 0;
-    CpuSet((void*)&zero2, p->reloadGauge, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(ReloadGauge) / 4);
+    CpuFill32(0, p->reloadGauge, sizeof(ReloadGauge));
     p->args = *a;
     p->reloadGauge->chargeTick = 0;
     p->flags = (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_RELOAD_CARD | CARD_DISP_FLAG_RELOAD_GAUGE);

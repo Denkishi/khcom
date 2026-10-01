@@ -39,6 +39,7 @@
 #include "card_types.h"
 #include "card_ui_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
@@ -1023,17 +1024,12 @@ void Premire_Chance_0(PremireChanceWork* w) {
     u8 i;
     s32 j;
     u16* cards;
-    u32 zero0 = 0;
-    u32 zero1;
-    u32 zero2;
 
-    CpuSet(&zero0, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(PremireChanceWork) / 4);
+    CpuFill32(0, w, sizeof(PremireChanceWork));
     gCardListWork = EwramAlloc(sizeof(CardListWork));
     w->slots = EwramAlloc(sizeof(CardSlot) * 100);
-    zero1 = 0;
-    CpuSet(&zero1, gCardListWork, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardListWork) / 4);
-    zero2 = 0;
-    CpuSet(&zero2, w->slots, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardSlot) * 100 / 4);
+    CpuFill32(0, gCardListWork, sizeof(CardListWork));
+    CpuFill32(0, w->slots, sizeof(CardSlot) * 100);
     cards = GetActiveDeck()->cards;
     w->tiles2 = AllocObjTiles(0x120, 0);
     w->palette2 = LoadObjPalette(gUnk_09618CD8, 32);

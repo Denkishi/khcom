@@ -3,6 +3,7 @@
 #include "sio.h"
 #include "gba/io_reg.h"
 #include "system_state.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "sio_types.h"
 #include "types.h"
@@ -107,7 +108,6 @@ void ResetTimer3Callback() {
 void SioInit() {
     u16* p;
     u16 ime;
-    u32 zero;
 
     p = &gSioSavedIme;
     ime = REG_IME;
@@ -126,8 +126,7 @@ void SioInit() {
     REG_IME = *p;
     REG_SIOMLT_SEND = 0;
     *(u64*)REG_ADDR_SIOMULTI0 = 0;
-    zero = 0;
-    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+    CpuFill32(0, &gSioWork, sizeof(SioWork));
     gSioIdleVBlanks = 0;
     gSioSendEmpty = 0;
     gSioPrevPlayerCount = 0;
@@ -158,8 +157,6 @@ void func_08006E70() {
 }
 
 void SioStop() {
-    u32 zero;
-
     gSioSavedIme = REG_IME;
     REG_IME = 0;
     REG_IE &= ~(INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
@@ -167,8 +164,7 @@ void SioStop() {
     REG_SIOCNT = 0;
     REG_TM3CNT_H = 0;
     REG_IF = (INTR_FLAG_TIMER3 | INTR_FLAG_SERIAL);
-    zero = 0;
-    CpuSet(&zero, &gSioWork, (sizeof(SioWork) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+    CpuFill32(0, &gSioWork, sizeof(SioWork));
 }
 
 u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {

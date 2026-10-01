@@ -25,6 +25,7 @@
 #include "card_def_data.h"
 #include "card_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 s32 UpdateReloadChildAbsorb(ReloadChildWork* w);
@@ -191,14 +192,12 @@ void RELOAD_CHILDREN_3(ReloadChildWork* w) {
 }
 
 void REV_COUNT_0(RevCountWork* w, RevCountArgs* a) {
-    vu32 zero;
     s16* count;
     s16* count2;
     void** row;
     u8 idx;
 
-    zero = 0;
-    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(RevCountWork) / 4);
+    CpuFill32(0, w, sizeof(RevCountWork));
     w->args = *a;
     idx = w->args.list;
     w->list = idx;

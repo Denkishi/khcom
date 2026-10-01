@@ -18,6 +18,7 @@
 #include "gba/oam.h"
 #include "engine.h"
 #include "gba/defines.h"
+#include "gba/macro.h"
 #include "gba/syscall.h"
 #include "intr.h"
 #include "m4a.h"
@@ -325,12 +326,9 @@ void mode_movie_1() {
 
     switch (sMovieModeState) {
     case 0: {
-        s32 fill;
-
         InitDisplayRegs();
         gDispCnt &= ~(DISPCNT_BG_ALL_ON | DISPCNT_OBJ_ON);
-        fill = 0;
-        CpuSet(&fill, (void*)VRAM, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
+        CpuFill32(0, (void*)VRAM, 0x18000);
         sMovieModeState++;
         break;
     }
@@ -344,8 +342,8 @@ void mode_movie_1() {
         EwramHeapInit(GetEwramHeapStart(), GetEwramHeapSize());
         SetEwramHeapName(sMovieHeapName);
         SetIwramHeapName(sMovieHeapName);
-        CpuSet(gUnk_08F69C04, (void*)OBJ_PLTT, 16);
-        CpuSet(gUnk_09614718, (void*)0x05000220, 16);
+        CpuCopy16(gUnk_08F69C04, (void*)OBJ_PLTT, 32);
+        CpuCopy16(gUnk_09614718, (void*)0x05000220, 32);
         MovieSetCallbacks(IwramAlloc, EwramAlloc, IwramFree, EwramFree);
 
         switch (sMovieId) {
@@ -502,10 +500,7 @@ void mode_movie_1() {
         sMovieModeState++;
         break;
     case 3: {
-        s32 fill;
-
-        fill = 0;
-        CpuSet(&fill, (void*)VRAM, CPU_SET_SRC_FIXED | CPU_SET_32BIT | 0x6000);
+        CpuFill32(0, (void*)VRAM, 0x18000);
 
         if (sMovieFlags & MOVIE_FLAG_SOFT_RESET) {
 #ifdef VERSION_EU

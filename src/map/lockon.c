@@ -17,6 +17,7 @@
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 u8* gDebugTextTileDest;
@@ -309,15 +310,11 @@ void func_0805F728(s32* x, s32* y) {
 }
 
 void DebugTextClearBg() {
-    s32 a;
-    s32 b;
     void* charBase = GetBgCharBase(0);
     void* screenBase = GetBgScreenBase(0);
 
-    a = 0;
-    CpuFastSet(&a, charBase, CPU_FAST_SET_SRC_FIXED | 0x1500);
-    b = 0;
-    CpuFastSet(&b, screenBase, CPU_FAST_SET_SRC_FIXED | 0x140);
+    CpuFastFill(0, charBase, 0x5400);
+    CpuFastFill(0, screenBase, 0x500);
 }
 
 void func_0805F7B0(s32 a) {
@@ -437,17 +434,13 @@ void DebugTextLoadPalette(s32 a, void* b, s32 c, u8 d) {
 }
 
 void DebugTextInit(u8 bg, u16 b, u16 c) {
-    s32 fillA;
-    s32 fillB;
     u8 i;
     u8 j;
     void* charBase = GetBgCharBase(bg);
     void* screenBase = GetBgScreenBase(bg);
 
-    fillA = 0;
-    CpuSet(&fillA, charBase, (b >> 2) | CPU_SET_32BIT | CPU_SET_SRC_FIXED);
-    fillB = 0;
-    CpuSet(&fillB, screenBase, (c >> 2) | CPU_SET_32BIT | CPU_SET_SRC_FIXED);
+    CpuFill32(0, charBase, b);
+    CpuFill32(0, screenBase, c);
 
     gDebugTextLines = EwramAlloc(sizeof(DebugTextLine) * 20);
     gDebugTextLineCount = 0;

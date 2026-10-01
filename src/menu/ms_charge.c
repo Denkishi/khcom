@@ -33,6 +33,7 @@
 #include "registration_data.h"
 #include "text_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 #ifdef VERSION_EU
@@ -496,27 +497,13 @@ void MsChargeSelectNextValue(MsCard* card) {
 }
 
 void MsChargeRemoveCard(MsCard* card) {
-    vu32* dma;
-    MsCard* last;
-    u16* p;
-    u16 zero;
     u8 slot;
     s16 j;
 
     slot = gCardDefs[card->cardId].category;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)(card + 1);
-    dma[1] = (u32)card;
-    dma[2] = ((285 - GetMsChargeSelectedIndex()) * 26) | (DMA_ENABLE << 16);
-    dma[2];
-    p = &zero;
-    *p = 0;
-    dma[0] = (u32)p;
-    last = &gMsCards[285];
-    dma[1] = (u32)last;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x1A;
-    dma[2];
-    last->kind = 0x8F;
+    DmaCopy16(3, card + 1, card, (285 - GetMsChargeSelectedIndex()) * 52);
+    DmaFill16(3, 0, &gMsCards[285], 0x34);
+    gMsCards[285].kind = 0x8F;
 
     for (j = slot + 1; j <= 3; j++) {
         sMsChargeCategoryStart[j]--;
@@ -561,11 +548,8 @@ s32 FindMsCard(u16 id, u8 flag, s16 count) {
 
 void MsChargeBuildCardList() {
     MsCard tmp;
-    vu32* dma;
-    u16* p;
     s16* q;
     s16 a;
-    u16 zero;
     s16 n;
     u16 id;
     s16 i;
@@ -577,13 +561,7 @@ void MsChargeBuildCardList() {
     s16 j;
     s16 idx;
 
-    p = &zero;
-    *p = 0;
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)p;
-    dma[1] = (u32)gMsCards;
-    dma[2] = ((DMA_ENABLE | DMA_SRC_FIXED) << 16) | 0x1D0C;
-    dma[2];
+    DmaFill16(3, 0, gMsCards, 0x3A18);
 
     for (n = 0; n <= 285; n++) {
         gMsCards[n].kind = 0x8F;

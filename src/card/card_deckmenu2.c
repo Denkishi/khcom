@@ -37,6 +37,7 @@
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 const u16 gUnk_090354E8[21] = {
@@ -3226,7 +3227,6 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* w, void* a) {
     u16* count;
     u8* p;
     u8* q;
-    vu32 zero;
 
     FadeStartIn(FADE_MODE_BLACK, 4);
 
@@ -3244,8 +3244,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* w, void* a) {
         count = &w->entryCount;
         *count = n = 0x11E;
         w->kindEntries = EwramAlloc(n * sizeof(CardKindEntry));
-        zero = 0;
-        CpuSet((void*)&zero, w->kindEntries, *count * (sizeof(CardKindEntry) / 4) | CPU_SET_SRC_FIXED | CPU_SET_32BIT);
+        CpuFill32(0, w->kindEntries, *count * sizeof(CardKindEntry));
         w->entries = k;
         break;
     case 1:
@@ -3870,7 +3869,6 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* w, void* a) {
 
 u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a) {
     u16 i;
-    u32 zero;
 
     FadeStartIn(FADE_MODE_BLACK, 4);
 
@@ -3878,8 +3876,7 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* w, void* a) {
     case 0:
         w->entryCount = 286;
         w->kindEntries = EwramAlloc(w->entryCount * sizeof(CardKindEntry));
-        zero = 0;
-        CpuSet(&zero, w->kindEntries, CPU_SET_SRC_FIXED | CPU_SET_32BIT | w->entryCount * (sizeof(CardKindEntry) / 4));
+        CpuFill32(0, w->kindEntries, w->entryCount * sizeof(CardKindEntry));
         w->entries = 0;
         w->descriptionX = 7;
         w->descriptionY = 113;

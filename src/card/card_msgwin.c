@@ -30,6 +30,7 @@
 #include "card_message_data.h"
 #include "msg_portrait_data.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 CardMsgWinWork* gActiveCardMsgwin;
@@ -50,10 +51,7 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* w, void* a);
 u8 UpdateCardMsgwinPersistent(CardMsgWinWork* w, void* a);
 
 static void msgwin_0(CardMsgWinWork* w, CardMessageArgs* a) {
-    vu32 zero;
-
-    zero = 0;
-    CpuSet((void*)&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(CardMsgWinWork) / 4);
+    CpuFill32(0, w, sizeof(CardMsgWinWork));
     w->unk_13C = InitCardMsgGlyphSprites(0, 0);
     w->args = *a;
     w->messageDef = &gCardMessageDefs[w->args.messageId];

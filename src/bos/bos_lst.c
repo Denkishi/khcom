@@ -24,6 +24,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
@@ -2573,9 +2574,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
 void task_bos_lst_2(BosLstWork* work) {
     s16 sx;
     s16 sy;
-    u32 fill;
     s16 idx;
-    vu32* dma;
     u32* src;
     LstSub* sub;
     s16 anim;
@@ -2676,34 +2675,20 @@ void task_bos_lst_2(BosLstWork* work) {
             n += 9;
         }
 
-        dma = (vu32*)REG_ADDR_DMA3;
-        dma[0] = (u32)sLstAnimDefs[anim].bgMap;
-        dma[1] = (u32)work->bgMap;
-        dma[2] = (DMA_ENABLE << 16) | 0x400;
-        dma[2];
+        DmaCopy16(3, sLstAnimDefs[anim].bgMap, work->bgMap, 0x800);
         src = sBosLstBgFrames[n][1];
-        dma[0] = (u32)src;
-        dma[1] = (u32)work->bgMap;
-        dma[2] = (DMA_ENABLE << 16) | 0x140;
-        dma[2];
+        DmaCopy16(3, src, work->bgMap, 0x280);
 
         if (work->facing > 0) {
-            dma[0] = (u32)(src + 160);
-            dma[1] = (u32)work->unk_B24;
+            DmaCopy16(3, src + 160, work->unk_B24, 0x1C);
         } else {
-            dma[0] = (u32)(src + 169);
-            dma[1] = (u32)work->unk_B48;
+            DmaCopy16(3, src + 169, work->unk_B48, 0x1C);
         }
 
-        dma[2] = (DMA_ENABLE << 16) | 0xE;
-        dma[2];
-
         if (sy < 0) {
-            fill = 0;
-            CpuFastSet(&fill, work->bgMap, ((((-sy) >> 3) << 4) & 0x1FFFFF) | 0x1000000);
+            CpuFastFill(0, work->bgMap, ((-sy) >> 3) * 64);
         } else if (sy <= 159) {
-            fill = 0;
-            CpuFastSet(&fill, work->bgMap + ((20 - (sy >> 3)) << 6), ((((sy >> 3) + 12) << 4) & 0x1FFFFF) | 0x1000000);
+            CpuFastFill(0, work->bgMap + ((20 - (sy >> 3)) << 6), ((sy >> 3) + 12) * 64);
         }
 
         LoadBgMap(1, work->bgMap, 0x800);

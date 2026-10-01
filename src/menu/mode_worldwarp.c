@@ -25,6 +25,7 @@
 #include "obj_api.h"
 #include "text.h"
 #include "text_types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 static s16 sWorldWarpCursor;
@@ -442,7 +443,6 @@ void WorldWarpDraw() {
 void mode_worldwarp_0() {
     s32 i;
     void** p;
-    vu32* dma;
 
     sWorldWarpFloorCount = GetProgressFloor() + 1;
     p = &sWorldWarpTilemap;
@@ -527,11 +527,7 @@ void mode_worldwarp_0() {
 #endif
 
     LoadBgMap(0, gUnk_09A35A1C, 0x500);
-    dma = (vu32*)REG_ADDR_DMA3;
-    dma[0] = (u32)gUnk_09A3641C;
-    dma[1] = (u32)sWorldWarpTilemap;
-    dma[2] = (DMA_ENABLE << 16) | 0x280;
-    dma[2];
+    DmaCopy16(3, gUnk_09A3641C, sWorldWarpTilemap, 0x500);
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpFloorWorlds[i] >= 0) {

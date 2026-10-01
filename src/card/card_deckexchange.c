@@ -26,6 +26,7 @@
 #include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "gba/macro.h"
 #include <stddef.h>
 
 #ifndef VERSION_EU
@@ -81,11 +82,9 @@ static const s16 sDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
 static const u16 sUnk_09041F3E[4] = { 45, 93, 141, 30 };
 
 void deckexchange_0(DeckExchangeWork* w, void* a) {
-    s32 zero;
     u16 n;
 
-    zero = 0;
-    CpuSet(&zero, w, CPU_SET_SRC_FIXED | CPU_SET_32BIT | sizeof(DeckExchangeWork) / 4);
+    CpuFill32(0, w, sizeof(DeckExchangeWork));
     w->tiles7 = 0;
     w->tiles4 = 0;
     w->tiles5 = 0;
@@ -606,7 +605,6 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* w, void* a) {
 }
 
 u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a) {
-    u32 zero;
     u16 i;
     u16 j;
     u16 n;
@@ -617,8 +615,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* w, void* a) {
     case 0:
         w->entryCount = 286;
         w->kindEntries = EwramAlloc(w->entryCount * sizeof(CardKindEntry));
-        zero = 0;
-        CpuSet(&zero, w->kindEntries, CPU_SET_SRC_FIXED | CPU_SET_32BIT | w->entryCount * (sizeof(CardKindEntry) / 4));
+        CpuFill32(0, w->kindEntries, w->entryCount * sizeof(CardKindEntry));
         break;
     case 1:
         CountCardsNotInDeckByKind(w->kindEntries, w->deckIndex, 0, w->entryCount, w->unk_4F4);

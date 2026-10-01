@@ -172,6 +172,7 @@ card_deckexchange.c
 card_mode_deck.c
 tutorial_deck.s
 card_riku_tutorial.c
+mode_textcheck.c
 card_print.c
 sprites_number_plus_frames.s
 sprites_card_pictures_frames.s

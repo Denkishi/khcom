@@ -1,9 +1,7 @@
 #include "mode_battle.h"
-#include "sprites_language_select.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
-#include "gba/keys.h"
 #include "battle_actor.h"
 #include "battle_bounds.h"
 #include "battle_work.h"
@@ -14,185 +12,15 @@
 #include "game_state.h"
 #include "gba/macro.h"
 #include "gba/syscall.h"
-#include "key.h"
 #include "m4a_song.h"
 #include "mode.h"
 #include "mode_chkbtl_api.h"
-#include "obj_api.h"
 #include "registration_data.h"
-#include "save_api.h"
 #include <stddef.h>
 #include "system_state.h"
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
-
-#ifdef VERSION_EU
-static LangWork* sLangWork;
-
-void eu_08009CD0(s32 arg) {
-    sLangWork = EwramAlloc(sizeof(LangWork));
-    SetBgMode0();
-    SetupBg(0, 0, 29, 0);
-    SetupBg(1, 0, 30, 0);
-    SetBgPriority(0, 0);
-    SetBgPriority(1, 1);
-    LoadBgPalette(0, gUnkEu_08F6A6FC, 0x40);
-    LoadBgTilesLz77(0, gUnkEu_08F77180);
-    LoadBgMapLz77(0, gUnkEu_08F7EFB0);
-    LoadBgMapLz77(1, gUnkEu_08F7EBF8);
-    sLangWork->tiles = LoadObjTiles(gUnkEu_08C9CA58, 0x1A0);
-    sLangWork->palette = LoadObjPalette(gUnkEu_08F6A6DC, 32);
-    sLangWork->timer = 0;
-    sLangWork->state = 0;
-    sLangWork->flags = 0;
-    SaveLoadHeader();
-
-    switch (gLanguage) {
-    case LANGUAGE_ENGLISH:
-        sLangWork->cursor = 0;
-        break;
-    case LANGUAGE_ITALIAN:
-        sLangWork->cursor = 1;
-        break;
-    case LANGUAGE_FRENCH:
-        sLangWork->cursor = 2;
-        break;
-    case LANGUAGE_SPANISH:
-        sLangWork->cursor = 3;
-        break;
-    case LANGUAGE_GERMAN:
-        sLangWork->cursor = 4;
-        break;
-    default:
-        gLanguage = LANGUAGE_ENGLISH;
-        sLangWork->cursor = 0;
-        break;
-    }
-
-    sLangWork->language = gLanguage;
-    FadeStartIn(FADE_MODE_BLACK, 16);
-}
-
-void mode_lang_1() {
-    switch (sLangWork->state) {
-    case 0:
-        if (!FadeIsActive()) {
-            sLangWork->state = 1;
-        }
-
-        break;
-    case 1:
-        if (GetKeysRepeat() & DPAD_UP) {
-            sLangWork->cursor--;
-
-            if (sLangWork->cursor < 0) {
-                sLangWork->cursor = 4;
-            }
-
-            m4aSongNumStart(SONG_SYS_CLICK);
-        } else if (GetKeysRepeat() & DPAD_DOWN) {
-            sLangWork->cursor++;
-
-            if (sLangWork->cursor > 4) {
-                sLangWork->cursor = 0;
-            }
-
-            m4aSongNumStart(SONG_SYS_CLICK);
-        } else if (GetKeysPressed() & A_BUTTON) {
-            sLangWork->timer = 0;
-            sLangWork->state = 2;
-            m4aSongNumStart(SONG_SYS_KETTEI);
-        } else if (GetKeysPressed() & B_BUTTON) {
-            sLangWork->state = 3;
-            m4aSongNumStart(SONG_SYS_CANSEL);
-        }
-
-        break;
-    case 2:
-        if (sLangWork->timer == 0) {
-            switch (sLangWork->cursor) {
-            case 0:
-                gLanguage = LANGUAGE_ENGLISH;
-                break;
-            case 1:
-                gLanguage = LANGUAGE_ITALIAN;
-                break;
-            case 2:
-                gLanguage = LANGUAGE_FRENCH;
-                break;
-            case 3:
-                gLanguage = LANGUAGE_SPANISH;
-                break;
-            case 4:
-                gLanguage = LANGUAGE_GERMAN;
-                break;
-            default:
-                gLanguage = LANGUAGE_ENGLISH;
-                break;
-            }
-
-            if (sLangWork->language != gLanguage) {
-                SaveWriteHeader(-1);
-            }
-        }
-
-        if (sLangWork->timer % 4 < 2) {
-            sLangWork->flags &= ~LANG_FLAG_HIDE_CURSOR;
-        } else {
-            sLangWork->flags |= LANG_FLAG_HIDE_CURSOR;
-        }
-
-        if (sLangWork->timer > 29) {
-            sLangWork->flags &= ~LANG_FLAG_HIDE_CURSOR;
-            sLangWork->state = 3;
-            sLangWork->timer = 0;
-        } else {
-            sLangWork->timer++;
-        }
-
-        break;
-    case 3:
-        if (sLangWork->timer == 0) {
-            FadeStartOut(FADE_MODE_BLACK, 16);
-        }
-
-        if (!FadeIsActive()) {
-            ModeRequest(&gModeCopyright1, 0);
-        } else {
-            sLangWork->timer++;
-        }
-
-        break;
-    }
-
-    if (!(sLangWork->flags & LANG_FLAG_HIDE_CURSOR)) {
-        switch (sLangWork->cursor) {
-        case 0:
-            DrawSprite(0x60, 0x58, gUnkEu_08C9C97C, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
-            break;
-        case 1:
-            DrawSprite(0x60, 0x68, gUnkEu_08C9C99E, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
-            break;
-        case 2:
-            DrawSprite(0x60, 0x78, gUnkEu_08C9C9C0, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
-            break;
-        case 3:
-            DrawSprite(0x60, 0x88, gUnkEu_08C9C9E2, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
-            break;
-        case 4:
-            DrawSprite(0x60, 0x98, gUnkEu_08C9CA04, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
-            break;
-        }
-    }
-}
-
-void mode_lang_2() {
-    ReleaseObjTiles(sLangWork->tiles);
-    ReleaseObjPalette(sLangWork->palette);
-    EwramFree(sLangWork);
-}
-#endif
 
 void mode_battle_0(u32 mode) {
     BtlWork** p;
@@ -592,7 +420,4 @@ void mode_battle_2() {
     EwramFree(gBtlWork);
 }
 
-#ifdef VERSION_EU
-Mode gModeLang = { "mode_lang", eu_08009CD0, mode_lang_1, mode_lang_2 };
-#endif
 Mode gModeBattle = { "mode_battle", (ModeInitFunc)mode_battle_0, mode_battle_1, mode_battle_2 };

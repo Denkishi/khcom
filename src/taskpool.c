@@ -1,4 +1,3 @@
-#include "mode_battle_data.h"
 #include "registration_data.h"
 #include "chara_api.h"
 #include "display.h"

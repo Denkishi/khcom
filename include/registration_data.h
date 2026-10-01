@@ -5,6 +5,10 @@
 #include "mode.h"
 #include "types.h"
 
+#ifdef VERSION_EU
+extern Mode gModeLang;
+#endif
+
 extern Mode gModeJiminy;
 extern TaskDesc gTaskDescMonsgage;
 extern TaskDesc gTaskDescBtlPopCb;

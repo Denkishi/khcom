@@ -11,7 +11,6 @@
 #include "key.h"
 #include "map_runtime.h"
 #include "mode.h"
-#include "mode_battle_data.h"
 #include "registration_data.h"
 #include "system_state.h"
 #include "types.h"

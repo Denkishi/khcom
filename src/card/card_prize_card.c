@@ -91,16 +91,15 @@ static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
     w->prevPos = w->pos;
     w->vz += 0x38;
     w->pos.z += w->vz;
-    w->pos.x += (gSineTable[(u8)w->moveAngle] * w->speed) >> 8;
+    x = gSineTable[(u8)w->moveAngle];
+    w->pos.x += (x * w->speed) >> 8;
     w->pos.y += (-gSineTable[(u8)w->moveAngle + 0x40] * w->speed) >> 8;
 
     if (IsFldPosBlocked(&w->pos) != 0) {
         w->moveAngle = w->moveAngle + k + GetRandom() % 33;
 
-        do {
-            w->pos.x = w->prevPos.x;
-            w->pos.y = w->prevPos.y;
-        } while (0);
+        w->pos.x = w->prevPos.x;
+        w->pos.y = w->prevPos.y;
     } else {
         w->pos.ground = GetFldPosGround(&w->pos);
     }

@@ -1,6 +1,5 @@
 #include "task_descriptors.h"
 #include "smn.h"
-#include "frd.h"
 #include "anim.h"
 #include "sprites_smn.h"
 #include "btl_api.h"
@@ -254,65 +253,6 @@ void task_smn_king_3(SmnKingWork* work) {
     obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
     ReleaseObjPalette(work->palette);
     TaskPoolDestroy(&work->tasks);
-}
-
-u8 FrdDonaldApplyGravity(FrdDonaldWork* work) {
-    BtlObj* body;
-
-    body = &work->body;
-    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
-    body->z += work->vz;
-    work->vz += 0x33;
-
-    if (body->z > body->groundZ) {
-        body->z = body->groundZ;
-        work->vz = 0;
-        return 1;
-    }
-
-    return 0;
-}
-
-void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
-    s32 x;
-    s32 y;
-    s32 z;
-    s32 w;
-    s32 t;
-    s16 p;
-    s16 q;
-    s16 r;
-
-    y = body->y;
-    z = body->z - (c * 256);
-    w = 0x180;
-
-    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        x = body->x + (b * 256);
-        t = -0x180;
-    } else {
-        x = body->x - (b * 256);
-        t = w;
-    }
-
-    BgFxSetPosition(x, y, z);
-    BgFxSetScale(t, w);
-
-    if (a != 0) {
-        if (gBtlWork->battleId == 0x98) {
-            p = 0x20;
-            q = 0x20;
-            r = 0x30;
-        } else {
-            p = 0x0A;
-            q = 0x0A;
-            r = 0x0A;
-        }
-
-        if (ApplyAttackBox(0x84, x, y, z, p, q, r) != 0) {
-            m4aSongNumStart(SONG_EF_FIRE01);
-        }
-    }
 }
 
 TaskDesc gTaskDescSmnKing = {

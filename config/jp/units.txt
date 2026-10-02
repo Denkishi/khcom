@@ -101,7 +101,13 @@ smn_mushu.c
 smn_dumbo.c
 smn_genie.c
 smn_king.c
-frd.c
+frd_donald.c
+frd_goofy.c
+frd_ariel.c
+frd_jack.c
+frd_pan.c
+frd_aladdin.c
+frd_beast.c
 pc_acddmg.c
 hum_cloud.c
 hum_hook.c

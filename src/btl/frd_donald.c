@@ -1,0 +1,668 @@
+#include "task_descriptors.h"
+#include "system_state.h"
+#include "display.h"
+#include "frd.h"
+#include "sprites_evt.h"
+#include "sprites_frd.h"
+#include "btl_api.h"
+#include "frd_donald_api.h"
+#include "songs.h"
+#include "frd_tasks.h"
+#include "anim.h"
+#include "battle_actor.h"
+#include "battle_actor_types.h"
+#include "battle_work.h"
+#include "btl_collision.h"
+#include "btl_effect.h"
+#include "engine_math.h"
+#include "m4a_song.h"
+#include "obj.h"
+#include "obj_api.h"
+#include "taskpool.h"
+#include "types.h"
+#include <stddef.h>
+
+static const AnimDef sFrdDonaldAnimDefs[6] = {
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0, { 0, 0, 0 } },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 1, { 0, 0, 0 } },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 2, { 0, 0, 0 } },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 3, { 0, 0, 0 } },
+    { gDonaFl00Frames, gDonaFl00Anims, gDonaFl00Tiles, 5, { 0, 0, 0 } },
+    { gDonaBl00Frames, gDonaBl00Anims, gDonaBl00Tiles, 2, { 0, 0, 0 } },
+};
+
+TaskDesc gTaskDescFrdDonald = {
+    "task_frd_donald",
+    (TaskInitFunc)task_frd_donald_0,
+    (TaskUpdateFunc)task_frd_donald_1,
+    (TaskDrawFunc)task_frd_donald_2,
+    (TaskDestroyFunc)task_frd_donald_3,
+    sizeof(FrdDonaldWork),
+};
+
+u8 FrdDonaldApplyGravity(FrdDonaldWork* work) {
+    BtlObj* body;
+
+    body = &work->body;
+    ApplyBattleBounds(&body->x, &body->y, &body->z, &body->groundZ);
+    body->z += work->vz;
+    work->vz += 0x33;
+
+    if (body->z > body->groundZ) {
+        body->z = body->groundZ;
+        work->vz = 0;
+        return 1;
+    }
+
+    return 0;
+}
+
+void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
+    s32 x;
+    s32 y;
+    s32 z;
+    s32 w;
+    s32 t;
+    s16 p;
+    s16 q;
+    s16 r;
+
+    y = body->y;
+    z = body->z - (c * 256);
+    w = 0x180;
+
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        x = body->x + (b * 256);
+        t = -0x180;
+    } else {
+        x = body->x - (b * 256);
+        t = w;
+    }
+
+    BgFxSetPosition(x, y, z);
+    BgFxSetScale(t, w);
+
+    if (a != 0) {
+        if (gBtlWork->battleId == 0x98) {
+            p = 0x20;
+            q = 0x20;
+            r = 0x30;
+        } else {
+            p = 0x0A;
+            q = 0x0A;
+            r = 0x0A;
+        }
+
+        if (ApplyAttackBox(0x84, x, y, z, p, q, r) != 0) {
+            m4aSongNumStart(SONG_EF_FIRE01);
+        }
+    }
+}
+
+void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
+    BtlObj* body;
+
+    body = &work->body;
+
+    if (args->mainSide != 0) {
+        work->mainSide = 1;
+        gBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
+        work->actor = gBtlWork->actor;
+        work->tiles = gBtlWork->tiles2;
+    } else {
+        work->mainSide = args->mainSide;
+        gRikuBtlWork->flags |= BTL_FLAG_SUMMON_ACTIVE;
+        work->actor = gRikuBtlWork->actor;
+        work->tiles = gBtlWork->tiles2;
+    }
+
+    work->variant = args->variant;
+    work->state = 0;
+    work->stateTimer = 0;
+    work->steps = 0;
+    work->vz = 0;
+
+    if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        work->unk_158 = work->actor->x - 0x3000;
+        body->x = (gBtlWork->xMax + 0x30) << 8;
+        body->flags = BTLOBJ_FLAG_FACING_LEFT;
+    } else {
+        work->unk_158 = work->actor->x + 0x3000;
+        body->x = (gBtlWork->xMin - 0x30) << 8;
+        body->flags = 0;
+    }
+
+    body->y = work->actor->y;
+    body->z = -0x5000;
+    body->groundZ = 0;
+    work->palette = LoadObjPalette(gDonaldPalette, 32);
+    AnimInit(&work->anim, NULL, NULL);
+    AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+
+    switch (args->variant) {
+    case 0:
+        work->repeatsLeft = 1;
+
+#ifdef VERSION_EU
+        if (gLanguage == LANGUAGE_ITALIAN) {
+            m4aSongNumStart(SONG_VO_SR_SUMMON00);
+        } else {
+            m4aSongNumStart(SONG_VO_SR_SUMMON04);
+        }
+#else
+        m4aSongNumStart(SONG_VO_SR_SUMMON04);
+#endif
+        break;
+    case 1:
+        work->repeatsLeft = 1;
+
+#ifdef VERSION_EU
+        if (gLanguage == LANGUAGE_ITALIAN) {
+            m4aSongNumStart(SONG_VO_SR_SUMMON00);
+        } else {
+            m4aSongNumStart(SONG_VO_SR_SUMMON04);
+        }
+#else
+        m4aSongNumStart(SONG_VO_SR_SUMMON04);
+#endif
+        break;
+    case 2:
+        work->repeatsLeft = 1;
+
+#ifdef VERSION_EU
+        if (gLanguage == LANGUAGE_ITALIAN) {
+            m4aSongNumStart(SONG_VO_SR_SUMMON00);
+        } else {
+            m4aSongNumStart(SONG_VO_SR_SUMMON04);
+        }
+#else
+        m4aSongNumStart(SONG_VO_SR_SUMMON04);
+#endif
+        break;
+    default:
+        m4aSongNumStart(SONG_VO_DL_ATTACK00);
+        BgFxStartFlame(0, 0, 0, 0x180);
+        UpdateDonaldFlame(body, 0, 8, 8);
+        break;
+    }
+
+    TaskPoolInit(&work->tasks, 1);
+    TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
+}
+
+u8 task_frd_donald_1(FrdDonaldWork* work) {
+    BtlObj* body = &work->body;
+    BtlWork* owner;
+    BtlObj* target;
+    s32 angle;
+
+    if (work->mainSide != 0) {
+        owner = gBtlWork;
+        target = owner->actor2;
+    } else {
+        owner = gRikuBtlWork;
+        target = owner->actor2;
+    }
+
+    if (owner->flags & BTL_FLAG_DISMISS_SUMMONS) return 0;
+
+    switch (work->state) {
+    case 0:
+        if (work->stateTimer == 0) {
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
+            work->stateTimer++;
+        }
+
+        body->x += (work->unk_158 - body->x) >> 4;
+        ClampBattlePosition(&body->x, &body->y, -16, 0);
+
+        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+
+        if (FrdDonaldApplyGravity(work)) {
+            work->stateTimer = 0;
+
+            if (work->variant == 3) work->state = 8;
+            else {
+                work->state = 1;
+                m4aSongNumStart(SONG_VO_DL_ATTACK00);
+            }
+        }
+
+        break;
+    case 1:
+        if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+
+        if (AnimIsFinished(&work->anim)) {
+            SelectLockonTarget();
+
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
+            else {
+                u16 spell = GetRandom();
+                spell &= 3;
+
+                switch (spell) {
+                case 0:
+                    work->state = 4;
+                    break;
+                case 1:
+                    work->state = 5;
+                    break;
+                case 2:
+                    work->state = 6;
+                    break;
+                case 3:
+                    work->state = 7;
+                    break;
+                }
+            }
+
+            work->stateTimer = 0;
+        } else work->stateTimer++;
+
+        break;
+    case 2:
+        if (work->repeatsLeft > 0) {
+            SelectLockonTarget();
+
+            if (gBtlWork->flags & BTL_FLAG_TUTORIAL) work->state = 4;
+            else {
+                u16 spell = GetRandom();
+                spell &= 3;
+
+                switch (spell) {
+                case 0:
+                    work->state = 4;
+                    break;
+                case 1:
+                    work->state = 5;
+                    break;
+                case 2:
+                    work->state = 6;
+                    break;
+                case 3:
+                    work->state = 7;
+                    break;
+                }
+            }
+
+            work->stateTimer = 0;
+            work->repeatsLeft--;
+        } else {
+            if (work->stateTimer == 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 3, 0, work->tiles);
+
+            if (AnimIsFinished(&work->anim)) {
+                work->state = 3;
+                work->stateTimer = 0;
+            } else work->stateTimer++;
+        }
+
+        break;
+    case 3:
+        if (work->stateTimer == 0) {
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 2, 0, work->tiles);
+
+            if (!(body->flags & BTLOBJ_FLAG_FACING_LEFT)) work->unk_158 = (gBtlWork->xMin - 64) * 256;
+            else work->unk_158 = (gBtlWork->xMax + 64) * 256;
+
+            work->vz = -0x500;
+            work->steps = 30;
+        }
+
+        ApproachValue(&body->x, work->unk_158, work->steps);
+
+        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+
+        FrdDonaldApplyGravity(work);
+
+        if (work->steps <= 0) {
+            if (work->variant == 3) BgAnimStop();
+
+            return 0;
+        }
+
+        work->stateTimer++;
+        work->steps--;
+        break;
+    case 8:
+        if (work->stateTimer == 0) {
+            if (body->flags & BTLOBJ_FLAG_FACING_LEFT) angle = GetRandom() % 2 ? 0xAD : 0xD3;
+            else angle = GetRandom() % 2 ? 0x53 : 0x2D;
+
+            work->unk_158 = gSineTable[angle] * 3;
+            work->unk_15C = -gSineTable[angle + 64] * 3;
+        }
+
+        if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
+        else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
+
+        if (work->unk_158 < 0) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+        else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+
+        body->x += work->unk_158;
+        body->y += work->unk_15C;
+        FrdDonaldApplyGravity(work);
+        UpdateDonaldFlame(body, 1, 2, 8);
+
+        switch (ClampBattlePosition(&body->x, &body->y, 0, 0)) {
+        case 1:
+        case 2:
+            work->unk_158 = -work->unk_158;
+            break;
+        case 3:
+        case 4:
+            work->unk_15C = -work->unk_15C;
+            break;
+        }
+
+        if (work->stateTimer > 179) {
+            work->stateTimer = 0;
+            work->state = 3;
+        } else work->stateTimer++;
+
+        break;
+    case 4:
+        {
+            s32 x,y,z;
+
+            if (work->stateTimer == 0) {
+                AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimReset(&work->anim);
+
+                if (target != NULL) {
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+                }
+            }
+
+            if (work->stateTimer == 40) {
+                if (target != NULL) {
+                    x = target->x;
+                    y = target->y;
+                    z = target->z - target->centerHeight * 256;
+
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+                } else {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0xC800;
+                    else x = body->x + 0xC800;
+
+                    y = body->y;
+                    z = body->z - 0x800;
+                }
+
+                switch (work->variant) {
+                case 0:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
+                    else BgFxStartFire(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
+
+                    break;
+                case 1:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
+                    else BgFxStartFire(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
+
+                    break;
+                case 2:
+                default:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
+                    else BgFxStartFire(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
+
+                    break;
+                }
+            }
+
+            if (work->stateTimer > 40) {
+                if (!BgFxIsActive()) {
+                    work->state = 2;
+                    work->stateTimer = 0;
+                    break;
+                }
+
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+            }
+
+            work->stateTimer++;
+            break;
+        }
+    case 5:
+        {
+            s32 x,y,z;
+
+            if (work->stateTimer == 0) {
+                AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 0, 0, work->tiles);
+                AnimReset(&work->anim);
+
+                if (target != NULL) {
+                    if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+                }
+            }
+
+            if (work->stateTimer == 40) {
+                if (target != NULL) {
+                    x = target->x;
+                    y = target->y;
+                    z = target->z - target->centerHeight * 256;
+
+                    if (x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                    else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+                } else {
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x = body->x - 0x6400;
+                    else x = body->x + 0x6400;
+
+                    y = body->y;
+                    z = body->z - 0x800;
+                }
+
+                switch (work->variant) {
+                case 0:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(0, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
+                    else BgFxStartBlizzard(0, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
+
+                    break;
+                case 1:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(1, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
+                    else BgFxStartBlizzard(1, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
+
+                    break;
+                case 2:
+                default:
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(2, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
+                    else BgFxStartBlizzard(2, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
+
+                    break;
+                }
+            }
+
+            if (work->stateTimer > 40) {
+                if (!BgFxIsActive()) {
+                    work->state = 2;
+                    work->stateTimer = 0;
+                    break;
+                }
+
+                if (target != NULL) BgFxSetTarget(target->x, target->y, target->z - target->centerHeight * 256);
+            }
+
+            work->stateTimer++;
+            break;
+        }
+    case 6:
+        if (work->stateTimer == 0) {
+            AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 1, 0, work->tiles);
+            AnimReset(&work->anim);
+
+            if (target != NULL) {
+                if (target->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            }
+        }
+
+        if (work->stateTimer == 40) {
+            switch (work->variant) {
+            case 0:
+                {
+                    s32 x,y,z;
+
+                    if (target != NULL) {
+                        x=target->x;
+                        y=target->y;
+                        z=target->groundZ;
+                    } else {
+                        if (body->flags & BTLOBJ_FLAG_FACING_LEFT) x=body->x-0x5000;
+                        else x=body->x+0x5000;
+
+                        y=body->y;
+                        z=0;
+                    }
+
+                    BgFxStartThunder(0, body->x, body->y, body->z-0x4000, x,y,z,129);
+                    break;
+                }
+            case 1:
+                BgFxStartWideThunder(1,body->x,body->y,body->z-0x4000,body->groundZ,130);
+                break;
+            case 2:
+            default:
+                BgFxStartWideThunder(2,body->x,body->y,body->z-0x4000,body->groundZ,131);
+                break;
+            }
+        }
+
+        if (work->stateTimer == 60) SetBattleZoom(15,148,0x10000,0x12C00);
+
+        if (work->stateTimer > 40 && !BgFxIsActive()) {
+            work->state=2;
+            SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+            work->stateTimer=0;
+        } else work->stateTimer++;
+
+        break;
+    case 7:
+        {
+            BtlObj* ally=work->mainSide != 0 ? gBtlWork->actor : gRikuBtlWork->actor;
+
+            if (work->stateTimer == 0) {
+                AnimChangeWithDef(sFrdDonaldAnimDefs,&work->anim,1,0,work->tiles);
+                AnimReset(&work->anim);
+
+                if (ally->x < body->x) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
+                else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            }
+
+            if (work->stateTimer == 40) {
+                switch (work->variant) {
+                case 0:
+                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
+                    break;
+                case 1:
+                    BgFxStartCure(1,ally->x,ally->y,ally->z-0x2C00);
+                    break;
+                case 2:
+                    BgFxStartCure(2,ally->x,ally->y,ally->z-0x2C00);
+                    break;
+                default:
+                    BgFxStartCure(0,ally->x,ally->y,ally->z-0x2C00);
+                    break;
+                }
+            }
+
+            if (work->stateTimer > 40) {
+                if (BgFxIsActive()) {
+                    BgFxSetPosition(ally->x,ally->y,ally->z-0x2C00);
+                } else {
+                    if (ally->btl->hcEffect == 13) {
+                        switch (work->variant) {
+                        case 0:
+                            ally->hp+=75;
+                            break;
+                        case 1:
+                            ally->hp+=225;
+                            break;
+                        case 2:
+                            ally->hp+=450;
+                            break;
+                        }
+                    } else {
+                        switch (work->variant) {
+                        case 0:
+                            ally->hp+=50;
+                            break;
+                        case 1:
+                            ally->hp+=150;
+                            break;
+                        case 2:
+                            ally->hp+=300;
+                            break;
+                        }
+                    }
+
+                    if (ally->hp > ally->maxHp) ally->hp=ally->maxHp;
+
+                    CreateBtlPopTask(ally,10);
+                    work->state=2;
+                    SetBattleZoom(15,256,gBtlWork->x2,gBtlWork->y2);
+                    work->stateTimer=0;
+                    break;
+                }
+            }
+
+            work->stateTimer++;
+            break;
+        }
+    }
+
+    AnimUpdate(&work->anim);
+    TaskPoolUpdate(&work->tasks);
+    return 1;
+}
+
+void task_frd_donald_2(FrdDonaldWork* work) {
+    BtlObj* body;
+    void* gfx;
+    u16 flags;
+    s16 sx;
+    s16 sy;
+    ObjAffine* affine;
+    s32 sclX;
+    s32 sclY;
+
+    body = &work->body;
+    gfx = AnimGetGfx(&work->anim);
+    flags = GetBattleSpritePriorityFlags(body->y);
+
+    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        sclY = gBtlWork->scale;
+        sclX = sclY;
+    } else if (gBtlWork->scale == 256) {
+        sclY = gBtlWork->scale;
+        sclX = sclY;
+        flags |= SPRITE_FLAG_HFLIP;
+    } else {
+        sclX = -gBtlWork->scale;
+        sclY = gBtlWork->scale;
+    }
+
+    WorldToScreen(&sx, &sy, body->x, body->y, body->z);
+
+    if (gBtlWork->scale == 256) {
+        affine = NULL;
+    } else if (gBtlWork->scale <= 255) {
+        affine = AllocObjAffine(0, sclX, sclY, 0);
+    } else {
+        affine = AllocObjAffine(0, sclX, sclY, 1);
+    }
+
+    DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags,
+               -4100 - ((body->y >> 8) * 4));
+    body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
+    TaskPoolDraw(&work->tasks);
+}
+
+void task_frd_donald_3(FrdDonaldWork* work) {
+    BtlWork* obj;
+
+    obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
+    obj->flags &= ~BTL_FLAG_SUMMON_ACTIVE;
+    ReleaseObjPalette(work->palette);
+    TaskPoolDestroy(&work->tasks);
+}

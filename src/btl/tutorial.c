@@ -2,21 +2,71 @@
 #include "gba/keys.h"
 #include "sprites_btl_hud.h"
 #include "system_state.h"
-#include "btl_hpoth_api.h"
 #include "anim.h"
 #include "battle_work.h"
+#include "btl4.h"
 #include "btl_effect.h"
 #include "card_api.h"
 #include "card_battle.h"
 #include "display.h"
 #include "engine_math.h"
 #include "game.h"
+#include "gba/io_reg.h"
 #include "key.h"
 #include "obj.h"
 #include "obj_api.h"
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+
+void TutorialOpenMessage(u16 a) {
+    gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
+    CreateCardMessageTask(&gBtlWork->taskPools[1], 0, a);
+}
+
+void TutorialOpenPersistentMessage(u16 a) {
+    CreatePersistentSysmsgwinTask(&gBtlWork->taskPools[1], a);
+}
+
+void TutorialRestoreBgMode() {
+    gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
+}
+
+void TutorialQueueMessage(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 1;
+    p->nextState = c;
+    p->message = b;
+}
+
+void TutorialQueuePersistentMessage(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 3;
+    p->nextState = c;
+    p->message = b;
+}
+
+void TutorialCloseMessage() {
+    CloseMessageWindow();
+}
+
+void TutorialWait(TutorialWork* p, u16 b, u32 c) {
+    p->timer = 0;
+    p->state = 0;
+    p->nextState = c;
+    p->unk_00E = b;
+}
+
+void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d) {
+    p->flags |= TUTORIAL_FLAG_SHOW_ARROW;
+    p->arrowX = b;
+    p->arrowY = c;
+    AnimStart(&p->anim, d, ANIM_FLAG_LOOP);
+}
+
+void TutorialHideArrow(TutorialWork* p) {
+    p->flags &= ~TUTORIAL_FLAG_SHOW_ARROW;
+}
 
 void task_tutorial_0(TutorialWork* work, s32 arg1) {
     gBg0Cnt = 0;

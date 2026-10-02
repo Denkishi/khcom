@@ -25,6 +25,15 @@ typedef struct TutorialWork {
     AnimState anim;
 } TutorialWork;
 
+void TutorialOpenMessage(u16 a);
+void TutorialOpenPersistentMessage(u16 a);
+void TutorialRestoreBgMode();
+void TutorialQueueMessage(TutorialWork* p, u16 b, u32 c);
+void TutorialQueuePersistentMessage(TutorialWork* p, u16 b, u32 c);
+void TutorialCloseMessage();
+void TutorialWait(TutorialWork* p, u16 b, u32 c);
+void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d);
+void TutorialHideArrow(TutorialWork* p);
 void task_tutorial_0(TutorialWork* work, s32 arg1);
 s32 task_tutorial_1(TutorialWork* work);
 void task_tutorial_2(TutorialWork* work);

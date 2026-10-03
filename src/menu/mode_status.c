@@ -5,15 +5,77 @@
 #include "sprites_status.h"
 #include "game_state.h"
 #include "fade.h"
-#include "mode_copyright2.h"
 #include "mode.h"
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "copyright_screens.h"
+#include "player_progression_types.h"
 
 static TaskPool sStatusTaskPool;
 static Task* sStatusBarTask;
 static u8 sStatusReturnToMenu;
+
+u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
+    u16 buf[6];
+    s32 scale;
+    s32 i;
+
+    if (digits > 6) {
+        digits = 6;
+    }
+
+    scale = 1;
+
+    for (i = 0; i < digits; i++) {
+        scale *= 10;
+    }
+
+    if (value > scale - 1) {
+        value = scale - 1;
+    } else if (value < 0) {
+        value = 0;
+    }
+
+    for (i = 0; i < digits; i++) {
+        buf[i] = (value % scale) / (scale / 10);
+        scale /= 10;
+    }
+
+    for (i = 0; i < digits; i++) {
+        RequestDma3Copy(&gUnk_09801C98[buf[i] * 32], dst, 32);
+        dst += 32;
+    }
+
+    return dst;
+}
+
+void LoadStatusNumberTiles() {
+    u8* p;
+
+    p = GetBgCharBase(2) + 0x40;
+    p = CopyNumberTiles(p, gGameState.progression.level, 2);
+    p = CopyNumberTiles(p, gGameState.hp, 3);
+    p = CopyNumberTiles(p, gGameState.progression.maxHp, 3);
+
+    if (gGameState.flags & GAME_FLAG_RIKU) {
+        p += 0x80;
+    } else {
+        p = CopyNumberTiles(p, gGameState.progression.cp, 4);
+    }
+
+    p = CopyNumberTiles(p, gGameState.progression.exp, 6);
+    p = CopyNumberTiles(p, gGameState.progression.nextExp, 6);
+
+    if (gGameState.flags & GAME_FLAG_RIKU) {
+        p += 0xC0;
+        p = CopyNumberTiles(p, gGameState.progression.ap, 2);
+        CopyNumberTiles(p, gGameState.progression.dp, 3);
+    } else {
+        p += 0x20;
+        CopyNumberTiles(p, gGameState.progression.mooglePoints, 5);
+    }
+}
 
 void mode_status_0() {
     BgReset();

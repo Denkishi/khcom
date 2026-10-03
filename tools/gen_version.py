@@ -19,8 +19,8 @@ from the next function's address in this version, not from the US size, so
 a function that is a different length here still tiles correctly.
 
 A source file that config/us/units.txt does not list joins this version's
-link order when it defines functions named <version>_<address>; it goes
-where those addresses fall, and its .rodata and .data come from
+link order when it defines functions named <version>_<address> (or listed
+in TARGET_REGION_FUNCS); it goes where those addresses fall, and its .rodata and .data come from
 TARGET_DATA_ADDR and TARGET_DATA_SIZE.
 """
 
@@ -2190,13 +2190,40 @@ def active_includes(path, ver):
     return out
 
 
+# Region-only functions that were named after decompilation, so their names no longer
+# carry their address: name -> address in that version. Matched like <version>_<address>
+# definitions in the active #ifdef branch; names defined only in assembly (syscall
+# stubs) are added to the rows directly.
+TARGET_REGION_FUNCS = {
+    "eu": {
+        "ClearSystemMemory": 0x08000334,
+        "DoSoftReset": 0x0800115C,
+        "LoadBgTilesLz77": 0x080059D4,
+        "HandleRikuTutorialCardInput": 0x08013190,
+        "GetTextSlotsMaxLineWidth": 0x0806629C,
+        "SioExchangeLoopback": 0x080C24D8,
+        "SioRandomPartnerSend": 0x080C273C,
+        "BosUrsulaBubbleAnimChange": 0x080DA80C,
+        "BosLstAnyBitScaling": 0x0810BA1C,
+        "BosLstBitIsScaling": 0x0810F08C,
+        "LZ77UnCompVram": 0x08116B04,
+    },
+}
+
+
 def active_definitions(path, ver):
     pat = re.compile(r"^[A-Za-z_][A-Za-z0-9_* ]*\b((?:func_)?" + ver + r"_([0-9A-Fa-f]{8}))\(.*\)\s*\{")
+    named = TARGET_REGION_FUNCS.get(ver, {})
+    definition = re.compile(r"^[A-Za-z_][A-Za-z0-9_* ]*\b(\w+)\(.*\)\s*\{")
     out = []
     for line in active_lines(path, ver):
         m = pat.match(line)
         if m:
             out.append((m.group(1), int(m.group(2), 16)))
+            continue
+        m = definition.match(line)
+        if m and m.group(1) in named:
+            out.append((m.group(1), named[m.group(1)]))
     return out
 
 
@@ -2208,8 +2235,13 @@ def load_rows(ver):
             r[3] = at
             if r[4] == "absent":
                 r[4] = "entry"
+    found = set()
     for f in sorted(Path("src").rglob("*.c"), key=lambda path: path.name):
         for name, at in active_definitions(f, ver):
+            rows.append([name, 0, 0, at, "named"])
+            found.add(name)
+    for name, at in TARGET_REGION_FUNCS.get(ver, {}).items():
+        if name not in found:
             rows.append([name, 0, 0, at, "named"])
     return rows
 

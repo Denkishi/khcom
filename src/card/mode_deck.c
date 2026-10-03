@@ -8,7 +8,6 @@
 #include "sprites_msg.h"
 #include "fade.h"
 #include "songs.h"
-#include "battle_actor.h"
 #include "field_state.h"
 #include "game_state.h"
 #include "key.h"

@@ -102,6 +102,13 @@ typedef char MapEnmCache_size[(sizeof(MapEnmCache) == 0x38) ? 1 : -1];
 
 extern GameState gGameState;
 
+void InitGameState();
+void ClearFieldResume();
+void RequestFieldResume();
+void SeedGameRandom();
+void ResetGameState();
 void UpdatePlayTime();
+void SetupRikuNewGame();
+void SetupSoraNewGame();
 
 #endif

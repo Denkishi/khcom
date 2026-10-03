@@ -134,7 +134,6 @@ u8 GetStockMoveCount();
 void HumDrawSub(struct HumWork* p, struct HumSub* s);
 void HandleRikuAiCardInput();
 u8 HumIsTargetInReach(struct HumWork* p, s16 a, u16 b, u16 r);
-void InitGameState();
 
 const EnemyBaseStats* GetEnemyBaseStats(u16 i);
 s32 ResolveAttackHit(BtlObj* a, s32 b);
@@ -226,7 +225,6 @@ void EndCardPlay();
 void func_08012214();
 void ColliderClearPoolContacts(ListPool* pool);
 u8 BgFxIsBlocked(u8 a);
-void SeedGameRandom();
 
 u8 ColliderIsColliding(Collider* p);
 s32 ApplyBtlObjHit(BtlObj* p);

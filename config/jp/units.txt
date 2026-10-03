@@ -34,7 +34,7 @@ btl_collision.c
 evt_data.c
 btl_effect.c
 battle_runtime.c
-task.c
+game_state.c
 evt.c
 acgtrans.c
 btl.c

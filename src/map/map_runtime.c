@@ -10,7 +10,6 @@
 #include "player_progression.h"
 #include "jiminy_inline_text_data.h"
 #include "jiminy_data.h"
-#include "battle_actor.h"
 #include "card_api.h"
 #include "common_text.h"
 #include "engine_math.h"

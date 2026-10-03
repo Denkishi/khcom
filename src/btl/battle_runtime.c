@@ -31,7 +31,6 @@
 #include "m4a.h"
 #include "map_runtime.h"
 #include "mode.h"
-#include "mode_chkbtl_api.h"
 #include "obj.h"
 #include "player_progression_types.h"
 #include "save_api.h"
@@ -2665,50 +2664,4 @@ u8 StepHitFlashSolid(BtlObj* p) {
 
     p->hitFlashFrames++;
     return 1;
-}
-
-void InitGameState() {
-    CpuFill32(0, &gGameState, sizeof(GameState));
-
-    if (gDebugFlags & DEBUG_FLAG_RIKU) {
-        gGameState.flags |= GAME_FLAG_RIKU;
-        gGameState.flags |= GAME_FLAG_SORA_CLEAR;
-    }
-
-    gGameState.world = WORLD_WONDERLAND;
-    gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
-    InitPlayerProgression();
-    gGameState.availableWorlds = 0xFFFF;
-    ResetMapFloors();
-    gGameState.hp = gGameState.progression.maxHp;
-    gGameState.fieldAngle = 0x2D;
-    gGameState.roomEffect = 0;
-}
-
-void ClearFieldResume() {
-    gGameState.fieldResume = 0;
-}
-
-void RequestFieldResume() {
-    gGameState.fieldResume = 1;
-}
-
-void SeedGameRandom() {
-    if (gGameState.fieldResume != 0) {
-        SeedRandom(gGameState.randomSeed);
-    } else {
-        gGameState.randomSeed = GetRandom();
-        SeedRandom(gGameState.randomSeed);
-    }
-}
-
-void ResetGameState() {
-    SeedRandom(gFrameCounter);
-    InitGameState();
-    ClearFieldResume();
-    ChkBtlReset();
-    gUnk_02039DC0 = 0;
-#ifdef VERSION_EU
-    gDebugFlags &= ~DEBUG_FLAG_DEBUG_MENU;
-#endif
 }

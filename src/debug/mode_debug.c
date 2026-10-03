@@ -12,7 +12,6 @@
 #include "player_progression.h"
 #include "gba/io_reg.h"
 #include "anim.h"
-#include "battle_actor.h"
 #include "card_api.h"
 #include "display.h"
 #include "key.h"

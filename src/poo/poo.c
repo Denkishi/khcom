@@ -271,6 +271,7 @@ void SetPoohAction(PoohWork* w, u32 b) {
     } else if (b == 16) {
         m4aSongNumStart(SONG_SYS_PO_FALL);
     } else if (b == 39 || b == 22 || (b >= 32 && b <= 35)) {
+        // fakematch
         do {
             w->angle = 0xAD;
             w->lookAngle = 0xAD;

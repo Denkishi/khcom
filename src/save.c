@@ -684,6 +684,7 @@ void ShowSramErrorScreen() {
     *ime = 1;
     p = (vu16*)REG_ADDR_BG0CNT;
 
+    // fakematch
     do {
         *p = 0x88;
     } while (0);

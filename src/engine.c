@@ -1023,6 +1023,7 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
         *ph = 16;
         break;
     case OAM_SHAPE_SIZE(OAM_SHAPE_SQUARE, 2):
+        // fakematch
         do {
             *pw = 32;
             *ph = 32;

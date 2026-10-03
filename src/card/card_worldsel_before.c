@@ -57,6 +57,7 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
     }
 
     if (++w->animTimer == gWorldSelAnims[w->animStep].duration) {
+        // fakematch
         do {
             w->animStep = w->animStep > 28 ? 0 : w->animStep + 1;
         } while (0);

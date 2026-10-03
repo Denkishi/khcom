@@ -81,6 +81,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
     obj = work->mainSide != 0 ? gBtlWork : gRikuBtlWork;
 
     if (obj->flags & BTL_FLAG_DISMISS_SUMMONS) {
+        // fakematch
         do {
             return 0;
         } while (0);

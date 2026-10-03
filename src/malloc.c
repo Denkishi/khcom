@@ -49,6 +49,7 @@ void HeapInit(void* addr, u32 size, Heap* heap) {
     size &= ~31;
     head = addr;
 
+    // fakematch
     do {
         last = size - 32;
     } while (0);

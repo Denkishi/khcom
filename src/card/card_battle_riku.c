@@ -2009,6 +2009,7 @@ u8 UseRikuCard(CardBattleWork* w) {
         v = 0;
     }
 
+    // fakematch
     do {
         TickRikuHcEffectOnCardUse();
     } while (0);

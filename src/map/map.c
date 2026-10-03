@@ -6152,6 +6152,7 @@ void MapSaveLoadLevelTiles(u16 v) {
     for (i = 0; i < 2; i++) {
         RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
 
+        // fakematch
         do {
             off += 0x20;
         } while (0);

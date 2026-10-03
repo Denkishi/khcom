@@ -205,6 +205,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             m4aSongNumStart(SONG_EF_SUMMON_DOWN);
         }
 
+        // fakematch
         do {
             ApproachValue(&work->scale, 25, work->steps);
         } while (0);

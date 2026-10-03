@@ -2080,6 +2080,7 @@ void Task_MapGmk_Enm_0(MapGmkEnmWork* w, FldPos* arg) {
         frames = gEmy0600Frames;
     }
 
+    // fakematch
     do {
         AnimInit(an, anim, frames);
         AnimStart(an, 0, ANIM_FLAG_LOOP);

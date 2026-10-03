@@ -394,6 +394,7 @@ u8 UpdateRevCountEmpty(RevCountWork* w, void* a) {
         w->steps--;
     }
 
+    // fakematch
     do {
         if (w->list == 0) {
             if (*w->args.count > 1) {

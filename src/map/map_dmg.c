@@ -1,3 +1,8 @@
+/**
+ * map_dmg.c
+ * Field Attack Area Marker
+ */
+
 #include "map_tasks.h"
 #include "sprites_btl.h"
 #include "sprite_palettes.h"

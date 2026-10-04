@@ -1,3 +1,8 @@
+/**
+ * mode_battle.c
+ * Battle Mode
+ */
+
 #include "mode_battle.h"
 #include "malloc.h"
 #include "fade.h"

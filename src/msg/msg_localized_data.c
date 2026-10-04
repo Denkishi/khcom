@@ -1,3 +1,8 @@
+/**
+ * msg_localized_data.c
+ * EU Localized Text Records
+ */
+
 #include "msg_localized_text.h"
 #include "text_types.h"
 

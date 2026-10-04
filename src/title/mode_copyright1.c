@@ -1,3 +1,8 @@
+/**
+ * mode_copyright1.c
+ * Copyright Screen and Save Data Check
+ */
+
 #include "registration_data.h"
 #include "copyright_screens.h"
 #include "fade.h"

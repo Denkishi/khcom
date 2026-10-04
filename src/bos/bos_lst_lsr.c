@@ -1,3 +1,8 @@
+/**
+ * bos_lst_lsr.c
+ * Marluxia Final Form Lasers
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

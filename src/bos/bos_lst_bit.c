@@ -1,3 +1,8 @@
+/**
+ * bos_lst_bit.c
+ * Marluxia Final Form Laser Bits
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

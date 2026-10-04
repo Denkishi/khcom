@@ -1,3 +1,8 @@
+/**
+ * card_prize_card.c
+ * Field Prize Card
+ */
+
 #include "registration_data.h"
 #include "map_api.h"
 #include "m4a_song.h"

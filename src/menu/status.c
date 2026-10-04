@@ -1,3 +1,8 @@
+/**
+ * status.c
+ * Status Screen Tasks
+ */
+
 #include "macros.h"
 #include "localized_resource_assets.h"
 #include "registration_data.h"

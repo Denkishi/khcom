@@ -1,3 +1,8 @@
+/**
+ * hum_hook.c
+ * Captain Hook Boss
+ */
+
 #include "fade.h"
 #include "obj_api.h"
 #include "pallet.h"

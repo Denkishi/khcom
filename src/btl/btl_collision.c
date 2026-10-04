@@ -1,3 +1,8 @@
+/**
+ * btl_collision.c
+ * Attack Hit Checks and Colliders
+ */
+
 #include "engine_math.h"
 #include "listpool.h"
 #include "battle.h"

@@ -1,3 +1,8 @@
+/**
+ * hum_common.c
+ * Humanoid Boss Common Routines
+ */
+
 #include "mode_vsbattle.h"
 #include "prize_types.h"
 #include "btl_api.h"

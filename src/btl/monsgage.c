@@ -1,3 +1,8 @@
+/**
+ * monsgage.c
+ * Monstro Event Battle Gauge
+ */
+
 #include "system_state.h"
 #include "monsgage.h"
 #include "obj_api.h"

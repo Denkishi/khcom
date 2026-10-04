@@ -1,3 +1,8 @@
+/**
+ * bos_lst_ptl.c
+ * Marluxia Final Form Petal Effect
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

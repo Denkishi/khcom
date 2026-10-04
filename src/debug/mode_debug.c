@@ -1,3 +1,8 @@
+/**
+ * mode_debug.c
+ * Debug Menu
+ */
+
 #include "mode_continue.h"
 #include "mode_chkmov.h"
 #include "system_state.h"

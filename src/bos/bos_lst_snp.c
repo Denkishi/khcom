@@ -1,3 +1,8 @@
+/**
+ * bos_lst_snp.c
+ * Marluxia Final Form Broken Part
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

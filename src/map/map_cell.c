@@ -1,3 +1,8 @@
+/**
+ * map_cell.c
+ * Field Cells and Room Generation
+ */
+
 #include "macros.h"
 #include "map.h"
 #include "malloc.h"

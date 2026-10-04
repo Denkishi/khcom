@@ -1,3 +1,8 @@
+/**
+ * card_level_up.c
+ * Level-Up Bonus Screen
+ */
+
 #include "card_localized_data.h"
 #include "registration_data.h"
 #include "system_state.h"

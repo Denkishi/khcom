@@ -1,3 +1,8 @@
+/**
+ * mode_status.c
+ * Status Screen
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"

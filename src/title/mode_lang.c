@@ -1,3 +1,8 @@
+/**
+ * mode_lang.c
+ * Language Select Screen
+ */
+
 #include "mode_lang.h"
 #include "sprites_language_select.h"
 #include "malloc.h"

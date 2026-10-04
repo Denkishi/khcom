@@ -1,3 +1,8 @@
+/**
+ * emy_04.c
+ * Green Requiem Enemy
+ */
+
 #include "task_descriptors.h"
 #include "emy.h"
 #include "sprites_emy.h"

@@ -1,3 +1,8 @@
+/**
+ * wlogo.c
+ * World Logo Animations
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "intr.h"

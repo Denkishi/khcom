@@ -1,3 +1,8 @@
+/**
+ * mode_allmap.c
+ * Floor Map Screen
+ */
+
 #include "macros.h"
 #include "mode_allmap.h"
 #include "sprites_allmap.h"

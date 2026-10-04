@@ -1,3 +1,8 @@
+/**
+ * btl_escape.c
+ * Battle Escape Gauge
+ */
+
 #include "system_state.h"
 #include "btl2.h"
 #include "sprites_btl.h"

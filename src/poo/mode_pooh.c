@@ -1,3 +1,8 @@
+/**
+ * mode_pooh.c
+ * 100 Acre Wood Mode
+ */
+
 #include "mode_pooh.h"
 #include "sprites_pooh.h"
 #include "world_types.h"

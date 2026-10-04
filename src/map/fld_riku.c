@@ -1,3 +1,8 @@
+/**
+ * fld_riku.c
+ * Riku Field Character
+ */
+
 #include "task_descriptors.h"
 #include "map_api.h"
 #include "fld.h"

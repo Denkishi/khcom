@@ -1,3 +1,8 @@
+/**
+ * card_riku_tutorial.c
+ * Sleight Combos and Riku Tutorial Modes
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "card_battle.h"

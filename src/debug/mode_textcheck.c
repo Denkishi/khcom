@@ -1,3 +1,8 @@
+/**
+ * mode_textcheck.c
+ * Debug Text Check
+ */
+
 #include "registration_data.h"
 #include "display.h"
 #include "taskpool.h"

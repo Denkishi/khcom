@@ -1,3 +1,8 @@
+/**
+ * bos_lst.c
+ * Marluxia Final Form Boss
+ */
+
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "gba/io_reg.h"

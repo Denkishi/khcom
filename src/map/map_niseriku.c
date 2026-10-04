@@ -1,3 +1,8 @@
+/**
+ * map_niseriku.c
+ * Riku Replica Field NPC
+ */
+
 #include "map_tasks.h"
 #include "sprites_evt.h"
 #include "sprites_map_tasks.h"

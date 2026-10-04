@@ -1,3 +1,8 @@
+/**
+ * btl_map.c
+ * Battle Background Map
+ */
+
 #include "btl.h"
 #include "battle_backgrounds.h"
 #include "btl_api.h"

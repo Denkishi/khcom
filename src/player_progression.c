@@ -1,3 +1,8 @@
+/**
+ * player_progression.c
+ * Player Progression
+ */
+
 #include "macros.h"
 #include "ms_api.h"
 #include "player_progression.h"

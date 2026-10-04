@@ -1,3 +1,8 @@
+/**
+ * card_prize_card_init.c
+ * Map Card Prizes and Key Display
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"

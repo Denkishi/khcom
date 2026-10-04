@@ -1,3 +1,8 @@
+/**
+ * card_lvup_logo.c
+ * Level-Up Logo and Effects
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "m4a_song.h"

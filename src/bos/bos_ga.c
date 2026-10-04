@@ -1,3 +1,8 @@
+/**
+ * bos_ga.c
+ * Guard Armor Boss
+ */
+
 #include "bos_ga.h"
 #include "anim.h"
 #include "sprites_worldinspect.h"

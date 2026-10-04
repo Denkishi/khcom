@@ -1,3 +1,8 @@
+/**
+ * chara.c
+ * Link Connection and Command Protocol
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "chara_api.h"

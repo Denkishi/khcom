@@ -1,3 +1,8 @@
+/**
+ * card_battle_riku.c
+ * Riku Card Battle Interface
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "card_battle.h"

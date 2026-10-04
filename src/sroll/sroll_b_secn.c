@@ -1,3 +1,8 @@
+/**
+ * sroll_b_secn.c
+ * Staff Roll Section Headers
+ */
+
 #include "sroll.h"
 #include "sprites_staff_roll.h"
 #include "fade.h"

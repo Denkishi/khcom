@@ -1,3 +1,8 @@
+/**
+ * map_faint.c
+ * Field Faint Effect
+ */
+
 #include "map_tasks.h"
 #include "sprites_btl.h"
 #include "sprite_palettes.h"

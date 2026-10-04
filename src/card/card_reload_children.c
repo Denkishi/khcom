@@ -1,3 +1,8 @@
+/**
+ * card_reload_children.c
+ * Card Reload, Boss Prize and Scrollbar
+ */
+
 #include "registration_data.h"
 #include "m4a_song.h"
 #include "game_state.h"

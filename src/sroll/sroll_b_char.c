@@ -1,3 +1,8 @@
+/**
+ * sroll_b_char.c
+ * Staff Roll Credit Characters
+ */
+
 #include "sroll.h"
 #include "evt.h"
 #include "fade.h"

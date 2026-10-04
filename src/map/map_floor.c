@@ -1,3 +1,8 @@
+/**
+ * map_floor.c
+ * Floor Name Display
+ */
+
 #include "monsgage.h"
 #include "map_tasks.h"
 #include "sprites_map.h"

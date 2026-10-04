@@ -1,3 +1,8 @@
+/**
+ * events.c
+ * Event Sequence Data
+ */
+
 #include "msg.h"
 #include "eventselect_api.h"
 #include "card_message_text.h"

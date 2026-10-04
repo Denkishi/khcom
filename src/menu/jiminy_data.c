@@ -1,3 +1,8 @@
+/**
+ * jiminy_data.c
+ * Jiminy's Journal Data
+ */
+
 #include "jiminy_data.h"
 #include "common_text.h"
 #include "jiminy_inline_text_data.h"

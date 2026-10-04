@@ -1,3 +1,8 @@
+/**
+ * card_name.c
+ * Card Name, Premium Effect and Print Layer
+ */
+
 #include "msg_localized_data.h"
 #include "system_state.h"
 #include "text.h"

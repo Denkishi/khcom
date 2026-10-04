@@ -1,3 +1,8 @@
+/**
+ * engine.c
+ * Graphics Engine
+ */
+
 #include "macros.h"
 #include "engine_math.h"
 #include "fade.h"

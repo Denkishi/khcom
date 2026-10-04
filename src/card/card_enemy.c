@@ -1,3 +1,8 @@
+/**
+ * card_enemy.c
+ * Enemy Battle Cards
+ */
+
 #include "registration_data.h"
 #include "card_battle.h"
 #include "m4a_song.h"

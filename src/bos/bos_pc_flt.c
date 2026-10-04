@@ -1,3 +1,8 @@
+/**
+ * bos_pc_flt.c
+ * Parasite Cage Boss Floating Platforms
+ */
+
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "anim.h"

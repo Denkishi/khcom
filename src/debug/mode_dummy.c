@@ -1,3 +1,8 @@
+/**
+ * mode_dummy.c
+ * Debug Placeholder Screen
+ */
+
 #include "map_api.h"
 #include "mode_chkbtl.h"
 #include "msg_api.h"

@@ -1,3 +1,8 @@
+/**
+ * btl_riku.c
+ * Riku Battle Character
+ */
+
 #include "task_descriptors.h"
 #include "card_battle.h"
 #include "engine_math.h"

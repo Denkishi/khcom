@@ -1,3 +1,8 @@
+/**
+ * smn_bambi.c
+ * Bambi Summon
+ */
+
 #include "task_descriptors.h"
 #include "smn.h"
 #include "anim.h"

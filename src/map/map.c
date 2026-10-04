@@ -1,3 +1,8 @@
+/**
+ * map.c
+ * Field Map Modes and Menus
+ */
+
 #include "system_state.h"
 #include "monsgage.h"
 #include "map.h"

@@ -1,3 +1,8 @@
+/**
+ * btl_hpply.c
+ * Player HP Gauge
+ */
+
 #include "m4a_song.h"
 #include "btl2.h"
 #include "sprites_btl.h"

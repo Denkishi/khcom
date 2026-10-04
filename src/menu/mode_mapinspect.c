@@ -1,3 +1,8 @@
+/**
+ * mode_mapinspect.c
+ * Map Card List Screen
+ */
+
 #include "system_state.h"
 #include "map_api.h"
 #include "text.h"

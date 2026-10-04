@@ -1,3 +1,8 @@
+/**
+ * btl_born.c
+ * Enemy Spawn Sequence
+ */
+
 #include "obj_api.h"
 #include "util.h"
 #include "btl3.h"

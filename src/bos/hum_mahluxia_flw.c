@@ -1,3 +1,8 @@
+/**
+ * hum_mahluxia_flw.c
+ * Marluxia Boss Flower Effect
+ */
+
 #include "obj_api.h"
 #include "hum.h"
 #include "sprites_hum.h"

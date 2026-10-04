@@ -1,3 +1,8 @@
+/**
+ * btl_start.c
+ * Battle Start Effect
+ */
+
 #include "display.h"
 #include "m4a_song.h"
 #include "btl2.h"

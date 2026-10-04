@@ -1,3 +1,8 @@
+/**
+ * mode_movie.c
+ * Movie Playback Mode
+ */
+
 #include "mode_chkmov.h"
 #include "registration_data.h"
 #include "system_state.h"

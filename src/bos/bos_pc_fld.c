@@ -1,3 +1,8 @@
+/**
+ * bos_pc_fld.c
+ * Parasite Cage Boss Arena
+ */
+
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "sprites_staff_roll.h"

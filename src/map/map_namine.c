@@ -1,3 +1,8 @@
+/**
+ * map_namine.c
+ * Namine Field NPC
+ */
+
 #include "map_tasks.h"
 #include "sprites_evt.h"
 #include "sprite_palettes.h"

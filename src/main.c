@@ -1,3 +1,8 @@
+/**
+ * main.c
+ * Main Loop and Interrupts
+ */
+
 #include "chara_api.h"
 #include "intr.h"
 #include "gba/syscall.h"

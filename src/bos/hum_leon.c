@@ -1,3 +1,8 @@
+/**
+ * hum_leon.c
+ * Leon Tutorial Opponent
+ */
+
 #include "hum.h"
 #include "sprites_evt.h"
 #include "sprites_hum.h"

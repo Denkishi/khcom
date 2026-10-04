@@ -1,3 +1,8 @@
+/**
+ * lockon.c
+ * Field Lock-On Cursor
+ */
+
 #include "mode_test.h"
 #include "sprites_mode_test.h"
 #include "malloc.h"

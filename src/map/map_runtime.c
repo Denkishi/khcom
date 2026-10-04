@@ -1,3 +1,8 @@
+/**
+ * map_runtime.c
+ * Floor and Room Progression
+ */
+
 #include "map_api.h"
 #include "msg_api.h"
 #include "monsgage.h"

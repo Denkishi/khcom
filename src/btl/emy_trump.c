@@ -1,3 +1,8 @@
+/**
+ * emy_trump.c
+ * Card Soldier Enemy
+ */
+
 #include "task_descriptors.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"

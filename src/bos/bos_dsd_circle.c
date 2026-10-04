@@ -1,3 +1,8 @@
+/**
+ * bos_dsd_circle.c
+ * Darkside Boss Energy Attacks
+ */
+
 #include "bos2.h"
 #include "sprites_bos2.h"
 #include "sprites_btl.h"

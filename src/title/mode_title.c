@@ -1,3 +1,8 @@
+/**
+ * mode_title.c
+ * Title Screen
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "title_api.h"

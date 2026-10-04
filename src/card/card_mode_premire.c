@@ -1,3 +1,8 @@
+/**
+ * card_mode_premire.c
+ * Enemy Card Effect Names and Level-Up Test
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "msg_api.h"

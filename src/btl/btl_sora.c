@@ -1,3 +1,8 @@
+/**
+ * btl_sora.c
+ * Sora Battle Character
+ */
+
 #include "task_descriptors.h"
 #include "card_battle.h"
 #include "engine_math.h"

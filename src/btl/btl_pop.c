@@ -1,3 +1,8 @@
+/**
+ * btl_pop.c
+ * Battle Popup Labels
+ */
+
 #include "system_state.h"
 #include "btl2.h"
 #include "sprites_btl.h"

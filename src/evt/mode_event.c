@@ -1,3 +1,8 @@
+/**
+ * mode_event.c
+ * Event Mode
+ */
+
 #include "mode_test.h"
 #include "card_ids.h"
 #include "gba/keys.h"

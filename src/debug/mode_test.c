@@ -1,3 +1,8 @@
+/**
+ * mode_test.c
+ * Debug HP Gauge Sprite Test
+ */
+
 #include "mode_test.h"
 #include "gba/keys.h"
 #include "sprites_mode_test.h"

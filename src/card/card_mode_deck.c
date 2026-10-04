@@ -1,3 +1,8 @@
+/**
+ * card_mode_deck.c
+ * Deck Setup and Card Description Tables
+ */
+
 #include "msg_localized_data.h"
 #include "registration_data.h"
 #include "system_state.h"

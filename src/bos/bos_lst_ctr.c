@@ -1,3 +1,8 @@
+/**
+ * bos_lst_ctr.c
+ * Marluxia Final Form Projectiles
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

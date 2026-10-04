@@ -1,3 +1,8 @@
+/**
+ * poo.c
+ * 100 Acre Wood Minigame Objects
+ */
+
 #include "macros.h"
 #include "poo.h"
 #include "background_actor_assets.h"

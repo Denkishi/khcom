@@ -1,3 +1,8 @@
+/**
+ * hum_mahluxia.c
+ * Marluxia Boss
+ */
+
 #include "system_state.h"
 #include "fade.h"
 #include "obj_api.h"

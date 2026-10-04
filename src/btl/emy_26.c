@@ -1,3 +1,8 @@
+/**
+ * emy_26.c
+ * Gargoyle Enemy
+ */
+
 #include "task_descriptors.h"
 #include "sprites_emy.h"
 #include "enemy_common.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_jf.c
+ * Jafar Boss
+ */
+
 #include "macros.h"
 #include "bos2.h"
 #include "sprites_bos2.h"

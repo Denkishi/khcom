@@ -1,3 +1,8 @@
+/**
+ * btl_exp.c
+ * Experience Point Display
+ */
+
 #include "system_state.h"
 #include "btl4.h"
 #include "sprites_btl_hud.h"

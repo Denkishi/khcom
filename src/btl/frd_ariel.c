@@ -1,3 +1,8 @@
+/**
+ * frd_ariel.c
+ * Ariel Battle Ally
+ */
+
 #include "task_descriptors.h"
 #include "frd.h"
 #include "sprites_frd.h"

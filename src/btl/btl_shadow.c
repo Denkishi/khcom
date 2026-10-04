@@ -1,3 +1,8 @@
+/**
+ * btl_shadow.c
+ * Battle Actor Shadow
+ */
+
 #include "btl2.h"
 #include "sprites_btl.h"
 #include "battle_actor.h"

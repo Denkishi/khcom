@@ -1,3 +1,8 @@
+/**
+ * continue_ui.c
+ * Continue Screen Menu
+ */
+
 #include "system_state.h"
 #include "anim.h"
 #include "types.h"

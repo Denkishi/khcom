@@ -1,3 +1,8 @@
+/**
+ * debug_text.c
+ * Debug Text Printing
+ */
+
 #include "debug_font.h"
 #include "malloc.h"
 #include "display.h"

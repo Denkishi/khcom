@@ -1,3 +1,8 @@
+/**
+ * boss_card_data.c
+ * Enemy Card Deck Tables
+ */
+
 #include "card_ids.h"
 #include "types.h"
 

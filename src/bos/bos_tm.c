@@ -1,3 +1,8 @@
+/**
+ * bos_tm.c
+ * Trickmaster Boss
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "boss_tm.h"

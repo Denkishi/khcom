@@ -1,3 +1,8 @@
+/**
+ * game_state.c
+ * Game State Setup
+ */
+
 #include "system_state.h"
 #include "game_state.h"
 #include "card_api.h"

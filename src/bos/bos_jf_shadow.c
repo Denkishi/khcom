@@ -1,3 +1,8 @@
+/**
+ * bos_jf_shadow.c
+ * Jafar Boss Shadow
+ */
+
 #include "macros.h"
 #include "bos_jf_shadow.h"
 #include "sprites_btl.h"

@@ -1,3 +1,8 @@
+/**
+ * card_deckmenu2.c
+ * Deck Data and Sora Deck Menu
+ */
+
 #include "macros.h"
 #include "card_localized_data.h"
 #include "msg_localized_data.h"

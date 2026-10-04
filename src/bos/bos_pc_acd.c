@@ -1,3 +1,8 @@
+/**
+ * bos_pc_acd.c
+ * Parasite Cage Boss Acid
+ */
+
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "fade.h"

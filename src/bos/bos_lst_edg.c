@@ -1,3 +1,8 @@
+/**
+ * bos_lst_edg.c
+ * Marluxia Final Form Boomerang Attack
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

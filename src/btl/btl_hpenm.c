@@ -1,3 +1,8 @@
+/**
+ * btl_hpenm.c
+ * Enemy HP Gauge
+ */
+
 #include "system_state.h"
 #include "btl2.h"
 #include "sprites_btl_hud.h"

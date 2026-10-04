@@ -1,3 +1,8 @@
+/**
+ * mode_ms.c
+ * Moogle Card Pack Shop
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"

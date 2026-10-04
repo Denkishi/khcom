@@ -1,3 +1,8 @@
+/**
+ * card_deckmenu2_2.c
+ * Riku Deck Menu
+ */
+
 #include "card_localized_data.h"
 #include "registration_data.h"
 #include "system_state.h"

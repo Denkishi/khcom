@@ -1,3 +1,8 @@
+/**
+ * card_worldsel_before.c
+ * World Select Lead-In Effect
+ */
+
 #include "registration_data.h"
 #include "m4a_song.h"
 #include "fade.h"

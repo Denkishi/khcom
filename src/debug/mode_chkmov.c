@@ -1,3 +1,8 @@
+/**
+ * mode_chkmov.c
+ * Debug Movie Check
+ */
+
 #include "card_api.h"
 #include "display.h"
 #include "gba/keys.h"

@@ -1,3 +1,8 @@
+/**
+ * mode_deck.c
+ * Deck Menu Screen
+ */
+
 #include "mode_deck.h"
 #include "registration_data.h"
 #include "map_api.h"

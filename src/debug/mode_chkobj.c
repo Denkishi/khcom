@@ -1,3 +1,8 @@
+/**
+ * mode_chkobj.c
+ * Debug Object Check
+ */
+
 #include "mode_chkobj_assets.h"
 #include "mode_chkobj.h"
 #include "mode_chkbtl.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_boogie.c
+ * Oogie Boogie Boss
+ */
+
 #include "bos_boogie.h"
 #include "bos4_api.h"
 #include "registration_data.h"

@@ -1,3 +1,8 @@
+/**
+ * ms_charge.c
+ * Moogle Card Trade-In Screen
+ */
+
 #include "localized_resource_assets.h"
 #include "system_state.h"
 #include "ms_charge_api.h"

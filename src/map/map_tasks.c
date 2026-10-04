@@ -1,3 +1,8 @@
+/**
+ * map_tasks.c
+ * Field Enemies and Gimmicks
+ */
+
 #include "monsgage.h"
 #include "map_resource_assets.h"
 #include "map_tasks.h"

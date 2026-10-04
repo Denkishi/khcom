@@ -1,3 +1,8 @@
+/**
+ * sroll_b_logo.c
+ * Staff Roll Logo
+ */
+
 #include "sroll.h"
 #include "sprites_staff_roll.h"
 #include "fade.h"

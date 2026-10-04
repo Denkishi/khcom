@@ -1,3 +1,8 @@
+/**
+ * btl_effect.c
+ * Battle Background Effects
+ */
+
 #include "display.h"
 #include "battle.h"
 #include "battle_bg_animations.h"

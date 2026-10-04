@@ -1,3 +1,8 @@
+/**
+ * card_battle.c
+ * Sora Card Battle Interface
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "card_api.h"

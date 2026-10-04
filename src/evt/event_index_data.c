@@ -1,3 +1,8 @@
+/**
+ * event_index_data.c
+ * Event Index Tables
+ */
+
 #include "event_name_text.h"
 #include "event_background_types.h"
 #include "event_backgrounds.h"

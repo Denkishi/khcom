@@ -1,3 +1,8 @@
+/**
+ * formation_data.c
+ * Enemy Formation Data
+ */
+
 #include "formation_data.h"
 #include "formation_types.h"
 

@@ -1,3 +1,8 @@
+/**
+ * util.c
+ * Key State and Song Utilities
+ */
+
 #include "util.h"
 #include "malloc.h"
 #include "m4a.h"

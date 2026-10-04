@@ -1,3 +1,8 @@
+/**
+ * emy_38.c
+ * Large Body Enemy
+ */
+
 #include "task_descriptors.h"
 #include "sprites_emy.h"
 #include "btl_api.h"

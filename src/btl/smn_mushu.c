@@ -1,3 +1,8 @@
+/**
+ * smn_mushu.c
+ * Mushu Summon
+ */
+
 #include "task_descriptors.h"
 #include "display.h"
 #include "smn.h"

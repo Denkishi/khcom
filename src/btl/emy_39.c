@@ -1,3 +1,8 @@
+/**
+ * emy_39.c
+ * Fat Bandit Enemy
+ */
+
 #include "task_descriptors.h"
 #include "display.h"
 #include "emy.h"

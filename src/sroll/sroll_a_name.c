@@ -1,3 +1,8 @@
+/**
+ * sroll_a_name.c
+ * Staff Roll Character Names
+ */
+
 #include "sroll.h"
 #include "sprites_staff_roll.h"
 #include "gba/io_reg.h"

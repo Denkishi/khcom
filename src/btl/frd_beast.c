@@ -1,3 +1,8 @@
+/**
+ * frd_beast.c
+ * Beast Battle Ally
+ */
+
 #include "task_descriptors.h"
 #include "system_state.h"
 #include "frd.h"

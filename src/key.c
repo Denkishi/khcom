@@ -1,3 +1,8 @@
+/**
+ * key.c
+ * Key Input
+ */
+
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "types.h"

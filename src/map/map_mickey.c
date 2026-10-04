@@ -1,3 +1,8 @@
+/**
+ * map_mickey.c
+ * King Mickey Field NPC
+ */
+
 #include "map_tasks.h"
 #include "sprites_map_tasks.h"
 #include "sprite_palettes.h"

@@ -1,3 +1,8 @@
+/**
+ * card_deckcard2.c
+ * Deck Grid Card Sprite
+ */
+
 #include "obj_api.h"
 #include "listpool.h"
 #include "taskpool.h"

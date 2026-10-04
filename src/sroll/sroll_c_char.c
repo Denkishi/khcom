@@ -1,3 +1,8 @@
+/**
+ * sroll_c_char.c
+ * Staff Roll Ending Character
+ */
+
 #include "sroll.h"
 #include "sprites_staff_roll.h"
 #include "anim.h"

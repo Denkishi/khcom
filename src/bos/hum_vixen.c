@@ -1,3 +1,8 @@
+/**
+ * hum_vixen.c
+ * Vexen Boss
+ */
+
 #include "system_state.h"
 #include "fade.h"
 #include "obj_api.h"

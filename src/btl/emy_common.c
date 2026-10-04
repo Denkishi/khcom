@@ -1,3 +1,8 @@
+/**
+ * emy_common.c
+ * Common Enemy Routines
+ */
+
 #include "display.h"
 #include "mode_vsbattle.h"
 #include "enemy_common.h"

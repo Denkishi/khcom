@@ -1,3 +1,8 @@
+/**
+ * map_data.c
+ * Field Map Data Tables
+ */
+
 #include "map.h"
 #include "map_enemy_data.h"
 #include "map_spawn_data.h"

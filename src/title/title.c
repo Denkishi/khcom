@@ -1,3 +1,8 @@
+/**
+ * title.c
+ * Title Screen Logo and Menu
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "title_api.h"

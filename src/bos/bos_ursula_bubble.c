@@ -1,3 +1,8 @@
+/**
+ * bos_ursula_bubble.c
+ * Ursula Boss Bubbles and Thunder
+ */
+
 #include "bos4.h"
 #include "sprites_bos4.h"
 #include "songs.h"

@@ -1,3 +1,8 @@
+/**
+ * actor_localized_data.c
+ * Localized Sprite Animation Tables
+ */
+
 #include "battle_localized_assets.h"
 #include "sprites_hum.h"
 #include "sprites_emy.h"

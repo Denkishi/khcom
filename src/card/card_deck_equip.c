@@ -1,3 +1,8 @@
+/**
+ * card_deck_equip.c
+ * Deck Equip Dialogs
+ */
+
 #include "system_state.h"
 #include "msg_api.h"
 #include <string.h>

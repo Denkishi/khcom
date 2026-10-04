@@ -1,3 +1,8 @@
+/**
+ * card_sysmsgwin.c
+ * System Message Window
+ */
+
 #include "system_state.h"
 #include "msg_api.h"
 #include "m4a_song.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_jf_majin.c
+ * Genie Jafar Body and Darkside Boss
+ */
+
 #include "macros.h"
 #include "bos2.h"
 #include "sprites_bos2.h"

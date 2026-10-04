@@ -1,3 +1,8 @@
+/**
+ * sio.c
+ * Serial Communication Driver
+ */
+
 #include "macros.h"
 #include "intr.h"
 #include "sio.h"

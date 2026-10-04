@@ -1,3 +1,8 @@
+/**
+ * mode_worldinspect.c
+ * World List Screen
+ */
+
 #include "types.h"
 #include "worldinspect_data.h"
 #include "registration_data.h"

@@ -1,3 +1,8 @@
+/**
+ * room.c
+ * Room Name Display
+ */
+
 #include "text.h"
 #include "monsgage.h"
 #include "room.h"

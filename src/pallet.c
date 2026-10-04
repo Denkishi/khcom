@@ -1,3 +1,8 @@
+/**
+ * pallet.c
+ * Palette Effects and Background Wave
+ */
+
 #include "macros.h"
 #include "pallet.h"
 #include "intr.h"

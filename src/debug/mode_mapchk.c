@@ -1,3 +1,8 @@
+/**
+ * mode_mapchk.c
+ * Debug Map Check
+ */
+
 #include "mode_mapchk.h"
 #include "registration_data.h"
 #include "map_runtime.h"

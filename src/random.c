@@ -1,3 +1,8 @@
+/**
+ * random.c
+ * Random Number Generator
+ */
+
 #include "types.h"
 
 static u32 sRandSeed;

@@ -1,3 +1,8 @@
+/**
+ * battle_runtime.c
+ * Battle Core Logic
+ */
+
 #include "macros.h"
 #include "mode_continue.h"
 #include "registration_data.h"

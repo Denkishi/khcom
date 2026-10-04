@@ -1,3 +1,8 @@
+/**
+ * emy_08.c
+ * Black Fungus Enemy
+ */
+
 #include "task_descriptors.h"
 #include "emy.h"
 #include "sprites_emy.h"

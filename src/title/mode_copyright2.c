@@ -1,3 +1,8 @@
+/**
+ * mode_copyright2.c
+ * Second Copyright Screen
+ */
+
 #include "registration_data.h"
 #include "copyright_screens.h"
 #include "fade.h"

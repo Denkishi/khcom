@@ -1,3 +1,8 @@
+/**
+ * btl_vslockon.c
+ * Link Battle Lock-On Cursor
+ */
+
 #include "btl4.h"
 #include "sprites_btl.h"
 #include "anim.h"

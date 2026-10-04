@@ -1,3 +1,8 @@
+/**
+ * hum_robe.c
+ * Robed Figure Tutorial Opponent
+ */
+
 #include "hum.h"
 #include "sprites_evt.h"
 #include "sprites_hum.h"

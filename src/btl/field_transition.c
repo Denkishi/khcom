@@ -1,3 +1,8 @@
+/**
+ * field_transition.c
+ * Field Entry Transition
+ */
+
 #include "mode.h"
 #include "obj_api.h"
 #include "battle.h"

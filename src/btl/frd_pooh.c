@@ -1,3 +1,8 @@
+/**
+ * frd_pooh.c
+ * Winnie the Pooh Battle Ally
+ */
+
 #include "frd_pooh.h"
 #include "sprites_pooh.h"
 #include "btl_api.h"

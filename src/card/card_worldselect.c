@@ -1,3 +1,8 @@
+/**
+ * card_worldselect.c
+ * Map Card Selection and Inventory
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "system_state.h"

@@ -1,3 +1,8 @@
+/**
+ * card_stock_info.c
+ * Card Help Text and Sleight Info
+ */
+
 #include "msg_localized_data.h"
 #include "system_state.h"
 #include "player_progression.h"

@@ -1,3 +1,8 @@
+/**
+ * bg_anim.c
+ * Background Animation Player
+ */
+
 #include "pallet.h"
 #include "gba/syscall.h"
 #include <stddef.h>

@@ -1,3 +1,8 @@
+/**
+ * sprite.c
+ * Sprite Management
+ */
+
 #include "display.h"
 #include "gba/syscall.h"
 #include "listpool.h"

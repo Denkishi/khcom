@@ -1,3 +1,8 @@
+/**
+ * btl.c
+ * Battle Lock-On Cursor and Area Marker
+ */
+
 #include "task_descriptors.h"
 #include "obj_api.h"
 #include "btl.h"

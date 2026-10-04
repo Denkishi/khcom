@@ -1,3 +1,8 @@
+/**
+ * mode_eventselect.c
+ * Debug Event Select and Event Effects
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "msg_api.h"

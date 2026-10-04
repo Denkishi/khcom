@@ -1,3 +1,8 @@
+/**
+ * allmap.c
+ * Floor Map Screen Tasks
+ */
+
 #include "macros.h"
 #include "localized_resource_assets.h"
 #include "registration_data.h"

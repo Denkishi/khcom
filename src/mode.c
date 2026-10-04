@@ -1,3 +1,8 @@
+/**
+ * mode.c
+ * Game Mode Manager
+ */
+
 #include "registration_data.h"
 #include "chara_api.h"
 #include "display.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_lst_fal.c
+ * Marluxia Final Form Falling Particles
+ */
+
 #include "bos7.h"
 #include "sprites_bos7.h"
 #include "sprites_bos6.h"

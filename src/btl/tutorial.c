@@ -1,3 +1,8 @@
+/**
+ * tutorial.c
+ * Battle Tutorial Guide
+ */
+
 #include "tutorial.h"
 #include "gba/keys.h"
 #include "sprites_btl_hud.h"

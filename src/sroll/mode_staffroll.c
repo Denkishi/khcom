@@ -1,3 +1,8 @@
+/**
+ * mode_staffroll.c
+ * Staff Roll Mode
+ */
+
 #include "registration_data.h"
 #include "system_state.h"
 #include "mode.h"

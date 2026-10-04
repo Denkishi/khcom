@@ -1,3 +1,8 @@
+/**
+ * mode_continue.c
+ * Continue Screen
+ */
+
 #include "continue_ui.h"
 #include "map_api.h"
 #include "mode.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_pc.c
+ * Parasite Cage Boss
+ */
+
 #include "bos6.h"
 #include "sprites_bos6.h"
 #include "sprites_bos7.h"

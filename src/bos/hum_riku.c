@@ -1,3 +1,8 @@
+/**
+ * hum_riku.c
+ * Riku Replica Boss
+ */
+
 #include "fade.h"
 #include "obj_api.h"
 #include "hum.h"

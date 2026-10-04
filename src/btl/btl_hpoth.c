@@ -1,3 +1,8 @@
+/**
+ * btl_hpoth.c
+ * Link Opponent HP Gauge
+ */
+
 #include "btl4.h"
 #include "sprites_btl.h"
 #include "anim.h"

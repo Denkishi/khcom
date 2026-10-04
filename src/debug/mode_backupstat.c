@@ -1,3 +1,8 @@
+/**
+ * mode_backupstat.c
+ * Debug Save Backup Status
+ */
+
 #include "mode_chkbtl.h"
 #include "mode_backupstat.h"
 #include "gba/keys.h"

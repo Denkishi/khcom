@@ -1,3 +1,8 @@
+/**
+ * emy_06.c
+ * Sea Neon Enemy
+ */
+
 #include "task_descriptors.h"
 #include "emy.h"
 #include "sprites_emy.h"

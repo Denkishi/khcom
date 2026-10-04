@@ -1,3 +1,8 @@
+/**
+ * card_premire_chance.c
+ * Premium Bonus Roulette Cards
+ */
+
 #include "fade.h"
 #include "obj_api.h"
 #include "engine_math.h"

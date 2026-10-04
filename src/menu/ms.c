@@ -1,3 +1,8 @@
+/**
+ * ms.c
+ * Moogle Shop Sparkles and Flags
+ */
+
 #include "ms.h"
 #include "sprites_moogle_shop.h"
 #include "mode_ms_api.h"

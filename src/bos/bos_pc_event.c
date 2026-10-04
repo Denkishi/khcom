@@ -1,3 +1,8 @@
+/**
+ * bos_pc_event.c
+ * Parasite Cage Boss Event Animation
+ */
+
 #include "bos6.h"
 #include "taskpool.h"
 #include "types.h"

@@ -1,3 +1,8 @@
+/**
+ * mode_chksnd.c
+ * Debug Sound Check
+ */
+
 #include "m4a_song.h"
 #include "mode_chksnd.h"
 #include "gba/keys.h"

@@ -1,3 +1,8 @@
+/**
+ * card_map_anim.c
+ * Card Collection and Map Tile Animation
+ */
+
 #include "macros.h"
 #include "player_progression.h"
 #include "game_state.h"

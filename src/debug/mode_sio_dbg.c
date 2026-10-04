@@ -1,3 +1,8 @@
+/**
+ * mode_sio_dbg.c
+ * Debug Link Battle Config
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "mode_sio_dbg.h"

@@ -1,3 +1,8 @@
+/**
+ * card_friend_card.c
+ * Card Pickups, Sleight Names and Premium Bonus
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "system_state.h"

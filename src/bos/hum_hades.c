@@ -1,3 +1,8 @@
+/**
+ * hum_hades.c
+ * Hades Boss
+ */
+
 #include "system_state.h"
 #include "obj_api.h"
 #include "hum.h"

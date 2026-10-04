@@ -1,3 +1,8 @@
+/**
+ * evt_data.c
+ * Event Object Animation Data
+ */
+
 #include "mode_chkobj_assets.h"
 #include "evt_assets.h"
 #include "sprites_continue.h"

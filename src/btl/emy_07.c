@@ -1,3 +1,8 @@
+/**
+ * emy_07.c
+ * White Mushroom Enemy
+ */
+
 #include "task_descriptors.h"
 #include "emy.h"
 #include "sprites_emy.h"

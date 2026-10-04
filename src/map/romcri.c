@@ -1,3 +1,8 @@
+/**
+ * romcri.c
+ * Room Creation Effects
+ */
+
 #include "pallet.h"
 #include "romcri.h"
 #include "romcri_backgrounds.h"

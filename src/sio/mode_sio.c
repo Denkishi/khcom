@@ -1,3 +1,8 @@
+/**
+ * mode_sio.c
+ * Link Battle and Card Trade Modes
+ */
+
 #include "macros.h"
 #include "mode_sio_dbg.h"
 #include "mode_chkobj_assets.h"

@@ -1,3 +1,8 @@
+/**
+ * fld_shadow.c
+ * Field Actor Shadow
+ */
+
 #include "task_descriptors.h"
 #include "fld.h"
 #include "sprites_btl.h"

@@ -1,3 +1,8 @@
+/**
+ * btl_pop_cb.c
+ * Riku Card Break Popup
+ */
+
 #include "system_state.h"
 #include "btl4.h"
 #include "sprites_btl.h"

@@ -1,3 +1,8 @@
+/**
+ * btl_vs.c
+ * Link Battle Logic
+ */
+
 #include "display.h"
 #include "m4a_song.h"
 #include "battle.h"

@@ -1,3 +1,8 @@
+/**
+ * bos_dsd_ita.c
+ * Darkside Boss Platform and Rocks
+ */
+
 #include "bos2.h"
 #include "sprites_bos2.h"
 #include "battle_actor.h"

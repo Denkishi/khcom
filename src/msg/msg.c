@@ -1,3 +1,8 @@
+/**
+ * msg.c
+ * Text and Glyph Rendering
+ */
+
 #include "msg.h"
 #include "sprites_msg.h"
 #include "malloc.h"

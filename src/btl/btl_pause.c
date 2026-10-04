@@ -1,3 +1,8 @@
+/**
+ * btl_pause.c
+ * Battle Pause Control
+ */
+
 #include "system_state.h"
 #include "m4a_song.h"
 #include "btl2.h"

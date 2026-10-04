@@ -1,3 +1,8 @@
+/**
+ * card_ev_bg_effect.c
+ * Event Background Effects
+ */
+
 #include "registration_data.h"
 #include "fade.h"
 #include "display.h"

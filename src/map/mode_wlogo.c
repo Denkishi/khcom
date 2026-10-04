@@ -1,3 +1,8 @@
+/**
+ * mode_wlogo.c
+ * World Logo Screen
+ */
+
 #include "mode_wlogo.h"
 #include "registration_data.h"
 #include "mode_sio.h"

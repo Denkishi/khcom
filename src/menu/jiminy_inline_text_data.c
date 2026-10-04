@@ -1,3 +1,8 @@
+/**
+ * jiminy_inline_text_data.c
+ * EU Localized World Names
+ */
+
 #include "localized_names.h"
 #include "jiminy_types.h"
 

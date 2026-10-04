@@ -1,3 +1,8 @@
+/**
+ * mode_vsbattle.c
+ * Link Battle Mode
+ */
+
 #include "macros.h"
 #include "mode_vsbattle.h"
 #include "chara_types.h"

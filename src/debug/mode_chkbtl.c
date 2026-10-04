@@ -1,3 +1,8 @@
+/**
+ * mode_chkbtl.c
+ * Debug Battle Check
+ */
+
 #include "macros.h"
 #include "mode_chkbtl.h"
 #include "gba/keys.h"

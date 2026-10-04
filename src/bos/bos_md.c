@@ -1,3 +1,8 @@
+/**
+ * bos_md.c
+ * Dragon Maleficent Boss
+ */
+
 #include "system_state.h"
 #include "display.h"
 #include "fade.h"

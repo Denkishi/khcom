@@ -1,3 +1,8 @@
+/**
+ * btl_raid.c
+ * Raid Sleight Keyblade Throw
+ */
+
 #include "display.h"
 #include "obj_api.h"
 #include "btl3.h"

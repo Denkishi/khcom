@@ -1,3 +1,8 @@
+/**
+ * sroll_b_crtn.c
+ * Staff Roll Curtain
+ */
+
 #include "sroll.h"
 #include "sprites_evt.h"
 #include "sprites_smn.h"

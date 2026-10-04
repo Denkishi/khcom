@@ -1,3 +1,8 @@
+/**
+ * smn_tink.c
+ * Tinker Bell Summon
+ */
+
 #include "task_descriptors.h"
 #include "smn.h"
 #include "anim.h"

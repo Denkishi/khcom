@@ -1,3 +1,8 @@
+/**
+ * pcm_audio.c
+ * PCM Audio Playback
+ */
+
 #include "pcm_audio.h"
 #include "sroll_api.h"
 #include "gba/io_reg.h"

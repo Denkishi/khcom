@@ -1,3 +1,8 @@
+/**
+ * mode_jiminy.c
+ * Jiminy's Journal Screen
+ */
+
 #include "sprites_msg.h"
 #include "jiminy_journal.h"
 #include "sprites_bos5.h"

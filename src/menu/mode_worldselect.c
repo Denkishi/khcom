@@ -1,3 +1,8 @@
+/**
+ * mode_worldselect.c
+ * World Select Screen
+ */
+
 #include "system_state.h"
 #include "map_api.h"
 #include "msg_api.h"

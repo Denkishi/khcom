@@ -1,3 +1,8 @@
+/**
+ * mode_ms_top.c
+ * Moogle Shop Top Menu
+ */
+
 #include "mode_ms_top.h"
 #include "registration_data.h"
 #include "system_state.h"

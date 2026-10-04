@@ -1,3 +1,8 @@
+/**
+ * bos_boogie_dice.c
+ * Oogie Boogie Boss Dice and Gimmicks
+ */
+
 #include "macros.h"
 #include "bos4.h"
 #include "sprites_bos4.h"

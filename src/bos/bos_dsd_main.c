@@ -1,3 +1,8 @@
+/**
+ * bos_dsd_main.c
+ * Darkside Boss Body
+ */
+
 #include "bos2.h"
 #include "boss_map_block_assets.h"
 #include "sprites_bos2.h"

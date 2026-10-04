@@ -1,3 +1,8 @@
+/**
+ * malloc.c
+ * Heap Memory Allocator
+ */
+
 #include "malloc.h"
 #include <stddef.h>
 #include "types.h"

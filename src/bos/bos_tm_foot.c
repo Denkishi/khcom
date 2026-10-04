@@ -1,3 +1,8 @@
+/**
+ * bos_tm_foot.c
+ * Trickmaster Boss Limbs, Clubs and Table
+ */
+
 #include "macros.h"
 #include "boss_tm.h"
 #include "boss_tm_assets.h"

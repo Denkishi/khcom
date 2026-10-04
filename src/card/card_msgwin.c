@@ -1,3 +1,8 @@
+/**
+ * card_msgwin.c
+ * Card Message Window
+ */
+
 #include "macros.h"
 #include "msg_localized_data.h"
 #include "registration_data.h"

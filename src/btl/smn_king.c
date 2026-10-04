@@ -1,3 +1,8 @@
+/**
+ * smn_king.c
+ * King Mickey Summon
+ */
+
 #include "task_descriptors.h"
 #include "smn.h"
 #include "anim.h"

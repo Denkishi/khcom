@@ -1,3 +1,8 @@
+/**
+ * btl_badstatus.c
+ * Status Ailment Indicator
+ */
+
 #include "obj_api.h"
 #include "btl3.h"
 #include "sprites_btl.h"

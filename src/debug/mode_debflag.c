@@ -1,3 +1,8 @@
+/**
+ * mode_debflag.c
+ * Debug Flag Settings
+ */
+
 #include "macros.h"
 #include "map_api.h"
 #include "mode_chkbtl.h"

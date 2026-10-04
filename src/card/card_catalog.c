@@ -1,3 +1,8 @@
+/**
+ * card_catalog.c
+ * Card Definition Catalog
+ */
+
 #include <stddef.h>
 #include "card_def_assets.h"
 #include "sprites_card_pictures.h"

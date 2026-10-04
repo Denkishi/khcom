@@ -1,3 +1,8 @@
+/**
+ * mode_chkeff.c
+ * Debug Effect Check
+ */
+
 #include "bg_animation_data.h"
 #include "display.h"
 #include "mode_chkeff.h"

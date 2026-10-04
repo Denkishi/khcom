@@ -1,3 +1,8 @@
+/**
+ * event_message.c
+ * Event Sequence Player
+ */
+
 #include "macros.h"
 #include "registration_data.h"
 #include "eventselect_api.h"

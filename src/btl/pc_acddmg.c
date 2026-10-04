@@ -1,3 +1,8 @@
+/**
+ * pc_acddmg.c
+ * Parasite Cage Acid Damage
+ */
+
 #include "pc_acddmg.h"
 #include "battle_actor_types.h"
 #include "battle_work.h"

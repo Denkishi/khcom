@@ -1,3 +1,8 @@
+/**
+ * bos_tm_body.c
+ * Trickmaster Boss Body
+ */
+
 #include "macros.h"
 #include "boss_tm.h"
 #include "boss_tm_assets.h"

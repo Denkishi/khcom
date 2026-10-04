@@ -99,6 +99,32 @@ def declared_category_ids():
     return ids
 
 
+def declared_category_paths():
+    """Map each category id to its path prefixes, as listed in decomp.yaml."""
+    config_path = Path(__file__).resolve().parent.parent / "decomp.yaml"
+    paths, current, in_paths = {}, None, False
+    for line in config_path.read_text().splitlines():
+        stripped = line.strip()
+        if stripped.startswith("- id:"):
+            current = stripped.split(":", 1)[1].strip()
+            paths[current] = []
+            in_paths = False
+        elif current is not None and stripped == "paths:":
+            in_paths = True
+        elif in_paths and stripped.startswith("- "):
+            paths[current].append(stripped[2:].strip())
+        elif stripped and not stripped.startswith("#"):
+            in_paths = False
+    return paths
+
+
+def most_specific(name, cats, paths):
+    """Keep only the category whose matching path prefix is longest."""
+    if len(cats) < 2:
+        return cats
+    return [max(cats, key=lambda c: max((len(p) for p in paths.get(c, []) if name.startswith(p)), default=-1))]
+
+
 def drop_excluded(report):
     report["units"] = [
         u for u in report.get("units", [])
@@ -108,13 +134,15 @@ def drop_excluded(report):
     # totals but belongs to no subsystem, so leave it uncategorised rather than
     # invent a bucket for it.
     allowed = declared_category_ids()
+    paths = declared_category_paths()
     for unit in report["units"]:
         meta = unit.setdefault("metadata", {})
         cats = meta.get("progress_categories") or []
         if unit.get("name", "").startswith(UNATTRIBUTED_UNITS):
             meta["progress_categories"] = []
         else:
-            meta["progress_categories"] = [c for c in cats if c in allowed]
+            meta["progress_categories"] = most_specific(
+                unit.get("name", ""), [c for c in cats if c in allowed], paths)
     used = {c for u in report["units"]
             for c in (u.get("metadata", {}).get("progress_categories") or [])}
     report["categories"] = [

@@ -56,8 +56,9 @@ tools:
       # (tools/gen_symbols.py), so these buckets group by evidence, not guesswork.
       # Anything whose subsystem is not established stays in `named` or `unidentified`.
       categories:
-        # Specific groups first: prefix matching means `src/task` would otherwise
-        # swallow `src/taskpool`. Do not add a bare `src` / `src/` path — mapfile_parser
+        # Paths are prefixes and a unit can match several (`src/mode` also matches
+        # every `src/mode_*` unit); tools/normalize_report.py keeps only the category
+        # with the longest matching path. Do not add a bare `src` / `src/` path — mapfile_parser
         # synthesizes a folder-named `src` category for unmatched units, which then
         # also tags later units that already match core/game/sdk. Data is a dimension,
         # not a category, so each bucket reports its own code and data; unattributed
@@ -67,8 +68,9 @@ tools:
           paths:
             - src/main
             - src/malloc
+            - src/listpool
             - src/taskpool
-            - src/task
+            - src/mode
             - src/key
             - src/sprite
             - src/engine
@@ -138,6 +140,7 @@ tools:
             - src/battle_field_state
             - src/battle_localized_data
             - src/battle_runtime
+            - src/game_state
             - src/debug_menu_data
             - src/event_background_data
             - src/event_chara_data

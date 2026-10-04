@@ -221,7 +221,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
                         (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
         break;
     case 2:
-        LoadBgPalette(3, gUnk_09614118, 0x1E0);
+        LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
         break;
     case 3:
         LoadBgTiles(0, gUnk_09406F78, 0xC00);
@@ -1260,9 +1260,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0x90, pal, 32);
+        LoadPalette(gDeckMenuPalettes[9], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0xA0, pal, 32);
+        LoadPalette(gDeckMenuPalettes[10], pal, 32);
         LoadBgMap(0, gUnk_09519AB8 + 0xC0, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
         LoadBgMap(2, gUnk_0951AAB8, 0x180);
@@ -1280,9 +1280,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0x80, pal, 32);
+        LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0xA0, pal, 32);
+        LoadPalette(gDeckMenuPalettes[10], pal, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8 + 0xC0, 0x180);
         LoadBgMap(2, gUnk_0951AAB8, 0x180);
@@ -1300,9 +1300,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, pal, 32);
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0x80, pal, 32);
+        LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_09614118 + 0x90, pal, 32);
+        LoadPalette(gDeckMenuPalettes[9], pal, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
         LoadBgMap(2, gUnk_0951AAB8 + 0xC0, 0x180);
@@ -1422,24 +1422,24 @@ void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
 
     switch (kind) {
     case 5:
-        RequestDma3Copy(gUnk_095152B8 + slot * 128, dst, 20);
-        RequestDma3Copy(gUnk_095152B8 + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + slot * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + slot * 128, dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gUnk_095152CC + slot * 128, dst, 20);
-        RequestDma3Copy(gUnk_095152CC + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + slot * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + slot * 128, dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gUnk_095152E0 + slot * 128, dst, 20);
-        RequestDma3Copy(gUnk_095152E0 + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + slot * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + slot * 128, dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gUnk_09515338 + slot * 128, dst, 20);
-        RequestDma3Copy(gUnk_09515338 + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + slot * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + slot * 128, dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gUnk_0951534C + slot * 128, dst, 20);
-        RequestDma3Copy(gUnk_0951534C + 0x20 + slot * 128, dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + slot * 128, dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + slot * 128, dst + 0x40, 20);
         break;
     }
 }
@@ -1544,7 +1544,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
 
         work->entryIndex = i;
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614118[def->category * 16 + 0x100], dst, 32);
+        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
 
         for (j = 0; j < 10; j++) {
             DrawValueCount(work->entries[i].valueCounts[j], j);

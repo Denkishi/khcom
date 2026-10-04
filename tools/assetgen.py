@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import math
 import os
 import subprocess
 import sys
@@ -408,6 +409,8 @@ def lender(lookup, entry, version):
     target = owner.by_name[name]
     if target.get("tiles") or target.get("format") not in ("tiles4", "sprite_sheet") or target[version].get("compress"):
         raise ManifestError(f"{entry['name']}: {name} is not an uncompressed tile block of its own")
+    if entry.get("tiles_offset", 0) % 32:
+        raise ManifestError(f"{entry['name']}: tiles_offset {entry['tiles_offset']:#x} is not a whole number of tiles")
     return owner, target
 
 
@@ -594,8 +597,8 @@ def decode_one(manifest, entry, version, data, tmp, palette_bytes):
 def borrowed_block(lookup, entry, version, tmp):
     owner, target = lender(lookup, entry, version)
     if target["format"] == "sprite_sheet":
-        return encode_sheet(owner, target, version)[2]
-    return encode(owner, target, version, tmp)
+        return encode_sheet(owner, target, version)[2][entry.get("tiles_offset", 0):]
+    return encode(owner, target, version, tmp)[entry.get("tiles_offset", 0):]
 
 
 def encode_sheet(manifest, entry, version, main=None, extra=None, borrowed=None):
@@ -687,6 +690,7 @@ def decode(manifest, version, rom, rom_base=0x08000000, lookup=None):
                     if target["format"] == "sprite_sheet":
                         frames, anims = owner.frames(target, version), owner.animations(target, version)
                         borrowed = sprite_sheet.parse_records(borrowed, len(frames), len(anims))[2]
+                    borrowed = borrowed[entry.get("tiles_offset", 0):]
                 files = decode_sheet(manifest, entry, version, data, palette_bytes, borrowed)
             elif entry["format"] in m4a_assets.FORMATS:
                 try:
@@ -976,7 +980,11 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
                 size = entry[version]["size"]
                 if size % SCALAR_SIZES[ctype]:
                     raise ManifestError(f"{manifest.group}: {entry['name']} is {size} bytes in {version}, not a whole number of {ctype}")
-                lines.append(f"extern {ctype} {symbol}[{size // SCALAR_SIZES[ctype]}];")
+                count = size // SCALAR_SIZES[ctype]
+                shape = manifest.data(entry, version, "shape") or [count]
+                if math.prod(shape) != count:
+                    raise ManifestError(f"{manifest.group}: {entry['name']} has shape {shape} but {count} {ctype} in {version}")
+                lines.append(f"extern {ctype} {symbol}{''.join(f'[{n}]' for n in shape)};")
     lines += ["", "#endif"]
     write_if_changed(out_path, "\n".join(lines) + "\n")
 

@@ -4180,7 +4180,7 @@ entries:
 - name: gUnk_099A8914
   format: sprite_sheet
   tiles: gUnk_099EDE7C
-  palette: gUnk_09A3CDDC
+  palette: gPooAltImagePalettes
   align: 4
   cell: [64, 64]
   anchor: [36, 29]

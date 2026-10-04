@@ -213,7 +213,7 @@ void WorldselectLoadSlotPalette(s16 model, s16 slot) {
     s32 size;
 
     if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
-        src = gUnk_09A3CDDC;
+        src = gPooAltImagePalettes;
         size = 0x40;
     } else {
         src = sWorldselectWorldDefs[model].palette;

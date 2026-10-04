@@ -9654,54 +9654,19 @@ entries:
   eu:
     address: 0x099331F0
     size: 1024
-- name: gUnk_09953764
+- name: gMapDoorEmblemTiles
   format: tiles4
   width: 8
+  shape: [2, 2, 256]
   us:
     address: 0x09953764
-    size: 256
+    size: 1024
   jp:
     address: 0x09908278
-    size: 256
+    size: 1024
   eu:
     address: 0x099335F0
-    size: 256
-- name: gUnk_09953864
-  format: tiles4
-  width: 8
-  us:
-    address: 0x09953864
-    size: 256
-  jp:
-    address: 0x09908378
-    size: 256
-  eu:
-    address: 0x099336F0
-    size: 256
-- name: gUnk_09953964
-  format: tiles4
-  width: 8
-  us:
-    address: 0x09953964
-    size: 256
-  jp:
-    address: 0x09908478
-    size: 256
-  eu:
-    address: 0x099337F0
-    size: 256
-- name: gUnk_09953A64
-  format: tiles4
-  width: 8
-  us:
-    address: 0x09953A64
-    size: 256
-  jp:
-    address: 0x09908578
-    size: 256
-  eu:
-    address: 0x099338F0
-    size: 256
+    size: 1024
 - name: gUnk_09953B64
   format: tiles4
   width: 8
@@ -10930,7 +10895,8 @@ entries:
     size: 20
 - name: gMapUiSpriteUs_098A94DC
   format: sprite_sheet
-  tiles: gUnk_09953A64
+  tiles: gMapDoorEmblemTiles
+  tiles_offset: 0x300
   palette: gUnk_09991284
   cell: [24, 24]
   anchor: [15, 76]
@@ -10957,7 +10923,8 @@ entries:
     size: 32
 - name: gMapUiSpriteUs_098A94FC
   format: sprite_sheet
-  tiles: gUnk_09953964
+  tiles: gMapDoorEmblemTiles
+  tiles_offset: 0x200
   palette: gUnk_09991284
   cell: [24, 24]
   anchor: [9, 76]

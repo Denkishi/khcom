@@ -1075,61 +1075,17 @@ entries:
   eu:
     address: 0x09536B24
     size: 2048
-- name: gUnk_095152B8
+- name: gDeckFilterTabMap
   format: tilemap
   us:
     address: 0x095152B8
-    size: 20
+    size: 2048
   jp:
     address: 0x094CCD94
-    size: 20
+    size: 2048
   eu:
     address: 0x09537B24
-    size: 20
-- name: gUnk_095152CC
-  format: tilemap
-  us:
-    address: 0x095152CC
-    size: 20
-  jp:
-    address: 0x094CCDA8
-    size: 20
-  eu:
-    address: 0x09537B38
-    size: 20
-- name: gUnk_095152E0
-  format: tilemap
-  us:
-    address: 0x095152E0
-    size: 88
-  jp:
-    address: 0x094CCDBC
-    size: 88
-  eu:
-    address: 0x09537B4C
-    size: 88
-- name: gUnk_09515338
-  format: tilemap
-  us:
-    address: 0x09515338
-    size: 20
-  jp:
-    address: 0x094CCE14
-    size: 20
-  eu:
-    address: 0x09537BA4
-    size: 20
-- name: gUnk_0951534C
-  format: tilemap
-  us:
-    address: 0x0951534C
-    size: 1900
-  jp:
-    address: 0x094CCE28
-    size: 1900
-  eu:
-    address: 0x09537BB8
-    size: 1900
+    size: 2048
 - name: gUnk_09515AB8
   format: tilemap
   us:

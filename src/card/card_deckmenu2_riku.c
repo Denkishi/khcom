@@ -198,14 +198,14 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
         break;
     }
 
-    LoadBgPalette(3, gUnk_09614118, 0x1E0);
+    LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
     LoadBgMap(3, gUnk_0951B2B8, 0x800);
     LoadBgMap(0, gUnk_08125E24, 0x800);
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
 #else
     LoadBgTiles(3, gUnk_09402F78, 0x4000);
-    LoadBgPalette(3, gUnk_09614118, 0x1E0);
+    LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
     LoadBgMap(3, gUnk_0951B2B8, 0x800);
     LoadBgMap(0, gUnk_08125E24, 0x800);
     LoadBgTiles(1, gUnk_09406F78, 0xC00);
@@ -936,7 +936,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
 
         DrawRikuCpCost(def->cpCost);
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614118[def->category * 16 + 0x100], dst, 32);
+        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
         LoadRikuCardNameText(work, t);
         LoadRikuCardDescriptionText(work, t);
         work->previewShown = 1;

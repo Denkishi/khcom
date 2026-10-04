@@ -1427,7 +1427,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
     switch (work->step) {
     case 0:
         LoadBgTiles(3, gUnk_09402F78, 0x2000);
-        LoadBgPalette(3, gUnk_09614118, 0x1E0);
+        LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
         break;
     case 1:
 #ifdef VERSION_EU
@@ -4843,9 +4843,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0x90], dst, 32);
+        LoadPalette(gDeckMenuPalettes[9], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0xA0], dst, 32);
+        LoadPalette(gDeckMenuPalettes[10], dst, 32);
         LoadBgMap(0, &gUnk_09519AB8[0xC0], 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
         LoadBgMap(2, gUnk_0951AAB8, 0x180);
@@ -4863,9 +4863,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0x80], dst, 32);
+        LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0xA0], dst, 32);
+        LoadPalette(gDeckMenuPalettes[10], dst, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, &gUnk_0951A2B8[0xC0], 0x180);
         LoadBgMap(2, gUnk_0951AAB8, 0x180);
@@ -4883,9 +4883,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gUnk_096142F8, dst, 32);
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0x80], dst, 32);
+        LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(&gUnk_09614118[0x90], dst, 32);
+        LoadPalette(gDeckMenuPalettes[9], dst, 32);
         LoadBgMap(0, gUnk_09519AB8, 0x180);
         LoadBgMap(1, gUnk_0951A2B8, 0x180);
         LoadBgMap(2, &gUnk_0951AAB8[0xC0], 0x180);
@@ -5067,24 +5067,24 @@ void DrawDeckFilterTab(u8 kind, u8 slot) {
 
     switch (kind) {
     case 0:
-        RequestDma3Copy(gUnk_095152B8 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gUnk_095152B8 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + CARD_SLOT_OFFSET(slot, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gUnk_095152CC + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gUnk_095152CC + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + CARD_SLOT_OFFSET(slot, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gUnk_095152E0 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gUnk_095152E0 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gUnk_09515338 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gUnk_09515338 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + CARD_SLOT_OFFSET(slot, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gUnk_0951534C + CARD_SLOT_OFFSET(slot, 0), dst, 20);
-        RequestDma3Copy(gUnk_0951534C + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + CARD_SLOT_OFFSET(slot, 0), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + CARD_SLOT_OFFSET(slot, 0), dst + 0x40, 20);
         break;
     }
 }
@@ -5096,24 +5096,24 @@ void DrawCollectionFilterTab(u8 kind, u8 slot) {
 
     switch (kind) {
     case 5:
-        RequestDma3Copy(gUnk_095152B8 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gUnk_095152B8 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + CARD_SLOT_OFFSET(slot, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
         break;
     case 4:
-        RequestDma3Copy(gUnk_095152CC + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gUnk_095152CC + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + CARD_SLOT_OFFSET(slot, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
         break;
     case 3:
-        RequestDma3Copy(gUnk_095152E0 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gUnk_095152E0 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
         break;
     case 2:
-        RequestDma3Copy(gUnk_09515338 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gUnk_09515338 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + CARD_SLOT_OFFSET(slot, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
         break;
     case 1:
-        RequestDma3Copy(gUnk_0951534C + CARD_SLOT_OFFSET(slot, 1), dst, 20);
-        RequestDma3Copy(gUnk_0951534C + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + CARD_SLOT_OFFSET(slot, 1), dst, 20);
+        RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + CARD_SLOT_OFFSET(slot, 1), dst + 0x40, 20);
         break;
     }
 }
@@ -5384,7 +5384,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
 
         DrawCpCost(GetCardCpCost(id));
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614118[def->category * 16 + 0x100], dst, 32);
+        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
         LoadCardNameText(work, id & CARD_ID_MASK);
         LoadCardDescriptionText(work, id & CARD_ID_MASK);
     } else {

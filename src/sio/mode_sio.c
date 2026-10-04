@@ -712,9 +712,9 @@ void mode_sio_btl_option_0(s32 arg) {
     sSioBtlOptionWork->textSlotCount2 = LoadTextSlots(gSioDeckNames[0], sSioBtlOptionWork->textSlots2);
     sSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], sSioBtlOptionWork->textSlots3);
 #endif
-    sSioBtlOptionWork->palette7 = LoadObjPalette(gUnk_096FBCC4, 32);
-    sSioBtlOptionWork->palette8 = LoadObjPalette(gUnk_096FBCC4 + 32, 32);
-    sSioBtlOptionWork->palette9 = LoadObjPalette(gUnk_096FBCC4 + 16, 32);
+    sSioBtlOptionWork->palette7 = LoadObjPalette(gNameTextPalettes[0], 32);
+    sSioBtlOptionWork->palette8 = LoadObjPalette(gNameTextPalettes[2], 32);
+    sSioBtlOptionWork->palette9 = LoadObjPalette(gNameTextPalettes[1], 32);
     sSioBtlOptionWork->worldEntry = gSioWorldList[gSioWorldCursor];
     DisableBg(0);
     DisableBg(1);
@@ -879,7 +879,7 @@ void SioBtlOptionInitObjs() {
 #else
     sSioBtlOptionWork->tiles5[0] = LoadObjTiles(gUnk_0962D900, 0x280);
 #endif
-    sSioBtlOptionWork->palette5[0] = LoadObjPalette(gUnk_096FBD64, 32);
+    sSioBtlOptionWork->palette5[0] = LoadObjPalette(gSioHandicapGauge1Palettes[0], 32);
 #ifdef VERSION_EU
     sSioBtlOptionWork->gfx5[0] = gUnkEu_09F7EB18[0];
 #else
@@ -891,7 +891,7 @@ void SioBtlOptionInitObjs() {
 #else
     sSioBtlOptionWork->tiles5[1] = LoadObjTiles(gUnk_0962DBA0, 0x280);
 #endif
-    sSioBtlOptionWork->palette5[1] = LoadObjPalette(gUnk_096FBDA4, 32);
+    sSioBtlOptionWork->palette5[1] = LoadObjPalette(gSioHandicapGauge2Palettes[0], 32);
 #ifdef VERSION_EU
     sSioBtlOptionWork->gfx5[1] = gUnkEu_09F7EB20[0];
 #else
@@ -1817,7 +1817,7 @@ void SioBtlOptionCheckReady() {
     if (!gSioDebugMode) {
 #endif
     if (gSioCommandRecv[1][0] == 0x2FCF) {
-        RequestDma3Copy(gUnk_096B2724, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioBtlOptionReadyTiles + 0xC0, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player1Ready) {
             SetSioBtlOptionAnimation(0, 1, 1);
@@ -1827,7 +1827,7 @@ void SioBtlOptionCheckReady() {
     }
 
     if (gSioCommandRecv[1][1] == 0x6AD6) {
-        RequestDma3Copy(gUnk_096B2B24, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioBtlOptionReadyTiles + 0x4C0, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player2Ready) {
             SetSioBtlOptionAnimation(1, 1, 1);
@@ -1838,7 +1838,7 @@ void SioBtlOptionCheckReady() {
 #ifdef VERSION_EU
     } else {
     if (gSioDebugReady[0] == 1) {
-        RequestDma3Copy(gUnk_096B2724, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioBtlOptionReadyTiles + 0xC0, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player1Ready) {
             SetSioBtlOptionAnimation(0, 1, 1);
@@ -1848,7 +1848,7 @@ void SioBtlOptionCheckReady() {
     }
 
     if (gSioDebugReady[1] == 1) {
-        RequestDma3Copy(gUnk_096B2B24, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioBtlOptionReadyTiles + 0x4C0, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
 
         if (!sSioBtlOptionWork->player2Ready) {
             SetSioBtlOptionAnimation(1, 1, 1);
@@ -2231,19 +2231,19 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x11, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(&gSioHandicapGauge1Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - a) * 2);
         break;
     case 6:
-        LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gUnk_096FBD64, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBD64 + 0x16, (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(&gSioHandicapGauge1Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (a - 6) * 2);
         break;
     }
 
@@ -2253,27 +2253,27 @@ void SioBtlOptionUpdateHandicapGauges(u16 a, u16 b) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x11, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(&gSioHandicapGauge2Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - b) * 2);
         break;
     case 6:
-        LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gUnk_096FBDA4, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
-        LoadPalette(gUnk_096FBDA4 + 0x16, (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(&gSioHandicapGauge2Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (b - 6) * 2);
         break;
     }
 }
 
 void SioBtlOptionCancelReady() {
     sSioBtlOptionWork->messageVisible = 0;
-    RequestDma3Copy(gUnk_096B2664, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
-    RequestDma3Copy(gUnk_096B2664 + 0x400, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gSioBtlOptionReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gSioBtlOptionReadyTiles + 0x400, (void*)(BG_VRAM + 24 * TILE_SIZE_4BPP), 0xC0);
     sSioBtlOptionWork->player1Ready = 0;
     sSioBtlOptionWork->player2Ready = 0;
     SetSioBtlOptionAnimation(0, 0, 0);
@@ -3060,7 +3060,7 @@ void SioChgCardSelect() {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
 
-        RequestDma3Copy(gUnk_096B5FA4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles + 0xC0, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[0] = 1;
     } else if (gSioCommandRecv[1][0] == 0x2B9A) {
         if (gSioChgCardReady[0] == 1) {
@@ -3069,7 +3069,7 @@ void SioChgCardSelect() {
             sSioChgCardWork->messageVisible = 0;
         }
 
-        RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[0] = 0;
     }
 
@@ -3079,7 +3079,7 @@ void SioChgCardSelect() {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
 
-        RequestDma3Copy(gUnk_096B63A4, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles + 0x4C0, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[1] = 1;
     } else if (gSioCommandRecv[1][1] == 0x2B9A) {
         if (gSioChgCardReady[1] == 1) {
@@ -3088,7 +3088,7 @@ void SioChgCardSelect() {
             sSioChgCardWork->messageVisible = 0;
         }
 
-        RequestDma3Copy(gUnk_096B62E4, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
         gSioChgCardReady[1] = 0;
     }
 
@@ -3622,20 +3622,20 @@ void SioChgCardHandleInput() {
         sSioChgCardWork->cursorVisible = 0;
 
         if (gFrameCounter % 10 == 0) {
-            RequestDma3Copy(&gUnk_096B5EE4[sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+            RequestDma3Copy(&gSioChgCardReadyTiles[sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
             sSioChgCardWork->blinkPhase = 1 - sSioChgCardWork->blinkPhase;
         }
     } else if (sSioChgCardWork->cursor == 11) {
         sSioChgCardWork->cursorVisible = 0;
 
         if (gFrameCounter % 10 == 0) {
-            RequestDma3Copy(&gUnk_096B62E4[sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
+            RequestDma3Copy(&gSioChgCardReadyTiles[0x400 + sSioChgCardWork->blinkPhase * 192], (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
             sSioChgCardWork->blinkPhase = 1 - sSioChgCardWork->blinkPhase;
         }
     } else {
         sSioChgCardWork->cursorVisible = 1;
-        RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
-        RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+        RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     }
 }
 
@@ -3723,8 +3723,8 @@ void SioChgCardCancelReady() {
     sSioChgCardWork->offeredCard = gSioChgCardSlots[sSioChgCardWork->cursor];
     SetSioChgCardAnimation(0, 0, 0);
     SetSioChgCardAnimation(1, 0, 0);
-    RequestDma3Copy(gUnk_096B5EE4, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
-    RequestDma3Copy(gUnk_096B5EE4 + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gSioChgCardReadyTiles, (void*)(BG_VRAM + TILE_SIZE_4BPP), 0xC0);
+    RequestDma3Copy(gSioChgCardReadyTiles + 0x400, (void*)(BG_VRAM + 7 * TILE_SIZE_4BPP), 0xC0);
     gSioChgCardReady[0] = 0;
     gSioChgCardReady[1] = 0;
     sSioChgCardWork->messageVisible = 0;

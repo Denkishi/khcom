@@ -1594,7 +1594,7 @@ void mode_jiminy_0() {
 
     sJiminyWork->tiles7 = AllocObjTiles(0x2000, NULL);
 #ifdef VERSION_EU
-    sJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CDDC, 0x40);
+    sJiminyWork->palette8 = LoadObjPalette(gPooAltImagePalettes, 0x40);
 #else
     sJiminyWork->palette8 = LoadObjPalette(gUnk_09A3CC9C, 0x20);
 #endif
@@ -2329,8 +2329,8 @@ void JiminyDetailUpdate() {
         if (sJiminyWork->detail->tiles != NULL) {
 #ifdef VERSION_EU
             if (sJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
-                LoadObjPaletteBank(sJiminyWork->palette8->index, gUnk_09A3CDDC);
-                LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gUnk_09A3CDDC + 0x10);
+                LoadObjPaletteBank(sJiminyWork->palette8->index, gPooAltImagePalettes[0]);
+                LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gPooAltImagePalettes[1]);
                 SetObjTileSource(sJiminyWork->tiles7, gUnk_099EDE7C);
             } else
 #endif

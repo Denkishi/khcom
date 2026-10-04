@@ -103,42 +103,18 @@ entries:
   eu:
     address: 0x096776CC
     size: 1344
-- name: gUnk_096B2664
+- name: gSioBtlOptionReadyTiles
   format: tiles4
-  width: 2
+  width: 4
   us:
     address: 0x096B2664
-    size: 192
+    size: 1408
   jp:
     address: 0x0966AE40
-    size: 192
+    size: 1408
   eu:
     address: 0x09677C0C
-    size: 192
-- name: gUnk_096B2724
-  format: tiles4
-  width: 32
-  us:
-    address: 0x096B2724
-    size: 1024
-  jp:
-    address: 0x0966AF00
-    size: 1024
-  eu:
-    address: 0x09677CCC
-    size: 1024
-- name: gUnk_096B2B24
-  format: tiles4
-  width: 2
-  us:
-    address: 0x096B2B24
-    size: 192
-  jp:
-    address: 0x0966B300
-    size: 192
-  eu:
-    address: 0x096780CC
-    size: 192
+    size: 1408
 - name: gUnk_096B2BE4
   format: tiles4
   width: 32
@@ -166,42 +142,15 @@ entries:
   jp:
     address: 0x0966E580
     size: 320
-- name: gUnk_096B5EE4
+- name: gSioChgCardReadyTiles
   format: tiles4
-  width: 2
+  width: 4
   us:
     address: 0x096B5EE4
-    size: 192
+    size: 1408
   jp:
     address: 0x0966E6C0
-    size: 192
-- name: gUnk_096B5FA4
-  format: tiles4
-  width: 2
-  us:
-    address: 0x096B5FA4
-    size: 832
-  jp:
-    address: 0x0966E780
-    size: 832
-- name: gUnk_096B62E4
-  format: tiles4
-  width: 2
-  us:
-    address: 0x096B62E4
-    size: 192
-  jp:
-    address: 0x0966EAC0
-    size: 192
-- name: gUnk_096B63A4
-  format: tiles4
-  width: 2
-  us:
-    address: 0x096B63A4
-    size: 192
-  jp:
-    address: 0x0966EB80
-    size: 192
+    size: 1408
 - name: gUnk_096F5464
   format: tilemap
   us:

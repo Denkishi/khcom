@@ -2420,8 +2420,9 @@ entries:
   eu:
     address: 0x09546F84
     size: 128
-- name: gUnk_09614118
+- name: gDeckMenuPalettes
   format: palette
+  shape: [15, 16]
   us:
     address: 0x09614118
     size: 480
@@ -5246,30 +5247,18 @@ entries:
   eu:
     address: 0x096C912C
     size: 192
-- name: gUnk_096FBCC4
+- name: gNameTextPalettes
   format: palette
+  shape: [3, 16]
   us:
     address: 0x096FBCC4
-    size: 32
+    size: 96
   jp:
     address: 0x096B44A0
-    size: 32
+    size: 96
   eu:
     address: 0x096C91EC
-    size: 32
-- name: gUnk_096FBCE4
-  format: palette
-  us:
-    address: 0x096FBCE4
-    size: 64
-  jp:
-    address: 0x096B44C0
-    size: 64
-    symbol: gUnkJp_096B44C0
-  eu:
-    address: 0x096C920C
-    size: 64
-    symbol: gUnkEu_096C920C
+    size: 96
 - name: gUnk_096FBD24
   format: palette
   us:
@@ -5292,54 +5281,30 @@ entries:
   eu:
     address: 0x096C926C
     size: 32
-- name: gUnk_096FBD64
+- name: gSioHandicapGauge1Palettes
   format: palette
+  shape: [2, 16]
   us:
     address: 0x096FBD64
-    size: 32
+    size: 64
   jp:
     address: 0x096B4540
-    size: 32
+    size: 64
   eu:
     address: 0x096C928C
-    size: 32
-- name: gUnk_096FBD84
+    size: 64
+- name: gSioHandicapGauge2Palettes
   format: palette
-  us:
-    address: 0x096FBD84
-    size: 32
-  jp:
-    address: 0x096B4560
-    size: 32
-    symbol: gUnkJp_096B4560
-  eu:
-    address: 0x096C92AC
-    size: 32
-    symbol: gUnkEu_096C92AC
-- name: gUnk_096FBDA4
-  format: palette
+  shape: [2, 16]
   us:
     address: 0x096FBDA4
-    size: 32
+    size: 64
   jp:
     address: 0x096B4580
-    size: 32
+    size: 64
   eu:
     address: 0x096C92CC
-    size: 32
-- name: gUnk_096FBDC4
-  format: palette
-  us:
-    address: 0x096FBDC4
-    size: 32
-  jp:
-    address: 0x096B45A0
-    size: 32
-    symbol: gUnkJp_096B45A0
-  eu:
-    address: 0x096C92EC
-    size: 32
-    symbol: gUnkEu_096C92EC
+    size: 64
 - name: gUnk_096FBDE4
   format: palette
   us:
@@ -6686,8 +6651,9 @@ entries:
   eu:
     address: 0x09A9A880
     size: 32
-- name: gUnk_09A3CDDC
+- name: gPooAltImagePalettes
   format: palette
+  shape: [2, 16]
   us:
     address: 0x09A3CDDC
     size: 64

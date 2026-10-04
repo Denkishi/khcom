@@ -5060,14 +5060,14 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
     case 0:
     case 1:
         work->sprite2 = gMapUiSpriteUs_098A94DC;
-        work->openSrc2 = gUnk_09953864;
-        work->closedSrc2 = gUnk_09953864 + 0x200;
+        work->openSrc2 = gMapDoorEmblemTiles[0][1];
+        work->closedSrc2 = gMapDoorEmblemTiles[1][1];
         break;
     case 2:
     case 3:
         work->sprite2 = gMapUiSpriteUs_098A94FC;
-        work->openSrc2 = gUnk_09953764;
-        work->closedSrc2 = gUnk_09953764 + 0x200;
+        work->openSrc2 = gMapDoorEmblemTiles[0][0];
+        work->closedSrc2 = gMapDoorEmblemTiles[1][0];
         break;
     }
 

@@ -1834,28 +1834,18 @@ entries:
   eu:
     address: 0x096C83AC
     size: 32
-- name: gUnk_096FAEA4
+- name: gWlogoTtPalettes
   format: palette
+  shape: [16, 16]
   us:
     address: 0x096FAEA4
-    size: 256
+    size: 512
   jp:
     address: 0x096B3680
-    size: 256
+    size: 512
   eu:
     address: 0x096C83CC
-    size: 256
-- name: gUnk_096FAFA4
-  format: palette
-  us:
-    address: 0x096FAFA4
-    size: 256
-  jp:
-    address: 0x096B3780
-    size: 256
-  eu:
-    address: 0x096C84CC
-    size: 256
+    size: 512
 - name: gUnk_096FB0A4
   format: palette
   us:

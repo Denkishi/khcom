@@ -212,7 +212,7 @@ void WLogoInitWorldSelect() {
 #else
     *p = LoadTextSlots(sWorldNames[sWLogoWorld], sWLogoNameSlots);
 #endif
-    sWLogoNamePalette = LoadObjPalette(gUnk_096FBCC4, 32);
+    sWLogoNamePalette = LoadObjPalette(gNameTextPalettes[0], 32);
 }
 
 void WLogoStartLogo(u8 a) {

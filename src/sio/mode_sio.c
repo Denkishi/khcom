@@ -31,7 +31,6 @@
 #include "card_ids.h"
 #include "malloc.h"
 #include "fade.h"
-#include "card_deck.h"
 #include "songs.h"
 #include "common_text.h"
 #include "anim.h"
@@ -55,6 +54,8 @@
 #include "text_types.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_map_anim.h"
+#include "card_deckmenu2.h"
 
 s8 gSioDebugMode EWRAM_COMMON(4);
 

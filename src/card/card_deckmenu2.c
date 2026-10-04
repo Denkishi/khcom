@@ -46,6 +46,7 @@
 #include <stddef.h>
 #include "card_deckmenu2.h"
 #include "ms_charge.h"
+#include "card_map_anim.h"
 
 const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),

@@ -4,7 +4,11 @@
 #include "card.h"
 #include "types.h"
 
+void ClearCardCollectionSlot(u16* p);
+u8 HasNonPremiumCardsInActiveDeck();
+u8 IsActiveDeckAllPremium();
 void BuildRikuDeck(u8 a);
+u8 GetActiveDeckIndex();
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a);
 u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a);
 u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a);

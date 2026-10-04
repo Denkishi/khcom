@@ -17,7 +17,6 @@
 #include "world_types.h"
 #include "gba/keys.h"
 #include "fade.h"
-#include "card_deck.h"
 #include "player_progression.h"
 #include <stdlib.h>
 #include "enemy_tile_counts.h"
@@ -46,6 +45,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "hum_common.h"
+#include "card_deckmenu2.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);

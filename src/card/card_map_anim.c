@@ -13,7 +13,6 @@
 #include "card.h"
 #include "map_tile_animations.h"
 #include "evt_obj.h"
-#include "card_deck.h"
 #include "card_api.h"
 #include "card_def_data.h"
 #include "card_types.h"
@@ -23,6 +22,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_deckmenu2.h"
 
 Deck gDecks[3] EWRAM_COMMON(16);
 

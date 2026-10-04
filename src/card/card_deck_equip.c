@@ -14,7 +14,6 @@
 #include "card.h"
 #include "sprites_card.h"
 #include "gba/keys.h"
-#include "card_deck.h"
 #include "jiminy_data.h"
 #include "common_text.h"
 #include "card_api.h"
@@ -23,6 +22,7 @@
 #include "types.h"
 #include "deck_equip_suffix.inc"
 #include <stddef.h>
+#include "card_deckmenu2.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;

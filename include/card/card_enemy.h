@@ -7,5 +7,7 @@
 u8 EnemyCardDeal(CardDisplayWork* work, void* a);
 u8 EnemyCardClosed(CardDisplayWork* work, void* a);
 u8 EnemyCardShrinkAway(CardDisplayWork* work);
+void SetBossCardValue(u16 a);
+u16 GetBossCardValue();
 
 #endif

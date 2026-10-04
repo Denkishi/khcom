@@ -132,7 +132,4 @@ void CharaObjFree();
 void CharaObjSetBankFadeEnabled(u16 a, u8 b);
 void RequestTileRowsCopy(u8* src, u8* dst, u16 size, s16 count);
 
-void FreeLinkSendDeck();
-void FreeLinkPartnerDeck();
-
 #endif /* GUARD_CHARA_H */

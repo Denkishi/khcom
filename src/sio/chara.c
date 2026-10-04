@@ -14,7 +14,6 @@
 #include "gba/keys.h"
 #include "system_state.h"
 #include "chara_types.h"
-#include "card_deck.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
@@ -37,6 +36,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "card_map_anim.h"
 
 u32 gDebugLogC[100] EWRAM_COMMON(16);
 u32 gVBlankTimerElapsed EWRAM_COMMON(4);

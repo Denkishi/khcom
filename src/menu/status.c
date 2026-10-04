@@ -16,7 +16,6 @@
 #include "card_ids.h"
 #include "player_progression.h"
 #include "fade.h"
-#include "card_deck.h"
 #include "songs.h"
 #include "mode_status_api.h"
 #include "card_api.h"
@@ -37,6 +36,7 @@
 #include "text.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_deckmenu2.h"
 
 TaskDesc gTaskDescStatus = {
     "task_status",

@@ -6,10 +6,6 @@
 
 extern u16 gUnk_09A3DE7C[];
 
-u16 CountCollectionCards();
-u16 CountCardsInDecks();
-void ClearCardCollectionSlot(u16* p);
-
 s16 GetMsChargeTabStart(s16 a);
 s16 GetMsChargeTabCount(s16 a);
 s16 GetMsChargeSelectedIndex();

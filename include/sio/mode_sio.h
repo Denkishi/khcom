@@ -399,7 +399,6 @@ s8 SioChgCardHasOwnCards();
 s8 SioChgCardSlotsEmpty();
 void SioChgCardShowInfo();
 void SioChgCardHideInfo();
-s16 AddCardToCollection(u16 a);
 void SioChgCardDrawPointTotals();
 void SioChgCardHandleInput();
 void SioChgCardCancelReady();

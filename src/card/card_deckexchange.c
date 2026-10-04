@@ -32,9 +32,10 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
-#include "card_deck.h"
 #include "card_deckexchange.h"
 #include "ms_charge.h"
+#include "card_map_anim.h"
+#include "card_deckmenu2.h"
 
 #ifndef VERSION_EU
 u16 gSioTradeCardId EWRAM_COMMON(4);

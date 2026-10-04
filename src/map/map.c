@@ -16,7 +16,6 @@
 #include "gba/io_reg.h"
 #include "engine_math.h"
 #include "mode_pooh_api.h"
-#include "card_deck.h"
 #include "map_runtime.h"
 #include "malloc.h"
 #include "fade.h"
@@ -63,6 +62,8 @@
 #include "text_types.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_map_anim.h"
+#include "card_deckmenu2.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];

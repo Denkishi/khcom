@@ -40,6 +40,8 @@
 #include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_map_anim.h"
+#include "card_deckmenu2.h"
 
 #ifdef VERSION_EU
 static void* sUnkEu_09F84FA8[5] = {

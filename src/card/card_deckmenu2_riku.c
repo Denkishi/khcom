@@ -33,9 +33,10 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include <stddef.h>
-#include "card_deck.h"
 #include "card_deckmenu2_riku.h"
 #include "ms_charge.h"
+#include "card_map_anim.h"
+#include "card_deckmenu2.h"
 
 #ifdef VERSION_EU
 static const u16 sRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };

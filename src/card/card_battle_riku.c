@@ -34,6 +34,8 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_battle_riku.h"
+#include "card_map_anim.h"
+#include "card_enemy.h"
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
 

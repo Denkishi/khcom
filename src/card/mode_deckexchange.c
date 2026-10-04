@@ -17,13 +17,13 @@
 #include "sprites_card.h"
 #include "card_ids.h"
 #include "card_description_text.h"
-#include "card_deck.h"
 #include "battle_work.h"
 #include "card_api.h"
 #include "card_description_data.h"
 #include "mode.h"
 #include <stddef.h>
 #include "types.h"
+#include "card_deckmenu2.h"
 
 #ifndef VERSION_EU
 static TaskPool sModeDeckExchangeTasks;

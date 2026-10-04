@@ -1993,13 +1993,13 @@ void MapApplyRoomDecor() {
     }
 }
 
-void MapAnmSetupSlot(MapAnmSlot* p, const MapGmkDef* q) {
+void MapAnmSetupSlot(MapAnmSlot* p, const MapAnmEntry* q) {
     p->tiles = q->tiles;
-    p->frameSize = q->tilesSize;
-    p->dest += q->unk_0A << 5;
+    p->frameSize = q->frameSize;
+    p->dest += q->tileOffset << 5;
     p->timer = 0;
-    p->script = q->palette;
-    p->scriptPos = q->palette;
+    p->script = q->script;
+    p->scriptPos = q->script;
 }
 
 void MapAnmStepScript(MapAnmSlot* p) {
@@ -2185,10 +2185,10 @@ u8 DoorAcceptsMapCard(MapCardAttributes* p) {
     return 1;
 }
 
-s32 PayEventKey(PrizeEntry* p) {
+s32 PayEventKey(MapCardAttributes* p) {
     if (GetEventKey(0)->rule == 4) {
-        if (sEventKey.value > p->unk_02) {
-            sEventKey.value -= p->unk_02;
+        if (sEventKey.value > p->value) {
+            sEventKey.value -= p->value;
             sEventKeyProgress->remaining = sEventKey.value;
             return 0;
         }
@@ -6651,7 +6651,7 @@ void Task_MapAnm_0(MapAnmWork* work, MapAnmEntry* list) {
             e = work->slots;
 
             do {
-                MapAnmSetupSlot(e, (const MapGmkDef*)list);
+                MapAnmSetupSlot(e, list);
                 e++;
                 list++;
             } while (list->script != NULL);

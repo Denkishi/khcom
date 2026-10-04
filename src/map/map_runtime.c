@@ -25,6 +25,7 @@
 #include "types.h"
 #include "save_types.h"
 #include <stddef.h>
+#include "map.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -625,7 +626,7 @@ u8 GetRandomRoomType() {
     return gRikuRoomTypes[GetRandom() % 13];
 }
 
-void CreateMapRoom(u8 a, MapCardKindValue* p) {
+void CreateMapRoom(u8 a, MapCardAttributes* p) {
     MapFloorRoom* e = GetMapFloorRoom(a);
     const u8* row;
     const u8* anim;

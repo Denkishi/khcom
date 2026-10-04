@@ -7,7 +7,6 @@
 
 struct EventKey;
 struct MapCardAttributes;
-struct PrizeEntry;
 struct MapCell;
 struct MapProgress;
 
@@ -31,7 +30,7 @@ u8 SelectEventDoor(u8 a, u8 b);
 u8 CountRemainingEventKeys();
 struct EventKey* GetEventKey(u8 a);
 u8 DoorAcceptsMapCard(struct MapCardAttributes* p);
-s32 PayEventKey(struct PrizeEntry* p);
+s32 PayEventKey(struct MapCardAttributes* p);
 u8 AreWorldPrizesCollected();
 void CopyMapProgress(struct MapProgress* p);
 void RestoreMapProgress(struct MapProgress* p);

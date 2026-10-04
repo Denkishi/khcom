@@ -4369,7 +4369,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     d = &gCardDefs[work->cardId];
     work->tiles = LoadObjTiles(d->tiles, 0x300);
     work->palette = LoadObjPalette(d->palette, 32);
-    work->stat = *(PrzCardStat*)&d->kind;
+    work->stat = *(CardStat*)&d->kind;
     q = &gCardBacks[work->stat.category];
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->tiles2 = LoadObjTiles(q->tiles, 0x280);

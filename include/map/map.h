@@ -12,6 +12,7 @@
 #include "text_types.h"
 #include "battle_actor_types.h"
 #include "obj.h"
+#include "card_types.h"
 
 typedef struct MapPlatform {
     u16 left;
@@ -640,14 +641,6 @@ typedef struct MapGmk06Work {
     TaskPool tasks;
 } MapGmk06Work;
 
-typedef struct PrzCardStat {
-    u8 unk_00[0x04];
-    u8 value;
-    u8 unk_05[0x09];
-    u8 category;
-    u8 unk_0F[0x09];
-} PrzCardStat;
-
 typedef struct MapPrzCardWork {
     s32 posX;
     s32 posY;
@@ -664,7 +657,7 @@ typedef struct MapPrzCardWork {
     u16 spriteFlags;
     u16 timer;
     void (*update)(struct MapPrzCardWork*);
-    PrzCardStat stat;
+    CardStat stat;
     u16 cardId;
     u8 unk_0AA[0x02];
     s32 vz;
@@ -1163,7 +1156,7 @@ void MapEnmDestroy(MapEnmWork* work);
 s32 MapGmkIsAreaSparse(s16 x, s16 y);
 void MapReserveArea(s16 x, s16 y, u8 w, u8 h);
 s16 MapRowsToWallBase(s16 x, s16 y);
-void MapAnmSetupSlot(MapAnmSlot* p, const MapGmkDef* q);
+void MapAnmSetupSlot(MapAnmSlot* p, const MapAnmEntry* q);
 void MapAnmStepScript(MapAnmSlot* p);
 void MapAnmFlushSlot(MapAnmSlot* p);
 void MapAnmUpdateSlot(MapAnmSlot* p);

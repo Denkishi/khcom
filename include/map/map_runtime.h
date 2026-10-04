@@ -15,10 +15,7 @@ typedef struct MapFloorDef {
     MapEventDoor* eventDoors;
 } MapFloorDef;
 
-typedef struct MapCardKindValue {
-    u16 kind;
-    u16 value;
-} MapCardKindValue;
+struct MapCardAttributes;
 
 u8 GetOppositeDoorSide(u8 a);
 void MarkEventRoomDone(MapEventDoor* p);
@@ -42,7 +39,7 @@ u8 GetEventRoomKind(u8 a);
 s32 GetMapRoomCardValue(u8 a);
 void SetCardlessRoomType(u8 a);
 u8 GetRandomRoomType();
-void CreateMapRoom(u8 a, MapCardKindValue* p);
+void CreateMapRoom(u8 a, struct MapCardAttributes* p);
 void LoadMapRoomState(MapRoomState* p, u8 a);
 void SetCurrentMapRoom(u8 a, u8 b);
 u8 GetProgressFloor();

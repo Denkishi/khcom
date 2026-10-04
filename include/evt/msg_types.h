@@ -66,6 +66,18 @@ typedef struct MessageScriptEntry {
     u16 frame;
 } MessageScriptEntry;
 
+#ifdef VERSION_JP
+#define EVENT_TEXT_DELAY 3
+#else
+#define EVENT_TEXT_DELAY 1
+#endif
+
+#ifdef VERSION_EU
+#define EVENT_TEXT(name) (&name)
+#else
+#define EVENT_TEXT(name) (name)
+#endif
+
 struct EventCharaWork;
 
 typedef void (*EventCharaKeyframeFunc)(struct EventCharaWork*);

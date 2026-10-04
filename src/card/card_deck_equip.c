@@ -424,5 +424,5 @@ TaskDesc gTaskDescDeckErrorDeckFull = {
 };
 
 #ifdef VERSION_EU
-u8* gUnkEu_09F73464[5] = { gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5 };
+u8* gLeaveWorldTextByLanguage[5] = { gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5 };
 #endif

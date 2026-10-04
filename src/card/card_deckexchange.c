@@ -71,8 +71,8 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->palette6 = NULL;
     work->palette7 = NULL;
     work->palette4 = NULL;
-    work->unk_4C0 = NULL;
-    work->unk_4C4 = NULL;
+    work->cursorCard = NULL;
+    work->prevCursorCard = NULL;
     work->entries = NULL;
     work->resultOut = a;
     SetBgMode0();
@@ -122,11 +122,11 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->exitRequested = 0;
     work->barSlideTimer = 16;
     work->bannerSlideTimer = 16;
-    work->unk_6A4 = 0;
-    work->unk_6AC = -0x800;
-    work->unk_6A8 = 0;
-    work->unk_6B0 = 0xA000;
-    work->unk_6B4 = -0x8000;
+    work->topBarX = 0;
+    work->topBarY = -0x800;
+    work->bottomBarX = 0;
+    work->bottomBarY = 0xA000;
+    work->bannerX = -0x8000;
     work->holding = 0;
     work->x7 = 8;
     work->y7 = 113;

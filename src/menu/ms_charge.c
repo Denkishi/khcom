@@ -43,7 +43,7 @@
 #include "card_deckmenu2.h"
 
 #ifdef VERSION_EU
-static void* sUnkEu_09F84FA8[5] = {
+static void* sMsChargeBgMapsByLanguage[5] = {
     gUnkEu_09A94E20,
     gUnkEu_09A95320,
     gUnkEu_09A96220,
@@ -51,7 +51,7 @@ static void* sUnkEu_09F84FA8[5] = {
     gUnkEu_09A95820,
 };
 
-static void* sUnkEu_09F84FBC[5] = {
+static void* sMsChargeTabTilemapsByLanguage[5] = {
     gUnkEu_09A96720,
     gUnkEu_09A96820,
     gUnkEu_09A96920,
@@ -59,7 +59,7 @@ static void* sUnkEu_09F84FBC[5] = {
     gUnkEu_09A96920,
 };
 
-static void* sUnkEu_09F84FD0[5] = {
+static void* sMsChargeValueCountBgMapsByLanguage[5] = {
     gUnk_09A3B85C,
     gUnkEu_09A97A20,
     gUnkEu_09A98920,
@@ -67,7 +67,7 @@ static void* sUnkEu_09F84FD0[5] = {
     gUnkEu_09A97F20,
 };
 
-static void* sUnkEu_09F84FE4[5] = {
+static void* sMsChargeEnemyCountBgMapsByLanguage[5] = {
     gUnk_09A3BD5C,
     gUnkEu_09A98E20,
     gUnkEu_09A99D20,
@@ -366,7 +366,7 @@ void MsChargeDrawValueCounts() {
     } else if (card->category == 3) {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
-            LoadBgMap(1, sUnkEu_09F84FE4[gLanguage], 0x500);
+            LoadBgMap(1, sMsChargeEnemyCountBgMapsByLanguage[gLanguage], 0x500);
 #else
             LoadBgMap(1, gUnk_09A3BD5C, 0x500);
 #endif
@@ -389,7 +389,7 @@ void MsChargeDrawValueCounts() {
     } else {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
-            LoadBgMap(1, sUnkEu_09F84FD0[gLanguage], 0x500);
+            LoadBgMap(1, sMsChargeValueCountBgMapsByLanguage[gLanguage], 0x500);
 #else
             LoadBgMap(1, gUnk_09A3B85C, 0x500);
 #endif
@@ -416,7 +416,7 @@ void MsChargeDrawTab(s16 a) {
     t = 4 - a;
     base = GetBgScreenBase(0);
 #ifdef VERSION_EU
-    RequestTilemapRectCopy(sUnkEu_09F84FBC[gLanguage], base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
+    RequestTilemapRectCopy(sMsChargeTabTilemapsByLanguage[gLanguage], base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
 #else
     RequestTilemapRectCopy(gUnk_09A3B75C, base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
 #endif
@@ -1170,7 +1170,7 @@ void mode_ms_charge_0() {
     );
     LoadBgMap(0,
 #ifdef VERSION_EU
-        sUnkEu_09F84FA8[gLanguage]
+        sMsChargeBgMapsByLanguage[gLanguage]
 #else
         gUnk_09A3B25C
 #endif
@@ -1179,7 +1179,7 @@ void mode_ms_charge_0() {
     if (GetMsChargeSelectedCard()->category == 3) {
         LoadBgMap(1,
 #ifdef VERSION_EU
-        sUnkEu_09F84FE4[gLanguage]
+        sMsChargeEnemyCountBgMapsByLanguage[gLanguage]
 #else
         gUnk_09A3BD5C
 #endif
@@ -1187,7 +1187,7 @@ void mode_ms_charge_0() {
     } else {
         LoadBgMap(1,
 #ifdef VERSION_EU
-        sUnkEu_09F84FD0[gLanguage]
+        sMsChargeValueCountBgMapsByLanguage[gLanguage]
 #else
         gUnk_09A3B85C
 #endif

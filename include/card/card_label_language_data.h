@@ -2,8 +2,8 @@
 #define GUARD_CARD_LABEL_LANGUAGE_DATA_H
 
 #ifdef VERSION_EU
-extern void* gUnkEu_09F5D574[5];
-extern void** gUnkEu_09F5D588[5];
+extern void* gHcEffectNameTilesByLanguage[5];
+extern void** gHcEffectNameSpritesByLanguage[5];
 extern void* gUnkEu_09F5D59C[5];
 extern void** gUnkEu_09F5D5B0[5];
 extern void* gUnkEu_09F5D5C4[5];

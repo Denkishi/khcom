@@ -24,24 +24,24 @@
 #include "card_stock_info.h"
 
 #if defined(VERSION_US)
-static const CardHelpDef sUnk_0903BD0C = {
-    gUnk_09EE7A38,
+static const CardHelpDef sFiraHelpDef = {
+    gFiraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_US)
-static const CardHelpDef sUnk_0903BD14 = {
-    gUnk_09EE7A40,
+static const CardHelpDef sBlizzaraHelpDef = {
+    gBlizzaraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 #endif
 
 #if defined(VERSION_JP)
-static const CardHelpDef sUnk_0903BD0C = {
-    gUnk_09EE7A38,
+static const CardHelpDef sFiraHelpDef = {
+    gFiraHelpTexts,
     2,
     { 0, 0, 0 },
 };
@@ -51,8 +51,8 @@ static const CardHelpDef sUnk_0903BD0C = {
 #include "card_help_pages_head.inc"
 #endif
 #if defined(VERSION_JP)
-static const CardHelpDef sUnk_0903BD14 = {
-    gUnk_09EE7A40,
+static const CardHelpDef sBlizzaraHelpDef = {
+    gBlizzaraHelpTexts,
     2,
     { 0, 0, 0 },
 };
@@ -69,26 +69,26 @@ static const CardHelpDef sUnk_0903BFB4 = {
 };
 #endif
 
-static const CardHelpDef sUnk_0903BD1C = {
-    gUnk_09EE7A48,
+static const CardHelpDef sThundaraHelpDef = {
+    gThundaraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD24 = {
-    gUnk_09EE7A50,
+static const CardHelpDef sCuraHelpDef = {
+    gCuraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD2C = {
-    gUnk_09EE7A60,
+static const CardHelpDef sStopraHelpDef = {
+    gStopraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD34 = {
-    gUnk_09EE79F4,
+static const CardHelpDef sSonicBladeHelpDef = {
+    gSonicBladeHelpTexts,
 #if defined(VERSION_US) || defined(VERSION_EU)
     3,
 #elif defined(VERSION_JP)
@@ -97,246 +97,246 @@ static const CardHelpDef sUnk_0903BD34 = {
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD3C = {
-    gUnk_09EE7A08,
+static const CardHelpDef sStrikeRaidHelpDef = {
+    gStrikeRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
-static const CardHelpDef sUnk_0903BD0C = {
-    gUnk_09EE7A38,
+static const CardHelpDef sFiraHelpDef = {
+    gFiraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-static const CardHelpDef sUnk_0903BD44 = {
-    gUnk_09EE7A70,
+static const CardHelpDef sFiragaHelpDef = {
+    gFiragaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
-static const CardHelpDef sUnk_0903BD14 = {
-    gUnk_09EE7A40,
+static const CardHelpDef sBlizzaraHelpDef = {
+    gBlizzaraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 #endif
 
-static const CardHelpDef sUnk_0903BD4C = {
-    gUnk_09EE7A78,
+static const CardHelpDef sBlizzagaHelpDef = {
+    gBlizzagaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD54 = {
-    gUnk_09EE7A80,
+static const CardHelpDef sThundagaHelpDef = {
+    gThundagaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD5C = {
-    gUnk_09EE7A88,
+static const CardHelpDef sCuragaHelpDef = {
+    gCuragaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD64 = {
-    gUnk_09EE7A58,
+static const CardHelpDef sGraviraHelpDef = {
+    gGraviraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD6C = {
-    gUnk_09EE7A90,
+static const CardHelpDef sGravigaHelpDef = {
+    gGravigaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD74 = {
-    gUnk_09EE7A98,
+static const CardHelpDef sStopgaHelpDef = {
+    gStopgaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD7C = {
-    gUnk_09EE7B98,
+static const CardHelpDef sGoofyChargeHelpDef = {
+    gGoofyChargeHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD84 = {
-    gUnk_09EE7BA0,
+static const CardHelpDef sGoofyTornadoHelpDef = {
+    gGoofyTornadoHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD8C = {
-    gUnk_09EE7B78,
+static const CardHelpDef sMagicHelpDef = {
+    gMagicHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD94 = {
-    gUnk_09EE7B88,
+static const CardHelpDef sMagicPairHelpDef = {
+    gMagicPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BD9C = {
-    gUnk_09EE7AA8,
+static const CardHelpDef sProudRoarHelpDef = {
+    gProudRoarHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDA4 = {
-    gUnk_09EE7AB8,
+static const CardHelpDef sProudRoarPairHelpDef = {
+    gProudRoarPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDAC = {
-    gUnk_09EE7AC8,
+static const CardHelpDef sShowtimeHelpDef = {
+    gShowtimeHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDB4 = {
-    gUnk_09EE7AD8,
+static const CardHelpDef sShowtimePairHelpDef = {
+    gShowtimePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDBC = {
-    gUnk_09EE7B38,
+static const CardHelpDef sParadiseHelpDef = {
+    gParadiseHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDC4 = {
-    gUnk_09EE7B48,
+static const CardHelpDef sParadisePairHelpDef = {
+    gParadisePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDCC = {
-    gUnk_09EE7B58,
+static const CardHelpDef sSplashHelpDef = {
+    gSplashHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDD4 = {
-    gUnk_09EE7B68,
+static const CardHelpDef sSplashPairHelpDef = {
+    gSplashPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDDC = {
-    gUnk_09EE7AE8,
+static const CardHelpDef sTwinkleHelpDef = {
+    gTwinkleHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDE4 = {
-    gUnk_09EE7AF8,
+static const CardHelpDef sTwinklePairHelpDef = {
+    gTwinklePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDEC = {
-    gUnk_09EE7B08,
+static const CardHelpDef sFlareBreathHelpDef = {
+    gFlareBreathHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDF4 = {
-    gUnk_09EE7B18,
+static const CardHelpDef sFlareBreathPairHelpDef = {
+    gFlareBreathPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BDFC = {
-    gUnk_09EE7B28,
+static const CardHelpDef sOmnislashHelpDef = {
+    gOmnislashHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE04 = {
-    gUnk_09EE7B30,
+static const CardHelpDef sCrossSlashHelpDef = {
+    gCrossSlashHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE0C = {
-    gUnk_09EE7BA8,
+static const CardHelpDef sSandstormHelpDef = {
+    gSandstormHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE14 = {
-    gUnk_09EE7BB8,
+static const CardHelpDef sSandstormPairHelpDef = {
+    gSandstormPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE1C = {
-    gUnk_09EE7BE8,
+static const CardHelpDef sSpiralWaveHelpDef = {
+    gSpiralWaveHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE24 = {
-    gUnk_09EE7BF8,
+static const CardHelpDef sSpiralWavePairHelpDef = {
+    gSpiralWavePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE2C = {
-    gUnk_09EE7BC8,
+static const CardHelpDef sSurpriseHelpDef = {
+    gSurpriseHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE34 = {
-    gUnk_09EE7BD8,
+static const CardHelpDef sSurprisePairHelpDef = {
+    gSurprisePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE3C = {
-    gUnk_09EE7C08,
+static const CardHelpDef sHummingbirdHelpDef = {
+    gHummingbirdHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE44 = {
-    gUnk_09EE7C18,
+static const CardHelpDef sHummingbirdPairHelpDef = {
+    gHummingbirdPairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE4C = {
-    gUnk_09EE7C28,
+static const CardHelpDef sFerociousLungeHelpDef = {
+    gFerociousLungeHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE54 = {
-    gUnk_09EE7C38,
+static const CardHelpDef sFerociousLungePairHelpDef = {
+    gFerociousLungePairHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE5C = {
-    gUnk_09EE7D54,
+static const CardHelpDef sMmMiracleHelpDef = {
+    gMmMiracleHelpTexts,
     4,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE64 = {
-    gUnk_09EE7D64,
+static const CardHelpDef sMmMiraclePairHelpDef = {
+    gMmMiraclePairHelpTexts,
 #if defined(VERSION_US) || defined(VERSION_EU)
     4,
 #elif defined(VERSION_JP)
@@ -345,80 +345,80 @@ static const CardHelpDef sUnk_0903BE64 = {
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE6C = {
-    gUnk_09EE7A68,
+static const CardHelpDef sAeroraHelpDef = {
+    gAeroraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE74 = {
-    gUnk_09EE7AA0,
+static const CardHelpDef sAerogaHelpDef = {
+    gAerogaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE7C = {
-    gUnk_09EE79EC,
+static const CardHelpDef sBlitzHelpDef = {
+    gBlitzHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE84 = {
-    gUnk_09EE7A00,
+static const CardHelpDef sArsArcanumHelpDef = {
+    gArsArcanumHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE8C = {
-    gUnk_09EE7A10,
+static const CardHelpDef sRagnarokHelpDef = {
+    gRagnarokHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE94 = {
-    gUnk_09EE7A18,
+static const CardHelpDef sTrinityLimitHelpDef = {
+    gTrinityLimitHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BE9C = {
-    gUnk_09EE7A20,
+static const CardHelpDef sSlidingDashHelpDef = {
+    gSlidingDashHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEA4 = {
-    gUnk_09EE7A28,
+static const CardHelpDef sStunImpactHelpDef = {
+    gStunImpactHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEAC = {
-    gUnk_09EE7A30,
+static const CardHelpDef sZantetsukenHelpDef = {
+    gZantetsukenHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEB4 = {
-    gUnk_09EE7C48,
+static const CardHelpDef sWarpHelpDef = {
+    gWarpHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEBC = {
-    gUnk_09EE7C50,
+static const CardHelpDef sWarpinatorHelpDef = {
+    gWarpinatorHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEC4 = {
-    gUnk_09EE7C58,
+static const CardHelpDef sTerrorHelpDef = {
+    gTerrorHelpTexts,
     3,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BECC = {
-    gUnk_09EE7C64,
+static const CardHelpDef sConfuseHelpDef = {
+    gConfuseHelpTexts,
     2,
     { 0, 0, 0 },
 };
@@ -431,62 +431,62 @@ static const CardHelpDef sUnk_0903BED4 = {
 };
 #endif
 
-static const CardHelpDef sUnk_0903BEDC = {
-    gUnk_09EE7C6C,
+static const CardHelpDef sStopRaidHelpDef = {
+    gStopRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEE4 = {
-    gUnk_09EE7C74,
+static const CardHelpDef sJudgmentHelpDef = {
+    gJudgmentHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEEC = {
-    gUnk_09EE7C7C,
+static const CardHelpDef sReflectRaidHelpDef = {
+    gReflectRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEF4 = {
-    gUnk_09EE7C84,
+static const CardHelpDef sFireRaidHelpDef = {
+    gFireRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BEFC = {
-    gUnk_09EE7C8C,
+static const CardHelpDef sBlizzardRaidHelpDef = {
+    gBlizzardRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF04 = {
-    gUnk_09EE7C94,
+static const CardHelpDef sThunderRaidHelpDef = {
+    gThunderRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF0C = {
-    gUnk_09EE7C9C,
+static const CardHelpDef sGravityRaidHelpDef = {
+    gGravityRaidHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF14 = {
-    gUnk_09EE7CA4,
+static const CardHelpDef sAquaSplashHelpDef = {
+    gAquaSplashHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF1C = {
-    gUnk_09EE7CAC,
+static const CardHelpDef sHolyHelpDef = {
+    gHolyHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF24 = {
-    gUnk_09EE7CB4,
+static const CardHelpDef sBlazingDonaldHelpDef = {
+    gBlazingDonaldHelpTexts,
     2,
     { 0, 0, 0 },
 };
@@ -499,98 +499,98 @@ static const CardHelpDef sUnk_0903BF2C = {
 };
 #endif
 
-static const CardHelpDef sUnk_0903BF34 = {
-    gUnk_09EE7CBC,
+static const CardHelpDef sGiftedMiracleHelpDef = {
+    gGiftedMiracleHelpTexts,
     3,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF3C = {
-    gUnk_09EE7CC8,
+static const CardHelpDef sMegaFlareHelpDef = {
+    gMegaFlareHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF44 = {
-    gUnk_09EE7CD0,
+static const CardHelpDef sFiragaBreakHelpDef = {
+    gFiragaBreakHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF4C = {
-    gUnk_09EE7CD8,
+static const CardHelpDef sShockImpactHelpDef = {
+    gShockImpactHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF54 = {
-    gUnk_09EE7CE0,
+static const CardHelpDef sIdyllRompHelpDef = {
+    gIdyllRompHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF5C = {
-    gUnk_09EE7CE8,
+static const CardHelpDef sCrossSlashPlusHelpDef = {
+    gCrossSlashPlusHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF64 = {
-    gUnk_09EE7CF0,
+static const CardHelpDef sHomingFiraHelpDef = {
+    gHomingFiraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF6C = {
-    gUnk_09EE7CF8,
+static const CardHelpDef sHomingBlizzaraHelpDef = {
+    gHomingBlizzaraHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF74 = {
-    gUnk_09EE7D00,
+static const CardHelpDef sSynchroHelpDef = {
+    gSynchroHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF7C = {
-    gUnk_09EE7D08,
+static const CardHelpDef sBindHelpDef = {
+    gBindHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF84 = {
-    gUnk_09EE7D10,
+static const CardHelpDef sTornadoHelpDef = {
+    gTornadoHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF8C = {
-    gUnk_09EE7D18,
+static const CardHelpDef sQuakeHelpDef = {
+    gQuakeHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF94 = {
-    gUnk_09EE7D20,
+static const CardHelpDef sTeleportHelpDef = {
+    gTeleportHelpTexts,
     3,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BF9C = {
-    gUnk_09EE7D2C,
+static const CardHelpDef sDarkBreakHelpDef = {
+    gDarkBreakHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BFA4 = {
-    gUnk_09EE7D34,
+static const CardHelpDef sDarkFiragaHelpDef = {
+    gDarkFiragaHelpTexts,
     2,
     { 0, 0, 0 },
 };
 
-static const CardHelpDef sUnk_0903BFAC = {
-    gUnk_09EE7D3C,
+static const CardHelpDef sDarkAuraHelpDef = {
+    gDarkAuraHelpTexts,
     2,
     { 0, 0, 0 },
 };
@@ -604,7 +604,7 @@ static const CardHelpDef sUnk_0903BFB4 = {
 #endif
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE79EC[] = {
+const CardHelpText* gBlitzHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090381F8,
     gCardHelpTextUs_09038260,
@@ -615,7 +615,7 @@ const CardHelpText* gUnk_09EE79EC[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE79F4[] = {
+const CardHelpText* gSonicBladeHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090382DC,
     gCardHelpTextUs_0903835A,
@@ -631,7 +631,7 @@ const CardHelpText* gUnk_09EE79F4[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7A00[] = {
+const CardHelpText* gArsArcanumHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038440,
     gCardHelpTextUs_0903848E,
@@ -642,7 +642,7 @@ const CardHelpText* gUnk_09EE7A00[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7A08[] = {
+const CardHelpText* gStrikeRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090384DC,
     gCardHelpTextUs_0903857A,
@@ -656,7 +656,7 @@ const CardHelpText* gUnk_09EE7A08[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7A10[] = {
+const CardHelpText* gRagnarokHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090385CC,
     gCardHelpTextUs_09038646,
@@ -666,7 +666,7 @@ const CardHelpText* gUnk_09EE7A10[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A18[] = {
+const CardHelpText* gTrinityLimitHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038694,
     gCardHelpTextUs_090386F0,
@@ -676,7 +676,7 @@ const CardHelpText* gUnk_09EE7A18[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A20[] = {
+const CardHelpText* gSlidingDashHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038736,
     gCardHelpTextUs_090387A4,
@@ -686,7 +686,7 @@ const CardHelpText* gUnk_09EE7A20[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A28[] = {
+const CardHelpText* gStunImpactHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903881C,
     gCardHelpTextUs_0903887A,
@@ -696,7 +696,7 @@ const CardHelpText* gUnk_09EE7A28[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A30[] = {
+const CardHelpText* gZantetsukenHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090388F2,
     gCardHelpTextUs_0903897C,
@@ -707,7 +707,7 @@ const CardHelpText* gUnk_09EE7A30[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7A38[] = {
+const CardHelpText* gFiraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090389D2,
     gCardHelpTextUs_09038A32,
@@ -720,7 +720,7 @@ const CardHelpText* gUnk_09EE7A38[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A40[] = {
+const CardHelpText* gBlizzaraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038A4E,
     gCardHelpTextUs_09038AAA,
@@ -733,7 +733,7 @@ const CardHelpText* gUnk_09EE7A40[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A48[] = {
+const CardHelpText* gThundaraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038AD6,
     gCardHelpTextUs_09038B3E,
@@ -746,7 +746,7 @@ const CardHelpText* gUnk_09EE7A48[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A50[] = {
+const CardHelpText* gCuraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038B66,
     gCardHelpTextUs_09038B90,
@@ -760,7 +760,7 @@ const CardHelpText* gUnk_09EE7A50[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7A58[] = {
+const CardHelpText* gGraviraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038BAC,
     gCardHelpTextUs_09038C10,
@@ -771,7 +771,7 @@ const CardHelpText* gUnk_09EE7A58[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7A60[] = {
+const CardHelpText* gStopraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038C38,
     gCardHelpTextUs_09038C96,
@@ -785,7 +785,7 @@ const CardHelpText* gUnk_09EE7A60[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7A68[] = {
+const CardHelpText* gAeroraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038CB2,
     gCardHelpTextUs_09038D16,
@@ -796,7 +796,7 @@ const CardHelpText* gUnk_09EE7A68[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7A70[] = {
+const CardHelpText* gFiragaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038D32,
     gCardHelpTextUs_09038D90,
@@ -809,7 +809,7 @@ const CardHelpText* gUnk_09EE7A70[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A78[] = {
+const CardHelpText* gBlizzagaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038DBA,
     gCardHelpTextUs_09038E16,
@@ -822,7 +822,7 @@ const CardHelpText* gUnk_09EE7A78[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A80[] = {
+const CardHelpText* gThundagaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038E58,
     gCardHelpTextUs_09038EBA,
@@ -835,7 +835,7 @@ const CardHelpText* gUnk_09EE7A80[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A88[] = {
+const CardHelpText* gCuragaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038EF6,
     gCardHelpTextUs_09038F3C,
@@ -849,13 +849,13 @@ const CardHelpText* gUnk_09EE7A88[] = {
 };
 
 #if defined(VERSION_JP)
-const CardHelpText* gUnk_09EE7A58[] = {
+const CardHelpText* gGraviraHelpTexts[] = {
     gCardHelpTextJp_0900BBB8,
     gCardHelpTextJp_0900BBE4,
 };
 #endif
 
-const CardHelpText* gUnk_09EE7A90[] = {
+const CardHelpText* gGravigaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09038F66,
     gCardHelpTextUs_09038FCA,
@@ -868,7 +868,7 @@ const CardHelpText* gUnk_09EE7A90[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7A98[] = {
+const CardHelpText* gStopgaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039006,
     gCardHelpTextUs_0903906E,
@@ -882,7 +882,7 @@ const CardHelpText* gUnk_09EE7A98[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7AA0[] = {
+const CardHelpText* gAerogaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039098,
     gCardHelpTextUs_09039110,
@@ -893,7 +893,7 @@ const CardHelpText* gUnk_09EE7AA0[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7AA8[] = {
+const CardHelpText* gProudRoarHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903913A,
     gCardHelpTextUs_090391BA,
@@ -912,7 +912,7 @@ const CardHelpText* gUnk_09EE7AA8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7AB8[] = {
+const CardHelpText* gProudRoarPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903913A,
     gCardHelpTextUs_090391BA,
@@ -931,7 +931,7 @@ const CardHelpText* gUnk_09EE7AB8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7AC8[] = {
+const CardHelpText* gShowtimeHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903929E,
     gCardHelpTextUs_09039334,
@@ -950,7 +950,7 @@ const CardHelpText* gUnk_09EE7AC8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7AD8[] = {
+const CardHelpText* gShowtimePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903929E,
     gCardHelpTextUs_09039334,
@@ -969,7 +969,7 @@ const CardHelpText* gUnk_09EE7AD8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7AE8[] = {
+const CardHelpText* gTwinkleHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903941E,
     gCardHelpTextUs_09039490,
@@ -988,7 +988,7 @@ const CardHelpText* gUnk_09EE7AE8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7AF8[] = {
+const CardHelpText* gTwinklePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903941E,
     gCardHelpTextUs_09039490,
@@ -1007,7 +1007,7 @@ const CardHelpText* gUnk_09EE7AF8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B08[] = {
+const CardHelpText* gFlareBreathHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090395B6,
     gCardHelpTextUs_09039646,
@@ -1026,7 +1026,7 @@ const CardHelpText* gUnk_09EE7B08[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B18[] = {
+const CardHelpText* gFlareBreathPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090395B6,
     gCardHelpTextUs_09039646,
@@ -1046,13 +1046,13 @@ const CardHelpText* gUnk_09EE7B18[] = {
 };
 
 #if defined(VERSION_JP)
-const CardHelpText* gUnk_09EE7B30[] = {
+const CardHelpText* gCrossSlashHelpTexts[] = {
     gCardHelpTextJp_0900BF88,
     gCardHelpTextJp_0900BF9C,
 };
 #endif
 
-const CardHelpText* gUnk_09EE7B28[] = {
+const CardHelpText* gOmnislashHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090397BA,
     gCardHelpTextUs_09039842,
@@ -1066,7 +1066,7 @@ const CardHelpText* gUnk_09EE7B28[] = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7B30[] = {
+const CardHelpText* gCrossSlashHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039738,
     gCardHelpTextUs_0903979A,
@@ -1077,7 +1077,7 @@ const CardHelpText* gUnk_09EE7B30[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7B38[] = {
+const CardHelpText* gParadiseHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039872,
     gCardHelpTextUs_090398D4,
@@ -1096,7 +1096,7 @@ const CardHelpText* gUnk_09EE7B38[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B48[] = {
+const CardHelpText* gParadisePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039872,
     gCardHelpTextUs_090398D4,
@@ -1115,7 +1115,7 @@ const CardHelpText* gUnk_09EE7B48[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B58[] = {
+const CardHelpText* gSplashHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090399B8,
     gCardHelpTextUs_09039A3A,
@@ -1134,7 +1134,7 @@ const CardHelpText* gUnk_09EE7B58[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B68[] = {
+const CardHelpText* gSplashPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_090399B8,
     gCardHelpTextUs_09039A3A,
@@ -1153,7 +1153,7 @@ const CardHelpText* gUnk_09EE7B68[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B78[] = {
+const CardHelpText* gMagicHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039B28,
     gCardHelpTextUs_09039B96,
@@ -1172,7 +1172,7 @@ const CardHelpText* gUnk_09EE7B78[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B88[] = {
+const CardHelpText* gMagicPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039B28,
     gCardHelpTextUs_09039B96,
@@ -1191,7 +1191,7 @@ const CardHelpText* gUnk_09EE7B88[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7B98[] = {
+const CardHelpText* gGoofyChargeHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039C66,
     gCardHelpTextUs_09039CEE,
@@ -1204,7 +1204,7 @@ const CardHelpText* gUnk_09EE7B98[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BA0[] = {
+const CardHelpText* gGoofyTornadoHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039D0E,
     gCardHelpTextUs_09039D8E,
@@ -1217,7 +1217,7 @@ const CardHelpText* gUnk_09EE7BA0[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BA8[] = {
+const CardHelpText* gSandstormHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039DBE,
     gCardHelpTextUs_09039E1A,
@@ -1236,7 +1236,7 @@ const CardHelpText* gUnk_09EE7BA8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BB8[] = {
+const CardHelpText* gSandstormPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039DBE,
     gCardHelpTextUs_09039E1A,
@@ -1255,7 +1255,7 @@ const CardHelpText* gUnk_09EE7BB8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BC8[] = {
+const CardHelpText* gSurpriseHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039F12,
     gCardHelpTextUs_09039F82,
@@ -1274,7 +1274,7 @@ const CardHelpText* gUnk_09EE7BC8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BD8[] = {
+const CardHelpText* gSurprisePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_09039F12,
     gCardHelpTextUs_09039F82,
@@ -1293,7 +1293,7 @@ const CardHelpText* gUnk_09EE7BD8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BE8[] = {
+const CardHelpText* gSpiralWaveHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A03C,
     gCardHelpTextUs_0903A0A4,
@@ -1312,7 +1312,7 @@ const CardHelpText* gUnk_09EE7BE8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7BF8[] = {
+const CardHelpText* gSpiralWavePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A03C,
     gCardHelpTextUs_0903A0A4,
@@ -1331,7 +1331,7 @@ const CardHelpText* gUnk_09EE7BF8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C08[] = {
+const CardHelpText* gHummingbirdHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A18C,
     gCardHelpTextUs_0903A1FE,
@@ -1350,7 +1350,7 @@ const CardHelpText* gUnk_09EE7C08[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C18[] = {
+const CardHelpText* gHummingbirdPairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A18C,
     gCardHelpTextUs_0903A1FE,
@@ -1369,7 +1369,7 @@ const CardHelpText* gUnk_09EE7C18[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C28[] = {
+const CardHelpText* gFerociousLungeHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A318,
     gCardHelpTextUs_0903A39A,
@@ -1388,7 +1388,7 @@ const CardHelpText* gUnk_09EE7C28[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C38[] = {
+const CardHelpText* gFerociousLungePairHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A318,
     gCardHelpTextUs_0903A39A,
@@ -1408,7 +1408,7 @@ const CardHelpText* gUnk_09EE7C38[] = {
 };
 
 #if defined(VERSION_JP)
-const CardHelpText* gUnk_09EE7D54[] = {
+const CardHelpText* gMmMiracleHelpTexts[] = {
     gCardHelpTextJp_0900D0D8,
     gCardHelpTextJp_0900D110,
     gCardHelpTextJp_0900D11C,
@@ -1420,58 +1420,58 @@ const CardHelpText* gUnk_09EE7D44[] = {
     gCardHelpTextJp_0900D174,
 };
 
-const CardHelpText* gUnk_09EE7D64[] = {
+const CardHelpText* gMmMiraclePairHelpTexts[] = {
     gCardHelpTextJp_0900D11C,
     gCardHelpTextJp_0900D158,
 };
 
-const CardHelpText* gUnk_09EE7A68[] = {
+const CardHelpText* gAeroraHelpTexts[] = {
     gCardHelpTextJp_0900BC8C,
     gCardHelpTextJp_0900BCC0,
 };
 
-const CardHelpText* gUnk_09EE7AA0[] = {
+const CardHelpText* gAerogaHelpTexts[] = {
     gCardHelpTextJp_0900BCD0,
     gCardHelpTextJp_0900BD08,
 };
 
-const CardHelpText* gUnk_09EE79EC[] = {
+const CardHelpText* gBlitzHelpTexts[] = {
     gCardHelpTextJp_0900B684,
     gCardHelpTextJp_0900B6B0,
 };
 
-const CardHelpText* gUnk_09EE7A00[] = {
+const CardHelpText* gArsArcanumHelpTexts[] = {
     gCardHelpTextJp_0900B76C,
     gCardHelpTextJp_0900B78C,
 };
 
-const CardHelpText* gUnk_09EE7A10[] = {
+const CardHelpText* gRagnarokHelpTexts[] = {
     gCardHelpTextJp_0900B81C,
     gCardHelpTextJp_0900B83C,
 };
 
-const CardHelpText* gUnk_09EE7A18[] = {
+const CardHelpText* gTrinityLimitHelpTexts[] = {
     gCardHelpTextJp_0900B864,
     gCardHelpTextJp_0900B8A0,
 };
 
-const CardHelpText* gUnk_09EE7A20[] = {
+const CardHelpText* gSlidingDashHelpTexts[] = {
     gCardHelpTextJp_0900B8C8,
     gCardHelpTextJp_0900B8F0,
 };
 
-const CardHelpText* gUnk_09EE7A28[] = {
+const CardHelpText* gStunImpactHelpTexts[] = {
     gCardHelpTextJp_0900B928,
     gCardHelpTextJp_0900B950,
 };
 
-const CardHelpText* gUnk_09EE7A30[] = {
+const CardHelpText* gZantetsukenHelpTexts[] = {
     gCardHelpTextJp_0900B988,
     gCardHelpTextJp_0900B9C4,
 };
 #endif
 
-const CardHelpText* gUnk_09EE7C48[] = {
+const CardHelpText* gWarpHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A490,
     gCardHelpTextUs_0903A4D0,
@@ -1484,7 +1484,7 @@ const CardHelpText* gUnk_09EE7C48[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C50[] = {
+const CardHelpText* gWarpinatorHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A4FA,
     gCardHelpTextUs_0903A562,
@@ -1497,7 +1497,7 @@ const CardHelpText* gUnk_09EE7C50[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C58[] = {
+const CardHelpText* gTerrorHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A592,
     gCardHelpTextUs_0903A5FC,
@@ -1513,7 +1513,7 @@ const CardHelpText* gUnk_09EE7C58[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C64[] = {
+const CardHelpText* gConfuseHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A692,
     gCardHelpTextUs_0903A700,
@@ -1533,7 +1533,7 @@ const CardHelpText* gUnk_09EE7D74[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7C6C[] = {
+const CardHelpText* gStopRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A750,
     gCardHelpTextUs_0903A7B0,
@@ -1546,7 +1546,7 @@ const CardHelpText* gUnk_09EE7C6C[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C74[] = {
+const CardHelpText* gJudgmentHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A806,
     gCardHelpTextUs_0903A878,
@@ -1559,7 +1559,7 @@ const CardHelpText* gUnk_09EE7C74[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C7C[] = {
+const CardHelpText* gReflectRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A8CE,
     gCardHelpTextUs_0903A95A,
@@ -1572,7 +1572,7 @@ const CardHelpText* gUnk_09EE7C7C[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C84[] = {
+const CardHelpText* gFireRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903A9B2,
     gCardHelpTextUs_0903AA08,
@@ -1585,7 +1585,7 @@ const CardHelpText* gUnk_09EE7C84[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C8C[] = {
+const CardHelpText* gBlizzardRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AA5E,
     gCardHelpTextUs_0903AAB2,
@@ -1598,7 +1598,7 @@ const CardHelpText* gUnk_09EE7C8C[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C94[] = {
+const CardHelpText* gThunderRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AB10,
     gCardHelpTextUs_0903AB70,
@@ -1611,7 +1611,7 @@ const CardHelpText* gUnk_09EE7C94[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7C9C[] = {
+const CardHelpText* gGravityRaidHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903ABCC,
     gCardHelpTextUs_0903AC32,
@@ -1624,7 +1624,7 @@ const CardHelpText* gUnk_09EE7C9C[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CA4[] = {
+const CardHelpText* gAquaSplashHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AC8E,
     gCardHelpTextUs_0903AD26,
@@ -1637,7 +1637,7 @@ const CardHelpText* gUnk_09EE7CA4[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CAC[] = {
+const CardHelpText* gHolyHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AD58,
     gCardHelpTextUs_0903ADD8,
@@ -1650,7 +1650,7 @@ const CardHelpText* gUnk_09EE7CAC[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CB4[] = {
+const CardHelpText* gBlazingDonaldHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AE2A,
     gCardHelpTextUs_0903AE60,
@@ -1670,7 +1670,7 @@ const CardHelpText* gUnk_09EE7D7C[] = {
 };
 #endif
 
-const CardHelpText* gUnk_09EE7CBC[] = {
+const CardHelpText* gGiftedMiracleHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AEA2,
     gCardHelpTextUs_0903AF44,
@@ -1686,7 +1686,7 @@ const CardHelpText* gUnk_09EE7CBC[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CC8[] = {
+const CardHelpText* gMegaFlareHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903AFDE,
     gCardHelpTextUs_0903B02C,
@@ -1699,7 +1699,7 @@ const CardHelpText* gUnk_09EE7CC8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CD0[] = {
+const CardHelpText* gFiragaBreakHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B058,
     gCardHelpTextUs_0903B0E6,
@@ -1712,7 +1712,7 @@ const CardHelpText* gUnk_09EE7CD0[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CD8[] = {
+const CardHelpText* gShockImpactHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B128,
     gCardHelpTextUs_0903B192,
@@ -1725,7 +1725,7 @@ const CardHelpText* gUnk_09EE7CD8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CE0[] = {
+const CardHelpText* gIdyllRompHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B1EA,
     gCardHelpTextUs_0903B260,
@@ -1738,7 +1738,7 @@ const CardHelpText* gUnk_09EE7CE0[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CE8[] = {
+const CardHelpText* gCrossSlashPlusHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B2B8,
     gCardHelpTextUs_0903B31A,
@@ -1751,7 +1751,7 @@ const CardHelpText* gUnk_09EE7CE8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CF0[] = {
+const CardHelpText* gHomingFiraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B35C,
     gCardHelpTextUs_0903B3C6,
@@ -1764,7 +1764,7 @@ const CardHelpText* gUnk_09EE7CF0[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7CF8[] = {
+const CardHelpText* gHomingBlizzaraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B404,
     gCardHelpTextUs_0903B476,
@@ -1777,7 +1777,7 @@ const CardHelpText* gUnk_09EE7CF8[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D00[] = {
+const CardHelpText* gSynchroHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B4BC,
     gCardHelpTextUs_0903B522,
@@ -1790,7 +1790,7 @@ const CardHelpText* gUnk_09EE7D00[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D08[] = {
+const CardHelpText* gBindHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B552,
     gCardHelpTextUs_0903B5DE,
@@ -1803,7 +1803,7 @@ const CardHelpText* gUnk_09EE7D08[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D10[] = {
+const CardHelpText* gTornadoHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B622,
     gCardHelpTextUs_0903B6B0,
@@ -1816,7 +1816,7 @@ const CardHelpText* gUnk_09EE7D10[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D18[] = {
+const CardHelpText* gQuakeHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B6F6,
     gCardHelpTextUs_0903B76E,
@@ -1829,7 +1829,7 @@ const CardHelpText* gUnk_09EE7D18[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D20[] = {
+const CardHelpText* gTeleportHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B7B4,
     gCardHelpTextUs_0903B842,
@@ -1845,7 +1845,7 @@ const CardHelpText* gUnk_09EE7D20[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D2C[] = {
+const CardHelpText* gDarkBreakHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B8DA,
     gCardHelpTextUs_0903B976,
@@ -1858,7 +1858,7 @@ const CardHelpText* gUnk_09EE7D2C[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D34[] = {
+const CardHelpText* gDarkFiragaHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903B9C4,
     gCardHelpTextUs_0903BA4A,
@@ -1871,7 +1871,7 @@ const CardHelpText* gUnk_09EE7D34[] = {
 #endif
 };
 
-const CardHelpText* gUnk_09EE7D3C[] = {
+const CardHelpText* gDarkAuraHelpTexts[] = {
 #if defined(VERSION_US)
     gCardHelpTextUs_0903BA9A,
     gCardHelpTextUs_0903BB2C,
@@ -1892,14 +1892,14 @@ const CardHelpText* gUnk_09EE7D44[] = {
     gCardHelpTextUs_0903BCFA,
 };
 
-const CardHelpText* gUnk_09EE7D54[] = {
+const CardHelpText* gMmMiracleHelpTexts[] = {
     gCardHelpTextUs_0903BB76,
     gCardHelpTextUs_0903BBF8,
     gCardHelpTextUs_0903BC24,
     gCardHelpTextUs_0903BCB8,
 };
 
-const CardHelpText* gUnk_09EE7D64[] = {
+const CardHelpText* gMmMiraclePairHelpTexts[] = {
     gCardHelpTextUs_0903BB76,
     gCardHelpTextUs_0903BBF8,
     gCardHelpTextUs_0903BC24,
@@ -1918,14 +1918,14 @@ const CardHelpText* gUnk_09EE7D7C[] = {
 #endif
 
 #if defined(VERSION_EU)
-const CardHelpText* gUnk_09EE7D54[] = {
+const CardHelpText* gMmMiracleHelpTexts[] = {
     &gCardHelp42Text0,
     &gCardHelp42Text1,
     &gCardHelp42Text2,
     &gCardHelp42Text3,
 };
 
-const CardHelpText* gUnk_09EE7D64[] = {
+const CardHelpText* gMmMiraclePairHelpTexts[] = {
     &gCardHelp42Text0,
     &gCardHelp42Text1,
     &gCardHelp42Text2,
@@ -2049,99 +2049,99 @@ u8 IsLevelUpStockUnlocked() {
 }
 
 const CardHelpDef* gCardHelpDefs[] = {
-    &sUnk_0903BD0C,
-    &sUnk_0903BD14,
-    &sUnk_0903BD1C,
-    &sUnk_0903BD24,
-    &sUnk_0903BD2C,
-    &sUnk_0903BD34,
-    &sUnk_0903BD3C,
-    &sUnk_0903BD44,
-    &sUnk_0903BD4C,
-    &sUnk_0903BD54,
-    &sUnk_0903BD5C,
-    &sUnk_0903BD64,
-    &sUnk_0903BD6C,
-    &sUnk_0903BD74,
-    &sUnk_0903BD84,
-    &sUnk_0903BD7C,
-    &sUnk_0903BD8C,
-    &sUnk_0903BD94,
-    &sUnk_0903BD9C,
-    &sUnk_0903BDA4,
-    &sUnk_0903BDAC,
-    &sUnk_0903BDB4,
-    &sUnk_0903BDBC,
-    &sUnk_0903BDC4,
-    &sUnk_0903BDCC,
-    &sUnk_0903BDD4,
-    &sUnk_0903BDDC,
-    &sUnk_0903BDE4,
-    &sUnk_0903BDEC,
-    &sUnk_0903BDF4,
-    &sUnk_0903BDFC,
-    &sUnk_0903BE04,
-    &sUnk_0903BE0C,
-    &sUnk_0903BE14,
-    &sUnk_0903BE1C,
-    &sUnk_0903BE24,
-    &sUnk_0903BE2C,
-    &sUnk_0903BE34,
-    &sUnk_0903BE3C,
-    &sUnk_0903BE44,
-    &sUnk_0903BE4C,
-    &sUnk_0903BE54,
-    &sUnk_0903BE5C,
-    &sUnk_0903BE64,
-    &sUnk_0903BE6C,
-    &sUnk_0903BE74,
-    &sUnk_0903BE7C,
-    &sUnk_0903BE84,
-    &sUnk_0903BE8C,
-    &sUnk_0903BE94,
-    &sUnk_0903BE9C,
-    &sUnk_0903BEA4,
-    &sUnk_0903BEAC,
-    &sUnk_0903BEB4,
-    &sUnk_0903BEBC,
-    &sUnk_0903BEC4,
-    &sUnk_0903BECC,
+    &sFiraHelpDef,
+    &sBlizzaraHelpDef,
+    &sThundaraHelpDef,
+    &sCuraHelpDef,
+    &sStopraHelpDef,
+    &sSonicBladeHelpDef,
+    &sStrikeRaidHelpDef,
+    &sFiragaHelpDef,
+    &sBlizzagaHelpDef,
+    &sThundagaHelpDef,
+    &sCuragaHelpDef,
+    &sGraviraHelpDef,
+    &sGravigaHelpDef,
+    &sStopgaHelpDef,
+    &sGoofyTornadoHelpDef,
+    &sGoofyChargeHelpDef,
+    &sMagicHelpDef,
+    &sMagicPairHelpDef,
+    &sProudRoarHelpDef,
+    &sProudRoarPairHelpDef,
+    &sShowtimeHelpDef,
+    &sShowtimePairHelpDef,
+    &sParadiseHelpDef,
+    &sParadisePairHelpDef,
+    &sSplashHelpDef,
+    &sSplashPairHelpDef,
+    &sTwinkleHelpDef,
+    &sTwinklePairHelpDef,
+    &sFlareBreathHelpDef,
+    &sFlareBreathPairHelpDef,
+    &sOmnislashHelpDef,
+    &sCrossSlashHelpDef,
+    &sSandstormHelpDef,
+    &sSandstormPairHelpDef,
+    &sSpiralWaveHelpDef,
+    &sSpiralWavePairHelpDef,
+    &sSurpriseHelpDef,
+    &sSurprisePairHelpDef,
+    &sHummingbirdHelpDef,
+    &sHummingbirdPairHelpDef,
+    &sFerociousLungeHelpDef,
+    &sFerociousLungePairHelpDef,
+    &sMmMiracleHelpDef,
+    &sMmMiraclePairHelpDef,
+    &sAeroraHelpDef,
+    &sAerogaHelpDef,
+    &sBlitzHelpDef,
+    &sArsArcanumHelpDef,
+    &sRagnarokHelpDef,
+    &sTrinityLimitHelpDef,
+    &sSlidingDashHelpDef,
+    &sStunImpactHelpDef,
+    &sZantetsukenHelpDef,
+    &sWarpHelpDef,
+    &sWarpinatorHelpDef,
+    &sTerrorHelpDef,
+    &sConfuseHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
     &sUnk_0903BED4,
 #elif defined(VERSION_EU)
     NULL,
 #endif
-    &sUnk_0903BEDC,
-    &sUnk_0903BEE4,
-    &sUnk_0903BEEC,
-    &sUnk_0903BEF4,
-    &sUnk_0903BEFC,
-    &sUnk_0903BF04,
-    &sUnk_0903BF0C,
-    &sUnk_0903BF14,
-    &sUnk_0903BF1C,
-    &sUnk_0903BF24,
+    &sStopRaidHelpDef,
+    &sJudgmentHelpDef,
+    &sReflectRaidHelpDef,
+    &sFireRaidHelpDef,
+    &sBlizzardRaidHelpDef,
+    &sThunderRaidHelpDef,
+    &sGravityRaidHelpDef,
+    &sAquaSplashHelpDef,
+    &sHolyHelpDef,
+    &sBlazingDonaldHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
     &sUnk_0903BF2C,
 #elif defined(VERSION_EU)
     NULL,
 #endif
-    &sUnk_0903BF34,
-    &sUnk_0903BF3C,
-    &sUnk_0903BF44,
-    &sUnk_0903BF4C,
-    &sUnk_0903BF54,
-    &sUnk_0903BF5C,
-    &sUnk_0903BF64,
-    &sUnk_0903BF6C,
-    &sUnk_0903BF74,
-    &sUnk_0903BF7C,
-    &sUnk_0903BF84,
-    &sUnk_0903BF8C,
-    &sUnk_0903BF94,
-    &sUnk_0903BF9C,
-    &sUnk_0903BFA4,
-    &sUnk_0903BFAC,
+    &sGiftedMiracleHelpDef,
+    &sMegaFlareHelpDef,
+    &sFiragaBreakHelpDef,
+    &sShockImpactHelpDef,
+    &sIdyllRompHelpDef,
+    &sCrossSlashPlusHelpDef,
+    &sHomingFiraHelpDef,
+    &sHomingBlizzaraHelpDef,
+    &sSynchroHelpDef,
+    &sBindHelpDef,
+    &sTornadoHelpDef,
+    &sQuakeHelpDef,
+    &sTeleportHelpDef,
+    &sDarkBreakHelpDef,
+    &sDarkFiragaHelpDef,
+    &sDarkAuraHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
     &sUnk_0903BFB4,
     &sUnk_0903BFB4,

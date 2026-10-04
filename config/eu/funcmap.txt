@@ -2054,8 +2054,8 @@ EnemyCardClosed	0x08090808	92	0x08090860	body
 UpdateEnemyCardRingPosition	0x08090864	220	0x080908bc	global
 EnemyCardShrinkAway	0x08090940	100	0x08090998	body
 EnemyCardFlyOff	0x080909a4	176	0x080909fc	global
-func_08090A54	0x08090a54	120	0x08090aac	global
-func_08090ACC	0x08090acc	132	0x08090b24	global
+EnemyCardSlideBack	0x08090a54	120	0x08090aac	global
+EnemyCardSlideOut	0x08090acc	132	0x08090b24	global
 DispatchEnemyCardCommand	0x08090b50	236	0x08090ba8	global
 EnemyStockMoveToSlot	0x08090c3c	372	0x08090c94	global
 EnemyCardBreakFall	0x08090db0	240	0x08090e08	global
@@ -3476,7 +3476,7 @@ task_title_logo_0	0x080d63ec	12	0x080d2c64	named
 task_title_logo_1	0x080d63f8	64	0x080d2c70	named
 task_title_logo_2	0x080d6438	228	0x080d2cb0	named
 task_title_logo_3	0x080d651c	44	0x080d2d94	named
-func_080D6548	0x080d6548	44	0x080d2dc0	global
+PackLowBytes	0x080d6548	44	0x080d2dc0	global
 IsTitleLogoScaleDone	0x080d6574	12	0x080d2dec	body
 task_title_obj_0	0x080d6580	284	0x080d2df8	named
 task_title_obj_1	0x080d669c	96	0x080d30b4	named

@@ -42,7 +42,7 @@
 #include "types.h"
 
 #ifdef VERSION_EU
-static void* sUnkEu_09F84F5C[5] = {
+static void* sMoogleShopBgMapsByLanguage[5] = {
     gUnkEu_09A8DAA0,
     gUnk_09A3B25C,
     gUnkEu_09A91920,
@@ -1167,7 +1167,7 @@ void mode_ms_shop_0() {
     LoadBgTiles(0, gUnk_09A1251C, 0x6860);
     LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A18D7C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 #ifdef VERSION_EU
-    LoadBgMap(0, sUnkEu_09F84F5C[gLanguage], size);
+    LoadBgMap(0, sMoogleShopBgMapsByLanguage[gLanguage], size);
 #else
     LoadBgMap(0, gUnk_09A382DC, size);
 #endif
@@ -1227,7 +1227,7 @@ void mode_ms_shop_1() {
             SetMooglePackBought(gMapFloorState.room, sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
             sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
 #ifdef VERSION_EU
-            LoadBgMap(0, sUnkEu_09F84F5C[gLanguage], 0x500);
+            LoadBgMap(0, sMoogleShopBgMapsByLanguage[gLanguage], 0x500);
 #else
             LoadBgMap(0, gUnk_09A382DC, 0x500);
 #endif

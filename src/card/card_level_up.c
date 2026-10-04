@@ -43,11 +43,11 @@
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
 
-const u16 gUnkEu_090D1332[5] = { 0xE80, 0x1140, 0x1280, 0xF00, 0xF60 };
+const u16 gLevelUpOptionTileSizesByLanguage[5] = { 0xE80, 0x1140, 0x1280, 0xF00, 0xF60 };
 
 const u8 gLevelUpDisabledText[] = "\x19\x19\x19";
 
-const u8* const gUnkEu_090D1340[5] = { gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText };
+const u8* const gLevelUpDisabledTextByLanguage[5] = { gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText, gLevelUpDisabledText };
 #elif defined(VERSION_JP)
 const u8 gLevelUpDisabledText[] = "\x81\x7c\x81\x7c\x81\x7c";
 #else

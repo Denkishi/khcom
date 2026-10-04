@@ -80,7 +80,7 @@ static void* sAllmapBarSprites[5] = {
     gUnkEu_09738564,
 };
 
-static void* sUnkEu_09F80138[5] = {
+static void* sAllmapBarBgMapsByLanguage[5] = {
     gUnkEu_0980F840,
     gUnkEu_0980FD40,
     gUnkEu_09810C40,
@@ -508,7 +508,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 
         if (work->steps == 0) {
 #ifdef VERSION_EU
-            LoadBgMap(3, sUnkEu_09F80138[gLanguage], 0x500);
+            LoadBgMap(3, sAllmapBarBgMapsByLanguage[gLanguage], 0x500);
 #else
             LoadBgMap(3, gUnk_0983B298, 0x500);
 #endif

@@ -92,7 +92,7 @@ static const u16 sMsTopIntroMessages[3] = {
 };
 
 #ifdef VERSION_EU
-static void* sUnkEu_09F84EE8[5] = {
+static void* sMsTopBgMapsByLanguage[5] = {
     gUnk_09A378DC,
     gUnk_09A382DC,
     gUnkEu_09A8C1A0,
@@ -100,7 +100,7 @@ static void* sUnkEu_09F84EE8[5] = {
     gUnkEu_09A8B7A0,
 };
 
-static void* sUnkEu_09F84EFC[5] = {
+static void* sMsTopBarBgMapsByLanguage[5] = {
     gUnk_09A37DDC,
     gUnkEu_09A8C6A0,
     gUnkEu_09A8D5A0,
@@ -108,7 +108,7 @@ static void* sUnkEu_09F84EFC[5] = {
     gUnkEu_09A8CBA0,
 };
 
-static void* sUnkEu_09F84F10[5] = {
+static void* sMsTopTitleSpritesByLanguage[5] = {
     gUnk_099A2AD4,
     gUnkEu_099AFC68,
     gUnkEu_099B0A58,
@@ -116,7 +116,7 @@ static void* sUnkEu_09F84F10[5] = {
     gUnkEu_099B00F8,
 };
 
-static void* sUnkEu_09F84F24[5] = {
+static void* sMsTopTopBarSpritesByLanguage[5] = {
     gUnk_099A2AF0,
     gUnkEu_099AFC84,
     gUnkEu_099B0A74,
@@ -124,7 +124,7 @@ static void* sUnkEu_09F84F24[5] = {
     gUnkEu_099B0114,
 };
 
-static void* sUnkEu_09F84F38[5] = {
+static void* sMsTopBottomBarSpritesByLanguage[5] = {
     gUnk_099A2B24,
     gUnkEu_099AFCB8,
     gUnkEu_099B0AA8,
@@ -268,7 +268,7 @@ void MsTopHandleInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
-        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
@@ -279,7 +279,7 @@ void MsTopHandleInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMsTopBarVisible = 1;
 #ifdef VERSION_EU
-        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
@@ -317,9 +317,9 @@ void MsTopDraw() {
 
     if (sMsTopBarVisible) {
 #ifdef VERSION_EU
-        DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, sUnkEu_09F84F38[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, sMsTopTitleSpritesByLanguage[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, sMsTopTopBarSpritesByLanguage[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, sMsTopBottomBarSpritesByLanguage[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
 #else
         DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
         DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
@@ -434,13 +434,13 @@ void mode_ms_top_0(u32 a) {
 
     if (sMsTopBarVisible) {
 #ifdef VERSION_EU
-        LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
+        LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A378DC, 0x500);
 #endif
     } else {
 #ifdef VERSION_EU
-        LoadBgMap(2, sUnkEu_09F84EFC[gLanguage], 0x500);
+        LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
         LoadBgMap(2, gUnk_09A37DDC, 0x500);
 #endif
@@ -496,7 +496,7 @@ void mode_ms_top_1() {
         if (--sMsTopSteps <= 0) {
             sMsTopBarVisible = 0;
 #ifdef VERSION_EU
-            LoadBgMap(2, sUnkEu_09F84EFC[gLanguage], 0x500);
+            LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
             LoadBgMap(2, gUnk_09A37DDC, 0x500);
 #endif

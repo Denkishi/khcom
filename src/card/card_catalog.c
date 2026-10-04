@@ -60,10 +60,10 @@ const u8 gBlackStarText[3] = "\x81\x9A";
 
 const u8 gWhiteStarText[3] = "\x81\x99";
 
-const u8* gUnk_09EE26F4 = gWhiteStarText;
-const u8* gUnk_09EE26F8 = gBlackStarText;
-const u8* gUnk_09EE26FC = gWhiteCircleText;
-const u8* gUnk_09EE2700 = gBlackCircleText;
+const u8* gWhiteStarTextPtr = gWhiteStarText;
+const u8* gBlackStarTextPtr = gBlackStarText;
+const u8* gWhiteCircleTextPtr = gWhiteCircleText;
+const u8* gBlackCircleTextPtr = gBlackCircleText;
 
 const CardDef gCardDefs[950] = {
     {
@@ -9571,7 +9571,7 @@ const CardDef gCardDefs[950] = {
 const HcEffectDef gHcEffectDefs[55] = {
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9583,7 +9583,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9594,7 +9594,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9606,7 +9606,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9617,7 +9617,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9629,7 +9629,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9646,7 +9646,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9658,7 +9658,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9675,7 +9675,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9687,7 +9687,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9704,7 +9704,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9716,7 +9716,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9733,7 +9733,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9745,7 +9745,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9762,7 +9762,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9774,7 +9774,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9791,7 +9791,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9803,7 +9803,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9820,7 +9820,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9832,7 +9832,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9849,7 +9849,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9861,7 +9861,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9882,7 +9882,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9894,7 +9894,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9905,7 +9905,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9917,7 +9917,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9928,7 +9928,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9940,7 +9940,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9951,7 +9951,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9963,7 +9963,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -9980,7 +9980,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -9992,7 +9992,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10009,7 +10009,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10021,7 +10021,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10038,7 +10038,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10050,7 +10050,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10067,7 +10067,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10079,7 +10079,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10096,7 +10096,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10108,7 +10108,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10125,7 +10125,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10137,7 +10137,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10154,7 +10154,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10166,7 +10166,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10183,7 +10183,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10195,7 +10195,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10206,7 +10206,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10218,7 +10218,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10235,7 +10235,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10247,7 +10247,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10264,7 +10264,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10276,7 +10276,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10297,7 +10297,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10309,7 +10309,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10326,7 +10326,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10338,7 +10338,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10355,7 +10355,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10367,7 +10367,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10384,7 +10384,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10396,7 +10396,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10413,7 +10413,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10425,7 +10425,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10442,7 +10442,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10454,7 +10454,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10471,7 +10471,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10483,7 +10483,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10494,7 +10494,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10506,7 +10506,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10517,7 +10517,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10529,7 +10529,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10546,7 +10546,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10558,7 +10558,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10575,7 +10575,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10587,7 +10587,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10604,7 +10604,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10616,7 +10616,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10633,7 +10633,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10645,7 +10645,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10662,7 +10662,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10674,7 +10674,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10691,7 +10691,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10703,7 +10703,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10720,7 +10720,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10732,7 +10732,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10749,7 +10749,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10761,7 +10761,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10778,7 +10778,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10790,7 +10790,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10807,7 +10807,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10819,7 +10819,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10836,7 +10836,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10848,7 +10848,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10865,7 +10865,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10877,7 +10877,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10894,7 +10894,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10906,7 +10906,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10923,7 +10923,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10935,7 +10935,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10952,7 +10952,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10964,7 +10964,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -10975,7 +10975,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -10987,7 +10987,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -11004,7 +11004,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -11016,7 +11016,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -11033,7 +11033,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -11045,7 +11045,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -11062,7 +11062,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -11074,7 +11074,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -11091,7 +11091,7 @@ const HcEffectDef gHcEffectDefs[55] = {
     },
     {
 #ifdef VERSION_EU
-        gUnkEu_09F5D574,
+        gHcEffectNameTilesByLanguage,
 #else
         gUnk_09079EB2,
 #endif
@@ -11103,7 +11103,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #endif
 #endif
 #if defined(VERSION_EU)
-        gUnkEu_09F5D588,
+        gHcEffectNameSpritesByLanguage,
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
@@ -13366,8 +13366,8 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 };
 
 #ifdef VERSION_EU
-void* gUnkEu_09F5D574[5] = { gUnk_09079EB2, gUnkEu_0910DD2E, gUnkEu_09121002, gUnkEu_0911AB16, gUnkEu_09114860 };
-void** gUnkEu_09F5D588[5] = { gUnkEu_09F753D0, gUnkEu_09F75498, gUnkEu_09F756F0, gUnkEu_09F75628, gUnkEu_09F75560 };
+void* gHcEffectNameTilesByLanguage[5] = { gUnk_09079EB2, gUnkEu_0910DD2E, gUnkEu_09121002, gUnkEu_0911AB16, gUnkEu_09114860 };
+void** gHcEffectNameSpritesByLanguage[5] = { gUnkEu_09F753D0, gUnkEu_09F75498, gUnkEu_09F756F0, gUnkEu_09F75628, gUnkEu_09F75560 };
 void* gUnkEu_09F5D59C[5] = { gUnk_09080074, gUnkEu_091292D6, gUnkEu_0912F83E, gUnkEu_0912D736, gUnkEu_0912B47C };
 void** gUnkEu_09F5D5B0[5] = { gUnkEu_09F757B8, gUnkEu_09F757FC, gUnkEu_09F758C8, gUnkEu_09F75884, gUnkEu_09F75840 };
 void* gUnkEu_09F5D5C4[5] = { gUnk_090822F2, gUnkEu_091367CC, gUnkEu_0914583A, gUnkEu_091407A2, gUnkEu_0913B7F4 };

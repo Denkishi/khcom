@@ -49,7 +49,7 @@ void task_title_logo_0(TitleLogoWork* work);
 u8 task_title_logo_1(TitleLogoWork* work);
 void task_title_logo_2(TitleLogoWork* work);
 void task_title_logo_3(TitleLogoWork* work);
-void func_080D6548(u8* src, u16* dst, u16 size);
+void PackLowBytes(u8* src, u16* dst, u16 size);
 u8 IsTitleLogoScaleDone();
 void task_title_obj_0(TitleObjWork* work);
 u8 task_title_obj_1(TitleObjWork* work);

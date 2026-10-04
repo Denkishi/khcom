@@ -42,7 +42,7 @@
 #include "registration_data.h"
 
 #ifdef VERSION_EU
-static void* sUnkEu_09F85008[5] = {
+static void* sMapInspectScrollMarkerSpritesByLanguage[5] = {
     gUnk_0999D9C0,
     gUnkEu_099A6BA8,
     gUnkEu_099A9128,
@@ -50,7 +50,7 @@ static void* sUnkEu_09F85008[5] = {
     gUnkEu_099A7828,
 };
 
-static void* sUnkEu_09F8501C[5] = {
+static void* sMapInspectTitleSpritesByLanguage[5] = {
     gUnk_0999D9CA,
     gUnkEu_099A6BB2,
     gUnkEu_099A9132,
@@ -58,7 +58,7 @@ static void* sUnkEu_09F8501C[5] = {
     gUnkEu_099A7832,
 };
 
-static void* sUnkEu_09F85030[5] = {
+static void* sMapInspectTopBarSpritesByLanguage[5] = {
     gUnk_0999D9E6,
     gUnkEu_099A6BC8,
     gUnkEu_099A9148,
@@ -66,7 +66,7 @@ static void* sUnkEu_09F85030[5] = {
     gUnkEu_099A7848,
 };
 
-static void* sUnkEu_09F85044[5] = {
+static void* sMapInspectBottomBarSpritesByLanguage[5] = {
     gUnk_0999DA1A,
     gUnkEu_099A6BFC,
     gUnkEu_099A917C,
@@ -940,21 +940,21 @@ void MapInspectDraw() {
     if (sMapInspectState != 2) {
         DrawSprite(sMapInspectBarX >> 8, 0,
 #ifdef VERSION_EU
-            sUnkEu_09F8501C[gLanguage],
+            sMapInspectTitleSpritesByLanguage[gLanguage],
 #else
             gUnk_0999D9CA,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
         DrawSprite(128, sMapInspectBarY[0] >> 8,
 #ifdef VERSION_EU
-            sUnkEu_09F85030[gLanguage],
+            sMapInspectTopBarSpritesByLanguage[gLanguage],
 #else
             gUnk_0999D9E6,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(128, sMapInspectBarY[1] >> 8,
 #ifdef VERSION_EU
-            sUnkEu_09F85044[gLanguage],
+            sMapInspectBottomBarSpritesByLanguage[gLanguage],
 #else
             gUnk_0999DA1A,
 #endif
@@ -971,7 +971,7 @@ void MapInspectDraw() {
 
     DrawSprite(72, t + 40,
 #ifdef VERSION_EU
-            sUnkEu_09F85008[gLanguage],
+            sMapInspectScrollMarkerSpritesByLanguage[gLanguage],
 #else
             gUnk_0999D9C0,
 #endif

@@ -321,7 +321,7 @@ u8 EnemyCardFlyOff(CardDisplayWork* work) {
     return 1;
 }
 
-void func_08090A54(CardDisplayWork* work, void* a) {
+void EnemyCardSlideBack(CardDisplayWork* work, void* a) {
     work->x -= gSineTable[work->spinSpeed] * 3;
     UpdateCardDisplayFlip(work);
 
@@ -339,7 +339,7 @@ void func_08090A54(CardDisplayWork* work, void* a) {
     }
 }
 
-void func_08090ACC(CardDisplayWork* work, void* a) {
+void EnemyCardSlideOut(CardDisplayWork* work, void* a) {
     work->x += gSineTable[work->spinSpeed] * 3;
     UpdateCardDisplayFlip(work);
 
@@ -349,7 +349,7 @@ void func_08090ACC(CardDisplayWork* work, void* a) {
         work->spinSpeed = 0x80;
         work->flags &= ~CARD_DISP_FLAG_SELECTED;
         work->priority = 100;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08090A54);
+        SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardSlideBack);
     }
 
     if (!(work->flags & CARD_DISP_FLAG_OPEN)) {
@@ -388,7 +388,7 @@ void DispatchEnemyCardCommand(CardDisplayWork* work, void* a) {
     case 9:
         work->spinSpeed = 0;
         work->priority -= 4;
-        SetTaskUpdate(a, (TaskUpdateFunc)func_08090ACC);
+        SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardSlideOut);
         work->command = 0;
         break;
     }

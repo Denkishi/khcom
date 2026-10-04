@@ -183,7 +183,7 @@ void task_title_logo_3(TitleLogoWork* work) {
     }
 }
 
-void func_080D6548(u8* src, u16* dst, u16 size) {
+void PackLowBytes(u8* src, u16* dst, u16 size) {
     while (size != 0) {
         *dst = src[0] + (src[2] << 8);
         dst++;

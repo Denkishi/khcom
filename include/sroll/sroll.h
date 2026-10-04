@@ -95,7 +95,7 @@ typedef struct SrollBLogoArg {
 } SrollBLogoArg;
 
 typedef struct SrollBSecnWork {
-    s32 unk_00;
+    s32 timer;
     s32 x;
     s32 y;
     s32* scrollY;

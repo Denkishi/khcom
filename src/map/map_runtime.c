@@ -784,7 +784,7 @@ u8 GetProgressFloor() {
 
 void* GetMapWorldName(u8 index) {
 #ifdef VERSION_EU
-    return eu_0805E924(gMapWorldNames[index]);
+    return GetLocalizedString(gMapWorldNames[index]);
 #else
     return (void*)gMapWorldNames[index];
 #endif

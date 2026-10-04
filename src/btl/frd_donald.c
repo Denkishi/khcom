@@ -334,17 +334,17 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             else angle = GetRandom() % 2 ? 0x53 : 0x2D;
 
             work->unk_158 = gSineTable[angle] * 3;
-            work->unk_15C = -gSineTable[angle + 64] * 3;
+            work->vy = -gSineTable[angle + 64] * 3;
         }
 
-        if (work->unk_15C > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
+        if (work->vy > 0) AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
         else AnimChangeWithDef(sFrdDonaldAnimDefs, &work->anim, 5, ANIM_FLAG_LOOP, work->tiles);
 
         if (work->unk_158 < 0) body->flags |= BTLOBJ_FLAG_FACING_LEFT;
         else body->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
 
         body->x += work->unk_158;
-        body->y += work->unk_15C;
+        body->y += work->vy;
         FrdDonaldApplyGravity(work);
         UpdateDonaldFlame(body, 1, 2, 8);
 
@@ -355,7 +355,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
             break;
         case 3:
         case 4:
-            work->unk_15C = -work->unk_15C;
+            work->vy = -work->vy;
             break;
         }
 

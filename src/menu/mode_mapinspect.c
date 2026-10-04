@@ -1198,7 +1198,7 @@ void mode_mapinspect_0() {
     InitTextSlots(sMapInspectDescText, 0x5A);
 
 #ifdef VERSION_EU
-    length = GetTextLength(eu_0805E924(&gUnkEu_08890EC0));
+    length = GetTextLength(GetLocalizedString(&gUnkEu_08890EC0));
 #else
     length = GetTextLength(gUnk_08159FBC);
 #endif
@@ -1206,13 +1206,13 @@ void mode_mapinspect_0() {
     sMapInspectConfirmText = EwramAlloc(sMapInspectConfirmTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectConfirmText, sMapInspectConfirmTextLength);
 #ifdef VERSION_EU
-    sMapInspectConfirmTextCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890EC0), sMapInspectConfirmText);
+    sMapInspectConfirmTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890EC0), sMapInspectConfirmText);
 #else
     sMapInspectConfirmTextCount = LoadTextSlots(gUnk_08159FBC, sMapInspectConfirmText);
 #endif
 
 #ifdef VERSION_EU
-    length = GetTextLength(eu_0805E924(&gUnkEu_08890E1C));
+    length = GetTextLength(GetLocalizedString(&gUnkEu_08890E1C));
 #else
     length = GetTextLength(gUnk_08159E10);
 #endif
@@ -1220,13 +1220,13 @@ void mode_mapinspect_0() {
     sMapInspectYesText = EwramAlloc(sMapInspectYesTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectYesText, sMapInspectYesTextLength);
 #ifdef VERSION_EU
-    sMapInspectYesTextCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), sMapInspectYesText);
+    sMapInspectYesTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), sMapInspectYesText);
 #else
     sMapInspectYesTextCount = LoadTextSlots(gUnk_08159E10, sMapInspectYesText);
 #endif
 
 #ifdef VERSION_EU
-    length = GetTextLength(eu_0805E924(&gUnkEu_08890E44));
+    length = GetTextLength(GetLocalizedString(&gUnkEu_08890E44));
 #else
     length = GetTextLength(gUnk_08159E18);
 #endif
@@ -1234,7 +1234,7 @@ void mode_mapinspect_0() {
     sMapInspectNoText = EwramAlloc(sMapInspectNoTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoText, sMapInspectNoTextLength);
 #ifdef VERSION_EU
-    sMapInspectNoTextCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), sMapInspectNoText);
+    sMapInspectNoTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), sMapInspectNoText);
 #else
     sMapInspectNoTextCount = LoadTextSlots(gUnk_08159E18, sMapInspectNoText);
 #endif
@@ -1251,14 +1251,14 @@ void mode_mapinspect_0() {
     sMapInspectNoticeTextCount[1] = LoadTextSlots(gUnk_0814FBBC, sMapInspectNoticeText[1]);
 #else
 #ifdef VERSION_EU
-    sMapInspectNoticeTextLength[0] = GetTextLength(eu_0805E924(&gUnkEu_08895CF8));
+    sMapInspectNoticeTextLength[0] = GetTextLength(GetLocalizedString(&gUnkEu_08895CF8));
 #else
     sMapInspectNoticeTextLength[0] = GetTextLength(gUnk_0815C136);
 #endif
     sMapInspectNoticeText[0] = EwramAlloc(sMapInspectNoticeTextLength[0] * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoticeText[0], sMapInspectNoticeTextLength[0]);
 #ifdef VERSION_EU
-    sMapInspectNoticeTextCount[0] = LoadTextSlots(eu_0805E924(&gUnkEu_08895CF8), sMapInspectNoticeText[0]);
+    sMapInspectNoticeTextCount[0] = LoadTextSlots(GetLocalizedString(&gUnkEu_08895CF8), sMapInspectNoticeText[0]);
 #else
     sMapInspectNoticeTextCount[0] = LoadTextSlots(gUnk_0815C136, sMapInspectNoticeText[0]);
 #endif

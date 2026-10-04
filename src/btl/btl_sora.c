@@ -136,33 +136,33 @@ static const u16 sBtlSoraGroundSongs[4][4] = {
     { SONG_SYS_SR_STONEL, SONG_SYS_SR_STONER, SONG_SYS_SR_STONEJP, SONG_SYS_SR_STONELD },
 };
 
-static const s32 sUnk_0813C0FC[18] = {
+static const s32 sBtlSoraSwing1AttackIds[18] = {
     12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54, 57, 60, 63,
 };
 
-static const s32 sUnk_0813C144[18] = {
+static const s32 sBtlSoraSwing2AttackIds[18] = {
     13, 16, 19, 22, 25, 28, 31, 34, 37, 40, 43, 46, 49, 52, 55, 58, 61, 64,
 };
 
-static const s32 sUnk_0813C18C[18] = {
+static const s32 sBtlSoraSwing3AttackIds[18] = {
     14, 17, 20, 23, 26, 29, 32, 35, 38, 41, 44, 47, 50, 53, 56, 59, 62, 65,
 };
 
-static const SoraAttackDef sUnk_0813C1D4 = { 2, sUnk_0813C0FC, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
+static const SoraAttackDef sBtlSoraSwing1 = { 2, sBtlSoraSwing1AttackIds, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C1EC = { 7, sUnk_0813C144, SONG_VO_SR_ATTACK03, SONG_BTL_SR_ATT01, 0, 0, 0, NULL };
+static const SoraAttackDef sBtlSoraSwing2 = { 7, sBtlSoraSwing2AttackIds, SONG_VO_SR_ATTACK03, SONG_BTL_SR_ATT01, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C204 = { 12, sUnk_0813C0FC, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
+static const SoraAttackDef sBtlSoraSwing1Wide = { 12, sBtlSoraSwing1AttackIds, SONG_VO_SR_ATTACK01, SONG_BTL_SR_ATT00, 0, 0, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C21C = { 17, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_ZOOM_ON_HIT, 0, NULL };
+static const SoraAttackDef sBtlSoraSwing3 = { 17, sBtlSoraSwing3AttackIds, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_ZOOM_ON_HIT, 0, NULL };
 
-static const SoraAttackDef sUnk_0813C234 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sBtlSoraAirSwing1Hop = { 27, sBtlSoraSwing1AttackIds, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sBtlSoraSwing1 };
 
-static const SoraAttackDef sUnk_0813C24C = { 22, sUnk_0813C144, SONG_VO_SR_ATTACK00, SONG_BTL_SR_ATT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1D4 };
+static const SoraAttackDef sBtlSoraAirSwing1 = { 22, sBtlSoraSwing2AttackIds, SONG_VO_SR_ATTACK00, SONG_BTL_SR_ATT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlSoraSwing1 };
 
-static const SoraAttackDef sUnk_0813C264 = { 27, sUnk_0813C0FC, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C1EC };
+static const SoraAttackDef sBtlSoraAirSwing2 = { 27, sBtlSoraSwing1AttackIds, SONG_VO_SR_ATTACK02, SONG_BTL_SR_ATT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlSoraSwing2 };
 
-static const SoraAttackDef sUnk_0813C27C = { 32, sUnk_0813C18C, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_AERIAL_SWING | COMBO_FLAG_ZOOM_ON_HIT, 0, &sUnk_0813C21C };
+static const SoraAttackDef sBtlSoraAirSwing3 = { 32, sBtlSoraSwing3AttackIds, SONG_VO_SR_ATTACK05, SONG_BTL_SR_ATT02, 0, COMBO_FLAG_AERIAL_SWING | COMBO_FLAG_ZOOM_ON_HIT, 0, &sBtlSoraSwing3 };
 
 static const u8 sBtlSoraSwingHitFrames[5] = {
     10, 12, 15, 18, 20,
@@ -597,30 +597,30 @@ void StartBtlSoraCombo(BtlSoraWork* work) {
     } else {
         switch (GetBtlSoraComboType(work)) {
         case 0:
-            work->attacks[0] = &sUnk_0813C1D4;
-            work->attacks[1] = &sUnk_0813C1EC;
-            work->attacks[2] = &sUnk_0813C21C;
+            work->attacks[0] = &sBtlSoraSwing1;
+            work->attacks[1] = &sBtlSoraSwing2;
+            work->attacks[2] = &sBtlSoraSwing3;
             break;
         case 1:
-            work->attacks[0] = &sUnk_0813C1EC;
-            work->attacks[1] = &sUnk_0813C1D4;
-            work->attacks[2] = &sUnk_0813C21C;
+            work->attacks[0] = &sBtlSoraSwing2;
+            work->attacks[1] = &sBtlSoraSwing1;
+            work->attacks[2] = &sBtlSoraSwing3;
             break;
         case 2:
-            work->attacks[0] = &sUnk_0813C24C;
-            work->attacks[1] = &sUnk_0813C264;
-            work->attacks[2] = &sUnk_0813C27C;
+            work->attacks[0] = &sBtlSoraAirSwing1;
+            work->attacks[1] = &sBtlSoraAirSwing2;
+            work->attacks[2] = &sBtlSoraAirSwing3;
             break;
         case 3:
-            work->attacks[0] = &sUnk_0813C234;
-            work->attacks[1] = &sUnk_0813C24C;
-            work->attacks[2] = &sUnk_0813C27C;
+            work->attacks[0] = &sBtlSoraAirSwing1Hop;
+            work->attacks[1] = &sBtlSoraAirSwing1;
+            work->attacks[2] = &sBtlSoraAirSwing3;
             break;
         case 4:
         default:
-            work->attacks[0] = &sUnk_0813C204;
-            work->attacks[1] = &sUnk_0813C1EC;
-            work->attacks[2] = &sUnk_0813C21C;
+            work->attacks[0] = &sBtlSoraSwing1Wide;
+            work->attacks[1] = &sBtlSoraSwing2;
+            work->attacks[2] = &sBtlSoraSwing3;
             break;
         }
 
@@ -3250,12 +3250,12 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 27) {
-            work->unk_158 = 20;
+            work->timer = 20;
             BtlMapStartShake();
             ApplyAttackBox(114, p->x, p->y, p->z, 256, 256, 256);
             FadeFromAmount(FADE_MODE_BLUE, 16, 20);
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
-        } else if ((s16)work->stateTimer > 27 && (s16)--work->unk_158 <= 0) {
+        } else if ((s16)work->stateTimer > 27 && (s16)--work->timer <= 0) {
             SetBtlSoraAnimation(work, 46, 0);
             SetBtlSoraState(work, 82);
             break;
@@ -3277,11 +3277,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 27) {
-            work->unk_158 = 20;
+            work->timer = 20;
             BgFxStartBind(p->x, 115);
             m4aSongNumStart(SONG_EF_BIND);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
-            if ((s16)--work->unk_158 <= 0) {
+            if ((s16)--work->timer <= 0) {
                 SetBtlSoraAnimation(work, 46, 0);
                 SetBtlSoraState(work, 82);
                 break;
@@ -3885,9 +3885,9 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                func_080137C8(p->x - 15360, p->y, p->z, 0);
+                BgFxStartDashRing(p->x - 15360, p->y, p->z, 0);
             } else {
-                func_080137C8(p->x + 15360, p->y, p->z, 1);
+                BgFxStartDashRing(p->x + 15360, p->y, p->z, 1);
             }
         }
 
@@ -4914,10 +4914,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (e != NULL) {
                 work->unk_194 = e->x;
-                work->unk_198 = e->y;
+                work->targetY = e->y;
             } else {
                 work->unk_194 = p->x;
-                work->unk_198 = p->y;
+                work->targetY = p->y;
             }
 
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -4940,7 +4940,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         case 4:
         case 5:
             p->x += (work->unk_194 - p->x) >> 3;
-            p->y += (work->unk_198 - p->y) >> 3;
+            p->y += (work->targetY - p->y) >> 3;
             break;
         case 6:
             if (work->anim.timer % 6 == 0) {
@@ -5107,7 +5107,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             p->originZ = p->z;
-            work->unk_158 = 0;
+            work->timer = 0;
         } else {
             work->stateTimer++;
         }
@@ -5123,8 +5123,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         {
             const s16* sine = gSineTable;
-            u16 uv = work->unk_158;
-            work->unk_158 = uv + 1;
+            u16 uv = work->timer;
+            work->timer = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
@@ -5170,8 +5170,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         {
             const s16* sine = gSineTable;
-            u16 uv = work->unk_158;
-            work->unk_158 = uv + 1;
+            u16 uv = work->timer;
+            work->timer = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
@@ -5209,8 +5209,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         {
             const s16* sine = gSineTable;
-            u16 uv = work->unk_158;
-            work->unk_158 = uv + 1;
+            u16 uv = work->timer;
+            work->timer = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
@@ -5267,7 +5267,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             p->originZ = p->z;
-            work->unk_158 = 0;
+            work->timer = 0;
         } else {
             work->stateTimer++;
         }
@@ -5283,8 +5283,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         {
             const s16* sine = gSineTable;
-            u16 uv = work->unk_158;
-            work->unk_158 = uv + 1;
+            u16 uv = work->timer;
+            work->timer = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
@@ -5330,8 +5330,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         {
             const s16* sine = gSineTable;
-            u16 uv = work->unk_158;
-            work->unk_158 = uv + 1;
+            u16 uv = work->timer;
+            work->timer = uv + 1;
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 

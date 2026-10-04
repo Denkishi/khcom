@@ -35,7 +35,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
 #ifdef VERSION_JP
     work->textSlotCount2 = LoadTextSlots(common_text_326, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895A00), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895A00), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_331, work->textSlots2);
 #endif
@@ -85,7 +85,7 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;
     work->textSlotCount2 = LoadTextSlots(common_text_328, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895AF4), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895AF4), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_009, work->textSlots2);
 #endif
@@ -118,7 +118,7 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;
     work->textSlotCount2 = LoadTextSlots(common_text_329, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895C30), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895C30), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_334, work->textSlots2);
 #endif
@@ -151,7 +151,7 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = LoadTextSlots(gUnk_0814FBB0, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gUnk_0814FBBC, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895CF8), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895CF8), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_333, work->textSlots2);
 #endif
@@ -182,7 +182,7 @@ void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = LoadTextSlots(gUnk_0814FBB0, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gUnk_0814FBD4, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08895DBC), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895DBC), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_332, work->textSlots2);
 #endif
@@ -244,9 +244,9 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890EC0), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots3);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890EC0), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots3);
 #else
     work->textSlotCount = LoadTextSlots(gUnk_08159FBC, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);
@@ -282,9 +282,9 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08895E94), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots3);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08895E94), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots3);
 #else
     work->textSlotCount = LoadTextSlots(gUnk_0815C1C2, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);

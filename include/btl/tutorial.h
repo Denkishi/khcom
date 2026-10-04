@@ -15,7 +15,7 @@ typedef struct TutorialWork {
     u32 state;
     u32 nextState;
     s16 timer;
-    s16 unk_00E;
+    s16 count;
     s16 inputCooldown;
     u16 arrowX;
     u16 arrowY;

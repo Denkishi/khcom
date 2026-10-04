@@ -26,7 +26,7 @@ typedef struct SmnCloudWork {
     u8 unk_158;
     u8 unk_159[0x03];
     s32 unk_15C;
-    u16 unk_160;
+    u16 attackPhase;
     u8 variant;
     u8 mainSide;
     u8 animating;
@@ -50,7 +50,7 @@ typedef struct SmnBambiWork {
     BtlObj body;
     s16 stateTimer;
     s16 steps;
-    s16 unk_14C;
+    s16 hopTimer;
     u8 unk_14E[0x02];
     s32 unk_150;
     s32 scale;

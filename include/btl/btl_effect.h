@@ -57,7 +57,7 @@ void BgFxStartSync(s32 x, s32 y, s32 z);
 void BgFxStartStunImpact(s32 x, s32 y, s32 z);
 void BgFxStartZantetsuken(s32 x, s32 y, s32 z, u8 f);
 void BgFxStartUrsulaBeam(s32 x, s32 y, s32 z, u8 f, s32 w, u16 a);
-void func_080169A0(s32 x, s32 y, s32 z, u8 f);
+void BgFxStartAnsemRush(s32 x, s32 y, s32 z, u8 f);
 void BgFxStartJfMajinBeam(s32 x, s32 y, s32 z, s32 w, u8 f, u16 a);
 void BgFxStartFireBurst(s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32 w);
 void BgFxStartFireExplosion(s32 x, s32 y, s32 z);
@@ -80,9 +80,9 @@ void BgFxStartAero(u16 a, s32 x, s32 y, s32 z, s32 w);
 void BgFxStartRikuDarkModeFlash(s32 x, s32 y, s32 z);
 void BgFxStartLstCtr(s32 x, s32 y, s32 z, s32 s);
 void BgFxStartLstCtrFlipped(s32 x, s32 y, s32 z, s32 s);
-void func_08018B04(s32 x, s32 y, s32 z, s32 s);
+void BgFxStartDsdTransition(s32 x, s32 y, s32 z, s32 s);
 void BgFxStartRikuDarkMode(s32 x, s32 y, s32 z);
 void BgFxStartRikuLimitFinish(s32 x, s32 y, s32 z);
-void func_08018FE4(s32 x, s32 y, s32 z);
+void BgFxStartRikuDiveHit(s32 x, s32 y, s32 z);
 
 #endif

@@ -26,10 +26,10 @@ extern const MapNameText* gBasementFloorNames[12];
 const void* GetFloorName() {
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return eu_0805E924(gBasementFloorNames[gGameState.floor]);
+        return GetLocalizedString(gBasementFloorNames[gGameState.floor]);
     }
 
-    return eu_0805E924(gFloorNames[gGameState.floor]);
+    return GetLocalizedString(gFloorNames[gGameState.floor]);
 #else
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return gBasementFloorNames[gGameState.floor];

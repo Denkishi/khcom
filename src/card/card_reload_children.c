@@ -733,7 +733,7 @@ u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* a) {
             work->rotation = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateBossPrizeShow);
 #ifdef VERSION_EU
-            CreateCardNameDisplay(&work->tasks, eu_0805E924(gCardDefs[work->cardId].name));
+            CreateCardNameDisplay(&work->tasks, GetLocalizedString(gCardDefs[work->cardId].name));
 #else
             CreateCardNameDisplay(&work->tasks, gCardDefs[work->cardId].name);
 #endif

@@ -1415,7 +1415,7 @@ void JiminyOpenList(s16 a, s16 b, const u16* const* c, const u16* d, const u16* 
 
 #ifdef VERSION_EU
     for (i = 0; i < b; i++) {
-        sJiminyWork->resolvedTexts[i] = eu_0805E924(c[i]);
+        sJiminyWork->resolvedTexts[i] = GetLocalizedString(c[i]);
     }
 
     sJiminyWork->itemTexts = sJiminyWork->resolvedTexts;
@@ -1618,7 +1618,7 @@ void mode_jiminy_0() {
 #ifdef VERSION_JP
     sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #elif defined(VERSION_EU)
-    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
+    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gUnkEu_08892334));
 #else
     sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
@@ -1750,7 +1750,7 @@ void mode_jiminy_1() {
         sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
 #else
 #ifdef VERSION_EU
-        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, eu_0805E924(&gUnkEu_08892334));
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gUnkEu_08892334));
 #else
         sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
 #endif
@@ -2263,7 +2263,7 @@ void JiminyDetailUpdate() {
                 0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
             sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, eu_0805E924(sJiminyWork->detail->name));
+                0x1600, GetLocalizedString(sJiminyWork->detail->name));
 #else
             sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, sJiminyWork->detail->name);
@@ -2286,7 +2286,7 @@ void JiminyDetailUpdate() {
                 0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
             sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
-                0x1600, eu_0805E924(sJiminyWork->detail->name));
+                0x1600, GetLocalizedString(sJiminyWork->detail->name));
 #else
             sJiminyWork->charCount = LayoutMsgGlyphs(0x400,
                 0x1600, sJiminyWork->detail->name);
@@ -2310,7 +2310,7 @@ void JiminyDetailUpdate() {
                 0x1800, sJiminyWork->detail->name);
 #elif defined(VERSION_EU)
             sJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
-                0x1600, eu_0805E924(sJiminyWork->detail->name));
+                0x1600, GetLocalizedString(sJiminyWork->detail->name));
 #else
             sJiminyWork->charCount = LayoutMsgGlyphs(0x2800,
                 0x1600, sJiminyWork->detail->name);
@@ -2377,7 +2377,7 @@ void JiminyDetailUpdate() {
 #else
             width = GetMsgTextWidth(
 #ifdef VERSION_EU
-                eu_0805E924(sJiminyWork->detail->name)
+                GetLocalizedString(sJiminyWork->detail->name)
 #else
                 sJiminyWork->detail->name
 #endif
@@ -2413,7 +2413,7 @@ void JiminyDetailUpdate() {
 #else
             width = (s16)GetMsgTextWidth(
 #ifdef VERSION_EU
-                eu_0805E924(sJiminyWork->detail->name)
+                GetLocalizedString(sJiminyWork->detail->name)
 #else
                 sJiminyWork->detail->name
 #endif

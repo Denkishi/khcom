@@ -59,7 +59,7 @@ void TutorialWait(TutorialWork* work, u16 b, u32 c) {
     work->timer = 0;
     work->state = 0;
     work->nextState = c;
-    work->unk_00E = b;
+    work->count = b;
 }
 
 void TutorialShowArrow(TutorialWork* work, u16 b, u16 c, u16 d) {
@@ -80,7 +80,7 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     work->flags = 0;
     work->timer = 0;
     work->state = 0;
-    work->unk_00E = 120;
+    work->count = 120;
     work->nextState = arg1 == 0 ? 5 : 0x2B;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CONTROL;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_JUMP;
@@ -100,7 +100,7 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
 s32 task_tutorial_1(TutorialWork* work) {
     switch (work->state) {
     case 0:
-        if (work->timer > work->unk_00E) {
+        if (work->timer > work->count) {
             work->state = work->nextState;
             work->timer = 0;
         } else {
@@ -271,7 +271,7 @@ s32 task_tutorial_1(TutorialWork* work) {
         break;
     case 21:
         if (work->timer == 0) {
-            work->unk_00E = 0;
+            work->count = 0;
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
         }
 
@@ -281,18 +281,18 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         if (work->flags & TUTORIAL_FLAG_CARD_ACTION_ACTIVE) {
             if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
-                if (work->unk_00E == 0) {
+                if (work->count == 0) {
                     TutorialCloseMessage();
                 }
 
                 work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
-                work->unk_00E++;
+                work->count++;
             }
         } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             work->flags |= TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
         }
 
-        if (work->unk_00E <= 2) {
+        if (work->count <= 2) {
             work->timer++;
             break;
         }
@@ -373,7 +373,7 @@ s32 task_tutorial_1(TutorialWork* work) {
         break;
     case 35:
         if (work->timer == 0) {
-            work->unk_00E = 0;
+            work->count = 0;
             work->inputCooldown = 0;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_CARD_SELECT;
         }
@@ -381,13 +381,13 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->inputCooldown <= 0) {
             if (GetKeysPressed() & (L_BUTTON | R_BUTTON)) {
                 work->inputCooldown = 10;
-                work->unk_00E++;
+                work->count++;
             }
         } else {
             work->inputCooldown--;
         }
 
-        if (work->unk_00E <= 6) {
+        if (work->count <= 6) {
             work->timer++;
             break;
         }
@@ -408,15 +408,15 @@ s32 task_tutorial_1(TutorialWork* work) {
         break;
     case 39:
         if (work->timer == 0) {
-            work->unk_00E = 0;
+            work->count = 0;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_LIST_SWITCH;
         }
 
         if (GetKeysPressed() & SELECT_BUTTON) {
-            work->unk_00E++;
+            work->count++;
         }
 
-        if (work->unk_00E <= 1) {
+        if (work->count <= 1) {
             work->timer++;
             break;
         }
@@ -444,7 +444,7 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->timer == 0) {
             TutorialHideArrow(work);
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
-            work->unk_00E = 0;
+            work->count = 0;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_CONTROL;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_JUMP;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_DODGE;
@@ -459,13 +459,13 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->flags & TUTORIAL_FLAG_CARD_ACTION_ACTIVE) {
             if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
                 work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
-                work->unk_00E++;
+                work->count++;
             }
         } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             work->flags |= TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
         }
 
-        if (work->unk_00E <= 6) {
+        if (work->count <= 6) {
             work->timer++;
             break;
         }
@@ -525,16 +525,16 @@ s32 task_tutorial_1(TutorialWork* work) {
         break;
     case 57:
         if (work->timer == 0) {
-            work->unk_00E = 0;
+            work->count = 0;
         }
 
         if (work->timer == 10) {
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_STOCK;
         }
 
-        if (work->unk_00E == 0 && GetSoraStockCount() != 0) {
+        if (work->count == 0 && GetSoraStockCount() != 0) {
             TutorialCloseMessage();
-            work->unk_00E++;
+            work->count++;
         }
 
         if (GetSoraStockCount() <= 2) {
@@ -556,7 +556,7 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->timer == 0) {
             gBtlWork->flags |= 0x20000000000ULL;
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
-            work->unk_00E = 0;
+            work->count = 0;
         }
 
         if (work->timer == 10) {
@@ -566,17 +566,17 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->flags & TUTORIAL_FLAG_CARD_ACTION_ACTIVE) {
             if (!(gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION)) {
                 work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
-                work->unk_00E++;
+                work->count++;
             }
         } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             work->flags |= TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
 
-            if (work->unk_00E == 0) {
+            if (work->count == 0) {
                 TutorialCloseMessage();
             }
         }
 
-        if (work->unk_00E > 0) {
+        if (work->count > 0) {
             gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK_USE;
             gBtlWork->flags &= ~0x20000000000ULL;
             TutorialWait(work, 30, 61);

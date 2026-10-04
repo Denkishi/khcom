@@ -49,7 +49,7 @@ void CardName_0(CardNameWork* work) {
 #endif
     work->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(q->cardDef->name), work->textSlots);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(q->cardDef->name), work->textSlots);
     work->textSlotCount2 = LoadTextSlots((u16*)gUnkEu_09F6602C.strings[gLanguage], work->textSlots2);
 #else
     work->textSlotCount = LoadTextSlots(q->cardDef->name, work->textSlots);

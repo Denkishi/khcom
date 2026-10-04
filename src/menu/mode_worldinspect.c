@@ -298,7 +298,7 @@ u8 WorldInspectLoadName(s16 id) {
     u8 ret = 0;
 
     if (id != 0) {
-        ret = LoadTextSlots(eu_0805E924(sWorldinspectMsgs[id].text), sWorldInspectNameText);
+        ret = LoadTextSlots(GetLocalizedString(sWorldinspectMsgs[id].text), sWorldInspectNameText);
     }
 
     return ret;

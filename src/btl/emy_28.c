@@ -71,7 +71,7 @@ u8 task_emy_28_1(Emy28Work* work) {
             break;
         }
 
-        w->unk_184 = 0xEFFF;
+        w->hitFrame = 0xEFFF;
     }
 
     if (work->base.state == 8) {
@@ -168,7 +168,7 @@ u8 task_emy_28_1(Emy28Work* work) {
 
         if (EmyLungeAttack(&work->base, 22, 10, 20, 201, 32, SONG_BTL_MON_HIT00, 16, -40, 32)
                 == 1) {
-            w->unk_184 = work->base.stateTimer;
+            w->hitFrame = work->base.stateTimer;
         }
 
         break;
@@ -194,7 +194,7 @@ u8 task_emy_28_1(Emy28Work* work) {
 
         if (EmyLungeAttack(&work->base, 35, 10, 14, 202, 32, SONG_BTL_MON_HIT04, 24, 32, 16)
                 == 1) {
-            w->unk_184 = work->base.stateTimer;
+            w->hitFrame = work->base.stateTimer;
         }
 
         break;

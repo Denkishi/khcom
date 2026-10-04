@@ -2198,6 +2198,8 @@ TARGET_REGION_FUNCS = {
         "LoadBgTilesLz77": 0x080059D4,
         "mode_chkmov_0": 0x0800C76C,
         "HandleRikuTutorialCardInput": 0x08013190,
+        "GetLocalizedString": 0x0805E924,
+        "FrdPoohApplyGravity": 0x08060C44,
         "GetTextSlotsMaxLineWidth": 0x0806629C,
         "Mode_textcheck_0": 0x080AB9FC,
         "Mode_textcheck_1": 0x080ABA38,

@@ -39,7 +39,7 @@ typedef struct Emy06Work {
 typedef struct Emy07Work {
     EmyWork base;
     s16 successCount;
-    u8 unk_186;
+    u8 thunderRequested;
     u8 rewarded;
 } Emy07Work;
 
@@ -97,7 +97,7 @@ typedef struct Emy16pWork {
 
 typedef struct Emy18Work {
     EmyWork base;
-    u16 unk_184;
+    u16 hitFrame;
 } Emy18Work;
 
 typedef struct Emy19Work {
@@ -122,7 +122,7 @@ typedef struct Emy23Work {
 
 typedef struct Emy28Work {
     EmyWork base;
-    u16 unk_184;
+    u16 hitFrame;
 } Emy28Work;
 
 typedef struct Emy29Work {

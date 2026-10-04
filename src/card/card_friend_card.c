@@ -528,7 +528,7 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
             work->scaleX = 0x100;
             work->scaleY = 0x100;
 #ifdef VERSION_EU
-            CreateCardNameDisplay(&work->tasks, eu_0805E924(gCardDefs[work->cardId].name));
+            CreateCardNameDisplay(&work->tasks, GetLocalizedString(gCardDefs[work->cardId].name));
 #else
             CreateCardNameDisplay(&work->tasks, gCardDefs[work->cardId].name);
 #endif

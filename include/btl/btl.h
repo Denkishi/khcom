@@ -46,7 +46,7 @@ typedef struct BtlLockonWork {
     void* palette;
     AnimState anim;
     void* gfx;
-    s16 unk_024;
+    s16 timer;
     u8 unk_026[0x02];
 } BtlLockonWork;
 
@@ -111,7 +111,7 @@ typedef struct BtlSoraWork {
     s32 vz;
     u16 stateTimer;
     s16 steps;
-    u16 unk_158;
+    u16 timer;
     u16 flags;
     s32 speed;
     u8 angle;
@@ -132,7 +132,7 @@ typedef struct BtlSoraWork {
     u8 swingSpeed;
     u8 unk_191[0x3];
     s32 unk_194;
-    s32 unk_198;
+    s32 targetY;
     s32 scaleX;
     s32 scaleY;
     BtlObj* target;
@@ -193,7 +193,7 @@ typedef struct BtlRikuWork {
     u16 frameCount;
     u8 unk_1AA[0x2];
     void* paletteData;
-    u16 unk_1B0;
+    u16 limitDashCount;
     u8 unk_1B2[0x2];
     s32 targetX;
     s32 targetY;
@@ -222,7 +222,7 @@ extern u16 gBStatesPalette[];
 
 void LoadBtlSoraPalette(BtlSoraWork* work);
 void DisableBtlSoraPassThrough(BtlSoraWork* work);
-void func_080137C8(s32 x, s32 y, s32 z, u8 f);
+void BgFxStartDashRing(s32 x, s32 y, s32 z, u8 f);
 void BgFxStartRagnarokShot(s32 x, s32 y, s32 z, u8 f);
 s32 ResolveLinkActiveCardsMove(s32* out, s32 b);
 

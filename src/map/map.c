@@ -3938,7 +3938,7 @@ void Mode_MenuNew_0() {
     InitTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
     sNewGameSlotMenuWork->palette9 = LoadObjPalette(gUnk_09991BE4, 32);
 #ifdef VERSION_EU
-    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892780), sNewGameSlotMenuWork->textSlots2);
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08892780), sNewGameSlotMenuWork->textSlots2);
 #else
     sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, sNewGameSlotMenuWork->textSlots2);
 #endif
@@ -5226,9 +5226,9 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     InitTextSlots(p2, 6);
     p3 = work->textSlots4;
     InitTextSlots(p3, 9);
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_088927F4), p1);
-    work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p2);
-    work->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p3);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_088927F4), p1);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), p2);
+    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), p3);
 #else
     p1 = work->textSlots2;
     InitTextSlots(p1, 33);
@@ -6319,9 +6319,9 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         p3 = work->textSlots4;
         InitTextSlots(p3, 9);
 #ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08892864), p1);
-        work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p2);
-        work->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p3);
+        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08892864), p1);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), p2);
+        work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), p3);
 #else
         work->textSlotCount2 = LoadTextSlots(gUnk_08159DF0, p1);
         work->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
@@ -6381,7 +6381,7 @@ s32 MapSaveInput(MapSaveWork* work) {
         }
 
 #ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_088928E4), work->textSlots2);
+        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_088928E4), work->textSlots2);
 #else
         work->textSlotCount2 = LoadTextSlots(gUnk_0815B5A6, work->textSlots2);
 #endif

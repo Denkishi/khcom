@@ -44,25 +44,25 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
 
     if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A09A), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnk_0815A09A), work->textSlots);
 #else
         work->textSlotCount = LoadTextSlots(gUnk_0815A09A, work->textSlots);
 #endif
     } else if (args.flags & STAT_INCREASE_FLAG_DP) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A198), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnk_0815A198), work->textSlots);
 #else
         work->textSlotCount = LoadTextSlots(gUnk_0815A198, work->textSlots);
 #endif
     } else if (!(gGameState.flags & GAME_FLAG_RIKU)) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A0EE), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnk_0815A0EE), work->textSlots);
 #else
         work->textSlotCount = LoadTextSlots(gUnk_0815A0EE, work->textSlots);
 #endif
     } else {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnk_0815A152), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnk_0815A152), work->textSlots);
 #else
         work->textSlotCount = LoadTextSlots(gUnk_0815A152, work->textSlots);
 #endif
@@ -72,9 +72,9 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
 
 #ifdef VERSION_EU
     if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == LANGUAGE_SPANISH) {
-        work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnkEu_08895EDC), work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895EDC), work->textSlots3);
     } else {
-        work->textSlotCount3 = LoadTextSlots(eu_0805E924(&gUnk_0815A0A0), work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnk_0815A0A0), work->textSlots3);
     }
 #else
     work->textSlotCount3 = LoadTextSlots(gUnk_0815A0A0, work->textSlots3);

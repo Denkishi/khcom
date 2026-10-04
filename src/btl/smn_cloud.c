@@ -179,7 +179,7 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     work->scaleX = 10;
     work->scaleY = 10;
     work->animating = 0;
-    work->unk_160 = 0;
+    work->attackPhase = 0;
     work->target = NULL;
     work->attackCount = 0;
     work->targetIndex = 0;
@@ -302,9 +302,9 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     case 1:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
-        } else if ((s16)work->unk_160 == 0 && AnimIsFinished(&work->anim)) {
+        } else if ((s16)work->attackPhase == 0 && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 1, 0, work->tiles);
-            work->unk_160++;
+            work->attackPhase++;
         } else if (AnimIsFinished(&work->anim)) {
             work->state = 5;
             work->stateTimer = 0;
@@ -312,7 +312,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         }
 
         if (work->anim.timer == 0) {
-            if ((s16)work->unk_160 == 0) {
+            if ((s16)work->attackPhase == 0) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);
@@ -387,9 +387,9 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
     case 2:
         if (work->stateTimer == 0) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 6, 0, work->tiles);
-        } else if ((s16)work->unk_160 == 0 && AnimIsFinished(&work->anim)) {
+        } else if ((s16)work->attackPhase == 0 && AnimIsFinished(&work->anim)) {
             AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 7, 0, work->tiles);
-            work->unk_160++;
+            work->attackPhase++;
         } else if (AnimIsFinished(&work->anim)) {
             work->state = 5;
             work->stateTimer = 0;
@@ -397,7 +397,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         }
 
         if (work->anim.timer == 0) {
-            if ((s16)work->unk_160 == 0) {
+            if ((s16)work->attackPhase == 0) {
                 switch (AnimGetFrame(&work->anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_KU_ATTACK00);

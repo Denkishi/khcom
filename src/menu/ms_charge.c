@@ -270,7 +270,7 @@ void MsChargeLoadSelectedCard() {
         sMsChargeCardPremium = card->premium;
         p = &sMsChargeNameTextCount;
 #ifdef VERSION_EU
-        *p = LoadTextSlots(eu_0805E924(gCardDefs[defIdx].name), sMsChargeNameText);
+        *p = LoadTextSlots(GetLocalizedString(gCardDefs[defIdx].name), sMsChargeNameText);
 #else
         *p = LoadTextSlots(gCardDefs[defIdx].name, sMsChargeNameText);
 #endif
@@ -1260,7 +1260,7 @@ void mode_ms_charge_0() {
     InitTextSlots(sMsChargeDescText, 90);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890F40)
+        GetLocalizedString(&gUnkEu_08890F40)
 #else
         gUnk_08159F38
 #endif
@@ -1276,14 +1276,14 @@ void mode_ms_charge_0() {
     pb = &sMsChargeConfirmTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890F40)
+        GetLocalizedString(&gUnkEu_08890F40)
 #else
         gUnk_08159F38
 #endif
     , sMsChargeConfirmText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08895960)
+        GetLocalizedString(&gUnkEu_08895960)
 #else
         gUnk_0815C204
 #endif
@@ -1299,14 +1299,14 @@ void mode_ms_charge_0() {
     pb = &sMsChargeNoticeTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08895960)
+        GetLocalizedString(&gUnkEu_08895960)
 #else
         gUnk_0815C204
 #endif
     , sMsChargeNoticeText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890E1C)
+        GetLocalizedString(&gUnkEu_08890E1C)
 #else
         gUnk_08159E10
 #endif
@@ -1322,14 +1322,14 @@ void mode_ms_charge_0() {
     pb = &sMsChargeYesTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890E1C)
+        GetLocalizedString(&gUnkEu_08890E1C)
 #else
         gUnk_08159E10
 #endif
     , sMsChargeYesText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890E44)
+        GetLocalizedString(&gUnkEu_08890E44)
 #else
         gUnk_08159E18
 #endif
@@ -1345,7 +1345,7 @@ void mode_ms_charge_0() {
     pb = &sMsChargeNoTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        eu_0805E924(&gUnkEu_08890E44)
+        GetLocalizedString(&gUnkEu_08890E44)
 #else
         gUnk_08159E18
 #endif

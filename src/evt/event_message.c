@@ -7239,8 +7239,8 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 10);
     work->palette4 = LoadTextPalette(1);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots2);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots2);
 #else
     work->textSlotCount = LoadTextSlots(gUnk_08159E10, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gUnk_08159E18, work->textSlots2);

@@ -100,21 +100,21 @@ static const s32 sBtlRikuAttackIds[3] = {
     0, 1, 2,
 };
 
-static const RikuAttackDef sUnk_0813C6E8 = { 1, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1 = { 1, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C704 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing2 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C720 = { 3, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1Wide = { 3, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C73C = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing3 = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, 0, NULL };
 
-static const RikuAttackDef sUnk_0813C758 = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sBtlRikuAirSwing1Hop = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sUnk_0813C774 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C6E8 };
+static const RikuAttackDef sBtlRikuAirSwing1 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sUnk_0813C790 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C704 };
+static const RikuAttackDef sBtlRikuAirSwing2 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing2 };
 
-static const RikuAttackDef sUnk_0813C7AC = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, 0, &sUnk_0813C73C };
+static const RikuAttackDef sBtlRikuAirSwing3 = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing3 };
 
 void EnableBtlRikuPassThrough(BtlRikuWork* work) {
     u16 a = work->flags | BTL_RIKU_FLAG_PASS_THROUGH;
@@ -674,30 +674,30 @@ void StartBtlRikuCombo(BtlRikuWork* work) {
     } else {
         switch (GetBtlRikuComboType(work)) {
         case 0:
-            work->attacks[0] = &sUnk_0813C6E8;
-            work->attacks[1] = &sUnk_0813C704;
-            work->attacks[2] = &sUnk_0813C73C;
+            work->attacks[0] = &sBtlRikuSwing1;
+            work->attacks[1] = &sBtlRikuSwing2;
+            work->attacks[2] = &sBtlRikuSwing3;
             break;
         case 1:
-            work->attacks[0] = &sUnk_0813C704;
-            work->attacks[1] = &sUnk_0813C6E8;
-            work->attacks[2] = &sUnk_0813C73C;
+            work->attacks[0] = &sBtlRikuSwing2;
+            work->attacks[1] = &sBtlRikuSwing1;
+            work->attacks[2] = &sBtlRikuSwing3;
             break;
         case 2:
-            work->attacks[0] = &sUnk_0813C774;
-            work->attacks[1] = &sUnk_0813C790;
-            work->attacks[2] = &sUnk_0813C7AC;
+            work->attacks[0] = &sBtlRikuAirSwing1;
+            work->attacks[1] = &sBtlRikuAirSwing2;
+            work->attacks[2] = &sBtlRikuAirSwing3;
             break;
         case 3:
-            work->attacks[0] = &sUnk_0813C758;
-            work->attacks[1] = &sUnk_0813C774;
-            work->attacks[2] = &sUnk_0813C7AC;
+            work->attacks[0] = &sBtlRikuAirSwing1Hop;
+            work->attacks[1] = &sBtlRikuAirSwing1;
+            work->attacks[2] = &sBtlRikuAirSwing3;
             break;
         case 4:
         default:
-            work->attacks[0] = &sUnk_0813C720;
-            work->attacks[1] = &sUnk_0813C704;
-            work->attacks[2] = &sUnk_0813C73C;
+            work->attacks[0] = &sBtlRikuSwing1Wide;
+            work->attacks[1] = &sBtlRikuSwing2;
+            work->attacks[2] = &sBtlRikuSwing3;
             break;
         }
 
@@ -1487,7 +1487,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         if (p->x < ((gBtlWork->xMin - 48) << 8) || p->x > ((gBtlWork->xMax + 48) << 8)) {
             work->state = 52;
             work->stateTimer = 0;
-            work->unk_1B0 = 0;
+            work->limitDashCount = 0;
             break;
         }
 
@@ -1595,7 +1595,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->vz = 0;
 
-        if (work->stateTimer == 15 && (s16)work->unk_1B0 > 4) {
+        if (work->stateTimer == 15 && (s16)work->limitDashCount > 4) {
             work->state = 54;
             work->stateTimer = 0;
             break;
@@ -1610,7 +1610,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         work->state = 52;
         work->stateTimer = 0;
-        work->unk_1B0++;
+        work->limitDashCount++;
         break;
     case 54:
         BtlMapFollowPosition(p->x, p->y, p->z);
@@ -2376,7 +2376,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             if (ApplyAttackBox(8, p->x, p->y, p->z, 32, 16, 24) != 0) {
                 m4aSongNumStart(SONG_BTL_RK_HIT02);
                 work->flags |= BTL_RIKU_FLAG_SWING_HIT;
-                func_08018FE4(p->x, p->y, p->z);
+                BgFxStartRikuDiveHit(p->x, p->y, p->z);
             }
         }
 

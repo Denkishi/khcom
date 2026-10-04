@@ -540,7 +540,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 8, ANIM_FLAG_LOOP, w->base.sub->tiles);
             w->hoverZ = -0xC00;
             w->steps = 40;
-            func_080169A0(w->sub.x, w->sub.y,
+            BgFxStartAnsemRush(w->sub.x, w->sub.y,
                 w->sub.z - 0x2100, act->flags & BTLOBJ_FLAG_FACING_LEFT);
         }
 

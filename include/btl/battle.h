@@ -25,7 +25,7 @@ typedef struct BgFx {
     s16 timer;
     s16 steps;
     s16 unk_0C;
-    s16 unk_0E;
+    s16 scaleYSteps;
     s32 x;
     s32 y;
     s32 z;
@@ -34,15 +34,15 @@ typedef struct BgFx {
     u8 angle;
     u8 unk_25;
     u16 state;
-    s32 unk_28;
-    s32 unk_2C;
-    s32 unk_30;
+    s32 targetX;
+    s32 targetY;
+    s32 targetZ;
     u16 flags;
     u16 endSignals;
     u8 priority;
     u8 unk_39[0x03];
     s32 unk_3C;
-    s32 unk_40;
+    s32 angleFixed;
     struct BtlObj* actor;
     s32 attack;
     s16 releaseFrames;

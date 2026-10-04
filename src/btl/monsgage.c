@@ -15,7 +15,7 @@
 #include "types.h"
 
 #ifdef VERSION_EU
-void* eu_0805E924(const void* strings) {
+void* GetLocalizedString(const void* strings) {
     void* const* s = strings;
 
     switch (gLanguage) {

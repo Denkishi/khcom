@@ -186,7 +186,7 @@ u8 WorldWarpLoadCurrentName(s16 a) {
     }
 
 #ifdef VERSION_EU
-    return LoadTextSlots(eu_0805E924(sWorldSelectDefs[a].name), sWorldWarpCurrentName);
+    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[a].name), sWorldWarpCurrentName);
 #else
     return LoadTextSlots(sWorldSelectDefs[a].name, sWorldWarpCurrentName);
 #endif
@@ -198,7 +198,7 @@ u8 WorldWarpLoadSelectedName(s16 a) {
     }
 
 #ifdef VERSION_EU
-    return LoadTextSlots(eu_0805E924(sWorldSelectDefs[a].name), sWorldWarpSelectedName);
+    return LoadTextSlots(GetLocalizedString(sWorldSelectDefs[a].name), sWorldWarpSelectedName);
 #else
     return LoadTextSlots(sWorldSelectDefs[a].name, sWorldWarpSelectedName);
 #endif

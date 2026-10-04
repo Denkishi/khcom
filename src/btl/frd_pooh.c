@@ -43,7 +43,7 @@ static const AnimDef sFrdPoohAnimDefsEu[18] = {
     { gPoohFf00FlFrames, gPoohFf00FlAnims, gPoohFf00FlTiles, 0, { 0, 0, 0 } },
 };
 
-u8 eu_08060C44(FrdPoohWork* work) {
+u8 FrdPoohApplyGravity(FrdPoohWork* work) {
     FrdPoohBody* body;
     body = &work->body;
     ApplyBattleBounds(&body->x, &body->y, &body->z, &body->ground);
@@ -271,7 +271,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
             }
         }
 
-        if (eu_08060C44(work) && !work->bounce) {
+        if (FrdPoohApplyGravity(work) && !work->bounce) {
             work->bounce = 1;
             BtlMapStartShake();
         }

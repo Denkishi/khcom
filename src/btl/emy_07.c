@@ -54,7 +54,7 @@ TaskDesc gTaskDescEmy07 = {
 void task_emy_07_0(Emy07Work* work, void* obj) {
     EmyInit(&work->base, &sEmy07Def, obj);
     work->successCount = 0;
-    work->unk_186 = 0;
+    work->thunderRequested = 0;
     work->base.idleState = 0x12;
     work->base.actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
     work->rewarded = 0;
@@ -90,7 +90,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         switch (state) {
         case 21:
-            w->unk_186 = 0;
+            w->thunderRequested = 0;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
                 ClearBtlObjActionFlags(act);
@@ -100,7 +100,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             break;
         case 22:
-            w->unk_186 = 0;
+            w->thunderRequested = 0;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 ClearBtlObjActionFlags(act);
@@ -110,7 +110,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             break;
         case 23:
-            w->unk_186 = 1;
+            w->thunderRequested = 1;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 ClearBtlObjActionFlags(act);
@@ -192,7 +192,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         break;
     case 20:
-        if (w->unk_186 != 0) {
+        if (w->thunderRequested != 0) {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 1, 0, w->base.tiles);

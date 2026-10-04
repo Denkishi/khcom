@@ -518,7 +518,7 @@ void mode_sio_btl_connect_0(s32 arg) {
     sSioBtlConnectWork->textSlotCount = 0;
     InitTextSlots(sSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
 #ifdef VERSION_EU
-    sSioBtlConnectWork->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08891508), sSioBtlConnectWork->textSlots);
+    sSioBtlConnectWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08891508), sSioBtlConnectWork->textSlots);
 #else
     sSioBtlConnectWork->textSlotCount = LoadTextSlots(gUnk_08159E4A, sSioBtlConnectWork->textSlots);
 #endif
@@ -845,7 +845,7 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->messageVisible = 0;
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots4, 120);
-    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
 #else
     InitTextSlots(sSioBtlOptionWork->textSlots4, 60);
     sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, sSioBtlOptionWork->textSlots4);
@@ -914,7 +914,7 @@ void SioBtlOptionLoadWorld() {
     LoadBgPalette(2, gSioWorldEntries[i].palette, gSioWorldEntries[i].paletteSize);
 #ifdef VERSION_EU
     LoadBgMapLz77(2, gSioWorldEntries[i].map);
-    sSioBtlOptionWork->textSlotCount = LoadTextSlots(eu_0805E924(gSioWorldEntries[i].text), sSioBtlOptionWork->textSlots);
+    sSioBtlOptionWork->textSlotCount = LoadTextSlots(GetLocalizedString(gSioWorldEntries[i].text), sSioBtlOptionWork->textSlots);
 #else
     LoadBgMap(2, gSioWorldEntries[i].map, gSioWorldEntries[i].mapSize);
     sSioBtlOptionWork->textSlotCount = LoadTextSlots(gSioWorldEntries[i].text, sSioBtlOptionWork->textSlots);
@@ -1292,7 +1292,7 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->menuOpen = 0;
             sSioBtlOptionWork->messageVisible = 1;
 #ifdef VERSION_EU
-            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
 #else
             sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, sSioBtlOptionWork->textSlots4);
 #endif
@@ -1391,7 +1391,7 @@ void SioBtlOptionHandleMenu() {
                 gSioDebugReady[0] = 1;
                 sSioBtlOptionWork->menuOpen = 0;
                 sSioBtlOptionWork->messageVisible = 1;
-                sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+                sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
                 sSioBtlOptionWork->x = 68;
 #else
@@ -1545,7 +1545,7 @@ void SioBtlOptionChangeWorld() {
     case 2:
         RequestDma3Copy((u8*)gSioWorldEntries[b].tiles + 0x2000, (u8*)GetBgCharBase(2) + 0x2000, gSioWorldEntries[b].tilesSize - 0x2000);
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount = LoadTextSlots(eu_0805E924(gSioWorldEntries[b].text), sSioBtlOptionWork->textSlots);
+        sSioBtlOptionWork->textSlotCount = LoadTextSlots(GetLocalizedString(gSioWorldEntries[b].text), sSioBtlOptionWork->textSlots);
 #else
         sSioBtlOptionWork->textSlotCount = LoadTextSlots(gSioWorldEntries[b].text, sSioBtlOptionWork->textSlots);
 #endif
@@ -1603,7 +1603,7 @@ void SioBtlOptionWaitReady() {
     if (sSioBtlOptionWork->player1Ready == 1 && sSioBtlOptionWork->player2Ready == 1) {
         sSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891670), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891670), sSioBtlOptionWork->textSlots4);
 #else
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A23C, sSioBtlOptionWork->textSlots4);
 #endif
@@ -1636,7 +1636,7 @@ void SioBtlOptionConfirm() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
 #else
         sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815B3D4, sSioBtlOptionWork->textSlots4);
 #endif
@@ -1658,7 +1658,7 @@ void SioBtlOptionConfirm() {
     } else if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(eu_0805E924(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
         sSioBtlOptionWork->x = 72;
         sSioBtlOptionWork->y2 = 124;
         sSioBtlOptionWork->state++;
@@ -3878,7 +3878,7 @@ void mode_sioError_0(s32 arg) {
 #endif
     InitTextSlots(sSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
 #ifdef VERSION_EU
-    sSioErrorWork->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_088920BC), sSioErrorWork->textSlots);
+    sSioErrorWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_088920BC), sSioErrorWork->textSlots);
 #elif defined(VERSION_JP)
     sSioErrorWork->textSlotCount = LoadTextSlots(gUnk_0814F180, sSioErrorWork->textSlots);
 #else

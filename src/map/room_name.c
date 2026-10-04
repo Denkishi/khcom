@@ -126,7 +126,7 @@ void task_room_name_0(RoomNameWork* work, s32 arg) {
     InitTextSlots(work->textSlots, 0x24);
     work->palette2 = LoadTextPalette(1);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(eu_0805E924(gRoomNames[work->nameId]), work->textSlots);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(gRoomNames[work->nameId]), work->textSlots);
 #else
     work->textSlotCount = LoadTextSlots(gRoomNames[work->nameId], work->textSlots);
 #endif

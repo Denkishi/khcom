@@ -43,7 +43,7 @@ void task_btl_lockon_0(BtlLockonWork* work) {
     AnimInit(&work->anim, gUnk_09EE10F8, gUnk_09EE10EC);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    work->unk_024 = 0;
+    work->timer = 0;
     gBtlWork->actor2 = NULL;
 }
 
@@ -139,8 +139,8 @@ u8 task_btl_lockon_1(BtlLockonWork* work) {
         }
     }
 
-    if (work->unk_024 != 0) {
-        work->unk_024--;
+    if (work->timer != 0) {
+        work->timer--;
     }
 
     return 1;

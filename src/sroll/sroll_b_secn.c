@@ -22,7 +22,7 @@ static s32 Square(s32 x) {
 void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* a) {
     u32 i;
 
-    work->unk_00 = 0;
+    work->timer = 0;
     work->x = a->x;
     work->y = a->y;
     work->scrollY = a->scrollY;
@@ -77,7 +77,7 @@ u8 task_sroll_b_secn_1(SrollBSecnWork* work) {
         }
     }
 
-    work->unk_00++;
+    work->timer++;
     return r;
 }
 

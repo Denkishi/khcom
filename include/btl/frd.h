@@ -27,7 +27,7 @@ typedef struct FrdDonaldWork {
     u8 unk_152[0x02];
     s32 vz;
     s32 unk_158;
-    s32 unk_15C;
+    s32 vy;
     s16 repeatsLeft;
     u8 unk_162[0x02];
 } FrdDonaldWork;

@@ -527,7 +527,7 @@ func_080135EC	0x080135ec	140	0x080135ec	global
 BgFxStartSoraHit	0x08013678	104	0x08013678	body
 BgFxStartRikuHit	0x080136e0	104	0x080136e0	body
 BgFxStartLimit	0x08013748	128	0x08013748	global
-func_080137C8	0x080137c8	140	0x080137c8	global
+BgFxStartDashRing	0x080137c8	140	0x080137c8	global
 BgFxStartEnemyHit	0x08013854	104	0x08013854	body
 BgFxStartFireHit	0x080138bc	112	0x080138bc	global
 BgFxStartBlizzardHit	0x0801392c	104	0x0801392c	body
@@ -548,8 +548,8 @@ BgFxStartSummon	0x080140e0	140	0x080140e0	global
 BgFxStartFriendHit	0x0801416c	104	0x0801416c	body
 BgFxUpdateFollowActor	0x080141d4	40	0x080141d4	global
 BgFxStartActorThunder	0x080141fc	152	0x080141fc	global
-func_08014294	0x08014294	200	0x08014294	global
-func_0801435C	0x0801435c	176	0x0801435c	global
+BgFxUpdateFallingThunder	0x08014294	200	0x08014294	global
+BgFxStartFallingThunder	0x0801435c	176	0x0801435c	global
 BgFxUpdateDsdEnergy	0x0801440c	204	0x0801440c	global
 func_080144D8	0x080144d8	176	0x080144d8	global
 BgFxStartDsdEnergy	0x08014588	204	0x08014588	global
@@ -597,7 +597,7 @@ BgFxUpdateRagnarokCharge	0x08015ff4	68	0x08015ff4	global
 BgFxStartRagnarokCharge	0x08016038	136	0x08016038	global
 BgFxUpdateRagnarokShot	0x080160c0	312	0x080160c0	global
 BgFxStartRagnarokShot	0x080161f8	176	0x080161f8	global
-func_080162A8	0x080162a8	120	0x080162a8	global
+BgFxStartGlow	0x080162a8	120	0x080162a8	global
 BgFxGetSyncTarget	0x08016320	84	0x08016320	global
 BgFxApplySyncHp	0x08016374	244	0x08016374	global
 BgFxUpdateSync	0x08016468	372	0x08016468	global
@@ -607,7 +607,7 @@ BgFxUpdateZantetsuken	0x080166f8	88	0x080166f8	global
 BgFxStartZantetsuken	0x08016750	168	0x08016750	global
 BgFxUpdateUrsulaBeam	0x080167f8	192	0x080167f8	global
 BgFxStartUrsulaBeam	0x080168b8	232	0x080168b8	global
-func_080169A0	0x080169a0	196	0x080169a0	global
+BgFxStartAnsemRush	0x080169a0	196	0x080169a0	global
 BgFxUpdateAnsemWave	0x08016a64	144	0x08016a64	global
 BgFxStartAnsemWave	0x08016af4	216	0x08016af4	global
 func_08016BCC	0x08016bcc	116	0x08016bcc	global
@@ -649,12 +649,12 @@ BgFxStartAero	0x080188e4	140	0x080188e4	global
 BgFxStartRikuDarkModeFlash	0x08018970	108	0x08018970	global
 BgFxStartLstCtr	0x080189dc	148	0x080189dc	body
 BgFxStartLstCtrFlipped	0x08018a70	148	0x08018a70	global
-func_08018B04	0x08018b04	116	0x08018b04	global
+BgFxStartDsdTransition	0x08018b04	116	0x08018b04	global
 BgFxUpdateRikuDarkMode	0x08018b78	192	0x08018b78	global
 BgFxStartRikuDarkMode	0x08018c38	140	0x08018c38	global
 BgFxUpdateRikuLimitFinish	0x08018cc4	612	0x08018cc4	global
 BgFxStartRikuLimitFinish	0x08018f28	188	0x08018f28	global
-func_08018FE4	0x08018fe4	108	0x08018fe4	body
+BgFxStartRikuDiveHit	0x08018fe4	108	0x08018fe4	body
 SetBattleZoom	0x08019050	24	0x08019050	global
 AnimChangeWithDef	0x08019068	52	0x08019068	global
 WorldToScreen	0x0801909c	244	0x0801909c	global

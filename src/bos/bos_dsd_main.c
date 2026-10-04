@@ -294,7 +294,7 @@ void BosDsdMainBeginTransition(DsdMainWork* work, s32 x, s32 y, s32 z) {
     FadeSetPaletteExcluded(0, 0);
     FadeSetPaletteExcluded(0x13, 0);
     FadeToAmount(FADE_MODE_BLACK, 0x14, 8);
-    func_08018B04(x - 0x1400, y, z - 0xA00, 0x100);
+    BgFxStartDsdTransition(x - 0x1400, y, z - 0xA00, 0x100);
     m4aSongNumStart(SONG_SND_721);
     q->flags |= BTLOBJ_FLAG_UNHITTABLE;
 }
@@ -990,7 +990,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         FadeSetPaletteExcluded(0, 0);
         FadeSetPaletteExcluded(19, 0);
         FadeToAmount(FADE_MODE_BLACK, 20, 8);
-        func_08018B04(a->x - 0x1400, a->y, a->z - 0xA00, 0x100);
+        BgFxStartDsdTransition(a->x - 0x1400, a->y, a->z - 0xA00, 0x100);
         m4aSongNumStart(SONG_SND_721);
         work->stepTimer = 0;
         work->dsd->stateStep++;

@@ -88,7 +88,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     work->state = 0;
     work->stateTimer = 0;
     work->steps = 0;
-    work->unk_14C = 0;
+    work->hopTimer = 0;
     work->unk_150 = 0;
     work->scale = 10;
     work->animating = 0;
@@ -271,7 +271,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
 
         break;
     case 1:
-        if (work->unk_14C == 0) {
+        if (work->hopTimer == 0) {
             AnimStart(&work->anim, 0, 0);
             SmnBambiPickHopTarget(work);
             work->steps = 30;
@@ -283,8 +283,8 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             ApplyAttackBox(0x74, body->x, body->y, body->z, 8, 8, 8);
         }
 
-        if (work->unk_14C > 4) {
-            if (work->unk_14C == 5) {
+        if (work->hopTimer > 4) {
+            if (work->hopTimer == 5) {
                 work->vz = -0x300;
                 m4aSongNumStart(SONG_BTL_BBI_JUMP);
             }
@@ -300,7 +300,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
         if (AnimIsFinished(&work->anim)) {
-            work->unk_14C = 0;
+            work->hopTimer = 0;
             work->stateTimer++;
             args.x = body->x;
             args.y = body->y;
@@ -315,7 +315,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             args.noTimeout = 0;
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, &args);
         } else {
-            work->unk_14C++;
+            work->hopTimer++;
         }
 
         if (work->stateTimer > 4) {

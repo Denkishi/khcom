@@ -5158,7 +5158,7 @@ void LoadCardNameText(DeckMenuWork* work, s32 id) {
 
     def = &gCardDefs[id];
 #ifdef VERSION_EU
-    work->textSlotCount4 = LoadTextSlots(eu_0805E924(def->name), work->textSlots4);
+    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(def->name), work->textSlots4);
 #else
     work->textSlotCount4 = LoadTextSlots(def->name, work->textSlots4);
 #endif

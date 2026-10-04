@@ -1458,7 +1458,7 @@ void ResetSelectedMapCard() {
 
 const void* GetRoomName(u16 a) {
 #ifdef VERSION_EU
-    return eu_0805E924(gRoomNames[a]);
+    return GetLocalizedString(gRoomNames[a]);
 #else
     return gRoomNames[a];
 #endif

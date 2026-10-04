@@ -4528,8 +4528,8 @@ void Task_MapPrzStock_3(MapPrzStockWork* work) {
 }
 
 void MapMsgInit(MapMsgWork* work, void* text) {
-    LoadBgTiles(0, &gUnk_099597E4[0x140], 0x140);
-    LoadBgMap(0, &gUnk_09985F44[0x400], 0x800);
+    LoadBgTiles(0, gMapMsgWinTiles, 0x140);
+    LoadBgMap(0, gMapMsgWinMap, 0x800);
     SetBgScroll(0, 0, (u16)-46);
     LoadPalette(gCard00Palette, &gUnk_050001C0[0x20], 32);
     InitTextSlots(work->textSlots, 48);

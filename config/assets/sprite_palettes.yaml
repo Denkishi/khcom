@@ -2303,11 +2303,9 @@ entries:
   jp:
     address: 0x095CC9D4
     size: 32
-    symbol: gUnkJp_095CC9D4
   eu:
     address: 0x09546DE4
     size: 32
-    symbol: gUnkEu_09546DE4
 - name: gUnk_09613F18
   format: palette
   us:

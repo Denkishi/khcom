@@ -1439,11 +1439,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
 #endif
         break;
     case 2:
-#ifdef VERSION_EU
-        LoadBgMap(3, gUnk_095132B8, 0x800);
-#else
-        LoadBgMap(3, gUnk_09516AB8, 0x800);
-#endif
+        LoadBgMap(3, gDeckMenuMap, 0x800);
         break;
     case 3:
 #ifdef VERSION_EU
@@ -1465,7 +1461,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
             break;
         }
 #else
-        LoadBgTiles(0, gUnk_09406F78, 0xC00);
+        LoadBgTiles(0, gDeck1PanelTiles, 0xC00);
 #endif
         break;
     case 4:
@@ -1473,10 +1469,10 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
         break;
 #ifndef VERSION_EU
     case 5:
-        LoadBgTiles(1, &gUnk_09406F78[0xC00], 0x2000);
+        LoadBgTiles(1, gDeck2PanelTiles, 0x2000);
         break;
     case 6:
-        RequestDma3Copy(&gUnk_09406F78[0x2C00],
+        RequestDma3Copy(&gDeck2PanelTiles[0x2000],
                         (u8*)GetBgCharBase(1) + 0x2000, 0x1E20);
         break;
 #endif
@@ -1485,10 +1481,10 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
         break;
 #ifndef VERSION_EU
     case 8:
-        LoadBgTiles(2, &gUnk_09406F78[0x4A20], 0x2000);
+        LoadBgTiles(2, gDeck3PanelTiles, 0x2000);
         break;
     case 9:
-        RequestDma3Copy(&gUnk_09406F78[0x6A20],
+        RequestDma3Copy(&gDeck3PanelTiles[0x2000],
                         (u8*)GetBgCharBase(2) + 0x2000, 0x1E20);
         break;
 #endif
@@ -3554,11 +3550,7 @@ u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* a) {
     ReleaseCommandMenuGfx(work);
     SetDeckMenuFrameCursor(work, 0);
     SetDeckMenuHandAnim(work);
-#ifdef VERSION_EU
-    LoadBgMap(3, &gUnk_095132B8[0x400], 0x800);
-#else
-    LoadBgMap(3, gUnk_095132B8, 0x800);
-#endif
+    LoadBgMap(3, gDeckRemoveGridMap, 0x800);
     ClearCardGrid(work);
     work->categoryFilter = 0;
     work->cursorCol = 0;
@@ -4106,11 +4098,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
 #endif
 
     work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
-#ifdef VERSION_EU
-    LoadBgMap(3, gUnk_095132B8, 0x800);
-#else
-    LoadBgMap(3, gUnk_09516AB8, 0x800);
-#endif
+    LoadBgMap(3, gDeckMenuMap, 0x800);
     work->x5 = 0x7800;
     work->y5 = 0;
     work->x6 = 0xA400;

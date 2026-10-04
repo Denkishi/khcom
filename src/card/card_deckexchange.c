@@ -224,26 +224,26 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
         LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
         break;
     case 3:
-        LoadBgTiles(0, gUnk_09406F78, 0xC00);
+        LoadBgTiles(0, gDeck1PanelTiles, 0xC00);
         break;
     case 4:
         LoadBgMap(0, gUnk_08125E24, 0x800);
         break;
     case 5:
-        LoadBgTiles(1, &gUnk_09406F78[0xC00], 0x2000);
+        LoadBgTiles(1, gDeck2PanelTiles, 0x2000);
         break;
     case 6:
-        RequestDma3Copy(&gUnk_09406F78[0x2C00],
+        RequestDma3Copy(&gDeck2PanelTiles[0x2000],
                         (u8*)GetBgCharBase(1) + 0x2000, 0x1E20);
         break;
     case 7:
         LoadBgMap(1, gUnk_08125E24, 0x800);
         break;
     case 8:
-        LoadBgTiles(2, &gUnk_09406F78[0x4A20], 0x2000);
+        LoadBgTiles(2, gDeck3PanelTiles, 0x2000);
         break;
     case 9:
-        RequestDma3Copy(&gUnk_09406F78[0x6A20],
+        RequestDma3Copy(&gDeck3PanelTiles[0x2000],
                         (u8*)GetBgCharBase(2) + 0x2000, 0x1E20);
         break;
     case 10:

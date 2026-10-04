@@ -23,7 +23,7 @@ objects:
     start: 0x093FD438
     end: 0x09402F78
   - name: sprites_level_up_maps_1.s
-    start: 0x0950F2B8
+    start: 0x0950EAB8
     end: 0x09512AB8
   - name: sprites_level_up_maps_2.s
     start: 0x0951F2B8
@@ -38,7 +38,7 @@ objects:
     start: 0x093B8B54
     end: 0x093BE294
   - name: sprites_level_up_maps_1.s
-    start: 0x094C7594
+    start: 0x094C6D94
     end: 0x094CAD94
   - name: sprites_level_up_maps_2.s
     start: 0x094D7D94
@@ -53,7 +53,7 @@ objects:
     start: 0x094D0304
     end: 0x094DCCE4
   - name: sprites_level_up_maps_1.s
-    start: 0x09531224
+    start: 0x09530824
     end: 0x09532B24
   - name: sprites_level_up_maps_2.s
     start: 0x0953EB24
@@ -2595,6 +2595,22 @@ entries:
   eu:
     address: 0x094D0304
     size: 6784
+- name: gLevelUpChosenMap
+  format: tilemap
+  us:
+    address: 0x0950EAB8
+    size: 2048
+  jp:
+    address: 0x094C6D94
+    size: 2048
+  eu:
+    address: 0x09532124
+    size: 1280
+- name: gUnkEu_09530824
+  format: tilemap
+  eu:
+    address: 0x09530824
+    size: 2560
 - name: gUnk_0950F2B8
   format: tilemap
   us:
@@ -2638,7 +2654,7 @@ entries:
     size: 2048
   eu:
     address: 0x09531C24
-    size: 2560
+    size: 1280
 - name: gUnk_0951F2B8
   format: tilemap
   us:

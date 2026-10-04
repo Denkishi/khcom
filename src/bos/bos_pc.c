@@ -152,7 +152,7 @@ static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
 
 static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
     gUnk_09C91754, 0x3340, gBosPcBgPalette, 0x100,
-    { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x400, gUnk_09D33A74 + 0x400 }
+    { gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgFillMap, gBosPcBgFillMap }
 };
 
 const PcSpriteCmd gBosPcIdleFrame0[51] = {

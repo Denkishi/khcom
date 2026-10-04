@@ -104,18 +104,18 @@ static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_L
 
 #if defined(VERSION_US)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnk_0984AE38, 0x140,
-    { gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x800, gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x400 },
+    gBosBoogieBgTiles, 0x7F00, gUnk_0984AE38, 0x140,
+    { gBossMapBlockUs_08125E24, gBosBoogieBgMaps[1], gBossMapBlockUs_08125E24, gBosBoogieBgMaps[0] },
 };
 #elif defined(VERSION_JP)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnkJp_097FFB0C, 0x140,
-    { gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x800, gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x400 },
+    gBosBoogieBgTiles, 0x7F00, gUnkJp_097FFB0C, 0x140,
+    { gBossMapBlockJp_08125EA0, gBosBoogieBgMaps[1], gBossMapBlockJp_08125EA0, gBosBoogieBgMaps[0] },
 };
 #elif defined(VERSION_EU)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnkEu_0981F4E0, 0x140,
-    { gBossMapBlockEu_08124944, gUnk_09841F98 + 0x800, gBossMapBlockEu_08124944, gUnk_09841F98 + 0x400 },
+    gBosBoogieBgTiles, 0x7F00, gUnkEu_0981F4E0, 0x140,
+    { gBossMapBlockEu_08124944, gBosBoogieBgMaps[1], gBossMapBlockEu_08124944, gBosBoogieBgMaps[0] },
 };
 #endif
 

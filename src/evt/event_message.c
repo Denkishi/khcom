@@ -6200,7 +6200,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
                     void* pal;
 
                     pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-                    LoadBgTiles(work->bg, gUnk_0950E2F8, 0x140);
+                    LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
                     LoadBgMap(work->bg, gUnk_096112B8, 0x800);
                     LoadPalette(gCard00Palette, pal, 32);
 
@@ -6256,7 +6256,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
             void* pal;
 
             pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-            LoadBgTiles(work->bg, gUnk_0950E2F8, 0x140);
+            LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
             LoadBgMap(work->bg, gUnk_096112B8, 0x800);
             LoadPalette(gCard00Palette, pal, 32);
 

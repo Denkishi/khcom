@@ -1155,8 +1155,8 @@ void mode_mapinspect_0() {
     LoadBgTiles(0, gUnk_09A03CFC, 0x2980);
 #endif
     LoadBgPalette(2, gCard00Palette, 0x20);
-    LoadBgTiles(2, gUnk_099597E4, 0x140);
-    LoadBgMap(2, gUnk_09985F44, 0x800);
+    LoadBgTiles(2, gConfirmWinTiles, 0x140);
+    LoadBgMap(2, gConfirmWinMap, 0x800);
     LoadBgMap(0, gUnk_09A3439C, 0x500);
 
     if (GetMapInspectSelectedEntry()->category == 3) {

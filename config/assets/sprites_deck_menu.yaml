@@ -896,15 +896,36 @@ entries:
   eu:
     address: 0x094DCCE4
     size: 14336
-- name: gUnk_09406F78
+- name: gDeck1PanelTiles
   format: tiles4
-  width: 2
+  width: 8
   us:
     address: 0x09406F78
-    size: 34880
+    size: 3072
   jp:
     address: 0x093C2294
-    size: 34880
+    size: 3072
+- name: gDeck2PanelTiles
+  format: tiles4
+  width: 7
+  us:
+    address: 0x09407B78
+    size: 15904
+  jp:
+    address: 0x093C2E94
+    size: 15904
+- name: gDeck3PanelTiles
+  format: tiles4
+  width: 7
+  us:
+    address: 0x0940B998
+    size: 15904
+  jp:
+    address: 0x093C6CB4
+    size: 15904
+- name: gUnkEu_094E0CE4
+  format: tiles4
+  width: 2
   eu:
     address: 0x094E0CE4
     size: 5120
@@ -1042,17 +1063,22 @@ entries:
   eu:
     address: 0x09532B24
     size: 2048
-- name: gUnk_095132B8
+- name: gDeckRemoveGridMap
   format: tilemap
   us:
     address: 0x095132B8
-    size: 4096
+    size: 2048
   jp:
     address: 0x094CB594
     size: 2048
   eu:
-    address: 0x09533324
-    size: 4096
+    address: 0x09533B24
+    size: 2048
+- name: gUnk_09513AB8
+  format: tilemap
+  us:
+    address: 0x09513AB8
+    size: 2048
 - name: gUnk_095142B8
   format: tilemap
   us:
@@ -1105,7 +1131,7 @@ entries:
   eu:
     address: 0x0953A324
     size: 2048
-- name: gUnk_09516AB8
+- name: gDeckMenuMap
   format: tilemap
   us:
     address: 0x09516AB8
@@ -1114,8 +1140,8 @@ entries:
     address: 0x094CE594
     size: 2048
   eu:
-    address: 0x0953AB24
-    size: 4096
+    address: 0x09533324
+    size: 2048
 - name: gUnk_095172B8
   format: tilemap
   us:
@@ -1204,16 +1230,32 @@ entries:
   eu:
     address: 0x09539324
     size: 2048
-- name: gUnk_0951B2B8
+- name: gRikuDeckMenuMap
   format: tilemap
   us:
     address: 0x0951B2B8
-    size: 4096
+    size: 2048
   jp:
     address: 0x094D2D94
-    size: 4096
+    size: 2048
   eu:
     address: 0x09539B24
+    size: 2048
+- name: gRikuDeckPanelMap
+  format: tilemap
+  us:
+    address: 0x0951BAB8
+    size: 2048
+  jp:
+    address: 0x094D3594
+    size: 2048
+  eu:
+    address: 0x0953AB24
+    size: 2048
+- name: gUnkEu_0953B324
+  format: tilemap
+  eu:
+    address: 0x0953B324
     size: 2048
 - name: gUnk_0951C2B8
   format: tilemap

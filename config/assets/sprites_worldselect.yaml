@@ -1180,17 +1180,28 @@ entries:
   eu:
     address: 0x095298C4
     size: 320
-- name: gUnk_09508098
+- name: gMapSelectTiles
   format: tiles4
   us:
     address: 0x09508098
-    size: 17376
+    size: 8224
   jp:
     address: 0x094C0374
-    size: 17376
+    size: 8224
   eu:
     address: 0x09529A04
-    size: 17376
+    size: 8224
+- name: gMapSelectValuesTiles
+  format: tiles4
+  us:
+    address: 0x0950A0B8
+    size: 9152
+  jp:
+    address: 0x094C2394
+    size: 9152
+  eu:
+    address: 0x0952BA24
+    size: 9152
 - name: gUnk_0950C478
   format: tiles4
   width: 4
@@ -1227,15 +1238,25 @@ entries:
   eu:
     address: 0x0952E0E4
     size: 256
-- name: gUnk_096102B8
+- name: gMapSelectMap
   format: tilemap
-  declare: false
   us:
     address: 0x096102B8
-    size: 4096
+    size: 2048
   jp:
     address: 0x095C8D94
-    size: 4096
+    size: 2048
   eu:
     address: 0x09543324
-    size: 4096
+    size: 2048
+- name: gMapSelectValuesMap
+  format: tilemap
+  us:
+    address: 0x09610AB8
+    size: 2048
+  jp:
+    address: 0x095C9594
+    size: 2048
+  eu:
+    address: 0x09543B24
+    size: 2048

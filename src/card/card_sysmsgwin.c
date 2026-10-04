@@ -128,7 +128,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
     case 0:
     case 1:
         pal = &gUnk_050001C0[0x20];
-        LoadBgTiles(work->args.bg, gUnk_0950E2F8, 0x140);
+        LoadBgTiles(work->args.bg, gSysMsgWinTiles, 0x140);
         LoadBgMap(work->args.bg, gUnk_096112B8, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
@@ -166,7 +166,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
 
         if (work->tiles2 == NULL) {
             work->fallbackFrame = 1;
-            work->tiles2 = LoadObjTiles(&gUnk_0950E2F8[0x140], 0x680);
+            work->tiles2 = LoadObjTiles(gSysMsgWinFallbackTiles, 0x680);
         } else {
             work->fallbackFrame = 0;
         }
@@ -563,8 +563,8 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* a) {
     case 0:
     case 1:
         pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-        LoadBgTiles(work->args.bg, gUnk_099597E4, 0x140);
-        LoadBgMap(work->args.bg, gUnk_09985F44, 0x800);
+        LoadBgTiles(work->args.bg, gConfirmWinTiles, 0x140);
+        LoadBgMap(work->args.bg, gConfirmWinMap, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
         switch (work->messageDef->positionIndex) {

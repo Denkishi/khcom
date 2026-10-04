@@ -24,7 +24,6 @@
 #include "sprites_fld.h"
 #include "sprites_level_up.h"
 #include "sprites_sora.h"
-#include "sprites_msg.h"
 #include "sprites_card.h"
 #include "gba/io_reg.h"
 #include "gba/keys.h"
@@ -101,7 +100,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->tiles5[1] = AllocSpriteFrameTiles(0x500);
     work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    work->tilesPalettes[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
+    work->tilesPalettes[7] = LoadObjPalette(gUnk_09613EF8, 32);
     FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, 1);
     work->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
     TaskPoolInit(&work->pool, 10);
@@ -735,9 +734,9 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
     s8 i;
     u8* q;
 #ifdef VERSION_EU
-    enum { mapOffset = 0x20C0, mapSize = 0x500 };
+    enum { mapSize = 0x500 };
 #else
-    enum { mapOffset = 0x7C0, mapSize = 0x800 };
+    enum { mapSize = 0x800 };
 #endif
 
     if (GetKeysRepeat() & DPAD_DOWN) {
@@ -798,9 +797,9 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
         work->state = 2;
 
         if (gBtlWork->battleId == 151) {
-            LoadBgMap(0, &gUnk_0950E2F8[mapOffset], mapSize);
+            LoadBgMap(0, gLevelUpChosenMap, mapSize);
         } else {
-            LoadBgMap(1, &gUnk_0950E2F8[mapOffset], mapSize);
+            LoadBgMap(1, gLevelUpChosenMap, mapSize);
         }
 
         work->optionSteps[0] = 16;

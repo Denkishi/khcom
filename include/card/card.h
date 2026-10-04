@@ -2033,7 +2033,6 @@ extern const u8* gDeckKeyboardRows[7];
 extern const u8* gDeckKeyboardKatakanaRows[7];
 extern const u8* gDeckKeyboardAlphanumericRows[7];
 #endif
-extern const u16 gUnk_096102B8[];
 extern const void* gMapSelectBgMapBlocks[2];
 extern s16 gMapSelectValueColumnX[5];
 extern s16 gMapSelectValueRowY[2];

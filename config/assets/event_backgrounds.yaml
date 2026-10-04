@@ -4600,7 +4600,7 @@ entries:
     items: [gUnkEu_08125144]
 - name: gUnk_09EE2D9C
   record: MapTable
-  items: [gUnk_09D33A74, gUnk_09D33274]
+  items: [gBosPcBgLeftMap, gBosPcBgRightMap]
   us:
     address: 0x09EE2D9C
   jp:
@@ -13685,7 +13685,7 @@ entries:
     address: 0x095D6C44
     size: 300
     compress: lz77
-- name: gUnk_09D33274
+- name: gBosPcBgRightMap
   format: tilemap
   us:
     address: 0x09D33274
@@ -13696,14 +13696,25 @@ entries:
   eu:
     address: 0x09D9F1A0
     size: 2048
-- name: gUnk_09D33A74
+- name: gBosPcBgLeftMap
   format: tilemap
   us:
     address: 0x09D33A74
-    size: 4096
+    size: 2048
   jp:
     address: 0x09D0CF80
-    size: 4096
+    size: 2048
   eu:
     address: 0x09D9F9A0
-    size: 4096
+    size: 2048
+- name: gBosPcBgFillMap
+  format: tilemap
+  us:
+    address: 0x09D34274
+    size: 2048
+  jp:
+    address: 0x09D0D780
+    size: 2048
+  eu:
+    address: 0x09DA01A0
+    size: 2048

@@ -199,16 +199,16 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
     }
 
     LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
-    LoadBgMap(3, gUnk_0951B2B8, 0x800);
+    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     LoadBgMap(0, gUnk_08125E24, 0x800);
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
 #else
     LoadBgTiles(3, gUnk_09402F78, 0x4000);
     LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
-    LoadBgMap(3, gUnk_0951B2B8, 0x800);
+    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     LoadBgMap(0, gUnk_08125E24, 0x800);
-    LoadBgTiles(1, gUnk_09406F78, 0xC00);
+    LoadBgTiles(1, gDeck1PanelTiles, 0xC00);
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
 #endif
@@ -227,13 +227,11 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
     LoadPalette(gUnk_096142F8, pal, 32);
 #ifdef VERSION_EU
     RequestDma3Copy(gRikuDeckEquipMarkerTiles[gLanguage] + 0x20, base + 0x2D80, 0x1E0);
-    LoadBgMap(0, gUnk_095172B8, 0x800);
-    LoadBgMap(1, gUnk_09516AB8, 0x800);
 #else
     RequestDma3Copy(gUnk_0940FC58, base + 0x1A0, 0x1E0);
-    LoadBgMap(0, gUnk_09516AB8 + 0x400, 0x800);
-    LoadBgMap(1, gUnk_0951B2B8 + 0x400, 0x800);
 #endif
+    LoadBgMap(0, gUnk_095172B8, 0x800);
+    LoadBgMap(1, gRikuDeckPanelMap, 0x800);
     DrawRikuDeckCategoryCount(work->deckAttackCount, 0);
     DrawRikuDeckCategoryCount(work->deckMagicCount, 1);
     DrawRikuDeckCategoryCount(work->deckItemCount, 2);
@@ -449,7 +447,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
 #endif
     work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
     work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
-    LoadBgMap(3, gUnk_0951B2B8, 0x800);
+    LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     work->x5 = 0x7800;
     work->y5 = 0;
     work->x6 = 0xA400;

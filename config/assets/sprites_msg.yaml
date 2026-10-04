@@ -24,7 +24,7 @@ objects:
     end: 0x09443138
   - name: sprites_msg_tiles_2.s
     start: 0x0950E2F8
-    end: 0x0950F2B8
+    end: 0x0950EAB8
   - name: sprites_msg_maps.s
     start: 0x0951D2B8
     end: 0x0951F2B8
@@ -47,7 +47,7 @@ objects:
     end: 0x093FB414
   - name: sprites_msg_tiles_2.s
     start: 0x094C65D4
-    end: 0x094C7594
+    end: 0x094C6D94
   - name: sprites_msg_maps.s
     start: 0x094D5D94
     end: 0x094D7D94
@@ -70,7 +70,7 @@ objects:
     end: 0x09519544
   - name: sprites_msg_tiles_2.s
     start: 0x09530064
-    end: 0x09531224
+    end: 0x09530824
   - name: sprites_msg_maps.s
     start: 0x0953CB24
     end: 0x0953EB24
@@ -16392,18 +16392,30 @@ entries:
   eu:
     address: 0x09513544
     size: 24576
-- name: gUnk_0950E2F8
+- name: gSysMsgWinTiles
   format: tiles4
   width: 2
   us:
     address: 0x0950E2F8
-    size: 4032
+    size: 320
   jp:
     address: 0x094C65D4
-    size: 4032
+    size: 320
   eu:
     address: 0x09530064
-    size: 4544
+    size: 320
+- name: gSysMsgWinFallbackTiles
+  format: tiles4
+  width: 2
+  us:
+    address: 0x0950E438
+    size: 1664
+  jp:
+    address: 0x094C6714
+    size: 1664
+  eu:
+    address: 0x095301A4
+    size: 1664
 - name: gUnk_0951D2B8
   format: tilemap
   declare: false

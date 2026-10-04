@@ -5216,8 +5216,8 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     TextSlot* p2;
     TextSlot* p3;
 
-    LoadBgTiles(0, gUnk_099597E4, 0x140);
-    LoadBgMap(0, gUnk_09985F44, 0x800);
+    LoadBgTiles(0, gConfirmWinTiles, 0x140);
+    LoadBgMap(0, gConfirmWinMap, 0x800);
     LoadPalette(gCard00Palette, &gUnk_050001C0[0x20], 0x20);
     FadeSetPaletteExcluded(15, 1);
     SetBgScroll(0, 0, 0);

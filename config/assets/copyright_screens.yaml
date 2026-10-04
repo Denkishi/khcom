@@ -65,18 +65,30 @@ entries:
   eu:
     address: 0x097B1D00
     size: 20416
-- name: gUnk_097E05B8
+- name: gCopyright2Tiles
   format: tiles4
   width: 2
   us:
     address: 0x097E05B8
-    size: 52928
+    size: 20416
   jp:
     address: 0x0979AA4C
-    size: 52928
+    size: 20416
   eu:
     address: 0x097B6CC0
-    size: 52928
+    size: 20416
+- name: gBosBoogieBgTiles
+  format: tiles4
+  width: 8
+  us:
+    address: 0x097E5578
+    size: 32512
+  jp:
+    address: 0x0979FA0C
+    size: 32512
+  eu:
+    address: 0x097BBC80
+    size: 32512
 - name: gUnk_09801C98
   format: tiles4
   width: 2
@@ -108,17 +120,29 @@ entries:
   eu:
     address: 0x09815E40
     size: 2048
-- name: gUnk_09841F98
+- name: gCopyright2Map
   format: tilemap
   us:
     address: 0x09841F98
-    size: 6144
+    size: 2048
   jp:
     address: 0x097F746C
-    size: 6144
+    size: 2048
   eu:
     address: 0x09816640
-    size: 6144
+    size: 2048
+- name: gBosBoogieBgMaps
+  format: tilemap
+  shape: [2, 1024]
+  us:
+    address: 0x09842798
+    size: 4096
+  jp:
+    address: 0x097F7C6C
+    size: 4096
+  eu:
+    address: 0x09816E40
+    size: 4096
 - name: gUnk_0984AA38
   format: palette
   us:

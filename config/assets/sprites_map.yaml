@@ -9764,18 +9764,30 @@ entries:
   eu:
     address: 0x09943DB0
     size: 5376
-- name: gUnk_099597E4
+- name: gConfirmWinTiles
   format: tiles4
-  width: 4
+  width: 2
   us:
     address: 0x099597E4
-    size: 640
+    size: 320
   jp:
     address: 0x0990E2F8
-    size: 640
+    size: 320
   eu:
     address: 0x0994B170
-    size: 640
+    size: 320
+- name: gMapMsgWinTiles
+  format: tiles4
+  width: 2
+  us:
+    address: 0x09959924
+    size: 320
+  jp:
+    address: 0x0990E438
+    size: 320
+  eu:
+    address: 0x0994B2B0
+    size: 320
 - name: gUnk_09959A64
   format: tiles4
   width: 32
@@ -9876,17 +9888,28 @@ entries:
   eu:
     address: 0x09939D30
     size: 7104
-- name: gUnk_09985F44
+- name: gConfirmWinMap
   format: tilemap
   us:
     address: 0x09985F44
-    size: 4096
+    size: 2048
   jp:
     address: 0x0993AA58
-    size: 4096
+    size: 2048
   eu:
     address: 0x0998BF30
-    size: 4096
+    size: 2048
+- name: gMapMsgWinMap
+  format: tilemap
+  us:
+    address: 0x09986744
+    size: 2048
+  jp:
+    address: 0x0993B258
+    size: 2048
+  eu:
+    address: 0x0998C730
+    size: 2048
 - name: gUnkEu_0993B8F0
   format: tiles4
   width: 2

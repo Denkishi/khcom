@@ -3858,7 +3858,7 @@ void mode_sioError_0(s32 arg) {
     sSioErrorWork->unk_04 = 0;
 #ifdef VERSION_EU
     LoadBgPalette(0, gCard00Palette, 32);
-    LoadBgTiles(0, gUnk_0950E2F8, 0x140);
+    LoadBgTiles(0, gSysMsgWinTiles, 0x140);
 
     if (gLanguage == LANGUAGE_FRENCH || gLanguage == LANGUAGE_SPANISH) {
         LoadBgMap(0, gUnkEu_096C798C, 0x800);
@@ -3872,7 +3872,7 @@ void mode_sioError_0(s32 arg) {
     LoadBgMap(0, gUnk_096F6464, 0x800);
     LoadBgPalette(0, gCard00Palette, 32);
 #else
-    LoadBgTiles(0, gUnk_0950E2F8, 0x140);
+    LoadBgTiles(0, gSysMsgWinTiles, 0x140);
     LoadBgMap(0, gUnk_096112B8, 0x800);
     LoadBgPalette(0, gCard00Palette, 32);
     SetBgScroll(0, 0xFFE9, 0xFFD0);

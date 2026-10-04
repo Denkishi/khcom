@@ -305,6 +305,7 @@ bos_tm_body.c
 bos_tm_foot.c
 bos_jf.c
 bos_jf_majin.c
+bos_dsd.c
 bos_dsd_main.c
 bos_dsd_ita.c
 bos_dsd_circle.c

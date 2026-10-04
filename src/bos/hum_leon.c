@@ -7,7 +7,6 @@
 #include "sprites_evt.h"
 #include "sprites_hum.h"
 #include "hum_common.h"
-#include "actor_localized_data.h"
 #include "hum_tasks.h"
 #include "anim.h"
 #include "battle_actor.h"

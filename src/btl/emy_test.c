@@ -6,7 +6,6 @@
 #include "task_descriptors.h"
 #include "sprites_emy.h"
 #include "enemy_common.h"
-#include "actor_localized_data.h"
 #include "emy_tasks.h"
 #include "anim.h"
 #include "battle_actor.h"

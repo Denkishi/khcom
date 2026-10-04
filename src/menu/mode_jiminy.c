@@ -27,7 +27,6 @@
 #include "common_text.h"
 #include "jiminy_records_assets.h"
 #include "map_card_assets.h"
-#include "actor_localized_data.h"
 #include "jiminy_data.h"
 #include "anim.h"
 #include "card.h"

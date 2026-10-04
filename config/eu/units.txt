@@ -160,7 +160,6 @@ sprites_emy_frames_2.s
 sprites_btl_frames_3.s
 sprites_btl_hud_frames.s
 sprites_hum_frames_1.s
-actor_localized_data.c
 sprites_emy_frames_3.s
 jiminy_journal_frames.s
 sprites_language_select_frames.s

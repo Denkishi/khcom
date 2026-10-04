@@ -1,5 +1,12 @@
 group: sprites_language_select
 types:
+  SpriteTable:
+    kind: table
+    type: void*
+  AnimTable:
+    kind: table
+    type: AnimHeader*
+    header: anim.h
   Sprite:
     kind: sprite
   AnimHeader:
@@ -12,6 +19,8 @@ objects:
   - name: sprites_language_select_frames.s
     start: 0x08C9C97C
     end: 0x08C9CBF8
+    data_start: 0x09F5D4D8
+    data_end: 0x09F5D500
   - name: sprites_language_select_palettes.s
     start: 0x08F6A6FC
     end: 0x08F6A73C
@@ -22,6 +31,16 @@ objects:
     start: 0x08F7EBF8
     end: 0x08F7F15C
 entries:
+- name: gUnkEu_09F5D4D8
+  record: SpriteTable
+  items: [gUnkEu_08C9C97C, gUnkEu_08C9C99E, gUnkEu_08C9C9C0, gUnkEu_08C9C9E2, gUnkEu_08C9CA04]
+  eu:
+    address: 0x09F5D4D8
+- name: gUnkEu_09F5D4EC
+  record: AnimTable
+  items: [gUnkEu_08C9CA26, gUnkEu_08C9CA30, gUnkEu_08C9CA3A, gUnkEu_08C9CA44, gUnkEu_08C9CA4E]
+  eu:
+    address: 0x09F5D4EC
 - name: gUnkEu_08C9CA58
   format: sprite_sheet
   cell: [80, 24]
@@ -65,23 +84,18 @@ entries:
     - [32x8, 18, -2]
   animations:
   - symbol: gUnkEu_08C9CA26
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   - symbol: gUnkEu_08C9CA30
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
   - symbol: gUnkEu_08C9CA3A
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
   - symbol: gUnkEu_08C9CA44
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
   - symbol: gUnkEu_08C9CA4E
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
   eu:

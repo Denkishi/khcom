@@ -30,6 +30,8 @@ objects:
   - name: sprites_emy_frames_3.s
     start: 0x08C69188
     end: 0x08C69C04
+    data_start: 0x09EE2608
+    data_end: 0x09EE2628
   jp:
   - name: sprites_emy_frames_1.s
     start: 0x089441CC
@@ -47,6 +49,8 @@ objects:
   - name: sprites_emy_frames_3.s
     start: 0x08C5C770
     end: 0x08C5D1EC
+    data_start: 0x09EBA084
+    data_end: 0x09EBA0A4
   eu:
   - name: sprites_emy_frames_1.s
     start: 0x0897C508
@@ -64,6 +68,8 @@ objects:
   - name: sprites_emy_frames_3.s
     start: 0x08C99138
     end: 0x08C99BB4
+    data_start: 0x09F5D414
+    data_end: 0x09F5D434
 entries:
 - name: gUnk_09EDF778
   record: SpriteTable
@@ -3593,6 +3599,24 @@ entries:
     address: 0x09EB8B50
   eu:
     address: 0x09F5BD2C
+- name: gUnk_09EE2608
+  record: SpriteTable
+  items: [gUnk_08C69188, gUnk_08C69198, gUnk_08C691A8, gUnk_08C691B8]
+  us:
+    address: 0x09EE2608
+  jp:
+    address: 0x09EBA084
+  eu:
+    address: 0x09F5D414
+- name: gUnk_09EE2618
+  record: AnimTable
+  items: [gUnk_08C691C8, gUnk_08C691D2, gUnk_08C691DC, gUnk_08C691E6]
+  us:
+    address: 0x09EE2618
+  jp:
+    address: 0x09EBA094
+  eu:
+    address: 0x09F5D424
 - name: gUnk_08950D30
   format: sprite_sheet
   align: 4
@@ -14540,19 +14564,15 @@ entries:
     - [32x8, -16, -1]
   animations:
   - symbol: gUnk_08C691C8
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   - symbol: gUnk_08C691D2
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
   - symbol: gUnk_08C691DC
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
   - symbol: gUnk_08C691E6
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [2, 4], [1, 4]]
   us:

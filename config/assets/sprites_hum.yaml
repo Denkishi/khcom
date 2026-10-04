@@ -18,7 +18,7 @@ objects:
     start: 0x08B26854
     end: 0x08C69188
     data_start: 0x09EE15FC
-    data_end: 0x09EE25D0
+    data_end: 0x09EE2608
   - name: sprites_hum_frames_2.s
     start: 0x08C6AF80
     end: 0x08C6B0C4
@@ -32,7 +32,7 @@ objects:
     start: 0x08B19E3C
     end: 0x08C5C770
     data_start: 0x09EB9078
-    data_end: 0x09EBA04C
+    data_end: 0x09EBA084
   - name: sprites_hum_frames_2.s
     start: 0x08C5E568
     end: 0x08C5E6AC
@@ -46,7 +46,7 @@ objects:
     start: 0x08B56804
     end: 0x08C99138
     data_start: 0x09F5C408
-    data_end: 0x09F5D3DC
+    data_end: 0x09F5D414
   - name: sprites_hum_frames_2.s
     start: 0x08C9CBF8
     end: 0x08C9CD3C
@@ -1868,6 +1868,42 @@ entries:
     address: 0x09EBA048
   eu:
     address: 0x09F5D3D8
+- name: gUnk_09EE25D0
+  record: SpriteTable
+  items: [gUnk_08C665DC, gUnk_08C665F2, gUnk_08C66608, gUnk_08C66624, gUnk_08C66640]
+  us:
+    address: 0x09EE25D0
+  jp:
+    address: 0x09EBA04C
+  eu:
+    address: 0x09F5D3DC
+- name: gUnk_09EE25E4
+  record: AnimTable
+  items: [gUnk_08C66656, gUnk_08C66664, gUnk_08C6666E, gUnk_08C66680]
+  us:
+    address: 0x09EE25E4
+  jp:
+    address: 0x09EBA060
+  eu:
+    address: 0x09F5D3F0
+- name: gUnk_09EE25F4
+  record: SpriteTable
+  items: [gUnk_08C67F30, gUnk_08C67F40, gUnk_08C67F50, gUnk_08C67F60]
+  us:
+    address: 0x09EE25F4
+  jp:
+    address: 0x09EBA070
+  eu:
+    address: 0x09F5D400
+- name: gUnk_09EE2604
+  record: AnimTable
+  items: [gUnk_08C67F70]
+  us:
+    address: 0x09EE2604
+  jp:
+    address: 0x09EBA080
+  eu:
+    address: 0x09F5D410
 - name: gVixenE1Frames
   record: SpriteTable
   items: [gVixenE1Frame0, gVixenE1Frame1, gVixenE1Frame2, gVixenE1Frame3, gVixenE1Frame4, gVixenE1Frame5, gVixenE1Frame6, gVixenE1Frame7]
@@ -9453,19 +9489,15 @@ entries:
     - [16x32, -32, -56]
   animations:
   - symbol: gUnk_08C66656
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4]]
   - symbol: gUnk_08C66664
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
   - symbol: gUnk_08C6666E
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4], [3, 7], [2, 5]]
   - symbol: gUnk_08C66680
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4], [4, 4]]
   us:
@@ -9502,7 +9534,6 @@ entries:
     - [32x8, -15, 1]
   animations:
   - symbol: gUnk_08C67F70
-    declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 8], [2, 10], [3, 8]]
   us:

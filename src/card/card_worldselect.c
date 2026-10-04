@@ -855,7 +855,7 @@ void MapSelect_2(MapSelectWork* work) {
 #else
                    (17 / work->lastPage) * work->page + 108,
 #endif
-                   gUnk_09EEB000, work->tiles6, work->palette, NULL, 0, 40);
+                   gUnk_09EEB000[0], work->tiles6, work->palette, NULL, 0, 40);
     }
 
     if (!work->isEventDoor && work->mosaicX != 9 && work->mosaicY != 9) {

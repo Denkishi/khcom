@@ -73,7 +73,6 @@ entries:
     symbol: gUnkEu_09F81F58
 - name: gUnkUs_09EF68E4
   record: SpriteTable
-  scalar: true
   items: [gUnk_097A1898]
   us:
     address: 0x09EF68E4
@@ -82,7 +81,6 @@ entries:
     symbol: gUnkJp_09ECDCD0
 - name: gUnkUs_09EF68E8
   record: SpriteTable
-  scalar: true
   items: [gUnk_097A18CC]
   us:
     address: 0x09EF68E8

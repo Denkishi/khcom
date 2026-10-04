@@ -880,7 +880,7 @@ void deckexchange_2(DeckExchangeWork* work) {
         DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 30, work->gfx, work->tiles, work->palette, NULL, work->handFlags, 3);
     }
 
-    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEB000, work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEB000[0], work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     switch (work->view) {
     case 0:

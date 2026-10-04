@@ -1462,7 +1462,7 @@ TaskDesc gTaskDescStockNameRiku = {
 };
 
 #ifdef VERSION_EU
-void** gPremireChanceTitles[5] = { gUnk_09EEA16C, &gUnkEu_09F75FB4, &gUnkEu_09F75FCC, &gUnkEu_09F75FC4, &gUnkEu_09F75FBC };
+void** gPremireChanceTitles[5] = { gUnk_09EEA16C, gUnkEu_09F75FB4, gUnkEu_09F75FCC, gUnkEu_09F75FC4, gUnkEu_09F75FBC };
 #endif
 
 TaskDesc gTaskDescPremireChance = {

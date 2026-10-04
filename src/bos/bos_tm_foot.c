@@ -527,8 +527,8 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->gfx = gUnk_09EF39DC[2];
     work->gfx2 = gUnk_09EF39DC[2];
-    work->gfx3 = gUnk_09EF39BC;
-    work->gfx4 = gUnk_09EF39C4;
+    work->gfx3 = gUnk_09EF39BC[0];
+    work->gfx4 = gUnk_09EF39C4[0];
     work->tm = arg;
     work->tm->tileCount += work->tiles2->count + work->tiles3->count;
     work->footFrame = 0;

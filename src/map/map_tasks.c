@@ -4691,7 +4691,7 @@ TaskDesc gTaskDescMapGmkBarrel = {
 };
 
 const MapGmkDef gMapGmk04Def = {
-    gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, gUnk_09EF8494, &gUnk_09EF84A4,
+    gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, gUnk_09EF8494, gUnk_09EF84A4,
     1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk04,
 };
 
@@ -4719,7 +4719,7 @@ TaskDesc gTaskDescMapGmk05 = {
 };
 
 const MapGmkDef gMapGmk06Def = {
-    gUnk_09991344, gUnk_0985BDEA, 0x400, 0, 0, gUnk_09EF84A8, &gUnk_09EF84B8,
+    gUnk_09991344, gUnk_0985BDEA, 0x400, 0, 0, gUnk_09EF84A8, gUnk_09EF84B8,
     1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk06,
 };
 

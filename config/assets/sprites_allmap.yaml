@@ -217,7 +217,6 @@ entries:
     address: 0x09F818DC
 - name: gUnkEu_09F818E0
   record: SpriteTable
-  scalar: true
   items: [gUnkEu_0973BA4C]
   eu:
     address: 0x09F818E0

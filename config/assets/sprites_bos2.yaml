@@ -141,7 +141,6 @@ entries:
     address: 0x09F7EEFC
 - name: gUnk_09EF3C18
   record: SpriteTable
-  scalar: true
   items: [gUnk_0962FC9C]
   us:
     address: 0x09EF3C18
@@ -151,7 +150,6 @@ entries:
     address: 0x09F7EF0C
 - name: gUnk_09EF3C1C
   record: AnimTable
-  scalar: true
   items: [gUnk_0962FCA6]
   us:
     address: 0x09EF3C1C

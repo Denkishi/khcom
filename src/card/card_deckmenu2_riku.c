@@ -490,9 +490,9 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
 #ifdef VERSION_EU
         DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
 #elif defined(VERSION_JP)
-        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF0, work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF0[0], work->tiles12, work->palette3, NULL, 0, 10);
 #else
-        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF8, work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF8[0], work->tiles12, work->palette3, NULL, 0, 10);
 #endif
     }
 
@@ -510,7 +510,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
                    work->tiles2, work->palette4, NULL, 0, 8);
     }
 
-    DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000, work->tiles4,
+    DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000[0], work->tiles4,
                work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     if (work->tiles7 != NULL) {
@@ -1054,11 +1054,11 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
 void* gRikuDeckTitleBannerTiles[5] = { gUnk_090A418E, gUnkEu_091926B2, gUnkEu_0919308A, gUnkEu_09192D42, gUnkEu_091929FA };
 
 void** gRikuDeckTitleBannerSprites[5] = {
-    &gUnk_09EEAFF8,
-    &gUnkEu_09F77100,
-    &gUnkEu_09F77118,
-    &gUnkEu_09F77110,
-    &gUnkEu_09F77108,
+    gUnk_09EEAFF8,
+    gUnkEu_09F77100,
+    gUnkEu_09F77118,
+    gUnkEu_09F77110,
+    gUnkEu_09F77108,
 };
 
 u8* gRikuDeckEquipMarkerTiles[5] = { gUnkEu_094EAD64, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };

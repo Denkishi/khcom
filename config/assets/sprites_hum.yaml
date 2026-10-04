@@ -283,7 +283,6 @@ entries:
     address: 0x09F5C5C0
 - name: gUnk_09EE17BC
   record: AnimTable
-  scalar: true
   items: [gUnk_08B5A868]
   us:
     address: 0x09EE17BC

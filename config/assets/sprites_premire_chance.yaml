@@ -43,7 +43,6 @@ entries:
     address: 0x09F75F84
 - name: gUnk_09EEA170
   record: AnimTable
-  scalar: true
   items: [gUnk_0908BB76]
   us:
     address: 0x09EEA170
@@ -62,7 +61,6 @@ entries:
     address: 0x09F75F8C
 - name: gUnk_09EEA17C
   record: AnimTable
-  scalar: true
   items: [gUnk_0908BFA8]
   us:
     address: 0x09EEA17C

@@ -2017,7 +2017,7 @@ s32 UpdateStockInfoMessage(StockInfoWork* work) {
 }
 
 void StockInfo_2(StockInfoWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEA28C, work->tiles, work->palette, NULL, 0, 50);
+    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEA28C[0], work->tiles, work->palette, NULL, 0, 50);
     TaskPoolDraw(&work->tasks);
 }
 

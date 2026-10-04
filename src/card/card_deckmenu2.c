@@ -4188,7 +4188,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     }
 
     if (work->view != 13) {
-        DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000, work->tiles4, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+        DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000[0], work->tiles4, work->palette, NULL, SPRITE_PRIORITY(2), 10);
     }
 
     if (work->tiles6 != NULL) {
@@ -4201,7 +4201,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
 #ifdef VERSION_EU
                    gDeckTitleBannerSprites[gLanguage][0],
 #else
-                   gUnk_09EEAFF0,
+                   gUnk_09EEAFF0[0],
 #endif
                    work->tiles12, work->palette3, NULL, 0, 10);
     }
@@ -4223,7 +4223,7 @@ static void Deckmenu2_2(DeckMenuWork* work) {
             DrawSprite(120, 80, gDeckCommandMenuSprites[gLanguage][0], work->tiles3, work->palette2, NULL, 0, 8);
         }
 #else
-        DrawSprite(120, 80, gUnk_09EEAFE8, work->tiles3, work->palette2, NULL, 0, 8);
+        DrawSprite(120, 80, gUnk_09EEAFE8[0], work->tiles3, work->palette2, NULL, 0, 8);
 #endif
         DrawDeckNames(work, 0);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
@@ -7499,21 +7499,21 @@ void** gDeckButtonLabelSprites[5] = { gUnk_09EEAFD4, gUnkEu_09F77070, gUnkEu_09F
 void* gDeckCommandMenuTiles[5] = { gUnk_090A261E, gUnkEu_0918B8F2, gUnkEu_0919016A, gUnkEu_0918E942, gUnkEu_0918D11A };
 
 void** gDeckCommandMenuSprites[5] = {
-    &gUnk_09EEAFE8,
-    &gUnkEu_09F770C0,
-    &gUnkEu_09F770D8,
-    &gUnkEu_09F770D0,
-    &gUnkEu_09F770C8,
+    gUnk_09EEAFE8,
+    gUnkEu_09F770C0,
+    gUnkEu_09F770D8,
+    gUnkEu_09F770D0,
+    gUnkEu_09F770C8,
 };
 
 void* gDeckTitleBannerTiles[5] = { gUnk_090A3E46, gUnkEu_09191992, gUnkEu_0919236A, gUnkEu_09192022, gUnkEu_09191CDA };
 
 void** gDeckTitleBannerSprites[5] = {
-    &gUnk_09EEAFF0,
-    &gUnkEu_09F770E0,
-    &gUnkEu_09F770F8,
-    &gUnkEu_09F770F0,
-    &gUnkEu_09F770E8,
+    gUnk_09EEAFF0,
+    gUnkEu_09F770E0,
+    gUnkEu_09F770F8,
+    gUnkEu_09F770F0,
+    gUnkEu_09F770E8,
 };
 
 u8* gDeckEquipMarkerTiles[5] = { gUnkEu_094EAD64, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };

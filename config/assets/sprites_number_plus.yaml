@@ -43,7 +43,6 @@ entries:
     address: 0x09F74628
 - name: gUnk_09EE91AC
   record: AnimTable
-  scalar: true
   items: [gUnk_090451B6]
   us:
     address: 0x09EE91AC

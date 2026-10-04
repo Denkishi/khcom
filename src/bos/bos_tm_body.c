@@ -647,8 +647,8 @@ void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
     work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    work->gfx = gUnk_09EF3950;
-    work->gfx2 = gUnk_09EF3958;
+    work->gfx = gUnk_09EF3950[0];
+    work->gfx2 = gUnk_09EF3958[0];
     work->gfx3 = gUnk_09EF397C[0];
     work->gfx4 = gUnk_09EF3960[0];
     work->tm = arg;

@@ -82,7 +82,6 @@ entries:
     address: 0x09F5A3D0
 - name: gUnk_09EDF7B8
   record: AnimTable
-  scalar: true
   items: [gUnk_08950CEA]
   us:
     address: 0x09EDF7B8
@@ -101,7 +100,6 @@ entries:
     address: 0x09F5A414
 - name: gUnk_09EDF7FC
   record: AnimTable
-  scalar: true
   items: [gUnk_089535FA]
   us:
     address: 0x09EDF7FC
@@ -228,7 +226,6 @@ entries:
     address: 0x09F5A548
 - name: gUnk_09EDF910
   record: AnimTable
-  scalar: true
   items: [gUnk_0895D994]
   us:
     address: 0x09EDF910
@@ -679,7 +676,6 @@ entries:
     address: 0x09F5A9C8
 - name: gUnk_09EDFD88
   record: AnimTable
-  scalar: true
   items: [gUnk_089AB208]
   us:
     address: 0x09EDFD88
@@ -698,7 +694,6 @@ entries:
     address: 0x09F5A9E4
 - name: gUnk_09EDFDB8
   record: AnimTable
-  scalar: true
   items: [gUnk_089AC4C6]
   us:
     address: 0x09EDFDB8

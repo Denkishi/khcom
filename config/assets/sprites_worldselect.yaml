@@ -61,7 +61,6 @@ entries:
     address: 0x09F7C244
 - name: gUnk_09EF1064
   record: AnimTable
-  scalar: true
   items: [gUnk_093F202A]
   us:
     address: 0x09EF1064
@@ -80,7 +79,6 @@ entries:
     address: 0x09F7C24C
 - name: gUnk_09EF106C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F213E]
   us:
     address: 0x09EF106C
@@ -99,7 +97,6 @@ entries:
     address: 0x09F7C254
 - name: gUnk_09EF1074
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2252]
   us:
     address: 0x09EF1074
@@ -118,7 +115,6 @@ entries:
     address: 0x09F7C25C
 - name: gUnk_09EF107C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2366]
   us:
     address: 0x09EF107C
@@ -137,7 +133,6 @@ entries:
     address: 0x09F7C264
 - name: gUnk_09EF1084
   record: AnimTable
-  scalar: true
   items: [gUnk_093F247A]
   us:
     address: 0x09EF1084
@@ -156,7 +151,6 @@ entries:
     address: 0x09F7C26C
 - name: gUnk_09EF108C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F258E]
   us:
     address: 0x09EF108C
@@ -175,7 +169,6 @@ entries:
     address: 0x09F7C274
 - name: gUnk_09EF1094
   record: AnimTable
-  scalar: true
   items: [gUnk_093F26A2]
   us:
     address: 0x09EF1094
@@ -194,7 +187,6 @@ entries:
     address: 0x09F7C27C
 - name: gUnk_09EF109C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F27B6]
   us:
     address: 0x09EF109C
@@ -213,7 +205,6 @@ entries:
     address: 0x09F7C284
 - name: gUnk_09EF10A4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F28CA]
   us:
     address: 0x09EF10A4
@@ -232,7 +223,6 @@ entries:
     address: 0x09F7C28C
 - name: gUnk_09EF10AC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F29DE]
   us:
     address: 0x09EF10AC
@@ -251,7 +241,6 @@ entries:
     address: 0x09F7C294
 - name: gUnk_09EF10B4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2AF2]
   us:
     address: 0x09EF10B4
@@ -270,7 +259,6 @@ entries:
     address: 0x09F7C29C
 - name: gUnk_09EF10BC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2C06]
   us:
     address: 0x09EF10BC
@@ -289,7 +277,6 @@ entries:
     address: 0x09F7C2A4
 - name: gUnk_09EF10C4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2D1A]
   us:
     address: 0x09EF10C4
@@ -308,7 +295,6 @@ entries:
     address: 0x09F7C2AC
 - name: gUnk_09EF10CC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2E2E]
   us:
     address: 0x09EF10CC
@@ -327,7 +313,6 @@ entries:
     address: 0x09F7C2B4
 - name: gUnk_09EF10D4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F2F42]
   us:
     address: 0x09EF10D4
@@ -346,7 +331,6 @@ entries:
     address: 0x09F7C2BC
 - name: gUnk_09EF10DC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F3056]
   us:
     address: 0x09EF10DC
@@ -365,7 +349,6 @@ entries:
     address: 0x09F7C2C4
 - name: gUnk_09EF10E4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F316A]
   us:
     address: 0x09EF10E4
@@ -384,7 +367,6 @@ entries:
     address: 0x09F7C2CC
 - name: gUnk_09EF10EC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F327E]
   us:
     address: 0x09EF10EC
@@ -403,7 +385,6 @@ entries:
     address: 0x09F7C2D4
 - name: gUnk_09EF10F4
   record: AnimTable
-  scalar: true
   items: [gUnk_093F3392]
   us:
     address: 0x09EF10F4
@@ -422,7 +403,6 @@ entries:
     address: 0x09F7C2DC
 - name: gUnk_09EF10FC
   record: AnimTable
-  scalar: true
   items: [gUnk_093F34A6]
   us:
     address: 0x09EF10FC
@@ -441,7 +421,6 @@ entries:
     address: 0x09F7C2E4
 - name: gUnk_09EF1104
   record: AnimTable
-  scalar: true
   items: [gUnk_093F35BA]
   us:
     address: 0x09EF1104
@@ -460,7 +439,6 @@ entries:
     address: 0x09F7C2EC
 - name: gUnk_09EF110C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F36CE]
   us:
     address: 0x09EF110C
@@ -479,7 +457,6 @@ entries:
     address: 0x09F7C2F4
 - name: gUnk_09EF1114
   record: AnimTable
-  scalar: true
   items: [gUnk_093F37E2]
   us:
     address: 0x09EF1114
@@ -498,7 +475,6 @@ entries:
     address: 0x09F7C2FC
 - name: gUnk_09EF111C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F38F6]
   us:
     address: 0x09EF111C
@@ -517,7 +493,6 @@ entries:
     address: 0x09F7C304
 - name: gUnk_09EF1124
   record: AnimTable
-  scalar: true
   items: [gUnk_093F3A0A]
   us:
     address: 0x09EF1124
@@ -536,7 +511,6 @@ entries:
     address: 0x09F7C30C
 - name: gUnk_09EF112C
   record: AnimTable
-  scalar: true
   items: [gUnk_093F3B1E]
   us:
     address: 0x09EF112C
@@ -546,7 +520,6 @@ entries:
     address: 0x09F7C310
 - name: gUnk_09EF1130
   record: SpriteTable
-  scalar: true
   items: [gUnk_093F3C28]
   us:
     address: 0x09EF1130
@@ -556,7 +529,6 @@ entries:
     address: 0x09F7C314
 - name: gUnk_09EF1134
   record: AnimTable
-  scalar: true
   items: [gUnk_093F3C32]
   us:
     address: 0x09EF1134

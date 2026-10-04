@@ -403,7 +403,7 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->cardRequests = 0;
     work->breakCount = 0;
     work->falCount = 0;
-    work->unk_076 = 0;
+    work->hurtTimer = 0;
     work->unk_078 = 0;
     work->cardDelay = 0x1E000;
     work->groundCount = 0;
@@ -1361,8 +1361,8 @@ u8 BosLstAttackKama(BosLstWork* work) {
         if (work->z < -0x1E000) {
             *p8C = 3;
             work->timer = 0;
-            work->unk_094 = work->y;
-            work->unk_098 = work->z;
+            work->kamaStartY = work->y;
+            work->kamaStartZ = work->z;
 
             if (gBtlWork->actor->x > 0xF7FF) {
                 work->kamaStartX = (GetRandom() % 41 << 8) + 0xB000;
@@ -2297,7 +2297,7 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
         p->hurtTimer = 20;
-        work->unk_076 = 20;
+        work->hurtTimer = 20;
 
         if (p->state == 5) {
             ClearBtlObjActionFlags(obj);
@@ -2447,7 +2447,7 @@ u8 task_bos_lst_1(BosLstWork* work) {
     case BTL_REACTION_GRAVITY:
         work->cardDelay = work->cardDelay * 3;
         work->cardDelay = work->cardDelay / 4;
-        work->unk_076 = 20;
+        work->hurtTimer = 20;
         BosLstSpawnFal(work, 0);
         BosLstSpawnFal(work, 0);
         BosLstSpawnFal(work, 0);

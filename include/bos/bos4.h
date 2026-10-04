@@ -22,8 +22,8 @@ typedef struct BoogieExplosiondiceWork {
     TaskPool tasks;
     BtlObj obj;
     u32 vz;
-    u32 unk_154;
-    u8 unk_158;
+    u32 speed;
+    u8 angle;
     u8 unk_159[0x3];
     BoogieWork* boogie;
 } BoogieExplosiondiceWork;

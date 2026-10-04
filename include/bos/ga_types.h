@@ -45,7 +45,7 @@ typedef struct GaEntryWork {
     u8 bobAngle;
     u8 unk_159;
     u16 flags;
-    s16 unk_15C;
+    s16 counter;
     u16 x2;
     u16 y2;
     u8 unk_162[0x02];

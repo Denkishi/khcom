@@ -3656,7 +3656,7 @@ BosUrsulaIsFacingLeft	0x080dc510	24	0x080dc530	global
 BosUrsulaIsGimmickActive	0x080dc528	28	0x080dc548	global
 BosUrsulaObjectsGone	0x080dc544	52	0x080dc564	global
 BosUrsulaIsGimmickStarting	0x080dc578	56	0x080dc598	global
-func_080DC5B0	0x080dc5b0	56	0x080dc5d0	global
+BosUrsulaIsGimmickInProgress	0x080dc5b0	56	0x080dc5d0	global
 BosUrsulaGetHpPhase	0x080dc5e8	64	0x080dc608	global
 BosUrsulaIsDefeated	0x080dc628	24	0x080dc648	global
 task_bos_ursula_map_0	0x080dc640	236	0x080dc660	named

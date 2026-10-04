@@ -340,19 +340,19 @@ static TaskDesc sTaskDescBosMdMap = {
     sizeof(MdMapWork),
 };
 
-static const MdFirePoint sUnk_09992E98[4] = { { 88, 288, 240, 0 }, { 56, 312, 330, 0 }, { 72, 336, 420, 0 }, { 104, 360, 510, 0 } };
+static const MdFirePoint sMdFirePoints0[4] = { { 88, 288, 240, 0 }, { 56, 312, 330, 0 }, { 72, 336, 420, 0 }, { 104, 360, 510, 0 } };
 
-static const MdFirePoint sUnk_09992EB8[4] = { { 128, 304, 0, 0 }, { 104, 324, 0, 0 }, { 144, 344, 0, 0 }, { 112, 364, 0, 0 } };
+static const MdFirePoint sMdFirePoints1[4] = { { 128, 304, 0, 0 }, { 104, 324, 0, 0 }, { 144, 344, 0, 0 }, { 112, 364, 0, 0 } };
 
-static const MdFirePoint sUnk_09992ED8[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
+static const MdFirePoint sMdFirePoints2[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
 
 static const MdFireDef sMdFireDefs[6] = {
-    { sUnk_09992E98, 4, 0 },
-    { sUnk_09992EB8, 4, 0 },
-    { sUnk_09992ED8, 4, 0 },
-    { sUnk_09992E98, 4, 0 },
-    { sUnk_09992E98, 4, 0 },
-    { sUnk_09992E98, 4, 0 },
+    { sMdFirePoints0, 4, 0 },
+    { sMdFirePoints1, 4, 0 },
+    { sMdFirePoints2, 4, 0 },
+    { sMdFirePoints0, 4, 0 },
+    { sMdFirePoints0, 4, 0 },
+    { sMdFirePoints0, 4, 0 },
 };
 
 static const EmyKind sBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };

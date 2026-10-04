@@ -201,7 +201,7 @@ void task_hum_riku_0(RikuWork* work) {
     work->unk_1C4 = 0;
     work->flags = 0;
     work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
-    work->unk_1CC = 0;
+    work->afterimageTimer = 0;
 
     if (gBtlWork->battleId != 0xA1) {
         work->base.stockMoves = sHumRikuStockMoves[0];
@@ -1045,7 +1045,7 @@ void task_hum_riku_2(RikuWork* work) {
     HumDraw(&work->base);
 
     if ((work->flags & RIKU_FLAG_AFTERIMAGE) && (work->sub.flags & HUM_SUB_FLAG_HIDDEN)) {
-        switch (work->unk_1CC % 2) {
+        switch (work->afterimageTimer % 2) {
         case 0:
             RikuDrawAfterimage(work, &work->spawns[2]);
             break;
@@ -1054,7 +1054,7 @@ void task_hum_riku_2(RikuWork* work) {
             break;
         }
 
-        work->unk_1CC++;
+        work->afterimageTimer++;
     }
 
     work->spawns[4] = work->spawns[3];

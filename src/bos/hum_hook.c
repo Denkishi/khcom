@@ -103,7 +103,7 @@ void HookJumpOffset(CloudWork* work, s16 a, s32 b) {
     w->targetY = act->y;
     w->state = 0x16;
     w->stateTimer = 0;
-    work->unk_188 = -b;
+    work->speed = -b;
 }
 
 void HookJumpTo(CloudWork* work, s32 a, s32 b) {
@@ -111,7 +111,7 @@ void HookJumpTo(CloudWork* work, s32 a, s32 b) {
     work->base.targetY = b;
     work->base.state = 0x16;
     work->base.stateTimer = 0;
-    work->unk_188 = -0x680;
+    work->speed = -0x680;
 }
 
 u8 HookTryJumpAway(CloudWork* work) {
@@ -154,7 +154,7 @@ void task_hum_hook_0(HookWork* work, void* arg) {
     }
 
     work->base.flags |= HUM_FLAG_BOSS_DEATH;
-    work->unk_188 = 0;
+    work->speed = 0;
     work->playerSlide = 0;
     work->slide = 0;
     work->angle = 0;
@@ -681,7 +681,7 @@ u8 task_hum_hook_1(HookWork* work) {
         if (AnimIsFinished(&work->base.anim)) {
             work->base.stateTimer = 0;
             work->base.state = 23;
-            work->base.vz = w->unk_188;
+            work->base.vz = w->speed;
         } else {
             work->base.stateTimer++;
         }

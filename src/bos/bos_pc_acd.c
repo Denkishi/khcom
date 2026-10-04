@@ -48,7 +48,7 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
     work->x = -1;
     work->y = -1;
-    work->unk_014 = -1;
+    work->z = -1;
     work->shared = arg;
     anim = &work->anim;
     AnimInit(anim, gUnk_09EFABA4, gUnk_09EFAB68);
@@ -117,7 +117,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
 
     work->x = pos->x;
     work->y = pos->y - 0x400;
-    work->unk_014 = 0;
+    work->z = 0;
 
     if (shared->unk_04 == 1) {
         tbl = gUnk_09EFAB68;

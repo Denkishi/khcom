@@ -169,9 +169,9 @@ typedef struct PcGfxSet {
 typedef struct PcShot {
     s32 targetX;
     s32 targetY;
-    u16 unk_08;
+    u16 steps;
     u8 unk_0A[0x2];
-    s32 unk_0C;
+    s32 targetScale;
 } PcShot;
 
 typedef struct PcShared {
@@ -243,7 +243,7 @@ typedef struct PcAcdWork {
     ObjPalette* palette;
     s32 x;
     s32 y;
-    s32 unk_014;
+    s32 z;
     u8 acdOff;
     u8 unk_019[0x3];
     PcShared* shared;
@@ -347,7 +347,7 @@ typedef struct BosLstWork {
     u16 cardRequests;
     s16 breakCount;
     u16 falCount;
-    u16 unk_076;
+    u16 hurtTimer;
     u16 unk_078;
     s16 defeatTimer;
     s32 cardDelay;
@@ -358,8 +358,8 @@ typedef struct BosLstWork {
     s16 kamaStep;
     s16 kamaCount;
     s32 kamaStartX;
-    s32 unk_094;
-    s32 unk_098;
+    s32 kamaStartY;
+    s32 kamaStartZ;
     s32 kamaTargetX;
     s32 kamaTargetY;
     s32 kamaTargetZ;

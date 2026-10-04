@@ -115,11 +115,11 @@ TaskDesc gTaskDescBosBoogieMap = {
 
 static const BosMapanimeFrame sBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-static const BosMapanimeDef sUnk_096FE034 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0x7C00, 0x0100, 0x0300, 0, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef0 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED478, 0x7C00, 0x0100, 0x0300, 0, 0 };
 
-static const BosMapanimeDef sUnk_096FE04C = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0x7D00, 0x0100, 0x0300, 0, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef1 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED578, 0x7D00, 0x0100, 0x0300, 0, 0 };
 
-static const BosMapanimeDef sUnk_096FE064 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0x7E00, 0x0100, 0x0300, 0, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef2 = { sBosBoogieMapanimeFrames, 5, 0, gUnk_097ED678, 0x7E00, 0x0100, 0x0300, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
@@ -649,8 +649,8 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->state = 0;
     work->timer = 0;
     work->vz = 0;
-    work->unk_154 = GetRandom() % 437 + 76;
-    work->unk_158 = GetRandom() % 128 + 0x40;
+    work->speed = GetRandom() % 437 + 76;
+    work->angle = GetRandom() % 128 + 0x40;
     p = gBtlWork->actor;
     work->obj.x = p->x;
     work->obj.y = p->y;
@@ -889,9 +889,9 @@ u8 task_bos_boogie_map_1() {
 }
 
 void task_bos_boogie_mapanime_0(BoogieMapanimeWork* work) {
-    BosMapanimeInit(&work->anims[0], &sUnk_096FE034);
-    BosMapanimeInit(&work->anims[1], &sUnk_096FE04C);
-    BosMapanimeInit(&work->anims[2], &sUnk_096FE064);
+    BosMapanimeInit(&work->anims[0], &sBosBoogieMapanimeDef0);
+    BosMapanimeInit(&work->anims[1], &sBosBoogieMapanimeDef1);
+    BosMapanimeInit(&work->anims[2], &sBosBoogieMapanimeDef2);
 }
 
 u8 task_bos_boogie_mapanime_1(BoogieMapanimeWork* work) {

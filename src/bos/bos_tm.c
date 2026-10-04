@@ -20,9 +20,9 @@
 #include "types.h"
 
 s16 gBosTmActorZ EWRAM_COMMON(4);
-s16 gUnk_0203AB40 EWRAM_COMMON(4);
+s16 gBosTmActorOriginZ EWRAM_COMMON(4);
 s16 gBosTmActorY EWRAM_COMMON(4);
-s16 gUnk_0203AB48 EWRAM_COMMON(4);
+s16 gBosTmBossY EWRAM_COMMON(4);
 
 static const BattleBackgroundDef sBosTmBattleBackgroundDef = {
     gUnk_0964AE84, 0x8000, { 0, 0 }, gUnk_096FB164, 0x140, { 0, 0 }, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
@@ -202,9 +202,9 @@ u8 task_bos_tm_1(TmWork* work) {
     }
 
     gBosTmActorY = gBtlWork->actor->y >> 8;
-    gUnk_0203AB40 = gBtlWork->actor->originZ >> 8;
+    gBosTmActorOriginZ = gBtlWork->actor->originZ >> 8;
     gBosTmActorZ = gBtlWork->actor->z >> 8;
-    gUnk_0203AB48 = gBtlWork->bossY >> 8;
+    gBosTmBossY = gBtlWork->bossY >> 8;
 
     if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && work->state != 13) {
         if (gBtlWork->actor->originZ <= -0x2D00) {

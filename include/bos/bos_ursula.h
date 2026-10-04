@@ -122,7 +122,7 @@ u8 BosUrsulaIsFacingLeft();
 u8 BosUrsulaIsGimmickActive();
 u8 BosUrsulaObjectsGone();
 u8 BosUrsulaIsGimmickStarting();
-u8 func_080DC5B0();
+u8 BosUrsulaIsGimmickInProgress();
 u32 BosUrsulaGetHpPhase();
 u8 BosUrsulaIsDefeated();
 s32 BosUrsulaGetTakoPlatformRadius(u8 a);

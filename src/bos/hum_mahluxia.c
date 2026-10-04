@@ -212,7 +212,7 @@ void task_hum_mahluxia_0(MahluxiaWork* work) {
     work->flags = 0;
     work->hoverZ = -0x300;
     work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
-    work->unk_1D8 = 0;
+    work->afterimageTimer = 0;
     AnimChangeWithDef(sHumMahluxiaAnimDefs, &work->base.anim, 0, ANIM_FLAG_LOOP, work->base.tiles);
     MahluxiaSaveAfterimage(work, &work->spawns[0]);
     work->spawns[1] = work->spawns[0];
@@ -764,7 +764,7 @@ void task_hum_mahluxia_2(MahluxiaWork* work) {
     HumDraw(&work->base);
 
     if ((work->flags & MAHLUXIA_FLAG_AFTERIMAGE) && (work->sub.flags & HUM_SUB_FLAG_HIDDEN)) {
-        switch (work->unk_1D8 % 12) {
+        switch (work->afterimageTimer % 12) {
         case 0:
         case 2:
         case 4:
@@ -787,7 +787,7 @@ void task_hum_mahluxia_2(MahluxiaWork* work) {
             break;
         }
 
-        work->unk_1D8++;
+        work->afterimageTimer++;
     }
 
     work->spawns[8] = work->spawns[7];

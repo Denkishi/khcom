@@ -77,7 +77,7 @@ void CloudJumpOffset(CloudWork* work, s16 a, s32 b) {
     w->base.targetY = obj->y;
     w->base.state = 0x19;
     w->base.stateTimer = 0;
-    work->unk_188 = -b;
+    work->speed = -b;
     work->state = 0;
 }
 
@@ -86,7 +86,7 @@ void CloudJumpTo(CloudWork* work, s32 a, s32 b) {
     work->base.targetY = b;
     work->base.state = 0x19;
     work->base.stateTimer = 0;
-    work->unk_188 = -0x500;
+    work->speed = -0x500;
     work->nextState = 0;
 }
 
@@ -130,7 +130,7 @@ s32 CloudTryJumpAway(CloudWork* work) {
 
 void task_hum_cloud_0(CloudWork* work, void* obj) {
     HumInit(&work->base, &sHumCloudDef);
-    work->unk_188 = 0;
+    work->speed = 0;
     work->base.stockMoves = sHumCloudStockMoves[0];
 }
 
@@ -336,7 +336,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         if (work->base.stateTimer > 3) {
             work->base.stateTimer = 0;
             work->base.state = 26;
-            work->base.vz = w->unk_188;
+            work->base.vz = w->speed;
         } else {
             work->base.stateTimer++;
         }
@@ -415,21 +415,21 @@ u8 task_hum_cloud_1(CloudWork* work) {
 
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
-            w->unk_188 = 0;
+            w->speed = 0;
             work->base.targetZ = act->z;
         }
 
-        ret = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->unk_188);
+        ret = HumMoveToward(&work->base, work->base.targetX, work->base.targetY, w->speed);
 
         if (ret) {
             work->base.state = 26;
             w->nextState = 0;
             work->base.stateTimer = 0;
         } else {
-            w->unk_188 += 76;
+            w->speed += 76;
 
-            if ((s32)w->unk_188 > 0x800) {
-                w->unk_188 = 0x800;
+            if ((s32)w->speed > 0x800) {
+                w->speed = 0x800;
             }
 
             d = (work->base.targetX - act->x) >> 3;
@@ -438,8 +438,8 @@ u8 task_hum_cloud_1(CloudWork* work) {
                 d = -d;
             }
 
-            if (d < (s32)w->unk_188) {
-                w->unk_188 = d;
+            if (d < (s32)w->speed) {
+                w->speed = d;
             }
 
             {
@@ -545,7 +545,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             work->base.targetY = y;
             work->base.state = 25;
             work->base.stateTimer = 0;
-            w->unk_188 = -0x500;
+            w->speed = -0x500;
             w->nextState = 32;
         }
 
@@ -554,11 +554,11 @@ u8 task_hum_cloud_1(CloudWork* work) {
         s32 d;
 
         if (work->base.stateTimer == 0) {
-            w->unk_18E = 0;
+            w->attackPhase = 0;
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 18, 0, w->base.tiles);
-        } else if ((s16)w->unk_18E == 0 && AnimIsFinished(&work->base.anim)) {
+        } else if ((s16)w->attackPhase == 0 && AnimIsFinished(&work->base.anim)) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 19, 0, w->base.tiles);
-            w->unk_18E++;
+            w->attackPhase++;
         } else if (AnimIsFinished(&work->base.anim)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
@@ -570,7 +570,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
         HumFaceTarget(&work->base, 1);
 
         if (work->base.anim.timer == 0) {
-            if ((s16)w->unk_18E == 0) {
+            if ((s16)w->attackPhase == 0) {
                 switch (AnimGetFrame(&work->base.anim)) {
                 case 2:
                     m4aSongNumStart(SONG_VO_MKU_ATTACK00);
@@ -679,7 +679,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
     case 29: {
         if (work->base.stateTimer == 0) {
             AnimChangeWithDef(sHumCloudAnimDefs, &w->base.anim, 14, 0, w->base.tiles);
-            w->unk_188 = 0;
+            w->speed = 0;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 work->base.targetX = (gBtlWork->xMin + 50) << 8;
@@ -699,18 +699,18 @@ u8 task_hum_cloud_1(CloudWork* work) {
             s32 v;
         v = (work->base.targetZ - act->z) >> 3;
 
-        if (v > (s32)w->unk_188) {
-            v = w->unk_188;
+        if (v > (s32)w->speed) {
+            v = w->speed;
         }
 
-        if (v < -(s32)w->unk_188) {
-            v = -w->unk_188;
+        if (v < -(s32)w->speed) {
+            v = -w->speed;
         }
 
         act->z += v;
         }
 
-        w->unk_188 += 0x80;
+        w->speed += 0x80;
 
         if ((act->z - work->base.targetZ >= 0) ? act->z - work->base.targetZ <= 0xFFF : work->base.targetZ - act->z <= 0xFFF) {
             work->base.state = 30;

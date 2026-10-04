@@ -5666,8 +5666,8 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             }
 
             BgFxStartPcShot(p->x - 0xC00, p->y, p->z, sPcShots[idx].targetX,
-                          sPcShots[idx].targetY, -0x1000, 0xF7, sPcShots[idx].unk_08,
-                          sPcShots[idx].unk_0C);
+                          sPcShots[idx].targetY, -0x1000, 0xF7, sPcShots[idx].steps,
+                          sPcShots[idx].targetScale);
             m4aSongNumStart(SONG_BTL_PK_BEEM);
             break;
         case 5:

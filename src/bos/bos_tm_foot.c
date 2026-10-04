@@ -26,13 +26,13 @@
 #include "taskpool.h"
 #include "types.h"
 
-s16 gUnk_0203AC60 EWRAM_COMMON(4);
-s32 gUnk_0203AC64 EWRAM_COMMON(4);
+s16 gBosTmArmImpactViewX EWRAM_COMMON(4);
+s32 gBosTmArmImpactViewFixedX EWRAM_COMMON(4);
 s16 gUnk_0203AC68 EWRAM_COMMON(4);
-s16 gUnk_0203AC6C EWRAM_COMMON(4);
+s16 gBosTmArmImpactViewY EWRAM_COMMON(4);
 s32 gUnk_0203AC70 EWRAM_COMMON(4);
-u16 gUnk_0203AC74 EWRAM_COMMON(4);
-s32 gUnk_0203AC78 EWRAM_COMMON(4);
+u16 gBosTmArmSpinTimer EWRAM_COMMON(4);
+s32 gBosTmArmImpactViewFixedY EWRAM_COMMON(4);
 
 static u8 sBosTmFootIdleFrames[8] = { 2, 1, 0, 1, 2, 3, 4, 3 };
 
@@ -1086,12 +1086,12 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     TaskPoolInit(&work->tasks, 2);
     CreateBosTmClbTask(&work->tasks, &work->clb, &work->tips[0]);
     CreateBosTmClbTask(&work->tasks, &work->clb2, &work->tips[1]);
-    gUnk_0203AC74 = 0;
-    gUnk_0203AC64 = 0;
-    gUnk_0203AC78 = 0;
+    gBosTmArmSpinTimer = 0;
+    gBosTmArmImpactViewFixedX = 0;
+    gBosTmArmImpactViewFixedY = 0;
     gUnk_0203AC70 = 0;
-    gUnk_0203AC60 = 0;
-    gUnk_0203AC6C = 0;
+    gBosTmArmImpactViewX = 0;
+    gBosTmArmImpactViewY = 0;
     gUnk_0203AC68 = 0;
 }
 
@@ -1328,10 +1328,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer == 37) {
-            gUnk_0203AC64 = gBtlWork->viewX;
-            gUnk_0203AC78 = gBtlWork->viewY;
-            gUnk_0203AC60 = gUnk_0203AC64 >> 8;
-            gUnk_0203AC6C = gUnk_0203AC78 >> 8;
+            gBosTmArmImpactViewFixedX = gBtlWork->viewX;
+            gBosTmArmImpactViewFixedY = gBtlWork->viewY;
+            gBosTmArmImpactViewX = gBosTmArmImpactViewFixedX >> 8;
+            gBosTmArmImpactViewY = gBosTmArmImpactViewFixedY >> 8;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(0x10D00, 0x15800);
@@ -1342,10 +1342,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BtlMapStartShake();
             m4aSongNumStart(SONG_BTL_LB_RUMB);
             ApplyAttackBox(238, gBtlWork->viewX, gBtlWork->viewY, 0, 320, 240, 1);
-            gUnk_0203AC64 = gBtlWork->viewX;
-            gUnk_0203AC78 = gBtlWork->viewY;
-            gUnk_0203AC60 = gUnk_0203AC64 >> 8;
-            gUnk_0203AC6C = gUnk_0203AC78 >> 8;
+            gBosTmArmImpactViewFixedX = gBtlWork->viewX;
+            gBosTmArmImpactViewFixedY = gBtlWork->viewY;
+            gBosTmArmImpactViewX = gBosTmArmImpactViewFixedX >> 8;
+            gBosTmArmImpactViewY = gBosTmArmImpactViewFixedY >> 8;
         }
 
         if (work->timer > 50) {
@@ -1372,10 +1372,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         }
 
         if (work->timer == 52) {
-            gUnk_0203AC64 = gBtlWork->viewX;
-            gUnk_0203AC78 = gBtlWork->viewY;
-            gUnk_0203AC60 = gUnk_0203AC64 >> 8;
-            gUnk_0203AC6C = gUnk_0203AC78 >> 8;
+            gBosTmArmImpactViewFixedX = gBtlWork->viewX;
+            gBosTmArmImpactViewFixedY = gBtlWork->viewY;
+            gBosTmArmImpactViewX = gBosTmArmImpactViewFixedX >> 8;
+            gBosTmArmImpactViewY = gBosTmArmImpactViewFixedY >> 8;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
                 BgFxStartGroundImpact(0x10D00, 0x15800);
@@ -1386,10 +1386,10 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BtlMapStartShake();
             m4aSongNumStart(SONG_BTL_LB_RUMB);
             ApplyAttackBox(238, gBtlWork->viewX, gBtlWork->viewY, 0, 320, 240, 1);
-            gUnk_0203AC64 = gBtlWork->viewX;
-            gUnk_0203AC78 = gBtlWork->viewY;
-            gUnk_0203AC60 = gUnk_0203AC64 >> 8;
-            gUnk_0203AC6C = gUnk_0203AC78 >> 8;
+            gBosTmArmImpactViewFixedX = gBtlWork->viewX;
+            gBosTmArmImpactViewFixedY = gBtlWork->viewY;
+            gBosTmArmImpactViewX = gBosTmArmImpactViewFixedX >> 8;
+            gBosTmArmImpactViewY = gBosTmArmImpactViewFixedY >> 8;
         }
 
         if (work->timer > 65) {
@@ -1424,7 +1424,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->timer++;
         }
 
-        gUnk_0203AC74 = work->timer;
+        gBosTmArmSpinTimer = work->timer;
         break;
     case 17:
         return;

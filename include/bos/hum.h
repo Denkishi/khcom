@@ -19,9 +19,9 @@ typedef struct VixenSub {
 
 typedef struct CloudWork {
     HumWork base;
-    u32 unk_188;
+    u32 speed;
     u16 state;
-    u16 unk_18E;
+    u16 attackPhase;
     u16 nextState;
     u8 unk_192[0x02];
 } CloudWork;
@@ -33,7 +33,7 @@ enum HookFlag {
 
 typedef struct HookWork {
     HumWork base;
-    u32 unk_188;
+    u32 speed;
     s32 playerSlide;
     s32 slide;
     u16 angle;
@@ -187,7 +187,7 @@ typedef struct MahluxiaWork {
     u16 flags;
     u8 unk_1D2[0x02];
     s32 swingBaseY;
-    s16 unk_1D8;
+    s16 afterimageTimer;
     u8 unk_1DA[0x02];
     RikuSpawn spawns[9];
     s32 subSpeed;
@@ -376,7 +376,7 @@ typedef struct RikuWork {
     s32 unk_1C4;
     u16 unk_1C8;
     u16 flags;
-    s16 unk_1CC;
+    s16 afterimageTimer;
     u16 unk_1CE;
     RikuSpawn spawns[9];
     u16 dashCount;

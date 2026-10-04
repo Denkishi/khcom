@@ -795,7 +795,7 @@ u8 BosUrsulaIsGimmickStarting() {
     return 1;
 }
 
-u8 func_080DC5B0() {
+u8 BosUrsulaIsGimmickInProgress() {
     if (BosUrsulaIsGimmickActive() && (sUrsulaWork->sinkSteps != 0 || sUrsulaWork->riseSteps != 0 || sUrsulaWork->unk_15C != 0)) {
         return 1;
     }
@@ -893,10 +893,10 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
         gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
     }
 
-    if (func_080DC5B0() && work->viewYMaxTarget == 0x1E000) {
+    if (BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == 0x1E000) {
         work->viewYMaxTarget = 0x22000;
         work->viewYMaxSteps = 20;
-    } else if (!func_080DC5B0() && work->viewYMaxTarget == 0x22000) {
+    } else if (!BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == 0x22000) {
         work->viewYMaxTarget = 0x1E000;
         work->viewYMaxSteps = 20;
     }

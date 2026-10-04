@@ -327,7 +327,7 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     e->vz = 0;
     e->rotation = 0;
     e->flags = 0;
-    e->unk_15C = 0;
+    e->counter = 0;
     e->vx = e->vy = 0;
     BosGaEntryResetHome(work, i);
     e->unk_130 = 0;
@@ -464,7 +464,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
                 e->baseVx = 0;
                 e->baseVy = 0;
                 e->baseVz = 1;
-                e->unk_15C = i * 8;
+                e->counter = i * 8;
 
                 if (i == 1) {
                     e->rotation = 0;
@@ -482,9 +482,9 @@ u8 BosGaUpdateAssemble(GaWork* work) {
                 e = &work->entries[i];
 
                 if (i != 1) {
-                    if (e->unk_15C > 0) {
-                        e->unk_15C--;
-                    } else if (e->unk_15C == 0) {
+                    if (e->counter > 0) {
+                        e->counter--;
+                    } else if (e->counter == 0) {
                         e->baseX += e->baseVx;
                         e->baseY += e->baseVy;
                         e->baseZ += e->baseVz;
@@ -512,7 +512,7 @@ u8 BosGaUpdateAssemble(GaWork* work) {
                                 BosGaEntryResetHome(work, i);
                                 e->rotation = 0;
                                 e->baseVz = 0;
-                                e->unk_15C = -1;
+                                e->counter = -1;
                                 work->timer--;
 
                                 if (work->timer <= 0) {
@@ -2628,13 +2628,13 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
         if (e->index == 0) {
             BeginBossDefeat(&e->actor);
             e->mode = 0;
-            e->unk_15C = 0;
+            e->counter = 0;
             work->entries[1].mode = 0;
-            work->entries[1].unk_15C = 0;
+            work->entries[1].counter = 0;
             BosGaRequestState(work, 11);
         } else {
             e->mode = 3;
-            e->unk_15C = 0;
+            e->counter = 0;
 
             if (work->state != 10 && work->nextState != 10) {
                 if (work->cardActionSeen) {
@@ -2703,15 +2703,15 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
         BosGaEntryUpdateFall(e);
         break;
     case 3:
-        if (e->unk_15C == 0) {
+        if (e->counter == 0) {
             e->flags |= GA_ENTRY_FLAG_HURT;
             e->flashTimer = 0;
 
             if (!BgFxIsActive()) {
                 BgFxStartEnemyDeath(e->actor.x, e->actor.y + e->actor.z, 0, 0x100);
-                e->unk_15C++;
+                e->counter++;
             }
-        } else if (e->unk_15C > 0) {
+        } else if (e->counter > 0) {
             if (work->entries[2].flags & work->entries[3].flags & work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) {
                 SetBtlObjUnhittable(&work->entries[0].actor, 0);
             }

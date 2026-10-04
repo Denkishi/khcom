@@ -320,17 +320,17 @@ void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a);
 void BosTmArmStepJointAnim(TmArmJoint* joints, TmAnim* a);
 
 extern s16 gBosTmActorZ;
-extern s16 gUnk_0203AB40;
+extern s16 gBosTmActorOriginZ;
 extern s16 gBosTmActorY;
-extern s16 gUnk_0203AB48;
+extern s16 gBosTmBossY;
 extern BtlObj gBosTmBodyObjCopy;
-extern s16 gUnk_0203AC60;
-extern s32 gUnk_0203AC64;
+extern s16 gBosTmArmImpactViewX;
+extern s32 gBosTmArmImpactViewFixedX;
 extern s16 gUnk_0203AC68;
-extern s16 gUnk_0203AC6C;
+extern s16 gBosTmArmImpactViewY;
 extern s32 gUnk_0203AC70;
-extern u16 gUnk_0203AC74;
-extern s32 gUnk_0203AC78;
+extern u16 gBosTmArmSpinTimer;
+extern s32 gBosTmArmImpactViewFixedY;
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg);
 u8 task_bos_tm_body_1(TmBodyWork* work);

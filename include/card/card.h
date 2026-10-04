@@ -308,7 +308,7 @@ typedef struct RevCountWork {
     s32 y;
 } RevCountWork;
 
-typedef char UnkStruct_08098CE4_sizechk[(sizeof(struct RevCountWork) == 0x44) ? 1 : -1];
+typedef char RevCountWork_sizechk[(sizeof(struct RevCountWork) == 0x44) ? 1 : -1];
 
 extern const s32 gLvupEffectStartOffsetX[];
 extern const s32 gLvupEffectStartOffsetY[];
@@ -477,8 +477,8 @@ typedef struct DeckExchangeWork {
     s16 rowCount;
     u8 view;
     u8 unk_6F1;
-    u8 unk_6F2;
-    u8 unk_6F3;
+    u8 prevCursorCol;
+    u8 prevCursorRow;
     u8 savedCol;
     u8 savedRow;
     u8 timer;
@@ -495,7 +495,7 @@ typedef struct DeckExchangeWork {
     u8 textSlotCount3;
     u8 textSlotCount4;
     u8 mode;
-    u8 unk_707;
+    u8 commandCursor;
     s16 x7;
     s16 y7;
     u8 textSlotCount5;
@@ -503,9 +503,9 @@ typedef struct DeckExchangeWork {
     u8 unk_70E;
     u8 unk_70F;
     u8 exitRequested;
-    u8 unk_711;
-    u8 unk_712;
-    u8 unk_713;
+    u8 barSlideTimer;
+    u8 bannerSlideTimer;
+    u8 inputDelay;
     u8 holding;
     u8 step;
     u16 gridEntryCount;
@@ -743,14 +743,14 @@ typedef struct RikuDeckMenuWork {
     u8 unk_4F3;
     u8* resultOut;
     u8 deckIndex;
-    u8 unk_4F9;
+    u8 categoryFilter;
     u8 textSlotCount;
     u8 textSlotCount2;
     u8 textSlotCount3;
     u8 textSlotCount4;
     u8 textSlotCount5;
-    u8 unk_4FF;
-    u8 unk_500;
+    u8 mode;
+    u8 commandCursor;
     u8 popupActive;
     u8 unk_502;
     u8 unk_503;
@@ -836,7 +836,7 @@ typedef struct ReloadChildWork {
     u8 retractTimer;
 } ReloadChildWork;
 
-typedef char UnkStruct_08098BE8_sizechk[(sizeof(struct ReloadChildWork) == 0x48) ? 1 : -1];
+typedef char ReloadChildWork_sizechk[(sizeof(struct ReloadChildWork) == 0x48) ? 1 : -1];
 
 typedef struct PremiumCardEffectWork {
     void* tiles;
@@ -958,7 +958,7 @@ typedef struct MapcardWork {
 typedef char MapcardWork_size[(sizeof(MapcardWork) == 0x78) ? 1 : -1];
 
 typedef struct ReloadGauge {
-    s16 unk_00;
+    s16 sine;
     u16 angle;
     s32 offsetX;
     u8 unk_08[0x05];
@@ -1360,7 +1360,7 @@ typedef struct MapSelectWork {
     u8 valueCounts[0x0A];
     u8 remainingKeys;
     u8 unk_2DB;
-    void* unk_2DC;
+    void* nextEventKey;
     MapSelectKindEntry* kindEntries;
 } MapSelectWork;
 
@@ -1465,12 +1465,12 @@ typedef struct StockInfoWork {
     TaskPool tasks;
 } StockInfoWork;
 
-typedef struct UnkStruct_080ABA80 {
+typedef struct StockKeys {
     s32 keys[6];
-} UnkStruct_080ABA80;
+} StockKeys;
 
-extern const UnkStruct_080ABA80 gTutorialEmptyKeys;
-extern const UnkStruct_080ABA80 gSoraEmptyKeys;
+extern const StockKeys gTutorialEmptyKeys;
+extern const StockKeys gSoraEmptyKeys;
 
 typedef struct GimmickCardArgs {
     s32 x;
@@ -1865,10 +1865,10 @@ u8 SoraCardBreakFall(CardDisplayWork* work, void* a);
 u8 RikuCardBreakFall(CardDisplayWork* work, void* a);
 u8 EnemyCardBreakFall(CardDisplayWork* work, void* a);
 void card_reload_0(CardDisplayWork* work, CardDisplayArgs* a);
-void func_08091048(CardDisplayWork* work, CardDisplayArgs* a);
+void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* a);
 void LoadSoraReloadCardGfx(CardDisplayWork* work);
 void Reload_Card_0(CardDisplayWork* work, CardDisplayArgs* a);
-void func_08091138(CardDisplayWork* work, CardDisplayArgs* a);
+void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* a);
 u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* a);
 u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a);
 void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* a);
@@ -1941,7 +1941,7 @@ typedef struct SelmapEventKeyWork {
     u8 slideSteps;
     u8 unk_11B;
     u8 unk_11C;
-    u8 unk_11D;
+    u8 frame;
     u8 mosaicX;
     u8 mosaicY;
     u8 mosaicTimer;
@@ -2003,7 +2003,7 @@ typedef struct PremireChanceWork {
     u8 stopped;
     u8 inputEnabled;
     u8 resultPending;
-    u8 unk_87;
+    u8 cursorHidden;
     u8 bgAnimDuration;
     u8 resultTimer;
     u8 stopTimer;
@@ -2013,7 +2013,7 @@ typedef struct PremireChanceWork {
 } PremireChanceWork;
 
 typedef struct LevelUpWork {
-    void* unk_000[8];
+    void* tilesPalettes[8];
 #ifdef VERSION_EU
     void* tiles5[3];
     u8 unk_02C[0xC];
@@ -2342,8 +2342,8 @@ extern const u8* gDeckKeyboardSymbolRows[7];
 #endif
 extern TaskDesc gTaskDescDeckCard2;
 extern TaskDesc gTaskDescEnemyUsecard;
-extern TaskDesc gUnk_09EE4B70;
-extern TaskDesc gUnk_09EE4B88;
+extern TaskDesc gTaskDescEnemyUsecardByIndex;
+extern TaskDesc gTaskDescEnemyUsecardRandom;
 #ifdef VERSION_EU
 extern void* gMapCardUiExtraTilesByLanguage[5];
 extern void** gMapCardUiSpritesByLanguage[5];
@@ -2515,8 +2515,8 @@ s32 UseSoraHeartlessCard(CardBattleWork* work);
 void UseSoraStock(CardBattleWork* work);
 void ClearSoraCardPlayFlags();
 u8 SoraStockStartUnopposedPlay(CardDisplayWork* work, void* a);
-void func_080AB22C(u8 a);
-void func_080AB4AC(u8 a);
+void BuildDebugKeybladeDeck(u8 a);
+void BuildDebugMixedDeck(u8 a);
 void func_080AB964();
 void func_080AB968();
 #ifdef VERSION_EU

@@ -53,7 +53,7 @@ static const u16 sSoraStockValueX[4] = {
     40, 52, 64, 0,
 };
 
-const UnkStruct_080ABA80 gSoraEmptyKeys = {
+const StockKeys gSoraEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
@@ -69,7 +69,7 @@ void RequestSoraKingReload2() {
     sSoraCardReloadRequest = 16;
 }
 
-u8 func_080762A8() {
+u8 GetSoraListIndex() {
     return gCardBattleState->soraListIndex;
 }
 
@@ -594,7 +594,7 @@ static void cardbattle_0(CardBattleWork* work) {
     }
 }
 
-s32 func_08076F4C(CardBattleWork* work) {
+s32 IsSoraOnlyStockLeft(CardBattleWork* work) {
     if (CountAvailableCards(work, 0) == 0 && work->cardsLeft[0] <= 1 && work->stockCount != 0) {
         return 1;
     }
@@ -603,9 +603,9 @@ s32 func_08076F4C(CardBattleWork* work) {
 }
 
 s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
-    UnkStruct_080ABA80 data;
+    StockKeys data;
     u8 flag[4];
-    UnkStruct_080ABA80 cards;
+    StockKeys cards;
     u8 output[6];
     u8 i;
     u8 found;
@@ -2131,7 +2131,7 @@ void SelectNextSoraCard(CardBattleWork* work, u8 b) {
     sSoraSelectedCard->priority = 50;
 }
 
-void func_080791C0(CardBattleWork* work) {
+void ApplyTrickmasterToSoraCard(CardBattleWork* work) {
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
         if (gRikuBtlWork->hcEffect == 0x30) {
             if (sSoraSelectedCard->value != 0) {
@@ -2143,7 +2143,7 @@ void func_080791C0(CardBattleWork* work) {
     }
 }
 
-void func_08079218(CardBattleWork* work) {
+void ApplyTrickmasterToSoraStock(CardBattleWork* work) {
     u8 dmg = gCardBattleState->activeValue;
     u8 i;
 
@@ -2299,7 +2299,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
         sSoraSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
-        func_080791C0(work);
+        ApplyTrickmasterToSoraCard(work);
         gCardBattleState->activeCards[0] = sSoraSelectedCard;
         gCardBattleState->activeCardCount = 1;
         gCardBattleState->activeValue = sSoraSelectedCard->value;
@@ -2309,7 +2309,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
             gCardBattleState->darkModeReady = 1;
         }
     } else {
-        func_080791C0(work);
+        ApplyTrickmasterToSoraCard(work);
         gBtlWork->breakDifference = 0;
         gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
@@ -3035,7 +3035,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
     CardDisplayWork* previous[3];
 #endif
-    UnkStruct_080ABA80 arr;
+    StockKeys arr;
     u8 flag;
     u16 total;
     u8 i;
@@ -3128,7 +3128,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
         gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_BUSY;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-        func_08079218(work);
+        ApplyTrickmasterToSoraStock(work);
 
 #ifndef VERSION_EU
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
@@ -3196,7 +3196,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
     }
 
     gBtlWork->breakDifference = 0;
-    func_08079218(work);
+    ApplyTrickmasterToSoraStock(work);
     m4aSongNumStart(SONG_SYS_DROW);
     gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;

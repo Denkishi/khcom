@@ -27,7 +27,7 @@ extern u8 gUnkEu_08F77180[];
 extern u16 gUnkEu_08F7EBF8[];
 extern u16 gUnkEu_08F7EFB0[];
 
-void eu_08009CD0(s32 arg);
+void mode_lang_0(s32 arg);
 void mode_lang_1();
 void mode_lang_2();
 #endif

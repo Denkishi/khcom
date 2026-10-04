@@ -1132,7 +1132,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
     work->stopped = 0;
     work->inputEnabled = 1;
     work->resultPending = 1;
-    work->unk_87 = 0;
+    work->cursorHidden = 0;
     work->stopTimer = 0;
     work->titleSteps = 16;
     work->slideSteps = 16;
@@ -1168,7 +1168,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
             TaskPoolUpdate(&work->tasks);
             TaskPoolUpdate(&gCardListWork->effectTasks);
             z = 0;
-            work->unk_87 = 1;
+            work->cursorHidden = 1;
             work->inputEnabled = z;
             return 1;
         }
@@ -1196,7 +1196,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
             n = ListPoolNext(&n->node);
         }
     } else {
-        work->unk_87 = 1;
+        work->cursorHidden = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceStop);
     }
 
@@ -1251,7 +1251,7 @@ u8 Premire_Chance_1(PremireChanceWork* work, void* a) {
 }
 
 void Premire_Chance_2(PremireChanceWork* work) {
-    if (work->unk_87 == 0) {
+    if (work->cursorHidden == 0) {
         DrawSprite(62, 50, work->gfx, work->tiles2, work->palette2, NULL, 0, 0);
         DrawSprite(53, 64, work->gfx2, work->tiles3, work->palette3, NULL, 0, 0);
     }
@@ -1336,7 +1336,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* a) {
     pool = &work->tasks;
 
     if (t == 30) {
-        q = &work->unk_87;
+        q = &work->cursorHidden;
         z = 0;
         *q = 1;
         SetBgPriority(2, 0);

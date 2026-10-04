@@ -386,7 +386,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             }
         }
 
-        if (func_08083920() == 8) {
+        if (GetBossCardShownValue() == 8) {
             if (work->cardRequested) {
 #ifdef VERSION_EU
                 if (ConsumeGimmickFlag(0)) {

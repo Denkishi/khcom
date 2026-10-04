@@ -2196,6 +2196,7 @@ TARGET_REGION_FUNCS = {
         "ClearSystemMemory": 0x08000334,
         "DoSoftReset": 0x0800115C,
         "LoadBgTilesLz77": 0x080059D4,
+        "mode_lang_0": 0x08009CD0,
         "mode_chkmov_0": 0x0800C76C,
         "HandleRikuTutorialCardInput": 0x08013190,
         "GetLocalizedString": 0x0805E924,

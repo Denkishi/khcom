@@ -662,7 +662,7 @@ static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
     { sRikuPrizeCastleOblivionTiers, 1 },
 };
 
-static const u16 sUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
+static const u16 sKeyToRewardsChances[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
 
 void PrizeCardInitInit(PrizeCardInitWork* work, PrizeCardArgs* args) {
     work->spawned = 0;
@@ -755,8 +755,8 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (!HasMapCard(0xFB)) {
                         if (!AreWorldPrizesCollected()) {
-                            if (sUnk_0903612C[gGameState.world] != 0) {
-                                if (GetRandom() % 100 <= sUnk_0903612C[gGameState.world]) {
+                            if (sKeyToRewardsChances[gGameState.world] != 0) {
+                                if (GetRandom() % 100 <= sKeyToRewardsChances[gGameState.world]) {
                                     args[8] = 0xFB;
                                 } else {
                                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
@@ -1508,7 +1508,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
     work->gfx = AnimGetGfx(&work->anim);
     work->palette = work->args->palette;
     work->unk_11C = 0;
-    work->unk_11D = 0;
+    work->frame = 0;
     work->mosaicX = 8;
     work->mosaicY = 8;
     work->mosaicTimer = 0;
@@ -1560,7 +1560,7 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* a) {
     }
 
     work->mosaicTimer++;
-    work->unk_11D++;
+    work->frame++;
 
     if (work->args->closeMode != 0) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSelmapEventKeyClose);

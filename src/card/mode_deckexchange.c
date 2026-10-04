@@ -176,7 +176,7 @@ void FillDebugCardCollection() {
 #endif
 }
 
-void func_080AB22C(u8 a) {
+void BuildDebugKeybladeDeck(u8 a) {
     AddCardToDeckViaActive(a, 0);
     AddCardToDeckViaActive(a, 1);
     AddCardToDeckViaActive(a, 2);
@@ -233,7 +233,7 @@ void BuildDebugKingdomKeyDeck(u8 a) {
     AddCardToDeckViaActive(a, ObtainCard(CARD_ID(CARD_CURE, 5)));
 }
 
-void func_080AB4AC(u8 a) {
+void BuildDebugMixedDeck(u8 a) {
     AddCardToDeckViaActive(a, 0);
     AddCardToDeckViaActive(a, 1);
     AddCardToDeckViaActive(a, 2);

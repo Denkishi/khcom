@@ -106,10 +106,10 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->step = 0;
     work->cursorCol = 0;
     work->cursorRow = 0;
-    work->unk_6F2 = 0;
-    work->unk_6F3 = 0;
+    work->prevCursorCol = 0;
+    work->prevCursorRow = 0;
     work->timer = 4;
-    work->unk_707 = 0;
+    work->commandCursor = 0;
     work->mode = 0;
     work->view = 0;
     work->deckAttackCount = CountActiveDeckCardsOfCategory(0);
@@ -120,8 +120,8 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->entryCount = 0;
     work->popupActive = 0;
     work->exitRequested = 0;
-    work->unk_711 = 16;
-    work->unk_712 = 16;
+    work->barSlideTimer = 16;
+    work->bannerSlideTimer = 16;
     work->unk_6A4 = 0;
     work->unk_6AC = -0x800;
     work->unk_6A8 = 0;
@@ -138,7 +138,7 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     n = sUnk_09041F3E[work->deckIndex];
     work->unk_6CA = n;
     work->unk_70F = 0;
-    work->unk_713 = 0;
+    work->inputDelay = 0;
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;

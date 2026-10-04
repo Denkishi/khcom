@@ -64,14 +64,14 @@ void Level_Up_0(LevelUpWork* work) {
 
     work->tiles4 = NULL;
     work->palette5 = NULL;
-    work->unk_000[0] = NULL;
-    work->unk_000[1] = NULL;
-    work->unk_000[2] = NULL;
-    work->unk_000[3] = NULL;
-    work->unk_000[4] = NULL;
-    work->unk_000[5] = NULL;
-    work->unk_000[6] = NULL;
-    work->unk_000[7] = NULL;
+    work->tilesPalettes[0] = NULL;
+    work->tilesPalettes[1] = NULL;
+    work->tilesPalettes[2] = NULL;
+    work->tilesPalettes[3] = NULL;
+    work->tilesPalettes[4] = NULL;
+    work->tilesPalettes[5] = NULL;
+    work->tilesPalettes[6] = NULL;
+    work->tilesPalettes[7] = NULL;
     work->palette = NULL;
     work->palette2 = NULL;
     work->tiles = NULL;
@@ -94,15 +94,15 @@ void Level_Up_0(LevelUpWork* work) {
     InitTextSlots(work->textSlots[3], 36);
     InitTextSlots(work->textSlots[4], 36);
     InitTextSlots(work->textSlots[5], 36);
-    work->unk_000[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
+    work->tilesPalettes[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
 #else
-    work->unk_000[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
+    work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
     work->tiles5[0] = AllocSpriteFrameTiles(0x500);
     work->tiles5[1] = AllocSpriteFrameTiles(0x500);
     work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    work->unk_000[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
-    FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[7])->index + 16, 1);
+    work->tilesPalettes[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
+    FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, 1);
     work->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
     TaskPoolInit(&work->pool, 10);
 
@@ -410,47 +410,47 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 
         if (work->timer > 7) {
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA2BC[0], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA2BC[1], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA2BC[2], gUnk_090950F4);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
 
-                work->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
-                work->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613F18, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
-                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA29C[0], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA29C[1], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA29C[2], gUnk_09091D36);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
 
-                work->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                work->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613EB8, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
 
 #ifdef VERSION_EU
@@ -478,8 +478,8 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
             work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[5])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
             work->tiles = AllocObjTiles(0x3C0, NULL);
             work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
@@ -890,9 +890,9 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
 
     if (work->optionSteps[0] == 0) {
         for (i = 0; i < 3; i++) {
-            if (i != work->cursor && work->unk_000[i] != NULL) {
-                ReleaseObjTiles(work->unk_000[i]);
-                work->unk_000[i] = NULL;
+            if (i != work->cursor && work->tilesPalettes[i] != NULL) {
+                ReleaseObjTiles(work->tilesPalettes[i]);
+                work->tilesPalettes[i] = NULL;
             }
         }
 
@@ -1079,46 +1079,46 @@ void Level_Up_2(LevelUpWork* work) {
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       work->unk_000[6], work->unk_000[7], NULL, 0, 50);
+                       work->tilesPalettes[6], work->tilesPalettes[7], NULL, 0, 50);
 
-            if (work->unk_000[0] != NULL) {
+            if (work->tilesPalettes[0] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[0], work->y4[0], gUnk_09EEA2BC[0], work->unk_000[0], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gUnk_09EEA2BC[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[0], work->y4[0], gUnkEu_09F7626C[0], work->unk_000[0], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gUnkEu_09F7626C[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            if (work->unk_000[1] != NULL) {
+            if (work->tilesPalettes[1] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[1], work->y4[1], gUnk_09EEA2BC[1], work->unk_000[1], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gUnk_09EEA2BC[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[1], work->y4[1], gUnkEu_09F7626C[1], work->unk_000[1], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gUnkEu_09F7626C[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            if (work->unk_000[2] != NULL) {
+            if (work->tilesPalettes[2] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[2], work->y4[2], gUnk_09EEA2BC[2], work->unk_000[2], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gUnk_09EEA2BC[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[2], work->y4[2], gUnkEu_09F7626C[2], work->unk_000[2], work->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gUnkEu_09F7626C[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case 1:
             for (; i < 3; i++) {
@@ -1150,9 +1150,9 @@ void Level_Up_2(LevelUpWork* work) {
                     DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
                     DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
-                    DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2D8[i], work->unk_000[i], work->unk_000[5], NULL, 0, 50);
+                    DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2D8[i], work->tilesPalettes[i], work->tilesPalettes[5], NULL, 0, 50);
                 } else {
-                    if (work->unk_000[i] != NULL) {
+                    if (work->tilesPalettes[i] != NULL) {
 #ifdef VERSION_EU
                         DrawSprite(work->x5[i] + 2, work->y5[i] - 1, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
 #else
@@ -1162,10 +1162,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                         if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                            DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2BC[i], work->unk_000[i], work->unk_000[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2BC[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                         } else {
-                            DrawSprite(work->x4[i], work->y4[i], gUnkEu_09F7626C[i], work->unk_000[i], work->unk_000[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gUnkEu_09F7626C[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
                         }
 #endif
                     }
@@ -1181,16 +1181,16 @@ void Level_Up_2(LevelUpWork* work) {
             DrawTextSlots(work->x5[work->cursor] + 22, work->y5[work->cursor] - 5, work->textSlots[work->cursor], work->palette, 40, work->textSlotCounts[work->cursor]);
             DrawTextSlots(work->x5[work->cursor] + 4, work->y5[work->cursor] + 13, work->textSlots[work->cursor + 3], work->palette, 40, work->textSlotCounts[work->cursor + 3]);
 #endif
-            DrawSprite(work->x4[work->cursor], work->y4[work->cursor], NULL, work->unk_000[work->cursor], work->unk_000[5], NULL, 0, 50);
+            DrawSprite(work->x4[work->cursor], work->y4[work->cursor], NULL, work->tilesPalettes[work->cursor], work->tilesPalettes[5], NULL, 0, 50);
             DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       work->unk_000[6], work->unk_000[7], NULL, 0, 50);
-            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+                       work->tilesPalettes[6], work->tilesPalettes[7], NULL, 0, 50);
+            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         }
 
@@ -1201,21 +1201,21 @@ void Level_Up_2(LevelUpWork* work) {
 #endif
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->levelDigits, 0);
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->maxHpDigits, 1);
-            DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
@@ -1223,28 +1223,28 @@ void Level_Up_2(LevelUpWork* work) {
 #endif
                        work->cpDigits, 2);
         } else {
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->levelDigits, 0);
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->maxHpDigits, 1);
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->apDigits, 4);
-            DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->unk_000[6], work->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
@@ -1280,32 +1280,32 @@ void Level_Up_3(LevelUpWork* work) {
     FreeTextSlots(work->textSlots[5], 36);
 #endif
 
-    if (work->unk_000[6] != NULL) {
-        ReleaseObjTiles(work->unk_000[6]);
+    if (work->tilesPalettes[6] != NULL) {
+        ReleaseObjTiles(work->tilesPalettes[6]);
     }
 
-    if (work->unk_000[7] != NULL) {
-        ReleaseObjPalette(work->unk_000[7]);
+    if (work->tilesPalettes[7] != NULL) {
+        ReleaseObjPalette(work->tilesPalettes[7]);
     }
 
-    if (work->unk_000[0] != NULL) {
-        ReleaseObjTiles(work->unk_000[0]);
+    if (work->tilesPalettes[0] != NULL) {
+        ReleaseObjTiles(work->tilesPalettes[0]);
     }
 
-    if (work->unk_000[1] != NULL) {
-        ReleaseObjTiles(work->unk_000[1]);
+    if (work->tilesPalettes[1] != NULL) {
+        ReleaseObjTiles(work->tilesPalettes[1]);
     }
 
-    if (work->unk_000[2] != NULL) {
-        ReleaseObjTiles(work->unk_000[2]);
+    if (work->tilesPalettes[2] != NULL) {
+        ReleaseObjTiles(work->tilesPalettes[2]);
     }
 
-    if (work->unk_000[4] != NULL) {
-        ReleaseObjPalette(work->unk_000[4]);
+    if (work->tilesPalettes[4] != NULL) {
+        ReleaseObjPalette(work->tilesPalettes[4]);
     }
 
-    if (work->unk_000[5] != NULL) {
-        ReleaseObjPalette(work->unk_000[5]);
+    if (work->tilesPalettes[5] != NULL) {
+        ReleaseObjPalette(work->tilesPalettes[5]);
     }
 
     if (work->palette != NULL) {
@@ -1438,47 +1438,47 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #endif
 
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA2BC[0], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA2BC[1], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA2BC[2], gUnk_090950F4);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
 
-                work->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
-                work->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613F18, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
-                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
+                work->tilesPalettes[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA29C[0], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA29C[1], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA29C[2], gUnk_09091D36);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
 
-                work->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                work->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613EB8, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
 
 #ifdef VERSION_EU
@@ -1506,8 +1506,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
             work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[5])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
             work->tiles = AllocObjTiles(0x3C0, NULL);
             work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
@@ -1743,16 +1743,16 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a) {
             ApproachValue(&work->y2, 0x9800, work->barSteps);
             work->barSteps--;
         } else {
-            if (work->unk_000[0] != NULL) {
-                ReleaseObjTiles(work->unk_000[0]);
+            if (work->tilesPalettes[0] != NULL) {
+                ReleaseObjTiles(work->tilesPalettes[0]);
             }
 
-            if (work->unk_000[1] != NULL) {
-                ReleaseObjTiles(work->unk_000[1]);
+            if (work->tilesPalettes[1] != NULL) {
+                ReleaseObjTiles(work->tilesPalettes[1]);
             }
 
-            if (work->unk_000[2] != NULL) {
-                ReleaseObjTiles(work->unk_000[2]);
+            if (work->tilesPalettes[2] != NULL) {
+                ReleaseObjTiles(work->tilesPalettes[2]);
             }
 
 #ifdef VERSION_EU
@@ -1769,12 +1769,12 @@ u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a) {
             }
 #endif
 
-            if (work->unk_000[4] != NULL) {
-                ReleaseObjPalette(work->unk_000[4]);
+            if (work->tilesPalettes[4] != NULL) {
+                ReleaseObjPalette(work->tilesPalettes[4]);
             }
 
-            if (work->unk_000[5] != NULL) {
-                ReleaseObjPalette(work->unk_000[5]);
+            if (work->tilesPalettes[5] != NULL) {
+                ReleaseObjPalette(work->tilesPalettes[5]);
             }
 
             if (work->palette != NULL) {

@@ -283,7 +283,7 @@ u8 UpdateMapSelectSetup(MapSelectWork* work, void* a) {
 
     if (work->isEventDoor == 1) {
         work->remainingKeys = CountRemainingEventKeys();
-        work->unk_2DC = GetEventKey(0);
+        work->nextEventKey = GetEventKey(0);
         n = work->remainingKeys;
 
         while (n != 0) {
@@ -2704,7 +2704,7 @@ void UpdateReloadGageRingPosition(CardDisplayWork* work) {
 }
 
 void StepReloadGageSine(ReloadGauge* p) {
-    p->unk_00 = gSineTable[(u8)p->angle] >> 8;
+    p->sine = gSineTable[(u8)p->angle] >> 8;
     p->angle += 16;
 }
 

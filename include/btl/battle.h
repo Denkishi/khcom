@@ -138,7 +138,7 @@ u8 GetRikuSelectedCardValue();
 s32 GetRikuSelectedMove();
 u8 GetRikuCardsLeft();
 u8 GetActiveCardValue();
-void func_080838E8();
+void RequestBossCardOpen();
 void RequestBossCardClose();
 extern Mode gModeChkbtl;
 

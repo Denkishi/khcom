@@ -483,7 +483,7 @@ u8 EnemyCardBreakFall(CardDisplayWork* work, void* a) {
     return 1;
 }
 
-void func_08090EA0(CardDisplayWork* work, CardDisplayArgs* a) {
+void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
@@ -566,7 +566,7 @@ void func_08090EA0(CardDisplayWork* work, CardDisplayArgs* a) {
     work->flags |= CARD_DISP_FLAG_GFX_LOADED;
 }
 
-void func_08091048(CardDisplayWork* work, CardDisplayArgs* a) {
+void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
@@ -609,7 +609,7 @@ void func_08091048(CardDisplayWork* work, CardDisplayArgs* a) {
     work->value = work->cardDef->value;
 }
 
-void func_08091138(CardDisplayWork* work, CardDisplayArgs* a) {
+void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
@@ -902,7 +902,7 @@ void UseEnemyCard(u16 arg) {
     p->flags = (p->flags | CARD_DISP_FLAG_SELECTED) & ~CARD_DISP_FLAG_SETTLED;
 }
 
-void func_080917C8(u16 a, u8 b) {
+void UseEnemyCardByIndex(u16 a, u8 b) {
     CardDisplayArgs arg;
     CardDisplayWork* p;
     u8 i;
@@ -912,7 +912,7 @@ void func_080917C8(u16 a, u8 b) {
     arg.variant = a;
     arg.index = b;
     arg.listIndex = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B70, &arg)->work;
+    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardByIndex, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
@@ -947,7 +947,7 @@ void func_080917C8(u16 a, u8 b) {
     p->flags &= ~CARD_DISP_FLAG_SETTLED;
 }
 
-void func_08091978(u16 a, u8 b) {
+void UseRandomEnemyCard(u16 a, u8 b) {
     CardDisplayArgs arg;
     CardDisplayWork* p;
     u8 i;
@@ -957,7 +957,7 @@ void func_08091978(u16 a, u8 b) {
     arg.variant = a;
     arg.index = b;
     arg.listIndex = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gUnk_09EE4B88, &arg)->work;
+    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardRandom, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
@@ -1019,25 +1019,25 @@ TaskDesc gTaskDescCardEnemy = {
 
 TaskDesc gTaskDescEnemyUsecard = {
     "EnemyUsecard",
-    (TaskInitFunc)func_08090EA0,
+    (TaskInitFunc)EnemyUsecard_0,
     (TaskUpdateFunc)EnemyUsecard_1,
     (TaskDrawFunc)EnemyCardDraw,
     (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };
 
-TaskDesc gUnk_09EE4B70 = {
+TaskDesc gTaskDescEnemyUsecardByIndex = {
     "EnemyUsecard",
-    (TaskInitFunc)func_08091048,
+    (TaskInitFunc)EnemyUsecardByIndexInit,
     (TaskUpdateFunc)EnemyUsecard_1,
     (TaskDrawFunc)EnemyCardDraw,
     (TaskDestroyFunc)EnemyCardDestroy,
     sizeof(CardDisplayWork),
 };
 
-TaskDesc gUnk_09EE4B88 = {
+TaskDesc gTaskDescEnemyUsecardRandom = {
     "EnemyUsecard",
-    (TaskInitFunc)func_08091138,
+    (TaskInitFunc)EnemyUsecardRandomInit,
     (TaskUpdateFunc)EnemyUsecard_1,
     (TaskDrawFunc)EnemyCardDraw,
     (TaskDestroyFunc)EnemyCardDestroy,

@@ -74,7 +74,7 @@ static void* sUnkEu_09F85044[5] = {
     gUnkEu_099A787C,
 };
 
-static void* sUnkEu_09F85058[5] = {
+static void* sMapInspectBarTilesByLanguage[5] = {
     gUnkEu_099A6090,
     gUnkEu_099A6CCE,
     gUnkEu_099A924E,
@@ -82,7 +82,7 @@ static void* sUnkEu_09F85058[5] = {
     gUnkEu_099A794E,
 };
 
-static AnimHeader** sUnkEu_09F8506C[5] = {
+static AnimHeader** sMapInspectCursorAnimsByLanguage[5] = {
     gUnk_09EF981C,
     gUnkEu_09F8533C,
     gUnkEu_09F85408,
@@ -90,7 +90,7 @@ static AnimHeader** sUnkEu_09F8506C[5] = {
     gUnkEu_09F85380,
 };
 
-static void** sUnkEu_09F85080[5] = {
+static void** sMapInspectCursorFramesByLanguage[5] = {
     gUnk_09EF97EC,
     gUnkEu_09F8530C,
     gUnkEu_09F853D8,
@@ -108,7 +108,7 @@ static MapCardCategoryDef sMapCardCategoryDefs[5] = {
 };
 
 #ifdef VERSION_EU
-static const u16 sUnkEu_09999A50[5] = {2752, 2816, 2816, 2816, 2816};
+static const u16 sMapInspectBarTileSizesByLanguage[5] = {2752, 2816, 2816, 2816, 2816};
 #endif
 static const u16 sMapCardCategoryTypes[4] = {2, 1, 3, 4};
 
@@ -1170,8 +1170,8 @@ void mode_mapinspect_0() {
     MapInspectDrawValueCounts();
     sMapInspectBarPalette = LoadObjPalette(gUnk_09A3D2DC, 0x20);
 #ifdef VERSION_EU
-    sMapInspectBarTiles = LoadObjTiles(sUnkEu_09F85058[gLanguage], sUnkEu_09999A50[gLanguage]);
-    AnimInit(&sMapInspectCursorAnim, sUnkEu_09F8506C[gLanguage], sUnkEu_09F85080[gLanguage]);
+    sMapInspectBarTiles = LoadObjTiles(sMapInspectBarTilesByLanguage[gLanguage], sMapInspectBarTileSizesByLanguage[gLanguage]);
+    AnimInit(&sMapInspectCursorAnim, sMapInspectCursorAnimsByLanguage[gLanguage], sMapInspectCursorFramesByLanguage[gLanguage]);
 #else
 #ifdef VERSION_JP
     sMapInspectBarTiles = LoadObjTiles(gUnk_0999DAEC, 0xA80);

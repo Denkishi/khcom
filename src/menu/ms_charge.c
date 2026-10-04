@@ -88,7 +88,7 @@ static u16 sMsChargeCollectionCount;
 static struct ObjTiles* sMsChargeScrollbarTiles;
 static struct ObjPalette* sMsChargeCategoryPalette;
 static struct ObjTiles* sMsChargeHighlightTiles;
-static AnimState sUnk_02035C50;
+static AnimState sMsChargeArrowAnim;
 static AnimState sMsChargeHighlightAnim;
 static struct ObjPalette* sMsChargeMooglePalette;
 static struct ObjTiles* sMsChargeMoogleTiles;
@@ -992,7 +992,7 @@ void MsChargeDraw() {
     s32 j;
 
     if (sMsChargeMenuState != 1) {
-        DrawSprite(16, 60, AnimUpdate(&sUnk_02035C50), sMsChargeHighlightTiles, sMsChargeCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(16, 60, AnimUpdate(&sMsChargeArrowAnim), sMsChargeHighlightTiles, sMsChargeCategoryPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
     }
 
     t = (GetMsChargeTabCount(sMsChargeTab) + 2) / 3 - 4;
@@ -1211,8 +1211,8 @@ void mode_ms_charge_0() {
     sMsChargeScrollbarTiles = LoadObjTiles(gUnk_099A7C78, 32);
     sMsChargeCategoryPalette = LoadObjPalette(gUnk_09A3DE7C, 32);
     sMsChargeHighlightTiles = LoadObjTiles(gUnk_099A6C82, 0xFE0);
-    AnimInit(&sUnk_02035C50, gUnk_09EF9AA4, gUnk_09EF9A68);
-    AnimStart(&sUnk_02035C50, 1, ANIM_FLAG_LOOP);
+    AnimInit(&sMsChargeArrowAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
+    AnimStart(&sMsChargeArrowAnim, 1, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeHighlightAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);

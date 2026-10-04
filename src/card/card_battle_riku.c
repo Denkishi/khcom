@@ -247,7 +247,7 @@ static const s16 sRikuStockValueX[4] = {
     184, 172, 160, 0,
 };
 
-static const UnkStruct_080ABA80 sRikuEmptyKeys = {
+static const StockKeys sRikuEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
 
@@ -319,15 +319,15 @@ void RequestSwitchRikuCardList() {
     sRikuCardRequest = 10;
 }
 
-void func_0807E26C() {
+void RequestRikuAutoCycle60() {
     sRikuCardRequest = 11;
 }
 
-void func_0807E278() {
+void RequestRikuAutoCycle180() {
     sRikuCardRequest = 12;
 }
 
-void func_0807E284() {
+void RequestRikuAutoCycle300() {
     sRikuCardRequest = 13;
 }
 
@@ -843,9 +843,9 @@ static void cardbattle_0(CardBattleWork* work) {
 }
 
 static u8 cardbattle_1(CardBattleWork* work, void* a) {
-    UnkStruct_080ABA80 arr;
+    StockKeys arr;
     u8 flag[4];
-    UnkStruct_080ABA80 arr2;
+    StockKeys arr2;
     u8 buf[6];
     s32 hold;
     ReloadArgs args;
@@ -1736,7 +1736,7 @@ void CycleRikuCardList(CardBattleWork* work) {
     gCardBattleState->rikuListIndex = work->listIndex;
 }
 
-void func_08080228(CardBattleWork* work) {
+void ApplyTrickmasterToRikuCard(CardBattleWork* work) {
     if (gBtlWork->hcEffect == 0x30) {
         if (sRikuSelectedCard->value != 0) {
             sRikuSelectedCard->value -= gCardBattleState->activeValue;
@@ -1746,7 +1746,7 @@ void func_08080228(CardBattleWork* work) {
     }
 }
 
-void func_08080268(CardBattleWork* work) {
+void ApplyTrickmasterToRikuStock(CardBattleWork* work) {
     CardDisplayWork* q;
     u8 d;
     u8 i;
@@ -1882,14 +1882,14 @@ void TryRikuCardBreak(CardBattleWork* work) {
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
         sRikuSelectedCard->flags |= CARD_DISP_FLAG_IN_PLAY;
-        func_08080228(work);
+        ApplyTrickmasterToRikuCard(work);
         gCardBattleState->activeCards[0] = sRikuSelectedCard;
         gCardBattleState->activeCardCount = 1;
         gCardBattleState->activeValue = sRikuSelectedCard->value;
         gBtlWork->soraOwnsPlay = 0;
         AddBreakDarkPoints();
     } else {
-        func_08080228(work);
+        ApplyTrickmasterToRikuCard(work);
         gBtlWork->breakDifference = 0;
         gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
@@ -2252,7 +2252,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
 #ifdef VERSION_EU
     CardDisplayWork* previous[3];
 #endif
-    UnkStruct_080ABA80 arr = sRikuEmptyKeys;
+    StockKeys arr = sRikuEmptyKeys;
     u8 flag;
     u8 skip;
     u8 i;
@@ -2334,7 +2334,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
         gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-        func_08080268(work);
+        ApplyTrickmasterToRikuStock(work);
 
 #ifndef VERSION_EU
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
@@ -2399,7 +2399,7 @@ void TryRikuStockBreak(CardBattleWork* work) {
 #endif
     } else {
         gBtlWork->breakDifference = 0;
-        func_08080268(work);
+        ApplyTrickmasterToRikuStock(work);
         m4aSongNumStart(SONG_SYS_DROW);
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
@@ -3976,7 +3976,7 @@ void TickRikuHcEffectOnAttackEnd() {
     }
 }
 
-void func_080838E8() {
+void RequestBossCardOpen() {
 }
 
 void RequestBossCardClose() {
@@ -3998,7 +3998,7 @@ void RequestBossCardRandom() {
     gBossCardRequest = 2;
 }
 
-u8 func_08083920() {
+u8 GetBossCardShownValue() {
     return GetBossCardValue();
 }
 

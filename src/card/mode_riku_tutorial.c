@@ -74,7 +74,7 @@ void RikuTutorialModeDestroy() {
 }
 
 s32 ResolveActiveCardsMove(s32* out) {
-    UnkStruct_080ABA80 arr;
+    StockKeys arr;
     u8 buf[6];
     u8 flag;
     u8 i;
@@ -231,7 +231,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 }
 
 s32 ResolveLinkActiveCardsMove(s32* out, s32 b) {
-    UnkStruct_080ABA80 arr;
+    StockKeys arr;
     u8 buf[6];
     u8 flag;
     u8 i;
@@ -728,7 +728,7 @@ u8 AreThreeCardValuesEqual(CardDisplayWork** p, u8 a) {
     return 1;
 }
 
-s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag) {
+s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, u8* flag) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -1101,7 +1101,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA
     return 107;
 }
 
-s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, UnkStruct_080ABA80* arr, u8* flag, s32 b) {
+s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 kind, StockKeys* arr, u8* flag, s32 b) {
     s32 v[3];
     u32 key;
     u8 ret;
@@ -1898,7 +1898,7 @@ u8 IsLinkSideStockLearned(s32 a, s32 b) {
     return r;
 }
 
-s32 LookupStockPairName(UnkStruct_080ABA80* cards, u8* output, u8 count) {
+s32 LookupStockPairName(StockKeys* cards, u8* output, u8 count) {
     u32 v[6];
 
     v[0] = cards->keys[0];
@@ -2016,6 +2016,6 @@ Mode gModeRikuDeckTutorial = {
     RikuTutorialModeDestroy,
 };
 
-const UnkStruct_080ABA80 gTutorialEmptyKeys = {
+const StockKeys gTutorialEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };

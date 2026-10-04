@@ -1038,9 +1038,9 @@ void InitSoraDecks() {
 
     if (gDebugFlags & DEBUG_FLAG_ALL_BTL_CARD) {
         FillDebugCardCollection();
-        func_080AB22C(2);
+        BuildDebugKeybladeDeck(2);
         BuildDebugKingdomKeyDeck(1);
-        func_080AB4AC(0);
+        BuildDebugMixedDeck(0);
     } else {
         ObtainStarterCards();
         FillStarterDeck();
@@ -1069,8 +1069,8 @@ void InitDebugDecks() {
     InitDecks();
     FillDebugCardCollection();
     BuildDebugKingdomKeyDeck(0);
-    func_080AB22C(1);
-    func_080AB4AC(2);
+    BuildDebugKeybladeDeck(1);
+    BuildDebugMixedDeck(2);
 #ifdef VERSION_EU
     SetDeckName(0, gDefaultDeckName0.strings[gLanguage]);
     SetDeckName(1, gDefaultDeckName1.strings[gLanguage]);

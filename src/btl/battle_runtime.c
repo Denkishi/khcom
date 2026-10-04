@@ -864,7 +864,7 @@ void UpdateBattleState() {
             }
 
             RequestOpenCards();
-            func_080838E8();
+            RequestBossCardOpen();
             gBtlWork->phaseStep = 3;
         } else if (gBtlWork->phaseStep == 3) {
             gBtlWork->phase = 1;

@@ -24,7 +24,7 @@
 
 static LangWork* sLangWork;
 
-void eu_08009CD0(s32 arg) {
+void mode_lang_0(s32 arg) {
     sLangWork = EwramAlloc(sizeof(LangWork));
     SetBgMode0();
     SetupBg(0, 0, 29, 0);
@@ -187,6 +187,6 @@ void mode_lang_2() {
     EwramFree(sLangWork);
 }
 
-Mode gModeLang = { "mode_lang", eu_08009CD0, mode_lang_1, mode_lang_2 };
+Mode gModeLang = { "mode_lang", mode_lang_0, mode_lang_1, mode_lang_2 };
 
 #endif

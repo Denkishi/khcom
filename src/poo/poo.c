@@ -12,11 +12,9 @@
 #include "btl_api.h"
 #include "malloc.h"
 #include "mode_pooh_api.h"
-#include "fade.h"
 #include "songs.h"
 #include "player_progression.h"
 #include <stdlib.h>
-#include "mode_allmap_api.h"
 #include "poo_background_data.h"
 #include <string.h>
 #include "anim.h"
@@ -7692,42 +7690,6 @@ void AllmapVCountCallback() {
     REG_BG2CNT &= ~BGCNT_PRIORITY_MASK;
     REG_BG2CNT |= BGCNT_PRIORITY(2);
     REG_BG2HOFS = 0;
-}
-
-void AllmapAllocBgMaps() {
-    u32 i;
-    u16 j;
-    u16 k;
-
-    gAllmapBg0Map = EwramAlloc(0x4000);
-    gAllmapBg1Map = EwramAlloc(0x4000);
-
-    for (i = 0; i < 0x2000; i++) {
-        gAllmapBg0Map[i] = 0;
-        gAllmapBg1Map[i] = 0;
-    }
-
-    for (j = 0; j < 4; j++) {
-        for (k = 0; k < 2; k++) {
-            gAllmapBg0MapBlocks[j * 2 + k] = gAllmapBg0Map + (j * 2 + k) * 0x400;
-            gAllmapBg1MapBlocks[j * 2 + k] = gAllmapBg1Map + (j * 2 + k) * 0x400;
-        }
-    }
-}
-
-void AllmapDimPalette10() {
-    s32 i;
-
-    for (i = 0; i < 32; i++) {
-        FadeSetPaletteExcluded(i, 1);
-    }
-
-    FadeSetPaletteExcluded(10, 0);
-    FadeToAmount(FADE_MODE_BLACK, 16, 16);
-}
-
-void AllmapSetBlend(s16 a) {
-    SetBlendAlpha(a, 16 - a);
 }
 
 TaskDesc gTaskDescPooPooh = {

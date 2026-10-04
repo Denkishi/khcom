@@ -128,6 +128,42 @@ static u8 sAllmapPalette10Copy[0x40];
 static u8 sAllmapReturnToMenu;
 static u8 sAllmapLowerBgm;
 
+void AllmapAllocBgMaps() {
+    u32 i;
+    u16 j;
+    u16 k;
+
+    gAllmapBg0Map = EwramAlloc(0x4000);
+    gAllmapBg1Map = EwramAlloc(0x4000);
+
+    for (i = 0; i < 0x2000; i++) {
+        gAllmapBg0Map[i] = 0;
+        gAllmapBg1Map[i] = 0;
+    }
+
+    for (j = 0; j < 4; j++) {
+        for (k = 0; k < 2; k++) {
+            gAllmapBg0MapBlocks[j * 2 + k] = gAllmapBg0Map + (j * 2 + k) * 0x400;
+            gAllmapBg1MapBlocks[j * 2 + k] = gAllmapBg1Map + (j * 2 + k) * 0x400;
+        }
+    }
+}
+
+void AllmapDimPalette10() {
+    s32 i;
+
+    for (i = 0; i < 32; i++) {
+        FadeSetPaletteExcluded(i, 1);
+    }
+
+    FadeSetPaletteExcluded(10, 0);
+    FadeToAmount(FADE_MODE_BLACK, 16, 16);
+}
+
+void AllmapSetBlend(s16 a) {
+    SetBlendAlpha(a, 16 - a);
+}
+
 void AllmapCyclePalette() {
     PooPalStep t[9];
 

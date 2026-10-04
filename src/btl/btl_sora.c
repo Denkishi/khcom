@@ -515,7 +515,7 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
     work->tapTimers[0] = 0;
     work->tapTimers[1] = 0;
     work->task = NULL;
-    work->unk_191[0] = 2;
+    work->breakAnim = 2;
     work->scaleX = work->scaleY = 0x100;
     work->frameCount = 0;
 
@@ -1043,115 +1043,115 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->btl->stockMove++;
         }
 
-        work->unk_191[0] = 2;
+        work->breakAnim = 2;
 
         switch (id) {
         case 0:
-            work->unk_191[1] = 0;
+            work->keyblade = 0;
             work->swingSpeed = 2;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 1:
-            work->unk_191[1] = 1;
+            work->keyblade = 1;
             work->swingSpeed = 0;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
         case 2:
-            work->unk_191[1] = 2;
+            work->keyblade = 2;
             work->swingSpeed = 3;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 3:
-            work->unk_191[1] = 3;
+            work->keyblade = 3;
             work->swingSpeed = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 4:
-            work->unk_191[1] = 4;
+            work->keyblade = 4;
             work->swingSpeed = 2;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             StartBtlSoraCombo(work);
             break;
         case 5:
-            work->unk_191[1] = 5;
+            work->keyblade = 5;
             work->swingSpeed = 2;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 6:
-            work->unk_191[1] = 6;
+            work->keyblade = 6;
             work->swingSpeed = 0;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 7:
-            work->unk_191[1] = 7;
+            work->keyblade = 7;
             work->swingSpeed = 1;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 8:
-            work->unk_191[1] = 8;
+            work->keyblade = 8;
             work->swingSpeed = 3;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 9:
-            work->unk_191[1] = 9;
+            work->keyblade = 9;
             work->swingSpeed = 3;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 10:
-            work->unk_191[1] = 10;
+            work->keyblade = 10;
             work->swingSpeed = 4;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 11:
-            work->unk_191[1] = 11;
+            work->keyblade = 11;
             work->swingSpeed = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 12:
-            work->unk_191[1] = 12;
+            work->keyblade = 12;
             work->swingSpeed = 1;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
         case 13:
-            work->unk_191[1] = 13;
+            work->keyblade = 13;
             work->swingSpeed = 2;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 14:
-            work->unk_191[1] = 14;
+            work->keyblade = 14;
             work->swingSpeed = 3;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             StartBtlSoraCombo(work);
             break;
         case 15:
-            work->unk_191[1] = 15;
+            work->keyblade = 15;
             work->swingSpeed = 2;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             StartBtlSoraCombo(work);
             break;
         case 16:
-            work->unk_191[1] = 16;
+            work->keyblade = 16;
             work->swingSpeed = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             StartBtlSoraCombo(work);
             break;
         case 17:
-            work->unk_191[1] = 17;
+            work->keyblade = 17;
             work->swingSpeed = 1;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             StartBtlSoraCombo(work);
             break;
         case 19:
@@ -1159,126 +1159,126 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x8002ACAB:
             work->state = 6;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             break;
         case 0xCAB2ACAB:
             work->state = 6;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 20:
             work->state = 7;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x8002D4B5:
             work->state = 7;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             break;
         case 0xCB52D4B5:
             work->state = 7;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 21:
             work->state = 8;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x8002FCBF:
             work->state = 8;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             break;
         case 0xCBF2FCBF:
             work->state = 8;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 22:
             work->state = 10;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             break;
         case 0x800324C9:
             work->state = 10;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             break;
         case 0xCC9324C9:
             work->state = 10;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             break;
         case 24:
             work->state = 11;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x800374DD:
             work->state = 11;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             break;
         case 0xCDD374DD:
             work->state = 11;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 23:
             work->state = 9;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x80034CD3:
             work->state = 9;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 1;
-            work->unk_191[0] = 2;
+            work->breakAnim = 2;
             break;
         case 0xCD334CD3:
             work->state = 9;
             work->steps = 0;
             work->stateTimer = 0;
             work->variant[0] = 2;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 27:
             work->state = 17;
@@ -1328,7 +1328,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
             work->variant[0] = 0;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0x8004B52D:
             work->state = 17;
@@ -1336,7 +1336,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
             work->variant[0] = 1;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 0xD2D4B52D:
             work->state = 17;
@@ -1344,7 +1344,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->stateTimer = 0;
             work->summonDesc = &gTaskDescSmnTink;
             work->variant[0] = 2;
-            work->unk_191[0] = 1;
+            work->breakAnim = 1;
             break;
         case 41:
             work->state = 17;
@@ -1581,49 +1581,49 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 0;
             break;
         case 48:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 1;
             break;
         case 49:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 2;
             break;
         case 50:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 3;
             break;
         case 51:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 4;
             break;
         case 52:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 5;
             break;
         case 53:
             work->state = 12;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 0;
+            work->breakAnim = 0;
             work->variant[0] = 6;
             break;
         case 25:
@@ -1666,7 +1666,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = 39;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 102:
             work->state = 50;
@@ -1679,7 +1679,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->state = 45;
             work->steps = 0;
             work->stateTimer = 0;
-            work->unk_191[0] = 3;
+            work->breakAnim = 3;
             break;
         case 105:
             work->state = 56;
@@ -2377,7 +2377,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
-            SetBtlSoraAnimation(work, work->unk_191[0] + 47, 0);
+            SetBtlSoraAnimation(work, work->breakAnim + 47, 0);
         }
 
         FocusBtlSoraCameraOnTarget(work);
@@ -2476,7 +2476,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCameraOnTarget(work);
 
         if ((s16)work->stateTimer == 0) {
-            SetBtlSoraAnimation(work, work->unk_191[0] + 47, 0);
+            SetBtlSoraAnimation(work, work->breakAnim + 47, 0);
         }
 
         if (AnimIsFinished(&work->anim)) {
@@ -2777,30 +2777,30 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 switch (a->animId) {
                 case 22:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 5120, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x - 5120, p->y,
                                           p->z - 7168, 40, 16, 44);
                     } else {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 5120, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x + 5120, p->y,
                                           p->z - 7168, 40, 16, 44);
                     }
 
                     break;
                 case 12:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 8192, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x - 8192, p->y,
                                           p->z, 28, 20, 32);
                     } else {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 8192, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x + 8192, p->y,
                                           p->z, 28, 20, 32);
                     }
 
                     break;
                 default:
                     if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x - 9216, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x - 9216, p->y,
                                           p->z, 32, 12, 32);
                     } else {
-                        d = ApplyAttackBox(a->attackIds[work->unk_191[1]], p->x + 9216, p->y,
+                        d = ApplyAttackBox(a->attackIds[work->keyblade], p->x + 9216, p->y,
                                           p->z, 32, 12, 32);
                     }
 
@@ -2812,10 +2812,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                         t = 164;
                     } else {
                         CreateBtlPopTask(p, 2);
-                        t = a->attackIds[work->unk_191[1]];
+                        t = a->attackIds[work->keyblade];
                     }
                 } else {
-                    t = a->attackIds[work->unk_191[1]];
+                    t = a->attackIds[work->keyblade];
                 }
 
                 switch (a->animId) {
@@ -6046,7 +6046,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     if (work->state == 29 && (work->flags & BTL_SORA_FLAG_HIDDEN)) {
         work->flags &= ~BTL_SORA_FLAG_HIDDEN;
         LoadBtlSoraPalette(work);
-        SetBtlSoraAnimation(work, work->unk_191[0] + 47, 0);
+        SetBtlSoraAnimation(work, work->breakAnim + 47, 0);
         p->x = p->originX;
         p->y = p->originY;
         p->z = p->originZ;

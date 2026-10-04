@@ -143,7 +143,11 @@ typedef struct CardBattleWork {
     u8 unk_BB;
     u8 revCountShown[4];
     u8 reloadPending[4];
-    u8 unk_C4[5];
+    u8 reloadShown;
+    u8 stockNameChecked;
+    u8 dealtCount;
+    u8 xSteps;
+    u8 actionTaken;
     u8 cardsClosed;
 } CardBattleWork;
 
@@ -1579,7 +1583,11 @@ typedef struct SysMsgWinWork {
     TextChar* nextText;
     u16 glyphPaletteIndex;
     s16 closeTimer;
-    u8 unk_138[0x05];
+    u8 unk_138;
+    u8 shownChars;
+    u8 unk_13A;
+    u8 charCount;
+    u8 unk_13C;
     u8 choice;
     u8 cursorSteps;
     u8 textSlotCount;
@@ -1589,7 +1597,8 @@ typedef struct SysMsgWinWork {
     u8 unk_143;
     u8 choiceVisible;
     u8 messagePending;
-    u8 unk_146[0x02];
+    u8 keepOpen;
+    u8 fallbackFrame;
 } SysMsgWinWork;
 
 typedef char SysMsgWinWork_size[(sizeof(SysMsgWinWork) == 0x148) ? 1 : -1];

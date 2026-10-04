@@ -674,7 +674,7 @@ static void cardbattle_0(CardBattleWork* work) {
     work->revCountShown[2] = 0;
     work->revCountShown[3] = 0;
     work->stockValue = 0;
-    work->unk_C4[3] = 0;
+    work->xSteps = 0;
     work->x = sRikuStockValueX[0];
 
     for (i = 0; i <= 2; i++) {
@@ -687,7 +687,7 @@ static void cardbattle_0(CardBattleWork* work) {
         work->slots[i] = NULL;
     }
 
-    work->unk_C4[1] = 0;
+    work->stockNameChecked = 0;
     ListPoolInit(&work->cardDisplays[0]);
     ListPoolInit(&work->cardDisplays[1]);
     ListPoolInit(&work->cardDisplays[2]);
@@ -865,11 +865,11 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
         return 0;
     }
 
-    if (work->unk_C4[3] != 0) {
+    if (work->xSteps != 0) {
         hold = work->x << 8;
-        ApproachValue(&hold, sRikuStockValueX[work->stockCount - 1] << 8, work->unk_C4[3]);
+        ApproachValue(&hold, sRikuStockValueX[work->stockCount - 1] << 8, work->xSteps);
         work->x = hold >> 8;
-        work->unk_C4[3]--;
+        work->xSteps--;
     }
 
     if (sRikuSelectedCard->flags & CARD_DISP_FLAG_RELOAD_GAUGE) {
@@ -1027,7 +1027,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
         break;
     case 7:
         work->revCountShown[work->listIndex] = 0;
-        work->unk_C4[0] = 0;
+        work->reloadShown = 0;
         CloseRikuCards(work);
         break;
     case 8:
@@ -1264,7 +1264,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
                 sRikuSelectedCard->flags |= CARD_DISP_FLAG_REMOVE;
                 BeginRikuReloadDeal(work);
                 work->reloadPending[work->listIndex] = 0;
-                work->unk_C4[0] = 1;
+                work->reloadShown = 1;
                 gRikuBtlWork->flags |= BTL_FLAG_RELOADING;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuReloadDeal);
                 sRikuSelectedCard->flags = (sRikuSelectedCard->flags | (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_OPEN | CARD_DISP_FLAG_VISIBLE)) & ~CARD_DISP_FLAG_FROZEN;
@@ -1274,7 +1274,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
 #endif
                 slot = work->listIndex;
                 args.slot = slot;
-                args.state = &work->unk_C4[0];
+                args.state = &work->reloadShown;
                 args.mode = 2;
                 TaskCreate(&work->tasks, &gTaskDescRELOAD, &args);
                 return 1;
@@ -1332,7 +1332,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
         }
     }
 
-    if (work->unk_C4[1] == 0 && AreCardsSettled(work->stock, work->stockCount)) {
+    if (work->stockNameChecked == 0 && AreCardsSettled(work->stock, work->stockCount)) {
         arr = sRikuEmptyKeys;
 
         if (!(gBtlWork->flags & BTL_FLAG_VS_BATTLE)) {
@@ -1413,7 +1413,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
             }
         }
 
-        work->unk_C4[1] = 1;
+        work->stockNameChecked = 1;
     }
 
     gCardBattleState->rikuCardsLeft = work->cardsLeft[work->listIndex];
@@ -1495,7 +1495,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* work, void* a) {
     }
 
     if ((s16)sRikuSelectedCard->timer == 0) {
-        if (CountAvailableCardSlots(work, work->listIndex) > work->unk_C4[2]) {
+        if (CountAvailableCardSlots(work, work->listIndex) > work->dealtCount) {
             sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SELECTED;
             v = sRikuSelectedCard->args.index - 1;
             c = FindPrevAvailableSlot(work, work->listIndex, &v);
@@ -1513,13 +1513,13 @@ u8 UpdateRikuReloadDeal(CardBattleWork* work, void* a) {
                 p->y = p->ringCenterY;
                 p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
                 sRikuSelectedCard = p;
-                work->unk_C4[2]++;
+                work->dealtCount++;
                 work->cardsLeft[work->listIndex]++;
             }
         } else {
             gRikuBtlWork->flags &= ~BTL_FLAG_RELOADING;
             gRikuBtlWork->flags &= ~0x100;
-            work->unk_C4[0] = 0;
+            work->reloadShown = 0;
             m4aSongNumStop(SONG_SYS_RELOAD);
             sRikuCardRequest = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)cardbattle_1);
@@ -1528,7 +1528,7 @@ u8 UpdateRikuReloadDeal(CardBattleWork* work, void* a) {
 
     if (sRikuCardRequest == 7) {
         work->revCountShown[work->listIndex] = 0;
-        work->unk_C4[0] = 0;
+        work->reloadShown = 0;
         CloseRikuCards(work);
         m4aSongNumStop(SONG_SYS_RELOAD);
     }
@@ -2056,7 +2056,7 @@ void BeginRikuReloadDeal(CardBattleWork* work) {
     CardSlot* c = NULL;
     u16 v;
 
-    work->unk_C4[2] = 0;
+    work->dealtCount = 0;
     ResetCardSlotsForReload(work, work->listIndex);
 
     if (CountAvailableCardSlots(work, work->listIndex) != 0) {
@@ -2085,7 +2085,7 @@ void BeginRikuReloadDeal(CardBattleWork* work) {
             p->timer = 8;
             p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_DEALING | CARD_DISP_FLAG_VISIBLE);
             sRikuSelectedCard = p;
-            work->unk_C4[2]++;
+            work->dealtCount++;
             work->cardsLeft[work->listIndex]++;
         }
     } else {
@@ -2130,7 +2130,7 @@ u8 StockRikuCard(CardBattleWork* work) {
         return 1;
     }
 
-    work->unk_C4[1] = 0;
+    work->stockNameChecked = 0;
     gCardBattleState->rikuStockNameShown = 0;
 #ifndef VERSION_EU
     m4aSongNumStart(SONG_SYS_KETEI2);
@@ -2172,7 +2172,7 @@ u8 StockRikuCard(CardBattleWork* work) {
 
     if (work->stockValue != 0) {
         UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
-        work->unk_C4[3] = 8;
+        work->xSteps = 8;
     }
 
     work->cardsLeft[work->listIndex]--;
@@ -2428,7 +2428,7 @@ void UseRikuStock(CardBattleWork* work) {
 
     gCardBattleState->unk_0C0 = 0;
     gCardBattleState->rikuStockNameShown = 0;
-    work->unk_C4[1] = 0;
+    work->stockNameChecked = 0;
     flags = gBtlWork->flags;
 
     if ((flags & BTL_FLAG_CARD_ACTIVE) == 0) {
@@ -2504,7 +2504,7 @@ void UseRikuStock(CardBattleWork* work) {
     gCardBattleState->rikuStockedCount = 0;
     work->stockValue = 0;
     ClearStockedCardSlots(work);
-    work->unk_C4[1] = 0;
+    work->stockNameChecked = 0;
 }
 
 u8 UseRikuHeartlessCard(CardBattleWork* work) {
@@ -2537,7 +2537,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* work) {
 
         if (work->stockValue > 1) {
             UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
-            work->unk_C4[3] = 8;
+            work->xSteps = 8;
         }
 
         sRikuSelectedCard->args.slot->used = 1;

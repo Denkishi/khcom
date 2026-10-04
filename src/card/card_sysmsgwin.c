@@ -52,11 +52,11 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
     }
 
     FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
-    work->unk_138[4] = 0;
-    work->unk_138[0] = 8;
-    work->unk_138[1] = 0;
-    work->unk_138[2] = 0;
-    work->unk_138[3] = 0;
+    work->unk_13C = 0;
+    work->unk_138 = 8;
+    work->shownChars = 0;
+    work->unk_13A = 0;
+    work->charCount = 0;
     work->unk_143 = 0;
     work->nextText = NULL;
     work->tiles3 = NULL;
@@ -74,16 +74,16 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->messagePending = 0;
-    work->unk_146[0] = 1;
+    work->keepOpen = 1;
 #ifdef VERSION_JP
-    work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
+    work->charCount = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
                                    (TextChar*)work->messageDef->text, &work->nextText);
 #else
     if (work->nextText != NULL) {
-        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+        work->charCount = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                                        (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
     } else {
-        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+        work->charCount = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                                        (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
     }
 #endif
@@ -92,7 +92,7 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
     InitTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
-    work->unk_138[1] = work->unk_138[3];
+    work->shownChars = work->charCount;
 
     switch (work->args.mode) {
     case 0:
@@ -166,10 +166,10 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
         work->tiles2 = LoadObjTiles(gUnk_093F98AC, 0x1800);
 
         if (work->tiles2 == NULL) {
-            work->unk_146[1] = 1;
+            work->fallbackFrame = 1;
             work->tiles2 = LoadObjTiles(&gUnk_0950E2F8[0x140], 0x680);
         } else {
-            work->unk_146[1] = 0;
+            work->fallbackFrame = 0;
         }
 
         work->palette4 = LoadObjPalette(gCard00Palette, 32);
@@ -203,19 +203,19 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
 
         if (work->nextText != NULL) {
 #ifdef VERSION_JP
-            work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
+            work->charCount = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
                                            work->nextText, &work->nextText);
 #else
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+            work->charCount = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                                            work->nextText, &work->nextText);
 #endif
-            work->unk_138[1] = work->unk_138[3];
+            work->shownChars = work->charCount;
         } else if (!(work->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
             AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
             work->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
             work->closeTimer = 0;
-            work->unk_138[0] = 8;
+            work->unk_138 = 8;
         } else {
             ReleaseObjTiles(work->tiles3);
             ReleaseObjPalette(work->palette);
@@ -319,13 +319,13 @@ u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a) {
 }
 
 void sysmsgwin_2(SysMsgWinWork* work) {
-    DrawCardMsgGlyphs(work->unk_138[1]);
+    DrawCardMsgGlyphs(work->shownChars);
 
     switch (work->args.mode) {
     case 2:
     case 3:
         if (work->tiles2 != NULL) {
-            if (work->unk_146[1] != 0) {
+            if (work->fallbackFrame != 0) {
                 DrawSprite(work->frameX >> 8, work->frameY >> 8, (&gUnk_09EF12E8[2])[0],
                            work->tiles2, work->palette4, NULL, 0, 10);
             } else {
@@ -412,7 +412,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
     TextChar** p;
 #endif
 
-    if (work->unk_146[0] == 0) {
+    if (work->keepOpen == 0) {
         return 0;
     }
 
@@ -420,7 +420,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
         work->messagePending = 0;
         work->messageDef = &gCardMessageDefs[work->args.messageId];
 #ifdef VERSION_JP
-        work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(
+        work->charCount = LayoutCardMsgGlyphsPageSjis(
             0x2E00,
             gMsgwinTextY[work->messageDef->positionIndex],
             (TextChar*)(work->messageDef->text),
@@ -429,12 +429,12 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
         p = &work->nextText;
 
         if (*p != NULL) {
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(
+            work->charCount = LayoutCardMsgGlyphsPage(
                 0x2E00,
                 sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                 *p, p);
         } else {
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(
+            work->charCount = LayoutCardMsgGlyphsPage(
                 0x2E00,
                 sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                 (TextChar*)LANGSTR(work->messageDef->text),
@@ -442,7 +442,7 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
         }
 #endif
 
-        work->unk_138[1] = work->unk_138[3];
+        work->shownChars = work->charCount;
     }
 
     return 1;
@@ -461,7 +461,7 @@ s32 ReplaceSysmsgwinMessage(CardMessageArgs* src) {
 
 s32 CloseSysmsgwin() {
     if (sActiveSysmsgwin != NULL) {
-        sActiveSysmsgwin->unk_146[0] = 0;
+        sActiveSysmsgwin->keepOpen = 0;
         return 1;
     }
 
@@ -474,11 +474,11 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
     work->messageDef = &gCardMessageDefs[work->args.messageId];
     work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
     FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
-    work->unk_138[4] = 0;
-    work->unk_138[0] = 8;
-    work->unk_138[1] = 0;
-    work->unk_138[2] = 0;
-    work->unk_138[3] = 0;
+    work->unk_13C = 0;
+    work->unk_138 = 8;
+    work->shownChars = 0;
+    work->unk_13A = 0;
+    work->charCount = 0;
     work->unk_143 = 0;
     work->nextText = NULL;
     work->tiles3 = NULL;
@@ -496,55 +496,55 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->messagePending = 0;
-    work->unk_146[0] = 1;
+    work->keepOpen = 1;
 #ifdef VERSION_JP
-    work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)work->messageDef->text, &work->nextText);
+    work->charCount = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)work->messageDef->text, &work->nextText);
 #else
     if (work->nextText != NULL) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_GERMAN:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_SPANISH:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_ITALIAN:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         default:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         }
 #else
-        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+        work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
 #endif
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_GERMAN:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_SPANISH:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_ITALIAN:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         default:
-            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+            work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         }
 #else
-        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
+        work->charCount = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
 #endif
     }
 #endif
@@ -553,7 +553,7 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
     InitTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
-    work->unk_138[1] = work->unk_138[3];
+    work->shownChars = work->charCount;
     sActiveSysmsgwin = work;
 }
 
@@ -721,7 +721,7 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* a) {
 }
 
 void sysmsgwinChoice_2(SysMsgWinWork* work) {
-    DrawCardMsgGlyphs(work->unk_138[1]);
+    DrawCardMsgGlyphs(work->shownChars);
 
     switch (work->args.mode) {
     case 2:

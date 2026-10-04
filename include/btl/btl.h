@@ -130,7 +130,9 @@ typedef struct BtlSoraWork {
     Task* task;
     TaskDesc* summonDesc;
     u8 swingSpeed;
-    u8 unk_191[0x3];
+    u8 breakAnim;
+    u8 keyblade;
+    u8 unk_193;
     s32 unk_194;
     s32 targetY;
     s32 scaleX;

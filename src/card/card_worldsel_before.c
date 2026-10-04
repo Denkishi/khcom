@@ -98,7 +98,7 @@ void WorldSel_Before_3(WorldSelBeforeWork* work) {
 }
 
 void func_080A581C(u8* work) {
-    TaskCreate(&work[0x10], &gTaskDescWorldSelBefore, work);
+    TaskCreate((TaskPool*)&work[0x10], &gTaskDescWorldSelBefore, work);
 }
 
 void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z) {

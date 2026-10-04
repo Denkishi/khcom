@@ -312,7 +312,7 @@ void EV_BG_EFFECT_3() {
 }
 
 void CreateEVBGEFFECTTask(u8* work) {
-    TaskCreate(&work[0x10], &gTaskDescEVBGEFFECT, work);
+    TaskCreate((TaskPool*)&work[0x10], &gTaskDescEVBGEFFECT, work);
 }
 
 const EventBgEffectDef* gEventBgEffectDefs[8] = {

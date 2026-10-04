@@ -2059,7 +2059,7 @@ u16 LoadTwoDigitTextTileArray(u8 v, void** out) {
         buf[2] = 0;
     }
 
-    return LoadTextTileArray(buf, out);
+    return LoadTextTileArray((TextChar*)buf, out);
 }
 #endif
 

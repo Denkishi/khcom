@@ -986,7 +986,7 @@ void BosTmArmUpdateJoints(TmArmJoint* joints, u16 a) {
         p = &joints[i];
 
         q = &p->angle;
-        ApproachAngle(q, p->targetAngle, a);
+        ApproachAngle((u16*)q, p->targetAngle, a);
     }
 
     BosTmArmComputeJointPositions(joints);

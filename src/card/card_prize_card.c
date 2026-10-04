@@ -221,7 +221,7 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a) {
     s32 v;
 
     v = work->rotation << 8;
-    ApproachValue(&work->flipAngleY, 0, work->steps);
+    ApproachValue((s32*)&work->flipAngleY, 0, work->steps);
     ApproachValue(&v, 0, work->steps);
     ApproachValue(&work->pos.x, 0x7800, work->steps);
     ApproachValue(&work->pos.y, 0x5800, work->steps);

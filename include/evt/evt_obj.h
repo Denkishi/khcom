@@ -1,5 +1,5 @@
-#ifndef GUARD_EVT_H
-#define GUARD_EVT_H
+#ifndef GUARD_EVT_OBJ_H
+#define GUARD_EVT_OBJ_H
 
 #include "evt_object_types.h"
 #include "obj.h"
@@ -35,4 +35,4 @@ extern EventState* gEventState;
 void EvtObjSetGroundZ(EvtObj* obj, s32 a);
 void EvtObjChangeAnim(EvtObjWork* work);
 
-#endif /* GUARD_EVT_H */
+#endif /* GUARD_EVT_OBJ_H */

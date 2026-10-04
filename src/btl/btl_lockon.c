@@ -1,5 +1,5 @@
 /**
- * btl.c
+ * btl_lockon.c
  * Battle Lock-On Cursor and Area Marker
  */
 

@@ -22,7 +22,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
-#include "util.h"
+#include "key_state.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];

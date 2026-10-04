@@ -1,5 +1,5 @@
-#ifndef GUARD_EVT_API_H
-#define GUARD_EVT_API_H
+#ifndef GUARD_EVT_OBJ_API_H
+#define GUARD_EVT_OBJ_API_H
 
 #include "types.h"
 

@@ -12,7 +12,7 @@
 #include "malloc.h"
 #include "card.h"
 #include "map_tile_animations.h"
-#include "evt.h"
+#include "evt_obj.h"
 #include "card_deck.h"
 #include "card_api.h"
 #include "card_def_data.h"

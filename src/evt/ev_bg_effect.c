@@ -1,5 +1,5 @@
 /**
- * card_ev_bg_effect.c
+ * ev_bg_effect.c
  * Event Background Effects
  */
 
@@ -9,13 +9,13 @@
 #include "taskpool.h"
 #include "card.h"
 #include "sprites_msg.h"
-#include "evt.h"
+#include "evt_obj.h"
 #include "evt_types.h"
 #include "mode_battle_data.h"
 #include "msg_types.h"
 #include "types.h"
 #include <stddef.h>
-#include "card_ev_bg_effect.h"
+#include "ev_bg_effect.h"
 
 static const EventBgEffectDef sEventBgEffect0Def = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x10, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,

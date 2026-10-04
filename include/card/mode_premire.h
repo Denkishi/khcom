@@ -1,5 +1,5 @@
-#ifndef GUARD_CARD_MODE_PREMIRE_H
-#define GUARD_CARD_MODE_PREMIRE_H
+#ifndef GUARD_MODE_PREMIRE_H
+#define GUARD_MODE_PREMIRE_H
 
 #include "card.h"
 #include "types.h"

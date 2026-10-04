@@ -12,7 +12,7 @@
 #include "pallet.h"
 #include "sprite.h"
 #include "sroll.h"
-#include "util.h"
+#include "key_state.h"
 #include "sio.h"
 #include "engine.h"
 #include "main.h"

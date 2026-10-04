@@ -1,5 +1,5 @@
-#ifndef GUARD_MS_H
-#define GUARD_MS_H
+#ifndef GUARD_MS_SHOP_HOSI_H
+#define GUARD_MS_SHOP_HOSI_H
 
 #include "ms_types.h"
 #include "types.h"
@@ -22,4 +22,4 @@ s32 task_ms_shop_hosi_1(MsShopHosiWork* work);
 void task_ms_shop_hosi_2(MsShopHosiWork* work);
 void task_ms_shop_hosi_3(MsShopHosiWork* work);
 
-#endif /* GUARD_MS_H */
+#endif /* GUARD_MS_SHOP_HOSI_H */

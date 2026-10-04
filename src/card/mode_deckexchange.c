@@ -1,6 +1,6 @@
 /**
- * card_mode_deck.c
- * Deck Setup and Card Description Tables
+ * mode_deckexchange.c
+ * Deck Exchange Mode and Deck Setup
  */
 
 #include "msg_localized_data.h"

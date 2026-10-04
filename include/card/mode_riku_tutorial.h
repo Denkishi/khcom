@@ -1,5 +1,5 @@
-#ifndef GUARD_CARD_RIKU_TUTORIAL_H
-#define GUARD_CARD_RIKU_TUTORIAL_H
+#ifndef GUARD_MODE_RIKU_TUTORIAL_H
+#define GUARD_MODE_RIKU_TUTORIAL_H
 
 #include "card.h"
 #include "types.h"

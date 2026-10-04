@@ -14,7 +14,7 @@
 #include "staff_roll_types.h"
 #include "gba/keys.h"
 #include "sroll_api.h"
-#include "evt_api.h"
+#include "evt_obj_api.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"

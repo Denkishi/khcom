@@ -1,9 +1,9 @@
 /**
- * ms.c
+ * ms_shop_hosi.c
  * Moogle Shop Sparkles and Flags
  */
 
-#include "ms.h"
+#include "ms_shop_hosi.h"
 #include "sprites_moogle_shop.h"
 #include "mode_ms_api.h"
 #include "engine_math.h"

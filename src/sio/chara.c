@@ -9,7 +9,7 @@
 #include "display.h"
 #include "pallet.h"
 #include "sio_api.h"
-#include "util.h"
+#include "key_state.h"
 #include "chara.h"
 #include "gba/keys.h"
 #include "system_state.h"

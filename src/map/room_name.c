@@ -1,11 +1,11 @@
 /**
- * room.c
+ * room_name.c
  * Room Name Display
  */
 
 #include "text.h"
 #include "monsgage.h"
-#include "room.h"
+#include "room_name.h"
 #include "sprites_map.h"
 #include "sprites_map_tasks.h"
 #include "map_text_data.h"

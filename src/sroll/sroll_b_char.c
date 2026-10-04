@@ -4,7 +4,7 @@
  */
 
 #include "sroll.h"
-#include "evt.h"
+#include "evt_obj.h"
 #include "fade.h"
 #include "anim.h"
 #include "evt_object_types.h"

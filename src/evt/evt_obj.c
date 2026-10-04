@@ -1,11 +1,11 @@
 /**
- * evt.c
+ * evt_obj.c
  * Event Objects and Shadows
  */
 
 #include "macros.h"
 #include "task_descriptors.h"
-#include "evt.h"
+#include "evt_obj.h"
 #include "sprites_btl.h"
 #include "evt_tasks.h"
 #include "anim.h"

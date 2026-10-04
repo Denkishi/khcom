@@ -4,7 +4,7 @@
  */
 
 #include "obj_api.h"
-#include "util.h"
+#include "key_state.h"
 #include "btl3.h"
 #include "songs.h"
 #include "btl3_tasks.h"

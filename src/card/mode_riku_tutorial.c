@@ -1,5 +1,5 @@
 /**
- * card_riku_tutorial.c
+ * mode_riku_tutorial.c
  * Sleight Combos and Riku Tutorial Modes
  */
 
@@ -20,7 +20,7 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include <stddef.h>
-#include "card_riku_tutorial.h"
+#include "mode_riku_tutorial.h"
 
 static TaskPool sRikuTutorialTasks;
 

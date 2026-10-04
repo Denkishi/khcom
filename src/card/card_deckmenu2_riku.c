@@ -1,5 +1,5 @@
 /**
- * card_deckmenu2_2.c
+ * card_deckmenu2_riku.c
  * Riku Deck Menu
  */
 
@@ -34,7 +34,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_deck.h"
-#include "card_deckmenu2_2.h"
+#include "card_deckmenu2_riku.h"
 #include "ms_charge.h"
 
 #ifdef VERSION_EU

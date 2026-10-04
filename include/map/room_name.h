@@ -1,5 +1,5 @@
-#ifndef GUARD_ROOM_H
-#define GUARD_ROOM_H
+#ifndef GUARD_ROOM_NAME_H
+#define GUARD_ROOM_NAME_H
 
 #include "types.h"
 #include "text_types.h"
@@ -34,4 +34,4 @@ u8 task_room_name_1(RoomNameWork* work);
 void task_room_name_2(RoomNameWork* work);
 void task_room_name_3(RoomNameWork* work);
 
-#endif /* GUARD_ROOM_H */
+#endif /* GUARD_ROOM_NAME_H */

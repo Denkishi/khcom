@@ -26,7 +26,7 @@
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "bos6_api.h"
-#include "evt_api.h"
+#include "evt_obj_api.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"

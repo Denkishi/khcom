@@ -39,7 +39,7 @@
 #include "player_progression_types.h"
 #include "taskpool.h"
 #include "types.h"
-#include "util.h"
+#include "key_state.h"
 #include <stddef.h>
 
 static const AnimDef sBtlRikuAnimDefs[35] = {

@@ -1,5 +1,5 @@
-#ifndef GUARD_BOS_H
-#define GUARD_BOS_H
+#ifndef GUARD_BOS_MAP_H
+#define GUARD_BOS_MAP_H
 
 #include "battle_actor_types.h"
 
@@ -9,4 +9,4 @@ typedef struct BosShadowWork {
     BtlObj* actor;
 } BosShadowWork;
 
-#endif /* GUARD_BOS_H */
+#endif /* GUARD_BOS_MAP_H */

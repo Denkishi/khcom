@@ -1,9 +1,9 @@
 /**
- * bos.c
+ * bos_map.c
  * Boss Battle Map and Shadow
  */
 
-#include "bos.h"
+#include "bos_map.h"
 #include "sprites_btl.h"
 #include "boss_background_types.h"
 #include <stddef.h>

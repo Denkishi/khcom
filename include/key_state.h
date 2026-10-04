@@ -1,5 +1,5 @@
-#ifndef GUARD_UTIL_H
-#define GUARD_UTIL_H
+#ifndef GUARD_KEY_STATE_H
+#define GUARD_KEY_STATE_H
 
 #include "types.h"
 

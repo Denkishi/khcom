@@ -149,6 +149,8 @@ tools:
             - src/event_scanline_state
             - src/event_sequence_data
             - src/event_sprite_data
+            - src/print
+            - src/ev_bg_effect
             - src/events
             - src/field_transition
             - src/formation_data

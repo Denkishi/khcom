@@ -1,9 +1,9 @@
 /**
- * util.c
+ * key_state.c
  * Key State and Song Utilities
  */
 
-#include "util.h"
+#include "key_state.h"
 #include "malloc.h"
 #include "m4a.h"
 #include "gba/keys.h"

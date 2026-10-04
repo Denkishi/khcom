@@ -1,5 +1,5 @@
-#ifndef GUARD_CARD_DECKMENU2_2_H
-#define GUARD_CARD_DECKMENU2_2_H
+#ifndef GUARD_CARD_DECKMENU2_RIKU_H
+#define GUARD_CARD_DECKMENU2_RIKU_H
 
 #include "card.h"
 #include "types.h"

@@ -29,7 +29,7 @@
 #include "obj_api.h"
 #include "sprite.h"
 #include "types.h"
-#include "util.h"
+#include "key_state.h"
 #include "movie_subtitle_text.h"
 #include "movies.h"
 #include "text_types.h"

@@ -1,5 +1,5 @@
 /**
- * card_mode_premire.c
+ * mode_premire.c
  * Enemy Card Effect Names and Level-Up Test
  */
 
@@ -24,7 +24,7 @@
 #include "mode.h"
 #include <stddef.h>
 #include "types.h"
-#include "card_mode_premire.h"
+#include "mode_premire.h"
 
 static TaskPool sModePremireTasks;
 #ifndef VERSION_EU

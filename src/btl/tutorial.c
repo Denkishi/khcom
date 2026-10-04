@@ -32,40 +32,40 @@ void TutorialRestoreBgMode() {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
-void TutorialQueueMessage(TutorialWork* p, u16 b, u32 c) {
-    p->timer = 0;
-    p->state = 1;
-    p->nextState = c;
-    p->message = b;
+void TutorialQueueMessage(TutorialWork* work, u16 b, u32 c) {
+    work->timer = 0;
+    work->state = 1;
+    work->nextState = c;
+    work->message = b;
 }
 
-void TutorialQueuePersistentMessage(TutorialWork* p, u16 b, u32 c) {
-    p->timer = 0;
-    p->state = 3;
-    p->nextState = c;
-    p->message = b;
+void TutorialQueuePersistentMessage(TutorialWork* work, u16 b, u32 c) {
+    work->timer = 0;
+    work->state = 3;
+    work->nextState = c;
+    work->message = b;
 }
 
 void TutorialCloseMessage() {
     CloseMessageWindow();
 }
 
-void TutorialWait(TutorialWork* p, u16 b, u32 c) {
-    p->timer = 0;
-    p->state = 0;
-    p->nextState = c;
-    p->unk_00E = b;
+void TutorialWait(TutorialWork* work, u16 b, u32 c) {
+    work->timer = 0;
+    work->state = 0;
+    work->nextState = c;
+    work->unk_00E = b;
 }
 
-void TutorialShowArrow(TutorialWork* p, u16 b, u16 c, u16 d) {
-    p->flags |= TUTORIAL_FLAG_SHOW_ARROW;
-    p->arrowX = b;
-    p->arrowY = c;
-    AnimStart(&p->anim, d, ANIM_FLAG_LOOP);
+void TutorialShowArrow(TutorialWork* work, u16 b, u16 c, u16 d) {
+    work->flags |= TUTORIAL_FLAG_SHOW_ARROW;
+    work->arrowX = b;
+    work->arrowY = c;
+    AnimStart(&work->anim, d, ANIM_FLAG_LOOP);
 }
 
-void TutorialHideArrow(TutorialWork* p) {
-    p->flags &= ~TUTORIAL_FLAG_SHOW_ARROW;
+void TutorialHideArrow(TutorialWork* work) {
+    work->flags &= ~TUTORIAL_FLAG_SHOW_ARROW;
 }
 
 void task_tutorial_0(TutorialWork* work, s32 arg1) {

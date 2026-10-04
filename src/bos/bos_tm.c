@@ -38,110 +38,110 @@ static Task* sBosTmFootTask;
 static Task* sBosTmTblTask;
 static TaskPool sBosTmTaskPool;
 
-void BosTmSetArmPositions(TmWork* w) {
-    if (w->flags & TM_FLAG_FACING_LEFT) {
-        w->arm.x = w->x2 + 0x1000;
-        w->arm.x2 = w->x2 - 0x700;
-        w->arm.y = w->y2 + 0x700;
-        w->arm.y2 = w->y2 - 0x400;
-        w->arm.z = w->z2 - 0x2200;
-        w->arm.z2 = w->z2 - 0x1C00;
+void BosTmSetArmPositions(TmWork* work) {
+    if (work->flags & TM_FLAG_FACING_LEFT) {
+        work->arm.x = work->x2 + 0x1000;
+        work->arm.x2 = work->x2 - 0x700;
+        work->arm.y = work->y2 + 0x700;
+        work->arm.y2 = work->y2 - 0x400;
+        work->arm.z = work->z2 - 0x2200;
+        work->arm.z2 = work->z2 - 0x1C00;
     } else {
-        w->arm.x = w->x2 + 0x700;
-        w->arm.x2 = w->x2 - 0xE00;
-        w->arm.y = w->y2 - 0x400;
-        w->arm.y2 = w->y2 + 0x700;
-        w->arm.z = w->z2 - 0x1C00;
-        w->arm.z2 = w->z2 - 0x2200;
+        work->arm.x = work->x2 + 0x700;
+        work->arm.x2 = work->x2 - 0xE00;
+        work->arm.y = work->y2 - 0x400;
+        work->arm.y2 = work->y2 + 0x700;
+        work->arm.z = work->z2 - 0x1C00;
+        work->arm.z2 = work->z2 - 0x2200;
     }
 }
 
-void task_bos_tm_0(TmWork* w, BtlObj* arg) {
-    w->flags = 0;
+void task_bos_tm_0(TmWork* work, BtlObj* arg) {
+    work->flags = 0;
 
     if (arg != NULL) {
-        w->flags = TM_FLAG_IN_EVENT;
+        work->flags = TM_FLAG_IN_EVENT;
     }
 
     TaskPoolInit(&sBosTmTaskPool, 4);
 
-    if (w->flags & TM_FLAG_IN_EVENT) {
-        w->x = arg->x >> 8;
-        w->y = arg->y >> 8;
-        w->z = arg->z >> 8;
+    if (work->flags & TM_FLAG_IN_EVENT) {
+        work->x = arg->x >> 8;
+        work->y = arg->y >> 8;
+        work->z = arg->z >> 8;
     } else {
-        w->x = 0x15D;
-        w->y = 0x16C;
-        w->z = -0x3C;
-        gBtlWork->bossX = w->x << 8;
+        work->x = 0x15D;
+        work->y = 0x16C;
+        work->z = -0x3C;
+        gBtlWork->bossX = work->x << 8;
         gBtlWork->bossY = 0x156 << 8;
-        gBtlWork->bossZ = (s16)w->z << 8;
+        gBtlWork->bossZ = (s16)work->z << 8;
     }
 
-    w->baseX = (s16)w->x << 8;
-    w->baseY = (s16)w->y << 8;
-    w->baseZ = (s16)w->z << 8;
-    w->x2 = w->baseX;
-    w->y2 = w->baseY;
-    w->z2 = w->baseZ;
-    w->vx = 0;
-    w->vy = 0;
-    w->step = 0;
-    w->stepTimer = 0;
-    w->hitCount = 0;
-    w->hurtTimer = 55;
-    w->stateTimer = 0;
-    w->tableState = 0;
-    w->flags |= (TM_FLAG_TABLE_JUST_RAISED | TM_FLAG_FACING_LEFT);
-    w->unk_3B = 0;
-    w->resumeState = 16;
-    w->tileIndex = 0;
-    w->tileCount = 0;
-    w->paletteIndex = 0;
-    w->arm.tm = w;
-    BosTmSetArmPositions(w);
+    work->baseX = (s16)work->x << 8;
+    work->baseY = (s16)work->y << 8;
+    work->baseZ = (s16)work->z << 8;
+    work->x2 = work->baseX;
+    work->y2 = work->baseY;
+    work->z2 = work->baseZ;
+    work->vx = 0;
+    work->vy = 0;
+    work->step = 0;
+    work->stepTimer = 0;
+    work->hitCount = 0;
+    work->hurtTimer = 55;
+    work->stateTimer = 0;
+    work->tableState = 0;
+    work->flags |= (TM_FLAG_TABLE_JUST_RAISED | TM_FLAG_FACING_LEFT);
+    work->unk_3B = 0;
+    work->resumeState = 16;
+    work->tileIndex = 0;
+    work->tileCount = 0;
+    work->paletteIndex = 0;
+    work->arm.tm = work;
+    BosTmSetArmPositions(work);
 
-    if (w->flags & TM_FLAG_IN_EVENT) {
-        w->state = 15;
-        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, w);
-        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
+    if (work->flags & TM_FLAG_IN_EVENT) {
+        work->state = 15;
+        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, work);
+        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, work);
+        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &work->arm);
     } else {
-        w->state = 0;
+        work->state = 0;
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosMap, (void*)&sBosTmBattleBackgroundDef);
-        sBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, w);
-        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, w);
-        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, w);
-        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &w->arm);
+        sBosTmTblTask = TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBosTmTbl, work);
+        sBosTmBodyTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmBody, work);
+        sBosTmFootTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmFoot, work);
+        sBosTmArmTask = TaskCreate(&sBosTmTaskPool, &gTaskDescBosTmArm, &work->arm);
         gBtlWork->bossPriorityOffset = 10;
     }
 }
 
-u8 task_bos_tm_1(TmWork* w) {
+u8 task_bos_tm_1(TmWork* work) {
     CharaObjParam2 param;
     u16 t;
 
-    switch (w->state) {
+    switch (work->state) {
     case 0:
     case 15:
-        w->stepTimer++;
+        work->stepTimer++;
 
-        if (w->stepTimer > 8) {
-            w->stepTimer = 0;
-            w->step++;
+        if (work->stepTimer > 8) {
+            work->stepTimer = 0;
+            work->step++;
 
-            if (w->step > 7) {
-                w->step = 0;
+            if (work->step > 7) {
+                work->step = 0;
             }
         }
 
         break;
     case 12:
-        w->step++;
-        t = w->hitCount;
+        work->step++;
+        t = work->hitCount;
 
         if ((s16)t == 1) {
-            w->hitCount = t + 1;
+            work->hitCount = t + 1;
         }
 
         break;
@@ -149,40 +149,40 @@ u8 task_bos_tm_1(TmWork* w) {
     case 5:
     case 6:
     case 7:
-        w->stepTimer++;
+        work->stepTimer++;
 
-        if (w->stepTimer > 6) {
-            w->stepTimer = 0;
-            w->step++;
+        if (work->stepTimer > 6) {
+            work->stepTimer = 0;
+            work->step++;
 
-            if (w->step > 9) {
-                w->step = 0;
+            if (work->step > 9) {
+                work->step = 0;
             }
         }
 
         break;
     case 13:
-        if (w->step != 0) {
+        if (work->step != 0) {
             if (!CharaObjUpdateDefeat2()) {
                 EndBossDefeat();
                 return 0;
             }
         } else {
-            param.tilesAddr = OBJ_VRAM0 + (w->tileIndex << 5);
-            param.tileCount = w->tileCount;
-            param.paletteAddr = OBJ_PLTT + (w->paletteIndex << 5);
+            param.tilesAddr = OBJ_VRAM0 + (work->tileIndex << 5);
+            param.tileCount = work->tileCount;
+            param.paletteAddr = OBJ_PLTT + (work->paletteIndex << 5);
             param.paletteSize = 0x60;
-            param.x = w->x2;
-            param.y = w->y2;
-            param.z = w->z2;
+            param.x = work->x2;
+            param.y = work->y2;
+            param.z = work->z2;
             param.callback = BosTmDestroyParts;
-            gBosTmBodyObjCopy.x = w->x2;
-            gBosTmBodyObjCopy.y = w->y2;
-            gBosTmBodyObjCopy.z = w->z2;
+            gBosTmBodyObjCopy.x = work->x2;
+            gBosTmBodyObjCopy.y = work->y2;
+            gBosTmBodyObjCopy.z = work->z2;
             param.prizeObj = &gBosTmBodyObjCopy;
             CharaObjInitDefeat2(&param);
-            w->flags &= ~TM_FLAG_HURT;
-            w->step++;
+            work->flags &= ~TM_FLAG_HURT;
+            work->step++;
         }
 
         break;
@@ -190,7 +190,7 @@ u8 task_bos_tm_1(TmWork* w) {
     case 3:
     case 9:
     case 11:
-        w->step++;
+        work->step++;
         break;
     case 17:
         break;
@@ -201,7 +201,7 @@ u8 task_bos_tm_1(TmWork* w) {
     gBosTmActorZ = gBtlWork->actor->z >> 8;
     gUnk_0203AB48 = gBtlWork->bossY >> 8;
 
-    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && w->state != 13) {
+    if ((gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) && work->state != 13) {
         if (gBtlWork->actor->originZ <= -0x2D00) {
             gBtlWork->bossPriorityOffset = -10;
         } else {
@@ -216,16 +216,16 @@ u8 task_bos_tm_1(TmWork* w) {
     }
 
     TaskPoolUpdate(&sBosTmTaskPool);
-    BosTmSetArmPositions(w);
-    w->stateTimer++;
+    BosTmSetArmPositions(work);
+    work->stateTimer++;
     return 1;
 }
 
-void task_bos_tm_2(TmWork* w) {
+void task_bos_tm_2(TmWork* work) {
     TaskPoolDraw(&sBosTmTaskPool);
 }
 
-void task_bos_tm_3(TmWork* w) {
+void task_bos_tm_3(TmWork* work) {
     TaskPoolDestroy(&sBosTmTaskPool);
 }
 

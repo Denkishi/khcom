@@ -32,151 +32,151 @@
 
 static SysMsgWinWork* sActiveSysmsgwin;
 
-u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a);
-s32 UpdateSysmsgwinClose(SysMsgWinWork* w);
-u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a);
-u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a);
+u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a);
+s32 UpdateSysmsgwinClose(SysMsgWinWork* work);
+u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a);
+u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a);
 
 static const s32 sSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 
-void sysmsgwin_0(SysMsgWinWork* w, CardMessageArgs* a) {
-    CpuFill32(0, w, sizeof(SysMsgWinWork));
-    w->args = *a;
-    w->messageDef = &gCardMessageDefs[w->args.messageId];
+void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
+    CpuFill32(0, work, sizeof(SysMsgWinWork));
+    work->args = *a;
+    work->messageDef = &gCardMessageDefs[work->args.messageId];
 
-    if (w->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
-        w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 1);
+    if (work->messageDef->flags & CARD_MSG_FLAG_ALT_HIGHLIGHT) {
+        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 1);
     } else {
-        w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
+        work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
     }
 
-    FadeSetPaletteExcluded(w->glyphPaletteIndex + 16, 1);
-    w->unk_138[4] = 0;
-    w->unk_138[0] = 8;
-    w->unk_138[1] = 0;
-    w->unk_138[2] = 0;
-    w->unk_138[3] = 0;
-    w->unk_143 = 0;
-    w->nextText = NULL;
-    w->tiles3 = NULL;
-    w->palette = NULL;
-    w->tiles4 = NULL;
-    w->palette2 = NULL;
-    w->tiles2 = NULL;
-    w->palette4 = NULL;
-    w->tiles = NULL;
-    w->palette3 = NULL;
-    w->textPalette = NULL;
-    w->unk_142 = 1;
-    w->waitIconVisible = 1;
-    w->choiceVisible = 0;
-    w->textSlotCount = 0;
-    w->textSlotCount2 = 0;
-    w->messagePending = 0;
-    w->unk_146[0] = 1;
+    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
+    work->unk_138[4] = 0;
+    work->unk_138[0] = 8;
+    work->unk_138[1] = 0;
+    work->unk_138[2] = 0;
+    work->unk_138[3] = 0;
+    work->unk_143 = 0;
+    work->nextText = NULL;
+    work->tiles3 = NULL;
+    work->palette = NULL;
+    work->tiles4 = NULL;
+    work->palette2 = NULL;
+    work->tiles2 = NULL;
+    work->palette4 = NULL;
+    work->tiles = NULL;
+    work->palette3 = NULL;
+    work->textPalette = NULL;
+    work->unk_142 = 1;
+    work->waitIconVisible = 1;
+    work->choiceVisible = 0;
+    work->textSlotCount = 0;
+    work->textSlotCount2 = 0;
+    work->messagePending = 0;
+    work->unk_146[0] = 1;
 #ifdef VERSION_JP
-    w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
-                                   (TextChar*)w->messageDef->text, &w->nextText);
+    work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
+                                   (TextChar*)work->messageDef->text, &work->nextText);
 #else
-    if (w->nextText != NULL) {
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
-                                       (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+    if (work->nextText != NULL) {
+        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+                                       (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
     } else {
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
-                                       (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+                                       (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
     }
 #endif
 
-    InitTextSlots(w->textSlots, 10);
-    InitTextSlots(w->textSlots2, 10);
+    InitTextSlots(work->textSlots, 10);
+    InitTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
-    w->unk_138[1] = w->unk_138[3];
+    work->unk_138[1] = work->unk_138[3];
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 0:
-        w->tiles3 = AllocObjTiles(0x40, NULL);
-        w->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(w->palette->index + 16, 1);
-        SetObjTileSource(w->tiles3, gFEventTiles);
-        AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
-        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
-        w->gfx4 = AnimGetGfx(&w->anim2);
-        SetBgPriority(w->args.bg, 0);
+        work->tiles3 = AllocObjTiles(0x40, NULL);
+        work->palette = LoadObjPalette(gBStatesPalette, 32);
+        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        SetObjTileSource(work->tiles3, gFEventTiles);
+        AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
+        AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
+        work->gfx4 = AnimGetGfx(&work->anim2);
+        SetBgPriority(work->args.bg, 0);
         break;
     case 1:
-        SetBgPriority(w->args.bg, 0);
+        SetBgPriority(work->args.bg, 0);
         break;
     case 2:
-        w->tiles3 = AllocObjTiles(0x40, NULL);
-        w->palette = LoadObjPalette(gBStatesPalette, 32);
-        FadeSetPaletteExcluded(w->palette->index + 16, 1);
-        SetObjTileSource(w->tiles3, gFEventTiles);
-        AnimInit(&w->anim2, gFEventAnims, gFEventFrames);
-        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
-        w->gfx4 = AnimGetGfx(&w->anim2);
+        work->tiles3 = AllocObjTiles(0x40, NULL);
+        work->palette = LoadObjPalette(gBStatesPalette, 32);
+        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        SetObjTileSource(work->tiles3, gFEventTiles);
+        AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
+        AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
+        work->gfx4 = AnimGetGfx(&work->anim2);
         break;
     }
 
-    sActiveSysmsgwin = w;
+    sActiveSysmsgwin = work;
 }
 
-u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
+u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
     void* pal;
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 0:
     case 1:
         pal = &gUnk_050001C0[0x20];
-        LoadBgTiles(w->args.bg, gUnk_0950E2F8, 0x140);
-        LoadBgMap(w->args.bg, gUnk_096112B8, 0x800);
+        LoadBgTiles(work->args.bg, gUnk_0950E2F8, 0x140);
+        LoadBgMap(work->args.bg, gUnk_096112B8, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
-        switch (w->messageDef->positionIndex) {
+        switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
-            SetBgScroll(w->args.bg, (u16)-24, 0);
+            SetBgScroll(work->args.bg, (u16)-24, 0);
             break;
         case 1:
         case 3:
-            SetBgScroll(w->args.bg, (u16)-24, (u16)-94);
+            SetBgScroll(work->args.bg, (u16)-24, (u16)-94);
             break;
         default:
-            SetBgScroll(w->args.bg, (u16)-24, (u16)-94);
+            SetBgScroll(work->args.bg, (u16)-24, (u16)-94);
             break;
         }
 
         break;
     case 2:
     case 3:
-        switch (w->messageDef->positionIndex) {
+        switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
-            w->frameX = 0x7800;
-            w->frameY = 0x2200;
+            work->frameX = 0x7800;
+            work->frameY = 0x2200;
             break;
         case 1:
         default:
-            w->frameX = 0x7800;
-            w->frameY = 0x7E00;
+            work->frameX = 0x7800;
+            work->frameY = 0x7E00;
             break;
         }
 
-        w->tiles2 = LoadObjTiles(gUnk_093F98AC, 0x1800);
+        work->tiles2 = LoadObjTiles(gUnk_093F98AC, 0x1800);
 
-        if (w->tiles2 == NULL) {
-            w->unk_146[1] = 1;
-            w->tiles2 = LoadObjTiles(&gUnk_0950E2F8[0x140], 0x680);
+        if (work->tiles2 == NULL) {
+            work->unk_146[1] = 1;
+            work->tiles2 = LoadObjTiles(&gUnk_0950E2F8[0x140], 0x680);
         } else {
-            w->unk_146[1] = 0;
+            work->unk_146[1] = 0;
         }
 
-        w->palette4 = LoadObjPalette(gCard00Palette, 32);
-        FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+        work->palette4 = LoadObjPalette(gCard00Palette, 32);
+        FadeSetPaletteExcluded(work->palette4->index + 16, 1);
         break;
     }
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 0:
     case 2:
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinWaitInput);
@@ -190,67 +190,67 @@ u8 sysmsgwin_1(SysMsgWinWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
+u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
     u16* pal;
 
-    if (w->tiles3 != NULL) {
-        w->gfx4 = AnimUpdate(&w->anim2);
+    if (work->tiles3 != NULL) {
+        work->gfx4 = AnimUpdate(&work->anim2);
     }
 
     if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_KETTEI);
 
-        if (w->nextText != NULL) {
+        if (work->nextText != NULL) {
 #ifdef VERSION_JP
-            w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[w->messageDef->positionIndex],
-                                           w->nextText, &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x2E00, gMsgwinTextY[work->messageDef->positionIndex],
+                                           work->nextText, &work->nextText);
 #else
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
-                                           w->nextText, &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x2E00, sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+                                           work->nextText, &work->nextText);
 #endif
-            w->unk_138[1] = w->unk_138[3];
-        } else if (!(w->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
-            AnimStart(&w->anim2, 3, ANIM_FLAG_LOOP);
-            w->unk_142 = 0;
+            work->unk_138[1] = work->unk_138[3];
+        } else if (!(work->messageDef->flags & CARD_MSG_FLAG_CHOICE_AT_END)) {
+            AnimStart(&work->anim2, 3, ANIM_FLAG_LOOP);
+            work->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
-            w->closeTimer = 0;
-            w->unk_138[0] = 8;
+            work->closeTimer = 0;
+            work->unk_138[0] = 8;
         } else {
-            ReleaseObjTiles(w->tiles3);
-            ReleaseObjPalette(w->palette);
-            w->tiles3 = NULL;
-            w->palette = NULL;
-            w->tiles4 = AllocObjTiles(0x120, NULL);
+            ReleaseObjTiles(work->tiles3);
+            ReleaseObjPalette(work->palette);
+            work->tiles3 = NULL;
+            work->palette = NULL;
+            work->tiles4 = AllocObjTiles(0x120, NULL);
             pal = gUnk_09614418;
-            w->palette2 = LoadObjPalette(pal, 32);
+            work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 #else
-            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
-            LoadObjPaletteBank(w->palette2->index, pal);
-            SetObjTileSource(w->tiles4, gUnk_090A4664);
-            AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-            AnimStart(&w->anim3, 2, ANIM_FLAG_LOOP);
-            w->gfx = AnimGetGfx(&w->anim3);
-            w->choice = 1;
-            w->x = 0x5800;
-            w->cursorY = gMsgwaitYesnoCursorY[w->choice] - 0x500;
+            LoadObjPaletteBank(work->palette2->index, pal);
+            SetObjTileSource(work->tiles4, gUnk_090A4664);
+            AnimInit(&work->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+            AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
+            work->gfx = AnimGetGfx(&work->anim3);
+            work->choice = 1;
+            work->x = 0x5800;
+            work->cursorY = gMsgwaitYesnoCursorY[work->choice] - 0x500;
 #ifdef VERSION_EU
-            w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots);
-            w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots2);
+            work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots);
+            work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots2);
 #else
-            w->textSlotCount = LoadTextSlots(gUnk_08159E10, w->textSlots);
-            w->textSlotCount2 = LoadTextSlots(gUnk_08159E18, w->textSlots2);
+            work->textSlotCount = LoadTextSlots(gUnk_08159E10, work->textSlots);
+            work->textSlotCount2 = LoadTextSlots(gUnk_08159E18, work->textSlots2);
 #endif
-            w->textPalette = LoadTextPalette(1);
-            w->choiceVisible = 1;
-            w->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
-            w->palette3 = LoadObjPalette(gCard00Palette, 32);
+            work->textPalette = LoadTextPalette(1);
+            work->choiceVisible = 1;
+            work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+            work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
 #else
-            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoice);
         }
@@ -259,189 +259,189 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* w, void* a) {
     return 1;
 }
 
-s32 UpdateSysmsgwinClose(SysMsgWinWork* w) {
-    if (w->tiles3 != NULL) {
-        w->gfx4 = AnimUpdate(&w->anim2);
+s32 UpdateSysmsgwinClose(SysMsgWinWork* work) {
+    if (work->tiles3 != NULL) {
+        work->gfx4 = AnimUpdate(&work->anim2);
     }
 
-    w->closeTimer += 1;
+    work->closeTimer += 1;
 
-    if (w->closeTimer > 15) {
-        w->waitIconVisible = 0;
+    if (work->closeTimer > 15) {
+        work->waitIconVisible = 0;
         return 0;
     }
 
     return 1;
 }
 
-u8 UpdateSysmsgwinChoice(SysMsgWinWork* w, void* a) {
-    w->gfx = AnimUpdate(&w->anim3);
+u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a) {
+    work->gfx = AnimUpdate(&work->anim3);
 
     switch (GetKeysPressed()) {
     case DPAD_UP:
-        if (w->choice != 0) {
-            w->choice--;
+        if (work->choice != 0) {
+            work->choice--;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursorSteps = 4;
+        work->cursorSteps = 4;
         break;
     case DPAD_DOWN:
-        if (w->choice == 0) {
-            w->choice++;
+        if (work->choice == 0) {
+            work->choice++;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursorSteps = 4;
+        work->cursorSteps = 4;
         break;
     case A_BUTTON:
     case START_BUTTON:
         m4aSongNumStart(SONG_SYS_KETTEI);
 
-        if (w->choice == 0) {
+        if (work->choice == 0) {
             gMessageWindowAnswerYes = 1;
         } else {
             gMessageWindowAnswerYes = 0;
         }
 
-        w->unk_142 = 0;
+        work->unk_142 = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
         break;
     }
 
-    if (w->cursorSteps != 0) {
-        ApproachValue(&w->cursorY, gMsgwaitYesnoCursorY[w->choice] - 0x500, w->cursorSteps);
-        w->cursorSteps--;
+    if (work->cursorSteps != 0) {
+        ApproachValue(&work->cursorY, gMsgwaitYesnoCursorY[work->choice] - 0x500, work->cursorSteps);
+        work->cursorSteps--;
     }
 
     return 1;
 }
 
-void sysmsgwin_2(SysMsgWinWork* w) {
-    DrawCardMsgGlyphs(w->unk_138[1]);
+void sysmsgwin_2(SysMsgWinWork* work) {
+    DrawCardMsgGlyphs(work->unk_138[1]);
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 2:
     case 3:
-        if (w->tiles2 != NULL) {
-            if (w->unk_146[1] != 0) {
-                DrawSprite(w->frameX >> 8, w->frameY >> 8, (&gUnk_09EF12E8[2])[0],
-                           w->tiles2, w->palette4, NULL, 0, 10);
+        if (work->tiles2 != NULL) {
+            if (work->unk_146[1] != 0) {
+                DrawSprite(work->frameX >> 8, work->frameY >> 8, (&gUnk_09EF12E8[2])[0],
+                           work->tiles2, work->palette4, NULL, 0, 10);
             } else {
-                DrawSprite(w->frameX >> 8, w->frameY >> 8, (&gUnk_09EF1278[2])[0],
-                           w->tiles2, w->palette4, NULL, 0, 10);
+                DrawSprite(work->frameX >> 8, work->frameY >> 8, (&gUnk_09EF1278[2])[0],
+                           work->tiles2, work->palette4, NULL, 0, 10);
             }
         }
 
         break;
     }
 
-    if (w->tiles3 != NULL) {
-        if (w->waitIconVisible) {
-            DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4,
-                       w->tiles3, w->palette, NULL, 0, 5);
+    if (work->tiles3 != NULL) {
+        if (work->waitIconVisible) {
+            DrawSprite(120, gMsgwaitIconPos[work->messageDef->positionIndex][1] >> 8, work->gfx4,
+                       work->tiles3, work->palette, NULL, 0, 5);
         }
     }
 
-    if (w->tiles4 != NULL) {
-        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx,
-                   w->tiles4, w->palette2, NULL, SPRITE_FLAG_HFLIP, 5);
+    if (work->tiles4 != NULL) {
+        DrawSprite(work->x >> 8, work->cursorY >> 8, work->gfx,
+                   work->tiles4, work->palette2, NULL, SPRITE_FLAG_HFLIP, 5);
     }
 
-    if (w->choiceVisible) {
-        DrawSprite(120, 75, gUnk_09EF126C[1], w->tiles, w->palette3, NULL, 0, 10);
-        DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) >> 1, 62, w->textSlots,
-                      w->textPalette, 0, w->textSlotCount);
-        DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) >> 1, 77, w->textSlots2,
-                      w->textPalette, 0, w->textSlotCount2);
+    if (work->choiceVisible) {
+        DrawSprite(120, 75, gUnk_09EF126C[1], work->tiles, work->palette3, NULL, 0, 10);
+        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 62, work->textSlots,
+                      work->textPalette, 0, work->textSlotCount);
+        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 77, work->textSlots2,
+                      work->textPalette, 0, work->textSlotCount2);
     }
 }
 
-void sysmsgwin_3(SysMsgWinWork* w) {
-    if (w->args.mode <= 1) {
-        DisableBg(w->args.bg);
+void sysmsgwin_3(SysMsgWinWork* work) {
+    if (work->args.mode <= 1) {
+        DisableBg(work->args.bg);
     }
 
     FreeCardMsgGlyphSprites();
 
-    if (w->tiles3 != NULL) {
-        ReleaseObjTiles(w->tiles3);
+    if (work->tiles3 != NULL) {
+        ReleaseObjTiles(work->tiles3);
     }
 
-    if (w->palette != NULL) {
-        ReleaseObjPalette(w->palette);
+    if (work->palette != NULL) {
+        ReleaseObjPalette(work->palette);
     }
 
-    if (w->tiles4 != NULL) {
-        ReleaseObjTiles(w->tiles4);
+    if (work->tiles4 != NULL) {
+        ReleaseObjTiles(work->tiles4);
     }
 
-    if (w->palette2 != NULL) {
-        ReleaseObjPalette(w->palette2);
+    if (work->palette2 != NULL) {
+        ReleaseObjPalette(work->palette2);
     }
 
-    if (w->tiles != NULL) {
-        ReleaseObjTiles(w->tiles);
+    if (work->tiles != NULL) {
+        ReleaseObjTiles(work->tiles);
     }
 
-    if (w->tiles2 != NULL) {
-        ReleaseObjTiles(w->tiles2);
+    if (work->tiles2 != NULL) {
+        ReleaseObjTiles(work->tiles2);
     }
 
-    if (w->palette4 != NULL) {
-        ReleaseObjPalette(w->palette4);
+    if (work->palette4 != NULL) {
+        ReleaseObjPalette(work->palette4);
     }
 
-    if (w->palette3 != NULL) {
-        ReleaseObjPalette(w->palette3);
+    if (work->palette3 != NULL) {
+        ReleaseObjPalette(work->palette3);
     }
 
-    if (w->textPalette != NULL) {
-        ReleaseObjPalette(w->textPalette);
+    if (work->textPalette != NULL) {
+        ReleaseObjPalette(work->textPalette);
     }
 
-    FreeTextSlots(w->textSlots, 10);
-    FreeTextSlots(w->textSlots2, 10);
+    FreeTextSlots(work->textSlots, 10);
+    FreeTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 0;
     sActiveSysmsgwin = NULL;
 }
 
-u8 UpdateSysmsgwinPersistent(SysMsgWinWork* w, void* a) {
+u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a) {
 #ifndef VERSION_JP
     TextChar** p;
 #endif
 
-    if (w->unk_146[0] == 0) {
+    if (work->unk_146[0] == 0) {
         return 0;
     }
 
-    if (w->messagePending == 1) {
-        w->messagePending = 0;
-        w->messageDef = &gCardMessageDefs[w->args.messageId];
+    if (work->messagePending == 1) {
+        work->messagePending = 0;
+        work->messageDef = &gCardMessageDefs[work->args.messageId];
 #ifdef VERSION_JP
-        w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(
+        work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(
             0x2E00,
-            gMsgwinTextY[w->messageDef->positionIndex],
-            (TextChar*)(w->messageDef->text),
-            &w->nextText);
+            gMsgwinTextY[work->messageDef->positionIndex],
+            (TextChar*)(work->messageDef->text),
+            &work->nextText);
 #else
-        p = &w->nextText;
+        p = &work->nextText;
 
         if (*p != NULL) {
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(
                 0x2E00,
-                sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
+                sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                 *p, p);
         } else {
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(
                 0x2E00,
-                sSysmsgwinTextY[w->messageDef->positionIndex] - 0x200,
-                (TextChar*)LANGSTR(w->messageDef->text),
+                sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
+                (TextChar*)LANGSTR(work->messageDef->text),
                 p);
         }
 #endif
 
-        w->unk_138[1] = w->unk_138[3];
+        work->unk_138[1] = work->unk_138[3];
     }
 
     return 1;
@@ -467,225 +467,225 @@ s32 CloseSysmsgwin() {
     return 0;
 }
 
-void sysmsgwinChoice_0(SysMsgWinWork* w, CardMessageArgs* a) {
-    CpuFill32(0, w, sizeof(SysMsgWinWork));
-    w->args = *a;
-    w->messageDef = &gCardMessageDefs[w->args.messageId];
-    w->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
-    FadeSetPaletteExcluded(w->glyphPaletteIndex + 16, 1);
-    w->unk_138[4] = 0;
-    w->unk_138[0] = 8;
-    w->unk_138[1] = 0;
-    w->unk_138[2] = 0;
-    w->unk_138[3] = 0;
-    w->unk_143 = 0;
-    w->nextText = NULL;
-    w->tiles3 = NULL;
-    w->palette = NULL;
-    w->tiles4 = NULL;
-    w->palette2 = NULL;
-    w->tiles2 = NULL;
-    w->palette4 = NULL;
-    w->tiles = NULL;
-    w->palette3 = NULL;
-    w->textPalette = NULL;
-    w->unk_142 = 1;
-    w->waitIconVisible = 1;
-    w->choiceVisible = 0;
-    w->textSlotCount = 0;
-    w->textSlotCount2 = 0;
-    w->messagePending = 0;
-    w->unk_146[0] = 1;
+void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
+    CpuFill32(0, work, sizeof(SysMsgWinWork));
+    work->args = *a;
+    work->messageDef = &gCardMessageDefs[work->args.messageId];
+    work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
+    FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
+    work->unk_138[4] = 0;
+    work->unk_138[0] = 8;
+    work->unk_138[1] = 0;
+    work->unk_138[2] = 0;
+    work->unk_138[3] = 0;
+    work->unk_143 = 0;
+    work->nextText = NULL;
+    work->tiles3 = NULL;
+    work->palette = NULL;
+    work->tiles4 = NULL;
+    work->palette2 = NULL;
+    work->tiles2 = NULL;
+    work->palette4 = NULL;
+    work->tiles = NULL;
+    work->palette3 = NULL;
+    work->textPalette = NULL;
+    work->unk_142 = 1;
+    work->waitIconVisible = 1;
+    work->choiceVisible = 0;
+    work->textSlotCount = 0;
+    work->textSlotCount2 = 0;
+    work->messagePending = 0;
+    work->unk_146[0] = 1;
 #ifdef VERSION_JP
-    w->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)w->messageDef->text, &w->nextText);
+    work->unk_138[3] = LayoutCardMsgGlyphsPageSjis(0x4000, 0x4000, (TextChar*)work->messageDef->text, &work->nextText);
 #else
-    if (w->nextText != NULL) {
+    if (work->nextText != NULL) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_GERMAN:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_SPANISH:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_ITALIAN:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         default:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         }
 #else
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
 #endif
     } else {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_GERMAN:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4100, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_SPANISH:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4400, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         case LANGUAGE_ITALIAN:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4600, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         default:
-            w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+            work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
             break;
         }
 #else
-        w->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(w->messageDef->text), &w->nextText);
+        work->unk_138[3] = LayoutCardMsgGlyphsPage(0x4D00, 0x4000, (TextChar*)LANGSTR(work->messageDef->text), &work->nextText);
 #endif
     }
 #endif
 
-    InitTextSlots(w->textSlots, 10);
-    InitTextSlots(w->textSlots2, 10);
+    InitTextSlots(work->textSlots, 10);
+    InitTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 1;
     gMessageWindowAnswerYes = 0;
-    w->unk_138[1] = w->unk_138[3];
-    sActiveSysmsgwin = w;
+    work->unk_138[1] = work->unk_138[3];
+    sActiveSysmsgwin = work;
 }
 
-u8 sysmsgwinChoice_1(SysMsgWinWork* w, void* a) {
+u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* a) {
     void* pal;
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 0:
     case 1:
         pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-        LoadBgTiles(w->args.bg, gUnk_099597E4, 0x140);
-        LoadBgMap(w->args.bg, gUnk_09985F44, 0x800);
+        LoadBgTiles(work->args.bg, gUnk_099597E4, 0x140);
+        LoadBgMap(work->args.bg, gUnk_09985F44, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
-        switch (w->messageDef->positionIndex) {
+        switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
-            SetBgScroll(w->args.bg, 0, 0);
+            SetBgScroll(work->args.bg, 0, 0);
             break;
         case 1:
         case 3:
-            SetBgScroll(w->args.bg, 0, 0);
+            SetBgScroll(work->args.bg, 0, 0);
             break;
         default:
-            SetBgScroll(w->args.bg, 0, 0);
+            SetBgScroll(work->args.bg, 0, 0);
             break;
         }
 
         break;
     case 2:
     case 3:
-        switch (w->messageDef->positionIndex) {
+        switch (work->messageDef->positionIndex) {
         case 0:
         case 2:
-            w->frameX = 0x7800;
-            w->frameY = 0x2000;
+            work->frameX = 0x7800;
+            work->frameY = 0x2000;
             break;
         case 1:
         default:
-            w->frameX = 0x7800;
-            w->frameY = 0x8200;
+            work->frameX = 0x7800;
+            work->frameY = 0x8200;
             break;
         }
 
-        w->tiles2 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
-        w->palette4 = LoadObjPalette(gCard00Palette, 32);
-        FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+        work->tiles2 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+        work->palette4 = LoadObjPalette(gCard00Palette, 32);
+        FadeSetPaletteExcluded(work->palette4->index + 16, 1);
         break;
     }
 
-    if (w->args.mode == 0 || w->args.mode == 2) {
+    if (work->args.mode == 0 || work->args.mode == 2) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceSetup);
     }
 
     return 1;
 }
 
-u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* w, void* a) {
+u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
     u16* pal;
 
-    w->tiles4 = AllocObjTiles(0x120, NULL);
+    work->tiles4 = AllocObjTiles(0x120, NULL);
     pal = gUnk_09614418;
-    w->palette2 = LoadObjPalette(pal, 32);
+    work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 #else
-    FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
-    LoadObjPaletteBank(w->palette2->index, pal);
-    SetObjTileSource(w->tiles4, gUnk_090A4664);
-    AnimInit(&w->anim3, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&w->anim3, 2, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim3);
-    w->choice = 1;
-    w->x = 0x8500;
-    w->cursorY = 0x5000;
+    LoadObjPaletteBank(work->palette2->index, pal);
+    SetObjTileSource(work->tiles4, gUnk_090A4664);
+    AnimInit(&work->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+    AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim3);
+    work->choice = 1;
+    work->x = 0x8500;
+    work->cursorY = 0x5000;
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), w->textSlots2);
+    work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots2);
 #else
-    w->textSlotCount = LoadTextSlots(gUnk_08159E10, w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(gUnk_08159E18, w->textSlots2);
+    work->textSlotCount = LoadTextSlots(gUnk_08159E10, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gUnk_08159E18, work->textSlots2);
 #endif
-    w->textPalette = LoadTextPalette(1);
-    w->choiceVisible = 1;
-    w->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
-    w->palette3 = LoadObjPalette(gCard00Palette, 32);
+    work->textPalette = LoadTextPalette(1);
+    work->choiceVisible = 1;
+    work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+    work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
-    FadeSetPaletteExcluded(w->palette3->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette3->index + 16, 1);
 #else
-    FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceInput);
     return 1;
 }
 
-s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* w) {
-    if (w->tiles3 != NULL) {
-        w->gfx4 = AnimUpdate(&w->anim2);
+s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* work) {
+    if (work->tiles3 != NULL) {
+        work->gfx4 = AnimUpdate(&work->anim2);
     }
 
-    w->closeTimer += 1;
+    work->closeTimer += 1;
 
-    if (w->closeTimer > 15) {
-        w->waitIconVisible = 0;
+    if (work->closeTimer > 15) {
+        work->waitIconVisible = 0;
         return 0;
     }
 
     return 1;
 }
 
-u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* w, void* a) {
+u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* a) {
     s32 tbl[2];
 
     *(u64*)tbl = *(u64*)gSysmsgwinChoiceCursorX;
-    w->gfx = AnimUpdate(&w->anim3);
+    work->gfx = AnimUpdate(&work->anim3);
 
     switch (GetKeysPressed()) {
     case DPAD_LEFT:
-        if (w->choice != 0) {
-            w->choice--;
+        if (work->choice != 0) {
+            work->choice--;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursorSteps = 1;
+        work->cursorSteps = 1;
         break;
     case DPAD_RIGHT:
-        if (w->choice == 0) {
-            w->choice++;
+        if (work->choice == 0) {
+            work->choice++;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursorSteps = 1;
+        work->cursorSteps = 1;
         break;
     }
 
@@ -694,101 +694,101 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* w, void* a) {
     case START_BUTTON:
         m4aSongNumStart(SONG_SYS_KETTEI);
 
-        if (w->choice == 0) {
+        if (work->choice == 0) {
             gMessageWindowAnswerYes = 1;
         } else {
             gMessageWindowAnswerYes = 0;
         }
 
-        w->unk_142 = 0;
+        work->unk_142 = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
         break;
     case B_BUTTON:
         m4aSongNumStart(SONG_SYS_CLOSE);
         gMessageWindowAnswerYes = 0;
-        w->unk_142 = 0;
+        work->unk_142 = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinChoiceClose);
         break;
     }
 
-    if (w->cursorSteps != 0) {
-        ApproachValue(&w->x, tbl[w->choice], w->cursorSteps);
-        w->cursorSteps--;
+    if (work->cursorSteps != 0) {
+        ApproachValue(&work->x, tbl[work->choice], work->cursorSteps);
+        work->cursorSteps--;
     }
 
     return 1;
 }
 
-void sysmsgwinChoice_2(SysMsgWinWork* w) {
-    DrawCardMsgGlyphs(w->unk_138[1]);
+void sysmsgwinChoice_2(SysMsgWinWork* work) {
+    DrawCardMsgGlyphs(work->unk_138[1]);
 
-    switch (w->args.mode) {
+    switch (work->args.mode) {
     case 2:
     case 3:
-        if (w->tiles2 != NULL) {
-            DrawSprite(w->frameX >> 8, w->frameY >> 8, gUnk_09EF1278[0], w->tiles2, w->palette4, NULL, 0, 20);
+        if (work->tiles2 != NULL) {
+            DrawSprite(work->frameX >> 8, work->frameY >> 8, gUnk_09EF1278[0], work->tiles2, work->palette4, NULL, 0, 20);
         }
 
         break;
     }
 
-    if (w->tiles3 != NULL && w->waitIconVisible) {
-        DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4, w->tiles3, w->palette, NULL, 0, 10);
+    if (work->tiles3 != NULL && work->waitIconVisible) {
+        DrawSprite(120, gMsgwaitIconPos[work->messageDef->positionIndex][1] >> 8, work->gfx4, work->tiles3, work->palette, NULL, 0, 10);
     }
 
-    if (w->tiles4 != NULL) {
-        DrawSprite(w->x >> 8, w->cursorY >> 8, w->gfx, w->tiles4, w->palette2, NULL, SPRITE_FLAG_HFLIP, 10);
+    if (work->tiles4 != NULL) {
+        DrawSprite(work->x >> 8, work->cursorY >> 8, work->gfx, work->tiles4, work->palette2, NULL, SPRITE_FLAG_HFLIP, 10);
     }
 
-    DrawTextSlots(89, 86, w->textSlots, w->textPalette, 0, w->textSlotCount);
-    DrawTextSlots(135, 86, w->textSlots2, w->textPalette, 0, w->textSlotCount2);
+    DrawTextSlots(89, 86, work->textSlots, work->textPalette, 0, work->textSlotCount);
+    DrawTextSlots(135, 86, work->textSlots2, work->textPalette, 0, work->textSlotCount2);
 }
 
-void sysmsgwinChoice_3(SysMsgWinWork* w) {
-    if (w->args.mode <= 1) {
-        DisableBg(w->args.bg);
+void sysmsgwinChoice_3(SysMsgWinWork* work) {
+    if (work->args.mode <= 1) {
+        DisableBg(work->args.bg);
     }
 
     FreeCardMsgGlyphSprites();
 
-    if (w->tiles3 != NULL) {
-        ReleaseObjTiles(w->tiles3);
+    if (work->tiles3 != NULL) {
+        ReleaseObjTiles(work->tiles3);
     }
 
-    if (w->palette != NULL) {
-        ReleaseObjPalette(w->palette);
+    if (work->palette != NULL) {
+        ReleaseObjPalette(work->palette);
     }
 
-    if (w->tiles4 != NULL) {
-        ReleaseObjTiles(w->tiles4);
+    if (work->tiles4 != NULL) {
+        ReleaseObjTiles(work->tiles4);
     }
 
-    if (w->palette2 != NULL) {
-        ReleaseObjPalette(w->palette2);
+    if (work->palette2 != NULL) {
+        ReleaseObjPalette(work->palette2);
     }
 
-    if (w->tiles != NULL) {
-        ReleaseObjTiles(w->tiles);
+    if (work->tiles != NULL) {
+        ReleaseObjTiles(work->tiles);
     }
 
-    if (w->tiles2 != NULL) {
-        ReleaseObjTiles(w->tiles2);
+    if (work->tiles2 != NULL) {
+        ReleaseObjTiles(work->tiles2);
     }
 
-    if (w->palette4 != NULL) {
-        ReleaseObjPalette(w->palette4);
+    if (work->palette4 != NULL) {
+        ReleaseObjPalette(work->palette4);
     }
 
-    if (w->palette3 != NULL) {
-        ReleaseObjPalette(w->palette3);
+    if (work->palette3 != NULL) {
+        ReleaseObjPalette(work->palette3);
     }
 
-    if (w->textPalette != NULL) {
-        ReleaseObjPalette(w->textPalette);
+    if (work->textPalette != NULL) {
+        ReleaseObjPalette(work->textPalette);
     }
 
-    FreeTextSlots(w->textSlots, 10);
-    FreeTextSlots(w->textSlots2, 10);
+    FreeTextSlots(work->textSlots, 10);
+    FreeTextSlots(work->textSlots2, 10);
     gMessageWindowOpen = 0;
     sActiveSysmsgwin = NULL;
 }

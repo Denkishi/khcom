@@ -29,22 +29,22 @@ Deck* gLinkSendDeck EWRAM_COMMON(4);
 
 u16 gCardCount EWRAM_COMMON(4);
 
-void map_anim_0(MapTileAnimationWork* p) {
+void map_anim_0(MapTileAnimationWork* work) {
     u8 i;
 
-    p->definition = gMapTileAnimationDefs[gEventState->mapAnim];
+    work->definition = gMapTileAnimationDefs[gEventState->mapAnim];
 
-    if (p->definition != NULL) {
-        for (i = 0; i < p->definition->trackCount; i++) {
-            p->frameTimers[i] = 0;
-            p->frameIndices[i] = 0;
+    if (work->definition != NULL) {
+        for (i = 0; i < work->definition->trackCount; i++) {
+            work->frameTimers[i] = 0;
+            work->frameIndices[i] = 0;
         }
     }
 
-    p->firstTrack = 0;
+    work->firstTrack = 0;
 }
 
-u8 map_anim_1(MapTileAnimationWork* w) {
+u8 map_anim_1(MapTileAnimationWork* work) {
     const MapTileAnimationDef* a;
     const MapTileAnimationTrack* e;
     const MapTileAnimationFrame* f;
@@ -52,28 +52,28 @@ u8 map_anim_1(MapTileAnimationWork* w) {
     u8 i;
     u8* dst;
 
-    a = w->definition;
+    a = work->definition;
 
     if (a == NULL) {
         return 1;
     }
 
-    for (i = w->firstTrack; i < (a = w->definition)->trackCount; i++) {
+    for (i = work->firstTrack; i < (a = work->definition)->trackCount; i++) {
         e = &a->tracks[i];
-        f = &e->frames[w->frameIndices[i]];
-        w->frameTimers[i]++;
+        f = &e->frames[work->frameIndices[i]];
+        work->frameTimers[i]++;
 
-        if (w->frameTimers[i] == f->duration) {
-            w->frameIndices[i]++;
+        if (work->frameTimers[i] == f->duration) {
+            work->frameIndices[i]++;
 
-            if (w->frameIndices[i] == e->frameCount) {
-                w->frameIndices[i] = 0;
+            if (work->frameIndices[i] == e->frameCount) {
+                work->frameIndices[i] = 0;
             }
 
-            f2 = &e->frames[w->frameIndices[i]];
+            f2 = &e->frames[work->frameIndices[i]];
             dst = (u8*)GetBgCharBase(3) + 0x7000;
             RequestDma3Copy(e->tiles + f2->tileOffset, dst + e->destOffset, e->copySize);
-            w->frameTimers[i] = 0;
+            work->frameTimers[i] = 0;
         }
     }
 

@@ -317,82 +317,82 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
     }
 }
 
-void MapChkEditMode(MapChkWork* p) {
+void MapChkEditMode(MapChkWork* work) {
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
-        p->mode = p->mode == 0 ? 4 : p->mode - 1;
+        work->mode = work->mode == 0 ? 4 : work->mode - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_RIGHT) != 0) {
-        p->mode = p->mode > 3 ? 0 : p->mode + 1;
+        work->mode = work->mode > 3 ? 0 : work->mode + 1;
     }
 
-    DebugTextPrint(80, 32, 2, sMapChkModeNames[p->mode]);
+    DebugTextPrint(80, 32, 2, sMapChkModeNames[work->mode]);
 }
 
-void MapChkEditWorld(MapChkWork* p) {
-    u8 v = p->world;
+void MapChkEditWorld(MapChkWork* work) {
+    u8 v = work->world;
     const u8* t;
     s32 n;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
-        p->world = p->world == 0 ? 12 : p->world - 1;
+        work->world = work->world == 0 ? 12 : work->world - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_RIGHT) != 0) {
-        p->world = p->world > 11 ? 0 : p->world + 1;
+        work->world = work->world > 11 ? 0 : work->world + 1;
     }
 
-    if (v != p->world) {
+    if (v != work->world) {
         t = gUnk_0984B458[0];
-        n = p->world * 8;
+        n = work->world * 8;
         t += 4;
         DebugTextPrint(80, 44, 2, *(const char**)(t + n));
     }
 }
 
-void MapChkEditFloor(MapChkWork* p) {
+void MapChkEditFloor(MapChkWork* work) {
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
-        p->floor = p->floor == 0 ? 13 : p->floor - 1;
+        work->floor = work->floor == 0 ? 13 : work->floor - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_RIGHT) != 0) {
-        p->floor = p->floor > 12 ? 0 : p->floor + 1;
+        work->floor = work->floor > 12 ? 0 : work->floor + 1;
     }
 
-    DebugTextPrintNumber(80, 56, 2, p->floor + 1);
+    DebugTextPrintNumber(80, 56, 2, work->floor + 1);
     DebugTextPrint(112, 56, 2, sMapChkBasementText);
 
-    if (12 - p->floor > 0) {
-        DebugTextPrintNumber(128, 56, 2, 12 - p->floor);
+    if (12 - work->floor > 0) {
+        DebugTextPrintNumber(128, 56, 2, 12 - work->floor);
     } else {
         DebugTextPrint(112, 56, 2, sMapChkBasementNoneText);
     }
 }
 
-void MapChkEditForm(MapChkWork* p) {
-    u8 v = p->form;
+void MapChkEditForm(MapChkWork* work) {
+    u8 v = work->form;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
-        p->form = p->form == 0 ? 12 : p->form - 1;
+        work->form = work->form == 0 ? 12 : work->form - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_RIGHT) != 0) {
-        p->form = p->form > 11 ? 0 : p->form + 1;
+        work->form = work->form > 11 ? 0 : work->form + 1;
     }
 
-    if (v != p->form) {
-        LoadMapForm(p->form + 15);
-        DebugTextPrint(80, 80, 2, sMapChkFormNames[p->form]);
+    if (v != work->form) {
+        LoadMapForm(work->form + 15);
+        DebugTextPrint(80, 80, 2, sMapChkFormNames[work->form]);
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
         DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
         DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
         DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
         DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 
-void MapChkEditWidth(MapChkWork* p) {
+void MapChkEditWidth(MapChkWork* work) {
     u8 v = sMapChkForm->maxWidth;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 8) {
@@ -407,17 +407,17 @@ void MapChkEditWidth(MapChkWork* p) {
         sMapChkForm->maxWidth = v;
         sMapChkForm->minWidth = v;
         DebugTextPrintNumber(80, 92, 2, sMapChkForm->maxWidth);
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 
-void MapChkFlipParamToggle(MapChkWork* p) {
+void MapChkFlipParamToggle(MapChkWork* work) {
     if ((GetKeysRepeat() & (DPAD_RIGHT | DPAD_LEFT)) != 0) {
-        MapChkSetParamToggle((u8*)p, p->useParams == 0 ? 1 : 0);
+        MapChkSetParamToggle((u8*)work, work->useParams == 0 ? 1 : 0);
     }
 }
 
-void MapChkEditMinHeight(MapChkWork* p) {
+void MapChkEditMinHeight(MapChkWork* work) {
     u8 v = sMapChkForm->minHeight;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 2) {
@@ -437,11 +437,11 @@ void MapChkEditMinHeight(MapChkWork* p) {
             DebugTextPrintNumber(80, 116, 2, sMapChkForm->maxHeight);
         }
 
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 
-void MapChkEditMaxHeight(MapChkWork* p) {
+void MapChkEditMaxHeight(MapChkWork* work) {
     u8 v = sMapChkForm->maxHeight;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 2) {
@@ -461,11 +461,11 @@ void MapChkEditMaxHeight(MapChkWork* p) {
             DebugTextPrintNumber(80, 104, 2, sMapChkForm->minHeight);
         }
 
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 
-void MapChkEditMinDepth(MapChkWork* p) {
+void MapChkEditMinDepth(MapChkWork* work) {
     u8 v = sMapChkForm->minDepth;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 3) {
@@ -485,11 +485,11 @@ void MapChkEditMinDepth(MapChkWork* p) {
             DebugTextPrintNumber(80, 140, 2, sMapChkForm->maxDepth);
         }
 
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 
-void MapChkEditMaxDepth(MapChkWork* p) {
+void MapChkEditMaxDepth(MapChkWork* work) {
     u8 v = sMapChkForm->maxDepth;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0 && v > 3) {
@@ -509,7 +509,7 @@ void MapChkEditMaxDepth(MapChkWork* p) {
             DebugTextPrintNumber(80, 128, 2, sMapChkForm->minDepth);
         }
 
-        MapChkSetParamToggle((u8*)p, 1);
+        MapChkSetParamToggle((u8*)work, 1);
     }
 }
 

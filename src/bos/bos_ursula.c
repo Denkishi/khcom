@@ -954,13 +954,13 @@ void task_bos_ursula_border_3(UrsulaBorderWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d) {
+void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* work) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->bossX + d->offsetX;
+    *a = gBtlWork->bossX + work->offsetX;
 
-    if (d->isLeft != 0) {
+    if (work->isLeft != 0) {
         if (BosUrsulaIsFacingLeft() != 0) {
             *a += -0x2200;
         } else {
@@ -976,7 +976,7 @@ void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* d) {
 
     *b = gBtlWork->bossY;
     p = &gBtlWork->bossZ;
-    t = d->offsetZ + 0x5000;
+    t = work->offsetZ + 0x5000;
     *c = *p + t;
 }
 
@@ -1268,13 +1268,13 @@ u8 BosUrsulaTakoIsStoodOn(UrsulaTakoWork* work) {
     return 0;
 }
 
-void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d) {
+void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* work) {
     s32* p;
     s32 t;
 
-    *a = gBtlWork->bossX + d->offsetX;
+    *a = gBtlWork->bossX + work->offsetX;
 
-    if (d->isLeft != 0) {
+    if (work->isLeft != 0) {
         if (BosUrsulaIsFacingLeft() != 0) {
             *a += -0x4A00;
         } else {
@@ -1290,7 +1290,7 @@ void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* d)
 
     *b = gBtlWork->bossY + 0x800;
     p = &gBtlWork->bossZ;
-    t = d->offsetZ + 0x5000;
+    t = work->offsetZ + 0x5000;
     *c = *p + t;
 }
 

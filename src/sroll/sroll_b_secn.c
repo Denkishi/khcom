@@ -14,79 +14,79 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void task_sroll_b_secn_0(SrollBSecnWork* w, SrollBSecnArg* a) {
+void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* a) {
     u32 i;
 
-    w->unk_00 = 0;
-    w->x = a->x;
-    w->y = a->y;
-    w->scrollY = a->scrollY;
-    w->scrollSpeed = a->scrollSpeed;
+    work->unk_00 = 0;
+    work->x = a->x;
+    work->y = a->y;
+    work->scrollY = a->scrollY;
+    work->scrollSpeed = a->scrollSpeed;
 
     if (a->index < 0) {
 #ifdef VERSION_JP
-        w->tiles = LoadObjTiles(gUnk_09C87A10, 590 * 32);
+        work->tiles = LoadObjTiles(gUnk_09C87A10, 590 * 32);
 #else
-        w->tiles = LoadObjTiles(gUnk_09C87A10, 606 * 32);
+        work->tiles = LoadObjTiles(gUnk_09C87A10, 606 * 32);
 #endif
-        w->palette = LoadObjPalette(gUnk_09D6CF34, 32);
-        AnimInit(&w->anim, gUnk_09EFB834, gUnk_09EFB828);
-        AnimStart(&w->anim, 0, 0);
-        AnimInit(&w->anim2, gUnk_09EFB834, gUnk_09EFB828);
-        AnimStart(&w->anim2, 0, 0);
+        work->palette = LoadObjPalette(gUnk_09D6CF34, 32);
+        AnimInit(&work->anim, gUnk_09EFB834, gUnk_09EFB828);
+        AnimStart(&work->anim, 0, 0);
+        AnimInit(&work->anim2, gUnk_09EFB834, gUnk_09EFB828);
+        AnimStart(&work->anim2, 0, 0);
     } else {
-        w->tiles = LoadObjTiles(gSrollSecnSprites[a->index].tiles, gSrollSecnSprites[a->index].tileSize);
-        w->palette = LoadObjPalette(gUnk_09D6BE74, 256);
-        AnimInit(&w->anim, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
-        AnimStart(&w->anim, 0, 0);
-        AnimInit(&w->anim2, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
-        AnimStart(&w->anim2, 1, 0);
+        work->tiles = LoadObjTiles(gSrollSecnSprites[a->index].tiles, gSrollSecnSprites[a->index].tileSize);
+        work->palette = LoadObjPalette(gUnk_09D6BE74, 256);
+        AnimInit(&work->anim, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
+        AnimStart(&work->anim, 0, 0);
+        AnimInit(&work->anim2, gSrollSecnSprites[a->index].anims, gSrollSecnSprites[a->index].gfxTable);
+        AnimStart(&work->anim2, 1, 0);
     }
 
     for (i = 0; i < 8; i++) {
-        FadeSetPaletteExcluded((w->palette->index + i) % 16 + 16, 1);
+        FadeSetPaletteExcluded((work->palette->index + i) % 16 + 16, 1);
     }
 }
 
-u8 task_sroll_b_secn_1(SrollBSecnWork* w) {
+u8 task_sroll_b_secn_1(SrollBSecnWork* work) {
     u8 r;
     s16 y;
 
     r = 1;
-    y = (w->y >> 8) - (*w->scrollY >> 8);
+    y = (work->y >> 8) - (*work->scrollY >> 8);
 
     if (y <= -32) {
         r = 0;
     }
 
     if (y <= 159) {
-        ApproachValueHalfSteps(&w->x, 0x7800, 20);
+        ApproachValueHalfSteps(&work->x, 0x7800, 20);
 
-        if (abs(w->x - 0x7800) <= 255) {
-            w->x = 0x7800;
+        if (abs(work->x - 0x7800) <= 255) {
+            work->x = 0x7800;
         }
 
-        if (w->x == 0x7800) {
-            AnimUpdate(&w->anim);
-            AnimUpdate(&w->anim2);
+        if (work->x == 0x7800) {
+            AnimUpdate(&work->anim);
+            AnimUpdate(&work->anim2);
         }
     }
 
-    w->unk_00++;
+    work->unk_00++;
     return r;
 }
 
-void task_sroll_b_secn_2(SrollBSecnWork* w) {
+void task_sroll_b_secn_2(SrollBSecnWork* work) {
     u16 y;
 
-    y = (w->y >> 8) - (*w->scrollY >> 8);
-    DrawSprite(120, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, 0, 0xEF0);
-    DrawSprite(120, y, AnimGetGfx(&w->anim2), w->tiles, w->palette, NULL, 0, 0xEE0);
+    y = (work->y >> 8) - (*work->scrollY >> 8);
+    DrawSprite(120, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, 0, 0xEF0);
+    DrawSprite(120, y, AnimGetGfx(&work->anim2), work->tiles, work->palette, NULL, 0, 0xEE0);
 }
 
-void task_sroll_b_secn_3(SrollBSecnWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void task_sroll_b_secn_3(SrollBSecnWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 const SrollSecnSprite gSrollSecnSprites[] = {

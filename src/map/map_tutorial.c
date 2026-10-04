@@ -32,7 +32,7 @@ void MapTutorialStartBattle() {
     gMapRoomState->flags |= ROOM_FLAG_START_BATTLE;
 }
 
-void MapTutorialWaitStart(MapTutorialWork* w) {
+void MapTutorialWaitStart(MapTutorialWork* work) {
     u32 flags;
 
     if (gFieldState->lockonTarget == NULL) {
@@ -41,207 +41,207 @@ void MapTutorialWaitStart(MapTutorialWork* w) {
         if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.tutorialFlags & 0x10)) {
             gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
             gFieldState->flags = flags | FIELD_FLAG_FREEZE_PLAYER;
-            CreateCardMessageTask(&w->tasks, 0, 0x6A);
-            w->update = MapTutorialDropBarrel;
+            CreateCardMessageTask(&work->tasks, 0, 0x6A);
+            work->update = MapTutorialDropBarrel;
         }
     }
 }
 
-void MapTutorialDropBarrel(MapTutorialWork* w) {
+void MapTutorialDropBarrel(MapTutorialWork* work) {
     if (!IsMessageWindowOpen()) {
         AnimState* a;
 
-        MapPickFreeFloorPosInView(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
-        w->obj.fieldPosition.z = 0;
-        w->obj.fieldPosition.ground = GetFldPosFloor(&w->obj.fieldPosition);
-        w->obj.fieldPosition.y -= w->obj.fieldPosition.ground;
-        w->obj.fieldPosition.z = w->obj.fieldPosition.ground - 0xA000;
-        w->obj.height = 24;
-        w->obj.speed = 2;
-        w->tiles = AllocObjTiles(0x400, gUnk_09858B3C);
-        w->palette = LoadObjPalette(gUnk_099912E4, 32);
-        a = &w->anim;
+        MapPickFreeFloorPosInView(&work->obj.fieldPosition, &work->obj.fieldPosition.y);
+        work->obj.fieldPosition.z = 0;
+        work->obj.fieldPosition.ground = GetFldPosFloor(&work->obj.fieldPosition);
+        work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
+        work->obj.fieldPosition.z = work->obj.fieldPosition.ground - 0xA000;
+        work->obj.height = 24;
+        work->obj.speed = 2;
+        work->tiles = AllocObjTiles(0x400, gUnk_09858B3C);
+        work->palette = LoadObjPalette(gUnk_099912E4, 32);
+        a = &work->anim;
         AnimInit(a, gUnk_09EF8460, gUnk_09EF8424);
         AnimStart(a, 0, ANIM_FLAG_LOOP);
-        w->gfx = AnimGetGfx(a);
-        ColliderInit(&w->collider, 6, 12, 24);
-        ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
-        w->shadowVisible = 1;
-        TaskCreate(&w->tasks2, &gTaskDescFldShadow, &w->obj);
-        w->visible = 1;
-        w->update = MapTutorialBarrelFall;
+        work->gfx = AnimGetGfx(a);
+        ColliderInit(&work->collider, 6, 12, 24);
+        ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
+        work->shadowVisible = 1;
+        TaskCreate(&work->tasks2, &gTaskDescFldShadow, &work->obj);
+        work->visible = 1;
+        work->update = MapTutorialBarrelFall;
     }
 }
 
-void MapTutorialBarrelFall(MapTutorialWork* w) {
-    MapTutorialWork* p = w;
+void MapTutorialBarrelFall(MapTutorialWork* work) {
+    MapTutorialWork* p = work;
 
-    w->obj.speed += 0x38;
-    w->obj.fieldPosition.z += w->obj.speed;
+    work->obj.speed += 0x38;
+    work->obj.fieldPosition.z += work->obj.speed;
 
-    if (w->obj.fieldPosition.z > w->obj.fieldPosition.ground) {
+    if (work->obj.fieldPosition.z > work->obj.fieldPosition.ground) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         m4aSongNumStart(SONG_SND_215);
-        w->obj.fieldPosition.z = w->obj.fieldPosition.ground;
-        w->obj.speed = 0;
-        w->shadowVisible = 0;
-        w->update = MapTutorialWaitBarrelHit;
+        work->obj.fieldPosition.z = work->obj.fieldPosition.ground;
+        work->obj.speed = 0;
+        work->shadowVisible = 0;
+        work->update = MapTutorialWaitBarrelHit;
     }
 
     ColliderSetPosition(&p->collider, p->obj.fieldPosition.x, p->obj.fieldPosition.y, p->obj.fieldPosition.z);
 }
 
-void MapTutorialWaitBarrelHit(MapTutorialWork* w) {
-    if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 8)) {
+void MapTutorialWaitBarrelHit(MapTutorialWork* work) {
+    if (IsHitByMapAttack(&work->obj.fieldPosition, 8, 8)) {
         m4aSongNumStart(SONG_SYS_OBJ_BREAK);
-        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &work->obj);
         gMapRoomState->flags &= ~ROOM_FLAG_NO_RANDOM_PRIZE;
-        TryCreateRandomPrzCard(0, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
-        AnimStart(&w->anim, 1, 0);
-        w->update = MapTutorialBarrelBreak;
-        ColliderUnregister(&w->collider);
+        TryCreateRandomPrzCard(0, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
+        AnimStart(&work->anim, 1, 0);
+        work->update = MapTutorialBarrelBreak;
+        ColliderUnregister(&work->collider);
     }
 }
 
-void MapTutorialBarrelBreak(MapTutorialWork* w) {
-    if (AnimIsFinished(&w->anim)) {
-        w->update = MapTutorialWaitPrizeCard;
+void MapTutorialBarrelBreak(MapTutorialWork* work) {
+    if (AnimIsFinished(&work->anim)) {
+        work->update = MapTutorialWaitPrizeCard;
     } else {
-        w->gfx = AnimUpdate(&w->anim);
+        work->gfx = AnimUpdate(&work->anim);
     }
 }
 
-void MapTutorialWaitPrizeCard(MapTutorialWork* w) {
+void MapTutorialWaitPrizeCard(MapTutorialWork* work) {
     if ((gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) == 0) {
         gGameState.progression.tutorialFlags |= 0x2000;
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        CreateCardMessageTask(&w->tasks, 0, 0x6B);
-        w->update = MapTutorialSpawnEnemy;
+        CreateCardMessageTask(&work->tasks, 0, 0x6B);
+        work->update = MapTutorialSpawnEnemy;
     }
 }
 
-void MapTutorialSpawnEnemy(MapTutorialWork* w) {
+void MapTutorialSpawnEnemy(MapTutorialWork* work) {
     if (!IsMessageWindowOpen()) {
         AnimState* a;
         u8 v;
 
-        MapPickFreeFloorPosInView(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
-        w->obj.fieldPosition.z = 0;
-        w->obj.fieldPosition.ground = GetFldPosFloor(&w->obj.fieldPosition);
-        w->obj.fieldPosition.y -= w->obj.fieldPosition.ground;
-        w->obj.fieldPosition.z = w->obj.fieldPosition.ground;
-        w->obj.height = 16;
+        MapPickFreeFloorPosInView(&work->obj.fieldPosition, &work->obj.fieldPosition.y);
+        work->obj.fieldPosition.z = 0;
+        work->obj.fieldPosition.ground = GetFldPosFloor(&work->obj.fieldPosition);
+        work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
+        work->obj.fieldPosition.z = work->obj.fieldPosition.ground;
+        work->obj.height = 16;
         v = 0;
 
-        if (gFieldState->actor.fieldPosition.x > w->obj.fieldPosition.x) {
+        if (gFieldState->actor.fieldPosition.x > work->obj.fieldPosition.x) {
             v = 1;
         }
 
-        w->flip = v;
-        w->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
-        w->palette = LoadObjPalette(gEmy00Palette, 32);
-        a = &w->anim;
+        work->flip = v;
+        work->tiles = AllocObjTiles(0x400, gEmy00L06Tiles);
+        work->palette = LoadObjPalette(gEmy00Palette, 32);
+        a = &work->anim;
         AnimInit(a, gEmy00L06Anims, gEmy00L06Frames);
         AnimStart(a, 0, ANIM_FLAG_LOOP);
-        w->gfx = AnimGetGfx(a);
-        ColliderInit(&w->collider, 3, 8, 16);
-        ColliderSetPosition(&w->collider, w->obj.fieldPosition.x, w->obj.fieldPosition.y, w->obj.fieldPosition.z);
-        ColliderSetDisabled(&w->collider, 1);
-        w->update = MapTutorialEnemyAppear;
+        work->gfx = AnimGetGfx(a);
+        ColliderInit(&work->collider, 3, 8, 16);
+        ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
+        ColliderSetDisabled(&work->collider, 1);
+        work->update = MapTutorialEnemyAppear;
     }
 }
 
-void MapTutorialEnemyAppear(MapTutorialWork* w) {
-    AnimState* a = &w->anim;
+void MapTutorialEnemyAppear(MapTutorialWork* work) {
+    AnimState* a = &work->anim;
 
     if (AnimIsFinished(a)) {
         AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L00Anims, gEmy00L00Frames);
-        SetObjTileSource(w->tiles, gEmy00L00Tiles);
-        CreateCardMessageTask(&w->tasks, 0, 0x6C);
-        w->update = MapTutorialWaitEnemyMessage;
+        SetObjTileSource(work->tiles, gEmy00L00Tiles);
+        CreateCardMessageTask(&work->tasks, 0, 0x6C);
+        work->update = MapTutorialWaitEnemyMessage;
     } else {
-        w->gfx = AnimUpdate(a);
+        work->gfx = AnimUpdate(a);
     }
 }
 
-void MapTutorialWaitEnemyMessage(MapTutorialWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
+void MapTutorialWaitEnemyMessage(MapTutorialWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
 
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
-        ColliderSetDisabled(&w->collider, 0);
-        w->update = MapTutorialEnemyUpdate;
+        ColliderSetDisabled(&work->collider, 0);
+        work->update = MapTutorialEnemyUpdate;
     }
 }
 
-void MapTutorialEnemyUpdate(MapTutorialWork* w) {
-    AnimState* a = &w->anim;
+void MapTutorialEnemyUpdate(MapTutorialWork* work) {
+    AnimState* a = &work->anim;
 
-    w->gfx = AnimUpdate(a);
+    work->gfx = AnimUpdate(a);
 
-    if (IsHitByMapAttack(&w->obj.fieldPosition, 8, 16)) {
+    if (IsHitByMapAttack(&work->obj.fieldPosition, 8, 16)) {
         gMapRoomState->flags |= ROOM_FLAG_ATTACK_HIT;
         gMapRoomState->flags |= ROOM_FLAG_ENEMY_STRUCK;
-        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &w->obj);
+        TaskCreate(&gFieldState->tasks, &gTaskDescMapSpark, &work->obj);
         m4aSongNumStart(SONG_SYS_FIELD_ATT00);
         AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L09Anims, gEmy00L09Frames);
-        SetObjTileSource(w->tiles, gEmy00L09Tiles);
-        w->update = MapTutorialEnemyHit;
-    } else if (w->collider.colliding) {
-        if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && w->collider.otherType == 1) {
-            ColliderSetDisabled(&w->collider, 1);
+        SetObjTileSource(work->tiles, gEmy00L09Tiles);
+        work->update = MapTutorialEnemyHit;
+    } else if (work->collider.colliding) {
+        if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && work->collider.otherType == 1) {
+            ColliderSetDisabled(&work->collider, 1);
             MapTutorialStartBattle();
         } else {
-            w->obj.fieldPosition.x += w->collider.pushX;
-            w->obj.fieldPosition.y += w->collider.pushY;
+            work->obj.fieldPosition.x += work->collider.pushX;
+            work->obj.fieldPosition.y += work->collider.pushY;
         }
     }
 }
 
-void MapTutorialEnemyHit(MapTutorialWork* w) {
-    AnimState* a = &w->anim;
+void MapTutorialEnemyHit(MapTutorialWork* work) {
+    AnimState* a = &work->anim;
 
     if (AnimIsFinished(a)) {
-        ColliderSetDisabled(&w->collider, 1);
+        ColliderSetDisabled(&work->collider, 1);
         gGameState.flags |= GAME_FLAG_FIRST_STRIKE;
         MapTutorialStartBattle();
     } else {
-        w->gfx = AnimUpdate(a);
+        work->gfx = AnimUpdate(a);
     }
 }
 
-void Task_MapTutorial_0(MapTutorialWork* w) {
+void Task_MapTutorial_0(MapTutorialWork* work) {
     u16 t;
 
-    TaskPoolInit(&w->tasks, 1);
-    TaskPoolInit(&w->tasks2, 1);
+    TaskPoolInit(&work->tasks, 1);
+    TaskPoolInit(&work->tasks2, 1);
     gMapRoomState->flags |= ROOM_FLAG_NO_RANDOM_PRIZE;
-    w->tiles = NULL;
-    w->palette = NULL;
-    w->flip = 0;
+    work->tiles = NULL;
+    work->palette = NULL;
+    work->flip = 0;
     t = gGameState.progression.tutorialFlags & 0x2000;
 
     if (t == 0) {
-        w->shadowVisible = 0;
-        w->visible = 0;
-        w->update = MapTutorialWaitStart;
+        work->shadowVisible = 0;
+        work->visible = 0;
+        work->update = MapTutorialWaitStart;
     } else {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        TaskCreate(&w->tasks2, &gTaskDescFldShadow, &w->obj);
-        w->visible = 1;
-        w->shadowVisible = 1;
-        w->update = MapTutorialSpawnEnemy;
+        TaskCreate(&work->tasks2, &gTaskDescFldShadow, &work->obj);
+        work->visible = 1;
+        work->shadowVisible = 1;
+        work->update = MapTutorialSpawnEnemy;
     }
 }
 
-s32 Task_MapTutorial_1(MapTutorialWork* w) {
-    TaskPoolUpdate(&w->tasks);
-    TaskPoolUpdate(&w->tasks2);
+s32 Task_MapTutorial_1(MapTutorialWork* work) {
+    TaskPoolUpdate(&work->tasks);
+    TaskPoolUpdate(&work->tasks2);
 
-    if (w->update != NULL) {
-        w->update(w);
+    if (work->update != NULL) {
+        work->update(work);
 
-        if (w->update != NULL) {
+        if (work->update != NULL) {
             return 1;
         }
     }
@@ -249,7 +249,7 @@ s32 Task_MapTutorial_1(MapTutorialWork* w) {
     return 0;
 }
 
-void Task_MapTutorial_2(MapTutorialWork* w) {
+void Task_MapTutorial_2(MapTutorialWork* work) {
     u16 flags;
     u16 v;
     s32 k;
@@ -257,38 +257,38 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
     s16 x;
     s16 y;
 
-    TaskPoolDraw(&w->tasks);
+    TaskPoolDraw(&work->tasks);
 
-    if (w->visible) {
-        x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
-        k = w->obj.fieldPosition.y >> 8;
-        y = k + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
+    if (work->visible) {
+        x = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
+        k = work->obj.fieldPosition.y >> 8;
+        y = k + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        t = w->flip;
+        t = work->flip;
         flags = SPRITE_PRIORITY(2);
 
         if (t) {
             flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         }
 
-        DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, flags, v);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, flags, v);
 
-        if (w->shadowVisible) {
-            w->obj.shadowZ = w->obj.fieldPosition.ground;
-            w->obj.shadowPriority = v + 1;
-            TaskPoolDraw(&w->tasks2);
+        if (work->shadowVisible) {
+            work->obj.shadowZ = work->obj.fieldPosition.ground;
+            work->obj.shadowPriority = v + 1;
+            TaskPoolDraw(&work->tasks2);
         }
     }
 }
 
-void Task_MapTutorial_3(MapTutorialWork* w) {
-    if (w->tiles != NULL) {
-        ReleaseObjTiles(w->tiles);
-        ReleaseObjPalette(w->palette);
+void Task_MapTutorial_3(MapTutorialWork* work) {
+    if (work->tiles != NULL) {
+        ReleaseObjTiles(work->tiles);
+        ReleaseObjPalette(work->palette);
     }
 
-    TaskPoolDestroy(&w->tasks);
-    TaskPoolDestroy(&w->tasks2);
+    TaskPoolDestroy(&work->tasks);
+    TaskPoolDestroy(&work->tasks2);
 }
 
 TaskDesc gTaskDescMapTutorial = {

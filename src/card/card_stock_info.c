@@ -1935,23 +1935,23 @@ static const u16 sLevelUpStockLevels[12] = {
     2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 999,
 };
 
-s32 UpdateStockInfoMessage(StockInfoWork* w);
+s32 UpdateStockInfoMessage(StockInfoWork* work);
 
-void StockInfo_0(StockInfoWork* w, u8* active) {
+void StockInfo_0(StockInfoWork* work, u8* active) {
     u8 i;
 
-    w->active = active;
-    TaskPoolInit(&w->tasks, 1);
-    w->tiles = LoadObjTiles(gUnk_0908FCEE, 0x12A0);
-    w->palette = LoadObjPalette(gUnk_09613F78, 32);
+    work->active = active;
+    TaskPoolInit(&work->tasks, 1);
+    work->tiles = LoadObjTiles(gUnk_0908FCEE, 0x12A0);
+    work->palette = LoadObjPalette(gUnk_09613F78, 32);
 
     for (i = 16; i < 32; i++) {
         FadeSetPaletteExcluded(i, 1);
     }
 
-    w->x = 0x4C00;
-    w->y = 0xBC00;
-    w->timer = 16;
+    work->x = 0x4C00;
+    work->y = 0xBC00;
+    work->timer = 16;
 
     switch (gGameState.progression.levelMilestone) {
     case 0:
@@ -1990,38 +1990,38 @@ void StockInfo_0(StockInfoWork* w, u8* active) {
     }
 }
 
-u8 StockInfo_1(StockInfoWork* w, void* a) {
-    if (w->timer > 0) {
-        ApproachValue(&w->y, 0x6C00, w->timer);
-        w->timer--;
+u8 StockInfo_1(StockInfoWork* work, void* a) {
+    if (work->timer > 0) {
+        ApproachValue(&work->y, 0x6C00, work->timer);
+        work->timer--;
     } else {
         m4aSongNumStart(SONG_SYS_CHAGEF2);
-        CreateStockMesDispTask(&w->tasks, sLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
+        CreateStockMesDispTask(&work->tasks, sLevelUpStockHelpIndices[gGameState.progression.levelMilestone], 0, 0, 0x50);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateStockInfoMessage);
     }
 
     return 1;
 }
 
-s32 UpdateStockInfoMessage(StockInfoWork* w) {
-    if (*w->active == 0) {
+s32 UpdateStockInfoMessage(StockInfoWork* work) {
+    if (*work->active == 0) {
         return 0;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void StockInfo_2(StockInfoWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEA28C, w->tiles, w->palette, NULL, 0, 50);
-    TaskPoolDraw(&w->tasks);
+void StockInfo_2(StockInfoWork* work) {
+    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEA28C, work->tiles, work->palette, NULL, 0, 50);
+    TaskPoolDraw(&work->tasks);
 }
 
-void StockInfo_3(StockInfoWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void StockInfo_3(StockInfoWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gGameState.progression.levelMilestone++;
-    TaskPoolDestroy(&w->tasks);
+    TaskPoolDestroy(&work->tasks);
 }
 
 void* GetCardHelpText(u16 a, u8 b) {

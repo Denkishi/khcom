@@ -18,42 +18,42 @@ s32 SrollANameSquare2(s32 x) {
     return x * x;
 }
 
-void task_sroll_a_name_0(SrollANameWork* w, SrollANameArg* a) {
+void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a) {
     AnimState* anim;
 
-    w->kind = a->kind;
-    w->x = a->x;
-    w->y = a->y;
-    w->targetX = a->targetX;
-    w->targetY = a->targetY;
-    w->unk_00 = 0;
-    w->timer = 0;
+    work->kind = a->kind;
+    work->x = a->x;
+    work->y = a->y;
+    work->targetX = a->targetX;
+    work->targetY = a->targetY;
+    work->unk_00 = 0;
+    work->timer = 0;
 
     switch (a->kind) {
     case 0:
 #ifdef VERSION_JP
-        w->tiles = LoadObjTiles(gUnk_09C638BE, 45 * 32);
+        work->tiles = LoadObjTiles(gUnk_09C638BE, 45 * 32);
 #else
-        w->tiles = LoadObjTiles(gUnk_09C638BE, 35 * 32);
+        work->tiles = LoadObjTiles(gUnk_09C638BE, 35 * 32);
 #endif
-        anim = &w->anim;
+        anim = &work->anim;
         AnimInit(anim, gUnk_09EFB200, gUnk_09EFB1F8);
         AnimStart(anim, a->animId, 0);
         break;
     case 1:
-        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
-        anim = &w->anim;
+        work->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
+        anim = &work->anim;
         AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
         AnimStart(anim, a->animId, 0);
         break;
     case 2:
-        w->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
+        work->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
 
         if (a->animId == 1) {
-            anim = &w->anim;
+            anim = &work->anim;
             AnimInit(anim, gUnk_09EFB5EC, gUnk_09EFB5B0);
         } else {
-            anim = &w->anim;
+            anim = &work->anim;
             AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
         }
 
@@ -63,59 +63,59 @@ void task_sroll_a_name_0(SrollANameWork* w, SrollANameArg* a) {
         break;
     }
 
-    w->palette = LoadObjPalette(gUnk_09D6CD74, 64);
+    work->palette = LoadObjPalette(gUnk_09D6CD74, 64);
 }
 
-u8 task_sroll_a_name_1(SrollANameWork* w) {
-    w->timer++;
+u8 task_sroll_a_name_1(SrollANameWork* work) {
+    work->timer++;
 
-    if (w->kind == 2) {
-        if (w->timer <= 47) {
-            gBldAlpha = w->timer / 3;
+    if (work->kind == 2) {
+        if (work->timer <= 47) {
+            gBldAlpha = work->timer / 3;
         } else {
-            if (w->timer == 48) {
+            if (work->timer == 48) {
                 gBldCnt = 0;
                 gBldAlpha = 0;
             }
 
-            AnimUpdate(&w->anim);
+            AnimUpdate(&work->anim);
         }
     } else {
-        AnimUpdate(&w->anim);
+        AnimUpdate(&work->anim);
     }
 
     return 1;
 }
 
-void task_sroll_a_name_2(SrollANameWork* w) {
+void task_sroll_a_name_2(SrollANameWork* work) {
     s32 x;
     s32 y;
     u16 flags;
     s32 ofs;
 
-    if (w->timer <= 29) {
-        x = w->x + (w->targetX - w->x) * w->timer / 30;
-        y = w->y + (w->targetY - w->y) * w->timer / 30;
+    if (work->timer <= 29) {
+        x = work->x + (work->targetX - work->x) * work->timer / 30;
+        y = work->y + (work->targetY - work->y) * work->timer / 30;
     } else {
-        x = w->targetX;
-        y = w->targetY;
+        x = work->targetX;
+        y = work->targetY;
     }
 
     flags = 0;
 
-    if (w->kind == 2) {
+    if (work->kind == 2) {
         flags = SPRITE_FLAG_BLEND;
-        ofs = AnimGetFrame(&w->anim) * 16 + 16;
-        LoadPalette(&gUnk_09D6CD74[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((w->palette->index & 15) * 32), 32);
+        ofs = AnimGetFrame(&work->anim) * 16 + 16;
+        LoadPalette(&gUnk_09D6CD74[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((work->palette->index & 15) * 32), 32);
     }
 
-    DrawSprite(x >> 8, y >> 8, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, flags,
-               0xFF0 - w->kind);
+    DrawSprite(x >> 8, y >> 8, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, flags,
+               0xFF0 - work->kind);
 }
 
-void task_sroll_a_name_3(SrollANameWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void task_sroll_a_name_3(SrollANameWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 TaskDesc gTaskDescSrollAName = {

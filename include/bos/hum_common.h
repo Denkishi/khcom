@@ -16,17 +16,17 @@ void HumStartKnockback(struct HumWork* work);
 s32 HumUpdateReaction(struct HumWork* work);
 void HumSubUpdateAnimation(struct HumSub* sub);
 s32 HumUpdate(struct HumWork* work);
-void HumDrawSub(struct HumWork* p, struct HumSub* s);
+void HumDrawSub(struct HumWork* work, struct HumSub* s);
 void HumDraw(struct HumWork* work);
 void HandleRikuAiCardInput();
 #ifdef VERSION_EU
 void HandleRikuTutorialCardInput();
 #endif
-void HumFaceTarget(struct HumWork* p, u16 n);
-u8 HumMoveToward(struct HumWork* p, s32 x, s32 y, s32 spd);
-u8 HumIsTargetInReach(struct HumWork* p, s16 a, u16 b, u16 r);
-u8 HumIsNearAreaEdge(struct HumWork* p, u16 b);
-u8 HumIsInPlayerReach(struct HumWork* p, s16 a, u16 b, u16 r);
+void HumFaceTarget(struct HumWork* work, u16 n);
+u8 HumMoveToward(struct HumWork* work, s32 x, s32 y, s32 spd);
+u8 HumIsTargetInReach(struct HumWork* work, s16 a, u16 b, u16 r);
+u8 HumIsNearAreaEdge(struct HumWork* work, u16 b);
+u8 HumIsInPlayerReach(struct HumWork* work, s16 a, u16 b, u16 r);
 u8 HumChooseCardAction(struct HumWork* work, u16 interval, u16 offset, u16 width, u16 depth);
 s32 HumResolveCardMove(struct HumWork* work);
 

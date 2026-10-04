@@ -25,129 +25,129 @@
 #include <stddef.h>
 #include "types.h"
 
-u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a);
-u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w);
-u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a);
-void AimFieldPrizeCardAtCenter(PrizeCardWork* w);
+u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a);
+u8 UpdateFieldPrizeCardShrink(PrizeCardWork* work);
+u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a);
+void AimFieldPrizeCardAtCenter(PrizeCardWork* work);
 void CreateFieldPrizeCardTask(TaskPool* pool, PrizeCardTaskArgs* args);
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 
-static void PrizeCard_0(PrizeCardWork* w, PrizeCardTaskArgs* p) {
+static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* p) {
     PrizeCardTaskArgs args;
     const CardDef* def;
     const CardBack* back;
     Collider* q;
 
     args = *p;
-    w->cardId = args.cardId;
+    work->cardId = args.cardId;
     def = &gCardDefs[args.cardId];
-    w->tiles = LoadObjTiles(def->tiles, 0x300);
-    w->palette = LoadObjPalette(def->palette, 32);
-    w->stat = *(CardStat*)&def->kind;
+    work->tiles = LoadObjTiles(def->tiles, 0x300);
+    work->palette = LoadObjPalette(def->palette, 32);
+    work->stat = *(CardStat*)&def->kind;
 
-    if (gCardDefs[w->cardId].flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
+    if (gCardDefs[work->cardId].flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
         back = &gCardBacks[3];
     } else {
-        back = &gCardBacks[w->stat.category];
+        back = &gCardBacks[work->stat.category];
     }
 
-    w->tiles2 = LoadObjTiles(back->tiles, 0x280);
-    w->tiles3 = LoadObjTiles(back->tiles3, 0x600);
-    w->palette2 = LoadObjPalette(gCard00Palette, 32);
-    w->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    w->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    w->pos.x = args.x;
-    w->pos.y = args.y;
-    w->pos.z = args.z;
-    w->pos.ground = 0;
-    w->rotation = 24;
-    FldPosInitGround(&w->pos);
-    w->vz = -(GetRandom() % 129 + 0x300);
-    w->speed = GetRandom() % 129 + 0x80;
-    w->moveAngle = GetRandom() % 256;
-    w->scaleX = 0x80;
-    w->scaleY = 0x80;
-    w->scale = 0x80;
-    w->flipAngleY = 0;
-    w->flipAngleX = 0;
-    q = &w->collider;
+    work->tiles2 = LoadObjTiles(back->tiles, 0x280);
+    work->tiles3 = LoadObjTiles(back->tiles3, 0x600);
+    work->palette2 = LoadObjPalette(gCard00Palette, 32);
+    work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->palette3 = LoadObjPalette(gBStatesPalette, 32);
+    work->pos.x = args.x;
+    work->pos.y = args.y;
+    work->pos.z = args.z;
+    work->pos.ground = 0;
+    work->rotation = 24;
+    FldPosInitGround(&work->pos);
+    work->vz = -(GetRandom() % 129 + 0x300);
+    work->speed = GetRandom() % 129 + 0x80;
+    work->moveAngle = GetRandom() % 256;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
+    work->scale = 0x80;
+    work->flipAngleY = 0;
+    work->flipAngleX = 0;
+    q = &work->collider;
     ColliderInit(q, 5, 30, 10);
     ColliderSetDisabled(q, 1);
-    ColliderSetPosition(q, w->pos.x, w->pos.y, w->pos.z);
-    w->timer = 0;
-    w->collected[0] = 0;
-    w->steps = 0;
-    w->holdTimer = 0;
-    TaskPoolInit(&w->tasks, 1);
+    ColliderSetPosition(q, work->pos.x, work->pos.y, work->pos.z);
+    work->timer = 0;
+    work->collected[0] = 0;
+    work->steps = 0;
+    work->holdTimer = 0;
+    TaskPoolInit(&work->tasks, 1);
 }
 
-static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
+static u8 PrizeCard_1(PrizeCardWork* work, void* a) {
     s32 k = 112;
     s16 x;
     s16 y;
 
-    w->prevPos = w->pos;
-    w->vz += 0x38;
-    w->pos.z += w->vz;
-    x = gSineTable[(u8)w->moveAngle];
-    w->pos.x += (x * w->speed) >> 8;
-    w->pos.y += (-gSineTable[(u8)w->moveAngle + 0x40] * w->speed) >> 8;
+    work->prevPos = work->pos;
+    work->vz += 0x38;
+    work->pos.z += work->vz;
+    x = gSineTable[(u8)work->moveAngle];
+    work->pos.x += (x * work->speed) >> 8;
+    work->pos.y += (-gSineTable[(u8)work->moveAngle + 0x40] * work->speed) >> 8;
 
-    if (IsFldPosBlocked(&w->pos) != 0) {
-        w->moveAngle = w->moveAngle + k + GetRandom() % 33;
+    if (IsFldPosBlocked(&work->pos) != 0) {
+        work->moveAngle = work->moveAngle + k + GetRandom() % 33;
 
-        w->pos.x = w->prevPos.x;
-        w->pos.y = w->prevPos.y;
+        work->pos.x = work->prevPos.x;
+        work->pos.y = work->prevPos.y;
     } else {
-        w->pos.ground = GetFldPosGround(&w->pos);
+        work->pos.ground = GetFldPosGround(&work->pos);
     }
 
-    if (w->pos.z - 0x800 > w->pos.ground) {
-        w->pos.z = w->pos.ground - 0x800;
-        w->vz = -((w->vz * 217) >> 8);
+    if (work->pos.z - 0x800 > work->pos.ground) {
+        work->pos.z = work->pos.ground - 0x800;
+        work->vz = -((work->vz * 217) >> 8);
 
-        if (w->vz > -0x200) {
-            w->vz = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
-    if (w->collider.colliding) {
-        w->collected[0] = 1;
+    if (work->collider.colliding) {
+        work->collected[0] = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
-        if (w->cardId <= 0x1C1) {
-            ObtainCard(w->cardId);
+        if (work->cardId <= 0x1C1) {
+            ObtainCard(work->cardId);
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardFlight);
-        x = (w->pos.x >> 8) - (gFieldState->x >> 8);
-        y = (w->pos.y >> 8) + (w->pos.z >> 8) - (gFieldState->y >> 8);
-        w->pos.x = x << 8;
-        w->pos.y = y << 8;
-        ColliderSetDisabled(&w->collider, 1);
-        w->steps = 16;
-        w->priority = 50;
-        AimFieldPrizeCardAtCenter(w);
+        x = (work->pos.x >> 8) - (gFieldState->x >> 8);
+        y = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
+        work->pos.x = x << 8;
+        work->pos.y = y << 8;
+        ColliderSetDisabled(&work->collider, 1);
+        work->steps = 16;
+        work->priority = 50;
+        AimFieldPrizeCardAtCenter(work);
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->pos.x, w->pos.y, w->pos.z);
-    w->x = (w->pos.x >> 8) - (gFieldState->x >> 8);
-    w->y2 = (w->pos.y >> 8) + (w->pos.z >> 8) - (gFieldState->y >> 8);
-    w->x2 = (w->pos.x >> 8) - (gFieldState->x >> 8);
-    w->y = (w->pos.y >> 8) + (w->pos.ground >> 8) - (gFieldState->y >> 8);
-    w->priority = -0x1004 - (w->pos.y >> 8) * 4;
-    UpdateFieldPrizeCardScale(w);
-    w->flipAngleX += 2;
+    ColliderSetPosition(&work->collider, work->pos.x, work->pos.y, work->pos.z);
+    work->x = (work->pos.x >> 8) - (gFieldState->x >> 8);
+    work->y2 = (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8);
+    work->x2 = (work->pos.x >> 8) - (gFieldState->x >> 8);
+    work->y = (work->pos.y >> 8) + (work->pos.ground >> 8) - (gFieldState->y >> 8);
+    work->priority = -0x1004 - (work->pos.y >> 8) * 4;
+    UpdateFieldPrizeCardScale(work);
+    work->flipAngleX += 2;
 
-    if (w->timer == 20) {
-        ColliderSetDisabled(&w->collider, 0);
+    if (work->timer == 20) {
+        ColliderSetDisabled(&work->collider, 0);
     }
 
-    if (w->timer <= 59) {
-        w->timer++;
+    if (work->timer <= 59) {
+        work->timer++;
     }
 
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
@@ -157,58 +157,58 @@ static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
     return 1;
 }
 
-void AimFieldPrizeCardAtCenter(PrizeCardWork* w) {
+void AimFieldPrizeCardAtCenter(PrizeCardWork* work) {
     s32 cx = 0x7800;
     s32 cy = 0x5000;
     s32 v[2];
 
-    v[0] = cx - w->pos.x;
-    v[1] = cy - w->pos.y;
-    w->distance = NormalizeVector2D8(&v[0], &v[1]);
-    w->dirX = -v[0];
-    w->dirY = -v[1];
-    w->speed = 0x300;
-    w->vz = 2;
+    v[0] = cx - work->pos.x;
+    v[1] = cy - work->pos.y;
+    work->distance = NormalizeVector2D8(&v[0], &v[1]);
+    work->dirX = -v[0];
+    work->dirY = -v[1];
+    work->speed = 0x300;
+    work->vz = 2;
 }
 
-u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a) {
+u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a) {
     s32 v[2];
 
-    if (w->speed < 0) {
-        v[0] = 0x7800 - w->pos.x;
-        v[1] = 0x5000 - w->pos.y;
+    if (work->speed < 0) {
+        v[0] = 0x7800 - work->pos.x;
+        v[1] = 0x5000 - work->pos.y;
         NormalizeVector2D8(&v[0], &v[1]);
-        w->dirX = -v[0];
-        w->dirY = -v[1];
+        work->dirX = -v[0];
+        work->dirY = -v[1];
 
-        if (w->distance <= 0x7FF) {
-            w->steps = 0;
-            w->rotation = 0;
+        if (work->distance <= 0x7FF) {
+            work->steps = 0;
+            work->rotation = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShow);
 #ifdef VERSION_EU
-            CreateCardNameDisplay(&w->tasks, eu_0805E924(gCardDefs[w->cardId].name));
+            CreateCardNameDisplay(&work->tasks, eu_0805E924(gCardDefs[work->cardId].name));
 #else
-            CreateCardNameDisplay(&w->tasks, gCardDefs[w->cardId].name);
+            CreateCardNameDisplay(&work->tasks, gCardDefs[work->cardId].name);
 #endif
         }
     }
 
-    w->pos.x += (w->dirX * w->speed) >> 8;
-    w->pos.y += (w->dirY * w->speed) >> 8;
-    w->rotation += 32;
-    w->flipAngleY += (64 - w->flipAngleY) >> 4;
-    w->flipAngleX = 0;
-    w->distance = VectorLength2D(0x7800 - w->pos.x, 0x5000 - w->pos.y);
-    w->speed -= w->vz;
-    w->vz += 2;
+    work->pos.x += (work->dirX * work->speed) >> 8;
+    work->pos.y += (work->dirY * work->speed) >> 8;
+    work->rotation += 32;
+    work->flipAngleY += (64 - work->flipAngleY) >> 4;
+    work->flipAngleX = 0;
+    work->distance = VectorLength2D(0x7800 - work->pos.x, 0x5000 - work->pos.y);
+    work->speed -= work->vz;
+    work->vz += 2;
 
-    if (w->scale <= 255) {
-        w->scale += 3;
+    if (work->scale <= 255) {
+        work->scale += 3;
     }
 
-    w->x = w->pos.x >> 8;
-    w->y2 = w->pos.y >> 8;
-    UpdateFieldPrizeCardScale(w);
+    work->x = work->pos.x >> 8;
+    work->y2 = work->pos.y >> 8;
+    UpdateFieldPrizeCardScale(work);
 
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return 0;
@@ -217,42 +217,42 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a) {
+u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a) {
     s32 v;
 
-    v = w->rotation << 8;
-    ApproachValue(&w->flipAngleY, 0, w->steps);
-    ApproachValue(&v, 0, w->steps);
-    ApproachValue(&w->pos.x, 0x7800, w->steps);
-    ApproachValue(&w->pos.y, 0x5800, w->steps);
-    w->rotation = v >> 8;
+    v = work->rotation << 8;
+    ApproachValue(&work->flipAngleY, 0, work->steps);
+    ApproachValue(&v, 0, work->steps);
+    ApproachValue(&work->pos.x, 0x7800, work->steps);
+    ApproachValue(&work->pos.y, 0x5800, work->steps);
+    work->rotation = v >> 8;
 
-    if (w->steps != 0) {
-        w->steps--;
+    if (work->steps != 0) {
+        work->steps--;
     }
 
-    if (w->scale <= 255) {
-        w->scale += 2;
+    if (work->scale <= 255) {
+        work->scale += 2;
     } else {
-        w->scale = 256;
+        work->scale = 256;
     }
 
-    w->x = w->pos.x >> 8;
-    w->y2 = w->pos.y >> 8;
-    UpdateFieldPrizeCardScale(w);
-    w->holdTimer++;
+    work->x = work->pos.x >> 8;
+    work->y2 = work->pos.y >> 8;
+    UpdateFieldPrizeCardScale(work);
+    work->holdTimer++;
 
-    if (w->cardId > 0x1C2) {
-        if (w->holdTimer == 120) {
-            w->holdTimer = 0;
+    if (work->cardId > 0x1C2) {
+        if (work->holdTimer == 120) {
+            work->holdTimer = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
         }
-    } else if (w->holdTimer == 30) {
-        w->holdTimer = 0;
+    } else if (work->holdTimer == 30) {
+        work->holdTimer = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateFieldPrizeCardShrink);
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
 
     if (gFieldState->flags & FIELD_FLAG_ROOM_CREATE) {
         return 0;
@@ -261,24 +261,24 @@ u8 UpdateFieldPrizeCardShow(PrizeCardWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateFieldPrizeCardShrink(PrizeCardWork* w) {
-    w->rotation += 32;
-    w->targetX = (gFieldState->actor.fieldPosition.x >> 8) - (gFieldState->x >> 8);
-    w->targetY = (gFieldState->actor.fieldPosition.y >> 8) + (gFieldState->actor.fieldPosition.z >> 8) -
+u8 UpdateFieldPrizeCardShrink(PrizeCardWork* work) {
+    work->rotation += 32;
+    work->targetX = (gFieldState->actor.fieldPosition.x >> 8) - (gFieldState->x >> 8);
+    work->targetY = (gFieldState->actor.fieldPosition.y >> 8) + (gFieldState->actor.fieldPosition.z >> 8) -
                 (gFieldState->y >> 8);
-    w->x += (w->targetX - w->x) >> 3;
-    w->y2 += (w->targetY - w->y2) >> 3;
-    w->scaleX -= 10;
-    w->scaleY -= 10;
+    work->x += (work->targetX - work->x) >> 3;
+    work->y2 += (work->targetY - work->y2) >> 3;
+    work->scaleX -= 10;
+    work->scaleY -= 10;
 
-    if (w->scaleX > 10 && !(gFieldState->flags & FIELD_FLAG_ROOM_CREATE)) {
+    if (work->scaleX > 10 && !(gFieldState->flags & FIELD_FLAG_ROOM_CREATE)) {
         return 1;
     }
 
     return 0;
 }
 
-static void PrizeCard_2(PrizeCardWork* w) {
+static void PrizeCard_2(PrizeCardWork* work) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
@@ -287,69 +287,69 @@ static void PrizeCard_2(PrizeCardWork* w) {
     s16 v;
     s32 t;
 
-    t = w->collected[0];
+    t = work->collected[0];
     pal = 0;
 
     if (t == 0) {
         pal = 0x800;
     }
 
-    if (w->scaleX == 0x100 && w->rotation == 0) {
+    if (work->scaleX == 0x100 && work->rotation == 0) {
         affine = NULL;
     } else {
-        affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
+        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
     }
 
-    def = &gCardDefs[w->cardId];
-    DrawSprite(w->x, (u16)w->y2 - 8, def->gfx, w->tiles, w->palette,
-               affine, pal, w->priority + 1);
-    back = &gCardBacks[w->stat.category];
-    DrawSprite(w->x, (u16)w->y2 - 8, back->gfx, w->tiles2, w->palette2,
-               affine, pal, w->priority);
-    gfx = gUnk_09EE981C[w->stat.value];
-    DrawSprite(w->x, (u16)w->y2 - 8, gfx, w->tiles4, w->palette2, affine,
-               pal, w->priority - 1);
+    def = &gCardDefs[work->cardId];
+    DrawSprite(work->x, (u16)work->y2 - 8, def->gfx, work->tiles, work->palette,
+               affine, pal, work->priority + 1);
+    back = &gCardBacks[work->stat.category];
+    DrawSprite(work->x, (u16)work->y2 - 8, back->gfx, work->tiles2, work->palette2,
+               affine, pal, work->priority);
+    gfx = gUnk_09EE981C[work->stat.value];
+    DrawSprite(work->x, (u16)work->y2 - 8, gfx, work->tiles4, work->palette2, affine,
+               pal, work->priority - 1);
 
-    if (w->collected[0] == 0) {
-        v = 204 - ((w->pos.ground - w->pos.z) >> 7);
+    if (work->collected[0] == 0) {
+        v = 204 - ((work->pos.ground - work->pos.z) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        DrawSprite(w->x2, w->y, gUnk_09EE1380[0],
-                   w->tiles5, w->palette3, AllocObjAffine(0, v, v, 0), pal,
-                   w->priority + 2);
+        DrawSprite(work->x2, work->y, gUnk_09EE1380[0],
+                   work->tiles5, work->palette3, AllocObjAffine(0, v, v, 0), pal,
+                   work->priority + 2);
     }
 
-    TaskPoolDraw(&w->tasks);
+    TaskPoolDraw(&work->tasks);
 }
 
-static void PrizeCard_3(PrizeCardWork* w) {
-    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette->index + 16, 0);
-    ColliderUnregister(&w->collider);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjTiles(w->tiles3);
-    ReleaseObjTiles(w->tiles5);
-    ReleaseObjPalette(w->palette);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjPalette(w->palette3);
-    TaskPoolDestroy(&w->tasks);
+static void PrizeCard_3(PrizeCardWork* work) {
+    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    ColliderUnregister(&work->collider);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjTiles(work->tiles3);
+    ReleaseObjTiles(work->tiles5);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette3);
+    TaskPoolDestroy(&work->tasks);
 }
 
-void UpdateFieldPrizeCardScale(PrizeCardWork* w) {
-    w->scaleX = (-gSineTable[((w->flipAngleX + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
-    w->scaleY = (-gSineTable[((w->flipAngleY + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
+void UpdateFieldPrizeCardScale(PrizeCardWork* work) {
+    work->scaleX = (-gSineTable[((work->flipAngleX + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
+    work->scaleY = (-gSineTable[((work->flipAngleY + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 }
 

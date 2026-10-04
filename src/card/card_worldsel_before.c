@@ -12,84 +12,84 @@
 #include <stddef.h>
 #include "types.h"
 
-void WorldSel_Before_0(WorldSelBeforeWork* w, WorldSelBeforeArgs* a) {
+void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* a) {
     u8 i;
 
     FadeToAmount(FADE_MODE_BLACK, 16, 8);
-    w->pos = *a;
-    w->tiles = LoadObjTiles(gUnk_093FB0CC, 0xC0);
-    w->palette = LoadObjPalette(gUnk_09619378, 32);
-    w->tiles2 = LoadObjTiles(gUnk_093FB1AC, 0x4A0);
-    w->palette2 = AllocObjPalette(32);
-    w->spriteCount = 6;
-    w->animStep = 0;
-    w->animTimer = 0;
-    w->risenCount = 0;
-    UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 4]);
-    FadeSetPaletteExcluded(w->palette->index + 16, 1);
-    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+    work->pos = *a;
+    work->tiles = LoadObjTiles(gUnk_093FB0CC, 0xC0);
+    work->palette = LoadObjPalette(gUnk_09619378, 32);
+    work->tiles2 = LoadObjTiles(gUnk_093FB1AC, 0x4A0);
+    work->palette2 = AllocObjPalette(32);
+    work->spriteCount = 6;
+    work->animStep = 0;
+    work->animTimer = 0;
+    work->risenCount = 0;
+    UpdateAllocatedObjPalette(work->palette2, &gUnk_09619178[gWorldSelAnims[work->animStep].palette << 4]);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 
-    for (i = 0; i < w->spriteCount; i++) {
-        w->angle[i] = 0x80;
-        w->z2[i] = 0;
-        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->pos.x;
-        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->pos.y;
+    for (i = 0; i < work->spriteCount; i++) {
+        work->angle[i] = 0x80;
+        work->z2[i] = 0;
+        work->x2[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
+        work->y2[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
     }
 
     m4aSongNumStart(SONG_SND_212);
 }
 
-s32 WorldSel_Before_1(WorldSelBeforeWork* w) {
+s32 WorldSel_Before_1(WorldSelBeforeWork* work) {
     u8 i;
 
-    if (w->risenCount < w->spriteCount) {
-        w->z2[w->risenCount] -= (s32)(24.0f / (256.0f / (float)w->spriteCount * 0.25f) * 256.0f);
+    if (work->risenCount < work->spriteCount) {
+        work->z2[work->risenCount] -= (s32)(24.0f / (256.0f / (float)work->spriteCount * 0.25f) * 256.0f);
 
-        if (w->z2[w->risenCount] <= -6144) {
-            w->risenCount++;
+        if (work->z2[work->risenCount] <= -6144) {
+            work->risenCount++;
         }
     }
 
-    for (i = 0; i < w->risenCount; i++) {
-        w->x2[i] = gSineTable[w->angle[i]] * 24 + w->pos.x;
-        w->y2[i] = -gSineTable[w->angle[i] + 64] * 12 + w->pos.y;
-        w->angle[i] += 4;
+    for (i = 0; i < work->risenCount; i++) {
+        work->x2[i] = gSineTable[work->angle[i]] * 24 + work->pos.x;
+        work->y2[i] = -gSineTable[work->angle[i] + 64] * 12 + work->pos.y;
+        work->angle[i] += 4;
     }
 
-    if (++w->animTimer == gWorldSelAnims[w->animStep].duration) {
+    if (++work->animTimer == gWorldSelAnims[work->animStep].duration) {
         // fakematch
         do {
-            w->animStep = w->animStep > 28 ? 0 : w->animStep + 1;
+            work->animStep = work->animStep > 28 ? 0 : work->animStep + 1;
         } while (0);
 
-        w->animTimer = 0;
-        UpdateAllocatedObjPalette(w->palette2, &gUnk_09619178[gWorldSelAnims[w->animStep].palette << 4]);
+        work->animTimer = 0;
+        UpdateAllocatedObjPalette(work->palette2, &gUnk_09619178[gWorldSelAnims[work->animStep].palette << 4]);
     }
 
     return 1;
 }
 
-void WorldSel_Before_2(WorldSelBeforeWork* w) {
+void WorldSel_Before_2(WorldSelBeforeWork* work) {
     u8 i;
 
-    for (i = 0; i < w->spriteCount; i++) {
-        DrawSprite((w->x2[i] >> 8) - (gFieldState->x >> 8),
-                   (w->y2[i] >> 8) + ((w->pos.z + w->z2[i]) >> 8) - (gFieldState->y >> 8),
-                   (&gUnk_09EF1278[4])[0], w->tiles, w->palette, NULL, SPRITE_PRIORITY(2),
-                   -0x1004 - (w->y2[i] >> 8) * 4);
+    for (i = 0; i < work->spriteCount; i++) {
+        DrawSprite((work->x2[i] >> 8) - (gFieldState->x >> 8),
+                   (work->y2[i] >> 8) + ((work->pos.z + work->z2[i]) >> 8) - (gFieldState->y >> 8),
+                   (&gUnk_09EF1278[4])[0], work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
+                   -0x1004 - (work->y2[i] >> 8) * 4);
     }
 
-    DrawSprite((w->pos.x >> 8) - (gFieldState->x >> 8) - 32,
-               (w->pos.y >> 8) + (w->pos.z >> 8) - (gFieldState->y >> 8) - 16,
-               (&gUnk_09EF1278[6])[0], w->tiles2, w->palette2, NULL, SPRITE_PRIORITY(2),
-               -0x1004 - ((w->pos.y - 512) >> 8) * 4);
+    DrawSprite((work->pos.x >> 8) - (gFieldState->x >> 8) - 32,
+               (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8) - 16,
+               (&gUnk_09EF1278[6])[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(2),
+               -0x1004 - ((work->pos.y - 512) >> 8) * 4);
 }
 
-void WorldSel_Before_3(WorldSelBeforeWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjPalette(w->palette);
-    ReleaseObjPalette(w->palette2);
+void WorldSel_Before_3(WorldSelBeforeWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
 }
 
 void func_080A581C(u8* work) {

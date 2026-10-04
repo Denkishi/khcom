@@ -43,7 +43,7 @@
 u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
 u16 PickPrizeMapCardForWorld(u16 a, s32 b);
 void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
-s32 UpdateSpotLightFadeOut(SpotlightWork* w);
+s32 UpdateSpotLightFadeOut(SpotlightWork* work);
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
@@ -664,38 +664,38 @@ static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
 
 static const u16 sUnk_0903612C[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };
 
-void PrizeCardInitInit(PrizeCardInitWork* w, PrizeCardArgs* args) {
-    w->spawned = 0;
-    w->args = *args;
-    TaskPoolInit(&w->tasks, 1);
+void PrizeCardInitInit(PrizeCardInitWork* work, PrizeCardArgs* args) {
+    work->spawned = 0;
+    work->args = *args;
+    TaskPoolInit(&work->tasks, 1);
 }
 
-s32 PrizeCardInit_1(PrizeCardInitWork* w) {
+s32 PrizeCardInit_1(PrizeCardInitWork* work) {
     s32 args[9];
     s32 v;
 
-    if (!w->spawned) {
+    if (!work->spawned) {
         if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
-            *(PrizeCardArgs*)args = w->args;
+            *(PrizeCardArgs*)args = work->args;
             args[8] = 2;
-            CreatePrizeMapCardTask(&w->tasks, args);
+            CreatePrizeMapCardTask(&work->tasks, args);
             gGameState.progression.tutorialFlags |= 0x20;
         } else if (gGameState.floor == 0) {
             if (CountZeroValueMapCards() == 0) {
-                *(PrizeCardArgs*)args = w->args;
+                *(PrizeCardArgs*)args = work->args;
                 args[8] = PickPrizeMapCardKindForWorld(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    CreatePrizeMapCardTask(&w->tasks, args);
+                    CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
                 }
             } else {
-                *(PrizeCardArgs*)args = w->args;
+                *(PrizeCardArgs*)args = work->args;
                 args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
                 if (args[8] != 0xFFFF) {
-                    CreatePrizeMapCardTask(&w->tasks, args);
+                    CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
                 }
@@ -706,7 +706,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
             if (v >= 125 && v <= 127) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (GetRandom() % 100 < 20) {
-                        *(PrizeCardArgs*)args = w->args;
+                        *(PrizeCardArgs*)args = work->args;
 
 #ifdef VERSION_EU
                         if (CountRegularMapCards() <= 98) {
@@ -718,21 +718,21 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                         args[8] = CARD_ID(CARD_GRAVITY, GetRandom() % 10);
 #endif
                     } else {
-                        *(PrizeCardArgs*)args = w->args;
+                        *(PrizeCardArgs*)args = work->args;
                         args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
                     }
 
                     if (args[8] != 0xFFFF) {
-                        CreatePrizeMapCardTask(&w->tasks, args);
+                        CreatePrizeMapCardTask(&work->tasks, args);
                     } else {
                         return 0;
                     }
                 } else {
-                    *(PrizeCardArgs*)args = w->args;
+                    *(PrizeCardArgs*)args = work->args;
                     args[8] = PickPrizeMapCardForWorld(gGameState.world, 1);
 
                     if (args[8] != 0xFFFF) {
-                        CreatePrizeMapCardTask(&w->tasks, args);
+                        CreatePrizeMapCardTask(&work->tasks, args);
                     } else {
                         return 0;
                     }
@@ -740,17 +740,17 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
             } else if (v >= 131 && v <= 133) {
 #ifdef VERSION_EU
                 if (CountRegularMapCards() <= 98) {
-                    *(PrizeCardArgs*)args = w->args;
+                    *(PrizeCardArgs*)args = work->args;
                     args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                    CreatePrizeMapCardTask(&w->tasks, args);
+                    CreatePrizeMapCardTask(&work->tasks, args);
                 }
 #else
-                *(PrizeCardArgs*)args = w->args;
+                *(PrizeCardArgs*)args = work->args;
                 args[8] = CARD_ID(CARD_ULTIMA_WEAPON, GetRandom() % 10);
-                CreatePrizeMapCardTask(&w->tasks, args);
+                CreatePrizeMapCardTask(&work->tasks, args);
 #endif
             } else {
-                *(PrizeCardArgs*)args = w->args;
+                *(PrizeCardArgs*)args = work->args;
 
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (!HasMapCard(0xFB)) {
@@ -775,25 +775,25 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 }
 
                 if (args[8] != 0xFFFF) {
-                    CreatePrizeMapCardTask(&w->tasks, args);
+                    CreatePrizeMapCardTask(&work->tasks, args);
                 } else {
                     return 0;
                 }
             }
         }
 
-        w->spawned = 1;
+        work->spawned = 1;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
+s32 PrizeCardInit_Boss_1(PrizeCardInitWork* work, void* a) {
     PrizeCardTaskArgs args;
 
-    if (!w->spawned) {
-        *(PrizeCardArgs*)&args = w->args;
+    if (!work->spawned) {
+        *(PrizeCardArgs*)&args = work->args;
 
         switch (gBtlWork->battleId) {
         case 148:
@@ -876,31 +876,31 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
             args.cardId = CARD_LEXAEUS_9;
             break;
         default:
-            w->spawned = 1;
+            work->spawned = 1;
             return 1;
         }
 
         if (gBtlWork->battleId != 121) {
             if (!CollectionHasCard(args.cardId)) {
-                TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
+                TaskCreate(&work->tasks, &gTaskDescPrizeBoss, &args);
             }
         } else {
-            TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
+            TaskCreate(&work->tasks, &gTaskDescPrizeBoss, &args);
         }
 
-        w->spawned = 1;
+        work->spawned = 1;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void PrizeCardInitDraw(PrizeCardInitWork* w) {
-    TaskPoolDraw(&w->tasks);
+void PrizeCardInitDraw(PrizeCardInitWork* work) {
+    TaskPoolDraw(&work->tasks);
 }
 
-void PrizeCardInitDestroy(PrizeCardInitWork* w) {
-    TaskPoolDestroy(&w->tasks);
+void PrizeCardInitDestroy(PrizeCardInitWork* work) {
+    TaskPoolDestroy(&work->tasks);
 }
 
 u16 PickPrizeMapCardKind(const PrizeMapCardGroup* tbl, u16 n) {
@@ -1060,112 +1060,112 @@ Task* CreateVersionDisplay(TaskPool* pool) {
     return TaskCreate(pool, &gTaskDescVersion, NULL);
 }
 
-static void PrizeCard_0(PrizeMapCardWork* w, s32* args) {
+static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     Collider* p;
 
-    w->cardId = args[8];
-    w->cardDef = &gMapCardDefs[args[8]];
-    w->cardBack = &gMapCardBackDefs[w->cardDef->backIndex];
-    w->tiles = LoadObjTiles(w->cardDef->tiles, 0x300);
-    w->palette = LoadObjPalette(w->cardDef->palette, 32);
-    *(u64*)&w->kind = *(u64*)&w->cardDef->kind;
-    w->tiles2 = LoadObjTiles(w->cardBack->tiles, w->cardBack->tilesSize);
-    w->tiles3 = LoadObjTiles(w->cardBack->tiles, w->cardBack->tilesSize);
-    w->palette2 = LoadObjPalette(w->cardBack->palette, w->cardBack->paletteSize);
-    w->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    w->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    w->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
-    w->posX = args[0];
-    w->posY = args[1];
-    w->posZ = 0;
-    w->groundZ = 0;
-    w->rotation = 24;
-    w->vz = -(GetRandom() % 129 + 0x300);
-    w->speed = GetRandom() % 129 + 0x80;
-    w->moveAngle = GetRandom() % 256;
-    w->scaleX = 0x80;
-    w->scaleY = 0x80;
-    w->scale = 0x80;
-    w->flipAngleY = 0;
-    w->flipAngleX = 0;
-    p = &w->collider;
+    work->cardId = args[8];
+    work->cardDef = &gMapCardDefs[args[8]];
+    work->cardBack = &gMapCardBackDefs[work->cardDef->backIndex];
+    work->tiles = LoadObjTiles(work->cardDef->tiles, 0x300);
+    work->palette = LoadObjPalette(work->cardDef->palette, 32);
+    *(u64*)&work->kind = *(u64*)&work->cardDef->kind;
+    work->tiles2 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
+    work->tiles3 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
+    work->palette2 = LoadObjPalette(work->cardBack->palette, work->cardBack->paletteSize);
+    work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->posX = args[0];
+    work->posY = args[1];
+    work->posZ = 0;
+    work->groundZ = 0;
+    work->rotation = 24;
+    work->vz = -(GetRandom() % 129 + 0x300);
+    work->speed = GetRandom() % 129 + 0x80;
+    work->moveAngle = GetRandom() % 256;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
+    work->scale = 0x80;
+    work->flipAngleY = 0;
+    work->flipAngleX = 0;
+    p = &work->collider;
     ColliderInit(p, 5, 8, 10);
     ColliderSetDisabled(p, 1);
-    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
-    w->backAnimTimer = 0;
-    w->backAnimStep = 0;
-    w->backFrame = 0;
-    w->timer = 0;
-    w->collected = 0;
-    w->steps = 0;
-    w->holdTimer = 0;
-    TaskPoolInit(&w->tasks, 1);
+    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    work->backAnimTimer = 0;
+    work->backAnimStep = 0;
+    work->backFrame = 0;
+    work->timer = 0;
+    work->collected = 0;
+    work->steps = 0;
+    work->holdTimer = 0;
+    TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-static u8 PrizeCard_1(PrizeMapCardWork* w, void* a) {
+static u8 PrizeCard_1(PrizeMapCardWork* work, void* a) {
     s16 x;
     s16 y;
 
-    w->vz += 56;
-    w->posZ += w->vz;
-    w->posX += (gSineTable[(u8)w->moveAngle] * w->speed) >> 8;
-    w->posY += (-gSineTable[(u8)w->moveAngle + 64] * w->speed) >> 8;
+    work->vz += 56;
+    work->posZ += work->vz;
+    work->posX += (gSineTable[(u8)work->moveAngle] * work->speed) >> 8;
+    work->posY += (-gSineTable[(u8)work->moveAngle + 64] * work->speed) >> 8;
 
-    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10)) {
-        w->moveAngle += GetRandom() % 57 + 100;
+    if (ClampBattlePosition(&work->posX, &work->posY, -10, -10)) {
+        work->moveAngle += GetRandom() % 57 + 100;
     }
 
     if (gBtlWork->hcEffect == 6) {
-        ColliderSetRadius(&w->collider, 50);
+        ColliderSetRadius(&work->collider, 50);
     } else {
-        ColliderSetRadius(&w->collider, 10);
+        ColliderSetRadius(&work->collider, 10);
     }
 
-    if (w->posZ - 8 > w->groundZ) {
-        w->posZ = w->groundZ - 8;
-        w->vz = -((w->vz * 217) >> 8);
-        w->moveAngle = GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
-        w->moveAngle += GetRandom() % 65 - 32;
+    if (work->posZ - 8 > work->groundZ) {
+        work->posZ = work->groundZ - 8;
+        work->vz = -((work->vz * 217) >> 8);
+        work->moveAngle = GetAngle(work->posX, work->posY, gBtlWork->actor->x, gBtlWork->actor->y);
+        work->moveAngle += GetRandom() % 65 - 32;
 
-        if (w->vz > -0x200) {
-            w->vz = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
-    if (w->collider.colliding) {
-        w->collected = 1;
+    if (work->collider.colliding) {
+        work->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        AddMapCard(w->cardId);
+        AddMapCard(work->cardId);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardFlight);
-        WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
-        w->posX = x << 8;
-        w->posY = y << 8;
-        ColliderSetDisabled(&w->collider, 1);
-        w->priority = 50;
-        AimPrizeMapCardAtCenter(w);
+        WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
+        work->posX = x << 8;
+        work->posY = y << 8;
+        ColliderSetDisabled(&work->collider, 1);
+        work->priority = 50;
+        AimPrizeMapCardAtCenter(work);
         return 1;
     } else {
-        ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
-        WorldToScreen(&w->x, &w->y2, w->posX, w->posY, w->posZ);
-        WorldToScreen(&w->x2, &w->y, w->posX, w->posY, w->groundZ);
-        w->priority = -0x1004 - (w->posY >> 8) * 4;
-        UpdatePrizeMapCardScale(w);
-        w->flipAngleX += 2;
+        ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
+        WorldToScreen(&work->x, &work->y2, work->posX, work->posY, work->posZ);
+        WorldToScreen(&work->x2, &work->y, work->posX, work->posY, work->groundZ);
+        work->priority = -0x1004 - (work->posY >> 8) * 4;
+        UpdatePrizeMapCardScale(work);
+        work->flipAngleX += 2;
 
-        if (w->timer == 20) {
-            ColliderSetDisabled(&w->collider, 0);
+        if (work->timer == 20) {
+            ColliderSetDisabled(&work->collider, 0);
         }
 
-        if (w->timer <= 59) {
-            w->timer++;
+        if (work->timer <= 59) {
+            work->timer++;
         }
     }
 
     return 1;
 }
 
-void AimPrizeMapCardAtCenter(PrizeMapCardWork* w) {
+void AimPrizeMapCardAtCenter(PrizeMapCardWork* work) {
     s16 x;
     s16 y;
     s32 dx;
@@ -1176,16 +1176,16 @@ void AimPrizeMapCardAtCenter(PrizeMapCardWork* w) {
     WorldToScreen(&x, &y, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
     tx = 0x7800;
     ty = 0x5000;
-    dx = tx - w->posX;
-    dy = ty - w->posY;
-    w->distance = NormalizeVector2D8(&dx, &dy);
-    w->dirX = -dx;
-    w->dirY = -dy;
-    w->speed = 0x300;
-    w->vz = 2;
+    dx = tx - work->posX;
+    dy = ty - work->posY;
+    work->distance = NormalizeVector2D8(&dx, &dy);
+    work->dirX = -dx;
+    work->dirY = -dy;
+    work->speed = 0x300;
+    work->vz = 2;
 }
 
-u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* w, void* a) {
+u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* work, void* a) {
     s32 dx;
     s32 dy;
     u8 z;
@@ -1195,210 +1195,210 @@ u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* w, void* a) {
     s16* q1;
     s16* q2;
 
-    if (w->speed < 0) {
-        dx = 0x7800 - w->posX;
-        dy = 0x5000 - w->posY;
+    if (work->speed < 0) {
+        dx = 0x7800 - work->posX;
+        dy = 0x5000 - work->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->dirX = -dx;
-        w->dirY = -dy;
+        work->dirX = -dx;
+        work->dirY = -dy;
 
-        if (w->distance <= 0x7FF) {
-            w->steps = 0;
-            w->rotation = 0;
+        if (work->distance <= 0x7FF) {
+            work->steps = 0;
+            work->rotation = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardShow);
-            CreateCardNameDisplay(&w->tasks, GetRoomName(w->cardDef->kind));
+            CreateCardNameDisplay(&work->tasks, GetRoomName(work->cardDef->kind));
         }
     }
 
-    w->posX += (w->dirX * w->speed) >> 8;
-    w->posY += (w->dirY * w->speed) >> 8;
-    t = w->rotation + 32;
+    work->posX += (work->dirX * work->speed) >> 8;
+    work->posY += (work->dirY * work->speed) >> 8;
+    t = work->rotation + 32;
     z = 0;
-    w->rotation = t;
-    w->flipAngleY += (64 - w->flipAngleY) >> 4;
-    w->flipAngleX = z;
-    w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
-    w->speed -= w->vz;
-    w->vz += 2;
+    work->rotation = t;
+    work->flipAngleY += (64 - work->flipAngleY) >> 4;
+    work->flipAngleX = z;
+    work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
+    work->speed -= work->vz;
+    work->vz += 2;
 
-    if (w->scale <= 0xFF) {
-        w->scale += 3;
+    if (work->scale <= 0xFF) {
+        work->scale += 3;
     }
 
-    x = w->posX >> 8;
-    q1 = &w->x;
+    x = work->posX >> 8;
+    q1 = &work->x;
     *q1 = x;
-    y = w->posY >> 8;
-    q2 = &w->y2;
+    y = work->posY >> 8;
+    q2 = &work->y2;
     *q2 = y;
-    UpdatePrizeMapCardScale(w);
+    UpdatePrizeMapCardScale(work);
     return 1;
 }
 
-u8 UpdatePrizeMapCardShow(PrizeMapCardWork* w, void* a) {
+u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* a) {
     s32 v;
     s16 lim;
     s32 x;
     s16* q;
 
-    v = w->rotation << 8;
-    ApproachValue((s32*)&w->flipAngleY, 0, w->steps);
-    ApproachValue(&v, 0, w->steps);
-    ApproachValue(&w->posX, 0x7800, w->steps);
-    ApproachValue(&w->posY, 0x5800, w->steps);
-    w->rotation = v >> 8;
+    v = work->rotation << 8;
+    ApproachValue((s32*)&work->flipAngleY, 0, work->steps);
+    ApproachValue(&v, 0, work->steps);
+    ApproachValue(&work->posX, 0x7800, work->steps);
+    ApproachValue(&work->posY, 0x5800, work->steps);
+    work->rotation = v >> 8;
 
-    if (w->steps != 0) {
-        w->steps--;
+    if (work->steps != 0) {
+        work->steps--;
     }
 
     lim = 0x100;
 
-    if (w->scale < 0x100) {
-        w->scale += 2;
+    if (work->scale < 0x100) {
+        work->scale += 2;
     } else {
-        w->scale = lim;
+        work->scale = lim;
     }
 
-    x = w->posX >> 8;
-    q = &w->x;
+    x = work->posX >> 8;
+    q = &work->x;
     *q = x;
-    x = w->posY >> 8;
-    q = &w->y2;
+    x = work->posY >> 8;
+    q = &work->y2;
     *q = x;
-    UpdatePrizeMapCardScale(w);
-    w->holdTimer++;
+    UpdatePrizeMapCardScale(work);
+    work->holdTimer++;
 
-    if (w->holdTimer == 30) {
-        w->holdTimer = 0;
+    if (work->holdTimer == 30) {
+        work->holdTimer = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePrizeMapCardShrink);
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 UpdatePrizeMapCardShrink(PrizeMapCardWork* w) {
-    w->rotation += 32;
-    WorldToScreen(&w->x3, &w->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    w->x += (w->x3 - w->x) >> 3;
-    w->y2 += (w->y3 - w->y2) >> 3;
-    w->scaleX -= 10;
-    w->scaleY -= 10;
+u8 UpdatePrizeMapCardShrink(PrizeMapCardWork* work) {
+    work->rotation += 32;
+    WorldToScreen(&work->x3, &work->y3, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
+    work->x += (work->x3 - work->x) >> 3;
+    work->y2 += (work->y3 - work->y2) >> 3;
+    work->scaleX -= 10;
+    work->scaleY -= 10;
 
-    if (w->scaleX <= 10) {
+    if (work->scaleX <= 10) {
         return 0;
     }
 
     return 1;
 }
 
-static void PrizeCard_2(PrizeMapCardWork* w) {
+static void PrizeCard_2(PrizeMapCardWork* work) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
     s16 v;
 
-    pal = !w->collected ? GetBattleSpritePriorityFlags(w->posY) : 0;
+    pal = !work->collected ? GetBattleSpritePriorityFlags(work->posY) : 0;
 
-    if (w->scaleX == 0x100 && w->rotation == 0) {
+    if (work->scaleX == 0x100 && work->rotation == 0) {
         affine = NULL;
     } else {
-        affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
+        affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
     }
 
-    DrawSprite(w->x, (u16)w->y2 - 8,
-               *w->cardDef->sprites,
-               w->tiles, w->palette, affine, pal,
-               w->priority + 1);
+    DrawSprite(work->x, (u16)work->y2 - 8,
+               *work->cardDef->sprites,
+               work->tiles, work->palette, affine, pal,
+               work->priority + 1);
 
-    if (w->cardDef->backIndex == 4) {
-        gfx = w->cardBack->sprites[w->backFrame];
+    if (work->cardDef->backIndex == 4) {
+        gfx = work->cardBack->sprites[work->backFrame];
     } else {
-        gfx = w->cardBack->sprites[0];
+        gfx = work->cardBack->sprites[0];
     }
 
-    DrawSprite(w->x, (u16)w->y2 - 8, gfx,
-               w->tiles2, w->palette2, affine, pal,
-               w->priority);
+    DrawSprite(work->x, (u16)work->y2 - 8, gfx,
+               work->tiles2, work->palette2, affine, pal,
+               work->priority);
 
-    if (w->cardDef->backIndex != 4) {
-        gfx = gUnk_09EE981C[w->value];
-        DrawSprite(w->x, (u16)w->y2 - 8, gfx,
-                   w->tiles4, w->palette2, affine, pal,
-                   w->priority - 1);
+    if (work->cardDef->backIndex != 4) {
+        gfx = gUnk_09EE981C[work->value];
+        DrawSprite(work->x, (u16)work->y2 - 8, gfx,
+                   work->tiles4, work->palette2, affine, pal,
+                   work->priority - 1);
     }
 
-    if (!w->collected) {
-        v = 204 - ((w->groundZ - w->posZ) >> 7);
+    if (!work->collected) {
+        v = 204 - ((work->groundZ - work->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        DrawSprite(w->x2, w->y, gUnk_09EE1380[0],
-                   w->tiles5, w->palette3,
+        DrawSprite(work->x2, work->y, gUnk_09EE1380[0],
+                   work->tiles5, work->palette3,
                    AllocObjAffine(0, v, v, 0), pal,
-                   w->priority + 2);
+                   work->priority + 2);
     }
 
-    TaskPoolDraw(&w->tasks);
+    TaskPoolDraw(&work->tasks);
 }
 
-static void PrizeCard_3(PrizeMapCardWork* w) {
-    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette->index + 16, 0);
-    ColliderUnregister(&w->collider);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjTiles(w->tiles3);
-    ReleaseObjTiles(w->tiles5);
-    ReleaseObjPalette(w->palette);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjPalette(w->palette3);
-    TaskPoolDestroy(&w->tasks);
+static void PrizeCard_3(PrizeMapCardWork* work) {
+    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    ColliderUnregister(&work->collider);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjTiles(work->tiles3);
+    ReleaseObjTiles(work->tiles5);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette3);
+    TaskPoolDestroy(&work->tasks);
     gBtlWork->prizeCount--;
 }
 
-void UpdatePrizeMapCardScale(PrizeMapCardWork* w) {
-    w->scaleX = (-gSineTable[((w->flipAngleX + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
-    w->scaleY = (-gSineTable[((w->flipAngleY + 0x80) & 0xFF) + 0x40] * w->scale) >> 8;
+void UpdatePrizeMapCardScale(PrizeMapCardWork* work) {
+    work->scaleX = (-gSineTable[((work->flipAngleX + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
+    work->scaleY = (-gSineTable[((work->flipAngleY + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 }
 
 #ifndef VERSION_EU
-void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* w) {
+void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* work) {
     u8* p;
     u8* q;
     u8 k;
     u8 v;
     u8 z;
-    v = gPrizeMapCardBackAnim[w->backAnimStep].sprite;
-    q = &w->backFrame;
+    v = gPrizeMapCardBackAnim[work->backAnimStep].sprite;
+    q = &work->backFrame;
     z = 0;
     *q = v;
-    p = &w->backAnimTimer;
-    k = w->backAnimStep;
+    p = &work->backAnimTimer;
+    k = work->backAnimStep;
 
     if (*p == gPrizeMapCardBackAnim[k].duration) {
-        w->backAnimStep = k + 1;
+        work->backAnimStep = k + 1;
 
-        if (w->backAnimStep == 7) {
-            w->backAnimStep = z;
+        if (work->backAnimStep == 7) {
+            work->backAnimStep = z;
         }
 
         *p = z;
     }
 
-    w->backAnimTimer++;
+    work->backAnimTimer++;
 }
 #endif
 
@@ -1406,12 +1406,12 @@ void CreatePrizeMapCardTask(TaskPool* pool, s32* args) {
     TaskCreate(pool, &gTaskDescPrizeMapCard, args);
 }
 
-void SpotLight_0(SpotlightWork* w, u8* src) {
+void SpotLight_0(SpotlightWork* work, u8* src) {
     if (src != NULL) {
-        w->endFlag = src;
+        work->endFlag = src;
     } else {
-        w->endFlag = &w->ownEndFlag;
-        w->ownEndFlag = 0;
+        work->endFlag = &work->ownEndFlag;
+        work->ownEndFlag = 0;
     }
 
     LoadBgTiles(0, gUnk_09501778, 0xCA0);
@@ -1419,25 +1419,25 @@ void SpotLight_0(SpotlightWork* w, u8* src) {
     FadeSetPaletteExcluded(13, 1);
     LoadBgMap(0, gUnk_0960F2B8, 0x800);
     SetBgScroll(0, 0, 0);
-    w->steps = 30;
-    w->blendB = 0x1000;
-    w->blendA = 0;
+    work->steps = 30;
+    work->blendB = 0x1000;
+    work->blendA = 0;
     FadeStartOut(FADE_MODE_BLACK, 30);
     gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
 }
 
-u8 SpotLight_1(SpotlightWork* w, void* a) {
-    ApproachValue(&w->blendA, 0x1000, w->steps);
+u8 SpotLight_1(SpotlightWork* work, void* a) {
+    ApproachValue(&work->blendA, 0x1000, work->steps);
 
-    if (w->steps != 0) {
-        w->steps--;
-        w->bldAlpha = ((w->blendB >> 8) << 8) | (w->blendA >> 8);
-        gBldAlpha = w->bldAlpha;
+    if (work->steps != 0) {
+        work->steps--;
+        work->bldAlpha = ((work->blendB >> 8) << 8) | (work->blendA >> 8);
+        gBldAlpha = work->bldAlpha;
     }
 
-    if (*w->endFlag == 1) {
+    if (*work->endFlag == 1) {
         FadeStartIn(FADE_MODE_BLACK, 30);
-        w->steps = 30;
+        work->steps = 30;
         gBldCnt = (BLDCNT_TGT1_BG0 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateSpotLightFadeOut);
     }
@@ -1445,17 +1445,17 @@ u8 SpotLight_1(SpotlightWork* w, void* a) {
     return 1;
 }
 
-s32 UpdateSpotLightFadeOut(SpotlightWork* w) {
+s32 UpdateSpotLightFadeOut(SpotlightWork* work) {
     s32 v;
 
-    ApproachValue(&w->blendA, 0, w->steps);
+    ApproachValue(&work->blendA, 0, work->steps);
 
-    if (w->steps != 0) {
-        w->steps--;
+    if (work->steps != 0) {
+        work->steps--;
     }
 
-    v = ((w->blendB >> 8) << 8) | (w->blendA >> 8);
-    w->bldAlpha = v;
+    v = ((work->blendB >> 8) << 8) | (work->blendA >> 8);
+    work->bldAlpha = v;
     gBldAlpha = v;
     return 1;
 }

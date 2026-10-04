@@ -45,7 +45,7 @@
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 
-void CreatePremireChanceCardTasks(PremireChanceWork* w);
+void CreatePremireChanceCardTasks(PremireChanceWork* work);
 
 static const u32 sFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),
@@ -58,131 +58,131 @@ static const u32 sFriendCardIds[8] = {
     CARD_ID(CARD_THE_KING, 0),
 };
 
-void Friend_card_0(PickupCardWork* w, s32* args) {
+void Friend_card_0(PickupCardWork* work, s32* args) {
     Collider* p;
 
-    w->cardId = args[3];
-    w->posX = args[0];
-    w->posY = args[1];
-    w->posZ = args[2];
-    w->floor = 0;
-    w->moveAngle = GetRandom();
-    w->vz = -(GetRandom() % 129 + 0x300);
-    w->speed = GetRandom() % 129 + 0x80;
-    w->flipAngleX = 0;
-    w->flipAngleY = 0;
-    w->angle = 24;
-    w->scaleX = 0x80;
-    w->scaleY = 0x80;
-    w->scale = 0x80;
-    w->screenSpace = 0;
-    w->unk_1CB = 0;
-    w->unk_1CC = 0;
-    w->timer = 0;
-    w->visible = 1;
-    w->cardDef = &gCardDefs[args[3]];
+    work->cardId = args[3];
+    work->posX = args[0];
+    work->posY = args[1];
+    work->posZ = args[2];
+    work->floor = 0;
+    work->moveAngle = GetRandom();
+    work->vz = -(GetRandom() % 129 + 0x300);
+    work->speed = GetRandom() % 129 + 0x80;
+    work->flipAngleX = 0;
+    work->flipAngleY = 0;
+    work->angle = 24;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
+    work->scale = 0x80;
+    work->screenSpace = 0;
+    work->unk_1CB = 0;
+    work->unk_1CC = 0;
+    work->timer = 0;
+    work->visible = 1;
+    work->cardDef = &gCardDefs[args[3]];
 
-    if (w->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        w->backCategory = 3;
+    if (work->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
+        work->backCategory = 3;
     } else {
-        w->backCategory = w->cardDef->category;
+        work->backCategory = work->cardDef->category;
     }
 
-    w->palette = LoadObjPalette(gCard00Palette, 32);
-    w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    w->tiles2 = LoadObjTiles(w->cardDef->tiles, 0x300);
-    w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
-    w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &w->collider;
+    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
+    work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
+    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->palette3 = LoadObjPalette(gBStatesPalette, 32);
+    p = &work->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
-    TaskPoolInit(&w->tasks, 1);
+    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void Heartless_card_0(PickupCardWork* w, s32* args) {
+void Heartless_card_0(PickupCardWork* work, s32* args) {
     Collider* p;
 
-    w->cardId = args[3];
-    w->posX = args[0];
-    w->posY = args[1];
-    w->posZ = args[2];
-    w->floor = 0;
-    w->moveAngle = GetRandom();
-    w->vz = -(GetRandom() % 129 + 0x300);
-    w->speed = GetRandom() % 129 + 0x80;
-    w->flipAngleX = 0;
-    w->flipAngleY = 0;
-    w->angle = 24;
-    w->scaleX = 0x80;
-    w->scaleY = 0x80;
-    w->scale = 0x80;
-    w->screenSpace = 0;
-    w->unk_1CB = 0;
-    w->unk_1CC = 0;
-    w->timer = 0;
-    w->visible = 1;
-    w->cardDef = &gCardDefs[args[3]];
+    work->cardId = args[3];
+    work->posX = args[0];
+    work->posY = args[1];
+    work->posZ = args[2];
+    work->floor = 0;
+    work->moveAngle = GetRandom();
+    work->vz = -(GetRandom() % 129 + 0x300);
+    work->speed = GetRandom() % 129 + 0x80;
+    work->flipAngleX = 0;
+    work->flipAngleY = 0;
+    work->angle = 24;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
+    work->scale = 0x80;
+    work->screenSpace = 0;
+    work->unk_1CB = 0;
+    work->unk_1CC = 0;
+    work->timer = 0;
+    work->visible = 1;
+    work->cardDef = &gCardDefs[args[3]];
 
-    if (w->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        w->backCategory = 3;
+    if (work->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
+        work->backCategory = 3;
     } else {
-        w->backCategory = w->cardDef->category;
+        work->backCategory = work->cardDef->category;
     }
 
-    w->tiles = LoadObjTiles(gCardBacks[w->backCategory].tiles, 0x280);
-    w->palette = LoadObjPalette(gCard00Palette, 32);
-    w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    w->tiles2 = LoadObjTiles(w->cardDef->tiles, 0x300);
-    w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
-    w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &w->collider;
+    work->tiles = LoadObjTiles(gCardBacks[work->backCategory].tiles, 0x280);
+    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
+    work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
+    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->palette3 = LoadObjPalette(gBStatesPalette, 32);
+    p = &work->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
-    TaskPoolInit(&w->tasks, 1);
+    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void Gimmick_card_0(PickupCardWork* w, GimmickCardArgs* args) {
+void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     Collider* p;
 
-    w->cardId = args->cardId;
-    w->posX = args->x;
-    w->posY = args->y;
-    w->posZ = args->z;
-    w->floor = 0;
-    w->moveAngle = GetRandom();
-    w->vz = -((u16)(GetRandom() % 129) + 0x300);
-    w->speed = (u16)(GetRandom() % 129) + 0x80;
-    w->flipAngleX = 0;
-    w->flipAngleY = 0;
-    w->angle = 24;
-    w->scaleX = 0x80;
-    w->scaleY = 0x80;
-    w->scale = 0x80;
-    w->screenSpace = 0;
-    w->unk_1CB = 0;
-    w->unk_1CC = 0;
-    w->timer = 0;
-    w->visible = 1;
-    w->cardDef = &gCardDefs[args->cardId];
-    w->backCategory = w->cardDef->category;
-    w->palette = LoadObjPalette(gCard00Palette, 32);
-    w->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    w->tiles2 = LoadObjTiles(w->cardDef->tiles, 0x300);
-    w->palette2 = LoadObjPalette(w->cardDef->palette, 32);
-    w->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    w->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &w->collider;
+    work->cardId = args->cardId;
+    work->posX = args->x;
+    work->posY = args->y;
+    work->posZ = args->z;
+    work->floor = 0;
+    work->moveAngle = GetRandom();
+    work->vz = -((u16)(GetRandom() % 129) + 0x300);
+    work->speed = (u16)(GetRandom() % 129) + 0x80;
+    work->flipAngleX = 0;
+    work->flipAngleY = 0;
+    work->angle = 24;
+    work->scaleX = 0x80;
+    work->scaleY = 0x80;
+    work->scale = 0x80;
+    work->screenSpace = 0;
+    work->unk_1CB = 0;
+    work->unk_1CC = 0;
+    work->timer = 0;
+    work->visible = 1;
+    work->cardDef = &gCardDefs[args->cardId];
+    work->backCategory = work->cardDef->category;
+    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
+    work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
+    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->palette3 = LoadObjPalette(gBStatesPalette, 32);
+    p = &work->collider;
     ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, w->posX, w->posY, w->posZ);
-    TaskPoolInit(&w->tasks, 1);
+    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
-void StartPickupCardFlight(PickupCardWork* w, u8 kind) {
+void StartPickupCardFlight(PickupCardWork* work, u8 kind) {
     s32 dx;
     s32 dy;
     s32 tx;
@@ -196,16 +196,16 @@ void StartPickupCardFlight(PickupCardWork* w, u8 kind) {
         ty = 0xA000;
     }
 
-    dx = tx - w->posX;
-    dy = ty - w->posY;
-    w->distance = NormalizeVector2D8(&dx, &dy);
-    w->dirX = -dx;
-    w->dirY = -dy;
-    w->speed = 0x300;
-    w->vz = 2;
+    dx = tx - work->posX;
+    dy = ty - work->posY;
+    work->distance = NormalizeVector2D8(&dx, &dy);
+    work->dirX = -dx;
+    work->dirY = -dy;
+    work->speed = 0x300;
+    work->vz = 2;
 }
 
-s32 Friend_card_1(PickupCardWork* w, void* a) {
+s32 Friend_card_1(PickupCardWork* work, void* a) {
     s16 sx;
     s32 t;
     u16 n;
@@ -215,56 +215,56 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         return 0;
     }
 
-    w->vz += gBtlWork->gravity;
-    w->posZ += w->vz;
-    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
-    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
+    work->vz += gBtlWork->gravity;
+    work->posZ += work->vz;
+    work->posX += (gSineTable[work->moveAngle] * work->speed) >> 8;
+    work->posY += (-gSineTable[work->moveAngle + 64] * work->speed) >> 8;
 
-    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
-        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
+    if (ClampBattlePosition(&work->posX, &work->posY, -10, -10) != 0) {
+        work->moveAngle = (u8)(work->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->posZ - 0x800 > w->floor) {
-        w->posZ = w->floor - 0x800;
-        w->vz = -((204 * w->vz) >> 8);
-        w->moveAngle = GetAngle(w->posX, w->posY,
+    if (work->posZ - 0x800 > work->floor) {
+        work->posZ = work->floor - 0x800;
+        work->vz = -((204 * work->vz) >> 8);
+        work->moveAngle = GetAngle(work->posX, work->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
-        w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
+        work->moveAngle = (u8)(work->moveAngle + 224) + GetRandom() % 65;
 
-        if (w->vz > -0x200) {
-            w->vz = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
     if (gBtlWork->hcEffect == 6) {
-        ColliderSetRadius(&w->collider, 50);
+        ColliderSetRadius(&work->collider, 50);
     } else {
-        ColliderSetRadius(&w->collider, 10);
+        ColliderSetRadius(&work->collider, 10);
     }
 
-    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
-                          &w->floor) != 0) {
-        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
+    if (ApplyBattleBounds(&work->posX, &work->posY, &work->posZ,
+                          &work->floor) != 0) {
+        work->moveAngle = (u8)(work->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding) {
+    if (work->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
 #ifdef VERSION_EU
-        w->priority = 10;
+        work->priority = 10;
 #endif
 
         if (gCardBattleState != NULL) {
-            WorldToScreen(&sx, &sy, w->posX, w->posY,
-                          w->posZ);
-            w->posX = sx << 8;
-            w->posY = sy << 8;
-            w->screenSpace = 1;
-            ColliderSetDisabled(&w->collider, 1);
-            StartPickupCardFlight(w, 0);
+            WorldToScreen(&sx, &sy, work->posX, work->posY,
+                          work->posZ);
+            work->posX = sx << 8;
+            work->posY = sy << 8;
+            work->screenSpace = 1;
+            ColliderSetDisabled(&work->collider, 1);
+            StartPickupCardFlight(work, 0);
 #ifdef VERSION_EU
-            w->visible = 1;
+            work->visible = 1;
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
@@ -272,48 +272,48 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->posX, w->posY,
-                  w->posZ);
-    w->scaleX =
-        (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] *
-         w->scale) >> 8;
-    w->scaleY =
-        (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] *
-         w->scale) >> 8;
+    ColliderSetPosition(&work->collider, work->posX, work->posY,
+                  work->posZ);
+    work->scaleX =
+        (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] *
+         work->scale) >> 8;
+    work->scaleY =
+        (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] *
+         work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 
-    w->flipAngleX += 2;
-    w->priority = -0x1004 - (w->posY >> 8) * 4;
-    TaskPoolUpdate(&w->tasks);
+    work->flipAngleX += 2;
+    work->priority = -0x1004 - (work->posY >> 8) * 4;
+    TaskPoolUpdate(&work->tasks);
 
     if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         return 1;
     }
 
-    n = w->timer;
+    n = work->timer;
 
     if (n > 359) {
         return 0;
     }
 
     t = n + 1;
-    w->timer = t;
+    work->timer = t;
 
-    if (w->timer > 279 && t % 4 == 0) {
-        w->visible ^= 1;
+    if (work->timer > 279 && t % 4 == 0) {
+        work->visible ^= 1;
     }
 
     return 1;
 }
 
-s32 Gimmick_card_1(PickupCardWork* w, void* a) {
+s32 Gimmick_card_1(PickupCardWork* work, void* a) {
     s16 sx;
     s32 t;
     u16 n;
@@ -323,56 +323,56 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         return 0;
     }
 
-    w->vz += 56;
-    w->posZ += w->vz;
-    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
-    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
+    work->vz += 56;
+    work->posZ += work->vz;
+    work->posX += (gSineTable[work->moveAngle] * work->speed) >> 8;
+    work->posY += (-gSineTable[work->moveAngle + 64] * work->speed) >> 8;
 
-    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
-        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
+    if (ClampBattlePosition(&work->posX, &work->posY, -10, -10) != 0) {
+        work->moveAngle = (u8)(work->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->posZ - 0x800 > w->floor) {
-        w->posZ = w->floor - 0x800;
-        w->vz = -((204 * w->vz) >> 8);
-        w->moveAngle = GetAngle(w->posX, w->posY,
+    if (work->posZ - 0x800 > work->floor) {
+        work->posZ = work->floor - 0x800;
+        work->vz = -((204 * work->vz) >> 8);
+        work->moveAngle = GetAngle(work->posX, work->posY,
                                gBtlWork->actor->x,
                                gBtlWork->actor->y);
-        w->moveAngle = (u8)(w->moveAngle + 224) + GetRandom() % 65;
+        work->moveAngle = (u8)(work->moveAngle + 224) + GetRandom() % 65;
 
-        if (w->vz > -0x200) {
-            w->vz = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
     if (gBtlWork->hcEffect == 6) {
-        ColliderSetRadius(&w->collider, 50);
+        ColliderSetRadius(&work->collider, 50);
     } else {
-        ColliderSetRadius(&w->collider, 10);
+        ColliderSetRadius(&work->collider, 10);
     }
 
-    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ,
-                          &w->floor) != 0) {
-        w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
+    if (ApplyBattleBounds(&work->posX, &work->posY, &work->posZ,
+                          &work->floor) != 0) {
+        work->moveAngle = (u8)(work->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding) {
+    if (work->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
 #ifdef VERSION_EU
-        w->priority = 10;
+        work->priority = 10;
 #endif
 
         if (gCardBattleState != NULL) {
-            WorldToScreen(&sx, &sy, w->posX, w->posY,
-                          w->posZ);
-            w->posX = sx << 8;
-            w->posY = sy << 8;
-            w->screenSpace = 1;
-            ColliderSetDisabled(&w->collider, 1);
-            StartPickupCardFlight(w, 0);
+            WorldToScreen(&sx, &sy, work->posX, work->posY,
+                          work->posZ);
+            work->posX = sx << 8;
+            work->posY = sy << 8;
+            work->screenSpace = 1;
+            ColliderSetDisabled(&work->collider, 1);
+            StartPickupCardFlight(work, 0);
 #ifdef VERSION_EU
-            w->visible = 1;
+            work->visible = 1;
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)FlyPickupCardToDeck);
         }
@@ -380,28 +380,28 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->posX, w->posY,
-                  w->posZ);
-    w->scaleX =
-        (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] *
-         w->scale) >> 8;
-    w->scaleY =
-        (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] *
-         w->scale) >> 8;
+    ColliderSetPosition(&work->collider, work->posX, work->posY,
+                  work->posZ);
+    work->scaleX =
+        (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] *
+         work->scale) >> 8;
+    work->scaleY =
+        (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] *
+         work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 
-    w->flipAngleX += 2;
-    w->priority = -0x1004 - (w->posY >> 8) * 4;
-    TaskPoolUpdate(&w->tasks);
+    work->flipAngleX += 2;
+    work->priority = -0x1004 - (work->posY >> 8) * 4;
+    TaskPoolUpdate(&work->tasks);
 
-    n = w->timer;
+    n = work->timer;
 
     if (n > 359) {
         gCardBattleState->gimmickCardCount -= 1;
@@ -409,16 +409,16 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
     }
 
     t = n + 1;
-    w->timer = t;
+    work->timer = t;
 
-    if (w->timer > 279 && t % 4 == 0) {
-        w->visible ^= 1;
+    if (work->timer > 279 && t % 4 == 0) {
+        work->visible ^= 1;
     }
 
     return 1;
 }
 
-u8 FlyPickupCardToDeck(PickupCardWork* w) {
+u8 FlyPickupCardToDeck(PickupCardWork* work) {
     s32 dx;
     s32 dy;
     u16 t;
@@ -427,331 +427,331 @@ u8 FlyPickupCardToDeck(PickupCardWork* w) {
         return 0;
     }
 
-    if (w->speed < 0) {
-        dx = -w->posX;
-        dy = 0xA000 - w->posY;
+    if (work->speed < 0) {
+        dx = -work->posX;
+        dy = 0xA000 - work->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->dirX = -dx;
-        w->dirY = -dy;
+        work->dirX = -dx;
+        work->dirY = -dy;
 
-        if (w->distance < 0x800) {
-            if (w->cardId >= 655 && w->cardId <= 659) {
-                gCardBattleState->pickedGimmickCardId = w->cardId;
+        if (work->distance < 0x800) {
+            if (work->cardId >= 655 && work->cardId <= 659) {
+                gCardBattleState->pickedGimmickCardId = work->cardId;
             } else {
-                gCardBattleState->pickedFriendCardId = w->cardId;
+                gCardBattleState->pickedFriendCardId = work->cardId;
             }
 
             return 0;
         }
     }
 
-    w->posX += (w->dirX * w->speed) >> 8;
-    w->posY += (w->dirY * w->speed) >> 8;
-    w->angle += 32;
-    w->flipAngleY += (64 - w->flipAngleY) >> 4;
-    w->flipAngleX = 0;
-    w->distance = VectorLength2D(-w->posX, 0xA000 - w->posY);
-    w->speed -= w->vz;
-    w->vz += 2;
-    t = w->scale;
+    work->posX += (work->dirX * work->speed) >> 8;
+    work->posY += (work->dirY * work->speed) >> 8;
+    work->angle += 32;
+    work->flipAngleY += (64 - work->flipAngleY) >> 4;
+    work->flipAngleX = 0;
+    work->distance = VectorLength2D(-work->posX, 0xA000 - work->posY);
+    work->speed -= work->vz;
+    work->vz += 2;
+    t = work->scale;
 
     if ((s16)t <= 255) {
-        w->scale = t + 3;
+        work->scale = t + 3;
     }
 
-    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
-    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
+    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 FlyHeartlessCardToPlayer(PickupCardWork* w) {
+u8 FlyHeartlessCardToPlayer(PickupCardWork* work) {
     s16 x;
     s16 y;
 
-    w->angle += 32;
+    work->angle += 32;
     WorldToScreen(&x, &y, gBtlWork->actor->x, gBtlWork->actor->y, gBtlWork->actor->z);
-    w->posX += ((x << 8) - w->posX) >> 3;
-    w->posY += ((y << 8) - w->posY) >> 3;
-    w->scaleX -= 10;
-    w->scaleY -= 10;
+    work->posX += ((x << 8) - work->posX) >> 3;
+    work->posY += ((y << 8) - work->posY) >> 3;
+    work->scaleX -= 10;
+    work->scaleY -= 10;
 
-    if (w->scaleX <= 10) {
+    if (work->scaleX <= 10) {
         return 0;
     }
 
     return 1;
 }
 
-s32 WaitHeartlessCardName(PickupCardWork* w, void* a) {
-    w->timer += 1;
+s32 WaitHeartlessCardName(PickupCardWork* work, void* a) {
+    work->timer += 1;
 
-    if (w->timer == 60) {
+    if (work->timer == 60) {
         SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToPlayer);
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-s32 FlyHeartlessCardToCenter(PickupCardWork* w, void* a) {
+s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
     s32 dx = 0;
     s32 dy = 0;
     u16 t;
 
-    if (w->speed < 0) {
-        dx = 0x7800 - w->posX;
-        dy = 0x5000 - w->posY;
+    if (work->speed < 0) {
+        dx = 0x7800 - work->posX;
+        dy = 0x5000 - work->posY;
         NormalizeVector2D8(&dx, &dy);
-        w->dirX = -dx;
-        w->dirY = -dy;
+        work->dirX = -dx;
+        work->dirY = -dy;
 
-        if (w->distance < 0x800) {
-            w->flipAngleY = 0;
-            w->angle = 0;
-            w->flipAngleX = 0;
-            w->posX = 0x7800;
-            w->posY = 0x5000;
-            w->scaleX = 0x100;
-            w->scaleY = 0x100;
+        if (work->distance < 0x800) {
+            work->flipAngleY = 0;
+            work->angle = 0;
+            work->flipAngleX = 0;
+            work->posX = 0x7800;
+            work->posY = 0x5000;
+            work->scaleX = 0x100;
+            work->scaleY = 0x100;
 #ifdef VERSION_EU
-            CreateCardNameDisplay(&w->tasks, eu_0805E924(gCardDefs[w->cardId].name));
+            CreateCardNameDisplay(&work->tasks, eu_0805E924(gCardDefs[work->cardId].name));
 #else
-            CreateCardNameDisplay(&w->tasks, gCardDefs[w->cardId].name);
+            CreateCardNameDisplay(&work->tasks, gCardDefs[work->cardId].name);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)WaitHeartlessCardName);
-            w->timer = 0;
-            w->priority = 50;
+            work->timer = 0;
+            work->priority = 50;
             return 1;
         }
     }
 
-    w->posX += (w->dirX * w->speed) >> 8;
-    w->posY += (w->dirY * w->speed) >> 8;
-    w->angle += 32;
-    w->flipAngleY += (64 - w->flipAngleY) >> 4;
-    w->flipAngleX = 0;
-    w->distance = VectorLength2D(0x7800 - w->posX, 0x5000 - w->posY);
-    w->speed -= w->vz;
-    w->vz += 2;
-    t = w->scale;
+    work->posX += (work->dirX * work->speed) >> 8;
+    work->posY += (work->dirY * work->speed) >> 8;
+    work->angle += 32;
+    work->flipAngleY += (64 - work->flipAngleY) >> 4;
+    work->flipAngleX = 0;
+    work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
+    work->speed -= work->vz;
+    work->vz += 2;
+    t = work->scale;
 
     if ((s16)t <= 255) {
-        w->scale = t + 3;
+        work->scale = t + 3;
     }
 
-    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
-    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
+    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-s32 Heartless_card_1(PickupCardWork* w, void* a) {
+s32 Heartless_card_1(PickupCardWork* work, void* a) {
     s16 x;
     s16 y;
 
-    w->vz += 0x38;
-    w->posZ += w->vz;
-    w->posX += (gSineTable[w->moveAngle] * w->speed) >> 8;
-    w->posY += (-gSineTable[w->moveAngle + 64] * w->speed) >> 8;
+    work->vz += 0x38;
+    work->posZ += work->vz;
+    work->posX += (gSineTable[work->moveAngle] * work->speed) >> 8;
+    work->posY += (-gSineTable[work->moveAngle + 64] * work->speed) >> 8;
 
-    if (ClampBattlePosition(&w->posX, &w->posY, -10, -10) != 0) {
-        w->moveAngle = (u8)(w->moveAngle + 0x70) + GetRandom() % 33;
+    if (ClampBattlePosition(&work->posX, &work->posY, -10, -10) != 0) {
+        work->moveAngle = (u8)(work->moveAngle + 0x70) + GetRandom() % 33;
     }
 
-    if (w->posZ - 0x800 > w->floor) {
-        w->posZ = w->floor - 0x800;
-        w->vz = -((w->vz * 204) >> 8);
-        w->moveAngle = GetAngle(w->posX, w->posY, gBtlWork->actor->x, gBtlWork->actor->y);
-        w->moveAngle = (u8)(w->moveAngle + 0xE0) + GetRandom() % 65;
+    if (work->posZ - 0x800 > work->floor) {
+        work->posZ = work->floor - 0x800;
+        work->vz = -((work->vz * 204) >> 8);
+        work->moveAngle = GetAngle(work->posX, work->posY, gBtlWork->actor->x, gBtlWork->actor->y);
+        work->moveAngle = (u8)(work->moveAngle + 0xE0) + GetRandom() % 65;
 
-        if (w->vz > -0x200) {
-            w->vz = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
     if (gBtlWork->hcEffect == 6) {
-        ColliderSetRadius(&w->collider, 50);
+        ColliderSetRadius(&work->collider, 50);
     } else {
-        ColliderSetRadius(&w->collider, 10);
+        ColliderSetRadius(&work->collider, 10);
     }
 
-    if (ApplyBattleBounds(&w->posX, &w->posY, &w->posZ, &w->floor)) {
-        w->moveAngle = (u8)(w->moveAngle + 0x70) + GetRandom() % 33;
+    if (ApplyBattleBounds(&work->posX, &work->posY, &work->posZ, &work->floor)) {
+        work->moveAngle = (u8)(work->moveAngle + 0x70) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding) {
+    if (work->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
-        w->priority = 10;
+        work->priority = 10;
 #endif
-        ObtainCard(w->cardId);
-        WorldToScreen(&x, &y, w->posX, w->posY, w->posZ);
-        w->posX = x << 8;
-        w->posY = y << 8;
-        w->screenSpace = 1;
-        ColliderSetDisabled(&w->collider, 1);
-        StartPickupCardFlight(w, 1);
+        ObtainCard(work->cardId);
+        WorldToScreen(&x, &y, work->posX, work->posY, work->posZ);
+        work->posX = x << 8;
+        work->posY = y << 8;
+        work->screenSpace = 1;
+        ColliderSetDisabled(&work->collider, 1);
+        StartPickupCardFlight(work, 1);
         SetTaskUpdate(a, (TaskUpdateFunc)FlyHeartlessCardToCenter);
         return 1;
     }
 
-    ColliderSetPosition(&w->collider, w->posX, w->posY, w->posZ);
-    w->scaleX = (-gSineTable[((w->flipAngleX + 128) & 0xFF) + 64] * w->scale) >> 8;
-    w->scaleY = (-gSineTable[((w->flipAngleY + 128) & 0xFF) + 64] * w->scale) >> 8;
+    ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
+    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
 
-    if ((u16)(w->scaleX + 2) <= 4) {
-        w->scaleX = 2;
+    if ((u16)(work->scaleX + 2) <= 4) {
+        work->scaleX = 2;
     }
 
-    if ((u16)(w->scaleY + 2) <= 4) {
-        w->scaleY = 2;
+    if ((u16)(work->scaleY + 2) <= 4) {
+        work->scaleY = 2;
     }
 
-    w->flipAngleX += 2;
-    w->priority = -0x1004 - ((w->posY >> 8) << 2);
-    TaskPoolUpdate(&w->tasks);
+    work->flipAngleX += 2;
+    work->priority = -0x1004 - ((work->posY >> 8) << 2);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void PickupCardDraw(PickupCardWork* w) {
+void PickupCardDraw(PickupCardWork* work) {
     s16 x;
     u16 y;
     ObjAffine* affine;
     s16 v;
     u8 kind;
 
-    if (w->visible != 0) {
-        if (!w->screenSpace) {
-            w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
-            WorldToScreen(&x, &y, w->posX, w->posY,
-                          w->posZ);
+    if (work->visible != 0) {
+        if (!work->screenSpace) {
+            work->spriteFlags = GetBattleSpritePriorityFlags(work->posY);
+            WorldToScreen(&x, &y, work->posX, work->posY,
+                          work->posZ);
         } else {
-            w->spriteFlags = 0;
-            x = w->posX >> 8;
-            y = w->posY >> 8;
+            work->spriteFlags = 0;
+            x = work->posX >> 8;
+            y = work->posY >> 8;
         }
 
-        affine = AllocObjAffine(w->angle, w->scaleX,
-                                w->scaleY, 0);
+        affine = AllocObjAffine(work->angle, work->scaleX,
+                                work->scaleY, 0);
         DrawSprite(x, y - 8,
-                   gCardBacks[w->cardDef->category].gfx,
-                   gCardBattleState->tiles[w->cardDef->category],
-                   w->palette, affine,
-                   w->spriteFlags, w->priority);
-        DrawSprite(x, y - 8, w->cardDef->gfx,
-                   w->tiles2, w->palette2, affine,
-                   w->spriteFlags, w->priority + 1);
-        kind = w->cardDef->value;
+                   gCardBacks[work->cardDef->category].gfx,
+                   gCardBattleState->tiles[work->cardDef->category],
+                   work->palette, affine,
+                   work->spriteFlags, work->priority);
+        DrawSprite(x, y - 8, work->cardDef->gfx,
+                   work->tiles2, work->palette2, affine,
+                   work->spriteFlags, work->priority + 1);
+        kind = work->cardDef->value;
         DrawSprite(x, y - 8, gUnk_09EE981C[kind],
-                   w->tiles3, w->palette, affine,
-                   w->spriteFlags, w->priority - 2);
-        v = 204 - ((w->floor - w->posZ) >> 7);
+                   work->tiles3, work->palette, affine,
+                   work->spriteFlags, work->priority - 2);
+        v = 204 - ((work->floor - work->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        if (!w->screenSpace) {
-            WorldToScreen(&w->x, &w->y,
-                          w->posX, w->posY,
-                          w->floor);
-            DrawSprite(w->x, w->y,
-                       gUnk_09EE1380[0], w->tiles4,
-                       w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->spriteFlags, w->priority + 2);
+        if (!work->screenSpace) {
+            WorldToScreen(&work->x, &work->y,
+                          work->posX, work->posY,
+                          work->floor);
+            DrawSprite(work->x, work->y,
+                       gUnk_09EE1380[0], work->tiles4,
+                       work->palette3, AllocObjAffine(0, v, v, 0),
+                       work->spriteFlags, work->priority + 2);
         }
 
-        TaskPoolDraw(&w->tasks);
+        TaskPoolDraw(&work->tasks);
     }
 }
 
-void Heartless_card_2(PickupCardWork* w) {
+void Heartless_card_2(PickupCardWork* work) {
     s16 x;
     u16 y;
     ObjAffine* affine;
     s16 v;
 
-    if (w->visible != 0) {
-        if (!w->screenSpace) {
-            w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
-            WorldToScreen(&x, &y, w->posX, w->posY,
-                          w->posZ);
+    if (work->visible != 0) {
+        if (!work->screenSpace) {
+            work->spriteFlags = GetBattleSpritePriorityFlags(work->posY);
+            WorldToScreen(&x, &y, work->posX, work->posY,
+                          work->posZ);
         } else {
-            w->spriteFlags = 0;
-            x = w->posX >> 8;
-            y = w->posY >> 8;
+            work->spriteFlags = 0;
+            x = work->posX >> 8;
+            y = work->posY >> 8;
         }
 
-        affine = AllocObjAffine(w->angle, w->scaleX,
-                                w->scaleY, 0);
+        affine = AllocObjAffine(work->angle, work->scaleX,
+                                work->scaleY, 0);
         DrawSprite(x, y - 8,
-                   gCardBacks[w->cardDef->category].gfx,
-                   w->tiles, w->palette, affine,
-                   w->spriteFlags, w->priority);
-        DrawSprite(x, y - 8, w->cardDef->gfx,
-                   w->tiles2, w->palette2, affine,
-                   w->spriteFlags, w->priority + 1);
-        v = 204 - ((w->floor - w->posZ) >> 7);
+                   gCardBacks[work->cardDef->category].gfx,
+                   work->tiles, work->palette, affine,
+                   work->spriteFlags, work->priority);
+        DrawSprite(x, y - 8, work->cardDef->gfx,
+                   work->tiles2, work->palette2, affine,
+                   work->spriteFlags, work->priority + 1);
+        v = 204 - ((work->floor - work->posZ) >> 7);
 
         if (v <= 2) {
             v = 2;
         }
 
-        if (!w->screenSpace) {
-            WorldToScreen(&w->x, &w->y,
-                          w->posX, w->posY,
-                          w->floor);
-            DrawSprite(w->x, w->y,
-                       gUnk_09EE1380[0], w->tiles4,
-                       w->palette3, AllocObjAffine(0, v, v, 0),
-                       w->spriteFlags, w->priority + 2);
+        if (!work->screenSpace) {
+            WorldToScreen(&work->x, &work->y,
+                          work->posX, work->posY,
+                          work->floor);
+            DrawSprite(work->x, work->y,
+                       gUnk_09EE1380[0], work->tiles4,
+                       work->palette3, AllocObjAffine(0, v, v, 0),
+                       work->spriteFlags, work->priority + 2);
         }
 
-        TaskPoolDraw(&w->tasks);
+        TaskPoolDraw(&work->tasks);
     }
 }
 
-void PickupCardDestroy(PickupCardWork* w) {
-    ReleaseObjPalette(w->palette);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjPalette(w->palette3);
-    ColliderUnregister(&w->collider);
-    TaskPoolDestroy(&w->tasks);
+void PickupCardDestroy(PickupCardWork* work) {
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjPalette(work->palette3);
+    ColliderUnregister(&work->collider);
+    TaskPoolDestroy(&work->tasks);
     // @bug Leaving a battle frees gCardBattleState before this card is destroyed (NULL write).
     gCardBattleState->friendCardCount = 0;
     gBtlWork->prizeCount--;
 }
 
-void Heartless_card_3(PickupCardWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjPalette(w->palette3);
-    ColliderUnregister(&w->collider);
-    TaskPoolDestroy(&w->tasks);
+void Heartless_card_3(PickupCardWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjPalette(work->palette3);
+    ColliderUnregister(&work->collider);
+    TaskPoolDestroy(&work->tasks);
     gBtlWork->prizeCount--;
 }
 
@@ -797,7 +797,7 @@ void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d) {
     }
 }
 
-void StockNameSora_0(StockNameWork* w, const s32* src) {
+void StockNameSora_0(StockNameWork* work, const s32* src) {
     u8 i;
     s32* dst;
     s32* q;
@@ -809,23 +809,23 @@ void StockNameSora_0(StockNameWork* w, const s32* src) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = w->stockNames;
+            dst = work->stockNames;
             q = &dst[i];
             *q = s[i];
         }
 
-        w->cycling = 1;
+        work->cycling = 1;
     } else {
-        w->cycling = 0;
+        work->cycling = 0;
     }
 
     z = 0;
-    w->stockNameIndex = z;
-    w->unk_04 = z;
+    work->stockNameIndex = z;
+    work->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
-    w->tiles = obj;
+    work->tiles = obj;
 
-    if (!w->cycling) {
+    if (!work->cycling) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -841,55 +841,55 @@ void StockNameSora_0(StockNameWork* w, const s32* src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gStockNameSprites[w->stockNames[0]].sprites);
-        u = LANGSTR(gStockNameSprites[w->stockNames[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[w->stockNames[0]].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
+        u = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[work->stockNames[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gStockNameSprites[w->stockNames[0]].sprites[gStockNameSprites[w->stockNames[0]].spriteIndex], gStockNameSprites[w->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[work->stockNames[0]].sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], gStockNameSprites[work->stockNames[0]].tiles);
 #endif
     }
 
-    w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->visible = 1;
-    w->stockName = gCardBattleState->soraStockName;
+    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->visible = 1;
+    work->stockName = gCardBattleState->soraStockName;
 }
 
-u8 StockNameSora_1(StockNameWork* w) {
+u8 StockNameSora_1(StockNameWork* work) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites);
-    void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
+    void** t = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
+    void* u = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
 
-    if (!gCardBattleState->soraStockNameShown || gCardBattleState->soraStockName != w->stockName) {
+    if (!gCardBattleState->soraStockNameShown || gCardBattleState->soraStockName != work->stockName) {
         return 0;
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        w->visible = 1;
+        work->visible = 1;
     } else {
-        w->visible = 0;
+        work->visible = 0;
     }
 
-    if (w->cycling == 1 && w->visible) {
-        w->stockNameIndex++;
+    if (work->cycling == 1 && work->visible) {
+        work->stockNameIndex++;
 
-        if (w->stockNames[w->stockNameIndex] == -1) {
-            w->stockNameIndex = 0;
+        if (work->stockNames[work->stockNameIndex] == -1) {
+            work->stockNameIndex = 0;
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles, t[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], u);
+        UpdateSpriteFrameTiles(work->tiles, t[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(w->tiles, gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
+        UpdateSpriteFrameTiles(work->tiles, gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
     }
 
     return 1;
 }
 
-void StockNameSora_2(StockNameWork* w) {
-    if (w->visible) {
-        DrawSprite(64, 14, NULL, w->tiles, w->palette, NULL,
+void StockNameSora_2(StockNameWork* work) {
+    if (work->visible) {
+        DrawSprite(64, 14, NULL, work->tiles, work->palette, NULL,
 #ifdef VERSION_EU
                    SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC,
 #else
@@ -899,7 +899,7 @@ void StockNameSora_2(StockNameWork* w) {
     }
 }
 
-void StockNameRiku_0(StockNameWork* w, const s32* src) {
+void StockNameRiku_0(StockNameWork* work, const s32* src) {
     u8 i;
     s32* dst;
     s32* q;
@@ -911,23 +911,23 @@ void StockNameRiku_0(StockNameWork* w, const s32* src) {
         s = src;
 
         for (i = 0; i < 6; i++) {
-            dst = w->stockNames;
+            dst = work->stockNames;
             q = &dst[i];
             *q = s[i];
         }
 
-        w->cycling = 1;
+        work->cycling = 1;
     } else {
-        w->cycling = 0;
+        work->cycling = 0;
     }
 
     z = 0;
-    w->stockNameIndex = z;
-    w->unk_04 = z;
+    work->stockNameIndex = z;
+    work->unk_04 = z;
     obj = AllocSpriteFrameTiles(0x3C0);
-    w->tiles = obj;
+    work->tiles = obj;
 
-    if (!w->cycling) {
+    if (!work->cycling) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -943,132 +943,132 @@ void StockNameRiku_0(StockNameWork* w, const s32* src) {
         void** t;
         void* u;
 
-        t = (void**)LANGSTR(gStockNameSprites[w->stockNames[0]].sprites);
-        u = LANGSTR(gStockNameSprites[w->stockNames[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[w->stockNames[0]].spriteIndex], u);
+        t = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
+        u = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[work->stockNames[0]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(obj, gStockNameSprites[w->stockNames[0]].sprites[gStockNameSprites[w->stockNames[0]].spriteIndex], gStockNameSprites[w->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, gStockNameSprites[work->stockNames[0]].sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], gStockNameSprites[work->stockNames[0]].tiles);
 #endif
     }
 
-    w->palette = LoadObjPalette(gBStatesPalette, 32);
-    w->visible = 1;
-    w->stockName = gCardBattleState->rikuStockName;
+    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    work->visible = 1;
+    work->stockName = gCardBattleState->rikuStockName;
 }
 
-u8 StockNameRiku_1(StockNameWork* w) {
+u8 StockNameRiku_1(StockNameWork* work) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites);
-    void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
+    void** t = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
+    void* u = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
 
-    if (!gCardBattleState->rikuStockNameShown || gCardBattleState->rikuStockName != w->stockName) {
+    if (!gCardBattleState->rikuStockNameShown || gCardBattleState->rikuStockName != work->stockName) {
         return 0;
     }
 
     if ((gFrameCounter >> 5) & 1) {
-        w->visible = 0;
+        work->visible = 0;
     } else {
-        w->visible = 1;
+        work->visible = 1;
     }
 
-    if (w->cycling == 1 && w->visible) {
-        w->stockNameIndex++;
+    if (work->cycling == 1 && work->visible) {
+        work->stockNameIndex++;
 
-        if (w->stockNames[w->stockNameIndex] == -1) {
-            w->stockNameIndex = 0;
+        if (work->stockNames[work->stockNameIndex] == -1) {
+            work->stockNameIndex = 0;
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(w->tiles, t[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], u);
+        UpdateSpriteFrameTiles(work->tiles, t[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], u);
 #else
-        UpdateSpriteFrameTiles(w->tiles, gStockNameSprites[w->stockNames[w->stockNameIndex]].sprites[gStockNameSprites[w->stockNames[w->stockNameIndex]].spriteIndex], gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
+        UpdateSpriteFrameTiles(work->tiles, gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
     }
 
     return 1;
 }
 
-void StockNameRiku_2(StockNameWork* w) {
-    if (gRikuBtlWork->hcEffect != 28 && w->visible) {
-        DrawSprite(120, 14, NULL, w->tiles, w->palette, NULL, 0, 10);
+void StockNameRiku_2(StockNameWork* work) {
+    if (gRikuBtlWork->hcEffect != 28 && work->visible) {
+        DrawSprite(120, 14, NULL, work->tiles, work->palette, NULL, 0, 10);
     }
 }
 
-void StockNameRiku_3(StockNameWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void StockNameRiku_3(StockNameWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gCardBattleState->unk_0D9 = 0;
-    w->visible = 0;
+    work->visible = 0;
     gCardBattleState->unk_0CA = 256;
 }
 
-void StockNameSora_3(StockNameWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void StockNameSora_3(StockNameWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gCardBattleState->unk_0D8 = 0;
-    w->visible = 0;
+    work->visible = 0;
     gCardBattleState->unk_0C8 = 256;
 }
 
-void Premire_Chance_0(PremireChanceWork* w) {
+void Premire_Chance_0(PremireChanceWork* work) {
     u8 n = 0;
     u8 i;
     s32 j;
     u16* cards;
 
-    CpuFill32(0, w, sizeof(PremireChanceWork));
+    CpuFill32(0, work, sizeof(PremireChanceWork));
     gCardListWork = EwramAlloc(sizeof(CardListWork));
-    w->slots = EwramAlloc(sizeof(CardSlot) * 100);
+    work->slots = EwramAlloc(sizeof(CardSlot) * 100);
     CpuFill32(0, gCardListWork, sizeof(CardListWork));
-    CpuFill32(0, w->slots, sizeof(CardSlot) * 100);
+    CpuFill32(0, work->slots, sizeof(CardSlot) * 100);
     cards = GetActiveDeck()->cards;
-    w->tiles2 = AllocObjTiles(0x120, NULL);
-    w->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
-    SetObjTileSource(w->tiles2, gUnk_093F4578);
-    AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
+    work->tiles2 = AllocObjTiles(0x120, NULL);
+    work->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
+    SetObjTileSource(work->tiles2, gUnk_093F4578);
+    AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        w->tiles = LoadObjTiles(gUnkEu_0916292A, 0x340);
+        work->tiles = LoadObjTiles(gUnkEu_0916292A, 0x340);
         break;
     case LANGUAGE_GERMAN:
-        w->tiles = LoadObjTiles(gUnkEu_091633A4, 0x3C0);
+        work->tiles = LoadObjTiles(gUnkEu_091633A4, 0x3C0);
         break;
     case LANGUAGE_ITALIAN:
-        w->tiles = LoadObjTiles(gUnkEu_09162FB8, 0x3C0);
+        work->tiles = LoadObjTiles(gUnkEu_09162FB8, 0x3C0);
         break;
     case LANGUAGE_SPANISH:
-        w->tiles = LoadObjTiles(gUnkEu_09162C8C, 0x300);
+        work->tiles = LoadObjTiles(gUnkEu_09162C8C, 0x300);
         break;
     case LANGUAGE_ENGLISH:
-        w->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+        work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
         break;
     default:
-        w->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+        work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
         break;
     }
 #else
-    w->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+    work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
 #endif
-    w->palette = LoadObjPalette(gUnk_09613E98, 32);
-    w->tiles5 = LoadObjTiles(gUnk_0908BFB2, 0x3C0);
-    w->tiles3 = AllocObjTiles(0x3C0, NULL);
-    w->palette3 = LoadObjPalette(gUnk_09618D18, 32);
-    SetObjTileSource(w->tiles3, gUnk_093F47E4);
-    AnimInit(&w->anim2, gUnk_09EF1194, gUnk_09EF1180);
-    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
-    w->gfx2 = AnimGetGfx(&w->anim2);
-    w->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
-    w->palette4 = LoadObjPalette(gBStatesPalette, 32);
+    work->palette = LoadObjPalette(gUnk_09613E98, 32);
+    work->tiles5 = LoadObjTiles(gUnk_0908BFB2, 0x3C0);
+    work->tiles3 = AllocObjTiles(0x3C0, NULL);
+    work->palette3 = LoadObjPalette(gUnk_09618D18, 32);
+    SetObjTileSource(work->tiles3, gUnk_093F47E4);
+    AnimInit(&work->anim2, gUnk_09EF1194, gUnk_09EF1180);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
+    work->gfx2 = AnimGetGfx(&work->anim2);
+    work->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
+    work->palette4 = LoadObjPalette(gBStatesPalette, 32);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
-    FadeSetPaletteExcluded(w->palette->index + 16, 1);
-    FadeSetPaletteExcluded(w->palette3->index + 16, 1);
-    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
-    FadeSetPaletteExcluded(w->palette4->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 
 #ifdef VERSION_EU
     for (i = 0, n = 0; i < DECK_SIZE; i++) {
@@ -1079,10 +1079,10 @@ void Premire_Chance_0(PremireChanceWork* w) {
             if (!(gCardCollection[cards[i]] & 0x8000)) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 3) {
                     if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 2) {
-                        w->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
-                        w->slots[n].index = i;
-                        w->slots[n].unk_06 = n;
-                        w->slots[n].stocked = 0;
+                        work->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
+                        work->slots[n].index = i;
+                        work->slots[n].unk_06 = n;
+                        work->slots[n].stocked = 0;
                         n++;
                     }
                 }
@@ -1098,10 +1098,10 @@ void Premire_Chance_0(PremireChanceWork* w) {
                 if (!(gCardCollection[cards[j]] & 0x8000)) {
                     if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 3) {
                         if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 2) {
-                            w->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;
-                            w->slots[n].index = j;
-                            w->slots[n].unk_06 = n;
-                            w->slots[n].stocked = 0;
+                            work->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;
+                            work->slots[n].index = j;
+                            work->slots[n].unk_06 = n;
+                            work->slots[n].stocked = 0;
                             n++;
                         }
                     }
@@ -1116,108 +1116,108 @@ void Premire_Chance_0(PremireChanceWork* w) {
         } while (n < 10);
     }
 
-    w->cardCount = n;
-    TaskPoolInit(&w->tasks, w->cardCount + 1);
+    work->cardCount = n;
+    TaskPoolInit(&work->tasks, work->cardCount + 1);
     ListPoolInit(&gCardListWork->cards);
     gCardListWork->selectedCard = NULL;
     gCardListWork->effectCount = 0;
     TaskPoolInit(&gCardListWork->effectTasks, 24);
-    CreatePremireChanceCardTasks(w);
-    w->spinDelay = 10;
-    w->advanced = 0;
-    w->stopped = 0;
-    w->inputEnabled = 1;
-    w->resultPending = 1;
-    w->unk_87 = 0;
-    w->stopTimer = 0;
-    w->titleSteps = 16;
-    w->slideSteps = 16;
-    w->titleX = -0x80;
-    w->topY = -0x800;
-    w->bottomY = 0xA000;
+    CreatePremireChanceCardTasks(work);
+    work->spinDelay = 10;
+    work->advanced = 0;
+    work->stopped = 0;
+    work->inputEnabled = 1;
+    work->resultPending = 1;
+    work->unk_87 = 0;
+    work->stopTimer = 0;
+    work->titleSteps = 16;
+    work->slideSteps = 16;
+    work->titleX = -0x80;
+    work->topY = -0x800;
+    work->bottomY = 0xA000;
 }
 
-u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
+u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* a) {
     PremireChanceCardWork* n;
     s32 t;
     s32 z;
 
-    if (w->inputEnabled != 0) {
-        if ((GetKeysPressed() & A_BUTTON) && !w->stopped) {
-            w->stopped = 1;
+    if (work->inputEnabled != 0) {
+        if ((GetKeysPressed() & A_BUTTON) && !work->stopped) {
+            work->stopped = 1;
             m4aSongNumStart(SONG_SYS_ITEMGET);
         }
 
-        if ((GetKeysPressed() & B_BUTTON) && w->stopped != 1) {
+        if ((GetKeysPressed() & B_BUTTON) && work->stopped != 1) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            w->titleSteps = 16;
-            w->slideSteps = 16;
+            work->titleSteps = 16;
+            work->slideSteps = 16;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
             n = ListPoolFirst(&gCardListWork->cards);
 
             while (n != NULL) {
                 n->state |= 0xFF;
-                w->resultPending = 0;
+                work->resultPending = 0;
                 n = ListPoolNext(&n->node);
             }
 
-            TaskPoolUpdate(&w->tasks);
+            TaskPoolUpdate(&work->tasks);
             TaskPoolUpdate(&gCardListWork->effectTasks);
             z = 0;
-            w->unk_87 = 1;
-            w->inputEnabled = z;
+            work->unk_87 = 1;
+            work->inputEnabled = z;
             return 1;
         }
     }
 
     n = ListPoolFirst(&gCardListWork->cards);
 
-    if (!w->stopped) {
+    if (!work->stopped) {
         while (n != NULL) {
             t = n->steps;
 
             if (t == 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (n->position < w->cardCount - 1) {
+                if (n->position < work->cardCount - 1) {
                     n->position++;
                 } else {
                     n->position = t;
                 }
 
-                n->steps = w->spinDelay;
-                w->advanced = 1;
+                n->steps = work->spinDelay;
+                work->advanced = 1;
             }
 
             n = ListPoolNext(&n->node);
         }
     } else {
-        w->unk_87 = 1;
+        work->unk_87 = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceStop);
     }
 
-    if (w->spinDelay == 4 || w->spinDelay == 10) {
-        w->inputEnabled = 1;
+    if (work->spinDelay == 4 || work->spinDelay == 10) {
+        work->inputEnabled = 1;
     } else {
-        w->inputEnabled = 0;
+        work->inputEnabled = 0;
     }
 
-    if (w->advanced) {
-        if (w->spinDelay > 4) {
-            w->spinDelay--;
+    if (work->advanced) {
+        if (work->spinDelay > 4) {
+            work->spinDelay--;
         }
 
-        w->advanced = 0;
+        work->advanced = 0;
     }
 
-    w->gfx = AnimUpdate(&w->anim);
-    w->gfx2 = AnimUpdate(&w->anim2);
-    TaskPoolUpdate(&w->tasks);
+    work->gfx = AnimUpdate(&work->anim);
+    work->gfx2 = AnimUpdate(&work->anim2);
+    TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
 
-u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
+u8 Premire_Chance_1(PremireChanceWork* work, void* a) {
     s32 v;
     u8* p;
     PremireChanceCardWork* n;
@@ -1228,76 +1228,76 @@ u8 Premire_Chance_1(PremireChanceWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
-    p = &w->slideSteps;
+    p = &work->slideSteps;
 
     if (*p != 0) {
-        ApproachValue(&w->topY, 0, *p);
-        ApproachValue(&w->bottomY, 0x9800, *p);
+        ApproachValue(&work->topY, 0, *p);
+        ApproachValue(&work->bottomY, 0x9800, *p);
     } else {
-        v = w->titleX << 8;
-        p = &w->titleSteps;
+        v = work->titleX << 8;
+        p = &work->titleSteps;
         ApproachValue(&v, 0, *p);
-        w->titleX = v >> 8;
+        work->titleX = v >> 8;
     }
 
     (*p)--;
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }
 
-void Premire_Chance_2(PremireChanceWork* w) {
-    if (w->unk_87 == 0) {
-        DrawSprite(62, 50, w->gfx, w->tiles2, w->palette2, NULL, 0, 0);
-        DrawSprite(53, 64, w->gfx2, w->tiles3, w->palette3, NULL, 0, 0);
+void Premire_Chance_2(PremireChanceWork* work) {
+    if (work->unk_87 == 0) {
+        DrawSprite(62, 50, work->gfx, work->tiles2, work->palette2, NULL, 0, 0);
+        DrawSprite(53, 64, work->gfx2, work->tiles3, work->palette3, NULL, 0, 0);
     }
 
-    if (w->inputEnabled != 0) {
-        DrawSprite(88, 70, gUnk_09EE98EC[0], w->tiles4, w->palette4, NULL, 0, 0);
+    if (work->inputEnabled != 0) {
+        DrawSprite(88, 70, gUnk_09EE98EC[0], work->tiles4, work->palette4, NULL, 0, 0);
     }
 
 #ifdef VERSION_EU
-    DrawSprite(w->titleX, 0, gPremireChanceTitles[gLanguage][0], w->tiles, w->palette, NULL, 0, 0);
+    DrawSprite(work->titleX, 0, gPremireChanceTitles[gLanguage][0], work->tiles, work->palette, NULL, 0, 0);
 #else
-    DrawSprite(w->titleX, 0, gUnk_09EEA16C[0], w->tiles, w->palette, NULL, 0, 0);
+    DrawSprite(work->titleX, 0, gUnk_09EEA16C[0], work->tiles, work->palette, NULL, 0, 0);
 #endif
-    DrawSprite(120, w->topY >> 8, gUnk_09EEA174[0], w->tiles5, w->palette, NULL, 0, 60);
-    DrawSprite(120, w->bottomY >> 8, gUnk_09EEA174[1], w->tiles5, w->palette, NULL, 0, 60);
-    TaskPoolDraw(&w->tasks);
+    DrawSprite(120, work->topY >> 8, gUnk_09EEA174[0], work->tiles5, work->palette, NULL, 0, 60);
+    DrawSprite(120, work->bottomY >> 8, gUnk_09EEA174[1], work->tiles5, work->palette, NULL, 0, 60);
+    TaskPoolDraw(&work->tasks);
     TaskPoolDraw(&gCardListWork->effectTasks);
 }
 
-void Premire_Chance_3(PremireChanceWork* w) {
+void Premire_Chance_3(PremireChanceWork* work) {
     TaskPoolDestroy(&gCardListWork->effectTasks);
-    EwramFree(w->slots);
+    EwramFree(work->slots);
     EwramFree(gCardListWork);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjTiles(w->tiles3);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjTiles(w->tiles5);
-    FadeSetPaletteExcluded(w->palette->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette3->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette2->index + 16, 0);
-    FadeSetPaletteExcluded(w->palette4->index + 16, 0);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjPalette(w->palette3);
-    ReleaseObjPalette(w->palette4);
-    ReleaseObjPalette(w->palette);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjTiles(work->tiles3);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles5);
+    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette3->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette2->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette4->index + 16, 0);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette3);
+    ReleaseObjPalette(work->palette4);
+    ReleaseObjPalette(work->palette);
     SetJiminyFlag(0xF5);
-    TaskPoolDestroy(&w->tasks);
+    TaskPoolDestroy(&work->tasks);
 }
 
-void CreatePremireChanceCardTasks(PremireChanceWork* w) {
+void CreatePremireChanceCardTasks(PremireChanceWork* work) {
     u8 i;
 
-    for (i = 0; i < w->cardCount; i++) {
-        w->slots[i].unk_06 = i;
-        TaskCreate(&w->tasks, &gTaskDescPremireChanceCard, &w->slots[i]);
+    for (i = 0; i < work->cardCount; i++) {
+        work->slots[i].unk_06 = i;
+        TaskCreate(&work->tasks, &gTaskDescPremireChanceCard, &work->slots[i]);
     }
 }
 
-u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
+u8 UpdatePremireChanceStop(PremireChanceWork* work, void* a) {
     PremireChanceCardWork* n;
     TaskPool* pool;
     u8 z;
@@ -1305,13 +1305,13 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     u8* q;
 
     n = ListPoolFirst(&gCardListWork->cards);
-    w->gfx = AnimUpdate(&w->anim);
-    w->gfx2 = AnimUpdate(&w->anim2);
-    w->spinDelay = 0;
-    w->stopTimer++;
-    w->inputEnabled = 0;
+    work->gfx = AnimUpdate(&work->anim);
+    work->gfx2 = AnimUpdate(&work->anim2);
+    work->spinDelay = 0;
+    work->stopTimer++;
+    work->inputEnabled = 0;
 
-    if (w->resultPending) {
+    if (work->resultPending) {
         while (n != NULL) {
             if (n->steps == 0) {
                 if (n->position == 3) {
@@ -1321,25 +1321,25 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
                     n->state = 3;
                 }
 
-                w->resultPending = 0;
+                work->resultPending = 0;
             }
 
             n = ListPoolNext(&n->node);
         }
     }
 
-    t = w->stopTimer;
-    pool = &w->tasks;
+    t = work->stopTimer;
+    pool = &work->tasks;
 
     if (t == 30) {
-        q = &w->unk_87;
+        q = &work->unk_87;
         z = 0;
         *q = 1;
         SetBgPriority(2, 0);
         BgAnimInit(2, 0x8000, 0x80);
         BgAnimStart(&gBgAnimDefPremireChance, 120, 60);
-        w->bgAnimDuration = BgAnimGetDuration(&gBgAnimDefPremireChance);
-        w->resultTimer = z;
+        work->bgAnimDuration = BgAnimGetDuration(&gBgAnimDefPremireChance);
+        work->resultTimer = z;
         gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3 | BLDCNT_TGT2_OBJ);
         gBldAlpha = BLDALPHA_BLEND(16, 16);
         BgAnimUpdate();
@@ -1358,56 +1358,56 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     return 1;
 }
 
-u8 UpdatePremireChanceResult(PremireChanceWork* w, void* a) {
+u8 UpdatePremireChanceResult(PremireChanceWork* work, void* a) {
     ListPoolFirst(&gCardListWork->cards);
     BgAnimUpdate();
-    w->gfx = AnimUpdate(&w->anim);
-    w->gfx2 = AnimUpdate(&w->anim2);
-    TaskPoolUpdate(&w->tasks);
+    work->gfx = AnimUpdate(&work->anim);
+    work->gfx2 = AnimUpdate(&work->anim2);
+    TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
 
     if ((GetKeysPressed() & A_BUTTON)
 #ifdef VERSION_EU
-        && w->resultTimer > 8
+        && work->resultTimer > 8
 #endif
     ) {
-        w->titleSteps = 16;
-        w->slideSteps = 16;
+        work->titleSteps = 16;
+        work->slideSteps = 16;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceClose);
     }
 
 #ifdef VERSION_EU
-    if (w->resultTimer <= 254) {
-        w->resultTimer++;
+    if (work->resultTimer <= 254) {
+        work->resultTimer++;
     }
 #endif
 
     return 1;
 }
 
-u8 UpdatePremireChanceClose(PremireChanceWork* w, void* a) {
+u8 UpdatePremireChanceClose(PremireChanceWork* work, void* a) {
     s32 v;
     u8* p;
 
-    p = &w->titleSteps;
+    p = &work->titleSteps;
 
     if (*p != 0) {
-        v = w->titleX << 8;
+        v = work->titleX << 8;
         ApproachValue(&v, -0x8000, *p);
-        w->titleX = v >> 8;
+        work->titleX = v >> 8;
     } else {
-        p = &w->slideSteps;
+        p = &work->slideSteps;
 
         if (*p == 0) {
             return 0;
         }
 
-        ApproachValue(&w->topY, -0x800, *p);
-        ApproachValue(&w->bottomY, 0xA000, *p);
+        ApproachValue(&work->topY, -0x800, *p);
+        ApproachValue(&work->bottomY, 0xA000, *p);
     }
 
     (*p)--;
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
 }

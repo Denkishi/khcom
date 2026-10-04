@@ -37,8 +37,8 @@
 u8 UpdateLevelUpWaitFade();
 s32 IsLevelUpApUnlocked();
 struct LevelUpWork;
-u8 UpdateLevelUpResult(struct LevelUpWork* w, void* a);
-u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a);
+u8 UpdateLevelUpResult(struct LevelUpWork* work, void* a);
+u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a);
 
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
@@ -58,90 +58,90 @@ static const s16 sLevelUpCursorY[3] = { 30, 78, 128 };
 
 static const s16 sLevelUpApLevels[20] = { 2, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95 };
 
-void Level_Up_0(LevelUpWork* w) {
+void Level_Up_0(LevelUpWork* work) {
     s16 x;
     s16 y;
 
-    w->tiles4 = NULL;
-    w->palette5 = NULL;
-    w->unk_000[0] = NULL;
-    w->unk_000[1] = NULL;
-    w->unk_000[2] = NULL;
-    w->unk_000[3] = NULL;
-    w->unk_000[4] = NULL;
-    w->unk_000[5] = NULL;
-    w->unk_000[6] = NULL;
-    w->unk_000[7] = NULL;
-    w->palette = NULL;
-    w->palette2 = NULL;
-    w->tiles = NULL;
-    w->palette3 = NULL;
-    w->tiles2 = NULL;
-    w->tiles3 = NULL;
-    w->palette4 = NULL;
-    w->optionEnabled[0] = 1;
-    w->optionEnabled[1] = 1;
-    w->optionEnabled[2] = 1;
+    work->tiles4 = NULL;
+    work->palette5 = NULL;
+    work->unk_000[0] = NULL;
+    work->unk_000[1] = NULL;
+    work->unk_000[2] = NULL;
+    work->unk_000[3] = NULL;
+    work->unk_000[4] = NULL;
+    work->unk_000[5] = NULL;
+    work->unk_000[6] = NULL;
+    work->unk_000[7] = NULL;
+    work->palette = NULL;
+    work->palette2 = NULL;
+    work->tiles = NULL;
+    work->palette3 = NULL;
+    work->tiles2 = NULL;
+    work->tiles3 = NULL;
+    work->palette4 = NULL;
+    work->optionEnabled[0] = 1;
+    work->optionEnabled[1] = 1;
+    work->optionEnabled[2] = 1;
 
     if (gCardBattleState != NULL) {
         gCardBattleState->levelUpShown = 1;
     }
 
 #ifndef VERSION_EU
-    InitTextSlots(w->textSlots[0], 36);
-    InitTextSlots(w->textSlots[1], 36);
-    InitTextSlots(w->textSlots[2], 36);
-    InitTextSlots(w->textSlots[3], 36);
-    InitTextSlots(w->textSlots[4], 36);
-    InitTextSlots(w->textSlots[5], 36);
-    w->unk_000[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
+    InitTextSlots(work->textSlots[0], 36);
+    InitTextSlots(work->textSlots[1], 36);
+    InitTextSlots(work->textSlots[2], 36);
+    InitTextSlots(work->textSlots[3], 36);
+    InitTextSlots(work->textSlots[4], 36);
+    InitTextSlots(work->textSlots[5], 36);
+    work->unk_000[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
 #else
-    w->unk_000[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
-    w->tiles5[0] = AllocSpriteFrameTiles(0x500);
-    w->tiles5[1] = AllocSpriteFrameTiles(0x500);
-    w->tiles5[2] = AllocSpriteFrameTiles(0x500);
+    work->unk_000[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
+    work->tiles5[0] = AllocSpriteFrameTiles(0x500);
+    work->tiles5[1] = AllocSpriteFrameTiles(0x500);
+    work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    w->unk_000[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
-    FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[7])->index + 16, 1);
-    w->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
-    TaskPoolInit(&w->pool, 10);
+    work->unk_000[7] = LoadObjPalette(gUnk_09613E98 + 0x30, 32);
+    FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[7])->index + 16, 1);
+    work->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
+    TaskPoolInit(&work->pool, 10);
 
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-        w->tiles4 = AllocObjTiles(0x500, NULL);
-        w->palette5 = AllocObjPalette(32);
-        UpdateAllocatedObjPalette(w->palette5, gSoraPalette);
-        FadeSetPaletteExcluded(w->palette5->index + 16, 1);
+        work->tiles4 = AllocObjTiles(0x500, NULL);
+        work->palette5 = AllocObjPalette(32);
+        UpdateAllocatedObjPalette(work->palette5, gSoraPalette);
+        FadeSetPaletteExcluded(work->palette5->index + 16, 1);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
-        SetObjTileSource(w->tiles4, gSor1ll51Tiles);
-        AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
-        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
+        SetObjTileSource(work->tiles4, gSor1ll51Tiles);
+        AnimInit(&work->anim2, gSor1ll51Anims, gSor1ll51Frames);
+        AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     } else {
-        w->tiles4 = AllocObjTiles(0x800, NULL);
-        w->palette5 = AllocObjPalette(32);
-        UpdateAllocatedObjPalette(w->palette5, gRikuPalette);
-        FadeSetPaletteExcluded(w->palette5->index + 16, 1);
+        work->tiles4 = AllocObjTiles(0x800, NULL);
+        work->palette5 = AllocObjPalette(32);
+        UpdateAllocatedObjPalette(work->palette5, gRikuPalette);
+        FadeSetPaletteExcluded(work->palette5->index + 16, 1);
         WorldToScreen(&x, &y, gBtlWork->actor->x,
                       gBtlWork->actor->y,
                       gBtlWork->actor->z);
-        SetObjTileSource(w->tiles4, gRikuBt00Tiles);
-        AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
-        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
+        SetObjTileSource(work->tiles4, gRikuBt00Tiles);
+        AnimInit(&work->anim2, gRikuBt00Anims, gRikuBt00Frames);
+        AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     }
 
     if (gBtlWork->flags & BTL_FLAG_FIELD_HIDDEN) {
-        w->x7 = 0x1C400;
-        w->y6 = 0x5000;
+        work->x7 = 0x1C400;
+        work->y6 = 0x5000;
     } else {
-        w->x7 = x << 8;
-        w->y6 = y << 8;
+        work->x7 = x << 8;
+        work->y6 = y << 8;
     }
 
-    w->gfx = AnimGetGfx(&w->anim2);
+    work->gfx = AnimGetGfx(&work->anim2);
 
     if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE)) {
-        w->bossBattle = 0;
+        work->bossBattle = 0;
         gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;
         gBg1Cnt &= ~BGCNT_256COLOR;
         SetBgSize(1, 0);
@@ -161,7 +161,7 @@ void Level_Up_0(LevelUpWork* w) {
         gBg2X = gBg3X;
         gBg2Y = gBg3Y;
     } else {
-        w->bossBattle = 1;
+        work->bossBattle = 1;
 
         switch (gBtlWork->battleId) {
         case 151:
@@ -191,48 +191,48 @@ void Level_Up_0(LevelUpWork* w) {
     }
 
     gBldCnt &= ~BLDCNT_EFFECT_BLEND;
-    w->x6 = -128;
-    w->x4[0] = -128;
-    w->x4[1] = -128;
-    w->x4[2] = -128;
-    w->y4[0] = 16;
-    w->y4[1] = 64;
-    w->y4[2] = 112;
-    w->slideSteps = 24;
-    w->headerSteps = 16;
-    w->optionSteps[0] = 16;
-    w->optionSteps[1] = 16;
-    w->optionSteps[2] = 16;
-    w->x5[0] = 8;
-    w->x5[1] = 8;
-    w->x5[2] = 8;
-    w->y5[0] = 31;
-    w->y5[1] = 79;
-    w->y5[2] = 127;
-    w->x = 128;
-    w->x2 = 128;
-    w->y = -0x800;
-    w->y2 = 0xA000;
-    w->barSteps = 16;
-    w->bgScrollX = 0;
-    w->statsOffsetX = 256;
-    w->x3 = 132;
-    w->y3 = sLevelUpCursorY[0];
-    w->state = 0;
-    w->cursor = 0;
-    w->applied = 0;
-    LevelUpSplitDigits3(gGameState.progression.level, w->levelDigits);
-    LevelUpSplitDigits3(gGameState.progression.maxHp, w->maxHpDigits);
-    LevelUpSplitDigits4(gGameState.progression.cp, w->cpDigits);
-    LevelUpSplitDigits3(gGameState.progression.dp, w->dpDigits);
-    LevelUpSplitDigits2(gGameState.progression.ap, w->apDigits);
-    w->timer = 0;
-    w->loaded[1] = 0;
-    w->loaded[0] = 0;
-    w->blinkTimer = 0;
-    w->blinkOn = 0;
-    w->playerSteps = 16;
-    w->effectShown = 0;
+    work->x6 = -128;
+    work->x4[0] = -128;
+    work->x4[1] = -128;
+    work->x4[2] = -128;
+    work->y4[0] = 16;
+    work->y4[1] = 64;
+    work->y4[2] = 112;
+    work->slideSteps = 24;
+    work->headerSteps = 16;
+    work->optionSteps[0] = 16;
+    work->optionSteps[1] = 16;
+    work->optionSteps[2] = 16;
+    work->x5[0] = 8;
+    work->x5[1] = 8;
+    work->x5[2] = 8;
+    work->y5[0] = 31;
+    work->y5[1] = 79;
+    work->y5[2] = 127;
+    work->x = 128;
+    work->x2 = 128;
+    work->y = -0x800;
+    work->y2 = 0xA000;
+    work->barSteps = 16;
+    work->bgScrollX = 0;
+    work->statsOffsetX = 256;
+    work->x3 = 132;
+    work->y3 = sLevelUpCursorY[0];
+    work->state = 0;
+    work->cursor = 0;
+    work->applied = 0;
+    LevelUpSplitDigits3(gGameState.progression.level, work->levelDigits);
+    LevelUpSplitDigits3(gGameState.progression.maxHp, work->maxHpDigits);
+    LevelUpSplitDigits4(gGameState.progression.cp, work->cpDigits);
+    LevelUpSplitDigits3(gGameState.progression.dp, work->dpDigits);
+    LevelUpSplitDigits2(gGameState.progression.ap, work->apDigits);
+    work->timer = 0;
+    work->loaded[1] = 0;
+    work->loaded[0] = 0;
+    work->blinkTimer = 0;
+    work->blinkOn = 0;
+    work->playerSteps = 16;
+    work->effectShown = 0;
 }
 #ifdef VERSION_EU
 #define CARD_E7A4_DST 0x20
@@ -271,9 +271,9 @@ void LoadLevelUpRikuBgTiles() {
     }
 }
 
-u8 UpdateLevelUpSelect(LevelUpWork* w, void* a);
+u8 UpdateLevelUpSelect(LevelUpWork* work, void* a);
 
-u8 Level_Up_1(LevelUpWork* w, void* a) {
+u8 Level_Up_1(LevelUpWork* work, void* a) {
     s32 x[3];
 #ifdef VERSION_EU
     enum { tileSize = 0xC80, mapSize = 0x500, bgSize = 0x2C00 };
@@ -281,11 +281,11 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
     enum { tileSize = 0xD80, mapSize = 0x800, bgSize = 0x3680 };
 #endif
 
-    if (w->loaded[1] == 0) {
-        w->timer++;
+    if (work->loaded[1] == 0) {
+        work->timer++;
 
-        if (w->timer > 7) {
-            if (!w->bossBattle) {
+        if (work->timer > 7) {
+            if (!work->bossBattle) {
                 LoadBgTiles(1, gUnk_093FF8F8, bgSize);
 
 #ifdef VERSION_EU
@@ -399,122 +399,122 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             FadeSetPaletteExcluded(11, 1);
             FadeSetPaletteExcluded(12, 1);
             FadeSetPaletteExcluded(13, 1);
-            w->loaded[1] = 1;
-            w->timer = 0;
+            work->loaded[1] = 1;
+            work->timer = 0;
             return 1;
         }
 
         return 1;
     }
 
-    if (w->loaded[0] == 0) {
-        w->timer++;
+    if (work->loaded[0] == 0) {
+        work->timer++;
 
-        if (w->timer > 7) {
+        if (work->timer > 7) {
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
 
-                w->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
-                w->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
+                work->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
-                w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
 
-                w->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                w->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
+                work->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
 
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
             case LANGUAGE_FRENCH:
-                w->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
                 break;
             case LANGUAGE_GERMAN:
-                w->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
                 break;
             case LANGUAGE_ITALIAN:
-                w->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
                 break;
             case LANGUAGE_SPANISH:
-                w->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
                 break;
             default:
-                w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
             }
 #else
-            w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+            work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
-            w->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
-            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
-            w->tiles = AllocObjTiles(0x3C0, NULL);
-            w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
-            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
-            SetObjTileSource(w->tiles, gUnk_093F4578);
-            AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-            AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
-            w->gfx2 = AnimGetGfx(&w->anim);
-            w->loaded[0] = 1;
-            w->timer = 0;
+            work->palette4 = LoadObjPalette(gCard00Palette, 32);
+            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[4])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[5])->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            work->tiles = AllocObjTiles(0x3C0, NULL);
+            work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
+            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+            SetObjTileSource(work->tiles, gUnk_093F4578);
+            AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+            AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
+            work->gfx2 = AnimGetGfx(&work->anim);
+            work->loaded[0] = 1;
+            work->timer = 0;
             FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
 
         return 1;
     }
 
-    w->gfx = AnimUpdate(&w->anim2);
+    work->gfx = AnimUpdate(&work->anim2);
 
-    if (w->playerSteps != 0) {
-        ApproachValue(&w->x7, 0xBE00, w->playerSteps);
-        ApproachValue(&w->y6, 0x5000, w->playerSteps);
-        w->playerSteps--;
+    if (work->playerSteps != 0) {
+        ApproachValue(&work->x7, 0xBE00, work->playerSteps);
+        ApproachValue(&work->y6, 0x5000, work->playerSteps);
+        work->playerSteps--;
     }
 
-    if (w->barSteps != 0) {
-        ApproachValue(&w->y, 0, w->barSteps);
-        ApproachValue(&w->y2, 0x9800, w->barSteps);
-        w->barSteps--;
+    if (work->barSteps != 0) {
+        ApproachValue(&work->y, 0, work->barSteps);
+        ApproachValue(&work->y2, 0x9800, work->barSteps);
+        work->barSteps--;
     } else {
-        s32 x3 = w->bgScrollX << 8;
-        s32 x4 = w->statsOffsetX << 8;
-        ApproachValue(&x3, 0x10000, w->slideSteps);
-        ApproachValue(&x4, 0, w->slideSteps);
+        s32 x3 = work->bgScrollX << 8;
+        s32 x4 = work->statsOffsetX << 8;
+        ApproachValue(&x3, 0x10000, work->slideSteps);
+        ApproachValue(&x4, 0, work->slideSteps);
 
         if (gBtlWork->battleId == 151) {
             ScrollBgMapTo(0, x3 >> 8, 0);
@@ -522,53 +522,53 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
             ScrollBgMapTo(1, x3 >> 8, 0);
         }
 
-        w->bgScrollX = x3 >> 8;
-        w->statsOffsetX = x4 >> 8;
+        work->bgScrollX = x3 >> 8;
+        work->statsOffsetX = x4 >> 8;
 
-        if (w->slideSteps > 0) {
-            w->slideSteps--;
+        if (work->slideSteps > 0) {
+            work->slideSteps--;
         }
 
-        if (w->slideSteps <= 11) {
-            s32 x5 = w->x6 << 8;
-            ApproachValue(&x5, 0, w->headerSteps);
-            w->x6 = x5 >> 8;
+        if (work->slideSteps <= 11) {
+            s32 x5 = work->x6 << 8;
+            ApproachValue(&x5, 0, work->headerSteps);
+            work->x6 = x5 >> 8;
 
-            if (w->headerSteps > 0) {
-                w->headerSteps--;
+            if (work->headerSteps > 0) {
+                work->headerSteps--;
             }
 
-            if (w->headerSteps <= 6) {
-                x[0] = w->x4[0] << 8;
-                x[1] = w->x4[1] << 8;
-                x[2] = w->x4[2] << 8;
-                ApproachValue(&x[0], 0x1000, w->optionSteps[0]);
+            if (work->headerSteps <= 6) {
+                x[0] = work->x4[0] << 8;
+                x[1] = work->x4[1] << 8;
+                x[2] = work->x4[2] << 8;
+                ApproachValue(&x[0], 0x1000, work->optionSteps[0]);
 
-                if (w->optionSteps[0] > 0) {
-                    w->optionSteps[0]--;
+                if (work->optionSteps[0] > 0) {
+                    work->optionSteps[0]--;
                 }
 
-                if (w->optionSteps[0] <= 6) {
-                    ApproachValue(&x[1], 0x1000, w->optionSteps[1]);
+                if (work->optionSteps[0] <= 6) {
+                    ApproachValue(&x[1], 0x1000, work->optionSteps[1]);
 
-                    if (w->optionSteps[1] > 0) {
-                        w->optionSteps[1]--;
+                    if (work->optionSteps[1] > 0) {
+                        work->optionSteps[1]--;
                     }
                 }
 
-                if (w->optionSteps[1] <= 6) {
-                    ApproachValue(&x[2], 0x1000, w->optionSteps[2]);
+                if (work->optionSteps[1] <= 6) {
+                    ApproachValue(&x[2], 0x1000, work->optionSteps[2]);
 
-                    if (w->optionSteps[2] > 0) {
-                        w->optionSteps[2]--;
+                    if (work->optionSteps[2] > 0) {
+                        work->optionSteps[2]--;
                     }
                 }
 
-                w->x4[0] = x[0] >> 8;
-                w->x4[1] = x[1] >> 8;
-                w->x4[2] = x[2] >> 8;
+                work->x4[0] = x[0] >> 8;
+                work->x4[1] = x[1] >> 8;
+                work->x4[2] = x[2] >> 8;
 
-                if (w->optionSteps[2] == 0) {
+                if (work->optionSteps[2] == 0) {
                     u8 i;
 
                     if (gBtlWork->battleId == 151) {
@@ -577,162 +577,162 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                         LoadBgMap(1, gUnk_095112B8, mapSize);
                     }
 
-                    w->state = 1;
+                    work->state = 1;
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[0]);
-                            w->textSlotCounts[3] = 0;
+                            work->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[0]);
+                            work->textSlotCounts[3] = 0;
 #endif
-                            w->optionEnabled[0] = 0;
+                            work->optionEnabled[0] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][0], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][0], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[0], w->textSlots[0]);
-                            w->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], w->textSlots[3]);
+                            work->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[0], work->textSlots[0]);
+                            work->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], work->textSlots[3]);
 #endif
                         }
 
                         if (gGameState.progression.cp > 1899) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                            w->textSlotCounts[4] = 0;
+                            work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                            work->textSlotCounts[4] = 0;
 #endif
-                            w->optionEnabled[1] = 0;
+                            work->optionEnabled[1] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][1], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][1], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[1], w->textSlots[1]);
-                            w->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], w->textSlots[4]);
+                            work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[1], work->textSlots[1]);
+                            work->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], work->textSlots[4]);
 #endif
                         }
 
                         if (gGameState.progression.levelMilestone > 10) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                            w->textSlotCounts[5] = 0;
+                            work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                            work->textSlotCounts[5] = 0;
 #endif
-                            w->optionEnabled[2] = 0;
+                            work->optionEnabled[2] = 0;
                         } else if (!IsLevelUpStockUnlocked()) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                            w->textSlotCounts[5] = 0;
+                            work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                            work->textSlotCounts[5] = 0;
 #endif
-                            w->optionEnabled[2] = 0;
+                            work->optionEnabled[2] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][2], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][2], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[2], w->textSlots[2]);
-                            w->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], w->textSlots[5]);
+                            work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[2], work->textSlots[2]);
+                            work->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], work->textSlots[5]);
 #endif
                         }
 
-                        w->palette = LoadObjPalette(gUnk_09613F98, 32);
-                        w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
+                        work->palette = LoadObjPalette(gUnk_09613F98, 32);
+                        work->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
                     } else {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[6], w->textSlots[0]);
-                            w->textSlotCounts[3] = 0;
+                            work->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[6], work->textSlots[0]);
+                            work->textSlotCounts[3] = 0;
 #endif
-                            w->optionEnabled[0] = 0;
+                            work->optionEnabled[0] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][3], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][3], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[0], w->textSlots[0]);
-                            w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
+                            work->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[0], work->textSlots[0]);
+                            work->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], work->textSlots[3]);
 #endif
                         }
 
                         if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                            w->textSlotCounts[4] = 0;
+                            work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                            work->textSlotCounts[4] = 0;
 #endif
-                            w->optionEnabled[1] = 0;
+                            work->optionEnabled[1] = 0;
                         } else if (!(u8)IsLevelUpApUnlocked()) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                            w->textSlotCounts[4] = 0;
+                            work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                            work->textSlotCounts[4] = 0;
 #endif
-                            w->optionEnabled[1] = 0;
+                            work->optionEnabled[1] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][4], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][4], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[1] = LoadTextSlots(gLevelUpRikuTexts[1], w->textSlots[1]);
-                            w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
+                            work->textSlotCounts[1] = LoadTextSlots(gLevelUpRikuTexts[1], work->textSlots[1]);
+                            work->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], work->textSlots[4]);
 #endif
                         }
 
                         if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                            w->textSlotCounts[5] = 0;
+                            work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                            work->textSlotCounts[5] = 0;
 #endif
-                            w->optionEnabled[2] = 0;
+                            work->optionEnabled[2] = 0;
                         } else {
 #ifdef VERSION_EU
-                            UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][5], gLevelUpOptionTilesByLanguage[gLanguage]);
+                            UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][5], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                            w->textSlotCounts[2] = LoadTextSlots(gLevelUpRikuTexts[2], w->textSlots[2]);
-                            w->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], w->textSlots[5]);
+                            work->textSlotCounts[2] = LoadTextSlots(gLevelUpRikuTexts[2], work->textSlots[2]);
+                            work->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], work->textSlots[5]);
 #endif
                         }
 
-                        w->palette = LoadObjPalette(gUnk_09613FD8, 32);
-                        w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
+                        work->palette = LoadObjPalette(gUnk_09613FD8, 32);
+                        work->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
                     }
 
-                    FadeSetPaletteExcluded(w->palette->index + 16, 1);
-                    FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+                    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+                    FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 
                     for (i = 0; i < 3; i++) {
-                        if (w->optionEnabled[i] == 1) {
+                        if (work->optionEnabled[i] == 1) {
                             break;
                         }
                     }
 
-                    w->cursor = i;
-                    w->y3 = sLevelUpCursorY[w->cursor];
+                    work->cursor = i;
+                    work->y3 = sLevelUpCursorY[work->cursor];
                     SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
 
                     if (gBtlWork->battleId == 151) {
-                        LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
+                        LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
                     } else {
-                        LoadBgMap(1, gLevelUpOptionBgMaps[w->cursor], 0x800);
+                        LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
                     }
                 }
             }
         }
     }
 
-    TaskPoolUpdate(&w->pool);
+    TaskPoolUpdate(&work->pool);
     return 1;
 }
 
-u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
+u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
     s32 x;
     s8 i;
     u8* q;
@@ -743,8 +743,8 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
 #endif
 
     if (GetKeysRepeat() & DPAD_DOWN) {
-        i = w->cursor;
-        q = w->optionEnabled;
+        i = work->cursor;
+        q = work->optionEnabled;
 
         do {
             i++;
@@ -754,24 +754,24 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
             }
         } while (q[i] == 0);
 
-        if (i != w->cursor) {
+        if (i != work->cursor) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursor = i;
+        work->cursor = i;
 
         if (gBtlWork->battleId == 151) {
-            LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
-            LoadBgMap(1, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
         }
 
-        w->cursorSteps = 8;
+        work->cursorSteps = 8;
     }
 
     if (GetKeysRepeat() & DPAD_UP) {
-        i = w->cursor;
-        q = w->optionEnabled;
+        i = work->cursor;
+        q = work->optionEnabled;
 
         do {
             i--;
@@ -781,23 +781,23 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
             }
         } while (q[i] == 0);
 
-        if (i != w->cursor) {
+        if (i != work->cursor) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        w->cursor = i;
+        work->cursor = i;
 
         if (gBtlWork->battleId == 151) {
-            LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
-            LoadBgMap(1, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
         }
 
-        w->cursorSteps = 8;
+        work->cursorSteps = 8;
     }
 
     while (GetKeysRepeat() & A_BUTTON) {
-        w->state = 2;
+        work->state = 2;
 
         if (gBtlWork->battleId == 151) {
             LoadBgMap(0, &gUnk_0950E2F8[mapOffset], mapSize);
@@ -805,175 +805,175 @@ u8 UpdateLevelUpSelect(LevelUpWork* w, void* a) {
             LoadBgMap(1, &gUnk_0950E2F8[mapOffset], mapSize);
         }
 
-        w->optionSteps[0] = 16;
-        w->optionSteps[1] = 16;
-        w->optionSteps[2] = 16;
+        work->optionSteps[0] = 16;
+        work->optionSteps[1] = 16;
+        work->optionSteps[2] = 16;
         m4aSongNumStart(SONG_SYS_KETTEI);
-        ReleaseObjTiles(w->tiles);
-        ReleaseObjPalette(w->palette3);
-        w->tiles = AllocObjTiles(128, NULL);
-        w->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
-        FadeSetPaletteExcluded(w->palette3->index + 16, 1);
-        SetObjTileSource(w->tiles, gUnk_0908F190);
-        AnimInit(&w->anim, gUnk_09EEA280, gUnk_09EEA26C);
-        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-        w->gfx2 = AnimGetGfx(&w->anim);
-        w->cursorSteps = 16;
-        w->x3 = 136;
+        ReleaseObjTiles(work->tiles);
+        ReleaseObjPalette(work->palette3);
+        work->tiles = AllocObjTiles(128, NULL);
+        work->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
+        FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+        SetObjTileSource(work->tiles, gUnk_0908F190);
+        AnimInit(&work->anim, gUnk_09EEA280, gUnk_09EEA26C);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+        work->gfx2 = AnimGetGfx(&work->anim);
+        work->cursorSteps = 16;
+        work->x3 = 136;
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-            SetObjTileSource(w->tiles4, gSor1ff00Tiles);
-            AnimInit(&w->anim2, gSor1ff00Anims, gSor1ff00Frames);
-            AnimStart(&w->anim2, 1, 0);
+            SetObjTileSource(work->tiles4, gSor1ff00Tiles);
+            AnimInit(&work->anim2, gSor1ff00Anims, gSor1ff00Frames);
+            AnimStart(&work->anim2, 1, 0);
         } else {
-            SetObjTileSource(w->tiles4, gRikuFf00Tiles);
-            AnimInit(&w->anim2, gRikuFf00Anims, gRikuFf00Frames);
-            AnimStart(&w->anim2, 1, 0);
+            SetObjTileSource(work->tiles4, gRikuFf00Tiles);
+            AnimInit(&work->anim2, gRikuFf00Anims, gRikuFf00Frames);
+            AnimStart(&work->anim2, 1, 0);
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpResult);
         return 1;
     }
 
-    x = w->y3 << 8;
-    ApproachValue(&x, sLevelUpCursorY[w->cursor] << 8, w->cursorSteps);
-    w->cursorSteps--;
-    w->y3 = x >> 8;
-    w->gfx2 = AnimUpdate(&w->anim);
-    w->blinkTimer++;
+    x = work->y3 << 8;
+    ApproachValue(&x, sLevelUpCursorY[work->cursor] << 8, work->cursorSteps);
+    work->cursorSteps--;
+    work->y3 = x >> 8;
+    work->gfx2 = AnimUpdate(&work->anim);
+    work->blinkTimer++;
 
-    if (w->blinkTimer == 32) {
-        w->blinkTimer = 0;
-        w->blinkOn ^= 1;
+    if (work->blinkTimer == 32) {
+        work->blinkTimer = 0;
+        work->blinkOn ^= 1;
     }
 
-    w->gfx = AnimUpdate(&w->anim2);
-    TaskPoolUpdate(&w->pool);
+    work->gfx = AnimUpdate(&work->anim2);
+    TaskPoolUpdate(&work->pool);
     return 1;
 }
 
-u8 UpdateLevelUpClose(LevelUpWork* w, void* a);
+u8 UpdateLevelUpClose(LevelUpWork* work, void* a);
 
-u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
+u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
     u8 i;
 
-    if (w->effectShown == 0) {
+    if (work->effectShown == 0) {
 #ifndef VERSION_US
         LevelUpEffectArgs args;
         args.x = 192;
         args.y = 60;
         args.unk_08 = 0;
         args.target = NULL;
-        TaskCreate(&w->pool, &gTaskDescLVUPEFFECT, &args);
+        TaskCreate(&work->pool, &gTaskDescLVUPEFFECT, &args);
         m4aSongNumStart(SONG_SYS_LVUP);
 #endif
-        w->effectShown++;
+        work->effectShown++;
     }
 
     for (i = 0; i < 3; i++) {
-        if (i != w->cursor) {
-            s32 x = w->x4[i] << 8;
-            s32 y = w->x5[i] << 8;
-            ApproachValue(&x, -0x10000, w->optionSteps[i]);
-            ApproachValue(&y, -0xF800, w->optionSteps[i]);
-            w->x4[i] = x >> 8;
-            w->x5[i] = y >> 8;
+        if (i != work->cursor) {
+            s32 x = work->x4[i] << 8;
+            s32 y = work->x5[i] << 8;
+            ApproachValue(&x, -0x10000, work->optionSteps[i]);
+            ApproachValue(&y, -0xF800, work->optionSteps[i]);
+            work->x4[i] = x >> 8;
+            work->x5[i] = y >> 8;
         } else {
-            s32 x = w->y4[i] << 8;
-            s32 y = w->y5[i] << 8;
-            ApproachValue(&x, 0x2000, w->optionSteps[i]);
-            ApproachValue(&y, 0x3100, w->optionSteps[i]);
-            w->y4[i] = x >> 8;
-            w->y5[i] = y >> 8;
+            s32 x = work->y4[i] << 8;
+            s32 y = work->y5[i] << 8;
+            ApproachValue(&x, 0x2000, work->optionSteps[i]);
+            ApproachValue(&y, 0x3100, work->optionSteps[i]);
+            work->y4[i] = x >> 8;
+            work->y5[i] = y >> 8;
         }
 
-        if (w->optionSteps[i] > 0) {
-            w->optionSteps[i]--;
+        if (work->optionSteps[i] > 0) {
+            work->optionSteps[i]--;
         }
     }
 
-    if (w->optionSteps[0] == 0) {
+    if (work->optionSteps[0] == 0) {
         for (i = 0; i < 3; i++) {
-            if (i != w->cursor && w->unk_000[i] != NULL) {
-                ReleaseObjTiles(w->unk_000[i]);
-                w->unk_000[i] = NULL;
+            if (i != work->cursor && work->unk_000[i] != NULL) {
+                ReleaseObjTiles(work->unk_000[i]);
+                work->unk_000[i] = NULL;
             }
         }
 
-        if (!w->applied) {
-            switch (w->cursor) {
+        if (!work->applied) {
+            switch (work->cursor) {
             case 0: {
                 s32 amount = LevelUpMaxHp();
                 StatIncreaseDisplayArgs args;
-                w->messageActive = 1;
+                work->messageActive = 1;
                 args.amount = amount;
-                args.done = &w->messageActive;
+                args.done = &work->messageActive;
                 args.flags = STAT_INCREASE_FLAG_MAX_HP;
-                TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
+                TaskCreate(&work->pool, &gTaskDescLvupMsg, &args);
                 break;
             }
             case 1:
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
                     s32 amount = LevelUpCp();
                     StatIncreaseDisplayArgs args;
-                    w->messageActive = 1;
+                    work->messageActive = 1;
                     args.amount = amount;
-                    args.done = &w->messageActive;
+                    args.done = &work->messageActive;
                     args.flags = 0;
-                    TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
+                    TaskCreate(&work->pool, &gTaskDescLvupMsg, &args);
                 } else {
                     s32 amount = LevelUpAp();
                     StatIncreaseDisplayArgs args;
-                    w->messageActive = 1;
+                    work->messageActive = 1;
                     args.amount = amount;
-                    args.done = &w->messageActive;
+                    args.done = &work->messageActive;
                     args.flags = 0;
                     gGameState.progression.levelMilestone++;
-                    TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
+                    TaskCreate(&work->pool, &gTaskDescLvupMsg, &args);
                 }
 
                 break;
             case 2:
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                    w->messageActive = 1;
-                    TaskCreate(&w->pool, &gTaskDescStockInfo, &w->messageActive);
+                    work->messageActive = 1;
+                    TaskCreate(&work->pool, &gTaskDescStockInfo, &work->messageActive);
                 } else {
                     s32 amount = LevelUpDp();
                     StatIncreaseDisplayArgs args;
-                    w->messageActive = 1;
+                    work->messageActive = 1;
                     args.amount = amount;
-                    args.done = &w->messageActive;
+                    args.done = &work->messageActive;
                     args.flags = STAT_INCREASE_FLAG_DP;
-                    TaskCreate(&w->pool, &gTaskDescLvupMsg, &args);
+                    TaskCreate(&work->pool, &gTaskDescLvupMsg, &args);
                 }
 
                 break;
             }
 
-            LevelUpSplitDigits3(gGameState.progression.maxHp, w->maxHpDigits);
-            LevelUpSplitDigits4(gGameState.progression.cp, w->cpDigits);
-            LevelUpSplitDigits3(gGameState.progression.dp, w->dpDigits);
-            LevelUpSplitDigits2(gGameState.progression.ap, w->apDigits);
-            w->applied = 1;
+            LevelUpSplitDigits3(gGameState.progression.maxHp, work->maxHpDigits);
+            LevelUpSplitDigits4(gGameState.progression.cp, work->cpDigits);
+            LevelUpSplitDigits3(gGameState.progression.dp, work->dpDigits);
+            LevelUpSplitDigits2(gGameState.progression.ap, work->apDigits);
+            work->applied = 1;
         }
     }
 
     {
-        s32 y = w->y3 << 8;
-        ApproachValue(&y, 0x3000, w->cursorSteps);
-        w->cursorSteps--;
-        w->y3 = y >> 8;
+        s32 y = work->y3 << 8;
+        ApproachValue(&y, 0x3000, work->cursorSteps);
+        work->cursorSteps--;
+        work->y3 = y >> 8;
     }
 
-    TaskPoolUpdate(&w->pool);
-    w->blinkTimer++;
+    TaskPoolUpdate(&work->pool);
+    work->blinkTimer++;
 
-    if (w->blinkTimer == 32) {
-        w->blinkTimer = 0;
-        w->blinkOn ^= 1;
+    if (work->blinkTimer == 32) {
+        work->blinkTimer = 0;
+        work->blinkOn ^= 1;
     }
 
-    if (w->timer == 180) {
+    if (work->timer == 180) {
         if (GetKeysPressed() & A_BUTTON) {
             if (gBtlWork->battleId == 151) {
                 SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
@@ -981,13 +981,13 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
             }
 
-            w->headerSteps = 16;
-            w->slideSteps = 16;
-            w->optionSteps[w->cursor] = 16;
-            w->barSteps = 16;
-            w->state = 3;
-            w->blinkOn = 0;
-            w->messageActive = 0;
+            work->headerSteps = 16;
+            work->slideSteps = 16;
+            work->optionSteps[work->cursor] = 16;
+            work->barSteps = 16;
+            work->state = 3;
+            work->blinkOn = 0;
+            work->messageActive = 0;
             gBtlWork->pendingLevelUps--;
 
             if (gBtlWork->pendingLevelUps == 0) {
@@ -999,15 +999,15 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             m4aSongNumStart(SONG_SYS_KETTEI);
         }
     } else {
-        w->timer++;
+        work->timer++;
     }
 
-    w->gfx2 = AnimUpdate(&w->anim);
-    w->gfx = AnimUpdate(&w->anim2);
+    work->gfx2 = AnimUpdate(&work->anim);
+    work->gfx = AnimUpdate(&work->anim2);
     return 1;
 }
 
-u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
+u8 UpdateLevelUpClose(LevelUpWork* work, void* a) {
     s32 v1;
     s32 v2;
     s32 v3;
@@ -1015,23 +1015,23 @@ u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
     s32 v0;
     s8 n;
 
-    v1 = w->x4[w->cursor] << 8;
-    v2 = w->x5[w->cursor] << 8;
-    v3 = w->bgScrollX << 8;
-    v4 = w->statsOffsetX << 8;
-    v0 = w->x6 << 8;
-    ApproachValue(&v0, -0x8000, w->headerSteps);
-    ApproachValue(&v1, -0x8000, w->optionSteps[w->cursor]);
-    ApproachValue(&v2, -0xF800, w->optionSteps[w->cursor]);
-    w->x4[w->cursor] = v1 >> 8;
-    w->x5[w->cursor] = v2 >> 8;
-    w->x6 = v0 >> 8;
-    w->headerSteps--;
-    w->optionSteps[w->cursor]--;
-    ApproachValue(&v3, 0, w->slideSteps);
-    ApproachValue(&v4, 0x10000, w->slideSteps);
-    ApproachValue(&w->x7, 0x1BE00, w->slideSteps);
-    ApproachValue(&w->y6, 0x4800, w->slideSteps);
+    v1 = work->x4[work->cursor] << 8;
+    v2 = work->x5[work->cursor] << 8;
+    v3 = work->bgScrollX << 8;
+    v4 = work->statsOffsetX << 8;
+    v0 = work->x6 << 8;
+    ApproachValue(&v0, -0x8000, work->headerSteps);
+    ApproachValue(&v1, -0x8000, work->optionSteps[work->cursor]);
+    ApproachValue(&v2, -0xF800, work->optionSteps[work->cursor]);
+    work->x4[work->cursor] = v1 >> 8;
+    work->x5[work->cursor] = v2 >> 8;
+    work->x6 = v0 >> 8;
+    work->headerSteps--;
+    work->optionSteps[work->cursor]--;
+    ApproachValue(&v3, 0, work->slideSteps);
+    ApproachValue(&v4, 0x10000, work->slideSteps);
+    ApproachValue(&work->x7, 0x1BE00, work->slideSteps);
+    ApproachValue(&work->y6, 0x4800, work->slideSteps);
 
     if (gBtlWork->battleId == 151) {
         ScrollBgMapTo(0, v3 >> 8, 0);
@@ -1039,27 +1039,27 @@ u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
         ScrollBgMapTo(1, v3 >> 8, 0);
     }
 
-    w->bgScrollX = v3 >> 8;
-    w->statsOffsetX = v4 >> 8;
+    work->bgScrollX = v3 >> 8;
+    work->statsOffsetX = v4 >> 8;
 
-    if (w->slideSteps > 0) {
-        w->slideSteps--;
+    if (work->slideSteps > 0) {
+        work->slideSteps--;
     }
 
-    n = w->slideSteps;
+    n = work->slideSteps;
 
     if (n == 0) {
-        if (w->barSteps != 0) {
-            ApproachValue(&w->y, -0x800, w->barSteps);
-            ApproachValue(&w->y2, 0xA000, w->barSteps);
-            w->barSteps--;
+        if (work->barSteps != 0) {
+            ApproachValue(&work->y, -0x800, work->barSteps);
+            ApproachValue(&work->y2, 0xA000, work->barSteps);
+            work->barSteps--;
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpWaitFade);
         }
     }
 
-    w->gfx = AnimUpdate(&w->anim2);
-    TaskPoolUpdate(&w->pool);
+    work->gfx = AnimUpdate(&work->anim2);
+    TaskPoolUpdate(&work->pool);
     return 1;
 }
 
@@ -1073,284 +1073,284 @@ u8 UpdateLevelUpWaitFade() {
 
 void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind);
 
-void Level_Up_2(LevelUpWork* w) {
+void Level_Up_2(LevelUpWork* work) {
     u8 i = 0;
 
-    if (w->loaded[0] != 0) {
-        switch (w->state) {
+    if (work->loaded[0] != 0) {
+        switch (work->state) {
         case 0:
-            DrawSprite(w->x6, 0,
+            DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       w->unk_000[6], w->unk_000[7], NULL, 0, 50);
+                       work->unk_000[6], work->unk_000[7], NULL, 0, 50);
 
-            if (w->unk_000[0] != NULL) {
+            if (work->unk_000[0] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[0], w->y4[0], gUnk_09EEA2BC[0], w->unk_000[0], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gUnk_09EEA2BC[0], work->unk_000[0], work->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[0], w->y4[0], gUnkEu_09F7626C[0], w->unk_000[0], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gUnkEu_09F7626C[0], work->unk_000[0], work->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            if (w->unk_000[1] != NULL) {
+            if (work->unk_000[1] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[1], w->y4[1], gUnk_09EEA2BC[1], w->unk_000[1], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gUnk_09EEA2BC[1], work->unk_000[1], work->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[1], w->y4[1], gUnkEu_09F7626C[1], w->unk_000[1], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gUnkEu_09F7626C[1], work->unk_000[1], work->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            if (w->unk_000[2] != NULL) {
+            if (work->unk_000[2] != NULL) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(w->x4[2], w->y4[2], gUnk_09EEA2BC[2], w->unk_000[2], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gUnk_09EEA2BC[2], work->unk_000[2], work->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(w->x4[2], w->y4[2], gUnkEu_09F7626C[2], w->unk_000[2], w->unk_000[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gUnkEu_09F7626C[2], work->unk_000[2], work->unk_000[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case 1:
             for (; i < 3; i++) {
-                if (i == w->cursor) {
+                if (i == work->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 5, w->y5[i] - 4, NULL, w->tiles5[i], w->palette, NULL, 0, 40);
+                    DrawSprite(work->x5[i] + 5, work->y5[i] - 4, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
 #else
-                    DrawTextSlots(w->x5[i] + 22, w->y5[i] - 5, w->textSlots[i], w->palette, 40, w->textSlotCounts[i]);
-                    DrawTextSlots(w->x5[i] + 4, w->y5[i] + 13, w->textSlots[i + 3], w->palette, 40, w->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
                 } else {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 3, w->y5[i] - 2, NULL, w->tiles5[i], w->palette2, NULL, 0, 40);
+                    DrawSprite(work->x5[i] + 3, work->y5[i] - 2, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
 #else
-                    DrawTextSlots(w->x5[i] + 20, w->y5[i] - 3, w->textSlots[i], w->palette2, 40, w->textSlotCounts[i]);
-                    DrawTextSlots(w->x5[i] + 2, w->y5[i] + 15, w->textSlots[i + 3], w->palette2, 40, w->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->x5[i] + 20, work->y5[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->x5[i] + 2, work->y5[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
 #endif
                 }
             }
 
-            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, NULL, 0, 40);
+            DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
         case 2:
             for (; i < 3; i++) {
-                if (i == w->cursor) {
+                if (i == work->cursor) {
 #ifdef VERSION_EU
-                    DrawSprite(w->x5[i] + 4, w->y5[i] - 3, NULL, w->tiles5[i], w->palette, NULL, 0, 40);
+                    DrawSprite(work->x5[i] + 4, work->y5[i] - 3, NULL, work->tiles5[i], work->palette, NULL, 0, 40);
 #else
-                    DrawTextSlots(w->x5[i] + 22, w->y5[i] - 5, w->textSlots[i], w->palette, 40, w->textSlotCounts[i]);
-                    DrawTextSlots(w->x5[i] + 4, w->y5[i] + 13, w->textSlots[i + 3], w->palette, 40, w->textSlotCounts[i + 3]);
+                    DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
+                    DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
-                    DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2D8[i], w->unk_000[i], w->unk_000[5], NULL, 0, 50);
+                    DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2D8[i], work->unk_000[i], work->unk_000[5], NULL, 0, 50);
                 } else {
-                    if (w->unk_000[i] != NULL) {
+                    if (work->unk_000[i] != NULL) {
 #ifdef VERSION_EU
-                        DrawSprite(w->x5[i] + 2, w->y5[i] - 1, NULL, w->tiles5[i], w->palette2, NULL, 0, 40);
+                        DrawSprite(work->x5[i] + 2, work->y5[i] - 1, NULL, work->tiles5[i], work->palette2, NULL, 0, 40);
 #else
-                        DrawTextSlots(w->x5[i] + 20, w->y5[i] - 3, w->textSlots[i], w->palette2, 40, w->textSlotCounts[i]);
-                        DrawTextSlots(w->x5[i] + 2, w->y5[i] + 15, w->textSlots[i + 3], w->palette2, 40, w->textSlotCounts[i + 3]);
+                        DrawTextSlots(work->x5[i] + 20, work->y5[i] - 3, work->textSlots[i], work->palette2, 40, work->textSlotCounts[i]);
+                        DrawTextSlots(work->x5[i] + 2, work->y5[i] + 15, work->textSlots[i + 3], work->palette2, 40, work->textSlotCounts[i + 3]);
 #endif
 #ifdef VERSION_EU
                         if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                            DrawSprite(w->x4[i], w->y4[i], gUnk_09EEA2BC[i], w->unk_000[i], w->unk_000[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2BC[i], work->unk_000[i], work->unk_000[4], NULL, 0, 50);
 #ifdef VERSION_EU
                         } else {
-                            DrawSprite(w->x4[i], w->y4[i], gUnkEu_09F7626C[i], w->unk_000[i], w->unk_000[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gUnkEu_09F7626C[i], work->unk_000[i], work->unk_000[4], NULL, 0, 50);
                         }
 #endif
                     }
                 }
             }
 
-            DrawSprite(w->x3, w->y3, w->gfx2, w->tiles, w->palette3, NULL, 0, 40);
+            DrawSprite(work->x3, work->y3, work->gfx2, work->tiles, work->palette3, NULL, 0, 40);
             break;
         case 3:
 #ifdef VERSION_EU
-            DrawSprite(w->x5[w->cursor] + 2, w->y5[w->cursor] - 1, NULL, w->tiles5[w->cursor], w->palette, NULL, 0, 40);
+            DrawSprite(work->x5[work->cursor] + 2, work->y5[work->cursor] - 1, NULL, work->tiles5[work->cursor], work->palette, NULL, 0, 40);
 #else
-            DrawTextSlots(w->x5[w->cursor] + 22, w->y5[w->cursor] - 5, w->textSlots[w->cursor], w->palette, 40, w->textSlotCounts[w->cursor]);
-            DrawTextSlots(w->x5[w->cursor] + 4, w->y5[w->cursor] + 13, w->textSlots[w->cursor + 3], w->palette, 40, w->textSlotCounts[w->cursor + 3]);
+            DrawTextSlots(work->x5[work->cursor] + 22, work->y5[work->cursor] - 5, work->textSlots[work->cursor], work->palette, 40, work->textSlotCounts[work->cursor]);
+            DrawTextSlots(work->x5[work->cursor] + 4, work->y5[work->cursor] + 13, work->textSlots[work->cursor + 3], work->palette, 40, work->textSlotCounts[work->cursor + 3]);
 #endif
-            DrawSprite(w->x4[w->cursor], w->y4[w->cursor], NULL, w->unk_000[w->cursor], w->unk_000[5], NULL, 0, 50);
-            DrawSprite(w->x6, 0,
+            DrawSprite(work->x4[work->cursor], work->y4[work->cursor], NULL, work->unk_000[work->cursor], work->unk_000[5], NULL, 0, 50);
+            DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
-                       w->unk_000[6], w->unk_000[7], NULL, 0, 50);
-            DrawSprite(w->x, w->y >> 8, gUnk_09EEA1EC[0], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(w->x2, w->y2 >> 8, gUnk_09EEA1EC[1], w->tiles2, w->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+                       work->unk_000[6], work->unk_000[7], NULL, 0, 50);
+            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->unk_000[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         }
 
 #ifdef VERSION_JP
-        if (w->blinkOn != 0) {
-            DrawSprite(192, 82, gUnk_09EEA19C[0], w->tiles3, w->palette4, NULL, 0, 10);
+        if (work->blinkOn != 0) {
+            DrawSprite(192, 82, gUnk_09EEA19C[0], work->tiles3, work->palette4, NULL, 0, 10);
         }
 #endif
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 17, w->unk_000[6], w->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->levelDigits, 0);
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 111, w->unk_000[6], w->unk_000[7],
+                       work->levelDigits, 0);
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->maxHpDigits, 1);
-            DrawLevelUpStatDigits(w->statsOffsetX + 206, 132, w->unk_000[6], w->unk_000[7],
+                       work->maxHpDigits, 1);
+            DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->cpDigits, 2);
+                       work->cpDigits, 2);
         } else {
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 17, w->unk_000[6], w->unk_000[7],
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->levelDigits, 0);
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 106, w->unk_000[6], w->unk_000[7],
+                       work->levelDigits, 0);
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->maxHpDigits, 1);
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 122, w->unk_000[6], w->unk_000[7],
+                       work->maxHpDigits, 1);
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->apDigits, 4);
-            DrawLevelUpStatDigits(w->statsOffsetX + 214, 137, w->unk_000[6], w->unk_000[7],
+                       work->apDigits, 4);
+            DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->unk_000[6], work->unk_000[7],
 #ifdef VERSION_EU
                        gUnk_09EEA1BC[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
-                       w->dpDigits, 3);
+                       work->dpDigits, 3);
         }
     }
 
-    DrawSprite(w->x7 >> 8, w->y6 >> 8, w->gfx, w->tiles4, w->palette5, NULL, SPRITE_PRIORITY(1), 40);
-    TaskPoolDraw(&w->pool);
+    DrawSprite(work->x7 >> 8, work->y6 >> 8, work->gfx, work->tiles4, work->palette5, NULL, SPRITE_PRIORITY(1), 40);
+    TaskPoolDraw(&work->pool);
 }
 
-void Level_Up_3(LevelUpWork* w) {
+void Level_Up_3(LevelUpWork* work) {
 #ifdef VERSION_EU
-    if (w->tiles5[0] != NULL) {
-        ReleaseObjTiles(w->tiles5[0]);
+    if (work->tiles5[0] != NULL) {
+        ReleaseObjTiles(work->tiles5[0]);
     }
 
-    if (w->tiles5[1] != NULL) {
-        ReleaseObjTiles(w->tiles5[1]);
+    if (work->tiles5[1] != NULL) {
+        ReleaseObjTiles(work->tiles5[1]);
     }
 
-    if (w->tiles5[2] != NULL) {
-        ReleaseObjTiles(w->tiles5[2]);
+    if (work->tiles5[2] != NULL) {
+        ReleaseObjTiles(work->tiles5[2]);
     }
 #else
-    FreeTextSlots(w->textSlots[0], 36);
-    FreeTextSlots(w->textSlots[1], 36);
-    FreeTextSlots(w->textSlots[2], 36);
-    FreeTextSlots(w->textSlots[3], 36);
-    FreeTextSlots(w->textSlots[4], 36);
-    FreeTextSlots(w->textSlots[5], 36);
+    FreeTextSlots(work->textSlots[0], 36);
+    FreeTextSlots(work->textSlots[1], 36);
+    FreeTextSlots(work->textSlots[2], 36);
+    FreeTextSlots(work->textSlots[3], 36);
+    FreeTextSlots(work->textSlots[4], 36);
+    FreeTextSlots(work->textSlots[5], 36);
 #endif
 
-    if (w->unk_000[6] != NULL) {
-        ReleaseObjTiles(w->unk_000[6]);
+    if (work->unk_000[6] != NULL) {
+        ReleaseObjTiles(work->unk_000[6]);
     }
 
-    if (w->unk_000[7] != NULL) {
-        ReleaseObjPalette(w->unk_000[7]);
+    if (work->unk_000[7] != NULL) {
+        ReleaseObjPalette(work->unk_000[7]);
     }
 
-    if (w->unk_000[0] != NULL) {
-        ReleaseObjTiles(w->unk_000[0]);
+    if (work->unk_000[0] != NULL) {
+        ReleaseObjTiles(work->unk_000[0]);
     }
 
-    if (w->unk_000[1] != NULL) {
-        ReleaseObjTiles(w->unk_000[1]);
+    if (work->unk_000[1] != NULL) {
+        ReleaseObjTiles(work->unk_000[1]);
     }
 
-    if (w->unk_000[2] != NULL) {
-        ReleaseObjTiles(w->unk_000[2]);
+    if (work->unk_000[2] != NULL) {
+        ReleaseObjTiles(work->unk_000[2]);
     }
 
-    if (w->unk_000[4] != NULL) {
-        ReleaseObjPalette(w->unk_000[4]);
+    if (work->unk_000[4] != NULL) {
+        ReleaseObjPalette(work->unk_000[4]);
     }
 
-    if (w->unk_000[5] != NULL) {
-        ReleaseObjPalette(w->unk_000[5]);
+    if (work->unk_000[5] != NULL) {
+        ReleaseObjPalette(work->unk_000[5]);
     }
 
-    if (w->palette != NULL) {
-        ReleaseObjPalette(w->palette);
+    if (work->palette != NULL) {
+        ReleaseObjPalette(work->palette);
     }
 
-    if (w->palette2 != NULL) {
-        ReleaseObjPalette(w->palette2);
+    if (work->palette2 != NULL) {
+        ReleaseObjPalette(work->palette2);
     }
 
-    if (w->tiles != NULL) {
-        ReleaseObjTiles(w->tiles);
+    if (work->tiles != NULL) {
+        ReleaseObjTiles(work->tiles);
     }
 
-    if (w->palette3 != NULL) {
-        ReleaseObjPalette(w->palette3);
+    if (work->palette3 != NULL) {
+        ReleaseObjPalette(work->palette3);
     }
 
-    if (w->tiles2 != NULL) {
-        ReleaseObjTiles(w->tiles2);
+    if (work->tiles2 != NULL) {
+        ReleaseObjTiles(work->tiles2);
     }
 
-    if (w->tiles3 != NULL) {
-        ReleaseObjTiles(w->tiles3);
+    if (work->tiles3 != NULL) {
+        ReleaseObjTiles(work->tiles3);
     }
 
-    if (w->palette4 != NULL) {
-        ReleaseObjPalette(w->palette4);
+    if (work->palette4 != NULL) {
+        ReleaseObjPalette(work->palette4);
     }
 
-    if (w->tiles4 != NULL) {
-        ReleaseObjTiles(w->tiles4);
+    if (work->tiles4 != NULL) {
+        ReleaseObjTiles(work->tiles4);
     }
 
-    if (w->palette5 != NULL) {
-        ReleaseObjPalette(w->palette5);
+    if (work->palette5 != NULL) {
+        ReleaseObjPalette(work->palette5);
     }
 
-    TaskPoolDestroy(&w->pool);
+    TaskPoolDestroy(&work->pool);
 }
 
 void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind) {
@@ -1426,144 +1426,144 @@ void LevelUpSplitDigits4(u16 n, u16* out) {
     out[3] = d0;
 }
 
-u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
+u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
     enum { tileSize = 0xC80, mapSize = 0x500 };
 #else
     enum { tileSize = 0xD80, mapSize = 0x800 };
 #endif
 
-    if (w->loaded[0] == 0) {
-        w->timer++;
+    if (work->loaded[0] == 0) {
+        work->timer++;
 
-        if (w->timer > 7) {
+        if (work->timer > 7) {
 #ifdef VERSION_EU
-            w->tiles5[0] = AllocSpriteFrameTiles(0x500);
-            w->tiles5[1] = AllocSpriteFrameTiles(0x500);
-            w->tiles5[2] = AllocSpriteFrameTiles(0x500);
+            work->tiles5[0] = AllocSpriteFrameTiles(0x500);
+            work->tiles5[1] = AllocSpriteFrameTiles(0x500);
+            work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
 
             if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA2BC[0], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA2BC[1], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA2BC[2], gUnk_090950F4);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
                 }
 #endif
 
-                w->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
-                w->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->unk_000[4] = LoadObjPalette(gUnk_09613F18, 32);
+                work->unk_000[5] = LoadObjPalette(gUnk_09613F38, 32);
             } else {
-                w->unk_000[0] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[1] = AllocSpriteFrameTiles(tileSize);
-                w->unk_000[2] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[0] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[1] = AllocSpriteFrameTiles(tileSize);
+                work->unk_000[2] = AllocSpriteFrameTiles(tileSize);
 
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnk_09EEA29C[0], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnk_09EEA29C[1], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnk_09EEA29C[2], gUnk_09091D36);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(w->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(w->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(w->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->unk_000[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
                 }
 #endif
 
-                w->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                w->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->unk_000[4] = LoadObjPalette(gUnk_09613EB8, 32);
+                work->unk_000[5] = LoadObjPalette(gUnk_09613ED8, 32);
             }
 
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
             case LANGUAGE_FRENCH:
-                w->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
                 break;
             case LANGUAGE_GERMAN:
-                w->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
                 break;
             case LANGUAGE_ITALIAN:
-                w->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
                 break;
             case LANGUAGE_SPANISH:
-                w->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
                 break;
             default:
-                w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
                 break;
             }
 #else
-            w->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+            work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
-            w->palette4 = LoadObjPalette(gCard00Palette, 32);
-            FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[4])->index + 16, 1);
-            FadeSetPaletteExcluded(((ObjPalette*)w->unk_000[5])->index + 16, 1);
-            FadeSetPaletteExcluded(w->palette4->index + 16, 1);
-            w->tiles = AllocObjTiles(0x3C0, NULL);
-            w->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
-            FadeSetPaletteExcluded(w->palette3->index + 16, 1);
-            SetObjTileSource(w->tiles, gUnk_093F4578);
-            AnimInit(&w->anim, gUnk_09EF1170, gUnk_09EF1150);
-            AnimStart(&w->anim, 2, ANIM_FLAG_LOOP);
-            w->gfx2 = AnimGetGfx(&w->anim);
-            w->loaded[0] = 1;
-            w->timer = 0;
+            work->palette4 = LoadObjPalette(gCard00Palette, 32);
+            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[4])->index + 16, 1);
+            FadeSetPaletteExcluded(((ObjPalette*)work->unk_000[5])->index + 16, 1);
+            FadeSetPaletteExcluded(work->palette4->index + 16, 1);
+            work->tiles = AllocObjTiles(0x3C0, NULL);
+            work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
+            FadeSetPaletteExcluded(work->palette3->index + 16, 1);
+            SetObjTileSource(work->tiles, gUnk_093F4578);
+            AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+            AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
+            work->gfx2 = AnimGetGfx(&work->anim);
+            work->loaded[0] = 1;
+            work->timer = 0;
             FadeToAmount(FADE_MODE_BLACK, 8, 16);
         }
 
         return 1;
     }
 
-    w->gfx = AnimUpdate(&w->anim2);
+    work->gfx = AnimUpdate(&work->anim2);
 
     {
-        s32 x0 = w->x4[0] << 8;
-        s32 x1 = w->x4[1] << 8;
-        s32 x2 = w->x4[2] << 8;
-        ApproachValue(&x0, 0x1000, w->optionSteps[0]);
+        s32 x0 = work->x4[0] << 8;
+        s32 x1 = work->x4[1] << 8;
+        s32 x2 = work->x4[2] << 8;
+        ApproachValue(&x0, 0x1000, work->optionSteps[0]);
 
-        if (w->optionSteps[0] > 0) {
-            w->optionSteps[0]--;
+        if (work->optionSteps[0] > 0) {
+            work->optionSteps[0]--;
         }
 
-        if (w->optionSteps[0] <= 6) {
-            ApproachValue(&x1, 0x1000, w->optionSteps[1]);
+        if (work->optionSteps[0] <= 6) {
+            ApproachValue(&x1, 0x1000, work->optionSteps[1]);
 
-            if (w->optionSteps[1] > 0) {
-                w->optionSteps[1]--;
+            if (work->optionSteps[1] > 0) {
+                work->optionSteps[1]--;
             }
         }
 
-        if (w->optionSteps[1] <= 6) {
-            ApproachValue(&x2, 0x1000, w->optionSteps[2]);
+        if (work->optionSteps[1] <= 6) {
+            ApproachValue(&x2, 0x1000, work->optionSteps[2]);
 
-            if (w->optionSteps[2] > 0) {
-                w->optionSteps[2]--;
+            if (work->optionSteps[2] > 0) {
+                work->optionSteps[2]--;
             }
         }
 
-        w->x4[0] = x0 >> 8;
-        w->x4[1] = x1 >> 8;
-        w->x4[2] = x2 >> 8;
+        work->x4[0] = x0 >> 8;
+        work->x4[1] = x1 >> 8;
+        work->x4[2] = x2 >> 8;
     }
 
-    if (w->optionSteps[2] == 0) {
+    if (work->optionSteps[2] == 0) {
         u8 i;
 
         if (gBtlWork->battleId == 151) {
@@ -1572,285 +1572,285 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
             LoadBgMap(1, gUnk_095112B8, mapSize);
         }
 
-        w->state = 1;
+        work->state = 1;
 
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[0]);
-                w->textSlotCounts[3] = 0;
+                work->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[0]);
+                work->textSlotCounts[3] = 0;
 #endif
-                w->optionEnabled[0] = 0;
+                work->optionEnabled[0] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][0], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][0], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[0], w->textSlots[0]);
-                w->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], w->textSlots[3]);
+                work->textSlotCounts[0] = LoadTextSlots(gLevelUpSoraTexts[0], work->textSlots[0]);
+                work->textSlotCounts[3] = LoadTextSlots(gLevelUpSoraTexts[3], work->textSlots[3]);
 #endif
             }
 
             if (gGameState.progression.cp > 1899) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                w->textSlotCounts[4] = 0;
+                work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                work->textSlotCounts[4] = 0;
 #endif
-                w->optionEnabled[1] = 0;
+                work->optionEnabled[1] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][1], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][1], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[1], w->textSlots[1]);
-                w->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], w->textSlots[4]);
+                work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[1], work->textSlots[1]);
+                work->textSlotCounts[4] = LoadTextSlots(gLevelUpSoraTexts[4], work->textSlots[4]);
 #endif
             }
 
             if (gGameState.progression.levelMilestone > 10) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                w->textSlotCounts[5] = 0;
+                work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                work->textSlotCounts[5] = 0;
 #endif
-                w->optionEnabled[2] = 0;
+                work->optionEnabled[2] = 0;
             } else if (!IsLevelUpStockUnlocked()) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                w->textSlotCounts[5] = 0;
+                work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                work->textSlotCounts[5] = 0;
 #endif
-                w->optionEnabled[2] = 0;
+                work->optionEnabled[2] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][2], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][2], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[2], w->textSlots[2]);
-                w->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], w->textSlots[5]);
+                work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[2], work->textSlots[2]);
+                work->textSlotCounts[5] = LoadTextSlots(gLevelUpSoraTexts[5], work->textSlots[5]);
 #endif
             }
 
-            w->palette = LoadObjPalette(gUnk_09613F98, 32);
-            w->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
+            work->palette = LoadObjPalette(gUnk_09613F98, 32);
+            work->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
         } else {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[6], w->textSlots[0]);
-                w->textSlotCounts[3] = 0;
+                work->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[6], work->textSlots[0]);
+                work->textSlotCounts[3] = 0;
 #endif
-                w->optionEnabled[0] = 0;
+                work->optionEnabled[0] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][3], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[0], gLevelUpOptionSpritesByLanguage[gLanguage][3], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[0], w->textSlots[0]);
-                w->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], w->textSlots[3]);
+                work->textSlotCounts[0] = LoadTextSlots(gLevelUpRikuTexts[0], work->textSlots[0]);
+                work->textSlotCounts[3] = LoadTextSlots(gLevelUpRikuTexts[3], work->textSlots[3]);
 #endif
             }
 
             if (gGameState.progression.ap > 29) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                w->textSlotCounts[4] = 0;
+                work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                work->textSlotCounts[4] = 0;
 #endif
-                w->optionEnabled[1] = 0;
+                work->optionEnabled[1] = 0;
             } else if (!(u8)IsLevelUpApUnlocked()) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[1]);
-                w->textSlotCounts[4] = 0;
+                work->textSlotCounts[1] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[1]);
+                work->textSlotCounts[4] = 0;
 #endif
-                w->optionEnabled[1] = 0;
+                work->optionEnabled[1] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][4], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][4], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[1] = LoadTextSlots(gLevelUpRikuTexts[1], w->textSlots[1]);
-                w->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], w->textSlots[4]);
+                work->textSlotCounts[1] = LoadTextSlots(gLevelUpRikuTexts[1], work->textSlots[1]);
+                work->textSlotCounts[4] = LoadTextSlots(gLevelUpRikuTexts[4], work->textSlots[4]);
 #endif
             }
 
             if (gGameState.progression.dp > 299) {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], w->textSlots[2]);
-                w->textSlotCounts[5] = 0;
+                work->textSlotCounts[2] = LoadTextSlots(gLevelUpSoraTexts[6], work->textSlots[2]);
+                work->textSlotCounts[5] = 0;
 #endif
-                w->optionEnabled[2] = 0;
+                work->optionEnabled[2] = 0;
             } else {
 #ifdef VERSION_EU
-                UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][5], gLevelUpOptionTilesByLanguage[gLanguage]);
+                UpdateSpriteFrameTiles(work->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][5], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
-                w->textSlotCounts[2] = LoadTextSlots(gLevelUpRikuTexts[2], w->textSlots[2]);
-                w->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], w->textSlots[5]);
+                work->textSlotCounts[2] = LoadTextSlots(gLevelUpRikuTexts[2], work->textSlots[2]);
+                work->textSlotCounts[5] = LoadTextSlots(gLevelUpRikuTexts[5], work->textSlots[5]);
 #endif
             }
 
-            w->palette = LoadObjPalette(gUnk_09613FD8, 32);
-            w->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
+            work->palette = LoadObjPalette(gUnk_09613FD8, 32);
+            work->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
         }
 
-        FadeSetPaletteExcluded(w->palette->index + 16, 1);
-        FadeSetPaletteExcluded(w->palette2->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 
         for (i = 0; i < 3; i++) {
-            if (w->optionEnabled[i] == 1) {
+            if (work->optionEnabled[i] == 1) {
                 break;
             }
         }
 
-        w->cursor = i;
-        w->y3 = sLevelUpCursorY[w->cursor];
+        work->cursor = i;
+        work->y3 = sLevelUpCursorY[work->cursor];
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpSelect);
 
         if (gBtlWork->battleId == 151) {
-            LoadBgMap(0, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
-            LoadBgMap(1, gLevelUpOptionBgMaps[w->cursor], 0x800);
+            LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
         }
     }
 
-    TaskPoolUpdate(&w->pool);
+    TaskPoolUpdate(&work->pool);
     return 1;
 }
 
-u8 UpdateLevelUpNextSlideOut(LevelUpWork* w, void* a) {
+u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a) {
     s32 x;
     s32 y;
     s8 n;
 
-    x = w->x4[w->cursor] << 8;
-    y = w->x5[w->cursor] << 8;
-    ApproachValue(&x, -0x8000, w->optionSteps[w->cursor]);
-    ApproachValue(&y, -0xF800, w->optionSteps[w->cursor]);
-    w->x4[w->cursor] = x >> 8;
-    w->x5[w->cursor] = y >> 8;
-    w->optionSteps[w->cursor]--;
+    x = work->x4[work->cursor] << 8;
+    y = work->x5[work->cursor] << 8;
+    ApproachValue(&x, -0x8000, work->optionSteps[work->cursor]);
+    ApproachValue(&y, -0xF800, work->optionSteps[work->cursor]);
+    work->x4[work->cursor] = x >> 8;
+    work->x5[work->cursor] = y >> 8;
+    work->optionSteps[work->cursor]--;
 
-    if (w->slideSteps > 0) {
-        w->slideSteps--;
+    if (work->slideSteps > 0) {
+        work->slideSteps--;
     }
 
-    n = w->slideSteps;
+    n = work->slideSteps;
 
     if (n == 0) {
-        if (w->barSteps != 0) {
-            ApproachValue(&w->y, 0, w->barSteps);
-            ApproachValue(&w->y2, 0x9800, w->barSteps);
-            w->barSteps--;
+        if (work->barSteps != 0) {
+            ApproachValue(&work->y, 0, work->barSteps);
+            ApproachValue(&work->y2, 0x9800, work->barSteps);
+            work->barSteps--;
         } else {
-            if (w->unk_000[0] != NULL) {
-                ReleaseObjTiles(w->unk_000[0]);
+            if (work->unk_000[0] != NULL) {
+                ReleaseObjTiles(work->unk_000[0]);
             }
 
-            if (w->unk_000[1] != NULL) {
-                ReleaseObjTiles(w->unk_000[1]);
+            if (work->unk_000[1] != NULL) {
+                ReleaseObjTiles(work->unk_000[1]);
             }
 
-            if (w->unk_000[2] != NULL) {
-                ReleaseObjTiles(w->unk_000[2]);
+            if (work->unk_000[2] != NULL) {
+                ReleaseObjTiles(work->unk_000[2]);
             }
 
 #ifdef VERSION_EU
-            if (w->tiles5[0] != NULL) {
-                ReleaseObjTiles(w->tiles5[0]);
+            if (work->tiles5[0] != NULL) {
+                ReleaseObjTiles(work->tiles5[0]);
             }
 
-            if (w->tiles5[1] != NULL) {
-                ReleaseObjTiles(w->tiles5[1]);
+            if (work->tiles5[1] != NULL) {
+                ReleaseObjTiles(work->tiles5[1]);
             }
 
-            if (w->tiles5[2] != NULL) {
-                ReleaseObjTiles(w->tiles5[2]);
+            if (work->tiles5[2] != NULL) {
+                ReleaseObjTiles(work->tiles5[2]);
             }
 #endif
 
-            if (w->unk_000[4] != NULL) {
-                ReleaseObjPalette(w->unk_000[4]);
+            if (work->unk_000[4] != NULL) {
+                ReleaseObjPalette(work->unk_000[4]);
             }
 
-            if (w->unk_000[5] != NULL) {
-                ReleaseObjPalette(w->unk_000[5]);
+            if (work->unk_000[5] != NULL) {
+                ReleaseObjPalette(work->unk_000[5]);
             }
 
-            if (w->palette != NULL) {
-                ReleaseObjPalette(w->palette);
+            if (work->palette != NULL) {
+                ReleaseObjPalette(work->palette);
             }
 
-            if (w->palette2 != NULL) {
-                ReleaseObjPalette(w->palette2);
+            if (work->palette2 != NULL) {
+                ReleaseObjPalette(work->palette2);
             }
 
-            if (w->tiles != NULL) {
-                ReleaseObjTiles(w->tiles);
+            if (work->tiles != NULL) {
+                ReleaseObjTiles(work->tiles);
             }
 
-            if (w->palette3 != NULL) {
-                ReleaseObjPalette(w->palette3);
+            if (work->palette3 != NULL) {
+                ReleaseObjPalette(work->palette3);
             }
 
-            if (w->tiles3 != NULL) {
-                ReleaseObjTiles(w->tiles3);
+            if (work->tiles3 != NULL) {
+                ReleaseObjTiles(work->tiles3);
             }
 
-            if (w->palette4 != NULL) {
-                ReleaseObjPalette(w->palette4);
+            if (work->palette4 != NULL) {
+                ReleaseObjPalette(work->palette4);
             }
 
-            w->x4[0] = 0xFF80;
-            w->x4[1] = 0xFF80;
-            w->x4[2] = 0xFF80;
-            w->y4[0] = 16;
-            w->y4[1] = 64;
-            w->y4[2] = 112;
-            w->slideSteps = 24;
-            w->headerSteps = 16;
-            w->optionSteps[0] = 16;
-            w->optionSteps[1] = 16;
-            w->optionSteps[2] = 16;
-            w->x5[0] = 8;
-            w->x5[1] = 8;
-            w->x5[2] = 8;
-            w->y5[0] = 31;
-            w->y5[1] = 79;
-            w->y5[2] = 127;
-            w->x3 = 132;
-            w->y3 = sLevelUpCursorY[0];
+            work->x4[0] = 0xFF80;
+            work->x4[1] = 0xFF80;
+            work->x4[2] = 0xFF80;
+            work->y4[0] = 16;
+            work->y4[1] = 64;
+            work->y4[2] = 112;
+            work->slideSteps = 24;
+            work->headerSteps = 16;
+            work->optionSteps[0] = 16;
+            work->optionSteps[1] = 16;
+            work->optionSteps[2] = 16;
+            work->x5[0] = 8;
+            work->x5[1] = 8;
+            work->x5[2] = 8;
+            work->y5[0] = 31;
+            work->y5[1] = 79;
+            work->y5[2] = 127;
+            work->x3 = 132;
+            work->y3 = sLevelUpCursorY[0];
 
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                SetObjTileSource(w->tiles4, gSor1ll51Tiles);
-                AnimInit(&w->anim2, gSor1ll51Anims, gSor1ll51Frames);
-                AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
+                SetObjTileSource(work->tiles4, gSor1ll51Tiles);
+                AnimInit(&work->anim2, gSor1ll51Anims, gSor1ll51Frames);
+                AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
             } else {
-                SetObjTileSource(w->tiles4, gRikuBt00Tiles);
-                AnimInit(&w->anim2, gRikuBt00Anims, gRikuBt00Frames);
-                AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
+                SetObjTileSource(work->tiles4, gRikuBt00Tiles);
+                AnimInit(&work->anim2, gRikuBt00Anims, gRikuBt00Frames);
+                AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
             }
 
-            w->loaded[0] = 0;
-            w->state = 0;
-            w->effectShown = 0;
-            w->timer = 0;
-            w->applied = 0;
+            work->loaded[0] = 0;
+            work->state = 0;
+            work->effectShown = 0;
+            work->timer = 0;
+            work->applied = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpNextSlideIn);
         }
     }
 
-    w->optionEnabled[0] = 1;
-    w->optionEnabled[1] = 1;
-    w->optionEnabled[2] = 1;
-    w->gfx = AnimUpdate(&w->anim2);
-    TaskPoolUpdate(&w->pool);
+    work->optionEnabled[0] = 1;
+    work->optionEnabled[1] = 1;
+    work->optionEnabled[2] = 1;
+    work->gfx = AnimUpdate(&work->anim2);
+    TaskPoolUpdate(&work->pool);
     return 1;
 }
 

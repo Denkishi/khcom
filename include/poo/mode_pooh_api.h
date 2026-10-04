@@ -18,8 +18,8 @@ void OpenPoohModeMessage(u16 a);
 u16 SpawnPooPrizes(u8 kind, u8 count, s32 x, s32 y, s32 z);
 void SetPooMapBeeVisible(u8 a);
 u8 IsPooMapBeeVisible();
-void SetPoohDir5Right(struct PoohWork* w);
-void SetPoohAnimation(struct PoohWork* w, u32 anim);
+void SetPoohDir5Right(struct PoohWork* work);
+void SetPoohAnimation(struct PoohWork* work, u32 anim);
 u8 IsWithinPoohRadius(u16 x, u16 y, u16 px, u16 py);
 
 #endif

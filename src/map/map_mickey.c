@@ -19,40 +19,40 @@
 #include "types.h"
 #include <stddef.h>
 
-void MapMickeyCheckTalk(MapMickeyWork* w) {
-    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
+void MapMickeyCheckTalk(MapMickeyWork* work) {
+    if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         switch (gMapFloorState.progress) {
         case 20:
-            CreateCardMessageTask(&w->tasks, 0, 0x3F);
+            CreateCardMessageTask(&work->tasks, 0, 0x3F);
             break;
         case 22:
-            CreateCardMessageTask(&w->tasks, 0, 0x3D);
+            CreateCardMessageTask(&work->tasks, 0, 0x3D);
             break;
         case 23:
         default:
-            CreateCardMessageTask(&w->tasks, 0, 0x3E);
+            CreateCardMessageTask(&work->tasks, 0, 0x3E);
             break;
         }
 
-        w->update = MapMickeyWaitMessage;
+        work->update = MapMickeyWaitMessage;
     }
 }
 
-void MapMickeyWaitMessage(MapMickeyWork* w) {
+void MapMickeyWaitMessage(MapMickeyWork* work) {
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
-        w->update = MapMickeyCheckTalk;
+        work->update = MapMickeyCheckTalk;
     }
 }
 
-void Task_MapMickey_0(MapMickeyWork* w) {
-    FldObj* e = &w->obj;
+void Task_MapMickey_0(MapMickeyWork* work) {
+    FldObj* e = &work->obj;
 
     e->fieldPosition.x = 0x1C800;
     e->fieldPosition.y = 0xE000;
-    w->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
+    work->spriteFlags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
     e->fieldPosition.z = 0;
     e->fieldPosition.ground = GetFldPosFloor(&e->fieldPosition);
     e->fieldPosition.z = e->fieldPosition.ground;
@@ -60,70 +60,70 @@ void Task_MapMickey_0(MapMickeyWork* w) {
     e->angle = 0xAD;
     e->height = 0x30;
     e->kind = 2;
-    w->visible = 1;
-    w->update = MapMickeyCheckTalk;
-    w->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
-    w->palette = LoadObjPalette(gMickeyPalette, 32);
-    AnimInit(&w->anim, gMickeyFl00Anims, gMickeyFl00Frames);
-    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-    ColliderInit(&w->collider, 4, 16, 48);
-    ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+    work->visible = 1;
+    work->update = MapMickeyCheckTalk;
+    work->tiles = AllocObjTiles(0x300, gMickeyFl00Tiles);
+    work->palette = LoadObjPalette(gMickeyPalette, 32);
+    AnimInit(&work->anim, gMickeyFl00Anims, gMickeyFl00Frames);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    ColliderInit(&work->collider, 4, 16, 48);
+    ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
     FldObjRegister(e);
-    TaskPoolInit(&w->tasks, 2);
-    TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
-    w->targeted = 0;
-    TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
+    TaskPoolInit(&work->tasks, 2);
+    TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
+    work->targeted = 0;
+    TaskPoolInit(&work->tasks2, 1);
+    TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
 }
 
-s32 Task_MapMickey_1(MapMickeyWork* w) {
+s32 Task_MapMickey_1(MapMickeyWork* work) {
     if ((u8)IsMapInterrupted()) {
-        w->visible = 0;
+        work->visible = 0;
     } else {
-        w->visible = 1;
-        w->targeted = IsFldObjTalkTarget(&w->obj);
-        TaskPoolUpdate(&w->tasks);
-        TaskPoolUpdate(&w->tasks2);
-        AnimUpdate(&w->anim);
+        work->visible = 1;
+        work->targeted = IsFldObjTalkTarget(&work->obj);
+        TaskPoolUpdate(&work->tasks);
+        TaskPoolUpdate(&work->tasks2);
+        AnimUpdate(&work->anim);
 
-        if (w->update != NULL) {
-            w->update(w);
+        if (work->update != NULL) {
+            work->update(work);
         }
     }
 
     return 1;
 }
 
-void Task_MapMickey_2(MapMickeyWork* w) {
-    FldPos* p = &w->obj.fieldPosition;
+void Task_MapMickey_2(MapMickeyWork* work) {
+    FldPos* p = &work->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
     s16 y;
 
-    if (w->visible) {
+    if (work->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, w->spriteFlags, v);
-        w->obj.shadowZ = p->ground;
-        w->obj.shadowPriority = v + 1;
-        TaskPoolDraw(&w->tasks);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, work->spriteFlags, v);
+        work->obj.shadowZ = p->ground;
+        work->obj.shadowPriority = v + 1;
+        TaskPoolDraw(&work->tasks);
 
-        if (w->targeted) {
-            TaskPoolDraw(&w->tasks2);
+        if (work->targeted) {
+            TaskPoolDraw(&work->tasks2);
         }
     }
 }
 
-void Task_MapMickey_3(MapMickeyWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    ColliderUnregister(&w->collider);
-    FldObjUnregister(&w->obj);
-    TaskPoolDestroy(&w->tasks);
-    TaskPoolDestroy(&w->tasks2);
+void Task_MapMickey_3(MapMickeyWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ColliderUnregister(&work->collider);
+    FldObjUnregister(&work->obj);
+    TaskPoolDestroy(&work->tasks);
+    TaskPoolDestroy(&work->tasks2);
 }
 
 TaskDesc gTaskDescMapMickey = {

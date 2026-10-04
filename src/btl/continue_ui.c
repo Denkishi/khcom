@@ -53,11 +53,11 @@ void LoadContinueCursorPalette(s32 a) {
 #define MSG_CONT_X 0xBC00
 #endif
 
-void ContinueSora_0(ContinueWork* p) {
+void ContinueSora_0(ContinueWork* work) {
     u8 i;
 
     SetBgMode1();
-    p->cursor = 0;
+    work->cursor = 0;
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
     SetupBg(2, 2, 28, 10);
@@ -74,24 +74,24 @@ void ContinueSora_0(ContinueWork* p) {
     BgAnimInit(2, 0x8000, 128);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
-    p->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
-    p->palette3 = LoadObjPalette(gUnk_096146F8, 32);
-    LoadContinueCursorPalette(p->cursor);
-    p->tiles = AllocObjTiles(512, NULL);
+    work->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
+    work->palette3 = LoadObjPalette(gUnk_096146F8, 32);
+    LoadContinueCursorPalette(work->cursor);
+    work->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
-    p->palette = LoadObjPalette(gUnk_09614658, 160);
+    work->palette = LoadObjPalette(gUnk_09614658, 160);
     PopPaletteEffect();
-    SetObjTileSource(p->tiles, gUnk_090A6B26);
-    AnimInit(&p->anim, gUnk_09EEB108, gUnk_09EEB0C4);
-    AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
-    p->tiles2 = AllocObjTiles(1024, NULL);
-    p->palette2 = LoadObjPalette(gSoraPalette, 32);
-    SetObjTileSource(p->tiles2, gSoraContinueTiles);
-    AnimInit(&p->anim2, gSoraContinueAnims, gSoraContinueFrames);
-    AnimStart(&p->anim2, 0, ANIM_FLAG_LOOP);
-    p->unk_58 = -2048;
-    p->unk_5C = 0xA000;
-    p->steps = 16;
+    SetObjTileSource(work->tiles, gUnk_090A6B26);
+    AnimInit(&work->anim, gUnk_09EEB108, gUnk_09EEB0C4);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->tiles2 = AllocObjTiles(1024, NULL);
+    work->palette2 = LoadObjPalette(gSoraPalette, 32);
+    SetObjTileSource(work->tiles2, gSoraContinueTiles);
+    AnimInit(&work->anim2, gSoraContinueAnims, gSoraContinueFrames);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
+    work->unk_58 = -2048;
+    work->unk_5C = 0xA000;
+    work->steps = 16;
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -100,34 +100,34 @@ void ContinueSora_0(ContinueWork* p) {
     case LANGUAGE_SPANISH:
     case 5:
     case 6:
-        p->x = 0xBC00;
+        work->x = 0xBC00;
         break;
     case LANGUAGE_GERMAN:
     case LANGUAGE_ITALIAN:
-        p->x = 0xC000;
+        work->x = 0xC000;
         break;
     }
 #else
-    p->x = MSG_CONT_X;
+    work->x = MSG_CONT_X;
 #endif
-    p->y = 0x4000;
-    p->unk_64 = 0;
-    p->blendAlpha = 0;
+    work->y = 0x4000;
+    work->unk_64 = 0;
+    work->blendAlpha = 0;
     FadeStartIn(FADE_MODE_WHITE, 24);
 
     for (i = 0; i < 5; i++) {
-        FadeSetPaletteExcluded(p->palette->index + i, 0);
+        FadeSetPaletteExcluded(work->palette->index + i, 0);
     }
 
-    p->blendAlpha = 0x1000;
-    p->state = 0;
+    work->blendAlpha = 0x1000;
+    work->state = 0;
 }
 
-void ContinueRiku_0(ContinueWork* p) {
+void ContinueRiku_0(ContinueWork* work) {
     u8 i;
 
     SetBgMode1();
-    p->cursor = 0;
+    work->cursor = 0;
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
     SetupBg(2, 2, 28, 10);
@@ -144,24 +144,24 @@ void ContinueRiku_0(ContinueWork* p) {
     BgAnimInit(2, 0x8000, 128);
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
-    p->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
-    p->palette3 = LoadObjPalette(gUnk_096146F8, 32);
-    LoadContinueCursorPalette(p->cursor);
-    p->tiles = AllocObjTiles(512, NULL);
+    work->tiles3 = LoadObjTiles(gUnk_090A7D9A, 192);
+    work->palette3 = LoadObjPalette(gUnk_096146F8, 32);
+    LoadContinueCursorPalette(work->cursor);
+    work->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
-    p->palette = LoadObjPalette(gUnk_09614658, 160);
+    work->palette = LoadObjPalette(gUnk_09614658, 160);
     PopPaletteEffect();
-    SetObjTileSource(p->tiles, gUnk_090A6B26);
-    AnimInit(&p->anim, gUnk_09EEB108, gUnk_09EEB0C4);
-    AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
-    p->tiles2 = AllocObjTiles(1024, NULL);
-    p->palette2 = LoadObjPalette(gRikuPalette, 32);
-    SetObjTileSource(p->tiles2, gRikuContinueTiles);
-    AnimInit(&p->anim2, gRikuContinueAnims, gRikuContinueFrames);
-    AnimStart(&p->anim2, 0, ANIM_FLAG_LOOP);
-    p->unk_58 = -2048;
-    p->unk_5C = 0xA000;
-    p->steps = 16;
+    SetObjTileSource(work->tiles, gUnk_090A6B26);
+    AnimInit(&work->anim, gUnk_09EEB108, gUnk_09EEB0C4);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->tiles2 = AllocObjTiles(1024, NULL);
+    work->palette2 = LoadObjPalette(gRikuPalette, 32);
+    SetObjTileSource(work->tiles2, gRikuContinueTiles);
+    AnimInit(&work->anim2, gRikuContinueAnims, gRikuContinueFrames);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
+    work->unk_58 = -2048;
+    work->unk_5C = 0xA000;
+    work->steps = 16;
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -170,73 +170,73 @@ void ContinueRiku_0(ContinueWork* p) {
     case LANGUAGE_SPANISH:
     case 5:
     case 6:
-        p->x = 0xBC00;
+        work->x = 0xBC00;
         break;
     case LANGUAGE_GERMAN:
     case LANGUAGE_ITALIAN:
-        p->x = 0xC000;
+        work->x = 0xC000;
         break;
     }
 #else
-    p->x = MSG_CONT_X;
+    work->x = MSG_CONT_X;
 #endif
-    p->y = 0x4000;
-    p->unk_64 = 0;
-    p->blendAlpha = 0;
+    work->y = 0x4000;
+    work->unk_64 = 0;
+    work->blendAlpha = 0;
     FadeStartIn(FADE_MODE_WHITE, 24);
 
     for (i = 0; i < 5; i++) {
-        FadeSetPaletteExcluded(p->palette->index + i, 0);
+        FadeSetPaletteExcluded(work->palette->index + i, 0);
     }
 
-    p->blendAlpha = 0x1000;
-    p->state = 0;
+    work->blendAlpha = 0x1000;
+    work->state = 0;
 }
 
-static s32 Continue_1(ContinueWork* p) {
+static s32 Continue_1(ContinueWork* work) {
     const s32* t;
 
     BgAnimUpdate();
-    p->gfx = AnimUpdate(&p->anim);
-    p->gfx2 = AnimUpdate(&p->anim2);
+    work->gfx = AnimUpdate(&work->anim);
+    work->gfx2 = AnimUpdate(&work->anim2);
     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3);
-    gBldAlpha = p->blendAlpha;
+    gBldAlpha = work->blendAlpha;
 
-    if (p->state == 0) {
+    if (work->state == 0) {
         if (!FadeIsActive()) {
-            p->state = 1;
+            work->state = 1;
         }
     }
 
-    if (p->state == 1) {
-        if (p->steps > 0) {
-            ApproachValue(&p->unk_58, 0, p->steps);
-            ApproachValue(&p->unk_5C, 0x9800, p->steps);
-            p->steps--;
+    if (work->state == 1) {
+        if (work->steps > 0) {
+            ApproachValue(&work->unk_58, 0, work->steps);
+            ApproachValue(&work->unk_5C, 0x9800, work->steps);
+            work->steps--;
         }
 
-        if (p->blendAlpha < 0x1010) {
-            p->blendAlpha++;
+        if (work->blendAlpha < 0x1010) {
+            work->blendAlpha++;
         } else {
-            p->blendAlpha = 0x1010;
+            work->blendAlpha = 0x1010;
         }
 
         if ((GetKeysPressed() & DPAD_UP) != 0) {
-            if (p->cursor == 1) {
-                p->cursor = 0;
+            if (work->cursor == 1) {
+                work->cursor = 0;
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
         if ((GetKeysPressed() & DPAD_DOWN) != 0) {
-            if (p->cursor == 0) {
-                p->cursor = 1;
+            if (work->cursor == 0) {
+                work->cursor = 1;
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
 
         if ((GetKeysHeld() & A_BUTTON) != 0) {
-            switch (p->cursor) {
+            switch (work->cursor) {
             case 0:
                 FadeStartOut(FADE_MODE_BLACK, 96);
                 break;
@@ -246,22 +246,22 @@ static s32 Continue_1(ContinueWork* p) {
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
-            p->state = 2;
-            p->steps = 16;
+            work->state = 2;
+            work->steps = 16;
         }
     }
 
-    if (p->state == 2) {
-        if (p->steps > 0) {
-            ApproachValue(&p->unk_58, -2048, p->steps);
-            ApproachValue(&p->unk_5C, 0xA000, p->steps);
-            p->steps--;
+    if (work->state == 2) {
+        if (work->steps > 0) {
+            ApproachValue(&work->unk_58, -2048, work->steps);
+            ApproachValue(&work->unk_5C, 0xA000, work->steps);
+            work->steps--;
         }
 
-        if (p->blendAlpha > 0x1000) {
-            p->blendAlpha--;
+        if (work->blendAlpha > 0x1000) {
+            work->blendAlpha--;
         } else {
-            p->blendAlpha = 0x1000;
+            work->blendAlpha = 0x1000;
         }
 
         if (!FadeIsActive()) {
@@ -269,32 +269,32 @@ static s32 Continue_1(ContinueWork* p) {
             DisableBg(2);
             LoadBgMap(0, gUnk_08125E24, 0x800);
             LoadBgMap(2, gUnk_08125E24, 0x800);
-            p->state = 3;
+            work->state = 3;
         }
     }
 
-    LoadContinueCursorPalette(p->cursor);
+    LoadContinueCursorPalette(work->cursor);
     t = sContinueCursorY;
-    p->y += (t[p->cursor] - p->y) >> 3;
-    p->unk_64 += 4;
+    work->y += (t[work->cursor] - work->y) >> 3;
+    work->unk_64 += 4;
 }
 
-static void Continue_2(ContinueWork* p) {
-    DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, SPRITE_FLAG_BLEND, 100);
-    DrawSprite(120, 120, p->gfx2, p->tiles2, p->palette2, NULL, 0, 100);
+static void Continue_2(ContinueWork* work) {
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, SPRITE_FLAG_BLEND, 100);
+    DrawSprite(120, 120, work->gfx2, work->tiles2, work->palette2, NULL, 0, 100);
 }
 
-static void Continue_3(ContinueWork* p) {
+static void Continue_3(ContinueWork* work) {
     DisableBg(0);
     DisableBg(2);
     LoadBgMap(0, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
-    ReleaseObjTiles(p->tiles2);
-    ReleaseObjPalette(p->palette2);
-    ReleaseObjPalette(p->palette);
-    ReleaseObjTiles(p->tiles);
-    ReleaseObjTiles(p->tiles3);
-    ReleaseObjPalette(p->palette3);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles3);
+    ReleaseObjPalette(work->palette3);
     gBldCnt = 0;
 }
 

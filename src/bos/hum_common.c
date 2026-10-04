@@ -614,7 +614,7 @@ s32 HumUpdate(HumWork* work) {
     return 1;
 }
 
-void HumDrawSub(HumWork* p, HumSub* s) {
+void HumDrawSub(HumWork* work, HumSub* s) {
     s16 x;
     s16 y;
     BtlObj* c;
@@ -632,7 +632,7 @@ void HumDrawSub(HumWork* p, HumSub* s) {
         return;
     }
 
-    c = &p->actor;
+    c = &work->actor;
     attr = GetBattleSpritePriorityFlags(s->y);
 
     if (c->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -852,40 +852,40 @@ void HandleRikuTutorialCardInput() {
 }
 #endif
 
-void HumFaceTarget(HumWork* p, u16 n) {
+void HumFaceTarget(HumWork* work, u16 n) {
     s32 v;
-    GetEnemyTargetPosition(&p->actor, &v, NULL, NULL);
+    GetEnemyTargetPosition(&work->actor, &v, NULL, NULL);
 
     if (GetRandom() % n == 0) {
-        if (p->actor.x > v) {
-            p->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
+        if (work->actor.x > v) {
+            work->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
         } else {
-            p->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
+            work->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
     }
 }
 
-u8 HumMoveToward(HumWork* p, s32 x, s32 y, s32 spd) {
-    u8 ang = GetAngle(p->actor.x, p->actor.y, x, y);
+u8 HumMoveToward(HumWork* work, s32 x, s32 y, s32 spd) {
+    u8 ang = GetAngle(work->actor.x, work->actor.y, x, y);
 
-    p->actor.x += gSineTable[ang] * spd >> 8;
-    p->actor.y += -gSineTable[ang + 64] * spd >> 8;
+    work->actor.x += gSineTable[ang] * spd >> 8;
+    work->actor.y += -gSineTable[ang + 64] * spd >> 8;
 
-    if (p->actor.x - x >= 0 ? p->actor.x - x > 0x1E00 : x - p->actor.x > 0x1E00) {
+    if (work->actor.x - x >= 0 ? work->actor.x - x > 0x1E00 : x - work->actor.x > 0x1E00) {
         return 0;
     }
 
-    if (p->actor.y - y >= 0 ? p->actor.y - y > 0x1000 : y - p->actor.y > 0x1000) {
+    if (work->actor.y - y >= 0 ? work->actor.y - y > 0x1000 : y - work->actor.y > 0x1000) {
         return 0;
     }
 
     return 1;
 }
 
-u8 HumIsTargetInReach(HumWork* p, s16 a, u16 b, u16 r) {
+u8 HumIsTargetInReach(HumWork* work, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
-    BtlObj* c = &p->actor;
+    BtlObj* c = &work->actor;
     s32 d;
     s32 t;
     s32 bb;
@@ -926,22 +926,22 @@ u8 HumIsTargetInReach(HumWork* p, s16 a, u16 b, u16 r) {
     return 1;
 }
 
-u8 HumIsNearAreaEdge(HumWork* p, u16 b) {
-    if (p->actor.x < (gBtlWork->xMin + b) << 8) {
+u8 HumIsNearAreaEdge(HumWork* work, u16 b) {
+    if (work->actor.x < (gBtlWork->xMin + b) << 8) {
         return 1;
     }
 
-    if (p->actor.x > (gBtlWork->xMax - b) << 8) {
+    if (work->actor.x > (gBtlWork->xMax - b) << 8) {
         return 1;
     }
 
     return 0;
 }
 
-u8 HumIsInPlayerReach(HumWork* p, s16 a, u16 b, u16 r) {
+u8 HumIsInPlayerReach(HumWork* work, s16 a, u16 b, u16 r) {
     s32 v0;
     s32 v1;
-    BtlObj* c = &p->actor;
+    BtlObj* c = &work->actor;
     BtlObj* o = gBtlWork->actor;
     s32 d;
     s32 t;

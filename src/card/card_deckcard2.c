@@ -9,8 +9,8 @@
 #include "types.h"
 #include <stddef.h>
 
-void DeckCard2ReleaseGfx(DeckCard2Work* node);
-u8 DeckCard2IsOnScreen(DeckCard2Work* n);
+void DeckCard2ReleaseGfx(DeckCard2Work* work);
+u8 DeckCard2IsOnScreen(DeckCard2Work* work);
 
 const s16 gDeckGridColumnX[3] = { 13, 36, 59 };
 
@@ -20,155 +20,155 @@ const s16 gCollectionGridColumnX[3] = { 181, 204, 227 };
 
 const s16 gCollectionGridRowY[4] = { 47, 73, 99, 125 };
 
-void DeckCard2_0(DeckCard2Work* n, DeckCard2Args* a) {
-    n->args = *a;
-    n->tiles = NULL;
-    n->palette = NULL;
-    n->tiles2 = NULL;
-    n->palette2 = NULL;
-    n->flags = 0;
+void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* a) {
+    work->args = *a;
+    work->tiles = NULL;
+    work->palette = NULL;
+    work->tiles2 = NULL;
+    work->palette2 = NULL;
+    work->flags = 0;
 
-    switch (n->args.panel) {
+    switch (work->args.panel) {
     case 0:
-        if ((u16)n->args.row <= 3) {
-            n->x = gDeckGridColumnX[n->args.col] << 8;
-            n->y = gDeckGridRowY[n->args.row] << 8;
+        if ((u16)work->args.row <= 3) {
+            work->x = gDeckGridColumnX[work->args.col] << 8;
+            work->y = gDeckGridRowY[work->args.row] << 8;
         } else {
-            n->x = gDeckGridColumnX[n->args.col] << 8;
-            n->y = 0x20000;
+            work->x = gDeckGridColumnX[work->args.col] << 8;
+            work->y = 0x20000;
         }
 
         break;
     case 1:
-        if ((u16)n->args.row <= 3) {
-            n->x = gCollectionGridColumnX[n->args.col] << 8;
-            n->y = gCollectionGridRowY[n->args.row] << 8;
+        if ((u16)work->args.row <= 3) {
+            work->x = gCollectionGridColumnX[work->args.col] << 8;
+            work->y = gCollectionGridRowY[work->args.row] << 8;
         } else {
-            n->x = gCollectionGridColumnX[n->args.col] << 8;
-            n->y = 0x20000;
+            work->x = gCollectionGridColumnX[work->args.col] << 8;
+            work->y = 0x20000;
         }
 
         break;
     }
 
-    if (n->args.cardId != 0xFFFF) {
-        if (!(n->args.cardId & 0x8000)) {
-            n->premium = 0;
+    if (work->args.cardId != 0xFFFF) {
+        if (!(work->args.cardId & 0x8000)) {
+            work->premium = 0;
         } else {
-            n->premium = 1;
+            work->premium = 1;
         }
 
-        n->cardDef = &gCardDefs[n->args.cardId & 0xFFF];
+        work->cardDef = &gCardDefs[work->args.cardId & 0xFFF];
 
-        if (n->cardDef->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
-            n->cardBack = &gCardBacks[3];
+        if (work->cardDef->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
+            work->cardBack = &gCardBacks[3];
         } else {
-            n->cardBack = &gCardBacks[n->cardDef->category];
+            work->cardBack = &gCardBacks[work->cardDef->category];
         }
     }
 
-    n->done = 0;
-    ListNodeInit(&n->node, n->args.pool, n);
-    ListPoolAppend(&n->node, n->args.pool);
+    work->done = 0;
+    ListNodeInit(&work->node, work->args.pool, work);
+    ListPoolAppend(&work->node, work->args.pool);
 }
 
-u8 DeckCard2_1(DeckCard2Work* n) {
-    if (n->done == 1) {
+u8 DeckCard2_1(DeckCard2Work* work) {
+    if (work->done == 1) {
         return 0;
     }
 
-    switch (n->args.panel) {
+    switch (work->args.panel) {
     case 0:
-        if ((u16)n->args.row <= 3) {
-            n->x = gDeckGridColumnX[n->args.col] << 8;
-            n->y = gDeckGridRowY[n->args.row] << 8;
+        if ((u16)work->args.row <= 3) {
+            work->x = gDeckGridColumnX[work->args.col] << 8;
+            work->y = gDeckGridRowY[work->args.row] << 8;
         } else {
-            n->x = gDeckGridColumnX[n->args.col] << 8;
-            n->y = 0x20000;
+            work->x = gDeckGridColumnX[work->args.col] << 8;
+            work->y = 0x20000;
         }
 
         break;
     case 1:
-        if ((u16)n->args.row <= 3) {
-            n->x = gCollectionGridColumnX[n->args.col] << 8;
-            n->y = gCollectionGridRowY[n->args.row] << 8;
+        if ((u16)work->args.row <= 3) {
+            work->x = gCollectionGridColumnX[work->args.col] << 8;
+            work->y = gCollectionGridRowY[work->args.row] << 8;
         } else {
-            n->x = gCollectionGridColumnX[n->args.col] << 8;
-            n->y = 0x20000;
+            work->x = gCollectionGridColumnX[work->args.col] << 8;
+            work->y = 0x20000;
         }
 
         break;
     }
 
-    if (DeckCard2IsOnScreen(n)) {
-        DeckCard2LoadGfx(n);
+    if (DeckCard2IsOnScreen(work)) {
+        DeckCard2LoadGfx(work);
     } else {
-        DeckCard2ReleaseGfx(n);
+        DeckCard2ReleaseGfx(work);
     }
 }
 
-void DeckCard2_2(DeckCard2Work* n) {
-    if (!(n->flags & DECK_CARD2_FLAG_GFX_LOADED)) {
+void DeckCard2_2(DeckCard2Work* work) {
+    if (!(work->flags & DECK_CARD2_FLAG_GFX_LOADED)) {
         return;
     }
 
-    if (n->tiles != NULL && n->palette != NULL) {
-        DrawSprite(n->x >> 8, n->y >> 8, n->cardDef->gfx2, n->tiles, n->palette, NULL, 0, 0x33);
+    if (work->tiles != NULL && work->palette != NULL) {
+        DrawSprite(work->x >> 8, work->y >> 8, work->cardDef->gfx2, work->tiles, work->palette, NULL, 0, 0x33);
 
-        if (n->premium) {
-            DrawSprite(n->x >> 8, n->y >> 8, gCardUiSpriteState.gfx, gCardUiSpriteState.tiles, gCardUiSpriteState.palette, NULL, 0, 0x28);
+        if (work->premium) {
+            DrawSprite(work->x >> 8, work->y >> 8, gCardUiSpriteState.gfx, gCardUiSpriteState.tiles, gCardUiSpriteState.palette, NULL, 0, 0x28);
         }
     }
 
-    if (n->args.panel == 0 && n->cardDef->category != 3) {
-        DrawSprite((n->x >> 8) - 3, (n->y >> 8) - 4, gUnk_09EE981C[n->cardDef->value], n->tiles2, n->palette2, NULL, 0, 0x31);
+    if (work->args.panel == 0 && work->cardDef->category != 3) {
+        DrawSprite((work->x >> 8) - 3, (work->y >> 8) - 4, gUnk_09EE981C[work->cardDef->value], work->tiles2, work->palette2, NULL, 0, 0x31);
     }
 }
 
-void DeckCard2_3(DeckCard2Work* n) {
-    DeckCard2ReleaseGfx(n);
-    ListPoolRemove(&n->node, n->args.pool);
+void DeckCard2_3(DeckCard2Work* work) {
+    DeckCard2ReleaseGfx(work);
+    ListPoolRemove(&work->node, work->args.pool);
 }
 
-void DeckCard2LoadGfx(DeckCard2Work* n) {
-    if (n->args.cardId == 0xFFFF) {
+void DeckCard2LoadGfx(DeckCard2Work* work) {
+    if (work->args.cardId == 0xFFFF) {
         return;
     }
 
-    if (n->flags & DECK_CARD2_FLAG_GFX_LOADED) {
+    if (work->flags & DECK_CARD2_FLAG_GFX_LOADED) {
         return;
     }
 
-    n->palette2 = LoadObjPalette(gCard00Palette, 32);
-    n->tiles = LoadObjTiles(n->cardDef->tiles2, 0x200);
-    n->palette = LoadObjPalette(n->cardDef->palette2, 32);
-    n->tiles2 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->palette2 = LoadObjPalette(gCard00Palette, 32);
+    work->tiles = LoadObjTiles(work->cardDef->tiles2, 0x200);
+    work->palette = LoadObjPalette(work->cardDef->palette2, 32);
+    work->tiles2 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
 
-    if (n->tiles != NULL && n->palette != NULL) {
-        n->flags |= DECK_CARD2_FLAG_GFX_LOADED;
+    if (work->tiles != NULL && work->palette != NULL) {
+        work->flags |= DECK_CARD2_FLAG_GFX_LOADED;
     }
 }
 
-void DeckCard2ReleaseGfx(DeckCard2Work* node) {
-    if (node->flags & DECK_CARD2_FLAG_GFX_LOADED) {
-        ReleaseObjPalette(node->palette2);
-        ReleaseObjTiles(node->tiles);
-        ReleaseObjPalette(node->palette);
-        ReleaseObjTiles(node->tiles2);
-        node->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
-        node->tiles = NULL;
-        node->palette = NULL;
-        node->tiles2 = NULL;
-        node->palette2 = NULL;
+void DeckCard2ReleaseGfx(DeckCard2Work* work) {
+    if (work->flags & DECK_CARD2_FLAG_GFX_LOADED) {
+        ReleaseObjPalette(work->palette2);
+        ReleaseObjTiles(work->tiles);
+        ReleaseObjPalette(work->palette);
+        ReleaseObjTiles(work->tiles2);
+        work->flags &= ~DECK_CARD2_FLAG_GFX_LOADED;
+        work->tiles = NULL;
+        work->palette = NULL;
+        work->tiles2 = NULL;
+        work->palette2 = NULL;
     }
 }
 
-u8 DeckCard2IsOnScreen(DeckCard2Work* n) {
+u8 DeckCard2IsOnScreen(DeckCard2Work* work) {
     s16 a;
     s16 b;
 
-    a = n->x >> 8;
-    b = n->y >> 8;
+    a = work->x >> 8;
+    b = work->y >> 8;
 
     if (a < 0) {
         return 0;

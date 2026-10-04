@@ -218,18 +218,18 @@ void Hanabira_0(EffectWork* w, EventCharaWork* chara) {
     }
 }
 
-s32 Hanabira_1(EffectWork* w) {
-    TaskPoolUpdate(&w->tasks);
+s32 Hanabira_1(EffectWork* work) {
+    TaskPoolUpdate(&work->tasks);
 
     return 1;
 }
 
-void Hanabira_2(EffectWork* w) {
-    TaskPoolDraw(&w->tasks);
+void Hanabira_2(EffectWork* work) {
+    TaskPoolDraw(&work->tasks);
 }
 
-void Hanabira_3(EffectWork* w) {
-    TaskPoolDestroy(&w->tasks);
+void Hanabira_3(EffectWork* work) {
+    TaskPoolDestroy(&work->tasks);
 }
 
 void Hanabira_c_0(EffectWork* w, EventCharaWork* chara) {
@@ -249,62 +249,62 @@ void Hanabira_c_0(EffectWork* w, EventCharaWork* chara) {
     w->state = 0;
 }
 
-s32 Hanabira_c_1(EffectWork* w) {
+s32 Hanabira_c_1(EffectWork* work) {
     s32 v;
     s32 r;
 
-    switch (w->state) {
+    switch (work->state) {
     case 0:
-        w->x += w->vx;
-        w->z += w->vz;
-        w->vz += 17;
+        work->x += work->vx;
+        work->z += work->vz;
+        work->vz += 17;
 
-        if (w->vz > 256) {
-            w->state = 1;
+        if (work->vz > 256) {
+            work->state = 1;
         }
 
         break;
     case 1:
-        w->x += w->vx;
-        w->z += w->vz;
-        w->vz = (v = w->vz - 12) - (r = GetRandom()) % 9;
+        work->x += work->vx;
+        work->z += work->vz;
+        work->vz = (v = work->vz - 12) - (r = GetRandom()) % 9;
 
-        if (w->vz < 0) {
-            w->vz = GetRandom() % 181 + 204;
+        if (work->vz < 0) {
+            work->vz = GetRandom() % 181 + 204;
 
-            if (w->vx > 0) {
-                w->vx = -(GetRandom() % 257 + 128);
+            if (work->vx > 0) {
+                work->vx = -(GetRandom() % 257 + 128);
             } else {
-                w->vx = GetRandom() % 257 + 128;
+                work->vx = GetRandom() % 257 + 128;
             }
         }
 
-        if (w->z >= 0) {
+        if (work->z >= 0) {
             return 0;
         }
 
         break;
     }
 
-    w->gfx = AnimUpdate(&w->anim);
+    work->gfx = AnimUpdate(&work->anim);
 
     return 1;
 }
 
-void Hanabira_c_2(EffectWork* w) {
+void Hanabira_c_2(EffectWork* work) {
     s32 x;
     s32 y;
     s32 t;
 
-    x = (w->x >> 8) - (gEventState->x >> 8);
-    t = w->y >> 8;
-    y = t + (w->z >> 8) - (gEventState->y >> 8);
-    DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - t * 4);
+    x = (work->x >> 8) - (gEventState->x >> 8);
+    t = work->y >> 8;
+    y = t + (work->z >> 8) - (gEventState->y >> 8);
+    DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), -0x1004 - t * 4);
 }
 
-void Hanabira_c_3(EffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void Hanabira_c_3(EffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 void smoke_0(EffectWork* w, EventCharaWork* chara) {
@@ -363,46 +363,46 @@ void balloon_0(EffectWork* w, EventCharaWork* chara) {
     w->age = 0;
 }
 
-s32 EffectUpdateObj(EffectWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
+s32 EffectUpdateObj(EffectWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
 
-    if (!w->actor->callbackActive) {
+    if (!work->actor->callbackActive) {
         return 0;
     }
 
     return 1;
 }
 
-s32 Exclamation_1(EffectWork* w) {
-    w->age++;
-    w->gfx = AnimUpdate(&w->anim);
+s32 Exclamation_1(EffectWork* work) {
+    work->age++;
+    work->gfx = AnimUpdate(&work->anim);
 
-    if (!w->actor->callbackActive || w->age == 50) {
+    if (!work->actor->callbackActive || work->age == 50) {
         return 0;
     }
 
     return 1;
 }
 
-void EffectDrawObj(EffectWork* w) {
+void EffectDrawObj(EffectWork* work) {
     u16 pr;
     s32 y;
 
-    pr = w->actor->obj.drawFlags;
+    pr = work->actor->obj.drawFlags;
 
-    if (!w->followFlip) {
+    if (!work->followFlip) {
         pr &= 0xFFFE;
     }
 
-    DrawSprite((w->x >> 8) - (gEventState->x >> 8),
-               (y = (w->y >> 8) + gEventCharaParams[w->actor->arg.chara].spriteYOffset) -
+    DrawSprite((work->x >> 8) - (gEventState->x >> 8),
+               (y = (work->y >> 8) + gEventCharaParams[work->actor->arg.chara].spriteYOffset) -
                    (gEventState->y >> 8),
-               w->gfx, w->tiles, w->palette, NULL, pr, 50);
+               work->gfx, work->tiles, work->palette, NULL, pr, 50);
 }
 
-void EffectReleaseObj(EffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void EffectReleaseObj(EffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 void Question_0(EffectWork* w, EventCharaWork* chara) {
@@ -423,19 +423,19 @@ void Question_0(EffectWork* w, EventCharaWork* chara) {
     w->age = 0;
 }
 
-s32 Question_1(EffectWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
-    w->timer++;
+s32 Question_1(EffectWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
+    work->timer++;
 
-    if (w->timer == 12) {
-        AnimStart(&w->anim, 6, ANIM_FLAG_LOOP);
+    if (work->timer == 12) {
+        AnimStart(&work->anim, 6, ANIM_FLAG_LOOP);
     }
 
-    if (!w->actor->callbackActive) {
+    if (!work->actor->callbackActive) {
         return 0;
     }
 
-    w->age = 0;
+    work->age = 0;
 
     return 1;
 }
@@ -466,36 +466,36 @@ void TinkerbellParticleInit(EffectWork* w, EventCharaWork* chara) {
     gEventState->particleCount++;
 }
 
-s32 TinkerbellParticleUpdate(EffectWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
-    w->age++;
-    w->z2 += 256;
+s32 TinkerbellParticleUpdate(EffectWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
+    work->age++;
+    work->z2 += 256;
 
-    if (w->z2 > 0) {
+    if (work->z2 > 0) {
         return 0;
     }
 
     return 1;
 }
 
-void TinkerbellParticleDraw(EffectWork* w) {
+void TinkerbellParticleDraw(EffectWork* work) {
     u16 pr;
 
-    pr = w->actor->obj.drawFlags;
+    pr = work->actor->obj.drawFlags;
 
-    if (!w->followFlip) {
+    if (!work->followFlip) {
         pr &= 0xFFFE;
     }
 
-    DrawSprite((w->x >> 8) - (gEventState->x >> 8),
-               ((w->y + w->z2) >> 8) - (gEventState->y >> 8),
-               w->gfx, w->tiles, w->palette, NULL, pr,
-               -0x1004 - (w->y >> 8) * 4);
+    DrawSprite((work->x >> 8) - (gEventState->x >> 8),
+               ((work->y + work->z2) >> 8) - (gEventState->y >> 8),
+               work->gfx, work->tiles, work->palette, NULL, pr,
+               -0x1004 - (work->y >> 8) * 4);
 }
 
-void TinkerbellParticleDestroy(EffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void TinkerbellParticleDestroy(EffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gEventState->particleCount--;
 }
 
@@ -516,11 +516,11 @@ void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
     w->age = 0;
 }
 
-s32 GlowNose_1(EffectWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
-    w->age++;
+s32 GlowNose_1(EffectWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
+    work->age++;
 
-    if (w->age > 44) {
+    if (work->age > 44) {
         return 0;
     }
 
@@ -554,11 +554,11 @@ void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
     w->age = 0;
 }
 
-s32 GlowNose2_1(EffectWork* w) {
-    w->gfx = AnimUpdate(&w->anim);
-    w->age++;
+s32 GlowNose2_1(EffectWork* work) {
+    work->gfx = AnimUpdate(&work->anim);
+    work->age++;
 
-    if (w->age > 8) {
+    if (work->age > 8) {
         return 0;
     }
 
@@ -600,16 +600,16 @@ void down_0(EffectWork* w, EventCharaWork* chara) {
     }
 }
 
-s32 down_1(EffectWork* w) {
+s32 down_1(EffectWork* work) {
     DownWork* s;
     u8 i;
 
-    s = w->down;
+    s = work->down;
 
     for (i = 0; i < 8; i++) {
-        s->x[i] = gSineTable[s->angle[i] & 0xFF] * 8 + w->x;
+        s->x[i] = gSineTable[s->angle[i] & 0xFF] * 8 + work->x;
         s->y[i] = -gSineTable[(s->angle[i] & 0xFF) + 64] * (s->wobble[i] + 4) +
-                       w->y;
+                       work->y;
         s->angle[i] += 4;
 
         if (s->wobble[i] == 0) {
@@ -619,32 +619,32 @@ s32 down_1(EffectWork* w) {
         }
     }
 
-    if (!w->actor->callbackActive) {
+    if (!work->actor->callbackActive) {
         return 0;
     }
 
     return 1;
 }
 
-s32 down_2(EffectWork* w) {
+s32 down_2(EffectWork* work) {
     DownWork* s;
     u16 pr;
     u8 i;
 
-    pr = w->actor->obj.drawFlags;
-    s = w->down;
+    pr = work->actor->obj.drawFlags;
+    s = work->down;
 
     for (i = 0; i < 8; i++) {
         DrawSprite((s->x[i] >> 8) - (gEventState->x >> 8),
                    (s->y[i] >> 8) - (gEventState->y >> 8), NULL,
-                   w->tiles, w->palette, NULL, pr, 50);
+                   work->tiles, work->palette, NULL, pr, 50);
     }
 }
 
-void down_3(EffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    EwramFree(w->down);
+void down_3(EffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    EwramFree(work->down);
 }
 
 void Tinkerbell_0(EffectWork* w, EventCharaWork* chara) {
@@ -654,75 +654,75 @@ void Tinkerbell_0(EffectWork* w, EventCharaWork* chara) {
     TaskPoolInit(&w->tasks, 8);
 }
 
-s32 Tinkerbell_1(EffectWork* w) {
-    w->timer++;
+s32 Tinkerbell_1(EffectWork* work) {
+    work->timer++;
 
-    if (w->timer == 5) {
+    if (work->timer == 5) {
         if (gEventState->particleCount <= 3) {
-            TaskCreate(&w->tasks, &gTaskDescTinkerbellParticle, w->actor);
+            TaskCreate(&work->tasks, &gTaskDescTinkerbellParticle, work->actor);
         }
 
-        w->timer = 0;
+        work->timer = 0;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
 
     return 1;
 }
 
-void Tinkerbell_2(EffectWork* w) {
-    TaskPoolDraw(&w->tasks);
+void Tinkerbell_2(EffectWork* work) {
+    TaskPoolDraw(&work->tasks);
 }
 
-void Tinkerbell_3(EffectWork* w) {
-    TaskPoolDestroy(&w->tasks);
+void Tinkerbell_3(EffectWork* work) {
+    TaskPoolDestroy(&work->tasks);
 }
 
-void CreateTinkerbellTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescTinkerbell, p);
+void CreateTinkerbellTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescTinkerbell, work);
 }
 
-void CreateDownTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescDown, p);
+void CreateDownTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescDown, work);
 }
 
-void CreateSmokeTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescSmoke, p);
+void CreateSmokeTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescSmoke, work);
 }
 
-void CreateExclamationTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescExclamation, p);
+void CreateExclamationTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescExclamation, work);
 }
 
-void CreateBalloonTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescBalloon, p);
+void CreateBalloonTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescBalloon, work);
 }
 
-void CreateQuestionTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescQuestion, p);
+void CreateQuestionTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescQuestion, work);
 }
 
-void CreateGlowNoseTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescGlowNose, p);
+void CreateGlowNoseTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescGlowNose, work);
 }
 
-void CreateGlowNose2Task(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescGlowNose2, p);
+void CreateGlowNose2Task(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescGlowNose2, work);
 }
 
-void CreateHanabiraTask(EventCharaWork* p) {
-    TaskCreate(&p->tasks, &gTaskDescHanabira, p);
+void CreateHanabiraTask(EventCharaWork* work) {
+    TaskCreate(&work->tasks, &gTaskDescHanabira, work);
 }
 
-void EV_SOUND_0(EvSoundWork* w, u8* arg) {
+void EV_SOUND_0(EvSoundWork* work, u8* arg) {
     u8 i;
 
-    w->eventId = arg[0];
-    w->cue = 0;
-    w->unk_06 = 0;
-    w->fadeMode = 0;
-    w->volume = 256;
-    w->soundCues = gEventSequenceDefs[w->eventId]->soundCues;
+    work->eventId = arg[0];
+    work->cue = 0;
+    work->unk_06 = 0;
+    work->fadeMode = 0;
+    work->volume = 256;
+    work->soundCues = gEventSequenceDefs[work->eventId]->soundCues;
     gEventSoundMix = EwramAlloc(256);
 
     for (i = 0; i < 64; i++) {
@@ -731,18 +731,18 @@ void EV_SOUND_0(EvSoundWork* w, u8* arg) {
     }
 }
 
-s32 EV_SOUND_1(EvSoundWork* w) {
+s32 EV_SOUND_1(EvSoundWork* work) {
     const EvSoundCue* p;
     MusicPlayerInfo* mp;
     u8 idx;
     u8 n;
     u8 i;
 
-    if (w->soundCues == NULL) {
+    if (work->soundCues == NULL) {
         return 0;
     }
 
-    p = &w->soundCues[w->cue];
+    p = &work->soundCues[work->cue];
 
     if (gEventState->frame == p->frame) {
         if (p->song != 0xFFFF) {
@@ -761,23 +761,23 @@ s32 EV_SOUND_1(EvSoundWork* w) {
 
         if (p->flags & EV_SOUND_FLAG_FADE_OUT) {
             m4aMPlayFadeOut(gMPlayTable[gSongTable[p->song].ms].info, 5);
-            w->fadeMode = 2;
+            work->fadeMode = 2;
         }
 
         if (p->flags & EV_SOUND_FLAG_FADE_IN) {
             n = gSongTable[p->song].ms;
             mp = gMPlayTable[n].info;
-            w->volume = 3;
+            work->volume = 3;
             m4aMPlayVolumeControl(mp, 255, 3);
-            w->fadeMode = 1;
+            work->fadeMode = 1;
         }
 
         if ((p->flags & EV_SOUND_FLAG_END) == 0) {
-            w->cue++;
+            work->cue++;
         }
     }
 
-    EvSoundUpdateFadeIn(w);
+    EvSoundUpdateFadeIn(work);
 
     for (i = 16; i <= 24; i++) {
         m4aMPlayPanpotControl(gMPlayTable[i].info, 255,
@@ -796,20 +796,20 @@ void EV_SOUND_3() {
     EwramFree(gEventSoundMix);
 }
 
-void EvSoundUpdateFadeIn(EvSoundWork* w) {
+void EvSoundUpdateFadeIn(EvSoundWork* work) {
     MusicPlayerInfo* mp;
 
     mp = gMPlayTable[0].info;
 
-    if (w->fadeMode == 1) {
-        w->volume += 2;
+    if (work->fadeMode == 1) {
+        work->volume += 2;
 
-        if (w->volume > 255) {
-            w->volume = 256;
+        if (work->volume > 255) {
+            work->volume = 256;
         }
 
         m4aMPlayImmInit(mp);
-        m4aMPlayVolumeControl(mp, 255, w->volume);
+        m4aMPlayVolumeControl(mp, 255, work->volume);
     }
 }
 

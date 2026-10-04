@@ -11,7 +11,7 @@
 #include "types.h"
 #include <stddef.h>
 
-u8 UpdateEventBgEffectAnim(EventBgEffectWork* w, void* a);
+u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a);
 
 static const EventBgEffectDef sEventBgEffect0Def = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x10, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,
@@ -117,40 +117,40 @@ static const EventBgEffectDef sEventBgEffect6Def = {
     &gEventBgEffectMaps[6], gUnk_094233B8 + 0x19D80, gUnk_096148D8 + 0x70, 0x1000, 0x20, { 1, 1, 0, 0 }, sEventBgEffect6Frames, 6, 2,
 };
 
-void LoadEventBgEffect(EventBgEffectWork* w) {
+void LoadEventBgEffect(EventBgEffectWork* work) {
     const EventBgEffectEntry* e;
     const EventBgEffectDef* d;
 
-    e = &w->entries[w->entry];
+    e = &work->entries[work->entry];
     d = gEventBgEffectDefs[e->effect];
-    w->effect = e->effect;
+    work->effect = e->effect;
     LoadBgTiles(0, d->tiles, d->tilesSize);
     LoadBgPalette(0, d->palette, d->paletteSize);
     LoadBgMap(0, d->maps[0], 0x800);
     SetBgScroll(0, (u16)((gEventState->x >> 8) - (e->x >> 8)), (u16)((gEventState->y >> 8) - (e->y >> 8)));
 
     if (d->frames != NULL) {
-        w->animating = 1;
+        work->animating = 1;
     }
 
     SetBgBlend(0, 16, 16);
     gEventState->bgEffectActive = 1;
-    w->frame = w->frameTimer = w->fadingIn = 0;
+    work->frame = work->frameTimer = work->fadingIn = 0;
 }
 
-void ClearEventBgEffect(EventBgEffectWork* w) {
+void ClearEventBgEffect(EventBgEffectWork* work) {
     LoadBgTiles(0, gUnk_094233B8, 1280);
     LoadBgPalette(0, gUnk_096148D8, 32);
     LoadBgMap(0, gUnk_08125E24, 2048);
 }
 
-void StartEventBgEffectFadeOut(EventBgEffectWork* w) {
+void StartEventBgEffectFadeOut(EventBgEffectWork* work) {
     const EventBgEffectEntry* p;
     u16 v;
     u8 i;
 
     v = 16;
-    p = &w->entries[w->entry];
+    p = &work->entries[work->entry];
 
     for (i = 16; i <= 31; i++) {
         FadeSetPaletteExcluded(i, 1);
@@ -169,12 +169,12 @@ void StartEventBgEffectFadeOut(EventBgEffectWork* w) {
     }
 }
 
-void StartEventBgEffectFadeIn(EventBgEffectWork* w) {
+void StartEventBgEffectFadeIn(EventBgEffectWork* work) {
     const EventBgEffectEntry* t;
     u16 v;
 
     v = 16;
-    t = &w->entries[w->entry];
+    t = &work->entries[work->entry];
     FadeSetPaletteExcluded(14, 1);
 
     if (t->x > 0) {
@@ -188,61 +188,61 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* w) {
     }
 }
 
-void EV_BG_EFFECT_0(EventBgEffectWork* w, u8* b) {
+void EV_BG_EFFECT_0(EventBgEffectWork* work, u8* b) {
     u8 t;
     u8 z;
 
     t = b[0];
     z = 0;
-    w->eventId = t;
-    w->entry = z;
-    w->animating = z;
-    w->entries = gEventSequenceDefs[w->eventId]->bgEffects;
+    work->eventId = t;
+    work->entry = z;
+    work->animating = z;
+    work->entries = gEventSequenceDefs[work->eventId]->bgEffects;
 }
 
-u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
+u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* a) {
     const EventBgEffectEntry* e;
     const EventBgEffectEntry* cur;
     u8 i;
 
-    e = w->entries;
+    e = work->entries;
 
     if (e == NULL) {
         return 0;
     }
 
-    if (e[w->entry].frame <= gEventState->frame && !(e[w->entry].flags & 0x8000)) {
-        w->entry++;
-        cur = &e[w->entry];
+    if (e[work->entry].frame <= gEventState->frame && !(e[work->entry].flags & 0x8000)) {
+        work->entry++;
+        cur = &e[work->entry];
 
         if (cur->flags & 1) {
-            LoadEventBgEffect(w);
+            LoadEventBgEffect(work);
 
-            if (w->animating != 0) {
+            if (work->animating != 0) {
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventBgEffectAnim);
             }
         }
 
         if (cur->flags & 4) {
-            StartEventBgEffectFadeOut(w);
+            StartEventBgEffectFadeOut(work);
         }
 
         if (cur->flags & 8) {
-            StartEventBgEffectFadeIn(w);
-            w->fadingIn = 1;
+            StartEventBgEffectFadeIn(work);
+            work->fadingIn = 1;
         }
 
         if (cur->flags & 2) {
-            ClearEventBgEffect(w);
+            ClearEventBgEffect(work);
             gEventState->bgEffectActive = 0;
             gBldCnt = gEventState->bldCnt;
             gBldAlpha = gEventState->bldAlpha;
         }
     }
 
-    if (w->fadingIn == 1) {
+    if (work->fadingIn == 1) {
         if (!FadeIsActive()) {
-            w->fadingIn = 0;
+            work->fadingIn = 0;
 
             for (i = 16; i < 32; i++) {
                 FadeSetPaletteExcluded(i, 0);
@@ -253,47 +253,47 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateEventBgEffectAnim(EventBgEffectWork* w, void* a) {
+u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a) {
     const EventBgEffectEntry* p;
 
-    p = &w->entries[w->entry];
+    p = &work->entries[work->entry];
     SetBgScroll(0, (u16)((gEventState->x >> 8) - (p->x >> 8)),
                 (u16)((gEventState->y >> 8) - (p->y >> 8)));
 
-    if (!StepEventBgEffectAnim(w)) {
+    if (!StepEventBgEffectAnim(work)) {
         SetTaskUpdate(a, (TaskUpdateFunc)EV_BG_EFFECT_1);
     }
 
     return 1;
 }
 
-u8 StepEventBgEffectAnim(EventBgEffectWork* w) {
+u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
     const EventBgEffectDef* d;
     const EventBgEffectFrame* tbl;
 
-    if (w->animating == 0) {
+    if (work->animating == 0) {
         return 0;
     }
 
-    d = gEventBgEffectDefs[w->effect];
+    d = gEventBgEffectDefs[work->effect];
     tbl = d->frames;
 
-    if (w->frameTimer < tbl[w->frame].duration) {
-        w->frameTimer++;
+    if (work->frameTimer < tbl[work->frame].duration) {
+        work->frameTimer++;
     } else {
-        w->frameTimer = 0;
+        work->frameTimer = 0;
 
-        if (w->frame < d->frameCount - 1) {
-            w->frame++;
-            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
+        if (work->frame < d->frameCount - 1) {
+            work->frame++;
+            RequestDma3Copy(d->tiles + tbl[work->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
         } else {
             if (d->loopFrame == -1) {
-                w->animating = 0;
+                work->animating = 0;
                 return 0;
             }
 
-            w->frame = d->loopFrame;
-            RequestDma3Copy(d->tiles + tbl[w->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
+            work->frame = d->loopFrame;
+            RequestDma3Copy(d->tiles + tbl[work->frame].tilesOffset, GetBgCharBase(0), d->tilesSize);
         }
     }
 

@@ -70,65 +70,65 @@ void Mode_Deck_2() {
     TaskPoolDestroy(&sModeDeckTasks);
 }
 
-void menu_0(MenuWork* w) {
+void menu_0(MenuWork* work) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     gFieldState->flags |= FIELD_FLAG_MENU_OPEN;
-    w->x = 0xF000;
-    w->y = 0x4800;
-    w->cursor = 0;
-    w->state = 0;
-    w->tiles = LoadObjTiles(gUnk_090D4DD0, 0x2E80);
-    w->palette = LoadObjPalette(gUnk_096148B8, 0x20);
+    work->x = 0xF000;
+    work->y = 0x4800;
+    work->cursor = 0;
+    work->state = 0;
+    work->tiles = LoadObjTiles(gUnk_090D4DD0, 0x2E80);
+    work->palette = LoadObjPalette(gUnk_096148B8, 0x20);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
 
-u8 menu_1(MenuWork* w) {
-    switch (w->state) {
+u8 menu_1(MenuWork* work) {
+    switch (work->state) {
     case 0:
-        w->x += (0xBC00 - w->x) >> 1;
+        work->x += (0xBC00 - work->x) >> 1;
 
-        if ((w->x >> 8) == 0xBC) {
-            w->state = 1;
+        if ((work->x >> 8) == 0xBC) {
+            work->state = 1;
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->state = 4;
+            work->state = 4;
         }
 
         break;
     case 1:
         if (GetKeysRepeat() & DPAD_UP) {
-            if (w->cursor != 0) {
-                w->cursor--;
+            if (work->cursor != 0) {
+                work->cursor--;
             } else {
-                w->cursor = 5;
+                work->cursor = 5;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysRepeat() & DPAD_DOWN) {
-            if (w->cursor <= 4) {
-                w->cursor++;
+            if (work->cursor <= 4) {
+                work->cursor++;
             } else {
-                w->cursor = 0;
+                work->cursor = 0;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            switch (w->cursor) {
+            switch (work->cursor) {
             case 0:
-                w->state = 2;
-                w->cursor = 6;
+                work->state = 2;
+                work->cursor = 6;
                 m4aSongNumStart(SONG_SYS_CANSEL);
                 break;
             case 2:
                 RequestFieldResume();
                 FadeStartOut(FADE_MODE_BLACK, 32);
-                w->state = 4;
+                work->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 1:
@@ -143,59 +143,59 @@ u8 menu_1(MenuWork* w) {
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->state = 5;
+            work->state = 5;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         break;
     case 2:
         if (GetKeysRepeat() & DPAD_UP) {
-            if (w->cursor > 6) {
-                w->cursor--;
+            if (work->cursor > 6) {
+                work->cursor--;
             } else {
-                w->cursor = 9;
+                work->cursor = 9;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysRepeat() & DPAD_DOWN) {
-            if (w->cursor <= 8) {
-                w->cursor++;
+            if (work->cursor <= 8) {
+                work->cursor++;
             } else {
-                w->cursor = 6;
+                work->cursor = 6;
             }
 
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         if (GetKeysPressed() & B_BUTTON) {
-            w->state = 1;
-            w->cursor = 0;
+            work->state = 1;
+            work->cursor = 0;
             m4aSongNumStart(SONG_SYS_CLOSE);
         }
 
         if (GetKeysPressed() & A_BUTTON) {
-            switch (w->cursor) {
+            switch (work->cursor) {
             case 6:
-                w->cursor = 0;
-                w->state = 1;
+                work->cursor = 0;
+                work->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 7:
-                w->cursor = 0;
-                w->state = 1;
+                work->cursor = 0;
+                work->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 8:
-                w->cursor = 0;
-                w->state = 1;
+                work->cursor = 0;
+                work->state = 1;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             case 9:
                 RequestFieldResume();
                 FadeStartOut(FADE_MODE_BLACK, 32);
-                w->state = 4;
+                work->state = 4;
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 break;
             }
@@ -203,27 +203,27 @@ u8 menu_1(MenuWork* w) {
 
         break;
     case 4:
-        w->x += (0x11800 - w->x) >> 1;
+        work->x += (0x11800 - work->x) >> 1;
 
-        if ((w->x >> 8) > 274) {
+        if ((work->x >> 8) > 274) {
             if (!FadeIsActive()) {
-                if (w->cursor != 2) {
-                    if (w->cursor == 9) {
+                if (work->cursor != 2) {
+                    if (work->cursor == 9) {
                         ModeRequest(&gModeDeck, 0);
                     }
                 } else {
                     ModeRequest(&gModeAllmap, 0);
                 }
 
-                w->state = 5;
+                work->state = 5;
             }
         }
 
         break;
     case 5:
-        w->x += (0x11800 - w->x) >> 1;
+        work->x += (0x11800 - work->x) >> 1;
 
-        if ((w->x >> 8) > 274) {
+        if ((work->x >> 8) > 274) {
             return 0;
         }
 
@@ -236,13 +236,13 @@ u8 menu_1(MenuWork* w) {
     return 1;
 }
 
-void menu_2(MenuWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, gUnk_09EEC600[w->cursor], w->tiles, w->palette, NULL, 0, 80);
+void menu_2(MenuWork* work) {
+    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEC600[work->cursor], work->tiles, work->palette, NULL, 0, 80);
 }
 
-void menu_3(MenuWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void menu_3(MenuWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
     gFieldState->flags &= ~FIELD_FLAG_MENU_OPEN;

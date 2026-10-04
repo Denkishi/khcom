@@ -29,29 +29,29 @@ static s32 sUnk_02034A24;
 static s32 sDebugTextMergeFirstGlyph;
 static void* sUnk_02034A2C;
 
-void task_lockon_0(LockonWork* w) {
+void task_lockon_0(LockonWork* work) {
     s32 i;
 
     gLockonDoorPosition = EwramAlloc(12);
-    w->tiles = AllocObjTiles(0x80, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
-    SetObjTileSource(w->tiles, gUnk_090D7C84);
-    AnimInit(&w->anim, gUnk_09EEC66C, gUnk_09EEC660);
-    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
+    work->tiles = AllocObjTiles(0x80, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
+    SetObjTileSource(work->tiles, gUnk_090D7C84);
+    AnimInit(&work->anim, gUnk_09EEC66C, gUnk_09EEC660);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
 
     for (i = 0; i < 8; i++) {
-        w->targets[i] = NULL;
+        work->targets[i] = NULL;
     }
 
-    w->targetCount = 0;
-    w->selected = -1;
-    w->timer = 0;
-    w->unk_30 = 0;
-    w->unk_4C = 0;
+    work->targetCount = 0;
+    work->selected = -1;
+    work->timer = 0;
+    work->unk_30 = 0;
+    work->unk_4C = 0;
 }
 
-u8 task_lockon_1(LockonWork* w) {
+u8 task_lockon_1(LockonWork* work) {
     FldObj* o;
     s8 count;
     s8 i;
@@ -72,10 +72,10 @@ u8 task_lockon_1(LockonWork* w) {
         return 1;
     }
 
-    LockonClearTargets(w);
+    LockonClearTargets(work);
 
-    if (w->prevSelected != w->selected) {
-        w->unk_30 = 0;
+    if (work->prevSelected != work->selected) {
+        work->unk_30 = 0;
     }
 
     px = gFieldState->actor.fieldPosition.x;
@@ -94,11 +94,11 @@ u8 task_lockon_1(LockonWork* w) {
                     gLockonDoorPosition[0] = o->fieldPosition.x;
                     gLockonDoorPosition[1] = o->fieldPosition.y;
                     gLockonDoorPosition[2] = o->fieldPosition.z;
-                    w->targets[count++] = o;
-                    w->targetCount++;
+                    work->targets[count++] = o;
+                    work->targetCount++;
                 } else {
-                    w->targets[count++] = o;
-                    w->targetCount++;
+                    work->targets[count++] = o;
+                    work->targetCount++;
                 }
             }
 
@@ -109,31 +109,31 @@ u8 task_lockon_1(LockonWork* w) {
             o = ListPoolNext(&o->node);
         }
 
-        if (w->targetCount != 0) {
+        if (work->targetCount != 0) {
             nsel = 0;
 
-            for (i = 0; i < w->targetCount; i++) {
-                if (LockonIsInFront(gFieldState->actor.angle, px, py, w->targets[i])) {
-                    w->selected = i;
+            for (i = 0; i < work->targetCount; i++) {
+                if (LockonIsInFront(gFieldState->actor.angle, px, py, work->targets[i])) {
+                    work->selected = i;
                     list[nsel++] = i;
                 }
             }
 
             if (nsel > 1) {
-                w->selected = LockonPickNearest(px, py, w, nsel, list);
+                work->selected = LockonPickNearest(px, py, work, nsel, list);
             }
         }
     }
 
-    if (w->selected >= 0) {
-        gFieldState->lockonTarget = w->targets[w->selected];
+    if (work->selected >= 0) {
+        gFieldState->lockonTarget = work->targets[work->selected];
     } else {
         gFieldState->lockonTarget = NULL;
-        w->unk_30 = 0;
+        work->unk_30 = 0;
     }
 
-    w->prevSelected = w->selected;
-    w->gfx = AnimUpdate(&w->anim);
+    work->prevSelected = work->selected;
+    work->gfx = AnimUpdate(&work->anim);
     return 1;
 }
 
@@ -143,7 +143,7 @@ u8 task_lockon_1(LockonWork* w) {
             (v) = (dest); \
         } \
     } while (0)
-void task_lockon_2(LockonWork* w) {
+void task_lockon_2(LockonWork* work) {
     FldObj* obj;
     s32 x;
     s32 y;
@@ -156,7 +156,7 @@ void task_lockon_2(LockonWork* w) {
         return;
     }
 
-    obj = w->targets[w->selected];
+    obj = work->targets[work->selected];
 
     if (obj->kind == 2) {
         return;
@@ -170,38 +170,38 @@ void task_lockon_2(LockonWork* w) {
     CLAMP_LABEL(x2.coord, x + 60, 240, 192);
     CLAMP_LABEL(y2.coord, y, 160, 152);
 
-    x2.counter = w->timer++;
+    x2.counter = work->timer++;
     y2.counter = x2.counter;
 
     if (y2.counter > 10) {
-        w->timer = 0;
+        work->timer = 0;
     }
 
     if (gFieldState->lockonTarget == NULL) {
         return;
     }
 
-    if (w->selected < 0) {
+    if (work->selected < 0) {
         return;
     }
 
 #ifdef VERSION_EU
     {
-        FldObj* obj = w->targets[w->selected];
+        FldObj* obj = work->targets[work->selected];
         s32 projectedY = (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8);
 
-        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, w->gfx, w->tiles, w->palette, NULL, SPRITE_PRIORITY(1), -0x100E - (((s16)projectedY >> 8) << 2));
+        DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), projectedY - obj->height + 40, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), -0x100E - (((s16)projectedY >> 8) << 2));
     }
 #else
-    obj = w->targets[w->selected];
-    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height + 40, w->gfx, w->tiles, w->palette, NULL, 0, -0x100E - ((w->targets[w->selected]->fieldPosition.y >> 8) << 2));
+    obj = work->targets[work->selected];
+    DrawSprite((obj->fieldPosition.x >> 8) - (gFieldState->x >> 8), (obj->fieldPosition.y >> 8) + (obj->fieldPosition.z >> 8) - (gFieldState->y >> 8) - obj->height + 40, work->gfx, work->tiles, work->palette, NULL, 0, -0x100E - ((work->targets[work->selected]->fieldPosition.y >> 8) << 2));
 #endif
 }
 
 #undef CLAMP_LABEL
-void task_lockon_3(LockonWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void task_lockon_3(LockonWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gFieldState->lockonTarget = NULL;
     EwramFree(gLockonDoorPosition);
     gLockonDoorPosition = NULL;
@@ -222,7 +222,7 @@ s32 NormalizeVector2D8(s32* x, s32* y) {
     return d;
 }
 
-s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
+s8 LockonPickNearest(s32 a, s32 b, LockonWork* work, s8 n, s8* list) {
     s8 i;
     s8 best;
     s32 bestDist;
@@ -235,7 +235,7 @@ s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     bestDist = 0x10000;
 
     for (i = 0; i < n; i++) {
-        o = w->targets[list[i]];
+        o = work->targets[list[i]];
 
         if (o != NULL) {
             dx = o->fieldPosition.x;
@@ -256,17 +256,17 @@ s8 LockonPickNearest(s32 a, s32 b, LockonWork* w, s8 n, s8* list) {
     return best;
 }
 
-void LockonClearTargets(LockonWork* w) {
+void LockonClearTargets(LockonWork* work) {
     s8 i;
 
     if ((gFieldState->flags & FIELD_FLAG_HOLD_LOCKON) == 0) {
-        w->selected = -1;
+        work->selected = -1;
 
         for (i = 0; i < 8; i++) {
-            w->targets[i] = NULL;
+            work->targets[i] = NULL;
         }
 
-        w->targetCount = 0;
+        work->targetCount = 0;
     }
 }
 

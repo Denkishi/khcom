@@ -19,106 +19,106 @@ void SrollBCharSetMotion(Task* task, s32 v) {
     ((SrollBCharWork*)task->work)->motion = v;
 }
 
-void SrollBCharChangeAnim(SrollBCharWork* w) {
+void SrollBCharChangeAnim(SrollBCharWork* work) {
     const EvtObjAnim* def;
     const EvtAnimDef* gfx;
 
-    def = w->obj->animEntry;
+    def = work->obj->animEntry;
     gfx = def->animDef;
-    AnimChangeWithTables(&w->anim, def->animId, def->flags, gfx->anims, gfx->gfxTable);
-    SetObjTileSource(w->tiles, gfx->tiles);
-    w->obj->flags &= ~EVTOBJ_FLAG_ANIM_CHANGED;
+    AnimChangeWithTables(&work->anim, def->animId, def->flags, gfx->anims, gfx->gfxTable);
+    SetObjTileSource(work->tiles, gfx->tiles);
+    work->obj->flags &= ~EVTOBJ_FLAG_ANIM_CHANGED;
 }
 
-void task_sroll_b_char_0(SrollBCharWork* w, EvtObjParam* a) {
+void task_sroll_b_char_0(SrollBCharWork* work, EvtObjParam* a) {
     const EvtObjRes* res;
     AnimState* anim;
 
     res = a->res;
-    w->motion = 0;
-    w->motionTimer = 0;
-    w->obj = a->obj;
-    w->tiles = AllocObjTiles(res->tileCount * 32, NULL);
-    w->palette = LoadObjPalette(res->palette, 32);
-    anim = &w->anim;
+    work->motion = 0;
+    work->motionTimer = 0;
+    work->obj = a->obj;
+    work->tiles = AllocObjTiles(res->tileCount * 32, NULL);
+    work->palette = LoadObjPalette(res->palette, 32);
+    anim = &work->anim;
     AnimInit(anim, NULL, NULL);
-    w->obj->anim = anim;
-    w->obj->paletteIndex = w->palette->index;
-    SrollBCharChangeAnim(w);
-    TaskPoolInit(&w->tasks, 4);
+    work->obj->anim = anim;
+    work->obj->paletteIndex = work->palette->index;
+    SrollBCharChangeAnim(work);
+    TaskPoolInit(&work->tasks, 4);
 }
 
-s32 task_sroll_b_char_1(SrollBCharWork* w) {
+s32 task_sroll_b_char_1(SrollBCharWork* work) {
     SrollBCrtnArg a;
 
-    if (w->obj->flags & EVTOBJ_FLAG_ANIM_CHANGED) {
-        SrollBCharChangeAnim(w);
+    if (work->obj->flags & EVTOBJ_FLAG_ANIM_CHANGED) {
+        SrollBCharChangeAnim(work);
     }
 
-    if ((w->obj->drawFlags & SPRITE_FLAG_BLEND) == 0) {
-        FadeSetPaletteExcluded((w->palette->index & 15) + 16, 0);
+    if ((work->obj->drawFlags & SPRITE_FLAG_BLEND) == 0) {
+        FadeSetPaletteExcluded((work->palette->index & 15) + 16, 0);
     } else {
-        FadeSetPaletteExcluded((w->palette->index & 15) + 16, 1);
+        FadeSetPaletteExcluded((work->palette->index & 15) + 16, 1);
     }
 
-    AnimUpdate(&w->anim);
-    TaskPoolUpdate(&w->tasks);
+    AnimUpdate(&work->anim);
+    TaskPoolUpdate(&work->tasks);
 
-    switch (w->motion) {
+    switch (work->motion) {
     case 1:
-        w->obj->x -= 128;
-        w->obj->y += 128;
+        work->obj->x -= 128;
+        work->obj->y += 128;
         break;
     case 2:
-        w->obj->z = gSrollBCharHopOffsets[(w->motionTimer >> 2) & 15] << 8;
-        w->motionTimer++;
+        work->obj->z = gSrollBCharHopOffsets[(work->motionTimer >> 2) & 15] << 8;
+        work->motionTimer++;
         break;
     case 3:
-        if ((w->motionTimer & 3) == 0) {
+        if ((work->motionTimer & 3) == 0) {
             a.kind = 2;
-            a.x = w->obj->x;
-            a.y = w->obj->y;
-            TaskCreate(&w->tasks, &gTaskDescSrollBCrtn, &a);
+            a.x = work->obj->x;
+            a.y = work->obj->y;
+            TaskCreate(&work->tasks, &gTaskDescSrollBCrtn, &a);
         }
 
-        w->obj->z = (gSrollBCharHopOffsets[(w->motionTimer >> 2) & 15] << 8) >> 2;
-        w->motionTimer++;
+        work->obj->z = (gSrollBCharHopOffsets[(work->motionTimer >> 2) & 15] << 8) >> 2;
+        work->motionTimer++;
         break;
     case 4:
-        w->obj->x += 128;
-        w->obj->y -= 128;
+        work->obj->x += 128;
+        work->obj->y -= 128;
         break;
     case 5:
-        w->obj->x += (gSrollBCharSwayOffsets[(w->motionTimer >> 2) & 15] << 8) >> 2;
-        w->motionTimer++;
+        work->obj->x += (gSrollBCharSwayOffsets[(work->motionTimer >> 2) & 15] << 8) >> 2;
+        work->motionTimer++;
         break;
     }
 
     return 1;
 }
 
-void task_sroll_b_char_2(SrollBCharWork* w) {
+void task_sroll_b_char_2(SrollBCharWork* work) {
     EvtObj* obj;
     void* gfx;
     u16 x;
     u16 y;
 
-    obj = w->obj;
+    obj = work->obj;
 
     if ((obj->flags & EVTOBJ_FLAG_HIDDEN) == 0) {
         x = obj->x >> 8;
         y = (obj->y + obj->z) >> 8;
-        gfx = AnimGetGfx(&w->anim);
-        DrawSprite(x, y, gfx, w->tiles, w->palette,
+        gfx = AnimGetGfx(&work->anim);
+        DrawSprite(x, y, gfx, work->tiles, work->palette,
                    AllocObjAffine(obj->angle, obj->scaleX, obj->scaleY, 1), obj->drawFlags, 0xFF0);
-        TaskPoolDraw(&w->tasks);
+        TaskPoolDraw(&work->tasks);
     }
 }
 
-void task_sroll_b_char_3(SrollBCharWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    TaskPoolDestroy(&w->tasks);
+void task_sroll_b_char_3(SrollBCharWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    TaskPoolDestroy(&work->tasks);
 }
 
 const s32 gSrollBCharSwayOffsets[16] = { -1, -2, -3, -4, -3, -2, -1, 0, 1, 2, 3, 4, 3, 2, 1, 0 };

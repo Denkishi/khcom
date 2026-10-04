@@ -23,55 +23,55 @@
 #include "types.h"
 #include <stddef.h>
 
-void MapNiserikuCheckTalk(MapNiserikuWork* w) {
-    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
+void MapNiserikuCheckTalk(MapNiserikuWork* work) {
+    if (work->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-        CreateCardMessageTask(&w->tasks, 0, 0x34);
-        w->update = MapNiserikuWaitMessage;
+        CreateCardMessageTask(&work->tasks, 0, 0x34);
+        work->update = MapNiserikuWaitMessage;
     }
 }
 
-void MapNiserikuWaitMessage(MapNiserikuWork* w) {
+void MapNiserikuWaitMessage(MapNiserikuWork* work) {
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
-        w->update = MapNiserikuCheckTalk;
+        work->update = MapNiserikuCheckTalk;
     }
 }
 
-void MapNiserikuWaitApproach(MapNiserikuWork* w) {
+void MapNiserikuWaitApproach(MapNiserikuWork* work) {
     s32 dx;
     s32 dy;
 
-    dx = w->obj.fieldPosition.x - gFieldState->actor.fieldPosition.x;
+    dx = work->obj.fieldPosition.x - gFieldState->actor.fieldPosition.x;
 
     if (dx < 0) {
-        dx = gFieldState->actor.fieldPosition.x - w->obj.fieldPosition.x;
+        dx = gFieldState->actor.fieldPosition.x - work->obj.fieldPosition.x;
     }
 
-    dy = w->obj.fieldPosition.y - gFieldState->actor.fieldPosition.y;
+    dy = work->obj.fieldPosition.y - gFieldState->actor.fieldPosition.y;
 
     if (dy < 0) {
-        dy = gFieldState->actor.fieldPosition.y - w->obj.fieldPosition.y;
+        dy = gFieldState->actor.fieldPosition.y - work->obj.fieldPosition.y;
     }
 
     if (dx <= 0x8000 && dy <= 0x8000) {
         if (Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < 0x3000) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
-            w->update = MapNiserikuStartEvent;
+            work->update = MapNiserikuStartEvent;
         }
     }
 }
 
-void MapNiserikuStartEvent(MapNiserikuWork* w) {
+void MapNiserikuStartEvent(MapNiserikuWork* work) {
     if (!FadeIsActive()) {
         RequestEventMode(0x3B);
-        w->update = NULL;
+        work->update = NULL;
     }
 }
 
-void Task_MapNiseriku_0(MapNiserikuWork* w) {
-    FldObj* e = &w->obj;
+void Task_MapNiseriku_0(MapNiserikuWork* work) {
+    FldObj* e = &work->obj;
     s32 c;
 
     switch (gMapFloorState.progress) {
@@ -105,106 +105,106 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         c = 1;
     }
 
-    w->registered = c;
+    work->registered = c;
 
-    w->visible = 1;
-    w->targeted = 0;
-    TaskPoolInit(&w->tasks2, 1);
-    TaskCreate(&w->tasks2, &gTaskDescMapTalk, &w->obj);
-    TaskPoolInit(&w->tasks, 2);
+    work->visible = 1;
+    work->targeted = 0;
+    TaskPoolInit(&work->tasks2, 1);
+    TaskCreate(&work->tasks2, &gTaskDescMapTalk, &work->obj);
+    TaskPoolInit(&work->tasks, 2);
 
     switch (gMapFloorState.progress) {
     case 27:
-        w->update = MapNiserikuCheckTalk;
-        w->tiles = AllocObjTiles(0x680, gNiseFl00Tiles);
-        w->palette = LoadObjPalette(gNiserikuPalette, 32);
-        AnimInit(&w->anim, gNiseFl00Anims, gNiseFl00Frames);
-        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-        ColliderInit(&w->collider, 4, 16, 48);
-        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
-        TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
+        work->update = MapNiserikuCheckTalk;
+        work->tiles = AllocObjTiles(0x680, gNiseFl00Tiles);
+        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        AnimInit(&work->anim, gNiseFl00Anims, gNiseFl00Frames);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+        ColliderInit(&work->collider, 4, 16, 48);
+        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
     case 23:
-        w->update = MapNiserikuWaitApproach;
-        w->tiles = AllocObjTiles(0x320, gNiserikuHizaFTiles);
-        w->palette = LoadObjPalette(gNiserikuPalette, 32);
-        AnimInit(&w->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
-        AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-        ColliderInit(&w->collider, 4, 16, 48);
-        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
-        TaskCreate(&w->tasks, &gTaskDescFldShadow, &w->obj);
+        work->update = MapNiserikuWaitApproach;
+        work->tiles = AllocObjTiles(0x320, gNiserikuHizaFTiles);
+        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        AnimInit(&work->anim, gNiserikuHizaFAnims, gNiserikuHizaFFrames);
+        AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+        ColliderInit(&work->collider, 4, 16, 48);
+        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        TaskCreate(&work->tasks, &gTaskDescFldShadow, &work->obj);
         break;
     case 24:
     case 25:
     case 26:
     default:
-        w->update = NULL;
-        w->tiles = AllocObjTiles(0x300, gNiserikuDownFTiles);
-        w->palette = LoadObjPalette(gNiserikuPalette, 32);
-        AnimInit(&w->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
-        AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
-        ColliderInit(&w->collider, 4, 36, 48);
-        ColliderSetPosition(&w->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
+        work->update = NULL;
+        work->tiles = AllocObjTiles(0x300, gNiserikuDownFTiles);
+        work->palette = LoadObjPalette(gNiserikuPalette, 32);
+        AnimInit(&work->anim, gNiserikuDownFAnims, gNiserikuDownFFrames);
+        AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
+        ColliderInit(&work->collider, 4, 36, 48);
+        ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
         break;
     }
 
-    if (w->registered) {
+    if (work->registered) {
         FldObjRegister(e);
     }
 }
 
-s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
+s32 Task_MapNiseriku_1(MapNiserikuWork* work) {
     if ((u8)IsMapInterrupted()) {
-        w->visible = 0;
+        work->visible = 0;
     } else {
-        w->visible = 1;
-        w->targeted = IsFldObjTalkTarget(&w->obj);
-        TaskPoolUpdate(&w->tasks);
-        TaskPoolUpdate(&w->tasks2);
-        AnimUpdate(&w->anim);
+        work->visible = 1;
+        work->targeted = IsFldObjTalkTarget(&work->obj);
+        TaskPoolUpdate(&work->tasks);
+        TaskPoolUpdate(&work->tasks2);
+        AnimUpdate(&work->anim);
 
-        if (w->update != NULL) {
-            w->update(w);
+        if (work->update != NULL) {
+            work->update(work);
         }
     }
 
     return 1;
 }
 
-void Task_MapNiseriku_2(MapNiserikuWork* w) {
-    FldPos* p = &w->obj.fieldPosition;
+void Task_MapNiseriku_2(MapNiserikuWork* work) {
+    FldPos* p = &work->obj.fieldPosition;
     u16 v;
     s32 k;
     s16 x;
     s16 y;
 
-    if (w->visible) {
+    if (work->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
         v = -0x1004 - k * 4;
-        DrawSprite(x, y, AnimGetGfx(&w->anim), w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), v);
-        w->obj.shadowZ = p->ground;
-        w->obj.shadowPriority = v + 1;
-        TaskPoolDraw(&w->tasks);
+        DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), v);
+        work->obj.shadowZ = p->ground;
+        work->obj.shadowPriority = v + 1;
+        TaskPoolDraw(&work->tasks);
 
-        if (w->targeted) {
-            TaskPoolDraw(&w->tasks2);
+        if (work->targeted) {
+            TaskPoolDraw(&work->tasks2);
         }
     }
 }
 
-void Task_MapNiseriku_3(MapNiserikuWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    ColliderUnregister(&w->collider);
+void Task_MapNiseriku_3(MapNiserikuWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    ColliderUnregister(&work->collider);
 
-    if (w->registered) {
-        FldObjUnregister(&w->obj);
+    if (work->registered) {
+        FldObjUnregister(&work->obj);
     }
 
-    TaskPoolDestroy(&w->tasks);
-    TaskPoolDestroy(&w->tasks2);
+    TaskPoolDestroy(&work->tasks);
+    TaskPoolDestroy(&work->tasks2);
 }
 
 TaskDesc gTaskDescMapNiseriku = {

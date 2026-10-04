@@ -40,8 +40,8 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
     return Sqrt8((dx * dx >> 8) + (dy * dy >> 8)) < lim ? 1 : 0;
 }
 
-void MapStairWaitStepOn(MapStairWork* w) {
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800)) {
+void MapStairWaitStepOn(MapStairWork* work) {
+    if ((u8)IsPlayerWithin(&work->obj.fieldPosition, 0x800)) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= ROOM_FLAG_WALK_OUT;
@@ -52,10 +52,10 @@ void MapStairWaitStepOn(MapStairWork* w) {
     }
 }
 
-void MapStairWaitStepOn2(MapStairWork* w) {
+void MapStairWaitStepOn2(MapStairWork* work) {
     s32 k = 0x800;
 
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k)) {
+    if ((u8)IsPlayerWithin(&work->obj.fieldPosition, k)) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= k;
@@ -66,81 +66,81 @@ void MapStairWaitStepOn2(MapStairWork* w) {
     }
 }
 
-void MapStairWaitApproach(MapStairWork* w) {
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x3000)) {
+void MapStairWaitApproach(MapStairWork* work) {
+    if ((u8)IsPlayerWithin(&work->obj.fieldPosition, 0x3000)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
-        CreateCardMessageTask(&w->tasks, 0, 0xA7);
-        w->update = MapStairWaitMessage;
+        CreateCardMessageTask(&work->tasks, 0, 0xA7);
+        work->update = MapStairWaitMessage;
     }
 }
 
-void MapStairWaitMessage(MapStairWork* w) {
+void MapStairWaitMessage(MapStairWork* work) {
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
         gGameState.progression.tutorialFlags |= 0x400;
-        w->update = MapStairWaitStepOn;
+        work->update = MapStairWaitStepOn;
     }
 }
 
-void Task_MapStair_0(MapStairWork* w, FldObj* arg) {
+void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
     s32 y;
 
-    w->obj.angle = arg->angle;
-    w->obj.fieldPosition.x = arg->fieldPosition.x;
+    work->obj.angle = arg->angle;
+    work->obj.fieldPosition.x = arg->fieldPosition.x;
     y = arg->fieldPosition.y;
-    w->obj.fieldPosition.ground = 0;
-    w->obj.fieldPosition.z = 0;
-    w->obj.fieldPosition.y = y;
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
-    w->tiles = LoadObjTiles(gUnk_08B1EA00, 0xE0);
-    w->visible = 0;
+    work->obj.fieldPosition.ground = 0;
+    work->obj.fieldPosition.z = 0;
+    work->obj.fieldPosition.y = y;
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
+    work->tiles = LoadObjTiles(gUnk_08B1EA00, 0xE0);
+    work->visible = 0;
 
-    switch (w->obj.angle) {
+    switch (work->obj.angle) {
     case 0x2D:
         if ((gGameState.progression.tutorialFlags & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
-            w->update = MapStairWaitApproach;
+            work->update = MapStairWaitApproach;
         } else {
-            w->update = MapStairWaitStepOn;
+            work->update = MapStairWaitStepOn;
         }
 
         break;
     case 0xAD:
-        w->update = MapStairWaitStepOn2;
+        work->update = MapStairWaitStepOn2;
         break;
     }
 
-    TaskPoolInit(&w->tasks, 1);
+    TaskPoolInit(&work->tasks, 1);
 }
 
-s32 Task_MapStair_1(MapStairWork* w) {
-    TaskPoolUpdate(&w->tasks);
+s32 Task_MapStair_1(MapStairWork* work) {
+    TaskPoolUpdate(&work->tasks);
 
-    if (w->update != NULL) {
-        w->update(w);
+    if (work->update != NULL) {
+        work->update(work);
     }
 
     return 1;
 }
 
-void Task_MapStair_2(MapStairWork* w) {
+void Task_MapStair_2(MapStairWork* work) {
     s32 x;
     s32 y;
 
-    TaskPoolDraw(&w->tasks);
+    TaskPoolDraw(&work->tasks);
 
-    if (w->visible == 1) {
-        x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
-        y = (w->obj.fieldPosition.y >> 8) + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
-        DrawSprite(x, y, gUnk_08B1E9A6, w->tiles, w->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    if (work->visible == 1) {
+        x = (work->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
+        y = (work->obj.fieldPosition.y >> 8) + (work->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
+        DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
     }
 }
 
-void Task_MapStair_3(MapStairWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    TaskPoolDestroy(&w->tasks);
+void Task_MapStair_3(MapStairWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    TaskPoolDestroy(&work->tasks);
 }
 
 TaskDesc gTaskDescMapStair = {

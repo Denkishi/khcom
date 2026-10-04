@@ -19,11 +19,11 @@ struct SaveLargeSlice;
 struct SaveSmallSlice;
 struct BtlPrizeSrc;
 
-void Mapcard_2(struct MapcardWork* w);
-void Level_Up_3(struct LevelUpWork* w);
+void Mapcard_2(struct MapcardWork* work);
+void Level_Up_3(struct LevelUpWork* work);
 
 void InitRikuDeckForWorld(u8 a);
-void SelectPrevSoraCard(struct CardBattleWork* w, u8 b, u8 c);
+void SelectPrevSoraCard(struct CardBattleWork* work, u8 b, u8 c);
 void func_0807B3C4(s32 a);
 u8 GetSoraCardListIndex();
 u8 GetSoraStockCount();

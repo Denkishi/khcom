@@ -55,41 +55,41 @@ void Mode_DeckExchange_2() {
 }
 #endif
 
-void DarkPoint_0(DarkPointWork* w) {
-    w->tiles = LoadObjTiles(gUnk_093FB6C4, 576);
-    w->slideTimer = 8;
-    w->x = -0x2000;
-    SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
+void DarkPoint_0(DarkPointWork* work) {
+    work->tiles = LoadObjTiles(gUnk_093FB6C4, 576);
+    work->slideTimer = 8;
+    work->x = -0x2000;
+    SplitFourDigits(gBtlWork->darkPoints, &work->thousands);
 }
 
-s32 DarkPoint_1(DarkPointWork* w) {
-    SplitFourDigits(gBtlWork->darkPoints, &w->thousands);
+s32 DarkPoint_1(DarkPointWork* work) {
+    SplitFourDigits(gBtlWork->darkPoints, &work->thousands);
 
-    if (w->slideTimer > 0) {
-        ApproachValue(&w->x, 0, w->slideTimer);
-        w->slideTimer--;
+    if (work->slideTimer > 0) {
+        ApproachValue(&work->x, 0, work->slideTimer);
+        work->slideTimer--;
     }
 
     return 1;
 }
 
-void DarkPoint_2(DarkPointWork* w) {
-    DrawSprite(w->x >> 8, 27, gUnk_09EF1298[0], w->tiles, gCardBattleState->palette, NULL, 0, 30);
+void DarkPoint_2(DarkPointWork* work) {
+    DrawSprite(work->x >> 8, 27, gUnk_09EF1298[0], work->tiles, gCardBattleState->palette, NULL, 0, 30);
 
-    if (w->hundreds != 0) {
-        DrawSprite((w->x >> 8) + 11, 30, gUnk_09EF1298[w->hundreds + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((w->x >> 8) + 23, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
-    } else if (w->tens != 0) {
-        DrawSprite((w->x >> 8) + 15, 30, gUnk_09EF1298[w->tens + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((w->x >> 8) + 21, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
+    if (work->hundreds != 0) {
+        DrawSprite((work->x >> 8) + 11, 30, gUnk_09EF1298[work->hundreds + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 17, 30, gUnk_09EF1298[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 23, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+    } else if (work->tens != 0) {
+        DrawSprite((work->x >> 8) + 15, 30, gUnk_09EF1298[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 21, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
     } else {
-        DrawSprite((w->x >> 8) + 17, 30, gUnk_09EF1298[w->ones + 1], w->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 17, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
     }
 }
 
-void DarkPoint_3(DarkPointWork* w) {
-    ReleaseObjTiles(w->tiles);
+void DarkPoint_3(DarkPointWork* work) {
+    ReleaseObjTiles(work->tiles);
 }
 
 void AddCardToDeckViaActive(u8 a, u16 b) {

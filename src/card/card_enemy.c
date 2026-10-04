@@ -20,9 +20,9 @@
 static s16 sBossCardValue;
 
 
-u8 EnemyCardDeal(CardDisplayWork* p, void* a);
-u8 EnemyCardClosed(CardDisplayWork* p, void* a);
-u8 EnemyCardShrinkAway(CardDisplayWork* p);
+u8 EnemyCardDeal(CardDisplayWork* work, void* a);
+u8 EnemyCardClosed(CardDisplayWork* work, void* a);
+u8 EnemyCardShrinkAway(CardDisplayWork* work);
 
 static const s32 sEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,
@@ -49,57 +49,57 @@ void LookupEnemyCardDef(CardDisplayArgs* a, const CardDef** b, u8 c) {
     }
 }
 
-void LinkEnemyCardDisplay(CardDisplayWork* p) {
-    ListNodeInit(&p->node, p->args.pool, p);
-    ListPoolAppend(&p->node, p->args.pool);
+void LinkEnemyCardDisplay(CardDisplayWork* work) {
+    ListNodeInit(&work->node, work->args.pool, work);
+    ListPoolAppend(&work->node, work->args.pool);
 }
 
-void card_enemy_0(CardDisplayWork* p, CardDisplayArgs* a) {
-    p->tiles = NULL;
-    p->tiles2 = NULL;
-    p->tiles3 = NULL;
-    p->palette = NULL;
-    p->command = 0;
-    p->args = *a;
-    p->flags = 0;
-    p->priority = 0x50;
-    p->timer = 0;
-    LookupEnemyCardDef(&p->args, &p->cardDef, p->args.index);
-    p->scaleX = 0x100;
-    p->scaleY = 0x100;
-    p->bobAngle = GetRandom();
-    p->angle = 0;
-    p->ringRadius = 0;
-    p->ringRadiusTarget = 0x2400;
-    p->ringCenterX = sEnemyCardLayout[0];
-    p->ringCenterY = sEnemyCardLayout[1];
-    p->x = 0xDC00;
-    p->y = 0x8400;
-    p->value = p->cardDef->value;
-    LinkEnemyCardDisplay(p);
+void card_enemy_0(CardDisplayWork* work, CardDisplayArgs* a) {
+    work->tiles = NULL;
+    work->tiles2 = NULL;
+    work->tiles3 = NULL;
+    work->palette = NULL;
+    work->command = 0;
+    work->args = *a;
+    work->flags = 0;
+    work->priority = 0x50;
+    work->timer = 0;
+    LookupEnemyCardDef(&work->args, &work->cardDef, work->args.index);
+    work->scaleX = 0x100;
+    work->scaleY = 0x100;
+    work->bobAngle = GetRandom();
+    work->angle = 0;
+    work->ringRadius = 0;
+    work->ringRadiusTarget = 0x2400;
+    work->ringCenterX = sEnemyCardLayout[0];
+    work->ringCenterY = sEnemyCardLayout[1];
+    work->x = 0xDC00;
+    work->y = 0x8400;
+    work->value = work->cardDef->value;
+    LinkEnemyCardDisplay(work);
 }
 
-u8 card_enemy_1(CardDisplayWork* p, void* a) {
-    if (!(p->flags & CARD_DISP_FLAG_VISIBLE)) {
-        if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
-            ReleaseCardDisplayGfx(p);
-            p->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
-            p->flags |= CARD_DISP_FLAG_FACE_DOWN;
+u8 card_enemy_1(CardDisplayWork* work, void* a) {
+    if (!(work->flags & CARD_DISP_FLAG_VISIBLE)) {
+        if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
+            ReleaseCardDisplayGfx(work);
+            work->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
+            work->flags |= CARD_DISP_FLAG_FACE_DOWN;
         }
     }
 
-    UpdateCardDisplayFlip(p);
+    UpdateCardDisplayFlip(work);
 
-    if (p->flags & CARD_DISP_FLAG_DEALING) {
-        p->timer = 8;
+    if (work->flags & CARD_DISP_FLAG_DEALING) {
+        work->timer = 8;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardDeal);
-    } else if (!(p->flags & CARD_DISP_FLAG_FROZEN)) {
-        UpdateEnemyCardRingPosition(p);
-        p->bobAngle += 4;
-        DispatchEnemyCardCommand(p, a);
+    } else if (!(work->flags & CARD_DISP_FLAG_FROZEN)) {
+        UpdateEnemyCardRingPosition(work);
+        work->bobAngle += 4;
+        DispatchEnemyCardCommand(work, a);
 
-        if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
-            p->flags &= ~CARD_DISP_FLAG_SETTLED;
+        if (!(work->flags & CARD_DISP_FLAG_OPEN)) {
+            work->flags &= ~CARD_DISP_FLAG_SETTLED;
             SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardClosed);
         }
     }
@@ -107,210 +107,210 @@ u8 card_enemy_1(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-void EnemyCardDraw(CardDisplayWork* p) {
+void EnemyCardDraw(CardDisplayWork* work) {
     void* gfx;
     ObjAffine* affine;
     u16 flags;
 
-    gfx = p->cardDef->gfx;
+    gfx = work->cardDef->gfx;
 
-    if (p->flags & CARD_DISP_FLAG_VISIBLE) {
-        if (!(p->flags & CARD_DISP_FLAG_FACE_DOWN)) {
-            if (p->flags & CARD_DISP_FLAG_GFX_LOADED) {
-                if ((p->flags & CARD_DISP_FLAG_DOUBLE_SIZE) == 0) {
-                    affine = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 0);
+    if (work->flags & CARD_DISP_FLAG_VISIBLE) {
+        if (!(work->flags & CARD_DISP_FLAG_FACE_DOWN)) {
+            if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {
+                if ((work->flags & CARD_DISP_FLAG_DOUBLE_SIZE) == 0) {
+                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 0);
                 } else {
-                    affine = AllocObjAffine(p->angle, p->scaleX, p->scaleY, 1);
+                    affine = AllocObjAffine(work->angle, work->scaleX, work->scaleY, 1);
                 }
 
                 flags = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
-                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
-                           gEnemyCardBacks[0].gfx, gCardBattleState->tiles[p->cardDef->category],
-                           gCardBattleState->palette, affine, flags, p->priority - 1);
-                DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
-                           gfx, p->tiles, p->palette, affine, flags, p->priority);
+                DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
+                           gEnemyCardBacks[0].gfx, gCardBattleState->tiles[work->cardDef->category],
+                           gCardBattleState->palette, affine, flags, work->priority - 1);
+                DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
+                           gfx, work->tiles, work->palette, affine, flags, work->priority);
 
-                if (p->valueModified) {
-                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
-                               gUnk_09EE981C[p->value], gCardBattleState->tiles7,
-                               gCardBattleState->palette2, affine, flags, p->priority - 2);
+                if (work->valueModified) {
+                    DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
+                               gUnk_09EE981C[work->value], gCardBattleState->tiles7,
+                               gCardBattleState->palette2, affine, flags, work->priority - 2);
                 } else {
-                    DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
-                               gUnk_09EE981C[p->value], gCardBattleState->tiles5,
-                               gCardBattleState->palette, affine, flags, p->priority - 2);
+                    DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
+                               gUnk_09EE981C[work->value], gCardBattleState->tiles5,
+                               gCardBattleState->palette, affine, flags, work->priority - 2);
                 }
             }
         }
     }
 }
 
-void EnemyCardDestroy(CardDisplayWork* p) {
-    if (p->tiles != NULL) {
-        ReleaseCardDisplayGfx(p);
+void EnemyCardDestroy(CardDisplayWork* work) {
+    if (work->tiles != NULL) {
+        ReleaseCardDisplayGfx(work);
     }
 
-    if (p->palette2 != NULL) {
-        ReleaseObjPalette(p->palette2);
+    if (work->palette2 != NULL) {
+        ReleaseObjPalette(work->palette2);
     }
 }
 
-u8 EnemyCardWaitPlayEnd(CardDisplayWork* p, void* a) {
+u8 EnemyCardWaitPlayEnd(CardDisplayWork* work, void* a) {
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
-        p->timer = 8;
-        p->spinSpeed = 8;
+        work->timer = 8;
+        work->spinSpeed = 8;
         gCardBattleState->activeCardCount = 0;
         gCardBattleState->activeValue = 0;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
         gBtlWork->flags &= ~BTL_FLAG_CARD_ACTIVE;
         gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_BUSY;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardShrinkAway);
-    } else if (p->flags & CARD_DISP_FLAG_BROKEN) {
-        p->priority -= 4;
-        p->ringRadius = 0x500;
-        p->timer = 0x100;
-        p->ringAngle = (u16)(GetRandom() % 33) - 16;
-        p->spinSpeed = GetRandom() % 5 + 254;
+    } else if (work->flags & CARD_DISP_FLAG_BROKEN) {
+        work->priority -= 4;
+        work->ringRadius = 0x500;
+        work->timer = 0x100;
+        work->ringAngle = (u16)(GetRandom() % 33) - 16;
+        work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardBreakFall);
     }
 
     return 1;
 }
 
-u8 EnemyUsecard_1(CardDisplayWork* p, void* a) {
-    p->priority = 80;
-    ApproachValue(&p->x, 0x7800, p->timer);
-    ApproachValue(&p->y, 0x8400, p->timer);
+u8 EnemyUsecard_1(CardDisplayWork* work, void* a) {
+    work->priority = 80;
+    ApproachValue(&work->x, 0x7800, work->timer);
+    ApproachValue(&work->y, 0x8400, work->timer);
 
-    if ((s16)p->timer > 0) {
-        p->timer--;
+    if ((s16)work->timer > 0) {
+        work->timer--;
     }
 
     if (gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) {
-        if (p->flags & CARD_DISP_FLAG_IN_PLAY) {
-            if ((s16)p->timer == 0) {
+        if (work->flags & CARD_DISP_FLAG_IN_PLAY) {
+            if ((s16)work->timer == 0) {
                 SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardWaitPlayEnd);
             }
-        } else if ((s16)p->timer <= 2) {
-            p->priority -= 4;
-            p->ringRadius = 0x500;
-            p->timer = 0x100;
-            p->ringAngle = (u16)(GetRandom() % 33) - 16;
-            p->spinSpeed = GetRandom() % 5 + 254;
+        } else if ((s16)work->timer <= 2) {
+            work->priority -= 4;
+            work->ringRadius = 0x500;
+            work->timer = 0x100;
+            work->ringAngle = (u16)(GetRandom() % 33) - 16;
+            work->spinSpeed = GetRandom() % 5 + 254;
             SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardFlyOff);
             return 1;
         }
-    } else if ((s16)p->timer <= 2) {
-        p->priority -= 4;
-        p->ringRadius = 0x500;
-        p->timer = 0x100;
-        p->ringAngle = (u16)(GetRandom() % 33) - 16;
-        p->spinSpeed = GetRandom() % 5 + 254;
+    } else if ((s16)work->timer <= 2) {
+        work->priority -= 4;
+        work->ringRadius = 0x500;
+        work->timer = 0x100;
+        work->ringAngle = (u16)(GetRandom() % 33) - 16;
+        work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardFlyOff);
     }
 
     return 1;
 }
 
-u8 EnemyCardDeal(CardDisplayWork* p, void* a) {
-    ApproachValue(&p->x, gSineTable[((p->ringAngle >> 8) - 32) & 0xFF] * (p->ringRadius >> 8) + sEnemyCardLayout[0],
-                  p->timer);
-    ApproachValue(&p->y, -gSineTable[(((p->ringAngle >> 8) - 32) & 0xFF) + 0x40] * (p->ringRadius >> 8) + sEnemyCardLayout[1],
-                  p->timer);
-    p->timer--;
+u8 EnemyCardDeal(CardDisplayWork* work, void* a) {
+    ApproachValue(&work->x, gSineTable[((work->ringAngle >> 8) - 32) & 0xFF] * (work->ringRadius >> 8) + sEnemyCardLayout[0],
+                  work->timer);
+    ApproachValue(&work->y, -gSineTable[(((work->ringAngle >> 8) - 32) & 0xFF) + 0x40] * (work->ringRadius >> 8) + sEnemyCardLayout[1],
+                  work->timer);
+    work->timer--;
 
-    if ((s16)p->timer <= 1) {
-        p->timer = 0;
-        p->flags &= ~CARD_DISP_FLAG_DEALING;
+    if ((s16)work->timer <= 1) {
+        work->timer = 0;
+        work->flags &= ~CARD_DISP_FLAG_DEALING;
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
     return 1;
 }
 
-u8 EnemyCardClosed(CardDisplayWork* p, void* a) {
-    if (p->command == 7) {
+u8 EnemyCardClosed(CardDisplayWork* work, void* a) {
+    if (work->command == 7) {
         return 0;
     }
 
-    p->ringRadius += -p->ringRadius >> 1;
-    p->x += (sEnemyCardLayout[8] - p->x) >> 1;
-    p->y += (sEnemyCardLayout[9] - p->y) >> 1;
+    work->ringRadius += -work->ringRadius >> 1;
+    work->x += (sEnemyCardLayout[8] - work->x) >> 1;
+    work->y += (sEnemyCardLayout[9] - work->y) >> 1;
 
-    if (p->flags & CARD_DISP_FLAG_OPEN) {
+    if (work->flags & CARD_DISP_FLAG_OPEN) {
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
     return 1;
 }
 
-void UpdateEnemyCardRingPosition(CardDisplayWork* p) {
+void UpdateEnemyCardRingPosition(CardDisplayWork* work) {
     s32 t;
 
-    if (p->ringAngleTarget - p->ringAngle > 0x7F00) {
-        p->ringAngle += 0x10000;
+    if (work->ringAngleTarget - work->ringAngle > 0x7F00) {
+        work->ringAngle += 0x10000;
     }
 
-    t = p->ringAngle - 0x10000;
+    t = work->ringAngle - 0x10000;
 
-    if (p->ringAngleTarget - t < p->ringAngle - p->ringAngleTarget) {
-        p->ringAngle = t;
+    if (work->ringAngleTarget - t < work->ringAngle - work->ringAngleTarget) {
+        work->ringAngle = t;
     }
 
-    p->swingAngle += (p->swingAngleTarget - p->swingAngle) >> 2;
-    p->ringRadius += (p->ringRadiusTarget - p->ringRadius) >> 1;
-    ApproachValue(&p->ringAngle, p->ringAngleTarget, p->timer);
-    p->timer--;
+    work->swingAngle += (work->swingAngleTarget - work->swingAngle) >> 2;
+    work->ringRadius += (work->ringRadiusTarget - work->ringRadius) >> 1;
+    ApproachValue(&work->ringAngle, work->ringAngleTarget, work->timer);
+    work->timer--;
 
-    if ((s16)p->timer <= 1) {
-        p->timer = 0;
-        p->flags |= CARD_DISP_FLAG_SETTLED;
+    if ((s16)work->timer <= 1) {
+        work->timer = 0;
+        work->flags |= CARD_DISP_FLAG_SETTLED;
     } else {
-        p->flags &= ~CARD_DISP_FLAG_SETTLED;
+        work->flags &= ~CARD_DISP_FLAG_SETTLED;
     }
 
-    p->x = gSineTable[((p->ringAngle >> 8) - 32) & 0xFF] * (p->ringRadius >> 8) + p->ringCenterX;
-    p->y = -gSineTable[(((p->ringAngle >> 8) - 32) & 0xFF) + 64] * (p->ringRadius >> 8) + p->ringCenterY;
+    work->x = gSineTable[((work->ringAngle >> 8) - 32) & 0xFF] * (work->ringRadius >> 8) + work->ringCenterX;
+    work->y = -gSineTable[(((work->ringAngle >> 8) - 32) & 0xFF) + 64] * (work->ringRadius >> 8) + work->ringCenterY;
 }
 
-u8 EnemyCardShrinkAway(CardDisplayWork* p) {
-    ApproachValue(&p->y, 0x8200, p->timer);
+u8 EnemyCardShrinkAway(CardDisplayWork* work) {
+    ApproachValue(&work->y, 0x8200, work->timer);
 
-    if ((s16)p->timer > 0) {
-        p->timer--;
+    if ((s16)work->timer > 0) {
+        work->timer--;
     } else {
-        p->timer = 0;
+        work->timer = 0;
     }
 
-    if ((s16)p->timer == 0) {
-        p->timer = 0;
-        p->angle += p->spinSpeed;
-        p->spinSpeed++;
+    if ((s16)work->timer == 0) {
+        work->timer = 0;
+        work->angle += work->spinSpeed;
+        work->spinSpeed++;
 
-        if (p->scaleX <= 25) {
+        if (work->scaleX <= 25) {
             return 0;
         }
 
-        p->scaleX -= 25;
-        p->scaleY -= 25;
+        work->scaleX -= 25;
+        work->scaleY -= 25;
     }
 
     return 1;
 }
 
-u8 EnemyCardFlyOff(CardDisplayWork* p) {
-    p->command = 0;
-    p->y -= p->ringRadius;
-    p->ringRadius -= (s16)p->timer;
-    p->timer++;
-    p->x -= gSineTable[(p->ringAngle & 0xFF) + 0x40];
-    p->angle += p->spinSpeed;
-    p->scaleX -= 5;
-    p->scaleY -= 5;
+u8 EnemyCardFlyOff(CardDisplayWork* work) {
+    work->command = 0;
+    work->y -= work->ringRadius;
+    work->ringRadius -= (s16)work->timer;
+    work->timer++;
+    work->x -= gSineTable[(work->ringAngle & 0xFF) + 0x40];
+    work->angle += work->spinSpeed;
+    work->scaleX -= 5;
+    work->scaleY -= 5;
 
-    if (IsCardDisplayOffScreen(p)) {
-        p->flags &= ~CARD_DISP_FLAG_VISIBLE;
-        ReleaseCardDisplayGfx(p);
-        p->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
+    if (IsCardDisplayOffScreen(work)) {
+        work->flags &= ~CARD_DISP_FLAG_VISIBLE;
+        ReleaseCardDisplayGfx(work);
+        work->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
         gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_BUSY;
         return 0;
     }
@@ -318,162 +318,162 @@ u8 EnemyCardFlyOff(CardDisplayWork* p) {
     return 1;
 }
 
-void func_08090A54(CardDisplayWork* p, void* a) {
-    p->x -= gSineTable[p->spinSpeed] * 3;
-    UpdateCardDisplayFlip(p);
+void func_08090A54(CardDisplayWork* work, void* a) {
+    work->x -= gSineTable[work->spinSpeed] * 3;
+    UpdateCardDisplayFlip(work);
 
-    if (p->spinSpeed != 0) {
-        p->spinSpeed -= 8;
+    if (work->spinSpeed != 0) {
+        work->spinSpeed -= 8;
     } else {
-        p->spinSpeed = 0;
-        p->flags &= ~CARD_DISP_FLAG_VISIBLE;
+        work->spinSpeed = 0;
+        work->flags &= ~CARD_DISP_FLAG_VISIBLE;
         SetTaskUpdate(a, (TaskUpdateFunc)card_enemy_1);
     }
 
-    if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
-        p->flags &= ~CARD_DISP_FLAG_SETTLED;
+    if (!(work->flags & CARD_DISP_FLAG_OPEN)) {
+        work->flags &= ~CARD_DISP_FLAG_SETTLED;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardClosed);
     }
 }
 
-void func_08090ACC(CardDisplayWork* p, void* a) {
-    p->x += gSineTable[p->spinSpeed] * 3;
-    UpdateCardDisplayFlip(p);
+void func_08090ACC(CardDisplayWork* work, void* a) {
+    work->x += gSineTable[work->spinSpeed] * 3;
+    UpdateCardDisplayFlip(work);
 
-    if ((s8)p->spinSpeed >= 0) {
-        p->spinSpeed += 8;
+    if ((s8)work->spinSpeed >= 0) {
+        work->spinSpeed += 8;
     } else {
-        p->spinSpeed = 0x80;
-        p->flags &= ~CARD_DISP_FLAG_SELECTED;
-        p->priority = 100;
+        work->spinSpeed = 0x80;
+        work->flags &= ~CARD_DISP_FLAG_SELECTED;
+        work->priority = 100;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090A54);
     }
 
-    if (!(p->flags & CARD_DISP_FLAG_OPEN)) {
-        p->flags &= ~CARD_DISP_FLAG_SETTLED;
+    if (!(work->flags & CARD_DISP_FLAG_OPEN)) {
+        work->flags &= ~CARD_DISP_FLAG_SETTLED;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardClosed);
     }
 }
 
-void DispatchEnemyCardCommand(CardDisplayWork* p, void* a) {
-    switch (p->command) {
+void DispatchEnemyCardCommand(CardDisplayWork* work, void* a) {
+    switch (work->command) {
     case 5:
-        p->timer = 16;
-        p->priority -= 4;
+        work->timer = 16;
+        work->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyUsecard_1);
         break;
     case 6:
-        p->timer = 8;
-        p->priority -= 4;
+        work->timer = 8;
+        work->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyStockMoveToSlot);
         break;
     case 8:
-        p->priority -= 4;
-        p->ringRadius = 0x500;
-        p->timer = 0x100;
-        p->ringAngle = (u16)(GetRandom() % 33) - 16;
-        p->spinSpeed = GetRandom() % 5 + 254;
+        work->priority -= 4;
+        work->ringRadius = 0x500;
+        work->timer = 0x100;
+        work->ringAngle = (u16)(GetRandom() % 33) - 16;
+        work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardFlyOff);
         break;
     case 7:
-        p->ringRadius = 0x500;
-        p->timer = 0x100;
-        p->ringAngle = (u16)(GetRandom() % 33) - 16;
-        p->spinSpeed = GetRandom() % 5 + 254;
+        work->ringRadius = 0x500;
+        work->timer = 0x100;
+        work->ringAngle = (u16)(GetRandom() % 33) - 16;
+        work->spinSpeed = GetRandom() % 5 + 254;
         SetTaskUpdate(a, (TaskUpdateFunc)EnemyCardFlyOff);
         break;
     case 9:
-        p->spinSpeed = 0;
-        p->priority -= 4;
+        work->spinSpeed = 0;
+        work->priority -= 4;
         SetTaskUpdate(a, (TaskUpdateFunc)func_08090ACC);
-        p->command = 0;
+        work->command = 0;
         break;
     }
 }
 
-u8 EnemyStockMoveToSlot(CardDisplayWork* p, void* a) {
+u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* a) {
     s32 (*tbl)[2]; s32* q;
 
     if (gBtlWork->paused == 1) {
         return 1;
     }
 
-    UpdateCardDisplayFlip(p);
+    UpdateCardDisplayFlip(work);
 
-    if (p->flags & CARD_DISP_FLAG_OPEN) {
-        q = &p->x; tbl = (s32 (*)[2])sEnemyCardLayout; ApproachValue(q, tbl[3 - p->stockIndex][0], p->timer); ApproachValue(&p->y, ((s32 (*)[2])sEnemyCardLayout)[3 - p->stockIndex][1], p->timer);
+    if (work->flags & CARD_DISP_FLAG_OPEN) {
+        q = &work->x; tbl = (s32 (*)[2])sEnemyCardLayout; ApproachValue(q, tbl[3 - work->stockIndex][0], work->timer); ApproachValue(&work->y, ((s32 (*)[2])sEnemyCardLayout)[3 - work->stockIndex][1], work->timer);
     } else {
-        ApproachValue(&p->x, sEnemyCardLayout[8], p->timer);
-        ApproachValue(&p->y, sEnemyCardLayout[9], p->timer);
+        ApproachValue(&work->x, sEnemyCardLayout[8], work->timer);
+        ApproachValue(&work->y, sEnemyCardLayout[9], work->timer);
     }
 
-    if ((s16)p->timer > 0) {
-        p->timer--;
-        p->flags &= ~CARD_DISP_FLAG_SETTLED;
+    if ((s16)work->timer > 0) {
+        work->timer--;
+        work->flags &= ~CARD_DISP_FLAG_SETTLED;
     } else {
-        p->timer = 0;
-        p->flags |= CARD_DISP_FLAG_SETTLED;
+        work->timer = 0;
+        work->flags |= CARD_DISP_FLAG_SETTLED;
     }
 
-    if (p->command == 5) {
-        if (!(gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) && p->stockIndex == 0) {
+    if (work->command == 5) {
+        if (!(gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) && work->stockIndex == 0) {
             gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
         }
 
-        if (p->flags & CARD_DISP_FLAG_UNOPPOSED) {
+        if (work->flags & CARD_DISP_FLAG_UNOPPOSED) {
             SetTaskUpdate(a, (TaskUpdateFunc)SoraStockStartUnopposedPlay);
         } else {
-            p->timer = 15;
-            p->ringRadiusTarget = 0x800;
-            p->ringRadius = 0;
-            p->ringAngleTarget = gPlayedCardAngles[p->stockIndex] * 2;
-            p->ringAngle = 0;
-            p->ringCenterX = p->x;
-            p->ringCenterY = p->y;
+            work->timer = 15;
+            work->ringRadiusTarget = 0x800;
+            work->ringRadius = 0;
+            work->ringAngleTarget = gPlayedCardAngles[work->stockIndex] * 2;
+            work->ringAngle = 0;
+            work->ringCenterX = work->x;
+            work->ringCenterY = work->y;
             SetTaskUpdate(a, (TaskUpdateFunc)SoraStockMoveToPlay);
         }
     }
 
-    p->bobAngle += 4;
+    work->bobAngle += 4;
     return 1;
 }
 
-u8 EnemyCardBreakFall(CardDisplayWork* p, void* a) {
-    p->command = 0;
-    p->y -= p->ringRadius;
-    p->ringRadius -= (s16)p->timer >> 1;
-    p->timer++;
-    p->x += 0x200;
-    p->angle += 16;
+u8 EnemyCardBreakFall(CardDisplayWork* work, void* a) {
+    work->command = 0;
+    work->y -= work->ringRadius;
+    work->ringRadius -= (s16)work->timer >> 1;
+    work->timer++;
+    work->x += 0x200;
+    work->angle += 16;
 
-    if (!(p->flags & CARD_DISP_FLAG_SPIN_MIRRORED)) {
-        p->scaleX -= 20;
+    if (!(work->flags & CARD_DISP_FLAG_SPIN_MIRRORED)) {
+        work->scaleX -= 20;
 
-        if (p->scaleX >= -2 && p->scaleX <= 2) {
-            p->scaleX = -20;
+        if (work->scaleX >= -2 && work->scaleX <= 2) {
+            work->scaleX = -20;
         }
 
-        if (p->scaleX <= -0x100) {
-            p->scaleX = -0x100;
-            p->flags |= CARD_DISP_FLAG_SPIN_MIRRORED;
+        if (work->scaleX <= -0x100) {
+            work->scaleX = -0x100;
+            work->flags |= CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     } else {
-        p->scaleX -= 20;
+        work->scaleX -= 20;
 
-        if (p->scaleX >= -2 && p->scaleX <= 2) {
-            p->scaleX = 20;
+        if (work->scaleX >= -2 && work->scaleX <= 2) {
+            work->scaleX = 20;
         }
 
-        if (p->scaleX >= 0x100) {
-            p->scaleX = 0x100;
-            p->flags &= ~CARD_DISP_FLAG_SPIN_MIRRORED;
+        if (work->scaleX >= 0x100) {
+            work->scaleX = 0x100;
+            work->flags &= ~CARD_DISP_FLAG_SPIN_MIRRORED;
         }
     }
 
-    if (IsCardDisplayOffScreen(p)) {
-        p->flags &= ~CARD_DISP_FLAG_VISIBLE;
-        ReleaseCardDisplayGfx(p);
-        p->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
+    if (IsCardDisplayOffScreen(work)) {
+        work->flags &= ~CARD_DISP_FLAG_VISIBLE;
+        ReleaseCardDisplayGfx(work);
+        work->flags &= ~CARD_DISP_FLAG_GFX_LOADED;
         gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_BUSY;
         return 0;
     }
@@ -481,35 +481,35 @@ u8 EnemyCardBreakFall(CardDisplayWork* p, void* a) {
     return 1;
 }
 
-void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
+void func_08090EA0(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
 
-    p->tiles = NULL;
-    p->tiles2 = NULL;
-    p->tiles3 = NULL;
-    p->tiles4 = NULL;
-    p->tiles5 = NULL;
-    p->palette2 = NULL;
-    p->palette = NULL;
-    p->children = NULL;
-    p->command = 0;
-    p->args = *a;
-    p->flags = 0;
-    p->priority = 50;
-    p->timer = 0;
-    tbl = gEnemyCardIds[p->args.variant];
-    n = gEnemyCardCounts[p->args.variant];
-    p->enemyKind = p->args.variant;
+    work->tiles = NULL;
+    work->tiles2 = NULL;
+    work->tiles3 = NULL;
+    work->tiles4 = NULL;
+    work->tiles5 = NULL;
+    work->palette2 = NULL;
+    work->palette = NULL;
+    work->children = NULL;
+    work->command = 0;
+    work->args = *a;
+    work->flags = 0;
+    work->priority = 50;
+    work->timer = 0;
+    tbl = gEnemyCardIds[work->args.variant];
+    n = gEnemyCardCounts[work->args.variant];
+    work->enemyKind = work->args.variant;
 
     if (n == 1) {
         id = tbl[0];
-    } else if ((s16)p->args.index != -1) {
-        if ((s16)p->args.index > n) {
+    } else if ((s16)work->args.index != -1) {
+        if ((s16)work->args.index > n) {
             id = tbl[GetRandom() % n];
         } else {
-            id = tbl[(s16)p->args.index - 1];
+            id = tbl[(s16)work->args.index - 1];
         }
     } else {
         if (gCardBattleState->nextEnemyCardIndex > n) {
@@ -520,134 +520,134 @@ void func_08090EA0(CardDisplayWork* p, CardDisplayArgs* a) {
         gCardBattleState->nextEnemyCardIndex = GetRandom() % n;
     }
 
-    p->cardDef = &gCardDefs[id];
-    p->scaleX = 0x100;
-    p->scaleY = 0x100;
-    p->bobAngle = GetRandom();
-    p->angle = 0;
-    p->ringRadius = 0;
-    p->ringRadiusTarget = 0x2400;
-    p->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
-    p->ringCenterX = 0xDC00;
-    p->ringCenterY = 0x8800;
-    p->x = 0xDC00;
-    p->y = 0x8800;
-    p->timer = 10;
-    p->priority -= 4;
-    LoadCardDisplayGfx(p);
-    p->value = p->cardDef->value;
+    work->cardDef = &gCardDefs[id];
+    work->scaleX = 0x100;
+    work->scaleY = 0x100;
+    work->bobAngle = GetRandom();
+    work->angle = 0;
+    work->ringRadius = 0;
+    work->ringRadiusTarget = 0x2400;
+    work->flags |= (CARD_DISP_FLAG_SELECTED | CARD_DISP_FLAG_VISIBLE);
+    work->ringCenterX = 0xDC00;
+    work->ringCenterY = 0x8800;
+    work->x = 0xDC00;
+    work->y = 0x8800;
+    work->timer = 10;
+    work->priority -= 4;
+    LoadCardDisplayGfx(work);
+    work->value = work->cardDef->value;
 
     switch (gGameState.roomEffect) {
     case 1:
-        p->value += 2;
+        work->value += 2;
 
-        if (p->value > 9) {
-            p->value = 9;
+        if (work->value > 9) {
+            work->value = 9;
         }
 
-        p->valueModified = 1;
+        work->valueModified = 1;
         break;
     case 2:
-        if (p->value > 2) {
-            p->value -= 2;
+        if (work->value > 2) {
+            work->value -= 2;
         } else {
-            p->value = 1;
+            work->value = 1;
         }
 
-        p->valueModified = 1;
+        work->valueModified = 1;
         break;
     default:
-        p->valueModified = 0;
+        work->valueModified = 0;
         break;
     }
 
-    p->flags |= CARD_DISP_FLAG_GFX_LOADED;
+    work->flags |= CARD_DISP_FLAG_GFX_LOADED;
 }
 
-void func_08091048(CardDisplayWork* p, CardDisplayArgs* a) {
+void func_08091048(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
 
-    p->tiles = NULL;
-    p->tiles2 = NULL;
-    p->tiles3 = NULL;
-    p->palette = NULL;
-    p->command = 0;
-    p->args = *a;
-    p->flags = 0;
-    p->priority = 50;
-    p->timer = 0;
-    tbl = gEnemyCardIds[p->args.variant];
-    n = gEnemyCardCounts[p->args.variant];
-    p->enemyKind = p->args.variant;
+    work->tiles = NULL;
+    work->tiles2 = NULL;
+    work->tiles3 = NULL;
+    work->palette = NULL;
+    work->command = 0;
+    work->args = *a;
+    work->flags = 0;
+    work->priority = 50;
+    work->timer = 0;
+    tbl = gEnemyCardIds[work->args.variant];
+    n = gEnemyCardCounts[work->args.variant];
+    work->enemyKind = work->args.variant;
 
     if (n == 1) {
         id = tbl[0];
-    } else if ((s16)p->args.index < n) {
-        id = tbl[(s16)p->args.index];
+    } else if ((s16)work->args.index < n) {
+        id = tbl[(s16)work->args.index];
     } else {
         id = tbl[GetRandom() % n];
     }
 
-    p->cardDef = &gCardDefs[id];
-    p->scaleX = 0x100;
-    p->scaleY = 0x100;
-    p->bobAngle = GetRandom();
-    p->angle = 0;
-    p->ringRadius = 0;
-    p->ringRadiusTarget = 0x2400;
-    p->flags |= (CARD_DISP_FLAG_FACE_DOWN | CARD_DISP_FLAG_VISIBLE);
-    p->ringCenterX = 0x10000;
-    p->ringCenterY = 0x8800;
-    p->x = 0x10000;
-    p->y = 0x8800;
-    p->timer = 0x10;
-    p->priority -= 4;
-    p->value = p->cardDef->value;
+    work->cardDef = &gCardDefs[id];
+    work->scaleX = 0x100;
+    work->scaleY = 0x100;
+    work->bobAngle = GetRandom();
+    work->angle = 0;
+    work->ringRadius = 0;
+    work->ringRadiusTarget = 0x2400;
+    work->flags |= (CARD_DISP_FLAG_FACE_DOWN | CARD_DISP_FLAG_VISIBLE);
+    work->ringCenterX = 0x10000;
+    work->ringCenterY = 0x8800;
+    work->x = 0x10000;
+    work->y = 0x8800;
+    work->timer = 0x10;
+    work->priority -= 4;
+    work->value = work->cardDef->value;
 }
 
-void func_08091138(CardDisplayWork* p, CardDisplayArgs* a) {
+void func_08091138(CardDisplayWork* work, CardDisplayArgs* a) {
     const s32* tbl;
     u8 n;
     s32 id;
 
-    p->tiles = NULL;
-    p->tiles2 = NULL;
-    p->tiles3 = NULL;
-    p->palette = NULL;
-    p->command = 0;
-    p->args = *a;
-    p->flags = 0;
-    p->priority = 50;
-    p->timer = 0;
-    tbl = gEnemyCardIds[p->args.variant];
-    n = gEnemyCardCounts[p->args.variant];
-    p->enemyKind = p->args.variant;
+    work->tiles = NULL;
+    work->tiles2 = NULL;
+    work->tiles3 = NULL;
+    work->palette = NULL;
+    work->command = 0;
+    work->args = *a;
+    work->flags = 0;
+    work->priority = 50;
+    work->timer = 0;
+    tbl = gEnemyCardIds[work->args.variant];
+    n = gEnemyCardCounts[work->args.variant];
+    work->enemyKind = work->args.variant;
 
     if (n == 1) {
         id = tbl[0];
-    } else if ((s16)p->args.index < n) {
-        id = tbl[GetRandom() % (s16)p->args.index];
+    } else if ((s16)work->args.index < n) {
+        id = tbl[GetRandom() % (s16)work->args.index];
     } else {
         id = tbl[GetRandom() % n];
     }
 
-    p->cardDef = &gCardDefs[id];
-    p->scaleX = 0x100;
-    p->scaleY = 0x100;
-    p->bobAngle = GetRandom();
-    p->angle = 0;
-    p->ringRadius = 0;
-    p->ringRadiusTarget = 0x2400;
-    p->flags |= (CARD_DISP_FLAG_FACE_DOWN | CARD_DISP_FLAG_VISIBLE);
-    p->ringCenterX = 0x10000;
-    p->ringCenterY = 0x8800;
-    p->x = 0x10000;
-    p->y = 0x8800;
-    p->timer = 0x10;
-    p->priority -= 4;
-    p->value = p->cardDef->value;
+    work->cardDef = &gCardDefs[id];
+    work->scaleX = 0x100;
+    work->scaleY = 0x100;
+    work->bobAngle = GetRandom();
+    work->angle = 0;
+    work->ringRadius = 0;
+    work->ringRadiusTarget = 0x2400;
+    work->flags |= (CARD_DISP_FLAG_FACE_DOWN | CARD_DISP_FLAG_VISIBLE);
+    work->ringCenterX = 0x10000;
+    work->ringCenterY = 0x8800;
+    work->x = 0x10000;
+    work->y = 0x8800;
+    work->timer = 0x10;
+    work->priority -= 4;
+    work->value = work->cardDef->value;
 }
 
 void UseEnemyCard(u16 arg) {

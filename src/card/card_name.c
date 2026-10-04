@@ -27,39 +27,39 @@ static u8 sPrintLineCount;
 static u8 sPrintBg;
 
 
-void PremireEffectSetOrbitPos(PremiumCardEffectWork* w);
-void PremireEffectMoveToCenter(PremiumCardEffectWork* w);
-void PremireEffectMoveFalling(PremiumCardEffectWork* w);
+void PremireEffectSetOrbitPos(PremiumCardEffectWork* work);
+void PremireEffectMoveToCenter(PremiumCardEffectWork* work);
+void PremireEffectMoveFalling(PremiumCardEffectWork* work);
 
 #include "premium_message.inc"
-void CardName_0(CardNameWork* w) {
+void CardName_0(CardNameWork* work) {
     PremireChanceCardWork* q = gCardListWork->selectedCard;
     ObjPalette* pal;
     s32 v;
     s16 t;
 
-    InitTextSlots(w->textSlots, 32);
-    InitTextSlots(w->textSlots2, 32);
+    InitTextSlots(work->textSlots, 32);
+    InitTextSlots(work->textSlots2, 32);
 #ifdef VERSION_EU
-    InitTextSlots(w->textSlots3, 32);
+    InitTextSlots(work->textSlots3, 32);
 #else
-    InitTextSlots(w->textSlots3, 2);
+    InitTextSlots(work->textSlots3, 2);
 #endif
-    w->textPalette = LoadTextPalette(1);
+    work->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
-    w->textSlotCount = LoadTextSlots(eu_0805E924(q->cardDef->name), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots((u16*)gUnkEu_09F6602C.strings[gLanguage], w->textSlots2);
+    work->textSlotCount = LoadTextSlots(eu_0805E924(q->cardDef->name), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots((u16*)gUnkEu_09F6602C.strings[gLanguage], work->textSlots2);
 #else
-    w->textSlotCount = LoadTextSlots(q->cardDef->name, w->textSlots);
+    work->textSlotCount = LoadTextSlots(q->cardDef->name, work->textSlots);
 #ifdef VERSION_JP
-    w->textSlotCount3 = LoadTextSlots((u16*)gUnkJp_09009748, w->textSlots3);
-    w->textSlotCount2 = LoadTextSlots((u16*)gUnkJp_0900974C, w->textSlots2);
+    work->textSlotCount3 = LoadTextSlots((u16*)gUnkJp_09009748, work->textSlots3);
+    work->textSlotCount2 = LoadTextSlots((u16*)gUnkJp_0900974C, work->textSlots2);
 #else
-    w->textSlotCount2 = LoadTextSlots(gUnk_090362A4, w->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gUnk_090362A4, work->textSlots2);
 #endif
 #endif
 #ifndef VERSION_JP
-    w->palette = LoadObjPalette(gUnk_09614798, 32);
+    work->palette = LoadObjPalette(gUnk_09614798, 32);
 #endif
 
 #ifdef VERSION_EU
@@ -67,204 +67,204 @@ void CardName_0(CardNameWork* w) {
     case LANGUAGE_ENGLISH:
     case LANGUAGE_GERMAN:
     case LANGUAGE_ITALIAN:
-        w->textSlotCount3 = 0;
-        v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->nameX = v;
-        t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-        w->suffixX = t;
-        v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->messageX = v;
+        work->textSlotCount3 = 0;
+        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = v;
+        t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+        work->suffixX = t;
+        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = v;
         break;
     case LANGUAGE_FRENCH:
-        w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, w->textSlots3);
-        v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->nameX = v;
-        t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-        w->suffixX = t;
-        v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->messageX = v;
+        work->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, work->textSlots3);
+        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = v;
+        t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+        work->suffixX = t;
+        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = v;
         break;
     case LANGUAGE_SPANISH:
-        w->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF64D, w->textSlots3);
-        v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-        w->nameX = v;
-        w->suffixX = v - 3;
-        v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-        w->messageX = v;
+        work->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF64D, work->textSlots3);
+        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = v;
+        work->suffixX = v - 3;
+        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = v;
         break;
     default:
-        w->textSlotCount3 = 0;
+        work->textSlotCount3 = 0;
         break;
     }
 #else
-    v = (230 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
-    w->nameX = v;
-    t = (u16)w->nameX + GetTextSlotsWidth(w->textSlots, w->textSlotCount);
-    w->suffixX = t;
-    v = (240 - GetTextSlotsWidth(w->textSlots2, w->textSlotCount2)) / 2;
-    w->messageX = v;
+    v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->nameX = v;
+    t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+    work->suffixX = t;
+    v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->messageX = v;
 #endif
-    w->tiles = LoadObjTiles(gUnk_093F98AC, 0x1800);
+    work->tiles = LoadObjTiles(gUnk_093F98AC, 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
-    w->palette2 = pal;
+    work->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, 1);
-    FadeSetPaletteExcluded(w->textPalette->index + 16, 1);
+    FadeSetPaletteExcluded(work->textPalette->index + 16, 1);
 }
 
 s32 CardName_1() {
     return 1;
 }
 
-void CardName_2(CardNameWork* w) {
+void CardName_2(CardNameWork* work) {
     void** p = &gUnk_09EF1278[2];
 
-    DrawSprite(120, 126, *p, w->tiles, w->palette2, NULL, 0, 50);
+    DrawSprite(120, 126, *p, work->tiles, work->palette2, NULL, 0, 50);
 #ifdef VERSION_JP
-    DrawTextSlots(w->nameX, 115, w->textSlots, w->textPalette, 30, w->textSlotCount);
+    DrawTextSlots(work->nameX, 115, work->textSlots, work->textPalette, 30, work->textSlotCount);
 #else
-    DrawTextSlots(w->nameX, 115, w->textSlots, w->palette, 30, w->textSlotCount);
+    DrawTextSlots(work->nameX, 115, work->textSlots, work->palette, 30, work->textSlotCount);
 #endif
 #ifndef VERSION_US
-    DrawTextSlots(w->suffixX, 115, w->textSlots3, w->textPalette, 30, w->textSlotCount3);
+    DrawTextSlots(work->suffixX, 115, work->textSlots3, work->textPalette, 30, work->textSlotCount3);
 #endif
-    DrawTextSlots(w->messageX, 130, w->textSlots2, w->textPalette, 30, w->textSlotCount2);
+    DrawTextSlots(work->messageX, 130, work->textSlots2, work->textPalette, 30, work->textSlotCount2);
 }
 
-void CardName_3(CardNameWork* w) {
-    FreeTextSlots(w->textSlots, 32);
-    FreeTextSlots(w->textSlots2, 32);
+void CardName_3(CardNameWork* work) {
+    FreeTextSlots(work->textSlots, 32);
+    FreeTextSlots(work->textSlots2, 32);
 #ifdef VERSION_EU
-    FreeTextSlots(w->textSlots3, 32);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->textPalette);
-    ReleaseObjPalette(w->palette2);
-    ReleaseObjPalette(w->palette);
+    FreeTextSlots(work->textSlots3, 32);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->textPalette);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette);
 #else
-    FreeTextSlots(w->textSlots3, 2);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->textPalette);
-    ReleaseObjPalette(w->palette2);
+    FreeTextSlots(work->textSlots3, 2);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->textPalette);
+    ReleaseObjPalette(work->palette2);
 #ifndef VERSION_JP
-    ReleaseObjPalette(w->palette);
+    ReleaseObjPalette(work->palette);
 #endif
 #endif
 }
 
-void PremireEffectInit(PremiumCardEffectWork* w, s16* a) {
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_09619158, 32);
-    SetObjTileSource(w->tiles, gUnk_093F762E);
-    AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
-    AnimStart(&w->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->centerX = a[1] << 8;
-    w->centerY = a[2] << 8;
-    w->fallY = 0;
-    w->radius = a[0] << 8;
-    w->angle = a[3];
-    w->speed = GetRandom() % 0x181 + 0x100;
-    w->x = 0;
-    w->y = 0;
-    w->unk_38 = 0;
-    w->fallSpeed = -(GetRandom() % 0x81 + 0x200);
+void PremireEffectInit(PremiumCardEffectWork* work, s16* a) {
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_09619158, 32);
+    SetObjTileSource(work->tiles, gUnk_093F762E);
+    AnimInit(&work->anim, gUnk_09EF1260, gUnk_09EF1230);
+    AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->centerX = a[1] << 8;
+    work->centerY = a[2] << 8;
+    work->fallY = 0;
+    work->radius = a[0] << 8;
+    work->angle = a[3];
+    work->speed = GetRandom() % 0x181 + 0x100;
+    work->x = 0;
+    work->y = 0;
+    work->unk_38 = 0;
+    work->fallSpeed = -(GetRandom() % 0x81 + 0x200);
     gCardListWork->effectCount++;
 }
 
-void PremireEffectConvergeInit(PremiumCardEffectWork* w, s16* a) {
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_09619158, 32);
-    SetObjTileSource(w->tiles, gUnk_093F762E);
-    AnimInit(&w->anim, gUnk_09EF1260, gUnk_09EF1230);
-    AnimStart(&w->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->centerX = a[1] << 8;
-    w->centerY = a[2] << 8;
-    w->fallY = 0;
-    w->radius = a[0] << 8;
-    w->angle = a[3];
-    w->speed = GetRandom() % 0x81 + 0x200;
-    w->x = 0;
-    w->y = 0;
-    w->unk_38 = 0;
-    w->fallSpeed = -(GetRandom() % 0x81 + 0x200);
-    PremireEffectSetOrbitPos(w);
+void PremireEffectConvergeInit(PremiumCardEffectWork* work, s16* a) {
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_09619158, 32);
+    SetObjTileSource(work->tiles, gUnk_093F762E);
+    AnimInit(&work->anim, gUnk_09EF1260, gUnk_09EF1230);
+    AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->centerX = a[1] << 8;
+    work->centerY = a[2] << 8;
+    work->fallY = 0;
+    work->radius = a[0] << 8;
+    work->angle = a[3];
+    work->speed = GetRandom() % 0x81 + 0x200;
+    work->x = 0;
+    work->y = 0;
+    work->unk_38 = 0;
+    work->fallSpeed = -(GetRandom() % 0x81 + 0x200);
+    PremireEffectSetOrbitPos(work);
     gCardListWork->effectCount++;
 }
 
-s32 PremireEffectSpiralUpdate(PremiumCardEffectWork* w) {
-    PremireEffectSetOrbitPos(w);
-    w->angle += 8;
+s32 PremireEffectSpiralUpdate(PremiumCardEffectWork* work) {
+    PremireEffectSetOrbitPos(work);
+    work->angle += 8;
 
-    if (w->radius > 0) {
-        w->radius += -0x180;
-        w->gfx = AnimUpdate(&w->anim);
+    if (work->radius > 0) {
+        work->radius += -0x180;
+        work->gfx = AnimUpdate(&work->anim);
         return 1;
     }
 
     return 0;
 }
 
-s32 Premire_EFFECT2_1(PremiumCardEffectWork* w) {
-    PremireEffectMoveFalling(w);
-    w->gfx = AnimUpdate(&w->anim);
+s32 Premire_EFFECT2_1(PremiumCardEffectWork* work) {
+    PremireEffectMoveFalling(work);
+    work->gfx = AnimUpdate(&work->anim);
 
-    if (w->y > 0xB400) {
+    if (work->y > 0xB400) {
         return 0;
     }
 
     return 1;
 }
 
-s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* w) {
-    PremireEffectMoveToCenter(w);
-    w->angle += 8;
-    w->gfx = AnimUpdate(&w->anim);
+s32 PremireEffectConvergeUpdate(PremiumCardEffectWork* work) {
+    PremireEffectMoveToCenter(work);
+    work->angle += 8;
+    work->gfx = AnimUpdate(&work->anim);
 
-    if (w->radius <= 0x800) {
+    if (work->radius <= 0x800) {
         return 0;
     }
 
     return 1;
 }
 
-void PremireEffectDraw(PremiumCardEffectWork* w) {
-    DrawSprite(w->x >> 8, w->y >> 8, w->gfx, w->tiles, w->palette, NULL, 0, 0);
+void PremireEffectDraw(PremiumCardEffectWork* work) {
+    DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
 }
 
-void PremireEffectDestroy(PremiumCardEffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void PremireEffectDestroy(PremiumCardEffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     gCardListWork->effectCount--;
 }
 
-void PremireEffectSetOrbitPos(PremiumCardEffectWork* w) {
-    w->x = gSineTable[w->angle & 0xFF] * (w->radius >> 8) + w->centerX;
-    w->y = -gSineTable[(w->angle & 0xFF) + 64] * (w->radius >> 8) + w->centerY;
+void PremireEffectSetOrbitPos(PremiumCardEffectWork* work) {
+    work->x = gSineTable[work->angle & 0xFF] * (work->radius >> 8) + work->centerX;
+    work->y = -gSineTable[(work->angle & 0xFF) + 64] * (work->radius >> 8) + work->centerY;
 }
 
-void PremireEffectMoveFalling(PremiumCardEffectWork* w) {
-    w->fallSpeed += 30;
-    w->fallY += w->fallSpeed;
-    w->centerX += gSineTable[w->angle & 0xFF] * (w->speed >> 8);
-    w->centerY += -gSineTable[(w->angle & 0xFF) + 64] * (w->speed >> 8);
-    w->x = w->centerX;
-    w->y = w->centerY + w->fallY;
+void PremireEffectMoveFalling(PremiumCardEffectWork* work) {
+    work->fallSpeed += 30;
+    work->fallY += work->fallSpeed;
+    work->centerX += gSineTable[work->angle & 0xFF] * (work->speed >> 8);
+    work->centerY += -gSineTable[(work->angle & 0xFF) + 64] * (work->speed >> 8);
+    work->x = work->centerX;
+    work->y = work->centerY + work->fallY;
 }
 
-void PremireEffectMoveToCenter(PremiumCardEffectWork* w) {
+void PremireEffectMoveToCenter(PremiumCardEffectWork* work) {
     s32 v;
     s32 d;
 
-    w->vx = w->centerX - w->x;
-    w->vy = w->centerY - w->y;
-    w->radius = NormalizeVector2D8(&w->vx, &w->vy);
-    v = w->speed;
+    work->vx = work->centerX - work->x;
+    work->vy = work->centerY - work->y;
+    work->radius = NormalizeVector2D8(&work->vx, &work->vy);
+    v = work->speed;
     d = v >> 8;
-    w->x += w->vx * d;
-    w->y += w->vy * d;
+    work->x += work->vx * d;
+    work->y += work->vy * d;
 
-    if (w->radius > 0) {
-        w->speed = v - 2;
+    if (work->radius > 0) {
+        work->speed = v - 2;
     }
 }
 

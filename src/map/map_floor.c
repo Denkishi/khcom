@@ -34,25 +34,25 @@ const void* GetFloorName() {
 #endif
 }
 
-void Task_MapFloor_0(MapFloorWork* w) {
+void Task_MapFloor_0(MapFloorWork* work) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
-    w->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
-    w->palette = LoadObjPalette(gUnk_099910C4, 32);
-    w->gfx = gUnk_09EF8DA4[0];
-    w->timer = 120;
+    work->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
+    work->palette = LoadObjPalette(gUnk_099910C4, 32);
+    work->gfx = gUnk_09EF8DA4[0];
+    work->timer = 120;
 #ifdef VERSION_EU
-    InitTextSlots(w->textSlots, 60);
+    InitTextSlots(work->textSlots, 60);
 #else
-    InitTextSlots(w->textSlots, 40);
+    InitTextSlots(work->textSlots, 40);
 #endif
-    w->palette2 = LoadTextPalette(1);
-    w->textSlotCount = LoadTextSlots(GetFloorName(), w->textSlots);
-    w->textX = (240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) / 2;
+    work->palette2 = LoadTextPalette(1);
+    work->textSlotCount = LoadTextSlots(GetFloorName(), work->textSlots);
+    work->textX = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 }
 
-s32 Task_MapFloor_1(MapFloorWork* w) {
-    u16* p = &w->timer;
+s32 Task_MapFloor_1(MapFloorWork* work) {
+    u16* p = &work->timer;
 
     if (*p != 0) {
         (*p)--;
@@ -62,19 +62,19 @@ s32 Task_MapFloor_1(MapFloorWork* w) {
     return 0;
 }
 
-void Task_MapFloor_2(MapFloorWork* w) {
-    DrawSprite(120, 138, w->gfx, w->tiles, w->palette, NULL, 0, 0x3C);
-    DrawTextSlots(w->textX, 0x85, w->textSlots, w->palette2, 50, w->textSlotCount);
+void Task_MapFloor_2(MapFloorWork* work) {
+    DrawSprite(120, 138, work->gfx, work->tiles, work->palette, NULL, 0, 0x3C);
+    DrawTextSlots(work->textX, 0x85, work->textSlots, work->palette2, 50, work->textSlotCount);
 }
 
-void Task_MapFloor_3(MapFloorWork* w) {
-    ReleaseObjPalette(w->palette);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette2);
+void Task_MapFloor_3(MapFloorWork* work) {
+    ReleaseObjPalette(work->palette);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette2);
 #ifdef VERSION_EU
-    FreeTextSlots(w->textSlots, 60);
+    FreeTextSlots(work->textSlots, 60);
 #else
-    FreeTextSlots(w->textSlots, 40);
+    FreeTextSlots(work->textSlots, 40);
 #endif
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;

@@ -181,52 +181,52 @@ s32 BosGaGetAngle(s32 x0, s32 y0, s32 x1, s32 y1) {
     return (t + (q << 6) + 0x40) & 0xFF;
 }
 
-void BosGaEntryUpdateFall(GaEntryWork* e) {
-    e->vz += 0x4C;
-    e->actor.z += e->vz;
+void BosGaEntryUpdateFall(GaEntryWork* work) {
+    work->vz += 0x4C;
+    work->actor.z += work->vz;
 
-    if (e->actor.z > 0) {
-        if (e->vz > 0x500) {
+    if (work->actor.z > 0) {
+        if (work->vz > 0x500) {
             m4aSongNumStart(SONG_BTL_IRON_GIMICBREAK);
         }
 
-        e->actor.z = 0;
-        e->vz = -e->vz / 2;
+        work->actor.z = 0;
+        work->vz = -work->vz / 2;
     }
 
-    if (e->vx > 0) {
-        e->actor.x += e->vx;
-        e->vx -= 0x11;
+    if (work->vx > 0) {
+        work->actor.x += work->vx;
+        work->vx -= 0x11;
 
-        if (e->vx < 0) {
-            e->vx = 0;
+        if (work->vx < 0) {
+            work->vx = 0;
         }
-    } else if (e->vx < 0) {
-        e->actor.x += e->vx;
-        e->vx += 0x11;
+    } else if (work->vx < 0) {
+        work->actor.x += work->vx;
+        work->vx += 0x11;
 
-        if (e->vx > 0) {
-            e->vx = 0;
-        }
-    }
-
-    if (e->vy > 0) {
-        e->actor.y += e->vy / 2;
-        e->vy -= 0x11;
-
-        if (e->vy < 0) {
-            e->vy = 0;
-        }
-    } else if (e->vy < 0) {
-        e->actor.y += e->vy / 2;
-        e->vy += 0x11;
-
-        if (e->vy > 0) {
-            e->vy = 0;
+        if (work->vx > 0) {
+            work->vx = 0;
         }
     }
 
-    ClampBattlePosition(&e->actor.x, &e->actor.y, -0x18, -0x0C);
+    if (work->vy > 0) {
+        work->actor.y += work->vy / 2;
+        work->vy -= 0x11;
+
+        if (work->vy < 0) {
+            work->vy = 0;
+        }
+    } else if (work->vy < 0) {
+        work->actor.y += work->vy / 2;
+        work->vy += 0x11;
+
+        if (work->vy > 0) {
+            work->vy = 0;
+        }
+    }
+
+    ClampBattlePosition(&work->actor.x, &work->actor.y, -0x18, -0x0C);
 }
 
 void BosGaRequestState(GaWork* work, s32 state) {
@@ -376,13 +376,13 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     ColliderInit(&e->actor.collider, 8, 8, 0x10);
 }
 
-void BosGaEntryRelease(GaEntryWork* e) {
-    if (!(e->flags & GA_ENTRY_FLAG_RELEASED)) {
-        ColliderUnregister(&e->actor.collider);
-        ReleaseObjTiles(e->tiles);
-        ReleaseEnemyBtlObj(&e->actor);
-        TaskPoolDestroy(&e->tasks);
-        e->flags |= GA_ENTRY_FLAG_RELEASED;
+void BosGaEntryRelease(GaEntryWork* work) {
+    if (!(work->flags & GA_ENTRY_FLAG_RELEASED)) {
+        ColliderUnregister(&work->actor.collider);
+        ReleaseObjTiles(work->tiles);
+        ReleaseEnemyBtlObj(&work->actor);
+        TaskPoolDestroy(&work->tasks);
+        work->flags |= GA_ENTRY_FLAG_RELEASED;
     }
 }
 

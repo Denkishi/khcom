@@ -8,7 +8,7 @@ struct PooPos;
 
 extern const PooHitBox gPoohHitBox;
 
-void SetPoohAction(struct PoohWork* w, u32 b);
+void SetPoohAction(struct PoohWork* work, u32 b);
 void func_080CA35C();
 void func_080CA368(s32 a, u16 b, u16 c);
 void MovePooCamera(s32 a, s32 b);

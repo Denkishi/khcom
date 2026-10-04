@@ -21,191 +21,191 @@
 
 static u8 sLvupLogoActive;
 
-void TrackLevelUpEffectTarget(LevelUpEffectWork* w) {
+void TrackLevelUpEffectTarget(LevelUpEffectWork* work) {
     s16 x;
     s16 y;
     BtlObj* t;
 
-    t = w->target;
+    t = work->target;
 
     if (t != NULL) {
         WorldToScreen(&x, &y, t->x, t->y, t->z);
-        w->targetX = x;
-        w->targetY = y - 16;
+        work->targetX = x;
+        work->targetY = y - 16;
     }
 }
 
-void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
+void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
     s32 i;
     LevelUpEffectArgs args;
 
-    w->target = a->target;
-    w->targetX = a->x;
-    w->targetY = a->y;
-    w->radius = 30;
-    w->unk_97 = a->unk_08;
-    TrackLevelUpEffectTarget(w);
+    work->target = a->target;
+    work->targetX = a->x;
+    work->targetY = a->y;
+    work->radius = 30;
+    work->unk_97 = a->unk_08;
+    TrackLevelUpEffectTarget(work);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
     case LANGUAGE_FRENCH:
-        w->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
         break;
     case LANGUAGE_GERMAN:
-        w->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
         break;
     case LANGUAGE_ITALIAN:
-        w->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
         break;
     case LANGUAGE_SPANISH:
-        w->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
         break;
     default:
-        w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
     }
 #else
-    w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+    work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
-    w->palette = LoadObjPalette(gCard00Palette, 32);
+    work->palette = LoadObjPalette(gCard00Palette, 32);
 
     for (i = 0; i < 4; i++) {
-        w->centerX[i] = (w->targetX << 8) + gLvupEffectStartOffsetX[i];
-        w->centerY[i] = (w->targetY << 8) + gLvupEffectStartOffsetY[i];
-        w->angle[i] = gLvupEffectStartAngles[i];
-        w->x[i] = w->radius * gSineTable[w->angle[i] & 0xFF] + w->centerX[i];
-        w->y[i] = -gSineTable[(w->angle[i] & 0xFF) + 64] * w->radius + w->centerY[i];
-        w->unk_54[i] = 0;
+        work->centerX[i] = (work->targetX << 8) + gLvupEffectStartOffsetX[i];
+        work->centerY[i] = (work->targetY << 8) + gLvupEffectStartOffsetY[i];
+        work->angle[i] = gLvupEffectStartAngles[i];
+        work->x[i] = work->radius * gSineTable[work->angle[i] & 0xFF] + work->centerX[i];
+        work->y[i] = -gSineTable[(work->angle[i] & 0xFF) + 64] * work->radius + work->centerY[i];
+        work->unk_54[i] = 0;
     }
 
-    w->frame = 0;
-    w->timer = 0;
-    w->gatherSteps = 24;
-    TaskPoolInit(&w->tasks, 4);
+    work->frame = 0;
+    work->timer = 0;
+    work->gatherSteps = 24;
+    TaskPoolInit(&work->tasks, 4);
 
-    if (w->target != NULL && !sLvupLogoActive) {
-        args.x = w->x[0];
-        args.y = w->y[0];
-        args.target = w->target;
-        args.tiles = w->tiles;
-        args.palette = w->palette;
-        TaskCreate(&w->tasks, &gTaskDescLvupLogo, &args);
+    if (work->target != NULL && !sLvupLogoActive) {
+        args.x = work->x[0];
+        args.y = work->y[0];
+        args.target = work->target;
+        args.tiles = work->tiles;
+        args.palette = work->palette;
+        TaskCreate(&work->tasks, &gTaskDescLvupLogo, &args);
         sLvupLogoActive = 1;
     }
 }
 
-u8 LVUP_EFFECT_1(LevelUpEffectWork* w, void* a) {
+u8 LVUP_EFFECT_1(LevelUpEffectWork* work, void* a) {
     s32 i;
 
-    TrackLevelUpEffectTarget(w);
+    TrackLevelUpEffectTarget(work);
 
-    if ((s8)w->gatherSteps > 0) {
+    if ((s8)work->gatherSteps > 0) {
         for (i = 0; i < 4; i++) {
-            ApproachValue(&w->centerX[i], w->targetX << 8, (s8)w->gatherSteps);
-            ApproachValue(&w->centerY[i], w->targetY << 8, (s8)w->gatherSteps);
+            ApproachValue(&work->centerX[i], work->targetX << 8, (s8)work->gatherSteps);
+            ApproachValue(&work->centerY[i], work->targetY << 8, (s8)work->gatherSteps);
         }
 
-        w->gatherSteps--;
+        work->gatherSteps--;
     } else {
         for (i = 0; i < 4; i++) {
-            w->angle[i] += 6;
-            w->centerX[i] = w->targetX << 8;
-            w->centerY[i] = w->targetY << 8;
+            work->angle[i] += 6;
+            work->centerX[i] = work->targetX << 8;
+            work->centerY[i] = work->targetY << 8;
         }
 
-        if ((s16)w->angle[0] > 0x100) {
-            w->radius--;
+        if ((s16)work->angle[0] > 0x100) {
+            work->radius--;
         }
     }
 
     for (i = 0; i < 4; i++) {
-        w->x[i] = gSineTable[w->angle[i] & 0xFF] * w->radius + w->centerX[i];
-        w->y[i] = -gSineTable[(w->angle[i] & 0xFF) + 64] * w->radius + w->centerY[i];
+        work->x[i] = gSineTable[work->angle[i] & 0xFF] * work->radius + work->centerX[i];
+        work->y[i] = -gSineTable[(work->angle[i] & 0xFF) + 64] * work->radius + work->centerY[i];
     }
 
-    w->timer++;
-    TaskPoolUpdate(&w->tasks);
+    work->timer++;
+    TaskPoolUpdate(&work->tasks);
 
-    if (w->radius == 0) {
+    if (work->radius == 0) {
         for (i = 0; i < 4; i++) {
             switch (i) {
             case 0:
-                w->speed[0] = 0x300;
-                w->vy[0] = -0x180;
-                w->angle[0] = 8;
+                work->speed[0] = 0x300;
+                work->vy[0] = -0x180;
+                work->angle[0] = 8;
                 break;
             case 1:
-                w->speed[1] = 0x300;
-                w->vy[1] = -0x180;
-                w->angle[1] = -8;
+                work->speed[1] = 0x300;
+                work->vy[1] = -0x180;
+                work->angle[1] = -8;
                 break;
             case 2:
-                w->speed[2] = 0x300;
-                w->vy[2] = -0x180;
-                w->angle[2] = 16;
+                work->speed[2] = 0x300;
+                work->vy[2] = -0x180;
+                work->angle[2] = 16;
                 break;
             case 3:
-                w->speed[3] = 0x300;
-                w->vy[3] = -0x180;
-                w->angle[3] = -16;
+                work->speed[3] = 0x300;
+                work->vy[3] = -0x180;
+                work->angle[3] = -16;
                 break;
             }
         }
 
-        w->frame = 1;
+        work->frame = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateLevelUpEffectScatter);
     }
 
     return 1;
 }
 
-u8 UpdateLevelUpEffectScatter(LevelUpEffectWork* w) {
+u8 UpdateLevelUpEffectScatter(LevelUpEffectWork* work) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        w->vy[i] += 25;
-        w->y[i] += w->vy[i];
-        w->x[i] += gSineTable[(u8)w->angle[i]] * (w->speed[i] >> 8);
+        work->vy[i] += 25;
+        work->y[i] += work->vy[i];
+        work->x[i] += gSineTable[(u8)work->angle[i]] * (work->speed[i] >> 8);
     }
 
-    w->timer++;
+    work->timer++;
 
-    if (w->timer % 8 == 0 && (s8)w->timer > 1) {
-        w->frame++;
+    if (work->timer % 8 == 0 && (s8)work->timer > 1) {
+        work->frame++;
     }
 
-    TaskPoolUpdate(&w->tasks);
+    TaskPoolUpdate(&work->tasks);
 
-    if (w->y[0] > 0xA000) {
+    if (work->y[0] > 0xA000) {
         return 0;
     }
 
     return 1;
 }
 
-void LVUP_EFFECT_2(LevelUpEffectWork* w) {
+void LVUP_EFFECT_2(LevelUpEffectWork* work) {
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (w->frame <= 5) {
+        if (work->frame <= 5) {
 #ifdef VERSION_EU
-            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSpritesByLanguage[gLanguage][w->frame], w->tiles, w->palette, NULL, 0, 20);
+            DrawSprite(work->x[i] >> 8, work->y[i] >> 8, gLvupEffectSpritesByLanguage[gLanguage][work->frame], work->tiles, work->palette, NULL, 0, 20);
 #else
-            DrawSprite(w->x[i] >> 8, w->y[i] >> 8, gLvupEffectSprites[w->frame], w->tiles, w->palette, NULL, 0, 20);
+            DrawSprite(work->x[i] >> 8, work->y[i] >> 8, gLvupEffectSprites[work->frame], work->tiles, work->palette, NULL, 0, 20);
 #endif
         }
     }
 
-    TaskPoolDraw(&w->tasks);
+    TaskPoolDraw(&work->tasks);
 }
 
-void LVUP_EFFECT_3(LevelUpEffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
-    TaskPoolDestroy(&w->tasks);
+void LVUP_EFFECT_3(LevelUpEffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
+    TaskPoolDestroy(&work->tasks);
 
     if (gBtlWork->flags & BTL_FLAG_LEVEL_UP_EFFECT) {
         gBtlWork->flags &= ~BTL_FLAG_LEVEL_UP_EFFECT;
@@ -245,68 +245,68 @@ const s32 gLvupEffectStartOffsetY[4] = { 0, 0, -0xF000, 0xF000 };
 
 const u16 gLvupEffectStartAngles[4] = { 0, 128, 64, 192 };
 
-void Lvup_Logo_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
-    w->x[0] = a->x;
-    w->targetX = a->x;
-    w->y[0] = a->y;
-    w->targetY = a->y;
-    w->target = a->target;
+void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
+    work->x[0] = a->x;
+    work->targetX = a->x;
+    work->y[0] = a->y;
+    work->targetY = a->y;
+    work->target = a->target;
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
     case LANGUAGE_FRENCH:
-        w->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
         break;
     case LANGUAGE_GERMAN:
-        w->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
         break;
     case LANGUAGE_ITALIAN:
-        w->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
         break;
     case LANGUAGE_SPANISH:
-        w->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+        work->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
         break;
     default:
-        w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
         break;
     }
 #else
-    w->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+    work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
 #endif
     LoadObjPalette(gCard00Palette, 32);
-    w->tiles = a->tiles;
-    w->palette = a->palette;
+    work->tiles = a->tiles;
+    work->palette = a->palette;
     FadeSetPaletteExcluded(a->palette->index + 16, 1);
-    w->frame = 0;
-    w->timer = 0;
-    w->vy[0] = -0x280;
+    work->frame = 0;
+    work->timer = 0;
+    work->vy[0] = -0x280;
     m4aSongNumStart(SONG_BTL_LVUP);
 }
 
-s32 Lvup_Logo_1(LevelUpEffectWork* w) {
-    w->y[0] += w->vy[0];
-    w->vy[0] += 25;
-    TrackLevelUpEffectTarget(w);
-    w->x[0] = w->targetX << 8;
-    w->timer++;
+s32 Lvup_Logo_1(LevelUpEffectWork* work) {
+    work->y[0] += work->vy[0];
+    work->vy[0] += 25;
+    TrackLevelUpEffectTarget(work);
+    work->x[0] = work->targetX << 8;
+    work->timer++;
 
-    if ((s8)w->timer == 60) {
+    if ((s8)work->timer == 60) {
         return 0;
     }
 
     return 1;
 }
 
-void Lvup_Logo_2(LevelUpEffectWork* w) {
-    DrawSprite(w->x[0] >> 8, w->y[0] >> 8, gUnk_09EEA19C[w->frame], w->tiles, w->palette, NULL, 0, 10);
+void Lvup_Logo_2(LevelUpEffectWork* work) {
+    DrawSprite(work->x[0] >> 8, work->y[0] >> 8, gUnk_09EEA19C[work->frame], work->tiles, work->palette, NULL, 0, 10);
 }
 
-void Lvup_Logo_3(LevelUpEffectWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void Lvup_Logo_3(LevelUpEffectWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
     sLvupLogoActive = 0;
 }
 
@@ -328,7 +328,7 @@ u8 CreateLevelUpEffectTask(BtlObj* p, TaskPool* pool) {
     return 1;
 }
 
-void LoadEventMapObjectGfx(EventMapObjectWork* w, EventBackgroundDef* t) {
+void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* t) {
     EventMapObjectDef* q;
     EventMapObjectPlacement* entries;
     u8 i;
@@ -337,73 +337,73 @@ void LoadEventMapObjectGfx(EventMapObjectWork* w, EventBackgroundDef* t) {
     entries = q->placements;
 
     for (i = 0; i < 10; i++) {
-        w->tiles[i] = NULL;
-        w->palettes[i] = NULL;
+        work->tiles[i] = NULL;
+        work->palettes[i] = NULL;
     }
 
     for (i = 0; i < q->placementCount; i++) {
-        if (w->tiles[entries[i].spriteIndex] == NULL) {
-            w->tiles[entries[i].spriteIndex] = LoadObjTiles(q->tileResources[entries[i].spriteIndex].data, q->tileResources[entries[i].spriteIndex].size);
-            w->palettes[entries[i].spriteIndex] = LoadObjPalette(q->paletteResources[entries[i].spriteIndex].data, q->paletteResources[entries[i].spriteIndex].size);
+        if (work->tiles[entries[i].spriteIndex] == NULL) {
+            work->tiles[entries[i].spriteIndex] = LoadObjTiles(q->tileResources[entries[i].spriteIndex].data, q->tileResources[entries[i].spriteIndex].size);
+            work->palettes[entries[i].spriteIndex] = LoadObjPalette(q->paletteResources[entries[i].spriteIndex].data, q->paletteResources[entries[i].spriteIndex].size);
         }
     }
 }
 
-void ReleaseEventMapObjectGfx(EventMapObjectWork* w) {
+void ReleaseEventMapObjectGfx(EventMapObjectWork* work) {
     u8 i;
 
     for (i = 0; i <= 9; i++) {
-        if (w->tiles[i] != NULL) {
-            ReleaseObjTiles(w->tiles[i]);
-            ReleaseObjPalette(w->palettes[i]);
+        if (work->tiles[i] != NULL) {
+            ReleaseObjTiles(work->tiles[i]);
+            ReleaseObjPalette(work->palettes[i]);
         }
     }
 }
 
-void Ev_mapObj_0(EventMapObjectWork* w, u8* a) {
+void Ev_mapObj_0(EventMapObjectWork* work, u8* a) {
     EventBackgroundDef* t;
 
-    w->background = a[0];
-    t = gEventBackgroundDefs[w->background];
+    work->background = a[0];
+    t = gEventBackgroundDefs[work->background];
 
     if (t->mapObjects != NULL) {
-        LoadEventMapObjectGfx(w, t);
-        w->definition = t->mapObjects;
+        LoadEventMapObjectGfx(work, t);
+        work->definition = t->mapObjects;
     }
 }
 
-u8 Ev_mapObj_1(EventMapObjectWork* w) {
+u8 Ev_mapObj_1(EventMapObjectWork* work) {
     EventMapObjectDef* p;
     EventMapObjectPlacement* q;
     u8 i;
 
-    p = w->definition;
+    p = work->definition;
     q = p->placements;
 
     for (i = 0; i < p->placementCount; i++) {
-        FadeSetPaletteExcluded(w->palettes[q[i].spriteIndex]->index + 16, 0);
+        FadeSetPaletteExcluded(work->palettes[q[i].spriteIndex]->index + 16, 0);
     }
 
     return 1;
 }
 
-void Ev_mapObj_2(EventMapObjectWork* w) {
+void Ev_mapObj_2(EventMapObjectWork* work) {
     EventMapObjectDef* q;
     EventMapObjectPlacement* entries;
     EventMapObjectPlacement* e;
     u8 i;
 
-    q = w->definition;
+    q = work->definition;
     entries = q->placements;
 
     for (i = 0; i < q->placementCount; i++) {
         e = &entries[i];
-        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], w->tiles[e->spriteIndex], w->palettes[e->spriteIndex], NULL, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
+        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], work->tiles[e->spriteIndex], work->palettes[e->spriteIndex], NULL, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
     }
 }
 
-void Ev_mapObj_3(EventMapObjectWork* w) {
-    ReleaseEventMapObjectGfx(w);
+void Ev_mapObj_3(EventMapObjectWork* work) {
+    ReleaseEventMapObjectGfx(work);
 }
 
 TaskDesc gTaskDescLvupLogo = {

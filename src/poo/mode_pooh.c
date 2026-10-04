@@ -707,155 +707,155 @@ u8 IsPooMapBeeVisible() {
     return sPooMapBeeVisible;
 }
 
-void SetPoohDir5Right(PoohWork* w) {
-    switch (((w->angle + 16) & 0xFF) >> 5) {
+void SetPoohDir5Right(PoohWork* work) {
+    switch (((work->angle + 16) & 0xFF) >> 5) {
     case 1:
-        w->dirIndex = 4;
-        w->flipped = 0;
+        work->dirIndex = 4;
+        work->flipped = 0;
         break;
     case 2:
-        w->dirIndex = 3;
-        w->flipped = 0;
+        work->dirIndex = 3;
+        work->flipped = 0;
         break;
     case 3:
-        w->dirIndex = 2;
-        w->flipped = 0;
+        work->dirIndex = 2;
+        work->flipped = 0;
         break;
     case 4:
-        w->dirIndex = 1;
-        w->flipped = 0;
+        work->dirIndex = 1;
+        work->flipped = 0;
         break;
     case 5:
-        w->dirIndex = 2;
-        w->flipped = 1;
+        work->dirIndex = 2;
+        work->flipped = 1;
         break;
     case 6:
-        w->dirIndex = 3;
-        w->flipped = 1;
+        work->dirIndex = 3;
+        work->flipped = 1;
         break;
     case 7:
-        w->dirIndex = 4;
-        w->flipped = 1;
+        work->dirIndex = 4;
+        work->flipped = 1;
         break;
     case 0:
     default:
-        w->dirIndex = 0;
-        w->flipped = 0;
+        work->dirIndex = 0;
+        work->flipped = 0;
         break;
     }
 }
 
-void SetPoohDir5Left(PoohWork* w) {
-    switch (((w->angle + 16) & 0xFF) >> 5) {
+void SetPoohDir5Left(PoohWork* work) {
+    switch (((work->angle + 16) & 0xFF) >> 5) {
     case 1:
-        w->dirIndex = 4;
-        w->flipped = 1;
+        work->dirIndex = 4;
+        work->flipped = 1;
         break;
     case 2:
-        w->dirIndex = 3;
-        w->flipped = 1;
+        work->dirIndex = 3;
+        work->flipped = 1;
         break;
     case 3:
-        w->dirIndex = 2;
-        w->flipped = 1;
+        work->dirIndex = 2;
+        work->flipped = 1;
         break;
     case 4:
-        w->dirIndex = 1;
-        w->flipped = 0;
+        work->dirIndex = 1;
+        work->flipped = 0;
         break;
     case 5:
-        w->dirIndex = 2;
-        w->flipped = 0;
+        work->dirIndex = 2;
+        work->flipped = 0;
         break;
     case 6:
-        w->dirIndex = 3;
-        w->flipped = 0;
+        work->dirIndex = 3;
+        work->flipped = 0;
         break;
     case 7:
-        w->dirIndex = 4;
-        w->flipped = 0;
+        work->dirIndex = 4;
+        work->flipped = 0;
         break;
     case 0:
     default:
-        w->dirIndex = 0;
-        w->flipped = 0;
+        work->dirIndex = 0;
+        work->flipped = 0;
         break;
     }
 }
 
-void SetPoohDir8(PoohWork* w) {
-    w->flipped = 0;
+void SetPoohDir8(PoohWork* work) {
+    work->flipped = 0;
 
-    switch (((w->angle + 16) & 0xFF) >> 5) {
+    switch (((work->angle + 16) & 0xFF) >> 5) {
     case 0:
-        w->dirIndex = 0;
+        work->dirIndex = 0;
         break;
     case 1:
-        w->dirIndex = 4;
+        work->dirIndex = 4;
         break;
     case 2:
-        w->dirIndex = 3;
+        work->dirIndex = 3;
         break;
     case 3:
-        w->dirIndex = 2;
+        work->dirIndex = 2;
         break;
     case 4:
-        w->dirIndex = 1;
+        work->dirIndex = 1;
         break;
     case 5:
-        w->dirIndex = 5;
+        work->dirIndex = 5;
         break;
     case 6:
-        w->dirIndex = 6;
+        work->dirIndex = 6;
         break;
     case 7:
-        w->dirIndex = 7;
+        work->dirIndex = 7;
         break;
     default:
-        w->dirIndex = 0;
+        work->dirIndex = 0;
         break;
     }
 }
 
-void SetPoohDir2(PoohWork* w) {
-    switch (((w->angle + 16) & 0xFF) >> 5) {
+void SetPoohDir2(PoohWork* work) {
+    switch (((work->angle + 16) & 0xFF) >> 5) {
     case 0:
     case 1:
-        w->dirIndex = 0;
-        w->flipped = 1;
+        work->dirIndex = 0;
+        work->flipped = 1;
         break;
     case 2:
-        w->dirIndex = 1;
-        w->flipped = 1;
+        work->dirIndex = 1;
+        work->flipped = 1;
         break;
     case 3:
-        w->dirIndex = 1;
-        w->flipped = 1;
+        work->dirIndex = 1;
+        work->flipped = 1;
         break;
     case 4:
     case 5:
     case 6:
-        w->dirIndex = 1;
-        w->flipped = 0;
+        work->dirIndex = 1;
+        work->flipped = 0;
         break;
     case 7:
     default:
-        w->dirIndex = 0;
-        w->flipped = 0;
+        work->dirIndex = 0;
+        work->flipped = 0;
         break;
     }
 }
 
-void SetPoohDir3(PoohWork* w) {
-    if (w->angle <= 99) {
-        w->dirIndex = 3;
-        w->flipped = 1;
-    } else if (w->angle <= 156) {
-        w->dirIndex = 1;
-        w->flipped = 0;
+void SetPoohDir3(PoohWork* work) {
+    if (work->angle <= 99) {
+        work->dirIndex = 3;
+        work->flipped = 1;
+    } else if (work->angle <= 156) {
+        work->dirIndex = 1;
+        work->flipped = 0;
     } else {
-        w->dirIndex = 3;
-        w->flipped = 0;
+        work->dirIndex = 3;
+        work->flipped = 0;
     }
 }
 
@@ -876,160 +876,160 @@ u8 IsAngleFacingRight(u8 a) {
     return 0;
 }
 
-u8 GetPoohLookColumn(PoohWork* w) {
+u8 GetPoohLookColumn(PoohWork* work) {
     u8 tbl[8][8];
     u32 row;
     u32 col;
 
     memcpy(tbl, sPoohLookOffsets, sizeof(tbl));
-    row = (u32)((w->angle + 16) & 0xFF) >> 5;
-    col = (u32)((w->lookAngle + 16) & 0xFF) >> 5;
+    row = (u32)((work->angle + 16) & 0xFF) >> 5;
+    col = (u32)((work->lookAngle + 16) & 0xFF) >> 5;
 
     if ((s8)tbl[row][col] == 3) {
-        return w->lookColumn;
+        return work->lookColumn;
     }
 
     return tbl[row][col] + 2;
 }
 
-void SetPoohAnimation(PoohWork* w, u32 anim) {
+void SetPoohAnimation(PoohWork* work, u32 anim) {
     AnimDef* e;
     u16 flags;
 
     flags = 0;
-    ColliderSetRadius(&w->collider, gPoohHitBox.radius);
+    ColliderSetRadius(&work->collider, gPoohHitBox.radius);
 
-    if (w->animAction == anim) {
+    if (work->animAction == anim) {
         flags = ANIM_FLAG_KEEP_FRAME;
     }
 
-    w->animAction = anim;
+    work->animAction = anim;
 
     switch (anim) {
     case 3:
     case 4:
     case 7:
         flags |= ANIM_FLAG_LOOP;
-        SetPoohDir8(w);
-        e = &sPooh01AnimDefs[w->dirIndex];
+        SetPoohDir8(work);
+        e = &sPooh01AnimDefs[work->dirIndex];
         break;
     case 5:
     case 6:
         flags |= ANIM_FLAG_LOOP;
-        SetPoohDir3(w);
-        e = &sPooh10AnimDefs[w->dirIndex];
+        SetPoohDir3(work);
+        e = &sPooh10AnimDefs[work->dirIndex];
         break;
     case 16:
-        SetPoohDir8(w);
-        e = &sTrap0001AnimDefs[w->dirIndex];
+        SetPoohDir8(work);
+        e = &sTrap0001AnimDefs[work->dirIndex];
         break;
     case 17:
-        SetPoohDir5Left(w);
-        e = &sPooh04AnimDefs[w->dirIndex];
+        SetPoohDir5Left(work);
+        e = &sPooh04AnimDefs[work->dirIndex];
         break;
     case 18:
-        SetPoohDir5Left(w);
-        e = &sPooh04aAnimDefs[w->dirIndex];
+        SetPoohDir5Left(work);
+        e = &sPooh04aAnimDefs[work->dirIndex];
         break;
     case 19:
-        SetPoohDir2(w);
-        e = &sPooh03AnimDefs[w->dirIndex];
+        SetPoohDir2(work);
+        e = &sPooh03AnimDefs[work->dirIndex];
         break;
     case 20:
-        w->hideShadow = 1;
-        SetPoohDir2(w);
-        e = &sPooh07Anim0Defs[w->dirIndex];
+        work->hideShadow = 1;
+        SetPoohDir2(work);
+        e = &sPooh07Anim0Defs[work->dirIndex];
         break;
     case 21:
-        w->hideShadow = 1;
-        SetPoohDir2(w);
+        work->hideShadow = 1;
+        SetPoohDir2(work);
 
-        if (IsPooEventDone(6) || w->leavingWagon || (w->dirIndex == 5 && w->flipped == 0)) {
-            e = &sPooh07Anim0Defs[w->dirIndex];
+        if (IsPooEventDone(6) || work->leavingWagon || (work->dirIndex == 5 && work->flipped == 0)) {
+            e = &sPooh07Anim0Defs[work->dirIndex];
         } else {
-            e = &sPooh07Anim1Defs[w->dirIndex];
+            e = &sPooh07Anim1Defs[work->dirIndex];
         }
 
         break;
     case 36:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sTrap0002Anim0Def;
         break;
     case 37:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sTrap0002Anim1Def;
         break;
     case 23:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim0Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 32:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sPoohFl05Anim9Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 33:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sPoohFl09Anim0Def;
         break;
     case 34:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sPoohFl09Anim1Def;
         break;
     case 35:
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sPoohFl09Anim2Def;
         break;
     case 24:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim1Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 25:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim2Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 26:
-        ColliderSetRadius(&w->collider, 14);
+        ColliderSetRadius(&work->collider, 14);
         flags |= ANIM_FLAG_LOOP;
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim3Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 27:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim4Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 28:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl05Anim5Def;
-        w->hideShadow = 1;
+        work->hideShadow = 1;
         break;
     case 29:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim1Def;
         break;
     case 30:
         flags |= ANIM_FLAG_LOOP;
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim2Def;
         break;
     case 31:
-        w->flipped = IsAngleFacingRight(w->angle);
+        work->flipped = IsAngleFacingRight(work->angle);
         e = &sPoohFl06Anim3Def;
         break;
     case 38:
     case 39:
         flags |= ANIM_FLAG_LOOP;
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sTrap0003Anim0Def;
         break;
     case 22:
         flags |= ANIM_FLAG_LOOP;
-        w->flipped = 0;
+        work->flipped = 0;
         e = &sPoohOwlDescentAnimDef;
         break;
     case 0:
@@ -1044,19 +1044,19 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
     case 14:
     case 15:
         flags |= ANIM_FLAG_LOOP;
-        SetPoohDir5Right(w);
-        w->lookColumn = GetPoohLookColumn(w);
-        e = &sPooh00LookAnimDefs[w->dirIndex][GetPoohLookColumn(w)];
+        SetPoohDir5Right(work);
+        work->lookColumn = GetPoohLookColumn(work);
+        e = &sPooh00LookAnimDefs[work->dirIndex][GetPoohLookColumn(work)];
         break;
     default:
         flags |= ANIM_FLAG_LOOP;
-        SetPoohDir5Right(w);
-        e = &sPooh00AnimDefs[w->dirIndex];
+        SetPoohDir5Right(work);
+        e = &sPooh00AnimDefs[work->dirIndex];
         break;
     }
 
-    AnimChangeWithTables(&w->anim, e->animId, flags, e->anims, e->gfxTable);
-    SetObjTileSource(w->tiles, e->tiles);
+    AnimChangeWithTables(&work->anim, e->animId, flags, e->anims, e->gfxTable);
+    SetObjTileSource(work->tiles, e->tiles);
 }
 
 u8 IsWithinPoohRadius(u16 x, u16 y, u16 px, u16 py) {

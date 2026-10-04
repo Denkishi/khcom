@@ -29,60 +29,60 @@ static s32 Square(s32 x) {
     return x * x;
 }
 
-void task_sroll_tmr_0(SrollTmrWork* w, void* arg) {
-    w->visible = 0;
-    w->frameCount = 0;
-    w->tiles = LoadObjTiles(gUnk_09C904B4, 352);
-    w->palette = LoadObjPalette(gUnk_09D6D114, 32);
+void task_sroll_tmr_0(SrollTmrWork* work, void* arg) {
+    work->visible = 0;
+    work->frameCount = 0;
+    work->tiles = LoadObjTiles(gUnk_09C904B4, 352);
+    work->palette = LoadObjPalette(gUnk_09D6D114, 32);
 }
 
-u8 task_sroll_tmr_1(SrollTmrWork* w) {
+u8 task_sroll_tmr_1(SrollTmrWork* work) {
     u8 r;
 
     r = 1;
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        if (w->visible == 1) {
-            w->visible = 0;
+        if (work->visible == 1) {
+            work->visible = 0;
         } else {
-            w->visible = r;
+            work->visible = r;
         }
     }
 
-    FadeSetPaletteExcluded((w->palette->index & 15) + 16, 1);
-    w->frameCount++;
+    FadeSetPaletteExcluded((work->palette->index & 15) + 16, 1);
+    work->frameCount++;
     return r;
 }
 
-void task_sroll_tmr_2(SrollTmrWork* w) {
+void task_sroll_tmr_2(SrollTmrWork* work) {
     s32 t;
     u16 h;
     u16 m;
     u16 s;
     u16 z;
 
-    if (w->visible == 0) {
+    if (work->visible == 0) {
         return;
     }
 
-    t = w->frameCount;
+    t = work->frameCount;
     h = t / 3600;
     m = t / 60 % 60;
     s = t % 60;
     z = 0;
-    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(24, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(48, 8, gUnk_09EFBAE8[10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], w->tiles, w->palette, NULL, z, z);
-    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], w->tiles, w->palette, NULL, z, z);
+    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(24, 8, gUnk_09EFBAE8[10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(48, 8, gUnk_09EFBAE8[10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], work->tiles, work->palette, NULL, z, z);
 }
 
-void task_sroll_tmr_3(SrollTmrWork* w) {
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjPalette(w->palette);
+void task_sroll_tmr_3(SrollTmrWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
 void SrollBlit1bppWidth0() {
@@ -570,7 +570,7 @@ u8 SrollTextGetGlyphWidth(u16 c, u8* font, u8* widths, u32 count) {
     return w;
 }
 
-s32 SrollTextMeasureWidth(SrollWork* w, const u8* s) {
+s32 SrollTextMeasureWidth(SrollWork* work, const u8* s) {
     s32 total;
     u16 c;
     s32 hi;
@@ -587,7 +587,7 @@ s32 SrollTextMeasureWidth(SrollWork* w, const u8* s) {
             s += 1;
         }
 
-        total += SrollTextGetGlyphWidth(c, w->fontPages, w->fontWidths, w->fontGlyphCount);
+        total += SrollTextGetGlyphWidth(c, work->fontPages, work->fontWidths, work->fontGlyphCount);
     }
 
     return total;
@@ -597,7 +597,7 @@ u8* SrollTextGetGlyphAddress(u16 c, u8* font, u8* base, u16 a, u16 b) {
     return base + SrollTextGetGlyphIndex(c, font) * (a << 3) * b;
 }
 
-u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
+u32 SrollTextBlitGlyph(SrollWork* work, u32* dst, u8* src, s32 width) {
     SrollBlit b;
     u32 pal[16];
     u32 bg;
@@ -606,19 +606,19 @@ u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
     u16 n;
 
     r = 0;
-    pal[0] = c = w->bgColor;
-    pal[1] = w->fgColor;
-    pal[2] = w->shadowColor;
-    pal[3] = w->edgeColor;
+    pal[0] = c = work->bgColor;
+    pal[1] = work->fgColor;
+    pal[2] = work->shadowColor;
+    pal[3] = work->edgeColor;
     bg = (c << 4) | c;
     bg |= bg << 8;
     bg |= bg << 16;
-    b.x = w->x & 7;
+    b.x = work->x & 7;
     b.width = width;
     b.src = src;
     b.dst = dst;
     b.colors = pal;
-    n = w->glyphHeight;
+    n = work->glyphHeight;
 
     if (n-- != 0) {
         do {
@@ -626,7 +626,7 @@ u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
                 CpuFastFill(bg, b.dst, 32);
             }
 
-            switch (w->glyphBpp) {
+            switch (work->glyphBpp) {
             case 1:
                 r = SrollTextBlit1bpp(&b);
                 break;
@@ -635,299 +635,299 @@ u32 SrollTextBlitGlyph(SrollWork* w, u32* dst, u8* src, s32 width) {
                 break;
             }
 
-            b.src += w->glyphBpp * 8;
-            b.dst += w->textWidth * 8;
+            b.src += work->glyphBpp * 8;
+            b.dst += work->textWidth * 8;
         } while (n-- != 0);
     }
 
     return r;
 }
 
-void SrollTextSelectFont(SrollWork* w, u32 mode) {
+void SrollTextSelectFont(SrollWork* work, u32 mode) {
     if (mode > 1) {
         mode = 0;
     }
 
-    w->glyphBpp = gUnk_09A5B440[mode].bpp;
-    w->glyphHeight = gUnk_09A5B440[mode].height;
-    w->fontPages = gUnk_09A5B440[mode].pages;
-    w->fontGlyphs = gUnk_09A5B440[mode].glyphs;
-    w->fontWidths = gUnk_09A5B440[mode].widths;
-    w->fontGlyphCount = gUnk_09A5B440[mode].glyphCount;
-    w->unk_44 = gUnk_09A5B440[mode].unk_14;
-    SrollTextSetCursorTile(w, w->x, w->y);
+    work->glyphBpp = gUnk_09A5B440[mode].bpp;
+    work->glyphHeight = gUnk_09A5B440[mode].height;
+    work->fontPages = gUnk_09A5B440[mode].pages;
+    work->fontGlyphs = gUnk_09A5B440[mode].glyphs;
+    work->fontWidths = gUnk_09A5B440[mode].widths;
+    work->fontGlyphCount = gUnk_09A5B440[mode].glyphCount;
+    work->unk_44 = gUnk_09A5B440[mode].unk_14;
+    SrollTextSetCursorTile(work, work->x, work->y);
 }
 
-void SrollTextInit(SrollWork* w, const SrollInit* a) {
-    SrollTextSelectFont(w, a->font);
-    SrollTextSetColors(w, a->fgColor, a->shadowColor, a->bgColor, a->edgeColor);
-    w->mapWidth = 32;
-    w->flags = 0;
-    w->frameStyle = a->frameStyle;
-    w->windowX = a->windowX;
-    w->windowY = a->windowY;
-    w->windowWidth = a->windowWidth;
-    w->windowHeight = a->windowHeight;
-    w->textX = a->textX;
-    w->textY = a->textY;
-    w->textWidth = a->textWidth;
-    w->textHeight = a->textHeight;
-    w->clearTile = a->clearTile;
-    w->frameTileBase = a->frameTileBase;
-    w->textTileBase = a->textTileBase;
-    w->unk_48 = a->unk_10;
-    w->tilemapBuffer = a->tilemapBuffer;
-    w->tileData = a->tileData;
-    w->tilemap = a->tilemap;
-    SrollTextClearQueue(w);
-    SrollTextResetWindow(w, 1);
+void SrollTextInit(SrollWork* work, const SrollInit* a) {
+    SrollTextSelectFont(work, a->font);
+    SrollTextSetColors(work, a->fgColor, a->shadowColor, a->bgColor, a->edgeColor);
+    work->mapWidth = 32;
+    work->flags = 0;
+    work->frameStyle = a->frameStyle;
+    work->windowX = a->windowX;
+    work->windowY = a->windowY;
+    work->windowWidth = a->windowWidth;
+    work->windowHeight = a->windowHeight;
+    work->textX = a->textX;
+    work->textY = a->textY;
+    work->textWidth = a->textWidth;
+    work->textHeight = a->textHeight;
+    work->clearTile = a->clearTile;
+    work->frameTileBase = a->frameTileBase;
+    work->textTileBase = a->textTileBase;
+    work->unk_48 = a->unk_10;
+    work->tilemapBuffer = a->tilemapBuffer;
+    work->tileData = a->tileData;
+    work->tilemap = a->tilemap;
+    SrollTextClearQueue(work);
+    SrollTextResetWindow(work, 1);
 }
 
-void SrollTextClearWindowImmediate(SrollWork* w) {
-    SrollTextClearWindow(w, 1);
+void SrollTextClearWindowImmediate(SrollWork* work) {
+    SrollTextClearWindow(work, 1);
 }
 
-void SrollTextClearQueue(SrollWork* w) {
-    w->writeIdx = 0;
-    w->readIdx = 0;
+void SrollTextClearQueue(SrollWork* work) {
+    work->writeIdx = 0;
+    work->readIdx = 0;
 }
 
-u8 SrollTextQueueIsEmpty(SrollWork* w) {
+u8 SrollTextQueueIsEmpty(SrollWork* work) {
     u8 r;
 
     r = 0;
 
-    if (w->writeIdx == w->readIdx) {
+    if (work->writeIdx == work->readIdx) {
         r = 1;
     }
 
     return r;
 }
 
-void SrollTextEnqueueChar(SrollWork* w, u16 c) {
-    w->charQueue[w->writeIdx] = c;
-    w->writeIdx = (w->writeIdx + 1) & 0xFF;
+void SrollTextEnqueueChar(SrollWork* work, u16 c) {
+    work->charQueue[work->writeIdx] = c;
+    work->writeIdx = (work->writeIdx + 1) & 0xFF;
 }
 
-u16 SrollTextDequeueChar(SrollWork* w) {
+u16 SrollTextDequeueChar(SrollWork* work) {
     u16 c;
 
-    if (w->writeIdx == w->readIdx) {
+    if (work->writeIdx == work->readIdx) {
         return 0;
     }
 
-    c = w->charQueue[w->readIdx];
-    w->readIdx = (w->readIdx + 1) & 0xFF;
+    c = work->charQueue[work->readIdx];
+    work->readIdx = (work->readIdx + 1) & 0xFF;
     return c;
 }
 
-void SrollTextSetCursorTile(SrollWork* w, u16 x, u16 y) {
-    if (x >= w->textWidth) {
+void SrollTextSetCursorTile(SrollWork* work, u16 x, u16 y) {
+    if (x >= work->textWidth) {
         x = 0;
     }
 
-    if (y + w->glyphHeight > w->textHeight) {
+    if (y + work->glyphHeight > work->textHeight) {
         y = 0;
     }
 
-    w->x = x * 8;
-    w->y = y;
+    work->x = x * 8;
+    work->y = y;
 }
 
-void SrollTextSetCursorPixelX(SrollWork* w, u16 x) {
-    if (x >= w->textWidth * 8) {
+void SrollTextSetCursorPixelX(SrollWork* work, u16 x) {
+    if (x >= work->textWidth * 8) {
         x = 0;
     }
 
-    w->x = x;
+    work->x = x;
 }
 
-void SrollTextSetColors(SrollWork* w, u16 a, u16 b, u16 c, u16 d) {
-    w->fgColor = a;
-    w->shadowColor = b;
-    w->bgColor = c;
-    w->edgeColor = d;
+void SrollTextSetColors(SrollWork* work, u16 a, u16 b, u16 c, u16 d) {
+    work->fgColor = a;
+    work->shadowColor = b;
+    work->bgColor = c;
+    work->edgeColor = d;
 }
 
-void SrollTextClearWindow(SrollWork* w, u8 flush) {
+void SrollTextClearWindow(SrollWork* work, u8 flush) {
     u16* p;
     u16 i;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
+    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
 
-    for (i = 0; i < w->windowHeight; i++) {
-        CpuFill16(w->clearTile, p, w->windowWidth * 2);
-        p += w->mapWidth;
+    for (i = 0; i < work->windowHeight; i++) {
+        CpuFill16(work->clearTile, p, work->windowWidth * 2);
+        p += work->mapWidth;
     }
 
     if (flush == 1) {
-        SrollTextFlushTilemap(w);
+        SrollTextFlushTilemap(work);
     }
 }
 
-void SrollTextDrawFrame(SrollWork* w) {
+void SrollTextDrawFrame(SrollWork* work) {
     u16* p;
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
-    t = w->frameTileBase + 1;
-    CpuFill16(t + 2, p + 1, (u32)(w->windowWidth - 2) << 1);
+    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    t = work->frameTileBase + 1;
+    CpuFill16(t + 2, p + 1, (u32)(work->windowWidth - 2) << 1);
     p[0] = t + 1;
-    p[w->windowWidth - 1] = t + 3;
-    p += w->mapWidth;
+    p[work->windowWidth - 1] = t + 3;
+    p += work->mapWidth;
 
-    for (i = 1; i < w->windowHeight - 1; i++) {
-        CpuFill16(t, p + 1, (u32)(w->windowWidth - 2) << 1);
+    for (i = 1; i < work->windowHeight - 1; i++) {
+        CpuFill16(t, p + 1, (u32)(work->windowWidth - 2) << 1);
         p[0] = t + 4;
-        p[w->windowWidth - 1] = t + 5;
-        p += w->mapWidth;
+        p[work->windowWidth - 1] = t + 5;
+        p += work->mapWidth;
     }
 
-    CpuFill16(t + 7, p + 1, (u32)(w->windowWidth - 2) << 1);
+    CpuFill16(t + 7, p + 1, (u32)(work->windowWidth - 2) << 1);
     p[0] = t + 6;
-    p[w->windowWidth - 1] = t + 8;
+    p[work->windowWidth - 1] = t + 8;
 }
 
-void SrollTextDrawFrameTailLeft(SrollWork* w) {
+void SrollTextDrawFrameTailLeft(SrollWork* work) {
     u16* p;
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
-    t = w->frameTileBase + 1;
-    CpuFill16(t + 2, p + 2, (u32)(w->windowWidth - 3) << 1);
+    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    t = work->frameTileBase + 1;
+    CpuFill16(t + 2, p + 2, (u32)(work->windowWidth - 3) << 1);
     p[1] = t + 1;
-    p[w->windowWidth - 1] = t + 3;
-    p += w->mapWidth;
+    p[work->windowWidth - 1] = t + 3;
+    p += work->mapWidth;
 
-    for (i = 1; i < w->windowHeight - 2; i++) {
-        CpuFill16(t, p + 2, (u32)(w->windowWidth - 3) << 1);
+    for (i = 1; i < work->windowHeight - 2; i++) {
+        CpuFill16(t, p + 2, (u32)(work->windowWidth - 3) << 1);
         p[1] = t + 4;
-        p[w->windowWidth - 1] = t + 5;
-        p += w->mapWidth;
+        p[work->windowWidth - 1] = t + 5;
+        p += work->mapWidth;
     }
 
-    CpuFill16(t, p + 2, (u32)(w->windowWidth - 3) << 1);
+    CpuFill16(t, p + 2, (u32)(work->windowWidth - 3) << 1);
     p[0] = t + 10;
     p[1] = t + 11;
-    p[w->windowWidth - 1] = t + 5;
-    p += w->mapWidth;
+    p[work->windowWidth - 1] = t + 5;
+    p += work->mapWidth;
 
-    CpuFill16(t + 7, p + 2, (u32)(w->windowWidth - 3) << 1);
+    CpuFill16(t + 7, p + 2, (u32)(work->windowWidth - 3) << 1);
     p[1] = t + 6;
-    p[w->windowWidth - 1] = t + 8;
+    p[work->windowWidth - 1] = t + 8;
 }
 
-void SrollTextDrawFrameTailRight(SrollWork* w) {
+void SrollTextDrawFrameTailRight(SrollWork* work) {
     u16* p;
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->windowY * w->mapWidth * 2 + w->windowX * 2);
-    t = w->frameTileBase + 1;
-    CpuFill16(t + 2, p + 1, (u32)(w->windowWidth - 3) << 1);
+    p = (u16*)(SrollTextGetTilemap(work) + work->windowY * work->mapWidth * 2 + work->windowX * 2);
+    t = work->frameTileBase + 1;
+    CpuFill16(t + 2, p + 1, (u32)(work->windowWidth - 3) << 1);
     p[0] = t + 1;
-    p[w->windowWidth - 2] = t + 3;
-    p += w->mapWidth;
+    p[work->windowWidth - 2] = t + 3;
+    p += work->mapWidth;
 
-    for (i = 1; i < w->windowHeight - 2; i++) {
-        CpuFill16(t, p + 1, (u32)(w->windowWidth - 3) << 1);
+    for (i = 1; i < work->windowHeight - 2; i++) {
+        CpuFill16(t, p + 1, (u32)(work->windowWidth - 3) << 1);
         p[0] = t + 4;
-        p[w->windowWidth - 2] = t + 5;
-        p += w->mapWidth;
+        p[work->windowWidth - 2] = t + 5;
+        p += work->mapWidth;
     }
 
-    CpuFill16(t, p + 1, (u32)(w->windowWidth - 3) << 1);
+    CpuFill16(t, p + 1, (u32)(work->windowWidth - 3) << 1);
     p[0] = t + 4;
-    p[w->windowWidth - 2] = (t | 0x400) + 11;
-    p[w->windowWidth - 1] = (t | 0x400) + 10;
-    p += w->mapWidth;
+    p[work->windowWidth - 2] = (t | 0x400) + 11;
+    p[work->windowWidth - 1] = (t | 0x400) + 10;
+    p += work->mapWidth;
 
-    CpuFill16(t + 7, p + 1, (u32)(w->windowWidth - 3) << 1);
+    CpuFill16(t + 7, p + 1, (u32)(work->windowWidth - 3) << 1);
     p[0] = t + 6;
-    p[w->windowWidth - 2] = t + 8;
+    p[work->windowWidth - 2] = t + 8;
 }
 
-void SrollTextClearTextArea(SrollWork* w) {
+void SrollTextClearTextArea(SrollWork* work) {
     u16* p;
     u16 i;
     u16 t;
 
-    p = (u16*)(SrollTextGetTilemap(w) + w->textY * w->mapWidth * 2 + w->textX * 2);
-    t = w->frameTileBase + 1;
+    p = (u16*)(SrollTextGetTilemap(work) + work->textY * work->mapWidth * 2 + work->textX * 2);
+    t = work->frameTileBase + 1;
 
-    for (i = 0; i < w->textHeight; i++) {
-        CpuFill16(t, p, w->textWidth * 2);
-        p += w->mapWidth;
+    for (i = 0; i < work->textHeight; i++) {
+        CpuFill16(t, p, work->textWidth * 2);
+        p += work->mapWidth;
     }
 }
 
-void SrollTextResetWindow(SrollWork* w, u8 flush) {
+void SrollTextResetWindow(SrollWork* work, u8 flush) {
     u16 t;
 
-    switch (w->frameStyle) {
+    switch (work->frameStyle) {
     case 1:
-        SrollTextDrawFrame(w);
+        SrollTextDrawFrame(work);
         break;
     case 2:
-        SrollTextDrawFrameTailLeft(w);
+        SrollTextDrawFrameTailLeft(work);
         break;
     case 3:
-        SrollTextDrawFrameTailRight(w);
+        SrollTextDrawFrameTailRight(work);
         break;
     default:
-        SrollTextClearTextArea(w);
+        SrollTextClearTextArea(work);
         break;
     }
 
-    SrollTextSetCursorTile(w, 0, 0);
+    SrollTextSetCursorTile(work, 0, 0);
 
     if (flush == 1) {
-        SrollTextFlushTilemap(w);
+        SrollTextFlushTilemap(work);
     } else {
-        t = w->flags | SROLL_FLAG_TILEMAP_DIRTY;
-        w->flags = t;
+        t = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
+        work->flags = t;
     }
 }
 
-void SrollTextClearRect(SrollWork* w, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
+void SrollTextClearRect(SrollWork* work, u16 x, u16 y, u16 cw, u16 ch, u8 flush) {
     u16* p;
     u16 i;
     u16 t;
     u16 v;
 
-    if (x >= w->textWidth) {
+    if (x >= work->textWidth) {
         return;
     }
 
-    if (y >= w->textHeight) {
+    if (y >= work->textHeight) {
         return;
     }
 
-    if (x + cw > w->textWidth) {
-        cw = w->textWidth - x;
+    if (x + cw > work->textWidth) {
+        cw = work->textWidth - x;
     }
 
-    if (y + ch > w->textHeight) {
-        ch = w->textHeight - y;
+    if (y + ch > work->textHeight) {
+        ch = work->textHeight - y;
     }
 
-    p = (u16*)(SrollTextGetTilemap(w) + (w->textY + y) * w->mapWidth * 2 + (w->textX + x) * 2);
-    v = w->frameTileBase + 1;
+    p = (u16*)(SrollTextGetTilemap(work) + (work->textY + y) * work->mapWidth * 2 + (work->textX + x) * 2);
+    v = work->frameTileBase + 1;
     i = 0;
 
     while (i < ch) {
         CpuFill16(v, p, (u32)(cw << 1));
-        p += w->mapWidth;
+        p += work->mapWidth;
         i++;
     }
 
     if (flush == 1) {
-        SrollTextFlushTilemap(w);
+        SrollTextFlushTilemap(work);
     } else {
-        t = w->flags | SROLL_FLAG_TILEMAP_DIRTY;
-        w->flags = t;
+        t = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
+        work->flags = t;
     }
 }
 
@@ -949,16 +949,16 @@ u16 ParseLowercaseHexDigit(u16 c) {
     return v;
 }
 
-u8* SrollTextEnqueueString(SrollWork* w, u8* s) {
+u8* SrollTextEnqueueString(SrollWork* work, u8* s) {
     s32 hi;
 
     while (*s != 0) {
         if (*s & 0x80) {
             hi = s[0] << 8;
-            SrollTextEnqueueChar(w, s[1] | hi);
+            SrollTextEnqueueChar(work, s[1] | hi);
             s += 2;
         } else {
-            SrollTextEnqueueChar(w, SrollTextMapSingleByteChar(s[0]));
+            SrollTextEnqueueChar(work, SrollTextMapSingleByteChar(s[0]));
             s += 1;
         }
     }
@@ -966,7 +966,7 @@ u8* SrollTextEnqueueString(SrollWork* w, u8* s) {
     return s + 1;
 }
 
-u8 SrollTextProcessNextChar(SrollWork* w) {
+u8 SrollTextProcessNextChar(SrollWork* work) {
     u16 v[2];
     u16* p;
     u32 off;
@@ -980,22 +980,22 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
 
     r = 0;
 
-    if (w->x >= w->textWidth * 8) {
-        w->x = 0;
+    if (work->x >= work->textWidth * 8) {
+        work->x = 0;
     }
 
-    c = SrollTextDequeueChar(w);
+    c = SrollTextDequeueChar(work);
 
     if (c & 0xFF00) {
-        off = (w->y * w->textWidth + (w->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(c, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
-        wd = SrollTextGetGlyphWidth(c, w->fontPages, w->fontWidths, w->fontGlyphCount);
-        n = SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, wd);
-        t = w->y * w->textWidth + (w->x >> 3) + w->textTileBase;
-        p = (u16*)(SrollTextGetTilemap(w) +
-                   ((w->textY + w->y) * w->mapWidth + ((w->x >> 3) + w->textX)) * 2);
+        off = (work->y * work->textWidth + (work->x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(c, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        wd = SrollTextGetGlyphWidth(c, work->fontPages, work->fontWidths, work->fontGlyphCount);
+        n = SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, wd);
+        t = work->y * work->textWidth + (work->x >> 3) + work->textTileBase;
+        p = (u16*)(SrollTextGetTilemap(work) +
+                   ((work->textY + work->y) * work->mapWidth + ((work->x >> 3) + work->textX)) * 2);
 
-        for (i = 0; i < w->glyphHeight; i++) {
+        for (i = 0; i < work->glyphHeight; i++) {
             if (n == 1) {
                 p[0] = t;
             } else {
@@ -1003,34 +1003,34 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
                 p[1] = t + 1;
             }
 
-            p += w->mapWidth;
-            t += w->textWidth;
+            p += work->mapWidth;
+            t += work->textWidth;
         }
 
-        w->x += wd;
-        w->flags |= SROLL_FLAG_TILEMAP_DIRTY;
+        work->x += wd;
+        work->flags |= SROLL_FLAG_TILEMAP_DIRTY;
         r = 1;
     } else {
         switch (c) {
         case '@':
-            v[0] = SrollTextDequeueChar(w);
-            v[1] = SrollTextDequeueChar(w);
+            v[0] = SrollTextDequeueChar(work);
+            v[1] = SrollTextDequeueChar(work);
 
             switch (v[0]) {
             case 'F':
-                SrollTextSelectFont(w, ParseLowercaseHexDigit(v[1]));
+                SrollTextSelectFont(work, ParseLowercaseHexDigit(v[1]));
                 break;
             case 'f':
-                w->fgColor = ParseLowercaseHexDigit(v[1]);
+                work->fgColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 's':
-                w->shadowColor = ParseLowercaseHexDigit(v[1]);
+                work->shadowColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 'b':
-                w->bgColor = ParseLowercaseHexDigit(v[1]);
+                work->bgColor = ParseLowercaseHexDigit(v[1]);
                 break;
             case 'e':
-                w->edgeColor = ParseLowercaseHexDigit(v[1]);
+                work->edgeColor = ParseLowercaseHexDigit(v[1]);
                 break;
             }
 
@@ -1038,11 +1038,11 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
         case 0:
             break;
         case '\n':
-            w->x = 0;
-            w->y += w->glyphHeight;
+            work->x = 0;
+            work->y += work->glyphHeight;
 
-            if (w->y + w->glyphHeight > w->textHeight) {
-                w->y = 0;
+            if (work->y + work->glyphHeight > work->textHeight) {
+                work->y = 0;
             }
 
             break;
@@ -1052,101 +1052,101 @@ u8 SrollTextProcessNextChar(SrollWork* w) {
     return r;
 }
 
-void SrollTextDrawNextGlyph(SrollWork* w, u8 flush) {
+void SrollTextDrawNextGlyph(SrollWork* work, u8 flush) {
     u8 r;
 
     r = 0;
 
-    while (!SrollTextQueueIsEmpty(w) && !r) {
-        r = SrollTextProcessNextChar(w);
+    while (!SrollTextQueueIsEmpty(work) && !r) {
+        r = SrollTextProcessNextChar(work);
     }
 
-    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
-        SrollTextFlushTilemap(w);
-    }
-}
-
-void SrollTextDrawQueued(SrollWork* w, u8 flush) {
-    while (!SrollTextQueueIsEmpty(w)) {
-        SrollTextProcessNextChar(w);
-    }
-
-    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
-        SrollTextFlushTilemap(w);
+    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+        SrollTextFlushTilemap(work);
     }
 }
 
-u8* SrollTextGetTilemap(SrollWork* w) {
+void SrollTextDrawQueued(SrollWork* work, u8 flush) {
+    while (!SrollTextQueueIsEmpty(work)) {
+        SrollTextProcessNextChar(work);
+    }
+
+    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+        SrollTextFlushTilemap(work);
+    }
+}
+
+u8* SrollTextGetTilemap(SrollWork* work) {
     u8* v;
 
-    v = w->tilemapBuffer;
+    v = work->tilemapBuffer;
 
     if (v == NULL) {
-        v = w->tilemap;
+        v = work->tilemap;
     }
 
     return v;
 }
 
-void SrollTextFlushTilemap(SrollWork* w) {
+void SrollTextFlushTilemap(SrollWork* work) {
     u32 off;
 
-    if (w->tilemapBuffer != NULL) {
-        off = w->windowY * w->mapWidth * 2;
-        RequestDma3Copy(w->tilemapBuffer + off, w->tilemap + off, w->windowHeight * w->mapWidth * 2);
+    if (work->tilemapBuffer != NULL) {
+        off = work->windowY * work->mapWidth * 2;
+        RequestDma3Copy(work->tilemapBuffer + off, work->tilemap + off, work->windowHeight * work->mapWidth * 2);
     }
 
-    w->flags &= ~SROLL_FLAG_TILEMAP_DIRTY;
+    work->flags &= ~SROLL_FLAG_TILEMAP_DIRTY;
 }
 
-void SrollTextDrawString(SrollWork* w, u8* s, u8 flush) {
-    SrollTextDrawQueued(w, 0);
-    SrollTextEnqueueString(w, s);
-    SrollTextDrawQueued(w, 0);
+void SrollTextDrawString(SrollWork* work, u8* s, u8 flush) {
+    SrollTextDrawQueued(work, 0);
+    SrollTextEnqueueString(work, s);
+    SrollTextDrawQueued(work, 0);
 
-    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
-        SrollTextFlushTilemap(w);
-    }
-}
-
-void SrollTextDrawStringAtTile(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
-    SrollTextDrawQueued(w, 0);
-    SrollTextSetCursorTile(w, x, y);
-    SrollTextEnqueueString(w, s);
-    SrollTextDrawQueued(w, 0);
-
-    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
-        SrollTextFlushTilemap(w);
+    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+        SrollTextFlushTilemap(work);
     }
 }
 
-void SrollTextDrawStringAtPixelX(SrollWork* w, u16 x, u16 y, u8* s, u8 flush) {
+void SrollTextDrawStringAtTile(SrollWork* work, u16 x, u16 y, u8* s, u8 flush) {
+    SrollTextDrawQueued(work, 0);
+    SrollTextSetCursorTile(work, x, y);
+    SrollTextEnqueueString(work, s);
+    SrollTextDrawQueued(work, 0);
+
+    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+        SrollTextFlushTilemap(work);
+    }
+}
+
+void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* s, u8 flush) {
     u32 off;
     u8* g;
     s32 n;
 
-    SrollTextDrawQueued(w, 0);
-    SrollTextSetCursorTile(w, x >> 3, y);
+    SrollTextDrawQueued(work, 0);
+    SrollTextSetCursorTile(work, x >> 3, y);
     n = x & 7;
 
     if (n != 0) {
-        off = (w->y * w->textWidth + (x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
-        SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, n);
+        off = (work->y * work->textWidth + (x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, n);
     }
 
-    SrollTextSetCursorPixelX(w, x);
-    SrollTextEnqueueString(w, s);
-    SrollTextDrawQueued(w, 0);
+    SrollTextSetCursorPixelX(work, x);
+    SrollTextEnqueueString(work, s);
+    SrollTextDrawQueued(work, 0);
 
-    if ((w->x & 7) != 0) {
-        off = (w->y * w->textWidth + (w->x >> 3)) * 32;
-        g = SrollTextGetGlyphAddress(0x8140, w->fontPages, w->fontGlyphs, w->glyphBpp, w->glyphHeight);
-        SrollTextBlitGlyph(w, (u32*)(w->tileData + off), g, 8 - (w->x & 7));
+    if ((work->x & 7) != 0) {
+        off = (work->y * work->textWidth + (work->x >> 3)) * 32;
+        g = SrollTextGetGlyphAddress(0x8140, work->fontPages, work->fontGlyphs, work->glyphBpp, work->glyphHeight);
+        SrollTextBlitGlyph(work, (u32*)(work->tileData + off), g, 8 - (work->x & 7));
     }
 
-    if (flush == 1 && (w->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
-        SrollTextFlushTilemap(w);
+    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+        SrollTextFlushTilemap(work);
     }
 }
 

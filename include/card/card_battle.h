@@ -110,9 +110,9 @@ void RequestSoraKingReload0();
 void RequestSoraKingReload1();
 void RequestSoraKingReload2();
 void RequestSoraRemoveItemCards();
-s32 cardbattleSora_1(struct CardBattleWork* w, Task* task);
-struct CardSlot* FindNextAvailableSlot(struct CardBattleWork* w, u8 slot, u16* n);
-struct CardSlot* FindPrevAvailableSlot(struct CardBattleWork* w, u8 slot, u16* n);
-void CreateSoraCardRing(struct CardBattleWork* w, u8 slot);
+s32 cardbattleSora_1(struct CardBattleWork* work, Task* task);
+struct CardSlot* FindNextAvailableSlot(struct CardBattleWork* work, u8 slot, u16* n);
+struct CardSlot* FindPrevAvailableSlot(struct CardBattleWork* work, u8 slot, u16* n);
+void CreateSoraCardRing(struct CardBattleWork* work, u8 slot);
 
 #endif

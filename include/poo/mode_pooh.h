@@ -16,11 +16,11 @@ void mode_pooh_0(s32 arg);
 void mode_pooh_1();
 void mode_pooh_2();
 u16 CountPooPrizes();
-void SetPoohDir5Left(PoohWork* w);
-void SetPoohDir8(PoohWork* w);
-void SetPoohDir2(PoohWork* w);
-void SetPoohDir3(PoohWork* w);
+void SetPoohDir5Left(PoohWork* work);
+void SetPoohDir8(PoohWork* work);
+void SetPoohDir2(PoohWork* work);
+void SetPoohDir3(PoohWork* work);
 u8 IsAngleFacingRight(u8 a);
-u8 GetPoohLookColumn(PoohWork* w);
+u8 GetPoohLookColumn(PoohWork* work);
 
 #endif /* GUARD_MODE_POOH_H */

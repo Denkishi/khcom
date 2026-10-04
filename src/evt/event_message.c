@@ -51,10 +51,10 @@
 #include "types.h"
 #include <stddef.h>
 
-static void msgwin_0(MsgWinWork* p, u8* arg);
-static u8 msgwin_1(MsgWinWork* p, void* a);
-static void msgwin_2(MsgWinWork* p);
-static void msgwin_3(MsgWinWork* p);
+static void msgwin_0(MsgWinWork* work, u8* arg);
+static u8 msgwin_1(MsgWinWork* work, void* a);
+static void msgwin_2(MsgWinWork* work);
+static void msgwin_3(MsgWinWork* work);
 
 static const MsgFaceAnim sTalk00FaceAnims[8] = {
     {
@@ -3104,7 +3104,7 @@ u8 UpdateEventSeqSkip() {
     return v;
 }
 
-u8 UpdateEventSeq(EventSeqWork* p, void* a) {
+u8 UpdateEventSeq(EventSeqWork* work, void* a) {
     const EventSequenceDef* t;
     u8 i;
 
@@ -3113,7 +3113,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
     }
 
     if ((GetKeysHeld() & START_BUTTON) != 0) {
-        switch (p->eventId) {
+        switch (work->eventId) {
         case 68:
         case 83:
         case 84:
@@ -3128,7 +3128,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
 
     if (gEventState->skipHoldTime > 64 || gEventState->endRequest == 1) {
         gEventState->skipHoldTime = 64;
-        p->ending = 1;
+        work->ending = 1;
         gEventState->ending = 1;
         FadeStartOut(FADE_MODE_BLACK, 64);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventSeqSkip);
@@ -3140,10 +3140,10 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         return 1;
     }
 
-    if (p->timer == p->seqDef->startDelay) {
+    if (work->timer == work->seqDef->startDelay) {
         gEventState->flags |= EVENT_FLAG_STARTED;
     } else {
-        s32 t = p->seqDef->keyframes->flags & 0xFF0;
+        s32 t = work->seqDef->keyframes->flags & 0xFF0;
 
         if (t == 0) {
             FadeStartIn(FADE_MODE_BLACK, 64);
@@ -3151,13 +3151,13 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
             FadeStartIn(FADE_MODE_WHITE, 120);
         }
 
-        p->timer++;
+        work->timer++;
     }
 
-    TaskPoolUpdate(&p->tasks);
-    TaskPoolUpdate(&p->tasks2);
+    TaskPoolUpdate(&work->tasks);
+    TaskPoolUpdate(&work->tasks2);
 
-    if (p->hasBoss) {
+    if (work->hasBoss) {
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
     }
@@ -3166,18 +3166,18 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
         gEventState->frame++;
     }
 
-    t = gEventSequenceDefs[p->eventId];
+    t = gEventSequenceDefs[work->eventId];
 
-    if (gEventState->frame >= t->endFrame && !p->ending && !FadeIsActive()) {
+    if (gEventState->frame >= t->endFrame && !work->ending && !FadeIsActive()) {
         if (!gEventState->fadedOut) {
             FadeStartOut(FADE_MODE_BLACK, 64);
         }
 
-        p->ending = 1;
+        work->ending = 1;
         gEventState->ending = 1;
     }
 
-    if (p->ending == 1) {
+    if (work->ending == 1) {
         for (i = 0; i < 32; i++) {
             FadeSetPaletteExcluded(i, 0);
         }
@@ -3191,67 +3191,67 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
     return 1;
 }
 
-void event_seq_2(EventSeqWork* p) {
-    TaskPoolDraw(&p->tasks2);
+void event_seq_2(EventSeqWork* work) {
+    TaskPoolDraw(&work->tasks2);
 
-    if (p->hasBoss) {
+    if (work->hasBoss) {
         TaskPoolDraw(&gBtlWork->taskPools[0]);
     }
 
-    TaskPoolDraw(&p->tasks);
+    TaskPoolDraw(&work->tasks);
 }
 
-void event_seq_3(EventSeqWork* p) {
-    TaskPoolDestroy(&p->tasks);
+void event_seq_3(EventSeqWork* work) {
+    TaskPoolDestroy(&work->tasks);
 
-    if (p->task != NULL) {
-        TaskPoolDestroy(&p->tasks2);
+    if (work->task != NULL) {
+        TaskPoolDestroy(&work->tasks2);
     }
 
 #ifdef VERSION_EU
-    if (p->bg3MapUnpacked) {
+    if (work->bg3MapUnpacked) {
         FreeBgDecompressedMap(3);
     }
 
-    if (p->bg2MapUnpacked) {
+    if (work->bg2MapUnpacked) {
         FreeBgDecompressedMap(2);
     }
 
-    if (p->bg1MapUnpacked) {
+    if (work->bg1MapUnpacked) {
         FreeBgDecompressedMap(1);
     }
 #endif
 }
 
-void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
+void event_chara_0(EventCharaWork* work, EventSeqArg* a) {
     s32 v0;
     s32 v1;
 
-    TaskPoolInit(&p->tasks, 8);
-    p->arg = *a;
-    p->keyframes = gEventSequenceDefs[p->arg.eventId]->charaTracks[p->arg.track].keyframes;
-    p->keyframe = 0;
-    p->steps = p->keyframes->frame;
-    p->hopVelocity = 0;
-    p->unk_18C = 0;
-    p->unk_198 = 0;
-    p->effectLevel = 0;
-    p->effectTimer = 0;
-    p->spriteX = 0;
-    p->spriteY = 0;
-    p->tiles = NULL;
-    p->palette = NULL;
-    p->gfx = NULL;
-    p->spriteFlipX = 0;
-    p->callbackActive = 0;
-    p->usesBtlWork = 0;
-    p->finished = 0;
-    p->bobPhase = 0;
-    p->visible = 1;
-    p->unk_1B8 = 0;
-    gEventState->charaObjs[p->arg.track] = &p->obj;
+    TaskPoolInit(&work->tasks, 8);
+    work->arg = *a;
+    work->keyframes = gEventSequenceDefs[work->arg.eventId]->charaTracks[work->arg.track].keyframes;
+    work->keyframe = 0;
+    work->steps = work->keyframes->frame;
+    work->hopVelocity = 0;
+    work->unk_18C = 0;
+    work->unk_198 = 0;
+    work->effectLevel = 0;
+    work->effectTimer = 0;
+    work->spriteX = 0;
+    work->spriteY = 0;
+    work->tiles = NULL;
+    work->palette = NULL;
+    work->gfx = NULL;
+    work->spriteFlipX = 0;
+    work->callbackActive = 0;
+    work->usesBtlWork = 0;
+    work->finished = 0;
+    work->bobPhase = 0;
+    work->visible = 1;
+    work->unk_1B8 = 0;
+    gEventState->charaObjs[work->arg.track] = &work->obj;
 
-    switch (p->arg.chara) {
+    switch (work->arg.chara) {
     case 95:
         // @bug Never sets gBtlWork->actor, which this intro dereferences (NULL read and write).
         gBtlWork = EwramAlloc(sizeof(BtlWork));
@@ -3259,7 +3259,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         gBtlWork->flags = 0;
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
         gBtlWork->scale = 0x100;
@@ -3272,10 +3272,10 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gBtlWork->zoomX = 0x10000;
         gBtlWork->zoomY = 0x14000;
         gBtlWork->zoomSteps = 15;
-        p->obj.x = p->keyframes->x;
-        p->obj.y = p->keyframes->y;
-        p->obj.z = p->keyframes->z;
-        TaskCreate(&p->tasks, &gTaskDescBosTm, &p->obj);
+        work->obj.x = work->keyframes->x;
+        work->obj.y = work->keyframes->y;
+        work->obj.z = work->keyframes->z;
+        TaskCreate(&work->tasks, &gTaskDescBosTm, &work->obj);
         break;
     case 96:
         gBtlWork = EwramAlloc(sizeof(BtlWork));
@@ -3283,16 +3283,16 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = 0x100;
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 424, 294, 384);
-        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosPc, NULL);
+        gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, NULL);
         break;
     case 97:
         gBtlWork = EwramAlloc(sizeof(BtlWork));
@@ -3300,17 +3300,17 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(1, 1);
         SetBgPriority(2, 0);
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = 0x100;
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 424, 294, 384);
-        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosPc, &p->tasks);
-        p->hasObj = 0;
+        gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, &work->tasks);
+        work->hasObj = 0;
         gEventState->cameraX = v0 = gBtlWork->viewX;
         gEventState->cameraY = v1 = gBtlWork->viewY;
         gEventState->centerX = gBtlWork->x;
@@ -3325,16 +3325,16 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 0);
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = 0x100;
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 368, 480, 512);
-        gEventState->bossTask = TaskCreate(&p->tasks, &gTaskDescBosLst, &p->tasks);
+        gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosLst, &work->tasks);
         break;
     case 101:
         SetupBg(0, 0, 24, 0);
@@ -3345,22 +3345,22 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 0);
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->x = 0x26600;
         gBtlWork->y = 0x12800;
         gBtlWork->viewX = 0x26600;
         gBtlWork->viewY = 0x12800;
         gBtlWork->x2 = 0x26600;
         gBtlWork->y2 = 0x12800;
-        p->obj.x = 0x2A200;
-        p->obj.y = 0x15E00;
-        p->obj.z = -0x3800;
+        work->obj.x = 0x2A200;
+        work->obj.y = 0x15E00;
+        work->obj.z = -0x3800;
         SetBattleBounds(420, 612, 328, 384);
-        TaskCreate(&p->tasks, &gTaskDescBosJf, &p->obj);
+        TaskCreate(&work->tasks, &gTaskDescBosJf, &work->obj);
         break;
     case 103:
         SetupBg(0, 0, 24, 0);
@@ -3375,7 +3375,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         gBtlWork->flags = 0;
-        p->usesBtlWork = 1;
+        work->usesBtlWork = 1;
         gBtlWork->x = 0x12C00;
         gBtlWork->y = 0x16800;
         gBtlWork->viewX = 0x12C00;
@@ -3388,11 +3388,11 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         gEventState->centerY = gBtlWork->y;
         gEventState->shakeX = 0;
         gEventState->shakeY = 0;
-        p->obj.x = p->keyframes->x;
-        p->obj.y = p->keyframes->y;
-        p->obj.z = p->keyframes->z;
+        work->obj.x = work->keyframes->x;
+        work->obj.y = work->keyframes->y;
+        work->obj.z = work->keyframes->z;
         SetBattleBounds(0, 256, 328, 424);
-        TaskCreate(&p->tasks, &gTaskDescBosDsd, &p->obj);
+        TaskCreate(&work->tasks, &gTaskDescBosDsd, &work->obj);
         break;
     case 98:
         SetupBg(0, 0, 24, 0);
@@ -3403,12 +3403,12 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
-        TaskCreate(&p->tasks, &gTaskDescBosBoogie, NULL);
+        work->usesBtlWork = 1;
+        TaskCreate(&work->tasks, &gTaskDescBosBoogie, NULL);
         gBtlWork->fadeAmount = 5;
         break;
     case 99:
@@ -3420,12 +3420,12 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
-        TaskCreate(&p->tasks, &gTaskDescBosUrsula, NULL);
+        work->usesBtlWork = 1;
+        TaskCreate(&work->tasks, &gTaskDescBosUrsula, NULL);
         gBtlWork->fadeAmount = 5;
         break;
     case 104:
@@ -3437,75 +3437,75 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         SetBgPriority(2, 1);
         gBtlWork = EwramAlloc(sizeof(BtlWork));
         BtlWorkInit();
-        gBtlWork->actor = &p->actor;
+        gBtlWork->actor = &work->actor;
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        p->usesBtlWork = 1;
-        TaskCreate(&p->tasks, &gTaskDescBosGa, (void*)1);
+        work->usesBtlWork = 1;
+        TaskCreate(&work->tasks, &gTaskDescBosGa, (void*)1);
         gBtlWork->fadeAmount = 5;
         break;
     default:
-        if ((p->keyframes->flags & CHARA_KEYFRAME_FLAG_DEFER_SPAWN) == 0) {
-            CreateEvtObjTask(&p->tasks, &p->obj, p->arg.chara, p->keyframes->anim, p->keyframes->x, p->keyframes->y, p->keyframes->z);
-            p->hasObj = 1;
+        if ((work->keyframes->flags & CHARA_KEYFRAME_FLAG_DEFER_SPAWN) == 0) {
+            CreateEvtObjTask(&work->tasks, &work->obj, work->arg.chara, work->keyframes->anim, work->keyframes->x, work->keyframes->y, work->keyframes->z);
+            work->hasObj = 1;
         } else {
-            p->hasObj = 0;
+            work->hasObj = 0;
         }
 
-        SetupEventCharaShadow(p);
+        SetupEventCharaShadow(work);
         break;
     }
 
-    if (p->hasObj) {
-        ApplyEventCharaDrawFlags(p);
+    if (work->hasObj) {
+        ApplyEventCharaDrawFlags(work);
     }
 }
 
-u8 event_chara_1(EventCharaWork* p, void* a) {
+u8 event_chara_1(EventCharaWork* work, void* a) {
     u8 t;
     s32 v0;
     s32 v1;
 
-    t = AdvanceEventCharaKeyframe(p);
+    t = AdvanceEventCharaKeyframe(work);
 
-    if (p->hasObj) {
-        UpdateEventCharaMotion(p);
+    if (work->hasObj) {
+        UpdateEventCharaMotion(work);
     }
 
-    PlayEventCharaAnimSounds(p);
+    PlayEventCharaAnimSounds(work);
 
     if (t) {
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
-            ((void (*)(EventCharaWork*, void*))p->keyframes[p->keyframe].update)(p, a);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
+            ((void (*)(EventCharaWork*, void*))work->keyframes[work->keyframe].update)(work, a);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_NO_SHADOW) {
-        p->obj.flags |= EVTOBJ_FLAG_NO_SHADOW;
+    if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_NO_SHADOW) {
+        work->obj.flags |= EVTOBJ_FLAG_NO_SHADOW;
     } else {
-        p->obj.flags &= ~EVTOBJ_FLAG_NO_SHADOW;
+        work->obj.flags &= ~EVTOBJ_FLAG_NO_SHADOW;
     }
 
-    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PLAYER_CONTROL) {
+    if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_PLAYER_CONTROL) {
         gEventState->flags |= EVENT_FLAG_PAUSED;
         gEventState->flags |= EVENT_FLAG_PLAYER_CONTROL;
-        p->speed = 0;
+        work->speed = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
 
-    if (p->usesBtlWork) {
-        switch (p->arg.chara) {
+    if (work->usesBtlWork) {
+        switch (work->arg.chara) {
         case 0x62:
             gEventState->x = gEventState->cameraX = gBtlWork->x2;
             gEventState->y = gEventState->cameraY = gBtlWork->y2;
@@ -3537,19 +3537,19 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         }
     }
 
-    if (p->arg.chara == 0) {
+    if (work->arg.chara == 0) {
         if (gBtlWork != NULL) {
-            gBtlWork->actor->x = p->obj.x - 0x7800;
-            gBtlWork->actor->y = p->obj.y - 0x5000;
+            gBtlWork->actor->x = work->obj.x - 0x7800;
+            gBtlWork->actor->y = work->obj.y - 0x5000;
             gBtlWork->actor->z = 0;
         }
     }
 
-    if (p->finished) {
+    if (work->finished) {
         return 0;
     }
 
-    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) {
+    if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) {
         if (gFrameCounter % 6 == 0) {
             u16 v = GetRandom() % 7 + 4;
 
@@ -3560,128 +3560,128 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
     return 1;
 }
 
-static inline s16 GetEventCharaScreenX(EventCharaWork* p) {
-    return (p->spriteX >> 8) - (gEventState->x >> 8);
+static inline s16 GetEventCharaScreenX(EventCharaWork* work) {
+    return (work->spriteX >> 8) - (gEventState->x >> 8);
 }
 
-void event_chara_2(EventCharaWork* p) {
+void event_chara_2(EventCharaWork* work) {
     const EventCharaKeyframe* e;
     s32 save;
     s32 x;
     s32 y;
     u16 h;
 
-    save = p->obj.z;
-    e = &p->keyframes[p->keyframe];
+    save = work->obj.z;
+    e = &work->keyframes[work->keyframe];
 
     if (e->flags & CHARA_KEYFRAME_FLAG_BOB) {
-        p->obj.z = gSineTable[p->bobPhase] * 2 + save;
+        work->obj.z = gSineTable[work->bobPhase] * 2 + save;
     } else if (e->flags & CHARA_KEYFRAME_FLAG_BOB_LARGE) {
-        p->obj.z = gSineTable[p->bobPhase] * 3 + save;
+        work->obj.z = gSineTable[work->bobPhase] * 3 + save;
     }
 
-    if (p->visible != 0) {
-        TaskPoolDraw(&p->tasks);
+    if (work->visible != 0) {
+        TaskPoolDraw(&work->tasks);
     }
 
-    if (p->arg.chara == 99) {
+    if (work->arg.chara == 99) {
         TaskPoolDraw(&gBtlWork->taskPools[0]);
     }
 
-    if (p->tiles != NULL) {
-        h = p->obj.drawFlags;
+    if (work->tiles != NULL) {
+        h = work->obj.drawFlags;
 
-        if (p->spriteFlipX == 0) {
+        if (work->spriteFlipX == 0) {
             h &= ~SPRITE_FLAG_HFLIP;
         } else {
             h |= SPRITE_FLAG_HFLIP;
         }
 
-        x = GetEventCharaScreenX(p);
-        y = (p->spriteY >> 8) + gEventCharaParams[p->arg.chara].spriteYOffset - (gEventState->y >> 8);
-        DrawSprite(x, y, p->gfx, p->tiles, p->palette, NULL, h, 50);
+        x = GetEventCharaScreenX(work);
+        y = (work->spriteY >> 8) + gEventCharaParams[work->arg.chara].spriteYOffset - (gEventState->y >> 8);
+        DrawSprite(x, y, work->gfx, work->tiles, work->palette, NULL, h, 50);
     }
 
-    p->obj.z = save;
+    work->obj.z = save;
 }
 
-void event_chara_3(EventCharaWork* p) {
-    TaskPoolDestroy(&p->tasks);
+void event_chara_3(EventCharaWork* work) {
+    TaskPoolDestroy(&work->tasks);
 
-    if (p->usesBtlWork) {
+    if (work->usesBtlWork) {
         TaskPoolDestroy(&gBtlWork->taskPools[0]);
         TaskPoolDestroy(&gBtlWork->taskPools[1]);
         EwramFree(gBtlWork);
     }
 }
 
-u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
-    const EventCharaKeyframe* e = &p->keyframes[p->keyframe];
+u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
+    const EventCharaKeyframe* e = &work->keyframes[work->keyframe];
     u16 v;
 
-    if (p->keyframes[p->keyframe].frame > gEventState->frame) {
+    if (work->keyframes[work->keyframe].frame > gEventState->frame) {
         return 0;
     }
 
-    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_END) != 0) {
+    if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_END) != 0) {
         return 0;
     }
 
-    p->keyframe++;
-    p->steps = p->keyframes[p->keyframe].frame - gEventState->frame;
-    p->animId = p->keyframes[p->keyframe].anim;
+    work->keyframe++;
+    work->steps = work->keyframes[work->keyframe].frame - gEventState->frame;
+    work->animId = work->keyframes[work->keyframe].anim;
 
-    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SPAWN) != 0) {
-        CreateEvtObjTask(&p->tasks, &p->obj, p->arg.chara, p->keyframes[p->keyframe].anim,
-                      p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y,
-                      p->keyframes[p->keyframe].z);
-        p->hasObj = 1;
-        SetupEventCharaShadow(p);
+    if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_SPAWN) != 0) {
+        CreateEvtObjTask(&work->tasks, &work->obj, work->arg.chara, work->keyframes[work->keyframe].anim,
+                      work->keyframes[work->keyframe].x, work->keyframes[work->keyframe].y,
+                      work->keyframes[work->keyframe].z);
+        work->hasObj = 1;
+        SetupEventCharaShadow(work);
     }
 
-    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_DESPAWN) != 0) {
-        p->finished = 1;
+    if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_DESPAWN) != 0) {
+        work->finished = 1;
     }
 
-    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(&gUnk_096148D8[0x80], (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
-    } else if ((p->keyframes[p->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(gEvtObjResources[p->arg.chara].res.palette, (void*)(p->obj.paletteIndex * 32 + OBJ_PLTT), 32);
+    if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
+        LoadPalette(&gUnk_096148D8[0x80], (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
+    } else if ((work->keyframes[work->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
+        LoadPalette(gEvtObjResources[work->arg.chara].res.palette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     }
 
-    if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) != 0) {
+    if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_TRANSLUCENT) != 0) {
         gBldCnt = (BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
-        v = p->obj.drawFlags;
-        EvtObjSetDrawFlags(&p->obj, v | SPRITE_FLAG_BLEND);
+        v = work->obj.drawFlags;
+        EvtObjSetDrawFlags(&work->obj, v | SPRITE_FLAG_BLEND);
     } else {
-        v = p->obj.drawFlags;
-        EvtObjSetDrawFlags(&p->obj, p->obj.drawFlags & ~SPRITE_FLAG_BLEND);
-        p->unk_1B8 = 0;
+        v = work->obj.drawFlags;
+        EvtObjSetDrawFlags(&work->obj, work->obj.drawFlags & ~SPRITE_FLAG_BLEND);
+        work->unk_1B8 = 0;
     }
 
-    if (p->hasObj) {
-        if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_MOTION_MASK) == CHARA_MOTION_SET_POSITION) {
-            EvtObjSetPos(&p->obj, p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y, p->keyframes[p->keyframe].z);
+    if (work->hasObj) {
+        if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_MOTION_MASK) == CHARA_MOTION_SET_POSITION) {
+            EvtObjSetPos(&work->obj, work->keyframes[work->keyframe].x, work->keyframes[work->keyframe].y, work->keyframes[work->keyframe].z);
         }
 
-        EvtObjSetAnim(&p->obj, p->animId);
-        ApplyEventCharaDrawFlags(p);
+        EvtObjSetAnim(&work->obj, work->animId);
+        ApplyEventCharaDrawFlags(work);
         return 1;
     }
 
-    if (p->keyframes[p->keyframe].anim == 0x3AF) {
+    if (work->keyframes[work->keyframe].anim == 0x3AF) {
         BosPcStartEventAnim(gEventState->bossTask);
     }
 
-    if (p->keyframes[p->keyframe].anim == 0x3AB) {
+    if (work->keyframes[work->keyframe].anim == 0x3AB) {
         BosLstAdvanceEventStep(gEventState->bossTask);
     }
 
     return 0;
 }
 
-void UpdateEventCharaMotion(EventCharaWork* p) {
-    const EventCharaKeyframe* e = &p->keyframes[p->keyframe];
+void UpdateEventCharaMotion(EventCharaWork* work) {
+    const EventCharaKeyframe* e = &work->keyframes[work->keyframe];
     BtlObj* t;
 
     if (e->anim == 0x3A7) {
@@ -3694,277 +3694,277 @@ void UpdateEventCharaMotion(EventCharaWork* p) {
 
     switch (e->flags & CHARA_KEYFRAME_MOTION_MASK) {
     case CHARA_MOTION_SET_POSITION:
-        EvtObjSetPos(&p->obj, p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y, p->keyframes[p->keyframe].z);
+        EvtObjSetPos(&work->obj, work->keyframes[work->keyframe].x, work->keyframes[work->keyframe].y, work->keyframes[work->keyframe].z);
         break;
     case CHARA_MOTION_MOVE_TO:
-        ApproachValue(&p->obj.x, p->keyframes[p->keyframe].x, p->steps);
-        ApproachValue(&p->obj.y, p->keyframes[p->keyframe].y, p->steps);
-        ApproachValue(&p->obj.z, p->keyframes[p->keyframe].z, p->steps);
-        p->steps--;
+        ApproachValue(&work->obj.x, work->keyframes[work->keyframe].x, work->steps);
+        ApproachValue(&work->obj.y, work->keyframes[work->keyframe].y, work->steps);
+        ApproachValue(&work->obj.z, work->keyframes[work->keyframe].z, work->steps);
+        work->steps--;
 
-        if (p->steps == 0) {
-            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_KEEP_ANIM) == 0) {
-                SetEventCharaEndAnim(p);
+        if (work->steps == 0) {
+            if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_KEEP_ANIM) == 0) {
+                SetEventCharaEndAnim(work);
             }
         }
 
         break;
     case CHARA_MOTION_WALK:
         if ((e->flags & CHARA_KEYFRAME_FLAG_FAST) == 0) {
-            p->speed = gEventCharaParams[p->arg.chara].slowSpeed;
+            work->speed = gEventCharaParams[work->arg.chara].slowSpeed;
         } else {
-            p->speed = gEventCharaParams[p->arg.chara].fastSpeed;
+            work->speed = gEventCharaParams[work->arg.chara].fastSpeed;
         }
 
         if (e->motionArg == 1) {
-            p->obj.z -= p->speed;
+            work->obj.z -= work->speed;
         } else if (e->motionArg == 2) {
-            p->obj.z += p->speed;
+            work->obj.z += work->speed;
         } else {
-            p->obj.x += (gSineTable[e->motionArg & 0xFF] * p->speed) >> 8;
-            p->obj.y += (-gSineTable[(e->motionArg & 0xFF) + 64] * p->speed) >> 8;
+            work->obj.x += (gSineTable[e->motionArg & 0xFF] * work->speed) >> 8;
+            work->obj.y += (-gSineTable[(e->motionArg & 0xFF) + 64] * work->speed) >> 8;
         }
 
         break;
     }
 
     if ((e->flags & CHARA_KEYFRAME_FLAG_BOB) != 0) {
-        p->bobPhase += 4;
+        work->bobPhase += 4;
     } else if ((e->flags & CHARA_KEYFRAME_FLAG_BOB_LARGE) != 0) {
-        p->bobPhase += 4;
+        work->bobPhase += 4;
     } else {
-        p->bobPhase = 0;
+        work->bobPhase = 0;
     }
 
     if ((e->flags & CHARA_KEYFRAME_FLAG_BLINK) != 0) {
-        p->visible ^= 1;
+        work->visible ^= 1;
     } else {
-        p->visible = 1;
+        work->visible = 1;
     }
 }
 
-void SetEventCharaEndAnim(EventCharaWork* p) {
-    const EventCharaKeyframe* e = &p->keyframes[p->keyframe];
+void SetEventCharaEndAnim(EventCharaWork* work) {
+    const EventCharaKeyframe* e = &work->keyframes[work->keyframe];
 
-    EvtObjSetAnim(&p->obj, e->motionArg);
+    EvtObjSetAnim(&work->obj, e->motionArg);
 }
 
-u8 EventCharaHop(EventCharaWork* p, void* a) {
-    p->hopVelocity = 0x800;
-    p->unk_18C = 0;
-    p->waitTimer = 0;
-    p->unk_198 = p->obj.z;
-    TaskPoolUpdate(&p->tasks);
+u8 EventCharaHop(EventCharaWork* work, void* a) {
+    work->hopVelocity = 0x800;
+    work->unk_18C = 0;
+    work->waitTimer = 0;
+    work->unk_198 = work->obj.z;
+    TaskPoolUpdate(&work->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopUpdate);
     return 1;
 }
 
-u8 EventCharaHopUpdate(EventCharaWork* p, void* a) {
+u8 EventCharaHopUpdate(EventCharaWork* work, void* a) {
     u16 x;
     u16 y;
     u8 t;
 
-    x = (p->obj.x >> 8) - (gEventState->x >> 8);
-    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
-    t = AdvanceEventCharaKeyframe(p);
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
+    x = (work->obj.x >> 8) - (gEventState->x >> 8);
+    y = (work->obj.y >> 8) + (work->obj.z >> 8) - (gEventState->y >> 8);
+    t = AdvanceEventCharaKeyframe(work);
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
 
-    if (p->waitTimer == 0) {
-        p->obj.z -= p->hopVelocity / 4;
-        p->hopVelocity -= p->unk_18C / 4;
-        p->unk_18C += 51;
+    if (work->waitTimer == 0) {
+        work->obj.z -= work->hopVelocity / 4;
+        work->hopVelocity -= work->unk_18C / 4;
+        work->unk_18C += 51;
     } else {
-        p->waitTimer--;
+        work->waitTimer--;
 
-        if (p->waitTimer == 0) {
-            if (p->arg.chara == 10) {
+        if (work->waitTimer == 0) {
+            if (work->arg.chara == 10) {
                 m4aSongNumStart(SONG_SND_324);
                 SetEventSoundPosition(SONG_SND_324, x, y);
             }
         }
     }
 
-    if (p->obj.z > p->unk_198) {
-        p->obj.z = p->unk_198;
-        p->hopVelocity = 0x800;
-        p->unk_18C = 0;
-        p->waitTimer = 17;
+    if (work->obj.z > work->unk_198) {
+        work->obj.z = work->unk_198;
+        work->hopVelocity = 0x800;
+        work->unk_18C = 0;
+        work->waitTimer = 17;
     }
 
     if (t) {
-        p->obj.z = p->unk_198;
+        work->obj.z = work->unk_198;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaHopHigh(EventCharaWork* p, void* a) {
-    p->hopVelocity = 0xC00;
-    p->unk_18C = 0;
-    p->waitTimer = 0;
-    p->unk_198 = p->obj.z;
-    TaskPoolUpdate(&p->tasks);
+u8 EventCharaHopHigh(EventCharaWork* work, void* a) {
+    work->hopVelocity = 0xC00;
+    work->unk_18C = 0;
+    work->waitTimer = 0;
+    work->unk_198 = work->obj.z;
+    TaskPoolUpdate(&work->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopHighUpdate);
     return 1;
 }
 
-u8 EventCharaHopHighUpdate(EventCharaWork* p, void* a) {
+u8 EventCharaHopHighUpdate(EventCharaWork* work, void* a) {
     u8 t;
 
-    t = AdvanceEventCharaKeyframe(p);
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
+    t = AdvanceEventCharaKeyframe(work);
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
 
-    if (p->waitTimer == 0) {
-        p->obj.z -= p->hopVelocity / 4;
-        p->hopVelocity -= p->unk_18C / 4;
-        p->unk_18C += 51;
+    if (work->waitTimer == 0) {
+        work->obj.z -= work->hopVelocity / 4;
+        work->hopVelocity -= work->unk_18C / 4;
+        work->unk_18C += 51;
     } else {
-        p->waitTimer--;
+        work->waitTimer--;
     }
 
-    if (p->obj.z > p->unk_198) {
-        p->obj.z = p->unk_198;
-        p->hopVelocity = 0;
-        p->unk_18C = 0;
-        p->waitTimer = 17;
+    if (work->obj.z > work->unk_198) {
+        work->obj.z = work->unk_198;
+        work->hopVelocity = 0;
+        work->unk_18C = 0;
+        work->waitTimer = 17;
     }
 
     if (t) {
-        p->obj.z = p->unk_198;
+        work->obj.z = work->unk_198;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaHopLow(EventCharaWork* p, void* a) {
-    p->hopVelocity = 0x300;
-    p->unk_18C = 0;
-    p->waitTimer = 0;
-    p->unk_198 = p->obj.z;
-    TaskPoolUpdate(&p->tasks);
+u8 EventCharaHopLow(EventCharaWork* work, void* a) {
+    work->hopVelocity = 0x300;
+    work->unk_18C = 0;
+    work->waitTimer = 0;
+    work->unk_198 = work->obj.z;
+    TaskPoolUpdate(&work->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaHopLowUpdate);
     return 1;
 }
 
-u8 EventCharaHopLowUpdate(EventCharaWork* p, void* a) {
+u8 EventCharaHopLowUpdate(EventCharaWork* work, void* a) {
     u8 t;
 
-    t = AdvanceEventCharaKeyframe(p);
-    PlayEventCharaAnimSounds(p);
-    UpdateEventCharaMotion(p);
+    t = AdvanceEventCharaKeyframe(work);
+    PlayEventCharaAnimSounds(work);
+    UpdateEventCharaMotion(work);
 
-    if (p->waitTimer == 0) {
-        p->obj.z -= p->hopVelocity;
-        p->hopVelocity -= p->unk_18C;
-        p->unk_18C += 51;
+    if (work->waitTimer == 0) {
+        work->obj.z -= work->hopVelocity;
+        work->hopVelocity -= work->unk_18C;
+        work->unk_18C += 51;
     } else {
-        p->waitTimer--;
+        work->waitTimer--;
     }
 
-    if (p->obj.z > p->unk_198) {
-        p->obj.z = p->unk_198;
-        p->hopVelocity = 0x800;
-        p->unk_18C = 0;
-        p->waitTimer = 17;
+    if (work->obj.z > work->unk_198) {
+        work->obj.z = work->unk_198;
+        work->hopVelocity = 0x800;
+        work->unk_18C = 0;
+        work->waitTimer = 17;
     }
 
     if (t) {
-        p->obj.z = p->unk_198;
+        work->obj.z = work->unk_198;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaDrop(EventCharaWork* p, void* a) {
-    p->hopVelocity = 0x300;
-    p->unk_18C = 0;
-    p->waitTimer = 0;
-    p->unk_198 = p->obj.z;
-    TaskPoolUpdate(&p->tasks);
+u8 EventCharaDrop(EventCharaWork* work, void* a) {
+    work->hopVelocity = 0x300;
+    work->unk_18C = 0;
+    work->waitTimer = 0;
+    work->unk_198 = work->obj.z;
+    TaskPoolUpdate(&work->tasks);
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaDropUpdate);
     return 1;
 }
 
-u8 EventCharaDropUpdate(EventCharaWork* p, void* a) {
+u8 EventCharaDropUpdate(EventCharaWork* work, void* a) {
     u8 t;
 
-    t = AdvanceEventCharaKeyframe(p);
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
+    t = AdvanceEventCharaKeyframe(work);
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
 
-    if (p->waitTimer == 0) {
-        p->obj.z -= p->hopVelocity;
-        p->hopVelocity -= p->unk_18C;
-        p->unk_18C += 51;
+    if (work->waitTimer == 0) {
+        work->obj.z -= work->hopVelocity;
+        work->hopVelocity -= work->unk_18C;
+        work->unk_18C += 51;
     } else {
-        p->waitTimer--;
+        work->waitTimer--;
     }
 
-    if (p->obj.z > 0) {
-        p->obj.z = 0;
-        p->waitTimer = 17;
+    if (work->obj.z > 0) {
+        work->obj.z = 0;
+        work->waitTimer = 17;
     }
 
     if (t) {
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4010,44 +4010,44 @@ u8 EventCharaFadeOut(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel != 0) {
-            p->effectLevel--;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel != 0) {
+            work->effectLevel--;
         }
     }
 
-    gBldAlpha = ((16 - p->effectLevel) << 8) | p->effectLevel;
+    gBldAlpha = ((16 - work->effectLevel) << 8) | work->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
 
         {
-            u16 z = p->obj.drawFlags;
+            u16 z = work->obj.drawFlags;
 
             z &= 0xFFFB;
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4093,44 +4093,44 @@ u8 EventCharaFadeIn(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 EventCharaFadeInUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel <= 15) {
-            p->effectLevel++;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel <= 15) {
+            work->effectLevel++;
         }
     }
 
-    gBldAlpha = ((16 - p->effectLevel) << 8) | p->effectLevel;
+    gBldAlpha = ((16 - work->effectLevel) << 8) | work->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
 
         {
-            u16 z = p->obj.drawFlags;
+            u16 z = work->obj.drawFlags;
 
             z &= 0xFFFB;
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4166,37 +4166,37 @@ u8 EventCharaBlendUp(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaBlendUpUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel <= 15) {
-            p->effectLevel++;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel <= 15) {
+            work->effectLevel++;
         }
     }
 
-    gBldAlpha = (p->effectLevel << 8) | 16;
+    gBldAlpha = (work->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4232,247 +4232,247 @@ u8 EventCharaBlendDown(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaBlendDownUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel != 0) {
-            p->effectLevel--;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel != 0) {
+            work->effectLevel--;
         }
     }
 
-    gBldAlpha = (p->effectLevel << 8) | 16;
+    gBldAlpha = (work->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaCircleSlow(EventCharaWork* p, void* a) {
-    p->unk_18C = 0;
-    p->unk_198 = 0;
-    p->startX = p->obj.x;
-    p->startZ = p->obj.z;
+u8 EventCharaCircleSlow(EventCharaWork* work, void* a) {
+    work->unk_18C = 0;
+    work->unk_198 = 0;
+    work->startX = work->obj.x;
+    work->startZ = work->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleSlowUpdate);
     return 1;
 }
 
-u8 EventCharaCircleSlowUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
-    p->obj.y += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
-    p->unk_18C += 2;
+u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->obj.x += gSineTable[(u8)work->unk_18C] * (work->unk_198 >> 8);
+    work->obj.y += -gSineTable[(u8)work->unk_18C + 64] * (work->unk_198 >> 9);
+    work->unk_18C += 2;
 
-    if (p->unk_198 < 0x200) {
-        p->unk_198 += 25;
+    if (work->unk_198 < 0x200) {
+        work->unk_198 += 25;
     }
 
-    if (AdvanceEventCharaKeyframe(p)) {
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+    if (AdvanceEventCharaKeyframe(work)) {
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaCircleFast(EventCharaWork* p, void* a) {
-    p->unk_18C = 0;
-    p->unk_198 = 0;
-    p->startX = p->obj.x;
-    p->startZ = p->obj.z;
+u8 EventCharaCircleFast(EventCharaWork* work, void* a) {
+    work->unk_18C = 0;
+    work->unk_198 = 0;
+    work->startX = work->obj.x;
+    work->startZ = work->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaCircleFastUpdate);
     return 1;
 }
 
-u8 EventCharaCircleFastUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->obj.x += gSineTable[(u8)p->unk_18C] * (p->unk_198 >> 8);
-    p->obj.y += -gSineTable[(u8)p->unk_18C + 64] * (p->unk_198 >> 9);
-    p->unk_18C += 6;
+u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->obj.x += gSineTable[(u8)work->unk_18C] * (work->unk_198 >> 8);
+    work->obj.y += -gSineTable[(u8)work->unk_18C + 64] * (work->unk_198 >> 9);
+    work->unk_18C += 6;
 
-    if (p->unk_198 < 0x200) {
-        p->unk_198 += 25;
+    if (work->unk_198 < 0x200) {
+        work->unk_198 += 25;
     }
 
-    if (AdvanceEventCharaKeyframe(p)) {
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+    if (AdvanceEventCharaKeyframe(work)) {
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaJitter(EventCharaWork* p, void* a) {
-    p->unk_18C = 1;
-    p->unk_198 = 0;
-    p->startX = p->obj.x;
-    p->startZ = p->obj.z;
+u8 EventCharaJitter(EventCharaWork* work, void* a) {
+    work->unk_18C = 1;
+    work->unk_198 = 0;
+    work->startX = work->obj.x;
+    work->startZ = work->obj.z;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaJitterUpdate);
     return 1;
 }
 
-u8 EventCharaJitterUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
+u8 EventCharaJitterUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
 
-    if (p->unk_198 == 2) {
-        p->obj.z += p->unk_18C << 10;
-        p->unk_18C = -p->unk_18C;
-        p->unk_198 = 0;
+    if (work->unk_198 == 2) {
+        work->obj.z += work->unk_18C << 10;
+        work->unk_18C = -work->unk_18C;
+        work->unk_198 = 0;
     } else {
-        p->unk_198++;
+        work->unk_198++;
     }
 
-    if (AdvanceEventCharaKeyframe(p)) {
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+    if (AdvanceEventCharaKeyframe(work)) {
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void ApplyEventCharaDrawFlags(EventCharaWork* p) {
+void ApplyEventCharaDrawFlags(EventCharaWork* work) {
     u16 z;
 
-    z = p->obj.drawFlags;
+    z = work->obj.drawFlags;
 
-    if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_HFLIP) {
-        if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
+    if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_HFLIP) {
+        if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
             z |= SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP;
             z &= ~SPRITE_PRIORITY(2);
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
         } else {
             z |= SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
             z &= ~SPRITE_PRIORITY(1);
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
 
-            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
+            if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
                 z |= SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
-                EvtObjSetDrawFlags(&p->obj, z);
+                EvtObjSetDrawFlags(&work->obj, z);
             } else {
                 z |= SPRITE_FLAG_HFLIP;
                 z &= ~SPRITE_PRIORITY(2);
-                EvtObjSetDrawFlags(&p->obj, z);
+                EvtObjSetDrawFlags(&work->obj, z);
             }
         }
     } else {
-        if (p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
+        if (work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_1) {
             z |= SPRITE_PRIORITY(1);
             z &= ~SPRITE_PRIORITY(2);
             z &= ~SPRITE_FLAG_HFLIP;
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
         } else {
             z |= SPRITE_PRIORITY(2);
             z &= ~SPRITE_PRIORITY(1);
             z &= ~SPRITE_FLAG_HFLIP;
-            EvtObjSetDrawFlags(&p->obj, z);
+            EvtObjSetDrawFlags(&work->obj, z);
 
-            if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
+            if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_PRIORITY_0) == 0) {
                 z |= SPRITE_PRIORITY(2);
                 z &= ~SPRITE_FLAG_HFLIP;
-                EvtObjSetDrawFlags(&p->obj, z);
+                EvtObjSetDrawFlags(&work->obj, z);
             } else {
                 z &= ~SPRITE_PRIORITY(2);
                 z &= ~SPRITE_FLAG_HFLIP;
-                EvtObjSetDrawFlags(&p->obj, z);
+                EvtObjSetDrawFlags(&work->obj, z);
             }
         }
     }
 }
 
-u8 EventCharaToggleAnim(EventCharaWork* p, void* a) {
-    p->effectTimer = 0;
-    p->effectLevel = 0;
+u8 EventCharaToggleAnim(EventCharaWork* work, void* a) {
+    work->effectTimer = 0;
+    work->effectLevel = 0;
     SetTaskUpdate(a, (TaskUpdateFunc)EventCharaToggleAnimUpdate);
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 EventCharaToggleAnimUpdate(EventCharaWork* p, void* a) {
+u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* a) {
     u16 buf[2];
 
     memcpy(buf, sEventCharaToggleAnims, 4);
-    EvtObjSetAnim(&p->obj, buf[p->effectLevel]);
-    p->effectTimer++;
+    EvtObjSetAnim(&work->obj, buf[work->effectLevel]);
+    work->effectTimer++;
 
-    if (p->effectTimer == 12) {
-        p->effectTimer = 0;
-        p->effectLevel ^= 1;
+    if (work->effectTimer == 12) {
+        work->effectTimer = 0;
+        work->effectLevel ^= 1;
     }
 
-    if (AdvanceEventCharaKeyframe(p)) {
-        if (p->tiles != NULL) {
-            ReleaseObjTiles(p->tiles);
+    if (AdvanceEventCharaKeyframe(work)) {
+        if (work->tiles != NULL) {
+            ReleaseObjTiles(work->tiles);
         }
 
-        if (p->palette != NULL) {
-            ReleaseObjPalette(p->palette);
+        if (work->palette != NULL) {
+            ReleaseObjPalette(work->palette);
         }
 
-        p->tiles = NULL;
-        p->palette = NULL;
+        work->tiles = NULL;
+        work->palette = NULL;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4508,37 +4508,37 @@ u8 EventCharaFadeToBlack(void* work, void* a) {
     return 1;
 }
 
-u8 EventCharaFadeToBlackUpdate(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel != 0) {
-            p->effectLevel--;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel != 0) {
+            work->effectLevel--;
         }
     }
 
-    gBldAlpha = p->effectLevel;
+    gBldAlpha = work->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
@@ -4574,120 +4574,120 @@ u8 func_0806FCF4(void* work, void* a) {
     return 1;
 }
 
-u8 func_0806FDB0(EventCharaWork* p, void* a) {
-    UpdateEventCharaMotion(p);
-    PlayEventCharaAnimSounds(p);
-    p->effectTimer++;
+u8 func_0806FDB0(EventCharaWork* work, void* a) {
+    UpdateEventCharaMotion(work);
+    PlayEventCharaAnimSounds(work);
+    work->effectTimer++;
 
-    if (p->effectTimer % 2 == 0) {
-        if (p->effectLevel != 0) {
-            p->effectLevel--;
+    if (work->effectTimer % 2 == 0) {
+        if (work->effectLevel != 0) {
+            work->effectLevel--;
         }
     }
 
-    gBldAlpha = (16 - p->effectLevel) | (p->effectLevel << 8);
-    gBldAlpha = (p->effectLevel << 8) | 16;
+    gBldAlpha = (16 - work->effectLevel) | (work->effectLevel << 8);
+    gBldAlpha = (work->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p)) {
+    if (AdvanceEventCharaKeyframe(work)) {
         gBldCnt = 0;
 
-        if (p->keyframes[p->keyframe].update != NULL) {
-            SetTaskUpdate(a, p->keyframes[p->keyframe].update);
+        if (work->keyframes[work->keyframe].update != NULL) {
+            SetTaskUpdate(a, work->keyframes[work->keyframe].update);
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)event_chara_1);
         }
 
-        if (p->keyframes[p->keyframe].callback != NULL) {
-            p->keyframes[p->keyframe].callback(p);
-            p->callbackActive = 1;
+        if (work->keyframes[work->keyframe].callback != NULL) {
+            work->keyframes[work->keyframe].callback(work);
+            work->callbackActive = 1;
         } else {
-            p->callbackActive = 0;
+            work->callbackActive = 0;
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void ReadEventCharaDpadAngle(EventCharaWork* p) {
+void ReadEventCharaDpadAngle(EventCharaWork* work) {
     u16 keys = GetKeysHeld();
 
     switch (keys & DPAD_ANY) {
     case DPAD_UP:
         if (GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-            p->angle = 211;
+            work->angle = 211;
         } else if (GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-            p->angle = 45;
+            work->angle = 45;
         } else {
-            p->angle = 0;
+            work->angle = 0;
         }
 
         break;
     case DPAD_DOWN:
         if (GetKeyReleaseTime(DPAD_LEFT) <= 4) {
-            p->angle = 173;
+            work->angle = 173;
         } else if (GetKeyReleaseTime(DPAD_RIGHT) <= 4) {
-            p->angle = 83;
+            work->angle = 83;
         } else {
-            p->angle = 128;
+            work->angle = 128;
         }
 
         break;
     case DPAD_LEFT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
-            p->angle = 211;
+            work->angle = 211;
         } else if (GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-            p->angle = 173;
+            work->angle = 173;
         } else {
-            p->angle = 192;
+            work->angle = 192;
         }
 
         break;
     case DPAD_RIGHT:
         if (GetKeyReleaseTime(DPAD_UP) <= 4) {
-            p->angle = 45;
+            work->angle = 45;
         } else if (GetKeyReleaseTime(DPAD_DOWN) <= 4) {
-            p->angle = 83;
+            work->angle = 83;
         } else {
-            p->angle = 64;
+            work->angle = 64;
         }
 
         break;
     case (DPAD_RIGHT | DPAD_UP):
-        p->angle = 45;
+        work->angle = 45;
         break;
     case (DPAD_LEFT | DPAD_UP):
-        p->angle = 211;
+        work->angle = 211;
         break;
     case (DPAD_RIGHT | DPAD_DOWN):
-        p->angle = 83;
+        work->angle = 83;
         break;
     case (DPAD_LEFT | DPAD_DOWN):
-        p->angle = 173;
+        work->angle = 173;
         break;
     }
 }
 
-void UpdateEventCharaAngle(EventCharaWork* p) {
-    u8 old = p->angle;
+void UpdateEventCharaAngle(EventCharaWork* work) {
+    u8 old = work->angle;
 
-    ReadEventCharaDpadAngle(p);
+    ReadEventCharaDpadAngle(work);
 
-    if (old != p->angle) {
-        if (abs((s8)GetAngleDiff(old, p->angle)) > 100) {
-            p->speed = 0;
+    if (old != work->angle) {
+        if (abs((s8)GetAngleDiff(old, work->angle)) > 100) {
+            work->speed = 0;
         } else {
-            p->speed >>= 1;
+            work->speed >>= 1;
         }
     }
 }
 
-void SetEventCharaMoveAnim(EventCharaWork* p, s32 a) {
+void SetEventCharaMoveAnim(EventCharaWork* work, s32 a) {
     u16 f;
 
-    f = p->obj.drawFlags;
+    f = work->obj.drawFlags;
 
-    switch (p->angle) {
+    switch (work->angle) {
     case 0xD3:
         f &= 0xFFFE;
         break;
@@ -4704,447 +4704,447 @@ void SetEventCharaMoveAnim(EventCharaWork* p, s32 a) {
         break;
     }
 
-    if (a != p->animId) {
-        EvtObjSetAnim(&p->obj, a);
-        p->animId = a;
+    if (a != work->animId) {
+        EvtObjSetAnim(&work->obj, a);
+        work->animId = a;
     }
 
-    EvtObjSetDrawFlags(&p->obj, f);
+    EvtObjSetDrawFlags(&work->obj, f);
 }
 
-u8 UpdateEventCharaControl(EventCharaWork* p, void* a) {
+u8 UpdateEventCharaControl(EventCharaWork* work, void* a) {
     u16 keys;
     s32 v;
 
     keys = GetKeysHeld();
-    ReadEventCharaDpadAngle(p);
+    ReadEventCharaDpadAngle(work);
 
-    switch (p->angle) {
+    switch (work->angle) {
     case 0x00:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 5);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 5);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 10);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 10);
         }
 
         break;
     case 0x80:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 6);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 6);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 11);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 11);
         }
 
         break;
     case 0xC0:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 8);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 8);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 13);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 13);
         }
 
         break;
     case 0x40:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 8);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 8);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 13);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 13);
         }
 
         break;
     case 0xD3:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 9);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 9);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 14);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 14);
         }
 
         break;
     case 0x2D:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 9);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 9);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 14);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 14);
         }
 
         break;
     case 0xAD:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 7);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 7);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 12);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 12);
         }
 
         break;
     case 0x53:
         if ((keys & A_BUTTON) != 0) {
-            p->moveMode = 1;
-            SetEventCharaMoveAnim(p, 7);
+            work->moveMode = 1;
+            SetEventCharaMoveAnim(work, 7);
         } else {
-            p->moveMode = 2;
-            SetEventCharaMoveAnim(p, 12);
+            work->moveMode = 2;
+            SetEventCharaMoveAnim(work, 12);
         }
 
         break;
     }
 
     if ((keys & DPAD_ANY) != 0) {
-        v = p->speed + 51;
-        p->speed = v;
+        v = work->speed + 51;
+        work->speed = v;
 
-        switch (p->moveMode) {
+        switch (work->moveMode) {
         case 1:
-            if (v > gEventCharaParams[p->arg.chara].slowSpeed) {
-                p->speed = gEventCharaParams[p->arg.chara].slowSpeed;
+            if (v > gEventCharaParams[work->arg.chara].slowSpeed) {
+                work->speed = gEventCharaParams[work->arg.chara].slowSpeed;
             }
 
             break;
         case 2:
-            if (v > gEventCharaParams[p->arg.chara].fastSpeed) {
-                p->speed = gEventCharaParams[p->arg.chara].fastSpeed;
+            if (v > gEventCharaParams[work->arg.chara].fastSpeed) {
+                work->speed = gEventCharaParams[work->arg.chara].fastSpeed;
             }
 
             break;
         }
     } else {
-        p->speed -= 102;
+        work->speed -= 102;
 
-        if (p->speed < 0) {
-            p->speed = 0;
+        if (work->speed < 0) {
+            work->speed = 0;
         }
 
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 0);
+            SetEventCharaMoveAnim(work, 0);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 1);
+            SetEventCharaMoveAnim(work, 1);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 3);
+            SetEventCharaMoveAnim(work, 3);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 3);
+            SetEventCharaMoveAnim(work, 3);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 2);
+            SetEventCharaMoveAnim(work, 2);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 2);
+            SetEventCharaMoveAnim(work, 2);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 4);
+            SetEventCharaMoveAnim(work, 4);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 4);
+            SetEventCharaMoveAnim(work, 4);
             break;
         }
     }
 
     if ((GetKeysPressed() & B_BUTTON) != 0) {
-        p->jumpPhase = 0;
-        p->waitTimer = 0;
+        work->jumpPhase = 0;
+        work->waitTimer = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaJump);
     }
 
-    v = p->obj.x + (gSineTable[p->angle] * p->speed >> 8);
-    p->obj.x = v;
-    p->obj.y += p->speed * -gSineTable[p->angle + 64] >> 8;
+    v = work->obj.x + (gSineTable[work->angle] * work->speed >> 8);
+    work->obj.x = v;
+    work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
 
-    if (p->arg.chara == 0) {
+    if (work->arg.chara == 0) {
         if (gBtlWork != NULL) {
             gBtlWork->actor->x = v - 0x7800;
-            gBtlWork->actor->y = p->obj.y - 0x5000;
+            gBtlWork->actor->y = work->obj.y - 0x5000;
             gBtlWork->actor->z = 0;
         }
     }
 
-    p->lastAngle = p->angle;
-    p->lastMoveMode = p->moveMode;
-    TaskPoolUpdate(&p->tasks);
+    work->lastAngle = work->angle;
+    work->lastMoveMode = work->moveMode;
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
+u8 UpdateEventCharaJump(EventCharaWork* work, void* a) {
     u16 keys = GetKeysHeld();
 
     if ((keys & DPAD_ANY) != 0) {
-        p->speed += 5;
+        work->speed += 5;
     }
 
-    switch (p->jumpPhase) {
+    switch (work->jumpPhase) {
     case 0:
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 38);
+            SetEventCharaMoveAnim(work, 38);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 44);
+            SetEventCharaMoveAnim(work, 44);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 56);
+            SetEventCharaMoveAnim(work, 56);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 56);
+            SetEventCharaMoveAnim(work, 56);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 50);
+            SetEventCharaMoveAnim(work, 50);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 50);
+            SetEventCharaMoveAnim(work, 50);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 62);
+            SetEventCharaMoveAnim(work, 62);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 62);
+            SetEventCharaMoveAnim(work, 62);
             break;
         }
 
-        p->obj.x += gSineTable[p->angle] * (p->speed >> 2) >> 8;
-        p->obj.y += -gSineTable[p->angle + 64] * (p->speed >> 2) >> 8;
+        work->obj.x += gSineTable[work->angle] * (work->speed >> 2) >> 8;
+        work->obj.y += -gSineTable[work->angle + 64] * (work->speed >> 2) >> 8;
 
-        if (p->waitTimer > 3) {
-            p->jumpPhase = 1;
-            p->unk_18C = -0x540;
-            p->unk_198 = p->obj.z;
-            p->waitTimer = 0;
+        if (work->waitTimer > 3) {
+            work->jumpPhase = 1;
+            work->unk_18C = -0x540;
+            work->unk_198 = work->obj.z;
+            work->waitTimer = 0;
         } else {
-            p->waitTimer++;
+            work->waitTimer++;
         }
 
         break;
     case 1:
-        UpdateEventCharaAngle(p);
+        UpdateEventCharaAngle(work);
 
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 39);
+            SetEventCharaMoveAnim(work, 39);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 45);
+            SetEventCharaMoveAnim(work, 45);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 57);
+            SetEventCharaMoveAnim(work, 57);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 57);
+            SetEventCharaMoveAnim(work, 57);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 51);
+            SetEventCharaMoveAnim(work, 51);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 51);
+            SetEventCharaMoveAnim(work, 51);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 63);
+            SetEventCharaMoveAnim(work, 63);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 63);
+            SetEventCharaMoveAnim(work, 63);
             break;
         }
 
-        p->obj.x += gSineTable[p->angle] * p->speed >> 8;
-        p->obj.y += p->speed * -gSineTable[p->angle + 64] >> 8;
-        p->unk_18C += 51;
-        p->obj.z += p->unk_18C;
+        work->obj.x += gSineTable[work->angle] * work->speed >> 8;
+        work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
+        work->unk_18C += 51;
+        work->obj.z += work->unk_18C;
 
         if ((GetKeysHeld() & B_BUTTON) == 0) {
-            p->unk_18C += 64;
+            work->unk_18C += 64;
         }
 
-        if (p->unk_18C > -0x200) {
-            p->jumpPhase = 2;
-            p->waitTimer = 0;
+        if (work->unk_18C > -0x200) {
+            work->jumpPhase = 2;
+            work->waitTimer = 0;
         }
 
         break;
     case 2:
-        UpdateEventCharaAngle(p);
+        UpdateEventCharaAngle(work);
 
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 40);
+            SetEventCharaMoveAnim(work, 40);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 46);
+            SetEventCharaMoveAnim(work, 46);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 58);
+            SetEventCharaMoveAnim(work, 58);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 58);
+            SetEventCharaMoveAnim(work, 58);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 52);
+            SetEventCharaMoveAnim(work, 52);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 52);
+            SetEventCharaMoveAnim(work, 52);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 64);
+            SetEventCharaMoveAnim(work, 64);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 64);
+            SetEventCharaMoveAnim(work, 64);
             break;
         }
 
-        p->obj.x += gSineTable[p->angle] * p->speed >> 8;
-        p->obj.y += p->speed * -gSineTable[p->angle + 64] >> 8;
-        p->unk_18C += 51;
-        p->obj.z += p->unk_18C;
+        work->obj.x += gSineTable[work->angle] * work->speed >> 8;
+        work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
+        work->unk_18C += 51;
+        work->obj.z += work->unk_18C;
 
         if ((GetKeysHeld() & B_BUTTON) == 0) {
-            p->unk_18C += 64;
+            work->unk_18C += 64;
         }
 
-        if (p->unk_18C > 0) {
-            p->jumpPhase = 3;
-            p->waitTimer = 0;
+        if (work->unk_18C > 0) {
+            work->jumpPhase = 3;
+            work->waitTimer = 0;
         }
 
         break;
     case 3:
-        UpdateEventCharaAngle(p);
+        UpdateEventCharaAngle(work);
 
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 40);
+            SetEventCharaMoveAnim(work, 40);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 46);
+            SetEventCharaMoveAnim(work, 46);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 58);
+            SetEventCharaMoveAnim(work, 58);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 58);
+            SetEventCharaMoveAnim(work, 58);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 52);
+            SetEventCharaMoveAnim(work, 52);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 52);
+            SetEventCharaMoveAnim(work, 52);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 64);
+            SetEventCharaMoveAnim(work, 64);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 64);
+            SetEventCharaMoveAnim(work, 64);
             break;
         }
 
-        p->obj.x += gSineTable[p->angle] * p->speed >> 8;
-        p->obj.y += p->speed * -gSineTable[p->angle + 64] >> 8;
-        p->obj.z += p->unk_18C;
-        p->unk_18C += 51;
+        work->obj.x += gSineTable[work->angle] * work->speed >> 8;
+        work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
+        work->obj.z += work->unk_18C;
+        work->unk_18C += 51;
 
-        if (p->unk_18C > 0x1FF) {
-            p->jumpPhase = 4;
-            p->waitTimer = 0;
+        if (work->unk_18C > 0x1FF) {
+            work->jumpPhase = 4;
+            work->waitTimer = 0;
         }
 
         break;
     case 4:
-        UpdateEventCharaAngle(p);
+        UpdateEventCharaAngle(work);
 
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 41);
+            SetEventCharaMoveAnim(work, 41);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 47);
+            SetEventCharaMoveAnim(work, 47);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 59);
+            SetEventCharaMoveAnim(work, 59);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 59);
+            SetEventCharaMoveAnim(work, 59);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 53);
+            SetEventCharaMoveAnim(work, 53);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 53);
+            SetEventCharaMoveAnim(work, 53);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 65);
+            SetEventCharaMoveAnim(work, 65);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 65);
+            SetEventCharaMoveAnim(work, 65);
             break;
         }
 
-        p->obj.x += gSineTable[p->angle] * p->speed >> 8;
-        p->obj.y += p->speed * -gSineTable[p->angle + 64] >> 8;
-        p->obj.z += p->unk_18C;
-        p->unk_18C += 51;
+        work->obj.x += gSineTable[work->angle] * work->speed >> 8;
+        work->obj.y += work->speed * -gSineTable[work->angle + 64] >> 8;
+        work->obj.z += work->unk_18C;
+        work->unk_18C += 51;
 
-        if (p->obj.z > p->unk_198) {
-            p->obj.z = p->unk_198;
-            p->jumpPhase = 5;
-            p->waitTimer = 0;
+        if (work->obj.z > work->unk_198) {
+            work->obj.z = work->unk_198;
+            work->jumpPhase = 5;
+            work->waitTimer = 0;
         }
 
         break;
     case 5:
-        switch (p->angle) {
+        switch (work->angle) {
         case 0x00:
-            SetEventCharaMoveAnim(p, 42);
+            SetEventCharaMoveAnim(work, 42);
             break;
         case 0x80:
-            SetEventCharaMoveAnim(p, 48);
+            SetEventCharaMoveAnim(work, 48);
             break;
         case 0xC0:
-            SetEventCharaMoveAnim(p, 60);
+            SetEventCharaMoveAnim(work, 60);
             break;
         case 0x40:
-            SetEventCharaMoveAnim(p, 60);
+            SetEventCharaMoveAnim(work, 60);
             break;
         case 0xAD:
-            SetEventCharaMoveAnim(p, 54);
+            SetEventCharaMoveAnim(work, 54);
             break;
         case 0x53:
-            SetEventCharaMoveAnim(p, 54);
+            SetEventCharaMoveAnim(work, 54);
             break;
         case 0xD3:
-            SetEventCharaMoveAnim(p, 66);
+            SetEventCharaMoveAnim(work, 66);
             break;
         case 0x2D:
-            SetEventCharaMoveAnim(p, 66);
+            SetEventCharaMoveAnim(work, 66);
             break;
         }
 
-        p->speed = 204 * p->speed >> 8;
+        work->speed = 204 * work->speed >> 8;
 
         if ((GetKeysPressed() & B_BUTTON) != 0) {
-            p->jumpPhase = 1;
-            p->unk_18C = -0x540;
-        } else if (p->waitTimer > 10) {
-            p->lastAngle = 255;
+            work->jumpPhase = 1;
+            work->unk_18C = -0x540;
+        } else if (work->waitTimer > 10) {
+            work->lastAngle = 255;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateEventCharaControl);
         } else {
-            p->waitTimer++;
+            work->waitTimer++;
         }
 
         break;
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 #ifdef VERSION_EU
@@ -5155,25 +5155,25 @@ u8 UpdateEventCharaJump(EventCharaWork* p, void* a) {
 #define MSG_SOUND_ID_B1 0xB1
 #endif
 
-s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
+s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
     u16 x;
     u16 y;
 
-    x = (p->obj.x >> 8) - (gEventState->x >> 8);
-    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
+    x = (work->obj.x >> 8) - (gEventState->x >> 8);
+    y = (work->obj.y >> 8) + (work->obj.z >> 8) - (gEventState->y >> 8);
 
-    switch (p->keyframes[p->keyframe].anim) {
+    switch (work->keyframes[work->keyframe].anim) {
     case 0x2EB:
     case 0x2F1:
     case 0x2F2:
-        if (p->arg.eventId != MSG_SOUND_ID_9E) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 2) {
+        if (work->arg.eventId != MSG_SOUND_ID_9E) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 2) {
                     m4aSongNumStart(SONG_SND_958);
                     SetEventSoundPosition(SONG_SND_958, x, y);
                 }
 
-                if (p->obj.anim->frame == 6) {
+                if (work->obj.anim->frame == 6) {
                     m4aSongNumStart(SONG_SND_959);
                     SetEventSoundPosition(SONG_SND_959, x, y);
                 }
@@ -5182,13 +5182,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x2E6:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
@@ -5196,13 +5196,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x375:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -5210,8 +5210,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x398:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_373);
                 SetEventSoundPosition(SONG_SND_373, x, y);
             }
@@ -5219,8 +5219,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x399:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SND_374);
                 SetEventSoundPosition(SONG_SND_374, x, y);
             }
@@ -5228,21 +5228,21 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x5E:
-        if (p->obj.anim->timer == 9) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 9) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_EV01_01);
             }
         }
 
         break;
     case 0x1C2:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
@@ -5251,13 +5251,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x1C0:
     case 0x1C1:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
@@ -5266,13 +5266,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x34B:
     case 0x34C:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -5280,13 +5280,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x2B2:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -5302,9 +5302,9 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x20B:
     case 0x2C7:
     case 0x2C8:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
-                if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
+                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
@@ -5313,8 +5313,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
 
-            if (p->obj.anim->frame == 7) {
-                if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+            if (work->obj.anim->frame == 7) {
+                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
@@ -5327,9 +5327,9 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x2C5:
     case 0x2C6:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
-                if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
+                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTL);
                     SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
                 } else {
@@ -5338,8 +5338,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
 
-            if (p->obj.anim->frame == 5) {
-                if ((u16)(p->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
+            if (work->obj.anim->frame == 5) {
+                if ((u16)(work->arg.eventId - MSG_SOUND_ID_B1) <= 1) {
                     m4aSongNumStart(SONG_EV_SR_DIRTR);
                     SetEventSoundPosition(SONG_EV_SR_DIRTR, x, y);
                 } else {
@@ -5352,13 +5352,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x371:
     case 0x372:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 7) {
+            if (work->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5367,13 +5367,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x1EE:
     case 0x1F6:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -5381,13 +5381,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x345:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -5395,13 +5395,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x344:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -5409,13 +5409,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x341:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 9) {
+            if (work->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -5427,13 +5427,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x30E:
     case 0x30F:
     case 0x310:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 9) {
+            if (work->obj.anim->frame == 9) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -5442,13 +5442,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x275:
     case 0x276:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
@@ -5456,13 +5456,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x277:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
             }
 
-            if (p->obj.anim->frame == 7) {
+            if (work->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                 SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
             }
@@ -5470,13 +5470,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x2A5:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN2_DIRTL, x, y);
             }
 
-            if (p->obj.anim->frame == 7) {
+            if (work->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN2_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN2_DIRTR, x, y);
             }
@@ -5484,13 +5484,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x2A8:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
@@ -5498,13 +5498,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x271:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -5512,13 +5512,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x241:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLEL);
                 SetEventSoundPosition(SONG_EV_MAN_MARBLEL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_MARBLER);
                 SetEventSoundPosition(SONG_EV_MAN_MARBLER, x, y);
             }
@@ -5526,13 +5526,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x17A:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5541,13 +5541,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x178:
     case 0x179:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5556,13 +5556,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x19C:
     case 0x19D:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -5571,13 +5571,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x14A:
     case 0x14B:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTL);
                 SetEventSoundPosition(SONG_EV_WOMAN2_DIRTL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_WOMAN2_DIRTR);
                 SetEventSoundPosition(SONG_EV_WOMAN2_DIRTR, x, y);
             }
@@ -5585,13 +5585,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x157:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_MAN_WOODL);
                 SetEventSoundPosition(SONG_EV_MAN_WOODL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_MAN_WOODR);
                 SetEventSoundPosition(SONG_EV_MAN_WOODR, x, y);
             }
@@ -5599,13 +5599,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x23E:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLEL);
                 SetEventSoundPosition(SONG_EV_MAN_RMARBLEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_RMARBLER);
                 SetEventSoundPosition(SONG_EV_MAN_RMARBLER, x, y);
             }
@@ -5614,13 +5614,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x16C:
     case 0x16E:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTL);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_MAN_DIRTR);
                 SetEventSoundPosition(SONG_EV_MAN_DIRTR, x, y);
             }
@@ -5631,13 +5631,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x123:
     case 0x128:
     case 0x129:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -5648,9 +5648,9 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xE0:
     case 0xE1:
     case 0xE2:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
-                if (p->arg.eventId == 0x61) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
+                if (work->arg.eventId == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_L);
                     SetEventSoundPosition(SONG_EV_WOMAN_DIRT_L, x, y);
                 } else {
@@ -5659,8 +5659,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
                 }
             }
 
-            if (p->obj.anim->frame == 5) {
-                if (p->arg.eventId == 0x61) {
+            if (work->obj.anim->frame == 5) {
+                if (work->arg.eventId == 0x61) {
                     m4aSongNumStart(SONG_EV_WOMAN_DIRT_R);
                     SetEventSoundPosition(SONG_EV_WOMAN_DIRT_R, x, y);
                 } else {
@@ -5673,13 +5673,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0xD6:
     case 0xD9:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5688,13 +5688,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0xCA:
     case 0xCB:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_954);
                 SetEventSoundPosition(SONG_SND_954, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_955);
                 SetEventSoundPosition(SONG_SND_955, x, y);
             }
@@ -5703,13 +5703,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0xD3:
     case 0xD4:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_956);
                 SetEventSoundPosition(SONG_SND_956, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SND_957);
                 SetEventSoundPosition(SONG_SND_957, x, y);
             }
@@ -5718,13 +5718,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x10A:
     case 0x10B:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -5733,8 +5733,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x83:
     case 0x88:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_EV01_03);
                 SetEventSoundPosition(SONG_EV_EV01_03, x, y);
             }
@@ -5744,8 +5744,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x12:
     case 0x13:
     case 0x66:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_EV01_01);
                 SetEventSoundPosition(SONG_EV_EV01_01, x, y);
             }
@@ -5757,14 +5757,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x7:
     case 0x8:
     case 0x9:
-        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 1) {
-                    PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
+        if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 1) {
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
                 }
 
-                if (p->obj.anim->frame == 5) {
-                    PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
+                if (work->obj.anim->frame == 5) {
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
                 }
             }
         }
@@ -5774,14 +5774,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x77:
     case 0x288:
     case 0x28C:
-        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 2) {
-                    PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
+        if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 2) {
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
                 }
 
-                if (p->obj.anim->frame == 6) {
-                    PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
+                if (work->obj.anim->frame == 6) {
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
                 }
             }
         }
@@ -5791,14 +5791,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x79:
     case 0x289:
     case 0x28D:
-        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 3) {
-                    PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
+        if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 3) {
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
                 }
 
-                if (p->obj.anim->frame == 7) {
-                    PlayDonaldFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
+                if (work->obj.anim->frame == 7) {
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
                 }
             }
         }
@@ -5811,14 +5811,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0x265:
     case 0x266:
     case 0x267:
-        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 3) {
-                    PlayGoofyFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
+        if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 3) {
+                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
                 }
 
-                if (p->obj.anim->frame == 7) {
-                    PlayGoofyFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
+                if (work->obj.anim->frame == 7) {
+                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
                 }
             }
         }
@@ -5829,14 +5829,14 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xC:
     case 0xD:
     case 0xE:
-        if (gEventBackgroundDefs[p->arg.eventId] != NULL) {
-            if (p->obj.anim->timer == 0) {
-                if (p->obj.anim->frame == 3) {
-                    PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 1);
+        if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
+            if (work->obj.anim->timer == 0) {
+                if (work->obj.anim->frame == 3) {
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
                 }
 
-                if (p->obj.anim->frame == 7) {
-                    PlaySoraFootstep(p, gEventBackgroundDefs[p->arg.eventId]->groundType, 0);
+                if (work->obj.anim->frame == 7) {
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
                 }
             }
         }
@@ -5844,13 +5844,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0xB8:
     case 0xBA:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 2) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 6) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -5858,8 +5858,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0xBB:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_EV34_00);
                 SetEventSoundPosition(SONG_EV_EV34_00, x, y);
             }
@@ -5867,8 +5867,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0xC1:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
                 SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
@@ -5877,8 +5877,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0xE9:
     case 0xEA:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_SND_324);
                 SetEventSoundPosition(SONG_SND_324, x, y);
             }
@@ -5891,13 +5891,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xF8:
     case 0xF9:
     case 0xFA:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
 
-            if (p->obj.anim->frame == 5) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
@@ -5910,13 +5910,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     case 0xFB:
     case 0xFC:
     case 0xFD:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_PI_FOOTL);
                 SetEventSoundPosition(SONG_EV_PI_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 4) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_EV_PI_FOOTR);
                 SetEventSoundPosition(SONG_EV_PI_FOOTR, x, y);
             }
@@ -5925,13 +5925,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x280:
     case 0x281:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 7) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5940,13 +5940,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x18D:
     case 0x18E:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -5954,8 +5954,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x18F:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 4) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 4) {
                 m4aSongNumStart(SONG_BTL_GMIC_OK);
             }
         }
@@ -5963,13 +5963,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x159:
     case 0x15D:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_STONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_STONER, x, y);
             }
@@ -5977,8 +5977,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x15E:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_CARDTHR);
                 SetEventSoundPosition(SONG_EV_CARDTHR, x, y);
             }
@@ -5987,13 +5987,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x185:
     case 0x186:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -6001,13 +6001,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x187:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 7) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 7) {
                 m4aSongNumStart(SONG_EV_MAN_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 3) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_EV_MAN_STONER);
                 SetEventSoundPosition(SONG_EV_MAN_STONER, x, y);
             }
@@ -6016,8 +6016,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x2E7:
     case 0x2E8:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_GE_ENTRY);
                 SetEventSoundPosition(SONG_EV_GE_ENTRY, x, y);
             }
@@ -6026,13 +6026,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x2AE:
     case 0x2AF:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
@@ -6041,13 +6041,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x1C5:
     case 0x1C6:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_MAN2_STONEL);
                 SetEventSoundPosition(SONG_EV_MAN2_STONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_MAN2_STONER);
                 SetEventSoundPosition(SONG_EV_MAN2_STONER, x, y);
             }
@@ -6056,13 +6056,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x27A:
     case 0x27D:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONEL);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONEL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_EV_WOMAN_RSTONER);
                 SetEventSoundPosition(SONG_EV_WOMAN_RSTONER, x, y);
             }
@@ -6071,13 +6071,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x10F:
     case 0x11B:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 6) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 6) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -6086,13 +6086,13 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
         break;
     case 0x110:
     case 0x11C:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 5) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 5) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTL);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTL, x, y);
             }
 
-            if (p->obj.anim->frame == 2) {
+            if (work->obj.anim->frame == 2) {
                 m4aSongNumStart(SONG_SYS_POO_FOOTR);
                 SetEventSoundPosition(SONG_SYS_POO_FOOTR, x, y);
             }
@@ -6100,8 +6100,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x118:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_EV_AL_LAND);
                 SetEventSoundPosition(SONG_EV_AL_LAND, x, y);
             }
@@ -6109,8 +6109,8 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x29E:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 3) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 3) {
                 m4aSongNumStart(SONG_VO_GE_ATTACK02);
                 SetEventSoundPosition(SONG_VO_GE_ATTACK02, x, y);
             }
@@ -6118,16 +6118,16 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
 
         break;
     case 0x2A2:
-        if (p->obj.anim->timer == 0) {
-            if (p->obj.anim->frame == 1) {
+        if (work->obj.anim->timer == 0) {
+            if (work->obj.anim->frame == 1) {
                 m4aSongNumStart(SONG_EV_GE_FOOTUP);
             }
         }
 
         break;
     case 0x1DE:
-        if (p->obj.anim->timer == 1) {
-            if (p->obj.anim->frame == 0) {
+        if (work->obj.anim->timer == 1) {
+            if (work->obj.anim->frame == 0) {
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
                 SetEventSoundPosition(SONG_BTL_DARKDEAD, x, y);
             }
@@ -6137,12 +6137,12 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* p) {
     }
 }
 
-void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
+void PlaySoraFootstep(EventCharaWork* work, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (p->obj.x >> 8) - (gEventState->x >> 8);
-    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
+    x = (work->obj.x >> 8) - (gEventState->x >> 8);
+    y = (work->obj.y >> 8) + (work->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -6166,7 +6166,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if ((p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (p->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
+        if ((work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (work->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
             if (flag) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
                 SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
@@ -6206,12 +6206,12 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     }
 }
 
-void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
+void PlayDonaldFootstep(EventCharaWork* work, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (p->obj.x >> 8) - (gEventState->x >> 8);
-    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
+    x = (work->obj.x >> 8) - (gEventState->x >> 8);
+    y = (work->obj.y >> 8) + (work->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -6235,7 +6235,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
+        if (work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
             if (!flag) {
                 m4aSongNumStart(SONG_EV_DL_STONE_R);
                 SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
@@ -6267,12 +6267,12 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     }
 }
 
-void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
+void PlayGoofyFootstep(EventCharaWork* work, u8 kind, u8 flag) {
     u16 x;
     u16 y;
 
-    x = (p->obj.x >> 8) - (gEventState->x >> 8);
-    y = (p->obj.y >> 8) + (p->obj.z >> 8) - (gEventState->y >> 8);
+    x = (work->obj.x >> 8) - (gEventState->x >> 8);
+    y = (work->obj.y >> 8) + (work->obj.z >> 8) - (gEventState->y >> 8);
 
     switch (kind) {
     case 0:
@@ -6296,7 +6296,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 2:
-        if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
+        if (work->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
             if (!flag) {
                 m4aSongNumStart(SONG_EV_GF_STONE_R);
                 SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
@@ -6328,18 +6328,18 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
     }
 }
 
-void SetupEventCharaShadow(EventCharaWork* p) {
-    switch (p->arg.chara) {
+void SetupEventCharaShadow(EventCharaWork* work) {
+    switch (work->arg.chara) {
     case 6:
     case 16:
     case 20:
     case 21:
     case 22:
     case 32:
-        p->obj.flags |= EVTOBJ_FLAG_SHADOW_WIDE;
+        work->obj.flags |= EVTOBJ_FLAG_SHADOW_WIDE;
         break;
     case 37:
-        CreateTinkerbellTask(p);
+        CreateTinkerbellTask(work);
     case 8:
     case 10:
     case 33:
@@ -6350,7 +6350,7 @@ void SetupEventCharaShadow(EventCharaWork* p) {
     case 72:
     case 73:
     case 74:
-        p->obj.flags |= EVTOBJ_FLAG_SHADOW_SMALL;
+        work->obj.flags |= EVTOBJ_FLAG_SHADOW_SMALL;
         break;
     case 0:
         break;
@@ -6364,81 +6364,81 @@ void SetupEventCharaShadow(EventCharaWork* p) {
 #define MSG_WIN_ID_B 0x9C
 #endif
 
-static void msgwin_0(MsgWinWork* p, u8* arg) {
+static void msgwin_0(MsgWinWork* work, u8* arg) {
     const EventSequenceDef* t;
 
-    p->eventId = arg[0];
+    work->eventId = arg[0];
 
-    switch (p->eventId) {
+    switch (work->eventId) {
     case 11:
-        p->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette3(0);
+        work->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette3(0);
         break;
     case 3:
     case MSG_WIN_ID_A:
     case MSG_WIN_ID_B:
-        p->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette5(0);
+        work->glyphPaletteIndex = InitMsgGlyphSpritesAltPalette5(0);
         break;
     default:
-        p->glyphPaletteIndex = InitMsgGlyphSprites(0);
+        work->glyphPaletteIndex = InitMsgGlyphSprites(0);
         break;
     }
 
-    if (gEventBackgroundDefs[p->eventId] != NULL) {
-        p->bg = 0;
+    if (gEventBackgroundDefs[work->eventId] != NULL) {
+        work->bg = 0;
     } else {
-        p->bg = 2;
+        work->bg = 2;
     }
 
-    LoadBgTiles(p->bg, gUnk_094233B8, 0x500);
-    LoadBgPalette(p->bg, gUnk_096148D8, 32);
-    LoadBgMap(p->bg, gUnk_08125E24, 0x800);
-    SetBgPriority(p->bg, 0);
-    t = gEventSequenceDefs[p->eventId];
-    p->palette = NULL;
-    p->steps = 0;
-    p->shownChars = 0;
-    p->charTimer = 0;
-    p->charCount = 0;
-    p->scriptIndex = 0;
-    p->textLoaded = 0;
-    p->started = 0;
-    p->script = t->script;
-    p->waitCreated = 0;
-    p->scrollX = 0;
-    p->nextText = NULL;
+    LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
+    LoadBgPalette(work->bg, gUnk_096148D8, 32);
+    LoadBgMap(work->bg, gUnk_08125E24, 0x800);
+    SetBgPriority(work->bg, 0);
+    t = gEventSequenceDefs[work->eventId];
+    work->palette = NULL;
+    work->steps = 0;
+    work->shownChars = 0;
+    work->charTimer = 0;
+    work->charCount = 0;
+    work->scriptIndex = 0;
+    work->textLoaded = 0;
+    work->started = 0;
+    work->script = t->script;
+    work->waitCreated = 0;
+    work->scrollX = 0;
+    work->nextText = NULL;
     gEventState->msgWinOpen = 0;
     gEventState->msgWaitActive = 0;
     gEventState->msgWinCentered = 0;
-    TaskPoolInit(&p->tasks, 2);
-    CreateMsgfaceTask(&p->tasks, &p->face, p->script->portraitId, p->script->expressionId, p->script->positionIndex);
+    TaskPoolInit(&work->tasks, 2);
+    CreateMsgfaceTask(&work->tasks, &work->face, work->script->portraitId, work->script->expressionId, work->script->positionIndex);
 }
 
-static u8 msgwin_1(MsgWinWork* p, void* a) {
+static u8 msgwin_1(MsgWinWork* work, void* a) {
     const MessageScriptEntry* e;
 
-    if (!p->textLoaded) {
+    if (!work->textLoaded) {
         if (!gEventState->bgEffectActive) {
-            MsgwinLoadEntry(p);
+            MsgwinLoadEntry(work);
         }
     } else {
-        MsgwinCheckStart(p);
+        MsgwinCheckStart(work);
     }
 
-    if (p->started) {
-        gEventState->msgWinPosition = p->position;
+    if (work->started) {
+        gEventState->msgWinPosition = work->position;
 
         if (gEventState->focusSpeaker) {
             if (gEventState->focusSteps != 0) {
                 gEventState->focusSteps--;
             } else {
-                e = &p->script[p->scriptIndex];
+                e = &work->script[work->scriptIndex];
 
                 if (e->portraitId == 62) {
                     void* pal;
 
                     pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-                    LoadBgTiles(p->bg, gUnk_0950E2F8, 0x140);
-                    LoadBgMap(p->bg, gUnk_096112B8, 0x800);
+                    LoadBgTiles(work->bg, gUnk_0950E2F8, 0x140);
+                    LoadBgMap(work->bg, gUnk_096112B8, 0x800);
                     LoadPalette(gCard00Palette, pal, 32);
 
                     if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
@@ -6450,51 +6450,51 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
                     switch (e->positionIndex) {
                     case 0:
                     case 2:
-                        SetBgScroll(p->bg, (u16)-0x28, 0);
+                        SetBgScroll(work->bg, (u16)-0x28, 0);
                         break;
                     case 1:
                     case 3:
-                        SetBgScroll(p->bg, (u16)-0x28, (u16)-0x60);
+                        SetBgScroll(work->bg, (u16)-0x28, (u16)-0x60);
                         break;
                     }
 
-                    if (p->palette == NULL) {
-                        p->palette = LoadObjPalette(gUnk_09614718, 32);
+                    if (work->palette == NULL) {
+                        work->palette = LoadObjPalette(gUnk_09614718, 32);
 
                         if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                            FadeSetPaletteExcluded(p->palette->index + 16, 1);
+                            FadeSetPaletteExcluded(work->palette->index + 16, 1);
                         }
                     }
 
-                    RequestMsgfaceSlideIn(&p->face);
+                    RequestMsgfaceSlideIn(&work->face);
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
                     gEventState->msgWinCentered = 1;
                 } else {
-                    LoadBgTiles(p->bg, gUnk_094233B8, 0x500);
-                    LoadBgPalette(p->bg, gUnk_096148D8, 32);
-                    SetBgMapBlocks(p->bg, gMsgwinMapBlocks[p->position], 2, 1);
-                    RedrawBgMapAt(p->bg, p->scrollX, 0);
+                    LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
+                    LoadBgPalette(work->bg, gUnk_096148D8, 32);
+                    SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
+                    RedrawBgMapAt(work->bg, work->scrollX, 0);
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
-                    RequestMsgfaceSlideIn(&p->face);
+                    RequestMsgfaceSlideIn(&work->face);
                     gEventState->msgWinOpen = 1;
 
-                    if (p->palette != NULL) {
-                        ReleaseObjPalette(p->palette);
-                        p->palette = NULL;
+                    if (work->palette != NULL) {
+                        ReleaseObjPalette(work->palette);
+                        work->palette = NULL;
                     }
 
                     gEventState->msgWinCentered = 0;
                 }
             }
         } else {
-        e = &p->script[p->scriptIndex];
+        e = &work->script[work->scriptIndex];
 
         if (e->portraitId == 62) {
             void* pal;
 
             pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
-            LoadBgTiles(p->bg, gUnk_0950E2F8, 0x140);
-            LoadBgMap(p->bg, gUnk_096112B8, 0x800);
+            LoadBgTiles(work->bg, gUnk_0950E2F8, 0x140);
+            LoadBgMap(work->bg, gUnk_096112B8, 0x800);
             LoadPalette(gCard00Palette, pal, 32);
 
             if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
@@ -6506,37 +6506,37 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
             switch (e->positionIndex) {
             case 0:
             case 2:
-                SetBgScroll(p->bg, (u16)-0x18, 0);
+                SetBgScroll(work->bg, (u16)-0x18, 0);
                 break;
             case 1:
             case 3:
-                SetBgScroll(p->bg, (u16)-0x18, (u16)-0x60);
+                SetBgScroll(work->bg, (u16)-0x18, (u16)-0x60);
                 break;
             }
 
-            if (p->palette == NULL) {
-                p->palette = LoadObjPalette(gUnk_09614718, 32);
+            if (work->palette == NULL) {
+                work->palette = LoadObjPalette(gUnk_09614718, 32);
 
                 if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                FadeSetPaletteExcluded(p->palette->index + 16, 1);
+                FadeSetPaletteExcluded(work->palette->index + 16, 1);
                 }
             }
 
-            RequestMsgfaceSlideIn(&p->face);
+            RequestMsgfaceSlideIn(&work->face);
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
             gEventState->msgWinCentered = 1;
         } else {
-            LoadBgTiles(p->bg, gUnk_094233B8, 0x500);
-            LoadBgPalette(p->bg, gUnk_096148D8, 32);
-            SetBgMapBlocks(p->bg, gMsgwinMapBlocks[p->position], 2, 1);
-            RedrawBgMapAt(p->bg, p->scrollX, 0);
+            LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
+            LoadBgPalette(work->bg, gUnk_096148D8, 32);
+            SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
+            RedrawBgMapAt(work->bg, work->scrollX, 0);
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
-            RequestMsgfaceSlideIn(&p->face);
+            RequestMsgfaceSlideIn(&work->face);
             gEventState->msgWinOpen = 1;
 
-            if (p->palette != NULL) {
-                ReleaseObjPalette(p->palette);
-                p->palette = NULL;
+            if (work->palette != NULL) {
+                ReleaseObjPalette(work->palette);
+                work->palette = NULL;
             }
 
             gEventState->msgWinCentered = 0;
@@ -6545,90 +6545,90 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
     }
 
     if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(p->glyphPaletteIndex + 16, 0);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 0);
         FadeSetPaletteExcluded(14, 0);
     } else {
-        FadeSetPaletteExcluded(p->glyphPaletteIndex + 16, 1);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 MsgwinContinueUpdate(MsgWinWork* p, void* a) {
-    if (!p->textLoaded) {
+u8 MsgwinContinueUpdate(MsgWinWork* work, void* a) {
+    if (!work->textLoaded) {
         if (!gEventState->bgEffectActive) {
-            MsgwinLoadEntry(p);
+            MsgwinLoadEntry(work);
         }
     } else {
-        MsgwinCheckStart(p);
+        MsgwinCheckStart(work);
     }
 
-    if (p->started) {
-        gEventState->msgWinPosition = p->position;
+    if (work->started) {
+        gEventState->msgWinPosition = work->position;
 
         if (gEventState->focusSpeaker) {
             if (gEventState->focusSteps != 0) {
                 gEventState->focusSteps--;
             } else {
                 SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
-                RequestMsgfaceSlideIn(&p->face);
+                RequestMsgfaceSlideIn(&work->face);
                 gEventState->msgWinOpen = 1;
             }
         } else {
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
-            RequestMsgfaceSlideIn(&p->face);
+            RequestMsgfaceSlideIn(&work->face);
             gEventState->msgWinOpen = 1;
         }
     }
 
     if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(p->glyphPaletteIndex + 16, 0);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 0);
         FadeSetPaletteExcluded(14, 0);
     } else {
-        FadeSetPaletteExcluded(p->glyphPaletteIndex + 16, 1);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
         FadeSetPaletteExcluded(14, 1);
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-static void msgwin_2(MsgWinWork* p) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+static void msgwin_2(MsgWinWork* work) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
     if (e->portraitId != 62) {
-        DrawMsgGlyphs(p->shownChars);
+        DrawMsgGlyphs(work->shownChars);
     } else {
-        DrawMsgGlyphsWithPalette(p->shownChars, p->palette);
+        DrawMsgGlyphsWithPalette(work->shownChars, work->palette);
     }
 
-    TaskPoolDraw(&p->tasks);
+    TaskPoolDraw(&work->tasks);
 }
 
-static void msgwin_3(MsgWinWork* p) {
-    if (p->palette != NULL) {
-        ReleaseObjPalette(p->palette);
+static void msgwin_3(MsgWinWork* work) {
+    if (work->palette != NULL) {
+        ReleaseObjPalette(work->palette);
     }
 
     FreeMsgGlyphSprites();
-    TaskPoolDestroy(&p->tasks);
+    TaskPoolDestroy(&work->tasks);
 }
 
-u8 MsgwinOpenUpdate(MsgWinWork* p, void* a) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+u8 MsgwinOpenUpdate(MsgWinWork* work, void* a) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
-    ApproachValue(&p->scrollX, gMsgwinOpenScrollX[p->position], p->steps);
+    ApproachValue(&work->scrollX, gMsgwinOpenScrollX[work->position], work->steps);
 
     if (e->portraitId != 62) {
-        ScrollBgMapTo(p->bg, p->scrollX, 0);
+        ScrollBgMapTo(work->bg, work->scrollX, 0);
     }
 
-    if (p->steps != 0) {
-        p->steps--;
+    if (work->steps != 0) {
+        work->steps--;
     } else {
-        p->steps = 0;
+        work->steps = 0;
 
         if ((e->flags & 0xF) == 0) {
             gEventState->talking = 1;
@@ -6637,82 +6637,82 @@ u8 MsgwinOpenUpdate(MsgWinWork* p, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)MsgwinTypeUpdate);
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+u8 MsgwinTypeUpdate(MsgWinWork* work, void* a) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
-    MsgwinTypeStep(p);
+    MsgwinTypeStep(work);
 
     if (e->portraitId == 62) {
-        p->shownChars = p->charCount;
+        work->shownChars = work->charCount;
     } else if (GetKeysPressed() & A_BUTTON) {
-        if (p->shownChars < p->charCount) {
-            p->shownChars = p->charCount;
+        if (work->shownChars < work->charCount) {
+            work->shownChars = work->charCount;
         }
     }
 
-    if (p->waitCreated == 1 && !gEventState->msgWaitActive) {
-        MsgLatinChar* text = p->nextText;
+    if (work->waitCreated == 1 && !gEventState->msgWaitActive) {
+        MsgLatinChar* text = work->nextText;
 
         if (text != NULL) {
-            p->steps = 0;
-            p->textLoaded = 0;
-            p->started = 1;
-            p->face.shown = 1;
+            work->steps = 0;
+            work->textLoaded = 0;
+            work->started = 1;
+            work->face.shown = 1;
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinContinueUpdate);
         } else {
             HideMsgGlyphs();
 
             if ((e->flags & MSG_SCRIPT_FLAG_END) == 0) {
-                if (p->script[p->scriptIndex + 1].positionIndex != 4) {
-                    p->steps = 8;
-                    RequestMsgfaceSlideOut(&p->face);
+                if (work->script[work->scriptIndex + 1].positionIndex != 4) {
+                    work->steps = 8;
+                    RequestMsgfaceSlideOut(&work->face);
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinCloseUpdate);
                     gEventState->msgWinOpen = 0;
-                    p->face.shown = 0;
+                    work->face.shown = 0;
                 } else {
-                    p->steps = 0;
-                    p->textLoaded = 0;
-                    p->started = 0;
-                    p->scriptIndex++;
+                    work->steps = 0;
+                    work->textLoaded = 0;
+                    work->started = 0;
+                    work->scriptIndex++;
                     gEventState->flags &= ~EVENT_FLAG_PAUSED;
-                    p->face.shown = 1;
+                    work->face.shown = 1;
                     SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
                 }
             } else {
-                p->steps = 8;
-                RequestMsgfaceSlideOut(&p->face);
+                work->steps = 8;
+                RequestMsgfaceSlideOut(&work->face);
                 SetTaskUpdate(a, (TaskUpdateFunc)MsgwinCloseUpdate);
                 gEventState->msgWinOpen = 0;
-                p->face.shown = 0;
+                work->face.shown = 0;
             }
         }
 
-        p->waitCreated = 0;
+        work->waitCreated = 0;
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+u8 MsgwinCloseUpdate(MsgWinWork* work, void* a) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
-    ApproachValue(&p->scrollX, gMsgwinClosedScrollX[p->position], p->steps);
+    ApproachValue(&work->scrollX, gMsgwinClosedScrollX[work->position], work->steps);
 
     if (e->portraitId != 62) {
-        ScrollBgMapTo(p->bg, p->scrollX, 0);
+        ScrollBgMapTo(work->bg, work->scrollX, 0);
     } else {
-        DisableBg(p->bg);
+        DisableBg(work->bg);
     }
 
-    if (p->steps != 0) {
-        p->steps--;
+    if (work->steps != 0) {
+        work->steps--;
     } else {
-        p->steps = 0;
+        work->steps = 0;
 
         if ((gEventState->flags & EVENT_FLAG_PLAYER_CONTROL) == 0) {
             gEventState->flags &= ~EVENT_FLAG_PAUSED;
@@ -6721,109 +6721,109 @@ u8 MsgwinCloseUpdate(MsgWinWork* p, void* a) {
         gEventState->focusSpeaker = 0;
 
         if ((e->flags & MSG_SCRIPT_FLAG_END) == 0) {
-            p->started = 0;
-            p->textLoaded = 0;
-            p->scriptIndex++;
+            work->started = 0;
+            work->textLoaded = 0;
+            work->scriptIndex++;
             SetTaskUpdate(a, (TaskUpdateFunc)msgwin_1);
         }
     }
 
-    TaskPoolUpdate(&p->tasks);
+    TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
-void MsgwinLoadEntry(MsgWinWork* p) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+void MsgwinLoadEntry(MsgWinWork* work) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
     s32 n;
 
     n = e->positionIndex;
 
     if (n != 4) {
-        p->position = n;
-        p->scrollX = gMsgwinClosedScrollX[n];
+        work->position = n;
+        work->scrollX = gMsgwinClosedScrollX[n];
     }
 
     if ((e->flags & MSG_SCRIPT_FLAG_SILHOUETTE) != 0) {
-        p->face.silhouette = 1;
+        work->face.silhouette = 1;
     } else {
-        p->face.silhouette = 0;
+        work->face.silhouette = 0;
     }
 
-    SetMsgfacePortrait(&p->face, e->portraitId, e->expressionId, p->position);
+    SetMsgfacePortrait(&work->face, e->portraitId, e->expressionId, work->position);
 
 #ifdef VERSION_JP
     if (e->portraitId == 62) {
-        p->charCount = LayoutMsgGlyphsSjis(0x2E00, gMsgwinTextY[p->position], (u8*)e->text);
+        work->charCount = LayoutMsgGlyphsSjis(0x2E00, gMsgwinTextY[work->position], (u8*)e->text);
     } else {
-        p->charCount = LayoutMsgGlyphsSjis(gMsgwinTextX[p->position], gMsgwinTextY[p->position], (u8*)e->text);
+        work->charCount = LayoutMsgGlyphsSjis(gMsgwinTextX[work->position], gMsgwinTextY[work->position], (u8*)e->text);
     }
 #else
     if (e->portraitId == 62) {
-        if (p->nextText != NULL) {
-            p->charCount = LayoutMsgGlyphsPage(0x2E00, gMsgwinTextY[p->position] - 0x200, p->nextText, &p->nextText);
+        if (work->nextText != NULL) {
+            work->charCount = LayoutMsgGlyphsPage(0x2E00, gMsgwinTextY[work->position] - 0x200, work->nextText, &work->nextText);
         } else {
-            p->charCount = LayoutMsgGlyphsPage(0x2E00, gMsgwinTextY[p->position] - 0x200, LANGSTR(e->text), &p->nextText);
+            work->charCount = LayoutMsgGlyphsPage(0x2E00, gMsgwinTextY[work->position] - 0x200, LANGSTR(e->text), &work->nextText);
         }
     } else {
-        if (p->nextText != NULL) {
-            p->charCount = LayoutMsgGlyphsPage(gMsgwinTextX[p->position], gMsgwinTextY[p->position] - 0x200, p->nextText, &p->nextText);
+        if (work->nextText != NULL) {
+            work->charCount = LayoutMsgGlyphsPage(gMsgwinTextX[work->position], gMsgwinTextY[work->position] - 0x200, work->nextText, &work->nextText);
         } else {
-            p->charCount = LayoutMsgGlyphsPage(gMsgwinTextX[p->position], gMsgwinTextY[p->position] - 0x200, LANGSTR(e->text), &p->nextText);
+            work->charCount = LayoutMsgGlyphsPage(gMsgwinTextX[work->position], gMsgwinTextY[work->position] - 0x200, LANGSTR(e->text), &work->nextText);
         }
     }
 #endif
 
-    p->charTimer = 0;
-    p->shownChars = 0;
-    p->textLoaded = 1;
+    work->charTimer = 0;
+    work->shownChars = 0;
+    work->textLoaded = 1;
 }
 
-void MsgwinTypeStep(MsgWinWork* p) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+void MsgwinTypeStep(MsgWinWork* work) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
     u8 v;
 
-    if (p->charTimer >= e->charDelay) {
-        if (p->shownChars < p->charCount) {
-            p->shownChars++;
+    if (work->charTimer >= e->charDelay) {
+        if (work->shownChars < work->charCount) {
+            work->shownChars++;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
             gEventState->talking = 0;
 
-            if (!p->waitCreated) {
-                if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_END) == 0) {
-                    if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
-                        TaskCreate(&p->tasks, &sTaskDescMsgwait, &p->script[p->scriptIndex + 1].positionIndex);
+            if (!work->waitCreated) {
+                if ((work->script[work->scriptIndex].flags & MSG_SCRIPT_FLAG_END) == 0) {
+                    if ((work->script[work->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
+                        TaskCreate(&work->tasks, &sTaskDescMsgwait, &work->script[work->scriptIndex + 1].positionIndex);
                     } else {
-                        TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &p->script[p->scriptIndex + 1].positionIndex);
+                        TaskCreate(&work->tasks, &gTaskDescMsgwaitYesno, &work->script[work->scriptIndex + 1].positionIndex);
                     }
                 } else {
                     v = 0;
 
-                    if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
-                        TaskCreate(&p->tasks, &sTaskDescMsgwait, &v);
+                    if ((work->script[work->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
+                        TaskCreate(&work->tasks, &sTaskDescMsgwait, &v);
                     } else {
-                        TaskCreate(&p->tasks, &gTaskDescMsgwaitYesno, &v);
+                        TaskCreate(&work->tasks, &gTaskDescMsgwaitYesno, &v);
                     }
                 }
 
-                p->waitCreated = 1;
+                work->waitCreated = 1;
             }
         }
 
-        p->charTimer = 0;
+        work->charTimer = 0;
     } else {
-        p->charTimer++;
+        work->charTimer++;
     }
 }
 
-void MsgwinCheckStart(MsgWinWork* p) {
-    const MessageScriptEntry* e = &p->script[p->scriptIndex];
+void MsgwinCheckStart(MsgWinWork* work) {
+    const MessageScriptEntry* e = &work->script[work->scriptIndex];
 
     if (gEventState->frame >= e->frame) {
-        if (!p->started) {
+        if (!work->started) {
             gEventState->flags |= EVENT_FLAG_PAUSED;
-            p->started = 1;
-            p->steps = 8;
+            work->started = 1;
+            work->steps = 8;
 
             if ((e->flags & MSG_SCRIPT_FLAG_FOCUS_SPEAKER) != 0) {
                 gEventState->focusSpeaker = 1;
@@ -6836,93 +6836,93 @@ void MsgwinCheckStart(MsgWinWork* p) {
     }
 }
 
-void msgface_0(MsgFaceWork* p, MsgFaceControl* ctl) {
+void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     const MsgFaceAnim* anim;
     u32 n;
 
-    p->tiles = AllocObjTiles(0x12C0, NULL);
-    p->palette = AllocObjPalette(32);
-    p->face = ctl;
-    p->steps = 0;
-    p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
-    p->y = gMsgfaceY[n];
-    p->scaleX = 0x100;
-    p->arrived = 0;
-    p->talking = 0;
-    p->visible = 1;
+    work->tiles = AllocObjTiles(0x12C0, NULL);
+    work->palette = AllocObjPalette(32);
+    work->face = ctl;
+    work->steps = 0;
+    work->x = gMsgfaceHiddenX[n = work->face->positionIndex];
+    work->y = gMsgfaceY[n];
+    work->scaleX = 0x100;
+    work->arrived = 0;
+    work->talking = 0;
+    work->visible = 1;
 
-    if (p->face->portraitId != 62) {
-        anim = gMsgFaceAnims[p->face->portraitId];
+    if (work->face->portraitId != 62) {
+        anim = gMsgFaceAnims[work->face->portraitId];
     } else {
         anim = gMsgFaceAnims[0];
     }
 
-    if (p->face->positionIndex <= 1) {
-        p->flipX = 1;
-    } else if (p->face->positionIndex <= 3) {
-        p->flipX = 0;
+    if (work->face->positionIndex <= 1) {
+        work->flipX = 1;
+    } else if (work->face->positionIndex <= 3) {
+        work->flipX = 0;
     }
 
-    if (p->face->portraitId != 62) {
-        SetObjTileSource(p->tiles, anim[p->face->expressionId].tiles);
-        UpdateAllocatedObjPalette(p->palette, anim[p->face->expressionId].palette);
-        AnimInit(&p->anim, anim[p->face->expressionId].anims, anim[p->face->expressionId].gfxTable);
-        AnimStart(&p->anim, 0, anim[p->face->expressionId].animFlags);
-        p->gfx = AnimGetGfx(&p->anim);
+    if (work->face->portraitId != 62) {
+        SetObjTileSource(work->tiles, anim[work->face->expressionId].tiles);
+        UpdateAllocatedObjPalette(work->palette, anim[work->face->expressionId].palette);
+        AnimInit(&work->anim, anim[work->face->expressionId].anims, anim[work->face->expressionId].gfxTable);
+        AnimStart(&work->anim, 0, anim[work->face->expressionId].animFlags);
+        work->gfx = AnimGetGfx(&work->anim);
     } else {
-        SetObjTileSource(p->tiles, anim->tiles);
-        UpdateAllocatedObjPalette(p->palette, anim->palette);
-        AnimInit(&p->anim, anim->anims, anim->gfxTable);
-        AnimStart(&p->anim, 0, anim->animFlags);
-        p->gfx = AnimGetGfx(&p->anim);
+        SetObjTileSource(work->tiles, anim->tiles);
+        UpdateAllocatedObjPalette(work->palette, anim->palette);
+        AnimInit(&work->anim, anim->anims, anim->gfxTable);
+        AnimStart(&work->anim, 0, anim->animFlags);
+        work->gfx = AnimGetGfx(&work->anim);
     }
 }
 
-u8 msgface_1(MsgFaceWork* p, void* a) {
+u8 msgface_1(MsgFaceWork* work, void* a) {
     const MsgFaceAnim* anim = NULL;
     u32 n;
 
-    if (p->face->portraitId != 62) {
-        anim = gMsgFaceAnims[p->face->portraitId];
-        p->visible = 1;
+    if (work->face->portraitId != 62) {
+        anim = gMsgFaceAnims[work->face->portraitId];
+        work->visible = 1;
     } else {
-        p->visible = 0;
+        work->visible = 0;
     }
 
-    switch (p->face->command) {
+    switch (work->face->command) {
     case 1:
-        if (!p->face->shown) {
-            p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
-            p->y = gMsgfaceY[n];
+        if (!work->face->shown) {
+            work->x = gMsgfaceHiddenX[n = work->face->positionIndex];
+            work->y = gMsgfaceY[n];
         }
 
-        p->steps = 8;
+        work->steps = 8;
 
         if (anim != NULL) {
-            if (p->face->silhouette == 1) {
-                UpdateAllocatedObjPalette(p->palette, &gUnk_096148D8[0x80]);
+            if (work->face->silhouette == 1) {
+                UpdateAllocatedObjPalette(work->palette, &gUnk_096148D8[0x80]);
             } else {
-                UpdateAllocatedObjPalette(p->palette, anim[p->face->expressionId].palette);
+                UpdateAllocatedObjPalette(work->palette, anim[work->face->expressionId].palette);
             }
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceSlideInUpdate);
         break;
     case 2:
-        p->steps = 8;
-        p->arrived = 0;
+        work->steps = 8;
+        work->arrived = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceSlideOutUpdate);
         break;
     case 4:
-        p->steps = 4;
+        work->steps = 4;
 
-        if (p->face->positionIndex <= 1) {
-            p->scaleX = -255;
-        } else if (p->face->positionIndex <= 3) {
-            p->scaleX = 256;
+        if (work->face->positionIndex <= 1) {
+            work->scaleX = -255;
+        } else if (work->face->positionIndex <= 3) {
+            work->scaleX = 256;
         }
 
-        p->y = gMsgfaceY[p->face->positionIndex];
+        work->y = gMsgfaceY[work->face->positionIndex];
         SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceFlipOutUpdate);
         break;
     case 3:
@@ -6931,154 +6931,154 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     }
 
     if (gEventState->talking == 1) {
-        if (!p->talking) {
-            if (anim != NULL && anim[p->face->expressionId].animCount > 1) {
-                AnimStart(&p->anim, 1, anim[p->face->expressionId].animFlags);
+        if (!work->talking) {
+            if (anim != NULL && anim[work->face->expressionId].animCount > 1) {
+                AnimStart(&work->anim, 1, anim[work->face->expressionId].animFlags);
             }
 
-            p->talking = 1;
+            work->talking = 1;
         }
     } else {
-        if (p->talking == 1) {
+        if (work->talking == 1) {
             if (anim != NULL) {
-                AnimStart(&p->anim, 0, anim[p->face->expressionId].animFlags);
+                AnimStart(&work->anim, 0, anim[work->face->expressionId].animFlags);
             }
 
-            p->talking = 0;
+            work->talking = 0;
         }
     }
 
     if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(p->palette->index + 16, 0);
+        FadeSetPaletteExcluded(work->palette->index + 16, 0);
     } else {
-        FadeSetPaletteExcluded(p->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, 1);
     }
 
-    p->gfx = AnimUpdate(&p->anim);
+    work->gfx = AnimUpdate(&work->anim);
     return 1;
 }
 
-void msgface_2(MsgFaceWork* p) {
+void msgface_2(MsgFaceWork* work) {
     ObjAffine* t;
     u8 v;
 
-    if (p->visible) {
-        t = AllocObjAffine(0, p->scaleX, 256, 0);
+    if (work->visible) {
+        t = AllocObjAffine(0, work->scaleX, 256, 0);
 
         if (t != NULL) {
-            DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, 0, 50);
+            DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, t, 0, 50);
         } else {
-            v = p->flipX;
+            v = work->flipX;
 
             if (v) {
-                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, SPRITE_FLAG_HFLIP, 50);
+                DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, t, SPRITE_FLAG_HFLIP, 50);
             } else {
-                DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, v, 50);
+                DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, v, 50);
             }
         }
     }
 }
 
-void msgface_3(MsgFaceWork* p) {
-    ReleaseObjTiles(p->tiles);
-    ReleaseObjPalette(p->palette);
+void msgface_3(MsgFaceWork* work) {
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
-u8 MsgfaceSlideInUpdate(MsgFaceWork* p, void* a) {
-    ApproachValue(&p->x, gMsgfaceShownX[p->face->positionIndex], p->steps);
-    p->steps--;
+u8 MsgfaceSlideInUpdate(MsgFaceWork* work, void* a) {
+    ApproachValue(&work->x, gMsgfaceShownX[work->face->positionIndex], work->steps);
+    work->steps--;
 
-    if (p->steps == 0) {
-        p->face->command = 0;
-        p->arrived = 1;
+    if (work->steps == 0) {
+        work->face->command = 0;
+        work->arrived = 1;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
 
     return 1;
 }
 
-u8 MsgfaceSlideOutUpdate(MsgFaceWork* p, void* a) {
-    ApproachValue(&p->x, gMsgfaceHiddenX[p->face->positionIndex], p->steps);
-    p->steps--;
+u8 MsgfaceSlideOutUpdate(MsgFaceWork* work, void* a) {
+    ApproachValue(&work->x, gMsgfaceHiddenX[work->face->positionIndex], work->steps);
+    work->steps--;
 
-    if (p->steps == 0) {
-        p->face->command = 0;
+    if (work->steps == 0) {
+        work->face->command = 0;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
 
     return 1;
 }
 
-u8 MsgfaceChangeUpdate(MsgFaceWork* p, void* a) {
+u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* a) {
     const MsgFaceAnim* t;
     s32 n;
 
     t = NULL;
 
-    if (p->face->portraitId != 62) {
-        t = gMsgFaceAnims[p->face->portraitId];
-        p->visible = 1;
+    if (work->face->portraitId != 62) {
+        t = gMsgFaceAnims[work->face->portraitId];
+        work->visible = 1;
     } else {
-        p->visible = 0;
+        work->visible = 0;
     }
 
-    if (p->face->positionIndex <= 1) {
-        p->flipX = 1;
-    } else if (p->face->positionIndex <= 3) {
-        p->flipX = 0;
+    if (work->face->positionIndex <= 1) {
+        work->flipX = 1;
+    } else if (work->face->positionIndex <= 3) {
+        work->flipX = 0;
     }
 
     if (t != NULL) {
-        SetObjTileSource(p->tiles, t[p->face->expressionId].tiles);
-        UpdateAllocatedObjPalette(p->palette, t[p->face->expressionId].palette);
-        AnimInit(&p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
-        AnimStart(&p->anim, 0, t[p->face->expressionId].animFlags);
-        p->gfx = AnimGetGfx(&p->anim);
-        p->arrived = 0;
-        p->steps = 8;
-        p->face->command = 0;
+        SetObjTileSource(work->tiles, t[work->face->expressionId].tiles);
+        UpdateAllocatedObjPalette(work->palette, t[work->face->expressionId].palette);
+        AnimInit(&work->anim, t[work->face->expressionId].anims, t[work->face->expressionId].gfxTable);
+        AnimStart(&work->anim, 0, t[work->face->expressionId].animFlags);
+        work->gfx = AnimGetGfx(&work->anim);
+        work->arrived = 0;
+        work->steps = 8;
+        work->face->command = 0;
     }
 
-    p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
-    p->y = gMsgfaceY[n];
-    p->scaleX = 256;
-    p->steps = 8;
+    work->x = gMsgfaceHiddenX[n = work->face->positionIndex];
+    work->y = gMsgfaceY[n];
+    work->scaleX = 256;
+    work->steps = 8;
     SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     return 1;
 }
 
-u8 MsgfaceFlipOutUpdate(MsgFaceWork* p, void* a) {
+u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* a) {
     const MsgFaceAnim* t;
 
-    if (p->scaleX < 0) {
-        ApproachValue(&p->scaleX, -2, p->steps);
+    if (work->scaleX < 0) {
+        ApproachValue(&work->scaleX, -2, work->steps);
     } else {
-        ApproachValue(&p->scaleX, 2, p->steps);
+        ApproachValue(&work->scaleX, 2, work->steps);
     }
 
-    p->steps--;
+    work->steps--;
 
-    if (p->steps == 0) {
+    if (work->steps == 0) {
         t = NULL;
 
-        if (p->face->portraitId != 62) {
-            t = gMsgFaceAnims[p->face->portraitId];
+        if (work->face->portraitId != 62) {
+            t = gMsgFaceAnims[work->face->portraitId];
         }
 
-        if (p->face->positionIndex <= 1) {
-            p->flipX = 1;
-        } else if (p->face->positionIndex <= 3) {
-            p->flipX = 0;
+        if (work->face->positionIndex <= 1) {
+            work->flipX = 1;
+        } else if (work->face->positionIndex <= 3) {
+            work->flipX = 0;
         }
 
         if (t != NULL) {
-            SetObjTileSource(p->tiles, t[p->face->expressionId].tiles);
-            UpdateAllocatedObjPalette(p->palette, t[p->face->expressionId].palette);
-            AnimInit(&p->anim, t[p->face->expressionId].anims, t[p->face->expressionId].gfxTable);
-            AnimStart(&p->anim, 0, t[p->face->expressionId].animFlags);
-            p->gfx = AnimGetGfx(&p->anim);
-            p->arrived = 0;
-            p->steps = 8;
+            SetObjTileSource(work->tiles, t[work->face->expressionId].tiles);
+            UpdateAllocatedObjPalette(work->palette, t[work->face->expressionId].palette);
+            AnimInit(&work->anim, t[work->face->expressionId].anims, t[work->face->expressionId].gfxTable);
+            AnimStart(&work->anim, 0, t[work->face->expressionId].animFlags);
+            work->gfx = AnimGetGfx(&work->anim);
+            work->arrived = 0;
+            work->steps = 8;
         }
 
         SetTaskUpdate(a, (TaskUpdateFunc)MsgfaceFlipInUpdate);
@@ -7087,19 +7087,19 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* p, void* a) {
     return 1;
 }
 
-u8 MsgfaceFlipInUpdate(MsgFaceWork* p, void* a) {
-    if (p->scaleX < 0) {
-        ApproachValue(&p->scaleX, -255, p->steps);
+u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* a) {
+    if (work->scaleX < 0) {
+        ApproachValue(&work->scaleX, -255, work->steps);
     } else {
-        ApproachValue(&p->scaleX, 256, p->steps);
+        ApproachValue(&work->scaleX, 256, work->steps);
     }
 
-    p->steps--;
+    work->steps--;
 
-    if (p->steps == 0) {
-        p->arrived = 1;
-        p->face->command = 0;
-        p->scaleX = 256;
+    if (work->steps == 0) {
+        work->arrived = 1;
+        work->face->command = 0;
+        work->scaleX = 256;
         SetTaskUpdate(a, (TaskUpdateFunc)msgface_1);
     }
 
@@ -7142,26 +7142,26 @@ void RequestMsgfaceSlideOut(MsgFaceControl* p) {
     p->command = 2;
 }
 
-void msgwait_0(MsgWaitWork* p, u8* arg) {
-    p->nextPosition = arg[0];
-    p->tiles = AllocObjTiles(64, NULL);
-    p->palette = LoadObjPalette(gBStatesPalette, 32);
-    LoadObjPaletteBank(p->palette->index, gBStatesPalette);
-    FadeSetPaletteExcluded(p->palette->index + 16, 1);
-    SetObjTileSource(p->tiles, gFEventTiles);
-    AnimInit(&p->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&p->anim, 2, ANIM_FLAG_LOOP);
-    p->timer = 0;
+void msgwait_0(MsgWaitWork* work, u8* arg) {
+    work->nextPosition = arg[0];
+    work->tiles = AllocObjTiles(64, NULL);
+    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    LoadObjPaletteBank(work->palette->index, gBStatesPalette);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    SetObjTileSource(work->tiles, gFEventTiles);
+    AnimInit(&work->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
+    work->timer = 0;
     gEventState->msgWaitActive = 1;
 }
 
-u8 msgwait_1(MsgWaitWork* p, void* a) {
-    p->gfx = AnimUpdate(&p->anim);
+u8 msgwait_1(MsgWaitWork* work, void* a) {
+    work->gfx = AnimUpdate(&work->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(&p->anim, 3, ANIM_FLAG_LOOP);
+        AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
 
-        if (p->nextPosition == 4) {
+        if (work->nextPosition == 4) {
             gEventState->msgWaitActive = 0;
             m4aSongNumStart(SONG_SYS_KETTEI);
             return 0;
@@ -7174,13 +7174,13 @@ u8 msgwait_1(MsgWaitWork* p, void* a) {
     return 1;
 }
 
-u8 UpdateMsgwaitClosing(MsgWaitWork* p) {
+u8 UpdateMsgwaitClosing(MsgWaitWork* work) {
     u8 r;
 
-    p->gfx = AnimUpdate(&p->anim);
-    p->timer++;
+    work->gfx = AnimUpdate(&work->anim);
+    work->timer++;
 
-    if (p->timer <= 15) {
+    if (work->timer <= 15) {
         r = 1;
     } else {
         gEventState->msgWaitActive = 0;
@@ -7190,87 +7190,87 @@ u8 UpdateMsgwaitClosing(MsgWaitWork* p) {
     return r;
 }
 
-void msgwait_2(MsgWaitWork* p) {
+void msgwait_2(MsgWaitWork* work) {
     u8 v = gEventState->msgWinCentered;
 
     if (v) {
-        DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx,
-                   p->tiles, p->palette, NULL, 0, 0);
+        DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, work->gfx,
+                   work->tiles, work->palette, NULL, 0, 0);
     } else {
         DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8,
-                   gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles,
-                   p->palette, NULL, 0, 0);
+                   gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, work->gfx, work->tiles,
+                   work->palette, NULL, 0, 0);
     }
 }
 
-void msgwait_3(MsgWaitWork* p) {
-    FadeSetPaletteExcluded(p->palette->index + 16, 0);
-    ReleaseObjTiles(p->tiles);
-    ReleaseObjPalette(p->palette);
+void msgwait_3(MsgWaitWork* work) {
+    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjPalette(work->palette);
 }
 
-void msgwait_yesno_0(MsgWaitWork* p, u8* a) {
-    p->nextPosition = *a;
-    p->tiles = AllocObjTiles(64, NULL);
-    p->palette = LoadObjPalette(gBStatesPalette, 32);
-    LoadObjPaletteBank(p->palette->index, gBStatesPalette);
-    FadeSetPaletteExcluded(p->palette->index + 16, 1);
-    SetObjTileSource(p->tiles, gFEventTiles);
-    AnimInit(&p->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&p->anim, 2, ANIM_FLAG_LOOP);
-    p->timer = 0;
-    p->tiles2 = AllocObjTiles(288, NULL);
-    p->palette2 = LoadObjPalette(gUnk_09614418, 32);
-    LoadObjPaletteBank(p->palette2->index, gUnk_09614418);
-    SetObjTileSource(p->tiles2, gUnk_090A4664);
-    AnimInit(&p->anim2, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&p->anim2, 2, ANIM_FLAG_LOOP);
-    p->gfx2 = AnimGetGfx(&p->anim2);
-    p->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
-    p->palette3 = LoadObjPalette(gCard00Palette, 32);
-    LoadObjPaletteBank(p->palette3->index, gCard00Palette);
-    FadeSetPaletteExcluded(p->palette->index + 16, 1);
-    InitTextSlots(p->textSlots, 10);
-    InitTextSlots(p->textSlots2, 10);
-    p->palette4 = LoadTextPalette(1);
+void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
+    work->nextPosition = *a;
+    work->tiles = AllocObjTiles(64, NULL);
+    work->palette = LoadObjPalette(gBStatesPalette, 32);
+    LoadObjPaletteBank(work->palette->index, gBStatesPalette);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    SetObjTileSource(work->tiles, gFEventTiles);
+    AnimInit(&work->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
+    work->timer = 0;
+    work->tiles2 = AllocObjTiles(288, NULL);
+    work->palette2 = LoadObjPalette(gUnk_09614418, 32);
+    LoadObjPaletteBank(work->palette2->index, gUnk_09614418);
+    SetObjTileSource(work->tiles2, gUnk_090A4664);
+    AnimInit(&work->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
+    work->gfx2 = AnimGetGfx(&work->anim2);
+    work->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
+    work->palette3 = LoadObjPalette(gCard00Palette, 32);
+    LoadObjPaletteBank(work->palette3->index, gCard00Palette);
+    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    InitTextSlots(work->textSlots, 10);
+    InitTextSlots(work->textSlots2, 10);
+    work->palette4 = LoadTextPalette(1);
 #ifdef VERSION_EU
-    p->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), p->textSlots);
-    p->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), p->textSlots2);
+    work->textSlotCount = LoadTextSlots(eu_0805E924(&gUnkEu_08890E1C), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(eu_0805E924(&gUnkEu_08890E44), work->textSlots2);
 #else
-    p->textSlotCount = LoadTextSlots(gUnk_08159E10, p->textSlots);
-    p->textSlotCount2 = LoadTextSlots(gUnk_08159E18, p->textSlots2);
+    work->textSlotCount = LoadTextSlots(gUnk_08159E10, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gUnk_08159E18, work->textSlots2);
 #endif
-    p->x = 0x5800;
-    p->cursor = 1;
-    p->y = gMsgwaitYesnoCursorY[1];
-    p->timer = 0;
+    work->x = 0x5800;
+    work->cursor = 1;
+    work->y = gMsgwaitYesnoCursorY[1];
+    work->timer = 0;
     gEventState->msgWaitActive = 1;
     gEventState->askedYesNo = 1;
     gEventState->answerYes = 0;
-    p->choiceShown = 0;
+    work->choiceShown = 0;
 }
 
-u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
+u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* a) {
     switch (GetKeysPressed()) {
     case DPAD_UP:
-        if (p->cursor != 0) {
-            p->cursor--;
+        if (work->cursor != 0) {
+            work->cursor--;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        p->timer = 1;
+        work->timer = 1;
         break;
     case DPAD_DOWN:
-        if (p->cursor == 0) {
-            p->cursor++;
+        if (work->cursor == 0) {
+            work->cursor++;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
-        p->timer = 1;
+        work->timer = 1;
         break;
     case A_BUTTON:
     case START_BUTTON:
-        if (p->cursor == 0) {
+        if (work->cursor == 0) {
             gEventState->answerYes = 1;
         } else {
             gEventState->answerYes = 0;
@@ -7297,21 +7297,21 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* p, void* a) {
         return 0;
     }
 
-    if (p->timer != 0) {
-        ApproachValue(&p->y, gMsgwaitYesnoCursorY[p->cursor], p->timer);
-        p->timer--;
+    if (work->timer != 0) {
+        ApproachValue(&work->y, gMsgwaitYesnoCursorY[work->cursor], work->timer);
+        work->timer--;
     }
 
-    p->gfx = AnimUpdate(&p->anim);
+    work->gfx = AnimUpdate(&work->anim);
     return 1;
 }
 
-u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
-    p->gfx = AnimUpdate(&p->anim);
+u8 msgwait_yesno_1(MsgWaitWork* work, void* a) {
+    work->gfx = AnimUpdate(&work->anim);
 
     if (GetKeysPressed() & A_BUTTON) {
-        AnimStart(&p->anim, 3, ANIM_FLAG_LOOP);
-        p->choiceShown = 1;
+        AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
+        work->choiceShown = 1;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);
     }
@@ -7319,33 +7319,33 @@ u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
     return 1;
 }
 
-void msgwait_yesno_2(MsgWaitWork* p) {
-    switch (p->choiceShown) {
+void msgwait_yesno_2(MsgWaitWork* work) {
+    switch (work->choiceShown) {
     case 0:
         if (gEventState->msgWinCentered) {
-            DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
+            DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
         } else {
-            DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
+            DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
         }
 
         break;
     case 1:
-        DrawSprite(120, 80, gUnk_09EF126C[1], p->tiles3, p->palette3, NULL, 0, 10);
-        DrawSprite(p->x >> 8, p->y >> 8, p->gfx2, p->tiles2, p->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
-        DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots, p->textSlotCount)) >> 1, 67, p->textSlots, p->palette4, 0, p->textSlotCount);
-        DrawTextSlots((240 - GetTextSlotsWidth(p->textSlots2, p->textSlotCount2)) >> 1, 82, p->textSlots2, p->palette4, 0, p->textSlotCount2);
+        DrawSprite(120, 80, gUnk_09EF126C[1], work->tiles3, work->palette3, NULL, 0, 10);
+        DrawSprite(work->x >> 8, work->y >> 8, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
+        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 67, work->textSlots, work->palette4, 0, work->textSlotCount);
+        DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 82, work->textSlots2, work->palette4, 0, work->textSlotCount2);
         break;
     }
 }
 
-void msgwait_yesno_3(MsgWaitWork* p) {
-    ReleaseObjTiles(p->tiles2);
-    ReleaseObjTiles(p->tiles3);
-    ReleaseObjPalette(p->palette3);
-    ReleaseObjPalette(p->palette2);
-    ReleaseObjPalette(p->palette4);
-    FreeTextSlots(p->textSlots, 10);
-    FreeTextSlots(p->textSlots2, 10);
+void msgwait_yesno_3(MsgWaitWork* work) {
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjTiles(work->tiles3);
+    ReleaseObjPalette(work->palette3);
+    ReleaseObjPalette(work->palette2);
+    ReleaseObjPalette(work->palette4);
+    FreeTextSlots(work->textSlots, 10);
+    FreeTextSlots(work->textSlots2, 10);
 }
 
 void HBlankIntrEventScanlineScroll() {
@@ -7367,41 +7367,41 @@ void HBlankIntrEventBgWave() {
     HBlankIntrEventScanlineScroll();
 }
 
-void view_0(EventCameraWork* p, u8* arg) {
+void view_0(EventCameraWork* work, u8* arg) {
     const EventSequenceDef* t;
     EventBackgroundDef* u;
     const EventCameraKeyframe* q;
     EvtObj* obj;
     u8 n;
 
-    gEventScanlineScroll = &p->scanline;
-    p->wavePhase = 0;
-    p->scanline.enabled = 0;
-    p->eventId = arg[0];
-    p->keyframe = 0;
-    p->steps = 0;
-    p->angle = 0;
-    p->approachMode = 0;
-    p->effectStarted = 0;
-    t = gEventSequenceDefs[p->eventId];
-    u = gEventBackgroundDefs[p->eventId];
+    gEventScanlineScroll = &work->scanline;
+    work->wavePhase = 0;
+    work->scanline.enabled = 0;
+    work->eventId = arg[0];
+    work->keyframe = 0;
+    work->steps = 0;
+    work->angle = 0;
+    work->approachMode = 0;
+    work->effectStarted = 0;
+    t = gEventSequenceDefs[work->eventId];
+    u = gEventBackgroundDefs[work->eventId];
     q = t->keyframes;
-    p->keyframes = q;
+    work->keyframes = q;
 
     if (q->target != 255) {
-        n = FindEventCameraTarget(p);
+        n = FindEventCameraTarget(work);
         obj = gEventState->charaObjs[n];
-        p->targetX = obj->x;
-        p->targetY = obj->y;
+        work->targetX = obj->x;
+        work->targetY = obj->y;
     } else {
-        p->targetX = q->x;
-        p->targetY = q->y;
+        work->targetX = q->x;
+        work->targetY = q->y;
     }
 
-    gEventState->cameraX = p->targetX - 0x7800;
-    gEventState->cameraY = p->targetY - 0x5000;
-    gEventState->centerX = p->targetX;
-    gEventState->centerY = p->targetY;
+    gEventState->cameraX = work->targetX - 0x7800;
+    gEventState->cameraY = work->targetY - 0x5000;
+    gEventState->centerX = work->targetX;
+    gEventState->centerY = work->targetY;
     gEventState->shakeX = 0;
     gEventState->shakeY = 0;
 
@@ -7409,7 +7409,7 @@ void view_0(EventCameraWork* p, u8* arg) {
         if (u->isAffine != 0) {
             SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
         } else {
-            if (p->eventId == 77) {
+            if (work->eventId == 77) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + 8 + gEventState->shakeX, (gEventState->cameraY >> 8) + 40);
             } else {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
@@ -7440,8 +7440,8 @@ void ClearEventObjPaletteExclusions() {
 #define MSG_VIEW_ID_B4 0xB4
 #endif
 
-u8 view_1(EventCameraWork* p, Task* task) {
-    EventBackgroundDef* u = gEventBackgroundDefs[p->eventId];
+u8 view_1(EventCameraWork* work, Task* task) {
+    EventBackgroundDef* u = gEventBackgroundDefs[work->eventId];
     const EventCameraKeyframe* e;
     EvtObj* q;
     u8 n;
@@ -7455,42 +7455,42 @@ u8 view_1(EventCameraWork* p, Task* task) {
     }
 
     if (!gEventState->focusSpeaker) {
-        e = &p->keyframes[p->keyframe];
+        e = &work->keyframes[work->keyframe];
 
         if (gEventState->frame >= (u16)e->frame && !(e->flags & CAMERA_KEYFRAME_FLAG_END)) {
-            p->keyframe++;
-            e = &p->keyframes[p->keyframe];
-            p->effectStarted = 0;
+            work->keyframe++;
+            e = &work->keyframes[work->keyframe];
+            work->effectStarted = 0;
 
             if (e->callback != NULL) {
-                ((void (*)(EventCameraWork*))e->callback)(p);
+                ((void (*)(EventCameraWork*))e->callback)(work);
             }
 
             switch (e->flags & CAMERA_KEYFRAME_MODE_MASK) {
             case CAMERA_MODE_FOLLOW:
-                p->approachMode = 0;
+                work->approachMode = 0;
                 break;
             case CAMERA_MODE_APPROACH:
-                p->approachMode = 1;
-                p->steps = e->duration;
+                work->approachMode = 1;
+                work->steps = e->duration;
                 break;
             }
         }
 
         if ((e->flags & CAMERA_KEYFRAME_MODE_MASK) != CAMERA_MODE_KEEP) {
             if (e->target == 255) {
-                p->targetX = e->x;
-                p->targetY = e->y;
+                work->targetX = e->x;
+                work->targetY = e->y;
             } else {
-                n = FindEventCameraTarget(p);
+                n = FindEventCameraTarget(work);
                 q = gEventState->charaObjs[n];
-                p->targetX = q->x;
-                p->targetY = q->y + q->z + e->yOffset;
+                work->targetX = q->x;
+                work->targetY = q->y + q->z + e->yOffset;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FLASH) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(FADE_MODE_ADD_WHITE, e->duration);
 
@@ -7499,16 +7499,16 @@ u8 view_1(EventCameraWork* p, Task* task) {
                 }
 
                 gEventState->fadedOut = 0;
-                p->effectStarted = 1;
+                work->effectStarted = 1;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_WHITE, e->duration);
                 gEventState->fadedOut = 1;
-                p->effectStarted = 1;
+                work->effectStarted = 1;
 
                 if (e->flags & CAMERA_KEYFRAME_FLAG_END) {
                     m4aSongNumStart(SONG_EV_WHITEOUT);
@@ -7517,33 +7517,33 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_BLACK, e->duration);
                 gEventState->fadedOut = 1;
-                p->effectStarted = 1;
+                work->effectStarted = 1;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 FadeStartIn(FADE_MODE_WHITE, e->duration);
                 gEventState->fadedOut = 0;
-                p->effectStarted = 1;
+                work->effectStarted = 1;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(FADE_MODE_BLACK, e->duration);
                 gEventState->fadedOut = 0;
-                p->effectStarted = 1;
+                work->effectStarted = 1;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_HALF_FLASH) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeFromAmount(FADE_MODE_ADD_WHITE, 16, e->duration);
 
@@ -7551,27 +7551,27 @@ u8 view_1(EventCameraWork* p, Task* task) {
                     m4aSongNumStart(SONG_EV_FLASH00);
                 }
 
-                p->effectStarted = 1;
+                work->effectStarted = 1;
             }
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_WAVE_START) {
             StartBgWave(HBlankIntrEventBgWave);
-            p->scanline.enabled = 1;
+            work->scanline.enabled = 1;
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_WAVE_STOP) {
-            p->scanline.enabled = 0;
+            work->scanline.enabled = 0;
             ResetHBlankCallback();
             DisableHBlankIntr();
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE_LINEAR) {
-            if (!p->effectStarted) {
+            if (!work->effectStarted) {
                 FadeStartIn(FADE_MODE_WHITE_BLEND, e->duration);
             }
 
-            p->effectStarted = 1;
+            work->effectStarted = 1;
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_SHAKE_SMALL) {
@@ -7585,24 +7585,24 @@ u8 view_1(EventCameraWork* p, Task* task) {
             gEventState->shakeY = GetRandom() % 16;
         } else if (e->flags & CAMERA_KEYFRAME_FLAG_SWAY) {
             gEventState->shakeX = 0;
-            gEventState->shakeY = gSineTable[(p->angle >> 3) & 0xFF] >> 5;
-            p->angle += 4;
+            gEventState->shakeY = gSineTable[(work->angle >> 3) & 0xFF] >> 5;
+            work->angle += 4;
         } else {
             gEventState->shakeX = 0;
             gEventState->shakeY = 0;
         }
 
-        if (p->approachMode != 0) {
-            EventCameraApproach(p);
+        if (work->approachMode != 0) {
+            EventCameraApproach(work);
         } else {
-            EventCameraFollow(p);
+            EventCameraFollow(work);
         }
 
         if (u != NULL) {
             if (u->isAffine != 0) {
                 SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
             } else {
-                if (p->eventId == 77) {
+                if (work->eventId == 77) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
                 } else {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
@@ -7617,7 +7617,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
                 }
             }
         } else {
-            switch (p->eventId) {
+            switch (work->eventId) {
             case 77:
             case 78:
                 gBtlWork->viewX = gEventState->x;
@@ -7653,28 +7653,28 @@ u8 view_1(EventCameraWork* p, Task* task) {
             }
         }
     } else {
-        n = FindEventCharaTrack(p, gEventState->speaker);
-        p->targetX = gEventState->charaObjs[n]->x;
+        n = FindEventCharaTrack(work, gEventState->speaker);
+        work->targetX = gEventState->charaObjs[n]->x;
 
         switch (gEventState->msgWinPosition) {
         case 0:
         case 2:
-            p->targetY = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z + sSpeakerFocusYOffsets[n];
+            work->targetY = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z + sSpeakerFocusYOffsets[n];
             break;
         case 1:
         case 3:
-            p->targetY = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z;
+            work->targetY = gEventState->charaObjs[n]->y + gEventState->charaObjs[n]->z;
             break;
         }
 
-        p->steps = gEventState->focusSteps;
-        EventCameraApproach(p);
+        work->steps = gEventState->focusSteps;
+        EventCameraApproach(work);
 
         if (u != NULL) {
             if (u->isAffine != 0) {
                 SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
             } else {
-                if (p->eventId == 77) {
+                if (work->eventId == 77) {
                     ScrollBgMapTo(3, (gEventState->x >> 8) + 8, (gEventState->y >> 8) + 40);
                 } else {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
@@ -7704,7 +7704,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         func_080CA368(3, gEventState->cameraX >> 8, gEventState->cameraY >> 8);
     }
 
-    UpdateEventScanlineWave(p);
+    UpdateEventScanlineWave(work);
     return 1;
 }
 
@@ -7714,20 +7714,20 @@ void view_2() {
 void view_3() {
 }
 
-void SetEventCameraCenter(EventCameraWork* p) {
-    gEventState->centerX = p->targetX;
-    gEventState->centerY = p->targetY;
+void SetEventCameraCenter(EventCameraWork* work) {
+    gEventState->centerX = work->targetX;
+    gEventState->centerY = work->targetY;
 }
 
-void EventCameraFollow(EventCameraWork* a) {
+void EventCameraFollow(EventCameraWork* work) {
     const EventCameraKeyframe* e;
     s32 x;
     s32 y;
 
-    SetEventCameraCenter(a);
+    SetEventCameraCenter(work);
     x = gEventState->centerX - 0x7800;
     y = gEventState->centerY - 0x5000;
-    e = &a->keyframes[a->keyframe];
+    e = &work->keyframes[work->keyframe];
 
     if (e->flags & (CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_KEYFRAME_FLAG_SHAKE_LARGE | CAMERA_KEYFRAME_FLAG_SHAKE_SMALL)) {
         gEventState->cameraX = x;
@@ -7741,29 +7741,29 @@ void EventCameraFollow(EventCameraWork* a) {
     gEventState->y = gEventState->cameraY + (gEventState->shakeY << 8);
 }
 
-void EventCameraSnap(EventCameraWork* a) {
+void EventCameraSnap(EventCameraWork* work) {
     s32 x;
     s32 y;
 
-    SetEventCameraCenter(a);
+    SetEventCameraCenter(work);
     x = gEventState->centerX - 0x7800;
     y = gEventState->centerY - 0x5000;
     gEventState->cameraX = x;
     gEventState->cameraY = y;
 }
 
-void EventCameraApproach(EventCameraWork* a) {
+void EventCameraApproach(EventCameraWork* work) {
     s32 x;
     s32 y;
 
-    SetEventCameraCenter(a);
+    SetEventCameraCenter(work);
     x = gEventState->centerX - 0x7800;
     y = gEventState->centerY - 0x5000;
 
-    if (a->steps != 0) {
-        ApproachValue(&gEventState->cameraX, x, a->steps);
-        ApproachValue(&gEventState->cameraY, y, a->steps);
-        a->steps--;
+    if (work->steps != 0) {
+        ApproachValue(&gEventState->cameraX, x, work->steps);
+        ApproachValue(&gEventState->cameraY, y, work->steps);
+        work->steps--;
     } else {
         gEventState->cameraX = x;
         gEventState->cameraY = y;
@@ -7773,11 +7773,11 @@ void EventCameraApproach(EventCameraWork* a) {
     gEventState->y = gEventState->cameraY + (gEventState->shakeY << 8);
 }
 
-u8 FindEventCameraTarget(EventCameraWork* p) {
-    const EventSequenceDef* t = gEventSequenceDefs[p->eventId];
+u8 FindEventCameraTarget(EventCameraWork* work) {
+    const EventSequenceDef* t = gEventSequenceDefs[work->eventId];
     u8 n = t->charaCount;
     const EventCharaTrack* q = t->charaTracks;
-    const EventCameraKeyframe* e = &p->keyframes[p->keyframe];
+    const EventCameraKeyframe* e = &work->keyframes[work->keyframe];
     u8 i;
 
     for (i = 0; i < n; i++) {
@@ -7789,8 +7789,8 @@ u8 FindEventCameraTarget(EventCameraWork* p) {
     return 0xFF;
 }
 
-u8 FindEventCharaTrack(EventCameraWork* p, u8 v) {
-    const EventSequenceDef* t = gEventSequenceDefs[p->eventId];
+u8 FindEventCharaTrack(EventCameraWork* work, u8 v) {
+    const EventSequenceDef* t = gEventSequenceDefs[work->eventId];
     u8 n = t->charaCount;
     const EventCharaTrack* q = t->charaTracks;
     u8 i;
@@ -7804,25 +7804,25 @@ u8 FindEventCharaTrack(EventCameraWork* p, u8 v) {
     return 0xFF;
 }
 
-u8 UpdateEventCameraFollowPlayer(EventCameraWork* p) {
+u8 UpdateEventCameraFollowPlayer(EventCameraWork* work) {
     EventBackgroundDef* t;
     EvtObj* q;
     u8 n;
 
-    n = FindEventCharaTrack(p, 0);
-    t = gEventBackgroundDefs[p->eventId];
+    n = FindEventCharaTrack(work, 0);
+    t = gEventBackgroundDefs[work->eventId];
     q = gEventState->charaObjs[n];
-    p->targetX = q->x;
-    p->targetY = q->y + q->z;
+    work->targetX = q->x;
+    work->targetY = q->y + q->z;
 
     if (t != NULL) {
         if (t->isAffine != 0) {
-            EventCameraSnap(p);
+            EventCameraSnap(work);
             SetBgAffine(2, 0, 0x100, 0x100, gEventState->centerX, gEventState->centerY);
         } else {
-            EventCameraFollow(p);
+            EventCameraFollow(work);
 
-            if (p->eventId == 77) {
+            if (work->eventId == 77) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + 8 + gEventState->shakeX, (gEventState->cameraY >> 8) + 40);
             } else {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
@@ -7837,7 +7837,7 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* p) {
             }
         }
     } else {
-        EventCameraFollow(p);
+        EventCameraFollow(work);
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
         ScrollBgMapTo(0, (gEventState->cameraX >> 8) + 8, (gEventState->cameraY >> 8) + 40);
@@ -7847,16 +7847,16 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* p) {
     return 1;
 }
 
-void UpdateEventScanlineWave(EventCameraWork* p) {
+void UpdateEventScanlineWave(EventCameraWork* work) {
     u8 i;
     s32 v;
 
-    if (p->scanline.enabled == 1) {
+    if (work->scanline.enabled == 1) {
         for (i = 0; i < 160; i++) {
-            p->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + p->wavePhase) * 2) & 0xFF]) / 32;
+            work->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + work->wavePhase) * 2) & 0xFF]) / 32;
         }
 
-        p->wavePhase++;
+        work->wavePhase++;
     }
 }
 

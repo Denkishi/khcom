@@ -9,13 +9,13 @@ struct EventSoundMix;
 extern struct EventSoundMix* gEventSoundMix;
 
 void SetEventSoundPosition(u16 song, s16 x, s16 y);
-void CreateTinkerbellTask(struct EventCharaWork* p);
-void CreateDownTask(struct EventCharaWork* p);
-void CreateSmokeTask(struct EventCharaWork* p);
-void CreateExclamationTask(struct EventCharaWork* p);
-void CreateBalloonTask(struct EventCharaWork* p);
-void CreateQuestionTask(struct EventCharaWork* p);
-void CreateGlowNoseTask(struct EventCharaWork* p);
-void CreateHanabiraTask(struct EventCharaWork* p);
+void CreateTinkerbellTask(struct EventCharaWork* work);
+void CreateDownTask(struct EventCharaWork* work);
+void CreateSmokeTask(struct EventCharaWork* work);
+void CreateExclamationTask(struct EventCharaWork* work);
+void CreateBalloonTask(struct EventCharaWork* work);
+void CreateQuestionTask(struct EventCharaWork* work);
+void CreateGlowNoseTask(struct EventCharaWork* work);
+void CreateHanabiraTask(struct EventCharaWork* work);
 
 #endif

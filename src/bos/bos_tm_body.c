@@ -88,10 +88,10 @@ TaskDesc gTaskDescBosTmBody = {
     sizeof(TmBodyWork),
 };
 
-void BosTmBodyResetTimers(TmBodyWork* p) {
-    p->tm->stepTimer = 0;
-    p->tm->step = 0;
-    p->tm->stateTimer = 0;
+void BosTmBodyResetTimers(TmBodyWork* work) {
+    work->tm->stepTimer = 0;
+    work->tm->step = 0;
+    work->tm->stateTimer = 0;
 }
 
 void BosTmBodyInitEnemy(BtlObj* p, s16 a, s16 b, s16 c) {
@@ -116,288 +116,288 @@ void BosTmBodyReleaseEnemy(BtlObj* a) {
     ReleaseEnemyBtlObj(a);
 }
 
-void BosTmBodyUpdateAngle(TmBodyWork* p) {
-    p->angleTimer++;
+void BosTmBodyUpdateAngle(TmBodyWork* work) {
+    work->angleTimer++;
 
-    if (p->angleTimer > 5) {
-        p->angleTimer = 0;
-        p->angleStep++;
+    if (work->angleTimer > 5) {
+        work->angleTimer = 0;
+        work->angleStep++;
 
-        if (p->angleStep > 10) {
-            p->angleStep = 0;
+        if (work->angleStep > 10) {
+            work->angleStep = 0;
         }
 
-        p->angle = sBosTmBodyAngles[p->angleStep];
+        work->angle = sBosTmBodyAngles[work->angleStep];
     }
 }
 
-void BosTmBodyPlaceParts(TmBodyWork* p) {
-    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-        p->body.x = p->tm->x2 + 0x400;
-        p->body2.x = p->tm->x2;
-        p->body3.x = p->tm->x2 + 0xC00;
-        p->body4.x = p->tm->x2 - 0x100;
+void BosTmBodyPlaceParts(TmBodyWork* work) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+        work->body.x = work->tm->x2 + 0x400;
+        work->body2.x = work->tm->x2;
+        work->body3.x = work->tm->x2 + 0xC00;
+        work->body4.x = work->tm->x2 - 0x100;
     } else {
-        p->body.x = p->tm->x2 - 0x400;
-        p->body2.x = p->tm->x2;
-        p->body3.x = p->tm->x2 - 0xC00;
-        p->body4.x = p->tm->x2 + 0x100;
+        work->body.x = work->tm->x2 - 0x400;
+        work->body2.x = work->tm->x2;
+        work->body3.x = work->tm->x2 - 0xC00;
+        work->body4.x = work->tm->x2 + 0x100;
     }
 
-    p->body.y = p->tm->y2;
-    p->body2.y = p->tm->y2;
-    p->body3.y = p->tm->y2 + 0x100;
-    p->body4.y = p->tm->y2 - 0x400;
-    p->body.z = p->tm->z2 - 0x2200;
-    p->body2.z = p->tm->z2 + 0x900;
-    p->body3.z = p->tm->z2 - 0x2100;
-    p->body4.z = p->tm->z2 - 0x1E00;
+    work->body.y = work->tm->y2;
+    work->body2.y = work->tm->y2;
+    work->body3.y = work->tm->y2 + 0x100;
+    work->body4.y = work->tm->y2 - 0x400;
+    work->body.z = work->tm->z2 - 0x2200;
+    work->body2.z = work->tm->z2 + 0x900;
+    work->body3.z = work->tm->z2 - 0x2100;
+    work->body4.z = work->tm->z2 - 0x1E00;
 }
 
-void BosTmBodyResetPose(TmBodyWork* p) {
-    p->angle = 0;
-    p->angle2 = 0;
-    p->gfx3 = gUnk_09EF397C[0];
-    p->gfx4 = gUnk_09EF3960[0];
-    p->tm->x2 = p->tm->baseX;
-    p->tm->y2 = p->tm->baseY;
-    p->tm->z2 = p->tm->baseZ;
-    BosTmBodyPlaceParts(p);
+void BosTmBodyResetPose(TmBodyWork* work) {
+    work->angle = 0;
+    work->angle2 = 0;
+    work->gfx3 = gUnk_09EF397C[0];
+    work->gfx4 = gUnk_09EF3960[0];
+    work->tm->x2 = work->tm->baseX;
+    work->tm->y2 = work->tm->baseY;
+    work->tm->z2 = work->tm->baseZ;
+    BosTmBodyPlaceParts(work);
 }
 
-void BosTmBodySetDefeatPose(TmBodyWork* p) {
+void BosTmBodySetDefeatPose(TmBodyWork* work) {
     TmWork* src;
     s32 dz;
 
-    p->angle = 226;
-    p->angle2 = 226;
-    p->gfx3 = gUnk_09EF397C[0];
-    p->gfx4 = gUnk_09EF3960[0];
+    work->angle = 226;
+    work->angle2 = 226;
+    work->gfx3 = gUnk_09EF397C[0];
+    work->gfx4 = gUnk_09EF3960[0];
     dz = 0xF00;
-    src = p->tm;
+    src = work->tm;
 
     if (src->flags & TM_FLAG_FACING_LEFT) {
-        p->tm->x2 = p->tm->baseX - 0xA00;
-        p->tm->y2 = p->tm->baseY;
-        p->tm->z2 = p->tm->baseZ + dz;
-        p->body.x = p->tm->baseX - 0xF00;
-        p->body2.x = p->tm->x2 + 0x500;
-        p->body3.x = p->tm->x2 + 0x400;
-        p->body4.x = p->tm->x2 - 0x900;
+        work->tm->x2 = work->tm->baseX - 0xA00;
+        work->tm->y2 = work->tm->baseY;
+        work->tm->z2 = work->tm->baseZ + dz;
+        work->body.x = work->tm->baseX - 0xF00;
+        work->body2.x = work->tm->x2 + 0x500;
+        work->body3.x = work->tm->x2 + 0x400;
+        work->body4.x = work->tm->x2 - 0x900;
     } else {
-        p->tm->x2 = p->tm->baseX + 0xA00;
-        p->tm->y2 = p->tm->baseY;
-        p->tm->z2 = p->tm->baseZ + 0xF00;
-        p->body.x = p->tm->baseX + 0xF00;
-        p->body2.x = p->tm->x2 - 0x500;
-        p->body3.x = p->tm->x2 - 0x400;
-        p->body4.x = p->tm->x2 + 0x900;
+        work->tm->x2 = work->tm->baseX + 0xA00;
+        work->tm->y2 = work->tm->baseY;
+        work->tm->z2 = work->tm->baseZ + 0xF00;
+        work->body.x = work->tm->baseX + 0xF00;
+        work->body2.x = work->tm->x2 - 0x500;
+        work->body3.x = work->tm->x2 - 0x400;
+        work->body4.x = work->tm->x2 + 0x900;
     }
 
-    p->body.z = p->tm->z2 - 0x1F00;
-    p->body2.z = p->tm->z2 + 0xE00;
-    p->body3.z = p->tm->z2 - 0x1F00;
-    p->body4.z = p->tm->z2 - 0x1C00;
+    work->body.z = work->tm->z2 - 0x1F00;
+    work->body2.z = work->tm->z2 + 0xE00;
+    work->body3.z = work->tm->z2 - 0x1F00;
+    work->body4.z = work->tm->z2 - 0x1C00;
 }
 
-void BosTmBodySetBreakPose(TmBodyWork* p) {
-    p->angle = 30;
-    p->angle2 = 10;
-    p->gfx3 = gUnk_09EF397C[0];
-    p->gfx4 = gUnk_09EF3960[0];
+void BosTmBodySetBreakPose(TmBodyWork* work) {
+    work->angle = 30;
+    work->angle2 = 10;
+    work->gfx3 = gUnk_09EF397C[0];
+    work->gfx4 = gUnk_09EF3960[0];
 
-    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-        p->tm->x2 = p->tm->baseX + 0xA00;
-        p->tm->y2 = p->tm->baseY;
-        p->tm->z2 = p->tm->baseZ + 0xF00;
-        p->body.x = p->tm->baseX + 0xB00;
-        p->body2.x = p->tm->x2 - 0x500;
-        p->body3.x = p->tm->x2 + 0x900;
-        p->body4.x = p->tm->x2 - 0x400;
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+        work->tm->x2 = work->tm->baseX + 0xA00;
+        work->tm->y2 = work->tm->baseY;
+        work->tm->z2 = work->tm->baseZ + 0xF00;
+        work->body.x = work->tm->baseX + 0xB00;
+        work->body2.x = work->tm->x2 - 0x500;
+        work->body3.x = work->tm->x2 + 0x900;
+        work->body4.x = work->tm->x2 - 0x400;
     } else {
-        p->tm->x2 = p->tm->baseX - 0xA00;
-        p->tm->y2 = p->tm->baseY;
-        p->tm->z2 = p->tm->baseZ + 0xF00;
-        p->body.x = p->tm->baseX - 0xB00;
-        p->body2.x = p->tm->x2 + 0x500;
-        p->body3.x = p->tm->x2 - 0x900;
-        p->body4.x = p->tm->x2 + 0x400;
+        work->tm->x2 = work->tm->baseX - 0xA00;
+        work->tm->y2 = work->tm->baseY;
+        work->tm->z2 = work->tm->baseZ + 0xF00;
+        work->body.x = work->tm->baseX - 0xB00;
+        work->body2.x = work->tm->x2 + 0x500;
+        work->body3.x = work->tm->x2 - 0x900;
+        work->body4.x = work->tm->x2 + 0x400;
     }
 
-    p->body.z = p->tm->z2 - 0x2200;
-    p->body2.z = p->tm->z2 + 0x900;
-    p->body3.z = p->tm->z2 - 0x1F00;
-    p->body4.z = p->tm->z2 - 0x1C00;
+    work->body.z = work->tm->z2 - 0x2200;
+    work->body2.z = work->tm->z2 + 0x900;
+    work->body3.z = work->tm->z2 - 0x1F00;
+    work->body4.z = work->tm->z2 - 0x1C00;
 }
 
-void BosTmBodyApplyThrowStep(TmBodyWork* p, s16 a) {
-    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-        p->angle += sBosTmBodyThrowSteps[a].dAngle;
-        p->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
-        p->body.x += sBosTmBodyThrowSteps[a].dx << 8;
-        p->body2.x += sBosTmBodyThrowSteps[a].dx2 << 8;
-        p->body3.x += sBosTmBodyThrowSteps[a].dx3 << 8;
-        p->body4.x += sBosTmBodyThrowSteps[a].dx4 << 8;
-        p->tm->x2 += sBosTmBodyThrowSteps[a].dx3 << 8;
+void BosTmBodyApplyThrowStep(TmBodyWork* work, s16 a) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+        work->angle += sBosTmBodyThrowSteps[a].dAngle;
+        work->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
+        work->body.x += sBosTmBodyThrowSteps[a].dx << 8;
+        work->body2.x += sBosTmBodyThrowSteps[a].dx2 << 8;
+        work->body3.x += sBosTmBodyThrowSteps[a].dx3 << 8;
+        work->body4.x += sBosTmBodyThrowSteps[a].dx4 << 8;
+        work->tm->x2 += sBosTmBodyThrowSteps[a].dx3 << 8;
     } else {
-        p->angle += sBosTmBodyThrowSteps[a].dAngle;
-        p->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
-        p->body.x -= sBosTmBodyThrowSteps[a].dx << 8;
-        p->body2.x -= sBosTmBodyThrowSteps[a].dx2 << 8;
-        p->body3.x -= sBosTmBodyThrowSteps[a].dx3 << 8;
-        p->body4.x -= sBosTmBodyThrowSteps[a].dx4 << 8;
-        p->tm->x2 -= sBosTmBodyThrowSteps[a].dx3 << 8;
+        work->angle += sBosTmBodyThrowSteps[a].dAngle;
+        work->angle2 += sBosTmBodyThrowSteps[a].dAngle2;
+        work->body.x -= sBosTmBodyThrowSteps[a].dx << 8;
+        work->body2.x -= sBosTmBodyThrowSteps[a].dx2 << 8;
+        work->body3.x -= sBosTmBodyThrowSteps[a].dx3 << 8;
+        work->body4.x -= sBosTmBodyThrowSteps[a].dx4 << 8;
+        work->tm->x2 -= sBosTmBodyThrowSteps[a].dx3 << 8;
     }
 
-    p->body.z += sBosTmBodyThrowSteps[a].dz << 8;
-    p->body2.z += sBosTmBodyThrowSteps[a].dz2 << 8;
-    p->body3.z += sBosTmBodyThrowSteps[a].dz3 << 8;
-    p->body4.z += sBosTmBodyThrowSteps[a].dz4 << 8;
-    p->tm->z2 += sBosTmBodyThrowSteps[a].dz2 << 8;
-    p->gfx3 = gUnk_09EF397C[sBosTmBodyThrowSteps[a].gfx3Index];
-    p->gfx4 = gUnk_09EF3960[sBosTmBodyThrowSteps[a].gfx4Index];
+    work->body.z += sBosTmBodyThrowSteps[a].dz << 8;
+    work->body2.z += sBosTmBodyThrowSteps[a].dz2 << 8;
+    work->body3.z += sBosTmBodyThrowSteps[a].dz3 << 8;
+    work->body4.z += sBosTmBodyThrowSteps[a].dz4 << 8;
+    work->tm->z2 += sBosTmBodyThrowSteps[a].dz2 << 8;
+    work->gfx3 = gUnk_09EF397C[sBosTmBodyThrowSteps[a].gfx3Index];
+    work->gfx4 = gUnk_09EF3960[sBosTmBodyThrowSteps[a].gfx4Index];
 }
 
-void BosTmBodySetWalkPose(TmBodyWork* p) {
-    p->angle = 0;
-    p->angle2 = 0;
-    p->gfx3 = gUnk_09EF397C[0];
-    p->gfx4 = gUnk_09EF3960[0];
-    p->tm->x2 = p->tm->baseX;
-    p->tm->y2 = p->tm->baseY;
-    p->tm->z2 = p->tm->baseZ - 0x1500;
-    BosTmBodyPlaceParts(p);
+void BosTmBodySetWalkPose(TmBodyWork* work) {
+    work->angle = 0;
+    work->angle2 = 0;
+    work->gfx3 = gUnk_09EF397C[0];
+    work->gfx4 = gUnk_09EF3960[0];
+    work->tm->x2 = work->tm->baseX;
+    work->tm->y2 = work->tm->baseY;
+    work->tm->z2 = work->tm->baseZ - 0x1500;
+    BosTmBodyPlaceParts(work);
 }
 
-void BosTmBodyWalk(TmBodyWork* p) {
-    if (p->tm->stepTimer == 0) {
-        p->tm->baseX += p->tm->vx;
-        p->tm->baseY += p->tm->vy;
-        p->tm->x2 = p->tm->baseX;
-        p->tm->y2 = p->tm->baseY;
-        p->tm->z2 += sBosTmBodyWalkZ[p->tm->step] << 8;
-        BosTmBodyPlaceParts(p);
+void BosTmBodyWalk(TmBodyWork* work) {
+    if (work->tm->stepTimer == 0) {
+        work->tm->baseX += work->tm->vx;
+        work->tm->baseY += work->tm->vy;
+        work->tm->x2 = work->tm->baseX;
+        work->tm->y2 = work->tm->baseY;
+        work->tm->z2 += sBosTmBodyWalkZ[work->tm->step] << 8;
+        BosTmBodyPlaceParts(work);
     }
 
-    BosTmBodyUpdateAngle(p);
+    BosTmBodyUpdateAngle(work);
 }
 
-void BosTmBodyUpdateRecoil(TmBodyWork* p) {
+void BosTmBodyUpdateRecoil(TmBodyWork* work) {
     s16 i;
     s16 j;
 
-    if (p->tm->hitCount == 1) {
-        p->tm->step = 0;
-        p->tm->stepTimer = 0;
+    if (work->tm->hitCount == 1) {
+        work->tm->step = 0;
+        work->tm->stepTimer = 0;
 
-        if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-            p->angle = sBosTmBodyRecoilSteps[p->tm->step].dAngle;
-            p->angle2 = sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
-            p->body.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx + 4) << 8);
-            p->body2.x = p->tm->baseX + (sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8);
-            p->body3.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx3 + 12) << 8);
-            p->body4.x = p->tm->baseX + ((sBosTmBodyRecoilSteps[p->tm->step].dx4 - 1) << 8);
-            p->tm->x2 = p->tm->baseX + (sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8);
+        if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+            work->angle = sBosTmBodyRecoilSteps[work->tm->step].dAngle;
+            work->angle2 = sBosTmBodyRecoilSteps[work->tm->step].dAngle2;
+            work->body.x = work->tm->baseX + ((sBosTmBodyRecoilSteps[work->tm->step].dx + 4) << 8);
+            work->body2.x = work->tm->baseX + (sBosTmBodyRecoilSteps[work->tm->step].dx2 << 8);
+            work->body3.x = work->tm->baseX + ((sBosTmBodyRecoilSteps[work->tm->step].dx3 + 12) << 8);
+            work->body4.x = work->tm->baseX + ((sBosTmBodyRecoilSteps[work->tm->step].dx4 - 1) << 8);
+            work->tm->x2 = work->tm->baseX + (sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8);
         } else {
-            p->angle = sBosTmBodyRecoilSteps[p->tm->step].dAngle;
-            p->angle2 = sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
-            p->body.x = p->tm->baseX + ((-4 - sBosTmBodyRecoilSteps[p->tm->step].dx) << 8);
-            p->body2.x = p->tm->baseX - (sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8);
-            p->body3.x = p->tm->baseX + ((-12 - sBosTmBodyRecoilSteps[p->tm->step].dx3) << 8);
-            p->body4.x = p->tm->baseX + ((1 - sBosTmBodyRecoilSteps[p->tm->step].dx4) << 8);
-            p->tm->x2 = p->tm->baseX - (sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8);
+            work->angle = sBosTmBodyRecoilSteps[work->tm->step].dAngle;
+            work->angle2 = sBosTmBodyRecoilSteps[work->tm->step].dAngle2;
+            work->body.x = work->tm->baseX + ((-4 - sBosTmBodyRecoilSteps[work->tm->step].dx) << 8);
+            work->body2.x = work->tm->baseX - (sBosTmBodyRecoilSteps[work->tm->step].dx2 << 8);
+            work->body3.x = work->tm->baseX + ((-12 - sBosTmBodyRecoilSteps[work->tm->step].dx3) << 8);
+            work->body4.x = work->tm->baseX + ((1 - sBosTmBodyRecoilSteps[work->tm->step].dx4) << 8);
+            work->tm->x2 = work->tm->baseX - (sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8);
         }
 
-        p->body.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz - 34 + sBosTmBodyRecoilZ[2]) << 8);
-        p->body2.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz2 + 9 + sBosTmBodyRecoilZ[2]) << 8);
-        p->body3.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz3 - 33 + sBosTmBodyRecoilZ[2]) << 8);
-        p->body4.z = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz4 - 30 + sBosTmBodyRecoilZ[2]) << 8);
-        p->tm->z2 = p->tm->baseZ + ((sBosTmBodyRecoilSteps[p->tm->step].dz2 + 0 + sBosTmBodyRecoilZ[2]) << 8);
+        work->body.z = work->tm->baseZ + ((sBosTmBodyRecoilSteps[work->tm->step].dz - 34 + sBosTmBodyRecoilZ[2]) << 8);
+        work->body2.z = work->tm->baseZ + ((sBosTmBodyRecoilSteps[work->tm->step].dz2 + 9 + sBosTmBodyRecoilZ[2]) << 8);
+        work->body3.z = work->tm->baseZ + ((sBosTmBodyRecoilSteps[work->tm->step].dz3 - 33 + sBosTmBodyRecoilZ[2]) << 8);
+        work->body4.z = work->tm->baseZ + ((sBosTmBodyRecoilSteps[work->tm->step].dz4 - 30 + sBosTmBodyRecoilZ[2]) << 8);
+        work->tm->z2 = work->tm->baseZ + ((sBosTmBodyRecoilSteps[work->tm->step].dz2 + 0 + sBosTmBodyRecoilZ[2]) << 8);
     } else {
-        if (p->tm->step < 3) {
-            if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                p->angle += sBosTmBodyRecoilSteps[p->tm->step].dAngle;
-                p->angle2 += sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
-                p->body.x += sBosTmBodyRecoilSteps[p->tm->step].dx << 8;
-                p->body2.x += sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8;
-                p->body3.x += sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
-                p->body4.x += sBosTmBodyRecoilSteps[p->tm->step].dx4 << 8;
-                p->tm->x2 += sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
+        if (work->tm->step < 3) {
+            if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+                work->angle += sBosTmBodyRecoilSteps[work->tm->step].dAngle;
+                work->angle2 += sBosTmBodyRecoilSteps[work->tm->step].dAngle2;
+                work->body.x += sBosTmBodyRecoilSteps[work->tm->step].dx << 8;
+                work->body2.x += sBosTmBodyRecoilSteps[work->tm->step].dx2 << 8;
+                work->body3.x += sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8;
+                work->body4.x += sBosTmBodyRecoilSteps[work->tm->step].dx4 << 8;
+                work->tm->x2 += sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8;
             } else {
-                p->angle += sBosTmBodyRecoilSteps[p->tm->step].dAngle;
-                p->angle2 += sBosTmBodyRecoilSteps[p->tm->step].dAngle2;
-                p->body.x -= sBosTmBodyRecoilSteps[p->tm->step].dx << 8;
-                p->body2.x -= sBosTmBodyRecoilSteps[p->tm->step].dx2 << 8;
-                p->body3.x -= sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
-                p->body4.x -= sBosTmBodyRecoilSteps[p->tm->step].dx4 << 8;
-                p->tm->x2 -= sBosTmBodyRecoilSteps[p->tm->step].dx3 << 8;
+                work->angle += sBosTmBodyRecoilSteps[work->tm->step].dAngle;
+                work->angle2 += sBosTmBodyRecoilSteps[work->tm->step].dAngle2;
+                work->body.x -= sBosTmBodyRecoilSteps[work->tm->step].dx << 8;
+                work->body2.x -= sBosTmBodyRecoilSteps[work->tm->step].dx2 << 8;
+                work->body3.x -= sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8;
+                work->body4.x -= sBosTmBodyRecoilSteps[work->tm->step].dx4 << 8;
+                work->tm->x2 -= sBosTmBodyRecoilSteps[work->tm->step].dx3 << 8;
             }
 
-            j = 2 - p->tm->step;
-            p->body.z += (sBosTmBodyRecoilSteps[p->tm->step].dz + sBosTmBodyRecoilZ[j]) << 8;
-            p->body2.z += (sBosTmBodyRecoilSteps[p->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
-            p->body3.z += (sBosTmBodyRecoilSteps[p->tm->step].dz3 + sBosTmBodyRecoilZ[j]) << 8;
-            p->body4.z += (sBosTmBodyRecoilSteps[p->tm->step].dz4 + sBosTmBodyRecoilZ[j]) << 8;
-            p->tm->z2 += (sBosTmBodyRecoilSteps[p->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            j = 2 - work->tm->step;
+            work->body.z += (sBosTmBodyRecoilSteps[work->tm->step].dz + sBosTmBodyRecoilZ[j]) << 8;
+            work->body2.z += (sBosTmBodyRecoilSteps[work->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            work->body3.z += (sBosTmBodyRecoilSteps[work->tm->step].dz3 + sBosTmBodyRecoilZ[j]) << 8;
+            work->body4.z += (sBosTmBodyRecoilSteps[work->tm->step].dz4 + sBosTmBodyRecoilZ[j]) << 8;
+            work->tm->z2 += (sBosTmBodyRecoilSteps[work->tm->step].dz2 + sBosTmBodyRecoilZ[j]) << 8;
         }
 
-        if (p->tm->hurtTimer < 3) {
-            i = p->tm->hurtTimer;
+        if (work->tm->hurtTimer < 3) {
+            i = work->tm->hurtTimer;
 
-            if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                p->angle -= sBosTmBodyRecoilSteps[i].dAngle;
-                p->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
-                p->body.x -= sBosTmBodyRecoilSteps[i].dx << 8;
-                p->body2.x -= sBosTmBodyRecoilSteps[i].dx2 << 8;
-                p->body3.x -= sBosTmBodyRecoilSteps[i].dx3 << 8;
-                p->body4.x -= sBosTmBodyRecoilSteps[i].dx4 << 8;
-                p->tm->x2 -= sBosTmBodyRecoilSteps[i].dx3 << 8;
+            if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+                work->angle -= sBosTmBodyRecoilSteps[i].dAngle;
+                work->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
+                work->body.x -= sBosTmBodyRecoilSteps[i].dx << 8;
+                work->body2.x -= sBosTmBodyRecoilSteps[i].dx2 << 8;
+                work->body3.x -= sBosTmBodyRecoilSteps[i].dx3 << 8;
+                work->body4.x -= sBosTmBodyRecoilSteps[i].dx4 << 8;
+                work->tm->x2 -= sBosTmBodyRecoilSteps[i].dx3 << 8;
             } else {
-                p->angle -= sBosTmBodyRecoilSteps[i].dAngle;
-                p->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
-                p->body.x += sBosTmBodyRecoilSteps[i].dx << 8;
-                p->body2.x += sBosTmBodyRecoilSteps[i].dx2 << 8;
-                p->body3.x += sBosTmBodyRecoilSteps[i].dx3 << 8;
-                p->body4.x += sBosTmBodyRecoilSteps[i].dx4 << 8;
-                p->tm->x2 += sBosTmBodyRecoilSteps[i].dx3 << 8;
+                work->angle -= sBosTmBodyRecoilSteps[i].dAngle;
+                work->angle2 -= sBosTmBodyRecoilSteps[i].dAngle2;
+                work->body.x += sBosTmBodyRecoilSteps[i].dx << 8;
+                work->body2.x += sBosTmBodyRecoilSteps[i].dx2 << 8;
+                work->body3.x += sBosTmBodyRecoilSteps[i].dx3 << 8;
+                work->body4.x += sBosTmBodyRecoilSteps[i].dx4 << 8;
+                work->tm->x2 += sBosTmBodyRecoilSteps[i].dx3 << 8;
             }
 
             j = 2 - i;
-            p->body.z -= (sBosTmBodyRecoilSteps[i].dz + sBosTmBodyRecoilZ[j]) << 8;
-            p->body2.z -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
-            p->body3.z -= (sBosTmBodyRecoilSteps[i].dz3 + sBosTmBodyRecoilZ[j]) << 8;
-            p->body4.z -= (sBosTmBodyRecoilSteps[i].dz4 + sBosTmBodyRecoilZ[j]) << 8;
-            p->tm->z2 -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            work->body.z -= (sBosTmBodyRecoilSteps[i].dz + sBosTmBodyRecoilZ[j]) << 8;
+            work->body2.z -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
+            work->body3.z -= (sBosTmBodyRecoilSteps[i].dz3 + sBosTmBodyRecoilZ[j]) << 8;
+            work->body4.z -= (sBosTmBodyRecoilSteps[i].dz4 + sBosTmBodyRecoilZ[j]) << 8;
+            work->tm->z2 -= (sBosTmBodyRecoilSteps[i].dz2 + sBosTmBodyRecoilZ[j]) << 8;
         }
     }
 }
 
-void BosTmBodyApplySpinStep(TmBodyWork* p, s16 a) {
-    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-        p->angle += sBosTmBodySpinSteps[a].dAngle;
-        p->angle2 += sBosTmBodySpinSteps[a].dAngle2;
-        p->body.x += sBosTmBodySpinSteps[a].dx << 8;
-        p->body2.x += sBosTmBodySpinSteps[a].dx2 << 8;
-        p->body3.x += sBosTmBodySpinSteps[a].dx3 << 8;
-        p->body4.x += sBosTmBodySpinSteps[a].dx4 << 8;
-        p->tm->x2 += sBosTmBodySpinSteps[a].dx3 << 8;
+void BosTmBodyApplySpinStep(TmBodyWork* work, s16 a) {
+    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+        work->angle += sBosTmBodySpinSteps[a].dAngle;
+        work->angle2 += sBosTmBodySpinSteps[a].dAngle2;
+        work->body.x += sBosTmBodySpinSteps[a].dx << 8;
+        work->body2.x += sBosTmBodySpinSteps[a].dx2 << 8;
+        work->body3.x += sBosTmBodySpinSteps[a].dx3 << 8;
+        work->body4.x += sBosTmBodySpinSteps[a].dx4 << 8;
+        work->tm->x2 += sBosTmBodySpinSteps[a].dx3 << 8;
     } else {
-        p->angle += sBosTmBodySpinSteps[a].dAngle;
-        p->angle2 += sBosTmBodySpinSteps[a].dAngle2;
-        p->body.x -= sBosTmBodySpinSteps[a].dx << 8;
-        p->body2.x -= sBosTmBodySpinSteps[a].dx2 << 8;
-        p->body3.x -= sBosTmBodySpinSteps[a].dx3 << 8;
-        p->body4.x -= sBosTmBodySpinSteps[a].dx4 << 8;
-        p->tm->x2 -= sBosTmBodySpinSteps[a].dx3 << 8;
+        work->angle += sBosTmBodySpinSteps[a].dAngle;
+        work->angle2 += sBosTmBodySpinSteps[a].dAngle2;
+        work->body.x -= sBosTmBodySpinSteps[a].dx << 8;
+        work->body2.x -= sBosTmBodySpinSteps[a].dx2 << 8;
+        work->body3.x -= sBosTmBodySpinSteps[a].dx3 << 8;
+        work->body4.x -= sBosTmBodySpinSteps[a].dx4 << 8;
+        work->tm->x2 -= sBosTmBodySpinSteps[a].dx3 << 8;
     }
 
-    p->body.z += sBosTmBodySpinSteps[a].dz << 8;
-    p->body2.z += sBosTmBodySpinSteps[a].dz2 << 8;
-    p->body3.z += sBosTmBodySpinSteps[a].dz3 << 8;
-    p->body4.z += sBosTmBodySpinSteps[a].dz4 << 8;
-    p->tm->z2 += sBosTmBodySpinSteps[a].dz2 << 8;
-    p->gfx3 = gUnk_09EF397C[sBosTmBodySpinSteps[a].gfx3Index];
-    p->gfx4 = gUnk_09EF3960[sBosTmBodySpinSteps[a].gfx4Index];
+    work->body.z += sBosTmBodySpinSteps[a].dz << 8;
+    work->body2.z += sBosTmBodySpinSteps[a].dz2 << 8;
+    work->body3.z += sBosTmBodySpinSteps[a].dz3 << 8;
+    work->body4.z += sBosTmBodySpinSteps[a].dz4 << 8;
+    work->tm->z2 += sBosTmBodySpinSteps[a].dz2 << 8;
+    work->gfx3 = gUnk_09EF397C[sBosTmBodySpinSteps[a].gfx3Index];
+    work->gfx4 = gUnk_09EF3960[sBosTmBodySpinSteps[a].gfx4Index];
 }
 
 s32 GetAbsoluteDifference(s32 a, s32 b) {
@@ -412,74 +412,74 @@ s32 GetAbsoluteDifference(s32 a, s32 b) {
     return 0;
 }
 
-void BosTmBodyChooseAction(TmBodyWork* p) {
+void BosTmBodyChooseAction(TmBodyWork* work) {
     s32 st;
     s32 next;
     u16 rnd;
 
-    if (p->tm->flags & TM_FLAG_SWITCHING_SIDES) {
-        p->tm->state = p->tm->resumeState;
+    if (work->tm->flags & TM_FLAG_SWITCHING_SIDES) {
+        work->tm->state = work->tm->resumeState;
         return;
     }
 
-    if (p->body2.hp < p->body2.maxHp / 2) {
-        st = p->tm->tableState;
+    if (work->body2.hp < work->body2.maxHp / 2) {
+        st = work->tm->tableState;
 
         if (st == 2) {
-            if (p->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
-                p->tm->state = 1;
-                p->tm->flags = p->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
-            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
+            if (work->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
+                work->tm->state = 1;
+                work->tm->flags = work->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
+            } else if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    p->tm->state = 9;
+                    work->tm->state = 9;
                 } else {
-                    p->tm->state = 1;
+                    work->tm->state = 1;
                 }
             } else {
-                p->tm->state = sBosTmActionChoices[GetRandom() % 4];
+                work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->state == 3) {
-                    p->tm->state = st;
+                if (work->tm->state == 3) {
+                    work->tm->state = st;
                 }
 
-                if (p->tm->state == 4) {
-                    p->tm->state = 1;
+                if (work->tm->state == 4) {
+                    work->tm->state = 1;
                 }
             }
         } else if (st == 0) {
-            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
+            if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    p->tm->state = 9;
+                    work->tm->state = 9;
                 } else {
-                    p->tm->state = 1;
+                    work->tm->state = 1;
                 }
             } else {
-                p->tm->state = sBosTmActionChoices[GetRandom() % 4];
+                work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->state == 4) {
-                    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        p->tm->state = 4;
-                        p->tm->resumeState = 4;
+                if (work->tm->state == 4) {
+                    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+                        work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
+                        work->tm->state = 4;
+                        work->tm->resumeState = 4;
                     } else {
-                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        p->tm->state = 6;
-                        p->tm->resumeState = 6;
+                        work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
+                        work->tm->state = 6;
+                        work->tm->resumeState = 6;
                     }
 
-                    next = p->tm->state;
+                    next = work->tm->state;
 
                     if (next == 3) {
                         rnd = GetRandom() % 100;
 
                         if (rnd <= 49) {
-                            p->tm->state = 11;
+                            work->tm->state = 11;
                         } else {
-                            p->tm->state = next;
+                            work->tm->state = next;
                         }
                     }
                 }
@@ -488,87 +488,87 @@ void BosTmBodyChooseAction(TmBodyWork* p) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
-                p->tm->state = 9;
+                work->tm->state = 9;
             } else {
-                p->tm->state = 10;
+                work->tm->state = 10;
             }
         }
 
-        st = p->tm->state;
+        st = work->tm->state;
 
         if (st == 1) {
             rnd = GetRandom() % 100;
 
             if (rnd <= 59) {
-                p->tm->state = st;
+                work->tm->state = st;
             } else {
-                p->tm->state = 10;
+                work->tm->state = 10;
             }
         }
     } else {
-        st = p->tm->tableState;
+        st = work->tm->tableState;
 
         if (st == 2) {
-            if (p->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
-                p->tm->state = 1;
-                p->tm->flags = p->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
-            } else if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
+            if (work->tm->flags & TM_FLAG_TABLE_JUST_RAISED) {
+                work->tm->state = 1;
+                work->tm->flags = work->tm->flags & ~TM_FLAG_TABLE_JUST_RAISED;
+            } else if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 20) {
-                    p->tm->state = 9;
+                    work->tm->state = 9;
                 } else {
-                    p->tm->state = 1;
+                    work->tm->state = 1;
                 }
             } else {
-                p->tm->state = sBosTmActionChoices[GetRandom() % 4];
+                work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->state == 3) {
-                    p->tm->state = st;
+                if (work->tm->state == 3) {
+                    work->tm->state = st;
                 }
 
-                if (p->tm->state == 4) {
-                    p->tm->state = 1;
+                if (work->tm->state == 4) {
+                    work->tm->state = 1;
                 }
             }
         } else if (st == 0) {
-            if (GetAbsoluteDifference(gBtlWork->actor->x, p->tm->baseX) <= 0x1DFF) {
+            if (GetAbsoluteDifference(gBtlWork->actor->x, work->tm->baseX) <= 0x1DFF) {
                 rnd = GetRandom() % 100;
 
                 if (rnd > 30) {
-                    p->tm->state = 9;
+                    work->tm->state = 9;
                 } else {
-                    p->tm->state = 1;
+                    work->tm->state = 1;
                 }
             } else {
-                p->tm->state = sBosTmActionChoices[GetRandom() % 4];
+                work->tm->state = sBosTmActionChoices[GetRandom() % 4];
 
-                if (p->tm->state == 4) {
-                    if (p->tm->flags & TM_FLAG_FACING_LEFT) {
-                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        p->tm->state = 4;
-                        p->tm->resumeState = 4;
+                if (work->tm->state == 4) {
+                    if (work->tm->flags & TM_FLAG_FACING_LEFT) {
+                        work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
+                        work->tm->state = 4;
+                        work->tm->resumeState = 4;
                     } else {
-                        p->tm->flags |= TM_FLAG_SWITCHING_SIDES;
-                        p->tm->state = 6;
-                        p->tm->resumeState = 6;
+                        work->tm->flags |= TM_FLAG_SWITCHING_SIDES;
+                        work->tm->state = 6;
+                        work->tm->resumeState = 6;
                     }
                 }
             }
         } else {
-            p->tm->state = 9;
+            work->tm->state = 9;
         }
     }
 }
 
-void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* b) {
+void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
     u16 t;
 
     if (a->hp <= 0) {
         return;
     }
 
-    if (b->tm->baseX < 0x8E00 || b->tm->baseX > 0x16F00) {
+    if (work->tm->baseX < 0x8E00 || work->tm->baseX > 0x16F00) {
         a->flags |= BTLOBJ_FLAG_INTANGIBLE;
     } else {
         a->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
@@ -576,66 +576,66 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* b) {
 
     switch (UpdateBtlObjReaction(a)) {
     case BTL_REACTION_CARD_ACTION:
-        BosTmBodyResetTimers(b);
-        BosTmBodyRollBossCard(b);
-        BosTmBodyChooseAction(b);
-        b->tm->flags &= ~TM_FLAG_HURT;
+        BosTmBodyResetTimers(work);
+        BosTmBodyRollBossCard(work);
+        BosTmBodyChooseAction(work);
+        work->tm->flags &= ~TM_FLAG_HURT;
         break;
     case BTL_REACTION_CARD_BROKEN:
-        b->tm->stateTimer = 0;
-        b->tm->state = 14;
+        work->tm->stateTimer = 0;
+        work->tm->state = 14;
         break;
     case BTL_REACTION_HURT:
     case BTL_REACTION_STUNNED:
     case BTL_REACTION_GRAVITY:
-        b->hp = a->hp;
-        b->tm->flags |= TM_FLAG_HURT;
-        b->tm->hitCount++;
+        work->hp = a->hp;
+        work->tm->flags |= TM_FLAG_HURT;
+        work->tm->hitCount++;
 
-        if (b->prevHp - b->hp >= 9999) {
-            b->tm->hurtTimer = 55;
-            b->tm->state = 12;
-            b->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
-        } else if (b->tm->state != 12) {
-            b->tm->hurtTimer = 20;
-            b->tm->flags |= TM_FLAG_HURT_NO_RECOIL;
+        if (work->prevHp - work->hp >= 9999) {
+            work->tm->hurtTimer = 55;
+            work->tm->state = 12;
+            work->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
+        } else if (work->tm->state != 12) {
+            work->tm->hurtTimer = 20;
+            work->tm->flags |= TM_FLAG_HURT_NO_RECOIL;
         }
 
         break;
     case BTL_REACTION_DEFEATED:
     case BTL_REACTION_GRAVITY_DEFEATED:
         BeginBossDefeat(a);
-        b->tm->step = 0;
-        b->tm->state = 13;
+        work->tm->step = 0;
+        work->tm->state = 13;
         break;
     }
 
-    if (b->tm->flags & TM_FLAG_HURT) {
-        b->tm->hurtTimer--;
+    if (work->tm->flags & TM_FLAG_HURT) {
+        work->tm->hurtTimer--;
 
-        if (b->tm->hurtTimer <= 0) {
-            b->tm->hitCount = 0;
-            b->tm->flags &= ~TM_FLAG_HURT;
+        if (work->tm->hurtTimer <= 0) {
+            work->tm->hitCount = 0;
+            work->tm->flags &= ~TM_FLAG_HURT;
             ClearBtlObjActionFlags(a);
 
-            if (b->tm->flags & TM_FLAG_HURT_NO_RECOIL) {
-                b->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
+            if (work->tm->flags & TM_FLAG_HURT_NO_RECOIL) {
+                work->tm->flags &= ~TM_FLAG_HURT_NO_RECOIL;
             } else {
-                BosTmBodyResetTimers(b);
-                t = b->tm->flags & TM_FLAG_SWITCHING_SIDES;
+                BosTmBodyResetTimers(work);
+                t = work->tm->flags & TM_FLAG_SWITCHING_SIDES;
 
                 if (t) {
-                    BosTmBodySetWalkPose(b);
-                    b->tm->state = 8;
+                    BosTmBodySetWalkPose(work);
+                    work->tm->state = 8;
                 } else {
-                    BosTmBodyResetPose(b);
-                    b->tm->state = 0;
+                    BosTmBodyResetPose(work);
+                    work->tm->state = 0;
                 }
             }
         }
     }
 
-    b->prevHp = a->hp;
+    work->prevHp = a->hp;
 }
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {

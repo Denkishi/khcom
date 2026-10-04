@@ -30,18 +30,18 @@
 #include <stddef.h>
 
 void DrawRikuCpCost(u8 a);
-void ShowRikuDeckCardPreview(RikuDeckMenuWork* w);
-u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a);
-s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* w);
-u8 CheckRikuDeckCpCost(RikuDeckMenuWork* w);
-u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* w);
-DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* w);
-u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a);
-void ClearRikuCardGrid(RikuDeckMenuWork* w);
-void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w);
-void FreeRikuCollectionEntries(RikuDeckMenuWork* w);
-void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind);
-void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode);
+void ShowRikuDeckCardPreview(RikuDeckMenuWork* work);
+u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a);
+s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* work);
+u8 CheckRikuDeckCpCost(RikuDeckMenuWork* work);
+u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* work);
+DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work);
+u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a);
+void ClearRikuCardGrid(RikuDeckMenuWork* work);
+void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* work);
+void FreeRikuCollectionEntries(RikuDeckMenuWork* work);
+void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind);
+void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 mode);
 u16 CountCollectionCards();
 u16 CountCardsInDecks();
 u8 GetActiveDeckIndex();
@@ -66,10 +66,10 @@ const s16 gRikuDeckValueGridY[5] = { 80, 88, 96, 104, 112 };
 
 static const u16 sUnk_09041EEE[4] = { 45, 93, 141, 30 };
 
-static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
+static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     u16 v;
 
-    w->resultOut = a;
+    work->resultOut = a;
     SetBgMode0();
     SetBackdropColor(0, 0, 0);
     SetupBg(0, 0, 31, 0);
@@ -89,105 +89,105 @@ static void Deckmenu2_0(RikuDeckMenuWork* w, void* a) {
     SetBgPriority(1, 1);
     SetBgPriority(2, 2);
     FadeStartIn(FADE_MODE_BLACK, 16);
-    ListPoolInit(&w->pool);
-    TaskPoolInit(&w->taskpool, 99);
-    TaskPoolInit(&w->cardpool, 1);
-    w->deckIndex = GetActiveDeckIndex();
-    CreateRikuDeckGridCards(w, 0);
-    w->tiles = AllocObjTiles(0x120, NULL);
-    SetObjTileSource(w->tiles, gUnk_090A4664);
-    AnimInit(&w->anim2, gUnk_09EEB03C, gUnk_09EEB008);
-    AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim2);
-    w->x = sRikuDeckTabPointerX[0] << 8;
-    w->y = sRikuDeckTabPointerY[0] << 8;
-    w->handFlags = 0;
-    w->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
-    w->palette = LoadObjPalette(gUnk_09614418, 32);
-    w->handVisible = 0;
-    w->tiles2 = AllocObjTiles(0x280, NULL);
-    SetRikuDeckMenuFrameCursor(w, 0);
-    w->palette4 = LoadObjPalette(gUnk_09614438, 32);
-    w->tiles10 = NULL;
-    w->tiles7 = NULL;
-    w->tiles8 = NULL;
-    w->tiles9 = NULL;
-    w->palette5 = NULL;
-    w->palette6 = NULL;
-    w->tiles3 = NULL;
-    w->palette2 = NULL;
-    w->cursorCol = 0;
-    w->cursorRow = 0;
-    w->prevCursorCol = 0;
-    w->prevCursorRow = 0;
-    w->timer = 4;
-    w->unk_500 = 0;
-    w->cursorCard = NULL;
-    w->prevCursorCard = NULL;
-    w->unk_4FF = 0;
-    w->view = 0;
-    w->deckAttackCount = CountActiveDeckCardsOfCategory(0);
-    w->deckMagicCount = CountActiveDeckCardsOfCategory(1);
-    w->deckItemCount = CountActiveDeckCardsOfCategory(2);
-    w->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
-    w->unk_4F9 = 0;
-    w->entryCount = 0;
-    w->entries = NULL;
-    w->popupActive = 0;
-    w->exitRequested = 0;
-    w->barSlideTimer = 16;
-    w->bannerSlideTimer = 16;
-    w->x5 = 0x7800;
-    w->y5 = -0x800;
-    w->x6 = 0xA400;
-    w->y6 = 0xA000;
-    w->x7 = -0x8000;
-    w->holding = 0;
+    ListPoolInit(&work->pool);
+    TaskPoolInit(&work->taskpool, 99);
+    TaskPoolInit(&work->cardpool, 1);
+    work->deckIndex = GetActiveDeckIndex();
+    CreateRikuDeckGridCards(work, 0);
+    work->tiles = AllocObjTiles(0x120, NULL);
+    SetObjTileSource(work->tiles, gUnk_090A4664);
+    AnimInit(&work->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim2);
+    work->x = sRikuDeckTabPointerX[0] << 8;
+    work->y = sRikuDeckTabPointerY[0] << 8;
+    work->handFlags = 0;
+    work->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
+    work->palette = LoadObjPalette(gUnk_09614418, 32);
+    work->handVisible = 0;
+    work->tiles2 = AllocObjTiles(0x280, NULL);
+    SetRikuDeckMenuFrameCursor(work, 0);
+    work->palette4 = LoadObjPalette(gUnk_09614438, 32);
+    work->tiles10 = NULL;
+    work->tiles7 = NULL;
+    work->tiles8 = NULL;
+    work->tiles9 = NULL;
+    work->palette5 = NULL;
+    work->palette6 = NULL;
+    work->tiles3 = NULL;
+    work->palette2 = NULL;
+    work->cursorCol = 0;
+    work->cursorRow = 0;
+    work->prevCursorCol = 0;
+    work->prevCursorRow = 0;
+    work->timer = 4;
+    work->unk_500 = 0;
+    work->cursorCard = NULL;
+    work->prevCursorCard = NULL;
+    work->unk_4FF = 0;
+    work->view = 0;
+    work->deckAttackCount = CountActiveDeckCardsOfCategory(0);
+    work->deckMagicCount = CountActiveDeckCardsOfCategory(1);
+    work->deckItemCount = CountActiveDeckCardsOfCategory(2);
+    work->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
+    work->unk_4F9 = 0;
+    work->entryCount = 0;
+    work->entries = NULL;
+    work->popupActive = 0;
+    work->exitRequested = 0;
+    work->barSlideTimer = 16;
+    work->bannerSlideTimer = 16;
+    work->x5 = 0x7800;
+    work->y5 = -0x800;
+    work->x6 = 0xA400;
+    work->y6 = 0xA000;
+    work->x7 = -0x8000;
+    work->holding = 0;
 #ifdef VERSION_EU
-    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+    work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
-    w->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
-    w->palette3 = LoadObjPalette(gUnk_096144F8, 32);
-    w->unk_4BC = 79;
-    v = sUnk_09041EEE[w->deckIndex];
-    w->unk_4BE = v;
-    w->unk_4C0 = 225;
-    v = sUnk_09041EEE[w->deckIndex];
-    w->unk_4C2 = v;
-    w->unk_503 = 0;
-    w->inputDelay = 0;
-    w->textSlotCount = 0;
-    w->textSlotCount2 = 0;
-    w->textSlotCount3 = 0;
-    w->textSlotCount4 = 0;
-    w->result = 0;
-    InitTextSlots(w->textSlots, 8);
-    InitTextSlots(w->textSlots2, 8);
-    InitTextSlots(w->textSlots3, 8);
-    InitTextSlots(w->textSlots4, 30);
-    InitTextSlots(w->textSlots5, 60);
-    w->descriptionX = 94;
-    w->descriptionY = 126;
-    w->previewShown = 0;
+    work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+    work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+    work->unk_4BC = 79;
+    v = sUnk_09041EEE[work->deckIndex];
+    work->unk_4BE = v;
+    work->unk_4C0 = 225;
+    v = sUnk_09041EEE[work->deckIndex];
+    work->unk_4C2 = v;
+    work->unk_503 = 0;
+    work->inputDelay = 0;
+    work->textSlotCount = 0;
+    work->textSlotCount2 = 0;
+    work->textSlotCount3 = 0;
+    work->textSlotCount4 = 0;
+    work->result = 0;
+    InitTextSlots(work->textSlots, 8);
+    InitTextSlots(work->textSlots2, 8);
+    InitTextSlots(work->textSlots3, 8);
+    InitTextSlots(work->textSlots4, 30);
+    InitTextSlots(work->textSlots5, 60);
+    work->descriptionX = 94;
+    work->descriptionY = 126;
+    work->previewShown = 0;
 }
 
-void DrawRikuCardDescription(RikuDeckMenuWork* w) {
-    DrawTextSlots(w->descriptionX, w->descriptionY, w->textSlots5,
-                  w->palette, 20, w->textSlotCount5);
+void DrawRikuCardDescription(RikuDeckMenuWork* work) {
+    DrawTextSlots(work->descriptionX, work->descriptionY, work->textSlots5,
+                  work->palette, 20, work->textSlotCount5);
 }
 
-void LoadRikuCardDescriptionText(RikuDeckMenuWork* w, u16 card) {
+void LoadRikuCardDescriptionText(RikuDeckMenuWork* work, u16 card) {
     const CardDef* d;
     void* s;
 
     d = &gCardDefs[card];
     s = gCardKindDescriptions[d->kind];
-    w->textSlotCount5 = LoadTextSlots(LANGSTR(s), w->textSlots5);
+    work->textSlotCount5 = LoadTextSlots(LANGSTR(s), work->textSlots5);
 }
 
-u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
     LoadBgTiles(3, gUnk_09402F78, 0x5400);
 
@@ -226,7 +226,7 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
     u8* base;
     u16* pal;
 
@@ -242,54 +242,54 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
     LoadBgMap(0, gUnk_09516AB8 + 0x400, 0x800);
     LoadBgMap(1, gUnk_0951B2B8 + 0x400, 0x800);
 #endif
-    DrawRikuDeckCategoryCount(w->deckAttackCount, 0);
-    DrawRikuDeckCategoryCount(w->deckMagicCount, 1);
-    DrawRikuDeckCategoryCount(w->deckItemCount, 2);
-    DrawRikuDeckCategoryCount(w->deckEnemyCount, 3);
+    DrawRikuDeckCategoryCount(work->deckAttackCount, 0);
+    DrawRikuDeckCategoryCount(work->deckMagicCount, 1);
+    DrawRikuDeckCategoryCount(work->deckItemCount, 2);
+    DrawRikuDeckCategoryCount(work->deckEnemyCount, 3);
     DrawRikuDeckCardCount(0);
     DrawRikuCardTotals();
-    w->x2 = 0x4800;
-    w->y2 = 0x2800;
-    w->cursorRow = w->deckIndex;
-    ApproachValue(&w->x, sRikuDeckTabPointerX[w->cursorCol] << 8, w->timer);
-    ApproachValue(&w->y, sRikuDeckTabPointerY[w->cursorRow] << 8, w->timer);
-    w->view = 1;
-    SetRikuDeckMenuHandAnim(w);
-    LoadRikuDeckNameTexts(w);
-    w->step = 0;
-    w->timer = 16;
+    work->x2 = 0x4800;
+    work->y2 = 0x2800;
+    work->cursorRow = work->deckIndex;
+    ApproachValue(&work->x, sRikuDeckTabPointerX[work->cursorCol] << 8, work->timer);
+    ApproachValue(&work->y, sRikuDeckTabPointerY[work->cursorRow] << 8, work->timer);
+    work->view = 1;
+    SetRikuDeckMenuHandAnim(work);
+    LoadRikuDeckNameTexts(work);
+    work->step = 0;
+    work->timer = 16;
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuSlideIn);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* a) {
     u8 n;
 
     if (!FadeIsActive()) {
-        switch (w->step) {
+        switch (work->step) {
         case 0:
-            ApproachValue(&w->y5, 0, w->timer);
-            ApproachValue(&w->y6, 0x9800, w->timer);
-            w->timer--;
+            ApproachValue(&work->y5, 0, work->timer);
+            ApproachValue(&work->y6, 0x9800, work->timer);
+            work->timer--;
 
-            if (w->timer == 0) {
-                w->timer = 16;
-                w->step++;
+            if (work->timer == 0) {
+                work->timer = 16;
+                work->step++;
             }
 
             break;
         case 1:
-            ApproachValue(&w->x7, 0, w->timer);
-            n = --w->timer;
+            ApproachValue(&work->x7, 0, work->timer);
+            n = --work->timer;
 
             if (n == 0) {
                 LoadBgMap(3, gUnk_095162B8, 0x800);
-                ReleaseObjTiles(w->tiles12);
-                w->tiles12 = NULL;
-                ReleaseObjTiles(w->tiles6);
-                w->tiles6 = NULL;
-                ReleaseObjPalette(w->palette3);
-                w->palette3 = NULL;
+                ReleaseObjTiles(work->tiles12);
+                work->tiles12 = NULL;
+                ReleaseObjTiles(work->tiles6);
+                work->tiles6 = NULL;
+                ReleaseObjPalette(work->palette3);
+                work->palette3 = NULL;
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuEnterDeckGrid);
             }
 
@@ -300,190 +300,190 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* w, void* a) {
     return 1;
 }
 
-u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* w, void* a) {
-    w->x = gDeckGridColumnX[w->cursorCol] << 8;
-    w->y = gDeckGridRowY[w->cursorRow] << 8;
-    w->view = 0;
-    SetRikuDeckMenuHandAnim(w);
-    ShowRikuDeckCardPreview(w);
-    w->handVisible = 1;
+u8 UpdateRikuDeckMenuEnterDeckGrid(RikuDeckMenuWork* work, void* a) {
+    work->x = gDeckGridColumnX[work->cursorCol] << 8;
+    work->y = gDeckGridRowY[work->cursorRow] << 8;
+    work->view = 0;
+    SetRikuDeckMenuHandAnim(work);
+    ShowRikuDeckCardPreview(work);
+    work->handVisible = 1;
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuDeckGrid);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a) {
     u16 x;
 
-    w->gfx = AnimUpdate(&w->anim2);
-    w->gfx2 = AnimUpdate(&w->anim3);
+    work->gfx = AnimUpdate(&work->anim2);
+    work->gfx2 = AnimUpdate(&work->anim3);
 
     if (FadeIsActive()) {
-        TaskPoolUpdate(&w->taskpool);
+        TaskPoolUpdate(&work->taskpool);
         return 1;
     }
 
-    if (w->popupActive != 0) {
-        ApproachValue(&w->x, gDeckGridColumnX[w->cursorCol] << 8, w->timer);
-        ApproachValue(&w->y, gDeckGridRowY[w->cursorRow] << 8, w->timer);
+    if (work->popupActive != 0) {
+        ApproachValue(&work->x, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
+        ApproachValue(&work->y, gDeckGridRowY[work->cursorRow] << 8, work->timer);
 
-        if (w->timer != 0) {
-            w->timer--;
+        if (work->timer != 0) {
+            work->timer--;
         }
 
-        TaskPoolUpdate(&w->taskpool);
-        TaskPoolUpdate(&w->cardpool);
+        TaskPoolUpdate(&work->taskpool);
+        TaskPoolUpdate(&work->cardpool);
 
         if (GetKeysPressed() & START_BUTTON) {
-            w->exitRequested = 1;
+            work->exitRequested = 1;
         }
 
-        w->inputDelay = 4;
+        work->inputDelay = 4;
         return 1;
     }
 
-    if (w->inputDelay > 0) {
-        TaskPoolUpdate(&w->taskpool);
-        TaskPoolUpdate(&w->cardpool);
-        w->inputDelay--;
+    if (work->inputDelay > 0) {
+        TaskPoolUpdate(&work->taskpool);
+        TaskPoolUpdate(&work->cardpool);
+        work->inputDelay--;
         return 1;
     }
 
-    if (w->exitRequested) {
-        if (CheckRikuDeckCpCost(w) && CheckRikuDeckHasAttackCard(w)) {
+    if (work->exitRequested) {
+        if (CheckRikuDeckCpCost(work) && CheckRikuDeckHasAttackCard(work)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
             return 1;
         }
 
-        w->exitRequested = 0;
+        work->exitRequested = 0;
     }
 
     switch (GetKeysRepeat()) {
     case DPAD_UP:
-        if (w->cursorRow > 0) {
-            (w->cursorRow)--;
-            w->timer = 4;
+        if (work->cursorRow > 0) {
+            (work->cursorRow)--;
+            work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         } else {
-            ScrollRikuGridUp(w);
+            ScrollRikuGridUp(work);
         }
 
-        ShowRikuDeckCardPreview(w);
+        ShowRikuDeckCardPreview(work);
         break;
     case DPAD_DOWN:
-        if (w->cursorRow <= 2) {
-            (w->cursorRow)++;
-            w->timer = 4;
+        if (work->cursorRow <= 2) {
+            (work->cursorRow)++;
+            work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         } else {
-            ScrollRikuGridDown(w);
+            ScrollRikuGridDown(work);
 
-            if (w->holding != 0) {
-                if ((u16)w->heldRow <= 3) {
-                    w->y3 = gDeckGridRowY[w->heldRow] << 8;
+            if (work->holding != 0) {
+                if ((u16)work->heldRow <= 3) {
+                    work->y3 = gDeckGridRowY[work->heldRow] << 8;
                 } else {
-                    w->y3 = 0xFFFF0000;
+                    work->y3 = 0xFFFF0000;
                 }
             }
         }
 
-        ShowRikuDeckCardPreview(w);
+        ShowRikuDeckCardPreview(work);
         break;
     case DPAD_LEFT:
-        if (w->cursorCol > 0) {
-            (w->cursorCol)--;
-            w->timer = 4;
+        if (work->cursorCol > 0) {
+            (work->cursorCol)--;
+            work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
 
-        ShowRikuDeckCardPreview(w);
+        ShowRikuDeckCardPreview(work);
         break;
     case DPAD_RIGHT:
-        if (w->cursorCol <= 1) {
-            (w->cursorCol)++;
-            w->timer = 4;
+        if (work->cursorCol <= 1) {
+            (work->cursorCol)++;
+            work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
         }
 
-        ShowRikuDeckCardPreview(w);
+        ShowRikuDeckCardPreview(work);
         break;
     case START_BUTTON:
-        w->result = 7;
+        work->result = 7;
         m4aSongNumStart(SONG_SYS_CANSEL);
         FadeStartOut(FADE_MODE_BLACK, 4);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
         return 1;
     case B_BUTTON:
-        w->result = 8;
+        work->result = 8;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuStartSlideOut);
         return 1;
     }
 
-    w->cursorCard = GetRikuCardAtCursor(w);
-    ApproachValue(&w->x, gDeckGridColumnX[w->cursorCol] << 8, w->timer);
-    ApproachValue(&w->y, gDeckGridRowY[w->cursorRow] << 8, w->timer);
+    work->cursorCard = GetRikuCardAtCursor(work);
+    ApproachValue(&work->x, gDeckGridColumnX[work->cursorCol] << 8, work->timer);
+    ApproachValue(&work->y, gDeckGridRowY[work->cursorRow] << 8, work->timer);
 
-    if (w->timer != 0) {
-        w->timer--;
+    if (work->timer != 0) {
+        work->timer--;
     }
 
-    w->prevCursorCard = w->cursorCard;
-    x = w->cursorCol;
-    w->prevCursorCol = x;
-    x = w->cursorRow;
-    w->prevCursorRow = x;
-    TaskPoolUpdate(&w->taskpool);
-    TaskPoolUpdate(&w->cardpool);
+    work->prevCursorCard = work->cursorCard;
+    x = work->cursorCol;
+    work->prevCursorCol = x;
+    x = work->cursorRow;
+    work->prevCursorRow = x;
+    TaskPoolUpdate(&work->taskpool);
+    TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* w) {
+s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* work) {
     if (!FadeIsActive()) {
         return 0;
     }
 
-    TaskPoolUpdate(&w->taskpool);
-    TaskPoolUpdate(&w->cardpool);
+    TaskPoolUpdate(&work->taskpool);
+    TaskPoolUpdate(&work->cardpool);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
-    w->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    w->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+    work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
-    w->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
-    w->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+    work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+    work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
     LoadBgMap(3, gUnk_0951B2B8, 0x800);
-    w->x5 = 0x7800;
-    w->y5 = 0;
-    w->x6 = 0xA400;
-    w->y6 = 0x9800;
-    w->x7 = 0;
-    w->barSlideTimer = 16;
-    w->bannerSlideTimer = 16;
-    w->handVisible = 0;
+    work->x5 = 0x7800;
+    work->y5 = 0;
+    work->x6 = 0xA400;
+    work->y6 = 0x9800;
+    work->x7 = 0;
+    work->barSlideTimer = 16;
+    work->bannerSlideTimer = 16;
+    work->handVisible = 0;
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuSlideOut);
     return 1;
 }
 
-u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* w, void* a) {
+u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* a) {
     u8* p;
 
-    p = &w->bannerSlideTimer;
+    p = &work->bannerSlideTimer;
 
     if ((s8)*p > 0) {
-        ApproachValue(&w->x7, -0x8000, (s8)*p);
+        ApproachValue(&work->x7, -0x8000, (s8)*p);
         (*p)--;
     } else {
-        p = &w->barSlideTimer;
+        p = &work->barSlideTimer;
 
         if ((s8)*p > 0) {
-            ApproachValue(&w->y5, -0x800, (s8)*p);
-            ApproachValue(&w->y6, 0xA000, (s8)*p);
+            ApproachValue(&work->y5, -0x800, (s8)*p);
+            ApproachValue(&work->y6, 0xA000, (s8)*p);
             (*p)--;
         } else {
             FadeStartOut(FADE_MODE_BLACK, 4);
@@ -494,120 +494,120 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* w, void* a) {
     return 1;
 }
 
-static void Deckmenu2_2(RikuDeckMenuWork* w) {
-    if (w->tiles12 != NULL) {
+static void Deckmenu2_2(RikuDeckMenuWork* work) {
+    if (work->tiles12 != NULL) {
 #ifdef VERSION_EU
-        DrawSprite(w->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], w->tiles12, w->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
 #elif defined(VERSION_JP)
-        DrawSprite(w->x7 >> 8, 0, gUnk_09EEAFF0, w->tiles12, w->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF0, work->tiles12, work->palette3, NULL, 0, 10);
 #else
-        DrawSprite(w->x7 >> 8, 0, gUnk_09EEAFF8, w->tiles12, w->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF8, work->tiles12, work->palette3, NULL, 0, 10);
 #endif
     }
 
-    if (w->tiles6 != NULL) {
-        DrawSprite(w->x5 >> 8, w->y5 >> 8, gUnk_09EEB080[0], w->tiles6,
-                   w->palette3, NULL, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(w->x6 >> 8, w->y6 >> 8, gUnk_09EEB080[1], w->tiles6,
-                   w->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+    if (work->tiles6 != NULL) {
+        DrawSprite(work->x5 >> 8, work->y5 >> 8, gUnk_09EEB080[0], work->tiles6,
+                   work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(work->x6 >> 8, work->y6 >> 8, gUnk_09EEB080[1], work->tiles6,
+                   work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
-    if (w->handVisible) {
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx,
-                   w->tiles, w->palette, NULL, w->handFlags, 3);
-        DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2,
-                   w->tiles2, w->palette4, NULL, 0, 8);
+    if (work->handVisible) {
+        DrawSprite((work->x >> 8) - 16, (work->y >> 8) - 30, work->gfx,
+                   work->tiles, work->palette, NULL, work->handFlags, 3);
+        DrawSprite((work->x >> 8) - 16, (work->y >> 8) - 20, work->gfx2,
+                   work->tiles2, work->palette4, NULL, 0, 8);
     }
 
-    DrawSprite(w->x2 >> 8, w->y2 >> 8, gUnk_09EEB000, w->tiles4,
-               w->palette, NULL, SPRITE_PRIORITY(2), 10);
+    DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000, work->tiles4,
+               work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
-    if (w->tiles7 != NULL) {
-        DrawSprite(168, 86, w->gfx4, w->tiles7, w->palette5, NULL, 0, 20);
+    if (work->tiles7 != NULL) {
+        DrawSprite(168, 86, work->gfx4, work->tiles7, work->palette5, NULL, 0, 20);
     }
 
-    if (w->tiles8 != NULL) {
-        DrawSprite(168, 86, w->gfx5, w->tiles8, w->palette6, NULL, 0, 21);
+    if (work->tiles8 != NULL) {
+        DrawSprite(168, 86, work->gfx5, work->tiles8, work->palette6, NULL, 0, 21);
     }
 
-    if (w->tiles9 != NULL) {
-        DrawSprite(168, 86, w->gfx6, w->tiles9, w->palette5, NULL, 0, 19);
+    if (work->tiles9 != NULL) {
+        DrawSprite(168, 86, work->gfx6, work->tiles9, work->palette5, NULL, 0, 19);
     }
 
-    if (w->previewShown) {
-        if (w->textSlotCount4 != 0) {
-            DrawTextSlots(100, 112, w->textSlots4, w->palette4, 20, w->textSlotCount4);
+    if (work->previewShown) {
+        if (work->textSlotCount4 != 0) {
+            DrawTextSlots(100, 112, work->textSlots4, work->palette4, 20, work->textSlotCount4);
         }
 
-        DrawRikuCardDescription(w);
+        DrawRikuCardDescription(work);
     }
 
-    TaskPoolDraw(&w->taskpool);
-    TaskPoolDraw(&w->cardpool);
+    TaskPoolDraw(&work->taskpool);
+    TaskPoolDraw(&work->cardpool);
 }
 
-static void Deckmenu2_3(RikuDeckMenuWork* w) {
-    ClearRikuCardGrid(w);
-    ReleaseObjTiles(w->tiles);
-    ReleaseObjTiles(w->tiles2);
-    ReleaseObjTiles(w->tiles4);
-    ReleaseObjPalette(w->palette);
-    ReleaseRikuCommandMenuGfx(w);
+static void Deckmenu2_3(RikuDeckMenuWork* work) {
+    ClearRikuCardGrid(work);
+    ReleaseObjTiles(work->tiles);
+    ReleaseObjTiles(work->tiles2);
+    ReleaseObjTiles(work->tiles4);
+    ReleaseObjPalette(work->palette);
+    ReleaseRikuCommandMenuGfx(work);
 
-    if (w->tiles12 != NULL) {
-        ReleaseObjTiles(w->tiles12);
+    if (work->tiles12 != NULL) {
+        ReleaseObjTiles(work->tiles12);
     }
 
-    if (w->tiles6 != NULL) {
-        ReleaseObjTiles(w->tiles6);
+    if (work->tiles6 != NULL) {
+        ReleaseObjTiles(work->tiles6);
     }
 
-    if (w->palette3 != NULL) {
-        ReleaseObjPalette(w->palette3);
+    if (work->palette3 != NULL) {
+        ReleaseObjPalette(work->palette3);
     }
 
-    FreeTextSlots(w->textSlots, 8);
-    FreeTextSlots(w->textSlots2, 8);
-    FreeTextSlots(w->textSlots3, 8);
-    FreeTextSlots(w->textSlots4, 30);
-    FreeTextSlots(w->textSlots5, 60);
-    ReleaseObjPalette(w->palette4);
-    TaskPoolDestroy(&w->taskpool);
-    TaskPoolDestroy(&w->cardpool);
-    FreeRikuCollectionEntries(w);
-    *w->resultOut = w->result;
+    FreeTextSlots(work->textSlots, 8);
+    FreeTextSlots(work->textSlots2, 8);
+    FreeTextSlots(work->textSlots3, 8);
+    FreeTextSlots(work->textSlots4, 30);
+    FreeTextSlots(work->textSlots5, 60);
+    ReleaseObjPalette(work->palette4);
+    TaskPoolDestroy(&work->taskpool);
+    TaskPoolDestroy(&work->cardpool);
+    FreeRikuCollectionEntries(work);
+    *work->resultOut = work->result;
 }
 
-void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind) {
+void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
     DeckCard2Args args;
     u16* cards;
     u8 i;
     s8 x;
     s8 y;
 
-    cards = GetDeck(w->deckIndex)->cards;
+    cards = GetDeck(work->deckIndex)->cards;
     x = 0;
     y = 0;
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != 0xFFFF) {
             if (kind == 0) {
-                args.pool = &w->pool;
+                args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
                 args.col = x;
                 args.row = y;
                 args.panel = 0;
                 args.slot = &cards[i];
-                TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
+                TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
             } else if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == kind - 1) {
-                args.pool = &w->pool;
+                args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
                 args.col = x;
                 args.row = y;
                 args.panel = 0;
                 args.slot = &cards[i];
-                TaskCreate(&w->taskpool, &gTaskDescDeckCard2, &args);
+                TaskCreate(&work->taskpool, &gTaskDescDeckCard2, &args);
                 x++;
             }
 
@@ -618,30 +618,30 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* w, u8 kind) {
         }
     }
 
-    w->x2 = 0x4800;
-    w->y2 = 0x2800;
-    w->scrollRowEnd = 4;
+    work->x2 = 0x4800;
+    work->y2 = 0x2800;
+    work->scrollRowEnd = 4;
 }
 
-void ClearRikuCardGrid(RikuDeckMenuWork* w) {
+void ClearRikuCardGrid(RikuDeckMenuWork* work) {
     DeckCard2Work* node;
 
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
         node->done = 1;
         node = ListPoolNext(&node->node);
     }
 
-    TaskPoolUpdate(&w->taskpool);
+    TaskPoolUpdate(&work->taskpool);
 }
 
-void ScrollRikuGridDown(RikuDeckMenuWork* w) {
+void ScrollRikuGridDown(RikuDeckMenuWork* work) {
     DeckCard2Work* node;
 
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
-    if ((s8)w->scrollRowEnd == 33) {
+    if ((s8)work->scrollRowEnd == 33) {
         return;
     }
 
@@ -657,28 +657,28 @@ void ScrollRikuGridDown(RikuDeckMenuWork* w) {
     }
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    w->scrollRowEnd++;
-    w->y2 += 0x300;
+    work->scrollRowEnd++;
+    work->y2 += 0x300;
 
-    if (w->y2 > 0x7C00) {
-        w->y2 = 0x7C00;
+    if (work->y2 > 0x7C00) {
+        work->y2 = 0x7C00;
     }
 
-    if (w->holding != 0) {
-        w->heldRow--;
+    if (work->holding != 0) {
+        work->heldRow--;
     }
 }
 
-u8 ScrollRikuGridUp(RikuDeckMenuWork* w) {
+u8 ScrollRikuGridUp(RikuDeckMenuWork* work) {
     DeckCard2Work* node;
 
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
     if (node == NULL) {
-        w->y2 -= 0x300;
+        work->y2 -= 0x300;
 
-        if (w->y2 < 0x2800) {
-            w->y2 = 0x2800;
+        if (work->y2 < 0x2800) {
+            work->y2 = 0x2800;
             return 0;
         }
 
@@ -701,24 +701,24 @@ u8 ScrollRikuGridUp(RikuDeckMenuWork* w) {
     } while (node != NULL);
 
     m4aSongNumStart(SONG_SYS_CLICKI04B);
-    w->scrollRowEnd--;
-    w->y2 -= 0x300;
+    work->scrollRowEnd--;
+    work->y2 -= 0x300;
 
-    if (w->y2 < 0x2800) {
-        w->y2 = 0x2800;
+    if (work->y2 < 0x2800) {
+        work->y2 = 0x2800;
     }
 
     return 1;
 }
 
-DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* w) {
+DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work) {
     DeckCard2Work* node;
 
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        if (w->cursorCol == node->args.col &&
-            w->cursorRow == node->args.row) {
+        if (work->cursorCol == node->args.col &&
+            work->cursorRow == node->args.row) {
             return node;
         }
 
@@ -739,10 +739,10 @@ void DrawRikuDeckCategoryCount(u8 a, u8 b) {
     RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
 }
 
-void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* w) {
+void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
     u16 t;
 
-    switch (w->view) {
+    switch (work->view) {
     case 0:
     case 2:
     case 4:
@@ -753,14 +753,14 @@ void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* w) {
     case 9:
     case 10:
     case 11:
-        AnimStart(&w->anim2, 0, ANIM_FLAG_LOOP);
-        w->handFlags &= ~SPRITE_FLAG_HFLIP;
+        AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
+        work->handFlags &= ~SPRITE_FLAG_HFLIP;
         break;
     case 1:
     case 3:
-        AnimStart(&w->anim2, 2, ANIM_FLAG_LOOP);
-        t = w->handFlags | SPRITE_FLAG_HFLIP;
-        w->handFlags = t;
+        AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
+        t = work->handFlags | SPRITE_FLAG_HFLIP;
+        work->handFlags = t;
         break;
     }
 }
@@ -827,78 +827,78 @@ void DrawRikuCardTotals() {
     RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], base + 0x340, 32);
 }
 
-void LoadRikuDeckNameTexts(RikuDeckMenuWork* w) {
-    FreeTextSlots(w->textSlots, 8);
-    FreeTextSlots(w->textSlots2, 8);
-    FreeTextSlots(w->textSlots3, 8);
-    w->textSlotCount = LoadTextSlots(GetDeckName(0), w->textSlots);
-    w->textSlotCount2 = LoadTextSlots(GetDeckName(1), w->textSlots2);
-    w->textSlotCount3 = LoadTextSlots(GetDeckName(2), w->textSlots3);
+void LoadRikuDeckNameTexts(RikuDeckMenuWork* work) {
+    FreeTextSlots(work->textSlots, 8);
+    FreeTextSlots(work->textSlots2, 8);
+    FreeTextSlots(work->textSlots3, 8);
+    work->textSlotCount = LoadTextSlots(GetDeckName(0), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetDeckName(1), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(GetDeckName(2), work->textSlots3);
 }
 
-void LoadRikuCardNameText(RikuDeckMenuWork* w, s32 id) {
+void LoadRikuCardNameText(RikuDeckMenuWork* work, s32 id) {
     const CardDef* def;
 
     def = &gCardDefs[id];
 #ifdef VERSION_EU
-    w->textSlotCount4 = LoadTextSlots(eu_0805E924(def->name), w->textSlots4);
+    work->textSlotCount4 = LoadTextSlots(eu_0805E924(def->name), work->textSlots4);
 #else
-    w->textSlotCount4 = LoadTextSlots(def->name, w->textSlots4);
+    work->textSlotCount4 = LoadTextSlots(def->name, work->textSlots4);
 #endif
 
     switch (def->category) {
     case 0:
         LoadPalette(gUnk_09614458,
-                    (void*)(w->palette4->index * 32 +
+                    (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
-                    w->palette4->count << 5);
+                    work->palette4->count << 5);
         break;
     case 1:
         LoadPalette(gUnk_09614478,
-                    (void*)(w->palette4->index * 32 +
+                    (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
-                    w->palette4->count << 5);
+                    work->palette4->count << 5);
         break;
     case 2:
         LoadPalette(gUnk_09614498,
-                    (void*)(w->palette4->index * 32 +
+                    (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
-                    w->palette4->count << 5);
+                    work->palette4->count << 5);
         break;
     case 3:
         LoadPalette(gUnk_096144B8,
-                    (void*)(w->palette4->index * 32 +
+                    (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
-                    w->palette4->count << 5);
+                    work->palette4->count << 5);
         break;
     }
 }
 
-void ReleaseRikuCardPreview(RikuDeckMenuWork* w) {
-    if (w->tiles10 != NULL) {
-        ReleaseObjTiles(w->tiles10);
-        w->tiles10 = NULL;
+void ReleaseRikuCardPreview(RikuDeckMenuWork* work) {
+    if (work->tiles10 != NULL) {
+        ReleaseObjTiles(work->tiles10);
+        work->tiles10 = NULL;
     }
 
-    if (w->tiles7 != NULL) {
-        ReleaseObjTiles(w->tiles7);
-        ReleaseObjPalette(w->palette5);
-        ReleaseObjTiles(w->tiles8);
-        ReleaseObjPalette(w->palette6);
+    if (work->tiles7 != NULL) {
+        ReleaseObjTiles(work->tiles7);
+        ReleaseObjPalette(work->palette5);
+        ReleaseObjTiles(work->tiles8);
+        ReleaseObjPalette(work->palette6);
 
-        if (w->tiles9 != NULL) {
-            ReleaseObjTiles(w->tiles9);
-            w->tiles9 = NULL;
+        if (work->tiles9 != NULL) {
+            ReleaseObjTiles(work->tiles9);
+            work->tiles9 = NULL;
         }
 
-        w->tiles7 = NULL;
-        w->palette5 = NULL;
-        w->tiles8 = NULL;
-        w->palette6 = NULL;
+        work->tiles7 = NULL;
+        work->palette5 = NULL;
+        work->tiles8 = NULL;
+        work->palette6 = NULL;
     }
 }
 
-void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
+void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
     DeckCard2Work* node;
     const CardDef* def;
     void* dst;
@@ -906,10 +906,10 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
     u32 t;
 
     id = 0xFFFF;
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
-        if (node->args.row == w->cursorRow && node->args.col == w->cursorCol) {
+        if (node->args.row == work->cursorRow && node->args.col == work->cursorCol) {
             id = node->args.cardId;
             break;
         }
@@ -917,40 +917,40 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* w) {
         node = ListPoolNext(&node->node);
     }
 
-    ReleaseRikuCardPreview(w);
+    ReleaseRikuCardPreview(work);
 
     if (id != 0xFFFF) {
         if (id & 0x8000) {
-            w->tiles10 = AllocObjTiles(0x280, NULL);
-            SetObjTileSource(w->tiles10, gUnk_0908B1B4);
-            AnimInit(&w->anim, gUnk_09EEA164, gUnk_09EEA148);
-            AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-            w->gfx3 = AnimGetGfx(&w->anim);
+            work->tiles10 = AllocObjTiles(0x280, NULL);
+            SetObjTileSource(work->tiles10, gUnk_0908B1B4);
+            AnimInit(&work->anim, gUnk_09EEA164, gUnk_09EEA148);
+            AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+            work->gfx3 = AnimGetGfx(&work->anim);
         }
 
         t = id & CARD_ID_MASK;
         def = &gCardDefs[t];
-        w->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 768);
-        w->tiles8 = LoadObjTiles(def->tiles, 512);
-        w->palette6 = LoadObjPalette(def->palette, 32);
-        w->palette5 = LoadObjPalette(gCard00Palette, 32);
-        w->gfx4 = gCardBacks[def->category].gfx;
-        w->gfx5 = def->gfx;
+        work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 768);
+        work->tiles8 = LoadObjTiles(def->tiles, 512);
+        work->palette6 = LoadObjPalette(def->palette, 32);
+        work->palette5 = LoadObjPalette(gCard00Palette, 32);
+        work->gfx4 = gCardBacks[def->category].gfx;
+        work->gfx5 = def->gfx;
 
         if (def->category != 3) {
-            w->tiles9 = LoadObjTiles(gUnk_0905EAE8, 480);
-            w->gfx6 = gUnk_09EE981C[def->value];
+            work->tiles9 = LoadObjTiles(gUnk_0905EAE8, 480);
+            work->gfx6 = gUnk_09EE981C[def->value];
         }
 
         DrawRikuCpCost(def->cpCost);
         dst = gUnk_05000160;
         LoadPalette(&gUnk_09614118[def->category * 16 + 0x100], dst, 32);
-        LoadRikuCardNameText(w, t);
-        LoadRikuCardDescriptionText(w, t);
-        w->previewShown = 1;
+        LoadRikuCardNameText(work, t);
+        LoadRikuCardDescriptionText(work, t);
+        work->previewShown = 1;
     } else {
         DrawRikuCpCost(0);
-        w->previewShown = 0;
+        work->previewShown = 0;
     }
 }
 
@@ -971,50 +971,50 @@ void DrawRikuCpCost(u8 a) {
     }
 }
 
-void FreeRikuCollectionEntries(RikuDeckMenuWork* w) {
+void FreeRikuCollectionEntries(RikuDeckMenuWork* work) {
     CardKindEntry** p;
     u16 i;
 
-    if (w->entries != NULL) {
-        for (i = 0; i < w->entryCount; i++) {
-            EwramFree(w->entries[i].indices);
+    if (work->entries != NULL) {
+        for (i = 0; i < work->entryCount; i++) {
+            EwramFree(work->entries[i].indices);
         }
 
-        p = &w->entries;
+        p = &work->entries;
         EwramFree(*p);
         *p = NULL;
     }
 }
 
-void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* w) {
-    if (w->tiles3 != NULL) {
-        ReleaseObjTiles(w->tiles3);
-        ReleaseObjPalette(w->palette2);
-        w->tiles3 = NULL;
-        w->palette2 = NULL;
+void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* work) {
+    if (work->tiles3 != NULL) {
+        ReleaseObjTiles(work->tiles3);
+        ReleaseObjPalette(work->palette2);
+        work->tiles3 = NULL;
+        work->palette2 = NULL;
     }
 }
 
-void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* w, u8 mode) {
+void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 mode) {
     switch (mode) {
     case 0:
-        SetObjTileSource(w->tiles2, gUnk_090A4A0C);
-        AnimInit(&w->anim3, gUnk_09EEB064, gUnk_09EEB050);
-        AnimStart(&w->anim3, 0, ANIM_FLAG_LOOP);
-        w->gfx2 = AnimGetGfx(&w->anim3);
+        SetObjTileSource(work->tiles2, gUnk_090A4A0C);
+        AnimInit(&work->anim3, gUnk_09EEB064, gUnk_09EEB050);
+        AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
+        work->gfx2 = AnimGetGfx(&work->anim3);
         break;
     case 1:
-        SetObjTileSource(w->tiles2, gUnk_090A51F6);
-        AnimInit(&w->anim3, gUnk_09EEB07C, gUnk_09EEB068);
-        AnimStart(&w->anim3, 0, ANIM_FLAG_LOOP);
-        w->gfx2 = AnimGetGfx(&w->anim3);
+        SetObjTileSource(work->tiles2, gUnk_090A51F6);
+        AnimInit(&work->anim3, gUnk_09EEB07C, gUnk_09EEB068);
+        AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
+        work->gfx2 = AnimGetGfx(&work->anim3);
         break;
     }
 }
 
-u8 CheckRikuDeckCpCost(RikuDeckMenuWork* w) {
+u8 CheckRikuDeckCpCost(RikuDeckMenuWork* work) {
     if (GetDeckCpCost(GetActiveDeckIndex()) > gGameState.progression.cp) {
-        TaskCreate(&w->cardpool, &gTaskDescDeckErrorCp, &w->popupActive);
+        TaskCreate(&work->cardpool, &gTaskDescDeckErrorCp, &work->popupActive);
         m4aSongNumStart(SONG_SYS_BEEP);
         return 0;
     }
@@ -1022,20 +1022,20 @@ u8 CheckRikuDeckCpCost(RikuDeckMenuWork* w) {
     return 1;
 }
 
-u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* w) {
+u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* work) {
     if (CountActiveDeckCardsOfCategory(0) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        TaskCreate(&w->cardpool, &gTaskDescDeckErrorNoAttackCard, &w->popupActive);
+        TaskCreate(&work->cardpool, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
         return 0;
     }
 
     return 1;
 }
 
-u8 FindRikuCardInDirection(RikuDeckMenuWork* w, s16 x, s16 y, u16 dir) {
+u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
     DeckCard2Work* node;
 
-    node = ListPoolFirst(&w->pool);
+    node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
         if (node->args.col == x && node->args.row == y) {
@@ -1047,13 +1047,13 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* w, s16 x, s16 y, u16 dir) {
 
     switch (dir) {
     case 64:
-        return FindRikuCardInDirection(w, x, y - 1, 64);
+        return FindRikuCardInDirection(work, x, y - 1, 64);
     case 128:
-        return FindRikuCardInDirection(w, x, y + 1, 128);
+        return FindRikuCardInDirection(work, x, y + 1, 128);
     case 32:
-        return FindRikuCardInDirection(w, x - 1, y, 32);
+        return FindRikuCardInDirection(work, x - 1, y, 32);
     case 16:
-        return FindRikuCardInDirection(w, x + 1, y, 16);
+        return FindRikuCardInDirection(work, x + 1, y, 16);
     }
 
     return 0;

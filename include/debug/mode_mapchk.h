@@ -15,16 +15,16 @@ typedef struct MapChkWork {
 
 void MapChkSetParamToggle(u8* p, u8 a);
 void MapChkSetFloorProgress(u8 a, u8 b);
-void MapChkEditMode(MapChkWork* p);
-void MapChkEditWorld(MapChkWork* p);
-void MapChkEditFloor(MapChkWork* p);
-void MapChkEditForm(MapChkWork* p);
-void MapChkEditWidth(MapChkWork* p);
-void MapChkFlipParamToggle(MapChkWork* p);
-void MapChkEditMinHeight(MapChkWork* p);
-void MapChkEditMaxHeight(MapChkWork* p);
-void MapChkEditMinDepth(MapChkWork* p);
-void MapChkEditMaxDepth(MapChkWork* p);
+void MapChkEditMode(MapChkWork* work);
+void MapChkEditWorld(MapChkWork* work);
+void MapChkEditFloor(MapChkWork* work);
+void MapChkEditForm(MapChkWork* work);
+void MapChkEditWidth(MapChkWork* work);
+void MapChkFlipParamToggle(MapChkWork* work);
+void MapChkEditMinHeight(MapChkWork* work);
+void MapChkEditMaxHeight(MapChkWork* work);
+void MapChkEditMinDepth(MapChkWork* work);
+void MapChkEditMaxDepth(MapChkWork* work);
 void Mode_MapChk_0();
 void Mode_MapChk_1();
 void Mode_MapChk_2();

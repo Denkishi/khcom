@@ -1255,9 +1255,4 @@ u16 CheckPooSoraExit(PooPos* p);
 
 u8 IsPoohOnWagon();
 
-#ifdef VERSION_EU
-extern u8* gAllmapFloorTilesByLanguage[5];
-extern u8* gAllmapRikuFloorTilesByLanguage[5];
-#endif
-
 #endif /* GUARD_POO_H */

@@ -21,9 +21,13 @@ void InitAllmap();
 void UpdateAllmap();
 void DestroyAllmap();
 
+void AllmapVCountCallback();
 void AllmapAllocBgMaps();
 void AllmapDimPalette10();
 void AllmapSetBlend(s16 a);
+void AllmapCyclePalette();
+void AllmapLoadWorldBg();
+void AllmapLoadFloorTiles();
 void mode_allmap_0(s32 a);
 void AllmapFreezePalette10();
 void mode_allmap_1();

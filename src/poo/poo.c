@@ -8,7 +8,6 @@
 #include "sprites_pooh.h"
 #include "sprites_sora.h"
 #include "gba/keys.h"
-#include "gba/io_reg.h"
 #include "btl_api.h"
 #include "malloc.h"
 #include "mode_pooh_api.h"
@@ -7683,15 +7682,6 @@ void SetPooRabbitTalkBlocked(u8 a) {
     sPoohInteractions->rabbitTalkBlocked = a;
 }
 
-void AllmapVCountCallback() {
-    while ((REG_DISPSTAT & DISPSTAT_HBLANK) == 0) {
-    }
-
-    REG_BG2CNT &= ~BGCNT_PRIORITY_MASK;
-    REG_BG2CNT |= BGCNT_PRIORITY(2);
-    REG_BG2HOFS = 0;
-}
-
 TaskDesc gTaskDescPooPooh = {
     "task_poo_pooh",
     (TaskInitFunc)task_poo_pooh_0,
@@ -8995,20 +8985,3 @@ TaskDesc gTaskDescPooCabbageAfterEvent = {
 
 const s32 gPooMainEventIds[6] = { 0, 1, 2, 3, 4, 5 };
 
-#ifdef VERSION_EU
-u8* gAllmapFloorTilesByLanguage[5] = {
-    gUnk_097B7218,
-    gUnkEu_097966A0,
-    gUnkEu_09799760,
-    gUnkEu_09798720,
-    gUnkEu_097976E0,
-};
-
-u8* gAllmapRikuFloorTilesByLanguage[5] = {
-    gUnkEu_0979A7A0,
-    gUnkEu_0979B7E0,
-    gUnkEu_0979E8A0,
-    gUnkEu_0979D860,
-    gUnkEu_0979C820,
-};
-#endif

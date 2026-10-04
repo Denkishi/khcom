@@ -25,7 +25,6 @@
 #include "mode.h"
 #include "mode_battle_data.h"
 #include "obj_api.h"
-#include "poo_api.h"
 #include "registration_data.h"
 #include <stddef.h>
 #include "taskpool.h"
@@ -99,6 +98,24 @@ static const PooPalStep sAllmapPalSteps[9] = {
     { 255, 255 },
 };
 
+#ifdef VERSION_EU
+u8* gAllmapFloorTilesByLanguage[5] = {
+    gUnk_097B7218,
+    gUnkEu_097966A0,
+    gUnkEu_09799760,
+    gUnkEu_09798720,
+    gUnkEu_097976E0,
+};
+
+u8* gAllmapRikuFloorTilesByLanguage[5] = {
+    gUnkEu_0979A7A0,
+    gUnkEu_0979B7E0,
+    gUnkEu_0979E8A0,
+    gUnkEu_0979D860,
+    gUnkEu_0979C820,
+};
+#endif
+
 Mode gModeAllmap = {
     "mode_allmap",
     mode_allmap_0,
@@ -127,6 +144,15 @@ static s16 sAllmapBlendTimer;
 static u8 sAllmapPalette10Copy[0x40];
 static u8 sAllmapReturnToMenu;
 static u8 sAllmapLowerBgm;
+
+void AllmapVCountCallback() {
+    while ((REG_DISPSTAT & DISPSTAT_HBLANK) == 0) {
+    }
+
+    REG_BG2CNT &= ~BGCNT_PRIORITY_MASK;
+    REG_BG2CNT |= BGCNT_PRIORITY(2);
+    REG_BG2HOFS = 0;
+}
 
 void AllmapAllocBgMaps() {
     u32 i;

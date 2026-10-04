@@ -25,10 +25,6 @@ void SetPooState(const void* p);
 u8 IsPooAltImageActive();
 void FreePoohInteractions();
 void InitPoohInteractions();
-void AllmapVCountCallback();
-void AllmapCyclePalette();
-void AllmapLoadWorldBg();
-void AllmapLoadFloorTiles();
 
 struct PooNode;
 

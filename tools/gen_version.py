@@ -1938,7 +1938,7 @@ TARGET_DATA_SIZE = {
         ("continue_ui.c", ".data"): 0x44,
         ("card_stock_info.c", ".rodata"): 0x2D2,
         ("mode_sio_dbg.c", ".data"): 0x40,
-        ("poo.c", ".data"): 0xc00,
+        ("mode_allmap.c", ".data"): 0x38,
         ("allmap.c", ".data"): 0xb8,
         ("title.c", ".data"): 0x9c,
         ("status.c", ".rodata"): 0x137,
@@ -2010,6 +2010,7 @@ TARGET_DATA_ADDR = {
     "eu": {
         ("mode_chkmov.c", ".rodata"): 0x0812f680,
         ("mode_worldselect.c", ".data"): 0x09f847d4,
+        ("mode_allmap.c", ".data"): 0x09f800a4,
         ("mode_movie.c", ".rodata"): 0x0883de0c,
         ("jiminy_inline_text_data.c", ".rodata"): 0x0888e310,
         ("localized_names_eu.c", ".rodata"): 0x0888e4d4,

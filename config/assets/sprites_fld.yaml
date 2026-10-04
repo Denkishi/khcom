@@ -568,23 +568,13 @@ entries:
     address: 0x09F59E08
 - name: gSor1fl10Frames
   record: SpriteTable
-  items: [gSor1fl10Frame0, gSor1fl10Frame1, gSor1fl10Frame2, gSor1fl10Frame3]
+  items: [gSor1fl10Frame0, gSor1fl10Frame1, gSor1fl10Frame2, gSor1fl10Frame3, gSor1fl10Frame4]
   us:
     address: 0x09EDF308
   jp:
     address: 0x09EB6D84
   eu:
     address: 0x09F59F60
-- name: gUnk_09EDF318
-  record: SpriteTable
-  scalar: true
-  items: [gSor1fl10Frame4]
-  us:
-    address: 0x09EDF318
-  jp:
-    address: 0x09EB6D94
-  eu:
-    address: 0x09F59F70
 - name: gSor1fl10Anims
   record: AnimTable
   items: [gSor1fl10Anim0]
@@ -596,23 +586,13 @@ entries:
     address: 0x09F59F74
 - name: gSor1bl10Frames
   record: SpriteTable
-  items: [gSor1bl10Frame0, gSor1bl10Frame1, gSor1bl10Frame2, gSor1bl10Frame3]
+  items: [gSor1bl10Frame0, gSor1bl10Frame1, gSor1bl10Frame2, gSor1bl10Frame3, gSor1bl10Frame4]
   us:
     address: 0x09EDF320
   jp:
     address: 0x09EB6D9C
   eu:
     address: 0x09F59F78
-- name: gUnk_09EDF330
-  record: SpriteTable
-  scalar: true
-  items: [gSor1bl10Frame4]
-  us:
-    address: 0x09EDF330
-  jp:
-    address: 0x09EB6DAC
-  eu:
-    address: 0x09F59F88
 - name: gSor1bl10Anims
   record: AnimTable
   items: [gSor1bl10Anim0]
@@ -759,23 +739,13 @@ entries:
     address: 0x09F5A24C
 - name: gUnk_09EDF60C
   record: AnimTable
-  items: [gUnk_0893DC4C]
+  items: [gUnk_0893DC4C, gUnk_0893DCD2]
   us:
     address: 0x09EDF60C
   jp:
     address: 0x09EB7088
   eu:
     address: 0x09F5A264
-- name: gUnk_09EDF610
-  record: AnimTable
-  scalar: true
-  items: [gUnk_0893DCD2]
-  us:
-    address: 0x09EDF610
-  jp:
-    address: 0x09EB708C
-  eu:
-    address: 0x09F5A268
 - name: gUnk_09EDF614
   record: SpriteTable
   items: [gUnk_0893EFBC, gUnk_0893EFD2, gUnk_0893EFE2, gUnk_0893EFF2, gUnk_0893F002, gUnk_0893F00C, gUnk_0893F022, gUnk_0893F038]
@@ -823,23 +793,13 @@ entries:
     address: 0x09F5A2C4
 - name: gUnk_09EDF678
   record: AnimTable
-  items: [gUnk_08942992]
+  items: [gUnk_08942992, gUnk_089429A4]
   us:
     address: 0x09EDF678
   jp:
     address: 0x09EB70F4
   eu:
     address: 0x09F5A2D0
-- name: gUnk_09EDF67C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_089429A4]
-  us:
-    address: 0x09EDF67C
-  jp:
-    address: 0x09EB70F8
-  eu:
-    address: 0x09F5A2D4
 - name: gUnk_09EDF680
   record: SpriteTable
   items: [gUnk_08943470, gUnk_08943486, gUnk_0894349C]
@@ -851,23 +811,13 @@ entries:
     address: 0x09F5A2D8
 - name: gUnk_09EDF68C
   record: AnimTable
-  items: [gUnk_089434AC]
+  items: [gUnk_089434AC, gUnk_089434BE]
   us:
     address: 0x09EDF68C
   jp:
     address: 0x09EB7108
   eu:
     address: 0x09F5A2E4
-- name: gUnk_09EDF690
-  record: AnimTable
-  scalar: true
-  items: [gUnk_089434BE]
-  us:
-    address: 0x09EDF690
-  jp:
-    address: 0x09EB710C
-  eu:
-    address: 0x09F5A2E8
 - name: gRik1ff10Frames
   record: SpriteTable
   items: [gRik1ff10Frame0, gRik1ff10Frame1, gRik1ff10Frame2, gRik1ff10Frame3, gRik1ff10Frame4]

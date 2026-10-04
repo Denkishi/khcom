@@ -34,23 +34,13 @@ objects:
 entries:
 - name: gBanb00Frames
   record: SpriteTable
-  items: [gBanb00Frame0, gBanb00Frame1, gBanb00Frame2, gBanb00Frame3, gBanb00Frame4, gBanb00Frame5, gBanb00Frame6]
+  items: [gBanb00Frame0, gBanb00Frame1, gBanb00Frame2, gBanb00Frame3, gBanb00Frame4, gBanb00Frame5, gBanb00Frame6, gBanb00Frame7]
   us:
     address: 0x09EDE790
   jp:
     address: 0x09EB620C
   eu:
     address: 0x09F593E8
-- name: gUnk_09EDE7AC
-  record: SpriteTable
-  scalar: true
-  items: [gBanb00Frame7]
-  us:
-    address: 0x09EDE7AC
-  jp:
-    address: 0x09EB6228
-  eu:
-    address: 0x09F59404
 - name: gBanb00Anims
   record: AnimTable
   items: [gBanb00Anim0]

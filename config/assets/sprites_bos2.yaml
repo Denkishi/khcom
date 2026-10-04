@@ -132,44 +132,13 @@ entries:
     address: 0x09F7EEEC
 - name: gUnk_09EF3C08
   record: AnimTable
-  scalar: true
-  items: [gUnk_0962FC72]
+  items: [gUnk_0962FC72, gUnk_0962FC7C, gUnk_0962FC86, gUnk_0962FC90]
   us:
     address: 0x09EF3C08
   jp:
     address: 0x09ECAFF4
   eu:
     address: 0x09F7EEFC
-- name: gUnk_09EF3C0C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_0962FC7C]
-  us:
-    address: 0x09EF3C0C
-  jp:
-    address: 0x09ECAFF8
-  eu:
-    address: 0x09F7EF00
-- name: gUnk_09EF3C10
-  record: AnimTable
-  scalar: true
-  items: [gUnk_0962FC86]
-  us:
-    address: 0x09EF3C10
-  jp:
-    address: 0x09ECAFFC
-  eu:
-    address: 0x09F7EF04
-- name: gUnk_09EF3C14
-  record: AnimTable
-  scalar: true
-  items: [gUnk_0962FC90]
-  us:
-    address: 0x09EF3C14
-  jp:
-    address: 0x09ECB000
-  eu:
-    address: 0x09F7EF08
 - name: gUnk_09EF3C18
   record: SpriteTable
   scalar: true
@@ -237,74 +206,13 @@ entries:
     address: 0x09F7EF44
 - name: gUnk_09EF3C6C
   record: AnimTable
-  scalar: true
-  items: [gUnk_0963007C]
+  items: [gUnk_0963007C, gUnk_09630086, gUnk_09630090, gUnk_0963009A, gUnk_096300A4, gUnk_096300AE, gUnk_096300B8]
   us:
     address: 0x09EF3C6C
   jp:
     address: 0x09ECB058
   eu:
     address: 0x09F7EF60
-- name: gUnk_09EF3C70
-  record: AnimTable
-  scalar: true
-  items: [gUnk_09630086]
-  us:
-    address: 0x09EF3C70
-  jp:
-    address: 0x09ECB05C
-  eu:
-    address: 0x09F7EF64
-- name: gUnk_09EF3C74
-  record: AnimTable
-  scalar: true
-  items: [gUnk_09630090]
-  us:
-    address: 0x09EF3C74
-  jp:
-    address: 0x09ECB060
-  eu:
-    address: 0x09F7EF68
-- name: gUnk_09EF3C78
-  record: AnimTable
-  scalar: true
-  items: [gUnk_0963009A]
-  us:
-    address: 0x09EF3C78
-  jp:
-    address: 0x09ECB064
-  eu:
-    address: 0x09F7EF6C
-- name: gUnk_09EF3C7C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_096300A4]
-  us:
-    address: 0x09EF3C7C
-  jp:
-    address: 0x09ECB068
-  eu:
-    address: 0x09F7EF70
-- name: gUnk_09EF3C80
-  record: AnimTable
-  scalar: true
-  items: [gUnk_096300AE]
-  us:
-    address: 0x09EF3C80
-  jp:
-    address: 0x09ECB06C
-  eu:
-    address: 0x09F7EF74
-- name: gUnk_09EF3C84
-  record: AnimTable
-  scalar: true
-  items: [gUnk_096300B8]
-  us:
-    address: 0x09EF3C84
-  jp:
-    address: 0x09ECB070
-  eu:
-    address: 0x09F7EF78
 - name: gUnk_0962EC5C
   format: sprite_sheet
   tiles: gUnk_09682AA4

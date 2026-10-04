@@ -284,33 +284,13 @@ entries:
     address: 0x09F7EC50
 - name: gUnk_09EF3960
   record: SpriteTable
-  items: [gUnk_0962E6F4, gUnk_0962E6FE, gUnk_0962E708, gUnk_0962E712]
+  items: [gUnk_0962E6F4, gUnk_0962E6FE, gUnk_0962E708, gUnk_0962E712, gUnk_0962E722, gUnk_0962E732]
   us:
     address: 0x09EF3960
   jp:
     address: 0x09ECAD4C
   eu:
     address: 0x09F7EC54
-- name: gUnk_09EF3970
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0962E722]
-  us:
-    address: 0x09EF3970
-  jp:
-    address: 0x09ECAD5C
-  eu:
-    address: 0x09F7EC64
-- name: gUnk_09EF3974
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0962E732]
-  us:
-    address: 0x09EF3974
-  jp:
-    address: 0x09ECAD60
-  eu:
-    address: 0x09F7EC68
 - name: gUnk_09EF3978
   record: AnimTable
   scalar: true
@@ -323,33 +303,13 @@ entries:
     address: 0x09F7EC6C
 - name: gUnk_09EF397C
   record: SpriteTable
-  items: [gUnk_0962E748, gUnk_0962E758, gUnk_0962E768, gUnk_0962E778]
+  items: [gUnk_0962E748, gUnk_0962E758, gUnk_0962E768, gUnk_0962E778, gUnk_0962E782, gUnk_0962E78C]
   us:
     address: 0x09EF397C
   jp:
     address: 0x09ECAD68
   eu:
     address: 0x09F7EC70
-- name: gUnk_09EF398C
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0962E782]
-  us:
-    address: 0x09EF398C
-  jp:
-    address: 0x09ECAD78
-  eu:
-    address: 0x09F7EC80
-- name: gUnk_09EF3990
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0962E78C]
-  us:
-    address: 0x09EF3990
-  jp:
-    address: 0x09ECAD7C
-  eu:
-    address: 0x09F7EC84
 - name: gUnk_09EF3994
   record: AnimTable
   scalar: true
@@ -391,25 +351,13 @@ entries:
     address: 0x09F7EC94
 - name: gUnk_09EF39B4
   record: AnimTable
-  items: [gUnk_0962E7E6]
+  items: [gUnk_0962E7E6, gUnkUs_0962E804]
   us:
     address: 0x09EF39B4
   jp:
     address: 0x09ECADA0
   eu:
     address: 0x09F7ECA8
-- name: gUnkUs_09EF39B8
-  record: AnimTable
-  scalar: true
-  items: [gUnkUs_0962E804]
-  us:
-    address: 0x09EF39B8
-  jp:
-    address: 0x09ECADA4
-    symbol: gUnkJp_09ECADA4
-  eu:
-    address: 0x09F7ECAC
-    symbol: gUnkEu_09F7ECAC
 - name: gUnk_09EF39BC
   record: SpriteTable
   scalar: true

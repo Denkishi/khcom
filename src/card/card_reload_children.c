@@ -1032,13 +1032,13 @@ void** gRevCountSprites[4] = {
     gUnk_09EEA5C4,
 };
 
-AnimHeader** gUnk_09EE76E0 = &gUnk_09EEA750;
+AnimHeader** gUnk_09EE76E0 = gUnk_09EEA750;
 
-AnimHeader** gUnk_09EE76E4 = &gUnk_09EEABA8;
+AnimHeader** gUnk_09EE76E4 = gUnk_09EEABA8;
 
-AnimHeader** gUnk_09EE76E8 = &gUnk_09EEA97C;
+AnimHeader** gUnk_09EE76E8 = gUnk_09EEA97C;
 
-AnimHeader** gUnk_09EE76EC = &gUnk_09EEADD4;
+AnimHeader** gUnk_09EE76EC = gUnk_09EEADD4;
 
 TaskDesc gTaskDescREVCOUNT = {
     "REV_COUNT",

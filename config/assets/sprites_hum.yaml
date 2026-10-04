@@ -274,24 +274,13 @@ entries:
     address: 0x09F5C5B8
 - name: gUnk_09EE17B4
   record: SpriteTable
-  scalar: true
-  items: [gUnk_08B5A854]
+  items: [gUnk_08B5A854, gUnk_08B5A85E]
   us:
     address: 0x09EE17B4
   jp:
     address: 0x09EB9230
   eu:
     address: 0x09F5C5C0
-- name: gUnk_09EE17B8
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_08B5A85E]
-  us:
-    address: 0x09EE17B8
-  jp:
-    address: 0x09EB9234
-  eu:
-    address: 0x09F5C5C4
 - name: gUnk_09EE17BC
   record: AnimTable
   scalar: true

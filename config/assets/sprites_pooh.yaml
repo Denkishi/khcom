@@ -1675,43 +1675,13 @@ entries:
     address: 0x09F8141C
 - name: gRaVegetablesFrames
   record: SpriteTable
-  items: [gRaVegetablesFrame0, gRaVegetablesFrame1, gRaVegetablesFrame2, gRaVegetablesFrame3, gRaVegetablesFrame4, gRaVegetablesFrame5, gRaVegetablesFrame6, gRaVegetablesFrame7, gRaVegetablesFrame8, gRaVegetablesFrame9]
+  items: [gRaVegetablesFrame0, gRaVegetablesFrame1, gRaVegetablesFrame2, gRaVegetablesFrame3, gRaVegetablesFrame4, gRaVegetablesFrame5, gRaVegetablesFrame6, gRaVegetablesFrame7, gRaVegetablesFrame8, gRaVegetablesFrame9, gRaVegetablesFrame10, gRaVegetablesFrame11, gRaVegetablesFrame12]
   us:
     address: 0x09EF602C
   jp:
     address: 0x09ECD418
   eu:
     address: 0x09F81424
-- name: gUnk_09EF6054
-  record: SpriteTable
-  scalar: true
-  items: [gRaVegetablesFrame10]
-  us:
-    address: 0x09EF6054
-  jp:
-    address: 0x09ECD440
-  eu:
-    address: 0x09F8144C
-- name: gUnk_09EF6058
-  record: SpriteTable
-  scalar: true
-  items: [gRaVegetablesFrame11]
-  us:
-    address: 0x09EF6058
-  jp:
-    address: 0x09ECD444
-  eu:
-    address: 0x09F81450
-- name: gUnk_09EF605C
-  record: SpriteTable
-  scalar: true
-  items: [gRaVegetablesFrame12]
-  us:
-    address: 0x09EF605C
-  jp:
-    address: 0x09ECD448
-  eu:
-    address: 0x09F81454
 - name: gRaVegetablesAnims
   record: AnimTable
   items: [gRaVegetablesAnim0, gRaVegetablesAnim1, gRaVegetablesAnim2, gRaVegetablesAnim3, gRaVegetablesAnim4, gRaVegetablesAnim5]
@@ -1723,23 +1693,13 @@ entries:
     address: 0x09F81458
 - name: gRaWagonFrames
   record: SpriteTable
-  items: [gRaWagonFrame0, gRaWagonFrame1, gRaWagonFrame2, gRaWagonFrame3, gRaWagonFrame4, gRaWagonFrame5, gRaWagonFrame6, gRaWagonFrame7, gRaWagonFrame8, gRaWagonFrame9, gRaWagonFrame10, gRaWagonFrame11]
+  items: [gRaWagonFrame0, gRaWagonFrame1, gRaWagonFrame2, gRaWagonFrame3, gRaWagonFrame4, gRaWagonFrame5, gRaWagonFrame6, gRaWagonFrame7, gRaWagonFrame8, gRaWagonFrame9, gRaWagonFrame10, gRaWagonFrame11, gRaWagonFrame12]
   us:
     address: 0x09EF6078
   jp:
     address: 0x09ECD464
   eu:
     address: 0x09F81470
-- name: gUnk_09EF60A8
-  record: SpriteTable
-  scalar: true
-  items: [gRaWagonFrame12]
-  us:
-    address: 0x09EF60A8
-  jp:
-    address: 0x09ECD494
-  eu:
-    address: 0x09F814A0
 - name: gRaWagonAnims
   record: AnimTable
   items: [gRaWagonAnim0, gRaWagonAnim1, gRaWagonAnim2, gRaWagonAnim3, gRaWagonAnim4, gRaWagonAnim5]

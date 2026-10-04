@@ -100,53 +100,13 @@ entries:
     address: 0x09F5A5FC
 - name: gNiserikuHizaFFrames
   record: SpriteTable
-  items: [gNiserikuHizaFFrame0]
+  items: [gNiserikuHizaFFrame0, gNiserikuHizaFFrame1, gNiserikuHizaFFrame2, gNiserikuHizaFFrame3, gNiserikuHizaFFrame4]
   us:
     address: 0x09EF04FC
   jp:
     address: 0x09EC78E8
   eu:
     address: 0x09F7B6E0
-- name: gUnk_09EF0500
-  record: SpriteTable
-  scalar: true
-  items: [gNiserikuHizaFFrame1]
-  us:
-    address: 0x09EF0500
-  jp:
-    address: 0x09EC78EC
-  eu:
-    address: 0x09F7B6E4
-- name: gUnk_09EF0504
-  record: SpriteTable
-  scalar: true
-  items: [gNiserikuHizaFFrame2]
-  us:
-    address: 0x09EF0504
-  jp:
-    address: 0x09EC78F0
-  eu:
-    address: 0x09F7B6E8
-- name: gUnk_09EF0508
-  record: SpriteTable
-  scalar: true
-  items: [gNiserikuHizaFFrame3]
-  us:
-    address: 0x09EF0508
-  jp:
-    address: 0x09EC78F4
-  eu:
-    address: 0x09F7B6EC
-- name: gUnk_09EF050C
-  record: SpriteTable
-  scalar: true
-  items: [gNiserikuHizaFFrame4]
-  us:
-    address: 0x09EF050C
-  jp:
-    address: 0x09EC78F8
-  eu:
-    address: 0x09F7B6F0
 - name: gNiserikuHizaFAnims
   record: AnimTable
   items: [gNiserikuHizaFAnim0]

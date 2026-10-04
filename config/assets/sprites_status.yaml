@@ -193,21 +193,12 @@ entries:
     symbol: gUnkJp_09ECDD3C
 - name: gUnkUs_09EF6954
   record: SpriteTable
-  items: [gUnk_097A2DF8]
+  items: [gUnk_097A2DF8, gUnkUs_097A2E02]
   us:
     address: 0x09EF6954
   jp:
     address: 0x09ECDD40
     symbol: gUnkJp_09ECDD40
-- name: gUnkUs_09EF6958
-  record: SpriteTable
-  scalar: true
-  items: [gUnkUs_097A2E02]
-  us:
-    address: 0x09EF6958
-  jp:
-    address: 0x09ECDD44
-    symbol: gUnkJp_09ECDD44
 - name: gUnkUs_09EF695C
   record: AnimTable
   items: [gUnkUs_097A2E0C]

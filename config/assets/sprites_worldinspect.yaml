@@ -136,33 +136,13 @@ entries:
     address: 0x09F85218
 - name: gUnk_09EF97A0
   record: SpriteTable
-  items: [gUnk_0999CF38]
+  items: [gUnk_0999CF38, gUnk_0999CF54, gUnk_0999CF88]
   us:
     address: 0x09EF97A0
   jp:
     address: 0x09ED0B8C
   eu:
     address: 0x09F8523C
-- name: gUnk_09EF97A4
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0999CF54]
-  us:
-    address: 0x09EF97A4
-  jp:
-    address: 0x09ED0B90
-  eu:
-    address: 0x09F85240
-- name: gUnk_09EF97A8
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0999CF88]
-  us:
-    address: 0x09EF97A8
-  jp:
-    address: 0x09ED0B94
-  eu:
-    address: 0x09F85244
 - name: gUnk_09EF97AC
   record: AnimTable
   items: [gUnk_0999CFBC]
@@ -246,33 +226,13 @@ entries:
     address: 0x09F85444
 - name: gUnk_09EF9860
   record: SpriteTable
-  items: [gUnk_0999F400]
+  items: [gUnk_0999F400, gUnk_0999F416, gUnk_0999F44A]
   us:
     address: 0x09EF9860
   jp:
     address: 0x09ED0C4C
   eu:
     address: 0x09F8544C
-- name: gUnk_09EF9864
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0999F416]
-  us:
-    address: 0x09EF9864
-  jp:
-    address: 0x09ED0C50
-  eu:
-    address: 0x09F85450
-- name: gUnk_09EF9868
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_0999F44A]
-  us:
-    address: 0x09EF9868
-  jp:
-    address: 0x09ED0C54
-  eu:
-    address: 0x09F85454
 - name: gUnk_09EF986C
   record: AnimTable
   items: [gUnk_0999F47E]
@@ -1350,21 +1310,9 @@ entries:
     address: 0x09F85238
 - name: gUnkEu_09F85288
   record: SpriteTable
-  items: [gUnkEu_099A4C4C]
+  items: [gUnkEu_099A4C4C, gUnkEu_099A4C68, gUnkEu_099A4C9C]
   eu:
     address: 0x09F85288
-- name: gUnkEu_09F8528C
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A4C68]
-  eu:
-    address: 0x09F8528C
-- name: gUnkEu_09F85290
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A4C9C]
-  eu:
-    address: 0x09F85290
 - name: gUnkEu_09F85294
   record: AnimTable
   items: [gUnkEu_099A4CD0]
@@ -1372,21 +1320,9 @@ entries:
     address: 0x09F85294
 - name: gUnkEu_09F85298
   record: SpriteTable
-  items: [gUnkEu_099A511C]
+  items: [gUnkEu_099A511C, gUnkEu_099A5138, gUnkEu_099A516C]
   eu:
     address: 0x09F85298
-- name: gUnkEu_09F8529C
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A5138]
-  eu:
-    address: 0x09F8529C
-- name: gUnkEu_09F852A0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A516C]
-  eu:
-    address: 0x09F852A0
 - name: gUnkEu_09F852A4
   record: AnimTable
   items: [gUnkEu_099A51A0]
@@ -1394,21 +1330,9 @@ entries:
     address: 0x09F852A4
 - name: gUnkEu_09F852A8
   record: SpriteTable
-  items: [gUnkEu_099A55AC]
+  items: [gUnkEu_099A55AC, gUnkEu_099A55C8, gUnkEu_099A55FC]
   eu:
     address: 0x09F852A8
-- name: gUnkEu_09F852AC
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A55C8]
-  eu:
-    address: 0x09F852AC
-- name: gUnkEu_09F852B0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A55FC]
-  eu:
-    address: 0x09F852B0
 - name: gUnkEu_09F852B4
   record: AnimTable
   items: [gUnkEu_099A5630]
@@ -1416,21 +1340,9 @@ entries:
     address: 0x09F852B4
 - name: gUnkEu_09F852B8
   record: SpriteTable
-  items: [gUnkEu_099A5A3C]
+  items: [gUnkEu_099A5A3C, gUnkEu_099A5A58, gUnkEu_099A5A8C]
   eu:
     address: 0x09F852B8
-- name: gUnkEu_09F852BC
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A5A58]
-  eu:
-    address: 0x09F852BC
-- name: gUnkEu_09F852C0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099A5A8C]
-  eu:
-    address: 0x09F852C0
 - name: gUnkEu_09F852C4
   record: AnimTable
   items: [gUnkEu_099A5AC0]
@@ -1478,21 +1390,9 @@ entries:
     address: 0x09F85408
 - name: gUnkEu_09F854AC
   record: SpriteTable
-  items: [gUnkEu_099AB990]
+  items: [gUnkEu_099AB990, gUnkEu_099AB9A6, gUnkEu_099AB9DA]
   eu:
     address: 0x09F854AC
-- name: gUnkEu_09F854B0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AB9A6]
-  eu:
-    address: 0x09F854B0
-- name: gUnkEu_09F854B4
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AB9DA]
-  eu:
-    address: 0x09F854B4
 - name: gUnkEu_09F854B8
   record: AnimTable
   items: [gUnkEu_099ABA0E]
@@ -1500,21 +1400,9 @@ entries:
     address: 0x09F854B8
 - name: gUnkEu_09F854BC
   record: SpriteTable
-  items: [gUnkEu_099ABF18]
+  items: [gUnkEu_099ABF18, gUnkEu_099ABF2E, gUnkEu_099ABF62]
   eu:
     address: 0x09F854BC
-- name: gUnkEu_09F854C0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099ABF2E]
-  eu:
-    address: 0x09F854C0
-- name: gUnkEu_09F854C4
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099ABF62]
-  eu:
-    address: 0x09F854C4
 - name: gUnkEu_09F854C8
   record: AnimTable
   items: [gUnkEu_099ABF96]
@@ -1522,21 +1410,9 @@ entries:
     address: 0x09F854C8
 - name: gUnkEu_09F854CC
   record: SpriteTable
-  items: [gUnkEu_099AC3E0]
+  items: [gUnkEu_099AC3E0, gUnkEu_099AC3F6, gUnkEu_099AC42A]
   eu:
     address: 0x09F854CC
-- name: gUnkEu_09F854D0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AC3F6]
-  eu:
-    address: 0x09F854D0
-- name: gUnkEu_09F854D4
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AC42A]
-  eu:
-    address: 0x09F854D4
 - name: gUnkEu_09F854D8
   record: AnimTable
   items: [gUnkEu_099AC45E]
@@ -1544,21 +1420,9 @@ entries:
     address: 0x09F854D8
 - name: gUnkEu_09F854DC
   record: SpriteTable
-  items: [gUnkEu_099AC968]
+  items: [gUnkEu_099AC968, gUnkEu_099AC97E, gUnkEu_099AC9B2]
   eu:
     address: 0x09F854DC
-- name: gUnkEu_09F854E0
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AC97E]
-  eu:
-    address: 0x09F854E0
-- name: gUnkEu_09F854E4
-  record: SpriteTable
-  scalar: true
-  items: [gUnkEu_099AC9B2]
-  eu:
-    address: 0x09F854E4
 - name: gUnkEu_09F854E8
   record: AnimTable
   items: [gUnkEu_099AC9E6]

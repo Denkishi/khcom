@@ -21637,190 +21637,37 @@ entries:
     address: 0x09F777D0
 - name: gUnk_09EEC5F0
   record: SpriteTable
-  scalar: true
-  items: [gUnk_090D4720]
+  items: [gUnk_090D4720, gUnk_090D472A]
   us:
     address: 0x09EEC5F0
   jp:
     address: 0x09EC39DC
   eu:
     address: 0x09F777D4
-- name: gUnk_09EEC5F4
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090D472A]
-  us:
-    address: 0x09EEC5F4
-  jp:
-    address: 0x09EC39E0
-  eu:
-    address: 0x09F777D8
 - name: gUnk_09EEC5F8
   record: AnimTable
-  scalar: true
-  items: [gUnk_090D4734]
+  items: [gUnk_090D4734, gUnk_090D473E]
   us:
     address: 0x09EEC5F8
   jp:
     address: 0x09EC39E4
   eu:
     address: 0x09F777DC
-- name: gUnk_09EEC5FC
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D473E]
-  us:
-    address: 0x09EEC5FC
-  jp:
-    address: 0x09EC39E8
-  eu:
-    address: 0x09F777E0
 - name: gUnk_09EEC600
   record: SpriteTable
-  items: [gUnk_090D4848, gUnk_090D48A0, gUnk_090D48F8, gUnk_090D4950, gUnk_090D49A8, gUnk_090D4A00, gUnk_090D4A58, gUnk_090D4AE0, gUnk_090D4B68, gUnk_090D4BF0]
+  items: [gUnk_090D4848, gUnk_090D48A0, gUnk_090D48F8, gUnk_090D4950, gUnk_090D49A8, gUnk_090D4A00, gUnk_090D4A58, gUnk_090D4AE0, gUnk_090D4B68, gUnk_090D4BF0, gUnk_090D4C78, gUnk_090D4CE8]
   us:
     address: 0x09EEC600
   jp:
     address: 0x09EC39EC
   eu:
     address: 0x09F777E4
-- name: gUnk_09EEC628
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090D4C78]
-  us:
-    address: 0x09EEC628
-  jp:
-    address: 0x09EC3A14
-  eu:
-    address: 0x09F7780C
-- name: gUnk_09EEC62C
-  record: SpriteTable
-  scalar: true
-  items: [gUnk_090D4CE8]
-  us:
-    address: 0x09EEC62C
-  jp:
-    address: 0x09EC3A18
-  eu:
-    address: 0x09F77810
 - name: gUnk_09EEC630
   record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D58]
+  items: [gUnk_090D4D58, gUnk_090D4D62, gUnk_090D4D6C, gUnk_090D4D76, gUnk_090D4D80, gUnk_090D4D8A, gUnk_090D4D94, gUnk_090D4D9E, gUnk_090D4DA8, gUnk_090D4DB2, gUnk_090D4DBC, gUnk_090D4DC6]
   us:
     address: 0x09EEC630
   jp:
     address: 0x09EC3A1C
   eu:
     address: 0x09F77814
-- name: gUnk_09EEC634
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D62]
-  us:
-    address: 0x09EEC634
-  jp:
-    address: 0x09EC3A20
-  eu:
-    address: 0x09F77818
-- name: gUnk_09EEC638
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D6C]
-  us:
-    address: 0x09EEC638
-  jp:
-    address: 0x09EC3A24
-  eu:
-    address: 0x09F7781C
-- name: gUnk_09EEC63C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D76]
-  us:
-    address: 0x09EEC63C
-  jp:
-    address: 0x09EC3A28
-  eu:
-    address: 0x09F77820
-- name: gUnk_09EEC640
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D80]
-  us:
-    address: 0x09EEC640
-  jp:
-    address: 0x09EC3A2C
-  eu:
-    address: 0x09F77824
-- name: gUnk_09EEC644
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D8A]
-  us:
-    address: 0x09EEC644
-  jp:
-    address: 0x09EC3A30
-  eu:
-    address: 0x09F77828
-- name: gUnk_09EEC648
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D94]
-  us:
-    address: 0x09EEC648
-  jp:
-    address: 0x09EC3A34
-  eu:
-    address: 0x09F7782C
-- name: gUnk_09EEC64C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4D9E]
-  us:
-    address: 0x09EEC64C
-  jp:
-    address: 0x09EC3A38
-  eu:
-    address: 0x09F77830
-- name: gUnk_09EEC650
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4DA8]
-  us:
-    address: 0x09EEC650
-  jp:
-    address: 0x09EC3A3C
-  eu:
-    address: 0x09F77834
-- name: gUnk_09EEC654
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4DB2]
-  us:
-    address: 0x09EEC654
-  jp:
-    address: 0x09EC3A40
-  eu:
-    address: 0x09F77838
-- name: gUnk_09EEC658
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4DBC]
-  us:
-    address: 0x09EEC658
-  jp:
-    address: 0x09EC3A44
-  eu:
-    address: 0x09F7783C
-- name: gUnk_09EEC65C
-  record: AnimTable
-  scalar: true
-  items: [gUnk_090D4DC6]
-  us:
-    address: 0x09EEC65C
-  jp:
-    address: 0x09EC3A48
-  eu:
-    address: 0x09F77840

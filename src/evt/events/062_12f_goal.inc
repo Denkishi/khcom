@@ -1,0 +1,75 @@
+#ifdef VERSION_US
+static const MessageScriptEntry sEvent062Script[1] = {
+    { 0, 3, 3, 1, { 0, 0, 0 }, gEvent062Text00, MSG_SCRIPT_FLAG_END, 9999 },
+};
+
+#include "event_062_text.inc"
+#endif
+#ifdef VERSION_JP
+static const MessageScriptEntry sEvent062Script[1] = {
+    { 0, 3, 3, 3, { 0, 0, 0 }, gEvent062Text00, MSG_SCRIPT_FLAG_END, 9999 },
+};
+
+#include "event_062_text.inc"
+#endif
+#ifdef VERSION_EU
+static const MessageScriptEntry sEvent062Script[1] = {
+    { 0, 3, 3, 1, { 0, 0, 0 }, NULL, MSG_SCRIPT_FLAG_END, 9999 },
+};
+#endif
+
+static const EventCameraKeyframe sEvent062Camera[1] = {
+    { -65485, 159744, 66048, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+};
+
+static const EvSoundCue sEvent062SoundCues[3] = {
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_EV_WARPOUT, 290, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 365, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCharaKeyframe sEvent062Track0[1] = {
+    { 714, 1000, { 0, 0 }, 153088, 68864, 0, 0, { 0, 0 }, 33026, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent062Track1[1] = {
+    { 440, 30, { 0, 0 }, 157952, 71680, 0, 0, { 0, 0 }, 32770, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent062Track2[4] = {
+    { 842, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 842, 350, { 0, 0 }, 184064, 84480, 0, 0, { 0, 0 }, 2, EventCharaFadeIn, NULL },
+    { 844, 450, { 0, 0 }, 167936, 76800, 0, 842, { 0, 0 }, 3, NULL, NULL },
+    { 842, 330, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent062Tracks[3] = {
+    { sEvent062Track0, 65, { 0, 0, 0 } },
+    { sEvent062Track1, 35, { 0, 0, 0 } },
+    { sEvent062Track2, 79, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent062 = {
+    3,
+    { 0, 0, 0 },
+    sEvent062Tracks,
+    sEvent062Camera,
+    sEvent062Script,
+    sEvent062SoundCues,
+    NULL,
+    370,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    65535,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};

@@ -1,0 +1,85 @@
+#ifdef VERSION_US
+#include "event_195_text.inc"
+#endif
+
+static const MessageScriptEntry sEvent195Script[15] = {
+    { 61, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text00), 0, 100 },
+    { 26, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text01), 0, 130 },
+    { 26, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text02), 0, 200 },
+    { 26, 5, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text03), 0, 202 },
+    { 26, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text04), 0, 330 },
+    { 61, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text05), 0, 360 },
+    { 61, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text06), 0, 550 },
+    { 61, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text07), 0, 552 },
+    { 61, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text08), 0, 650 },
+    { 61, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text09), 0, 652 },
+    { 61, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text10), 0, 654 },
+    { 61, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text11), 0, 780 },
+    { 26, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text12), 0, 850 },
+    { 61, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text13), 0, 880 },
+    { 26, 4, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent195Text14), MSG_SCRIPT_FLAG_END, 1060 },
+};
+
+#ifdef VERSION_JP
+#include "event_195_text.inc"
+#endif
+
+static const EvSoundCue sEvent195SoundCues[2] = {
+    { 65535, 0, 0, 0 },
+    { SONG_SND_358, 836, EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCameraKeyframe sEvent195Camera[2] = {
+    { -65536, 106752, 103168, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, NULL },
+    { -64537, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, { 0, 0 }, NULL },
+};
+
+static const EventCharaKeyframe sEvent195Track0[10] = {
+    { 515, 150, { 0, 0 }, 102400, 111360, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 558, 270, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 295, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 540, 380, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 540, 510, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
+    { 540, 570, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 820, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 536, 900, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 536, 1030, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
+    { 536, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent195Track1[4] = {
+    { 745, 670, { 0, 0 }, 114944, 104704, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 747, 700, { 0, 0 }, 109568, 108800, 0, 745, { 0, 0 }, 3, NULL, NULL },
+    { 745, 730, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 750, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent195Tracks[2] = {
+    { sEvent195Track0, 44, { 0, 0, 0 } },
+    { sEvent195Track1, 69, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent195 = {
+    2,
+    { 0, 0, 0 },
+    sEvent195Tracks,
+    sEvent195Camera,
+    sEvent195Script,
+    sEvent195SoundCues,
+    NULL,
+    1120,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    65535,
+    0,
+    { 0, 0 },
+    13,
+    0,
+    255,
+    255,
+};

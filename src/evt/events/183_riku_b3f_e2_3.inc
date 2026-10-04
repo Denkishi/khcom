@@ -1,0 +1,94 @@
+#ifdef VERSION_US
+#include "event_183_text.inc"
+#endif
+
+static const MessageScriptEntry sEvent183Script[10] = {
+    { 0, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text00), 0, 95 },
+    { 55, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text01), 0, 240 },
+    { 27, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text02), 0, 270 },
+    { 27, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text03), 0, 272 },
+    { 55, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text04), 0, 400 },
+    { 27, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text05), 0, 430 },
+    { 55, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text06), 0, 460 },
+    { 27, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text07), 0, 490 },
+    { 55, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text08), 0, 550 },
+    { 27, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent183Text09), MSG_SCRIPT_FLAG_END, 750 },
+};
+
+#ifdef VERSION_JP
+#include "event_183_text.inc"
+#endif
+
+static const EvSoundCue sEvent183SoundCues[4] = {
+    { SONG_BGM_EVENT2, 0, 0, 0 },
+    { SONG_SND_364, 100, 0, 0 },
+    { SONG_EV_WARPIN, 600, 0, 0 },
+    { SONG_BGM_EVENT2, 805, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCameraKeyframe sEvent183Camera[7] = {
+    { -65406, 61440, 27136, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
+    { -65346, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 60, { 0, 0 }, NULL },
+    { -65326, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 30, { 0, 0 }, NULL },
+    { -65036, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65016, 65536, 23296, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 15, { 0, 0 }, NULL },
+    { -65006, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_MODE_KEEP, 10, { 0, 0 }, NULL },
+    { -60536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+};
+
+static const EventCharaKeyframe sEvent183Track0[5] = {
+    { 718, 500, { 0, 0 }, 54016, 40448, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 702, 520, { 0, 0 }, 62464, 33024, 0, 696, { 0, 0 }, 4163, NULL, NULL },
+    { 702, 700, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 719, 714, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 696, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent183Track1[8] = {
+    { 889, 190, { 0, 0 }, 11776, 44800, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 905, 300, { 0, 0 }, 70144, 28672, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 906, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 889, 510, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 900, 600, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 901, 650, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaFadeOut, NULL },
+    { 902, 1000, { 0, 0 }, 11776, 44800, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 889, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent183Track2[4] = {
+    { 107, 100, { 0, 0 }, 69120, 27904, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 107, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, EventCharaBlendUp, NULL },
+    { 107, 500, { 0, 0 }, 11776, 44800, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 4, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent183Tracks[3] = {
+    { sEvent183Track0, 65, { 0, 0, 0 } },
+    { sEvent183Track1, 83, { 0, 0, 0 } },
+    { sEvent183Track2, 0, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent183 = {
+    3,
+    { 0, 0, 0 },
+    sEvent183Tracks,
+    sEvent183Camera,
+    sEvent183Script,
+    sEvent183SoundCues,
+    NULL,
+    810,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    65535,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};

@@ -1,0 +1,89 @@
+#ifndef VERSION_EU
+#ifdef VERSION_US
+static const MessageScriptEntry sEvent127Script[7] = {
+    { 0, 3, 3, 1, { 0, 0, 0 }, gEvent127Text00, 0, 150 },
+    { 31, 0, 1, 1, { 0, 0, 0 }, gEvent127Text01, 0, 180 },
+    { 31, 0, 4, 1, { 0, 0, 0 }, gEvent127Text02, 0, 185 },
+    { 31, 0, 1, 1, { 0, 0, 0 }, gEvent127Text03, 0, 300 },
+    { 0, 3, 3, 1, { 0, 0, 0 }, gEvent127Text04, 0, 330 },
+    { 31, 0, 1, 1, { 0, 0, 0 }, gEvent127Text05, 0, 360 },
+    { 31, 0, 4, 1, { 0, 0, 0 }, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
+};
+
+#include "event_127_text.inc"
+#endif
+#ifdef VERSION_JP
+static const MessageScriptEntry sEvent127Script[7] = {
+    { 0, 3, 3, 3, { 0, 0, 0 }, gEvent127Text00, 0, 150 },
+    { 31, 0, 1, 3, { 0, 0, 0 }, gEvent127Text01, 0, 180 },
+    { 31, 0, 4, 3, { 0, 0, 0 }, gEvent127Text02, 0, 185 },
+    { 31, 0, 1, 3, { 0, 0, 0 }, gEvent127Text03, 0, 300 },
+    { 0, 3, 3, 3, { 0, 0, 0 }, gEvent127Text04, 0, 330 },
+    { 31, 0, 1, 3, { 0, 0, 0 }, gEvent127Text05, 0, 360 },
+    { 31, 0, 4, 3, { 0, 0, 0 }, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
+};
+
+#include "event_127_text.inc"
+#endif
+static const EventCameraKeyframe sEvent127Camera[1] = {
+    { -55537, 66304, 66560, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+};
+
+static const EvSoundCue sEvent127SoundCues[1] = {
+    { SONG_BGM_TOWN_FIELD, 0, EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCharaKeyframe sEvent127Track0[7] = {
+    { 4, 100, { 0, 0 }, 57344, 75008, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 27, 182, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 4, 235, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 4, 285, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateExclamationTask },
+    { 4, 325, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 30, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 4, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent127Track1[1] = {
+    { 114, 9999, { 0, 0 }, 63744, 78592, 0, 0, { 0, 0 }, 32834, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent127Track2[1] = {
+    { 146, 9999, { 0, 0 }, 46848, 79616, 0, 0, { 0, 0 }, 32834, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent127Track3[1] = {
+    { 638, 9999, { 0, 0 }, 70144, 67328, 0, 0, { 0, 0 }, 32770, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent127Tracks[4] = {
+    { sEvent127Track0, 0, { 0, 0, 0 } },
+    { sEvent127Track1, 1, { 0, 0, 0 } },
+    { sEvent127Track2, 2, { 0, 0, 0 } },
+    { sEvent127Track3, 57, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent127 = {
+    4,
+    { 0, 0, 0 },
+    sEvent127Tracks,
+    sEvent127Camera,
+    sEvent127Script,
+    sEvent127SoundCues,
+    NULL,
+    600,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    65535,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};
+#endif

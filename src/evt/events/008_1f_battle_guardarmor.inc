@@ -1,0 +1,67 @@
+static const MessageScriptEntry sEvent008Script[1] = {
+    { 33, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent007Text00), MSG_SCRIPT_FLAG_END, 9999 },
+};
+
+static const EventCameraKeyframe sEvent008Camera[9] = {
+    { -65436, 69120, 94720, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
+    { -65366, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65311, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65271, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65251, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65196, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65176, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_MEDIUM | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -65156, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -63536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+};
+
+static const EvSoundCue sEvent008SoundCues[7] = {
+    { SONG_BGM_EVENT2, 0, 0, 0 },
+    { SONG_SND_389, 220, 0, 0 },
+    { SONG_EV_RUMBLE, 225, 0, 0 },
+    { SONG_EV_RUMBLE, 245, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_SND_389, 335, 0, 0 },
+    { SONG_EV_RUMBLE, 345, 0, 0 },
+    { SONG_EV_RUMBLE, 355, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCharaKeyframe sEvent008Track0[5] = {
+    { 3, 100, { 0, 0 }, 48640, 110080, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 105, 150, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateExclamationTask },
+    { 105, 320, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 2, 360, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 18, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent008Track1[1] = {
+    { 945, 1, { 0, 0 }, 36864, 104704, 0, 0, { 0, 0 }, 32770, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent008Tracks[2] = {
+    { sEvent008Track0, 0, { 0, 0, 0 } },
+    { sEvent008Track1, 104, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent008 = {
+    2,
+    { 0, 0, 0 },
+    sEvent008Tracks,
+    sEvent008Camera,
+    sEvent008Script,
+    sEvent008SoundCues,
+    NULL,
+    500,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    148,
+    65535,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};

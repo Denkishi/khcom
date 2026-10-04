@@ -165,6 +165,19 @@ def rel(path):
 text_fragments = {path.name: rel(path) for pool in text_pools for path in pool.fragment_paths(version)}
 C_INCLUDE_RE = re.compile(r'^\s*#\s*include\s+"([^"]+)"', re.M)
 
+def c_include_deps(path):
+    local, names, stack = [], set(), [path]
+    while stack:
+        cur = stack.pop()
+        for name in C_INCLUDE_RE.findall(cur.read_text()):
+            ref = cur.parent / name
+            if not ref.is_file():
+                names.add(name)
+            elif rel(ref) not in local:
+                local.append(rel(ref))
+                stack.append(ref)
+    return sorted(local) + sorted({text_fragments[name] for name in names if name in text_fragments})
+
 sources = {}
 for path in sorted(Path("src").rglob("*.c")):
     if path.name in sources:
@@ -244,7 +257,7 @@ for src, obj, flags in units:
             deps.append(str(legacy_assembler))
     if rule == "cc":
         deps += headers + generated_headers + ["tools/legacy/bin/arm-elf-as"]
-        deps += sorted({text_fragments[name] for name in C_INCLUDE_RE.findall(src.read_text()) if name in text_fragments})
+        deps += c_include_deps(src)
     if any(dep.startswith("assets/") for dep in deps):
         deps.append(assets_stamp)
     edges.append((obj, rule, src, deps, variables))

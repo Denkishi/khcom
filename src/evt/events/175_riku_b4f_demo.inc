@@ -1,0 +1,104 @@
+#ifdef VERSION_US
+#include "event_175_text.inc"
+#endif
+
+static const MessageScriptEntry sEvent175Script[13] = {
+    { 55, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text00), 0, 100 },
+    { 55, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text01), 0, 102 },
+    { 20, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text02), 0, 250 },
+    { 55, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text03), 0, 280 },
+    { 20, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text04), 0, 310 },
+    { 20, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text05), 0, 312 },
+    { 20, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text06), 0, 314 },
+    { 55, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text07), 0, 340 },
+    { 20, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text08), 0, 370 },
+    { 55, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text09), 0, 410 },
+    { 20, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text10), 0, 460 },
+    { 55, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text11), 0, 500 },
+    { 55, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent175Text12), MSG_SCRIPT_FLAG_END, 502 },
+};
+
+#ifdef VERSION_JP
+#include "event_175_text.inc"
+#endif
+
+static const EvSoundCue sEvent175SoundCues[2] = {
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 555, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCameraKeyframe sEvent175Camera[2] = {
+    { -65396, 56320, 53248, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
+    { -64537, 62976, 55808, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 50, { 0, 0 }, NULL },
+};
+
+static const EventCharaKeyframe sEvent175Track0[4] = {
+    { 891, 200, { 0, 0 }, 55808, 61440, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 892, 495, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 890, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 889, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent175Track1[4] = {
+    { 486, 103, { 0, 0 }, 97280, 83712, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 502, 227, { 0, 0 }, 0, 0, 0, 211, { 0, 0 }, 4, NULL, NULL },
+    { 486, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 486, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent175Tracks[2] = {
+    { sEvent175Track0, 83, { 0, 0, 0 } },
+    { sEvent175Track1, 43, { 0, 0, 0 } },
+};
+
+#if defined(VERSION_US) || defined(VERSION_JP)
+const EventSequenceDef gEvent175 = {
+    2,
+    { 0, 0, 0 },
+    sEvent175Tracks,
+    sEvent175Camera,
+    sEvent175Script,
+    sEvent175SoundCues,
+    NULL,
+    560,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    176,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};
+#elif defined(VERSION_EU)
+const EventSequenceDef gEvent175 = {
+    2,
+    { 0, 0, 0 },
+    sEvent175Tracks,
+    sEvent175Camera,
+    sEvent175Script,
+    sEvent175SoundCues,
+    NULL,
+    560,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    174,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};
+#endif

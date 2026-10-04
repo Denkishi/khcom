@@ -1,0 +1,96 @@
+#ifdef VERSION_US
+#include "event_165_text.inc"
+#endif
+
+static const MessageScriptEntry sEvent165Script[6] = {
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text00), 0, 160 },
+    { 27, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text01), 0, 190 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text02), 0, 360 },
+    { 27, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text03), 0, 390 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text04), 0, 420 },
+    { 27, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent165Text05), MSG_SCRIPT_FLAG_END, 450 },
+};
+
+#ifdef VERSION_JP
+#include "event_165_text.inc"
+#endif
+
+static const EvSoundCue sEvent165SoundCues[2] = {
+    { SONG_BGM_EVENT_XIII, 0, 0, 0 },
+    { SONG_BGM_EVENT_XIII, 505, EV_SOUND_FLAG_FADE_OUT | EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCameraKeyframe sEvent165Camera[1] = {
+    { -64537, 68608, 51712, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+};
+
+static const EventCharaKeyframe sEvent165Track0[3] = {
+    { 696, 1, { 0, 0 }, 31744, 77312, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 712, 130, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, NULL, NULL },
+    { 696, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent165Track1[5] = {
+    { 721, 110, { 0, 0 }, 78080, 56576, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 721, 200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 721, 330, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, NULL, CreateBalloonTask },
+    { 721, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 721, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent165Tracks[2] = {
+    { sEvent165Track0, 65, { 0, 0, 0 } },
+    { sEvent165Track1, 67, { 0, 0, 0 } },
+};
+
+#if defined(VERSION_US) || defined(VERSION_JP)
+const EventSequenceDef gEvent165 = {
+    2,
+    { 0, 0, 0 },
+    sEvent165Tracks,
+    sEvent165Camera,
+    sEvent165Script,
+    sEvent165SoundCues,
+    NULL,
+    510,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    166,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};
+#elif defined(VERSION_EU)
+const EventSequenceDef gEvent165 = {
+    2,
+    { 0, 0, 0 },
+    sEvent165Tracks,
+    sEvent165Camera,
+    sEvent165Script,
+    sEvent165SoundCues,
+    NULL,
+    510,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    164,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};
+#endif

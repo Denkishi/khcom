@@ -1,0 +1,191 @@
+#ifdef VERSION_US
+#include "event_158_text.inc"
+static const MessageScriptEntry sEvent158Script[21] = {
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text00, 0, 180 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text01, 0, 310 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text02, 0, 610 },
+    { 26, 5, 3, 1, { 0, 0, 0 }, gEvent158Text03, 0, 660 },
+    { 61, 0, 0, 1, { 0, 0, 0 }, gEvent158Text04, 0, 840 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent158Text05, 0, 980 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent158Text06, 0, 1230 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, gEvent158Text07, 0, 1260 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text08, 0, 1290 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, gEvent158Text09, 0, 1320 },
+    { 61, 3, 1, 1, { 0, 0, 0 }, gEvent158Text10, 0, 1410 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, gEvent158Text11, 0, 1414 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text12, 0, 1450 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, gEvent158Text13, 0, 1480 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, gEvent158Text14, 0, 1482 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, gEvent158Text15, 0, 1484 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, gEvent158Text16, 0, 1675 },
+    { 61, 3, 1, 1, { 0, 0, 0 }, gEvent158Text17, 0, 1700 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent158Text18, 0, 1890 },
+    { 61, 1, 1, 1, { 0, 0, 0 }, gEvent158Text19, 0, 1920 },
+    { 26, 4, 3, 1, { 0, 0, 0 }, gEvent158Text20, MSG_SCRIPT_FLAG_END, 1950 },
+};
+#endif
+
+#ifdef VERSION_JP
+static const MessageScriptEntry sEvent158Script[21] = {
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text00, 0, 180 },
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text01, 0, 310 },
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text02, 0, 610 },
+    { 26, 5, 3, 3, { 0, 0, 0 }, gEvent158Text03, 0, 660 },
+    { 61, 0, 0, 3, { 0, 0, 0 }, gEvent158Text04, 0, 840 },
+    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent158Text05, 0, 980 },
+    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent158Text06, 0, 1230 },
+    { 61, 0, 1, 3, { 0, 0, 0 }, gEvent158Text07, 0, 1260 },
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text08, 0, 1290 },
+    { 61, 0, 1, 3, { 0, 0, 0 }, gEvent158Text09, 0, 1320 },
+    { 61, 3, 1, 3, { 0, 0, 0 }, gEvent158Text10, 0, 1410 },
+    { 61, 0, 4, 3, { 0, 0, 0 }, gEvent158Text11, 0, 1414 },
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text12, 0, 1450 },
+    { 61, 0, 1, 3, { 0, 0, 0 }, gEvent158Text13, 0, 1480 },
+    { 61, 0, 4, 3, { 0, 0, 0 }, gEvent158Text14, 0, 1482 },
+    { 61, 0, 4, 3, { 0, 0, 0 }, gEvent158Text15, 0, 1484 },
+    { 26, 0, 3, 3, { 0, 0, 0 }, gEvent158Text16, 0, 1675 },
+    { 61, 3, 1, 3, { 0, 0, 0 }, gEvent158Text17, 0, 1700 },
+    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent158Text18, 0, 1890 },
+    { 61, 1, 1, 3, { 0, 0, 0 }, gEvent158Text19, 0, 1920 },
+    { 26, 4, 3, 3, { 0, 0, 0 }, gEvent000Text15, MSG_SCRIPT_FLAG_END, 1950 },
+};
+
+#include "event_158_text.inc"
+#endif
+#ifdef VERSION_EU
+static const MessageScriptEntry sEvent158Script[21] = {
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text00, 0, 180 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text01, 0, 310 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text02, 0, 610 },
+    { 26, 5, 3, 1, { 0, 0, 0 }, &gEvent158Text03, 0, 660 },
+    { 61, 0, 0, 1, { 0, 0, 0 }, &gEvent158Text04, 0, 840 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent158Text05, 0, 980 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent158Text06, 0, 1230 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, &gEvent158Text07, 0, 1260 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text08, 0, 1290 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, &gEvent158Text09, 0, 1320 },
+    { 61, 3, 1, 1, { 0, 0, 0 }, &gEvent158Text10, 0, 1410 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, &gEvent158Text11, 0, 1414 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text12, 0, 1450 },
+    { 61, 0, 1, 1, { 0, 0, 0 }, &gEvent158Text13, 0, 1480 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, &gEvent158Text14, 0, 1482 },
+    { 61, 0, 4, 1, { 0, 0, 0 }, &gEvent158Text15, 0, 1484 },
+    { 26, 0, 3, 1, { 0, 0, 0 }, &gEvent158Text16, 0, 1675 },
+    { 61, 3, 1, 1, { 0, 0, 0 }, &gEvent158Text17, 0, 1700 },
+    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent158Text18, 0, 1890 },
+    { 61, 1, 1, 1, { 0, 0, 0 }, &gEvent158Text19, 0, 1920 },
+    { 26, 4, 3, 1, { 0, 0, 0 }, &gEvent158Text20, MSG_SCRIPT_FLAG_END, 1950 },
+};
+#endif
+
+static const EvSoundCue sEvent158SoundCues[8] = {
+    { SONG_BGM_T13THFLOOR, 0, 0, 0 },
+    { SONG_BGM_T13THFLOOR, 360, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_BGM_EVENT_UNREST, 611, EV_SOUND_FLAG_FADE_IN, 0 },
+    { SONG_BGM_EVENT_UNREST, 900, EV_SOUND_FLAG_FADE_OUT, 0 },
+    { SONG_EV_FLASH01, 1010, 0, 0 },
+    { SONG_EV_FLASH01, 1040, 0, 0 },
+    { SONG_EV_FLASH01, 1060, 0, 0 },
+    { SONG_EV_WHITEOUT, 1110, EV_SOUND_FLAG_END, 0 },
+};
+
+static const EventCameraKeyframe sEvent158Camera[12] = {
+    { -64676, 171520, 68352, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
+    { -64526, 178176, 66560, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, NULL },
+    { -64496, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 10, { 0, 0 }, NULL },
+    { -64476, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 20, { 0, 0 }, NULL },
+    { -64466, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_HALF_FLASH | CAMERA_KEYFRAME_FLAG_NO_FLASH_SOUND | CAMERA_MODE_KEEP, 10, { 0, 0 }, NULL },
+    { -64426, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -64376, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE | CAMERA_MODE_KEEP, 50, { 0, 0 }, NULL },
+    { -64371, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -64321, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_MODE_KEEP, 50, { 0, 0 }, NULL },
+    { -64186, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+    { -63536, 173824, 68608, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 50, { 0, 0 }, NULL },
+    { -60536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
+};
+
+static const EventCharaKeyframe sEvent158Track0[31] = {
+    { 515, 1, { 0, 0 }, 137216, 93696, 0, 0, { 0, 0 }, 66, NULL, NULL },
+    { 518, 150, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, NULL, NULL },
+    { 515, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 240, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
+    { 515, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 514, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 330, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 530, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 530, 480, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
+    { 530, 490, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 500, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 532, 520, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 532, 570, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateExclamationTask },
+    { 532, 580, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 630, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 540, 680, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 540, 810, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
+    { 540, 860, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 975, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 532, 982, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 1495, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 1625, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
+    { 515, 1650, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 540, 1670, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 1770, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 536, 1790, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 536, 1840, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateExclamationTask },
+    { 536, 1860, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 558, 1925, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
+    { 515, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent158Track1[10] = {
+    { 745, 1161, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, NULL, NULL },
+    { 745, 1350, { 0, 0 }, 185088, 70656, 0, 0, { 0, 0 }, 1048834, NULL, NULL },
+    { 747, 1380, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 1048836, NULL, NULL },
+    { 745, 1405, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 1048837, NULL, NULL },
+    { 751, 1412, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 1048837, NULL, NULL },
+    { 745, 1720, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 1048837, NULL, NULL },
+    { 750, 1890, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 1048837, NULL, NULL },
+    { 745, 1980, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 1048837, NULL, NULL },
+    { 745, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 524544, EventCharaFadeOut, NULL },
+    { 745, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+};
+
+static const EventCharaKeyframe sEvent158Track2[5] = {
+    { 920, 860, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8274, NULL, NULL },
+    { 920, 861, { 0, 0 }, 185856, 44800, 0, 0, { 0, 0 }, 16722, NULL, NULL },
+    { 920, 950, { 0, 0 }, 185856, 61952, 0, 920, { 0, 0 }, 339, NULL, NULL },
+    { 920, 1120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 469, NULL, NULL },
+    { 920, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98370, NULL, NULL },
+};
+
+static const EventCharaTrack sEvent158Tracks[3] = {
+    { sEvent158Track0, 44, { 0, 0, 0 } },
+    { sEvent158Track1, 69, { 0, 0, 0 } },
+    { sEvent158Track2, 87, { 0, 0, 0 } },
+};
+
+const EventSequenceDef gEvent158 = {
+    3,
+    { 0, 0, 0 },
+    sEvent158Tracks,
+    sEvent158Camera,
+    sEvent158Script,
+    sEvent158SoundCues,
+    NULL,
+    2060,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    65535,
+    0,
+    { 0, 0 },
+    65535,
+    0,
+    255,
+    255,
+};

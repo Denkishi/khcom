@@ -209,7 +209,7 @@ entries:
     size: 32
 - name: gUnk_08F68604
   format: palette
-  declare: false
+  const: true
   us:
     address: 0x08F68604
     size: 32

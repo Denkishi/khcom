@@ -58,7 +58,6 @@ typedef struct EffectWork {
 
 extern EventState* gEventState;
 extern const EventCharaParams gEventCharaParams[];
-extern const char gUnk_08F70990[];
 
 void mode_eventselect_0();
 void mode_eventselect_1();

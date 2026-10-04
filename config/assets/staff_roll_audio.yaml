@@ -29,7 +29,7 @@ entries:
     address: 0x09AB93B8
 - name: gBlockAudioData
   format: raw
-  declare: false
+  ctype: u32
   us:
     address: 0x09A5B674
     size: 1998868

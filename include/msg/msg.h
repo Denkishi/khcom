@@ -265,9 +265,4 @@ u8 msgwait_1(MsgWaitWork* work, void* a);
 void msgwait_2(MsgWaitWork* work);
 void msgwait_3(MsgWaitWork* work);
 
-extern const u16 gUnk_0951D2B8[1024];
-extern const u16 gUnk_0951DAB8[1024];
-extern const u16 gUnk_0951E2B8[1024];
-extern const u16 gUnk_0951EAB8[1024];
-
 #endif /* GUARD_MSG_H */

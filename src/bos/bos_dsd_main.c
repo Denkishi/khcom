@@ -14,7 +14,6 @@
 #include "songs.h"
 #include "acgtrans.h"
 #include "anim.h"
-#include "background_actor_assets.h"
 #include "battle_actor.h"
 #include "battle_actor_types.h"
 #include "battle_work.h"

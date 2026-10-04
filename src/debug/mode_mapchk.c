@@ -24,6 +24,7 @@
 #include "save_types.h"
 #include "types.h"
 #include "debug_text.h"
+#include "map_check_worlds.h"
 
 static const char sDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
 

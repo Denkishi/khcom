@@ -3858,7 +3858,7 @@ entries:
     size: 532
 - name: gUnk_09858320
   format: sprite_sheet
-  declare: false
+  const: true
   align: 4
   cell: [40, 40]
   anchor: [16, 31]
@@ -3892,7 +3892,7 @@ entries:
     size: 1600
 - name: gUnk_09858B3C
   format: sprite_sheet
-  declare: false
+  const: true
   align: 4
   cell: [82, 53]
   anchor: [41, 41]
@@ -4010,7 +4010,7 @@ entries:
     size: 6684
 - name: gUnk_0985A3EA
   format: sprite_sheet
-  declare: false
+  const: true
   align: 4
   cell: [32, 60]
   anchor: [16, 55]
@@ -9742,7 +9742,7 @@ entries:
 - name: gUnk_099581A4
   format: tiles4
   width: 2
-  declare: false
+  const: true
   us:
     address: 0x099581A4
     size: 320
@@ -9803,20 +9803,23 @@ entries:
 - name: gUnk_09961A64
   format: tiles4
   width: 4
-  declare: false
+  const: true
   us:
     address: 0x09961A64
     size: 4480
+    shape: [14, 320]
   jp:
     address: 0x09916578
     size: 4480
+    shape: [14, 320]
   eu:
     address: 0x099533F0
     size: 2048
 - name: gUnk_09962BE4
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   us:
     address: 0x09962BE4
     size: 4480
@@ -9829,7 +9832,8 @@ entries:
 - name: gUnk_09963D64
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   us:
     address: 0x09963D64
     size: 4480
@@ -9842,7 +9846,8 @@ entries:
 - name: gUnk_09964EE4
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   us:
     address: 0x09964EE4
     size: 4480
@@ -9855,7 +9860,7 @@ entries:
 - name: gUnk_09966064
   format: tiles4
   width: 2
-  declare: false
+  const: true
   us:
     address: 0x09966064
     size: 320
@@ -10070,139 +10075,156 @@ entries:
 - name: gUnkEu_09953BF0
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x09953BF0
     size: 2048
 - name: gUnkEu_099543F0
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x099543F0
     size: 2048
 - name: gUnkEu_09954BF0
   format: tiles4
-  declare: false
+  const: true
   eu:
     address: 0x09954BF0
     size: 1632
 - name: gUnkEu_09955250
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09955250
     size: 4480
 - name: gUnkEu_09959850
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09959850
     size: 4480
 - name: gUnkEu_0995A9D0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x0995A9D0
     size: 4480
 - name: gUnkEu_0995BB50
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x0995BB50
     size: 4480
 - name: gUnkEu_0995CCD0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x0995CCD0
     size: 4480
 - name: gUnkEu_0995DE50
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x0995DE50
     size: 4480
 - name: gUnkEu_0995EFD0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x0995EFD0
     size: 4480
 - name: gUnkEu_09960150
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09960150
     size: 4480
 - name: gUnkEu_099612D0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x099612D0
     size: 4480
 - name: gUnkEu_09962450
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09962450
     size: 4480
 - name: gUnkEu_099635D0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x099635D0
     size: 4480
 - name: gUnkEu_09964750
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09964750
     size: 4480
 - name: gUnkEu_099658D0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x099658D0
     size: 4480
 - name: gUnkEu_09966A50
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09966A50
     size: 4480
 - name: gUnkEu_09967BD0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09967BD0
     size: 4480
 - name: gUnkEu_09968D50
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09968D50
     size: 4480
 - name: gUnkEu_09969ED0
   format: tiles4
   width: 4
-  declare: false
+  shape: [14, 320]
+  const: true
   eu:
     address: 0x09969ED0
     size: 4480
@@ -10400,28 +10422,28 @@ entries:
 - name: gUnkEu_0996D130
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x0996D130
     size: 2048
 - name: gUnkEu_0996D930
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x0996D930
     size: 2048
 - name: gUnkEu_0996E130
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x0996E130
     size: 2048
 - name: gUnkEu_0996E930
   format: tiles4
   width: 32
-  declare: false
+  const: true
   eu:
     address: 0x0996E930
     size: 2048

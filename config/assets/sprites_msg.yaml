@@ -16418,7 +16418,7 @@ entries:
     size: 1664
 - name: gUnk_0951D2B8
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0951D2B8
     size: 2048
@@ -16430,7 +16430,7 @@ entries:
     size: 2048
 - name: gUnk_0951DAB8
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0951DAB8
     size: 2048
@@ -16442,7 +16442,7 @@ entries:
     size: 2048
 - name: gUnk_0951E2B8
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0951E2B8
     size: 2048
@@ -16454,7 +16454,7 @@ entries:
     size: 2048
 - name: gUnk_0951EAB8
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0951EAB8
     size: 2048

@@ -1200,7 +1200,7 @@ entries:
     size: 2048
 - name: gBossMapBlockUs_09845798
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09845798
     size: 2048
@@ -1214,7 +1214,7 @@ entries:
     symbol: gBossMapBlockEu_09819E40
 - name: gBossMapBlockUs_09845F98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09845F98
     size: 2048
@@ -1228,7 +1228,7 @@ entries:
     symbol: gBossMapBlockEu_0981A640
 - name: gBossMapBlockUs_09846798
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09846798
     size: 2048
@@ -1242,7 +1242,7 @@ entries:
     symbol: gBossMapBlockEu_0981AE40
 - name: gBossMapBlockUs_09846F98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09846F98
     size: 2048

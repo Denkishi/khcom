@@ -1,6 +1,7 @@
 group: sprites_staff_roll
 types:
   StaffRollTileBlock:
+    header: sroll.h
     fields:
     - name: tiles
       type: void*
@@ -32548,7 +32549,6 @@ entries:
     size: 9392
 - name: gUnk_09A54218
   record: StaffRollTileBlock
-  declare: false
   us:
     address: 0x09A54218
     elements:

@@ -12,7 +12,6 @@ typedef struct DebugWork {
     AnimState anim;
 } DebugWork;
 
-extern const u16 gUnk_08F68604[];
 extern const char gVersionString[];
 extern Mode gModeChkbtl;
 extern Mode gModeChksnd;

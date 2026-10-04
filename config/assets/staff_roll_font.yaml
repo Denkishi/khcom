@@ -35,7 +35,8 @@ types:
       type: u32
   StaffRollBlitTable:
     kind: table
-    type: void*
+    type: SrollBlitFunc
+    header: sroll.h
   StaffRollCharMap:
     kind: array
     type: u16
@@ -222,7 +223,8 @@ entries:
     address: 0x09AB2454
 - name: gUnk_09A54918
   record: SrollMask
-  declare: false
+  shape: [9, 8]
+  const: false
   elements:
   - [4294967295, 4294967295, 0]
   - [4294967295, 4294967295, 0]
@@ -304,7 +306,7 @@ entries:
     address: 0x09AB2660
 - name: gUnk_09A54C78
   record: SrollShift
-  declare: false
+  const: false
   elements:
   - [0, 32]
   - [4, 28]
@@ -322,7 +324,6 @@ entries:
     address: 0x09AB29C0
 - name: gUnk_09A54CB8
   record: StaffRollBlitTable
-  declare: false
   items:
   - SrollBlit1bppWidth0
   - SrollBlit1bppWidth1
@@ -341,7 +342,6 @@ entries:
     address: 0x09AB2A00
 - name: gUnk_09A54CDC
   record: StaffRollBlitTable
-  declare: false
   items:
   - SrollBlit2bppWidth0
   - SrollBlit2bppWidth1
@@ -584,7 +584,6 @@ entries:
     address: 0x09AB8E88
 - name: gUnk_09A5B440
   record: SrollFont
-  declare: false
   elements:
   - [2, 2, gStaffRollFontPages, gStaffRollFont0Glyphs, gStaffRollFont0Widths, 524, 8]
   - [2, 1, gStaffRollFontPages, gStaffRollFont1Glyphs, gStaffRollFont1Widths, 524, 8]
@@ -596,7 +595,6 @@ entries:
     address: 0x09AB9188
 - name: gUnk_09A5B470
   record: StaffRollCharMap
-  declare: false
   values:
   - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
   - [16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]

@@ -21,6 +21,8 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "staff_roll_audio.h"
+#include "staff_roll_font.h"
 
 static DmaStream sDmaStream;
 static u8 sBlockAudioPlaying;

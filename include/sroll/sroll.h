@@ -40,6 +40,8 @@ typedef struct SrollBlit {
     u32 buf[32];
 } SrollBlit;
 
+typedef void (*SrollBlitFunc)(u32* dst, u8* src, u32* pal, s32 x);
+
 typedef struct SrollANameWork {
     u16 unk_00;
     s16 kind;
@@ -230,19 +232,10 @@ typedef struct SrollSecnSprite {
     void* gfxTable;
 } SrollSecnSprite;
 
-extern const StaffRollTileBlock gUnk_09A54218[];
-
 extern const SrollSecnSprite gSrollSecnSprites[];
 extern const s32 gSrollBCharSwayOffsets[16];
 extern const s32 gSrollBCharHopOffsets[16];
-extern SrollShift gUnk_09A54C78[];
-extern SrollMask gUnk_09A54918[][8];
-extern void (*gUnk_09A54CB8[])(u32*, u8*, u32*, s32);
-extern void (*gUnk_09A54CDC[])(u32*, u8*, u32*, s32);
 extern u8 gUnk_05000220[];
-extern const SrollFont gUnk_09A5B440[];
-extern const u16 gUnk_09A5B470[];
-extern u32 gBlockAudioData[];
 
 void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a);
 void task_sroll_a_name_2(SrollANameWork* work);

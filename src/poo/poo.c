@@ -5,7 +5,6 @@
 
 #include "macros.h"
 #include "poo.h"
-#include "background_actor_assets.h"
 #include "sprites_btl.h"
 #include "sprites_evt.h"
 #include "sprites_fld.h"

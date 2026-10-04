@@ -31,6 +31,7 @@ GBAGFX_MAX_COLORS = 256
 ASM_KINDS = ("sprite", "anim", "array", "string")
 SCALAR_SIZES = {"u8": 1, "s8": 1, "u16": 2, "s16": 2, "u32": 4, "s32": 4}
 FORMAT_CTYPES = {"tilemap": "u16", "palette": "u16"}
+CONST_KINDS = ("struct", "array", "string")
 DIRECTIVES = {1: ".byte", 2: ".hword", 4: ".4byte"}
 VALUES_PER_LINE = {1: 16, 2: 8, 4: 4}
 
@@ -922,6 +923,24 @@ def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
     write_if_changed(out_path, "\n".join(lines) + "\n")
 
 
+def qualifier(item, kind=None):
+    return "const " if item.get("const", kind in CONST_KINDS) else ""
+
+
+def scalar_count(manifest, entry, version, ctype):
+    size = manifest.size(entry, version)
+    if size % SCALAR_SIZES[ctype]:
+        raise ManifestError(f"{manifest.group}: {entry['name']} is {size} bytes in {version}, not a whole number of {ctype}")
+    return size // SCALAR_SIZES[ctype]
+
+
+def dimensions(manifest, entry, version, count, unit):
+    shape = manifest.data(entry, version, "shape") or [count]
+    if math.prod(shape) != count:
+        raise ManifestError(f"{manifest.group}: {entry['name']} has shape {shape} but {count} {unit} in {version}")
+    return "".join(f"[{n}]" for n in shape)
+
+
 def emit_header(manifest, version, members_by_object, out_path, sheets):
     guard = "GUARD_GEN_" + manifest.group.upper() + "_H"
     lines = [f"#ifndef {guard}", f"#define {guard}", ""]
@@ -941,50 +960,48 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
             if entry.get("format") == "sprite_sheet":
                 for frame in manifest.frames(entry, version):
                     if frame.get("declare") is not False:
-                        lines.append(f"extern u16 {manifest.item_symbol(frame, version)}[];")
+                        lines.append(f"extern {qualifier(frame)}u16 {manifest.item_symbol(frame, version)}[];")
                 for anim in manifest.animations(entry, version):
                     if anim.get("declare") is not False:
-                        lines.append(f"extern {manifest.anim_type()} {manifest.item_symbol(anim, version)};")
+                        lines.append(f"extern {qualifier(anim)}{manifest.anim_type()} {manifest.item_symbol(anim, version)};")
                 if entry.get("declare") is not False and not entry.get("tiles"):
-                    lines.append(f"extern u8 {manifest.symbol(entry, version)}[{len(sheets[entry['name']][2])}];")
+                    lines.append(f"extern {qualifier(entry)}u8 {manifest.symbol(entry, version)}[{len(sheets[entry['name']][2])}];")
                 continue
             if entry.get("declare") is False:
                 continue
             symbol = manifest.symbol(entry, version)
             kind = manifest.kind(entry)
+            const = qualifier(entry, kind)
             if kind == "table":
                 ctype = manifest.types[entry["record"]]["type"]
                 lines.append(f"extern {ctype} {symbol}[{len(manifest.data(entry, version, 'items'))}];")
+            elif kind == "struct" and "ctype" in entry:
+                count = scalar_count(manifest, entry, version, entry["ctype"])
+                lines.append(f"extern {const}{entry['ctype']} {symbol}{dimensions(manifest, entry, version, count, entry['ctype'])};")
             elif kind == "struct":
                 if not manifest.types[entry["record"]].get("header"):
                     raise ManifestError(f"{manifest.group}: {entry['name']} is declared but {entry['record']} has no header")
                 elements = manifest.elements(entry, version)
-                count = "" if elements is None else f"[{len(elements)}]"
-                lines.append(f"extern const {entry['record']} {symbol}{count};")
+                count = "" if elements is None else dimensions(manifest, entry, version, len(elements), entry["record"])
+                lines.append(f"extern {const}{entry['record']} {symbol}{count};")
             elif kind == "array":
                 rtype = manifest.types[entry["record"]]
                 values = len(manifest.values(entry, version))
                 columns = rtype.get("columns")
                 shape = f"[{values}]" if not columns else f"[{values // columns}][{columns}]"
-                lines.append(f"extern const {rtype.get('ctype', rtype['type'])} {symbol}{shape};")
+                lines.append(f"extern {const}{rtype.get('ctype', rtype['type'])} {symbol}{shape};")
             elif kind == "string":
-                lines.append(f"extern const {manifest.types[entry['record']].get('ctype', 'char')} {symbol}[];")
+                lines.append(f"extern {const}{manifest.types[entry['record']].get('ctype', 'char')} {symbol}[];")
             elif kind == "anim":
-                lines.append(f"extern {entry['record']} {symbol};")
+                lines.append(f"extern {const}{entry['record']} {symbol};")
             elif kind == "sprite":
-                lines.append(f"extern u16 {symbol}[];")
+                lines.append(f"extern {const}u16 {symbol}[];")
             elif name.endswith(".s") and "type" in entry:
-                lines.append(f"extern {entry['type']} {symbol};")
+                lines.append(f"extern {const}{entry['type']} {symbol};")
             elif name.endswith(".s"):
                 ctype = entry.get("ctype", FORMAT_CTYPES.get(entry.get("format"), "u8"))
-                size = entry[version]["size"]
-                if size % SCALAR_SIZES[ctype]:
-                    raise ManifestError(f"{manifest.group}: {entry['name']} is {size} bytes in {version}, not a whole number of {ctype}")
-                count = size // SCALAR_SIZES[ctype]
-                shape = manifest.data(entry, version, "shape") or [count]
-                if math.prod(shape) != count:
-                    raise ManifestError(f"{manifest.group}: {entry['name']} has shape {shape} but {count} {ctype} in {version}")
-                lines.append(f"extern {ctype} {symbol}{''.join(f'[{n}]' for n in shape)};")
+                count = scalar_count(manifest, entry, version, ctype)
+                lines.append(f"extern {const}{ctype} {symbol}{dimensions(manifest, entry, version, count, ctype)};")
     lines += ["", "#endif"]
     write_if_changed(out_path, "\n".join(lines) + "\n")
 

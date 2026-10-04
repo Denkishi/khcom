@@ -2398,9 +2398,6 @@ void BuildDebugKeybladeDeck(u8 a);
 void BuildDebugMixedDeck(u8 a);
 void func_080AB964();
 void func_080AB968();
-#ifdef VERSION_EU
-extern AnimHeader gUnk_090A44BA;
-#endif
 #ifdef VERSION_JP
 extern u8 gUnk_0814FBD4[];
 #endif

@@ -12308,7 +12308,7 @@ entries:
     size: 16032
 - name: gUnk_09806D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09806D98
     size: 2048
@@ -12320,7 +12320,7 @@ entries:
     size: 2048
 - name: gUnk_09807598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09807598
     size: 2048
@@ -12332,7 +12332,7 @@ entries:
     size: 2048
 - name: gUnk_09807D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09807D98
     size: 2048
@@ -12344,7 +12344,7 @@ entries:
     size: 2048
 - name: gUnk_09808598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09808598
     size: 2048
@@ -12356,7 +12356,7 @@ entries:
     size: 2048
 - name: gUnk_09808D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09808D98
     size: 2048
@@ -12368,7 +12368,7 @@ entries:
     size: 2048
 - name: gUnk_09809598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09809598
     size: 2048
@@ -12380,7 +12380,7 @@ entries:
     size: 2048
 - name: gUnk_09809D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09809D98
     size: 2048
@@ -12392,7 +12392,7 @@ entries:
     size: 2048
 - name: gUnk_0980A598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980A598
     size: 2048
@@ -12404,7 +12404,7 @@ entries:
     size: 2048
 - name: gUnk_0980AD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980AD98
     size: 2048
@@ -12416,7 +12416,7 @@ entries:
     size: 2048
 - name: gUnk_0980B598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980B598
     size: 2048
@@ -12428,7 +12428,7 @@ entries:
     size: 2048
 - name: gUnk_0980BD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980BD98
     size: 2048
@@ -12440,7 +12440,7 @@ entries:
     size: 2048
 - name: gUnk_0980C598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980C598
     size: 2048
@@ -12452,7 +12452,7 @@ entries:
     size: 2048
 - name: gUnk_0980CD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980CD98
     size: 2048
@@ -12464,7 +12464,7 @@ entries:
     size: 2048
 - name: gUnk_0980D598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980D598
     size: 2048
@@ -12476,7 +12476,7 @@ entries:
     size: 2048
 - name: gUnk_0980DD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980DD98
     size: 2048
@@ -12488,7 +12488,7 @@ entries:
     size: 2048
 - name: gUnk_0980E598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980E598
     size: 2048
@@ -12500,7 +12500,7 @@ entries:
     size: 2048
 - name: gUnk_0980ED98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980ED98
     size: 2048
@@ -12512,7 +12512,7 @@ entries:
     size: 2048
 - name: gUnk_0980F598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980F598
     size: 2048
@@ -12524,7 +12524,7 @@ entries:
     size: 2048
 - name: gUnk_0980FD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0980FD98
     size: 2048
@@ -12536,7 +12536,7 @@ entries:
     size: 2048
 - name: gUnk_09810598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09810598
     size: 2048
@@ -12548,7 +12548,7 @@ entries:
     size: 2048
 - name: gUnk_09810D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09810D98
     size: 2048
@@ -12560,7 +12560,7 @@ entries:
     size: 2048
 - name: gUnk_09811598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09811598
     size: 2048
@@ -12572,7 +12572,7 @@ entries:
     size: 2048
 - name: gUnk_09811D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09811D98
     size: 2048
@@ -12584,7 +12584,7 @@ entries:
     size: 2048
 - name: gUnk_09812598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09812598
     size: 2048
@@ -12596,7 +12596,7 @@ entries:
     size: 2048
 - name: gUnk_09812D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09812D98
     size: 2048
@@ -12608,7 +12608,7 @@ entries:
     size: 2048
 - name: gUnk_09813598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09813598
     size: 2048
@@ -12620,7 +12620,7 @@ entries:
     size: 2048
 - name: gUnk_09813D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09813D98
     size: 2048
@@ -12632,7 +12632,7 @@ entries:
     size: 2048
 - name: gUnk_09814598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09814598
     size: 2048
@@ -12644,7 +12644,7 @@ entries:
     size: 2048
 - name: gUnk_09814D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09814D98
     size: 2048
@@ -12656,7 +12656,7 @@ entries:
     size: 2048
 - name: gUnk_09815598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09815598
     size: 2048
@@ -12668,7 +12668,7 @@ entries:
     size: 2048
 - name: gUnk_09815D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09815D98
     size: 2048
@@ -12680,7 +12680,7 @@ entries:
     size: 2048
 - name: gUnk_09816598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09816598
     size: 2048
@@ -12692,7 +12692,7 @@ entries:
     size: 2048
 - name: gUnk_09816D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09816D98
     size: 2048
@@ -12704,7 +12704,7 @@ entries:
     size: 2048
 - name: gUnk_09817598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09817598
     size: 2048
@@ -12716,7 +12716,7 @@ entries:
     size: 2048
 - name: gUnk_09817D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09817D98
     size: 2048
@@ -12728,7 +12728,7 @@ entries:
     size: 2048
 - name: gUnk_09818598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09818598
     size: 2048
@@ -12740,7 +12740,7 @@ entries:
     size: 2048
 - name: gUnk_09818D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09818D98
     size: 2048
@@ -12752,7 +12752,7 @@ entries:
     size: 2048
 - name: gUnk_09819598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09819598
     size: 2048
@@ -12764,7 +12764,7 @@ entries:
     size: 2048
 - name: gUnk_09819D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09819D98
     size: 2048
@@ -12776,7 +12776,7 @@ entries:
     size: 2048
 - name: gUnk_0981A598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981A598
     size: 2048
@@ -12788,7 +12788,7 @@ entries:
     size: 2048
 - name: gUnk_0981AD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981AD98
     size: 2048
@@ -12800,7 +12800,7 @@ entries:
     size: 2048
 - name: gUnk_0981B598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981B598
     size: 2048
@@ -12812,7 +12812,7 @@ entries:
     size: 2048
 - name: gUnk_0981BD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981BD98
     size: 2048
@@ -12824,7 +12824,7 @@ entries:
     size: 2048
 - name: gUnk_0981C598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981C598
     size: 2048
@@ -12836,7 +12836,7 @@ entries:
     size: 2048
 - name: gUnk_0981CD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981CD98
     size: 2048
@@ -12848,7 +12848,7 @@ entries:
     size: 2048
 - name: gUnk_0981D598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981D598
     size: 2048
@@ -12860,7 +12860,7 @@ entries:
     size: 2048
 - name: gUnk_0981DD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981DD98
     size: 2048
@@ -12872,7 +12872,7 @@ entries:
     size: 2048
 - name: gUnk_0981E598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981E598
     size: 2048
@@ -12884,7 +12884,7 @@ entries:
     size: 2048
 - name: gUnk_0981ED98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981ED98
     size: 2048
@@ -12896,7 +12896,7 @@ entries:
     size: 2048
 - name: gUnk_0981F598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981F598
     size: 2048
@@ -12908,7 +12908,7 @@ entries:
     size: 2048
 - name: gUnk_0981FD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0981FD98
     size: 2048
@@ -12920,7 +12920,7 @@ entries:
     size: 2048
 - name: gUnk_09820598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09820598
     size: 2048
@@ -12932,7 +12932,7 @@ entries:
     size: 2048
 - name: gUnk_09820D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09820D98
     size: 2048
@@ -12944,7 +12944,7 @@ entries:
     size: 2048
 - name: gUnk_09821598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09821598
     size: 2048
@@ -12956,7 +12956,7 @@ entries:
     size: 2048
 - name: gUnk_09821D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09821D98
     size: 2048
@@ -12968,7 +12968,7 @@ entries:
     size: 2048
 - name: gUnk_09822598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09822598
     size: 2048
@@ -12980,7 +12980,7 @@ entries:
     size: 2048
 - name: gUnk_09822D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09822D98
     size: 2048
@@ -12992,7 +12992,7 @@ entries:
     size: 2048
 - name: gUnk_09823598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09823598
     size: 2048
@@ -13004,7 +13004,7 @@ entries:
     size: 2048
 - name: gUnk_09823D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09823D98
     size: 2048
@@ -13016,7 +13016,7 @@ entries:
     size: 2048
 - name: gUnk_09824598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09824598
     size: 2048
@@ -13028,7 +13028,7 @@ entries:
     size: 2048
 - name: gUnk_09824D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09824D98
     size: 2048
@@ -13040,7 +13040,7 @@ entries:
     size: 2048
 - name: gUnk_09825598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09825598
     size: 2048
@@ -13052,7 +13052,7 @@ entries:
     size: 2048
 - name: gUnk_09825D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09825D98
     size: 2048
@@ -13064,7 +13064,7 @@ entries:
     size: 2048
 - name: gUnk_09826598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09826598
     size: 2048
@@ -13076,7 +13076,7 @@ entries:
     size: 2048
 - name: gUnk_09826D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09826D98
     size: 2048
@@ -13088,7 +13088,7 @@ entries:
     size: 2048
 - name: gUnk_09827598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09827598
     size: 2048
@@ -13100,7 +13100,7 @@ entries:
     size: 2048
 - name: gUnk_09827D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09827D98
     size: 2048
@@ -13112,7 +13112,7 @@ entries:
     size: 2048
 - name: gUnk_09828598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09828598
     size: 2048
@@ -13124,7 +13124,7 @@ entries:
     size: 2048
 - name: gUnk_09828D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09828D98
     size: 2048
@@ -13136,7 +13136,7 @@ entries:
     size: 2048
 - name: gUnk_09829598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09829598
     size: 2048
@@ -13148,7 +13148,7 @@ entries:
     size: 2048
 - name: gUnk_09829D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09829D98
     size: 2048
@@ -13160,7 +13160,7 @@ entries:
     size: 2048
 - name: gUnk_0982A598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982A598
     size: 2048
@@ -13172,7 +13172,7 @@ entries:
     size: 2048
 - name: gUnk_0982AD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982AD98
     size: 2048
@@ -13184,7 +13184,7 @@ entries:
     size: 2048
 - name: gUnk_0982B598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982B598
     size: 2048
@@ -13196,7 +13196,7 @@ entries:
     size: 2048
 - name: gUnk_0982BD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982BD98
     size: 2048
@@ -13208,7 +13208,7 @@ entries:
     size: 2048
 - name: gUnk_0982C598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982C598
     size: 2048
@@ -13220,7 +13220,7 @@ entries:
     size: 2048
 - name: gUnk_0982CD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982CD98
     size: 2048
@@ -13232,7 +13232,7 @@ entries:
     size: 2048
 - name: gUnk_0982D598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982D598
     size: 2048
@@ -13244,7 +13244,7 @@ entries:
     size: 2048
 - name: gUnk_0982DD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982DD98
     size: 2048
@@ -13256,7 +13256,7 @@ entries:
     size: 2048
 - name: gUnk_0982E598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982E598
     size: 2048
@@ -13268,7 +13268,7 @@ entries:
     size: 2048
 - name: gUnk_0982ED98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982ED98
     size: 2048
@@ -13280,7 +13280,7 @@ entries:
     size: 2048
 - name: gUnk_0982F598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982F598
     size: 2048
@@ -13292,7 +13292,7 @@ entries:
     size: 2048
 - name: gUnk_0982FD98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0982FD98
     size: 2048
@@ -13304,7 +13304,7 @@ entries:
     size: 2048
 - name: gUnk_09830598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09830598
     size: 2048
@@ -13316,7 +13316,7 @@ entries:
     size: 2048
 - name: gUnk_09830D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09830D98
     size: 2048
@@ -13328,7 +13328,7 @@ entries:
     size: 2048
 - name: gUnk_09831598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09831598
     size: 2048
@@ -13340,7 +13340,7 @@ entries:
     size: 2048
 - name: gUnk_09831D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09831D98
     size: 2048
@@ -13352,7 +13352,7 @@ entries:
     size: 2048
 - name: gUnk_09832598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09832598
     size: 2048
@@ -13364,7 +13364,7 @@ entries:
     size: 2048
 - name: gUnk_09832D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09832D98
     size: 2048
@@ -13376,7 +13376,7 @@ entries:
     size: 2048
 - name: gUnk_09833598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09833598
     size: 2048
@@ -13388,7 +13388,7 @@ entries:
     size: 2048
 - name: gUnk_09833D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09833D98
     size: 2048
@@ -13400,7 +13400,7 @@ entries:
     size: 2048
 - name: gUnk_09834598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09834598
     size: 2048
@@ -13412,7 +13412,7 @@ entries:
     size: 2048
 - name: gUnk_09834D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09834D98
     size: 2048
@@ -13424,7 +13424,7 @@ entries:
     size: 2048
 - name: gUnk_09835598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09835598
     size: 2048
@@ -13436,7 +13436,7 @@ entries:
     size: 2048
 - name: gUnk_09835D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09835D98
     size: 2048
@@ -13448,7 +13448,7 @@ entries:
     size: 2048
 - name: gUnk_09836598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09836598
     size: 2048
@@ -13460,7 +13460,7 @@ entries:
     size: 2048
 - name: gUnk_09836D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09836D98
     size: 2048
@@ -13472,7 +13472,7 @@ entries:
     size: 2048
 - name: gUnk_09837598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09837598
     size: 2048
@@ -13484,7 +13484,7 @@ entries:
     size: 2048
 - name: gUnk_09837D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09837D98
     size: 2048
@@ -13496,7 +13496,7 @@ entries:
     size: 2048
 - name: gUnk_09838598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09838598
     size: 2048
@@ -13508,7 +13508,7 @@ entries:
     size: 2048
 - name: gUnk_09838D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09838D98
     size: 2048
@@ -13520,7 +13520,7 @@ entries:
     size: 2048
 - name: gUnk_09839598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09839598
     size: 2048
@@ -13532,7 +13532,7 @@ entries:
     size: 2048
 - name: gUnk_09839D98
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x09839D98
     size: 2048
@@ -13544,7 +13544,7 @@ entries:
     size: 2048
 - name: gUnk_0983A598
   format: tilemap
-  declare: false
+  const: true
   us:
     address: 0x0983A598
     size: 2048

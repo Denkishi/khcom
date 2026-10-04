@@ -26,7 +26,8 @@ objects:
 entries:
 - name: gUnk_0984B458
   record: MapChkWorldName
-  declare: false
+  ctype: u8
+  shape: [13, 8]
   elements:
   - [1, gMapChkWorldNameAgrabah]
   - [7, gMapChkWorldNameNeverLand]

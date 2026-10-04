@@ -3,7 +3,6 @@
  * Field Tutorial
  */
 
-#include "map_resource_assets.h"
 #include "map_tasks.h"
 #include "sprites_emy.h"
 #include "sprites_map.h"

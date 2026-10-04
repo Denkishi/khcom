@@ -34,7 +34,7 @@ objects:
     end: 0x0993B764
   - name: sprites_map_tasks_palettes.s
     start: 0x099912A4
-    end: 0x099918C4
+    end: 0x09991924
   jp:
   - name: sprites_map_tasks_frames_1.s
     start: 0x08955664
@@ -56,7 +56,7 @@ objects:
     end: 0x098F0278
   - name: sprites_map_tasks_palettes.s
     start: 0x09945DB8
-    end: 0x099463D8
+    end: 0x09946438
   eu:
   - name: sprites_map_tasks_frames_1.s
     start: 0x0898D9A0
@@ -78,7 +78,7 @@ objects:
     end: 0x0991B5F0
   - name: sprites_map_tasks_palettes.s
     start: 0x09997290
-    end: 0x099978B0
+    end: 0x09997910
 entries:
 - name: gUnk_09EDF97C
   record: SpriteTable
@@ -1867,14 +1867,520 @@ entries:
   eu:
     address: 0x09997310
     size: 32
-- name: gUnk_09991344
+- name: gMapGmk06Palette
   format: palette
   us:
     address: 0x09991344
-    size: 1408
+    size: 32
   jp:
     address: 0x09945E58
-    size: 1408
+    size: 32
   eu:
     address: 0x09997330
-    size: 1408
+    size: 32
+- name: gMapGimmick01Palette
+  format: palette
+  us:
+    address: 0x09991364
+    size: 32
+  jp:
+    address: 0x09945E78
+    size: 32
+  eu:
+    address: 0x09997350
+    size: 32
+- name: gMapGimmick02Palette
+  format: palette
+  us:
+    address: 0x09991384
+    size: 32
+  jp:
+    address: 0x09945E98
+    size: 32
+  eu:
+    address: 0x09997370
+    size: 32
+- name: gMapGimmick03Palette
+  format: palette
+  us:
+    address: 0x099913A4
+    size: 32
+  jp:
+    address: 0x09945EB8
+    size: 32
+  eu:
+    address: 0x09997390
+    size: 32
+- name: gMapGimmick04Palette
+  format: palette
+  us:
+    address: 0x099913C4
+    size: 32
+  jp:
+    address: 0x09945ED8
+    size: 32
+  eu:
+    address: 0x099973B0
+    size: 32
+- name: gMapGimmick05Palette
+  format: palette
+  us:
+    address: 0x099913E4
+    size: 32
+  jp:
+    address: 0x09945EF8
+    size: 32
+  eu:
+    address: 0x099973D0
+    size: 32
+- name: gMapGimmick06Palette
+  format: palette
+  us:
+    address: 0x09991404
+    size: 32
+  jp:
+    address: 0x09945F18
+    size: 32
+  eu:
+    address: 0x099973F0
+    size: 32
+- name: gMapGimmick07Palette
+  format: palette
+  us:
+    address: 0x09991424
+    size: 32
+  jp:
+    address: 0x09945F38
+    size: 32
+  eu:
+    address: 0x09997410
+    size: 32
+- name: gWorldMapGmkWonderlandPalette
+  format: palette
+  us:
+    address: 0x09991444
+    size: 32
+  jp:
+    address: 0x09945F58
+    size: 32
+  eu:
+    address: 0x09997430
+    size: 32
+- name: gMapGimmick09Palette
+  format: palette
+  us:
+    address: 0x09991464
+    size: 32
+  jp:
+    address: 0x09945F78
+    size: 32
+  eu:
+    address: 0x09997450
+    size: 32
+- name: gMapGimmick10Palette
+  format: palette
+  us:
+    address: 0x09991484
+    size: 32
+  jp:
+    address: 0x09945F98
+    size: 32
+  eu:
+    address: 0x09997470
+    size: 32
+- name: gMapGimmick11Palette
+  format: palette
+  us:
+    address: 0x099914A4
+    size: 32
+  jp:
+    address: 0x09945FB8
+    size: 32
+  eu:
+    address: 0x09997490
+    size: 32
+- name: gMapGimmick12Palette
+  format: palette
+  us:
+    address: 0x099914C4
+    size: 32
+  jp:
+    address: 0x09945FD8
+    size: 32
+  eu:
+    address: 0x099974B0
+    size: 32
+- name: gMapGimmick13Palette
+  format: palette
+  us:
+    address: 0x099914E4
+    size: 32
+  jp:
+    address: 0x09945FF8
+    size: 32
+  eu:
+    address: 0x099974D0
+    size: 32
+- name: gMapGimmick14Palette
+  format: palette
+  us:
+    address: 0x09991504
+    size: 32
+  jp:
+    address: 0x09946018
+    size: 32
+  eu:
+    address: 0x099974F0
+    size: 32
+- name: gMapGimmick15Palette
+  format: palette
+  us:
+    address: 0x09991524
+    size: 32
+  jp:
+    address: 0x09946038
+    size: 32
+  eu:
+    address: 0x09997510
+    size: 32
+- name: gWorldMapGmkAtlanticaPalette
+  format: palette
+  us:
+    address: 0x09991544
+    size: 32
+  jp:
+    address: 0x09946058
+    size: 32
+  eu:
+    address: 0x09997530
+    size: 32
+- name: gWorldMapGmkHalloweenTownPalette
+  format: palette
+  us:
+    address: 0x09991564
+    size: 32
+  jp:
+    address: 0x09946078
+    size: 32
+  eu:
+    address: 0x09997550
+    size: 32
+- name: gMapGimmick18Palette
+  format: palette
+  us:
+    address: 0x09991584
+    size: 32
+  jp:
+    address: 0x09946098
+    size: 32
+  eu:
+    address: 0x09997570
+    size: 32
+- name: gMapGimmick19Palette
+  format: palette
+  us:
+    address: 0x099915A4
+    size: 32
+  jp:
+    address: 0x099460B8
+    size: 32
+  eu:
+    address: 0x09997590
+    size: 32
+- name: gMapGimmick20Palette
+  format: palette
+  us:
+    address: 0x099915C4
+    size: 32
+  jp:
+    address: 0x099460D8
+    size: 32
+  eu:
+    address: 0x099975B0
+    size: 32
+- name: gMapGimmick21Palette
+  format: palette
+  us:
+    address: 0x099915E4
+    size: 32
+  jp:
+    address: 0x099460F8
+    size: 32
+  eu:
+    address: 0x099975D0
+    size: 32
+- name: gMapGimmick22Palette
+  format: palette
+  us:
+    address: 0x09991604
+    size: 32
+  jp:
+    address: 0x09946118
+    size: 32
+  eu:
+    address: 0x099975F0
+    size: 32
+- name: gMapGimmick23Palette
+  format: palette
+  us:
+    address: 0x09991624
+    size: 32
+  jp:
+    address: 0x09946138
+    size: 32
+  eu:
+    address: 0x09997610
+    size: 32
+- name: gMapGimmick24Palette
+  format: palette
+  us:
+    address: 0x09991644
+    size: 32
+  jp:
+    address: 0x09946158
+    size: 32
+  eu:
+    address: 0x09997630
+    size: 32
+- name: gMapGimmick25Palette
+  format: palette
+  us:
+    address: 0x09991664
+    size: 32
+  jp:
+    address: 0x09946178
+    size: 32
+  eu:
+    address: 0x09997650
+    size: 32
+- name: gMapGimmick26Palette
+  format: palette
+  us:
+    address: 0x09991684
+    size: 32
+  jp:
+    address: 0x09946198
+    size: 32
+  eu:
+    address: 0x09997670
+    size: 32
+- name: gMapGimmick27Palette
+  format: palette
+  us:
+    address: 0x099916A4
+    size: 32
+  jp:
+    address: 0x099461B8
+    size: 32
+  eu:
+    address: 0x09997690
+    size: 32
+- name: gMapGimmick28Palette
+  format: palette
+  us:
+    address: 0x099916C4
+    size: 32
+  jp:
+    address: 0x099461D8
+    size: 32
+  eu:
+    address: 0x099976B0
+    size: 32
+- name: gMapGimmick29Palette
+  format: palette
+  us:
+    address: 0x099916E4
+    size: 32
+  jp:
+    address: 0x099461F8
+    size: 32
+  eu:
+    address: 0x099976D0
+    size: 32
+- name: gMapGimmick30Palette
+  format: palette
+  us:
+    address: 0x09991704
+    size: 32
+  jp:
+    address: 0x09946218
+    size: 32
+  eu:
+    address: 0x099976F0
+    size: 32
+- name: gWorldMapGmkHollowBastionPalette
+  format: palette
+  us:
+    address: 0x09991724
+    size: 32
+  jp:
+    address: 0x09946238
+    size: 32
+  eu:
+    address: 0x09997710
+    size: 32
+- name: gMapGimmick32Palette
+  format: palette
+  us:
+    address: 0x09991744
+    size: 32
+  jp:
+    address: 0x09946258
+    size: 32
+  eu:
+    address: 0x09997730
+    size: 32
+- name: gMapGimmick33Palette
+  format: palette
+  us:
+    address: 0x09991764
+    size: 32
+  jp:
+    address: 0x09946278
+    size: 32
+  eu:
+    address: 0x09997750
+    size: 32
+- name: gMapGimmick34Palette
+  format: palette
+  us:
+    address: 0x09991784
+    size: 32
+  jp:
+    address: 0x09946298
+    size: 32
+  eu:
+    address: 0x09997770
+    size: 32
+- name: gMapGimmick35Palette
+  format: palette
+  us:
+    address: 0x099917A4
+    size: 32
+  jp:
+    address: 0x099462B8
+    size: 32
+  eu:
+    address: 0x09997790
+    size: 32
+- name: gMapGimmick36Palette
+  format: palette
+  us:
+    address: 0x099917C4
+    size: 32
+  jp:
+    address: 0x099462D8
+    size: 32
+  eu:
+    address: 0x099977B0
+    size: 32
+- name: gMapGimmick37Palette
+  format: palette
+  us:
+    address: 0x099917E4
+    size: 32
+  jp:
+    address: 0x099462F8
+    size: 32
+  eu:
+    address: 0x099977D0
+    size: 32
+- name: gMapGimmick38Palette
+  format: palette
+  us:
+    address: 0x09991804
+    size: 32
+  jp:
+    address: 0x09946318
+    size: 32
+  eu:
+    address: 0x099977F0
+    size: 32
+- name: gWorldMapGmkTraverseTownPalette
+  format: palette
+  us:
+    address: 0x09991824
+    size: 32
+  jp:
+    address: 0x09946338
+    size: 32
+  eu:
+    address: 0x09997810
+    size: 32
+- name: gMapGimmick40Palette
+  format: palette
+  us:
+    address: 0x09991844
+    size: 32
+  jp:
+    address: 0x09946358
+    size: 32
+  eu:
+    address: 0x09997830
+    size: 32
+- name: gMapGimmick41Palette
+  format: palette
+  us:
+    address: 0x09991864
+    size: 32
+  jp:
+    address: 0x09946378
+    size: 32
+  eu:
+    address: 0x09997850
+    size: 32
+- name: gMapGimmick42Palette
+  format: palette
+  us:
+    address: 0x09991884
+    size: 32
+  jp:
+    address: 0x09946398
+    size: 32
+  eu:
+    address: 0x09997870
+    size: 32
+- name: gMapGimmick43Palette
+  format: palette
+  us:
+    address: 0x099918A4
+    size: 32
+  jp:
+    address: 0x099463B8
+    size: 32
+  eu:
+    address: 0x09997890
+    size: 32
+- name: gMapGimmick44Palette
+  format: palette
+  us:
+    address: 0x099918C4
+    size: 32
+  jp:
+    address: 0x099463D8
+    size: 32
+  eu:
+    address: 0x099978B0
+    size: 32
+- name: gMapGimmick45Palette
+  format: palette
+  us:
+    address: 0x099918E4
+    size: 32
+  jp:
+    address: 0x099463F8
+    size: 32
+  eu:
+    address: 0x099978D0
+    size: 32
+- name: gMapGimmick46Palette
+  format: palette
+  us:
+    address: 0x09991904
+    size: 32
+  jp:
+    address: 0x09946418
+    size: 32
+  eu:
+    address: 0x099978F0
+    size: 32

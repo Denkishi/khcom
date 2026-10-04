@@ -419,7 +419,6 @@ sprites_map_maps.s
 map_room_palettes_1.s
 sprite_palettes_13.s
 sprites_map_tasks_palettes.s
-sprites_evt_palettes_2.s
 sprite_palettes_14.s
 sprites_map_palettes.s
 map_room_maps_2.s

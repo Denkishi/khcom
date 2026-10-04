@@ -1540,7 +1540,7 @@ const EvtObjResTable gEvtObjResources[94] = {
     { { 60, { 0 }, gXexionPalette }, { 0 } },
     { { 60, { 0 }, gDizPalette }, { 0 } },
     { { 5, { 0 }, gOmamoriPalette }, { 0 } },
-    { { 30, { 0 }, gUnk_099918C4 }, { 0 } },
+    { { 30, { 0 }, gMapGimmick44Palette }, { 0 } },
     { { 4, { 0 }, gKoukyuPalette }, { 0 } },
     { { 4, { 0 }, gKoukyuPalette }, { 0 } },
     { { 72, { 0 }, gShougekihaPalette }, { 0 } },

@@ -40,6 +40,7 @@
 #include "taskpool.h"
 #include "text_types.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static void* sMoogleShopBgMapsByLanguage[5] = {

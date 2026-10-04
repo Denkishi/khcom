@@ -16,6 +16,7 @@
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 const MapNameText* gRoomNames[28] = {
 #if defined(VERSION_US)

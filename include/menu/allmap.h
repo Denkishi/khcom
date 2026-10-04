@@ -161,12 +161,6 @@ extern u8 gUnk_0976D880[];
 extern u8 gUnk_0976DB68[];
 extern u8 gUnk_0976DB9C[];
 extern u8 gUnk_0976DC9C[];
-extern u8 gUnk_0984A078[];
-extern u8 gUnk_0984A0F8[];
-extern u16 gUnk_0984A118[];
-extern u16 gUnk_0984A138[];
-extern u16 gUnk_0984A1D8[];
-extern u16 gUnk_09618D38[];
 
 extern u8 gAllmapCursorRoom;
 extern s16 gAllmapCameraY;

@@ -8,7 +8,6 @@
 #include "fade.h"
 #include "bos_md.h"
 #include "anim.h"
-#include "mode_battle_data.h"
 #include "sprites_bos5.h"
 #include "sprites_worldinspect.h"
 #include "chara_types.h"
@@ -30,6 +29,8 @@
 #include "types.h"
 #include <stddef.h>
 #include "bos_ga.h"
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 

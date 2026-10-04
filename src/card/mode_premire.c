@@ -13,7 +13,6 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_number_plus.h"
 #include "battle_backgrounds.h"
 #include "sprites_btl_hud.h"
@@ -25,6 +24,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "mode_premire.h"
+#include "sprite_palettes.h"
 
 static TaskPool sModePremireTasks;
 #ifndef VERSION_EU

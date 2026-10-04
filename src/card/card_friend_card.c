@@ -23,7 +23,6 @@
 #include "key.h"
 #include "malloc.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_btl.h"
 #include "sprites_card.h"
 #include "sprites_premire_chance.h"

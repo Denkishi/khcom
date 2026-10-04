@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnSimbaAnimDef = { gShinba10Frames, gShinba10Anims, gShinba10Tiles, 0, { 0, 0, 0 } };
 

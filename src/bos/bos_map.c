@@ -13,11 +13,11 @@
 #include "battle_actor_types.h"
 #include "battle_work.h"
 #include "display.h"
-#include "game.h"
 #include "obj.h"
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);

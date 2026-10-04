@@ -50,7 +50,6 @@ typedef struct FrdPoohArgs {
     u8 unk_03;
 } FrdPoohArgs;
 
-extern u16 gPoohPalette[];
 #endif
 
 #endif /* GUARD_FRD_POOH_H */

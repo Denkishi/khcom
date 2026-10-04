@@ -21,6 +21,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnDumboAnimDefs[3] = {
     { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 0, { 0, 0, 0 } },

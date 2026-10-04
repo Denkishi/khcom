@@ -21,6 +21,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "card_lvup_msg.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";

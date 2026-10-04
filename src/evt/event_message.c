@@ -22,7 +22,6 @@
 #include "sprites_msg.h"
 #include "sprites_card.h"
 #include "msg_portrait_data.h"
-#include "msg_portrait_assets.h"
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "bos6_api.h"
@@ -47,8 +46,6 @@
 #include "gba/defines.h"
 #include "key.h"
 #include "listpool.h"
-#include "mode_battle_data.h"
-#include "mode_chkobj_assets.h"
 #include "msg_types.h"
 #include "obj.h"
 #include "poo_api.h"
@@ -56,6 +53,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "default_bg_map.h"
 
 static void msgwin_0(MsgWinWork* work, u8* arg);
 static u8 msgwin_1(MsgWinWork* work, void* a);

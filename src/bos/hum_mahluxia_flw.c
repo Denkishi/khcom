@@ -10,11 +10,11 @@
 #include "anim.h"
 #include "battle_actor.h"
 #include "engine_math.h"
-#include "mode_chkobj_assets.h"
 #include "obj.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 TaskDesc gTaskDescHumMahluxiaFlw = {
     "task_hum_mahluxia_flw",

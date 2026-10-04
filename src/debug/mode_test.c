@@ -13,6 +13,7 @@
 #include "obj_api.h"
 #include <stddef.h>
 #include "types.h"
+#include "sprite_palettes.h"
 
 #ifndef VERSION_EU
 static struct ObjTiles* sTestTiles;

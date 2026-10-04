@@ -173,23 +173,6 @@ typedef struct StatusStocklistWork {
 
 extern s32 gStatusBarState;
 
-extern u16 gBStatesPalette[];
-extern u8 gUnk_097A2CF6[];
-extern u8 gUnk_097A2E16[];
-extern u8 gUnk_097A2DF8[];
-extern u8 gUnk_097A18EC[];
-extern u8 gUnk_097A18CC[];
-extern u8 gUnk_097A1864[];
-extern u8 gUnk_097A1898[];
-extern u8 gUnk_097A24A6[];
-extern u8 gUnk_097A28DA[];
-extern u16 gRikuPalette[];
-extern u8 gRikuBt00Tiles[];
-extern u16 gSoraPalette[];
-extern u8 gSor1ll51Tiles[];
-extern u8 gUnk_097A1C54[];
-extern u8 gUnk_097A2394[];
-
 u8 IsStatusBarIdle();
 void StatusHandleInput(StatusWork* work);
 s16 GetStatusScroll();

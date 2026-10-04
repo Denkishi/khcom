@@ -17,9 +17,9 @@
 #include "enemy_types.h"
 #include "engine_math.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy28CommonAnimDefs[3] = {
     { gEmy2800Frames, gEmy2800Anims, gEmy2800Tiles, 0, { 0, 0, 0 } },

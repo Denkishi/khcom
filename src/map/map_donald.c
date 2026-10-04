@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void MapDonaldCheckTalk(MapDonaldWork* work) {
     if (work->targeted && (GetKeysPressed() & A_BUTTON)) {

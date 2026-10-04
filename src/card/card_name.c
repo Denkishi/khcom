@@ -20,11 +20,12 @@
 #include "sprites_card.h"
 #include "premium_card_effect.h"
 #include "card_types.h"
-#include "mode_battle_data.h"
 #include "types.h"
 #include <stddef.h>
 #include "card_name.h"
 #include "ui_text.h"
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 static PrintLine* sPrintLines;
 

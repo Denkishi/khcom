@@ -24,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdJackAnimDefs[5] = {
     { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 0, { 0, 0, 0 } },

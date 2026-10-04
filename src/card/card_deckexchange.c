@@ -26,15 +26,15 @@
 #include "card_def_data.h"
 #include "card_types.h"
 #include "gba/defines.h"
-#include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_deckexchange.h"
-#include "ms_charge.h"
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 #ifndef VERSION_EU
 u16 gSioTradeCardId EWRAM_COMMON(4);

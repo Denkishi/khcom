@@ -25,6 +25,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnCloudAnimDefs[8] = {
     { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0, { 0, 0, 0 } },

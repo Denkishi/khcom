@@ -16,12 +16,12 @@
 #include "enemy_types.h"
 #include "engine_math.h"
 #include "game_state.h"
-#include "mode_chkobj_assets.h"
 #include "obj.h"
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy00CommonAnimDefs[3] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },

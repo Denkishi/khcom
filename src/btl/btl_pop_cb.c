@@ -13,6 +13,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
 #ifdef VERSION_EU

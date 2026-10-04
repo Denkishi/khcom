@@ -168,44 +168,4 @@ typedef struct BtlStartWork {
     s16 unk_02;
 } BtlStartWork;
 
-extern u8 gUnk_08B1E7F4[];
-extern u8 gUnk_08B1EB1C[];
-extern u8 gUnk_08B1ED76[];
-extern u8 gUnk_08B1EF0C[];
-extern u8 gUnk_08B1F020[];
-extern u8 gUnk_08B1F13A[];
-extern u8 gUnk_08B1F2D6[];
-extern u8 gUnk_08B1F472[];
-extern u8 gUnk_08B1F60E[];
-extern u8 gUnk_08B1F7AC[];
-extern u8 gBPuraizuFrame0[];
-extern u8 gBPuraizuFrame1[];
-extern u8 gBPuraizuFrame2[];
-extern u8 gBPuraizuFrame3[];
-extern u8 gBPuraizuFrame4[];
-extern u8 gBPuraizuFrame5[];
-extern u8 gBPuraizuFrame6[];
-extern u8 gBPuraizuFrame7[];
-extern u8 gBPuraizuFrame8[];
-extern u8 gBPuraizuFrame9[];
-extern u8 gBPuraizuTiles[];
-extern u8 gBHpgagEFrame0[];
-extern u8 gBHpgagEFrame1[];
-extern u8 gBHpgagEFrame2[];
-extern u8 gBHpgagEFrame3[];
-extern u8 gBHpgagEFrame4[];
-extern u8 gBHpgagEFrame5[];
-extern u8 gBHpgagEFrame6[];
-extern u8 gBHpgagEFrame7[];
-extern u8 gBHpgagEFrame8[];
-extern u8 gBHpgagEFrame9[];
-extern u8 gBHpgagEFrame10[];
-extern u8 gBHpgagEFrame11[];
-extern u8 gBHpgagEFrame12[];
-extern u8 gBHpgagEFrame13[];
-extern u8 gBHpgagETiles[];
-extern u16 gSoraPalette[];
-extern u16 gBStatesPalette[];
-extern u16 gRikuPalette[];
-
 #endif /* GUARD_BTL2_H */

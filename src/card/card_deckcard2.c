@@ -14,6 +14,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_deckcard2.h"
+#include "sprite_palettes.h"
 
 const s16 gDeckGridColumnX[3] = { 13, 36, 59 };
 

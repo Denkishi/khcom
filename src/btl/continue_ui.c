@@ -7,7 +7,6 @@
 #include "anim.h"
 #include "types.h"
 #include "bg_animation_data.h"
-#include "mode_battle_data.h"
 #include "engine_math.h"
 #include "display.h"
 #include "fade.h"
@@ -19,12 +18,12 @@
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "songs.h"
-#include "battle.h"
 #include "continue_types.h"
 #include "obj.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
 #include "taskpool.h"
+#include "default_bg_map.h"
 
 static const s32 sContinueCursorY[2] = {
     0x4000, 0x5600,

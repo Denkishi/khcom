@@ -4,7 +4,6 @@
  */
 
 #include "macros.h"
-#include "localized_resource_assets.h"
 #include "registration_data.h"
 #include "system_state.h"
 #include "map_api.h"
@@ -30,13 +29,14 @@
 #include "key.h"
 #include "m4a_song.h"
 #include "map_types.h"
-#include "mode_battle_data.h"
 #include "obj.h"
 #include "poo_api.h"
 #include "taskpool.h"
 #include "text.h"
 #include "types.h"
 #include <stddef.h>
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 #define sAllmapState ((AllmapState*)gSharedModeWork)
 

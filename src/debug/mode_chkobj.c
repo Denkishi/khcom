@@ -3,7 +3,6 @@
  * Debug Object Check
  */
 
-#include "mode_chkobj_assets.h"
 #include "mode_chkobj.h"
 #include "mode_chkbtl.h"
 #include "sprites_bos4.h"
@@ -41,6 +40,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "debug_text.h"
+#include "sprite_palettes.h"
 
 static ChkObjWork* sChkObjWork;
 

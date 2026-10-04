@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdBeastAnimDefs[2] = {
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0, { 0, 0, 0 } },

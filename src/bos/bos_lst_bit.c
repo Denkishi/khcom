@@ -22,6 +22,7 @@
 #include "registration_data.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const EmyKind sBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
 

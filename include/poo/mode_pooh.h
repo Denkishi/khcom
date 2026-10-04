@@ -4,8 +4,6 @@
 #include "types.h"
 #include "pooh_actor_types.h"
 
-extern u16 gPoohPalette[];
-
 void BackdropFadeToOriginal(u32 a, u16 b);
 void BackdropFadeToAmount(u32 a, u16 b, u16 c);
 u8 BackdropFadeIsActive();

@@ -212,15 +212,6 @@ typedef struct SmnKingWork {
     u8 unk_15F[0x09];
 } SmnKingWork;
 
-extern u16 gMickeyPalette[];
-extern u16 gCroudPalette[];
-extern u16 gBStatesPalette[];
-extern u16 gBanbPalette[];
-extern u16 gDamboPalette[];
-extern u16 gShinbaPalette[];
-extern u16 gTinkPalette[];
-extern u16 gGeniePalette[];
-extern u16 gMushuPalette[];
 void SmnBambiPickHopTarget(SmnBambiWork* work);
 void SmnGenieFollowTarget(SmnGenieWork* work);
 u8 SmnBambiApplyGravity(SmnBambiWork* work);

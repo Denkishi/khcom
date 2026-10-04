@@ -7,7 +7,6 @@
 #include "map_api.h"
 #include "fld.h"
 #include "gba/keys.h"
-#include "task_animation_assets.h"
 #include "sprites_evt.h"
 #include "sprites_fld.h"
 #include "sprites_riku.h"
@@ -31,6 +30,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sFldRikuAnimDefs[15][5] = {
     { { gUnk_09EDF4C0, gUnk_09EDF4C4, gUnk_08933A34, 0, { 0, 0, 0 } }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0, { 0, 0, 0 } }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0, { 0, 0, 0 } }, { gUnk_09EDF4C8, gUnk_09EDF4CC, gUnk_08933D94, 0, { 0, 0, 0 } }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0, { 0, 0, 0 } } },

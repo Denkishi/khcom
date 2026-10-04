@@ -3,7 +3,6 @@
  * Moogle Card Trade-In Screen
  */
 
-#include "localized_resource_assets.h"
 #include "system_state.h"
 #include "ms_charge_api.h"
 #include "display.h"
@@ -41,6 +40,7 @@
 #include <stddef.h>
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static void* sMsChargeBgMapsByLanguage[5] = {

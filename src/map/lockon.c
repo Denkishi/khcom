@@ -3,7 +3,6 @@
  * Field Lock-On Cursor
  */
 
-#include "mode_test.h"
 #include "sprites_mode_test.h"
 #include "malloc.h"
 #include "anim.h"
@@ -18,6 +17,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "sprite_palettes.h"
 
 void task_lockon_0(LockonWork* work) {
     s32 i;

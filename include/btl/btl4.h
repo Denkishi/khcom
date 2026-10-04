@@ -69,21 +69,9 @@ typedef struct BtlHpothWork {
     u32 gaugeMode;
 } BtlHpothWork;
 
-extern u8 gUnk_08B1D8BC[];
-extern u8 gUnk_08B1FCBC[];
-extern u8 gUnk_08B1FCCC[];
-extern u8 gUnk_08B1FCDC[];
-extern u8 gUnk_08B1FCEC[];
-extern u8 gUnk_08B1FCFC[];
-extern u8 gUnk_08B1FD0C[];
-extern u8 gUnk_08B1FD1C[];
-extern u8 gUnk_08B1FD2C[];
-extern u8 gUnk_08B1FD3C[];
-extern u8 gUnk_08B1FD4C[];
-extern u8 gUnk_08B1FD66[];
+#ifdef VERSION_JP
 extern u8 gUnk_08B25EF0[];
-extern u16 gBStatesPalette[];
-extern u16 gUnk_096FAC64[];
+#endif
 
 void CreatePersistentSysmsgwinTask(void* a, u16 b);
 

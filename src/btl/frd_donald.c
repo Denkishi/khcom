@@ -26,6 +26,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0, { 0, 0, 0 } },

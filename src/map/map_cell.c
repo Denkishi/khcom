@@ -29,6 +29,8 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "map_room_tables.h"
+#include "map_rooms.h"
 
 MapRoomState* gMapRoomState EWRAM_COMMON(4);
 MapFormDef gMapForm EWRAM_COMMON(8);

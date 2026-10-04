@@ -13,6 +13,8 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
+#include "sprites_mode_test.h"
 
 void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles = AllocObjTiles(0x140, gBHpgagETiles);

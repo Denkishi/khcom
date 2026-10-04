@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0, { 0, 0, 0 } };
 

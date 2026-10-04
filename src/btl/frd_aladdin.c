@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdAladdinAnimDefs[3] = {
     { gAladdin10Frames, gAladdin10Anims, gAladdin10Tiles, 2, { 0, 0, 0 } },

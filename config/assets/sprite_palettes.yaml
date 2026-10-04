@@ -6369,7 +6369,6 @@ entries:
     size: 96
 - name: gUnk_09A3CA3C
   format: palette
-  declare: false
   us:
     address: 0x09A3CA3C
     size: 32
@@ -6381,7 +6380,6 @@ entries:
     size: 32
 - name: gUnk_09A3CA5C
   format: palette
-  declare: false
   us:
     address: 0x09A3CA5C
     size: 32
@@ -6393,7 +6391,6 @@ entries:
     size: 32
 - name: gUnk_09A3CA7C
   format: palette
-  declare: false
   us:
     address: 0x09A3CA7C
     size: 32
@@ -6405,7 +6402,6 @@ entries:
     size: 32
 - name: gUnk_09A3CA9C
   format: palette
-  declare: false
   us:
     address: 0x09A3CA9C
     size: 32
@@ -6417,7 +6413,6 @@ entries:
     size: 32
 - name: gUnk_09A3CABC
   format: palette
-  declare: false
   us:
     address: 0x09A3CABC
     size: 32
@@ -6429,7 +6424,6 @@ entries:
     size: 32
 - name: gUnk_09A3CADC
   format: palette
-  declare: false
   us:
     address: 0x09A3CADC
     size: 32
@@ -6441,7 +6435,6 @@ entries:
     size: 32
 - name: gUnk_09A3CAFC
   format: palette
-  declare: false
   us:
     address: 0x09A3CAFC
     size: 32
@@ -6453,7 +6446,6 @@ entries:
     size: 32
 - name: gUnk_09A3CB1C
   format: palette
-  declare: false
   us:
     address: 0x09A3CB1C
     size: 32
@@ -6465,7 +6457,6 @@ entries:
     size: 32
 - name: gUnk_09A3CB3C
   format: palette
-  declare: false
   us:
     address: 0x09A3CB3C
     size: 32
@@ -6477,7 +6468,6 @@ entries:
     size: 32
 - name: gUnk_09A3CB5C
   format: palette
-  declare: false
   us:
     address: 0x09A3CB5C
     size: 32
@@ -6489,7 +6479,6 @@ entries:
     size: 32
 - name: gUnk_09A3CB7C
   format: palette
-  declare: false
   us:
     address: 0x09A3CB7C
     size: 32
@@ -6501,7 +6490,6 @@ entries:
     size: 32
 - name: gUnk_09A3CB9C
   format: palette
-  declare: false
   us:
     address: 0x09A3CB9C
     size: 32
@@ -6513,7 +6501,6 @@ entries:
     size: 32
 - name: gUnk_09A3CBBC
   format: palette
-  declare: false
   us:
     address: 0x09A3CBBC
     size: 32
@@ -6525,7 +6512,6 @@ entries:
     size: 32
 - name: gUnk_09A3CBDC
   format: palette
-  declare: false
   us:
     address: 0x09A3CBDC
     size: 32
@@ -6537,7 +6523,6 @@ entries:
     size: 32
 - name: gUnk_09A3CBFC
   format: palette
-  declare: false
   us:
     address: 0x09A3CBFC
     size: 32
@@ -6549,7 +6534,6 @@ entries:
     size: 32
 - name: gUnk_09A3CC1C
   format: palette
-  declare: false
   us:
     address: 0x09A3CC1C
     size: 32

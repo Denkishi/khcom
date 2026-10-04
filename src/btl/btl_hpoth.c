@@ -13,6 +13,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_hpoth_0(BtlHpothWork* work) {
     work->palette = LoadObjPalette(gUnk_096FAC64, 32);

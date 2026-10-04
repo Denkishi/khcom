@@ -22,6 +22,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "bos_ursula.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static UrsulaBubbleWork* sUrsulaBubbleWork;

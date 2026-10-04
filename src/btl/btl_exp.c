@@ -14,6 +14,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void* GetExpDigitGfx(s32 digit, u8 leading) {
     switch (digit) {

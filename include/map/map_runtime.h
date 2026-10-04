@@ -21,7 +21,7 @@ u8 GetOppositeDoorSide(u8 a);
 void MarkEventRoomDone(MapEventDoor* p);
 void SetHallDefaultSpawn();
 void UpdateWorldFriendFlags();
-MapFloorDef* GetMapFloorDef(u8 a);
+const MapFloorDef* GetMapFloorDef(u8 a);
 u8* GetMapRoomLinks(u8 a);
 MapEventDoor* GetMapEventDoor(u8 a);
 MapFloorRoom* GetMapFloorRoom(u8 index);
@@ -71,8 +71,5 @@ s32 FieldFloorAt(s32 x, s32 y, s32 z);
 #ifdef VERSION_EU
 extern const LocalizedText gMapWorldNameEu_088926FC;
 #endif
-
-extern MapFloorDef gUnk_0984C868[];
-extern MapFloorDef gUnk_0984CBD0[];
 
 #endif

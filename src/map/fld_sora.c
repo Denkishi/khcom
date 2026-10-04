@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sFldSoraAnimDefs[15][5] = {
     { { gSor1bb00Frames, gSor1bb00Anims, gSor1bb00Tiles, 0, { 0, 0, 0 } }, { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 0, { 0, 0, 0 } }, { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0, { 0, 0, 0 } }, { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 0, { 0, 0, 0 } }, { gSor1bl00Frames, gSor1bl00Anims, gSor1bl00Tiles, 0, { 0, 0, 0 } } },

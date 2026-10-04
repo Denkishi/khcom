@@ -15,9 +15,9 @@
 #include "enemy_types.h"
 #include "engine_math.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sEmyTrumpHCommonAnimDefs[3] = {
     { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0, { 0, 0, 0 } },

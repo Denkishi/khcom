@@ -13,9 +13,9 @@
 #include "btl_effect.h"
 #include "enemy_types.h"
 #include "engine_math.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy02CommonAnimDefs[3] = {
     { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },

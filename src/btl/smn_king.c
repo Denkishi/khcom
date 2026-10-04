@@ -24,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnKingAnimDefs[3] = {
     { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 0, { 0, 0, 0 } },

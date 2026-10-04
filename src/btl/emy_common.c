@@ -4,7 +4,6 @@
  */
 
 #include "display.h"
-#include "mode_vsbattle.h"
 #include "enemy_common.h"
 #include "system_state.h"
 #include "gba/io_reg.h"
@@ -25,6 +24,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 u16 gEnemyTileCounts[54] = {
     32, 32, 32, 32, 32, 34, 28, 24, 32,

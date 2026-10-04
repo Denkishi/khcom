@@ -5,7 +5,6 @@
 
 #include "macros.h"
 #include "boss_tm.h"
-#include "boss_tm_assets.h"
 #include "sprites_boss_tm.h"
 #include "engine_math.h"
 #include "m4a_song.h"
@@ -25,6 +24,7 @@
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 s16 gBosTmArmImpactViewX EWRAM_COMMON(4);
 s32 gBosTmArmImpactViewFixedX EWRAM_COMMON(4);

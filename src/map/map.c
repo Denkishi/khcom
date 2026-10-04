@@ -64,6 +64,8 @@
 #include <stddef.h>
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
+#include "map_room_tables.h"
+#include "sprite_palettes.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -78,7 +80,7 @@ static FldPos sMapEnmSpawnPositions[3];
 static u8 sMapGmkCount;
 static u8 sMapGmkPaletteCount;
 static u16 sMapGmkTileCount;
-static EventKeyList* sEventKeyList;
+static const EventKeyList* sEventKeyList;
 static EventKey sEventKey;
 static EventKeyProgress* sEventKeyProgress;
 static ModeFunc sMapDbgUpdate;

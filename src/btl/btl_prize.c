@@ -19,6 +19,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
     u8 angle;

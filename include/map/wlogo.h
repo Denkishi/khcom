@@ -424,17 +424,6 @@ typedef struct WlogoMonsWork {
 
 extern s32 gWlogoTtSkew;
 extern const WlogoPooObjStep gWlogoPooObjSteps[5][5];
-extern u8 gUnk_0961AA92[];
-extern u8 gUnk_0961B072[];
-extern u8 gUnk_0961C062[];
-extern u8 gUnk_0961C7F4[];
-extern u8 gUnk_0961DC0E[];
-extern u8 gUnk_0961FA28[];
-extern u8 gUnk_09620B0E[];
-extern u8 gUnk_096249F4[];
-extern u8 gUnk_09624F72[];
-extern u8 gUnk_0962848A[];
-extern u8 gUnk_09628DC0[];
 extern u8 gUnk_096FB084[];
 
 void task_wlogo_hwt_0(WlogoHwtWork* work);

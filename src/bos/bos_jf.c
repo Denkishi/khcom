@@ -29,6 +29,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 s16 gBosJfActorX EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);

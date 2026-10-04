@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 TaskDesc gTaskDescBtlLockon = {
     "task_btl_lockon",

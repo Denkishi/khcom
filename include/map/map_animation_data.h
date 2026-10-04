@@ -1,4 +1,0 @@
-#ifndef GUARD_MAP_ANIMATION_DATA_H
-#define GUARD_MAP_ANIMATION_DATA_H
-
-#endif

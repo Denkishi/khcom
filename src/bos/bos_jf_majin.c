@@ -22,7 +22,6 @@
 #include "engine_math.h"
 #include "gba/defines.h"
 #include "m4a_song.h"
-#include "mode_battle_data.h"
 #include "obj.h"
 #include "obj_api.h"
 #include "pallet.h"
@@ -30,6 +29,8 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 const void* gBosJfMajinMapBlockTable[4] EWRAM_COMMON(16);
 const void* gBosJfMajinMapBlocks EWRAM_COMMON(4);

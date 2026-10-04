@@ -15,7 +15,6 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_btl.h"
 #include "sprites_card_pictures.h"
 #include "songs.h"
@@ -30,6 +29,7 @@
 #include "types.h"
 #include "lockon.h"
 #include "card_prize_card.h"
+#include "sprite_palettes.h"
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 

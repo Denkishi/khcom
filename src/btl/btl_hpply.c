@@ -16,6 +16,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_hpply_0(BtlHpplyWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {

@@ -18,10 +18,10 @@
 #include "engine_math.h"
 #include "listpool.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy82CommonAnimDefs[3] = {
     { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0, { 0, 0, 0 } },

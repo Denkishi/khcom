@@ -29,6 +29,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const EmyKind sBosGaEmyKind =
 {32, 100, 16, 16, 0, 100, EMY_KIND_FLAG_NO_COLLIDER}

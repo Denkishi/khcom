@@ -232,8 +232,6 @@ typedef struct PcWork {
     PcOam oam[24];
 } PcWork;
 
-extern u16 gBosPcBgPalette[];
-
 u16 BosPcGetSpritePriority(PcWork* work, s32 a);
 u16 BosPcGetSpriteDepth(PcWork* work, s32 a, s32 b);
 
@@ -482,15 +480,10 @@ u8 BosLstFireBits(BosLstWork* work, s32 idx, s16 a);
 u8 task_bos_pc_flt_1(PcFltWork* work);
 void BosPcFltUpdateMotion(PcFltWork* work);
 
-extern u8 gUnk_09C4B012[];
-extern u8 gUnk_09C51CBC[];
-
 void BosLstMoveMode2(BosLstWork* work);
 void BosLstSetFacing(BosLstWork* work, s16 a);
 
 void task_bos_pc_fld_2(PcFldWork* work);
-
-extern u8 gUnk_09C489E4[];
 
 const PcAnimStep* BosPcGetAnimStep(PcWork* work);
 void BosPcUpdatePaletteCycle(PcWork* work);
@@ -500,10 +493,6 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool);
 void BosPcStartPaletteCycle(PcWork* work);
 void CreateBosPcFltTask(PcWork* work, u16 a, s32 b, s32 c, s32 d, u8 e);
 void CreateBosPcAcdTask(PcWork* work, TaskPool* pool);
-
-extern u16 gUnk_08F69BC4[];
-extern u8 gUnk_09C53724[];
-extern u8 gUnk_09C58590[];
 
 void task_bos_lst_0(BosLstWork* work, TaskPool* pool);
 u8 task_bos_lst_1(BosLstWork* work);

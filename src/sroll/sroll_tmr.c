@@ -20,6 +20,7 @@
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static DmaStream sDmaStream;
 static u8 sBlockAudioPlaying;

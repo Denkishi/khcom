@@ -32,6 +32,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "bos_boogie_dice.h"
+#include "sprite_palettes.h"
 
 u16 gBosBoogieSakuOpenTime EWRAM_COMMON(4);
 u8 gBosBoogieDiceFace EWRAM_COMMON(4);

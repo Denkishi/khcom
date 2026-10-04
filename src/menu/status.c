@@ -4,7 +4,6 @@
  */
 
 #include "macros.h"
-#include "localized_resource_assets.h"
 #include "registration_data.h"
 #include "system_state.h"
 #include "status_api.h"
@@ -38,6 +37,7 @@
 #include <stddef.h>
 #include "card_deckmenu2.h"
 #include "card_stock_info.h"
+#include "sprite_palettes.h"
 
 TaskDesc gTaskDescStatus = {
     "task_status",

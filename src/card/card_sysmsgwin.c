@@ -18,7 +18,6 @@
 #include "taskpool.h"
 #include "key.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_deck_menu.h"
 #include "sprites_evt.h"
 #include "sprites_msg.h"
@@ -34,6 +33,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_sysmsgwin.h"
+#include "sprite_palettes.h"
 
 static SysMsgWinWork* sActiveSysmsgwin;
 

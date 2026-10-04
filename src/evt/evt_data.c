@@ -3,8 +3,6 @@
  * Event Object Animation Data
  */
 
-#include "mode_chkobj_assets.h"
-#include "evt_assets.h"
 #include "sprites_continue.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"
@@ -16,6 +14,7 @@
 #include "sprites_smn.h"
 #include "sprites_sora.h"
 #include "evt_types.h"
+#include "sprite_palettes.h"
 
 static const EvtAnimDef sEvtAnimDefs[500] = {
     { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles },

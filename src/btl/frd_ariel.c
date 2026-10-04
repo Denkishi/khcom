@@ -22,6 +22,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdArielAnimDefs[3] = {
     { gUnk_09EDE5C8, gUnk_09EDE5F0, gUnk_088777F6, 0, { 0, 0, 0 } },

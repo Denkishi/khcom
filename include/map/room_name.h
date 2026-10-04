@@ -27,8 +27,6 @@ typedef struct RoomNameWork {
     TextSlot textSlots[0x24];
 } RoomNameWork;
 
-extern u16 gUnk_099910C4[];
-
 void task_room_name_0(RoomNameWork* work, s32 arg);
 u8 task_room_name_1(RoomNameWork* work);
 void task_room_name_2(RoomNameWork* work);

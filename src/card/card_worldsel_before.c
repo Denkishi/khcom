@@ -16,6 +16,7 @@
 #include "field_state.h"
 #include <stddef.h>
 #include "types.h"
+#include "sprite_palettes.h"
 
 void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* a) {
     u8 i;

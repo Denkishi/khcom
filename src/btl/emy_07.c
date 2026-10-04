@@ -19,10 +19,10 @@
 #include "enemy_types.h"
 #include "engine_math.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy07CommonAnimDefs[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },

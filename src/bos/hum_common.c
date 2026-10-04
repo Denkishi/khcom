@@ -3,7 +3,6 @@
  * Humanoid Boss Common Routines
  */
 
-#include "mode_vsbattle.h"
 #include "prize_types.h"
 #include "btl_api.h"
 #include "fade.h"
@@ -31,6 +30,7 @@
 #include "obj.h"
 #include "romcri_backgrounds.h"
 #include "card_battle_riku.h"
+#include "sprite_palettes.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);

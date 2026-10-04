@@ -17,7 +17,6 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_btl.h"
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
@@ -32,6 +31,7 @@
 #include <stddef.h>
 #include "lockon.h"
 #include "card_reload_children.h"
+#include "sprite_palettes.h"
 
 static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 

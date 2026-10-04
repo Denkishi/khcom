@@ -4,17 +4,8 @@
 #include "types.h"
 #include "text_types.h"
 #include "jiminy_types.h"
-#ifdef VERSION_EU
-extern u16 gUnk_09A3CDDC[];
-#endif
-
 
 extern TextChar gUnk_08159FE0[];
-extern u8 gTalk0600Tiles[];
-extern u8 gTalk2700Tiles[];
-extern u16 gCard00Palette[];
-extern u16 gTalk0600Palette[];
-extern u16 gTalk2700Palette[];
 
 void JiminyFreeRows();
 u8 JiminyHandleListInput();

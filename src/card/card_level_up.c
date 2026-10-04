@@ -32,13 +32,13 @@
 #include "battle.h"
 #include "battle_actor_types.h"
 #include "battle_work.h"
-#include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/defines.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
 #include "card_level_up.h"
+#include "default_bg_map.h"
 
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };

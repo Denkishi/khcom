@@ -28,6 +28,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 

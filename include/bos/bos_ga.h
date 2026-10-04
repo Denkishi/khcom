@@ -36,7 +36,5 @@ u8 BosGaUpdateBodyJump(GaWork* work);
 u8 BosGaUpdateGimmick(GaWork* work);
 u8 BosGaUpdateDefeat(GaWork* work);
 void BosGaEntryUpdate(GaWork* work, GaEntryWork* p);
-extern u16 gBoss01objPalette[];
-extern u16 gUnk_08F69BC4[];
 
 #endif /* GUARD_BOS_GA_H */

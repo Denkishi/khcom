@@ -14,6 +14,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sBtlBadstatusAnimDefs[5] = {
     { gUnk_09EE12E8, gUnk_09EE130C, gUnk_08B21CFC, 0, { 0, 0, 0 } },

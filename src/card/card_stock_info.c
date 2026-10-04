@@ -22,6 +22,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "card_stock_info.h"
+#include "sprite_palettes.h"
 
 #if defined(VERSION_US)
 static const CardHelpDef sFiraHelpDef = {

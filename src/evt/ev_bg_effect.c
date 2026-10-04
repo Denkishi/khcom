@@ -11,12 +11,12 @@
 #include "sprites_msg.h"
 #include "evt_obj.h"
 #include "evt_types.h"
-#include "mode_battle_data.h"
 #include "msg_types.h"
 #include "sprite_palettes.h"
 #include "types.h"
 #include <stddef.h>
 #include "ev_bg_effect.h"
+#include "default_bg_map.h"
 
 static const EventBgEffectDef sEventBgEffect0Def = {
     &gEventBgEffectMaps[0], gEventBgEffect0Tiles, gEventBgEffect0Palette, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,

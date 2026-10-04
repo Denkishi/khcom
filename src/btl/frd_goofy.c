@@ -21,6 +21,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdGoofyAnimDefs[5] = {
     { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0, { 0, 0, 0 } },

@@ -6,7 +6,6 @@
 #include "monsgage.h"
 #include "map_resource_assets.h"
 #include "map_tasks.h"
-#include "map_enemy_assets.h"
 #include "sprites_btl.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"
@@ -39,7 +38,6 @@
 #include "map_api.h"
 #include "map_types.h"
 #include "mode.h"
-#include "mode_chkobj_assets.h"
 #include "msg_api.h"
 #include "obj.h"
 #include "obj_api.h"
@@ -51,6 +49,8 @@
 #include "types.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "map_room_tables.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },

@@ -20,10 +20,6 @@ void FldRikuSetAnim(FldWork* work, s32 index, u16 flags);
 
 void CreateWorldSelBeforeTask(void* a, s32 x, s32 y, s32 z);
 
-extern u16 gSoraPalette[];
-extern u16 gRikuPalette[];
-extern u16 gUnk_08F69BE4[];
-
 u8 FldRikuCheckBlocked(FldPos* p);
 s32 FldRikuProbeGround(FldPos* p);
 u8 FldRikuCheckClimb(FldPos* p, FldWork* work);

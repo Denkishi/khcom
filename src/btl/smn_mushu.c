@@ -21,6 +21,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnMushuAnimDefs[4] = {
     { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 0, { 0, 0, 0 } },

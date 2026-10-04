@@ -32,6 +32,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "bos_ursula.h"
+#include "sprite_palettes.h"
 
 static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 

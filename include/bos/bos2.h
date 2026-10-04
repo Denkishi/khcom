@@ -384,16 +384,10 @@ extern const s16 gBosDsdCircleOffsetsY[10];
 extern const s16 gBosDsdFrameDurations[47];
 extern const s8 gBosDsdIdleBob[10];
 
-extern u16 gUnk_096FB8C4[];
-extern u16 gUnk_096FB8E4[];
-extern u16 gUnk_096FB864[];
-extern u16 gUnk_096FB884[];
 extern const s8 gBosDsdCirclePaletteDurations[10];
-extern u16 gUnk_096FB904[];
 extern u8 gUnk_06010000[];
 extern const EmyKind gBosJfEmyKind;
 
-extern u16 gUnk_08F69BC4[];
 extern const s16 gBosDsdItaDipSteps[6];
 extern const s16 gBosJfMajinFrameDurations[49];
 extern const s8 gBosJfMajinIdleOffsets[6];

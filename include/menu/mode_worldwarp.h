@@ -3,12 +3,6 @@
 
 #include "types.h"
 
-extern u16 gMoguPalette[];
-
-extern u16 gUnk_09A3D57C[];
-extern u16 gUnk_09A3D59C[];
-extern u16 gUnk_09A3D5BC[];
-
 void mode_worldwarp_0();
 void mode_worldwarp_1();
 void mode_worldwarp_2();

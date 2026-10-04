@@ -14,10 +14,10 @@
 #include "battle_work.h"
 #include "game_state.h"
 #include "hum_types.h"
-#include "mode_chkobj_assets.h"
 #include "player_progression_types.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sHumLeonAnimDefs[5] = {
     { gReonFl00Frames, gReonFl00Anims, gReonFl00Tiles, 0, { 0, 0, 0 } },

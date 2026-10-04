@@ -41,6 +41,7 @@
 #include "types.h"
 #include "key_state.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0, { 0, 0, 0 } },

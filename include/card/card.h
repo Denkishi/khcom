@@ -152,7 +152,6 @@ typedef struct CardBattleWork {
 } CardBattleWork;
 
 typedef char CardBattleWork_size[(sizeof(CardBattleWork) == 0xCC) ? 1 : -1];
-extern u8 gRiCardF0RedTiles[];
 
 typedef struct CardListWork {
     ListPool cards;
@@ -165,11 +164,8 @@ typedef struct CardListWork {
 
 typedef char CardListWork_size[(sizeof(CardListWork) == 0x2C) ? 1 : -1];
 
-extern u16 gUnk_09614118[];
-extern u16 gUnk_096142F8[];
 extern u8 gUnk_05000160[];
 extern void* gLvupEffectSprites[];
-extern u16 gUnk_09613F78[];
 
 typedef struct EventMapObjectWork {
     u8 background;
@@ -317,7 +313,6 @@ extern const s32 gLvupEffectStartOffsetX[];
 extern const s32 gLvupEffectStartOffsetY[];
 extern const u16 gLvupEffectStartAngles[];
 extern u16 gRandomHcEffects[47];
-extern u16 gUnk_09619178[];
 
 typedef struct WorldSelAnim {
     u8 palette;
@@ -326,13 +321,8 @@ typedef struct WorldSelAnim {
 } WorldSelAnim;
 
 extern WorldSelAnim gWorldSelAnims[30];
-extern u16 gUnk_09619378[];
 extern const s32 gSysmsgwinChoiceCursorX[];
 extern u8 gUnk_0815C1C2[];
-extern u16 gUnk_09614418[];
-extern u16 gUnk_09614438[];
-extern u8 gFEventTiles[];
-extern u16 gUnk_08F69BE4[];
 
 typedef struct CardMessageArgs {
     u32 bg;
@@ -1106,33 +1096,12 @@ typedef struct PrizeMapCardGroupList {
     u16 unk_06;
 } PrizeMapCardGroupList;
 
-extern Deck gUnk_09041FA0;
-extern u16 gUnk_09041F70[];
-extern u8 gRikuBt00Tiles[];
-extern u8 gSor1ll51Tiles[];
-extern u16 gUnk_09618D38[];
 extern const s32 gSoraCardLayout[][2];
 extern const s32 gSoraCardRingAngles[];
 extern const s32 gSoraCardSwingAngles[];
 extern const s32 gRikuCardLayout[][2];
 extern const s32 gPlayedCardCenter[];
 extern const s32 gPlayedCardAngles[];
-extern u16 gUnk_096144D8[];
-extern u16 gUnk_096FBA04[];
-extern u8 gUnk_09628DC0[];
-
-#ifdef VERSION_EU
-extern u8 gUnkEu_095EDAAA[];
-extern u8 gUnkEu_095EE0E2[];
-extern u8 gUnkEu_095EE71A[];
-extern u8 gUnkEu_095EED52[];
-extern u8 gUnkEu_095EF38A[];
-extern u8 gUnkEu_095EF9C2[];
-extern u8 gUnkEu_095EFFFA[];
-extern u8 gUnkEu_095F0632[];
-extern u8 gUnkEu_095F0C6A[];
-extern u8 gUnkEu_095F12A2[];
-#endif
 
 extern const s16 gDeckGridColumnX[];
 extern const s16 gDeckGridRowY[];
@@ -1141,21 +1110,6 @@ typedef struct PromptChoiceLayout {
     s32 x[2];
 } PromptChoiceLayout;
 
-extern u8 gUnk_09618C58[];
-extern u8 gUnk_09619098[];
-extern u8 gUnk_090A3E46[];
-extern u16 gUnk_096144F8[];
-extern u16 gUnk_09619158[];
-extern u16 gUnk_09614458[];
-extern u16 gUnk_09614478[];
-extern u16 gUnk_09614498[];
-extern u16 gUnk_096144B8[];
-extern u16 gUnk_09614406[];
-extern u16 gCard00Palette[];
-extern u8 gSor1ff00Tiles[];
-extern u8 gRikuFf00Tiles[];
-extern u16 gUnk_09614798[];
-extern u16 gUnk_09618C38[];
 extern u8 gUnk_050001A0[];
 extern u8 gUnk_050001C0[];
 extern u8 gUnk_0500016C[];
@@ -1979,9 +1933,6 @@ extern const s16 gKeyboardPageTabXEu[];
 
 #ifdef VERSION_JP
 extern const s16 gKeyboardPageTabXJp[];
-extern const u8 gUnkJp_090089B0[];
-extern const u8 gUnkJp_090089BC[];
-extern const u8 gUnkJp_090089C8[];
 #endif
 
 typedef struct PremireChanceWork {
@@ -2103,9 +2054,6 @@ extern const MapTileAnimationDef* gUnk_09EE4A4C;
 extern const u16* gRikuDeckCards[12];
 extern const u16* gRikuDeckEnemyCards[12];
 #ifdef VERSION_EU
-extern u8 gUnkEu_09F6FD74[7];
-extern u8 gUnkEu_09F6FD7B[7];
-extern u8 gUnkEu_09F6FD82[7];
 extern void* gDeckButtonLabelTiles[5];
 extern void** gDeckButtonLabelSprites[5];
 extern void* gDeckCommandMenuTiles[5];
@@ -2119,24 +2067,7 @@ extern const u8* gDeckKeyboardSymbolRows[7];
 extern void* gMapCardUiExtraTilesByLanguage[5];
 extern void** gMapCardUiSpritesByLanguage[5];
 extern void** gMapSelectTitleSpritesByLanguage[5];
-extern u8 gUnkEu_09189F36[];
-extern u8 gUnkEu_0918A73A[];
-extern u8 gUnkEu_0918A48E[];
-extern u8 gUnkEu_0918A1E2[];
-extern u8 gUnkEu_0918B8F2[];
-extern u8 gUnkEu_0919016A[];
-extern u8 gUnkEu_0918E942[];
-extern u8 gUnkEu_0918D11A[];
-extern u8 gUnkEu_09191992[];
-extern u8 gUnkEu_0919236A[];
-extern u8 gUnkEu_09192022[];
-extern u8 gUnkEu_09191CDA[];
-extern u8 gUnkEu_094C9860[];
-extern u8 gUnkEu_094C9C20[];
 #else
-extern u16 gUnk_09EE4AC8[7];
-extern u16 gUnk_09EE4AD6[7];
-extern u16 gUnk_09EE4AE4[7];
 extern const u8* gDeckKeyboardRows[7];
 #endif
 #ifdef VERSION_JP
@@ -2156,15 +2087,6 @@ extern void** gHcEffectCountUnitSpritesByLanguage[5];
 extern void* gLevelUpBgTilesByLanguage[5];
 extern void* gLevelUpHeaderTilesByLanguage[5];
 extern void** gLvupEffectSpritesByLanguage[5];
-extern u8 gUnkEu_094CE490[];
-extern u8 gUnkEu_094CE820[];
-extern u8 gUnkEu_094CE6F0[];
-extern u8 gUnkEu_094CE5C0[];
-extern u8 gUnkEu_094CF704[];
-extern u8 gUnkEu_094D72E4[];
-extern u8 gUnkEu_094DB664[];
-extern u8 gUnkEu_094D9FE4[];
-extern u8 gUnkEu_094D8964[];
 #else
 #ifdef VERSION_JP
 extern const u8 gLevelUpDisabledText[];
@@ -2279,10 +2201,6 @@ extern const CardHelpDef* gCardHelpDefs[];
 #ifdef VERSION_EU
 extern u8 gUnkEu_090D1DA5[];
 extern u8* gLeaveWorldTextByLanguage[5];
-extern u8 gUnkEu_091926B2[];
-extern u8 gUnkEu_0919308A[];
-extern u8 gUnkEu_09192D42[];
-extern u8 gUnkEu_091929FA[];
 extern void* gRikuDeckTitleBannerTiles[5];
 extern u8* gRikuDeckEquipMarkerTiles[5];
 extern Mode gModeTextCheck;
@@ -2320,11 +2238,6 @@ extern TaskDesc gTaskDescBosscard;
 extern const MapTileAnimationDef* gMapTileAnimationDefs[6];
 extern const u16* gRikuDeckCards[12];
 extern const u16* gRikuDeckEnemyCards[12];
-#ifndef VERSION_EU
-extern u16 gUnk_09EE4AC8[7];
-extern u16 gUnk_09EE4AD6[7];
-extern u16 gUnk_09EE4AE4[7];
-#endif
 #ifdef VERSION_EU
 extern void* gDeckButtonLabelTiles[5];
 extern void** gDeckButtonLabelSprites[5];

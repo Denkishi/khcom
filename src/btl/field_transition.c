@@ -18,6 +18,7 @@
 #include <stddef.h>
 #include "system_state.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static FieldTransitionWork* sFieldTransitionWork;
 

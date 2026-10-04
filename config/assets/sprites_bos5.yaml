@@ -1733,25 +1733,21 @@ entries:
     size: 4032
 - name: gUnkEu_09A840A0
   format: tilemap
-  declare: false
   eu:
     address: 0x09A840A0
     size: 1280
 - name: gUnkEu_09A845A0
   format: tilemap
-  declare: false
   eu:
     address: 0x09A845A0
     size: 1280
 - name: gUnkEu_09A84AA0
   format: tilemap
-  declare: false
   eu:
     address: 0x09A84AA0
     size: 1280
 - name: gUnkEu_09A84FA0
   format: tilemap
-  declare: false
   eu:
     address: 0x09A84FA0
     size: 1280

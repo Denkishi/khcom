@@ -29,7 +29,6 @@ typedef struct EvtShadowWork {
     void* tiles3;
 } EvtShadowWork;
 
-extern u16 gUnk_08F69BE4[];
 extern EventState* gEventState;
 
 void EvtObjSetGroundZ(EvtObj* obj, s32 a);

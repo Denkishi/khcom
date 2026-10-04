@@ -28,9 +28,8 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
-#include "bos4.h"
-#include "btl.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static BoogieWork* sBoogieWork;
 

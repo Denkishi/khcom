@@ -15,7 +15,6 @@
 #include "card_battle.h"
 #include "display.h"
 #include "engine_math.h"
-#include "game.h"
 #include "gba/io_reg.h"
 #include "key.h"
 #include "obj.h"
@@ -23,6 +22,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 void TutorialOpenMessage(u16 a) {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_1;

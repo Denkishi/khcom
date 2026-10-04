@@ -1,4 +1,0 @@
-#ifndef GUARD_JIMINY_RECORDS_DATA_H
-#define GUARD_JIMINY_RECORDS_DATA_H
-
-#endif

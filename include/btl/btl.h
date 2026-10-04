@@ -205,23 +205,6 @@ typedef struct BtlRikuWork {
     BtlObj* actor2;
 } BtlRikuWork;
 
-extern u8 gUnk_08B1D8BC[];
-extern u8 gUnk_08B1E974[];
-extern u8 gUnk_08B1E97E[];
-extern u8 gUnk_08B1E988[];
-extern u8 gUnk_08B1E992[];
-extern u8 gUnk_08B1E99C[];
-extern u8 gUnk_08B1E9A6[];
-extern u8 gUnk_08B1EA00[];
-extern u8 gUnk_08CB06E4[];
-extern u16 gUnk_08EFD384[];
-extern u16 gUnk_08F69404[];
-extern u16 gSoraPalette[];
-extern u16 gUnk_08F69BC4[];
-extern u16 gUnk_096FAC64[];
-extern u16 gRikuPalette[];
-extern u16 gBStatesPalette[];
-
 void LoadBtlSoraPalette(BtlSoraWork* work);
 void DisableBtlSoraPassThrough(BtlSoraWork* work);
 void BgFxStartDashRing(s32 x, s32 y, s32 z, u8 f);

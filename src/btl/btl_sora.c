@@ -39,6 +39,7 @@
 #include "types.h"
 #include "key_state.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0, { 0, 0, 0 } },

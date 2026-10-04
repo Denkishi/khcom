@@ -6,13 +6,13 @@
 #include "system_state.h"
 #include "monsgage.h"
 #include "obj_api.h"
-#include "game.h"
 #include "sprites_btl_hud.h"
 #include "battle_work.h"
 #include "obj.h"
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 void* GetLocalizedString(const void* strings) {

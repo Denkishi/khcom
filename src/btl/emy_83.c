@@ -17,11 +17,12 @@
 #include "enemy_types.h"
 #include "engine_math.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "obj_api.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
+#include "sprites_btl.h"
 
 static const AnimDef sEmy83CommonAnimDefs[3] = {
     { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },

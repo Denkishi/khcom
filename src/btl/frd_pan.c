@@ -24,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sFrdPanAnimDefs[4] = {
     { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0, { 0, 0, 0 } },

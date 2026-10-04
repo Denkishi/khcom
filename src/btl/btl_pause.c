@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_pause_0(BtlPauseWork* work) {
 #ifdef VERSION_EU

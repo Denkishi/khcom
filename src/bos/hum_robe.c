@@ -13,9 +13,9 @@
 #include "battle_actor_types.h"
 #include "battle_work.h"
 #include "hum_types.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static const AnimDef sHumRobeAnimDefs[2] = {
     { gRobeFl00Frames, gRobeFl00Anims, gRobeFl00Tiles, 5, { 0, 0, 0 } },

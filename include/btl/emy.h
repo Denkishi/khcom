@@ -207,16 +207,6 @@ typedef struct Emy83sWork {
     s16 frameCount;
 } Emy83sWork;
 
-extern u8 gEmy1610bTiles[];
-extern u8 gEmy1611bTiles[];
-extern u8 gEmy8311bFrame0[];
-extern u8 gEmy8311bFrame1[];
-extern u8 gEmy8311bTiles[];
-extern u8 gEmy8310bTiles[];
-extern u16 gEmy07mPalette[];
-extern u16 gEmy16Palette[];
-extern u16 gEmy83Palette[];
-
 void Emy29MoveToPose(Emy29Work* work, s16 anim, s16 dx, s16 dy, s16 dz);
 u8 GetEmyApproachAngle(EmyWork* work);
 

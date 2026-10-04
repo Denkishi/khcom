@@ -23,6 +23,7 @@
 #include "event_index_data.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static u8 sLvupLogoActive;
 

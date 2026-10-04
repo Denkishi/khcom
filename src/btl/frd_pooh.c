@@ -19,6 +19,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 

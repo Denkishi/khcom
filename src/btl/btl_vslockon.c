@@ -13,6 +13,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 void task_btl_vslockon_0(BtlVslockonWork* work) {
     work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);

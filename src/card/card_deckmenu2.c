@@ -37,16 +37,15 @@
 #include "card_types.h"
 #include "card_ui_types.h"
 #include "gba/defines.h"
-#include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/macro.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
 #include "card_deckmenu2.h"
-#include "ms_charge.h"
 #include "card_map_anim.h"
 #include "ui_text.h"
+#include "default_bg_map.h"
 
 const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),

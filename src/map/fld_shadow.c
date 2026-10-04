@@ -15,6 +15,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 void task_fld_shadow_0(FldShadowWork* work, FldObj* obj) {
     work->actor = obj;

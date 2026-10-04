@@ -16,10 +16,10 @@
 #include "btl_effect.h"
 #include "enemy_types.h"
 #include "m4a_song.h"
-#include "mode_chkobj_assets.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sEmy21CommonAnimDefs[3] = {
     { gEmy2100Frames, gEmy2100Anims, gEmy2100Tiles, 0, { 0, 0, 0 } },

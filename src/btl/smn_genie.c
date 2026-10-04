@@ -25,6 +25,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static const AnimDef sSmnGenieAnimDefs[2] = {
     { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 0, { 0, 0, 0 } },

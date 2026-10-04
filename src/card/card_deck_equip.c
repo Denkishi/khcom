@@ -24,6 +24,7 @@
 #include <stddef.h>
 #include "card_deckmenu2.h"
 #include "ui_text.h"
+#include "sprite_palettes.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;

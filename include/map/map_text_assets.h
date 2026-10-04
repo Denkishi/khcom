@@ -1,4 +1,0 @@
-#ifndef GUARD_MAP_TEXT_ASSETS_H
-#define GUARD_MAP_TEXT_ASSETS_H
-
-#endif

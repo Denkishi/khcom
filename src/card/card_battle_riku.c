@@ -17,7 +17,6 @@
 #include "taskpool.h"
 #include "malloc.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_card.h"
 #include "sprites_card_pictures.h"
 #include "songs.h"
@@ -35,6 +34,7 @@
 #include "card_battle_riku.h"
 #include "card_map_anim.h"
 #include "card_enemy.h"
+#include "sprite_palettes.h"
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
 

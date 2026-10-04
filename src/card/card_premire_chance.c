@@ -11,13 +11,13 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "card.h"
-#include "game.h"
 #include "sprites_card_pictures.h"
 #include "card_def_data.h"
 #include "card_types.h"
 #include "types.h"
 #include <stddef.h>
 #include "card_premire_chance.h"
+#include "sprite_palettes.h"
 
 static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 

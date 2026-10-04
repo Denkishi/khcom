@@ -16,6 +16,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 u16 gUnk_0203C3BC EWRAM_COMMON(4);
 u16 gUnk_0203C3C0 EWRAM_COMMON(4);

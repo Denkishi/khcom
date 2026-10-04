@@ -4,7 +4,6 @@
  */
 
 #include <stddef.h>
-#include "card_def_assets.h"
 #include "sprites_card_pictures.h"
 #include "sprite_palettes.h"
 #include "card_label_data.h"
@@ -14,7 +13,6 @@
 #include "card_ui_types.h"
 #include "jiminy_data.h"
 #include "types.h"
-#include "mode_test_assets.h"
 
 const CardBack gCardBacks[5] = {
     {

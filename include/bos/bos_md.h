@@ -177,8 +177,6 @@ typedef struct MdWork {
     u8 unk_1B6[0x2];
 } MdWork;
 
-extern u16 gUnk_09A3C9BC[];
-
 void BosMdFireHandleReaction(MdFireWork* work);
 u8 BosMdFireUpdateMotion(MdFireWork* work);
 
@@ -212,7 +210,6 @@ typedef struct MdMapWork {
 s32 task_bos_md_dai_1(MdDaiWork* work);
 void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg);
 void BosMdFirePlace(MdFireWork* work);
-extern u16 gUnk_09A3C99C[];
 void task_bos_md_dai_2(MdDaiWork* work);
 void BosMdSetFrame(MdWork* work, u16 id);
 void BosMdRequestState(MdWork* work, s32 state);
@@ -224,10 +221,7 @@ u8 BosMdUpdateQuake(MdWork* work);
 u8 BosMdUpdateFireBreath(MdWork* work);
 s32 task_bos_md_1(MdWork* work);
 void task_bos_md_0(MdWork* work, void* arg);
-extern u16 gUnk_09A3C8BC[];
 void MdAnimUpdate(MdWork* work);
-extern u16 gUnk_08F69BC4[];
-extern u16 gUnk_09A3C97C[];
 void task_bos_md_2(MdWork* work);
 void BosMdEndHurt(MdWork* work);
 void BosMdHandleReaction(MdWork* work);

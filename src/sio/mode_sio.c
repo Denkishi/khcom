@@ -5,7 +5,6 @@
 
 #include "macros.h"
 #include "mode_sio_dbg.h"
-#include "mode_chkobj_assets.h"
 #include "registration_data.h"
 #include "system_state.h"
 #include "chara_api.h"
@@ -56,6 +55,7 @@
 #include <stddef.h>
 #include "card_map_anim.h"
 #include "card_deckmenu2.h"
+#include "sprite_palettes.h"
 
 s8 gSioDebugMode EWRAM_COMMON(4);
 

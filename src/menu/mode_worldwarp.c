@@ -31,6 +31,7 @@
 #include "text_types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 static s16 sWorldWarpCursor;
 static s16 sWorldWarpFloorCount;

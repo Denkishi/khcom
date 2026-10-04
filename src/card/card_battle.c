@@ -13,7 +13,6 @@
 #include "engine_math.h"
 #include "listpool.h"
 #include "card.h"
-#include "game.h"
 #include "obj_api.h"
 #include "malloc.h"
 #include "anim.h"
@@ -34,6 +33,8 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "sprite_palettes.h"
+#include "tutorial_deck.h"
 
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;

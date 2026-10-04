@@ -94,7 +94,6 @@ typedef struct BattleAttackDef {
 } BattleAttackDef;
 
 extern s32 gUnk_02039DC0;
-extern u16 gUnk_08F69BC4[];
 
 
 void* ColliderGetPool(u32 type);
@@ -141,19 +140,6 @@ u8 GetActiveCardValue();
 void RequestBossCardOpen();
 void RequestBossCardClose();
 extern Mode gModeChkbtl;
-
-extern u8 gUnk_08935BC2[];
-extern u8 gRik1bl01Tiles[];
-extern u8 gRik1ll01Tiles[];
-extern u8 gRik1fl01Tiles[];
-extern u8 gUnk_0893416A[];
-extern u8 gSor1bb01Tiles[];
-extern u8 gSor1bl01Tiles[];
-extern u8 gSor1ll01Tiles[];
-extern u8 gSor1fl01Tiles[];
-extern u8 gSor1ff01Tiles[];
-extern u16 gRikuPalette[];
-extern u16 gSoraPalette[];
 
 u8 TryStartCardAction(BtlObj* p);
 void VsBtlWorkInit();

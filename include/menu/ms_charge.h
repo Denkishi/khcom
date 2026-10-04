@@ -4,8 +4,6 @@
 #include "ms_charge_api.h"
 #include "types.h"
 
-extern u16 gUnk_09A3DE7C[];
-
 s16 GetMsChargeTabStart(s16 a);
 s16 GetMsChargeTabCount(s16 a);
 s16 GetMsChargeSelectedIndex();
@@ -22,9 +20,6 @@ s32 FindMsCard(u16 id, u8 flag, s16 count);
 s32 MsChargeReadMenuKeys();
 s32 MsChargeSelectValueInColumn(MsCard* card, u16 col);
 
-extern u8 gMoguFl00Tiles[];
-extern u16 gCard00Palette[];
-extern u16 gMoguPalette[];
 void mode_ms_charge_1();
 void mode_ms_charge_2();
 void mode_ms_charge_0();

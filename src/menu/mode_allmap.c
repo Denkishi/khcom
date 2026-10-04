@@ -27,14 +27,14 @@
 #include "map_runtime.h"
 #include "map_types.h"
 #include "mode.h"
-#include "mode_battle_data.h"
 #include "obj_api.h"
 #include "registration_data.h"
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
-#include "localized_resource_assets.h"
 #include "allmap.h"
+#include "default_bg_map.h"
+#include "sprite_palettes.h"
 
 #if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {

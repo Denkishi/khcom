@@ -26,6 +26,7 @@
 #include "save_types.h"
 #include <stddef.h>
 #include "map.h"
+#include "map_room_tables.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -148,7 +149,7 @@ void UpdateWorldFriendFlags() {
     }
 }
 
-MapFloorDef* GetMapFloorDef(u8 a) {
+const MapFloorDef* GetMapFloorDef(u8 a) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return &gUnk_0984CBD0[a];
     }
@@ -531,7 +532,7 @@ void AdvanceToExitHall() {
 
 u8 GetEventStepKeyKind() {
     u8* e = GetMapRoomEvent(gMapFloorState.eventStep);
-    EventKeyList* t = &gEventKeyLists[GetMapEventDoor(*e)->keyList];
+    const EventKeyList* t = &gEventKeyLists[GetMapEventDoor(*e)->keyList];
     EventKey* q;
 
     t += *e;
@@ -903,7 +904,7 @@ void SetFloorWorld(u8 a) {
 }
 
 void EnterFloorWorld() {
-    MapFloorDef* e = GetMapFloorDef(gGameState.floor);
+    const MapFloorDef* e = GetMapFloorDef(gGameState.floor);
     MapFloorRoom* p;
     u16 t;
 

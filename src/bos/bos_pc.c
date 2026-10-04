@@ -30,6 +30,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "bos_pc.h"
+#include "sprite_palettes.h"
 
 static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gBosPcUnusedSlamFrame0,

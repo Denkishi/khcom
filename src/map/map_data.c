@@ -6,7 +6,6 @@
 #include "map.h"
 #include "map_enemy_data.h"
 #include "map_spawn_data.h"
-#include "mode_battle_data.h"
 #include "event_backgrounds.h"
 #include "card_ids.h"
 #include "registration_data.h"
@@ -17,6 +16,7 @@
 #include "map_room_types.h"
 #include "map_rooms.h"
 #include "types.h"
+#include "default_bg_map.h"
 
 const MapRoomDef* gMapRoomDefs[14] = {
     &gUnk_0984D2D8,

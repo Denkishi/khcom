@@ -22,8 +22,6 @@ enum MovieFlag {
     MOVIE_FLAG_PLAYING = 0x8
 };
 
-extern u16 gUnk_09614718[];
-
 #ifndef VERSION_JP
 s16 GetCenteredTextX(u16* widths, u16 count);
 #endif

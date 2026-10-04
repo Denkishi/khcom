@@ -5,7 +5,6 @@
 
 #include "macros.h"
 #include "boss_tm.h"
-#include "boss_tm_assets.h"
 #include "sprites_boss_tm.h"
 #include "card_api.h"
 #include "engine_math.h"
@@ -18,6 +17,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 BtlObj gBosTmBodyObjCopy EWRAM_COMMON(16);
 

@@ -60,8 +60,6 @@ typedef struct UrsulaTakoWork {
     s32 offsetZ;
 } UrsulaTakoWork;
 
-extern u8 gUnk_0979D0B6[];
-extern u16 gUnk_0984B0D8[];
 void BosUrsulaUpdateMapBlocks(UrsulaWork* work);
 void task_bos_ursula_2(UrsulaWork* work);
 u8 BosUrsulaIsGuarded(UrsulaWork* work);
@@ -141,11 +139,7 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg);
 u8 task_bos_ursula_tako_1(UrsulaTakoWork* work);
 void task_bos_ursula_0(UrsulaWork* work);
 void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg);
-extern u8 gUnk_0979E344[];
 void task_bos_ursula_border_2(UrsulaBorderWork* work);
-extern u8 gUnk_0979D090[];
-extern u8 gUnk_0979D8B8[];
-extern u16 gUnk_0984AFF8[];
 void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
 void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* work);
 void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* work);

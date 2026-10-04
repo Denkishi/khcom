@@ -17,6 +17,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static TaskDesc sTaskDescEvtObj = {
     "task_evt_obj",

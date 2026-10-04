@@ -9,15 +9,12 @@
 #include "display.h"
 #include "fade.h"
 #include "mode_worldselect.h"
-#include "worldinspect_assets.h"
 #include "sprites_bos5.h"
 #include "sprites_worldinspect.h"
 #include "gba/keys.h"
 #include "gba/io_reg.h"
 #include "malloc.h"
 #include "songs.h"
-#include "worldselect_assets.h"
-#include "jiminy_records_assets.h"
 #include "world_types.h"
 #include "bg_animation_data.h"
 #include "card_api.h"
@@ -35,6 +32,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static void* sWorldselectBg1Maps[5] = {

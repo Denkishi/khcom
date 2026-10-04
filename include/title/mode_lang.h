@@ -21,12 +21,6 @@ typedef struct LangWork {
     struct ObjPalette* palette;
 } LangWork;
 
-extern u16 gUnkEu_08F6A6DC[];
-extern u16 gUnkEu_08F6A6FC[];
-extern u8 gUnkEu_08F77180[];
-extern u16 gUnkEu_08F7EBF8[];
-extern u16 gUnkEu_08F7EFB0[];
-
 void mode_lang_0(s32 arg);
 void mode_lang_1();
 void mode_lang_2();

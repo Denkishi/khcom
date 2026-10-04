@@ -1,4 +1,0 @@
-#ifndef GUARD_CARD_MESSAGE_ASSETS_H
-#define GUARD_CARD_MESSAGE_ASSETS_H
-
-#endif

@@ -14,6 +14,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 static s32 Square(s32 x) {
     return x * x;

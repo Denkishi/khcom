@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "sprite_palettes.h"
 
 Mode gModePooh = {
     "mode_pooh",

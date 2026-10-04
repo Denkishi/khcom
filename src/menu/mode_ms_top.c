@@ -35,6 +35,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_msgwin.h"
+#include "sprite_palettes.h"
 
 static s16 sMsTopCursor;
 static void* sMsTopNextMode;

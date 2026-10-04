@@ -32,7 +32,6 @@
 #include "key.h"
 #include "listpool.h"
 #include "m4a_song.h"
-#include "mode_battle_data.h"
 #include "obj.h"
 #include "obj_api.h"
 #include "player_progression_types.h"
@@ -45,6 +44,9 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "default_bg_map.h"
+#include "event_backgrounds.h"
+#include "sprite_palettes.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);

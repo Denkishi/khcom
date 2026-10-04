@@ -5,7 +5,6 @@
 
 #include "mode_wlogo.h"
 #include "registration_data.h"
-#include "mode_sio.h"
 #include "monsgage.h"
 #include "jiminy_data.h"
 #include "gba/keys.h"
@@ -26,6 +25,7 @@
 #include "text_types.h"
 #include "types.h"
 #include "obj.h"
+#include "sprite_palettes.h"
 
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)

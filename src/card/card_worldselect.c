@@ -25,8 +25,6 @@
 #include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
-#include "map_card_assets.h"
-#include "game.h"
 #include "sprites_map.h"
 #include "sprites_worldselect.h"
 #include "battle_backgrounds.h"
@@ -49,7 +47,6 @@
 #include "map_runtime.h"
 #include "map_text_data.h"
 #include "mode.h"
-#include "mode_battle_data.h"
 #include "player_progression_types.h"
 #include "types.h"
 #include "gba/macro.h"
@@ -57,6 +54,7 @@
 #include <stddef.h>
 #include "lockon.h"
 #include "card_worldselect.h"
+#include "default_bg_map.h"
 
 static TaskPool sModeWorldselectTasks;
 

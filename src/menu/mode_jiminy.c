@@ -6,8 +6,6 @@
 #include "sprites_msg.h"
 #include "jiminy_journal.h"
 #include "sprites_bos5.h"
-#include "worldinspect_assets.h"
-#include "card_def_assets.h"
 #include "sprites_emy.h"
 #include "sprites_evt.h"
 #include "sprites_smn.h"
@@ -23,13 +21,9 @@
 #include "songs.h"
 #include <stdlib.h>
 #include "jiminy_records_index_data.h"
-#include "evt_assets.h"
 #include "common_text.h"
-#include "jiminy_records_assets.h"
-#include "map_card_assets.h"
 #include "jiminy_data.h"
 #include "anim.h"
-#include "card.h"
 #include "display.h"
 #include "engine_math.h"
 #include "game_state.h"
@@ -39,7 +33,6 @@
 #include "m4a_song.h"
 #include "map_api.h"
 #include "mode.h"
-#include "mode_chkobj_assets.h"
 #include "mode_jiminy.h"
 #include "monsgage.h"
 #include "msg_api.h"
@@ -57,6 +50,7 @@
 #include "gba/defines.h"
 #include <stddef.h>
 #include "registration_data.h"
+#include "sprite_palettes.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
     { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, NULL, 0 },

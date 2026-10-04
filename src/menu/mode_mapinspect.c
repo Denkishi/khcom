@@ -40,6 +40,7 @@
 #include <stddef.h>
 #include "card_worldselect.h"
 #include "registration_data.h"
+#include "sprite_palettes.h"
 
 #ifdef VERSION_EU
 static void* sMapInspectScrollMarkerSpritesByLanguage[5] = {

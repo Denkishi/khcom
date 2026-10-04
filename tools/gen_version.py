@@ -35,7 +35,6 @@ from function_pointer_evidence import literal_pointer_pairs, load_literal_loads,
 import assetgen
 import baserom
 import textgen
-from regional_data import asset_symbols, load_sidecars, managed_asset_names
 
 ROM_BASE = 0x08000000
 CODE_HI = 0x081213C4
@@ -2422,8 +2421,6 @@ def main():
 
     us = baserom.read("us", purpose="gen_version.py")
     ot = baserom.read(ver, purpose="gen_version.py")
-    regional = load_sidecars("config", {"us": us, ver: ot})
-    regional_plan = regional["regions"][ver]
     literal_loads = load_literal_loads("build/us/com_us.elf", ROM_BASE, CODE_HI)
     function_modes = load_function_modes("build/us/com_us.elf", ROM_BASE, CODE_HI)
     rows = load_rows(ver)
@@ -2495,14 +2492,7 @@ def main():
 
     out, uncertain = regional_symbols(
         Path("config/us/symbols.txt").read_text().splitlines(), tr,
-        TARGET_ONLY_SYMBOLS.get(ver, {}), set(TARGET_ABSENT_SYMBOLS.get(ver, ())) | managed_asset_names(regional))
-    regional_ledger = []
-    for line in out:
-        stripped = line.split("#", 1)[0].strip()
-        if stripped:
-            name, address = stripped.split("=")
-            regional_ledger.append((name.strip(), int(address.strip(), 16)))
-    asset_symbols(regional_plan, regional_ledger)
+        TARGET_ONLY_SYMBOLS.get(ver, {}), set(TARGET_ABSENT_SYMBOLS.get(ver, ())))
     Path(f"config/{ver}/symbols.txt").write_text("\n".join(out) + "\n")
     print(f"  symbols.txt: {len(out)} lines, {len(uncertain)} uncertain")
 

@@ -11,10 +11,8 @@ from pathlib import Path
 sys.path.append(str(Path(__file__).parent / "tools"))
 import ninja_syntax
 from assembler_flags import software_fp_flags
-from asset_objects import materialize_assets
 from assetgen import ManifestError
 from assetgen import plan as asset_plan
-from regional_data import asset_symbols, load_sidecars
 from textgen import TextError, load_pools as load_text_pools
 
 ASM_FILE_REF_RE = re.compile(r'\.(?:include|incbin)\s+"([^"]+)"')
@@ -124,10 +122,6 @@ if symbols_file.exists():
         name, addr = (x.strip() for x in line.split("="))
         symbols.append((name, int(addr, 16)))
 
-regional_files = sorted(Path("config").glob("*_data.yaml"))
-regional = load_sidecars("config")
-regional_plan = regional["regions"][version]
-symbols.extend(asset_symbols(regional_plan, symbols))
 
 try:
     groups = asset_plan(version)
@@ -218,8 +212,6 @@ for line in units_file.read_text().splitlines():
         sys.exit(f"error: unit {name} is listed twice in {units_file}")
     linked.add(obj)
     units.append((src, obj, flags))
-
-units = materialize_assets(regional_plan, units, version, build_dir)
 
 include_dirs = ["include"] + sorted(str(p) for p in Path("include").iterdir() if p.is_dir() and p.name != "gba")
 include_flags = " ".join(f"-I {d}" for d in include_dirs)
@@ -373,8 +365,6 @@ with out.open("w") as f:
         "check",
         command=f"python3 -c \"import hashlib,sys; sys.exit(hashlib.sha1(open('{rom}','rb').read()).hexdigest() != '{sha1}')\""
                 f" && cp {rom} {verified}"
-                + (f" && {report_python} tools/regional_data.py {version} --rom {verified} --binutils-prefix {prefix}"
-                   if regional_files else "")
                 + " && touch $out",
         description=f"CHECK {rom}",
     )
@@ -416,10 +406,7 @@ with out.open("w") as f:
         variables={"ldscript": ldscript, "map": mapfile},
     )
     n.build(rom, "rom", elf, implicit=["tools/gbafix.py"])
-    n.build(f"{build_dir}/ok", "check", rom,
-            implicit=(["tools/regional_data.py", "tools/rom_data_evidence.py"] + [str(path) for path in regional_files]
-                      if regional_files else []),
-            implicit_outputs=[verified])
+    n.build(f"{build_dir}/ok", "check", rom, implicit_outputs=[verified])
     n.newline()
 
     report = f"{build_dir}/report.json"

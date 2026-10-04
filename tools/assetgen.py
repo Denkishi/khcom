@@ -775,8 +775,7 @@ def emit_c(manifest, version, members, out_path, all_manifests):
             declared = True
         elif manifest.kind(entry) == "table" and symbol in referenced:
             ctype = manifest.types[entry["record"]]["type"]
-            count = "" if manifest.data(entry, version, "scalar") else f"[{len(manifest.data(entry, version, 'items'))}]"
-            lines.append(f"extern {ctype} {symbol}{count};")
+            lines.append(f"extern {ctype} {symbol}[{len(manifest.data(entry, version, 'items'))}];")
             declared = True
     if declared:
         lines.append("")
@@ -786,13 +785,10 @@ def emit_c(manifest, version, members, out_path, all_manifests):
         if kind == "table":
             ctype = manifest.types[entry["record"]]["type"]
             items = [f"({ctype}){resolve(item)}" for item in manifest.data(entry, version, "items")]
-            if manifest.data(entry, version, "scalar"):
-                lines.append(f"{ctype} {symbol} = {items[0]};")
-            else:
-                lines.append(f"{ctype} {symbol}[{len(items)}] = {{")
-                for item in items:
-                    lines.append(f"    {item},")
-                lines.append("};")
+            lines.append(f"{ctype} {symbol}[{len(items)}] = {{")
+            for item in items:
+                lines.append(f"    {item},")
+            lines.append("};")
         elif kind == "struct":
             rtype = manifest.types[entry["record"]]
             fields = manifest.fields(entry, version)
@@ -954,10 +950,7 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
             kind = manifest.kind(entry)
             if kind == "table":
                 ctype = manifest.types[entry["record"]]["type"]
-                if manifest.data(entry, version, "scalar"):
-                    lines.append(f"extern {ctype} {symbol};")
-                else:
-                    lines.append(f"extern {ctype} {symbol}[{len(manifest.data(entry, version, 'items'))}];")
+                lines.append(f"extern {ctype} {symbol}[{len(manifest.data(entry, version, 'items'))}];")
             elif kind == "struct":
                 if not manifest.types[entry["record"]].get("header"):
                     raise ManifestError(f"{manifest.group}: {entry['name']} is declared but {entry['record']} has no header")

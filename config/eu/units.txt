@@ -2,6 +2,7 @@ header.s
 crt0.s
 main.c
 malloc.c
+listpool.c
 taskpool.c
 mode.c
 key.c

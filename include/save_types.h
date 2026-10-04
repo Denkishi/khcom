@@ -91,7 +91,7 @@ typedef struct SaveSliceE6C {
 } SaveSliceE6C;
 
 typedef struct SaveMoogleShop {
-    u16 unk_00[32];
+    u16 packBoughtFlags[32];
     u16 unk_40[2];
 } SaveMoogleShop;
 

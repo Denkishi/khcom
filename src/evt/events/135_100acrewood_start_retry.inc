@@ -14,7 +14,7 @@ static const MessageScriptEntry sEvent135Script[1] = {
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, { 0, 0, 0 }, &gUnkEu_09F69614, MSG_SCRIPT_FLAG_END, 300 },
+    { 36, 1, 1, 1, { 0, 0, 0 }, &gCardMessageText053, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 

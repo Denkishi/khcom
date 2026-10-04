@@ -609,8 +609,8 @@ const CardHelpText* gUnk_09EE79EC[] = {
     gCardHelpTextUs_090381F8,
     gCardHelpTextUs_09038260,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6C9B8,
-    &gUnkEu_09F6C9CC,
+    &gCardHelp46Text0,
+    &gCardHelp46Text1,
 #endif
 };
 #endif
@@ -624,9 +624,9 @@ const CardHelpText* gUnk_09EE79F4[] = {
     gCardHelpTextJp_0900B6E8,
     gCardHelpTextJp_0900B734,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6C9E0,
-    &gUnkEu_09F6C9F4,
-    &gUnkEu_09F6CA08,
+    &gCardHelp05Text0,
+    &gCardHelp05Text1,
+    &gCardHelp05Text2,
 #endif
 };
 
@@ -636,8 +636,8 @@ const CardHelpText* gUnk_09EE7A00[] = {
     gCardHelpTextUs_09038440,
     gCardHelpTextUs_0903848E,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CA1C,
-    &gUnkEu_09F6CA30,
+    &gCardHelp47Text0,
+    &gCardHelp47Text1,
 #endif
 };
 #endif
@@ -650,8 +650,8 @@ const CardHelpText* gUnk_09EE7A08[] = {
     gCardHelpTextJp_0900B7B4,
     gCardHelpTextJp_0900B7F0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CA44,
-    &gUnkEu_09F6CA58,
+    &gCardHelp06Text0,
+    &gCardHelp06Text1,
 #endif
 };
 
@@ -661,8 +661,8 @@ const CardHelpText* gUnk_09EE7A10[] = {
     gCardHelpTextUs_090385CC,
     gCardHelpTextUs_09038646,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CA6C,
-    &gUnkEu_09F6CA80,
+    &gCardHelp48Text0,
+    &gCardHelp48Text1,
 #endif
 };
 
@@ -671,8 +671,8 @@ const CardHelpText* gUnk_09EE7A18[] = {
     gCardHelpTextUs_09038694,
     gCardHelpTextUs_090386F0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CA94,
-    &gUnkEu_09F6CAA8,
+    &gCardHelp49Text0,
+    &gCardHelp49Text1,
 #endif
 };
 
@@ -681,8 +681,8 @@ const CardHelpText* gUnk_09EE7A20[] = {
     gCardHelpTextUs_09038736,
     gCardHelpTextUs_090387A4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CABC,
-    &gUnkEu_09F6CAD0,
+    &gCardHelp50Text0,
+    &gCardHelp50Text1,
 #endif
 };
 
@@ -691,8 +691,8 @@ const CardHelpText* gUnk_09EE7A28[] = {
     gCardHelpTextUs_0903881C,
     gCardHelpTextUs_0903887A,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CAE4,
-    &gUnkEu_09F6CAF8,
+    &gCardHelp51Text0,
+    &gCardHelp51Text1,
 #endif
 };
 
@@ -701,8 +701,8 @@ const CardHelpText* gUnk_09EE7A30[] = {
     gCardHelpTextUs_090388F2,
     gCardHelpTextUs_0903897C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CB0C,
-    &gUnkEu_09F6CB20,
+    &gCardHelp52Text0,
+    &gCardHelp52Text1,
 #endif
 };
 #endif
@@ -715,8 +715,8 @@ const CardHelpText* gUnk_09EE7A38[] = {
     gCardHelpTextJp_0900B9F0,
     gCardHelpTextJp_0900BA08,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CB34,
-    &gUnkEu_09F6CB48,
+    &gCardHelp00Text0,
+    &gCardHelp00Text1,
 #endif
 };
 
@@ -728,8 +728,8 @@ const CardHelpText* gUnk_09EE7A40[] = {
     gCardHelpTextJp_0900BA24,
     gCardHelpTextJp_0900BA3C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CB5C,
-    &gUnkEu_09F6CB70,
+    &gCardHelp01Text0,
+    &gCardHelp01Text1,
 #endif
 };
 
@@ -741,8 +741,8 @@ const CardHelpText* gUnk_09EE7A48[] = {
     gCardHelpTextJp_0900BA58,
     gCardHelpTextJp_0900BA70,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CB84,
-    &gUnkEu_09F6CB98,
+    &gCardHelp02Text0,
+    &gCardHelp02Text1,
 #endif
 };
 
@@ -754,8 +754,8 @@ const CardHelpText* gUnk_09EE7A50[] = {
     gCardHelpTextJp_0900BA84,
     gCardHelpTextJp_0900BA9C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CBAC,
-    &gUnkEu_09F6CBC0,
+    &gCardHelp03Text0,
+    &gCardHelp03Text1,
 #endif
 };
 
@@ -765,8 +765,8 @@ const CardHelpText* gUnk_09EE7A58[] = {
     gCardHelpTextUs_09038BAC,
     gCardHelpTextUs_09038C10,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CBD4,
-    &gUnkEu_09F6CBE8,
+    &gCardHelp11Text0,
+    &gCardHelp11Text1,
 #endif
 };
 #endif
@@ -779,8 +779,8 @@ const CardHelpText* gUnk_09EE7A60[] = {
     gCardHelpTextJp_0900BAAC,
     gCardHelpTextJp_0900BAC8,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CBFC,
-    &gUnkEu_09F6CC10,
+    &gCardHelp04Text0,
+    &gCardHelp04Text1,
 #endif
 };
 
@@ -790,8 +790,8 @@ const CardHelpText* gUnk_09EE7A68[] = {
     gCardHelpTextUs_09038CB2,
     gCardHelpTextUs_09038D16,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CC24,
-    &gUnkEu_09F6CC38,
+    &gCardHelp44Text0,
+    &gCardHelp44Text1,
 #endif
 };
 #endif
@@ -804,8 +804,8 @@ const CardHelpText* gUnk_09EE7A70[] = {
     gCardHelpTextJp_0900BADC,
     gCardHelpTextJp_0900BAF4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CC4C,
-    &gUnkEu_09F6CC60,
+    &gCardHelp07Text0,
+    &gCardHelp07Text1,
 #endif
 };
 
@@ -817,8 +817,8 @@ const CardHelpText* gUnk_09EE7A78[] = {
     gCardHelpTextJp_0900BB14,
     gCardHelpTextJp_0900BB2C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CC74,
-    &gUnkEu_09F6CC88,
+    &gCardHelp08Text0,
+    &gCardHelp08Text1,
 #endif
 };
 
@@ -830,8 +830,8 @@ const CardHelpText* gUnk_09EE7A80[] = {
     gCardHelpTextJp_0900BB4C,
     gCardHelpTextJp_0900BB64,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CC9C,
-    &gUnkEu_09F6CCB0,
+    &gCardHelp09Text0,
+    &gCardHelp09Text1,
 #endif
 };
 
@@ -843,8 +843,8 @@ const CardHelpText* gUnk_09EE7A88[] = {
     gCardHelpTextJp_0900BB84,
     gCardHelpTextJp_0900BBA0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CCC4,
-    &gUnkEu_09F6CCD8,
+    &gCardHelp10Text0,
+    &gCardHelp10Text1,
 #endif
 };
 
@@ -863,8 +863,8 @@ const CardHelpText* gUnk_09EE7A90[] = {
     gCardHelpTextJp_0900BBF8,
     gCardHelpTextJp_0900BC24,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CCEC,
-    &gUnkEu_09F6CD00,
+    &gCardHelp12Text0,
+    &gCardHelp12Text1,
 #endif
 };
 
@@ -876,8 +876,8 @@ const CardHelpText* gUnk_09EE7A98[] = {
     gCardHelpTextJp_0900BC44,
     gCardHelpTextJp_0900BC6C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CD14,
-    &gUnkEu_09F6CD28,
+    &gCardHelp13Text0,
+    &gCardHelp13Text1,
 #endif
 };
 
@@ -887,8 +887,8 @@ const CardHelpText* gUnk_09EE7AA0[] = {
     gCardHelpTextUs_09039098,
     gCardHelpTextUs_09039110,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CD3C,
-    &gUnkEu_09F6CD50,
+    &gCardHelp45Text0,
+    &gCardHelp45Text1,
 #endif
 };
 #endif
@@ -905,10 +905,10 @@ const CardHelpText* gUnk_09EE7AA8[] = {
     gCardHelpTextJp_0900BD5C,
     gCardHelpTextJp_0900BD90,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CD64,
-    &gUnkEu_09F6CD78,
-    &gUnkEu_09F6CD8C,
-    &gUnkEu_09F6CDA0,
+    &gCardHelp18Text0,
+    &gCardHelp18Text1,
+    &gCardHelp18Text2,
+    &gCardHelp18Text3,
 #endif
 };
 
@@ -924,10 +924,10 @@ const CardHelpText* gUnk_09EE7AB8[] = {
     gCardHelpTextJp_0900BD5C,
     gCardHelpTextJp_0900BD90,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CD64,
-    &gUnkEu_09F6CD78,
-    &gUnkEu_09F6CD8C,
-    &gUnkEu_09F6CDA0,
+    &gCardHelp18Text0,
+    &gCardHelp18Text1,
+    &gCardHelp18Text2,
+    &gCardHelp18Text3,
 #endif
 };
 
@@ -943,10 +943,10 @@ const CardHelpText* gUnk_09EE7AC8[] = {
     gCardHelpTextJp_0900BDF4,
     gCardHelpTextJp_0900BE2C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CDB4,
-    &gUnkEu_09F6CDC8,
-    &gUnkEu_09F6CDDC,
-    &gUnkEu_09F6CDF0,
+    &gCardHelp20Text0,
+    &gCardHelp20Text1,
+    &gCardHelp20Text2,
+    &gCardHelp20Text3,
 #endif
 };
 
@@ -962,10 +962,10 @@ const CardHelpText* gUnk_09EE7AD8[] = {
     gCardHelpTextJp_0900BDF4,
     gCardHelpTextJp_0900BE2C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CDB4,
-    &gUnkEu_09F6CDC8,
-    &gUnkEu_09F6CDDC,
-    &gUnkEu_09F6CDF0,
+    &gCardHelp20Text0,
+    &gCardHelp20Text1,
+    &gCardHelp20Text2,
+    &gCardHelp20Text3,
 #endif
 };
 
@@ -981,10 +981,10 @@ const CardHelpText* gUnk_09EE7AE8[] = {
     gCardHelpTextJp_0900BE90,
     gCardHelpTextJp_0900BEC4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CE04,
-    &gUnkEu_09F6CE18,
-    &gUnkEu_09F6CE2C,
-    &gUnkEu_09F6CE40,
+    &gCardHelp26Text0,
+    &gCardHelp26Text1,
+    &gCardHelp26Text2,
+    &gCardHelp26Text3,
 #endif
 };
 
@@ -1000,10 +1000,10 @@ const CardHelpText* gUnk_09EE7AF8[] = {
     gCardHelpTextJp_0900BE90,
     gCardHelpTextJp_0900BEC4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CE04,
-    &gUnkEu_09F6CE18,
-    &gUnkEu_09F6CE2C,
-    &gUnkEu_09F6CE40,
+    &gCardHelp26Text0,
+    &gCardHelp26Text1,
+    &gCardHelp26Text2,
+    &gCardHelp26Text3,
 #endif
 };
 
@@ -1019,10 +1019,10 @@ const CardHelpText* gUnk_09EE7B08[] = {
     gCardHelpTextJp_0900BF2C,
     gCardHelpTextJp_0900BF64,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CE54,
-    &gUnkEu_09F6CE68,
-    &gUnkEu_09F6CE7C,
-    &gUnkEu_09F6CE90,
+    &gCardHelp28Text0,
+    &gCardHelp28Text1,
+    &gCardHelp28Text2,
+    &gCardHelp28Text3,
 #endif
 };
 
@@ -1038,10 +1038,10 @@ const CardHelpText* gUnk_09EE7B18[] = {
     gCardHelpTextJp_0900BF2C,
     gCardHelpTextJp_0900BF64,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CE54,
-    &gUnkEu_09F6CE68,
-    &gUnkEu_09F6CE7C,
-    &gUnkEu_09F6CE90,
+    &gCardHelp28Text0,
+    &gCardHelp28Text1,
+    &gCardHelp28Text2,
+    &gCardHelp28Text3,
 #endif
 };
 
@@ -1060,8 +1060,8 @@ const CardHelpText* gUnk_09EE7B28[] = {
     gCardHelpTextJp_0900BFB0,
     gCardHelpTextJp_0900BFDC,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CECC,
-    &gUnkEu_09F6CEE0,
+    &gCardHelp30Text0,
+    &gCardHelp30Text1,
 #endif
 };
 
@@ -1071,8 +1071,8 @@ const CardHelpText* gUnk_09EE7B30[] = {
     gCardHelpTextUs_09039738,
     gCardHelpTextUs_0903979A,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CEA4,
-    &gUnkEu_09F6CEB8,
+    &gCardHelp31Text0,
+    &gCardHelp31Text1,
 #endif
 };
 #endif
@@ -1089,10 +1089,10 @@ const CardHelpText* gUnk_09EE7B38[] = {
     gCardHelpTextJp_0900C03C,
     gCardHelpTextJp_0900C084,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CEF4,
-    &gUnkEu_09F6CF08,
-    &gUnkEu_09F6CF1C,
-    &gUnkEu_09F6CF30,
+    &gCardHelp22Text0,
+    &gCardHelp22Text1,
+    &gCardHelp22Text2,
+    &gCardHelp22Text3,
 #endif
 };
 
@@ -1108,10 +1108,10 @@ const CardHelpText* gUnk_09EE7B48[] = {
     gCardHelpTextJp_0900C03C,
     gCardHelpTextJp_0900C084,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CEF4,
-    &gUnkEu_09F6CF08,
-    &gUnkEu_09F6CF1C,
-    &gUnkEu_09F6CF30,
+    &gCardHelp22Text0,
+    &gCardHelp22Text1,
+    &gCardHelp22Text2,
+    &gCardHelp22Text3,
 #endif
 };
 
@@ -1127,10 +1127,10 @@ const CardHelpText* gUnk_09EE7B58[] = {
     gCardHelpTextJp_0900C0DC,
     gCardHelpTextJp_0900C118,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CF44,
-    &gUnkEu_09F6CF58,
-    &gUnkEu_09F6CF6C,
-    &gUnkEu_09F6CF80,
+    &gCardHelp24Text0,
+    &gCardHelp24Text1,
+    &gCardHelp24Text2,
+    &gCardHelp24Text3,
 #endif
 };
 
@@ -1146,10 +1146,10 @@ const CardHelpText* gUnk_09EE7B68[] = {
     gCardHelpTextJp_0900C0DC,
     gCardHelpTextJp_0900C118,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CF44,
-    &gUnkEu_09F6CF58,
-    &gUnkEu_09F6CF6C,
-    &gUnkEu_09F6CF80,
+    &gCardHelp24Text0,
+    &gCardHelp24Text1,
+    &gCardHelp24Text2,
+    &gCardHelp24Text3,
 #endif
 };
 
@@ -1165,10 +1165,10 @@ const CardHelpText* gUnk_09EE7B78[] = {
     gCardHelpTextJp_0900C188,
     gCardHelpTextJp_0900C1CC,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CF94,
-    &gUnkEu_09F6CFA8,
-    &gUnkEu_09F6CFBC,
-    &gUnkEu_09F6CFD0,
+    &gCardHelp16Text0,
+    &gCardHelp16Text1,
+    &gCardHelp16Text2,
+    &gCardHelp16Text3,
 #endif
 };
 
@@ -1184,10 +1184,10 @@ const CardHelpText* gUnk_09EE7B88[] = {
     gCardHelpTextJp_0900C130,
     gCardHelpTextJp_0900C174,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CF94,
-    &gUnkEu_09F6CFA8,
-    &gUnkEu_09F6CFBC,
-    &gUnkEu_09F6CFD0,
+    &gCardHelp16Text0,
+    &gCardHelp16Text1,
+    &gCardHelp16Text2,
+    &gCardHelp16Text3,
 #endif
 };
 
@@ -1199,8 +1199,8 @@ const CardHelpText* gUnk_09EE7B98[] = {
     gCardHelpTextJp_0900C1EC,
     gCardHelpTextJp_0900C218,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6CFE4,
-    &gUnkEu_09F6CFF8,
+    &gCardHelp15Text0,
+    &gCardHelp15Text1,
 #endif
 };
 
@@ -1212,8 +1212,8 @@ const CardHelpText* gUnk_09EE7BA0[] = {
     gCardHelpTextJp_0900C230,
     gCardHelpTextJp_0900C25C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D00C,
-    &gUnkEu_09F6D020,
+    &gCardHelp14Text0,
+    &gCardHelp14Text1,
 #endif
 };
 
@@ -1229,10 +1229,10 @@ const CardHelpText* gUnk_09EE7BA8[] = {
     gCardHelpTextJp_0900C2B0,
     gCardHelpTextJp_0900C2E0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D034,
-    &gUnkEu_09F6D048,
-    &gUnkEu_09F6D05C,
-    &gUnkEu_09F6D070,
+    &gCardHelp32Text0,
+    &gCardHelp32Text1,
+    &gCardHelp32Text2,
+    &gCardHelp32Text3,
 #endif
 };
 
@@ -1248,10 +1248,10 @@ const CardHelpText* gUnk_09EE7BB8[] = {
     gCardHelpTextJp_0900C2B0,
     gCardHelpTextJp_0900C2E0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D034,
-    &gUnkEu_09F6D048,
-    &gUnkEu_09F6D05C,
-    &gUnkEu_09F6D070,
+    &gCardHelp32Text0,
+    &gCardHelp32Text1,
+    &gCardHelp32Text2,
+    &gCardHelp32Text3,
 #endif
 };
 
@@ -1267,10 +1267,10 @@ const CardHelpText* gUnk_09EE7BC8[] = {
     gCardHelpTextJp_0900C350,
     gCardHelpTextJp_0900C38C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D084,
-    &gUnkEu_09F6D098,
-    &gUnkEu_09F6D0AC,
-    &gUnkEu_09F6D0C0,
+    &gCardHelp36Text0,
+    &gCardHelp36Text1,
+    &gCardHelp36Text2,
+    &gCardHelp36Text3,
 #endif
 };
 
@@ -1286,10 +1286,10 @@ const CardHelpText* gUnk_09EE7BD8[] = {
     gCardHelpTextJp_0900C350,
     gCardHelpTextJp_0900C38C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D084,
-    &gUnkEu_09F6D098,
-    &gUnkEu_09F6D0AC,
-    &gUnkEu_09F6D0C0,
+    &gCardHelp36Text0,
+    &gCardHelp36Text1,
+    &gCardHelp36Text2,
+    &gCardHelp36Text3,
 #endif
 };
 
@@ -1305,10 +1305,10 @@ const CardHelpText* gUnk_09EE7BE8[] = {
     gCardHelpTextJp_0900C3F0,
     gCardHelpTextJp_0900C428,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D0D4,
-    &gUnkEu_09F6D0E8,
-    &gUnkEu_09F6D0FC,
-    &gUnkEu_09F6D110,
+    &gCardHelp34Text0,
+    &gCardHelp34Text1,
+    &gCardHelp34Text2,
+    &gCardHelp34Text3,
 #endif
 };
 
@@ -1324,10 +1324,10 @@ const CardHelpText* gUnk_09EE7BF8[] = {
     gCardHelpTextJp_0900C3F0,
     gCardHelpTextJp_0900C428,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D0D4,
-    &gUnkEu_09F6D0E8,
-    &gUnkEu_09F6D0FC,
-    &gUnkEu_09F6D110,
+    &gCardHelp34Text0,
+    &gCardHelp34Text1,
+    &gCardHelp34Text2,
+    &gCardHelp34Text3,
 #endif
 };
 
@@ -1343,10 +1343,10 @@ const CardHelpText* gUnk_09EE7C08[] = {
     gCardHelpTextJp_0900C490,
     gCardHelpTextJp_0900C4C0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D124,
-    &gUnkEu_09F6D138,
-    &gUnkEu_09F6D14C,
-    &gUnkEu_09F6D160,
+    &gCardHelp38Text0,
+    &gCardHelp38Text1,
+    &gCardHelp38Text2,
+    &gCardHelp38Text3,
 #endif
 };
 
@@ -1362,10 +1362,10 @@ const CardHelpText* gUnk_09EE7C18[] = {
     gCardHelpTextJp_0900C490,
     gCardHelpTextJp_0900C4C0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D124,
-    &gUnkEu_09F6D138,
-    &gUnkEu_09F6D14C,
-    &gUnkEu_09F6D160,
+    &gCardHelp38Text0,
+    &gCardHelp38Text1,
+    &gCardHelp38Text2,
+    &gCardHelp38Text3,
 #endif
 };
 
@@ -1381,10 +1381,10 @@ const CardHelpText* gUnk_09EE7C28[] = {
     gCardHelpTextJp_0900C538,
     gCardHelpTextJp_0900C568,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D174,
-    &gUnkEu_09F6D188,
-    &gUnkEu_09F6D19C,
-    &gUnkEu_09F6D1B0,
+    &gCardHelp40Text0,
+    &gCardHelp40Text1,
+    &gCardHelp40Text2,
+    &gCardHelp40Text3,
 #endif
 };
 
@@ -1400,10 +1400,10 @@ const CardHelpText* gUnk_09EE7C38[] = {
     gCardHelpTextJp_0900C538,
     gCardHelpTextJp_0900C568,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D174,
-    &gUnkEu_09F6D188,
-    &gUnkEu_09F6D19C,
-    &gUnkEu_09F6D1B0,
+    &gCardHelp40Text0,
+    &gCardHelp40Text1,
+    &gCardHelp40Text2,
+    &gCardHelp40Text3,
 #endif
 };
 
@@ -1479,8 +1479,8 @@ const CardHelpText* gUnk_09EE7C48[] = {
     gCardHelpTextJp_0900C588,
     gCardHelpTextJp_0900C5B0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D1C4,
-    &gUnkEu_09F6D1D8,
+    &gCardHelp53Text0,
+    &gCardHelp53Text1,
 #endif
 };
 
@@ -1492,8 +1492,8 @@ const CardHelpText* gUnk_09EE7C50[] = {
     gCardHelpTextJp_0900C5CC,
     gCardHelpTextJp_0900C600,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D1EC,
-    &gUnkEu_09F6D200,
+    &gCardHelp54Text0,
+    &gCardHelp54Text1,
 #endif
 };
 
@@ -1507,9 +1507,9 @@ const CardHelpText* gUnk_09EE7C58[] = {
     gCardHelpTextJp_0900C644,
     gCardHelpTextJp_0900C668,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D214,
-    &gUnkEu_09F6D228,
-    &gUnkEu_09F6D23C,
+    &gCardHelp55Text0,
+    &gCardHelp55Text1,
+    &gCardHelp55Text2,
 #endif
 };
 
@@ -1521,8 +1521,8 @@ const CardHelpText* gUnk_09EE7C64[] = {
     gCardHelpTextJp_0900C68C,
     gCardHelpTextJp_0900C6C0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D250,
-    &gUnkEu_09F6D264,
+    &gCardHelp56Text0,
+    &gCardHelp56Text1,
 #endif
 };
 
@@ -1541,8 +1541,8 @@ const CardHelpText* gUnk_09EE7C6C[] = {
     gCardHelpTextJp_0900C728,
     gCardHelpTextJp_0900C75C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D278,
-    &gUnkEu_09F6D28C,
+    &gCardHelp58Text0,
+    &gCardHelp58Text1,
 #endif
 };
 
@@ -1554,8 +1554,8 @@ const CardHelpText* gUnk_09EE7C74[] = {
     gCardHelpTextJp_0900C788,
     gCardHelpTextJp_0900C7B8,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D2A0,
-    &gUnkEu_09F6D2B4,
+    &gCardHelp59Text0,
+    &gCardHelp59Text1,
 #endif
 };
 
@@ -1567,8 +1567,8 @@ const CardHelpText* gUnk_09EE7C7C[] = {
     gCardHelpTextJp_0900C7E0,
     gCardHelpTextJp_0900C82C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D2C8,
-    &gUnkEu_09F6D2DC,
+    &gCardHelp60Text0,
+    &gCardHelp60Text1,
 #endif
 };
 
@@ -1580,8 +1580,8 @@ const CardHelpText* gUnk_09EE7C84[] = {
     gCardHelpTextJp_0900C858,
     gCardHelpTextJp_0900C880,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D2F0,
-    &gUnkEu_09F6D304,
+    &gCardHelp61Text0,
+    &gCardHelp61Text1,
 #endif
 };
 
@@ -1593,8 +1593,8 @@ const CardHelpText* gUnk_09EE7C8C[] = {
     gCardHelpTextJp_0900C8AC,
     gCardHelpTextJp_0900C8D4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D318,
-    &gUnkEu_09F6D32C,
+    &gCardHelp62Text0,
+    &gCardHelp62Text1,
 #endif
 };
 
@@ -1606,8 +1606,8 @@ const CardHelpText* gUnk_09EE7C94[] = {
     gCardHelpTextJp_0900C900,
     gCardHelpTextJp_0900C928,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D340,
-    &gUnkEu_09F6D354,
+    &gCardHelp63Text0,
+    &gCardHelp63Text1,
 #endif
 };
 
@@ -1619,8 +1619,8 @@ const CardHelpText* gUnk_09EE7C9C[] = {
     gCardHelpTextJp_0900C954,
     gCardHelpTextJp_0900C988,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D368,
-    &gUnkEu_09F6D37C,
+    &gCardHelp64Text0,
+    &gCardHelp64Text1,
 #endif
 };
 
@@ -1632,8 +1632,8 @@ const CardHelpText* gUnk_09EE7CA4[] = {
     gCardHelpTextJp_0900C9B4,
     gCardHelpTextJp_0900C9F0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D390,
-    &gUnkEu_09F6D3A4,
+    &gCardHelp65Text0,
+    &gCardHelp65Text1,
 #endif
 };
 
@@ -1645,8 +1645,8 @@ const CardHelpText* gUnk_09EE7CAC[] = {
     gCardHelpTextJp_0900CA0C,
     gCardHelpTextJp_0900CA48,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D3B8,
-    &gUnkEu_09F6D3CC,
+    &gCardHelp66Text0,
+    &gCardHelp66Text1,
 #endif
 };
 
@@ -1658,8 +1658,8 @@ const CardHelpText* gUnk_09EE7CB4[] = {
     gCardHelpTextJp_0900CA78,
     gCardHelpTextJp_0900CAA4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D3E0,
-    &gUnkEu_09F6D3F4,
+    &gCardHelp67Text0,
+    &gCardHelp67Text1,
 #endif
 };
 
@@ -1680,9 +1680,9 @@ const CardHelpText* gUnk_09EE7CBC[] = {
     gCardHelpTextJp_0900CB48,
     gCardHelpTextJp_0900CB6C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D408,
-    &gUnkEu_09F6D41C,
-    &gUnkEu_09F6D430,
+    &gCardHelp69Text0,
+    &gCardHelp69Text1,
+    &gCardHelp69Text2,
 #endif
 };
 
@@ -1694,8 +1694,8 @@ const CardHelpText* gUnk_09EE7CC8[] = {
     gCardHelpTextJp_0900CB90,
     gCardHelpTextJp_0900CBAC,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D444,
-    &gUnkEu_09F6D458,
+    &gCardHelp70Text0,
+    &gCardHelp70Text1,
 #endif
 };
 
@@ -1707,8 +1707,8 @@ const CardHelpText* gUnk_09EE7CD0[] = {
     gCardHelpTextJp_0900CBCC,
     gCardHelpTextJp_0900CBF8,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D46C,
-    &gUnkEu_09F6D480,
+    &gCardHelp71Text0,
+    &gCardHelp71Text1,
 #endif
 };
 
@@ -1720,8 +1720,8 @@ const CardHelpText* gUnk_09EE7CD8[] = {
     gCardHelpTextJp_0900CC20,
     gCardHelpTextJp_0900CC50,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D494,
-    &gUnkEu_09F6D4A8,
+    &gCardHelp72Text0,
+    &gCardHelp72Text1,
 #endif
 };
 
@@ -1733,8 +1733,8 @@ const CardHelpText* gUnk_09EE7CE0[] = {
     gCardHelpTextJp_0900CC78,
     gCardHelpTextJp_0900CCA4,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D4BC,
-    &gUnkEu_09F6D4D0,
+    &gCardHelp73Text0,
+    &gCardHelp73Text1,
 #endif
 };
 
@@ -1746,8 +1746,8 @@ const CardHelpText* gUnk_09EE7CE8[] = {
     gCardHelpTextJp_0900CCCC,
     gCardHelpTextJp_0900CCFC,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D4E4,
-    &gUnkEu_09F6D4F8,
+    &gCardHelp74Text0,
+    &gCardHelp74Text1,
 #endif
 };
 
@@ -1759,8 +1759,8 @@ const CardHelpText* gUnk_09EE7CF0[] = {
     gCardHelpTextJp_0900CD20,
     gCardHelpTextJp_0900CD50,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D50C,
-    &gUnkEu_09F6D520,
+    &gCardHelp75Text0,
+    &gCardHelp75Text1,
 #endif
 };
 
@@ -1772,8 +1772,8 @@ const CardHelpText* gUnk_09EE7CF8[] = {
     gCardHelpTextJp_0900CD70,
     gCardHelpTextJp_0900CDA0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D534,
-    &gUnkEu_09F6D548,
+    &gCardHelp76Text0,
+    &gCardHelp76Text1,
 #endif
 };
 
@@ -1785,8 +1785,8 @@ const CardHelpText* gUnk_09EE7D00[] = {
     gCardHelpTextJp_0900CDC0,
     gCardHelpTextJp_0900CDFC,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D55C,
-    &gUnkEu_09F6D570,
+    &gCardHelp77Text0,
+    &gCardHelp77Text1,
 #endif
 };
 
@@ -1798,8 +1798,8 @@ const CardHelpText* gUnk_09EE7D08[] = {
     gCardHelpTextJp_0900CE18,
     gCardHelpTextJp_0900CE54,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D584,
-    &gUnkEu_09F6D598,
+    &gCardHelp78Text0,
+    &gCardHelp78Text1,
 #endif
 };
 
@@ -1811,8 +1811,8 @@ const CardHelpText* gUnk_09EE7D10[] = {
     gCardHelpTextJp_0900CE74,
     gCardHelpTextJp_0900CEB0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D5AC,
-    &gUnkEu_09F6D5C0,
+    &gCardHelp79Text0,
+    &gCardHelp79Text1,
 #endif
 };
 
@@ -1824,8 +1824,8 @@ const CardHelpText* gUnk_09EE7D18[] = {
     gCardHelpTextJp_0900CED0,
     gCardHelpTextJp_0900CF0C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D5D4,
-    &gUnkEu_09F6D5E8,
+    &gCardHelp80Text0,
+    &gCardHelp80Text1,
 #endif
 };
 
@@ -1839,9 +1839,9 @@ const CardHelpText* gUnk_09EE7D20[] = {
     gCardHelpTextJp_0900CF68,
     gCardHelpTextJp_0900CF90,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D5FC,
-    &gUnkEu_09F6D610,
-    &gUnkEu_09F6D624,
+    &gCardHelp81Text0,
+    &gCardHelp81Text1,
+    &gCardHelp81Text2,
 #endif
 };
 
@@ -1853,8 +1853,8 @@ const CardHelpText* gUnk_09EE7D2C[] = {
     gCardHelpTextJp_0900CFB4,
     gCardHelpTextJp_0900CFE8,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D638,
-    &gUnkEu_09F6D64C,
+    &gCardHelp82Text0,
+    &gCardHelp82Text1,
 #endif
 };
 
@@ -1866,8 +1866,8 @@ const CardHelpText* gUnk_09EE7D34[] = {
     gCardHelpTextJp_0900D014,
     gCardHelpTextJp_0900D04C,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D660,
-    &gUnkEu_09F6D674,
+    &gCardHelp83Text0,
+    &gCardHelp83Text1,
 #endif
 };
 
@@ -1879,8 +1879,8 @@ const CardHelpText* gUnk_09EE7D3C[] = {
     gCardHelpTextJp_0900D078,
     gCardHelpTextJp_0900D0B0,
 #elif defined(VERSION_EU)
-    &gUnkEu_09F6D688,
-    &gUnkEu_09F6D69C,
+    &gCardHelp84Text0,
+    &gCardHelp84Text1,
 #endif
 };
 
@@ -1919,17 +1919,17 @@ const CardHelpText* gUnk_09EE7D7C[] = {
 
 #if defined(VERSION_EU)
 const CardHelpText* gUnk_09EE7D54[] = {
-    &gUnkEu_09F6D6B0,
-    &gUnkEu_09F6D6C4,
-    &gUnkEu_09F6D6D8,
-    &gUnkEu_09F6D6EC,
+    &gCardHelp42Text0,
+    &gCardHelp42Text1,
+    &gCardHelp42Text2,
+    &gCardHelp42Text3,
 };
 
 const CardHelpText* gUnk_09EE7D64[] = {
-    &gUnkEu_09F6D6B0,
-    &gUnkEu_09F6D6C4,
-    &gUnkEu_09F6D6D8,
-    &gUnkEu_09F6D6EC,
+    &gCardHelp42Text0,
+    &gCardHelp42Text1,
+    &gCardHelp42Text2,
+    &gCardHelp42Text3,
 };
 #endif
 

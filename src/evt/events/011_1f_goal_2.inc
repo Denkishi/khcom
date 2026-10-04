@@ -66,7 +66,7 @@ static const MessageScriptEntry sEvent011Script[27] = {
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent011Script[27] = {
-    { 62, 0, 3, 1, { 0, 0, 0 }, &gUnkEu_09F66720, 0, 2 },
+    { 62, 0, 3, 1, { 0, 0, 0 }, &gCardMessageText174, 0, 2 },
     { 2, 0, 3, 1, { 0, 0, 0 }, &gEvent011Text01, 0, 100 },
     { 6, 0, 2, 1, { 0, 0, 0 }, &gEvent011Text02, 0, 130 },
     { 0, 0, 1, 1, { 0, 0, 0 }, &gEvent011Text03, 0, 160 },

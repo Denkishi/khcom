@@ -394,665 +394,665 @@ TaskDesc gTaskDescDarkPoint = {
 
 CardDescriptionText* gCardKindDescriptions[98] = {
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA0C,
+    &gCardKindDescription00,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090106C0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042080,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA20,
+    &gCardKindDescription01,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090106F4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090420FC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA34,
+    &gCardKindDescription02,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010728,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042176,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA48,
+    &gCardKindDescription03,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010760,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090421EE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA5C,
+    &gCardKindDescription04,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010794,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904226A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA70,
+    &gCardKindDescription05,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090107CC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090422E4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA84,
+    &gCardKindDescription06,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010800,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904235E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EA98,
+    &gCardKindDescription07,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010834,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090423D6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EAAC,
+    &gCardKindDescription08,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010868,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042452,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EAC0,
+    &gCardKindDescription09,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901089C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090424CC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EAD4,
+    &gCardKindDescription10,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090108D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904254E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EAE8,
+    &gCardKindDescription11,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010904,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090425CA,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EAFC,
+    &gCardKindDescription12,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010938,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042646,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB10,
+    &gCardKindDescription13,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901096C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090426C0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB24,
+    &gCardKindDescription14,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090109A0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904273C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB38,
+    &gCardKindDescription15,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090109D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090427BC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB4C,
+    &gCardKindDescription16,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A0C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042840,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB60,
+    &gCardKindDescription17,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A40,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904434A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB74,
+    &gCardKindDescription18,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F40,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB88,
+    &gCardKindDescription19,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A8C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F6A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EB9C,
+    &gCardKindDescription20,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010AAC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F92,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EBB0,
+    &gCardKindDescription21,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010ACC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042FC6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EBC4,
+    &gCardKindDescription22,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010AE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042FDE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EBD8,
+    &gCardKindDescription23,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B10,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090428BC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EBEC,
+    &gCardKindDescription24,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B2C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043042,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC00,
+    &gCardKindDescription25,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B60,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042912,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC14,
+    &gCardKindDescription26,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B84,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904309C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC28,
+    &gCardKindDescription27,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010BB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042984,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC3C,
+    &gCardKindDescription28,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010BE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090429E6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC50,
+    &gCardKindDescription29,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C0C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042A40,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC64,
+    &gCardKindDescription30,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C38,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090430F0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC78,
+    &gCardKindDescription31,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C58,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042AA0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EC8C,
+    &gCardKindDescription32,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904315A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ECA0,
+    &gCardKindDescription33,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010CA8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042AFC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ECB4,
+    &gCardKindDescription34,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010CE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090431C6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ECC8,
+    &gCardKindDescription35,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D20,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043230,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ECDC,
+    &gCardKindDescription36,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D5C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904329A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ECF0,
+    &gCardKindDescription37,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D98,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042B5C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED04,
+    &gCardKindDescription38,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010DD4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043302,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED18,
+    &gCardKindDescription39,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E10,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904336A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED2C,
+    &gCardKindDescription40,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E4C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090433DA,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED40,
+    &gCardKindDescription41,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043426,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED54,
+    &gCardKindDescription42,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E88,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043474,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED68,
+    &gCardKindDescription43,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010EBC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090434E0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED7C,
+    &gCardKindDescription44,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010EF4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043540,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5ED90,
+    &gCardKindDescription45,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F08,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043586,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EDA4,
+    &gCardKindDescription46,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F30,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09045146,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EDB8,
+    &gCardKindDescription47,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F68,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090435E4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EDCC,
+    &gCardKindDescription48,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F94,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043632,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EDE0,
+    &gCardKindDescription49,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011018,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043746,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EDF4,
+    &gCardKindDescription50,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901111C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090438CA,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE08,
+    &gCardKindDescription51,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011144,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904391C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE1C,
+    &gCardKindDescription52,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901116C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043976,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE30,
+    &gCardKindDescription53,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011194,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090439CE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE44,
+    &gCardKindDescription54,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010FB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043678,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE58,
+    &gCardKindDescription55,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010FE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090436E0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE6C,
+    &gCardKindDescription56,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090111F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043A80,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE80,
+    &gCardKindDescription57,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090110BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043814,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EE94,
+    &gCardKindDescription58,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011050,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090437B0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EEA8,
+    &gCardKindDescription59,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011224,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C02,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EEBC,
+    &gCardKindDescription60,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090112D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043B7C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EED0,
+    &gCardKindDescription61,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901108C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042BB4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EEE4,
+    &gCardKindDescription62,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011344,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043BDE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EEF8,
+    &gCardKindDescription63,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011314,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C88,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF0C,
+    &gCardKindDescription64,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011248,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C32,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF20,
+    &gCardKindDescription65,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090112B0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043B0E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF34,
+    &gCardKindDescription66,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090110F0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043880,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF48,
+    &gCardKindDescription67,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011278,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043AB0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF5C,
+    &gCardKindDescription68,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011370,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043C2C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF70,
+    &gCardKindDescription69,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090113D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043CE2,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF84,
+    &gCardKindDescription70,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901139C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043C82,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EF98,
+    &gCardKindDescription71,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090111BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043A1E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EFAC,
+    &gCardKindDescription72,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011500,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043F00,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EFC0,
+    &gCardKindDescription73,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090113F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043D42,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EFD4,
+    &gCardKindDescription74,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011428,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043DA6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EFE8,
+    &gCardKindDescription75,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011460,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043DF0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5EFFC,
+    &gCardKindDescription76,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011488,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043E56,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F010,
+    &gCardKindDescription77,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090114C4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043E9E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F024,
+    &gCardKindDescription78,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901152C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043F4A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F038,
+    &gCardKindDescription79,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011654,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904408C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F04C,
+    &gCardKindDescription80,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901159C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090442E0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F060,
+    &gCardKindDescription81,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090116F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042D38,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F074,
+    &gCardKindDescription82,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011810,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042CE4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F074,
+    &gCardKindDescription82,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011810,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042CE4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F088,
+    &gCardKindDescription84,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011564,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043FA0,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F09C,
+    &gCardKindDescription85,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090115D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042D90,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F0B0,
+    &gCardKindDescription86,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011638,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044060,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F0C4,
+    &gCardKindDescription87,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901160C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044000,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F0D8,
+    &gCardKindDescription88,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011684,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090440E6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F0EC,
+    &gCardKindDescription89,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090116BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044160,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F100,
+    &gCardKindDescription90,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011770,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090441C2,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F114,
+    &gCardKindDescription91,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011724,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042DF2,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F128,
+    &gCardKindDescription92,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011754,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042E4C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F13C,
+    &gCardKindDescription93,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090117AC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904422C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F150,
+    &gCardKindDescription94,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090117D4,
 #elif defined(VERSION_US)
@@ -1066,14 +1066,14 @@ CardDescriptionText* gCardKindDescriptions[98] = {
     NULL,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F164,
+    &gCardKindDescription96,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011844,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042E7C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F178,
+    &gCardKindDescription97,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011870,
 #elif defined(VERSION_US)
@@ -1083,182 +1083,182 @@ CardDescriptionText* gCardKindDescriptions[98] = {
 
 CardDescriptionText* gMapCardDescriptions[26] = {
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F18C,
+    &gMapCardDescription00,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B30,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044886,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F1A0,
+    &gMapCardDescription01,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B5C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090448CE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F1B4,
+    &gMapCardDescription02,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B84,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044922,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F1C8,
+    &gMapCardDescription03,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011BB0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044980,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F1DC,
+    &gMapCardDescription04,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011BE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090449D8,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F1F0,
+    &gMapCardDescription05,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C18,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044A44,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F204,
+    &gMapCardDescription06,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C44,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044A96,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F218,
+    &gMapCardDescription07,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C74,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044AF4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F22C,
+    &gMapCardDescription08,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CA4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044B56,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F240,
+    &gMapCardDescription09,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CB8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044B8E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F254,
+    &gMapCardDescription10,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044BEA,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F268,
+    &gMapCardDescription11,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D08,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044C48,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F27C,
+    &gMapCardDescription12,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D3C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044CA2,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F290,
+    &gMapCardDescription13,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D70,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044CFE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F2A4,
+    &gMapCardDescription14,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011DA4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044D56,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F2B8,
+    &gMapCardDescription15,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011DE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044DBE,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F2CC,
+    &gMapCardDescription16,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E04,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044E06,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F2E0,
+    &gMapCardDescription17,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E40,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044E6E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F2F4,
+    &gMapCardDescription18,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E78,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044EC6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F308,
+    &gMapCardDescription19,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011EB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044F16,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F31C,
+    &gMapCardDescription20,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011EEC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044F80,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F330,
+    &gMapCardDescription21,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F1C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044FD4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F344,
+    &gMapCardDescription22,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F48,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09045026,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F358,
+    &gMapCardDescription23,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F78,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904506E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F36C,
+    &gMapCardDescription24,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011FA8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090450B6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F380,
+    &gMapCardDescription25,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011FD8,
 #elif defined(VERSION_US)
@@ -1268,98 +1268,98 @@ CardDescriptionText* gMapCardDescriptions[26] = {
 
 CardDescriptionText* gWorldDescriptions[14] = {
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F394,
+    &gWorldDescription00,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901192C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904446C,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F3A8,
+    &gWorldDescription01,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090119EC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090445B4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F3BC,
+    &gWorldDescription02,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090119B4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904455E,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F3D0,
+    &gWorldDescription03,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011984,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044514,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F3E4,
+    &gWorldDescription04,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090443B2,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F3F8,
+    &gWorldDescription05,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011960,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090444C4,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F40C,
+    &gWorldDescription06,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118FC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904440A,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F420,
+    &gWorldDescription07,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A04,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090445FA,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F434,
+    &gWorldDescription08,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011AA0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090446FC,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F448,
+    &gWorldDescription09,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118A0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090447B6,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F45C,
+    &gWorldDescription10,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A74,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090446A8,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F470,
+    &gWorldDescription11,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011AD4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044758,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F484,
+    &gWorldDescription12,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A3C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044654,
 #endif
 #if defined(VERSION_EU)
-    &gUnkEu_09F5F498,
+    &gWorldDescription13,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B04,
 #elif defined(VERSION_US)

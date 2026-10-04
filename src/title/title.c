@@ -68,6 +68,7 @@ static const s16 sTitleLumiLevels[3] = {-7, 0, 3};
 static u8 sTitleLogoScaleDone;
 static u16 sUnk_02034ECE;
 static u8 sTitleObjSlideDone;
+static u16 sUnk_02034ED2;
 
 void TitleLogoLoadSprites(TitleLogoWork* work) {
     work->sprites[0].tiles = LoadObjTiles(gUnk_0976E9F4, 0x240);

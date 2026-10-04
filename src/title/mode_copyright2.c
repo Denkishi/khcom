@@ -5,7 +5,7 @@
 #include "mode.h"
 #include "types.h"
 
-u16 gCopyright2Timer __attribute__((aligned(4)));
+static u16 sCopyright2Timer;
 
 void mode_copyright2_0(s32 arg) {
     SetBgMode0();
@@ -21,13 +21,13 @@ void mode_copyright2_0(s32 arg) {
         FadeStartIn(FADE_MODE_WHITE, 0x43);
     }
 
-    gCopyright2Timer = 60;
+    sCopyright2Timer = 60;
 }
 
 void mode_copyright2_1() {
     if (!FadeIsActive()) {
-        if (gCopyright2Timer != 0) {
-            if (--gCopyright2Timer == 0) {
+        if (sCopyright2Timer != 0) {
+            if (--sCopyright2Timer == 0) {
                 FadeStartOut(FADE_MODE_BLACK, 0x43);
             }
         } else {

@@ -1,9 +1,7 @@
 #include "pallet.h"
 #include "romcri.h"
 #include "romcri_backgrounds.h"
-#include "enemy_tile_counts.h"
 #include "display.h"
-#include "formation_types.h"
 #include "game_state.h"
 #include "taskpool.h"
 #include "types.h"
@@ -269,19 +267,6 @@ u8 task_romcri_eff2_1(RomcriEff2Work* work) {
 
 void task_romcri_eff2_3() {
     DisableBg(1);
-}
-
-u16 GetBtlFormEntryTileCount(const BtlFormEntry* list) {
-    u16 total;
-    s32 i;
-
-    total = 0;
-
-    for (i = 0; i < list->count; i++) {
-        total += gEnemyTileCounts[list->steps[i].id];
-    }
-
-    return total;
 }
 
 TaskDesc gTaskDescRomcriEff = {

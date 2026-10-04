@@ -114,6 +114,7 @@ extern u16 gBStatesPalette[];
 extern u16 gCard00Palette[];
 extern u16 gUnk_096FAC64[];
 
+u16 GetBtlFormEntryTileCount(const BtlFormEntry* list);
 void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ);
 BtlObj* BtlRaidGetTarget(BtlRaidWork* work);
 

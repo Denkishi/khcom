@@ -6,10 +6,10 @@
 #include "engine_math.h"
 #include "formation_types.h"
 #include "game_state.h"
-#include "romcri.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "enemy_tile_counts.h"
 
 TaskDesc gTaskDescBtlForm = {
     "task_btl_form",
@@ -19,6 +19,19 @@ TaskDesc gTaskDescBtlForm = {
     (TaskDestroyFunc)task_btl_form_3,
     sizeof(BtlFormWork),
 };
+
+u16 GetBtlFormEntryTileCount(const BtlFormEntry* list) {
+    u16 total;
+    s32 i;
+
+    total = 0;
+
+    for (i = 0; i < list->count; i++) {
+        total += gEnemyTileCounts[list->steps[i].id];
+    }
+
+    return total;
+}
 
 void task_btl_form_0(BtlFormWork* work, const BtlFormList* list) {
     s32 i;

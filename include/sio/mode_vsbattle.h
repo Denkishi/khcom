@@ -1,8 +1,6 @@
 #ifndef GUARD_MODE_VSBATTLE_H
 #define GUARD_MODE_VSBATTLE_H
 
-#include "hum_types.h"
-#include "enemy_types.h"
 #include "types.h"
 
 typedef struct VsTaskArg {
@@ -27,9 +25,5 @@ void mode_vsbattle_2();
 void func_0800C6B0();
 void func_0800C6B4();
 void PlayVsBattleBgm();
-void EmyStartKnockback(EmyWork* work);
-void HumSubReleaseGraphics(HumSub* sub);
-void HumStartKnockback(HumWork* work);
-void HumSubUpdateAnimation(HumSub* sub);
 
 #endif

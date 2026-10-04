@@ -10,8 +10,11 @@ struct HumWork;
 
 void HumInit(struct HumWork* work, const struct HumDef* def);
 void HumSubInit(struct HumWork* work, struct HumSub* sub, const struct HumSubDef* def);
+void HumSubReleaseGraphics(struct HumSub* sub);
 void HumReleaseResources(struct HumWork* work);
+void HumStartKnockback(struct HumWork* work);
 s32 HumUpdateReaction(struct HumWork* work);
+void HumSubUpdateAnimation(struct HumSub* sub);
 s32 HumUpdate(struct HumWork* work);
 void HumDrawSub(struct HumWork* p, struct HumSub* s);
 void HumDraw(struct HumWork* work);

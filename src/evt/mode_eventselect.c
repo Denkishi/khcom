@@ -208,13 +208,13 @@ void mode_eventselect_2() {
     DebugTextDestroy();
 }
 
-void Hanabira_0(EffectWork* w, EventCharaWork* chara) {
+void Hanabira_0(EffectWork* work, EventCharaWork* chara) {
     s32 i;
 
-    TaskPoolInit(&w->tasks, 16);
+    TaskPoolInit(&work->tasks, 16);
 
     for (i = 15; i >= 0; i--) {
-        TaskCreate(&w->tasks, &gTaskDescHanabiraC, chara);
+        TaskCreate(&work->tasks, &gTaskDescHanabiraC, chara);
     }
 }
 
@@ -232,21 +232,21 @@ void Hanabira_3(EffectWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
-void Hanabira_c_0(EffectWork* w, EventCharaWork* chara) {
+void Hanabira_c_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->palette = LoadObjPalette(gMaruxhaBtEffPalette, 32);
-    w->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 256);
-    w->x = b->x;
-    w->y = b->y;
-    w->z = b->z - 0x3000;
-    w->vx = GetRandom() % 717 - 358;
-    w->vz = -(GetRandom() % 539 + 102);
-    AnimInit(&w->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
-    AnimStart(&w->anim, GetRandom() & 1, ANIM_FLAG_LOOP);
-    w->state = 0;
+    work->palette = LoadObjPalette(gMaruxhaBtEffPalette, 32);
+    work->tiles = LoadObjTiles(gMaruxhaBtEff2Tiles, 256);
+    work->x = b->x;
+    work->y = b->y;
+    work->z = b->z - 0x3000;
+    work->vx = GetRandom() % 717 - 358;
+    work->vz = -(GetRandom() % 539 + 102);
+    AnimInit(&work->anim, gMaruxhaBtEff2Anims, gMaruxhaBtEff2Frames);
+    AnimStart(&work->anim, GetRandom() & 1, ANIM_FLAG_LOOP);
+    work->state = 0;
 }
 
 s32 Hanabira_c_1(EffectWork* work) {
@@ -307,60 +307,60 @@ void Hanabira_c_3(EffectWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void smoke_0(EffectWork* w, EventCharaWork* chara) {
+void smoke_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->x = b->x;
-    w->y = b->y - 0x800;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gUnk_093215CA);
-    AnimInit(&w->anim, gUnk_09EEFD78, gUnk_09EEFD60);
-    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 1;
-    w->age = 0;
+    work->x = b->x;
+    work->y = b->y - 0x800;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gUnk_093215CA);
+    AnimInit(&work->anim, gUnk_09EEFD78, gUnk_09EEFD60);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 1;
+    work->age = 0;
 }
 
-void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
+void Exclamation_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->x = b->x;
-    w->y = b->y;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->x = b->x;
+    work->y = b->y;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 
     if (!FadeIsActive()) {
-        FadeSetPaletteExcluded(((ObjPaletteHeader*)w->palette)->index + 16, 1);
+        FadeSetPaletteExcluded(((ObjPaletteHeader*)work->palette)->index + 16, 1);
     }
 
-    SetObjTileSource(w->tiles, gFEventTiles);
-    AnimInit(&w->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&w->anim, 0, 0);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 1;
-    w->age = 0;
+    SetObjTileSource(work->tiles, gFEventTiles);
+    AnimInit(&work->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&work->anim, 0, 0);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 1;
+    work->age = 0;
 }
 
-void balloon_0(EffectWork* w, EventCharaWork* chara) {
+void balloon_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->x = b->x;
-    w->y = b->y;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gFEventTiles);
-    AnimInit(&w->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 0;
-    w->age = 0;
+    work->x = b->x;
+    work->y = b->y;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gFEventTiles);
+    AnimInit(&work->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 0;
+    work->age = 0;
 }
 
 s32 EffectUpdateObj(EffectWork* work) {
@@ -405,22 +405,22 @@ void EffectReleaseObj(EffectWork* work) {
     ReleaseObjPalette(work->palette);
 }
 
-void Question_0(EffectWork* w, EventCharaWork* chara) {
+void Question_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->x = b->x;
-    w->y = b->y;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gFEventTiles);
-    AnimInit(&w->anim, gFEventAnims, gFEventFrames);
-    AnimStart(&w->anim, 5, 0);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 0;
-    w->timer = 0;
-    w->age = 0;
+    work->x = b->x;
+    work->y = b->y;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gFEventTiles);
+    AnimInit(&work->anim, gFEventAnims, gFEventFrames);
+    AnimStart(&work->anim, 5, 0);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 0;
+    work->timer = 0;
+    work->age = 0;
 }
 
 s32 Question_1(EffectWork* work) {
@@ -440,29 +440,29 @@ s32 Question_1(EffectWork* work) {
     return 1;
 }
 
-void TinkerbellParticleInit(EffectWork* w, EventCharaWork* chara) {
+void TinkerbellParticleInit(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
     s32 d1;
     s32 d2;
     s32 k;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
     k = 0x400;
     d1 = (GetRandom() % 9 << 8) - k;
-    w->x = b->x + d1;
+    work->x = b->x + d1;
     d2 = (GetRandom() % 9 << 8) - k;
-    w->y = b->y + d2;
-    w->z2 = b->z;
-    w->vx = GetRandom() % 232 + 76;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gUnk_088A5D7A);
-    AnimInit(&w->anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
-    AnimStart(&w->anim, GetRandom() % 3, 0);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 0;
-    w->age = 0;
+    work->y = b->y + d2;
+    work->z2 = b->z;
+    work->vx = GetRandom() % 232 + 76;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gUnk_088A5D7A);
+    AnimInit(&work->anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
+    AnimStart(&work->anim, GetRandom() % 3, 0);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 0;
+    work->age = 0;
     gEventState->particleCount++;
 }
 
@@ -499,21 +499,21 @@ void TinkerbellParticleDestroy(EffectWork* work) {
     gEventState->particleCount--;
 }
 
-void GlowNose_0(EffectWork* w, EventCharaWork* chara) {
+void GlowNose_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
-    w->x = b->x - 1536;
-    w->y = b->y + 3072;
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gUnk_09321804);
-    AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
-    AnimStart(&w->anim, 0, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 1;
-    w->age = 0;
+    work->x = b->x - 1536;
+    work->y = b->y + 3072;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gUnk_09321804);
+    AnimInit(&work->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
+    AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 1;
+    work->age = 0;
 }
 
 s32 GlowNose_1(EffectWork* work) {
@@ -527,31 +527,31 @@ s32 GlowNose_1(EffectWork* work) {
     return 1;
 }
 
-void GlowNose2_0(EffectWork* w, EventCharaWork* chara) {
+void GlowNose2_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
 
     switch (chara->arg.chara) {
     case 3:
-        w->x = b->x - 6144;
-        w->y = b->y + 8192;
+        work->x = b->x - 6144;
+        work->y = b->y + 8192;
         break;
     case 43:
-        w->x = b->x + 2048;
-        w->y = b->y + 2048;
+        work->x = b->x + 2048;
+        work->y = b->y + 2048;
         break;
     }
 
-    w->tiles = AllocObjTiles(128, NULL);
-    w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(w->tiles, gUnk_09321804);
-    AnimInit(&w->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
-    AnimStart(&w->anim, 1, ANIM_FLAG_LOOP);
-    w->gfx = AnimGetGfx(&w->anim);
-    w->followFlip = 1;
-    w->age = 0;
+    work->tiles = AllocObjTiles(128, NULL);
+    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    SetObjTileSource(work->tiles, gUnk_09321804);
+    AnimInit(&work->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
+    AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
+    work->gfx = AnimGetGfx(&work->anim);
+    work->followFlip = 1;
+    work->age = 0;
 }
 
 s32 GlowNose2_1(EffectWork* work) {
@@ -565,34 +565,34 @@ s32 GlowNose2_1(EffectWork* work) {
     return 1;
 }
 
-void down_0(EffectWork* w, EventCharaWork* chara) {
+void down_0(EffectWork* work, EventCharaWork* chara) {
     EvtObj* b;
     DownWork* s;
     u8 i;
 
-    w->actor = chara;
+    work->actor = chara;
     b = &chara->obj;
 
     switch (chara->arg.chara) {
     case 0:
-        w->x = b->x + 4096;
-        w->y = b->y - 6144;
+        work->x = b->x + 4096;
+        work->y = b->y - 6144;
         break;
     case 2:
-        w->x = b->x - 2048;
-        w->y = b->y - 6144;
+        work->x = b->x - 2048;
+        work->y = b->y - 6144;
         break;
     case 1:
-        w->x = b->x + 3584;
-        w->y = b->y - 1024;
+        work->x = b->x + 3584;
+        work->y = b->y - 1024;
         break;
     }
 
-    w->tiles = AllocSpriteFrameTiles(32);
-    UpdateSpriteFrameTiles(w->tiles, gUnk_09EEA19C[3], gUnk_0908C686);
-    w->palette = LoadObjPalette(gCard00Palette, 32);
-    w->down = EwramAlloc(sizeof(DownWork));
-    s = w->down;
+    work->tiles = AllocSpriteFrameTiles(32);
+    UpdateSpriteFrameTiles(work->tiles, gUnk_09EEA19C[3], gUnk_0908C686);
+    work->palette = LoadObjPalette(gCard00Palette, 32);
+    work->down = EwramAlloc(sizeof(DownWork));
+    s = work->down;
 
     for (i = 0; i < 8; i++) {
         s->angle[i] = i * 32;
@@ -647,11 +647,11 @@ void down_3(EffectWork* work) {
     EwramFree(work->down);
 }
 
-void Tinkerbell_0(EffectWork* w, EventCharaWork* chara) {
-    w->actor = chara;
+void Tinkerbell_0(EffectWork* work, EventCharaWork* chara) {
+    work->actor = chara;
     gEventState->particleCount = 0;
-    w->timer = 0;
-    TaskPoolInit(&w->tasks, 8);
+    work->timer = 0;
+    TaskPoolInit(&work->tasks, 8);
 }
 
 s32 Tinkerbell_1(EffectWork* work) {

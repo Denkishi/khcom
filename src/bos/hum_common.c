@@ -733,7 +733,7 @@ void HumDraw(HumWork* work) {
 
         if (work->stateTimer & 1) {
             work->flags |= HUM_FLAG_FLASH_PALETTE;
-            LoadObjPaletteBank(work->palette->index, gUnk_08F6DA04 + 16 + sHumReloadPaletteCycle[idx] * 16);
+            LoadObjPaletteBank(work->palette->index, gHumFlashPalettes[sHumReloadPaletteCycle[idx]]);
         } else {
             work->flags &= ~HUM_FLAG_FLASH_PALETTE;
             LoadObjPaletteBank(work->palette->index, work->paletteData);

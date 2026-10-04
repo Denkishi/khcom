@@ -1961,19 +1961,18 @@ entries:
   eu:
     address: 0x09672B2C
     size: 16032
-- name: gUnk_096C0464
+- name: gBosTmTableMaps
   format: tilemap
+  shape: [9, 1024]
   us:
     address: 0x096C0464
     size: 18432
   jp:
     address: 0x09678C40
     size: 18432
-    symbol: gUnkJp_09678C40
   eu:
     address: 0x0968818C
     size: 18432
-    symbol: gUnkEu_0968818C
 - name: gUnk_096C4C64
   format: tilemap
   us:

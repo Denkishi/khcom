@@ -495,16 +495,15 @@ entries:
   eu:
     address: 0x08F69F5C
     size: 32
-- name: gUnk_08F6DA24
+- name: gHumFlashPalettes
   format: palette
+  shape: [16, 16]
   us:
     address: 0x08F6DA24
     size: 512
   jp:
     address: 0x08F60F2C
     size: 512
-    symbol: gUnkJp_08F60F2C
   eu:
     address: 0x08F69F7C
     size: 512
-    symbol: gUnkEu_08F69F7C

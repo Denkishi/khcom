@@ -1996,7 +1996,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     }
 
     work->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
-    work->palette = LoadObjPalette(&gUnk_099910C4[0x120], 32);
+    work->palette = LoadObjPalette(&gUnk_099912E4[0x10], 32);
     work->tiles = LoadObjTiles(gUnk_0985A3EA, 0x980);
     a = &work->anim;
     AnimInit(a, gUnk_09EF8488, gUnk_09EF8468);

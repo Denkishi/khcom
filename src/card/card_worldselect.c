@@ -28,7 +28,6 @@
 #include "sprites_map.h"
 #include "sprites_worldselect.h"
 #include "battle_backgrounds.h"
-#include "prize_card.h"
 #include "sprites_card_pictures.h"
 #include "sprites_card.h"
 #include "sprites_deck_menu.h"
@@ -383,7 +382,7 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
         }
 #endif
 
-        LoadBgMap(1, &gUnk_0960F2B8[0xC00], 0x800);
+        LoadBgMap(1, &gUnk_096102B8[0x400], 0x800);
         LoadMapSelectGridPalette(work->card->args.baseCardId, work);
         v = LoadMapSelectValueCounts(work->card->args.baseCardId, work);
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);

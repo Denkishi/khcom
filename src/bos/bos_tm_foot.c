@@ -10,7 +10,6 @@
 #include "m4a_song.h"
 #include "btl_effect.h"
 #include "system_state.h"
-#include "sprites_wlogo.h"
 #include <stddef.h>
 #include "btl_api.h"
 #include "songs.h"
@@ -25,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "sprites_bos2.h"
 
 s16 gBosTmArmImpactViewX EWRAM_COMMON(4);
 s32 gBosTmArmImpactViewFixedX EWRAM_COMMON(4);
@@ -1770,32 +1770,32 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
         case 0:
             m4aSongNumStart(SONG_BTL_TABLE_U);
             EnableBg(1);
-            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[8], 0x800);
             ColliderSetDisabled(&work->collider, 0);
             break;
         case 2:
-            LoadBgMap(1, &gUnk_096BF464[0x2400], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[7], 0x800);
             break;
         case 4:
-            LoadBgMap(1, &gUnk_096BF464[0x2000], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[6], 0x800);
             break;
         case 6:
-            LoadBgMap(1, &gUnk_096BF464[0x1C00], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[5], 0x800);
             break;
         case 8:
-            LoadBgMap(1, &gUnk_096BF464[0x1800], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[4], 0x800);
             break;
         case 10:
-            LoadBgMap(1, &gUnk_096BF464[0x1400], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[3], 0x800);
             break;
         case 12:
-            LoadBgMap(1, &gUnk_096BF464[0x1000], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[2], 0x800);
             break;
         case 14:
-            LoadBgMap(1, &gUnk_096BF464[0xC00], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[1], 0x800);
             break;
         case 16:
-            LoadBgMap(1, &gUnk_096BF464[0x800], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[0], 0x800);
             break;
         }
 
@@ -1815,30 +1815,30 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
     case 3:
         switch (work->frame) {
         case 0:
-            LoadBgMap(1, &gUnk_096BF464[0xC00], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[1], 0x800);
             ColliderSetDisabled(&work->collider, 1);
             work->height = 0;
             break;
         case 1:
-            LoadBgMap(1, &gUnk_096BF464[0x1000], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[2], 0x800);
             break;
         case 2:
-            LoadBgMap(1, &gUnk_096BF464[0x1400], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[3], 0x800);
             break;
         case 3:
-            LoadBgMap(1, &gUnk_096BF464[0x1800], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[4], 0x800);
             break;
         case 4:
-            LoadBgMap(1, &gUnk_096BF464[0x1C00], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[5], 0x800);
             break;
         case 5:
-            LoadBgMap(1, &gUnk_096BF464[0x2000], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[6], 0x800);
             break;
         case 6:
-            LoadBgMap(1, &gUnk_096BF464[0x2400], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[7], 0x800);
             break;
         case 7:
-            LoadBgMap(1, &gUnk_096BF464[0x2800], 0x800);
+            LoadBgMap(1, gBosTmTableMaps[8], 0x800);
             break;
         case 8:
             DisableBg(1);

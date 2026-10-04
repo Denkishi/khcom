@@ -735,9 +735,9 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
     s8 i;
     u8* q;
 #ifdef VERSION_EU
-    enum { mapOffset = 0x20C0, mapSize = 0x500, palOffset = 0x1190 };
+    enum { mapOffset = 0x20C0, mapSize = 0x500 };
 #else
-    enum { mapOffset = 0x7C0, mapSize = 0x800, palOffset = 0x1250 };
+    enum { mapOffset = 0x7C0, mapSize = 0x800 };
 #endif
 
     if (GetKeysRepeat() & DPAD_DOWN) {
@@ -810,7 +810,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
         ReleaseObjTiles(work->tiles);
         ReleaseObjPalette(work->palette3);
         work->tiles = AllocObjTiles(128, NULL);
-        work->palette3 = LoadObjPalette(&gCard00Palette[palOffset], 32);
+        work->palette3 = LoadObjPalette(gUnk_09613F58, 32);
         FadeSetPaletteExcluded(work->palette3->index + 16, 1);
         SetObjTileSource(work->tiles, gUnk_0908F190);
         AnimInit(&work->anim, gUnk_09EEA280, gUnk_09EEA26C);

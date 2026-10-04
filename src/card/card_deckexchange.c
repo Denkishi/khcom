@@ -269,13 +269,13 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* a) {
 
     switch (work->step) {
     case 1:
-        LoadBgMap(0, &gUnk_095192B8[0x400], 0x180);
+        LoadBgMap(0, gUnk_09519AB8, 0x180);
         break;
     case 2:
-        LoadBgMap(1, &gUnk_095192B8[0x800], 0x180);
+        LoadBgMap(1, gUnk_0951A2B8, 0x180);
         break;
     case 3:
-        LoadBgMap(2, &gUnk_095192B8[0xC00], 0x180);
+        LoadBgMap(2, gUnk_0951AAB8, 0x180);
         break;
     case 4:
         DrawDeckCategoryCount(work->deckAttackCount, 0);

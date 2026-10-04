@@ -61,32 +61,17 @@ objects:
 entries:
 - name: gUnkUs_09EF68E0
   record: SpriteTable
-  items: [gUnk_097A1864]
   us:
     address: 0x09EF68E0
+    items: [gUnk_097A1864, gUnk_097A1898, gUnk_097A18CC]
   jp:
     address: 0x09ECDCCC
+    items: [gUnk_097A1864, gUnk_097A1898, gUnk_097A18CC]
     symbol: gUnkJp_09ECDCCC
   eu:
     address: 0x09F81F58
     items: [gUnkEu_0977F7E4]
     symbol: gUnkEu_09F81F58
-- name: gUnkUs_09EF68E4
-  record: SpriteTable
-  items: [gUnk_097A1898]
-  us:
-    address: 0x09EF68E4
-  jp:
-    address: 0x09ECDCD0
-    symbol: gUnkJp_09ECDCD0
-- name: gUnkUs_09EF68E8
-  record: SpriteTable
-  items: [gUnk_097A18CC]
-  us:
-    address: 0x09EF68E8
-  jp:
-    address: 0x09ECDCD4
-    symbol: gUnkJp_09ECDCD4
 - name: gUnkUs_09EF68EC
   record: AnimTable
   items: [gUnkUs_097A18E2]

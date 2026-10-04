@@ -212,14 +212,9 @@ entries:
     address: 0x09F8187C
 - name: gUnkEu_09F818DC
   record: SpriteTable
-  items: [gUnkEu_0973BA18]
+  items: [gUnkEu_0973BA18, gUnkEu_0973BA4C]
   eu:
     address: 0x09F818DC
-- name: gUnkEu_09F818E0
-  record: SpriteTable
-  items: [gUnkEu_0973BA4C]
-  eu:
-    address: 0x09F818E0
 - name: gUnkEu_09F818E4
   record: AnimTable
   items: [gUnkEu_0973BA80]

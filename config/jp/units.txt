@@ -358,7 +358,6 @@ sprites_status_frames.s
 event_background_tiles_8.s
 sprites_pooh_tiles_1.s
 sprites_allmap_tiles.s
-sprites_pooh_tiles_2.s
 sprites_title_tiles.s
 copyright_screen_tiles.s
 sprites_bos4_tiles.s
@@ -366,7 +365,6 @@ sprites_status_tiles.s
 copyright_screen_data.s
 event_background_maps_7.s
 sprites_allmap_maps.s
-sprites_pooh_maps.s
 sprites_title_maps.s
 copyright_screen_maps.s
 sprites_bos4_maps.s

@@ -21,10 +21,10 @@ objects:
     data_end: 0x09EF659C
   - name: sprites_allmap_tiles.s
     start: 0x097B62B8
-    end: 0x097B7218
+    end: 0x097C77B8
   - name: sprites_allmap_maps.s
     start: 0x0983AD98
-    end: 0x0983BC18
+    end: 0x0983E398
   - name: sprites_allmap_palettes.s
     start: 0x0984A1F8
     end: 0x0984A418
@@ -36,10 +36,10 @@ objects:
     data_end: 0x09ECD988
   - name: sprites_allmap_tiles.s
     start: 0x0977074C
-    end: 0x097716AC
+    end: 0x09781C4C
   - name: sprites_allmap_maps.s
     start: 0x097F026C
-    end: 0x097F10EC
+    end: 0x097F386C
   - name: sprites_allmap_palettes.s
     start: 0x097FEECC
     end: 0x097FF0EC
@@ -51,10 +51,10 @@ objects:
     data_end: 0x09F819A4
   - name: sprites_allmap_tiles.s
     start: 0x09793C20
-    end: 0x09795660
+    end: 0x097ADE00
   - name: sprites_allmap_maps.s
     start: 0x0980F840
-    end: 0x09811AC0
+    end: 0x09814240
   - name: sprites_allmap_palettes.s
     start: 0x0981E8A0
     end: 0x0981EAC0
@@ -907,6 +907,170 @@ entries:
   eu:
     address: 0x09793C20
     size: 3936
+- name: gUnk_097B7218
+  format: tiles4
+  width: 2
+  us:
+    address: 0x097B7218
+    size: 4160
+  jp:
+    address: 0x097716AC
+    size: 4160
+  eu:
+    address: 0x09795660
+    size: 4160
+- name: gAllmapRikuFloorTiles
+  format: tiles4
+  width: 2
+  us:
+    address: 0x097B8258
+    size: 4160
+  jp:
+    address: 0x097726EC
+    size: 4160
+- name: gAllmapWorldBgWonderlandTiles
+  format: tiles4
+  us:
+    address: 0x097B9298
+    size: 5440
+  jp:
+    address: 0x0977372C
+    size: 5440
+  eu:
+    address: 0x0979F8E0
+    size: 5440
+- name: gAllmapWorldBgDestinyIslandsTiles
+  format: tiles4
+  us:
+    address: 0x097BA7D8
+    size: 4352
+  jp:
+    address: 0x09774C6C
+    size: 4352
+  eu:
+    address: 0x097A0E20
+    size: 4352
+- name: gAllmapWorldBgTraverseTownTiles
+  format: tiles4
+  us:
+    address: 0x097BB8D8
+    size: 5376
+  jp:
+    address: 0x09775D6C
+    size: 5376
+  eu:
+    address: 0x097A1F20
+    size: 5376
+- name: gAllmapWorldBgOlympusColiseumTiles
+  format: tiles4
+  us:
+    address: 0x097BCDD8
+    size: 2368
+  jp:
+    address: 0x0977726C
+    size: 2368
+  eu:
+    address: 0x097A3420
+    size: 2368
+- name: gAllmapWorldBgAgrabahTiles
+  format: tiles4
+  us:
+    address: 0x097BD718
+    size: 4288
+  jp:
+    address: 0x09777BAC
+    size: 4288
+  eu:
+    address: 0x097A3D60
+    size: 4288
+- name: gAllmapWorldBgMonstroTiles
+  format: tiles4
+  us:
+    address: 0x097BE7D8
+    size: 3392
+  jp:
+    address: 0x09778C6C
+    size: 3392
+  eu:
+    address: 0x097A4E20
+    size: 3392
+- name: gAllmapWorldBgAtlanticaTiles
+  format: tiles4
+  us:
+    address: 0x097BF518
+    size: 3360
+  jp:
+    address: 0x097799AC
+    size: 3360
+  eu:
+    address: 0x097A5B60
+    size: 3360
+- name: gAllmapWorldBgHalloweenTownTiles
+  format: tiles4
+  us:
+    address: 0x097C0238
+    size: 6400
+  jp:
+    address: 0x0977A6CC
+    size: 6400
+  eu:
+    address: 0x097A6880
+    size: 6400
+- name: gAllmapWorldBgNeverLandTiles
+  format: tiles4
+  us:
+    address: 0x097C1B38
+    size: 4320
+  jp:
+    address: 0x0977BFCC
+    size: 4320
+  eu:
+    address: 0x097A8180
+    size: 4320
+- name: gAllmapWorldBg100AcreWoodTiles
+  format: tiles4
+  us:
+    address: 0x097C2C18
+    size: 5344
+  jp:
+    address: 0x0977D0AC
+    size: 5344
+  eu:
+    address: 0x097A9260
+    size: 5344
+- name: gAllmapWorldBgHollowBastionTiles
+  format: tiles4
+  us:
+    address: 0x097C40F8
+    size: 4352
+  jp:
+    address: 0x0977E58C
+    size: 4352
+  eu:
+    address: 0x097AA740
+    size: 4352
+- name: gAllmapWorldBgTwilightTownTiles
+  format: tiles4
+  us:
+    address: 0x097C51F8
+    size: 4352
+  jp:
+    address: 0x0977F68C
+    size: 4352
+  eu:
+    address: 0x097AB840
+    size: 4352
+- name: gAllmapWorldBgCastleOblivionTiles
+  format: tiles4
+  us:
+    address: 0x097C62F8
+    size: 5312
+  jp:
+    address: 0x0978078C
+    size: 5312
+  eu:
+    address: 0x097AC940
+    size: 5312
 - name: gUnk_0983AD98
   format: tilemap
   us:
@@ -937,31 +1101,316 @@ entries:
   eu:
     address: 0x0981165C
     size: 1124
-- name: gUnk_0984A1F8
+- name: gAllmapFloorTitleMap
+  format: tilemap
+  ctype: u8
+  us:
+    address: 0x0983BC18
+    size: 128
+  jp:
+    address: 0x097F10EC
+    size: 128
+  eu:
+    address: 0x09811AC0
+    size: 128
+- name: gAllmapWorldBgWonderlandMap
+  format: tilemap
+  us:
+    address: 0x0983BC98
+    size: 768
+  jp:
+    address: 0x097F116C
+    size: 768
+  eu:
+    address: 0x09811B40
+    size: 768
+- name: gAllmapWorldBgDestinyIslandsMap
+  format: tilemap
+  us:
+    address: 0x0983BF98
+    size: 768
+  jp:
+    address: 0x097F146C
+    size: 768
+  eu:
+    address: 0x09811E40
+    size: 768
+- name: gAllmapWorldBgTraverseTownMap
+  format: tilemap
+  us:
+    address: 0x0983C298
+    size: 768
+  jp:
+    address: 0x097F176C
+    size: 768
+  eu:
+    address: 0x09812140
+    size: 768
+- name: gAllmapWorldBgOlympusColiseumMap
+  format: tilemap
+  us:
+    address: 0x0983C598
+    size: 768
+  jp:
+    address: 0x097F1A6C
+    size: 768
+  eu:
+    address: 0x09812440
+    size: 768
+- name: gAllmapWorldBgAgrabahMap
+  format: tilemap
+  us:
+    address: 0x0983C898
+    size: 768
+  jp:
+    address: 0x097F1D6C
+    size: 768
+  eu:
+    address: 0x09812740
+    size: 768
+- name: gAllmapWorldBgMonstroMap
+  format: tilemap
+  us:
+    address: 0x0983CB98
+    size: 768
+  jp:
+    address: 0x097F206C
+    size: 768
+  eu:
+    address: 0x09812A40
+    size: 768
+- name: gAllmapWorldBgAtlanticaMap
+  format: tilemap
+  us:
+    address: 0x0983CE98
+    size: 768
+  jp:
+    address: 0x097F236C
+    size: 768
+  eu:
+    address: 0x09812D40
+    size: 768
+- name: gAllmapWorldBgHalloweenTownMap
+  format: tilemap
+  us:
+    address: 0x0983D198
+    size: 768
+  jp:
+    address: 0x097F266C
+    size: 768
+  eu:
+    address: 0x09813040
+    size: 768
+- name: gAllmapWorldBgNeverLandMap
+  format: tilemap
+  us:
+    address: 0x0983D498
+    size: 768
+  jp:
+    address: 0x097F296C
+    size: 768
+  eu:
+    address: 0x09813340
+    size: 768
+- name: gAllmapWorldBg100AcreWoodMap
+  format: tilemap
+  us:
+    address: 0x0983D798
+    size: 768
+  jp:
+    address: 0x097F2C6C
+    size: 768
+  eu:
+    address: 0x09813640
+    size: 768
+- name: gAllmapWorldBgHollowBastionMap
+  format: tilemap
+  us:
+    address: 0x0983DA98
+    size: 768
+  jp:
+    address: 0x097F2F6C
+    size: 768
+  eu:
+    address: 0x09813940
+    size: 768
+- name: gAllmapWorldBgTwilightTownMap
+  format: tilemap
+  us:
+    address: 0x0983DD98
+    size: 768
+  jp:
+    address: 0x097F326C
+    size: 768
+  eu:
+    address: 0x09813C40
+    size: 768
+- name: gAllmapWorldBgCastleOblivionMap
+  format: tilemap
+  us:
+    address: 0x0983E098
+    size: 768
+  jp:
+    address: 0x097F356C
+    size: 768
+  eu:
+    address: 0x09813F40
+    size: 768
+- name: gAllmapRoomnamePalettes
   format: palette
   ctype: u8
   us:
     address: 0x0984A1F8
-    size: 32
+    size: 128
   jp:
     address: 0x097FEECC
-    size: 32
+    size: 128
   eu:
     address: 0x0981E8A0
-    size: 32
-- name: gUnk_0984A218
+    size: 128
+- name: gAllmapWorldBgWonderlandPalette
   format: palette
   us:
-    address: 0x0984A218
-    size: 512
+    address: 0x0984A278
+    size: 32
   jp:
-    address: 0x097FEEEC
-    size: 512
-    symbol: gUnkJp_097FEEEC
+    address: 0x097FEF4C
+    size: 32
   eu:
-    address: 0x0981E8C0
-    size: 512
-    symbol: gUnkEu_0981E8C0
+    address: 0x0981E920
+    size: 32
+- name: gAllmapWorldBgDestinyIslandsPalette
+  format: palette
+  us:
+    address: 0x0984A298
+    size: 32
+  jp:
+    address: 0x097FEF6C
+    size: 32
+  eu:
+    address: 0x0981E940
+    size: 32
+- name: gAllmapWorldBgTraverseTownPalette
+  format: palette
+  us:
+    address: 0x0984A2B8
+    size: 32
+  jp:
+    address: 0x097FEF8C
+    size: 32
+  eu:
+    address: 0x0981E960
+    size: 32
+- name: gAllmapWorldBgOlympusColiseumPalette
+  format: palette
+  us:
+    address: 0x0984A2D8
+    size: 32
+  jp:
+    address: 0x097FEFAC
+    size: 32
+  eu:
+    address: 0x0981E980
+    size: 32
+- name: gAllmapWorldBgAgrabahPalette
+  format: palette
+  us:
+    address: 0x0984A2F8
+    size: 32
+  jp:
+    address: 0x097FEFCC
+    size: 32
+  eu:
+    address: 0x0981E9A0
+    size: 32
+- name: gAllmapWorldBgMonstroPalette
+  format: palette
+  us:
+    address: 0x0984A318
+    size: 32
+  jp:
+    address: 0x097FEFEC
+    size: 32
+  eu:
+    address: 0x0981E9C0
+    size: 32
+- name: gAllmapWorldBgAtlanticaPalette
+  format: palette
+  us:
+    address: 0x0984A338
+    size: 32
+  jp:
+    address: 0x097FF00C
+    size: 32
+  eu:
+    address: 0x0981E9E0
+    size: 32
+- name: gAllmapWorldBgHalloweenTownPalette
+  format: palette
+  us:
+    address: 0x0984A358
+    size: 32
+  jp:
+    address: 0x097FF02C
+    size: 32
+  eu:
+    address: 0x0981EA00
+    size: 32
+- name: gAllmapWorldBgNeverLandPalette
+  format: palette
+  us:
+    address: 0x0984A378
+    size: 32
+  jp:
+    address: 0x097FF04C
+    size: 32
+  eu:
+    address: 0x0981EA20
+    size: 32
+- name: gAllmapWorldBg100AcreWoodPalette
+  format: palette
+  us:
+    address: 0x0984A398
+    size: 32
+  jp:
+    address: 0x097FF06C
+    size: 32
+  eu:
+    address: 0x0981EA40
+    size: 32
+- name: gAllmapWorldBgHollowBastionPalette
+  format: palette
+  us:
+    address: 0x0984A3B8
+    size: 32
+  jp:
+    address: 0x097FF08C
+    size: 32
+  eu:
+    address: 0x0981EA60
+    size: 32
+- name: gAllmapWorldBgTwilightTownPalette
+  format: palette
+  us:
+    address: 0x0984A3D8
+    size: 32
+  jp:
+    address: 0x097FF0AC
+    size: 32
+  eu:
+    address: 0x0981EA80
+    size: 32
+- name: gAllmapWorldBgCastleOblivionPalette
+  format: palette
+  us:
+    address: 0x0984A3F8
+    size: 32
+  jp:
+    address: 0x097FF0CC
+    size: 32
+  eu:
+    address: 0x0981EAA0
+    size: 32
 - name: gUnkEu_09811640
   format: tilemap
   eu:
@@ -997,3 +1446,57 @@ entries:
   eu:
     address: 0x09810C40
     size: 1280
+- name: gUnkEu_097966A0
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x097966A0
+    size: 4160
+- name: gUnkEu_097976E0
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x097976E0
+    size: 4160
+- name: gUnkEu_09798720
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x09798720
+    size: 4160
+- name: gUnkEu_09799760
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x09799760
+    size: 4160
+- name: gUnkEu_0979A7A0
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x0979A7A0
+    size: 4160
+- name: gUnkEu_0979B7E0
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x0979B7E0
+    size: 4160
+- name: gUnkEu_0979C820
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x0979C820
+    size: 4160
+- name: gUnkEu_0979D860
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x0979D860
+    size: 4160
+- name: gUnkEu_0979E8A0
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x0979E8A0
+    size: 4160

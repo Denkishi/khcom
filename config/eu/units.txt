@@ -362,7 +362,6 @@ sprites_status_frames.s
 event_background_tiles_4.s
 sprites_pooh_tiles_1.s
 sprites_allmap_tiles.s
-sprites_pooh_tiles_2.s
 sprites_title_tiles_1.s
 copyright_screen_tiles_1.s
 sprites_bos4_tiles.s

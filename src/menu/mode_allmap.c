@@ -7,7 +7,6 @@
 #include "mode_allmap.h"
 #include "sprites_allmap.h"
 #include "poo.h"
-#include "sprites_pooh.h"
 #include "system_state.h"
 #include "gba/io_reg.h"
 #include "allmap_api.h"
@@ -36,61 +35,23 @@
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
 
-#if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x30 },
-    { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnk_0984A218 + 0x70 },
-    { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnk_0984A218 + 0x90 },
-    { gUnk_0983BC18 + 0x980, gUnk_097B8258 + 0x4B80, gUnk_0984A218 + 0x60 },
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x30 },
-    { gUnk_0983BC18 + 0xF80, gUnk_097B8258 + 0x6580, gUnk_0984A218 + 0x80 },
-    { gUnk_0983BC18 + 0x1580, gUnk_097B8258 + 0x7FE0, gUnk_0984A218 + 0xA0 },
-    { gUnk_0983BC18 + 0x1880, gUnk_097B8258 + 0x98E0, gUnk_0984A218 + 0xB0 },
-    { gUnk_0983BC18 + 0x1E80, gUnk_097B8258 + 0xBEA0, gUnk_0984A218 + 0xD0 },
-    { gUnk_0983BC18 + 0x380, gUnk_097B8258 + 0x2580, gUnk_0984A218 + 0x40 },
-    { gUnk_0983BC18 + 0x680, gUnk_097B8258 + 0x3680, gUnk_0984A218 + 0x50 },
-    { gUnk_0983BC18 + 0x2180, gUnk_097B8258 + 0xCFA0, gUnk_0984A218 + 0xE0 },
-    { gUnk_0983BC18 + 0x2480, gUnk_097B8258 + 0xE0A0, gUnk_0984A218 + 0xF0 },
-    { gUnk_0983BC18 + 0x1B80, gUnk_097B8258 + 0xA9C0, gUnk_0984A218 + 0xC0 },
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnk_0984A218 + 0x30 },
+    { gAllmapWorldBgWonderlandMap, gAllmapWorldBgWonderlandTiles, gAllmapWorldBgWonderlandPalette },
+    { gAllmapWorldBgAgrabahMap, gAllmapWorldBgAgrabahTiles, gAllmapWorldBgAgrabahPalette },
+    { gAllmapWorldBgAtlanticaMap, gAllmapWorldBgAtlanticaTiles, gAllmapWorldBgAtlanticaPalette },
+    { gAllmapWorldBgOlympusColiseumMap, gAllmapWorldBgOlympusColiseumTiles, gAllmapWorldBgOlympusColiseumPalette },
+    { gAllmapWorldBgWonderlandMap, gAllmapWorldBgWonderlandTiles, gAllmapWorldBgWonderlandPalette },
+    { gAllmapWorldBgMonstroMap, gAllmapWorldBgMonstroTiles, gAllmapWorldBgMonstroPalette },
+    { gAllmapWorldBgHalloweenTownMap, gAllmapWorldBgHalloweenTownTiles, gAllmapWorldBgHalloweenTownPalette },
+    { gAllmapWorldBgNeverLandMap, gAllmapWorldBgNeverLandTiles, gAllmapWorldBgNeverLandPalette },
+    { gAllmapWorldBgHollowBastionMap, gAllmapWorldBgHollowBastionTiles, gAllmapWorldBgHollowBastionPalette },
+    { gAllmapWorldBgDestinyIslandsMap, gAllmapWorldBgDestinyIslandsTiles, gAllmapWorldBgDestinyIslandsPalette },
+    { gAllmapWorldBgTraverseTownMap, gAllmapWorldBgTraverseTownTiles, gAllmapWorldBgTraverseTownPalette },
+    { gAllmapWorldBgTwilightTownMap, gAllmapWorldBgTwilightTownTiles, gAllmapWorldBgTwilightTownPalette },
+    { gAllmapWorldBgCastleOblivionMap, gAllmapWorldBgCastleOblivionTiles, gAllmapWorldBgCastleOblivionPalette },
+    { gAllmapWorldBg100AcreWoodMap, gAllmapWorldBg100AcreWoodTiles, gAllmapWorldBg100AcreWoodPalette },
+    { gAllmapWorldBgWonderlandMap, gAllmapWorldBgWonderlandTiles, gAllmapWorldBgWonderlandPalette },
 };
-#elif defined(VERSION_JP)
-static const PooBgSet sAllmapWorldBgs[15] = {
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x30 },
-    { gUnk_0983BC18 + 0xC80, gUnk_097B8258 + 0x54C0, gUnkJp_097FEEEC + 0x70 },
-    { gUnk_0983BC18 + 0x1280, gUnk_097B8258 + 0x72C0, gUnkJp_097FEEEC + 0x90 },
-    { gUnk_0983BC18 + 0x980, gUnk_097B8258 + 0x4B80, gUnkJp_097FEEEC + 0x60 },
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x30 },
-    { gUnk_0983BC18 + 0xF80, gUnk_097B8258 + 0x6580, gUnkJp_097FEEEC + 0x80 },
-    { gUnk_0983BC18 + 0x1580, gUnk_097B8258 + 0x7FE0, gUnkJp_097FEEEC + 0xA0 },
-    { gUnk_0983BC18 + 0x1880, gUnk_097B8258 + 0x98E0, gUnkJp_097FEEEC + 0xB0 },
-    { gUnk_0983BC18 + 0x1E80, gUnk_097B8258 + 0xBEA0, gUnkJp_097FEEEC + 0xD0 },
-    { gUnk_0983BC18 + 0x380, gUnk_097B8258 + 0x2580, gUnkJp_097FEEEC + 0x40 },
-    { gUnk_0983BC18 + 0x680, gUnk_097B8258 + 0x3680, gUnkJp_097FEEEC + 0x50 },
-    { gUnk_0983BC18 + 0x2180, gUnk_097B8258 + 0xCFA0, gUnkJp_097FEEEC + 0xE0 },
-    { gUnk_0983BC18 + 0x2480, gUnk_097B8258 + 0xE0A0, gUnkJp_097FEEEC + 0xF0 },
-    { gUnk_0983BC18 + 0x1B80, gUnk_097B8258 + 0xA9C0, gUnkJp_097FEEEC + 0xC0 },
-    { gUnk_0983BC18 + 0x80, gUnk_097B8258 + 0x1040, gUnkJp_097FEEEC + 0x30 },
-};
-#elif defined(VERSION_EU)
-static const PooBgSet sAllmapWorldBgs[15] = {
-    { gUnk_0983BC18 + 0x80, gUnkEu_0979E8A0 + 0x1040, gUnkEu_0981E8C0 + 0x30 },
-    { gUnk_0983BC18 + 0xC80, gUnkEu_0979E8A0 + 0x54C0, gUnkEu_0981E8C0 + 0x70 },
-    { gUnk_0983BC18 + 0x1280, gUnkEu_0979E8A0 + 0x72C0, gUnkEu_0981E8C0 + 0x90 },
-    { gUnk_0983BC18 + 0x980, gUnkEu_0979E8A0 + 0x4B80, gUnkEu_0981E8C0 + 0x60 },
-    { gUnk_0983BC18 + 0x80, gUnkEu_0979E8A0 + 0x1040, gUnkEu_0981E8C0 + 0x30 },
-    { gUnk_0983BC18 + 0xF80, gUnkEu_0979E8A0 + 0x6580, gUnkEu_0981E8C0 + 0x80 },
-    { gUnk_0983BC18 + 0x1580, gUnkEu_0979E8A0 + 0x7FE0, gUnkEu_0981E8C0 + 0xA0 },
-    { gUnk_0983BC18 + 0x1880, gUnkEu_0979E8A0 + 0x98E0, gUnkEu_0981E8C0 + 0xB0 },
-    { gUnk_0983BC18 + 0x1E80, gUnkEu_0979E8A0 + 0xBEA0, gUnkEu_0981E8C0 + 0xD0 },
-    { gUnk_0983BC18 + 0x380, gUnkEu_0979E8A0 + 0x2580, gUnkEu_0981E8C0 + 0x40 },
-    { gUnk_0983BC18 + 0x680, gUnkEu_0979E8A0 + 0x3680, gUnkEu_0981E8C0 + 0x50 },
-    { gUnk_0983BC18 + 0x2180, gUnkEu_0979E8A0 + 0xCFA0, gUnkEu_0981E8C0 + 0xE0 },
-    { gUnk_0983BC18 + 0x2480, gUnkEu_0979E8A0 + 0xE0A0, gUnkEu_0981E8C0 + 0xF0 },
-    { gUnk_0983BC18 + 0x1B80, gUnkEu_0979E8A0 + 0xA9C0, gUnkEu_0981E8C0 + 0xC0 },
-    { gUnk_0983BC18 + 0x80, gUnkEu_0979E8A0 + 0x1040, gUnkEu_0981E8C0 + 0x30 },
-};
-#endif
 
 static const PooPalStep sAllmapPalSteps[9] = {
     { 0, 40 },
@@ -232,7 +193,7 @@ void AllmapLoadFloorTiles() {
 #ifdef VERSION_EU
         src = gAllmapRikuFloorTilesByLanguage[gLanguage] + gGameState.floor * 0x140;
 #else
-        src = &gUnk_097B8258[gGameState.floor * 0x140];
+        src = &gAllmapRikuFloorTiles[gGameState.floor * 0x140];
 #endif
     } else {
 #ifdef VERSION_EU
@@ -244,7 +205,7 @@ void AllmapLoadFloorTiles() {
 
     RequestDma3Copy(src, dst, 0x140);
     dst = (u8*)GetBgScreenBase(2) + 0x480;
-    src = gUnk_0983BC18;
+    src = gAllmapFloorTitleMap;
     RequestDma3Copy(src, dst, 10);
     dst = (u8*)GetBgScreenBase(2) + 0x4C0;
     src += 0x40;

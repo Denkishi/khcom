@@ -9585,7 +9585,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         0,
         0,
@@ -9608,7 +9608,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         0,
         2,
@@ -9631,7 +9631,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         33,
@@ -9660,7 +9660,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         1,
@@ -9689,7 +9689,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         9,
@@ -9718,7 +9718,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         7,
@@ -9747,7 +9747,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         3,
@@ -9776,7 +9776,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         22,
@@ -9805,7 +9805,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         32,
@@ -9834,7 +9834,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         30,
@@ -9863,7 +9863,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         28,
@@ -9896,7 +9896,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         10,
         1,
@@ -9919,7 +9919,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         11,
         1,
@@ -9942,7 +9942,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         12,
         1,
@@ -9965,7 +9965,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         24,
@@ -9994,7 +9994,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         43,
@@ -10023,7 +10023,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         6,
@@ -10052,7 +10052,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         8,
@@ -10081,7 +10081,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         41,
@@ -10110,7 +10110,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         16,
@@ -10139,7 +10139,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         20,
@@ -10168,7 +10168,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         21,
@@ -10197,7 +10197,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         21,
         1,
@@ -10220,7 +10220,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         36,
@@ -10249,7 +10249,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         15,
@@ -10278,7 +10278,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         23,
@@ -10311,7 +10311,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         38,
@@ -10340,7 +10340,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         44,
@@ -10369,7 +10369,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         42,
@@ -10398,7 +10398,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         17,
@@ -10427,7 +10427,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         27,
@@ -10456,7 +10456,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         2,
@@ -10485,7 +10485,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         31,
         1,
@@ -10508,7 +10508,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         32,
         1,
@@ -10531,7 +10531,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         31,
@@ -10560,7 +10560,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         19,
@@ -10589,7 +10589,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         4,
@@ -10618,7 +10618,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         26,
@@ -10647,7 +10647,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         14,
@@ -10676,7 +10676,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         13,
@@ -10705,7 +10705,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         29,
@@ -10734,7 +10734,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         37,
@@ -10763,7 +10763,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         25,
@@ -10792,7 +10792,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         39,
@@ -10821,7 +10821,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         40,
@@ -10850,7 +10850,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         34,
@@ -10879,7 +10879,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         35,
@@ -10908,7 +10908,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         45,
@@ -10937,7 +10937,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         46,
@@ -10966,7 +10966,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         48,
         50,
@@ -10989,7 +10989,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         47,
@@ -11018,7 +11018,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         5,
@@ -11047,7 +11047,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         34,
@@ -11076,7 +11076,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
 #if defined(VERSION_EU)
         18,
@@ -11105,7 +11105,7 @@ const HcEffectDef gHcEffectDefs[55] = {
 #elif defined(VERSION_JP)
         gUnkJp_09EC12D4,
 #elif defined(VERSION_US)
-        gUnkUs_09EE9EF8,
+        gUnk_09EE9EF8,
 #endif
         0,
         1,
@@ -11237,12 +11237,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11259,12 +11257,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
 #if defined(VERSION_EU)
         640,
@@ -11453,12 +11449,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
         2,
@@ -11469,12 +11463,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
         1,
@@ -11485,12 +11477,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
 #if defined(VERSION_EU)
         640,
@@ -11507,12 +11497,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
 #if defined(VERSION_EU)
         640,
@@ -11879,12 +11867,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11901,12 +11887,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11923,12 +11907,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11945,12 +11927,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11967,12 +11947,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -11989,12 +11967,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12011,12 +11987,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12033,12 +12007,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12055,12 +12027,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12077,12 +12047,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09086C1C,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D600,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14A4,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0B0,
+#else
+        gUnk_09EEA0B0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12099,12 +12067,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_0908AF32,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D628,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1534,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA140,
+#else
+        gUnk_09EEA140,
 #endif
         640,
         0,
@@ -12115,12 +12081,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_0908AF32,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D628,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1534,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA140,
+#else
+        gUnk_09EEA140,
 #endif
         640,
         0,
@@ -12187,12 +12151,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12209,12 +12171,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12231,12 +12191,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
 #if defined(VERSION_EU)
         640,
@@ -12259,12 +12217,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12281,12 +12237,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12303,12 +12257,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12325,12 +12277,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12469,12 +12419,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         9,
@@ -12485,12 +12433,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         10,
@@ -12501,12 +12447,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         11,
@@ -12517,12 +12461,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         12,
@@ -12533,12 +12475,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         13,
@@ -12549,12 +12489,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         14,
@@ -12565,12 +12503,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09080074,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D5B0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC13AC,
-#elif defined(VERSION_US)
-        gUnkUs_09EE9FC0,
+#else
+        gUnk_09EE9FC0,
 #endif
         640,
         15,
@@ -12889,12 +12825,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_0908A958,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D650,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1524,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA130,
+#else
+        gUnk_09EEA130,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12911,12 +12845,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_0908A958,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D650,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1524,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA130,
+#else
+        gUnk_09EEA130,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12933,12 +12865,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_0908A958,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D650,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1524,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA130,
+#else
+        gUnk_09EEA130,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12955,12 +12885,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
         0,
@@ -12971,12 +12899,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         0,
@@ -12987,12 +12913,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         1,
@@ -13003,12 +12927,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         2,
@@ -13019,12 +12941,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         3,
@@ -13035,12 +12955,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13057,12 +12975,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         4,
@@ -13073,12 +12989,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09089C16,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D6A0,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC1508,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA114,
+#else
+        gUnk_09EEA114,
 #endif
         640,
         5,
@@ -13089,12 +13003,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13111,12 +13023,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13133,12 +13043,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13155,12 +13063,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
         5,
@@ -13171,12 +13077,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13193,12 +13097,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13215,12 +13117,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13237,12 +13137,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13259,12 +13157,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13281,12 +13177,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #ifdef VERSION_EU
@@ -13301,12 +13195,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13323,12 +13215,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13345,12 +13235,10 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #else
         gUnk_09087DD2,
 #endif
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         gUnkEu_09F5D678,
-#elif defined(VERSION_JP)
-        gUnkJp_09EC14C8,
-#elif defined(VERSION_US)
-        gUnkUs_09EEA0D4,
+#else
+        gUnk_09EEA0D4,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13365,7 +13253,7 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 
 #ifdef VERSION_EU
 void* gHcEffectNameTilesByLanguage[5] = { gUnk_09079EB2, gUnkEu_0910DD2E, gUnkEu_09121002, gUnkEu_0911AB16, gUnkEu_09114860 };
-void** gHcEffectNameSpritesByLanguage[5] = { gUnkEu_09F753D0, gUnkEu_09F75498, gUnkEu_09F756F0, gUnkEu_09F75628, gUnkEu_09F75560 };
+void** gHcEffectNameSpritesByLanguage[5] = { gUnk_09EE9EF8, gUnkEu_09F75498, gUnkEu_09F756F0, gUnkEu_09F75628, gUnkEu_09F75560 };
 void* gUnkEu_09F5D59C[5] = { gUnk_09080074, gUnkEu_091292D6, gUnkEu_0912F83E, gUnkEu_0912D736, gUnkEu_0912B47C };
 void** gUnkEu_09F5D5B0[5] = { gUnkEu_09F757B8, gUnkEu_09F757FC, gUnkEu_09F758C8, gUnkEu_09F75884, gUnkEu_09F75840 };
 void* gUnkEu_09F5D5C4[5] = { gUnk_090822F2, gUnkEu_091367CC, gUnkEu_0914583A, gUnkEu_091407A2, gUnkEu_0913B7F4 };
@@ -13373,7 +13261,7 @@ void** gUnkEu_09F5D5D8[5] = { gUnkEu_09F7590C, gUnkEu_09F759B8, gUnkEu_09F75BBC,
 void* gUnkEu_09F5D5EC[5] = { gUnk_09086C1C, gUnkEu_0914B41E, gUnkEu_0914E89E, gUnkEu_0914D7B0, gUnkEu_0914C648 };
 void** gUnkEu_09F5D600[5] = { gUnkEu_09F75C68, gUnkEu_09F75C8C, gUnkEu_09F75CF8, gUnkEu_09F75CD4, gUnkEu_09F75CB0 };
 void* gUnkEu_09F5D614[5] = { gUnkEu_09160A0E, gUnkEu_09160C2A, gUnk_0908AF32, gUnk_0908A958, gUnkEu_09160E46 };
-void** gUnkEu_09F5D628[5] = { gUnkEu_09F75F38, gUnkEu_09F75F40, gUnkEu_09F75F58, gUnkEu_09F75F50, gUnkEu_09F75F48 };
+void** gUnkEu_09F5D628[5] = { gUnkEu_09F75F38, gUnkEu_09F75F40, gUnk_09EEA140, gUnkEu_09F75F50, gUnkEu_09F75F48 };
 void* gUnkEu_09F5D63C[5] = { gUnkEu_0915E7D4, gUnkEu_0915EDDA, gUnkEu_091602F4, gUnkEu_0915FC28, gUnkEu_0915F468 };
 void** gUnkEu_09F5D650[5] = { gUnkEu_09F75EE8, gUnkEu_09F75EF8, gUnkEu_09F75F28, gUnkEu_09F75F18, gUnkEu_09F75F08 };
 void* gUnkEu_09F5D664[5] = { gUnk_09087DD2, gUnkEu_091519CE, gUnkEu_091581F6, gUnkEu_09155EFE, gUnkEu_09153BC6 };

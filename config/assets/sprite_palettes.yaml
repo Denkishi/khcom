@@ -878,11 +878,9 @@ entries:
   jp:
     address: 0x095CA774
     size: 96
-    symbol: gUnkJp_095CA774
   eu:
     address: 0x09544D04
     size: 96
-    symbol: gUnkEu_09544D04
 - name: gCardSmn03Palette
   format: palette
   us:
@@ -913,11 +911,9 @@ entries:
   jp:
     address: 0x095CA814
     size: 32
-    symbol: gUnkJp_095CA814
   eu:
     address: 0x09544DA4
     size: 32
-    symbol: gUnkEu_09544DA4
 - name: gCardSmn06Palette
   format: palette
   us:
@@ -937,11 +933,9 @@ entries:
   jp:
     address: 0x095CA854
     size: 64
-    symbol: gUnkJp_095CA854
   eu:
     address: 0x09544DE4
     size: 64
-    symbol: gUnkEu_09544DE4
 - name: gCardSmn09Palette
   format: palette
   us:
@@ -1020,11 +1014,9 @@ entries:
   jp:
     address: 0x095CA954
     size: 32
-    symbol: gUnkJp_095CA954
   eu:
     address: 0x09544EE4
     size: 32
-    symbol: gUnkEu_09544EE4
 - name: gCardWep03Palette
   format: palette
   us:
@@ -1341,11 +1333,9 @@ entries:
   jp:
     address: 0x095CACF4
     size: 32
-    symbol: gUnkJp_095CACF4
   eu:
     address: 0x09545284
     size: 32
-    symbol: gUnkEu_09545284
 - name: gCardNpcEx05Palette
   format: palette
   us:
@@ -4324,11 +4314,9 @@ entries:
   jp:
     address: 0x095D0FD4
     size: 32
-    symbol: gUnkJp_095D0FD4
   eu:
     address: 0x0954B3E4
     size: 32
-    symbol: gUnkEu_0954B3E4
 - name: gKoukyuPalette
   format: palette
   us:
@@ -4359,11 +4347,9 @@ entries:
   jp:
     address: 0x095D1034
     size: 64
-    symbol: gUnkJp_095D1034
   eu:
     address: 0x0954B444
     size: 64
-    symbol: gUnkEu_0954B444
 - name: gCardRoom01Palette
   format: palette
   us:
@@ -4978,11 +4964,9 @@ entries:
   jp:
     address: 0x095D17D4
     size: 32
-    symbol: gUnkJp_095D17D4
   eu:
     address: 0x0954BBE4
     size: 32
-    symbol: gUnkEu_0954BBE4
 - name: gUnk_09618D18
   format: palette
   us:
@@ -5013,11 +4997,9 @@ entries:
   jp:
     address: 0x095D1834
     size: 32
-    symbol: gUnkJp_095D1834
   eu:
     address: 0x0954BC44
     size: 32
-    symbol: gUnkEu_0954BC44
 - name: gUnk_09618D78
   format: palette
   us:
@@ -5551,11 +5533,9 @@ entries:
   jp:
     address: 0x097FE9AC
     size: 32
-    symbol: gUnkJp_097FE9AC
   eu:
     address: 0x0981E380
     size: 32
-    symbol: gUnkEu_0981E380
 - name: roo
   format: palette
   symbol: gRooPalette
@@ -5942,11 +5922,9 @@ entries:
   jp:
     address: 0x09945BF8
     size: 32
-    symbol: gUnkJp_09945BF8
   eu:
     address: 0x099970D0
     size: 32
-    symbol: gUnkEu_099970D0
 - name: gUnk_09991104
   format: palette
   us:
@@ -6197,11 +6175,9 @@ entries:
   jp:
     address: 0x09946738
     size: 32
-    symbol: gUnkJp_09946738
   eu:
     address: 0x09997C10
     size: 32
-    symbol: gUnkEu_09997C10
 - name: gUnk_09991C44
   format: palette
   us:
@@ -6221,11 +6197,9 @@ entries:
   jp:
     address: 0x09946778
     size: 32
-    symbol: gUnkJp_09946778
   eu:
     address: 0x09997C50
     size: 32
-    symbol: gUnkEu_09997C50
 - name: gUnk_09991C84
   format: palette
   us:

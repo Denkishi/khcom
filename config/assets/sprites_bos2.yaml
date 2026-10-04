@@ -77,50 +77,42 @@ entries:
     address: 0x09ECAF2C
   eu:
     address: 0x09F7EE34
-- name: gUnkUs_09EF3BB4
+- name: gUnk_09EF3BB4
   record: SpriteTable
   items: [gUnkUs_0962F4B0, gUnkUs_0962F568, gUnkUs_0962F620, gUnkUs_0962F6D8, gUnkUs_0962F790, gUnkUs_0962F848, gUnkUs_0962F900, gUnkUs_0962F9B8, gUnkUs_0962FA70]
   us:
     address: 0x09EF3BB4
   jp:
     address: 0x09ECAFA0
-    symbol: gUnkJp_09ECAFA0
   eu:
     address: 0x09F7EEA8
-    symbol: gUnkEu_09F7EEA8
-- name: gUnkUs_09EF3BD8
+- name: gUnk_09EF3BD8
   record: AnimTable
   items: [gUnkUs_0962FB28]
   us:
     address: 0x09EF3BD8
   jp:
     address: 0x09ECAFC4
-    symbol: gUnkJp_09ECAFC4
   eu:
     address: 0x09F7EECC
-    symbol: gUnkEu_09F7EECC
-- name: gUnkUs_09EF3BDC
+- name: gUnk_09EF3BDC
   record: SpriteTable
   items: [gUnkUs_0962FB70, gUnkUs_0962FB8C, gUnkUs_0962FBA8, gUnkUs_0962FBC4, gUnkUs_0962FBE0, gUnkUs_0962FBFC]
   us:
     address: 0x09EF3BDC
   jp:
     address: 0x09ECAFC8
-    symbol: gUnkJp_09ECAFC8
   eu:
     address: 0x09F7EED0
-    symbol: gUnkEu_09F7EED0
-- name: gUnkUs_09EF3BF4
+- name: gUnk_09EF3BF4
   record: AnimTable
   items: [gUnkUs_0962FC18]
   us:
     address: 0x09EF3BF4
   jp:
     address: 0x09ECAFE0
-    symbol: gUnkJp_09ECAFE0
   eu:
     address: 0x09F7EEE8
-    symbol: gUnkEu_09F7EEE8
 - name: gUnk_09EF3BF8
   record: SpriteTable
   items: [gUnk_0962FC38, gUnk_0962FC42, gUnk_0962FC52, gUnk_0962FC62]
@@ -2633,7 +2625,7 @@ entries:
   eu:
     address: 0x096AA18C
     size: 2048
-- name: gBossMapBlockUs_096E2C64
+- name: gBossMapBlock_096E2C64
   format: tilemap
   const: true
   us:
@@ -2642,12 +2634,10 @@ entries:
   jp:
     address: 0x0969B440
     size: 2048
-    symbol: gBossMapBlockJp_0969B440
   eu:
     address: 0x096AA98C
     size: 2048
-    symbol: gBossMapBlockEu_096AA98C
-- name: gBossMapBlockUs_096E3464
+- name: gBossMapBlock_096E3464
   format: tilemap
   const: true
   us:
@@ -2656,11 +2646,9 @@ entries:
   jp:
     address: 0x0969BC40
     size: 2048
-    symbol: gBossMapBlockJp_0969BC40
   eu:
     address: 0x096AB18C
     size: 2048
-    symbol: gBossMapBlockEu_096AB18C
 - name: gUnk_096E3C64
   format: tilemap
   const: true

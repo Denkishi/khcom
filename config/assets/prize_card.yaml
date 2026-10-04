@@ -33,11 +33,9 @@ entries:
   jp:
     address: 0x094B9654
     size: 1024
-    symbol: gUnkJp_094B9654
   eu:
     address: 0x09522CE4
     size: 1024
-    symbol: gUnkEu_09522CE4
 - name: gUnk_09501778
   format: tiles4
   width: 2

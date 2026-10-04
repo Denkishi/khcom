@@ -1822,7 +1822,6 @@ entries:
   eu:
     address: 0x099A5F0C
     size: 3140
-    symbol: gUnkEu_099A6090
 - name: gUnk_0999E69E
   format: sprite_sheet
   align: 4
@@ -4283,7 +4282,7 @@ entries:
   eu:
     address: 0x099B6900
     size: 32
-- name: gRoomAssetUs_099A899C
+- name: gRoomAsset_099A899C
   format: tiles4
   width: 2
   us:
@@ -4292,11 +4291,9 @@ entries:
   jp:
     address: 0x0995D424
     size: 2368
-    symbol: gRoomAssetJp_0995D424
   eu:
     address: 0x099B6920
     size: 2368
-    symbol: gRoomAssetEu_099B6920
 - name: gUnkEu_099A924E
   format: sprite_sheet
   align: 4

@@ -58,13 +58,13 @@ void task_btl_map_0(BtlMapWork* work) {
             break;
         case 0xA0:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnkEu_08F7042C);
+            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CB06E4);
 #else
             LoadBgTiles(gBtlWork->mapBg, gUnk_08CB06E4, 0x4000);
 #endif
             LoadBgPalette(gBtlWork->mapBg, gUnk_08F69404, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnkEu_08F7D724);
+            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFD384);
 #else
             LoadBgMap(gBtlWork->mapBg, gUnk_08EFD384, 0x1000);
 #endif

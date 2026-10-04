@@ -74,16 +74,8 @@ static u8 sMsTopMessageStarted;
 static s16 sMsTopIntroIndex;
 
 static const WarpDef sWarpDefs[2] = {
-#if defined(VERSION_US)
-    {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gWorldwarpAssetUs_09A3D81C, 32, gWorldwarpAssetUs_099A2F84, 832, gUnk_09EF999C, gUnk_09EF9998, 0}, {192, 84, gMoguPalette, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 1}}},
-    {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gWorldwarpAssetUs_09A3D83C, 32, gWorldwarpAssetUs_099A32E4, 832, gUnk_09EF99A4, gUnk_09EF99A0, 0}, {160, 84, gUnk_09A3D77C, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 0}}},
-#elif defined(VERSION_JP)
-    {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gWorldwarpAssetJp_099F22A4, 32, gWorldwarpAssetJp_09957A0C, 832, gUnk_09EF999C, gUnk_09EF9998, 0}, {192, 84, gMoguPalette, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 1}}},
-    {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gWorldwarpAssetJp_099F22C4, 32, gWorldwarpAssetJp_09957D6C, 832, gUnk_09EF99A4, gUnk_09EF99A0, 0}, {160, 84, gUnk_09A3D77C, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 0}}},
-#elif defined(VERSION_EU)
-    {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gWorldwarpAssetEu_09A9B2E0, 32, gWorldwarpAssetEu_099B0F08, 832, gUnk_09EF999C, gUnk_09EF9998, 0}, {192, 84, gMoguPalette, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 1}}},
-    {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gWorldwarpAssetEu_09A9B300, 32, gWorldwarpAssetEu_099B1268, 832, gUnk_09EF99A4, gUnk_09EF99A0, 0}, {160, 84, gUnk_09A3D77C, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 0}}},
-#endif
+    {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gWorldwarpAsset_09A3D81C, 32, gWorldwarpAsset_099A2F84, 832, gUnk_09EF999C, gUnk_09EF9998, 0}, {192, 84, gMoguPalette, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 1}}},
+    {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gWorldwarpAsset_09A3D83C, 32, gWorldwarpAsset_099A32E4, 832, gUnk_09EF99A4, gUnk_09EF99A0, 0}, {160, 84, gUnk_09A3D77C, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 0}}},
 };
 
 static const u16 sMsTopIntroMessages[3] = {

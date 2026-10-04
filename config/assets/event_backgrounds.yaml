@@ -5706,7 +5706,6 @@ entries:
     address: 0x08F7042C
     size: 6164
     compress: lz77
-    symbol: gUnkEu_08F7042C
 - name: gUnk_08EFD384
   format: tilemap
   us:
@@ -5719,7 +5718,6 @@ entries:
     address: 0x08F7D724
     size: 1108
     compress: lz77
-    symbol: gUnkEu_08F7D724
 - name: gUnk_08F69404
   format: palette
   us:

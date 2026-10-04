@@ -16,7 +16,6 @@
 #include "battle_work.h"
 #include "battle_bg_types.h"
 #include "prize_types.h"
-#include "boss_map_block_assets.h"
 #include "copyright_screens.h"
 #include "sprites_evt.h"
 #include "sprites_title.h"
@@ -30,34 +29,11 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "default_bg_map.h"
 
 static BoogieWork* sBoogieWork;
 
-#if defined(VERSION_US)
-static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkUs_09EF66C4, gUnkUs_09EF66A8, gUnk_0977A53C, 0 },
-    { gUnkUs_09EF66E8, gUnkUs_09EF66C8, gUnk_0977F7B4, 0 },
-    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 0 },
-    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
-    { gUnkUs_09EF6750, gUnkUs_09EF6738, gUnk_0978DF7A, 0 },
-    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 0 },
-    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
-};
-#elif defined(VERSION_JP)
-static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkJp_09ECDAB0, gUnkJp_09ECDA94, gUnk_0977A53C, 0 },
-    { gUnkJp_09ECDAD4, gUnkJp_09ECDAB4, gUnk_0977F7B4, 0 },
-    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 0 },
-    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
-    { gUnkJp_09ECDB3C, gUnkJp_09ECDB24, gUnk_0978DF7A, 0 },
-    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 0 },
-    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
-};
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0 },
     { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0 },
@@ -69,27 +45,21 @@ static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 1 },
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
 };
+#else
+static const StatusAnimDef sBosBoogieAnimDefs[9] = {
+    { gUnk_09EF66C4, gUnk_09EF66A8, gUnk_0977A53C, 0 },
+    { gUnk_09EF66E8, gUnk_09EF66C8, gUnk_0977F7B4, 0 },
+    { gUnk_09EF6710, gUnk_09EF66EC, gUnk_097856FA, 0 },
+    { gUnk_09EF6710, gUnk_09EF66EC, gUnk_097856FA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
+    { gUnk_09EF6750, gUnk_09EF6738, gUnk_0978DF7A, 0 },
+    { gUnk_09EF676C, gUnk_09EF6754, gUnk_097920CA, 0 },
+    { gUnk_09EF676C, gUnk_09EF6754, gUnk_097920CA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
+};
 #endif
 
-#if defined(VERSION_US)
-static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkUs_09EF66A8, 7 },
-    { gUnkUs_09EF66C8, 8 },
-    { gUnkUs_09EF66EC, 9 },
-    { gUnk_09EF6718, 5 },
-    { gUnkUs_09EF6738, 6 },
-    { gUnkUs_09EF6754, 6 },
-};
-#elif defined(VERSION_JP)
-static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkJp_09ECDA94, 7 },
-    { gUnkJp_09ECDAB4, 8 },
-    { gUnkJp_09ECDAD8, 9 },
-    { gUnk_09EF6718, 5 },
-    { gUnkJp_09ECDB24, 6 },
-    { gUnkJp_09ECDB40, 6 },
-};
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnkEu_09F81C90, 7 },
     { gUnkEu_09F81CB0, 8 },
@@ -98,26 +68,23 @@ static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnkEu_09F81D20, 6 },
     { gUnkEu_09F81D3C, 6 },
 };
+#else
+static const StatusObjDef sBosBoogieSpriteDefs[6] = {
+    { gUnk_09EF66A8, 7 },
+    { gUnk_09EF66C8, 8 },
+    { gUnk_09EF66EC, 9 },
+    { gUnk_09EF6718, 5 },
+    { gUnk_09EF6738, 6 },
+    { gUnk_09EF6754, 6 },
+};
 #endif
 
 static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
 
-#if defined(VERSION_US)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gBosBoogieBgTiles, 0x7F00, gUnk_0984AE38, 0x140,
-    { gBossMapBlockUs_08125E24, gBosBoogieBgMaps[1], gBossMapBlockUs_08125E24, gBosBoogieBgMaps[0] },
+    { gUnk_08125E24, gBosBoogieBgMaps[1], gUnk_08125E24, gBosBoogieBgMaps[0] },
 };
-#elif defined(VERSION_JP)
-static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gBosBoogieBgTiles, 0x7F00, gUnkJp_097FFB0C, 0x140,
-    { gBossMapBlockJp_08125EA0, gBosBoogieBgMaps[1], gBossMapBlockJp_08125EA0, gBosBoogieBgMaps[0] },
-};
-#elif defined(VERSION_EU)
-static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gBosBoogieBgTiles, 0x7F00, gUnkEu_0981F4E0, 0x140,
-    { gBossMapBlockEu_08124944, gBosBoogieBgMaps[1], gBossMapBlockEu_08124944, gBosBoogieBgMaps[0] },
-};
-#endif
 
 void BosBoogieApplyDiceFace(BoogieWork* work) {
     if (gBosBoogieDiceBreakCount <= 2) {

@@ -62,9 +62,9 @@ static void* sStatusBarTiles[5] = {
 };
 
 static void** sStatusBarSprites[5] = {
-    gUnkEu_09F81EC8,
+    gUnk_09EF68E0,
     gUnkEu_09F81ED8,
-    gUnkEu_09F81EC8,
+    gUnk_09EF68E0,
     gUnkEu_09F81EF8,
     gUnkEu_09F81EE8,
 };

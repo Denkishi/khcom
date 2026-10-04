@@ -1255,28 +1255,24 @@ entries:
   eu:
     address: 0x08B50040
     size: 1506
-- name: gUnkUs_09EE1520
+- name: gUnk_09EE1520
   record: SpriteTable
   items: [gUnk_08B2556C, gUnk_08B2557C, gUnk_08B25586, gUnk_08B25590, gUnk_08B2559A]
   us:
     address: 0x09EE1520
   jp:
     address: 0x09EB8F9C
-    symbol: gUnkJp_09EB8F9C
   eu:
     address: 0x09F5C0EC
-    symbol: gUnkEu_09F5C0EC
-- name: gUnkUs_09EE1534
+- name: gUnk_09EE1534
   record: AnimTable
   items: [gUnk_08B255AA]
   us:
     address: 0x09EE1534
   jp:
     address: 0x09EB8FB0
-    symbol: gUnkJp_09EB8FB0
   eu:
     address: 0x09F5C100
-    symbol: gUnkEu_09F5C100
 - name: gUnk_09EE1538
   record: SpriteTable
   us:
@@ -1288,14 +1284,13 @@ entries:
   eu:
     address: 0x09F5C140
     items: [gUnk_08B25A34, gUnk_08B25A3E, gUnk_08B25A48, gUnk_08B25A52, gUnk_08B25A5C, gUnk_08B25A66, gUnk_08B25A70, gUnk_08B25A7A, gUnk_08B25A84, gUnk_08B25A8E, gUnk_08B25A98, gUnk_08B25AA2, gUnk_08B25AAC, gUnk_08B25AB6, gUnk_08B25AC0, gUnk_08B25ACA]
-- name: gUnkUs_09EE1578
+- name: gUnk_09EE1578
   record: AnimTable
   items: [gUnk_08B25AD4]
   us:
     address: 0x09EE1578
   jp:
     address: 0x09EB8FF4
-    symbol: gUnkJp_09EB8FF4
 - name: gUnk_09EE157C
   record: SpriteTable
   us:
@@ -1307,14 +1302,13 @@ entries:
   eu:
     address: 0x09F5C394
     items: [gUnkEu_08B55C58, gUnk_08B25E4A, gUnk_08B25E54, gUnk_08B25E5E, gUnk_08B25E6E, gUnk_08B25E78, gUnk_08B25E82, gUnk_08B25E8C, gUnk_08B25E96, gUnk_08B25EA0, gUnk_08B25EAA, gUnk_08B25EB4, gUnk_08B25EBE, gUnk_08B25EC8, gUnk_08B25ED2, gUnk_08B25EDC, gUnkEu_08B55CFE, gUnkEu_08B55D08, gUnkEu_08B55D18, gUnkEu_08B55D22, gUnkEu_08B55D32, gUnkEu_08B55D3C, gUnkEu_08B55D4C, gUnkEu_08B55D56, gUnkEu_08B55D66, gUnkEu_08B55D70, gUnkEu_08B55D80, gUnkEu_08B55D8A]
-- name: gUnkUs_09EE15BC
+- name: gUnk_09EE15BC
   record: AnimTable
   items: [gUnk_08B25EE6]
   us:
     address: 0x09EE15BC
   jp:
     address: 0x09EB9038
-    symbol: gUnkJp_09EB9038
 - name: gUnk_09EE15C0
   record: SpriteTable
   items: [gUnk_08B26270, gUnk_08B26286, gUnk_08B2629C, gUnk_08B262B2, gUnk_08B262C8, gUnk_08B262DE, gUnk_08B262F4, gUnk_08B2630A, gUnk_08B26320, gUnk_08B26336, gUnk_08B2634C, gUnk_08B26362]

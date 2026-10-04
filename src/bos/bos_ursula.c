@@ -3,7 +3,6 @@
  * Ursula Boss
  */
 
-#include "boss_map_block_assets.h"
 #include "bos4.h"
 #include "sprites_bos4.h"
 #include "gba/io_reg.h"
@@ -33,6 +32,7 @@
 #include <stddef.h>
 #include "bos_ursula.h"
 #include "sprite_palettes.h"
+#include "default_bg_map.h"
 
 static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 
@@ -41,175 +41,63 @@ static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
 };
 
 static const u16* sBosUrsulaMapBlocksLeft[12] = {
-#if defined(VERSION_US)
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_09845798,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-#elif defined(VERSION_JP)
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_097FAC6C,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-#elif defined(VERSION_EU)
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_09819E40,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-#endif
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gBossMapBlock_09845798,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
 };
 
 static const u16* sBosUrsulaMapBlocksHurtLeft[12] = {
-#if defined(VERSION_US)
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_09845F98,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-#elif defined(VERSION_JP)
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_097FB46C,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-#elif defined(VERSION_EU)
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_0981A640,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-#endif
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gBossMapBlock_09845F98,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
 };
 
 static const u16* sBosUrsulaMapBlocksRight[12] = {
-#if defined(VERSION_US)
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_09846798,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-#elif defined(VERSION_JP)
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_097FBC6C,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-#elif defined(VERSION_EU)
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_0981AE40,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-#endif
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gBossMapBlock_09846798,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
 };
 
 static const u16* sBosUrsulaMapBlocksHurtRight[12] = {
-#if defined(VERSION_US)
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_09846F98,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_08125E24,
-#elif defined(VERSION_JP)
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_097FC46C,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_08125EA0,
-#elif defined(VERSION_EU)
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_0981B640,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_08124944,
-#endif
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gBossMapBlock_09846F98,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
+    gUnk_08125E24,
 };
 
 TaskDesc gTaskDescBosUrsula = {

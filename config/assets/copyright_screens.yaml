@@ -173,11 +173,9 @@ entries:
   jp:
     address: 0x097FFB0C
     size: 320
-    symbol: gUnkJp_097FFB0C
   eu:
     address: 0x0981F4E0
     size: 320
-    symbol: gUnkEu_0981F4E0
 - name: gUnk_09849098
   format: tilemap
   us:

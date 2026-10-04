@@ -176,7 +176,7 @@ entries:
     address: 0x09ED0B24
   eu:
     address: 0x09F851B4
-- name: gRoomAssetUs_099939FA
+- name: gRoomAsset_099939FA
   format: sprite_sheet
   align: 4
   cell: [54, 71]
@@ -259,12 +259,10 @@ entries:
   jp:
     address: 0x099483B0
     size: 9630
-    symbol: gRoomAssetJp_0994850E
   eu:
     address: 0x09999B58
     size: 9630
-    symbol: gRoomAssetEu_09999CB6
-- name: gRoomAssetUs_09995E9C
+- name: gRoomAsset_09995E9C
   format: sprite_sheet
   align: 4
   cell: [32, 32]
@@ -302,12 +300,10 @@ entries:
   jp:
     address: 0x0994A950
     size: 3168
-    symbol: gRoomAssetJp_0994A9B0
   eu:
     address: 0x0999C0F8
     size: 3168
-    symbol: gRoomAssetEu_0999C158
-- name: gRoomAssetUs_09996B82
+- name: gRoomAsset_09996B82
   format: sprite_sheet
   align: 4
   cell: [61, 58]
@@ -368,12 +364,10 @@ entries:
   jp:
     address: 0x0994B5B0
     size: 5094
-    symbol: gRoomAssetJp_0994B696
   eu:
     address: 0x0999CD58
     size: 5094
-    symbol: gRoomAssetEu_0999CE3E
-- name: gRoomAssetUs_09997F64
+- name: gRoomAsset_09997F64
   format: sprite_sheet
   align: 4
   cell: [54, 57]
@@ -433,12 +427,10 @@ entries:
   jp:
     address: 0x0994C998
     size: 5024
-    symbol: gRoomAssetJp_0994CA78
   eu:
     address: 0x0999E140
     size: 5024
-    symbol: gRoomAssetEu_0999E220
-- name: gRoomAssetUs_09999244
+- name: gRoomAsset_09999244
   format: sprite_sheet
   align: 4
   cell: [32, 54]
@@ -460,12 +452,10 @@ entries:
   jp:
     address: 0x0994DD38
     size: 928
-    symbol: gRoomAssetJp_0994DD58
   eu:
     address: 0x0999F4E0
     size: 928
-    symbol: gRoomAssetEu_0999F500
-- name: gRoomAssetUs_099995FC
+- name: gRoomAsset_099995FC
   format: sprite_sheet
   align: 4
   cell: [47, 45]
@@ -491,11 +481,9 @@ entries:
   jp:
     address: 0x0994E0D8
     size: 856
-    symbol: gRoomAssetJp_0994E110
   eu:
     address: 0x0999F880
     size: 856
-    symbol: gRoomAssetEu_0999F8B8
 - name: gUnk_099999AC
   format: sprite_sheet
   align: 4
@@ -543,7 +531,7 @@ entries:
   eu:
     address: 0x0999FBD8
     size: 1264
-- name: gRoomAssetUs_09A1E0DC
+- name: gRoomAsset_09A1E0DC
   format: tilemap
   us:
     address: 0x09A1E0DC
@@ -551,12 +539,10 @@ entries:
   jp:
     address: 0x099D2B64
     size: 2048
-    symbol: gRoomAssetJp_099D2B64
   eu:
     address: 0x09A6FCA0
     size: 2048
-    symbol: gRoomAssetEu_09A6FCA0
-- name: gRoomAssetUs_09A1E8DC
+- name: gRoomAsset_09A1E8DC
   format: tilemap
   us:
     address: 0x09A1E8DC
@@ -564,12 +550,10 @@ entries:
   jp:
     address: 0x099D3364
     size: 2048
-    symbol: gRoomAssetJp_099D3364
   eu:
     address: 0x09A704A0
     size: 2048
-    symbol: gRoomAssetEu_09A704A0
-- name: gRoomAssetUs_09A1F0DC
+- name: gRoomAsset_09A1F0DC
   format: tilemap
   us:
     address: 0x09A1F0DC
@@ -577,12 +561,10 @@ entries:
   jp:
     address: 0x099D3B64
     size: 2048
-    symbol: gRoomAssetJp_099D3B64
   eu:
     address: 0x09A70CA0
     size: 2048
-    symbol: gRoomAssetEu_09A70CA0
-- name: gRoomAssetUs_09A1F8DC
+- name: gRoomAsset_09A1F8DC
   format: tilemap
   us:
     address: 0x09A1F8DC
@@ -590,12 +572,10 @@ entries:
   jp:
     address: 0x099D4364
     size: 4096
-    symbol: gRoomAssetJp_099D4364
   eu:
     address: 0x09A714A0
     size: 4096
-    symbol: gRoomAssetEu_09A714A0
-- name: gRoomAssetUs_09A3C75C
+- name: gRoomAsset_09A3C75C
   format: palette
   us:
     address: 0x09A3C75C
@@ -603,8 +583,6 @@ entries:
   jp:
     address: 0x099F11E4
     size: 320
-    symbol: gRoomAssetJp_099F11E4
   eu:
     address: 0x09A9A220
     size: 320
-    symbol: gRoomAssetEu_09A9A220

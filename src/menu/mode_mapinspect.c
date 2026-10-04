@@ -76,7 +76,7 @@ static void* sMapInspectBottomBarSpritesByLanguage[5] = {
 };
 
 static void* sMapInspectBarTilesByLanguage[5] = {
-    gUnkEu_099A6090,
+    gUnk_0999DAEC,
     gUnkEu_099A6CCE,
     gUnkEu_099A924E,
     gUnkEu_099A85CE,

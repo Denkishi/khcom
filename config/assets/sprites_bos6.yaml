@@ -1982,11 +1982,9 @@ entries:
   jp:
     address: 0x09C6B360
     size: 11328
-    symbol: gUnkJp_09C6B360
   eu:
     address: 0x09D02180
     size: 11328
-    symbol: gUnkEu_09D02180
 - name: gUnk_09C94A94
   format: tiles4
   width: 8
@@ -3389,11 +3387,9 @@ entries:
   jp:
     address: 0x09D427A0
     size: 224
-    symbol: gUnkJp_09D427A0
   eu:
     address: 0x09DD91C0
     size: 224
-    symbol: gUnkEu_09DD91C0
 - name: gUnk_09D69374
   format: palette
   us:

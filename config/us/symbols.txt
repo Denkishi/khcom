@@ -19,9 +19,3 @@ gUnk_06010000 = 0x06010000
 gUnk_0500016C = 0x0500016C
 gUnk_050001C0 = 0x050001C0
 gSramFileLarge = 0x0E002F20
-
-gMoogleAssetUs_099A3EA4 = 0x99a3ea4
-gMoogleAssetUs_099A41E4 = 0x99a41e4
-gMoogleAssetUs_099A4464 = 0x99a4464
-gMoogleAssetUs_099A46E4 = 0x99a46e4
-gBossMapBlockUs_08125E24 = 0x8125e24

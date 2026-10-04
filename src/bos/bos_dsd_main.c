@@ -4,7 +4,6 @@
  */
 
 #include "bos2.h"
-#include "boss_map_block_assets.h"
 #include "sprites_bos2.h"
 #include "sprites_btl.h"
 #include "system_state.h"
@@ -1325,22 +1324,10 @@ TaskDesc gTaskDescBosDsdMain = {
 };
 
 const u16* gBosDsdMapBlocks[4] = {
-#if defined(VERSION_US)
-    gBossMapBlockUs_096E2C64,
-    gBossMapBlockUs_08125E24,
-    gBossMapBlockUs_096E3464,
-    gBossMapBlockUs_08125E24,
-#elif defined(VERSION_JP)
-    gBossMapBlockJp_0969B440,
-    gBossMapBlockJp_08125EA0,
-    gBossMapBlockJp_0969BC40,
-    gBossMapBlockJp_08125EA0,
-#elif defined(VERSION_EU)
-    gBossMapBlockEu_096AA98C,
-    gBossMapBlockEu_08124944,
-    gBossMapBlockEu_096AB18C,
-    gBossMapBlockEu_08124944,
-#endif
+    gBossMapBlock_096E2C64,
+    gUnk_08125E24,
+    gBossMapBlock_096E3464,
+    gUnk_08125E24,
 };
 
 TaskDesc gTaskDescBosDsdMap = {

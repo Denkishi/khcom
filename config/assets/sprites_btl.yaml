@@ -257,72 +257,60 @@ entries:
     address: 0x09EB8B74
   eu:
     address: 0x09F5BD50
-- name: gUnkUs_09EE10FC
+- name: gUnk_09EE10FC
   record: SpriteTable
   items: [gUnkUs_08B1DA3C, gUnkUs_08B1DA46, gUnkUs_08B1DA50]
   us:
     address: 0x09EE10FC
   jp:
     address: 0x09EB8B78
-    symbol: gUnkJp_09EB8B78
   eu:
     address: 0x09F5BD54
-    symbol: gUnkEu_09F5BD54
-- name: gUnkUs_09EE1108
+- name: gUnk_09EE1108
   record: AnimTable
   items: [gUnkUs_08B1DA5A]
   us:
     address: 0x09EE1108
   jp:
     address: 0x09EB8B84
-    symbol: gUnkJp_09EB8B84
   eu:
     address: 0x09F5BD60
-    symbol: gUnkEu_09F5BD60
-- name: gUnkUs_09EE110C
+- name: gUnk_09EE110C
   record: SpriteTable
   items: [gUnkUs_08B1DBF0, gUnkUs_08B1DC00]
   us:
     address: 0x09EE110C
   jp:
     address: 0x09EB8B88
-    symbol: gUnkJp_09EB8B88
   eu:
     address: 0x09F5BD64
-    symbol: gUnkEu_09F5BD64
-- name: gUnkUs_09EE1114
+- name: gUnk_09EE1114
   record: AnimTable
   items: [gUnkUs_08B1DC0A, gUnkUs_08B1DC14]
   us:
     address: 0x09EE1114
   jp:
     address: 0x09EB8B90
-    symbol: gUnkJp_09EB8B90
   eu:
     address: 0x09F5BD6C
-    symbol: gUnkEu_09F5BD6C
-- name: gUnkUs_09EE111C
+- name: gUnk_09EE111C
   record: SpriteTable
   items: [gUnkUs_08B1DDA0, gUnkUs_08B1DDAA, gUnkUs_08B1DDB4, gUnkUs_08B1DDBE, gUnkUs_08B1DDDA, gUnkUs_08B1DDEA, gUnkUs_08B1DE06, gUnkUs_08B1DE16, gUnkUs_08B1DE32]
   us:
     address: 0x09EE111C
   jp:
     address: 0x09EB8B98
-    symbol: gUnkJp_09EB8B98
   eu:
     address: 0x09F5BD74
-    symbol: gUnkEu_09F5BD74
-- name: gUnkUs_09EE1140
+- name: gUnk_09EE1140
   record: AnimTable
   items: [gUnkUs_08B1DE42, gUnkUs_08B1DE4C, gUnkUs_08B1DE56, gUnkUs_08B1DE6C, gUnkUs_08B1DE82, gUnkUs_08B1DE8C, gUnkUs_08B1DE96]
   us:
     address: 0x09EE1140
   jp:
     address: 0x09EB8BBC
-    symbol: gUnkJp_09EB8BBC
   eu:
     address: 0x09F5BD98
-    symbol: gUnkEu_09F5BD98
 - name: gUnk_09EE115C
   record: SpriteTable
   items: [gUnkUs_08B1E7C0, gUnkUs_08B1E7D0]
@@ -332,39 +320,33 @@ entries:
     address: 0x09EB8BD8
   eu:
     address: 0x09F5BDB4
-- name: gUnkUs_09EE1164
+- name: gUnk_09EE1164
   record: AnimTable
   items: [gUnkUs_08B1E7E0, gUnkUs_08B1E7EA]
   us:
     address: 0x09EE1164
   jp:
     address: 0x09EB8BE0
-    symbol: gUnkJp_09EB8BE0
   eu:
     address: 0x09F5BDBC
-    symbol: gUnkEu_09F5BDBC
-- name: gUnkUs_09EE116C
+- name: gUnk_09EE116C
   record: SpriteTable
   items: [gUnk_08B1E974, gUnk_08B1E97E, gUnk_08B1E988, gUnk_08B1E992, gUnk_08B1E99C, gUnk_08B1E9A6, gUnkUs_08B1E9B0]
   us:
     address: 0x09EE116C
   jp:
     address: 0x09EB8BE8
-    symbol: gUnkJp_09EB8BE8
   eu:
     address: 0x09F5BDC4
-    symbol: gUnkEu_09F5BDC4
-- name: gUnkUs_09EE1188
+- name: gUnk_09EE1188
   record: AnimTable
   items: [gUnkUs_08B1E9BA, gUnkUs_08B1E9C4, gUnkUs_08B1E9CE, gUnkUs_08B1E9D8, gUnkUs_08B1E9E2, gUnkUs_08B1E9EC, gUnkUs_08B1E9F6]
   us:
     address: 0x09EE1188
   jp:
     address: 0x09EB8C04
-    symbol: gUnkJp_09EB8C04
   eu:
     address: 0x09F5BDE0
-    symbol: gUnkEu_09F5BDE0
 - name: gUnk_09EE11A4
   record: SpriteTable
   items: [gUnkUs_08B1EAE0, gUnkUs_08B1EAEA, gUnkUs_08B1EAF4]
@@ -374,7 +356,7 @@ entries:
     address: 0x09EB8C20
   eu:
     address: 0x09F5BDFC
-- name: gUnkUs_09EE11B0
+- name: gUnk_09EE11B0
   record: AnimTable
   us:
     address: 0x09EE11B0
@@ -382,11 +364,9 @@ entries:
   jp:
     address: 0x09EB8C2C
     items: [gUnkUs_08B1EAFE, gUnkUs_08B1EB08, gUnkUs_08B1EB12]
-    symbol: gUnkJp_09EB8C2C
   eu:
     address: 0x09F5BE08
     items: [gUnkUs_08B1EAFE]
-    symbol: gUnkEu_09F5BE08
 - name: gUnk_09EE11BC
   record: SpriteTable
   items: [gUnkUs_08B1ED5C]
@@ -507,7 +487,7 @@ entries:
     address: 0x09EE1204
   jp:
     address: 0x09EB8C80
-- name: gUnkUs_09EE1214
+- name: gUnk_09EE1214
   record: SpriteTable
   us:
     address: 0x09EE1214
@@ -515,22 +495,18 @@ entries:
   jp:
     address: 0x09EB8C90
     items: [gUnkUs_08B1FCAC, gUnk_08B1FCBC, gUnk_08B1FCCC, gUnk_08B1FCDC, gUnk_08B1FCEC, gUnk_08B1FCFC, gUnk_08B1FD0C, gUnk_08B1FD1C, gUnk_08B1FD2C, gUnk_08B1FD3C, gUnk_08B1FD4C]
-    symbol: gUnkJp_09EB8C90
   eu:
     address: 0x09F5BE2C
     items: [gUnkUs_08B1F120, gUnkEu_08B4AB9C, gUnkUs_08B1F2BC, gUnkEu_08B4ABBC, gUnkUs_08B1F458, gUnkEu_08B4ABDC, gUnkUs_08B1F5F4, gUnkEu_08B4ABFC, gUnkUs_08B1F750, gUnkEu_08B4AC1C, gUnkEu_08B4AC2C]
-    symbol: gUnkEu_09F5BE2C
-- name: gUnkUs_09EE1240
+- name: gUnk_09EE1240
   record: AnimTable
   items: [gUnkUs_08B1FD5C]
   us:
     address: 0x09EE1240
   jp:
     address: 0x09EB8CBC
-    symbol: gUnkJp_09EB8CBC
   eu:
     address: 0x09F5BE58
-    symbol: gUnkEu_09F5BE58
 - name: gBPuraizuFrames
   record: SpriteTable
   items: [gBPuraizuFrame0, gBPuraizuFrame1, gBPuraizuFrame2, gBPuraizuFrame3, gBPuraizuFrame4, gBPuraizuFrame5, gBPuraizuFrame6, gBPuraizuFrame7, gBPuraizuFrame8, gBPuraizuFrame9, gBPuraizuFrame10, gBPuraizuFrame11, gBPuraizuFrame12]
@@ -1622,11 +1598,9 @@ entries:
   jp:
     address: 0x08B11024
     size: 436
-    symbol: gUnkJp_08B11058
   eu:
     address: 0x08B49360
     size: 436
-    symbol: gUnkEu_08B49394
 - name: gUnk_08B1DC1E
   format: sprite_sheet
   align: 4
@@ -1662,11 +1636,9 @@ entries:
   jp:
     address: 0x08B111D8
     size: 430
-    symbol: gUnkJp_08B11206
   eu:
     address: 0x08B49514
     size: 430
-    symbol: gUnkEu_08B49542
 - name: gUnk_08B1DEA0
   format: sprite_sheet
   align: 4
@@ -1773,11 +1745,9 @@ entries:
   jp:
     address: 0x08B11388
     size: 2592
-    symbol: gUnkJp_08B11488
   eu:
     address: 0x08B496C4
     size: 2592
-    symbol: gUnkEu_08B497C4
 - name: gUnk_08B1E7F4
   format: sprite_sheet
   align: 4

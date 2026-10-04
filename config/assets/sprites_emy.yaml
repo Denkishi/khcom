@@ -5437,11 +5437,9 @@ entries:
   jp:
     address: 0x0899E790
     size: 4734
-    symbol: gUnkJp_0899E80E
   eu:
     address: 0x089D6ACC
     size: 4734
-    symbol: gUnkEu_089D6B4A
 - name: gUnk_089AC4F8
   format: sprite_sheet
   align: 4
@@ -5500,11 +5498,9 @@ entries:
   jp:
     address: 0x0899FA10
     size: 7632
-    symbol: gUnkJp_0899FAE0
   eu:
     address: 0x089D7D4C
     size: 7632
-    symbol: gUnkEu_089D7E1C
 - name: emy_07_fl00
   format: sprite_sheet
   palette: emy_07

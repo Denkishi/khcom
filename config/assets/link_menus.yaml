@@ -271,7 +271,6 @@ entries:
   jp:
     address: 0x096B4700
     size: 96
-    symbol: gUnkJp_096B4700
 - name: gUnk_096FBF84
   format: palette
   us:

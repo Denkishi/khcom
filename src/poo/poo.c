@@ -8837,29 +8837,7 @@ TaskDesc gTaskDescPooCabbageborn = {
 };
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
-#if defined(VERSION_US)
-    { gUnk_09760D00, 5, gUnkUs_09EF62B4, gUnkUs_09EF629C, gUnk_09849E78 },
-    { gUnk_09761824, 11, gUnkUs_09EF62E4, gUnkUs_09EF62B8, gUnk_09849E98 },
-    { gUnk_09762542, 24, gUnkUs_09EF6348, gUnkUs_09EF62E8, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, gUnkUs_09EF6358, gUnkUs_09EF634C, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, gUnkUs_09EF6380, gUnkUs_09EF635C, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, gUnkUs_09EF638C, gUnkUs_09EF6384, gUnk_09849F18 },
-    { gUnk_09765012, 6, gUnkUs_09EF63AC, gUnkUs_09EF6394, gUnk_09849F38 },
-    { gUnk_0976626E, 6, gUnkUs_09EF63C8, gUnkUs_09EF63B0, gUnk_09849F38 },
-    { gUnk_09767562, 10, gUnkUs_09EF63F4, gUnkUs_09EF63CC, gUnk_09849F58 },
-    { gUnk_09769416, 10, gUnkUs_09EF6420, gUnkUs_09EF63F8, gUnk_09849F58 },
-#elif defined(VERSION_JP)
-    { gUnk_09760D00, 5, gUnkJp_09ECD6A0, gUnkJp_09ECD688, gUnk_09849E78 },
-    { gUnk_09761824, 11, gUnkJp_09ECD6D0, gUnkJp_09ECD6A4, gUnk_09849E98 },
-    { gUnk_09762542, 24, gUnkJp_09ECD734, gUnkJp_09ECD6D4, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, gUnkJp_09ECD744, gUnkJp_09ECD738, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, gUnkJp_09ECD76C, gUnkJp_09ECD748, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, gUnkJp_09ECD778, gUnkJp_09ECD770, gUnk_09849F18 },
-    { gUnk_09765012, 6, gUnkJp_09ECD798, gUnkJp_09ECD780, gUnk_09849F38 },
-    { gUnk_0976626E, 6, gUnkJp_09ECD7B4, gUnkJp_09ECD79C, gUnk_09849F38 },
-    { gUnk_09767562, 10, gUnkJp_09ECD7E0, gUnkJp_09ECD7B8, gUnk_09849F58 },
-    { gUnk_09769416, 10, gUnkJp_09ECD80C, gUnkJp_09ECD7E4, gUnk_09849F58 },
-#else
+#ifdef VERSION_EU
     { gUnk_09760D00, 5, gUnkEu_09F816AC, gUnkEu_09F81694, gUnk_09849E78 },
     { gUnk_09761824, 11, gUnkEu_09F816DC, gUnkEu_09F816B0, gUnk_09849E98 },
     { gUnk_09762542, 24, gUnkEu_09F81740, gUnkEu_09F816E0, gUnk_09849EB8 },
@@ -8870,6 +8848,17 @@ const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
     { gUnk_0976626E, 6, gUnkEu_09F817C0, gUnkEu_09F817A8, gUnk_09849F38 },
     { gUnk_09767562, 10, gUnkEu_09F817EC, gUnkEu_09F817C4, gUnk_09849F58 },
     { gUnk_09769416, 10, gUnkEu_09F81818, gUnkEu_09F817F0, gUnk_09849F58 },
+#else
+    { gUnk_09760D00, 5, gUnk_09EF62B4, gUnk_09EF629C, gUnk_09849E78 },
+    { gUnk_09761824, 11, gUnk_09EF62E4, gUnk_09EF62B8, gUnk_09849E98 },
+    { gUnk_09762542, 24, gUnk_09EF6348, gUnk_09EF62E8, gUnk_09849EB8 },
+    { gUnk_097634D0, 3, gUnk_09EF6358, gUnk_09EF634C, gUnk_09849ED8 },
+    { gUnk_09763B54, 9, gUnk_09EF6380, gUnk_09EF635C, gUnk_09849EF8 },
+    { gUnk_09764BB8, 2, gUnk_09EF638C, gUnk_09EF6384, gUnk_09849F18 },
+    { gUnk_09765012, 6, gUnk_09EF63AC, gUnk_09EF6394, gUnk_09849F38 },
+    { gUnk_0976626E, 6, gUnk_09EF63C8, gUnk_09EF63B0, gUnk_09849F38 },
+    { gUnk_09767562, 10, gUnk_09EF63F4, gUnk_09EF63CC, gUnk_09849F58 },
+    { gUnk_09769416, 10, gUnk_09EF6420, gUnk_09EF63F8, gUnk_09849F58 },
 #endif
 };
 

@@ -1829,11 +1829,9 @@ entries:
   jp:
     address: 0x09945DB8
     size: 32
-    symbol: gUnkJp_09945DB8
   eu:
     address: 0x09997290
     size: 32
-    symbol: gUnkEu_09997290
 - name: gUnk_099912C4
   format: palette
   us:

@@ -530,7 +530,7 @@ entries:
   eu:
     address: 0x099AF7D8
     size: 1166
-- name: gWorldwarpAssetUs_099A2F84
+- name: gWorldwarpAsset_099A2F84
   format: sprite_sheet
   align: 4
   cell: [48, 40]
@@ -552,12 +552,10 @@ entries:
   jp:
     address: 0x099579EC
     size: 864
-    symbol: gWorldwarpAssetJp_09957A0C
   eu:
     address: 0x099B0EE8
     size: 864
-    symbol: gWorldwarpAssetEu_099B0F08
-- name: gWorldwarpAssetUs_099A32E4
+- name: gWorldwarpAsset_099A32E4
   format: sprite_sheet
   align: 4
   cell: [48, 40]
@@ -579,11 +577,9 @@ entries:
   jp:
     address: 0x09957D4C
     size: 864
-    symbol: gWorldwarpAssetJp_09957D6C
   eu:
     address: 0x099B1248
     size: 864
-    symbol: gWorldwarpAssetEu_099B1268
 - name: gUnk_099A36F8
   format: sprite_sheet
   align: 4
@@ -710,7 +706,7 @@ entries:
   eu:
     address: 0x099B1B7C
     size: 684
-- name: gMoogleAssetUs_099A3EC4
+- name: gMoogleAsset_099A3EC4
   format: sprite_sheet
   align: 4
   cell: [64, 40]
@@ -732,12 +728,10 @@ entries:
   jp:
     address: 0x0995892C
     size: 832
-    symbol: gMoogleAssetJp_0995894C
   eu:
     address: 0x099B1E28
     size: 832
-    symbol: gMoogleAssetEu_099B1E48
-- name: gMoogleAssetUs_099A4204
+- name: gMoogleAsset_099A4204
   format: sprite_sheet
   align: 4
   cell: [40, 40]
@@ -759,12 +753,10 @@ entries:
   jp:
     address: 0x09958C6C
     size: 640
-    symbol: gMoogleAssetJp_09958C8C
   eu:
     address: 0x099B2168
     size: 640
-    symbol: gMoogleAssetEu_099B2188
-- name: gMoogleAssetUs_099A4484
+- name: gMoogleAsset_099A4484
   format: sprite_sheet
   align: 4
   cell: [40, 40]
@@ -786,12 +778,10 @@ entries:
   jp:
     address: 0x09958EEC
     size: 640
-    symbol: gMoogleAssetJp_09958F0C
   eu:
     address: 0x099B23E8
     size: 640
-    symbol: gMoogleAssetEu_099B2408
-- name: gMoogleAssetUs_099A4704
+- name: gMoogleAsset_099A4704
   format: sprite_sheet
   align: 4
   cell: [48, 48]
@@ -813,11 +803,9 @@ entries:
   jp:
     address: 0x0995916C
     size: 928
-    symbol: gMoogleAssetJp_0995918C
   eu:
     address: 0x099B2668
     size: 928
-    symbol: gMoogleAssetEu_099B2688
 - name: gUnk_099A4B9A
   format: sprite_sheet
   align: 4
@@ -1403,7 +1391,7 @@ entries:
   eu:
     address: 0x09A8B2A0
     size: 1280
-- name: gMoogleAssetUs_09A387DC
+- name: gMoogleAsset_09A387DC
   format: tilemap
   us:
     address: 0x09A387DC
@@ -1411,12 +1399,10 @@ entries:
   jp:
     address: 0x099ED264
     size: 1280
-    symbol: gMoogleAssetJp_099ED264
   eu:
     address: 0x09A8DFA0
     size: 1280
-    symbol: gMoogleAssetEu_09A8DFA0
-- name: gMoogleAssetUs_09A38CDC
+- name: gMoogleAsset_09A38CDC
   format: tilemap
   us:
     address: 0x09A38CDC
@@ -1424,12 +1410,10 @@ entries:
   jp:
     address: 0x099ED764
     size: 1280
-    symbol: gMoogleAssetJp_099ED764
   eu:
     address: 0x09A8E4A0
     size: 1280
-    symbol: gMoogleAssetEu_09A8E4A0
-- name: gMoogleAssetUs_09A391DC
+- name: gMoogleAsset_09A391DC
   format: tilemap
   us:
     address: 0x09A391DC
@@ -1437,12 +1421,10 @@ entries:
   jp:
     address: 0x099EDC64
     size: 1280
-    symbol: gMoogleAssetJp_099EDC64
   eu:
     address: 0x09A8E9A0
     size: 1280
-    symbol: gMoogleAssetEu_09A8E9A0
-- name: gMoogleAssetUs_09A396DC
+- name: gMoogleAsset_09A396DC
   format: tilemap
   us:
     address: 0x09A396DC
@@ -1450,12 +1432,10 @@ entries:
   jp:
     address: 0x099EE164
     size: 1280
-    symbol: gMoogleAssetJp_099EE164
   eu:
     address: 0x09A8EEA0
     size: 1280
-    symbol: gMoogleAssetEu_09A8EEA0
-- name: gMoogleAssetUs_09A39BDC
+- name: gMoogleAsset_09A39BDC
   format: tilemap
   us:
     address: 0x09A39BDC
@@ -1463,12 +1443,10 @@ entries:
   jp:
     address: 0x099EE664
     size: 2048
-    symbol: gMoogleAssetJp_099EE664
   eu:
     address: 0x09A8F3A0
     size: 2048
-    symbol: gMoogleAssetEu_09A8F3A0
-- name: gMoogleAssetUs_09A3A3DC
+- name: gMoogleAsset_09A3A3DC
   format: tilemap
   us:
     address: 0x09A3A3DC
@@ -1476,11 +1454,9 @@ entries:
   jp:
     address: 0x099EEE64
     size: 2048
-    symbol: gMoogleAssetJp_099EEE64
   eu:
     address: 0x09A8FBA0
     size: 2048
-    symbol: gMoogleAssetEu_09A8FBA0
 - name: gUnk_09A3ABDC
   format: tilemap
   us:
@@ -1591,7 +1567,7 @@ entries:
   eu:
     address: 0x09A9B2C0
     size: 32
-- name: gWorldwarpAssetUs_09A3D81C
+- name: gWorldwarpAsset_09A3D81C
   format: palette
   us:
     address: 0x09A3D81C
@@ -1599,12 +1575,10 @@ entries:
   jp:
     address: 0x099F22A4
     size: 32
-    symbol: gWorldwarpAssetJp_099F22A4
   eu:
     address: 0x09A9B2E0
     size: 32
-    symbol: gWorldwarpAssetEu_09A9B2E0
-- name: gWorldwarpAssetUs_09A3D83C
+- name: gWorldwarpAsset_09A3D83C
   format: palette
   us:
     address: 0x09A3D83C
@@ -1612,11 +1586,9 @@ entries:
   jp:
     address: 0x099F22C4
     size: 32
-    symbol: gWorldwarpAssetJp_099F22C4
   eu:
     address: 0x09A9B300
     size: 32
-    symbol: gWorldwarpAssetEu_09A9B300
 - name: gUnk_09A3D85C
   format: palette
   us:
@@ -1661,7 +1633,7 @@ entries:
   eu:
     address: 0x09A9B540
     size: 32
-- name: gMoogleAssetUs_09A3DA9C
+- name: gMoogleAsset_09A3DA9C
   format: palette
   us:
     address: 0x09A3DA9C
@@ -1669,12 +1641,10 @@ entries:
   jp:
     address: 0x099F2524
     size: 32
-    symbol: gMoogleAssetJp_099F2524
   eu:
     address: 0x09A9B560
     size: 32
-    symbol: gMoogleAssetEu_09A9B560
-- name: gMoogleAssetUs_09A3DABC
+- name: gMoogleAsset_09A3DABC
   format: palette
   us:
     address: 0x09A3DABC
@@ -1682,12 +1652,10 @@ entries:
   jp:
     address: 0x099F2544
     size: 32
-    symbol: gMoogleAssetJp_099F2544
   eu:
     address: 0x09A9B580
     size: 32
-    symbol: gMoogleAssetEu_09A9B580
-- name: gMoogleAssetUs_09A3DADC
+- name: gMoogleAsset_09A3DADC
   format: palette
   us:
     address: 0x09A3DADC
@@ -1695,12 +1663,10 @@ entries:
   jp:
     address: 0x099F2564
     size: 32
-    symbol: gMoogleAssetJp_099F2564
   eu:
     address: 0x09A9B5A0
     size: 32
-    symbol: gMoogleAssetEu_09A9B5A0
-- name: gMoogleAssetUs_09A3DAFC
+- name: gMoogleAsset_09A3DAFC
   format: palette
   us:
     address: 0x09A3DAFC
@@ -1708,11 +1674,9 @@ entries:
   jp:
     address: 0x099F2584
     size: 32
-    symbol: gMoogleAssetJp_099F2584
   eu:
     address: 0x09A9B5C0
     size: 32
-    symbol: gMoogleAssetEu_09A9B5C0
 - name: gUnk_09A3DB1C
   format: palette
   us:

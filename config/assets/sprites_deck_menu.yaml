@@ -62,39 +62,33 @@ entries:
     address: 0x09EC23C8
   eu:
     address: 0x09F77044
-- name: gUnkUs_09EEAFDC
+- name: gUnk_09EEAFDC
   record: AnimTable
   items: [gUnk_090A1FA8]
   us:
     address: 0x09EEAFDC
   jp:
     address: 0x09EC23D0
-    symbol: gUnkJp_09EC23D0
   eu:
     address: 0x09F7704C
-    symbol: gUnkEu_09F7704C
-- name: gUnkUs_09EEAFE0
+- name: gUnk_09EEAFE0
   record: SpriteTable
   items: [gUnk_090A2234]
   us:
     address: 0x09EEAFE0
   jp:
     address: 0x09EC23D4
-    symbol: gUnkJp_09EC23D4
   eu:
     address: 0x09F77050
-    symbol: gUnkEu_09F77050
-- name: gUnkUs_09EEAFE4
+- name: gUnk_09EEAFE4
   record: AnimTable
   items: [gUnk_090A228C]
   us:
     address: 0x09EEAFE4
   jp:
     address: 0x09EC23D8
-    symbol: gUnkJp_09EC23D8
   eu:
     address: 0x09F77054
-    symbol: gUnkEu_09F77054
 - name: gUnk_09EEAFE8
   record: SpriteTable
   items: [gUnk_090A25F8]
@@ -104,17 +98,15 @@ entries:
     address: 0x09EC23DC
   eu:
     address: 0x09F77058
-- name: gUnkUs_09EEAFEC
+- name: gUnk_09EEAFEC
   record: AnimTable
   items: [gUnk_090A2614]
   us:
     address: 0x09EEAFEC
   jp:
     address: 0x09EC23E0
-    symbol: gUnkJp_09EC23E0
   eu:
     address: 0x09F7705C
-    symbol: gUnkEu_09F7705C
 - name: gUnk_09EEAFF0
   record: SpriteTable
   us:
@@ -126,14 +118,13 @@ entries:
   eu:
     address: 0x09F77060
     items: [gUnk_090A3E20]
-- name: gUnkUs_09EEAFF4
+- name: gUnk_09EEAFF4
   record: AnimTable
   items: [gUnk_090A3E3C]
   us:
     address: 0x09EEAFF4
   eu:
     address: 0x09F77064
-    symbol: gUnkEu_09F77064
 - name: gUnk_09EEAFF8
   record: SpriteTable
   items: [gUnk_090A4168]
@@ -141,17 +132,15 @@ entries:
     address: 0x09EEAFF8
   eu:
     address: 0x09F77068
-- name: gUnkUs_09EEAFFC
+- name: gUnk_09EEAFFC
   record: AnimTable
   items: [gUnk_090A4184]
   us:
     address: 0x09EEAFFC
   jp:
     address: 0x09EC23E8
-    symbol: gUnkJp_09EC23E8
   eu:
     address: 0x09F7706C
-    symbol: gUnkEu_09F7706C
 - name: gUnk_09EEB000
   record: SpriteTable
   us:
@@ -163,17 +152,15 @@ entries:
   eu:
     address: 0x09F77120
     items: [gUnkEu_091933AC]
-- name: gUnkUs_09EEB004
+- name: gUnk_09EEB004
   record: AnimTable
   items: [gUnk_090A44BA]
   us:
     address: 0x09EEB004
   jp:
     address: 0x09EC23F0
-    symbol: gUnkJp_09EC23F0
   eu:
     address: 0x09F77124
-    symbol: gUnkEu_09F77124
 - name: gUnkEu_09F77070
   record: SpriteTable
   items: [gUnk_090A44B0, gUnkEu_09189F1C]

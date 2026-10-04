@@ -61,28 +61,12 @@ TaskDesc gTaskDescBosBoogieDice = {
 };
 
 static void* const sBoogieDiceFaces[6][3] = {
-#if defined(VERSION_US)
-    { gUnkUs_09EF67A8, gUnkUs_09EF679C, gUnk_097976DC },
-    { gUnkUs_09EF67B8, gUnkUs_09EF67AC, gUnk_09797D0C },
-    { gUnkUs_09EF67C8, gUnkUs_09EF67BC, gUnk_0979833C },
-    { gUnkUs_09EF67D8, gUnkUs_09EF67CC, gUnk_0979896C },
-    { gUnkUs_09EF67E8, gUnkUs_09EF67DC, gUnk_09798F9C },
-    { gUnkUs_09EF67F8, gUnkUs_09EF67EC, gUnk_097995CC },
-#elif defined(VERSION_JP)
-    { gUnkJp_09ECDB94, gUnkJp_09ECDB88, gUnk_097976DC },
-    { gUnkJp_09ECDBA4, gUnkJp_09ECDB98, gUnk_09797D0C },
-    { gUnkJp_09ECDBB4, gUnkJp_09ECDBA8, gUnk_0979833C },
-    { gUnkJp_09ECDBC4, gUnkJp_09ECDBB8, gUnk_0979896C },
-    { gUnkJp_09ECDBD4, gUnkJp_09ECDBC8, gUnk_09798F9C },
-    { gUnkJp_09ECDBE4, gUnkJp_09ECDBD8, gUnk_097995CC },
-#else
-    { gUnkEu_09F81D90, gUnkEu_09F81D84, gUnk_097976DC },
-    { gUnkEu_09F81DA0, gUnkEu_09F81D94, gUnk_09797D0C },
-    { gUnkEu_09F81DB0, gUnkEu_09F81DA4, gUnk_0979833C },
-    { gUnkEu_09F81DC0, gUnkEu_09F81DB4, gUnk_0979896C },
-    { gUnkEu_09F81DD0, gUnkEu_09F81DC4, gUnk_09798F9C },
-    { gUnkEu_09F81DE0, gUnkEu_09F81DD4, gUnk_097995CC },
-#endif
+    { gUnk_09EF67A8, gUnk_09EF679C, gUnk_097976DC },
+    { gUnk_09EF67B8, gUnk_09EF67AC, gUnk_09797D0C },
+    { gUnk_09EF67C8, gUnk_09EF67BC, gUnk_0979833C },
+    { gUnk_09EF67D8, gUnk_09EF67CC, gUnk_0979896C },
+    { gUnk_09EF67E8, gUnk_09EF67DC, gUnk_09798F9C },
+    { gUnk_09EF67F8, gUnk_09EF67EC, gUnk_097995CC },
 };
 
 static const EmyKind sBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };

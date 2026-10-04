@@ -5,7 +5,6 @@
 
 #include "bos6.h"
 #include "sprites_bos6.h"
-#include "gba/io_reg.h"
 #include "bos7_api.h"
 #include "fade.h"
 #include "songs.h"
@@ -21,9 +20,7 @@
 #include "display.h"
 #include "engine_math.h"
 #include "gba/defines.h"
-#include "gba/syscall.h"
 #include "m4a_song.h"
-#include "obj.h"
 #include "obj_api.h"
 #include "registration_data.h"
 #include "task_descriptors.h"

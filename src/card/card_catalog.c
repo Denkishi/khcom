@@ -14,6 +14,7 @@
 #include "card_ui_types.h"
 #include "jiminy_data.h"
 #include "types.h"
+#include "mode_test_assets.h"
 
 const CardBack gCardBacks[5] = {
     {

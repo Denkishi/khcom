@@ -26,7 +26,6 @@
 #include "engine_math.h"
 #include "game_state.h"
 #include "gba/defines.h"
-#include "gba/syscall.h"
 #include "key.h"
 #include "m4a_song.h"
 #include "mode.h"

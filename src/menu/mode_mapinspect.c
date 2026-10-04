@@ -13,7 +13,6 @@
 #include "sprites_worldinspect.h"
 #include "sprites_map.h"
 #include "sprites_card_pictures.h"
-#include "gba/io_reg.h"
 #include "malloc.h"
 #include "fade.h"
 #include "mode_ms_top_api.h"
@@ -40,6 +39,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "card_worldselect.h"
+#include "registration_data.h"
 
 #ifdef VERSION_EU
 static void* sUnkEu_09F85008[5] = {

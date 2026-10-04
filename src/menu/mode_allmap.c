@@ -20,7 +20,6 @@
 #include "game_state.h"
 #include "gba/defines.h"
 #include "gba/macro.h"
-#include "gba/syscall.h"
 #include "intr.h"
 #include "m4a_catalog_data.h"
 #include "m4a_song.h"
@@ -34,6 +33,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "localized_resource_assets.h"
 
 #if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {

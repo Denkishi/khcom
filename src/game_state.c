@@ -13,7 +13,6 @@
 #include "battle.h"
 #include "engine_math.h"
 #include "gba/macro.h"
-#include "gba/syscall.h"
 #include "mode_chkbtl_api.h"
 #include "world_types.h"
 

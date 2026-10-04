@@ -56,6 +56,7 @@
 #include "types.h"
 #include "gba/defines.h"
 #include <stddef.h>
+#include "registration_data.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
     { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, NULL, 0 },

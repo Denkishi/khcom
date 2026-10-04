@@ -6,7 +6,6 @@
 #include "macros.h"
 #include "pallet.h"
 #include "intr.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "types.h"
 #include "system_state.h"

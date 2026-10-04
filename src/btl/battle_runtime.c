@@ -30,7 +30,6 @@
 #include "card_battle.h"
 #include "engine_math.h"
 #include "game_state.h"
-#include "gba/syscall.h"
 #include "listpool.h"
 #include "m4a.h"
 #include "map_runtime.h"

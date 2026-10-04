@@ -17,7 +17,6 @@
 #include "obj.h"
 #include "taskpool.h"
 #include "key.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
 #include "sprites_deck_menu.h"

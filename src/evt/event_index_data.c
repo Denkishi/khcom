@@ -8,7 +8,6 @@
 #include "event_backgrounds.h"
 #include "msg_types.h"
 #include <stddef.h>
-#include "types.h"
 #include "events.h"
 
 #ifdef VERSION_US

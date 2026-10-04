@@ -9,7 +9,6 @@
 #include <stdlib.h>
 #include "anim.h"
 #include "engine_math.h"
-#include "obj.h"
 #include "obj_api.h"
 #include <stddef.h>
 #include "taskpool.h"

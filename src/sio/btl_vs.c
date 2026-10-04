@@ -14,7 +14,6 @@
 #include "card_api.h"
 #include "card_battle.h"
 #include "gba/macro.h"
-#include "gba/syscall.h"
 #include "mode.h"
 #include "mode_vsbattle.h"
 #include "registration_data.h"

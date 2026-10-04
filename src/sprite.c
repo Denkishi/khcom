@@ -4,7 +4,6 @@
  */
 
 #include "display.h"
-#include "gba/syscall.h"
 #include "listpool.h"
 #include "malloc.h"
 #include "sprite.h"

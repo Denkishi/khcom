@@ -25,7 +25,6 @@
 #include "battle_actor_types.h"
 #include "listpool.h"
 #include "m4a_song.h"
-#include "obj.h"
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"

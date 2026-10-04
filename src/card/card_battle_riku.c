@@ -15,7 +15,6 @@
 #include "anim.h"
 #include "obj.h"
 #include "taskpool.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
 #include "game.h"

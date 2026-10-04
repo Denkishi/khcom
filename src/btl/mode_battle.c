@@ -16,7 +16,6 @@
 #include "formation_data.h"
 #include "game_state.h"
 #include "gba/macro.h"
-#include "gba/syscall.h"
 #include "m4a_song.h"
 #include "mode.h"
 #include "mode_chkbtl_api.h"

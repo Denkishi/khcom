@@ -16,7 +16,6 @@
 #include "sprites_card_pictures.h"
 #include "card_ids.h"
 #include "ms_types.h"
-#include "gba/io_reg.h"
 #include "mode_ms_top_api.h"
 #include "malloc.h"
 #include "fade.h"

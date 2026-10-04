@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_name.h"
+#include "ui_text.h"
 
 static PrintLine* sPrintLines;
 

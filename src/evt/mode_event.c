@@ -30,6 +30,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "msg_api.h"
 
 static TaskPool sEventTaskPool;
 static u8 sEventPaused;

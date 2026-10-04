@@ -9,7 +9,6 @@
 #include "gba/io_reg.h"
 #include "system_state.h"
 #include "gba/macro.h"
-#include "gba/syscall.h"
 #include "sio_types.h"
 #include <stddef.h>
 #include "types.h"

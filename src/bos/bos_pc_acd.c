@@ -11,7 +11,6 @@
 #include "battle_actor_types.h"
 #include "battle_work.h"
 #include "evt_types.h"
-#include "obj.h"
 #include "obj_api.h"
 #include <stddef.h>
 #include "taskpool.h"

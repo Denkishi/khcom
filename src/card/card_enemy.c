@@ -22,6 +22,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_enemy.h"
+#include "battle.h"
 
 static s16 sBossCardValue;
 

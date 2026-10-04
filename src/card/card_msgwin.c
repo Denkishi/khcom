@@ -19,7 +19,6 @@
 #include "text_types.h"
 #include "taskpool.h"
 #include "key.h"
-#include "gba/syscall.h"
 #include "card.h"
 #include "sprites_deck_menu.h"
 #include "sprites_evt.h"

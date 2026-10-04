@@ -23,6 +23,7 @@
 #include "deck_equip_suffix.inc"
 #include <stddef.h>
 #include "card_deckmenu2.h"
+#include "ui_text.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;

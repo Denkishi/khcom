@@ -15,7 +15,6 @@
 #include "card.h"
 #include "game.h"
 #include "obj_api.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "anim.h"
 #include "sprites_card_pictures.h"

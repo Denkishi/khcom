@@ -8,7 +8,6 @@
 #include "game_state.h"
 #include "display.h"
 #include "taskpool.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
 #include "map_tile_animations.h"

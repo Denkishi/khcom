@@ -20,6 +20,9 @@
 #include "m4a_song.h"
 #include "types.h"
 #include <stddef.h>
+#include "btl.h"
+#include "btl_effect.h"
+#include "hum.h"
 
 static const BgAnimationChunk sBgAnimationChunks[108] = {
     { gUnk_08CEFCE4, 29696, 0 },

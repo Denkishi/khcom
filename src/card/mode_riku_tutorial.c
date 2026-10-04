@@ -21,6 +21,8 @@
 #include "types.h"
 #include <stddef.h>
 #include "mode_riku_tutorial.h"
+#include "battle.h"
+#include "btl.h"
 
 static TaskPool sRikuTutorialTasks;
 

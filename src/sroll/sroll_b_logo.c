@@ -7,7 +7,6 @@
 #include "sprites_staff_roll.h"
 #include "fade.h"
 #include "anim.h"
-#include "obj.h"
 #include "obj_api.h"
 #include <stddef.h>
 #include "taskpool.h"

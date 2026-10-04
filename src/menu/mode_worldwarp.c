@@ -13,7 +13,6 @@
 #include "mode_worldwarp.h"
 #include "sprites_worldinspect.h"
 #include "world_types.h"
-#include "gba/io_reg.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"

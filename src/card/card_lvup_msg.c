@@ -11,7 +11,6 @@
 #include "fade.h"
 #include "obj_api.h"
 #include "engine_math.h"
-#include "obj.h"
 #include "taskpool.h"
 #include "card.h"
 #include "sprites_card.h"

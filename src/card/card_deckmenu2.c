@@ -23,7 +23,6 @@
 #include "text_types.h"
 #include "taskpool.h"
 #include "key.h"
-#include "gba/syscall.h"
 #include "malloc.h"
 #include "card.h"
 #include "sprites_card.h"
@@ -47,6 +46,7 @@
 #include "card_deckmenu2.h"
 #include "ms_charge.h"
 #include "card_map_anim.h"
+#include "ui_text.h"
 
 const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),

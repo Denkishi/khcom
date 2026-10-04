@@ -25,6 +25,7 @@
 #include "text.h"
 #include "text_types.h"
 #include "types.h"
+#include "obj.h"
 
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)

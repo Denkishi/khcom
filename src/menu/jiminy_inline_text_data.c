@@ -3,7 +3,6 @@
  * EU Localized World Names
  */
 
-#include "localized_names.h"
 #include "jiminy_types.h"
 
 #ifdef VERSION_EU

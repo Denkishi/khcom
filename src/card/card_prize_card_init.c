@@ -20,7 +20,6 @@
 #include "anim.h"
 #include "obj.h"
 #include "taskpool.h"
-#include "gba/syscall.h"
 #include "card.h"
 #include "card_reload_assets.h"
 #include "sprites_btl.h"
@@ -45,6 +44,7 @@
 #include <stddef.h>
 #include "lockon.h"
 #include "card_prize_card_init.h"
+#include "battle.h"
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 

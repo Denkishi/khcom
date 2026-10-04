@@ -40,6 +40,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "hum_common.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);

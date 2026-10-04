@@ -29,7 +29,6 @@ mode_vsbattle.c
 formation_data.c
 emy_common.c
 hum_common.c
-btl_actor.c
 player_progression.c
 field_transition.c
 btl_vs.c

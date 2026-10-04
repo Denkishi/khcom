@@ -49,12 +49,5 @@ void DropGimmickCard(u8 a, s32 x, s32 y, s32 z);
 void SetGimmickTarget(s32 a, s32 b, s32 c);
 void SetEnemyHpFromStats(BtlObj* a, s32 b, s32 c);
 void SetEnemyJiminyFlag(BtlObj* p);
-void HumDraw(struct HumWork* work);
-void HumFaceTarget(struct HumWork* p, u16 n);
-u8 HumMoveToward(struct HumWork* p, s32 x, s32 y, s32 spd);
-u8 HumIsNearAreaEdge(struct HumWork* p, u16 b);
-u8 HumIsInPlayerReach(struct HumWork* p, s16 a, u16 b, u16 r);
-u8 HumChooseCardAction(struct HumWork* work, u16 interval, u16 offset, u16 width, u16 depth);
-s32 HumResolveCardMove(struct HumWork* work);
 
 #endif

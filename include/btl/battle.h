@@ -131,10 +131,6 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b);
 s64 __ashldi3(s64 v, s32 n);
 u8 GetStockMoveCount();
 
-void HumDrawSub(struct HumWork* p, struct HumSub* s);
-void HandleRikuAiCardInput();
-u8 HumIsTargetInReach(struct HumWork* p, s16 a, u16 b, u16 r);
-
 const EnemyBaseStats* GetEnemyBaseStats(u16 i);
 s32 ResolveAttackHit(BtlObj* a, s32 b);
 
@@ -144,9 +140,6 @@ u8 GetRikuCardsLeft();
 u8 GetActiveCardValue();
 void func_080838E8();
 void RequestBossCardClose();
-#ifdef VERSION_EU
-void HandleRikuTutorialCardInput();
-#endif
 extern Mode gModeChkbtl;
 
 extern u8 gUnk_08935BC2[];

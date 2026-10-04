@@ -214,10 +214,10 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
 
     switch (work->step) {
     case 0:
-        LoadBgTiles(3, gUnk_09402F78, 0x2000);
+        LoadBgTiles(3, gDeckMenuTiles, 0x2000);
         break;
     case 1:
-        RequestDma3Copy(&gUnk_09402F78[0x2000],
+        RequestDma3Copy(&gDeckMenuTiles[0x2000],
                         (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
         break;
     case 2:
@@ -269,13 +269,13 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* a) {
 
     switch (work->step) {
     case 1:
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
         break;
     case 2:
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
         break;
     case 3:
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         break;
     case 4:
         DrawDeckCategoryCount(work->deckAttackCount, 0);
@@ -1263,9 +1263,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[9], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[10], pal, 32);
-        LoadBgMap(0, gUnk_09519AB8 + 0xC0, 0x180);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap + 0xC0, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, (u16)-76, (u16)-14);
         SetBgScroll(1, (u16)-88, (u16)-64);
         SetBgScroll(2, (u16)-88, (u16)-112);
@@ -1283,9 +1283,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[10], pal, 32);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
-        LoadBgMap(1, gUnk_0951A2B8 + 0xC0, 0x180);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
+        LoadBgMap(1, gDeck2PanelMap + 0xC0, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-76, (u16)-62);
         SetBgScroll(2, (u16)-88, (u16)-112);
@@ -1303,9 +1303,9 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[9], pal, 32);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
-        LoadBgMap(2, gUnk_0951AAB8 + 0xC0, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
+        LoadBgMap(2, gDeck3PanelMap + 0xC0, 0x180);
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-88, (u16)-64);
         SetBgScroll(2, (u16)-76, (u16)-110);
@@ -1361,19 +1361,19 @@ void DrawDeckExchangeEquipMarker(u8 mode) {
 
     switch (mode) {
     case 0:
-        RequestDma3Copy(gUnk_0940FC58, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
         break;
     case 1:
-        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
         break;
     case 2:
-        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg2 + 0x1A0, 0x1E0);
         break;
     }
 }

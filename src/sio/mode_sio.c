@@ -2059,20 +2059,20 @@ void SioBtlOptionDrawStats() {
     digits[1] = a / 10;
     a %= 10;
     digits[2] = a;
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 8 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 9 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 8 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 9 * TILE_SIZE_4BPP), 32);
 
     digits[0] = c / 100;
     c %= 100;
     digits[1] = c / 10;
     c %= 10;
     digits[2] = c;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 10 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 11 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 12 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 10 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 11 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 12 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
 
     digits[0] = e / 1000;
     e %= 1000;
@@ -2081,10 +2081,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = e / 10;
     e %= 10;
     digits[3] = e;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)(BG_VRAM + 19 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[3] * 32, (void*)(BG_VRAM + 19 * TILE_SIZE_4BPP), 32);
 
     digits[0] = g / 1000;
     g %= 1000;
@@ -2093,30 +2093,30 @@ void SioBtlOptionDrawStats() {
     digits[2] = g / 10;
     g %= 10;
     digits[3] = g;
-    RequestDma3Copy(gUnk_096B2124 + digits[0] * 32, (void*)(BG_VRAM + 20 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[1] * 32, (void*)(BG_VRAM + 21 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[2] * 32, (void*)(BG_VRAM + 22 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + digits[3] * 32, (void*)(BG_VRAM + 23 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[0] * 32, (void*)(BG_VRAM + 20 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[1] * 32, (void*)(BG_VRAM + 21 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[2] * 32, (void*)(BG_VRAM + 22 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + digits[3] * 32, (void*)(BG_VRAM + 23 * TILE_SIZE_4BPP), 32);
 
     digits[0] = b / 100;
     b %= 100;
     digits[1] = b / 10;
     b %= 10;
     digits[2] = b;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 31 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 32 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 31 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 32 * TILE_SIZE_4BPP), 32);
 
     digits[0] = d / 100;
     d %= 100;
     digits[1] = d / 10;
     d %= 10;
     digits[2] = d;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 33 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 34 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 35 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 36 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 37 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 38 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 33 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 34 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 35 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 36 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 37 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 38 * TILE_SIZE_4BPP), 32);
 
     digits[0] = f / 1000;
     f %= 1000;
@@ -2125,10 +2125,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = f / 10;
     f %= 10;
     digits[3] = f;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 39 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 40 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 41 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 42 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 39 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 40 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 41 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 42 * TILE_SIZE_4BPP), 32);
 
     digits[0] = h / 1000;
     h %= 1000;
@@ -2137,10 +2137,10 @@ void SioBtlOptionDrawStats() {
     digits[2] = h / 10;
     h %= 10;
     digits[3] = h;
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 43 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 44 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 45 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(gUnk_096B2124 + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 46 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[0] * 32, (void*)(BG_VRAM + 43 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[1] * 32, (void*)(BG_VRAM + 44 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[2] * 32, (void*)(BG_VRAM + 45 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(gSioBtlOptionDigitTiles + 0x400 + digits[3] * 32, (void*)(BG_VRAM + 46 * TILE_SIZE_4BPP), 32);
 }
 
 void SioApplyBattleSettings() {

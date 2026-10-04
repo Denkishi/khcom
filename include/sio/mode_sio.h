@@ -264,7 +264,6 @@ extern u8 gUnk_0815B3FA[];
 extern u8 gUnk_0815A23C[];
 extern u8 gUnk_0815B3D4[];
 extern u8 gUnk_0815A394[];
-extern u8 gUnk_096B2524[];
 extern Mode gModeDeckExchange;
 
 void mode_sio_btl_connect_0(s32 arg);

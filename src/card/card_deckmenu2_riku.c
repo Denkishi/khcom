@@ -181,7 +181,7 @@ void LoadRikuCardDescriptionText(RikuDeckMenuWork* work, u16 card) {
 
 u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
-    LoadBgTiles(3, gUnk_09402F78, 0x5400);
+    LoadBgTiles(3, gDeckMenuTiles, 0x5400);
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
@@ -204,7 +204,7 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
 #else
-    LoadBgTiles(3, gUnk_09402F78, 0x4000);
+    LoadBgTiles(3, gDeckMenuTiles, 0x4000);
     LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     LoadBgMap(0, gUnk_08125E24, 0x800);
@@ -226,9 +226,9 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
     pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
     LoadPalette(gUnk_096142F8, pal, 32);
 #ifdef VERSION_EU
-    RequestDma3Copy(gRikuDeckEquipMarkerTiles[gLanguage] + 0x20, base + 0x2D80, 0x1E0);
+    RequestDma3Copy(gRikuDeckEquipMarkerTilesByLanguage[gLanguage] + 0x20, base + 0x2D80, 0x1E0);
 #else
-    RequestDma3Copy(gUnk_0940FC58, base + 0x1A0, 0x1E0);
+    RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base + 0x1A0, 0x1E0);
 #endif
     LoadBgMap(0, gUnk_095172B8, 0x800);
     LoadBgMap(1, gRikuDeckPanelMap, 0x800);
@@ -1060,7 +1060,7 @@ void** gRikuDeckTitleBannerSprites[5] = {
     gUnkEu_09F77108,
 };
 
-u8* gRikuDeckEquipMarkerTiles[5] = { gUnkEu_094EAD64, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
+u8* gRikuDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
 #endif
 
 TaskDesc gTaskDescDeckmenu2Riku = {

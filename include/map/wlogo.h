@@ -384,7 +384,6 @@ typedef struct WlogoMonsWork {
 
 extern s32 gWlogoTtSkew;
 extern const WlogoPooObjStep gWlogoPooObjSteps[5][5];
-extern u8 gUnk_096FB084[];
 
 void task_wlogo_hwt_0(WlogoHwtWork* work);
 u8 task_wlogo_hwt_1(WlogoHwtWork* work);

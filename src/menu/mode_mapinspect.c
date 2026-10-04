@@ -1129,30 +1129,30 @@ void mode_mapinspect_0() {
     sMapInspectValueRow = 0;
     LoadBgPalette(0, gUnk_09A3D0DC, 0x160);
 #ifdef VERSION_EU
-    LoadBgTiles(0, gUnk_09A03CFC, 0x2C00);
+    LoadBgTiles(0, gMapInspectTiles, 0x2C00);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         break;
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gUnkEu_09A3D400, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
-        RequestDma3Copy(gUnkEu_09A3D400 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
+        RequestDma3Copy(gMapInspectFrTiles, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
+        RequestDma3Copy(gMapInspectFrTiles + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy(gUnkEu_09A41000, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
-        RequestDma3Copy(gUnkEu_09A41000 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
+        RequestDma3Copy(gMapInspectDeTiles, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
+        RequestDma3Copy(gMapInspectDeTiles + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gUnkEu_09A3FC00, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
-        RequestDma3Copy(gUnkEu_09A3FC00 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
+        RequestDma3Copy(gMapInspectItTiles, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
+        RequestDma3Copy(gMapInspectItTiles + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gUnkEu_09A3E800, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
-        RequestDma3Copy(gUnkEu_09A3E800 + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
+        RequestDma3Copy(gMapInspectEsTiles, (u8*)GetBgCharBase(0) + 0x800, 0xC00);
+        RequestDma3Copy(gMapInspectEsTiles + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
     }
 #else
-    LoadBgTiles(0, gUnk_09A03CFC, 0x2980);
+    LoadBgTiles(0, gMapInspectTiles, 0x2980);
 #endif
     LoadBgPalette(2, gCard00Palette, 0x20);
     LoadBgTiles(2, gConfirmWinTiles, 0x140);

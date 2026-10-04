@@ -1426,15 +1426,15 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
 
     switch (work->step) {
     case 0:
-        LoadBgTiles(3, gUnk_09402F78, 0x2000);
+        LoadBgTiles(3, gDeckMenuTiles, 0x2000);
         LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
         break;
     case 1:
 #ifdef VERSION_EU
-        RequestDma3Copy(&gUnk_09402F78[0x2000],
+        RequestDma3Copy(&gDeckMenuTiles[0x2000],
                         (u8*)GetBgCharBase(3) + 0x2000, 0x1800);
 #else
-        RequestDma3Copy(&gUnk_09402F78[0x2000],
+        RequestDma3Copy(&gDeckMenuTiles[0x2000],
                         (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
 #endif
         break;
@@ -1509,9 +1509,9 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
 
     switch (work->step) {
     case 0:
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         work->step++;
         break;
     case 1:
@@ -3084,7 +3084,7 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
         LoadBgMap(1, gUnk_095182B8, 0x800);
         LoadBgMap(2, gUnk_09514AB8, 0x800);
         SetBgScroll(0, 0, 0xFFF0);
@@ -3107,7 +3107,7 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gUnk_095182B8, 0x800);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
         LoadBgMap(2, gUnk_09514AB8, 0x800);
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0xFFF0);
@@ -3130,7 +3130,7 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gUnk_095182B8, 0x800);
         LoadBgMap(1, gUnk_09514AB8, 0x800);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0);
         SetBgScroll(2, 0, 0xFFF0);
@@ -3482,7 +3482,7 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
         LoadBgMap(1, gUnk_095172B8, 0x800);
         LoadBgMap(2, gUnk_09517AB8, 0x800);
         SetBgScroll(0, (u16)-88, (u16)-16);
@@ -3505,7 +3505,7 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gUnk_095172B8, 0x800);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
         LoadBgMap(2, gUnk_09517AB8, 0x800);
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-88, (u16)-16);
@@ -3528,7 +3528,7 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gUnk_095172B8, 0x800);
         LoadBgMap(1, gUnk_09517AB8, 0x800);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-140, (u16)-96);
         SetBgScroll(2, (u16)-88, (u16)-16);
@@ -4834,9 +4834,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[9], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[10], dst, 32);
-        LoadBgMap(0, &gUnk_09519AB8[0xC0], 0x180);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(0, &gDeck1PanelMap[0xC0], 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, 0xFFB4, 0xFFF2);
         SetBgScroll(1, 0xFFA8, 0xFFC0);
         SetBgScroll(2, 0xFFA8, 0xFF90);
@@ -4854,9 +4854,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[10], dst, 32);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
-        LoadBgMap(1, &gUnk_0951A2B8[0xC0], 0x180);
-        LoadBgMap(2, gUnk_0951AAB8, 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
+        LoadBgMap(1, &gDeck2PanelMap[0xC0], 0x180);
+        LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, 0xFFA8, 0xFFF0);
         SetBgScroll(1, 0xFFB4, 0xFFC2);
         SetBgScroll(2, 0xFFA8, 0xFF90);
@@ -4874,9 +4874,9 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[9], dst, 32);
-        LoadBgMap(0, gUnk_09519AB8, 0x180);
-        LoadBgMap(1, gUnk_0951A2B8, 0x180);
-        LoadBgMap(2, &gUnk_0951AAB8[0xC0], 0x180);
+        LoadBgMap(0, gDeck1PanelMap, 0x180);
+        LoadBgMap(1, gDeck2PanelMap, 0x180);
+        LoadBgMap(2, &gDeck3PanelMap[0xC0], 0x180);
         SetBgScroll(0, 0xFFA8, 0xFFF0);
         SetBgScroll(1, 0xFFA8, 0xFFC0);
         SetBgScroll(2, 0xFFB4, 0xFF92);
@@ -4943,7 +4943,7 @@ void DrawDeckEquipMarker(u8 mode) {
     bg0 = (u8*)GetBgCharBase(0) + 0x2D80;
     bg1 = (u8*)GetBgCharBase(1) + 0x30E0;
     bg2 = (u8*)GetBgCharBase(2) + 0x3440;
-    src = gDeckEquipMarkerTiles[gLanguage];
+    src = gDeckEquipMarkerTilesByLanguage[gLanguage];
 
     switch (mode) {
     case 0:
@@ -4973,19 +4973,19 @@ void DrawDeckEquipMarker(u8 mode) {
 
     switch (mode) {
     case 0:
-        RequestDma3Copy(gUnk_0940FC58, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_0940FC58 + 0x400, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
         break;
     case 1:
-        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
         break;
     case 2:
-        RequestDma3Copy(gUnk_09410058, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gUnk_09410058 - 0x400, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg2 + 0x1A0, 0x1E0);
         break;
     }
 #endif
@@ -7504,7 +7504,7 @@ void** gDeckTitleBannerSprites[5] = {
     gUnkEu_09F770E8,
 };
 
-u8* gDeckEquipMarkerTiles[5] = { gUnkEu_094EAD64, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
+u8* gDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
 #endif
 
 TaskDesc gTaskDescDeckmenu2 = {

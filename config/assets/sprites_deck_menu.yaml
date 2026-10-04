@@ -884,7 +884,7 @@ entries:
   eu:
     address: 0x091964DC
     size: 3502
-- name: gUnk_09402F78
+- name: gDeckMenuTiles
   format: tiles4
   width: 32
   us:
@@ -978,33 +978,31 @@ entries:
   format: tiles4
   us:
     address: 0x0940FAD8
-    size: 384
+    size: 352
   jp:
     address: 0x093CADF4
-    size: 384
+    size: 352
   eu:
     address: 0x094EAC04
     size: 352
-- name: gUnk_0940FC58
+- name: gDeckEquipMarkerTiles
   format: tiles4
-  width: 32
+  width: 2
   us:
-    address: 0x0940FC58
-    size: 1024
+    address: 0x0940FC38
+    size: 1856
   jp:
-    address: 0x093CAF74
-    size: 1024
+    address: 0x093CAF54
+    size: 1856
   eu:
-    address: 0x094EAD84
-    size: 1024
-- name: gUnk_09410058
+    address: 0x094EAD64
+    size: 1856
+- name: gUnk_09410378
   format: tiles4
+  width: 2
   us:
-    address: 0x09410058
-    size: 29472
-  jp:
-    address: 0x093CB374
-    size: 800
+    address: 0x09410378
+    size: 28672
 - name: gUnk_09417438
   format: tiles4
   width: 32
@@ -1197,7 +1195,7 @@ entries:
   eu:
     address: 0x09537324
     size: 2048
-- name: gUnk_09519AB8
+- name: gDeck1PanelMap
   format: tilemap
   us:
     address: 0x09519AB8
@@ -1208,7 +1206,7 @@ entries:
   eu:
     address: 0x09538324
     size: 2048
-- name: gUnk_0951A2B8
+- name: gDeck2PanelMap
   format: tilemap
   us:
     address: 0x0951A2B8
@@ -1219,7 +1217,7 @@ entries:
   eu:
     address: 0x09538B24
     size: 2048
-- name: gUnk_0951AAB8
+- name: gDeck3PanelMap
   format: tilemap
   us:
     address: 0x0951AAB8
@@ -1322,18 +1320,6 @@ entries:
   eu:
     address: 0x094EA2E4
     size: 1536
-- name: gUnkEu_094EAD64
-  format: tiles4
-  width: 1
-  eu:
-    address: 0x094EAD64
-    size: 32
-- name: gUnkEu_094EB184
-  format: tiles4
-  width: 25
-  eu:
-    address: 0x094EB184
-    size: 800
 - name: gUnkJp_093D1694
   format: tiles4
   width: 32

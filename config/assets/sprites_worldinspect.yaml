@@ -4581,7 +4581,7 @@ entries:
   eu:
     address: 0x09A2BE40
     size: 3584
-- name: gUnk_09A03CFC
+- name: gMapInspectTiles
   format: tiles4
   width: 4
   us:
@@ -5214,25 +5214,25 @@ entries:
   eu:
     address: 0x09A39A00
     size: 14848
-- name: gUnkEu_09A3D400
+- name: gMapInspectFrTiles
   format: tiles4
   width: 32
   eu:
     address: 0x09A3D400
     size: 5120
-- name: gUnkEu_09A3E800
+- name: gMapInspectEsTiles
   format: tiles4
   width: 32
   eu:
     address: 0x09A3E800
     size: 5120
-- name: gUnkEu_09A3FC00
+- name: gMapInspectItTiles
   format: tiles4
   width: 32
   eu:
     address: 0x09A3FC00
     size: 5120
-- name: gUnkEu_09A41000
+- name: gMapInspectDeTiles
   format: tiles4
   width: 32
   eu:

@@ -91,7 +91,7 @@ entries:
   eu:
     address: 0x0967C18C
     size: 2528
-- name: gUnk_096B2124
+- name: gSioBtlOptionDigitTiles
   format: tiles4
   width: 2
   us:

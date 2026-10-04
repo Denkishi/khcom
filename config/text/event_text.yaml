@@ -3861,15 +3861,15 @@ fragments:
     start: 0x09EE3844
     end: 0x09EE3C9E
     entries:
-    - gUnk_09EE3844
-    - gUnk_09EE38A8
-    - gUnk_09EE3942
-    - gUnk_09EE39B0
-    - gUnk_09EE3A58
-    - gUnk_09EE3AAE
-    - gUnk_09EE3B56
-    - gUnk_09EE3BDE
-    - gUnk_09EE3C5C
+    - gEvent022Text04
+    - gEvent022Text05
+    - gEvent022Text06
+    - gEvent022Text07
+    - gEvent022Text08
+    - gEvent022Text09
+    - gEvent022Text10
+    - gEvent022Text11
+    - gEvent022Text12
   jp:
   - name: event_074_text.inc
     format: jp

@@ -2678,9 +2678,9 @@ void task_bos_lst_2(BosLstWork* work) {
         DmaCopy16(3, src, work->bgMap, 0x280);
 
         if (work->facing > 0) {
-            DmaCopy16(3, src + 160, work->unk_B24, 0x1C);
+            DmaCopy16(3, src + 160, work->bgMapRow10, 0x1C);
         } else {
-            DmaCopy16(3, src + 169, work->unk_B48, 0x1C);
+            DmaCopy16(3, src + 169, work->bgMapRow10Col18, 0x1C);
         }
 
         if (sy < 0) {

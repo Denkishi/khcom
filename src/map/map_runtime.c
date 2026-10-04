@@ -1123,7 +1123,7 @@ u8 GetFldPosClimbDir(FldPos* p) {
     return 0;
 }
 
-s32 func_080DFE7C(s32 x, s32 y, s32 z) {
+s32 FieldFloorAt(s32 x, s32 y, s32 z) {
     MapCell* p;
     s32 r;
 

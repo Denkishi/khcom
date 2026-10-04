@@ -4076,7 +4076,7 @@ void MapPrizeCollect(MapPrizeWork* work) {
     work->x += (x - work->x) >> 2;
     work->y += (y - work->y) >> 2;
     work->z += (z - work->z) >> 2;
-    work->ground = func_080DFE7C(work->x, work->y, work->z);
+    work->ground = FieldFloorAt(work->x, work->y, work->z);
     work->scale -= 2;
 
     if (work->timer > 60) {

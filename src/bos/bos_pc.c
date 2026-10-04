@@ -32,119 +32,119 @@
 #include "bos_pc.h"
 
 static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
-    gUnk_09A42BD8,
-    gUnk_09A410FC,
-    gUnk_09A41360,
-    gUnk_09A415A0,
-    gUnk_09A417BC,
-    gUnk_09A419D8,
-    gUnk_09A41BD0,
-    gUnk_09A41DA4,
-    gUnk_09A41F78,
-    gUnk_09A4214C,
-    gUnk_09A42344,
-    gUnk_09A4253C,
-    gUnk_09A42734,
-    gUnk_09A42974,
-    gUnk_09A40E98,
-    gUnk_09A3DF34,
-    gUnk_09A3E198,
-    gUnk_09A3E3FC,
-    gUnk_09A3E660,
-    gUnk_09A3E8C4,
-    gUnk_09A3EB04,
-    gUnk_09A3ED44,
-    gUnk_09A3EF84,
-    gUnk_09A3F1C4,
-    gUnk_09A3F3E0,
-    gUnk_09A3F5D8,
-    gUnk_09A3F7F4,
-    gUnk_09A3F9EC,
-    gUnk_09A3FC2C,
-    gUnk_09A3FE90,
-    gUnk_09A400F4,
-    gUnk_09A40358,
-    gUnk_09A405BC,
-    gUnk_09A40820,
-    gUnk_09A409F4,
-    gUnk_09A40B80,
-    gUnk_09A40D0C,
-    gUnk_09A42E3C,
-    gUnk_09A430A0,
-    gUnk_09A432BC,
-    gUnk_09A434B4,
-    gUnk_09A43718,
-    gUnk_09A4397C,
-    gUnk_09A43BE0,
-    gUnk_09A44BA0,
-    gUnk_09A43FAC,
-    gUnk_09A44210,
-    gUnk_09A44474,
-    gUnk_09A446D8,
-    gUnk_09A4493C,
-    gUnk_09A43D48,
-    gUnk_09A44E04,
-    gUnk_09A45044,
-    gUnk_09A451F4,
-    gUnk_09A453C8,
-    gUnk_09A455C0,
-    gUnk_09A457DC,
-    gUnk_09A459B0,
-    gUnk_09A45B84,
-    gUnk_09A45D34,
-    gUnk_09A45F50,
-    gUnk_09A46124,
-    gUnk_09A462F8,
-    gUnk_09A4655C,
-    gUnk_09A467C0,
-    gUnk_09A46994,
-    gUnk_09A46B8C,
-    gUnk_09A46DA8,
-    gUnk_09A46FC4,
-    gUnk_09A47204,
-    gUnk_09A47444,
-    gUnk_09A47684,
-    gUnk_09A478C4,
-    gUnk_09A47AE0,
-    gUnk_09A47D20,
-    gUnk_09A47F84,
-    gUnk_09A480EC,
-    gUnk_09A48308,
-    gUnk_09A48500,
-    gUnk_09A48764,
-    gUnk_09A489C8,
-    gUnk_09A48C2C,
-    gUnk_09A48E90,
-    gUnk_09A48FF8,
-    gUnk_09A49214,
-    gUnk_09A4940C,
-    gUnk_09A49670,
-    gUnk_09A498D4,
-    gUnk_09A49B38,
-    gUnk_09A49D9C,
-    gUnk_09A4A000,
-    gUnk_09A4A264,
-    gUnk_09A4A4C8,
-    gUnk_09A4A708,
-    gUnk_09A4A924,
-    gUnk_09A4AAD4,
+    gBosPcUnusedSlamFrame0,
+    gBosPcUnusedSlamFrame1,
+    gBosPcUnusedSlamFrame2,
+    gBosPcUnusedSlamFrame3,
+    gBosPcUnusedSlamFrame4,
+    gBosPcUnusedSlamFrame5,
+    gBosPcUnusedSlamFrame6,
+    gBosPcUnusedSlamFrame7,
+    gBosPcUnusedSlamFrame8,
+    gBosPcUnusedSlamFrame9,
+    gBosPcUnusedSlamFrame10,
+    gBosPcUnusedSlamFrame11,
+    gBosPcUnusedSlamFrame12,
+    gBosPcUnusedSlamFrame13,
+    gBosPcUnusedSlamFrame14,
+    gBosPcIdleFrame0,
+    gBosPcIdleFrame1,
+    gBosPcIdleFrame2,
+    gBosPcIdleFrame3,
+    gBosPcIdleFrame4,
+    gBosPcIdleFrame5,
+    gBosPcIdleFrame6,
+    gBosPcIdleFrame7,
+    gBosPcIdleFrame8,
+    gBosPcIdleFrame9,
+    gBosPcIdleFrame10,
+    gBosPcIdleFrame11,
+    gBosPcIdleFrame12,
+    gBosPcIdleFrame13,
+    gBosPcIdleFrame14,
+    gBosPcReactionFrame0,
+    gBosPcReactionFrame1,
+    gBosPcReactionFrame2,
+    gBosPcReactionFrame3,
+    gBosPcReactionFrame4,
+    gBosPcReactionFrame5,
+    gBosPcReactionFrame6,
+    gBosPcSlamBackFrame0,
+    gBosPcSlamBackFrame1,
+    gBosPcSlamBackFrame2,
+    gBosPcSlamBackFrame3,
+    gBosPcSlamBackFrame4,
+    gBosPcSlamBackFrame5,
+    gBosPcSlamBackFrame6,
+    gBosPcGimmickSlamFrame0,
+    gBosPcGimmickSlamFrame1,
+    gBosPcGimmickSlamFrame2,
+    gBosPcGimmickSlamFrame3,
+    gBosPcGimmickSlamFrame4,
+    gBosPcGimmickSlamFrame5,
+    gBosPcGimmickSlamFrame6,
+    gBosPcBeamFrame0,
+    gBosPcBeamFrame1,
+    gBosPcBeamFrame2,
+    gBosPcBeamFrame3,
+    gBosPcBeamFrame4,
+    gBosPcBeamFrame5,
+    gBosPcBeamFrame6,
+    gBosPcBeamFrame7,
+    gBosPcBeamFrame8,
+    gBosPcBeamFrame9,
+    gBosPcBeamFrame10,
+    gBosPcBeamFrame11,
+    gBosPcTackleFrame0,
+    gBosPcTackleFrame1,
+    gBosPcTackleFrame2,
+    gBosPcTackleFrame3,
+    gBosPcTackleFrame4,
+    gBosPcTackleFrame5,
+    gBosPcTackleFrame6,
+    gBosPcTackleFrame7,
+    gBosPcTackleFrame8,
+    gBosPcTackleFrame9,
+    gBosPcTackleFrame10,
+    gBosPcTackleFrame11,
+    gBosPcSlamMidFrame0,
+    gBosPcSlamMidFrame1,
+    gBosPcSlamMidFrame2,
+    gBosPcSlamMidFrame3,
+    gBosPcSlamMidFrame4,
+    gBosPcSlamMidFrame5,
+    gBosPcSlamMidFrame6,
+    gBosPcSlamFrontFrame0,
+    gBosPcSlamFrontFrame1,
+    gBosPcSlamFrontFrame2,
+    gBosPcSlamFrontFrame3,
+    gBosPcSlamFrontFrame4,
+    gBosPcSlamFrontFrame5,
+    gBosPcSlamFrontFrame6,
+    gBosPcDefeatFrame0,
+    gBosPcDefeatFrame1,
+    gBosPcDefeatFrame2,
+    gBosPcDefeatFrame3,
+    gBosPcDefeatFrame4,
+    gBosPcDefeatFrame5,
+    gBosPcDefeatFrame6,
 };
 
 static const PcAnimStep* sBosPcAnims[14] = {
     gBosPcIdleAnim,
-    gUnk_09A4B174,
-    gUnk_09A4B3B4,
-    gUnk_09A4B5F4,
-    gUnk_09A4B834,
-    gUnk_09A4BBDC,
-    gUnk_09A4BD20,
-    gUnk_09A4BEAC,
-    gUnk_09A4C278,
-    gUnk_09A4C470,
-    gUnk_09A4C5B4,
+    gBosPcReactionShortAnim,
+    gBosPcReactionMidAnim,
+    gBosPcReactionLongAnim,
+    gBosPcUnusedSlamAnim,
+    gBosPcSlamBackAnim,
+    gBosPcGimmickSlamAnim,
+    gBosPcBeamAnim,
+    gBosPcTackleAnim,
+    gBosPcSlamMidAnim,
+    gBosPcSlamFrontAnim,
     gBosPcDefeatAnim,
-    gUnk_09A4C818,
-    gUnk_09A4C860,
+    gBosPcEventPoseAnim,
+    gBosPcEventAnim,
 };
 
 static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
@@ -154,7 +154,7 @@ static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
     { gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74, gUnk_09D33274, gUnk_09D33A74 + 0x400, gUnk_09D33A74 + 0x400 }
 };
 
-const PcSpriteCmd gUnk_09A3DF34[51] = {
+const PcSpriteCmd gBosPcIdleFrame0[51] = {
     { 1, 0, 8, -40, -57, 49, 0 },
     { 1, 13, 16, 29, 17, 35, 0 },
     { 0, 14, 16, 26, 10, 42, 0 },
@@ -208,7 +208,7 @@ const PcSpriteCmd gUnk_09A3DF34[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3E198[51] = {
+const PcSpriteCmd gBosPcIdleFrame1[51] = {
     { 1, 0, 8, -42, -46, 38, 0 },
     { 1, 11, 16, 24, 14, 38, 0 },
     { 0, 14, 16, 26, 9, 43, 0 },
@@ -262,7 +262,7 @@ const PcSpriteCmd gUnk_09A3E198[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3E3FC[51] = {
+const PcSpriteCmd gBosPcIdleFrame2[51] = {
     { 1, 14, 8, -49, -42, 34, 0 },
     { 1, 9, 16, 22, 1, 51, 0 },
     { 0, 4, 16, 27, -3, 55, 0 },
@@ -316,7 +316,7 @@ const PcSpriteCmd gUnk_09A3E3FC[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3E660[51] = {
+const PcSpriteCmd gBosPcIdleFrame3[51] = {
     { 1, 11, 8, -63, -42, 34, 0 },
     { 1, 8, 16, 33, -6, 58, 0 },
     { 0, 4, 16, 39, -8, 60, 0 },
@@ -370,7 +370,7 @@ const PcSpriteCmd gUnk_09A3E660[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3E8C4[48] = {
+const PcSpriteCmd gBosPcIdleFrame4[48] = {
     { 1, 9, 8, -68, -64, 56, 0 },
     { 1, 7, 16, 45, -5, 57, 0 },
     { 0, 9, 16, 49, -4, 56, 0 },
@@ -421,7 +421,7 @@ const PcSpriteCmd gUnk_09A3E8C4[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3EB04[48] = {
+const PcSpriteCmd gBosPcIdleFrame5[48] = {
     { 1, 7, 8, -60, -71, 63, 0 },
     { 1, 10, 16, 50, 8, 44, 0 },
     { 0, 14, 16, 52, 2, 50, 0 },
@@ -472,7 +472,7 @@ const PcSpriteCmd gUnk_09A3EB04[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3ED44[48] = {
+const PcSpriteCmd gBosPcIdleFrame6[48] = {
     { 1, 6, 8, -53, -69, 61, 0 },
     { 1, 11, 16, 61, 11, 41, 0 },
     { 0, 19, 16, 61, 3, 65, 0 },
@@ -523,7 +523,7 @@ const PcSpriteCmd gUnk_09A3ED44[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3EF84[48] = {
+const PcSpriteCmd gBosPcIdleFrame7[48] = {
     { 1, 6, 8, -42, -62, 54, 0 },
     { 1, 14, 16, 68, 4, 48, 0 },
     { 0, 24, 16, 63, 0, 52, 0 },
@@ -574,7 +574,7 @@ const PcSpriteCmd gUnk_09A3EF84[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3F1C4[45] = {
+const PcSpriteCmd gBosPcIdleFrame8[45] = {
     { 1, 7, 8, -41, -50, 42, 0 },
     { 1, 13, 16, 62, 3, 49, 0 },
     { 0, 34, 16, 59, -3, 55, 0 },
@@ -622,7 +622,7 @@ const PcSpriteCmd gUnk_09A3F1C4[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3F3E0[42] = {
+const PcSpriteCmd gBosPcIdleFrame9[42] = {
     { 1, 8, 8, -42, -42, 34, 0 },
     { 1, 12, 16, 56, 5, 47, 0 },
     { 0, 24, 16, 54, 0, 52, 0 },
@@ -667,7 +667,7 @@ const PcSpriteCmd gUnk_09A3F3E0[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3F5D8[45] = {
+const PcSpriteCmd gBosPcIdleFrame10[45] = {
     { 1, 9, 8, -45, -37, 29, 0 },
     { 1, 13, 16, 61, 0, 52, 0 },
     { 0, 34, 16, 59, -5, 57, 0 },
@@ -715,7 +715,7 @@ const PcSpriteCmd gUnk_09A3F5D8[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3F7F4[42] = {
+const PcSpriteCmd gBosPcIdleFrame11[42] = {
     { 1, 10, 8, -39, -40, 32, 0 },
     { 1, 14, 16, 62, -9, 61, 0 },
     { 0, 34, 16, 57, -12, 64, 0 },
@@ -760,7 +760,7 @@ const PcSpriteCmd gUnk_09A3F7F4[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3F9EC[48] = {
+const PcSpriteCmd gBosPcIdleFrame12[48] = {
     { 1, 11, 8, -39, -40, 32, 0 },
     { 1, 1, 16, 63, -14, 66, 0 },
     { 0, 29, 16, 59, -12, 64, 0 },
@@ -811,7 +811,7 @@ const PcSpriteCmd gUnk_09A3F9EC[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3FC2C[51] = {
+const PcSpriteCmd gBosPcIdleFrame13[51] = {
     { 1, 12, 8, -39, -46, 38, 0 },
     { 1, 1, 16, 61, -6, 58, 0 },
     { 0, 24, 16, 58, -5, 57, 0 },
@@ -865,7 +865,7 @@ const PcSpriteCmd gUnk_09A3FC2C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A3FE90[51] = {
+const PcSpriteCmd gBosPcIdleFrame14[51] = {
     { 1, 14, 8, -43, -55, 47, 0 },
     { 1, 0, 16, 64, 14, 38, 0 },
     { 0, 24, 16, 59, 11, 41, 0 },
@@ -919,7 +919,7 @@ const PcSpriteCmd gUnk_09A3FE90[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A400F4[51] = {
+const PcSpriteCmd gBosPcReactionFrame0[51] = {
     { 1, 8, 8, -59, -55, 49, 0 },
     { 1, 1, 16, 68, -13, 67, 0 },
     { 0, 24, 16, 62, -12, -94, 0 },
@@ -973,7 +973,7 @@ const PcSpriteCmd gUnk_09A400F4[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A40358[51] = {
+const PcSpriteCmd gBosPcReactionFrame1[51] = {
     { 1, 13, 8, -21, -35, 18, 0 },
     { 1, 15, 16, 75, -27, 70, 0 },
     { 0, 19, 16, 70, -32, -85, 0 },
@@ -1027,7 +1027,7 @@ const PcSpriteCmd gUnk_09A40358[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A405BC[51] = {
+const PcSpriteCmd gBosPcReactionFrame2[51] = {
     { 1, 11, 8, -55, -62, 48, 0 },
     { 1, 8, 16, 39, -32, 78, 0 },
     { 0, 4, 16, 43, -31, -83, 0 },
@@ -1081,7 +1081,7 @@ const PcSpriteCmd gUnk_09A405BC[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A40820[39] = {
+const PcSpriteCmd gBosPcReactionFrame3[39] = {
     { 1, 4, 8, -36, -33, 26, 0 },
     { 1, 5, 16, 77, -54, 107, 0 },
     { 0, 9, 16, 80, -49, -58, 0 },
@@ -1123,7 +1123,7 @@ const PcSpriteCmd gUnk_09A40820[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A409F4[33] = {
+const PcSpriteCmd gBosPcReactionFrame4[33] = {
     { 1, 9, 8, -27, 0, -2, 0 },
     { 1, 3, 16, 76, 19, 39, 0 },
     { 0, 14, 16, 73, 20, -122, 0 },
@@ -1159,7 +1159,7 @@ const PcSpriteCmd gUnk_09A409F4[33] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A40B80[33] = {
+const PcSpriteCmd gBosPcReactionFrame5[33] = {
     { 1, 8, 8, -27, -4, 2, 0 },
     { 1, 10, 16, 65, 27, 31, 0 },
     { 0, 34, 16, 67, 25, -127, 0 },
@@ -1195,7 +1195,7 @@ const PcSpriteCmd gUnk_09A40B80[33] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A40D0C[33] = {
+const PcSpriteCmd gBosPcReactionFrame6[33] = {
     { 1, 8, 8, -32, -10, 11, 0 },
     { 1, 9, 16, 64, 32, 29, 0 },
     { 0, 34, 16, 66, 30, -129, 0 },
@@ -1231,7 +1231,7 @@ const PcSpriteCmd gUnk_09A40D0C[33] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A40E98[51] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame14[51] = {
     { 1, 11, 16, -74, -3, -5, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 19, 12, 42, 13, 39, 0 },
@@ -1285,7 +1285,7 @@ const PcSpriteCmd gUnk_09A40E98[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A410FC[51] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame1[51] = {
     { 1, 13, 16, -51, -63, 55, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 19, 12, 42, 13, 39, 0 },
@@ -1339,7 +1339,7 @@ const PcSpriteCmd gUnk_09A410FC[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A41360[48] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame2[48] = {
     { 1, 12, 16, -51, -78, 70, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1390,7 +1390,7 @@ const PcSpriteCmd gUnk_09A41360[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A415A0[45] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame3[45] = {
     { 1, 11, 16, -37, -81, 73, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1438,7 +1438,7 @@ const PcSpriteCmd gUnk_09A415A0[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A417BC[45] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame4[45] = {
     { 1, 9, 16, -36, -98, 90, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1486,7 +1486,7 @@ const PcSpriteCmd gUnk_09A417BC[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A419D8[42] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame5[42] = {
     { 1, 8, 16, -25, -99, 91, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1531,7 +1531,7 @@ const PcSpriteCmd gUnk_09A419D8[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A41BD0[39] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame6[39] = {
     { 1, 7, 16, -11, -102, 94, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1573,7 +1573,7 @@ const PcSpriteCmd gUnk_09A41BD0[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A41DA4[39] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame7[39] = {
     { 1, 8, 16, 4, -107, 99, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1615,7 +1615,7 @@ const PcSpriteCmd gUnk_09A41DA4[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A41F78[39] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame8[39] = {
     { 1, 8, 16, 5, -107, 99, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1657,7 +1657,7 @@ const PcSpriteCmd gUnk_09A41F78[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4214C[42] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame9[42] = {
     { 1, 8, 16, -28, -97, 89, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1702,7 +1702,7 @@ const PcSpriteCmd gUnk_09A4214C[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A42344[42] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame10[42] = {
     { 1, 9, 16, -35, -87, 79, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1747,7 +1747,7 @@ const PcSpriteCmd gUnk_09A42344[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4253C[42] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame11[42] = {
     { 1, 10, 16, -49, -68, 60, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1792,7 +1792,7 @@ const PcSpriteCmd gUnk_09A4253C[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A42734[48] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame12[48] = {
     { 1, 10, 16, -60, -52, 44, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 24, 12, 42, 13, 39, 0 },
@@ -1843,7 +1843,7 @@ const PcSpriteCmd gUnk_09A42734[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A42974[51] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame13[51] = {
     { 1, 11, 16, -66, -28, 20, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 19, 12, 42, 13, 39, 0 },
@@ -1897,7 +1897,7 @@ const PcSpriteCmd gUnk_09A42974[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A42BD8[51] = {
+const PcSpriteCmd gBosPcUnusedSlamFrame0[51] = {
     { 1, 15, 16, -45, -57, 49, 0 },
     { 1, 14, 0, 45, 20, 32, 0 },
     { 0, 19, 12, 42, 13, 39, 0 },
@@ -1951,7 +1951,7 @@ const PcSpriteCmd gUnk_09A42BD8[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A42E3C[51] = {
+const PcSpriteCmd gBosPcSlamBackFrame0[51] = {
     { 1, 7, 8, -7, -127, 119, 0 },
     { 1, 16, 23, -77, -58, 110, 0 },
     { 4, 5, 8, -7, -59, -49, 0 },
@@ -2005,7 +2005,7 @@ const PcSpriteCmd gUnk_09A42E3C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A430A0[45] = {
+const PcSpriteCmd gBosPcSlamBackFrame1[45] = {
     { 1, 8, 8, -17, -18, 10, 0 },
     { 1, 8, 16, 0, -153, 205, 0 },
     { 4, 25, 8, 23, -77, -31, 0 },
@@ -2053,7 +2053,7 @@ const PcSpriteCmd gUnk_09A430A0[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A432BC[42] = {
+const PcSpriteCmd gBosPcSlamBackFrame2[42] = {
     { 1, 8, 8, -1, 96, -104, 0 },
     { 1, 1, 16, -16, -122, 174, 0 },
     { 4, 20, 8, 20, -75, -33, 0 },
@@ -2098,7 +2098,7 @@ const PcSpriteCmd gUnk_09A432BC[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A434B4[51] = {
+const PcSpriteCmd gBosPcSlamBackFrame3[51] = {
     { 1, 14, 8, -24, -21, 13, 0 },
     { 1, 2, 23, -44, -94, 82, 0 },
     { 4, 20, 8, -8, -60, -48, 0 },
@@ -2152,7 +2152,7 @@ const PcSpriteCmd gUnk_09A434B4[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A43718[51] = {
+const PcSpriteCmd gBosPcSlamBackFrame4[51] = {
     { 1, 11, 8, -36, -102, 65, 0 },
     { 1, 3, 23, -70, -72, 48, 0 },
     { 4, 10, 8, -15, -58, -50, 0 },
@@ -2206,7 +2206,7 @@ const PcSpriteCmd gUnk_09A43718[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4397C[51] = {
+const PcSpriteCmd gBosPcSlamBackFrame5[51] = {
     { 1, 9, 8, -25, -116, 62, 0 },
     { 1, 8, 23, -80, -36, 0, 0 },
     { 4, 5, 8, -15, -58, -50, 0 },
@@ -2260,7 +2260,7 @@ const PcSpriteCmd gUnk_09A4397C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A43BE0[30] = {
+const PcSpriteCmd gBosPcSlamBackFrame6[30] = {
     { 1, 8, 8, -18, -19, 11, 0 },
     { 1, 12, 16, -60, -65, 117, 0 },
     { 4, 15, 8, 4, -67, -41, 0 },
@@ -2293,7 +2293,7 @@ const PcSpriteCmd gUnk_09A43BE0[30] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A43D48[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame6[51] = {
     { 1, 15, 22, -67, -26, 18, 0 },
     { 1, 15, 16, 63, 5, 47, 0 },
     { 0, 24, 16, 60, 3, -111, 0 },
@@ -2347,7 +2347,7 @@ const PcSpriteCmd gUnk_09A43D48[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A43FAC[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame1[51] = {
     { 1, 13, 8, -56, -91, 83, 0 },
     { 1, 9, 16, -18, -73, 125, 0 },
     { 0, 4, 16, -13, -77, -31, 0 },
@@ -2401,7 +2401,7 @@ const PcSpriteCmd gUnk_09A43FAC[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A44210[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame2[51] = {
     { 1, 15, 8, 51, -173, 165, 0 },
     { 1, 7, 16, 70, -164, 216, 0 },
     { 0, 39, 16, 73, -156, 48, 0 },
@@ -2455,7 +2455,7 @@ const PcSpriteCmd gUnk_09A44210[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A44474[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame3[51] = {
     { 1, 0, 8, -60, -62, 54, 0 },
     { 1, 8, 16, -34, -61, 98, 0 },
     { 0, 4, 16, -30, -58, -50, 0 },
@@ -2509,7 +2509,7 @@ const PcSpriteCmd gUnk_09A44474[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A446D8[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame4[51] = {
     { 1, 1, 22, -65, 3, 0, 0 },
     { 1, 7, 23, -55, 5, 0, 0 },
     { 0, 4, 23, -51, 7, -147, 0 },
@@ -2563,7 +2563,7 @@ const PcSpriteCmd gUnk_09A446D8[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4493C[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame5[51] = {
     { 1, 1, 22, -63, 8, 0, 0 },
     { 1, 6, 23, -54, 13, 0, 0 },
     { 0, 39, 23, -50, 16, -124, 0 },
@@ -2617,7 +2617,7 @@ const PcSpriteCmd gUnk_09A4493C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A44BA0[51] = {
+const PcSpriteCmd gBosPcGimmickSlamFrame0[51] = {
     { 1, 13, 22, -80, -29, 21, 0 },
     { 1, 10, 23, -53, 2, 30, 0 },
     { 0, 9, 23, -49, -2, -106, 0 },
@@ -2671,7 +2671,7 @@ const PcSpriteCmd gUnk_09A44BA0[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A44E04[48] = {
+const PcSpriteCmd gBosPcBeamFrame0[48] = {
     { 1, 13, 22, -62, -49, 41, 0 },
     { 1, 7, 16, 30, -9, 61, 0 },
     { 4, 30, 8, -10, -65, -134, 0 },
@@ -2722,7 +2722,7 @@ const PcSpriteCmd gUnk_09A44E04[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A45044[36] = {
+const PcSpriteCmd gBosPcBeamFrame1[36] = {
     { 1, 18, 8, -32, -27, 3, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 20, 8, -7, -57, -143, 0 },
@@ -2761,7 +2761,7 @@ const PcSpriteCmd gUnk_09A45044[36] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A451F4[39] = {
+const PcSpriteCmd gBosPcBeamFrame2[39] = {
     { 1, 18, 8, -32, -27, 3, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 15, 8, -7, -57, -143, 0 },
@@ -2803,7 +2803,7 @@ const PcSpriteCmd gUnk_09A451F4[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A453C8[42] = {
+const PcSpriteCmd gBosPcBeamFrame3[42] = {
     { 1, 18, 8, -32, -27, 8, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 10, 8, -11, -57, -143, 0 },
@@ -2848,7 +2848,7 @@ const PcSpriteCmd gUnk_09A453C8[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A455C0[45] = {
+const PcSpriteCmd gBosPcBeamFrame4[45] = {
     { 1, 18, 8, -32, -27, 0, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 10, 8, -11, -57, -143, 0 },
@@ -2896,7 +2896,7 @@ const PcSpriteCmd gUnk_09A455C0[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A457DC[39] = {
+const PcSpriteCmd gBosPcBeamFrame5[39] = {
     { 1, 18, 8, -32, -27, 0, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 35, 8, -6, -59, -141, 0 },
@@ -2938,7 +2938,7 @@ const PcSpriteCmd gUnk_09A457DC[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A459B0[39] = {
+const PcSpriteCmd gBosPcBeamFrame6[39] = {
     { 1, 18, 8, -32, -27, 0, 0 },
     { 1, 18, 16, 40, 24, 0, 0 },
     { 4, 0, 8, -6, -59, -141, 0 },
@@ -2980,7 +2980,7 @@ const PcSpriteCmd gUnk_09A459B0[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A45B84[36] = {
+const PcSpriteCmd gBosPcBeamFrame7[36] = {
     { 1, 17, 22, -38, -55, 29, 0 },
     { 1, 17, 16, 40, 1, 33, 0 },
     { 4, 35, 8, -4, -62, -138, 0 },
@@ -3019,7 +3019,7 @@ const PcSpriteCmd gUnk_09A45B84[36] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A45D34[45] = {
+const PcSpriteCmd gBosPcBeamFrame8[45] = {
     { 1, 10, 8, -61, -86, 78, 0 },
     { 1, 10, 16, -30, -70, 122, 0 },
     { 4, 5, 8, -4, -63, -137, 0 },
@@ -3067,7 +3067,7 @@ const PcSpriteCmd gUnk_09A45D34[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A45F50[39] = {
+const PcSpriteCmd gBosPcBeamFrame9[39] = {
     { 1, 6, 8, -37, -56, 48, 0 },
     { 1, 6, 16, 65, -23, 75, 0 },
     { 4, 25, 8, -18, -60, -139, 0 },
@@ -3109,7 +3109,7 @@ const PcSpriteCmd gUnk_09A45F50[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A46124[39] = {
+const PcSpriteCmd gBosPcBeamFrame10[39] = {
     { 1, 7, 8, -40, -49, 41, 0 },
     { 1, 6, 16, 83, -10, 62, 0 },
     { 4, 30, 8, -17, -62, -138, 0 },
@@ -3151,7 +3151,7 @@ const PcSpriteCmd gUnk_09A46124[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A462F8[51] = {
+const PcSpriteCmd gBosPcBeamFrame11[51] = {
     { 1, 10, 8, -44, -29, 21, 0 },
     { 1, 11, 16, 58, -2, 54, 0 },
     { 4, 35, 8, -17, -63, -135, 0 },
@@ -3205,7 +3205,7 @@ const PcSpriteCmd gUnk_09A462F8[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4655C[51] = {
+const PcSpriteCmd gBosPcTackleFrame0[51] = {
     { 1, 10, 8, -90, -20, 13, 0 },
     { 1, 9, 23, -29, 38, 14, 0 },
     { 0, 9, 23, -25, 35, -233, 0 },
@@ -3259,7 +3259,7 @@ const PcSpriteCmd gUnk_09A4655C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A467C0[39] = {
+const PcSpriteCmd gBosPcTackleFrame1[39] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 28, 23, 0, 34, -234, 0 },
@@ -3301,7 +3301,7 @@ const PcSpriteCmd gUnk_09A467C0[39] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A46994[42] = {
+const PcSpriteCmd gBosPcTackleFrame2[42] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 24, 23, 0, 34, -234, 0 },
@@ -3346,7 +3346,7 @@ const PcSpriteCmd gUnk_09A46994[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A46B8C[45] = {
+const PcSpriteCmd gBosPcTackleFrame3[45] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 4, 31, -231, 0 },
@@ -3394,7 +3394,7 @@ const PcSpriteCmd gUnk_09A46B8C[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A46DA8[45] = {
+const PcSpriteCmd gBosPcTackleFrame4[45] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 3, 30, -230, 0 },
@@ -3442,7 +3442,7 @@ const PcSpriteCmd gUnk_09A46DA8[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A46FC4[48] = {
+const PcSpriteCmd gBosPcTackleFrame5[48] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 4, 28, -193, 0 },
@@ -3493,7 +3493,7 @@ const PcSpriteCmd gUnk_09A46FC4[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47204[48] = {
+const PcSpriteCmd gBosPcTackleFrame6[48] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 2, 28, -228, 0 },
@@ -3544,7 +3544,7 @@ const PcSpriteCmd gUnk_09A47204[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47444[48] = {
+const PcSpriteCmd gBosPcTackleFrame7[48] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 4, 26, -226, 0 },
@@ -3595,7 +3595,7 @@ const PcSpriteCmd gUnk_09A47444[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47684[48] = {
+const PcSpriteCmd gBosPcTackleFrame8[48] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 19, 23, 5, 26, -226, 0 },
@@ -3646,7 +3646,7 @@ const PcSpriteCmd gUnk_09A47684[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A478C4[45] = {
+const PcSpriteCmd gBosPcTackleFrame9[45] = {
     { 1, 18, 8, -30, -38, 0, 0 },
     { 1, 18, 23, 3, 39, 13, 0 },
     { 0, 24, 23, -1, 32, -232, 0 },
@@ -3694,7 +3694,7 @@ const PcSpriteCmd gUnk_09A478C4[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47AE0[48] = {
+const PcSpriteCmd gBosPcTackleFrame10[48] = {
     { 1, 17, 8, -86, -45, 37, 0 },
     { 1, 17, 23, -21, 20, 32, 0 },
     { 0, 24, 23, -24, 14, -214, 0 },
@@ -3745,7 +3745,7 @@ const PcSpriteCmd gUnk_09A47AE0[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47D20[51] = {
+const PcSpriteCmd gBosPcTackleFrame11[51] = {
     { 1, 2, 8, -56, -85, 77, 0 },
     { 1, 6, 23, 3, -85, 137, 0 },
     { 0, 39, 23, 7, -79, -121, 0 },
@@ -3799,7 +3799,7 @@ const PcSpriteCmd gUnk_09A47D20[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A47F84[30] = {
+const PcSpriteCmd gBosPcSlamMidFrame0[30] = {
     { 1, 8, 8, -18, -19, 11, 0 },
     { 1, 12, 16, -60, -65, 117, 0 },
     { 0, 29, 16, -58, -70, -38, 0 },
@@ -3832,7 +3832,7 @@ const PcSpriteCmd gUnk_09A47F84[30] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A480EC[45] = {
+const PcSpriteCmd gBosPcSlamMidFrame1[45] = {
     { 1, 8, 8, -17, -18, 10, 0 },
     { 1, 8, 16, 0, -153, 205, 0 },
     { 0, 9, 16, 5, -151, 43, 0 },
@@ -3880,7 +3880,7 @@ const PcSpriteCmd gUnk_09A480EC[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48308[42] = {
+const PcSpriteCmd gBosPcSlamMidFrame2[42] = {
     { 1, 8, 8, -1, 96, -104, 0 },
     { 1, 1, 16, -16, -122, 174, 0 },
     { 0, 24, 16, -22, -116, 8, 0 },
@@ -3925,7 +3925,7 @@ const PcSpriteCmd gUnk_09A48308[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48500[51] = {
+const PcSpriteCmd gBosPcSlamMidFrame3[51] = {
     { 1, 5, 8, -80, -74, 66, 0 },
     { 1, 3, 23, -69, -36, 62, 0 },
     { 0, 34, 23, -69, -28, -80, 0 },
@@ -3979,7 +3979,7 @@ const PcSpriteCmd gUnk_09A48500[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48764[51] = {
+const PcSpriteCmd gBosPcSlamMidFrame4[51] = {
     { 1, 5, 8, -88, -70, 33, 0 },
     { 1, 6, 23, -78, -19, 22, 0 },
     { 0, 39, 23, -74, -15, -93, 0 },
@@ -4033,7 +4033,7 @@ const PcSpriteCmd gUnk_09A48764[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A489C8[51] = {
+const PcSpriteCmd gBosPcSlamMidFrame5[51] = {
     { 1, 10, 8, -67, -41, 4, 0 },
     { 1, 8, 23, -78, -10, 0, 0 },
     { 0, 4, 23, -73, -10, -98, 0 },
@@ -4087,7 +4087,7 @@ const PcSpriteCmd gUnk_09A489C8[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48C2C[51] = {
+const PcSpriteCmd gBosPcSlamMidFrame6[51] = {
     { 1, 13, 8, -40, -55, 47, 0 },
     { 1, 10, 23, -77, -31, 83, 0 },
     { 0, 9, 23, -75, -36, -72, 0 },
@@ -4141,7 +4141,7 @@ const PcSpriteCmd gUnk_09A48C2C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48E90[30] = {
+const PcSpriteCmd gBosPcSlamFrontFrame0[30] = {
     { 1, 8, 8, -18, -19, 11, 0 },
     { 1, 12, 16, -60, -65, 117, 0 },
     { 0, 29, 16, -58, -70, -38, 0 },
@@ -4174,7 +4174,7 @@ const PcSpriteCmd gUnk_09A48E90[30] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A48FF8[45] = {
+const PcSpriteCmd gBosPcSlamFrontFrame1[45] = {
     { 1, 8, 8, -17, -18, 10, 0 },
     { 1, 8, 16, 0, -153, 205, 0 },
     { 0, 9, 16, 5, -151, 43, 0 },
@@ -4222,7 +4222,7 @@ const PcSpriteCmd gUnk_09A48FF8[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A49214[42] = {
+const PcSpriteCmd gBosPcSlamFrontFrame2[42] = {
     { 1, 8, 8, -1, 96, -104, 0 },
     { 1, 1, 16, -16, -122, 174, 0 },
     { 0, 24, 16, -22, -116, 8, 0 },
@@ -4267,7 +4267,7 @@ const PcSpriteCmd gUnk_09A49214[42] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4940C[51] = {
+const PcSpriteCmd gBosPcSlamFrontFrame3[51] = {
     { 1, 5, 8, -80, -74, 66, 0 },
     { 1, 3, 23, -69, -36, 72, 0 },
     { 0, 34, 23, -69, -28, -80, 0 },
@@ -4321,7 +4321,7 @@ const PcSpriteCmd gUnk_09A4940C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A49670[51] = {
+const PcSpriteCmd gBosPcSlamFrontFrame4[51] = {
     { 1, 5, 8, -88, -70, 62, 0 },
     { 1, 7, 23, -80, 2, 25, 0 },
     { 0, 39, 23, -74, 4, -112, 0 },
@@ -4375,7 +4375,7 @@ const PcSpriteCmd gUnk_09A49670[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A498D4[51] = {
+const PcSpriteCmd gBosPcSlamFrontFrame5[51] = {
     { 1, 10, 8, -67, -41, 33, 0 },
     { 1, 8, 23, -78, 30, 0, 0 },
     { 0, 4, 23, -73, 29, -137, 0 },
@@ -4429,7 +4429,7 @@ const PcSpriteCmd gUnk_09A498D4[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A49B38[51] = {
+const PcSpriteCmd gBosPcSlamFrontFrame6[51] = {
     { 1, 14, 8, -38, -48, 40, 0 },
     { 1, 16, 23, -85, -7, 59, 0 },
     { 0, 14, 23, -83, -13, -95, 0 },
@@ -4483,7 +4483,7 @@ const PcSpriteCmd gUnk_09A49B38[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A49D9C[51] = {
+const PcSpriteCmd gBosPcDefeatFrame0[51] = {
     { 1, 15, 22, -67, -26, 18, 0 },
     { 1, 15, 16, 63, 5, 47, 0 },
     { 0, 24, 16, 60, 3, -111, 0 },
@@ -4537,7 +4537,7 @@ const PcSpriteCmd gUnk_09A49D9C[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4A000[51] = {
+const PcSpriteCmd gBosPcDefeatFrame1[51] = {
     { 1, 13, 8, -56, -91, 83, 0 },
     { 1, 9, 16, -18, -73, 125, 0 },
     { 0, 4, 16, -13, -77, -31, 0 },
@@ -4591,7 +4591,7 @@ const PcSpriteCmd gUnk_09A4A000[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4A264[51] = {
+const PcSpriteCmd gBosPcDefeatFrame2[51] = {
     { 1, 1, 8, 43, -174, 166, 0 },
     { 1, 4, 16, 88, -151, 203, 0 },
     { 0, 34, 16, 85, -145, 37, 0 },
@@ -4645,7 +4645,7 @@ const PcSpriteCmd gUnk_09A4A264[51] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4A4C8[48] = {
+const PcSpriteCmd gBosPcDefeatFrame3[48] = {
     { 1, 10, 8, -68, -66, 58, 0 },
     { 1, 7, 16, -40, -42, 79, 0 },
     { 0, 29, 16, -35, -38, -70, 0 },
@@ -4696,7 +4696,7 @@ const PcSpriteCmd gUnk_09A4A4C8[48] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4A708[45] = {
+const PcSpriteCmd gBosPcDefeatFrame4[45] = {
     { 1, 11, 22, -60, -25, 17, 0 },
     { 1, 7, 23, -47, -5, 37, 0 },
     { 0, 39, 23, -40, -4, -104, 0 },
@@ -4744,7 +4744,7 @@ const PcSpriteCmd gUnk_09A4A708[45] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4A924[36] = {
+const PcSpriteCmd gBosPcDefeatFrame5[36] = {
     { 1, 8, 8, -39, -14, 4, 0 },
     { 1, 8, 23, -27, 29, -3, 0 },
     { 0, 9, 23, -22, 28, -168, 0 },
@@ -4783,7 +4783,7 @@ const PcSpriteCmd gUnk_09A4A924[36] = {
     { 255, 0, 0, 0, 0, 0, 0 },
 };
 
-const PcSpriteCmd gUnk_09A4AAD4[36] = {
+const PcSpriteCmd gBosPcDefeatFrame6[36] = {
     { 1, 8, 8, -28, -12, 4, 0 },
     { 1, 8, 23, -9, 37, 4, 0 },
     { 0, 9, 23, -2, 35, -143, 0 },
@@ -4887,7 +4887,7 @@ const PcAnimStep gBosPcIdleAnim[16] = {
     { 1, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4B174[16] = {
+const PcAnimStep gBosPcReactionShortAnim[16] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 15, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 1, 30, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 2, 31, 6 },
@@ -4906,7 +4906,7 @@ const PcAnimStep gUnk_09A4B174[16] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4B3B4[16] = {
+const PcAnimStep gBosPcReactionMidAnim[16] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 15, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 1, 30, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 2, 31, 6 },
@@ -4925,7 +4925,7 @@ const PcAnimStep gUnk_09A4B3B4[16] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4B5F4[16] = {
+const PcAnimStep gBosPcReactionLongAnim[16] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 15, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 1, 30, 6 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 2, 31, 6 },
@@ -4944,7 +4944,7 @@ const PcAnimStep gUnk_09A4B5F4[16] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4B834[26] = {
+const PcAnimStep gBosPcUnusedSlamAnim[26] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 4 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 1, 4 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 2, 4 },
@@ -4973,7 +4973,7 @@ const PcAnimStep gUnk_09A4B834[26] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4BBDC[9] = {
+const PcAnimStep gBosPcSlamBackAnim[9] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 8, 43, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 9, 38, 48 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 10, 39, 6 },
@@ -4985,7 +4985,7 @@ const PcAnimStep gUnk_09A4BBDC[9] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4BD20[11] = {
+const PcAnimStep gBosPcGimmickSlamAnim[11] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 15, 50, 10 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 16, 45, 10 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 17, 46, 30 },
@@ -4999,7 +4999,7 @@ const PcAnimStep gUnk_09A4BD20[11] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4BEAC[27] = {
+const PcAnimStep gBosPcBeamAnim[27] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 34, 51, 10 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 38, 58, 10 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 35, 52, 10 },
@@ -5029,7 +5029,7 @@ const PcAnimStep gUnk_09A4BEAC[27] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C278[14] = {
+const PcAnimStep gBosPcTackleAnim[14] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 22, 63, 10 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 23, 64, 30 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 6, 24, 65, 1 },
@@ -5046,7 +5046,7 @@ const PcAnimStep gUnk_09A4C278[14] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C470[9] = {
+const PcAnimStep gBosPcSlamMidAnim[9] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 8, 75, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 9, 76, 48 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 10, 77, 6 },
@@ -5058,7 +5058,7 @@ const PcAnimStep gUnk_09A4C470[9] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C5B4[9] = {
+const PcAnimStep gBosPcSlamFrontAnim[9] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 8, 82, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 9, 83, 48 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 10, 84, 6 },
@@ -5081,12 +5081,12 @@ const PcAnimStep gBosPcDefeatAnim[8] = {
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C818[2] = {
+const PcAnimStep gBosPcEventPoseAnim[2] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 20, 95, 16 },
     { 2, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0 },
 };
 
-const PcAnimStep gUnk_09A4C860[11] = {
+const PcAnimStep gBosPcEventAnim[11] = {
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 20, 95, 8 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 19, 94, 5 },
     { 0, { 0, 0 }, 0, 0, 0, { 0, 0 }, 0, 0, 0, 0, 0, 0, 0, { 0, 0 }, 0, 21, 93, 4 },
@@ -5137,7 +5137,7 @@ const PcSpriteCmd* BosPcGetSpriteCmds(PcWork* work) {
     const PcAnimStep* step;
 
     if (work->animSteps == NULL) {
-        return gUnk_09A3DF34;
+        return gBosPcIdleFrame0;
     }
 
     step = &work->animSteps[work->animFrame];
@@ -5329,7 +5329,7 @@ void BosPcDraw(PcWork* work) {
         }
     }
 
-    if (work->animSteps == gUnk_09A4C278) {
+    if (work->animSteps == gBosPcTackleAnim) {
         gBtlWork->bossPriorityOffset = i;
     } else {
         gBtlWork->bossPriorityOffset = 0xFFF6;

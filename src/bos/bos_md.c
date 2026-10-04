@@ -286,40 +286,40 @@ static const MdFrameDef sMdFrameDefs[41] = {
     },
 };
 
-static const MdAnimFrame sUnk_09992D34[4] = { { 1, 18 }, { 2, 12 }, { 3, 24 }, { 2, 12 } };
+static const MdAnimFrame sMdIdleFrames[4] = { { 1, 18 }, { 2, 12 }, { 3, 24 }, { 2, 12 } };
 
-static const MdAnimFrame sUnk_09992D44[4] = { { 4, 18 }, { 5, 12 }, { 6, 24 }, { 5, 12 } };
+static const MdAnimFrame sMdIdleNearFrames[4] = { { 4, 18 }, { 5, 12 }, { 6, 24 }, { 5, 12 } };
 
-static const MdAnimFrame sUnk_09992D54[4] = { { 7, 12 }, { 8, 30 }, { 9, 3 }, { 10, 6 } };
+static const MdAnimFrame sMdFireBreathStartFrames[4] = { { 7, 12 }, { 8, 30 }, { 9, 3 }, { 10, 6 } };
 
-static const MdAnimFrame sUnk_09992D64[2] = { { 11, 24 }, { 12, 6 } };
+static const MdAnimFrame sMdFireBreathFrames[2] = { { 11, 24 }, { 12, 6 } };
 
-static const MdAnimFrame sUnk_09992D6C[2] = { { 13, 6 }, { 14, 6 } };
+static const MdAnimFrame sMdFireBreathEndFrames[2] = { { 13, 6 }, { 14, 6 } };
 
-static const MdAnimFrame sUnk_09992D74[10] = { { 15, 6 }, { 16, 3 }, { 17, 3 }, { 18, 24 }, { 1, 6 }, { 19, 6 }, { 20, 3 }, { 21, 3 }, { 22, 24 }, { 1, 6 } };
+static const MdAnimFrame sMdQuakeDoubleFrames[10] = { { 15, 6 }, { 16, 3 }, { 17, 3 }, { 18, 24 }, { 1, 6 }, { 19, 6 }, { 20, 3 }, { 21, 3 }, { 22, 24 }, { 1, 6 } };
 
-static const MdAnimFrame sUnk_09992D9C[8] = { { 23, 6 }, { 24, 6 }, { 25, 6 }, { 26, 30 }, { 27, 3 }, { 28, 6 }, { 29, 6 }, { 30, 6 } };
+static const MdAnimFrame sMdQuakeHeavyFrames[8] = { { 23, 6 }, { 24, 6 }, { 25, 6 }, { 26, 30 }, { 27, 3 }, { 28, 6 }, { 29, 6 }, { 30, 6 } };
 
-static const MdAnimFrame sUnk_09992DBC[6] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 40, 3 } };
+static const MdAnimFrame sMdBiteNearFrames[6] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 40, 3 } };
 
-static const MdAnimFrame sUnk_09992DD4[8] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 35, 3 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 40, 6 } };
+static const MdAnimFrame sMdBiteFarFrames[8] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 35, 3 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 40, 6 } };
 
-static const MdAnimFrame sUnk_09992DF4[11] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 35, 6 }, { 32, 12 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 38, 6 } };
+static const MdAnimFrame sMdBiteDoubleFrames[11] = { { 39, 3 }, { 31, 24 }, { 32, 3 }, { 33, 3 }, { 34, 24 }, { 35, 6 }, { 32, 12 }, { 36, 3 }, { 37, 24 }, { 34, 6 }, { 38, 6 } };
 
-static const MdAnimFrame sUnk_09992E20[1] = { { 1, 32767 } };
+static const MdAnimFrame sMdDefeatFrames[1] = { { 1, 32767 } };
 
 static const MdAnimDef sMdAnimDefs[11] = {
-    { sUnk_09992D34, 4, 0 },
-    { sUnk_09992D44, 4, 0 },
-    { sUnk_09992D54, 4, 0 },
-    { sUnk_09992D64, 2, 0 },
-    { sUnk_09992D6C, 2, 0 },
-    { sUnk_09992D74, 10, 0 },
-    { sUnk_09992D9C, 8, 0 },
-    { sUnk_09992DBC, 6, 0 },
-    { sUnk_09992DD4, 8, 0 },
-    { sUnk_09992DF4, 11, 0 },
-    { sUnk_09992E20, 1, 0 },
+    { sMdIdleFrames, 4, 0 },
+    { sMdIdleNearFrames, 4, 0 },
+    { sMdFireBreathStartFrames, 4, 0 },
+    { sMdFireBreathFrames, 2, 0 },
+    { sMdFireBreathEndFrames, 2, 0 },
+    { sMdQuakeDoubleFrames, 10, 0 },
+    { sMdQuakeHeavyFrames, 8, 0 },
+    { sMdBiteNearFrames, 6, 0 },
+    { sMdBiteFarFrames, 8, 0 },
+    { sMdBiteDoubleFrames, 11, 0 },
+    { sMdDefeatFrames, 1, 0 },
 };
 
 TaskDesc gTaskDescBosMd = {

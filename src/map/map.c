@@ -2989,7 +2989,7 @@ void MapFldWaitRoomCreate() {
     }
 }
 
-void func_080E9F30() {
+void MapFldRestart() {
     DrawMapField();
 
     if (sUnk_02034FBC == 0) {

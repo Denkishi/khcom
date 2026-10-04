@@ -1210,7 +1210,7 @@ void MapFldExitRoom();
 void MapFldOpenAllmap();
 void MapFldWaitMenu();
 void MapFldWaitRoomCreate();
-void func_080E9F30();
+void MapFldRestart();
 void Mode_MapFld_0();
 void Mode_MapFld_1();
 void Mode_MapFld_2();

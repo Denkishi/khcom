@@ -3775,7 +3775,7 @@ FldPosRevertIfBlocked	0x080dfc94	72	0x080dfcb4	global
 MapFindOpenDoor	0x080dfcdc	168	0x080dfcfc	global
 IsAtTargetDoor	0x080dfd84	152	0x080dfda4	global
 GetFldPosClimbDir	0x080dfe1c	96	0x080dfe3c	global
-func_080DFE7C	0x080dfe7c	64	0x080dfe9c	global
+FieldFloorAt	0x080dfe7c	64	0x080dfe9c	global
 FieldGroundAt	0x080dfebc	96	0x080dfedc	global
 GetFldPosGround	0x080dff1c	20	0x080dff3c	body
 GetFldPosFloor	0x080dff30	28	0x080dff50	global
@@ -4007,7 +4007,7 @@ MapFldStartBattle	0x080e9d94	112	0x080e9db4	global
 MapFldOpenAllmap	0x080e9e04	36	0x080e9e24	global
 MapFldWaitMenu	0x080e9e28	108	0x080e9e48	global
 MapFldWaitRoomCreate	0x080e9e94	156	0x080e9eb4	global
-func_080E9F30	0x080e9f30	36	0x080e9f50	body
+MapFldRestart	0x080e9f30	36	0x080e9f50	body
 Mode_MapFld_0	0x080e9f54	596	0x080e9f74	global
 Mode_MapFld_1	0x080ea1a8	24	0x080ea1c8	body
 Mode_MapFld_2	0x080ea1c0	40	0x080ea1e0	global

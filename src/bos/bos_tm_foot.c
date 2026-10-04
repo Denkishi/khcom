@@ -114,71 +114,71 @@ static TaskDesc sTaskDescBosTmClb = {
     sizeof(TmClbWork),
 };
 
-static const TmAnimFrame sUnk_09619CDC[3] = {
+static const TmAnimFrame sBosTmArm0IdleLeftFrames[3] = {
     { 10, { 0, 0 }, { 175, 0, 0, 0, 160, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0 } },
     { 10, { 0, 0 }, { 175, 0, 0, 0, 155, 0, 0, 0, 145, 0, 0, 0, 180, 0, 0, 0 } },
     { 10, { 0, 0 }, { 175, 0, 0, 0, 165, 0, 0, 0, 152, 0, 0, 0, 220, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619D18[3] = {
+static const TmAnimFrame sBosTmArm1IdleLeftFrames[3] = {
     { 10, { 0, 0 }, { 80, 0, 0, 0, 102, 0, 0, 0, 95, 0, 0, 0, 160, 0, 0, 0 } },
     { 10, { 0, 0 }, { 90, 0, 0, 0, 128, 0, 0, 0, 220, 0, 0, 0, 240, 0, 0, 0 } },
     { 10, { 0, 0 }, { 76, 0, 0, 0, 128, 0, 0, 0, 160, 0, 0, 0, 224, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619D54[3] = {
+static const TmAnimFrame sBosTmArm0IdleRightFrames[3] = {
     { 10, { 0, 0 }, { 176, 0, 0, 0, 154, 0, 0, 0, 161, 0, 0, 0, 160, 0, 0, 0 } },
     { 10, { 0, 0 }, { 166, 0, 0, 0, 128, 0, 0, 0, 36, 0, 0, 0, 240, 0, 0, 0 } },
     { 10, { 0, 0 }, { 180, 0, 0, 0, 128, 0, 0, 0, 96, 0, 0, 0, 224, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619D90[3] = {
+static const TmAnimFrame sBosTmArm1IdleRightFrames[3] = {
     { 10, { 0, 0 }, { 81, 0, 0, 0, 96, 0, 0, 0, 116, 0, 0, 0, 0, 0, 0, 0 } },
     { 10, { 0, 0 }, { 81, 0, 0, 0, 101, 0, 0, 0, 111, 0, 0, 0, 180, 0, 0, 0 } },
     { 10, { 0, 0 }, { 81, 0, 0, 0, 91, 0, 0, 0, 104, 0, 0, 0, 220, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619DCC[1] = {
+static const TmAnimFrame sBosTmArm0HurtLeftFrames[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 214, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619DE0[1] = {
+static const TmAnimFrame sBosTmArm1HurtLeftFrames[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 64, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619DF4[1] = {
+static const TmAnimFrame sBosTmArm0HurtRightFrames[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 64, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619E08[1] = {
+static const TmAnimFrame sBosTmArm1HurtRightFrames[1] = {
     { 5, { 0, 0 }, { 128, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 214, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619E1C[3] = {
+static const TmAnimFrame sBosTmArm1FireLeftFrames[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 120, 0, 0, 0, 160, 0, 0, 0, 220, 0, 0, 0, 230, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619E58[3] = {
+static const TmAnimFrame sBosTmArm0FireLeftFrames[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 120, 0, 0, 0, 160, 0, 0, 0, 220, 0, 0, 0, 5, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619E94[3] = {
+static const TmAnimFrame sBosTmArm1FireRightFrames[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 136, 0, 0, 0, 96, 0, 0, 0, 36, 0, 0, 0, 5, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619ED0[3] = {
+static const TmAnimFrame sBosTmArm0FireRightFrames[3] = {
     { 2, { 0, 0 }, { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 } },
     { 2, { 0, 0 }, { 64, 0, 0, 0, 64, 0, 0, 0, 64, 0, 0, 0, 192, 0, 0, 0 } },
     { 250, { 0, 0 }, { 136, 0, 0, 0, 112, 0, 0, 0, 36, 0, 0, 0, 245, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619F0C[6] = {
+static const TmAnimFrame sBosTmArm1ThrowLeftFrames[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -187,7 +187,7 @@ static const TmAnimFrame sUnk_09619F0C[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619F84[6] = {
+static const TmAnimFrame sBosTmArm0ThrowLeftFrames[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -196,7 +196,7 @@ static const TmAnimFrame sUnk_09619F84[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_09619FFC[6] = {
+static const TmAnimFrame sBosTmArm1ThrowRightFrames[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -205,7 +205,7 @@ static const TmAnimFrame sUnk_09619FFC[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A074[6] = {
+static const TmAnimFrame sBosTmArm0ThrowRightFrames[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 24, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -214,7 +214,7 @@ static const TmAnimFrame sUnk_0961A074[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A0EC[6] = {
+static const TmAnimFrame sBosTmArm1ThrowSlowLeftFrames[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -223,7 +223,7 @@ static const TmAnimFrame sUnk_0961A0EC[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A164[6] = {
+static const TmAnimFrame sBosTmArm0ThrowSlowLeftFrames[6] = {
     { 3, { 0, 0 }, { 192, 0, 0, 0, 208, 0, 0, 0, 224, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 24, 0, 0, 0, 33, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 38, 0, 0, 0, 53, 0, 0, 0, 68, 0, 0, 0, 83, 0, 0, 0 } },
@@ -232,7 +232,7 @@ static const TmAnimFrame sUnk_0961A164[6] = {
     { 250, { 0, 0 }, { 148, 0, 0, 0, 163, 0, 0, 0, 178, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A1DC[6] = {
+static const TmAnimFrame sBosTmArm1ThrowSlowRightFrames[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -241,7 +241,7 @@ static const TmAnimFrame sUnk_0961A1DC[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A254[6] = {
+static const TmAnimFrame sBosTmArm0ThrowSlowRightFrames[6] = {
     { 3, { 0, 0 }, { 64, 0, 0, 0, 48, 0, 0, 0, 32, 0, 0, 0, 240, 0, 0, 0 } },
     { 3, { 0, 0 }, { 0, 0, 0, 0, 232, 0, 0, 0, 223, 0, 0, 0, 40, 0, 0, 0 } },
     { 39, { 0, 0 }, { 218, 0, 0, 0, 203, 0, 0, 0, 188, 0, 0, 0, 83, 0, 0, 0 } },
@@ -250,7 +250,7 @@ static const TmAnimFrame sUnk_0961A254[6] = {
     { 250, { 0, 0 }, { 108, 0, 0, 0, 93, 0, 0, 0, 78, 0, 0, 0, 193, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A2CC[6] = {
+static const TmAnimFrame sBosTmArm1WalkLeftFrames[6] = {
     { 10, { 0, 0 }, { 148, 0, 0, 0, 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0 } },
     { 15, { 0, 0 }, { 138, 0, 0, 0, 118, 0, 0, 0, 98, 0, 0, 0, 68, 0, 0, 0 } },
     { 10, { 0, 0 }, { 128, 0, 0, 0, 148, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
@@ -259,7 +259,7 @@ static const TmAnimFrame sUnk_0961A2CC[6] = {
     { 10, { 0, 0 }, { 158, 0, 0, 0, 138, 0, 0, 0, 108, 0, 0, 0, 58, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A344[6] = {
+static const TmAnimFrame sBosTmArm0WalkLeftFrames[6] = {
     { 10, { 0, 0 }, { 108, 0, 0, 0, 138, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
     { 15, { 0, 0 }, { 138, 0, 0, 0, 158, 0, 0, 0, 198, 0, 0, 0, 238, 0, 0, 0 } },
     { 10, { 0, 0 }, { 168, 0, 0, 0, 148, 0, 0, 0, 98, 0, 0, 0, 48, 0, 0, 0 } },
@@ -268,7 +268,7 @@ static const TmAnimFrame sUnk_0961A344[6] = {
     { 10, { 0, 0 }, { 128, 0, 0, 0, 148, 0, 0, 0, 168, 0, 0, 0, 208, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A3BC[6] = {
+static const TmAnimFrame sBosTmArm1WalkRightFrames[6] = {
     { 10, { 0, 0 }, { 108, 0, 0, 0, 128, 0, 0, 0, 148, 0, 0, 0, 88, 0, 0, 0 } },
     { 15, { 0, 0 }, { 118, 0, 0, 0, 138, 0, 0, 0, 158, 0, 0, 0, 68, 0, 0, 0 } },
     { 10, { 0, 0 }, { 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
@@ -277,7 +277,7 @@ static const TmAnimFrame sUnk_0961A3BC[6] = {
     { 10, { 0, 0 }, { 98, 0, 0, 0, 118, 0, 0, 0, 148, 0, 0, 0, 58, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A434[6] = {
+static const TmAnimFrame sBosTmArm0WalkRightFrames[6] = {
     { 10, { 0, 0 }, { 148, 0, 0, 0, 118, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
     { 15, { 0, 0 }, { 118, 0, 0, 0, 98, 0, 0, 0, 58, 0, 0, 0, 238, 0, 0, 0 } },
     { 10, { 0, 0 }, { 88, 0, 0, 0, 108, 0, 0, 0, 158, 0, 0, 0, 48, 0, 0, 0 } },
@@ -286,7 +286,7 @@ static const TmAnimFrame sUnk_0961A434[6] = {
     { 10, { 0, 0 }, { 128, 0, 0, 0, 108, 0, 0, 0, 88, 0, 0, 0, 208, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A4AC[5] = {
+static const TmAnimFrame sBosTmArm1SpinLeftFrames[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 112, 0, 0, 0, 72, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 160, 0, 0, 0, 144, 0, 0, 0, 112, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 192, 0, 0, 0, 184, 0, 0, 0, 96, 0, 0, 0, 118, 0, 0, 0 } },
@@ -294,7 +294,7 @@ static const TmAnimFrame sUnk_0961A4AC[5] = {
     { 20, { 0, 0 }, { 192, 0, 0, 0, 198, 0, 0, 0, 224, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A510[5] = {
+static const TmAnimFrame sBosTmArm0SpinLeftFrames[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 112, 0, 0, 0, 72, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 160, 0, 0, 0, 144, 0, 0, 0, 112, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 192, 0, 0, 0, 168, 0, 0, 0, 96, 0, 0, 0, 118, 0, 0, 0 } },
@@ -302,7 +302,7 @@ static const TmAnimFrame sUnk_0961A510[5] = {
     { 20, { 0, 0 }, { 192, 0, 0, 0, 198, 0, 0, 0, 224, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A574[5] = {
+static const TmAnimFrame sBosTmArm1SpinRightFrames[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 144, 0, 0, 0, 184, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 96, 0, 0, 0, 112, 0, 0, 0, 144, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 64, 0, 0, 0, 72, 0, 0, 0, 160, 0, 0, 0, 118, 0, 0, 0 } },
@@ -310,7 +310,7 @@ static const TmAnimFrame sUnk_0961A574[5] = {
     { 20, { 0, 0 }, { 64, 0, 0, 0, 58, 0, 0, 0, 32, 0, 0, 0, 248, 0, 0, 0 } },
 };
 
-static const TmAnimFrame sUnk_0961A5D8[5] = {
+static const TmAnimFrame sBosTmArm0SpinRightFrames[5] = {
     { 20, { 0, 0 }, { 128, 0, 0, 0, 144, 0, 0, 0, 184, 0, 0, 0, 58, 0, 0, 0 } },
     { 1, { 0, 0 }, { 96, 0, 0, 0, 112, 0, 0, 0, 144, 0, 0, 0, 96, 0, 0, 0 } },
     { 1, { 0, 0 }, { 64, 0, 0, 0, 88, 0, 0, 0, 160, 0, 0, 0, 118, 0, 0, 0 } },
@@ -1033,8 +1033,8 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->prevState = 0;
     work->jointAnim2.frames = NULL;
     work->jointAnim.frames = NULL;
-    BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619CDC, 3, work->joints.arms[0]);
-    BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D18, 3, &work->joints.arms[1][0]);
+    BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, 3, work->joints.arms[0]);
+    BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, 3, &work->joints.arms[1][0]);
 
     for (i = 0; i < 4; i++) {
         p = &work->joints.arms[0][i];
@@ -1115,9 +1115,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             work->tips[0].angle = 0x110;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D18, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleLeftFrames, 3, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619D90, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1IdleRightFrames, 3, &work->joints.all[4]);
             }
         }
 
@@ -1152,9 +1152,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A2CC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkLeftFrames, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A3BC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1WalkRightFrames, 6, &work->joints.all[4]);
             }
         }
 
@@ -1167,9 +1167,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, 1, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, 1, &work->joints.all[4]);
             }
         }
 
@@ -1181,9 +1181,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbThrow(&work->clb, &work->tips[0], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619DE0, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtLeftFrames, 1, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E08, 1, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1HurtRightFrames, 1, &work->joints.all[4]);
             }
         }
 
@@ -1192,11 +1192,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 1:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E94, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1226,11 +1226,11 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 10:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E1C, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireLeftFrames, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xE8;
                 BosTmClbHold(&work->clb, &work->tips[0], 0);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619E94, 3, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1FireRightFrames, 3, &work->joints.all[4]);
                 work->tips[0].angle = 0xF4;
                 BosTmClbHold(&work->clb, &work->tips[0], 2);
             }
@@ -1276,9 +1276,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 2:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1314,9 +1314,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 3:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619F0C, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowLeftFrames, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_09619FFC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowRightFrames, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1358,9 +1358,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
     case 11:
         if (work->timer == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A0EC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowLeftFrames, 6, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A1DC, 6, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1ThrowSlowRightFrames, 6, &work->joints.all[4]);
             }
 
             BosTmClbThrow(&work->clb, &work->tips[0], -0xB00);
@@ -1405,9 +1405,9 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb, &work->tips[0]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A4AC, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinLeftFrames, 5, &work->joints.all[4]);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim, sUnk_0961A574, 5, &work->joints.all[4]);
+                BosTmArmStartJointAnim(&work->jointAnim, sBosTmArm1SpinRightFrames, 5, &work->joints.all[4]);
             }
         }
 
@@ -1448,9 +1448,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             work->tips[1].angle = 0x110;
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619CDC, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleLeftFrames, 3, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619D54, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0IdleRightFrames, 3, work->joints.all);
             }
         }
 
@@ -1473,9 +1473,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A344, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkLeftFrames, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A434, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0WalkRightFrames, 6, work->joints.all);
             }
         }
 
@@ -1488,9 +1488,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, 1, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, 1, work->joints.all);
             }
         }
 
@@ -1502,9 +1502,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbThrow(&work->clb2, &work->tips[1], -128);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DCC, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtLeftFrames, 1, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619DF4, 1, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0HurtRightFrames, 1, work->joints.all);
             }
         }
 
@@ -1513,11 +1513,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 1:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619ED0, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, 3, work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1534,11 +1534,11 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 10:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619E58, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireLeftFrames, 3, work->joints.all);
                 work->tips[1].angle = 0x10C;
                 BosTmClbHold(&work->clb2, &work->tips[1], 1);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619ED0, 3, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0FireRightFrames, 3, work->joints.all);
                 work->tips[1].angle = 0x118;
                 BosTmClbHold(&work->clb2, &work->tips[1], 3);
             }
@@ -1555,9 +1555,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 2:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1573,9 +1573,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 3:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_09619F84, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowLeftFrames, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A074, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowRightFrames, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1591,9 +1591,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
     case 11:
         if (work->timer2 == 0) {
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A164, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowLeftFrames, 6, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A254, 6, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0ThrowSlowRightFrames, 6, work->joints.all);
             }
 
             BosTmClbThrow(&work->clb2, &work->tips[1], -0xB00);
@@ -1612,9 +1612,9 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
             BosTmClbHoldSpinning(&work->clb2, &work->tips[1]);
 
             if (work->src->tm->flags & TM_FLAG_FACING_LEFT) {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A510, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinLeftFrames, 5, work->joints.all);
             } else {
-                BosTmArmStartJointAnim(&work->jointAnim2, sUnk_0961A5D8, 5, work->joints.all);
+                BosTmArmStartJointAnim(&work->jointAnim2, sBosTmArm0SpinRightFrames, 5, work->joints.all);
             }
         }
 

@@ -21,7 +21,7 @@ s16 GetCenteredTextX(u16* widths, u16 count) {
 }
 #endif
 
-u16 CountNonSpaceChars(TextChar* str) {
+u16 CountNonSpaceChars(const TextChar* str) {
     s32 i;
 #ifndef VERSION_JP
     s32 n;

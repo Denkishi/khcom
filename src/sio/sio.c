@@ -214,7 +214,7 @@ u32 SioRunStateMachine(u8* a, u16* b, u16 (*c)[2]) {
         SioInitTimer();
         gSioWork.state = 4;
     case 4:
-        if (gSioWork.paused == 0) {
+        if (!gSioWork.paused) {
             SioQueueSendFrame(b);
         }
 
@@ -258,7 +258,7 @@ u32 SioTransferFrames(u8* a, u16* b, u16 (*c)[2]) {
     u32 t0, t1, t2, t3, t4, t5;
 
     if (gSioWork.state == 4) {
-        if (gSioWork.paused == 0) {
+        if (!gSioWork.paused) {
             SioQueueSendFrame(b);
         }
 
@@ -381,7 +381,7 @@ void SioReadRecvFrame(u16 (*frame)[2]) {
 }
 
 void SioVBlankUpdate() {
-    if (gSioWork.paused != 0) {
+    if (gSioWork.paused) {
         sSioPauseTimer--;
 
         if (sSioPauseTimer != 0) {
@@ -532,7 +532,7 @@ void SioRecvWord() {
 
     if (gSioWork.sendWordIdx == 0) {
         for (i = 0; i < gSioWork.playerCount; i++) {
-            if (gSioWork.checksum != buf[i] && sSioChecksumReady != 0) {
+            if (gSioWork.checksum != buf[i] && sSioChecksumReady) {
                 gSioWork.checksumError = 1;
             }
         }
@@ -552,7 +552,7 @@ void SioRecvWord() {
                 sSioRecvNonzero |= buf[i];
                 gSioWork.recvBuf[i][gSioWork.recvWordIdx][idx] = buf[i];
 
-                if (gSioWork.sendWordIdx == 1 && gSioWork.paused == 0 && (buf[i] & 0x1000)) {
+                if (gSioWork.sendWordIdx == 1 && !gSioWork.paused && (buf[i] & 0x1000)) {
                     gSioWork.paused = 1;
                     sSioPauseTimer = 5;
                 }
@@ -574,7 +574,7 @@ void SioSendWord() {
     if (gSioWork.sendWordIdx == 4) {
         REG_SIOMLT_SEND = gSioWork.checksum;
 
-        if (sSioSendEmpty == 0) {
+        if (!sSioSendEmpty) {
             gSioWork.sendCount--;
             gSioWork.sendReadIdx++;
 
@@ -589,13 +589,13 @@ void SioSendWord() {
             sSioSendEmpty = 1;
         }
 
-        if (sSioSendEmpty != 0) {
+        if (sSioSendEmpty) {
             REG_SIOMLT_SEND = 0;
         } else {
             REG_SIOMLT_SEND = gSioWork.sendBuf[gSioWork.sendWordIdx][gSioWork.sendReadIdx];
         }
 
-        if (gSioWork.paused == 0 && gSioWork.sendWordIdx == 0 && gSioWork.recvCount > 3) {
+        if (!gSioWork.paused && gSioWork.sendWordIdx == 0 && gSioWork.recvCount > 3) {
             REG_SIOMLT_SEND |= 0x1000;
         }
 

@@ -654,7 +654,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         }
 
         if (AnimIsFinished(&w->sub.anim)) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 ClearBtlObjActionFlags(act);
                 FadeToOriginal(FADE_MODE_BLACK, 8);
                 work->base.state = 0;

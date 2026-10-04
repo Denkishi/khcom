@@ -1043,7 +1043,7 @@ void MapInspectDraw() {
         if (sMapInspectCardBackSprite != NULL) {
             DrawSprite(112, 56, sMapInspectCardBackSprite, sMapInspectCardBackTiles, sMapInspectCardBackPalette, NULL, SPRITE_PRIORITY(2), 0x83E);
 
-            if (sMapInspectCardPremium != 0) {
+            if (sMapInspectCardPremium) {
                 DrawSprite(112, 56, AnimUpdate(&sMapInspectPremiumAnim), sMapInspectPremiumTiles, sMapInspectCardBackPalette, NULL, SPRITE_PRIORITY(2), 0x834);
             }
         }

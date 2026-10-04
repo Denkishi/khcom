@@ -432,7 +432,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
 
         break;
     case 4:
-        if (!FadeIsActive() && work->fadeStarted == 0) {
+        if (!FadeIsActive() && !work->fadeStarted) {
             FadeStartOut(FADE_MODE_BLACK, 16);
             work->fadeStarted = 1;
         }
@@ -447,7 +447,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
 
         break;
     case 2:
-        if (work->closing == 0) {
+        if (!work->closing) {
             if (GetKeysPressed() & START_BUTTON) {
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 FadeStartOut(FADE_MODE_BLACK, 16);
@@ -669,7 +669,7 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
 }
 
 void task_status_cursor_2(StatusCursorWork* work) {
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         if (!(gGameState.flags & GAME_FLAG_RIKU) || StatusTabHasItems()) {
             DrawSprite(work->x >> 8, (work->y >> 8) - 16, work->gfx[1], work->tiles2, work->palette2, NULL, 0, 0);
 
@@ -740,7 +740,7 @@ u8 task_status_stocklist_1(StatusStocklistWork* work) {
     work->timer++;
 
     if (work->timer > 24) {
-        work->blink = (work->blink == 0) ? 1 : 0;
+        work->blink = !work->blink ? 1 : 0;
         work->timer = 0;
     }
 
@@ -755,7 +755,7 @@ void task_status_stocklist_2(StatusStocklistWork* work) {
 
     for (i = 0; i < 8; i++) {
         if (work->tiles2[i] != NULL) {
-            if (work->blink != 0) {
+            if (work->blink) {
                 if (IsStockNew(GetStatusListItem(GetStatusScroll() + i))) {
                     DrawSprite(0, y, work->gfx, work->tiles, work->palette2, NULL, SPRITE_PRIORITY(2), i + 13);
                 }

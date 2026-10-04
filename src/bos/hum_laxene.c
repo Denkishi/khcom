@@ -865,7 +865,7 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
         return 0;
     }
 
-    if (work->onScreen == 0) {
+    if (!work->onScreen) {
         return 0;
     }
 
@@ -877,7 +877,7 @@ u8 task_hum_laxene_knf_1(LaxeneKnfWork* work) {
             work->state = 1;
             BgFxStartThunderHit(work->x, work->y, work->z + 0x1000);
         } else {
-            if (work->facingLeft != 0) {
+            if (work->facingLeft) {
                 work->x = work->x - work->vx;
             } else {
                 work->x = work->x + work->vx;
@@ -920,7 +920,7 @@ void task_hum_laxene_knf_2(LaxeneKnfWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
 
-    if (work->facingLeft != 0) {
+    if (work->facingLeft) {
         attr = GetBattleSpritePriorityFlags(work->y);
     } else {
         attr = GetBattleSpritePriorityFlags(work->y) | 1;

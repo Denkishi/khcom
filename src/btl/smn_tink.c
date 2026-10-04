@@ -318,7 +318,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
 
     ClampBattlePosition(&body->x, &body->y, -16, 0);
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

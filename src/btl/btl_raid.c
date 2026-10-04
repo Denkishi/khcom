@@ -67,7 +67,7 @@ void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ
         break;
     }
 
-    if (work->facingLeft == 0) {
+    if (!work->facingLeft) {
         dx = -dx;
     }
 
@@ -150,7 +150,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->attack = 105;
         work->state = 3;
 
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             work->angle = 192;
         } else {
             work->angle = 64;
@@ -163,7 +163,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->attack = 111;
         work->state = 4;
 
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             work->angle = 192;
         } else {
             work->angle = 64;
@@ -183,7 +183,7 @@ BtlObj* BtlRaidGetTarget(BtlRaidWork* work) {
     BtlObj* obj;
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             obj = gRikuBtlWork->actor;
         } else {
             obj = gBtlWork->actor;
@@ -210,7 +210,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     s32 y;
     s32 z;
 
-    if ((work->mainSide != 0 ? gBtlWork : gRikuBtlWork)->flags & BTL_FLAG_DISMISS_SUMMONS) {
+    if ((work->mainSide ? gBtlWork : gRikuBtlWork)->flags & BTL_FLAG_DISMISS_SUMMONS) {
         return 0;
     }
 
@@ -311,14 +311,14 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     case 0:
         ApproachValue(&work->vx, -0x800, work->timer);
 
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             work->x = work->x - work->vx;
         } else {
             work->x = work->x + work->vx;
         }
 
         if (work->flags & BTL_RAID_FLAG_STRIKE_ON_CONTACT) {
-            if (TestAttackBox(work->x, work->y, work->z, work->hitHalfSize, work->hitHalfSize, 32) != 0) {
+            if (TestAttackBox(work->x, work->y, work->z, work->hitHalfSize, work->hitHalfSize, 32)) {
                 work->state = 2;
                 work->timer = 0;
                 break;
@@ -355,7 +355,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     case 1:
         ApproachValue(&work->vx, -work->bounceVx, work->steps);
 
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             work->x = work->x - work->vx;
         } else {
             work->x = work->x + work->vx;
@@ -398,7 +398,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
             }
         }
 
-        if (!(work->flags & BTL_RAID_FLAG_BLADE_VISIBLE) && BgFxIsActive() == 0) {
+        if (!(work->flags & BTL_RAID_FLAG_BLADE_VISIBLE) && !BgFxIsActive()) {
             return 0;
         }
 
@@ -433,11 +433,11 @@ void task_btl_raid_2(BtlRaidWork* work) {
         if (scale == 256) {
             affine = NULL;
 
-            if (work->facingLeft == 0) {
+            if (!work->facingLeft) {
                 flags |= SPRITE_FLAG_HFLIP;
             }
         } else {
-            if (work->facingLeft == 0) {
+            if (!work->facingLeft) {
                 affine = AllocObjAffine(0, -scale, scale, 1);
             } else {
                 affine = AllocObjAffine(0, scale, scale, 1);

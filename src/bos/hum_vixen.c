@@ -449,7 +449,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             }
         }
 
-        if (AnimIsFinished(&w->base.anim) && BgFxIsActive() == 0) {
+        if (AnimIsFinished(&w->base.anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(act);
             w->base.state = 0;
             w->base.stateTimer = 0;
@@ -562,7 +562,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
         }
 
-        if (AnimGetFrame(&w->base.anim) > 4 && BgFxIsActive() == 0) {
+        if (AnimGetFrame(&w->base.anim) > 4 && !BgFxIsActive()) {
             m4aSongNumStart(SONG_VO_VIC_ATTACK02);
             m4aSongNumStart(SONG_BTL_VIC_ICEFALL);
             BgFxStartVixenIceFall(9999);
@@ -639,7 +639,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             VixenPlaceGroundIce(work);
         }
 
-        if (AnimIsFinished(&w->base.anim) && FadeIsActive() == 0) {
+        if (AnimIsFinished(&w->base.anim) && !FadeIsActive()) {
             ClearBtlObjActionFlags(act);
             w->base.state = 0;
             w->base.stateTimer = 0;
@@ -703,7 +703,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         if (AnimIsFinished(&w->base.anim) &&
-            IsTaskActiveNamed(work->task, sTaskDescHumVixenFrz.name) == 0) {
+            !IsTaskActiveNamed(work->task, sTaskDescHumVixenFrz.name)) {
             ClearBtlObjActionFlags(act);
             w->base.state = 0;
             w->base.stateTimer = 0;
@@ -777,7 +777,7 @@ u8 task_hum_vixen_ndl_1(VixenNdlWork* work) {
     switch (AnimGetFrame(&work->anim)) {
     case 1:
     case 2:
-        if (work->hitDone == 0) {
+        if (!work->hitDone) {
             if (gFrameCounter % 8 == work->hitPhase) {
                 ApplyAttackBox(0x13A, work->x, work->y, 0, 4, 4, 16);
             }
@@ -803,7 +803,7 @@ void task_hum_vixen_ndl_2(VixenNdlWork* work) {
     gfx = AnimGetGfx(&work->anim);
     attr = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->flipped != 0) {
+    if (work->flipped) {
         attr |= 1;
     }
 
@@ -1230,7 +1230,7 @@ void task_hum_vixen_frg_2(VixenFrgWork* work) {
     u16 attr;
     s32 i;
 
-    if (work->blinking != 0) {
+    if (work->blinking) {
         if (work->timer & 1) {
             return;
         }

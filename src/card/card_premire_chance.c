@@ -137,14 +137,14 @@ void PremireChanceCard_2(PremireChanceCardWork* w) {
         return;
     }
 
-    if (w->gfxLoaded != 0) {
+    if (w->gfxLoaded) {
         affine = AllocObjAffine(0, w->scaleX, w->scaleY, 1);
         DrawSprite(w->x + w->x2, w->y + w->y2, w->cardDef->gfx, w->tiles, w->palette2, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 70);
         DrawSprite(w->x + w->x2, w->y + w->y2, w->cardBack->gfx, w->tiles2, w->palette3, affine, SPRITE_PRIORITY(1),
                    sPremireChanceCardPriorities[w->position] + 69);
 
-        if (w->premium == 0) {
+        if (!w->premium) {
             DrawSprite(w->x + w->x2, w->y + w->y2, gUnk_09EE981C[w->cardDef->value], w->tiles3, w->palette3,
                        affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[w->position] + 68);
         } else {
@@ -187,7 +187,7 @@ u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* w) {
 }
 
 void LoadPremireChanceCardGfx(PremireChanceCardWork* w) {
-    if (w->gfxLoaded == 0) {
+    if (!w->gfxLoaded) {
         w->tiles2 = LoadObjTiles(w->cardBack->tiles, 0x280);
         w->palette3 = LoadObjPalette(gCard00Palette, 32);
         w->tiles = LoadObjTiles(w->cardDef->tiles, 0x200);
@@ -203,7 +203,7 @@ void LoadPremireChanceCardGfx(PremireChanceCardWork* w) {
 }
 
 void ReleasePremireChanceCardGfx(PremireChanceCardWork* w) {
-    if (w->gfxLoaded != 0) {
+    if (w->gfxLoaded) {
         ReleaseObjTiles(w->tiles2);
         ReleaseObjPalette(w->palette3);
         ReleaseObjTiles(w->tiles);

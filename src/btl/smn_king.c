@@ -195,7 +195,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
         body->z = body->groundZ;
     }
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

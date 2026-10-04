@@ -150,7 +150,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
             }
 
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);
-        } else if (BgFxIsActive() == 0) {
+        } else if (!BgFxIsActive()) {
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
             work->state = 4;
             work->stateTimer = 0;
@@ -174,7 +174,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         break;
     }
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

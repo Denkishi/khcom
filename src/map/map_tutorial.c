@@ -48,7 +48,7 @@ void MapTutorialWaitStart(MapTutorialWork* w) {
 }
 
 void MapTutorialDropBarrel(MapTutorialWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         AnimState* a;
 
         MapPickFreeFloorPosInView(&w->obj.fieldPosition, &w->obj.fieldPosition.y);
@@ -121,7 +121,7 @@ void MapTutorialWaitPrizeCard(MapTutorialWork* w) {
 }
 
 void MapTutorialSpawnEnemy(MapTutorialWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         AnimState* a;
         u8 v;
 
@@ -167,7 +167,7 @@ void MapTutorialEnemyAppear(MapTutorialWork* w) {
 void MapTutorialWaitEnemyMessage(MapTutorialWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         ColliderSetDisabled(&w->collider, 0);
         w->update = MapTutorialEnemyUpdate;
@@ -187,7 +187,7 @@ void MapTutorialEnemyUpdate(MapTutorialWork* w) {
         AnimChangeWithTables(a, 0, ANIM_FLAG_LOOP, gEmy00L09Anims, gEmy00L09Frames);
         SetObjTileSource(w->tiles, gEmy00L09Tiles);
         w->update = MapTutorialEnemyHit;
-    } else if (w->collider.colliding != 0) {
+    } else if (w->collider.colliding) {
         if (!(gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK) && w->collider.otherType == 1) {
             ColliderSetDisabled(&w->collider, 1);
             MapTutorialStartBattle();
@@ -259,7 +259,7 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
 
     TaskPoolDraw(&w->tasks);
 
-    if (w->visible != 0) {
+    if (w->visible) {
         x = (w->obj.fieldPosition.x >> 8) - (gFieldState->x >> 8);
         k = w->obj.fieldPosition.y >> 8;
         y = k + (w->obj.fieldPosition.z >> 8) - (gFieldState->y >> 8);
@@ -267,13 +267,13 @@ void Task_MapTutorial_2(MapTutorialWork* w) {
         t = w->flip;
         flags = SPRITE_PRIORITY(2);
 
-        if (t != 0) {
+        if (t) {
             flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP;
         }
 
         DrawSprite(x, y, w->gfx, w->tiles, w->palette, NULL, flags, v);
 
-        if (w->shadowVisible != 0) {
+        if (w->shadowVisible) {
             w->obj.shadowZ = w->obj.fieldPosition.ground;
             w->obj.shadowPriority = v + 1;
             TaskPoolDraw(&w->tasks2);

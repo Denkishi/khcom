@@ -143,7 +143,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
         return 0;
     }
 
-    if (work->collected == 0) {
+    if (!work->collected) {
         if (!(work->flags & BTL_PRIZE_FLAG_NO_MOVE)) {
             if (gBtlWork->boundsCallback != NULL) {
                 gBtlWork->boundsCallback(&work->x, &work->y, &work->z, &work->groundZ);

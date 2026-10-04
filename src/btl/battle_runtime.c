@@ -236,7 +236,7 @@ void HandleSoraCardInput() {
         RequestSwitchSoraCardList();
     }
 
-    if (IsSoraReloadCardSelected() != 0) {
+    if (IsSoraReloadCardSelected()) {
         gBtlWork->lHeldFrames = 0;
         gBtlWork->rHeldFrames = 0;
     } else {
@@ -342,7 +342,7 @@ void HandleRikuCardInput() {
         RequestSwitchRikuCardList();
     }
 
-    if (IsRikuReloadCardSelected() != 0) {
+    if (IsRikuReloadCardSelected()) {
         gBtlWork->lHeldFrames = 0;
         gBtlWork->rHeldFrames = 0;
     } else {
@@ -456,7 +456,7 @@ void HandleTutorialCardInput() {
     }
 
     if (!(gBtlWork->flags & BTL_FLAG_TUTORIAL_NO_CARD_SELECT)) {
-        if (IsSoraReloadCardSelected() != 0) {
+        if (IsSoraReloadCardSelected()) {
             gBtlWork->lHeldFrames = 0;
             gBtlWork->rHeldFrames = 0;
         } else {
@@ -1846,7 +1846,7 @@ void DropEnemyPrizes(BtlObj* p) {
         }
 
         if (gBtlWork->battleId != 120 && gBtlWork->battleId != 124) {
-            if (flag != 0) {
+            if (flag) {
                 CreateHeartlessCardTask(&gBtlWork->taskPools[0], p->x >> 8, p->y >> 8, p->z >> 8, p->kind);
             } else {
                 b.x = p->x;
@@ -2131,10 +2131,10 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
     s.z = z;
     s.tileCount = gEnemyTileCounts[id];
 
-    if (born != 0) {
+    if (born) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlBorn, &s);
     } else {
-        if (CanAllocObjTiles(s.tileCount) == 0 || CanAllocObjPalette(1) == 0) {
+        if (!CanAllocObjTiles(s.tileCount) || !CanAllocObjPalette(1)) {
             gBtlWork->pendingEnemies--;
             return 0;
         }
@@ -2234,7 +2234,7 @@ void SetGimmickTarget(s32 a, s32 b, s32 c) {
 
 void SetBtlPaletteFadeExcluded(u8 a, u8 b) {
     if (a <= 0x1F) {
-        if (b != 0) {
+        if (b) {
             gBtlWork->fadeExcludedPalettes |= 1 << a;
         } else {
             gBtlWork->fadeExcludedPalettes &= ~(1 << a);

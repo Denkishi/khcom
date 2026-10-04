@@ -20,7 +20,7 @@ void eu_080AB9FC() {
 }
 
 void eu_080ABA38() {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         sTextCheckMessageId++;
 
         if (sTextCheckMessageId == 179) {

@@ -892,7 +892,7 @@ s32 ApplyAttackBox(s32 a, s32 x, s32 y, s32 z, s16 p, s16 q, s16 r) {
             o = ListPoolNext(&o->node);
         }
 
-        if (flag != 0) {
+        if (flag) {
             return 2;
         }
 

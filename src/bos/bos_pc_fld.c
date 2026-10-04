@@ -70,7 +70,7 @@ void BosPcFldEnableObject(Task* task, u8 a) {
 
     ColliderSetDisabled(&work->collider, a);
 
-    if (a == 0) {
+    if (!a) {
         if (work->tiles == NULL) {
             work->tiles = LoadObjTiles(gUnk_09CC4E54, 0x200);
         }
@@ -100,7 +100,7 @@ void BosPcFldStartShake(s16 a) {
 void BosPcFldUpdateShake() {
     const s8* p;
 
-    if (sBosPcFldShakeActive != 0) {
+    if (sBosPcFldShakeActive) {
         p = sBosPcFldShakePatterns[sBosPcFldShakePattern];
         sBosPcFldShakeOffset += ((p[sBosPcFldShakeStep] << 12) - sBosPcFldShakeOffset) >> 3;
         sBosPcFldShakeStep += 1;

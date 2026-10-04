@@ -231,7 +231,7 @@ void FocusBtlSoraCameraOnTarget(BtlSoraWork* work) {
     s32 y;
     s32 z;
 
-    if (work->mainSide == 0) {
+    if (!work->mainSide) {
         return;
     }
 
@@ -264,14 +264,14 @@ void FocusBtlSoraCameraOnBgFx(BtlSoraWork* work) {
     s32 y;
     s32 z;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         BgFxGetPosition(&x, &y, &z);
         BtlMapFollowPosition(x, gBtlWork->actor->y, gBtlWork->actor->z);
     }
 }
 
 void FocusBtlSoraCamera(BtlSoraWork* work) {
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         BtlMapFollowPosition(work->actor.x, work->actor.y, work->actor.z);
     }
 }
@@ -319,7 +319,7 @@ void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 a, u16 b) {
 void LoadBtlSoraPalette(BtlSoraWork* work) {
     work->tiles = work->actor.btl->tiles;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         work->palette = LoadObjPalette(gSoraPalette, 0x20);
     } else {
         work->palette = LoadObjPalette(gUnk_096FAC64, 0x20);
@@ -648,7 +648,7 @@ BtlObj* PickBtlSoraTarget(BtlSoraWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             e = gRikuBtlWork->actor;
         } else {
             e = gBtlWork->actor;
@@ -709,7 +709,7 @@ u16 SwapBtlSoraKeyBits(u16 a, u16 b, u16 c) {
 
 BtlObj* GetBtlSoraActiveOpponent(BtlSoraWork* work) {
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
                 return gRikuBtlWork->actor;
             }
@@ -787,8 +787,8 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
     }
 
-    if (CanLevelUp() != 0) {
-        if (LevelUp() != 0) {
+    if (CanLevelUp()) {
+        if (LevelUp()) {
             CreateLevelUpEffectTask(p, &work->tasks);
         }
     }
@@ -885,7 +885,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if (work->frameCount % 20 == 0) {
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
@@ -916,7 +916,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->sioKeysA != 0) {
+        if (work->sioKeysA) {
             held = SioKeyGetHeldA();
             pressed = SioKeyGetPressedA();
         } else {
@@ -1019,7 +1019,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         work->flags |= BTL_SORA_FLAG_PASS_THROUGH;
 
         if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-            if (work->mainSide != 0) {
+            if (work->mainSide) {
                 id = ResolveLinkActiveCardsMove(sel, 0);
             } else {
                 id = ResolveLinkActiveCardsMove(sel, 1);
@@ -1998,7 +1998,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 AnimReset(&work->anim);
             }
 
-            if (AnimIsFinished(&work->anim) != 0) {
+            if (AnimIsFinished(&work->anim)) {
                 work->stateTimer = 1;
             } else {
                 work->steps++;
@@ -2051,7 +2051,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             if ((p->btl->flags & BTL_FLAG_RELOAD_CHARGING) && p->btl->hcEffect != 30) {
                 SetBtlSoraAnimation(work, 51, 0);
 
-                if (AnimIsFinished(&work->anim) != 0) {
+                if (AnimIsFinished(&work->anim)) {
                     AnimSetFrame(&work->anim, 3);
                 }
 
@@ -2357,7 +2357,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, 44, 0);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -2377,7 +2377,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         FocusBtlSoraCameraOnTarget(work);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -2449,7 +2449,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             if (work->state == 22) {
                 work->state = 18;
                 work->steps = 0;
@@ -2474,7 +2474,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, work->unk_191[0] + 47, 0);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -2509,11 +2509,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
-        if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             switch (p->btl->hcEffect) {
             case 13:
                 switch (work->variant[0]) {
@@ -2617,11 +2617,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
-        if ((s16)work->stateTimer > 25 && BgFxIsActive() == 0) {
+        if ((s16)work->stateTimer > 25 && !BgFxIsActive()) {
             FadeStartIn(FADE_MODE_GRAY, 8);
             SetBtlSoraState(work, 1);
         } else {
@@ -2646,10 +2646,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             BgFxStartPotion(p->x, p->y, p->z);
         }
 
-        if ((s16)work->stateTimer > 23 && BgFxIsActive() == 0) {
+        if ((s16)work->stateTimer > 23 && !BgFxIsActive()) {
             switch (work->variant[0]) {
             case 0:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraPotion();
                 } else {
                     RequestRikuPotion();
@@ -2657,7 +2657,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             case 1:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraHiPotion();
                 } else {
                     RequestRikuHiPotion();
@@ -2665,7 +2665,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             case 2:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegaPotion();
                 } else {
                     RequestRikuMegaPotion();
@@ -2673,7 +2673,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             case 3:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraEther();
                 } else {
                     RequestRikuEther();
@@ -2681,7 +2681,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             case 4:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegaEther();
                 } else {
                     RequestRikuMegaEther();
@@ -2689,7 +2689,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             case 5:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraElixir();
                 } else {
                     RequestRikuElixir();
@@ -2697,7 +2697,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 break;
             default:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegalixir();
                 } else {
                     RequestRikuMegalixir();
@@ -2875,7 +2875,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
+        if (AnimIsFinished(&work->anim) && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
             SetBtlSoraState(work, 1);
             break;
         }
@@ -2958,7 +2958,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         if ((s16)work->stateTimer == 30) {
             BgFxStartXmas(60);
             m4aSongNumStart(SONG_EF_XMAS);
-        } else if ((s16)work->stateTimer > 30 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 30 && !BgFxIsActive()) {
             e = gBtlWork->actor;
             CreateBtlPopTask(e, 10);
             e->hp += 50;
@@ -2995,7 +2995,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 }
             }
 
-            if (work->mainSide != 0) {
+            if (work->mainSide) {
                 RequestSoraMegalixir();
             } else {
                 RequestRikuMegalixir();
@@ -3136,7 +3136,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             m4aSongNumStart(SONG_EF_AIRO_HIT);
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
             SetBtlSoraState(work, 82);
             break;
@@ -3178,7 +3178,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             BgFxStartHoly(x, y, z, 112);
 
             m4aSongNumStart(SONG_EF_HOLLY);
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
             SetBtlSoraState(work, 82);
             break;
@@ -3221,7 +3221,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 BgFxAddPosition(0, 128, 0);
             }
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraAnimation(work, 46, 0);
                 SetBtlSoraState(work, 82);
                 m4aSongNumStop(SONG_EF_TRUNEDO);
@@ -3275,7 +3275,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->unk_158 = 20;
             BgFxStartBind(p->x, 115);
             m4aSongNumStart(SONG_EF_BIND);
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             if ((s16)--work->unk_158 <= 0) {
                 SetBtlSoraAnimation(work, 46, 0);
                 SetBtlSoraState(work, 82);
@@ -3310,7 +3310,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if ((s16)work->stateTimer > 41 && FadeIsActive() == 0) {
+        if ((s16)work->stateTimer > 41 && !FadeIsActive()) {
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -3396,7 +3396,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             } else {
                 BgFxStartSync(p->x - 768, p->y, p->z - 16384);
             }
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraAnimation(work, 46, 0);
             SetBtlSoraState(work, 82);
             break;
@@ -3450,13 +3450,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         } else if (work->variant[0] != 0 && (s16)work->stateTimer == 47) {
             SetBattleZoom(15, 148, 65536, 76800);
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
             SetBtlSoraState(work, 1);
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3499,13 +3499,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                                   work->variant[0] + 75);
                 }
             }
-        } else if ((s16)work->stateTimer > 27 && BgFxIsActive() == 0) {
+        } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBtlSoraState(work, 1);
             FadeToOriginal(FADE_MODE_ADD_WHITE, 20);
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3564,20 +3564,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                 }
 
-                if (d != 0) {
+                if (d) {
                     BgFxSetTarget(e->x, e->y, e->z - (e->centerHeight << 8));
                 }
             }
 
             FocusBtlSoraCameraOnBgFx(work);
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraState(work, 1);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3637,20 +3637,20 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     }
                 }
 
-                if (d != 0) {
+                if (d) {
                     BgFxSetTarget(e->x, e->y, e->z - (e->centerHeight << 8));
                 }
             }
 
             FocusBtlSoraCameraOnBgFx(work);
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraState(work, 1);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3702,13 +3702,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27) {
             FocusBtlSoraCameraOnBgFx(work);
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraState(work, 1);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3740,13 +3740,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27) {
             FocusBtlSoraCameraOnBgFx(work);
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraState(work, 1);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3794,13 +3794,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         } else if ((s16)work->stateTimer > 27) {
             FocusBtlSoraCameraOnBgFx(work);
 
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 SetBtlSoraState(work, 1);
                 break;
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
@@ -3905,7 +3905,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
             DisableBtlSoraPassThrough(work);
@@ -4207,7 +4207,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             p->originX = p->x;
             p->originY = p->y;
@@ -4220,7 +4220,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         break;
     case 82:
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -4256,7 +4256,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             FadeStartIn(FADE_MODE_ADD_WHITE, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
@@ -4554,7 +4554,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             MakeOpponentsHittable();
 
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
@@ -4653,7 +4653,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 p->x -= 2048;
             } else {
@@ -4735,7 +4735,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             SetBtlSoraState(work, 1);
         } else {
@@ -4790,7 +4790,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 60;
             work->stateTimer = 0;
         } else {
@@ -4851,7 +4851,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             SetBtlSoraAnimation(work, 76, 0);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->stateTimer = 0;
             SetBtlSoraState(work, 1);
         } else {
@@ -4970,7 +4970,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             if (work->comboCount == 0) {
                 SetBtlSoraState(work, 1);
                 FadeToOriginal(FADE_MODE_BLACK, 8);
@@ -5056,7 +5056,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             DisableBtlSoraPassThrough(work);
             SetBtlSoraState(work, 1);
             break;
@@ -5075,7 +5075,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCamera(work);
         SetBtlSoraAnimation(work, 64, 0);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 46;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5123,7 +5123,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 48;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5217,7 +5217,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->x += (p->originX - t) >> 3;
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
+        if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 3);
         } else {
@@ -5235,7 +5235,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCamera(work);
         SetBtlSoraAnimation(work, 64, 0);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 65;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5283,7 +5283,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->z += (p->originZ + (sine[(uv * 2) & 0xFF] << 3) - p->z) >> 3;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 67;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5346,7 +5346,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         BgFxAddPosition(p->x - t, p->y - t2, p->z - t3);
 #endif
 
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
             SetBtlSoraState(work, 3);
         } else {
@@ -5390,7 +5390,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
+        if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             SetBtlSoraState(work, 1);
         } else {
             work->stateTimer++;
@@ -5432,7 +5432,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
+        if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         } else {
@@ -5470,7 +5470,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && FadeIsActive() == 0) {
+        if (AnimIsFinished(&work->anim) && !FadeIsActive()) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         } else {
@@ -5547,7 +5547,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 40;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5609,7 +5609,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             p->flags |= 0x0000000400000000LL;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 41;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5656,11 +5656,11 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         FocusBtlSoraCamera(work);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlSoraAnimation(work, 1, 1);
         }
 
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -5716,7 +5716,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             break;
         }
 
-        if ((s16)work->stateTimer > 37 && IsTaskActiveNamed(work->task, gTaskDescBtlRaid.name) == 0) {
+        if ((s16)work->stateTimer > 37 && !IsTaskActiveNamed(work->task, gTaskDescBtlRaid.name)) {
             work->state = 32;
             work->steps = 0;
             work->stateTimer = 0;
@@ -5729,7 +5729,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         FocusBtlSoraCameraOnTarget(work);
         SetBtlSoraAnimation(work, 57, 0);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             SetBtlSoraState(work, 1);
         }
@@ -5762,7 +5762,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->speed = 0;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
@@ -5830,7 +5830,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             work->speed = 0;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
             work->speed = 0;
             work->state = 1;
@@ -5878,7 +5878,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         p->y += (-gSineTable[work->angle + 64] * (work->speed >> 1)) >> 8;
     }
 
-    if (p->collider.colliding != 0) {
+    if (p->collider.colliding) {
         if (p->collider.otherType == 12) {
             if (work->speed > 0 && work->state == 1) {
                 work->state = 36;
@@ -6029,7 +6029,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if (p->btl->flags & BTL_FLAG_PUSHING_EDGE) {
-            if (work->mainSide != 0) {
+            if (work->mainSide) {
                 FocusBtlSoraCamera(work);
             }
         }
@@ -6074,7 +6074,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
 #ifndef VERSION_EU
     if (work->actor.btl->hcEffect == 19) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             if (gFrameCounter & 1) {
                 return;
             }
@@ -6137,7 +6137,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 
-    if (StepHitFlash(p) != 0) {
+    if (StepHitFlash(p)) {
         u16 t = work->flags | BTL_SORA_FLAG_HIT_FLASH;
 
         work->flags = t;
@@ -6147,7 +6147,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
         work->flags = t;
 
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             LoadObjPaletteBank(work->palette->index, gSoraPalette);
         } else {
             LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
@@ -6156,7 +6156,7 @@ void task_btl_sora_2(BtlSoraWork* work) {
 
 #ifdef VERSION_EU
     if (p->btl->hcEffect == 19) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             if (gFrameCounter & 1) {
                 return;
             }

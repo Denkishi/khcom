@@ -891,7 +891,7 @@ void task_bos_jf_lamp_2(JfLampWork* work) {
         mode |= 1;
     }
 
-    if (gBtlWork->paused == 0 && (work->jf->flags & JF_FLAG_HURT) && (gFrameCounter & 1)) {
+    if (!gBtlWork->paused && (work->jf->flags & JF_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
     } else {
         pal = work->palette;

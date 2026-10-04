@@ -285,7 +285,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
         w->timer++;
 
         if (w->timer > 7) {
-            if (w->bossBattle == 0) {
+            if (!w->bossBattle) {
                 LoadBgTiles(1, gUnk_093FF8F8, bgSize);
 
 #ifdef VERSION_EU
@@ -622,7 +622,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[5] = 0;
 #endif
                             w->optionEnabled[2] = 0;
-                        } else if (IsLevelUpStockUnlocked() == 0) {
+                        } else if (!IsLevelUpStockUnlocked()) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -667,7 +667,7 @@ u8 Level_Up_1(LevelUpWork* w, void* a) {
                             w->textSlotCounts[4] = 0;
 #endif
                             w->optionEnabled[1] = 0;
-                        } else if ((u8)IsLevelUpApUnlocked() == 0) {
+                        } else if (!(u8)IsLevelUpApUnlocked()) {
 #ifdef VERSION_EU
                             UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -900,7 +900,7 @@ u8 UpdateLevelUpResult(LevelUpWork* w, void* a) {
             }
         }
 
-        if (w->applied == 0) {
+        if (!w->applied) {
             switch (w->cursor) {
             case 0: {
                 s32 amount = LevelUpMaxHp();
@@ -1064,7 +1064,7 @@ u8 UpdateLevelUpClose(LevelUpWork* w, void* a) {
 }
 
 u8 UpdateLevelUpWaitFade() {
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         return 0;
     }
 
@@ -1617,7 +1617,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[5] = 0;
 #endif
                 w->optionEnabled[2] = 0;
-            } else if (IsLevelUpStockUnlocked() == 0) {
+            } else if (!IsLevelUpStockUnlocked()) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[2], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else
@@ -1662,7 +1662,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* w, void* a) {
                 w->textSlotCounts[4] = 0;
 #endif
                 w->optionEnabled[1] = 0;
-            } else if ((u8)IsLevelUpApUnlocked() == 0) {
+            } else if (!(u8)IsLevelUpApUnlocked()) {
 #ifdef VERSION_EU
                 UpdateSpriteFrameTiles(w->tiles5[1], gLevelUpOptionSpritesByLanguage[gLanguage][6], gLevelUpOptionTilesByLanguage[gLanguage]);
 #else

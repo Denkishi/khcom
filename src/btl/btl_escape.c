@@ -62,7 +62,7 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
     }
 
     if (!(gBtlWork->flags & BTL_FLAG_PUSHING_EDGE)) {
-        if (work->visible != 0) {
+        if (work->visible) {
             work->progress = 0;
             work->visible = 0;
             work->timer = 0;
@@ -96,7 +96,7 @@ void task_btl_escape_2(BtlEscapeWork* work) {
     s32 v;
     ObjAffine* aff;
 
-    if (work->visible == 0) {
+    if (!work->visible) {
         return;
     }
 

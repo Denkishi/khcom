@@ -149,7 +149,7 @@ void MapChkSetParamToggle(u8* p, u8 a) {
 
 void MapChkSetFloorProgress(u8 a, u8 b) {
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
-        if (b != 0) {
+        if (b) {
             switch (a) {
             case 0:
                 gMapFloorState.progress = 1;
@@ -229,7 +229,7 @@ void MapChkSetFloorProgress(u8 a, u8 b) {
             }
         }
     } else {
-        if (b != 0) {
+        if (b) {
             switch (a) {
             case 0:
                 gMapFloorState.progress = 1;

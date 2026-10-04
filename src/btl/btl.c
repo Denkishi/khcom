@@ -169,12 +169,12 @@ void task_btl_area_0(BtlAreaWork* work) {
 }
 
 u8 task_btl_area_1(BtlAreaWork* work) {
-    if (work->enabled == 0) {
+    if (!work->enabled) {
         work->visible = 0;
         return 1;
     }
 
-    if (gBtlWork->areaUpdated != 0) {
+    if (gBtlWork->areaUpdated) {
         work->timer = 20;
         gBtlWork->areaUpdated = 0;
     }
@@ -197,7 +197,7 @@ void task_btl_area_2(BtlAreaWork* work) {
     s16 x;
     s16 y;
 
-    if (work->visible == 0) {
+    if (!work->visible) {
         return;
     }
 
@@ -222,7 +222,7 @@ void task_btl_area_2(BtlAreaWork* work) {
                   gBtlWork->z3 + (gBtlWork->areaHalfZ << 8));
     DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, SPRITE_FLAG_VFLIP, 0x101);
 
-    if (gBtlWork->soraOwnsPlay != 0) {
+    if (gBtlWork->soraOwnsPlay) {
         e = ListPoolFirst(&gBtlWork->pool);
 
         while (e != NULL) {

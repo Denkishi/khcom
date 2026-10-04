@@ -591,7 +591,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
                 }
             }
 
-            if (ok == 0) {
+            if (!ok) {
                 break;
             }
 
@@ -811,7 +811,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
             work->vz = 0;
         }
 
-        if (actor->collider.colliding != 0 && !(actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
+        if (actor->collider.colliding && !(actor->flags & BTLOBJ_FLAG_IN_CARD_ACTION) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }
@@ -892,7 +892,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 }
 
 void EmyDraw(EmyWork* work) {
-    if (work->visible != 0) {
+    if (work->visible) {
         BtlObj* actor;
         u16 g;
         ObjAffine* affine;
@@ -937,7 +937,7 @@ void EmyDraw(EmyWork* work) {
             affine = AllocObjAffine(0, sx, sy, 1);
         }
 
-        if (StepHitFlash(actor) != 0) {
+        if (StepHitFlash(actor)) {
             DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, g, (-4100 - ((actor->y >> 8) << 2)) | 3);
         } else {
             DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, g, (-4100 - ((actor->y >> 8) << 2)) | 3);

@@ -1387,7 +1387,7 @@ void mode_ms_charge_1() {
         break;
     case 2:
         if (!FadeIsActive()) {
-            if (sMsChargeBackToTop != 0) {
+            if (sMsChargeBackToTop) {
                 ModeRequest(&gModeMsTop, 2);
             } else {
                 RequestMapMode();

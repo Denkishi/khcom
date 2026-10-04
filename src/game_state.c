@@ -39,7 +39,7 @@ void RequestFieldResume() {
 }
 
 void SeedGameRandom() {
-    if (gGameState.fieldResume != 0) {
+    if (gGameState.fieldResume) {
         SeedRandom(gGameState.randomSeed);
     } else {
         gGameState.randomSeed = GetRandom();

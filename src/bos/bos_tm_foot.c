@@ -746,7 +746,7 @@ void task_bos_tm_foot_2(TmFootWork* work) {
         mode = 0x800;
     }
 
-    if (gBtlWork->paused != 0) {
+    if (gBtlWork->paused) {
         pal = work->palette;
     } else if ((work->tm->flags & TM_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
@@ -1120,14 +1120,14 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
         case 0:
             v = 0;
 
-            if (work->clbSwapped == 0) {
+            if (!work->clbSwapped) {
                 v = 1;
             }
 
             work->clbSwapped = v;
             break;
         case 22:
-            if (work->clbSwapped != 0) {
+            if (work->clbSwapped) {
                 BosTmClbThrow(&work->clb, &work->tips[0], -0x380);
             } else {
                 BosTmClbThrow(&work->clb2, &work->tips[0], -0x380);
@@ -1210,7 +1210,7 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
                 BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 20);
             }
         } else if (work->timer > 55) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 work->tips[0].angle = 0x110;
                 work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
             }
@@ -1244,14 +1244,14 @@ void BosTmArmUpdateArm1(TmArmWork* work) {
                 BgFxStartFireAtPlayer(x, y, z, 0, 0, 168, 18);
             }
         } else if (work->timer > 70) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 work->tips[0].angle = 0x110;
                 work->src->tm->flags |= TM_FLAG_ATTACK_DONE;
             }
         } else if (work->timer > 50) {
             v = BgFxIsActive();
 
-            if (v == 0) {
+            if (!v) {
                 j2 = &work->joints.all[3];
                 y2 = work->src->y2;
                 z2 = work->src->z2 + j2->curY - 0x2300;
@@ -1450,7 +1450,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         }
 
         if (work->timer2 % 30 == 12) {
-            if (work->clbSwapped != 0) {
+            if (work->clbSwapped) {
                 BosTmClbThrow(&work->clb2, &work->tips[1], -0x600);
             } else {
                 BosTmClbThrow(&work->clb, &work->tips[1], -0x600);
@@ -1519,7 +1519,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         }
 
         if (work->timer2 > 55) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 work->tips[1].angle = 240;
             }
         }
@@ -1540,7 +1540,7 @@ void BosTmArmUpdateArm0(TmArmWork* work) {
         }
 
         if (work->timer2 > 70) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 work->tips[1].angle = 240;
             }
         }
@@ -1669,7 +1669,7 @@ void task_bos_tm_arm_2(TmArmWork* work) {
     s32 i;
     TmArmJoint* j;
 
-    if (gBtlWork->paused != 0) {
+    if (gBtlWork->paused) {
         pal = work->palette;
     } else if ((work->src->tm->flags & TM_FLAG_HURT) && (gFrameCounter & 1)) {
         pal = work->palette2;
@@ -1749,8 +1749,8 @@ u8 task_bos_tm_tbl_1(TmTblWork* work) {
 
         break;
     case 0:
-        if (work->gimmickPlayed == 0) {
-            if (ConsumeGimmickFlag(0) != 0) {
+        if (!work->gimmickPlayed) {
+            if (ConsumeGimmickFlag(0)) {
                 work->gimmickPlayed = 1;
             }
         } else {

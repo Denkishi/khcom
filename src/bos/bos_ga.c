@@ -241,7 +241,7 @@ s32 BosGaEntryOffsetX(GaWork* work, s16 i) {
 
     v = sGaEntryDefs[i].offsetX;
 
-    if (work->flipped != 0) {
+    if (work->flipped) {
         v = -v;
     }
 
@@ -270,7 +270,7 @@ void BosGaEntryResetHome(GaWork* work, s32 i) {
 
     e = &work->entries[i];
 
-    if (work->flipped == 0) {
+    if (!work->flipped) {
         e->actor.flags |= BTLOBJ_FLAG_FACING_LEFT;
     } else {
         e->actor.flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -283,7 +283,7 @@ void BosGaEntryResetHome(GaWork* work, s32 i) {
     e->baseZ = BosGaEntryHomeZ(work, i);
     v = sGaEntryDefs[i].x2;
 
-    if (work->flipped != 0) {
+    if (work->flipped) {
         v = -v;
     }
 
@@ -633,7 +633,7 @@ u8 BosGaUpdateIdle(GaWork* work) {
         d = (dx + dy) >> 8;
 
         if (d <= 0xE0F) {
-            if (work->attackToggle == 0) {
+            if (!work->attackToggle) {
                 if (GetRandom() % 3 != 0) {
                     BosGaRequestState(work, 1);
                     RequestEnemyCardUse(&work->entries[0].actor);
@@ -649,7 +649,7 @@ u8 BosGaUpdateIdle(GaWork* work) {
                 }
             }
         } else if (d <= 0x270F) {
-            if (work->attackToggle == 0) {
+            if (!work->attackToggle) {
                 if (GetRandom() & 1) {
                     BosGaRequestState(work, 1);
                     RequestEnemyCardUse(&work->entries[0].actor);
@@ -665,7 +665,7 @@ u8 BosGaUpdateIdle(GaWork* work) {
                 }
             }
         } else {
-            if (work->attackToggle == 0) {
+            if (!work->attackToggle) {
                 if (GetRandom() % 3 != 0) {
                     BosGaRequestState(work, 2);
                 } else {
@@ -723,7 +723,7 @@ u8 BosGaUpdateWalk(GaWork* work) {
             x = gBtlWork->actor->x;
             y = gBtlWork->actor->y;
 
-            if (work->attackToggle == 0) {
+            if (!work->attackToggle) {
                 if (x > e->baseX) {
                     x -= 0x2800;
 
@@ -1266,7 +1266,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
             switch (work->step) {
             case 0:
                 if (e->index == 3) {
-                    e->baseX = e->baseX + (work->flipped == 0 ? 0x80 : -0x80);
+                    e->baseX = e->baseX + (!work->flipped ? 0x80 : -0x80);
                     work->timer++;
 
                     if (work->timer > 30) {
@@ -1280,7 +1280,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
                 break;
             case 1:
                 if (e->index == 3) {
-                    e->baseX = e->baseX + (work->flipped == 0 ? -0x300 : 0x300);
+                    e->baseX = e->baseX + (!work->flipped ? -0x300 : 0x300);
                     e->baseY += 0x133;
 
                     if (!(e->flags & GA_ENTRY_FLAG_DESTROYED)) {
@@ -1302,7 +1302,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
                 break;
             case 2:
                 if (e->index == 2) {
-                    e->baseX = e->baseX + (work->flipped == 0 ? 0x80 : -0x80);
+                    e->baseX = e->baseX + (!work->flipped ? 0x80 : -0x80);
                     work->timer++;
 
                     if (work->timer > 30) {
@@ -1316,7 +1316,7 @@ u8 BosGaUpdateThrust(GaWork* work) {
                 break;
             case 3:
                 if (e->index == 2) {
-                    e->baseX = e->baseX + (work->flipped == 0 ? -0x300 : 0x300);
+                    e->baseX = e->baseX + (!work->flipped ? -0x300 : 0x300);
                     e->baseY -= 0x133;
 
                     if (!(e->flags & GA_ENTRY_FLAG_DESTROYED)) {
@@ -1392,7 +1392,7 @@ u8 BosGaUpdateOrbit(GaWork* work) {
                 AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             case 3:
-                e->orbitAngle = work->flipped == 0 ? 0xC0 : 0x40;
+                e->orbitAngle = !work->flipped ? 0xC0 : 0x40;
                 AnimStart(&e->anim, 1, ANIM_FLAG_LOOP);
                 break;
             }
@@ -1413,13 +1413,13 @@ u8 BosGaUpdateOrbit(GaWork* work) {
                     break;
                 case 2:
                     t = e->orbitAngle;
-                    e->orbitAngle = work->flipped == 0 ? t - 1 : t + 1;
+                    e->orbitAngle = !work->flipped ? t - 1 : t + 1;
                     e->baseX = (gSineTable[e->orbitAngle] * work->orbitRadius >> 8) + work->entries[0].baseX;
                     e->baseY = (-gSineTable[e->orbitAngle + 0x40] * work->orbitRadius >> 8) + work->entries[0].baseY;
                     break;
                 case 3:
                     t = e->orbitAngle;
-                    e->orbitAngle = work->flipped == 0 ? t + 1 : t - 1;
+                    e->orbitAngle = !work->flipped ? t + 1 : t - 1;
                     e->baseX = (gSineTable[e->orbitAngle] * work->orbitRadius >> 8) + work->entries[0].baseX;
                     e->baseY = (-gSineTable[e->orbitAngle + 0x40] * work->orbitRadius >> 8) + work->entries[0].baseY;
                     break;
@@ -2314,7 +2314,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
 
                 if (i == 1) {
                     work->timer = 20;
-                    e->baseVx = (work->flipped == 0 ? -0xA00 : 0xA00) / work->timer;
+                    e->baseVx = (!work->flipped ? -0xA00 : 0xA00) / work->timer;
                     e->baseVy = 0x600 / work->timer;
                     work->step = 2;
                 }
@@ -2381,7 +2381,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
                     param.tileCount = e->tiles->count;
                     param.tilesAddr2 = OBJ_VRAM0 + (work->tiles->index << 5);
                     param.tileCount2 = work->tiles->count;
-                    param.x = e->baseX + (work->flipped == 0 ? -0x700 : 0x700);
+                    param.x = e->baseX + (!work->flipped ? -0x700 : 0x700);
                     param.y = e->baseY;
                     param.z = e->baseZ + 0x1000;
                     param.prizeObj = &e->actor;
@@ -2404,7 +2404,7 @@ u8 BosGaUpdateDefeat(GaWork* work) {
             work->step = 6;
             break;
         case 6:
-            if (CharaObjUpdateDefeat() == 0) {
+            if (!CharaObjUpdateDefeat()) {
                 EndBossDefeat();
                 result = 0;
             }
@@ -2480,7 +2480,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                             BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2488,7 +2488,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2522,7 +2522,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                             BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2530,7 +2530,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2564,7 +2564,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                             BosGaRequestState(work, 5);
                         }
                     } else {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2572,7 +2572,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
                     }
                 } else {
                     if ((work->entries[4].flags & work->entries[5].flags & GA_ENTRY_FLAG_DESTROYED) == 0) {
-                        if (work->attackToggle == 0) {
+                        if (!work->attackToggle) {
                             BosGaRequestState(work, 6);
                         } else {
                             BosGaRequestState(work, 3);
@@ -2595,7 +2595,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
         }
 
         if (GetRandom() % 3 != 0) {
-            if (work->attackToggle == 0) {
+            if (!work->attackToggle) {
                 work->attackToggle = 1;
             } else {
                 work->attackToggle = 0;
@@ -2632,7 +2632,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
             e->unk_15C = 0;
 
             if (work->state != 10 && work->nextState != 10) {
-                if (work->cardActionSeen != 0) {
+                if (work->cardActionSeen) {
                     ClearBtlObjActionFlags(&work->entries[0].actor);
                 }
 
@@ -2736,7 +2736,7 @@ void BosGaEntryUpdate(GaWork* work, GaEntryWork* e) {
         work->gfx = AnimUpdate(&work->anim);
     }
 
-    if (e->actor.collider.colliding != 0) {
+    if (e->actor.collider.colliding) {
         e->actor.x += e->actor.collider.pushX;
         e->actor.y += e->actor.collider.pushY;
     }

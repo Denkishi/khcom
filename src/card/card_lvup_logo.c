@@ -86,7 +86,7 @@ void LVUP_EFFECT_0(LevelUpEffectWork* w, LevelUpEffectArgs* a) {
     w->gatherSteps = 24;
     TaskPoolInit(&w->tasks, 4);
 
-    if (w->target != NULL && sLvupLogoActive == 0) {
+    if (w->target != NULL && !sLvupLogoActive) {
         args.x = w->x[0];
         args.y = w->y[0];
         args.target = w->target;

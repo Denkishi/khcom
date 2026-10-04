@@ -302,7 +302,7 @@ u8 task_hum_lexceus_1(LexceusWork* work) {
         }
 
         if (w->flags & LEXCEUS_FLAG_WEAPON_THROWN) {
-            if (IsTaskActiveNamed(w->task, sTaskDescHumLexTmh.name) == 0) {
+            if (!IsTaskActiveNamed(w->task, sTaskDescHumLexTmh.name)) {
                 work->base.stateTimer = 0;
                 work->base.state = 24;
                 break;
@@ -634,7 +634,7 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
         return 0;
     }
 
-    if (work->done != 0) {
+    if (work->done) {
         return 0;
     }
 
@@ -674,7 +674,7 @@ u8 task_hum_lex_tmh_1(LexTmhWork* work) {
             work->done = 1;
         }
 
-        if (work->flyLeft != 0) {
+        if (work->flyLeft) {
             work->x += -0x400;
         } else {
             work->x += 0x400;
@@ -712,7 +712,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
 
-    if (work->facingLeft != 0) {
+    if (work->facingLeft) {
         attr = GetBattleSpritePriorityFlags(work->y);
     } else {
         attr = GetBattleSpritePriorityFlags(work->y) | 1;
@@ -792,13 +792,13 @@ void task_hum_lex_tmh0_2(LexTmh0Work* work) {
     h = work->scale;
 
     if (h == 0x100) {
-        if (work->facingLeft == 0) {
+        if (!work->facingLeft) {
             attr |= 1;
         }
 
         sx = h;
     } else {
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             sx = h;
         } else {
             sx = -h;
@@ -894,7 +894,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
             AnimInit(&work->anim[i], gRexeusRock02Anims, gRexeusRock02Frames);
             AnimStart(&work->anim[i], GetRandom() % 5 + 2, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START);
 
-            if (work->facingLeft != 0) {
+            if (work->facingLeft) {
                 e->vx = -(GetRandom() % 0x501 + 0x300);
             } else {
                 e->vx = GetRandom() % 0x501 + 0x300;
@@ -917,7 +917,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
         work->timer = 0;
         break;
     case 6:
-        if (work->blinking == 0) {
+        if (!work->blinking) {
             MakeOpponentsHittable();
 
             for (i = 0; i < 12; i++) {
@@ -945,7 +945,7 @@ u8 task_hum_lex_rock_1(LexRockWork* work) {
                     break;
                 }
 
-                if (e->hasHit == 0) {
+                if (!e->hasHit) {
                     if (ApplyAttackBox(0x148, e->x, e->y, e->z, 4, 4, 4)) {
                         m4aSongNumStart(SONG_BTL_MON_HIT02);
                         e->hasHit = 1;
@@ -981,14 +981,14 @@ void task_hum_lex_rock_2(LexRockWork* work) {
     s32 i;
     LexRockSub* e;
 
-    if (work->blinking != 0 && (work->timer & 1)) {
+    if (work->blinking && (work->timer & 1)) {
         return;
     }
 
     if (work->rockCount == 1) {
         gfx = AnimGetGfx(&work->anim[0]);
 
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             attr = GetBattleSpritePriorityFlags(work->y);
         } else {
             attr = GetBattleSpritePriorityFlags(work->y) | 1;
@@ -1002,7 +1002,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
             e = &work->sub[i];
             gfx = AnimGetGfx(&work->anim[i]);
 
-            if (work->facingLeft != 0) {
+            if (work->facingLeft) {
                 attr = GetBattleSpritePriorityFlags(e->y);
             } else {
                 attr = GetBattleSpritePriorityFlags(e->y) | 1;

@@ -398,7 +398,7 @@ void BosMdLoadBgTiles(MdWork* work, u16 index) {
 void BosMdSetFrame(MdWork* work, u16 id) {
     s32 n;
 
-    if (work->bgVisible == 0) {
+    if (!work->bgVisible) {
         return;
     }
 
@@ -492,7 +492,7 @@ u8 BosMdUpdateIdle(MdWork* work) {
 
         break;
     case 1:
-        if (BosMdAnimIsLastFrame(work) != 0 && gBtlWork->actor->x > 0x8000) {
+        if (BosMdAnimIsLastFrame(work) && gBtlWork->actor->x > 0x8000) {
             MdAnimStart(work, 1);
         }
 
@@ -596,7 +596,7 @@ u8 BosMdUpdateBite(MdWork* work) {
                 break;
             }
 
-            if (BosMdAnimIsLastFrame(work) != 0) {
+            if (BosMdAnimIsLastFrame(work)) {
                 BosMdRequestState(work, 0);
             }
 
@@ -682,7 +682,7 @@ u8 BosMdUpdateQuake(MdWork* work) {
                 break;
             }
 
-            if (BosMdAnimIsLastFrame(work) != 0) {
+            if (BosMdAnimIsLastFrame(work)) {
                 BosMdRequestState(work, 0);
             }
 
@@ -721,7 +721,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
         case 1:
             switch (work->step) {
                 case 0:
-                    if (BosMdAnimIsLastFrame(work) != 0) {
+                    if (BosMdAnimIsLastFrame(work)) {
                         MdAnimStart(work, 3);
                         BgFxStartDragonFire(work->sub[0].x, work->sub[0].y,
                                       work->sub[0].z + 0x1200, 512);
@@ -736,7 +736,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
                         m4aSongNumStart(SONG_SND_714);
                     }
 
-                    if (BgFxIsActive() == 0) {
+                    if (!BgFxIsActive()) {
                         work->signals &= 0xFFFD;
                         a.pool = &work->tasks;
                         a.index = 0;
@@ -775,7 +775,7 @@ u8 BosMdUpdateFireBreath(MdWork* work) {
 
                     break;
                 case 2:
-                    if (BosMdAnimIsLastFrame(work) != 0) {
+                    if (BosMdAnimIsLastFrame(work)) {
                         BosMdRequestState(work, 0);
                     }
 
@@ -821,7 +821,7 @@ u8 BosMdUpdateDefeat(MdWork* work) {
         case 1:
             switch (work->step) {
             case 0:
-                if (FadeIsActive() == 0) {
+                if (!FadeIsActive()) {
                     BgFxStartBossDeath(work->sub[0].x,
                                   work->sub[0].y + work->sub[0].z);
                     FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -840,12 +840,12 @@ u8 BosMdUpdateDefeat(MdWork* work) {
 
                 break;
             case 2:
-                if (work->bgVisible != 0 && FadeGetAmount() == 31) {
+                if (work->bgVisible && FadeGetAmount() == 31) {
                     DisableBg(1);
                     work->bgVisible = 0;
                 }
 
-                if (BgFxIsActive() == 0) {
+                if (!BgFxIsActive()) {
                     arg.x = work->sub[0].x;
                     arg.y = work->sub[0].y;
                     arg.z = work->sub[0].z;
@@ -1063,7 +1063,7 @@ s32 task_bos_md_1(MdWork* work) {
 
     BosMdEndHurt(work);
 
-    if (ConsumeGimmickFlag(0) != 0) {
+    if (ConsumeGimmickFlag(0)) {
         args[0] = &work->tasks3;
         args[1] = &work->signals;
         TaskCreate(&work->tasks2, &sTaskDescBosMdDai, args);
@@ -1104,11 +1104,11 @@ void task_bos_md_2(MdWork* work) {
     void* p0;
     s32 i;
 
-    if (work->bgVisible == 0) {
+    if (!work->bgVisible) {
         return;
     }
 
-    if (StepHitFlash(&work->sub[0]) != 0) {
+    if (StepHitFlash(&work->sub[0])) {
         if (work->bgPalette != gUnk_08F69BC4) {
             LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
             work->bgPalette = gUnk_08F69BC4;
@@ -1346,7 +1346,7 @@ u8 BosMdFireUpdateMotion(MdFireWork* work) {
 
             if (work->contactCooldown > 0) {
                 work->contactCooldown--;
-            } else if (ColliderIsTouchingType(&work->sub.collider, 1) != 0) {
+            } else if (ColliderIsTouchingType(&work->sub.collider, 1)) {
                 m4aSongNumStart(SONG_SND_714);
                 gBtlWork->actor->flags |= BTLOBJ_FLAG_HAZARD_PENDING;
                 work->contactCooldown = 60;

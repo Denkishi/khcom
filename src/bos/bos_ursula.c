@@ -319,7 +319,7 @@ void BosUrsulaUpdateMapBlocks(UrsulaWork* work) {
 }
 
 u8 BosUrsulaIsGuarded(UrsulaWork* work) {
-    if (work->gimmickTimer == 0 && BosUrsulaTakoIsBusy(work->tako->work) == 0 && BosUrsulaTakoIsBusy(work->tako2->work) == 0) {
+    if (work->gimmickTimer == 0 && !BosUrsulaTakoIsBusy(work->tako->work) && !BosUrsulaTakoIsBusy(work->tako2->work)) {
         return 1;
     }
 
@@ -465,7 +465,7 @@ s32 BosUrsulaChooseAttack(UrsulaWork* work) {
 }
 
 void BosUrsulaRecoverPendingTakos(UrsulaWork* work) {
-    if (work->takoRecoverPending != 0) {
+    if (work->takoRecoverPending) {
         BosUrsulaTakoEndDown(work->tako->work);
         BosUrsulaTakoEndDown(work->tako2->work);
         work->takoRecoverPending = 0;
@@ -473,7 +473,7 @@ void BosUrsulaRecoverPendingTakos(UrsulaWork* work) {
 }
 
 void BosUrsulaUpdateTakoRecovery(UrsulaWork* work) {
-    if (work->gimmickTimer == 0 && BosUrsulaTakoIsStoodOn(work->tako->work) == 0 && BosUrsulaTakoIsStoodOn(work->tako2->work) == 0) {
+    if (work->gimmickTimer == 0 && !BosUrsulaTakoIsStoodOn(work->tako->work) && !BosUrsulaTakoIsStoodOn(work->tako2->work)) {
         BosUrsulaRecoverPendingTakos(work);
         work->takoRecoverPending = 1;
     } else {
@@ -785,7 +785,7 @@ u8 BosUrsulaObjectsGone() {
 }
 
 u8 BosUrsulaIsGimmickStarting() {
-    if (BosUrsulaObjectsGone() != 0 || BosUrsulaIsGimmickActive() == 0 || sUrsulaWork->gimmickDelay == 0) {
+    if (BosUrsulaObjectsGone() || !BosUrsulaIsGimmickActive() || sUrsulaWork->gimmickDelay == 0) {
         return 0;
     }
 
@@ -793,7 +793,7 @@ u8 BosUrsulaIsGimmickStarting() {
 }
 
 u8 func_080DC5B0() {
-    if (BosUrsulaIsGimmickActive() != 0 && (sUrsulaWork->sinkSteps != 0 || sUrsulaWork->riseSteps != 0 || sUrsulaWork->unk_15C != 0)) {
+    if (BosUrsulaIsGimmickActive() && (sUrsulaWork->sinkSteps != 0 || sUrsulaWork->riseSteps != 0 || sUrsulaWork->unk_15C != 0)) {
         return 1;
     }
 
@@ -859,7 +859,7 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     s32 b;
     u8 v;
 
-    if (BosUrsulaIsGimmickStarting() != 0) {
+    if (BosUrsulaIsGimmickStarting()) {
         return 1;
     }
 
@@ -890,10 +890,10 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
         gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
     }
 
-    if (func_080DC5B0() != 0 && work->viewYMaxTarget == 0x1E000) {
+    if (func_080DC5B0() && work->viewYMaxTarget == 0x1E000) {
         work->viewYMaxTarget = 0x22000;
         work->viewYMaxSteps = 20;
-    } else if (func_080DC5B0() == 0 && work->viewYMaxTarget == 0x22000) {
+    } else if (!func_080DC5B0() && work->viewYMaxTarget == 0x22000) {
         work->viewYMaxTarget = 0x1E000;
         work->viewYMaxSteps = 20;
     }
@@ -913,7 +913,7 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     ScrollBgMapTo(1, (gBtlWork->viewX >> 8) - 0x78, (gBtlWork->viewY >> 8) - 0x50);
     v = -0x18 - (gBtlWork->viewY >> 8);
 
-    if (v > 0xA0 || gBosUrsulaActive == 0) {
+    if (v > 0xA0 || !gBosUrsulaActive) {
         gDispCnt &= ~DISPCNT_WIN0_ON;
     } else {
         gDispCnt |= DISPCNT_WIN0_ON;
@@ -1229,8 +1229,8 @@ void task_bos_ursula_tako_2(UrsulaTakoWork* work) {
     s16 x;
     s16 y;
 
-    if (work->state != 4 && BosUrsulaIsGimmickActive() == 0) {
-        pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
+    if (work->state != 4 && !BosUrsulaIsGimmickActive()) {
+        pal = StepHitFlash(p) ? work->palette2 : work->palette;
         WorldToScreen(&x, &y, p->x, p->y, p->z);
         DrawSprite(x, y, AnimGetGfx(&work->anim), work->tiles, pal, NULL, SPRITE_PRIORITY(2), 0xFC00);
     }
@@ -1317,7 +1317,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
 }
 
 u8 task_bos_ursula_backtako_1(UrsulaBacktakoWork* work) {
-    if (BosUrsulaIsDefeated() == 0) {
+    if (!BosUrsulaIsDefeated()) {
         BosUrsulaBacktakoGetPosition(&work->x, &work->y, &work->z, work);
         work->isLeft = work->isLeft == 0 ? 1 : 0;
         BosUrsulaBacktakoGetPosition(&work->x2, &work->y2, &work->z2, work);
@@ -1333,7 +1333,7 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work) {
     s16 y;
     u8 f = BosUrsulaIsGimmickActive();
 
-    if (f != 0) {
+    if (f) {
         return;
     }
 
@@ -1363,7 +1363,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
 
     BosMapanimeUpdate(&work->anim, work->anim.def, 0);
 
-    if (BosMapanimeIsAtEnd(&work->anim) != 0) {
+    if (BosMapanimeIsAtEnd(&work->anim)) {
         if (work->anim.def == &sBosUrsulaMapanimeWindup) {
             if (work->attack == 1) {
                 BosMapanimeInit(&work->anim, &sBosUrsulaMapanimeBubble);
@@ -1383,7 +1383,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
     }
 
     if (work->anim.def == &sBosUrsulaMapanimeCharge && BosMapanimeGetFrameIndex(&work->anim) == 2) {
-        if (work->attackSpawned == 0) {
+        if (!work->attackSpawned) {
             work->attackSpawned = 1;
             BgFxStartUrsulaBeam(gBtlWork->bossX, gBtlWork->bossY + 0xC00,
                 gBtlWork->bossZ, BosUrsulaIsFacingLeft(), 0x266, 0x78);
@@ -1397,7 +1397,7 @@ u8 task_bos_ursula_mapanime_1(UrsulaMapanimeWork* work) {
     }
 
     if (work->anim.def == &sBosUrsulaMapanimeBubble && BosMapanimeGetFrameIndex(&work->anim) == 2
-            && work->attackSpawned == 0) {
+            && !work->attackSpawned) {
         work->attackSpawned = 1;
         work->task = TaskCreate(&work->tasks, &gTaskDescBosUrsulaBubble, NULL);
     }
@@ -1416,7 +1416,7 @@ void task_bos_ursula_mapanime_3(UrsulaMapanimeWork* work) {
 }
 
 void BosUrsulaStartAttack(s32 a) {
-    if (IsTaskActive(sUrsulaMapanimeWork->task) != 0) {
+    if (IsTaskActive(sUrsulaMapanimeWork->task)) {
         if (strcmp(GetTaskName(sUrsulaMapanimeWork->task), "task_bos_ursula_bubble") == 0) {
             BosUrsulaPopBubbles(sUrsulaMapanimeWork->task->work);
         } else {

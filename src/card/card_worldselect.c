@@ -151,7 +151,7 @@ void MapSelect_0(MapSelectWork* w, u8* a) {
 
     w->tiles3 = NULL;
 
-    if (w->isEventDoor == 0) {
+    if (!w->isEventDoor) {
         if (w->requiredValue == 0) {
             w->tiles4 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(w->tiles4, gUnk_09EF1198[0], gUnk_0950C478);
@@ -758,7 +758,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_BEEP);
         break;
     case B_BUTTON:
-        if (w->inTutorial == 0) {
+        if (!w->inTutorial) {
             for (p = ListPoolFirst(&w->cards); p != NULL; p = ListPoolNext(&p->node)) {
                 p->flags &= ~MAPCARD_FLAG_RAISED;
             }
@@ -837,7 +837,7 @@ u8 UpdateMapSelectClose(MapSelectWork* w) {
         ApproachValue(&w->y4, 0xA000, w->barSteps);
         w->barSteps--;
     } else {
-        if (w->cancelled != 0 || (w->card->flags & MAPCARD_FLAG_DELIVERED)) {
+        if (w->cancelled || (w->card->flags & MAPCARD_FLAG_DELIVERED)) {
             return 0;
         }
     }
@@ -875,12 +875,12 @@ void MapSelect_2(MapSelectWork* w) {
         }
     }
 
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         DrawSprite((w->x >> 8) - 23, (w->y >> 8) - 27, w->gfx, w->tiles, w->palette2, NULL, 0, 41);
         DrawSprite((w->x2 >> 8) - 16, (w->y2 >> 8) - 12, w->gfx2, w->tiles5, w->palette3, NULL, 0, 40);
     }
 
-    if (w->scrollBarVisible != 0) {
+    if (w->scrollBarVisible) {
         DrawSprite(224,
 #ifdef VERSION_EU
                    (18 / w->lastPage) * w->page + 108,
@@ -890,7 +890,7 @@ void MapSelect_2(MapSelectWork* w) {
                    gUnk_09EEB000, w->tiles6, w->palette, NULL, 0, 40);
     }
 
-    if (w->isEventDoor == 0 && w->mosaicX != 9 && w->mosaicY != 9) {
+    if (!w->isEventDoor && w->mosaicX != 9 && w->mosaicY != 9) {
         DrawSprite(120, 56, NULL, w->tiles4, w->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
         DrawSprite(120, 56, gCardBacks[4].gfx2, w->tiles2, w->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
     }
@@ -1822,7 +1822,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* w, void* a) {
 
     r = IsMessageWindowOpen();
 
-    if (r == 0) {
+    if (!r) {
         if (w->messageTimer == 8) {
             w->messageTimer = 0;
 
@@ -2060,7 +2060,7 @@ s32 func_080948F0(MapcardWork* w, void* a) {
     UpdateMapcardRise(w);
     UpdateMapcardGfx(w);
 
-    if (t == 0) {
+    if (!t) {
         w->flags &= 0xFFF3;
         SetTaskUpdate(a, (TaskUpdateFunc)Mapcard_1);
     }
@@ -2170,7 +2170,7 @@ void Mapcard_2(MapcardWork* w) {
     u16 y;
     void* sprite;
 
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         y = (w->y >> 8) + (gSineTable[w->angle] >> 8);
 
         if (w->flags & MAPCARD_FLAG_GFX_LOADED) {

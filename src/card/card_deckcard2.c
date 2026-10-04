@@ -115,7 +115,7 @@ void DeckCard2_2(DeckCard2Work* n) {
     if (n->tiles != NULL && n->palette != NULL) {
         DrawSprite(n->x >> 8, n->y >> 8, n->cardDef->gfx2, n->tiles, n->palette, NULL, 0, 0x33);
 
-        if (n->premium != 0) {
+        if (n->premium) {
             DrawSprite(n->x >> 8, n->y >> 8, gCardUiSpriteState.gfx, gCardUiSpriteState.tiles, gCardUiSpriteState.palette, NULL, 0, 0x28);
         }
     }

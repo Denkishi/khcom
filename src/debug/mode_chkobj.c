@@ -1476,13 +1476,13 @@ void mode_chkobj_1() {
         TaskPoolUpdate(&sChkObjWork->pool);
         TaskPoolDraw(&sChkObjWork->pool);
 
-        if (sChkObjWork->paused == 0 || (GetKeysRepeat() & A_BUTTON)) {
+        if (!sChkObjWork->paused || (GetKeysRepeat() & A_BUTTON)) {
             AnimUpdate(&sChkObjWork->anim);
         }
 
         sChkObjWork->gfx = AnimGetGfx(&sChkObjWork->anim);
 
-        if (sChkObjWork->paused != 0) {
+        if (sChkObjWork->paused) {
             PrintString(0, 1, 0, "PAUSE");
         } else {
             PrintString(0, 1, 0, "     ");

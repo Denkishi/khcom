@@ -996,7 +996,7 @@ void BgFxStartLimit(s32 x, s32 y, s32 z, u8 f) {
     sBgFx->y = y;
     sBgFx->z = z;
 
-    if (f != 0) {
+    if (f) {
         sBgFx->scaleX = -0x100;
     }
 
@@ -1018,7 +1018,7 @@ void func_080137C8(s32 x, s32 y, s32 z, u8 f) {
     sBgFx->y = y;
     sBgFx->z = z - 0x1000;
 
-    if (f != 0) {
+    if (f) {
         sBgFx->scaleX = -0x100;
     }
 
@@ -1919,7 +1919,7 @@ void BgFxStartGravity(u16 a, s32 x, s32 y, s32 z, s32 p, s32 q, s32 r, u8 f, s32
     sBgFx->unk_30 = r;
     sBgFx->attack = w;
 
-    if (f != 0) {
+    if (f) {
         sBgFx->scaleX = -sBgFx->scaleX;
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
@@ -2060,7 +2060,7 @@ void BgFxStartGas(s32 x, s32 y, s32 z, u8 f) {
     sBgFx->update = BgFxUpdateGas;
     m4aSongNumStart(SONG_EF_BFG_GASS);
 
-    if (f == 0) {
+    if (!f) {
         sBgFx->flags |= BGFX_FLAG_FLIP_X;
     }
 
@@ -2145,7 +2145,7 @@ void BgFxUpdateBossDeathFlash() {
 
         break;
     case 1:
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             BgAnimStop();
             FadeStartIn(FADE_MODE_ADD_WHITE, 120);
             FadeLock();

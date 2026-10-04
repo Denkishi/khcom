@@ -130,7 +130,7 @@ void EnemyCardDraw(CardDisplayWork* p) {
                 DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                            gfx, p->tiles, p->palette, affine, flags, p->priority);
 
-                if (p->valueModified != 0) {
+                if (p->valueModified) {
                     DrawSprite(p->x >> 8, (p->y >> 8) + (gSineTable[p->bobAngle] >> 8),
                                gUnk_09EE981C[p->value], gCardBattleState->tiles7,
                                gCardBattleState->palette2, affine, flags, p->priority - 2);
@@ -688,7 +688,7 @@ void UseEnemyCard(u16 arg) {
 
             if (gBtlWork->hcEffect == 2) {
 #ifdef VERSION_EU
-                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && gCardBattleState->soraStockActive == 0) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
                     found = 1;
                 }
 #else
@@ -735,7 +735,7 @@ void UseEnemyCard(u16 arg) {
 #endif
             }
 
-            if (found == 0) {
+            if (!found) {
                 gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
@@ -795,7 +795,7 @@ void UseEnemyCard(u16 arg) {
 
             if (gBtlWork->hcEffect == 2) {
 #ifdef VERSION_EU
-                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && gCardBattleState->soraStockActive == 0) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
                     flag = 1;
                 }
 #else
@@ -841,7 +841,7 @@ void UseEnemyCard(u16 arg) {
                 }
             }
 
-            if (flag == 0) {
+            if (!flag) {
                 gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
 
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {

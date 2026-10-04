@@ -20,7 +20,7 @@
 #include <stddef.h>
 
 void MapNamineCheckTalk(MapNamineWork* w) {
-    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
+    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gMapFloorState.progress == 27) {
@@ -34,7 +34,7 @@ void MapNamineCheckTalk(MapNamineWork* w) {
 }
 
 void MapNamineWaitMessage(MapNamineWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapNamineCheckTalk;
     }
@@ -80,7 +80,7 @@ void Task_MapNamine_0(MapNamineWork* w) {
     ColliderInit(&w->collider, 4, 16, 48);
     ColliderSetPosition(&w->collider, p->fieldPosition.x, p->fieldPosition.y, p->fieldPosition.z);
 
-    if (w->registered != 0) {
+    if (w->registered) {
         FldObjRegister(p);
     }
 
@@ -92,7 +92,7 @@ void Task_MapNamine_0(MapNamineWork* w) {
 }
 
 s32 Task_MapNamine_1(MapNamineWork* w) {
-    if ((u8)IsMapInterrupted() != 0) {
+    if ((u8)IsMapInterrupted()) {
         w->visible = 0;
     } else {
         w->visible = 1;
@@ -116,7 +116,7 @@ void Task_MapNamine_2(MapNamineWork* w) {
     s16 x;
     s16 y;
 
-    if (w->visible != 0) {
+    if (w->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
@@ -126,7 +126,7 @@ void Task_MapNamine_2(MapNamineWork* w) {
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->targeted != 0) {
+        if (w->targeted) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -137,7 +137,7 @@ void Task_MapNamine_3(MapNamineWork* w) {
     ReleaseObjPalette(w->palette);
     ColliderUnregister(&w->collider);
 
-    if (w->registered != 0) {
+    if (w->registered) {
         FldObjUnregister(&w->obj);
     }
 

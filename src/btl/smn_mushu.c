@@ -232,7 +232,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         break;
     }
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

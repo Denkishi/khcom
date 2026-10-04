@@ -157,7 +157,7 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     s16 x;
     s16 y;
 
-    if (gBtlWork->paused != 0) {
+    if (gBtlWork->paused) {
         LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
         gfx = work->palette;
     } else if (d->flags & DSD_FLAG_HURT) {
@@ -421,7 +421,7 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
 
         break;
     case 4:
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             BosDsdMainEndTransition(work);
             work->dsd->stateStep++;
         }
@@ -456,7 +456,7 @@ void BosDsdMainUpdateApproach(DsdMainWork* work) {
         work->dsd->stateStep++;
         break;
     case 1:
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -622,7 +622,7 @@ void BosDsdMainUpdateShockwave(DsdMainWork* work) {
     case 3:
         BosDsdMainLoopFrames(work);
 
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             ClearBtlObjActionFlags(a);
             work->stepTimer = 0;
             work->dsd->stateStep++;
@@ -799,7 +799,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
         work->dsd->stateStep++;
         break;
     case 1:
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -816,7 +816,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
     case 3:
         BosDsdMainLoopMapFrames(work);
 
-        if (IsTaskActive(work->energy1Task) != 0) {
+        if (IsTaskActive(work->energy1Task)) {
             break;
         }
 
@@ -837,7 +837,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
     case 4:
         BosDsdMainLoopMapFrames(work);
 
-        if (IsTaskActive(work->energy1Task2) != 0) {
+        if (IsTaskActive(work->energy1Task2)) {
             break;
         }
 
@@ -858,7 +858,7 @@ void BosDsdMainUpdateEnergy1Attack(DsdMainWork* work) {
     case 5:
         BosDsdMainLoopMapFrames(work);
 
-        if (IsTaskActive(work->energy1Task3) != 0) {
+        if (IsTaskActive(work->energy1Task3)) {
             break;
         }
 
@@ -894,7 +894,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         work->dsd->stateStep++;
         break;
     case 1:
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -911,7 +911,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
     case 3:
         BosDsdMainLoopMapFrames(work);
 
-        if (IsTaskActive(work->energy2Task) != 0) {
+        if (IsTaskActive(work->energy2Task)) {
             break;
         }
 
@@ -1011,7 +1011,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
     case 4:
         BtlMapSetCameraTarget(d->body[0].x - 0x1400, d->body[0].y + d->body[0].z + 0x3000);
 
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -1048,7 +1048,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         work->dsd->stateStep++;
         break;
     case 7:
-        if (CharaObjUpdateDefeat() == 0) {
+        if (!CharaObjUpdateDefeat()) {
             d->body[0].x = 300;
             d->body[0].y = 0;
             d->body[0].z = 0;

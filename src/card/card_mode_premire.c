@@ -184,7 +184,7 @@ u8 HCEffectName_1(HcEffectNameWork* w, void* a) {
 
     done = IsHcEffectNameShuffling(w);
 
-    if (done != 0) {
+    if (done) {
 #ifdef VERSION_EU
         SplitFourDigits(gBtlWork->hcEffectCount, &w->countThousands);
 #endif

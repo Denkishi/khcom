@@ -1263,7 +1263,7 @@ s32 GetJiminyEntryState(s32 idx) {
                 return 1;
             }
 
-            if (IsJiminyFlagSet(e->flags[i]) == 0) {
+            if (!IsJiminyFlagSet(e->flags[i])) {
                 a = 0;
             } else {
                 b = 0;
@@ -1586,7 +1586,7 @@ void mode_jiminy_0() {
         AnimStart(&sJiminyWork->anim, 0, ANIM_FLAG_LOOP);
     }
 
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         sJiminyWork->tiles4 = AllocObjTiles(0x200, gUnk_08C6A958);
         sJiminyWork->palette5 = LoadObjPalette(gUnk_08F6DE04, 0x20);
         AnimInit(&sJiminyWork->anim2, gUnk_09EE2678, gUnk_09EE2668);
@@ -1779,7 +1779,7 @@ void mode_jiminy_1() {
         e2 = &sJiminyEntries[sJiminyWork->entry];
         p2 = &sJiminyWork->pairs[sJiminyWork->entry];
 
-        if (JiminyHandleListInput() != 0) {
+        if (JiminyHandleListInput()) {
             break;
         }
 
@@ -1815,7 +1815,7 @@ void mode_jiminy_1() {
                 }
             }
 
-            if (ok != 0) {
+            if (ok) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
 
                 if (e2->children != NULL) {
@@ -2016,7 +2016,7 @@ void mode_jiminy_1() {
                 gUnk_08C6A526, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             if (sJiminyWork->flags & JIMINY_FLAG_SHOW_CURSOR) {
                 if (sJiminyWork->moveDelay <= 0) {
                     DrawSprite(sJiminyWork->x4 >> 8, sJiminyWork->y5 >> 8,
@@ -2515,7 +2515,7 @@ void JiminyDetailUpdate() {
             sJiminyWork->flags &= ~JIMINY_FLAG_SCROLL_DOWN;
         }
 
-        if (FadeIsActive() != 0) {
+        if (FadeIsActive()) {
             break;
         }
 

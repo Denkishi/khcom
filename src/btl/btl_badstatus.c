@@ -90,7 +90,7 @@ void task_btl_badstatus_2(BtlBadStatusWork* work) {
     if (obj->badStatus != BAD_STATUS_NONE) {
         flags = GetBattleSpritePriorityFlags(obj->y);
 
-        if (gBtlWork->paused != 0) {
+        if (gBtlWork->paused) {
             gfx = AnimGetGfx(&work->anim);
         } else {
             gfx = AnimUpdate(&work->anim);

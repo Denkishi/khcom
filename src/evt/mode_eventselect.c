@@ -334,7 +334,7 @@ void Exclamation_0(EffectWork* w, EventCharaWork* chara) {
     w->tiles = AllocObjTiles(128, NULL);
     w->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         FadeSetPaletteExcluded(((ObjPaletteHeader*)w->palette)->index + 16, 1);
     }
 
@@ -366,7 +366,7 @@ void balloon_0(EffectWork* w, EventCharaWork* chara) {
 s32 EffectUpdateObj(EffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->actor->callbackActive == 0) {
+    if (!w->actor->callbackActive) {
         return 0;
     }
 
@@ -377,7 +377,7 @@ s32 Exclamation_1(EffectWork* w) {
     w->age++;
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->actor->callbackActive == 0 || w->age == 50) {
+    if (!w->actor->callbackActive || w->age == 50) {
         return 0;
     }
 
@@ -390,7 +390,7 @@ void EffectDrawObj(EffectWork* w) {
 
     pr = w->actor->obj.drawFlags;
 
-    if (w->followFlip == 0) {
+    if (!w->followFlip) {
         pr &= 0xFFFE;
     }
 
@@ -431,7 +431,7 @@ s32 Question_1(EffectWork* w) {
         AnimStart(&w->anim, 6, ANIM_FLAG_LOOP);
     }
 
-    if (w->actor->callbackActive == 0) {
+    if (!w->actor->callbackActive) {
         return 0;
     }
 
@@ -483,7 +483,7 @@ void TinkerbellParticleDraw(EffectWork* w) {
 
     pr = w->actor->obj.drawFlags;
 
-    if (w->followFlip == 0) {
+    if (!w->followFlip) {
         pr &= 0xFFFE;
     }
 
@@ -619,7 +619,7 @@ s32 down_1(EffectWork* w) {
         }
     }
 
-    if (w->actor->callbackActive == 0) {
+    if (!w->actor->callbackActive) {
         return 0;
     }
 

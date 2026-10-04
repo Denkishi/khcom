@@ -250,7 +250,7 @@ void SetMapAttackBox(s32 x, s32 y, s32 z) {
 }
 
 u8 IsHitByMapAttack(FldPos* p, s16 a, s16 b) {
-    if (gMapRoomState->attackActive == 0) {
+    if (!gMapRoomState->attackActive) {
         return 0;
     }
 
@@ -821,7 +821,7 @@ void MapFindPlatformStairs(MapPlatform* p) {
                         q = MapGetCell(x, y - d);
 
                         if ((e->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT | MAP_CELL_FLAG_CORNER)) == 0 && (q->flags & (MAP_CELL_FLAG_EDGE_LEFT | MAP_CELL_FLAG_EDGE_RIGHT | MAP_CELL_FLAG_CORNER)) == 0) {
-                            if (p->hasStairs == 0 ||
+                            if (!p->hasStairs ||
                                 (p->spotUpperZ <= q->upperZ &&
                                  (p->spotUpperZ < q->upperZ ||
                                   p->left + GetRandom() % (p->right - p->left + 1) > x))) {
@@ -832,7 +832,7 @@ void MapFindPlatformStairs(MapPlatform* p) {
                                 p->spotUpperZ = q->upperZ;
                                 p->spotLowerZ = q->lowerZ;
                             }
-                        } else if (p->hasStairs == 0 && p->spotUpperZ <= q->upperZ &&
+                        } else if (!p->hasStairs && p->spotUpperZ <= q->upperZ &&
                                    (p->spotUpperZ < q->upperZ ||
                                     p->left + GetRandom() % (p->right - p->left + 1) > x)) {
                             p->x = x;
@@ -862,7 +862,7 @@ void MapPlacePlatformStairs() {
             MapFindPlatformStairs(e);
         }
 
-        if (e->hasStairs != 0) {
+        if (e->hasStairs) {
             MapBuildStairs(e->x, e->y);
         } else if (e->spotLowerZ != 0x100000) {
             MapMarkJumpSpot(e);
@@ -1049,7 +1049,7 @@ void MapMarkFloorVariants() {
                         ok = 0;
                     }
                 } else {
-                    if (ok == 0) {
+                    if (!ok) {
                         if (k % 2) {
                             c->flags |= 2;
                         } else {
@@ -1125,7 +1125,7 @@ void MapMarkCellEdges() {
                 break;
             }
 
-            if (flag != 0) {
+            if (flag) {
                 a->flags |= MAP_CELL_FLAG_EDGE_RIGHT;
                 b->flags |= MAP_CELL_FLAG_EDGE_LEFT;
             }
@@ -2000,7 +2000,7 @@ s32 GetMatchingBottomEdgeType(s16 x, s16 y) {
 }
 
 s32 PickEdgeTypeByHalf(s16 a, s16 b, s16 c, u8 d) {
-    if (d != 0) {
+    if (d) {
         if (c - a < b - c) {
             return 4;
         }
@@ -2016,7 +2016,7 @@ s32 PickEdgeTypeByHalf(s16 a, s16 b, s16 c, u8 d) {
 }
 
 s32 PickEdgeTypeByThird(s16 a, s16 b, s16 c, u8 d) {
-    if (d != 0) {
+    if (d) {
         if (c - a < (b - a) / 3) {
             return 4;
         }
@@ -2504,7 +2504,7 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
             }
         }
 
-        if (found != 0) {
+        if (found) {
             break;
         }
     }
@@ -2528,7 +2528,7 @@ u8 MapFindSpanBelowPlatforms(s16* a, s16* b, s16* c, s16* d) {
             }
         }
 
-        if (found != 0) {
+        if (found) {
             break;
         }
     }
@@ -2775,7 +2775,7 @@ void MapGenerateRoom(u16 a, u16 b) {
     p = &sMapBgBuffer;
     *p = EwramAlloc(0x1800);
 
-    if (gGameState.fieldResume == 0) {
+    if (!gGameState.fieldResume) {
         sMapCells = EwramAlloc(sizeof(MapCell) * 0xC00);
         sMapPlatforms = EwramAlloc(0x120);
         sMapDoors = EwramAlloc(sizeof(MapDoor) * 4);
@@ -2823,7 +2823,7 @@ void MapGenerateRoom(u16 a, u16 b) {
 void MapFreeRoom() {
     EwramFree(sMapBgBuffer);
 
-    if (gGameState.fieldResume == 0) {
+    if (!gGameState.fieldResume) {
         EwramFree(sMapCells);
         EwramFree(sMapPlatforms);
         EwramFree(sMapDoors);

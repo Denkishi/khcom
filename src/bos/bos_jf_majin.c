@@ -197,7 +197,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     s16 x;
     s16 y;
 
-    if (gBtlWork->paused == 0) {
+    if (!gBtlWork->paused) {
         if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
                 LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
@@ -553,7 +553,7 @@ void BosJfMajinUpdateRockAttack(JfMajinWork* work) {
             work->jf->bgFrameTimer++;
             break;
         case 4:
-            if (IsTaskActive(work->task) == 0) {
+            if (!IsTaskActive(work->task)) {
                 work->z = -0x3800;
                 work->moveSteps = 10;
                 work->step++;
@@ -1113,7 +1113,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
     case 1:
         BtlMapSetCameraTarget(jf->body.x, jf->body.y + jf->body.z);
 
-        if (FadeIsActive() != 0) {
+        if (FadeIsActive()) {
             break;
         }
 
@@ -1138,7 +1138,7 @@ void BosJfMajinUpdateDefeat(JfMajinWork* work) {
 
         break;
     case 3:
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             if (q->x < 0x1B200) {
                 q->x = 0x1BA00;
             }
@@ -1698,7 +1698,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
         work->throwTimer++;
         break;
     case 5:
-        if (MosaicIsActive() == 0) {
+        if (!MosaicIsActive()) {
             if (work->riseSteps == 0) {
                 BgFxStartExplosion(work->body.x - 0x800, work->body.y + work->body.z - 0x2400, 0);
                 work->riseSteps++;

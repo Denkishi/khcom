@@ -511,7 +511,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         break;
     case 3:
         if (work->timer == 0) {
-            if (BosLstLsrIsFiring(work->lsrTask) == 0) {
+            if (!BosLstLsrIsFiring(work->lsrTask)) {
                 a.x = work->fireX;
                 a.y = work->fireY;
                 a.z = work->fireZ;
@@ -532,7 +532,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
                 work->targetZ = gBtlWork->bossZ;
             }
 
-            if (BosLstLsrIsFiring(work->lsrTask) == 0) {
+            if (!BosLstLsrIsFiring(work->lsrTask)) {
                 if (work->shots > 1) {
                     work->state = 2;
                     work->timer = 0;

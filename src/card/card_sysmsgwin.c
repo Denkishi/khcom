@@ -337,7 +337,7 @@ void sysmsgwin_2(SysMsgWinWork* w) {
     }
 
     if (w->tiles3 != NULL) {
-        if (w->waitIconVisible != 0) {
+        if (w->waitIconVisible) {
             DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4,
                        w->tiles3, w->palette, NULL, 0, 5);
         }
@@ -348,7 +348,7 @@ void sysmsgwin_2(SysMsgWinWork* w) {
                    w->tiles4, w->palette2, NULL, SPRITE_FLAG_HFLIP, 5);
     }
 
-    if (w->choiceVisible != 0) {
+    if (w->choiceVisible) {
         DrawSprite(120, 75, gUnk_09EF126C[1], w->tiles, w->palette3, NULL, 0, 10);
         DrawTextSlots((240 - GetTextSlotsWidth(w->textSlots, w->textSlotCount)) >> 1, 62, w->textSlots,
                       w->textPalette, 0, w->textSlotCount);
@@ -732,7 +732,7 @@ void sysmsgwinChoice_2(SysMsgWinWork* w) {
         break;
     }
 
-    if (w->tiles3 != NULL && w->waitIconVisible != 0) {
+    if (w->tiles3 != NULL && w->waitIconVisible) {
         DrawSprite(120, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8, w->gfx4, w->tiles3, w->palette, NULL, 0, 10);
     }
 

@@ -209,7 +209,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         break;
     }
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

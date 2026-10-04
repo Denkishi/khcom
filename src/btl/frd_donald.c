@@ -82,7 +82,7 @@ void UpdateDonaldFlame(BtlObj* body, u8 a, s16 b, s16 c) {
     BgFxSetPosition(x, y, z);
     BgFxSetScale(t, w);
 
-    if (a != 0) {
+    if (a) {
         if (gBtlWork->battleId == 0x98) {
             p = 0x20;
             q = 0x20;

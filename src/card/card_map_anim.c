@@ -598,7 +598,7 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
         return;
     }
 
-    if (IsJiminyFlagSet(n) == 0) {
+    if (!IsJiminyFlagSet(n)) {
         gCardCount++;
     }
 

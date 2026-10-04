@@ -561,7 +561,7 @@ void mode_pooh_1() {
     UpdatePlayTime();
     SetPooMapBeeVisible(0);
 
-    if (sModePoohExiting != 0 && !FadeIsActive()) {
+    if (sModePoohExiting && !FadeIsActive()) {
 #ifdef VERSION_EU
         if (sModePoohExitEvent == 195) {
 #else
@@ -575,12 +575,12 @@ void mode_pooh_1() {
         return;
     }
 
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         gPooAttackActive = 0;
 
         if (IsTaskActive(sWLogoTask)) {
             TaskPoolUpdate(&sModePoohWLogoTasks);
-        } else if (IsMessageWindowOpen() == 0) {
+        } else if (!IsMessageWindowOpen()) {
             if (sModePoohMessage == 0xFFFE) {
                 if (IsMessageWindowAnswerYes()) {
 #ifdef VERSION_EU
@@ -635,7 +635,7 @@ void mode_pooh_2() {
 void ExitPoohMode(u32 a) {
     s32 i;
 
-    if (sModePoohExiting == 0) {
+    if (!sModePoohExiting) {
         sModePoohExitEvent = a;
 
         for (i = 0; i <= 31; i++) {
@@ -944,7 +944,7 @@ void SetPoohAnimation(PoohWork* w, u32 anim) {
         w->hideShadow = 1;
         SetPoohDir2(w);
 
-        if (IsPooEventDone(6) != 0 || w->leavingWagon != 0 || (w->dirIndex == 5 && w->flipped == 0)) {
+        if (IsPooEventDone(6) || w->leavingWagon || (w->dirIndex == 5 && w->flipped == 0)) {
             e = &sPooh07Anim0Defs[w->dirIndex];
         } else {
             e = &sPooh07Anim1Defs[w->dirIndex];

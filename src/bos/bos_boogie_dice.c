@@ -262,7 +262,7 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);
 
-    if (work->follower == 0) {
+    if (!work->follower) {
         RequestEnemyCardUse(&work->obj);
     }
 }
@@ -270,7 +270,7 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
 u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
     BtlObj* p = &work->obj;
 
-    if (work->follower == 0) {
+    if (!work->follower) {
         switch (UpdateBtlObjReaction(p)) {
         case BTL_REACTION_CARD_ACTION:
             work->state = 3;
@@ -283,7 +283,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
             break;
         case BTL_REACTION_HEALED:
         default:
-            if (ConsumeGimmickFlag(0) != 0) {
+            if (ConsumeGimmickFlag(0)) {
                 BosBoogieApplyGimmick();
 
                 if (work->state == 3) {
@@ -341,7 +341,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
     switch (work->state) {
     case 3:
-        if (BosBoogieDiceIsHeld(work) != 0) {
+        if (BosBoogieDiceIsHeld(work)) {
             return 1;
         }
 
@@ -356,14 +356,14 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->x += gSineTable[work->angle] * work->speed >> 8;
         p->y += -gSineTable[work->angle + 0x40] * work->speed >> 8;
 
-        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+        if (p->collider.colliding && work->scaleY > 255 && work->scaleX > 255) {
             work->speed = work->speed * 230 >> 8;
             p->x += p->collider.pushX;
             p->y += p->collider.pushY;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
-        if (ClampBoogieDicePosition(&p->x, &p->y, 0, 0) != 0) {
+        if (ClampBoogieDicePosition(&p->x, &p->y, 0, 0)) {
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -377,7 +377,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
                 work->state = 4;
                 p->flags |= BTLOBJ_FLAG_INTANGIBLE;
 
-                if (work->follower == 0) {
+                if (!work->follower) {
                     ClearBtlObjActionFlags(p);
                 }
             }
@@ -391,7 +391,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 #endif
 
-        if (work->timer == 0 && work->follower == 0) {
+        if (work->timer == 0 && !work->follower) {
             ClearBtlObjActionFlags(p);
             gBosBoogieDiceBreakCount++;
             work->counted = 1;
@@ -400,7 +400,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         work->timer++;
         BosBoogieDiceGrow(work);
 
-        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+        if (p->collider.colliding && work->scaleY > 255 && work->scaleX > 255) {
             work->speed = work->speed * 230 >> 8;
             p->x += p->collider.pushX;
             p->y += p->collider.pushY;
@@ -429,14 +429,14 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
         p->x += gSineTable[work->angle] * work->speed >> 8;
         p->y += -gSineTable[work->angle + 0x40] * work->speed >> 8;
 
-        if (p->collider.colliding != 0 && work->scaleY > 255 && work->scaleX > 255) {
+        if (p->collider.colliding && work->scaleY > 255 && work->scaleX > 255) {
             work->speed = work->speed * 230 >> 8;
             p->x += p->collider.pushX;
             p->y += p->collider.pushY;
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
-        if (ClampBoogieDicePosition(&p->x, &p->y, 0, 0) != 0) {
+        if (ClampBoogieDicePosition(&p->x, &p->y, 0, 0)) {
             work->angle = work->angle + (100 + GetRandom() % 57);
         }
 
@@ -447,7 +447,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         break;
     case 2:
-        if (work->follower == 0 && gBosBoogieGimmickCardDropped == 0 && GetRandom() % 16 <= 7) {
+        if (!work->follower && !gBosBoogieGimmickCardDropped && GetRandom() % 16 <= 7) {
             gBosBoogieGimmickCardDropped = 1;
             DropGimmickCard(0, p->x, p->y, p->z);
         }
@@ -456,7 +456,7 @@ u8 task_bos_boogie_dice_1(BoogieDiceWork* work) {
 
         return 0;
     case 4:
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 5;
             work->timer = 0;
         }
@@ -544,13 +544,13 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
     s32 a;
     s32 b;
 
-    if (BosBoogieDiceIsHeld(work) != 0) {
+    if (BosBoogieDiceIsHeld(work)) {
         return;
     }
 
     c = GetBattleSpritePriorityFlags(p->y);
 
-    if (StepHitFlash(p) != 0) {
+    if (StepHitFlash(p)) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -576,7 +576,7 @@ void task_bos_boogie_dice_2(BoogieDiceWork* work) {
 }
 
 void task_bos_boogie_dice_3(BoogieDiceWork* work) {
-    if (work->counted == 0 && gBosBoogieDiceBreakCount != 3 && work->follower == 0 && work->state != 10) {
+    if (!work->counted && gBosBoogieDiceBreakCount != 3 && !work->follower && work->state != 10) {
         gBosBoogieDiceFaceReady = 1;
     }
 
@@ -620,7 +620,7 @@ void RollBoogieDice(BoogieDiceWork* work) {
         break;
     }
 
-    if (work->follower == 0) {
+    if (!work->follower) {
         gBosBoogieDiceFace = n;
     }
 
@@ -664,7 +664,7 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
 u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
     BtlObj* p = &work->obj;
 
-    if (BosBoogieExplosiondiceIsHeld(work) != 0) {
+    if (BosBoogieExplosiondiceIsHeld(work)) {
         return 1;
     }
 
@@ -680,7 +680,7 @@ u8 task_bos_boogie_explosiondice_1(BoogieExplosiondiceWork* work) {
 
         break;
     case 2:
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             return 0;
         }
 
@@ -702,7 +702,7 @@ void task_bos_boogie_explosiondice_2(BoogieExplosiondiceWork* work) {
     u16 c;
     void* pal;
 
-    if (f != 0 || work->state == 1) {
+    if (f || work->state == 1) {
         return;
     }
 
@@ -745,7 +745,7 @@ void task_bos_boogie_saku_0(BoogieSakuWork* work, BoogieWork* arg) {
 u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
     u8 f;
 
-    if (gBosBoogieDiceBreakCount > 2 && AnimIsFinished(&work->anim) != 0) {
+    if (gBosBoogieDiceBreakCount > 2 && AnimIsFinished(&work->anim)) {
         if (work->openTimer < gBosBoogieSakuOpenTime) {
             if (work->openTimer == 0) {
                 BtlMapStartShake();
@@ -754,7 +754,7 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             work->openTimer++;
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
 
-            if (BosBoogieIsActorPastSaku() != 0) {
+            if (BosBoogieIsActorPastSaku()) {
                 SetBtlObjUnhittable(&work->boogie->actor, 0);
             } else {
                 SetBtlObjUnhittable(&work->boogie->actor, 1);
@@ -766,18 +766,18 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
             gBosBoogieSakuOpenTime = 0;
             SetBtlObjUnhittable(&work->boogie->actor, 1);
 
-            if (BosBoogieIsActorPastSaku() != 0) {
+            if (BosBoogieIsActorPastSaku()) {
                 work->task = TaskCreate(&work->tasks, &sTaskDescBosBoogieExplosiondice, work->boogie);
             }
         }
     }
 
-    if (gBosBoogieDiceBreakCount <= 2 && IsTaskActive(work->task) == 0) {
+    if (gBosBoogieDiceBreakCount <= 2 && !IsTaskActive(work->task)) {
         SetBattleBounds(0x80, 0x170, 0x240, 0x278);
 
         if (gBosBoogieDiceBreakCount != 0) {
             AnimChange(&work->anim, gBosBoogieDiceBreakCount, 0);
-        } else if (work->closePending != 0) {
+        } else if (work->closePending) {
             AnimChange(&work->anim, 3, 0);
             work->closePending = 0;
         }
@@ -787,11 +787,11 @@ u8 task_bos_boogie_saku_1(BoogieSakuWork* work) {
 
     if (gBosBoogieDiceBreakCount > 2
             || (gBosBoogieDiceBreakCount == 0 && AnimGetId(&work->anim) == 3
-                && IsTaskActive(work->task) == 0)) {
+                && !IsTaskActive(work->task))) {
         AnimUpdate(&work->anim);
     }
 
-    if (f == 0 && AnimIsFinished(&work->anim) != 0) {
+    if (!f && AnimIsFinished(&work->anim)) {
         m4aSongNumStart(SONG_BTL_BU_SAKU);
 
         if (AnimGetId(&work->anim) == 3) {
@@ -988,7 +988,7 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
         break;
     case BTL_REACTION_HEALED:
     default:
-        if (ConsumeGimmickFlag(0) == 0) {
+        if (!ConsumeGimmickFlag(0)) {
             break;
         }
 
@@ -1011,7 +1011,7 @@ u8 task_bos_boogie_disk_1(BoogieDiskWork* work) {
     case 0:
         p->y += work->vy;
 
-        if (ClampBoogieDiskPosition(&p->x, &p->y, 0x20, -0x10, p->z) != 0) {
+        if (ClampBoogieDiskPosition(&p->x, &p->y, 0x20, -0x10, p->z)) {
             work->vy = -work->vy;
         }
 
@@ -1091,7 +1091,7 @@ void BosBoogieKnifeAttack(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
     s32 dy;
 
-    if (gBosBoogieKnivesMoveRight != 0) {
+    if (gBosBoogieKnivesMoveRight) {
         work->scaleX = 0x100;
         work->drawOffsetX = 0;
         dy = 0x2000;
@@ -1114,7 +1114,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
     work->state = 0;
     work->timer = 0;
 
-    if (gBosBoogieKnivesMoveRight != 0) {
+    if (gBosBoogieKnivesMoveRight) {
         work->vx = 0x133;
     } else {
         work->vx = -0x133;
@@ -1148,7 +1148,7 @@ void task_bos_boogie_knife_0(BoogieKnifeWork* work, s32* arg) {
 u8 task_bos_boogie_knife_1(BoogieKnifeWork* work) {
     BtlObj* p = &work->obj;
 
-    if (gBosBoogieKnivesRetract != 0) {
+    if (gBosBoogieKnivesRetract) {
         work->state = 2;
     }
 
@@ -1218,7 +1218,7 @@ void task_bos_boogie_knife_2(BoogieKnifeWork* work) {
 
     c = GetBattleSpritePriorityFlags(p->y);
 
-    if (gBosBoogieKnivesRetract != 0 && (gFrameCounter & 1) != 0 && gBtlWork->paused == 0) {
+    if (gBosBoogieKnivesRetract && (gFrameCounter & 1) != 0 && !gBtlWork->paused) {
         pal = work->palette2;
     } else {
         pal = work->palette;
@@ -1248,7 +1248,7 @@ u8 BosBoogieAnyKnifeActive(BoogieKnifereaderWork* work) {
     s32 i;
 
     for (i = 0; i <= 4; i++) {
-        if (IsTaskActive(work->knives[i]) != 0) {
+        if (IsTaskActive(work->knives[i])) {
             return 1;
         }
     }
@@ -1309,7 +1309,7 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         break;
     case BTL_REACTION_HEALED:
     default:
-        if (ConsumeGimmickFlag(0) == 0) {
+        if (!ConsumeGimmickFlag(0)) {
             break;
         }
 
@@ -1353,13 +1353,13 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
         break;
     }
 
-    if (checkKnives == 0) {
+    if (!checkKnives) {
         pool = &work->tasks;
         TaskPoolUpdate(pool);
         return 1;
     }
 
-    if (BosBoogieAnyKnifeActive(work) == 0) {
+    if (!BosBoogieAnyKnifeActive(work)) {
         ClearBtlObjActionFlags(e);
 
         return 0;
@@ -1368,8 +1368,8 @@ u8 task_bos_boogie_knifereader_1(BoogieKnifereaderWork* work) {
     for (i = 0; i <= 4; i++) {
         pool = &work->tasks;
 
-        if (IsTaskActive(work->knives[i]) != 0) {
-            if (BosBoogieKnifeIsLanded(work->knives[i]->work) != 0) {
+        if (IsTaskActive(work->knives[i])) {
+            if (BosBoogieKnifeIsLanded(work->knives[i]->work)) {
                 m4aSongNumStart(SONG_BTL_BU_TRAP);
             }
 
@@ -1425,7 +1425,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
         break;
     case BTL_REACTION_HEALED:
     default:
-        if (ConsumeGimmickFlag(0) == 0) {
+        if (!ConsumeGimmickFlag(0)) {
             break;
         }
 
@@ -1455,7 +1455,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
             break;
         }
 
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 

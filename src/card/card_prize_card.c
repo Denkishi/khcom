@@ -113,7 +113,7 @@ static u8 PrizeCard_1(PrizeCardWork* w, void* a) {
         }
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         w->collected[0] = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
 

@@ -115,7 +115,7 @@ void mode_debflag_1() {
     }
 
     if (GetKeysPressed() & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON)) {
-        if (gDebflagReturnToMap != 0) {
+        if (gDebflagReturnToMap) {
             RequestMapMode();
         } else {
             ModeRequest(&gModeDebug, 0);

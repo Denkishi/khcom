@@ -167,7 +167,7 @@ u16 GetBtlRikuComboType(BtlRikuWork* work) {
 void FocusBtlRikuCameraOnTarget(BtlRikuWork* work) {
     BtlObj* c;
 
-    if (work->mainSide == 0) {
+    if (!work->mainSide) {
         return;
     }
 
@@ -186,7 +186,7 @@ void FocusBtlRikuCameraOnBgFx(BtlRikuWork* work) {
     s32 y;
     s32 z;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         BgFxGetPosition(&x, &y, &z);
         BtlMapFollowPosition(x, gBtlWork->actor->y, gBtlWork->actor->z);
     }
@@ -226,7 +226,7 @@ void DrawBtlRikuAfterimage(BtlRikuWork* work, BtlDrawInfo* out) {
     gfx = AnimGetGfx(&out->anim);
     a = &work->actor;
 
-    if (BgFxIsActive() == 0) {
+    if (!BgFxIsActive()) {
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetBlendAlpha(6, 12);
         flags = SPRITE_PRIORITY(2) | SPRITE_FLAG_BLEND;
@@ -307,7 +307,7 @@ void SetBtlRikuDirAnimation(BtlRikuWork* work, u16 a, u16 b) {
 void LoadBtlRikuPalette(BtlRikuWork* work) {
     work->tiles2 = work->actor.btl->tiles;
 
-    if (work->mainSide != 0) {
+    if (work->mainSide) {
         work->palette = LoadObjPalette(work->paletteData, 0x20);
     } else {
         work->palette = LoadObjPalette(gUnk_096FAC64, 0x20);
@@ -713,7 +713,7 @@ void StartBtlRikuKnockback(BtlRikuWork* work) {
 
 BtlObj* GetBtlRikuActiveOpponent(BtlRikuWork* work) {
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             if (gBtlWork->flags & BTL_FLAG_OPPONENT_CARD_ACTION) {
                 return gRikuBtlWork->actor;
             }
@@ -767,7 +767,7 @@ BtlObj* PickBtlRikuTarget(BtlRikuWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             e = gRikuBtlWork->actor;
         } else {
             e = gBtlWork->actor;
@@ -1025,7 +1025,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 BtlObj* e;
                 u16 uv;
 
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     e = gRikuBtlWork->actor;
                 } else {
                     e = gBtlWork->actor;
@@ -1058,7 +1058,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     }
 
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
-        if (work->sioKeysA != 0) {
+        if (work->sioKeysA) {
             held = SioKeyGetHeldA();
             pressed = SioKeyGetPressedA();
         } else {
@@ -1418,7 +1418,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->vz = 0;
         p->z += (-10240 - p->z) >> 5;
 
-        if (AnimIsFinished(&work->anim) == 0) {
+        if (!AnimIsFinished(&work->anim)) {
             work->stateTimer++;
             break;
         }
@@ -1454,7 +1454,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->x += (p->originX - t2) >> 3;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 51;
             work->stateTimer = 0;
         } else {
@@ -1625,7 +1625,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (BgFxIsActive() == 0 && work->steps <= 0 && AnimIsFinished(&work->anim) != 0) {
+        if (!BgFxIsActive() && work->steps <= 0 && AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             ClearBtlObjActionFlags(p);
             work->state = 35;
@@ -1722,7 +1722,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -1757,7 +1757,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     }
                 }
 
-                if (flag != 0) {
+                if (flag) {
                     BgFxSetTarget(e->x, e->y, e->z - (e->centerHeight << 8));
                 }
             }
@@ -1795,7 +1795,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->x += dx << 8;
             }
 
-            if (flag != 0) {
+            if (flag) {
                 work->flags |= BTL_RIKU_FLAG_FIRE_LAUNCHED;
 
                 if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -1806,11 +1806,11 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlRikuAnimation(work, 12, 1);
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && BgFxIsActive() == 0) {
+        if (AnimIsFinished(&work->anim) && !BgFxIsActive()) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -1915,7 +1915,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -1994,7 +1994,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->x += dz << 8;
             }
 
-            if (flag != 0) {
+            if (flag) {
                 MakeOpponentsHittable();
 
                 if ((p->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(mode, p->x - 5120, p->y, p->z, 20, 8, 16)
@@ -2018,7 +2018,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBattleZoom(8, 256, gBtlWork->x2, gBtlWork->y2);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -2095,7 +2095,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->x += dz << 8;
             }
 
-            if (flag != 0) {
+            if (flag) {
                 if (p->btl->hcEffect == 34) {
                     if ((p->flags & BTLOBJ_FLAG_FACING_LEFT) ? ApplyAttackBox(mode, p->x - 8960, p->y, p->z, 35, 25, 40)
                                        : ApplyAttackBox(mode, p->x + 8960, p->y, p->z, 35, 25, 40)) {
@@ -2153,7 +2153,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -2250,7 +2250,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 p->x += dz << 8;
             }
 
-            if (flag != 0) {
+            if (flag) {
                 MakeOpponentsHittable();
 
                 if (p->btl->hcEffect == 34) {
@@ -2282,7 +2282,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->stateTimer = 0;
@@ -2305,7 +2305,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             m4aSongNumStart(SONG_VO_RK_ATTACK02);
         }
 
-        if (AnimIsFinished(&work->anim) == 0) {
+        if (!AnimIsFinished(&work->anim)) {
             work->stateTimer++;
             break;
         }
@@ -2433,7 +2433,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         p->x += (work->targetX - p->x) >> 3;
 
-        if (AnimIsFinished(&work->anim) != 0 && p->z >= p->groundZ) {
+        if (AnimIsFinished(&work->anim) && p->z >= p->groundZ) {
             FadeToOriginal(FADE_MODE_BLACK, 8);
             ClearBtlObjActionFlags(p);
             work->state = 35;
@@ -2467,7 +2467,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 38;
             work->steps = 0;
             work->stateTimer = 0;
@@ -2623,7 +2623,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 35;
             work->steps = 0;
             work->stateTimer = 0;
@@ -2669,7 +2669,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             p->originX = p->x;
             p->originY = p->y;
@@ -2909,7 +2909,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 AnimReset(&work->anim);
             }
 
-            if (AnimIsFinished(&work->anim) == 0) {
+            if (!AnimIsFinished(&work->anim)) {
                 work->steps++;
                 break;
             }
@@ -3210,7 +3210,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 10, 0);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             SetBtlRikuState(work, 1);
             break;
         }
@@ -3230,7 +3230,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -3253,7 +3253,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         FocusBtlRikuCameraOnTarget(work);
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 35;
             work->steps = 0;
@@ -3306,7 +3306,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->flags |= BTL_RIKU_FLAG_AFTERIMAGE;
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && p->z >= p->groundZ) {
+        if (AnimIsFinished(&work->anim) && p->z >= p->groundZ) {
             DisableBtlRikuPassThrough(work);
             work->state = 35;
             work->steps = 0;
@@ -3392,7 +3392,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuDirAnimation(work, 5, 0);
         }
 
-        if (AnimIsFinished(&work->anim) == 0) {
+        if (!AnimIsFinished(&work->anim)) {
             work->stateTimer++;
             break;
         }
@@ -3466,7 +3466,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 19, 0);
         }
 
-        if (AnimIsFinished(&work->anim) == 0) {
+        if (!AnimIsFinished(&work->anim)) {
             work->stateTimer++;
             break;
         }
@@ -3540,7 +3540,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             SetBtlRikuAnimation(work, 9, 0);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             work->state = 1;
             work->steps = 0;
@@ -3573,10 +3573,10 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             BgFxStartPotion(p->x, p->y, p->z);
         }
 
-        if (work->stateTimer > 23 && BgFxIsActive() == 0) {
+        if (work->stateTimer > 23 && !BgFxIsActive()) {
             switch (work->variant[0]) {
             case 0:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraPotion();
                 } else {
                     RequestRikuPotion();
@@ -3584,7 +3584,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             case 1:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraHiPotion();
                 } else {
                     RequestRikuHiPotion();
@@ -3592,7 +3592,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             case 2:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegaPotion();
                 } else {
                     RequestRikuMegaPotion();
@@ -3600,7 +3600,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             case 3:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraEther();
                 } else {
                     RequestRikuEther();
@@ -3608,7 +3608,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             case 4:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegaEther();
                 } else {
                     RequestRikuMegaEther();
@@ -3616,7 +3616,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             case 5:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraElixir();
                 } else {
                     RequestRikuElixir();
@@ -3624,7 +3624,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
                 break;
             default:
-                if (work->mainSide != 0) {
+                if (work->mainSide) {
                     RequestSoraMegalixir();
                 } else {
                     RequestRikuMegalixir();
@@ -3798,7 +3798,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0 && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
+        if (AnimIsFinished(&work->anim) && (p->btl->flags & BTL_FLAG_PLAYER_AIRBORNE) == 0) {
             SetBtlRikuState(work, 1);
             break;
         }
@@ -4178,7 +4178,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             p->flags &= ~BTLOBJ_FLAG_CARD_USE_BLOCKED;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             ClearBtlObjActionFlags(p);
             p->originX = p->x;
             p->originY = p->y;
@@ -4192,7 +4192,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         break;
         break;
     case 19:
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 35;
             work->steps = 0;
             work->stateTimer = 0;
@@ -4200,7 +4200,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         break;
     case 18:
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             work->state = 1;
             work->steps = 0;
             work->stateTimer = 0;
@@ -4232,7 +4232,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             FadeStartIn(FADE_MODE_ADD_WHITE, 30);
             p->btl->hcEffectCount--;
             p->invincibleTimer = 60;
@@ -4329,7 +4329,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
@@ -4357,7 +4357,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             work->speed = 0;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
         }
 
@@ -4417,7 +4417,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         p->y += -gSineTable[work->angle + 64] * (work->speed >> 1) >> 8;
     }
 
-    if (p->collider.colliding != 0 && p->collider.otherType != 12) {
+    if (p->collider.colliding && p->collider.otherType != 12) {
         if ((work->flags & BTL_RIKU_FLAG_ON_PLATFORM) && p->collider.otherType == 7) {
             p->collider.standFlags |= COLLIDER_STAND_OVER_PLATFORM;
         } else if (!(work->flags & BTL_RIKU_FLAG_PASS_THROUGH)) {
@@ -4569,7 +4569,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         if (p->btl->flags & BTL_FLAG_PUSHING_EDGE) {
-            if (work->mainSide != 0) {
+            if (work->mainSide) {
                 BtlMapFollowPosition(p->x, p->y, p->z);
             }
         }
@@ -4615,7 +4615,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
     }
 
     if (work->actor.btl->hcEffect == 19) {
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             if (gFrameCounter & 1) {
                 return;
             }
@@ -4677,7 +4677,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
 
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 
-    if (StepHitFlash(p) != 0) {
+    if (StepHitFlash(p)) {
         u16 t = work->flags | BTL_RIKU_FLAG_HIT_FLASH;
 
         work->flags = t;
@@ -4687,7 +4687,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
 
         work->flags = t;
 
-        if (work->mainSide != 0) {
+        if (work->mainSide) {
             LoadObjPaletteBank(work->palette->index, work->paletteData);
         } else {
             LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);

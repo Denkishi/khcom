@@ -21,7 +21,7 @@
 #include <stddef.h>
 
 void MapGoofyCheckTalk(MapGoofyWork* w) {
-    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
+    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         if (gGameState.floor == 12 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
@@ -35,7 +35,7 @@ void MapGoofyCheckTalk(MapGoofyWork* w) {
 }
 
 void MapGoofyWaitMessage(MapGoofyWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapGoofyCheckTalk;
     }
@@ -86,7 +86,7 @@ void Task_MapGoofy_0(MapGoofyWork* w) {
 }
 
 s32 Task_MapGoofy_1(MapGoofyWork* w) {
-    if ((u8)IsMapInterrupted() != 0) {
+    if ((u8)IsMapInterrupted()) {
         w->visible = 0;
     } else {
         w->visible = 1;
@@ -110,7 +110,7 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
     s16 x;
     s16 y;
 
-    if (w->visible != 0) {
+    if (w->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
@@ -120,7 +120,7 @@ void Task_MapGoofy_2(MapGoofyWork* w) {
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->targeted != 0) {
+        if (w->targeted) {
             TaskPoolDraw(&w->tasks2);
         }
     }

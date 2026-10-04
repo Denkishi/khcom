@@ -31,7 +31,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
                 work->timer--;
             }
         } else {
-            if (work->grounded != 0) {
+            if (work->grounded) {
                 work->grounded = 0;
                 work->groundFrames = 0;
                 work->timer = 0;

@@ -956,7 +956,7 @@ void task_bos_tm_body_2(TmBodyWork* work) {
         mode = 0x801;
     }
 
-    if (gBtlWork->paused != 0) {
+    if (gBtlWork->paused) {
         pal = work->palette;
     } else if (work->tm->flags & TM_FLAG_HURT) {
         if (gFrameCounter & 1) {

@@ -319,14 +319,14 @@ void MovieDecodeFrame(MoviePlayer* a) {
 s32 MovieDrawFrame(MoviePlayer* a, void* dst) {
     MoviePlayer* p = a;
 
-    if (p->videoDone != 0) {
+    if (p->videoDone) {
         return 0;
     }
 
     CpuFastSet(p->videoPos, p->decodeBuf, (*(p->frameSizes + p->frameIndex) >> 2) & 0xFFFF);
     MovieDecodeFrame(p);
 
-    if (p->framePresent != 0) {
+    if (p->framePresent) {
         CpuFastCopy(p->frameBuf, dst, p->width * p->height * 2);
     }
 
@@ -342,7 +342,7 @@ u32 MovieDrawFrameRect(MoviePlayer* a, u32 x, u32 y, u32 w, u32 rows, void* dst,
     CpuFastSet(p->videoPos, p->decodeBuf, (*(p->frameSizes + p->frameIndex) >> 2) & 0xFFFF);
     MovieDecodeFrame(p);
 
-    if (p->framePresent != 0) {
+    if (p->framePresent) {
         d = dst;
         s = (u8*)p->frameBuf + x * 2 + (p->width << 1) * y;
 
@@ -379,12 +379,12 @@ s32 MovieAdvanceFrame(MoviePlayer* a) {
 
     p->frameIndex++;
 
-    if (p->videoDone != 0 || p->frameIndex == p->frameCount) {
+    if (p->videoDone || p->frameIndex == p->frameCount) {
         p->videoDone = 1;
         return 0;
     }
 
-    if (p->timingStarted == 0) {
+    if (!p->timingStarted) {
         p->timingStarted = 1;
         p->startTicks = MovieGetTicks();
     }
@@ -469,7 +469,7 @@ s32 MovieSyncFrame(MoviePlayer* a) {
     float target;
     MoviePlayer* p = a;
 
-    if (p->videoDone != 0 && p->audioDone != 0) {
+    if (p->videoDone && p->audioDone != 0) {
         p->videoDone = 0;
 
         if (p->audioDone != 2) {
@@ -486,7 +486,7 @@ s32 MovieSyncFrame(MoviePlayer* a) {
         return 1;
     }
 
-    if (p->timingStarted == 0) {
+    if (!p->timingStarted) {
         p->frameDecoded = 0;
         p->timingStarted = 1;
         p->startTicks = MovieGetTicks();
@@ -496,7 +496,7 @@ s32 MovieSyncFrame(MoviePlayer* a) {
     now = MovieTicksToSeconds(t - p->startTicks);
     target = p->secondsPerFrame * (p->frameIndex + 1);
 
-    if (p->frameDecoded != 0) {
+    if (p->frameDecoded) {
         p->frameDecoded = 0;
 
         if (now >= target + 0.01f) {

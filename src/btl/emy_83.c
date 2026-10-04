@@ -303,7 +303,7 @@ void task_emy_83_s_0(Emy83sWork* work, EmySpawn* spawn) {
     work->vz = 0;
     work->frameCount = 0;
 
-    if (spawn->facingLeft != 0) {
+    if (spawn->facingLeft) {
         work->vx = -(GetRandom() % 0x4CE + 0x133);
     } else {
         work->vx = GetRandom() % 0x4CE + 0x133;

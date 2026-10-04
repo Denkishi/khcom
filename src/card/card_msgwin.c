@@ -211,18 +211,18 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* w, void* a) {
 static void msgwin_2(CardMsgWinWork* w) {
     void** p;
 
-    if (w->textVisible != 0) {
+    if (w->textVisible) {
         DrawCardMsgGlyphs(w->shownChars);
     }
 
     if (w->tiles3 != NULL) {
-        if (w->faceFlip != 0) {
+        if (w->faceFlip) {
             DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, NULL, SPRITE_FLAG_HFLIP, 0);
         } else {
             DrawSprite(w->faceX >> 8, w->faceY >> 8, w->gfx, w->tiles3, w->palette, NULL, 0, 0);
         }
 
-        if (w->tiles4 != NULL && w->waitIconVisible != 0) {
+        if (w->tiles4 != NULL && w->waitIconVisible) {
             DrawSprite(gMsgwaitIconPos[w->messageDef->positionIndex][0] >> 8, gMsgwaitIconPos[w->messageDef->positionIndex][1] >> 8,
                        w->gfx2, w->tiles4, w->palette2, NULL, 0, 10);
         }
@@ -483,7 +483,7 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* w, void* a) {
 #endif
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->keepOpen == 0) {
+    if (!w->keepOpen) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinClose);
     } else if (w->messagePending == 1) {
         w->messagePending = 0;
@@ -571,8 +571,8 @@ void ShowPersistentCardMessage(void* pool, u32 a, u16 b) {
     args.messageId = b;
     args.mode = 1;
 
-    if (IsMessageWindowOpen() != 0) {
-        if ((u8)ReplaceCardMsgwinMessage(&args) == 0) {
+    if (IsMessageWindowOpen()) {
+        if (!(u8)ReplaceCardMsgwinMessage(&args)) {
             ReplaceSysmsgwinMessage(&args);
         }
     } else if (gCardMessageDefs[b].portraitId == 62) {

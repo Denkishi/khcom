@@ -565,7 +565,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
 
     if (body->z > body->groundZ) body->z = body->groundZ;
 
-    if (work->animating != 0) AnimUpdate(&work->anim);
+    if (work->animating) AnimUpdate(&work->anim);
 
     TaskPoolUpdate(&work->tasks);
     return 1;

@@ -557,7 +557,7 @@ void WorldselectDraw() {
                 pal = sWorldselectCardPalettes[0];
                 anim = gUnk_0999A350;
 
-                if (sWorldselectStep > 3 && sWorldselectCancelled == 0) {
+                if (sWorldselectStep > 3 && !sWorldselectCancelled) {
                     BgAnimSetPosition(x - 1, y - 5);
                 }
             } else if (t <= 61) {
@@ -612,7 +612,7 @@ void WorldselectDraw() {
         break;
     }
 
-    if (sWorldselectBgAnimActive != 0) {
+    if (sWorldselectBgAnimActive) {
         BgAnimUpdate();
     }
 
@@ -798,7 +798,7 @@ void mode_worldselect_1() {
 
         break;
     case 2:
-        if (IsMessageWindowOpen() == 0) {
+        if (!IsMessageWindowOpen()) {
             if (sWorldselectTutorialStep == 0) {
                 CreateCardMessageTask(&sWorldselectTaskPool, 2, 71);
                 sWorldselectTutorialStep++;
@@ -818,7 +818,7 @@ void mode_worldselect_1() {
         WorldselectHandleInput();
         break;
     case 4:
-        if (BgAnimIsStopped() != 0) {
+        if (BgAnimIsStopped()) {
             LoadBgMap(0, gUnk_09A310DC, 0x500);
             LoadBgMap(1, gUnk_09A31ADC, 0x500);
             sWorldselectTimer = 16;
@@ -849,7 +849,7 @@ void mode_worldselect_1() {
     case 7:
         FadeLock();
 
-        if (sWorldselectCancelled != 0) {
+        if (sWorldselectCancelled) {
             FadeStartOut(FADE_MODE_BLACK, 16);
         } else {
             FadeStartOut(FADE_MODE_ADD_WHITE, 16);
@@ -858,8 +858,8 @@ void mode_worldselect_1() {
         sWorldselectStep = 8;
         break;
     case 8:
-        if (FadeIsActive() == 0) {
-            if (sWorldselectCancelled != 0) {
+        if (!FadeIsActive()) {
+            if (sWorldselectCancelled) {
                 RequestMapMode();
             } else {
                 sWorldselectTimer = 60;
@@ -901,7 +901,7 @@ void mode_worldselect_1() {
 
     WorldselectCyclePalette();
 
-    if (FadeIsActive() != 0) {
+    if (FadeIsActive()) {
         FadeGetAmount();
     }
 

@@ -147,7 +147,7 @@ u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
         work->state++;
         break;
     case 1:
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -356,7 +356,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
     case 3:
         BtlMapSetCameraTarget(work->x, work->y + work->z);
 
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             work->state++;
         }
 
@@ -402,7 +402,7 @@ u8 task_bos_dsd_energy2_1(DsdEnergy2Work* work) {
         break;
     case 7:
         if (work->dropCount >= (s8)work->dropTotal - 1) {
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 BgAnimStop();
                 FadeToOriginal(FADE_MODE_BLACK, 8);
                 work->state++;

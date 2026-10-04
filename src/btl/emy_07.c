@@ -267,7 +267,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 6, 0, w->base.tiles);
 
         if (AnimIsFinished(&work->base.anim)) {
-            if (w->rewarded != 0) {
+            if (w->rewarded) {
                 DropEnemyPrizes(act);
                 TryDropPremireCard(act);
             }

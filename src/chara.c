@@ -599,8 +599,8 @@ s32 SioConnectSend() {
     u16* send;
     s32 i;
 
-    if (gSioConnected == 0) {
-        if (gSioConnectAccepted == 0) {
+    if (!gSioConnected) {
+        if (!gSioConnectAccepted) {
             if (GetKeysPressed() & A_BUTTON) {
                 gSioSendFrame[0] = 0xFEFE;
                 send = gSioSendFrame;
@@ -635,8 +635,8 @@ s32 SioConnectRecv() {
     u16 c;
     u16 v;
 
-    if (gSioConnected == 0) {
-        if (gSioConnectAccepted == 0) {
+    if (!gSioConnected) {
+        if (!gSioConnectAccepted) {
             if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
                 if (gSioRecvFrame[1][0] == gSioConnectId && gSioRecvFrame[1][1] == gSioRecvFrame[1][0]) {
                     gSioConnectAccepted = 1;
@@ -676,8 +676,8 @@ s32 SioConnectRecv() {
 s32 SioConnectSendAuto() {
     s32 i;
 
-    if (gSioConnected == 0) {
-        if (gSioConnectAccepted == 0) {
+    if (!gSioConnected) {
+        if (!gSioConnectAccepted) {
             gSioSendFrame[0] = 0xFEFE;
         } else {
             gSioSendFrame[0] = 0xECEC;
@@ -692,8 +692,8 @@ s32 SioConnectSendAuto() {
 }
 
 s32 SioConnectRecvAuto() {
-    if (gSioConnected == 0) {
-        if (gSioConnectAccepted == 0) {
+    if (!gSioConnected) {
+        if (!gSioConnectAccepted) {
             if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
                 gSioConnectAccepted = 1;
             }
@@ -867,8 +867,8 @@ void SioPrepareDeckExchange() {
 s32 SioExchangeSend() {
     u16 n;
 
-    if (gSioHandshakeDone == 0) {
-        if (gSioHandshakeAck == 0) {
+    if (!gSioHandshakeDone) {
+        if (!gSioHandshakeAck) {
             gSioSendFrame[0] = 0x1BFE;
         } else {
             gSioSendFrame[0] = 0xC5A0;
@@ -901,8 +901,8 @@ s32 SioExchangeSend() {
 s32 SioExchangeRecv() {
     u16 n;
 
-    if (gSioHandshakeDone == 0) {
-        if (gSioHandshakeAck == 0) {
+    if (!gSioHandshakeDone) {
+        if (!gSioHandshakeAck) {
             if (gSioRecvFrame[0][0] == 0x1BFE || gSioRecvFrame[0][1] == 0x1BFE) {
                 gSioHandshakeAck = 1;
             }
@@ -994,10 +994,10 @@ void SioSyncInit(void (*a)()) {
 }
 
 s32 SioSyncSend() {
-    if (gSioHandshakeDone == 0) {
-        if (gSioHandshakeAck == 0) {
+    if (!gSioHandshakeDone) {
+        if (!gSioHandshakeAck) {
             gSioSendFrame[0] = 0xFEFE;
-        } else if (gSioHandshakeConfirm == 0) {
+        } else if (!gSioHandshakeConfirm) {
             gSioSendFrame[0] = 0xECEC;
         } else {
             gSioSendFrame[0] = 0xDF89;
@@ -1008,8 +1008,8 @@ s32 SioSyncSend() {
 }
 
 s32 SioSyncRecv() {
-    if (gSioHandshakeDone == 0) {
-        if (gSioHandshakeAck == 0) {
+    if (!gSioHandshakeDone) {
+        if (!gSioHandshakeAck) {
             if (gSioRecvFrame[0][0] == 0xFEFE || gSioRecvFrame[0][1] == 0xFEFE) {
                 gSioHandshakeAck = 1;
             }

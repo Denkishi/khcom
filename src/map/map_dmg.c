@@ -23,10 +23,10 @@ void Task_MapDmg_0(MapDmgWork* w) {
 }
 
 s32 Task_MapDmg_1(MapDmgWork* w) {
-    if (w->enabled == 0) {
+    if (!w->enabled) {
         w->visible = 0;
     } else {
-        if (gMapRoomState->attackActive != 0 || (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK)) {
+        if (gMapRoomState->attackActive || (gMapRoomState->flags & ROOM_FLAG_ENEMY_STRUCK)) {
             w->timer = 20;
         }
 

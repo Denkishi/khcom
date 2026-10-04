@@ -2952,7 +2952,7 @@ void StaffRollRunScript(StaffRollWork* w) {
 
     run = 1;
 
-    while (run != 0) {
+    while (run) {
         if (w->scriptFrame != w->script[w->scriptPos + 2]) {
             switch (w->activeOp) {
             case 5:
@@ -3210,7 +3210,7 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
             StaffRollBlendUpdate(w);
             t = StaffRollBlendIsActive(w);
 
-            if (t != 0) {
+            if (t) {
                 break;
             }
 
@@ -3284,7 +3284,7 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
             StaffRollBlendUpdate(w);
             t = StaffRollBlendIsActive(w);
 
-            if (t != 0) {
+            if (t) {
                 break;
             }
 
@@ -3340,7 +3340,7 @@ u8 StaffRollRunScenes(StaffRollWork* w) {
 
         StaffRollBlendUpdate(w);
 
-        if (StaffRollBlendIsActive(w) == 0) {
+        if (!StaffRollBlendIsActive(w)) {
             result = 0;
         }
 
@@ -3440,7 +3440,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
         if (sub % 8 == 0 && w->lastRow != row) {
             s = sStaffRollLines[row];
 
-            if (w->creditsEnded == 0 && s == NULL) {
+            if (!w->creditsEnded && s == NULL) {
                 w->scrollSpeed = 0;
                 w->creditsEnded = 1;
             }
@@ -3449,7 +3449,7 @@ u8 StaffRollRunCredits(StaffRollWork* w) {
                 SrollTextClearRect(&w->text, 0, (row + 20) & 31, 30, 2, 1);
             }
 
-            if (w->creditsEnded == 0) {
+            if (!w->creditsEnded) {
                 SrollTextSetColors(&w->text, 15, 13, 0, 14);
                 loop = 1;
 
@@ -3645,7 +3645,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->creditsState = 2;
             w->creditsTimer = 0;
         }
@@ -3668,7 +3668,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->creditsState = 4;
             w->creditsTimer = 0;
         }
@@ -3714,7 +3714,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
                 w->subTasks[0] = TaskCreate(&w->tasks, &gTaskDescSrollCChar, (void*)1);
             } else {
@@ -3748,7 +3748,7 @@ u8 StaffRollShowCharacter(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             result = 0;
         }
 
@@ -3806,7 +3806,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->imageState = 2;
             w->imageTimer = 0;
         }
@@ -3841,7 +3841,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             SetBgScroll(0, 0, 0);
             result = 0;
         }
@@ -3873,7 +3873,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             SetBackdropColor(0, 0, 0);
             w->imageState = 2;
             w->imageTimer = 0;
@@ -3895,7 +3895,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             result = 0;
         }
 
@@ -3952,7 +3952,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->imageState = 2;
             w->imageTimer = 0;
         }
@@ -3974,7 +3974,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             result = 0;
         }
 
@@ -4005,7 +4005,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->imageState = 2;
             w->imageTimer = 0;
         }
@@ -4026,7 +4026,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             result = 0;
         }
 
@@ -4057,7 +4057,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             SetBackdropColor(0, 0, 0);
             w->imageState = 2;
             w->imageTimer = 0;
@@ -4079,7 +4079,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* w) {
             w->imageTimer++;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             result = 0;
         }
 
@@ -4183,7 +4183,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* w) {
 
         t = FadeIsActive();
 
-        if (t == 0) {
+        if (!t) {
             w->endState = 3;
             w->endTimer = 0;
         }
@@ -4209,7 +4209,7 @@ void mode_StaffRoll_1() {
 
     switch (w->phase) {
     case 0:
-        if (StaffRollWaitStart(w) != 0) {
+        if (StaffRollWaitStart(w)) {
             break;
         }
 
@@ -4219,7 +4219,7 @@ void mode_StaffRoll_1() {
         BlockAudioStart();
     case 1:
     {
-        if (StaffRollRunScenes(w) != 0) {
+        if (StaffRollRunScenes(w)) {
             break;
         }
 
@@ -4239,7 +4239,7 @@ void mode_StaffRoll_1() {
     }
     case 2:
     {
-        if (StaffRollRunCredits(w) != 0) {
+        if (StaffRollRunCredits(w)) {
             break;
         }
 
@@ -4259,7 +4259,7 @@ void mode_StaffRoll_1() {
     }
     case 3:
     {
-        if (StaffRollShowTitleBg(w) != 0) {
+        if (StaffRollShowTitleBg(w)) {
             break;
         }
 
@@ -4286,7 +4286,7 @@ void mode_StaffRoll_1() {
     }
     case 4:
     {
-        if (StaffRollShowCharacter(w) != 0) {
+        if (StaffRollShowCharacter(w)) {
             break;
         }
 
@@ -4302,7 +4302,7 @@ void mode_StaffRoll_1() {
     }
     case 5:
     {
-        if (StaffRollShowSoraImage1(w) != 0) {
+        if (StaffRollShowSoraImage1(w)) {
             break;
         }
 
@@ -4322,7 +4322,7 @@ void mode_StaffRoll_1() {
     }
     case 6:
     {
-        if (StaffRollShowSoraImage2(w) != 0) {
+        if (StaffRollShowSoraImage2(w)) {
             break;
         }
 
@@ -4342,7 +4342,7 @@ void mode_StaffRoll_1() {
     }
     case 7:
     {
-        if (StaffRollShowRikuImage1(w) != 0) {
+        if (StaffRollShowRikuImage1(w)) {
             break;
         }
 
@@ -4362,7 +4362,7 @@ void mode_StaffRoll_1() {
     }
     case 8:
     {
-        if (StaffRollShowRikuImage2(w) != 0) {
+        if (StaffRollShowRikuImage2(w)) {
             break;
         }
 
@@ -4382,7 +4382,7 @@ void mode_StaffRoll_1() {
     }
     case 9:
     {
-        if (StaffRollShowRikuImage3(w) != 0) {
+        if (StaffRollShowRikuImage3(w)) {
             break;
         }
 
@@ -4401,7 +4401,7 @@ void mode_StaffRoll_1() {
         break;
     }
     case 10:
-        if (StaffRollShowEndScreen(w) != 0) {
+        if (StaffRollShowEndScreen(w)) {
             break;
         }
 

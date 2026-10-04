@@ -674,7 +674,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
     s32 args[9];
     s32 v;
 
-    if (w->spawned == 0) {
+    if (!w->spawned) {
         if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
             *(PrizeCardArgs*)args = w->args;
             args[8] = 2;
@@ -753,8 +753,8 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
                 *(PrizeCardArgs*)args = w->args;
 
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                    if (HasMapCard(0xFB) == 0) {
-                        if (AreWorldPrizesCollected() == 0) {
+                    if (!HasMapCard(0xFB)) {
+                        if (!AreWorldPrizesCollected()) {
                             if (sUnk_0903612C[gGameState.world] != 0) {
                                 if (GetRandom() % 100 <= sUnk_0903612C[gGameState.world]) {
                                     args[8] = 0xFB;
@@ -792,7 +792,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* w) {
 s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
     PrizeCardTaskArgs args;
 
-    if (w->spawned == 0) {
+    if (!w->spawned) {
         *(PrizeCardArgs*)&args = w->args;
 
         switch (gBtlWork->battleId) {
@@ -881,7 +881,7 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* w, void* a) {
         }
 
         if (gBtlWork->battleId != 121) {
-            if (CollectionHasCard(args.cardId) == 0) {
+            if (!CollectionHasCard(args.cardId)) {
                 TaskCreate(&w->tasks, &gTaskDescPrizeBoss, &args);
             }
         } else {
@@ -1133,7 +1133,7 @@ static u8 PrizeCard_1(PrizeMapCardWork* w, void* a) {
         }
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         AddMapCard(w->cardId);
@@ -1299,7 +1299,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
     void* gfx;
     s16 v;
 
-    pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;
+    pal = !w->collected ? GetBattleSpritePriorityFlags(w->posY) : 0;
 
     if (w->scaleX == 0x100 && w->rotation == 0) {
         affine = NULL;
@@ -1329,7 +1329,7 @@ static void PrizeCard_2(PrizeMapCardWork* w) {
                    w->priority - 1);
     }
 
-    if (w->collected == 0) {
+    if (!w->collected) {
         v = 204 - ((w->groundZ - w->posZ) >> 7);
 
         if (v <= 2) {

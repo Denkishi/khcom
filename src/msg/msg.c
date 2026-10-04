@@ -1098,7 +1098,7 @@ void SetBgTextLine(u8 a, u8 b, u8 c, u8* s, u8 e, u8 f) {
 
     sBgTextLines[e].length = i;
 
-    if (sBgTextDrawQueued == 0) {
+    if (!sBgTextDrawQueued) {
         QueueVTransCallback(DrawBgTextLines);
         sBgTextDrawQueued = 1;
     }
@@ -1993,7 +1993,7 @@ void DrawMsgGlyphs(u8 n) {
             s32 x = b[i].x;
             s32 y = b[i].y;
 
-            if (b[i].useAlternatePalette != 0) {
+            if (b[i].useAlternatePalette) {
                 if (b[i].tiles != NULL) {
                     DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, 0);
                 }
@@ -6279,7 +6279,7 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
             break;
         }
 
-        if (flag == 0) {
+        if (!flag) {
             sCardMsgGlyphSprites[i].alternatePalette = LoadTextPalette(3);
         } else {
             sCardMsgGlyphSprites[i].alternatePalette = LoadTextPalette(5);
@@ -6666,7 +6666,7 @@ void DrawCardMsgGlyphs(u8 n) {
             s32 y = b[i].y;
 
             if (b[i].tiles != NULL) {
-                if (b[i].useAlternatePalette == 0) {
+                if (!b[i].useAlternatePalette) {
                     DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].palette, NULL, 0, 0);
                 } else {
                     DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, NULL, 0, 0);
@@ -6707,7 +6707,7 @@ void DrawMsgGlyphsWithPalette(u8 n, void* a) {
             s32 y = b[i].y;
 
             if (b[i].tiles != NULL) {
-                if (b[i].useAlternatePalette == 0) {
+                if (!b[i].useAlternatePalette) {
                     DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, a, 0);
                 } else {
                     DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles,
@@ -7203,7 +7203,7 @@ u8 CopyLatinGlyphsToVram(const TextChar* a, u16* b, u16 tile) {
                 sTextEntryCount++;
                 b++;
                 flag = 1;
-            } else if (flag != 0) {
+            } else if (flag) {
                 b[-1] += 3;
             }
         }

@@ -41,7 +41,7 @@ s32 IsPlayerWithin(FldPos* p, s32 lim) {
 }
 
 void MapStairWaitStepOn(MapStairWork* w) {
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800) != 0) {
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x800)) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= ROOM_FLAG_WALK_OUT;
@@ -55,7 +55,7 @@ void MapStairWaitStepOn(MapStairWork* w) {
 void MapStairWaitStepOn2(MapStairWork* w) {
     s32 k = 0x800;
 
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k) != 0) {
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, k)) {
         if (gFieldState->actor.fieldPosition.z == gFieldState->actor.fieldPosition.ground) {
             if (gMapFloorState.room == MAP_ROOM_ENTRANCE_HALL) {
                 gMapRoomState->flags |= k;
@@ -67,7 +67,7 @@ void MapStairWaitStepOn2(MapStairWork* w) {
 }
 
 void MapStairWaitApproach(MapStairWork* w) {
-    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x3000) != 0) {
+    if ((u8)IsPlayerWithin(&w->obj.fieldPosition, 0x3000)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
         CreateCardMessageTask(&w->tasks, 0, 0xA7);
@@ -76,7 +76,7 @@ void MapStairWaitApproach(MapStairWork* w) {
 }
 
 void MapStairWaitMessage(MapStairWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
         gGameState.progression.tutorialFlags |= 0x400;

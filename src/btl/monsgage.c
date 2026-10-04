@@ -192,7 +192,7 @@ void task_monsgage_2(MonsgageWork* work) {
     if (gBtlWork->phase != 0) {
         DrawSprite(172, 12, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
 
-        if (work->visible != 0) {
+        if (work->visible) {
             if (work->shownValue * 2 > 4) {
                 if (work->shownValue * 2 > 256) {
                     affine = AllocObjAffine(0, work->shownValue * 2, 256, 1);

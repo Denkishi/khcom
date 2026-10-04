@@ -142,7 +142,7 @@ void mode_chkeff_1() {
             BgAnimStart(obj, 120, 80);
         }
 
-        if (sChkEffWork->paused != 0) {
+        if (sChkEffWork->paused) {
             PrintString(0, 0, 0, sChkEffPauseText);
         } else {
             PrintString(0, 0, 0, sChkEffPauseBlankText);
@@ -173,7 +173,7 @@ void mode_chkeff_1() {
         BgAnimSetTransform((*wp)->rotation, (*wp)->scale, (*wp)->scale);
         SetBlendAlpha((*wp)->alphaA, (*wp)->alphaB);
 
-        if ((*wp)->paused == 0 || (GetKeysRepeat() & A_BUTTON)) {
+        if (!(*wp)->paused || (GetKeysRepeat() & A_BUTTON)) {
             BgAnimUpdate();
         }
 

@@ -70,7 +70,7 @@ void mode_copyright1_0(s32 arg) {
     SetBgPriority(0, 3);
 
 #ifndef VERSION_JP
-    if (sCopyrightExtraScreen != 0) {
+    if (sCopyrightExtraScreen) {
 #ifdef VERSION_EU
         LoadBgTiles(0, gUnk_09801DD8, 0x7A0);
         LoadBgPalette(0, gUnk_0984B298, 0x20);
@@ -92,7 +92,7 @@ void mode_copyright1_0(s32 arg) {
 }
 
 void mode_copyright1_1() {
-    if (sCopyrightSaveCorrupted != 0) {
+    if (sCopyrightSaveCorrupted) {
         ModeRequest(&gModeMenuMsg, 0);
     } else if (!FadeIsActive()) {
         if (sCopyright1Timer != 0) {
@@ -101,7 +101,7 @@ void mode_copyright1_1() {
             }
         } else
 #ifndef VERSION_JP
-        if (sCopyrightExtraScreen != 0) {
+        if (sCopyrightExtraScreen) {
             ModeRequest(&gModeCopyright1, 1);
         } else
 #endif

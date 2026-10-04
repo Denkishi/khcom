@@ -51,7 +51,7 @@ void TitleLoadPaletteBuffer() {
 }
 
 void TitleExitToChoice() {
-    if (sTitleCancelled != 0) {
+    if (sTitleCancelled) {
         ModeRequest(&gModeTitle, 0);
         return;
     }
@@ -97,11 +97,11 @@ void TitleShowLogo(u16 a) {
     DisableBg(1);
     DisableBg(2);
 
-    if (IsTaskActive(sTitleLogoTask) == 0) {
+    if (!IsTaskActive(sTitleLogoTask)) {
         sTitleLogoTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleLogo, NULL);
     }
 
-    if (IsTaskActive(sTitleObjTask) == 0) {
+    if (!IsTaskActive(sTitleObjTask)) {
         sTitleObjTask = TaskCreate(&sTitleTaskPool, &gTaskDescTitleObj, NULL);
     }
 

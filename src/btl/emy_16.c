@@ -115,7 +115,7 @@ u8 task_emy_16_1(Emy16Work* work) {
             w->pTaskStarted = 1;
         }
 
-        if (w->pTaskStarted != 0) {
+        if (w->pTaskStarted) {
             if (!IsTaskActiveNamed(w->pTask, sTaskDescEmy16P.name)) {
                 EmyReturnToIdle(&work->base);
             }
@@ -163,7 +163,7 @@ void task_emy_16_3(Emy16Work* work) {
 }
 
 void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
-    if (spawn->facingLeft != 0) {
+    if (spawn->facingLeft) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -189,7 +189,7 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
 u8 task_emy_16_b_1(Emy16bWork* work) {
     switch (work->state) {
     case 0:
-        if (work->facingLeft != 0) {
+        if (work->facingLeft) {
             work->x -= work->vx;
         } else {
             work->x += work->vx;
@@ -199,7 +199,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             work->vx = -work->vx;
         }
 
-        if (work->bounced == 0
+        if (!work->bounced
                 && TestAttackBox(work->x, work->y, work->z, 4, 4, 4)) {
             work->vx = -(work->vx >> 1);
             work->bounced = 1;
@@ -217,7 +217,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         }
 
-        if (work->collider.colliding != 0) {
+        if (work->collider.colliding) {
             work->timer = 0;
             work->state = 2;
             ColliderSetDisabled(&work->collider, 1);
@@ -248,7 +248,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
             work->visible = work->visible == 0;
         }
 
-        if (work->collider.colliding != 0) {
+        if (work->collider.colliding) {
             work->timer = 0;
             work->state = 2;
             ColliderSetDisabled(&work->collider, 1);
@@ -285,7 +285,7 @@ void task_emy_16_b_2(Emy16bWork* work) {
 
     gfx = AnimGetGfx(&work->anim);
 
-    if (work->visible != 0) {
+    if (work->visible) {
         pri = GetBattleSpritePriorityFlags(work->y);
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         angle = gBtlWork->scale;
@@ -293,10 +293,10 @@ void task_emy_16_b_2(Emy16bWork* work) {
         if (angle == 0x100) {
             affine = NULL;
 
-            if (work->facingLeft == 0) {
+            if (!work->facingLeft) {
                 pri |= 1;
             }
-        } else if (work->facingLeft == 0) {
+        } else if (!work->facingLeft) {
             affine = AllocObjAffine(0, -angle, angle, 1);
         } else {
             affine = AllocObjAffine(0, angle, angle, 1);
@@ -314,7 +314,7 @@ void task_emy_16_b_3(Emy16bWork* work) {
 }
 
 void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
-    if (spawn->facingLeft != 0) {
+    if (spawn->facingLeft) {
         work->facingLeft = 1;
     } else {
         work->facingLeft = 0;
@@ -335,7 +335,7 @@ u8 task_emy_16_p_1(Emy16pWork* work) {
         return 0;
     }
 
-    if (work->facingLeft != 0) {
+    if (work->facingLeft) {
         work->x -= 0x400;
     } else {
         work->x += 0x400;

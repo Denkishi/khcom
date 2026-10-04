@@ -33,7 +33,7 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
         work->visible = 1;
     } else {
         if (gBtlWork->actor2 == NULL) {
-            if (work->visible != 0) {
+            if (work->visible) {
                 work->visible = 0;
             }
 
@@ -122,7 +122,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     s32 v;
     ObjAffine* aff;
 
-    if (work->visible == 0) {
+    if (!work->visible) {
         return;
     }
 

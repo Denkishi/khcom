@@ -13,7 +13,7 @@
 void* GetExpDigitGfx(s32 digit, u8 leading) {
     switch (digit) {
     case 0:
-        if (leading != 0) {
+        if (leading) {
             return gUnk_08B25E6E;
         }
 

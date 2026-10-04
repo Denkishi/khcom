@@ -228,7 +228,7 @@ void task_emy_00_2(EmyWork* work) {
     s16 x;
     s16 y;
 
-    if (work->visible != 0) {
+    if (work->visible) {
         act = &work->actor;
         pri = GetBattleSpritePriorityFlags(act->y) | work->spriteFlags;
         WorldToScreen(&x, &y, act->x, act->y, act->z);

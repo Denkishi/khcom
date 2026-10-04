@@ -176,7 +176,7 @@ void HandleVsRikuCardInput() {
 
     f = IsRikuReloadCardSelected();
 
-    if (f != 0) {
+    if (f) {
         w->lHeldFrames = 0;
         w->rHeldFrames = 0;
     } else {
@@ -306,7 +306,7 @@ void HandleVsSoraCardInput() {
 
     f = IsSoraReloadCardSelected();
 
-    if (f != 0) {
+    if (f) {
         w->lHeldFrames = 0;
         w->rHeldFrames = 0;
     } else {
@@ -423,7 +423,7 @@ void VsBattleUpdate() {
         gRikuBtlWork->flags &= ~BTL_FLAG_STOCK_SEQUENCE;
         gBtlWork->phase = 1;
 
-        if (gBtlWork->soraOwnsPlay != 0) {
+        if (gBtlWork->soraOwnsPlay) {
             gBtlWork->flags &= ~BTL_FLAG_OPPONENT_CARD_ACTION;
             other->flags |= BTLOBJ_FLAG_CARD_BREAK_PENDING;
             FadeFromAmount(FADE_MODE_ADD_WHITE, 10, 4);
@@ -442,7 +442,7 @@ void VsBattleUpdate() {
         entered = 1;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
 
-        if (gBtlWork->soraOwnsPlay != 0) {
+        if (gBtlWork->soraOwnsPlay) {
             gBtlWork->flags |= BTL_FLAG_PLAYER_CARD_ACTION;
             player->flags |= BTLOBJ_FLAG_CARD_ACTION_PENDING;
         } else {

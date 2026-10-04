@@ -1057,7 +1057,7 @@ void SrollTextDrawNextGlyph(SrollWork* w, u8 flush) {
 
     r = 0;
 
-    while (!SrollTextQueueIsEmpty(w) && r == 0) {
+    while (!SrollTextQueueIsEmpty(w) && !r) {
         r = SrollTextProcessNextChar(w);
     }
 
@@ -1172,8 +1172,8 @@ void ScanlineDmaUpdate() {
 
     DmaStop(0);
 
-    if (sDmaStream.enabled != 0) {
-        if (sDmaStream.swapPending != 0) {
+    if (sDmaStream.enabled) {
+        if (sDmaStream.swapPending) {
             sDmaStream.srcIdx ^= 1;
             src = sDmaStream.src[sDmaStream.srcIdx];
             sDmaStream.dmaSrc = src;
@@ -1257,7 +1257,7 @@ void BlockAudioUpdate() {
     if (sBlockAudioPlaying == 1) {
         sBlockAudioPlaying = AudioBlockStreamUpdate();
 
-        if (sBlockAudioPlaying == 0) {
+        if (!sBlockAudioPlaying) {
             BlockAudioStop();
         }
     }

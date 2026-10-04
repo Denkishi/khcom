@@ -29,19 +29,19 @@ void task_btl_born_0(BtlBornWork* work, BtlBornArgs* args) {
 }
 
 u8 task_btl_born_1(BtlBornWork* work) {
-    if (BgFxIsActive() == 0) {
+    if (!BgFxIsActive()) {
         ClampBattlePosition(&work->pos.x, &work->pos.y, -24, -12);
 
-        if (IsSongPlaying(SONG_EF_MON_UP) == 0) {
+        if (!IsSongPlaying(SONG_EF_MON_UP)) {
             m4aSongNumStart(SONG_EF_MON_UP);
         }
 
-        if (CanAllocObjTiles(work->tileCount) == 0) {
+        if (!CanAllocObjTiles(work->tileCount)) {
             gBtlWork->pendingEnemies--;
             return 0;
         }
 
-        if (CanAllocObjPalette(1) == 0) {
+        if (!CanAllocObjPalette(1)) {
             gBtlWork->pendingEnemies--;
             return 0;
         }

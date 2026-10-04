@@ -24,7 +24,7 @@
 #include <stddef.h>
 
 void MapNiserikuCheckTalk(MapNiserikuWork* w) {
-    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
+    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         CreateCardMessageTask(&w->tasks, 0, 0x34);
         w->update = MapNiserikuWaitMessage;
@@ -32,7 +32,7 @@ void MapNiserikuCheckTalk(MapNiserikuWork* w) {
 }
 
 void MapNiserikuWaitMessage(MapNiserikuWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapNiserikuCheckTalk;
     }
@@ -64,7 +64,7 @@ void MapNiserikuWaitApproach(MapNiserikuWork* w) {
 }
 
 void MapNiserikuStartEvent(MapNiserikuWork* w) {
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         RequestEventMode(0x3B);
         w->update = NULL;
     }
@@ -148,13 +148,13 @@ void Task_MapNiseriku_0(MapNiserikuWork* w) {
         break;
     }
 
-    if (w->registered != 0) {
+    if (w->registered) {
         FldObjRegister(e);
     }
 }
 
 s32 Task_MapNiseriku_1(MapNiserikuWork* w) {
-    if ((u8)IsMapInterrupted() != 0) {
+    if ((u8)IsMapInterrupted()) {
         w->visible = 0;
     } else {
         w->visible = 1;
@@ -178,7 +178,7 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
     s16 x;
     s16 y;
 
-    if (w->visible != 0) {
+    if (w->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
@@ -188,7 +188,7 @@ void Task_MapNiseriku_2(MapNiserikuWork* w) {
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->targeted != 0) {
+        if (w->targeted) {
             TaskPoolDraw(&w->tasks2);
         }
     }
@@ -199,7 +199,7 @@ void Task_MapNiseriku_3(MapNiserikuWork* w) {
     ReleaseObjPalette(w->palette);
     ColliderUnregister(&w->collider);
 
-    if (w->registered != 0) {
+    if (w->registered) {
         FldObjUnregister(&w->obj);
     }
 

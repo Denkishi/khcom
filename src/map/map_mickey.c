@@ -20,7 +20,7 @@
 #include <stddef.h>
 
 void MapMickeyCheckTalk(MapMickeyWork* w) {
-    if (w->targeted != 0 && (GetKeysPressed() & A_BUTTON)) {
+    if (w->targeted && (GetKeysPressed() & A_BUTTON)) {
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
 
         switch (gMapFloorState.progress) {
@@ -41,7 +41,7 @@ void MapMickeyCheckTalk(MapMickeyWork* w) {
 }
 
 void MapMickeyWaitMessage(MapMickeyWork* w) {
-    if (IsMessageWindowOpen() == 0) {
+    if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         w->update = MapMickeyCheckTalk;
     }
@@ -77,7 +77,7 @@ void Task_MapMickey_0(MapMickeyWork* w) {
 }
 
 s32 Task_MapMickey_1(MapMickeyWork* w) {
-    if ((u8)IsMapInterrupted() != 0) {
+    if ((u8)IsMapInterrupted()) {
         w->visible = 0;
     } else {
         w->visible = 1;
@@ -101,7 +101,7 @@ void Task_MapMickey_2(MapMickeyWork* w) {
     s16 x;
     s16 y;
 
-    if (w->visible != 0) {
+    if (w->visible) {
         x = (p->x >> 8) - (gFieldState->x >> 8);
         k = p->y >> 8;
         y = k + (p->z >> 8) - (gFieldState->y >> 8);
@@ -111,7 +111,7 @@ void Task_MapMickey_2(MapMickeyWork* w) {
         w->obj.shadowPriority = v + 1;
         TaskPoolDraw(&w->tasks);
 
-        if (w->targeted != 0) {
+        if (w->targeted) {
             TaskPoolDraw(&w->tasks2);
         }
     }

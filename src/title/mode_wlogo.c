@@ -434,7 +434,7 @@ u8 task_wLogo_1(WLogoTaskWork* work) {
         }
     }
 
-    if (IsTaskActive(sTaskWLogoTask) != 0) {
+    if (IsTaskActive(sTaskWLogoTask)) {
         TaskPoolUpdate(&sTaskWLogoTasks);
         TaskPoolDraw(&sTaskWLogoTasks);
         return 1;

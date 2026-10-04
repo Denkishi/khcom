@@ -255,7 +255,7 @@ ObjTiles* LoadObjTiles(const void* src, u16 size) {
     cur = ListPoolFirst(&gSpriteWork->tilePool);
 
     while (cur != NULL) {
-        if (cur->src == src && cur->allocated == 0) {
+        if (cur->src == src && !cur->allocated) {
             cur->refCount++;
             return cur;
         }
@@ -775,7 +775,7 @@ void UpdateSpriteOam() {
         partCount = *parts++;
         tileOffset = 0;
 
-        if (mosaic != 0 && (entry->flags & SPRITE_FLAG_NO_MOSAIC) == 0) {
+        if (mosaic && (entry->flags & SPRITE_FLAG_NO_MOSAIC) == 0) {
             entry->flags |= SPRITE_FLAG_MOSAIC;
         }
 
@@ -856,7 +856,7 @@ void UpdateSpriteOam() {
             y += (s16)entry->y;
 
             if (x > 239 || x <= -width || y > 159 || y <= -height) {
-                if (((ObjTiles*)entry->tiles)->allocated != 0) {
+                if (((ObjTiles*)entry->tiles)->allocated) {
                     tileOffset += GetObjTileCount(attr0, attr1);
                 }
 
@@ -867,7 +867,7 @@ void UpdateSpriteOam() {
             oam[1] = (attr1 & 0xFE00) | (x & 0x1FF);
             tiles = entry->tiles;
 
-            if (tiles->allocated != 0) {
+            if (tiles->allocated) {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
                 oam[2] = (attr2 & 0xC00) | (tileOffset + tiles->index) | (palette << 12);
                 tileOffset += GetObjTileCount(oam[0], oam[1]);
@@ -1804,7 +1804,7 @@ void FlushDma3Queue() {
     for (i = 0; i < n; i++) {
         mask = 31;
 
-        if (fills[i].vertical != 0) {
+        if (fills[i].vertical) {
             for (row = 0; row < 32; row++) {
                 f = &fills[i];
                 dy = ((f->y + row) & mask) << 5;
@@ -1923,7 +1923,7 @@ void FlushDma3QueueWithCpu() {
     for (i = 0; i < n; i++) {
         mask = 31;
 
-        if (fills[i].vertical != 0) {
+        if (fills[i].vertical) {
             row = 0;
 
             for (; row < 32; row++) {
@@ -2218,7 +2218,7 @@ void ScrollBgMapTo(s32 bg, u16 x, u16 y) {
         return;
     }
 
-    if (e->dirty != 0) {
+    if (e->dirty) {
         RedrawBgMapAt(bg, x, y);
         return;
     }
@@ -2894,11 +2894,11 @@ void FadeUpdate() {
                 continue;
             }
 
-            if (slot->excluded != 0 && (gFadeWork->flags & FADE_FLAG_LOCKED) == 0) {
+            if (slot->excluded && (gFadeWork->flags & FADE_FLAG_LOCKED) == 0) {
                 continue;
             }
 
-            if (slot->dirty != 0) {
+            if (slot->dirty) {
                 slot->dirty = 0;
             } else if (!changed) {
                 continue;
@@ -3224,7 +3224,7 @@ void MosaicUpdate() {
         v = t;
         SetBgMosaicSize(v, v);
         SetObjMosaicSize(v, v);
-    } else if (sMosaicActive != 0) {
+    } else if (sMosaicActive) {
         sMosaicActive = 0;
         SetSpriteMosaicEnabled(0);
     }

@@ -314,7 +314,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
-        if (work->fired == 0) {
+        if (!work->fired) {
             SmnGenieFollowTarget(work);
 
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
@@ -345,7 +345,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             BgAnimIsStopped();
         }
 
-        if (work->fired != 0 && !BgFxIsActive()) {
+        if (work->fired && !BgFxIsActive()) {
             work->state = 2;
             work->stateTimer = 0;
         } else {
@@ -359,7 +359,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 1, 0, work->tiles);
         }
 
-        if (work->fired == 0) {
+        if (!work->fired) {
             SmnGenieFollowTarget(work);
 
             if (AnimGetFrame(&work->anim) == 6 && work->anim.timer == 0) {
@@ -391,7 +391,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             BgAnimIsStopped();
         }
 
-        if (work->fired != 0 && !BgFxIsActive()) {
+        if (work->fired && !BgFxIsActive()) {
             FadeStartIn(FADE_MODE_GRAY, 8);
             work->state = 2;
             work->stateTimer = 0;
@@ -406,7 +406,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             m4aSongNumStart(SONG_VO_GE_ATTACK02);
         }
 
-        if (work->fired == 0) {
+        if (!work->fired) {
             SmnGenieFollowTarget(work);
 
             if (AnimIsFinished(&work->anim)) {
@@ -430,7 +430,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             }
         }
 
-        if (work->fired != 0 && !BgFxIsActive()) {
+        if (work->fired && !BgFxIsActive()) {
             work->state = 2;
             work->stateTimer = 0;
         } else {
@@ -442,7 +442,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
 
     ClampBattlePosition(&body->x, &body->y, 0, -10);
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

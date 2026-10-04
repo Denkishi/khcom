@@ -356,8 +356,8 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
         return 1;
     }
 
-    if (w->exitRequested != 0) {
-        if ((u8)CheckDeckExchangeCpCost(w) != 0 && CheckDeckExchangeHasAttackCard(w) != 0) {
+    if (w->exitRequested) {
+        if ((u8)CheckDeckExchangeCpCost(w) && CheckDeckExchangeHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -376,7 +376,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
             w->cursorCol--;
             w->timer = 4;
 
-            if ((u8)MoveDeckExchangeValueCursor(w, 32) != 0) {
+            if ((u8)MoveDeckExchangeValueCursor(w, 32)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -388,7 +388,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
             w->cursorCol++;
             w->timer = 4;
 
-            if ((u8)MoveDeckExchangeValueCursor(w, 16) != 0) {
+            if ((u8)MoveDeckExchangeValueCursor(w, 16)) {
                 m4aSongNumStart(SONG_SYS_CLICK);
             }
         }
@@ -443,7 +443,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeGrid);
         return 1;
     case A_BUTTON:
-        if ((u8)TakeTradeCard(w) == 0) {
+        if (!(u8)TakeTradeCard(w)) {
             return 1;
         }
 
@@ -458,7 +458,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* w, void* a) {
         w->timer = 4;
         break;
     case START_BUTTON:
-        if ((u8)CheckDeckExchangeCpCost(w) != 0 && CheckDeckExchangeHasAttackCard(w) != 0) {
+        if ((u8)CheckDeckExchangeCpCost(w) && CheckDeckExchangeHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -552,7 +552,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
-        if ((u8)CheckDeckExchangeCpCost(w) != 0 && CheckDeckExchangeHasAttackCard(w) != 0) {
+        if ((u8)CheckDeckExchangeCpCost(w) && CheckDeckExchangeHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -695,8 +695,8 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
         return 1;
     }
 
-    if (w->exitRequested != 0) {
-        if ((u8)CheckDeckExchangeCpCost(w) != 0 && CheckDeckExchangeHasAttackCard(w) != 0) {
+    if (w->exitRequested) {
+        if ((u8)CheckDeckExchangeCpCost(w) && CheckDeckExchangeHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -709,13 +709,13 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
     switch (GetKeysRepeat()) {
     case DPAD_UP:
         if (w->cursorRow > 0) {
-            if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow - 1) != 0) {
+            if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow - 1)) {
                 w->cursorRow--;
                 w->timer = 4;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
         } else {
-            if (ScrollDeckExchangeGridUp(w) == 0) {
+            if (!ScrollDeckExchangeGridUp(w)) {
                 UpdateDeckExchangeGridScrollBar(w);
                 w->cursorCol = w->categoryFilter;
                 w->timer = 4;
@@ -737,12 +737,12 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
         break;
     case DPAD_DOWN:
         if (w->cursorRow < 3) {
-            if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
+            if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow + 1)) {
                 w->cursorRow++;
                 w->timer = 4;
                 m4aSongNumStart(SONG_SYS_CLICKI04B);
             }
-        } else if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow + 1) != 0) {
+        } else if (IsDeckExchangeCardAt(w, w->cursorCol, w->cursorRow + 1)) {
             ScrollDeckExchangeGridDown(w);
             UpdateDeckExchangeGridScrollBar(w);
         }
@@ -750,7 +750,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
         ShowDeckExchangeCardPreview(w);
         break;
     case DPAD_LEFT:
-        if (w->cursorCol > 0 && IsDeckExchangeCardAt(w, w->cursorCol - 1, w->cursorRow) != 0) {
+        if (w->cursorCol > 0 && IsDeckExchangeCardAt(w, w->cursorCol - 1, w->cursorRow)) {
             w->cursorCol--;
             w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -764,7 +764,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
             return 1;
         }
 
-        if (IsDeckExchangeCardAt(w, w->cursorCol + 1, w->cursorRow) != 0) {
+        if (IsDeckExchangeCardAt(w, w->cursorCol + 1, w->cursorRow)) {
             w->cursorCol++;
             w->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICKI04B);
@@ -776,7 +776,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
 
     switch (GetKeysPressed()) {
     case A_BUTTON:
-        if (IsDeckExchangeCardAtCursor(w) != 0) {
+        if (IsDeckExchangeCardAtCursor(w)) {
             w->savedCol = w->cursorCol;
             w->savedRow = w->cursorRow;
             w->cursorCol = 0;
@@ -785,7 +785,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
             w->view = 11;
             m4aSongNumStart(SONG_SYS_KETTEI);
 
-            if ((u8)MoveDeckExchangeValueCursor(w, 0) != 0) {
+            if ((u8)MoveDeckExchangeValueCursor(w, 0)) {
                 DrawDeckExchangeValueCpCost(w);
                 w->x2 = sDeckExchangeValueGridX[w->cursorCol] << 8;
                 w->y2 = (sDeckExchangeValueGridY[w->cursorRow] - 16) << 8;
@@ -808,7 +808,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* w, void* a) {
         m4aSongNumStart(SONG_SYS_CLOSE);
         return 1;
     case START_BUTTON:
-        if ((u8)CheckDeckExchangeCpCost(w) != 0 && CheckDeckExchangeHasAttackCard(w) != 0) {
+        if ((u8)CheckDeckExchangeCpCost(w) && CheckDeckExchangeHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -851,7 +851,7 @@ u8 UpdateDeckExchangeClose(DeckExchangeWork* w, void* a) {
 }
 
 u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* w) {
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         ClearDeckExchangeCardGrid(w);
         return 0;
     }
@@ -862,7 +862,7 @@ u8 UpdateDeckExchangeFadeOut(DeckExchangeWork* w) {
 }
 
 void DrawDeckExchangeDeckNames(DeckExchangeWork* w, u8 b) {
-    if (b == 0) {
+    if (!b) {
         switch (w->deckIndex) {
         case 0:
             DrawTextSlots(w->x4, w->y4, w->textSlots, w->palette, 20, w->textSlotCount);

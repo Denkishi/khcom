@@ -192,7 +192,7 @@ void UpdateMsTopMooglePalette() {
     }
 
     ReleaseObjPalette(sMsTopMooglePalette);
-    sMsTopMooglePalette = LoadObjPalette(flag == 0 ? gMoguPalette : gUnk_09A3D77C, 0x20);
+    sMsTopMooglePalette = LoadObjPalette(!flag ? gMoguPalette : gUnk_09A3D77C, 0x20);
 }
 
 void UpdateMsTopWarpGfx() {
@@ -309,7 +309,7 @@ void MsTopDraw() {
     s32 i;
     u16 flags;
 
-    if (sMsTopBarVisible != 0) {
+    if (sMsTopBarVisible) {
 #ifdef VERSION_EU
         DrawSprite(sMsTopBarX >> 8, 0, sUnkEu_09F84F10[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
         DrawSprite(0x80, sMsTopBarY[0] >> 8, sUnkEu_09F84F24[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
@@ -426,7 +426,7 @@ void mode_ms_top_0(u32 a) {
     LoadBgMap(0, gUnk_09A36EDC, 0x500);
     LoadBgMap(1, gUnk_09A373DC, 0x500);
 
-    if (sMsTopBarVisible != 0) {
+    if (sMsTopBarVisible) {
 #ifdef VERSION_EU
         LoadBgMap(2, sUnkEu_09F84EE8[gLanguage], 0x500);
 #else
@@ -510,7 +510,7 @@ void mode_ms_top_1() {
     case 3:
         QueueMsTopIntroMessage();
 
-        if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && IsMessageWindowOpen() == 0) {
+        if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && !IsMessageWindowOpen()) {
             SetJiminyFlag(27);
             gGameState.progression.tutorialFlags |= 0x80;
             sMsTopState = 4;
@@ -527,7 +527,7 @@ void mode_ms_top_1() {
 
         break;
     case 5:
-        if (IsMessageWindowOpen() == 0) {
+        if (!IsMessageWindowOpen()) {
             if (gGameState.floor <= 5) {
                 RollMooglePackCards(0, 0);
             } else if (gGameState.floor <= 9) {
@@ -544,7 +544,7 @@ void mode_ms_top_1() {
 
         break;
     case 6:
-        if (UpdateMooglePackOpening(1) == 0) {
+        if (!UpdateMooglePackOpening(1)) {
             ReleaseMooglePackOpening();
             SetMoogleFreePackFlag(gMapFloorState.room);
             SetupBg(3, 3, 31, 14);
@@ -583,7 +583,7 @@ void mode_ms_top_1() {
 
         break;
     case 11:
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             if (sMsTopNextMode != NULL) {
                 ModeRequest(sMsTopNextMode, 0);
             } else {
@@ -649,8 +649,8 @@ void mode_ms_top_1() {
     }
 
     if (sMsTopPendingOptionMessage >= 0) {
-        if (sMsTopMessageStarted != 0) {
-            if (IsMessageWindowOpen() == 0) {
+        if (sMsTopMessageStarted) {
+            if (!IsMessageWindowOpen()) {
                 ShowPersistentCardMessage(&sMsTopTaskPool, 3, sMsTopPendingOptionMessage);
                 sMsTopPendingOptionMessage = -1;
             }
@@ -662,8 +662,8 @@ void mode_ms_top_1() {
     }
 
     if (sMsTopPendingMessage >= 0) {
-        if (sMsTopMessageStarted != 0) {
-            if (IsMessageWindowOpen() == 0) {
+        if (sMsTopMessageStarted) {
+            if (!IsMessageWindowOpen()) {
                 CreateCardMessageTask(&sMsTopTaskPool, 3, sMsTopPendingMessage);
                 sMsTopPendingMessage = -1;
             }

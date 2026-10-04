@@ -174,13 +174,13 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     if (work->timer != 0) {
         AnimChange(&work->anim, 1, ANIM_FLAG_LOOP);
         work->timer--;
-    } else if (flag != 0) {
+    } else if (flag) {
         AnimChange(&work->anim, 2, ANIM_FLAG_LOOP);
     } else {
         AnimChange(&work->anim, 0, ANIM_FLAG_LOOP);
     }
 
-    if (work->firstUpdate != 0) {
+    if (work->firstUpdate) {
         work->firstUpdate = 0;
         work->displayHp = actor->hp;
     } else if (work->displayHp < actor->hp) {
@@ -219,8 +219,8 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         break;
     }
 
-    if (flag != 0) {
-        if (work->alarmPlaying == 0) {
+    if (flag) {
+        if (!work->alarmPlaying) {
             work->alarmPlaying = 1;
             m4aSongNumStart(SONG_SYS_ALART);
         }
@@ -283,7 +283,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             AnimChange(&work->anim2, 11, ANIM_FLAG_LOOP);
         }
 
-        if (work->alarmPlaying != 0) {
+        if (work->alarmPlaying) {
             work->alarmPlaying = 0;
             m4aSongNumStop(SONG_SYS_ALART);
         }

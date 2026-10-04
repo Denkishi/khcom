@@ -149,7 +149,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     work->asSprite = arg->asSprite;
     work->shape = SetupAllmapRoomDoors(work);
 
-    if (work->asSprite == 0) {
+    if (!work->asSprite) {
         work->tiles = LoadObjTiles(gUnk_0976B340, 0x2400);
         work->gfx2 = NULL;
     } else {
@@ -157,7 +157,7 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
         work->gfx2 = gUnk_09EF6424[work->shape];
     }
 
-    if (work->asSprite == 0 && work->room == gMapFloorState.room) {
+    if (!work->asSprite && work->room == gMapFloorState.room) {
         pal = gUnk_0984A138;
     } else {
         pal = gUnk_0984A0F8 + GetAllmapRoomPaletteOffset(work->room);
@@ -177,7 +177,7 @@ void task_allmap_room_2(AllmapRoomWork* work) {
     u16 g;
     u16 h;
 
-    if (work->asSprite == 0) {
+    if (!work->asSprite) {
         x = work->x * 24 - gAllmapCameraX;
         y = work->y * 24 - gAllmapCameraY;
         g = 0x800;
@@ -269,7 +269,7 @@ u8 AllmapDoorHasKeyInfo(u8 a, u8 b) {
         }
     }
 
-    if (AllmapDoorExists(a, b) != 0) {
+    if (AllmapDoorExists(a, b)) {
         return AllmapDoorIsOpen(a, b) == 0;
     }
 
@@ -334,7 +334,7 @@ void task_allmap_cursor_2(AllmapCursorWork* work) {
     s16 x;
     s16 y;
 
-    if (IsStockMesDispActive() != 0) {
+    if (IsStockMesDispActive()) {
         return;
     }
 
@@ -523,7 +523,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 
         break;
     case 4:
-        if (FadeIsActive() == 0 && work->fadeStarted == 0) {
+        if (!FadeIsActive() && !work->fadeStarted) {
             for (i = 0; i < 32; i++) {
                 FadeSetPaletteExcluded(i, 0);
             }
@@ -543,7 +543,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 
         break;
     case 2:
-        if (work->closing != 0) {
+        if (work->closing) {
             break;
         }
 
@@ -560,7 +560,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
             return 0;
         }
 
-        if ((GetKeysPressed() & B_BUTTON) != 0 && IsStockMesDispActive() == 0) {
+        if ((GetKeysPressed() & B_BUTTON) != 0 && !IsStockMesDispActive()) {
             m4aSongNumStart(SONG_SYS_CLOSE);
             AllmapBarStartClose(work);
             gAllmapModeState = 1;
@@ -613,7 +613,7 @@ u8 AllmapHasDoorInfo(AllmapCursorPos a) {
                 v = AllmapDoorHasCardInfo(r, sAllmapReverseDoors[i]);
             }
 
-            if (v != 0) {
+            if (v) {
                 return 1;
             }
         }
@@ -759,7 +759,7 @@ void task_allmap_doorinfo_0(AllmapDoorinfoWork* work, AllmapCursorPos* arg) {
 }
 
 s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
-    if ((GetKeysPressed() & B_BUTTON) != 0 && work->closing == 0) {
+    if ((GetKeysPressed() & B_BUTTON) != 0 && !work->closing) {
         work->closing = 1;
         m4aSongNumStart(SONG_SYS_CLOSE);
         work->steps = 8 - work->steps;
@@ -774,7 +774,7 @@ s32 task_allmap_doorinfo_1(AllmapDoorinfoWork* work) {
         work->steps--;
     }
 
-    if (work->closing != 0 && work->steps == 0) {
+    if (work->closing && work->steps == 0) {
         return 0;
     }
 
@@ -824,7 +824,7 @@ void task_allmap_doorinfo_2(AllmapDoorinfoWork* work) {
 void task_allmap_doorinfo_3(AllmapDoorinfoWork* work) {
     s32 i;
 
-    if (work->closing == 0) {
+    if (!work->closing) {
         FadeToOriginal(FADE_MODE_BLACK, 8);
     }
 
@@ -870,7 +870,7 @@ void task_allmap_pusha_0(AllmapPushaWork* work, AllmapCursorWork* arg) {
 }
 
 s32 task_allmap_pusha_1(AllmapPushaWork* work) {
-    if (IsStockMesDispActive() == 0 && (GetKeysPressed() & A_BUTTON) != 0) {
+    if (!IsStockMesDispActive() && (GetKeysPressed() & A_BUTTON) != 0) {
         m4aSongNumStart(SONG_SYS_KETTEI);
         work->task = TaskCreate(&work->tasks, &gTaskDescAllmapDoorinfo, &work->cursor->pos);
     }
@@ -882,7 +882,7 @@ s32 task_allmap_pusha_1(AllmapPushaWork* work) {
 }
 
 void task_allmap_pusha_2(AllmapPushaWork* work) {
-    if (IsStockMesDispActive() != 0) {
+    if (IsStockMesDispActive()) {
         TaskPoolDraw(&work->tasks);
     } else {
         work->x = work->cursor->pos.x * 24 - gAllmapCameraX;
@@ -899,7 +899,7 @@ void task_allmap_pusha_3(AllmapPushaWork* work) {
 }
 
 u8 IsStockMesDispActive() {
-    if (gStockMesDispWork == NULL || IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task) == 0) {
+    if (gStockMesDispWork == NULL || !IsTaskActive(((AllmapPushaWork*)gStockMesDispWork)->task)) {
         return 0;
     }
 
@@ -934,8 +934,8 @@ void AllmapDrawRoomTiles(s16 a, s16 b, s32 c, u8 d) {
     room = GetAllmapRoomAt(p);
     tile = c * 16;
 
-    if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || AllmapHasDoorInfo(p) != 0) {
-        if (d != 0) {
+    if (TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_EVENT_DONE) != 0 || TestAllmapRoomFlag(room, FLOOR_ROOM_FLAG_VISITED) != 0 || AllmapHasDoorInfo(p)) {
+        if (d) {
             tile += 0x2000;
         } else if (c == 1) {
             tile += 0x1000;
@@ -1052,7 +1052,7 @@ void UpdateAllmap() {
     s16 x;
     s16 y;
 
-    if (FadeIsActive() == 0 && gAllmapModeState == 3) {
+    if (!FadeIsActive() && gAllmapModeState == 3) {
         AllmapHandleInput();
     }
 
@@ -1107,14 +1107,14 @@ void AllmapInitDropOffsets() {
     base = (sAllmapState->maxY * 24 - gAllmapCameraY) << 9;
 
     for (i = 0; i < 32; i++) {
-        if (IsTaskActive(sAllmapState->roomTasks[i]) != 0) {
+        if (IsTaskActive(sAllmapState->roomTasks[i])) {
             w = sAllmapState->roomTasks[i]->work;
             w->dropTargetY = (w->y * 24 - gAllmapCameraY) << 8;
             w->dropY = w->dropTargetY - base;
         }
     }
 
-    if (IsTaskActive(sAllmapState->cursorTask) != 0) {
+    if (IsTaskActive(sAllmapState->cursorTask)) {
         c = sAllmapState->cursorTask->work;
         c->dropY = c->dropTargetY - base;
     }
@@ -1125,7 +1125,7 @@ s32 GetAllmapRoomAt(AllmapCursorPos a) {
     u8 i;
 
     for (i = 0; i < 32; i++) {
-        if (IsTaskActive(sAllmapState->roomTasks[i]) != 0) {
+        if (IsTaskActive(sAllmapState->roomTasks[i])) {
             w = sAllmapState->roomTasks[i]->work;
 
             if (a.x == w->x && a.y == w->y) {
@@ -1211,12 +1211,12 @@ void AllmapHandleInput() {
     sAllmapState->lastRoom = r;
     gAllmapCursorRoom = r;
 
-    if (moved != 0) {
+    if (moved) {
         m4aSongNumStart(SONG_SYS_CLICK);
         AllmapCenterOnRoom();
     }
 
-    if (IsTaskActive(sAllmapState->roomnameTask) != 0) {
+    if (IsTaskActive(sAllmapState->roomnameTask)) {
         TaskKill(&sAllmapState->tasks, sAllmapState->roomnameTask);
     }
 
@@ -1229,11 +1229,11 @@ void AllmapHandleInput() {
         AllmapClearRoomnameFrame();
     }
 
-    if (IsTaskActive(sAllmapState->pushaTask) != 0) {
+    if (IsTaskActive(sAllmapState->pushaTask)) {
         TaskKill(&sAllmapState->tasks, sAllmapState->pushaTask);
     }
 
-    if (AllmapHasDoorInfo(c->pos) != 0) {
+    if (AllmapHasDoorInfo(c->pos)) {
         sAllmapState->pushaTask = TaskCreate(&sAllmapState->tasks, &gTaskDescAllmapPusha, c);
     }
 }
@@ -1245,7 +1245,7 @@ void AllmapAddRoom(u8 a, u16 b, u16 c) {
 
     d = GetMapRoomLinks(a);
 
-    if (IsTaskActive(sAllmapState->roomTasks[a]) != 0) {
+    if (IsTaskActive(sAllmapState->roomTasks[a])) {
         return;
     }
 

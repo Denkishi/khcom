@@ -531,7 +531,7 @@ void DrawMooglePackOpening() {
     anim = AnimUpdate(&sMooglePackPremiumAnim);
 
     for (i = 0; i < 5; i++) {
-        if (sMooglePackCards[i].revealed == 0) {
+        if (!sMooglePackCards[i].revealed) {
             v = sMooglePackCards[i].scale;
             affine = AllocObjAffine(0, v, v, 0);
             obj = AnimUpdate(&sMooglePackCards[i].anim);
@@ -544,10 +544,10 @@ void DrawMooglePackOpening() {
         if (v != 0) {
             DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, obj, sMooglePackCards[i].tiles2, sMooglePackCards[i].palette2, affine, 0, 0x50);
 
-            if (sMooglePackCards[i].revealed != 0) {
+            if (sMooglePackCards[i].revealed) {
                 DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, sMooglePackCards[i].gfx, sMooglePackCards[i].tiles, sMooglePackCards[i].palette, affine, 0, 0x58);
 
-                if (sMooglePackCards[i].premium != 0) {
+                if (sMooglePackCards[i].premium) {
                     DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE9894[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
                     DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, anim, sMooglePackPremiumTiles, sMooglePackCard00Palette, affine, 0, 0x40);
                 } else {
@@ -590,7 +590,7 @@ u8 UpdateMooglePackOpening(u16 a) {
     for (i = 0; i < 5; i++) {
         switch (sMooglePackCards[i].state) {
         case 0:
-            if (FadeIsActive() == 0) {
+            if (!FadeIsActive()) {
                 if (sMooglePackCards[i].timer != 0) {
                     sMooglePackCards[i].state = 1;
                 }
@@ -603,7 +603,7 @@ u8 UpdateMooglePackOpening(u16 a) {
             ApproachValue(&sMooglePackCards[i].scale, 0x100, sMooglePackCards[i].timer);
 
             if (--sMooglePackCards[i].timer == 0) {
-                if (sMooglePackCards[i].premium != 0) {
+                if (sMooglePackCards[i].premium) {
                     sMooglePackCards[i].state = 5;
                 } else {
                     sMooglePackCards[i].state = 2;
@@ -747,7 +747,7 @@ u8 UpdateMooglePackOpening(u16 a) {
 
             break;
         case 8:
-            if (sMooglePackCards[i].premium != 0) {
+            if (sMooglePackCards[i].premium) {
                 g = gFrameCounter & 0x1F;
 
                 if (g == 0) {
@@ -783,7 +783,7 @@ u8 UpdateMooglePackOpening(u16 a) {
 
             break;
         case 9:
-            if (sMooglePackCards[i].premium != 0) {
+            if (sMooglePackCards[i].premium) {
                 h = gFrameCounter & 0x1F;
 
                 if (h == 0) {
@@ -1012,7 +1012,7 @@ void RollMooglePackCards(s16 a, s16 b) {
             acc += list[m]->weights[b];
 
             if (rnd < acc) {
-                if (IsCardKindObtained(list[m]->unlockFlag) != 0) {
+                if (IsCardKindObtained(list[m]->unlockFlag)) {
                     id = list[m]->cardId;
                 } else {
                     switch (gCardDefs[list[m]->cardId].category) {
@@ -1059,7 +1059,7 @@ void MoogleShopHandlePackInput() {
 
     if (keys & A_BUTTON) {
         if (sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0] >= 0 &&
-            SpendMooglePoints(sMooglePackPrices[sMoogleShopRowCategory[sMoogleShopRowCursor]][sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]]) != 0) {
+            SpendMooglePoints(sMooglePackPrices[sMoogleShopRowCategory[sMoogleShopRowCursor]][sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]])) {
             RollMooglePackCards(sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][1]);
             InitMooglePackOpening(sMoogleShopPackCursor % 2 * 96 + 72, sMoogleShopPackCursor / 2 * 64 + 48);
             FadeSetPaletteExcluded(13, 1);
@@ -1112,7 +1112,7 @@ void MoogleShopDraw() {
 
     switch (sMoogleShopState) {
     case 2:
-        if (sMoogleShopHasPacks != 0) {
+        if (sMoogleShopHasPacks) {
             ApproachValueHalf(&sMoogleShopCursorX, 0x400);
             ApproachValueHalf(&sMoogleShopCursorY, sMoogleShopRowCursor * 6144 + 0x800);
             DrawSprite(sMoogleShopCursorX >> 8, sMoogleShopCursorY >> 8, AnimUpdate(&sMoogleShopCursorAnim), sMoogleShopCursorTiles, sMoogleShopCursorPalette, NULL, SPRITE_PRIORITY(1), 0x3E8);
@@ -1170,7 +1170,7 @@ void mode_ms_shop_0() {
 #endif
     DrawMoogleShopCategoryLabels(sMoogleShopRowCursor);
 
-    if (sMoogleShopHasPacks != 0) {
+    if (sMoogleShopHasPacks) {
         LoadMooglePackSelectionTilemap(sMoogleShopPackCursor);
     }
 
@@ -1198,8 +1198,8 @@ void mode_ms_shop_1() {
 
     switch (sMoogleShopState) {
     case 0:
-        if (FadeIsActive() == 0) {
-            if (sMoogleShopHasPacks != 0) {
+        if (!FadeIsActive()) {
+            if (sMoogleShopHasPacks) {
                 sMoogleShopCursorX = 0x400;
                 sMoogleShopCursorY = sMoogleShopRowCursor * 6144 + 0x800;
                 sMoogleShopState = 2;
@@ -1219,7 +1219,7 @@ void mode_ms_shop_1() {
         MoogleShopHandlePackInput();
         break;
     case 4:
-        if (UpdateMooglePackOpening(0) == 0) {
+        if (!UpdateMooglePackOpening(0)) {
             ReleaseMooglePackOpening();
             SetMooglePackBought(gMapFloorState.room, sMoogleShopRowCategory[sMoogleShopRowCursor], sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0]);
             sMoogleShopHasPacks = BuildMooglePackList(gGameState.floor);
@@ -1244,7 +1244,7 @@ void mode_ms_shop_1() {
             DrawMoogleShopCategoryLabels(sMoogleShopRowCursor);
             DrawMoogleShopPacks(sMoogleShopRowCursor);
 
-            if (sMoogleShopHasPacks != 0) {
+            if (sMoogleShopHasPacks) {
                 for (; sMoogleShopPackCursor > 0 && sMoogleShopPacks[sMoogleShopRowCursor][sMoogleShopPackCursor][0] < 0; sMoogleShopPackCursor--) {
                 }
 
@@ -1256,13 +1256,13 @@ void mode_ms_shop_1() {
             LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A18D7C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             DisableBg(3);
             FadeToOriginal(FADE_MODE_BLACK, 8);
-            sMoogleShopState = sMoogleShopHasPacks != 0 ? 3 : 1;
+            sMoogleShopState = sMoogleShopHasPacks ? 3 : 1;
         }
 
         break;
     case 5:
-        if (FadeIsActive() == 0) {
-            if (sMoogleShopBackToTop != 0) {
+        if (!FadeIsActive()) {
+            if (sMoogleShopBackToTop) {
                 ModeRequest(&gModeMsTop, 2);
             } else {
                 RequestMapMode();

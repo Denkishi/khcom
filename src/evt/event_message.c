@@ -3057,9 +3057,9 @@ u8 event_seq_1(EventSeqWork* work, void* a) {
     TaskCreate(&work->tasks, &gTaskDescEVBGEFFECT, &work->eventId);
 
 #ifdef VERSION_EU
-    if (work->hasMapAnim != 0) {
+    if (work->hasMapAnim) {
 #else
-    if (flag != 0) {
+    if (flag) {
 #endif
         TaskCreate(&work->tasks, &gTaskDescMapAnim, NULL);
     }
@@ -3093,7 +3093,7 @@ u8 UpdateEventSeqSkip() {
     u8 r = FadeIsActive();
     u8 v;
 
-    if (r != 0) {
+    if (r) {
         v = 1;
     } else {
         gEventState->running = 0;
@@ -3157,7 +3157,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
     TaskPoolUpdate(&p->tasks);
     TaskPoolUpdate(&p->tasks2);
 
-    if (p->hasBoss != 0) {
+    if (p->hasBoss) {
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
     }
@@ -3168,8 +3168,8 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
 
     t = gEventSequenceDefs[p->eventId];
 
-    if (gEventState->frame >= t->endFrame && p->ending == 0 && FadeIsActive() == 0) {
-        if (gEventState->fadedOut == 0) {
+    if (gEventState->frame >= t->endFrame && !p->ending && !FadeIsActive()) {
+        if (!gEventState->fadedOut) {
             FadeStartOut(FADE_MODE_BLACK, 64);
         }
 
@@ -3182,7 +3182,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
             FadeSetPaletteExcluded(i, 0);
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             gEventState->running = 0;
             return 0;
         }
@@ -3194,7 +3194,7 @@ u8 UpdateEventSeq(EventSeqWork* p, void* a) {
 void event_seq_2(EventSeqWork* p) {
     TaskPoolDraw(&p->tasks2);
 
-    if (p->hasBoss != 0) {
+    if (p->hasBoss) {
         TaskPoolDraw(&gBtlWork->taskPools[0]);
     }
 
@@ -3209,15 +3209,15 @@ void event_seq_3(EventSeqWork* p) {
     }
 
 #ifdef VERSION_EU
-    if (p->bg3MapUnpacked != 0) {
+    if (p->bg3MapUnpacked) {
         FreeBgDecompressedMap(3);
     }
 
-    if (p->bg2MapUnpacked != 0) {
+    if (p->bg2MapUnpacked) {
         FreeBgDecompressedMap(2);
     }
 
-    if (p->bg1MapUnpacked != 0) {
+    if (p->bg1MapUnpacked) {
         FreeBgDecompressedMap(1);
     }
 #endif
@@ -3457,7 +3457,7 @@ void event_chara_0(EventCharaWork* p, EventSeqArg* a) {
         break;
     }
 
-    if (p->hasObj != 0) {
+    if (p->hasObj) {
         ApplyEventCharaDrawFlags(p);
     }
 }
@@ -3469,13 +3469,13 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
 
     t = AdvanceEventCharaKeyframe(p);
 
-    if (p->hasObj != 0) {
+    if (p->hasObj) {
         UpdateEventCharaMotion(p);
     }
 
     PlayEventCharaAnimSounds(p);
 
-    if (t != 0) {
+    if (t) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
             ((void (*)(EventCharaWork*, void*))p->keyframes[p->keyframe].update)(p, a);
@@ -3504,7 +3504,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
 
     TaskPoolUpdate(&p->tasks);
 
-    if (p->usesBtlWork != 0) {
+    if (p->usesBtlWork) {
         switch (p->arg.chara) {
         case 0x62:
             gEventState->x = gEventState->cameraX = gBtlWork->x2;
@@ -3545,7 +3545,7 @@ u8 event_chara_1(EventCharaWork* p, void* a) {
         }
     }
 
-    if (p->finished != 0) {
+    if (p->finished) {
         return 0;
     }
 
@@ -3608,7 +3608,7 @@ void event_chara_2(EventCharaWork* p) {
 void event_chara_3(EventCharaWork* p) {
     TaskPoolDestroy(&p->tasks);
 
-    if (p->usesBtlWork != 0) {
+    if (p->usesBtlWork) {
         TaskPoolDestroy(&gBtlWork->taskPools[0]);
         TaskPoolDestroy(&gBtlWork->taskPools[1]);
         EwramFree(gBtlWork);
@@ -3659,7 +3659,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* p) {
         p->unk_1B8 = 0;
     }
 
-    if (p->hasObj != 0) {
+    if (p->hasObj) {
         if ((p->keyframes[p->keyframe].flags & CHARA_KEYFRAME_MOTION_MASK) == CHARA_MOTION_SET_POSITION) {
             EvtObjSetPos(&p->obj, p->keyframes[p->keyframe].x, p->keyframes[p->keyframe].y, p->keyframes[p->keyframe].z);
         }
@@ -3792,7 +3792,7 @@ u8 EventCharaHopUpdate(EventCharaWork* p, void* a) {
         p->waitTimer = 17;
     }
 
-    if (t != 0) {
+    if (t) {
         p->obj.z = p->unk_198;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -3845,7 +3845,7 @@ u8 EventCharaHopHighUpdate(EventCharaWork* p, void* a) {
         p->waitTimer = 17;
     }
 
-    if (t != 0) {
+    if (t) {
         p->obj.z = p->unk_198;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -3898,7 +3898,7 @@ u8 EventCharaHopLowUpdate(EventCharaWork* p, void* a) {
         p->waitTimer = 17;
     }
 
-    if (t != 0) {
+    if (t) {
         p->obj.z = p->unk_198;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -3949,7 +3949,7 @@ u8 EventCharaDropUpdate(EventCharaWork* p, void* a) {
         p->waitTimer = 17;
     }
 
-    if (t != 0) {
+    if (t) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         } else {
@@ -3976,7 +3976,7 @@ u8 EventCharaFadeOut(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4023,7 +4023,7 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* p, void* a) {
 
     gBldAlpha = ((16 - p->effectLevel) << 8) | p->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -4059,7 +4059,7 @@ u8 EventCharaFadeIn(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4106,7 +4106,7 @@ u8 EventCharaFadeInUpdate(EventCharaWork* p, void* a) {
 
     gBldAlpha = ((16 - p->effectLevel) << 8) | p->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -4141,7 +4141,7 @@ u8 EventCharaBlendUp(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4179,7 +4179,7 @@ u8 EventCharaBlendUpUpdate(EventCharaWork* p, void* a) {
 
     gBldAlpha = (p->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -4207,7 +4207,7 @@ u8 EventCharaBlendDown(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4245,7 +4245,7 @@ u8 EventCharaBlendDownUpdate(EventCharaWork* p, void* a) {
 
     gBldAlpha = (p->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -4286,7 +4286,7 @@ u8 EventCharaCircleSlowUpdate(EventCharaWork* p, void* a) {
         p->unk_198 += 25;
     }
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         } else {
@@ -4325,7 +4325,7 @@ u8 EventCharaCircleFastUpdate(EventCharaWork* p, void* a) {
         p->unk_198 += 25;
     }
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         } else {
@@ -4365,7 +4365,7 @@ u8 EventCharaJitterUpdate(EventCharaWork* p, void* a) {
         p->unk_198++;
     }
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         } else {
@@ -4453,7 +4453,7 @@ u8 EventCharaToggleAnimUpdate(EventCharaWork* p, void* a) {
         p->effectLevel ^= 1;
     }
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->tiles != NULL) {
             ReleaseObjTiles(p->tiles);
         }
@@ -4483,7 +4483,7 @@ u8 EventCharaFadeToBlack(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4521,7 +4521,7 @@ u8 EventCharaFadeToBlackUpdate(EventCharaWork* p, void* a) {
 
     gBldAlpha = p->effectLevel;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -4549,7 +4549,7 @@ u8 func_0806FCF4(void* work, void* a) {
     UpdateEventCharaMotion(p);
     PlayEventCharaAnimSounds(p);
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         if (p->keyframes[p->keyframe].update != NULL) {
             SetTaskUpdate(a, p->keyframes[p->keyframe].update);
         }
@@ -4588,7 +4588,7 @@ u8 func_0806FDB0(EventCharaWork* p, void* a) {
     gBldAlpha = (16 - p->effectLevel) | (p->effectLevel << 8);
     gBldAlpha = (p->effectLevel << 8) | 16;
 
-    if (AdvanceEventCharaKeyframe(p) != 0) {
+    if (AdvanceEventCharaKeyframe(p)) {
         gBldCnt = 0;
 
         if (p->keyframes[p->keyframe].update != NULL) {
@@ -6146,7 +6146,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
     switch (kind) {
     case 0:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_SR_DIRTL);
             SetEventSoundPosition(SONG_EV_SR_DIRTL, x, y);
         } else {
@@ -6156,7 +6156,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 1:
-        if (flag == 0) {
+        if (!flag) {
             m4aSongNumStart(SONG_EV_SR_STONER);
             SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
         } else {
@@ -6167,7 +6167,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
         break;
     case 2:
         if ((p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) || (p->arg.eventId == 0x36 && gEventState->frame <= 0x4F)) {
-            if (flag != 0) {
+            if (flag) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
                 SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
             } else {
@@ -6175,7 +6175,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
             }
 
-            if (flag != 0) {
+            if (flag) {
                 m4aSongNumStart(SONG_EV_SR_STONEL);
                 SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
             } else {
@@ -6183,7 +6183,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_SR_STONER, x, y);
             }
         } else {
-            if (flag != 0) {
+            if (flag) {
                 m4aSongNumStart(SONG_EV_SR_MUDL);
                 SetEventSoundPosition(SONG_EV_SR_MUDL, x, y);
             } else {
@@ -6194,7 +6194,7 @@ void PlaySoraFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 3:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_SR_STONEL);
             SetEventSoundPosition(SONG_EV_SR_STONEL, x, y);
         } else {
@@ -6215,7 +6215,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
     switch (kind) {
     case 0:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_DL_DIRTL);
             SetEventSoundPosition(SONG_EV_DL_DIRTL, x, y);
         } else {
@@ -6225,7 +6225,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 1:
-        if (flag == 0) {
+        if (!flag) {
             m4aSongNumStart(SONG_EV_DL_STONE_R);
             SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
         } else {
@@ -6236,7 +6236,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
-            if (flag == 0) {
+            if (!flag) {
                 m4aSongNumStart(SONG_EV_DL_STONE_R);
                 SetEventSoundPosition(SONG_EV_DL_STONE_R, x, y);
             } else {
@@ -6244,7 +6244,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
             }
         } else {
-            if (flag != 0) {
+            if (flag) {
                 m4aSongNumStart(SONG_EV_DL_MUDL);
                 SetEventSoundPosition(SONG_EV_DL_MUDL, x, y);
             } else {
@@ -6255,7 +6255,7 @@ void PlayDonaldFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 3:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_DL_STONE_L);
             SetEventSoundPosition(SONG_EV_DL_STONE_L, x, y);
         } else {
@@ -6276,7 +6276,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
     switch (kind) {
     case 0:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_GF_DIRTL);
             SetEventSoundPosition(SONG_EV_GF_DIRTL, x, y);
         } else {
@@ -6286,7 +6286,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 1:
-        if (flag == 0) {
+        if (!flag) {
             m4aSongNumStart(SONG_EV_GF_STONE_R);
             SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
         } else {
@@ -6297,7 +6297,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
         break;
     case 2:
         if (p->arg.eventId == 0x4B && gEventState->frame > 0x2BC) {
-            if (flag == 0) {
+            if (!flag) {
                 m4aSongNumStart(SONG_EV_GF_STONE_R);
                 SetEventSoundPosition(SONG_EV_GF_STONE_R, x, y);
             } else {
@@ -6305,7 +6305,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
                 SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
             }
         } else {
-            if (flag != 0) {
+            if (flag) {
                 m4aSongNumStart(SONG_EV_GF_MUDL);
                 SetEventSoundPosition(SONG_EV_GF_MUDL, x, y);
             } else {
@@ -6316,7 +6316,7 @@ void PlayGoofyFootstep(EventCharaWork* p, u8 kind, u8 flag) {
 
         break;
     case 3:
-        if (flag != 0) {
+        if (flag) {
             m4aSongNumStart(SONG_EV_GF_STONE_L);
             SetEventSoundPosition(SONG_EV_GF_STONE_L, x, y);
         } else {
@@ -6416,18 +6416,18 @@ static void msgwin_0(MsgWinWork* p, u8* arg) {
 static u8 msgwin_1(MsgWinWork* p, void* a) {
     const MessageScriptEntry* e;
 
-    if (p->textLoaded == 0) {
-        if (gEventState->bgEffectActive == 0) {
+    if (!p->textLoaded) {
+        if (!gEventState->bgEffectActive) {
             MsgwinLoadEntry(p);
         }
     } else {
         MsgwinCheckStart(p);
     }
 
-    if (p->started != 0) {
+    if (p->started) {
         gEventState->msgWinPosition = p->position;
 
-        if (gEventState->focusSpeaker != 0) {
+        if (gEventState->focusSpeaker) {
             if (gEventState->focusSteps != 0) {
                 gEventState->focusSteps--;
             } else {
@@ -6557,18 +6557,18 @@ static u8 msgwin_1(MsgWinWork* p, void* a) {
 }
 
 u8 MsgwinContinueUpdate(MsgWinWork* p, void* a) {
-    if (p->textLoaded == 0) {
-        if (gEventState->bgEffectActive == 0) {
+    if (!p->textLoaded) {
+        if (!gEventState->bgEffectActive) {
             MsgwinLoadEntry(p);
         }
     } else {
         MsgwinCheckStart(p);
     }
 
-    if (p->started != 0) {
+    if (p->started) {
         gEventState->msgWinPosition = p->position;
 
-        if (gEventState->focusSpeaker != 0) {
+        if (gEventState->focusSpeaker) {
             if (gEventState->focusSteps != 0) {
                 gEventState->focusSteps--;
             } else {
@@ -6654,7 +6654,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* p, void* a) {
         }
     }
 
-    if (p->waitCreated == 1 && gEventState->msgWaitActive == 0) {
+    if (p->waitCreated == 1 && !gEventState->msgWaitActive) {
         MsgLatinChar* text = p->nextText;
 
         if (text != NULL) {
@@ -6789,7 +6789,7 @@ void MsgwinTypeStep(MsgWinWork* p) {
         } else {
             gEventState->talking = 0;
 
-            if (p->waitCreated == 0) {
+            if (!p->waitCreated) {
                 if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_END) == 0) {
                     if ((p->script[p->scriptIndex].flags & MSG_SCRIPT_FLAG_YES_NO) == 0) {
                         TaskCreate(&p->tasks, &sTaskDescMsgwait, &p->script[p->scriptIndex + 1].positionIndex);
@@ -6820,7 +6820,7 @@ void MsgwinCheckStart(MsgWinWork* p) {
     const MessageScriptEntry* e = &p->script[p->scriptIndex];
 
     if (gEventState->frame >= e->frame) {
-        if (p->started == 0) {
+        if (!p->started) {
             gEventState->flags |= EVENT_FLAG_PAUSED;
             p->started = 1;
             p->steps = 8;
@@ -6891,7 +6891,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
 
     switch (p->face->command) {
     case 1:
-        if (p->face->shown == 0) {
+        if (!p->face->shown) {
             p->x = gMsgfaceHiddenX[n = p->face->positionIndex];
             p->y = gMsgfaceY[n];
         }
@@ -6931,7 +6931,7 @@ u8 msgface_1(MsgFaceWork* p, void* a) {
     }
 
     if (gEventState->talking == 1) {
-        if (p->talking == 0) {
+        if (!p->talking) {
             if (anim != NULL && anim[p->face->expressionId].animCount > 1) {
                 AnimStart(&p->anim, 1, anim[p->face->expressionId].animFlags);
             }
@@ -6962,7 +6962,7 @@ void msgface_2(MsgFaceWork* p) {
     ObjAffine* t;
     u8 v;
 
-    if (p->visible != 0) {
+    if (p->visible) {
         t = AllocObjAffine(0, p->scaleX, 256, 0);
 
         if (t != NULL) {
@@ -6970,7 +6970,7 @@ void msgface_2(MsgFaceWork* p) {
         } else {
             v = p->flipX;
 
-            if (v != 0) {
+            if (v) {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, t, SPRITE_FLAG_HFLIP, 50);
             } else {
                 DrawSprite(p->x >> 8, p->y >> 8, p->gfx, p->tiles, p->palette, NULL, v, 50);
@@ -7193,7 +7193,7 @@ u8 UpdateMsgwaitClosing(MsgWaitWork* p) {
 void msgwait_2(MsgWaitWork* p) {
     u8 v = gEventState->msgWinCentered;
 
-    if (v != 0) {
+    if (v) {
         DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx,
                    p->tiles, p->palette, NULL, 0, 0);
     } else {
@@ -7322,7 +7322,7 @@ u8 msgwait_yesno_1(MsgWaitWork* p, void* a) {
 void msgwait_yesno_2(MsgWaitWork* p) {
     switch (p->choiceShown) {
     case 0:
-        if (gEventState->msgWinCentered != 0) {
+        if (gEventState->msgWinCentered) {
             DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
         } else {
             DrawSprite(gMsgwaitIconPos[gEventState->msgWinPosition][0] >> 8, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, p->gfx, p->tiles, p->palette, NULL, 0, 0);
@@ -7415,11 +7415,11 @@ void view_0(EventCameraWork* p, u8* arg) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
             }
 
-            if (gEventState->hasBg2Map != 0) {
+            if (gEventState->hasBg2Map) {
                 ScrollBgMapTo(2, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
             }
 
-            if (gEventState->hasBg1Map != 0) {
+            if (gEventState->hasBg1Map) {
                 ScrollBgMapTo(1, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
             }
         }
@@ -7454,7 +7454,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         return 1;
     }
 
-    if (gEventState->focusSpeaker == 0) {
+    if (!gEventState->focusSpeaker) {
         e = &p->keyframes[p->keyframe];
 
         if (gEventState->frame >= (u16)e->frame && !(e->flags & CAMERA_KEYFRAME_FLAG_END)) {
@@ -7490,7 +7490,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FLASH) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(FADE_MODE_ADD_WHITE, e->duration);
 
@@ -7504,7 +7504,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_WHITE) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_WHITE, e->duration);
                 gEventState->fadedOut = 1;
@@ -7517,7 +7517,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_OUT_BLACK) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_BLACK, e->duration);
                 gEventState->fadedOut = 1;
@@ -7526,7 +7526,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 FadeStartIn(FADE_MODE_WHITE, e->duration);
                 gEventState->fadedOut = 0;
                 p->effectStarted = 1;
@@ -7534,7 +7534,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_BLACK) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(FADE_MODE_BLACK, e->duration);
                 gEventState->fadedOut = 0;
@@ -7543,7 +7543,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_HALF_FLASH) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeFromAmount(FADE_MODE_ADD_WHITE, 16, e->duration);
 
@@ -7567,7 +7567,7 @@ u8 view_1(EventCameraWork* p, Task* task) {
         }
 
         if (e->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE_LINEAR) {
-            if (p->effectStarted == 0) {
+            if (!p->effectStarted) {
                 FadeStartIn(FADE_MODE_WHITE_BLEND, e->duration);
             }
 
@@ -7608,11 +7608,11 @@ u8 view_1(EventCameraWork* p, Task* task) {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
                 }
 
-                if (gEventState->hasBg2Map != 0) {
+                if (gEventState->hasBg2Map) {
                     ScrollBgMapTo(2, gEventState->x >> 8, gEventState->y >> 8);
                 }
 
-                if (gEventState->hasBg1Map != 0) {
+                if (gEventState->hasBg1Map) {
                     ScrollBgMapTo(1, gEventState->x >> 8, gEventState->y >> 8);
                 }
             }
@@ -7680,11 +7680,11 @@ u8 view_1(EventCameraWork* p, Task* task) {
                     ScrollBgMapTo(3, gEventState->x >> 8, gEventState->y >> 8);
                 }
 
-                if (gEventState->hasBg2Map != 0) {
+                if (gEventState->hasBg2Map) {
                     ScrollBgMapTo(2, gEventState->x >> 8, gEventState->y >> 8);
                 }
 
-                if (gEventState->hasBg1Map != 0) {
+                if (gEventState->hasBg1Map) {
                     ScrollBgMapTo(1, gEventState->x >> 8, gEventState->y >> 8);
                 }
             }
@@ -7828,11 +7828,11 @@ u8 UpdateEventCameraFollowPlayer(EventCameraWork* p) {
                 ScrollBgMapTo(3, (gEventState->cameraX >> 8) + gEventState->shakeX, gEventState->cameraY >> 8);
             }
 
-            if (gEventState->hasBg2Map != 0) {
+            if (gEventState->hasBg2Map) {
                 ScrollBgMapTo(2, gEventState->cameraX >> 8, gEventState->cameraY >> 8);
             }
 
-            if (gEventState->hasBg1Map != 0) {
+            if (gEventState->hasBg1Map) {
                 ScrollBgMapTo(1, gEventState->cameraX >> 8, gEventState->cameraY >> 8);
             }
         }

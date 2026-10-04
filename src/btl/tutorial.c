@@ -118,7 +118,7 @@ s32 task_tutorial_1(TutorialWork* work) {
         gBtlWork->hitStop = 8;
 
         if (work->timer == 0) {
-            if (BgFxIsActive() != 0) {
+            if (BgFxIsActive()) {
                 break;
             }
 
@@ -127,7 +127,7 @@ s32 task_tutorial_1(TutorialWork* work) {
             break;
         }
 
-        if (IsMessageWindowOpen() != 0) {
+        if (IsMessageWindowOpen()) {
             break;
         }
 
@@ -149,7 +149,7 @@ s32 task_tutorial_1(TutorialWork* work) {
     case 4:
         gBtlWork->hitStop = 8;
 
-        if (BgFxIsActive() != 0) {
+        if (BgFxIsActive()) {
             break;
         }
 
@@ -319,7 +319,7 @@ s32 task_tutorial_1(TutorialWork* work) {
             break;
         }
 
-        if (IsSoraReloadCardSelected() == 0) {
+        if (!IsSoraReloadCardSelected()) {
             work->timer++;
             break;
         }
@@ -348,7 +348,7 @@ s32 task_tutorial_1(TutorialWork* work) {
             break;
         }
 
-        if (IsSoraReloadCardSelected() != 0) {
+        if (IsSoraReloadCardSelected()) {
             work->timer++;
             break;
         }

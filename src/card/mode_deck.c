@@ -206,7 +206,7 @@ u8 menu_1(MenuWork* w) {
         w->x += (0x11800 - w->x) >> 1;
 
         if ((w->x >> 8) > 274) {
-            if (FadeIsActive() == 0) {
+            if (!FadeIsActive()) {
                 if (w->cursor != 2) {
                     if (w->cursor == 9) {
                         ModeRequest(&gModeDeck, 0);

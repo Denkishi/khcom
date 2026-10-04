@@ -267,7 +267,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         work->timer = 0;
         break;
     default:
-        if (gBosBoogieDiceFaceReady != 0 && work->state != 4) {
+        if (gBosBoogieDiceFaceReady && work->state != 4) {
             work->state = 5;
             work->timer = 0;
         }
@@ -310,7 +310,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
             work->defeatStep = 2;
             break;
         case 2:
-            if (FadeIsActive() == 0) {
+            if (!FadeIsActive()) {
                 BgFxStartBossDeath(a->x, a->y + a->z - ((s16)sBosBoogieEmyKind.centerHeight << 8));
                 SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
                 FadeToAmount(FADE_MODE_BLACK, gBtlWork->fadeAmount, 8);
@@ -329,7 +329,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
             break;
         case 4:
-            if (BgFxIsActive() == 0) {
+            if (!BgFxIsActive()) {
                 fx.x = a->x;
                 fx.y = 0x24000;
                 fx.z = -0x6400;
@@ -349,10 +349,10 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         if (AnimIsFinished(&work->anim)) {
             random = GetRandom();
 
-            if ((random & 15) <= 7 && FadeIsActive() == 0) {
+            if ((random & 15) <= 7 && !FadeIsActive()) {
                 work->state = 11;
 
-                if (work->cardRequested != 0) {
+                if (work->cardRequested) {
                     RequestBossCardRandom();
                     work->cardRequested = 0;
                 }
@@ -371,7 +371,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
         if (gBosBoogieDiceBreakCount <= 2 && !IsTaskActive(work->dice) &&
             !IsTaskActive(work->dice2) && !IsTaskActive(work->dice3) &&
-            !IsTaskActive(work->task) && gBtlWork->enemyTileCount <= 0 && work->cardRequested == 0) {
+            !IsTaskActive(work->task) && gBtlWork->enemyTileCount <= 0 && !work->cardRequested) {
             random = GetRandom() % 100;
 
             if (random == 0) {
@@ -382,7 +382,7 @@ u8 task_bos_boogie_1(BoogieWork* work) {
         }
 
         if (func_08083920() == 8) {
-            if (work->cardRequested != 0) {
+            if (work->cardRequested) {
 #ifdef VERSION_EU
                 if (ConsumeGimmickFlag(0)) {
                     BosBoogieApplyGimmick();
@@ -410,14 +410,14 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
                 break;
             }
-        } else if (work->cardRequested != 0 && work->timer > 10) {
+        } else if (work->cardRequested && work->timer > 10) {
             RequestBossCardRandom();
             work->cardRequested = 0;
         }
 
         random = GetRandom();
 
-        if ((random & 255) == 0 && work->cardRequested == 0) {
+        if ((random & 255) == 0 && !work->cardRequested) {
             work->state = 0;
             work->timer = 0;
         } else if (a->flags & BTLOBJ_FLAG_FACING_LEFT) {
@@ -459,10 +459,10 @@ u8 task_bos_boogie_1(BoogieWork* work) {
 
         break;
     case 8:
-        if (gBosBoogieAttackHit != 0) {
+        if (gBosBoogieAttackHit) {
             work->state = 10;
             work->timer = 0;
-        } else if (gBosBoogieTaskKnockedDown != 0) {
+        } else if (gBosBoogieTaskKnockedDown) {
             work->state = 0;
             work->timer = 0;
         } else if (!IsTaskActive(work->task)) {
@@ -621,7 +621,7 @@ void BosBoogieApplyGimmick() {
 }
 
 u32 GetBoogieDiceState() {
-    if (IsTaskActive(sBoogieWork->dice) != 0) {
+    if (IsTaskActive(sBoogieWork->dice)) {
         return ((BoogieDiceWork*)sBoogieWork->dice->work)->state;
     }
 

@@ -371,7 +371,7 @@ s32 HumUpdate(HumWork* work) {
             BgFxStartPotion(actor->x, actor->y, actor->z - ((actor->height - 48) << 8));
         }
 
-        if (work->stateTimer > 23 && BgFxIsActive() == 0) {
+        if (work->stateTimer > 23 && !BgFxIsActive()) {
             switch (work->itemIndex) {
             case 0:
                 RequestRikuPotion();
@@ -422,7 +422,7 @@ s32 HumUpdate(HumWork* work) {
             SetBattleZoom(1, 0x100, gBtlWork->x2, gBtlWork->y2);
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             work->stateTimer = 0;
 
             if (work->flags & HUM_FLAG_BOSS_DEATH) {
@@ -494,7 +494,7 @@ s32 HumUpdate(HumWork* work) {
     case 7:
         BtlMapFollowPosition(actor->x, actor->y, actor->z);
 
-        if (BgFxIsActive() == 0) {
+        if (!BgFxIsActive()) {
             PrizeCardArg arg2;
 
             EndBossDefeat();
@@ -523,7 +523,7 @@ s32 HumUpdate(HumWork* work) {
     case 17:
         SetRikuReloadCharging();
 
-        if (IsRikuReloadCardSelected() == 0) {
+        if (!IsRikuReloadCardSelected()) {
             work->stateTimer = 0;
             work->state = 0;
         } else {
@@ -542,7 +542,7 @@ s32 HumUpdate(HumWork* work) {
             work->vz = 0;
         }
 
-        if (actor->collider.colliding != 0 && !(work->flags & HUM_FLAG_PASS_THROUGH) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
+        if (actor->collider.colliding && !(work->flags & HUM_FLAG_PASS_THROUGH) && !(actor->collider.other->flags & COLLIDER_FLAG_PASS_THROUGH)) {
             actor->x += actor->collider.pushX >> 1;
             actor->y += actor->collider.pushY >> 1;
         }

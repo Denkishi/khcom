@@ -344,7 +344,7 @@ void task_emy_37_2(Emy37Work* work) {
 
     w = work;
 
-    if (work->base.visible != 0) {
+    if (work->base.visible) {
         act = &work->base.actor;
         pri = GetBattleSpritePriorityFlags(act->y) | work->base.spriteFlags;
         WorldToScreen(&x, &y, act->x, act->y, act->z);

@@ -539,7 +539,7 @@ u8 func_080DF49C() {
 }
 
 u8 GetCurrentEventDoorKeyKind() {
-    if (SelectEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide) != 0) {
+    if (SelectEventDoor(gMapRoomState->doorRoom, gMapRoomState->doorSide)) {
         return GetEventKey(0)->kind;
     }
 

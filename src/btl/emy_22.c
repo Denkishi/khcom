@@ -70,7 +70,7 @@ u8 task_emy_22_1(Emy22Work* work) {
 
         break;
     case 7:
-        if (w->counterPending != 0 && work->base.stateTimer == 0) {
+        if (w->counterPending && work->base.stateTimer == 0) {
             work->base.state = 18;
             work->base.stateTimer = 0;
             w->counterPending = 0;

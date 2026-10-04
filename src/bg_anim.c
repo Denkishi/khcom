@@ -71,7 +71,7 @@ void BgAnimInit(s32 bg, u16 b, u16 c) {
 }
 
 void BgAnimSetPosition(s16 x, s16 y) {
-    if (sBgAnimAffine != 0) {
+    if (sBgAnimAffine) {
         sBgAnimScrollX = -x;
         sBgAnimScrollY = -y;
     } else {
@@ -90,7 +90,7 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     sBgAnimCurrent = a;
     BgAnimSetPosition(x, y);
 
-    if (sBgAnimAffine != 0) {
+    if (sBgAnimAffine) {
         sBgAnimFrameBytes = a->tilesPerFrame << 6;
     } else {
         sBgAnimFrameBytes = a->tilesPerFrame << 5;
@@ -104,7 +104,7 @@ void BgAnimStart(BgAnimationDef* a, s32 x, s32 y) {
     sBgAnimStopped = 0;
     sBgAnimFrameDuration = a->frameDuration;
 
-    if (sBgAnimAffine != 0) {
+    if (sBgAnimAffine) {
         sBgAnimScaleX = 0x100;
         sBgAnimScaleY = 0x100;
         sBgAnimRotation = 0;
@@ -172,7 +172,7 @@ void BgAnimUpdate() {
         return;
     }
 
-    if (sBgAnimAffine != 0) {
+    if (sBgAnimAffine) {
         BgAnimApplyAffineTransform(sBgAnimBg, sBgAnimRotation, sBgAnimScaleX, sBgAnimScaleY, sBgAnimScrollX, sBgAnimScrollY);
         vis = 1;
     } else {
@@ -185,7 +185,7 @@ void BgAnimUpdate() {
         }
     }
 
-    if (vis != 0) {
+    if (vis) {
         EnableBg(sBgAnimBg);
 
         if (sBgAnimFrameTimer == 0) {

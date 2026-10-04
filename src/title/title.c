@@ -108,7 +108,7 @@ void task_title_logo_0(TitleLogoWork* work) {
 }
 
 u8 task_title_logo_1(TitleLogoWork* work) {
-    if (IsTitleLogoShown() && sTitleLogoScaleDone == 0) {
+    if (IsTitleLogoShown() && !sTitleLogoScaleDone) {
         work->unk_48 -= 76;
         work->scale += 6;
 

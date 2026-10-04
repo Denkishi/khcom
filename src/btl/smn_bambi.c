@@ -321,7 +321,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
         break;
     }
 
-    if (work->animating != 0) {
+    if (work->animating) {
         AnimUpdate(&work->anim);
     }
 

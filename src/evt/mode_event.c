@@ -115,14 +115,14 @@ void EventDebugUpdate() {
 
     TaskPoolDraw(&sEventTaskPool);
 
-    if (gEventState->running == 0) {
+    if (!gEventState->running) {
         if (sEventEndStep == 0) {
             ShowEventEndMessage();
             sEventEndStep = 1;
         }
 
         if (sEventEndStep == 1) {
-            if (IsMessageWindowOpen() == 0) {
+            if (!IsMessageWindowOpen()) {
                 ModeRequest(&gModeEventselect, 0);
             }
         }
@@ -139,7 +139,7 @@ void EventUpdate() {
     TaskPoolUpdate(&sEventTaskPool);
     TaskPoolDraw(&sEventTaskPool);
 
-    if (gEventState->running != 0) {
+    if (gEventState->running) {
         return;
     }
 
@@ -152,7 +152,7 @@ void EventUpdate() {
         return;
     }
 
-    if (IsMessageWindowOpen() != 0) {
+    if (IsMessageWindowOpen()) {
         return;
     }
 
@@ -169,9 +169,9 @@ void EventUpdate() {
     UnlockCardKindsAfterEvent();
     EnterExitHallAfterEvent();
 
-    if (gEventState->askedYesNo != 0) {
-        if (gEventState->answerYes == 0) {
-            if (HandleNoAnswerAfterEvent() == 0) {
+    if (gEventState->askedYesNo) {
+        if (!gEventState->answerYes) {
+            if (!HandleNoAnswerAfterEvent()) {
                 AdvanceFloorStory();
                 RequestMapMode();
             }
@@ -182,7 +182,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->toMap != 0) {
+    if (p->toMap) {
 #ifdef VERSION_EU
         if (sEventId == 148) {
 #else
@@ -246,7 +246,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->startsBattle != 0) {
+    if (p->startsBattle) {
         if (p->battleId == 122) {
             gGameState.battleStage = BATTLE_STAGE_HALLOWEEN_TOWN;
         } else if (p->battleId == 120) {
@@ -274,7 +274,7 @@ void EventUpdate() {
         return;
     }
 
-    if (p->toMapFld != 0) {
+    if (p->toMapFld) {
         AdvanceFloorStory();
         ModeRequest(&gModeMapFld, 0);
         return;

@@ -151,7 +151,7 @@ u8 task_bos_ursula_bubble_1(UrsulaBubbleWork* work) {
 #endif
 
     for (i = 0; i < work->bubbleCount; i++) {
-        if (IsTaskActive(work->bubbles[i]) != 0) {
+        if (IsTaskActive(work->bubbles[i])) {
             break;
         }
     }
@@ -178,7 +178,7 @@ void BosUrsulaPopBubbles(UrsulaBubbleWork* work) {
     s32 i;
 
     for (i = 0; i < work->bubbleCount; i++) {
-        if (IsTaskActive(work->bubbles[i]) != 0) {
+        if (IsTaskActive(work->bubbles[i])) {
             BosUrsulaBubblePop(work->bubbles[i]->work);
         }
     }
@@ -289,12 +289,12 @@ u8 task_bos_ursula_bubble_single_1(UrsulaBubbleSingleWork* work) {
     }
 
 #ifdef VERSION_EU
-    if (BosUrsulaBubbleAnimGetId() == 1 && BosUrsulaBubbleAnimIsFinished() != 0) {
+    if (BosUrsulaBubbleAnimGetId() == 1 && BosUrsulaBubbleAnimIsFinished()) {
         return 0;
     }
 
 #else
-    if (AnimGetId(&work->anim) == 1 && AnimIsFinished(&work->anim) != 0) {
+    if (AnimGetId(&work->anim) == 1 && AnimIsFinished(&work->anim)) {
         return 0;
     }
 
@@ -313,7 +313,7 @@ void task_bos_ursula_bubble_single_2(UrsulaBubbleSingleWork* work) {
     s16 y;
 
     v = GetBattleSpritePriorityFlags(p->y);
-    pal = StepHitFlash(p) != 0 ? work->palette2 : work->palette;
+    pal = StepHitFlash(p) ? work->palette2 : work->palette;
     WorldToScreen(&x, &y, p->x, p->y, p->z);
 #ifdef VERSION_EU
     DrawSprite(x, y, BosUrsulaBubbleAnimGetGfx(), work->tiles, pal, NULL, v, -0x1004 - (p->y >> 8) * 4);
@@ -359,8 +359,8 @@ void task_bos_ursula_thunder_0(UrsulaThunderWork* work) {
 }
 
 u8 task_bos_ursula_thunder_1(UrsulaThunderWork* work) {
-    if (BgFxIsActive() == 0) {
-        if (work->strikeStarted != 0) {
+    if (!BgFxIsActive()) {
+        if (work->strikeStarted) {
             return 0;
         }
 
@@ -385,7 +385,7 @@ void BosMapanimeInit(BosMapanimeState* p, const BosMapanimeDef* q) {
 }
 
 u8 BosMapanimeUpdate(BosMapanimeState* p, const BosMapanimeDef* q, u8 a) {
-    if (p->uploadPending == 0) {
+    if (!p->uploadPending) {
         p->timer++;
 
         if (p->timer > q->frames[p->frameIndex].duration) {
@@ -398,8 +398,8 @@ u8 BosMapanimeUpdate(BosMapanimeState* p, const BosMapanimeDef* q, u8 a) {
         }
     }
 
-    if (a == 0) {
-        if (p->timer == 0 || p->uploadPending != 0) {
+    if (!a) {
+        if (p->timer == 0 || p->uploadPending) {
             RequestDma3Copy((u8*)q->tiles + q->frameSize * q->frames[p->frameIndex].frame,
                 (u8*)GetBgCharBase(q->bg) + q->destOffset, q->copySize);
             p->uploadPending = 0;

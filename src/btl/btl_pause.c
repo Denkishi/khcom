@@ -47,14 +47,14 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 
     if (GetKeysPressed() & START_BUTTON) {
         if (!(gBtlWork->flags & BTL_FLAG_PAUSE_DISABLED)) {
-            gBtlWork->paused = gBtlWork->paused == 0 ? 1 : 0;
+            gBtlWork->paused = !gBtlWork->paused ? 1 : 0;
         }
     }
 
     paused = gBtlWork->paused;
 
-    if (paused != 0) {
-        if (work->visible == 0) {
+    if (paused) {
+        if (!work->visible) {
             FadeSetPaused(1);
             work->visible = 1;
             work->x = -0x4000;
@@ -93,7 +93,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
                 work->steps--;
             }
         }
-    } else if (work->visible != 0) {
+    } else if (work->visible) {
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x100);
         m4aMPlayVolumeControl(&gMPlayInfo1, 0xFF, 0x100);
         m4aMPlayVolumeControl(&gMPlayInfo2, 0xFF, 0x100);
@@ -125,7 +125,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 }
 
 void task_btl_pause_2(BtlPauseWork* work) {
-    if (work->visible != 0) {
+    if (work->visible) {
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
         DrawSprite(work->x2 >> 8, work->y2 >> 8, work->gfx2, work->tiles, work->palette, NULL, 0, 0);
     }

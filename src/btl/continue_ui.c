@@ -203,7 +203,7 @@ static s32 Continue_1(ContinueWork* p) {
     gBldAlpha = p->blendAlpha;
 
     if (p->state == 0) {
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             p->state = 1;
         }
     }
@@ -264,7 +264,7 @@ static s32 Continue_1(ContinueWork* p) {
             p->blendAlpha = 0x1000;
         }
 
-        if (FadeIsActive() == 0) {
+        if (!FadeIsActive()) {
             DisableBg(0);
             DisableBg(2);
             LoadBgMap(0, gUnk_08125E24, 0x800);

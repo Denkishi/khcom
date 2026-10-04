@@ -436,28 +436,28 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
     mask = 0;
 
     for (i = 0; i < 4; i++) {
-        if (AllmapDoorExists(work->room, i) == 0) {
+        if (!AllmapDoorExists(work->room, i)) {
             continue;
         }
 
         mask += 1 << i;
 
-        if (AllmapDoorLeadsToHall(work->room, i) != 0) {
+        if (AllmapDoorLeadsToHall(work->room, i)) {
             AnimInit(&work->anim[i], gUnk_09EF653C, gUnk_09EF64FC);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
-            if (work->asSprite == 0) {
+            if (!work->asSprite) {
                 work->tiles2[i] = LoadObjTiles(gUnk_0976DEDC, 0x500);
             } else {
                 work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF64FC, 16), gUnk_0976DEDC);
             }
-        } else if (AllmapDoorIsOpen(work->room, i) == 0) {
+        } else if (!AllmapDoorIsOpen(work->room, i)) {
             AnimInit(&work->anim[i], gUnk_09EF658C, gUnk_09EF654C);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
-            if (work->asSprite == 0) {
+            if (!work->asSprite) {
                 work->tiles2[i] = LoadObjTiles(gUnk_0976E4D4, 0x500);
             } else {
                 work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF654C, 16), gUnk_0976E4D4);

@@ -156,7 +156,7 @@ void RikuDrawAfterimage(RikuWork* work, RikuSpawn* p) {
     gfx = AnimGetGfx(&p->anim);
     act = &work->base.actor;
 
-    if (BgFxIsActive() == 0) {
+    if (!BgFxIsActive()) {
         gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
         SetBlendAlpha(6, 12);
         attr = 0x804;

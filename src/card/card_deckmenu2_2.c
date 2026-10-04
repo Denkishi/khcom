@@ -265,7 +265,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* w, void* a) {
 u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* w, void* a) {
     u8 n;
 
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         switch (w->step) {
         case 0:
             ApproachValue(&w->y5, 0, w->timer);
@@ -317,7 +317,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
     w->gfx = AnimUpdate(&w->anim2);
     w->gfx2 = AnimUpdate(&w->anim3);
 
-    if (FadeIsActive() != 0) {
+    if (FadeIsActive()) {
         TaskPoolUpdate(&w->taskpool);
         return 1;
     }
@@ -348,8 +348,8 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
         return 1;
     }
 
-    if (w->exitRequested != 0) {
-        if (CheckRikuDeckCpCost(w) != 0 && CheckRikuDeckHasAttackCard(w) != 0) {
+    if (w->exitRequested) {
+        if (CheckRikuDeckCpCost(w) && CheckRikuDeckHasAttackCard(w)) {
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
             FadeStartOut(FADE_MODE_BLACK, 4);
             m4aSongNumStart(SONG_SYS_CANSEL);
@@ -440,7 +440,7 @@ u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* w, void* a) {
 }
 
 s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* w) {
-    if (FadeIsActive() == 0) {
+    if (!FadeIsActive()) {
         return 0;
     }
 
@@ -512,7 +512,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
                    w->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
-    if (w->handVisible != 0) {
+    if (w->handVisible) {
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 30, w->gfx,
                    w->tiles, w->palette, NULL, w->handFlags, 3);
         DrawSprite((w->x >> 8) - 16, (w->y >> 8) - 20, w->gfx2,
@@ -534,7 +534,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* w) {
         DrawSprite(168, 86, w->gfx6, w->tiles9, w->palette5, NULL, 0, 19);
     }
 
-    if (w->previewShown != 0) {
+    if (w->previewShown) {
         if (w->textSlotCount4 != 0) {
             DrawTextSlots(100, 112, w->textSlots4, w->palette4, 20, w->textSlotCount4);
         }

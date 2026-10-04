@@ -55,7 +55,7 @@ void SndStreamInit(u32 rate, u32 channels) {
 }
 
 void SndStreamUpdate() {
-    if (gSndStream.playing != 0) {
+    if (gSndStream.playing) {
         gSndStream.dmaOffset += gSndStream.samplesPerFrame;
 
         if (gSndStream.dmaOffset == gSndStream.bufferSize) {
@@ -139,7 +139,7 @@ void SndStreamStart() {
 }
 
 void SndStreamStop() {
-    if (gSndStream.playing != 0) {
+    if (gSndStream.playing) {
         REG_TM0CNT_H = 0;
         gSndStream.playing = 0;
 

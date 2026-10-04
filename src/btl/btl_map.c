@@ -312,7 +312,7 @@ void BtlMapStartShake() {
 }
 
 void BtlMapUpdateShake() {
-    if (sBtlMapShakeActive != 0) {
+    if (sBtlMapShakeActive) {
         sBtlMapShakeOffset += ((sBtlMapShakePattern[(s16)sBtlMapShakeStep] << 12) - sBtlMapShakeOffset) >> 3;
         sBtlMapShakeStep++;
 
@@ -400,7 +400,7 @@ s32 task_btl_map_1(BtlMapWork* work) {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (sBtlMapShakeActive != 0) {
+    if (sBtlMapShakeActive) {
         gBtlWork->rotation = (sBtlMapShakeOffset >> 8) / 3;
     }
 

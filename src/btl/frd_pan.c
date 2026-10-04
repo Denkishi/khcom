@@ -273,7 +273,7 @@ u8 task_frd_pan_1(FrdPanWork* work) {
         work->hoverZ += (z - work->hoverZ) >> 5;
         FrdPanHover(work);
 
-        if (work->flyLeft != 0) {
+        if (work->flyLeft) {
             ApproachValue(&work->vx, -0x800, work->steps);
         } else {
             ApproachValue(&work->vx, 0x800, work->steps);

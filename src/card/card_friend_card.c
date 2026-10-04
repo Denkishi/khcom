@@ -248,7 +248,7 @@ s32 Friend_card_1(PickupCardWork* w, void* a) {
         w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
 #ifdef VERSION_EU
@@ -356,7 +356,7 @@ s32 Gimmick_card_1(PickupCardWork* w, void* a) {
         w->moveAngle = (u8)(w->moveAngle + 112) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 
 #ifdef VERSION_EU
@@ -598,7 +598,7 @@ s32 Heartless_card_1(PickupCardWork* w, void* a) {
         w->moveAngle = (u8)(w->moveAngle + 0x70) + GetRandom() % 33;
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
 #ifdef VERSION_EU
         w->priority = 10;
@@ -640,7 +640,7 @@ void PickupCardDraw(PickupCardWork* w) {
     u8 kind;
 
     if (w->visible != 0) {
-        if (w->screenSpace == 0) {
+        if (!w->screenSpace) {
             w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
             WorldToScreen(&x, &y, w->posX, w->posY,
                           w->posZ);
@@ -670,7 +670,7 @@ void PickupCardDraw(PickupCardWork* w) {
             v = 2;
         }
 
-        if (w->screenSpace == 0) {
+        if (!w->screenSpace) {
             WorldToScreen(&w->x, &w->y,
                           w->posX, w->posY,
                           w->floor);
@@ -691,7 +691,7 @@ void Heartless_card_2(PickupCardWork* w) {
     s16 v;
 
     if (w->visible != 0) {
-        if (w->screenSpace == 0) {
+        if (!w->screenSpace) {
             w->spriteFlags = GetBattleSpritePriorityFlags(w->posY);
             WorldToScreen(&x, &y, w->posX, w->posY,
                           w->posZ);
@@ -716,7 +716,7 @@ void Heartless_card_2(PickupCardWork* w) {
             v = 2;
         }
 
-        if (w->screenSpace == 0) {
+        if (!w->screenSpace) {
             WorldToScreen(&w->x, &w->y,
                           w->posX, w->posY,
                           w->floor);
@@ -825,7 +825,7 @@ void StockNameSora_0(StockNameWork* w, const s32* src) {
     obj = AllocSpriteFrameTiles(0x3C0);
     w->tiles = obj;
 
-    if (w->cycling == 0) {
+    if (!w->cycling) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -860,7 +860,7 @@ u8 StockNameSora_1(StockNameWork* w) {
     void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
 
-    if (gCardBattleState->soraStockNameShown == 0 || gCardBattleState->soraStockName != w->stockName) {
+    if (!gCardBattleState->soraStockNameShown || gCardBattleState->soraStockName != w->stockName) {
         return 0;
     }
 
@@ -870,7 +870,7 @@ u8 StockNameSora_1(StockNameWork* w) {
         w->visible = 0;
     }
 
-    if (w->cycling == 1 && w->visible != 0) {
+    if (w->cycling == 1 && w->visible) {
         w->stockNameIndex++;
 
         if (w->stockNames[w->stockNameIndex] == -1) {
@@ -888,7 +888,7 @@ u8 StockNameSora_1(StockNameWork* w) {
 }
 
 void StockNameSora_2(StockNameWork* w) {
-    if (w->visible != 0) {
+    if (w->visible) {
         DrawSprite(64, 14, NULL, w->tiles, w->palette, NULL,
 #ifdef VERSION_EU
                    SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC,
@@ -927,7 +927,7 @@ void StockNameRiku_0(StockNameWork* w, const s32* src) {
     obj = AllocSpriteFrameTiles(0x3C0);
     w->tiles = obj;
 
-    if (w->cycling == 0) {
+    if (!w->cycling) {
 #ifdef VERSION_EU
         void** t;
         void* u;
@@ -962,7 +962,7 @@ u8 StockNameRiku_1(StockNameWork* w) {
     void* u = LANGSTR(gStockNameSprites[w->stockNames[w->stockNameIndex]].tiles);
 #endif
 
-    if (gCardBattleState->rikuStockNameShown == 0 || gCardBattleState->rikuStockName != w->stockName) {
+    if (!gCardBattleState->rikuStockNameShown || gCardBattleState->rikuStockName != w->stockName) {
         return 0;
     }
 
@@ -972,7 +972,7 @@ u8 StockNameRiku_1(StockNameWork* w) {
         w->visible = 1;
     }
 
-    if (w->cycling == 1 && w->visible != 0) {
+    if (w->cycling == 1 && w->visible) {
         w->stockNameIndex++;
 
         if (w->stockNames[w->stockNameIndex] == -1) {
@@ -990,7 +990,7 @@ u8 StockNameRiku_1(StockNameWork* w) {
 }
 
 void StockNameRiku_2(StockNameWork* w) {
-    if (gRikuBtlWork->hcEffect != 28 && w->visible != 0) {
+    if (gRikuBtlWork->hcEffect != 28 && w->visible) {
         DrawSprite(120, 14, NULL, w->tiles, w->palette, NULL, 0, 10);
     }
 }
@@ -1143,7 +1143,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
     s32 z;
 
     if (w->inputEnabled != 0) {
-        if ((GetKeysPressed() & A_BUTTON) && w->stopped == 0) {
+        if ((GetKeysPressed() & A_BUTTON) && !w->stopped) {
             w->stopped = 1;
             m4aSongNumStart(SONG_SYS_ITEMGET);
         }
@@ -1172,7 +1172,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
 
     n = ListPoolFirst(&gCardListWork->cards);
 
-    if (w->stopped == 0) {
+    if (!w->stopped) {
         while (n != NULL) {
             t = n->steps;
 
@@ -1202,7 +1202,7 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* w, void* a) {
         w->inputEnabled = 0;
     }
 
-    if (w->advanced != 0) {
+    if (w->advanced) {
         if (w->spinDelay > 4) {
             w->spinDelay--;
         }
@@ -1311,7 +1311,7 @@ u8 UpdatePremireChanceStop(PremireChanceWork* w, void* a) {
     w->stopTimer++;
     w->inputEnabled = 0;
 
-    if (w->resultPending != 0) {
+    if (w->resultPending) {
         while (n != NULL) {
             if (n->steps == 0) {
                 if (n->position == 3) {

@@ -188,7 +188,7 @@ u8 FldRikuCheckDoorAhead(FldActor* act) {
     v.x += gSineTable[act->angle] * 8;
     v.y -= gSineTable[act->angle + 64] * 8;
 
-    if (MapFindOpenDoor(&v) != 0) {
+    if (MapFindOpenDoor(&v)) {
         return 1;
     }
 
@@ -306,7 +306,7 @@ void task_fld_riku_0(FldWork* work) {
     act->unk_32 = 0;
     act->kind = 0;
 
-    if (gGameState.fieldResume != 0) {
+    if (gGameState.fieldResume) {
         act->fieldPosition = gGameState.fieldPosition;
         act->angle = gGameState.fieldAngle;
         act->speed = gGameState.fieldSpeed;
@@ -456,7 +456,7 @@ u8 FldRikuGmkJump(FldWork* work, void* task) {
         break;
     }
 
-    if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+    if (FldRikuCheckBlocked(&act->fieldPosition)) {
         act->fieldPosition.x = x;
         act->fieldPosition.y = y;
     }
@@ -543,7 +543,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
             break;
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             if (work->vz < 0) {
                 work->state = 3;
             } else {
@@ -699,7 +699,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
         break;
     }
 
-    if (work->collider.colliding != 0) {
+    if (work->collider.colliding) {
         switch (work->collider.otherType) {
         case 3:
         case 5:
@@ -716,7 +716,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
         }
     }
 
-    if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+    if (FldRikuCheckBlocked(&act->fieldPosition)) {
         act->fieldPosition.x = sx;
         act->fieldPosition.y = sy;
 
@@ -741,7 +741,7 @@ u8 FldRikuJump(FldWork* work, void* task) {
                 p2 = p1;
                 p2.z += 768;
 
-                if (FldRikuCheckBlocked(&p1) == 0 && FldRikuCheckBlocked(&p2) != 0) {
+                if (!FldRikuCheckBlocked(&p1) && FldRikuCheckBlocked(&p2)) {
                     work->timer = 0;
                     work->state = 8;
                     gFieldState->lockonTarget = NULL;
@@ -836,7 +836,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
             p = act->fieldPosition;
             p.z = work->targetZ - 0x2800;
 
-            if (FldRikuCheckBlocked(&p) == 0) {
+            if (!FldRikuCheckBlocked(&p)) {
                 act->speed = 204;
                 work->vz = -0x580;
                 work->flags |= FLD_FLAG_NO_AIR_TURN;
@@ -900,7 +900,7 @@ u8 FldRikuClimb(FldWork* work, void* task) {
         break;
     }
 
-    if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+    if (FldRikuCheckBlocked(&act->fieldPosition)) {
         act->fieldPosition.x = x;
         act->fieldPosition.y = y;
     }
@@ -975,7 +975,7 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
         act->fieldPosition.x += gSineTable[act->angle];
         act->fieldPosition.y -= gSineTable[act->angle + 64];
 
-        if (AnimIsFinished(&work->anim) != 0 && ret == 0) {
+        if (AnimIsFinished(&work->anim) && !ret) {
             work->state = 9;
         } else {
             work->timer++;
@@ -1006,7 +1006,7 @@ u8 FldRikuHangLedge(FldWork* work, void* task) {
 
     work->gfx = AnimUpdate(&work->anim);
 
-    if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+    if (FldRikuCheckBlocked(&act->fieldPosition)) {
         act->fieldPosition.x = x;
         act->fieldPosition.y = y;
     }
@@ -1342,7 +1342,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
             SetMapAttackBox(nx, ny, act->fieldPosition.z - 0x800);
         }
 
-        if (AnimIsFinished(&work->anim) != 0) {
+        if (AnimIsFinished(&work->anim)) {
             switch (act->angle) {
             case 173:
                 act->fieldPosition.x -= 0x200;
@@ -1372,7 +1372,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
         }
     }
 
-    if (work->collider.colliding != 0) {
+    if (work->collider.colliding) {
         switch (work->collider.otherType) {
         case 5:
         case 3:
@@ -1388,7 +1388,7 @@ u8 FldRikuAttack(FldWork* work, void* task) {
         }
     }
 
-    if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+    if (FldRikuCheckBlocked(&act->fieldPosition)) {
         act->fieldPosition.x = x;
         act->fieldPosition.y = y;
     }
@@ -1529,11 +1529,11 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                 work->state = 11;
                 SetTaskUpdate(task, (TaskUpdateFunc)FldRikuAttack);
             }
-        } else if (AnimIsFinished(&work->anim) != 0) {
+        } else if (AnimIsFinished(&work->anim)) {
             work->state = 0;
         }
 
-        if (work->collider.colliding != 0) {
+        if (work->collider.colliding) {
             switch (work->collider.otherType) {
             case 3:
             case 5:
@@ -1550,7 +1550,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
             }
         }
 
-        if (FldRikuCheckBlocked(&act->fieldPosition) != 0) {
+        if (FldRikuCheckBlocked(&act->fieldPosition)) {
             act->fieldPosition.x = sx;
             act->fieldPosition.y = sy;
             r = FldRikuCheckClimb(&act->fieldPosition, work);
@@ -1573,7 +1573,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                     break;
                 }
             } else {
-                if (FldRikuCheckDoorAhead(act) != 0) {
+                if (FldRikuCheckDoorAhead(act)) {
                     FadeSetPaletteExcluded(work->palette->index + 16, 1);
                     gFieldState->flags |= FIELD_FLAG_EXIT_ROOM;
                     return 1;
@@ -1645,8 +1645,8 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                 a = FldRikuCheckBlocked(&p1);
                 b = FldRikuCheckBlocked(&p2);
 
-                if (a != 0) {
-                    if (b == 0) {
+                if (a) {
+                    if (!b) {
                         p3 = act->fieldPosition;
                         p3.x += dz;
                         p3.y += dw;
@@ -1656,7 +1656,7 @@ u8 task_fld_riku_1(FldWork* work, void* task) {
                             act->fieldPosition = p3;
                         }
                     }
-                } else if (b != 0) {
+                } else if (b) {
                     p4 = act->fieldPosition;
                     p4.x += dx;
                     p4.y += dy;
@@ -1706,7 +1706,7 @@ void task_fld_riku_2(FldWork* work) {
     act = &gFieldState->actor;
     pri = (work->flags & FLD_FLAG_HFLIP) ? 0x801 : 0x800;
 
-    if (work->onCollider != 0) {
+    if (work->onCollider) {
         depth = -0x1006 - (work->collider.platformY >> 8) * 4;
 
         if (work->collider.penetration <= work->collider.radius) {
@@ -1746,7 +1746,7 @@ void task_fld_riku_3(FldWork* work) {
     ReleaseObjPalette(work->palette);
     ColliderUnregister(&work->collider);
 
-    if (gGameState.fieldResume != 0) {
+    if (gGameState.fieldResume) {
         gGameState.fieldSpeed = act->speed;
         gGameState.fieldPosition = act->fieldPosition;
         gGameState.fieldAngle = act->angle;

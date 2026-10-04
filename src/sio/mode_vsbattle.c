@@ -79,7 +79,7 @@ void mode_vsbattle_0(u32 mode) {
 }
 
 void mode_vsbattle_1() {
-    if (gBtlWork->paused == 0) {
+    if (!gBtlWork->paused) {
         VsBattleUpdate();
 
         if (gBtlWork->hitStop <= 0) {

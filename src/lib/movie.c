@@ -92,22 +92,22 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
     }
 
     while (1) {
-        while (MovieSyncFrame(gMoviePlayer) == 0) {
+        while (!MovieSyncFrame(gMoviePlayer)) {
         }
 
         MovieDrawFrame(gMoviePlayer, (u16*)VRAM + (y * 240 + x));
 
-        if (MovieAdvanceFrame(gMoviePlayer) == 0) {
+        if (!MovieAdvanceFrame(gMoviePlayer)) {
             break;
         }
 
-        if (ok != 0) {
+        if (ok) {
             if (channels == 1) {
                 SndStreamLock(0, MovieGetAudioBlockSamples(gMoviePlayer), &dstA1, &lenA1, &dstA2, &lenA2);
                 MovieDecodeAudioBlock(gMoviePlayer, dstA1, lenA1, dstA2, lenA2, dstB1, lenB1, dstB2, lenB2);
                 SndStreamUnlock(0);
 
-                if (MovieAdvanceAudioBlock(gMoviePlayer) == 0) {
+                if (!MovieAdvanceAudioBlock(gMoviePlayer)) {
                     ok = 0;
                 }
             } else {
@@ -117,7 +117,7 @@ void MoviePlay(s32 (*a)(s32), s32 b) {
                 SndStreamUnlock(0);
                 SndStreamUnlock(1);
 
-                if (MovieAdvanceAudioBlock(gMoviePlayer) == 0) {
+                if (!MovieAdvanceAudioBlock(gMoviePlayer)) {
                     ok = 0;
                 }
             }

@@ -599,7 +599,7 @@ u8 PrizeBoss_1(BossPrizeWork* w, void* a) {
         w->timer++;
     }
 
-    if (w->collider.colliding != 0) {
+    if (w->collider.colliding) {
         w->collected = 1;
         m4aSongNumStart(SONG_SYS_ITEMGET);
         ObtainCard(w->cardId);
@@ -630,7 +630,7 @@ void PrizeBoss_2(BossPrizeWork* w) {
     const CardDef* def;
     s16 v;
 
-    pal = w->collected == 0 ? GetBattleSpritePriorityFlags(w->posY) : 0;
+    pal = !w->collected ? GetBattleSpritePriorityFlags(w->posY) : 0;
     affine = AllocObjAffine(w->rotation, w->scaleX, w->scaleY, 1);
     def = &gCardDefs[w->cardId];
     DrawSprite(w->x, (u16)w->y - 8, def->gfx, w->tiles, w->palette, affine, pal,
@@ -645,7 +645,7 @@ void PrizeBoss_2(BossPrizeWork* w) {
                    w->priority - 1);
     }
 
-    if (w->collected == 0) {
+    if (!w->collected) {
         v = 204 - ((w->groundZ - w->posZ) >> 7);
 
         if (v <= 2) {
@@ -828,7 +828,7 @@ u8 UpdateBossPrizeShrink(BossPrizeWork* w) {
 void SpawnBossPrizeCardEffects(BossPrizeWork* w) {
     CardEffectArgs args;
 
-    if (w->collected == 0) {
+    if (!w->collected) {
         if (w->effectTimer == 8) {
             if (w->effectCount <= 3) {
                 args.x = w->posX;
@@ -864,7 +864,7 @@ void SpawnBossPrizeCardEffects(BossPrizeWork* w) {
 void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
     w->args = *a;
 
-    if (w->args.screenSpace == 0) {
+    if (!w->args.screenSpace) {
         w->posX = a->x + ((GetRandom() % 9 - 4) << 8);
         w->posY = a->y;
         w->posZ = a->z - 0x800;
@@ -886,7 +886,7 @@ void Card_EFFECT_0(CardEffectWork* w, CardEffectArgs* a) {
 u8 Card_EFFECT_1(CardEffectWork* w) {
     w->gfx = AnimUpdate(&w->anim);
 
-    if (w->args.screenSpace == 0) {
+    if (!w->args.screenSpace) {
         WorldToScreen(&w->x, &w->y, w->posX, w->posY, w->posZ);
         w->posZ -= 0x100;
     } else {

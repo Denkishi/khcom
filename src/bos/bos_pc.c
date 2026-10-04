@@ -5256,7 +5256,7 @@ void BosPcDraw(PcWork* work) {
 
     gfx = work->palette;
 
-    if (work->defeated == 0) {
+    if (!work->defeated) {
         if (StepHitFlash(&work->body)) {
             gfx = work->palette2;
             work->flash = 1;
@@ -5363,7 +5363,7 @@ void BosPcStartPaletteCycle(PcWork* work) {
 }
 
 void BosPcUpdatePaletteCycle(PcWork* work) {
-    if (work->paletteCycle != 0) {
+    if (work->paletteCycle) {
         if (work->paletteTimer > sBosPcPaletteCycleFrames[work->paletteIndex]) {
             work->paletteIndex = sBosPcPaletteCycleNext[work->paletteIndex];
             work->paletteTimer = 0;
@@ -5374,7 +5374,7 @@ void BosPcUpdatePaletteCycle(PcWork* work) {
 }
 
 void BosPcLoadPaletteCycle(PcWork* work) {
-    if (work->paletteCycle != 0) {
+    if (work->paletteCycle) {
         LoadPalette(&gUnk_09D69374[work->paletteIndex * 16], gUnk_05000080, 32);
     }
 }
@@ -5594,7 +5594,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
 
         BosPcSetAnim(work, sel);
         work->step += 1;
-    } else if (BosPcIsAnimDone(work) != 0) {
+    } else if (BosPcIsAnimDone(work)) {
         ClearBtlObjActionFlags(p);
         work->state = 0;
         work->step = 0;
@@ -5763,7 +5763,7 @@ u8 BosPcUpdateReaction(PcWork* work, Task* task) {
     p = &work->body;
     BosPcSetAnim(work, work->reactionAnim);
 
-    if (BosPcIsAnimDone(work) != 0) {
+    if (BosPcIsAnimDone(work)) {
         work->cardDelay = 180;
 
         if (work->hurtTimer > 0) {

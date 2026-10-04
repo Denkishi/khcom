@@ -443,9 +443,9 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if ((w->flags & HOOK_FLAG_BOMB_THROWN) &&
-            IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) == 0 &&
-            IsTaskActiveNamed(w->bombTask2, sTaskDescHumHookBomb.name) == 0 &&
-            IsTaskActiveNamed(w->bombTask3, sTaskDescHumHookBomb.name) == 0) {
+            !IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) &&
+            !IsTaskActiveNamed(w->bombTask2, sTaskDescHumHookBomb.name) &&
+            !IsTaskActiveNamed(w->bombTask3, sTaskDescHumHookBomb.name)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -493,7 +493,7 @@ u8 task_hum_hook_1(HookWork* work) {
         }
 
         if ((w->flags & HOOK_FLAG_BOMB_THROWN) &&
-            IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) == 0) {
+            !IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name)) {
             ClearBtlObjActionFlags(act);
             work->base.state = 0;
             work->base.stateTimer = 0;
@@ -540,7 +540,7 @@ u8 task_hum_hook_1(HookWork* work) {
                 work->base.steps++;
                 work->base.state = 29;
             } else {
-                if (IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name) == 0) {
+                if (!IsTaskActiveNamed(w->bombTask, sTaskDescHumHookBomb.name)) {
                     work->base.stateTimer = 0;
                     ClearBtlObjActionFlags(act);
                     work->base.state = 0;
@@ -848,7 +848,7 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
         }
 
         work->backdropSet = 1;
-    } else if (work->backdropSet != 0) {
+    } else if (work->backdropSet) {
         SetBackdropColor(0, 0, 9);
         work->backdropSet = v;
     }
@@ -973,7 +973,7 @@ u8 task_hum_hook_bomb_1(HookBombWork* work) {
             }
         }
 
-        if (work->timer > 17 && BgFxIsActive() == 0) {
+        if (work->timer > 17 && !BgFxIsActive()) {
             return 0;
         }
 
@@ -995,14 +995,14 @@ void task_hum_hook_bomb_2(HookBombWork* work) {
     s16 x;
     s16 y;
 
-    if (work->visible == 0) {
+    if (!work->visible) {
         return;
     }
 
     gfx = AnimGetGfx(&work->anim);
     attr = GetBattleSpritePriorityFlags(work->y);
 
-    if (work->facingLeft == 0) {
+    if (!work->facingLeft) {
         attr |= 1;
     }
 

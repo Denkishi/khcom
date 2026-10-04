@@ -136,7 +136,6 @@ btl_vslockon.c
 btl_hpoth.c
 tutorial.c
 movies.s
-movie_text.c
 mode_movie.c
 mode_test.c
 sprites_frd_frames.s

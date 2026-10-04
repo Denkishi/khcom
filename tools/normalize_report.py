@@ -15,10 +15,10 @@ import argparse
 import json
 from pathlib import Path
 
-# FMV and the streamed staff roll song, which the build copies from extracted
-# files. They are real cartridge data and the build needs them, but they are not
+# Everything the build generates from extracted assets: art, audio, text, FMV.
+# They are real cartridge data and the build needs them, but they are not
 # decompilation work, so they count as neither matched nor unmatched data.
-EXCLUDED_UNITS = ("gen/movies", "gen/staff_roll_audio")
+EXCLUDED_UNITS = ("gen/",)
 UNATTRIBUTED_UNITS = ("asm/rodata_",)
 
 DIMENSIONS = {

@@ -528,7 +528,7 @@ void AdvanceToExitHall() {
     SetCurrentMapRoom(MAP_ROOM_EXIT_HALL, 5);
 }
 
-u8 func_080DF49C() {
+u8 GetEventStepKeyKind() {
     u8* e = GetMapRoomEvent(gMapFloorState.eventStep);
     EventKeyList* t = &gEventKeyLists[GetMapEventDoor(*e)->keyList];
     EventKey* q;
@@ -625,7 +625,7 @@ u8 GetRandomRoomType() {
     return gRikuRoomTypes[GetRandom() % 13];
 }
 
-void CreateMapRoom(u8 a, UnkStruct_080DF640* p) {
+void CreateMapRoom(u8 a, MapCardKindValue* p) {
     MapFloorRoom* e = GetMapFloorRoom(a);
     const u8* row;
     const u8* anim;

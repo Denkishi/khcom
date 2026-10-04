@@ -399,7 +399,7 @@ const PrzCardChance* gWorldPrzCardChances[14] = {
     gPrzCardChancesDefault,
 };
 
-const UnkStruct_080E8E24* gWorldPrizeLists[14] = {
+const PrizeEntry* gWorldPrizeLists[14] = {
     gPrizeListEmpty,
     gPrizeListAgrabah,
     gPrizeListAtlantica,
@@ -902,7 +902,7 @@ const PrzCardChance gPrzCardChancesCastleOblivion[25] = {
     { 41, 0, 0, 0, { 0, 0 } },
 };
 
-const UnkStruct_080E8E24 gPrzCardKinds[40] = {
+const PrizeEntry gPrzCardKinds[40] = {
     { { 0, 0 }, CARD_ID(CARD_KINGDOM_KEY, 0) },
     { { 8, 0 }, CARD_ID(CARD_OLYMPIA, 0) },
     { { 1, 0 }, CARD_ID(CARD_THREE_WISHES, 0) },
@@ -945,7 +945,7 @@ const UnkStruct_080E8E24 gPrzCardKinds[40] = {
     { { 56, 0 }, CARD_ANSEM_9 },
 };
 
-const UnkStruct_080E8E24 gPrzStocks[19] = {
+const PrizeEntry gPrzStocks[19] = {
     { { 25, 0 }, 140 },
     { { 44, 0 }, 141 },
     { { 26, 0 }, 142 },
@@ -969,78 +969,78 @@ const UnkStruct_080E8E24 gPrzStocks[19] = {
 
 const u16 gCardValueWeights[10] = { 500, 1500, 1500, 1600, 1400, 1000, 1000, 600, 500, 400 };
 
-const UnkStruct_080E8E24 gPrizeListEmpty[1] = {
+const PrizeEntry gPrizeListEmpty[1] = {
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListTraverseTown[2] = {
+const PrizeEntry gPrizeListTraverseTown[2] = {
     { { 2, 9 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListAgrabah[3] = {
+const PrizeEntry gPrizeListAgrabah[3] = {
     { { 0, 21 }, 0 },
     { { 3, 10 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListHalloweenTown[3] = {
+const PrizeEntry gPrizeListHalloweenTown[3] = {
     { { 1, 1 }, 0 },
     { { 3, 2 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListMonstro[3] = {
+const PrizeEntry gPrizeListMonstro[3] = {
     { { 1, 3 }, 0 },
     { { 3, 4 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListOlympusColiseum[3] = {
+const PrizeEntry gPrizeListOlympusColiseum[3] = {
     { { 1, 5 }, 0 },
     { { 2, 8 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListWonderland[3] = {
+const PrizeEntry gPrizeListWonderland[3] = {
     { { 0, 22 }, 0 },
     { { 3, 6 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListAtlantica[4] = {
+const PrizeEntry gPrizeListAtlantica[4] = {
     { { 1, 7 }, 0 },
     { { 1, 8 }, 0 },
     { { 3, 9 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListNeverLand[4] = {
+const PrizeEntry gPrizeListNeverLand[4] = {
     { { 1, 12 }, 0 },
     { { 1, 11 }, 0 },
     { { 3, 0 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListHollowBastion[4] = {
+const PrizeEntry gPrizeListHollowBastion[4] = {
     { { 1, 14 }, 0 },
     { { 1, 15 }, 0 },
     { { 2, 29 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListTwilightTown[3] = {
+const PrizeEntry gPrizeListTwilightTown[3] = {
     { { 1, 16 }, 0 },
     { { 3, 17 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListDestinyIslands[3] = {
+const PrizeEntry gPrizeListDestinyIslands[3] = {
     { { 1, 18 }, 0 },
     { { 2, 37 }, 0 },
     { { 4, 0 }, 0 },
 };
 
-const UnkStruct_080E8E24 gPrizeListCastleOblivion[1] = {
+const PrizeEntry gPrizeListCastleOblivion[1] = {
     { { 4, 0 }, 0 },
 };

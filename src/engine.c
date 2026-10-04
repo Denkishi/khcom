@@ -600,7 +600,7 @@ ObjAffine* AllocObjAffine(u8 a, s32 sx, s32 sy, u8 f) {
     return e;
 }
 
-ObjAffine* func_08002DA0(u8 a, s32 sx, s32 sy, u8 f) {
+ObjAffine* AllocObjAffineScaleFirst(u8 a, s32 sx, s32 sy, u8 f) {
     ObjAffine* e;
     s32 sin;
     s32 cos;

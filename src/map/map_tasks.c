@@ -4202,7 +4202,7 @@ void MapPrzCardAimAtCenter(MapPrzCardWork* work) {
     work->dirX = -dx;
     work->dirY = -dy;
     work->speed = 0x300;
-    work->unk_0AC = 2;
+    work->vz = 2;
 }
 
 void MapPrzCardBounce(MapPrzCardWork* work) {
@@ -4210,8 +4210,8 @@ void MapPrzCardBounce(MapPrzCardWork* work) {
     s32 nx;
     s32 ny;
 
-    work->unk_0AC += 0x38;
-    work->posZ += work->unk_0AC;
+    work->vz += 0x38;
+    work->posZ += work->vz;
     work->posX += gSineTable[work->angle] * work->speed >> 8;
     work->posY += -gSineTable[work->angle + 64] * work->speed >> 8;
 
@@ -4225,10 +4225,10 @@ void MapPrzCardBounce(MapPrzCardWork* work) {
 
     if (work->posZ - 0x800 > work->ground) {
         work->posZ = work->ground - 0x800;
-        work->unk_0AC = -(work->unk_0AC * 217 >> 8);
+        work->vz = -(work->vz * 217 >> 8);
 
-        if (work->unk_0AC > -0x200) {
-            work->unk_0AC = -0x200;
+        if (work->vz > -0x200) {
+            work->vz = -0x200;
         }
     }
 
@@ -4299,8 +4299,8 @@ void MapPrzCardFlyToCenter(MapPrzCardWork* work) {
     work->phaseY += (64 - work->phaseY) >> 4;
     work->phaseX = 0;
     work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
-    work->speed -= work->unk_0AC;
-    work->unk_0AC += 2;
+    work->speed -= work->vz;
+    work->vz += 2;
     work->scale += 3;
 
     if (work->scale > 0x100) {
@@ -4369,7 +4369,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     d = &gCardDefs[work->cardId];
     work->tiles = LoadObjTiles(d->tiles, 0x300);
     work->palette = LoadObjPalette(d->palette, 32);
-    work->stat = *(UnkStruct_08F70ACC*)&d->kind;
+    work->stat = *(PrzCardStat*)&d->kind;
     q = &gCardBacks[work->stat.category];
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->tiles2 = LoadObjTiles(q->tiles, 0x280);
@@ -4381,7 +4381,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     work->posZ = p->z;
     work->ground = 0;
     FldPosInitGround((FldPos*)work);
-    work->unk_0AC = -(GetRandom() % 129 + 0x300);
+    work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 128;
     work->angle = GetRandom();
     work->scaleX = 128;

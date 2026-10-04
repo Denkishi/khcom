@@ -172,8 +172,8 @@ typedef struct EventSequenceDef {
     u8 unk_26[2];
     u16 exitCode;
     u8 unk_2A;
-    u8 unk_2B;
-    u8 unk_2C;
+    u8 world;
+    u8 poohLevel;
 } EventSequenceDef;
 
 extern const EventSequenceDef* gEventSequenceDefs[];

@@ -16,7 +16,7 @@ static TaskPool sTextCheckTasks;
 
 static u32 sTextCheckMessageId;
 
-void eu_080AB9FC() {
+void Mode_textcheck_0() {
     sTextCheckMessageId = 0;
     SetBgMode0();
     SetupBg(0, 0, 28, 14);
@@ -24,7 +24,7 @@ void eu_080AB9FC() {
     CreateCardMessageTask(&sTextCheckTasks, 0, sTextCheckMessageId);
 }
 
-void eu_080ABA38() {
+void Mode_textcheck_1() {
     if (!IsMessageWindowOpen()) {
         sTextCheckMessageId++;
 
@@ -39,15 +39,15 @@ void eu_080ABA38() {
     TaskPoolDraw(&sTextCheckTasks);
 }
 
-void eu_080ABA7C() {
+void Mode_textcheck_2() {
     TaskPoolDestroy(&sTextCheckTasks);
 }
 
 Mode gModeTextCheck = {
     "Mode_textcheck",
-    (ModeInitFunc)eu_080AB9FC,
-    eu_080ABA38,
-    eu_080ABA7C,
+    (ModeInitFunc)Mode_textcheck_0,
+    Mode_textcheck_1,
+    Mode_textcheck_2,
 };
 
 #endif

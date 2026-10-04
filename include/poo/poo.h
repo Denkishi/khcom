@@ -1172,7 +1172,7 @@ void task_poo_pitAndButterfly_3(PooTrapWork* work);
 u8 task_poo_rabbitAfterEvent_1(PooRabbitAfterEventWork* work);
 void task_poo_rabbitAfterEvent_3(PooRabbitAfterEventWork* work);
 void ProjectToPooWagonEdgeLL(s32* a, s32* b);
-u8 func_080D1738();
+u8 IsPooCabbageGameActive();
 void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* work);
 u16 GetPooCabbageLandedCount();
 u32 NextPoohStumpIndex(u32 a);

@@ -4547,7 +4547,7 @@ u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a) {
     return 1;
 }
 
-u8 func_0806FCF4(void* work, void* a) {
+u8 EventCharaBlendDown2(void* work, void* a) {
     EventCharaWork* p = work;
     u16 z;
 
@@ -4574,12 +4574,12 @@ u8 func_0806FCF4(void* work, void* a) {
     gBldAlpha = 0;
     p->effectTimer = 0;
     p->effectLevel = 16;
-    SetTaskUpdate(a, (TaskUpdateFunc)func_0806FDB0);
+    SetTaskUpdate(a, (TaskUpdateFunc)EventCharaBlendDown2Update);
     TaskPoolUpdate(&p->tasks);
     return 1;
 }
 
-u8 func_0806FDB0(EventCharaWork* work, void* a) {
+u8 EventCharaBlendDown2Update(EventCharaWork* work, void* a) {
     UpdateEventCharaMotion(work);
     PlayEventCharaAnimSounds(work);
     work->effectTimer++;

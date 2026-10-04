@@ -4,7 +4,7 @@
 #include "types.h"
 
 struct PrzCardChance;
-struct UnkStruct_080E8E24;
+struct PrizeEntry;
 
 extern const struct PrzCardChance gPrzCardChancesDefault[7];
 extern const struct PrzCardChance gPrzCardChancesTraverseTown[8];
@@ -19,21 +19,21 @@ extern const struct PrzCardChance gPrzCardChancesHollowBastion[15];
 extern const struct PrzCardChance gPrzCardChancesTwilightTown[25];
 extern const struct PrzCardChance gPrzCardChancesDestinyIslands[16];
 extern const struct PrzCardChance gPrzCardChancesCastleOblivion[25];
-extern const struct UnkStruct_080E8E24 gPrzCardKinds[40];
-extern const struct UnkStruct_080E8E24 gPrzStocks[19];
+extern const struct PrizeEntry gPrzCardKinds[40];
+extern const struct PrizeEntry gPrzStocks[19];
 extern const u16 gCardValueWeights[10];
-extern const struct UnkStruct_080E8E24 gPrizeListEmpty[1];
-extern const struct UnkStruct_080E8E24 gPrizeListTraverseTown[2];
-extern const struct UnkStruct_080E8E24 gPrizeListAgrabah[3];
-extern const struct UnkStruct_080E8E24 gPrizeListHalloweenTown[3];
-extern const struct UnkStruct_080E8E24 gPrizeListMonstro[3];
-extern const struct UnkStruct_080E8E24 gPrizeListOlympusColiseum[3];
-extern const struct UnkStruct_080E8E24 gPrizeListWonderland[3];
-extern const struct UnkStruct_080E8E24 gPrizeListAtlantica[4];
-extern const struct UnkStruct_080E8E24 gPrizeListNeverLand[4];
-extern const struct UnkStruct_080E8E24 gPrizeListHollowBastion[4];
-extern const struct UnkStruct_080E8E24 gPrizeListTwilightTown[3];
-extern const struct UnkStruct_080E8E24 gPrizeListDestinyIslands[3];
-extern const struct UnkStruct_080E8E24 gPrizeListCastleOblivion[1];
+extern const struct PrizeEntry gPrizeListEmpty[1];
+extern const struct PrizeEntry gPrizeListTraverseTown[2];
+extern const struct PrizeEntry gPrizeListAgrabah[3];
+extern const struct PrizeEntry gPrizeListHalloweenTown[3];
+extern const struct PrizeEntry gPrizeListMonstro[3];
+extern const struct PrizeEntry gPrizeListOlympusColiseum[3];
+extern const struct PrizeEntry gPrizeListWonderland[3];
+extern const struct PrizeEntry gPrizeListAtlantica[4];
+extern const struct PrizeEntry gPrizeListNeverLand[4];
+extern const struct PrizeEntry gPrizeListHollowBastion[4];
+extern const struct PrizeEntry gPrizeListTwilightTown[3];
+extern const struct PrizeEntry gPrizeListDestinyIslands[3];
+extern const struct PrizeEntry gPrizeListCastleOblivion[1];
 
 #endif

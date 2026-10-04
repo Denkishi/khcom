@@ -628,7 +628,7 @@ void UpdatePoohAction(PoohWork* work, PooNode* n) {
         if (AnimGetGfxIndex(&work->anim) == 8 && gPoohPos->y > 0x1BD00 && (GetKeysPressed() & A_BUTTON) != 0) {
             v = 128;
 
-            if (func_080D1738()) {
+            if (IsPooCabbageGameActive()) {
                 v = 2;
             }
 
@@ -6629,7 +6629,7 @@ u16 GetPooCabbageLandedCount() {
     return sPooCabbageLandedCount;
 }
 
-u8 func_080D1738() {
+u8 IsPooCabbageGameActive() {
     if (!IsPooEventDone(4)) {
         if (IsPooEventDone(6)) {
             if (gPooScrollY > 0x4F9) {

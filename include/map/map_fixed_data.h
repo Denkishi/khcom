@@ -11,7 +11,7 @@ extern u8 gMapFixed4CellTypes[512];
 
 struct MapFixedDef;
 struct PrzCardChance;
-struct UnkStruct_080E8E24;
+struct PrizeEntry;
 
 extern const void* gMapFixed0Bg3Blocks[12];
 extern const void* gMapFixed0Bg2Blocks[12];
@@ -28,6 +28,6 @@ extern const void* gMapFixed4Bg1Blocks[4];
 extern const void* gMapFixed5Bg2Blocks[6];
 extern struct MapFixedDef* gMapFixedDefs[6];
 extern struct PrzCardChance* gWorldPrzCardChances[14];
-extern struct UnkStruct_080E8E24* gWorldPrizeLists[14];
+extern struct PrizeEntry* gWorldPrizeLists[14];
 
 #endif

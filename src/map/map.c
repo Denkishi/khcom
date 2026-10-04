@@ -2185,7 +2185,7 @@ u8 DoorAcceptsMapCard(MapCardAttributes* p) {
     return 1;
 }
 
-s32 PayEventKey(UnkStruct_080E8E24* p) {
+s32 PayEventKey(PrizeEntry* p) {
     if (GetEventKey(0)->rule == 4) {
         if (sEventKey.value > p->unk_02) {
             sEventKey.value -= p->unk_02;
@@ -2200,13 +2200,13 @@ s32 PayEventKey(UnkStruct_080E8E24* p) {
     return 1;
 }
 
-const UnkStruct_080E8E24* PickRandomPrzCard(u8 a) {
+const PrizeEntry* PickRandomPrzCard(u8 a) {
     u16 v = GetRandom() % 10000;
     PrzCardChance** t = gWorldPrzCardChances;
     PrzCardChance* p = t[gGameState.world];
 
     while (p->cardIndex != 41) {
-        const UnkStruct_080E8E24* q = &gPrzCardKinds[p->cardIndex];
+        const PrizeEntry* q = &gPrzCardKinds[p->cardIndex];
         u16 n = a != 0 ? p->weight2 : p->weight;
 
         if (v < n) {
@@ -2249,7 +2249,7 @@ u8 RollCardValue() {
     return 0;
 }
 
-s32 CreateMapPrzCardTask(const UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e) {
+s32 CreateMapPrzCardTask(const PrizeEntry* a, u8 b, s32 c, s32 d, s32 e) {
     MapPrizeArgs w;
 
     w.worldPrize = b;
@@ -2271,7 +2271,7 @@ s32 CreateMapPrzCardTask(const UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e)
 }
 
 u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d) {
-    const UnkStruct_080E8E24* q;
+    const PrizeEntry* q;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         return 0;
@@ -2317,8 +2317,8 @@ void CreateMapPrizeTasks(u8 a, u8 b, s32 c, s32 d, s32 e) {
 }
 
 void CreateWorldPrize(s32 x, s32 y, s32 z) {
-    UnkStruct_080E8E24* p = gWorldPrizeLists[gGameState.world];
-    const UnkStruct_080E8E24* e;
+    PrizeEntry* p = gWorldPrizeLists[gGameState.world];
+    const PrizeEntry* e;
 
     for (; p->unk_00[0] != 4; p++) {
         switch (p->unk_00[0]) {
@@ -2421,7 +2421,7 @@ u8 AreWorldPrizesCollected() {
     u8* p;
 
     for (i = 1; i <= 11; i++) {
-        UnkStruct_080E8E24** t = gWorldPrizeLists;
+        PrizeEntry** t = gWorldPrizeLists;
 
         p = (u8*)t[i];
 

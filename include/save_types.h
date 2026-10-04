@@ -90,10 +90,10 @@ typedef struct SaveSliceE6C {
     u16 unk_02;
 } SaveSliceE6C;
 
-typedef struct SaveSliceEB4 {
+typedef struct SaveMoogleShop {
     u16 unk_00[32];
     u16 unk_40[2];
-} SaveSliceEB4;
+} SaveMoogleShop;
 
 typedef struct SaveFileLarge {
     SaveCommon common;
@@ -101,7 +101,7 @@ typedef struct SaveFileLarge {
     SaveLargeSlice large;
     SaveSliceE6C unk_E6C;
     u8 pooState[0x044];
-    SaveSliceEB4 moogleShop;
+    SaveMoogleShop moogleShop;
 } SaveFileLarge;
 
 typedef struct SaveFileSmall {

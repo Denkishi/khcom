@@ -24,7 +24,7 @@ extern const char gMovieDebugTextEu_0812F6F4[];
 
 extern const MovieDebugEntry gMovieDebugEntriesEu[5];
 
-void eu_0800C76C(s32 arg) {
+void mode_chkmov_0(s32 arg) {
     sMovieDebugWorkEu = EwramAlloc(sizeof(MovieDebugWork));
     SetBgMode0();
     sMovieDebugWorkEu->index = 0;
@@ -88,7 +88,7 @@ const char gMovieDebugTextEu_0812F6F4[] = ": ";
 
 Mode gModeMovieDebugEu = {
     "mode_chkmov",
-    eu_0800C76C,
+    mode_chkmov_0,
     mode_chkmov_1,
     mode_chkmov_2,
 };

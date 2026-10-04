@@ -326,14 +326,14 @@ void EventUpdate() {
     if (p->unk_2A != 0) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (p->unk_2B != 255) {
+    } else if (p->world != 255) {
         AdvanceFloorStory();
         RequestMapMode();
-    } else if (p->unk_2C != 255) {
-        if (p->unk_2C == 0) {
+    } else if (p->poohLevel != 255) {
+        if (p->poohLevel == 0) {
             AdvanceFloorStory();
             ModeRequest(&gModePooh, 0);
-        } else if (p->unk_2C <= 6) {
+        } else if (p->poohLevel <= 6) {
             ModeRequest(&gModePooh, 1);
         }
     }

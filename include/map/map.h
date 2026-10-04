@@ -108,10 +108,10 @@ typedef struct MapCardAttributes {
     u16 color;
 } MapCardAttributes;
 
-typedef struct UnkStruct_080E8E24 {
+typedef struct PrizeEntry {
     u8 unk_00[0x02];
     u16 unk_02;
-} UnkStruct_080E8E24;
+} PrizeEntry;
 
 typedef struct PrzCardChance {
     u8 cardIndex;
@@ -640,13 +640,13 @@ typedef struct MapGmk06Work {
     TaskPool tasks;
 } MapGmk06Work;
 
-typedef struct UnkStruct_08F70ACC {
+typedef struct PrzCardStat {
     u8 unk_00[0x04];
     u8 value;
     u8 unk_05[0x09];
     u8 category;
     u8 unk_0F[0x09];
-} UnkStruct_08F70ACC;
+} PrzCardStat;
 
 typedef struct MapPrzCardWork {
     s32 posX;
@@ -664,10 +664,10 @@ typedef struct MapPrzCardWork {
     u16 spriteFlags;
     u16 timer;
     void (*update)(struct MapPrzCardWork*);
-    UnkStruct_08F70ACC stat;
+    PrzCardStat stat;
     u16 cardId;
     u8 unk_0AA[0x02];
-    s32 unk_0AC;
+    s32 vz;
     s32 speed;
     s16 scaleX;
     s16 scaleY;
@@ -1074,7 +1074,7 @@ u8 MapPatternFits(s16 x, s16 y, const MapCellPattern* p);
 void MapPlaceLayer1DecorPiece(s16 x, s16 y, const u8* p, u16* base);
 void MapPlaceLayer2DecorPiece(s16 x, s16 y, const u8* p, u16* base);
 void MapApplyLayer2DecorRule(MapDecorRule* p);
-const UnkStruct_080E8E24* PickRandomPrzCard(u8 a);
+const PrizeEntry* PickRandomPrzCard(u8 a);
 void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c);
 void NewGameSlotMenuLoadLevelTiles(u8 a, u16 v);
 void NewGameSlotMenuLoadTimeTiles(u8 a, u32 b);
@@ -1192,7 +1192,7 @@ void MapApplyLayer2DecorRules(MapDecorRule* p);
 void MapApplyRoomDecor();
 u8 IsEventDoor(u8 a, u8 b);
 u8 RollCardValue();
-s32 CreateMapPrzCardTask(const UnkStruct_080E8E24* a, u8 b, s32 c, s32 d, s32 e);
+s32 CreateMapPrzCardTask(const PrizeEntry* a, u8 b, s32 c, s32 d, s32 e);
 u8 TryCreateRandomPrzCard(u8 a, s32 b, s32 c, s32 d);
 void MapDbgSetUpdate(ModeFunc a);
 void MapDbgSetUpdateAndRun(ModeFunc a);

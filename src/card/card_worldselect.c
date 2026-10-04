@@ -494,7 +494,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
 
                     RemoveMapCard(work->card->args.baseCardId + sel);
 
-                    if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gMapCardDefs[work->card->args.baseCardId + sel].kind) == 1) {
+                    if ((u8)PayEventKey((struct PrizeEntry*)&gMapCardDefs[work->card->args.baseCardId + sel].kind) == 1) {
                         work->remainingKeys = CountRemainingEventKeys();
                         work->eventKey->paidCount++;
                         work->eventKey->slideSteps = 8;
@@ -674,7 +674,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a) {
                         m4aSongNumStart(SONG_SYS_KETEI2);
                         RemoveMapCard(work->card->args.baseCardId + 1);
 
-                        if ((u8)PayEventKey((struct UnkStruct_080E8E24*)&gMapCardDefs[work->card->args.baseCardId + 1].kind) == 1) {
+                        if ((u8)PayEventKey((struct PrizeEntry*)&gMapCardDefs[work->card->args.baseCardId + 1].kind) == 1) {
                             work->remainingKeys = CountRemainingEventKeys();
                             work->eventKey->paidCount++;
                             work->eventKey->slideSteps = 8;

@@ -15,10 +15,10 @@ typedef struct MapFloorDef {
     MapEventDoor* eventDoors;
 } MapFloorDef;
 
-typedef struct UnkStruct_080DF640 {
+typedef struct MapCardKindValue {
     u16 kind;
     u16 value;
-} UnkStruct_080DF640;
+} MapCardKindValue;
 
 u8 GetOppositeDoorSide(u8 a);
 void MarkEventRoomDone(MapEventDoor* p);
@@ -35,14 +35,14 @@ void SetWorldJiminyFlags();
 void SetFloorJiminyFlags();
 void AdvanceFloorStory();
 void AdvanceToExitHall();
-u8 func_080DF49C();
+u8 GetEventStepKeyKind();
 u8 GetCurrentEventDoorKeyKind();
 u8 SelectCurrentEventDoor();
 u8 GetEventRoomKind(u8 a);
 s32 GetMapRoomCardValue(u8 a);
 void SetCardlessRoomType(u8 a);
 u8 GetRandomRoomType();
-void CreateMapRoom(u8 a, UnkStruct_080DF640* p);
+void CreateMapRoom(u8 a, MapCardKindValue* p);
 void LoadMapRoomState(MapRoomState* p, u8 a);
 void SetCurrentMapRoom(u8 a, u8 b);
 u8 GetProgressFloor();

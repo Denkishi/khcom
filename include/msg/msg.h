@@ -221,7 +221,7 @@ void GetSjisGlyph(u16 a, u16* b, u8* c);
 u8 event_chara_1(EventCharaWork* work, void* a);
 u8 EventCharaToggleAnim(EventCharaWork* work, void* a);
 u8 EventCharaFadeToBlack(void* work, void* a);
-u8 func_0806FDB0(EventCharaWork* work, void* a);
+u8 EventCharaBlendDown2Update(EventCharaWork* work, void* a);
 u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* a);
 u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* a);
 u8 AdvanceEventCharaKeyframe(EventCharaWork* work);

@@ -21,12 +21,12 @@ extern u8* gDebugFont2Banks[2];
 
 void DebugTextClearBg();
 void func_0805F7B0(s32 a);
-void func_0805F7BC();
+void DebugTextClearScreen();
 void func_0805F7C8(u8 a);
 void DebugTextPrintFont2(u8 x, u8 y, u16* s);
 u8 DebugTextGetPixelShift(u8 a);
 void DebugTextClearLines();
-s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e);
+s32 DebugTextScrollUp(u8 bg, u8 b, u8 c, u8 d, u8 e);
 void DebugTextLoadPalette(s32 a, const void* b, s32 c, u8 d);
 void DebugTextInit(u8 bg, u16 b, u16 c);
 void DebugTextSetMergeFirstGlyph(s32 a);

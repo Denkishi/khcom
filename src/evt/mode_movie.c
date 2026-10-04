@@ -60,11 +60,11 @@ const MovieSub gMovieSubsOpening[3] = {
     { 825, 0, gMovieSubTextUs_0886A752, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnk_0886AB70[1] = {
+const MovieSub gMovieSubs6FGoal[1] = {
     { 30, 20, gMovieSubTextUs_0886AB3A, 1, 0, 50, 1, 0 },
 };
 
-const MovieSub gUnk_0886AB80[1] = {
+const MovieSub gMovieSubs12FE2[1] = {
     { 30, 20, gMovieSubTextUs_0886AB3A, 1, 0, 50, 1, 0 },
 };
 
@@ -108,13 +108,13 @@ const MovieSub gMovieSubsOpening[3] = {
 
 #include "movie_subtitles_1.inc"
 
-const MovieSub gUnk_0886AB70[1] = {
+const MovieSub gMovieSubs6FGoal[1] = {
     { 30, 20, gMovieSubTextJp_0885E018, 1, 0, 50, 1, 0 },
 };
 
 #include "movie_subtitles_2.inc"
 
-const MovieSub gUnk_0886AB80[1] = {
+const MovieSub gMovieSubs12FE2[1] = {
     { 30, 20, gMovieSubTextJp_0885E018, 1, 0, 50, 1, 0 },
 };
 

@@ -134,7 +134,7 @@ ReleaseObjPaletteRef	0x08002bcc	68	0x08002c44	global
 ReleaseObjPalette	0x08002c10	24	0x08002c88	global
 AllocObjAffineAngle	0x08002c28	140	0x08002ca0	global
 AllocObjAffine	0x08002cb4	236	0x08002d2c	global
-func_08002DA0	0x08002da0	236	0x08002e18	global
+AllocObjAffineScaleFirst	0x08002da0	236	0x08002e18	global
 AllocObjAffineMatrix	0x08002e8c	128	0x08002f04	global
 SortSprites	0x08002f0c	68	0x08002f84	global
 UpdateSpriteOam	0x08002f50	1416	0x08002fc8	global
@@ -1358,12 +1358,12 @@ LockonIsInFront	0x0805f6b4	116	0x08061bc8	global
 LockonGetDoorScreenPos	0x0805f728	72	0x08061c3c	global
 DebugTextClearBg	0x0805f770	64	0x08061c84	global
 func_0805F7B0	0x0805f7b0	12	0x08061cc4	body
-func_0805F7BC	0x0805f7bc	12	0x08061cd0	body
+DebugTextClearScreen	0x0805f7bc	12	0x08061cd0	body
 func_0805F7C8	0x0805f7c8	32	0x08061cdc	global
 DebugTextPrintFont2	0x0805f7e8	264	0x08061cfc	global
 DebugTextGetPixelShift	0x0805f8f0	20	0x08061e04	body
 DebugTextClearLines	0x0805f904	56	0x08061e18	global
-func_0805F93C	0x0805f93c	292	0x08061e50	global
+DebugTextScrollUp	0x0805f93c	292	0x08061e50	global
 DebugTextLoadPalette	0x0805fa60	44	0x08061f74	global
 DebugTextInit	0x0805fa8c	236	0x08061fa0	global
 DebugTextSetMergeFirstGlyph	0x0805fb78	12	0x0806208c	body
@@ -1512,8 +1512,8 @@ EventCharaToggleAnim	0x0806fa84	52	0x0806ee14	global
 EventCharaToggleAnimUpdate	0x0806fab8	180	0x0806ee48	global
 EventCharaFadeToBlack	0x0806fb6c	188	0x0806eefc	global
 EventCharaFadeToBlackUpdate	0x0806fc28	204	0x0806efb8	global
-func_0806FCF4	0x0806fcf4	188	0x0806f084	global
-func_0806FDB0	0x0806fdb0	224	0x0806f140	global
+EventCharaBlendDown2	0x0806fcf4	188	0x0806f084	global
+EventCharaBlendDown2Update	0x0806fdb0	224	0x0806f140	global
 ReadEventCharaDpadAngle	0x0806fe90	376	0x0806f220	global
 UpdateEventCharaAngle	0x08070008	80	0x0806f398	global
 SetEventCharaMoveAnim	0x08070058	124	0x0806f3e8	global
@@ -3309,7 +3309,7 @@ IncPooCabbageCount	0x080d16fc	20	0x080cdeec	body
 GetPooCabbageCount	0x080d1710	12	0x080cdf00	body
 IncPooCabbageLandedCount	0x080d171c	16	0x080cdf0c	body
 GetPooCabbageLandedCount	0x080d172c	12	0x080cdf1c	body
-func_080D1738	0x080d1738	56	0x080cdf28	global
+IsPooCabbageGameActive	0x080d1738	56	0x080cdf28	global
 task_poo_mapobjhit_0	0x080d1770	132	0x080cdf60	global
 task_poo_mapobjhit_1	0x080d17f4	196	0x080cdfe4	global
 task_poo_mapobjhit_2	0x080d18b8	188	0x080ce0a8	global
@@ -3741,7 +3741,7 @@ SetWorldJiminyFlags	0x080df048	508	0x080dbe94	global
 SetFloorJiminyFlags	0x080df244	316	0x080dc090	global
 AdvanceFloorStory	0x080df380	256	0x080dc1cc	global
 AdvanceToExitHall	0x080df480	28	0x080dc2cc	global
-func_080DF49C	0x080df49c	60	0x080dc2e8	global
+GetEventStepKeyKind	0x080df49c	60	0x080dc2e8	global
 GetCurrentEventDoorKeyKind	0x080df4d8	40	0x080dc324	global
 SelectCurrentEventDoor	0x080df500	28	0x080dc34c	global
 GetEventRoomKind	0x080df51c	44	0x080dc368	global

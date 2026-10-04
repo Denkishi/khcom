@@ -33,7 +33,7 @@ void func_0805F7B0(s32 a) {
     sUnk_02034A24 = a;
 }
 
-void func_0805F7BC() {
+void DebugTextClearScreen() {
     DebugTextClearBg();
 }
 
@@ -80,7 +80,7 @@ void DebugTextClearLines() {
     }
 }
 
-s32 func_0805F93C(u8 bg, u8 b, u8 c, u8 d, u8 e) {
+s32 DebugTextScrollUp(u8 bg, u8 b, u8 c, u8 d, u8 e) {
     u8 i;
     u8 j;
     u8 r;

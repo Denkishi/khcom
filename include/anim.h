@@ -13,7 +13,7 @@ typedef struct AnimDef {
 typedef struct AnimFrame {
     u16 gfxIndex;
     u16 duration;
-} __attribute__((packed, aligned(2))) AnimFrame;
+} AnimFrame;
 
 typedef struct AnimHeader {
     u16 unk_00;

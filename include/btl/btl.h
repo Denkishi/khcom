@@ -79,7 +79,7 @@ typedef struct RikuAttackDef {
     s16 hitFrame;
     u16 unk_06;
     const s32* attackIds;
-    u16 unk_0C;
+    u16 swingSound;
     u16 song;
     s32 vz;
     u16 flags;

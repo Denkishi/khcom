@@ -350,10 +350,10 @@ static const BattleAttackDef sBattleAttackDefs[330] = {
     { 384, 307, 256, 12, BgFxStartEnemyHit, ATTACK_FLAG_INFLICT_STUN | ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_ELEMENT_PHYSICAL },
 };
 
-static ListPool sUnk_020348E8;
-static ListPool sUnk_020348F8;
-static ListPool sUnk_02034908;
-static ListPool sUnk_02034918;
+static ListPool sColliderPoolPlayer;
+static ListPool sColliderPoolEnemy;
+static ListPool sColliderPoolPlayerOnly;
+static ListPool sColliderPoolObstacle;
 
 u8 CanAttackBoxHitBtlObj(BtlObj* p, s32 x, s32 y, s32 z, s16 a, s16 b, s16 c) {
     BtlObj* q = p->parent;
@@ -962,26 +962,26 @@ void* ColliderGetPool(u32 type) {
     case 2:
     case 4:
     case 9:
-        return &sUnk_020348E8;
+        return &sColliderPoolPlayer;
     case 3:
-        return &sUnk_020348F8;
+        return &sColliderPoolEnemy;
     case 5:
     case 7:
     case 8:
     case 10:
     case 11:
     case 12:
-        return &sUnk_02034908;
+        return &sColliderPoolPlayerOnly;
     }
 
-    return &sUnk_02034918;
+    return &sColliderPoolObstacle;
 }
 
 void ColliderPoolsInit() {
-    ListPoolInit(&sUnk_020348E8);
-    ListPoolInit(&sUnk_020348F8);
-    ListPoolInit(&sUnk_02034908);
-    ListPoolInit(&sUnk_02034918);
+    ListPoolInit(&sColliderPoolPlayer);
+    ListPoolInit(&sColliderPoolEnemy);
+    ListPoolInit(&sColliderPoolPlayerOnly);
+    ListPoolInit(&sColliderPoolObstacle);
 }
 
 void ColliderInit(Collider* p, u32 type, u16 r, u16 h) {
@@ -1150,16 +1150,16 @@ void ColliderCheckPoolPairs(ListPool* a, ListPool* b) {
 }
 
 void ColliderUpdateAll() {
-    ColliderClearPoolContacts(&sUnk_020348E8);
-    ColliderClearPoolContacts(&sUnk_020348F8);
-    ColliderClearPoolContacts(&sUnk_02034908);
-    ColliderClearPoolContacts(&sUnk_02034918);
-    ColliderCheckPoolPairs(&sUnk_020348E8, &sUnk_020348E8);
-    ColliderCheckPoolPairs(&sUnk_020348F8, &sUnk_020348E8);
-    ColliderCheckPoolPairs(&sUnk_02034908, &sUnk_020348E8);
-    ColliderCheckPoolPairs(&sUnk_020348F8, &sUnk_020348F8);
-    ColliderCheckPoolPairs(&sUnk_02034918, &sUnk_020348E8);
-    ColliderCheckPoolPairs(&sUnk_02034918, &sUnk_020348F8);
+    ColliderClearPoolContacts(&sColliderPoolPlayer);
+    ColliderClearPoolContacts(&sColliderPoolEnemy);
+    ColliderClearPoolContacts(&sColliderPoolPlayerOnly);
+    ColliderClearPoolContacts(&sColliderPoolObstacle);
+    ColliderCheckPoolPairs(&sColliderPoolPlayer, &sColliderPoolPlayer);
+    ColliderCheckPoolPairs(&sColliderPoolEnemy, &sColliderPoolPlayer);
+    ColliderCheckPoolPairs(&sColliderPoolPlayerOnly, &sColliderPoolPlayer);
+    ColliderCheckPoolPairs(&sColliderPoolEnemy, &sColliderPoolEnemy);
+    ColliderCheckPoolPairs(&sColliderPoolObstacle, &sColliderPoolPlayer);
+    ColliderCheckPoolPairs(&sColliderPoolObstacle, &sColliderPoolEnemy);
 }
 
 void ColliderSetDisabled(Collider* p, u8 b) {

@@ -29,7 +29,7 @@ static const AnimDef sSmnMushuAnimDefs[4] = {
     { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 3, { 0, 0, 0 } },
 };
 
-const AnimDef gUnk_0813EABC = { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 4, { 0, 0, 0 } };
+const AnimDef gSmnMushuEndAnimDef = { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 4, { 0, 0, 0 } };
 
 TaskDesc gTaskDescSmnMushu = {
     "task_smn_mushu",

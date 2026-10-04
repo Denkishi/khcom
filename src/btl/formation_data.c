@@ -12,7 +12,7 @@
 #define FORMATION_LIST_DROP 0
 #endif
 
-static const BtlFormStep sUnk_08130E6C[] = {
+static const BtlFormStep sBtlFormShadow8Steps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 65, -12, 0, 1 },
     { 0, 85, 12, 0, 2 },
@@ -23,9 +23,9 @@ static const BtlFormStep sUnk_08130E6C[] = {
     { 0, -25, -25, 0, 7 },
 };
 
-static const BtlFormEntry sUnk_08130ECC = { 8, { 0 }, sUnk_08130E6C, 60 };
+static const BtlFormEntry sBtlFormShadow8 = { 8, { 0 }, sBtlFormShadow8Steps, 60 };
 
-static const BtlFormStep sUnk_08130ED8[] = {
+static const BtlFormStep sBtlFormShadow7Steps[] = {
     { 0, 90, 0, 0, 0 },
     { 0, 55, 25, 0, 1 },
     { 0, 40, 0, 0, 2 },
@@ -35,9 +35,9 @@ static const BtlFormStep sUnk_08130ED8[] = {
     { 0, -64, 0, 0, 6 },
 };
 
-static const BtlFormEntry sUnk_08130F2C = { 7, { 0 }, sUnk_08130ED8, 60 };
+static const BtlFormEntry sBtlFormShadow7 = { 7, { 0 }, sBtlFormShadow7Steps, 60 };
 
-static const BtlFormStep sUnk_08130F38[] = {
+static const BtlFormStep sBtlFormShadow6ASteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 40, 0, 0, 1 },
     { 0, 25, 25, 0, 2 },
@@ -46,9 +46,9 @@ static const BtlFormStep sUnk_08130F38[] = {
     { 0, -25, -25, 0, 5 },
 };
 
-static const BtlFormEntry sUnk_08130F80 = { 6, { 0 }, sUnk_08130F38, 60 };
+static const BtlFormEntry sBtlFormShadow6A = { 6, { 0 }, sBtlFormShadow6ASteps, 60 };
 
-static const BtlFormStep sUnk_08130F8C[] = {
+static const BtlFormStep sBtlFormShadow6BSteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 40, 0, 0, 1 },
     { 0, 55, 25, 0, 2 },
@@ -57,9 +57,9 @@ static const BtlFormStep sUnk_08130F8C[] = {
     { 0, -25, 25, 0, 5 },
 };
 
-const BtlFormEntry gUnk_08130FD4 = { 6, { 0 }, sUnk_08130F8C, 60 };
+const BtlFormEntry gBtlFormShadow6B = { 6, { 0 }, sBtlFormShadow6BSteps, 60 };
 
-static const BtlFormStep sUnk_08130FE0[] = {
+static const BtlFormStep sBtlFormShadow6CSteps[] = {
     { 0, 90, 0, 0, 0 },
     { 0, 64, 0, 0, 1 },
     { 0, 40, 0, 0, 2 },
@@ -68,9 +68,9 @@ static const BtlFormStep sUnk_08130FE0[] = {
     { 0, -90, 0, 0, 5 },
 };
 
-const BtlFormEntry gUnk_08131028 = { 6, { 0 }, sUnk_08130FE0, 60 };
+const BtlFormEntry gBtlFormShadow6C = { 6, { 0 }, sBtlFormShadow6CSteps, 60 };
 
-static const BtlFormStep sUnk_08131034[] = {
+static const BtlFormStep sBtlFormShadow5ASteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 40, 0, 0, 1 },
     { 0, 55, 25, 0, 2 },
@@ -78,9 +78,9 @@ static const BtlFormStep sUnk_08131034[] = {
     { 0, 85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08131070 = { 5, { 0 }, sUnk_08131034, 60 };
+const BtlFormEntry gBtlFormShadow5A = { 5, { 0 }, sBtlFormShadow5ASteps, 60 };
 
-static const BtlFormStep sUnk_0813107C[] = {
+static const BtlFormStep sBtlFormShadow5BSteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 55, 25, 0, 1 },
     { 0, 90, 0, 0, 2 },
@@ -88,9 +88,9 @@ static const BtlFormStep sUnk_0813107C[] = {
     { 0, -85, 12, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_081310B8 = { 5, { 0 }, sUnk_0813107C, 60 };
+static const BtlFormEntry sBtlFormShadow5B = { 5, { 0 }, sBtlFormShadow5BSteps, 60 };
 
-static const BtlFormStep sUnk_081310C4[] = {
+static const BtlFormStep sBtlFormShadow5CSteps[] = {
     { 0, 65, -12, 0, 0 },
     { 0, 85, 12, 0, 1 },
     { 0, -25, -25, 0, 2 },
@@ -98,9 +98,9 @@ static const BtlFormStep sUnk_081310C4[] = {
     { 0, -55, 25, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_08131100 = { 5, { 0 }, sUnk_081310C4, 60 };
+static const BtlFormEntry sBtlFormShadow5C = { 5, { 0 }, sBtlFormShadow5CSteps, 60 };
 
-static const BtlFormStep sUnk_0813110C[] = {
+static const BtlFormStep sBtlFormShadow5DSteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 65, -12, 0, 1 },
     { 0, 90, 0, 0, 2 },
@@ -108,141 +108,141 @@ static const BtlFormStep sUnk_0813110C[] = {
     { 0, 55, 25, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_08131148 = { 5, { 0 }, sUnk_0813110C, 60 };
+static const BtlFormEntry sBtlFormShadow5D = { 5, { 0 }, sBtlFormShadow5DSteps, 60 };
 
-static const BtlFormStep sUnk_08131154[] = {
+static const BtlFormStep sBtlFormShadow4ASteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 55, 25, 0, 1 },
     { 0, 65, -12, 0, 2 },
     { 0, 85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_08131184 = { 4, { 0 }, sUnk_08131154, 60 };
+static const BtlFormEntry sBtlFormShadow4A = { 4, { 0 }, sBtlFormShadow4ASteps, 60 };
 
-static const BtlFormStep sUnk_08131190[] = {
+static const BtlFormStep sBtlFormShadow4BSteps[] = {
     { 0, 40, 0, 0, 0 },
     { 0, 65, -12, 0, 1 },
     { 0, 85, 12, 0, 2 },
     { 0, 90, 0, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_081311C0 = { 4, { 0 }, sUnk_08131190, 60 };
+static const BtlFormEntry sBtlFormShadow4B = { 4, { 0 }, sBtlFormShadow4BSteps, 60 };
 
-static const BtlFormStep sUnk_081311CC[] = {
+static const BtlFormStep sBtlFormShadow4CSteps[] = {
     { 0, 65, -12, 0, 0 },
     { 0, 85, 12, 0, 1 },
     { 0, -65, -12, 0, 2 },
     { 0, -85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_081311FC = { 4, { 0 }, sUnk_081311CC, 60 };
+static const BtlFormEntry sBtlFormShadow4C = { 4, { 0 }, sBtlFormShadow4CSteps, 60 };
 
-static const BtlFormStep sUnk_08131208[] = {
+static const BtlFormStep sBtlFormShadow4DSteps[] = {
     { 0, -55, 25, 0, 0 },
     { 0, -85, 12, 0, 1 },
     { 0, -65, -12, 0, 2 },
     { 0, -25, -25, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_08131238 = { 4, { 0 }, sUnk_08131208, 60 };
+static const BtlFormEntry sBtlFormShadow4D = { 4, { 0 }, sBtlFormShadow4DSteps, 60 };
 
-static const BtlFormStep sUnk_08131244[] = {
+static const BtlFormStep sBtlFormShadow3ASteps[] = {
     { 0, 40, 0, 0, 0 },
     { 0, 65, -12, 0, 1 },
     { 0, 85, 12, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08131268 = { 3, { 0 }, sUnk_08131244, 60 };
+static const BtlFormEntry sBtlFormShadow3A = { 3, { 0 }, sBtlFormShadow3ASteps, 60 };
 
-static const BtlFormStep sUnk_08131274[] = {
+static const BtlFormStep sBtlFormShadow3BSteps[] = {
     { 0, 65, -12, 0, 0 },
     { 0, 85, 12, 0, 1 },
     { 0, 90, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08131298 = { 3, { 0 }, sUnk_08131274, 60 };
+static const BtlFormEntry sBtlFormShadow3B = { 3, { 0 }, sBtlFormShadow3BSteps, 60 };
 
-static const BtlFormStep sUnk_081312A4[] = {
+static const BtlFormStep sBtlFormShadow3CSteps[] = {
     { 0, 65, -12, 0, 0 },
     { 0, 85, 12, 0, 1 },
     { 0, -40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081312C8 = { 3, { 0 }, sUnk_081312A4, 60 };
+static const BtlFormEntry sBtlFormShadow3C = { 3, { 0 }, sBtlFormShadow3CSteps, 60 };
 
-static const BtlFormStep sUnk_081312D4[] = {
+static const BtlFormStep sBtlFormShadow3DSteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 64, 0, 0, 1 },
     { 0, 55, 25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081312F8 = { 3, { 0 }, sUnk_081312D4, 60 };
+static const BtlFormEntry sBtlFormShadow3D = { 3, { 0 }, sBtlFormShadow3DSteps, 60 };
 
-static const BtlFormStep sUnk_08131304[] = {
+static const BtlFormStep sBtlFormShadow3ESteps[] = {
     { 0, -25, 25, 0, 0 },
     { 0, -64, 0, 0, 1 },
     { 0, -55, -25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08131328 = { 3, { 0 }, sUnk_08131304, 60 };
+static const BtlFormEntry sBtlFormShadow3E = { 3, { 0 }, sBtlFormShadow3ESteps, 60 };
 
-static const BtlFormStep sUnk_08131334[] = {
+static const BtlFormStep sBtlFormShadow3FSteps[] = {
     { 0, -65, -12, 0, 0 },
     { 0, -85, 12, 0, 1 },
     { 0, 40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08131358 = { 3, { 0 }, sUnk_08131334, 60 };
+static const BtlFormEntry sBtlFormShadow3F = { 3, { 0 }, sBtlFormShadow3FSteps, 60 };
 
-static const BtlFormStep sUnk_08131364[] = {
+static const BtlFormStep sBtlFormShadow2ASteps[] = {
     { 0, 65, -12, 0, 0 },
     { 0, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813137C = { 2, { 0 }, sUnk_08131364, 60 };
+static const BtlFormEntry sBtlFormShadow2A = { 2, { 0 }, sBtlFormShadow2ASteps, 60 };
 
-static const BtlFormStep sUnk_08131388[] = {
+static const BtlFormStep sBtlFormShadow2BSteps[] = {
     { 0, 25, -25, 0, 0 },
     { 0, 55, 25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081313A0 = { 2, { 0 }, sUnk_08131388, 60 };
+static const BtlFormEntry sBtlFormShadow2B = { 2, { 0 }, sBtlFormShadow2BSteps, 60 };
 
-static const BtlFormStep sUnk_081313AC[] = {
+static const BtlFormStep sBtlFormShadow2CSteps[] = {
     { 0, 40, 0, 0, 0 },
     { 0, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081313C4 = { 2, { 0 }, sUnk_081313AC, 60 };
+static const BtlFormEntry sBtlFormShadow2C = { 2, { 0 }, sBtlFormShadow2CSteps, 60 };
 
-static const BtlFormStep sUnk_081313D0[] = {
+static const BtlFormStep sBtlFormShadow2DSteps[] = {
     { 0, 40, 0, 0, 0 },
     { 0, 90, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081313E8 = { 2, { 0 }, sUnk_081313D0, 60 };
+static const BtlFormEntry sBtlFormShadow2D = { 2, { 0 }, sBtlFormShadow2DSteps, 60 };
 
-static const BtlFormStep sUnk_081313F4[] = {
+static const BtlFormStep sBtlFormShadow2ESteps[] = {
     { 0, -65, -12, 0, 0 },
     { 0, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813140C = { 2, { 0 }, sUnk_081313F4, 60 };
+static const BtlFormEntry sBtlFormShadow2E = { 2, { 0 }, sBtlFormShadow2ESteps, 60 };
 
-static const BtlFormStep sUnk_08131418[] = {
+static const BtlFormStep sBtlFormShadow2FSteps[] = {
     { 0, -55, 25, 0, 0 },
     { 0, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08131430 = { 2, { 0 }, sUnk_08131418, 60 };
+static const BtlFormEntry sBtlFormShadow2F = { 2, { 0 }, sBtlFormShadow2FSteps, 60 };
 
-static const BtlFormStep sUnk_0813143C[] = {
+static const BtlFormStep sBtlFormShadow1Steps[] = {
     { 0, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08131448 = { 1, { 0 }, sUnk_0813143C, 60 };
+static const BtlFormEntry sBtlFormShadow1 = { 1, { 0 }, sBtlFormShadow1Steps, 60 };
 
-static const BtlFormStep sUnk_08131454[] = {
+static const BtlFormStep sBtlFormRedNocturne5Steps[] = {
     { 1, 25, -25, -30, 0 },
     { 1, 40, 0, -30, 1 },
     { 1, 55, 25, -30, 2 },
@@ -250,78 +250,78 @@ static const BtlFormStep sUnk_08131454[] = {
     { 1, 85, 12, -40, 4 },
 };
 
-const BtlFormEntry gUnk_08131490 = { 5, { 0 }, sUnk_08131454, 60 };
+const BtlFormEntry gBtlFormRedNocturne5 = { 5, { 0 }, sBtlFormRedNocturne5Steps, 60 };
 
-static const BtlFormStep sUnk_0813149C[] = {
+static const BtlFormStep sBtlFormRedNocturne4Steps[] = {
     { 1, 25, -25, -30, 0 },
     { 1, 55, 25, -30, 1 },
     { 1, 65, -12, -40, 2 },
     { 1, 85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_081314CC = { 4, { 0 }, sUnk_0813149C, 60 };
+static const BtlFormEntry sBtlFormRedNocturne4 = { 4, { 0 }, sBtlFormRedNocturne4Steps, 60 };
 
-static const BtlFormStep sUnk_081314D8[] = {
+static const BtlFormStep sBtlFormRedNocturne3ASteps[] = {
     { 1, 40, 0, -30, 0 },
     { 1, 65, -12, -40, 1 },
     { 1, 85, 12, -40, 2 },
 };
 
-const BtlFormEntry gUnk_081314FC = { 3, { 0 }, sUnk_081314D8, 60 };
+const BtlFormEntry gBtlFormRedNocturne3A = { 3, { 0 }, sBtlFormRedNocturne3ASteps, 60 };
 
-static const BtlFormStep sUnk_08131508[] = {
+static const BtlFormStep sBtlFormRedNocturne3BSteps[] = {
     { 1, 65, -12, -40, 0 },
     { 1, 85, 12, -40, 1 },
     { 1, -40, 0, -30, 2 },
 };
 
-static const BtlFormEntry sUnk_0813152C = { 3, { 0 }, sUnk_08131508, 60 };
+static const BtlFormEntry sBtlFormRedNocturne3B = { 3, { 0 }, sBtlFormRedNocturne3BSteps, 60 };
 
-static const BtlFormStep sUnk_08131538[] = {
+static const BtlFormStep sBtlFormRedNocturne2ASteps[] = {
     { 1, 65, -12, -40, 0 },
     { 1, 85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08131550 = { 2, { 0 }, sUnk_08131538, 60 };
+static const BtlFormEntry sBtlFormRedNocturne2A = { 2, { 0 }, sBtlFormRedNocturne2ASteps, 60 };
 
-static const BtlFormStep sUnk_0813155C[] = {
+static const BtlFormStep sBtlFormRedNocturne2BSteps[] = {
     { 1, -65, -12, -40, 0 },
     { 1, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08131574 = { 2, { 0 }, sUnk_0813155C, 60 };
+static const BtlFormEntry sBtlFormRedNocturne2B = { 2, { 0 }, sBtlFormRedNocturne2BSteps, 60 };
 
-static const BtlFormStep sUnk_08131580[] = {
+static const BtlFormStep sBtlFormRedNocturne1ASteps[] = {
     { 1, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_0813158C = { 1, { 0 }, sUnk_08131580, 60 };
+static const BtlFormEntry sBtlFormRedNocturne1A = { 1, { 0 }, sBtlFormRedNocturne1ASteps, 60 };
 
-static const BtlFormStep sUnk_08131598[] = {
+static const BtlFormStep sBtlFormRedNocturne1BSteps[] = {
     { 1, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081315A4 = { 1, { 0 }, sUnk_08131598, 60 };
+static const BtlFormEntry sBtlFormRedNocturne1B = { 1, { 0 }, sBtlFormRedNocturne1BSteps, 60 };
 
-static const BtlFormStep sUnk_081315B0[] = {
+static const BtlFormStep sBtlFormRedNocturne1CSteps[] = {
     { 1, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081315BC = { 1, { 0 }, sUnk_081315B0, 60 };
+const BtlFormEntry gBtlFormRedNocturne1C = { 1, { 0 }, sBtlFormRedNocturne1CSteps, 60 };
 
-static const BtlFormStep sUnk_081315C8[] = {
+static const BtlFormStep sBtlFormRedNocturne1DSteps[] = {
     { 1, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081315D4 = { 1, { 0 }, sUnk_081315C8, 60 };
+const BtlFormEntry gBtlFormRedNocturne1D = { 1, { 0 }, sBtlFormRedNocturne1DSteps, 60 };
 
-static const BtlFormStep sUnk_081315E0[] = {
+static const BtlFormStep sBtlFormRedNocturne1ESteps[] = {
     { 1, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081315EC = { 1, { 0 }, sUnk_081315E0, 60 };
+const BtlFormEntry gBtlFormRedNocturne1E = { 1, { 0 }, sBtlFormRedNocturne1ESteps, 60 };
 
-static const BtlFormStep sUnk_081315F8[] = {
+static const BtlFormStep sBtlFormBlueRhapsody5Steps[] = {
     { 2, 25, -25, -30, 0 },
     { 2, 55, 25, -30, 1 },
     { 2, 90, 0, -50, 2 },
@@ -329,89 +329,89 @@ static const BtlFormStep sUnk_081315F8[] = {
     { 2, -85, 12, -40, 4 },
 };
 
-const BtlFormEntry gUnk_08131634 = { 5, { 0 }, sUnk_081315F8, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody5 = { 5, { 0 }, sBtlFormBlueRhapsody5Steps, 60 };
 
-static const BtlFormStep sUnk_08131640[] = {
+static const BtlFormStep sBtlFormBlueRhapsody4Steps[] = {
     { 2, 40, 0, -30, 0 },
     { 2, 65, -12, -40, 1 },
     { 2, 85, 12, -40, 2 },
     { 2, 90, 0, -50, 3 },
 };
 
-static const BtlFormEntry sUnk_08131670 = { 4, { 0 }, sUnk_08131640, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody4 = { 4, { 0 }, sBtlFormBlueRhapsody4Steps, 60 };
 
-static const BtlFormStep sUnk_0813167C[] = {
+static const BtlFormStep sBtlFormBlueRhapsody3Steps[] = {
     { 2, 65, -12, -40, 0 },
     { 2, 85, 12, -40, 1 },
     { 2, 90, 0, -50, 2 },
 };
 
-static const BtlFormEntry sUnk_081316A0 = { 3, { 0 }, sUnk_0813167C, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody3 = { 3, { 0 }, sBtlFormBlueRhapsody3Steps, 60 };
 
-static const BtlFormStep sUnk_081316AC[] = {
+static const BtlFormStep sBtlFormBlueRhapsody2ASteps[] = {
     { 2, 25, -25, -30, 0 },
     { 2, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_081316C4 = { 2, { 0 }, sUnk_081316AC, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody2A = { 2, { 0 }, sBtlFormBlueRhapsody2ASteps, 60 };
 
-static const BtlFormStep sUnk_081316D0[] = {
+static const BtlFormStep sBtlFormBlueRhapsody2BSteps[] = {
     { 2, -65, -12, -40, 0 },
     { 2, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_081316E8 = { 2, { 0 }, sUnk_081316D0, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody2B = { 2, { 0 }, sBtlFormBlueRhapsody2BSteps, 60 };
 
-static const BtlFormStep sUnk_081316F4[] = {
+static const BtlFormStep sBtlFormBlueRhapsody2CSteps[] = {
     { 2, -55, 25, -30, 0 },
     { 2, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_0813170C = { 2, { 0 }, sUnk_081316F4, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody2C = { 2, { 0 }, sBtlFormBlueRhapsody2CSteps, 60 };
 
-static const BtlFormStep sUnk_08131718[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1ASteps[] = {
     { 2, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gUnk_08131724 = { 1, { 0 }, sUnk_08131718, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1A = { 1, { 0 }, sBtlFormBlueRhapsody1ASteps, 60 };
 
-static const BtlFormStep sUnk_08131730[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1BSteps[] = {
     { 2, 40, 0, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_0813173C = { 1, { 0 }, sUnk_08131730, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1B = { 1, { 0 }, sBtlFormBlueRhapsody1BSteps, 60 };
 
-static const BtlFormStep sUnk_08131748[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1CSteps[] = {
     { 2, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08131754 = { 1, { 0 }, sUnk_08131748, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1C = { 1, { 0 }, sBtlFormBlueRhapsody1CSteps, 60 };
 
-static const BtlFormStep sUnk_08131760[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1DSteps[] = {
     { 2, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_0813176C = { 1, { 0 }, sUnk_08131760, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1D = { 1, { 0 }, sBtlFormBlueRhapsody1DSteps, 60 };
 
-static const BtlFormStep sUnk_08131778[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1ESteps[] = {
     { 2, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_08131784 = { 1, { 0 }, sUnk_08131778, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1E = { 1, { 0 }, sBtlFormBlueRhapsody1ESteps, 60 };
 
-static const BtlFormStep sUnk_08131790[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1FSteps[] = {
     { 2, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_0813179C = { 1, { 0 }, sUnk_08131790, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1F = { 1, { 0 }, sBtlFormBlueRhapsody1FSteps, 60 };
 
-static const BtlFormStep sUnk_081317A8[] = {
+static const BtlFormStep sBtlFormBlueRhapsody1GSteps[] = {
     { 2, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081317B4 = { 1, { 0 }, sUnk_081317A8, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1G = { 1, { 0 }, sBtlFormBlueRhapsody1GSteps, 60 };
 
-static const BtlFormStep sUnk_081317C0[] = {
+static const BtlFormStep sBtlFormYellowOpera5Steps[] = {
     { 3, 65, -12, -40, 0 },
     { 3, 85, 12, -40, 1 },
     { 3, -25, -25, -30, 2 },
@@ -419,106 +419,106 @@ static const BtlFormStep sUnk_081317C0[] = {
     { 3, -55, 25, -30, 4 },
 };
 
-const BtlFormEntry gUnk_081317FC = { 5, { 0 }, sUnk_081317C0, 60 };
+const BtlFormEntry gBtlFormYellowOpera5 = { 5, { 0 }, sBtlFormYellowOpera5Steps, 60 };
 
-static const BtlFormStep sUnk_08131808[] = {
+static const BtlFormStep sBtlFormYellowOpera4Steps[] = {
     { 3, 65, -12, -40, 0 },
     { 3, 85, 12, -40, 1 },
     { 3, -65, -12, -40, 2 },
     { 3, -85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08131838 = { 4, { 0 }, sUnk_08131808, 60 };
+static const BtlFormEntry sBtlFormYellowOpera4 = { 4, { 0 }, sBtlFormYellowOpera4Steps, 60 };
 
-static const BtlFormStep sUnk_08131844[] = {
+static const BtlFormStep sBtlFormYellowOpera3ASteps[] = {
     { 3, 65, -12, -40, 0 },
     { 3, 85, 12, -40, 1 },
     { 3, -40, 0, -30, 2 },
 };
 
-static const BtlFormEntry sUnk_08131868 = { 3, { 0 }, sUnk_08131844, 60 };
+static const BtlFormEntry sBtlFormYellowOpera3A = { 3, { 0 }, sBtlFormYellowOpera3ASteps, 60 };
 
-static const BtlFormStep sUnk_08131874[] = {
+static const BtlFormStep sBtlFormYellowOpera3BSteps[] = {
     { 3, -25, 25, -30, 0 },
     { 3, -64, 0, -50, 1 },
     { 3, -55, -25, -30, 2 },
 };
 
-static const BtlFormEntry sUnk_08131898 = { 3, { 0 }, sUnk_08131874, 60 };
+static const BtlFormEntry sBtlFormYellowOpera3B = { 3, { 0 }, sBtlFormYellowOpera3BSteps, 60 };
 
-static const BtlFormStep sUnk_081318A4[] = {
+static const BtlFormStep sBtlFormYellowOpera2ASteps[] = {
     { 3, 65, -12, -40, 0 },
     { 3, 85, 12, -40, 1 },
 };
 
-const BtlFormEntry gUnk_081318BC = { 2, { 0 }, sUnk_081318A4, 60 };
+const BtlFormEntry gBtlFormYellowOpera2A = { 2, { 0 }, sBtlFormYellowOpera2ASteps, 60 };
 
-static const BtlFormStep sUnk_081318C8[] = {
+static const BtlFormStep sBtlFormYellowOpera2BSteps[] = {
     { 3, 25, -25, -30, 0 },
     { 3, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_081318E0 = { 2, { 0 }, sUnk_081318C8, 60 };
+static const BtlFormEntry sBtlFormYellowOpera2B = { 2, { 0 }, sBtlFormYellowOpera2BSteps, 60 };
 
-static const BtlFormStep sUnk_081318EC[] = {
+static const BtlFormStep sBtlFormYellowOpera2CSteps[] = {
     { 3, 40, 0, -30, 0 },
     { 3, -40, 0, -30, 1 },
 };
 
-const BtlFormEntry gUnk_08131904 = { 2, { 0 }, sUnk_081318EC, 60 };
+const BtlFormEntry gBtlFormYellowOpera2C = { 2, { 0 }, sBtlFormYellowOpera2CSteps, 60 };
 
-static const BtlFormStep sUnk_08131910[] = {
+static const BtlFormStep sBtlFormYellowOpera2DSteps[] = {
     { 3, 40, 0, -30, 0 },
     { 3, 90, 0, -50, 1 },
 };
 
-static const BtlFormEntry sUnk_08131928 = { 2, { 0 }, sUnk_08131910, 60 };
+static const BtlFormEntry sBtlFormYellowOpera2D = { 2, { 0 }, sBtlFormYellowOpera2DSteps, 60 };
 
-static const BtlFormStep sUnk_08131934[] = {
+static const BtlFormStep sBtlFormYellowOpera2ESteps[] = {
     { 3, -65, -12, -40, 0 },
     { 3, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_0813194C = { 2, { 0 }, sUnk_08131934, 60 };
+static const BtlFormEntry sBtlFormYellowOpera2E = { 2, { 0 }, sBtlFormYellowOpera2ESteps, 60 };
 
-static const BtlFormStep sUnk_08131958[] = {
+static const BtlFormStep sBtlFormYellowOpera2FSteps[] = {
     { 3, -55, 25, -30, 0 },
     { 3, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08131970 = { 2, { 0 }, sUnk_08131958, 60 };
+static const BtlFormEntry sBtlFormYellowOpera2F = { 2, { 0 }, sBtlFormYellowOpera2FSteps, 60 };
 
-static const BtlFormStep sUnk_0813197C[] = {
+static const BtlFormStep sBtlFormYellowOpera1ASteps[] = {
     { 3, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gUnk_08131988 = { 1, { 0 }, sUnk_0813197C, 60 };
+const BtlFormEntry gBtlFormYellowOpera1A = { 1, { 0 }, sBtlFormYellowOpera1ASteps, 60 };
 
-static const BtlFormStep sUnk_08131994[] = {
+static const BtlFormStep sBtlFormYellowOpera1BSteps[] = {
     { 3, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081319A0 = { 1, { 0 }, sUnk_08131994, 60 };
+const BtlFormEntry gBtlFormYellowOpera1B = { 1, { 0 }, sBtlFormYellowOpera1BSteps, 60 };
 
-static const BtlFormStep sUnk_081319AC[] = {
+static const BtlFormStep sBtlFormYellowOpera1CSteps[] = {
     { 3, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081319B8 = { 1, { 0 }, sUnk_081319AC, 60 };
+static const BtlFormEntry sBtlFormYellowOpera1C = { 1, { 0 }, sBtlFormYellowOpera1CSteps, 60 };
 
-static const BtlFormStep sUnk_081319C4[] = {
+static const BtlFormStep sBtlFormYellowOpera1DSteps[] = {
     { 3, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081319D0 = { 1, { 0 }, sUnk_081319C4, 60 };
+const BtlFormEntry gBtlFormYellowOpera1D = { 1, { 0 }, sBtlFormYellowOpera1DSteps, 60 };
 
-static const BtlFormStep sUnk_081319DC[] = {
+static const BtlFormStep sBtlFormYellowOpera1ESteps[] = {
     { 3, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_081319E8 = { 1, { 0 }, sUnk_081319DC, 60 };
+const BtlFormEntry gBtlFormYellowOpera1E = { 1, { 0 }, sBtlFormYellowOpera1ESteps, 60 };
 
-static const BtlFormStep sUnk_081319F4[] = {
+static const BtlFormStep sBtlFormGreenRequiem5Steps[] = {
     { 4, 65, -12, -40, 0 },
     { 4, 85, 12, -40, 1 },
     { 4, -25, -25, -30, 2 },
@@ -526,99 +526,99 @@ static const BtlFormStep sUnk_081319F4[] = {
     { 4, -55, 25, -30, 4 },
 };
 
-const BtlFormEntry gUnk_08131A30 = { 5, { 0 }, sUnk_081319F4, 60 };
+const BtlFormEntry gBtlFormGreenRequiem5 = { 5, { 0 }, sBtlFormGreenRequiem5Steps, 60 };
 
-static const BtlFormStep sUnk_08131A3C[] = {
+static const BtlFormStep sBtlFormGreenRequiem4Steps[] = {
     { 4, 65, -12, -40, 0 },
     { 4, 85, 12, -40, 1 },
     { 4, -65, -12, -40, 2 },
     { 4, -85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08131A6C = { 4, { 0 }, sUnk_08131A3C, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem4 = { 4, { 0 }, sBtlFormGreenRequiem4Steps, 60 };
 
-static const BtlFormStep sUnk_08131A78[] = {
+static const BtlFormStep sBtlFormGreenRequiem3ASteps[] = {
     { 4, 65, -12, -40, 0 },
     { 4, 85, 12, -40, 1 },
     { 4, -40, 0, -30, 2 },
 };
 
-const BtlFormEntry gUnk_08131A9C = { 3, { 0 }, sUnk_08131A78, 60 };
+const BtlFormEntry gBtlFormGreenRequiem3A = { 3, { 0 }, sBtlFormGreenRequiem3ASteps, 60 };
 
-static const BtlFormStep sUnk_08131AA8[] = {
+static const BtlFormStep sBtlFormGreenRequiem3BSteps[] = {
     { 4, -65, -12, -40, 0 },
     { 4, -85, 12, -40, 1 },
     { 4, 40, 0, -30, 2 },
 };
 
-static const BtlFormEntry sUnk_08131ACC = { 3, { 0 }, sUnk_08131AA8, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem3B = { 3, { 0 }, sBtlFormGreenRequiem3BSteps, 60 };
 
-static const BtlFormStep sUnk_08131AD8[] = {
+static const BtlFormStep sBtlFormGreenRequiem2ASteps[] = {
     { 4, 65, -12, -40, 0 },
     { 4, 85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08131AF0 = { 2, { 0 }, sUnk_08131AD8, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem2A = { 2, { 0 }, sBtlFormGreenRequiem2ASteps, 60 };
 
-static const BtlFormStep sUnk_08131AFC[] = {
+static const BtlFormStep sBtlFormGreenRequiem2BSteps[] = {
     { 4, 25, -25, -30, 0 },
     { 4, 55, 25, -30, 1 },
 };
 
-const BtlFormEntry gUnk_08131B14 = { 2, { 0 }, sUnk_08131AFC, 60 };
+const BtlFormEntry gBtlFormGreenRequiem2B = { 2, { 0 }, sBtlFormGreenRequiem2BSteps, 60 };
 
-static const BtlFormStep sUnk_08131B20[] = {
+static const BtlFormStep sBtlFormGreenRequiem2CSteps[] = {
     { 4, 40, 0, -30, 0 },
     { 4, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08131B38 = { 2, { 0 }, sUnk_08131B20, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem2C = { 2, { 0 }, sBtlFormGreenRequiem2CSteps, 60 };
 
-static const BtlFormStep sUnk_08131B44[] = {
+static const BtlFormStep sBtlFormGreenRequiem2DSteps[] = {
     { 4, -65, -12, -40, 0 },
     { 4, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08131B5C = { 2, { 0 }, sUnk_08131B44, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem2D = { 2, { 0 }, sBtlFormGreenRequiem2DSteps, 60 };
 
-static const BtlFormStep sUnk_08131B68[] = {
+static const BtlFormStep sBtlFormGreenRequiem2ESteps[] = {
     { 4, -55, 25, -30, 0 },
     { 4, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08131B80 = { 2, { 0 }, sUnk_08131B68, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem2E = { 2, { 0 }, sBtlFormGreenRequiem2ESteps, 60 };
 
-static const BtlFormStep sUnk_08131B8C[] = {
+static const BtlFormStep sBtlFormGreenRequiem1ASteps[] = {
     { 4, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08131B98 = { 1, { 0 }, sUnk_08131B8C, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem1A = { 1, { 0 }, sBtlFormGreenRequiem1ASteps, 60 };
 
-static const BtlFormStep sUnk_08131BA4[] = {
+static const BtlFormStep sBtlFormGreenRequiem1BSteps[] = {
     { 4, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_08131BB0 = { 1, { 0 }, sUnk_08131BA4, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1B = { 1, { 0 }, sBtlFormGreenRequiem1BSteps, 60 };
 
-static const BtlFormStep sUnk_08131BBC[] = {
+static const BtlFormStep sBtlFormGreenRequiem1CSteps[] = {
     { 4, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_08131BC8 = { 1, { 0 }, sUnk_08131BBC, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1C = { 1, { 0 }, sBtlFormGreenRequiem1CSteps, 60 };
 
-static const BtlFormStep sUnk_08131BD4[] = {
+static const BtlFormStep sBtlFormGreenRequiem1DSteps[] = {
     { 4, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08131BE0 = { 1, { 0 }, sUnk_08131BD4, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem1D = { 1, { 0 }, sBtlFormGreenRequiem1DSteps, 60 };
 
-static const BtlFormStep sUnk_08131BEC[] = {
+static const BtlFormStep sBtlFormGreenRequiem1ESteps[] = {
     { 4, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gUnk_08131BF8 = { 1, { 0 }, sUnk_08131BEC, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1E = { 1, { 0 }, sBtlFormGreenRequiem1ESteps, 60 };
 
-static const BtlFormStep sUnk_08131C04[] = {
+static const BtlFormStep sBtlFormSeaNeon6Steps[] = {
     { 5, 25, -25, -30, 0 },
     { 5, 40, 0, -30, 1 },
     { 5, 25, 25, -30, 2 },
@@ -627,9 +627,9 @@ static const BtlFormStep sUnk_08131C04[] = {
     { 5, -25, -25, -30, 5 },
 };
 
-static const BtlFormEntry sUnk_08131C4C = { 6, { 0 }, sUnk_08131C04, 60 };
+static const BtlFormEntry sBtlFormSeaNeon6 = { 6, { 0 }, sBtlFormSeaNeon6Steps, 60 };
 
-static const BtlFormStep sUnk_08131C58[] = {
+static const BtlFormStep sBtlFormSeaNeon5Steps[] = {
     { 5, 25, -25, -30, 0 },
     { 5, 40, 0, -30, 1 },
     { 5, 55, 25, -30, 2 },
@@ -637,130 +637,130 @@ static const BtlFormStep sUnk_08131C58[] = {
     { 5, 85, 12, -40, 4 },
 };
 
-const BtlFormEntry gUnk_08131C94 = { 5, { 0 }, sUnk_08131C58, 60 };
+const BtlFormEntry gBtlFormSeaNeon5 = { 5, { 0 }, sBtlFormSeaNeon5Steps, 60 };
 
-static const BtlFormStep sUnk_08131CA0[] = {
+static const BtlFormStep sBtlFormSeaNeon4ASteps[] = {
     { 5, 25, -25, -30, 0 },
     { 5, 55, 25, -30, 1 },
     { 5, 65, -12, -40, 2 },
     { 5, 85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08131CD0 = { 4, { 0 }, sUnk_08131CA0, 60 };
+static const BtlFormEntry sBtlFormSeaNeon4A = { 4, { 0 }, sBtlFormSeaNeon4ASteps, 60 };
 
-static const BtlFormStep sUnk_08131CDC[] = {
+static const BtlFormStep sBtlFormSeaNeon4BSteps[] = {
     { 5, 65, -12, -40, 0 },
     { 5, 85, 12, -40, 1 },
     { 5, -65, -12, -40, 2 },
     { 5, -85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08131D0C = { 4, { 0 }, sUnk_08131CDC, 60 };
+static const BtlFormEntry sBtlFormSeaNeon4B = { 4, { 0 }, sBtlFormSeaNeon4BSteps, 60 };
 
-static const BtlFormStep sUnk_08131D18[] = {
+static const BtlFormStep sBtlFormSeaNeon3ASteps[] = {
     { 5, 40, 0, -30, 0 },
     { 5, 65, -12, -40, 1 },
     { 5, 85, 12, -40, 2 },
 };
 
-static const BtlFormEntry sUnk_08131D3C = { 3, { 0 }, sUnk_08131D18, 60 };
+static const BtlFormEntry sBtlFormSeaNeon3A = { 3, { 0 }, sBtlFormSeaNeon3ASteps, 60 };
 
-static const BtlFormStep sUnk_08131D48[] = {
+static const BtlFormStep sBtlFormSeaNeon3BSteps[] = {
     { 5, -25, 25, -30, 0 },
     { 5, -64, 0, -50, 1 },
     { 5, -55, -25, -30, 2 },
 };
 
-const BtlFormEntry gUnk_08131D6C = { 3, { 0 }, sUnk_08131D48, 60 };
+const BtlFormEntry gBtlFormSeaNeon3B = { 3, { 0 }, sBtlFormSeaNeon3BSteps, 60 };
 
-static const BtlFormStep sUnk_08131D78[] = {
+static const BtlFormStep sBtlFormSeaNeon2Steps[] = {
     { 5, 65, -12, -40, 0 },
     { 5, 85, 12, -40, 1 },
 };
 
-const BtlFormEntry gUnk_08131D90 = { 2, { 0 }, sUnk_08131D78, 60 };
+const BtlFormEntry gBtlFormSeaNeon2 = { 2, { 0 }, sBtlFormSeaNeon2Steps, 60 };
 
-static const BtlFormStep sUnk_08131D9C[] = {
+static const BtlFormStep sBtlFormSeaNeon1Steps[] = {
     { 5, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gUnk_08131DA8 = { 1, { 0 }, sUnk_08131D9C, 60 };
+const BtlFormEntry gBtlFormSeaNeon1 = { 1, { 0 }, sBtlFormSeaNeon1Steps, 60 };
 
-static const BtlFormStep sUnk_08131DB4[] = {
+static const BtlFormStep sBtlFormWhiteMushroom4Steps[] = {
     { 6, 65, -12, 0, 0 },
     { 6, 85, 12, 0, 1 },
     { 6, -65, -12, 0, 2 },
     { 6, -85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_08131DE4 = { 4, { 0 }, sUnk_08131DB4, 60 };
+static const BtlFormEntry sBtlFormWhiteMushroom4 = { 4, { 0 }, sBtlFormWhiteMushroom4Steps, 60 };
 
-static const BtlFormStep sUnk_08131DF0[] = {
+static const BtlFormStep sBtlFormWhiteMushroom3Steps[] = {
     { 6, 40, 0, 0, 0 },
     { 6, 65, -12, 0, 1 },
     { 6, 85, 12, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08131E14 = { 3, { 0 }, sUnk_08131DF0, 60 };
+const BtlFormEntry gBtlFormWhiteMushroom3 = { 3, { 0 }, sBtlFormWhiteMushroom3Steps, 60 };
 
-static const BtlFormStep sUnk_08131E20[] = {
+static const BtlFormStep sBtlFormWhiteMushroom2ASteps[] = {
     { 6, 25, -25, 0, 0 },
     { 6, 55, 25, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08131E38 = { 2, { 0 }, sUnk_08131E20, 60 };
+const BtlFormEntry gBtlFormWhiteMushroom2A = { 2, { 0 }, sBtlFormWhiteMushroom2ASteps, 60 };
 
-static const BtlFormStep sUnk_08131E44[] = {
+static const BtlFormStep sBtlFormWhiteMushroom2BSteps[] = {
     { 6, 40, 0, 0, 0 },
     { 6, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08131E5C = { 2, { 0 }, sUnk_08131E44, 60 };
+static const BtlFormEntry sBtlFormWhiteMushroom2B = { 2, { 0 }, sBtlFormWhiteMushroom2BSteps, 60 };
 
-static const BtlFormStep sUnk_08131E68[] = {
+static const BtlFormStep sBtlFormWhiteMushroom1Steps[] = {
     { 6, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08131E74 = { 1, { 0 }, sUnk_08131E68, 60 };
+static const BtlFormEntry sBtlFormWhiteMushroom1 = { 1, { 0 }, sBtlFormWhiteMushroom1Steps, 60 };
 
-static const BtlFormStep sUnk_08131E80[] = {
+static const BtlFormStep sBtlFormBlackFungus4Steps[] = {
     { 7, 65, -12, 0, 0 },
     { 7, 85, 12, 0, 1 },
     { 7, -65, -12, 0, 2 },
     { 7, -85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_08131EB0 = { 4, { 0 }, sUnk_08131E80, 60 };
+static const BtlFormEntry sBtlFormBlackFungus4 = { 4, { 0 }, sBtlFormBlackFungus4Steps, 60 };
 
-static const BtlFormStep sUnk_08131EBC[] = {
+static const BtlFormStep sBtlFormBlackFungus3Steps[] = {
     { 7, 65, -12, 0, 0 },
     { 7, 85, 12, 0, 1 },
     { 7, -40, 0, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08131EE0 = { 3, { 0 }, sUnk_08131EBC, 60 };
+const BtlFormEntry gBtlFormBlackFungus3 = { 3, { 0 }, sBtlFormBlackFungus3Steps, 60 };
 
-static const BtlFormStep sUnk_08131EEC[] = {
+static const BtlFormStep sBtlFormBlackFungus2ASteps[] = {
     { 7, 65, -12, 0, 0 },
     { 7, 85, 12, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08131F04 = { 2, { 0 }, sUnk_08131EEC, 60 };
+const BtlFormEntry gBtlFormBlackFungus2A = { 2, { 0 }, sBtlFormBlackFungus2ASteps, 60 };
 
-static const BtlFormStep sUnk_08131F10[] = {
+static const BtlFormStep sBtlFormBlackFungus2BSteps[] = {
     { 7, 40, 0, 0, 0 },
     { 7, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08131F28 = { 2, { 0 }, sUnk_08131F10, 60 };
+static const BtlFormEntry sBtlFormBlackFungus2B = { 2, { 0 }, sBtlFormBlackFungus2BSteps, 60 };
 
-static const BtlFormStep sUnk_08131F34[] = {
+static const BtlFormStep sBtlFormBlackFungus1Steps[] = {
     { 7, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08131F40 = { 1, { 0 }, sUnk_08131F34, 60 };
+static const BtlFormEntry sBtlFormBlackFungus1 = { 1, { 0 }, sBtlFormBlackFungus1Steps, 60 };
 
-static const BtlFormStep sUnk_08131F4C[] = {
+static const BtlFormStep sBtlFormSoldier6Steps[] = {
     { 9, 25, -25, 0, 0 },
     { 9, 40, 0, 0, 1 },
     { 9, 55, 25, 0, 2 },
@@ -769,9 +769,9 @@ static const BtlFormStep sUnk_08131F4C[] = {
     { 9, -25, 25, 0, 5 },
 };
 
-static const BtlFormEntry sUnk_08131F94 = { 6, { 0 }, sUnk_08131F4C, 60 };
+static const BtlFormEntry sBtlFormSoldier6 = { 6, { 0 }, sBtlFormSoldier6Steps, 60 };
 
-static const BtlFormStep sUnk_08131FA0[] = {
+static const BtlFormStep sBtlFormSoldier5ASteps[] = {
     { 9, 25, -25, 0, 0 },
     { 9, 55, 25, 0, 1 },
     { 9, 90, 0, 0, 2 },
@@ -779,9 +779,9 @@ static const BtlFormStep sUnk_08131FA0[] = {
     { 9, -85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08131FDC = { 5, { 0 }, sUnk_08131FA0, 60 };
+const BtlFormEntry gBtlFormSoldier5A = { 5, { 0 }, sBtlFormSoldier5ASteps, 60 };
 
-static const BtlFormStep sUnk_08131FE8[] = {
+static const BtlFormStep sBtlFormSoldier5BSteps[] = {
     { 9, 65, -12, -40, 0 },
     { 9, 85, 12, -40, 1 },
     { 9, -25, -25, -30, 2 },
@@ -789,238 +789,238 @@ static const BtlFormStep sUnk_08131FE8[] = {
     { 9, -55, 25, -30, 4 },
 };
 
-const BtlFormEntry gUnk_08132024 = { 5, { 0 }, sUnk_08131FE8, 60 };
+const BtlFormEntry gBtlFormSoldier5B = { 5, { 0 }, sBtlFormSoldier5BSteps, 60 };
 
-static const BtlFormStep sUnk_08132030[] = {
+static const BtlFormStep sBtlFormSoldier4ASteps[] = {
     { 9, 25, -25, 0, 0 },
     { 9, 55, 25, 0, 1 },
     { 9, 65, -12, 0, 2 },
     { 9, 85, 12, 0, 3 },
 };
 
-const BtlFormEntry gUnk_08132060 = { 4, { 0 }, sUnk_08132030, 60 };
+const BtlFormEntry gBtlFormSoldier4A = { 4, { 0 }, sBtlFormSoldier4ASteps, 60 };
 
-static const BtlFormStep sUnk_0813206C[] = {
+static const BtlFormStep sBtlFormSoldier4BSteps[] = {
     { 9, 40, 0, -30, 0 },
     { 9, 65, -12, -40, 1 },
     { 9, 85, 12, -40, 2 },
     { 9, 90, 0, -50, 3 },
 };
 
-static const BtlFormEntry sUnk_0813209C = { 4, { 0 }, sUnk_0813206C, 60 };
+static const BtlFormEntry sBtlFormSoldier4B = { 4, { 0 }, sBtlFormSoldier4BSteps, 60 };
 
-static const BtlFormStep sUnk_081320A8[] = {
+static const BtlFormStep sBtlFormSoldier4CSteps[] = {
     { 9, 65, -12, 0, 0 },
     { 9, 85, 12, 0, 1 },
     { 9, -65, -12, 0, 2 },
     { 9, -85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_081320D8 = { 4, { 0 }, sUnk_081320A8, 60 };
+static const BtlFormEntry sBtlFormSoldier4C = { 4, { 0 }, sBtlFormSoldier4CSteps, 60 };
 
-static const BtlFormStep sUnk_081320E4[] = {
+static const BtlFormStep sBtlFormSoldier3ASteps[] = {
     { 9, 40, 0, -30, 0 },
     { 9, 65, -12, -40, 1 },
     { 9, 85, 12, -40, 2 },
 };
 
-const BtlFormEntry gUnk_08132108 = { 3, { 0 }, sUnk_081320E4, 60 };
+const BtlFormEntry gBtlFormSoldier3A = { 3, { 0 }, sBtlFormSoldier3ASteps, 60 };
 
-static const BtlFormStep sUnk_08132114[] = {
+static const BtlFormStep sBtlFormSoldier3BSteps[] = {
     { 9, 65, -12, 0, 0 },
     { 9, 85, 12, 0, 1 },
     { 9, 90, 0, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08132138 = { 3, { 0 }, sUnk_08132114, 60 };
+const BtlFormEntry gBtlFormSoldier3B = { 3, { 0 }, sBtlFormSoldier3BSteps, 60 };
 
-static const BtlFormStep sUnk_08132144[] = {
+static const BtlFormStep sBtlFormSoldier3CSteps[] = {
     { 9, 65, -12, -40, 0 },
     { 9, 85, 12, -40, 1 },
     { 9, -40, 0, -30, 2 },
 };
 
-const BtlFormEntry gUnk_08132168 = { 3, { 0 }, sUnk_08132144, 60 };
+const BtlFormEntry gBtlFormSoldier3C = { 3, { 0 }, sBtlFormSoldier3CSteps, 60 };
 
-static const BtlFormStep sUnk_08132174[] = {
+static const BtlFormStep sBtlFormSoldier3DSteps[] = {
     { 9, 25, -25, 0, 0 },
     { 9, 64, 0, 0, 1 },
     { 9, 55, 25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08132198 = { 3, { 0 }, sUnk_08132174, 60 };
+static const BtlFormEntry sBtlFormSoldier3D = { 3, { 0 }, sBtlFormSoldier3DSteps, 60 };
 
-static const BtlFormStep sUnk_081321A4[] = {
+static const BtlFormStep sBtlFormSoldier3ESteps[] = {
     { 9, -25, 25, 0, 0 },
     { 9, -64, 0, 0, 1 },
     { 9, -55, -25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081321C8 = { 3, { 0 }, sUnk_081321A4, 60 };
+static const BtlFormEntry sBtlFormSoldier3E = { 3, { 0 }, sBtlFormSoldier3ESteps, 60 };
 
-static const BtlFormStep sUnk_081321D4[] = {
+static const BtlFormStep sBtlFormSoldier2ASteps[] = {
     { 9, 65, -12, 0, 0 },
     { 9, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081321EC = { 2, { 0 }, sUnk_081321D4, 60 };
+static const BtlFormEntry sBtlFormSoldier2A = { 2, { 0 }, sBtlFormSoldier2ASteps, 60 };
 
-static const BtlFormStep sUnk_081321F8[] = {
+static const BtlFormStep sBtlFormSoldier2BSteps[] = {
     { 9, 25, -25, -30, 0 },
     { 9, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132210 = { 2, { 0 }, sUnk_081321F8, 60 };
+static const BtlFormEntry sBtlFormSoldier2B = { 2, { 0 }, sBtlFormSoldier2BSteps, 60 };
 
-static const BtlFormStep sUnk_0813221C[] = {
+static const BtlFormStep sBtlFormSoldier2CSteps[] = {
     { 9, 40, 0, 0, 0 },
     { 9, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132234 = { 2, { 0 }, sUnk_0813221C, 60 };
+static const BtlFormEntry sBtlFormSoldier2C = { 2, { 0 }, sBtlFormSoldier2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132240[] = {
+static const BtlFormStep sBtlFormSoldier2DSteps[] = {
     { 9, -65, -12, 0, 0 },
     { 9, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132258 = { 2, { 0 }, sUnk_08132240, 60 };
+static const BtlFormEntry sBtlFormSoldier2D = { 2, { 0 }, sBtlFormSoldier2DSteps, 60 };
 
-static const BtlFormStep sUnk_08132264[] = {
+static const BtlFormStep sBtlFormSoldier1ASteps[] = {
     { 9, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132270 = { 1, { 0 }, sUnk_08132264, 60 };
+static const BtlFormEntry sBtlFormSoldier1A = { 1, { 0 }, sBtlFormSoldier1ASteps, 60 };
 
-static const BtlFormStep sUnk_0813227C[] = {
+static const BtlFormStep sBtlFormSoldier1BSteps[] = {
     { 9, 40, 0, 0, 0 },
 };
 
-const BtlFormEntry gUnk_08132288 = { 1, { 0 }, sUnk_0813227C, 60 };
+const BtlFormEntry gBtlFormSoldier1B = { 1, { 0 }, sBtlFormSoldier1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132294[] = {
+static const BtlFormStep sBtlFormSoldier1CSteps[] = {
     { 9, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_081322A0 = { 1, { 0 }, sUnk_08132294, 60 };
+static const BtlFormEntry sBtlFormSoldier1C = { 1, { 0 }, sBtlFormSoldier1CSteps, 60 };
 
-static const BtlFormStep sUnk_081322AC[] = {
+static const BtlFormStep sBtlFormSoldier1DSteps[] = {
     { 9, -40, 0, 0, 0 },
 };
 
-const BtlFormEntry gUnk_081322B8 = { 1, { 0 }, sUnk_081322AC, 60 };
+const BtlFormEntry gBtlFormSoldier1D = { 1, { 0 }, sBtlFormSoldier1DSteps, 60 };
 
-static const BtlFormStep sUnk_081322C4[] = {
+static const BtlFormStep sBtlFormPowerwild3Steps[] = {
     { 10, 40, 0, 0, 0 },
     { 10, 65, -12, 0, 1 },
     { 10, 85, 12, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081322E8 = { 3, { 0 }, sUnk_081322C4, 60 };
+static const BtlFormEntry sBtlFormPowerwild3 = { 3, { 0 }, sBtlFormPowerwild3Steps, 60 };
 
-static const BtlFormStep sUnk_081322F4[] = {
+static const BtlFormStep sBtlFormPowerwild2ASteps[] = {
     { 10, 25, -25, 0, 0 },
     { 10, 55, 25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813230C = { 2, { 0 }, sUnk_081322F4, 60 };
+static const BtlFormEntry sBtlFormPowerwild2A = { 2, { 0 }, sBtlFormPowerwild2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132318[] = {
+static const BtlFormStep sBtlFormPowerwild2BSteps[] = {
     { 10, -65, -12, 0, 0 },
     { 10, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132330 = { 2, { 0 }, sUnk_08132318, 60 };
+static const BtlFormEntry sBtlFormPowerwild2B = { 2, { 0 }, sBtlFormPowerwild2BSteps, 60 };
 
-static const BtlFormStep sUnk_0813233C[] = {
+static const BtlFormStep sBtlFormPowerwild1Steps[] = {
     { 10, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132348 = { 1, { 0 }, sUnk_0813233C, 60 };
+static const BtlFormEntry sBtlFormPowerwild1 = { 1, { 0 }, sBtlFormPowerwild1Steps, 60 };
 
-static const BtlFormStep sUnk_08132354[] = {
+static const BtlFormStep sBtlFormBouncywild3Steps[] = {
     { 11, 65, -12, 0, 0 },
     { 11, 85, 12, 0, 1 },
     { 11, 90, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08132378 = { 3, { 0 }, sUnk_08132354, 60 };
+static const BtlFormEntry sBtlFormBouncywild3 = { 3, { 0 }, sBtlFormBouncywild3Steps, 60 };
 
-static const BtlFormStep sUnk_08132384[] = {
+static const BtlFormStep sBtlFormBouncywild2ASteps[] = {
     { 11, 40, 0, 0, 0 },
     { 11, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813239C = { 2, { 0 }, sUnk_08132384, 60 };
+static const BtlFormEntry sBtlFormBouncywild2A = { 2, { 0 }, sBtlFormBouncywild2ASteps, 60 };
 
-static const BtlFormStep sUnk_081323A8[] = {
+static const BtlFormStep sBtlFormBouncywild2BSteps[] = {
     { 11, -55, 25, 0, 0 },
     { 11, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081323C0 = { 2, { 0 }, sUnk_081323A8, 60 };
+static const BtlFormEntry sBtlFormBouncywild2B = { 2, { 0 }, sBtlFormBouncywild2BSteps, 60 };
 
-static const BtlFormStep sUnk_081323CC[] = {
+static const BtlFormStep sBtlFormBouncywild1Steps[] = {
     { 11, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_081323D8 = { 1, { 0 }, sUnk_081323CC, 60 };
+static const BtlFormEntry sBtlFormBouncywild1 = { 1, { 0 }, sBtlFormBouncywild1Steps, 60 };
 
-static const BtlFormStep sUnk_081323E4[] = {
+static const BtlFormStep sBtlFormAirSoldier4ASteps[] = {
     { 12, 25, -25, -30, 0 },
     { 12, 55, 25, -30, 1 },
     { 12, 65, -12, -40, 2 },
     { 12, 85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08132414 = { 4, { 0 }, sUnk_081323E4, 60 };
+static const BtlFormEntry sBtlFormAirSoldier4A = { 4, { 0 }, sBtlFormAirSoldier4ASteps, 60 };
 
-static const BtlFormStep sUnk_08132420[] = {
+static const BtlFormStep sBtlFormAirSoldier4BSteps[] = {
     { 12, 65, -12, -40, 0 },
     { 12, 85, 12, -40, 1 },
     { 12, -65, -12, -40, 2 },
     { 12, -85, 12, -40, 3 },
 };
 
-static const BtlFormEntry sUnk_08132450 = { 4, { 0 }, sUnk_08132420, 60 };
+static const BtlFormEntry sBtlFormAirSoldier4B = { 4, { 0 }, sBtlFormAirSoldier4BSteps, 60 };
 
-static const BtlFormStep sUnk_0813245C[] = {
+static const BtlFormStep sBtlFormAirSoldier3ASteps[] = {
     { 12, 65, -12, -40, 0 },
     { 12, 85, 12, -40, 1 },
     { 12, 90, 0, -50, 2 },
 };
 
-static const BtlFormEntry sUnk_08132480 = { 3, { 0 }, sUnk_0813245C, 60 };
+static const BtlFormEntry sBtlFormAirSoldier3A = { 3, { 0 }, sBtlFormAirSoldier3ASteps, 60 };
 
-static const BtlFormStep sUnk_0813248C[] = {
+static const BtlFormStep sBtlFormAirSoldier3BSteps[] = {
     { 12, 65, -12, -40, 0 },
     { 12, 85, 12, -40, 1 },
     { 12, -40, 0, -30, 2 },
 };
 
-static const BtlFormEntry sUnk_081324B0 = { 3, { 0 }, sUnk_0813248C, 60 };
+static const BtlFormEntry sBtlFormAirSoldier3B = { 3, { 0 }, sBtlFormAirSoldier3BSteps, 60 };
 
-static const BtlFormStep sUnk_081324BC[] = {
+static const BtlFormStep sBtlFormAirSoldier2ASteps[] = {
     { 12, 40, 0, -30, 0 },
     { 12, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_081324D4 = { 2, { 0 }, sUnk_081324BC, 60 };
+static const BtlFormEntry sBtlFormAirSoldier2A = { 2, { 0 }, sBtlFormAirSoldier2ASteps, 60 };
 
-static const BtlFormStep sUnk_081324E0[] = {
+static const BtlFormStep sBtlFormAirSoldier2BSteps[] = {
     { 12, -55, 25, -30, 0 },
     { 12, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_081324F8 = { 2, { 0 }, sUnk_081324E0, 60 };
+static const BtlFormEntry sBtlFormAirSoldier2B = { 2, { 0 }, sBtlFormAirSoldier2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132504[] = {
+static const BtlFormStep sBtlFormAirSoldier1Steps[] = {
     { 12, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gUnk_08132510 = { 1, { 0 }, sUnk_08132504, 60 };
+const BtlFormEntry gBtlFormAirSoldier1 = { 1, { 0 }, sBtlFormAirSoldier1Steps, 60 };
 
-static const BtlFormStep sUnk_0813251C[] = {
+static const BtlFormStep sBtlFormBandit5Steps[] = {
     { 13, 25, -25, 0, 0 },
     { 13, 55, 25, 0, 1 },
     { 13, 90, 0, 0, 2 },
@@ -1028,275 +1028,275 @@ static const BtlFormStep sUnk_0813251C[] = {
     { 13, -85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08132558 = { 5, { 0 }, sUnk_0813251C, 60 };
+const BtlFormEntry gBtlFormBandit5 = { 5, { 0 }, sBtlFormBandit5Steps, 60 };
 
-static const BtlFormStep sUnk_08132564[] = {
+static const BtlFormStep sBtlFormBandit4ASteps[] = {
     { 13, 25, -25, 0, 0 },
     { 13, 55, 25, 0, 1 },
     { 13, 65, -12, 0, 2 },
     { 13, 85, 12, 0, 3 },
 };
 
-const BtlFormEntry gUnk_08132594 = { 4, { 0 }, sUnk_08132564, 60 };
+const BtlFormEntry gBtlFormBandit4A = { 4, { 0 }, sBtlFormBandit4ASteps, 60 };
 
-static const BtlFormStep sUnk_081325A0[] = {
+static const BtlFormStep sBtlFormBandit4BSteps[] = {
     { 13, 65, -12, 0, 0 },
     { 13, 85, 12, 0, 1 },
     { 13, -65, -12, 0, 2 },
     { 13, -85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_081325D0 = { 4, { 0 }, sUnk_081325A0, 60 };
+static const BtlFormEntry sBtlFormBandit4B = { 4, { 0 }, sBtlFormBandit4BSteps, 60 };
 
-static const BtlFormStep sUnk_081325DC[] = {
+static const BtlFormStep sBtlFormBandit3Steps[] = {
     { 13, 65, -12, 0, 0 },
     { 13, 85, 12, 0, 1 },
     { 13, -40, 0, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08132600 = { 3, { 0 }, sUnk_081325DC, 60 };
+const BtlFormEntry gBtlFormBandit3 = { 3, { 0 }, sBtlFormBandit3Steps, 60 };
 
-static const BtlFormStep sUnk_0813260C[] = {
+static const BtlFormStep sBtlFormBandit2ASteps[] = {
     { 13, 25, -25, 0, 0 },
     { 13, 55, 25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132624 = { 2, { 0 }, sUnk_0813260C, 60 };
+static const BtlFormEntry sBtlFormBandit2A = { 2, { 0 }, sBtlFormBandit2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132630[] = {
+static const BtlFormStep sBtlFormBandit2BSteps[] = {
     { 13, -55, 25, 0, 0 },
     { 13, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132648 = { 2, { 0 }, sUnk_08132630, 60 };
+static const BtlFormEntry sBtlFormBandit2B = { 2, { 0 }, sBtlFormBandit2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132654[] = {
+static const BtlFormStep sBtlFormBandit1ASteps[] = {
     { 13, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gUnk_08132660 = { 1, { 0 }, sUnk_08132654, 60 };
+const BtlFormEntry gBtlFormBandit1A = { 1, { 0 }, sBtlFormBandit1ASteps, 60 };
 
-static const BtlFormStep sUnk_0813266C[] = {
+static const BtlFormStep sBtlFormBandit1BSteps[] = {
     { 13, 40, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132678 = { 1, { 0 }, sUnk_0813266C, 60 };
+static const BtlFormEntry sBtlFormBandit1B = { 1, { 0 }, sBtlFormBandit1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132684[] = {
+static const BtlFormStep sBtlFormBarrelSpider3Steps[] = {
     { 14, 40, 0, 0, 0 },
     { 14, 65, -12, 0, 1 },
     { 14, 85, 12, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081326A8 = { 3, { 0 }, sUnk_08132684, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider3 = { 3, { 0 }, sBtlFormBarrelSpider3Steps, 60 };
 
-static const BtlFormStep sUnk_081326B4[] = {
+static const BtlFormStep sBtlFormBarrelSpider2ASteps[] = {
     { 14, 65, -12, 0, 0 },
     { 14, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081326CC = { 2, { 0 }, sUnk_081326B4, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider2A = { 2, { 0 }, sBtlFormBarrelSpider2ASteps, 60 };
 
-static const BtlFormStep sUnk_081326D8[] = {
+static const BtlFormStep sBtlFormBarrelSpider2BSteps[] = {
     { 14, 40, 0, 0, 0 },
     { 14, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081326F0 = { 2, { 0 }, sUnk_081326D8, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider2B = { 2, { 0 }, sBtlFormBarrelSpider2BSteps, 60 };
 
-static const BtlFormStep sUnk_081326FC[] = {
+static const BtlFormStep sBtlFormBarrelSpider2CSteps[] = {
     { 14, -65, -12, 0, 0 },
     { 14, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132714 = { 2, { 0 }, sUnk_081326FC, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider2C = { 2, { 0 }, sBtlFormBarrelSpider2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132720[] = {
+static const BtlFormStep sBtlFormBarrelSpider1ASteps[] = {
     { 14, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_0813272C = { 1, { 0 }, sUnk_08132720, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider1A = { 1, { 0 }, sBtlFormBarrelSpider1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132738[] = {
+static const BtlFormStep sBtlFormBarrelSpider1BSteps[] = {
     { 14, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132744 = { 1, { 0 }, sUnk_08132738, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider1B = { 1, { 0 }, sBtlFormBarrelSpider1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132750[] = {
+static const BtlFormStep sBtlFormSearchGhost3Steps[] = {
     { 15, 65, -12, -40, 0 },
     { 15, 85, 12, -40, 1 },
     { 15, 90, 0, -50, 2 },
 };
 
-static const BtlFormEntry sUnk_08132774 = { 3, { 0 }, sUnk_08132750, 60 };
+static const BtlFormEntry sBtlFormSearchGhost3 = { 3, { 0 }, sBtlFormSearchGhost3Steps, 60 };
 
-static const BtlFormStep sUnk_08132780[] = {
+static const BtlFormStep sBtlFormSearchGhost2ASteps[] = {
     { 15, 25, -25, -30, 0 },
     { 15, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132798 = { 2, { 0 }, sUnk_08132780, 60 };
+static const BtlFormEntry sBtlFormSearchGhost2A = { 2, { 0 }, sBtlFormSearchGhost2ASteps, 60 };
 
-static const BtlFormStep sUnk_081327A4[] = {
+static const BtlFormStep sBtlFormSearchGhost2BSteps[] = {
     { 15, 40, 0, -30, 0 },
     { 15, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_081327BC = { 2, { 0 }, sUnk_081327A4, 60 };
+static const BtlFormEntry sBtlFormSearchGhost2B = { 2, { 0 }, sBtlFormSearchGhost2BSteps, 60 };
 
-static const BtlFormStep sUnk_081327C8[] = {
+static const BtlFormStep sBtlFormSearchGhost2CSteps[] = {
     { 15, -65, -12, -40, 0 },
     { 15, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_081327E0 = { 2, { 0 }, sUnk_081327C8, 60 };
+static const BtlFormEntry sBtlFormSearchGhost2C = { 2, { 0 }, sBtlFormSearchGhost2CSteps, 60 };
 
-static const BtlFormStep sUnk_081327EC[] = {
+static const BtlFormStep sBtlFormSearchGhost1ASteps[] = {
     { 15, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_081327F8 = { 1, { 0 }, sUnk_081327EC, 60 };
+static const BtlFormEntry sBtlFormSearchGhost1A = { 1, { 0 }, sBtlFormSearchGhost1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132804[] = {
+static const BtlFormStep sBtlFormSearchGhost1BSteps[] = {
     { 15, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132810 = { 1, { 0 }, sUnk_08132804, 60 };
+static const BtlFormEntry sBtlFormSearchGhost1B = { 1, { 0 }, sBtlFormSearchGhost1BSteps, 60 };
 
-static const BtlFormStep sUnk_0813281C[] = {
+static const BtlFormStep sBtlFormScrewdiver2ASteps[] = {
     { 16, 65, -12, -40, 0 },
     { 16, 85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08132834 = { 2, { 0 }, sUnk_0813281C, 60 };
+static const BtlFormEntry sBtlFormScrewdiver2A = { 2, { 0 }, sBtlFormScrewdiver2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132840[] = {
+static const BtlFormStep sBtlFormScrewdiver2BSteps[] = {
     { 16, -55, 25, -30, 0 },
     { 16, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132858 = { 2, { 0 }, sUnk_08132840, 60 };
+static const BtlFormEntry sBtlFormScrewdiver2B = { 2, { 0 }, sBtlFormScrewdiver2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132864[] = {
+static const BtlFormStep sBtlFormScrewdiver1ASteps[] = {
     { 16, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132870 = { 1, { 0 }, sUnk_08132864, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1A = { 1, { 0 }, sBtlFormScrewdiver1ASteps, 60 };
 
-static const BtlFormStep sUnk_0813287C[] = {
+static const BtlFormStep sBtlFormScrewdiver1BSteps[] = {
     { 16, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132888 = { 1, { 0 }, sUnk_0813287C, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1B = { 1, { 0 }, sBtlFormScrewdiver1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132894[] = {
+static const BtlFormStep sBtlFormScrewdiver1CSteps[] = {
     { 16, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081328A0 = { 1, { 0 }, sUnk_08132894, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1C = { 1, { 0 }, sBtlFormScrewdiver1CSteps, 60 };
 
-static const BtlFormStep sUnk_081328AC[] = {
+static const BtlFormStep sBtlFormScrewdiver1DSteps[] = {
     { 16, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081328B8 = { 1, { 0 }, sUnk_081328AC, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1D = { 1, { 0 }, sBtlFormScrewdiver1DSteps, 60 };
 
-static const BtlFormStep sUnk_081328C4[] = {
+static const BtlFormStep sBtlFormScrewdiver1ESteps[] = {
     { 16, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081328D0 = { 1, { 0 }, sUnk_081328C4, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1E = { 1, { 0 }, sBtlFormScrewdiver1ESteps, 60 };
 
-static const BtlFormStep sUnk_081328DC[] = {
+static const BtlFormStep sBtlFormScrewdiver1FSteps[] = {
     { 16, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_081328E8 = { 1, { 0 }, sUnk_081328DC, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1F = { 1, { 0 }, sBtlFormScrewdiver1FSteps, 60 };
 
-static const BtlFormStep sUnk_081328F4[] = {
+static const BtlFormStep sBtlFormWightKnight3Steps[] = {
     { 17, 65, -12, 0, 0 },
     { 17, 85, 12, 0, 1 },
     { 17, -40, 0, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08132918 = { 3, { 0 }, sUnk_081328F4, 60 };
+const BtlFormEntry gBtlFormWightKnight3 = { 3, { 0 }, sBtlFormWightKnight3Steps, 60 };
 
-static const BtlFormStep sUnk_08132924[] = {
+static const BtlFormStep sBtlFormWightKnight2ASteps[] = {
     { 17, 25, -25, 0, 0 },
     { 17, 55, 25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813293C = { 2, { 0 }, sUnk_08132924, 60 };
+static const BtlFormEntry sBtlFormWightKnight2A = { 2, { 0 }, sBtlFormWightKnight2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132948[] = {
+static const BtlFormStep sBtlFormWightKnight2BSteps[] = {
     { 17, 40, 0, 0, 0 },
     { 17, -40, 0, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08132960 = { 2, { 0 }, sUnk_08132948, 60 };
+const BtlFormEntry gBtlFormWightKnight2B = { 2, { 0 }, sBtlFormWightKnight2BSteps, 60 };
 
-static const BtlFormStep sUnk_0813296C[] = {
+static const BtlFormStep sBtlFormWightKnight2CSteps[] = {
     { 17, 65, -12, 0, 0 },
     { 17, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132984 = { 2, { 0 }, sUnk_0813296C, 60 };
+static const BtlFormEntry sBtlFormWightKnight2C = { 2, { 0 }, sBtlFormWightKnight2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132990[] = {
+static const BtlFormStep sBtlFormWightKnight2DSteps[] = {
     { 17, -55, 25, 0, 0 },
     { 17, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081329A8 = { 2, { 0 }, sUnk_08132990, 60 };
+static const BtlFormEntry sBtlFormWightKnight2D = { 2, { 0 }, sBtlFormWightKnight2DSteps, 60 };
 
-static const BtlFormStep sUnk_081329B4[] = {
+static const BtlFormStep sBtlFormWightKnight1ASteps[] = {
     { 17, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_081329C0 = { 1, { 0 }, sUnk_081329B4, 60 };
+static const BtlFormEntry sBtlFormWightKnight1A = { 1, { 0 }, sBtlFormWightKnight1ASteps, 60 };
 
-static const BtlFormStep sUnk_081329CC[] = {
+static const BtlFormStep sBtlFormWightKnight1BSteps[] = {
     { 17, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_081329D8 = { 1, { 0 }, sUnk_081329CC, 60 };
+static const BtlFormEntry sBtlFormWightKnight1B = { 1, { 0 }, sBtlFormWightKnight1BSteps, 60 };
 
-static const BtlFormStep sUnk_081329E4[] = {
+static const BtlFormStep sBtlFormGargoyle3Steps[] = {
     { 18, 40, 0, -30, 0 },
     { 18, 65, -12, -40, 1 },
     { 18, 85, 12, -40, 2 },
 };
 
-static const BtlFormEntry sUnk_08132A08 = { 3, { 0 }, sUnk_081329E4, 60 };
+static const BtlFormEntry sBtlFormGargoyle3 = { 3, { 0 }, sBtlFormGargoyle3Steps, 60 };
 
-static const BtlFormStep sUnk_08132A14[] = {
+static const BtlFormStep sBtlFormGargoyle2ASteps[] = {
     { 18, 25, -25, -30, 0 },
     { 18, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132A2C = { 2, { 0 }, sUnk_08132A14, 60 };
+static const BtlFormEntry sBtlFormGargoyle2A = { 2, { 0 }, sBtlFormGargoyle2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132A38[] = {
+static const BtlFormStep sBtlFormGargoyle2BSteps[] = {
     { 18, -55, 25, -30, 0 },
     { 18, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132A50 = { 2, { 0 }, sUnk_08132A38, 60 };
+static const BtlFormEntry sBtlFormGargoyle2B = { 2, { 0 }, sBtlFormGargoyle2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132A5C[] = {
+static const BtlFormStep sBtlFormGargoyle1ASteps[] = {
     { 18, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132A68 = { 1, { 0 }, sUnk_08132A5C, 60 };
+static const BtlFormEntry sBtlFormGargoyle1A = { 1, { 0 }, sBtlFormGargoyle1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132A74[] = {
+static const BtlFormStep sBtlFormGargoyle1BSteps[] = {
     { 18, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132A80 = { 1, { 0 }, sUnk_08132A74, 60 };
+static const BtlFormEntry sBtlFormGargoyle1B = { 1, { 0 }, sBtlFormGargoyle1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132A8C[] = {
+static const BtlFormStep sBtlFormPirate5Steps[] = {
     { 19, 25, -25, 0, 0 },
     { 19, 40, 0, 0, 1 },
     { 19, 55, 25, 0, 2 },
@@ -1304,343 +1304,343 @@ static const BtlFormStep sUnk_08132A8C[] = {
     { 19, 85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08132AC8 = { 5, { 0 }, sUnk_08132A8C, 60 };
+const BtlFormEntry gBtlFormPirate5 = { 5, { 0 }, sBtlFormPirate5Steps, 60 };
 
-static const BtlFormStep sUnk_08132AD4[] = {
+static const BtlFormStep sBtlFormPirate4Steps[] = {
     { 19, 65, -12, 0, 0 },
     { 19, 85, 12, 0, 1 },
     { 19, -65, -12, 0, 2 },
     { 19, -85, 12, 0, 3 },
 };
 
-const BtlFormEntry gUnk_08132B04 = { 4, { 0 }, sUnk_08132AD4, 60 };
+const BtlFormEntry gBtlFormPirate4 = { 4, { 0 }, sBtlFormPirate4Steps, 60 };
 
-static const BtlFormStep sUnk_08132B10[] = {
+static const BtlFormStep sBtlFormPirate3ASteps[] = {
     { 19, 65, -12, 0, 0 },
     { 19, 85, 12, 0, 1 },
     { 19, 90, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08132B34 = { 3, { 0 }, sUnk_08132B10, 60 };
+static const BtlFormEntry sBtlFormPirate3A = { 3, { 0 }, sBtlFormPirate3ASteps, 60 };
 
-static const BtlFormStep sUnk_08132B40[] = {
+static const BtlFormStep sBtlFormPirate3BSteps[] = {
     { 19, -65, -12, 0, 0 },
     { 19, -85, 12, 0, 1 },
     { 19, 40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08132B64 = { 3, { 0 }, sUnk_08132B40, 60 };
+static const BtlFormEntry sBtlFormPirate3B = { 3, { 0 }, sBtlFormPirate3BSteps, 60 };
 
-static const BtlFormStep sUnk_08132B70[] = {
+static const BtlFormStep sBtlFormPirate2ASteps[] = {
     { 19, 65, -12, 0, 0 },
     { 19, 85, 12, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08132B88 = { 2, { 0 }, sUnk_08132B70, 60 };
+const BtlFormEntry gBtlFormPirate2A = { 2, { 0 }, sBtlFormPirate2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132B94[] = {
+static const BtlFormStep sBtlFormPirate2BSteps[] = {
     { 19, -65, -12, 0, 0 },
     { 19, -85, 12, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08132BAC = { 2, { 0 }, sUnk_08132B94, 60 };
+const BtlFormEntry gBtlFormPirate2B = { 2, { 0 }, sBtlFormPirate2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132BB8[] = {
+static const BtlFormStep sBtlFormPirate2CSteps[] = {
     { 19, 40, 0, 0, 0 },
     { 19, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132BD0 = { 2, { 0 }, sUnk_08132BB8, 60 };
+static const BtlFormEntry sBtlFormPirate2C = { 2, { 0 }, sBtlFormPirate2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132BDC[] = {
+static const BtlFormStep sBtlFormPirate1Steps[] = {
     { 19, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gUnk_08132BE8 = { 1, { 0 }, sUnk_08132BDC, 60 };
+const BtlFormEntry gBtlFormPirate1 = { 1, { 0 }, sBtlFormPirate1Steps, 60 };
 
-static const BtlFormStep sUnk_08132BF4[] = {
+static const BtlFormStep sBtlFormAirPirate2ASteps[] = {
     { 20, 25, -25, -30, 0 },
     { 20, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132C0C = { 2, { 0 }, sUnk_08132BF4, 60 };
+static const BtlFormEntry sBtlFormAirPirate2A = { 2, { 0 }, sBtlFormAirPirate2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132C18[] = {
+static const BtlFormStep sBtlFormAirPirate2BSteps[] = {
     { 20, 40, 0, -30, 0 },
     { 20, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132C30 = { 2, { 0 }, sUnk_08132C18, 60 };
+static const BtlFormEntry sBtlFormAirPirate2B = { 2, { 0 }, sBtlFormAirPirate2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132C3C[] = {
+static const BtlFormStep sBtlFormAirPirate2CSteps[] = {
     { 20, -55, 25, -30, 0 },
     { 20, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132C54 = { 2, { 0 }, sUnk_08132C3C, 60 };
+static const BtlFormEntry sBtlFormAirPirate2C = { 2, { 0 }, sBtlFormAirPirate2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132C60[] = {
+static const BtlFormStep sBtlFormAirPirate1ASteps[] = {
     { 20, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132C6C = { 1, { 0 }, sUnk_08132C60, 60 };
+static const BtlFormEntry sBtlFormAirPirate1A = { 1, { 0 }, sBtlFormAirPirate1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132C78[] = {
+static const BtlFormStep sBtlFormAirPirate1BSteps[] = {
     { 20, -64, 0, -50, 0 },
 };
 
-const BtlFormEntry gUnk_08132C84 = { 1, { 0 }, sUnk_08132C78, 60 };
+const BtlFormEntry gBtlFormAirPirate1B = { 1, { 0 }, sBtlFormAirPirate1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132C90[] = {
+static const BtlFormStep sBtlFormAirPirate1CSteps[] = {
     { 20, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08132C9C = { 1, { 0 }, sUnk_08132C90, 60 };
+static const BtlFormEntry sBtlFormAirPirate1C = { 1, { 0 }, sBtlFormAirPirate1CSteps, 60 };
 
-static const BtlFormStep sUnk_08132CA8[] = {
+static const BtlFormStep sBtlFormDarkball2ASteps[] = {
     { 21, 65, -12, -40, 0 },
     { 21, 85, 12, -40, 1 },
 };
 
-const BtlFormEntry gUnk_08132CC0 = { 2, { 0 }, sUnk_08132CA8, 60 };
+const BtlFormEntry gBtlFormDarkball2A = { 2, { 0 }, sBtlFormDarkball2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132CCC[] = {
+static const BtlFormStep sBtlFormDarkball2BSteps[] = {
     { 21, 25, -25, -30, 0 },
     { 21, 55, 25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132CE4 = { 2, { 0 }, sUnk_08132CCC, 60 };
+static const BtlFormEntry sBtlFormDarkball2B = { 2, { 0 }, sBtlFormDarkball2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132CF0[] = {
+static const BtlFormStep sBtlFormDarkball2CSteps[] = {
     { 21, 40, 0, -30, 0 },
     { 21, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132D08 = { 2, { 0 }, sUnk_08132CF0, 60 };
+static const BtlFormEntry sBtlFormDarkball2C = { 2, { 0 }, sBtlFormDarkball2CSteps, 60 };
 
-static const BtlFormStep sUnk_08132D14[] = {
+static const BtlFormStep sBtlFormDarkball2DSteps[] = {
     { 21, 40, 0, -30, 0 },
     { 21, 90, 0, -50, 1 },
 };
 
-static const BtlFormEntry sUnk_08132D2C = { 2, { 0 }, sUnk_08132D14, 60 };
+static const BtlFormEntry sBtlFormDarkball2D = { 2, { 0 }, sBtlFormDarkball2DSteps, 60 };
 
-static const BtlFormStep sUnk_08132D38[] = {
+static const BtlFormStep sBtlFormDarkball2ESteps[] = {
     { 21, -65, -12, -40, 0 },
     { 21, -85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08132D50 = { 2, { 0 }, sUnk_08132D38, 60 };
+static const BtlFormEntry sBtlFormDarkball2E = { 2, { 0 }, sBtlFormDarkball2ESteps, 60 };
 
-static const BtlFormStep sUnk_08132D5C[] = {
+static const BtlFormStep sBtlFormDarkball2FSteps[] = {
     { 21, -55, 25, -30, 0 },
     { 21, -25, -25, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132D74 = { 2, { 0 }, sUnk_08132D5C, 60 };
+static const BtlFormEntry sBtlFormDarkball2F = { 2, { 0 }, sBtlFormDarkball2FSteps, 60 };
 
-static const BtlFormStep sUnk_08132D80[] = {
+static const BtlFormStep sBtlFormDarkball1ASteps[] = {
     { 21, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132D8C = { 1, { 0 }, sUnk_08132D80, 60 };
+static const BtlFormEntry sBtlFormDarkball1A = { 1, { 0 }, sBtlFormDarkball1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132D98[] = {
+static const BtlFormStep sBtlFormDarkball1BSteps[] = {
     { 21, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132DA4 = { 1, { 0 }, sUnk_08132D98, 60 };
+static const BtlFormEntry sBtlFormDarkball1B = { 1, { 0 }, sBtlFormDarkball1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132DB0[] = {
+static const BtlFormStep sBtlFormDarkball1CSteps[] = {
     { 21, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08132DBC = { 1, { 0 }, sUnk_08132DB0, 60 };
+static const BtlFormEntry sBtlFormDarkball1C = { 1, { 0 }, sBtlFormDarkball1CSteps, 60 };
 
-static const BtlFormStep sUnk_08132DC8[] = {
+static const BtlFormStep sBtlFormDarkball1DSteps[] = {
     { 21, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08132DD4 = { 1, { 0 }, sUnk_08132DC8, 60 };
+static const BtlFormEntry sBtlFormDarkball1D = { 1, { 0 }, sBtlFormDarkball1DSteps, 60 };
 
-static const BtlFormStep sUnk_08132DE0[] = {
+static const BtlFormStep sBtlFormDarkball1ESteps[] = {
     { 21, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08132DEC = { 1, { 0 }, sUnk_08132DE0, 60 };
+static const BtlFormEntry sBtlFormDarkball1E = { 1, { 0 }, sBtlFormDarkball1ESteps, 60 };
 
-static const BtlFormStep sUnk_08132DF8[] = {
+static const BtlFormStep sBtlFormDarkball1FSteps[] = {
     { 21, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sUnk_08132E04 = { 1, { 0 }, sUnk_08132DF8, 60 };
+static const BtlFormEntry sBtlFormDarkball1F = { 1, { 0 }, sBtlFormDarkball1FSteps, 60 };
 
-static const BtlFormStep sUnk_08132E10[] = {
+static const BtlFormStep sBtlFormWyvern2Steps[] = {
     { 22, 65, -12, -40, 0 },
     { 22, 85, 12, -40, 1 },
 };
 
-static const BtlFormEntry sUnk_08132E28 = { 2, { 0 }, sUnk_08132E10, 60 };
+static const BtlFormEntry sBtlFormWyvern2 = { 2, { 0 }, sBtlFormWyvern2Steps, 60 };
 
-static const BtlFormStep sUnk_08132E34[] = {
+static const BtlFormStep sBtlFormWyvern1ASteps[] = {
     { 22, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132E40 = { 1, { 0 }, sUnk_08132E34, 60 };
+static const BtlFormEntry sBtlFormWyvern1A = { 1, { 0 }, sBtlFormWyvern1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132E4C[] = {
+static const BtlFormStep sBtlFormWyvern1BSteps[] = {
     { 22, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132E58 = { 1, { 0 }, sUnk_08132E4C, 60 };
+static const BtlFormEntry sBtlFormWyvern1B = { 1, { 0 }, sBtlFormWyvern1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132E64[] = {
+static const BtlFormStep sBtlFormWizard3Steps[] = {
     { 23, 65, -12, -40, 0 },
     { 23, 85, 12, -40, 1 },
     { 23, 90, 0, -50, 2 },
 };
 
-const BtlFormEntry gUnk_08132E88 = { 3, { 0 }, sUnk_08132E64, 60 };
+const BtlFormEntry gBtlFormWizard3 = { 3, { 0 }, sBtlFormWizard3Steps, 60 };
 
-static const BtlFormStep sUnk_08132E94[] = {
+static const BtlFormStep sBtlFormWizard2Steps[] = {
     { 23, 40, 0, -30, 0 },
     { 23, -40, 0, -30, 1 },
 };
 
-static const BtlFormEntry sUnk_08132EAC = { 2, { 0 }, sUnk_08132E94, 60 };
+static const BtlFormEntry sBtlFormWizard2 = { 2, { 0 }, sBtlFormWizard2Steps, 60 };
 
-static const BtlFormStep sUnk_08132EB8[] = {
+static const BtlFormStep sBtlFormWizard1ASteps[] = {
     { 23, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132EC4 = { 1, { 0 }, sUnk_08132EB8, 60 };
+static const BtlFormEntry sBtlFormWizard1A = { 1, { 0 }, sBtlFormWizard1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132ED0[] = {
+static const BtlFormStep sBtlFormWizard1BSteps[] = {
     { 23, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_08132EDC = { 1, { 0 }, sUnk_08132ED0, 60 };
+static const BtlFormEntry sBtlFormWizard1B = { 1, { 0 }, sBtlFormWizard1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132EE8[] = {
+static const BtlFormStep sBtlFormNeoshadow3ASteps[] = {
     { 24, 40, 0, 0, 0 },
     { 24, 65, -12, 0, 1 },
     { 24, 85, 12, 0, 2 },
 };
 
-const BtlFormEntry gUnk_08132F0C = { 3, { 0 }, sUnk_08132EE8, 60 };
+const BtlFormEntry gBtlFormNeoshadow3A = { 3, { 0 }, sBtlFormNeoshadow3ASteps, 60 };
 
-static const BtlFormStep sUnk_08132F18[] = {
+static const BtlFormStep sBtlFormNeoshadow3BSteps[] = {
     { 24, 65, -12, 0, 0 },
     { 24, 85, 12, 0, 1 },
     { 24, -40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08132F3C = { 3, { 0 }, sUnk_08132F18, 60 };
+static const BtlFormEntry sBtlFormNeoshadow3B = { 3, { 0 }, sBtlFormNeoshadow3BSteps, 60 };
 
-static const BtlFormStep sUnk_08132F48[] = {
+static const BtlFormStep sBtlFormNeoshadow2Steps[] = {
     { 24, 65, -12, 0, 0 },
     { 24, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132F60 = { 2, { 0 }, sUnk_08132F48, 60 };
+static const BtlFormEntry sBtlFormNeoshadow2 = { 2, { 0 }, sBtlFormNeoshadow2Steps, 60 };
 
-static const BtlFormStep sUnk_08132F6C[] = {
+static const BtlFormStep sBtlFormNeoshadow1ASteps[] = {
     { 24, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132F78 = { 1, { 0 }, sUnk_08132F6C, 60 };
+static const BtlFormEntry sBtlFormNeoshadow1A = { 1, { 0 }, sBtlFormNeoshadow1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132F84[] = {
+static const BtlFormStep sBtlFormNeoshadow1BSteps[] = {
     { 24, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132F90 = { 1, { 0 }, sUnk_08132F84, 60 };
+static const BtlFormEntry sBtlFormNeoshadow1B = { 1, { 0 }, sBtlFormNeoshadow1BSteps, 60 };
 
-static const BtlFormStep sUnk_08132F9C[] = {
+static const BtlFormStep sBtlFormLargeBody2ASteps[] = {
     { 25, 65, -12, 0, 0 },
     { 25, 85, 12, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08132FB4 = { 2, { 0 }, sUnk_08132F9C, 60 };
+const BtlFormEntry gBtlFormLargeBody2A = { 2, { 0 }, sBtlFormLargeBody2ASteps, 60 };
 
-static const BtlFormStep sUnk_08132FC0[] = {
+static const BtlFormStep sBtlFormLargeBody2BSteps[] = {
     { 25, 40, 0, 0, 0 },
     { 25, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08132FD8 = { 2, { 0 }, sUnk_08132FC0, 60 };
+static const BtlFormEntry sBtlFormLargeBody2B = { 2, { 0 }, sBtlFormLargeBody2BSteps, 60 };
 
-static const BtlFormStep sUnk_08132FE4[] = {
+static const BtlFormStep sBtlFormLargeBody1ASteps[] = {
     { 25, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08132FF0 = { 1, { 0 }, sUnk_08132FE4, 60 };
+static const BtlFormEntry sBtlFormLargeBody1A = { 1, { 0 }, sBtlFormLargeBody1ASteps, 60 };
 
-static const BtlFormStep sUnk_08132FFC[] = {
+static const BtlFormStep sBtlFormLargeBody1BSteps[] = {
     { 25, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133008 = { 1, { 0 }, sUnk_08132FFC, 60 };
+static const BtlFormEntry sBtlFormLargeBody1B = { 1, { 0 }, sBtlFormLargeBody1BSteps, 60 };
 
-static const BtlFormStep sUnk_08133014[] = {
+static const BtlFormStep sBtlFormFatBandit2ASteps[] = {
     { 26, 25, -25, 0, 0 },
     { 26, 55, 25, 0, 1 },
 };
 
-const BtlFormEntry gUnk_0813302C = { 2, { 0 }, sUnk_08133014, 60 };
+const BtlFormEntry gBtlFormFatBandit2A = { 2, { 0 }, sBtlFormFatBandit2ASteps, 60 };
 
-static const BtlFormStep sUnk_08133038[] = {
+static const BtlFormStep sBtlFormFatBandit2BSteps[] = {
     { 26, 40, 0, 0, 0 },
     { 26, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08133050 = { 2, { 0 }, sUnk_08133038, 60 };
+static const BtlFormEntry sBtlFormFatBandit2B = { 2, { 0 }, sBtlFormFatBandit2BSteps, 60 };
 
-static const BtlFormStep sUnk_0813305C[] = {
+static const BtlFormStep sBtlFormFatBandit1ASteps[] = {
     { 26, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133068 = { 1, { 0 }, sUnk_0813305C, 60 };
+static const BtlFormEntry sBtlFormFatBandit1A = { 1, { 0 }, sBtlFormFatBandit1ASteps, 60 };
 
-static const BtlFormStep sUnk_08133074[] = {
+static const BtlFormStep sBtlFormFatBandit1BSteps[] = {
     { 26, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133080 = { 1, { 0 }, sUnk_08133074, 60 };
+static const BtlFormEntry sBtlFormFatBandit1B = { 1, { 0 }, sBtlFormFatBandit1BSteps, 60 };
 
-static const BtlFormStep sUnk_0813308C[] = {
+static const BtlFormStep sBtlFormAquatank2Steps[] = {
     { 27, 65, -12, -40, 0 },
     { 27, 85, 12, -40, 1 },
 };
 
-const BtlFormEntry gUnk_081330A4 = { 2, { 0 }, sUnk_0813308C, 60 };
+const BtlFormEntry gBtlFormAquatank2 = { 2, { 0 }, sBtlFormAquatank2Steps, 60 };
 
-static const BtlFormStep sUnk_081330B0[] = {
+static const BtlFormStep sBtlFormAquatank1ASteps[] = {
     { 27, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_081330BC = { 1, { 0 }, sUnk_081330B0, 60 };
+static const BtlFormEntry sBtlFormAquatank1A = { 1, { 0 }, sBtlFormAquatank1ASteps, 60 };
 
-static const BtlFormStep sUnk_081330C8[] = {
+static const BtlFormStep sBtlFormAquatank1BSteps[] = {
     { 27, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sUnk_081330D4 = { 1, { 0 }, sUnk_081330C8, 60 };
+static const BtlFormEntry sBtlFormAquatank1B = { 1, { 0 }, sBtlFormAquatank1BSteps, 60 };
 
-static const BtlFormStep sUnk_081330E0[] = {
+static const BtlFormStep sBtlFormDefender2Steps[] = {
     { 28, 25, -25, 0, 0 },
     { 28, 55, 25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081330F8 = { 2, { 0 }, sUnk_081330E0, 60 };
+static const BtlFormEntry sBtlFormDefender2 = { 2, { 0 }, sBtlFormDefender2Steps, 60 };
 
-static const BtlFormStep sUnk_08133104[] = {
+static const BtlFormStep sBtlFormDefender1Steps[] = {
     { 28, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133110 = { 1, { 0 }, sUnk_08133104, 60 };
+static const BtlFormEntry sBtlFormDefender1 = { 1, { 0 }, sBtlFormDefender1Steps, 60 };
 
-static const BtlFormStep sUnk_0813311C[] = {
+static const BtlFormStep sBtlFormTornadoStep5ASteps[] = {
     { 29, 25, -25, 0, 0 },
     { 29, 40, 0, 0, 1 },
     { 29, 55, 25, 0, 2 },
@@ -1648,9 +1648,9 @@ static const BtlFormStep sUnk_0813311C[] = {
     { 29, 85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08133158 = { 5, { 0 }, sUnk_0813311C, 60 };
+const BtlFormEntry gBtlFormTornadoStep5A = { 5, { 0 }, sBtlFormTornadoStep5ASteps, 60 };
 
-static const BtlFormStep sUnk_08133164[] = {
+static const BtlFormStep sBtlFormTornadoStep5BSteps[] = {
     { 29, 25, -25, 0, 0 },
     { 29, 55, 25, 0, 1 },
     { 29, 90, 0, 0, 2 },
@@ -1658,76 +1658,76 @@ static const BtlFormStep sUnk_08133164[] = {
     { 29, -85, 12, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_081331A0 = { 5, { 0 }, sUnk_08133164, 60 };
+static const BtlFormEntry sBtlFormTornadoStep5B = { 5, { 0 }, sBtlFormTornadoStep5BSteps, 60 };
 
-static const BtlFormStep sUnk_081331AC[] = {
+static const BtlFormStep sBtlFormTornadoStep4Steps[] = {
     { 29, 25, -25, 0, 0 },
     { 29, 55, 25, 0, 1 },
     { 29, 65, -12, 0, 2 },
     { 29, 85, 12, 0, 3 },
 };
 
-const BtlFormEntry gUnk_081331DC = { 4, { 0 }, sUnk_081331AC, 60 };
+const BtlFormEntry gBtlFormTornadoStep4 = { 4, { 0 }, sBtlFormTornadoStep4Steps, 60 };
 
-static const BtlFormStep sUnk_081331E8[] = {
+static const BtlFormStep sBtlFormTornadoStep3ASteps[] = {
     { 29, 40, 0, 0, 0 },
     { 29, 65, -12, 0, 1 },
     { 29, 85, 12, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_0813320C = { 3, { 0 }, sUnk_081331E8, 60 };
+static const BtlFormEntry sBtlFormTornadoStep3A = { 3, { 0 }, sBtlFormTornadoStep3ASteps, 60 };
 
-static const BtlFormStep sUnk_08133218[] = {
+static const BtlFormStep sBtlFormTornadoStep3BSteps[] = {
     { 29, 25, -25, 0, 0 },
     { 29, 64, 0, 0, 1 },
     { 29, 55, 25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_0813323C = { 3, { 0 }, sUnk_08133218, 60 };
+static const BtlFormEntry sBtlFormTornadoStep3B = { 3, { 0 }, sBtlFormTornadoStep3BSteps, 60 };
 
-static const BtlFormStep sUnk_08133248[] = {
+static const BtlFormStep sBtlFormTornadoStep3CSteps[] = {
     { 29, -25, 25, 0, 0 },
     { 29, -64, 0, 0, 1 },
     { 29, -55, -25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_0813326C = { 3, { 0 }, sUnk_08133248, 60 };
+static const BtlFormEntry sBtlFormTornadoStep3C = { 3, { 0 }, sBtlFormTornadoStep3CSteps, 60 };
 
-static const BtlFormStep sUnk_08133278[] = {
+static const BtlFormStep sBtlFormTornadoStep2ASteps[] = {
     { 29, 65, -12, 0, 0 },
     { 29, 85, 12, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08133290 = { 2, { 0 }, sUnk_08133278, 60 };
+const BtlFormEntry gBtlFormTornadoStep2A = { 2, { 0 }, sBtlFormTornadoStep2ASteps, 60 };
 
-static const BtlFormStep sUnk_0813329C[] = {
+static const BtlFormStep sBtlFormTornadoStep2BSteps[] = {
     { 29, 40, 0, 0, 0 },
     { 29, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081332B4 = { 2, { 0 }, sUnk_0813329C, 60 };
+static const BtlFormEntry sBtlFormTornadoStep2B = { 2, { 0 }, sBtlFormTornadoStep2BSteps, 60 };
 
-static const BtlFormStep sUnk_081332C0[] = {
+static const BtlFormStep sBtlFormTornadoStep2CSteps[] = {
     { 29, -65, -12, 0, 0 },
     { 29, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081332D8 = { 2, { 0 }, sUnk_081332C0, 60 };
+static const BtlFormEntry sBtlFormTornadoStep2C = { 2, { 0 }, sBtlFormTornadoStep2CSteps, 60 };
 
-static const BtlFormStep sUnk_081332E4[] = {
+static const BtlFormStep sBtlFormTornadoStep2DSteps[] = {
     { 29, -55, 25, 0, 0 },
     { 29, -25, -25, 0, 1 },
 };
 
-const BtlFormEntry gUnk_081332FC = { 2, { 0 }, sUnk_081332E4, 60 };
+const BtlFormEntry gBtlFormTornadoStep2D = { 2, { 0 }, sBtlFormTornadoStep2DSteps, 60 };
 
-static const BtlFormStep sUnk_08133308[] = {
+static const BtlFormStep sBtlFormTornadoStep1Steps[] = {
     { 29, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133314 = { 1, { 0 }, sUnk_08133308, 60 };
+static const BtlFormEntry sBtlFormTornadoStep1 = { 1, { 0 }, sBtlFormTornadoStep1Steps, 60 };
 
-static const BtlFormStep sUnk_08133320[] = {
+static const BtlFormStep sBtlFormCrescendo5Steps[] = {
     { 30, 25, -25, 0, 0 },
     { 30, 40, 0, 0, 1 },
     { 30, 55, 25, 0, 2 },
@@ -1735,69 +1735,69 @@ static const BtlFormStep sUnk_08133320[] = {
     { 30, 85, 12, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_0813335C = { 5, { 0 }, sUnk_08133320, 60 };
+static const BtlFormEntry sBtlFormCrescendo5 = { 5, { 0 }, sBtlFormCrescendo5Steps, 60 };
 
-static const BtlFormStep sUnk_08133368[] = {
+static const BtlFormStep sBtlFormCrescendo4Steps[] = {
     { 30, 25, -25, 0, 0 },
     { 30, 55, 25, 0, 1 },
     { 30, 65, -12, 0, 2 },
     { 30, 85, 12, 0, 3 },
 };
 
-const BtlFormEntry gUnk_08133398 = { 4, { 0 }, sUnk_08133368, 60 };
+const BtlFormEntry gBtlFormCrescendo4 = { 4, { 0 }, sBtlFormCrescendo4Steps, 60 };
 
-static const BtlFormStep sUnk_081333A4[] = {
+static const BtlFormStep sBtlFormCrescendo3ASteps[] = {
     { 30, 40, 0, 0, 0 },
     { 30, 65, -12, 0, 1 },
     { 30, 85, 12, 0, 2 },
 };
 
-const BtlFormEntry gUnk_081333C8 = { 3, { 0 }, sUnk_081333A4, 60 };
+const BtlFormEntry gBtlFormCrescendo3A = { 3, { 0 }, sBtlFormCrescendo3ASteps, 60 };
 
-static const BtlFormStep sUnk_081333D4[] = {
+static const BtlFormStep sBtlFormCrescendo3BSteps[] = {
     { 30, 25, -25, 0, 0 },
     { 30, 64, 0, 0, 1 },
     { 30, 55, 25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081333F8 = { 3, { 0 }, sUnk_081333D4, 60 };
+static const BtlFormEntry sBtlFormCrescendo3B = { 3, { 0 }, sBtlFormCrescendo3BSteps, 60 };
 
-static const BtlFormStep sUnk_08133404[] = {
+static const BtlFormStep sBtlFormCrescendo3CSteps[] = {
     { 30, -25, 25, 0, 0 },
     { 30, -64, 0, 0, 1 },
     { 30, -55, -25, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_08133428 = { 3, { 0 }, sUnk_08133404, 60 };
+static const BtlFormEntry sBtlFormCrescendo3C = { 3, { 0 }, sBtlFormCrescendo3CSteps, 60 };
 
-static const BtlFormStep sUnk_08133434[] = {
+static const BtlFormStep sBtlFormCrescendo2ASteps[] = {
     { 30, 65, -12, 0, 0 },
     { 30, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813344C = { 2, { 0 }, sUnk_08133434, 60 };
+static const BtlFormEntry sBtlFormCrescendo2A = { 2, { 0 }, sBtlFormCrescendo2ASteps, 60 };
 
-static const BtlFormStep sUnk_08133458[] = {
+static const BtlFormStep sBtlFormCrescendo2BSteps[] = {
     { 30, -65, -12, 0, 0 },
     { 30, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08133470 = { 2, { 0 }, sUnk_08133458, 60 };
+static const BtlFormEntry sBtlFormCrescendo2B = { 2, { 0 }, sBtlFormCrescendo2BSteps, 60 };
 
-static const BtlFormStep sUnk_0813347C[] = {
+static const BtlFormStep sBtlFormCrescendo2CSteps[] = {
     { 30, -55, 25, 0, 0 },
     { 30, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08133494 = { 2, { 0 }, sUnk_0813347C, 60 };
+static const BtlFormEntry sBtlFormCrescendo2C = { 2, { 0 }, sBtlFormCrescendo2CSteps, 60 };
 
-static const BtlFormStep sUnk_081334A0[] = {
+static const BtlFormStep sBtlFormCrescendo1Steps[] = {
     { 30, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_081334AC = { 1, { 0 }, sUnk_081334A0, 60 };
+static const BtlFormEntry sBtlFormCrescendo1 = { 1, { 0 }, sBtlFormCrescendo1Steps, 60 };
 
-static const BtlFormStep sUnk_081334B8[] = {
+static const BtlFormStep sBtlFormCreeperPlant6Steps[] = {
     { 31, 25, -25, 0, 0 },
     { 31, 40, 0, 0, 1 },
     { 31, 25, 25, 0, 2 },
@@ -1806,9 +1806,9 @@ static const BtlFormStep sUnk_081334B8[] = {
     { 31, -25, -25, 0, 5 },
 };
 
-static const BtlFormEntry sUnk_08133500 = { 6, { 0 }, sUnk_081334B8, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant6 = { 6, { 0 }, sBtlFormCreeperPlant6Steps, 60 };
 
-static const BtlFormStep sUnk_0813350C[] = {
+static const BtlFormStep sBtlFormCreeperPlant5ASteps[] = {
     { 31, 25, -25, 0, 0 },
     { 31, 40, 0, 0, 1 },
     { 31, 55, 25, 0, 2 },
@@ -1816,9 +1816,9 @@ static const BtlFormStep sUnk_0813350C[] = {
     { 31, 85, 12, 0, 4 },
 };
 
-const BtlFormEntry gUnk_08133548 = { 5, { 0 }, sUnk_0813350C, 60 };
+const BtlFormEntry gBtlFormCreeperPlant5A = { 5, { 0 }, sBtlFormCreeperPlant5ASteps, 60 };
 
-static const BtlFormStep sUnk_08133554[] = {
+static const BtlFormStep sBtlFormCreeperPlant5BSteps[] = {
     { 31, 25, -25, 0, 0 },
     { 31, 55, 25, 0, 1 },
     { 31, 90, 0, 0, 2 },
@@ -1826,101 +1826,101 @@ static const BtlFormStep sUnk_08133554[] = {
     { 31, -85, 12, 0, 4 },
 };
 
-static const BtlFormEntry sUnk_08133590 = { 5, { 0 }, sUnk_08133554, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant5B = { 5, { 0 }, sBtlFormCreeperPlant5BSteps, 60 };
 
-static const BtlFormStep sUnk_0813359C[] = {
+static const BtlFormStep sBtlFormCreeperPlant4Steps[] = {
     { 31, 25, -25, 0, 0 },
     { 31, 55, 25, 0, 1 },
     { 31, 65, -12, 0, 2 },
     { 31, 85, 12, 0, 3 },
 };
 
-static const BtlFormEntry sUnk_081335CC = { 4, { 0 }, sUnk_0813359C, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant4 = { 4, { 0 }, sBtlFormCreeperPlant4Steps, 60 };
 
-static const BtlFormStep sUnk_081335D8[] = {
+static const BtlFormStep sBtlFormCreeperPlant3ASteps[] = {
     { 31, 40, 0, 0, 0 },
     { 31, 65, -12, 0, 1 },
     { 31, 85, 12, 0, 2 },
 };
 
-const BtlFormEntry gUnk_081335FC = { 3, { 0 }, sUnk_081335D8, 60 };
+const BtlFormEntry gBtlFormCreeperPlant3A = { 3, { 0 }, sBtlFormCreeperPlant3ASteps, 60 };
 
-static const BtlFormStep sUnk_08133608[] = {
+static const BtlFormStep sBtlFormCreeperPlant3BSteps[] = {
     { 31, -65, -12, 0, 0 },
     { 31, -85, 12, 0, 1 },
     { 31, 40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_0813362C = { 3, { 0 }, sUnk_08133608, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant3B = { 3, { 0 }, sBtlFormCreeperPlant3BSteps, 60 };
 
-static const BtlFormStep sUnk_08133638[] = {
+static const BtlFormStep sBtlFormCreeperPlant2ASteps[] = {
     { 31, 65, -12, 0, 0 },
     { 31, 85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08133650 = { 2, { 0 }, sUnk_08133638, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant2A = { 2, { 0 }, sBtlFormCreeperPlant2ASteps, 60 };
 
-static const BtlFormStep sUnk_0813365C[] = {
+static const BtlFormStep sBtlFormCreeperPlant1Steps[] = {
     { 31, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133668 = { 1, { 0 }, sUnk_0813365C, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant1 = { 1, { 0 }, sBtlFormCreeperPlant1Steps, 60 };
 
-static const BtlFormStep sUnk_08133674[] = {
+static const BtlFormStep sBtlFormCreeperPlant2BSteps[] = {
     { 31, 40, 0, 0, 0 },
     { 31, -40, 0, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_0813368C = { 2, { 0 }, sUnk_08133674, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant2B = { 2, { 0 }, sBtlFormCreeperPlant2BSteps, 60 };
 
-static const BtlFormStep sUnk_08133698[] = {
+static const BtlFormStep sBtlFormCreeperPlant2CSteps[] = {
     { 31, -65, -12, 0, 0 },
     { 31, -85, 12, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_081336B0 = { 2, { 0 }, sUnk_08133698, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant2C = { 2, { 0 }, sBtlFormCreeperPlant2CSteps, 60 };
 
-static const BtlFormStep sUnk_081336BC[] = {
+static const BtlFormStep sBtlFormCardSoldierSpade3Steps[] = {
     { 46, 65, -12, 0, 0 },
     { 46, 85, 12, 0, 1 },
     { 46, -40, 0, 0, 2 },
 };
 
-static const BtlFormEntry sUnk_081336E0 = { 3, { 0 }, sUnk_081336BC, 60 };
+static const BtlFormEntry sBtlFormCardSoldierSpade3 = { 3, { 0 }, sBtlFormCardSoldierSpade3Steps, 60 };
 
-static const BtlFormStep sUnk_081336EC[] = {
+static const BtlFormStep sBtlFormCardSoldierSpade2Steps[] = {
     { 46, -55, 25, 0, 0 },
     { 46, -25, -25, 0, 1 },
 };
 
-static const BtlFormEntry sUnk_08133704 = { 2, { 0 }, sUnk_081336EC, 60 };
+static const BtlFormEntry sBtlFormCardSoldierSpade2 = { 2, { 0 }, sBtlFormCardSoldierSpade2Steps, 60 };
 
-static const BtlFormStep sUnk_08133710[] = {
+static const BtlFormStep sBtlFormCardSoldierSpade1Steps[] = {
     { 46, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gUnk_0813371C = { 1, { 0 }, sUnk_08133710, 60 };
+const BtlFormEntry gBtlFormCardSoldierSpade1 = { 1, { 0 }, sBtlFormCardSoldierSpade1Steps, 60 };
 
-static const BtlFormStep sUnk_08133728[] = {
+static const BtlFormStep sBtlFormCardSoldierHeart3Steps[] = {
     { 47, 65, -12, 0, 0 },
     { 47, 85, 12, 0, 1 },
     { 47, 90, 0, 0, 2 },
 };
 
-const BtlFormEntry gUnk_0813374C = { 3, { 0 }, sUnk_08133728, 60 };
+const BtlFormEntry gBtlFormCardSoldierHeart3 = { 3, { 0 }, sBtlFormCardSoldierHeart3Steps, 60 };
 
-static const BtlFormStep sUnk_08133758[] = {
+static const BtlFormStep sBtlFormCardSoldierHeart2Steps[] = {
     { 47, 25, -25, 0, 0 },
     { 47, 55, 25, 0, 1 },
 };
 
-const BtlFormEntry gUnk_08133770 = { 2, { 0 }, sUnk_08133758, 60 };
+const BtlFormEntry gBtlFormCardSoldierHeart2 = { 2, { 0 }, sBtlFormCardSoldierHeart2Steps, 60 };
 
-static const BtlFormStep sUnk_0813377C[] = {
+static const BtlFormStep sBtlFormCardSoldierHeart1Steps[] = {
     { 47, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sUnk_08133788 = { 1, { 0 }, sUnk_0813377C, 60 };
+static const BtlFormEntry sBtlFormCardSoldierHeart1 = { 1, { 0 }, sBtlFormCardSoldierHeart1Steps, 60 };
 
 static const BtlFormList sBtlFormLists[144] = {
     { 14, { 0 }, &gBtlFormListEntries[0], 256, { 0 } },
@@ -2082,460 +2082,460 @@ static const BtlFormList sBtlFormLists[144] = {
 };
 
 const BtlFormEntry* gBtlFormListEntries[] = {
-    &sUnk_08130ECC,
-    &sUnk_08131238,
-    &sUnk_08131430,
-    &sUnk_08130F80,
-    &sUnk_081311FC,
-    &sUnk_08131358,
-    &sUnk_081313C4,
-    &sUnk_081311FC,
-    &sUnk_08131328,
-    &sUnk_081313E8,
-    &sUnk_08131238,
-    &sUnk_081312C8,
-    &sUnk_08130F2C,
-    &sUnk_08131448,
-    &sUnk_081336E0,
-    &sUnk_08133788,
-    &sUnk_08133704,
-    &sUnk_08133788,
-    &sUnk_081326A8,
-    &sUnk_081326A8,
-    &sUnk_08132714,
-    &sUnk_081326A8,
-    &sUnk_081326F0,
-    &sUnk_0813272C,
-    &sUnk_081326CC,
-    &sUnk_08132744,
-    &sUnk_08131E74,
-    &sUnk_08131E5C,
-    &sUnk_08131DE4,
-    &sUnk_08131F40,
-    &sUnk_08131F28,
-    &sUnk_08131EB0,
-    &sUnk_08131184,
-    &sUnk_08132FF0,
-    &sUnk_08133650,
-    &sUnk_081321C8,
-    &sUnk_08131550,
-    &sUnk_08133470,
-    &sUnk_08132FF0,
-    &sUnk_08132198,
-    &sUnk_081336B0,
-    &sUnk_0813344C,
-    &sUnk_0813137C,
-    &sUnk_08132FF0,
-    &sUnk_081314CC,
-    &sUnk_0813137C,
-    &sUnk_08132258,
-    &sUnk_08132FF0,
-    &sUnk_08133008,
-    &sUnk_0813335C,
-    &sUnk_0813368C,
-    &sUnk_08131358,
-    &sUnk_0813152C,
-    &sUnk_0813152C,
-    &sUnk_08133008,
-    &sUnk_08132FF0,
-    &sUnk_081312C8,
-    &sUnk_081314CC,
-    &sUnk_0813344C,
-    &sUnk_08133470,
-    &sUnk_081320D8,
-    &sUnk_08131100,
-    &sUnk_08132210,
-    &sUnk_08131F94,
-    &sUnk_081313A0,
-    &sUnk_081324B0,
-    &sUnk_08131430,
-    &sUnk_08132258,
-    &sUnk_08132480,
-    &sUnk_08132450,
-    &sUnk_081324D4,
-    &sUnk_081312F8,
-    &sUnk_081321C8,
-    &sUnk_081324D4,
-    &sUnk_081312F8,
-    &sUnk_08131238,
-    &sUnk_081310B8,
-    &sUnk_0813209C,
-    &sUnk_08131430,
-    &sUnk_0813140C,
-    &sUnk_081324F8,
-    &sUnk_081312C8,
-    &sUnk_081312F8,
-    &sUnk_08132414,
-    &sUnk_08132258,
-    &sUnk_081312F8,
-    &sUnk_08131430,
-    &sUnk_08132D2C,
-    &sUnk_0813140C,
-    &sUnk_08132D8C,
-    &sUnk_0813323C,
-    &sUnk_08132E04,
-    &sUnk_08132DD4,
-    &sUnk_08133428,
-    &sUnk_08132DBC,
-    &sUnk_08132DEC,
-    &sUnk_081335CC,
-    &sUnk_08132D50,
-    &sUnk_081332B4,
-    &sUnk_08133470,
-    &sUnk_08133314,
-    &sUnk_081334AC,
-    &sUnk_081313C4,
-    &sUnk_08133500,
-    &sUnk_081311FC,
-    &sUnk_081335CC,
-    &sUnk_081332D8,
-    &sUnk_08133314,
-    &sUnk_081335CC,
-    &sUnk_08133494,
-    &sUnk_08133314,
-    &sUnk_08132D2C,
-    &sUnk_08131100,
-    &sUnk_08132DBC,
-    &sUnk_08132DEC,
-    &sUnk_0813326C,
-    &sUnk_081333F8,
-    &sUnk_0813362C,
-    &sUnk_08131268,
-    &sUnk_08132FF0,
-    &sUnk_0813230C,
-    &sUnk_081316A0,
-    &sUnk_081322E8,
-    &sUnk_0813230C,
-    &sUnk_08132FF0,
-    &sUnk_08132330,
-    &sUnk_081316A0,
-    &sUnk_0813239C,
-    &sUnk_081316E8,
-    &sUnk_08131754,
-    &sUnk_0813230C,
-    &sUnk_081323D8,
-    &sUnk_0813230C,
-    &sUnk_081323D8,
-    &sUnk_08132FF0,
-    &sUnk_081323C0,
-    &sUnk_08133008,
-    &sUnk_081316C4,
-    &sUnk_08132378,
-    &sUnk_08132FF0,
-    &sUnk_081316C4,
-    &sUnk_081311FC,
-    &sUnk_081322E8,
-    &sUnk_08132FD8,
-    &sUnk_08131100,
-    &sUnk_081316C4,
-    &sUnk_08132FF0,
-    &sUnk_0813170C,
-    &sUnk_08131670,
-    &sUnk_081312F8,
-    &sUnk_08132348,
-    &sUnk_0813230C,
-    &sUnk_0813239C,
-    &sUnk_081323C0,
-    &sUnk_08131184,
-    &sUnk_08131B38,
-    &sUnk_0813194C,
-    &sUnk_081324F8,
-    &sUnk_08132798,
-    &sUnk_081332B4,
-    &sUnk_08132FF0,
-    &sUnk_0813326C,
-    &sUnk_08131838,
-    &sUnk_08131A6C,
-    &sUnk_08131298,
-    &sUnk_081324F8,
-    &sUnk_08133008,
-    &sUnk_08132774,
-    &sUnk_08131898,
-    &sUnk_08131928,
-    &sUnk_081331A0,
-    &sUnk_08132FD8,
-    &sUnk_08131A6C,
-    &sUnk_08132FF0,
-    &sUnk_08131B80,
-    &sUnk_08131148,
-    &sUnk_08131238,
-    &sUnk_081312F8,
-    &sUnk_08131430,
-    &sUnk_08131448,
-    &sUnk_08132450,
-    &sUnk_081327F8,
-    &sUnk_08132810,
-    &sUnk_081327F8,
-    &sUnk_0813137C,
-    &sUnk_081329C0,
-    &sUnk_0813140C,
-    &sUnk_081329D8,
-    &sUnk_081327F8,
-    &sUnk_0813362C,
-    &sUnk_08132A80,
-    &sUnk_08132984,
-    &sUnk_0813368C,
-    &sUnk_08132A08,
-    &sUnk_081327E0,
-    &sUnk_081311FC,
-    &sUnk_0813368C,
-    &sUnk_08132798,
-    &sUnk_08132A2C,
-    &sUnk_081329D8,
-    &sUnk_08132A68,
-    &sUnk_081329C0,
-    &sUnk_081310B8,
-    &sUnk_08132A50,
-    &sUnk_08132810,
-    &sUnk_08133590,
-    &sUnk_0813362C,
-    &sUnk_0813293C,
-    &sUnk_08132A2C,
-    &sUnk_081329A8,
-    &sUnk_081311FC,
-    &sUnk_08132A50,
-    &sUnk_0813293C,
-    &sUnk_081312F8,
-    &sUnk_0813158C,
-    &sUnk_081313A0,
-    &sUnk_081313A0,
-    &sUnk_081316C4,
-    &sUnk_08131550,
-    &sUnk_081316C4,
-    &sUnk_08132270,
-    &sUnk_081313A0,
-    &sUnk_081322A0,
-    &sUnk_08131550,
-    &sUnk_081313C4,
-    &sUnk_08132270,
-    &sUnk_081322A0,
-    &sUnk_08132270,
-    &sUnk_081322A0,
-    &sUnk_081316C4,
-    &sUnk_081313A0,
-    &sUnk_0813173C,
-    &sUnk_0813158C,
-    &sUnk_08132234,
-    &sUnk_081311FC,
-    &sUnk_081321EC,
-    &sUnk_08131CD0,
-    &sUnk_08132D50,
-    &sUnk_08132834,
-    &sUnk_081330BC,
-    &sUnk_08132888,
-    &sUnk_08132870,
-    &sUnk_08132D08,
-    &sUnk_08132DA4,
-    &sUnk_08132D8C,
-    &sUnk_08132798,
-    &sUnk_08131D3C,
-    &sUnk_08132870,
-    &sUnk_081330D4,
-    &sUnk_08132D8C,
-    &sUnk_08132810,
-    &sUnk_08132D8C,
-    &sUnk_08132810,
-    &sUnk_08132D8C,
-    &sUnk_08131C4C,
-    &sUnk_08132D8C,
-    &sUnk_08132DA4,
-    &sUnk_081330BC,
-    &sUnk_081328A0,
-    &sUnk_081328B8,
-    &sUnk_081328D0,
-    &sUnk_081328E8,
-    &sUnk_08131D0C,
-    &sUnk_081327BC,
-    &sUnk_081330BC,
-    &sUnk_08132834,
-    &sUnk_08132DA4,
-    &sUnk_08132D8C,
-    &sUnk_08132888,
-    &sUnk_08131CD0,
-    &sUnk_08132858,
-    &sUnk_081330BC,
-    &sUnk_08132888,
-    &sUnk_0813140C,
-    &sUnk_08132678,
-    &sUnk_08133080,
-    &sUnk_08132624,
-    &sUnk_081318E0,
-    &sUnk_08131B80,
-    &sUnk_08133080,
-    &sUnk_08131AF0,
-    &sUnk_0813194C,
-    &sUnk_08131358,
-    &sUnk_081324B0,
-    &sUnk_08131358,
-    &sUnk_08132414,
-    &sUnk_08131B98,
-    &sUnk_08131B98,
-    &sUnk_08133050,
-    &sUnk_08133080,
-    &sUnk_081325D0,
-    &sUnk_08131B38,
-    &sUnk_08131184,
-    &sUnk_081324D4,
-    &sUnk_08131838,
-    &sUnk_081312F8,
-    &sUnk_081324D4,
-    &sUnk_08132624,
-    &sUnk_08133080,
-    &sUnk_08132624,
-    &sUnk_08131ACC,
-    &sUnk_08131868,
-    &sUnk_08132648,
-    &sUnk_081325D0,
-    &sUnk_08133068,
-    &sUnk_08132624,
-    &sUnk_08133080,
-    &sUnk_081312F8,
-    &sUnk_08132B34,
-    &sUnk_08132C0C,
-    &sUnk_08132DA4,
-    &sUnk_08132D8C,
-    &sUnk_081311C0,
-    &sUnk_08133470,
-    &sUnk_08132BD0,
-    &sUnk_081311FC,
-    &sUnk_08132D74,
-    &sUnk_08132D8C,
-    &sUnk_08132C30,
-    &sUnk_081333F8,
-    &sUnk_08132C9C,
-    &sUnk_08132B34,
-    &sUnk_08132DA4,
-    &sUnk_08132D8C,
-    &sUnk_08132B34,
-    &sUnk_08132C54,
-    &sUnk_08132B64,
-    &sUnk_081310B8,
-    &sUnk_08132B64,
-    &sUnk_08132BD0,
-    &sUnk_08132D2C,
-    &sUnk_08133428,
-    &sUnk_08132C54,
-    &sUnk_08132B34,
-    &sUnk_08132C6C,
-    &sUnk_08131238,
-    &sUnk_08132DBC,
-    &sUnk_08132DBC,
-    &sUnk_08132DEC,
-    &sUnk_08130F80,
-    &sUnk_08133110,
-    &sUnk_081332D8,
-    &sUnk_08132E28,
-    &sUnk_08132EDC,
-    &sUnk_08132D2C,
-    &sUnk_0813320C,
-    &sUnk_08132E58,
-    &sUnk_08132E40,
-    &sUnk_081330F8,
-    &sUnk_08132EAC,
-    &sUnk_081311FC,
-    &sUnk_08132EAC,
-    &sUnk_081313A0,
-    &sUnk_08131430,
-    &sUnk_08132E28,
-    &sUnk_08132DA4,
-    &sUnk_08132D8C,
-    &sUnk_08132DA4,
-    &sUnk_08133110,
-    &sUnk_08132E58,
-    &sUnk_08133110,
-    &sUnk_08132EDC,
-    &sUnk_08132CE4,
-    &sUnk_0813326C,
-    &sUnk_08132DBC,
-    &sUnk_08132DEC,
-    &sUnk_08131100,
-    &sUnk_08133110,
-    &sUnk_08132EDC,
-    &sUnk_08133110,
-    &sUnk_081311FC,
-    &sUnk_08132EAC,
-    &sUnk_08131184,
-    &sUnk_08132D74,
-    &sUnk_081310B8,
-    &sUnk_08132F60,
-    &sUnk_08132F78,
-    &sUnk_08133110,
-    &sUnk_081315A4,
-    &sUnk_081317B4,
-    &sUnk_081319B8,
-    &sUnk_08131BE0,
-    &sUnk_08132EAC,
-    &sUnk_08132D08,
-    &sUnk_08132DBC,
-    &sUnk_08132DEC,
-    &sUnk_08132E04,
-    &sUnk_08132D74,
-    &sUnk_08132E28,
-    &sUnk_081330F8,
-    &sUnk_08131838,
-    &sUnk_08131550,
-    &sUnk_081316C4,
-    &sUnk_08131970,
-    &sUnk_08131B5C,
+    &sBtlFormShadow8,
+    &sBtlFormShadow4D,
+    &sBtlFormShadow2F,
+    &sBtlFormShadow6A,
+    &sBtlFormShadow4C,
+    &sBtlFormShadow3F,
+    &sBtlFormShadow2C,
+    &sBtlFormShadow4C,
+    &sBtlFormShadow3E,
+    &sBtlFormShadow2D,
+    &sBtlFormShadow4D,
+    &sBtlFormShadow3C,
+    &sBtlFormShadow7,
+    &sBtlFormShadow1,
+    &sBtlFormCardSoldierSpade3,
+    &sBtlFormCardSoldierHeart1,
+    &sBtlFormCardSoldierSpade2,
+    &sBtlFormCardSoldierHeart1,
+    &sBtlFormBarrelSpider3,
+    &sBtlFormBarrelSpider3,
+    &sBtlFormBarrelSpider2C,
+    &sBtlFormBarrelSpider3,
+    &sBtlFormBarrelSpider2B,
+    &sBtlFormBarrelSpider1A,
+    &sBtlFormBarrelSpider2A,
+    &sBtlFormBarrelSpider1B,
+    &sBtlFormWhiteMushroom1,
+    &sBtlFormWhiteMushroom2B,
+    &sBtlFormWhiteMushroom4,
+    &sBtlFormBlackFungus1,
+    &sBtlFormBlackFungus2B,
+    &sBtlFormBlackFungus4,
+    &sBtlFormShadow4A,
+    &sBtlFormLargeBody1A,
+    &sBtlFormCreeperPlant2A,
+    &sBtlFormSoldier3E,
+    &sBtlFormRedNocturne2A,
+    &sBtlFormCrescendo2B,
+    &sBtlFormLargeBody1A,
+    &sBtlFormSoldier3D,
+    &sBtlFormCreeperPlant2C,
+    &sBtlFormCrescendo2A,
+    &sBtlFormShadow2A,
+    &sBtlFormLargeBody1A,
+    &sBtlFormRedNocturne4,
+    &sBtlFormShadow2A,
+    &sBtlFormSoldier2D,
+    &sBtlFormLargeBody1A,
+    &sBtlFormLargeBody1B,
+    &sBtlFormCrescendo5,
+    &sBtlFormCreeperPlant2B,
+    &sBtlFormShadow3F,
+    &sBtlFormRedNocturne3B,
+    &sBtlFormRedNocturne3B,
+    &sBtlFormLargeBody1B,
+    &sBtlFormLargeBody1A,
+    &sBtlFormShadow3C,
+    &sBtlFormRedNocturne4,
+    &sBtlFormCrescendo2A,
+    &sBtlFormCrescendo2B,
+    &sBtlFormSoldier4C,
+    &sBtlFormShadow5C,
+    &sBtlFormSoldier2B,
+    &sBtlFormSoldier6,
+    &sBtlFormShadow2B,
+    &sBtlFormAirSoldier3B,
+    &sBtlFormShadow2F,
+    &sBtlFormSoldier2D,
+    &sBtlFormAirSoldier3A,
+    &sBtlFormAirSoldier4B,
+    &sBtlFormAirSoldier2A,
+    &sBtlFormShadow3D,
+    &sBtlFormSoldier3E,
+    &sBtlFormAirSoldier2A,
+    &sBtlFormShadow3D,
+    &sBtlFormShadow4D,
+    &sBtlFormShadow5B,
+    &sBtlFormSoldier4B,
+    &sBtlFormShadow2F,
+    &sBtlFormShadow2E,
+    &sBtlFormAirSoldier2B,
+    &sBtlFormShadow3C,
+    &sBtlFormShadow3D,
+    &sBtlFormAirSoldier4A,
+    &sBtlFormSoldier2D,
+    &sBtlFormShadow3D,
+    &sBtlFormShadow2F,
+    &sBtlFormDarkball2D,
+    &sBtlFormShadow2E,
+    &sBtlFormDarkball1A,
+    &sBtlFormTornadoStep3B,
+    &sBtlFormDarkball1F,
+    &sBtlFormDarkball1D,
+    &sBtlFormCrescendo3C,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1E,
+    &sBtlFormCreeperPlant4,
+    &sBtlFormDarkball2E,
+    &sBtlFormTornadoStep2B,
+    &sBtlFormCrescendo2B,
+    &sBtlFormTornadoStep1,
+    &sBtlFormCrescendo1,
+    &sBtlFormShadow2C,
+    &sBtlFormCreeperPlant6,
+    &sBtlFormShadow4C,
+    &sBtlFormCreeperPlant4,
+    &sBtlFormTornadoStep2C,
+    &sBtlFormTornadoStep1,
+    &sBtlFormCreeperPlant4,
+    &sBtlFormCrescendo2C,
+    &sBtlFormTornadoStep1,
+    &sBtlFormDarkball2D,
+    &sBtlFormShadow5C,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1E,
+    &sBtlFormTornadoStep3C,
+    &sBtlFormCrescendo3B,
+    &sBtlFormCreeperPlant3B,
+    &sBtlFormShadow3A,
+    &sBtlFormLargeBody1A,
+    &sBtlFormPowerwild2A,
+    &sBtlFormBlueRhapsody3,
+    &sBtlFormPowerwild3,
+    &sBtlFormPowerwild2A,
+    &sBtlFormLargeBody1A,
+    &sBtlFormPowerwild2B,
+    &sBtlFormBlueRhapsody3,
+    &sBtlFormBouncywild2A,
+    &sBtlFormBlueRhapsody2B,
+    &sBtlFormBlueRhapsody1C,
+    &sBtlFormPowerwild2A,
+    &sBtlFormBouncywild1,
+    &sBtlFormPowerwild2A,
+    &sBtlFormBouncywild1,
+    &sBtlFormLargeBody1A,
+    &sBtlFormBouncywild2B,
+    &sBtlFormLargeBody1B,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormBouncywild3,
+    &sBtlFormLargeBody1A,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormShadow4C,
+    &sBtlFormPowerwild3,
+    &sBtlFormLargeBody2B,
+    &sBtlFormShadow5C,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormLargeBody1A,
+    &sBtlFormBlueRhapsody2C,
+    &sBtlFormBlueRhapsody4,
+    &sBtlFormShadow3D,
+    &sBtlFormPowerwild1,
+    &sBtlFormPowerwild2A,
+    &sBtlFormBouncywild2A,
+    &sBtlFormBouncywild2B,
+    &sBtlFormShadow4A,
+    &sBtlFormGreenRequiem2C,
+    &sBtlFormYellowOpera2E,
+    &sBtlFormAirSoldier2B,
+    &sBtlFormSearchGhost2A,
+    &sBtlFormTornadoStep2B,
+    &sBtlFormLargeBody1A,
+    &sBtlFormTornadoStep3C,
+    &sBtlFormYellowOpera4,
+    &sBtlFormGreenRequiem4,
+    &sBtlFormShadow3B,
+    &sBtlFormAirSoldier2B,
+    &sBtlFormLargeBody1B,
+    &sBtlFormSearchGhost3,
+    &sBtlFormYellowOpera3B,
+    &sBtlFormYellowOpera2D,
+    &sBtlFormTornadoStep5B,
+    &sBtlFormLargeBody2B,
+    &sBtlFormGreenRequiem4,
+    &sBtlFormLargeBody1A,
+    &sBtlFormGreenRequiem2E,
+    &sBtlFormShadow5D,
+    &sBtlFormShadow4D,
+    &sBtlFormShadow3D,
+    &sBtlFormShadow2F,
+    &sBtlFormShadow1,
+    &sBtlFormAirSoldier4B,
+    &sBtlFormSearchGhost1A,
+    &sBtlFormSearchGhost1B,
+    &sBtlFormSearchGhost1A,
+    &sBtlFormShadow2A,
+    &sBtlFormWightKnight1A,
+    &sBtlFormShadow2E,
+    &sBtlFormWightKnight1B,
+    &sBtlFormSearchGhost1A,
+    &sBtlFormCreeperPlant3B,
+    &sBtlFormGargoyle1B,
+    &sBtlFormWightKnight2C,
+    &sBtlFormCreeperPlant2B,
+    &sBtlFormGargoyle3,
+    &sBtlFormSearchGhost2C,
+    &sBtlFormShadow4C,
+    &sBtlFormCreeperPlant2B,
+    &sBtlFormSearchGhost2A,
+    &sBtlFormGargoyle2A,
+    &sBtlFormWightKnight1B,
+    &sBtlFormGargoyle1A,
+    &sBtlFormWightKnight1A,
+    &sBtlFormShadow5B,
+    &sBtlFormGargoyle2B,
+    &sBtlFormSearchGhost1B,
+    &sBtlFormCreeperPlant5B,
+    &sBtlFormCreeperPlant3B,
+    &sBtlFormWightKnight2A,
+    &sBtlFormGargoyle2A,
+    &sBtlFormWightKnight2D,
+    &sBtlFormShadow4C,
+    &sBtlFormGargoyle2B,
+    &sBtlFormWightKnight2A,
+    &sBtlFormShadow3D,
+    &sBtlFormRedNocturne1A,
+    &sBtlFormShadow2B,
+    &sBtlFormShadow2B,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormRedNocturne2A,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormSoldier1A,
+    &sBtlFormShadow2B,
+    &sBtlFormSoldier1C,
+    &sBtlFormRedNocturne2A,
+    &sBtlFormShadow2C,
+    &sBtlFormSoldier1A,
+    &sBtlFormSoldier1C,
+    &sBtlFormSoldier1A,
+    &sBtlFormSoldier1C,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormShadow2B,
+    &sBtlFormBlueRhapsody1B,
+    &sBtlFormRedNocturne1A,
+    &sBtlFormSoldier2C,
+    &sBtlFormShadow4C,
+    &sBtlFormSoldier2A,
+    &sBtlFormSeaNeon4A,
+    &sBtlFormDarkball2E,
+    &sBtlFormScrewdiver2A,
+    &sBtlFormAquatank1A,
+    &sBtlFormScrewdiver1B,
+    &sBtlFormScrewdiver1A,
+    &sBtlFormDarkball2C,
+    &sBtlFormDarkball1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormSearchGhost2A,
+    &sBtlFormSeaNeon3A,
+    &sBtlFormScrewdiver1A,
+    &sBtlFormAquatank1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormSearchGhost1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormSearchGhost1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormSeaNeon6,
+    &sBtlFormDarkball1A,
+    &sBtlFormDarkball1B,
+    &sBtlFormAquatank1A,
+    &sBtlFormScrewdiver1C,
+    &sBtlFormScrewdiver1D,
+    &sBtlFormScrewdiver1E,
+    &sBtlFormScrewdiver1F,
+    &sBtlFormSeaNeon4B,
+    &sBtlFormSearchGhost2B,
+    &sBtlFormAquatank1A,
+    &sBtlFormScrewdiver2A,
+    &sBtlFormDarkball1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormScrewdiver1B,
+    &sBtlFormSeaNeon4A,
+    &sBtlFormScrewdiver2B,
+    &sBtlFormAquatank1A,
+    &sBtlFormScrewdiver1B,
+    &sBtlFormShadow2E,
+    &sBtlFormBandit1B,
+    &sBtlFormFatBandit1B,
+    &sBtlFormBandit2A,
+    &sBtlFormYellowOpera2B,
+    &sBtlFormGreenRequiem2E,
+    &sBtlFormFatBandit1B,
+    &sBtlFormGreenRequiem2A,
+    &sBtlFormYellowOpera2E,
+    &sBtlFormShadow3F,
+    &sBtlFormAirSoldier3B,
+    &sBtlFormShadow3F,
+    &sBtlFormAirSoldier4A,
+    &sBtlFormGreenRequiem1A,
+    &sBtlFormGreenRequiem1A,
+    &sBtlFormFatBandit2B,
+    &sBtlFormFatBandit1B,
+    &sBtlFormBandit4B,
+    &sBtlFormGreenRequiem2C,
+    &sBtlFormShadow4A,
+    &sBtlFormAirSoldier2A,
+    &sBtlFormYellowOpera4,
+    &sBtlFormShadow3D,
+    &sBtlFormAirSoldier2A,
+    &sBtlFormBandit2A,
+    &sBtlFormFatBandit1B,
+    &sBtlFormBandit2A,
+    &sBtlFormGreenRequiem3B,
+    &sBtlFormYellowOpera3A,
+    &sBtlFormBandit2B,
+    &sBtlFormBandit4B,
+    &sBtlFormFatBandit1A,
+    &sBtlFormBandit2A,
+    &sBtlFormFatBandit1B,
+    &sBtlFormShadow3D,
+    &sBtlFormPirate3A,
+    &sBtlFormAirPirate2A,
+    &sBtlFormDarkball1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormShadow4B,
+    &sBtlFormCrescendo2B,
+    &sBtlFormPirate2C,
+    &sBtlFormShadow4C,
+    &sBtlFormDarkball2F,
+    &sBtlFormDarkball1A,
+    &sBtlFormAirPirate2B,
+    &sBtlFormCrescendo3B,
+    &sBtlFormAirPirate1C,
+    &sBtlFormPirate3A,
+    &sBtlFormDarkball1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormPirate3A,
+    &sBtlFormAirPirate2C,
+    &sBtlFormPirate3B,
+    &sBtlFormShadow5B,
+    &sBtlFormPirate3B,
+    &sBtlFormPirate2C,
+    &sBtlFormDarkball2D,
+    &sBtlFormCrescendo3C,
+    &sBtlFormAirPirate2C,
+    &sBtlFormPirate3A,
+    &sBtlFormAirPirate1A,
+    &sBtlFormShadow4D,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1E,
+    &sBtlFormShadow6A,
+    &sBtlFormDefender1,
+    &sBtlFormTornadoStep2C,
+    &sBtlFormWyvern2,
+    &sBtlFormWizard1B,
+    &sBtlFormDarkball2D,
+    &sBtlFormTornadoStep3A,
+    &sBtlFormWyvern1B,
+    &sBtlFormWyvern1A,
+    &sBtlFormDefender2,
+    &sBtlFormWizard2,
+    &sBtlFormShadow4C,
+    &sBtlFormWizard2,
+    &sBtlFormShadow2B,
+    &sBtlFormShadow2F,
+    &sBtlFormWyvern2,
+    &sBtlFormDarkball1B,
+    &sBtlFormDarkball1A,
+    &sBtlFormDarkball1B,
+    &sBtlFormDefender1,
+    &sBtlFormWyvern1B,
+    &sBtlFormDefender1,
+    &sBtlFormWizard1B,
+    &sBtlFormDarkball2B,
+    &sBtlFormTornadoStep3C,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1E,
+    &sBtlFormShadow5C,
+    &sBtlFormDefender1,
+    &sBtlFormWizard1B,
+    &sBtlFormDefender1,
+    &sBtlFormShadow4C,
+    &sBtlFormWizard2,
+    &sBtlFormShadow4A,
+    &sBtlFormDarkball2F,
+    &sBtlFormShadow5B,
+    &sBtlFormNeoshadow2,
+    &sBtlFormNeoshadow1A,
+    &sBtlFormDefender1,
+    &sBtlFormRedNocturne1B,
+    &sBtlFormBlueRhapsody1G,
+    &sBtlFormYellowOpera1C,
+    &sBtlFormGreenRequiem1D,
+    &sBtlFormWizard2,
+    &sBtlFormDarkball2C,
+    &sBtlFormDarkball1C,
+    &sBtlFormDarkball1E,
+    &sBtlFormDarkball1F,
+    &sBtlFormDarkball2F,
+    &sBtlFormWyvern2,
+    &sBtlFormDefender2,
+    &sBtlFormYellowOpera4,
+    &sBtlFormRedNocturne2A,
+    &sBtlFormBlueRhapsody2A,
+    &sBtlFormYellowOpera2F,
+    &sBtlFormGreenRequiem2D,
 #ifndef VERSION_EU
-    &sUnk_08132EC4,
+    &sBtlFormWizard1A,
 #endif
-    &sUnk_08131AF0,
-    &sUnk_081318E0,
-    &sUnk_0813170C,
-    &sUnk_08131574,
-    &sUnk_08132E28,
-    &sUnk_08132F78,
-    &sUnk_08132F90,
-    &sUnk_08133110,
-    &sUnk_081311FC,
-    &sUnk_08132EAC,
-    &sUnk_08132F90,
-    &sUnk_08132F78,
-    &sUnk_08133110,
-    &sUnk_081315A4,
-    &sUnk_081317B4,
-    &sUnk_081319B8,
-    &sUnk_08131BE0,
+    &sBtlFormGreenRequiem2A,
+    &sBtlFormYellowOpera2B,
+    &sBtlFormBlueRhapsody2C,
+    &sBtlFormRedNocturne2B,
+    &sBtlFormWyvern2,
+    &sBtlFormNeoshadow1A,
+    &sBtlFormNeoshadow1B,
+    &sBtlFormDefender1,
+    &sBtlFormShadow4C,
+    &sBtlFormWizard2,
+    &sBtlFormNeoshadow1B,
+    &sBtlFormNeoshadow1A,
+    &sBtlFormDefender1,
+    &sBtlFormRedNocturne1B,
+    &sBtlFormBlueRhapsody1G,
+    &sBtlFormYellowOpera1C,
+    &sBtlFormGreenRequiem1D,
 #ifdef VERSION_EU
-    &sUnk_08132F60,
-    &sUnk_08132EC4,
-    &sUnk_08132E58,
+    &sBtlFormNeoshadow2,
+    &sBtlFormWizard1A,
+    &sBtlFormWyvern1B,
 #else
-    &sUnk_08132EC4,
-    &sUnk_08132E58,
-    &sUnk_08132F60,
+    &sBtlFormWizard1A,
+    &sBtlFormWyvern1B,
+    &sBtlFormNeoshadow2,
 #endif
-    &sUnk_08132F3C,
-    &sUnk_08132F60,
-    &sUnk_081311FC,
-    &sUnk_08131430,
-    &sUnk_08132F78,
-    &sUnk_08131268,
-    &sUnk_08132D8C,
-    &sUnk_08132DA4,
-    &sUnk_08133110,
-    &sUnk_081311FC,
-    &sUnk_08132E28,
-    &sUnk_0813320C,
-    &sUnk_08132E40,
-    &sUnk_08132EC4,
-    &sUnk_08132EAC,
-    &sUnk_081313C4,
-    &sUnk_08132EAC,
-    &sUnk_08133110,
-    &sUnk_08132EDC,
-    &sUnk_08132CE4,
-    &sUnk_08131100,
-    &sUnk_08132270,
-    &sUnk_08133314,
-    &sUnk_0813158C,
-    &sUnk_08132270,
-    &sUnk_081334AC,
-    &sUnk_0813158C,
-    &sUnk_08132270,
-    &sUnk_08133668,
-    &sUnk_0813158C,
+    &sBtlFormNeoshadow3B,
+    &sBtlFormNeoshadow2,
+    &sBtlFormShadow4C,
+    &sBtlFormShadow2F,
+    &sBtlFormNeoshadow1A,
+    &sBtlFormShadow3A,
+    &sBtlFormDarkball1A,
+    &sBtlFormDarkball1B,
+    &sBtlFormDefender1,
+    &sBtlFormShadow4C,
+    &sBtlFormWyvern2,
+    &sBtlFormTornadoStep3A,
+    &sBtlFormWyvern1A,
+    &sBtlFormWizard1A,
+    &sBtlFormWizard2,
+    &sBtlFormShadow2C,
+    &sBtlFormWizard2,
+    &sBtlFormDefender1,
+    &sBtlFormWizard1B,
+    &sBtlFormDarkball2B,
+    &sBtlFormShadow5C,
+    &sBtlFormSoldier1A,
+    &sBtlFormTornadoStep1,
+    &sBtlFormRedNocturne1A,
+    &sBtlFormSoldier1A,
+    &sBtlFormCrescendo1,
+    &sBtlFormRedNocturne1A,
+    &sBtlFormSoldier1A,
+    &sBtlFormCreeperPlant1,
+    &sBtlFormRedNocturne1A,
 };
 
 const BtlFormList* gBtlFormListByBattleId[147] = {

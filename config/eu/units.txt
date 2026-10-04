@@ -200,6 +200,7 @@ battle_background_maps_2.s
 sprites_language_select_maps.s
 lockon.c
 debug_font_tiles.s
+debug_text.c
 card_catalog.c
 mode_deck.c
 mode_continue.c

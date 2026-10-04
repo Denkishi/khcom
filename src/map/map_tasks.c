@@ -13,7 +13,6 @@
 #include "engine_math.h"
 #include "map_runtime.h"
 #include "fade.h"
-#include "mode_test_api.h"
 #include "songs.h"
 #include <stdlib.h>
 #include "world_types.h"
@@ -46,6 +45,7 @@
 #include "text.h"
 #include "types.h"
 #include <stddef.h>
+#include "lockon.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },

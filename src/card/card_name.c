@@ -1,6 +1,5 @@
 #include "msg_localized_data.h"
 #include "system_state.h"
-#include "mode_test_api.h"
 #include "text.h"
 #include "monsgage.h"
 #include "fade.h"
@@ -32,6 +31,7 @@ void PremireEffectMoveToCenter(PremiumCardEffectWork* work);
 void PremireEffectMoveFalling(PremiumCardEffectWork* work);
 
 #include "premium_message.inc"
+#include "lockon.h"
 void CardName_0(CardNameWork* work) {
     PremireChanceCardWork* q = gCardListWork->selectedCard;
     ObjPalette* pal;

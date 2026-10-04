@@ -1,12 +1,12 @@
 #include "mode_chkbtl.h"
 #include "mode_backupstat.h"
 #include "gba/keys.h"
-#include "mode_test_api.h"
 #include "display.h"
 #include "key.h"
 #include "mode.h"
 #include "save_api.h"
 #include "types.h"
+#include "debug_text.h"
 
 static const char* sBackupStatStateNames[3] = {
     "\x82\xC8\x82\xB5\x81\x40",

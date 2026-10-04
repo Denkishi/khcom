@@ -2,7 +2,6 @@
 #include "system_state.h"
 #include "map_api.h"
 #include "msg_api.h"
-#include "mode_test_api.h"
 #include "mode_debug.h"
 #include "m4a_song.h"
 #include "game_state.h"
@@ -39,6 +38,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "lockon.h"
 
 u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
 u16 PickPrizeMapCardForWorld(u16 a, s32 b);

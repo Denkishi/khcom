@@ -2,7 +2,6 @@
 #include "registration_data.h"
 #include "system_state.h"
 #include "card_battle.h"
-#include "mode_test_api.h"
 #include "player_progression.h"
 #include "m4a_song.h"
 #include "monsgage.h"
@@ -42,6 +41,7 @@
 #include "gba/macro.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
+#include "lockon.h"
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
 

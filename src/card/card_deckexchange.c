@@ -1,6 +1,5 @@
 #include "macros.h"
 #include "registration_data.h"
-#include "mode_test_api.h"
 #include "m4a_song.h"
 #include "game_state.h"
 #include "text.h"

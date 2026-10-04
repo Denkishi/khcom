@@ -21,7 +21,6 @@
 #include "sprites_smn.h"
 #include "sprites_sora.h"
 #include "gba/keys.h"
-#include "mode_test_api.h"
 #include "malloc.h"
 #include <stdlib.h>
 #include "anim.h"
@@ -36,6 +35,7 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "debug_text.h"
 
 static ChkObjWork* sChkObjWork;
 

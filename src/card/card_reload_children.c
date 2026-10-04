@@ -1,5 +1,4 @@
 #include "registration_data.h"
-#include "mode_test_api.h"
 #include "m4a_song.h"
 #include "game_state.h"
 #include "monsgage.h"
@@ -27,6 +26,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "lockon.h"
 
 s32 UpdateReloadChildAbsorb(ReloadChildWork* work);
 u8 UpdateReloadSlideOut(ReloadWork* work);

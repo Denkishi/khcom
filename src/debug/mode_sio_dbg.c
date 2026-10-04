@@ -8,11 +8,11 @@
 #include "key.h"
 #include "gba/keys.h"
 #include "mode.h"
-#include "mode_test_api.h"
 #include "card_api.h"
 #include "chara_types.h"
 #include "player_progression_types.h"
 #include "types.h"
+#include "debug_text.h"
 
 #ifdef VERSION_EU
 u16 gUnk_0203C3C4 EWRAM_COMMON(4);

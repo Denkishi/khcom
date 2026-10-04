@@ -54,6 +54,11 @@ const u8 gBlackStarText[3] = "\x81\x9A";
 
 const u8 gWhiteStarText[3] = "\x81\x99";
 
+const u8* gUnk_09EE26F4 = gWhiteStarText;
+const u8* gUnk_09EE26F8 = gBlackStarText;
+const u8* gUnk_09EE26FC = gWhiteCircleText;
+const u8* gUnk_09EE2700 = gBlackCircleText;
+
 const CardDef gCardDefs[950] = {
     {
 #if defined(VERSION_US)
@@ -13372,3 +13377,41 @@ void** gUnkEu_09F5D678[5] = { gUnkEu_09F75D1C, gUnkEu_09F75D5C, gUnkEu_09F75E1C,
 void* gUnkEu_09F5D68C[5] = { gUnk_09089C16, gUnkEu_0915B004, gUnkEu_0915DAD4, gUnkEu_0915CC96, gUnkEu_0915BE46 };
 void** gUnkEu_09F5D6A0[5] = { gUnkEu_09F75E5C, gUnkEu_09F75E78, gUnkEu_09F75ECC, gUnkEu_09F75EB0, gUnkEu_09F75E94 };
 #endif
+
+u16 GetCardCpCost(u16 a) {
+    s32 n;
+    u16 v;
+    CardStat* stat;
+
+    if (a & 0x8000) {
+        return gCardDefs[a & 0x0FFF].cpCost;
+    }
+
+    if ((a & 0x0FFF) <= 0x1C1) {
+        stat = (CardStat*)&gCardDefs[a & 0x0FFF].kind;
+        n = stat->value;
+
+        if (n == 0) {
+            n = 10;
+        }
+
+        n--;
+        v = stat->cpCost;
+        v += (v / 10) * n;
+        return v;
+    }
+
+    return gCardDefs[a & 0x0FFF].cpCost;
+}
+
+u16 GetCardMooglePointValue(u16 a) {
+    u16 v;
+
+    if ((a & 0x8000) == 0) {
+        v = GetCardCpCost(a) / 5 * 2;
+    } else {
+        v = GetCardCpCost(a & 0x0FFF) / 5 * 2 + 10;
+    }
+
+    return v;
+}

@@ -2,7 +2,6 @@
 #include "registration_data.h"
 #include "map_runtime.h"
 #include "map_api.h"
-#include "mode_test_api.h"
 #include "card_api.h"
 #include "save_api.h"
 #include "bos4_api.h"
@@ -19,6 +18,7 @@
 #include "player_progression_types.h"
 #include "save_types.h"
 #include "types.h"
+#include "debug_text.h"
 
 static const char sDebugMenuTextUs_0984B5F8[] = "\202s\202t\202s\202n\202q\202h\202`\202k";
 

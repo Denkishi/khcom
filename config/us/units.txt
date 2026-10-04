@@ -191,6 +191,7 @@ sprites_btl_palettes.s
 sprites_emy_palettes.s
 jiminy_journal_palettes.s
 lockon.c
+debug_text.c
 debug_font_tiles.s
 card_catalog.c
 mode_deck.c

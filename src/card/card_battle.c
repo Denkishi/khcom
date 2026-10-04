@@ -24,12 +24,12 @@
 #include "card_label_data.h"
 #include "card_types.h"
 #include "game_state.h"
-#include "mode_test_api.h"
 #include "obj.h"
 #include "taskpool.h"
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "lockon.h"
 
 s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task);
 

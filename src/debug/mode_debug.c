@@ -5,7 +5,6 @@
 #include "game_state.h"
 #include "sprites_mode_debug.h"
 #include "gba/keys.h"
-#include "mode_test_api.h"
 #include "malloc.h"
 #include "fade.h"
 #include "songs.h"
@@ -24,6 +23,7 @@
 #include "save_api.h"
 #include <stddef.h>
 #include "types.h"
+#include "debug_text.h"
 
 static DebugWork* sDebugWork;
 

@@ -27,7 +27,6 @@
 #include "malloc.h"
 #include "fade.h"
 #include "card_deck.h"
-#include "mode_test_api.h"
 #include "songs.h"
 #include "common_text.h"
 #include "anim.h"

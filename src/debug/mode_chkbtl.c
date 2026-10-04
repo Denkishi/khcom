@@ -2,7 +2,6 @@
 #include "mode_chkbtl.h"
 #include "gba/keys.h"
 #include "world_types.h"
-#include "mode_test_api.h"
 #include "fade.h"
 #include "battle_debug_types.h"
 #include "battle_work.h"
@@ -20,6 +19,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "debug_text.h"
 
 static ChkBtlWork sChkBtlWork;
 

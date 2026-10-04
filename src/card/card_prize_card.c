@@ -1,6 +1,5 @@
 #include "registration_data.h"
 #include "map_api.h"
-#include "mode_test_api.h"
 #include "m4a_song.h"
 #include "game_state.h"
 #include "monsgage.h"
@@ -24,6 +23,7 @@
 #include "map_runtime.h"
 #include <stddef.h>
 #include "types.h"
+#include "lockon.h"
 
 u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a);
 u8 UpdateFieldPrizeCardShrink(PrizeCardWork* work);

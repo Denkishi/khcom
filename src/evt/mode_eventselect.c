@@ -13,7 +13,6 @@
 #include "sprites_level_up.h"
 #include "sprites_smn.h"
 #include "obj_resource_types.h"
-#include "mode_test_api.h"
 #include "malloc.h"
 #include "anim.h"
 #include "card.h"
@@ -32,6 +31,7 @@
 #include "text.h"
 #include "types.h"
 #include <stddef.h>
+#include "debug_text.h"
 
 static const s16 sSoraEventIds[147] = {
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,

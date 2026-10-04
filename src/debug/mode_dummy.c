@@ -5,7 +5,6 @@
 #include "mode_dummy.h"
 #include "sprites_mode_debug.h"
 #include "gba/keys.h"
-#include "mode_test_api.h"
 #include "fade.h"
 #include "game_state.h"
 #include "key.h"
@@ -14,6 +13,7 @@
 #include "registration_data.h"
 #include "system_state.h"
 #include "types.h"
+#include "debug_text.h"
 
 static u16 sDummyEntryIndex;
 

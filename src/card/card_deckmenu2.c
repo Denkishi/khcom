@@ -3,7 +3,6 @@
 #include "msg_localized_data.h"
 #include "registration_data.h"
 #include "system_state.h"
-#include "mode_test_api.h"
 #include "player_progression.h"
 #include "m4a_song.h"
 #include "game_state.h"

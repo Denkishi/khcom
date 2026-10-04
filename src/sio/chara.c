@@ -12,7 +12,6 @@
 #include "card_deck.h"
 #include "malloc.h"
 #include "fade.h"
-#include "mode_test_api.h"
 #include "songs.h"
 #include "mode_sio_api.h"
 #include "battle_actor.h"
@@ -32,6 +31,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "lockon.h"
 
 u32 gDebugLogC[100] EWRAM_COMMON(16);
 u32 gVBlankTimerElapsed EWRAM_COMMON(4);

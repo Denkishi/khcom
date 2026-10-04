@@ -1,27 +1,15 @@
 #ifdef VERSION_US
 #include "event_084_text.inc"
-static const MessageScriptEntry sEvent084Script[3] = {
-    { 6, 1, 2, 1, { 0, 0, 0 }, gEvent084Text00, 0, 100 },
-    { 0, 7, 1, 1, { 0, 0, 0 }, gEvent084Text01, 0, 180 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, gEvent084Text02, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
-};
 #endif
+
+static const MessageScriptEntry sEvent084Script[3] = {
+    { 6, 1, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent084Text00), 0, 100 },
+    { 0, 7, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent084Text01), 0, 180 },
+    { 2, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent084Text02), MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent084Script[3] = {
-    { 6, 1, 2, 3, { 0, 0, 0 }, gEvent084Text00, 0, 100 },
-    { 0, 7, 1, 3, { 0, 0, 0 }, gEvent084Text01, 0, 180 },
-    { 2, 0, 3, 3, { 0, 0, 0 }, gEvent083Text04, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
-};
-
 #include "event_084_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent084Script[3] = {
-    { 6, 1, 2, 1, { 0, 0, 0 }, &gEvent084Text00, 0, 100 },
-    { 0, 7, 1, 1, { 0, 0, 0 }, &gEvent084Text01, 0, 180 },
-    { 2, 0, 3, 1, { 0, 0, 0 }, &gEvent084Text02, MSG_SCRIPT_FLAG_YES_NO | MSG_SCRIPT_FLAG_END, 200 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent084Camera[2] = {

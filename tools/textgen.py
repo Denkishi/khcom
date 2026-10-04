@@ -235,7 +235,8 @@ class Pool:
         self.listed = doc.get("entries", [])
         self.formats = doc.get("formats", {})
         self.fragment_specs = doc.get("fragments", {})
-        for version in list(self.objects) + list(self.fragment_specs):
+        self.alias_specs = doc.get("aliases", {})
+        for version in list(self.objects) + list(self.fragment_specs) + list(self.alias_specs):
             if version not in VERSIONS:
                 raise TextError(f"{self.name}: unknown version {version}")
 
@@ -277,6 +278,20 @@ class Pool:
 
     def entries(self, version):
         return [entry for unit in self.units(version) for entry in unit.entries]
+
+    def aliases(self, version):
+        aliases = self.alias_specs.get(version) or {}
+        if not isinstance(aliases, dict):
+            raise TextError(f"{self.name}: {version} aliases must map each alias to an entry")
+        names = {entry["name"] for entry in self.entries(version)} if aliases else set()
+        for alias, target in aliases.items():
+            if not isinstance(alias, str) or not alias.isascii() or not alias.isidentifier():
+                raise TextError(f"{self.name}: alias {alias!r} is not a symbol name")
+            if alias in names:
+                raise TextError(f"{self.name}: {version} alias {alias} is also an entry")
+            if target not in names:
+                raise TextError(f"{self.name}: {version} alias {alias} names {target}, which is not a {version} entry")
+        return aliases
 
     def texts(self, version):
         return [entry for entry in self.entries(version) if "record" not in entry]
@@ -568,6 +583,10 @@ def emit_header(pool, version, path):
     if declared:
         lines.append("")
         lines += [f"extern {ctype} {name}[];" for ctype, name in declared]
+    aliases = pool.aliases(version)
+    if aliases:
+        lines.append("")
+        lines += [f"#define {alias} {target}" for alias, target in aliases.items()]
     lines += ["", "#endif"]
     write_if_changed(path, "\n".join(lines) + "\n")
 

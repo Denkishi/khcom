@@ -1,48 +1,22 @@
 #ifdef VERSION_US
 #include "event_016_text.inc"
-static const MessageScriptEntry sEvent016Script[10] = {
-    { 1, 2, 2, 1, { 0, 0, 0 }, gEvent016Text00, 0, 260 },
-    { 0, 0, 1, 1, { 0, 0, 0 }, gEvent016Text01, 0, 300 },
-    { 1, 0, 2, 1, { 0, 0, 0 }, gEvent016Text02, 0, 320 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent016Text03, 0, 340 },
-    { 1, 0, 2, 1, { 0, 0, 0 }, gEvent016Text04, 0, 360 },
-    { 2, 1, 1, 1, { 0, 0, 0 }, gEvent016Text05, 0, 380 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, gEvent016Text06, 0, 400 },
-    { 0, 1, 1, 1, { 0, 0, 0 }, gEvent016Text07, 0, 420 },
-    { 0, 4, 4, 1, { 0, 0, 0 }, gEvent016Text08, 0, 432 },
-    { 1, 2, 2, 1, { 0, 0, 0 }, gEvent016Text09, MSG_SCRIPT_FLAG_END, 460 },
-};
 #endif
+
+static const MessageScriptEntry sEvent016Script[10] = {
+    { 1, 2, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text00), 0, 260 },
+    { 0, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text01), 0, 300 },
+    { 1, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text02), 0, 320 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text03), 0, 340 },
+    { 1, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text04), 0, 360 },
+    { 2, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text05), 0, 380 },
+    { 1, 3, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text06), 0, 400 },
+    { 0, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text07), 0, 420 },
+    { 0, 4, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text08), 0, 432 },
+    { 1, 2, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent016Text09), MSG_SCRIPT_FLAG_END, 460 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent016Script[10] = {
-    { 1, 2, 2, 3, { 0, 0, 0 }, gEvent016Text00, 0, 260 },
-    { 0, 0, 1, 3, { 0, 0, 0 }, gEvent016Text01, 0, 300 },
-    { 1, 0, 2, 3, { 0, 0, 0 }, gEvent016Text02, 0, 320 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent089Text12, 0, 340 },
-    { 1, 0, 2, 3, { 0, 0, 0 }, gEvent016Text04, 0, 360 },
-    { 2, 1, 1, 3, { 0, 0, 0 }, gEvent016Text05, 0, 380 },
-    { 1, 3, 2, 3, { 0, 0, 0 }, gEvent016Text06, 0, 400 },
-    { 0, 1, 1, 3, { 0, 0, 0 }, gEvent016Text07, 0, 420 },
-    { 0, 4, 4, 3, { 0, 0, 0 }, gEvent016Text08, 0, 432 },
-    { 1, 2, 2, 3, { 0, 0, 0 }, gEvent016Text09, MSG_SCRIPT_FLAG_END, 460 },
-};
-
 #include "event_016_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent016Script[10] = {
-    { 1, 2, 2, 1, { 0, 0, 0 }, &gEvent016Text00, 0, 260 },
-    { 0, 0, 1, 1, { 0, 0, 0 }, &gEvent016Text01, 0, 300 },
-    { 1, 0, 2, 1, { 0, 0, 0 }, &gEvent016Text02, 0, 320 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent016Text03, 0, 340 },
-    { 1, 0, 2, 1, { 0, 0, 0 }, &gEvent016Text04, 0, 360 },
-    { 2, 1, 1, 1, { 0, 0, 0 }, &gEvent016Text05, 0, 380 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, &gEvent016Text06, 0, 400 },
-    { 0, 1, 1, 1, { 0, 0, 0 }, &gEvent016Text07, 0, 420 },
-    { 0, 4, 4, 1, { 0, 0, 0 }, &gEvent016Text08, 0, 432 },
-    { 1, 2, 2, 1, { 0, 0, 0 }, &gEvent016Text09, MSG_SCRIPT_FLAG_END, 460 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent016Camera[1] = {

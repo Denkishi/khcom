@@ -1,63 +1,27 @@
 #ifdef VERSION_US
 #include "event_047_text.inc"
-static const MessageScriptEntry sEvent047Script[15] = {
-    { 54, 1, 1, 1, { 0, 0, 0 }, gEvent047Text00, 0, 130 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, gEvent047Text01, 0, 160 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, gEvent047Text02, 0, 180 },
-    { 54, 2, 4, 1, { 0, 0, 0 }, gEvent047Text03, 0, 182 },
-    { 54, 2, 1, 1, { 0, 0, 0 }, gEvent047Text04, 0, 332 },
-    { 54, 1, 4, 1, { 0, 0, 0 }, gEvent047Text05, 0, 334 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, gEvent047Text06, 0, 360 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, gEvent047Text07, 0, 380 },
-    { 58, 0, 2, 1, { 0, 0, 0 }, gEvent047Text08, 0, 420 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, gEvent047Text09, 0, 570 },
-    { 54, 1, 3, 1, { 0, 0, 0 }, gEvent047Text10, 0, 590 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, gEvent047Text11, 0, 630 },
-    { 58, 0, 2, 1, { 0, 0, 0 }, gEvent047Text12, 0, 650 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, gEvent047Text13, 0, 940 },
-    { 60, 5, 0, 1, { 0, 0, 0 }, gEvent047Text14, MSG_SCRIPT_FLAG_END, 1200 },
-};
 #endif
+
+static const MessageScriptEntry sEvent047Script[15] = {
+    { 54, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text00), 0, 130 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text01), 0, 160 },
+    { 54, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text02), 0, 180 },
+    { 54, 2, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text03), 0, 182 },
+    { 54, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text04), 0, 332 },
+    { 54, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text05), 0, 334 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text06), 0, 360 },
+    { 54, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text07), 0, 380 },
+    { 58, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text08), 0, 420 },
+    { 60, 4, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text09), 0, 570 },
+    { 54, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text10), 0, 590 },
+    { 60, 4, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text11), 0, 630 },
+    { 58, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text12), 0, 650 },
+    { 60, 4, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text13), 0, 940 },
+    { 60, 5, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent047Text14), MSG_SCRIPT_FLAG_END, 1200 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent047Script[15] = {
-    { 54, 1, 1, 3, { 0, 0, 0 }, gEvent047Text00, 0, 130 },
-    { 20, 0, 3, 3, { 0, 0, 0 }, gEvent047Text01, 0, 160 },
-    { 54, 1, 1, 3, { 0, 0, 0 }, gEvent047Text02, 0, 180 },
-    { 54, 2, 4, 3, { 0, 0, 0 }, gEvent047Text03, 0, 182 },
-    { 54, 2, 1, 3, { 0, 0, 0 }, gEvent047Text04, 0, 332 },
-    { 54, 1, 4, 3, { 0, 0, 0 }, gEvent047Text05, 0, 334 },
-    { 20, 0, 3, 3, { 0, 0, 0 }, gEvent047Text06, 0, 360 },
-    { 54, 1, 1, 3, { 0, 0, 0 }, gEvent047Text07, 0, 380 },
-    { 58, 0, 2, 3, { 0, 0, 0 }, gEvent047Text08, 0, 420 },
-    { 60, 4, 0, 3, { 0, 0, 0 }, gEvent047Text09, 0, 570 },
-    { 54, 1, 3, 3, { 0, 0, 0 }, gEvent047Text10, 0, 590 },
-    { 60, 4, 0, 3, { 0, 0, 0 }, gEvent047Text11, 0, 630 },
-    { 58, 0, 2, 3, { 0, 0, 0 }, gEvent047Text12, 0, 650 },
-    { 60, 4, 0, 3, { 0, 0, 0 }, gEvent111Text24, 0, 940 },
-    { 60, 5, 0, 3, { 0, 0, 0 }, gEvent047Text14, MSG_SCRIPT_FLAG_END, 1200 },
-};
-
 #include "event_047_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent047Script[15] = {
-    { 54, 1, 1, 1, { 0, 0, 0 }, &gEvent047Text00, 0, 130 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, &gEvent047Text01, 0, 160 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, &gEvent047Text02, 0, 180 },
-    { 54, 2, 4, 1, { 0, 0, 0 }, &gEvent047Text03, 0, 182 },
-    { 54, 2, 1, 1, { 0, 0, 0 }, &gEvent047Text04, 0, 332 },
-    { 54, 1, 4, 1, { 0, 0, 0 }, &gEvent047Text05, 0, 334 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, &gEvent047Text06, 0, 360 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, &gEvent047Text07, 0, 380 },
-    { 58, 0, 2, 1, { 0, 0, 0 }, &gEvent047Text08, 0, 420 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, &gEvent047Text09, 0, 570 },
-    { 54, 1, 3, 1, { 0, 0, 0 }, &gEvent047Text10, 0, 590 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, &gEvent047Text11, 0, 630 },
-    { 58, 0, 2, 1, { 0, 0, 0 }, &gEvent047Text12, 0, 650 },
-    { 60, 4, 0, 1, { 0, 0, 0 }, &gEvent047Text13, 0, 940 },
-    { 60, 5, 0, 1, { 0, 0, 0 }, &gEvent047Text14, MSG_SCRIPT_FLAG_END, 1200 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent047Camera[2] = {

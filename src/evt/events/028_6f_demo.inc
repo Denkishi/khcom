@@ -1,78 +1,32 @@
 #ifdef VERSION_US
 #include "event_028_text.inc"
-static const MessageScriptEntry sEvent028Script[20] = {
-    { 54, 2, 1, 1, { 0, 0, 0 }, gEvent028Text00, 0, 160 },
-    { 20, 1, 3, 1, { 0, 0, 0 }, gEvent028Text01, 0, 180 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, gEvent028Text02, 0, 250 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent028Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 270 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, gEvent028Text04, 0, 500 },
-    { 38, 0, 3, 1, { 0, 0, 0 }, gEvent028Text05, 0, 520 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, gEvent028Text06, 0, 540 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, gEvent028Text07, 0, 560 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent028Text08, 0, 590 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, gEvent028Text09, 0, 592 },
-    { 38, 1, 4, 1, { 0, 0, 0 }, gEvent028Text10, 0, 594 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, gEvent028Text11, 0, 620 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, gEvent028Text12, 0, 640 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, gEvent028Text13, 0, 680 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, gEvent028Text14, 0, 700 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, gEvent028Text15, 0, 720 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent028Text16, 0, 740 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, gEvent028Text17, 0, 890 },
-    { 20, 1, 3, 1, { 0, 0, 0 }, gEvent028Text18, 0, 930 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, gEvent028Text19, MSG_SCRIPT_FLAG_END, 950 },
-};
 #endif
+
+static const MessageScriptEntry sEvent028Script[20] = {
+    { 54, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text00), 0, 160 },
+    { 20, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text01), 0, 180 },
+    { 54, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text02), 0, 250 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text03), MSG_SCRIPT_FLAG_SILHOUETTE, 270 },
+    { 54, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text04), 0, 500 },
+    { 38, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text05), 0, 520 },
+    { 54, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text06), 0, 540 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text07), 0, 560 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text08), 0, 590 },
+    { 38, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text09), 0, 592 },
+    { 38, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text10), 0, 594 },
+    { 54, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text11), 0, 620 },
+    { 38, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text12), 0, 640 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text13), 0, 680 },
+    { 38, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text14), 0, 700 },
+    { 54, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text15), 0, 720 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text16), 0, 740 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text17), 0, 890 },
+    { 20, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text18), 0, 930 },
+    { 38, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent028Text19), MSG_SCRIPT_FLAG_END, 950 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent028Script[20] = {
-    { 54, 2, 1, 3, { 0, 0, 0 }, gEvent028Text00, 0, 160 },
-    { 20, 1, 3, 3, { 0, 0, 0 }, gEvent028Text01, 0, 180 },
-    { 54, 3, 1, 3, { 0, 0, 0 }, gEvent028Text02, 0, 250 },
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent028Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 270 },
-    { 54, 3, 1, 3, { 0, 0, 0 }, gEvent028Text04, 0, 500 },
-    { 38, 0, 3, 3, { 0, 0, 0 }, gEvent028Text05, 0, 520 },
-    { 54, 3, 1, 3, { 0, 0, 0 }, gEvent112Text05, 0, 540 },
-    { 20, 0, 3, 3, { 0, 0, 0 }, gEvent028Text07, 0, 560 },
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent028Text08, 0, 590 },
-    { 38, 0, 4, 3, { 0, 0, 0 }, gEvent028Text09, 0, 592 },
-    { 38, 1, 4, 3, { 0, 0, 0 }, gEvent028Text10, 0, 594 },
-    { 54, 3, 1, 3, { 0, 0, 0 }, gEvent028Text11, 0, 620 },
-    { 38, 1, 1, 3, { 0, 0, 0 }, gEvent028Text12, 0, 640 },
-    { 20, 0, 3, 3, { 0, 0, 0 }, gEvent028Text13, 0, 680 },
-    { 38, 1, 1, 3, { 0, 0, 0 }, gEvent028Text14, 0, 700 },
-    { 54, 1, 1, 3, { 0, 0, 0 }, gEvent028Text15, 0, 720 },
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent028Text16, 0, 740 },
-    { 20, 0, 3, 3, { 0, 0, 0 }, gEvent028Text17, 0, 890 },
-    { 20, 1, 3, 3, { 0, 0, 0 }, gEvent028Text18, 0, 930 },
-    { 38, 1, 1, 3, { 0, 0, 0 }, gEvent028Text19, MSG_SCRIPT_FLAG_END, 950 },
-};
-
 #include "event_028_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent028Script[20] = {
-    { 54, 2, 1, 1, { 0, 0, 0 }, &gEvent028Text00, 0, 160 },
-    { 20, 1, 3, 1, { 0, 0, 0 }, &gEvent028Text01, 0, 180 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, &gEvent028Text02, 0, 250 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent028Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 270 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, &gEvent028Text04, 0, 500 },
-    { 38, 0, 3, 1, { 0, 0, 0 }, &gEvent028Text05, 0, 520 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, &gEvent028Text06, 0, 540 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, &gEvent028Text07, 0, 560 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent028Text08, 0, 590 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, &gEvent028Text09, 0, 592 },
-    { 38, 1, 4, 1, { 0, 0, 0 }, &gEvent028Text10, 0, 594 },
-    { 54, 3, 1, 1, { 0, 0, 0 }, &gEvent028Text11, 0, 620 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, &gEvent028Text12, 0, 640 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, &gEvent028Text13, 0, 680 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, &gEvent028Text14, 0, 700 },
-    { 54, 1, 1, 1, { 0, 0, 0 }, &gEvent028Text15, 0, 720 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent028Text16, 0, 740 },
-    { 20, 0, 3, 1, { 0, 0, 0 }, &gEvent028Text17, 0, 890 },
-    { 20, 1, 3, 1, { 0, 0, 0 }, &gEvent028Text18, 0, 930 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, &gEvent028Text19, MSG_SCRIPT_FLAG_END, 950 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent028Camera[3] = {

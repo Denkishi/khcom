@@ -1,36 +1,18 @@
 #ifdef VERSION_US
 #include "event_179_text.inc"
-static const MessageScriptEntry sEvent179Script[6] = {
-    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent179Text00, 0, 355 },
-    { 55, 0, 1, 1, { 0, 0, 0 }, gEvent179Text01, 0, 385 },
-    { 55, 0, 3, 1, { 0, 0, 0 }, gEvent179Text02, 0, 510 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, gEvent179Text03, 0, 640 },
-    { 55, 0, 3, 1, { 0, 0, 0 }, gEvent179Text04, 0, 670 },
-    { 55, 0, 4, 1, { 0, 0, 0 }, gEvent179Text05, MSG_SCRIPT_FLAG_END, 674 },
-};
 #endif
+
+static const MessageScriptEntry sEvent179Script[6] = {
+    { 26, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text00), 0, 355 },
+    { 55, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text01), 0, 385 },
+    { 55, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text02), 0, 510 },
+    { 26, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text03), 0, 640 },
+    { 55, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text04), 0, 670 },
+    { 55, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent179Text05), MSG_SCRIPT_FLAG_END, 674 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent179Script[6] = {
-    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent179Text00, 0, 355 },
-    { 55, 0, 1, 3, { 0, 0, 0 }, gEvent179Text01, 0, 385 },
-    { 55, 0, 3, 3, { 0, 0, 0 }, gEvent179Text02, 0, 510 },
-    { 26, 5, 3, 3, { 0, 0, 0 }, gEvent163Text13, 0, 640 },
-    { 55, 0, 3, 3, { 0, 0, 0 }, gEvent179Text04, 0, 670 },
-    { 55, 0, 4, 3, { 0, 0, 0 }, gEvent179Text05, MSG_SCRIPT_FLAG_END, 674 },
-};
-
 #include "event_179_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent179Script[6] = {
-    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent179Text00, 0, 355 },
-    { 55, 0, 1, 1, { 0, 0, 0 }, &gEvent179Text01, 0, 385 },
-    { 55, 0, 3, 1, { 0, 0, 0 }, &gEvent179Text02, 0, 510 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, &gEvent179Text03, 0, 640 },
-    { 55, 0, 3, 1, { 0, 0, 0 }, &gEvent179Text04, 0, 670 },
-    { 55, 0, 4, 1, { 0, 0, 0 }, &gEvent179Text05, MSG_SCRIPT_FLAG_END, 674 },
-};
 #endif
 
 static const EvSoundCue sEvent179SoundCues[4] = {

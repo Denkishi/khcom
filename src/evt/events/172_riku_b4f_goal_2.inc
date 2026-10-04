@@ -1,36 +1,18 @@
 #ifdef VERSION_US
 #include "event_172_text.inc"
-static const MessageScriptEntry sEvent172Script[6] = {
-    { 57, 2, 1, 1, { 0, 0, 0 }, gEvent172Text00, 0, 100 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, gEvent172Text01, 0, 140 },
-    { 26, 1, 4, 1, { 0, 0, 0 }, gEvent172Text02, 0, 144 },
-    { 57, 1, 1, 1, { 0, 0, 0 }, gEvent172Text03, 0, 180 },
-    { 57, 2, 4, 1, { 0, 0, 0 }, gEvent172Text04, 0, 182 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent172Text05, MSG_SCRIPT_FLAG_END, 480 },
-};
 #endif
+
+static const MessageScriptEntry sEvent172Script[6] = {
+    { 57, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text00), 0, 100 },
+    { 26, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text01), 0, 140 },
+    { 26, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text02), 0, 144 },
+    { 57, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text03), 0, 180 },
+    { 57, 2, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text04), 0, 182 },
+    { 26, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent172Text05), MSG_SCRIPT_FLAG_END, 480 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent172Script[6] = {
-    { 57, 2, 1, 3, { 0, 0, 0 }, gEvent172Text00, 0, 100 },
-    { 26, 2, 3, 3, { 0, 0, 0 }, gEvent172Text01, 0, 140 },
-    { 26, 1, 4, 3, { 0, 0, 0 }, gEvent172Text02, 0, 144 },
-    { 57, 1, 1, 3, { 0, 0, 0 }, gEvent172Text03, 0, 180 },
-    { 57, 2, 4, 3, { 0, 0, 0 }, gEvent172Text04, 0, 182 },
-    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent033Text09, MSG_SCRIPT_FLAG_END, 480 },
-};
-
 #include "event_172_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent172Script[6] = {
-    { 57, 2, 1, 1, { 0, 0, 0 }, &gEvent172Text00, 0, 100 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, &gEvent172Text01, 0, 140 },
-    { 26, 1, 4, 1, { 0, 0, 0 }, &gEvent172Text02, 0, 144 },
-    { 57, 1, 1, 1, { 0, 0, 0 }, &gEvent172Text03, 0, 180 },
-    { 57, 2, 4, 1, { 0, 0, 0 }, &gEvent172Text04, 0, 182 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent172Text05, MSG_SCRIPT_FLAG_END, 480 },
-};
 #endif
 
 static const EvSoundCue sEvent172SoundCues[6] = {

@@ -1,42 +1,20 @@
 #ifdef VERSION_US
 #include "event_177_text.inc"
-static const MessageScriptEntry sEvent177Script[8] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent177Text00, 0, 380 },
-    { 26, 1, 1, 1, { 0, 0, 0 }, gEvent177Text01, 0, 460 },
-    { 26, 1, 4, 1, { 0, 0, 0 }, gEvent177Text02, 0, 462 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent177Text03, 0, 660 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent177Text04, 0, 800 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent177Text05, 0, 980 },
-    { 26, 1, 1, 1, { 0, 0, 0 }, gEvent177Text06, 0, 1080 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent177Text07, MSG_SCRIPT_FLAG_END, 1405 },
-};
 #endif
+
+static const MessageScriptEntry sEvent177Script[8] = {
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text00), 0, 380 },
+    { 26, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text01), 0, 460 },
+    { 26, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text02), 0, 462 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text03), 0, 660 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text04), 0, 800 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text05), 0, 980 },
+    { 26, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text06), 0, 1080 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent177Text07), MSG_SCRIPT_FLAG_END, 1405 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent177Script[8] = {
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent177Text00, 0, 380 },
-    { 26, 1, 1, 3, { 0, 0, 0 }, gEvent177Text01, 0, 460 },
-    { 26, 1, 4, 3, { 0, 0, 0 }, gEvent177Text02, 0, 462 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent177Text03, 0, 660 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent142Text03, 0, 800 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent177Text05, 0, 980 },
-    { 26, 1, 1, 3, { 0, 0, 0 }, gEvent177Text06, 0, 1080 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent177Text07, MSG_SCRIPT_FLAG_END, 1405 },
-};
-
 #include "event_177_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent177Script[8] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent177Text00, 0, 380 },
-    { 26, 1, 1, 1, { 0, 0, 0 }, &gEvent177Text01, 0, 460 },
-    { 26, 1, 4, 1, { 0, 0, 0 }, &gEvent177Text02, 0, 462 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent177Text03, 0, 660 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent177Text04, 0, 800 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent177Text05, 0, 980 },
-    { 26, 1, 1, 1, { 0, 0, 0 }, &gEvent177Text06, 0, 1080 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent177Text07, MSG_SCRIPT_FLAG_END, 1405 },
-};
 #endif
 
 static const EvSoundCue sEvent177SoundCues[5] = {

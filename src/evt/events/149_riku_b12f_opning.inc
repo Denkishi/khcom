@@ -1,75 +1,31 @@
 #ifdef VERSION_US
 #include "event_149_text.inc"
-static const MessageScriptEntry sEvent149Script[19] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent149Text00, 0, 250 },
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent149Text01, 0, 400 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, gEvent149Text02, MSG_SCRIPT_FLAG_SILHOUETTE, 440 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, gEvent149Text03, 0, 590 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, gEvent149Text04, MSG_SCRIPT_FLAG_SILHOUETTE, 690 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent149Text05, 0, 720 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent149Text06, 0, 880 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, gEvent149Text07, 0, 1050 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, gEvent149Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 1090 },
-    { 52, 0, 4, 1, { 0, 0, 0 }, gEvent149Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 1092 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, gEvent149Text10, 0, 1120 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, gEvent149Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 1160 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, gEvent149Text12, MSG_SCRIPT_FLAG_SILHOUETTE, 1370 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent149Text13, 0, 1590 },
-    { 52, 0, 0, 1, { 0, 0, 0 }, gEvent149Text14, MSG_SCRIPT_FLAG_SILHOUETTE, 1630 },
-    { 52, 0, 4, 1, { 0, 0, 0 }, gEvent149Text15, MSG_SCRIPT_FLAG_SILHOUETTE, 1632 },
-    { 52, 0, 1, 1, { 0, 0, 0 }, gEvent149Text16, MSG_SCRIPT_FLAG_SILHOUETTE, 1730 },
-    { 26, 1, 3, 1, { 0, 0, 0 }, gEvent149Text17, 0, 2020 },
-    { 52, 0, 1, 1, { 0, 0, 0 }, gEvent149Text18, MSG_SCRIPT_FLAG_SILHOUETTE | MSG_SCRIPT_FLAG_END, 2060 },
-};
 #endif
+
+static const MessageScriptEntry sEvent149Script[19] = {
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text00), 0, 250 },
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text01), 0, 400 },
+    { 52, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text02), MSG_SCRIPT_FLAG_SILHOUETTE, 440 },
+    { 26, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text03), 0, 590 },
+    { 52, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text04), MSG_SCRIPT_FLAG_SILHOUETTE, 690 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text05), 0, 720 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text06), 0, 880 },
+    { 26, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text07), 0, 1050 },
+    { 52, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text08), MSG_SCRIPT_FLAG_SILHOUETTE, 1090 },
+    { 52, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text09), MSG_SCRIPT_FLAG_SILHOUETTE, 1092 },
+    { 26, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text10), 0, 1120 },
+    { 52, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text11), MSG_SCRIPT_FLAG_SILHOUETTE, 1160 },
+    { 52, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text12), MSG_SCRIPT_FLAG_SILHOUETTE, 1370 },
+    { 26, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text13), 0, 1590 },
+    { 52, 0, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text14), MSG_SCRIPT_FLAG_SILHOUETTE, 1630 },
+    { 52, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text15), MSG_SCRIPT_FLAG_SILHOUETTE, 1632 },
+    { 52, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text16), MSG_SCRIPT_FLAG_SILHOUETTE, 1730 },
+    { 26, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text17), 0, 2020 },
+    { 52, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent149Text18), MSG_SCRIPT_FLAG_SILHOUETTE | MSG_SCRIPT_FLAG_END, 2060 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent149Script[19] = {
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent149Text00, 0, 250 },
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent149Text01, 0, 400 },
-    { 52, 0, 2, 3, { 0, 0, 0 }, gEvent149Text02, MSG_SCRIPT_FLAG_SILHOUETTE, 440 },
-    { 26, 2, 1, 3, { 0, 0, 0 }, gEvent000Text21, 0, 590 },
-    { 52, 0, 2, 3, { 0, 0, 0 }, gEvent149Text04, MSG_SCRIPT_FLAG_SILHOUETTE, 690 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent149Text05, 0, 720 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent149Text06, 0, 880 },
-    { 26, 2, 1, 3, { 0, 0, 0 }, gEvent149Text07, 0, 1050 },
-    { 52, 0, 2, 3, { 0, 0, 0 }, gEvent149Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 1090 },
-    { 52, 0, 4, 3, { 0, 0, 0 }, gEvent149Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 1092 },
-    { 26, 2, 1, 3, { 0, 0, 0 }, gEvent149Text10, 0, 1120 },
-    { 52, 0, 2, 3, { 0, 0, 0 }, gEvent149Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 1160 },
-    { 52, 0, 2, 3, { 0, 0, 0 }, gEvent149Text12, MSG_SCRIPT_FLAG_SILHOUETTE, 1370 },
-    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent149Text13, 0, 1590 },
-    { 52, 0, 0, 3, { 0, 0, 0 }, gEvent149Text14, MSG_SCRIPT_FLAG_SILHOUETTE, 1630 },
-    { 52, 0, 4, 3, { 0, 0, 0 }, gEvent149Text15, MSG_SCRIPT_FLAG_SILHOUETTE, 1632 },
-    { 52, 0, 1, 3, { 0, 0, 0 }, gEvent149Text16, MSG_SCRIPT_FLAG_SILHOUETTE, 1730 },
-    { 26, 1, 3, 3, { 0, 0, 0 }, gEvent149Text17, 0, 2020 },
-    { 52, 0, 1, 3, { 0, 0, 0 }, gEvent149Text18, MSG_SCRIPT_FLAG_SILHOUETTE | MSG_SCRIPT_FLAG_END, 2060 },
-};
-
 #include "event_149_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent149Script[19] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent149Text00, 0, 250 },
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent149Text01, 0, 400 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, &gEvent149Text02, MSG_SCRIPT_FLAG_SILHOUETTE, 440 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, &gEvent149Text03, 0, 590 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, &gEvent149Text04, MSG_SCRIPT_FLAG_SILHOUETTE, 690 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent149Text05, 0, 720 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent149Text06, 0, 880 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, &gEvent149Text07, 0, 1050 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, &gEvent149Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 1090 },
-    { 52, 0, 4, 1, { 0, 0, 0 }, &gEvent149Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 1092 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, &gEvent149Text10, 0, 1120 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, &gEvent149Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 1160 },
-    { 52, 0, 2, 1, { 0, 0, 0 }, &gEvent149Text12, MSG_SCRIPT_FLAG_SILHOUETTE, 1370 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent149Text13, 0, 1590 },
-    { 52, 0, 0, 1, { 0, 0, 0 }, &gEvent149Text14, MSG_SCRIPT_FLAG_SILHOUETTE, 1630 },
-    { 52, 0, 4, 1, { 0, 0, 0 }, &gEvent149Text15, MSG_SCRIPT_FLAG_SILHOUETTE, 1632 },
-    { 52, 0, 1, 1, { 0, 0, 0 }, &gEvent149Text16, MSG_SCRIPT_FLAG_SILHOUETTE, 1730 },
-    { 26, 1, 3, 1, { 0, 0, 0 }, &gEvent149Text17, 0, 2020 },
-    { 52, 0, 1, 1, { 0, 0, 0 }, &gEvent149Text18, MSG_SCRIPT_FLAG_SILHOUETTE | MSG_SCRIPT_FLAG_END, 2060 },
-};
 #endif
 
 static const EvSoundCue sEvent149SoundCues[5] = {

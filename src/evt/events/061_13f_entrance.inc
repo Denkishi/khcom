@@ -1,72 +1,30 @@
 #ifdef VERSION_US
 #include "event_061_text.inc"
-static const MessageScriptEntry sEvent061Script[18] = {
-    { 0, 0, 1, 1, { 0, 0, 0 }, gEvent061Text00, 0, 250 },
-    { 0, 5, 1, 1, { 0, 0, 0 }, gEvent061Text01, 0, 430 },
-    { 1, 2, 0, 1, { 0, 0, 0 }, gEvent061Text02, 0, 460 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, gEvent061Text03, 0, 540 },
-    { 0, 7, 4, 1, { 0, 0, 0 }, gEvent061Text04, 0, 542 },
-    { 1, 2, 0, 1, { 0, 0, 0 }, gEvent061Text05, 0, 580 },
-    { 1, 0, 4, 1, { 0, 0, 0 }, gEvent061Text06, 0, 582 },
-    { 1, 2, 4, 1, { 0, 0, 0 }, gEvent061Text07, 0, 586 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent061Text08, 0, 740 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, gEvent061Text09, 0, 760 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent061Text10, 0, 780 },
-    { 2, 1, 4, 1, { 0, 0, 0 }, gEvent061Text11, 0, 782 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, gEvent061Text12, 0, 810 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, gEvent061Text13, 0, 830 },
-    { 2, 1, 1, 1, { 0, 0, 0 }, gEvent061Text14, 0, 850 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent061Text15, 0, 950 },
-    { 0, 4, 3, 1, { 0, 0, 0 }, gEvent061Text16, 0, 1130 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, gEvent061Text17, MSG_SCRIPT_FLAG_END, 1230 },
-};
 #endif
+
+static const MessageScriptEntry sEvent061Script[18] = {
+    { 0, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text00), 0, 250 },
+    { 0, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text01), 0, 430 },
+    { 1, 2, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text02), 0, 460 },
+    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text03), 0, 540 },
+    { 0, 7, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text04), 0, 542 },
+    { 1, 2, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text05), 0, 580 },
+    { 1, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text06), 0, 582 },
+    { 1, 2, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text07), 0, 586 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text08), 0, 740 },
+    { 0, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text09), 0, 760 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text10), 0, 780 },
+    { 2, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text11), 0, 782 },
+    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text12), 0, 810 },
+    { 1, 3, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text13), 0, 830 },
+    { 2, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text14), 0, 850 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text15), 0, 950 },
+    { 0, 4, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text16), 0, 1130 },
+    { 1, 3, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent061Text17), MSG_SCRIPT_FLAG_END, 1230 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent061Script[18] = {
-    { 0, 0, 1, 3, { 0, 0, 0 }, gEvent061Text00, 0, 250 },
-    { 0, 5, 1, 3, { 0, 0, 0 }, gEvent061Text01, 0, 430 },
-    { 1, 2, 0, 3, { 0, 0, 0 }, gEvent061Text02, 0, 460 },
-    { 0, 0, 3, 3, { 0, 0, 0 }, gEvent061Text03, 0, 540 },
-    { 0, 7, 4, 3, { 0, 0, 0 }, gEvent061Text04, 0, 542 },
-    { 1, 2, 0, 3, { 0, 0, 0 }, gEvent061Text05, 0, 580 },
-    { 1, 0, 4, 3, { 0, 0, 0 }, gEvent061Text06, 0, 582 },
-    { 1, 2, 4, 3, { 0, 0, 0 }, gEvent061Text07, 0, 586 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent061Text08, 0, 740 },
-    { 0, 3, 3, 3, { 0, 0, 0 }, gEvent076Text19, 0, 760 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent061Text10, 0, 780 },
-    { 2, 1, 4, 3, { 0, 0, 0 }, gEvent061Text11, 0, 782 },
-    { 0, 0, 3, 3, { 0, 0, 0 }, gEvent061Text12, 0, 810 },
-    { 1, 3, 2, 3, { 0, 0, 0 }, gEvent061Text13, 0, 830 },
-    { 2, 1, 1, 3, { 0, 0, 0 }, gEvent061Text14, 0, 850 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent061Text15, 0, 950 },
-    { 0, 4, 3, 3, { 0, 0, 0 }, gEvent061Text16, 0, 1130 },
-    { 1, 3, 2, 3, { 0, 0, 0 }, gEvent061Text17, MSG_SCRIPT_FLAG_END, 1230 },
-};
-
 #include "event_061_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent061Script[18] = {
-    { 0, 0, 1, 1, { 0, 0, 0 }, &gEvent061Text00, 0, 250 },
-    { 0, 5, 1, 1, { 0, 0, 0 }, &gEvent061Text01, 0, 430 },
-    { 1, 2, 0, 1, { 0, 0, 0 }, &gEvent061Text02, 0, 460 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, &gEvent061Text03, 0, 540 },
-    { 0, 7, 4, 1, { 0, 0, 0 }, &gEvent061Text04, 0, 542 },
-    { 1, 2, 0, 1, { 0, 0, 0 }, &gEvent061Text05, 0, 580 },
-    { 1, 0, 4, 1, { 0, 0, 0 }, &gEvent061Text06, 0, 582 },
-    { 1, 2, 4, 1, { 0, 0, 0 }, &gEvent061Text07, 0, 586 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent061Text08, 0, 740 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, &gEvent061Text09, 0, 760 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent061Text10, 0, 780 },
-    { 2, 1, 4, 1, { 0, 0, 0 }, &gEvent061Text11, 0, 782 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, &gEvent061Text12, 0, 810 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, &gEvent061Text13, 0, 830 },
-    { 2, 1, 1, 1, { 0, 0, 0 }, &gEvent061Text14, 0, 850 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent061Text15, 0, 950 },
-    { 0, 4, 3, 1, { 0, 0, 0 }, &gEvent061Text16, 0, 1130 },
-    { 1, 3, 2, 1, { 0, 0, 0 }, &gEvent061Text17, MSG_SCRIPT_FLAG_END, 1230 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent061Camera[2] = {

@@ -1,42 +1,20 @@
 #ifdef VERSION_US
 #include "event_115_text.inc"
-static const MessageScriptEntry sEvent115Script[8] = {
-    { 0, 0, 3, 1, { 0, 0, 0 }, gEvent115Text00, 0, 150 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent115Text01, 0, 170 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, gEvent115Text02, 0, 190 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, gEvent115Text03, 0, 220 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, gEvent115Text04, 0, 300 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, gEvent115Text05, 0, 320 },
-    { 6, 0, 1, 1, { 0, 0, 0 }, gEvent115Text06, 0, 560 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent115Text07, MSG_SCRIPT_FLAG_END, 630 },
-};
 #endif
+
+static const MessageScriptEntry sEvent115Script[8] = {
+    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text00), 0, 150 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text01), 0, 170 },
+    { 1, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text02), 0, 190 },
+    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text03), 0, 220 },
+    { 1, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text04), 0, 300 },
+    { 0, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text05), 0, 320 },
+    { 6, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text06), 0, 560 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent115Text07), MSG_SCRIPT_FLAG_END, 630 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent115Script[8] = {
-    { 0, 0, 3, 3, { 0, 0, 0 }, gEvent115Text00, 0, 150 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent115Text01, 0, 170 },
-    { 1, 5, 1, 3, { 0, 0, 0 }, gEvent115Text02, 0, 190 },
-    { 0, 0, 3, 3, { 0, 0, 0 }, gEvent115Text03, 0, 220 },
-    { 1, 5, 1, 3, { 0, 0, 0 }, gEvent082Text01, 0, 300 },
-    { 0, 3, 3, 3, { 0, 0, 0 }, gEvent115Text05, 0, 320 },
-    { 6, 0, 1, 3, { 0, 0, 0 }, gEvent115Text06, 0, 560 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent115Text07, MSG_SCRIPT_FLAG_END, 630 },
-};
-
 #include "event_115_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent115Script[8] = {
-    { 0, 0, 3, 1, { 0, 0, 0 }, &gEvent115Text00, 0, 150 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent115Text01, 0, 170 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, &gEvent115Text02, 0, 190 },
-    { 0, 0, 3, 1, { 0, 0, 0 }, &gEvent115Text03, 0, 220 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, &gEvent115Text04, 0, 300 },
-    { 0, 3, 3, 1, { 0, 0, 0 }, &gEvent115Text05, 0, 320 },
-    { 6, 0, 1, 1, { 0, 0, 0 }, &gEvent115Text06, 0, 560 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent115Text07, MSG_SCRIPT_FLAG_END, 630 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent115Camera[2] = {

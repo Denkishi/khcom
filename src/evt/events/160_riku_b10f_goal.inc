@@ -1,57 +1,25 @@
 #ifdef VERSION_US
 #include "event_160_text.inc"
-static const MessageScriptEntry sEvent160Script[13] = {
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent160Text00, 0, 250 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, gEvent160Text01, 0, 280 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent160Text02, 0, 460 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, gEvent160Text03, 0, 462 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, gEvent160Text04, 0, 490 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, gEvent160Text05, 0, 520 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, gEvent160Text06, 0, 660 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, gEvent160Text07, 0, 662 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, gEvent160Text08, 0, 710 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, gEvent160Text09, 0, 790 },
-    { 26, 2, 4, 1, { 0, 0, 0 }, gEvent160Text10, 0, 792 },
-    { 26, 2, 4, 1, { 0, 0, 0 }, gEvent160Text11, 0, 794 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, gEvent160Text12, MSG_SCRIPT_FLAG_END, 822 },
-};
 #endif
+
+static const MessageScriptEntry sEvent160Script[13] = {
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text00), 0, 250 },
+    { 26, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text01), 0, 280 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text02), 0, 460 },
+    { 38, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text03), 0, 462 },
+    { 26, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text04), 0, 490 },
+    { 38, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text05), 0, 520 },
+    { 38, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text06), 0, 660 },
+    { 38, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text07), 0, 662 },
+    { 26, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text08), 0, 710 },
+    { 26, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text09), 0, 790 },
+    { 26, 2, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text10), 0, 792 },
+    { 26, 2, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text11), 0, 794 },
+    { 38, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent160Text12), MSG_SCRIPT_FLAG_END, 822 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent160Script[13] = {
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent160Text00, 0, 250 },
-    { 26, 2, 3, 3, { 0, 0, 0 }, gEvent160Text01, 0, 280 },
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent160Text02, 0, 460 },
-    { 38, 0, 4, 3, { 0, 0, 0 }, gEvent160Text03, 0, 462 },
-    { 26, 2, 3, 3, { 0, 0, 0 }, gEvent160Text04, 0, 490 },
-    { 38, 0, 1, 3, { 0, 0, 0 }, gEvent160Text05, 0, 520 },
-    { 38, 1, 1, 3, { 0, 0, 0 }, gEvent160Text06, 0, 660 },
-    { 38, 0, 4, 3, { 0, 0, 0 }, gEvent160Text07, 0, 662 },
-    { 26, 5, 3, 3, { 0, 0, 0 }, gEvent137Text08, 0, 710 },
-    { 26, 2, 3, 3, { 0, 0, 0 }, gEvent160Text09, 0, 790 },
-    { 26, 2, 4, 3, { 0, 0, 0 }, gEvent160Text10, 0, 792 },
-    { 26, 2, 4, 3, { 0, 0, 0 }, gEvent160Text11, 0, 794 },
-    { 38, 1, 1, 3, { 0, 0, 0 }, gEvent160Text12, MSG_SCRIPT_FLAG_END, 822 },
-};
-
 #include "event_160_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent160Script[13] = {
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent160Text00, 0, 250 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, &gEvent160Text01, 0, 280 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent160Text02, 0, 460 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, &gEvent160Text03, 0, 462 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, &gEvent160Text04, 0, 490 },
-    { 38, 0, 1, 1, { 0, 0, 0 }, &gEvent160Text05, 0, 520 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, &gEvent160Text06, 0, 660 },
-    { 38, 0, 4, 1, { 0, 0, 0 }, &gEvent160Text07, 0, 662 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, &gEvent160Text08, 0, 710 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, &gEvent160Text09, 0, 790 },
-    { 26, 2, 4, 1, { 0, 0, 0 }, &gEvent160Text10, 0, 792 },
-    { 26, 2, 4, 1, { 0, 0, 0 }, &gEvent160Text11, 0, 794 },
-    { 38, 1, 1, 1, { 0, 0, 0 }, &gEvent160Text12, MSG_SCRIPT_FLAG_END, 822 },
-};
 #endif
 
 static const EvSoundCue sEvent160SoundCues[7] = {

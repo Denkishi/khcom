@@ -1,63 +1,27 @@
 #ifdef VERSION_US
 #include "event_173_text.inc"
-static const MessageScriptEntry sEvent173Script[15] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent173Text00, 0, 350 },
-    { 56, 0, 3, 1, { 0, 0, 0 }, gEvent173Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, gEvent173Text02, 0, 600 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, gEvent173Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 640 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, gEvent173Text04, 0, 670 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, gEvent173Text05, MSG_SCRIPT_FLAG_SILHOUETTE, 700 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, gEvent173Text06, 0, 730 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, gEvent173Text07, MSG_SCRIPT_FLAG_SILHOUETTE, 760 },
-    { 56, 0, 4, 1, { 0, 0, 0 }, gEvent173Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 762 },
-    { 56, 0, 4, 1, { 0, 0, 0 }, gEvent173Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 764 },
-    { 56, 1, 1, 1, { 0, 0, 0 }, gEvent173Text10, 0, 850 },
-    { 61, 0, 3, 1, { 0, 0, 0 }, gEvent173Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 870 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent173Text12, 0, 955 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, gEvent173Text13, 0, 1275 },
-    { 56, 2, 1, 1, { 0, 0, 0 }, gEvent173Text14, MSG_SCRIPT_FLAG_END, 1305 },
-};
 #endif
+
+static const MessageScriptEntry sEvent173Script[15] = {
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text00), 0, 350 },
+    { 56, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text01), MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
+    { 26, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text02), 0, 600 },
+    { 56, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text03), MSG_SCRIPT_FLAG_SILHOUETTE, 640 },
+    { 26, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text04), 0, 670 },
+    { 56, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text05), MSG_SCRIPT_FLAG_SILHOUETTE, 700 },
+    { 26, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text06), 0, 730 },
+    { 56, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text07), MSG_SCRIPT_FLAG_SILHOUETTE, 760 },
+    { 56, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text08), MSG_SCRIPT_FLAG_SILHOUETTE, 762 },
+    { 56, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text09), MSG_SCRIPT_FLAG_SILHOUETTE, 764 },
+    { 56, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text10), 0, 850 },
+    { 61, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text11), MSG_SCRIPT_FLAG_SILHOUETTE, 870 },
+    { 26, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text12), 0, 955 },
+    { 26, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text13), 0, 1275 },
+    { 56, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent173Text14), MSG_SCRIPT_FLAG_END, 1305 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent173Script[15] = {
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent173Text00, 0, 350 },
-    { 56, 0, 3, 3, { 0, 0, 0 }, gEvent173Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
-    { 26, 2, 1, 3, { 0, 0, 0 }, gEvent173Text02, 0, 600 },
-    { 56, 0, 2, 3, { 0, 0, 0 }, gEvent173Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 640 },
-    { 26, 3, 1, 3, { 0, 0, 0 }, gEvent173Text04, 0, 670 },
-    { 56, 0, 2, 3, { 0, 0, 0 }, gEvent173Text05, MSG_SCRIPT_FLAG_SILHOUETTE, 700 },
-    { 26, 2, 1, 3, { 0, 0, 0 }, gEvent173Text06, 0, 730 },
-    { 56, 0, 2, 3, { 0, 0, 0 }, gEvent173Text07, MSG_SCRIPT_FLAG_SILHOUETTE, 760 },
-    { 56, 0, 4, 3, { 0, 0, 0 }, gEvent173Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 762 },
-    { 56, 0, 4, 3, { 0, 0, 0 }, gEvent173Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 764 },
-    { 56, 1, 1, 3, { 0, 0, 0 }, gEvent173Text10, 0, 850 },
-    { 61, 0, 3, 3, { 0, 0, 0 }, gEvent173Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 870 },
-    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent155Text19, 0, 955 },
-    { 26, 3, 3, 3, { 0, 0, 0 }, gEvent158Text05, 0, 1275 },
-    { 56, 2, 1, 3, { 0, 0, 0 }, gEvent173Text14, MSG_SCRIPT_FLAG_END, 1305 },
-};
-
 #include "event_173_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent173Script[15] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent173Text00, 0, 350 },
-    { 56, 0, 3, 1, { 0, 0, 0 }, &gEvent173Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 400 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, &gEvent173Text02, 0, 600 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, &gEvent173Text03, MSG_SCRIPT_FLAG_SILHOUETTE, 640 },
-    { 26, 3, 1, 1, { 0, 0, 0 }, &gEvent173Text04, 0, 670 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, &gEvent173Text05, MSG_SCRIPT_FLAG_SILHOUETTE, 700 },
-    { 26, 2, 1, 1, { 0, 0, 0 }, &gEvent173Text06, 0, 730 },
-    { 56, 0, 2, 1, { 0, 0, 0 }, &gEvent173Text07, MSG_SCRIPT_FLAG_SILHOUETTE, 760 },
-    { 56, 0, 4, 1, { 0, 0, 0 }, &gEvent173Text08, MSG_SCRIPT_FLAG_SILHOUETTE, 762 },
-    { 56, 0, 4, 1, { 0, 0, 0 }, &gEvent173Text09, MSG_SCRIPT_FLAG_SILHOUETTE, 764 },
-    { 56, 1, 1, 1, { 0, 0, 0 }, &gEvent173Text10, 0, 850 },
-    { 61, 0, 3, 1, { 0, 0, 0 }, &gEvent173Text11, MSG_SCRIPT_FLAG_SILHOUETTE, 870 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent173Text12, 0, 955 },
-    { 26, 3, 3, 1, { 0, 0, 0 }, &gEvent173Text13, 0, 1275 },
-    { 56, 2, 1, 1, { 0, 0, 0 }, &gEvent173Text14, MSG_SCRIPT_FLAG_END, 1305 },
-};
 #endif
 
 static const EvSoundCue sEvent173SoundCues[4] = {

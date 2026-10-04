@@ -1,30 +1,16 @@
 #ifdef VERSION_US
 #include "event_174_text.inc"
-static const MessageScriptEntry sEvent174Script[4] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent174Text00, 0, 100 },
-    { 26, 5, 1, 1, { 0, 0, 0 }, gEvent174Text01, 0, 250 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, gEvent174Text02, 0, 485 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, gEvent174Text03, MSG_SCRIPT_FLAG_END, 750 },
-};
 #endif
+
+static const MessageScriptEntry sEvent174Script[4] = {
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent174Text00), 0, 100 },
+    { 26, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent174Text01), 0, 250 },
+    { 26, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent174Text02), 0, 485 },
+    { 26, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent174Text03), MSG_SCRIPT_FLAG_END, 750 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent174Script[4] = {
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent163Text13, 0, 100 },
-    { 26, 5, 1, 3, { 0, 0, 0 }, gEvent174Text01, 0, 250 },
-    { 26, 2, 3, 3, { 0, 0, 0 }, gEvent174Text02, 0, 485 },
-    { 26, 5, 3, 3, { 0, 0, 0 }, gEvent174Text03, MSG_SCRIPT_FLAG_END, 750 },
-};
-
 #include "event_174_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent174Script[4] = {
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent174Text00, 0, 100 },
-    { 26, 5, 1, 1, { 0, 0, 0 }, &gEvent174Text01, 0, 250 },
-    { 26, 2, 3, 1, { 0, 0, 0 }, &gEvent174Text02, 0, 485 },
-    { 26, 5, 3, 1, { 0, 0, 0 }, &gEvent174Text03, MSG_SCRIPT_FLAG_END, 750 },
-};
 #endif
 
 static const EvSoundCue sEvent174SoundCues[1] = {

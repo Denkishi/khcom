@@ -1,36 +1,18 @@
 #ifdef VERSION_US
 #include "event_096_text.inc"
-static const MessageScriptEntry sEvent096Script[6] = {
-    { 0, 0, 3, 1, { 0, 0, 0 }, gEvent096Text00, 0, 300 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, gEvent096Text01, 0, 340 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, gEvent096Text02, 0, 380 },
-    { 4, 1, 1, 1, { 0, 0, 0 }, gEvent096Text03, 0, 400 },
-    { 1, 5, 3, 1, { 0, 0, 0 }, gEvent096Text04, 0, 670 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, gEvent096Text05, MSG_SCRIPT_FLAG_END, 710 },
-};
 #endif
+
+static const MessageScriptEntry sEvent096Script[6] = {
+    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text00), 0, 300 },
+    { 1, 5, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text01), 0, 340 },
+    { 2, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text02), 0, 380 },
+    { 4, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text03), 0, 400 },
+    { 1, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text04), 0, 670 },
+    { 0, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent096Text05), MSG_SCRIPT_FLAG_END, 710 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent096Script[6] = {
-    { 0, 0, 3, 3, { 0, 0, 0 }, gEvent082Text00, 0, 300 },
-    { 1, 5, 1, 3, { 0, 0, 0 }, gEvent096Text01, 0, 340 },
-    { 2, 0, 1, 3, { 0, 0, 0 }, gEvent096Text02, 0, 380 },
-    { 4, 1, 1, 3, { 0, 0, 0 }, gEvent096Text03, 0, 400 },
-    { 1, 5, 3, 3, { 0, 0, 0 }, gEvent096Text04, 0, 670 },
-    { 0, 2, 1, 3, { 0, 0, 0 }, gEvent096Text05, MSG_SCRIPT_FLAG_END, 710 },
-};
-
 #include "event_096_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent096Script[6] = {
-    { 0, 0, 3, 1, { 0, 0, 0 }, &gEvent096Text00, 0, 300 },
-    { 1, 5, 1, 1, { 0, 0, 0 }, &gEvent096Text01, 0, 340 },
-    { 2, 0, 1, 1, { 0, 0, 0 }, &gEvent096Text02, 0, 380 },
-    { 4, 1, 1, 1, { 0, 0, 0 }, &gEvent096Text03, 0, 400 },
-    { 1, 5, 3, 1, { 0, 0, 0 }, &gEvent096Text04, 0, 670 },
-    { 0, 2, 1, 1, { 0, 0, 0 }, &gEvent096Text05, MSG_SCRIPT_FLAG_END, 710 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent096Camera[3] = {

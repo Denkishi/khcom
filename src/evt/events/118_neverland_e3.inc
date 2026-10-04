@@ -1,87 +1,35 @@
 #ifdef VERSION_US
 #include "event_118_text.inc"
-static const MessageScriptEntry sEvent118Script[23] = {
-    { 1, 3, 0, 1, { 0, 0, 0 }, gEvent118Text00, 0, 120 },
-    { 30, 0, 1, 1, { 0, 0, 0 }, gEvent118Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
-    { 30, 1, 1, 1, { 0, 0, 0 }, gEvent118Text02, 0, 350 },
-    { 30, 1, 4, 1, { 0, 0, 0 }, gEvent118Text03, 0, 352 },
-    { 1, 0, 0, 1, { 0, 0, 0 }, gEvent118Text04, 0, 390 },
-    { 2, 0, 2, 1, { 0, 0, 0 }, gEvent118Text05, 0, 410 },
-    { 0, 0, 0, 1, { 0, 0, 0 }, gEvent118Text06, 0, 430 },
-    { 30, 1, 1, 1, { 0, 0, 0 }, gEvent118Text07, 0, 480 },
-    { 30, 1, 4, 1, { 0, 0, 0 }, gEvent118Text08, 0, 482 },
-    { 0, 2, 3, 1, { 0, 0, 0 }, gEvent118Text09, 0, 530 },
-    { 2, 0, 2, 1, { 0, 0, 0 }, gEvent118Text10, 0, 550 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, gEvent118Text11, 0, 580 },
-    { 0, 3, 2, 1, { 0, 0, 0 }, gEvent118Text12, 0, 850 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, gEvent118Text13, 0, 940 },
-    { 1, 2, 3, 1, { 0, 0, 0 }, gEvent118Text14, 0, 960 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, gEvent118Text15, 0, 980 },
-    { 29, 3, 0, 1, { 0, 0, 0 }, gEvent118Text16, 0, 1000 },
-    { 42, 1, 1, 1, { 0, 0, 0 }, gEvent118Text17, 0, 1100 },
-    { 29, 3, 1, 1, { 0, 0, 0 }, gEvent118Text18, 0, 1120 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, gEvent118Text19, 0, 1140 },
-    { 29, 3, 1, 1, { 0, 0, 0 }, gEvent118Text20, 0, 1190 },
-    { 30, 2, 3, 1, { 0, 0, 0 }, gEvent118Text21, 0, 1260 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, gEvent118Text22, MSG_SCRIPT_FLAG_END, 1500 },
-};
 #endif
+
+static const MessageScriptEntry sEvent118Script[23] = {
+    { 1, 3, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text00), 0, 120 },
+    { 30, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text01), MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
+    { 30, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text02), 0, 350 },
+    { 30, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text03), 0, 352 },
+    { 1, 0, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text04), 0, 390 },
+    { 2, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text05), 0, 410 },
+    { 0, 0, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text06), 0, 430 },
+    { 30, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text07), 0, 480 },
+    { 30, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text08), 0, 482 },
+    { 0, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text09), 0, 530 },
+    { 2, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text10), 0, 550 },
+    { 30, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text11), 0, 580 },
+    { 0, 3, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text12), 0, 850 },
+    { 30, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text13), 0, 940 },
+    { 1, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text14), 0, 960 },
+    { 30, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text15), 0, 980 },
+    { 29, 3, 0, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text16), 0, 1000 },
+    { 42, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text17), 0, 1100 },
+    { 29, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text18), 0, 1120 },
+    { 30, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text19), 0, 1140 },
+    { 29, 3, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text20), 0, 1190 },
+    { 30, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text21), 0, 1260 },
+    { 30, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent118Text22), MSG_SCRIPT_FLAG_END, 1500 },
+};
 
 #ifdef VERSION_JP
-static const MessageScriptEntry sEvent118Script[23] = {
-    { 1, 3, 0, 3, { 0, 0, 0 }, gEvent118Text00, 0, 120 },
-    { 30, 0, 1, 3, { 0, 0, 0 }, gEvent118Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
-    { 30, 1, 1, 3, { 0, 0, 0 }, gEvent118Text02, 0, 350 },
-    { 30, 1, 4, 3, { 0, 0, 0 }, gEvent118Text03, 0, 352 },
-    { 1, 0, 0, 3, { 0, 0, 0 }, gEvent118Text04, 0, 390 },
-    { 2, 0, 2, 3, { 0, 0, 0 }, gEvent118Text05, 0, 410 },
-    { 0, 0, 0, 3, { 0, 0, 0 }, gEvent118Text06, 0, 430 },
-    { 30, 1, 1, 3, { 0, 0, 0 }, gEvent118Text07, 0, 480 },
-    { 30, 1, 4, 3, { 0, 0, 0 }, gEvent118Text08, 0, 482 },
-    { 0, 2, 3, 3, { 0, 0, 0 }, gEvent118Text09, 0, 530 },
-    { 2, 0, 2, 3, { 0, 0, 0 }, gEvent118Text10, 0, 550 },
-    { 30, 3, 1, 3, { 0, 0, 0 }, gEvent118Text11, 0, 580 },
-    { 0, 3, 2, 3, { 0, 0, 0 }, gEvent118Text12, 0, 850 },
-    { 30, 3, 1, 3, { 0, 0, 0 }, gEvent118Text13, 0, 940 },
-    { 1, 2, 3, 3, { 0, 0, 0 }, gEvent103Text09, 0, 960 },
-    { 30, 3, 1, 3, { 0, 0, 0 }, gEvent118Text15, 0, 980 },
-    { 29, 3, 0, 3, { 0, 0, 0 }, gEvent118Text16, 0, 1000 },
-    { 42, 1, 1, 3, { 0, 0, 0 }, gEvent118Text17, 0, 1100 },
-    { 29, 3, 1, 3, { 0, 0, 0 }, gEvent118Text18, 0, 1120 },
-    { 30, 1, 3, 3, { 0, 0, 0 }, gEvent118Text19, 0, 1140 },
-    { 29, 3, 1, 3, { 0, 0, 0 }, gEvent118Text20, 0, 1190 },
-    { 30, 2, 3, 3, { 0, 0, 0 }, gEvent118Text21, 0, 1260 },
-    { 30, 1, 3, 3, { 0, 0, 0 }, gEvent118Text22, MSG_SCRIPT_FLAG_END, 1500 },
-};
-
 #include "event_118_text.inc"
-#endif
-#ifdef VERSION_EU
-static const MessageScriptEntry sEvent118Script[23] = {
-    { 1, 3, 0, 1, { 0, 0, 0 }, &gEvent118Text00, 0, 120 },
-    { 30, 0, 1, 1, { 0, 0, 0 }, &gEvent118Text01, MSG_SCRIPT_FLAG_SILHOUETTE, 150 },
-    { 30, 1, 1, 1, { 0, 0, 0 }, &gEvent118Text02, 0, 350 },
-    { 30, 1, 4, 1, { 0, 0, 0 }, &gEvent118Text03, 0, 352 },
-    { 1, 0, 0, 1, { 0, 0, 0 }, &gEvent118Text04, 0, 390 },
-    { 2, 0, 2, 1, { 0, 0, 0 }, &gEvent118Text05, 0, 410 },
-    { 0, 0, 0, 1, { 0, 0, 0 }, &gEvent118Text06, 0, 430 },
-    { 30, 1, 1, 1, { 0, 0, 0 }, &gEvent118Text07, 0, 480 },
-    { 30, 1, 4, 1, { 0, 0, 0 }, &gEvent118Text08, 0, 482 },
-    { 0, 2, 3, 1, { 0, 0, 0 }, &gEvent118Text09, 0, 530 },
-    { 2, 0, 2, 1, { 0, 0, 0 }, &gEvent118Text10, 0, 550 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, &gEvent118Text11, 0, 580 },
-    { 0, 3, 2, 1, { 0, 0, 0 }, &gEvent118Text12, 0, 850 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, &gEvent118Text13, 0, 940 },
-    { 1, 2, 3, 1, { 0, 0, 0 }, &gEvent118Text14, 0, 960 },
-    { 30, 3, 1, 1, { 0, 0, 0 }, &gEvent118Text15, 0, 980 },
-    { 29, 3, 0, 1, { 0, 0, 0 }, &gEvent118Text16, 0, 1000 },
-    { 42, 1, 1, 1, { 0, 0, 0 }, &gEvent118Text17, 0, 1100 },
-    { 29, 3, 1, 1, { 0, 0, 0 }, &gEvent118Text18, 0, 1120 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, &gEvent118Text19, 0, 1140 },
-    { 29, 3, 1, 1, { 0, 0, 0 }, &gEvent118Text20, 0, 1190 },
-    { 30, 2, 3, 1, { 0, 0, 0 }, &gEvent118Text21, 0, 1260 },
-    { 30, 1, 3, 1, { 0, 0, 0 }, &gEvent118Text22, MSG_SCRIPT_FLAG_END, 1500 },
-};
 #endif
 
 static const EventCameraKeyframe sEvent118Camera[5] = {

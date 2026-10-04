@@ -612,8 +612,8 @@ s32 down_1(EffectWork* work) {
     s = work->down;
 
     for (i = 0; i < 8; i++) {
-        s->x[i] = gSineTable[s->angle[i] & 0xFF] * 8 + work->x;
-        s->y[i] = -gSineTable[(s->angle[i] & 0xFF) + 64] * (s->wobble[i] + 4) +
+        s->x[i] = SIN(s->angle[i]) * 8 + work->x;
+        s->y[i] = -COS(s->angle[i]) * (s->wobble[i] + 4) +
                        work->y;
         s->angle[i] += 4;
 

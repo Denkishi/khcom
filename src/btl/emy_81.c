@@ -132,7 +132,7 @@ u8 task_emy_81_1(Emy81Work* work) {
         work->base.vz = 0;
 
         {
-            s32 sample = gSineTable[((u16)work->base.stateTimer * 4) & 0xFF] * 10;
+            s32 sample = SIN((u16)work->base.stateTimer * 4) * 10;
             s32 current = act->z;
 
             z = current + 0x2800;

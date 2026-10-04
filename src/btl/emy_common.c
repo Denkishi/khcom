@@ -299,7 +299,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         work->vz = 0;
         AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
-        actor->z += ((work->hoverZ + gSineTable[gFrameCounter & 0xFF] * 10) - actor->z) >> 4;
+        actor->z += ((work->hoverZ + SIN(gFrameCounter) * 10) - actor->z) >> 4;
 
         if (GetRandom() % work->def->turnInterval == 0) {
             if (actor->x > x) {
@@ -348,7 +348,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         work->vz = 0;
         AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
         TryEnemyCardUse(actor);
-        actor->z += ((work->hoverZ + gSineTable[gFrameCounter * 2 & 0xFF] * 12) - actor->z) >> 4;
+        actor->z += ((work->hoverZ + SIN(gFrameCounter * 2) * 12) - actor->z) >> 4;
 
         if (GetRandom() % work->def->turnInterval == 0) {
             if (actor->x > x) {

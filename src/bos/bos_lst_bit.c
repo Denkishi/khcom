@@ -652,16 +652,16 @@ u8 task_bos_lst_bit_1(LstState* work) {
     work->angle &= 0xFF;
 
     if (work->kind == 0) {
-        work->orbitX = (-gSineTable[(work->angle & 0xFF) + 64] * 3 >> 6) << 8;
-        work->orbitY = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
+        work->orbitX = (-COS(work->angle) * 3 >> 6) << 8;
+        work->orbitY = (SIN(work->angle) * 3 >> 6) << 8;
         work->orbitZ = work->orbitZ / 2;
     } else if (work->index == 0) {
         work->orbitX = work->orbitX / 2;
         work->orbitY = work->orbitY / 2;
         work->orbitZ = work->orbitZ / 2;
     } else {
-        work->orbitX = (-gSineTable[(work->angle & 0xFF) + 64] >> 3) << 8;
-        work->orbitY = (gSineTable[work->angle & 0xFF] * 3 >> 6) << 8;
+        work->orbitX = (-COS(work->angle) >> 3) << 8;
+        work->orbitY = (SIN(work->angle) * 3 >> 6) << 8;
         work->orbitZ = 0x800;
     }
 

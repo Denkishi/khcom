@@ -2443,11 +2443,11 @@ void BgFxUpdateDumboSplash() {
         t *= 44;
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
-            sBgFx->angleFixed = -gSineTable[(v * 4) & 0xFF] * 6;
+            sBgFx->angleFixed = -SIN(v * 4) * 6;
             ApplyAttackBox(sBgFx->attack, sBgFx->x + t, sBgFx->y,
                 sBgFx->z, t << 8 >> 16, 24, 24);
         } else {
-            sBgFx->angleFixed = gSineTable[(v * 4) & 0xFF] * 6;
+            sBgFx->angleFixed = SIN(v * 4) * 6;
             ApplyAttackBox(sBgFx->attack, sBgFx->x - t, sBgFx->y,
                 sBgFx->z, t << 8 >> 16, 24, 24);
         }
@@ -2901,7 +2901,7 @@ void BgFxUpdateSync() {
 
     switch (sBgFx->state) {
     case 0:
-        sBgFx->scaleX = (gSineTable[((u16)sBgFx->timer * 4) & 0xFF] >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
 
         if (sBgFx->steps > 0) {
             ApproachValueHalfSteps(&sBgFx->z, sBgFx->targetZ - 0x2000, sBgFx->steps);
@@ -2913,7 +2913,7 @@ void BgFxUpdateSync() {
 
         break;
     case 1:
-        sBgFx->scaleX = (gSineTable[((u16)sBgFx->timer * 4) & 0xFF] >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
         sBgFx->steps--;
 
         if (sBgFx->steps <= 0) {
@@ -2923,7 +2923,7 @@ void BgFxUpdateSync() {
 
         break;
     case 2:
-        sBgFx->scaleX = (gSineTable[((u16)sBgFx->timer * 4) & 0xFF] >> 3) + 89;
+        sBgFx->scaleX = (SIN((u16)sBgFx->timer * 4) >> 3) + 89;
         o = BgFxGetSyncTarget();
 
         if (o != NULL) {
@@ -3437,7 +3437,7 @@ void BgFxStartXmas(u16 a) {
 void BgFxUpdateVixenIceFall() {
     u16 t;
     s32 w;
-    t = (gSineTable[(sBgFx->unk_0C / 3) & 0xFF] * 10240) >> 16;
+    t = (SIN(sBgFx->unk_0C / 3) * 10240) >> 16;
     w = ((abs(gSineTable[(u8)sBgFx->unk_0C]) >> 1) + 0x100) * 0x133 >> 8;
     BgAnimSetTransform(t + 15, 0x133, w);
     BgFxUpdateFullscreen();
@@ -3641,8 +3641,8 @@ void BgFxTornadoLiftBtlObj(BtlObj* a, BtlObj* b, u8 c, u8 d) {
             }
 
             t = -(h >> 9);
-            nx = sBgFx->x + gSineTable[(b->angle + c) & 0xFF] * (s16)t;
-            ny = sBgFx->y + -gSineTable[((b->angle + c) & 0xFF) + 64] * ((s16)t >> 1);
+            nx = sBgFx->x + SIN(b->angle + c) * (s16)t;
+            ny = sBgFx->y + -COS(b->angle + c) * ((s16)t >> 1);
 
             if (b->x < nx) {
                 b->flags &= ~BTLOBJ_FLAG_FACING_LEFT;

@@ -278,10 +278,10 @@ s32 Friend_card_1(PickupCardWork* work, void* a) {
     ColliderSetPosition(&work->collider, work->posX, work->posY,
                   work->posZ);
     work->scaleX =
-        (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] *
+        (-COS(work->flipAngleX + 128) *
          work->scale) >> 8;
     work->scaleY =
-        (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] *
+        (-COS(work->flipAngleY + 128) *
          work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
@@ -386,10 +386,10 @@ s32 Gimmick_card_1(PickupCardWork* work, void* a) {
     ColliderSetPosition(&work->collider, work->posX, work->posY,
                   work->posZ);
     work->scaleX =
-        (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] *
+        (-COS(work->flipAngleX + 128) *
          work->scale) >> 8;
     work->scaleY =
-        (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] *
+        (-COS(work->flipAngleY + 128) *
          work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
@@ -462,8 +462,8 @@ u8 FlyPickupCardToDeck(PickupCardWork* work) {
         work->scale = t + 3;
     }
 
-    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
-    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleX = (-COS(work->flipAngleX + 128) * work->scale) >> 8;
+    work->scaleY = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
         work->scaleX = 2;
@@ -552,8 +552,8 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* a) {
         work->scale = t + 3;
     }
 
-    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
-    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleX = (-COS(work->flipAngleX + 128) * work->scale) >> 8;
+    work->scaleY = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
         work->scaleX = 2;
@@ -618,8 +618,8 @@ s32 Heartless_card_1(PickupCardWork* work, void* a) {
     }
 
     ColliderSetPosition(&work->collider, work->posX, work->posY, work->posZ);
-    work->scaleX = (-gSineTable[((work->flipAngleX + 128) & 0xFF) + 64] * work->scale) >> 8;
-    work->scaleY = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
+    work->scaleX = (-COS(work->flipAngleX + 128) * work->scale) >> 8;
+    work->scaleY = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
         work->scaleX = 2;

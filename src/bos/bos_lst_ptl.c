@@ -75,8 +75,8 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
     case 1:
         work->x -= 0x80;
         work->y += 0x100;
-        work->wobbleX = -gSineTable[((work->timer * 8) & 0xFF) + 0x40];
-        work->wobbleY = gSineTable[(work->timer * 2) & 0xFF];
+        work->wobbleX = -COS(work->timer * 8);
+        work->wobbleY = SIN(work->timer * 2);
         work->timer++;
 
         if ((work->y >> 8) > 0xA8) {

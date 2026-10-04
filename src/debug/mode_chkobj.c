@@ -1468,9 +1468,9 @@ void mode_chkobj_1() {
             DebugTextPrint(166, 0, 2, sChkObjEntries[sChkObjWork->category].name);
         }
 
-        SetBackdropColor((u16)abs(gSineTable[sChkObjWork->angle & 0xFF] * 5 >> 6),
-                      (u16)abs(gSineTable[(sChkObjWork->angle / 2) & 0xFF] * 5 >> 6),
-                      (u16)abs(gSineTable[(sChkObjWork->angle / 4) & 0xFF] * 5 >> 6));
+        SetBackdropColor((u16)abs(SIN(sChkObjWork->angle) * 5 >> 6),
+                      (u16)abs(SIN(sChkObjWork->angle / 2) * 5 >> 6),
+                      (u16)abs(SIN(sChkObjWork->angle / 4) * 5 >> 6));
 
         if (GetKeysHeld() & DPAD_UP) {
             sChkObjWork->y--;

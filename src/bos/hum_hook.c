@@ -732,7 +732,7 @@ u8 task_hum_hook_1(HookWork* work) {
     }
 
     if (act->hp > 0) {
-        gBtlWork->rotation = (gSineTable[(w->angle / 2) & 0xFF] * sHumHookRollAmplitudes[w->rollLevel]) >> 8;
+        gBtlWork->rotation = (SIN(w->angle / 2) * sHumHookRollAmplitudes[w->rollLevel]) >> 8;
 
         {
             s32 t;

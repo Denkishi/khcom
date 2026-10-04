@@ -539,7 +539,7 @@ void DrawMooglePackOpening() {
             affine = AllocObjAffine(0, v, v, 0);
             obj = AnimUpdate(&sMooglePackCards[i].anim);
         } else {
-            v = sMooglePackCards[i].scale * -gSineTable[(sMooglePackCards[i].flipAngle & 0xFF) + 0x40] >> 8;
+            v = sMooglePackCards[i].scale * -COS(sMooglePackCards[i].flipAngle) >> 8;
             affine = AllocObjAffine(0, v, sMooglePackCards[i].scale, 0);
             obj = sMooglePackCards[i].backSprite;
         }

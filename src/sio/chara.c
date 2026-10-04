@@ -293,9 +293,9 @@ u8 task_chgCardObj_1(ChgCardObjWork* work) {
         work->decel += 2;
         phase = ChgCardRotation(work, 128);
         p10 = work->scaleX;
-        *p10 = (-gSineTable[((work->flipAngleX + phase) & 0xFF) + 64] * work->scale) >> 8;
+        *p10 = (-COS(work->flipAngleX + phase) * work->scale) >> 8;
         p14 = work->scaleY;
-        *p14 = (-gSineTable[((work->flipAngleY + 128) & 0xFF) + 64] * work->scale) >> 8;
+        *p14 = (-COS(work->flipAngleY + 128) * work->scale) >> 8;
 
         if (*p10 >= -2 && *p10 <= 2) {
             *p10 = 2;

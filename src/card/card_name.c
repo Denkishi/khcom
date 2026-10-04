@@ -241,15 +241,15 @@ void PremireEffectDestroy(PremiumCardEffectWork* work) {
 }
 
 void PremireEffectSetOrbitPos(PremiumCardEffectWork* work) {
-    work->x = gSineTable[work->angle & 0xFF] * (work->radius >> 8) + work->centerX;
-    work->y = -gSineTable[(work->angle & 0xFF) + 64] * (work->radius >> 8) + work->centerY;
+    work->x = SIN(work->angle) * (work->radius >> 8) + work->centerX;
+    work->y = -COS(work->angle) * (work->radius >> 8) + work->centerY;
 }
 
 void PremireEffectMoveFalling(PremiumCardEffectWork* work) {
     work->fallSpeed += 30;
     work->fallY += work->fallSpeed;
-    work->centerX += gSineTable[work->angle & 0xFF] * (work->speed >> 8);
-    work->centerY += -gSineTable[(work->angle & 0xFF) + 64] * (work->speed >> 8);
+    work->centerX += SIN(work->angle) * (work->speed >> 8);
+    work->centerY += -COS(work->angle) * (work->speed >> 8);
     work->x = work->centerX;
     work->y = work->centerY + work->fallY;
 }

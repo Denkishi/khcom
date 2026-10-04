@@ -3423,7 +3423,7 @@ u8 RikuCardFlyOff(CardDisplayWork* work) {
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer;
     work->timer++;
-    work->x -= gSineTable[(work->ringAngle & 0xFF) + 0x40];
+    work->x -= COS(work->ringAngle);
     work->angle += work->spinSpeed;
     work->scaleX -= 5;
     work->scaleY -= 5;
@@ -3455,8 +3455,8 @@ void UpdateRikuPlayedCardPosition(CardDisplayWork* work) {
     }
 
     work->ringAngle += (work->ringAngleTarget - work->ringAngle) >> 2;
-    work->x = gSineTable[(work->ringAngle >> 8) & 0xFF] * (work->ringRadius >> 8) + work->ringCenterX;
-    work->y = -gSineTable[((work->ringAngle >> 8) & 0xFF) + 64] * (work->ringRadius >> 8) + work->ringCenterY;
+    work->x = SIN(work->ringAngle >> 8) * (work->ringRadius >> 8) + work->ringCenterX;
+    work->y = -COS(work->ringAngle >> 8) * (work->ringRadius >> 8) + work->ringCenterY;
 }
 
 u8 DispatchRikuCardCommand(CardDisplayWork* work, void* a) {

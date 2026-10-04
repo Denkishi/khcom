@@ -743,11 +743,11 @@ void MapEnm01UpdateHover(MapEnmWork* work, u8 a) {
 
     switch (a) {
     case 1:
-        v = work->targetZ + gSineTable[gFrameCounter & 0xFF] * 10;
+        v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
     case 0:
     default:
-        v = work->targetZ + gSineTable[gFrameCounter * 2 & 0xFF] * 12;
+        v = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
     }
 
@@ -1054,11 +1054,11 @@ void MapEnm03UpdateHover(MapEnmWork* work, u8 a) {
 
     switch (a) {
     case 1:
-        v = work->targetZ + gSineTable[gFrameCounter & 0xFF] * 10;
+        v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
     case 0:
     default:
-        v = work->targetZ + gSineTable[gFrameCounter * 2 & 0xFF] * 12;
+        v = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
     }
 
@@ -1299,11 +1299,11 @@ void MapEnm04UpdateHover(MapEnmWork* work, u8 a) {
 
     switch (a) {
     case 1:
-        v = work->targetZ + gSineTable[gFrameCounter & 0xFF] * 10;
+        v = work->targetZ + SIN(gFrameCounter) * 10;
         break;
     case 0:
     default:
-        v = work->targetZ + gSineTable[gFrameCounter * 2 & 0xFF] * 12;
+        v = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
     }
 
@@ -4178,8 +4178,8 @@ void Task_MapPrize_3(MapPrizeWork* work) {
 }
 
 void MapPrzCardUpdateScale(MapPrzCardWork* work) {
-    work->scaleX = -gSineTable[((work->phaseX + 0x80) & 0xFF) + 0x40] * work->scale >> 8;
-    work->scaleY = -gSineTable[((work->phaseY + 0x80) & 0xFF) + 0x40] * work->scale >> 8;
+    work->scaleX = -COS(work->phaseX + 0x80) * work->scale >> 8;
+    work->scaleY = -COS(work->phaseY + 0x80) * work->scale >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
         work->scaleX = 2;

@@ -92,7 +92,7 @@ u8 task_emy_29_1(Emy29Work* work) {
     case 0x12:
         AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
-        a = -gSineTable[(((u16)work->base.stateTimer * 2) & 0xFF) + 0x40] << 4;
+        a = -COS((u16)work->base.stateTimer * 2) << 4;
         t = act->z + 0x1000;
         act->z += (a - t) >> 2;
 

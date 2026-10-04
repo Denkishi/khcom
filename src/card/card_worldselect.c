@@ -2689,14 +2689,14 @@ void UpdateReloadGageRingPosition(CardDisplayWork* work) {
 
     switch (work->args.variant) {
     case 1:
-        work->ringCenterX = gSineTable[(work->swingAngle >> 8) & 0xFF] * 80 + gSoraCardLayout[0][0];
-        work->ringCenterY = -gSineTable[((work->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gSoraCardLayout[0][1];
+        work->ringCenterX = SIN(work->swingAngle >> 8) * 80 + gSoraCardLayout[0][0];
+        work->ringCenterY = -COS(work->swingAngle >> 8) * 80 + gSoraCardLayout[0][1];
         work->x = gSineTable[0x20] * (work->ringRadius >> 8) + work->ringCenterX;
         work->y = -gSineTable[0x60] * (work->ringRadius >> 8) + work->ringCenterY;
         break;
     case 2:
-        work->ringCenterX = gSineTable[(work->swingAngle >> 8) & 0xFF] * 80 + gRikuCardLayout[0][0];
-        work->ringCenterY = -gSineTable[((work->swingAngle >> 8) & 0xFF) + 0x40] * 80 + gRikuCardLayout[0][1];
+        work->ringCenterX = SIN(work->swingAngle >> 8) * 80 + gRikuCardLayout[0][0];
+        work->ringCenterY = -COS(work->swingAngle >> 8) * 80 + gRikuCardLayout[0][1];
         work->x = gSineTable[0xE0] * (work->ringRadius >> 8) + work->ringCenterX;
         work->y = -gSineTable[0x120] * (work->ringRadius >> 8) + work->ringCenterY;
         break;

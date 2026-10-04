@@ -614,10 +614,10 @@ void task_tutorial_2(TutorialWork* work) {
 
         if (work->anim.animId == 0) {
             x = work->arrowX;
-            s = gSineTable[(gFrameCounter << 3) & 0xFF];
+            s = SIN(gFrameCounter << 3);
             y = (s >> 7) + work->arrowY;
         } else {
-            s = gSineTable[(gFrameCounter << 3) & 0xFF];
+            s = SIN(gFrameCounter << 3);
             x = (s >> 7) + work->arrowX;
             y = work->arrowY;
         }

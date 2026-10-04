@@ -201,7 +201,7 @@ void SmnGenieFollowTarget(SmnGenieWork* work) {
     }
 
     body->y += v;
-    body->z += (zt - gSineTable[(work->stateTimer * 2) & 0xFF] * 8 - body->z) >> 3;
+    body->z += (zt - SIN(work->stateTimer * 2) * 8 - body->z) >> 3;
 }
 
 u8 task_smn_genie_1(SmnGenieWork* work) {
@@ -268,7 +268,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
             AnimChangeWithDef(sSmnGenieAnimDefs, &work->anim, 0, 0, work->tiles);
         }
 
-        height = ((u32)gSineTable[(work->stateTimer * 2) & 255] << 3) + 0xC00;
+        height = ((u32)SIN(work->stateTimer * 2) << 3) + 0xC00;
         body->z += (body->groundZ - height - body->z) >> 3;
 
         if ((s16)work->stateTimer > 10) {

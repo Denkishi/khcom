@@ -572,7 +572,7 @@ void BosLstMoveMode1(BosLstWork* work) {
     }
 
     y = 0x1F000;
-    work->offsetX = (-gSineTable[((work->frameCount * 4) & 0xFF) + 64] / 16) << 8;
+    work->offsetX = (-COS(work->frameCount * 4) / 16) << 8;
     work->y = BosLstApproachValue(work->y, y, 0, 0x100, 0x200);
     work->z = BosLstApproachValue(work->z, -0xA400, 0x400, 0x100, 0x200);
 }

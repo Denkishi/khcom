@@ -270,8 +270,8 @@ u8 LockonIsInFront(u16 a, s32 b, s32 c, FldObj* d) {
     if (d != NULL) {
         x = d->fieldPosition.x - b;
         y = d->fieldPosition.y - c;
-        sn = gSineTable[a & 0xFF];
-        cs = -gSineTable[(a & 0xFF) + 0x40];
+        sn = SIN(a);
+        cs = -COS(a);
         NormalizeVector2D8(&x, &y);
         dot = (sn * x >> 8) + (y * cs >> 8);
 

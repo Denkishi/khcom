@@ -591,12 +591,12 @@ void task_frd_jack_2(FrdJackWork* work) {
     }
 
     if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        sx = sx + (gSineTable[(u16)(angle + 128) & 0xFF] * 5 >> 5);
+        sx = sx + (SIN((u16)(angle + 128)) * 5 >> 5);
     } else {
-        sx = sx - (gSineTable[(u16)(angle + 128) & 0xFF] * 5 >> 5);
+        sx = sx - (SIN((u16)(angle + 128)) * 5 >> 5);
     }
 
-    sy = sy + (-gSineTable[((u16)(angle + 128) & 0xFF) + 64] * 5 >> 5) - 40;
+    sy = sy + (-COS((u16)(angle + 128)) * 5 >> 5) - 40;
     DrawSprite(sx, sy, gfx, work->tiles, work->palette, affine, flags, -4100 - ((body->y >> 8) * 4));
     body->shadowPriority = (-4100 - ((body->y >> 8) * 4)) | 2;
     TaskPoolDraw(&work->tasks);

@@ -215,9 +215,9 @@ u8 EnemyUsecard_1(CardDisplayWork* work, void* a) {
 }
 
 u8 EnemyCardDeal(CardDisplayWork* work, void* a) {
-    ApproachValue(&work->x, gSineTable[((work->ringAngle >> 8) - 32) & 0xFF] * (work->ringRadius >> 8) + sEnemyCardLayout[0],
+    ApproachValue(&work->x, SIN((work->ringAngle >> 8) - 32) * (work->ringRadius >> 8) + sEnemyCardLayout[0],
                   work->timer);
-    ApproachValue(&work->y, -gSineTable[(((work->ringAngle >> 8) - 32) & 0xFF) + 0x40] * (work->ringRadius >> 8) + sEnemyCardLayout[1],
+    ApproachValue(&work->y, -COS((work->ringAngle >> 8) - 32) * (work->ringRadius >> 8) + sEnemyCardLayout[1],
                   work->timer);
     work->timer--;
 
@@ -271,8 +271,8 @@ void UpdateEnemyCardRingPosition(CardDisplayWork* work) {
         work->flags &= ~CARD_DISP_FLAG_SETTLED;
     }
 
-    work->x = gSineTable[((work->ringAngle >> 8) - 32) & 0xFF] * (work->ringRadius >> 8) + work->ringCenterX;
-    work->y = -gSineTable[(((work->ringAngle >> 8) - 32) & 0xFF) + 64] * (work->ringRadius >> 8) + work->ringCenterY;
+    work->x = SIN((work->ringAngle >> 8) - 32) * (work->ringRadius >> 8) + work->ringCenterX;
+    work->y = -COS((work->ringAngle >> 8) - 32) * (work->ringRadius >> 8) + work->ringCenterY;
 }
 
 u8 EnemyCardShrinkAway(CardDisplayWork* work) {
@@ -305,7 +305,7 @@ u8 EnemyCardFlyOff(CardDisplayWork* work) {
     work->y -= work->ringRadius;
     work->ringRadius -= (s16)work->timer;
     work->timer++;
-    work->x -= gSineTable[(work->ringAngle & 0xFF) + 0x40];
+    work->x -= COS(work->ringAngle);
     work->angle += work->spinSpeed;
     work->scaleX -= 5;
     work->scaleY -= 5;

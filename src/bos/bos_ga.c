@@ -2192,9 +2192,9 @@ u8 BosGaUpdateGimmick(GaWork* work) {
             e = &work->entries[i];
 
             if (!(e->flags & GA_ENTRY_FLAG_DESTROYED)) {
-                e->vz = -gSineTable[((GetRandom() % 0x20) & 0xFF) + 0x40] * -3;
-                e->vx = gSineTable[(GetRandom() % 0x100) & 0xFF] * 0x233 >> 8;
-                e->vy = -gSineTable[((GetRandom() % 0x100) & 0xFF) + 0x40] * 0x233 >> 8;
+                e->vz = -COS(GetRandom() % 0x20) * -3;
+                e->vx = SIN(GetRandom() % 0x100) * 0x233 >> 8;
+                e->vy = -COS(GetRandom() % 0x100) * 0x233 >> 8;
                 e->mode = 1;
 
                 if (i == 0) {

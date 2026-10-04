@@ -210,7 +210,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
             work->hoverZ = body->z;
             work->steps = 30;
         } else {
-            body->z += (work->hoverZ + gSineTable[work->stateTimer & 0xFF] * 12
+            body->z += (work->hoverZ + SIN(work->stateTimer) * 12
                              - body->z) >> 2;
         }
 
@@ -236,9 +236,9 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         }
 
         p = work->actor;
-        x = p->x + gSineTable[((u16)work->stateTimer * 4) & 0xFF] * 32;
-        y = p->y + gSineTable[(((u16)work->stateTimer * 4) & 0xFF) + 64] * -16;
-        z = (p->z - 0x1E00) + gSineTable[(u16)work->stateTimer * 2 & 0xFF] * 16;
+        x = p->x + SIN((u16)work->stateTimer * 4) * 32;
+        y = p->y + COS((u16)work->stateTimer * 4) * -16;
+        z = (p->z - 0x1E00) + SIN((u16)work->stateTimer * 2) * 16;
 
         if (x < body->x) {
             body->flags |= BTLOBJ_FLAG_FACING_LEFT;

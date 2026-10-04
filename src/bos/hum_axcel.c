@@ -511,8 +511,8 @@ u8 task_hum_axcel_1(AxcelWork* work) {
 
         sub->x += (t - sub->x) >> 3;
         sub2->x += (t - sub2->x) >> 3;
-        sub->y += (act->y + gSineTable[((u16)work->base.stateTimer * 4) & 255] * 55 - sub->y) >> 2;
-        sub2->y += (act->y - gSineTable[((u16)work->base.stateTimer * 4) & 255] * 55 - sub2->y) >> 2;
+        sub->y += (act->y + SIN((u16)work->base.stateTimer * 4) * 55 - sub->y) >> 2;
+        sub2->y += (act->y - SIN((u16)work->base.stateTimer * 4) * 55 - sub2->y) >> 2;
 
         {
             s32* ground = &gBtlWork->targetZ;

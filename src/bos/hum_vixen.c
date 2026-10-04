@@ -524,7 +524,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         if (AnimGetFrame(&w->base.anim) > 2) {
             ang = GetAngle(work->needleX, work->needleY, x, y);
             ApproachAngle(&work->angle, ang, 3);
-            s = abs(gSineTable[((u16)w->base.stateTimer * 2) & 0xFF]);
+            s = abs(SIN((u16)w->base.stateTimer * 2));
             s += 384;
             work->needleX += (gSineTable[(u8)work->angle] * s) >> 8;
             work->needleY += (-gSineTable[(u8)work->angle + 64] * s) >> 8;

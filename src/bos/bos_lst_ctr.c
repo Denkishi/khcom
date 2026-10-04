@@ -136,9 +136,9 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->duration = (s16)BosLstCtrSqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) / 9;
         } else {
             work->offsetX =
-                (-gSineTable[((sBosLstCtrAngles[work->count][work->index] + c) & 0xFF) + 0x40] * 5 >> 6) << 8;
+                (-COS(sBosLstCtrAngles[work->count][work->index] + c) * 5 >> 6) << 8;
             work->offsetZ =
-                ((gSineTable[(sBosLstCtrAngles[work->count][work->index] + c) & 0xFF] * 3 >> 5) - 4) << 8;
+                ((SIN(sBosLstCtrAngles[work->count][work->index] + c) * 3 >> 5) - 4) << 8;
         }
 
         break;

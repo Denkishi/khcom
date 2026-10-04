@@ -485,7 +485,7 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
     DmaCopy16(3, sBosLstFldHofsTable, work->hofsTable, 0x940);
 
     for (i = 0; i < 0x1A0; i++) {
-        work->vofsTable[i] = (gSineTable[(i + 64) & 255] >> 1) & 0x1FF;
+        work->vofsTable[i] = (SIN(i + 64) >> 1) & 0x1FF;
     }
 
     work->cameraMode = 0;

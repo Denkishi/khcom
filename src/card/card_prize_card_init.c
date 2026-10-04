@@ -1362,8 +1362,8 @@ static void PrizeCard_3(PrizeMapCardWork* work) {
 }
 
 void UpdatePrizeMapCardScale(PrizeMapCardWork* work) {
-    work->scaleX = (-gSineTable[((work->flipAngleX + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
-    work->scaleY = (-gSineTable[((work->flipAngleY + 0x80) & 0xFF) + 0x40] * work->scale) >> 8;
+    work->scaleX = (-COS(work->flipAngleX + 0x80) * work->scale) >> 8;
+    work->scaleY = (-COS(work->flipAngleY + 0x80) * work->scale) >> 8;
 
     if ((u16)(work->scaleX + 2) <= 4) {
         work->scaleX = 2;

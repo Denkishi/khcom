@@ -81,8 +81,8 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
         work->centerX[i] = (work->targetX << 8) + gLvupEffectStartOffsetX[i];
         work->centerY[i] = (work->targetY << 8) + gLvupEffectStartOffsetY[i];
         work->angle[i] = gLvupEffectStartAngles[i];
-        work->x[i] = work->radius * gSineTable[work->angle[i] & 0xFF] + work->centerX[i];
-        work->y[i] = -gSineTable[(work->angle[i] & 0xFF) + 64] * work->radius + work->centerY[i];
+        work->x[i] = work->radius * SIN(work->angle[i]) + work->centerX[i];
+        work->y[i] = -COS(work->angle[i]) * work->radius + work->centerY[i];
         work->unk_54[i] = 0;
     }
 
@@ -127,8 +127,8 @@ u8 LVUP_EFFECT_1(LevelUpEffectWork* work, void* a) {
     }
 
     for (i = 0; i < 4; i++) {
-        work->x[i] = gSineTable[work->angle[i] & 0xFF] * work->radius + work->centerX[i];
-        work->y[i] = -gSineTable[(work->angle[i] & 0xFF) + 64] * work->radius + work->centerY[i];
+        work->x[i] = SIN(work->angle[i]) * work->radius + work->centerX[i];
+        work->y[i] = -COS(work->angle[i]) * work->radius + work->centerY[i];
     }
 
     work->timer++;

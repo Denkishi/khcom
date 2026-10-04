@@ -1847,7 +1847,7 @@ void mode_jiminy_1() {
         break;
     }
 
-    t = abs(gSineTable[(sJiminyWork->frame * 2) & 0xFF]) * 15 >> 8;
+    t = abs(SIN(sJiminyWork->frame * 2)) * 15 >> 8;
     gBldCnt = (BLDCNT_TGT1_OBJ | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG2 | BLDCNT_TGT2_BG3);
     SetBlendAlpha(t, 16 - t);
 

@@ -3338,7 +3338,7 @@ void task_poo_trapballoon_2(PooBalloonWork* work) {
     } else {
         work->gfx = AnimUpdate(&work->anim);
         work->angle += 2;
-        d = gSineTable[work->angle & 0xFF] * 2;
+        d = SIN(work->angle) * 2;
         x = ((work->pos.x - 0x800) >> 8) - gPooScrollX;
         d += 0x1200;
         y = ((work->pos.y + d) >> 8) + (work->pos.z >> 8) - gPooScrollY;

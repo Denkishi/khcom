@@ -74,7 +74,7 @@ u8 task_emy_41_1(Emy41Work* work) {
     case 0x12:
         AnimChangeWithDef(sEmy41AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
-        a = gSineTable[((u16)work->base.stateTimer * 4) & 0xFF] << 4;
+        a = SIN((u16)work->base.stateTimer * 4) << 4;
         t = act->z + 0x1000;
         act->z += (a - t) >> 2;
         EmyLungeAttack(&work->base, 0x14, 0x63, 0x1E, 0xD8, 0x40, SONG_BTL_MON_HIT02, 0, -0x10, 0x2C);

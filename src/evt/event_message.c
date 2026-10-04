@@ -3727,8 +3727,8 @@ void UpdateEventCharaMotion(EventCharaWork* work) {
         } else if (e->motionArg == 2) {
             work->obj.z += work->speed;
         } else {
-            work->obj.x += (gSineTable[e->motionArg & 0xFF] * work->speed) >> 8;
-            work->obj.y += (-gSineTable[(e->motionArg & 0xFF) + 64] * work->speed) >> 8;
+            work->obj.x += (SIN(e->motionArg) * work->speed) >> 8;
+            work->obj.y += (-COS(e->motionArg) * work->speed) >> 8;
         }
 
         break;
@@ -7591,7 +7591,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
             gEventState->shakeY = GetRandom() % 16;
         } else if (e->flags & CAMERA_KEYFRAME_FLAG_SWAY) {
             gEventState->shakeX = 0;
-            gEventState->shakeY = gSineTable[(work->angle >> 3) & 0xFF] >> 5;
+            gEventState->shakeY = SIN(work->angle >> 3) >> 5;
             work->angle += 4;
         } else {
             gEventState->shakeX = 0;
@@ -7859,7 +7859,7 @@ void UpdateEventScanlineWave(EventCameraWork* work) {
 
     if (work->scanline.enabled == 1) {
         for (i = 0; i < 160; i++) {
-            work->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)gSineTable[((i + work->wavePhase) * 2) & 0xFF]) / 32;
+            work->scanline.scrollX[i] = (gEventState->x >> 8) + (v = (u8)SIN((i + work->wavePhase) * 2)) / 32;
         }
 
         work->wavePhase++;

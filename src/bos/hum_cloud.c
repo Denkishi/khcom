@@ -443,7 +443,7 @@ u8 task_hum_cloud_1(CloudWork* work) {
             }
 
             {
-                s32 v = work->base.targetZ + gSineTable[(gFrameCounter * 4) & 0xFF] * 12;
+                s32 v = work->base.targetZ + SIN(gFrameCounter * 4) * 12;
             work->base.vz = 0;
             act->z += (v - act->z) >> 3;
             }

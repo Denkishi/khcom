@@ -544,7 +544,7 @@ void WorldselectDraw() {
 
     for (i = 0; i < sWorldselectSlotCount; i++) {
         ang = sWorldselectSlots[i].angle;
-        s = -gSineTable[((256 / sWorldselectSlotCount * i + sWorldselectBobPhase) & 0xFF) + 64];
+        s = -COS(256 / sWorldselectSlotCount * i + sWorldselectBobPhase);
         t = (s * 3 >> 7) + ang;
 
         if ((u8)(t - 62) > 2 && (u8)(t + 64) > 2) {

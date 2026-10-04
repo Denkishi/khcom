@@ -207,7 +207,7 @@ u8 task_frd_ariel_1(FrdArielWork* work) {
             }
         }
 
-        body->z = work->hoverZ + (gSineTable[((u16)work->stateTimer * 8) & 0xFF] << 3);
+        body->z = work->hoverZ + (SIN((u16)work->stateTimer * 8) << 3);
         body->y += (work->actor->y - body->y) >> 4;
 
         if (work->stateTimer == 20) {

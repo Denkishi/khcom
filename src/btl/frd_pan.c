@@ -147,7 +147,7 @@ void FrdPanHover(FrdPanWork* work) {
     BtlObj* body;
 
     body = &work->body;
-    body->z += ((work->hoverZ + (gSineTable[((u16)work->stateTimer * 2) & 0xFF] << 4)) - body->z) >> 2;
+    body->z += ((work->hoverZ + (SIN((u16)work->stateTimer * 2) << 4)) - body->z) >> 2;
 }
 
 u8 task_frd_pan_1(FrdPanWork* work) {

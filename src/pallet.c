@@ -398,7 +398,7 @@ void HBlankIntrBgWave1(s32 a) {
     line = (line + 1) % 228;
 
     if (gBgWaves[a].enabled == 1) {
-        REG_BGHOFS(0) = gSineTable[((line + gFrameCounter) * gBgWaves[a].frequency) & 0xFF] * gBgWaves[a].amplitude >> 8;
+        REG_BGHOFS(0) = SIN((line + gFrameCounter) * gBgWaves[a].frequency) * gBgWaves[a].amplitude >> 8;
     }
 }
 

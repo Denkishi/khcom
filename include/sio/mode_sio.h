@@ -357,6 +357,7 @@ void SioBtlOptionStartBattle();
 void SioBtlOptionDraw();
 void SioBtlOptionCheckReady();
 void SioBtlOptionRecvWorld();
+void SioBtlOptionRecvSettings();
 void SioBtlOptionSyncDeckNames();
 void SioBtlOptionDrawStats();
 void SioApplyBattleSettings();

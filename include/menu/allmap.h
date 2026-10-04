@@ -133,7 +133,10 @@ typedef struct AllmapPushaWork {
 } AllmapPushaWork;
 
 s32 GetAllmapRoomPaletteOffset(u8 a);
+void InitAllmap();
 void AllmapUpdateCamera(AllmapState* s);
+void UpdateAllmap();
+void DestroyAllmap();
 void AllmapHandleInput();
 void AllmapInitDropOffsets();
 void AllmapSetBounds(u16 a, u16 b, u16 c, u16 d);

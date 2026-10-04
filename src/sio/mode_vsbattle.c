@@ -24,6 +24,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "battle.h"
 
 u8 gUnk_02039B98 EWRAM_COMMON(4);
 

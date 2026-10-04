@@ -34,6 +34,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "localized_resource_assets.h"
+#include "allmap.h"
 
 #if defined(VERSION_US)
 static const PooBgSet sAllmapWorldBgs[15] = {

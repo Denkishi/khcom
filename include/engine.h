@@ -125,7 +125,6 @@ void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 count);
 void SplineEvaluate2D(Spline2D* spline, s32 t, s32* x, s32* y);
 void SplineFreeBuffers(Spline2D* spline);
 
-u8 DrawSpriteSharedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
 u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* c, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
 u8 DrawSpriteFrameTiles(s16 x, s16 y, void* obj, void* e, ObjAffine* f, u16 g, u16 h);
 void ReleaseSharedObjTiles(ObjTiles* p);
@@ -133,7 +132,6 @@ void ReleaseAllocatedObjTiles(ObjTiles* p);
 void ReleaseSpriteFrameTiles(ObjTiles* p);
 void ReleaseObjPaletteRef(ObjPalette* p);
 void SetSpriteMosaicEnabled(u8 a);
-void BgAnimSetStopFrame(u16 a);
 void VTransFree();
 void BgFree();
 void SetBgMosaic(s32 bg, u8 on);

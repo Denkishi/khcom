@@ -16,6 +16,7 @@
 #include "save_types.h"
 #include "system_state.h"
 #include <string.h>
+#include "save_data.h"
 
 const u8* gSaveSignature = gSaveSignatureText;
 

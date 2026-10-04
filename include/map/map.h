@@ -997,6 +997,7 @@ void LoadGameMenuInput(LoadGameMenuWork* work);
 void LoadGameMenuSlideOutX(LoadGameMenuWork* work);
 void LoadGameMenuExit(LoadGameMenuWork* work);
 void LoadGameMenuSlideOutY(LoadGameMenuWork* work);
+void MapRestoreBg1();
 void MapDrawBg1(s32 a, s32 b);
 void MapFindLowestEdgeRightward(s32 a, s16* px, s16* py, s16* pz, s16 lo, s16 hi);
 extern u8 gNiseFl00Tiles[];

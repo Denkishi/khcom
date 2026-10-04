@@ -16,6 +16,7 @@ void HandleMapSelectKindCursor(MapSelectWork* work);
 void ApplyMapSelectPageScroll(MapSelectWork* work);
 s32 SelectNearestMapSelectCard(MapSelectWork* work);
 s32 RemoveMapCard(u16 a);
+void CreateMapCardSelection(TaskPool* pool, u8* p);
 void LoadMapSelectKindPalette(u16 a, MapSelectWork* work);
 void LoadMapSelectGridPalette(u16 a, MapSelectWork* work);
 s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work);

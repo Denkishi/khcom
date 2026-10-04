@@ -5,8 +5,6 @@
 #include "evt_types.h"
 #include "types.h"
 
-void SioBtlOptionRecvSettings();
-
 #ifndef VERSION_EU
 extern Mode gModeTest;
 #endif

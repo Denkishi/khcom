@@ -28,8 +28,6 @@ extern u16 gUnk_09614718[];
 s16 GetCenteredTextX(u16* widths, u16 count);
 #endif
 u16 CountNonSpaceChars(const TextChar* str);
-void* GetIwramHeapStart();
-u32 GetIwramHeapSize();
 void MovieVBlankIntr();
 s32 HandleMovieFrame(s32 arg);
 

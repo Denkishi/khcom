@@ -48,15 +48,6 @@ u8 BytesEqual(const u8* a, const u8* b, s16 len);
 u16 SaveChecksum(u16* data, int size);
 int SaveVerifyBlock(u8* sram, u8* hdr, u8* buf, s16 size);
 
-void MakeSaveHeaderData(SaveHeaderData* data, s16 file);
-void MakeSaveFileLarge(SaveFileLarge* data);
-void MakeSaveFileSmall(SaveFileSmall* data);
-void ApplySaveHeaderData(SaveHeaderData* data);
-void MakeSaveSystem(SaveFileLarge* data);
-void ApplySaveSystem(SaveFileLarge* data);
-void ApplySaveFileLarge(SaveFileLarge* data);
-void ApplySaveFileSmall(SaveFileSmall* data);
-
 void SaveWriteSystem();
 
 void SaveWriteFileSmall(u16 file);

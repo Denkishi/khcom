@@ -15,6 +15,7 @@
 #include "save_types.h"
 #include "system_state.h"
 #include "types.h"
+#include "save_data.h"
 
 static u16 sRawKeys;
 static u16 sRawKeysPrev;

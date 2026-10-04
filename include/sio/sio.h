@@ -24,10 +24,4 @@ void SioResetSendQueue();
 void SioResetRecvQueue();
 void SioClearRegs();
 
-void VBlankIntr();
-void HBlankIntrDummy();
-void VCountIntrDummy();
-void SerialIntrDummy();
-void VBlankIntrSio();
-
 #endif /* GUARD_SIO_H */

@@ -30,6 +30,7 @@
 #include "macros.h"
 #include "obj.h"
 #include "romcri_backgrounds.h"
+#include "card_battle_riku.h"
 
 BtlWork* gRikuBtlWork EWRAM_COMMON(4);
 FieldState* gFieldState EWRAM_COMMON(4);

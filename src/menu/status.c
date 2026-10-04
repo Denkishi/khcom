@@ -37,6 +37,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "card_deckmenu2.h"
+#include "card_stock_info.h"
 
 TaskDesc gTaskDescStatus = {
     "task_status",

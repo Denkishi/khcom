@@ -43,6 +43,7 @@ struct BgAnimationDef;
 void MosaicReset();
 void BgAnimSetTransform(u8 a, s32 b, s32 c);
 void BgAnimSetLoopStartFrame(u16 a);
+void BgAnimSetStopFrame(u16 a);
 void BgAnimStop();
 void MosaicStartIn(u16 frames, u16 size);
 void MosaicStartOut(u16 frames, u16 size);

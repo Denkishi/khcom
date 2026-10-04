@@ -5,6 +5,7 @@
 #include "card_types.h"
 #include "types.h"
 
+void SetRikuReloadCharging();
 u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind);
 u8 UpdateRikuReloadDeal(CardBattleWork* work, void* a);
 void SelectNextRikuCard(CardBattleWork* work, u8 n);

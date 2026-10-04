@@ -12,6 +12,7 @@
 #include "sio_types.h"
 #include <stddef.h>
 #include "types.h"
+#include "main.h"
 
 u8 gSioLastSendCount EWRAM_COMMON(4);
 s16 gSioErrorFrameCount EWRAM_COMMON(4);

@@ -6,13 +6,17 @@
 
 struct Task;
 
-void func_08000F30(TaskPool* a);
-s32 func_08000F90();
-
+void* GetIwramHeapStart();
+u32 GetIwramHeapSize();
 void InitSystem();
+void VBlankIntr();
+void HBlankIntrDummy();
+void VCountIntrDummy();
+void SerialIntrDummy();
 void InitIntrTable();
 
 void* GetEwramHeapStart();
 u32 GetEwramHeapSize();
+void VBlankIntrSio();
 
 #endif /* GUARD_MAIN_H */

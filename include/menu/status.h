@@ -201,8 +201,6 @@ s32 GetStatusListItem(s16 a);
 void StatusEntryClear(StatusEntry* e);
 void StatusEntryAppend(StatusEntry* e, s32 v);
 s32 GetStatusItemTab(u32 a);
-void* GetCardHelpText(u16 a, u8 b);
-u8 GetCardHelpTextCount(u16 a);
 void* LoadStockNameTiles(u16 a);
 s32 GetStatusItemStockIndex(s32 a);
 s16 GetStatusScrollcursorY(StatusScrollcursorWork* work);

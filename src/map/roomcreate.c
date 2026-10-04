@@ -19,6 +19,8 @@
 #include "registration_data.h"
 #include "taskpool.h"
 #include "types.h"
+#include "card_worldselect.h"
+#include "map.h"
 
 void task_roomcreate_0(RoomCreateWork* work) {
     FldObj* obj;

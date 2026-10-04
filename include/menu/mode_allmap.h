@@ -17,10 +17,6 @@ extern u8 gUnk_05000140[];
 extern u8 gUnk_0984A0F8[];
 extern u16 gUnk_09849F78[];
 
-void InitAllmap();
-void UpdateAllmap();
-void DestroyAllmap();
-
 void AllmapVCountCallback();
 void AllmapAllocBgMaps();
 void AllmapDimPalette10();

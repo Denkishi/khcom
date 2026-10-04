@@ -12,6 +12,7 @@ void AnimChangeWithDef(const struct AnimDef* tbl, void* a, u16 i, u16 j, void* o
 void WorldToScreen(s16* x, s16* y, s32 px, s32 py, s32 pz);
 void CreateBtlPopTask(BtlObj* p, s16 b);
 void MakeOpponentsHittable();
+void UpdateBattleState();
 u32 ClampBattlePosition(s32* px, s32* py, s32 rx, s32 ry);
 void SetBattleBounds(s32 xMin, s32 xMax, s32 yMin, s32 yMax);
 s32 UpdateBtlObjReaction(BtlObj* p);

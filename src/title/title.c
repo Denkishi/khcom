@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "title_types.h"
 #include "types.h"
+#include "mode_title.h"
 
 #ifdef VERSION_EU
 extern void** gTitleLumiSpritesEu[5];

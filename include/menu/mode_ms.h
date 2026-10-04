@@ -98,8 +98,6 @@ void LoadMooglePackSelectionTilemap(s16 a);
 void MoogleShopHandleSoldOutInput();
 void MoogleShopHandleRowInput();
 
-void ShowPersistentCardMessage(void* pool, u32 a, u16 b);
-
 void SetMooglePackBought(u16 a, u16 b, u16 c);
 u8 UpdateMooglePackOpening(u16 a);
 void InitMooglePackOpening(s16 x, s16 y);

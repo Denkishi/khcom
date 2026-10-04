@@ -43,9 +43,6 @@ typedef struct TitleLumiChangeWork {
     void* gfx;
 } TitleLumiChangeWork;
 
-
-u8 IsTitleLogoShown();
-u8 IsTitleIntroDone();
 void TitleLogoLoadSprites(TitleLogoWork* work);
 
 void task_title_logo_0(TitleLogoWork* work);

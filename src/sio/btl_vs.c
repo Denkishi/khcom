@@ -15,13 +15,13 @@
 #include "card_battle.h"
 #include "gba/macro.h"
 #include "mode.h"
-#include "mode_vsbattle.h"
 #include "registration_data.h"
 #include <stddef.h>
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
 #include "key_state.h"
+#include "card_battle_riku.h"
 
 static u16 sVsKeyHoldL[2];
 static u16 sVsKeyHoldR[2];

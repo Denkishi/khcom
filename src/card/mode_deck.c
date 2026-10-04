@@ -21,6 +21,7 @@
 #include "system_state.h"
 #include "taskpool.h"
 #include "types.h"
+#include "mode_sio.h"
 
 static TaskPool sModeDeckTasks;
 static u8 sModeDeckResult;

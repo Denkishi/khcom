@@ -5,6 +5,8 @@ void TitleShowLogo(u16 a);
 void TitleFinishIntro();
 void TitleFadeOut();
 void TitleExitToChoice();
+u8 IsTitleLogoShown();
+u8 IsTitleIntroDone();
 
 extern s32 gTitleBgScale;
 extern s32 gTitleBgX;

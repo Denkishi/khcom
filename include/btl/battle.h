@@ -156,7 +156,9 @@ extern u16 gRikuPalette[];
 extern u16 gSoraPalette[];
 
 u8 TryStartCardAction(BtlObj* p);
+void VsBtlWorkInit();
 void VsEndCardPlay();
+void VsBattleUpdate();
 void AbsorbAttack(BtlObj* a, BtlObj* b, const BattleAttackDef* c);
 
 void func_080135EC(s32 x, s32 y, s32 z);

@@ -56,7 +56,7 @@ IWRAM_HEAP_SIZE = 0x6800
 IWRAM_BEFORE_HEAP = [("src/m4a2.o", ".bss")]
 IWRAM_AFTER_HEAP = [
     ("src/main.o", ".bss"),
-    ("src/taskpool.o", ".bss"),
+    ("src/mode.o", ".bss"),
     ("src/malloc.o", ".bss"),
     ("src/sprite.o", ".bss"),
     ("src/engine.o", ".iwram.*"),

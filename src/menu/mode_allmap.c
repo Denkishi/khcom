@@ -441,13 +441,3 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
 
     return order.shapes[mask] + 1;
 }
-
-s32 GetAllmapRoomPaletteOffset(u8 a) {
-    u8 r = 0;
-
-    if (GetEventRoomKind(a) == 1 || GetEventRoomKind(a) == 4) {
-        r = 1;
-    }
-
-    return r << 5;
-}

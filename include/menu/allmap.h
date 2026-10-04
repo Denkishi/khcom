@@ -132,6 +132,7 @@ typedef struct AllmapPushaWork {
     s16 y;
 } AllmapPushaWork;
 
+s32 GetAllmapRoomPaletteOffset(u8 a);
 void AllmapUpdateCamera(AllmapState* s);
 void AllmapHandleInput();
 void AllmapInitDropOffsets();

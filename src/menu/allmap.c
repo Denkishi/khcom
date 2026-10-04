@@ -128,6 +128,16 @@ static s32 sAllmapDoorOffsetY;
 static s32 sAllmapCameraFixedX;
 static s32 sAllmapCameraFixedY;
 
+s32 GetAllmapRoomPaletteOffset(u8 a) {
+    u8 r = 0;
+
+    if (GetEventRoomKind(a) == 1 || GetEventRoomKind(a) == 4) {
+        r = 1;
+    }
+
+    return r << 5;
+}
+
 void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     void* pal;
 

@@ -3,9 +3,9 @@
 #endif
 
 static const MessageScriptEntry sEvent035Script[3] = {
-    { 20, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent035Text00), 0, 340 },
-    { 20, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent035Text01), 0, 450 },
-    { 20, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent035Text02), MSG_SCRIPT_FLAG_END, 520 },
+    { 20, 1, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent035Text00), 0, 340 },
+    { 20, 0, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent035Text01), 0, 450 },
+    { 20, 1, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent035Text02), MSG_SCRIPT_FLAG_END, 520 },
 };
 
 #ifdef VERSION_JP
@@ -13,7 +13,7 @@ static const MessageScriptEntry sEvent035Script[3] = {
 #endif
 
 static const EventCameraKeyframe sEvent035Camera[1] = {
-    { -65485, 55296, 51456, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -65485, 55296, 51456, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent035SoundCues[2] = {
@@ -22,42 +22,40 @@ static const EvSoundCue sEvent035SoundCues[2] = {
 };
 
 static const EventCharaKeyframe sEvent035Track0[3] = {
-    { 486, 50, { 0, 0 }, 33792, 68864, 0, 0, { 0, 0 }, 82, NULL, NULL },
-    { 502, 130, { 0, 0 }, 50176, 61952, 0, 486, { 0, 0 }, 83, NULL, NULL },
-    { 486, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32853, NULL, NULL },
+    { 486, 50, 33792, 68864, 0, 0, 82, NULL, NULL },
+    { 502, 130, 50176, 61952, 0, 486, 83, NULL, NULL },
+    { 486, 5000, 0, 0, 0, 0, 32853, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent035Track1[8] = {
-    { 445, 160, { 0, 0 }, 60928, 53760, 0, 0, { 0, 0 }, 18, NULL, NULL },
-    { 445, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 16, NULL, CreateBalloonTask },
-    { 445, 360, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, NULL, NULL },
-    { 445, 410, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 16, NULL, CreateExclamationTask },
-    { 447, 480, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, NULL, NULL },
-    { 444, 550, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 21, NULL, NULL },
-    { 445, 680, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 16, NULL, CreateBalloonTask },
-    { 445, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32789, NULL, NULL },
+    { 445, 160, 60928, 53760, 0, 0, 18, NULL, NULL },
+    { 445, 290, 0, 0, 0, 0, 16, NULL, CreateBalloonTask },
+    { 445, 360, 0, 0, 0, 0, 21, NULL, NULL },
+    { 445, 410, 0, 0, 0, 0, 16, NULL, CreateExclamationTask },
+    { 447, 480, 0, 0, 0, 0, 21, NULL, NULL },
+    { 444, 550, 0, 0, 0, 0, 21, NULL, NULL },
+    { 445, 680, 0, 0, 0, 0, 16, NULL, CreateBalloonTask },
+    { 445, 5000, 0, 0, 0, 0, 32789, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent035Track2[1] = {
-    { 919, 5000, { 0, 0 }, 62464, 52992, 0, 0, { 0, 0 }, 33106, NULL, NULL },
+    { 919, 5000, 62464, 52992, 0, 0, 33106, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent035Tracks[3] = {
-    { sEvent035Track0, 43, { 0, 0, 0 } },
-    { sEvent035Track1, 35, { 0, 0, 0 } },
-    { sEvent035Track2, 86, { 0, 0, 0 } },
+    { sEvent035Track0, 43 },
+    { sEvent035Track1, 35 },
+    { sEvent035Track2, 86 },
 };
 
 const EventSequenceDef gEvent035 = {
     3,
-    { 0, 0, 0 },
     sEvent035Tracks,
     sEvent035Camera,
     sEvent035Script,
     sEvent035SoundCues,
     NULL,
     740,
-    0,
     0,
     0,
     0,

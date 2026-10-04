@@ -8,7 +8,6 @@
 typedef struct SmnArgs {
     u16 variant;
     u8 mainSide;
-    u8 unk_03;
 } SmnArgs;
 
 typedef struct SmnCloudWork {
@@ -24,21 +23,17 @@ typedef struct SmnCloudWork {
     s32 scaleX;
     s32 scaleY;
     u8 unk_158;
-    u8 unk_159[0x03];
     s32 unk_15C;
     u16 attackPhase;
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_165[0x03];
     BtlObj* target;
     s16 targetIndex;
-    u8 unk_16E[0x02];
     s32 targetX;
     s32 targetY;
     s32 targetZ;
     u16 attackCount;
-    u8 unk_17E[0x02];
 } SmnCloudWork;
 
 typedef struct SmnBambiWork {
@@ -51,20 +46,16 @@ typedef struct SmnBambiWork {
     s16 stateTimer;
     s16 steps;
     s16 hopTimer;
-    u8 unk_14E[0x02];
     s32 unk_150;
     s32 scale;
     u8 angle;
-    u8 unk_159[0x03];
     s32 vz;
     u16 unk_160;
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_165[0x03];
     struct BtlObj* target;
     s16 targetIndex;
-    u8 unk_16E[0x02];
     s32 targetX;
     s32 targetY;
 } SmnBambiWork;
@@ -90,7 +81,6 @@ typedef struct SmnTinkWork {
     u16 flyAngle;
     s16 healFrames;
     s16 frameCount;
-    u8 unk_172[0x02];
     s32 healTarget;
     s32 healHp;
     struct BtlObj* actor;
@@ -116,12 +106,10 @@ typedef struct SmnSimbaWork {
     s16 stateTimer;
     s16 steps;
     s16 unk_14C;
-    u8 unk_14E[0x02];
     s32 scale;
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_157;
 } SmnSimbaWork;
 
 typedef struct SmnMushuWork {
@@ -138,7 +126,6 @@ typedef struct SmnMushuWork {
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_155[0x03];
     struct BtlObj* actor;
 } SmnMushuWork;
 
@@ -152,12 +139,10 @@ typedef struct SmnDumboWork {
     s16 stateTimer;
     s16 steps;
     s16 unk_14C;
-    u8 unk_14E[0x02];
     s32 scale;
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_157;
 } SmnDumboWork;
 
 typedef struct SmnGenieWork {
@@ -173,12 +158,10 @@ typedef struct SmnGenieWork {
     u8 variant;
     u8 mainSide;
     u8 animating;
-    u8 unk_153;
     struct BtlObj* target;
     s16 targetIndex;
     s16 attacksLeft;
     u8 fired;
-    u8 unk_15D[3];
     s32 speedX;
     s32 speedY;
 } SmnGenieWork;

@@ -22,16 +22,16 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy28CommonAnimDefs[3] = {
-    { gEmy2800Frames, gEmy2800Anims, gEmy2800Tiles, 0, { 0, 0, 0 } },
-    { gEmy2802Frames, gEmy2802Anims, gEmy2802Tiles, 0, { 0, 0, 0 } },
-    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 1, { 0, 0, 0 } },
+    { gEmy2800Frames, gEmy2800Anims, gEmy2800Tiles, 0 },
+    { gEmy2802Frames, gEmy2802Anims, gEmy2802Tiles, 0 },
+    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 1 },
 };
 
 static const AnimDef sEmy28AnimDefs[4] = {
-    { gEmy2810Frames, gEmy2810Anims, gEmy2810Tiles, 0, { 0, 0, 0 } },
-    { gEmy2811Frames, gEmy2811Anims, gEmy2811Tiles, 0, { 0, 0, 0 } },
-    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 0, { 0, 0, 0 } },
-    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 2, { 0, 0, 0 } },
+    { gEmy2810Frames, gEmy2810Anims, gEmy2810Tiles, 0 },
+    { gEmy2811Frames, gEmy2811Anims, gEmy2811Tiles, 0 },
+    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 0 },
+    { gEmy2801Frames, gEmy2801Anims, gEmy2801Tiles, 2 },
 };
 
 static const EmyDef sEmy28Def = { gEmy28Palette, sEmy28CommonAnimDefs, 1024, 150, 4, 20, 40, 24, 16, 25, 0, { 20, 45, 48, 8, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };

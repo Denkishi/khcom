@@ -75,14 +75,12 @@ typedef struct FldWork {
     u16 unk_9E;
     s32 vz;
     u16 flags;
-    u8 unk_A6[0x02];
     s32 animAction;
     const u16* sounds;
     s32 targetX;
     s32 targetY;
     s32 targetZ;
     u8 onCollider;
-    u8 unk_BD[0x03];
 } FldWork;
 
 typedef char FldWork_size[(sizeof(FldWork) == 0xC0) ? 1 : -1];

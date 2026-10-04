@@ -14,7 +14,6 @@ typedef struct WorldselectWorldDef {
     void* nameTiles;
 #ifdef VERSION_EU
     u16 nameTilesOffset;
-    u16 unkEu_1A;
 #endif
 } WorldselectWorldDef;
 
@@ -22,7 +21,6 @@ typedef struct WorldselectSlot {
     s16 listIndex;
     u8 unk_02[0x6];
     u8 angle;
-    u8 unk_09[0x3];
     void* palette;
     void* tiles;
     void* gfx;

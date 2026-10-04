@@ -53,7 +53,6 @@ typedef struct EffectWork {
     u16 age;
     u8 followFlip;
     u8 state;
-    u8 unk_4A[0x02];
     TaskPool tasks;
 } EffectWork;
 

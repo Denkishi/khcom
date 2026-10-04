@@ -79,7 +79,6 @@ typedef struct BtlWork {
     s32 x2;
     s32 y2;
     u8 rotation;
-    u8 unk_019;
     s16 zoomSteps;
     s32 zoomX;
     s32 zoomY;
@@ -88,7 +87,6 @@ typedef struct BtlWork {
     TaskPool taskPools[3];
     u64 flags;
     u8 paused;
-    u8 unk_071;
     s16 hitStop;
     s16 freezeTimer;
     u16 pendingHitStop;
@@ -98,21 +96,18 @@ typedef struct BtlWork {
     ListPool pool2;
     s32 phase;
     u8 soraOwnsPlay;
-    u8 unk_0A5[0x03];
     BtlObj* actor3;
     BtlObj* actor4;
     s16 prizeCount;
     s8 stockMove;
     u8 fadeAmount;
     u8 areaUpdated;
-    u8 unk_0B5[0x03];
     s32 x3;
     s32 y3;
     s32 z3;
     s16 areaHalfX;
     s16 areaHalfY;
     s16 areaHalfZ;
-    u8 unk_0CA[0x02];
     s32 bossX;
     s32 bossY;
     s32 bossZ;
@@ -124,7 +119,6 @@ typedef struct BtlWork {
     u8 lHeldFrames;
     u8 rHeldFrames;
     s16 phaseStep;
-    u8 unk_0E6[0x02];
     Task* task;
     s16 enemyTileCount;
     u8 enemyCount;
@@ -144,7 +138,6 @@ typedef struct BtlWork {
     void* tiles3;
     u8 unk_11C[0x04];
     s16 pendingEnemies;
-    u8 unk_122[0x02];
     s32 damageScale;
     BtlBoundsCallback boundsCallback;
     s32 gravity;
@@ -156,9 +149,7 @@ typedef struct BtlWork {
     u16 mapBg;
     s16 darkPoints;
     s8 breakDifference;
-    u8 unk_1CB;
     u16 listSwitchTimer;
-    u8 unk_1CE[0x02];
 } BtlWork;
 
 typedef char BtlWork_size[(sizeof(BtlWork) == 0x1D0) ? 1 : -1];

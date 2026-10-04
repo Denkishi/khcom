@@ -19,11 +19,9 @@ typedef struct MapPlatform {
     u16 right;
     s32 z;
     u8 hasStairs;
-    u8 unk_09;
     u16 x;
     u16 y;
     u8 spotType;
-    u8 unk_0F;
     s32 spotUpperZ;
     s32 spotLowerZ;
 } MapPlatform;
@@ -41,18 +39,14 @@ typedef struct MapEnmDef {
     u16 tileCount;
     u16 height;
     u16 radius;
-    u16 unk_0E;
     TaskDesc* desc;
     u16 flags;
-    u16 unk_16;
 } MapEnmDef;
 
 typedef struct MapGmkDef {
     void* palette;
     const void* tiles;
     u16 tilesSize;
-    u8 unk_0A;
-    u8 unk_0B;
     void* gfxTable;
     void* anims;
     u8 ownTiles;
@@ -63,18 +57,15 @@ typedef struct MapGmkDef {
     u16 radius;
     u16 height;
     u16 hitSong;
-    u16 unk_22;
     void* desc;
 } MapGmkDef;
 
 typedef struct MapAnmSlot {
     const void* tiles;
     u16 frameSize;
-    u8 unk_06[0x02];
     u8* dest;
     u8* pending;
     s16 timer;
-    u8 unk_12[0x02];
     void* script;
     s16* scriptPos;
 } MapAnmSlot;
@@ -88,7 +79,6 @@ enum GmkFlag {
 
 typedef struct MapGmkPlacement {
     u16 flags;
-    u8 unk_02[0x02];
     FldPos pos;
     const MapGmkDef* def;
 } MapGmkPlacement;
@@ -116,7 +106,6 @@ typedef struct PrizeEntry {
 
 typedef struct PrzCardChance {
     u8 cardIndex;
-    u8 unk_01;
     u16 weight;
     u16 weight2;
     u8 unk_06[0x02];
@@ -124,13 +113,11 @@ typedef struct PrzCardChance {
 
 typedef struct MapPrizeArgs {
     u8 worldPrize;
-    u8 unk_01[0x03];
     s32 x;
     s32 y;
     s32 z;
     u8 unk_10[0x04];
     u16 id;
-    u8 unk_16[0x02];
 } MapPrizeArgs;
 
 typedef struct MapEnmArgs {
@@ -138,7 +125,6 @@ typedef struct MapEnmArgs {
     void (*update)(struct MapEnmWork*);
     FldPos pos;
     u8 angle;
-    u8 unk_19[0x03];
     s32 speed;
 } MapEnmArgs;
 
@@ -157,7 +143,6 @@ enum MapEnmFlag {
 typedef struct MapEnmWork {
     const MapEnmDef* def;
     u16 flags;
-    u16 paletteBank;
     FldObj obj;
     Collider collider;
     AnimState anim;
@@ -173,14 +158,12 @@ typedef struct MapEnmWork {
     s32 targetY;
     s32 targetZ;
     s16 colliderDelay;
-    u8 unk_E2[0x02];
     TaskPool tasks;
 } MapEnmWork;
 
 typedef struct MapEnm01Work {
     MapEnmWork enm;
     u8 wasOnScreen;
-    u8 unk_F9[0x03];
 } MapEnm01Work;
 
 typedef struct MapEnm03Work {
@@ -201,7 +184,6 @@ typedef struct LoadGameMenuWork {
     ObjPalette* palette7;
     TextSlot textSlots[0x24];
     u8 textSlotCount;
-    u8 unk_15D;
     u16 slotBaseY;
     ObjPalette* palette3;
     void* tiles3;
@@ -216,14 +198,12 @@ typedef struct LoadGameMenuWork {
     u8 loaded;
     u8 selectedSlot;
     u8 lastSlot;
-    u8 unk_185;
     u16 timer;
     void (*update)(struct LoadGameMenuWork*);
 } LoadGameMenuWork;
 
 typedef struct MenuMsgWork {
     u8 toTitle;
-    u8 unk_01[0x03];
     void (*update)(struct MenuMsgWork*);
     TaskPool tasks;
 } MenuMsgWork;
@@ -242,12 +222,10 @@ typedef struct NewGameSlotMenuWork {
     ObjPalette* palette8;
     TextSlot textSlots[0x24];
     u8 textSlotCount;
-    u8 unk_161;
     u16 slotBaseY;
     ObjPalette* palette9;
     TextSlot textSlots2[0x36];
     u8 textSlotCount2;
-    u8 unk_319[0x03];
     ObjPalette* palette4;
     void* tiles4;
     ObjPalette* palette5;
@@ -259,9 +237,7 @@ typedef struct NewGameSlotMenuWork {
     u8 confirmed;
     u8 isRiku;
     u8 selectedSlot;
-    u8 unk_33F;
     u16 timer;
-    u8 unk_342[0x02];
     void (*update)(struct NewGameSlotMenuWork*);
 } NewGameSlotMenuWork;
 
@@ -284,7 +260,6 @@ typedef struct MapMenuWork {
     s32 x4;
     s32 x5;
     u8 cursorVisible;
-    u8 unk_035[0x03];
     ObjPalette* palette4;
     ObjPalette* palette5;
     void* tiles6;
@@ -297,7 +272,6 @@ typedef struct MapMenuWork {
     ObjPalette* palette8;
     TextSlot textSlots[0x18];
     u8 textSlotCount;
-    u8 unk_135[0x03];
     ObjPalette* palette6;
     void* tiles8;
     ObjPalette* palette7;
@@ -316,15 +290,12 @@ typedef struct MapMenuWork {
     TextSlot textSlots2[0x21];
 #endif
     u8 textSlotCount2;
-    u8 unk_289[0x03];
     TextSlot textSlots3[0x06];
     u8 textSlotCount3;
-    u8 unk_2BD[0x03];
     TextSlot textSlots4[0x09];
     u8 textSlotCount4;
     u8 cursor;
     u8 confirmCursor;
-    u8 unk_30B;
     u16 steps;
     u8 panelsVisible;
     u8 reopened;
@@ -346,7 +317,6 @@ typedef struct MapSaveWork {
     FldRes* palette4;
     TextSlot textSlots[0x24];
     u8 textSlotCount;
-    u8 unk_165[0x03];
     FldRes* palette5;
     void* tiles4;
     s32 x3;
@@ -364,19 +334,14 @@ typedef struct MapSaveWork {
     TextSlot textSlots2[0x1B];
 #endif
     u8 textSlotCount2;
-    u8 unk_26D[0x03];
     TextSlot textSlots3[0x06];
     u8 textSlotCount3;
-    u8 unk_2A1[0x03];
     TextSlot textSlots4[0x09];
     u8 textSlotCount4;
-    u8 unk_2ED[0x03];
     s32 (*update)(struct MapSaveWork*);
     u8 confirmCursor;
-    u8 unk_2F5;
     u16 steps;
     u8 dialogVisible;
-    u8 unk_2F9[0x03];
     TaskPool tasks;
 } MapSaveWork;
 
@@ -385,7 +350,6 @@ typedef struct MapAnmEntry {
     void* tiles;
     u16 frameSize;
     u8 tileOffset;
-    u8 unk_0B;
 } MapAnmEntry;
 
 typedef struct MapAnmWork {
@@ -394,23 +358,18 @@ typedef struct MapAnmWork {
 
 typedef struct MapDbgWork {
     u8 visible;
-    u8 unk_01[0x03];
     u8* editing;
     void (*update)(struct MapDbgWork*);
     u8 seedCursor;
     u8 codeCursor;
-    u8 unk_0E[0x02];
     void* tiles;
     void* palette;
     u16 seedText[0x0A];
     u8 seedTextLength;
-    u8 unk_2D;
     u16 codeText[0x0A];
     u8 codeTextLength;
-    u8 unk_43;
     u16 cursorText;
     u8 cursorTextLength;
-    u8 unk_47;
 } MapDbgWork;
 
 typedef struct MapGmkEnmWork {
@@ -421,10 +380,8 @@ typedef struct MapGmkEnmWork {
     void* gfx;
     u8 (*update)(struct MapGmkEnmWork*);
     u8 flipX;
-    u8 unk_069[0x03];
     s32 targetZ;
     u16 timer;
-    u8 unk_072[0x02];
 } MapGmkEnmWork;
 
 typedef struct MapGmkDmyWork {
@@ -439,7 +396,6 @@ typedef struct MapGmkJumpWork {
     ObjPalette* palette;
     u8 unk_0BC[0x04];
     u8 state;
-    u8 unk_0C1[0x03];
     s32 jumpHeight;
     void (*update)(struct MapGmkJumpWork*);
 } MapGmkJumpWork;
@@ -451,7 +407,6 @@ typedef struct MapGmkTutorialWork {
     ObjPalette* palette;
     u8 unk_0A4[0x04];
     u8 opened;
-    u8 unk_0A9[0x03];
     u8 (*update)(struct MapGmkTutorialWork*);
     TaskPool tasks;
 } MapGmkTutorialWork;
@@ -465,7 +420,6 @@ typedef struct MapGmk01Work {
     ObjPalette* palette;
     void* gfx;
     u16 timer;
-    u16 unk_0C6;
     u8 (*update)(struct MapGmk01Work*);
 } MapGmk01Work;
 
@@ -478,7 +432,6 @@ typedef struct MapGmkSpiderWork {
     void* gfx;
     u8 (*update)(struct MapGmkSpiderWork*);
     u8 flipX;
-    u8 unk_0C5[0x03];
 } MapGmkSpiderWork;
 
 typedef struct MapGmkGpWork {
@@ -504,7 +457,6 @@ typedef struct MapGmkGp1Work {
     void* gfx;
     u16 hitSong;
     u8 visible;
-    u8 unk_0C7;
     u8 (*update)(struct MapGmkGp1Work*);
 } MapGmkGp1Work;
 
@@ -520,7 +472,6 @@ typedef struct MapGmk00Work {
     u16 unk_0C6;
     u8 visible;
     u8 stoodOn;
-    u8 unk_0CA[0x02];
 } MapGmk00Work;
 
 typedef struct MapGmkBarrelWork {
@@ -532,7 +483,6 @@ typedef struct MapGmkBarrelWork {
     ObjPalette* palette;
     void* gfx;
     u8 visible;
-    u8 unk_0C5[0x03];
     u8 (*update)(struct MapGmkBarrelWork*);
 } MapGmkBarrelWork;
 
@@ -553,7 +503,6 @@ typedef struct MapPrizeWork {
     s32 speed;
     u8 angle;
     u8 angleStep;
-    u8 unk_8E[0x02];
     s32 scale;
     u16 amount;
     u8 visible;
@@ -582,7 +531,6 @@ typedef struct MapGmkGp08Work {
     void* gfx2;
     u16 hitSong;
     u8 overlayVisible;
-    u8 unk_0CB;
     s32 (*update)(struct MapGmkGp08Work*);
 } MapGmkGp08Work;
 
@@ -596,9 +544,6 @@ typedef struct MapGmkGp09Work {
     void* gfx;
     void* gfx2;
     u8 overlayVisible;
-    u8 unk_0C9;
-    u8 unk_0CA;
-    u8 unk_0CB;
     s32 (*update)(struct MapGmkGp09Work*);
 } MapGmkGp09Work;
 
@@ -624,7 +569,6 @@ typedef struct MapGmk05Work {
     void* gfx;
     void (*update)(struct MapGmk05Work*);
     u8 targeted;
-    u8 unk_0C9[0x03];
     TaskPool tasks;
     TaskPool tasks2;
 } MapGmk05Work;
@@ -659,13 +603,11 @@ typedef struct MapPrzCardWork {
     void (*update)(struct MapPrzCardWork*);
     CardStat stat;
     u16 cardId;
-    u8 unk_0AA[0x02];
     s32 vz;
     s32 speed;
     s16 scaleX;
     s16 scaleY;
     u8 angle;
-    u8 unk_0B9;
     s16 x;
     s16 y;
     u16 priority;
@@ -678,7 +620,6 @@ typedef struct MapPrzCardWork {
     u8 phaseX;
     u8 worldPrize;
     u8 collected;
-    u8 unk_0D3;
     TaskPool tasks;
 } MapPrzCardWork;
 
@@ -719,7 +660,6 @@ typedef struct MapTalkWork {
     ObjPalette* palette;
     u8 unk_24[0x04];
     u8 playerOnRight;
-    u8 unk_29[0x03];
 } MapTalkWork;
 
 typedef struct MapDonaldWork {
@@ -731,7 +671,6 @@ typedef struct MapDonaldWork {
     void (*update)(struct MapDonaldWork*);
     u8 targeted;
     u8 visible;
-    u8 unk_0C2[0x02];
     TaskPool tasks;
     TaskPool tasks2;
 } MapDonaldWork;
@@ -745,7 +684,6 @@ typedef struct MapGoofyWork {
     void (*update)(struct MapGoofyWork*);
     u8 targeted;
     u8 visible;
-    u8 unk_0C2[0x02];
     TaskPool tasks;
     TaskPool tasks2;
 } MapGoofyWork;
@@ -760,9 +698,7 @@ typedef struct MapNamineWork {
     u8 registered;
     u8 targeted;
     u8 visible;
-    u8 unk_0C3;
     u16 spriteFlags;
-    u8 unk_0C6[0x02];
     TaskPool tasks;
     TaskPool tasks2;
 } MapNamineWork;
@@ -791,7 +727,6 @@ typedef struct MapTutorialWork {
     u8 visible;
     u8 shadowVisible;
     u8 flip;
-    u8 unk_0C3;
     void (*update)(struct MapTutorialWork*);
     TaskPool tasks;
     TaskPool tasks2;
@@ -807,7 +742,6 @@ typedef struct MapNiserikuWork {
     u8 registered;
     u8 targeted;
     u8 visible;
-    u8 unk_0C3;
     TaskPool tasks;
     TaskPool tasks2;
 } MapNiserikuWork;
@@ -819,7 +753,6 @@ typedef struct MapFloorWork {
     s16 textX;
     u16 timer;
     u8 textSlotCount;
-    u8 unk_11[0x03];
     void* palette2;
 #ifdef VERSION_EU
     TextSlot textSlots[0x3C];
@@ -832,10 +765,8 @@ typedef struct MapMsgWork {
     FldRes* palette;
     TextSlot textSlots[0x30];
     u8 textSlotCount;
-    u8 unk_185;
     s16 textX;
     u16 timer;
-    u8 unk_18A[0x02];
 } MapMsgWork;
 
 typedef struct MapStairWork {
@@ -843,14 +774,12 @@ typedef struct MapStairWork {
     ObjPalette* palette;
     void* tiles;
     u8 visible;
-    u8 unk_49[0x03];
     void (*update)(struct MapStairWork*);
     TaskPool tasks;
 } MapStairWork;
 
 typedef struct MapFixWork {
     u8 colliderCount;
-    u8 unk_01[0x03];
     Collider colliders[5];
     TaskPool tasks;
 #ifdef VERSION_EU
@@ -888,7 +817,6 @@ typedef struct MapDoorWork {
     u8 (*update)(struct MapDoorWork*);
     u8 visible;
     u8 triggered;
-    u8 unk_72[0x02];
     TaskPool tasks;
 } MapDoorWork;
 

@@ -3,7 +3,7 @@
 #endif
 
 static const MessageScriptEntry sEvent125Script[1] = {
-    { 34, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent125Text00), MSG_SCRIPT_FLAG_END, 200 },
+    { 34, 2, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent125Text00), MSG_SCRIPT_FLAG_END, 200 },
 };
 
 #ifdef VERSION_JP
@@ -15,27 +15,26 @@ static const EvSoundCue sEvent125SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent125Camera[1] = {
-    { -55537, 65536, 103168, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -55537, 65536, 103168, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent125Track0[2] = {
-    { 21, 1, { 0, 0 }, 55040, 116992, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 21, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 21, 1, 55040, 116992, 0, 0, 66, NULL, NULL },
+    { 21, 9999, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent125Track1[2] = {
-    { 395, 1, { 0, 0 }, 76032, 110848, 0, 0, { 0, 0 }, 2, NULL, NULL },
-    { 395, 9999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+    { 395, 1, 76032, 110848, 0, 0, 2, NULL, NULL },
+    { 395, 9999, 0, 0, 0, 0, 32773, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent125Tracks[2] = {
-    { sEvent125Track0, 0, { 0, 0, 0 } },
-    { sEvent125Track1, 25, { 0, 0, 0 } },
+    { sEvent125Track0, 0 },
+    { sEvent125Track1, 25 },
 };
 
 const EventSequenceDef gEvent125 = {
     2,
-    { 0, 0, 0 },
     sEvent125Tracks,
     sEvent125Camera,
     sEvent125Script,
@@ -44,7 +43,6 @@ const EventSequenceDef gEvent125 = {
     300,
     0,
     1,
-    0,
     0,
     0,
     0,

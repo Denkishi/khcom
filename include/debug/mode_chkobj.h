@@ -7,7 +7,6 @@
 typedef struct ChkObjEntry {
     ObjDef* defs;
     u16 count;
-    u16 unk_06;
     const char* name;
 } ChkObjEntry;
 

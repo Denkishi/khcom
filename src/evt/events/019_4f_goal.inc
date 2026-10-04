@@ -3,14 +3,14 @@
 #endif
 
 static const MessageScriptEntry sEvent019Script[8] = {
-    { 0, 7, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text00), 0, 250 },
-    { 0, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text01), 0, 350 },
-    { 0, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text02), 0, 450 },
-    { 1, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text03), 0, 600 },
-    { 0, 3, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text04), 0, 660 },
-    { 1, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text05), 0, 680 },
-    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text06), 0, 710 },
-    { 0, 7, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent019Text07), MSG_SCRIPT_FLAG_END, 900 },
+    { 0, 7, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text00), 0, 250 },
+    { 0, 3, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text01), 0, 350 },
+    { 0, 5, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text02), 0, 450 },
+    { 1, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text03), 0, 600 },
+    { 0, 3, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text04), 0, 660 },
+    { 1, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text05), 0, 680 },
+    { 0, 0, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text06), 0, 710 },
+    { 0, 7, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent019Text07), MSG_SCRIPT_FLAG_END, 900 },
 };
 
 #ifdef VERSION_JP
@@ -18,9 +18,9 @@ static const MessageScriptEntry sEvent019Script[8] = {
 #endif
 
 static const EventCameraKeyframe sEvent019Camera[3] = {
-    { -64966, 180736, 68608, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
-    { -64656, 186368, 67072, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 20, { 0, 0 }, NULL },
-    { -64536, 180736, 68608, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, { 0, 0 }, NULL },
+    { -64966, 180736, 68608, 0, 255, 0, 0, NULL },
+    { -64656, 186368, 67072, 0, 255, CAMERA_MODE_APPROACH, 20, NULL },
+    { -64536, 180736, 68608, 0, 255, CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 30, NULL },
 };
 
 static const EvSoundCue sEvent019SoundCues[1] = {
@@ -28,58 +28,56 @@ static const EvSoundCue sEvent019SoundCues[1] = {
 };
 
 static const EventCharaKeyframe sEvent019Track0[11] = {
-    { 4, 0, { 0, 0 }, 133632, 98048, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 9, 200, { 0, 0 }, 179712, 73728, 0, 4, { 0, 0 }, 67, NULL, NULL },
-    { 4, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 34, 602, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
-    { 34, 610, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 27, 660, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateExclamationTask },
-    { 30, 663, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 690, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 16, 705, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 910, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 9, 9999, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, NULL, NULL },
+    { 4, 0, 133632, 98048, 0, 0, 66, NULL, NULL },
+    { 9, 200, 179712, 73728, 0, 4, 67, NULL, NULL },
+    { 4, 210, 0, 0, 0, 0, 69, NULL, NULL },
+    { 34, 602, 0, 0, 0, 0, 64, NULL, CreateBalloonTask },
+    { 34, 610, 0, 0, 0, 0, 69, NULL, NULL },
+    { 27, 660, 0, 0, 0, 0, 64, NULL, CreateExclamationTask },
+    { 30, 663, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 690, 0, 0, 0, 0, 69, NULL, NULL },
+    { 16, 705, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 910, 0, 0, 0, 0, 69, NULL, NULL },
+    { 9, 9999, 0, 0, 0, 45, 32836, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent019Track1[15] = {
-    { 114, 0, { 0, 0 }, 145664, 94464, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 119, 450, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, NULL, NULL },
-    { 112, 451, { 0, 0 }, 221696, 60928, 0, 0, { 0, 0 }, 2, NULL, NULL },
-    { 117, 590, { 0, 0 }, 191232, 68864, 0, 112, { 0, 0 }, 3, NULL, NULL },
-    { 112, 600, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 136, 601, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 112, 679, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 125, 681, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 112, 720, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 111, 725, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 112, 730, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 113, 735, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 114, 745, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 119, 1200, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 68, NULL, NULL },
-    { 114, 1210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 114, 0, 145664, 94464, 0, 0, 66, NULL, NULL },
+    { 119, 450, 0, 0, 0, 45, 68, NULL, NULL },
+    { 112, 451, 221696, 60928, 0, 0, 2, NULL, NULL },
+    { 117, 590, 191232, 68864, 0, 112, 3, NULL, NULL },
+    { 112, 600, 0, 0, 0, 0, 5, NULL, NULL },
+    { 136, 601, 0, 0, 0, 0, 5, NULL, NULL },
+    { 112, 679, 0, 0, 0, 0, 5, NULL, NULL },
+    { 125, 681, 0, 0, 0, 0, 5, NULL, NULL },
+    { 112, 720, 0, 0, 0, 0, 5, NULL, NULL },
+    { 111, 725, 0, 0, 0, 0, 5, NULL, NULL },
+    { 112, 730, 0, 0, 0, 0, 69, NULL, NULL },
+    { 113, 735, 0, 0, 0, 0, 69, NULL, NULL },
+    { 114, 745, 0, 0, 0, 0, 69, NULL, NULL },
+    { 119, 1200, 0, 0, 0, 45, 68, NULL, NULL },
+    { 114, 1210, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent019Track2[2] = {
-    { 146, 0, { 0, 0 }, 145408, 88832, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 151, 450, { 0, 0 }, 0, 0, 0, 45, { 0, 0 }, 32836, NULL, NULL },
+    { 146, 0, 145408, 88832, 0, 0, 66, NULL, NULL },
+    { 151, 450, 0, 0, 0, 45, 32836, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent019Tracks[3] = {
-    { sEvent019Track0, 0, { 0, 0, 0 } },
-    { sEvent019Track1, 1, { 0, 0, 0 } },
-    { sEvent019Track2, 2, { 0, 0, 0 } },
+    { sEvent019Track0, 0 },
+    { sEvent019Track1, 1 },
+    { sEvent019Track2, 2 },
 };
 
 const EventSequenceDef gEvent019 = {
     3,
-    { 0, 0, 0 },
     sEvent019Tracks,
     sEvent019Camera,
     sEvent019Script,
     sEvent019SoundCues,
     NULL,
     950,
-    0,
     0,
     0,
     0,

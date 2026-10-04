@@ -19,15 +19,15 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy31CommonAnimDefs[3] = {
-    { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0, { 0, 0, 0 } },
-    { gEmy3104Frames, gEmy3104Anims, gEmy3104Tiles, 0, { 0, 0, 0 } },
-    { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0, { 0, 0, 0 } },
+    { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0 },
+    { gEmy3104Frames, gEmy3104Anims, gEmy3104Tiles, 0 },
+    { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0 },
 };
 
 static const AnimDef sEmy31AnimDefs[3] = {
-    { gEmy3105Frames, gEmy3105Anims, gEmy3105Tiles, 0, { 0, 0, 0 } },
-    { gEmy3106Frames, gEmy3106Anims, gEmy3106Tiles, 0, { 0, 0, 0 } },
-    { gEmy3107Frames, gEmy3107Anims, gEmy3107Tiles, 0, { 0, 0, 0 } },
+    { gEmy3105Frames, gEmy3105Anims, gEmy3105Tiles, 0 },
+    { gEmy3106Frames, gEmy3106Anims, gEmy3106Tiles, 0 },
+    { gEmy3107Frames, gEmy3107Anims, gEmy3107Tiles, 0 },
 };
 
 static const EmyDef sEmy31Def = { gEmy31Palette, sEmy31CommonAnimDefs, 256, 100, 10, 20, 64, 32, 32, 10, 0, { 23, 95, 32, 12, 24, 100, 0 } };

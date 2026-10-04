@@ -14,7 +14,6 @@ typedef struct TitleLogoWork {
     s32 unk_48;
     s32 scale;
     u16 unk_50;
-    u16 unk_52;
 } TitleLogoWork;
 
 #endif

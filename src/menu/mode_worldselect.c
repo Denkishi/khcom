@@ -107,67 +107,67 @@ static const WorldselectTileSizes sWorldselectTitleTileSizes = { { 896, 960, 102
 
 static const WorldselectWorldDef sWorldselectWorldDefs[13] = {
 #ifdef VERSION_EU
-    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, sWorldselectNameTileData, 8192, 0 },
+    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, sWorldselectNameTileData, 8192 },
 #else
     { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gUnk_099F6D3C },
 #endif
 #ifdef VERSION_EU
-    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, sWorldselectNameTileData, 12288, 0 },
+    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, sWorldselectNameTileData, 12288 },
 #else
     { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gUnk_099F7D3C },
 #endif
 #ifdef VERSION_EU
-    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, sWorldselectNameTileData, 6144, 0 },
+    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, sWorldselectNameTileData, 6144 },
 #else
     { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gUnk_099F653C },
 #endif
 #ifdef VERSION_EU
-    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, sWorldselectNameTileData, 0, 0 },
+    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, sWorldselectNameTileData, 0 },
 #else
     { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gUnk_099F4D3C },
 #endif
 #ifdef VERSION_EU
-    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, sWorldselectNameTileData, 10240, 0 },
+    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, sWorldselectNameTileData, 10240 },
 #else
     { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gUnk_099F753C },
 #endif
 #ifdef VERSION_EU
-    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, sWorldselectNameTileData, 14336, 0 },
+    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, sWorldselectNameTileData, 14336 },
 #else
     { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gUnk_099F853C },
 #endif
 #ifdef VERSION_EU
-    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, sWorldselectNameTileData, 16384, 0 },
+    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, sWorldselectNameTileData, 16384 },
 #else
     { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gUnk_099F8D3C },
 #endif
 #ifdef VERSION_EU
-    { 128, WORLD_HOLLOW_BASTION, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, sWorldselectNameTileData, 20480, 0 },
+    { 128, WORLD_HOLLOW_BASTION, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, sWorldselectNameTileData, 20480 },
 #else
     { 128, WORLD_HOLLOW_BASTION, 129, 151, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gUnk_099F9D3C },
 #endif
 #ifdef VERSION_EU
-    { 256, WORLD_DESTINY_ISLANDS, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, sWorldselectNameTileData, 2048, 0 },
+    { 256, WORLD_DESTINY_ISLANDS, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, sWorldselectNameTileData, 2048 },
 #else
     { 256, WORLD_DESTINY_ISLANDS, 53, 177, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gUnk_099F553C },
 #endif
 #ifdef VERSION_EU
-    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, sWorldselectNameTileData, 4096, 0 },
+    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, sWorldselectNameTileData, 4096 },
 #else
     { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gUnk_099F5D3C },
 #endif
 #ifdef VERSION_EU
-    { 2048, WORLD_TWILIGHT_TOWN, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, sWorldselectNameTileData, 22528, 0 },
+    { 2048, WORLD_TWILIGHT_TOWN, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, sWorldselectNameTileData, 22528 },
 #else
     { 2048, WORLD_TWILIGHT_TOWN, 44, 186, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gUnk_099FA53C },
 #endif
 #ifdef VERSION_EU
-    { 4096, WORLD_CASTLE_OBLIVION, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, sWorldselectNameTileData, 24576, 0 },
+    { 4096, WORLD_CASTLE_OBLIVION, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, sWorldselectNameTileData, 24576 },
 #else
     { 4096, WORLD_CASTLE_OBLIVION, 61, 192, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gUnk_099FAD3C },
 #endif
 #ifdef VERSION_EU
-    { 1024, WORLD_100_ACRE_WOOD, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, sWorldselectNameTileData, 18432, 0 },
+    { 1024, WORLD_100_ACRE_WOOD, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, sWorldselectNameTileData, 18432 },
 #else
     { 1024, WORLD_100_ACRE_WOOD, 134, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gUnk_099F953C },
 #endif

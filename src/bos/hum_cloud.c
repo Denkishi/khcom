@@ -31,29 +31,29 @@ static const u32 sHumCloudStockMoves[2][3] = {
 };
 
 static const AnimDef sHumCloudAnimDefs[20] = {
-    { gCroudBt00Frames, gCroudBt00Anims, gCroudBt00Tiles, 0, { 0, 0, 0 } },
-    { gCroudBt01Frames, gCroudBt01Anims, gCroudBt01Tiles, 0, { 0, 0, 0 } },
-    { gCroudBt02Frames, gCroudBt02Anims, gCroudBt02Tiles, 0, { 0, 0, 0 } },
-    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 0, { 0, 0, 0 } },
-    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 1, { 0, 0, 0 } },
-    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 2, { 0, 0, 0 } },
-    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 3, { 0, 0, 0 } },
-    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 4, { 0, 0, 0 } },
-    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 2, { 0, 0, 0 } },
-    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 2, { 0, 0, 0 } },
-    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 0, { 0, 0, 0 } },
-    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 1, { 0, 0, 0 } },
-    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 2, { 0, 0, 0 } },
-    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 3, { 0, 0, 0 } },
-    { gCroud10Frames, gCroud10Anims, gCroud10Tiles, 0, { 0, 0, 0 } },
-    { gCroud11Frames, gCroud11Anims, gCroud11Tiles, 0, { 0, 0, 0 } },
-    { gCroud12Frames, gCroud12Anims, gCroud12Tiles, 0, { 0, 0, 0 } },
-    { gCroud13Frames, gCroud13Anims, gCroud13Tiles, 0, { 0, 0, 0 } },
-    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0, { 0, 0, 0 } },
-    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 0, { 0, 0, 0 } },
+    { gCroudBt00Frames, gCroudBt00Anims, gCroudBt00Tiles, 0 },
+    { gCroudBt01Frames, gCroudBt01Anims, gCroudBt01Tiles, 0 },
+    { gCroudBt02Frames, gCroudBt02Anims, gCroudBt02Tiles, 0 },
+    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 0 },
+    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 1 },
+    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 2 },
+    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 3 },
+    { gCroudBt03Frames, gCroudBt03Anims, gCroudBt03Tiles, 4 },
+    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 2 },
+    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 2 },
+    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 0 },
+    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 1 },
+    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 2 },
+    { gCroud00Frames, gCroud00Anims, gCroud00Tiles, 3 },
+    { gCroud10Frames, gCroud10Anims, gCroud10Tiles, 0 },
+    { gCroud11Frames, gCroud11Anims, gCroud11Tiles, 0 },
+    { gCroud12Frames, gCroud12Anims, gCroud12Tiles, 0 },
+    { gCroud13Frames, gCroud13Anims, gCroud13Tiles, 0 },
+    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0 },
+    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 0 },
 };
 
-static const HumDef sHumCloudDef = { 128, 0, gCroudPalette, 0, { 43, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumCloudDef = { 128, gCroudPalette, 0, { 43, 99, 38, 14, 24, 99, 0 } };
 
 TaskDesc gTaskDescHumCloud = {
     "task_hum_cloud",

@@ -35,32 +35,32 @@ static const u32 sHumRikuStockMoves[2][3] = {
 };
 
 static const AnimDef sHumRikuAnimDefs[21] = {
-    { gNiserikuIdolFrames, gNiserikuIdolAnims, gNiserikuIdolTiles, 0, { 0, 0, 0 } },
-    { gNiserikuRunFrames, gNiserikuRunAnims, gNiserikuRunTiles, 0, { 0, 0, 0 } },
-    { gNiserikuDamageFrames, gNiserikuDamageAnims, gNiserikuDamageTiles, 0, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 0, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 1, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 2, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 3, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 4, { 0, 0, 0 } },
-    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 0, { 0, 0, 0 } },
-    { gNiserikuFuriharaiFrames, gNiserikuFuriharaiAnims, gNiserikuFuriharaiTiles, 0, { 0, 0, 0 } },
-    { gNiserikuTategiriFrames, gNiserikuTategiriAnims, gNiserikuTategiriTiles, 0, { 0, 0, 0 } },
-    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 0, { 0, 0, 0 } },
-    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 2, { 0, 0, 0 } },
-    { gNiserikuDarkfigaFrames, gNiserikuDarkfigaAnims, gNiserikuDarkfigaTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 1, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 2, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 1, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 2, { 0, 0, 0 } },
-    { gNiserikuYamiEndFrames, gNiserikuYamiEndAnims, gNiserikuYamiEndTiles, 0, { 0, 0, 0 } },
+    { gNiserikuIdolFrames, gNiserikuIdolAnims, gNiserikuIdolTiles, 0 },
+    { gNiserikuRunFrames, gNiserikuRunAnims, gNiserikuRunTiles, 0 },
+    { gNiserikuDamageFrames, gNiserikuDamageAnims, gNiserikuDamageTiles, 0 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 0 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 1 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 2 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 3 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 4 },
+    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 0 },
+    { gNiserikuFuriharaiFrames, gNiserikuFuriharaiAnims, gNiserikuFuriharaiTiles, 0 },
+    { gNiserikuTategiriFrames, gNiserikuTategiriAnims, gNiserikuTategiriTiles, 0 },
+    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 0 },
+    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 2 },
+    { gNiserikuDarkfigaFrames, gNiserikuDarkfigaAnims, gNiserikuDarkfigaTiles, 0 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 0 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 1 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 2 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 0 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 1 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 2 },
+    { gNiserikuYamiEndFrames, gNiserikuYamiEndAnims, gNiserikuYamiEndTiles, 0 },
 };
 
-static const HumDef sHumRikuDef = { 64, 0, gNiserikuPalette, 0, { 45, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumRikuDef = { 64, gNiserikuPalette, 0, { 45, 99, 38, 14, 24, 99, 0 } };
 
-static const HumSubDef sHumRikuSubDef = { gNiserikuPalette, 64, 0 };
+static const HumSubDef sHumRikuSubDef = { gNiserikuPalette, 64 };
 
 TaskDesc gTaskDescHumRiku = {
     "task_hum_riku",

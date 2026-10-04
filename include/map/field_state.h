@@ -33,10 +33,8 @@ typedef struct FieldState {
     FldActor actor;
     void* lockonTarget;
     s16 lockonDelay;
-    u16 unk_6E;
     u32 flags;
     u16 unk_74;
-    u16 unk_76;
     TaskPool tasks;
     TaskPool tasks2;
     TaskPool tasks3;
@@ -45,7 +43,6 @@ typedef struct FieldState {
     s32 spawnX;
     s32 spawnY;
     u8 spawnAngle;
-    u8 unk_E5[0x03];
 } FieldState;
 
 typedef char FieldState_size[(sizeof(FieldState) == 0xE8) ? 1 : -1];

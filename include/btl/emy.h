@@ -27,7 +27,6 @@ typedef struct Emy03Work {
 typedef struct Emy04Work {
     EmyWork base;
     u8 unk_184;
-    u8 unk_185;
     s16 healCount;
 } Emy04Work;
 
@@ -71,16 +70,13 @@ typedef struct Emy16bWork {
     s32 y;
     s32 z;
     u8 facingLeft;
-    u8 unk_02D[0x03];
     s32 vz;
     s32 vx;
     u32 state;
     s16 timer;
-    u8 unk_03E[0x02];
     Collider collider;
     u8 visible;
     u8 bounced;
-    u8 unk_09E[0x02];
 } Emy16bWork;
 
 typedef struct Emy16pWork {
@@ -91,7 +87,6 @@ typedef struct Emy16pWork {
     s32 y;
     s32 z;
     u8 facingLeft;
-    u8 unk_02D[0x03];
     s32 vz;
 } Emy16pWork;
 
@@ -142,7 +137,6 @@ typedef struct Emy31Work {
 typedef struct Emy37Work {
     EmyWork base;
     u8 rotation;
-    u8 unk_185[0x03];
     u32 speed;
     u16 angle;
 } Emy37Work;
@@ -190,7 +184,6 @@ typedef struct Emy83bWork {
     s32 z;
     u32 state;
     s16 timer;
-    u8 unk_032[0x02];
     Collider collider;
 } Emy83bWork;
 

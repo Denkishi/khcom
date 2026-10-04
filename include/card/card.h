@@ -159,7 +159,6 @@ typedef struct CardListWork {
     TaskPool effectTasks;
     u8 effectCount;
     u8 unk_29;
-    u8 unk_2A[2];
 } CardListWork;
 
 typedef char CardListWork_size[(sizeof(CardListWork) == 0x2C) ? 1 : -1];
@@ -169,7 +168,6 @@ extern void* gLvupEffectSprites[];
 
 typedef struct EventMapObjectWork {
     u8 background;
-    u8 unk_01[0x03];
     void* tiles[0x0A];
     ObjPalette* palettes[0x0A];
     u8 unk_54[0x04];
@@ -270,7 +268,6 @@ typedef struct PickupCardWork {
     u8 unk_1CC;
     u8 visible;
     u8 backCategory;
-    u8 unk_1CF;
     u16 spriteFlags;
 } PickupCardWork;
 
@@ -289,7 +286,6 @@ typedef struct RevCountArgs {
     u8* visible;
     u8 list;
     u8 side;
-    u8 unk_0E[0x02];
 } RevCountArgs;
 
 typedef struct RevCountWork {
@@ -298,10 +294,8 @@ typedef struct RevCountWork {
     void* gfx;
     AnimState anim;
     u8 list;
-    u8 unk_25;
     u16 shownCount;
     u8 steps;
-    u8 unk_29[0x03];
     RevCountArgs args;
     s32 x;
     s32 y;
@@ -337,7 +331,6 @@ typedef struct DeckCard2Args {
     s16 col;
     s16 row;
     u8 panel;
-    u8 unk_0B;
     u16* slot;
 } DeckCard2Args;
 
@@ -386,7 +379,6 @@ typedef struct PremireChanceCardWork {
     u8 steps;
     u8 gfxLoaded;
     u8 state;
-    u8 unk_56[0x02];
     ListNode node;
     s16 scaleX;
     s16 scaleY;
@@ -479,7 +471,6 @@ typedef struct DeckExchangeWork {
     u8 deckMagicCount;
     u8 deckItemCount;
     u8 deckEnemyCount;
-    u8 unk_6FB;
     u8* resultOut;
     u8 deckIndex;
     u8 categoryFilter;
@@ -511,7 +502,6 @@ typedef struct CardKindEntry {
     u16 kind;
     u16 count;
     u16 indexCount;
-    u8 unk_1A[0x02];
     u16* indices;
 } CardKindEntry;
 
@@ -576,7 +566,6 @@ typedef struct DeckMenuWork {
     u8 keyboardPage;
 #ifdef VERSION_EU
     u8 onEndKey;
-    u8 unk_7C9[3];
 #endif
     TaskPool taskpool;
     TaskPool cardpool;
@@ -650,7 +639,6 @@ typedef struct DeckMenuWork {
     u8 step;
     u8 promptChoice;
     u8 result;
-    u8 unk_8D3;
     u16 gridEntryCount;
 } DeckMenuWork;
 
@@ -733,7 +721,6 @@ typedef struct RikuDeckMenuWork {
     u8 deckMagicCount;
     u8 deckItemCount;
     u8 deckEnemyCount;
-    u8 unk_4F3;
     u8* resultOut;
     u8 deckIndex;
     u8 categoryFilter;
@@ -784,17 +771,14 @@ struct PremireChanceWork;
 typedef struct StockNameWork {
     u8 unk_00[4];
     u16 unk_04;
-    u8 unk_06[2];
     ObjTiles* tiles;
     ObjPalette* palette;
     u8 unk_10;
     u8 stockNameIndex;
-    u8 unk_12[2];
     u32 stockName;
     s32 stockNames[6];
     u8 cycling;
     u8 visible;
-    u8 unk_32[2];
 } StockNameWork;
 
 enum ReloadChildFlag {
@@ -809,9 +793,7 @@ typedef struct ReloadChildArgs {
     u8 index;
     u8 listIndex;
     u8 side;
-    u8 unk_0F;
     u16 flags;
-    u8 unk_12[0x02];
 } ReloadChildArgs;
 
 typedef struct ReloadChildWork {
@@ -945,7 +927,6 @@ typedef struct MapcardWork {
     u8 unk_72;
     u8 unk_73;
     u8 value;
-    u8 unk_75[0x03];
 } MapcardWork;
 
 typedef char MapcardWork_size[(sizeof(MapcardWork) == 0x78) ? 1 : -1];
@@ -956,7 +937,6 @@ typedef struct ReloadGauge {
     s32 offsetX;
     u8 unk_08[0x05];
     u8 gaugeAnim;
-    u8 unk_0E[0x02];
     AnimState anim;
     AnimState anim2;
     AnimState anim3;
@@ -965,7 +945,6 @@ typedef struct ReloadGauge {
     void* gfx3;
     s8 reloadCounter;
     u8 chargeTick;
-    u8 unk_66[0x02];
 } ReloadGauge;
 
 typedef char ReloadGauge_size[(sizeof(ReloadGauge) == 0x68) ? 1 : -1];
@@ -1002,7 +981,6 @@ typedef struct MapTileAnimationWork {
     u8 firstTrack;
     u8 frameTimers[8];
     u8 frameIndices[8];
-    u8 unk_11[3];
     const MapTileAnimationDef* definition;
 } MapTileAnimationWork;
 
@@ -1093,7 +1071,6 @@ typedef struct PrizeMapCardGroup {
 typedef struct PrizeMapCardGroupList {
     const PrizeMapCardGroup* data;
     u16 size;
-    u16 unk_06;
 } PrizeMapCardGroupList;
 
 extern const s32 gSoraCardLayout[][2];
@@ -1122,11 +1099,9 @@ typedef struct MapSelectKindEntry {
 
 typedef struct SpotlightWork {
     u8 steps;
-    u8 unk_01[0x03];
     s32 blendB;
     s32 blendA;
     u16 bldAlpha;
-    u8 unk_0E[0x02];
     u8* endFlag;
     u8 ownEndFlag;
 } SpotlightWork;
@@ -1170,7 +1145,6 @@ typedef struct CardEffectWork {
     s16 x;
     s16 y;
     u16 priority;
-    u8 unk_36[0x02];
     CardEffectArgs args;
 } CardEffectWork;
 
@@ -1298,7 +1272,6 @@ typedef struct MapSelectWork {
     u8 unk_28D[0x02];
     u8 slideSteps;
     u8 barSteps;
-    u8 unk_291[0x03];
     u8* status;
     u8 pageScroll;
     u8 mosaicX;
@@ -1312,11 +1285,9 @@ typedef struct MapSelectWork {
     u8 scrollBarVisible;
     u8 inTutorial;
     u8 tutorialMessage;
-    u8 unk_2C3;
     SelmapEventKeyArgs eventKeyArgs;
     u8 valueCounts[0x0A];
     u8 remainingKeys;
-    u8 unk_2DB;
     void* nextEventKey;
     MapSelectKindEntry* kindEntries;
 } MapSelectWork;
@@ -1334,7 +1305,6 @@ typedef struct LvupMsgWork {
     void* tiles;
     void* palette;
     u16 amount;
-    u8 unk_28E[2];
     s32 y;
     s32 x;
     s32 x2;
@@ -1363,7 +1333,6 @@ typedef struct DeckConfirmWork {
     u8 textSlotCount;
     u8 textSlotCount2;
     u8 textSlotCount3;
-    u8 unk_78F;
     s16 unk_790;
     s16 x;
     s16 x2;
@@ -1371,7 +1340,6 @@ typedef struct DeckConfirmWork {
     s16 y2;
     s16 x3;
     s16 y3;
-    u8 unk_79E[2];
     u8* active;
     u8 unk_7A4;
 } DeckConfirmWork;
@@ -1382,7 +1350,6 @@ typedef struct LevelUpEffectArgs {
     s32 x;
     s32 y;
     u8 unk_08;
-    u8 unk_09[3];
     struct BtlObj* target;
     void* tiles;
     ObjPalette* palette;
@@ -1417,7 +1384,6 @@ typedef struct StockInfoWork {
     s32 x;
     s32 y;
     s8 timer;
-    u8 unk_11[3];
     u8* active;
     TaskPool tasks;
 } StockInfoWork;
@@ -1450,7 +1416,6 @@ typedef struct WorldSelBeforeWork {
     WorldSelBeforeArgs pos;
     u8 animStep;
     u8 animTimer;
-    u8 unk_1E[0x02];
     s32 x2[10];
     s32 y2[10];
     s32 z2[10];
@@ -1495,7 +1460,6 @@ extern const EventBgEffectDef* gEventBgEffectDefs[];
 typedef struct ReloadArgs {
     u8 slot;
     u8 mode;
-    u8 unk_02[0x02];
     u8* state;
 } ReloadArgs;
 
@@ -1917,7 +1881,6 @@ typedef char SelmapEventKeyWork_size[(sizeof(SelmapEventKeyWork) == 0x124) ? 1 :
 typedef struct KeyboardLineLayout {
     const s16* positions;
     s16 count;
-    u8 unk_06[2];
 } KeyboardLineLayout;
 
 extern const s16 gKeyboardKeyX[];
@@ -1949,14 +1912,12 @@ typedef struct PremireChanceWork {
     void* gfx;
     void* gfx2;
     s16 titleX;
-    u8 unk_32[2];
     s32 topY;
     s32 bottomY;
     TaskPool tasks;
     u8 cardCount;
     u8 spinDelay;
     u8 advanced;
-    u8 unk_53;
     AnimState anim;
     AnimState anim2;
     u8 stopped;
@@ -1968,7 +1929,6 @@ typedef struct PremireChanceWork {
     u8 stopTimer;
     u8 titleSteps;
     u8 slideSteps;
-    u8 unk_8D[3];
 } PremireChanceWork;
 
 typedef struct LevelUpWork {
@@ -2012,7 +1972,6 @@ typedef struct LevelUpWork {
     u16 dpDigits[4];
     u16 apDigits[4];
     s16 timer;
-    s16 unk_7A6;
     s32 x7;
     s32 y6;
     s8 cursor;

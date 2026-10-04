@@ -24,21 +24,18 @@ extern const u8* gSaveSignature;
 typedef struct SaveBlockLarge {
     u8 signature[SAVE_SIGNATURE_SIZE];
     u16 checksum;
-    u16 unk_1A;
     SaveFileLarge data;
 } SaveBlockLarge;
 
 typedef struct SaveBlockSmall {
     u8 signature[SAVE_SIGNATURE_SIZE];
     u16 checksum;
-    u16 unk_1A;
     SaveFileSmall data;
 } SaveBlockSmall;
 
 typedef struct SaveHeader {
     u8 signature[SAVE_SIGNATURE_SIZE];
     u16 checksum;
-    u16 unk_1A;
     SaveHeaderData data;
 } SaveHeader;
 

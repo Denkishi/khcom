@@ -11,12 +11,10 @@ typedef struct BosMapanimeFrame {
 typedef struct BosMapanimeDef {
     const BosMapanimeFrame* frames;
     u16 frameCount;
-    u16 unk_06;
     void* tiles;
     u16 destOffset;
     u16 copySize;
     u16 frameSize;
-    u16 unk_12;
     s32 bg;
 } BosMapanimeDef;
 
@@ -24,7 +22,6 @@ typedef struct BosMapanimeState {
     u16 timer;
     u16 frameIndex;
     u8 uploadPending;
-    u8 unk_05[0x03];
     const BosMapanimeDef* def;
 } BosMapanimeState;
 

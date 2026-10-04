@@ -3,8 +3,8 @@
 #endif
 
 static const MessageScriptEntry sEvent052Script[2] = {
-    { 6, 4, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent052Text00), 0, 200 },
-    { 0, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent052Text01), MSG_SCRIPT_FLAG_END, 265 },
+    { 6, 4, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent052Text00), 0, 200 },
+    { 0, 2, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent052Text01), MSG_SCRIPT_FLAG_END, 265 },
 };
 
 #ifdef VERSION_JP
@@ -12,7 +12,7 @@ static const MessageScriptEntry sEvent052Script[2] = {
 #endif
 
 static const EventCameraKeyframe sEvent052Camera[1] = {
-    { -64536, 192512, 60672, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -64536, 192512, 60672, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EvSoundCue sEvent052SoundCues[1] = {
@@ -20,49 +20,47 @@ static const EvSoundCue sEvent052SoundCues[1] = {
 };
 
 static const EventCharaKeyframe sEvent052Track0[14] = {
-    { 4, 1, { 0, 0 }, 156160, 83968, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 14, 110, { 0, 0 }, 195072, 65536, 0, 4, { 0, 0 }, 67, NULL, NULL },
-    { 4, 210, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 3, 215, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 2, 220, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 1, 225, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 2, 260, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 31, 267, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 2, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 1, 305, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 2, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 3, 315, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 350, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 4, 1, 156160, 83968, 0, 0, 66, NULL, NULL },
+    { 14, 110, 195072, 65536, 0, 4, 67, NULL, NULL },
+    { 4, 210, 0, 0, 0, 0, 69, NULL, NULL },
+    { 3, 215, 0, 0, 0, 0, 69, NULL, NULL },
+    { 2, 220, 0, 0, 0, 0, 69, NULL, NULL },
+    { 1, 225, 0, 0, 0, 0, 5, NULL, NULL },
+    { 2, 260, 0, 0, 0, 0, 5, NULL, NULL },
+    { 31, 267, 0, 0, 0, 0, 5, NULL, NULL },
+    { 2, 300, 0, 0, 0, 0, 5, NULL, NULL },
+    { 1, 305, 0, 0, 0, 0, 5, NULL, NULL },
+    { 2, 310, 0, 0, 0, 0, 69, NULL, NULL },
+    { 3, 315, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 350, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 3000, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent052Track1[9] = {
-    { 229, 75, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, NULL, NULL },
-    { 229, 76, { 0, 0 }, 185856, 68096, 0, 0, { 0, 0 }, 16402, NULL, NULL },
-    { 233, 103, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, EventCharaHop, NULL },
-    { 229, 106, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 4, NULL, NULL },
-    { 229, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 229, 130, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 231, 160, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 234, 190, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, EventCharaHop, NULL },
-    { 231, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 229, 75, 0, 0, 0, 0, 8194, NULL, NULL },
+    { 229, 76, 185856, 68096, 0, 0, 16402, NULL, NULL },
+    { 233, 103, 0, 0, 0, 173, 4, EventCharaHop, NULL },
+    { 229, 106, 0, 0, 0, 173, 4, NULL, NULL },
+    { 229, 120, 0, 0, 0, 0, 5, NULL, NULL },
+    { 229, 130, 0, 0, 0, 0, 69, NULL, NULL },
+    { 231, 160, 0, 0, 0, 0, 69, NULL, NULL },
+    { 234, 190, 0, 0, 0, 0, 64, EventCharaHop, NULL },
+    { 231, 3000, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent052Tracks[2] = {
-    { sEvent052Track0, 0, { 0, 0, 0 } },
-    { sEvent052Track1, 8, { 0, 0, 0 } },
+    { sEvent052Track0, 0 },
+    { sEvent052Track1, 8 },
 };
 
 const EventSequenceDef gEvent052 = {
     2,
-    { 0, 0, 0 },
     sEvent052Tracks,
     sEvent052Camera,
     sEvent052Script,
     sEvent052SoundCues,
     NULL,
     320,
-    0,
     0,
     0,
     0,

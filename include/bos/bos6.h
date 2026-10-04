@@ -160,17 +160,14 @@ extern const PcSpriteCmd gBosPcDefeatFrame6[];
 typedef struct PcGfxSet {
     void* tiles;
     u16 tilesSize;
-    u8 unk_06[0x02];
     void* map;
     u16 mapSize;
-    u8 unk_0E[0x02];
 } PcGfxSet;
 
 typedef struct PcShot {
     s32 targetX;
     s32 targetY;
     u16 steps;
-    u8 unk_0A[0x2];
     s32 targetScale;
 } PcShot;
 
@@ -180,7 +177,6 @@ typedef struct PcShared {
     u8 unk_03;
     u8 unk_04;
     u8 inEvent;
-    u8 unk_06[0x2];
     s32 fltStopTimer;
     s32 gimmickTimer;
 } PcShared;
@@ -198,11 +194,9 @@ typedef struct PcWork {
     s16 reactionAnim;
     s16 flash;
     s16 prevFlash;
-    u8 unk_00E[0x2];
     s32 hitAttack;
     s32 hitFlags;
     u8 defeated;
-    u8 unk_019[0x3];
     s32 actorMaxX;
     s32 x;
     s32 y;
@@ -213,10 +207,8 @@ typedef struct PcWork {
     s16 animTimer;
     s16 bgFrame;
     u8 paletteCycle;
-    u8 unk_039;
     s16 paletteIndex;
     s16 paletteTimer;
-    u8 unk_03E[0x2];
     void* tiles;
     void* tiles2[2];
     void* palette;
@@ -243,7 +235,6 @@ typedef struct PcAcdWork {
     s32 y;
     s32 z;
     u8 acdOff;
-    u8 unk_019[0x3];
     PcShared* shared;
     AnimState anim;
 } PcAcdWork;
@@ -256,13 +247,11 @@ typedef struct PcFltWork {
     u8 unk_006;
     u8 unk_007;
     u16 orbitAngle;
-    u8 unk_00A[0x2];
     u32 centerX;
     u32 centerY;
     u16 radiusX;
     u16 radiusY;
     s16 sinkTimer;
-    u8 unk_01A[0x2];
     u32 baseX;
     u32 baseY;
     u32 baseZ;
@@ -278,10 +267,8 @@ typedef struct PcFltWork {
 
 typedef struct PcFldWork {
     u8 paletteCycle;
-    u8 unk_001;
     s16 paletteIndex;
     s16 paletteTimer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     Collider collider;
@@ -291,13 +278,11 @@ typedef struct LstSub {
     u8 defeated;
     u8 unk_001;
     u8 restartAnim;
-    u8 unk_003;
     s16 state;
     s16 timer;
     s16 hurtTimer;
     s16 animId;
     s16 curAnimId;
-    u8 unk_00E[0x2];
     ObjTiles* tiles;
     u8 unk_014[0x4];
     BtlObj body;
@@ -308,7 +293,6 @@ typedef struct BosLstWork {
     u8 inEvent;
     u8 eventStep;
     u8 hidden;
-    u8 unk_003;
     s16 unk_004;
     s16 subsDefeated;
     s16 state;
@@ -321,7 +305,6 @@ typedef struct BosLstWork {
     u16 prevFlash;
     s32 hpRatio;
     u8 turned;
-    u8 unk_01D;
     s16 animId;
     u16 animFlags;
     u16 animFacing;
@@ -364,18 +347,15 @@ typedef struct BosLstWork {
     s16 dashStep;
     s16 dashCount;
     s16 unk_0AC;
-    u8 unk_0AE[0x2];
     s32 dashSpeed;
     s32 dashVz;
     s32 ctrCount;
     s16 bitStep;
     s16 bitRound;
     s16 bitAttackStarted;
-    u16 unk_0C2;
     s32 lstTaskCount;
     u8 unk_0C8[0xC];
     u8 playerOnPlatform;
-    u8 unk_0D5;
     s16 platformStep;
     u8 unk_0D8[0x4];
     s32 platformSpeed;
@@ -517,7 +497,6 @@ typedef struct LstAnimDef {
     s16 bgX;
     s16 bgY;
     s16 bgZ;
-    u8 unk_2A[0x2];
 } LstAnimDef;
 
 void task_bos_lst_2(BosLstWork* work);
@@ -535,7 +514,6 @@ void task_bos_lst_3(BosLstWork* work);
 
 typedef struct PcFltInit {
     u8 index;
-    u8 unk_01;
     u16 angle;
     u32 x;
     u32 y;

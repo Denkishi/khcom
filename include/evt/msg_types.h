@@ -40,10 +40,8 @@ typedef struct EventCameraKeyframe {
     s32 y;
     s32 yOffset;
     u8 target;
-    u8 unk_11[3];
     u32 flags;
     u16 duration;
-    u8 unk_1A[2];
     void* callback;
 } EventCameraKeyframe;
 
@@ -60,7 +58,6 @@ typedef struct MessageScriptEntry {
     u32 expressionId;
     u32 positionIndex;
     u8 charDelay;
-    u8 unk_0D[3];
     const void* text;
     u16 flags;
     u16 frame;
@@ -111,12 +108,10 @@ enum EventCharaKeyframeFlag {
 typedef struct EventCharaKeyframe {
     u32 anim;
     u16 frame;
-    u8 unk_06[2];
     s32 x;
     s32 y;
     s32 z;
     u16 motionArg;
-    u8 unk_16[2];
     u32 flags;
     void* update;
     EventCharaKeyframeFunc callback;
@@ -125,7 +120,6 @@ typedef struct EventCharaKeyframe {
 typedef struct EventCharaTrack {
     const EventCharaKeyframe* keyframes;
     u8 chara;
-    u8 unk_05[3];
 } EventCharaTrack;
 
 enum EvSoundFlag {
@@ -148,12 +142,10 @@ typedef struct EventBgEffectEntry {
     s32 x;
     s32 y;
     u16 flags;
-    u8 unk_0E[0x02];
 } EventBgEffectEntry;
 
 typedef struct EventSequenceDef {
     u8 charaCount;
-    u8 unk_01[3];
     const EventCharaTrack* charaTracks;
     const EventCameraKeyframe* keyframes;
     const MessageScriptEntry* script;
@@ -165,7 +157,6 @@ typedef struct EventSequenceDef {
     u8 toTitle;
     u8 toCopyright;
     u8 toMapFld;
-    u8 unk_1F;
     u16 battleId;
     u16 nextEvent;
     u16 startDelay;

@@ -57,7 +57,6 @@ typedef struct EventState {
     u16 frame;
     u16 bldCnt;
     u16 bldAlpha;
-    u8 unk_72[2];
     s32 eventId;
     u8 hasBg2Map;
     u8 hasBg1Map;

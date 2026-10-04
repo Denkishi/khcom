@@ -23,7 +23,6 @@ typedef struct ContinueWork {
     s32 unk_5C;
     s32 cursor;
     u8 unk_64;
-    u8 unk_65;
     u16 blendAlpha;
     u8 unk_68[2];
     u8 state;

@@ -12,7 +12,6 @@
 typedef struct UrsulaWork {
     u32 state;
     s16 timer;
-    u8 unk_006[0x2];
     TaskPool tasks;
     Task* tako;
     Task* tako2;
@@ -32,7 +31,6 @@ typedef struct UrsulaWork {
     u16 unk_15C;
     u16 gimmickDelay;
     u8 takoRecoverPending;
-    u8 unk_161[0x3];
 } UrsulaWork;
 
 void BosUrsulaStartAttack(s32 a);
@@ -47,12 +45,10 @@ typedef struct UrsulaTakoWork {
     void* palette2;
     AnimState anim;
     u16 animBase;
-    u8 unk_026[0x2];
     BtlObj obj;
     u32 state;
     u16 timer;
     u8 isLeft;
-    u8 unk_13F[0x1];
     Collider collider;
     Collider collider2;
     s32 collider2OffsetX;
@@ -81,14 +77,12 @@ typedef struct UrsulaMapanimeWork {
     TaskPool tasks;
     Task* task;
     u8 attackSpawned;
-    u8 unk_029[0x3];
 } UrsulaMapanimeWork;
 
 typedef struct UrsulaMapWork {
     s32 viewYMax;
     s32 viewYMaxTarget;
     u16 viewYMaxSteps;
-    u8 unk_0A[0x2];
 } UrsulaMapWork;
 
 typedef struct UrsulaBorderWork {
@@ -105,7 +99,6 @@ typedef struct UrsulaBacktakoWork {
     AnimState anim;
     u16 animBase;
     u8 isLeft;
-    u8 unk_023[0x1];
     u32 offsetX;
     u32 offsetZ;
     u32 x;

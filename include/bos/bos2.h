@@ -42,7 +42,6 @@ typedef struct DsdWork {
     u32 state;
     u32 attackState;
     s16 attackCycle;
-    u16 unk_33E;
     u32 bodyX;
     u32 bodyY;
     u32 bodyZ;
@@ -54,7 +53,6 @@ typedef struct DsdWork {
     s16 bgFrameTimer;
     s16 flags;
     s8 hpPhase;
-    u8 unk_35B;
     s32 driftX;
     ObjTiles* tiles;
     ObjPalette* palette;
@@ -81,7 +79,6 @@ typedef struct DsdEnergy1Work {
     s32 vz;
     u8 angle;
     u8 targetAngle;
-    u8 unk_2A[0x2];
     s32 speed;
     s32 unk_30;
     s16 state;
@@ -91,10 +88,8 @@ typedef struct DsdEnergy1Work {
     s16 chargeTime;
     u8 unk_3E[0x2];
     s16 retargetTimer;
-    u8 unk_42[0x2];
     void* gfx;
     s8 visible;
-    u8 unk_49[0x3];
 } DsdEnergy1Work;
 
 typedef struct DsdEnergy2Work {
@@ -115,10 +110,8 @@ typedef struct DsdEnergy2Work {
     s16 chargeTime;
     s8 dropCount;
     u8 dropTotal;
-    u8 unk_36[0x2];
     void* gfx;
     s8 visible;
-    u8 unk_3D[0x3];
 } DsdEnergy2Work;
 
 typedef struct DsdRockWork {
@@ -131,7 +124,6 @@ typedef struct DsdRockWork {
     s32 vz;
     void* gfx;
     u8 front;
-    u8 unk_21[0x3];
 } DsdRockWork;
 
 typedef struct DsdCircleWork {
@@ -144,9 +136,7 @@ typedef struct DsdCircleWork {
     s16 paletteFrame;
     s16 endTimer;
     s8 frame;
-    u8 unk_1B;
     s16 summonTimer;
-    u16 unk_1E;
 } DsdCircleWork;
 
 typedef struct DsdMainWork {
@@ -154,7 +144,6 @@ typedef struct DsdMainWork {
     u16 moveSteps;
     s16 stepTimer;
     u8 unk_008;
-    u8 unk_009[0x1];
     s16 baseFrame;
     void* tiles;
     void* tiles2;
@@ -165,11 +154,9 @@ typedef struct DsdMainWork {
     void* palette;
     void* palette2;
     s8 spriteVisible;
-    u8 unk_055[0x3];
     TaskPool tasks;
     Task* energy2Task;
     s8 lastBreakDifference;
-    u8 unk_071[0x3];
     BtlObj body;
     Task* energy1Task;
     Task* energy1Task2;
@@ -193,7 +180,6 @@ typedef struct DsdItaWork {
     u16 lifeTimer;
     s16 offTimer;
     u8 state;
-    u8 unk_07B[0x1];
     u16 flags;
     s16 dipStep;
     s32 dipOffset;
@@ -230,7 +216,6 @@ typedef struct JfWork {
     s16 flags;
     s16 pillarPhase;
     s16 gimmickTimer;
-    u8 unk_252[0x2];
     TaskPool tasks;
     u16 unk_268;
     u16 unk_26A;
@@ -258,16 +243,13 @@ typedef struct JfLampWork {
     s16 voiceInterval;
     s16 voiceTimer;
     u8 unk_24;
-    u8 unk_25[0x3];
     s32 vx;
     u8 unk_2C[0x1];
     u8 onFlatGround;
     s16 moveSteps;
     u8 unk_30[0x2];
     u8 state;
-    u8 unk_33[0x1];
     s16 stateTimer;
-    u16 unk_36;
     s32 targetX;
     u8 unk_3C[0x6];
     u16 angle;
@@ -292,11 +274,9 @@ typedef struct JfRockWork {
     s32 accelZ;
     s16 animIndex;
     u8 visible;
-    u8 unk_15B[0x1];
     s16 riseSteps;
     s16 throwTimer;
     u8 state;
-    u8 unk_161[0x3];
     ObjTiles* tiles2;
     ObjPalette* palette2;
     void* gfx2;
@@ -304,11 +284,9 @@ typedef struct JfRockWork {
     s32 y2;
     s32 z2;
     u8 visible2;
-    u8 unk_17D;
     s16 gfx2Index;
     TaskPool tasks;
     u8 shadowVisible;
-    u8 unk_195[0x3];
 } JfRockWork;
 
 typedef struct JfMajinWork {
@@ -319,7 +297,6 @@ typedef struct JfMajinWork {
     void* gfx;
     AnimState anim;
     u8 spriteVisible;
-    u8 unk_2D[0x3];
     u32 unk_30;
     u32 unk_34;
     u8 unk_38[0x4];
@@ -344,7 +321,6 @@ typedef struct JfMajinWork {
     u16 middleTarget;
     u16 rightTarget;
     s8 extraClipRows;
-    u8 unk_6B[0x1];
     TaskPool tasks;
     Task* task;
 } JfMajinWork;
@@ -373,7 +349,6 @@ typedef struct JfBorderlineWork {
     u16 unk_0B2;
     u8 unk_0B4;
     u8 wide;
-    u8 unk_0B6[0x2];
 } JfBorderlineWork;
 
 typedef char JfWork_size[(sizeof(JfWork) == 0x26C) ? 1 : -1];

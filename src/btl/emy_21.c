@@ -22,16 +22,16 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy21CommonAnimDefs[3] = {
-    { gEmy2100Frames, gEmy2100Anims, gEmy2100Tiles, 0, { 0, 0, 0 } },
-    { gEmy2102Frames, gEmy2102Anims, gEmy2102Tiles, 0, { 0, 0, 0 } },
-    { gEmy2101Frames, gEmy2101Anims, gEmy2101Tiles, 0, { 0, 0, 0 } },
+    { gEmy2100Frames, gEmy2100Anims, gEmy2100Tiles, 0 },
+    { gEmy2102Frames, gEmy2102Anims, gEmy2102Tiles, 0 },
+    { gEmy2101Frames, gEmy2101Anims, gEmy2101Tiles, 0 },
 };
 
 static const AnimDef sEmy21AnimDefs[4] = {
-    { gEmy2110Frames, gEmy2110Anims, gEmy2110Tiles, 0, { 0, 0, 0 } },
-    { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 0, { 0, 0, 0 } },
-    { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 1, { 0, 0, 0 } },
-    { gEmy2111fFrames, gEmy2111fAnims, gEmy2111fTiles, 0, { 0, 0, 0 } },
+    { gEmy2110Frames, gEmy2110Anims, gEmy2110Tiles, 0 },
+    { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 0 },
+    { gEmy2111Frames, gEmy2111Anims, gEmy2111Tiles, 1 },
+    { gEmy2111fFrames, gEmy2111fAnims, gEmy2111fTiles, 0 },
 };
 
 static const EmyDef sEmy21Def = { gEmy21Palette, sEmy21CommonAnimDefs, 396, 130, 20, 20, 80, 80, 16, 5, 0, { 14, 40, 32, 16, 16, 100, 0 } };

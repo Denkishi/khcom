@@ -24,11 +24,11 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFrdGoofyAnimDefs[5] = {
-    { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0, { 0, 0, 0 } },
-    { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 1, { 0, 0, 0 } },
-    { gGoofy14Frames, gGoofy14Anims, gGoofy14Tiles, 0, { 0, 0, 0 } },
-    { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 1, { 0, 0, 0 } },
-    { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 2, { 0, 0, 0 } },
+    { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 0 },
+    { gGoofy16Frames, gGoofy16Anims, gGoofy16Tiles, 1 },
+    { gGoofy14Frames, gGoofy14Anims, gGoofy14Tiles, 0 },
+    { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 1 },
+    { gGoofy05Frames, gGoofy05Anims, gGoofy05Tiles, 2 },
 };
 
 TaskDesc gTaskDescFrdGoofy = {

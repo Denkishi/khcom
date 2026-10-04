@@ -24,9 +24,9 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnTinkAnimDefs[3] = {
-    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 1, { 0, 0, 0 } },
-    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 2, { 0, 0, 0 } },
-    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 3, { 0, 0, 0 } },
+    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 1 },
+    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 2 },
+    { gTinkF00Frames, gTinkF00Anims, gTinkF00Tiles, 3 },
 };
 
 TaskDesc gTaskDescSmnTink = {

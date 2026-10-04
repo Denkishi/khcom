@@ -25,7 +25,7 @@ s16 gBosTmActorY EWRAM_COMMON(4);
 s16 gBosTmBossY EWRAM_COMMON(4);
 
 static const BattleBackgroundDef sBosTmBattleBackgroundDef = {
-    gUnk_0964AE84, 0x8000, { 0, 0 }, gUnk_096FB164, 0x140, { 0, 0 }, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
+    gUnk_0964AE84, 0x8000, gUnk_096FB164, 0x140, { gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64, gUnk_096BFC64 }
 };
 
 TaskDesc gTaskDescBosTm = {

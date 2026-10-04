@@ -44,50 +44,50 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
-    { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0, { 0, 0, 0 } },
-    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 1, { 0, 0, 0 } },
-    { gRikuBt10Frames, gRikuBt10Anims, gRikuBt10Tiles, 3, { 0, 0, 0 } },
-    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 2, { 0, 0, 0 } },
-    { gRikuBt13Frames, gRikuBt13Anims, gRikuBt13Tiles, 0, { 0, 0, 0 } },
-    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 2, { 0, 0, 0 } },
-    { gRikuLl17Frames, gRikuLl17Anims, gRikuLl17Tiles, 1, { 0, 0, 0 } },
-    { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 0, { 0, 0, 0 } },
-    { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 1, { 0, 0, 0 } },
-    { gRikuBt04Frames, gRikuBt04Anims, gRikuBt04Tiles, 0, { 0, 0, 0 } },
-    { gRikuBt05Frames, gRikuBt05Anims, gRikuBt05Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EDF3E8, gUnk_09EDF400, gUnk_08925B44, 0, { 0, 0, 0 } },
-    { gNiserikuIdolFrames, gNiserikuIdolAnims, gNiserikuIdolTiles, 0, { 0, 0, 0 } },
-    { gNiserikuRunFrames, gNiserikuRunAnims, gNiserikuRunTiles, 0, { 0, 0, 0 } },
-    { gNiserikuDamageFrames, gNiserikuDamageAnims, gNiserikuDamageTiles, 0, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 0, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 1, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 2, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 3, { 0, 0, 0 } },
-    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 4, { 0, 0, 0 } },
-    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 0, { 0, 0, 0 } },
-    { gNiserikuFuriharaiFrames, gNiserikuFuriharaiAnims, gNiserikuFuriharaiTiles, 0, { 0, 0, 0 } },
-    { gNiserikuTategiriFrames, gNiserikuTategiriAnims, gNiserikuTategiriTiles, 0, { 0, 0, 0 } },
-    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 0, { 0, 0, 0 } },
-    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 2, { 0, 0, 0 } },
-    { gNiserikuDarkfigaFrames, gNiserikuDarkfigaAnims, gNiserikuDarkfigaTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 1, { 0, 0, 0 } },
-    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 2, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 0, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 1, { 0, 0, 0 } },
-    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 2, { 0, 0, 0 } },
-    { gNiserikuYamiEndFrames, gNiserikuYamiEndAnims, gNiserikuYamiEndTiles, 0, { 0, 0, 0 } },
-    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 1, { 0, 0, 0 } },
-    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 3, { 0, 0, 0 } },
+    { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0 },
+    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 1 },
+    { gRikuBt10Frames, gRikuBt10Anims, gRikuBt10Tiles, 3 },
+    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 2 },
+    { gRikuBt13Frames, gRikuBt13Anims, gRikuBt13Tiles, 0 },
+    { gRikuBt11Frames, gRikuBt11Anims, gRikuBt11Tiles, 2 },
+    { gRikuLl17Frames, gRikuLl17Anims, gRikuLl17Tiles, 1 },
+    { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 0 },
+    { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 1 },
+    { gRikuBt04Frames, gRikuBt04Anims, gRikuBt04Tiles, 0 },
+    { gRikuBt05Frames, gRikuBt05Anims, gRikuBt05Tiles, 0 },
+    { gUnk_09EDF3E8, gUnk_09EDF400, gUnk_08925B44, 0 },
+    { gNiserikuIdolFrames, gNiserikuIdolAnims, gNiserikuIdolTiles, 0 },
+    { gNiserikuRunFrames, gNiserikuRunAnims, gNiserikuRunTiles, 0 },
+    { gNiserikuDamageFrames, gNiserikuDamageAnims, gNiserikuDamageTiles, 0 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 0 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 1 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 2 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 3 },
+    { gNiserikuJumpFrames, gNiserikuJumpAnims, gNiserikuJumpTiles, 4 },
+    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 0 },
+    { gNiserikuFuriharaiFrames, gNiserikuFuriharaiAnims, gNiserikuFuriharaiTiles, 0 },
+    { gNiserikuTategiriFrames, gNiserikuTategiriAnims, gNiserikuTategiriTiles, 0 },
+    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 0 },
+    { gNiserikuKabutoFrames, gNiserikuKabutoAnims, gNiserikuKabutoTiles, 2 },
+    { gNiserikuDarkfigaFrames, gNiserikuDarkfigaAnims, gNiserikuDarkfigaTiles, 0 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 0 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 1 },
+    { gNiserikuYamiStartFrames, gNiserikuYamiStartAnims, gNiserikuYamiStartTiles, 2 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 0 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 1 },
+    { gNiserikuYamiIngFrames, gNiserikuYamiIngAnims, gNiserikuYamiIngTiles, 2 },
+    { gNiserikuYamiEndFrames, gNiserikuYamiEndAnims, gNiserikuYamiEndTiles, 0 },
+    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 1 },
+    { gNiserikuDashFrames, gNiserikuDashAnims, gNiserikuDashTiles, 3 },
 };
 
 static const AnimDef sBtlRikuDirAnimDefs[6][5] = {
-    { { gRik1ff02Frames, gRik1ff02Anims, gRik1ff02Tiles, 0, { 0, 0, 0 } }, { gRik1bb02Frames, gRik1bb02Anims, gRik1bb02Tiles, 0, { 0, 0, 0 } }, { gRik1fl02Frames, gRik1fl02Anims, gRik1fl02Tiles, 0, { 0, 0, 0 } }, { gRik1ll02Frames, gRik1ll02Anims, gRik1ll02Tiles, 0, { 0, 0, 0 } }, { gRik1bl02Frames, gRik1bl02Anims, gRik1bl02Tiles, 0, { 0, 0, 0 } } },
-    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 0, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 0, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 0, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 0, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 0, { 0, 0, 0 } } },
-    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 1, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 1, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 1, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 1, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 1, { 0, 0, 0 } } },
-    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 2, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 2, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 2, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 2, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 2, { 0, 0, 0 } } },
-    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 3, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 3, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 3, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 3, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 3, { 0, 0, 0 } } },
-    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 4, { 0, 0, 0 } }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 4, { 0, 0, 0 } }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 4, { 0, 0, 0 } }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 4, { 0, 0, 0 } }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 4, { 0, 0, 0 } } },
+    { { gRik1ff02Frames, gRik1ff02Anims, gRik1ff02Tiles, 0 }, { gRik1bb02Frames, gRik1bb02Anims, gRik1bb02Tiles, 0 }, { gRik1fl02Frames, gRik1fl02Anims, gRik1fl02Tiles, 0 }, { gRik1ll02Frames, gRik1ll02Anims, gRik1ll02Tiles, 0 }, { gRik1bl02Frames, gRik1bl02Anims, gRik1bl02Tiles, 0 } },
+    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 0 }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 0 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 0 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 0 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 0 } },
+    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 1 }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 1 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 1 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 1 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 1 } },
+    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 2 }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 2 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 2 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 2 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 2 } },
+    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 3 }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 3 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 3 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 3 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 3 } },
+    { { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 4 }, { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 4 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 4 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 4 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 4 } },
 };
 
 static const u16 sBtlRikuGroundSongs[4][4] = {
@@ -101,21 +101,21 @@ static const s32 sBtlRikuAttackIds[3] = {
     0, 1, 2,
 };
 
-static const RikuAttackDef sBtlRikuSwing1 = { 1, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1 = { 1, 15, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT00, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing2 = { 2, 17, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing2 = { 2, 17, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT01, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing1Wide = { 3, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing1Wide = { 3, 15, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT00, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuSwing3 = { 4, 21, 0, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, 0, NULL };
+static const RikuAttackDef sBtlRikuSwing3 = { 4, 21, &sBtlRikuAttackIds[2], 258, SONG_BTL_RK_HIT02, 0, 0, NULL };
 
-static const RikuAttackDef sBtlRikuAirSwing1Hop = { 6, 15, 0, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing1 };
+static const RikuAttackDef sBtlRikuAirSwing1Hop = { 6, 15, sBtlRikuAttackIds, 256, SONG_BTL_RK_HIT01, -640, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sBtlRikuAirSwing1 = { 5, 15, 0, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing1 };
+static const RikuAttackDef sBtlRikuAirSwing1 = { 5, 15, &sBtlRikuAttackIds[1], 254, SONG_BTL_RK_HIT00, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing1 };
 
-static const RikuAttackDef sBtlRikuAirSwing2 = { 5, 15, 0, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing2 };
+static const RikuAttackDef sBtlRikuAirSwing2 = { 5, 15, sBtlRikuAttackIds, 255, SONG_BTL_RK_HIT01, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing2 };
 
-static const RikuAttackDef sBtlRikuAirSwing3 = { 6, 15, 0, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, 0, &sBtlRikuSwing3 };
+static const RikuAttackDef sBtlRikuAirSwing3 = { 6, 15, &sBtlRikuAttackIds[2], 257, SONG_BTL_RK_HIT02, 0, COMBO_FLAG_AERIAL_SWING, &sBtlRikuSwing3 };
 
 void EnableBtlRikuPassThrough(BtlRikuWork* work) {
     u16 a = work->flags | BTL_RIKU_FLAG_PASS_THROUGH;

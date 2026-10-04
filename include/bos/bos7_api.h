@@ -35,7 +35,6 @@ typedef struct LstFalArg {
     s32 y;
     s32 z;
     u8 angle;
-    u8 unk_11;
     s16 facing;
     u16* falCount;
 } LstFalArg;

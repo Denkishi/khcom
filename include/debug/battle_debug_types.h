@@ -8,7 +8,6 @@ typedef struct ChkBtlWork {
     s8 bg;
     s16 enemy;
     s8 floor;
-    u8 unk_05;
     s16 hp;
 } ChkBtlWork;
 

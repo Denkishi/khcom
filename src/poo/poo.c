@@ -7699,7 +7699,7 @@ TaskDesc gTaskDescPooPooh = {
 };
 
 const PooMapBgDesc gPooMapBgDesc = {
-    gUnk_097A2ED8, 32768, 0, gUnk_09849898, 512, 0, gUnk_097AAED8, 16032, 16, 9
+    gUnk_097A2ED8, 32768, gUnk_09849898, 512, gUnk_097AAED8, 16032, 16, 9
 };
 
 const PooSpawn gPooSpawns[85] = {
@@ -7791,18 +7791,18 @@ const PooSpawn gPooSpawns[85] = {
 };
 
 const PooPileDesc gPooPileDescs[12] = {
-    { 611584, 339200, 4, 0 },
-    { 619264, 343296, 3, 0 },
-    { 626944, 347392, 2, 0 },
-    { 634624, 351488, 1, 0 },
-    { 642304, 355584, 2, 0 },
-    { 649984, 359680, 3, 0 },
-    { 657664, 363776, 4, 0 },
-    { 763904, 389632, 0, 0 },
-    { 759552, 398336, 0, 0 },
-    { 754688, 405760, 0, 0 },
-    { 747264, 411904, 0, 0 },
-    { 739072, 416768, 0, 0 },
+    { 611584, 339200, 4 },
+    { 619264, 343296, 3 },
+    { 626944, 347392, 2 },
+    { 634624, 351488, 1 },
+    { 642304, 355584, 2 },
+    { 649984, 359680, 3 },
+    { 657664, 363776, 4 },
+    { 763904, 389632, 0 },
+    { 759552, 398336, 0 },
+    { 754688, 405760, 0 },
+    { 747264, 411904, 0 },
+    { 739072, 416768, 0 },
 };
 
 const PooTileDesc gPooTileDescs[80] = {
@@ -7899,81 +7899,81 @@ TaskDesc gTaskDescPooMap = {
 
 const PooAnimDesc gPooSoraAnimDescs[11][5] = {
     {
-        { gSor1bb00Frames, gSor1bb00Anims, gSor1bb00Tiles, 0, 0 },
-        { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 0, 0 },
-        { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0, 0 },
-        { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 0, 0 },
-        { gSor1bl00Frames, gSor1bl00Anims, gSor1bl00Tiles, 0, 0 },
+        { gSor1bb00Frames, gSor1bb00Anims, gSor1bb00Tiles, 0 },
+        { gSor1ff00Frames, gSor1ff00Anims, gSor1ff00Tiles, 0 },
+        { gSor1fl00Frames, gSor1fl00Anims, gSor1fl00Tiles, 0 },
+        { gSor1ll00Frames, gSor1ll00Anims, gSor1ll00Tiles, 0 },
+        { gSor1bl00Frames, gSor1bl00Anims, gSor1bl00Tiles, 0 },
     },
     {
-        { gSor1bb01Frames, gSor1bb01Anims, gSor1bb01Tiles, 0, 0 },
-        { gSor1ff01Frames, gSor1ff01Anims, gSor1ff01Tiles, 0, 0 },
-        { gSor1fl01Frames, gSor1fl01Anims, gSor1fl01Tiles, 0, 0 },
-        { gSor1ll01Frames, gSor1ll01Anims, gSor1ll01Tiles, 0, 0 },
-        { gSor1bl01Frames, gSor1bl01Anims, gSor1bl01Tiles, 0, 0 },
+        { gSor1bb01Frames, gSor1bb01Anims, gSor1bb01Tiles, 0 },
+        { gSor1ff01Frames, gSor1ff01Anims, gSor1ff01Tiles, 0 },
+        { gSor1fl01Frames, gSor1fl01Anims, gSor1fl01Tiles, 0 },
+        { gSor1ll01Frames, gSor1ll01Anims, gSor1ll01Tiles, 0 },
+        { gSor1bl01Frames, gSor1bl01Anims, gSor1bl01Tiles, 0 },
     },
     {
-        { gSor1bb02Frames, gSor1bb02Anims, gSor1bb02Tiles, 0, 0 },
-        { gSor1ff02Frames, gSor1ff02Anims, gSor1ff02Tiles, 0, 0 },
-        { gSor1fl02Frames, gSor1fl02Anims, gSor1fl02Tiles, 0, 0 },
-        { gSor1ll02Frames, gSor1ll02Anims, gSor1ll02Tiles, 0, 0 },
-        { gSor1bl02Frames, gSor1bl02Anims, gSor1bl02Tiles, 0, 0 },
+        { gSor1bb02Frames, gSor1bb02Anims, gSor1bb02Tiles, 0 },
+        { gSor1ff02Frames, gSor1ff02Anims, gSor1ff02Tiles, 0 },
+        { gSor1fl02Frames, gSor1fl02Anims, gSor1fl02Tiles, 0 },
+        { gSor1ll02Frames, gSor1ll02Anims, gSor1ll02Tiles, 0 },
+        { gSor1bl02Frames, gSor1bl02Anims, gSor1bl02Tiles, 0 },
     },
     {
-        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 0, 0 },
-        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 0, 0 },
-        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 0, 0 },
-        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 0, 0 },
-        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 0, 0 },
+        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 0 },
+        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 0 },
+        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 0 },
+        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 0 },
+        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 0 },
     },
     {
-        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 1, 0 },
-        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 1, 0 },
-        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 1, 0 },
-        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 1, 0 },
-        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 1, 0 },
+        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 1 },
+        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 1 },
+        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 1 },
+        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 1 },
+        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 1 },
     },
     {
-        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 2, 0 },
-        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 2, 0 },
-        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 2, 0 },
-        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 2, 0 },
-        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 2, 0 },
+        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 2 },
+        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 2 },
+        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 2 },
+        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 2 },
+        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 2 },
     },
     {
-        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 3, 0 },
-        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 3, 0 },
-        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 3, 0 },
-        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 3, 0 },
-        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 3, 0 },
+        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 3 },
+        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 3 },
+        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 3 },
+        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 3 },
+        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 3 },
     },
     {
-        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 4, 0 },
-        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 4, 0 },
-        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 4, 0 },
-        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 4, 0 },
-        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 4, 0 },
+        { gSor1bb03Frames, gSor1bb03Anims, gSor1bb03Tiles, 4 },
+        { gSor1ff03Frames, gSor1ff03Anims, gSor1ff03Tiles, 4 },
+        { gSor1fl03Frames, gSor1fl03Anims, gSor1fl03Tiles, 4 },
+        { gSor1ll03Frames, gSor1ll03Anims, gSor1ll03Tiles, 4 },
+        { gSor1bl03Frames, gSor1bl03Anims, gSor1bl03Tiles, 4 },
     },
     {
-        { gSor1bb15Frames, gSor1bb15Anims, gSor1bb15Tiles, 2, 0 },
-        { gSor1ff15Frames, gSor1ff15Anims, gSor1ff15Tiles, 2, 0 },
-        { gSor1fl15Frames, gSor1fl15Anims, gSor1fl15Tiles, 2, 0 },
-        { gSor1ll15Frames, gSor1ll15Anims, gSor1ll15Tiles, 2, 0 },
-        { gSor1bl15Frames, gSor1bl15Anims, gSor1bl15Tiles, 2, 0 },
+        { gSor1bb15Frames, gSor1bb15Anims, gSor1bb15Tiles, 2 },
+        { gSor1ff15Frames, gSor1ff15Anims, gSor1ff15Tiles, 2 },
+        { gSor1fl15Frames, gSor1fl15Anims, gSor1fl15Tiles, 2 },
+        { gSor1ll15Frames, gSor1ll15Anims, gSor1ll15Tiles, 2 },
+        { gSor1bl15Frames, gSor1bl15Anims, gSor1bl15Tiles, 2 },
     },
     {
-        { gSor1bb10Frames, gSor1bb10Anims, gSor1bb10Tiles, 0, 0 },
-        { gSor1ff10Frames, gSor1ff10Anims, gSor1ff10Tiles, 0, 0 },
-        { gSor1fl10Frames, gSor1fl10Anims, gSor1fl10Tiles, 0, 0 },
-        { gSor1ll10Frames, gSor1ll10Anims, gSor1ll10Tiles, 0, 0 },
-        { gSor1bl10Frames, gSor1bl10Anims, gSor1bl10Tiles, 0, 0 },
+        { gSor1bb10Frames, gSor1bb10Anims, gSor1bb10Tiles, 0 },
+        { gSor1ff10Frames, gSor1ff10Anims, gSor1ff10Tiles, 0 },
+        { gSor1fl10Frames, gSor1fl10Anims, gSor1fl10Tiles, 0 },
+        { gSor1ll10Frames, gSor1ll10Anims, gSor1ll10Tiles, 0 },
+        { gSor1bl10Frames, gSor1bl10Anims, gSor1bl10Tiles, 0 },
     },
     {
-        { gSor1bb61Frames, gSor1bb61Anims, gSor1bb61Tiles, 0, 0 },
-        { gSor1ff61Frames, gSor1ff61Anims, gSor1ff61Tiles, 0, 0 },
-        { gSor1fl61Frames, gSor1fl61Anims, gSor1fl61Tiles, 0, 0 },
-        { gSor1ll61Frames, gSor1ll61Anims, gSor1ll61Tiles, 0, 0 },
-        { gSor1bl61Frames, gSor1bl61Anims, gSor1bl61Tiles, 0, 0 },
+        { gSor1bb61Frames, gSor1bb61Anims, gSor1bb61Tiles, 0 },
+        { gSor1ff61Frames, gSor1ff61Anims, gSor1ff61Tiles, 0 },
+        { gSor1fl61Frames, gSor1fl61Anims, gSor1fl61Tiles, 0 },
+        { gSor1ll61Frames, gSor1ll61Anims, gSor1ll61Tiles, 0 },
+        { gSor1bl61Frames, gSor1bl61Anims, gSor1bl61Tiles, 0 },
     },
 };
 
@@ -8532,9 +8532,9 @@ static const BosMapanimeFrame sPooMapanimeFrames0[4] = { { 18, 0 }, { 18, 1 }, {
 
 static const BosMapanimeFrame sPooMapanimeFrames1[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
 
-const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, 0, gUnk_097B4578, 0x2080, 0x0240, 0x0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, gUnk_097B4578, 0x2080, 0x0240, 0x0400, 3 };
 
-const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, 0, gUnk_097B5418, 0x3880, 0x0240, 0x0400, 0, 3 };
+const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, gUnk_097B5418, 0x3880, 0x0240, 0x0400, 3 };
 
 TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",
@@ -8575,17 +8575,17 @@ TaskDesc gTaskDescPooPoohstump = {
 };
 
 const PooAnimDesc gPooPigletAnimDescs[4] = {
-    { gUnk_09EF5CB0, gUnk_09EF5CAC, gUnk_09742FD8, 0, 0 },
-    { gUnk_09EF5CB8, gUnk_09EF5CB4, gUnk_097430EC, 0, 0 },
-    { gUnk_09EF5CDC, gUnk_09EF5CBC, gUnk_09743262, 0, 0 },
-    { gUnk_09EF5D00, gUnk_09EF5CE0, gUnk_09743ADA, 0, 0 },
+    { gUnk_09EF5CB0, gUnk_09EF5CAC, gUnk_09742FD8, 0 },
+    { gUnk_09EF5CB8, gUnk_09EF5CB4, gUnk_097430EC, 0 },
+    { gUnk_09EF5CDC, gUnk_09EF5CBC, gUnk_09743262, 0 },
+    { gUnk_09EF5D00, gUnk_09EF5CE0, gUnk_09743ADA, 0 },
 };
 
 const PooGfxDesc gPooPigletGfxDescs[4] = {
-    { gUnk_09EF5CAC, 1, 0 },
-    { gUnk_09EF5CB4, 1, 0 },
-    { gUnk_09EF5CBC, 8, 0 },
-    { gUnk_09EF5CE0, 8, 0 },
+    { gUnk_09EF5CAC, 1 },
+    { gUnk_09EF5CB4, 1 },
+    { gUnk_09EF5CBC, 8 },
+    { gUnk_09EF5CE0, 8 },
 };
 
 TaskDesc gTaskDescPooPiglet = {
@@ -8616,18 +8616,18 @@ TaskDesc gTaskDescPooOwl = {
 };
 
 const PooAnimDesc gPooRabbitAnimDescs[7] = {
-    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 0, 0 },
-    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 1, 0 },
-    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 2, 0 },
-    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 0, 0 },
-    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 2, 0 },
-    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 3, 0 },
-    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 4, 0 },
+    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 0 },
+    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 1 },
+    { gRabbitFl00Anims, gRabbitFl00Frames, gRabbitFl00Tiles, 2 },
+    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 0 },
+    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 2 },
+    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 3 },
+    { gRabbitBl00Anims, gRabbitBl00Frames, gRabbitBl00Tiles, 4 },
 };
 
 const PooGfxDesc gPooRabbitGfxDescs[2] = {
-    { gRabbitFl00Frames, 14, 0 },
-    { gRabbitBl00Frames, 15, 0 },
+    { gRabbitFl00Frames, 14 },
+    { gRabbitBl00Frames, 15 },
 };
 
 TaskDesc gTaskDescPooRabbit = {
@@ -8640,17 +8640,17 @@ TaskDesc gTaskDescPooRabbit = {
 };
 
 const PooAnimDesc gPooTiggerAnimDescs[4] = {
-    { gTiggerFl00Anims, gTiggerFl00Frames, gTiggerFl00Tiles, 0, 0 },
-    { gTiggerFl01Anims, gTiggerFl01Frames, gTiggerFl01Tiles, 0, 0 },
-    { gTiggerFl02Anims, gTiggerFl02Frames, gTiggerFl02Tiles, 0, 0 },
-    { gTiggerBl02Anims, gTiggerBl02Frames, gTiggerBl02Tiles, 0, 0 },
+    { gTiggerFl00Anims, gTiggerFl00Frames, gTiggerFl00Tiles, 0 },
+    { gTiggerFl01Anims, gTiggerFl01Frames, gTiggerFl01Tiles, 0 },
+    { gTiggerFl02Anims, gTiggerFl02Frames, gTiggerFl02Tiles, 0 },
+    { gTiggerBl02Anims, gTiggerBl02Frames, gTiggerBl02Tiles, 0 },
 };
 
 const PooGfxDesc gPooTiggerGfxDescs[4] = {
-    { gTiggerFl00Frames, 1, 0 },
-    { gTiggerFl01Frames, 9, 0 },
-    { gTiggerFl02Frames, 8, 0 },
-    { gTiggerBl02Frames, 8, 0 },
+    { gTiggerFl00Frames, 1 },
+    { gTiggerFl01Frames, 9 },
+    { gTiggerFl02Frames, 8 },
+    { gTiggerBl02Frames, 8 },
 };
 
 const s32 gPooTiggerHopCorners[8] = { 428288, 232704, 411904, 240896, 428288, 249088, 444672, 240896 };
@@ -8839,38 +8839,38 @@ TaskDesc gTaskDescPooCabbageborn = {
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
 #if defined(VERSION_US)
-    { gUnk_09760D00, 5, 0, gUnkUs_09EF62B4, gUnkUs_09EF629C, gUnk_09849E78 },
-    { gUnk_09761824, 11, 0, gUnkUs_09EF62E4, gUnkUs_09EF62B8, gUnk_09849E98 },
-    { gUnk_09762542, 24, 0, gUnkUs_09EF6348, gUnkUs_09EF62E8, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, 0, gUnkUs_09EF6358, gUnkUs_09EF634C, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, 0, gUnkUs_09EF6380, gUnkUs_09EF635C, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, 0, gUnkUs_09EF638C, gUnkUs_09EF6384, gUnk_09849F18 },
-    { gUnk_09765012, 6, 0, gUnkUs_09EF63AC, gUnkUs_09EF6394, gUnk_09849F38 },
-    { gUnk_0976626E, 6, 0, gUnkUs_09EF63C8, gUnkUs_09EF63B0, gUnk_09849F38 },
-    { gUnk_09767562, 10, 0, gUnkUs_09EF63F4, gUnkUs_09EF63CC, gUnk_09849F58 },
-    { gUnk_09769416, 10, 0, gUnkUs_09EF6420, gUnkUs_09EF63F8, gUnk_09849F58 },
+    { gUnk_09760D00, 5, gUnkUs_09EF62B4, gUnkUs_09EF629C, gUnk_09849E78 },
+    { gUnk_09761824, 11, gUnkUs_09EF62E4, gUnkUs_09EF62B8, gUnk_09849E98 },
+    { gUnk_09762542, 24, gUnkUs_09EF6348, gUnkUs_09EF62E8, gUnk_09849EB8 },
+    { gUnk_097634D0, 3, gUnkUs_09EF6358, gUnkUs_09EF634C, gUnk_09849ED8 },
+    { gUnk_09763B54, 9, gUnkUs_09EF6380, gUnkUs_09EF635C, gUnk_09849EF8 },
+    { gUnk_09764BB8, 2, gUnkUs_09EF638C, gUnkUs_09EF6384, gUnk_09849F18 },
+    { gUnk_09765012, 6, gUnkUs_09EF63AC, gUnkUs_09EF6394, gUnk_09849F38 },
+    { gUnk_0976626E, 6, gUnkUs_09EF63C8, gUnkUs_09EF63B0, gUnk_09849F38 },
+    { gUnk_09767562, 10, gUnkUs_09EF63F4, gUnkUs_09EF63CC, gUnk_09849F58 },
+    { gUnk_09769416, 10, gUnkUs_09EF6420, gUnkUs_09EF63F8, gUnk_09849F58 },
 #elif defined(VERSION_JP)
-    { gUnk_09760D00, 5, 0, gUnkJp_09ECD6A0, gUnkJp_09ECD688, gUnk_09849E78 },
-    { gUnk_09761824, 11, 0, gUnkJp_09ECD6D0, gUnkJp_09ECD6A4, gUnk_09849E98 },
-    { gUnk_09762542, 24, 0, gUnkJp_09ECD734, gUnkJp_09ECD6D4, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, 0, gUnkJp_09ECD744, gUnkJp_09ECD738, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, 0, gUnkJp_09ECD76C, gUnkJp_09ECD748, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, 0, gUnkJp_09ECD778, gUnkJp_09ECD770, gUnk_09849F18 },
-    { gUnk_09765012, 6, 0, gUnkJp_09ECD798, gUnkJp_09ECD780, gUnk_09849F38 },
-    { gUnk_0976626E, 6, 0, gUnkJp_09ECD7B4, gUnkJp_09ECD79C, gUnk_09849F38 },
-    { gUnk_09767562, 10, 0, gUnkJp_09ECD7E0, gUnkJp_09ECD7B8, gUnk_09849F58 },
-    { gUnk_09769416, 10, 0, gUnkJp_09ECD80C, gUnkJp_09ECD7E4, gUnk_09849F58 },
+    { gUnk_09760D00, 5, gUnkJp_09ECD6A0, gUnkJp_09ECD688, gUnk_09849E78 },
+    { gUnk_09761824, 11, gUnkJp_09ECD6D0, gUnkJp_09ECD6A4, gUnk_09849E98 },
+    { gUnk_09762542, 24, gUnkJp_09ECD734, gUnkJp_09ECD6D4, gUnk_09849EB8 },
+    { gUnk_097634D0, 3, gUnkJp_09ECD744, gUnkJp_09ECD738, gUnk_09849ED8 },
+    { gUnk_09763B54, 9, gUnkJp_09ECD76C, gUnkJp_09ECD748, gUnk_09849EF8 },
+    { gUnk_09764BB8, 2, gUnkJp_09ECD778, gUnkJp_09ECD770, gUnk_09849F18 },
+    { gUnk_09765012, 6, gUnkJp_09ECD798, gUnkJp_09ECD780, gUnk_09849F38 },
+    { gUnk_0976626E, 6, gUnkJp_09ECD7B4, gUnkJp_09ECD79C, gUnk_09849F38 },
+    { gUnk_09767562, 10, gUnkJp_09ECD7E0, gUnkJp_09ECD7B8, gUnk_09849F58 },
+    { gUnk_09769416, 10, gUnkJp_09ECD80C, gUnkJp_09ECD7E4, gUnk_09849F58 },
 #else
-    { gUnk_09760D00, 5, 0, gUnkEu_09F816AC, gUnkEu_09F81694, gUnk_09849E78 },
-    { gUnk_09761824, 11, 0, gUnkEu_09F816DC, gUnkEu_09F816B0, gUnk_09849E98 },
-    { gUnk_09762542, 24, 0, gUnkEu_09F81740, gUnkEu_09F816E0, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, 0, gUnkEu_09F81750, gUnkEu_09F81744, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, 0, gUnkEu_09F81778, gUnkEu_09F81754, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, 0, gUnkEu_09F81784, gUnkEu_09F8177C, gUnk_09849F18 },
-    { gUnk_09765012, 6, 0, gUnkEu_09F817A4, gUnkEu_09F8178C, gUnk_09849F38 },
-    { gUnk_0976626E, 6, 0, gUnkEu_09F817C0, gUnkEu_09F817A8, gUnk_09849F38 },
-    { gUnk_09767562, 10, 0, gUnkEu_09F817EC, gUnkEu_09F817C4, gUnk_09849F58 },
-    { gUnk_09769416, 10, 0, gUnkEu_09F81818, gUnkEu_09F817F0, gUnk_09849F58 },
+    { gUnk_09760D00, 5, gUnkEu_09F816AC, gUnkEu_09F81694, gUnk_09849E78 },
+    { gUnk_09761824, 11, gUnkEu_09F816DC, gUnkEu_09F816B0, gUnk_09849E98 },
+    { gUnk_09762542, 24, gUnkEu_09F81740, gUnkEu_09F816E0, gUnk_09849EB8 },
+    { gUnk_097634D0, 3, gUnkEu_09F81750, gUnkEu_09F81744, gUnk_09849ED8 },
+    { gUnk_09763B54, 9, gUnkEu_09F81778, gUnkEu_09F81754, gUnk_09849EF8 },
+    { gUnk_09764BB8, 2, gUnkEu_09F81784, gUnkEu_09F8177C, gUnk_09849F18 },
+    { gUnk_09765012, 6, gUnkEu_09F817A4, gUnkEu_09F8178C, gUnk_09849F38 },
+    { gUnk_0976626E, 6, gUnkEu_09F817C0, gUnkEu_09F817A8, gUnk_09849F38 },
+    { gUnk_09767562, 10, gUnkEu_09F817EC, gUnkEu_09F817C4, gUnk_09849F58 },
+    { gUnk_09769416, 10, gUnkEu_09F81818, gUnkEu_09F817F0, gUnk_09849F58 },
 #endif
 };
 
@@ -8902,11 +8902,11 @@ TaskDesc gTaskDescPooZzz = {
 };
 
 AnimDef gTrap01AnimDefs[5] = {
-    { gTrap01Bb00Frames, gTrap01Bb00Anims, gTrap01Bb00Tiles, 0, { 0, 0, 0 } },
-    { gTrap01Ff00Frames, gTrap01Ff00Anims, gTrap01Ff00Tiles, 0, { 0, 0, 0 } },
-    { gTrap01Fl00Frames, gTrap01Fl00Anims, gTrap01Fl00Tiles, 0, { 0, 0, 0 } },
-    { gTrap01Ll00Frames, gTrap01Ll00Anims, gTrap01Ll00Tiles, 0, { 0, 0, 0 } },
-    { gTrap01Bl00Frames, gTrap01Bl00Anims, gTrap01Bl00Tiles, 0, { 0, 0, 0 } },
+    { gTrap01Bb00Frames, gTrap01Bb00Anims, gTrap01Bb00Tiles, 0 },
+    { gTrap01Ff00Frames, gTrap01Ff00Anims, gTrap01Ff00Tiles, 0 },
+    { gTrap01Fl00Frames, gTrap01Fl00Anims, gTrap01Fl00Tiles, 0 },
+    { gTrap01Ll00Frames, gTrap01Ll00Anims, gTrap01Ll00Tiles, 0 },
+    { gTrap01Bl00Frames, gTrap01Bl00Anims, gTrap01Bl00Tiles, 0 },
 };
 
 TaskDesc gTaskDescPooButterfly = {

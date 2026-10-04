@@ -36,36 +36,36 @@ static const u32 sHumAxcelStockMoves[2][3] = {
 };
 
 static const AnimDef sHumAxcelAnimDefs[14] = {
-    { gAcceleBt00Frames, gAcceleBt00Anims, gAcceleBt00Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt01Frames, gAcceleBt01Anims, gAcceleBt01Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt02Frames, gAcceleBt02Anims, gAcceleBt02Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt03Frames, gAcceleBt03Anims, gAcceleBt03Tiles, 1, { 0, 0, 0 } },
-    { gAcceleBt03Frames, gAcceleBt03Anims, gAcceleBt03Tiles, 2, { 0, 0, 0 } },
-    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 1, { 0, 0, 0 } },
-    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 2, { 0, 0, 0 } },
-    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 1, { 0, 0, 0 } },
-    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 2, { 0, 0, 0 } },
-    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 0, { 0, 0, 0 } },
-    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 1, { 0, 0, 0 } },
-    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 2, { 0, 0, 0 } },
+    { gAcceleBt00Frames, gAcceleBt00Anims, gAcceleBt00Tiles, 0 },
+    { gAcceleBt01Frames, gAcceleBt01Anims, gAcceleBt01Tiles, 0 },
+    { gAcceleBt02Frames, gAcceleBt02Anims, gAcceleBt02Tiles, 0 },
+    { gAcceleBt03Frames, gAcceleBt03Anims, gAcceleBt03Tiles, 1 },
+    { gAcceleBt03Frames, gAcceleBt03Anims, gAcceleBt03Tiles, 2 },
+    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 0 },
+    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 1 },
+    { gAcceleBt04Frames, gAcceleBt04Anims, gAcceleBt04Tiles, 2 },
+    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 0 },
+    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 1 },
+    { gAcceleBt06Frames, gAcceleBt06Anims, gAcceleBt06Tiles, 2 },
+    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 0 },
+    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 1 },
+    { gAcceleBt05Frames, gAcceleBt05Anims, gAcceleBt05Tiles, 2 },
 };
 
 static const AnimDef sHumAxcelWeaponAnimDefs[10] = {
-    { gAcceleBtWepFrames, gAcceleBtWepAnims, gAcceleBtWepTiles, 0, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 0, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 1, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 2, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 7, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 3, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 4, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 5, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 8, { 0, 0, 0 } },
-    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 6, { 0, 0, 0 } },
+    { gAcceleBtWepFrames, gAcceleBtWepAnims, gAcceleBtWepTiles, 0 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 0 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 1 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 2 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 7 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 3 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 4 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 5 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 8 },
+    { gAcceleBt06WepFrames, gAcceleBt06WepAnims, gAcceleBt06WepTiles, 6 },
 };
 
-static const HumSubDef sHumAxcelSubDef = { gBStatesPalette, 64, 0 };
+static const HumSubDef sHumAxcelSubDef = { gBStatesPalette, 64 };
 
 static const HumDef sHumAxcelDef = {
 #ifdef VERSION_EU
@@ -73,7 +73,7 @@ static const HumDef sHumAxcelDef = {
 #else
         128
 #endif
-    , 0, gAccelePalette, 0, { 48, 99, 60, 14, 32, 99, 0 } };
+    , gAccelePalette, 0, { 48, 99, 60, 14, 32, 99, 0 } };
 
 TaskDesc gTaskDescHumAxcel = {
     "task_hum_axcel",

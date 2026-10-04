@@ -23,12 +23,10 @@ typedef struct SioWork {
     u8 sendWordIdx;
     u8 recvWordIdx;
     u8 unk_1A;
-    u8 unk_1B;
     u16 sendBuf[4][32];
     u8 sendReadIdx;
     u8 sendCount;
     u8 unk_11E;
-    u8 unk_11F;
     u16 recvBuf[2][4][32];
     u8 recvReadIdx;
     u8 recvCount;

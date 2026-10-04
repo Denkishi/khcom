@@ -25,7 +25,6 @@ typedef struct SaveCommon {
     u16 hp;
     u8 floor;
     u8 world;
-    u8 unk_92[0x02];
     u32 playTime;
 } SaveCommon;
 
@@ -33,7 +32,6 @@ typedef struct SaveFileSummary {
     u8 floor;
     u8 world;
     u8 level;
-    u8 unk_03;
     u32 playTime;
 } SaveFileSummary;
 
@@ -74,7 +72,6 @@ typedef struct MapProgress {
 typedef struct SaveLargeSlice {
     u8 activeDeck;
     u8 mapCardCounts[0x10E];
-    u8 unk_10F;
     u16 cards[SAVE_CARDS];
     u16 cardCount;
     Deck decks[SAVE_DECKS];

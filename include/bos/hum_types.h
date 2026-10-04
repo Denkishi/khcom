@@ -23,13 +23,11 @@ typedef struct HumSub {
     s32 y;
     s32 z;
     u16 flags;
-    u16 unk_36;
     void* gfx;
 } HumSub;
 
 typedef struct HumDef {
     u16 tileCount;
-    u16 unk_02;
     void* palette;
     u32 unk_08;
     EmyKind kind;
@@ -38,7 +36,6 @@ typedef struct HumDef {
 typedef struct HumSubDef {
     void* palette;
     u16 tileCount;
-    u16 unk_06;
 } HumSubDef;
 
 enum HumFlag {
@@ -71,7 +68,6 @@ typedef struct HumWork {
     s32 scaleY;
     u32 state;
     s16 boundsMargin;
-    u16 unk_176;
     void* paletteData;
     u16 unk_17C;
     u16 itemIndex;

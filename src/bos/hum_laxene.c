@@ -32,24 +32,24 @@ static const u32 sHumLaxeneStockMoves[2][3] = {
 };
 
 static const AnimDef sHumLaxeneAnimDefs[15] = {
-    { gLaxineIdleFrames, gLaxineIdleAnims, gLaxineIdleTiles, 0, { 0, 0, 0 } },
-    { gLaxineMoveFrames, gLaxineMoveAnims, gLaxineMoveTiles, 0, { 0, 0, 0 } },
-    { gLaxineMoveFrames, gLaxineMoveAnims, gLaxineMoveTiles, 1, { 0, 0, 0 } },
-    { gLaxineDamageFrames, gLaxineDamageAnims, gLaxineDamageTiles, 0, { 0, 0, 0 } },
-    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 1, { 0, 0, 0 } },
-    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 2, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 0, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 1, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 2, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 3, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 4, { 0, 0, 0 } },
-    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 5, { 0, 0, 0 } },
-    { gLaxineKnifethrowFrames, gLaxineKnifethrowAnims, gLaxineKnifethrowTiles, 0, { 0, 0, 0 } },
-    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 3, { 0, 0, 0 } },
-    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 4, { 0, 0, 0 } },
+    { gLaxineIdleFrames, gLaxineIdleAnims, gLaxineIdleTiles, 0 },
+    { gLaxineMoveFrames, gLaxineMoveAnims, gLaxineMoveTiles, 0 },
+    { gLaxineMoveFrames, gLaxineMoveAnims, gLaxineMoveTiles, 1 },
+    { gLaxineDamageFrames, gLaxineDamageAnims, gLaxineDamageTiles, 0 },
+    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 1 },
+    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 2 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 0 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 1 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 2 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 3 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 4 },
+    { gLaxineMagicFrames, gLaxineMagicAnims, gLaxineMagicTiles, 5 },
+    { gLaxineKnifethrowFrames, gLaxineKnifethrowAnims, gLaxineKnifethrowTiles, 0 },
+    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 3 },
+    { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 4 },
 };
 
-static const HumDef sHumLaxeneDef = { 128, 0, gLaxinePalette, 0, { 49, 99, 60, 14, 46, 99, 0 } };
+static const HumDef sHumLaxeneDef = { 128, gLaxinePalette, 0, { 49, 99, 60, 14, 46, 99, 0 } };
 
 TaskDesc gTaskDescHumLaxene = {
     "task_hum_laxene",

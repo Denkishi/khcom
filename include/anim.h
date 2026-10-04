@@ -8,7 +8,6 @@ typedef struct AnimDef {
     void* anims;
     void* tiles;
     u8 animId;
-    u8 unk_0D[0x03];
 } AnimDef;
 
 typedef struct AnimFrame {
@@ -41,7 +40,6 @@ typedef struct AnimState {
     u16 frameCount;
     u16 frame;
     u16 animId;
-    u16 unk_12;
     AnimFrame* frames;
 } AnimState;
 

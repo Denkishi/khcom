@@ -38,7 +38,6 @@ typedef struct FrdPoohWork {
     s32 velocity;
     s32 speed;
     u8 bounce;
-    u8 unk_161[3];
     s32 bob;
     s32 animcounter;
     s32 scale;
@@ -47,7 +46,6 @@ typedef struct FrdPoohWork {
 typedef struct FrdPoohArgs {
     u16 card;
     u8 side;
-    u8 unk_03;
 } FrdPoohArgs;
 
 #endif

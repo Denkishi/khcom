@@ -28,8 +28,8 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnGenieAnimDefs[2] = {
-    { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 0, { 0, 0, 0 } },
-    { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 1, { 0, 0, 0 } },
+    { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 0 },
+    { gGenie00Frames, gGenie00Anims, gGenie00Tiles, 1 },
 };
 
 TaskDesc gTaskDescSmnGenie = {

@@ -7,7 +7,6 @@
 typedef struct DebugWork {
     s8 cursor;
     s8 page;
-    u8 unk_02[0x02];
     void* tiles;
     void* palette;
     AnimState anim;

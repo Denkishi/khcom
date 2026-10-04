@@ -28,14 +28,14 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnCloudAnimDefs[8] = {
-    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0, { 0, 0, 0 } },
-    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 0, { 0, 0, 0 } },
-    { gCroud10Frames, gCroud10Anims, gCroud10Tiles, 0, { 0, 0, 0 } },
-    { gCroud11Frames, gCroud11Anims, gCroud11Tiles, 0, { 0, 0, 0 } },
-    { gCroud12Frames, gCroud12Anims, gCroud12Tiles, 0, { 0, 0, 0 } },
-    { gCroud13Frames, gCroud13Anims, gCroud13Tiles, 0, { 0, 0, 0 } },
-    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 1, { 0, 0, 0 } },
-    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 1, { 0, 0, 0 } },
+    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 0 },
+    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 0 },
+    { gCroud10Frames, gCroud10Anims, gCroud10Tiles, 0 },
+    { gCroud11Frames, gCroud11Anims, gCroud11Tiles, 0 },
+    { gCroud12Frames, gCroud12Anims, gCroud12Tiles, 0 },
+    { gCroud13Frames, gCroud13Anims, gCroud13Tiles, 0 },
+    { gCroud01Frames, gCroud01Anims, gCroud01Tiles, 1 },
+    { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 1 },
 };
 
 TaskDesc gTaskDescSmnCloud = {

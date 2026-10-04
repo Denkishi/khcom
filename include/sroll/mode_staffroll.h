@@ -10,7 +10,6 @@
 
 typedef struct StaffRollLabelArg {
     u16 kind;
-    u16 unk_02;
     s32 x;
     s32 y;
 } StaffRollLabelArg;
@@ -19,7 +18,6 @@ typedef struct StaffRollTaskArg {
     u16 kind;
     u16 animId;
     u16 nameIndex;
-    u16 unk_06;
     s32 x;
     s32 y;
     s32 targetX;
@@ -47,7 +45,6 @@ typedef struct StaffRollWork {
     u8 unk_001;
     u16 flags;
     u16 unk_004;
-    u16 unk_006;
     s32 phase;
     s32 phaseTimer;
     s32 musicFrames;
@@ -64,7 +61,6 @@ typedef struct StaffRollWork {
     s32 sceneScroll;
     const StaffRollScene* scene;
     u8 creditsEnded;
-    u8 unk_0A1[0x3];
     s32 creditsState;
     s32 creditsTimer;
     s32 unk_0AC;

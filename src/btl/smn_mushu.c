@@ -24,13 +24,13 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnMushuAnimDefs[4] = {
-    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 0, { 0, 0, 0 } },
-    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 1, { 0, 0, 0 } },
-    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 2, { 0, 0, 0 } },
-    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 3, { 0, 0, 0 } },
+    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 0 },
+    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 1 },
+    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 2 },
+    { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 3 },
 };
 
-const AnimDef gSmnMushuEndAnimDef = { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 4, { 0, 0, 0 } };
+const AnimDef gSmnMushuEndAnimDef = { gMushu10Frames, gMushu10Anims, gMushu10Tiles, 4 };
 
 TaskDesc gTaskDescSmnMushu = {
     "task_smn_mushu",

@@ -25,23 +25,23 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy37CommonAnimDefs[3] = {
-    { gEmy3700Frames, gEmy3700Anims, gEmy3700Tiles, 0, { 0, 0, 0 } },
-    { gEmy3702Frames, gEmy3702Anims, gEmy3702Tiles, 0, { 0, 0, 0 } },
-    { gEmy3701Frames, gEmy3701Anims, gEmy3701Tiles, 0, { 0, 0, 0 } },
+    { gEmy3700Frames, gEmy3700Anims, gEmy3700Tiles, 0 },
+    { gEmy3702Frames, gEmy3702Anims, gEmy3702Tiles, 0 },
+    { gEmy3701Frames, gEmy3701Anims, gEmy3701Tiles, 0 },
 };
 
 static const AnimDef sEmy37AnimDefs[11] = {
-    { gEmy3710Frames, gEmy3710Anims, gEmy3710Tiles, 0, { 0, 0, 0 } },
-    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 0, { 0, 0, 0 } },
-    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 1, { 0, 0, 0 } },
-    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 2, { 0, 0, 0 } },
-    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 3, { 0, 0, 0 } },
-    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 0, { 0, 0, 0 } },
-    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 1, { 0, 0, 0 } },
-    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 2, { 0, 0, 0 } },
-    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 3, { 0, 0, 0 } },
-    { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 0, { 0, 0, 0 } },
-    { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 1, { 0, 0, 0 } },
+    { gEmy3710Frames, gEmy3710Anims, gEmy3710Tiles, 0 },
+    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 0 },
+    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 1 },
+    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 2 },
+    { gEmy3711Frames, gEmy3711Anims, gEmy3711Tiles, 3 },
+    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 0 },
+    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 1 },
+    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 2 },
+    { gEmy3720Frames, gEmy3720Anims, gEmy3720Tiles, 3 },
+    { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 0 },
+    { gEmy3721Frames, gEmy3721Anims, gEmy3721Tiles, 1 },
 };
 
 static const EmyDef sEmy37Def = { gEmy37Palette, sEmy37CommonAnimDefs, 409, 130, 20, 20, 64, 32, 32, 10, EMY_DEF_FLAG_NO_SHADOW | EMY_DEF_FLAG_NO_SCALE_IN, { 24, 110, 38, 12, 20, 100, 0 } };

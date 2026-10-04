@@ -24,7 +24,6 @@ typedef struct EvtObj {
     u16 drawFlags;
     struct AnimState* anim;
     u16 paletteIndex;
-    u8 unk_1E[0x02];
     s32 scaleX;
     s32 scaleY;
     u8 angle;

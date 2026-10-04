@@ -15,10 +15,8 @@ typedef struct LockonWork {
     s8 prevSelected;
     u8 timer;
     u8 unk_30;
-    u8 unk_31[3];
     AnimState anim;
     u8 unk_4C;
-    u8 unk_4D[3];
 } LockonWork;
 
 extern s32* gLockonDoorPosition;

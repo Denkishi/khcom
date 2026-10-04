@@ -70,39 +70,39 @@ static u16* sUnkEu_09F84F84[5] = {
 
 static const MooglePackMenuEntry sMooglePackMenuEntries[4] = {
 #if defined(VERSION_US)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetUs_09A387DC, 1280, 5, 3, 40, 24, 0, {{gMoogleAssetUs_09A39BDC, 0, 0}, {gMoogleAssetUs_09A39BDC, 0, 16}, {gMoogleAssetUs_09A3A3DC, 0, 0}, {gMoogleAssetUs_09A3A3DC, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetUs_09A38CDC, 1280, 17, 3, 136, 24, 0, {{gMoogleAssetUs_09A39BDC, 12, 0}, {gMoogleAssetUs_09A39BDC, 12, 16}, {gMoogleAssetUs_09A3A3DC, 12, 0}, {gMoogleAssetUs_09A3A3DC, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetUs_09A391DC, 1280, 5, 11, 40, 88, 0, {{gMoogleAssetUs_09A39BDC, 0, 8}, {gMoogleAssetUs_09A39BDC, 0, 24}, {gMoogleAssetUs_09A3A3DC, 0, 8}, {gMoogleAssetUs_09A3A3DC, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetUs_09A396DC, 1280, 17, 11, 136, 88, 0, {{gMoogleAssetUs_09A39BDC, 12, 8}, {gMoogleAssetUs_09A39BDC, 12, 24}, {gMoogleAssetUs_09A3A3DC, 12, 8}, {gMoogleAssetUs_09A3A3DC, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetUs_09A387DC, 1280, 5, 3, 40, 24, {{gMoogleAssetUs_09A39BDC, 0, 0}, {gMoogleAssetUs_09A39BDC, 0, 16}, {gMoogleAssetUs_09A3A3DC, 0, 0}, {gMoogleAssetUs_09A3A3DC, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetUs_09A38CDC, 1280, 17, 3, 136, 24, {{gMoogleAssetUs_09A39BDC, 12, 0}, {gMoogleAssetUs_09A39BDC, 12, 16}, {gMoogleAssetUs_09A3A3DC, 12, 0}, {gMoogleAssetUs_09A3A3DC, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetUs_09A391DC, 1280, 5, 11, 40, 88, {{gMoogleAssetUs_09A39BDC, 0, 8}, {gMoogleAssetUs_09A39BDC, 0, 24}, {gMoogleAssetUs_09A3A3DC, 0, 8}, {gMoogleAssetUs_09A3A3DC, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetUs_09A396DC, 1280, 17, 11, 136, 88, {{gMoogleAssetUs_09A39BDC, 12, 8}, {gMoogleAssetUs_09A39BDC, 12, 24}, {gMoogleAssetUs_09A3A3DC, 12, 8}, {gMoogleAssetUs_09A3A3DC, 12, 24}}},
 #elif defined(VERSION_JP)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetJp_099ED264, 1280, 5, 3, 40, 24, 0, {{gMoogleAssetJp_099EE664, 0, 0}, {gMoogleAssetJp_099EE664, 0, 16}, {gMoogleAssetJp_099EEE64, 0, 0}, {gMoogleAssetJp_099EEE64, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetJp_099ED764, 1280, 17, 3, 136, 24, 0, {{gMoogleAssetJp_099EE664, 12, 0}, {gMoogleAssetJp_099EE664, 12, 16}, {gMoogleAssetJp_099EEE64, 12, 0}, {gMoogleAssetJp_099EEE64, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetJp_099EDC64, 1280, 5, 11, 40, 88, 0, {{gMoogleAssetJp_099EE664, 0, 8}, {gMoogleAssetJp_099EE664, 0, 24}, {gMoogleAssetJp_099EEE64, 0, 8}, {gMoogleAssetJp_099EEE64, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetJp_099EE164, 1280, 17, 11, 136, 88, 0, {{gMoogleAssetJp_099EE664, 12, 8}, {gMoogleAssetJp_099EE664, 12, 24}, {gMoogleAssetJp_099EEE64, 12, 8}, {gMoogleAssetJp_099EEE64, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetJp_099ED264, 1280, 5, 3, 40, 24, {{gMoogleAssetJp_099EE664, 0, 0}, {gMoogleAssetJp_099EE664, 0, 16}, {gMoogleAssetJp_099EEE64, 0, 0}, {gMoogleAssetJp_099EEE64, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetJp_099ED764, 1280, 17, 3, 136, 24, {{gMoogleAssetJp_099EE664, 12, 0}, {gMoogleAssetJp_099EE664, 12, 16}, {gMoogleAssetJp_099EEE64, 12, 0}, {gMoogleAssetJp_099EEE64, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetJp_099EDC64, 1280, 5, 11, 40, 88, {{gMoogleAssetJp_099EE664, 0, 8}, {gMoogleAssetJp_099EE664, 0, 24}, {gMoogleAssetJp_099EEE64, 0, 8}, {gMoogleAssetJp_099EEE64, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetJp_099EE164, 1280, 17, 11, 136, 88, {{gMoogleAssetJp_099EE664, 12, 8}, {gMoogleAssetJp_099EE664, 12, 24}, {gMoogleAssetJp_099EEE64, 12, 8}, {gMoogleAssetJp_099EEE64, 12, 24}}},
 #elif defined(VERSION_EU)
-    {-1, 2, 5, 1, 67, 16, gMoogleAssetEu_09A8DFA0, 1280, 5, 3, 40, 24, 0, {{sUnkEu_09F84F70, 0, 0}, {sUnkEu_09F84F70, 0, 16}, {sUnkEu_09F84F84, 0, 0}, {sUnkEu_09F84F84, 0, 16}}},
-    {-1, 3, 0, -1, 163, 16, gMoogleAssetEu_09A8E4A0, 1280, 17, 3, 136, 24, 0, {{sUnkEu_09F84F70, 12, 0}, {sUnkEu_09F84F70, 12, 16}, {sUnkEu_09F84F84, 12, 0}, {sUnkEu_09F84F84, 12, 16}}},
-    {0, -1, 5, 3, 67, 80, gMoogleAssetEu_09A8E9A0, 1280, 5, 11, 40, 88, 0, {{sUnkEu_09F84F70, 0, 8}, {sUnkEu_09F84F70, 0, 24}, {sUnkEu_09F84F84, 0, 8}, {sUnkEu_09F84F84, 0, 24}}},
-    {1, -1, 2, -1, 163, 80, gMoogleAssetEu_09A8EEA0, 1280, 17, 11, 136, 88, 0, {{sUnkEu_09F84F70, 12, 8}, {sUnkEu_09F84F70, 12, 24}, {sUnkEu_09F84F84, 12, 8}, {sUnkEu_09F84F84, 12, 24}}},
+    {-1, 2, 5, 1, 67, 16, gMoogleAssetEu_09A8DFA0, 1280, 5, 3, 40, 24, {{sUnkEu_09F84F70, 0, 0}, {sUnkEu_09F84F70, 0, 16}, {sUnkEu_09F84F84, 0, 0}, {sUnkEu_09F84F84, 0, 16}}},
+    {-1, 3, 0, -1, 163, 16, gMoogleAssetEu_09A8E4A0, 1280, 17, 3, 136, 24, {{sUnkEu_09F84F70, 12, 0}, {sUnkEu_09F84F70, 12, 16}, {sUnkEu_09F84F84, 12, 0}, {sUnkEu_09F84F84, 12, 16}}},
+    {0, -1, 5, 3, 67, 80, gMoogleAssetEu_09A8E9A0, 1280, 5, 11, 40, 88, {{sUnkEu_09F84F70, 0, 8}, {sUnkEu_09F84F70, 0, 24}, {sUnkEu_09F84F84, 0, 8}, {sUnkEu_09F84F84, 0, 24}}},
+    {1, -1, 2, -1, 163, 80, gMoogleAssetEu_09A8EEA0, 1280, 17, 11, 136, 88, {{sUnkEu_09F84F70, 12, 8}, {sUnkEu_09F84F70, 12, 24}, {sUnkEu_09F84F84, 12, 8}, {sUnkEu_09F84F84, 12, 24}}},
 #endif
 };
 
 static const MooglePackSpriteDef sMooglePackSpriteDefs[4] = {
 #if defined(VERSION_US)
-    {gMoogleAssetUs_09A3DA9C, 32, {0, 0}, gMoogleAssetUs_099A3EC4, 800, {0, 0}, gMoogleAssetUs_099A3EA4, 10, 12},
-    {gMoogleAssetUs_09A3DABC, 32, {0, 0}, gMoogleAssetUs_099A4204, 608, {0, 0}, gMoogleAssetUs_099A41E4, 12, 13},
-    {gMoogleAssetUs_09A3DADC, 32, {0, 0}, gMoogleAssetUs_099A4484, 608, {0, 0}, gMoogleAssetUs_099A4464, 12, 13},
-    {gMoogleAssetUs_09A3DAFC, 32, {0, 0}, gMoogleAssetUs_099A4704, 896, {0, 0}, gMoogleAssetUs_099A46E4, 9, 7},
+    {gMoogleAssetUs_09A3DA9C, 32, gMoogleAssetUs_099A3EC4, 800, gMoogleAssetUs_099A3EA4, 10, 12},
+    {gMoogleAssetUs_09A3DABC, 32, gMoogleAssetUs_099A4204, 608, gMoogleAssetUs_099A41E4, 12, 13},
+    {gMoogleAssetUs_09A3DADC, 32, gMoogleAssetUs_099A4484, 608, gMoogleAssetUs_099A4464, 12, 13},
+    {gMoogleAssetUs_09A3DAFC, 32, gMoogleAssetUs_099A4704, 896, gMoogleAssetUs_099A46E4, 9, 7},
 #elif defined(VERSION_JP)
-    {gMoogleAssetJp_099F2524, 32, {0, 0}, gMoogleAssetJp_0995894C, 800, {0, 0}, gMoogleAssetJp_0995892C, 10, 12},
-    {gMoogleAssetJp_099F2544, 32, {0, 0}, gMoogleAssetJp_09958C8C, 608, {0, 0}, gMoogleAssetJp_09958C6C, 12, 13},
-    {gMoogleAssetJp_099F2564, 32, {0, 0}, gMoogleAssetJp_09958F0C, 608, {0, 0}, gMoogleAssetJp_09958EEC, 12, 13},
-    {gMoogleAssetJp_099F2584, 32, {0, 0}, gMoogleAssetJp_0995918C, 896, {0, 0}, gMoogleAssetJp_0995916C, 9, 7},
+    {gMoogleAssetJp_099F2524, 32, gMoogleAssetJp_0995894C, 800, gMoogleAssetJp_0995892C, 10, 12},
+    {gMoogleAssetJp_099F2544, 32, gMoogleAssetJp_09958C8C, 608, gMoogleAssetJp_09958C6C, 12, 13},
+    {gMoogleAssetJp_099F2564, 32, gMoogleAssetJp_09958F0C, 608, gMoogleAssetJp_09958EEC, 12, 13},
+    {gMoogleAssetJp_099F2584, 32, gMoogleAssetJp_0995918C, 896, gMoogleAssetJp_0995916C, 9, 7},
 #elif defined(VERSION_EU)
-    {gMoogleAssetEu_09A9B560, 32, {0, 0}, gMoogleAssetEu_099B1E48, 800, {0, 0}, gMoogleAssetEu_099B1E28, 10, 12},
-    {gMoogleAssetEu_09A9B580, 32, {0, 0}, gMoogleAssetEu_099B2188, 608, {0, 0}, gMoogleAssetEu_099B2168, 12, 13},
-    {gMoogleAssetEu_09A9B5A0, 32, {0, 0}, gMoogleAssetEu_099B2408, 608, {0, 0}, gMoogleAssetEu_099B23E8, 12, 13},
-    {gMoogleAssetEu_09A9B5C0, 32, {0, 0}, gMoogleAssetEu_099B2688, 896, {0, 0}, gMoogleAssetEu_099B2668, 9, 7},
+    {gMoogleAssetEu_09A9B560, 32, gMoogleAssetEu_099B1E48, 800, gMoogleAssetEu_099B1E28, 10, 12},
+    {gMoogleAssetEu_09A9B580, 32, gMoogleAssetEu_099B2188, 608, gMoogleAssetEu_099B2168, 12, 13},
+    {gMoogleAssetEu_09A9B5A0, 32, gMoogleAssetEu_099B2408, 608, gMoogleAssetEu_099B23E8, 12, 13},
+    {gMoogleAssetEu_09A9B5C0, 32, gMoogleAssetEu_099B2688, 896, gMoogleAssetEu_099B2668, 9, 7},
 #endif
 };
 
@@ -120,56 +120,56 @@ static const u16 sMoogleCardValueWeights[10] = {
 };
 
 static const MooglePackCardDef sMoogleAttackPackCards[17] = {
-    {0, {0, 0}, 0, {0, 0, 0, 0}},
-    {CARD_ID(CARD_THREE_WISHES, 0), {0, 0}, 1, {20, 14, 4, 4}},
-    {CARD_ID(CARD_PUMPKINHEAD, 0), {0, 0}, 3, {20, 14, 4, 4}},
-    {CARD_ID(CARD_WISHING_STAR, 0), {0, 0}, 5, {20, 14, 4, 4}},
-    {CARD_ID(CARD_LADY_LUCK, 0), {0, 0}, 10, {20, 14, 4, 4}},
-    {CARD_ID(CARD_OLYMPIA, 0), {0, 0}, 8, {20, 14, 4, 4}},
-    {CARD_ID(CARD_METAL_CHOCOBO, 0), {0, 0}, 7, {0, 5, 10, 6}},
-    {CARD_ID(CARD_CRABCLAW, 0), {0, 0}, 2, {0, 5, 10, 6}},
-    {CARD_ID(CARD_FAIRY_HARP, 0), {0, 0}, 4, {0, 5, 10, 6}},
-    {CARD_ID(CARD_LIONHEART, 0), {0, 0}, 9, {0, 5, 10, 6}},
-    {CARD_ID(CARD_SPELLBINDER, 0), {0, 0}, 6, {0, 5, 10, 6}},
-    {CARD_ID(CARD_DIVINE_ROSE, 0), {0, 0}, 11, {0, 5, 10, 6}},
-    {CARD_ID(CARD_OATHKEEPER, 0), {0, 0}, 12, {0, 0, 5, 10}},
-    {CARD_ID(CARD_OBLIVION, 0), {0, 0}, 13, {0, 0, 5, 10}},
-    {CARD_ID(CARD_DIAMOND_DUST, 0), {0, 0}, 15, {0, 0, 5, 10}},
-    {CARD_ID(CARD_ONE_WINGED_ANGEL, 0), {0, 0}, 16, {0, 0, 5, 10}},
-    {CARD_ID(CARD_ULTIMA_WEAPON, 0), {0, 0}, 14, {0, 0, 0, 4}},
+    {0, 0, {0, 0, 0, 0}},
+    {CARD_ID(CARD_THREE_WISHES, 0), 1, {20, 14, 4, 4}},
+    {CARD_ID(CARD_PUMPKINHEAD, 0), 3, {20, 14, 4, 4}},
+    {CARD_ID(CARD_WISHING_STAR, 0), 5, {20, 14, 4, 4}},
+    {CARD_ID(CARD_LADY_LUCK, 0), 10, {20, 14, 4, 4}},
+    {CARD_ID(CARD_OLYMPIA, 0), 8, {20, 14, 4, 4}},
+    {CARD_ID(CARD_METAL_CHOCOBO, 0), 7, {0, 5, 10, 6}},
+    {CARD_ID(CARD_CRABCLAW, 0), 2, {0, 5, 10, 6}},
+    {CARD_ID(CARD_FAIRY_HARP, 0), 4, {0, 5, 10, 6}},
+    {CARD_ID(CARD_LIONHEART, 0), 9, {0, 5, 10, 6}},
+    {CARD_ID(CARD_SPELLBINDER, 0), 6, {0, 5, 10, 6}},
+    {CARD_ID(CARD_DIVINE_ROSE, 0), 11, {0, 5, 10, 6}},
+    {CARD_ID(CARD_OATHKEEPER, 0), 12, {0, 0, 5, 10}},
+    {CARD_ID(CARD_OBLIVION, 0), 13, {0, 0, 5, 10}},
+    {CARD_ID(CARD_DIAMOND_DUST, 0), 15, {0, 0, 5, 10}},
+    {CARD_ID(CARD_ONE_WINGED_ANGEL, 0), 16, {0, 0, 5, 10}},
+    {CARD_ID(CARD_ULTIMA_WEAPON, 0), 14, {0, 0, 0, 4}},
 };
 
 static const MooglePackCardDef sMoogleMagicPackCards[14] = {
-    {CARD_ID(CARD_FIRE, 0), {0, 0}, 17, {15, 10, 5, 5}},
-    {CARD_ID(CARD_BLIZZARD, 0), {0, 0}, 18, {15, 10, 5, 5}},
-    {CARD_ID(CARD_THUNDER, 0), {0, 0}, 19, {15, 10, 5, 5}},
-    {CARD_ID(CARD_GRAVITY, 0), {0, 0}, 21, {0, 5, 10, 5}},
-    {CARD_ID(CARD_STOP, 0), {0, 0}, 22, {0, 5, 10, 5}},
-    {CARD_ID(CARD_AERO, 0), {0, 0}, 23, {0, 5, 10, 5}},
-    {CARD_ID(CARD_CURE, 0), {0, 0}, 20, {10, 5, 0, 0}},
-    {CARD_ID(CARD_SIMBA, 0), {0, 0}, 24, {20, 5, 5, 5}},
-    {CARD_ID(CARD_GENIE, 0), {0, 0}, 25, {10, 20, 8, 10}},
-    {CARD_ID(CARD_BAMBI, 0), {0, 0}, 26, {0, 0, 8, 10}},
-    {CARD_ID(CARD_DUMBO, 0), {0, 0}, 27, {10, 20, 8, 10}},
-    {CARD_ID(CARD_TINKER_BELL, 0), {0, 0}, 28, {0, 0, 8, 10}},
-    {CARD_ID(CARD_MUSHU, 0), {0, 0}, 29, {0, 0, 8, 10}},
-    {CARD_ID(CARD_CLOUD, 0), {0, 0}, 30, {5, 5, 10, 15}},
+    {CARD_ID(CARD_FIRE, 0), 17, {15, 10, 5, 5}},
+    {CARD_ID(CARD_BLIZZARD, 0), 18, {15, 10, 5, 5}},
+    {CARD_ID(CARD_THUNDER, 0), 19, {15, 10, 5, 5}},
+    {CARD_ID(CARD_GRAVITY, 0), 21, {0, 5, 10, 5}},
+    {CARD_ID(CARD_STOP, 0), 22, {0, 5, 10, 5}},
+    {CARD_ID(CARD_AERO, 0), 23, {0, 5, 10, 5}},
+    {CARD_ID(CARD_CURE, 0), 20, {10, 5, 0, 0}},
+    {CARD_ID(CARD_SIMBA, 0), 24, {20, 5, 5, 5}},
+    {CARD_ID(CARD_GENIE, 0), 25, {10, 20, 8, 10}},
+    {CARD_ID(CARD_BAMBI, 0), 26, {0, 0, 8, 10}},
+    {CARD_ID(CARD_DUMBO, 0), 27, {10, 20, 8, 10}},
+    {CARD_ID(CARD_TINKER_BELL, 0), 28, {0, 0, 8, 10}},
+    {CARD_ID(CARD_MUSHU, 0), 29, {0, 0, 8, 10}},
+    {CARD_ID(CARD_CLOUD, 0), 30, {5, 5, 10, 15}},
 };
 
 static const MooglePackCardDef sMoogleItemPackCards[7] = {
-    {CARD_ID(CARD_POTION, 0), {0, 0}, 31, {50, 40, 0, 0}},
-    {CARD_ID(CARD_ETHER, 0), {0, 0}, 34, {50, 40, 20, 15}},
-    {CARD_ID(CARD_HI_POTION, 0), {0, 0}, 32, {0, 10, 25, 20}},
-    {CARD_ID(CARD_MEGA_ETHER, 0), {0, 0}, 35, {0, 10, 25, 20}},
-    {CARD_ID(CARD_MEGA_POTION, 0), {0, 0}, 33, {0, 0, 15, 20}},
-    {CARD_ID(CARD_ELIXIR, 0), {0, 0}, 36, {0, 0, 15, 15}},
-    {CARD_ID(CARD_MEGALIXIR, 0), {0, 0}, 37, {0, 0, 0, 10}},
+    {CARD_ID(CARD_POTION, 0), 31, {50, 40, 0, 0}},
+    {CARD_ID(CARD_ETHER, 0), 34, {50, 40, 20, 15}},
+    {CARD_ID(CARD_HI_POTION, 0), 32, {0, 10, 25, 20}},
+    {CARD_ID(CARD_MEGA_ETHER, 0), 35, {0, 10, 25, 20}},
+    {CARD_ID(CARD_MEGA_POTION, 0), 33, {0, 0, 15, 20}},
+    {CARD_ID(CARD_ELIXIR, 0), 36, {0, 0, 15, 15}},
+    {CARD_ID(CARD_MEGALIXIR, 0), 37, {0, 0, 0, 10}},
 };
 
 static const MooglePackCardTable sMooglePackCardTables[3] = {
-    {sMoogleAttackPackCards, 17, {0, 0}},
-    {sMoogleMagicPackCards, 14, {0, 0}},
-    {sMoogleItemPackCards, 7, {0, 0}},
+    {sMoogleAttackPackCards, 17},
+    {sMoogleMagicPackCards, 14},
+    {sMoogleItemPackCards, 7},
 };
 
 static const s16 sMooglePackTiers[13][4][4] = {

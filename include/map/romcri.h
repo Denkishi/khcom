@@ -6,7 +6,6 @@
 typedef struct RomcriEffWork {
     s16 timer;
     u8 angle;
-    u8 unk_03;
 } RomcriEffWork;
 
 typedef struct RomcriEff2Work {

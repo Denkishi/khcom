@@ -34,7 +34,6 @@ typedef struct TitleMenuWork {
     TaskPool tasks;
     s32 layout;
     s16 x;
-    u16 unk_62;
 } TitleMenuWork;
 
 typedef struct TitleLumiChangeWork {

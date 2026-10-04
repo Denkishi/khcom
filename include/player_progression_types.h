@@ -23,7 +23,6 @@ typedef struct PlayerProgression {
     u32 exp;
     u32 nextExp;
     u8 level;
-    u8 unk_11[0x03];
     u64 learnedStocks;
     u64 learnedStocks2;
     u64 newStocks;

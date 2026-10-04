@@ -27,10 +27,10 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFrdPanAnimDefs[4] = {
-    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0, { 0, 0, 0 } },
-    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 1, { 0, 0, 0 } },
-    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 2, { 0, 0, 0 } },
-    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 3, { 0, 0, 0 } },
+    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 0 },
+    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 1 },
+    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 2 },
+    { gPeterTukiFrames, gPeterTukiAnims, gPeterTukiTiles, 3 },
 };
 
 TaskDesc gTaskDescFrdPan = {

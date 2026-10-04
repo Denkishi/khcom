@@ -17,10 +17,8 @@ typedef struct PooSpot {
 typedef struct PooMapBgDesc {
     void* tiles;
     u16 tilesSize;
-    u16 unk_06;
     void* palette;
     u16 paletteSize;
-    u16 unk_0E;
     void* tiles2;
     u16 tilesSize2;
     u8 mapWidth;

@@ -9,8 +9,6 @@
 typedef struct MapFloorDef {
     u8 entryRoom;
     u8 exitRoom;
-    u8 unk_02;
-    u8 unk_03;
     u8* links;
     MapEventDoor* eventDoors;
 } MapFloorDef;

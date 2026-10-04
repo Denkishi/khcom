@@ -35,68 +35,68 @@ static BoogieWork* sBoogieWork;
 
 #if defined(VERSION_US)
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkUs_09EF66C4, gUnkUs_09EF66A8, gUnk_0977A53C, 0, 0 },
-    { gUnkUs_09EF66E8, gUnkUs_09EF66C8, gUnk_0977F7B4, 0, 0 },
-    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 0, 0 },
-    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0, 0 },
-    { gUnkUs_09EF6750, gUnkUs_09EF6738, gUnk_0978DF7A, 0, 0 },
-    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 0, 0 },
-    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
+    { gUnkUs_09EF66C4, gUnkUs_09EF66A8, gUnk_0977A53C, 0 },
+    { gUnkUs_09EF66E8, gUnkUs_09EF66C8, gUnk_0977F7B4, 0 },
+    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 0 },
+    { gUnkUs_09EF6710, gUnkUs_09EF66EC, gUnk_097856FA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
+    { gUnkUs_09EF6750, gUnkUs_09EF6738, gUnk_0978DF7A, 0 },
+    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 0 },
+    { gUnkUs_09EF676C, gUnkUs_09EF6754, gUnk_097920CA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
 };
 #elif defined(VERSION_JP)
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkJp_09ECDAB0, gUnkJp_09ECDA94, gUnk_0977A53C, 0, 0 },
-    { gUnkJp_09ECDAD4, gUnkJp_09ECDAB4, gUnk_0977F7B4, 0, 0 },
-    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 0, 0 },
-    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0, 0 },
-    { gUnkJp_09ECDB3C, gUnkJp_09ECDB24, gUnk_0978DF7A, 0, 0 },
-    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 0, 0 },
-    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
+    { gUnkJp_09ECDAB0, gUnkJp_09ECDA94, gUnk_0977A53C, 0 },
+    { gUnkJp_09ECDAD4, gUnkJp_09ECDAB4, gUnk_0977F7B4, 0 },
+    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 0 },
+    { gUnkJp_09ECDAFC, gUnkJp_09ECDAD8, gUnk_097856FA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
+    { gUnkJp_09ECDB3C, gUnkJp_09ECDB24, gUnk_0978DF7A, 0 },
+    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 0 },
+    { gUnkJp_09ECDB58, gUnkJp_09ECDB40, gUnk_097920CA, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
 };
 #elif defined(VERSION_EU)
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0, 0 },
-    { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0, 0 },
-    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 0, 0 },
-    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0, 0 },
-    { gUnkEu_09F81D38, gUnkEu_09F81D20, gUnkEu_0976A18E, 0, 0 },
-    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 0, 0 },
-    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 1, 0 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2, 0 },
+    { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0 },
+    { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0 },
+    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 0 },
+    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
+    { gUnkEu_09F81D38, gUnkEu_09F81D20, gUnkEu_0976A18E, 0 },
+    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 0 },
+    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 1 },
+    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
 };
 #endif
 
 #if defined(VERSION_US)
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkUs_09EF66A8, 7, 0 },
-    { gUnkUs_09EF66C8, 8, 0 },
-    { gUnkUs_09EF66EC, 9, 0 },
-    { gUnk_09EF6718, 5, 0 },
-    { gUnkUs_09EF6738, 6, 0 },
-    { gUnkUs_09EF6754, 6, 0 },
+    { gUnkUs_09EF66A8, 7 },
+    { gUnkUs_09EF66C8, 8 },
+    { gUnkUs_09EF66EC, 9 },
+    { gUnk_09EF6718, 5 },
+    { gUnkUs_09EF6738, 6 },
+    { gUnkUs_09EF6754, 6 },
 };
 #elif defined(VERSION_JP)
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkJp_09ECDA94, 7, 0 },
-    { gUnkJp_09ECDAB4, 8, 0 },
-    { gUnkJp_09ECDAD8, 9, 0 },
-    { gUnk_09EF6718, 5, 0 },
-    { gUnkJp_09ECDB24, 6, 0 },
-    { gUnkJp_09ECDB40, 6, 0 },
+    { gUnkJp_09ECDA94, 7 },
+    { gUnkJp_09ECDAB4, 8 },
+    { gUnkJp_09ECDAD8, 9 },
+    { gUnk_09EF6718, 5 },
+    { gUnkJp_09ECDB24, 6 },
+    { gUnkJp_09ECDB40, 6 },
 };
 #elif defined(VERSION_EU)
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkEu_09F81C90, 7, 0 },
-    { gUnkEu_09F81CB0, 8, 0 },
-    { gUnkEu_09F81CD4, 9, 0 },
-    { gUnk_09EF6718, 5, 0 },
-    { gUnkEu_09F81D20, 6, 0 },
-    { gUnkEu_09F81D3C, 6, 0 },
+    { gUnkEu_09F81C90, 7 },
+    { gUnkEu_09F81CB0, 8 },
+    { gUnkEu_09F81CD4, 9 },
+    { gUnk_09EF6718, 5 },
+    { gUnkEu_09F81D20, 6 },
+    { gUnkEu_09F81D3C, 6 },
 };
 #endif
 
@@ -104,17 +104,17 @@ static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_L
 
 #if defined(VERSION_US)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnk_0984AE38, 0x140, { 0, 0 },
+    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnk_0984AE38, 0x140,
     { gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x800, gBossMapBlockUs_08125E24, gUnk_09841F98 + 0x400 },
 };
 #elif defined(VERSION_JP)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkJp_097FFB0C, 0x140, { 0, 0 },
+    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnkJp_097FFB0C, 0x140,
     { gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x800, gBossMapBlockJp_08125EA0, gUnk_09841F98 + 0x400 },
 };
 #elif defined(VERSION_EU)
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gUnk_097E05B8 + 0x4FC0, 0x7F00, { 0, 0 }, gUnkEu_0981F4E0, 0x140, { 0, 0 },
+    gUnk_097E05B8 + 0x4FC0, 0x7F00, gUnkEu_0981F4E0, 0x140,
     { gBossMapBlockEu_08124944, gUnk_09841F98 + 0x800, gBossMapBlockEu_08124944, gUnk_09841F98 + 0x400 },
 };
 #endif

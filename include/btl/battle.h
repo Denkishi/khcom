@@ -32,7 +32,6 @@ typedef struct BgFx {
     s32 scaleX;
     s32 scaleY;
     u8 angle;
-    u8 unk_25;
     u16 state;
     s32 targetX;
     s32 targetY;
@@ -40,13 +39,11 @@ typedef struct BgFx {
     u16 flags;
     u16 endSignals;
     u8 priority;
-    u8 unk_39[0x03];
     s32 unk_3C;
     s32 angleFixed;
     struct BtlObj* actor;
     s32 attack;
     s16 releaseFrames;
-    u16 unk_4E;
 } BgFx;
 
 typedef struct EnemySpawnRequest {
@@ -74,7 +71,6 @@ typedef struct FieldTransitionWork {
     AnimState anim;
     u16 initialized;
     u8 flipped;
-    u8 unk_23;
 } FieldTransitionWork;
 
 typedef struct EnemyBaseStats {

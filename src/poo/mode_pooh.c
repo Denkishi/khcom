@@ -38,7 +38,7 @@ Mode gModePooh = {
     mode_pooh_2,
 };
 
-const PooHitBox gPoohHitBox = { gPoohPalette, 36, 16, 6, 0 };
+const PooHitBox gPoohHitBox = { gPoohPalette, 36, 16, 6 };
 
 static const s8 sPoohLookOffsets[8][8] = {
     { 0, 1, 2, 2, 3, -2, -2, -1 },
@@ -52,144 +52,144 @@ static const s8 sPoohLookOffsets[8][8] = {
 };
 
 static AnimDef sPooh00AnimDefs[5] = {
-    { gPoohBb00Frames, gPoohBb00Anims, gPoohBb00Tiles, 0, { 0, 0, 0 } },
-    { gPoohFf00Frames, gPoohFf00Anims, gPoohFf00Tiles, 0, { 0, 0, 0 } },
-    { gPoohFr00Frames, gPoohFr00Anims, gPoohFr00Tiles, 0, { 0, 0, 0 } },
-    { gPoohRr00Frames, gPoohRr00Anims, gPoohRr00Tiles, 0, { 0, 0, 0 } },
-    { gPoohBr00Frames, gPoohBr00Anims, gPoohBr00Tiles, 0, { 0, 0, 0 } },
+    { gPoohBb00Frames, gPoohBb00Anims, gPoohBb00Tiles, 0 },
+    { gPoohFf00Frames, gPoohFf00Anims, gPoohFf00Tiles, 0 },
+    { gPoohFr00Frames, gPoohFr00Anims, gPoohFr00Tiles, 0 },
+    { gPoohRr00Frames, gPoohRr00Anims, gPoohRr00Tiles, 0 },
+    { gPoohBr00Frames, gPoohBr00Anims, gPoohBr00Tiles, 0 },
 };
 
 static AnimDef sPooh04AnimDefs[5] = {
-    { gPoohBb04Frames, gPoohBb04Anims, gPoohBb04Tiles, 0, { 0, 0, 0 } },
-    { gPoohFf04Frames, gPoohFf04Anims, gPoohFf04Tiles, 0, { 0, 0, 0 } },
-    { gPoohFl04Frames, gPoohFl04Anims, gPoohFl04Tiles, 0, { 0, 0, 0 } },
-    { gPoohLl04Frames, gPoohLl04Anims, gPoohLl04Tiles, 0, { 0, 0, 0 } },
-    { gPoohBl04Frames, gPoohBl04Anims, gPoohBl04Tiles, 0, { 0, 0, 0 } },
+    { gPoohBb04Frames, gPoohBb04Anims, gPoohBb04Tiles, 0 },
+    { gPoohFf04Frames, gPoohFf04Anims, gPoohFf04Tiles, 0 },
+    { gPoohFl04Frames, gPoohFl04Anims, gPoohFl04Tiles, 0 },
+    { gPoohLl04Frames, gPoohLl04Anims, gPoohLl04Tiles, 0 },
+    { gPoohBl04Frames, gPoohBl04Anims, gPoohBl04Tiles, 0 },
 };
 
 static AnimDef sPooh04aAnimDefs[5] = {
-    { gPoohBb04aFrames, gPoohBb04aAnims, gPoohBb04aTiles, 0, { 0, 0, 0 } },
-    { gPoohFf04aFrames, gPoohFf04aAnims, gPoohFf04aTiles, 0, { 0, 0, 0 } },
-    { gPoohFl04aFrames, gPoohFl04aAnims, gPoohFl04aTiles, 0, { 0, 0, 0 } },
-    { gPoohLl04aFrames, gPoohLl04aAnims, gPoohLl04aTiles, 0, { 0, 0, 0 } },
-    { gPoohBl04aFrames, gPoohBl04aAnims, gPoohBl04aTiles, 0, { 0, 0, 0 } },
+    { gPoohBb04aFrames, gPoohBb04aAnims, gPoohBb04aTiles, 0 },
+    { gPoohFf04aFrames, gPoohFf04aAnims, gPoohFf04aTiles, 0 },
+    { gPoohFl04aFrames, gPoohFl04aAnims, gPoohFl04aTiles, 0 },
+    { gPoohLl04aFrames, gPoohLl04aAnims, gPoohLl04aTiles, 0 },
+    { gPoohBl04aFrames, gPoohBl04aAnims, gPoohBl04aTiles, 0 },
 };
 
 static AnimDef sPooh01AnimDefs[8] = {
-    { gPoohBb01Frames, gPoohBb01Anims, gPoohBb01Tiles, 0, { 0, 0, 0 } },
-    { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 0, { 0, 0, 0 } },
-    { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 0, { 0, 0, 0 } },
-    { gPoohRr01Frames, gPoohRr01Anims, gPoohRr01Tiles, 0, { 0, 0, 0 } },
-    { gPoohBr01Frames, gPoohBr01Anims, gPoohBr01Tiles, 0, { 0, 0, 0 } },
-    { gPoohFl01Frames, gPoohFl01Anims, gPoohFl01Tiles, 0, { 0, 0, 0 } },
-    { gPoohLl01Frames, gPoohLl01Anims, gPoohLl01Tiles, 0, { 0, 0, 0 } },
-    { gPoohBl01Frames, gPoohBl01Anims, gPoohBl01Tiles, 0, { 0, 0, 0 } },
+    { gPoohBb01Frames, gPoohBb01Anims, gPoohBb01Tiles, 0 },
+    { gPoohFf01Frames, gPoohFf01Anims, gPoohFf01Tiles, 0 },
+    { gPoohFr01Frames, gPoohFr01Anims, gPoohFr01Tiles, 0 },
+    { gPoohRr01Frames, gPoohRr01Anims, gPoohRr01Tiles, 0 },
+    { gPoohBr01Frames, gPoohBr01Anims, gPoohBr01Tiles, 0 },
+    { gPoohFl01Frames, gPoohFl01Anims, gPoohFl01Tiles, 0 },
+    { gPoohLl01Frames, gPoohLl01Anims, gPoohLl01Tiles, 0 },
+    { gPoohBl01Frames, gPoohBl01Anims, gPoohBl01Tiles, 0 },
 };
 
 static AnimDef sTrap0001AnimDefs[8] = {
-    { gTrap0001bbFrames, gTrap0001bbAnims, gTrap0001bbTiles, 0, { 0, 0, 0 } },
-    { gTrap0001ffFrames, gTrap0001ffAnims, gTrap0001ffTiles, 0, { 0, 0, 0 } },
-    { gTrap0001frFrames, gTrap0001frAnims, gTrap0001frTiles, 0, { 0, 0, 0 } },
-    { gTrap0001rrFrames, gTrap0001rrAnims, gTrap0001rrTiles, 0, { 0, 0, 0 } },
-    { gTrap0001brFrames, gTrap0001brAnims, gTrap0001brTiles, 0, { 0, 0, 0 } },
-    { gTrap0001flFrames, gTrap0001flAnims, gTrap0001flTiles, 0, { 0, 0, 0 } },
-    { gTrap0001llFrames, gTrap0001llAnims, gTrap0001llTiles, 0, { 0, 0, 0 } },
-    { gTrap0001blFrames, gTrap0001blAnims, gTrap0001blTiles, 0, { 0, 0, 0 } },
+    { gTrap0001bbFrames, gTrap0001bbAnims, gTrap0001bbTiles, 0 },
+    { gTrap0001ffFrames, gTrap0001ffAnims, gTrap0001ffTiles, 0 },
+    { gTrap0001frFrames, gTrap0001frAnims, gTrap0001frTiles, 0 },
+    { gTrap0001rrFrames, gTrap0001rrAnims, gTrap0001rrTiles, 0 },
+    { gTrap0001brFrames, gTrap0001brAnims, gTrap0001brTiles, 0 },
+    { gTrap0001flFrames, gTrap0001flAnims, gTrap0001flTiles, 0 },
+    { gTrap0001llFrames, gTrap0001llAnims, gTrap0001llTiles, 0 },
+    { gTrap0001blFrames, gTrap0001blAnims, gTrap0001blTiles, 0 },
 };
 
-static AnimDef sTrap0002Anim0Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 0, { 0, 0, 0 } };
+static AnimDef sTrap0002Anim0Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 0 };
 
-static AnimDef sTrap0002Anim1Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 1, { 0, 0, 0 } };
+static AnimDef sTrap0002Anim1Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002Tiles, 1 };
 
-static AnimDef sTrap0003Anim0Def = { gTrap0003Frames, gTrap0003Anims, gTrap0003Tiles, 0, { 0, 0, 0 } };
+static AnimDef sTrap0003Anim0Def = { gTrap0003Frames, gTrap0003Anims, gTrap0003Tiles, 0 };
 
-static AnimDef sPoohOwlDescentAnimDef = { gUnk_09EF5824, gUnk_09EF583C, gUnk_09724C1C, 1, { 0, 0, 0 } };
+static AnimDef sPoohOwlDescentAnimDef = { gUnk_09EF5824, gUnk_09EF583C, gUnk_09724C1C, 1 };
 
 static AnimDef sPooh03AnimDefs[2] = {
-    { gPoohBl03Frames, gPoohBl03Anims, gPoohBl03Tiles, 0, { 0, 0, 0 } },
-    { gPoohFl03Frames, gPoohFl03Anims, gPoohFl03Tiles, 0, { 0, 0, 0 } },
+    { gPoohBl03Frames, gPoohBl03Anims, gPoohBl03Tiles, 0 },
+    { gPoohFl03Frames, gPoohFl03Anims, gPoohFl03Tiles, 0 },
 };
 
 static AnimDef sPooh07Anim0Defs[2] = {
-    { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 0, { 0, 0, 0 } },
-    { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 0, { 0, 0, 0 } },
+    { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 0 },
+    { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 0 },
 };
 
 static AnimDef sPooh07Anim1Defs[2] = {
-    { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 1, { 0, 0, 0 } },
-    { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 1, { 0, 0, 0 } },
+    { gPoohBl07Frames, gPoohBl07Anims, gPoohBl07Tiles, 1 },
+    { gPoohFl07Frames, gPoohFl07Anims, gPoohFl07Tiles, 1 },
 };
 
-static AnimDef sPoohFl05Anim0Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 0, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim0Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 0 };
 
-static AnimDef sPoohFl05Anim1Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim1Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 1 };
 
-static AnimDef sPoohFl05Anim2Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim2Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 2 };
 
-static AnimDef sPoohFl05Anim3Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 3, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim3Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 3 };
 
-static AnimDef sPoohFl05Anim4Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 4, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim4Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 4 };
 
-static AnimDef sPoohFl05Anim5Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 5, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim5Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 5 };
 
-static AnimDef sPoohFl05Anim9Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 9, { 0, 0, 0 } };
+static AnimDef sPoohFl05Anim9Def = { gPoohFl05Frames, gPoohFl05Anims, gPoohFl05Tiles, 9 };
 
-static AnimDef sPoohFl06Anim1Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim1Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 1 };
 
-static AnimDef sPoohFl06Anim2Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim2Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 2 };
 
-static AnimDef sPoohFl06Anim3Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 3, { 0, 0, 0 } };
+static AnimDef sPoohFl06Anim3Def = { gPoohFl06Frames, gPoohFl06Anims, gPoohFl06Tiles, 3 };
 
-static AnimDef sPoohFl09Anim0Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 0, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim0Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 0 };
 
-static AnimDef sPoohFl09Anim1Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 1, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim1Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 1 };
 
-static AnimDef sPoohFl09Anim2Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 2, { 0, 0, 0 } };
+static AnimDef sPoohFl09Anim2Def = { gPoohFl09Frames, gPoohFl09Anims, gPoohFl09Tiles, 2 };
 
 static AnimDef sPooh10AnimDefs[4] = {
-    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } },
-    { gPoohFf10Frames, gPoohFf10Anims, gPoohFf10Tiles, 0, { 0, 0, 0 } },
-    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } },
-    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } },
+    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0 },
+    { gPoohFf10Frames, gPoohFf10Anims, gPoohFf10Tiles, 0 },
+    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0 },
+    { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0 },
 };
 
-AnimDef gPoohLl10Anim0Def = { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0, { 0, 0, 0 } };
+AnimDef gPoohLl10Anim0Def = { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, 0 };
 
 static AnimDef sPooh00LookAnimDefs[5][5] = {
     {
-        { gPoohBb00LlFrames, gPoohBb00LlAnims, gPoohBb00LlTiles, 0, { 0, 0, 0 } },
-        { gPoohBb00BlFrames, gPoohBb00BlAnims, gPoohBb00BlTiles, 0, { 0, 0, 0 } },
-        { gPoohBb00Frames, gPoohBb00Anims, gPoohBb00Tiles, 0, { 0, 0, 0 } },
-        { gPoohBb00BrFrames, gPoohBb00BrAnims, gPoohBb00BrTiles, 0, { 0, 0, 0 } },
-        { gPoohBb00RrFrames, gPoohBb00RrAnims, gPoohBb00RrTiles, 0, { 0, 0, 0 } },
+        { gPoohBb00LlFrames, gPoohBb00LlAnims, gPoohBb00LlTiles, 0 },
+        { gPoohBb00BlFrames, gPoohBb00BlAnims, gPoohBb00BlTiles, 0 },
+        { gPoohBb00Frames, gPoohBb00Anims, gPoohBb00Tiles, 0 },
+        { gPoohBb00BrFrames, gPoohBb00BrAnims, gPoohBb00BrTiles, 0 },
+        { gPoohBb00RrFrames, gPoohBb00RrAnims, gPoohBb00RrTiles, 0 },
     },
     {
-        { gPoohFf00RrFrames, gPoohFf00RrAnims, gPoohFf00RrTiles, 0, { 0, 0, 0 } },
-        { gPoohFf00FrFrames, gPoohFf00FrAnims, gPoohFf00FrTiles, 0, { 0, 0, 0 } },
-        { gPoohFf00Frames, gPoohFf00Anims, gPoohFf00Tiles, 0, { 0, 0, 0 } },
-        { gPoohFf00FlFrames, gPoohFf00FlAnims, gPoohFf00FlTiles, 0, { 0, 0, 0 } },
-        { gPoohFf00LlFrames, gPoohFf00LlAnims, gPoohFf00LlTiles, 0, { 0, 0, 0 } },
+        { gPoohFf00RrFrames, gPoohFf00RrAnims, gPoohFf00RrTiles, 0 },
+        { gPoohFf00FrFrames, gPoohFf00FrAnims, gPoohFf00FrTiles, 0 },
+        { gPoohFf00Frames, gPoohFf00Anims, gPoohFf00Tiles, 0 },
+        { gPoohFf00FlFrames, gPoohFf00FlAnims, gPoohFf00FlTiles, 0 },
+        { gPoohFf00LlFrames, gPoohFf00LlAnims, gPoohFf00LlTiles, 0 },
     },
     {
-        { gPoohFr00BrFrames, gPoohFr00BrAnims, gPoohFr00BrTiles, 0, { 0, 0, 0 } },
-        { gPoohFr00RrFrames, gPoohFr00RrAnims, gPoohFr00RrTiles, 0, { 0, 0, 0 } },
-        { gPoohFr00Frames, gPoohFr00Anims, gPoohFr00Tiles, 0, { 0, 0, 0 } },
-        { gPoohFr00FfFrames, gPoohFr00FfAnims, gPoohFr00FfTiles, 0, { 0, 0, 0 } },
-        { gPoohFr00FlFrames, gPoohFr00FlAnims, gPoohFr00FlTiles, 0, { 0, 0, 0 } },
+        { gPoohFr00BrFrames, gPoohFr00BrAnims, gPoohFr00BrTiles, 0 },
+        { gPoohFr00RrFrames, gPoohFr00RrAnims, gPoohFr00RrTiles, 0 },
+        { gPoohFr00Frames, gPoohFr00Anims, gPoohFr00Tiles, 0 },
+        { gPoohFr00FfFrames, gPoohFr00FfAnims, gPoohFr00FfTiles, 0 },
+        { gPoohFr00FlFrames, gPoohFr00FlAnims, gPoohFr00FlTiles, 0 },
     },
     {
-        { gPoohRr00BbFrames, gPoohRr00BbAnims, gPoohRr00BbTiles, 0, { 0, 0, 0 } },
-        { gPoohRr00BrFrames, gPoohRr00BrAnims, gPoohRr00BrTiles, 0, { 0, 0, 0 } },
-        { gPoohRr00Frames, gPoohRr00Anims, gPoohRr00Tiles, 0, { 0, 0, 0 } },
-        { gPoohRr00FrFrames, gPoohRr00FrAnims, gPoohRr00FrTiles, 0, { 0, 0, 0 } },
-        { gPoohRr00FfFrames, gPoohRr00FfAnims, gPoohRr00FfTiles, 0, { 0, 0, 0 } },
+        { gPoohRr00BbFrames, gPoohRr00BbAnims, gPoohRr00BbTiles, 0 },
+        { gPoohRr00BrFrames, gPoohRr00BrAnims, gPoohRr00BrTiles, 0 },
+        { gPoohRr00Frames, gPoohRr00Anims, gPoohRr00Tiles, 0 },
+        { gPoohRr00FrFrames, gPoohRr00FrAnims, gPoohRr00FrTiles, 0 },
+        { gPoohRr00FfFrames, gPoohRr00FfAnims, gPoohRr00FfTiles, 0 },
     },
     {
-        { gPoohBr00BlFrames, gPoohBr00BlAnims, gPoohBr00BlTiles, 0, { 0, 0, 0 } },
-        { gPoohBr00BbFrames, gPoohBr00BbAnims, gPoohBr00BbTiles, 0, { 0, 0, 0 } },
-        { gPoohBr00Frames, gPoohBr00Anims, gPoohBr00Tiles, 0, { 0, 0, 0 } },
-        { gPoohBr00RrFrames, gPoohBr00RrAnims, gPoohBr00RrTiles, 0, { 0, 0, 0 } },
-        { gPoohBr00FrFrames, gPoohBr00FrAnims, gPoohBr00FrTiles, 0, { 0, 0, 0 } },
+        { gPoohBr00BlFrames, gPoohBr00BlAnims, gPoohBr00BlTiles, 0 },
+        { gPoohBr00BbFrames, gPoohBr00BbAnims, gPoohBr00BbTiles, 0 },
+        { gPoohBr00Frames, gPoohBr00Anims, gPoohBr00Tiles, 0 },
+        { gPoohBr00RrFrames, gPoohBr00RrAnims, gPoohBr00RrTiles, 0 },
+        { gPoohBr00FrFrames, gPoohBr00FrAnims, gPoohBr00FrTiles, 0 },
     },
 };
 

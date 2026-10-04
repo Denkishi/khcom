@@ -47,7 +47,6 @@ typedef struct EventKeyCard {
     u16 total;
     u16 drawnTotal;
     u8 color;
-    u8 unk_33;
 } EventKeyCard;
 
 typedef char EventKeyCard_size[(sizeof(EventKeyCard) == 0x34) ? 1 : -1];
@@ -75,11 +74,9 @@ typedef struct MapCardDef {
     u16 paletteSize;
     u16 tilesSize2;
     u8 backIndex;
-    u8 unk_1F;
     u16 kind;
     u16 value;
     u16 color;
-    u16 unk_26;
 } MapCardDef;
 
 typedef struct MapCardBackDef {
@@ -91,7 +88,6 @@ typedef struct MapCardBackDef {
     u16 tilesSize;
     u16 paletteSize;
     u16 tilesSize2;
-    u8 unk_1A[0x2];
 } MapCardBackDef;
 
 #endif

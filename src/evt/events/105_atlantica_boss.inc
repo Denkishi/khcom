@@ -3,7 +3,7 @@
 #endif
 
 static const MessageScriptEntry sEvent105Script[1] = {
-    { 14, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent105Text00), MSG_SCRIPT_FLAG_END, 100 },
+    { 14, 2, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent105Text00), MSG_SCRIPT_FLAG_END, 100 },
 };
 
 #ifdef VERSION_JP
@@ -15,25 +15,24 @@ static const EvSoundCue sEvent105SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent105Camera[1] = {
-    { -64626, 81920, 102400, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -64626, 81920, 102400, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent105Track0[1] = {
-    { 21, 459, { 0, 0 }, 81920, 122880, 0, 0, { 0, 0 }, 32834, NULL, NULL },
+    { 21, 459, 81920, 122880, 0, 0, 32834, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent105Track1[1] = {
-    { 937, 459, { 0, 0 }, 45312, 60928, 0, 0, { 0, 0 }, 32770, NULL, NULL },
+    { 937, 459, 45312, 60928, 0, 0, 32770, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent105Tracks[2] = {
-    { sEvent105Track0, 0, { 0, 0, 0 } },
-    { sEvent105Track1, 99, { 0, 0, 0 } },
+    { sEvent105Track0, 0 },
+    { sEvent105Track1, 99 },
 };
 
 const EventSequenceDef gEvent105 = {
     2,
-    { 0, 0, 0 },
     sEvent105Tracks,
     sEvent105Camera,
     sEvent105Script,
@@ -42,7 +41,6 @@ const EventSequenceDef gEvent105 = {
     150,
     0,
     1,
-    0,
     0,
     0,
     0,

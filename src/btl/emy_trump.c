@@ -20,12 +20,12 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmyTrumpHCommonAnimDefs[3] = {
-    { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0, { 0, 0, 0 } },
-    { gTrumpH02bFrames, gTrumpH02bAnims, gTrumpH02bTiles, 0, { 0, 0, 0 } },
-    { gTrumpH03Frames, gTrumpH03Anims, gTrumpH03Tiles, 0, { 0, 0, 0 } },
+    { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0 },
+    { gTrumpH02bFrames, gTrumpH02bAnims, gTrumpH02bTiles, 0 },
+    { gTrumpH03Frames, gTrumpH03Anims, gTrumpH03Tiles, 0 },
 };
 
-static const AnimDef sEmyTrumpHAnimDef = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sEmyTrumpHAnimDef = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles, 0 };
 
 static const EmyDef sEmyTrumpHDef = { gTrumpHPalette, sEmyTrumpHCommonAnimDefs, 409, 130, 20, 20, 90, 32, 32, 10, 0, { 47, 200, 40, 16, 16, 100, 0 } };
 
@@ -39,12 +39,12 @@ TaskDesc gTaskDescEmyTrumpH = {
 };
 
 static const AnimDef sEmyTrumpSCommonAnimDefs[3] = {
-    { gTrumpS00bFrames, gTrumpS00bAnims, gTrumpS00bTiles, 0, { 0, 0, 0 } },
-    { gTrumpS02bFrames, gTrumpS02bAnims, gTrumpS02bTiles, 0, { 0, 0, 0 } },
-    { gTrumpS03Frames, gTrumpS03Anims, gTrumpS03Tiles, 0, { 0, 0, 0 } },
+    { gTrumpS00bFrames, gTrumpS00bAnims, gTrumpS00bTiles, 0 },
+    { gTrumpS02bFrames, gTrumpS02bAnims, gTrumpS02bTiles, 0 },
+    { gTrumpS03Frames, gTrumpS03Anims, gTrumpS03Tiles, 0 },
 };
 
-static const AnimDef sEmyTrumpSAnimDef = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sEmyTrumpSAnimDef = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 0 };
 
 static const EmyDef sEmyTrumpSDef = { gTrumpSPalette, sEmyTrumpSCommonAnimDefs, 307, 130, 20, 20, 64, 32, 32, 10, 0, { 46, 200, 40, 16, 16, 100, 0 } };
 

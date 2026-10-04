@@ -19,7 +19,6 @@ typedef struct BtlPopCbWork {
     s32 y;
     s32 z;
     s16 timer;
-    u8 unk_1A[0x02];
 } BtlPopCbWork;
 
 typedef struct BtlExpWork {
@@ -30,9 +29,7 @@ typedef struct BtlExpWork {
     void* gfx2[6];
     s16 timer;
     u8 level;
-    u8 unk_3F;
     u16 gainedExp;
-    u8 unk_42[0x02];
     u32 lastExp;
     u32 state;
 } BtlExpWork;
@@ -47,7 +44,6 @@ typedef struct BtlVslockonWork {
 typedef struct BtlHpothWork {
     s32 hpRatio;
     u8 firstUpdate;
-    u8 unk_05[0x03];
     void* palette2;
     void* palette;
     void* tiles;
@@ -60,12 +56,10 @@ typedef struct BtlHpothWork {
     AnimState anim2;
     AnimState anim;
     u8 unk_5C;
-    u8 unk_5D;
     s16 timer;
     s16 prevHp;
     s16 displayHp;
     s16 gaugeSize;
-    u8 unk_66[0x02];
     u32 gaugeMode;
 } BtlHpothWork;
 

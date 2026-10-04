@@ -8,11 +8,9 @@ typedef struct ChkEffWork {
     TaskPool pool;
     s16 effectIndex;
     u8 paused;
-    u8 unk_17;
     u16 scrollX;
     u16 scrollY;
     u8 rotation;
-    u8 unk_1D[0x03];
     s32 scale;
     u16 alphaA;
     u16 alphaB;

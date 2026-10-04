@@ -58,9 +58,7 @@ typedef struct EventCharaWork {
     u8 hasObj;
     u8 finished;
     u8 visible;
-    u8 unk_1B7;
     u16 unk_1B8;
-    u8 unk_1BA[2];
 } EventCharaWork;
 
 #endif

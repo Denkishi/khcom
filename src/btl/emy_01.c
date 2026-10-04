@@ -18,14 +18,14 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy01CommonAnimDefs[3] = {
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2 },
 };
 
 static const AnimDef sEmy01AnimDefs[2] = {
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 1 },
 };
 
 static const EmyDef sEmy01Def = { gEmy01Palette, sEmy01CommonAnimDefs, 384, 130, 20, 20, 64, 32, 32, 10, 0, { 1, 33, 24, 12, 4, 100, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };

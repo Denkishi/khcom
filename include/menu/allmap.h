@@ -19,7 +19,6 @@ typedef struct AllmapRoomnameWork {
     TextSlot textSlots[ALLMAP_ROOMNAME_TEXT_SLOTS + 1];
     void* palette;
     u8 textSlotCount;
-    u8 unk_0CD;
     u16 x;
 } AllmapRoomnameWork;
 
@@ -36,7 +35,6 @@ typedef struct AllmapBarWork {
     void* tiles2;
     void* palette;
     u16 steps;
-    u8 unk_0E[0x02];
     s32 y;
     s32 targetY;
     s32 y2;
@@ -69,7 +67,6 @@ typedef struct AllmapCursorWork {
     s32 drawX;
     s32 drawY;
     u16 moveSteps;
-    u8 unk_46[0x02];
 } AllmapCursorWork;
 
 typedef struct AllmapState {
@@ -92,13 +89,11 @@ typedef struct AllmapState {
     u16 maxY;
     s32 moveSpeed;
     u8 lastRoom;
-    u8 unk_C1[0x03];
 } AllmapState;
 
 typedef struct AllmapDoorinfoWork {
     AllmapCursorPos pos;
     u8 room;
-    u8 unk_005[0x03];
     void* gfx2[4];
     void* tiles;
     EventKeyCard doors[4];
@@ -109,14 +104,12 @@ typedef struct AllmapDoorinfoWork {
     s16 roomX;
     s16 roomY;
     u16 steps;
-    u8 unk_102[0x02];
     s32 x;
     s32 y;
     s32 targetX;
     s32 targetY;
     u16 count;
     u8 closing;
-    u8 unk_117;
 } AllmapDoorinfoWork;
 
 typedef struct AllmapPushaWork {

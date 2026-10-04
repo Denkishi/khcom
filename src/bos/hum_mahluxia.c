@@ -38,26 +38,26 @@ static const u32 sHumMahluxiaStockMovesB[3] = {
 };
 
 static const AnimDef sHumMahluxiaAnimDefs[13] = {
-    { gMaruxhaIdleFrames, gMaruxhaIdleAnims, gMaruxhaIdleTiles, 0, { 0, 0, 0 } },
-    { gMaruxhaMoveFrames, gMaruxhaMoveAnims, gMaruxhaMoveTiles, 0, { 0, 0, 0 } },
-    { gMaruxhaDamegeFrames, gMaruxhaDamegeAnims, gMaruxhaDamegeTiles, 0, { 0, 0, 0 } },
-    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 0, { 0, 0, 0 } },
-    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 0, { 0, 0, 0 } },
-    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 1, { 0, 0, 0 } },
-    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 2, { 0, 0, 0 } },
-    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 1, { 0, 0, 0 } },
-    { gMaruxhaAtk3Frames, gMaruxhaAtk3Anims, gMaruxhaAtk3Tiles, 0, { 0, 0, 0 } },
-    { gMaruxhaAtk2Frames, gMaruxhaAtk2Anims, gMaruxhaAtk2Tiles, 0, { 0, 0, 0 } },
-    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 2, { 0, 0, 0 } },
-    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 3, { 0, 0, 0 } },
-    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 4, { 0, 0, 0 } },
+    { gMaruxhaIdleFrames, gMaruxhaIdleAnims, gMaruxhaIdleTiles, 0 },
+    { gMaruxhaMoveFrames, gMaruxhaMoveAnims, gMaruxhaMoveTiles, 0 },
+    { gMaruxhaDamegeFrames, gMaruxhaDamegeAnims, gMaruxhaDamegeTiles, 0 },
+    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 0 },
+    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 0 },
+    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 1 },
+    { gMaruxhaAtk4Frames, gMaruxhaAtk4Anims, gMaruxhaAtk4Tiles, 2 },
+    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 1 },
+    { gMaruxhaAtk3Frames, gMaruxhaAtk3Anims, gMaruxhaAtk3Tiles, 0 },
+    { gMaruxhaAtk2Frames, gMaruxhaAtk2Anims, gMaruxhaAtk2Tiles, 0 },
+    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 2 },
+    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 3 },
+    { gMaruxhaAtk1Frames, gMaruxhaAtk1Anims, gMaruxhaAtk1Tiles, 4 },
 };
 
-static const AnimDef sHumMahluxiaEffAnimDef = { gMaruxhaBtEff1Frames, gMaruxhaBtEff1Anims, gMaruxhaBtEff1Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sHumMahluxiaEffAnimDef = { gMaruxhaBtEff1Frames, gMaruxhaBtEff1Anims, gMaruxhaBtEff1Tiles, 0 };
 
-static const HumSubDef sHumMahluxiaSubDef = { gMaruxhaBtEffPalette, 90, 0 };
+static const HumSubDef sHumMahluxiaSubDef = { gMaruxhaBtEffPalette, 90 };
 
-static const HumDef sHumMahluxiaDef = { 90, 0, gMaruxhaPalette, 0, { 51, 99, 60, 14, 40, 99, 0 } };
+static const HumDef sHumMahluxiaDef = { 90, gMaruxhaPalette, 0, { 51, 99, 60, 14, 40, 99, 0 } };
 
 TaskDesc gTaskDescHumMahluxia = {
     "task_hum_mahluxia",

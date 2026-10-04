@@ -25,16 +25,16 @@
 #include "sprites_btl.h"
 
 static const AnimDef sEmy83CommonAnimDefs[3] = {
-    { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },
-    { gEmy8302Frames, gEmy8302Anims, gEmy8302Tiles, 0, { 0, 0, 0 } },
-    { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0, { 0, 0, 0 } },
+    { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0 },
+    { gEmy8302Frames, gEmy8302Anims, gEmy8302Tiles, 0 },
+    { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0 },
 };
 
 static const AnimDef sEmy83AnimDefs[4] = {
-    { gEmy8310Frames, gEmy8310Anims, gEmy8310Tiles, 0, { 0, 0, 0 } },
-    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 0, { 0, 0, 0 } },
-    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 1, { 0, 0, 0 } },
-    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 2, { 0, 0, 0 } },
+    { gEmy8310Frames, gEmy8310Anims, gEmy8310Tiles, 0 },
+    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 0 },
+    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 1 },
+    { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 2 },
 };
 
 static const EmyDef sEmy83Def = { gEmy83Palette, sEmy83CommonAnimDefs, 192, 130, 20, 20, 50, 50, 50, 10, 0, { 31, 66, 35, 12, 24, 100, 0 } };

@@ -10,14 +10,11 @@ typedef struct WarpGfx {
     s16 y;
     void* palette;
     u16 paletteSize;
-    u8 unk_0A[0x02];
     void* tiles;
     u16 tilesSize;
-    u8 unk_12[0x02];
     AnimHeader** anims;
     void** gfxTable;
     u16 animId;
-    u8 unk_1E[0x02];
 } WarpGfx;
 
 typedef struct WarpDef {
@@ -32,7 +29,6 @@ typedef struct WarpDef {
     u16 flags;
     u16 x3;
     s16 y3;
-    u8 unk_1A[0x02];
     WarpGfx gfx[2];
 } WarpDef;
 

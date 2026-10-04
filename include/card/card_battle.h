@@ -72,9 +72,7 @@ typedef struct CardBattleState {
     u8 rikuHcEffectReplaced;
     u8 unk_0ED;
     u8 darkModeReady;
-    u8 unk_0EF;
     u16 rikuCardsLeft;
-    u8 unk_0F2[0x02];
     u32 soraReloadGauge;
     u32 rikuReloadGauge;
     u16 soraReloadCounter;

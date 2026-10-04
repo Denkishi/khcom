@@ -11,7 +11,6 @@ typedef struct MdFrameSprite {
     u16 x;
     u16 y;
     u16 z;
-    u16 unk_06;
     void* src;
     u32 unk_0C;
     void* sprite;
@@ -29,7 +28,6 @@ typedef struct MdFrameDef {
     u16 bgOffsetY;
     void* tiles;
     u16 tilesSize;
-    u16 unk_0A;
     const void* blocks[4];
     MdFrameSprite desc[2];
     MdFramePos pos[1];
@@ -43,17 +41,14 @@ typedef struct MdAnimFrame {
 typedef struct MdAnimDef {
     const MdAnimFrame* frames;
     u16 frameCount;
-    u16 unk_06;
 } MdAnimDef;
 
 typedef struct MdAnim {
     u16 animId;
-    u16 unk_02;
     const MdAnimFrame* frames;
     s16 frameCount;
     s16 frame;
     s16 timer;
-    u16 unk_0E;
 } MdAnim;
 
 typedef struct MdHahenWork {
@@ -67,7 +62,6 @@ typedef struct MdHahenWork {
     ObjTiles* tiles;
     void* gfx;
     u16 timer;
-    u8 unk_026[0x2];
 } MdHahenWork;
 
 typedef struct MdDaiWork {
@@ -76,7 +70,6 @@ typedef struct MdDaiWork {
     s32 z;
     s32 dropZ;
     s16 dropSteps;
-    u8 unk_012[0x2];
     ObjPalette* palette;
     ObjTiles* tiles;
     Collider collider;
@@ -91,14 +84,12 @@ typedef struct MdFireWork {
     s16 timer;
     s16 flashTimer;
     s16 contactCooldown;
-    u8 unk_00A[0x2];
     ObjPalette* palette;
     ObjPalette* palette2;
     ObjTiles* tiles;
     AnimState anim;
     u32 scale;
     s16 scaleSteps;
-    u8 unk_036[0x2];
     BtlObj sub;
     s32 x;
     s32 y;
@@ -109,7 +100,6 @@ typedef struct MdFireWork {
     s16 pattern;
     s16 index;
     u8 angle;
-    u8 unk_163;
     u32 centerX;
     u32 centerY;
     u16* flags;
@@ -132,7 +122,6 @@ typedef struct MdFirePoint {
 typedef struct MdFireDef {
     const MdFirePoint* points;
     s16 count;
-    u16 unk_06;
 } MdFireDef;
 
 typedef struct MdGfx {
@@ -142,7 +131,6 @@ typedef struct MdGfx {
     s16 x;
     s16 y;
     s16 z;
-    u16 unk_12;
 } MdGfx;
 
 enum MdFlag {
@@ -154,14 +142,12 @@ typedef struct MdWork {
     u32 nextState;
     u32 statePhase;
     u16 step;
-    u16 unk_00E;
     u32 hurtState[1];
     u16 flags;
     s16 timer;
     u16 unk_018;
     s16 hurtTimer;
     u8 bgVisible;
-    u8 unk_01D[0x3];
     ObjPalette* palette;
     ObjPalette* palette2;
     void* bgPalette;
@@ -174,7 +160,6 @@ typedef struct MdWork {
     MdGfx gfx[2];
     MdAnim anim;
     u16 signals;
-    u8 unk_1B6[0x2];
 } MdWork;
 
 void BosMdFireHandleReaction(MdFireWork* work);
@@ -196,10 +181,8 @@ void BosMdLoadBgTiles(MdWork* work, u16 index);
 typedef struct MdMapData {
     void* tiles;
     u16 tilesSize;
-    u8 unk_06[0x2];
     void* palette;
     u16 paletteSize;
-    u8 unk_0E[0x2];
     void* map[4];
 } MdMapData;
 

@@ -10,7 +10,6 @@
 typedef struct BoogieWork {
     s32 state;
     s16 timer;
-    u16 unk_006;
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;
@@ -28,13 +27,11 @@ typedef struct BoogieWork {
     u32 defeatStep;
     u8 cardRequested;
     u8 diceFollower;
-    u8 unk_176[2];
 } BoogieWork;
 
 typedef struct BoogieDiceWork {
     u32 state;
     s16 timer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;
@@ -44,21 +41,17 @@ typedef struct BoogieDiceWork {
     s32 vz;
     s32 speed;
     u8 angle;
-    u8 unk_159[0x3];
     s32 scaleX;
     s32 scaleY;
     s32 y;
     u8 counted;
-    u8 unk_169[0x3];
     BoogieWork* parent;
     u8 follower;
-    u8 unk_171[0x3];
 } BoogieDiceWork;
 
 typedef struct StatusObjDef {
     void* sprites;
     u16 spriteCount;
-    u16 unk_06;
 } StatusObjDef;
 
 typedef struct StatusAnimDef {
@@ -66,7 +59,6 @@ typedef struct StatusAnimDef {
     void** gfxTable;
     void* tiles;
     u16 animId;
-    u16 unk_0E;
 } StatusAnimDef;
 
 void BosBoogieApplyDiceFace(BoogieWork* work);

@@ -20,17 +20,17 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy15CommonAnimDefs[3] = {
-    { gEmy1500Frames, gEmy1500Anims, gEmy1500Tiles, 0, { 0, 0, 0 } },
-    { gEmy1502Frames, gEmy1502Anims, gEmy1502Tiles, 0, { 0, 0, 0 } },
-    { gEmy1501Frames, gEmy1501Anims, gEmy1501Tiles, 0, { 0, 0, 0 } },
+    { gEmy1500Frames, gEmy1500Anims, gEmy1500Tiles, 0 },
+    { gEmy1502Frames, gEmy1502Anims, gEmy1502Tiles, 0 },
+    { gEmy1501Frames, gEmy1501Anims, gEmy1501Tiles, 0 },
 };
 
 static const AnimDef sEmy15AnimDefs[5] = {
-    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 0, { 0, 0, 0 } },
-    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 1, { 0, 0, 0 } },
-    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 2, { 0, 0, 0 } },
-    { gEmy1511Frames, gEmy1511Anims, gEmy1511Tiles, 0, { 0, 0, 0 } },
-    { gEmy1511Frames, gEmy1511Anims, gEmy1511Tiles, 1, { 0, 0, 0 } },
+    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 0 },
+    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 1 },
+    { gEmy1510Frames, gEmy1510Anims, gEmy1510Tiles, 2 },
+    { gEmy1511Frames, gEmy1511Anims, gEmy1511Tiles, 0 },
+    { gEmy1511Frames, gEmy1511Anims, gEmy1511Tiles, 1 },
 };
 
 static const EmyDef sEmy15Def = { gEmy15Palette, sEmy15CommonAnimDefs, 192, 200, 2, 20, 64, 32, 32, 10, 0, { 10, 41, 35, 12, 16, 100, 0 } };

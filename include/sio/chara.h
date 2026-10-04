@@ -19,7 +19,6 @@ typedef struct ChgCardObjWork {
     s16 timer;
     s16 unk_02;
     s8 state;
-    u8 unk_05[0x03];
     s32* x;
     s32* y;
     s32* scaleX;
@@ -32,7 +31,6 @@ typedef struct ChgCardObjWork {
     u8 flipAngleY;
     u8 flipAngleX;
     s16 scale;
-    u8 unk_2E[0x02];
     s32 decel;
     s32 speed;
     s32 dirX;
@@ -58,19 +56,14 @@ typedef struct CharaObj {
     u32 z;
     u32 tilesAddr;
     u16 tileCount;
-    u8 unk_12[0x02];
     u32 tilesAddr2;
     u16 tileCount2;
-    u8 unk_1A[0x02];
     u32 tilesAddr3;
     u16 tileCount3;
-    u8 unk_22[0x02];
     u32 paletteAddr;
     u16 paletteSize;
-    u8 unk_2A[0x02];
     u32 tilesAddr4;
     u16 tileCount4;
-    u8 unk_32[0x02];
     u32 paletteAddr2;
     u16 paletteSize2;
     s16 fadeLevel;
@@ -78,14 +71,12 @@ typedef struct CharaObj {
     s16 fadeTick;
     s16 timer;
     u8 state;
-    u8 unk_45;
     u16 savedPalette[0x400];
     u16 fadedPalette[0x400];
     void (*callback)();
     struct BtlObj* prizeObj;
     u16 bankFadeEnabled[32];
     u16 flags;
-    u8 unk_1092[0x02];
 } CharaObj;
 
 typedef struct CharaPrizeArgs {

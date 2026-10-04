@@ -15,7 +15,6 @@ typedef struct GaEntryDef {
     AnimHeader** anims;
     void** gfxTable;
     u16 spriteCount;
-    u16 unk_22;
 } GaEntryDef;
 
 #endif

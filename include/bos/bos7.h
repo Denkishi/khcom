@@ -87,7 +87,6 @@ typedef struct LstCtrWork {
     s16 timer;
     s16 delay;
     u8 unk_010;
-    u8 unk_011;
     s16 duration;
     s32 curX;
     s32 curY;
@@ -135,7 +134,6 @@ typedef struct Vec3 {
 typedef struct LstLsrWork {
     s16 state;
     u8 angle;
-    u8 unk_003;
     s32 kind;
     s16* facing;
     u16* falCount;
@@ -180,7 +178,6 @@ typedef struct LstFalWork {
 
 typedef struct LstSnpWork {
     u8 angle;
-    u8 unk_001[0x3];
     s32 x;
     s32 y;
     s32 z;

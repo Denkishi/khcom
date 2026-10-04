@@ -3,7 +3,7 @@
 #endif
 
 static const MessageScriptEntry sEvent099Script[1] = {
-    { 0, 2, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent099Text00), MSG_SCRIPT_FLAG_END, 130 },
+    { 0, 2, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent099Text00), MSG_SCRIPT_FLAG_END, 130 },
 };
 
 #ifdef VERSION_JP
@@ -11,8 +11,8 @@ static const MessageScriptEntry sEvent099Script[1] = {
 #endif
 
 static const EventCameraKeyframe sEvent099Camera[2] = {
-    { -65536, 30720, 43008, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, NULL },
-    { -64536, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 60, { 0, 0 }, NULL },
+    { -65536, 30720, 43008, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64536, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 60, NULL },
 };
 
 static const EvSoundCue sEvent099SoundCues[3] = {
@@ -22,24 +22,23 @@ static const EvSoundCue sEvent099SoundCues[3] = {
 };
 
 static const EventCharaKeyframe sEvent099Track0[2] = {
-    { 18, 131, { 0, 0 }, 15360, 55296, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 13, 160, { 0, 0 }, 0, 0, 0, 64, { 0, 0 }, 32836, NULL, NULL },
+    { 18, 131, 15360, 55296, 0, 0, 66, NULL, NULL },
+    { 13, 160, 0, 0, 0, 64, 32836, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent099Track1[3] = {
-    { 932, 131, { 0, 0 }, 21248, 32768, -9728, 0, { 0, 0 }, 2, NULL, NULL },
-    { 933, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 932, 2200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+    { 932, 131, 21248, 32768, -9728, 0, 2, NULL, NULL },
+    { 933, 180, 0, 0, 0, 0, 5, NULL, NULL },
+    { 932, 2200, 0, 0, 0, 0, 32773, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent099Tracks[2] = {
-    { sEvent099Track0, 0, { 0, 0, 0 } },
-    { sEvent099Track1, 95, { 0, 0, 0 } },
+    { sEvent099Track0, 0 },
+    { sEvent099Track1, 95 },
 };
 
 const EventSequenceDef gEvent099 = {
     2,
-    { 0, 0, 0 },
     sEvent099Tracks,
     sEvent099Camera,
     sEvent099Script,
@@ -48,7 +47,6 @@ const EventSequenceDef gEvent099 = {
     160,
     0,
     1,
-    0,
     0,
     0,
     0,

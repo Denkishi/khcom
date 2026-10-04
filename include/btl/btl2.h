@@ -15,7 +15,6 @@ typedef struct BtlShadowWork {
 typedef struct BtlHpplyWork {
     s32 hpRatio;
     u8 firstUpdate;
-    u8 unk_05[0x03];
     void* palette2;
     void* palette;
     void* tiles;
@@ -33,7 +32,6 @@ typedef struct BtlHpplyWork {
     s16 prevHp;
     s16 displayHp;
     s16 gaugeSize;
-    u8 unk_66[0x02];
     u32 gaugeMode;
 } BtlHpplyWork;
 
@@ -44,7 +42,6 @@ typedef struct BtlHpenmWork {
     void* tiles3;
     s32 hpRatio;
     u8 visible;
-    u8 unk_15[0x03];
     BtlObj* actor;
     s16 gaugeSize;
     s16 displayHp;
@@ -57,7 +54,6 @@ typedef struct BtlPauseWork {
     void* gfx;
     void* gfx2;
     u8 visible;
-    u8 unk_11[0x03];
     s32 x;
     s32 y;
     s32 x2;
@@ -75,7 +71,6 @@ typedef struct BtlPopWork {
     s32 y;
     s32 z;
     s16 timer;
-    s16 unk_32;
 } BtlPopWork;
 
 typedef struct BtlEscapeWork {
@@ -89,7 +84,6 @@ typedef struct BtlEscapeWork {
     s32 progress;
     s16 timer;
     u8 visible;
-    u8 unk_23;
 } BtlEscapeWork;
 
 enum BtlPrizeFlag {
@@ -113,9 +107,7 @@ typedef struct BtlPrizeWork {
     s32 bounceSpeed;
     s16 timer;
     u8 spinSpeed;
-    u8 unk_2B;
     u16 flags;
-    u8 unk_2E[0x02];
     s32 collected;
     s32 orbitRadius;
     u16 exp;
@@ -123,7 +115,6 @@ typedef struct BtlPrizeWork {
     s32 vx;
     s32 vy;
     u8 angle;
-    u8 unk_45[0x03];
     BtlObj* actor;
 } BtlPrizeWork;
 
@@ -140,15 +131,12 @@ typedef struct BtlPremireWork {
     s32 bounceSpeed;
     s16 timer;
     u8 spinSpeed;
-    u8 unk_2B;
     u16 flags;
-    u8 unk_2E[0x02];
     s32 collected;
     s32 orbitRadius;
     s32 vx;
     s32 vy;
     u8 angle;
-    u8 unk_41[0x03];
     BtlObj* actor;
     AnimState anim;
 } BtlPremireWork;
@@ -160,7 +148,6 @@ typedef struct BtlPremireSrc {
     u8 unk_0C[0x06];
     s16 kind;
     s16 noTimeout;
-    s16 unk_16;
 } BtlPremireSrc;
 
 typedef struct BtlStartWork {

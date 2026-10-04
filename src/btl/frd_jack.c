@@ -27,11 +27,11 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFrdJackAnimDefs[5] = {
-    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 0, { 0, 0, 0 } },
-    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 1, { 0, 0, 0 } },
-    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 2, { 0, 0, 0 } },
-    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 3, { 0, 0, 0 } },
-    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 4, { 0, 0, 0 } },
+    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 0 },
+    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 1 },
+    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 2 },
+    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 3 },
+    { gUnk_09EDE594, gUnk_09EDE5B4, gUnk_08875122, 4 },
 };
 
 TaskDesc gTaskDescFrdJack = {

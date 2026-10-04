@@ -12,10 +12,8 @@ typedef struct MonsgageWork {
     void* gfx;
     void* gfx2;
     s16 timer;
-    u8 unk_1E[0x2];
     u32 state;
     u8 visible;
-    u8 unk_25[0x3];
 } MonsgageWork;
 
 void task_monsgage_0(MonsgageWork* work);

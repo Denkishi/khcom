@@ -20,14 +20,14 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sHumLeonAnimDefs[5] = {
-    { gReonFl00Frames, gReonFl00Anims, gReonFl00Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 0, { 0, 0, 0 } },
-    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 3, { 0, 0, 0 } },
-    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 1, { 0, 0, 0 } },
-    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 2, { 0, 0, 0 } },
+    { gReonFl00Frames, gReonFl00Anims, gReonFl00Tiles, 0 },
+    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 0 },
+    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 3 },
+    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 1 },
+    { gUnk_09EE25D0, gUnk_09EE25E4, gUnk_08C6668E, 2 },
 };
 
-static const HumDef sHumLeonDef = { 128, 0, gReonPalette, 0, { 41, 99, 64, 14, 40, 99, 0 } };
+static const HumDef sHumLeonDef = { 128, gReonPalette, 0, { 41, 99, 64, 14, 40, 99, 0 } };
 
 TaskDesc gTaskDescHumLeon = {
     "task_hum_leon",

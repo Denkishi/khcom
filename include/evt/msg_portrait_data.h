@@ -11,7 +11,6 @@ typedef struct MsgFaceAnim {
     AnimHeader** anims;
     u8 animCount;
     u8 animFlags;
-    u8 unk_12[2];
 } MsgFaceAnim;
 
 extern const MsgFaceAnim* gMsgFaceAnims[62];

@@ -23,9 +23,7 @@ typedef struct GaEntryWork {
     BtlObj actor;
     u8 unk_110[0x02];
     u8 rotation;
-    u8 unk_113;
     u16 landSteps;
-    u8 unk_116[0x02];
     s32 rotationFixed;
     s32 mode;
     s32 vz;
@@ -43,12 +41,10 @@ typedef struct GaEntryWork {
     s32 baseVz;
     s32 baseAccelZ;
     u8 bobAngle;
-    u8 unk_159;
     u16 flags;
     s16 counter;
     u16 x2;
     u16 y2;
-    u8 unk_162[0x02];
     s32 vx;
     s32 vy;
     TaskPool tasks;
@@ -57,7 +53,6 @@ typedef struct GaEntryWork {
     void* gfx;
     u32 index;
     u8 orbitAngle;
-    u8 unk_1A5;
     s16 flashTimer;
 } GaEntryWork;
 
@@ -70,10 +65,8 @@ typedef struct GaWork {
     s16 timer;
     s16 stepsLeft;
     s16 unk_014;
-    u8 unk_016[0x02];
     s32 flipped;
     u8 angle;
-    u8 unk_01D[0x03];
     GaEntryWork entries[6];
     AnimState anim;
     ObjTiles* tiles;
@@ -88,7 +81,6 @@ typedef struct GaWork {
     s32 attackToggle;
     s16 cardTimer;
     u8 cardActionSeen;
-    u8 unk_A53;
 } GaWork;
 
 #endif

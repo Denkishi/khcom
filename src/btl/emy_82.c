@@ -24,18 +24,18 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy82CommonAnimDefs[3] = {
-    { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0, { 0, 0, 0 } },
-    { gEmy8202Frames, gEmy8202Anims, gEmy8202Tiles, 0, { 0, 0, 0 } },
-    { gEmy8201Frames, gEmy8201Anims, gEmy8201Tiles, 0, { 0, 0, 0 } },
+    { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0 },
+    { gEmy8202Frames, gEmy8202Anims, gEmy8202Tiles, 0 },
+    { gEmy8201Frames, gEmy8201Anims, gEmy8201Tiles, 0 },
 };
 
 static const AnimDef sEmy82AnimDefs[6] = {
-    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 0, { 0, 0, 0 } },
-    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 1, { 0, 0, 0 } },
-    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 2, { 0, 0, 0 } },
-    { gEmy8210Frames, gEmy8210Anims, gEmy8210Tiles, 0, { 0, 0, 0 } },
-    { gEmy8211Frames, gEmy8211Anims, gEmy8211Tiles, 0, { 0, 0, 0 } },
-    { gEmy8212Frames, gEmy8212Anims, gEmy8212Tiles, 0, { 0, 0, 0 } },
+    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 0 },
+    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 1 },
+    { gEmy8210jFrames, gEmy8210jAnims, gEmy8210jTiles, 2 },
+    { gEmy8210Frames, gEmy8210Anims, gEmy8210Tiles, 0 },
+    { gEmy8211Frames, gEmy8211Anims, gEmy8211Tiles, 0 },
+    { gEmy8212Frames, gEmy8212Anims, gEmy8212Tiles, 0 },
 };
 
 static const EmyDef sEmy82Def = { gEmy82Palette, sEmy82CommonAnimDefs, 204, 3, 20, 20, 48, 32, 32, 1, 0, { 30, 66, 32, 10, 16, 100, 0 } };

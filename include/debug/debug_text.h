@@ -9,7 +9,6 @@ typedef struct DebugTextLine {
     u8 y;
     u8 unk_7C;
     u8 length;
-    u8 unk_7E[2];
     u32 font;
 } DebugTextLine;
 

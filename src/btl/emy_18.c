@@ -20,16 +20,16 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy18CommonAnimDefs[3] = {
-    { gEmy1800Frames, gEmy1800Anims, gEmy1800Tiles, 0, { 0, 0, 0 } },
-    { gEmy1802Frames, gEmy1802Anims, gEmy1802Tiles, 0, { 0, 0, 0 } },
-    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 1, { 0, 0, 0 } },
+    { gEmy1800Frames, gEmy1800Anims, gEmy1800Tiles, 0 },
+    { gEmy1802Frames, gEmy1802Anims, gEmy1802Tiles, 0 },
+    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 1 },
 };
 
 static const AnimDef sEmy18AnimDefs[4] = {
-    { gEmy1810Frames, gEmy1810Anims, gEmy1810Tiles, 0, { 0, 0, 0 } },
-    { gEmy1811Frames, gEmy1811Anims, gEmy1811Tiles, 0, { 0, 0, 0 } },
-    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 0, { 0, 0, 0 } },
-    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 2, { 0, 0, 0 } },
+    { gEmy1810Frames, gEmy1810Anims, gEmy1810Tiles, 0 },
+    { gEmy1811Frames, gEmy1811Anims, gEmy1811Tiles, 0 },
+    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 0 },
+    { gEmy1801Frames, gEmy1801Anims, gEmy1801Tiles, 2 },
 };
 
 static const EmyDef sEmy18Def = { gEmy18Palette, sEmy18CommonAnimDefs, 768, 150, 4, 20, 40, 24, 16, 10, 0, { 12, 45, 40, 8, 16, 100, 0 } };

@@ -37,11 +37,9 @@ typedef struct CardDef {
     u16 kind;
     u16 flags;
     u8 value;
-    u8 unk_21[0x03];
     u32 move;
     u16 catalogNumber;
     u8 category;
-    u8 unk_2B;
     u16 cpCost;
     u8 unk_2E[0x06];
 } CardDef;
@@ -59,11 +57,9 @@ typedef struct CardStat {
     u16 unk_00;
     u16 unk_02;
     u8 value;
-    u8 unk_05[0x03];
     u32 unk_08;
     u16 unk_0C;
     u8 category;
-    u8 unk_0F;
     u16 cpCost;
     u8 unk_12[0x06];
 } CardStat;

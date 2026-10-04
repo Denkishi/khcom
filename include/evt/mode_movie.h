@@ -9,10 +9,8 @@ typedef struct MovieSub {
     s16 x;
     const TextChar* text;
     u8 line;
-    u8 unk_09;
     u16 duration;
     u16 palette;
-    u16 unk_0E;
 } MovieSub;
 
 enum MovieFlag {

@@ -53,46 +53,46 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
-    { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },
-    { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EDF860, gUnk_09EDF880, gUnk_08958AC8, 0, { 0, 0, 0 } },
-    { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EDF8A8, gUnk_09EDF8C8, gUnk_0895B2C0, 0, { 0, 0, 0 } },
-    { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EDF97C, gUnk_09EDF9A4, gUnk_0896213C, 0, { 0, 0, 0 } },
-    { gEmy00L07Frames, gEmy00L07Anims, gEmy00L07Tiles, 0, { 0, 0, 0 } },
-    { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0, { 0, 0, 0 } },
-    { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0, { 0, 0, 0 } },
+    { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
+    { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
+    { gUnk_09EDF860, gUnk_09EDF880, gUnk_08958AC8, 0 },
+    { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0 },
+    { gUnk_09EDF8A8, gUnk_09EDF8C8, gUnk_0895B2C0, 0 },
+    { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 0 },
+    { gUnk_09EDF97C, gUnk_09EDF9A4, gUnk_0896213C, 0 },
+    { gEmy00L07Frames, gEmy00L07Anims, gEmy00L07Tiles, 0 },
+    { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0 },
+    { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0 },
 };
 
 const AnimDef gUnk_0984BC3C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1,
 };
 
 const AnimDef gUnk_0984BC4C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1,
 };
 
 const AnimDef gUnk_0984BC5C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0,
 };
 
 const AnimDef gUnk_0984BC6C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0,
 };
 
 const AnimDef gUnk_0984BC7C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2,
 };
 
 const AnimDef gUnk_0984BC8C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2, { 0, 0, 0 },
+    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2,
 };
 
 const MapEnmDef gMapEnm00Def = {
     sMapEnm00AnimDefs, gEmy00Palette,
-    32, 8, 16, 0,
-    &gTaskDescMapEnm00, MAP_ENM_DEF_FLAG_NO_SHADOW, 0,
+    32, 8, 16,
+    &gTaskDescMapEnm00, MAP_ENM_DEF_FLAG_NO_SHADOW,
 };
 
 TaskDesc gTaskDescMapEnm00 = {
@@ -105,18 +105,18 @@ TaskDesc gTaskDescMapEnm00 = {
 };
 
 static const AnimDef sMapEnm01AnimDefs[6] = {
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
-    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3, { 0, 0, 0 } },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 0 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 2 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3 },
+    { gEmy01L00Frames, gEmy01L00Anims, gEmy01L00Tiles, 3 },
 };
 
 const MapEnmDef gMapEnm01Def = {
     sMapEnm01AnimDefs, gEmy01Palette,
-    17, 16, 16, 0,
-    &gTaskDescMapEnm01, MAP_ENM_DEF_FLAG_AIRBORNE, 0,
+    17, 16, 16,
+    &gTaskDescMapEnm01, MAP_ENM_DEF_FLAG_AIRBORNE,
 };
 
 TaskDesc gTaskDescMapEnm01 = {
@@ -129,22 +129,22 @@ TaskDesc gTaskDescMapEnm01 = {
 };
 
 static const AnimDef sMapEnm02AnimDefs[2] = {
-    { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
-    { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0, { 0, 0, 0 } },
+    { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0 },
+    { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0 },
 };
 
 const AnimDef gUnk_0984BD6C = {
-    gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0, { 0, 0, 0 },
+    gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0,
 };
 
 const AnimDef gUnk_0984BD7C = {
-    gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0, { 0, 0, 0 },
+    gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0,
 };
 
 const MapEnmDef gMapEnm02Def = {
     sMapEnm02AnimDefs, gEmy38Palette,
-    106, 48, 36, 0,
-    &gTaskDescMapEnm02, MAP_ENM_DEF_FLAG_GUARD, 0,
+    106, 48, 36,
+    &gTaskDescMapEnm02, MAP_ENM_DEF_FLAG_GUARD,
 };
 
 TaskDesc gTaskDescMapEnm02 = {
@@ -157,24 +157,24 @@ TaskDesc gTaskDescMapEnm02 = {
 };
 
 static const AnimDef sMapEnm03AnimDefs[4] = {
-    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
-    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
-    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
-    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0, { 0, 0, 0 } },
+    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0 },
+    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0 },
+    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0 },
+    { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0 },
 };
 
 const AnimDef gUnk_0984BDF4 = {
-    gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0, { 0, 0, 0 },
+    gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0,
 };
 
 const AnimDef gUnk_0984BE04 = {
-    gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0, { 0, 0, 0 },
+    gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0,
 };
 
 const MapEnmDef gMapEnm03Def = {
     sMapEnm03AnimDefs, gEmy29Palette,
-    73, 56, 36, 0,
-    &gTaskDescMapEnm03, MAP_ENM_DEF_FLAG_AIRBORNE | MAP_ENM_DEF_FLAG_GUARD, 0,
+    73, 56, 36,
+    &gTaskDescMapEnm03, MAP_ENM_DEF_FLAG_AIRBORNE | MAP_ENM_DEF_FLAG_GUARD,
 };
 
 TaskDesc gTaskDescMapEnm03 = {
@@ -187,18 +187,18 @@ TaskDesc gTaskDescMapEnm03 = {
 };
 
 static const AnimDef sMapEnm04AnimDefs[6] = {
-    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0, { 0, 0, 0 } },
-    { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0, { 0, 0, 0 } },
-    { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0, { 0, 0, 0 } },
-    { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0, { 0, 0, 0 } },
-    { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0, { 0, 0, 0 } },
+    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0 },
+    { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0 },
+    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0 },
+    { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0 },
+    { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0 },
+    { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0 },
 };
 
 const MapEnmDef gMapEnm04Def = {
     sMapEnm04AnimDefs, gEmy06Palette,
-    34, 16, 12, 0,
-    &gTaskDescMapEnm04, MAP_ENM_DEF_FLAG_AIRBORNE, 0,
+    34, 16, 12,
+    &gTaskDescMapEnm04, MAP_ENM_DEF_FLAG_AIRBORNE,
 };
 
 TaskDesc gTaskDescMapEnm04 = {
@@ -211,20 +211,20 @@ TaskDesc gTaskDescMapEnm04 = {
 };
 
 static const AnimDef sMapEnm05AnimDefs[8] = {
-    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
+    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0 },
+    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0 },
+    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
+    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
+    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0 },
+    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0 },
+    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0 },
+    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0 },
 };
 
 const MapEnmDef gMapEnm05Def = {
     sMapEnm05AnimDefs, gEmy07Palette,
-    26, 16, 12, 0,
-    &gTaskDescMapEnm05, MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE, 0,
+    26, 16, 12,
+    &gTaskDescMapEnm05, MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE,
 };
 
 TaskDesc gTaskDescMapEnm05 = {
@@ -237,20 +237,20 @@ TaskDesc gTaskDescMapEnm05 = {
 };
 
 static const AnimDef sMapEnm06AnimDefs[8] = {
-    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
+    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0 },
+    { gEmy07Fl01Frames, gEmy07Fl01Anims, gEmy07Fl01Tiles, 0 },
+    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
+    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
+    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0 },
+    { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0 },
+    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0 },
+    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0 },
 };
 
 const MapEnmDef gMapEnm06Def = {
     sMapEnm06AnimDefs, gEmy07bPalette,
-    26, 16, 12, 0,
-    &gTaskDescMapEnm06, MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE, 0,
+    26, 16, 12,
+    &gTaskDescMapEnm06, MAP_ENM_DEF_FLAG_SPAWN_ANYWHERE,
 };
 
 TaskDesc gTaskDescMapEnm06 = {
@@ -4663,8 +4663,8 @@ void Task_MapTalk_3(MapTalkWork* work) {
 }
 
 const MapGmkDef gMapGmk01Def = {
-    gUnk_099912C4, gUnk_09858320, 0x200, 0, 0, gUnk_09EF8414, gUnk_09EF841C,
-    1, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, 0, &gTaskDescMapGmk01,
+    gUnk_099912C4, gUnk_09858320, 0x200, gUnk_09EF8414, gUnk_09EF841C,
+    1, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, &gTaskDescMapGmk01,
 };
 
 TaskDesc gTaskDescMapGmk01 = {
@@ -4677,8 +4677,8 @@ TaskDesc gTaskDescMapGmk01 = {
 };
 
 const MapGmkDef gMapGmkBarrelDef = {
-    gUnk_099912E4, gUnk_09858B3C, 0x400, 0, 0, gUnk_09EF8424, gUnk_09EF8460,
-    1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, 0, &gTaskDescMapGmkBarrel,
+    gUnk_099912E4, gUnk_09858B3C, 0x400, gUnk_09EF8424, gUnk_09EF8460,
+    1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, &gTaskDescMapGmkBarrel,
 };
 
 TaskDesc gTaskDescMapGmkBarrel = {
@@ -4691,8 +4691,8 @@ TaskDesc gTaskDescMapGmkBarrel = {
 };
 
 const MapGmkDef gMapGmk04Def = {
-    gUnk_09991324, gUnk_0985ADAA, 0x400, 0, 0, gUnk_09EF8494, gUnk_09EF84A4,
-    1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk04,
+    gUnk_09991324, gUnk_0985ADAA, 0x400, gUnk_09EF8494, gUnk_09EF84A4,
+    1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, &gTaskDescMapGmk04,
 };
 
 TaskDesc gTaskDescMapGmk04 = {
@@ -4705,8 +4705,8 @@ TaskDesc gTaskDescMapGmk04 = {
 };
 
 const MapGmkDef gMapGmk05Def = {
-    gMoguPalette, gMoguFl00Tiles, 0x100, 0, 0, gMoguFl00Frames, gMoguFl00Anims,
-    1, 13, 0, 0, 0, 16, 24, SONG_SYS_MOUGURI, 0, &gTaskDescMapGmk05,
+    gMoguPalette, gMoguFl00Tiles, 0x100, gMoguFl00Frames, gMoguFl00Anims,
+    1, 13, 0, 0, 0, 16, 24, SONG_SYS_MOUGURI, &gTaskDescMapGmk05,
 };
 
 TaskDesc gTaskDescMapGmk05 = {
@@ -4719,8 +4719,8 @@ TaskDesc gTaskDescMapGmk05 = {
 };
 
 const MapGmkDef gMapGmk06Def = {
-    gMapGmk06Palette, gUnk_0985BDEA, 0x400, 0, 0, gUnk_09EF84A8, gUnk_09EF84B8,
-    1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, 0, &gTaskDescMapGmk06,
+    gMapGmk06Palette, gUnk_0985BDEA, 0x400, gUnk_09EF84A8, gUnk_09EF84B8,
+    1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, &gTaskDescMapGmk06,
 };
 
 TaskDesc gTaskDescMapGmk06 = {

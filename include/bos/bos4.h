@@ -14,7 +14,6 @@
 typedef struct BoogieExplosiondiceWork {
     u32 state;
     u16 timer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;
@@ -24,14 +23,12 @@ typedef struct BoogieExplosiondiceWork {
     u32 vz;
     u32 speed;
     u8 angle;
-    u8 unk_159[0x3];
     BoogieWork* boogie;
 } BoogieExplosiondiceWork;
 
 typedef struct BoogieDiskWork {
     u32 state;
     u16 timer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;
@@ -42,7 +39,6 @@ typedef struct BoogieDiskWork {
     s32 vx;
     s32 vy;
     u8 angle;
-    u8 unk_15D[0x3];
 } BoogieDiskWork;
 
 typedef struct BoogieMapanimeWork {
@@ -51,7 +47,6 @@ typedef struct BoogieMapanimeWork {
 
 typedef struct UrsulaThunderWork {
     u16 strikeStarted;
-    u8 unk_002[0x2];
     s32 x;
     s32 y;
     s32 z;
@@ -76,7 +71,6 @@ typedef struct UrsulaBubbleSingleWork {
 #endif
     BtlObj obj;
     u16 timer;
-    u8 unk_136[0x2];
     u32 state;
     u16 angle;
     u16 targetAngle;
@@ -89,7 +83,6 @@ void task_bos_ursula_bubble_single_3(UrsulaBubbleSingleWork* work);
 typedef struct BoogieKnifereaderWork {
     u32 state;
     u16 timer;
-    u8 unk_006[0x2];
     TaskPool tasks;
     BtlObj obj;
     Task* knives[5];
@@ -100,7 +93,6 @@ typedef struct UrsulaBubbleWork {
     TaskPool tasks;
     Task* bubbles[10];
     u16 bubbleCount;
-    u8 unk_042[0x2];
 #ifdef VERSION_EU
     AnimState anim;
 #endif
@@ -128,18 +120,15 @@ typedef struct BoogieSakuWork {
     ObjPalette* palette;
     AnimState anim;
     u16 openTimer;
-    u8 unk_022[0x2];
     BoogieWork* boogie;
     TaskPool tasks;
     Task* task;
     u8 closePending;
-    u8 unk_041[0x3];
 } BoogieSakuWork;
 
 typedef struct BoogieKnifeWork {
     u32 state;
     u16 timer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;
@@ -157,7 +146,6 @@ typedef struct BoogieKnifeWork {
 typedef struct BoogieKaihukuWork {
     u32 state;
     u16 timer;
-    u8 unk_006[0x2];
     ObjTiles* tiles;
     ObjPalette* palette;
     ObjPalette* palette2;

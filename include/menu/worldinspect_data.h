@@ -21,17 +21,13 @@ typedef struct WorldinspectMsg {
     u16 world;
     void* palette;
     u16 paletteSize;
-    u8 unk_0A[0x02];
     void* tiles;
     u16 tilesSize;
-    u8 unk_12[0x02];
     void* sprite;
     void* palette2;
     u16 paletteSize2;
-    u8 unk_1E[0x02];
     void* tiles2;
     u16 tilesSize2;
-    u8 unk_26[0x02];
     void* sprite2;
     const void* text;
     u16 descId;

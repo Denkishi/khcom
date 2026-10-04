@@ -3,7 +3,7 @@
 #endif
 
 static const MessageScriptEntry sEvent148Script[1] = {
-    { 0, 7, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent148Text00), MSG_SCRIPT_FLAG_END, 150 },
+    { 0, 7, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent148Text00), MSG_SCRIPT_FLAG_END, 150 },
 };
 
 #ifdef VERSION_JP
@@ -15,32 +15,30 @@ static const EvSoundCue sEvent148SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent148Camera[1] = {
-    { -64537, 790528, 416512, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -64537, 790528, 416512, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent148Track0[6] = {
-    { 2, 80, { 0, 0 }, 790528, 419840, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 1, 90, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 2, 100, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 3, 110, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 4, 120, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 4, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+    { 2, 80, 790528, 419840, 0, 0, 66, NULL, NULL },
+    { 1, 90, 0, 0, 0, 0, 5, NULL, NULL },
+    { 2, 100, 0, 0, 0, 0, 5, NULL, NULL },
+    { 3, 110, 0, 0, 0, 0, 5, NULL, NULL },
+    { 4, 120, 0, 0, 0, 0, 5, NULL, NULL },
+    { 4, 1000, 0, 0, 0, 0, 32773, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent148Tracks[1] = {
-    { sEvent148Track0, 0, { 0, 0, 0 } },
+    { sEvent148Track0, 0 },
 };
 
 const EventSequenceDef gEvent148 = {
     1,
-    { 0, 0, 0 },
     sEvent148Tracks,
     sEvent148Camera,
     sEvent148Script,
     sEvent148SoundCues,
     NULL,
     210,
-    0,
     0,
     0,
     0,

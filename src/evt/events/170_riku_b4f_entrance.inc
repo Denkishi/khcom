@@ -3,8 +3,8 @@
 #endif
 
 static const MessageScriptEntry sEvent170Script[2] = {
-    { 26, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent170Text00), 0, 250 },
-    { 26, 5, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent170Text01), MSG_SCRIPT_FLAG_END, 350 },
+    { 26, 0, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent170Text00), 0, 250 },
+    { 26, 5, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent170Text01), MSG_SCRIPT_FLAG_END, 350 },
 };
 
 #ifdef VERSION_JP
@@ -16,31 +16,30 @@ static const EvSoundCue sEvent170SoundCues[1] = {
 };
 
 static const EventCameraKeyframe sEvent170Camera[1] = {
-    { -64537, 190976, 59648, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -64537, 190976, 59648, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent170Track0[5] = {
-    { 515, 1, { 0, 0 }, 156416, 83968, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 518, 140, { 0, 0 }, 187136, 67840, 0, 515, { 0, 0 }, 67, NULL, NULL },
-    { 515, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 557, 1000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 515, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 515, 1, 156416, 83968, 0, 0, 66, NULL, NULL },
+    { 518, 140, 187136, 67840, 0, 515, 67, NULL, NULL },
+    { 515, 170, 0, 0, 0, 0, 69, NULL, NULL },
+    { 557, 1000, 0, 0, 0, 0, 69, NULL, NULL },
+    { 515, 3000, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent170Track1[3] = {
-    { 603, 203, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 603, 1000, { 0, 0 }, 187136, 67840, 0, 0, { 0, 0 }, 338, NULL, NULL },
-    { 603, 3000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 603, 203, 0, 0, 0, 0, 66, NULL, NULL },
+    { 603, 1000, 187136, 67840, 0, 0, 338, NULL, NULL },
+    { 603, 3000, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent170Tracks[2] = {
-    { sEvent170Track0, 44, { 0, 0, 0 } },
-    { sEvent170Track1, 50, { 0, 0, 0 } },
+    { sEvent170Track0, 44 },
+    { sEvent170Track1, 50 },
 };
 
 const EventSequenceDef gEvent170 = {
     2,
-    { 0, 0, 0 },
     sEvent170Tracks,
     sEvent170Camera,
     sEvent170Script,
@@ -48,7 +47,6 @@ const EventSequenceDef gEvent170 = {
     NULL,
     410,
     1,
-    0,
     0,
     0,
     0,

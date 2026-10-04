@@ -68,7 +68,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0001Tiles,
@@ -77,7 +76,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0001Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0002Tiles,
@@ -86,7 +84,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0002Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0003Tiles,
@@ -95,7 +92,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0003Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0004Tiles,
@@ -104,7 +100,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0004Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0005Tiles,
@@ -113,7 +108,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0005Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0005Tiles,
@@ -122,7 +116,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0005Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0000Tiles,
@@ -131,7 +124,6 @@ static const MsgFaceAnim sTalk00FaceAnims[8] = {
         gTalk0000Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -143,7 +135,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0100Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0101Tiles,
@@ -152,7 +143,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0101Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0102Tiles,
@@ -161,7 +151,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0102Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0103Tiles,
@@ -170,7 +159,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0103Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0104Tiles,
@@ -179,7 +167,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0104Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0105Tiles,
@@ -188,7 +175,6 @@ static const MsgFaceAnim sTalk01FaceAnims[6] = {
         gTalk0105Anims,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -200,7 +186,6 @@ static const MsgFaceAnim sTalk22FaceAnims[5] = {
         gTalk0100Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0101Tiles,
@@ -209,7 +194,6 @@ static const MsgFaceAnim sTalk22FaceAnims[5] = {
         gTalk0101Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0102Tiles,
@@ -218,7 +202,6 @@ static const MsgFaceAnim sTalk22FaceAnims[5] = {
         gTalk0102Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0103Tiles,
@@ -227,7 +210,6 @@ static const MsgFaceAnim sTalk22FaceAnims[5] = {
         gTalk0103Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0105Tiles,
@@ -236,7 +218,6 @@ static const MsgFaceAnim sTalk22FaceAnims[5] = {
         gTalk0105Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -248,7 +229,6 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0200Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0201Tiles,
@@ -257,7 +237,6 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0201Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0202Tiles,
@@ -266,7 +245,6 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0202Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0203Tiles,
@@ -275,7 +253,6 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0203Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0204Tiles,
@@ -284,7 +261,6 @@ static const MsgFaceAnim sTalk02FaceAnims[5] = {
         gTalk0204Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -296,7 +272,6 @@ static const MsgFaceAnim sTalk23FaceAnims[3] = {
         gTalk0200Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0201Tiles,
@@ -305,7 +280,6 @@ static const MsgFaceAnim sTalk23FaceAnims[3] = {
         gTalk0201Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0202Tiles,
@@ -314,7 +288,6 @@ static const MsgFaceAnim sTalk23FaceAnims[3] = {
         gTalk0202Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -325,7 +298,6 @@ static const MsgFaceAnim sTalk03FaceAnims = {
     gTalk0300Anims,
     2,
     1,
-    { 0, 0 },
 };
 
 static const MsgFaceAnim sTalk04FaceAnims[4] = {
@@ -336,7 +308,6 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0400Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0401Tiles,
@@ -345,7 +316,6 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0401Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0402Tiles,
@@ -354,7 +324,6 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0402Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0403Tiles,
@@ -363,7 +332,6 @@ static const MsgFaceAnim sTalk04FaceAnims[4] = {
         gTalk0403Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -375,7 +343,6 @@ static const MsgFaceAnim sTalk05FaceAnims[4] = {
         gTalk0500Anims,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk0500Tiles,
@@ -384,7 +351,6 @@ static const MsgFaceAnim sTalk05FaceAnims[4] = {
         gTalk0500Anims + 2,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk0500Tiles,
@@ -393,7 +359,6 @@ static const MsgFaceAnim sTalk05FaceAnims[4] = {
         gTalk0500Anims + 4,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk0500Tiles,
@@ -402,7 +367,6 @@ static const MsgFaceAnim sTalk05FaceAnims[4] = {
         gTalk0500Anims + 6,
         8,
         1,
-        { 0, 0 },
     },
 };
 
@@ -414,7 +378,6 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Anims,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk0600Tiles,
@@ -423,7 +386,6 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Anims + 2,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk0600Tiles,
@@ -432,7 +394,6 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Anims + 4,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk0600Tiles,
@@ -441,7 +402,6 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Anims + 6,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk0600Tiles,
@@ -450,7 +410,6 @@ static const MsgFaceAnim sTalk06FaceAnims[5] = {
         gTalk0600Anims + 8,
         10,
         1,
-        { 0, 0 },
     },
 };
 
@@ -461,7 +420,6 @@ static const MsgFaceAnim sTalk07FaceAnims = {
     gTalk0700Anims,
     2,
     1,
-    { 0, 0 },
 };
 
 static const MsgFaceAnim sTalk08FaceAnims[2] = {
@@ -472,7 +430,6 @@ static const MsgFaceAnim sTalk08FaceAnims[2] = {
         gTalk0800Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk0800Tiles,
@@ -481,7 +438,6 @@ static const MsgFaceAnim sTalk08FaceAnims[2] = {
         gTalk0800Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -493,7 +449,6 @@ static const MsgFaceAnim sTalk09FaceAnims[2] = {
         gTalk0900Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk0900Tiles,
@@ -502,7 +457,6 @@ static const MsgFaceAnim sTalk09FaceAnims[2] = {
         gTalk0900Anims + 1,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -514,7 +468,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1000Tiles,
@@ -523,7 +476,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims + 2,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1000Tiles,
@@ -532,7 +484,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims + 4,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1000Tiles,
@@ -541,7 +492,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims + 6,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1000Tiles,
@@ -550,7 +500,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims + 8,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1000Tiles,
@@ -559,7 +508,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1000Anims + 10,
         12,
         1,
-        { 0, 0 },
     },
     {
         gTalk1002Tiles,
@@ -568,7 +516,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1002Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1002Tiles,
@@ -577,7 +524,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1002Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1002Tiles,
@@ -586,7 +532,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1002Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1003Tiles,
@@ -595,7 +540,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1003Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1003Tiles,
@@ -604,7 +548,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1003Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1003Tiles,
@@ -613,7 +556,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1003Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1004Tiles,
@@ -622,7 +564,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1004Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1004Tiles,
@@ -631,7 +572,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1004Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1004Tiles,
@@ -640,7 +580,6 @@ static const MsgFaceAnim sTalk10FaceAnims[15] = {
         gTalk1004Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -652,7 +591,6 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1100Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1101Tiles,
@@ -661,7 +599,6 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1101Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1102Tiles,
@@ -670,7 +607,6 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1102Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1103Tiles,
@@ -679,7 +615,6 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1103Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1104Tiles,
@@ -688,7 +623,6 @@ static const MsgFaceAnim sTalk11FaceAnims[5] = {
         gTalk1104Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -700,7 +634,6 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1200Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1201Tiles,
@@ -709,7 +642,6 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1201Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1202Tiles,
@@ -718,7 +650,6 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1202Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1203Tiles,
@@ -727,7 +658,6 @@ static const MsgFaceAnim sTalk12FaceAnims[4] = {
         gTalk1203Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -739,7 +669,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Anims,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1300Tiles,
@@ -748,7 +677,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Anims + 2,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1300Tiles,
@@ -757,7 +685,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Anims + 4,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1300Tiles,
@@ -766,7 +693,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1300Anims + 6,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1301Tiles,
@@ -775,7 +701,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1301Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk1301Tiles,
@@ -784,7 +709,6 @@ static const MsgFaceAnim sTalk13FaceAnims[6] = {
         gTalk1301Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -796,7 +720,6 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1400Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1401Tiles,
@@ -805,7 +728,6 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1401Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1402Tiles,
@@ -814,7 +736,6 @@ static const MsgFaceAnim sTalk14FaceAnims[3] = {
         gTalk1402Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -826,7 +747,6 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1500Tiles,
@@ -835,7 +755,6 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1502Tiles,
@@ -844,7 +763,6 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1502Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1503Tiles,
@@ -853,7 +771,6 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1503Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk1500Tiles,
@@ -862,7 +779,6 @@ static const MsgFaceAnim sTalk15FaceAnims[5] = {
         gTalk1500Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -874,7 +790,6 @@ static const MsgFaceAnim sTalk16FaceAnims[4] = {
         gTalk1600Anims,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1600Tiles,
@@ -883,7 +798,6 @@ static const MsgFaceAnim sTalk16FaceAnims[4] = {
         gTalk1600Anims + 2,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1600Tiles,
@@ -892,7 +806,6 @@ static const MsgFaceAnim sTalk16FaceAnims[4] = {
         gTalk1600Anims + 4,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk1600Tiles,
@@ -901,7 +814,6 @@ static const MsgFaceAnim sTalk16FaceAnims[4] = {
         gTalk1600Anims + 6,
         8,
         1,
-        { 0, 0 },
     },
 };
 
@@ -913,7 +825,6 @@ static const MsgFaceAnim sTalk17FaceAnims[3] = {
         gTalk1700Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1700Tiles,
@@ -922,7 +833,6 @@ static const MsgFaceAnim sTalk17FaceAnims[3] = {
         gTalk1700Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1700Tiles,
@@ -931,7 +841,6 @@ static const MsgFaceAnim sTalk17FaceAnims[3] = {
         gTalk1700Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -943,7 +852,6 @@ static const MsgFaceAnim sTalk18FaceAnims[3] = {
         gTalk1800Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1800Tiles,
@@ -952,7 +860,6 @@ static const MsgFaceAnim sTalk18FaceAnims[3] = {
         gTalk1800Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1800Tiles,
@@ -961,7 +868,6 @@ static const MsgFaceAnim sTalk18FaceAnims[3] = {
         gTalk1800Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -973,7 +879,6 @@ static const MsgFaceAnim sTalk19FaceAnims[3] = {
         gTalk1900Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1900Tiles,
@@ -982,7 +887,6 @@ static const MsgFaceAnim sTalk19FaceAnims[3] = {
         gTalk1900Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk1900Tiles,
@@ -991,7 +895,6 @@ static const MsgFaceAnim sTalk19FaceAnims[3] = {
         gTalk1900Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1003,7 +906,6 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2000Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2001Tiles,
@@ -1012,7 +914,6 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2001Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2002Tiles,
@@ -1021,7 +922,6 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2002Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2003Tiles,
@@ -1030,7 +930,6 @@ static const MsgFaceAnim sTalk20FaceAnims[4] = {
         gTalk2003Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1042,7 +941,6 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2100Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2101Tiles,
@@ -1051,7 +949,6 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2101Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2102Tiles,
@@ -1060,7 +957,6 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2102Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2103Tiles,
@@ -1069,7 +965,6 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2103Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2104Tiles,
@@ -1078,7 +973,6 @@ static const MsgFaceAnim sTalk21FaceAnims[5] = {
         gTalk2104Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1089,7 +983,6 @@ static const MsgFaceAnim sTalk36FaceAnims = {
     gTalk3600Anims,
     2,
     1,
-    { 0, 0 },
 };
 
 static const MsgFaceAnim sTalk37FaceAnims[2] = {
@@ -1100,7 +993,6 @@ static const MsgFaceAnim sTalk37FaceAnims[2] = {
         gTalk3700Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk3700Tiles,
@@ -1109,7 +1001,6 @@ static const MsgFaceAnim sTalk37FaceAnims[2] = {
         gTalk3700Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1121,7 +1012,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2400Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2401Tiles,
@@ -1130,7 +1020,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2401Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2402Tiles,
@@ -1139,7 +1028,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2402Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2403Tiles,
@@ -1148,7 +1036,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2403Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2404Tiles,
@@ -1157,7 +1044,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2404Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2405Tiles,
@@ -1166,7 +1052,6 @@ static const MsgFaceAnim sTalk24FaceAnims[6] = {
         gTalk2405Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1178,7 +1063,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2500Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2501Tiles,
@@ -1187,7 +1071,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2501Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2502Tiles,
@@ -1196,7 +1079,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2502Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2503Tiles,
@@ -1205,7 +1087,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2503Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2504Tiles,
@@ -1214,7 +1095,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2504Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2505Tiles,
@@ -1223,7 +1103,6 @@ static const MsgFaceAnim sTalk25FaceAnims[6] = {
         gTalk2505Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1235,7 +1114,6 @@ static const MsgFaceAnim sTalk26FaceAnims[2] = {
         gTalk2600Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2601Tiles,
@@ -1244,7 +1122,6 @@ static const MsgFaceAnim sTalk26FaceAnims[2] = {
         gTalk2601Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1256,7 +1133,6 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3000Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3001Tiles,
@@ -1265,7 +1141,6 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3001Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3002Tiles,
@@ -1274,7 +1149,6 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3002Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3003Tiles,
@@ -1283,7 +1157,6 @@ static const MsgFaceAnim sTalk30FaceAnims[4] = {
         gTalk3003Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1295,7 +1168,6 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3100Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3101Tiles,
@@ -1304,7 +1176,6 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3101Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3102Tiles,
@@ -1313,7 +1184,6 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3102Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3103Tiles,
@@ -1322,7 +1192,6 @@ static const MsgFaceAnim sTalk31FaceAnims[4] = {
         gTalk3103Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1334,7 +1203,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk3301Tiles,
@@ -1343,7 +1211,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3301Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3302Tiles,
@@ -1352,7 +1219,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3302Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3303Tiles,
@@ -1361,7 +1227,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3303Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3304Tiles,
@@ -1370,7 +1235,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3304Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3300Tiles,
@@ -1379,7 +1243,6 @@ static const MsgFaceAnim sTalk33FaceAnims[6] = {
         gTalk3300Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1391,7 +1254,6 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk3800Tiles,
@@ -1400,7 +1262,6 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk3802Tiles,
@@ -1409,7 +1270,6 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3802Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3803Tiles,
@@ -1418,7 +1278,6 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3803Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3800Tiles,
@@ -1427,7 +1286,6 @@ static const MsgFaceAnim sTalk38FaceAnims[5] = {
         gTalk3800Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1439,7 +1297,6 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4000Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4001Tiles,
@@ -1448,7 +1305,6 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4001Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4002Tiles,
@@ -1457,7 +1313,6 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4002Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4003Tiles,
@@ -1466,7 +1321,6 @@ static const MsgFaceAnim sTalk40FaceAnims[4] = {
         gTalk4003Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1478,7 +1332,6 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4100Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk4101Tiles,
@@ -1487,7 +1340,6 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4101Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk4101Tiles,
@@ -1496,7 +1348,6 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4101Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk4100Tiles,
@@ -1505,7 +1356,6 @@ static const MsgFaceAnim sTalk41FaceAnims[4] = {
         gTalk4100Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1517,7 +1367,6 @@ static const MsgFaceAnim sTalk42FaceAnims[3] = {
         gTalk4200Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4200Tiles,
@@ -1526,7 +1375,6 @@ static const MsgFaceAnim sTalk42FaceAnims[3] = {
         gTalk4200Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4200Tiles,
@@ -1535,7 +1383,6 @@ static const MsgFaceAnim sTalk42FaceAnims[3] = {
         gTalk4200Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1547,7 +1394,6 @@ static const MsgFaceAnim sTalk43FaceAnims[3] = {
         gTalk4300Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4300Tiles,
@@ -1556,7 +1402,6 @@ static const MsgFaceAnim sTalk43FaceAnims[3] = {
         gTalk4300Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4300Tiles,
@@ -1565,7 +1410,6 @@ static const MsgFaceAnim sTalk43FaceAnims[3] = {
         gTalk4300Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1577,7 +1421,6 @@ static const MsgFaceAnim sTalk44FaceAnims[2] = {
         gTalk4400Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk4400Tiles,
@@ -1586,7 +1429,6 @@ static const MsgFaceAnim sTalk44FaceAnims[2] = {
         gTalk4400Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1598,7 +1440,6 @@ static const MsgFaceAnim sTalk45FaceAnims[2] = {
         gTalk4500Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk4500Tiles,
@@ -1607,7 +1448,6 @@ static const MsgFaceAnim sTalk45FaceAnims[2] = {
         gTalk4500Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1619,7 +1459,6 @@ static const MsgFaceAnim sTalk46FaceAnims[3] = {
         gTalk4600Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4600Tiles,
@@ -1628,7 +1467,6 @@ static const MsgFaceAnim sTalk46FaceAnims[3] = {
         gTalk4600Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4600Tiles,
@@ -1637,7 +1475,6 @@ static const MsgFaceAnim sTalk46FaceAnims[3] = {
         gTalk4600Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1649,7 +1486,6 @@ static const MsgFaceAnim sTalk47FaceAnims[3] = {
         gTalk4700Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4700Tiles,
@@ -1658,7 +1494,6 @@ static const MsgFaceAnim sTalk47FaceAnims[3] = {
         gTalk4700Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk4700Tiles,
@@ -1667,7 +1502,6 @@ static const MsgFaceAnim sTalk47FaceAnims[3] = {
         gTalk4700Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1679,7 +1513,6 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5000Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5001Tiles,
@@ -1688,7 +1521,6 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5001Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5002Tiles,
@@ -1697,7 +1529,6 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5002Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5001Tiles,
@@ -1706,7 +1537,6 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
         gTalk5001Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1718,7 +1548,6 @@ static const MsgFaceAnim sTalk51FaceAnims[3] = {
         gTalk5100Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5100Tiles,
@@ -1727,7 +1556,6 @@ static const MsgFaceAnim sTalk51FaceAnims[3] = {
         gTalk5100Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5102Tiles,
@@ -1736,7 +1564,6 @@ static const MsgFaceAnim sTalk51FaceAnims[3] = {
         gTalk5102Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1748,7 +1575,6 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5500Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5500Tiles,
@@ -1757,7 +1583,6 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5500Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5502Tiles,
@@ -1766,7 +1591,6 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5502Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5503Tiles,
@@ -1775,7 +1599,6 @@ static const MsgFaceAnim sTalk55FaceAnims[4] = {
         gTalk5503Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1787,7 +1610,6 @@ static const MsgFaceAnim sTalk39FaceAnims[4] = {
         gTalk3900Anims,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk3900Tiles,
@@ -1796,7 +1618,6 @@ static const MsgFaceAnim sTalk39FaceAnims[4] = {
         gTalk3900Anims + 2,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk3900Tiles,
@@ -1805,7 +1626,6 @@ static const MsgFaceAnim sTalk39FaceAnims[4] = {
         gTalk3900Anims + 4,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk3900Tiles,
@@ -1814,7 +1634,6 @@ static const MsgFaceAnim sTalk39FaceAnims[4] = {
         gTalk3900Anims + 6,
         8,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1826,7 +1645,6 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5200Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5201Tiles,
@@ -1835,7 +1653,6 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5201Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5202Tiles,
@@ -1844,7 +1661,6 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5202Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5203Tiles,
@@ -1853,7 +1669,6 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5203Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5204Tiles,
@@ -1862,7 +1677,6 @@ static const MsgFaceAnim sTalk52FaceAnims[5] = {
         gTalk5204Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1874,7 +1688,6 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5400Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5401Tiles,
@@ -1883,7 +1696,6 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5401Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5402Tiles,
@@ -1892,7 +1704,6 @@ static const MsgFaceAnim sTalk54FaceAnims[3] = {
         gTalk5402Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1904,7 +1715,6 @@ static const MsgFaceAnim sTalk49FaceAnims[4] = {
         gTalk4900Anims,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk4900Tiles,
@@ -1913,7 +1723,6 @@ static const MsgFaceAnim sTalk49FaceAnims[4] = {
         gTalk4900Anims + 2,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk4900Tiles,
@@ -1922,7 +1731,6 @@ static const MsgFaceAnim sTalk49FaceAnims[4] = {
         gTalk4900Anims + 4,
         8,
         1,
-        { 0, 0 },
     },
     {
         gTalk4900Tiles,
@@ -1931,7 +1739,6 @@ static const MsgFaceAnim sTalk49FaceAnims[4] = {
         gTalk4900Anims + 6,
         8,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1943,7 +1750,6 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4800Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4801Tiles,
@@ -1952,7 +1758,6 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4801Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4802Tiles,
@@ -1961,7 +1766,6 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4802Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4803Tiles,
@@ -1970,7 +1774,6 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4803Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk4804Tiles,
@@ -1979,7 +1782,6 @@ static const MsgFaceAnim sTalk48FaceAnims[5] = {
         gTalk4804Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -1991,7 +1793,6 @@ static const MsgFaceAnim sTalk56FaceAnims[3] = {
         gTalk5600Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5600Tiles,
@@ -2000,7 +1801,6 @@ static const MsgFaceAnim sTalk56FaceAnims[3] = {
         gTalk5600Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5602Tiles,
@@ -2009,7 +1809,6 @@ static const MsgFaceAnim sTalk56FaceAnims[3] = {
         gTalk5602Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2021,7 +1820,6 @@ static const MsgFaceAnim sTalk58FaceAnims[2] = {
         gTalk5800Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5800Tiles,
@@ -2030,7 +1828,6 @@ static const MsgFaceAnim sTalk58FaceAnims[2] = {
         gTalk5800Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2042,7 +1839,6 @@ static const MsgFaceAnim sTalk59FaceAnims[3] = {
         gTalk5900Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk5900Tiles,
@@ -2051,7 +1847,6 @@ static const MsgFaceAnim sTalk59FaceAnims[3] = {
         gTalk5900Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk5900Tiles,
@@ -2060,7 +1855,6 @@ static const MsgFaceAnim sTalk59FaceAnims[3] = {
         gTalk5900Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2071,7 +1865,6 @@ static const MsgFaceAnim sTalk60FaceAnims = {
     gTalk6000Anims,
     2,
     1,
-    { 0, 0 },
 };
 
 static const MsgFaceAnim sTalk61FaceAnims[3] = {
@@ -2082,7 +1875,6 @@ static const MsgFaceAnim sTalk61FaceAnims[3] = {
         gTalk6100Anims,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk6100Tiles,
@@ -2091,7 +1883,6 @@ static const MsgFaceAnim sTalk61FaceAnims[3] = {
         gTalk6100Anims + 2,
         6,
         1,
-        { 0, 0 },
     },
     {
         gTalk6100Tiles,
@@ -2100,7 +1891,6 @@ static const MsgFaceAnim sTalk61FaceAnims[3] = {
         gTalk6100Anims + 4,
         6,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2111,7 +1901,6 @@ static const MsgFaceAnim sTalk34FaceAnims = {
     gTalk3400Anims,
     2,
     1,
-    { 0, 0 },
 };
 
 static const MsgFaceAnim sTalk35FaceAnims[3] = {
@@ -2122,7 +1911,6 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3500Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3501Tiles,
@@ -2131,7 +1919,6 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3501Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3502Tiles,
@@ -2140,7 +1927,6 @@ static const MsgFaceAnim sTalk35FaceAnims[3] = {
         gTalk3502Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2152,7 +1938,6 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5300Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5301Tiles,
@@ -2161,7 +1946,6 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5301Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5302Tiles,
@@ -2170,7 +1954,6 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5302Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5303Tiles,
@@ -2179,7 +1962,6 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5303Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk5304Tiles,
@@ -2188,7 +1970,6 @@ static const MsgFaceAnim sTalk53FaceAnims[5] = {
         gTalk5304Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2200,7 +1981,6 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2900Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2901Tiles,
@@ -2209,7 +1989,6 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2901Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2902Tiles,
@@ -2218,7 +1997,6 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2902Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2903Tiles,
@@ -2227,7 +2005,6 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2903Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2904Tiles,
@@ -2236,7 +2013,6 @@ static const MsgFaceAnim sTalk29FaceAnims[5] = {
         gTalk2904Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2248,7 +2024,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2800Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2801Tiles,
@@ -2257,7 +2032,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2801Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2802Tiles,
@@ -2266,7 +2040,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2802Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2803Tiles,
@@ -2275,7 +2048,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2803Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2804Tiles,
@@ -2284,7 +2056,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2804Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk2805Tiles,
@@ -2293,7 +2064,6 @@ static const MsgFaceAnim sTalk28FaceAnims[6] = {
         gTalk2805Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2305,7 +2075,6 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3200Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3201Tiles,
@@ -2314,7 +2083,6 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3201Anims,
         2,
         1,
-        { 0, 0 },
     },
     {
         gTalk3202Tiles,
@@ -2323,7 +2091,6 @@ static const MsgFaceAnim sTalk32FaceAnims[3] = {
         gTalk3202Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2335,7 +2102,6 @@ static const MsgFaceAnim sTalk57FaceAnims[3] = {
         gTalk5700Anims,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5700Tiles,
@@ -2344,7 +2110,6 @@ static const MsgFaceAnim sTalk57FaceAnims[3] = {
         gTalk5700Anims + 2,
         4,
         1,
-        { 0, 0 },
     },
     {
         gTalk5702Tiles,
@@ -2353,7 +2118,6 @@ static const MsgFaceAnim sTalk57FaceAnims[3] = {
         gTalk5702Anims,
         2,
         1,
-        { 0, 0 },
     },
 };
 
@@ -2365,7 +2129,6 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Anims,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk2700Tiles,
@@ -2374,7 +2137,6 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Anims + 2,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk2700Tiles,
@@ -2383,7 +2145,6 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Anims + 4,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk2700Tiles,
@@ -2392,7 +2153,6 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Anims + 6,
         10,
         1,
-        { 0, 0 },
     },
     {
         gTalk2700Tiles,
@@ -2401,7 +2161,6 @@ static const MsgFaceAnim sTalk27FaceAnims[5] = {
         gTalk2700Anims + 8,
         10,
         1,
-        { 0, 0 },
     },
 };
 

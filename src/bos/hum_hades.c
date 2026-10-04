@@ -34,27 +34,27 @@ static const u32 sHumHadesAngryStockMoves[3] = {
 };
 
 static const AnimDef sHumHadesAnimDefs[10] = {
-    { gHadesFloatFollowFrames, gHadesFloatFollowAnims, gHadesFloatFollowTiles, 0, { 0, 0, 0 } },
-    { gHadesFloatBackFrames, gHadesFloatBackAnims, gHadesFloatBackTiles, 0, { 0, 0, 0 } },
-    { gHadesDamageFrames, gHadesDamageAnims, gHadesDamageTiles, 0, { 0, 0, 0 } },
-    { gHadesFirashotFrames, gHadesFirashotAnims, gHadesFirashotTiles, 0, { 0, 0, 0 } },
-    { gHadesFigaballFrames, gHadesFigaballAnims, gHadesFigaballTiles, 0, { 0, 0, 0 } },
-    { gHadesNailofframeFrames, gHadesNailofframeAnims, gHadesNailofframeTiles, 0, { 0, 0, 0 } },
-    { gHadesAngryFrames, gHadesAngryAnims, gHadesAngryTiles, 0, { 0, 0, 0 } },
-    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 1, { 0, 0, 0 } },
-    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 2, { 0, 0, 0 } },
-    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 3, { 0, 0, 0 } },
+    { gHadesFloatFollowFrames, gHadesFloatFollowAnims, gHadesFloatFollowTiles, 0 },
+    { gHadesFloatBackFrames, gHadesFloatBackAnims, gHadesFloatBackTiles, 0 },
+    { gHadesDamageFrames, gHadesDamageAnims, gHadesDamageTiles, 0 },
+    { gHadesFirashotFrames, gHadesFirashotAnims, gHadesFirashotTiles, 0 },
+    { gHadesFigaballFrames, gHadesFigaballAnims, gHadesFigaballTiles, 0 },
+    { gHadesNailofframeFrames, gHadesNailofframeAnims, gHadesNailofframeTiles, 0 },
+    { gHadesAngryFrames, gHadesAngryAnims, gHadesAngryTiles, 0 },
+    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 1 },
+    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 2 },
+    { gHadesFramespreadFrames, gHadesFramespreadAnims, gHadesFramespreadTiles, 3 },
 };
 
 static const AnimDef sHumHadesEffectAnimDefs[5] = {
-    { gHadesAngryHiFrames, gHadesAngryHiAnims, gHadesAngryHiTiles, 0, { 0, 0, 0 } },
-    { gHadesNailFrameFrames, gHadesNailFrameAnims, gHadesNailFrameTiles, 0, { 0, 0, 0 } },
-    { gHadesFigaballBallFrames, gHadesFigaballBallAnims, gHadesFigaballBallTiles, 0, { 0, 0, 0 } },
-    { gHadesFigaballBallFrames, gHadesFigaballBallAnims, gHadesFigaballBallTiles, 1, { 0, 0, 0 } },
-    { gHadesFirashotFiraFrames, gHadesFirashotFiraAnims, gHadesFirashotFiraTiles, 0, { 0, 0, 0 } },
+    { gHadesAngryHiFrames, gHadesAngryHiAnims, gHadesAngryHiTiles, 0 },
+    { gHadesNailFrameFrames, gHadesNailFrameAnims, gHadesNailFrameTiles, 0 },
+    { gHadesFigaballBallFrames, gHadesFigaballBallAnims, gHadesFigaballBallTiles, 0 },
+    { gHadesFigaballBallFrames, gHadesFigaballBallAnims, gHadesFigaballBallTiles, 1 },
+    { gHadesFirashotFiraFrames, gHadesFirashotFiraAnims, gHadesFirashotFiraTiles, 0 },
 };
 
-static const HumSubDef sHumHadesSubDef = { gBStatesPalette, 75, 0 };
+static const HumSubDef sHumHadesSubDef = { gBStatesPalette, 75 };
 
 static const HumDef sHumHadesDef = {
 #ifdef VERSION_EU
@@ -62,7 +62,7 @@ static const HumDef sHumHadesDef = {
 #else
         128
 #endif
-    , 0, gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
+    , gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumHades = {
     "task_hum_hades",

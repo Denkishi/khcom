@@ -28,7 +28,6 @@
 static const CardHelpDef sFiraHelpDef = {
     gFiraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
@@ -36,7 +35,6 @@ static const CardHelpDef sFiraHelpDef = {
 static const CardHelpDef sBlizzaraHelpDef = {
     gBlizzaraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
@@ -44,7 +42,6 @@ static const CardHelpDef sBlizzaraHelpDef = {
 static const CardHelpDef sFiraHelpDef = {
     gFiraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
@@ -55,7 +52,6 @@ static const CardHelpDef sFiraHelpDef = {
 static const CardHelpDef sBlizzaraHelpDef = {
     gBlizzaraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
@@ -66,26 +62,22 @@ static const CardHelpDef sBlizzaraHelpDef = {
 static const CardHelpDef sUnk_0903BFB4 = {
     gUnk_09EE7D44,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
 static const CardHelpDef sThundaraHelpDef = {
     gThundaraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sCuraHelpDef = {
     gCuraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sStopraHelpDef = {
     gStopraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSonicBladeHelpDef = {
@@ -95,245 +87,205 @@ static const CardHelpDef sSonicBladeHelpDef = {
 #elif defined(VERSION_JP)
     2,
 #endif
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sStrikeRaidHelpDef = {
     gStrikeRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
 static const CardHelpDef sFiraHelpDef = {
     gFiraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
 static const CardHelpDef sFiragaHelpDef = {
     gFiragaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 #if defined(VERSION_EU)
 static const CardHelpDef sBlizzaraHelpDef = {
     gBlizzaraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
 static const CardHelpDef sBlizzagaHelpDef = {
     gBlizzagaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sThundagaHelpDef = {
     gThundagaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sCuragaHelpDef = {
     gCuragaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sGraviraHelpDef = {
     gGraviraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sGravigaHelpDef = {
     gGravigaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sStopgaHelpDef = {
     gStopgaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sGoofyChargeHelpDef = {
     gGoofyChargeHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sGoofyTornadoHelpDef = {
     gGoofyTornadoHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sMagicHelpDef = {
     gMagicHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sMagicPairHelpDef = {
     gMagicPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sProudRoarHelpDef = {
     gProudRoarHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sProudRoarPairHelpDef = {
     gProudRoarPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sShowtimeHelpDef = {
     gShowtimeHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sShowtimePairHelpDef = {
     gShowtimePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sParadiseHelpDef = {
     gParadiseHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sParadisePairHelpDef = {
     gParadisePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSplashHelpDef = {
     gSplashHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSplashPairHelpDef = {
     gSplashPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTwinkleHelpDef = {
     gTwinkleHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTwinklePairHelpDef = {
     gTwinklePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFlareBreathHelpDef = {
     gFlareBreathHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFlareBreathPairHelpDef = {
     gFlareBreathPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sOmnislashHelpDef = {
     gOmnislashHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sCrossSlashHelpDef = {
     gCrossSlashHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSandstormHelpDef = {
     gSandstormHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSandstormPairHelpDef = {
     gSandstormPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSpiralWaveHelpDef = {
     gSpiralWaveHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSpiralWavePairHelpDef = {
     gSpiralWavePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSurpriseHelpDef = {
     gSurpriseHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSurprisePairHelpDef = {
     gSurprisePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sHummingbirdHelpDef = {
     gHummingbirdHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sHummingbirdPairHelpDef = {
     gHummingbirdPairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFerociousLungeHelpDef = {
     gFerociousLungeHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFerociousLungePairHelpDef = {
     gFerociousLungePairHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sMmMiracleHelpDef = {
     gMmMiracleHelpTexts,
     4,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sMmMiraclePairHelpDef = {
@@ -343,264 +295,221 @@ static const CardHelpDef sMmMiraclePairHelpDef = {
 #elif defined(VERSION_JP)
     2,
 #endif
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sAeroraHelpDef = {
     gAeroraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sAerogaHelpDef = {
     gAerogaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sBlitzHelpDef = {
     gBlitzHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sArsArcanumHelpDef = {
     gArsArcanumHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sRagnarokHelpDef = {
     gRagnarokHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTrinityLimitHelpDef = {
     gTrinityLimitHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSlidingDashHelpDef = {
     gSlidingDashHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sStunImpactHelpDef = {
     gStunImpactHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sZantetsukenHelpDef = {
     gZantetsukenHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sWarpHelpDef = {
     gWarpHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sWarpinatorHelpDef = {
     gWarpinatorHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTerrorHelpDef = {
     gTerrorHelpTexts,
     3,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sConfuseHelpDef = {
     gConfuseHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
 static const CardHelpDef sUnk_0903BED4 = {
     gUnk_09EE7D74,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
 static const CardHelpDef sStopRaidHelpDef = {
     gStopRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sJudgmentHelpDef = {
     gJudgmentHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sReflectRaidHelpDef = {
     gReflectRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFireRaidHelpDef = {
     gFireRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sBlizzardRaidHelpDef = {
     gBlizzardRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sThunderRaidHelpDef = {
     gThunderRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sGravityRaidHelpDef = {
     gGravityRaidHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sAquaSplashHelpDef = {
     gAquaSplashHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sHolyHelpDef = {
     gHolyHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sBlazingDonaldHelpDef = {
     gBlazingDonaldHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
 static const CardHelpDef sUnk_0903BF2C = {
     gUnk_09EE7D7C,
     2,
-    { 0, 0, 0 },
 };
 #endif
 
 static const CardHelpDef sGiftedMiracleHelpDef = {
     gGiftedMiracleHelpTexts,
     3,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sMegaFlareHelpDef = {
     gMegaFlareHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sFiragaBreakHelpDef = {
     gFiragaBreakHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sShockImpactHelpDef = {
     gShockImpactHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sIdyllRompHelpDef = {
     gIdyllRompHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sCrossSlashPlusHelpDef = {
     gCrossSlashPlusHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sHomingFiraHelpDef = {
     gHomingFiraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sHomingBlizzaraHelpDef = {
     gHomingBlizzaraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sSynchroHelpDef = {
     gSynchroHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sBindHelpDef = {
     gBindHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTornadoHelpDef = {
     gTornadoHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sQuakeHelpDef = {
     gQuakeHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sTeleportHelpDef = {
     gTeleportHelpTexts,
     3,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sDarkBreakHelpDef = {
     gDarkBreakHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sDarkFiragaHelpDef = {
     gDarkFiragaHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 static const CardHelpDef sDarkAuraHelpDef = {
     gDarkAuraHelpTexts,
     2,
-    { 0, 0, 0 },
 };
 
 #if defined(VERSION_US)
 static const CardHelpDef sUnk_0903BFB4 = {
     gUnk_09EE7D44,
     4,
-    { 0, 0, 0 },
 };
 #endif
 

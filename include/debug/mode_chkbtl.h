@@ -7,7 +7,6 @@
 
 typedef struct ChkBtlEntry {
     u8 world;
-    u8 unk_01[0x03];
     s32 kind;
     s32 battleId;
     TaskDesc* taskDesc;
@@ -22,7 +21,6 @@ typedef struct ChkBtlPos {
 
 typedef struct ChkBtlWorld {
     u8 world;
-    u8 unk_01[0x03];
     const char* name;
 } ChkBtlWorld;
 

@@ -23,10 +23,8 @@ typedef struct CardMessageDef {
     u32 positionIndex;
     u16 expressionId;
     u8 charDelay;
-    u8 unk_0B;
     const CardMessageText* text;
     u16 flags;
-    u16 unk_12;
 } CardMessageDef;
 
 extern CardMessageDef gCardMessageDefs[];

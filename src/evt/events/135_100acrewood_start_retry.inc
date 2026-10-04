@@ -1,26 +1,26 @@
 #ifdef VERSION_US
 #include "event_135_text.inc"
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, { 0, 0, 0 }, gEventTextUs_0900868C, MSG_SCRIPT_FLAG_END, 300 },
+    { 36, 1, 1, 1, gEventTextUs_0900868C, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 3, { 0, 0, 0 }, gEvent135Text00, MSG_SCRIPT_FLAG_END, 300 },
+    { 36, 1, 1, 3, gEvent135Text00, MSG_SCRIPT_FLAG_END, 300 },
 };
 
 #include "event_135_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, { 0, 0, 0 }, &gCardMessageText053, MSG_SCRIPT_FLAG_END, 300 },
+    { 36, 1, 1, 1, &gCardMessageText053, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 
 static const EventCameraKeyframe sEvent135Camera[2] = {
-    { -65536, 105216, 67328, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, { 0, 0 }, NULL },
-    { -64636, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, { 0, 0 }, NULL },
+    { -65536, 105216, 67328, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE, 0, NULL },
+    { -64636, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_KEEP, 80, NULL },
 };
 
 static const EvSoundCue sEvent135SoundCues[2] = {
@@ -29,40 +29,38 @@ static const EvSoundCue sEvent135SoundCues[2] = {
 };
 
 static const EventCharaKeyframe sEvent135Track0[5] = {
-    { 2, 1, { 0, 0 }, 73472, 59648, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 7, 121, { 0, 0 }, 100096, 71424, 0, 2, { 0, 0 }, 67, NULL, NULL },
-    { 2, 140, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 3, 145, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 2000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 2, 1, 73472, 59648, 0, 0, 66, NULL, NULL },
+    { 7, 121, 100096, 71424, 0, 2, 67, NULL, NULL },
+    { 2, 140, 0, 0, 0, 0, 69, NULL, NULL },
+    { 3, 145, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 2000, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent135Track1[3] = {
-    { 796, 160, { 0, 0 }, 110080, 67840, 0, 0, { 0, 0 }, 258, NULL, NULL },
-    { 797, 1830, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 261, NULL, NULL },
-    { 756, 1880, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+    { 796, 160, 110080, 67840, 0, 0, 258, NULL, NULL },
+    { 797, 1830, 0, 0, 0, 0, 261, NULL, NULL },
+    { 756, 1880, 0, 0, 0, 0, 32773, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent135Track2[2] = {
-    { 806, 20, { 0, 0 }, 146176, 59904, -5120, 0, { 0, 0 }, 2, NULL, NULL },
-    { 806, 9999, { 0, 0 }, 0, 0, 0, 173, { 0, 0 }, 33028, NULL, NULL },
+    { 806, 20, 146176, 59904, -5120, 0, 2, NULL, NULL },
+    { 806, 9999, 0, 0, 0, 173, 33028, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent135Tracks[3] = {
-    { sEvent135Track0, 0, { 0, 0, 0 } },
-    { sEvent135Track1, 70, { 0, 0, 0 } },
-    { sEvent135Track2, 71, { 0, 0, 0 } },
+    { sEvent135Track0, 0 },
+    { sEvent135Track1, 70 },
+    { sEvent135Track2, 71 },
 };
 
 const EventSequenceDef gEvent135 = {
     3,
-    { 0, 0, 0 },
     sEvent135Tracks,
     sEvent135Camera,
     sEvent135Script,
     sEvent135SoundCues,
     NULL,
     360,
-    0,
     0,
     0,
     0,

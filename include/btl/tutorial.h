@@ -19,7 +19,6 @@ typedef struct TutorialWork {
     s16 inputCooldown;
     u16 arrowX;
     u16 arrowY;
-    u8 unk_016[0x2];
     void* tiles;
     void* palette;
     AnimState anim;

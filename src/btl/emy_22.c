@@ -22,14 +22,14 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy22CommonAnimDefs[3] = {
-    { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0, { 0, 0, 0 } },
-    { gEmy2202Frames, gEmy2202Anims, gEmy2202Tiles, 0, { 0, 0, 0 } },
-    { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0, { 0, 0, 0 } },
+    { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0 },
+    { gEmy2202Frames, gEmy2202Anims, gEmy2202Tiles, 0 },
+    { gEmy2200Frames, gEmy2200Anims, gEmy2200Tiles, 0 },
 };
 
 static const AnimDef sEmy22AnimDefs[2] = {
-    { gEmy2210Frames, gEmy2210Anims, gEmy2210Tiles, 0, { 0, 0, 0 } },
-    { gEmy2211Frames, gEmy2211Anims, gEmy2211Tiles, 0, { 0, 0, 0 } },
+    { gEmy2210Frames, gEmy2210Anims, gEmy2210Tiles, 0 },
+    { gEmy2211Frames, gEmy2211Anims, gEmy2211Tiles, 0 },
 };
 
 static const EmyDef sEmy22Def = { gEmy22Palette, sEmy22CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 5, 0, { 15, 61, 40, 12, 24, 15, EMY_KIND_FLAG_NO_ENEMY_COLLISION } };

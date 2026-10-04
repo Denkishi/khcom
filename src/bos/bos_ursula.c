@@ -37,7 +37,7 @@
 static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
-    gUnk_097EE378, 0x7000, { 0, 0 }, gUnk_0984AFF8, 0xe0, { 0, 0 }, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
+    gUnk_097EE378, 0x7000, gUnk_0984AFF8, 0xe0, { gUnk_09843798, gUnk_09843F98, gUnk_09844798, gUnk_09844F98 }
 };
 
 static const u16* sBosUrsulaMapBlocksLeft[12] = {
@@ -269,15 +269,15 @@ static const BosMapanimeFrame sBosUrsulaMapanimeChargeFrames[5] = { { 10, 0 }, {
 
 static const BosMapanimeFrame sBosUrsulaMapanimeRecoverFrames[1] = { { 0, 0 } };
 
-static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, 0, gUnk_097F5378, 0x0C00, 0x0300, 0x0400, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeIdle = { sBosUrsulaMapanimeIdleFrames, 6, gUnk_097F5378, 0x0C00, 0x0300, 0x0400, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, 0, gUnk_097F5E78, 0x0C00, 0x0860, 0x0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeWindup = { sBosUrsulaMapanimeWindupFrames, 12, gUnk_097F5E78, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, 0, gUnk_097F8AD8, 0x0C00, 0x0860, 0x0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbleFrames, 5, gUnk_097F8AD8, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, 0, gUnk_097FC338, 0x0C00, 0x0860, 0x0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, 5, gUnk_097FC338, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, 0, gUnk_097EEF78, 0x0C00, 0x0860, 0x0C00, 0, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, gUnk_097EEF78, 0x0C00, 0x0860, 0x0C00, 0 };
 
 static TaskDesc sTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",

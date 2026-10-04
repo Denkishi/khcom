@@ -24,7 +24,6 @@ typedef struct EventBackgroundDef {
     u8 mapHeight;
     s32 mapAnim;
     u8 isAffine;
-    u8 unk_25[3];
     struct EventMapObjectDef* mapObjects;
     u8 groundType;
     u8 flags;

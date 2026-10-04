@@ -9,14 +9,12 @@
 typedef struct StatusEntry {
     s32 items[72];
     u16 count;
-    u16 unk_122;
 } StatusEntry;
 
 typedef struct StatusBarWork {
     void* tiles;
     void* palette;
     u16 steps;
-    u16 unk_0A;
     s32 y;
     s32 targetY;
     s32 y2;
@@ -49,7 +47,6 @@ typedef struct StatusDecknameWork {
     TextSlot textSlots[10];
     void* palette;
     u8 textSlotCount;
-    u8 unk_55[0x3];
     u8* mesWindowOpen;
 } StatusDecknameWork;
 
@@ -84,7 +81,6 @@ typedef struct StatusMeswindowWork {
     s32 item;
     u8* open;
     u8 textIndex;
-    u8 unk_21[3];
 } StatusMeswindowWork;
 
 typedef struct StatusMessageParam {
@@ -96,7 +92,6 @@ typedef struct StatusMessageParam {
 typedef struct StatusMessageWork {
     TextSlot textSlots[100];
     u8 textSlotCount;
-    u8 unk_321[3];
     void* palette;
     StatusMessageParam param;
 } StatusMessageWork;
@@ -106,7 +101,6 @@ typedef struct StatusFriendWork {
     void* palette[3];
     void* gfx[3];
     u16 count;
-    u16 unk_26;
 } StatusFriendWork;
 
 typedef struct StatusMesParam {
@@ -136,16 +130,13 @@ typedef struct StockMesDispWork {
     void* gfx;
     void* gfx2;
     u16 frame;
-    u16 unk_22;
     TaskPool tasks;
     void* task;
     u16 x;
     u16 y;
     u8 textIndex;
-    u8 unk_41;
     u16 helpIndex;
     u8 textCount;
-    u8 unk_45[3];
 } StockMesDispWork;
 
 typedef struct StatusWork {
@@ -154,7 +145,6 @@ typedef struct StatusWork {
     u16 unk_18;
     s16 cursor;
     s16 scroll;
-    u16 unk_1E;
 } StatusWork;
 
 typedef struct StatusStocklistWork {
@@ -168,7 +158,6 @@ typedef struct StatusStocklistWork {
     u16 scroll;
     u16 timer;
     u8 blink;
-    u8 unk_4C9[3];
 } StatusStocklistWork;
 
 extern s32 gStatusBarState;

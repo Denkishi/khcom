@@ -12,7 +12,6 @@ struct EvtObjParam;
 typedef struct DmaStream {
     u8 enabled;
     u8 swapPending;
-    u8 unk_02[0x2];
     void (*update)();
     vu16* dst;
     s32 srcIdx;
@@ -45,7 +44,6 @@ typedef struct SrollANameWork {
     u16 unk_00;
     s16 kind;
     s16 timer;
-    u8 unk_06[0x2];
     s32 x;
     s32 y;
     s32 targetX;
@@ -59,7 +57,6 @@ typedef struct SrollANameArg {
     s16 kind;
     u16 animId;
     u16 nameIndex;
-    u8 unk_06[0x2];
     s32 x;
     s32 y;
     s32 targetX;
@@ -117,7 +114,6 @@ typedef struct SrollBSecnArg {
 typedef struct SrollBCrtnWork {
     s32 timer;
     u16 kind;
-    u8 unk_06[0x2];
     s32 x;
     s32 y;
     void* tiles;
@@ -135,14 +131,12 @@ typedef struct SrollCCharWork {
 
 typedef struct SrollBCrtnArg {
     u16 kind;
-    u8 unk_02[0x2];
     s32 x;
     s32 y;
 } SrollBCrtnArg;
 
 typedef struct SrollTmrWork {
     u8 visible;
-    u8 unk_01[0x3];
     s32 frameCount;
     void* tiles;
     ObjPalette* palette;
@@ -154,7 +148,6 @@ typedef struct SrollInit {
     u16 clearTile;
     u16 frameTileBase;
     u16 textTileBase;
-    u8 unk_0E[0x2];
     u8* unk_10;
     u8* tilemapBuffer;
     u8* tileData;
@@ -213,13 +206,11 @@ typedef struct SrollWork {
     u16 clearTile;
     u16 frameTileBase;
     u16 textTileBase;
-    u16 unk_32;
     u8* fontPages;
     u8* fontGlyphs;
     u8* fontWidths;
     u32 fontGlyphCount;
     u8 unk_44;
-    u8 unk_45[0x3];
     u8* unk_48;
     u8* tilemapBuffer;
     u8* tileData;

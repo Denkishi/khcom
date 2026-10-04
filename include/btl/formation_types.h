@@ -13,17 +13,14 @@ typedef struct BtlFormStep {
 
 typedef struct BtlFormEntry {
     s16 count;
-    u8 unk_02[0x02];
     const BtlFormStep* steps;
     u16 delay;
 } BtlFormEntry;
 
 typedef struct BtlFormList {
     s16 count;
-    u8 unk_02[0x02];
     const BtlFormEntry* const* entries;
     s16 threshold;
-    u8 unk_0A[0x02];
 } BtlFormList;
 
 typedef char BtlFormStep_size[(sizeof(BtlFormStep) == 12) ? 1 : -1];

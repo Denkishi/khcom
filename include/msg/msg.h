@@ -21,7 +21,6 @@ typedef struct SpriteTextLine {
     u8 visible;
     u8 unk_53;
     u8 useAlternatePalette;
-    u8 unk_55[3];
 } SpriteTextLine;
 
 typedef struct BgTextLine {
@@ -48,7 +47,6 @@ typedef struct MsgFaceWork {
     u8 talking;
     u8 flipX;
     u8 visible;
-    u8 unk_35[3];
     MsgFaceControl* face;
 } MsgFaceWork;
 
@@ -58,7 +56,6 @@ typedef struct MsgWinWork {
     s32 scrollX;
     u16 glyphPaletteIndex;
     u8 steps;
-    u8 unk_1F;
     u32 position;
     u8 shownChars;
     u8 charTimer;
@@ -70,7 +67,6 @@ typedef struct MsgWinWork {
     u8 waitCreated;
     MsgFaceControl face;
     u8 bg;
-    u8 unk_39[3];
     const MessageScriptEntry* script;
     MsgLatinChar* nextText;
 } MsgWinWork;
@@ -85,7 +81,6 @@ typedef struct EventSeqWork {
     u8 unk_30;
     u8 unk_31;
     u8 hasBoss;
-    u8 unk_33;
     const struct EventSequenceDef* seqDef;
     u16 timer;
 #ifdef VERSION_EU
@@ -99,7 +94,6 @@ typedef struct EventSeqWork {
 typedef struct EventScanlineScroll {
     u8 unk_00[2];
     u8 enabled;
-    u8 unk_03;
     u16 scrollX[160];
 } EventScanlineScroll;
 
@@ -108,7 +102,6 @@ typedef struct EventCameraWork {
     s32 targetY;
     u8 eventId;
     u8 keyframe;
-    u8 unk_0A[2];
     const EventCameraKeyframe* keyframes;
     u16 steps;
     u16 angle;
@@ -134,7 +127,6 @@ typedef struct MsgWaitWork {
     AnimState anim;
     u8 textSlotCount;
     u8 textSlotCount2;
-    u8 unk_F6[2];
     s32 x;
     s32 y;
     u8 cursor;
@@ -142,7 +134,6 @@ typedef struct MsgWaitWork {
     u8 timer;
     u8 nextPosition;
     u8 choiceShown;
-    u8 unk_105[3];
 } MsgWaitWork;
 
 typedef struct TextGlyphSprite {
@@ -153,7 +144,6 @@ typedef struct TextGlyphSprite {
     ObjPalette* alternatePalette;
     u8 useAlternatePalette;
     u8 visible;
-    u8 unk_16[2];
 } TextGlyphSprite;
 
 extern EventState* gEventState;

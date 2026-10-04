@@ -23,18 +23,18 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy08CommonAnimDefs[3] = {
-    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl09Frames, gEmy07Fl09Anims, gEmy07Fl09Tiles, 0, { 0, 0, 0 } },
+    { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
+    { gEmy07Fl03Frames, gEmy07Fl03Anims, gEmy07Fl03Tiles, 0 },
+    { gEmy07Fl09Frames, gEmy07Fl09Anims, gEmy07Fl09Tiles, 0 },
 };
 
 static const AnimDef sEmy08AnimDefs[6] = {
-    { gEmy07Fl10Frames, gEmy07Fl10Anims, gEmy07Fl10Tiles, 0, { 0, 0, 0 } },
-    { gUnk_09EDFFDC, gUnk_09EE0004, gUnk_089C292C, 0, { 0, 0, 0 } },
-    { gEmy07Fl10tFrames, gEmy07Fl10tAnims, gEmy07Fl10tTiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl10fFrames, gEmy07Fl10fAnims, gEmy07Fl10fTiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl11tFrames, gEmy07Fl11tAnims, gEmy07Fl11tTiles, 0, { 0, 0, 0 } },
-    { gEmy07Fl11fFrames, gEmy07Fl11fAnims, gEmy07Fl11fTiles, 0, { 0, 0, 0 } },
+    { gEmy07Fl10Frames, gEmy07Fl10Anims, gEmy07Fl10Tiles, 0 },
+    { gUnk_09EDFFDC, gUnk_09EE0004, gUnk_089C292C, 0 },
+    { gEmy07Fl10tFrames, gEmy07Fl10tAnims, gEmy07Fl10tTiles, 0 },
+    { gEmy07Fl10fFrames, gEmy07Fl10fAnims, gEmy07Fl10fTiles, 0 },
+    { gEmy07Fl11tFrames, gEmy07Fl11tAnims, gEmy07Fl11tTiles, 0 },
+    { gEmy07Fl11fFrames, gEmy07Fl11fAnims, gEmy07Fl11fTiles, 0 },
 };
 
 static const EmyDef sEmy08Def = { gEmy07bPalette, sEmy08CommonAnimDefs, 179, 130, 20, 20, 24, 24, 16, 5, 0, { 7, 999, 32, 12, 16, 100, 0 } };

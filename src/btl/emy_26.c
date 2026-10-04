@@ -20,14 +20,14 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy26CommonAnimDefs[3] = {
-    { gEmy2600Frames, gEmy2600Anims, gEmy2600Tiles, 0, { 0, 0, 0 } },
-    { gEmy2602Frames, gEmy2602Anims, gEmy2602Tiles, 0, { 0, 0, 0 } },
-    { gEmy2601Frames, gEmy2601Anims, gEmy2601Tiles, 0, { 0, 0, 0 } },
+    { gEmy2600Frames, gEmy2600Anims, gEmy2600Tiles, 0 },
+    { gEmy2602Frames, gEmy2602Anims, gEmy2602Tiles, 0 },
+    { gEmy2601Frames, gEmy2601Anims, gEmy2601Tiles, 0 },
 };
 
 static const AnimDef sEmy26AnimDefs[2] = {
-    { gEmy2610Frames, gEmy2610Anims, gEmy2610Tiles, 0, { 0, 0, 0 } },
-    { gEmy2611Frames, gEmy2611Anims, gEmy2611Tiles, 0, { 0, 0, 0 } },
+    { gEmy2610Frames, gEmy2610Anims, gEmy2610Tiles, 0 },
+    { gEmy2611Frames, gEmy2611Anims, gEmy2611Tiles, 0 },
 };
 
 static const EmyDef sEmy26Def = { gEmy26Palette, sEmy26CommonAnimDefs, 192, 130, 20, 20, 64, 32, 32, 10, 0, { 18, 89, 36, 20, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };

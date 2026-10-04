@@ -11,7 +11,6 @@ typedef struct MenuWork {
     s32 y;
     u8 state;
     u8 cursor;
-    u8 unk_12[0x02];
 } MenuWork;
 
 extern Mode gModeDeck;

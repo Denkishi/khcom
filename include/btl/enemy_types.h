@@ -46,10 +46,8 @@ typedef struct EmyWork {
     s16 steps;
     u16 flags;
     u8 visible;
-    u8 unk_15B;
     const EmyDef* def;
     u8 angle;
-    u8 unk_161;
     u16 spriteFlags;
     s32 speed;
     s32 vz;

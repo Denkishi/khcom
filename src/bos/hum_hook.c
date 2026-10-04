@@ -40,24 +40,24 @@ static const u32 sHumHookStockMovesB[3] = {
 };
 
 static const AnimDef sHumHookAnimDefs[15] = {
-    { gHookBt00Frames, gHookBt00Anims, gHookBt00Tiles, 0, { 0, 0, 0 } },
-    { gHookBt01Frames, gHookBt01Anims, gHookBt01Tiles, 0, { 0, 0, 0 } },
-    { gHookBt02Frames, gHookBt02Anims, gHookBt02Tiles, 0, { 0, 0, 0 } },
-    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 0, { 0, 0, 0 } },
-    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 1, { 0, 0, 0 } },
-    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 2, { 0, 0, 0 } },
-    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 3, { 0, 0, 0 } },
-    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 4, { 0, 0, 0 } },
-    { gHookBt10Frames, gHookBt10Anims, gHookBt10Tiles, 0, { 0, 0, 0 } },
-    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 1, { 0, 0, 0 } },
-    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 0, { 0, 0, 0 } },
-    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 2, { 0, 0, 0 } },
-    { gHookBt12Frames, gHookBt12Anims, gHookBt12Tiles, 0, { 0, 0, 0 } },
-    { gHookF03Frames, gHookF03Anims, gHookF03Tiles, 2, { 0, 0, 0 } },
-    { gHookF03Frames, gHookF03Anims, gHookF03Tiles, 3, { 0, 0, 0 } },
+    { gHookBt00Frames, gHookBt00Anims, gHookBt00Tiles, 0 },
+    { gHookBt01Frames, gHookBt01Anims, gHookBt01Tiles, 0 },
+    { gHookBt02Frames, gHookBt02Anims, gHookBt02Tiles, 0 },
+    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 0 },
+    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 1 },
+    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 2 },
+    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 3 },
+    { gHookBt03Frames, gHookBt03Anims, gHookBt03Tiles, 4 },
+    { gHookBt10Frames, gHookBt10Anims, gHookBt10Tiles, 0 },
+    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 1 },
+    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 0 },
+    { gHookBt11Frames, gHookBt11Anims, gHookBt11Tiles, 2 },
+    { gHookBt12Frames, gHookBt12Anims, gHookBt12Tiles, 0 },
+    { gHookF03Frames, gHookF03Anims, gHookF03Tiles, 2 },
+    { gHookF03Frames, gHookF03Anims, gHookF03Tiles, 3 },
 };
 
-static const HumDef sHumHookDef = { 128, 0, gHookPalette, 0, { 42, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumHookDef = { 128, gHookPalette, 0, { 42, 99, 38, 14, 24, 99, 0 } };
 
 static const u8 sHumHookRollAmplitudes[8] = {
     0, 4, 4, 6, 8, 10, 8, 6,

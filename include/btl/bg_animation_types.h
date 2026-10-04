@@ -6,7 +6,6 @@
 typedef struct BgAnimationChunk {
     void* data;
     u16 size;
-    u16 unk_06;
 } BgAnimationChunk;
 
 typedef struct BgAnimationDef {

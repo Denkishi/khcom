@@ -7,7 +7,6 @@
 
 typedef struct MooglePackCardDef {
     u16 cardId;
-    u8 unk_02[0x2];
     s32 unlockFlag;
     u16 weights[4];
 } MooglePackCardDef;
@@ -15,16 +14,13 @@ typedef struct MooglePackCardDef {
 typedef struct MooglePackCardTable {
     const MooglePackCardDef* cards;
     s16 count;
-    u8 unk_06[0x2];
 } MooglePackCardTable;
 
 typedef struct MooglePackSpriteDef {
     void* palette;
     u16 paletteSize;
-    u8 unk_06[0x2];
     void* tiles;
     u16 tilesSize;
-    u8 unk_0E[0x2];
     void* sprite;
     u16 xOffset;
     u16 yOffset;
@@ -53,7 +49,6 @@ typedef struct MooglePackMenuEntry {
     s16 tilemapY;
     u16 spriteX;
     u16 spriteY;
-    u16 unk_1A;
     MooglePackTilemapDef packTilemaps[4];
 } MooglePackMenuEntry;
 
@@ -66,10 +61,8 @@ typedef struct MooglePackCardWork {
     void* backSprite;
     AnimState anim;
     u16 flipAngle;
-    u16 unk_32;
     s32 scale;
     u16 state;
-    u16 unk_3A;
     s32 x;
     s32 y;
     u16 timer;

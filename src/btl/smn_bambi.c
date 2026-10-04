@@ -25,7 +25,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 
-static const AnimDef sSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0, { 0, 0, 0 } };
+static const AnimDef sSmnBambiAnimDef = { gBanb00Frames, gBanb00Anims, gBanb00Tiles, 0 };
 
 TaskDesc gTaskDescSmnBambi = {
     "task_smn_bambi",

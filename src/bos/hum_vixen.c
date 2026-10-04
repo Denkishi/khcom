@@ -46,24 +46,24 @@ static const u32 sHumVixenStockMovesD[3] = {
 };
 
 static const AnimDef sHumVixenAnimDefs[15] = {
-    { gVixenS1Frames, gVixenS1Anims, gVixenS1Tiles, 0, { 0, 0, 0 } },
-    { gVixenW1Frames, gVixenW1Anims, gVixenW1Tiles, 0, { 0, 0, 0 } },
-    { gVixenD1Frames, gVixenD1Anims, gVixenD1Tiles, 0, { 0, 0, 0 } },
-    { gVixenA1Frames, gVixenA1Anims, gVixenA1Tiles, 0, { 0, 0, 0 } },
-    { gVixenM1bFrames, gVixenM1bAnims, gVixenM1bTiles, 0, { 0, 0, 0 } },
-    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 0, { 0, 0, 0 } },
-    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 2, { 0, 0, 0 } },
-    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 3, { 0, 0, 0 } },
-    { gVixenM4Frames, gVixenM4Anims, gVixenM4Tiles, 0, { 0, 0, 0 } },
-    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 0, { 0, 0, 0 } },
-    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 1, { 0, 0, 0 } },
-    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 2, { 0, 0, 0 } },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 0, { 0, 0, 0 } },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 1, { 0, 0, 0 } },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 2, { 0, 0, 0 } },
+    { gVixenS1Frames, gVixenS1Anims, gVixenS1Tiles, 0 },
+    { gVixenW1Frames, gVixenW1Anims, gVixenW1Tiles, 0 },
+    { gVixenD1Frames, gVixenD1Anims, gVixenD1Tiles, 0 },
+    { gVixenA1Frames, gVixenA1Anims, gVixenA1Tiles, 0 },
+    { gVixenM1bFrames, gVixenM1bAnims, gVixenM1bTiles, 0 },
+    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 0 },
+    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 2 },
+    { gVixenM2aFrames, gVixenM2aAnims, gVixenM2aTiles, 3 },
+    { gVixenM4Frames, gVixenM4Anims, gVixenM4Tiles, 0 },
+    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 0 },
+    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 1 },
+    { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 2 },
+    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 0 },
+    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 1 },
+    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 2 },
 };
 
-static const HumDef sHumVixenDef = { 83, 0, gVixenPalette, 0, { 50, 99, 80, 14, 48, 99, 0 } };
+static const HumDef sHumVixenDef = { 83, gVixenPalette, 0, { 50, 99, 80, 14, 48, 99, 0 } };
 
 TaskDesc gTaskDescHumVixen = {
     "task_hum_vixen",
@@ -93,19 +93,19 @@ static TaskDesc sTaskDescHumVixenIce = {
 };
 
 static const AnimDef sHumVixenFrzAnimDefs[13] = {
-    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 0, { 0, 0, 0 } },
-    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 1, { 0, 0, 0 } },
-    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 0, { 0, 0, 0 } },
-    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 2, { 0, 0, 0 } },
-    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 1, { 0, 0, 0 } },
-    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 3, { 0, 0, 0 } },
-    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 2, { 0, 0, 0 } },
-    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 0, { 0, 0, 0 } },
-    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 1, { 0, 0, 0 } },
-    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 2, { 0, 0, 0 } },
-    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 0, { 0, 0, 0 } },
-    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 1, { 0, 0, 0 } },
-    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 2, { 0, 0, 0 } },
+    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 0 },
+    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 1 },
+    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 0 },
+    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 2 },
+    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 1 },
+    { gVixenReitouFrames, gVixenReitouAnims, gVixenReitouTiles, 3 },
+    { gReitouSoraFrames, gReitouSoraAnims, gReitouSoraTiles, 2 },
+    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 0 },
+    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 1 },
+    { gReitouRikuFrames, gReitouRikuAnims, gReitouRikuTiles, 2 },
+    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 0 },
+    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 1 },
+    { gReitouNiseFrames, gReitouNiseAnims, gReitouNiseTiles, 2 },
 };
 
 static TaskDesc sTaskDescHumVixenFrz = {

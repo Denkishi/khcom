@@ -3,18 +3,18 @@
 #endif
 
 static const MessageScriptEntry sEvent193Script[12] = {
-    { 26, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text00), 0, 330 },
-    { 56, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text01), 0, 530 },
-    { 56, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text02), 0, 650 },
-    { 56, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text03), 0, 652 },
-    { 56, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text04), 0, 654 },
-    { 26, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text05), 0, 680 },
-    { 26, 2, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text06), 0, 820 },
-    { 56, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text07), 0, 1020 },
-    { 26, 2, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text08), 0, 1050 },
-    { 26, 0, 2, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text09), 0, 1100 },
-    { 26, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text10), 0, 1102 },
-    { 56, 2, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent193Text11), MSG_SCRIPT_FLAG_END, 1150 },
+    { 26, 0, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text00), 0, 330 },
+    { 56, 0, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text01), 0, 530 },
+    { 56, 0, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text02), 0, 650 },
+    { 56, 0, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text03), 0, 652 },
+    { 56, 0, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text04), 0, 654 },
+    { 26, 0, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text05), 0, 680 },
+    { 26, 2, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text06), 0, 820 },
+    { 56, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text07), 0, 1020 },
+    { 26, 2, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text08), 0, 1050 },
+    { 26, 0, 2, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text09), 0, 1100 },
+    { 26, 1, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text10), 0, 1102 },
+    { 56, 2, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent193Text11), MSG_SCRIPT_FLAG_END, 1150 },
 };
 
 #ifdef VERSION_JP
@@ -34,12 +34,12 @@ static const EvSoundCue sEvent193SoundCues[9] = {
 };
 
 static const EventCameraKeyframe sEvent193Camera[6] = {
-    { -65186, 165376, 73984, 0, 255, { 0, 0, 0 }, 0, 0, { 0, 0 }, NULL },
-    { -64986, 181504, 65792, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 70, { 0, 0 }, NULL },
-    { -64537, 173824, 72704, 0, 255, { 0, 0, 0 }, CAMERA_MODE_APPROACH, 60, { 0, 0 }, NULL },
-    { -64326, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
-    { -64181, 0, 0, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, { 0, 0 }, NULL },
-    { -63536, 66304, 33792, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 1, { 0, 0 }, NULL },
+    { -65186, 165376, 73984, 0, 255, 0, 0, NULL },
+    { -64986, 181504, 65792, 0, 255, CAMERA_MODE_APPROACH, 70, NULL },
+    { -64537, 173824, 72704, 0, 255, CAMERA_MODE_APPROACH, 60, NULL },
+    { -64326, 0, 0, 0, 255, CAMERA_MODE_KEEP, 0, NULL },
+    { -64181, 0, 0, 0, 255, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_MODE_KEEP, 0, NULL },
+    { -63536, 66304, 33792, 0, 255, CAMERA_KEYFRAME_FLAG_SHAKE_SMALL | CAMERA_KEYFRAME_FLAG_END | CAMERA_MODE_APPROACH, 1, NULL },
 };
 
 static const EventBgEffectEntry sEvent193BgEffects[4] = {
@@ -50,41 +50,40 @@ static const EventBgEffectEntry sEvent193BgEffects[4] = {
 };
 
 static const EventCharaKeyframe sEvent193Track0[7] = {
-    { 515, 1, { 0, 0 }, 131072, 100352, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 518, 140, { 0, 0 }, 164608, 82432, 0, 515, { 0, 0 }, 67, NULL, NULL },
-    { 515, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 515, 300, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateBalloonTask },
-    { 515, 720, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 560, 1355, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 561, 5000, { 0, 0 }, 57088, 43520, 0, 0, { 0, 0 }, 32834, NULL, NULL },
+    { 515, 1, 131072, 100352, 0, 0, 66, NULL, NULL },
+    { 518, 140, 164608, 82432, 0, 515, 67, NULL, NULL },
+    { 515, 170, 0, 0, 0, 0, 69, NULL, NULL },
+    { 515, 300, 0, 0, 0, 0, 64, NULL, CreateBalloonTask },
+    { 515, 720, 0, 0, 0, 0, 69, NULL, NULL },
+    { 560, 1355, 0, 0, 0, 0, 69, NULL, NULL },
+    { 561, 5000, 57088, 43520, 0, 0, 32834, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent193Track1[8] = {
-    { 688, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 2, NULL, NULL },
-    { 688, 550, { 0, 0 }, 198144, 66816, 0, 0, { 0, 0 }, 2, EventCharaFadeIn, NULL },
-    { 690, 620, { 0, 0 }, 182784, 74752, 0, 688, { 0, 0 }, 3, NULL, NULL },
-    { 688, 840, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 688, 970, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, NULL, CreateBalloonTask },
-    { 688, 1180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 694, 1355, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 694, 5000, { 0, 0 }, 75264, 35840, 0, 0, { 0, 0 }, 32770, NULL, NULL },
+    { 688, 450, 0, 0, 0, 0, 2, NULL, NULL },
+    { 688, 550, 198144, 66816, 0, 0, 2, EventCharaFadeIn, NULL },
+    { 690, 620, 182784, 74752, 0, 688, 3, NULL, NULL },
+    { 688, 840, 0, 0, 0, 0, 5, NULL, NULL },
+    { 688, 970, 0, 0, 0, 0, 0, NULL, CreateBalloonTask },
+    { 688, 1180, 0, 0, 0, 0, 5, NULL, NULL },
+    { 694, 1355, 0, 0, 0, 0, 5, NULL, NULL },
+    { 694, 5000, 75264, 35840, 0, 0, 32770, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent193Track2[3] = {
-    { 926, 1200, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 8194, NULL, NULL },
-    { 926, 1215, { 0, 0 }, 184064, 72704, 0, 0, { 0, 0 }, 16658, NULL, NULL },
-    { 926, 5000, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 98306, NULL, NULL },
+    { 926, 1200, 0, 0, 0, 0, 8194, NULL, NULL },
+    { 926, 1215, 184064, 72704, 0, 0, 16658, NULL, NULL },
+    { 926, 5000, 0, 0, 0, 0, 98306, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent193Tracks[3] = {
-    { sEvent193Track0, 44, { 0, 0, 0 } },
-    { sEvent193Track1, 64, { 0, 0, 0 } },
-    { sEvent193Track2, 92, { 0, 0, 0 } },
+    { sEvent193Track0, 44 },
+    { sEvent193Track1, 64 },
+    { sEvent193Track2, 92 },
 };
 
 const EventSequenceDef gEvent193 = {
     3,
-    { 0, 0, 0 },
     sEvent193Tracks,
     sEvent193Camera,
     sEvent193Script,
@@ -93,7 +92,6 @@ const EventSequenceDef gEvent193 = {
     1410,
     0,
     1,
-    0,
     0,
     0,
     0,

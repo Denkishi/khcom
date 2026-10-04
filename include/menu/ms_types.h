@@ -23,7 +23,6 @@ typedef struct MsShopHosiArg {
     s16 y;
     void* palette;
     u8 angle;
-    u8 unk_09[0x3];
     s32 speed;
 } MsShopHosiArg;
 

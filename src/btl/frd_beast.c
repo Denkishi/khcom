@@ -26,8 +26,8 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFrdBeastAnimDefs[2] = {
-    { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0, { 0, 0, 0 } },
-    { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 1, { 0, 0, 0 } },
+    { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0 },
+    { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 1 },
 };
 
 u8 FrdBeastApplyGravity(FrdBeastWork* work) {

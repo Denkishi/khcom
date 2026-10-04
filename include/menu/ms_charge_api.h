@@ -9,7 +9,6 @@ typedef struct MsCard {
     u16 category;
     s16 values[10][2];
     u8 premium;
-    u8 unk_2F[0x1];
     u32 sortKey;
 } MsCard;
 

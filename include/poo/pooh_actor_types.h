@@ -37,7 +37,6 @@ typedef struct PooState {
     s32 poohAction;
     u32 flags;
     u16 eventsDone;
-    u16 unk_2A;
     u32 droppedPrizes[4];
     u16 gauge;
     u16 gaugeTimer;
@@ -47,7 +46,6 @@ typedef struct PooState {
 
 typedef struct PooShadowInfo {
     u16 priority;
-    u16 unk_02;
     s32 z;
 } PooShadowInfo;
 
@@ -56,7 +54,6 @@ typedef struct PooHitBox {
     u16 tileCount;
     s16 height;
     s16 radius;
-    s16 unk_0A;
 } PooHitBox;
 
 typedef struct PoohWork {
@@ -65,7 +62,6 @@ typedef struct PoohWork {
     void* gfx;
     AnimState anim;
     u8 flipped;
-    u8 unk_25;
     u16 animAction;
     PooPos pos;
     u8 angle;
@@ -79,28 +75,22 @@ typedef struct PoohWork {
     Collider collider;
     s32 dirIndex;
     u16 balloonTimer;
-    u8 unk_AE[0x02];
     TaskPool tasks;
     Task* task;
     Task* zzzTask;
     u8 unk_CC;
-    u8 unk_CD[0x03];
     struct PooNode* targetNode;
     u16 lookTimer;
     u8 unk_D6;
-    u8 unk_D7;
     u16 sleepTimer;
     s16 actionTimer;
     u16 callTimer;
-    u8 unk_DE[0x02];
     PooShadowInfo shadowInfo;
     u8 onCollider;
-    u8 unk_E9[0x03];
     s32 groundZ;
     s32 stumpIndex;
     u16 stumpCount;
     u8 leavingWagon;
-    u8 unk_F7;
     u16 callCount;
     u8 hideShadow;
     u8 hopAngle;

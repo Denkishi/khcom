@@ -34,31 +34,31 @@ static const u32 sHumAnsemStockMovesB[3] = {
 };
 
 static const AnimDef sHumAnsemAnimDefs[7] = {
-    { gAnsemBt00Frames, gAnsemBt00Anims, gAnsemBt00Tiles, 0, { 0, 0, 0 } },
-    { gAnsemBt01Frames, gAnsemBt01Anims, gAnsemBt01Tiles, 0, { 0, 0, 0 } },
-    { gAnsemBt03Frames, gAnsemBt03Anims, gAnsemBt03Tiles, 0, { 0, 0, 0 } },
-    { gAnsemBt04Frames, gAnsemBt04Anims, gAnsemBt04Tiles, 0, { 0, 0, 0 } },
-    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 0, { 0, 0, 0 } },
-    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 1, { 0, 0, 0 } },
-    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 2, { 0, 0, 0 } },
+    { gAnsemBt00Frames, gAnsemBt00Anims, gAnsemBt00Tiles, 0 },
+    { gAnsemBt01Frames, gAnsemBt01Anims, gAnsemBt01Tiles, 0 },
+    { gAnsemBt03Frames, gAnsemBt03Anims, gAnsemBt03Tiles, 0 },
+    { gAnsemBt04Frames, gAnsemBt04Anims, gAnsemBt04Tiles, 0 },
+    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 0 },
+    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 1 },
+    { gAnsemBt05Frames, gAnsemBt05Anims, gAnsemBt05Tiles, 2 },
 };
 
 static const AnimDef sHumAnsemBackAnimDefs[10] = {
-    { gAnsembackBt00Frames, gAnsembackBt00Anims, gAnsembackBt00Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt01Frames, gAnsembackBt01Anims, gAnsembackBt01Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt02Frames, gAnsembackBt02Anims, gAnsembackBt02Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt03Frames, gAnsembackBt03Anims, gAnsembackBt03Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt03bFrames, gAnsembackBt03bAnims, gAnsembackBt03bTiles, 1, { 0, 0, 0 } },
-    { gAnsembackBt03bFrames, gAnsembackBt03bAnims, gAnsembackBt03bTiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt04Frames, gAnsembackBt04Anims, gAnsembackBt04Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 0, { 0, 0, 0 } },
-    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 1, { 0, 0, 0 } },
-    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 2, { 0, 0, 0 } },
+    { gAnsembackBt00Frames, gAnsembackBt00Anims, gAnsembackBt00Tiles, 0 },
+    { gAnsembackBt01Frames, gAnsembackBt01Anims, gAnsembackBt01Tiles, 0 },
+    { gAnsembackBt02Frames, gAnsembackBt02Anims, gAnsembackBt02Tiles, 0 },
+    { gAnsembackBt03Frames, gAnsembackBt03Anims, gAnsembackBt03Tiles, 0 },
+    { gAnsembackBt03bFrames, gAnsembackBt03bAnims, gAnsembackBt03bTiles, 1 },
+    { gAnsembackBt03bFrames, gAnsembackBt03bAnims, gAnsembackBt03bTiles, 0 },
+    { gAnsembackBt04Frames, gAnsembackBt04Anims, gAnsembackBt04Tiles, 0 },
+    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 0 },
+    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 1 },
+    { gAnsembackBt05Frames, gAnsembackBt05Anims, gAnsembackBt05Tiles, 2 },
 };
 
-static const HumSubDef sHumAnsemSubDef = { gAnsembackPalette, 128, 0 };
+static const HumSubDef sHumAnsemSubDef = { gAnsembackPalette, 128 };
 
-static const HumDef sHumAnsemDef = { 80, 0, gAnsemPalette, 0, { 52, 99, 65, 14, 42, 99, 0 } };
+static const HumDef sHumAnsemDef = { 80, gAnsemPalette, 0, { 52, 99, 65, 14, 42, 99, 0 } };
 
 TaskDesc gTaskDescHumAnsem = {
     "task_hum_ansem",

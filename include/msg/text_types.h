@@ -17,8 +17,6 @@ typedef struct TextSlot {
     void* tiles;
     u8 useAlternatePalette;
     s8 advance;
-    u8 unk_06;
-    u8 unk_07;
 } TextSlot;
 
 #endif

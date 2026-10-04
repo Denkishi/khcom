@@ -32,7 +32,6 @@ typedef struct TmWork {
     u16 x;
     u16 y;
     u16 z;
-    u8 unk_06[0x2];
     s32 baseX;
     s32 baseY;
     s32 baseZ;
@@ -42,7 +41,6 @@ typedef struct TmWork {
     s32 vx;
     s32 vy;
     u16 flags;
-    u8 unk_2A[0x2];
     u32 state;
     s16 hitCount;
     s16 hurtTimer;
@@ -55,7 +53,6 @@ typedef struct TmWork {
     u16 tileIndex;
     u16 tileCount;
     u16 paletteIndex;
-    u8 unk_46[0x2];
     TmArmSrc arm;
 } TmWork;
 
@@ -68,17 +65,14 @@ typedef struct TmBodyWork {
     u8 unk_120[0x4];
     void* gfx;
     u8 angle;
-    u8 unk_129[0x3];
     BtlObj body2;
     u8 unk_23C[0x4];
     void* gfx2;
     u8 angle2;
-    u8 unk_245[0x3];
     BtlObj body3;
     u8 unk_358[0x4];
     void* gfx3;
     u8 angle3;
-    u8 unk_361[0x3];
     BtlObj body4;
     u8 unk_474[0x4];
     void* gfx4;
@@ -89,12 +83,10 @@ typedef struct TmBodyWork {
     s16 angleTimer;
     s16 unk_486;
     u8 unk_488;
-    u8 unk_489;
     s16 hp;
     s16 prevHp;
     s16 unk_48E;
     u8 unk_490;
-    u8 unk_491;
     s16 unk_492;
 } TmBodyWork;
 
@@ -103,7 +95,6 @@ typedef struct TmTblWork {
     Collider collider;
     u16 height;
     u8 unk_062;
-    u8 unk_063[0x1];
     u16 unk_064;
     s8 frame;
     u8 gimmickPlayed;
@@ -115,7 +106,6 @@ typedef struct TmArmPos {
     s32 y;
     s32 z;
     u16 angle;
-    u16 unk_0E;
 } TmArmPos;
 
 typedef struct TmClbArg {
@@ -132,7 +122,6 @@ typedef struct TmClbWork {
     ObjTiles* tiles;
     ObjPalette* palette;
     u16 angle;
-    u8 unk_00E[0x2];
     s32 x;
     s32 y;
     s32 z;
@@ -148,7 +137,6 @@ typedef struct TmAnim {
     s16 timer;
     s16 frame;
     s16 frameCount;
-    u8 unk_06[0x2];
     const TmAnimFrame* frames;
 } TmAnim;
 
@@ -156,11 +144,9 @@ typedef struct TmArmJoint {
     s32 curX;
     s32 curY;
     u8 angle;
-    u8 unk_09[0x3];
     s32 x;
     s32 y;
     u16 targetAngle;
-    u8 unk_16[0x2];
     AnimState anim;
     void* gfx;
 } TmArmJoint;
@@ -183,12 +169,10 @@ typedef struct TmArmWork {
     TmAnim jointAnim;
     TmAnim jointAnim2;
     u8 clbSwapped;
-    u8 unk_231[0x3];
     u32 prevState;
     ObjTiles* tiles2;
     AnimState anim;
     u8 paletteStep;
-    u8 unk_255[0x3];
 } TmArmWork;
 
 typedef struct TmFootWork {
@@ -196,7 +180,6 @@ typedef struct TmFootWork {
     u8 unk_002;
     u8 footFrame;
     u8 footFrame2;
-    u8 unk_005[0x3];
     ObjTiles* tiles;
     ObjTiles* tiles2;
     ObjTiles* tiles3;
@@ -205,19 +188,15 @@ typedef struct TmFootWork {
     BtlObj body;
     void* gfx;
     u8 unk_130;
-    u8 unk_131[0x3];
     BtlObj body2;
     void* gfx2;
     u8 unk_248;
-    u8 unk_249[0x3];
     BtlObj body3;
     void* gfx3;
     u8 unk_360;
-    u8 unk_361[0x3];
     BtlObj body4;
     void* gfx4;
     u8 unk_478;
-    u8 unk_479[0x3];
     TmWork* tm;
     u32 unk_480;
 } TmFootWork;

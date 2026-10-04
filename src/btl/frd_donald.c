@@ -29,12 +29,12 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFrdDonaldAnimDefs[6] = {
-    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0, { 0, 0, 0 } },
-    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 1, { 0, 0, 0 } },
-    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 2, { 0, 0, 0 } },
-    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 3, { 0, 0, 0 } },
-    { gDonaFl00Frames, gDonaFl00Anims, gDonaFl00Tiles, 5, { 0, 0, 0 } },
-    { gDonaBl00Frames, gDonaBl00Anims, gDonaBl00Tiles, 2, { 0, 0, 0 } },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0 },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 1 },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 2 },
+    { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 3 },
+    { gDonaFl00Frames, gDonaFl00Anims, gDonaFl00Tiles, 5 },
+    { gDonaBl00Frames, gDonaBl00Anims, gDonaBl00Tiles, 2 },
 };
 
 TaskDesc gTaskDescFrdDonald = {

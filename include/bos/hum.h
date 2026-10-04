@@ -12,7 +12,6 @@
 typedef struct VixenSub {
     u8 pending;
     u8 active;
-    u8 unk_02[0x02];
     s32 x;
     s32 y;
 } VixenSub;
@@ -23,7 +22,6 @@ typedef struct CloudWork {
     u16 state;
     u16 attackPhase;
     u16 nextState;
-    u8 unk_192[0x02];
 } CloudWork;
 
 enum HookFlag {
@@ -39,7 +37,6 @@ typedef struct HookWork {
     u16 angle;
     u16 rollLevel;
     u16 flags;
-    u8 unk_19A[0x02];
     TaskPool tasks;
     void* bombTask;
     void* bombTask2;
@@ -51,7 +48,6 @@ typedef struct HookMoonWork {
     ObjPalette* palette;
     u16 angle;
     u8 backdropSet;
-    u8 unk_0B;
 } HookMoonWork;
 
 typedef struct VixenNdlArgs {
@@ -61,7 +57,6 @@ typedef struct VixenNdlArgs {
     u8 unk_0C[0x06];
     s16 facingLeft;
     u16 variant;
-    u16 unk_16;
     void* tiles;
     u8 unk_1C[0x04];
 } VixenNdlArgs;
@@ -76,7 +71,6 @@ typedef struct VixenNdlWork {
     u8 hitPhase;
     u8 hitDone;
     u8 flipped;
-    u8 unk_2F;
 } VixenNdlWork;
 
 typedef struct VixenFrzWork {
@@ -90,7 +84,6 @@ typedef struct VixenFrzWork {
     s16 timer;
     u16 variant;
     u16 flipped;
-    u16 unk_36;
 } VixenFrzWork;
 
 typedef struct VixenIceWork {
@@ -103,7 +96,6 @@ typedef struct VixenIceWork {
     s16 stateTimer;
     u16 steps;
     u16 lifetime;
-    u8 unk_8A[0x02];
     s32 scale;
     s32 targetScale;
 } VixenIceWork;
@@ -116,10 +108,8 @@ typedef struct LexTmh0Work {
     s32 y;
     s32 z;
     u8 facingLeft;
-    u8 unk_2D[0x03];
     s32 scale;
     s16 steps;
-    u8 unk_36[0x02];
 } LexTmh0Work;
 
 typedef struct LexTmhWork {
@@ -131,7 +121,6 @@ typedef struct LexTmhWork {
     s32 z;
     u8 facingLeft;
     u8 done;
-    u16 unk_2E;
     s32 state;
     s32 targetX;
     s32 targetY;
@@ -139,7 +128,6 @@ typedef struct LexTmhWork {
     void* tiles2;
     void* palette2;
     u8 flyLeft;
-    u8 unk_49;
     s16 timer;
 } LexTmhWork;
 
@@ -152,7 +140,6 @@ typedef struct RikuSpawn {
     s32 y;
     s32 z;
     u16 flags;
-    u16 unk_0E;
     AnimState anim;
     const void* tileSrc;
     s32 scale;
@@ -185,10 +172,8 @@ typedef struct MahluxiaWork {
     u16 steps;
     s32 angle;
     u16 flags;
-    u8 unk_1D2[0x02];
     s32 swingBaseY;
     s16 afterimageTimer;
-    u8 unk_1DA[0x02];
     RikuSpawn spawns[9];
     s32 subSpeed;
     TaskPool tasks;
@@ -221,7 +206,6 @@ typedef struct LaxeneWork {
     u16 unk_18C;
     u16 flags;
     u16 scaleSteps;
-    u16 unk_192;
     TaskPool tasks;
 } LaxeneWork;
 
@@ -240,7 +224,6 @@ typedef struct VixenWork {
     TaskPool tasks;
     void* task;
     u8 needleCount;
-    u8 unk_1BD[0x03];
     s32 slideSpeed;
     VixenSub sub[3];
     ObjTiles needleTiles;
@@ -260,7 +243,6 @@ typedef struct LexceusWork {
     u8 unk_1C8[0x02];
     u16 flags;
     s16 scaleSteps;
-    u16 unk_1CE;
     s32 targetScaleX;
     s32 targetScaleY;
     TaskPool tasks;
@@ -268,7 +250,6 @@ typedef struct LexceusWork {
     s32 tilt;
     s32 targetTilt;
     u16 tiltSteps;
-    u16 unk_1FA;
     s32 tiltSlide;
     s32 cameraBaseY;
 } LexceusWork;
@@ -299,7 +280,6 @@ typedef struct HadesWork {
     u16 unk_1C8;
     u16 flags;
     s16 angryAttacks;
-    u8 unk_1CE[0x02];
     s32 subVz;
     void* tiles;
     void* tiles2;
@@ -316,7 +296,6 @@ typedef struct LeonWork {
     HumWork base;
     u16 flashTimer;
     u8 unk_18A;
-    u8 unk_18B;
     u64 savedLearnedStocks;
     u64 savedLearnedStocks2;
 } LeonWork;
@@ -331,7 +310,6 @@ typedef struct AnsemWork {
     u8 unk_1D4[0x02];
     s16 steps;
     s16 repeatCount;
-    u8 unk_1DA[0x02];
 } AnsemWork;
 
 typedef struct VixenFrgDef {
@@ -350,7 +328,6 @@ typedef struct VixenFrgSub {
     s32 vx;
     s32 vy;
     u16 spriteFlags;
-    u16 unk_1E;
 } VixenFrgSub;
 
 typedef struct VixenFrgWork {
@@ -358,10 +335,8 @@ typedef struct VixenFrgWork {
     void* tiles;
     void* palette;
     s16 timer;
-    u16 unk_3A;
     VixenFrgSub sub[15];
     u8 blinking;
-    u8 unk_21D[0x03];
 } VixenFrgWork;
 
 enum RikuFlag {
@@ -377,10 +352,8 @@ typedef struct RikuWork {
     u16 unk_1C8;
     u16 flags;
     s16 afterimageTimer;
-    u16 unk_1CE;
     RikuSpawn spawns[9];
     u16 dashCount;
-    u8 unk_382[0x02];
 } RikuWork;
 
 typedef struct HookBombWork {
@@ -391,17 +364,13 @@ typedef struct HookBombWork {
     s32 y;
     s32 z;
     u8 facingLeft;
-    u8 unk_2D[0x03];
     s32 vz;
     u8 angle;
-    u8 unk_35[0x03];
     s32 state;
     s16 timer;
-    u16 unk_3E;
     void* tiles2;
     void* palette2;
     u8 visible;
-    u8 unk_49;
     s16 bounceCount;
     s16 maxBounces;
     u16 variant;
@@ -410,7 +379,6 @@ typedef struct HookBombWork {
 
 typedef struct LexRockSub {
     u8 hasHit;
-    u8 unk_01[0x03];
     s32 x;
     s32 y;
     s32 z;
@@ -427,7 +395,6 @@ typedef struct LexRockWork {
     s32 y;
     s32 z;
     u8 facingLeft;
-    u8 unk_161;
     u16 state;
     u16 rockCount;
     s16 timer;
@@ -435,7 +402,6 @@ typedef struct LexRockWork {
     void* tiles;
     void* palette;
     u8 blinking;
-    u8 unk_2C1[0x03];
 } LexRockWork;
 
 enum AxcelFlag {
@@ -450,7 +416,6 @@ typedef struct AxcelWork {
     s16 steps;
     u16 flags;
     u16 scaleSteps;
-    u16 unk_20A;
     s32 targetScaleX;
     s32 targetScaleY;
     s32 orbitRadius;
@@ -474,7 +439,6 @@ typedef struct AxcelPtcWork {
 typedef struct RobeWork {
     HumWork base;
     u16 idleAnim;
-    u8 unk_18A[0x02];
 } RobeWork;
 
 extern TaskDesc gTaskDescHumMahluxiaFlw;

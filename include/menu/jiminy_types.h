@@ -18,7 +18,6 @@ typedef LocalizedText JiminyLocalizedName;
 typedef struct JiminyLocalizedText {
     JiminyTextChar** lines[5];
     u16 lineCounts[5];
-    u16 padding;
 } JiminyLocalizedText;
 
 typedef char JiminyLocalizedName_size[(sizeof(JiminyLocalizedName) == 20) ? 1 : -1];
@@ -35,7 +34,6 @@ typedef struct JiminyDetail {
     const void* text;
 #ifndef VERSION_EU
     s16 lineCount;
-    u16 padding;
 #endif
     void* sprite;
     void* palette;
@@ -109,7 +107,6 @@ typedef struct JiminyWork {
     s16 cursorRow;
     s16 itemCount;
     s16 visibleRows;
-    u8 unk_C7A[0x02];
     AnimState anim;
     AnimState anim2;
     u16 flags;
@@ -124,7 +121,6 @@ typedef struct JiminyWork {
     s16 y;
     s16 x2;
     s16 y2;
-    u8 unk_CCA[0x02];
     const JiminyDetail* detail;
     u16 detailCount;
     s16 detailIndex;

@@ -20,10 +20,8 @@ typedef struct BtlTaskArgs {
     u8 unk_0C[0x6];
     s16 facingLeft;
     u16 mainSide;
-    u16 unk_16;
     void* unk_18;
     u16 variant;
-    u8 unk_1E[0x2];
 } BtlTaskArgs;
 
 enum BtlDrawInfoFlag {
@@ -35,7 +33,6 @@ typedef struct BtlDrawInfo {
     s32 y;
     s32 z;
     u16 flags;
-    u8 unk_0E[0x2];
     AnimState anim;
     const void* tileSrc;
     s32 scale;
@@ -47,7 +44,6 @@ typedef struct BtlLockonWork {
     AnimState anim;
     void* gfx;
     s16 timer;
-    u8 unk_026[0x02];
 } BtlLockonWork;
 
 typedef struct BtlAreaWork {
@@ -70,20 +66,17 @@ typedef struct SoraAttackDef {
     u16 hitSound;
     s32 vz;
     u16 flags;
-    u16 unk_12;
     const struct SoraAttackDef* next;
 } SoraAttackDef;
 
 typedef struct RikuAttackDef {
     s32 animId;
     s16 hitFrame;
-    u16 unk_06;
     const s32* attackIds;
     u16 swingSound;
     u16 song;
     s32 vz;
     u16 flags;
-    u16 unk_16;
     const struct RikuAttackDef* next;
 } RikuAttackDef;
 
@@ -122,7 +115,6 @@ typedef struct BtlSoraWork {
     u8 mainSide;
     u8 sioKeysA;
     u16 platformPriority;
-    u8 unk_176[0x2];
     s32 platformX;
     s32 platformY;
     s32 platformZ;
@@ -132,14 +124,12 @@ typedef struct BtlSoraWork {
     u8 swingSpeed;
     u8 breakAnim;
     u8 keyblade;
-    u8 unk_193;
     s32 unk_194;
     s32 targetY;
     s32 scaleX;
     s32 scaleY;
     BtlObj* target;
     u16 frameCount;
-    u8 unk_1AA[0x2];
 } BtlSoraWork;
 
 enum BtlRikuFlag {
@@ -193,14 +183,11 @@ typedef struct BtlRikuWork {
     s32 scaleY;
     BtlObj* target;
     u16 frameCount;
-    u8 unk_1AA[0x2];
     void* paletteData;
     u16 limitDashCount;
-    u8 unk_1B2[0x2];
     s32 targetX;
     s32 targetY;
     s16 drawCount;
-    u8 unk_1BE[0x2];
     BtlDrawInfo drawInfo[9];
     BtlObj* actor2;
 } BtlRikuWork;

@@ -20,18 +20,15 @@ typedef struct BtlFormWork {
     s16 timer;
     s16 stepTimer;
     s16 stepIndex;
-    u8 unk_06[0x02];
     const BtlFormList* list;
     const BtlFormEntry* entry;
     s16 entryIndex;
-    u8 unk_12[0x02];
     s32 x;
     s32 y;
     s32 z;
     u16 flags;
     u16 nextTileCount;
     s16 waitTimer;
-    u8 unk_26[0x02];
 } BtlFormWork;
 
 typedef struct BtlVec {
@@ -68,11 +65,9 @@ typedef struct BtlRaidWork {
     s16 steps;
     u8 facingLeft;
     u8 mainSide;
-    u8 unk_3E[0x02];
     u32 state;
     s32 scale;
     u16 variant;
-    u8 unk_4A[0x02];
     s32 attack;
     s32 unk_50;
     s16 hitHalfSize;
@@ -83,7 +78,6 @@ typedef struct BtlRaidWork {
     void* tiles;
     void* palette2;
     u16 song;
-    u8 unk_6A[0x02];
 } BtlRaidWork;
 
 typedef struct BtlRaidArgs {
@@ -95,7 +89,6 @@ typedef struct BtlRaidArgs {
     s16 mainSide;
     u8 unk_16[0x06];
     u16 variant;
-    u8 unk_1E[0x02];
 } BtlRaidArgs;
 
 typedef struct BtlBadStatusWork {

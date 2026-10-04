@@ -16,10 +16,8 @@ typedef struct AllmapRoomWork {
     s32 dropY;
     s32 dropTargetY;
     u8 room;
-    u8 unk_099;
     u16 shape;
     u16 asSprite;
-    u8 unk_09E[0x02];
 } AllmapRoomWork;
 
 #endif

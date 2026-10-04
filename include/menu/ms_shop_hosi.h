@@ -12,7 +12,6 @@ typedef struct MsShopHosiWork {
     s16 frame;
     s16 timer;
     s16 frameDuration;
-    u8 unk_16[0x2];
     void* palette;
     void* tiles;
 } MsShopHosiWork;

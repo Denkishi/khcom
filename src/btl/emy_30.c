@@ -22,20 +22,20 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sEmy30CommonAnimDefs[3] = {
-    { gEmy3000Frames, gEmy3000Anims, gEmy3000Tiles, 0, { 0, 0, 0 } },
-    { gEmy3002Frames, gEmy3002Anims, gEmy3002Tiles, 0, { 0, 0, 0 } },
-    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 1, { 0, 0, 0 } },
+    { gEmy3000Frames, gEmy3000Anims, gEmy3000Tiles, 0 },
+    { gEmy3002Frames, gEmy3002Anims, gEmy3002Tiles, 0 },
+    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 1 },
 };
 
 static const AnimDef sEmy30AnimDefs[8] = {
-    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 0, { 0, 0, 0 } },
-    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 2, { 0, 0, 0 } },
-    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 0, { 0, 0, 0 } },
-    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 1, { 0, 0, 0 } },
-    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 2, { 0, 0, 0 } },
-    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 0, { 0, 0, 0 } },
-    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 1, { 0, 0, 0 } },
-    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 2, { 0, 0, 0 } },
+    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 0 },
+    { gEmy3001Frames, gEmy3001Anims, gEmy3001Tiles, 2 },
+    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 0 },
+    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 1 },
+    { gEmy3010Frames, gEmy3010Anims, gEmy3010Tiles, 2 },
+    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 0 },
+    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 1 },
+    { gEmy3011Frames, gEmy3011Anims, gEmy3011Tiles, 2 },
 };
 
 static const EmyDef sEmy30Def = { gEmy30Palette, sEmy30CommonAnimDefs, 1024, 150, 4, 20, 60, 32, 32, 30, 0, { 22, 45, 34, 30, 16, 100, EMY_KIND_FLAG_LARGE_BODY } };

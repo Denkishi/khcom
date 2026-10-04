@@ -24,9 +24,9 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnDumboAnimDefs[3] = {
-    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 0, { 0, 0, 0 } },
-    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 1, { 0, 0, 0 } },
-    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 2, { 0, 0, 0 } },
+    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 0 },
+    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 1 },
+    { gUnk_09EDE848, gUnk_09EDE86C, gUnk_088ABF88, 2 },
 };
 
 TaskDesc gTaskDescSmnDumbo = {

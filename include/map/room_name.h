@@ -16,13 +16,10 @@ typedef struct RoomNameWork {
     s32 unk_20;
     s32 unk_24;
     u8 state;
-    u8 unk_29;
     u16 timer;
     u16 unk_2C;
-    u8 unk_2E[0x2];
     s32 nameId;
     u8 textSlotCount;
-    u8 unk_35[0x3];
     void* palette2;
     TextSlot textSlots[0x24];
 } RoomNameWork;

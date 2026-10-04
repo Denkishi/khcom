@@ -14,7 +14,6 @@ typedef struct EventKey {
 
 typedef struct EventKeyList {
     u8 count;
-    u8 unk_01[0x03];
     EventKey* keys;
 } EventKeyList;
 
@@ -90,13 +89,10 @@ typedef struct MapRoomState {
     u8 battleId;
     u8 doorRoom;
     u8 doorSide;
-    u8 unk_11[0x03];
     FldObj* door;
     u8 jumpGmkAngle;
-    u8 unk_19[0x03];
     s32 jumpGmkHeight;
     u8 attackActive;
-    u8 unk_21[0x03];
     s32 attackX;
     s32 attackY;
     s32 attackZ;
@@ -109,7 +105,6 @@ typedef struct MapCell {
     u8 bg3Piece;
     u8 bg2Piece;
     u8 bg1Piece;
-    u8 unk_06[0x02];
     s32 upperZ;
     s32 lowerZ;
     void* maskTable;
@@ -130,15 +125,12 @@ typedef struct MapEventDoor {
 
 typedef struct MapFloorRoom {
     u16 flags;
-    u8 unk_02;
-    u8 unk_03;
     u32 seed;
     u8 nameId;
     u8 roomType;
     u8 cardValue;
     u8 enemiesLeft;
     u8 przCardsLeft;
-    u8 unk_0D[0x03];
 } MapFloorRoom;
 
 typedef struct EventKeyProgress {
@@ -149,7 +141,6 @@ typedef struct EventKeyProgress {
 
 typedef struct MapFloorState {
     u8 progress;
-    u8 unk_01;
     u16 flags;
     u8 world;
     u8 eventStep;

@@ -13,7 +13,6 @@ typedef struct SioBattleWork {
     u8 state;
     u16 slideTimer;
     u16 stateFrames;
-    u8 unk_06[0x02];
     s32 x;
     s32 y;
     s32 y2;
@@ -32,22 +31,17 @@ typedef struct SioBattleWork {
     AnimState anim;
     s32 cursorY;
     u16 modeArg;
-    u8 unk_6A[0x02];
 } SioBattleWork;
 
 typedef struct SioWorldEntry {
     void* tiles;
     u16 tilesSize;
-    u16 unk_06;
     void* map;
     u16 mapSize;
-    u16 unk_0E;
     void* palette;
     u16 paletteSize;
-    u16 unk_16;
     const void* text;
     u8 world;
-    u8 unk_1D;
     u16 textX;
 } SioWorldEntry;
 
@@ -90,18 +84,15 @@ typedef struct SioBtlConnectWork {
     s16 timer;
     s8 state;
     u8 textSlotCount;
-    u8 unk_06[2];
     TextSlot textSlots[SIO_CONNECT_TEXT_SLOTS];
     void* palette;
 } SioBtlConnectWork;
 
 typedef struct SioErrorWork {
     u8 unk_00;
-    u8 unk_01;
     u16 unk_02;
     u16 unk_04;
     u8 textSlotCount;
-    u8 unk_07;
     TextSlot textSlots[SIO_ERROR_TEXT_SLOTS];
     void* palette;
 } SioErrorWork;
@@ -116,7 +107,6 @@ typedef struct SioCardTaskArg {
     s32 targetX;
     s32 targetY;
     u16 delay;
-    u8 unk_22[2];
 } SioCardTaskArg;
 
 typedef struct SioChgCardWork {
@@ -124,7 +114,6 @@ typedef struct SioChgCardWork {
     s8 state;
     s16 blinkPhase;
     s16 timer;
-    u8 unk_006[2];
     void* playerTilesPalettes[4];
     void* gfx[2];
     AnimState anim[2];
@@ -133,19 +122,16 @@ typedef struct SioChgCardWork {
     void* gfx2;
     AnimState anim2;
     s8 cursorVisible;
-    u8 unk_075;
     s16 cursor;
     s16 nextCursor;
     s16 x;
     s16 y;
-    u8 unk_07E[2];
     void* tiles2;
     void* palette2;
     void* gfx3;
     AnimState anim3;
     s8 ready;
     s8 cardVisible[10];
-    u8 unk_0AF;
     s32 x2[10];
     s32 y2[10];
     void* tiles3[10];
@@ -162,11 +148,9 @@ typedef struct SioChgCardWork {
     void* gfx6;
     s8 messageVisible;
     u8 textSlotCount;
-    u8 unk_20E[2];
     TextSlot textSlots[42];
     s8 cardInfoVisible;
     u8 textSlotCount2;
-    u8 unk_362[2];
     TextSlot textSlots2[20];
     s16 receiveOk;
     u16 collectionBackup[0x3E7];
@@ -174,17 +158,14 @@ typedef struct SioChgCardWork {
     s16 x3;
     s16 y3;
     s8 leaveDelay;
-    u8 unk_BE1[3];
     TaskPool tasks;
 } SioChgCardWork;
 
 typedef struct SioBtlCardgetWork {
     s8 state;
-    u8 unk_01;
     u16 unk_02;
     s16 timer;
     s8 lost;
-    u8 unk_07;
     void* tiles;
     void* tiles2;
     void* palette;
@@ -206,28 +187,24 @@ typedef struct SioBtlOptionWork {
     s8 cursor;
     u8 returnState;
     s8 state;
-    u8 unk_003;
     s16 fadeLevel;
     s16 timer;
     void* playerTilesPalettes[4];
     void* gfx6[2];
     AnimState anim2[2];
     u8 textSlotCount;
-    u8 unk_051[3];
     TextSlot textSlots[20];
 #ifdef VERSION_EU
     TextSlot unkEu_0F4[20];
 #endif
     void* palette7;
     u8 textSlotCount2;
-    u8 unk_0F9[3];
     TextSlot textSlots2[10];
 #ifdef VERSION_EU
     TextSlot unkEu_1EC[10];
 #endif
     void* palette8;
     u8 textSlotCount3;
-    u8 unk_151[3];
     TextSlot textSlots3[10];
 #ifdef VERSION_EU
     TextSlot unkEu_294[10];
@@ -237,21 +214,18 @@ typedef struct SioBtlOptionWork {
     void* palette;
     void* gfx;
     s8 menuOpen;
-    u8 unk_1B5[3];
     void* tiles2;
     void* palette2;
     void* gfx2;
     AnimState anim;
     s32 y;
     s8 cursorVisible;
-    u8 unk_1E1[3];
     void* tiles4;
     void* palette4;
     void* gfx4;
     void* gfx7;
     void* gfx8;
     s8 handicapMarkerVisible;
-    u8 unk_1F9;
     u16 frameCount;
     void* tiles5[2];
     void* gfx5[2];
@@ -260,27 +234,23 @@ typedef struct SioBtlOptionWork {
     s8 handicap;
     s8 player1Ready;
     s8 player2Ready;
-    u8 unk_219;
     u16 modeArg;
     void* tiles3;
     void* palette3;
     void* gfx3;
     s8 messageVisible;
     u8 textSlotCount4;
-    u8 unk_22A[2];
     TextSlot textSlots4[60];
 #ifdef VERSION_EU
     TextSlot unkEu_54C[60];
 #endif
     void* palette6;
     s8 worldChangeState;
-    u8 unk_411;
     s16 x;
     s16 y2;
     s8 leaveDelay;
     s8 worldEntry;
     u16 unk_418;
-    u8 unk_41A[2];
 } SioBtlOptionWork;
 
 extern u8 gUnk_0815A2BE[];

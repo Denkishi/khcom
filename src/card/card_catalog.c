@@ -72,7 +72,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 0, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 0, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -82,7 +82,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 1, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 1, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -92,7 +92,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 2, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 2, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -102,7 +102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 3, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 3, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -112,7 +112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 4, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 4, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -122,7 +122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 5, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 5, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -132,7 +132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 6, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 6, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -142,7 +142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 7, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 7, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -152,7 +152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 8, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 8, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -162,7 +162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep01Frame0, gCardWep01Tiles, gCardWep01Palette, &gUnkEu_0888E860, gUnk_0905F0BC, gUnk_0905F0D0, gUnk_09612C38,
 #endif
-        0, 0x0, 9, {0, 0, 0}, 0x0, 1, 0, 0, 10, {2, 0, 0, 0, 0, 0},
+        0, 0x0, 9, 0x0, 1, 0, 10, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -172,7 +172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 0, {0, 0, 0}, 0x3, 11, 0, 0, 15, {10, 0, 0, 0, 0, 0},
+        1, 0x0, 0, 0x3, 11, 0, 15, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -182,7 +182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 1, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 1, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -192,7 +192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 2, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 2, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -202,7 +202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 3, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 3, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -212,7 +212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 4, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 4, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -222,7 +222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 5, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 5, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -232,7 +232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 6, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 6, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -242,7 +242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 7, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 7, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -252,7 +252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 8, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 8, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -262,7 +262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep04Frame0, gCardWep04Tiles, gCardWep04Palette, &gUnkEu_0888E8B4, gUnk_0905F2E4, gUnk_0905F2F8, gUnk_09612C78,
 #endif
-        1, 0x0, 9, {0, 0, 0}, 0x3, 11, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        1, 0x0, 9, 0x3, 11, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -272,7 +272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 0, {0, 0, 0}, 0x4, 21, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        2, 0x0, 0, 0x4, 21, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -282,7 +282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 1, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 1, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -292,7 +292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 2, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 2, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -302,7 +302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 3, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 3, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -312,7 +312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 4, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 4, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -322,7 +322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 5, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 5, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -332,7 +332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 6, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 6, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -342,7 +342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 7, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 7, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -352,7 +352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 8, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 8, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -362,7 +362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep05Frame0, gCardWep05Tiles, gCardWep05Palette, &gUnkEu_0888E904, gUnk_0905F3F8, gUnk_0905F40C, gUnk_09612C98,
 #endif
-        2, 0x0, 9, {0, 0, 0}, 0x4, 21, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        2, 0x0, 9, 0x4, 21, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -372,7 +372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 0, {0, 0, 0}, 0x5, 31, 0, 0, 15, {10, 0, 0, 0, 0, 0},
+        3, 0x0, 0, 0x5, 31, 0, 15, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -382,7 +382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 1, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 1, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -392,7 +392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 2, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 2, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -402,7 +402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 3, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 3, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -412,7 +412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 4, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 4, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -422,7 +422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 5, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 5, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -432,7 +432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 6, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 6, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -442,7 +442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 7, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 7, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -452,7 +452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 8, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 8, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -462,7 +462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep06Frame0, gCardWep06Tiles, gCardWep06Palette, &gUnkEu_0888E964, gUnk_0905F50C, gUnk_0905F520, gUnk_09612CB8,
 #endif
-        3, 0x0, 9, {0, 0, 0}, 0x5, 31, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        3, 0x0, 9, 0x5, 31, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -472,7 +472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 0, {0, 0, 0}, 0x6, 41, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        4, 0x0, 0, 0x6, 41, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -482,7 +482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 1, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 1, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -492,7 +492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 2, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 2, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -502,7 +502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 3, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 3, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -512,7 +512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 4, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 4, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -522,7 +522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 5, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 5, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -532,7 +532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 6, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 6, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -542,7 +542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 7, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 7, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -552,7 +552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 8, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 8, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -562,7 +562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep07Frame0, gCardWep07Tiles, gCardWep07Palette, &gUnkEu_0888E9B8, gUnk_0905F620, gUnk_0905F634, gUnk_09612CD8,
 #endif
-        4, 0x0, 9, {0, 0, 0}, 0x6, 41, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        4, 0x0, 9, 0x6, 41, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -572,7 +572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 0, {0, 0, 0}, 0x7, 51, 0, 0, 15, {10, 0, 0, 0, 0, 0},
+        5, 0x0, 0, 0x7, 51, 0, 15, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -582,7 +582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 1, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 1, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -592,7 +592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 2, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 2, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -602,7 +602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 3, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 3, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -612,7 +612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 4, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 4, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -622,7 +622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 5, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 5, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -632,7 +632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 6, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 6, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -642,7 +642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 7, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 7, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -652,7 +652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 8, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 8, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -662,7 +662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep08Frame0, gCardWep08Tiles, gCardWep08Palette, &gUnkEu_0888EA14, gUnk_0905F734, gUnk_0905F748, gUnk_09612CF8,
 #endif
-        5, 0x0, 9, {0, 0, 0}, 0x7, 51, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        5, 0x0, 9, 0x7, 51, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -672,7 +672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 0, {0, 0, 0}, 0x8, 61, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        6, 0x0, 0, 0x8, 61, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -682,7 +682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 1, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 1, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -692,7 +692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 2, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 2, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -702,7 +702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 3, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 3, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -712,7 +712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 4, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 4, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -722,7 +722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 5, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 5, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -732,7 +732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 6, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 6, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -742,7 +742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 7, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 7, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -752,7 +752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 8, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 8, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -762,7 +762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep09Frame0, gCardWep09Tiles, gCardWep09Palette, &gUnkEu_0888EA64, gUnk_0905F848, gUnk_0905F85C, gUnk_09612D18,
 #endif
-        6, 0x0, 9, {0, 0, 0}, 0x8, 61, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        6, 0x0, 9, 0x8, 61, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -772,7 +772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 0, {0, 0, 0}, 0x9, 71, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        7, 0x0, 0, 0x9, 71, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -782,7 +782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 1, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 1, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -792,7 +792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 2, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 2, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -802,7 +802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 3, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 3, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -812,7 +812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 4, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 4, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -822,7 +822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 5, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 5, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -832,7 +832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 6, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 6, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -842,7 +842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 7, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 7, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -852,7 +852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 8, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 8, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -862,7 +862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep10Frame0, gCardWep10Tiles, gCardWep10Palette, &gUnkEu_0888EAC0, gUnk_0905F95C, gUnk_0905F970, gUnk_09612D38,
 #endif
-        7, 0x0, 9, {0, 0, 0}, 0x9, 71, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        7, 0x0, 9, 0x9, 71, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -872,7 +872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 0, {0, 0, 0}, 0x2, 81, 0, 0, 15, {10, 0, 0, 0, 0, 0},
+        8, 0x0, 0, 0x2, 81, 0, 15, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -882,7 +882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 1, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 1, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -892,7 +892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 2, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 2, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -902,7 +902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 3, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 3, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -912,7 +912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 4, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 4, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -922,7 +922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 5, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 5, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -932,7 +932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 6, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 6, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -942,7 +942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 7, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 7, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -952,7 +952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 8, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 8, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -962,7 +962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep03Frame0, gCardWep03Tiles, gCardWep03Palette, &gUnkEu_0888EB00, gUnk_0905F1D0, gUnk_0905F1E4, gUnk_09612C58,
 #endif
-        8, 0x0, 9, {0, 0, 0}, 0x2, 81, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        8, 0x0, 9, 0x2, 81, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -972,7 +972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 0, {0, 0, 0}, 0xa, 91, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        9, 0x0, 0, 0xa, 91, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -982,7 +982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 1, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 1, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -992,7 +992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 2, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 2, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1002,7 +1002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 3, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 3, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1012,7 +1012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 4, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 4, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1022,7 +1022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 5, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 5, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1032,7 +1032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 6, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 6, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1042,7 +1042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 7, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 7, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1052,7 +1052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 8, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 8, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1062,7 +1062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep11Frame0, gCardWep11Tiles, gCardWep11Palette, &gUnkEu_0888EB4C, gUnk_0905FA70, gUnk_0905FA84, gUnk_09612D58,
 #endif
-        9, 0x0, 9, {0, 0, 0}, 0xa, 91, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        9, 0x0, 9, 0xa, 91, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1072,7 +1072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 0, {0, 0, 0}, 0xb, 101, 0, 0, 15, {10, 0, 0, 0, 0, 0},
+        10, 0x0, 0, 0xb, 101, 0, 15, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1082,7 +1082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 1, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 1, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1092,7 +1092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 2, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 2, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1102,7 +1102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 3, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 3, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1112,7 +1112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 4, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 4, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1122,7 +1122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 5, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 5, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1132,7 +1132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 6, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 6, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1142,7 +1142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 7, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 7, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1152,7 +1152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 8, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 8, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1162,7 +1162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep12Frame0, gCardWep12Tiles, gCardWep12Palette, &gUnkEu_0888EBA4, gUnk_0905FB84, gUnk_0905FB98, gUnk_09612D78,
 #endif
-        10, 0x0, 9, {0, 0, 0}, 0xb, 101, 0, 0, 15, {2, 0, 0, 0, 0, 0},
+        10, 0x0, 9, 0xb, 101, 0, 15, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1172,7 +1172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 0, {0, 0, 0}, 0xc, 111, 0, 0, 20, {10, 0, 0, 0, 0, 0},
+        11, 0x0, 0, 0xc, 111, 0, 20, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1182,7 +1182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 1, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 1, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1192,7 +1192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 2, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 2, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1202,7 +1202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 3, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 3, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1212,7 +1212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 4, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 4, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1222,7 +1222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 5, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 5, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1232,7 +1232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 6, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 6, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1242,7 +1242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 7, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 7, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1252,7 +1252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 8, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 8, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1262,7 +1262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep13Frame0, gCardWep13Tiles, gCardWep13Palette, &gUnkEu_0888EBF0, gUnk_0905FC98, gUnk_0905FCAC, gUnk_09612D98,
 #endif
-        11, 0x0, 9, {0, 0, 0}, 0xc, 111, 0, 0, 20, {2, 0, 0, 0, 0, 0},
+        11, 0x0, 9, 0xc, 111, 0, 20, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1272,7 +1272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 0, {0, 0, 0}, 0xd, 121, 0, 0, 25, {10, 0, 0, 0, 0, 0},
+        12, 0x0, 0, 0xd, 121, 0, 25, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1282,7 +1282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 1, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 1, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1292,7 +1292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 2, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 2, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1302,7 +1302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 3, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 3, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1312,7 +1312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 4, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 4, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1322,7 +1322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 5, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 5, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1332,7 +1332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 6, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 6, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1342,7 +1342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 7, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 7, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1352,7 +1352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 8, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 8, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1362,7 +1362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep14Frame0, gCardWep14Tiles, gCardWep14Palette, &gUnkEu_0888EC44, gUnk_0905FDAC, gUnk_0905FDC0, gUnk_09612DB8,
 #endif
-        12, 0x0, 9, {0, 0, 0}, 0xd, 121, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        12, 0x0, 9, 0xd, 121, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1372,7 +1372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 0, {0, 0, 0}, 0xe, 131, 0, 0, 25, {10, 0, 0, 0, 0, 0},
+        13, 0x0, 0, 0xe, 131, 0, 25, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1382,7 +1382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 1, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 1, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1392,7 +1392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 2, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 2, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1402,7 +1402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 3, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 3, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1412,7 +1412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 4, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 4, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1422,7 +1422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 5, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 5, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1432,7 +1432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 6, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 6, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1442,7 +1442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 7, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 7, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1452,7 +1452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 8, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 8, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1462,7 +1462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep15Frame0, gCardWep15Tiles, gCardWep15Palette, &gUnkEu_0888EC9C, gUnk_0905FEC0, gUnk_0905FED4, gUnk_09612DD8,
 #endif
-        13, 0x0, 9, {0, 0, 0}, 0xe, 131, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        13, 0x0, 9, 0xe, 131, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1472,7 +1472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 0, {0, 0, 0}, 0x10, 141, 0, 0, 25, {10, 0, 0, 0, 0, 0},
+        14, 0x0, 0, 0x10, 141, 0, 25, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1482,7 +1482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 1, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 1, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1492,7 +1492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 2, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 2, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1502,7 +1502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 3, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 3, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1512,7 +1512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 4, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 4, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1522,7 +1522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 5, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 5, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1532,7 +1532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 6, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 6, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1542,7 +1542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 7, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 7, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1552,7 +1552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 8, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 8, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1562,7 +1562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep18Frame0, gCardWep18Tiles, gCardWep18Palette, &gUnkEu_0888ED48, gUnk_090600E8, gUnk_090600FC, gUnk_09612E18,
 #endif
-        14, 0x0, 9, {0, 0, 0}, 0x10, 141, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        14, 0x0, 9, 0x10, 141, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1572,7 +1572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 0, {0, 0, 0}, 0x11, 151, 0, 0, 25, {10, 0, 0, 0, 0, 0},
+        15, 0x0, 0, 0x11, 151, 0, 25, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1582,7 +1582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 1, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 1, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1592,7 +1592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 2, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 2, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1602,7 +1602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 3, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 3, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1612,7 +1612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 4, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 4, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1622,7 +1622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 5, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 5, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1632,7 +1632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 6, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 6, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1642,7 +1642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 7, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 7, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1652,7 +1652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 8, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 8, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1662,7 +1662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep19Frame0, gCardWep19Tiles, gCardWep19Palette, &gUnkEu_0888EDAC, gUnk_090601FC, gUnk_09060210, gUnk_09612E38,
 #endif
-        15, 0x0, 9, {0, 0, 0}, 0x11, 151, 0, 0, 25, {2, 0, 0, 0, 0, 0},
+        15, 0x0, 9, 0x11, 151, 0, 25, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1672,7 +1672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 0, {0, 0, 0}, 0xf, 161, 0, 0, 30, {10, 0, 0, 0, 0, 0},
+        16, 0x0, 0, 0xf, 161, 0, 30, {10, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1682,7 +1682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 1, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 1, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1692,7 +1692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 2, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 2, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1702,7 +1702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 3, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 3, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1712,7 +1712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 4, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 4, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1722,7 +1722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 5, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 5, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1732,7 +1732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 6, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 6, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1742,7 +1742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 7, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 7, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1752,7 +1752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 8, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 8, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1762,7 +1762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep16Frame0, gCardWep16Tiles, gCardWep16Palette, &gUnkEu_0888ECE8, gUnk_0905FFD4, gUnk_0905FFE8, gUnk_09612DF8,
 #endif
-        16, 0x0, 9, {0, 0, 0}, 0xf, 161, 0, 0, 30, {2, 0, 0, 0, 0, 0},
+        16, 0x0, 9, 0xf, 161, 0, 30, {2, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1772,7 +1772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 0, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 0, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1782,7 +1782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 1, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 1, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1792,7 +1792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 2, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 2, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1802,7 +1802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 3, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 3, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1812,7 +1812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 4, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 4, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1822,7 +1822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 5, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 5, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1832,7 +1832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 6, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 6, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1842,7 +1842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 7, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 7, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1852,7 +1852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 8, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 8, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1862,7 +1862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc01Frame0, gCardMgc01Tiles, gCardMgc01Palette, &gUnkEu_0888EDE0, gUnk_09060424, gUnk_09060438, gUnk_09612E78,
 #endif
-        18, 0x0, 9, {0, 0, 0}, 0x13, 171, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        18, 0x0, 9, 0x13, 171, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1872,7 +1872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 0, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 0, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1882,7 +1882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 1, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 1, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1892,7 +1892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 2, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 2, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1902,7 +1902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 3, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 3, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1912,7 +1912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 4, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 4, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1922,7 +1922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 5, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 5, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1932,7 +1932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 6, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 6, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1942,7 +1942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 7, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 7, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1952,7 +1952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 8, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 8, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1962,7 +1962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc02Frame0, gCardMgc02Tiles, gCardMgc02Palette, &gUnkEu_0888EE18, gUnk_09060538, gUnk_0906054C, gUnk_09612E98,
 #endif
-        19, 0x0, 9, {0, 0, 0}, 0x14, 181, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        19, 0x0, 9, 0x14, 181, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1972,7 +1972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 0, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 0, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1982,7 +1982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 1, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 1, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -1992,7 +1992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 2, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 2, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2002,7 +2002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 3, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 3, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2012,7 +2012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 4, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 4, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2022,7 +2022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 5, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 5, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2032,7 +2032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 6, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 6, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2042,7 +2042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 7, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 7, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2052,7 +2052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 8, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 8, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2062,7 +2062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc03Frame0, gCardMgc03Tiles, gCardMgc03Palette, &gUnkEu_0888EE50, gUnk_0906064C, gUnk_09060660, gUnk_09612EB8,
 #endif
-        20, 0x0, 9, {0, 0, 0}, 0x15, 191, 1, 0, 15, {3, 0, 0, 0, 0, 0},
+        20, 0x0, 9, 0x15, 191, 1, 15, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2072,7 +2072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 0, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 0, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2082,7 +2082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 1, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 1, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2092,7 +2092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 2, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 2, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2102,7 +2102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 3, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 3, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2112,7 +2112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 4, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 4, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2122,7 +2122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 5, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 5, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2132,7 +2132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 6, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 6, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2142,7 +2142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 7, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 7, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2152,7 +2152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 8, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 8, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2162,7 +2162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc04Frame0, gCardMgc04Tiles, gCardMgc04Palette, &gUnkEu_0888EE80, gUnk_09060760, gUnk_09060774, gUnk_09612ED8,
 #endif
-        21, 0x0, 9, {0, 0, 0}, 0x16, 201, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        21, 0x0, 9, 0x16, 201, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2172,7 +2172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 0, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 0, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2182,7 +2182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 1, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 1, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2192,7 +2192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 2, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 2, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2202,7 +2202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 3, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 3, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2212,7 +2212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 4, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 4, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2222,7 +2222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 5, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 5, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2232,7 +2232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 6, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 6, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2242,7 +2242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 7, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 7, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2252,7 +2252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 8, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 8, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2262,7 +2262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc05Frame0, gCardMgc05Tiles, gCardMgc05Palette, &gUnkEu_0888EEC0, gUnk_09060874, gUnk_09060888, gUnk_09612EF8,
 #endif
-        22, 0x0, 9, {0, 0, 0}, 0x17, 211, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        22, 0x0, 9, 0x17, 211, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2272,7 +2272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 0, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 0, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2282,7 +2282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 1, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 1, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2292,7 +2292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 2, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 2, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2302,7 +2302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 3, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 3, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2312,7 +2312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 4, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 4, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2322,7 +2322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 5, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 5, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2332,7 +2332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 6, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 6, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2342,7 +2342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 7, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 7, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2352,7 +2352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 8, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 8, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2362,7 +2362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc06Frame0, gCardMgc06Tiles, gCardMgc06Palette, &gUnkEu_0888EEF0, gUnk_09060988, gUnk_0906099C, gUnk_09612F18,
 #endif
-        23, 0x0, 9, {0, 0, 0}, 0x18, 221, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        23, 0x0, 9, 0x18, 221, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2372,7 +2372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 0, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 0, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2382,7 +2382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 1, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 1, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2392,7 +2392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 2, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 2, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2402,7 +2402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 3, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 3, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2412,7 +2412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 4, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 4, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2422,7 +2422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 5, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 5, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2432,7 +2432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 6, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 6, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2442,7 +2442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 7, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 7, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2452,7 +2452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 8, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 8, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2462,7 +2462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardMgc07Frame0, gCardMgc07Tiles, gCardMgc07Palette, &gUnkEu_0888EF20, gUnk_09060A9C, gUnk_09060AB0, gUnk_09612F38,
 #endif
-        24, 0x0, 9, {0, 0, 0}, 0x19, 231, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        24, 0x0, 9, 0x19, 231, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2472,7 +2472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 0, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2482,7 +2482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 1, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2492,7 +2492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 2, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2502,7 +2502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 3, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2512,7 +2512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 4, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2522,7 +2522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 5, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2532,7 +2532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 6, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2542,7 +2542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 7, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2552,7 +2552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 8, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2562,7 +2562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn02Frame0, gCardSmn02Tiles, gDonaldPalette, &gUnkEu_0888F2C0, gUnk_09061450, gUnk_09061464, gUnk_09613058,
 #endif
-        39, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x1c, 241, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        39, CARD_DEF_FLAG_FRIEND, 9, 0x1c, 241, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2572,7 +2572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 0, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2582,7 +2582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 1, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2592,7 +2592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 2, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2602,7 +2602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 3, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2612,7 +2612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 4, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2622,7 +2622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 5, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2632,7 +2632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 6, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2642,7 +2642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 7, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2652,7 +2652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 8, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2662,7 +2662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn01Frame0, gCardSmn01Tiles, gGoofyPalette, &gUnkEu_0888F2F4, gUnk_0906133C, gUnk_09061350, gUnk_09613038,
 #endif
-        40, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x1b, 251, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        40, CARD_DEF_FLAG_FRIEND, 9, 0x1b, 251, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2672,7 +2672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 0, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2682,7 +2682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 1, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2692,7 +2692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 2, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2702,7 +2702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 3, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2712,7 +2712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 4, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2722,7 +2722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 5, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2732,7 +2732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 6, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2742,7 +2742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 7, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2752,7 +2752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 8, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2762,7 +2762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn03Frame0, gCardSmn03Tiles, gCardSmn03Palette, &gUnkEu_0888EF54, gUnk_09061564, gUnk_09061578, gUnk_09613078,
 #endif
-        25, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x1d, 261, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        25, CARD_DEF_FLAG_SUMMON, 9, 0x1d, 261, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2772,7 +2772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 0, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2782,7 +2782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 1, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2792,7 +2792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 2, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2802,7 +2802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 3, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2812,7 +2812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 4, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2822,7 +2822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 5, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2832,7 +2832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 6, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2842,7 +2842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 7, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2852,7 +2852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 8, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2862,7 +2862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn04Frame0, gCardSmn04Tiles, gCardSmn04Palette, &gUnkEu_0888EF8C, gUnk_09061678, gUnk_0906168C, gUnk_09613098,
 #endif
-        26, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x1e, 271, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        26, CARD_DEF_FLAG_SUMMON, 9, 0x1e, 271, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2872,7 +2872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 0, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2882,7 +2882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 1, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2892,7 +2892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 2, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2902,7 +2902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 3, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2912,7 +2912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 4, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2922,7 +2922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 5, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2932,7 +2932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 6, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2942,7 +2942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 7, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2952,7 +2952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 8, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2962,7 +2962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn05Frame0, gCardSmn05Tiles, gBanbPalette, &gUnkEu_0888EFC0, gUnk_0906178C, gUnk_090617A0, gUnk_096130B8,
 #endif
-        27, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x1f, 281, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        27, CARD_DEF_FLAG_SUMMON, 9, 0x1f, 281, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2972,7 +2972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 0, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2982,7 +2982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 1, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -2992,7 +2992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 2, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3002,7 +3002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 3, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3012,7 +3012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 4, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3022,7 +3022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 5, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3032,7 +3032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 6, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3042,7 +3042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 7, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3052,7 +3052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 8, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3062,7 +3062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn06Frame0, gCardSmn06Tiles, gCardSmn06Palette, &gUnkEu_0888EFF4, gUnk_090618A0, gUnk_090618B4, gUnk_096130D8,
 #endif
-        28, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x20, 291, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        28, CARD_DEF_FLAG_SUMMON, 9, 0x20, 291, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3072,7 +3072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 0, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3082,7 +3082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 1, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3092,7 +3092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 2, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3102,7 +3102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 3, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3112,7 +3112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 4, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3122,7 +3122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 5, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3132,7 +3132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 6, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3142,7 +3142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 7, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3152,7 +3152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 8, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3162,7 +3162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn07Frame0, gCardSmn07Tiles, gTinkPalette, &gUnkEu_0888F03C, gUnk_090619B4, gUnk_090619C8, gUnk_096130F8,
 #endif
-        29, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x21, 301, 1, 0, 20, {3, 0, 0, 0, 0, 0},
+        29, CARD_DEF_FLAG_SUMMON, 9, 0x21, 301, 1, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3172,7 +3172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 0, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3182,7 +3182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 1, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3192,7 +3192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 2, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3202,7 +3202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 3, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3212,7 +3212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 4, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3222,7 +3222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 5, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3232,7 +3232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 6, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3242,7 +3242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 7, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3252,7 +3252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 8, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3262,7 +3262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn08Frame0, gCardSmn08Tiles, gMushuPalette, &gUnkEu_0888F070, gUnk_09061AC8, gUnk_09061ADC, gUnk_09613118,
 #endif
-        30, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x22, 311, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        30, CARD_DEF_FLAG_SUMMON, 9, 0x22, 311, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3272,7 +3272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 0, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 0, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3282,7 +3282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 1, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 1, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3292,7 +3292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 2, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 2, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3302,7 +3302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 3, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 3, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3312,7 +3312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 4, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 4, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3322,7 +3322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 5, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 5, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3332,7 +3332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 6, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 6, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3342,7 +3342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 7, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 7, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3352,7 +3352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 8, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 8, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3362,7 +3362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09Palette, &gUnkEu_0888F0A4, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613138,
 #endif
-        31, CARD_DEF_FLAG_SUMMON, 9, {0, 0, 0}, 0x23, 321, 1, 0, 25, {3, 0, 0, 0, 0, 0},
+        31, CARD_DEF_FLAG_SUMMON, 9, 0x23, 321, 1, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3372,7 +3372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 0, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3382,7 +3382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 1, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3392,7 +3392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 2, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3402,7 +3402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 3, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3412,7 +3412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 4, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3422,7 +3422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 5, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3432,7 +3432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 6, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3442,7 +3442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 7, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3452,7 +3452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 8, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3462,7 +3462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn10Frame0, gCardSmn10Tiles, gAladdinPalette, &gUnkEu_0888F394, gUnk_09061CF4, gUnk_09061D08, gUnk_096131F8,
 #endif
-        41, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x28, 331, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        41, CARD_DEF_FLAG_FRIEND, 9, 0x28, 331, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3472,7 +3472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 0, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3482,7 +3482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 1, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3492,7 +3492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 2, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3502,7 +3502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 3, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3512,7 +3512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 4, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3522,7 +3522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 5, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3532,7 +3532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 6, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3542,7 +3542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 7, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3552,7 +3552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 8, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3562,7 +3562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn11Frame0, gCardSmn11Tiles, gArielPalette, &gUnkEu_0888F3C8, gUnk_09061E08, gUnk_09061E1C, gUnk_09613218,
 #endif
-        42, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x29, 341, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        42, CARD_DEF_FLAG_FRIEND, 9, 0x29, 341, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3572,7 +3572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 0, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3582,7 +3582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 1, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3592,7 +3592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 2, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3602,7 +3602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 3, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3612,7 +3612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 4, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3622,7 +3622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 5, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3632,7 +3632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 6, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3642,7 +3642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 7, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3652,7 +3652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 8, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3662,7 +3662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn12Frame0, gCardSmn12Tiles, gJackPalette, &gUnkEu_0888F3F8, gUnk_09061F1C, gUnk_09061F30, gUnk_09613238,
 #endif
-        43, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x2a, 351, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        43, CARD_DEF_FLAG_FRIEND, 9, 0x2a, 351, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3672,7 +3672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 0, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3682,7 +3682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 1, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3692,7 +3692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 2, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3702,7 +3702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 3, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3712,7 +3712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 4, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3722,7 +3722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 5, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3732,7 +3732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 6, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3742,7 +3742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 7, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3752,7 +3752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 8, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3762,7 +3762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn13Frame0, gCardSmn13Tiles, gPeterPalette, &gUnkEu_0888F440, gUnk_09062030, gUnk_09062044, gUnk_09613258,
 #endif
-        44, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x2b, 361, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        44, CARD_DEF_FLAG_FRIEND, 9, 0x2b, 361, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3772,7 +3772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 0, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3782,7 +3782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 1, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3792,7 +3792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 2, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3802,7 +3802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 3, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3812,7 +3812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 4, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3822,7 +3822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 5, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3832,7 +3832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 6, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3842,7 +3842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 7, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3852,7 +3852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 8, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3862,7 +3862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn14Frame0, gCardSmn14Tiles, gBeastPalette, &gUnkEu_0888F484, gUnk_09062144, gUnk_09062158, gUnk_09613278,
 #endif
-        45, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x2c, 371, 2, 0, 25, {3, 0, 0, 0, 0, 0},
+        45, CARD_DEF_FLAG_FRIEND, 9, 0x2c, 371, 2, 25, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3872,7 +3872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 0, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3882,7 +3882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 1, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3892,7 +3892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 2, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3902,7 +3902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 3, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3912,7 +3912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 4, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3922,7 +3922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 5, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3932,7 +3932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 6, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3942,7 +3942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 7, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3952,7 +3952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 8, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3962,7 +3962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm01Frame0, gCardItm01Tiles, gCardItm01Palette, &gUnkEu_0888F0DC, gUnk_09060BB0, gUnk_09060BC4, gUnk_09612F58,
 #endif
-        32, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x2f, 381, 2, 0, 30, {3, 0, 0, 0, 0, 0},
+        32, CARD_DEF_FLAG_ITEM, 9, 0x2f, 381, 2, 30, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3972,7 +3972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 0, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3982,7 +3982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 1, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -3992,7 +3992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 2, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4002,7 +4002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 3, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4012,7 +4012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 4, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4022,7 +4022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 5, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4032,7 +4032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 6, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4042,7 +4042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 7, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4052,7 +4052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 8, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4062,7 +4062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm02Frame0, gCardItm02Tiles, gCardItm02Palette, &gUnkEu_0888F128, gUnk_09060CC4, gUnk_09060CD8, gUnk_09612F78,
 #endif
-        33, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x30, 391, 2, 0, 40, {3, 0, 0, 0, 0, 0},
+        33, CARD_DEF_FLAG_ITEM, 9, 0x30, 391, 2, 40, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4072,7 +4072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 0, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4082,7 +4082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 1, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4092,7 +4092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 2, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4102,7 +4102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 3, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4112,7 +4112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 4, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4122,7 +4122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 5, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4132,7 +4132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 6, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4142,7 +4142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 7, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4152,7 +4152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 8, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4162,7 +4162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm03Frame0, gCardItm03Tiles, gCardItm03Palette, &gUnkEu_0888F178, gUnk_09060DD8, gUnk_09060DEC, gUnk_09612F98,
 #endif
-        34, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x31, 401, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        34, CARD_DEF_FLAG_ITEM, 9, 0x31, 401, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4172,7 +4172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 0, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4182,7 +4182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 1, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4192,7 +4192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 2, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4202,7 +4202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 3, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4212,7 +4212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 4, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4222,7 +4222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 5, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4232,7 +4232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 6, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4242,7 +4242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 7, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4252,7 +4252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 8, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4262,7 +4262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm04Frame0, gCardItm04Tiles, gCardItm04Palette, &gUnkEu_0888F1AC, gUnk_09060EEC, gUnk_09060F00, gUnk_09612FB8,
 #endif
-        35, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x32, 411, 2, 0, 20, {3, 0, 0, 0, 0, 0},
+        35, CARD_DEF_FLAG_ITEM, 9, 0x32, 411, 2, 20, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4272,7 +4272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 0, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4282,7 +4282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 1, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4292,7 +4292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 2, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4302,7 +4302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 3, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4312,7 +4312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 4, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4322,7 +4322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 5, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4332,7 +4332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 6, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4342,7 +4342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 7, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4352,7 +4352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 8, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4362,7 +4362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm05Frame0, gCardItm05Tiles, gCardItm05Palette, &gUnkEu_0888F1F4, gUnk_09061000, gUnk_09061014, gUnk_09612FD8,
 #endif
-        36, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x33, 421, 2, 0, 35, {3, 0, 0, 0, 0, 0},
+        36, CARD_DEF_FLAG_ITEM, 9, 0x33, 421, 2, 35, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4372,7 +4372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 0, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4382,7 +4382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 1, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4392,7 +4392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 2, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4402,7 +4402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 3, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4412,7 +4412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 4, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4422,7 +4422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 5, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4432,7 +4432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 6, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4442,7 +4442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 7, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4452,7 +4452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 8, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4462,7 +4462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm06Frame0, gCardItm06Tiles, gCardItm06Palette, &gUnkEu_0888F22C, gUnk_09061114, gUnk_09061128, gUnk_09612FF8,
 #endif
-        37, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x34, 431, 2, 0, 45, {3, 0, 0, 0, 0, 0},
+        37, CARD_DEF_FLAG_ITEM, 9, 0x34, 431, 2, 45, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4472,7 +4472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 0, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 0, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4482,7 +4482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 1, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 1, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4492,7 +4492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 2, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 2, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4502,7 +4502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 3, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 3, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4512,7 +4512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 4, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 4, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4522,7 +4522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 5, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 5, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4532,7 +4532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 6, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 6, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4542,7 +4542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 7, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 7, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4552,7 +4552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 8, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 8, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4562,7 +4562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardItm07Frame0, gCardItm07Tiles, gCardItm07Palette, &gUnkEu_0888F278, gUnk_09061228, gUnk_0906123C, gUnk_09613018,
 #endif
-        38, CARD_DEF_FLAG_ITEM, 9, {0, 0, 0}, 0x35, 441, 2, 0, 50, {3, 0, 0, 0, 0, 0},
+        38, CARD_DEF_FLAG_ITEM, 9, 0x35, 441, 2, 50, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4572,7 +4572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, &gUnkEu_0888F880, gUnk_0906236C, gUnk_09062380, gUnk_096132B8,
 #endif
-        47, 0x0, 1, {0, 0, 0}, 0x1, 450, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        47, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4582,7 +4582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, &gUnkEu_0888F880, gUnk_0906236C, gUnk_09062380, gUnk_096132B8,
 #endif
-        47, 0x0, 1, {0, 0, 0}, 0x1, 450, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        47, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4592,7 +4592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, &gUnkEu_0888F880, gUnk_0906236C, gUnk_09062380, gUnk_096132B8,
 #endif
-        47, 0x0, 1, {0, 0, 0}, 0x1, 450, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        47, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4602,7 +4602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, &gUnkEu_0888F8C4, gUnk_090628D0, gUnk_090628E4, gUnk_096133B8,
 #endif
-        48, 0x0, 1, {0, 0, 0}, 0x3, 453, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        48, 0x0, 1, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4612,7 +4612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, &gUnkEu_0888F8C4, gUnk_090628D0, gUnk_090628E4, gUnk_096133B8,
 #endif
-        48, 0x0, 2, {0, 0, 0}, 0x3, 453, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        48, 0x0, 2, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4622,7 +4622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, &gUnkEu_0888F8C4, gUnk_090628D0, gUnk_090628E4, gUnk_096133B8,
 #endif
-        48, 0x0, 2, {0, 0, 0}, 0x3, 453, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        48, 0x0, 2, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4632,7 +4632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, &gUnkEu_0888F9AC, gUnk_09063A10, gUnk_09063A24, gUnk_096135B8,
 #endif
-        49, 0x0, 1, {0, 0, 0}, 0x33, 456, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        49, 0x0, 1, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4642,7 +4642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, &gUnkEu_0888F9AC, gUnk_09063A10, gUnk_09063A24, gUnk_096135B8,
 #endif
-        49, 0x0, 3, {0, 0, 0}, 0x33, 456, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        49, 0x0, 3, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4652,7 +4652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, &gUnkEu_0888F9AC, gUnk_09063A10, gUnk_09063A24, gUnk_096135B8,
 #endif
-        49, 0x0, 4, {0, 0, 0}, 0x33, 456, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        49, 0x0, 4, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4662,7 +4662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, &gUnkEu_0888FB28, gUnk_09062480, gUnk_09062494, gUnk_096132D8,
 #endif
-        50, 0x0, 1, {0, 0, 0}, 0x4, 459, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        50, 0x0, 1, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4672,7 +4672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, &gUnkEu_0888FB28, gUnk_09062480, gUnk_09062494, gUnk_096132D8,
 #endif
-        50, 0x0, 2, {0, 0, 0}, 0x4, 459, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        50, 0x0, 2, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4682,7 +4682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, &gUnkEu_0888FB28, gUnk_09062480, gUnk_09062494, gUnk_096132D8,
 #endif
-        50, 0x0, 4, {0, 0, 0}, 0x4, 459, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        50, 0x0, 4, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4692,7 +4692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B1A8, gUnk_0904B1BC, gEmy02Palette, &gUnkEu_0888FB84, gUnk_09062480, gUnk_09062494, gUnk_096132F8,
 #endif
-        51, 0x0, 1, {0, 0, 0}, 0xb, 463, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        51, 0x0, 1, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4702,7 +4702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B1A8, gUnk_0904B1BC, gEmy02Palette, &gUnkEu_0888FB84, gUnk_09062480, gUnk_09062494, gUnk_096132F8,
 #endif
-        51, 0x0, 2, {0, 0, 0}, 0xb, 463, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        51, 0x0, 2, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4712,7 +4712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B1A8, gUnk_0904B1BC, gEmy02Palette, &gUnkEu_0888FB84, gUnk_09062480, gUnk_09062494, gUnk_096132F8,
 #endif
-        51, 0x0, 4, {0, 0, 0}, 0xb, 463, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        51, 0x0, 4, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4722,7 +4722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B3BC, gUnk_0904B3D0, gEmy03Palette, &gUnkEu_0888FBDC, gUnk_09062480, gUnk_09062494, gUnk_09613318,
 #endif
-        52, 0x0, 1, {0, 0, 0}, 0xc, 466, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        52, 0x0, 1, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4732,7 +4732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B3BC, gUnk_0904B3D0, gEmy03Palette, &gUnkEu_0888FBDC, gUnk_09062480, gUnk_09062494, gUnk_09613318,
 #endif
-        52, 0x0, 2, {0, 0, 0}, 0xc, 466, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        52, 0x0, 2, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4742,7 +4742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B3BC, gUnk_0904B3D0, gEmy03Palette, &gUnkEu_0888FBDC, gUnk_09062480, gUnk_09062494, gUnk_09613318,
 #endif
-        52, 0x0, 4, {0, 0, 0}, 0xc, 466, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        52, 0x0, 4, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4752,7 +4752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B5D0, gUnk_0904B5E4, gEmy04Palette, &gUnkEu_0888FC34, gUnk_09062480, gUnk_09062494, gUnk_09613338,
 #endif
-        53, 0x0, 1, {0, 0, 0}, 0xd, 469, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        53, 0x0, 1, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4762,7 +4762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B5D0, gUnk_0904B5E4, gEmy04Palette, &gUnkEu_0888FC34, gUnk_09062480, gUnk_09062494, gUnk_09613338,
 #endif
-        53, 0x0, 2, {0, 0, 0}, 0xd, 469, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        53, 0x0, 2, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4772,7 +4772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_0904B5D0, gUnk_0904B5E4, gEmy04Palette, &gUnkEu_0888FC34, gUnk_09062480, gUnk_09062494, gUnk_09613338,
 #endif
-        53, 0x0, 4, {0, 0, 0}, 0xd, 469, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        53, 0x0, 4, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4782,7 +4782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, &gUnkEu_0888F910, gUnk_090629E4, gUnk_090629F8, gUnk_096133D8,
 #endif
-        54, 0x0, 3, {0, 0, 0}, 0x1f, 471, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        54, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4792,7 +4792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, &gUnkEu_0888F910, gUnk_090629E4, gUnk_090629F8, gUnk_096133D8,
 #endif
-        54, 0x0, 3, {0, 0, 0}, 0x1f, 471, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        54, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4802,7 +4802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, &gUnkEu_0888F910, gUnk_090629E4, gUnk_090629F8, gUnk_096133D8,
 #endif
-        54, 0x0, 3, {0, 0, 0}, 0x1f, 471, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        54, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4812,7 +4812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, &gUnkEu_0888F960, gUnk_09062AF8, gUnk_09062B0C, gUnk_096133F8,
 #endif
-        55, 0x0, 2, {0, 0, 0}, 0x6, 474, 3, 0, 10, {5, 0, 0, 0, 0, 0},
+        55, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4822,7 +4822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, &gUnkEu_0888F960, gUnk_09062AF8, gUnk_09062B0C, gUnk_096133F8,
 #endif
-        55, 0x0, 2, {0, 0, 0}, 0x6, 474, 3, 0, 10, {5, 0, 0, 0, 0, 0},
+        55, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4832,7 +4832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, &gUnkEu_0888F960, gUnk_09062AF8, gUnk_09062B0C, gUnk_096133F8,
 #endif
-        55, 0x0, 2, {0, 0, 0}, 0x6, 474, 3, 0, 10, {5, 0, 0, 0, 0, 0},
+        55, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4842,7 +4842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, &gUnkEu_0888FCD0, gUnk_09062C0C, gUnk_09062C20, gUnk_09613418,
 #endif
-        56, 0x0, 3, {0, 0, 0}, 0x1e, 477, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        56, 0x0, 3, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4852,7 +4852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, &gUnkEu_0888FCD0, gUnk_09062C0C, gUnk_09062C20, gUnk_09613418,
 #endif
-        56, 0x0, 4, {0, 0, 0}, 0x1e, 477, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        56, 0x0, 4, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4862,7 +4862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, &gUnkEu_0888FCD0, gUnk_09062C0C, gUnk_09062C20, gUnk_09613418,
 #endif
-        56, 0x0, 4, {0, 0, 0}, 0x1e, 477, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        56, 0x0, 4, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4872,7 +4872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, &gUnkEu_0888FA8C, gUnk_09062D20, gUnk_09062D34, gUnk_09613438,
 #endif
-        57, 0x0, 1, {0, 0, 0}, 0x5, 480, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        57, 0x0, 1, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4882,7 +4882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, &gUnkEu_0888FA8C, gUnk_09062D20, gUnk_09062D34, gUnk_09613438,
 #endif
-        57, 0x0, 2, {0, 0, 0}, 0x5, 480, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        57, 0x0, 2, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4892,7 +4892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, &gUnkEu_0888FA8C, gUnk_09062D20, gUnk_09062D34, gUnk_09613438,
 #endif
-        57, 0x0, 2, {0, 0, 0}, 0x5, 480, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        57, 0x0, 2, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4902,7 +4902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, &gUnkEu_0888FA00, gUnk_09063B24, gUnk_09063B38, gUnk_096135D8,
 #endif
-        58, 0x0, 3, {0, 0, 0}, 0x24, 483, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        58, 0x0, 3, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4912,7 +4912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, &gUnkEu_0888FA00, gUnk_09063B24, gUnk_09063B38, gUnk_096135D8,
 #endif
-        58, 0x0, 1, {0, 0, 0}, 0x24, 483, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        58, 0x0, 1, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4922,7 +4922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, &gUnkEu_0888FA00, gUnk_09063B24, gUnk_09063B38, gUnk_096135D8,
 #endif
-        58, 0x0, 6, {0, 0, 0}, 0x24, 483, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        58, 0x0, 6, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4932,7 +4932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, &gUnkEu_0888FD24, gUnk_09062E34, gUnk_09062E48, gUnk_09613458,
 #endif
-        59, 0x0, 4, {0, 0, 0}, 0x9, 486, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        59, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4942,7 +4942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, &gUnkEu_0888FD24, gUnk_09062E34, gUnk_09062E48, gUnk_09613458,
 #endif
-        59, 0x0, 4, {0, 0, 0}, 0x9, 486, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        59, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4952,7 +4952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, &gUnkEu_0888FD24, gUnk_09062E34, gUnk_09062E48, gUnk_09613458,
 #endif
-        59, 0x0, 4, {0, 0, 0}, 0x9, 486, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        59, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4962,7 +4962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, &gUnkEu_0888FE74, gUnk_09062F48, gUnk_09062F5C, gUnk_09613478,
 #endif
-        60, 0x0, 1, {0, 0, 0}, 0x23, 489, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        60, 0x0, 1, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4972,7 +4972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, &gUnkEu_0888FE74, gUnk_09062F48, gUnk_09062F5C, gUnk_09613478,
 #endif
-        60, 0x0, 2, {0, 0, 0}, 0x23, 489, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        60, 0x0, 2, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4982,7 +4982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, &gUnkEu_0888FE74, gUnk_09062F48, gUnk_09062F5C, gUnk_09613478,
 #endif
-        60, 0x0, 2, {0, 0, 0}, 0x23, 489, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        60, 0x0, 2, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -4992,7 +4992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, &gUnkEu_0888FA4C, gUnk_09062594, gUnk_090625A8, gUnk_09613358,
 #endif
-        61, 0x0, 1, {0, 0, 0}, 0x10, 492, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        61, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5002,7 +5002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, &gUnkEu_0888FA4C, gUnk_09062594, gUnk_090625A8, gUnk_09613358,
 #endif
-        61, 0x0, 1, {0, 0, 0}, 0x10, 492, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        61, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5012,7 +5012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, &gUnkEu_0888FA4C, gUnk_09062594, gUnk_090625A8, gUnk_09613358,
 #endif
-        61, 0x0, 1, {0, 0, 0}, 0x10, 492, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        61, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5022,7 +5022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, &gUnkEu_0888FF00, gUnk_0906305C, gUnk_09063070, gUnk_09613498,
 #endif
-        62, 0x0, 1, {0, 0, 0}, 0x15, 495, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        62, 0x0, 1, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5032,7 +5032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, &gUnkEu_0888FF00, gUnk_0906305C, gUnk_09063070, gUnk_09613498,
 #endif
-        62, 0x0, 2, {0, 0, 0}, 0x15, 495, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        62, 0x0, 2, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5042,7 +5042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, &gUnkEu_0888FF00, gUnk_0906305C, gUnk_09063070, gUnk_09613498,
 #endif
-        62, 0x0, 2, {0, 0, 0}, 0x15, 495, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        62, 0x0, 2, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5052,7 +5052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, &gUnkEu_0888FEBC, gUnk_09063C38, gUnk_09063C4C, gUnk_096135F8,
 #endif
-        63, 0x0, 2, {0, 0, 0}, 0x28, 498, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        63, 0x0, 2, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5062,7 +5062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, &gUnkEu_0888FEBC, gUnk_09063C38, gUnk_09063C4C, gUnk_096135F8,
 #endif
-        63, 0x0, 1, {0, 0, 0}, 0x28, 498, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        63, 0x0, 1, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5072,7 +5072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, &gUnkEu_0888FEBC, gUnk_09063C38, gUnk_09063C4C, gUnk_096135F8,
 #endif
-        63, 0x0, 7, {0, 0, 0}, 0x28, 498, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        63, 0x0, 7, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5082,7 +5082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, &gUnkEu_0888FD80, gUnk_09063170, gUnk_09063184, gUnk_096134B8,
 #endif
-        64, 0x0, 2, {0, 0, 0}, 0x35, 501, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        64, 0x0, 2, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5092,7 +5092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, &gUnkEu_0888FD80, gUnk_09063170, gUnk_09063184, gUnk_096134B8,
 #endif
-        64, 0x0, 3, {0, 0, 0}, 0x35, 501, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        64, 0x0, 3, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5102,7 +5102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, &gUnkEu_0888FD80, gUnk_09063170, gUnk_09063184, gUnk_096134B8,
 #endif
-        64, 0x0, 3, {0, 0, 0}, 0x35, 501, 3, 0, 15, {5, 0, 0, 0, 0, 0},
+        64, 0x0, 3, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5112,7 +5112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, &gUnkEu_0888FE18, gUnk_09063284, gUnk_09063298, gUnk_096134D8,
 #endif
-        65, 0x0, 3, {0, 0, 0}, 0x13, 504, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        65, 0x0, 3, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5122,7 +5122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, &gUnkEu_0888FE18, gUnk_09063284, gUnk_09063298, gUnk_096134D8,
 #endif
-        65, 0x0, 4, {0, 0, 0}, 0x13, 504, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        65, 0x0, 4, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5132,7 +5132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, &gUnkEu_0888FE18, gUnk_09063284, gUnk_09063298, gUnk_096134D8,
 #endif
-        65, 0x0, 4, {0, 0, 0}, 0x13, 504, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        65, 0x0, 4, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5142,7 +5142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, &gUnkEu_0888FACC, gUnk_09063398, gUnk_090633AC, gUnk_096134F8,
 #endif
-        66, 0x0, 1, {0, 0, 0}, 0x11, 507, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        66, 0x0, 1, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5152,7 +5152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, &gUnkEu_0888FACC, gUnk_09063398, gUnk_090633AC, gUnk_096134F8,
 #endif
-        66, 0x0, 2, {0, 0, 0}, 0x11, 507, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        66, 0x0, 2, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5162,7 +5162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, &gUnkEu_0888FACC, gUnk_09063398, gUnk_090633AC, gUnk_096134F8,
 #endif
-        66, 0x0, 2, {0, 0, 0}, 0x11, 507, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        66, 0x0, 2, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5172,7 +5172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, &gUnkEu_0888FDD4, gUnk_090634AC, gUnk_090634C0, gUnk_09613518,
 #endif
-        67, 0x0, 3, {0, 0, 0}, 0x1d, 510, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        67, 0x0, 3, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5182,7 +5182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, &gUnkEu_0888FDD4, gUnk_090634AC, gUnk_090634C0, gUnk_09613518,
 #endif
-        67, 0x0, 4, {0, 0, 0}, 0x1d, 510, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        67, 0x0, 4, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5192,7 +5192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, &gUnkEu_0888FDD4, gUnk_090634AC, gUnk_090634C0, gUnk_09613518,
 #endif
-        67, 0x0, 4, {0, 0, 0}, 0x1d, 510, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        67, 0x0, 4, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5202,7 +5202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, &gUnkEu_0888FF50, gUnk_090635C0, gUnk_090635D4, gUnk_09613538,
 #endif
-        68, 0x0, 2, {0, 0, 0}, 0x7, 513, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        68, 0x0, 2, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5212,7 +5212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, &gUnkEu_0888FF50, gUnk_090635C0, gUnk_090635D4, gUnk_09613538,
 #endif
-        68, 0x0, 4, {0, 0, 0}, 0x7, 513, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        68, 0x0, 4, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5222,7 +5222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, &gUnkEu_0888FF50, gUnk_090635C0, gUnk_090635D4, gUnk_09613538,
 #endif
-        68, 0x0, 6, {0, 0, 0}, 0x7, 513, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        68, 0x0, 6, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5232,7 +5232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, &gUnkEu_0888FFCC, gUnk_09063D4C, gUnk_09063D60, gUnk_09613618,
 #endif
-        69, 0x0, 5, {0, 0, 0}, 0xe, 516, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        69, 0x0, 5, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5242,7 +5242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, &gUnkEu_0888FFCC, gUnk_09063D4C, gUnk_09063D60, gUnk_09613618,
 #endif
-        69, 0x0, 1, {0, 0, 0}, 0xe, 516, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        69, 0x0, 1, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5252,7 +5252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, &gUnkEu_0888FFCC, gUnk_09063D4C, gUnk_09063D60, gUnk_09613618,
 #endif
-        69, 0x0, 9, {0, 0, 0}, 0xe, 516, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        69, 0x0, 9, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5262,7 +5262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, &gUnkEu_0888FF88, gUnk_090636D4, gUnk_090636E8, gUnk_09613558,
 #endif
-        70, 0x0, 4, {0, 0, 0}, 0x19, 519, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        70, 0x0, 4, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5272,7 +5272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, &gUnkEu_0888FF88, gUnk_090636D4, gUnk_090636E8, gUnk_09613558,
 #endif
-        70, 0x0, 5, {0, 0, 0}, 0x19, 519, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        70, 0x0, 5, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5282,7 +5282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, &gUnkEu_0888FF88, gUnk_090636D4, gUnk_090636E8, gUnk_09613558,
 #endif
-        70, 0x0, 5, {0, 0, 0}, 0x19, 519, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        70, 0x0, 5, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5292,7 +5292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, &gUnkEu_0888FC74, gUnk_090637E8, gUnk_090637FC, gUnk_09613578,
 #endif
-        71, 0x0, 3, {0, 0, 0}, 0x26, 522, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        71, 0x0, 3, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5302,7 +5302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, &gUnkEu_0888FC74, gUnk_090637E8, gUnk_090637FC, gUnk_09613578,
 #endif
-        71, 0x0, 1, {0, 0, 0}, 0x26, 522, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        71, 0x0, 1, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5312,7 +5312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, &gUnkEu_0888FC74, gUnk_090637E8, gUnk_090637FC, gUnk_09613578,
 #endif
-        71, 0x0, 7, {0, 0, 0}, 0x26, 522, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        71, 0x0, 7, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5322,7 +5322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, &gUnkEu_088901A8, gUnk_090638FC, gUnk_09063910, gUnk_09613598,
 #endif
-        72, 0x0, 7, {0, 0, 0}, 0x18, 525, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        72, 0x0, 7, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5332,7 +5332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, &gUnkEu_088901A8, gUnk_090638FC, gUnk_09063910, gUnk_09613598,
 #endif
-        72, 0x0, 2, {0, 0, 0}, 0x18, 525, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        72, 0x0, 2, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5342,7 +5342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, &gUnkEu_088901A8, gUnk_090638FC, gUnk_09063910, gUnk_09613598,
 #endif
-        72, 0x0, 8, {0, 0, 0}, 0x18, 525, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        72, 0x0, 8, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5352,7 +5352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy07Frame0, gCardEmy07Tiles, gEmy07Palette, &gUnkEu_08890020, gUnk_090626A8, gUnk_090626BC, gUnk_09613378,
 #endif
-        73, 0x0, 2, {0, 0, 0}, 0x2a, 528, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        73, 0x0, 2, 0x2a, 528, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5362,7 +5362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, &gUnkEu_08890070, gUnk_090627BC, gUnk_090627D0, gUnk_09613398,
 #endif
-        74, 0x0, 7, {0, 0, 0}, 0x25, 529, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        74, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5372,7 +5372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, &gUnkEu_08890070, gUnk_090627BC, gUnk_090627D0, gUnk_09613398,
 #endif
-        74, 0x0, 7, {0, 0, 0}, 0x25, 529, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        74, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5382,7 +5382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, &gUnkEu_08890070, gUnk_090627BC, gUnk_090627D0, gUnk_09613398,
 #endif
-        74, 0x0, 7, {0, 0, 0}, 0x25, 529, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        74, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5392,7 +5392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, &gUnkEu_088900CC, gUnk_09064088, gUnk_0906409C, gUnk_09613678,
 #endif
-        75, 0x0, 2, {0, 0, 0}, 0x14, 532, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        75, 0x0, 2, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5402,7 +5402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, &gUnkEu_088900CC, gUnk_09064088, gUnk_0906409C, gUnk_09613678,
 #endif
-        75, 0x0, 4, {0, 0, 0}, 0x14, 532, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        75, 0x0, 4, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5412,7 +5412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, &gUnkEu_088900CC, gUnk_09064088, gUnk_0906409C, gUnk_09613678,
 #endif
-        75, 0x0, 6, {0, 0, 0}, 0x14, 532, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        75, 0x0, 6, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5422,7 +5422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, &gUnkEu_08890118, gUnk_09063E60, gUnk_09063E74, gUnk_09613638,
 #endif
-        76, 0x0, 2, {0, 0, 0}, 0xa, 535, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        76, 0x0, 2, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5432,7 +5432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, &gUnkEu_08890118, gUnk_09063E60, gUnk_09063E74, gUnk_09613638,
 #endif
-        76, 0x0, 4, {0, 0, 0}, 0xa, 535, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        76, 0x0, 4, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5442,7 +5442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, &gUnkEu_08890118, gUnk_09063E60, gUnk_09063E74, gUnk_09613638,
 #endif
-        76, 0x0, 6, {0, 0, 0}, 0xa, 535, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        76, 0x0, 6, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5452,7 +5452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, &gUnkEu_0889015C, gUnk_09063F74, gUnk_09063F88, gUnk_09613658,
 #endif
-        77, 0x0, 2, {0, 0, 0}, 0x27, 538, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        77, 0x0, 2, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5462,7 +5462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, &gUnkEu_0889015C, gUnk_09063F74, gUnk_09063F88, gUnk_09613658,
 #endif
-        77, 0x0, 4, {0, 0, 0}, 0x27, 538, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        77, 0x0, 4, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5472,7 +5472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, &gUnkEu_0889015C, gUnk_09063F74, gUnk_09063F88, gUnk_09613658,
 #endif
-        77, 0x0, 6, {0, 0, 0}, 0x27, 538, 3, 0, 20, {5, 0, 0, 0, 0, 0},
+        77, 0x0, 6, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5482,7 +5482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890200, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 1, {0, 0, 0}, 0x22, 575, 3, 0, 30, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 1, 0x22, 575, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5492,7 +5492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_088903AC, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 1, {0, 0, 0}, 0x29, 605, 3, 0, 60, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 1, 0x29, 605, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5502,7 +5502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890290, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 1, {0, 0, 0}, 0x30, 595, 3, 0, 25, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 1, 0x30, 595, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5512,7 +5512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890484, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 1, {0, 0, 0}, 0x2d, 565, 3, 0, 99, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 1, 0x2d, 565, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5522,7 +5522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, &gUnkEu_088959B8, gUnkEu_090F3F2C, gUnk_09066544, gUnk_09613DB8,
 #endif
-        82, 0x0, 2, {0, 0, 0}, 0x2c, 545, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        82, 0x0, 2, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5532,7 +5532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, &gUnkEu_088959B8, gUnkEu_090F3F2C, gUnk_09066544, gUnk_09613DB8,
 #endif
-        82, 0x0, 3, {0, 0, 0}, 0x2c, 545, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        82, 0x0, 3, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5542,7 +5542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, &gUnkEu_088959B8, gUnkEu_090F3F2C, gUnk_09066544, gUnk_09613DB8,
 #endif
-        82, 0x0, 3, {0, 0, 0}, 0x2c, 545, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        82, 0x0, 3, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5552,7 +5552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, &gUnkEu_088959B8, gUnkEu_090F3E18, gUnk_09066430, gUnk_09613D98,
 #endif
-        83, 0x0, 1, {0, 0, 0}, 0x2c, 548, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        83, 0x0, 1, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5562,7 +5562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, &gUnkEu_088959B8, gUnkEu_090F3E18, gUnk_09066430, gUnk_09613D98,
 #endif
-        83, 0x0, 4, {0, 0, 0}, 0x2c, 548, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        83, 0x0, 4, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5572,7 +5572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, &gUnkEu_088959B8, gUnkEu_090F3E18, gUnk_09066430, gUnk_09613D98,
 #endif
-        83, 0x0, 4, {0, 0, 0}, 0x2c, 548, 3, 0, 55, {5, 0, 0, 0, 0, 0},
+        83, 0x0, 4, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5582,7 +5582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11Palette, &gUnkEu_08890230, gUnk_09064FA0, gUnk_09064FB4, gUnk_09613858,
 #endif
-        84, 0x0, 9, {0, 0, 0}, 0x8, 551, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        84, 0x0, 9, 0x8, 551, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5592,7 +5592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_088902C8, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 1, {0, 0, 0}, 0x2, 615, 3, 0, 65, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 1, 0x2, 615, 3, 65, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5602,7 +5602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890354, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 1, {0, 0, 0}, 0x17, 585, 3, 0, 40, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 1, 0x17, 585, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5612,7 +5612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890300, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 1, {0, 0, 0}, 0x2e, 625, 3, 0, 50, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 1, 0x2e, 625, 3, 50, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5622,7 +5622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10Palette, &gUnkEu_088903E0, gUnk_09064B50, gUnk_09064B64, gUnk_096137B8,
 #endif
-        88, 0x0, 9, {0, 0, 0}, 0x1a, 555, 3, 0, 35, {5, 0, 0, 0, 0, 0},
+        88, 0x0, 9, 0x1a, 555, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5632,7 +5632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_0889043C, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 1, {0, 0, 0}, 0x2b, 635, 3, 0, 70, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 1, 0x2b, 635, 3, 70, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5642,7 +5642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12Palette, &gUnkEu_0888F52C, gUnk_090652DC, gUnk_090650C8, gUnk_096138F8,
 #endif
-        90, 0x0, 9, {0, 0, 0}, 0xf, 557, 3, 0, 80, {5, 0, 0, 0, 0, 0},
+        90, 0x0, 9, 0xf, 557, 3, 80, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5652,7 +5652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13Palette, &gUnkEu_0888F770, gUnk_09065840, gUnk_090651DC, gUnk_09613998,
 #endif
-        91, 0x0, 9, {0, 0, 0}, 0x12, 558, 3, 0, 75, {5, 0, 0, 0, 0, 0},
+        91, 0x0, 9, 0x12, 558, 3, 75, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5662,7 +5662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14Palette, &gUnkEu_0888F740, gUnk_09065B7C, gUnk_090652F0, gUnk_09613A38,
 #endif
-        92, 0x0, 9, {0, 0, 0}, 0x32, 559, 3, 0, 60, {5, 0, 0, 0, 0, 0},
+        92, 0x0, 9, 0x32, 559, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5672,7 +5672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15Palette, &gUnkEu_0888F7A4, gUnk_09065FCC, gUnk_09065404, gUnk_09613AD8,
 #endif
-        93, 0x0, 9, {0, 0, 0}, 0x1b, 560, 3, 0, 60, {5, 0, 0, 0, 0, 0},
+        93, 0x0, 9, 0x1b, 560, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5682,7 +5682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16Palette, &gUnkEu_0888F7E8, gUnk_09066308, gUnk_09065740, gUnk_09613B78,
 #endif
-        94, 0x0, 9, {0, 0, 0}, 0x2f, 561, 3, 0, 99, {5, 0, 0, 0, 0, 0},
+        94, 0x0, 9, 0x2f, 561, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5692,7 +5692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_0888F7E8, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 1, {0, 0, 0}, 0x2b, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 1, 0x2b, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5702,7 +5702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17Palette, &gUnkEu_08890F7C, gUnk_09066758, gUnk_09065B90, gUnk_09613C18,
 #endif
-        96, 0x0, 9, {0, 0, 0}, 0x31, 563, 3, 0, 99, {5, 0, 0, 0, 0, 0},
+        96, 0x0, 9, 0x31, 563, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5712,7 +5712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18Palette, &gUnkEu_08890FB0, gUnk_09066A94, gUnk_09065ECC, gUnk_09613CB8,
 #endif
-        97, 0x0, 9, {0, 0, 0}, 0x1c, 564, 3, 0, 60, {5, 0, 0, 0, 0, 0},
+        97, 0x0, 9, 0x1c, 564, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5722,7 +5722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 0, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 0, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5732,7 +5732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 1, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 1, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5742,7 +5742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 2, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 2, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5752,7 +5752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 3, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 3, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5762,7 +5762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 4, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 4, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5772,7 +5772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 5, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 5, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5782,7 +5782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 6, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 6, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5792,7 +5792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 7, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 7, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5802,7 +5802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 8, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 8, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5812,7 +5812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, &gUnkEu_08890A18, gUnk_0906419C, gUnk_090641B0, gUnk_09613698,
 #endif
-        81, 0x0, 9, {0, 0, 0}, 0x0, 565, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        81, 0x0, 9, 0x0, 565, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5822,7 +5822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 0, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 0, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5832,7 +5832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 1, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 1, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5842,7 +5842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 2, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 2, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5852,7 +5852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 3, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 3, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5862,7 +5862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 4, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 4, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5872,7 +5872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 5, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 5, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5882,7 +5882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 6, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 6, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5892,7 +5892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 7, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 7, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5902,7 +5902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 8, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 8, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5912,7 +5912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, &gUnkEu_08890A18, gUnk_090642B0, gUnk_090642C4, gUnk_096136B8,
 #endif
-        78, 0x0, 9, {0, 0, 0}, 0x0, 575, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        78, 0x0, 9, 0x0, 575, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5922,7 +5922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 0, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 0, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5932,7 +5932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 1, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 1, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5942,7 +5942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 2, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 2, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5952,7 +5952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 3, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 3, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5962,7 +5962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 4, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 4, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5972,7 +5972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 5, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 5, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5982,7 +5982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 6, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 6, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -5992,7 +5992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 7, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 7, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6002,7 +6002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 8, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 8, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6012,7 +6012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, &gUnkEu_08890A18, gUnk_090643C4, gUnk_090643D8, gUnk_096136D8,
 #endif
-        86, 0x0, 9, {0, 0, 0}, 0x0, 585, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        86, 0x0, 9, 0x0, 585, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6022,7 +6022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 0, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 0, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6032,7 +6032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 1, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 1, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6042,7 +6042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 2, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 2, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6052,7 +6052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 3, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 3, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6062,7 +6062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 4, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 4, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6072,7 +6072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 5, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 5, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6082,7 +6082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 6, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 6, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6092,7 +6092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 7, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 7, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6102,7 +6102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 8, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 8, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6112,7 +6112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, &gUnkEu_08890A18, gUnk_090644D8, gUnk_090644EC, gUnk_096136F8,
 #endif
-        80, 0x0, 9, {0, 0, 0}, 0x0, 595, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        80, 0x0, 9, 0x0, 595, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6122,7 +6122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 0, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 0, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6132,7 +6132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 1, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 1, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6142,7 +6142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 2, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 2, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6152,7 +6152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 3, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 3, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6162,7 +6162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 4, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 4, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6172,7 +6172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 5, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 5, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6182,7 +6182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 6, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 6, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6192,7 +6192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 7, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 7, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6202,7 +6202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 8, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 8, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6212,7 +6212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, &gUnkEu_08890A18, gUnk_090645EC, gUnk_09064600, gUnk_09613718,
 #endif
-        79, 0x0, 9, {0, 0, 0}, 0x0, 605, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        79, 0x0, 9, 0x0, 605, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6222,7 +6222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 0, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 0, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6232,7 +6232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 1, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 1, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6242,7 +6242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 2, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 2, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6252,7 +6252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 3, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 3, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6262,7 +6262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 4, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 4, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6272,7 +6272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 5, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 5, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6282,7 +6282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 6, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 6, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6292,7 +6292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 7, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 7, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6302,7 +6302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 8, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 8, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6312,7 +6312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, &gUnkEu_08890A18, gUnk_09064700, gUnk_09064714, gUnk_09613738,
 #endif
-        85, 0x0, 9, {0, 0, 0}, 0x0, 615, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        85, 0x0, 9, 0x0, 615, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6322,7 +6322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 0, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 0, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6332,7 +6332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 1, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 1, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6342,7 +6342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 2, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 2, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6352,7 +6352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 3, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 3, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6362,7 +6362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 4, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 4, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6372,7 +6372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 5, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 5, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6382,7 +6382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 6, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 6, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6392,7 +6392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 7, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 7, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6402,7 +6402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 8, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 8, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6412,7 +6412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, &gUnkEu_08890A18, gUnk_09064814, gUnk_09064828, gUnk_09613758,
 #endif
-        87, 0x0, 9, {0, 0, 0}, 0x0, 625, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        87, 0x0, 9, 0x0, 625, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6422,7 +6422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 0, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 0, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6432,7 +6432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 1, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 1, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6442,7 +6442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 2, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 2, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6452,7 +6452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 3, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 3, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6462,7 +6462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 4, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 4, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6472,7 +6472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 5, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 5, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6482,7 +6482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 6, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 6, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6492,7 +6492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 7, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 7, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6502,7 +6502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 8, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 8, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6512,7 +6512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, &gUnkEu_08890A18, gUnk_09064928, gUnk_0906493C, gUnk_09613778,
 #endif
-        89, 0x0, 9, {0, 0, 0}, 0x0, 635, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        89, 0x0, 9, 0x0, 635, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6522,7 +6522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 0, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 0, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6532,7 +6532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 1, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 1, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6542,7 +6542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 2, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 2, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6552,7 +6552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 3, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 3, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6562,7 +6562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 4, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 4, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6572,7 +6572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 5, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 5, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6582,7 +6582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 6, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 6, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6592,7 +6592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 7, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 7, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6602,7 +6602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 8, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 8, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6612,7 +6612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, &gUnkEu_08890A18, gUnk_09064A3C, gUnk_09064A50, gUnk_09613798,
 #endif
-        95, 0x0, 9, {0, 0, 0}, 0x0, 645, 3, 0, 0, {5, 0, 0, 0, 0, 0},
+        95, 0x0, 9, 0x0, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6622,7 +6622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_09054110, gUnk_09054124, gUnk_09612BB8, &gUnkEu_08890A18, NULL, NULL, NULL,
 #endif
-        98, CARD_DEF_FLAG_GIMMICK, 0, {0, 0, 0}, 0x8c, 655, 2, 0, 0, {0, 0, 0, 0, 0, 0},
+        98, CARD_DEF_FLAG_GIMMICK, 0, 0x8c, 655, 2, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6632,7 +6632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_09054110, gUnk_09054124, gUnk_09612BB8, &gUnkEu_08890A18, NULL, NULL, NULL,
 #endif
-        99, CARD_DEF_FLAG_GIMMICK, 0, {0, 0, 0}, 0x8d, 656, 2, 0, 0, {0, 0, 0, 0, 0, 0},
+        99, CARD_DEF_FLAG_GIMMICK, 0, 0x8d, 656, 2, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6642,7 +6642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_09054110, gUnk_09054124, gUnk_09612BB8, &gUnkEu_08890A18, NULL, NULL, NULL,
 #endif
-        100, CARD_DEF_FLAG_GIMMICK, 0, {0, 0, 0}, 0x8e, 657, 2, 0, 0, {0, 0, 0, 0, 0, 0},
+        100, CARD_DEF_FLAG_GIMMICK, 0, 0x8e, 657, 2, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6652,7 +6652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_09054110, gUnk_09054124, gUnk_09612BB8, &gUnkEu_08890A18, NULL, NULL, NULL,
 #endif
-        101, CARD_DEF_FLAG_GIMMICK, 0, {0, 0, 0}, 0x8f, 658, 2, 0, 0, {0, 0, 0, 0, 0, 0},
+        101, CARD_DEF_FLAG_GIMMICK, 0, 0x8f, 658, 2, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6662,7 +6662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gUnk_09054110, gUnk_09054124, gUnk_09612BB8, &gUnkEu_08890A18, NULL, NULL, NULL,
 #endif
-        102, CARD_DEF_FLAG_GIMMICK, 0, {0, 0, 0}, 0x90, 659, 2, 0, 0, {0, 0, 0, 0, 0, 0},
+        102, CARD_DEF_FLAG_GIMMICK, 0, 0x90, 659, 2, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6672,7 +6672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 0, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 0, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6682,7 +6682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 1, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 1, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6692,7 +6692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 2, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 2, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6702,7 +6702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 3, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 3, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6712,7 +6712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 4, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 4, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6722,7 +6722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 5, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 5, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6732,7 +6732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 6, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 6, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6742,7 +6742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 7, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 7, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6752,7 +6752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 8, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 8, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6762,7 +6762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardWep20Frame0, gCardWep20Tiles, gCardWep20Palette, &gUnkEu_0889103C, gUnk_09060310, gUnk_09060324, gUnk_09612E58,
 #endif
-        17, 0x0, 9, {0, 0, 0}, 0x12, 661, 0, 0, 0, {5, 0, 0, 0, 0, 0},
+        17, 0x0, 9, 0x12, 661, 0, 0, {5, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6772,7 +6772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 0, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 0, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6782,7 +6782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 1, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 1, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6792,7 +6792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 2, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 2, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6802,7 +6802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 3, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 3, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6812,7 +6812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 4, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 4, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6822,7 +6822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 5, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 5, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6832,7 +6832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 6, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 6, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6842,7 +6842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 7, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 7, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6852,7 +6852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 8, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 8, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6862,7 +6862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn15Frame0, gCardSmn15Tiles, gMickeyPalette, &gUnkEu_08890FEC, gUnk_09062258, gUnk_0906226C, gUnk_09613298,
 #endif
-        46, CARD_DEF_FLAG_FRIEND, 9, {0, 0, 0}, 0x2d, 671, 2, 0, 0, {3, 0, 0, 0, 0, 0},
+        46, CARD_DEF_FLAG_FRIEND, 9, 0x2d, 671, 2, 0, {3, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6872,7 +6872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 0, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 0, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6882,7 +6882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 1, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 1, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6892,7 +6892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 2, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 2, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6902,7 +6902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 3, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 3, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6912,7 +6912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 4, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 4, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6922,7 +6922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 5, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 5, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6932,7 +6932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 6, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 6, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6942,7 +6942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 7, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 7, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6952,7 +6952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 8, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 8, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6962,7 +6962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09aPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613158,
 #endif
-        131, 0x0, 9, {0, 0, 0}, 0x24, 681, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        131, 0x0, 9, 0x24, 681, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6972,7 +6972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 0, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 0, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6982,7 +6982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 1, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 1, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -6992,7 +6992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 2, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 2, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7002,7 +7002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 3, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 3, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7012,7 +7012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 4, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 4, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7022,7 +7022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 5, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 5, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7032,7 +7032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 6, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 6, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7042,7 +7042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 7, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 7, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7052,7 +7052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 8, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 8, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7062,7 +7062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardSmn09Frame0, gCardSmn09Tiles, gCardSmn09bPalette, &gUnkEu_08890A18, gUnk_09061BDC, gUnk_09061BF2, gUnk_09613178,
 #endif
-        132, 0x0, 9, {0, 0, 0}, 0x25, 691, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        132, 0x0, 9, 0x25, 691, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7072,7 +7072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 0, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 0, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7082,7 +7082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 1, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 1, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7092,7 +7092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 2, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 2, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7102,7 +7102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 3, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 3, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7112,7 +7112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 4, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 4, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7122,7 +7122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 5, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 5, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7132,7 +7132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 6, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 6, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7142,7 +7142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 7, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 7, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7152,7 +7152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 8, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 8, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7162,7 +7162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10aPalette, &gUnkEu_08890A18, gUnk_09064C64, gUnk_09064C78, gUnk_096137D8,
 #endif
-        103, 0x0, 9, {0, 0, 0}, 0x24, 701, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        103, 0x0, 9, 0x24, 701, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7172,7 +7172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 0, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 0, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7182,7 +7182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 1, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 1, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7192,7 +7192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 2, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 2, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7202,7 +7202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 3, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 3, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7212,7 +7212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 4, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 4, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7222,7 +7222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 5, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 5, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7232,7 +7232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 6, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 6, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7242,7 +7242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 7, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 7, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7252,7 +7252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 8, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 8, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7262,7 +7262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10bPalette, &gUnkEu_08890A18, gUnk_09064D78, gUnk_09064D8C, gUnk_096137D8,
 #endif
-        104, 0x0, 9, {0, 0, 0}, 0x25, 711, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        104, 0x0, 9, 0x25, 711, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7272,7 +7272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 0, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 0, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7282,7 +7282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 1, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 1, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7292,7 +7292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 2, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 2, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7302,7 +7302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 3, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 3, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7312,7 +7312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 4, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 4, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7322,7 +7322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 5, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 5, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7332,7 +7332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 6, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 6, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7342,7 +7342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 7, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 7, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7352,7 +7352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 8, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 8, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7362,7 +7362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10cPalette, &gUnkEu_08890A18, gUnk_09064E8C, gUnk_09064EA0, gUnk_096137D8,
 #endif
-        105, 0x0, 9, {0, 0, 0}, 0x26, 721, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        105, 0x0, 9, 0x26, 721, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7372,7 +7372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 0, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 0, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7382,7 +7382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 1, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 1, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7392,7 +7392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 2, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 2, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7402,7 +7402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 3, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 3, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7412,7 +7412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 4, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 4, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7422,7 +7422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 5, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 5, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7432,7 +7432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 6, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 6, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7442,7 +7442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 7, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 7, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7452,7 +7452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 8, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 8, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7462,7 +7462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10dPalette, &gUnkEu_08890A18, gUnk_09064B50, gUnk_09064B64, gUnk_096137D8,
 #endif
-        106, 0x0, 9, {0, 0, 0}, 0x27, 731, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        106, 0x0, 9, 0x27, 731, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7472,7 +7472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 0, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 0, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7482,7 +7482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 1, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 1, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7492,7 +7492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 2, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 2, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7502,7 +7502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 3, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 3, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7512,7 +7512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 4, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 4, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7522,7 +7522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 5, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 5, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7532,7 +7532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 6, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 6, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7542,7 +7542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 7, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 7, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7552,7 +7552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 8, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 8, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7562,7 +7562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11aPalette, &gUnkEu_08890A18, gUnk_090650B4, gUnkEu_090F1EE8, gUnk_09613878,
 #endif
-        107, 0x0, 9, {0, 0, 0}, 0x24, 741, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        107, 0x0, 9, 0x24, 741, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7572,7 +7572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 0, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 0, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7582,7 +7582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 1, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 1, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7592,7 +7592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 2, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 2, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7602,7 +7602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 3, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 3, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7612,7 +7612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 4, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 4, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7622,7 +7622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 5, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 5, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7632,7 +7632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 6, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 6, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7642,7 +7642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 7, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 7, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7652,7 +7652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 8, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 8, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7662,7 +7662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11bPalette, &gUnkEu_08890A18, gUnk_090651C8, gUnkEu_090F1FFC, gUnk_09613878,
 #endif
-        108, 0x0, 9, {0, 0, 0}, 0x25, 751, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        108, 0x0, 9, 0x25, 751, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7672,7 +7672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 0, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 0, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7682,7 +7682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 1, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 1, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7692,7 +7692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 2, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 2, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7702,7 +7702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 3, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 3, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7712,7 +7712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 4, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 4, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7722,7 +7722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 5, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 5, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7732,7 +7732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 6, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 6, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7742,7 +7742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 7, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 7, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7752,7 +7752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 8, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 8, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7762,7 +7762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12aPalette, &gUnkEu_08890A18, gUnk_090653F0, gUnkEu_090F2224, gUnk_09613918,
 #endif
-        111, 0x0, 9, {0, 0, 0}, 0x24, 761, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        111, 0x0, 9, 0x24, 761, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7772,7 +7772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 0, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 0, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7782,7 +7782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 1, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 1, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7792,7 +7792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 2, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 2, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7802,7 +7802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 3, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 3, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7812,7 +7812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 4, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 4, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7822,7 +7822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 5, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 5, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7832,7 +7832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 6, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 6, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7842,7 +7842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 7, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 7, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7852,7 +7852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 8, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 8, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7862,7 +7862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12bPalette, &gUnkEu_08890A18, gUnk_09065504, gUnkEu_090F2338, gUnk_09613918,
 #endif
-        112, 0x0, 9, {0, 0, 0}, 0x25, 771, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        112, 0x0, 9, 0x25, 771, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7872,7 +7872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 0, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 0, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7882,7 +7882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 1, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 1, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7892,7 +7892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 2, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 2, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7902,7 +7902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 3, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 3, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7912,7 +7912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 4, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 4, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7922,7 +7922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 5, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 5, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7932,7 +7932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 6, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 6, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7942,7 +7942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 7, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 7, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7952,7 +7952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 8, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 8, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7962,7 +7962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12cPalette, &gUnkEu_08890A18, gUnk_09065618, gUnkEu_090F244C, gUnk_09613918,
 #endif
-        113, 0x0, 9, {0, 0, 0}, 0x26, 781, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        113, 0x0, 9, 0x26, 781, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7972,7 +7972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 0, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 0, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7982,7 +7982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 1, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 1, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -7992,7 +7992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 2, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 2, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8002,7 +8002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 3, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 3, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8012,7 +8012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 4, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 4, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8022,7 +8022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 5, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 5, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8032,7 +8032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 6, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 6, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8042,7 +8042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 7, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 7, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8052,7 +8052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 8, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 8, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8062,7 +8062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12dPalette, &gUnkEu_08890A18, gUnk_0906572C, gUnkEu_090F2560, gUnk_09613918,
 #endif
-        114, 0x0, 9, {0, 0, 0}, 0x27, 791, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        114, 0x0, 9, 0x27, 791, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8072,7 +8072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 0, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 0, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8082,7 +8082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 1, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 1, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8092,7 +8092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 2, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 2, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8102,7 +8102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 3, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 3, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8112,7 +8112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 4, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 4, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8122,7 +8122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 5, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 5, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8132,7 +8132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 6, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 6, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8142,7 +8142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 7, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 7, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8152,7 +8152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 8, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 8, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8162,7 +8162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13aPalette, &gUnkEu_08890A18, gUnk_09065954, gUnkEu_090F2788, gUnk_096139B8,
 #endif
-        115, 0x0, 9, {0, 0, 0}, 0x24, 801, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        115, 0x0, 9, 0x24, 801, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8172,7 +8172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 0, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 0, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8182,7 +8182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 1, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 1, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8192,7 +8192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 2, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 2, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8202,7 +8202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 3, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 3, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8212,7 +8212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 4, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 4, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8222,7 +8222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 5, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 5, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8232,7 +8232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 6, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 6, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8242,7 +8242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 7, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 7, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8252,7 +8252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 8, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 8, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8262,7 +8262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13bPalette, &gUnkEu_08890A18, gUnk_09065A68, gUnkEu_090F289C, gUnk_096139B8,
 #endif
-        116, 0x0, 9, {0, 0, 0}, 0x25, 811, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        116, 0x0, 9, 0x25, 811, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8272,7 +8272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 0, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 0, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8282,7 +8282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 1, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 1, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8292,7 +8292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 2, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 2, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8302,7 +8302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 3, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 3, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8312,7 +8312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 4, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 4, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8322,7 +8322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 5, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 5, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8332,7 +8332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 6, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 6, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8342,7 +8342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 7, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 7, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8352,7 +8352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 8, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 8, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8362,7 +8362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14aPalette, &gUnkEu_08890A18, gUnk_09065C90, gUnkEu_090F2AC4, gUnk_09613A58,
 #endif
-        119, 0x0, 9, {0, 0, 0}, 0x24, 821, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        119, 0x0, 9, 0x24, 821, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8372,7 +8372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 0, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 0, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8382,7 +8382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 1, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 1, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8392,7 +8392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 2, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 2, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8402,7 +8402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 3, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 3, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8412,7 +8412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 4, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 4, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8422,7 +8422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 5, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 5, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8432,7 +8432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 6, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 6, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8442,7 +8442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 7, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 7, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8452,7 +8452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 8, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 8, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8462,7 +8462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14bPalette, &gUnkEu_08890A18, gUnk_09065DA4, gUnkEu_090F2BD8, gUnk_09613A58,
 #endif
-        120, 0x0, 9, {0, 0, 0}, 0x25, 831, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        120, 0x0, 9, 0x25, 831, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8472,7 +8472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 0, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 0, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8482,7 +8482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 1, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 1, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8492,7 +8492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 2, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 2, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8502,7 +8502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 3, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 3, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8512,7 +8512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 4, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 4, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8522,7 +8522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 5, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 5, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8532,7 +8532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 6, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 6, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8542,7 +8542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 7, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 7, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8552,7 +8552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 8, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 8, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8562,7 +8562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14cPalette, &gUnkEu_08890A18, gUnk_09065EB8, gUnkEu_090F2CEC, gUnk_09613A58,
 #endif
-        121, 0x0, 9, {0, 0, 0}, 0x26, 841, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        121, 0x0, 9, 0x26, 841, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8572,7 +8572,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 0, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 0, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8582,7 +8582,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 1, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 1, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8592,7 +8592,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 2, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 2, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8602,7 +8602,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 3, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 3, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8612,7 +8612,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 4, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 4, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8622,7 +8622,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 5, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 5, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8632,7 +8632,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 6, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 6, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8642,7 +8642,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 7, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 7, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8652,7 +8652,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 8, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 8, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8662,7 +8662,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15aPalette, &gUnkEu_08890A18, gUnk_090660E0, gUnk_09065518, gUnk_09613AF8,
 #endif
-        123, 0x0, 9, {0, 0, 0}, 0x24, 851, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        123, 0x0, 9, 0x24, 851, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8672,7 +8672,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 0, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 0, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8682,7 +8682,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 1, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 1, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8692,7 +8692,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 2, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 2, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8702,7 +8702,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 3, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 3, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8712,7 +8712,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 4, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 4, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8722,7 +8722,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 5, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 5, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8732,7 +8732,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 6, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 6, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8742,7 +8742,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 7, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 7, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8752,7 +8752,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 8, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 8, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8762,7 +8762,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15bPalette, &gUnkEu_08890A18, gUnk_090661F4, gUnk_0906562C, gUnk_09613AF8,
 #endif
-        124, 0x0, 9, {0, 0, 0}, 0x25, 861, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        124, 0x0, 9, 0x25, 861, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8772,7 +8772,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 0, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 0, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8782,7 +8782,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 1, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 1, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8792,7 +8792,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 2, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 2, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8802,7 +8802,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 3, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 3, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8812,7 +8812,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 4, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 4, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8822,7 +8822,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 5, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 5, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8832,7 +8832,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 6, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 6, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8842,7 +8842,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 7, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 7, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8852,7 +8852,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 8, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 8, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8862,7 +8862,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16aPalette, &gUnkEu_08890A18, gUnk_0906641C, gUnk_09065854, gUnk_09613B98,
 #endif
-        127, 0x0, 9, {0, 0, 0}, 0x24, 871, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        127, 0x0, 9, 0x24, 871, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8872,7 +8872,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 0, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 0, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8882,7 +8882,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 1, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 1, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8892,7 +8892,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 2, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 2, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8902,7 +8902,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 3, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 3, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8912,7 +8912,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 4, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 4, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8922,7 +8922,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 5, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 5, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8932,7 +8932,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 6, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 6, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8942,7 +8942,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 7, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 7, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8952,7 +8952,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 8, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 8, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8962,7 +8962,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16bPalette, &gUnkEu_08890A18, gUnk_09066530, gUnk_09065968, gUnk_09613B98,
 #endif
-        128, 0x0, 9, {0, 0, 0}, 0x25, 881, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        128, 0x0, 9, 0x25, 881, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8972,7 +8972,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 0, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 0, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8982,7 +8982,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 1, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 1, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -8992,7 +8992,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 2, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 2, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9002,7 +9002,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 3, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 3, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9012,7 +9012,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 4, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 4, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9022,7 +9022,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 5, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 5, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9032,7 +9032,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 6, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 6, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9042,7 +9042,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 7, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 7, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9052,7 +9052,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 8, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 8, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9062,7 +9062,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16cPalette, &gUnkEu_08890A18, gUnk_09066644, gUnk_09065A7C, gUnk_09613B98,
 #endif
-        129, 0x0, 9, {0, 0, 0}, 0x26, 891, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        129, 0x0, 9, 0x26, 891, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9072,7 +9072,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 0, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 0, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9082,7 +9082,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 1, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 1, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9092,7 +9092,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 2, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 2, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9102,7 +9102,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 3, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 3, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9112,7 +9112,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 4, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 4, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9122,7 +9122,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 5, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 5, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9132,7 +9132,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 6, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 6, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9142,7 +9142,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 7, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 7, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9152,7 +9152,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 8, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 8, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9162,7 +9162,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17aPalette, &gUnkEu_08890A18, gUnk_0906686C, gUnk_09065CA4, gUnk_09613C38,
 #endif
-        139, 0x0, 9, {0, 0, 0}, 0x24, 901, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        139, 0x0, 9, 0x24, 901, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9172,7 +9172,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 0, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 0, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9182,7 +9182,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 1, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 1, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9192,7 +9192,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 2, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 2, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9202,7 +9202,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 3, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 3, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9212,7 +9212,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 4, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 4, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9222,7 +9222,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 5, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 5, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9232,7 +9232,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 6, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 6, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9242,7 +9242,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 7, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 7, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9252,7 +9252,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 8, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 8, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9262,7 +9262,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17bPalette, &gUnkEu_08890A18, gUnk_09066980, gUnk_09065DB8, gUnk_09613C38,
 #endif
-        140, 0x0, 9, {0, 0, 0}, 0x25, 911, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        140, 0x0, 9, 0x25, 911, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9272,7 +9272,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 0, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 0, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9282,7 +9282,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 1, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 1, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9292,7 +9292,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 2, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 2, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9302,7 +9302,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 3, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 3, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9312,7 +9312,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 4, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 4, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9322,7 +9322,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 5, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 5, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9332,7 +9332,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 6, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 6, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9342,7 +9342,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 7, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 7, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9352,7 +9352,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 8, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 8, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9362,7 +9362,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17cPalette, &gUnkEu_08890A18, gUnk_09066758, gUnk_09065B90, gUnk_09613C78,
 #endif
-        141, 0x0, 9, {0, 0, 0}, 0x26, 921, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        141, 0x0, 9, 0x26, 921, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9372,7 +9372,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 0, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 0, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9382,7 +9382,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 1, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 1, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9392,7 +9392,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 2, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 2, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9402,7 +9402,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 3, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 3, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9412,7 +9412,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 4, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 4, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9422,7 +9422,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 5, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 5, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9432,7 +9432,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 6, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 6, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9442,7 +9442,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 7, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 7, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9452,7 +9452,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 8, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 8, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9462,7 +9462,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18aPalette, &gUnkEu_08890A18, gUnk_09066BA8, gUnk_09065FE0, gUnk_09613CD8,
 #endif
-        135, 0x0, 9, {0, 0, 0}, 0x24, 931, 1, 0, 0, {0, 0, 0, 0, 0, 0},
+        135, 0x0, 9, 0x24, 931, 1, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9472,7 +9472,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 0, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 0, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9482,7 +9482,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 1, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 1, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9492,7 +9492,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 2, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 2, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9502,7 +9502,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 3, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 3, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9512,7 +9512,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 4, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 4, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9522,7 +9522,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 5, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 5, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9532,7 +9532,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 6, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 6, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9542,7 +9542,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 7, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 7, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9552,7 +9552,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 8, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 8, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
     {
 #if defined(VERSION_US)
@@ -9562,7 +9562,7 @@ const CardDef gCardDefs[950] = {
 #elif defined(VERSION_EU)
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18bPalette, &gUnkEu_08890A18, gUnkEu_090F3ADC, gUnk_090660F4, gUnk_09613CD8,
 #endif
-        136, 0x0, 9, {0, 0, 0}, 0x25, 941, 0, 0, 0, {0, 0, 0, 0, 0, 0},
+        136, 0x0, 9, 0x25, 941, 0, 0, {0, 0, 0, 0, 0, 0},
     },
 };
 

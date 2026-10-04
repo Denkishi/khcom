@@ -27,9 +27,9 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sSmnKingAnimDefs[3] = {
-    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 0, { 0, 0, 0 } },
-    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 1, { 0, 0, 0 } },
-    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 2, { 0, 0, 0 } },
+    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 0 },
+    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 1 },
+    { gMickey10Frames, gMickey10Anims, gMickey10Tiles, 2 },
 };
 
 void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {

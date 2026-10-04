@@ -21,13 +21,11 @@ typedef struct Dma3Request {
 #define BG_ENTRY_COUNT 4
 typedef struct BgEntry {
     u8 dirty;
-    u8 unk_01[3];
     void* const* map;
     u8 width;
     u8 height;
     u16 x;
     u16 y;
-    u16 unk_0E;
 #ifdef VERSION_EU
     void** decompressedMap;
 #endif
@@ -40,7 +38,6 @@ typedef struct BgWork {
 typedef struct Dma3Pending {
     void* dst;
     u16 size;
-    u16 unk_06;
 } Dma3Pending;
 
 typedef struct Dma3Blit {
@@ -96,10 +93,8 @@ typedef struct FadeWork {
     u32 target;
     u32 lastAmount;
     u16 timer;
-    u16 unk_58E;
     u32 mode;
     u16 flags;
-    u16 unk_596;
 } FadeWork;
 
 typedef char FadeWork_size[(sizeof(FadeWork) == 0x598) ? 1 : -1];
@@ -107,7 +102,6 @@ typedef char PaletteSlot_size[(sizeof(PaletteSlot) == 0x2C) ? 1 : -1];
 
 typedef struct Spline2D {
     s16 pointCount;
-    u16 unk_02;
     s32* intervals;
     s32* scratch;
     s32* knots;

@@ -32,19 +32,19 @@ static const u32 sHumLexceusStockMoves[3] = {
 };
 
 static const AnimDef sHumLexceusAnimDefs[10] = {
-    { gRexeusIdlFrames, gRexeusIdlAnims, gRexeusIdlTiles, 0, { 0, 0, 0 } },
-    { gRexeusMovFrames, gRexeusMovAnims, gRexeusMovTiles, 0, { 0, 0, 0 } },
-    { gRexeusDmgFrames, gRexeusDmgAnims, gRexeusDmgTiles, 0, { 0, 0, 0 } },
-    { gRexeusCmb1Frames, gRexeusCmb1Anims, gRexeusCmb1Tiles, 0, { 0, 0, 0 } },
-    { gRexeusCmb2Frames, gRexeusCmb2Anims, gRexeusCmb2Tiles, 1, { 0, 0, 0 } },
-    { gRexeusTmhFrames, gRexeusTmhAnims, gRexeusTmhTiles, 0, { 0, 0, 0 } },
-    { gRexeusTmhFrames, gRexeusTmhAnims, gRexeusTmhTiles, 1, { 0, 0, 0 } },
-    { gRexeusRckFrames, gRexeusRckAnims, gRexeusRckTiles, 0, { 0, 0, 0 } },
-    { gRexeusRckFrames, gRexeusRckAnims, gRexeusRckTiles, 1, { 0, 0, 0 } },
-    { gRexeusImpFrames, gRexeusImpAnims, gRexeusImpTiles, 0, { 0, 0, 0 } },
+    { gRexeusIdlFrames, gRexeusIdlAnims, gRexeusIdlTiles, 0 },
+    { gRexeusMovFrames, gRexeusMovAnims, gRexeusMovTiles, 0 },
+    { gRexeusDmgFrames, gRexeusDmgAnims, gRexeusDmgTiles, 0 },
+    { gRexeusCmb1Frames, gRexeusCmb1Anims, gRexeusCmb1Tiles, 0 },
+    { gRexeusCmb2Frames, gRexeusCmb2Anims, gRexeusCmb2Tiles, 1 },
+    { gRexeusTmhFrames, gRexeusTmhAnims, gRexeusTmhTiles, 0 },
+    { gRexeusTmhFrames, gRexeusTmhAnims, gRexeusTmhTiles, 1 },
+    { gRexeusRckFrames, gRexeusRckAnims, gRexeusRckTiles, 0 },
+    { gRexeusRckFrames, gRexeusRckAnims, gRexeusRckTiles, 1 },
+    { gRexeusImpFrames, gRexeusImpAnims, gRexeusImpTiles, 0 },
 };
 
-static const HumDef sHumLexceusDef = { 128, 0, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
+static const HumDef sHumLexceusDef = { 128, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumLexceus = {
     "task_hum_lexceus",

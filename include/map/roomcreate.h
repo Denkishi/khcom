@@ -19,7 +19,6 @@ typedef struct RoomCreateWork {
     s16 timer;
     u8 spotLightEnd;
     u8 mapSelectStatus;
-    u8 unk_2A[0x02];
     TaskPool tasks;
     s32 state;
 } RoomCreateWork;

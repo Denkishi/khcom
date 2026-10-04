@@ -3,22 +3,22 @@
 #endif
 
 static const MessageScriptEntry sEvent137Script[16] = {
-    { 48, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text00), 0, 100 },
-    { 36, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text01), 0, 120 },
-    { 0, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text02), 0, 140 },
-    { 48, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text03), 0, 160 },
-    { 48, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text04), 0, 260 },
-    { 48, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text05), 0, 262 },
-    { 48, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text06), 0, 264 },
-    { 48, 0, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text07), 0, 266 },
-    { 0, 0, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text08), 0, 280 },
-    { 48, 0, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text09), 0, 300 },
-    { 48, 1, 4, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text10), 0, 302 },
-    { 36, 2, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text11), 0, 400 },
-    { 48, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text12), 0, 420 },
-    { 36, 1, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text13), 0, 440 },
-    { 0, 4, 3, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text14), 0, 600 },
-    { 48, 1, 1, EVENT_TEXT_DELAY, { 0, 0, 0 }, EVENT_TEXT(gEvent137Text15), MSG_SCRIPT_FLAG_END, 620 },
+    { 48, 0, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text00), 0, 100 },
+    { 36, 1, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text01), 0, 120 },
+    { 0, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text02), 0, 140 },
+    { 48, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text03), 0, 160 },
+    { 48, 0, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text04), 0, 260 },
+    { 48, 0, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text05), 0, 262 },
+    { 48, 0, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text06), 0, 264 },
+    { 48, 0, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text07), 0, 266 },
+    { 0, 0, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text08), 0, 280 },
+    { 48, 0, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text09), 0, 300 },
+    { 48, 1, 4, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text10), 0, 302 },
+    { 36, 2, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text11), 0, 400 },
+    { 48, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text12), 0, 420 },
+    { 36, 1, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text13), 0, 440 },
+    { 0, 4, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text14), 0, 600 },
+    { 48, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent137Text15), MSG_SCRIPT_FLAG_END, 620 },
 };
 
 #ifdef VERSION_JP
@@ -33,56 +33,54 @@ static const EvSoundCue sEvent137SoundCues[4] = {
 };
 
 static const EventCameraKeyframe sEvent137Camera[1] = {
-    { -65226, 237824, 121344, 0, 255, { 0, 0, 0 }, CAMERA_KEYFRAME_FLAG_END, 0, { 0, 0 }, NULL },
+    { -65226, 237824, 121344, 0, 255, CAMERA_KEYFRAME_FLAG_END, 0, NULL },
 };
 
 static const EventCharaKeyframe sEvent137Track0[10] = {
-    { 4, 130, { 0, 0 }, 235008, 129536, 0, 0, { 0, 0 }, 66, NULL, NULL },
-    { 0, 135, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 4, 170, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 0, 175, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 4, 180, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 64, NULL, CreateQuestionTask },
-    { 4, 280, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 34, 290, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 670, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 4, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 4, 130, 235008, 129536, 0, 0, 66, NULL, NULL },
+    { 0, 135, 0, 0, 0, 0, 5, NULL, NULL },
+    { 4, 170, 0, 0, 0, 0, 5, NULL, NULL },
+    { 0, 175, 0, 0, 0, 0, 5, NULL, NULL },
+    { 4, 180, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 250, 0, 0, 0, 0, 64, NULL, CreateQuestionTask },
+    { 4, 280, 0, 0, 0, 0, 69, NULL, NULL },
+    { 34, 290, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 670, 0, 0, 0, 0, 69, NULL, NULL },
+    { 4, 999, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent137Track1[6] = {
-    { 756, 180, { 0, 0 }, 229120, 126464, 0, 0, { 0, 0 }, 2, NULL, NULL },
-    { 765, 250, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, NULL, CreateQuestionTask },
-    { 765, 310, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 798, 399, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 799, 421, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 69, NULL, NULL },
-    { 800, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32837, NULL, NULL },
+    { 756, 180, 229120, 126464, 0, 0, 2, NULL, NULL },
+    { 765, 250, 0, 0, 0, 0, 0, NULL, CreateQuestionTask },
+    { 765, 310, 0, 0, 0, 0, 5, NULL, NULL },
+    { 798, 399, 0, 0, 0, 0, 69, NULL, NULL },
+    { 799, 421, 0, 0, 0, 0, 69, NULL, NULL },
+    { 800, 999, 0, 0, 0, 0, 32837, NULL, NULL },
 };
 
 static const EventCharaKeyframe sEvent137Track2[6] = {
-    { 814, 155, { 0, 0 }, 244736, 121344, 0, 0, { 0, 0 }, 2, NULL, NULL },
-    { 815, 415, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 815, 450, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 814, 590, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 0, NULL, CreateBalloonTask },
-    { 814, 630, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 5, NULL, NULL },
-    { 815, 999, { 0, 0 }, 0, 0, 0, 0, { 0, 0 }, 32773, NULL, NULL },
+    { 814, 155, 244736, 121344, 0, 0, 2, NULL, NULL },
+    { 815, 415, 0, 0, 0, 0, 5, NULL, NULL },
+    { 815, 450, 0, 0, 0, 0, 5, NULL, NULL },
+    { 814, 590, 0, 0, 0, 0, 0, NULL, CreateBalloonTask },
+    { 814, 630, 0, 0, 0, 0, 5, NULL, NULL },
+    { 815, 999, 0, 0, 0, 0, 32773, NULL, NULL },
 };
 
 static const EventCharaTrack sEvent137Tracks[3] = {
-    { sEvent137Track0, 0, { 0, 0, 0 } },
-    { sEvent137Track1, 70, { 0, 0, 0 } },
-    { sEvent137Track2, 73, { 0, 0, 0 } },
+    { sEvent137Track0, 0 },
+    { sEvent137Track1, 70 },
+    { sEvent137Track2, 73 },
 };
 
 const EventSequenceDef gEvent137 = {
     3,
-    { 0, 0, 0 },
     sEvent137Tracks,
     sEvent137Camera,
     sEvent137Script,
     sEvent137SoundCues,
     NULL,
     830,
-    0,
     0,
     0,
     0,

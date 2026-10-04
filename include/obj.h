@@ -20,7 +20,6 @@ typedef struct PaletteSlot {
     u16 buffer[16];
     u8 excluded;
     u8 dirty;
-    u8 unk_2A[0x02];
 } PaletteSlot;
 
 typedef struct ObjTiles {
@@ -28,11 +27,9 @@ typedef struct ObjTiles {
     u16 refCount;
     u16 index;
     u16 count;
-    u16 unk_0A;
     ListNode node;
     void* sprite;
     u8 allocated;
-    u8 unk_25[0x03];
     u32 type;
     struct ObjTiles* self;
 } ObjTiles;
@@ -44,11 +41,9 @@ typedef struct ObjAffine {
     u16 pd;
     u16 index;
     u8 doubleSize;
-    u8 unk_0B;
     s32 sx;
     s32 sy;
     u8 angle;
-    u8 unk_15[0x03];
 } ObjAffine;
 
 typedef struct ObjPalette {
@@ -56,7 +51,6 @@ typedef struct ObjPalette {
     u16 refCount;
     u16 index;
     u16 count;
-    u16 unk_0A;
     ListNode node;
     u32 type;
     struct ObjPalette* self;

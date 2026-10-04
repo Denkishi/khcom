@@ -10,12 +10,10 @@ typedef struct ObjDef {
     void* anims;
     void* tiles;
     u16 animCount;
-    u16 unk_0E;
     void* palette;
     const char* aobName;
     const char* aclName;
     u16 paletteSize;
-    u16 unk_1E;
 } ObjDef;
 
 typedef struct ChkObjWork {
@@ -23,13 +21,11 @@ typedef struct ChkObjWork {
     s16 defIndex;
     s16 animId;
     s16 category;
-    u8 unk_1A[0x02];
     void* tiles;
     void* palette;
     AnimState anim;
     void* gfx;
     u8 paused;
-    u8 unk_41;
     u16 angle;
     s16 maxTiles;
     s16 y;

@@ -29,13 +29,9 @@
 #include "gba/defines.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_sysmsgwin.h"
 
 static SysMsgWinWork* sActiveSysmsgwin;
-
-u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a);
-s32 UpdateSysmsgwinClose(SysMsgWinWork* work);
-u8 UpdateSysmsgwinChoice(SysMsgWinWork* work, void* a);
-u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* a);
 
 static const s32 sSysmsgwinTextY[4] = { 0xE00, 0x6C00, 0xE00, 0x6C00 };
 

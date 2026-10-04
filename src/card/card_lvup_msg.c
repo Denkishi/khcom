@@ -16,8 +16,7 @@
 #include "msg.h"
 #include <stddef.h>
 #include "types.h"
-
-u8 UpdateLvupMsgSlideIn(LvupMsgWork* work, void* a);
+#include "card_lvup_msg.h"
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";

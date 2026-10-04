@@ -33,12 +33,7 @@
 #include "gba/defines.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
-
-u8 UpdateLevelUpWaitFade();
-s32 IsLevelUpApUnlocked();
-struct LevelUpWork;
-u8 UpdateLevelUpResult(struct LevelUpWork* work, void* a);
-u8 UpdateLevelUpNextSlideOut(LevelUpWork* work, void* a);
+#include "card_level_up.h"
 
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
@@ -270,8 +265,6 @@ void LoadLevelUpRikuBgTiles() {
 #endif
     }
 }
-
-u8 UpdateLevelUpSelect(LevelUpWork* work, void* a);
 
 u8 Level_Up_1(LevelUpWork* work, void* a) {
     s32 x[3];
@@ -852,8 +845,6 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
     return 1;
 }
 
-u8 UpdateLevelUpClose(LevelUpWork* work, void* a);
-
 u8 UpdateLevelUpResult(LevelUpWork* work, void* a) {
     u8 i;
 
@@ -1070,8 +1061,6 @@ u8 UpdateLevelUpWaitFade() {
 
     return 1;
 }
-
-void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16* digits, u8 kind);
 
 void Level_Up_2(LevelUpWork* work) {
     u8 i = 0;

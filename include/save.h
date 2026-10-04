@@ -60,5 +60,7 @@ void ApplySaveFileSmall(SaveFileSmall* data);
 void SaveWriteSystem();
 
 void SaveWriteFileSmall(u16 file);
+void WaitSramErrorInput();
+void ReadKeysRaw();
 
 #endif /* GUARD_SAVE_H */

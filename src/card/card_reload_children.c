@@ -27,9 +27,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "lockon.h"
-
-s32 UpdateReloadChildAbsorb(ReloadChildWork* work);
-u8 UpdateReloadSlideOut(ReloadWork* work);
+#include "card_reload_children.h"
 
 static const s16 sSoraReloadChildOffsetX[4] = { 16, 29, 42, 51 };
 

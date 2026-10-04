@@ -31,8 +31,6 @@
 #include <stddef.h>
 #include "lockon.h"
 
-s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task);
-
 static CardDisplayWork* sSoraSelectedCard;
 static u32 sSoraCardRequest;
 static u32 sSoraCardReloadRequest;
@@ -1500,32 +1498,6 @@ const s32 gPlayedCardCenter[2] = {
 const s32 gPlayedCardAngles[3] = {
     0x5A00, 0, 0xAC00,
 };
-
-u8 IsCardDisplayOffScreen(CardDisplayWork* work);
-void ReleaseCardDisplayGfx(CardDisplayWork* work);
-void LookupSoraCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
-void LinkSoraCardDisplay(CardDisplayWork* work);
-void LoadSoraCardDisplayGfx2(CardDisplayWork* work);
-void UpdateSoraCardValue(CardDisplayWork* work);
-void TickSoraHcEffectOnPlayEnd();
-void RemoveSoraCardDisplays(CardBattleWork* work);
-void ClearStockedCardSlots(CardBattleWork* work);
-void TickSoraHcEffectOnCardUse();
-void LoadCardDisplayGfx(CardDisplayWork* work);
-u8 SoraStockMoveToSlot(CardDisplayWork* work, void* a);
-u8 SoraStockVanish(CardDisplayWork* work);
-void RefreshSoraCardDisplayGfx(CardDisplayWork* work);
-void func_0807B458(CardBattleWork* work, u16 value);
-void SyncSoraHcEffect(CardBattleWork* work);
-void ApplySoraHcEffect(CardBattleWork* work);
-void UpdateSoraCardRingPosition(CardDisplayWork* work);
-u8 DispatchSoraCardCommand(CardDisplayWork* work, void* a);
-u8 SoraGimmickCardLaunch(CardDisplayWork* work, void* a);
-u8 SoraGimmickCardHit(CardDisplayWork* work);
-void UpdateSoraReloadGauge(CardDisplayWork* work);
-void TickSoraHcEffectOnAttackEnd();
-u8 SoraCardShrinkAway(CardDisplayWork* work);
-void UpdateSoraPlayedCardPosition(CardDisplayWork* work);
 
 u8 AreCardsSettled(CardDisplayWork** p, u8 n) {
     u8 count;

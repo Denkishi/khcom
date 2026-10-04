@@ -51,6 +51,7 @@
 #include "sprite_palettes.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "card_worldselect.h"
 
 static TaskPool sModeWorldselectTasks;
 
@@ -61,40 +62,6 @@ static void* sSelectedMapCard;
 MapCardUiResources gMapCardUiResources EWRAM_COMMON(16);
 
 u8 gMapCardCounts[270] EWRAM_COMMON(16);
-
-u16 CountMapCardsOfKind(u16 a);
-u8 UpdateReloadGageIdle(CardDisplayWork* work, void* a);
-u8 UpdateMapSelectSetup(MapSelectWork* work, void* a);
-void LoadMapSelectKindPalette(u16 a, MapSelectWork* work);
-s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work);
-u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a);
-u8 UpdateMapSelectKindInput(MapSelectWork* work, void* a);
-void AimMapcardAtDoor(MapcardWork* work);
-u8 UpdateMapcardFlyToDoor(MapcardWork* work, void* a);
-s32 RemoveMapCard(u16 a);
-u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a);
-u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* a);
-u8 UpdateMapSelectClose(MapSelectWork* work);
-void HandleMapSelectKindCursor(MapSelectWork* work);
-void ApplyMapSelectPageScroll(MapSelectWork* work);
-s32 SelectNearestMapSelectCard(MapSelectWork* work);
-void LoadMapSelectGridPalette(u16 a, MapSelectWork* work);
-void HandleMapSelectValueCursor(MapSelectWork* work);
-void UpdateMapcardRise(MapcardWork* work);
-void func_08094DEC(MapcardWork* work);
-u8 func_08094E4C(MapcardWork* work);
-MapcardWork* CreateMapCard(MapcardArgs* args, TaskPool* pool);
-void LinkMapcardNode(MapcardWork* work);
-void UpdateReloadGageRingPosition(CardDisplayWork* work);
-void StepReloadGageSine(ReloadGauge* p);
-void InitReloadGageCounterAnim(ReloadGauge* p, void* a, u8 b, s32 count);
-void SetReloadGageCounterAnim(ReloadGauge* p, s32 count);
-s32 UpdateReloadGageSlide(ReloadGauge* p, CardDisplayWork* work);
-void InitReloadGageAnims(ReloadGauge* p, CardDisplayWork* work, u8 idx);
-void UpdateReloadGageAnims(ReloadGauge* p, CardDisplayWork* work);
-void SetReloadGageIdleFrames(ReloadGauge* p, CardDisplayWork* work);
-void AdvanceReloadGageAnim(ReloadGauge* p, CardDisplayWork* work);
-void ResetReloadGageAnim(ReloadGauge* p);
 
 void WORLDSELECT_0() {
     SetBgMode2();
@@ -123,8 +90,6 @@ void WORLDSELECT_1() {
 void WORLDSELECT_2() {
     TaskPoolDestroy(&sModeWorldselectTasks);
 }
-
-void CreateMapSelectCards(MapSelectWork* work);
 
 void MapSelect_0(MapSelectWork* work, u8* a) {
     s32 n;
@@ -330,8 +295,6 @@ u8 UpdateMapSelectSetup(MapSelectWork* work, void* a) {
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectSlideIn);
     return 1;
 }
-
-u8 UpdateMapSelectEventDoorTutorial(MapSelectWork* work, void* a);
 
 u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* a) {
     MapcardWork* n;
@@ -1972,8 +1935,6 @@ void Mapcard_0(MapcardWork* work, MapcardArgs* a) {
     UpdateMapcardRise(work);
     UpdateMapcardGfx(work);
 }
-
-s32 func_080948F0(MapcardWork* work, void* a);
 
 u8 Mapcard_1(MapcardWork* work, void* a) {
     if (work->flags & 0xC) {

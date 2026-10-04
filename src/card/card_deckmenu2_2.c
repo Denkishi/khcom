@@ -28,23 +28,9 @@
 #include "player_progression_types.h"
 #include "types.h"
 #include <stddef.h>
-
-void DrawRikuCpCost(u8 a);
-void ShowRikuDeckCardPreview(RikuDeckMenuWork* work);
-u8 UpdateRikuDeckMenuDeckGrid(RikuDeckMenuWork* work, void* a);
-s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* work);
-u8 CheckRikuDeckCpCost(RikuDeckMenuWork* work);
-u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* work);
-DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work);
-u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a);
-void ClearRikuCardGrid(RikuDeckMenuWork* work);
-void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* work);
-void FreeRikuCollectionEntries(RikuDeckMenuWork* work);
-void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind);
-void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 mode);
-u16 CountCollectionCards();
-u16 CountCardsInDecks();
-u8 GetActiveDeckIndex();
+#include "card_deck.h"
+#include "card_deckmenu2_2.h"
+#include "ms_charge.h"
 
 #ifdef VERSION_EU
 static const u16 sRikuDeckTitleBannerTileSizes[5] = { 0x320, 0x320, 0x320, 0x320, 0x320 };

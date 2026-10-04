@@ -28,8 +28,6 @@
 #include <stddef.h>
 #include "bos_ursula.h"
 
-u8 task_bos_ursula_1(UrsulaWork* work);
-
 static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {

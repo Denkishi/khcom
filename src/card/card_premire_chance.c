@@ -12,13 +12,7 @@
 #include "card_types.h"
 #include "types.h"
 #include <stddef.h>
-
-s32 UpdatePremireChanceCardAnim(PremireChanceCardWork* work);
-void ReleasePremireChanceCardGfx(PremireChanceCardWork* work);
-void UpdatePremireChanceCardPos(PremireChanceCardWork* work);
-void LoadPremireChanceCardGfx(PremireChanceCardWork* work);
-u8 IsPremireChanceCardOnScreen(PremireChanceCardWork* work);
-u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* a);
+#include "card_premire_chance.h"
 
 static const s16 sPremireChanceCardAngles[9] = { 0, 11, 23, 34, 46, 57, 68, 79, 90 };
 

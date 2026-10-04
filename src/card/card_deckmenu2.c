@@ -39,6 +39,8 @@
 #include "gba/macro.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
+#include "card_deckmenu2.h"
+#include "ms_charge.h"
 
 const u16 gRikuDeckCards0[21] = {
     CARD_ID(CARD_SOUL_EATER, 7),
@@ -354,67 +356,6 @@ static u8 sActiveDeck;
 static u16 sUnk_02034AB2;
 
 CardUiSpriteState gCardUiSpriteState EWRAM_COMMON(16);
-
-u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a);
-void ReleaseCardPreview(DeckMenuWork* work);
-void HighlightDeckTab(DeckMenuWork* work, u8 b);
-void DrawCpCost(u8 a);
-s32 GetCardIdForKindEntry(s32 a);
-u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a);
-void LoadDeckNameTexts(DeckMenuWork* work);
-u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a);
-void ReleaseCommandMenuGfx(DeckMenuWork* work);
-u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a);
-void BuildRikuDeck(u8 a);
-u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* a);
-void ClearCardGrid(DeckMenuWork* work);
-void CreateDeckGridCards(DeckMenuWork* work, u8 b);
-void ShowDeckCardPreview(DeckMenuWork* work);
-u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a);
-s32 ShowCollectionCardPreview(DeckMenuWork* work);
-void SetGridRowCount(DeckMenuWork* work, s16 n);
-void UpdateGridScrollBar(DeckMenuWork* work);
-u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a);
-void DrawCollectionCategoryCount(u16 a, u8 b);
-u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuFadeOut(DeckMenuWork* work);
-u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a);
-u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* a);
-void FreeCollectionEntries(DeckMenuWork* work);
-void DrawValueCount(u8 a, u16 b);
-void DrawDeckCategoryCount(u8 a, u8 b);
-u16 CountCollectionCards();
-u16 CountCardsInDecks();
-void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 mode);
-s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 c);
-void ScrollGridDown(DeckMenuWork* work);
-DeckCard2Work* GetCardAtCursor(DeckMenuWork* work);
-void DrawDeckEquipMarker(u8 mode);
-void DrawDeckCpCost(u8 mode);
-void DrawCardTotals();
-void DrawSelectedValueCpCost(DeckMenuWork* work);
-s32 MoveValueCursor(DeckMenuWork* work, u16 keys);
-s32 AddSelectedValueCardToDeck(DeckMenuWork* work);
-u8 DeleteSelectedValueCard(DeckMenuWork* work);
-s32 CheckDeckCpCost(DeckMenuWork* work);
-s32 CheckDeckHasAttackCard(DeckMenuWork* work);
-s32 IsCardAtCursor(DeckMenuWork* work);
-u8 IsCardAt(DeckMenuWork* work, s16 a, s16 b);
-u8 SwapHeldDeckCard(DeckMenuWork* work);
-void BuildCollectionEntries(DeckMenuWork* work);
 
 void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 mode, u16 n, void* p) {
     u16 mask;
@@ -1474,8 +1415,6 @@ static u8 Deckmenu2_1(DeckMenuWork* work, void* a) {
 
     return 1;
 }
-
-u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a);
 
 u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
     FadeStartIn(FADE_MODE_BLACK, 16);

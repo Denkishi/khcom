@@ -39,12 +39,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "lockon.h"
-
-u16 PickPrizeMapCardKindForWorld(u16 a, s32 b);
-u16 PickPrizeMapCardForWorld(u16 a, s32 b);
-void CreatePrizeMapCardTask(TaskPool* pool, s32* args);
-s32 UpdateSpotLightFadeOut(SpotlightWork* work);
-s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work);
+#include "card_prize_card_init.h"
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 

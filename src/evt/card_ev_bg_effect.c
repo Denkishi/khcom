@@ -10,8 +10,7 @@
 #include "msg_types.h"
 #include "types.h"
 #include <stddef.h>
-
-u8 UpdateEventBgEffectAnim(EventBgEffectWork* work, void* a);
+#include "card_ev_bg_effect.h"
 
 static const EventBgEffectDef sEventBgEffect0Def = {
     &gEventBgEffectMaps[0], gUnk_094233B8 + 0x500, gUnk_096148D8 + 0x10, 0x8C0, 0x20, { 1, 1, 0, 0 }, NULL, 0, -1,

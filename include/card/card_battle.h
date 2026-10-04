@@ -4,6 +4,8 @@
 #include "types.h"
 #include "anim.h"
 #include "taskpool.h"
+#include "card.h"
+#include "card_types.h"
 
 struct CardDisplayWork;
 struct CardSlot;
@@ -114,5 +116,26 @@ s32 cardbattleSora_1(struct CardBattleWork* work, Task* task);
 struct CardSlot* FindNextAvailableSlot(struct CardBattleWork* work, u8 slot, u16* n);
 struct CardSlot* FindPrevAvailableSlot(struct CardBattleWork* work, u8 slot, u16* n);
 void CreateSoraCardRing(struct CardBattleWork* work, u8 slot);
+s32 UpdateSoraReloadDeal(CardBattleWork* work, Task* task);
+void func_0807B458(CardBattleWork* work, u16 value);
+void SyncSoraHcEffect(CardBattleWork* work);
+void ApplySoraHcEffect(CardBattleWork* work);
+void TickSoraHcEffectOnCardUse();
+u8 SoraStockMoveToSlot(CardDisplayWork* work, void* a);
+void UpdateSoraCardRingPosition(CardDisplayWork* work);
+u8 SoraCardShrinkAway(CardDisplayWork* work);
+void UpdateSoraPlayedCardPosition(CardDisplayWork* work);
+u8 DispatchSoraCardCommand(CardDisplayWork* work, void* a);
+void LookupSoraCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
+void LinkSoraCardDisplay(CardDisplayWork* work);
+void LoadSoraCardDisplayGfx2(CardDisplayWork* work);
+void RefreshSoraCardDisplayGfx(CardDisplayWork* work);
+u8 SoraGimmickCardLaunch(CardDisplayWork* work, void* a);
+u8 SoraGimmickCardHit(CardDisplayWork* work);
+u8 SoraStockVanish(CardDisplayWork* work);
+void UpdateSoraReloadGauge(CardDisplayWork* work);
+void UpdateSoraCardValue(CardDisplayWork* work);
+void TickSoraHcEffectOnPlayEnd();
+void TickSoraHcEffectOnAttackEnd();
 
 #endif

@@ -16,13 +16,10 @@
 #include "card_types.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_enemy.h"
 
 static s16 sBossCardValue;
 
-
-u8 EnemyCardDeal(CardDisplayWork* work, void* a);
-u8 EnemyCardClosed(CardDisplayWork* work, void* a);
-u8 EnemyCardShrinkAway(CardDisplayWork* work);
 
 static const s32 sEnemyCardLayout[10] = {
     0x11000, 0xBC00, 0xDC00, 0x5800, 0xDC00, 0x4400, 0xDC00, 0x3000, 0x10400, 0xB800,

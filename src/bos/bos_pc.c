@@ -24,8 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
-
-void task_bos_pc_3(PcWork* work);
+#include "bos_pc.h"
 
 static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gUnk_09A42BD8,

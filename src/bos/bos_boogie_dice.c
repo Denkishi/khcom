@@ -26,8 +26,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
-
-void task_bos_boogie_saku_2(BoogieSakuWork* work);
+#include "bos_boogie_dice.h"
 
 u16 gBosBoogieSakuOpenTime EWRAM_COMMON(4);
 u8 gBosBoogieDiceFace EWRAM_COMMON(4);

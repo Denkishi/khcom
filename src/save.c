@@ -15,9 +15,6 @@ static u16 sRawKeys;
 static u16 sRawKeysPrev;
 static u8 sSramErrorTilemapBuf[0x800];
 
-void WaitSramErrorInput();
-void ReadKeysRaw();
-
 void ZeroFill(void* dst, s16 size) {
     if (size & 1) {
         ((u8*)dst)[size - 1] = 0;

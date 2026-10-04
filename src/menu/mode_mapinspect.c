@@ -34,6 +34,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_worldselect.h"
 
 #ifdef VERSION_EU
 static void* sUnkEu_09F85008[5] = {

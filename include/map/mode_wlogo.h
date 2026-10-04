@@ -11,4 +11,7 @@ typedef struct WLogoTaskWork {
     u8 unk_0A[2];
 } WLogoTaskWork;
 
+void WLogoInitWorldSelect();
+void WLogoStartLogo(u8 a);
+
 #endif

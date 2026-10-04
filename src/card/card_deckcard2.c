@@ -8,9 +8,7 @@
 #include "card_ui_types.h"
 #include "types.h"
 #include <stddef.h>
-
-void DeckCard2ReleaseGfx(DeckCard2Work* work);
-u8 DeckCard2IsOnScreen(DeckCard2Work* work);
+#include "card_deckcard2.h"
 
 const s16 gDeckGridColumnX[3] = { 13, 36, 59 };
 

@@ -32,17 +32,13 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_msgwin.h"
 
 static CardMsgWinWork* sActiveCardMsgwin;
 
 u8 gMessageWindowOpen EWRAM_COMMON(4);
 
 u8 gMessageWindowAnswerYes EWRAM_COMMON(4);
-
-u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* a);
-u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* a);
 
 static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* a) {
     CpuFill32(0, work, sizeof(CardMsgWinWork));

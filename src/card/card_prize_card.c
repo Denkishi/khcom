@@ -24,12 +24,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "lockon.h"
-
-u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* a);
-u8 UpdateFieldPrizeCardShrink(PrizeCardWork* work);
-u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* a);
-void AimFieldPrizeCardAtCenter(PrizeCardWork* work);
-void CreateFieldPrizeCardTask(TaskPool* pool, PrizeCardTaskArgs* args);
+#include "card_prize_card.h"
 
 const u8 gUnk_090359E8[8] = { 1, 1, 4, 2, 5, 3, 3, 2 };
 

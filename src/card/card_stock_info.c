@@ -16,6 +16,7 @@
 #include "status.h"
 #include <stddef.h>
 #include "types.h"
+#include "card_stock_info.h"
 
 #if defined(VERSION_US)
 static const CardHelpDef sUnk_0903BD0C = {
@@ -1934,8 +1935,6 @@ static const u16 sLevelUpStockHelpIndices[12] = {
 static const u16 sLevelUpStockLevels[12] = {
     2, 7, 12, 17, 22, 27, 32, 37, 42, 47, 52, 999,
 };
-
-s32 UpdateStockInfoMessage(StockInfoWork* work);
 
 void StockInfo_0(StockInfoWork* work, u8* active) {
     u8 i;

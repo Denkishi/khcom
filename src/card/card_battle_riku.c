@@ -28,6 +28,7 @@
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
+#include "card_battle_riku.h"
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
 
@@ -244,33 +245,6 @@ static const s16 sRikuStockValueX[4] = {
 static const UnkStruct_080ABA80 sRikuEmptyKeys = {
     { -1, -1, -1, -1, -1, -1 },
 };
-
-u8 UpdateRikuReloadDeal(CardBattleWork* work, void* a);
-void SelectNextRikuCard(CardBattleWork* work, u8 n);
-void SelectPrevRikuCard(CardBattleWork* work, u8 n);
-u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 n, u8 kind);
-void func_08081740(CardBattleWork* work, u16 n);
-void SyncRikuHcEffect(CardBattleWork* work);
-void SwitchRikuCardList(CardBattleWork* work);
-void CycleRikuCardList(CardBattleWork* work);
-u8 UseRikuCard(CardBattleWork* work);
-void BeginRikuReloadDeal(CardBattleWork* work);
-u8 StockRikuCard(CardBattleWork* work);
-void UseRikuStock(CardBattleWork* work);
-u8 UseRikuHeartlessCard(CardBattleWork* work);
-void TickRikuHcEffectOnCardUse();
-void ResetRikuReloadGauge(CardBattleWork* work);
-void LoadRikuCardDisplayGfx2(CardDisplayWork* work);
-void TickRikuHcEffectOnPlayEnd();
-u8 RikuStockMoveToSlot(CardDisplayWork* work, void* a);
-void UpdateRikuReloadGauge(CardDisplayWork* work);
-void LookupRikuCardDef(CardDisplayArgs* a, const CardDef** out, u8 index);
-void TickRikuHcEffectOnAttackEnd();
-u8 RikuCardShrinkAway(CardDisplayWork* work);
-u8 RikuStockVanish(CardDisplayWork* work);
-void RefreshRikuCardDisplayGfx(CardDisplayWork* work);
-s32 BosscardSlideOut(BossCardWork* work);
-void UpdateRikuPlayedCardPosition(CardDisplayWork* work);
 
 void RequestRikuPotion() {
     sRikuCardReloadRequest = 17;

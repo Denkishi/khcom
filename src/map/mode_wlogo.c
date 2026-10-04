@@ -21,9 +21,6 @@
 #include "text_types.h"
 #include "types.h"
 
-void WLogoInitWorldSelect();
-void WLogoStartLogo(u8 a);
-
 static u8* sWorldNames[13] = {
 #if defined(VERSION_US)
     (u8*)gUnk_0815A534,

@@ -18,6 +18,7 @@
 #include "mode_battle_data.h"
 #include "types.h"
 #include <stddef.h>
+#include "card_name.h"
 
 static PrintLine* sPrintLines;
 
@@ -25,10 +26,6 @@ static u8 sPrintLineCount;
 
 static u8 sPrintBg;
 
-
-void PremireEffectSetOrbitPos(PremiumCardEffectWork* work);
-void PremireEffectMoveToCenter(PremiumCardEffectWork* work);
-void PremireEffectMoveFalling(PremiumCardEffectWork* work);
 
 #include "premium_message.inc"
 #include "lockon.h"

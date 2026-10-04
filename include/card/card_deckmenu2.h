@@ -1,0 +1,64 @@
+#ifndef GUARD_CARD_DECKMENU2_H
+#define GUARD_CARD_DECKMENU2_H
+
+#include "card.h"
+#include "types.h"
+
+void BuildRikuDeck(u8 a);
+u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuDeckGrid(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuDeckFilter(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuDeleteValueSelect(DeckMenuWork* work, void* a);
+void RemoveEmptyCollectionEntry(DeckMenuWork* work, u8 mode);
+u8 UpdateDeckMenuCollectionFilter(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuDeckSelect(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuCommands(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuCloseCommands(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuAddGrid(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuBuildRemoveGrid(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuRemoveGrid(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuDeleteGrid(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuFadeOut(DeckMenuWork* work);
+u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuSlideOut(DeckMenuWork* work, void* a);
+void CreateDeckGridCards(DeckMenuWork* work, u8 b);
+s32 CreateCollectionGridCards(DeckMenuWork* work, u8 kind, u8 c);
+s32 GetCardIdForKindEntry(s32 a);
+void ClearCardGrid(DeckMenuWork* work);
+void SetGridRowCount(DeckMenuWork* work, s16 n);
+void UpdateGridScrollBar(DeckMenuWork* work);
+void ScrollGridDown(DeckMenuWork* work);
+DeckCard2Work* GetCardAtCursor(DeckMenuWork* work);
+void HighlightDeckTab(DeckMenuWork* work, u8 b);
+void DrawDeckEquipMarker(u8 mode);
+void DrawDeckCpCost(u8 mode);
+void DrawCardTotals();
+void LoadDeckNameTexts(DeckMenuWork* work);
+s32 ShowCollectionCardPreview(DeckMenuWork* work);
+void ReleaseCardPreview(DeckMenuWork* work);
+void ShowDeckCardPreview(DeckMenuWork* work);
+void DrawSelectedValueCpCost(DeckMenuWork* work);
+void DrawCpCost(u8 a);
+s32 MoveValueCursor(DeckMenuWork* work, u16 keys);
+s32 AddSelectedValueCardToDeck(DeckMenuWork* work);
+void FreeCollectionEntries(DeckMenuWork* work);
+void ReleaseCommandMenuGfx(DeckMenuWork* work);
+u8 DeleteSelectedValueCard(DeckMenuWork* work);
+s32 CheckDeckCpCost(DeckMenuWork* work);
+s32 CheckDeckHasAttackCard(DeckMenuWork* work);
+s32 IsCardAtCursor(DeckMenuWork* work);
+u8 IsCardAt(DeckMenuWork* work, s16 a, s16 b);
+u8 SwapHeldDeckCard(DeckMenuWork* work);
+u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a);
+u8 UpdateDeckMenuKeyboard(DeckMenuWork* work, void* a);
+void BuildCollectionEntries(DeckMenuWork* work);
+
+#endif

@@ -150,5 +150,6 @@ void task_bos_ursula_backtako_2(UrsulaBacktakoWork* work);
 void BosUrsulaTakoGetPosition(s32* a, s32* b, s32* c, UrsulaTakoWork* work);
 void BosUrsulaBacktakoGetPosition(s32* a, s32* b, s32* c, UrsulaBacktakoWork* work);
 s32 BosUrsulaChooseAttackPhase2(UrsulaWork* work);
+u8 task_bos_ursula_1(UrsulaWork* work);
 
 #endif /* GUARD_BOS_URSULA_H */

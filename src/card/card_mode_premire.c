@@ -19,14 +19,12 @@
 #include "mode.h"
 #include <stddef.h>
 #include "types.h"
+#include "card_mode_premire.h"
 
 static TaskPool sModePremireTasks;
 #ifndef VERSION_EU
 static u8 sUnk_02034AF4[4];
 #endif
-
-u8 IsHcEffectNameShuffling(HcEffectNameWork* work);
-u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a);
 
 void Mode_Premire_0() {
     func_08085FB0();

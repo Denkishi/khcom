@@ -42,10 +42,9 @@
 #include "sprite_palettes.h"
 #include <stddef.h>
 #include "lockon.h"
+#include "card_friend_card.h"
 
 struct CardListWork* gCardListWork EWRAM_COMMON(4);
-
-void CreatePremireChanceCardTasks(PremireChanceWork* work);
 
 static const u32 sFriendCardIds[8] = {
     CARD_ID(CARD_GOOFY, 0),

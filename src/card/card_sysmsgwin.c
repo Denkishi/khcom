@@ -53,9 +53,9 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* a) {
 
     FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
     work->unk_13C = 0;
-    work->unk_138 = 8;
+    work->steps = 8;
     work->shownChars = 0;
-    work->unk_13A = 0;
+    work->charTimer = 0;
     work->charCount = 0;
     work->unk_143 = 0;
     work->nextText = NULL;
@@ -215,7 +215,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
             work->unk_142 = 0;
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateSysmsgwinClose);
             work->closeTimer = 0;
-            work->unk_138 = 8;
+            work->steps = 8;
         } else {
             ReleaseObjTiles(work->tiles3);
             ReleaseObjPalette(work->palette);
@@ -475,9 +475,9 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* a) {
     work->glyphPaletteIndex = InitCardMsgGlyphSprites(1, 0);
     FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
     work->unk_13C = 0;
-    work->unk_138 = 8;
+    work->steps = 8;
     work->shownChars = 0;
-    work->unk_13A = 0;
+    work->charTimer = 0;
     work->charCount = 0;
     work->unk_143 = 0;
     work->nextText = NULL;

@@ -1583,9 +1583,9 @@ typedef struct SysMsgWinWork {
     TextChar* nextText;
     u16 glyphPaletteIndex;
     s16 closeTimer;
-    u8 unk_138;
+    u8 steps;
     u8 shownChars;
-    u8 unk_13A;
+    u8 charTimer;
     u8 charCount;
     u8 unk_13C;
     u8 choice;

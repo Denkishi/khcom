@@ -932,11 +932,16 @@ extern u8 gRaWagonFrame1[];
 extern u8 gRaWagonFrame12[];
 extern u8 gPoohFl05Tiles[];
 extern u16 gPoohPalette[];
+extern u16 gTrap0001Palette[];
+extern u16 gTrap0002Palette[];
+extern u16 gTrap0003Palette[];
 extern u8 gUnk_097606E8[];
 extern u16 gUnk_09849E38[];
 extern u16 gUnk_09849BB8[];
 extern const BosMapanimeDef gPooMapanimeDef1;
 
+s32 GetPooManhattanDistance(PooPos* a, PooPos* b);
+void SetPoohPalette(PoohWork* w, u32 b);
 void task_poo_mapbee_0(PooMapBeeWork* w, PooPos* p);
 void task_poo_zzz_2(PooZzzWork* w);
 s32 GetPooWagonSide(s32 a, s32 b);

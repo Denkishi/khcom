@@ -243,6 +243,51 @@ static PooBeeAfterEventWork* sPooBeeAfterEventWork;
 static u16 sPooCabbageCount;
 static u16 sPooCabbageLandedCount;
 
+s32 GetPooManhattanDistance(PooPos* a, PooPos* b) {
+    s32 dx;
+    s32 dy;
+
+    dx = a->x - b->x;
+
+    if (dx < 0) {
+        dx = b->x - a->x;
+    }
+
+    dy = a->y - b->y;
+
+    if (dy < 0) {
+        dy = b->y - a->y;
+    }
+
+    return dx + dy;
+}
+
+void SetPoohPalette(PoohWork* w, u32 b) {
+    u16* pal;
+
+    switch (b) {
+    case 16:
+        pal = gTrap0001Palette;
+        break;
+    case 36:
+    case 37:
+        pal = gTrap0002Palette;
+        break;
+    case 38:
+    case 39:
+        pal = gTrap0003Palette;
+        break;
+    default:
+        pal = gPoohPalette;
+        break;
+    }
+
+    if (w->palette->src != pal) {
+        ReleaseObjPalette(w->palette);
+        w->palette = LoadObjPalette(pal, 32);
+    }
+}
+
 void SetPoohAction(PoohWork* w, u32 b) {
     sPoohAction = b;
 

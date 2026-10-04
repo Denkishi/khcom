@@ -4,7 +4,6 @@
 #include "types.h"
 
 struct Collider;
-struct PooPos;
 struct PoohWork;
 
 void BackdropFadeStartOut(u32 a, u16 b);
@@ -22,7 +21,5 @@ u8 IsPooMapBeeVisible();
 void SetPoohDir5Right(struct PoohWork* w);
 void SetPoohAnimation(struct PoohWork* w, u32 anim);
 u8 IsWithinPoohRadius(u16 x, u16 y, u16 px, u16 py);
-s32 GetPooManhattanDistance(struct PooPos* a, struct PooPos* b);
-void SetPoohPalette(struct PoohWork* w, u32 b);
 
 #endif

@@ -34,6 +34,7 @@
 #include "card_api.h"
 #include "card_message_data.h"
 #include "msg_portrait_data.h"
+#include "sprite_palettes.h"
 #include "types.h"
 #include "gba/macro.h"
 #include <stddef.h>
@@ -146,8 +147,8 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* a) {
 }
 
 static u8 msgwin_1(CardMsgWinWork* work, void* a) {
-    LoadBgTiles(work->args.bg, gUnk_094233B8, 1280);
-    LoadBgPalette(work->args.bg, gUnk_096148D8, 32);
+    LoadBgTiles(work->args.bg, gMsgwinTiles, 1280);
+    LoadBgPalette(work->args.bg, gMsgwinPalette, 32);
     SetBgMapBlocks(work->args.bg, gMsgwinMapBlocks[work->messageDef->positionIndex], 2, 1);
     ScrollBgMapTo(work->args.bg, work->x, 0);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinLoadText);

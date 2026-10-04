@@ -2708,17 +2708,105 @@ entries:
   eu:
     address: 0x095477A4
     size: 32
-- name: gUnk_096148D8
+- name: gMsgwinPalette
   format: palette
   us:
     address: 0x096148D8
-    size: 288
+    size: 32
   jp:
     address: 0x095CD3B4
-    size: 288
+    size: 32
   eu:
     address: 0x095477C4
-    size: 288
+    size: 32
+- name: gEventBgEffect0Palette
+  format: palette
+  us:
+    address: 0x096148F8
+    size: 32
+  jp:
+    address: 0x095CD3D4
+    size: 32
+  eu:
+    address: 0x095477E4
+    size: 32
+- name: gEventBgEffect1Palette
+  format: palette
+  us:
+    address: 0x09614918
+    size: 32
+  jp:
+    address: 0x095CD3F4
+    size: 32
+  eu:
+    address: 0x09547804
+    size: 32
+- name: gEventBgEffect2Palette
+  format: palette
+  us:
+    address: 0x09614938
+    size: 32
+  jp:
+    address: 0x095CD414
+    size: 32
+  eu:
+    address: 0x09547824
+    size: 32
+- name: gEventBgEffect4Palette
+  format: palette
+  us:
+    address: 0x09614958
+    size: 32
+  jp:
+    address: 0x095CD434
+    size: 32
+  eu:
+    address: 0x09547844
+    size: 32
+- name: gEventBgEffect3Palette
+  format: palette
+  us:
+    address: 0x09614978
+    size: 32
+  jp:
+    address: 0x095CD454
+    size: 32
+  eu:
+    address: 0x09547864
+    size: 32
+- name: gEventBgEffect5Palette
+  format: palette
+  us:
+    address: 0x09614998
+    size: 32
+  jp:
+    address: 0x095CD474
+    size: 32
+  eu:
+    address: 0x09547884
+    size: 32
+- name: gEventBgEffect6Palette
+  format: palette
+  us:
+    address: 0x096149B8
+    size: 32
+  jp:
+    address: 0x095CD494
+    size: 32
+  eu:
+    address: 0x095478A4
+    size: 32
+- name: gEventSilhouettePalette
+  format: palette
+  us:
+    address: 0x096149D8
+    size: 32
+  jp:
+    address: 0x095CD4B4
+    size: 32
+  eu:
+    address: 0x095478C4
+    size: 32
 - name: gTalk0000Palette
   format: palette
   us:

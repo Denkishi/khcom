@@ -52,6 +52,7 @@
 #include "msg_types.h"
 #include "obj.h"
 #include "poo_api.h"
+#include "sprite_palettes.h"
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
@@ -3649,7 +3650,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
     }
 
     if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(&gUnk_096148D8[0x80], (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
+        LoadPalette(gEventSilhouettePalette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     } else if ((work->keyframes[work->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
         LoadPalette(gEvtObjResources[work->arg.chara].res.palette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     }
@@ -6394,8 +6395,8 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
         work->bg = 2;
     }
 
-    LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
-    LoadBgPalette(work->bg, gUnk_096148D8, 32);
+    LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
+    LoadBgPalette(work->bg, gMsgwinPalette, 32);
     LoadBgMap(work->bg, gUnk_08125E24, 0x800);
     SetBgPriority(work->bg, 0);
     t = gEventSequenceDefs[work->eventId];
@@ -6475,8 +6476,8 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
                     gEventState->msgWinCentered = 1;
                 } else {
-                    LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
-                    LoadBgPalette(work->bg, gUnk_096148D8, 32);
+                    LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
+                    LoadBgPalette(work->bg, gMsgwinPalette, 32);
                     SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
                     RedrawBgMapAt(work->bg, work->scrollX, 0);
                     SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
@@ -6531,8 +6532,8 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
             gEventState->msgWinCentered = 1;
         } else {
-            LoadBgTiles(work->bg, gUnk_094233B8, 0x500);
-            LoadBgPalette(work->bg, gUnk_096148D8, 32);
+            LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
+            LoadBgPalette(work->bg, gMsgwinPalette, 32);
             SetBgMapBlocks(work->bg, gMsgwinMapBlocks[work->position], 2, 1);
             RedrawBgMapAt(work->bg, work->scrollX, 0);
             SetTaskUpdate(a, (TaskUpdateFunc)MsgwinOpenUpdate);
@@ -6905,7 +6906,7 @@ u8 msgface_1(MsgFaceWork* work, void* a) {
 
         if (anim != NULL) {
             if (work->face->silhouette == 1) {
-                UpdateAllocatedObjPalette(work->palette, &gUnk_096148D8[0x80]);
+                UpdateAllocatedObjPalette(work->palette, gEventSilhouettePalette);
             } else {
                 UpdateAllocatedObjPalette(work->palette, anim[work->face->expressionId].palette);
             }

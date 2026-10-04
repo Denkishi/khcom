@@ -16297,18 +16297,101 @@ entries:
   eu:
     address: 0x092657D8
     size: 5084
-- name: gUnk_094233B8
+- name: gMsgwinTiles
   format: tiles4
-  width: 4
+  width: 8
   us:
     address: 0x094233B8
-    size: 130432
+    size: 1280
   jp:
     address: 0x093DB694
-    size: 130432
+    size: 1280
   eu:
     address: 0x094F97C4
-    size: 130432
+    size: 1280
+- name: gEventBgEffect0Tiles
+  format: tiles4
+  width: 10
+  us:
+    address: 0x094238B8
+    size: 2240
+  jp:
+    address: 0x093DBB94
+    size: 2240
+  eu:
+    address: 0x094F9CC4
+    size: 2240
+- name: gEventBgEffect1Tiles
+  format: tiles4
+  width: 2
+  us:
+    address: 0x09424178
+    size: 16064
+  jp:
+    address: 0x093DC454
+    size: 16064
+  eu:
+    address: 0x094FA584
+    size: 16064
+- name: gEventBgEffect2Tiles
+  format: tiles4
+  width: 5
+  us:
+    address: 0x09428038
+    size: 24160
+  jp:
+    address: 0x093E0314
+    size: 24160
+  eu:
+    address: 0x094FE444
+    size: 24160
+- name: gEventBgEffect4Tiles
+  format: tiles4
+  width: 8
+  us:
+    address: 0x0942DE98
+    size: 20480
+  jp:
+    address: 0x093E6174
+    size: 20480
+  eu:
+    address: 0x095042A4
+    size: 20480
+- name: gEventBgEffect3Tiles
+  format: tiles4
+  width: 8
+  us:
+    address: 0x09432E98
+    size: 20480
+  jp:
+    address: 0x093EB174
+    size: 20480
+  eu:
+    address: 0x095092A4
+    size: 20480
+- name: gEventBgEffect5Tiles
+  format: tiles4
+  us:
+    address: 0x09437E98
+    size: 21152
+  jp:
+    address: 0x093F0174
+    size: 21152
+  eu:
+    address: 0x0950E2A4
+    size: 21152
+- name: gEventBgEffect6Tiles
+  format: tiles4
+  width: 8
+  us:
+    address: 0x0943D138
+    size: 24576
+  jp:
+    address: 0x093F5414
+    size: 24576
+  eu:
+    address: 0x09513544
+    size: 24576
 - name: gUnk_0950E2F8
   format: tiles4
   width: 2

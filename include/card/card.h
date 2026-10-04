@@ -152,7 +152,6 @@ typedef struct CardBattleWork {
 } CardBattleWork;
 
 typedef char CardBattleWork_size[(sizeof(CardBattleWork) == 0xCC) ? 1 : -1];
-extern u16 gUnk_096148D8[];
 extern u8 gRiCardF0RedTiles[];
 
 typedef struct CardListWork {

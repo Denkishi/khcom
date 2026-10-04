@@ -937,7 +937,7 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
             if entry.get("format") == "sprite_sheet":
                 for frame in manifest.frames(entry, version):
                     if frame.get("declare") is not False:
-                        lines.append(f"extern u8 {manifest.item_symbol(frame, version)}[];")
+                        lines.append(f"extern u16 {manifest.item_symbol(frame, version)}[];")
                 for anim in manifest.animations(entry, version):
                     if anim.get("declare") is not False:
                         lines.append(f"extern {manifest.anim_type()} {manifest.item_symbol(anim, version)};")
@@ -968,7 +968,7 @@ def emit_header(manifest, version, members_by_object, out_path, sheets):
             elif kind == "anim":
                 lines.append(f"extern {entry['record']} {symbol};")
             elif kind == "sprite":
-                lines.append(f"extern u8 {symbol}[];")
+                lines.append(f"extern u16 {symbol}[];")
             elif name.endswith(".s") and "type" in entry:
                 lines.append(f"extern {entry['type']} {symbol};")
             elif name.endswith(".s"):

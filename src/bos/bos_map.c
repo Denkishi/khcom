@@ -99,7 +99,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
     u8 flip;
     u16 frame;
     ObjAffine* sprite;
-    u8* gfx;
+    void* gfx;
 
     obj = work->actor;
     flip = 0;

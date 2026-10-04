@@ -163,7 +163,7 @@ s32 task_evt_shadow_1() {
 
 void task_evt_shadow_2(EvtShadowWork* work) {
     EvtObj* obj;
-    u8* gfx;
+    void* gfx;
     void* vram;
     s32 size;
     ObjAffine* sprite;

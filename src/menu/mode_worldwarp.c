@@ -342,9 +342,9 @@ void WorldWarpHandleInput() {
 void WorldWarpDraw() {
     s32 i;
 #ifdef VERSION_EU
-    u8* tile0;
-    u8* tile1;
-    u8* tile2;
+    void* tile0;
+    void* tile1;
+    void* tile2;
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:

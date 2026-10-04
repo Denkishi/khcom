@@ -28,9 +28,9 @@ typedef struct WarpRect {
 } WarpRect;
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099AABA4[];
-extern u8 gUnkEu_099AABBA[];
-extern u8 gUnkEu_099AABEE[];
+extern u16 gUnkEu_099AABA4[];
+extern u16 gUnkEu_099AABBA[];
+extern u16 gUnkEu_099AABEE[];
 extern u8 gUnkEu_099AAC2C[];
 #endif
 

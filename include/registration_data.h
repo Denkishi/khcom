@@ -355,9 +355,9 @@ extern TaskDesc gTaskDescFrdPoohEu;
 #endif
 
 #ifdef VERSION_EU
-extern u8 gUnkEu_099A421C[];
-extern u8 gUnkEu_099A4238[];
-extern u8 gUnkEu_099A426C[];
+extern u16 gUnkEu_099A421C[];
+extern u16 gUnkEu_099A4238[];
+extern u16 gUnkEu_099A426C[];
 #endif
 
 #endif

@@ -544,8 +544,8 @@ typedef struct MapPrizeWork {
     Collider collider;
     void* tiles;
     ObjPalette* palette;
-    u8* gfx;
-    u8* gfx2;
+    void* gfx;
+    void* gfx2;
     void (*update)(struct MapPrizeWork*);
     u16 kind;
     u16 timer;

@@ -2479,6 +2479,12 @@ entries:
   jp:
     address: 0x09ED0178
   eu:
+    address: 0x09F8447C
+    items: [gMapUiSpriteEu_09887388, gMapUiSpriteEu_09887398, gMapUiSpriteEu_098873CC]
+- name: gUnkEu_09F8443C
+  record: SpriteTable
+  items: [gMapUiSpriteUs_098A8BE4, gMapUiSpriteUs_098A8BF4, gMapUiSpriteUs_098A8C28]
+  eu:
     address: 0x09F8443C
 - name: gUnk_09EF8D98
   record: AnimTable
@@ -2487,6 +2493,12 @@ entries:
     address: 0x09EF8D98
   jp:
     address: 0x09ED0184
+  eu:
+    address: 0x09F84488
+    items: [gMapUiAnimEu_09887400]
+- name: gUnkEu_09F84448
+  record: AnimTable
+  items: [gMapUiAnimUs_098A8C5C]
   eu:
     address: 0x09F84448
 - name: gUnk_09EF8D9C
@@ -2848,16 +2860,6 @@ entries:
   items: [gMapUiAnimEu_09886FBE]
   eu:
     address: 0x09F84478
-- name: gUnkEu_09F8447C
-  record: SpriteTable
-  items: [gMapUiSpriteEu_09887388, gMapUiSpriteEu_09887398, gMapUiSpriteEu_098873CC]
-  eu:
-    address: 0x09F8447C
-- name: gUnkEu_09F84488
-  record: AnimTable
-  items: [gMapUiAnimEu_09887400]
-  eu:
-    address: 0x09F84488
 - name: gUnkEu_09F84510
   record: SpriteTable
   items: [gMapUiSpriteUs_098A96A0, gMapUiSpriteUs_098A9710, gMapUiSpriteUs_098A9780, gMapUiSpriteUs_098A97F0]

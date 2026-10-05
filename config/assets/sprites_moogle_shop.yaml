@@ -1499,6 +1499,11 @@ entries:
     address: 0x099F01E4
     size: 256
   eu:
+    address: 0x09A96720
+    size: 256
+- name: gUnkEu_09A90F20
+  format: tilemap
+  eu:
     address: 0x09A90F20
     size: 1280
 - name: gUnk_09A3B85C
@@ -1848,11 +1853,6 @@ entries:
   eu:
     address: 0x09A96220
     size: 1280
-- name: gUnkEu_09A96720
-  format: tilemap
-  eu:
-    address: 0x09A96720
-    size: 256
 - name: gUnkEu_09A96820
   format: tilemap
   eu:

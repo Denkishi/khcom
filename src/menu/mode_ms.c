@@ -47,7 +47,7 @@ static void* sMoogleShopBgMapsByLanguage[5] = {
     gUnk_09A3B25C,
     gUnkEu_09A91920,
     gUnkEu_09A91420,
-    gUnk_09A3B75C,
+    gUnkEu_09A90F20,
 };
 
 static u16* sUnkEu_09F84F70[5] = {

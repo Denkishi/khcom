@@ -6509,14 +6509,14 @@ void Task_MapSave_2(MapSaveWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        DrawSprite(128, work->y >> 8, gUnkEu_09F8447C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8447C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnkEu_09F8447C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
-        break;
-    case LANGUAGE_FRENCH:
         DrawSprite(128, work->y >> 8, gUnk_09EF8D8C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
         DrawSprite(128, work->y2 >> 8, gUnk_09EF8D8C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
         DrawSprite(work->x >> 8, 0, gUnk_09EF8D8C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        break;
+    case LANGUAGE_FRENCH:
+        DrawSprite(128, work->y >> 8, gUnkEu_09F8443C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8443C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gUnkEu_09F8443C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     case LANGUAGE_SPANISH:
         DrawSprite(128, work->y >> 8, gUnkEu_09F8444C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);

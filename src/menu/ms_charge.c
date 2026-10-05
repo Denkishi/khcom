@@ -52,7 +52,7 @@ static void* sMsChargeBgMapsByLanguage[5] = {
 };
 
 static void* sMsChargeTabTilemapsByLanguage[5] = {
-    gUnkEu_09A96720,
+    gUnk_09A3B75C,
     gUnkEu_09A96820,
     gUnkEu_09A96920,
     gUnkEu_09A96A20,

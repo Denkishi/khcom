@@ -361,10 +361,10 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
     work->angle = arg->index << 7;
     work->scaleX = 2;
     work->scaleY = 2;
-    work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
-    AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
+    AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);
     AnimStart(&work->anim, sLstAnimSets[work->animSet].idleAnim, ANIM_FLAG_LOOP);
     InitEnemyBtlObj(&work->obj, &sBosLstBitEmyKind, work->x, work->y, work->z);
     pool = &work->tasks;

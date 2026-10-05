@@ -47,9 +47,9 @@ void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
     work->y = arg->y;
     work->wobbleX = 0;
     work->wobbleY = 0;
-    work->tiles = LoadObjTiles(gUnk_09CD0C34, 0x200);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
-    AnimInit(&work->anim, gUnk_09EFBF54, gUnk_09EFBF40);
+    work->tiles = LoadObjTiles(gBosLstPtlTiles, 0x200);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    AnimInit(&work->anim, gBosLstPtlAnims, gBosLstPtlFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 

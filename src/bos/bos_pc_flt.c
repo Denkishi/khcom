@@ -394,10 +394,10 @@ void BosPcFltSyncCollider(PcFltWork* work) {
 void task_bos_pc_flt_0(PcFltWork* work, PcFltInit* arg) {
     AnimState* anim;
 
-    work->tiles = LoadObjTiles(gUnk_09CB8F54, 0xDC0);
-    work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
+    work->tiles = LoadObjTiles(gBosPcFltTiles, 0xDC0);
+    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
     anim = &work->anim;
-    AnimInit(anim, gUnk_09EFBBEC, gUnk_09EFBBBC);
+    AnimInit(anim, gBosPcFltAnims, gBosPcFltFrames);
     AnimStart(anim, 1, 0);
     ColliderInit(&work->collider, 7, 26, 4);
     work->playerOnPlatform = 0;

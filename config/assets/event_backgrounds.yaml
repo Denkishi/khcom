@@ -1043,7 +1043,7 @@ entries:
   symbol: gEventBgUnusedParasiteCageBattle
   record: EventBackgroundDef
   fields:
-    tiles: gUnk_09C91754
+    tiles: gBosPcBgTiles
     tiles2: 0
     palette: gBosPcBgPalette
     maps: gEventBgUnusedParasiteCageBattleBg3MapBlocks

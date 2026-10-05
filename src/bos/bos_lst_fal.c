@@ -82,9 +82,9 @@ void task_bos_lst_fal_0(LstFalWork* work, LstFalArg* arg) {
 
     work->falCount = arg->falCount;
     (*work->falCount)++;
-    work->tiles = LoadObjTiles(gUnk_09CD1074, 0x700);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
-    AnimInit(&work->anim, gUnk_09EFBFC4, gUnk_09EFBF64);
+    work->tiles = LoadObjTiles(gBosLstFalTiles, 0x700);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    AnimInit(&work->anim, gBosLstFalAnims, gBosLstFalFrames);
     AnimStart(&work->anim, anim, ANIM_FLAG_LOOP);
 }
 

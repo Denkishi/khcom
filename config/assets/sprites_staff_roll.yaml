@@ -17829,8 +17829,8 @@ entries:
     address: 0x09D01664
 - name: gUnk_09C91350
   format: sprite_sheet
-  tiles: gUnk_09CC4E54
-  palette: gUnk_09D693D4
+  tiles: gBosPcFldTiles
+  palette: gBosPcObjPalette
   align: 4
   cell: [80, 32]
   anchor: [40, 8]
@@ -24553,8 +24553,8 @@ entries:
     size: 472
 - name: gUnk_09C90614
   format: sprite_sheet
-  tiles: gUnk_09CB84B4
-  palette: gUnk_09D693D4
+  tiles: gBosPcLayerTiles
+  palette: gBosPcObjPalette
   cell: [16, 17]
   anchor: [8, 8]
   columns: 8
@@ -24735,8 +24735,8 @@ entries:
     size: 410
 - name: gUnk_09C44708
   format: sprite_sheet
-  tiles: gUnk_09C448D2
-  palette: gUnk_09D693D4
+  tiles: gBosPcStandaloneTiles
+  palette: gBosPcObjPalette
   cell: [48, 48]
   anchor: [24, 24]
   columns: 8

@@ -139,9 +139,9 @@ void task_bos_lst_lsr_0(LstLsrWork* work, LstLsrArg* arg) {
     work->facing = arg->facing;
     work->falCount = arg->falCount;
     work->state = 0;
-    work->tiles = LoadObjTiles(gUnk_09CD0334, 0x900);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
-    AnimInit(&work->anim, gUnk_09EFBF18, gUnk_09EFBEC4);
+    work->tiles = LoadObjTiles(gBosLstBitTiles, 0x900);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    AnimInit(&work->anim, gBosLstBitAnims, gBosLstBitFrames);
     AnimStart(&work->anim, 4, 0);
 }
 
@@ -229,7 +229,7 @@ void task_bos_lst_lsr_2(LstLsrWork* work) {
         oam = AllocObjAffineAngle(work->angle, 1);
         x = x2 + (x1 - x2) * work->timer / work->duration;
         y = y2 + (y1 - y2) * work->timer / work->duration;
-        DrawSprite(x, y, gUnk_09EFBEC4[13], work->tiles, work->palette,
+        DrawSprite(x, y, gBosLstBitFrames[13], work->tiles, work->palette,
                    oam, prio, z);
         break;
     case 3:

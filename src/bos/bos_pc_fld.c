@@ -77,13 +77,13 @@ void BosPcFldEnableObject(Task* task, u8 a) {
 
     if (!a) {
         if (work->tiles == NULL) {
-            work->tiles = LoadObjTiles(gUnk_09CC4E54, 0x200);
+            work->tiles = LoadObjTiles(gBosPcFldTiles, 0x200);
         }
 
         if (work->palette == NULL) {
-            pal = LoadObjPalette(gUnk_09D693D4, 0x60);
+            pal = LoadObjPalette(gBosPcObjPalette, 0x60);
             work->palette = pal;
-            LoadPalette(gUnk_09D69434, gUnk_05000220 + pal->index * 32, 32);
+            LoadPalette(gBosPcFldPalette, gUnk_05000220 + pal->index * 32, 32);
         }
     }
 }
@@ -148,7 +148,7 @@ void BosPcFldUpdatePaletteCycle(PcFldWork* work) {
 
 void BosPcFldLoadPaletteCycle(PcFldWork* work) {
     if (work->paletteCycle != 0) {
-        LoadPalette(gUnk_09D69374 + work->paletteIndex * 16, gUnk_05000080, 32);
+        LoadPalette(gBosPcCyclePalettes + work->paletteIndex * 16, gUnk_05000080, 32);
     }
 }
 

@@ -151,7 +151,7 @@ static const PcAnimStep* sBosPcAnims[14] = {
 static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
 
 static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
-    gUnk_09C91754, 0x3340, gBosPcBgPalette, 0x100,
+    gBosPcBgTiles, 0x3340, gBosPcBgPalette, 0x100,
     { gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgLeftMap, gBosPcBgRightMap, gBosPcBgFillMap, gBosPcBgFillMap }
 };
 
@@ -4824,49 +4824,49 @@ const PcSpriteCmd gBosPcDefeatFrame6[36] = {
 };
 
 static const PcGfxSet sPcGfxSets[43] = {
-    { gUnk_09C94A94, 3328, gUnk_09D35A74, 2048 },
-    { gUnk_09C95794, 3488, gUnk_09D36274, 2048 },
-    { gUnk_09C96534, 3552, gUnk_09D36A74, 2048 },
-    { gUnk_09C97314, 3520, gUnk_09D37274, 2048 },
-    { gUnk_09C980D4, 3424, gUnk_09D37A74, 2048 },
-    { gUnk_09C98E34, 3360, gUnk_09D38274, 2048 },
-    { gUnk_09C99B54, 3424, gUnk_09D38A74, 2048 },
-    { gUnk_09C9A8B4, 3232, gUnk_09D39274, 2048 },
-    { gUnk_09C9B554, 3456, gUnk_09D39A74, 2048 },
-    { gUnk_09C9C2D4, 3584, gUnk_09D3A274, 2048 },
-    { gUnk_09C9D0D4, 3680, gUnk_09D3AA74, 2048 },
-    { gUnk_09C9DF34, 3296, gUnk_09D3B274, 2048 },
-    { gUnk_09C9EC14, 3200, gUnk_09D3BA74, 2048 },
-    { gUnk_09C9F894, 3168, gUnk_09D3C274, 2048 },
-    { gUnk_09CA04F4, 3200, gUnk_09D3CA74, 2048 },
-    { gUnk_09CA1174, 3232, gUnk_09D3D274, 2048 },
-    { gUnk_09CA1E14, 3520, gUnk_09D3DA74, 2048 },
-    { gUnk_09CA2BD4, 3488, gUnk_09D3E274, 2048 },
-    { gUnk_09CA3974, 3104, gUnk_09D3EA74, 2048 },
-    { gUnk_09CA4594, 3072, gUnk_09D3F274, 2048 },
-    { gUnk_09CA5194, 2944, gUnk_09D3FA74, 2048 },
-    { gUnk_09CA5D14, 3200, gUnk_09D40274, 2048 },
-    { gUnk_09CA6994, 3136, gUnk_09D40A74, 2048 },
-    { gUnk_09CA75D4, 2816, gUnk_09D41274, 2048 },
-    { gUnk_09CA80D4, 3584, gUnk_09D41A74, 2048 },
-    { gUnk_09CA8ED4, 4064, gUnk_09D42274, 2048 },
-    { gUnk_09CA9EB4, 4416, gUnk_09D42A74, 2048 },
-    { gUnk_09CAAFF4, 4096, gUnk_09D43274, 2048 },
-    { gUnk_09CABFF4, 4096, gUnk_09D43A74, 2048 },
-    { gUnk_09CACFF4, 4000, gUnk_09D44274, 2048 },
-    { gUnk_09CADF94, 4064, gUnk_09D44A74, 2048 },
-    { gUnk_09CAEF74, 3360, gUnk_09D45274, 2048 },
-    { gUnk_09CAFC94, 3104, gUnk_09D45A74, 2048 },
-    { gUnk_09CB08B4, 3104, gUnk_09D46274, 2048 },
-    { gUnk_09CB14D4, 3200, gUnk_09D46A74, 2048 },
-    { gUnk_09CB2154, 3136, gUnk_09D47274, 2048 },
-    { gUnk_09CB2D94, 3104, gUnk_09D47A74, 2048 },
-    { gUnk_09CB39B4, 3136, gUnk_09D48274, 2048 },
-    { gUnk_09CB45F4, 3200, gUnk_09D48A74, 2048 },
-    { gUnk_09CB5274, 3200, gUnk_09D49274, 2048 },
-    { gUnk_09CB5EF4, 3200, gUnk_09D49A74, 2048 },
-    { gUnk_09CB6B74, 3232, gUnk_09D4A274, 2048 },
-    { gUnk_09CB7814, 3232, gUnk_09D4AA74, 2048 },
+    { gBosPcGfxSet0Tiles, 3328, gBosPcGfxSet0Map, 2048 },
+    { gBosPcGfxSet1Tiles, 3488, gBosPcGfxSet1Map, 2048 },
+    { gBosPcGfxSet2Tiles, 3552, gBosPcGfxSet2Map, 2048 },
+    { gBosPcGfxSet3Tiles, 3520, gBosPcGfxSet3Map, 2048 },
+    { gBosPcGfxSet4Tiles, 3424, gBosPcGfxSet4Map, 2048 },
+    { gBosPcGfxSet5Tiles, 3360, gBosPcGfxSet5Map, 2048 },
+    { gBosPcGfxSet6Tiles, 3424, gBosPcGfxSet6Map, 2048 },
+    { gBosPcGfxSet7Tiles, 3232, gBosPcGfxSet7Map, 2048 },
+    { gBosPcGfxSet8Tiles, 3456, gBosPcGfxSet8Map, 2048 },
+    { gBosPcGfxSet9Tiles, 3584, gBosPcGfxSet9Map, 2048 },
+    { gBosPcGfxSet10Tiles, 3680, gBosPcGfxSet10Map, 2048 },
+    { gBosPcGfxSet11Tiles, 3296, gBosPcGfxSet11Map, 2048 },
+    { gBosPcGfxSet12Tiles, 3200, gBosPcGfxSet12Map, 2048 },
+    { gBosPcGfxSet13Tiles, 3168, gBosPcGfxSet13Map, 2048 },
+    { gBosPcGfxSet14Tiles, 3200, gBosPcGfxSet14Map, 2048 },
+    { gBosPcGfxSet15Tiles, 3232, gBosPcGfxSet15Map, 2048 },
+    { gBosPcGfxSet16Tiles, 3520, gBosPcGfxSet16Map, 2048 },
+    { gBosPcGfxSet17Tiles, 3488, gBosPcGfxSet17Map, 2048 },
+    { gBosPcGfxSet18Tiles, 3104, gBosPcGfxSet18Map, 2048 },
+    { gBosPcGfxSet19Tiles, 3072, gBosPcGfxSet19Map, 2048 },
+    { gBosPcGfxSet20Tiles, 2944, gBosPcGfxSet20Map, 2048 },
+    { gBosPcGfxSet21Tiles, 3200, gBosPcGfxSet21Map, 2048 },
+    { gBosPcGfxSet22Tiles, 3136, gBosPcGfxSet22Map, 2048 },
+    { gBosPcGfxSet23Tiles, 2816, gBosPcGfxSet23Map, 2048 },
+    { gBosPcGfxSet24Tiles, 3584, gBosPcGfxSet24Map, 2048 },
+    { gBosPcGfxSet25Tiles, 4064, gBosPcGfxSet25Map, 2048 },
+    { gBosPcGfxSet26Tiles, 4416, gBosPcGfxSet26Map, 2048 },
+    { gBosPcGfxSet27Tiles, 4096, gBosPcGfxSet27Map, 2048 },
+    { gBosPcGfxSet28Tiles, 4096, gBosPcGfxSet28Map, 2048 },
+    { gBosPcGfxSet29Tiles, 4000, gBosPcGfxSet29Map, 2048 },
+    { gBosPcGfxSet30Tiles, 4064, gBosPcGfxSet30Map, 2048 },
+    { gBosPcGfxSet31Tiles, 3360, gBosPcGfxSet31Map, 2048 },
+    { gBosPcGfxSet32Tiles, 3104, gBosPcGfxSet32Map, 2048 },
+    { gBosPcGfxSet33Tiles, 3104, gBosPcGfxSet33Map, 2048 },
+    { gBosPcGfxSet34Tiles, 3200, gBosPcGfxSet34Map, 2048 },
+    { gBosPcGfxSet35Tiles, 3136, gBosPcGfxSet35Map, 2048 },
+    { gBosPcGfxSet36Tiles, 3104, gBosPcGfxSet36Map, 2048 },
+    { gBosPcGfxSet37Tiles, 3136, gBosPcGfxSet37Map, 2048 },
+    { gBosPcGfxSet38Tiles, 3200, gBosPcGfxSet38Map, 2048 },
+    { gBosPcGfxSet39Tiles, 3200, gBosPcGfxSet39Map, 2048 },
+    { gBosPcGfxSet40Tiles, 3200, gBosPcGfxSet40Map, 2048 },
+    { gBosPcGfxSet41Tiles, 3232, gBosPcGfxSet41Map, 2048 },
+    { gBosPcGfxSet42Tiles, 3232, gBosPcGfxSet42Map, 2048 },
 };
 
 const PcAnimStep gBosPcIdleAnim[16] = {
@@ -5380,7 +5380,7 @@ void BosPcUpdatePaletteCycle(PcWork* work) {
 
 void BosPcLoadPaletteCycle(PcWork* work) {
     if (work->paletteCycle) {
-        LoadPalette(&gUnk_09D69374[work->paletteIndex * 16], gUnk_05000080, 32);
+        LoadPalette(&gBosPcCyclePalettes[work->paletteIndex * 16], gUnk_05000080, 32);
     }
 }
 
@@ -5455,11 +5455,11 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->body2.flags |= BTLOBJ_FLAG_FACING_LEFT;
     SetBtlObjParent(q, p);
     ColliderInit(&work->collider, 8, 32, 56);
-    LoadBgMap(1, gUnk_09D34A74, 0x1000);
-    work->tiles = LoadObjTiles(gUnk_09CB84B4, 0xAA0);
-    work->tiles2[0] = AllocObjTiles(0x400, gUnk_09C448D2);
-    work->tiles2[1] = AllocObjTiles(0x400, gUnk_09C448D2);
-    work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
+    LoadBgMap(1, gBosBlankMap, 0x1000);
+    work->tiles = LoadObjTiles(gBosPcLayerTiles, 0xAA0);
+    work->tiles2[0] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
+    work->tiles2[1] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
+    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
     SetBtlPaletteFadeExcluded(0, 1);
     work->flt[0] = NULL;

@@ -74,152 +74,152 @@ objects:
     start: 0x09DD9420
     end: 0x09DD94C0
 entries:
-- name: gUnk_09EFAEF8
+- name: gBosLstEdgFrames
   record: SpriteTable
-  items: [gUnk_09C5C460, gUnk_09C5C462, gUnk_09C5C46C, gUnk_09C5C476, gUnk_09C5C480, gUnk_09C5C48A, gUnk_09C5C494, gUnk_09C5C49E, gUnk_09C5C4A8]
+  items: [gBosLstEdgFrame0, gBosLstEdgFrame1, gBosLstEdgFrame2, gBosLstEdgFrame3, gBosLstEdgFrame4, gBosLstEdgFrame5, gBosLstEdgFrame6, gBosLstEdgFrame7, gBosLstEdgFrame8]
   us:
     address: 0x09EFAEF8
   jp:
     address: 0x09ED2404
   eu:
     address: 0x09F86C44
-- name: gUnk_09EFAF1C
+- name: gBosLstEdgAnims
   record: AnimTable
-  items: [gUnk_09C5C4B2, gUnk_09C5C4D8]
+  items: [gBosLstEdgAnim0, gBosLstEdgAnim1]
   us:
     address: 0x09EFAF1C
   jp:
     address: 0x09ED2428
   eu:
     address: 0x09F86C68
-- name: gUnk_09EFAF24
+- name: gBosLstCtrFrames
   record: SpriteTable
-  items: [gUnk_09C5C664, gUnk_09C5C674, gUnk_09C5C676, gUnk_09C5C678, gUnk_09C5C67A, gUnk_09C5C67C, gUnk_09C5C686, gUnk_09C5C690, gUnk_09C5C69A, gUnk_09C5C6A4, gUnk_09C5C6AE]
+  items: [gBosLstCtrFrame0, gBosLstCtrFrame1, gBosLstCtrFrame2, gBosLstCtrFrame3, gBosLstCtrFrame4, gBosLstCtrFrame5, gBosLstCtrFrame6, gBosLstCtrFrame7, gBosLstCtrFrame8, gBosLstCtrFrame9, gBosLstCtrFrame10]
   us:
     address: 0x09EFAF24
   jp:
     address: 0x09ED2430
   eu:
     address: 0x09F86C70
-- name: gUnk_09EFAF50
+- name: gBosLstCtrAnims
   record: AnimTable
-  items: [gUnk_09C5C6B8, gUnk_09C5C6C2, gUnk_09C5C6CC, gUnk_09C5C6D6]
+  items: [gBosLstCtrAnim0, gBosLstCtrAnim1, gBosLstCtrAnim2, gBosLstCtrAnim3]
   us:
     address: 0x09EFAF50
   jp:
     address: 0x09ED245C
   eu:
     address: 0x09F86C9C
-- name: gUnk_09EFBEC4
+- name: gBosLstBitFrames
   record: SpriteTable
-  items: [gUnk_09C913F4, gUnk_09C913FE, gUnk_09C9140E, gUnk_09C9141E, gUnk_09C9142E, gUnk_09C9143E, gUnk_09C9144E, gUnk_09C91458, gUnk_09C91462, gUnk_09C91464, gUnk_09C9146E, gUnk_09C91478, gUnk_09C91482, gUnk_09C9148C, gUnk_09C91496, gUnk_09C914A0, gUnk_09C914AA, gUnk_09C914B4, gUnk_09C914BE, gUnk_09C914C8, gUnk_09C914D2]
+  items: [gBosLstBitFrame0, gBosLstBitFrame1, gBosLstBitFrame2, gBosLstBitFrame3, gBosLstBitFrame4, gBosLstBitFrame5, gBosLstBitFrame6, gBosLstBitFrame7, gBosLstBitFrame8, gBosLstBitFrame9, gBosLstBitFrame10, gBosLstBitFrame11, gBosLstBitFrame12, gBosLstBitFrame13, gBosLstBitFrame14, gBosLstBitFrame15, gBosLstBitFrame16, gBosLstBitFrame17, gBosLstBitFrame18, gBosLstBitFrame19, gBosLstBitFrame20]
   us:
     address: 0x09EFBEC4
   jp:
     address: 0x09ED343C
   eu:
     address: 0x09F886D8
-- name: gUnk_09EFBF18
+- name: gBosLstBitAnims
   record: AnimTable
-  items: [gUnk_09C914DC, gUnk_09C914FA, gUnk_09C91504, gUnk_09C9150E, gUnk_09C91518, gUnk_09C91522, gUnk_09C9152C, gUnk_09C9154E, gUnk_09C91558, gUnk_09C91562]
+  items: [gBosLstBitAnim0, gBosLstBitAnim1, gBosLstBitAnim2, gBosLstBitAnim3, gBosLstBitAnim4, gBosLstBitAnim5, gBosLstBitAnim6, gBosLstBitAnim7, gBosLstBitAnim8, gBosLstBitAnim9]
   us:
     address: 0x09EFBF18
   jp:
     address: 0x09ED3490
   eu:
     address: 0x09F8872C
-- name: gUnk_09EFBF40
+- name: gBosLstPtlFrames
   record: SpriteTable
-  items: [gUnk_09C9156C, gUnk_09C9156E, gUnk_09C91578, gUnk_09C91582, gUnk_09C9158C]
+  items: [gBosLstPtlFrame0, gBosLstPtlFrame1, gBosLstPtlFrame2, gBosLstPtlFrame3, gBosLstPtlFrame4]
   us:
     address: 0x09EFBF40
   jp:
     address: 0x09ED34B8
   eu:
     address: 0x09F88754
-- name: gUnk_09EFBF54
+- name: gBosLstPtlAnims
   record: AnimTable
-  items: [gUnk_09C91596, gUnk_09C915A0]
+  items: [gBosLstPtlAnim0, gBosLstPtlAnim1]
   us:
     address: 0x09EFBF54
   jp:
     address: 0x09ED34CC
   eu:
     address: 0x09F88768
-- name: gUnk_09EFBF5C
+- name: gBosLstSnpFrames
   record: SpriteTable
-  items: [gUnk_09C915C0]
+  items: [gBosLstSnpFrame0]
   us:
     address: 0x09EFBF5C
   jp:
     address: 0x09ED34D4
   eu:
     address: 0x09F88770
-- name: gUnk_09EFBF60
+- name: gBosLstSnpAnims
   record: AnimTable
-  items: [gUnk_09C915D6]
+  items: [gBosLstSnpAnim0]
   us:
     address: 0x09EFBF60
   jp:
     address: 0x09ED34D8
   eu:
     address: 0x09F88774
-- name: gUnk_09EFBF64
+- name: gBosLstFalFrames
   record: SpriteTable
-  items: [gUnk_09C915E0, gUnk_09C915EA, gUnk_09C915F4, gUnk_09C915FE, gUnk_09C91608, gUnk_09C91612, gUnk_09C9161C, gUnk_09C91626, gUnk_09C91630, gUnk_09C9163A, gUnk_09C91644, gUnk_09C9164E, gUnk_09C91658, gUnk_09C91662, gUnk_09C9166C, gUnk_09C91676, gUnk_09C91680, gUnk_09C9168A, gUnk_09C91694, gUnk_09C9169E, gUnk_09C916A8, gUnk_09C916B2, gUnk_09C916BC, gUnk_09C916C6]
+  items: [gBosLstFalFrame0, gBosLstFalFrame1, gBosLstFalFrame2, gBosLstFalFrame3, gBosLstFalFrame4, gBosLstFalFrame5, gBosLstFalFrame6, gBosLstFalFrame7, gBosLstFalFrame8, gBosLstFalFrame9, gBosLstFalFrame10, gBosLstFalFrame11, gBosLstFalFrame12, gBosLstFalFrame13, gBosLstFalFrame14, gBosLstFalFrame15, gBosLstFalFrame16, gBosLstFalFrame17, gBosLstFalFrame18, gBosLstFalFrame19, gBosLstFalFrame20, gBosLstFalFrame21, gBosLstFalFrame22, gBosLstFalFrame23]
   us:
     address: 0x09EFBF64
   jp:
     address: 0x09ED34DC
   eu:
     address: 0x09F88778
-- name: gUnk_09EFBFC4
+- name: gBosLstFalAnims
   record: AnimTable
-  items: [gUnk_09C916D0, gUnk_09C916E6, gUnk_09C916FC, gUnk_09C91712, gUnk_09C91728, gUnk_09C9173E]
+  items: [gBosLstFalAnim0, gBosLstFalAnim1, gBosLstFalAnim2, gBosLstFalAnim3, gBosLstFalAnim4, gBosLstFalAnim5]
   us:
     address: 0x09EFBFC4
   jp:
     address: 0x09ED353C
   eu:
     address: 0x09F887D8
-- name: gUnk_09C5C4E2
+- name: gBosLstEdgTiles
   format: sprite_sheet
   align: 4
   cell: [17, 17]
   anchor: [9, 9]
   columns: 8
   frames:
-  - symbol: gUnk_09C5C460
+  - symbol: gBosLstEdgFrame0
     pieces: []
-  - symbol: gUnk_09C5C462
+  - symbol: gBosLstEdgFrame1
     pieces:
     - [16x16, -8, -8, {pal: 1}]
-  - symbol: gUnk_09C5C46C
+  - symbol: gBosLstEdgFrame2
     pieces:
     - [16x16, -8, -8, {pal: 1}]
-  - symbol: gUnk_09C5C476
+  - symbol: gBosLstEdgFrame3
     pieces:
     - [16x16, -8, -8, {pal: 1}]
-  - symbol: gUnk_09C5C480
+  - symbol: gBosLstEdgFrame4
     pieces:
     - [16x16, -8, -9, {vflip: true, pal: 1}]
-  - symbol: gUnk_09C5C48A
+  - symbol: gBosLstEdgFrame5
     pieces:
     - [16x16, -8, -9, {vflip: true, pal: 1}]
-  - symbol: gUnk_09C5C494
+  - symbol: gBosLstEdgFrame6
     pieces:
     - [16x16, -9, -9, {hflip: true, vflip: true, pal: 1}]
-  - symbol: gUnk_09C5C49E
+  - symbol: gBosLstEdgFrame7
     pieces:
     - [16x16, -9, -8, {hflip: true, pal: 1}]
-  - symbol: gUnk_09C5C4A8
+  - symbol: gBosLstEdgFrame8
     pieces:
     - [16x16, -9, -8, {hflip: true, pal: 1}]
   animations:
-  - symbol: gUnk_09C5C4B2
+  - symbol: gBosLstEdgAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
-  - symbol: gUnk_09C5C4D8
+  - symbol: gBosLstEdgAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -231,54 +231,54 @@ entries:
   eu:
     address: 0x09CBA1A8
     size: 514
-- name: gUnk_09C5C704
+- name: gBosLstCtrTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [12, 8]
   columns: 8
   frames:
-  - symbol: gUnk_09C5C664
+  - symbol: gBosLstCtrFrame0
     pieces:
     - [32x16, -12, -8]
     - [32x16, 20, -8]
-  - symbol: gUnk_09C5C674
+  - symbol: gBosLstCtrFrame1
     pieces: []
-  - symbol: gUnk_09C5C676
+  - symbol: gBosLstCtrFrame2
     pieces: []
-  - symbol: gUnk_09C5C678
+  - symbol: gBosLstCtrFrame3
     pieces: []
-  - symbol: gUnk_09C5C67A
+  - symbol: gBosLstCtrFrame4
     pieces: []
-  - symbol: gUnk_09C5C67C
+  - symbol: gBosLstCtrFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_09C5C686
+  - symbol: gBosLstCtrFrame6
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_09C5C690
+  - symbol: gBosLstCtrFrame7
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_09C5C69A
+  - symbol: gBosLstCtrFrame8
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_09C5C6A4
+  - symbol: gBosLstCtrFrame9
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_09C5C6AE
+  - symbol: gBosLstCtrFrame10
     pieces:
     - [16x16, -8, -8]
   animations:
-  - symbol: gUnk_09C5C6B8
+  - symbol: gBosLstCtrAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 60]]
-  - symbol: gUnk_09C5C6C2
+  - symbol: gBosLstCtrAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 60]]
-  - symbol: gUnk_09C5C6CC
+  - symbol: gBosLstCtrAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
-  - symbol: gUnk_09C5C6D6
+  - symbol: gBosLstCtrAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [9, 6], [8, 6], [7, 6], [6, 6]]
   us:
@@ -290,110 +290,110 @@ entries:
   eu:
     address: 0x09CBA3AC
     size: 1440
-- name: gUnk_09C913F4
+- name: gBosLstBitFrame0
   format: sprite_sheet
-  tiles: gUnk_09CD0334
+  tiles: gBosLstBitTiles
   align: 4
   cell: [32, 42]
   anchor: [16, 30]
   columns: 8
   frames:
-  - symbol: gUnk_09C913F4
+  - symbol: gBosLstBitFrame0
     pieces:
     - [32x32, -16, -20, {tile: 0}]
-  - symbol: gUnk_09C913FE
+  - symbol: gBosLstBitFrame1
     pieces:
     - [8x8, -3, -25, {tile: 16}]
     - [32x32, -16, -20, {tile: 0}]
-  - symbol: gUnk_09C9140E
+  - symbol: gBosLstBitFrame2
     pieces:
     - [8x8, -3, -25, {tile: 17}]
     - [32x32, -16, -20, {tile: 0}]
-  - symbol: gUnk_09C9141E
+  - symbol: gBosLstBitFrame3
     pieces:
     - [16x16, -7, -29, {tile: 18}]
     - [32x32, -16, -20, {tile: 0}]
-  - symbol: gUnk_09C9142E
+  - symbol: gBosLstBitFrame4
     pieces:
     - [8x16, -3, -30, {tile: 22}]
     - [32x32, -16, -20, {tile: 0}]
-  - symbol: gUnk_09C9143E
+  - symbol: gBosLstBitFrame5
     pieces:
     - [16x16, -8, -20, {tile: 24}]
     - [16x16, -8, -4, {tile: 24}]
-  - symbol: gUnk_09C9144E
+  - symbol: gBosLstBitFrame6
     pieces:
     - [16x8, -8, -4, {tile: 24}]
-  - symbol: gUnk_09C91458
+  - symbol: gBosLstBitFrame7
     pieces:
     - [16x16, -8, -12, {tile: 24}]
-  - symbol: gUnk_09C91462
+  - symbol: gBosLstBitFrame8
     pieces: []
-  - symbol: gUnk_09C91464
+  - symbol: gBosLstBitFrame9
     pieces:
     - [8x8, -3, -3, {tile: 16}]
-  - symbol: gUnk_09C9146E
+  - symbol: gBosLstBitFrame10
     pieces:
     - [8x8, -3, -3, {tile: 17}]
-  - symbol: gUnk_09C91478
+  - symbol: gBosLstBitFrame11
     pieces:
     - [16x16, -7, -7, {tile: 18}]
-  - symbol: gUnk_09C91482
+  - symbol: gBosLstBitFrame12
     pieces:
     - [16x32, -8, -20, {tile: 28}]
-  - symbol: gUnk_09C9148C
+  - symbol: gBosLstBitFrame13
     pieces:
     - [16x32, -8, -20, {tile: 36}]
-  - symbol: gUnk_09C91496
+  - symbol: gBosLstBitFrame14
     pieces:
     - [16x32, -8, -20, {tile: 44}]
-  - symbol: gUnk_09C914A0
+  - symbol: gBosLstBitFrame15
     pieces:
     - [16x8, -8, -8, {tile: 52}]
-  - symbol: gUnk_09C914AA
+  - symbol: gBosLstBitFrame16
     pieces:
     - [16x16, -8, -16, {tile: 54}]
-  - symbol: gUnk_09C914B4
+  - symbol: gBosLstBitFrame17
     pieces:
     - [16x16, -8, -16, {tile: 58}]
-  - symbol: gUnk_09C914BE
+  - symbol: gBosLstBitFrame18
     pieces:
     - [16x16, -8, -16, {tile: 62}]
-  - symbol: gUnk_09C914C8
+  - symbol: gBosLstBitFrame19
     pieces:
     - [16x16, -8, -16, {tile: 66}]
-  - symbol: gUnk_09C914D2
+  - symbol: gBosLstBitFrame20
     pieces:
     - [16x8, -8, -14, {tile: 70}]
   animations:
-  - symbol: gUnk_09C914DC
+  - symbol: gBosLstBitAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 8], [3, 2], [4, 2], [0, 1]]
-  - symbol: gUnk_09C914FA
+  - symbol: gBosLstBitAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 4]]
-  - symbol: gUnk_09C91504
+  - symbol: gBosLstBitAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[6, 60]]
-  - symbol: gUnk_09C9150E
+  - symbol: gBosLstBitAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[7, 60]]
-  - symbol: gUnk_09C91518
+  - symbol: gBosLstBitAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 60]]
-  - symbol: gUnk_09C91522
+  - symbol: gBosLstBitAnim5
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 60]]
-  - symbol: gUnk_09C9152C
+  - symbol: gBosLstBitAnim6
     fields: {unk_00: 64, unk_02: 64}
     frames: [[15, 1], [16, 2], [17, 4], [18, 2], [19, 3], [20, 4], [8, 1]]
-  - symbol: gUnk_09C9154E
+  - symbol: gBosLstBitAnim7
     fields: {unk_00: 64, unk_02: 64}
     frames: [[12, 4]]
-  - symbol: gUnk_09C91558
+  - symbol: gBosLstBitAnim8
     fields: {unk_00: 64, unk_02: 64}
     frames: [[13, 4]]
-  - symbol: gUnk_09C91562
+  - symbol: gBosLstBitAnim9
     fields: {unk_00: 64, unk_02: 64}
     frames: [[14, 4]]
   us:
@@ -405,33 +405,33 @@ entries:
   eu:
     address: 0x09D01720
     size: 376
-- name: gUnk_09C9156C
+- name: gBosLstPtlFrame0
   format: sprite_sheet
-  tiles: gUnk_09CD0C34
+  tiles: gBosLstPtlTiles
   align: 4
   cell: [16, 16]
   anchor: [8, 8]
   columns: 5
   frames:
-  - symbol: gUnk_09C9156C
+  - symbol: gBosLstPtlFrame0
     pieces: []
-  - symbol: gUnk_09C9156E
+  - symbol: gBosLstPtlFrame1
     pieces:
     - [16x16, -8, -8, {pal: 1, tile: 0}]
-  - symbol: gUnk_09C91578
+  - symbol: gBosLstPtlFrame2
     pieces:
     - [16x16, -8, -8, {pal: 1, tile: 4}]
-  - symbol: gUnk_09C91582
+  - symbol: gBosLstPtlFrame3
     pieces:
     - [16x16, -8, -8, {pal: 1, tile: 8}]
-  - symbol: gUnk_09C9158C
+  - symbol: gBosLstPtlFrame4
     pieces:
     - [16x16, -8, -8, {pal: 1, tile: 12}]
   animations:
-  - symbol: gUnk_09C91596
+  - symbol: gBosLstPtlAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 60]]
-  - symbol: gUnk_09C915A0
+  - symbol: gBosLstPtlAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6]]
   us:
@@ -443,21 +443,21 @@ entries:
   eu:
     address: 0x09D01898
     size: 82
-- name: gUnk_09C915C0
+- name: gBosLstSnpFrame0
   format: sprite_sheet
-  tiles: gUnk_09CD0E34
+  tiles: gBosLstSnpTiles
   align: 4
   cell: [30, 63]
   anchor: [11, 31]
   columns: 1
   frames:
-  - symbol: gUnk_09C915C0
+  - symbol: gBosLstSnpFrame0
     pieces:
     - [8x16, 11, 16, {tile: 16}]
     - [16x32, -11, -31, {tile: 0}]
     - [16x32, -4, 0, {tile: 8}]
   animations:
-  - symbol: gUnk_09C915D6
+  - symbol: gBosLstSnpAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8]]
   us:
@@ -469,103 +469,103 @@ entries:
   eu:
     address: 0x09D018EC
     size: 32
-- name: gUnk_09C915E0
+- name: gBosLstFalFrame0
   format: sprite_sheet
-  tiles: gUnk_09CD1074
+  tiles: gBosLstFalTiles
   align: 4
   cell: [16, 16]
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gUnk_09C915E0
+  - symbol: gBosLstFalFrame0
     pieces:
     - [8x8, -4, -4, {tile: 0}]
-  - symbol: gUnk_09C915EA
+  - symbol: gBosLstFalFrame1
     pieces:
     - [8x8, -4, -4, {tile: 1}]
-  - symbol: gUnk_09C915F4
+  - symbol: gBosLstFalFrame2
     pieces:
     - [8x8, -4, -4, {tile: 2}]
-  - symbol: gUnk_09C915FE
+  - symbol: gBosLstFalFrame3
     pieces:
     - [8x8, -4, -4, {tile: 3}]
-  - symbol: gUnk_09C91608
+  - symbol: gBosLstFalFrame4
     pieces:
     - [8x8, -4, -4, {tile: 4}]
-  - symbol: gUnk_09C91612
+  - symbol: gBosLstFalFrame5
     pieces:
     - [8x8, -4, -4, {tile: 5}]
-  - symbol: gUnk_09C9161C
+  - symbol: gBosLstFalFrame6
     pieces:
     - [8x8, -4, -4, {tile: 6}]
-  - symbol: gUnk_09C91626
+  - symbol: gBosLstFalFrame7
     pieces:
     - [8x8, -4, -4, {tile: 7}]
-  - symbol: gUnk_09C91630
+  - symbol: gBosLstFalFrame8
     pieces:
     - [16x8, -8, -4, {tile: 8}]
-  - symbol: gUnk_09C9163A
+  - symbol: gBosLstFalFrame9
     pieces:
     - [16x8, -8, -4, {tile: 10}]
-  - symbol: gUnk_09C91644
+  - symbol: gBosLstFalFrame10
     pieces:
     - [16x8, -8, -4, {tile: 12}]
-  - symbol: gUnk_09C9164E
+  - symbol: gBosLstFalFrame11
     pieces:
     - [16x8, -8, -4, {tile: 14}]
-  - symbol: gUnk_09C91658
+  - symbol: gBosLstFalFrame12
     pieces:
     - [8x16, -4, -8, {tile: 16}]
-  - symbol: gUnk_09C91662
+  - symbol: gBosLstFalFrame13
     pieces:
     - [8x16, -4, -8, {tile: 18}]
-  - symbol: gUnk_09C9166C
+  - symbol: gBosLstFalFrame14
     pieces:
     - [8x16, -4, -8, {tile: 20}]
-  - symbol: gUnk_09C91676
+  - symbol: gBosLstFalFrame15
     pieces:
     - [8x16, -4, -8, {tile: 22}]
-  - symbol: gUnk_09C91680
+  - symbol: gBosLstFalFrame16
     pieces:
     - [16x16, -8, -8, {tile: 24}]
-  - symbol: gUnk_09C9168A
+  - symbol: gBosLstFalFrame17
     pieces:
     - [16x16, -8, -8, {tile: 28}]
-  - symbol: gUnk_09C91694
+  - symbol: gBosLstFalFrame18
     pieces:
     - [16x16, -8, -8, {tile: 32}]
-  - symbol: gUnk_09C9169E
+  - symbol: gBosLstFalFrame19
     pieces:
     - [16x16, -8, -8, {tile: 36}]
-  - symbol: gUnk_09C916A8
+  - symbol: gBosLstFalFrame20
     pieces:
     - [16x16, -8, -8, {tile: 40}]
-  - symbol: gUnk_09C916B2
+  - symbol: gBosLstFalFrame21
     pieces:
     - [16x16, -8, -8, {tile: 44}]
-  - symbol: gUnk_09C916BC
+  - symbol: gBosLstFalFrame22
     pieces:
     - [16x16, -8, -8, {tile: 48}]
-  - symbol: gUnk_09C916C6
+  - symbol: gBosLstFalFrame23
     pieces:
     - [16x16, -8, -8, {tile: 52}]
   animations:
-  - symbol: gUnk_09C916D0
+  - symbol: gBosLstFalAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7]]
-  - symbol: gUnk_09C916E6
+  - symbol: gBosLstFalAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 7], [5, 7], [6, 7], [7, 7]]
-  - symbol: gUnk_09C916FC
+  - symbol: gBosLstFalAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 7], [9, 7], [10, 7], [11, 7]]
-  - symbol: gUnk_09C91712
+  - symbol: gBosLstFalAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[12, 7], [13, 7], [14, 7], [15, 7]]
-  - symbol: gUnk_09C91728
+  - symbol: gBosLstFalAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[16, 7], [17, 7], [18, 7], [19, 7]]
-  - symbol: gUnk_09C9173E
+  - symbol: gBosLstFalAnim5
     fields: {unk_00: 64, unk_02: 64}
     frames: [[20, 7], [21, 7], [22, 7], [23, 7]]
   us:
@@ -577,7 +577,7 @@ entries:
   eu:
     address: 0x09D0190C
     size: 372
-- name: gUnk_09C91754
+- name: gBosPcBgTiles
   format: tiles4
   width: 8
   us:
@@ -589,7 +589,7 @@ entries:
   eu:
     address: 0x09D01A80
     size: 1792
-- name: gUnk_09CD0334
+- name: gBosLstBitTiles
   format: tiles4
   width: 8
   us:
@@ -601,7 +601,7 @@ entries:
   eu:
     address: 0x09D40660
     size: 2304
-- name: gUnk_09CD0C34
+- name: gBosLstPtlTiles
   format: tiles4
   width: 16
   us:
@@ -613,7 +613,7 @@ entries:
   eu:
     address: 0x09D40F60
     size: 512
-- name: gUnk_09CD0E34
+- name: gBosLstSnpTiles
   format: tiles4
   width: 2
   us:
@@ -625,7 +625,7 @@ entries:
   eu:
     address: 0x09D41160
     size: 576
-- name: gUnk_09CD1074
+- name: gBosLstFalTiles
   format: tiles4
   width: 8
   us:
@@ -637,7 +637,7 @@ entries:
   eu:
     address: 0x09D413A0
     size: 1792
-- name: gUnk_09D4BA74
+- name: gBosLstFldMode1Map
   format: tilemap
   us:
     address: 0x09D4BA74
@@ -648,7 +648,7 @@ entries:
   eu:
     address: 0x09DB79A0
     size: 2048
-- name: gUnk_09D4C274
+- name: gBosLstFldMode2Map
   format: tilemap
   us:
     address: 0x09D4C274
@@ -659,7 +659,7 @@ entries:
   eu:
     address: 0x09DB81A0
     size: 2048
-- name: gUnk_09D4CA74
+- name: gBosLstFldMode2ReverseMap
   format: tilemap
   us:
     address: 0x09D4CA74
@@ -670,7 +670,7 @@ entries:
   eu:
     address: 0x09DB89A0
     size: 2048
-- name: gUnk_09D4D274
+- name: gBosLstFldMode4Map
   format: tilemap
   us:
     address: 0x09D4D274
@@ -681,7 +681,7 @@ entries:
   eu:
     address: 0x09DB91A0
     size: 2048
-- name: gUnk_09D694F4
+- name: gBosLstFldPalette
   format: palette
   us:
     address: 0x09D694F4

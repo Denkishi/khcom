@@ -33,18 +33,18 @@
 static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
 
 static const BattleBackgroundDef sBosLstBattleBackgroundDef = {
-    gUnk_09CC5054, 0x8000, gUnk_09D69454, 0x140, { gUnk_09D4B274, gUnk_09D4B274, gUnk_09D4B274, gUnk_09D4B274 }
+    gBosLstBgTiles, 0x8000, gBosLstBgPalette, 0x140, { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }
 };
 
 static const LstAnimDef sLstAnimDefs[8] = {
-    { gUnk_09D4DA74, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
-    { gUnk_09D4FA74, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
-    { gUnk_09D4E274, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
-    { gUnk_09D50274, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
-    { gUnk_09D4EA74, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
-    { gUnk_09D50A74, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
-    { gUnk_09D4F274, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
-    { gUnk_09D51274, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
+    { gBosLstAnim0BgMap, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
+    { gBosLstAnim1BgMap, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
+    { gBosLstAnim2BgMap, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
+    { gBosLstAnim3BgMap, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
+    { gBosLstAnim4BgMap, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
+    { gBosLstAnim5BgMap, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
+    { gBosLstAnim6BgMap, 0, 8, { 0, 0, 0, 0 }, 3, 47, { 0, 0 }, -15, 17, 61, 65535, 60, { 0, 0 }, -43, -17, 80, 72, 0, 72 },
+    { gBosLstAnim7BgMap, 0, 8, { 1, 0, 0, 0 }, 65533, 47, { 1, 0 }, 15, 17, 61, 1, 60, { 1, 0 }, 43, -17, 80, 184, 0, 72 },
 };
 
 static const u16 sBosLstBodyFrames[48] = {
@@ -58,24 +58,24 @@ static const u8 sBosLstAnimSheets[8] = { 0, 0, 0, 0, 0, 0, 0, 1 };
 static const s32 sBosLstBobZ[16] = { -1, -2, -3, -4, -5, -6, -7, -8, -7, -6, -5, -4, -3, -2, -1, 0 };
 
 static void* const sBosLstBgFrames[18][2] = {
-    { gUnk_09CC5054, gUnk_09D4DA74 },
-    { gUnk_09CCD054, gUnk_09D51A74 },
-    { gUnk_09CCD694, gUnk_09D52274 },
-    { gUnk_09CCDC14, gUnk_09D52A74 },
-    { gUnk_09CCE1D4, gUnk_09D53274 },
-    { gUnk_09CCE7F4, gUnk_09D53A74 },
-    { gUnk_09CCEDB4, gUnk_09D54274 },
-    { gUnk_09CCF374, gUnk_09D54A74 },
-    { gUnk_09CCFA54, gUnk_09D55274 },
-    { gUnk_09CC5054, gUnk_09D4FA74 },
-    { gUnk_09CCD054, gUnk_09D55A74 },
-    { gUnk_09CCD694, gUnk_09D56274 },
-    { gUnk_09CCDC14, gUnk_09D56A74 },
-    { gUnk_09CCE1D4, gUnk_09D57274 },
-    { gUnk_09CCE7F4, gUnk_09D57A74 },
-    { gUnk_09CCEDB4, gUnk_09D58274 },
-    { gUnk_09CCF374, gUnk_09D58A74 },
-    { gUnk_09CCFA54, gUnk_09D59274 },
+    { gBosLstBgTiles, gBosLstAnim0BgMap },
+    { gBosLstBgFrame1Tiles, gBosLstBgFrame1Map },
+    { gBosLstBgFrame2Tiles, gBosLstBgFrame2Map },
+    { gBosLstBgFrame3Tiles, gBosLstBgFrame3Map },
+    { gBosLstBgFrame4Tiles, gBosLstBgFrame4Map },
+    { gBosLstBgFrame5Tiles, gBosLstBgFrame5Map },
+    { gBosLstBgFrame6Tiles, gBosLstBgFrame6Map },
+    { gBosLstBgFrame7Tiles, gBosLstBgFrame7Map },
+    { gBosLstBgFrame8Tiles, gBosLstBgFrame8Map },
+    { gBosLstBgTiles, gBosLstAnim1BgMap },
+    { gBosLstBgFrame1Tiles, gBosLstBgFrame10Map },
+    { gBosLstBgFrame2Tiles, gBosLstBgFrame11Map },
+    { gBosLstBgFrame3Tiles, gBosLstBgFrame12Map },
+    { gBosLstBgFrame4Tiles, gBosLstBgFrame13Map },
+    { gBosLstBgFrame5Tiles, gBosLstBgFrame14Map },
+    { gBosLstBgFrame6Tiles, gBosLstBgFrame15Map },
+    { gBosLstBgFrame7Tiles, gBosLstBgFrame16Map },
+    { gBosLstBgFrame8Tiles, gBosLstBgFrame17Map },
 };
 
 TaskDesc gTaskDescBosLst = {
@@ -204,13 +204,13 @@ void BosLstSetAnim(BosLstWork* work, u16 a, u16 b, u8 c) {
 
     switch (sBosLstAnimSheets[a]) {
     case 0:
-        SetObjTileSource(work->tiles, gUnk_09C4B012);
-        AnimChangeWithTables(&work->anim, v, b, gUnk_09EFAD3C, gUnk_09EFABB0);
+        SetObjTileSource(work->tiles, gBosLstMarluxiaTiles);
+        AnimChangeWithTables(&work->anim, v, b, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
         break;
     case 1:
         v -= 14;
-        SetObjTileSource(work->tiles, gUnk_09C51CBC);
-        AnimChangeWithTables(&work->anim, v, b, gUnk_09EFADBC, gUnk_09EFAD74);
+        SetObjTileSource(work->tiles, gBosLstMarluxiaDashTiles);
+        AnimChangeWithTables(&work->anim, v, b, gBosLstMarluxiaDashAnims, gBosLstMarluxiaDashFrames);
         break;
     }
 
@@ -426,10 +426,10 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->sub[1].hurtTimer = 0;
     work->sub[1].animId = 0;
     work->sub[1].curAnimId = -1;
-    work->sub[0].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EFADC4, 16), gUnk_09C53724);
-    work->sub[1].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EFAE54, 16), gUnk_09C58590);
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EFABB0, 0x62), gUnk_09C4B012);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
+    work->sub[0].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstScythe0Frames, 16), gBosLstScythe0Tiles);
+    work->sub[1].tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstScythe1Frames, 16), gBosLstScythe1Tiles);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosLstMarluxiaFrames, 0x62), gBosLstMarluxiaTiles);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
     i = 0;
     obj = &work->body;
     anim = &work->anim;
@@ -465,20 +465,20 @@ void task_bos_lst_0(BosLstWork* work, TaskPool* pool) {
     work->animFlags = 0;
     work->bgFrame = 0xFFFF;
     work->hittableTimer = 0;
-    AnimInit(anim, gUnk_09EFAD3C, gUnk_09EFABB0);
+    AnimInit(anim, gBosLstMarluxiaAnims, gBosLstMarluxiaFrames);
     BosLstSetAnim(work, 0, 1, 0);
-    AnimInit(&work->sub[0].anim, gUnk_09EFAE1C, gUnk_09EFADC4);
+    AnimInit(&work->sub[0].anim, gBosLstScythe0Anims, gBosLstScythe0Frames);
     AnimStart(&work->sub[0].anim, 0, ANIM_FLAG_LOOP);
-    AnimInit(&work->sub[1].anim, gUnk_09EFAEAC, gUnk_09EFAE54);
+    AnimInit(&work->sub[1].anim, gBosLstScythe1Anims, gBosLstScythe1Frames);
     AnimStart(&work->sub[1].anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 0x60);
     SetBtlPaletteFadeExcluded(0, 1);
     SetBtlPaletteFadeExcluded(1, 1);
     SetBtlPaletteFadeExcluded(2, 1);
     SetBattleActorPosition(0xCC00, 0x1F000, 0);
-    LoadBgMap(1, gUnk_09D34A74, 0x1000);
-    LoadBgMap(1, gUnk_09D4DA74, 0x800);
-    LoadBgMap(0, gUnk_09D4B274, 0x800);
+    LoadBgMap(1, gBosBlankMap, 0x1000);
+    LoadBgMap(1, gBosLstAnim0BgMap, 0x800);
+    LoadBgMap(0, gBosLstBgMap, 0x800);
     g = gBtlWork;
     g->bossX = work->x;
     g->bossY = work->y;
@@ -2257,15 +2257,15 @@ void BosLstUpdateSub(BosLstWork* work, LstSub* p) {
 
     if (work->facing > 0) {
         if (p->unk_001 == 1) {
-            AnimChangeWithTables(&p->anim, p->animId * 2, f, gUnk_09EFAE1C, gUnk_09EFADC4);
+            AnimChangeWithTables(&p->anim, p->animId * 2, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
         } else {
-            AnimChangeWithTables(&p->anim, p->animId * 2, f, gUnk_09EFAEAC, gUnk_09EFAE54);
+            AnimChangeWithTables(&p->anim, p->animId * 2, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
         }
     } else {
         if (p->unk_001 == 1) {
-            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gUnk_09EFAEAC, gUnk_09EFAE54);
+            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gBosLstScythe1Anims, gBosLstScythe1Frames);
         } else {
-            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gUnk_09EFAE1C, gUnk_09EFADC4);
+            AnimChangeWithTables(&p->anim, p->animId * 2 + 1, f, gBosLstScythe0Anims, gBosLstScythe0Frames);
         }
     }
 
@@ -2603,8 +2603,8 @@ void task_bos_lst_2(BosLstWork* work) {
 
     if ((s16)work->flash != (s16)work->prevFlash) {
         if ((s16)work->flash == 0) {
-            LoadPalette(gUnk_09D69454, (void*)PLTT, 0x60);
-            LoadPalette(gUnk_09D69594, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 0x60);
+            LoadPalette(gBosLstBgPalette, (void*)PLTT, 0x60);
+            LoadPalette(gBosLstObjPalette, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 0x60);
         } else {
             LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
             LoadPalette(gUnk_08F69BC4, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 32);

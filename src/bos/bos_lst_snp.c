@@ -41,10 +41,10 @@ void task_bos_lst_snp_0(LstSnpWork* work, LstSnpArg* arg) {
     work->z = arg->z;
     work->vx = (GetRandom() % 0x181 + 0x80) * arg->facing;
     work->vz = -(GetRandom() % 0x201 + 0x400);
-    work->tiles = LoadObjTiles(gUnk_09CD0E34, 0x240);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
+    work->tiles = LoadObjTiles(gBosLstSnpTiles, 0x240);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
     m4aSongNumStart(SONG_SND_707);
-    AnimInit(&work->anim, gUnk_09EFBF60, gUnk_09EFBF5C);
+    AnimInit(&work->anim, gBosLstSnpAnims, gBosLstSnpFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }
 

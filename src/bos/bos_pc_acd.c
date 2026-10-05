@@ -43,14 +43,14 @@ void task_bos_pc_acd_0(PcAcdWork* work, PcShared* arg) {
     AnimState* anim;
 
     work->unk_000 = 0;
-    work->tiles = AllocObjTiles(0x300, gUnk_09C489E4);
-    work->palette = LoadObjPalette(gUnk_09D693D4, 0x60);
+    work->tiles = AllocObjTiles(0x300, gBosPcAcdTiles);
+    work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
     work->x = -1;
     work->y = -1;
     work->z = -1;
     work->shared = arg;
     anim = &work->anim;
-    AnimInit(anim, gUnk_09EFABA4, gUnk_09EFAB68);
+    AnimInit(anim, gBosPcAcdAnims, gBosPcAcdFrames);
 
     if (work->shared->inEvent == 1) {
         work->acdOff = 1;
@@ -119,7 +119,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     work->z = 0;
 
     if (shared->unk_04 == 1) {
-        tbl = gUnk_09EFAB68;
+        tbl = gBosPcAcdFrames;
         ofs = AnimGetGfxIndex(&work->anim) + 5;
         gfx = tbl[ofs];
 
@@ -145,7 +145,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
                 return;
             }
 
-            tbl = gUnk_09EFAB68;
+            tbl = gBosPcAcdFrames;
             ofs = AnimGetGfxIndex(anim) + 5;
             gfx = tbl[ofs];
 

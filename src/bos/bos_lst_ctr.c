@@ -97,9 +97,9 @@ void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->x = arg->x;
     work->y = arg->y;
     work->z = arg->z;
-    work->tiles = LoadObjTiles(gUnk_09C5C704, 0x500);
-    work->palette = LoadObjPalette(gUnk_09D69594, 0x60);
-    AnimInit(&work->anim, gUnk_09EFAF50, gUnk_09EFAF24);
+    work->tiles = LoadObjTiles(gBosLstCtrTiles, 0x500);
+    work->palette = LoadObjPalette(gBosLstObjPalette, 0x60);
+    AnimInit(&work->anim, gBosLstCtrAnims, gBosLstCtrFrames);
     AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
 }
 

@@ -1031,18 +1031,18 @@ entries:
     address: 0x09ED308C
   eu:
     address: 0x09F88328
-- name: gBosPcArmSegmentFrames
+- name: gBosPcLayerFrames
   record: PcSpriteTable
-  items: [gBosPcArmSegmentFrame0, gBosPcArmSegmentFrame1, gBosPcArmSegmentFrame2, gBosPcArmSegmentFrame3, gBosPcArmSegmentFrame4, gBosPcArmSegmentFrame5, gBosPcArmSegmentFrame6, gBosPcArmSegmentFrame7, gBosPcArmSegmentFrame8, gBosPcArmSegmentFrame9, gBosPcArmSegmentFrame10, gBosPcArmSegmentFrame11, gBosPcArmSegmentFrame12, gBosPcArmSegmentFrame13, gBosPcArmSegmentFrame14, gBosPcArmSegmentFrame15, gBosPcArmSegmentFrame16, gBosPcArmSegmentFrame17, gBosPcArmSegmentFrame18, gBosPcArmSegmentFrame19, gBosPcArmSegmentFrame20, gBosPcArmSegmentFrame21, gBosPcArmSegmentFrame22, gBosPcArmSegmentFrame23, gBosPcArmSegmentFrame24, gBosPcArmSegmentFrame25, gBosPcArmSegmentFrame26, gBosPcArmSegmentFrame27, gBosPcArmSegmentFrame28, gBosPcArmSegmentFrame29, gBosPcArmSegmentFrame30, gBosPcArmSegmentFrame31, gBosPcArmSegmentFrame32, gBosPcArmSegmentFrame33, gBosPcArmSegmentFrame34, gBosPcArmSegmentFrame35, gBosPcArmSegmentFrame36, gBosPcArmSegmentFrame37, gBosPcArmSegmentFrame38, gBosPcArmSegmentFrame39]
+  items: [gBosPcLayerFrame0, gBosPcLayerFrame1, gBosPcLayerFrame2, gBosPcLayerFrame3, gBosPcLayerFrame4, gBosPcLayerFrame5, gBosPcLayerFrame6, gBosPcLayerFrame7, gBosPcLayerFrame8, gBosPcLayerFrame9, gBosPcLayerFrame10, gBosPcLayerFrame11, gBosPcLayerFrame12, gBosPcLayerFrame13, gBosPcLayerFrame14, gBosPcLayerFrame15, gBosPcLayerFrame16, gBosPcLayerFrame17, gBosPcLayerFrame18, gBosPcLayerFrame19, gBosPcLayerFrame20, gBosPcLayerFrame21, gBosPcLayerFrame22, gBosPcLayerFrame23, gBosPcLayerFrame24, gBosPcLayerFrame25, gBosPcLayerFrame26, gBosPcLayerFrame27, gBosPcLayerFrame28, gBosPcLayerFrame29, gBosPcLayerFrame30, gBosPcLayerFrame31, gBosPcLayerFrame32, gBosPcLayerFrame33, gBosPcLayerFrame34, gBosPcLayerFrame35, gBosPcLayerFrame36, gBosPcLayerFrame37, gBosPcLayerFrame38, gBosPcLayerFrame39]
   us:
     address: 0x09EFBB18
   jp:
     address: 0x09ED3090
   eu:
     address: 0x09F8832C
-- name: gBosPcArmSegmentAnims
+- name: gBosPcLayerAnims
   record: AnimTable
-  items: [gBosPcArmSegmentAnim0]
+  items: [gBosPcLayerAnim0]
   us:
     address: 0x09EFBBB8
   jp:
@@ -24551,7 +24551,7 @@ entries:
   eu:
     address: 0x09D00768
     size: 472
-- name: gBosPcArmSegmentFrame0
+- name: gBosPcLayerFrame0
   format: sprite_sheet
   tiles: gBosPcLayerTiles
   palette: gBosPcObjPalette
@@ -24559,168 +24559,168 @@ entries:
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gBosPcArmSegmentFrame0
+  - symbol: gBosPcLayerFrame0
     declare: false
     pieces:
     - [8x8, -4, -4, {tile: 0}]
-  - symbol: gBosPcArmSegmentFrame1
+  - symbol: gBosPcLayerFrame1
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 1}]
-  - symbol: gBosPcArmSegmentFrame2
+  - symbol: gBosPcLayerFrame2
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 5}]
-  - symbol: gBosPcArmSegmentFrame3
+  - symbol: gBosPcLayerFrame3
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 9}]
-  - symbol: gBosPcArmSegmentFrame4
+  - symbol: gBosPcLayerFrame4
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 13}]
-  - symbol: gBosPcArmSegmentFrame5
+  - symbol: gBosPcLayerFrame5
     declare: false
     pieces:
     - [8x8, -4, -4, {tile: 17}]
-  - symbol: gBosPcArmSegmentFrame6
+  - symbol: gBosPcLayerFrame6
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 18}]
-  - symbol: gBosPcArmSegmentFrame7
+  - symbol: gBosPcLayerFrame7
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 22}]
-  - symbol: gBosPcArmSegmentFrame8
+  - symbol: gBosPcLayerFrame8
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 26}]
-  - symbol: gBosPcArmSegmentFrame9
+  - symbol: gBosPcLayerFrame9
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 30}]
-  - symbol: gBosPcArmSegmentFrame10
+  - symbol: gBosPcLayerFrame10
     declare: false
     pieces:
     - [8x8, -4, -4, {tile: 34}]
-  - symbol: gBosPcArmSegmentFrame11
+  - symbol: gBosPcLayerFrame11
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 35}]
-  - symbol: gBosPcArmSegmentFrame12
+  - symbol: gBosPcLayerFrame12
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 39}]
-  - symbol: gBosPcArmSegmentFrame13
+  - symbol: gBosPcLayerFrame13
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 43}]
-  - symbol: gBosPcArmSegmentFrame14
+  - symbol: gBosPcLayerFrame14
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 47}]
-  - symbol: gBosPcArmSegmentFrame15
+  - symbol: gBosPcLayerFrame15
     declare: false
     pieces:
     - [8x8, -4, -4, {tile: 51}]
-  - symbol: gBosPcArmSegmentFrame16
+  - symbol: gBosPcLayerFrame16
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 52}]
-  - symbol: gBosPcArmSegmentFrame17
+  - symbol: gBosPcLayerFrame17
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 56}]
-  - symbol: gBosPcArmSegmentFrame18
+  - symbol: gBosPcLayerFrame18
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 60}]
-  - symbol: gBosPcArmSegmentFrame19
+  - symbol: gBosPcLayerFrame19
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 64}]
-  - symbol: gBosPcArmSegmentFrame20
+  - symbol: gBosPcLayerFrame20
     declare: false
     pieces:
     - [8x8, -4, -4, {tile: 68}]
-  - symbol: gBosPcArmSegmentFrame21
+  - symbol: gBosPcLayerFrame21
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 69}]
-  - symbol: gBosPcArmSegmentFrame22
+  - symbol: gBosPcLayerFrame22
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 73}]
-  - symbol: gBosPcArmSegmentFrame23
+  - symbol: gBosPcLayerFrame23
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 77}]
-  - symbol: gBosPcArmSegmentFrame24
+  - symbol: gBosPcLayerFrame24
     declare: false
     pieces:
     - [16x16, -8, -8, {tile: 81}]
-  - symbol: gBosPcArmSegmentFrame25
+  - symbol: gBosPcLayerFrame25
     declare: false
     pieces:
     - [8x8, -4, -3, {vflip: true, tile: 51}]
-  - symbol: gBosPcArmSegmentFrame26
+  - symbol: gBosPcLayerFrame26
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 52}]
-  - symbol: gBosPcArmSegmentFrame27
+  - symbol: gBosPcLayerFrame27
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 56}]
-  - symbol: gBosPcArmSegmentFrame28
+  - symbol: gBosPcLayerFrame28
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 60}]
-  - symbol: gBosPcArmSegmentFrame29
+  - symbol: gBosPcLayerFrame29
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 64}]
-  - symbol: gBosPcArmSegmentFrame30
+  - symbol: gBosPcLayerFrame30
     declare: false
     pieces:
     - [8x8, -4, -3, {vflip: true, tile: 34}]
-  - symbol: gBosPcArmSegmentFrame31
+  - symbol: gBosPcLayerFrame31
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 35}]
-  - symbol: gBosPcArmSegmentFrame32
+  - symbol: gBosPcLayerFrame32
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 39}]
-  - symbol: gBosPcArmSegmentFrame33
+  - symbol: gBosPcLayerFrame33
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 43}]
-  - symbol: gBosPcArmSegmentFrame34
+  - symbol: gBosPcLayerFrame34
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 47}]
-  - symbol: gBosPcArmSegmentFrame35
+  - symbol: gBosPcLayerFrame35
     declare: false
     pieces:
     - [8x8, -4, -3, {vflip: true, tile: 17}]
-  - symbol: gBosPcArmSegmentFrame36
+  - symbol: gBosPcLayerFrame36
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 18}]
-  - symbol: gBosPcArmSegmentFrame37
+  - symbol: gBosPcLayerFrame37
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 22}]
-  - symbol: gBosPcArmSegmentFrame38
+  - symbol: gBosPcLayerFrame38
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 26}]
-  - symbol: gBosPcArmSegmentFrame39
+  - symbol: gBosPcLayerFrame39
     declare: false
     pieces:
     - [16x16, -8, -7, {vflip: true, tile: 30}]
   animations:
-  - symbol: gBosPcArmSegmentAnim0
+  - symbol: gBosPcLayerAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 0]]
@@ -24733,7 +24733,7 @@ entries:
   eu:
     address: 0x09D00940
     size: 410
-- name: gBosPcHandFrame0
+- name: gBosPcStandaloneFrame0
   format: sprite_sheet
   tiles: gBosPcStandaloneTiles
   palette: gBosPcObjPalette
@@ -24741,108 +24741,108 @@ entries:
   anchor: [24, 24]
   columns: 8
   frames:
-  - symbol: gBosPcHandFrame0
+  - symbol: gBosPcStandaloneFrame0
     pieces:
     - [32x32, -24, -16, {tile: 0}]
     - [16x32, 8, -16, {tile: 16}]
     - [8x8, -16, -24, {tile: 24}]
-  - symbol: gBosPcHandFrame1
+  - symbol: gBosPcStandaloneFrame1
     pieces:
     - [16x32, 8, -24, {tile: 25}]
     - [32x32, -24, -8, {tile: 33}]
     - [32x8, -24, -16, {tile: 49}]
-  - symbol: gBosPcHandFrame2
+  - symbol: gBosPcStandaloneFrame2
     pieces:
     - [32x32, -8, -24, {tile: 53}]
     - [32x16, -24, 8, {tile: 69}]
     - [16x16, -24, -8, {tile: 77}]
-  - symbol: gBosPcHandFrame3
+  - symbol: gBosPcStandaloneFrame3
     pieces:
     - [32x32, -16, -8, {tile: 81}]
     - [32x16, -8, -24, {tile: 97}]
     - [8x8, 16, -8, {tile: 105}]
     - [8x16, -24, 0, {tile: 106}]
-  - symbol: gBosPcHandFrame4
+  - symbol: gBosPcStandaloneFrame4
     pieces:
     - [32x32, -16, -24, {tile: 108}]
     - [32x16, -16, 8, {tile: 124}]
     - [8x8, -24, 8, {tile: 132}]
-  - symbol: gBosPcHandFrame5
+  - symbol: gBosPcStandaloneFrame5
     pieces:
     - [32x32, -8, -8, {tile: 133}]
     - [16x32, -24, -24, {tile: 149}]
     - [16x16, -8, -24, {tile: 157}]
     - [8x16, -16, 8, {tile: 161}]
-  - symbol: gBosPcHandFrame6
+  - symbol: gBosPcStandaloneFrame6
     pieces:
     - [32x32, -8, -8, {tile: 163}]
     - [16x32, -24, -24, {tile: 179}]
     - [16x16, -8, -24, {tile: 187}]
-  - symbol: gBosPcHandFrame7
+  - symbol: gBosPcStandaloneFrame7
     pieces:
     - [32x32, -24, -16, {tile: 191}]
     - [16x32, 8, -8, {tile: 207}]
     - [8x8, 0, 15, {tile: 215}]
     - [8x8, -16, -24, {tile: 216}]
-  - symbol: gBosPcHandFrame8
+  - symbol: gBosPcStandaloneFrame8
     pieces:
     - [32x32, -24, -16, {tile: 217}]
     - [16x32, 8, -16, {tile: 233}]
     - [8x8, 8, -24, {tile: 241}]
-  - symbol: gBosPcHandFrame9
+  - symbol: gBosPcStandaloneFrame9
     pieces:
     - [32x32, -24, -8, {tile: 242}]
     - [16x32, 8, -16, {tile: 258}]
     - [16x16, -8, -24, {tile: 266}]
-  - symbol: gBosPcHandFrame10
+  - symbol: gBosPcStandaloneFrame10
     pieces:
     - [32x32, -24, -8, {tile: 270}]
     - [16x32, 8, -24, {tile: 286}]
     - [16x16, -8, -24, {tile: 294}]
-  - symbol: gBosPcHandFrame11
+  - symbol: gBosPcStandaloneFrame11
     pieces:
     - [32x32, -24, -8, {tile: 298}]
     - [32x16, -8, -24, {tile: 314}]
     - [16x16, 8, -8, {tile: 322}]
     - [8x16, -16, -24, {tile: 326}]
-  - symbol: gBosPcHandFrame12
+  - symbol: gBosPcStandaloneFrame12
     pieces:
     - [32x32, -16, -8, {tile: 328}]
     - [32x16, -16, -24, {tile: 344}]
     - [8x8, -24, -16, {tile: 352}]
-  - symbol: gBosPcHandFrame13
+  - symbol: gBosPcStandaloneFrame13
     pieces:
     - [32x32, -8, -8, {tile: 353}]
     - [32x16, -24, -24, {tile: 369}]
     - [16x16, -24, -8, {tile: 377}]
     - [8x16, 8, -24, {tile: 381}]
-  - symbol: gBosPcHandFrame14
+  - symbol: gBosPcStandaloneFrame14
     pieces:
     - [32x32, -8, -8, {tile: 383}]
     - [32x16, -24, -24, {tile: 399}]
     - [16x16, -24, -8, {tile: 407}]
-  - symbol: gBosPcHandFrame15
+  - symbol: gBosPcStandaloneFrame15
     pieces:
     - [32x32, -8, -8, {tile: 411}]
     - [16x32, -24, -16, {tile: 427}]
     - [16x16, -8, -24, {tile: 435}]
-  - symbol: gBosPcHandFrame16
+  - symbol: gBosPcStandaloneFrame16
     pieces:
     - [32x32, -16, -13, {tile: 439}]
     - [16x8, -8, -21, {tile: 455}]
     - [8x8, -24, -13, {tile: 457}]
-  - symbol: gBosPcHandFrame17
+  - symbol: gBosPcStandaloneFrame17
     pieces:
     - [32x32, -24, -14, {tile: 458}]
     - [16x32, 8, -14, {tile: 474}]
     - [32x8, -16, -22, {tile: 482}]
-  - symbol: gBosPcHandFrame18
+  - symbol: gBosPcStandaloneFrame18
     pieces:
     - [32x32, -24, -15, {tile: 486}]
     - [16x32, 8, -15, {tile: 502}]
     - [16x8, -8, -23, {tile: 510}]
   animations:
-  - symbol: gBosPcHandAnim0
+  - symbol: gBosPcStandaloneAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -24855,18 +24855,18 @@ entries:
   eu:
     address: 0x09CA2450
     size: 458
-- name: gBosPcHandFrames
+- name: gBosPcStandaloneFrames
   record: SpriteTable
-  items: [gBosPcHandFrame0, gBosPcHandFrame1, gBosPcHandFrame2, gBosPcHandFrame3, gBosPcHandFrame4, gBosPcHandFrame5, gBosPcHandFrame6, gBosPcHandFrame7, gBosPcHandFrame8, gBosPcHandFrame9, gBosPcHandFrame10, gBosPcHandFrame11, gBosPcHandFrame12, gBosPcHandFrame13, gBosPcHandFrame14, gBosPcHandFrame15, gBosPcHandFrame16, gBosPcHandFrame17, gBosPcHandFrame18]
+  items: [gBosPcStandaloneFrame0, gBosPcStandaloneFrame1, gBosPcStandaloneFrame2, gBosPcStandaloneFrame3, gBosPcStandaloneFrame4, gBosPcStandaloneFrame5, gBosPcStandaloneFrame6, gBosPcStandaloneFrame7, gBosPcStandaloneFrame8, gBosPcStandaloneFrame9, gBosPcStandaloneFrame10, gBosPcStandaloneFrame11, gBosPcStandaloneFrame12, gBosPcStandaloneFrame13, gBosPcStandaloneFrame14, gBosPcStandaloneFrame15, gBosPcStandaloneFrame16, gBosPcStandaloneFrame17, gBosPcStandaloneFrame18]
   us:
     address: 0x09EFAB18
   jp:
     address: 0x09ED2024
   eu:
     address: 0x09F86864
-- name: gBosPcHandAnims
+- name: gBosPcStandaloneAnims
   record: AnimTable
-  items: [gBosPcHandAnim0]
+  items: [gBosPcStandaloneAnim0]
   us:
     address: 0x09EFAB64
   jp:

@@ -53,27 +53,27 @@
 #include "sprite_palettes.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
-    { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry00Children, NULL, 0 },
-    { gUnk_08F61384, gJiminyEntry01Names, 17, 0, NULL, gJiminyEntry01Flags, 1 },
-    { gUnk_08F5E384, gJiminyEntry02Names, 7, 0, gJiminyEntry02Children, NULL, 0 },
-    { gUnk_08F5F384, gJiminyEntry03Names, 3, 0, gJiminyEntry03Children, NULL, 0 },
-    { gUnk_08F5E384, gJiminyEntry04Names, 17, 2, NULL, gJiminyEntry04Flags, 2 },
-    { gUnk_08F5E384, gJiminyEntry05Names, 14, 2, NULL, gJiminyEntry05Flags, 3 },
-    { gUnk_08F5E384, gJiminyEntry06Names, 7, 2, NULL, gJiminyEntry06Flags, 4 },
-    { gUnk_08F5E384, gJiminyEntry07Names, 7, 2, NULL, gJiminyEntry07Flags, 5 },
-    { gUnk_08F5E384, gJiminyEntry08Names, 49, 2, NULL, gJiminyEntry08Flags, 6 },
-    { gUnk_08F5E384, gJiminyEntry09Names, 26, 2, NULL, gJiminyEntry09Flags, 7 },
-    { gUnk_08F5E384, gJiminyEntry10Names, 1, 2, NULL, gJiminyEntry10Flags, 8 },
-    { gUnk_08F5F384, gJiminyEntry11Names, 25, 3, NULL, gJiminyEntry11Flags, 9 },
-    { gUnk_08F5F384, gJiminyEntry12Names, 40, 3, NULL, gJiminyEntry12Flags, 10 },
-    { gUnk_08F5F384, gJiminyEntry13Names, 35, 3, NULL, gJiminyEntry13Flags, 11 },
-    { gUnk_08F62384, gJiminyRootNames, 3, -1, gJiminyEntry14Children, NULL, 0 },
-    { gUnk_08F61384, gJiminyEntry15Names, 6, 14, NULL, gJiminyEntry15Flags, 12 },
-    { gUnk_08F5E384, gJiminyEntry16Names, 22, 14, NULL, gJiminyEntry16Flags, 13 },
-    { gUnk_08F5F384, gJiminyEntry03Names, 3, 14, gJiminyEntry17Children, NULL, 0 },
-    { gUnk_08F5F384, gJiminyEntry18Names, 14, 17, NULL, gJiminyEntry18Flags, 14 },
-    { gUnk_08F5F384, gJiminyEntry19Names, 6, 17, NULL, gJiminyEntry19Flags, 15 },
-    { gUnk_08F5F384, gJiminyEntry20Names, 33, 17, NULL, gJiminyEntry20Flags, 16 },
+    { gJiminyRootMap, gJiminyRootNames, 3, -1, gJiminyEntry00Children, NULL, 0 },
+    { gJiminyStoryListMap, gJiminyEntry01Names, 17, 0, NULL, gJiminyEntry01Flags, 1 },
+    { gJiminyCardListMap, gJiminyEntry02Names, 7, 0, gJiminyEntry02Children, NULL, 0 },
+    { gJiminyCharacterListMap, gJiminyEntry03Names, 3, 0, gJiminyEntry03Children, NULL, 0 },
+    { gJiminyCardListMap, gJiminyEntry04Names, 17, 2, NULL, gJiminyEntry04Flags, 2 },
+    { gJiminyCardListMap, gJiminyEntry05Names, 14, 2, NULL, gJiminyEntry05Flags, 3 },
+    { gJiminyCardListMap, gJiminyEntry06Names, 7, 2, NULL, gJiminyEntry06Flags, 4 },
+    { gJiminyCardListMap, gJiminyEntry07Names, 7, 2, NULL, gJiminyEntry07Flags, 5 },
+    { gJiminyCardListMap, gJiminyEntry08Names, 49, 2, NULL, gJiminyEntry08Flags, 6 },
+    { gJiminyCardListMap, gJiminyEntry09Names, 26, 2, NULL, gJiminyEntry09Flags, 7 },
+    { gJiminyCardListMap, gJiminyEntry10Names, 1, 2, NULL, gJiminyEntry10Flags, 8 },
+    { gJiminyCharacterListMap, gJiminyEntry11Names, 25, 3, NULL, gJiminyEntry11Flags, 9 },
+    { gJiminyCharacterListMap, gJiminyEntry12Names, 40, 3, NULL, gJiminyEntry12Flags, 10 },
+    { gJiminyCharacterListMap, gJiminyEntry13Names, 35, 3, NULL, gJiminyEntry13Flags, 11 },
+    { gJiminyRootMap, gJiminyRootNames, 3, -1, gJiminyEntry14Children, NULL, 0 },
+    { gJiminyStoryListMap, gJiminyEntry15Names, 6, 14, NULL, gJiminyEntry15Flags, 12 },
+    { gJiminyCardListMap, gJiminyEntry16Names, 22, 14, NULL, gJiminyEntry16Flags, 13 },
+    { gJiminyCharacterListMap, gJiminyEntry03Names, 3, 14, gJiminyEntry17Children, NULL, 0 },
+    { gJiminyCharacterListMap, gJiminyEntry18Names, 14, 17, NULL, gJiminyEntry18Flags, 14 },
+    { gJiminyCharacterListMap, gJiminyEntry19Names, 6, 17, NULL, gJiminyEntry19Flags, 15 },
+    { gJiminyCharacterListMap, gJiminyEntry20Names, 33, 17, NULL, gJiminyEntry20Flags, 16 },
 };
 
 #if defined(VERSION_US)
@@ -245,7 +245,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { gUnk_0815C10E, gJiminyPremiumCardsLines, 17, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C10E, gJiminyPremiumCardsLines, 17, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -316,7 +316,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnk_0815B1E4, gJiminyCharacterJasmineLines, 6, gJasmineF00Frame0, gJasminePalette, gJasmineF00Tiles, gCardNpcAl01Frame0, gCardNpcAl01Palette, gCardNpcAl01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { gUnk_0815B1F4, gJiminyCharacterIagoLines, 7, gUnk_09393218, gUnk_09618358, gUnk_0939322C, gCardNpcAl03Frame0, gCardNpcAl03Palette, gCardNpcAl03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { gUnk_0815AC7C, gJiminyCharacterJafarLines, 8, gJafferFl00Frame0, gJafferPalette, gJafferFl00Tiles, gCardNpcAl02Frame0, gCardNpcAl02Palette, gCardNpcAl02Tiles, NULL, NULL, NULL, 0, 0, -3, 19 },
-    { gUnk_0815B1FE, gJiminyCharacterJafarGenieLines, 7, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { gUnk_0815B1FE, gJiminyCharacterJafarGenieLines, 7, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { gUnk_0815A972, gJiminyCharacterJackLines, 7, gJackFl00Frame0, gJackPalette, gJackFl00Tiles, gCardSmn12Frame0, gJackPalette, gCardSmn12Tiles, NULL, NULL, NULL, 0, 0, 2, 11 },
     { gUnk_0815B21A, gJiminyCharacterSallyLines, 7, gSariFl00Frame0, gSariPalette, gSariFl00Tiles, gCardNpcNm01Frame0, gCardNpcNm01Palette, gCardNpcNm01Tiles, NULL, NULL, NULL, 0, 0, -2, 7 },
     { gUnk_0815B226, gJiminyCharacterDrFinkelsteinLines, 10, gFinklF00Frame0, gFinklPalette, gFinklF00Tiles, gCardNpcNm02Frame0, gCardNpcNm02Palette, gCardNpcNm02Tiles, NULL, NULL, NULL, 0, 0, -1, -7 },
@@ -334,7 +334,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnk_0815A990, gJiminyCharacterBeastLines, 10, gBeastFl00Frame0, gBeastPalette, gBeastFl00Tiles, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, NULL, NULL, NULL, 0, 0, -1, 10 },
     { gUnk_0815B34A, gJiminyCharacterBelleLines, 11, gBellFl00Frame0, gBellPalette, gBellFl00Tiles, gCardNpcPc01Frame0, gCardNpcPc01Palette, gCardNpcPc01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { gUnk_0815B356, gJiminyCharacterMaleficentLines, 11, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { gUnk_0815ACD6, gJiminyCharacterDragonMaleficentLines, 8, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gUnk_08F67B84, gUnk_08F6E124, gUnk_08EECEE4, 64, 5280, 0, 0 },
+    { gUnk_0815ACD6, gJiminyCharacterDragonMaleficentLines, 8, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gJiminyDragonMaleficentBgMap, gJiminyDragonMaleficentBgPalette, gJiminyDragonMaleficentBgTiles, 64, 5280, 0, 0 },
     { gUnk_0815B36C, gJiminyCharacterWinnieThePoohLines, 9, gPoohFl06Frame0, gPoohPalette, gPoohFl06Tiles, gCardNpcPo01Frame0, gCardNpcPo01Palette, gCardNpcPo01Tiles, NULL, NULL, NULL, 0, 0, -2, -6 },
     { gUnk_0815B38C, gJiminyCharacterPigletLines, 6, gUnk_09742FC4, gUnk_09849C18, gUnk_09742FD8, gCardNpcPo03Frame0, gCardNpcPo03Palette, gCardNpcPo03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { gUnk_0815B39A, gJiminyCharacterOwlLines, 6, gOwlFl00Frame0, gOwlPalette, gOwlFl00Tiles, gCardNpcPo06Frame0, gCardNpcPo06Palette, gCardNpcPo06Tiles, NULL, NULL, NULL, 0, 0, -3, -7 },
@@ -376,10 +376,10 @@ static const JiminyDetail sJiminyEntry13Details[35] = {
     { gUnk_0815ABE2, gJiminyHeartlessCreeperPlantLines, 8, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { gUnk_0815ABFE, gJiminyHeartlessTornadoStepLines, 9, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { gUnk_0815AC18, gJiminyHeartlessCrescendoLines, 6, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { gUnk_0815AC40, gJiminyHeartlessGuardArmorLines, 6, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { gUnk_0815ACB0, gJiminyHeartlessParasiteCageLines, 10, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { gUnk_0815AC64, gJiminyHeartlessTrickmasterLines, 8, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { gUnk_0815ACFA, gJiminyHeartlessDarksideLines, 7, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { gUnk_0815AC40, gJiminyHeartlessGuardArmorLines, 6, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { gUnk_0815ACB0, gJiminyHeartlessParasiteCageLines, 10, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { gUnk_0815AC64, gJiminyHeartlessTrickmasterLines, 8, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { gUnk_0815ACFA, gJiminyHeartlessDarksideLines, 7, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry18Details[14] = {
@@ -401,7 +401,7 @@ static const JiminyDetail sJiminyEntry18Details[14] = {
 
 static const JiminyDetail sJiminyEntry19Details[6] = {
     { gUnk_0815B356, gJiminyRikuCharacterMaleficentLines, 13, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { gUnk_0815B1FE, gJiminyRikuCharacterJafarGenieLines, 8, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { gUnk_0815B1FE, gJiminyRikuCharacterJafarGenieLines, 8, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { gUnk_0815AC88, gJiminyRikuCharacterUrsulaLines, 9, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, NULL, NULL, NULL, 0, 0, -3, 6 },
     { gUnk_0815AC58, gJiminyRikuCharacterHadesLines, 8, gHadesFl00Frame0, gHadesPalette, gHadesFl00Tiles, gCardBos11Frame0, gCardBos11Palette, gCardBos11Tiles, NULL, NULL, NULL, 0, 0, 0, 18 },
     { gUnk_0815AC96, gJiminyRikuCharacterOogieBoogieLines, 8, gBugiFl00Frame0, gBugiPalette, gBugiFl00Tiles, gCardBos02Frame0, gBoss02objPalette, gCardBos02Tiles, NULL, NULL, NULL, 0, 0, -4, 9 },
@@ -438,10 +438,10 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
     { gUnk_0815ABE2, gJiminyHeartlessCreeperPlantLines, 8, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { gUnk_0815ABFE, gJiminyHeartlessTornadoStepLines, 9, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { gUnk_0815AC18, gJiminyHeartlessCrescendoLines, 6, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { gUnk_0815AC40, gJiminyRikuHeartlessGuardArmorLines, 7, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { gUnk_0815ACB0, gJiminyRikuHeartlessParasiteCageLines, 7, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { gUnk_0815AC64, gJiminyRikuHeartlessTrickmasterLines, 8, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { gUnk_0815ACFA, gJiminyRikuHeartlessDarksideLines, 8, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { gUnk_0815AC40, gJiminyRikuHeartlessGuardArmorLines, 7, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { gUnk_0815ACB0, gJiminyRikuHeartlessParasiteCageLines, 7, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { gUnk_0815AC64, gJiminyRikuHeartlessTrickmasterLines, 8, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { gUnk_0815ACFA, gJiminyRikuHeartlessDarksideLines, 8, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 
 #elif defined(VERSION_JP)
@@ -614,7 +614,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { gUnkJp_0814FAB8, gJiminyPremiumCardsLines, 13, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FAB8, gJiminyPremiumCardsLines, 13, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -685,7 +685,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnkJp_0814ECDC, gJiminyCharacterJasmineLines, 5, gJasmineF00Frame0, gJasminePalette, gJasmineF00Tiles, gCardNpcAl01Frame0, gCardNpcAl01Palette, gCardNpcAl01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { gUnkJp_0814ECE8, gJiminyCharacterIagoLines, 5, gUnk_09393218, gUnk_09618358, gUnk_0939322C, gCardNpcAl03Frame0, gCardNpcAl03Palette, gCardNpcAl03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { gUnkJp_0814EC1C, gJiminyCharacterJafarLines, 6, gJafferFl00Frame0, gJafferPalette, gJafferFl00Tiles, gCardNpcAl02Frame0, gCardNpcAl02Palette, gCardNpcAl02Tiles, NULL, NULL, NULL, 0, 0, -3, 19 },
-    { gUnkJp_0814ECF4, gJiminyCharacterJafarGenieLines, 6, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { gUnkJp_0814ECF4, gJiminyCharacterJafarGenieLines, 6, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { gUnkJp_0814E8F4, gJiminyCharacterJackLines, 6, gJackFl00Frame0, gJackPalette, gJackFl00Tiles, gCardSmn12Frame0, gJackPalette, gCardSmn12Tiles, NULL, NULL, NULL, 0, 0, 2, 11 },
     { gUnkJp_0814ED00, gJiminyCharacterSallyLines, 6, gSariFl00Frame0, gSariPalette, gSariFl00Tiles, gCardNpcNm01Frame0, gCardNpcNm01Palette, gCardNpcNm01Tiles, NULL, NULL, NULL, 0, 0, -2, 7 },
     { gUnkJp_0814ED08, gJiminyCharacterDrFinkelsteinLines, 8, gFinklF00Frame0, gFinklPalette, gFinklF00Tiles, gCardNpcNm02Frame0, gCardNpcNm02Palette, gCardNpcNm02Tiles, NULL, NULL, NULL, 0, 0, -1, -7 },
@@ -703,7 +703,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { gUnkJp_0814E910, gJiminyCharacterBeastLines, 10, gBeastFl00Frame0, gBeastPalette, gBeastFl00Tiles, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, NULL, NULL, NULL, 0, 0, -1, 10 },
     { gUnkJp_0814EDE8, gJiminyCharacterBelleLines, 9, gBellFl00Frame0, gBellPalette, gBellFl00Tiles, gCardNpcPc01Frame0, gCardNpcPc01Palette, gCardNpcPc01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { gUnkJp_0814EDF0, gJiminyCharacterMaleficentLines, 9, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { gUnkJp_0814EC58, gJiminyCharacterDragonMaleficentLines, 5, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gUnk_08F67B84, gUnk_08F6E124, gUnk_08EECEE4, 64, 5280, 0, 0 },
+    { gUnkJp_0814EC58, gJiminyCharacterDragonMaleficentLines, 5, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gJiminyDragonMaleficentBgMap, gJiminyDragonMaleficentBgPalette, gJiminyDragonMaleficentBgTiles, 64, 5280, 0, 0 },
     { gUnkJp_0814EE00, gJiminyCharacterWinnieThePoohLines, 6, gPoohFl06Frame0, gPoohPalette, gPoohFl06Tiles, gCardNpcPo01Frame0, gCardNpcPo01Palette, gCardNpcPo01Tiles, NULL, NULL, NULL, 0, 0, -2, -6 },
     { gUnkJp_0814EE08, gJiminyCharacterPigletLines, 6, gUnk_09742FC4, gUnk_09849C18, gUnk_09742FD8, gCardNpcPo03Frame0, gCardNpcPo03Palette, gCardNpcPo03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { gUnkJp_0814EE14, gJiminyCharacterOwlLines, 5, gOwlFl00Frame0, gOwlPalette, gOwlFl00Tiles, gCardNpcPo06Frame0, gCardNpcPo06Palette, gCardNpcPo06Tiles, NULL, NULL, NULL, 0, 0, -3, -7 },
@@ -745,10 +745,10 @@ static const JiminyDetail sJiminyEntry13Details[35] = {
     { gUnkJp_0814EBAC, gJiminyHeartlessCreeperPlantLines, 7, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { gUnkJp_0814EBC0, gJiminyHeartlessTornadoStepLines, 6, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { gUnkJp_0814EBD4, gJiminyHeartlessCrescendoLines, 5, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { gUnkJp_0814EBF0, gJiminyHeartlessGuardArmorLines, 4, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { gUnkJp_0814EC3C, gJiminyHeartlessParasiteCageLines, 8, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { gUnkJp_0814EC08, gJiminyHeartlessTrickmasterLines, 6, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { gUnkJp_0814EC70, gJiminyHeartlessDarksideLines, 6, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { gUnkJp_0814EBF0, gJiminyHeartlessGuardArmorLines, 4, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { gUnkJp_0814EC3C, gJiminyHeartlessParasiteCageLines, 8, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { gUnkJp_0814EC08, gJiminyHeartlessTrickmasterLines, 6, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { gUnkJp_0814EC70, gJiminyHeartlessDarksideLines, 6, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry18Details[14] = {
@@ -770,7 +770,7 @@ static const JiminyDetail sJiminyEntry18Details[14] = {
 
 static const JiminyDetail sJiminyEntry19Details[6] = {
     { gUnkJp_0814EDF0, gJiminyRikuCharacterMaleficentLines, 6, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { gUnkJp_0814ECF4, gJiminyRikuCharacterJafarGenieLines, 6, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { gUnkJp_0814ECF4, gJiminyRikuCharacterJafarGenieLines, 6, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { gUnkJp_0814EC28, gJiminyRikuCharacterUrsulaLines, 6, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, NULL, NULL, NULL, 0, 0, -3, 6 },
     { gUnkJp_0814EC00, gJiminyRikuCharacterHadesLines, 5, gHadesFl00Frame0, gHadesPalette, gHadesFl00Tiles, gCardBos11Frame0, gCardBos11Palette, gCardBos11Tiles, NULL, NULL, NULL, 0, 0, 0, 18 },
     { gUnkJp_0814EC34, gJiminyRikuCharacterOogieBoogieLines, 5, gBugiFl00Frame0, gBugiPalette, gBugiFl00Tiles, gCardBos02Frame0, gBoss02objPalette, gCardBos02Tiles, NULL, NULL, NULL, 0, 0, -4, 9 },
@@ -807,10 +807,10 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
     { gUnkJp_0814EBAC, gJiminyHeartlessCreeperPlantLines, 7, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { gUnkJp_0814EBC0, gJiminyHeartlessTornadoStepLines, 6, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { gUnkJp_0814EBD4, gJiminyHeartlessCrescendoLines, 5, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { gUnkJp_0814EBF0, gJiminyRikuHeartlessGuardArmorLines, 4, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { gUnkJp_0814EC3C, gJiminyRikuHeartlessParasiteCageLines, 4, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { gUnkJp_0814EC08, gJiminyRikuHeartlessTrickmasterLines, 4, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { gUnkJp_0814EC70, gJiminyRikuHeartlessDarksideLines, 5, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { gUnkJp_0814EBF0, gJiminyRikuHeartlessGuardArmorLines, 4, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { gUnkJp_0814EC3C, gJiminyRikuHeartlessParasiteCageLines, 4, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { gUnkJp_0814EC08, gJiminyRikuHeartlessTrickmasterLines, 4, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { gUnkJp_0814EC70, gJiminyRikuHeartlessDarksideLines, 5, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 
 #elif defined(VERSION_EU)
@@ -983,7 +983,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { &gUnkEu_08895850, &gUnkEu_0885E1D8, gUnk_08C6AA58, gUnk_08F6E164, gUnk_08C6AA7E, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_08895850, &gUnkEu_0885E1D8, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -1054,7 +1054,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { &gUnkEu_08890678, &gUnkEu_088656A0, gJasmineF00Frame0, gJasminePalette, gJasmineF00Tiles, gCardNpcAl01Frame0, gCardNpcAl01Palette, gCardNpcAl01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { &gUnkEu_088906A8, &gUnkEu_088658CC, gUnk_09393218, gUnk_09618358, gUnk_0939322C, gCardNpcAl03Frame0, gCardNpcAl03Palette, gCardNpcAl03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { &gUnkEu_088902C8, &gUnkEu_08865BD8, gJafferFl00Frame0, gJafferPalette, gJafferFl00Tiles, gCardNpcAl02Frame0, gCardNpcAl02Palette, gCardNpcAl02Tiles, NULL, NULL, NULL, 0, 0, -3, 19 },
-    { &gUnkEu_08890700, &gUnkEu_08865EE4, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { &gUnkEu_08890700, &gUnkEu_08865EE4, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { &gUnkEu_0888F3F8, &gUnkEu_088661B0, gJackFl00Frame0, gJackPalette, gJackFl00Tiles, gCardSmn12Frame0, gJackPalette, gCardSmn12Tiles, NULL, NULL, NULL, 0, 0, 2, 11 },
     { &gUnkEu_08890734, &gUnkEu_08866440, gSariFl00Frame0, gSariPalette, gSariFl00Tiles, gCardNpcNm01Frame0, gCardNpcNm01Palette, gCardNpcNm01Tiles, NULL, NULL, NULL, 0, 0, -2, 7 },
     { &gUnkEu_0889079C, &gUnkEu_088668B0, gFinklF00Frame0, gFinklPalette, gFinklF00Tiles, gCardNpcNm02Frame0, gCardNpcNm02Palette, gCardNpcNm02Tiles, NULL, NULL, NULL, 0, 0, -1, -7 },
@@ -1072,7 +1072,7 @@ static const JiminyDetail sJiminyEntry12Details[40] = {
     { &gUnkEu_0888F484, &gUnkEu_0886B178, gBeastFl00Frame0, gBeastPalette, gBeastFl00Tiles, gCardSmn14Frame0, gBeastPalette, gCardSmn14Tiles, NULL, NULL, NULL, 0, 0, -1, 10 },
     { &gUnkEu_08890C04, &gUnkEu_0886B574, gBellFl00Frame0, gBellPalette, gBellFl00Tiles, gCardNpcPc01Frame0, gCardNpcPc01Palette, gCardNpcPc01Tiles, NULL, NULL, NULL, 0, 0, -4, 5 },
     { &gUnkEu_08890C48, &gUnkEu_0886B974, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { &gUnkEu_0889043C, &gUnkEu_0886BC2C, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gUnk_08F67B84, gUnk_08F6E124, gUnk_08EECEE4, 64, 5280, 0, 0 },
+    { &gUnkEu_0889043C, &gUnkEu_0886BC2C, NULL, NULL, NULL, gCardBos07Frame0, gCardBos07Palette, gCardBos07Tiles, gJiminyDragonMaleficentBgMap, gJiminyDragonMaleficentBgPalette, gJiminyDragonMaleficentBgTiles, 64, 5280, 0, 0 },
     { &gUnkEu_08890CA8, &gUnkEu_0886BF6C, gPoohFl06Frame0, gPoohPalette, gPoohFl06Tiles, gCardNpcPo01Frame0, gCardNpcPo01Palette, gCardNpcPo01Tiles, NULL, NULL, NULL, 0, 0, -2, -6 },
     { &gUnkEu_08890CE0, &gUnkEu_0886C1B8, gUnk_09742FC4, gUnk_09849C18, gUnk_09742FD8, gCardNpcPo03Frame0, gCardNpcPo03Palette, gCardNpcPo03Tiles, NULL, NULL, NULL, 0, 0, -2, -10 },
     { &gUnkEu_08890D14, &gUnkEu_0886C3D4, gOwlFl00Frame0, gOwlPalette, gOwlFl00Tiles, gCardNpcPo06Frame0, gCardNpcPo06Palette, gCardNpcPo06Tiles, NULL, NULL, NULL, 0, 0, -3, -7 },
@@ -1114,10 +1114,10 @@ static const JiminyDetail sJiminyEntry13Details[35] = {
     { &gUnkEu_088900CC, &gUnkEu_08873838, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { &gUnkEu_08890118, &gUnkEu_08873B94, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { &gUnkEu_0889015C, &gUnkEu_08873DB0, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { &gUnkEu_08890200, &gUnkEu_0886D198, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { &gUnkEu_088903AC, &gUnkEu_0886D560, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { &gUnkEu_08890290, &gUnkEu_0886D8F0, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { &gUnkEu_08890484, &gUnkEu_0886DBF8, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { &gUnkEu_08890200, &gUnkEu_0886D198, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { &gUnkEu_088903AC, &gUnkEu_0886D560, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { &gUnkEu_08890290, &gUnkEu_0886D8F0, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { &gUnkEu_08890484, &gUnkEu_0886DBF8, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry18Details[14] = {
@@ -1139,7 +1139,7 @@ static const JiminyDetail sJiminyEntry18Details[14] = {
 
 static const JiminyDetail sJiminyEntry19Details[6] = {
     { &gUnkEu_08890C48, &gUnkEu_088793FC, gMarefF00Frame0, gMarefPalette, gMarefF00Tiles, gCardNpcPc02Frame0, gCardNpcPc02Palette, gCardNpcPc02Tiles, NULL, NULL, NULL, 0, 0, -12, 16 },
-    { &gUnkEu_08890700, &gUnkEu_08879700, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gUnk_08F67384, gUnk_08F6E104, gUnk_08EEC044, 32, 3744, 0, 0 },
+    { &gUnkEu_08890700, &gUnkEu_08879700, NULL, NULL, NULL, gCardBos05Frame0, gCardBos05Palette, gCardBos05Tiles, gJiminyJafarGenieBgMap, gJiminyJafarGenieBgPalette, gJiminyJafarGenieBgTiles, 32, 3744, 0, 0 },
     { &gUnkEu_08890300, &gUnkEu_08879A6C, gArthraFl00Frame0, gArthraPalette, gArthraFl00Tiles, gCardBos06Frame0, gCardBos06Palette, gCardBos06Tiles, NULL, NULL, NULL, 0, 0, -3, 6 },
     { &gUnkEu_08890230, &gUnkEu_08879D24, gHadesFl00Frame0, gHadesPalette, gHadesFl00Tiles, gCardBos11Frame0, gCardBos11Palette, gCardBos11Tiles, NULL, NULL, NULL, 0, 0, 0, 18 },
     { &gUnkEu_08890354, &gUnkEu_08879FFC, gBugiFl00Frame0, gBugiPalette, gBugiFl00Tiles, gCardBos02Frame0, gBoss02objPalette, gCardBos02Tiles, NULL, NULL, NULL, 0, 0, -4, 9 },
@@ -1176,10 +1176,10 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
     { &gUnkEu_088900CC, &gUnkEu_08873838, gEmy8300Frame0, gEmy83Palette, gEmy8300Tiles, gCardEmy83Frame0, gEmy83Palette, gCardEmy83Tiles, NULL, NULL, NULL, 0, 0, 0, -4 },
     { &gUnkEu_08890118, &gUnkEu_08873B94, gEmy8100Frame0, gEmy81Palette, gEmy8100Tiles, gCardEmy81Frame0, gEmy81Palette, gCardEmy81Tiles, NULL, NULL, NULL, 0, 0, -2, -3 },
     { &gUnkEu_0889015C, &gUnkEu_08873DB0, gEmy8201Frame2, gEmy82Palette, gEmy8201Tiles, gCardEmy82Frame0, gEmy82Palette, gCardEmy82Tiles, NULL, NULL, NULL, 0, 0, 4, -10 },
-    { &gUnkEu_08890200, &gUnkEu_0887A4D8, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gUnk_08F65B84, gUnk_08F6E044, gUnk_08EE8E84, 32, 3488, 3, -3 },
-    { &gUnkEu_088903AC, &gUnkEu_0887A744, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gUnk_08F66B84, gUnk_08F6E0A4, gUnk_08EEAD44, 96, 4864, 0, 0 },
-    { &gUnkEu_08890290, &gUnkEu_0887AA0C, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gUnk_08F66384, gUnk_08F6E064, gUnk_08EE9C24, 64, 4384, 0, 3 },
-    { &gUnkEu_08890484, &gUnkEu_0887AD44, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gUnk_08F65384, gUnk_08F6E024, gUnk_08EE7A24, 32, 5216, 0, 0 },
+    { &gUnkEu_08890200, &gUnkEu_0887A4D8, NULL, NULL, NULL, gCardBos01Frame0, gBoss01objPalette, gCardBos01Tiles, gJiminyGuardArmorBgMap, gJiminyGuardArmorBgPalette, gJiminyGuardArmorBgTiles, 32, 3488, 3, -3 },
+    { &gUnkEu_088903AC, &gUnkEu_0887A744, NULL, NULL, NULL, gCardBos04Frame0, gBosPcBgPalette, gCardBos04Tiles, gJiminyParasiteCageBgMap, gJiminyParasiteCageBgPalette, gJiminyParasiteCageBgTiles, 96, 4864, 0, 0 },
+    { &gUnkEu_08890290, &gUnkEu_0887AA0C, NULL, NULL, NULL, gCardBos03Frame0, gBoss03objPalette, gCardBos03Tiles, gJiminyTrickmasterBgMap, gJiminyTrickmasterBgPalette, gJiminyTrickmasterBgTiles, 64, 4384, 0, 3 },
+    { &gUnkEu_08890484, &gUnkEu_0887AD44, NULL, NULL, NULL, gCardBos00Frame0, gBoss00ObjPalette, gCardBos00Tiles, gJiminyDarksideBgMap, gJiminyDarksideBgPalette, gJiminyDarksideBgTiles, 32, 5216, 0, 0 },
 };
 #endif
 
@@ -1517,53 +1517,53 @@ void mode_jiminy_0() {
     SetBgPriority(2, 0);
     SetBgPriority(3, 0);
 #ifdef VERSION_JP
-    LoadBgTiles(1, gUnk_08EE4A64, 0x2DA0);
+    LoadBgTiles(1, gJiminyBgTiles, 0x2DA0);
 #elif defined(VERSION_EU)
-    LoadBgTiles(1, gUnk_08EE4A64, 0x2F60);
+    LoadBgTiles(1, gJiminyBgTiles, 0x2F60);
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gUnkEu_08EF3EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesFrench, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gUnkEu_08EF4EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesSpanish, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gUnkEu_08EF5EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesItalian, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy(gUnkEu_08EF6EDC, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesGerman, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
         break;
     }
 #else
-    LoadBgTiles(1, gUnk_08EE4A64, 0x2E80);
+    LoadBgTiles(1, gJiminyBgTiles, 0x2E80);
 #endif
-    LoadBgPalette(1, gUnk_08F6DE24, 0x200);
-    LoadBgMap(1, gUnk_08F61B84, 0x800);
-    LoadBgMap(2, gUnk_08F60B84, 0x800);
+    LoadBgPalette(1, gJiminyBgPalette, 0x200);
+    LoadBgMap(1, gJiminyCoverMap, 0x800);
+    LoadBgMap(2, gJiminyMessageMap, 0x800);
 
 #ifdef VERSION_EU
     if (gLanguage == LANGUAGE_ENGLISH) {
-        sJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
+        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
     } else {
-        sJiminyWork->tiles = LoadObjTiles(gUnkEu_08C9A5E2, 0x1780);
+        sJiminyWork->tiles = LoadObjTiles(gJiminyTitleLocalizedTiles, 0x1780);
     }
 #else
-    sJiminyWork->tiles = LoadObjTiles(gUnk_08C69C9C, 0x880);
+    sJiminyWork->tiles = LoadObjTiles(gJiminyTitleTiles, 0x880);
 #endif
-    sJiminyWork->palette = LoadObjPalette(gUnk_08F6DD64, 0x20);
+    sJiminyWork->palette = LoadObjPalette(gJiminyTitlePalette, 0x20);
     FadeSetPaletteExcluded(sJiminyWork->palette->index + 0x10, 1);
-    sJiminyWork->tiles2 = LoadObjTiles(gUnk_08C6A88C, 0x40);
-    sJiminyWork->palette2 = LoadObjPalette(gUnk_08F6DDE4, 0x20);
-    sJiminyWork->palette3 = LoadObjPalette(gUnk_08F6DD84, 0x20);
-    sJiminyWork->tiles5 = LoadObjTiles(gUnk_08C6A54E, 0x140);
-    sJiminyWork->palette6 = LoadObjPalette(gUnk_08F6DDA4, 0x20);
+    sJiminyWork->tiles2 = LoadObjTiles(gJiminyBinderRingTiles, 0x40);
+    sJiminyWork->palette2 = LoadObjPalette(gJiminyBinderRingPalette, 0x20);
+    sJiminyWork->palette3 = LoadObjPalette(gJiminyRootListPalette, 0x20);
+    sJiminyWork->tiles5 = LoadObjTiles(gJiminyScrollArrowTiles, 0x140);
+    sJiminyWork->palette6 = LoadObjPalette(gJiminyScrollArrowPalette, 0x20);
 #ifdef VERSION_EU
-    sJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x340);
+    sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x340);
 #else
-    sJiminyWork->tiles6 = LoadObjTiles(gUnk_08C6A6B8, 0x1C0);
+    sJiminyWork->tiles6 = LoadObjTiles(gJiminyRowMarkTiles, 0x1C0);
 #endif
-    sJiminyWork->palette7 = LoadObjPalette(gUnk_08F6DDC4, 0x20);
+    sJiminyWork->palette7 = LoadObjPalette(gJiminyListPalette, 0x20);
     sJiminyWork->x3 = -0x8000;
     sJiminyWork->y3 = -0x800;
     sJiminyWork->y4 = 0xA000;
@@ -1586,9 +1586,9 @@ void mode_jiminy_0() {
     }
 
     if (!FadeIsActive()) {
-        sJiminyWork->tiles4 = AllocObjTiles(0x200, gUnk_08C6A958);
-        sJiminyWork->palette5 = LoadObjPalette(gUnk_08F6DE04, 0x20);
-        AnimInit(&sJiminyWork->anim2, gUnk_09EE2678, gUnk_09EE2668);
+        sJiminyWork->tiles4 = AllocObjTiles(0x200, gJiminyCursorTiles);
+        sJiminyWork->palette5 = LoadObjPalette(gJiminyCursorPalette, 0x20);
+        AnimInit(&sJiminyWork->anim2, gJiminyCursorAnims, gJiminyCursorFrames);
         AnimStart(&sJiminyWork->anim2, 2, ANIM_FLAG_LOOP);
     }
 
@@ -1684,7 +1684,7 @@ void mode_jiminy_1() {
             c = sJiminyWork->flags | JIMINY_FLAG_SHOW_TITLE;
             sJiminyWork->flags = c & ~JIMINY_FLAG_SHOW_CURSOR;
             sJiminyWork->steps = 16;
-            LoadBgMap(1, gUnk_08F61B84, 0x800);
+            LoadBgMap(1, gJiminyCoverMap, 0x800);
         }
 
         ApproachValue(&sJiminyWork->x3, -0x8000, sJiminyWork->steps);
@@ -1756,16 +1756,16 @@ void mode_jiminy_1() {
 
         if (sJiminyWork->entry == 0 || sJiminyWork->entry == 14) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                LoadBgMap(1, gUnk_08F62B84, 0x800);
+                LoadBgMap(1, gJiminyRikuRootMap, 0x800);
             } else {
                 LoadBgMap(1, e->map, 0x800);
             }
 
-            LoadObjPaletteBank(sJiminyWork->palette3->index, gUnk_08F6DD84);
+            LoadObjPaletteBank(sJiminyWork->palette3->index, gJiminyRootListPalette);
             JiminyOpenList(3, e->count, e->names, e->flags, e->children, 0x80, 0x40, 0x18);
         } else {
             LoadBgMap(1, e->map, 0x800);
-            LoadObjPaletteBank(sJiminyWork->palette3->index, gUnk_08F6DDC4);
+            LoadObjPaletteBank(sJiminyWork->palette3->index, gJiminyListPalette);
 #ifdef VERSION_JP
             JiminyOpenList(8, e->count, e->names, e->flags, e->children, 0x70, 0x1A, 0x10);
 #else
@@ -1868,38 +1868,38 @@ void mode_jiminy_1() {
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
-                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnk_08C6A6A4,
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame2,
                         sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_FRENCH:
-                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD82,
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame3,
                         sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_SPANISH:
-                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD8C,
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame4,
                         sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_ITALIAN:
-                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BD9C,
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame5,
                         sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 case LANGUAGE_GERMAN:
                 default:
-                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnkEu_08C9BDAC,
+                    DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame6,
                         sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
                     break;
                 }
 #else
-                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gUnk_08C6A6A4,
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i, gJiminyRowMarkFrame2,
                     sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
             case 2:
 #ifdef VERSION_EU
-                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gJiminyRowMarkFrame1,
                     sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0xFFFE);
 #else
-                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gUnk_08C6A69A,
+                DrawSprite(0xD9, sJiminyWork->listY + sJiminyWork->rowHeight * i - 2, gJiminyRowMarkFrame1,
                     sJiminyWork->tiles6, sJiminyWork->palette7, NULL, SPRITE_FLAG_BLEND, 0);
 #endif
                 break;
@@ -1912,94 +1912,94 @@ void mode_jiminy_1() {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C76, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleFrame3, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C04, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleFrame0, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnk_08C69C20, sJiminyWork->tiles,
+            DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleFrame1, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnk_08C69C54, sJiminyWork->tiles,
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleFrame2, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A538, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame3, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A4CC, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame0, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+            DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleLocalizedFrame1, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleLocalizedFrame2, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A564, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame5, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A554, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame4, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+            DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleLocalizedFrame1, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleLocalizedFrame2, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A590, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame7, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A57A, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame6, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+            DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleLocalizedFrame1, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleLocalizedFrame2, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
             break;
         case LANGUAGE_GERMAN:
         default:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5C2, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame9, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             } else {
-                DrawSprite(sJiminyWork->x3 >> 8, 0, gUnkEu_08C9A5A6, sJiminyWork->tiles,
+                DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleLocalizedFrame8, sJiminyWork->tiles,
                     sJiminyWork->palette, NULL, 0, 0);
             }
 
-            DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-            DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnkEu_08C9A4E2, sJiminyWork->tiles,
+            DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+            DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleLocalizedFrame1, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
-            DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnkEu_08C9A516, sJiminyWork->tiles,
+            DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleLocalizedFrame2, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 1);
             break;
         }
 #else
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C76, sJiminyWork->tiles,
+            DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleFrame3, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 0);
         } else {
-            DrawSprite(sJiminyWork->x3 >> 8, 0, gUnk_08C69C04, sJiminyWork->tiles,
+            DrawSprite(sJiminyWork->x3 >> 8, 0, gJiminyTitleFrame0, sJiminyWork->tiles,
                 sJiminyWork->palette, NULL, 0, 0);
         }
 
-        DrawSprite(0x58, 0x98, gUnk_08C6A878, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
-        DrawSprite(0x80, sJiminyWork->y3 >> 8, gUnk_08C69C20, sJiminyWork->tiles,
+        DrawSprite(0x58, 0x98, gJiminyBinderRingFrame0, sJiminyWork->tiles2, sJiminyWork->palette2, NULL, 0, 0);
+        DrawSprite(0x80, sJiminyWork->y3 >> 8, gJiminyTitleFrame1, sJiminyWork->tiles,
             sJiminyWork->palette, NULL, 0, 1);
-        DrawSprite(0x80, sJiminyWork->y4 >> 8, gUnk_08C69C54, sJiminyWork->tiles,
+        DrawSprite(0x80, sJiminyWork->y4 >> 8, gJiminyTitleFrame2, sJiminyWork->tiles,
             sJiminyWork->palette, NULL, 0, 1);
 #endif
     }
@@ -2007,12 +2007,12 @@ void mode_jiminy_1() {
     if (sJiminyWork->state == 7) {
         if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
             DrawSprite(sJiminyWork->x, sJiminyWork->y - ((sJiminyWork->frame >> 3) & 3),
-                gUnk_08C6A51C, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
+                gJiminyScrollArrowFrame0, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
         }
 
         if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
             DrawSprite(sJiminyWork->x2, sJiminyWork->y2 + ((sJiminyWork->frame >> 3) & 3),
-                gUnk_08C6A526, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
+                gJiminyScrollArrowFrame1, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
         }
 
         if (!FadeIsActive()) {
@@ -2022,7 +2022,7 @@ void mode_jiminy_1() {
                         AnimUpdate(&sJiminyWork->anim2), sJiminyWork->tiles4,
                         sJiminyWork->palette5, NULL, 0, 0);
                 } else {
-                    DrawSprite(sJiminyWork->x4 >> 8, sJiminyWork->y5 >> 8, gUnk_08C6A8F8,
+                    DrawSprite(sJiminyWork->x4 >> 8, sJiminyWork->y5 >> 8, gJiminyCursorFrame2,
                         sJiminyWork->tiles4, sJiminyWork->palette5, NULL, 0, 0);
 
                     if (sJiminyWork->moveDelay == 1) {
@@ -2250,8 +2250,8 @@ void JiminyDetailUpdate() {
 
         switch (sJiminyWork->detailLayout) {
         case 0:
-            map0 = gUnk_08F64384;
-            map1 = gUnk_08F60384;
+            map0 = gJiminyDetailOverlayMap;
+            map1 = gJiminyStoryDetailMap;
 #ifdef VERSION_JP
             sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
                 0x1800, sJiminyWork->detail->name);
@@ -2273,8 +2273,8 @@ void JiminyDetailUpdate() {
 #endif
             break;
         case 1:
-            map0 = gUnk_08F64384;
-            map1 = gUnk_08F5EB84;
+            map0 = gJiminyDetailOverlayMap;
+            map1 = gJiminyCardDetailMap;
 #ifdef VERSION_JP
             sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400,
                 0x1800, sJiminyWork->detail->name);
@@ -2297,8 +2297,8 @@ void JiminyDetailUpdate() {
             break;
         case 2:
         default:
-            map0 = gUnk_08F63384;
-            map1 = gUnk_08F5FB84;
+            map0 = gJiminyCharacterDetailOverlayMap;
+            map1 = gJiminyCharacterDetailMap;
 #ifdef VERSION_JP
             sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x2800,
                 0x1800, sJiminyWork->detail->name);
@@ -2346,10 +2346,10 @@ void JiminyDetailUpdate() {
         }
 
         if (sJiminyWork->detailLayout == 2) {
-            nameMap = gUnk_08F63B84;
+            nameMap = gJiminyCharacterNamePlateMap;
             dest = (u8*)GetBgScreenBase(0) + 0x8E;
         } else {
-            nameMap = gUnk_08F64B84;
+            nameMap = gJiminyNamePlateMap;
             dest = (u8*)GetBgScreenBase(0) + 0x80;
         }
 
@@ -2454,7 +2454,7 @@ void JiminyDetailUpdate() {
         }
 #endif
 
-        source = gUnk_08EE78E4;
+        source = gJiminyDigitTiles;
         SplitThreeDecimalDigits(selected + 1, digits);
         dest = (u8*)GetBgCharBase(0) + 0x20;
         RequestDma3Copy(source + digits[0] * 0x20, dest, 0x20);
@@ -2589,18 +2589,18 @@ void JiminyDetailUpdate() {
 
     if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_UP) {
         DrawSprite(sJiminyWork->x, sJiminyWork->y - ((sJiminyWork->frame >> 3) & 3) + 4,
-            gUnk_08C6A51C, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
+            gJiminyScrollArrowFrame0, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 
     if (sJiminyWork->flags & JIMINY_FLAG_SCROLL_DOWN) {
         DrawSprite(sJiminyWork->x2, sJiminyWork->y2 + ((sJiminyWork->frame >> 3) & 3),
-            gUnk_08C6A526, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
+            gJiminyScrollArrowFrame1, sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 
     if (sJiminyWork->detailIndex != sJiminyWork->nextDetail) {
-        DrawSprite(-((sJiminyWork->frame >> 3) & 3) + 0x9A, 5, gUnk_08C6A530,
+        DrawSprite(-((sJiminyWork->frame >> 3) & 3) + 0x9A, 5, gJiminyScrollArrowFrame2,
             sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
-        DrawSprite(0xE0 + ((sJiminyWork->frame >> 3) & 3), 5, gUnk_08C6A53A,
+        DrawSprite(0xE0 + ((sJiminyWork->frame >> 3) & 3), 5, gJiminyScrollArrowFrame3,
             sJiminyWork->tiles5, sJiminyWork->palette6, NULL, 0, 0);
     }
 

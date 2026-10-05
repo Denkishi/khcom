@@ -59,126 +59,126 @@ objects:
     data_start: 0x09F5D434
     data_end: 0x09F5D4D8
 entries:
-- name: gUnk_09EE2628
+- name: gJiminyTitleFrames
   record: SpriteTable
-  items: [gUnk_08C69C04, gUnk_08C69C20, gUnk_08C69C54, gUnk_08C69C76]
+  items: [gJiminyTitleFrame0, gJiminyTitleFrame1, gJiminyTitleFrame2, gJiminyTitleFrame3]
   us:
     address: 0x09EE2628
   jp:
     address: 0x09EBA0A4
   eu:
     address: 0x09F5D434
-- name: gUnk_09EE2638
+- name: gJiminyTitleAnims
   record: AnimTable
-  items: [gUnk_08C69C92]
+  items: [gJiminyTitleAnim0]
   us:
     address: 0x09EE2638
   jp:
     address: 0x09EBA0B4
   eu:
     address: 0x09F5D444
-- name: gUnkEu_09F5D448
+- name: gJiminyTitleLocalizedFrames
   record: SpriteTable
-  items: [gUnkEu_08C9A4CC, gUnkEu_08C9A4E2, gUnkEu_08C9A516, gUnkEu_08C9A538, gUnkEu_08C9A554, gUnkEu_08C9A564, gUnkEu_08C9A57A, gUnkEu_08C9A590, gUnkEu_08C9A5A6, gUnkEu_08C9A5C2]
+  items: [gJiminyTitleLocalizedFrame0, gJiminyTitleLocalizedFrame1, gJiminyTitleLocalizedFrame2, gJiminyTitleLocalizedFrame3, gJiminyTitleLocalizedFrame4, gJiminyTitleLocalizedFrame5, gJiminyTitleLocalizedFrame6, gJiminyTitleLocalizedFrame7, gJiminyTitleLocalizedFrame8, gJiminyTitleLocalizedFrame9]
   eu:
     address: 0x09F5D448
-- name: gUnkEu_09F5D470
+- name: gJiminyTitleLocalizedAnims
   record: AnimTable
-  items: [gUnkEu_08C9A5D8]
+  items: [gJiminyTitleLocalizedAnim0]
   eu:
     address: 0x09F5D470
-- name: gUnk_09EE263C
+- name: gJiminyScrollArrowFrames
   record: SpriteTable
-  items: [gUnk_08C6A51C, gUnk_08C6A526, gUnk_08C6A530, gUnk_08C6A53A]
+  items: [gJiminyScrollArrowFrame0, gJiminyScrollArrowFrame1, gJiminyScrollArrowFrame2, gJiminyScrollArrowFrame3]
   us:
     address: 0x09EE263C
   jp:
     address: 0x09EBA0B8
   eu:
     address: 0x09F5D494
-- name: gUnk_09EE264C
+- name: gJiminyScrollArrowAnims
   record: AnimTable
-  items: [gUnk_08C6A544]
+  items: [gJiminyScrollArrowAnim0]
   us:
     address: 0x09EE264C
   jp:
     address: 0x09EBA0C8
   eu:
     address: 0x09F5D4A4
-- name: gUnk_09EE2650
+- name: gJiminyRowMarkFrames
   record: SpriteTable
-  items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4]
+  items: [gJiminyRowMarkFrame0, gJiminyRowMarkFrame1, gJiminyRowMarkFrame2]
   us:
     address: 0x09EE2650
   jp:
     address: 0x09EBA0CC
   eu:
     address: 0x09F5D474
-    items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4, gUnkEu_08C9BD82, gUnkEu_08C9BD8C, gUnkEu_08C9BD9C, gUnkEu_08C9BDAC]
-- name: gUnk_09EE265C
+    items: [gJiminyRowMarkFrame0, gJiminyRowMarkFrame1, gJiminyRowMarkFrame2, gJiminyRowMarkFrame3, gJiminyRowMarkFrame4, gJiminyRowMarkFrame5, gJiminyRowMarkFrame6]
+- name: gJiminyRowMarkAnims
   record: AnimTable
-  items: [gUnk_08C6A6AE]
+  items: [gJiminyRowMarkAnim0]
   us:
     address: 0x09EE265C
   jp:
     address: 0x09EBA0D8
   eu:
     address: 0x09F5D490
-- name: gUnk_09EE2660
+- name: gJiminyBinderRingFrames
   record: SpriteTable
-  items: [gUnk_08C6A878]
+  items: [gJiminyBinderRingFrame0]
   us:
     address: 0x09EE2660
   jp:
     address: 0x09EBA0DC
   eu:
     address: 0x09F5D4A8
-- name: gUnk_09EE2664
+- name: gJiminyBinderRingAnims
   record: AnimTable
-  items: [gUnk_08C6A882]
+  items: [gJiminyBinderRingAnim0]
   us:
     address: 0x09EE2664
   jp:
     address: 0x09EBA0E0
   eu:
     address: 0x09F5D4AC
-- name: gUnk_09EE2668
+- name: gJiminyCursorFrames
   record: SpriteTable
-  items: [gUnk_08C6A8CC, gUnk_08C6A8E2, gUnk_08C6A8F8, gUnk_08C6A90E]
+  items: [gJiminyCursorFrame0, gJiminyCursorFrame1, gJiminyCursorFrame2, gJiminyCursorFrame3]
   us:
     address: 0x09EE2668
   jp:
     address: 0x09EBA0E4
   eu:
     address: 0x09F5D4B0
-- name: gUnk_09EE2678
+- name: gJiminyCursorAnims
   record: AnimTable
-  items: [gUnk_08C6A924, gUnk_08C6A92A, gUnk_08C6A930, gUnk_08C6A94E]
+  items: [gJiminyCursorAnim0, gJiminyCursorAnim1, gJiminyCursorAnim2, gJiminyCursorAnim3]
   us:
     address: 0x09EE2678
   jp:
     address: 0x09EBA0F4
   eu:
     address: 0x09F5D4C0
-- name: gUnk_09EE2688
+- name: gJiminyPremiumCardFrames
   record: SpriteTable
-  items: [gUnk_08C6AA58]
+  items: [gJiminyPremiumCardFrame0]
   us:
     address: 0x09EE2688
   jp:
     address: 0x09EBA104
   eu:
     address: 0x09F5D4D0
-- name: gUnk_09EE268C
+- name: gJiminyPremiumCardAnims
   record: AnimTable
-  items: [gUnk_08C6AA74]
+  items: [gJiminyPremiumCardAnim0]
   us:
     address: 0x09EE268C
   jp:
     address: 0x09EBA108
   eu:
     address: 0x09F5D4D4
-- name: gUnk_08EE4A64
+- name: gJiminyBgTiles
   format: tiles4
   us:
     address: 0x08EE4A64
@@ -189,7 +189,7 @@ entries:
   eu:
     address: 0x08EF0F7C
     size: 11904
-- name: gUnk_08EE78E4
+- name: gJiminyDigitTiles
   format: tiles4
   width: 2
   us:
@@ -201,7 +201,7 @@ entries:
   eu:
     address: 0x08EF7E3C
     size: 320
-- name: gUnk_08EE7A24
+- name: gJiminyDarksideBgTiles
   format: tiles4
   us:
     address: 0x08EE7A24
@@ -212,7 +212,7 @@ entries:
   eu:
     address: 0x08EF7F7C
     size: 5216
-- name: gUnk_08EE8E84
+- name: gJiminyGuardArmorBgTiles
   format: tiles4
   us:
     address: 0x08EE8E84
@@ -223,7 +223,7 @@ entries:
   eu:
     address: 0x08EF93DC
     size: 3488
-- name: gUnk_08EE9C24
+- name: gJiminyTrickmasterBgTiles
   format: tiles4
   us:
     address: 0x08EE9C24
@@ -234,7 +234,7 @@ entries:
   eu:
     address: 0x08EFA17C
     size: 4384
-- name: gUnk_08EEAD44
+- name: gJiminyParasiteCageBgTiles
   format: tiles4
   width: 8
   us:
@@ -246,7 +246,7 @@ entries:
   eu:
     address: 0x08EFB29C
     size: 4864
-- name: gUnk_08EEC044
+- name: gJiminyJafarGenieBgTiles
   format: tiles4
   us:
     address: 0x08EEC044
@@ -257,7 +257,7 @@ entries:
   eu:
     address: 0x08EFC59C
     size: 3744
-- name: gUnk_08EECEE4
+- name: gJiminyDragonMaleficentBgTiles
   format: tiles4
   us:
     address: 0x08EECEE4
@@ -268,36 +268,36 @@ entries:
   eu:
     address: 0x08EFD43C
     size: 5280
-- name: gUnkEu_08EF3DFC
+- name: gJiminyBgExtraTiles
   format: tiles4
   width: 7
   eu:
     address: 0x08EF3DFC
     size: 224
-- name: gUnkEu_08EF3EDC
+- name: gJiminyBgTitleTilesFrench
   format: tiles4
   width: 32
   eu:
     address: 0x08EF3EDC
     size: 4096
-- name: gUnkEu_08EF4EDC
+- name: gJiminyBgTitleTilesSpanish
   format: tiles4
   width: 32
   eu:
     address: 0x08EF4EDC
     size: 4096
-- name: gUnkEu_08EF5EDC
+- name: gJiminyBgTitleTilesItalian
   format: tiles4
   width: 32
   eu:
     address: 0x08EF5EDC
     size: 4096
-- name: gUnkEu_08EF6EDC
+- name: gJiminyBgTitleTilesGerman
   format: tiles4
   eu:
     address: 0x08EF6EDC
     size: 3936
-- name: gUnk_08F5E384
+- name: gJiminyCardListMap
   format: tilemap
   us:
     address: 0x08F5E384
@@ -308,7 +308,7 @@ entries:
   eu:
     address: 0x08F5D8DC
     size: 2048
-- name: gUnk_08F5EB84
+- name: gJiminyCardDetailMap
   format: tilemap
   us:
     address: 0x08F5EB84
@@ -319,7 +319,7 @@ entries:
   eu:
     address: 0x08F5E0DC
     size: 2048
-- name: gUnk_08F5F384
+- name: gJiminyCharacterListMap
   format: tilemap
   us:
     address: 0x08F5F384
@@ -330,7 +330,7 @@ entries:
   eu:
     address: 0x08F5E8DC
     size: 2048
-- name: gUnk_08F5FB84
+- name: gJiminyCharacterDetailMap
   format: tilemap
   us:
     address: 0x08F5FB84
@@ -341,7 +341,7 @@ entries:
   eu:
     address: 0x08F5F0DC
     size: 2048
-- name: gUnk_08F60384
+- name: gJiminyStoryDetailMap
   format: tilemap
   us:
     address: 0x08F60384
@@ -352,7 +352,7 @@ entries:
   eu:
     address: 0x08F610DC
     size: 2048
-- name: gUnk_08F60B84
+- name: gJiminyMessageMap
   format: tilemap
   us:
     address: 0x08F60B84
@@ -363,7 +363,7 @@ entries:
   eu:
     address: 0x08F5B8DC
     size: 2048
-- name: gUnk_08F61384
+- name: gJiminyStoryListMap
   format: tilemap
   us:
     address: 0x08F61384
@@ -374,7 +374,7 @@ entries:
   eu:
     address: 0x08F608DC
     size: 2048
-- name: gUnk_08F61B84
+- name: gJiminyCoverMap
   format: tilemap
   us:
     address: 0x08F61B84
@@ -385,7 +385,7 @@ entries:
   eu:
     address: 0x08F5C0DC
     size: 2048
-- name: gUnk_08F62384
+- name: gJiminyRootMap
   format: tilemap
   us:
     address: 0x08F62384
@@ -396,7 +396,7 @@ entries:
   eu:
     address: 0x08F5C8DC
     size: 2048
-- name: gUnk_08F62B84
+- name: gJiminyRikuRootMap
   format: tilemap
   us:
     address: 0x08F62B84
@@ -407,7 +407,7 @@ entries:
   eu:
     address: 0x08F5D0DC
     size: 2048
-- name: gUnk_08F63384
+- name: gJiminyCharacterDetailOverlayMap
   format: tilemap
   us:
     address: 0x08F63384
@@ -418,7 +418,7 @@ entries:
   eu:
     address: 0x08F5F8DC
     size: 2048
-- name: gUnk_08F63B84
+- name: gJiminyCharacterNamePlateMap
   format: tilemap
   us:
     address: 0x08F63B84
@@ -429,7 +429,7 @@ entries:
   eu:
     address: 0x08F600DC
     size: 2048
-- name: gUnk_08F64384
+- name: gJiminyDetailOverlayMap
   format: tilemap
   us:
     address: 0x08F64384
@@ -440,7 +440,7 @@ entries:
   eu:
     address: 0x08F5A8DC
     size: 2048
-- name: gUnk_08F64B84
+- name: gJiminyNamePlateMap
   format: tilemap
   us:
     address: 0x08F64B84
@@ -451,7 +451,7 @@ entries:
   eu:
     address: 0x08F5B0DC
     size: 2048
-- name: gUnk_08F65384
+- name: gJiminyDarksideBgMap
   format: tilemap
   us:
     address: 0x08F65384
@@ -462,7 +462,7 @@ entries:
   eu:
     address: 0x08F618DC
     size: 2048
-- name: gUnk_08F65B84
+- name: gJiminyGuardArmorBgMap
   format: tilemap
   us:
     address: 0x08F65B84
@@ -473,7 +473,7 @@ entries:
   eu:
     address: 0x08F620DC
     size: 2048
-- name: gUnk_08F66384
+- name: gJiminyTrickmasterBgMap
   format: tilemap
   us:
     address: 0x08F66384
@@ -484,7 +484,7 @@ entries:
   eu:
     address: 0x08F628DC
     size: 2048
-- name: gUnk_08F66B84
+- name: gJiminyParasiteCageBgMap
   format: tilemap
   us:
     address: 0x08F66B84
@@ -495,7 +495,7 @@ entries:
   eu:
     address: 0x08F630DC
     size: 2048
-- name: gUnk_08F67384
+- name: gJiminyJafarGenieBgMap
   format: tilemap
   us:
     address: 0x08F67384
@@ -506,7 +506,7 @@ entries:
   eu:
     address: 0x08F638DC
     size: 2048
-- name: gUnk_08F67B84
+- name: gJiminyDragonMaleficentBgMap
   format: tilemap
   us:
     address: 0x08F67B84
@@ -517,7 +517,7 @@ entries:
   eu:
     address: 0x08F640DC
     size: 2048
-- name: gUnk_08F6DD64
+- name: gJiminyTitlePalette
   format: palette
   us:
     address: 0x08F6DD64
@@ -528,7 +528,7 @@ entries:
   eu:
     address: 0x08F6A2BC
     size: 32
-- name: gUnk_08F6DD84
+- name: gJiminyRootListPalette
   format: palette
   us:
     address: 0x08F6DD84
@@ -539,7 +539,7 @@ entries:
   eu:
     address: 0x08F6A2DC
     size: 32
-- name: gUnk_08F6DDA4
+- name: gJiminyScrollArrowPalette
   format: palette
   us:
     address: 0x08F6DDA4
@@ -550,7 +550,7 @@ entries:
   eu:
     address: 0x08F6A2FC
     size: 32
-- name: gUnk_08F6DDC4
+- name: gJiminyListPalette
   format: palette
   us:
     address: 0x08F6DDC4
@@ -561,7 +561,7 @@ entries:
   eu:
     address: 0x08F6A31C
     size: 32
-- name: gUnk_08F6DDE4
+- name: gJiminyBinderRingPalette
   format: palette
   us:
     address: 0x08F6DDE4
@@ -572,7 +572,7 @@ entries:
   eu:
     address: 0x08F6A33C
     size: 32
-- name: gUnk_08F6DE04
+- name: gJiminyCursorPalette
   format: palette
   us:
     address: 0x08F6DE04
@@ -583,7 +583,7 @@ entries:
   eu:
     address: 0x08F6A35C
     size: 32
-- name: gUnk_08F6DE24
+- name: gJiminyBgPalette
   format: palette
   us:
     address: 0x08F6DE24
@@ -594,7 +594,7 @@ entries:
   eu:
     address: 0x08F6A37C
     size: 512
-- name: gUnk_08F6E024
+- name: gJiminyDarksideBgPalette
   format: palette
   us:
     address: 0x08F6E024
@@ -605,7 +605,7 @@ entries:
   eu:
     address: 0x08F6A57C
     size: 32
-- name: gUnk_08F6E044
+- name: gJiminyGuardArmorBgPalette
   format: palette
   us:
     address: 0x08F6E044
@@ -616,7 +616,7 @@ entries:
   eu:
     address: 0x08F6A59C
     size: 32
-- name: gUnk_08F6E064
+- name: gJiminyTrickmasterBgPalette
   format: palette
   us:
     address: 0x08F6E064
@@ -627,7 +627,7 @@ entries:
   eu:
     address: 0x08F6A5BC
     size: 64
-- name: gUnk_08F6E0A4
+- name: gJiminyParasiteCageBgPalette
   format: palette
   us:
     address: 0x08F6E0A4
@@ -638,7 +638,7 @@ entries:
   eu:
     address: 0x08F6A5FC
     size: 96
-- name: gUnk_08F6E104
+- name: gJiminyJafarGenieBgPalette
   format: palette
   us:
     address: 0x08F6E104
@@ -649,7 +649,7 @@ entries:
   eu:
     address: 0x08F6A65C
     size: 32
-- name: gUnk_08F6E124
+- name: gJiminyDragonMaleficentBgPalette
   format: palette
   us:
     address: 0x08F6E124
@@ -660,7 +660,7 @@ entries:
   eu:
     address: 0x08F6A67C
     size: 64
-- name: gUnk_08F6E164
+- name: gJiminyPremiumCardPalette
   format: palette
   us:
     address: 0x08F6E164
@@ -671,19 +671,19 @@ entries:
   eu:
     address: 0x08F6A6BC
     size: 32
-- name: gUnk_08C69C9C
+- name: gJiminyTitleTiles
   format: sprite_sheet
   cell: [240, 16]
   anchor: [128, 0]
   columns: 4
   frames:
-  - symbol: gUnk_08C69C04
+  - symbol: gJiminyTitleFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x16, 96, 0]
-  - symbol: gUnk_08C69C20
+  - symbol: gJiminyTitleFrame1
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -693,21 +693,21 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnk_08C69C54
+  - symbol: gJiminyTitleFrame2
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0, {fresh: true}]
     - [32x8, -64, 0, {fresh: true}]
     - [8x8, -32, 0]
     - [8x8, 104, 0]
-  - symbol: gUnk_08C69C76
+  - symbol: gJiminyTitleFrame3
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
     - [8x16, 80, 0, {fresh: true}]
   animations:
-  - symbol: gUnk_08C69C92
+  - symbol: gJiminyTitleAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -719,18 +719,18 @@ entries:
   eu:
     address: 0x08C99BB4
     size: 2328
-- name: gUnkEu_08C9A5E2
+- name: gJiminyTitleLocalizedTiles
   format: sprite_sheet
   cell: [240, 16]
   anchor: [128, 0]
   columns: 8
   frames:
-  - symbol: gUnkEu_08C9A4CC
+  - symbol: gJiminyTitleLocalizedFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [8x16, 64, 0]
-  - symbol: gUnkEu_08C9A4E2
+  - symbol: gJiminyTitleLocalizedFrame1
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -740,76 +740,76 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnkEu_08C9A516
+  - symbol: gJiminyTitleLocalizedFrame2
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0, {fresh: true}]
     - [32x8, -64, 0, {fresh: true}]
     - [8x8, -32, 0]
     - [8x8, 104, 0]
-  - symbol: gUnkEu_08C9A538
+  - symbol: gJiminyTitleLocalizedFrame3
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
     - [8x16, 80, 0]
-  - symbol: gUnkEu_08C9A554
+  - symbol: gJiminyTitleLocalizedFrame4
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
-  - symbol: gUnkEu_08C9A564
+  - symbol: gJiminyTitleLocalizedFrame5
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
-  - symbol: gUnkEu_08C9A57A
+  - symbol: gJiminyTitleLocalizedFrame6
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
-  - symbol: gUnkEu_08C9A590
+  - symbol: gJiminyTitleLocalizedFrame7
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [8x16, 64, 0]
-  - symbol: gUnkEu_08C9A5A6
+  - symbol: gJiminyTitleLocalizedFrame8
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x16, 96, 0, {fresh: true}]
-  - symbol: gUnkEu_08C9A5C2
+  - symbol: gJiminyTitleLocalizedFrame9
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
   animations:
-  - symbol: gUnkEu_08C9A5D8
+  - symbol: gJiminyTitleLocalizedAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08C9A4CC
     size: 6294
-- name: gUnk_08C6A54E
+- name: gJiminyScrollArrowTiles
   format: sprite_sheet
   cell: [16, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnk_08C6A51C
+  - symbol: gJiminyScrollArrowFrame0
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08C6A526
+  - symbol: gJiminyScrollArrowFrame1
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08C6A530
+  - symbol: gJiminyScrollArrowFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_08C6A53A
+  - symbol: gJiminyScrollArrowFrame3
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_08C6A544
+  - symbol: gJiminyScrollArrowAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -821,24 +821,24 @@ entries:
   eu:
     address: 0x08C9C100
     size: 370
-- name: gUnk_08C6A6B8
+- name: gJiminyRowMarkTiles
   format: sprite_sheet
   align: 4
   cell: [38, 16]
   anchor: [14, 0]
   columns: 7
   frames:
-  - symbol: gUnk_08C6A690
+  - symbol: gJiminyRowMarkFrame0
     pieces:
     - [32x16, -8, 0]
-  - symbol: gUnk_08C6A69A
+  - symbol: gJiminyRowMarkFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_08C6A6A4
+  - symbol: gJiminyRowMarkFrame2
     pieces:
     - [16x8, 0, 0]
   animations:
-  - symbol: gUnk_08C6A6AE
+  - symbol: gJiminyRowMarkAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -851,41 +851,41 @@ entries:
     address: 0x08C9BD64
     size: 924
     frames:
-    - symbol: gUnk_08C6A690
+    - symbol: gJiminyRowMarkFrame0
       pieces:
       - [32x16, -8, 0]
-    - symbol: gUnk_08C6A69A
+    - symbol: gJiminyRowMarkFrame1
       pieces:
       - [16x16, 0, 0]
-    - symbol: gUnk_08C6A6A4
+    - symbol: gJiminyRowMarkFrame2
       pieces:
       - [16x8, 0, 0]
-    - symbol: gUnkEu_08C9BD82
+    - symbol: gJiminyRowMarkFrame3
       pieces:
       - [32x8, -14, 0]
-    - symbol: gUnkEu_08C9BD8C
+    - symbol: gJiminyRowMarkFrame4
       pieces:
       - [16x8, -6, 0]
       - [8x8, 10, 0]
-    - symbol: gUnkEu_08C9BD9C
+    - symbol: gJiminyRowMarkFrame5
       pieces:
       - [16x8, -6, 0]
       - [8x8, 10, 0]
-    - symbol: gUnkEu_08C9BDAC
+    - symbol: gJiminyRowMarkFrame6
       pieces:
       - [16x8, 0, 0]
-- name: gUnk_08C6A88C
+- name: gJiminyBinderRingTiles
   format: sprite_sheet
   align: 4
   cell: [16, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_08C6A878
+  - symbol: gJiminyBinderRingFrame0
     pieces:
     - [16x8, 0, 0]
   animations:
-  - symbol: gUnk_08C6A882
+  - symbol: gJiminyBinderRingAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -897,43 +897,43 @@ entries:
   eu:
     address: 0x08C9C274
     size: 84
-- name: gUnk_08C6A958
+- name: gJiminyCursorTiles
   format: sprite_sheet
   cell: [27, 24]
   anchor: [3, 0]
   columns: 4
   frames:
-  - symbol: gUnk_08C6A8CC
+  - symbol: gJiminyCursorFrame0
     pieces:
     - [16x16, 8, 0, {hflip: true}]
     - [8x16, 0, 0, {hflip: true}]
     - [16x8, 1, 16, {hflip: true}]
-  - symbol: gUnk_08C6A8E2
+  - symbol: gJiminyCursorFrame1
     pieces:
     - [16x16, 7, 0, {hflip: true}]
     - [8x16, -1, 0, {hflip: true}]
     - [16x8, 0, 16, {hflip: true}]
-  - symbol: gUnk_08C6A8F8
+  - symbol: gJiminyCursorFrame2
     pieces:
     - [16x16, 6, 0, {hflip: true}]
     - [8x16, -2, 0, {hflip: true}]
     - [16x8, -1, 16, {hflip: true}]
-  - symbol: gUnk_08C6A90E
+  - symbol: gJiminyCursorFrame3
     pieces:
     - [16x16, 5, 0, {hflip: true}]
     - [8x16, -3, 0, {hflip: true}]
     - [16x8, -2, 16, {hflip: true}]
   animations:
-  - symbol: gUnk_08C6A924
+  - symbol: gJiminyCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: []
-  - symbol: gUnk_08C6A92A
+  - symbol: gJiminyCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: []
-  - symbol: gUnk_08C6A930
+  - symbol: gJiminyCursorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
-  - symbol: gUnk_08C6A94E
+  - symbol: gJiminyCursorAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -945,20 +945,20 @@ entries:
   eu:
     address: 0x08C9C2C8
     size: 396
-- name: gUnk_08C6AA7E
+- name: gJiminyPremiumCardTiles
   format: sprite_sheet
   cell: [64, 50]
   anchor: [32, 26]
   columns: 1
   frames:
-  - symbol: gUnk_08C6AA58
+  - symbol: gJiminyPremiumCardFrame0
     pieces:
     - [32x8, -32, -16]
     - [32x32, 0, -18]
     - [32x8, 0, -26]
     - [32x32, -32, -8]
   animations:
-  - symbol: gUnk_08C6AA74
+  - symbol: gJiminyPremiumCardAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:

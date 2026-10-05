@@ -342,70 +342,66 @@ entries:
   eu:
     address: 0x09F5BE08
     items: [gBtlEscapeAnim0]
-- name: gUnk_09EE11BC
+- name: gBtlPopCounterFrames
   record: SpriteTable
-  items: [gUnk_08B1ED5C]
+  items: [gBtlPopCounterFrame0]
   us:
     address: 0x09EE11BC
   jp:
     address: 0x09EB8C38
-  eu:
-    address: 0x09F5BE14
-- name: gUnk_09EE11C0
+- name: gBtlPopCounterAnims
   record: AnimTable
-  items: [gUnk_08B1ED6C]
+  items: [gBtlPopCounterAnim0]
   us:
     address: 0x09EE11C0
   jp:
     address: 0x09EB8C3C
-  eu:
-    address: 0x09F5BE18
-- name: gUnk_09EE11C4
+- name: gBtlPopMissFrames
   record: SpriteTable
-  items: [gUnk_08B1EEF8]
+  items: [gBtlPopMissFrame0]
   us:
     address: 0x09EE11C4
   jp:
     address: 0x09EB8C40
   eu:
-    address: 0x09F5BE1C
-- name: gUnk_09EE11C8
+    address: 0x09F5BE0C
+- name: gBtlPopMissAnims
   record: AnimTable
-  items: [gUnk_08B1EF02]
+  items: [gBtlPopMissAnim0]
   us:
     address: 0x09EE11C8
   jp:
     address: 0x09EB8C44
   eu:
-    address: 0x09F5BE20
-- name: gUnk_09EE11CC
+    address: 0x09F5BE10
+- name: gBtlPopGuardFrames
   record: SpriteTable
-  items: [gUnk_08B1F00C]
+  items: [gBtlPopGuardFrame0]
   us:
     address: 0x09EE11CC
   jp:
     address: 0x09EB8C48
   eu:
-    address: 0x09F5BE24
-- name: gUnk_09EE11D0
+    address: 0x09F5BE14
+- name: gBtlPopGuardAnims
   record: AnimTable
-  items: [gUnk_08B1F016]
+  items: [gBtlPopGuardAnim0]
   us:
     address: 0x09EE11D0
   jp:
     address: 0x09EB8C4C
   eu:
-    address: 0x09F5BE28
-- name: gUnk_09EE11D4
+    address: 0x09F5BE18
+- name: gBtlPopOverWriteFrames
   record: SpriteTable
-  items: [gUnk_08B1F120]
+  items: [gBtlPopOverWriteFrame0]
   us:
     address: 0x09EE11D4
   jp:
     address: 0x09EB8C50
-- name: gUnk_09EE11D8
+- name: gBtlPopOverWriteAnims
   record: AnimTable
-  items: [gUnk_08B1F130]
+  items: [gBtlPopOverWriteAnim0]
   us:
     address: 0x09EE11D8
   jp:
@@ -431,6 +427,8 @@ entries:
     address: 0x09EE11E4
   jp:
     address: 0x09EB8C60
+  eu:
+    address: 0x09F5BE1C
 - name: gBtlPopCardBreakAnims
   record: AnimTable
   items: [gBtlPopCardBreakAnim0]
@@ -438,6 +436,8 @@ entries:
     address: 0x09EE11E8
   jp:
     address: 0x09EB8C64
+  eu:
+    address: 0x09F5BE20
 - name: gBtlPopRecoverFrames
   record: SpriteTable
   items: [gBtlPopRecoverFrame0]
@@ -445,6 +445,8 @@ entries:
     address: 0x09EE11EC
   jp:
     address: 0x09EB8C68
+  eu:
+    address: 0x09F5BE24
 - name: gBtlPopRecoverAnims
   record: AnimTable
   items: [gBtlPopRecoverAnim0]
@@ -452,6 +454,8 @@ entries:
     address: 0x09EE11F0
   jp:
     address: 0x09EB8C6C
+  eu:
+    address: 0x09F5BE28
 - name: gBtlPopPercentFrames
   record: SpriteTable
   items: [gBtlPopPercentFrame0, gBtlPopPercentFrame1, gBtlPopPercentFrame2, gBtlPopPercentFrame3]
@@ -475,7 +479,6 @@ entries:
     address: 0x09EB8C90
   eu:
     address: 0x09F5BE2C
-    items: [gUnk_08B1F120, gBtlPopCbEnglishFrame1, gBtlPopCbEnglishFrame2, gBtlPopCbEnglishFrame3, gBtlPopCbEnglishFrame4, gBtlPopCbEnglishFrame5, gBtlPopCbEnglishFrame6, gBtlPopCbEnglishFrame7, gBtlPopCbEnglishFrame8, gBtlPopCbEnglishFrame9, gBtlPopCbEnglishFrame10]
 - name: gBtlPopCbAnims
   record: AnimTable
   items: [gBtlPopCbAnim0]
@@ -485,7 +488,6 @@ entries:
     address: 0x09EB8CBC
   eu:
     address: 0x09F5BE58
-    items: [gUnk_08B1F130]
 - name: gBPuraizuFrames
   record: SpriteTable
   items: [gBPuraizuFrame0, gBPuraizuFrame1, gBPuraizuFrame2, gBPuraizuFrame3, gBPuraizuFrame4, gBPuraizuFrame5, gBPuraizuFrame6, gBPuraizuFrame7, gBPuraizuFrame8, gBPuraizuFrame9, gBPuraizuFrame10, gBPuraizuFrame11, gBPuraizuFrame12]
@@ -720,16 +722,6 @@ entries:
     address: 0x09EB8F14
   eu:
     address: 0x09F5C0B0
-- name: gBtlPopMissEnglishFrames
-  record: SpriteTable
-  items: [gBtlPopMissEnglishFrame0]
-  eu:
-    address: 0x09F5BE0C
-- name: gBtlPopMissEnglishAnims
-  record: AnimTable
-  items: [gBtlPopMissEnglishAnim0]
-  eu:
-    address: 0x09F5BE10
 - name: sor1ll70
   format: sprite_sheet
   palette: sora
@@ -1327,19 +1319,19 @@ entries:
   eu:
     address: 0x089513D8
     size: 7344
-- name: gUnk_08B1F13A
+- name: gBtlPopOverWriteTiles
   format: sprite_sheet
   align: 4
-  cell: [64, 16]
-  anchor: [28, 8]
-  columns: 8
+  cell: [48, 16]
+  anchor: [24, 8]
+  columns: 1
   frames:
-  - symbol: gUnk_08B1F120
+  - symbol: gBtlPopOverWriteFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
   animations:
-  - symbol: gUnk_08B1F130
+  - symbol: gBtlPopOverWriteAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1348,55 +1340,6 @@ entries:
   jp:
     address: 0x08B12708
     size: 410
-  eu:
-    address: 0x08B4AB8C
-    size: 3130
-    symbol: gBtlPopCbEnglishTiles
-    frames:
-    - symbol: gUnk_08B1F120
-      pieces:
-      - [32x16, -24, -8]
-      - [16x16, 8, -8]
-    - symbol: gBtlPopCbEnglishFrame1
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame2
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame3
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame4
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame5
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame6
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame7
-      pieces:
-      - [32x16, 4, -8]
-      - [32x16, -28, -8]
-    - symbol: gBtlPopCbEnglishFrame8
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame9
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
-    - symbol: gBtlPopCbEnglishFrame10
-      pieces:
-      - [32x16, -28, -8]
-      - [32x16, 4, -8]
 - name: gBtlPopTimeBreakTiles
   format: sprite_sheet
   align: 4
@@ -1439,6 +1382,9 @@ entries:
   jp:
     address: 0x08B12A40
     size: 410
+  eu:
+    address: 0x08B4A894
+    size: 410
 - name: gBtlPopRecoverTiles
   format: sprite_sheet
   align: 4
@@ -1459,6 +1405,9 @@ entries:
     size: 346
   jp:
     address: 0x08B12BDC
+    size: 346
+  eu:
+    address: 0x08B4AA30
     size: 346
 - name: emy_83_11b
   format: sprite_sheet
@@ -1789,12 +1738,12 @@ entries:
   anchor: [24, 8]
   columns: 1
   frames:
-  - symbol: gUnk_08B1ED5C
+  - symbol: gBtlPopCounterFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
   animations:
-  - symbol: gUnk_08B1ED6C
+  - symbol: gBtlPopCounterAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1803,26 +1752,18 @@ entries:
   jp:
     address: 0x08B12344
     size: 410
-  eu:
-    address: 0x08B4A780
-    size: 276
-    symbol: gBtlPopGuardEnglishTiles
-    frames:
-    - symbol: gUnk_08B1ED5C
-      pieces:
-      - [32x16, -16, -8]
 - name: gBtlPopMissTiles
   format: sprite_sheet
   align: 4
-  cell: [48, 16]
-  anchor: [24, 8]
+  cell: [32, 16]
+  anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnk_08B1EEF8
+  - symbol: gBtlPopMissFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnk_08B1EF02
+  - symbol: gBtlPopMissAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1832,26 +1773,20 @@ entries:
     address: 0x08B124E0
     size: 276
   eu:
-    address: 0x08B4A894
-    size: 410
-    symbol: gBtlPopCardBreakEnglishTiles
-    frames:
-    - symbol: gUnk_08B1EEF8
-      pieces:
-      - [32x16, -24, -8]
-      - [16x16, 8, -8]
+    address: 0x08B4A66C
+    size: 276
 - name: gBtlPopGuardTiles
   format: sprite_sheet
   align: 4
-  cell: [40, 16]
-  anchor: [20, 8]
+  cell: [32, 16]
+  anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnk_08B1F00C
+  - symbol: gBtlPopGuardFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnk_08B1F016
+  - symbol: gBtlPopGuardAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1861,14 +1796,8 @@ entries:
     address: 0x08B125F4
     size: 276
   eu:
-    address: 0x08B4AA30
-    size: 346
-    symbol: gUnk_08B1F13A
-    frames:
-    - symbol: gUnk_08B1F00C
-      pieces:
-      - [32x16, -20, -8]
-      - [8x16, 12, -8]
+    address: 0x08B4A780
+    size: 276
 - name: gBtlPopPercentTiles
   format: sprite_sheet
   align: 4
@@ -1969,6 +1898,9 @@ entries:
     size: 3130
   jp:
     address: 0x08B13294
+    size: 3130
+  eu:
+    address: 0x08B4AB8C
     size: 3130
 - name: b_puraizu
   format: sprite_sheet
@@ -2754,23 +2686,6 @@ entries:
   eu:
     address: 0x08B4EB90
     size: 4070
-- name: gBtlPopMissEnglishTiles
-  format: sprite_sheet
-  align: 4
-  cell: [32, 16]
-  anchor: [16, 8]
-  columns: 1
-  frames:
-  - symbol: gBtlPopMissEnglishFrame0
-    pieces:
-    - [32x16, -16, -8]
-  animations:
-  - symbol: gBtlPopMissEnglishAnim0
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 4]]
-  eu:
-    address: 0x08B4A66C
-    size: 276
 - name: gBtlRikuDarkModePalette
   format: palette
   us:

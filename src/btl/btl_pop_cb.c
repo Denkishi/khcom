@@ -22,39 +22,39 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
     case LANGUAGE_FRENCH:
-        work->tiles = AllocObjTiles(0x200, gBtlPopCbEnglishTiles);
+        work->tiles = AllocObjTiles(0x200, gBtlPopCbTiles);
 
         switch (src->number) {
         case 0:
-            work->gfx = gBtlPopCbEnglishFrame1;
+            work->gfx = gBtlPopCbFrame1;
             break;
         case 1:
-            work->gfx = gBtlPopCbEnglishFrame2;
+            work->gfx = gBtlPopCbFrame2;
             break;
         case 2:
-            work->gfx = gBtlPopCbEnglishFrame3;
+            work->gfx = gBtlPopCbFrame3;
             break;
         case 3:
-            work->gfx = gBtlPopCbEnglishFrame4;
+            work->gfx = gBtlPopCbFrame4;
             break;
         case 4:
-            work->gfx = gBtlPopCbEnglishFrame5;
+            work->gfx = gBtlPopCbFrame5;
             break;
         case 5:
-            work->gfx = gBtlPopCbEnglishFrame6;
+            work->gfx = gBtlPopCbFrame6;
             break;
         case 6:
-            work->gfx = gBtlPopCbEnglishFrame7;
+            work->gfx = gBtlPopCbFrame7;
             break;
         case 7:
-            work->gfx = gBtlPopCbEnglishFrame8;
+            work->gfx = gBtlPopCbFrame8;
             break;
         case 8:
-            work->gfx = gBtlPopCbEnglishFrame9;
+            work->gfx = gBtlPopCbFrame9;
             break;
         case 9:
         default:
-            work->gfx = gBtlPopCbEnglishFrame10;
+            work->gfx = gBtlPopCbFrame10;
             break;
         }
 

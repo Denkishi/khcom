@@ -35,7 +35,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots3, 80);
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
 #ifdef VERSION_JP
-    work->textSlotCount2 = LoadTextSlots(common_text_326, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gUnkJp_0814FB18, work->textSlots2);
 #elif defined(VERSION_EU)
     work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895A00), work->textSlots2);
 #else
@@ -85,7 +85,7 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_JP
     work->textSlotCount = 0;
-    work->textSlotCount2 = LoadTextSlots(common_text_328, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gUnkJp_0814FB30, work->textSlots2);
 #elif defined(VERSION_EU)
     work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895AF4), work->textSlots2);
 #else

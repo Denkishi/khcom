@@ -618,54 +618,54 @@ entries:
   - gMapNameTextJp_0814F6E0
   - gMapNameTextJp_0814F6F4
   - {name: common_text_263, declare: false}
-  - {name: common_text_264, declare: false}
-  - {name: common_text_265, declare: false}
-  - {name: common_text_266, declare: false}
-  - {name: common_text_267, declare: false}
-  - {name: common_text_268, declare: false}
-  - {name: common_text_269, declare: false}
-  - {name: common_text_270, declare: false}
-  - {name: common_text_271, declare: false}
-  - {name: common_text_272, declare: false}
-  - {name: common_text_273, declare: false}
-  - {name: common_text_274, declare: false}
-  - {name: common_text_275, declare: false}
-  - {name: common_text_276, declare: false}
-  - {name: common_text_277, declare: false}
-  - {name: common_text_278, declare: false}
-  - {name: common_text_279, declare: false}
-  - {name: common_text_280, declare: false}
-  - {name: common_text_281, declare: false}
-  - {name: common_text_282, declare: false}
-  - {name: common_text_283, declare: false}
-  - {name: common_text_284, declare: false}
-  - {name: common_text_285, declare: false}
-  - {name: common_text_286, declare: false}
-  - {name: common_text_287, declare: false}
-  - {name: common_text_288, declare: false}
-  - {name: common_text_289, declare: false}
-  - {name: common_text_290, declare: false}
-  - {name: common_text_291, declare: false}
-  - {name: common_text_292, declare: false}
-  - {name: common_text_293, declare: false}
-  - {name: common_text_294, declare: false}
-  - {name: common_text_295, declare: false}
-  - {name: common_text_296, declare: false}
-  - {name: common_text_297, declare: false}
-  - {name: common_text_298, declare: false}
-  - {name: common_text_299, declare: false}
-  - {name: common_text_300, declare: false}
-  - {name: common_text_301, declare: false}
-  - {name: common_text_302, declare: false}
-  - {name: common_text_303, declare: false}
-  - {name: common_text_304, declare: false}
-  - {name: common_text_305, declare: false}
-  - {name: common_text_306, declare: false}
-  - {name: common_text_307, declare: false}
-  - {name: common_text_308, declare: false}
-  - {name: common_text_309, declare: false}
-  - {name: common_text_310, declare: false}
-  - {name: common_text_311, declare: false}
+  - {name: gUnkJp_0814F718, declare: false}
+  - {name: gUnkJp_0814F728, declare: false}
+  - {name: gUnkJp_0814F73C, declare: false}
+  - {name: gUnkJp_0814F744, declare: false}
+  - {name: gUnkJp_0814F754, declare: false}
+  - {name: gUnkJp_0814F768, declare: false}
+  - {name: gUnkJp_0814F77C, declare: false}
+  - {name: gUnkJp_0814F790, declare: false}
+  - {name: gUnkJp_0814F79C, declare: false}
+  - {name: gUnkJp_0814F7AC, declare: false}
+  - {name: gUnkJp_0814F7BC, declare: false}
+  - {name: gUnkJp_0814F7CC, declare: false}
+  - {name: gUnkJp_0814F7DC, declare: false}
+  - {name: gUnkJp_0814F7EC, declare: false}
+  - {name: gUnkJp_0814F7F8, declare: false}
+  - {name: gUnkJp_0814F800, declare: false}
+  - {name: gUnkJp_0814F80C, declare: false}
+  - {name: gUnkJp_0814F81C, declare: false}
+  - {name: gUnkJp_0814F828, declare: false}
+  - {name: gUnkJp_0814F834, declare: false}
+  - {name: gUnkJp_0814F844, declare: false}
+  - {name: gUnkJp_0814F854, declare: false}
+  - {name: gUnkJp_0814F864, declare: false}
+  - {name: gUnkJp_0814F874, declare: false}
+  - {name: gUnkJp_0814F880, declare: false}
+  - {name: gUnkJp_0814F894, declare: false}
+  - {name: gUnkJp_0814F8A8, declare: false}
+  - {name: gUnkJp_0814F8B8, declare: false}
+  - {name: gUnkJp_0814F8CC, declare: false}
+  - {name: gUnkJp_0814F8DC, declare: false}
+  - {name: gUnkJp_0814F8F0, declare: false}
+  - {name: gUnkJp_0814F900, declare: false}
+  - {name: gUnkJp_0814F910, declare: false}
+  - {name: gUnkJp_0814F920, declare: false}
+  - {name: gUnkJp_0814F930, declare: false}
+  - {name: gUnkJp_0814F938, declare: false}
+  - {name: gUnkJp_0814F944, declare: false}
+  - {name: gUnkJp_0814F950, declare: false}
+  - {name: gUnkJp_0814F960, declare: false}
+  - {name: gUnkJp_0814F974, declare: false}
+  - {name: gUnkJp_0814F988, declare: false}
+  - {name: gUnkJp_0814F99C, declare: false}
+  - {name: gUnkJp_0814F9B0, declare: false}
+  - {name: gUnkJp_0814F9C0, declare: false}
+  - {name: gUnkJp_0814F9CC, declare: false}
+  - {name: gUnkJp_0814F9D8, declare: false}
+  - {name: gUnkJp_0814F9EC, declare: false}
+  - {name: gUnkJp_0814F9F8, declare: false}
   - gUnkJp_0814FA0C
   - gUnkJp_0814FA18
   - gUnkJp_0814FA2C
@@ -680,12 +680,12 @@ entries:
   - {name: common_text_323, declare: false}
   - gUnk_0815C204
   - gUnkJp_0814FB0C
-  - common_text_326
-  - {name: common_text_327, declare: false}
-  - common_text_328
+  - gUnkJp_0814FB18
+  - {name: gUnkJp_0814FB28, declare: false}
+  - gUnkJp_0814FB30
   - common_text_329
   - gUnk_0814FBB0
   - gUnk_0814FBBC
   - {name: gUnk_0814FBD4, declare: false}
-  - {name: common_text_333, declare: false}
+  - {name: gUnkJp_0814FBE8, declare: false}
   - {name: gUnk_0815C1C2, declare: false}

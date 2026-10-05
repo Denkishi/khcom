@@ -417,9 +417,8 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #endif
     work->palette = LoadObjPalette(gUnk_0984A7F8, 0x20);
     TitleCopyToPaletteBuffer(work->palette->index + 16, gUnk_0984A7F8, 0x20);
-#ifdef VERSION_EU
     work->tiles2[0] = LoadObjTiles(gUnk_09771DC0, 0x280);
-
+#ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         work->tiles2[1] = LoadObjTiles(gUnk_097720F2, 0xB20);
@@ -443,7 +442,6 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 
     work->tiles2[2] = LoadObjTiles(gUnk_09772CC6, 0x700);
 #else
-    work->tiles2[0] = LoadObjTiles(gUnk_09771DC0, 0x280);
     work->tiles2[1] = LoadObjTiles(gUnk_097720F2, 0xB20);
 #ifdef VERSION_JP
     work->tiles2[2] = LoadObjTiles(gUnk_09772CC6, 0xE00);
@@ -483,12 +481,10 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     case 6:
         break;
     }
-
-    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
-    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescTitleLumichange, NULL);
 }
@@ -702,12 +698,10 @@ void task_title_menu_2(TitleMenuWork* work) {
     case 6:
         break;
     }
-
-    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
-    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #endif
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
         work->x = 120;

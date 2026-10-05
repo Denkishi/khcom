@@ -948,10 +948,8 @@ void mode_worldinspect_1() {
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
-#ifdef VERSION_EU
             LoadBgMap(0, gUnk_09A329DC, 0x500);
-#else
-            LoadBgMap(0, gUnk_09A329DC, 0x500);
+#ifndef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
 #endif
             sWorldInspectState = 2;

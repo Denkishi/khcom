@@ -1058,13 +1058,7 @@ CardDescriptionText* gCardKindDescriptions[98] = {
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044282,
 #endif
-#if defined(VERSION_EU)
     NULL,
-#elif defined(VERSION_JP)
-    NULL,
-#elif defined(VERSION_US)
-    NULL,
-#endif
 #if defined(VERSION_EU)
     &gCardKindDescription96,
 #elif defined(VERSION_JP)

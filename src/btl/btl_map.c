@@ -23,9 +23,6 @@ static const s8 sBtlMapShakePattern[32] = {
     4, 4, 4, 4, -4, -4, -4, -4, 3, 3, 3, 3, -3, -3, -3, -3, 2, 2, 2, 2, -2, -2, -2, -2, 1, 1, 1, 1, -1, -1, -1, -1,
 };
 
-#ifdef VERSION_EU
-#endif
-
 void task_btl_map_0(BtlMapWork* work) {
     SetBgSize(gBtlWork->mapBg, 0x8000);
 

@@ -4131,12 +4131,11 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
             }
 
             LoadBgTiles(1, gUnk_09D2B334, 0x45C0);
-            LoadBgPalette(1, gUnk_09D6CB74, 0x200);
 #else
             LoadBgTiles(1, gUnk_09D2B334, 0x7F40);
             LoadBgMap(1, gUnk_09D68A74, 0x800);
-            LoadBgPalette(1, gUnk_09D6CB74, 0x200);
 #endif
+            LoadBgPalette(1, gUnk_09D6CB74, 0x200);
         } else {
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -4159,12 +4158,11 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
             }
 
             LoadBgTiles(1, gUnk_09D25774, 0x5140);
-            LoadBgPalette(1, gUnk_09D6C974, 0x200);
 #else
             LoadBgTiles(1, gUnk_09D25774, 0x5BC0);
             LoadBgMap(1, gUnk_09D68274, 0x800);
-            LoadBgPalette(1, gUnk_09D6C974, 0x200);
 #endif
+            LoadBgPalette(1, gUnk_09D6C974, 0x200);
         }
 
         m4aSongNumStart(SONG_BGM_TITLE);

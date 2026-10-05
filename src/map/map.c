@@ -3904,8 +3904,6 @@ void Mode_MenuNew_0() {
     LoadBgPalette(3, gUnk_09991D44, 0x200);
     LoadBgMap(3, gUnk_0998CF44, 0x800);
     LoadBgPalette(1, gUnk_09991D44, 0x200);
-    LoadBgPalette(0, gUnk_09991D44, 0x200);
-    LoadBgMap(0, gUnk_0998F744, 0x800);
 #else
     LoadBgTiles(3, gUnk_099661A4, 0x1FA0);
     LoadBgPalette(3, gUnk_09991D44, 0x200);
@@ -3913,9 +3911,9 @@ void Mode_MenuNew_0() {
     LoadBgTiles(1, gUnk_099661A4, 0x1FA0);
     LoadBgPalette(1, gUnk_09991D44, 0x200);
     LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
+#endif
     LoadBgPalette(0, gUnk_09991D44, 0x200);
     LoadBgMap(0, gUnk_0998F744, 0x800);
-#endif
     SetBgScroll(0, 0, 0xFFFC);
     sNewGameSlotMenuWork->palette2 = LoadObjPalette(gUnk_09991D04, 32);
     sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
@@ -4524,7 +4522,6 @@ void Mode_MenuLoad_0(s32 arg) {
     LoadBgMap(3, gUnk_09986F44, 0x800);
     LoadBgPalette(2, gUnk_099919C4, 0x200);
     LoadBgMap(2, gUnk_09987744, 0x800);
-    LoadBgPalette(1, gUnk_099919C4, 0x200);
 #else
     LoadBgTiles(3, gUnk_09959A64, 0x8000);
     LoadBgPalette(3, gUnk_099919C4, 0x200);
@@ -4533,8 +4530,8 @@ void Mode_MenuLoad_0(s32 arg) {
     LoadBgPalette(2, gUnk_099919C4, 0x200);
     LoadBgMap(2, gUnk_09987744, 0x800);
     LoadBgTiles(1, gUnk_09959A64, 0x8000);
-    LoadBgPalette(1, gUnk_099919C4, 0x200);
 #endif
+    LoadBgPalette(1, gUnk_099919C4, 0x200);
 
     if (sLoadGameMenuWork->showRikuSlots != 0) {
         LoadBgMap(1, gUnk_09988F44, 0x800);
@@ -5222,8 +5219,8 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     FadeSetPaletteExcluded(15, 1);
     SetBgScroll(0, 0, 0);
     work->confirmPalette = LoadTextPalette(1);
-#ifdef VERSION_EU
     p1 = work->textSlots2;
+#ifdef VERSION_EU
     InitTextSlots(p1, 66);
     p2 = work->textSlots3;
     InitTextSlots(p2, 6);
@@ -5233,7 +5230,6 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), p2);
     work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), p3);
 #else
-    p1 = work->textSlots2;
     InitTextSlots(p1, 33);
     p2 = work->textSlots3;
     InitTextSlots(p2, 6);
@@ -5251,13 +5247,11 @@ void MapMenuFreeConfirm(MapMenuWork* work) {
     ReleaseObjPalette(work->confirmPalette);
 #ifdef VERSION_EU
     FreeTextSlots(work->textSlots2, 0x42);
-    FreeTextSlots(work->textSlots3, 6);
-    FreeTextSlots(work->textSlots4, 9);
 #else
     FreeTextSlots(work->textSlots2, 0x21);
+#endif
     FreeTextSlots(work->textSlots3, 6);
     FreeTextSlots(work->textSlots4, 9);
-#endif
 }
 
 s32 MapMenuOpen(MapMenuWork* work) {
@@ -5431,14 +5425,11 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
             work->tiles3 = LoadObjTiles(gUnkEu_0994AAB0, 0x200);
             break;
         }
-
-        work->x = -0x8000;
-        work->tiles4 = LoadObjTiles(gUnk_09957C24, 0x300);
 #else
         work->tiles3 = LoadObjTiles(gUnk_09957F24, 0x200);
+#endif
         work->x = -0x8000;
         work->tiles4 = LoadObjTiles(gUnk_09957C24, 0x300);
-#endif
         work->x2 = 0xF800;
         MapMenuSetPanelPalettesExcluded(work, 1);
         work->panelsVisible = 1;

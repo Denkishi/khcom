@@ -2754,11 +2754,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
         }
 
         if ((s16)work->stateTimer == 0) {
-#ifdef VERSION_EU
             SetBtlSoraAnimation(work, a->animId + work->swingSpeed, 0);
-#else
-            SetBtlSoraAnimation(work, a->animId + work->swingSpeed, 0);
-#endif
             m4aSongNumStart(a->swingSound);
             work->vz = a->vz;
 

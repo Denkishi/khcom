@@ -70,13 +70,11 @@ void WORLDSELECT_0() {
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
     SetBgSize(3, 0x8000);
-#ifdef VERSION_EU
     LoadBgTiles(3, gUnk_08C8C824, 0x4000);
     LoadBgPalette(3, gUnk_08F68A84, 0x100);
+#ifdef VERSION_EU
     LoadBgMapLz77(3, gUnk_08EF4384);
 #else
-    LoadBgTiles(3, gUnk_08C8C824, 0x4000);
-    LoadBgPalette(3, gUnk_08F68A84, 0x100);
     LoadBgMap(3, gUnk_08EF4384, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
@@ -447,9 +445,8 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
 
     switch (keys & (A_BUTTON | B_BUTTON | SELECT_BUTTON | START_BUTTON | L_BUTTON | R_BUTTON)) {
     case B_BUTTON:
-#ifdef VERSION_EU
         LoadBgTiles(1, gMapSelectTiles, 0x2020);
-
+#ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             break;
@@ -466,12 +463,8 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
             RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         }
-
-        LoadBgMap(1, gMapSelectMap, 0x800);
-#else
-        LoadBgTiles(1, gMapSelectTiles, 0x2020);
-        LoadBgMap(1, gMapSelectMap, 0x800);
 #endif
+        LoadBgMap(1, gMapSelectMap, 0x800);
         work->card->flags &= ~MAPCARD_FLAG_OPENED;
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectLeaveValues);
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -514,9 +507,8 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                     LoadMapSelectGridPalette(work->card->args.baseCardId, work);
 
                     if ((s8)LoadMapSelectValueCounts(work->card->args.baseCardId, work) == -1) {
-#ifdef VERSION_EU
                         LoadBgTiles(1, gMapSelectTiles, 0x2020);
-
+#ifdef VERSION_EU
                         switch (gLanguage) {
                         case LANGUAGE_ENGLISH:
                             break;
@@ -533,12 +525,8 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                             RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         }
-
-                        LoadBgMap(1, gMapSelectMap, 0x800);
-#else
-                        LoadBgTiles(1, gMapSelectTiles, 0x2020);
-                        LoadBgMap(1, gMapSelectMap, 0x800);
 #endif
+                        LoadBgMap(1, gMapSelectMap, 0x800);
                         work->card->flags &= ~MAPCARD_FLAG_OPENED;
                         RemoveMapSelectCard(work);
                         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectLeaveValues);

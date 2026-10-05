@@ -218,9 +218,8 @@ void LVUP_EFFECT_3(LevelUpEffectWork* work) {
     }
 }
 
-#ifdef VERSION_EU
 void* gLvupEffectSprites[6] = { gUnk_0908C640, gUnk_0908C64A, gUnk_0908C654, gUnk_0908C65E, gUnk_0908C668, gUnk_0908C672 };
-
+#ifdef VERSION_EU
 static void* sLvupEffectSpritesFrench[6] = { gUnkEu_0916F94C, gUnkEu_0916F956, gUnkEu_0916F960, gUnkEu_0916F96A, gUnkEu_0916F974, gUnkEu_0916F97E };
 
 static void* sLvupEffectSpritesSpanish[6] = { gUnkEu_0916FD84, gUnkEu_0916FD8E, gUnkEu_0916FD98, gUnkEu_0916FDA2, gUnkEu_0916FDAC, gUnkEu_0916FDB6 };
@@ -230,8 +229,6 @@ static void* sLvupEffectSpritesItalian[6] = { gUnkEu_091701BC, gUnkEu_091701C6, 
 static void* sLvupEffectSpritesGerman[6] = { gUnkEu_091705F4, gUnkEu_091705FE, gUnkEu_09170608, gUnkEu_09170612, gUnkEu_0917061C, gUnkEu_09170626 };
 
 void** gLvupEffectSpritesByLanguage[5] = { gLvupEffectSprites, sLvupEffectSpritesFrench, sLvupEffectSpritesGerman, sLvupEffectSpritesItalian, sLvupEffectSpritesSpanish };
-#else
-void* gLvupEffectSprites[6] = { gUnk_0908C640, gUnk_0908C64A, gUnk_0908C654, gUnk_0908C65E, gUnk_0908C668, gUnk_0908C672 };
 #endif
 
 TaskDesc gTaskDescLVUPEFFECT = {

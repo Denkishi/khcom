@@ -1267,13 +1267,12 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     SetupBg(0, 0, 31, 0);
     SetupBg(1, 0, 29, 0);
     SetupBg(2, 0, 28, 0);
-    SetupBg(3, 0, 30, 0);
 #else
     SetupBg(0, 3, 31, 0);
     SetupBg(1, 2, 23, 0);
     SetupBg(2, 1, 15, 0);
-    SetupBg(3, 0, 30, 0);
 #endif
+    SetupBg(3, 0, 30, 0);
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
     SetBgPriority(2, 2);
@@ -1292,11 +1291,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     work->x = sDeckTabPointerX[0] << 8;
     work->y = sDeckTabPointerY[0] << 8;
     work->handFlags = 0;
-#ifdef VERSION_EU
     work->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
-#else
-    work->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
-#endif
     work->palette = LoadObjPalette(gUnk_09614418, 32);
 #ifdef VERSION_EU
     work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
@@ -4934,10 +4929,10 @@ void DrawDeckCardCount(u8 deck) {
 }
 
 void DrawDeckEquipMarker(u8 mode) {
-#ifdef VERSION_EU
     u8* bg0;
     u8* bg1;
     u8* bg2;
+#ifdef VERSION_EU
     u8* src;
 
     bg0 = (u8*)GetBgCharBase(0) + 0x2D80;
@@ -4963,10 +4958,6 @@ void DrawDeckEquipMarker(u8 mode) {
         break;
     }
 #else
-    u8* bg0;
-    u8* bg1;
-    u8* bg2;
-
     bg0 = GetBgCharBase(0);
     bg1 = GetBgCharBase(1);
     bg2 = GetBgCharBase(2);

@@ -2429,7 +2429,6 @@ void JiminyDetailUpdate() {
             case 10: nameMap += 0x10; break;
             case 11: nameMap += 0xD0; break;
             case 12: nameMap += 0xD0; break;
-            case 13: nameMap += 0xD0; break;
 #else
             case 7: nameMap += 0x240; break;
             case 8: nameMap += 0x2A0; break;
@@ -2437,8 +2436,8 @@ void JiminyDetailUpdate() {
             case 10: nameMap += 0x360; break;
             case 11: nameMap += 0x10; break;
             case 12: nameMap += 0x70; break;
-            case 13: nameMap += 0xD0; break;
 #endif
+            case 13: nameMap += 0xD0; break;
             default: nameMap += 0x130; break;
             }
         }

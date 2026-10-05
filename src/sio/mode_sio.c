@@ -110,8 +110,6 @@ extern const SioAnimDef gSioChgCardAnimDefs[3];
 #ifdef VERSION_EU
 #include "link_deck_names.inc"
 #endif
-#ifdef VERSION_EU
-#endif
 extern SioWorldEntry gSioWorldEntries[];
 extern s8 gSioHandicapMarkerX[];
 extern u16 gSioHandicapAp[];

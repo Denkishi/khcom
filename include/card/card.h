@@ -2166,10 +2166,6 @@ extern Mode gModeTextCheck;
 extern Mode gModeDeckExchange;
 #endif
 
-#ifndef VERSION_EU
-#endif
-#ifdef VERSION_EU
-#endif
 extern u8 gBossCardRequestValue;
 extern u8 gBossCardRequest;
 extern Deck gDecks[3];

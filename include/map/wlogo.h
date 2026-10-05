@@ -88,8 +88,8 @@ typedef struct WlogoBksWork {
     u8 state;
     u16 timer;
     u16 paletteStep;
-    u8 unk_006;
-    u16 unk_008;
+    u8 tileFrame;
+    u16 tileFrameTimer;
     u8 blend;
     void* tiles;
     void* palette;
@@ -132,8 +132,8 @@ typedef struct WlogoTtLineWork {
 typedef struct WlogoPooWork {
     u8 state;
     u16 timer;
-    u8 unk_004;
-    u16 unk_006;
+    u8 tileFrame;
+    u16 tileFrameTimer;
     u8 blend;
     u8 unk_009[0x3];
 } WlogoPooWork;
@@ -354,14 +354,14 @@ typedef struct WlogoHwtObjWork {
     s32 ay;
     u16 step;
     u16 stepTimer;
-    u8 unk_040;
+    u8 done;
     s32 unk_044;
     u8 unk_048[0x2];
     u8 id;
 } WlogoHwtObjWork;
 
 typedef struct WlogoHwtWork {
-    u16 unk_000;
+    u16 paletteStep;
     u16 timer;
     u8 state;
     u8 blend;

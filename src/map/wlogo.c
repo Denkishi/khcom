@@ -178,7 +178,7 @@ void task_wlogo_hwt_0(WlogoHwtWork* work) {
     LoadBgPalette(0, gWlogoHwtPalette, 0x20);
     LoadBgTiles(0, gWlogoHwtTiles, 0xC20);
     LoadBgMap(0, gWlogoHwtMap, 0x800);
-    work->unk_000 = 0;
+    work->paletteStep = 0;
     work->timer = 0;
     work->state = 0;
     work->blend = 0;
@@ -299,7 +299,7 @@ void task_wlogo_hwt_obj_0(WlogoHwtObjWork* work, s32 arg) {
     work->unk_044 = gWlogoHwtObjStarts[work->id].unk_08;
     work->step = 0;
     work->stepTimer = 0;
-    work->unk_040 = 0;
+    work->done = 0;
 }
 
 u8 task_wlogo_hwt_obj_1(WlogoHwtObjWork* work) {
@@ -1524,8 +1524,8 @@ void task_wlogo_poo_0(WlogoPooWork* work) {
     work->timer = 0;
     work->state = 0;
     work->blend = 0;
-    work->unk_004 = 0;
-    work->unk_006 = 0;
+    work->tileFrame = 0;
+    work->tileFrameTimer = 0;
     SetBgBlend(0, 16, 0);
     TaskPoolInit(&sWlogoPooTaskPool, 4);
 }
@@ -2113,8 +2113,8 @@ void task_wlogo_bks_0(WlogoBksWork* work) {
     work->paletteStep = 0;
     work->state = 0;
     work->blend = 0;
-    work->unk_006 = 0;
-    work->unk_008 = 0;
+    work->tileFrame = 0;
+    work->tileFrameTimer = 0;
     work->frameCount = 0;
     work->visible = 0;
     SetBgBlend(0, 16 - work->blend, work->blend);

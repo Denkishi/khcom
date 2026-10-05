@@ -490,15 +490,6 @@ TARGET_ANCHORS = {
 
 TARGET_ONLY_SYMBOLS = {
     "eu": {
-        "gUnkEu_099AABA4": 0x099AABA4,
-        "gUnkEu_099AABBA": 0x099AABBA,
-        "gUnkEu_099AABEE": 0x099AABEE,
-        "gUnkEu_099A421C": 0x099A421C,
-        "gUnkEu_099A4238": 0x099A4238,
-        "gUnkEu_099A426C": 0x099A426C,
-        "gUnkEu_099AEE98": 0x099AEE98,
-        "gUnkEu_092D1F74": 0x092D1F74,
-        "gUnkEu_099AAC2C": 0x099AAC2C,
         "gHadesBSmallCardPalette": 0x95468e4,
         "gRikuBSmallCardPalette": 0x9546924,
         "gRikuCSmallCardPalette": 0x9546924,

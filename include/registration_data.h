@@ -354,10 +354,4 @@ extern Mode gModeSioDbgFlg;
 extern TaskDesc gTaskDescFrdPoohEu;
 #endif
 
-#ifdef VERSION_EU
-extern u16 gUnkEu_099A421C[];
-extern u16 gUnkEu_099A4238[];
-extern u16 gUnkEu_099A426C[];
-#endif
-
 #endif

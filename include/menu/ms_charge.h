@@ -24,9 +24,4 @@ void mode_ms_charge_1();
 void mode_ms_charge_2();
 void mode_ms_charge_0();
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_092D1F74[];
-extern u8 gUnkEu_099AEE98[];
-#endif
-
 #endif

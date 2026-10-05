@@ -599,9 +599,9 @@ void WorldInspectDraw() {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        first = gUnkEu_099A421C;
-        second = gUnkEu_099A4238;
-        third = gUnkEu_099A426C;
+        first = gWorldInspectBarFrame0;
+        second = gWorldInspectBarFrame1;
+        third = gWorldInspectBarFrame2;
         break;
     case LANGUAGE_FRENCH:
         first = gWorldInspectBarFrenchFrame0;

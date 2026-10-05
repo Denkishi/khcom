@@ -1217,13 +1217,7 @@ void mode_ms_charge_0() {
     AnimInit(&sMsChargeHighlightAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
-    sMsChargeMoogleTiles = LoadObjTiles(
-#ifdef VERSION_EU
-        gUnkEu_099AEE98
-#else
-        gMsChargeMoogleTiles
-#endif
-    , 0x940);
+    sMsChargeMoogleTiles = LoadObjTiles(gMsChargeMoogleTiles, 0x940);
     AnimInit(&sMsChargeCursorAnim,
         gMsChargeMoogleAnims
     ,
@@ -1237,13 +1231,7 @@ void mode_ms_charge_0() {
     );
     AnimStart(&sMsChargeMoogleAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, 32);
-    sMsChargeConfirmCursorTiles = LoadObjTiles(
-#ifdef VERSION_EU
-        gUnkEu_092D1F74
-#else
-        gMoguFl00Tiles
-#endif
-    , 0xC00);
+    sMsChargeConfirmCursorTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
     AnimInit(&sMsChargeConfirmCursorAnim, gMoguFl00Anims, gMoguFl00Frames);
 
     {

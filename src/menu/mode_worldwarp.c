@@ -348,9 +348,9 @@ void WorldWarpDraw() {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        tile0 = gUnkEu_099AABA4;
-        tile1 = gUnkEu_099AABBA;
-        tile2 = gUnkEu_099AABEE;
+        tile0 = gWorldWarpBarFrame0;
+        tile1 = gWorldWarpBarFrame1;
+        tile2 = gWorldWarpBarFrame2;
         break;
     case LANGUAGE_FRENCH:
         tile0 = gWorldWarpBarFrenchFrame0;
@@ -648,7 +648,7 @@ void mode_worldwarp_0() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AAC2C, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, 0x500);
         break;
     case LANGUAGE_FRENCH:
         sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarFrenchTiles, 0x500);

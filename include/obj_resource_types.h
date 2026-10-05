@@ -5,7 +5,7 @@
 
 typedef struct ObjPaletteHeader {
     u8* src;
-    u8 unk_04[0x02];
+    u8 refCount[0x02];
     u16 index;
     u16 count;
 } ObjPaletteHeader;

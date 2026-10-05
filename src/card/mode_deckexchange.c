@@ -394,665 +394,665 @@ TaskDesc gTaskDescDarkPoint = {
 
 CardDescriptionText* gCardKindDescriptions[98] = {
 #if defined(VERSION_EU)
-    &gCardKindDescription00,
+    &gCardKindDescription00ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090106C0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042080,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription01,
+    &gCardKindDescription01ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090106F4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090420FC,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription02,
+    &gCardKindDescription02ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010728,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042176,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription03,
+    &gCardKindDescription03ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010760,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090421EE,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription04,
+    &gCardKindDescription04ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010794,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904226A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription05,
+    &gCardKindDescription05ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090107CC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090422E4,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription06,
+    &gCardKindDescription06ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010800,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904235E,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription07,
+    &gCardKindDescription07ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010834,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090423D6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription08,
+    &gCardKindDescription08ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010868,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042452,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription09,
+    &gCardKindDescription09ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901089C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090424CC,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription10,
+    &gCardKindDescription10ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090108D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904254E,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription11,
+    &gCardKindDescription11ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010904,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090425CA,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription12,
+    &gCardKindDescription12ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010938,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042646,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription13,
+    &gCardKindDescription13ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901096C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090426C0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription14,
+    &gCardKindDescription14ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090109A0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904273C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription15,
+    &gCardKindDescription15ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090109D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090427BC,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription16,
+    &gCardKindDescription16ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A0C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042840,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription17,
+    &gCardKindDescription17ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A40,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904434A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription18,
+    &gCardKindDescription18ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F40,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription19,
+    &gCardKindDescription19ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010A8C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F6A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription20,
+    &gCardKindDescription20ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010AAC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042F92,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription21,
+    &gCardKindDescription21ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010ACC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042FC6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription22,
+    &gCardKindDescription22ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010AE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042FDE,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription23,
+    &gCardKindDescription23ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B10,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090428BC,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription24,
+    &gCardKindDescription24ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B2C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043042,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription25,
+    &gCardKindDescription25ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B60,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042912,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription26,
+    &gCardKindDescription26ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010B84,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904309C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription27,
+    &gCardKindDescription27ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010BB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042984,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription28,
+    &gCardKindDescription28ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010BE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090429E6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription29,
+    &gCardKindDescription29ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C0C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042A40,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription30,
+    &gCardKindDescription30ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C38,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090430F0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription31,
+    &gCardKindDescription31ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C58,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042AA0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription32,
+    &gCardKindDescription32ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010C6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904315A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription33,
+    &gCardKindDescription33ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010CA8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042AFC,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription34,
+    &gCardKindDescription34ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010CE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090431C6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription35,
+    &gCardKindDescription35ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D20,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043230,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription36,
+    &gCardKindDescription36ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D5C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904329A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription37,
+    &gCardKindDescription37ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010D98,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042B5C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription38,
+    &gCardKindDescription38ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010DD4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043302,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription39,
+    &gCardKindDescription39ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E10,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904336A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription40,
+    &gCardKindDescription40ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E4C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090433DA,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription41,
+    &gCardKindDescription41ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E6C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043426,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription42,
+    &gCardKindDescription42ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010E88,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043474,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription43,
+    &gCardKindDescription43ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010EBC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090434E0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription44,
+    &gCardKindDescription44ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010EF4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043540,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription45,
+    &gCardKindDescription45ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F08,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043586,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription46,
+    &gCardKindDescription46ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F30,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09045146,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription47,
+    &gCardKindDescription47ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F68,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090435E4,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription48,
+    &gCardKindDescription48ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010F94,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043632,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription49,
+    &gCardKindDescription49ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011018,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043746,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription50,
+    &gCardKindDescription50ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901111C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090438CA,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription51,
+    &gCardKindDescription51ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011144,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904391C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription52,
+    &gCardKindDescription52ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901116C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043976,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription53,
+    &gCardKindDescription53ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011194,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090439CE,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription54,
+    &gCardKindDescription54ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010FB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043678,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription55,
+    &gCardKindDescription55ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09010FE4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090436E0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription56,
+    &gCardKindDescription56ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090111F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043A80,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription57,
+    &gCardKindDescription57ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090110BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043814,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription58,
+    &gCardKindDescription58ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011050,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090437B0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription59,
+    &gCardKindDescription59ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011224,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C02,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription60,
+    &gCardKindDescription60ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090112D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043B7C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription61,
+    &gCardKindDescription61ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901108C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042BB4,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription62,
+    &gCardKindDescription62ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011344,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043BDE,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription63,
+    &gCardKindDescription63ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011314,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C88,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription64,
+    &gCardKindDescription64ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011248,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042C32,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription65,
+    &gCardKindDescription65ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090112B0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043B0E,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription66,
+    &gCardKindDescription66ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090110F0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043880,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription67,
+    &gCardKindDescription67ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011278,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043AB0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription68,
+    &gCardKindDescription68ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011370,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043C2C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription69,
+    &gCardKindDescription69ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090113D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043CE2,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription70,
+    &gCardKindDescription70ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901139C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043C82,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription71,
+    &gCardKindDescription71ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090111BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043A1E,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription72,
+    &gCardKindDescription72ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011500,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043F00,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription73,
+    &gCardKindDescription73ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090113F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043D42,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription74,
+    &gCardKindDescription74ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011428,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043DA6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription75,
+    &gCardKindDescription75ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011460,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043DF0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription76,
+    &gCardKindDescription76ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011488,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043E56,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription77,
+    &gCardKindDescription77ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090114C4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043E9E,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription78,
+    &gCardKindDescription78ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901152C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043F4A,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription79,
+    &gCardKindDescription79ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011654,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904408C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription80,
+    &gCardKindDescription80ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901159C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090442E0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription81,
+    &gCardKindDescription81ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090116F8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042D38,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription82,
+    &gCardKindDescription82ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011810,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042CE4,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription82,
+    &gCardKindDescription82ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011810,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042CE4,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription84,
+    &gCardKindDescription84ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011564,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09043FA0,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription85,
+    &gCardKindDescription85ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090115D8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042D90,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription86,
+    &gCardKindDescription86ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011638,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044060,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription87,
+    &gCardKindDescription87ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901160C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044000,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription88,
+    &gCardKindDescription88ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011684,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090440E6,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription89,
+    &gCardKindDescription89ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090116BC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044160,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription90,
+    &gCardKindDescription90ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011770,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090441C2,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription91,
+    &gCardKindDescription91ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011724,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042DF2,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription92,
+    &gCardKindDescription92ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011754,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042E4C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription93,
+    &gCardKindDescription93ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090117AC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904422C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription94,
+    &gCardKindDescription94ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090117D4,
 #elif defined(VERSION_US)
@@ -1060,14 +1060,14 @@ CardDescriptionText* gCardKindDescriptions[98] = {
 #endif
     NULL,
 #if defined(VERSION_EU)
-    &gCardKindDescription96,
+    &gCardKindDescription96ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011844,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09042E7C,
 #endif
 #if defined(VERSION_EU)
-    &gCardKindDescription97,
+    &gCardKindDescription97ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011870,
 #elif defined(VERSION_US)
@@ -1077,182 +1077,182 @@ CardDescriptionText* gCardKindDescriptions[98] = {
 
 CardDescriptionText* gMapCardDescriptions[26] = {
 #if defined(VERSION_EU)
-    &gMapCardDescription00,
+    &gMapCardDescription00ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B30,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044886,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription01,
+    &gMapCardDescription01ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B5C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090448CE,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription02,
+    &gMapCardDescription02ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B84,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044922,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription03,
+    &gMapCardDescription03ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011BB0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044980,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription04,
+    &gMapCardDescription04ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011BE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090449D8,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription05,
+    &gMapCardDescription05ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C18,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044A44,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription06,
+    &gMapCardDescription06ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C44,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044A96,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription07,
+    &gMapCardDescription07ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011C74,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044AF4,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription08,
+    &gMapCardDescription08ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CA4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044B56,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription09,
+    &gMapCardDescription09ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CB8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044B8E,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription10,
+    &gMapCardDescription10ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011CE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044BEA,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription11,
+    &gMapCardDescription11ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D08,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044C48,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription12,
+    &gMapCardDescription12ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D3C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044CA2,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription13,
+    &gMapCardDescription13ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011D70,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044CFE,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription14,
+    &gMapCardDescription14ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011DA4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044D56,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription15,
+    &gMapCardDescription15ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011DE0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044DBE,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription16,
+    &gMapCardDescription16ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E04,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044E06,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription17,
+    &gMapCardDescription17ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E40,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044E6E,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription18,
+    &gMapCardDescription18ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011E78,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044EC6,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription19,
+    &gMapCardDescription19ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011EB4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044F16,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription20,
+    &gMapCardDescription20ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011EEC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044F80,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription21,
+    &gMapCardDescription21ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F1C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044FD4,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription22,
+    &gMapCardDescription22ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F48,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09045026,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription23,
+    &gMapCardDescription23ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011F78,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904506E,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription24,
+    &gMapCardDescription24ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011FA8,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090450B6,
 #endif
 #if defined(VERSION_EU)
-    &gMapCardDescription25,
+    &gMapCardDescription25ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011FD8,
 #elif defined(VERSION_US)
@@ -1262,98 +1262,98 @@ CardDescriptionText* gMapCardDescriptions[26] = {
 
 CardDescriptionText* gWorldDescriptions[14] = {
 #if defined(VERSION_EU)
-    &gWorldDescription00,
+    &gWorldDescription00ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_0901192C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904446C,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription01,
+    &gWorldDescription01ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090119EC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090445B4,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription02,
+    &gWorldDescription02ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090119B4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904455E,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription03,
+    &gWorldDescription03ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011984,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044514,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription04,
+    &gWorldDescription04ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118D0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090443B2,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription05,
+    &gWorldDescription05ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011960,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090444C4,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription06,
+    &gWorldDescription06ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118FC,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_0904440A,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription07,
+    &gWorldDescription07ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A04,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090445FA,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription08,
+    &gWorldDescription08ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011AA0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090446FC,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription09,
+    &gWorldDescription09ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_090118A0,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090447B6,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription10,
+    &gWorldDescription10ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A74,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_090446A8,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription11,
+    &gWorldDescription11ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011AD4,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044758,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription12,
+    &gWorldDescription12ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011A3C,
 #elif defined(VERSION_US)
     gCardDescriptionTextUs_09044654,
 #endif
 #if defined(VERSION_EU)
-    &gWorldDescription13,
+    &gWorldDescription13ByLanguage,
 #elif defined(VERSION_JP)
     gCardDescriptionTextJp_09011B04,
 #elif defined(VERSION_US)

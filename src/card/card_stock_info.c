@@ -519,8 +519,8 @@ const CardHelpText* gBlitzHelpTexts[] = {
     gCardHelpTextUs_090381F8,
     gCardHelpTextUs_09038260,
 #elif defined(VERSION_EU)
-    &gBlitzHelpText0,
-    &gBlitzHelpText1,
+    &gBlitzHelpText0ByLanguage,
+    &gBlitzHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -534,9 +534,9 @@ const CardHelpText* gSonicBladeHelpTexts[] = {
     gCardHelpTextJp_0900B6E8,
     gCardHelpTextJp_0900B734,
 #elif defined(VERSION_EU)
-    &gSonicBladeHelpText0,
-    &gSonicBladeHelpText1,
-    &gSonicBladeHelpText2,
+    &gSonicBladeHelpText0ByLanguage,
+    &gSonicBladeHelpText1ByLanguage,
+    &gSonicBladeHelpText2ByLanguage,
 #endif
 };
 
@@ -546,8 +546,8 @@ const CardHelpText* gArsArcanumHelpTexts[] = {
     gCardHelpTextUs_09038440,
     gCardHelpTextUs_0903848E,
 #elif defined(VERSION_EU)
-    &gArsArcanumHelpText0,
-    &gArsArcanumHelpText1,
+    &gArsArcanumHelpText0ByLanguage,
+    &gArsArcanumHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -560,8 +560,8 @@ const CardHelpText* gStrikeRaidHelpTexts[] = {
     gCardHelpTextJp_0900B7B4,
     gCardHelpTextJp_0900B7F0,
 #elif defined(VERSION_EU)
-    &gStrikeRaidHelpText0,
-    &gStrikeRaidHelpText1,
+    &gStrikeRaidHelpText0ByLanguage,
+    &gStrikeRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -571,8 +571,8 @@ const CardHelpText* gRagnarokHelpTexts[] = {
     gCardHelpTextUs_090385CC,
     gCardHelpTextUs_09038646,
 #elif defined(VERSION_EU)
-    &gRagnarokHelpText0,
-    &gRagnarokHelpText1,
+    &gRagnarokHelpText0ByLanguage,
+    &gRagnarokHelpText1ByLanguage,
 #endif
 };
 
@@ -581,8 +581,8 @@ const CardHelpText* gTrinityLimitHelpTexts[] = {
     gCardHelpTextUs_09038694,
     gCardHelpTextUs_090386F0,
 #elif defined(VERSION_EU)
-    &gTrinityLimitHelpText0,
-    &gTrinityLimitHelpText1,
+    &gTrinityLimitHelpText0ByLanguage,
+    &gTrinityLimitHelpText1ByLanguage,
 #endif
 };
 
@@ -591,8 +591,8 @@ const CardHelpText* gSlidingDashHelpTexts[] = {
     gCardHelpTextUs_09038736,
     gCardHelpTextUs_090387A4,
 #elif defined(VERSION_EU)
-    &gSlidingDashHelpText0,
-    &gSlidingDashHelpText1,
+    &gSlidingDashHelpText0ByLanguage,
+    &gSlidingDashHelpText1ByLanguage,
 #endif
 };
 
@@ -601,8 +601,8 @@ const CardHelpText* gStunImpactHelpTexts[] = {
     gCardHelpTextUs_0903881C,
     gCardHelpTextUs_0903887A,
 #elif defined(VERSION_EU)
-    &gStunImpactHelpText0,
-    &gStunImpactHelpText1,
+    &gStunImpactHelpText0ByLanguage,
+    &gStunImpactHelpText1ByLanguage,
 #endif
 };
 
@@ -611,8 +611,8 @@ const CardHelpText* gZantetsukenHelpTexts[] = {
     gCardHelpTextUs_090388F2,
     gCardHelpTextUs_0903897C,
 #elif defined(VERSION_EU)
-    &gZantetsukenHelpText0,
-    &gZantetsukenHelpText1,
+    &gZantetsukenHelpText0ByLanguage,
+    &gZantetsukenHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -625,8 +625,8 @@ const CardHelpText* gFiraHelpTexts[] = {
     gCardHelpTextJp_0900B9F0,
     gCardHelpTextJp_0900BA08,
 #elif defined(VERSION_EU)
-    &gFiraHelpText0,
-    &gFiraHelpText1,
+    &gFiraHelpText0ByLanguage,
+    &gFiraHelpText1ByLanguage,
 #endif
 };
 
@@ -638,8 +638,8 @@ const CardHelpText* gBlizzaraHelpTexts[] = {
     gCardHelpTextJp_0900BA24,
     gCardHelpTextJp_0900BA3C,
 #elif defined(VERSION_EU)
-    &gBlizzaraHelpText0,
-    &gBlizzaraHelpText1,
+    &gBlizzaraHelpText0ByLanguage,
+    &gBlizzaraHelpText1ByLanguage,
 #endif
 };
 
@@ -651,8 +651,8 @@ const CardHelpText* gThundaraHelpTexts[] = {
     gCardHelpTextJp_0900BA58,
     gCardHelpTextJp_0900BA70,
 #elif defined(VERSION_EU)
-    &gThundaraHelpText0,
-    &gThundaraHelpText1,
+    &gThundaraHelpText0ByLanguage,
+    &gThundaraHelpText1ByLanguage,
 #endif
 };
 
@@ -664,8 +664,8 @@ const CardHelpText* gCuraHelpTexts[] = {
     gCardHelpTextJp_0900BA84,
     gCardHelpTextJp_0900BA9C,
 #elif defined(VERSION_EU)
-    &gCuraHelpText0,
-    &gCuraHelpText1,
+    &gCuraHelpText0ByLanguage,
+    &gCuraHelpText1ByLanguage,
 #endif
 };
 
@@ -675,8 +675,8 @@ const CardHelpText* gGraviraHelpTexts[] = {
     gCardHelpTextUs_09038BAC,
     gCardHelpTextUs_09038C10,
 #elif defined(VERSION_EU)
-    &gGraviraHelpText0,
-    &gGraviraHelpText1,
+    &gGraviraHelpText0ByLanguage,
+    &gGraviraHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -689,8 +689,8 @@ const CardHelpText* gStopraHelpTexts[] = {
     gCardHelpTextJp_0900BAAC,
     gCardHelpTextJp_0900BAC8,
 #elif defined(VERSION_EU)
-    &gStopraHelpText0,
-    &gStopraHelpText1,
+    &gStopraHelpText0ByLanguage,
+    &gStopraHelpText1ByLanguage,
 #endif
 };
 
@@ -700,8 +700,8 @@ const CardHelpText* gAeroraHelpTexts[] = {
     gCardHelpTextUs_09038CB2,
     gCardHelpTextUs_09038D16,
 #elif defined(VERSION_EU)
-    &gAeroraHelpText0,
-    &gAeroraHelpText1,
+    &gAeroraHelpText0ByLanguage,
+    &gAeroraHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -714,8 +714,8 @@ const CardHelpText* gFiragaHelpTexts[] = {
     gCardHelpTextJp_0900BADC,
     gCardHelpTextJp_0900BAF4,
 #elif defined(VERSION_EU)
-    &gFiragaHelpText0,
-    &gFiragaHelpText1,
+    &gFiragaHelpText0ByLanguage,
+    &gFiragaHelpText1ByLanguage,
 #endif
 };
 
@@ -727,8 +727,8 @@ const CardHelpText* gBlizzagaHelpTexts[] = {
     gCardHelpTextJp_0900BB14,
     gCardHelpTextJp_0900BB2C,
 #elif defined(VERSION_EU)
-    &gBlizzagaHelpText0,
-    &gBlizzagaHelpText1,
+    &gBlizzagaHelpText0ByLanguage,
+    &gBlizzagaHelpText1ByLanguage,
 #endif
 };
 
@@ -740,8 +740,8 @@ const CardHelpText* gThundagaHelpTexts[] = {
     gCardHelpTextJp_0900BB4C,
     gCardHelpTextJp_0900BB64,
 #elif defined(VERSION_EU)
-    &gThundagaHelpText0,
-    &gThundagaHelpText1,
+    &gThundagaHelpText0ByLanguage,
+    &gThundagaHelpText1ByLanguage,
 #endif
 };
 
@@ -753,8 +753,8 @@ const CardHelpText* gCuragaHelpTexts[] = {
     gCardHelpTextJp_0900BB84,
     gCardHelpTextJp_0900BBA0,
 #elif defined(VERSION_EU)
-    &gCuragaHelpText0,
-    &gCuragaHelpText1,
+    &gCuragaHelpText0ByLanguage,
+    &gCuragaHelpText1ByLanguage,
 #endif
 };
 
@@ -773,8 +773,8 @@ const CardHelpText* gGravigaHelpTexts[] = {
     gCardHelpTextJp_0900BBF8,
     gCardHelpTextJp_0900BC24,
 #elif defined(VERSION_EU)
-    &gGravigaHelpText0,
-    &gGravigaHelpText1,
+    &gGravigaHelpText0ByLanguage,
+    &gGravigaHelpText1ByLanguage,
 #endif
 };
 
@@ -786,8 +786,8 @@ const CardHelpText* gStopgaHelpTexts[] = {
     gCardHelpTextJp_0900BC44,
     gCardHelpTextJp_0900BC6C,
 #elif defined(VERSION_EU)
-    &gStopgaHelpText0,
-    &gStopgaHelpText1,
+    &gStopgaHelpText0ByLanguage,
+    &gStopgaHelpText1ByLanguage,
 #endif
 };
 
@@ -797,8 +797,8 @@ const CardHelpText* gAerogaHelpTexts[] = {
     gCardHelpTextUs_09039098,
     gCardHelpTextUs_09039110,
 #elif defined(VERSION_EU)
-    &gAerogaHelpText0,
-    &gAerogaHelpText1,
+    &gAerogaHelpText0ByLanguage,
+    &gAerogaHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -815,10 +815,10 @@ const CardHelpText* gProudRoarHelpTexts[] = {
     gCardHelpTextJp_0900BD5C,
     gCardHelpTextJp_0900BD90,
 #elif defined(VERSION_EU)
-    &gProudRoarHelpText0,
-    &gProudRoarHelpText1,
-    &gProudRoarHelpText2,
-    &gProudRoarHelpText3,
+    &gProudRoarHelpText0ByLanguage,
+    &gProudRoarHelpText1ByLanguage,
+    &gProudRoarHelpText2ByLanguage,
+    &gProudRoarHelpText3ByLanguage,
 #endif
 };
 
@@ -834,10 +834,10 @@ const CardHelpText* gProudRoarPairHelpTexts[] = {
     gCardHelpTextJp_0900BD5C,
     gCardHelpTextJp_0900BD90,
 #elif defined(VERSION_EU)
-    &gProudRoarHelpText0,
-    &gProudRoarHelpText1,
-    &gProudRoarHelpText2,
-    &gProudRoarHelpText3,
+    &gProudRoarHelpText0ByLanguage,
+    &gProudRoarHelpText1ByLanguage,
+    &gProudRoarHelpText2ByLanguage,
+    &gProudRoarHelpText3ByLanguage,
 #endif
 };
 
@@ -853,10 +853,10 @@ const CardHelpText* gShowtimeHelpTexts[] = {
     gCardHelpTextJp_0900BDF4,
     gCardHelpTextJp_0900BE2C,
 #elif defined(VERSION_EU)
-    &gShowtimeHelpText0,
-    &gShowtimeHelpText1,
-    &gShowtimeHelpText2,
-    &gShowtimeHelpText3,
+    &gShowtimeHelpText0ByLanguage,
+    &gShowtimeHelpText1ByLanguage,
+    &gShowtimeHelpText2ByLanguage,
+    &gShowtimeHelpText3ByLanguage,
 #endif
 };
 
@@ -872,10 +872,10 @@ const CardHelpText* gShowtimePairHelpTexts[] = {
     gCardHelpTextJp_0900BDF4,
     gCardHelpTextJp_0900BE2C,
 #elif defined(VERSION_EU)
-    &gShowtimeHelpText0,
-    &gShowtimeHelpText1,
-    &gShowtimeHelpText2,
-    &gShowtimeHelpText3,
+    &gShowtimeHelpText0ByLanguage,
+    &gShowtimeHelpText1ByLanguage,
+    &gShowtimeHelpText2ByLanguage,
+    &gShowtimeHelpText3ByLanguage,
 #endif
 };
 
@@ -891,10 +891,10 @@ const CardHelpText* gTwinkleHelpTexts[] = {
     gCardHelpTextJp_0900BE90,
     gCardHelpTextJp_0900BEC4,
 #elif defined(VERSION_EU)
-    &gTwinkleHelpText0,
-    &gTwinkleHelpText1,
-    &gTwinkleHelpText2,
-    &gTwinkleHelpText3,
+    &gTwinkleHelpText0ByLanguage,
+    &gTwinkleHelpText1ByLanguage,
+    &gTwinkleHelpText2ByLanguage,
+    &gTwinkleHelpText3ByLanguage,
 #endif
 };
 
@@ -910,10 +910,10 @@ const CardHelpText* gTwinklePairHelpTexts[] = {
     gCardHelpTextJp_0900BE90,
     gCardHelpTextJp_0900BEC4,
 #elif defined(VERSION_EU)
-    &gTwinkleHelpText0,
-    &gTwinkleHelpText1,
-    &gTwinkleHelpText2,
-    &gTwinkleHelpText3,
+    &gTwinkleHelpText0ByLanguage,
+    &gTwinkleHelpText1ByLanguage,
+    &gTwinkleHelpText2ByLanguage,
+    &gTwinkleHelpText3ByLanguage,
 #endif
 };
 
@@ -929,10 +929,10 @@ const CardHelpText* gFlareBreathHelpTexts[] = {
     gCardHelpTextJp_0900BF2C,
     gCardHelpTextJp_0900BF64,
 #elif defined(VERSION_EU)
-    &gFlareBreathHelpText0,
-    &gFlareBreathHelpText1,
-    &gFlareBreathHelpText2,
-    &gFlareBreathHelpText3,
+    &gFlareBreathHelpText0ByLanguage,
+    &gFlareBreathHelpText1ByLanguage,
+    &gFlareBreathHelpText2ByLanguage,
+    &gFlareBreathHelpText3ByLanguage,
 #endif
 };
 
@@ -948,10 +948,10 @@ const CardHelpText* gFlareBreathPairHelpTexts[] = {
     gCardHelpTextJp_0900BF2C,
     gCardHelpTextJp_0900BF64,
 #elif defined(VERSION_EU)
-    &gFlareBreathHelpText0,
-    &gFlareBreathHelpText1,
-    &gFlareBreathHelpText2,
-    &gFlareBreathHelpText3,
+    &gFlareBreathHelpText0ByLanguage,
+    &gFlareBreathHelpText1ByLanguage,
+    &gFlareBreathHelpText2ByLanguage,
+    &gFlareBreathHelpText3ByLanguage,
 #endif
 };
 
@@ -970,8 +970,8 @@ const CardHelpText* gOmnislashHelpTexts[] = {
     gCardHelpTextJp_0900BFB0,
     gCardHelpTextJp_0900BFDC,
 #elif defined(VERSION_EU)
-    &gOmnislashHelpText0,
-    &gOmnislashHelpText1,
+    &gOmnislashHelpText0ByLanguage,
+    &gOmnislashHelpText1ByLanguage,
 #endif
 };
 
@@ -981,8 +981,8 @@ const CardHelpText* gCrossSlashHelpTexts[] = {
     gCardHelpTextUs_09039738,
     gCardHelpTextUs_0903979A,
 #elif defined(VERSION_EU)
-    &gCrossSlashHelpText0,
-    &gCrossSlashHelpText1,
+    &gCrossSlashHelpText0ByLanguage,
+    &gCrossSlashHelpText1ByLanguage,
 #endif
 };
 #endif
@@ -999,10 +999,10 @@ const CardHelpText* gParadiseHelpTexts[] = {
     gCardHelpTextJp_0900C03C,
     gCardHelpTextJp_0900C084,
 #elif defined(VERSION_EU)
-    &gParadiseHelpText0,
-    &gParadiseHelpText1,
-    &gParadiseHelpText2,
-    &gParadiseHelpText3,
+    &gParadiseHelpText0ByLanguage,
+    &gParadiseHelpText1ByLanguage,
+    &gParadiseHelpText2ByLanguage,
+    &gParadiseHelpText3ByLanguage,
 #endif
 };
 
@@ -1018,10 +1018,10 @@ const CardHelpText* gParadisePairHelpTexts[] = {
     gCardHelpTextJp_0900C03C,
     gCardHelpTextJp_0900C084,
 #elif defined(VERSION_EU)
-    &gParadiseHelpText0,
-    &gParadiseHelpText1,
-    &gParadiseHelpText2,
-    &gParadiseHelpText3,
+    &gParadiseHelpText0ByLanguage,
+    &gParadiseHelpText1ByLanguage,
+    &gParadiseHelpText2ByLanguage,
+    &gParadiseHelpText3ByLanguage,
 #endif
 };
 
@@ -1037,10 +1037,10 @@ const CardHelpText* gSplashHelpTexts[] = {
     gCardHelpTextJp_0900C0DC,
     gCardHelpTextJp_0900C118,
 #elif defined(VERSION_EU)
-    &gSplashHelpText0,
-    &gSplashHelpText1,
-    &gSplashHelpText2,
-    &gSplashHelpText3,
+    &gSplashHelpText0ByLanguage,
+    &gSplashHelpText1ByLanguage,
+    &gSplashHelpText2ByLanguage,
+    &gSplashHelpText3ByLanguage,
 #endif
 };
 
@@ -1056,10 +1056,10 @@ const CardHelpText* gSplashPairHelpTexts[] = {
     gCardHelpTextJp_0900C0DC,
     gCardHelpTextJp_0900C118,
 #elif defined(VERSION_EU)
-    &gSplashHelpText0,
-    &gSplashHelpText1,
-    &gSplashHelpText2,
-    &gSplashHelpText3,
+    &gSplashHelpText0ByLanguage,
+    &gSplashHelpText1ByLanguage,
+    &gSplashHelpText2ByLanguage,
+    &gSplashHelpText3ByLanguage,
 #endif
 };
 
@@ -1075,10 +1075,10 @@ const CardHelpText* gMagicHelpTexts[] = {
     gCardHelpTextJp_0900C188,
     gCardHelpTextJp_0900C1CC,
 #elif defined(VERSION_EU)
-    &gMagicHelpText0,
-    &gMagicHelpText1,
-    &gMagicHelpText2,
-    &gMagicHelpText3,
+    &gMagicHelpText0ByLanguage,
+    &gMagicHelpText1ByLanguage,
+    &gMagicHelpText2ByLanguage,
+    &gMagicHelpText3ByLanguage,
 #endif
 };
 
@@ -1094,10 +1094,10 @@ const CardHelpText* gMagicPairHelpTexts[] = {
     gCardHelpTextJp_0900C130,
     gCardHelpTextJp_0900C174,
 #elif defined(VERSION_EU)
-    &gMagicHelpText0,
-    &gMagicHelpText1,
-    &gMagicHelpText2,
-    &gMagicHelpText3,
+    &gMagicHelpText0ByLanguage,
+    &gMagicHelpText1ByLanguage,
+    &gMagicHelpText2ByLanguage,
+    &gMagicHelpText3ByLanguage,
 #endif
 };
 
@@ -1109,8 +1109,8 @@ const CardHelpText* gGoofyChargeHelpTexts[] = {
     gCardHelpTextJp_0900C1EC,
     gCardHelpTextJp_0900C218,
 #elif defined(VERSION_EU)
-    &gGoofyChargeHelpText0,
-    &gGoofyChargeHelpText1,
+    &gGoofyChargeHelpText0ByLanguage,
+    &gGoofyChargeHelpText1ByLanguage,
 #endif
 };
 
@@ -1122,8 +1122,8 @@ const CardHelpText* gGoofyTornadoHelpTexts[] = {
     gCardHelpTextJp_0900C230,
     gCardHelpTextJp_0900C25C,
 #elif defined(VERSION_EU)
-    &gGoofyTornadoHelpText0,
-    &gGoofyTornadoHelpText1,
+    &gGoofyTornadoHelpText0ByLanguage,
+    &gGoofyTornadoHelpText1ByLanguage,
 #endif
 };
 
@@ -1139,10 +1139,10 @@ const CardHelpText* gSandstormHelpTexts[] = {
     gCardHelpTextJp_0900C2B0,
     gCardHelpTextJp_0900C2E0,
 #elif defined(VERSION_EU)
-    &gSandstormHelpText0,
-    &gSandstormHelpText1,
-    &gSandstormHelpText2,
-    &gSandstormHelpText3,
+    &gSandstormHelpText0ByLanguage,
+    &gSandstormHelpText1ByLanguage,
+    &gSandstormHelpText2ByLanguage,
+    &gSandstormHelpText3ByLanguage,
 #endif
 };
 
@@ -1158,10 +1158,10 @@ const CardHelpText* gSandstormPairHelpTexts[] = {
     gCardHelpTextJp_0900C2B0,
     gCardHelpTextJp_0900C2E0,
 #elif defined(VERSION_EU)
-    &gSandstormHelpText0,
-    &gSandstormHelpText1,
-    &gSandstormHelpText2,
-    &gSandstormHelpText3,
+    &gSandstormHelpText0ByLanguage,
+    &gSandstormHelpText1ByLanguage,
+    &gSandstormHelpText2ByLanguage,
+    &gSandstormHelpText3ByLanguage,
 #endif
 };
 
@@ -1177,10 +1177,10 @@ const CardHelpText* gSurpriseHelpTexts[] = {
     gCardHelpTextJp_0900C350,
     gCardHelpTextJp_0900C38C,
 #elif defined(VERSION_EU)
-    &gSurpriseHelpText0,
-    &gSurpriseHelpText1,
-    &gSurpriseHelpText2,
-    &gSurpriseHelpText3,
+    &gSurpriseHelpText0ByLanguage,
+    &gSurpriseHelpText1ByLanguage,
+    &gSurpriseHelpText2ByLanguage,
+    &gSurpriseHelpText3ByLanguage,
 #endif
 };
 
@@ -1196,10 +1196,10 @@ const CardHelpText* gSurprisePairHelpTexts[] = {
     gCardHelpTextJp_0900C350,
     gCardHelpTextJp_0900C38C,
 #elif defined(VERSION_EU)
-    &gSurpriseHelpText0,
-    &gSurpriseHelpText1,
-    &gSurpriseHelpText2,
-    &gSurpriseHelpText3,
+    &gSurpriseHelpText0ByLanguage,
+    &gSurpriseHelpText1ByLanguage,
+    &gSurpriseHelpText2ByLanguage,
+    &gSurpriseHelpText3ByLanguage,
 #endif
 };
 
@@ -1215,10 +1215,10 @@ const CardHelpText* gSpiralWaveHelpTexts[] = {
     gCardHelpTextJp_0900C3F0,
     gCardHelpTextJp_0900C428,
 #elif defined(VERSION_EU)
-    &gSpiralWaveHelpText0,
-    &gSpiralWaveHelpText1,
-    &gSpiralWaveHelpText2,
-    &gSpiralWaveHelpText3,
+    &gSpiralWaveHelpText0ByLanguage,
+    &gSpiralWaveHelpText1ByLanguage,
+    &gSpiralWaveHelpText2ByLanguage,
+    &gSpiralWaveHelpText3ByLanguage,
 #endif
 };
 
@@ -1234,10 +1234,10 @@ const CardHelpText* gSpiralWavePairHelpTexts[] = {
     gCardHelpTextJp_0900C3F0,
     gCardHelpTextJp_0900C428,
 #elif defined(VERSION_EU)
-    &gSpiralWaveHelpText0,
-    &gSpiralWaveHelpText1,
-    &gSpiralWaveHelpText2,
-    &gSpiralWaveHelpText3,
+    &gSpiralWaveHelpText0ByLanguage,
+    &gSpiralWaveHelpText1ByLanguage,
+    &gSpiralWaveHelpText2ByLanguage,
+    &gSpiralWaveHelpText3ByLanguage,
 #endif
 };
 
@@ -1253,10 +1253,10 @@ const CardHelpText* gHummingbirdHelpTexts[] = {
     gCardHelpTextJp_0900C490,
     gCardHelpTextJp_0900C4C0,
 #elif defined(VERSION_EU)
-    &gHummingbirdHelpText0,
-    &gHummingbirdHelpText1,
-    &gHummingbirdHelpText2,
-    &gHummingbirdHelpText3,
+    &gHummingbirdHelpText0ByLanguage,
+    &gHummingbirdHelpText1ByLanguage,
+    &gHummingbirdHelpText2ByLanguage,
+    &gHummingbirdHelpText3ByLanguage,
 #endif
 };
 
@@ -1272,10 +1272,10 @@ const CardHelpText* gHummingbirdPairHelpTexts[] = {
     gCardHelpTextJp_0900C490,
     gCardHelpTextJp_0900C4C0,
 #elif defined(VERSION_EU)
-    &gHummingbirdHelpText0,
-    &gHummingbirdHelpText1,
-    &gHummingbirdHelpText2,
-    &gHummingbirdHelpText3,
+    &gHummingbirdHelpText0ByLanguage,
+    &gHummingbirdHelpText1ByLanguage,
+    &gHummingbirdHelpText2ByLanguage,
+    &gHummingbirdHelpText3ByLanguage,
 #endif
 };
 
@@ -1291,10 +1291,10 @@ const CardHelpText* gFerociousLungeHelpTexts[] = {
     gCardHelpTextJp_0900C538,
     gCardHelpTextJp_0900C568,
 #elif defined(VERSION_EU)
-    &gFerociousLungeHelpText0,
-    &gFerociousLungeHelpText1,
-    &gFerociousLungeHelpText2,
-    &gFerociousLungeHelpText3,
+    &gFerociousLungeHelpText0ByLanguage,
+    &gFerociousLungeHelpText1ByLanguage,
+    &gFerociousLungeHelpText2ByLanguage,
+    &gFerociousLungeHelpText3ByLanguage,
 #endif
 };
 
@@ -1310,10 +1310,10 @@ const CardHelpText* gFerociousLungePairHelpTexts[] = {
     gCardHelpTextJp_0900C538,
     gCardHelpTextJp_0900C568,
 #elif defined(VERSION_EU)
-    &gFerociousLungeHelpText0,
-    &gFerociousLungeHelpText1,
-    &gFerociousLungeHelpText2,
-    &gFerociousLungeHelpText3,
+    &gFerociousLungeHelpText0ByLanguage,
+    &gFerociousLungeHelpText1ByLanguage,
+    &gFerociousLungeHelpText2ByLanguage,
+    &gFerociousLungeHelpText3ByLanguage,
 #endif
 };
 
@@ -1389,8 +1389,8 @@ const CardHelpText* gWarpHelpTexts[] = {
     gCardHelpTextJp_0900C588,
     gCardHelpTextJp_0900C5B0,
 #elif defined(VERSION_EU)
-    &gWarpHelpText0,
-    &gWarpHelpText1,
+    &gWarpHelpText0ByLanguage,
+    &gWarpHelpText1ByLanguage,
 #endif
 };
 
@@ -1402,8 +1402,8 @@ const CardHelpText* gWarpinatorHelpTexts[] = {
     gCardHelpTextJp_0900C5CC,
     gCardHelpTextJp_0900C600,
 #elif defined(VERSION_EU)
-    &gWarpinatorHelpText0,
-    &gWarpinatorHelpText1,
+    &gWarpinatorHelpText0ByLanguage,
+    &gWarpinatorHelpText1ByLanguage,
 #endif
 };
 
@@ -1417,9 +1417,9 @@ const CardHelpText* gTerrorHelpTexts[] = {
     gCardHelpTextJp_0900C644,
     gCardHelpTextJp_0900C668,
 #elif defined(VERSION_EU)
-    &gTerrorHelpText0,
-    &gTerrorHelpText1,
-    &gTerrorHelpText2,
+    &gTerrorHelpText0ByLanguage,
+    &gTerrorHelpText1ByLanguage,
+    &gTerrorHelpText2ByLanguage,
 #endif
 };
 
@@ -1431,8 +1431,8 @@ const CardHelpText* gConfuseHelpTexts[] = {
     gCardHelpTextJp_0900C68C,
     gCardHelpTextJp_0900C6C0,
 #elif defined(VERSION_EU)
-    &gConfuseHelpText0,
-    &gConfuseHelpText1,
+    &gConfuseHelpText0ByLanguage,
+    &gConfuseHelpText1ByLanguage,
 #endif
 };
 
@@ -1451,8 +1451,8 @@ const CardHelpText* gStopRaidHelpTexts[] = {
     gCardHelpTextJp_0900C728,
     gCardHelpTextJp_0900C75C,
 #elif defined(VERSION_EU)
-    &gStopRaidHelpText0,
-    &gStopRaidHelpText1,
+    &gStopRaidHelpText0ByLanguage,
+    &gStopRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1464,8 +1464,8 @@ const CardHelpText* gJudgmentHelpTexts[] = {
     gCardHelpTextJp_0900C788,
     gCardHelpTextJp_0900C7B8,
 #elif defined(VERSION_EU)
-    &gJudgmentHelpText0,
-    &gJudgmentHelpText1,
+    &gJudgmentHelpText0ByLanguage,
+    &gJudgmentHelpText1ByLanguage,
 #endif
 };
 
@@ -1477,8 +1477,8 @@ const CardHelpText* gReflectRaidHelpTexts[] = {
     gCardHelpTextJp_0900C7E0,
     gCardHelpTextJp_0900C82C,
 #elif defined(VERSION_EU)
-    &gReflectRaidHelpText0,
-    &gReflectRaidHelpText1,
+    &gReflectRaidHelpText0ByLanguage,
+    &gReflectRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1490,8 +1490,8 @@ const CardHelpText* gFireRaidHelpTexts[] = {
     gCardHelpTextJp_0900C858,
     gCardHelpTextJp_0900C880,
 #elif defined(VERSION_EU)
-    &gFireRaidHelpText0,
-    &gFireRaidHelpText1,
+    &gFireRaidHelpText0ByLanguage,
+    &gFireRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1503,8 +1503,8 @@ const CardHelpText* gBlizzardRaidHelpTexts[] = {
     gCardHelpTextJp_0900C8AC,
     gCardHelpTextJp_0900C8D4,
 #elif defined(VERSION_EU)
-    &gBlizzardRaidHelpText0,
-    &gBlizzardRaidHelpText1,
+    &gBlizzardRaidHelpText0ByLanguage,
+    &gBlizzardRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1516,8 +1516,8 @@ const CardHelpText* gThunderRaidHelpTexts[] = {
     gCardHelpTextJp_0900C900,
     gCardHelpTextJp_0900C928,
 #elif defined(VERSION_EU)
-    &gThunderRaidHelpText0,
-    &gThunderRaidHelpText1,
+    &gThunderRaidHelpText0ByLanguage,
+    &gThunderRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1529,8 +1529,8 @@ const CardHelpText* gGravityRaidHelpTexts[] = {
     gCardHelpTextJp_0900C954,
     gCardHelpTextJp_0900C988,
 #elif defined(VERSION_EU)
-    &gGravityRaidHelpText0,
-    &gGravityRaidHelpText1,
+    &gGravityRaidHelpText0ByLanguage,
+    &gGravityRaidHelpText1ByLanguage,
 #endif
 };
 
@@ -1542,8 +1542,8 @@ const CardHelpText* gAquaSplashHelpTexts[] = {
     gCardHelpTextJp_0900C9B4,
     gCardHelpTextJp_0900C9F0,
 #elif defined(VERSION_EU)
-    &gAquaSplashHelpText0,
-    &gAquaSplashHelpText1,
+    &gAquaSplashHelpText0ByLanguage,
+    &gAquaSplashHelpText1ByLanguage,
 #endif
 };
 
@@ -1555,8 +1555,8 @@ const CardHelpText* gHolyHelpTexts[] = {
     gCardHelpTextJp_0900CA0C,
     gCardHelpTextJp_0900CA48,
 #elif defined(VERSION_EU)
-    &gHolyHelpText0,
-    &gHolyHelpText1,
+    &gHolyHelpText0ByLanguage,
+    &gHolyHelpText1ByLanguage,
 #endif
 };
 
@@ -1568,8 +1568,8 @@ const CardHelpText* gBlazingDonaldHelpTexts[] = {
     gCardHelpTextJp_0900CA78,
     gCardHelpTextJp_0900CAA4,
 #elif defined(VERSION_EU)
-    &gBlazingDonaldHelpText0,
-    &gBlazingDonaldHelpText1,
+    &gBlazingDonaldHelpText0ByLanguage,
+    &gBlazingDonaldHelpText1ByLanguage,
 #endif
 };
 
@@ -1590,9 +1590,9 @@ const CardHelpText* gGiftedMiracleHelpTexts[] = {
     gCardHelpTextJp_0900CB48,
     gCardHelpTextJp_0900CB6C,
 #elif defined(VERSION_EU)
-    &gGiftedMiracleHelpText0,
-    &gGiftedMiracleHelpText1,
-    &gGiftedMiracleHelpText2,
+    &gGiftedMiracleHelpText0ByLanguage,
+    &gGiftedMiracleHelpText1ByLanguage,
+    &gGiftedMiracleHelpText2ByLanguage,
 #endif
 };
 
@@ -1604,8 +1604,8 @@ const CardHelpText* gMegaFlareHelpTexts[] = {
     gCardHelpTextJp_0900CB90,
     gCardHelpTextJp_0900CBAC,
 #elif defined(VERSION_EU)
-    &gMegaFlareHelpText0,
-    &gMegaFlareHelpText1,
+    &gMegaFlareHelpText0ByLanguage,
+    &gMegaFlareHelpText1ByLanguage,
 #endif
 };
 
@@ -1617,8 +1617,8 @@ const CardHelpText* gFiragaBreakHelpTexts[] = {
     gCardHelpTextJp_0900CBCC,
     gCardHelpTextJp_0900CBF8,
 #elif defined(VERSION_EU)
-    &gFiragaBreakHelpText0,
-    &gFiragaBreakHelpText1,
+    &gFiragaBreakHelpText0ByLanguage,
+    &gFiragaBreakHelpText1ByLanguage,
 #endif
 };
 
@@ -1630,8 +1630,8 @@ const CardHelpText* gShockImpactHelpTexts[] = {
     gCardHelpTextJp_0900CC20,
     gCardHelpTextJp_0900CC50,
 #elif defined(VERSION_EU)
-    &gShockImpactHelpText0,
-    &gShockImpactHelpText1,
+    &gShockImpactHelpText0ByLanguage,
+    &gShockImpactHelpText1ByLanguage,
 #endif
 };
 
@@ -1643,8 +1643,8 @@ const CardHelpText* gIdyllRompHelpTexts[] = {
     gCardHelpTextJp_0900CC78,
     gCardHelpTextJp_0900CCA4,
 #elif defined(VERSION_EU)
-    &gIdyllRompHelpText0,
-    &gIdyllRompHelpText1,
+    &gIdyllRompHelpText0ByLanguage,
+    &gIdyllRompHelpText1ByLanguage,
 #endif
 };
 
@@ -1656,8 +1656,8 @@ const CardHelpText* gCrossSlashPlusHelpTexts[] = {
     gCardHelpTextJp_0900CCCC,
     gCardHelpTextJp_0900CCFC,
 #elif defined(VERSION_EU)
-    &gCrossSlashPlusHelpText0,
-    &gCrossSlashPlusHelpText1,
+    &gCrossSlashPlusHelpText0ByLanguage,
+    &gCrossSlashPlusHelpText1ByLanguage,
 #endif
 };
 
@@ -1669,8 +1669,8 @@ const CardHelpText* gHomingFiraHelpTexts[] = {
     gCardHelpTextJp_0900CD20,
     gCardHelpTextJp_0900CD50,
 #elif defined(VERSION_EU)
-    &gHomingFiraHelpText0,
-    &gHomingFiraHelpText1,
+    &gHomingFiraHelpText0ByLanguage,
+    &gHomingFiraHelpText1ByLanguage,
 #endif
 };
 
@@ -1682,8 +1682,8 @@ const CardHelpText* gHomingBlizzaraHelpTexts[] = {
     gCardHelpTextJp_0900CD70,
     gCardHelpTextJp_0900CDA0,
 #elif defined(VERSION_EU)
-    &gHomingBlizzaraHelpText0,
-    &gHomingBlizzaraHelpText1,
+    &gHomingBlizzaraHelpText0ByLanguage,
+    &gHomingBlizzaraHelpText1ByLanguage,
 #endif
 };
 
@@ -1695,8 +1695,8 @@ const CardHelpText* gSynchroHelpTexts[] = {
     gCardHelpTextJp_0900CDC0,
     gCardHelpTextJp_0900CDFC,
 #elif defined(VERSION_EU)
-    &gSynchroHelpText0,
-    &gSynchroHelpText1,
+    &gSynchroHelpText0ByLanguage,
+    &gSynchroHelpText1ByLanguage,
 #endif
 };
 
@@ -1708,8 +1708,8 @@ const CardHelpText* gBindHelpTexts[] = {
     gCardHelpTextJp_0900CE18,
     gCardHelpTextJp_0900CE54,
 #elif defined(VERSION_EU)
-    &gBindHelpText0,
-    &gBindHelpText1,
+    &gBindHelpText0ByLanguage,
+    &gBindHelpText1ByLanguage,
 #endif
 };
 
@@ -1721,8 +1721,8 @@ const CardHelpText* gTornadoHelpTexts[] = {
     gCardHelpTextJp_0900CE74,
     gCardHelpTextJp_0900CEB0,
 #elif defined(VERSION_EU)
-    &gTornadoHelpText0,
-    &gTornadoHelpText1,
+    &gTornadoHelpText0ByLanguage,
+    &gTornadoHelpText1ByLanguage,
 #endif
 };
 
@@ -1734,8 +1734,8 @@ const CardHelpText* gQuakeHelpTexts[] = {
     gCardHelpTextJp_0900CED0,
     gCardHelpTextJp_0900CF0C,
 #elif defined(VERSION_EU)
-    &gQuakeHelpText0,
-    &gQuakeHelpText1,
+    &gQuakeHelpText0ByLanguage,
+    &gQuakeHelpText1ByLanguage,
 #endif
 };
 
@@ -1749,9 +1749,9 @@ const CardHelpText* gTeleportHelpTexts[] = {
     gCardHelpTextJp_0900CF68,
     gCardHelpTextJp_0900CF90,
 #elif defined(VERSION_EU)
-    &gTeleportHelpText0,
-    &gTeleportHelpText1,
-    &gTeleportHelpText2,
+    &gTeleportHelpText0ByLanguage,
+    &gTeleportHelpText1ByLanguage,
+    &gTeleportHelpText2ByLanguage,
 #endif
 };
 
@@ -1763,8 +1763,8 @@ const CardHelpText* gDarkBreakHelpTexts[] = {
     gCardHelpTextJp_0900CFB4,
     gCardHelpTextJp_0900CFE8,
 #elif defined(VERSION_EU)
-    &gDarkBreakHelpText0,
-    &gDarkBreakHelpText1,
+    &gDarkBreakHelpText0ByLanguage,
+    &gDarkBreakHelpText1ByLanguage,
 #endif
 };
 
@@ -1776,8 +1776,8 @@ const CardHelpText* gDarkFiragaHelpTexts[] = {
     gCardHelpTextJp_0900D014,
     gCardHelpTextJp_0900D04C,
 #elif defined(VERSION_EU)
-    &gDarkFiragaHelpText0,
-    &gDarkFiragaHelpText1,
+    &gDarkFiragaHelpText0ByLanguage,
+    &gDarkFiragaHelpText1ByLanguage,
 #endif
 };
 
@@ -1789,8 +1789,8 @@ const CardHelpText* gDarkAuraHelpTexts[] = {
     gCardHelpTextJp_0900D078,
     gCardHelpTextJp_0900D0B0,
 #elif defined(VERSION_EU)
-    &gDarkAuraHelpText0,
-    &gDarkAuraHelpText1,
+    &gDarkAuraHelpText0ByLanguage,
+    &gDarkAuraHelpText1ByLanguage,
 #endif
 };
 
@@ -1829,17 +1829,17 @@ const CardHelpText* gSleight68HelpTexts[] = {
 
 #if defined(VERSION_EU)
 const CardHelpText* gMmMiracleHelpTexts[] = {
-    &gMmMiracleHelpText0,
-    &gMmMiracleHelpText1,
-    &gMmMiracleHelpText2,
-    &gMmMiracleHelpText3,
+    &gMmMiracleHelpText0ByLanguage,
+    &gMmMiracleHelpText1ByLanguage,
+    &gMmMiracleHelpText2ByLanguage,
+    &gMmMiracleHelpText3ByLanguage,
 };
 
 const CardHelpText* gMmMiraclePairHelpTexts[] = {
-    &gMmMiracleHelpText0,
-    &gMmMiracleHelpText1,
-    &gMmMiracleHelpText2,
-    &gMmMiracleHelpText3,
+    &gMmMiracleHelpText0ByLanguage,
+    &gMmMiracleHelpText1ByLanguage,
+    &gMmMiracleHelpText2ByLanguage,
+    &gMmMiracleHelpText3ByLanguage,
 };
 #endif
 

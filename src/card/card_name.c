@@ -52,7 +52,7 @@ void CardName_0(CardNameWork* work) {
     work->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
     work->textSlotCount = LoadTextSlots(GetLocalizedString(q->cardDef->name), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots((u16*)gBecamePremiumCardText.strings[gLanguage], work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots((u16*)gPremiumCardMessageTextByLanguage.strings[gLanguage], work->textSlots2);
 #else
     work->textSlotCount = LoadTextSlots(q->cardDef->name, work->textSlots);
 #ifdef VERSION_JP

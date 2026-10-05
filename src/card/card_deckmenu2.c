@@ -1049,9 +1049,9 @@ void InitSoraDecks() {
     }
 
 #ifdef VERSION_EU
-    SetDeckName(0, gDefaultDeckName0.strings[gLanguage]);
-    SetDeckName(1, gDefaultDeckName1.strings[gLanguage]);
-    SetDeckName(2, gDefaultDeckName2.strings[gLanguage]);
+    SetDeckName(0, gDefaultDeckName0TextByLanguage.strings[gLanguage]);
+    SetDeckName(1, gDefaultDeckName1TextByLanguage.strings[gLanguage]);
+    SetDeckName(2, gDefaultDeckName2TextByLanguage.strings[gLanguage]);
 #elif defined(VERSION_JP)
     SetDeckName(0, gDefaultDeckName0TextJapanese);
     SetDeckName(1, gDefaultDeckName1TextJapanese);
@@ -1072,9 +1072,9 @@ void InitDebugDecks() {
     BuildDebugKeybladeDeck(1);
     BuildDebugMixedDeck(2);
 #ifdef VERSION_EU
-    SetDeckName(0, gDefaultDeckName0.strings[gLanguage]);
-    SetDeckName(1, gDefaultDeckName1.strings[gLanguage]);
-    SetDeckName(2, gDefaultDeckName2.strings[gLanguage]);
+    SetDeckName(0, gDefaultDeckName0TextByLanguage.strings[gLanguage]);
+    SetDeckName(1, gDefaultDeckName1TextByLanguage.strings[gLanguage]);
+    SetDeckName(2, gDefaultDeckName2TextByLanguage.strings[gLanguage]);
 #elif defined(VERSION_JP)
     SetDeckName(0, gDefaultDeckName0TextJapanese);
     SetDeckName(1, gDefaultDeckName1TextJapanese);

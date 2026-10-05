@@ -295,7 +295,7 @@ typedef struct HadesWork {
 typedef struct LeonWork {
     HumWork base;
     u16 flashTimer;
-    u8 unk_18A;
+    u8 gunbladeRaised;
     u64 savedLearnedStocks;
     u64 savedLearnedStocks2;
 } LeonWork;

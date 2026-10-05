@@ -41,9 +41,9 @@ static s16 sMsTopCursor;
 static void* sMsTopNextMode;
 static struct ObjTiles* sMsTopBarTiles;
 static struct ObjPalette* sMsTopBarPalette;
-static struct ObjTiles* sMsTopWorldwarpTiles;
-static struct ObjPalette* sMsTopWorldwarpPalette;
-static AnimState sWorldwarpAnim;
+static struct ObjTiles* sMsTopArrowTiles;
+static struct ObjPalette* sMsTopArrowPalette;
+static AnimState sMsTopArrowAnim;
 static struct ObjTiles* sMsTopSoraTiles;
 static struct ObjPalette* sMsTopSoraPalette;
 static AnimState sMsTopSoraAnim;
@@ -227,7 +227,7 @@ void UpdateMsTopWarpGfx() {
 }
 
 void SetMsTopWarpAnim(s16 a) {
-    AnimStart(&sWorldwarpAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
+    AnimStart(&sMsTopArrowAnim, sWarpDefs[a].animId, ANIM_FLAG_LOOP);
 }
 
 void QueueMsTopIntroMessage() {
@@ -339,7 +339,7 @@ void MsTopDraw() {
     DrawSprite(sWarpDefs[0].x3 + ((sMsTopMoogleX - sMsTopBg0ScrollX) >> 8), sWarpDefs[0].y3,
         AnimUpdate(&sMsTopMoogleAnim), sMsTopMoogleTiles, sMsTopMooglePalette, NULL, flags, 0x834);
     DrawSprite((sMsTopObjScrollX >> 8) + sWarpDefs[0].x, sWarpDefs[0].y,
-        AnimUpdate(&sWorldwarpAnim), sMsTopWorldwarpTiles, sMsTopWorldwarpPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        AnimUpdate(&sMsTopArrowAnim), sMsTopArrowTiles, sMsTopArrowPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
 
     DrawSprite(sWarpDefs[0].x2 + (sMsTopObjScrollX >> 8), sWarpDefs[0].y2,
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, NULL,
@@ -446,9 +446,9 @@ void mode_ms_top_0(u32 a) {
 
     sMsTopBarPalette = LoadObjPalette(gMsTopBarPalette, 0x20);
     sMsTopBarTiles = LoadObjTiles(gMsTopBarTiles, 0x400);
-    sMsTopWorldwarpPalette = LoadObjPalette(gMsTopArrowPalette, 0x20);
-    sMsTopWorldwarpTiles = LoadObjTiles(gMsTopArrowTiles, 0x500);
-    AnimInit(&sWorldwarpAnim, gMsTopArrowAnims, gMsTopArrowFrames);
+    sMsTopArrowPalette = LoadObjPalette(gMsTopArrowPalette, 0x20);
+    sMsTopArrowTiles = LoadObjTiles(gMsTopArrowTiles, 0x500);
+    AnimInit(&sMsTopArrowAnim, gMsTopArrowAnims, gMsTopArrowFrames);
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, 0x20);
     sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
@@ -682,8 +682,8 @@ void mode_ms_top_2() {
 
     ReleaseObjPalette(sMsTopBarPalette);
     ReleaseObjTiles(sMsTopBarTiles);
-    ReleaseObjPalette(sMsTopWorldwarpPalette);
-    ReleaseObjTiles(sMsTopWorldwarpTiles);
+    ReleaseObjPalette(sMsTopArrowPalette);
+    ReleaseObjTiles(sMsTopArrowTiles);
     ReleaseObjPalette(sMsTopSoraPalette);
     ReleaseObjTiles(sMsTopSoraTiles);
     ReleaseObjPalette(sMsTopShadowPalette);

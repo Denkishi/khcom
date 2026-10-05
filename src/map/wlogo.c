@@ -345,7 +345,7 @@ void task_wlogo_won_0(WlogoWonWork* work) {
     work->palette = LoadObjPalette(gUnk_096FAC84, 0x20);
 
     for (i = 0; i < 10; i++) {
-        work->gfx[i] = gUnk_09EF3924[i];
+        work->gfx[i] = gWlogoWonCardFrames[i];
         work->x[i] = gWlogoWonCards[i].x;
         work->y[i] = gWlogoWonCards[i].y;
         work->speedX[i] = gWlogoWonCards[i].speedX;

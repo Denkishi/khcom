@@ -147,11 +147,11 @@ void mode_sio_battle_0(s32 a) {
     sSioBattleWork->x = -0x8000;
     sSioBattleWork->y = -0x800;
     sSioBattleWork->y2 = 0xA000;
-    sSioBattleWork->tiles = LoadObjTiles(gUnk_0962AD62, 0x240);
+    sSioBattleWork->tiles = LoadObjTiles(gSioBattleLinkTiles, 0x240);
     sSioBattleWork->palette = LoadObjPalette(gUnk_096FBA44, 32);
 
     for (i = 0; i < 3; i++) {
-        sSioBattleWork->gfx2[i] = gUnk_09EF3884[i];
+        sSioBattleWork->gfx2[i] = gSioBattleLinkFrames[i];
     }
 
 #ifdef VERSION_EU
@@ -160,36 +160,36 @@ void mode_sio_battle_0(s32 a) {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sSioBattleWork->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
-        sSioBattleWork->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuTiles, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedTiles, 0x600);
         break;
     case LANGUAGE_ITALIAN:
-        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EFFFA, 0x600);
-        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F0632, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuItalianTiles, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedItalianTiles, 0x600);
         break;
     case LANGUAGE_FRENCH:
-        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EE71A, 0x600);
-        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EED52, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuFrenchTiles, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedFrenchTiles, 0x600);
         break;
     case LANGUAGE_SPANISH:
-        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095EF38A, 0x600);
-        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095EF9C2, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuSpanishTiles, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedSpanishTiles, 0x600);
         break;
     case LANGUAGE_GERMAN:
     default:
-        sSioBattleWork->tiles2 = LoadObjTiles(gUnkEu_095F0C6A, 0x600);
-        sSioBattleWork->tiles3 = LoadObjTiles(gUnkEu_095F12A2, 0x600);
+        sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuGermanTiles, 0x600);
+        sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedGermanTiles, 0x600);
         break;
     }
 #else
-    sSioBattleWork->tiles2 = LoadObjTiles(gUnk_0962B286, 0x600);
+    sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuTiles, 0x600);
     sSioBattleWork->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    sSioBattleWork->tiles3 = LoadObjTiles(gUnk_0962B8BE, 0x600);
+    sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedTiles, 0x600);
     sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
 #endif
-    sSioBattleWork->tiles4 = LoadObjTiles(gUnk_0962B090, 0x1C0);
+    sSioBattleWork->tiles4 = LoadObjTiles(gSioCursorTiles, 0x1C0);
     sSioBattleWork->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
-    AnimInit(&sSioBattleWork->anim, gUnk_09EF38B4, gUnk_09EF3894);
+    AnimInit(&sSioBattleWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBattleWork->anim, 1, ANIM_FLAG_LOOP);
     gfx = AnimGetGfx(&sSioBattleWork->anim);
     w = sSioBattleWork;
@@ -217,30 +217,30 @@ void mode_sio_battle_0(s32 a) {
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_ITALIAN:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuItalianFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedItalianFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_FRENCH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrenchFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrenchFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_SPANISH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuSpanishFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedSpanishFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_GERMAN:
         default:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuGermanFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedGermanFrames[sSioBattleWork->cursor];
             break;
         }
 #else
-        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
 #endif
         break;
@@ -252,31 +252,31 @@ void mode_sio_battle_0(s32 a) {
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_ITALIAN:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuItalianFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedItalianFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_FRENCH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrenchFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrenchFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_SPANISH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuSpanishFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedSpanishFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_GERMAN:
         default:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuGermanFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedGermanFrames[sSioBattleWork->cursor];
             break;
         }
 #else
         w->cursor = 0;
-        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
 #endif
@@ -289,30 +289,30 @@ void mode_sio_battle_0(s32 a) {
 
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_ITALIAN:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuItalianFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedItalianFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_FRENCH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrenchFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrenchFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_SPANISH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuSpanishFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedSpanishFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_GERMAN:
         default:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuGermanFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedGermanFrames[sSioBattleWork->cursor];
             break;
         }
 #else
-        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
         sSioBattleWork->cursorY = sSioBattleWork->cursor * 0x1C00 + 0x3300;
         gSioBattleFileLoaded = 1;
 #endif
@@ -391,30 +391,30 @@ void mode_sio_battle_1() {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_ITALIAN:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB80[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB8C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuItalianFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedItalianFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_FRENCH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB50[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB5C[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuFrenchFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrenchFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_SPANISH:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB68[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EB74[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuSpanishFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedSpanishFrames[sSioBattleWork->cursor];
             break;
         case LANGUAGE_GERMAN:
         default:
-            sSioBattleWork->gfx3 = gUnkEu_09F7EB98[sSioBattleWork->cursor];
-            sSioBattleWork->gfx4 = gUnkEu_09F7EBA4[sSioBattleWork->cursor];
+            sSioBattleWork->gfx3 = gSioBattleMenuGermanFrames[sSioBattleWork->cursor];
+            sSioBattleWork->gfx4 = gSioBattleMenuSelectedGermanFrames[sSioBattleWork->cursor];
             break;
         }
 #else
-        sSioBattleWork->gfx3 = gUnk_09EF38BC[sSioBattleWork->cursor];
-        sSioBattleWork->gfx4 = gUnk_09EF38C8[sSioBattleWork->cursor];
+        sSioBattleWork->gfx3 = gSioBattleMenuFrames[sSioBattleWork->cursor];
+        sSioBattleWork->gfx4 = gSioBattleMenuSelectedFrames[sSioBattleWork->cursor];
 #endif
 
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
@@ -806,35 +806,35 @@ void SioBtlOptionInitObjs() {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sSioBtlOptionWork->tiles = LoadObjTiles(gUnk_0962BEDA, 0xC00);
-        sSioBtlOptionWork->gfx = gUnk_09EF38D4[0];
+        sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuTiles, 0xC00);
+        sSioBtlOptionWork->gfx = gSioBtlOptionMenuFrames[0];
         break;
     case LANGUAGE_ITALIAN:
-        sSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F3D12, 0xC00);
-        sSioBtlOptionWork->gfx = gUnkEu_09F7EBC8[0];
+        sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuItalianTiles, 0xC00);
+        sSioBtlOptionWork->gfx = gSioBtlOptionMenuItalianFrames[0];
         break;
     case LANGUAGE_FRENCH:
-        sSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F24DA, 0xC00);
-        sSioBtlOptionWork->gfx = gUnkEu_09F7EBB8[0];
+        sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuFrenchTiles, 0xC00);
+        sSioBtlOptionWork->gfx = gSioBtlOptionMenuFrenchFrames[0];
         break;
     case LANGUAGE_SPANISH:
-        sSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F30F6, 0xC00);
-        sSioBtlOptionWork->gfx = gUnkEu_09F7EBC0[0];
+        sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuSpanishTiles, 0xC00);
+        sSioBtlOptionWork->gfx = gSioBtlOptionMenuSpanishFrames[0];
         break;
     case LANGUAGE_GERMAN:
     default:
-        sSioBtlOptionWork->tiles = LoadObjTiles(gUnkEu_095F492E, 0xC00);
-        sSioBtlOptionWork->gfx = gUnkEu_09F7EBD0[0];
+        sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuGermanTiles, 0xC00);
+        sSioBtlOptionWork->gfx = gSioBtlOptionMenuGermanFrames[0];
         break;
     }
 #else
-    sSioBtlOptionWork->tiles = LoadObjTiles(gUnk_0962BEDA, 0xC00);
+    sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuTiles, 0xC00);
     sSioBtlOptionWork->palette = LoadObjPalette(gUnk_096FBD24, 32);
-    sSioBtlOptionWork->gfx = gUnk_09EF38D4[0];
+    sSioBtlOptionWork->gfx = gSioBtlOptionMenuFrames[0];
 #endif
-    sSioBtlOptionWork->tiles2 = LoadObjTiles(gUnk_0962B090, 0x1C0);
+    sSioBtlOptionWork->tiles2 = LoadObjTiles(gSioCursorTiles, 0x1C0);
     sSioBtlOptionWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
-    AnimInit(&sSioBtlOptionWork->anim, gUnk_09EF38B4, gUnk_09EF3894);
+    AnimInit(&sSioBtlOptionWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBtlOptionWork->anim, 1, ANIM_FLAG_LOOP);
     sSioBtlOptionWork->gfx2 = AnimGetGfx(&sSioBtlOptionWork->anim);
     sSioBtlOptionWork->cursorVisible = 1;
@@ -856,19 +856,19 @@ void SioBtlOptionInitObjs() {
 #endif
     sSioBtlOptionWork->y2 = 124;
     sSioBtlOptionWork->palette6 = LoadObjPalette(gUnk_096FBAA4, 32);
-    sSioBtlOptionWork->tiles4 = LoadObjTiles(gUnk_0962D7C0, 0x120);
+    sSioBtlOptionWork->tiles4 = LoadObjTiles(gSioBtlOptionLrTiles, 0x120);
     sSioBtlOptionWork->palette4 = LoadObjPalette(gUnk_096FBD44, 32);
-    sSioBtlOptionWork->gfx4 = gUnk_09EF38EC[0];
-    sSioBtlOptionWork->gfx7 = gUnk_09EF38EC[1];
-    sSioBtlOptionWork->gfx8 = gUnk_09EF38EC[2];
+    sSioBtlOptionWork->gfx4 = gSioBtlOptionLrFrames[0];
+    sSioBtlOptionWork->gfx7 = gSioBtlOptionLrFrames[1];
+    sSioBtlOptionWork->gfx8 = gSioBtlOptionLrFrames[2];
     sSioBtlOptionWork->handicapMarkerVisible = 0;
-    sSioBtlOptionWork->tiles5[0] = LoadObjTiles(gUnk_0962D900, 0x280);
+    sSioBtlOptionWork->tiles5[0] = LoadObjTiles(gSioHandicapGauge1Tiles, 0x280);
     sSioBtlOptionWork->palette5[0] = LoadObjPalette(gSioHandicapGauge1Palettes[0], 32);
-    sSioBtlOptionWork->gfx5[0] = gUnk_09EF38FC[0];
+    sSioBtlOptionWork->gfx5[0] = gSioHandicapGauge1Frames[0];
     sSioBtlOptionWork->handicaps[0] = gSioHandicaps[0];
-    sSioBtlOptionWork->tiles5[1] = LoadObjTiles(gUnk_0962DBA0, 0x280);
+    sSioBtlOptionWork->tiles5[1] = LoadObjTiles(gSioHandicapGauge2Tiles, 0x280);
     sSioBtlOptionWork->palette5[1] = LoadObjPalette(gSioHandicapGauge2Palettes[0], 32);
-    sSioBtlOptionWork->gfx5[1] = gUnk_09EF3904[0];
+    sSioBtlOptionWork->gfx5[1] = gSioHandicapGauge2Frames[0];
     sSioBtlOptionWork->handicaps[1] = gSioHandicaps[1];
 
     if (gSioPlayerId == 0) {
@@ -2591,52 +2591,52 @@ void SioBtlCardgetLoad1PWin() {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962CAFC, 0x680);
-        sSioBtlCardgetWork->gfx3 = gUnk_09EF38DC[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962D196, 0x600);
-        sSioBtlCardgetWork->gfx4 = gUnk_09EF38E4[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseFrames[0];
         break;
     case LANGUAGE_FRENCH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F5550, 0x640);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBD8[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F5BB0, 0x580);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBE0[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinFrenchTiles, 0x640);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinFrenchFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseFrenchTiles, 0x580);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseFrenchFrames[0];
         break;
     case LANGUAGE_SPANISH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F6150, 0x640);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBE8[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F67B0, 0x580);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBF0[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinSpanishTiles, 0x640);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinSpanishFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseSpanishTiles, 0x580);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseSpanishFrames[0];
         break;
     case LANGUAGE_ITALIAN:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F6D50, 0x640);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBF8[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F73AA, 0x600);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EC00[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinItalianTiles, 0x640);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinItalianFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseItalianTiles, 0x600);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseItalianFrames[0];
         break;
     case LANGUAGE_GERMAN:
     default:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F79D2, 0x5C0);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC08[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F7FAE, 0x600);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EC10[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinGermanTiles, 0x5C0);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinGermanFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseGermanTiles, 0x600);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseGermanFrames[0];
         break;
     }
 #else
 #ifdef VERSION_JP
-    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962CAFC, 0x500);
+    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x500);
 #else
-    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962CAFC, 0x680);
+    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
 #endif
     sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBDE4, 32);
-    sSioBtlCardgetWork->gfx3 = gUnk_09EF38DC[0];
+    sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinFrames[0];
 #ifdef VERSION_JP
-    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962D196, 0x480);
+    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x480);
 #else
-    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962D196, 0x600);
+    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
 #endif
     sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBE04, 32);
-    sSioBtlCardgetWork->gfx4 = gUnk_09EF38E4[0];
+    sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseFrames[0];
 #endif
 }
 
@@ -2652,52 +2652,52 @@ void SioBtlCardgetLoad2PWin() {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962D196, 0x600);
-        sSioBtlCardgetWork->gfx3 = gUnk_09EF38E4[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962CAFC, 0x680);
-        sSioBtlCardgetWork->gfx4 = gUnk_09EF38DC[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinFrames[0];
         break;
     case LANGUAGE_FRENCH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F5BB0, 0x580);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBE0[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F5550, 0x640);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBD8[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseFrenchTiles, 0x580);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseFrenchFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinFrenchTiles, 0x640);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinFrenchFrames[0];
         break;
     case LANGUAGE_SPANISH:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F67B0, 0x580);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EBF0[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F6150, 0x640);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBE8[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseSpanishTiles, 0x580);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseSpanishFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinSpanishTiles, 0x640);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinSpanishFrames[0];
         break;
     case LANGUAGE_ITALIAN:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F73AA, 0x600);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC00[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F6D50, 0x640);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EBF8[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseItalianTiles, 0x600);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseItalianFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinItalianTiles, 0x640);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinItalianFrames[0];
         break;
     case LANGUAGE_GERMAN:
     default:
-        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnkEu_095F7FAE, 0x600);
-        sSioBtlCardgetWork->gfx3 = gUnkEu_09F7EC10[0];
-        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnkEu_095F79D2, 0x5C0);
-        sSioBtlCardgetWork->gfx4 = gUnkEu_09F7EC08[0];
+        sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseGermanTiles, 0x600);
+        sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseGermanFrames[0];
+        sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinGermanTiles, 0x5C0);
+        sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinGermanFrames[0];
         break;
     }
 #else
 #ifdef VERSION_JP
-    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962D196, 0x480);
+    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x480);
 #else
-    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gUnk_0962D196, 0x600);
+    sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
 #endif
     sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBE04, 32);
-    sSioBtlCardgetWork->gfx3 = gUnk_09EF38E4[0];
+    sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseFrames[0];
 #ifdef VERSION_JP
-    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962CAFC, 0x500);
+    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x500);
 #else
-    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gUnk_0962CAFC, 0x680);
+    sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
 #endif
     sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBDE4, 32);
-    sSioBtlCardgetWork->gfx4 = gUnk_09EF38DC[0];
+    sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinFrames[0];
 #endif
 }
 
@@ -2887,14 +2887,14 @@ void SioChgCardInitObjs() {
         sSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gSoraPalette, 32);
     }
 
-    sSioChgCardWork->tiles = LoadObjTiles(gUnk_0962DEA8, 0x780);
+    sSioChgCardWork->tiles = LoadObjTiles(gSioChgCardHighlightTiles, 0x780);
     sSioChgCardWork->palette = LoadObjPalette(gUnk_096FBF04, 32);
-    AnimInit(&sSioChgCardWork->anim2, gUnk_09EF3920, gUnk_09EF390C);
+    AnimInit(&sSioChgCardWork->anim2, gSioChgCardHighlightAnims, gSioChgCardHighlightFrames);
     AnimStart(&sSioChgCardWork->anim2, 0, ANIM_FLAG_LOOP);
     sSioChgCardWork->gfx2 = AnimGetGfx(&sSioChgCardWork->anim2);
-    sSioChgCardWork->tiles2 = LoadObjTiles(gUnk_0962B090, 0x1C0);
+    sSioChgCardWork->tiles2 = LoadObjTiles(gSioCursorTiles, 0x1C0);
     sSioChgCardWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
-    AnimInit(&sSioChgCardWork->anim3, gUnk_09EF38B4, gUnk_09EF3894);
+    AnimInit(&sSioChgCardWork->anim3, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioChgCardWork->anim3, 0, ANIM_FLAG_LOOP);
     sSioChgCardWork->gfx3 = AnimGetGfx(&sSioChgCardWork->anim3);
 

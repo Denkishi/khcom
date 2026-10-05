@@ -348,10 +348,10 @@ void BosTmFootSyncCollider(BtlObj* sub, TmFootWork* work) {
 void BosTmFootResetPose(TmFootWork* work) {
     work->unk_002 = 0;
     work->unk_000 = 0;
-    SetObjTileSource(work->tiles2, gUnk_09654C04);
-    SetObjTileSource(work->tiles3, gUnk_09654C04);
-    work->gfx = gUnk_09EF39DC[2];
-    work->gfx2 = gUnk_09EF39DC[2];
+    SetObjTileSource(work->tiles2, gBosTmFootTiles);
+    SetObjTileSource(work->tiles3, gBosTmFootTiles);
+    work->gfx = gBosTmFootFrames[2];
+    work->gfx2 = gBosTmFootFrames[2];
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->baseX + 0x100;
@@ -383,10 +383,10 @@ void BosTmFootResetPose(TmFootWork* work) {
 }
 
 void BosTmFootSetBreakPose(TmFootWork* work) {
-    SetObjTileSource(work->tiles2, gUnk_09654C04);
-    SetObjTileSource(work->tiles3, gUnk_09654C04);
-    work->gfx = gUnk_09EF39DC[0];
-    work->gfx2 = gUnk_09EF39DC[0];
+    SetObjTileSource(work->tiles2, gBosTmFootTiles);
+    SetObjTileSource(work->tiles3, gBosTmFootTiles);
+    work->gfx = gBosTmFootFrames[0];
+    work->gfx2 = gBosTmFootFrames[0];
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->baseX + 0x100;
@@ -418,8 +418,8 @@ void BosTmFootSetBreakPose(TmFootWork* work) {
 }
 
 void BosTmFootApplyThrowStep(TmFootWork* work, s16 a) {
-    work->gfx = gUnk_09EF39DC[sBosTmFootThrowSteps[a].gfxIndex];
-    work->gfx2 = gUnk_09EF39DC[sBosTmFootThrowSteps[a].gfx2Index];
+    work->gfx = gBosTmFootFrames[sBosTmFootThrowSteps[a].gfxIndex];
+    work->gfx2 = gBosTmFootFrames[sBosTmFootThrowSteps[a].gfx2Index];
     work->body.z += sBosTmFootThrowSteps[a].dz << 8;
     work->body2.z += sBosTmFootThrowSteps[a].dz2 << 8;
 }
@@ -427,10 +427,10 @@ void BosTmFootApplyThrowStep(TmFootWork* work, s16 a) {
 void BosTmFootSetWalkPose(TmFootWork* work) {
     work->unk_002 = 0;
     work->unk_000 = 0;
-    SetObjTileSource(work->tiles2, gUnk_09658C04);
-    SetObjTileSource(work->tiles3, gUnk_09658C04);
-    work->gfx = gUnk_09EF3A1C[6];
-    work->gfx2 = gUnk_09EF3A1C[1];
+    SetObjTileSource(work->tiles2, gBosTmFootWalkTiles);
+    SetObjTileSource(work->tiles3, gBosTmFootWalkTiles);
+    work->gfx = gBosTmFootWalkFrames[6];
+    work->gfx2 = gBosTmFootWalkFrames[1];
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body.x = work->tm->x2 + 0x500;
@@ -466,8 +466,8 @@ void BosTmFootWalk(TmFootWork* work) {
         return;
     }
 
-    work->gfx = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfxIndex];
-    work->gfx2 = gUnk_09EF3A1C[sBosTmFootWalkSteps[work->tm->step].gfx2Index];
+    work->gfx = gBosTmFootWalkFrames[sBosTmFootWalkSteps[work->tm->step].gfxIndex];
+    work->gfx2 = gBosTmFootWalkFrames[sBosTmFootWalkSteps[work->tm->step].gfx2Index];
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->body3.x = work->tm->x2 + ((sBosTmFootWalkSteps[work->tm->step].x3 + 6) << 8);
@@ -511,8 +511,8 @@ void BosTmFootWalk(TmFootWork* work) {
 }
 
 void BosTmFootApplySpinStep(TmFootWork* work, s16 a) {
-    work->gfx = gUnk_09EF39DC[sBosTmFootSpinSteps[a].gfxIndex];
-    work->gfx2 = gUnk_09EF39DC[sBosTmFootSpinSteps[a].gfx2Index];
+    work->gfx = gBosTmFootFrames[sBosTmFootSpinSteps[a].gfxIndex];
+    work->gfx2 = gBosTmFootFrames[sBosTmFootSpinSteps[a].gfx2Index];
     work->body.z += sBosTmFootSpinSteps[a].dz << 8;
     work->body2.z += sBosTmFootSpinSteps[a].dz2 << 8;
 }
@@ -520,15 +520,15 @@ void BosTmFootApplySpinStep(TmFootWork* work, s16 a) {
 void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     u16 f;
 
-    work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
-    work->tiles2 = AllocObjTiles(0x440, gUnk_09654C04);
-    work->tiles3 = AllocObjTiles(0x440, gUnk_09654C04);
+    work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
+    work->tiles2 = AllocObjTiles(0x440, gBosTmFootTiles);
+    work->tiles3 = AllocObjTiles(0x440, gBosTmFootTiles);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    work->gfx = gUnk_09EF39DC[2];
-    work->gfx2 = gUnk_09EF39DC[2];
-    work->gfx3 = gUnk_09EF39BC[0];
-    work->gfx4 = gUnk_09EF39C4[0];
+    work->gfx = gBosTmFootFrames[2];
+    work->gfx2 = gBosTmFootFrames[2];
+    work->gfx3 = gBosTmShoe0Frames[0];
+    work->gfx4 = gBosTmShoe1Frames[0];
     work->tm = arg;
     work->tm->tileCount += work->tiles2->count + work->tiles3->count;
     work->footFrame = 0;
@@ -585,8 +585,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
 
             work->footFrame = sBosTmFootIdleFrames[work->tm->step];
             work->footFrame2 = sBosTmFootIdleFrames[(work->tm->step + 4) & 7];
-            work->gfx = gUnk_09EF39DC[(s8)work->footFrame];
-            work->gfx2 = gUnk_09EF39DC[(s8)work->footFrame2];
+            work->gfx = gBosTmFootFrames[(s8)work->footFrame];
+            work->gfx2 = gBosTmFootFrames[(s8)work->footFrame2];
             work->body3.z =
                 work->tm->z2 + ((sBosTmFootIdleZ[(s8)work->footFrame] + 40) << 8);
             work->body4.z =
@@ -678,8 +678,8 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         if (work->tm->hitCount == 1) {
             work->unk_002 = 0;
             work->unk_000 = 0;
-            work->gfx = gUnk_09EF39DC[1];
-            work->gfx2 = gUnk_09EF39DC[1];
+            work->gfx = gBosTmFootFrames[1];
+            work->gfx2 = gBosTmFootFrames[1];
             work->body.z = work->tm->baseZ +
                             ((sBosTmFootSteps[work->tm->step].dz - 4) << 8);
             work->body2.z = work->tm->baseZ +
@@ -690,16 +690,16 @@ u8 task_bos_tm_foot_1(TmFootWork* work) {
         }
 
         if (work->tm->step <= 2) {
-            work->gfx = gUnk_09EF39DC[sBosTmFootSteps[work->tm->step].gfxIndex];
-            work->gfx2 = gUnk_09EF39DC[sBosTmFootSteps[work->tm->step].gfx2Index];
+            work->gfx = gBosTmFootFrames[sBosTmFootSteps[work->tm->step].gfxIndex];
+            work->gfx2 = gBosTmFootFrames[sBosTmFootSteps[work->tm->step].gfx2Index];
             work->body.z += sBosTmFootSteps[work->tm->step].dz << 8;
             work->body2.z += sBosTmFootSteps[work->tm->step].dz2 << 8;
         }
 
         if (work->tm->hurtTimer <= 2) {
             work->gfx =
-                gUnk_09EF39DC[(table = sBosTmFootSteps, e = &table[work->tm->hurtTimer])->gfxIndex + 1];
-            work->gfx2 = gUnk_09EF39DC[e->gfx2Index + 1];
+                gBosTmFootFrames[(table = sBosTmFootSteps, e = &table[work->tm->hurtTimer])->gfxIndex + 1];
+            work->gfx2 = gBosTmFootFrames[e->gfx2Index + 1];
             work->body.z -= e->dz << 8;
             work->body2.z -= e->dz2 << 8;
         }
@@ -830,7 +830,7 @@ void BosTmClbHold(TmClbArg* p, TmArmPos* a, u8 mode) {
 void task_bos_tm_clb_0(TmClbWork* work, TmClbArg* arg) {
     TmArmPos* p;
 
-    work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
+    work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->arg = arg;
     p = arg->src;
@@ -901,7 +901,7 @@ void task_bos_tm_clb_2(TmClbWork* work) {
 
     p = AllocObjAffineAngle(work->angle, 0);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gUnk_0962E838, work->tiles, work->palette, p, SPRITE_PRIORITY(2),
+    DrawSprite(x, y, gBosTmClubHandleFrame0, work->tiles, work->palette, p, SPRITE_PRIORITY(2),
                -0x1002 - (work->y >> 8) * 4);
     // @bug AllocObjAffineAngle returns NULL at angle 0 (NULL write).
     p->doubleSize = 1;
@@ -1024,7 +1024,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     TmArmJoint* q;
 
     work->src = arg;
-    work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
+    work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->timer = 0;
@@ -1061,21 +1061,21 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->tips[1].angle = 240;
 
     for (i = 0; i < 3; i++) {
-        AnimInit(&work->joints.arms[0][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
+        AnimInit(&work->joints.arms[0][i].anim, gBosTmArmAnims, gBosTmArmFrames);
         AnimStart(&work->joints.arms[0][i].anim, 0, ANIM_FLAG_LOOP);
         work->joints.arms[0][i].anim.frame = i * 2;
         work->joints.arms[0][i].gfx = AnimGetGfx(&work->joints.arms[0][i].anim);
-        AnimInit(&work->joints.arms[1][i].anim, gUnk_09EF39B4, gUnk_09EF39A0);
+        AnimInit(&work->joints.arms[1][i].anim, gBosTmArmAnims, gBosTmArmFrames);
         AnimStart(&work->joints.arms[1][i].anim, 0, ANIM_FLAG_LOOP);
         work->joints.arms[1][i].anim.frame = i * 2;
         work->joints.arms[1][i].gfx = AnimGetGfx(&work->joints.arms[1][i].anim);
     }
 
-    work->joints.arms[0][3].gfx = gUnk_0962E7A0;
-    work->joints.arms[1][3].gfx = gUnk_0962E7A0;
-    work->tiles2 = AllocObjTiles(0x140, gUnk_09657C04);
+    work->joints.arms[0][3].gfx = gBosTmHandFrame0;
+    work->joints.arms[1][3].gfx = gBosTmHandFrame0;
+    work->tiles2 = AllocObjTiles(0x140, gBosTmClubTiles);
     work->src->tm->tileCount += work->tiles2->count;
-    AnimInit(&work->anim, gUnk_09EF3A18, gUnk_09EF39F8);
+    AnimInit(&work->anim, gBosTmClubAnims, gBosTmClubFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->clb.tiles = work->tiles2;
     work->clb2.tiles = work->tiles2;
@@ -1653,7 +1653,7 @@ u8 task_bos_tm_arm_1(TmArmWork* work) {
         work->clb2.gfx = gfx;
 
         if (gFrameCounter % 5 == 0) {
-            LoadObjPaletteBank(work->palette->index + 1, gUnk_096FB304 + work->paletteStep * 16);
+            LoadObjPaletteBank(work->palette->index + 1, gBosTmClubPalettes + work->paletteStep * 16);
             work->paletteStep = (work->paletteStep + 1) & 7;
         }
     }

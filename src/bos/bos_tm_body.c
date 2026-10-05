@@ -162,8 +162,8 @@ void BosTmBodyPlaceParts(TmBodyWork* work) {
 void BosTmBodyResetPose(TmBodyWork* work) {
     work->angle = 0;
     work->angle2 = 0;
-    work->gfx3 = gUnk_09EF397C[0];
-    work->gfx4 = gUnk_09EF3960[0];
+    work->gfx3 = gBosTmBodyPart2Frames[0];
+    work->gfx4 = gBosTmBodyPart3Frames[0];
     work->tm->x2 = work->tm->baseX;
     work->tm->y2 = work->tm->baseY;
     work->tm->z2 = work->tm->baseZ;
@@ -176,8 +176,8 @@ void BosTmBodySetDefeatPose(TmBodyWork* work) {
 
     work->angle = 226;
     work->angle2 = 226;
-    work->gfx3 = gUnk_09EF397C[0];
-    work->gfx4 = gUnk_09EF3960[0];
+    work->gfx3 = gBosTmBodyPart2Frames[0];
+    work->gfx4 = gBosTmBodyPart3Frames[0];
     dz = 0xF00;
     src = work->tm;
 
@@ -208,8 +208,8 @@ void BosTmBodySetDefeatPose(TmBodyWork* work) {
 void BosTmBodySetBreakPose(TmBodyWork* work) {
     work->angle = 30;
     work->angle2 = 10;
-    work->gfx3 = gUnk_09EF397C[0];
-    work->gfx4 = gUnk_09EF3960[0];
+    work->gfx3 = gBosTmBodyPart2Frames[0];
+    work->gfx4 = gBosTmBodyPart3Frames[0];
 
     if (work->tm->flags & TM_FLAG_FACING_LEFT) {
         work->tm->x2 = work->tm->baseX + 0xA00;
@@ -259,15 +259,15 @@ void BosTmBodyApplyThrowStep(TmBodyWork* work, s16 a) {
     work->body3.z += sBosTmBodyThrowSteps[a].dz3 << 8;
     work->body4.z += sBosTmBodyThrowSteps[a].dz4 << 8;
     work->tm->z2 += sBosTmBodyThrowSteps[a].dz2 << 8;
-    work->gfx3 = gUnk_09EF397C[sBosTmBodyThrowSteps[a].gfx3Index];
-    work->gfx4 = gUnk_09EF3960[sBosTmBodyThrowSteps[a].gfx4Index];
+    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodyThrowSteps[a].gfx3Index];
+    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodyThrowSteps[a].gfx4Index];
 }
 
 void BosTmBodySetWalkPose(TmBodyWork* work) {
     work->angle = 0;
     work->angle2 = 0;
-    work->gfx3 = gUnk_09EF397C[0];
-    work->gfx4 = gUnk_09EF3960[0];
+    work->gfx3 = gBosTmBodyPart2Frames[0];
+    work->gfx4 = gBosTmBodyPart3Frames[0];
     work->tm->x2 = work->tm->baseX;
     work->tm->y2 = work->tm->baseY;
     work->tm->z2 = work->tm->baseZ - 0x1500;
@@ -401,8 +401,8 @@ void BosTmBodyApplySpinStep(TmBodyWork* work, s16 a) {
     work->body3.z += sBosTmBodySpinSteps[a].dz3 << 8;
     work->body4.z += sBosTmBodySpinSteps[a].dz4 << 8;
     work->tm->z2 += sBosTmBodySpinSteps[a].dz2 << 8;
-    work->gfx3 = gUnk_09EF397C[sBosTmBodySpinSteps[a].gfx3Index];
-    work->gfx4 = gUnk_09EF3960[sBosTmBodySpinSteps[a].gfx4Index];
+    work->gfx3 = gBosTmBodyPart2Frames[sBosTmBodySpinSteps[a].gfx3Index];
+    work->gfx4 = gBosTmBodyPart3Frames[sBosTmBodySpinSteps[a].gfx4Index];
 }
 
 s32 GetAbsoluteDifference(s32 a, s32 b) {
@@ -644,13 +644,13 @@ void BosTmBodyUpdateReaction(BtlObj* a, TmBodyWork* work) {
 }
 
 void task_bos_tm_body_0(TmBodyWork* work, TmWork* arg) {
-    work->tiles = LoadObjTiles(gUnk_09652E84, 0x1D80);
+    work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    work->gfx = gUnk_09EF3950[0];
-    work->gfx2 = gUnk_09EF3958[0];
-    work->gfx3 = gUnk_09EF397C[0];
-    work->gfx4 = gUnk_09EF3960[0];
+    work->gfx = gBosTmBodyPart0Frames[0];
+    work->gfx2 = gBosTmBodyPart1Frames[0];
+    work->gfx3 = gBosTmBodyPart2Frames[0];
+    work->gfx4 = gBosTmBodyPart3Frames[0];
     work->tm = arg;
     work->tm->tileIndex = work->tiles->index;
     work->tm->tileCount += work->tiles->count;

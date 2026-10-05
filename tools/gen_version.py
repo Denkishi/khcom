@@ -1640,7 +1640,7 @@ TARGET_ONLY_SYMBOLS = {
         "gBHpgagEAnim2": 0x08b4fc6c,
         "gBHpgagEAnim3": 0x08b4fc76,
         "gBHpgagEAnim4": 0x08b4fc80,
-        "gUnk_0962DEA8": 0x095ef388,
+        "gSioChgCardHighlightTiles": 0x095ef388,
         "gUnk_096FBE24": 0x096c934c,
         "gUnk_096FBF04": 0x096c942c,
         "gUnk_097A2DF8": 0x09780840,

@@ -100,7 +100,7 @@ void SrollBlit1bppWidth1(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -116,7 +116,7 @@ void SrollBlit1bppWidth2(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -133,7 +133,7 @@ void SrollBlit1bppWidth3(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -151,7 +151,7 @@ void SrollBlit1bppWidth4(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -170,7 +170,7 @@ void SrollBlit1bppWidth5(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -190,7 +190,7 @@ void SrollBlit1bppWidth6(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -211,7 +211,7 @@ void SrollBlit1bppWidth7(u32* dst, u8* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 24;
@@ -232,7 +232,7 @@ void SrollBlit1bppWidth8(u32* dst, u8* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 7) & 1];
@@ -259,7 +259,7 @@ u32 SrollTextBlit1bpp(SrollBlit* w) {
     e = w->x + w->width;
     p = w->buf;
     d = w->dst;
-    m = &gUnk_09A54918[w->width][w->x];
+    m = &gStaffRollBlitMasks[w->width][w->x];
     k = m->keepLeft | m->keepRight;
     p[0] = d[0] & k;
     p[1] = d[1] & k;
@@ -282,7 +282,7 @@ u32 SrollTextBlit1bpp(SrollBlit* w) {
         p[15] = d[15] & k;
     }
 
-    gUnk_09A54CB8[w->width](p, w->src, w->colors, w->x);
+    gStaffRollBlit1bppFuncs[w->width](p, w->src, w->colors, w->x);
     d[0] = p[0];
     d[1] = p[1];
     d[2] = p[2];
@@ -323,7 +323,7 @@ void SrollBlit2bppWidth1(u32* dst, u16* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
     d = dst;
     s = src;
 
@@ -343,7 +343,7 @@ void SrollBlit2bppWidth2(u32* dst, u16* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 16;
@@ -360,7 +360,7 @@ void SrollBlit2bppWidth3(u32* dst, u16* src, u32* pal, s32 x) {
     u32 v;
     u32 c;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         c = src[i] << 16;
@@ -377,7 +377,7 @@ void SrollBlit2bppWidth4(u32* dst, u16* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 6) & 3];
@@ -394,7 +394,7 @@ void SrollBlit2bppWidth5(u32* dst, u16* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 6) & 3];
@@ -412,7 +412,7 @@ void SrollBlit2bppWidth6(u32* dst, u16* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 6) & 3];
@@ -431,7 +431,7 @@ void SrollBlit2bppWidth7(u32* dst, u16* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 6) & 3];
@@ -451,7 +451,7 @@ void SrollBlit2bppWidth8(u32* dst, u16* src, u32* pal, s32 x) {
     s32 i;
     u32 v;
 
-    t = &gUnk_09A54C78[x];
+    t = &gStaffRollBlitShifts[x];
 
     for (i = 0; i <= 7; i++) {
         v = pal[(src[i] >> 6) & 3];
@@ -478,7 +478,7 @@ u32 SrollTextBlit2bpp(SrollBlit* w) {
     e = w->x + w->width;
     p = w->buf;
     d = w->dst;
-    m = &gUnk_09A54918[w->width][w->x];
+    m = &gStaffRollBlitMasks[w->width][w->x];
     k = m->keepLeft | m->keepRight;
     p[0] = d[0] & k;
     p[1] = d[1] & k;
@@ -501,7 +501,7 @@ u32 SrollTextBlit2bpp(SrollBlit* w) {
         p[15] = d[15] & k;
     }
 
-    gUnk_09A54CDC[w->width](p, w->src, w->colors, w->x);
+    gStaffRollBlit2bppFuncs[w->width](p, w->src, w->colors, w->x);
     d[0] = p[0];
     d[1] = p[1];
     d[2] = p[2];
@@ -654,13 +654,13 @@ void SrollTextSelectFont(SrollWork* work, u32 mode) {
         mode = 0;
     }
 
-    work->glyphBpp = gUnk_09A5B440[mode].bpp;
-    work->glyphHeight = gUnk_09A5B440[mode].height;
-    work->fontPages = gUnk_09A5B440[mode].pages;
-    work->fontGlyphs = gUnk_09A5B440[mode].glyphs;
-    work->fontWidths = gUnk_09A5B440[mode].widths;
-    work->fontGlyphCount = gUnk_09A5B440[mode].glyphCount;
-    work->unk_44 = gUnk_09A5B440[mode].unk_14;
+    work->glyphBpp = gStaffRollFonts[mode].bpp;
+    work->glyphHeight = gStaffRollFonts[mode].height;
+    work->fontPages = gStaffRollFonts[mode].pages;
+    work->fontGlyphs = gStaffRollFonts[mode].glyphs;
+    work->fontWidths = gStaffRollFonts[mode].widths;
+    work->fontGlyphCount = gStaffRollFonts[mode].glyphCount;
+    work->unk_44 = gStaffRollFonts[mode].unk_14;
     SrollTextSetCursorTile(work, work->x, work->y);
 }
 
@@ -1157,7 +1157,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* s, u8 flush)
 }
 
 u16 SrollTextMapSingleByteChar(u8 c) {
-    return gUnk_09A5B470[c];
+    return gStaffRollSingleByteCharMap[c];
 }
 
 void ScanlineDmaReset() {

@@ -17,7 +17,7 @@ objects:
     start: 0x09AB93B8
     end: 0x09CA13D0
 entries:
-- name: gUnk_09A5B670
+- name: gBlockAudioSampleRate
   record: BlockAudioSampleRate
   declare: false
   values: [21024]

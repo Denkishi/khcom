@@ -23,7 +23,7 @@ objects:
     start: 0x094F22C4
     end: 0x094F97C4
 entries:
-- name: gUnk_08F6E190
+- name: gDebugFont2Bank0Tiles
   format: tiles4
   width: 32
   us:
@@ -35,7 +35,7 @@ entries:
   eu:
     address: 0x08F7F168
     size: 4096
-- name: gUnk_08F6F190
+- name: gDebugFont2Bank1Tiles
   format: tiles4
   width: 32
   us:
@@ -47,7 +47,7 @@ entries:
   eu:
     address: 0x08F80168
     size: 6144
-- name: gUnk_08F70990
+- name: gDebugFontPalette
   format: raw
   ctype: u16
   const: true
@@ -60,7 +60,7 @@ entries:
   eu:
     address: 0x08F81968
     size: 32
-- name: gUnk_0941BEB8
+- name: gDebugFont0Tiles
   format: tiles4
   width: 4
   us:
@@ -72,7 +72,7 @@ entries:
   eu:
     address: 0x094F22C4
     size: 7808
-- name: gUnk_0941DD38
+- name: gDebugFont1Tiles
   format: tiles4
   width: 4
   us:

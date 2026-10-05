@@ -31,51 +31,51 @@ objects:
     start: 0x08F7EBF8
     end: 0x08F7F15C
 entries:
-- name: gUnkEu_09F5D4D8
+- name: gLanguageSelectCursorFrames
   record: SpriteTable
-  items: [gUnkEu_08C9C97C, gUnkEu_08C9C99E, gUnkEu_08C9C9C0, gUnkEu_08C9C9E2, gUnkEu_08C9CA04]
+  items: [gLanguageSelectCursorFrame0, gLanguageSelectCursorFrame1, gLanguageSelectCursorFrame2, gLanguageSelectCursorFrame3, gLanguageSelectCursorFrame4]
   eu:
     address: 0x09F5D4D8
-- name: gUnkEu_09F5D4EC
+- name: gLanguageSelectCursorAnims
   record: AnimTable
-  items: [gUnkEu_08C9CA26, gUnkEu_08C9CA30, gUnkEu_08C9CA3A, gUnkEu_08C9CA44, gUnkEu_08C9CA4E]
+  items: [gLanguageSelectCursorAnim0, gLanguageSelectCursorAnim1, gLanguageSelectCursorAnim2, gLanguageSelectCursorAnim3, gLanguageSelectCursorAnim4]
   eu:
     address: 0x09F5D4EC
-- name: gUnkEu_08C9CA58
+- name: gLanguageSelectCursorTiles
   format: sprite_sheet
   cell: [80, 24]
   anchor: [20, 18]
   columns: 5
   frames:
-  - symbol: gUnkEu_08C9C97C
+  - symbol: gLanguageSelectCursorFrame0
     pieces:
     - [16x8, -16, -18]
     - [8x16, -16, -10]
     - [32x8, -8, -2]
     - [8x8, 49, -2]
     - [32x8, 18, -2]
-  - symbol: gUnkEu_08C9C99E
+  - symbol: gLanguageSelectCursorFrame1
     pieces:
     - [16x8, -18, -18]
     - [8x16, -18, -10]
     - [32x8, -10, -2]
     - [8x8, 50, -2]
     - [32x8, 21, -2, {same: [0, 4]}]
-  - symbol: gUnkEu_08C9C9C0
+  - symbol: gLanguageSelectCursorFrame2
     pieces:
     - [16x8, -20, -18]
     - [8x16, -20, -10]
     - [32x8, -12, -2]
     - [8x8, 52, -2]
     - [32x8, 20, -2]
-  - symbol: gUnkEu_08C9C9E2
+  - symbol: gLanguageSelectCursorFrame3
     pieces:
     - [16x8, -17, -18]
     - [8x16, -17, -10]
     - [32x8, -9, -2]
     - [8x8, 49, -2]
     - [32x8, 17, -2]
-  - symbol: gUnkEu_08C9CA04
+  - symbol: gLanguageSelectCursorFrame4
     pieces:
     - [16x8, -18, -18]
     - [8x16, -18, -10]
@@ -83,43 +83,43 @@ entries:
     - [8x8, 50, -2]
     - [32x8, 18, -2]
   animations:
-  - symbol: gUnkEu_08C9CA26
+  - symbol: gLanguageSelectCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnkEu_08C9CA30
+  - symbol: gLanguageSelectCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
-  - symbol: gUnkEu_08C9CA3A
+  - symbol: gLanguageSelectCursorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
-  - symbol: gUnkEu_08C9CA44
+  - symbol: gLanguageSelectCursorAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnkEu_08C9CA4E
+  - symbol: gLanguageSelectCursorAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
   eu:
     address: 0x08C9C97C
     size: 636
-- name: gUnkEu_08F6A6FC
+- name: gLanguageSelectPalette
   format: palette
   eu:
     address: 0x08F6A6FC
     size: 64
-- name: gUnkEu_08F77180
+- name: gLanguageSelectTiles
   format: tiles4
   width: 2
   eu:
     address: 0x08F77180
     size: 7864
     compress: lz77
-- name: gUnkEu_08F7EBF8
+- name: gLanguageSelectBgMap
   format: tilemap
   eu:
     address: 0x08F7EBF8
     size: 952
     compress: lz77
-- name: gUnkEu_08F7EFB0
+- name: gLanguageSelectMenuMap
   format: tilemap
   eu:
     address: 0x08F7EFB0

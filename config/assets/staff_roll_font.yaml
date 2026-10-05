@@ -221,7 +221,7 @@ entries:
     address: 0x09A095DC
   eu:
     address: 0x09AB2454
-- name: gUnk_09A54918
+- name: gStaffRollBlitMasks
   record: SrollMask
   shape: [9, 8]
   const: false
@@ -304,7 +304,7 @@ entries:
     address: 0x09A097E8
   eu:
     address: 0x09AB2660
-- name: gUnk_09A54C78
+- name: gStaffRollBlitShifts
   record: SrollShift
   const: false
   elements:
@@ -322,7 +322,7 @@ entries:
     address: 0x09A09B48
   eu:
     address: 0x09AB29C0
-- name: gUnk_09A54CB8
+- name: gStaffRollBlit1bppFuncs
   record: StaffRollBlitTable
   items:
   - SrollBlit1bppWidth0
@@ -340,7 +340,7 @@ entries:
     address: 0x09A09B88
   eu:
     address: 0x09AB2A00
-- name: gUnk_09A54CDC
+- name: gStaffRollBlit2bppFuncs
   record: StaffRollBlitTable
   items:
   - SrollBlit2bppWidth0
@@ -582,7 +582,7 @@ entries:
     address: 0x09A10010
   eu:
     address: 0x09AB8E88
-- name: gUnk_09A5B440
+- name: gStaffRollFonts
   record: SrollFont
   elements:
   - [2, 2, gStaffRollFontPages, gStaffRollFont0Glyphs, gStaffRollFont0Widths, 524, 8]
@@ -593,7 +593,7 @@ entries:
     address: 0x09A10310
   eu:
     address: 0x09AB9188
-- name: gUnk_09A5B470
+- name: gStaffRollSingleByteCharMap
   record: StaffRollCharMap
   values:
   - [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]

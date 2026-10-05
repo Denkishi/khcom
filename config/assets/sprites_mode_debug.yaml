@@ -59,53 +59,53 @@ objects:
     start: 0x08F79038
     end: 0x08F79520
 entries:
-- name: gUnk_09EDF764
+- name: gDebugMenuCursorFrames
   record: SpriteTable
-  items: [gUnk_0895085C, gUnk_0895087E, gUnk_089508A0, gUnk_089508C2]
+  items: [gDebugMenuCursorFrame0, gDebugMenuCursorFrame1, gDebugMenuCursorFrame2, gDebugMenuCursorFrame3]
   us:
     address: 0x09EDF764
   jp:
     address: 0x09EB71E0
   eu:
     address: 0x09F5A3BC
-- name: gUnk_09EDF774
+- name: gDebugMenuCursorAnims
   record: AnimTable
-  items: [gUnk_089508E4]
+  items: [gDebugMenuCursorAnim0]
   us:
     address: 0x09EDF774
   jp:
     address: 0x09EB71F0
   eu:
     address: 0x09F5A3CC
-- name: gUnk_08950902
+- name: gDebugMenuCursorTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnk_0895085C
+  - symbol: gDebugMenuCursorFrame0
     pieces:
     - [16x16, 0, 0]
     - [32x8, 16, 8]
     - [32x8, 48, 8]
     - [16x8, 80, 8]
     - [8x8, 96, 8]
-  - symbol: gUnk_0895087E
+  - symbol: gDebugMenuCursorFrame1
     pieces:
     - [32x8, 16, 8]
     - [32x8, 48, 8]
     - [16x8, 80, 8]
     - [8x8, 96, 8]
     - [16x16, 0, 0]
-  - symbol: gUnk_089508A0
+  - symbol: gDebugMenuCursorFrame2
     pieces:
     - [32x8, 16, 8]
     - [32x8, 48, 8]
     - [16x8, 80, 8]
     - [8x8, 96, 8]
     - [16x16, 0, 0]
-  - symbol: gUnk_089508C2
+  - symbol: gDebugMenuCursorFrame3
     pieces:
     - [32x8, 16, 8]
     - [32x8, 48, 8]
@@ -113,7 +113,7 @@ entries:
     - [8x8, 96, 8]
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_089508E4
+  - symbol: gDebugMenuCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [0, 8], [3, 8]]
   us:
@@ -125,7 +125,7 @@ entries:
   eu:
     address: 0x0897C180
     size: 902
-- name: gUnk_08C6B0C4
+- name: gDebugCheckerBgTiles
   format: tiles4
   us:
     address: 0x08C6B0C4
@@ -137,7 +137,7 @@ entries:
     address: 0x08F6A73C
     size: 3776
     compress: lz77
-- name: gUnk_08C72CE4
+- name: gDebugMenuBgTiles
   format: tiles4
   width: 2
   us:
@@ -150,7 +150,7 @@ entries:
     address: 0x08F6B5FC
     size: 14656
     compress: lz77
-- name: gUnk_08EEE384
+- name: gDebugCheckerBgMap
   format: tilemap
   us:
     address: 0x08EEE384
@@ -162,7 +162,7 @@ entries:
     address: 0x08F79038
     size: 260
     compress: lz77
-- name: gUnk_08EEEB84
+- name: gDebugMenuBgMap
   format: tilemap
   us:
     address: 0x08EEEB84
@@ -174,7 +174,7 @@ entries:
     address: 0x08F7913C
     size: 996
     compress: lz77
-- name: gUnk_08F683C4
+- name: gDebugCheckerBgPalette
   format: palette
   us:
     address: 0x08F683C4
@@ -185,7 +185,7 @@ entries:
   eu:
     address: 0x08F6491C
     size: 32
-- name: gUnk_08F683E4
+- name: gDebugMenuBgPalette
   format: palette
   us:
     address: 0x08F683E4
@@ -196,7 +196,7 @@ entries:
   eu:
     address: 0x08F6493C
     size: 512
-- name: gUnk_08F685E4
+- name: gDebugMenuCursorPalette
   format: palette
   us:
     address: 0x08F685E4
@@ -207,7 +207,7 @@ entries:
   eu:
     address: 0x08F64B3C
     size: 32
-- name: gUnk_08F68604
+- name: gDebugMenuTextPalette
   format: palette
   const: true
   us:

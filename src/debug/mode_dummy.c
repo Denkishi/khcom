@@ -46,13 +46,13 @@ void mode_dummy_0(u32 arg) {
     DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
     SetupBg(1, 1, 0x0C, 8);
 #ifdef VERSION_EU
-    LoadBgTilesLz77(1, gUnk_08C6B0C4);
-    LoadBgMapLz77(1, gUnk_08EEE384);
-    LoadBgPalette(1, gUnk_08F683C4, 0x20);
+    LoadBgTilesLz77(1, gDebugCheckerBgTiles);
+    LoadBgMapLz77(1, gDebugCheckerBgMap);
+    LoadBgPalette(1, gDebugCheckerBgPalette, 0x20);
 #else
-    LoadBgTiles(1, gUnk_08C6B0C4, 0x7C20);
-    LoadBgPalette(1, gUnk_08F683C4, 0x20);
-    LoadBgMap(1, gUnk_08EEE384, 0x800);
+    LoadBgTiles(1, gDebugCheckerBgTiles, 0x7C20);
+    LoadBgPalette(1, gDebugCheckerBgPalette, 0x20);
+    LoadBgMap(1, gDebugCheckerBgMap, 0x800);
 #endif
     EnableBg(1);
     sDummyEntryIndex = arg;

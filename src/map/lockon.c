@@ -25,8 +25,8 @@ void task_lockon_0(LockonWork* work) {
     gLockonDoorPosition = EwramAlloc(12);
     work->tiles = AllocObjTiles(0x80, NULL);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
-    SetObjTileSource(work->tiles, gUnk_090D7C84);
-    AnimInit(&work->anim, gUnk_09EEC66C, gUnk_09EEC660);
+    SetObjTileSource(work->tiles, gLockonCursorTiles);
+    AnimInit(&work->anim, gLockonCursorAnims, gLockonCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 

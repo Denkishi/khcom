@@ -57,22 +57,22 @@ void mode_debug_0() {
     SetBgColorMode(1, BGCNT_256COLOR);
     SetBgSize(1, 0);
 #ifdef VERSION_EU
-    LoadBgPalette(1, gUnk_08F683E4, 0x200);
-    LoadBgTilesLz77(1, gUnk_08C72CE4);
-    LoadBgMapLz77(1, gUnk_08EEEB84);
+    LoadBgPalette(1, gDebugMenuBgPalette, 0x200);
+    LoadBgTilesLz77(1, gDebugMenuBgTiles);
+    LoadBgMapLz77(1, gDebugMenuBgMap);
 #else
-    LoadBgTiles(1, gUnk_08C72CE4, 0x5B40);
-    LoadBgPalette(1, gUnk_08F683E4, 0x200);
-    LoadBgMap(1, gUnk_08EEEB84, 0x800);
+    LoadBgTiles(1, gDebugMenuBgTiles, 0x5B40);
+    LoadBgPalette(1, gDebugMenuBgPalette, 0x200);
+    LoadBgMap(1, gDebugMenuBgMap, 0x800);
 #endif
     EnableBg(1);
     SetBackdropColor(31, 31, 31);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gUnk_08F68604, 0x20, 0x0F);
-    sDebugWork->tiles = LoadObjTiles(gUnk_08950902, 0x2E0);
-    sDebugWork->palette = LoadObjPalette(gUnk_08F685E4, 0x20);
-    AnimInit(&sDebugWork->anim, gUnk_09EDF774, gUnk_09EDF764);
+    DebugTextLoadPalette(0, gDebugMenuTextPalette, 0x20, 0x0F);
+    sDebugWork->tiles = LoadObjTiles(gDebugMenuCursorTiles, 0x2E0);
+    sDebugWork->palette = LoadObjPalette(gDebugMenuCursorPalette, 0x20);
+    AnimInit(&sDebugWork->anim, gDebugMenuCursorAnims, gDebugMenuCursorFrames);
     AnimStart(&sDebugWork->anim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_JP
     DebugTextPrint(0, 0, 2, "\x82\x69\x82\x4f\x82\x53\x82\x50\x82\x4f\x82\x4f\x82\x50\x82\x81");

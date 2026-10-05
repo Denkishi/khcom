@@ -32,11 +32,11 @@ void mode_lang_0(s32 arg) {
     SetupBg(1, 0, 30, 0);
     SetBgPriority(0, 0);
     SetBgPriority(1, 1);
-    LoadBgPalette(0, gUnkEu_08F6A6FC, 0x40);
-    LoadBgTilesLz77(0, gUnkEu_08F77180);
-    LoadBgMapLz77(0, gUnkEu_08F7EFB0);
-    LoadBgMapLz77(1, gUnkEu_08F7EBF8);
-    sLangWork->tiles = LoadObjTiles(gUnkEu_08C9CA58, 0x1A0);
+    LoadBgPalette(0, gLanguageSelectPalette, 0x40);
+    LoadBgTilesLz77(0, gLanguageSelectTiles);
+    LoadBgMapLz77(0, gLanguageSelectMenuMap);
+    LoadBgMapLz77(1, gLanguageSelectBgMap);
+    sLangWork->tiles = LoadObjTiles(gLanguageSelectCursorTiles, 0x1A0);
     sLangWork->palette = LoadObjPalette(gUnkEu_08F6A6DC, 32);
     sLangWork->timer = 0;
     sLangWork->state = 0;
@@ -164,19 +164,19 @@ void mode_lang_1() {
     if (!(sLangWork->flags & LANG_FLAG_HIDE_CURSOR)) {
         switch (sLangWork->cursor) {
         case 0:
-            DrawSprite(0x60, 0x58, gUnkEu_08C9C97C, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
+            DrawSprite(0x60, 0x58, gLanguageSelectCursorFrame0, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
             break;
         case 1:
-            DrawSprite(0x60, 0x68, gUnkEu_08C9C99E, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
+            DrawSprite(0x60, 0x68, gLanguageSelectCursorFrame1, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
             break;
         case 2:
-            DrawSprite(0x60, 0x78, gUnkEu_08C9C9C0, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
+            DrawSprite(0x60, 0x78, gLanguageSelectCursorFrame2, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
             break;
         case 3:
-            DrawSprite(0x60, 0x88, gUnkEu_08C9C9E2, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
+            DrawSprite(0x60, 0x88, gLanguageSelectCursorFrame3, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
             break;
         case 4:
-            DrawSprite(0x60, 0x98, gUnkEu_08C9CA04, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
+            DrawSprite(0x60, 0x98, gLanguageSelectCursorFrame4, sLangWork->tiles, sLangWork->palette, NULL, 0, 0);
             break;
         }
     }

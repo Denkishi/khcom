@@ -56,18 +56,18 @@ entries:
     address: 0x09EE150C
   jp:
     address: 0x09EB8F88
-- name: gUnk_09EEC660
+- name: gLockonCursorFrames
   record: SpriteTable
-  items: [gUnk_090D7C50, gUnk_090D7C5A, gUnk_090D7C64]
+  items: [gLockonCursorFrame0, gLockonCursorFrame1, gLockonCursorFrame2]
   us:
     address: 0x09EEC660
   jp:
     address: 0x09EC3A4C
   eu:
     address: 0x09F77844
-- name: gUnk_09EEC66C
+- name: gLockonCursorAnims
   record: AnimTable
-  items: [gUnk_090D7C6E]
+  items: [gLockonCursorAnim0]
   us:
     address: 0x09EEC66C
   jp:
@@ -161,24 +161,24 @@ entries:
   jp:
     address: 0x08B18280
     size: 2258
-- name: gUnk_090D7C84
+- name: gLockonCursorTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [8, 8]
   columns: 3
   frames:
-  - symbol: gUnk_090D7C50
+  - symbol: gLockonCursorFrame0
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_090D7C5A
+  - symbol: gLockonCursorFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_090D7C64
+  - symbol: gLockonCursorFrame2
     pieces:
     - [16x16, -8, -8]
   animations:
-  - symbol: gUnk_090D7C6E
+  - symbol: gLockonCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 10], [2, 10], [1, 10], [0, 10]]
   us:

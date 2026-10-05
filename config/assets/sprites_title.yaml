@@ -65,583 +65,583 @@ objects:
     start: 0x0981F960
     end: 0x09827E2C
 entries:
-- name: gUnk_09EF659C
+- name: gTitleLogoDisneySquareEnixFrames
   record: SpriteTable
-  items: [gUnk_0976E9D4]
+  items: [gTitleLogoDisneySquareEnixFrame0]
   us:
     address: 0x09EF659C
   jp:
     address: 0x09ECD988
   eu:
     address: 0x09F819A4
-- name: gUnk_09EF65A0
+- name: gTitleLogoDisneySquareEnixAnims
   record: AnimTable
-  items: [gUnk_0976E9EA]
+  items: [gTitleLogoDisneySquareEnixAnim0]
   us:
     address: 0x09EF65A0
   jp:
     address: 0x09ECD98C
   eu:
     address: 0x09F819A8
-- name: gUnk_09EF65A4
+- name: gTitleLogoKanaFrames
   record: SpriteTable
-  items: [gUnk_0976EC34]
+  items: [gTitleLogoKanaFrame0]
   us:
     address: 0x09EF65A4
   jp:
     address: 0x09ECD990
   eu:
     address: 0x09F819AC
-- name: gUnk_09EF65A8
+- name: gTitleLogoKanaAnims
   record: AnimTable
-  items: [gUnk_0976EC4A]
+  items: [gTitleLogoKanaAnim0]
   us:
     address: 0x09EF65A8
   jp:
     address: 0x09ECD994
   eu:
     address: 0x09F819B0
-- name: gUnk_09EF65AC
+- name: gTitleLogoChainOfMemoriesFrames
   record: SpriteTable
-  items: [gUnk_0976ED34]
+  items: [gTitleLogoChainOfMemoriesFrame0]
   us:
     address: 0x09EF65AC
   jp:
     address: 0x09ECD998
   eu:
     address: 0x09F819B4
-- name: gUnk_09EF65B0
+- name: gTitleLogoChainOfMemoriesAnims
   record: AnimTable
-  items: [gUnk_0976ED50]
+  items: [gTitleLogoChainOfMemoriesAnim0]
   us:
     address: 0x09EF65B0
   jp:
     address: 0x09ECD99C
   eu:
     address: 0x09F819B8
-- name: gUnk_09EF65B4
+- name: gTitleLogoCrownFrames
   record: SpriteTable
-  items: [gUnk_0976F0DC]
+  items: [gTitleLogoCrownFrame0]
   us:
     address: 0x09EF65B4
   jp:
     address: 0x09ECD9A0
   eu:
     address: 0x09F819BC
-- name: gUnk_09EF65B8
+- name: gTitleLogoCrownAnims
   record: AnimTable
-  items: [gUnk_0976F0EC]
+  items: [gTitleLogoCrownAnim0]
   us:
     address: 0x09EF65B8
   jp:
     address: 0x09ECD9A4
   eu:
     address: 0x09F819C0
-- name: gUnk_09EF65BC
+- name: gTitleLogoKingdomHeartsFrames
   record: SpriteTable
-  items: [gUnk_0976F1B8]
+  items: [gTitleLogoKingdomHeartsFrame0]
   us:
     address: 0x09EF65BC
   jp:
     address: 0x09ECD9A8
   eu:
     address: 0x09F819C4
-- name: gUnk_09EF65C0
+- name: gTitleLogoKingdomHeartsAnims
   record: AnimTable
-  items: [gUnk_0976F1E6]
+  items: [gTitleLogoKingdomHeartsAnim0]
   us:
     address: 0x09EF65C0
   jp:
     address: 0x09ECD9AC
   eu:
     address: 0x09F819C8
-- name: gUnk_09EF65C4
+- name: gTitleLogoHeartFrames
   record: SpriteTable
-  items: [gUnk_0976FCB0]
+  items: [gTitleLogoHeartFrame0]
   us:
     address: 0x09EF65C4
   jp:
     address: 0x09ECD9B0
   eu:
     address: 0x09F819CC
-- name: gUnk_09EF65C8
+- name: gTitleLogoHeartAnims
   record: AnimTable
-  items: [gUnk_0976FD86, gUnk_0976FD90]
+  items: [gTitleLogoHeartAnim0, gTitleLogoHeartAnim1]
   us:
     address: 0x09EF65C8
   jp:
     address: 0x09ECD9B4
   eu:
     address: 0x09F819D0
-- name: gUnk_09EF65D0
+- name: gTitleWorkInProgressFrames
   record: SpriteTable
-  items: [gUnk_09770ED8, gUnk_09770EE8]
+  items: [gTitleWorkInProgressFrame0, gTitleWorkInProgressFrame1]
   us:
     address: 0x09EF65D0
   jp:
     address: 0x09ECD9BC
   eu:
     address: 0x09F819D8
-- name: gUnk_09EF65D8
+- name: gTitleWorkInProgressAnims
   record: AnimTable
-  items: [gUnk_09770EFE, gUnk_09770F08]
+  items: [gTitleWorkInProgressAnim0, gTitleWorkInProgressAnim1]
   us:
     address: 0x09EF65D8
   jp:
     address: 0x09ECD9C4
   eu:
     address: 0x09F819E0
-- name: gUnk_09EF65E0
+- name: gTitleDevelopedByFrames
   record: SpriteTable
-  items: [gUnk_09771034]
+  items: [gTitleDevelopedByFrame0]
   us:
     address: 0x09EF65E0
   jp:
     address: 0x09ECD9CC
   eu:
     address: 0x09F81C54
-- name: gUnk_09EF65E4
+- name: gTitleDevelopedByAnims
   record: AnimTable
-  items: [gUnk_09771056]
+  items: [gTitleDevelopedByAnim0]
   us:
     address: 0x09EF65E4
   jp:
     address: 0x09ECD9D0
   eu:
     address: 0x09F81C58
-- name: gUnk_09EF65E8
+- name: gTitleGameStartFrames
   record: SpriteTable
-  items: [gUnk_09771420]
+  items: [gTitleGameStartFrame0]
   us:
     address: 0x09EF65E8
   jp:
     address: 0x09ECD9D4
   eu:
     address: 0x09F819E8
-- name: gUnk_09EF65EC
+- name: gTitleGameStartAnims
   record: AnimTable
-  items: [gUnk_09771430]
+  items: [gTitleGameStartAnim0]
   us:
     address: 0x09EF65EC
   jp:
     address: 0x09ECD9D8
   eu:
     address: 0x09F819EC
-- name: gUnk_09EF65F0
+- name: gTitlePressStartFrames
   record: SpriteTable
-  items: [gUnk_0977153C, gUnk_09771570, gUnk_097715A4, gUnk_097715D8, gUnk_0977160C]
+  items: [gTitlePressStartFrame0, gTitlePressStartFrame1, gTitlePressStartFrame2, gTitlePressStartFrame3, gTitlePressStartFrame4]
   us:
     address: 0x09EF65F0
   jp:
     address: 0x09ECD9DC
   eu:
     address: 0x09F81A08
-- name: gUnk_09EF6604
+- name: gTitlePressStartAnims
   record: AnimTable
-  items: [gUnk_09771640]
+  items: [gTitlePressStartAnim0]
   us:
     address: 0x09EF6604
   jp:
     address: 0x09ECD9F0
   eu:
     address: 0x09F81A1C
-- name: gUnk_09EF6608
+- name: gTitleMenuCursorFrames
   record: SpriteTable
-  items: [gUnk_09771D68, gUnk_09771D72, gUnk_09771D7C, gUnk_09771D86, gUnk_09771D90]
+  items: [gTitleMenuCursorFrame0, gTitleMenuCursorFrame1, gTitleMenuCursorFrame2, gTitleMenuCursorFrame3, gTitleMenuCursorFrame4]
   us:
     address: 0x09EF6608
   jp:
     address: 0x09ECD9F4
   eu:
     address: 0x09F819F0
-- name: gUnk_09EF661C
+- name: gTitleMenuCursorAnims
   record: AnimTable
-  items: [gUnk_09771D9A]
+  items: [gTitleMenuCursorAnim0]
   us:
     address: 0x09EF661C
   jp:
     address: 0x09ECDA08
   eu:
     address: 0x09F81A04
-- name: gUnk_09EF6620
+- name: gTitleMenuSelectedEntryFrames
   record: SpriteTable
-  items: [gUnk_09772040, gUnk_0977205C, gUnk_09772078, gUnk_09772094, gUnk_097720B0, gUnk_097720CC]
+  items: [gTitleMenuSelectedEntryFrame0, gTitleMenuSelectedEntryFrame1, gTitleMenuSelectedEntryFrame2, gTitleMenuSelectedEntryFrame3, gTitleMenuSelectedEntryFrame4, gTitleMenuSelectedEntryFrame5]
   us:
     address: 0x09EF6620
   jp:
     address: 0x09ECDA0C
   eu:
     address: 0x09F81A80
-- name: gUnk_09EF6638
+- name: gTitleMenuSelectedEntryAnims
   record: AnimTable
-  items: [gUnk_097720E8]
+  items: [gTitleMenuSelectedEntryAnim0]
   us:
     address: 0x09EF6638
   jp:
     address: 0x09ECDA24
   eu:
     address: 0x09F81A98
-- name: gUnk_09EF663C
+- name: gTitleMenuSelectedBarFrames
   record: SpriteTable
-  items: [gUnk_09772C14, gUnk_09772C30, gUnk_09772C4C, gUnk_09772C68, gUnk_09772C84, gUnk_09772CA0]
+  items: [gTitleMenuSelectedBarFrame0, gTitleMenuSelectedBarFrame1, gTitleMenuSelectedBarFrame2, gTitleMenuSelectedBarFrame3, gTitleMenuSelectedBarFrame4, gTitleMenuSelectedBarFrame5]
   us:
     address: 0x09EF663C
   jp:
     address: 0x09ECDA28
   eu:
     address: 0x09F81B0C
-- name: gUnk_09EF6654
+- name: gTitleMenuSelectedBarAnims
   record: AnimTable
-  items: [gUnk_09772CBC]
+  items: [gTitleMenuSelectedBarAnim0]
   us:
     address: 0x09EF6654
   jp:
     address: 0x09ECDA40
   eu:
     address: 0x09F81B24
-- name: gUnk_09EF6658
+- name: gTitleSoraLumiFrames
   record: SpriteTable
-  items: [gUnk_097733C8, gUnk_097733E4, gUnk_09773400]
+  items: [gTitleSoraLumiFrame0, gTitleSoraLumiFrame1, gTitleSoraLumiFrame2]
   us:
     address: 0x09EF6658
   jp:
     address: 0x09ECDA44
   eu:
     address: 0x09F81B28
-- name: gUnk_09EF6664
+- name: gTitleSoraLumiAnims
   record: AnimTable
-  items: [gUnk_0977341C]
+  items: [gTitleSoraLumiAnim0]
   us:
     address: 0x09EF6664
   jp:
     address: 0x09ECDA50
   eu:
     address: 0x09F81B34
-- name: gUnk_09EF6668
+- name: gTitleMenuEntryFrames
   record: SpriteTable
-  items: [gUnk_09773D68, gUnk_09773D84, gUnk_09773DA0, gUnk_09773DBC, gUnk_09773DD8, gUnk_09773DF4]
+  items: [gTitleMenuEntryFrame0, gTitleMenuEntryFrame1, gTitleMenuEntryFrame2, gTitleMenuEntryFrame3, gTitleMenuEntryFrame4, gTitleMenuEntryFrame5]
   us:
     address: 0x09EF6668
   jp:
     address: 0x09ECDA54
   eu:
     address: 0x09F81B78
-- name: gUnk_09EF6680
+- name: gTitleMenuEntryAnims
   record: AnimTable
-  items: [gUnk_09773E10]
+  items: [gTitleMenuEntryAnim0]
   us:
     address: 0x09EF6680
   jp:
     address: 0x09ECDA6C
   eu:
     address: 0x09F81B90
-- name: gUnk_09EF6684
+- name: gTitleRikuLumiFrames
   record: SpriteTable
-  items: [gUnk_0977541C, gUnk_0977543E, gUnk_09775460]
+  items: [gTitleRikuLumiFrame0, gTitleRikuLumiFrame1, gTitleRikuLumiFrame2]
   us:
     address: 0x09EF6684
   jp:
     address: 0x09ECDA70
   eu:
     address: 0x09F81C04
-- name: gUnk_09EF6690
+- name: gTitleRikuLumiAnims
   record: AnimTable
-  items: [gUnk_09775482]
+  items: [gTitleRikuLumiAnim0]
   us:
     address: 0x09EF6690
   jp:
     address: 0x09ECDA7C
   eu:
     address: 0x09F81C10
-- name: gUnk_09EF6694
+- name: gTitlePremiumShowcaseFrames
   record: SpriteTable
-  items: [gUnk_09775CCC]
+  items: [gTitlePremiumShowcaseFrame0]
   us:
     address: 0x09EF6694
   jp:
     address: 0x09ECDA80
   eu:
     address: 0x09F81C7C
-- name: gUnk_09EF6698
+- name: gTitlePremiumShowcaseAnims
   record: AnimTable
-  items: [gUnk_09775CE8]
+  items: [gTitlePremiumShowcaseAnim0]
   us:
     address: 0x09EF6698
   jp:
     address: 0x09ECDA84
   eu:
     address: 0x09F81C80
-- name: gUnk_09EF669C
+- name: gTitleLogoReverseRebirthFrames
   record: SpriteTable
-  items: [gUnk_09775EB4, gUnk_09775ECA]
+  items: [gTitleLogoReverseRebirthFrame0, gTitleLogoReverseRebirthFrame1]
   us:
     address: 0x09EF669C
   jp:
     address: 0x09ECDA88
   eu:
     address: 0x09F81C84
-- name: gUnk_09EF66A4
+- name: gTitleLogoReverseRebirthAnims
   record: AnimTable
-  items: [gUnk_0977606C]
+  items: [gTitleLogoReverseRebirthAnim0]
   us:
     address: 0x09EF66A4
   jp:
     address: 0x09ECDA90
   eu:
     address: 0x09F81C8C
-- name: gUnkEu_09F81A20
+- name: gTitlePressStartFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0973FB04, gUnkEu_0973FB44, gUnkEu_0973FB84, gUnkEu_0973FBC4, gUnkEu_0973FC04]
+  items: [gTitlePressStartFrenchFrame0, gTitlePressStartFrenchFrame1, gTitlePressStartFrenchFrame2, gTitlePressStartFrenchFrame3, gTitlePressStartFrenchFrame4]
   eu:
     address: 0x09F81A20
-- name: gUnkEu_09F81A34
+- name: gTitlePressStartFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0973FC44]
+  items: [gTitlePressStartFrenchAnim0]
   eu:
     address: 0x09F81A34
-- name: gUnkEu_09F81A38
+- name: gTitlePressStartSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0974040C, gUnkEu_09740440, gUnkEu_09740474, gUnkEu_097404A8, gUnkEu_097404DC]
+  items: [gTitlePressStartSpanishFrame0, gTitlePressStartSpanishFrame1, gTitlePressStartSpanishFrame2, gTitlePressStartSpanishFrame3, gTitlePressStartSpanishFrame4]
   eu:
     address: 0x09F81A38
-- name: gUnkEu_09F81A4C
+- name: gTitlePressStartSpanishAnims
   record: AnimTable
-  items: [gUnkEu_09740510]
+  items: [gTitlePressStartSpanishAnim0]
   eu:
     address: 0x09F81A4C
-- name: gUnkEu_09F81A50
+- name: gTitlePressStartItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09740C38, gUnkEu_09740C6C, gUnkEu_09740CA0, gUnkEu_09740CD4, gUnkEu_09740D08]
+  items: [gTitlePressStartItalianFrame0, gTitlePressStartItalianFrame1, gTitlePressStartItalianFrame2, gTitlePressStartItalianFrame3, gTitlePressStartItalianFrame4]
   eu:
     address: 0x09F81A50
-- name: gUnkEu_09F81A64
+- name: gTitlePressStartItalianAnims
   record: AnimTable
-  items: [gUnkEu_09740D3C]
+  items: [gTitlePressStartItalianAnim0]
   eu:
     address: 0x09F81A64
-- name: gUnkEu_09F81A68
+- name: gTitlePressStartGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09741464, gUnkEu_097414AA, gUnkEu_097414F0, gUnkEu_09741536, gUnkEu_0974157C]
+  items: [gTitlePressStartGermanFrame0, gTitlePressStartGermanFrame1, gTitlePressStartGermanFrame2, gTitlePressStartGermanFrame3, gTitlePressStartGermanFrame4]
   eu:
     address: 0x09F81A68
-- name: gUnkEu_09F81A7C
+- name: gTitlePressStartGermanAnims
   record: AnimTable
-  items: [gUnkEu_097415C2]
+  items: [gTitlePressStartGermanAnim0]
   eu:
     address: 0x09F81A7C
-- name: gUnkEu_09F81A9C
+- name: gTitleMenuSelectedEntryFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_097429BC, gUnkEu_097429D8, gUnkEu_097429FA, gUnkEu_09742A16, gUnkEu_09742A32, gUnkEu_09742A4E]
+  items: [gTitleMenuSelectedEntryFrenchFrame0, gTitleMenuSelectedEntryFrenchFrame1, gTitleMenuSelectedEntryFrenchFrame2, gTitleMenuSelectedEntryFrenchFrame3, gTitleMenuSelectedEntryFrenchFrame4, gTitleMenuSelectedEntryFrenchFrame5]
   eu:
     address: 0x09F81A9C
-- name: gUnkEu_09F81AB4
+- name: gTitleMenuSelectedEntryFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09742A6A]
+  items: [gTitleMenuSelectedEntryFrenchAnim0]
   eu:
     address: 0x09F81AB4
-- name: gUnkEu_09F81AB8
+- name: gTitleMenuSelectedEntrySpanishFrames
   record: SpriteTable
-  items: [gUnkEu_09743754, gUnkEu_09743776, gUnkEu_09743798, gUnkEu_097437B4, gUnkEu_097437D0, gUnkEu_097437EC]
+  items: [gTitleMenuSelectedEntrySpanishFrame0, gTitleMenuSelectedEntrySpanishFrame1, gTitleMenuSelectedEntrySpanishFrame2, gTitleMenuSelectedEntrySpanishFrame3, gTitleMenuSelectedEntrySpanishFrame4, gTitleMenuSelectedEntrySpanishFrame5]
   eu:
     address: 0x09F81AB8
-- name: gUnkEu_09F81AD0
+- name: gTitleMenuSelectedEntrySpanishAnims
   record: AnimTable
-  items: [gUnkEu_09743808]
+  items: [gTitleMenuSelectedEntrySpanishAnim0]
   eu:
     address: 0x09F81AD0
-- name: gUnkEu_09F81AD4
+- name: gTitleMenuSelectedEntryItalianFrames
   record: SpriteTable
-  items: [gUnkEu_097444F4, gUnkEu_09744510, gUnkEu_0974452C, gUnkEu_09744548, gUnkEu_0974456A, gUnkEu_09744586]
+  items: [gTitleMenuSelectedEntryItalianFrame0, gTitleMenuSelectedEntryItalianFrame1, gTitleMenuSelectedEntryItalianFrame2, gTitleMenuSelectedEntryItalianFrame3, gTitleMenuSelectedEntryItalianFrame4, gTitleMenuSelectedEntryItalianFrame5]
   eu:
     address: 0x09F81AD4
-- name: gUnkEu_09F81AEC
+- name: gTitleMenuSelectedEntryItalianAnims
   record: AnimTable
-  items: [gUnkEu_097445A2]
+  items: [gTitleMenuSelectedEntryItalianAnim0]
   eu:
     address: 0x09F81AEC
-- name: gUnkEu_09F81AF0
+- name: gTitleMenuSelectedEntryGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09744FCC, gUnkEu_09744FE8, gUnkEu_09745004, gUnkEu_09745020, gUnkEu_0974503C, gUnkEu_09745058]
+  items: [gTitleMenuSelectedEntryGermanFrame0, gTitleMenuSelectedEntryGermanFrame1, gTitleMenuSelectedEntryGermanFrame2, gTitleMenuSelectedEntryGermanFrame3, gTitleMenuSelectedEntryGermanFrame4, gTitleMenuSelectedEntryGermanFrame5]
   eu:
     address: 0x09F81AF0
-- name: gUnkEu_09F81B08
+- name: gTitleMenuSelectedEntryGermanAnims
   record: AnimTable
-  items: [gUnkEu_09745074]
+  items: [gTitleMenuSelectedEntryGermanAnim0]
   eu:
     address: 0x09F81B08
-- name: gUnkEu_09F81B38
+- name: gTitleSoraLumiFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_09746C34, gUnkEu_09746C56, gUnkEu_09746C78]
+  items: [gTitleSoraLumiFrenchFrame0, gTitleSoraLumiFrenchFrame1, gTitleSoraLumiFrenchFrame2]
   eu:
     address: 0x09F81B38
-- name: gUnkEu_09F81B44
+- name: gTitleSoraLumiFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09746C9A]
+  items: [gTitleSoraLumiFrenchAnim0]
   eu:
     address: 0x09F81B44
-- name: gUnkEu_09F81B48
+- name: gTitleSoraLumiSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_097473E4, gUnkEu_09747406, gUnkEu_09747428]
+  items: [gTitleSoraLumiSpanishFrame0, gTitleSoraLumiSpanishFrame1, gTitleSoraLumiSpanishFrame2]
   eu:
     address: 0x09F81B48
-- name: gUnkEu_09F81B54
+- name: gTitleSoraLumiSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0974744A]
+  items: [gTitleSoraLumiSpanishAnim0]
   eu:
     address: 0x09F81B54
-- name: gUnkEu_09F81B58
+- name: gTitleSoraLumiItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09747B94, gUnkEu_09747BB6, gUnkEu_09747BD8]
+  items: [gTitleSoraLumiItalianFrame0, gTitleSoraLumiItalianFrame1, gTitleSoraLumiItalianFrame2]
   eu:
     address: 0x09F81B58
-- name: gUnkEu_09F81B64
+- name: gTitleSoraLumiItalianAnims
   record: AnimTable
-  items: [gUnkEu_09747BFA]
+  items: [gTitleSoraLumiItalianAnim0]
   eu:
     address: 0x09F81B64
-- name: gUnkEu_09F81B68
+- name: gTitleSoraLumiGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09748344, gUnkEu_09748366, gUnkEu_09748388]
+  items: [gTitleSoraLumiGermanFrame0, gTitleSoraLumiGermanFrame1, gTitleSoraLumiGermanFrame2]
   eu:
     address: 0x09F81B68
-- name: gUnkEu_09F81B74
+- name: gTitleSoraLumiGermanAnims
   record: AnimTable
-  items: [gUnkEu_097483AA]
+  items: [gTitleSoraLumiGermanAnim0]
   eu:
     address: 0x09F81B74
-- name: gUnkEu_09F81B94
+- name: gTitleMenuEntryFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0974A1A8, gUnkEu_0974A1CA, gUnkEu_0974A1F2, gUnkEu_0974A214, gUnkEu_0974A236, gUnkEu_0974A258]
+  items: [gTitleMenuEntryFrenchFrame0, gTitleMenuEntryFrenchFrame1, gTitleMenuEntryFrenchFrame2, gTitleMenuEntryFrenchFrame3, gTitleMenuEntryFrenchFrame4, gTitleMenuEntryFrenchFrame5]
   eu:
     address: 0x09F81B94
-- name: gUnkEu_09F81BAC
+- name: gTitleMenuEntryFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0974A27A]
+  items: [gTitleMenuEntryFrenchAnim0]
   eu:
     address: 0x09F81BAC
-- name: gUnkEu_09F81BB0
+- name: gTitleMenuEntrySpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0974B224, gUnkEu_0974B24C, gUnkEu_0974B274, gUnkEu_0974B296, gUnkEu_0974B2B8, gUnkEu_0974B2DA]
+  items: [gTitleMenuEntrySpanishFrame0, gTitleMenuEntrySpanishFrame1, gTitleMenuEntrySpanishFrame2, gTitleMenuEntrySpanishFrame3, gTitleMenuEntrySpanishFrame4, gTitleMenuEntrySpanishFrame5]
   eu:
     address: 0x09F81BB0
-- name: gUnkEu_09F81BC8
+- name: gTitleMenuEntrySpanishAnims
   record: AnimTable
-  items: [gUnkEu_0974B2FC]
+  items: [gTitleMenuEntrySpanishAnim0]
   eu:
     address: 0x09F81BC8
-- name: gUnkEu_09F81BCC
+- name: gTitleMenuEntryItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0974C428, gUnkEu_0974C44A, gUnkEu_0974C46C, gUnkEu_0974C48E, gUnkEu_0974C4B6, gUnkEu_0974C4D8]
+  items: [gTitleMenuEntryItalianFrame0, gTitleMenuEntryItalianFrame1, gTitleMenuEntryItalianFrame2, gTitleMenuEntryItalianFrame3, gTitleMenuEntryItalianFrame4, gTitleMenuEntryItalianFrame5]
   eu:
     address: 0x09F81BCC
-- name: gUnkEu_09F81BE4
+- name: gTitleMenuEntryItalianAnims
   record: AnimTable
-  items: [gUnkEu_0974C4FA]
+  items: [gTitleMenuEntryItalianAnim0]
   eu:
     address: 0x09F81BE4
-- name: gUnkEu_09F81BE8
+- name: gTitleMenuEntryGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0974D3A4, gUnkEu_0974D3C6, gUnkEu_0974D3E8, gUnkEu_0974D40A, gUnkEu_0974D42C, gUnkEu_0974D44E]
+  items: [gTitleMenuEntryGermanFrame0, gTitleMenuEntryGermanFrame1, gTitleMenuEntryGermanFrame2, gTitleMenuEntryGermanFrame3, gTitleMenuEntryGermanFrame4, gTitleMenuEntryGermanFrame5]
   eu:
     address: 0x09F81BE8
-- name: gUnkEu_09F81C00
+- name: gTitleMenuEntryGermanAnims
   record: AnimTable
-  items: [gUnkEu_0974D470]
+  items: [gTitleMenuEntryGermanAnim0]
   eu:
     address: 0x09F81C00
-- name: gUnkEu_09F81C14
+- name: gTitleRikuLumiFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0974EC0C, gUnkEu_0974EC2E, gUnkEu_0974EC50]
+  items: [gTitleRikuLumiFrenchFrame0, gTitleRikuLumiFrenchFrame1, gTitleRikuLumiFrenchFrame2]
   eu:
     address: 0x09F81C14
-- name: gUnkEu_09F81C20
+- name: gTitleRikuLumiFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0974EC72]
+  items: [gTitleRikuLumiFrenchAnim0]
   eu:
     address: 0x09F81C20
-- name: gUnkEu_09F81C24
+- name: gTitleRikuLumiSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0974F3BC, gUnkEu_0974F3DE, gUnkEu_0974F400]
+  items: [gTitleRikuLumiSpanishFrame0, gTitleRikuLumiSpanishFrame1, gTitleRikuLumiSpanishFrame2]
   eu:
     address: 0x09F81C24
-- name: gUnkEu_09F81C30
+- name: gTitleRikuLumiSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0974F422]
+  items: [gTitleRikuLumiSpanishAnim0]
   eu:
     address: 0x09F81C30
-- name: gUnkEu_09F81C34
+- name: gTitleRikuLumiItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0974FB6C, gUnkEu_0974FB8E, gUnkEu_0974FBB0]
+  items: [gTitleRikuLumiItalianFrame0, gTitleRikuLumiItalianFrame1, gTitleRikuLumiItalianFrame2]
   eu:
     address: 0x09F81C34
-- name: gUnkEu_09F81C40
+- name: gTitleRikuLumiItalianAnims
   record: AnimTable
-  items: [gUnkEu_0974FBD2]
+  items: [gTitleRikuLumiItalianAnim0]
   eu:
     address: 0x09F81C40
-- name: gUnkEu_09F81C44
+- name: gTitleRikuLumiGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0975031C, gUnkEu_0975033E, gUnkEu_09750360]
+  items: [gTitleRikuLumiGermanFrame0, gTitleRikuLumiGermanFrame1, gTitleRikuLumiGermanFrame2]
   eu:
     address: 0x09F81C44
-- name: gUnkEu_09F81C50
+- name: gTitleRikuLumiGermanAnims
   record: AnimTable
-  items: [gUnkEu_09750382]
+  items: [gTitleRikuLumiGermanAnim0]
   eu:
     address: 0x09F81C50
-- name: gUnkEu_09F81C5C
+- name: gTitleDevelopedByFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_09750EB8]
+  items: [gTitleDevelopedByFrenchFrame0]
   eu:
     address: 0x09F81C5C
-- name: gUnkEu_09F81C60
+- name: gTitleDevelopedByFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09750EDA]
+  items: [gTitleDevelopedByFrenchAnim0]
   eu:
     address: 0x09F81C60
-- name: gUnkEu_09F81C64
+- name: gTitleDevelopedBySpanishFrames
   record: SpriteTable
-  items: [gUnkEu_097512A4]
+  items: [gTitleDevelopedBySpanishFrame0]
   eu:
     address: 0x09F81C64
-- name: gUnkEu_09F81C68
+- name: gTitleDevelopedBySpanishAnims
   record: AnimTable
-  items: [gUnkEu_097512C0]
+  items: [gTitleDevelopedBySpanishAnim0]
   eu:
     address: 0x09F81C68
-- name: gUnkEu_09F81C6C
+- name: gTitleDevelopedByItalianFrames
   record: SpriteTable
-  items: [gUnkEu_097516CC]
+  items: [gTitleDevelopedByItalianFrame0]
   eu:
     address: 0x09F81C6C
-- name: gUnkEu_09F81C70
+- name: gTitleDevelopedByItalianAnims
   record: AnimTable
-  items: [gUnkEu_097516EE]
+  items: [gTitleDevelopedByItalianAnim0]
   eu:
     address: 0x09F81C70
-- name: gUnkEu_09F81C74
+- name: gTitleDevelopedByGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09751AB8]
+  items: [gTitleDevelopedByGermanFrame0]
   eu:
     address: 0x09F81C74
-- name: gUnkEu_09F81C78
+- name: gTitleDevelopedByGermanAnims
   record: AnimTable
-  items: [gUnkEu_09751AD4]
+  items: [gTitleDevelopedByGermanAnim0]
   eu:
     address: 0x09F81C78
-- name: gUnk_0977143A
+- name: gTitleGameStartTiles
   format: sprite_sheet
   align: 4
   cell: [64, 8]
   anchor: [8, 0]
   columns: 1
   frames:
-  - symbol: gUnk_09771420
+  - symbol: gTitleGameStartFrame0
     pieces:
     - [32x8, -8, 0]
     - [32x8, 24, 0]
   animations:
-  - symbol: gUnk_09771430
+  - symbol: gTitleGameStartAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -653,20 +653,20 @@ entries:
   eu:
     address: 0x0973EEE4
     size: 282
-- name: gUnk_0976E9F4
+- name: gTitleLogoDisneySquareEnixTiles
   format: sprite_sheet
   align: 4
   cell: [72, 16]
   anchor: [36, 60]
   columns: 1
   frames:
-  - symbol: gUnk_0976E9D4
+  - symbol: gTitleLogoDisneySquareEnixFrame0
     pieces:
     - [32x16, -36, -60]
     - [32x16, -4, -60]
     - [8x16, 28, -60]
   animations:
-  - symbol: gUnk_0976E9EA
+  - symbol: gTitleLogoDisneySquareEnixAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -678,20 +678,20 @@ entries:
   eu:
     address: 0x0973C884
     size: 608
-- name: gUnk_0976EC54
+- name: gTitleLogoKanaTiles
   format: sprite_sheet
   align: 4
   cell: [56, 8]
   anchor: [28, 4]
   columns: 1
   frames:
-  - symbol: gUnk_0976EC34
+  - symbol: gTitleLogoKanaFrame0
     pieces:
     - [32x8, -28, -4]
     - [16x8, 4, -4]
     - [8x8, 20, -4]
   animations:
-  - symbol: gUnk_0976EC4A
+  - symbol: gTitleLogoKanaAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -703,21 +703,21 @@ entries:
   eu:
     address: 0x0973CAE4
     size: 256
-- name: gUnk_0976ED5A
+- name: gTitleLogoChainOfMemoriesTiles
   format: sprite_sheet
   align: 4
   cell: [112, 16]
   anchor: [57, 16]
   columns: 1
   frames:
-  - symbol: gUnk_0976ED34
+  - symbol: gTitleLogoChainOfMemoriesFrame0
     pieces:
     - [32x16, -57, -16]
     - [32x16, -25, -16]
     - [32x16, 7, -16]
     - [16x16, 39, -16]
   animations:
-  - symbol: gUnk_0976ED50
+  - symbol: gTitleLogoChainOfMemoriesAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -729,19 +729,19 @@ entries:
   eu:
     address: 0x0973CBE4
     size: 934
-- name: gUnk_0976F0F6
+- name: gTitleLogoCrownTiles
   format: sprite_sheet
   align: 4
   cell: [24, 16]
   anchor: [14, 46]
   columns: 1
   frames:
-  - symbol: gUnk_0976F0DC
+  - symbol: gTitleLogoCrownFrame0
     pieces:
     - [16x16, -14, -46]
     - [8x16, 2, -46]
   animations:
-  - symbol: gUnk_0976F0EC
+  - symbol: gTitleLogoCrownAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -753,14 +753,14 @@ entries:
   eu:
     address: 0x0973CF8C
     size: 218
-- name: gUnk_0976F1F0
+- name: gTitleLogoKingdomHeartsTiles
   format: sprite_sheet
   align: 4
   cell: [152, 40]
   anchor: [75, 32]
   columns: 1
   frames:
-  - symbol: gUnk_0976F1B8
+  - symbol: gTitleLogoKingdomHeartsFrame0
     pieces:
     - [64x32, -75, -32]
     - [64x32, -11, -32]
@@ -770,7 +770,7 @@ entries:
     - [32x8, -11, 0]
     - [16x8, 53, 0]
   animations:
-  - symbol: gUnk_0976F1E6
+  - symbol: gTitleLogoKingdomHeartsAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -782,14 +782,14 @@ entries:
   eu:
     address: 0x0973D068
     size: 2808
-- name: gUnk_0976FD96
+- name: gTitleLogoHeartTiles
   format: sprite_sheet
   align: 4
   cell: [160, 96]
   anchor: [80, 48]
   columns: 1
   frames:
-  - symbol: gUnk_0976FCB0
+  - symbol: gTitleLogoHeartFrame0
     pieces:
     - [32x8, 8, -48]
     - [32x32, 8, -40]
@@ -827,10 +827,10 @@ entries:
     - [8x16, 72, -16]
     - [8x16, -64, 8]
   animations:
-  - symbol: gUnk_0976FD86
+  - symbol: gTitleLogoHeartAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
-  - symbol: gUnk_0976FD90
+  - symbol: gTitleLogoHeartAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: []
   us:
@@ -842,14 +842,14 @@ entries:
   eu:
     address: 0x0973DB60
     size: 4646
-- name: gUnkEu_0973FC6A
+- name: gTitlePressStartFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [120, 16]
   columns: 5
   frames:
-  - symbol: gUnkEu_0973FB04
+  - symbol: gTitlePressStartFrenchFrame0
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8]
@@ -861,7 +861,7 @@ entries:
     - [32x16, -40, -16]
     - [8x16, -8, -16]
     - [16x8, 0, -8]
-  - symbol: gUnkEu_0973FB44
+  - symbol: gTitlePressStartFrenchFrame1
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -873,7 +873,7 @@ entries:
     - [32x16, -40, -16]
     - [8x16, -8, -16]
     - [16x8, 0, -8]
-  - symbol: gUnkEu_0973FB84
+  - symbol: gTitlePressStartFrenchFrame2
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -885,7 +885,7 @@ entries:
     - [32x16, -40, -16]
     - [8x16, -8, -16]
     - [16x8, 0, -8]
-  - symbol: gUnkEu_0973FBC4
+  - symbol: gTitlePressStartFrenchFrame3
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -897,7 +897,7 @@ entries:
     - [32x16, -40, -16]
     - [8x16, -8, -16]
     - [16x8, 0, -8]
-  - symbol: gUnkEu_0973FC04
+  - symbol: gTitlePressStartFrenchFrame4
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -910,20 +910,20 @@ entries:
     - [8x16, -8, -16]
     - [16x8, 0, -8]
   animations:
-  - symbol: gUnkEu_0973FC44
+  - symbol: gTitlePressStartFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x0973FB04
     size: 2310
-- name: gUnkEu_09740536
+- name: gTitlePressStartSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [120, 16]
   columns: 5
   frames:
-  - symbol: gUnkEu_0974040C
+  - symbol: gTitlePressStartSpanishFrame0
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8]
@@ -933,7 +933,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740440
+  - symbol: gTitlePressStartSpanishFrame1
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -943,7 +943,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740474
+  - symbol: gTitlePressStartSpanishFrame2
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -953,7 +953,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_097404A8
+  - symbol: gTitlePressStartSpanishFrame3
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -963,7 +963,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_097404DC
+  - symbol: gTitlePressStartSpanishFrame4
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -974,20 +974,20 @@ entries:
     - [32x16, -72, -16]
     - [32x16, -40, -16]
   animations:
-  - symbol: gUnkEu_09740510
+  - symbol: gTitlePressStartSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x0974040C
     size: 2090
-- name: gUnkEu_09740D62
+- name: gTitlePressStartItalianTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [120, 16]
   columns: 5
   frames:
-  - symbol: gUnkEu_09740C38
+  - symbol: gTitlePressStartItalianFrame0
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8]
@@ -997,7 +997,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740C6C
+  - symbol: gTitlePressStartItalianFrame1
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -1007,7 +1007,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740CA0
+  - symbol: gTitlePressStartItalianFrame2
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -1017,7 +1017,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740CD4
+  - symbol: gTitlePressStartItalianFrame3
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -1027,7 +1027,7 @@ entries:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
     - [32x16, -40, -16]
-  - symbol: gUnkEu_09740D08
+  - symbol: gTitlePressStartItalianFrame4
     pieces:
     - [16x16, -120, -16]
     - [32x8, -8, -8, {same: [0, 1]}]
@@ -1038,20 +1038,20 @@ entries:
     - [32x16, -72, -16]
     - [32x16, -40, -16]
   animations:
-  - symbol: gUnkEu_09740D3C
+  - symbol: gTitlePressStartItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x09740C38
     size: 2090
-- name: gUnkEu_097415E8
+- name: gTitlePressStartGermanTiles
   format: sprite_sheet
   align: 4
   cell: [240, 24]
   anchor: [120, 24]
   columns: 5
   frames:
-  - symbol: gUnkEu_09741464
+  - symbol: gTitlePressStartGermanFrame0
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8]
@@ -1064,7 +1064,7 @@ entries:
     - [8x8, -17, -24]
     - [32x8, 24, -8, {fresh: true}]
     - [8x8, 16, -8]
-  - symbol: gUnkEu_097414AA
+  - symbol: gTitlePressStartGermanFrame1
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -1077,7 +1077,7 @@ entries:
     - [8x8, -17, -24]
     - [32x8, 24, -8]
     - [8x8, 16, -8]
-  - symbol: gUnkEu_097414F0
+  - symbol: gTitlePressStartGermanFrame2
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -1090,7 +1090,7 @@ entries:
     - [8x8, -17, -24]
     - [32x8, 24, -8]
     - [8x8, 16, -8]
-  - symbol: gUnkEu_09741536
+  - symbol: gTitlePressStartGermanFrame3
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -1103,7 +1103,7 @@ entries:
     - [8x8, -17, -24]
     - [32x8, 24, -8]
     - [8x8, 16, -8]
-  - symbol: gUnkEu_0974157C
+  - symbol: gTitlePressStartGermanFrame4
     pieces:
     - [16x16, -120, -16]
     - [32x8, 56, -8, {same: [0, 1]}]
@@ -1117,238 +1117,238 @@ entries:
     - [32x8, 24, -8]
     - [8x8, 16, -8]
   animations:
-  - symbol: gUnkEu_097415C2
+  - symbol: gTitlePressStartGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x09741464
     size: 2436
-- name: gUnkEu_09742A74
+- name: gTitleMenuSelectedEntryFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [-16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_097429BC
+  - symbol: gTitleMenuSelectedEntryFrenchFrame0
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x8, 112, 8]
-  - symbol: gUnkEu_097429D8
+  - symbol: gTitleMenuSelectedEntryFrenchFrame1
     pieces:
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
     - [16x16, 48, 0]
     - [16x8, 64, 8]
-  - symbol: gUnkEu_097429FA
+  - symbol: gTitleMenuSelectedEntryFrenchFrame2
     pieces:
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
-  - symbol: gUnkEu_09742A16
+  - symbol: gTitleMenuSelectedEntryFrenchFrame3
     pieces:
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
-  - symbol: gUnkEu_09742A32
+  - symbol: gTitleMenuSelectedEntryFrenchFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_09742A4E
+  - symbol: gTitleMenuSelectedEntryFrenchFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_09742A6A
+  - symbol: gTitleMenuSelectedEntryFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097429BC
     size: 3480
-- name: gUnkEu_09743812
+- name: gTitleMenuSelectedEntrySpanishTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [-16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_09743754
+  - symbol: gTitleMenuSelectedEntrySpanishFrame0
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [16x16, 80, 0]
     - [8x16, 96, 0]
     - [16x8, 104, 8]
-  - symbol: gUnkEu_09743776
+  - symbol: gTitleMenuSelectedEntrySpanishFrame1
     pieces:
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
     - [16x16, 48, 0]
     - [16x8, 64, 8]
-  - symbol: gUnkEu_09743798
+  - symbol: gTitleMenuSelectedEntrySpanishFrame2
     pieces:
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
-  - symbol: gUnkEu_097437B4
+  - symbol: gTitleMenuSelectedEntrySpanishFrame3
     pieces:
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
-  - symbol: gUnkEu_097437D0
+  - symbol: gTitleMenuSelectedEntrySpanishFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_097437EC
+  - symbol: gTitleMenuSelectedEntrySpanishFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_09743808
+  - symbol: gTitleMenuSelectedEntrySpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09743754
     size: 3486
-- name: gUnkEu_097445AC
+- name: gTitleMenuSelectedEntryItalianTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [-16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_097444F4
+  - symbol: gTitleMenuSelectedEntryItalianFrame0
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8]
-  - symbol: gUnkEu_09744510
+  - symbol: gTitleMenuSelectedEntryItalianFrame1
     pieces:
     - [32x16, 16, 0]
     - [8x16, 48, 0]
     - [32x8, 88, 8]
     - [32x8, 56, 8]
-  - symbol: gUnkEu_0974452C
+  - symbol: gTitleMenuSelectedEntryItalianFrame2
     pieces:
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
-  - symbol: gUnkEu_09744548
+  - symbol: gTitleMenuSelectedEntryItalianFrame3
     pieces:
     - [32x16, 16, 0]
     - [16x16, 48, 0]
     - [8x16, 64, 0, {fresh: true}]
     - [32x8, 88, 8]
     - [16x8, 72, 8]
-  - symbol: gUnkEu_0974456A
+  - symbol: gTitleMenuSelectedEntryItalianFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_09744586
+  - symbol: gTitleMenuSelectedEntryItalianFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_097445A2
+  - symbol: gTitleMenuSelectedEntryItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097444F4
     size: 2776
-- name: gUnkEu_0974507E
+- name: gTitleMenuSelectedEntryGermanTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [-16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_09744FCC
+  - symbol: gTitleMenuSelectedEntryGermanFrame0
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8]
-  - symbol: gUnkEu_09744FE8
+  - symbol: gTitleMenuSelectedEntryGermanFrame1
     pieces:
     - [32x16, 16, 0]
     - [8x16, 48, 0]
     - [32x8, 88, 8]
     - [32x8, 56, 8]
-  - symbol: gUnkEu_09745004
+  - symbol: gTitleMenuSelectedEntryGermanFrame2
     pieces:
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
     - [32x16, 16, 0]
-  - symbol: gUnkEu_09745020
+  - symbol: gTitleMenuSelectedEntryGermanFrame3
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8]
-  - symbol: gUnkEu_0974503C
+  - symbol: gTitleMenuSelectedEntryGermanFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_09745058
+  - symbol: gTitleMenuSelectedEntryGermanFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 88, 0]
     - [8x16, 80, 0]
   animations:
-  - symbol: gUnkEu_09745074
+  - symbol: gTitleMenuSelectedEntryGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09744FCC
     size: 2834
-- name: gUnkEu_09746CA4
+- name: gTitleSoraLumiFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_09746C34
+  - symbol: gTitleSoraLumiFrenchFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
     - [16x16, 88, 0]
-  - symbol: gUnkEu_09746C56
+  - symbol: gTitleSoraLumiFrenchFrame1
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
     - [16x16, 88, 0]
-  - symbol: gUnkEu_09746C78
+  - symbol: gTitleSoraLumiFrenchFrame2
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
@@ -1356,34 +1356,34 @@ entries:
     - [32x16, 24, 0]
     - [32x16, 56, 0]
   animations:
-  - symbol: gUnkEu_09746C9A
+  - symbol: gTitleSoraLumiFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09746C34
     size: 1968
-- name: gUnkEu_09747454
+- name: gTitleSoraLumiSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_097473E4
+  - symbol: gTitleSoraLumiSpanishFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09747406
+  - symbol: gTitleSoraLumiSpanishFrame1
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09747428
+  - symbol: gTitleSoraLumiSpanishFrame2
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
@@ -1391,34 +1391,34 @@ entries:
     - [32x16, 24, 0]
     - [32x16, 56, 0]
   animations:
-  - symbol: gUnkEu_0974744A
+  - symbol: gTitleSoraLumiSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097473E4
     size: 1968
-- name: gUnkEu_09747C04
+- name: gTitleSoraLumiItalianTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_09747B94
+  - symbol: gTitleSoraLumiItalianFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09747BB6
+  - symbol: gTitleSoraLumiItalianFrame1
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09747BD8
+  - symbol: gTitleSoraLumiItalianFrame2
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
@@ -1426,34 +1426,34 @@ entries:
     - [32x16, 24, 0]
     - [32x16, 56, 0]
   animations:
-  - symbol: gUnkEu_09747BFA
+  - symbol: gTitleSoraLumiItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09747B94
     size: 1968
-- name: gUnkEu_097483B4
+- name: gTitleSoraLumiGermanTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_09748344
+  - symbol: gTitleSoraLumiGermanFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09748366
+  - symbol: gTitleSoraLumiGermanFrame1
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x16, 88, 0]
     - [32x16, 24, 0]
     - [32x16, 56, 0]
-  - symbol: gUnkEu_09748388
+  - symbol: gTitleSoraLumiGermanFrame2
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
@@ -1461,27 +1461,27 @@ entries:
     - [32x16, 24, 0]
     - [32x16, 56, 0]
   animations:
-  - symbol: gUnkEu_097483AA
+  - symbol: gTitleSoraLumiGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09748344
     size: 1968
-- name: gUnkEu_0974A284
+- name: gTitleMenuEntryFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [0, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_0974A1A8
+  - symbol: gTitleMenuEntryFrenchFrame0
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x8, 112, 8]
-  - symbol: gUnkEu_0974A1CA
+  - symbol: gTitleMenuEntryFrenchFrame1
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
@@ -1489,28 +1489,28 @@ entries:
     - [32x8, 64, 8]
     - [16x8, 96, 8]
     - [8x8, 112, 8, {fresh: true}]
-  - symbol: gUnkEu_0974A1F2
+  - symbol: gTitleMenuEntryFrenchFrame2
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
     - [32x8, 48, 8, {fresh: true}]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8, {fresh: true}]
-  - symbol: gUnkEu_0974A214
+  - symbol: gTitleMenuEntryFrenchFrame3
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8, {same: [0, 4]}]
     - [16x16, 0, 0]
-  - symbol: gUnkEu_0974A236
+  - symbol: gTitleMenuEntryFrenchFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
     - [16x16, 0, 0, {fresh: true}]
-  - symbol: gUnkEu_0974A258
+  - symbol: gTitleMenuEntryFrenchFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
@@ -1518,20 +1518,20 @@ entries:
     - [32x16, 88, 0]
     - [8x16, 80, 0]
   animations:
-  - symbol: gUnkEu_0974A27A
+  - symbol: gTitleMenuEntryFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974A1A8
     size: 4220
-- name: gUnkEu_0974B306
+- name: gTitleMenuEntrySpanishTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [0, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_0974B224
+  - symbol: gTitleMenuEntrySpanishFrame0
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
@@ -1539,7 +1539,7 @@ entries:
     - [16x16, 80, 0]
     - [8x16, 96, 0]
     - [16x8, 104, 8]
-  - symbol: gUnkEu_0974B24C
+  - symbol: gTitleMenuEntrySpanishFrame1
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
@@ -1547,28 +1547,28 @@ entries:
     - [32x8, 64, 8]
     - [16x8, 96, 8]
     - [8x8, 112, 8]
-  - symbol: gUnkEu_0974B274
+  - symbol: gTitleMenuEntrySpanishFrame2
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x8, 48, 8, {fresh: true}]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8, {fresh: true}]
-  - symbol: gUnkEu_0974B296
+  - symbol: gTitleMenuEntrySpanishFrame3
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8, {fresh: true}]
-  - symbol: gUnkEu_0974B2B8
+  - symbol: gTitleMenuEntrySpanishFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
     - [16x16, 0, 0, {fresh: true}]
-  - symbol: gUnkEu_0974B2DA
+  - symbol: gTitleMenuEntrySpanishFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
@@ -1576,41 +1576,41 @@ entries:
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_0974B2FC
+  - symbol: gTitleMenuEntrySpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974B224
     size: 4610
-- name: gUnkEu_0974C504
+- name: gTitleMenuEntryItalianTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [0, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_0974C428
+  - symbol: gTitleMenuEntryItalianFrame0
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8]
-  - symbol: gUnkEu_0974C44A
+  - symbol: gTitleMenuEntryItalianFrame1
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [8x16, 48, 0]
     - [32x8, 56, 8]
     - [32x8, 88, 8, {fresh: true}]
-  - symbol: gUnkEu_0974C46C
+  - symbol: gTitleMenuEntryItalianFrame2
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x8, 48, 8, {fresh: true}]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8]
-  - symbol: gUnkEu_0974C48E
+  - symbol: gTitleMenuEntryItalianFrame3
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
@@ -1618,14 +1618,14 @@ entries:
     - [8x16, 64, 0, {fresh: true}]
     - [32x8, 72, 8, {fresh: true}]
     - [16x8, 104, 8]
-  - symbol: gUnkEu_0974C4B6
+  - symbol: gTitleMenuEntryItalianFrame4
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_0974C4D8
+  - symbol: gTitleMenuEntryItalianFrame5
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
@@ -1633,55 +1633,55 @@ entries:
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_0974C4FA
+  - symbol: gTitleMenuEntryItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974C428
     size: 3964
-- name: gUnkEu_0974D47A
+- name: gTitleMenuEntryGermanTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [0, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_0974D3A4
+  - symbol: gTitleMenuEntryGermanFrame0
     pieces:
     - [16x16, 0, 0]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8]
-  - symbol: gUnkEu_0974D3C6
+  - symbol: gTitleMenuEntryGermanFrame1
     pieces:
     - [32x16, 16, 0]
     - [8x16, 48, 0]
     - [16x16, 0, 0, {fresh: true}]
     - [32x8, 56, 8]
     - [32x8, 88, 8, {fresh: true}]
-  - symbol: gUnkEu_0974D3E8
+  - symbol: gTitleMenuEntryGermanFrame2
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x8, 48, 8, {fresh: true}]
     - [32x8, 80, 8, {fresh: true}]
     - [8x8, 112, 8]
-  - symbol: gUnkEu_0974D40A
+  - symbol: gTitleMenuEntryGermanFrame3
     pieces:
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [8x16, 80, 0]
     - [32x8, 88, 8, {fresh: true}]
-  - symbol: gUnkEu_0974D42C
+  - symbol: gTitleMenuEntryGermanFrame4
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [16x16, 0, 0, {fresh: true}]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnkEu_0974D44E
+  - symbol: gTitleMenuEntryGermanFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
@@ -1689,34 +1689,34 @@ entries:
     - [8x16, 80, 0]
     - [32x16, 88, 0]
   animations:
-  - symbol: gUnkEu_0974D470
+  - symbol: gTitleMenuEntryGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974D3A4
     size: 4022
-- name: gUnkEu_0974EC7C
+- name: gTitleRikuLumiFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [104, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0974EC0C
+  - symbol: gTitleRikuLumiFrenchFrame0
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
     - [8x16, -8, 0]
-  - symbol: gUnkEu_0974EC2E
+  - symbol: gTitleRikuLumiFrenchFrame1
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0974EC50
+  - symbol: gTitleRikuLumiFrenchFrame2
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
@@ -1724,34 +1724,34 @@ entries:
     - [32x16, -72, 0]
     - [32x16, -40, 0]
   animations:
-  - symbol: gUnkEu_0974EC72
+  - symbol: gTitleRikuLumiFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974EC0C
     size: 1968
-- name: gUnkEu_0974F42C
+- name: gTitleRikuLumiSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [104, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0974F3BC
+  - symbol: gTitleRikuLumiSpanishFrame0
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0974F3DE
+  - symbol: gTitleRikuLumiSpanishFrame1
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0974F400
+  - symbol: gTitleRikuLumiSpanishFrame2
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
@@ -1759,34 +1759,34 @@ entries:
     - [32x16, -72, 0]
     - [32x16, -40, 0]
   animations:
-  - symbol: gUnkEu_0974F422
+  - symbol: gTitleRikuLumiSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974F3BC
     size: 1968
-- name: gUnkEu_0974FBDC
+- name: gTitleRikuLumiItalianTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [104, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0974FB6C
+  - symbol: gTitleRikuLumiItalianFrame0
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0974FB8E
+  - symbol: gTitleRikuLumiItalianFrame1
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0974FBB0
+  - symbol: gTitleRikuLumiItalianFrame2
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
@@ -1794,34 +1794,34 @@ entries:
     - [32x16, -72, 0]
     - [32x16, -40, 0]
   animations:
-  - symbol: gUnkEu_0974FBD2
+  - symbol: gTitleRikuLumiItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974FB6C
     size: 1968
-- name: gUnkEu_0975038C
+- name: gTitleRikuLumiGermanTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [104, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0975031C
+  - symbol: gTitleRikuLumiGermanFrame0
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_0975033E
+  - symbol: gTitleRikuLumiGermanFrame1
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
     - [8x16, -8, 0]
     - [32x16, -72, 0]
     - [32x16, -40, 0]
-  - symbol: gUnkEu_09750360
+  - symbol: gTitleRikuLumiGermanFrame2
     pieces:
     - [16x16, -104, 0, {hflip: true}]
     - [16x16, -88, 0]
@@ -1829,20 +1829,20 @@ entries:
     - [32x16, -72, 0]
     - [32x16, -40, 0]
   animations:
-  - symbol: gUnkEu_09750382
+  - symbol: gTitleRikuLumiGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0975031C
     size: 1968
-- name: gUnkEu_09750EE4
+- name: gTitleDevelopedByFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [64, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09750EB8
+  - symbol: gTitleDevelopedByFrenchFrame0
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
@@ -1850,40 +1850,40 @@ entries:
     - [32x16, -64, 0]
     - [32x16, -32, 0]
   animations:
-  - symbol: gUnkEu_09750EDA
+  - symbol: gTitleDevelopedByFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09750EB8
     size: 1004
-- name: gUnkEu_097512CA
+- name: gTitleDevelopedBySpanishTiles
   format: sprite_sheet
   align: 4
   cell: [128, 16]
   anchor: [64, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_097512A4
+  - symbol: gTitleDevelopedBySpanishFrame0
     pieces:
     - [32x16, -64, 0]
     - [32x16, -32, 0]
     - [32x16, 0, 0]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnkEu_097512C0
+  - symbol: gTitleDevelopedBySpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097512A4
     size: 1062
-- name: gUnkEu_097516F8
+- name: gTitleDevelopedByItalianTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [64, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_097516CC
+  - symbol: gTitleDevelopedByItalianFrame0
     pieces:
     - [32x16, -64, 0]
     - [32x16, -32, 0]
@@ -1891,45 +1891,45 @@ entries:
     - [16x16, 32, 0]
     - [8x16, 48, 0]
   animations:
-  - symbol: gUnkEu_097516EE
+  - symbol: gTitleDevelopedByItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097516CC
     size: 1004
-- name: gUnkEu_09751ADE
+- name: gTitleDevelopedByGermanTiles
   format: sprite_sheet
   align: 4
   cell: [128, 16]
   anchor: [64, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09751AB8
+  - symbol: gTitleDevelopedByGermanFrame0
     pieces:
     - [32x16, -64, 0]
     - [32x16, -32, 0]
     - [32x16, 0, 0]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnkEu_09751AD4
+  - symbol: gTitleDevelopedByGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09751AB8
     size: 1062
-- name: gUnk_09776076
+- name: gTitleLogoReverseRebirthTiles
   format: sprite_sheet
   align: 4
   cell: [216, 136]
   anchor: [107, 59]
   columns: 2
   frames:
-  - symbol: gUnk_09775EB4
+  - symbol: gTitleLogoReverseRebirthFrame0
     pieces:
     - [32x16, -48, -8]
     - [32x16, -16, -8]
     - [32x16, 16, -8]
-  - symbol: gUnk_09775ECA
+  - symbol: gTitleLogoReverseRebirthFrame1
     pieces:
     - [32x16, -71, -15, {pal: 1}]
     - [32x16, -39, -15, {pal: 1, fresh: true}]
@@ -2001,7 +2001,7 @@ entries:
     - [16x32, 77, 13, {fresh: true}]
     - [16x8, 77, 45, {fresh: true}]
   animations:
-  - symbol: gUnk_0977606C
+  - symbol: gTitleLogoReverseRebirthAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2013,27 +2013,27 @@ entries:
   eu:
     address: 0x097520C8
     size: 17794
-- name: gUnk_09770F12
+- name: gTitleWorkInProgressTiles
   format: sprite_sheet
   align: 4
   cell: [72, 8]
   anchor: [36, 8]
   columns: 2
   frames:
-  - symbol: gUnk_09770ED8
+  - symbol: gTitleWorkInProgressFrame0
     pieces:
     - [32x8, -28, -8]
     - [32x8, 4, -8]
-  - symbol: gUnk_09770EE8
+  - symbol: gTitleWorkInProgressFrame1
     pieces:
     - [32x8, -28, -8]
     - [32x8, 4, -8]
     - [8x8, -36, -8]
   animations:
-  - symbol: gUnk_09770EFE
+  - symbol: gTitleWorkInProgressAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_09770F08
+  - symbol: gTitleWorkInProgressAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
   us:
@@ -2045,14 +2045,14 @@ entries:
   eu:
     address: 0x0973ED88
     size: 346
-- name: gUnk_09771060
+- name: gTitleDevelopedByTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [64, 0]
   columns: 1
   frames:
-  - symbol: gUnk_09771034
+  - symbol: gTitleDevelopedByFrame0
     pieces:
     - [32x16, -64, 0]
     - [32x16, -32, 0]
@@ -2060,7 +2060,7 @@ entries:
     - [16x16, 32, 0]
     - [8x16, 48, 0]
   animations:
-  - symbol: gUnk_09771056
+  - symbol: gTitleDevelopedByAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2072,14 +2072,14 @@ entries:
   eu:
     address: 0x09750ACC
     size: 1004
-- name: gUnk_09771666
+- name: gTitlePressStartTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [120, 16]
   columns: 5
   frames:
-  - symbol: gUnk_0977153C
+  - symbol: gTitlePressStartFrame0
     pieces:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
@@ -2089,7 +2089,7 @@ entries:
     - [32x8, 56, -8, {fresh: true}]
     - [32x8, 88, -8]
     - [32x8, 24, -8, {same: [0, 4]}]
-  - symbol: gUnk_09771570
+  - symbol: gTitlePressStartFrame1
     pieces:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
@@ -2099,7 +2099,7 @@ entries:
     - [32x8, 56, -8]
     - [32x8, 88, -8]
     - [32x8, 24, -8, {same: [0, 4]}]
-  - symbol: gUnk_097715A4
+  - symbol: gTitlePressStartFrame2
     pieces:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
@@ -2109,7 +2109,7 @@ entries:
     - [32x8, 56, -8]
     - [32x8, 88, -8]
     - [32x8, 24, -8, {same: [0, 4]}]
-  - symbol: gUnk_097715D8
+  - symbol: gTitlePressStartFrame3
     pieces:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
@@ -2119,7 +2119,7 @@ entries:
     - [32x8, 56, -8]
     - [32x8, 88, -8]
     - [32x8, 24, -8, {same: [0, 4]}]
-  - symbol: gUnk_0977160C
+  - symbol: gTitlePressStartFrame4
     pieces:
     - [32x16, -104, -16]
     - [32x16, -72, -16]
@@ -2130,7 +2130,7 @@ entries:
     - [32x8, 88, -8]
     - [32x8, 24, -8, {same: [0, 4]}]
   animations:
-  - symbol: gUnk_09771640
+  - symbol: gTitlePressStartAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   us:
@@ -2142,30 +2142,30 @@ entries:
   eu:
     address: 0x0973F2D8
     size: 2090
-- name: gUnk_09771DC0
+- name: gTitleMenuCursorTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_09771D68
+  - symbol: gTitleMenuCursorFrame0
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_09771D72
+  - symbol: gTitleMenuCursorFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_09771D7C
+  - symbol: gTitleMenuCursorFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_09771D86
+  - symbol: gTitleMenuCursorFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_09771D90
+  - symbol: gTitleMenuCursorFrame4
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_09771D9A
+  - symbol: gTitleMenuCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   us:
@@ -2177,51 +2177,51 @@ entries:
   eu:
     address: 0x0973F000
     size: 728
-- name: gUnk_097720F2
+- name: gTitleMenuSelectedEntryTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [-16, 0]
   columns: 6
   frames:
-  - symbol: gUnk_09772040
+  - symbol: gTitleMenuSelectedEntryFrame0
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
-  - symbol: gUnk_0977205C
+  - symbol: gTitleMenuSelectedEntryFrame1
     pieces:
     - [32x16, 16, 0]
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
-  - symbol: gUnk_09772078
+  - symbol: gTitleMenuSelectedEntryFrame2
     pieces:
     - [32x16, 16, 0]
     - [32x8, 48, 8]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
-  - symbol: gUnk_09772094
+  - symbol: gTitleMenuSelectedEntryFrame3
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x8, 80, 8]
     - [8x8, 112, 8]
-  - symbol: gUnk_097720B0
+  - symbol: gTitleMenuSelectedEntryFrame4
     pieces:
     - [32x16, 16, 0, {fresh: true}]
     - [32x16, 48, 0, {fresh: true}]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
-  - symbol: gUnk_097720CC
+  - symbol: gTitleMenuSelectedEntryFrame5
     pieces:
     - [32x16, 16, 0]
     - [32x16, 48, 0]
     - [32x16, 80, 0]
     - [8x16, 112, 0]
   animations:
-  - symbol: gUnk_097720E8
+  - symbol: gTitleMenuSelectedEntryAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2233,51 +2233,51 @@ entries:
   eu:
     address: 0x09741DE8
     size: 3026
-- name: gUnk_09772CC6
+- name: gTitleMenuSelectedBarTiles
   format: sprite_sheet
   align: 4
   cell: [128, 16]
   anchor: [0, -8]
   columns: 6
   frames:
-  - symbol: gUnk_09772C14
+  - symbol: gTitleMenuSelectedBarFrame0
     pieces:
     - [32x8, 0, 8]
     - [32x8, 32, 8]
     - [32x8, 64, 8, {fresh: true}]
     - [32x8, 96, 8]
-  - symbol: gUnk_09772C30
+  - symbol: gTitleMenuSelectedBarFrame1
     pieces:
     - [32x8, 64, 8, {fresh: true}]
     - [32x8, 96, 8, {fresh: true}]
     - [32x8, 0, 8]
     - [32x8, 32, 8, {same: [0, 1]}]
-  - symbol: gUnk_09772C4C
+  - symbol: gTitleMenuSelectedBarFrame2
     pieces:
     - [32x8, 64, 8, {fresh: true}]
     - [32x8, 96, 8, {fresh: true}]
     - [32x8, 0, 8]
     - [32x8, 32, 8, {same: [0, 1]}]
-  - symbol: gUnk_09772C68
+  - symbol: gTitleMenuSelectedBarFrame3
     pieces:
     - [32x8, 64, 8, {fresh: true}]
     - [32x8, 96, 8, {fresh: true}]
     - [32x8, 0, 8]
     - [32x8, 32, 8, {same: [0, 1]}]
-  - symbol: gUnk_09772C84
+  - symbol: gTitleMenuSelectedBarFrame4
     pieces:
     - [32x8, 32, 8, {fresh: true}]
     - [32x8, 64, 8, {fresh: true}]
     - [32x8, 96, 8, {fresh: true}]
     - [32x8, 0, 8]
-  - symbol: gUnk_09772CA0
+  - symbol: gTitleMenuSelectedBarFrame5
     pieces:
     - [32x8, 96, 8, {fresh: true}]
     - [32x8, 32, 8, {same: [4, 0]}]
     - [32x8, 64, 8]
     - [32x8, 0, 8]
   animations:
-  - symbol: gUnk_09772CBC
+  - symbol: gTitleMenuSelectedBarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2287,37 +2287,37 @@ entries:
     address: 0x0972B3F0
     size: 3762
     frames:
-    - symbol: gUnk_09772C14
+    - symbol: gTitleMenuSelectedBarFrame0
       pieces:
       - [32x16, 0, 8]
       - [32x16, 32, 8]
       - [32x16, 64, 8]
       - [32x16, 96, 8]
-    - symbol: gUnk_09772C30
+    - symbol: gTitleMenuSelectedBarFrame1
       pieces:
       - [32x16, 0, 8]
       - [32x16, 32, 8]
       - [32x16, 64, 8]
       - [32x16, 96, 8]
-    - symbol: gUnk_09772C4C
+    - symbol: gTitleMenuSelectedBarFrame2
       pieces:
       - [32x16, 0, 8]
       - [32x16, 32, 8]
       - [32x16, 64, 8]
       - [32x16, 96, 8]
-    - symbol: gUnk_09772C68
+    - symbol: gTitleMenuSelectedBarFrame3
       pieces:
       - [32x16, 64, 8]
       - [32x16, 96, 8]
       - [32x16, 0, 8]
       - [32x16, 32, 8]
-    - symbol: gUnk_09772C84
+    - symbol: gTitleMenuSelectedBarFrame4
       pieces:
       - [32x16, 0, 8]
       - [32x16, 32, 8]
       - [32x16, 64, 8]
       - [32x16, 96, 8]
-    - symbol: gUnk_09772CA0
+    - symbol: gTitleMenuSelectedBarFrame5
       pieces:
       - [32x16, 0, 8]
       - [32x16, 32, 8]
@@ -2327,33 +2327,33 @@ entries:
     address: 0x09745AE0
     size: 1970
     cell: [128, 8]
-- name: gUnk_09773426
+- name: gTitleSoraLumiTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnk_097733C8
+  - symbol: gTitleSoraLumiFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x16, 96, 0]
-  - symbol: gUnk_097733E4
+  - symbol: gTitleSoraLumiFrame1
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x16, 96, 0]
-  - symbol: gUnk_09773400
+  - symbol: gTitleSoraLumiFrame2
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0, {fresh: true}]
     - [8x16, 96, 0]
   animations:
-  - symbol: gUnk_0977341C
+  - symbol: gTitleSoraLumiAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2363,19 +2363,19 @@ entries:
     address: 0x0972C2A4
     size: 2462
     frames:
-    - symbol: gUnk_097733C8
+    - symbol: gTitleSoraLumiFrame0
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
       - [32x16, 64, 0]
       - [8x16, 96, 0]
-    - symbol: gUnk_097733E4
+    - symbol: gTitleSoraLumiFrame1
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
       - [32x16, 64, 0]
       - [8x16, 96, 0]
-    - symbol: gUnk_09773400
+    - symbol: gTitleSoraLumiFrame2
       pieces:
       - [32x16, 0, 0, {fresh: true}]
       - [32x16, 32, 0]
@@ -2384,51 +2384,51 @@ entries:
   eu:
     address: 0x09746294
     size: 2462
-- name: gUnk_09773E1A
+- name: gTitleMenuEntryTiles
   format: sprite_sheet
   align: 4
   cell: [128, 32]
   anchor: [0, 8]
   columns: 6
   frames:
-  - symbol: gUnk_09773D68
+  - symbol: gTitleMenuEntryFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [32x16, 96, 0]
-  - symbol: gUnk_09773D84
+  - symbol: gTitleMenuEntryFrame1
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [32x16, 96, 0, {fresh: true}]
-  - symbol: gUnk_09773DA0
+  - symbol: gTitleMenuEntryFrame2
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0, {fresh: true}]
     - [32x16, 96, 0, {fresh: true}]
-  - symbol: gUnk_09773DBC
+  - symbol: gTitleMenuEntryFrame3
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [32x16, 96, 0, {fresh: true}]
-  - symbol: gUnk_09773DD8
+  - symbol: gTitleMenuEntryFrame4
     pieces:
     - [32x16, 0, 0, {fresh: true}]
     - [32x16, 32, 0, {fresh: true}]
     - [32x16, 64, 0]
     - [32x16, 96, 0]
-  - symbol: gUnk_09773DF4
+  - symbol: gTitleMenuEntryFrame5
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [32x16, 96, 0]
   animations:
-  - symbol: gUnk_09773E10
+  - symbol: gTitleMenuEntryAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2438,27 +2438,27 @@ entries:
     address: 0x0972CC44
     size: 11370
     frames:
-    - symbol: gUnk_09773D68
+    - symbol: gTitleMenuEntryFrame0
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
-    - symbol: gUnk_09773D84
+    - symbol: gTitleMenuEntryFrame1
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
-    - symbol: gUnk_09773DA0
+    - symbol: gTitleMenuEntryFrame2
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
-    - symbol: gUnk_09773DBC
+    - symbol: gTitleMenuEntryFrame3
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
-    - symbol: gUnk_09773DD8
+    - symbol: gTitleMenuEntryFrame4
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
-    - symbol: gUnk_09773DF4
+    - symbol: gTitleMenuEntryFrame5
       pieces:
       - [64x32, 0, -8]
       - [64x32, 64, -8]
@@ -2467,28 +2467,28 @@ entries:
     size: 5810
     cell: [128, 16]
     anchor: [0, 0]
-- name: gUnk_0977548C
+- name: gTitleRikuLumiTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [104, 0]
   columns: 3
   frames:
-  - symbol: gUnk_0977541C
+  - symbol: gTitleRikuLumiFrame0
     pieces:
     - [32x16, -88, 0]
     - [32x16, -56, 0]
     - [16x16, -24, 0]
     - [16x16, -104, 0, {hflip: true}]
     - [8x16, -8, 0]
-  - symbol: gUnk_0977543E
+  - symbol: gTitleRikuLumiFrame1
     pieces:
     - [32x16, -88, 0]
     - [32x16, -56, 0]
     - [16x16, -24, 0, {fresh: true}]
     - [8x16, -8, 0]
     - [16x16, -104, 0, {hflip: true}]
-  - symbol: gUnk_09775460
+  - symbol: gTitleRikuLumiFrame2
     pieces:
     - [32x16, -88, 0]
     - [32x16, -56, 0]
@@ -2496,7 +2496,7 @@ entries:
     - [8x16, -8, 0]
     - [16x16, -104, 0, {hflip: true}]
   animations:
-  - symbol: gUnk_09775482
+  - symbol: gTitleRikuLumiAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2506,21 +2506,21 @@ entries:
     address: 0x0972F8B0
     size: 2224
     frames:
-    - symbol: gUnk_0977541C
+    - symbol: gTitleRikuLumiFrame0
       pieces:
       - [32x16, -88, 0]
       - [32x16, -56, 0]
       - [16x16, -24, 0]
       - [16x16, -104, 0, {hflip: true}]
       - [8x16, -8, 0]
-    - symbol: gUnk_0977543E
+    - symbol: gTitleRikuLumiFrame1
       pieces:
       - [32x16, -88, 0]
       - [32x16, -56, 0]
       - [16x16, -24, 0, {fresh: true}]
       - [8x16, -8, 0]
       - [16x16, -104, 0, {hflip: true}]
-    - symbol: gUnk_09775460
+    - symbol: gTitleRikuLumiFrame2
       pieces:
       - [32x16, -88, 0, {fresh: true}]
       - [32x16, -56, 0]
@@ -2530,21 +2530,21 @@ entries:
   eu:
     address: 0x0974E35C
     size: 2224
-- name: gUnk_09775CF2
+- name: gTitlePremiumShowcaseTiles
   format: sprite_sheet
   align: 4
   cell: [112, 8]
   anchor: [56, 1]
   columns: 1
   frames:
-  - symbol: gUnk_09775CCC
+  - symbol: gTitlePremiumShowcaseFrame0
     pieces:
     - [32x8, -56, -1]
     - [32x8, -24, -1]
     - [32x8, 8, -1]
     - [16x8, 40, -1]
   animations:
-  - symbol: gUnk_09775CE8
+  - symbol: gTitlePremiumShowcaseAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -2556,7 +2556,7 @@ entries:
   eu:
     address: 0x09751EE0
     size: 486
-- name: gUnk_097C77B8
+- name: gTitleSoraBgTiles
   format: tiles4
   us:
     address: 0x097C77B8
@@ -2568,7 +2568,7 @@ entries:
     address: 0x0981F960
     size: 17468
     compress: lz77
-- name: gUnk_097CF758
+- name: gTitleLogoBgTiles
   format: tiles4
   width: 8
   us:
@@ -2580,7 +2580,7 @@ entries:
   eu:
     address: 0x097ADE00
     size: 16128
-- name: gUnk_097D3658
+- name: gTitleRikuBgTiles
   format: tiles4
   us:
     address: 0x097D3658
@@ -2592,7 +2592,7 @@ entries:
     address: 0x09823D9C
     size: 13620
     compress: lz77
-- name: gUnk_0983E398
+- name: gTitleSoraIntroBgMap
   format: tilemap
   us:
     address: 0x0983E398
@@ -2604,7 +2604,7 @@ entries:
     address: 0x098272D0
     size: 844
     compress: lz77
-- name: gUnk_0983EB98
+- name: gTitleSoraBgMap
   format: tilemap
   us:
     address: 0x0983EB98
@@ -2616,7 +2616,7 @@ entries:
     address: 0x0982761C
     size: 772
     compress: lz77
-- name: gUnk_0983F398
+- name: gTitlePressStartBarMap
   format: tilemap
   us:
     address: 0x0983F398
@@ -2627,7 +2627,7 @@ entries:
   eu:
     address: 0x09815640
     size: 2048
-- name: gUnk_0983FB98
+- name: gTitleLogoBgMap
   format: tilemap
   us:
     address: 0x0983FB98
@@ -2638,7 +2638,7 @@ entries:
   eu:
     address: 0x09814A40
     size: 1024
-- name: gUnk_09840798
+- name: gTitleRikuIntroBgMap
   format: tilemap
   us:
     address: 0x09840798
@@ -2650,7 +2650,7 @@ entries:
     address: 0x09827920
     size: 788
     compress: lz77
-- name: gUnk_09840F98
+- name: gTitleRikuBgMap
   format: tilemap
   us:
     address: 0x09840F98
@@ -2662,7 +2662,7 @@ entries:
     address: 0x09827C34
     size: 504
     compress: lz77
-- name: gUnk_0984A418
+- name: gTitleSoraBgPalette
   format: palette
   us:
     address: 0x0984A418
@@ -2673,7 +2673,7 @@ entries:
   eu:
     address: 0x0981EAC0
     size: 512
-- name: gUnk_0984A618
+- name: gTitleLogoBgPalette
   format: palette
   us:
     address: 0x0984A618
@@ -2684,7 +2684,7 @@ entries:
   eu:
     address: 0x0981ECC0
     size: 160
-- name: gUnk_0984A6B8
+- name: gTitleLogoDisneySquareEnixPalette
   format: palette
   us:
     address: 0x0984A6B8
@@ -2695,7 +2695,7 @@ entries:
   eu:
     address: 0x0981ED60
     size: 32
-- name: gUnk_0984A6D8
+- name: gTitleLogoKanaPalette
   format: palette
   us:
     address: 0x0984A6D8
@@ -2706,7 +2706,7 @@ entries:
   eu:
     address: 0x0981ED80
     size: 32
-- name: gUnk_0984A6F8
+- name: gTitleLogoChainOfMemoriesPalette
   format: palette
   us:
     address: 0x0984A6F8
@@ -2717,7 +2717,7 @@ entries:
   eu:
     address: 0x0981EDA0
     size: 32
-- name: gUnk_0984A718
+- name: gTitleLogoKingdomHeartsPalette
   format: palette
   us:
     address: 0x0984A718
@@ -2728,7 +2728,7 @@ entries:
   eu:
     address: 0x0981EDC0
     size: 32
-- name: gUnk_0984A738
+- name: gTitleLogoHeartPalette
   format: palette
   us:
     address: 0x0984A738
@@ -2739,7 +2739,7 @@ entries:
   eu:
     address: 0x0981EDE0
     size: 64
-- name: gUnk_0984A778
+- name: gTitleObjPalettes
   format: palette
   ctype: u8
   us:
@@ -2751,7 +2751,7 @@ entries:
   eu:
     address: 0x0981EE20
     size: 64
-- name: gUnk_0984A7B8
+- name: gTitleSoraLumiPalette
   format: palette
   ctype: u8
   us:
@@ -2763,7 +2763,7 @@ entries:
   eu:
     address: 0x0981EE60
     size: 32
-- name: gUnk_0984A7D8
+- name: gTitleRikuLumiPalette
   format: palette
   us:
     address: 0x0984A7D8
@@ -2774,7 +2774,7 @@ entries:
   eu:
     address: 0x0981EE80
     size: 32
-- name: gUnk_0984A7F8
+- name: gTitleMenuEntryPalette
   format: palette
   us:
     address: 0x0984A7F8
@@ -2785,7 +2785,7 @@ entries:
   eu:
     address: 0x0981EEA0
     size: 32
-- name: gUnk_0984A818
+- name: gTitleRikuBgPalette
   format: palette
   us:
     address: 0x0984A818
@@ -2796,7 +2796,7 @@ entries:
   eu:
     address: 0x0981EEC0
     size: 512
-- name: gUnk_0984AA18
+- name: gTitleLogoReverseRebirthPalette
   format: palette
   us:
     address: 0x0984AA18
@@ -2807,7 +2807,7 @@ entries:
   eu:
     address: 0x0981F0C0
     size: 32
-- name: gUnkEu_09814E40
+- name: gTitlePressStartBarGermanMap
   format: tilemap
   eu:
     address: 0x09814E40

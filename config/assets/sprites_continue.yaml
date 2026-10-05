@@ -50,36 +50,36 @@ objects:
     start: 0x095A3D74
     end: 0x095A3F4C
 entries:
-- name: gUnk_09EEB0C4
+- name: gContinueCursorFrames
   record: SpriteTable
-  items: [gUnk_090A6A20, gUnk_090A6A2A, gUnk_090A6A34, gUnk_090A6A3E, gUnk_090A6A48, gUnk_090A6A52, gUnk_090A6A5C, gUnk_090A6A66, gUnk_090A6A70, gUnk_090A6A7A, gUnk_090A6A84, gUnk_090A6A8E, gUnk_090A6A98, gUnk_090A6AA2, gUnk_090A6AAC, gUnk_090A6AB6, gUnk_090A6AC0]
+  items: [gContinueCursorFrame0, gContinueCursorFrame1, gContinueCursorFrame2, gContinueCursorFrame3, gContinueCursorFrame4, gContinueCursorFrame5, gContinueCursorFrame6, gContinueCursorFrame7, gContinueCursorFrame8, gContinueCursorFrame9, gContinueCursorFrame10, gContinueCursorFrame11, gContinueCursorFrame12, gContinueCursorFrame13, gContinueCursorFrame14, gContinueCursorFrame15, gContinueCursorFrame16]
   us:
     address: 0x09EEB0C4
   jp:
     address: 0x09EC24B0
   eu:
     address: 0x09F77254
-- name: gUnk_09EEB108
+- name: gContinueCursorAnims
   record: AnimTable
-  items: [gUnk_090A6ACA, gUnk_090A6AF0]
+  items: [gContinueCursorAnim0, gContinueCursorAnim1]
   us:
     address: 0x09EEB108
   jp:
     address: 0x09EC24F4
   eu:
     address: 0x09F77298
-- name: gUnk_09EEB110
+- name: gContinueLineFrames
   record: SpriteTable
-  items: [gUnk_090A7D28, gUnk_090A7D5C]
+  items: [gContinueLineFrame0, gContinueLineFrame1]
   us:
     address: 0x09EEB110
   jp:
     address: 0x09EC24FC
   eu:
     address: 0x09F772A0
-- name: gUnk_09EEB118
+- name: gContinueLineAnims
   record: AnimTable
-  items: [gUnk_090A7D90]
+  items: [gContinueLineAnim0]
   us:
     address: 0x09EEB118
   jp:
@@ -122,69 +122,69 @@ entries:
     address: 0x09EC256C
   eu:
     address: 0x09F77310
-- name: gUnk_090A6B26
+- name: gContinueCursorTiles
   format: sprite_sheet
   align: 4
   cell: [64, 44]
   anchor: [31, 24]
   columns: 8
   frames:
-  - symbol: gUnk_090A6A20
+  - symbol: gContinueCursorFrame0
     pieces:
     - [32x32, -16, -16]
-  - symbol: gUnk_090A6A2A
+  - symbol: gContinueCursorFrame1
     pieces:
     - [32x32, -16, -16, {pal: 1}]
-  - symbol: gUnk_090A6A34
+  - symbol: gContinueCursorFrame2
     pieces:
     - [32x32, -16, -16, {pal: 2}]
-  - symbol: gUnk_090A6A3E
+  - symbol: gContinueCursorFrame3
     pieces:
     - [32x32, -16, -16, {pal: 3}]
-  - symbol: gUnk_090A6A48
+  - symbol: gContinueCursorFrame4
     pieces:
     - [32x32, -16, -16, {pal: 3}]
-  - symbol: gUnk_090A6A52
+  - symbol: gContinueCursorFrame5
     pieces:
     - [64x32, -31, -12, {pal: 8}]
-  - symbol: gUnk_090A6A5C
+  - symbol: gContinueCursorFrame6
     pieces:
     - [64x32, -31, -13, {pal: 8}]
-  - symbol: gUnk_090A6A66
+  - symbol: gContinueCursorFrame7
     pieces:
     - [64x32, -31, -14, {pal: 8}]
-  - symbol: gUnk_090A6A70
+  - symbol: gContinueCursorFrame8
     pieces:
     - [64x32, -31, -13, {pal: 8}]
-  - symbol: gUnk_090A6A7A
+  - symbol: gContinueCursorFrame9
     pieces:
     - [64x32, -31, -14, {pal: 8}]
-  - symbol: gUnk_090A6A84
+  - symbol: gContinueCursorFrame10
     pieces:
     - [64x32, -31, -15, {pal: 8}]
-  - symbol: gUnk_090A6A8E
+  - symbol: gContinueCursorFrame11
     pieces:
     - [64x32, -31, -24, {pal: 8}]
-  - symbol: gUnk_090A6A98
+  - symbol: gContinueCursorFrame12
     pieces:
     - [64x32, -31, -22, {pal: 8}]
-  - symbol: gUnk_090A6AA2
+  - symbol: gContinueCursorFrame13
     pieces:
     - [64x32, -31, -21, {pal: 8}]
-  - symbol: gUnk_090A6AAC
+  - symbol: gContinueCursorFrame14
     pieces:
     - [64x32, -31, -14, {pal: 8}]
-  - symbol: gUnk_090A6AB6
+  - symbol: gContinueCursorFrame15
     pieces:
     - [64x32, -31, -13, {pal: 8}]
-  - symbol: gUnk_090A6AC0
+  - symbol: gContinueCursorFrame16
     pieces:
     - [64x32, -31, -12, {pal: 8}]
   animations:
-  - symbol: gUnk_090A6ACA
+  - symbol: gContinueCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [3, 8], [2, 8], [1, 8]]
-  - symbol: gUnk_090A6AF0
+  - symbol: gContinueCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 13], [6, 13], [7, 13], [8, 13], [9, 13], [10, 13], [11, 13], [12, 13], [13, 13], [14, 13], [15, 13], [16, 13]]
   us:
@@ -196,14 +196,14 @@ entries:
   eu:
     address: 0x0919728C
     size: 4870
-- name: gUnk_090A7D9A
+- name: gContinueLineTiles
   format: sprite_sheet
   align: 4
   cell: [240, 8]
   anchor: [128, 0]
   columns: 2
   frames:
-  - symbol: gUnk_090A7D28
+  - symbol: gContinueLineFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -213,7 +213,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnk_090A7D5C
+  - symbol: gContinueLineFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -224,7 +224,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gUnk_090A7D90
+  - symbol: gContinueLineAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -355,7 +355,7 @@ entries:
   eu:
     address: 0x09199778
     size: 5304
-- name: gUnk_0941A418
+- name: gContinueBgTiles
   format: tiles4
   us:
     address: 0x0941A418
@@ -367,7 +367,7 @@ entries:
     address: 0x0954C284
     size: 1328
     compress: lz77
-- name: gUnk_0951CAB8
+- name: gContinueBgMap
   format: tilemap
   us:
     address: 0x0951CAB8
@@ -379,25 +379,25 @@ entries:
     address: 0x095A3D74
     size: 472
     compress: lz77
-- name: gUnkEu_0954C7B4
+- name: gContinueBgFrenchTiles
   format: tiles4
   eu:
     address: 0x0954C7B4
     size: 1384
     compress: lz77
-- name: gUnkEu_0954CD1C
+- name: gContinueBgSpanishTiles
   format: tiles4
   eu:
     address: 0x0954CD1C
     size: 1308
     compress: lz77
-- name: gUnkEu_0954D238
+- name: gContinueBgItalianTiles
   format: tiles4
   eu:
     address: 0x0954D238
     size: 1384
     compress: lz77
-- name: gUnkEu_0954D7A0
+- name: gContinueBgGermanTiles
   format: tiles4
   eu:
     address: 0x0954D7A0

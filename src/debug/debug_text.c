@@ -426,7 +426,7 @@ void DebugTextDrawAligned(u8 bg) {
         y = sDebugTextLines[n].y;
 
         for (i = 0; i < sDebugTextLines[n].length; i++) {
-            src = (u32*)&gUnk_0941DD38[sDebugTextLines[n].glyphs[i] * 32];
+            src = (u32*)&gDebugFont1Tiles[sDebugTextLines[n].glyphs[i] * 32];
 
             for (k = 0; k < 8; k++) {
                 tiles[k] = src[0];
@@ -478,11 +478,11 @@ void DebugTextDraw(u8 bg) {
 
             switch (sDebugTextLines[n].font) {
             case 0:
-                font = gUnk_0941BEB8 + sDebugTextLines[n].glyphs[i] * 32;
+                font = gDebugFont0Tiles + sDebugTextLines[n].glyphs[i] * 32;
                 height = 8;
                 break;
             case 1:
-                font = gUnk_0941DD38 + sDebugTextLines[n].glyphs[i] * 32;
+                font = gDebugFont1Tiles + sDebugTextLines[n].glyphs[i] * 32;
                 height = 10;
                 break;
             case 2:
@@ -536,4 +536,4 @@ void DebugTextDestroy() {
     DebugTextFree();
 }
 
-u8* gDebugFont2Banks[2] = { gUnk_08F6E190, gUnk_08F6F190 };
+u8* gDebugFont2Banks[2] = { gDebugFont2Bank0Tiles, gDebugFont2Bank1Tiles };

@@ -91,11 +91,11 @@ void TitleExitToChoice() {
 
 void TitleShowLogo(u16 a) {
     if ((gGameState.flags & GAME_FLAG_RIKU_TITLE) != 0) {
-        LoadBgPalette(1, gUnk_0984A818, 0x200);
-        TitleCopyToPaletteBuffer(0, gUnk_0984A818, 0x200);
+        LoadBgPalette(1, gTitleRikuBgPalette, 0x200);
+        TitleCopyToPaletteBuffer(0, gTitleRikuBgPalette, 0x200);
     } else {
-        LoadBgPalette(1, gUnk_0984A418, 0x200);
-        TitleCopyToPaletteBuffer(0, gUnk_0984A418, 0x200);
+        LoadBgPalette(1, gTitleSoraBgPalette, 0x200);
+        TitleCopyToPaletteBuffer(0, gTitleSoraBgPalette, 0x200);
     }
 
     EnableBg(0);
@@ -123,11 +123,11 @@ void TitleFinishIntro() {
     case 5:
     case 6:
 #endif
-        LoadBgMap(0, gUnk_0983F398, 0x800);
+        LoadBgMap(0, gTitlePressStartBarMap, 0x800);
 #ifdef VERSION_EU
         break;
     case LANGUAGE_GERMAN:
-        LoadBgMap(0, gUnkEu_09814E40, 0x800);
+        LoadBgMap(0, gTitlePressStartBarGermanMap, 0x800);
         break;
     }
 #endif
@@ -158,15 +158,15 @@ void mode_title_0() {
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
-        LoadBgMapLz77(0, gUnk_09840798);
+        LoadBgMapLz77(0, gTitleRikuIntroBgMap);
 #else
-        LoadBgMap(0, gUnk_09840798, 0x800);
+        LoadBgMap(0, gTitleRikuIntroBgMap, 0x800);
 #endif
     } else {
 #ifdef VERSION_EU
-        LoadBgMapLz77(0, gUnk_0983E398);
+        LoadBgMapLz77(0, gTitleSoraIntroBgMap);
 #else
-        LoadBgMap(0, gUnk_0983E398, 0x800);
+        LoadBgMap(0, gTitleSoraIntroBgMap, 0x800);
 #endif
     }
 
@@ -176,19 +176,19 @@ void mode_title_0() {
 
     if (gGameState.flags & GAME_FLAG_RIKU_TITLE) {
 #ifdef VERSION_EU
-        LoadBgTilesLz77(1, gUnk_097D3658);
-        LoadBgMapLz77(1, gUnk_09840F98);
+        LoadBgTilesLz77(1, gTitleRikuBgTiles);
+        LoadBgMapLz77(1, gTitleRikuBgMap);
 #else
-        LoadBgTiles(1, gUnk_097D3658, 0x7FA0);
-        LoadBgMap(1, gUnk_09840F98, 0x800);
+        LoadBgTiles(1, gTitleRikuBgTiles, 0x7FA0);
+        LoadBgMap(1, gTitleRikuBgMap, 0x800);
 #endif
     } else {
 #ifdef VERSION_EU
-        LoadBgTilesLz77(1, gUnk_097C77B8);
-        LoadBgMapLz77(1, gUnk_0983EB98);
+        LoadBgTilesLz77(1, gTitleSoraBgTiles);
+        LoadBgMapLz77(1, gTitleSoraBgMap);
 #else
-        LoadBgTiles(1, gUnk_097C77B8, 0x7FA0);
-        LoadBgMap(1, gUnk_0983EB98, 0x800);
+        LoadBgTiles(1, gTitleSoraBgTiles, 0x7FA0);
+        LoadBgMap(1, gTitleSoraBgMap, 0x800);
 #endif
     }
 
@@ -198,9 +198,9 @@ void mode_title_0() {
     SetupBg(2, 2, 0x1F, 0xB);
     SetBgSize(2, 0x4000);
     SetBgPriority(2, 2);
-    LoadBgTiles(2, gUnk_097CF758, 0x3F00);
-    LoadBgPalette(2, gUnk_0984A618, 0xA0);
-    LoadBgMap(2, gUnk_0983FB98, 0x400);
+    LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
+    LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);
+    LoadBgMap(2, gTitleLogoBgMap, 0x400);
     gTitleBgX = 0x7800;
     gTitleBgY = 0x5A00;
     gTitleBgScale = 0x1000;

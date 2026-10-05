@@ -3635,9 +3635,9 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
         DisableBg(1);
         EnableBg(2);
         DisableBg(3);
-        LoadBgTiles(2, gUnk_097CF758, 0x3F00);
-        LoadBgMap(2, gUnk_0983FB98, 0x400);
-        LoadBgPalette(2, gUnk_0984A618, 0xA0);
+        LoadBgTiles(2, gTitleLogoBgTiles, 0x3F00);
+        LoadBgMap(2, gTitleLogoBgMap, 0x400);
+        LoadBgPalette(2, gTitleLogoBgPalette, 0xA0);
         SetBgAffine(2, 0, 0x100, 0x100, 0x7800, 0x5C00);
         work->creditsState = 1;
         work->creditsTimer = 0;

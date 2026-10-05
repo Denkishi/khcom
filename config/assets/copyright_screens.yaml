@@ -53,7 +53,7 @@ objects:
     start: 0x0981F940
     end: 0x0981F960
 entries:
-- name: gUnk_097DB5F8
+- name: gCopyright1Tiles
   format: tiles4
   width: 2
   us:
@@ -89,7 +89,7 @@ entries:
   eu:
     address: 0x097BBC80
     size: 32512
-- name: gUnk_09801C98
+- name: gStatusDigitTiles
   format: tiles4
   width: 2
   us:
@@ -101,7 +101,7 @@ entries:
   eu:
     address: 0x097DAF60
     size: 320
-- name: gUnk_09801DD8
+- name: gCopyrightNintendoTiles
   format: tiles4
   us:
     address: 0x09801DD8
@@ -109,7 +109,7 @@ entries:
   eu:
     address: 0x097DB0A0
     size: 1952
-- name: gUnk_09841798
+- name: gCopyright1Map
   format: tilemap
   us:
     address: 0x09841798
@@ -143,7 +143,7 @@ entries:
   eu:
     address: 0x09816E40
     size: 4096
-- name: gUnk_0984AA38
+- name: gCopyright1Palette
   format: palette
   us:
     address: 0x0984AA38
@@ -154,7 +154,7 @@ entries:
   eu:
     address: 0x0981F0E0
     size: 512
-- name: gUnk_0984AC38
+- name: gCopyright2Palette
   format: palette
   us:
     address: 0x0984AC38
@@ -165,7 +165,7 @@ entries:
   eu:
     address: 0x0981F2E0
     size: 512
-- name: gUnk_0984AE38
+- name: gBosBoogieBgPalette
   format: palette
   us:
     address: 0x0984AE38
@@ -176,7 +176,7 @@ entries:
   eu:
     address: 0x0981F4E0
     size: 320
-- name: gUnk_09849098
+- name: gCopyrightNintendoMap
   format: tilemap
   us:
     address: 0x09849098
@@ -184,7 +184,7 @@ entries:
   eu:
     address: 0x0981D740
     size: 2048
-- name: gUnk_0984B298
+- name: gCopyrightNintendoPalette
   format: palette
   us:
     address: 0x0984B298

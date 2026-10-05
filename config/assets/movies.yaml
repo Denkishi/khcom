@@ -14,7 +14,7 @@ objects:
     start: 0x0812FB24
     end: 0x0883DE0C
 entries:
-- name: gUnk_0815C3EC
+- name: gMovieOpening
   format: raw
   us:
     address: 0x0815C3EC
@@ -25,7 +25,7 @@ entries:
   eu:
     address: 0x0812FB24
     size: 3689288
-- name: gUnk_084E0F34
+- name: gMovieEvent026
   format: raw
   us:
     address: 0x084E0F34
@@ -36,7 +36,7 @@ entries:
   eu:
     address: 0x084B466C
     size: 79660
-- name: gUnk_084F4660
+- name: gMovieEvent057
   format: raw
   us:
     address: 0x084F4660
@@ -47,7 +47,7 @@ entries:
   eu:
     address: 0x084C7D98
     size: 427604
-- name: gUnk_0855CCB4
+- name: gMovieEnding
   format: raw
   us:
     address: 0x0855CCB4
@@ -58,7 +58,7 @@ entries:
   eu:
     address: 0x085303EC
     size: 1699168
-- name: gUnk_086FBA14
+- name: gMovieRikuEnding
   format: raw
   us:
     address: 0x086FBA14

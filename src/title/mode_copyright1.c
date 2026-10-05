@@ -77,19 +77,19 @@ void mode_copyright1_0(s32 arg) {
 #ifndef VERSION_JP
     if (sCopyrightExtraScreen) {
 #ifdef VERSION_EU
-        LoadBgTiles(0, gUnk_09801DD8, 0x7A0);
-        LoadBgPalette(0, gUnk_0984B298, 0x20);
+        LoadBgTiles(0, gCopyrightNintendoTiles, 0x7A0);
+        LoadBgPalette(0, gCopyrightNintendoPalette, 0x20);
 #else
-        LoadBgTiles(0, gUnk_09801DD8, 0x4FC0);
-        LoadBgPalette(0, gUnk_0984B298, 0x1C0);
+        LoadBgTiles(0, gCopyrightNintendoTiles, 0x4FC0);
+        LoadBgPalette(0, gCopyrightNintendoPalette, 0x1C0);
 #endif
-        LoadBgMap(0, gUnk_09849098, 0x800);
+        LoadBgMap(0, gCopyrightNintendoMap, 0x800);
     } else
 #endif
     {
-        LoadBgTiles(0, gUnk_097DB5F8, 0x4FC0);
-        LoadBgPalette(0, gUnk_0984AA38, 0x200);
-        LoadBgMap(0, gUnk_09841798, 0x800);
+        LoadBgTiles(0, gCopyright1Tiles, 0x4FC0);
+        LoadBgPalette(0, gCopyright1Palette, 0x200);
+        LoadBgMap(0, gCopyright1Map, 0x800);
     }
 
     FadeStartIn(FADE_MODE_WHITE, 0x43);

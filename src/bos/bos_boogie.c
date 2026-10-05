@@ -57,7 +57,7 @@ static const StatusObjDef sBosBoogieSpriteDefs[6] = {
 static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
 
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
-    gBosBoogieBgTiles, 0x7F00, gUnk_0984AE38, 0x140,
+    gBosBoogieBgTiles, 0x7F00, gBosBoogieBgPalette, 0x140,
     { gUnk_08125E24, gBosBoogieBgMaps[1], gUnk_08125E24, gBosBoogieBgMaps[0] },
 };
 

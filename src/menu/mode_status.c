@@ -48,7 +48,7 @@ u8* CopyNumberTiles(u8* dst, s32 value, u16 digits) {
     }
 
     for (i = 0; i < digits; i++) {
-        RequestDma3Copy(&gUnk_09801C98[buf[i] * 32], dst, 32);
+        RequestDma3Copy(&gStatusDigitTiles[buf[i] * 32], dst, 32);
         dst += 32;
     }
 

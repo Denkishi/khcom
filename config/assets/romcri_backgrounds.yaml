@@ -32,7 +32,7 @@ objects:
     start: 0x08F69F3C
     end: 0x08F6A17C
 entries:
-- name: gUnk_08ED21E4
+- name: gRomcriEffDownTiles
   format: tiles4
   width: 2
   us:
@@ -44,7 +44,7 @@ entries:
   eu:
     address: 0x08EDE6FC
     size: 19136
-- name: gUnk_08ED6CA4
+- name: gRomcriEffDown2Tiles
   format: tiles4
   us:
     address: 0x08ED6CA4
@@ -55,7 +55,7 @@ entries:
   eu:
     address: 0x08EE31BC
     size: 20128
-- name: gUnk_08EDBB44
+- name: gRomcriEffUpTiles
   format: tiles4
   us:
     address: 0x08EDBB44
@@ -66,7 +66,7 @@ entries:
   eu:
     address: 0x08EE805C
     size: 29984
-- name: gUnk_08EE3064
+- name: gRomcriEff2Tiles
   format: tiles4
   us:
     address: 0x08EE3064
@@ -77,7 +77,7 @@ entries:
   eu:
     address: 0x08EEF57C
     size: 2592
-- name: gUnk_08F4C384
+- name: gRomcriEffDownLeftMap0
   format: tilemap
   us:
     address: 0x08F4C384
@@ -88,7 +88,7 @@ entries:
   eu:
     address: 0x08F488DC
     size: 2048
-- name: gUnk_08F4CB84
+- name: gRomcriEffDownLeftMap1
   format: tilemap
   us:
     address: 0x08F4CB84
@@ -99,7 +99,7 @@ entries:
   eu:
     address: 0x08F490DC
     size: 2048
-- name: gUnk_08F4D384
+- name: gRomcriEffDownLeftMap2
   format: tilemap
   us:
     address: 0x08F4D384
@@ -110,7 +110,7 @@ entries:
   eu:
     address: 0x08F498DC
     size: 2048
-- name: gUnk_08F4DB84
+- name: gRomcriEffDownLeftMap3
   format: tilemap
   us:
     address: 0x08F4DB84
@@ -121,7 +121,7 @@ entries:
   eu:
     address: 0x08F4A0DC
     size: 2048
-- name: gUnk_08F4E384
+- name: gRomcriEffDownRightMap0
   format: tilemap
   us:
     address: 0x08F4E384
@@ -132,7 +132,7 @@ entries:
   eu:
     address: 0x08F4A8DC
     size: 2048
-- name: gUnk_08F4EB84
+- name: gRomcriEffDownRightMap1
   format: tilemap
   us:
     address: 0x08F4EB84
@@ -143,7 +143,7 @@ entries:
   eu:
     address: 0x08F4B0DC
     size: 2048
-- name: gUnk_08F4F384
+- name: gRomcriEffDownRightMap2
   format: tilemap
   us:
     address: 0x08F4F384
@@ -154,7 +154,7 @@ entries:
   eu:
     address: 0x08F4B8DC
     size: 2048
-- name: gUnk_08F4FB84
+- name: gRomcriEffDownRightMap3
   format: tilemap
   us:
     address: 0x08F4FB84
@@ -165,7 +165,7 @@ entries:
   eu:
     address: 0x08F4C0DC
     size: 2048
-- name: gUnk_08F50384
+- name: gRomcriEffDownLeftMap4
   format: tilemap
   us:
     address: 0x08F50384
@@ -176,7 +176,7 @@ entries:
   eu:
     address: 0x08F4C8DC
     size: 2048
-- name: gUnk_08F50B84
+- name: gRomcriEffDownLeftMap5
   format: tilemap
   us:
     address: 0x08F50B84
@@ -187,7 +187,7 @@ entries:
   eu:
     address: 0x08F4D0DC
     size: 2048
-- name: gUnk_08F51384
+- name: gRomcriEffDownLeftMap6
   format: tilemap
   us:
     address: 0x08F51384
@@ -198,7 +198,7 @@ entries:
   eu:
     address: 0x08F4D8DC
     size: 2048
-- name: gUnk_08F51B84
+- name: gRomcriEffDownLeftMap7
   format: tilemap
   us:
     address: 0x08F51B84
@@ -209,7 +209,7 @@ entries:
   eu:
     address: 0x08F4E0DC
     size: 2048
-- name: gUnk_08F52384
+- name: gRomcriEffDownRightMap4
   format: tilemap
   us:
     address: 0x08F52384
@@ -220,7 +220,7 @@ entries:
   eu:
     address: 0x08F4E8DC
     size: 2048
-- name: gUnk_08F52B84
+- name: gRomcriEffDownRightMap5
   format: tilemap
   us:
     address: 0x08F52B84
@@ -231,7 +231,7 @@ entries:
   eu:
     address: 0x08F4F0DC
     size: 2048
-- name: gUnk_08F53384
+- name: gRomcriEffDownRightMap6
   format: tilemap
   us:
     address: 0x08F53384
@@ -242,7 +242,7 @@ entries:
   eu:
     address: 0x08F4F8DC
     size: 2048
-- name: gUnk_08F53B84
+- name: gRomcriEffDownRightMap7
   format: tilemap
   us:
     address: 0x08F53B84
@@ -253,7 +253,7 @@ entries:
   eu:
     address: 0x08F500DC
     size: 2048
-- name: gUnk_08F54384
+- name: gRomcriEffUpRightMap0
   format: tilemap
   us:
     address: 0x08F54384
@@ -264,7 +264,7 @@ entries:
   eu:
     address: 0x08F508DC
     size: 2048
-- name: gUnk_08F54B84
+- name: gRomcriEffUpRightMap1
   format: tilemap
   us:
     address: 0x08F54B84
@@ -275,7 +275,7 @@ entries:
   eu:
     address: 0x08F510DC
     size: 2048
-- name: gUnk_08F55384
+- name: gRomcriEffUpRightMap2
   format: tilemap
   us:
     address: 0x08F55384
@@ -286,7 +286,7 @@ entries:
   eu:
     address: 0x08F518DC
     size: 2048
-- name: gUnk_08F55B84
+- name: gRomcriEffUpRightMap3
   format: tilemap
   us:
     address: 0x08F55B84
@@ -297,7 +297,7 @@ entries:
   eu:
     address: 0x08F520DC
     size: 2048
-- name: gUnk_08F56384
+- name: gRomcriEffUpRightMap4
   format: tilemap
   us:
     address: 0x08F56384
@@ -308,7 +308,7 @@ entries:
   eu:
     address: 0x08F528DC
     size: 2048
-- name: gUnk_08F56B84
+- name: gRomcriEffUpRightMap5
   format: tilemap
   us:
     address: 0x08F56B84
@@ -319,7 +319,7 @@ entries:
   eu:
     address: 0x08F530DC
     size: 2048
-- name: gUnk_08F57384
+- name: gRomcriEffUpRightMap6
   format: tilemap
   us:
     address: 0x08F57384
@@ -330,7 +330,7 @@ entries:
   eu:
     address: 0x08F538DC
     size: 2048
-- name: gUnk_08F57B84
+- name: gRomcriEffUpRightMap7
   format: tilemap
   us:
     address: 0x08F57B84
@@ -341,7 +341,7 @@ entries:
   eu:
     address: 0x08F540DC
     size: 2048
-- name: gUnk_08F58384
+- name: gRomcriEffUpLeftMap0
   format: tilemap
   us:
     address: 0x08F58384
@@ -352,7 +352,7 @@ entries:
   eu:
     address: 0x08F548DC
     size: 2048
-- name: gUnk_08F58B84
+- name: gRomcriEffUpLeftMap1
   format: tilemap
   us:
     address: 0x08F58B84
@@ -363,7 +363,7 @@ entries:
   eu:
     address: 0x08F550DC
     size: 2048
-- name: gUnk_08F59384
+- name: gRomcriEffUpLeftMap2
   format: tilemap
   us:
     address: 0x08F59384
@@ -374,7 +374,7 @@ entries:
   eu:
     address: 0x08F558DC
     size: 2048
-- name: gUnk_08F59B84
+- name: gRomcriEffUpLeftMap3
   format: tilemap
   us:
     address: 0x08F59B84
@@ -385,7 +385,7 @@ entries:
   eu:
     address: 0x08F560DC
     size: 2048
-- name: gUnk_08F5A384
+- name: gRomcriEffUpLeftMap4
   format: tilemap
   us:
     address: 0x08F5A384
@@ -396,7 +396,7 @@ entries:
   eu:
     address: 0x08F568DC
     size: 2048
-- name: gUnk_08F5AB84
+- name: gRomcriEffUpLeftMap5
   format: tilemap
   us:
     address: 0x08F5AB84
@@ -407,7 +407,7 @@ entries:
   eu:
     address: 0x08F570DC
     size: 2048
-- name: gUnk_08F5B384
+- name: gRomcriEffUpLeftMap6
   format: tilemap
   us:
     address: 0x08F5B384
@@ -418,7 +418,7 @@ entries:
   eu:
     address: 0x08F578DC
     size: 2048
-- name: gUnk_08F5BB84
+- name: gRomcriEffUpLeftMap7
   format: tilemap
   us:
     address: 0x08F5BB84
@@ -429,7 +429,7 @@ entries:
   eu:
     address: 0x08F580DC
     size: 2048
-- name: gUnk_08F5C384
+- name: gRomcriEff2Map0
   format: tilemap
   us:
     address: 0x08F5C384
@@ -440,7 +440,7 @@ entries:
   eu:
     address: 0x08F588DC
     size: 2048
-- name: gUnk_08F5CB84
+- name: gRomcriEff2Map1
   format: tilemap
   us:
     address: 0x08F5CB84
@@ -451,7 +451,7 @@ entries:
   eu:
     address: 0x08F590DC
     size: 2048
-- name: gUnk_08F5D384
+- name: gRomcriEff2Map2
   format: tilemap
   us:
     address: 0x08F5D384
@@ -462,7 +462,7 @@ entries:
   eu:
     address: 0x08F598DC
     size: 2048
-- name: gUnk_08F5DB84
+- name: gRomcriEff2Map3
   format: tilemap
   us:
     address: 0x08F5DB84
@@ -473,7 +473,7 @@ entries:
   eu:
     address: 0x08F5A0DC
     size: 2048
-- name: gUnk_08F6D9E4
+- name: gRomcriEffPalette
   format: palette
   us:
     address: 0x08F6D9E4
@@ -484,7 +484,7 @@ entries:
   eu:
     address: 0x08F69F3C
     size: 32
-- name: gUnk_08F6DA04
+- name: gRomcriEff2Palette
   format: palette
   us:
     address: 0x08F6DA04

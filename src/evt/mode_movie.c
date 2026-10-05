@@ -709,7 +709,7 @@ void mode_movie_1() {
 
         switch (sMovieId) {
         case 1:
-            p = gUnk_0815C3EC;
+            p = gMovieOpening;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -741,17 +741,17 @@ void mode_movie_1() {
 #endif
             break;
         case 2:
-            p = gUnk_084E0F34;
+            p = gMovieEvent026;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 3:
-            p = gUnk_084F4660;
+            p = gMovieEvent057;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
         case 4:
-            p = gUnk_0855CCB4;
+            p = gMovieEnding;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -790,7 +790,7 @@ void mode_movie_1() {
         default:
 #endif
         case 5:
-            p = gUnk_086FBA14;
+            p = gMovieRikuEnding;
 
 #ifdef VERSION_EU
             switch (gLanguage) {
@@ -827,7 +827,7 @@ void mode_movie_1() {
             break;
 #ifndef VERSION_EU
         default:
-            p = gUnk_0855CCB4;
+            p = gMovieEnding;
             sMovieSubs = gMovieSubsOpening;
             sMovieSubCount = 3;
             break;

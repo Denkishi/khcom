@@ -8,10 +8,8 @@
 #include "taskpool.h"
 #include "obj.h"
 
-extern void* gBosJfMajinFrameMaps[48];
-extern const u16* gUnk_09EF28CC;
-extern void* gBosJfMajinFrameTiles[48];
-extern void* gUnk_09EF2990;
+extern void* gBosJfMajinFrameMaps[49];
+extern void* gBosJfMajinFrameTiles[49];
 extern u32 gBosJfMajinBeamScales[27];
 extern u32 gUnk_09EF2A00;
 extern u32 gUnk_09EF2A04;

@@ -35,8 +35,8 @@
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
 
-extern const u16* gBosDsdFrameMaps[46][4];
-extern void* gBosDsdFrameTiles[37];
+extern const u16* gBosDsdFrameMaps[47][4];
+extern void* gBosDsdFrameTiles[47];
 extern const u16* gBosDsdMapBlocks[4];
 
 void BosDsdSetBgMap(u8 index) {
@@ -1197,7 +1197,7 @@ const s16 gBosDsdFrameDurations[47] = {
 
 const s8 gBosDsdIdleBob[10] = { -1, 1, 1, 1, 1, -1, -1, -1, 0, 0 };
 
-const u16* gBosDsdFrameMaps[46][4] = {
+const u16* gBosDsdFrameMaps[47][4] = {
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame0Map, gDefaultBgMap },
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame1Map, gDefaultBgMap },
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame2Map, gDefaultBgMap },
@@ -1244,17 +1244,10 @@ const u16* gBosDsdFrameMaps[46][4] = {
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame43Map, gDefaultBgMap },
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame44Map, gDefaultBgMap },
     { gDefaultBgMap, gDefaultBgMap, gBosDsdFrame45Map, gDefaultBgMap },
+    { gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap },
 };
 
-const u16* gUnk_09EF2D84 = gDefaultBgMap;
-
-const u16* gUnk_09EF2D88 = gDefaultBgMap;
-
-const u16* gUnk_09EF2D8C = gDefaultBgMap;
-
-const u16* gUnk_09EF2D90 = gDefaultBgMap;
-
-void* gBosDsdFrameTiles[37] = {
+void* gBosDsdFrameTiles[47] = {
     gBosDsdBgTiles,
     gBosDsdFrame1Tiles,
     gBosDsdFrame2Tiles,
@@ -1292,27 +1285,17 @@ void* gBosDsdFrameTiles[37] = {
     gBosDsdFrame15Tiles,
     gBosDsdFrame14Tiles,
     gBosDsdFrame36Tiles,
+    gBosDsdFrame36Tiles,
+    gBosDsdFrame36Tiles,
+    gBosDsdFrame36Tiles,
+    gBosDsdFrame36Tiles,
+    gBosDsdFrame41Tiles,
+    gBosDsdFrame41Tiles,
+    gBosDsdFrame41Tiles,
+    gBosDsdFrame41Tiles,
+    gBosDsdFrame41Tiles,
+    NULL,
 };
-
-void* gUnk_09EF2E28 = gBosDsdFrame36Tiles;
-
-void* gUnk_09EF2E2C = gBosDsdFrame36Tiles;
-
-void* gUnk_09EF2E30 = gBosDsdFrame36Tiles;
-
-void* gUnk_09EF2E34 = gBosDsdFrame36Tiles;
-
-void* gUnk_09EF2E38 = gBosDsdFrame41Tiles;
-
-void* gUnk_09EF2E3C = gBosDsdFrame41Tiles;
-
-void* gUnk_09EF2E40 = gBosDsdFrame41Tiles;
-
-void* gUnk_09EF2E44 = gBosDsdFrame41Tiles;
-
-void* gUnk_09EF2E48 = gBosDsdFrame41Tiles;
-
-void* gUnk_09EF2E4C = NULL;
 
 TaskDesc gTaskDescBosDsdMain = {
     "task_bos_dsd_main",

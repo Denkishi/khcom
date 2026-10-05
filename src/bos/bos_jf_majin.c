@@ -2018,7 +2018,7 @@ const u16 gBosJfPillarPatterns[16][3] = {
     { 0, 0, 0 },
 };
 
-void* gBosJfMajinFrameMaps[48] = {
+void* gBosJfMajinFrameMaps[49] = {
     gBosJfMajinFrame0Map,
     gBosJfMajinFrame1Map,
     gBosJfMajinFrame2Map,
@@ -2067,11 +2067,10 @@ void* gBosJfMajinFrameMaps[48] = {
     gBosJfMajinFrame45Map,
     gBosJfMajinFrame46Map,
     gBosJfMajinFrame47Map,
+    gDefaultBgMap,
 };
 
-const u16* gUnk_09EF28CC = gDefaultBgMap;
-
-void* gBosJfMajinFrameTiles[48] = {
+void* gBosJfMajinFrameTiles[49] = {
     gBosJfMajinFrame0Tiles,
     gBosJfMajinFrame1Tiles,
     gBosJfMajinFrame2Tiles,
@@ -2120,9 +2119,8 @@ void* gBosJfMajinFrameTiles[48] = {
     gBosJfMajinFrame25Tiles,
     gBosJfMajinFrame26Tiles,
     gBosJfMajinFrame27Tiles,
+    NULL,
 };
-
-void* gUnk_09EF2990 = NULL;
 
 u32 gBosJfMajinBeamScales[27] = { 256, 266, 276, 286, 296, 307, 317, 327, 337, 348, 358, 368, 378, 389, 399, 409, 419, 432, 445, 458, 471, 486, 501, 517, 532, 547, 563 };
 

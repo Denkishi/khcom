@@ -64,7 +64,7 @@ typedef struct GaWork {
     u16 flags;
     s16 timer;
     s16 stepsLeft;
-    s16 unk_014;
+    s16 hurtTimer;
     s32 flipped;
     u8 angle;
     GaEntryWork entries[6];

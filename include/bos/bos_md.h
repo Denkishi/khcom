@@ -12,7 +12,7 @@ typedef struct MdFrameSprite {
     u16 y;
     u16 z;
     void* src;
-    u32 unk_0C;
+    u32 srcSize;
     void* sprite;
 } MdFrameSprite;
 
@@ -145,7 +145,7 @@ typedef struct MdWork {
     u32 hurtState[1];
     u16 flags;
     s16 timer;
-    u16 unk_018;
+    u16 stepsLeft;
     s16 hurtTimer;
     u8 bgVisible;
     ObjPalette* palette;

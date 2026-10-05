@@ -983,7 +983,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
     work->flags = 0;
     work->statePhase = 0;
     work->timer = 0;
-    work->unk_018 = 0;
+    work->stepsLeft = 0;
     work->hurtTimer = 0;
     work->signals = 0;
     work->bgVisible = 1;

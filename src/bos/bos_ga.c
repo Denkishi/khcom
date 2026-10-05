@@ -2746,7 +2746,7 @@ void task_bos_ga_0(GaWork* work, s32 arg) {
     work->statePhase = 0;
     work->timer = 0;
     work->stepsLeft = 0;
-    work->unk_014 = 0;
+    work->hurtTimer = 0;
     work->flipped = 0;
     work->angle = 0;
     work->attackToggle = 0;

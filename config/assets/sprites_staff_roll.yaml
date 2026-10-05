@@ -24094,7 +24094,7 @@ entries:
   eu:
     address: 0x09DD41A0
     size: 2048
-- name: gUnk_09D68A74
+- name: gStaffRollRikuEndMap
   format: tilemap
   us:
     address: 0x09D68A74
@@ -24102,6 +24102,11 @@ entries:
   jp:
     address: 0x09D41F80
     size: 2048
+  eu:
+    address: 0x09DD69A0
+    size: 2048
+- name: gStaffRollSoraEndFrenchMap
+  format: tilemap
   eu:
     address: 0x09DD49A0
     size: 2048
@@ -24119,11 +24124,6 @@ entries:
   format: tilemap
   eu:
     address: 0x09DD61A0
-    size: 2048
-- name: gStaffRollRikuEndMap
-  format: tilemap
-  eu:
-    address: 0x09DD69A0
     size: 2048
 - name: gStaffRollRikuEndFrenchMap
   format: tilemap

@@ -4133,7 +4133,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
             LoadBgTiles(1, gStaffRollRikuEndTiles, 0x45C0);
 #else
             LoadBgTiles(1, gStaffRollRikuEndTiles, 0x7F40);
-            LoadBgMap(1, gUnk_09D68A74, 0x800);
+            LoadBgMap(1, gStaffRollRikuEndMap, 0x800);
 #endif
             LoadBgPalette(1, gStaffRollRikuEndPalette, 0x200);
         } else {
@@ -4143,7 +4143,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
                 LoadBgMap(1, gStaffRollSoraEndMap, 0x800);
                 break;
             case LANGUAGE_FRENCH:
-                LoadBgMap(1, gUnk_09D68A74, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndFrenchMap, 0x800);
                 break;
             case LANGUAGE_SPANISH:
                 LoadBgMap(1, gStaffRollSoraEndSpanishMap, 0x800);

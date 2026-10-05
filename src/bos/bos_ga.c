@@ -36,16 +36,16 @@ static const EmyKind sBosGaEmyKind =
 ;
 
 static const GaEntryDef sGaEntryDefs[6] = {
-    {256, 0, 0, -15872, 0, 0, gRoomAsset_099939FA, gUnk_09EF96A4, gUnk_09EF9684, 8},
-    {256, -2560, 2048, -25088, 0, 0, gRoomAsset_09995E9C, gUnk_09EF96C8, gUnk_09EF96B0, 6},
-    {256, 2560, 5632, -14848, 0, 0, gRoomAsset_09996B82, gUnk_09EF96EC, gUnk_09EF96D0, 7},
-    {256, -11264, -3328, -12288, 0, 0, gRoomAsset_09997F64, gUnk_09EF9710, gUnk_09EF96F4, 7},
-    {256, 3840, 512, -2048, 0, 0, gRoomAsset_09999244, gUnk_09EF971C, gUnk_09EF9718, 1},
-    {256, -3328, -1792, -2048, 0, 0, gRoomAsset_099995FC, gUnk_09EF9724, gUnk_09EF9720, 1},
+    {256, 0, 0, -15872, 0, 0, gBosGaTorsoTiles, gBosGaTorsoAnims, gBosGaTorsoFrames, 8},
+    {256, -2560, 2048, -25088, 0, 0, gBosGaHeadTiles, gBosGaHeadAnims, gBosGaHeadFrames, 6},
+    {256, 2560, 5632, -14848, 0, 0, gBosGaNearHandTiles, gBosGaNearHandAnims, gBosGaNearHandFrames, 7},
+    {256, -11264, -3328, -12288, 0, 0, gBosGaFarHandTiles, gBosGaFarHandAnims, gBosGaFarHandFrames, 7},
+    {256, 3840, 512, -2048, 0, 0, gBosGaNearFootTiles, gBosGaNearFootAnims, gBosGaNearFootFrames, 1},
+    {256, -3328, -1792, -2048, 0, 0, gBosGaFarFootTiles, gBosGaFarFootAnims, gBosGaFarFootFrames, 1},
 };
 
 static const BosMapConfig sBosMapConfig =
-{gRoomAsset_099A899C, 16352, gRoomAsset_09A3C75C, 320, {gRoomAsset_09A1E0DC, gRoomAsset_09A1F0DC, gRoomAsset_09A1E8DC, gRoomAsset_09A1F8DC}}
+{gBosGaBgTiles, 16352, gBosGaBgPalette, 320, {gBosGaBgTopLeftMap, gBosGaBgTopRightMap, gBosGaBgBottomLeftMap, gBosGaBgBottomRightMap}}
 ;
 
 static const s32 sBosGaTanTable[32] = {
@@ -351,8 +351,8 @@ void BosGaEntryInit(GaWork* work, u32 i, s32 c) {
     e->gfx = AnimGetGfx(&e->anim);
 
     if (i == 0) {
-        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF9728, 4), gUnk_099999AC);
-        AnimInit(&work->anim, gUnk_09EF9738, gUnk_09EF9728);
+        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosGaCollarFrames, 4), gBosGaCollarTiles);
+        AnimInit(&work->anim, gBosGaCollarAnims, gBosGaCollarFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
     }

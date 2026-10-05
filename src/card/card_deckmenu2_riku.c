@@ -200,16 +200,16 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
 
     LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
-    LoadBgMap(0, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
 #else
     LoadBgTiles(3, gDeckMenuTiles, 0x4000);
     LoadBgPalette(3, gDeckMenuPalettes, 0x1E0);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
-    LoadBgMap(0, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
     LoadBgTiles(1, gDeck1PanelTiles, 0xC00);
 #endif
-    LoadBgMap(1, gUnk_08125E24, 0x800);
-    LoadBgMap(2, gUnk_08125E24, 0x800);
+    LoadBgMap(1, gDefaultBgMap, 0x800);
+    LoadBgMap(2, gDefaultBgMap, 0x800);
     SetBgScroll(0, (u16)-88, (u16)-108);
     SetBgScroll(1, (u16)-88, (u16)-16);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateRikuDeckMenuLoadDeckInfo);

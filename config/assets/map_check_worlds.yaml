@@ -24,7 +24,7 @@ objects:
     start: 0x09827E2C
     end: 0x09827FCC
 entries:
-- name: gUnk_0984B458
+- name: gMapChkWorldNames
   record: MapChkWorldName
   ctype: u8
   shape: [13, 8]

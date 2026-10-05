@@ -58,34 +58,34 @@ static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0 },
     { gEmy00L02BackFrames, gEmy00L02BackAnims, gEmy00L02BackTiles, 0 },
     { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 0 },
-    { gUnk_09EDF97C, gUnk_09EDF9A4, gUnk_0896213C, 0 },
+    { gEmy00L07BackFrames, gEmy00L07BackAnims, gEmy00L07BackTiles, 0 },
     { gEmy00L07Frames, gEmy00L07Anims, gEmy00L07Tiles, 0 },
     { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0 },
     { gEmy00L09Frames, gEmy00L09Anims, gEmy00L09Tiles, 0 },
 };
 
-const AnimDef gUnk_0984BC3C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1,
+const AnimDef gMapEnm00AnimDef10 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 1,
 };
 
-const AnimDef gUnk_0984BC4C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 1,
+const AnimDef gMapEnm00AnimDef11 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 1,
 };
 
-const AnimDef gUnk_0984BC5C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0,
+const AnimDef gMapEnm00AnimDef12 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 0,
 };
 
-const AnimDef gUnk_0984BC6C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 0,
+const AnimDef gMapEnm00AnimDef13 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 0,
 };
 
-const AnimDef gUnk_0984BC7C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2,
+const AnimDef gMapEnm00AnimDef14 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 2,
 };
 
-const AnimDef gUnk_0984BC8C = {
-    gUnk_09EF8D00, gUnk_09EF8D18, gUnk_098A5F22, 2,
+const AnimDef gMapEnm00AnimDef15 = {
+    gEmy00PeekFrames, gEmy00PeekAnims, gEmy00PeekTiles, 2,
 };
 
 const MapEnmDef gMapEnm00Def = {
@@ -132,11 +132,11 @@ static const AnimDef sMapEnm02AnimDefs[2] = {
     { gEmy3800Frames, gEmy3800Anims, gEmy3800Tiles, 0 },
 };
 
-const AnimDef gUnk_0984BD6C = {
+const AnimDef gMapEnm02AnimDef2 = {
     gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0,
 };
 
-const AnimDef gUnk_0984BD7C = {
+const AnimDef gMapEnm02AnimDef3 = {
     gEmy3801Frames, gEmy3801Anims, gEmy3801Tiles, 0,
 };
 
@@ -162,11 +162,11 @@ static const AnimDef sMapEnm03AnimDefs[4] = {
     { gEmy2900Frames, gEmy2900Anims, gEmy2900Tiles, 0 },
 };
 
-const AnimDef gUnk_0984BDF4 = {
+const AnimDef gMapEnm03AnimDef4 = {
     gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0,
 };
 
-const AnimDef gUnk_0984BE04 = {
+const AnimDef gMapEnm03AnimDef5 = {
     gEmy2902Frames, gEmy2902Anims, gEmy2902Tiles, 0,
 };
 
@@ -186,9 +186,9 @@ TaskDesc gTaskDescMapEnm03 = {
 };
 
 static const AnimDef sMapEnm04AnimDefs[6] = {
-    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0 },
+    { gEmy0600BackFrames, gEmy0600BackAnims, gEmy0600BackTiles, 0 },
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0 },
-    { gUnk_09EF8D24, gUnk_09EF8D44, gUnk_098A659A, 0 },
+    { gEmy0600BackFrames, gEmy0600BackAnims, gEmy0600BackTiles, 0 },
     { gEmy0600Frames, gEmy0600Anims, gEmy0600Tiles, 0 },
     { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0 },
     { gEmy0603Frames, gEmy0603Anims, gEmy0603Tiles, 0 },
@@ -1995,10 +1995,10 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     }
 
     work->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
-    work->palette = LoadObjPalette(&gUnk_099912E4[0x10], 32);
-    work->tiles = LoadObjTiles(gUnk_0985A3EA, 0x980);
+    work->palette = LoadObjPalette(&gMapGmkBarrelJumpPalettes[0x10], 32);
+    work->tiles = LoadObjTiles(gMapGmkJumpTiles, 0x980);
     a = &work->anim;
-    AnimInit(a, gUnk_09EF8488, gUnk_09EF8468);
+    AnimInit(a, gMapGmkJumpAnims, gMapGmkJumpFrames);
     work->state = 0;
     AnimStart(a, 0, ANIM_FLAG_LOOP);
     work->update = MapGmkJumpWaitStep;
@@ -2186,7 +2186,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* work) {
     void* p = GetSelectedMapCard();
 
     if (p != NULL) {
-        CreateMapRoom(gUnk_0984C868[0].entryRoom, p);
+        CreateMapRoom(gMapFloorDefs[0].entryRoom, p);
         work->update = MapGmkTutorialWaitOpen;
     }
 
@@ -2201,7 +2201,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* work) {
 
 u8 MapGmkTutorialWaitOpen(MapGmkTutorialWork* work) {
     if (gFieldState->flags & FIELD_FLAG_DOOR_OPENED) {
-        UpdateSpriteFrameTiles(work->tiles, gMapUiSprite_098A94A0, gUnk_0994C364);
+        UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0OpenTiles);
         work->opened = 1;
         work->update = MapGmkTutorialIdle;
     }
@@ -2224,7 +2224,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->obj.height = 32;
     work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, 32);
     work->tiles = AllocSpriteFrameTiles(0x400);
-    UpdateSpriteFrameTiles(work->tiles, gMapUiSprite_098A94A0, gUnk_0994BF64);
+    UpdateSpriteFrameTiles(work->tiles, gMapDoorSide0Frame0, gMapDoorTraverseTownSide0ClosedTiles);
     ColliderInit(&work->collider, 6, 16, 0);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
     work->opened = 0;
@@ -3438,7 +3438,7 @@ u8 MapGmk01WaitHit(MapGmk01Work* work) {
         a = &work->anim;
         AnimStart(a, 1, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(a);
-        SetObjTileSource(work->tiles, gUnk_09858320);
+        SetObjTileSource(work->tiles, gMapGmk01Tiles);
         work->update = MapGmk01Open;
     }
 
@@ -3486,7 +3486,7 @@ void Task_MapGmk01_0(MapGmk01Work* work, MapGmkPlacement* arg) {
     work->placement = arg;
     e->fieldPosition = arg->pos;
     e->height = d->height;
-    work->tiles = AllocObjTiles(0x320, gUnk_09858320);
+    work->tiles = AllocObjTiles(0x320, gMapGmk01Tiles);
     work->palette = LoadObjPalette(d->palette, 32);
     a = &work->anim;
     AnimInit(a, d->anims, d->gfxTable);
@@ -3502,7 +3502,7 @@ void Task_MapGmk01_0(MapGmk01Work* work, MapGmkPlacement* arg) {
         work->update = MapGmk01WaitHit;
     }
 
-    SetObjTileSource(work->tiles, gUnk_09858320);
+    SetObjTileSource(work->tiles, gMapGmk01Tiles);
     ColliderInit(&work->collider, 6, d->radius, d->height);
     ColliderSetPosition(&work->collider, e->fieldPosition.x, e->fieldPosition.y, e->fieldPosition.z);
 }
@@ -4094,31 +4094,31 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->vz = -(GetRandom() % 0x301 + 0x200);
     work->speed = GetRandom() % 155 + 153;
     work->angle = GetRandom();
-    work->tiles = LoadObjTiles(gUnk_098A5CF4, 0x160);
+    work->tiles = LoadObjTiles(gMapPrizeTiles, 0x160);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     work->kind = arg->id;
 
     switch (work->kind) {
     case 3:
-        work->gfx = gUnk_098A5CAE;
+        work->gfx = gMapPrizeFrame3;
         work->amount = 10;
         break;
     case 2:
-        work->gfx = gUnk_098A5CA4;
+        work->gfx = gMapPrizeFrame2;
         work->amount = 4;
         break;
     case 1:
-        work->gfx = gUnk_098A5C9A;
+        work->gfx = gMapPrizeFrame1;
         work->amount = gGameState.progression.maxHp / 20;
         break;
     case 0:
     default:
-        work->gfx = gUnk_098A5C90;
+        work->gfx = gMapPrizeFrame0;
         work->amount = gGameState.progression.maxHp * 3 / 100;
         break;
     }
 
-    work->gfx2 = gUnk_098A5CB8;
+    work->gfx2 = gMapPrizeFrame4;
     work->collected = 0;
     work->visible = 1;
     work->timer = 0;
@@ -4571,10 +4571,10 @@ void Task_MapSpark_0(MapSparkWork* work, FldObj* obj) {
     AnimState* a;
 
     work->obj = obj;
-    work->tiles = AllocObjTiles(0x200, gUnk_098A4B68);
+    work->tiles = AllocObjTiles(0x200, gMapSparkTiles);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
     a = &work->anim;
-    AnimInit(a, gUnk_09EF8CC0, gUnk_09EF8CA0);
+    AnimInit(a, gMapSparkAnims, gMapSparkFrames);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         AnimStart(a, 1, ANIM_FLAG_LOOP);
@@ -4617,9 +4617,9 @@ void Task_MapSpark_3(MapSparkWork* work) {
 
 void Task_MapTalk_0(MapTalkWork* work, FldObj* obj) {
     work->obj = obj;
-    work->tiles = AllocObjTiles(0x200, &gUnk_098A4B68[0x1028]);
+    work->tiles = AllocObjTiles(0x200, &gMapSparkTiles[0x1028]);
     work->palette = LoadObjPalette(gCommonObjPalette, 32);
-    AnimInit(&work->anim, gUnk_09EF8CD0, gUnk_09EF8CC8);
+    AnimInit(&work->anim, gMapTalkAnims, gMapTalkFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->playerOnRight = 0;
 }
@@ -4662,7 +4662,7 @@ void Task_MapTalk_3(MapTalkWork* work) {
 }
 
 const MapGmkDef gMapGmk01Def = {
-    gUnk_099912C4, gUnk_09858320, 0x200, gUnk_09EF8414, gUnk_09EF841C,
+    gMapGmk01Palette, gMapGmk01Tiles, 0x200, gMapGmk01Frames, gMapGmk01Anims,
     1, 13, 0, 0, 0, 16, 16, SONG_SYS_TRESURE, &gTaskDescMapGmk01,
 };
 
@@ -4676,7 +4676,7 @@ TaskDesc gTaskDescMapGmk01 = {
 };
 
 const MapGmkDef gMapGmkBarrelDef = {
-    gUnk_099912E4, gUnk_09858B3C, 0x400, gUnk_09EF8424, gUnk_09EF8460,
+    gMapGmkBarrelJumpPalettes, gMapGmkBarrelTiles, 0x400, gMapGmkBarrelFrames, gMapGmkBarrelAnims,
     1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, &gTaskDescMapGmkBarrel,
 };
 
@@ -4690,7 +4690,7 @@ TaskDesc gTaskDescMapGmkBarrel = {
 };
 
 const MapGmkDef gMapGmk04Def = {
-    gUnk_09991324, gUnk_0985ADAA, 0x400, gUnk_09EF8494, gUnk_09EF84A4,
+    gMapGmk04Palette, gMapGmk04Tiles, 0x400, gMapGmk04Frames, gMapGmk04Anims,
     1, 13, 0, 0, 0, 24, 62, SONG_SYS_KETTEI, &gTaskDescMapGmk04,
 };
 
@@ -4718,7 +4718,7 @@ TaskDesc gTaskDescMapGmk05 = {
 };
 
 const MapGmkDef gMapGmk06Def = {
-    gMapGmk06Palette, gUnk_0985BDEA, 0x400, gUnk_09EF84A8, gUnk_09EF84B8,
+    gMapGmk06Palette, gMapGmk06Tiles, 0x400, gMapGmk06Frames, gMapGmk06Anims,
     1, 13, 0, 0, 0, 24, 54, SONG_SYS_KETTEI, &gTaskDescMapGmk06,
 };
 

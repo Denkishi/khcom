@@ -95,49 +95,49 @@ static WarpIcon sWarpIcons[13] = {
 static WorldSelectDef sWorldSelectDefs[14] = {
 #if defined(VERSION_US)
     {NULL, 0, NULL, 0, NULL, NULL},
-    {gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, gUnk_0815A56C},
-    {gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, gUnk_0815A5AA},
-    {gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, gUnk_0815A54A},
-    {gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, gUnk_0815A534},
-    {gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, gUnk_0815A59A},
-    {gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, gUnk_0815A57C},
-    {gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, gUnk_0815A5BE},
-    {gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, gUnk_0815A5D4},
-    {gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, gUnk_0815A62A},
-    {gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, gUnk_0815A518},
-    {gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, gUnk_0815A60E},
-    {gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, gUnk_0815A64A},
-    {gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, gUnk_0815A5F2},
+    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gUnk_0815A56C},
+    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gUnk_0815A5AA},
+    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gUnk_0815A54A},
+    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gUnk_0815A534},
+    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gUnk_0815A59A},
+    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gUnk_0815A57C},
+    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gUnk_0815A5BE},
+    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gUnk_0815A5D4},
+    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gUnk_0815A62A},
+    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gUnk_0815A518},
+    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gUnk_0815A60E},
+    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gUnk_0815A64A},
+    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gUnk_0815A5F2},
 #elif defined(VERSION_JP)
     {NULL, 0, NULL, 0, NULL, NULL},
-    {gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, gUnkJp_0814E590},
-    {gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, gUnkJp_0814E5E4},
-    {gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, gUnkJp_0814E5CC},
-    {gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, gUnkJp_0814E59C},
-    {gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, gUnkJp_0814E5AC},
-    {gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, gUnkJp_0814E5B8},
-    {gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, gUnkJp_0814E5F4},
-    {gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, gUnkJp_0814E618},
-    {gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, gUnkJp_0814E62C},
-    {gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, gUnkJp_0814E57C},
-    {gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, gUnkJp_0814E644},
-    {gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, gUnkJp_0814E658},
-    {gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, gUnkJp_0814E604},
+    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gUnkJp_0814E590},
+    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gUnkJp_0814E5E4},
+    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gUnkJp_0814E5CC},
+    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gUnkJp_0814E59C},
+    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gUnkJp_0814E5AC},
+    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gUnkJp_0814E5B8},
+    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gUnkJp_0814E5F4},
+    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gUnkJp_0814E618},
+    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gUnkJp_0814E62C},
+    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gUnkJp_0814E57C},
+    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gUnkJp_0814E644},
+    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gUnkJp_0814E658},
+    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gUnkJp_0814E604},
 #elif defined(VERSION_EU)
     {NULL, 0, NULL, 0, NULL, NULL},
-    {gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, &gUnkEu_0888E3A0},
-    {gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, &gUnkEu_0888E578},
-    {gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, &gUnkEu_0888E530},
-    {gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, &gUnkEu_0888E410},
-    {gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, &gUnkEu_0888E450},
-    {gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, &gUnkEu_0888E4C0},
-    {gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, &gUnkEu_0888E5DC},
-    {gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, &gUnkEu_0888E6BC},
-    {gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, &gUnkEu_0888E72C},
-    {gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, &gUnkEu_0888E364},
-    {gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, &gUnkEu_0888E78C},
-    {gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, &gUnkEu_0888E804},
-    {gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, &gUnkEu_0888E654},
+    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, &gUnkEu_0888E3A0},
+    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, &gUnkEu_0888E578},
+    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, &gUnkEu_0888E530},
+    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, &gUnkEu_0888E410},
+    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, &gUnkEu_0888E450},
+    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, &gUnkEu_0888E4C0},
+    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, &gUnkEu_0888E5DC},
+    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, &gUnkEu_0888E6BC},
+    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, &gUnkEu_0888E72C},
+    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, &gUnkEu_0888E364},
+    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, &gUnkEu_0888E78C},
+    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, &gUnkEu_0888E804},
+    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, &gUnkEu_0888E654},
 #endif
 };
 
@@ -226,14 +226,14 @@ void WorldWarpHandleInput() {
     if (keys & A_BUTTON) {
         if (sWorldWarpCursor == gGameState.floor) {
             sWorldWarpTarget = -1;
-            LoadBgMap(0, gUnk_09A35A1C, 0x500);
+            LoadBgMap(0, gWorldWarpBgMap, 0x500);
             sWorldWarpSteps = 16;
             sWorldWarpState = 3;
             m4aSongNumStart(SONG_SYS_CLOSE);
         } else {
             if (sWorldWarpFloorWorlds[sWorldWarpCursor] >= 0) {
                 sWorldWarpTarget = sWorldWarpCursor;
-                LoadBgMap(0, gUnk_09A35A1C, 0x500);
+                LoadBgMap(0, gWorldWarpBgMap, 0x500);
                 sWorldWarpSteps = 16;
                 sWorldWarpState = 3;
                 m4aSongNumStart(SONG_SYS_WORLDSTART);
@@ -243,7 +243,7 @@ void WorldWarpHandleInput() {
         }
     } else if (keys & B_BUTTON) {
         sWorldWarpTarget = -1;
-        LoadBgMap(0, gUnk_09A35A1C, 0x500);
+        LoadBgMap(0, gWorldWarpBgMap, 0x500);
         sWorldWarpSteps = 16;
         sWorldWarpState = 3;
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -286,51 +286,51 @@ void WorldWarpHandleInput() {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_FRENCH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_SPANISH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_ITALIAN:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_GERMAN:
         default:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         }
 #else
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 #endif
 
@@ -353,25 +353,25 @@ void WorldWarpDraw() {
         tile2 = gUnkEu_099AABEE;
         break;
     case LANGUAGE_FRENCH:
-        tile0 = gUnkEu_099AB990;
-        tile1 = gUnkEu_099AB9A6;
-        tile2 = gUnkEu_099AB9DA;
+        tile0 = gWorldWarpBarFrenchFrame0;
+        tile1 = gWorldWarpBarFrenchFrame1;
+        tile2 = gWorldWarpBarFrenchFrame2;
         break;
     case LANGUAGE_SPANISH:
-        tile0 = gUnkEu_099ABF18;
-        tile1 = gUnkEu_099ABF2E;
-        tile2 = gUnkEu_099ABF62;
+        tile0 = gWorldWarpBarSpanishFrame0;
+        tile1 = gWorldWarpBarSpanishFrame1;
+        tile2 = gWorldWarpBarSpanishFrame2;
         break;
     case LANGUAGE_ITALIAN:
-        tile0 = gUnkEu_099AC3E0;
-        tile1 = gUnkEu_099AC3F6;
-        tile2 = gUnkEu_099AC42A;
+        tile0 = gWorldWarpBarItalianFrame0;
+        tile1 = gWorldWarpBarItalianFrame1;
+        tile2 = gWorldWarpBarItalianFrame2;
         break;
     case LANGUAGE_GERMAN:
     default:
-        tile0 = gUnkEu_099AC968;
-        tile1 = gUnkEu_099AC97E;
-        tile2 = gUnkEu_099AC9B2;
+        tile0 = gWorldWarpBarGermanFrame0;
+        tile1 = gWorldWarpBarGermanFrame1;
+        tile2 = gWorldWarpBarGermanFrame2;
         break;
     }
 
@@ -383,9 +383,9 @@ void WorldWarpDraw() {
     }
 #else
     if (sWorldWarpState != 2) {
-        DrawSprite(sWorldWarpBarX >> 8, 0, gUnk_0999F400, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
-        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gUnk_0999F416, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
-        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gUnk_0999F44A, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(sWorldWarpBarX >> 8, 0, gWorldWarpBarFrame0, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
+        DrawSprite(0x80, sWorldWarpBarY[0] >> 8, gWorldWarpBarFrame1, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
+        DrawSprite(0x80, sWorldWarpBarY[1] >> 8, gWorldWarpBarFrame2, sWorldWarpBarTiles, sWorldWarpBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
 #endif
 
@@ -481,7 +481,7 @@ void mode_worldwarp_0() {
     sWorldWarpBarX = -0x8000;
     sWorldWarpCursorX = (sWarpIcons[sWorldWarpCursor].x << 11) + 0x2000;
     sWorldWarpCursorY = (sWarpIcons[sWorldWarpCursor].y << 11) - 0x600;
-    LoadBgPalette(0, gUnk_09A3D37C, 0x200);
+    LoadBgPalette(0, gWorldWarpPalettes, 0x200);
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpFloorWorlds[i] > 0) {
@@ -495,55 +495,55 @@ void mode_worldwarp_0() {
         }
     }
 
-    LoadBgTiles(0, gUnk_09A06A7C, 0x6BC0);
+    LoadBgTiles(0, gWorldWarpTiles, 0x6BC0);
 
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_09A4FBC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_09A50BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_09A51BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_09A52BC0, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }
     } else {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_09A4F3C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_09A503C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_09A513C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_09A523C0, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         }
     }
 #endif
 
-    LoadBgMap(0, gUnk_09A35A1C, 0x500);
-    DmaCopy16(3, gUnk_09A3641C, sWorldWarpTilemap, 0x500);
+    LoadBgMap(0, gWorldWarpBgMap, 0x500);
+    DmaCopy16(3, gWorldWarpFloorMap, sWorldWarpTilemap, 0x500);
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpFloorWorlds[i] >= 0) {
-            WorldWarpCopyTilemapRect(7, 4, gUnk_09A3691C, 0, 0, sWorldWarpTilemap, sWarpIcons[i].x, sWarpIcons[i].y);
+            WorldWarpCopyTilemapRect(7, 4, gWorldWarpFloorPartsMap, 0, 0, sWorldWarpTilemap, sWarpIcons[i].x, sWarpIcons[i].y);
         }
     }
 
     for (i = 0; i < sWorldWarpFloorCount - 1; i++) {
         if (sWorldWarpFloorWorlds[i] >= 0 && sWorldWarpFloorWorlds[i + 1] >= 0) {
             WorldWarpCopyTilemapRect(sWarpRects[sWarpIcons[i].rect].width, sWarpRects[sWarpIcons[i].rect].height,
-                gUnk_09A3691C, sWarpRects[sWarpIcons[i].rect].x,
+                gWorldWarpFloorPartsMap, sWarpRects[sWarpIcons[i].rect].x,
                 sWarpRects[sWarpIcons[i].rect].y, sWorldWarpTilemap,
                 sWarpIcons[i].x2, sWarpIcons[i].y2);
         }
@@ -553,17 +553,17 @@ void mode_worldwarp_0() {
         if (sWorldWarpFloorWorlds[i] >= 0) {
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 if (i <= 8) {
-                    WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, i * 3, 9, sWorldWarpTilemap,
+                    WorldWarpCopyTilemapRect(3, 1, gWorldWarpFloorPartsMap, i * 3, 9, sWorldWarpTilemap,
                         sWarpIcons[i].x + 3, sWarpIcons[i].y + 2);
                 } else {
-                    WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, (i - 9) * 4, 10, sWorldWarpTilemap,
+                    WorldWarpCopyTilemapRect(4, 1, gWorldWarpFloorPartsMap, (i - 9) * 4, 10, sWorldWarpTilemap,
                         sWarpIcons[i].x + 3, sWarpIcons[i].y + 2);
                 }
             } else if (i <= 2) {
-                WorldWarpCopyTilemapRect(4, 1, gUnk_09A3691C, i * 4, 21, sWorldWarpTilemap,
+                WorldWarpCopyTilemapRect(4, 1, gWorldWarpFloorPartsMap, i * 4, 21, sWorldWarpTilemap,
                     sWarpIcons[i].x + 3, sWarpIcons[i].y + 2);
             } else {
-                WorldWarpCopyTilemapRect(3, 1, gUnk_09A3691C, (i - 3) * 3, 22, sWorldWarpTilemap,
+                WorldWarpCopyTilemapRect(3, 1, gWorldWarpFloorPartsMap, (i - 3) * 3, 22, sWorldWarpTilemap,
                     sWarpIcons[i].x + 3, sWarpIcons[i].y + 2);
             }
         }
@@ -583,63 +583,63 @@ void mode_worldwarp_0() {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_FRENCH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A56780, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5CF80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorFrenchTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A57480, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5DC80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorSpanishTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58180, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5E980, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorItalianTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_GERMAN:
     default:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58E80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x20);
         } else {
-            WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5F680, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x120);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorGermanTiles, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     }
 #else
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-        WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0E33C, (u8*)GetBgCharBase(0) + 0x120);
-        WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0D63C, (u8*)GetBgCharBase(0) + 0x20);
+        WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpCurrentFloorTiles, (u8*)GetBgCharBase(0) + 0x120);
+        WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
     } else {
-        WorldWarpLoadFloorTiles(gGameState.floor, gUnk_09A0FD3C, (u8*)GetBgCharBase(0) + 0x120);
-        WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A0F03C, (u8*)GetBgCharBase(0) + 0x20);
+        WorldWarpLoadFloorTiles(gGameState.floor, gWorldWarpRikuCurrentFloorTiles, (u8*)GetBgCharBase(0) + 0x120);
+        WorldWarpLoadFloorTiles(sWorldWarpCursor, gWorldWarpRikuSelectedFloorTiles, (u8*)GetBgCharBase(0) + 0x20);
     }
 #endif
 
@@ -651,31 +651,31 @@ void mode_worldwarp_0() {
         sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AAC2C, 0x500);
         break;
     case LANGUAGE_FRENCH:
-        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABA18, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarFrenchTiles, 0x500);
         break;
     case LANGUAGE_SPANISH:
-        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099ABFA0, 0x440);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarSpanishTiles, 0x440);
         break;
     case LANGUAGE_ITALIAN:
-        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC468, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarItalianTiles, 0x500);
         break;
     case LANGUAGE_GERMAN:
     default:
-        sWorldWarpBarTiles = LoadObjTiles(gUnkEu_099AC9F0, 0x500);
+        sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarGermanTiles, 0x500);
         break;
     }
 #else
-    sWorldWarpBarTiles = LoadObjTiles(gUnk_0999F488, 0x500);
+    sWorldWarpBarTiles = LoadObjTiles(gWorldWarpBarTiles, 0x500);
 #endif
     sWorldWarpHighlightPalette = LoadObjPalette(gWorldWarpHighlightPalette, 32);
-    sWorldWarpHighlightTiles = LoadObjTiles(gUnk_0999FA20, 0x680);
-    AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
+    sWorldWarpHighlightTiles = LoadObjTiles(gWorldWarpHighlightTiles, 0x680);
+    AnimInit(&sWorldWarpHighlightAnim, gWorldWarpHighlightAnims, gWorldWarpHighlightFrames);
     AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
-    AnimInit(&sWorldWarpArrowAnim, gUnk_09EF9898, gUnk_09EF9870);
+    AnimInit(&sWorldWarpArrowAnim, gWorldWarpHighlightAnims, gWorldWarpHighlightFrames);
     AnimStart(&sWorldWarpArrowAnim, 1, ANIM_FLAG_LOOP);
     sWorldWarpCursorPalette = LoadObjPalette(gWorldWarpCursorPalette, 32);
-    sWorldWarpCursorTiles = LoadObjTiles(gUnk_099A012C, 192);
-    AnimInit(&sWorldWarpCursorAnim, gUnk_09EF98B0, gUnk_09EF98A0);
+    sWorldWarpCursorTiles = LoadObjTiles(gWorldWarpCursorTiles, 192);
+    AnimInit(&sWorldWarpCursorAnim, gWorldWarpCursorAnims, gWorldWarpCursorFrames);
     AnimStart(&sWorldWarpCursorAnim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
     InitTextSlots(sWorldWarpCurrentName, 48);
@@ -710,7 +710,7 @@ void mode_worldwarp_1() {
         ApproachValue(&sWorldWarpBarX, 0, sWorldWarpSteps);
 
         if (--sWorldWarpSteps <= 0) {
-            LoadBgMap(0, gUnk_09A35F1C, 0x500);
+            LoadBgMap(0, gWorldWarpBgHeaderMap, 0x500);
             sWorldWarpState = 2;
         }
 

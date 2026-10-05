@@ -151,26 +151,26 @@ void UpdateWorldFriendFlags() {
 
 const MapFloorDef* GetMapFloorDef(u8 a) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return &gUnk_0984CBD0[a];
+        return &gRikuMapFloorDefs[a];
     }
 
-    return &gUnk_0984C868[a];
+    return &gMapFloorDefs[a];
 }
 
 u8* GetMapRoomLinks(u8 a) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return gUnk_0984CBD0[gGameState.floor].links + a * 4;
+        return gRikuMapFloorDefs[gGameState.floor].links + a * 4;
     }
 
-    return gUnk_0984C868[gGameState.floor].links + a * 4;
+    return gMapFloorDefs[gGameState.floor].links + a * 4;
 }
 
 MapEventDoor* GetMapEventDoor(u8 a) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        return gUnk_0984CBD0[gGameState.floor].eventDoors + a;
+        return gRikuMapFloorDefs[gGameState.floor].eventDoors + a;
     }
 
-    return gUnk_0984C868[gGameState.floor].eventDoors + a;
+    return gMapFloorDefs[gGameState.floor].eventDoors + a;
 }
 
 MapFloorRoom* GetMapFloorRoom(u8 index) {
@@ -642,7 +642,7 @@ void CreateMapRoom(u8 a, MapCardAttributes* p) {
     e->seed = gFrameCounter * gFrameCounter;
 
     if (p != NULL) {
-        row = gUnk_0984D0CC[p->kind];
+        row = gMapRoomCodes[p->kind];
         e->cardValue = p->value;
         e->nameId = row[0];
 
@@ -655,7 +655,7 @@ void CreateMapRoom(u8 a, MapCardAttributes* p) {
         SetCardlessRoomType(a);
     }
 
-    anim = gUnk_0984D134[e->roomType];
+    anim = gMapRoomShapes[e->roomType];
     e->enemiesLeft = anim[2];
     e->przCardsLeft = anim[6];
 }
@@ -672,7 +672,7 @@ void LoadMapRoomState(MapRoomState* p, u8 a) {
     gMapRoomState->roomType = e->roomType;
 
     if (gMapChkUseParams == 0) {
-        row = gUnk_0984D134[e->roomType];
+        row = gMapRoomShapes[e->roomType];
         gGameState.roomEffect = row[5];
         LoadMapForm(row[0]);
     }

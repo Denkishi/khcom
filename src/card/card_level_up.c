@@ -147,8 +147,8 @@ void Level_Up_0(LevelUpWork* work) {
         SetupBg(2, 0, 12, 0);
         SetupBg(1, 2, 24, 0);
         SetupBg(0, 2, 25, 0);
-        LoadBgMap(1, gUnk_08125E24, 0x800);
-        LoadBgMap(0, gUnk_08125E24, 0x800);
+        LoadBgMap(1, gDefaultBgMap, 0x800);
+        LoadBgMap(0, gDefaultBgMap, 0x800);
         EnableBg(2);
         DisableBg(1);
         DisableBg(0);
@@ -166,24 +166,24 @@ void Level_Up_0(LevelUpWork* work) {
         case 151:
             SetBgSize(0, 0);
             SetupBg(0, 0, 26, 0);
-            LoadBgMap(0, gUnk_08125E24, 0x800);
+            LoadBgMap(0, gDefaultBgMap, 0x800);
             DisableBg(0);
             break;
         case 152:
             SetBgSize(1, 0);
             SetupBg(1, 1, 24, 0);
-            LoadBgMap(1, gUnk_08125E24, 0x800);
+            LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
         case 148:
             SetBgSize(1, 0);
             SetupBg(1, 2, 26, 0);
-            LoadBgMap(1, gUnk_08125E24, 0x800);
+            LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
         default:
             SetBgSize(1, 0);
-            LoadBgMap(1, gUnk_08125E24, 0x800);
+            LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
         }
@@ -1888,7 +1888,7 @@ void** gLevelUpOptionSpritesByLanguage[5] = {
 u16* gLevelUpSoraTexts[7] = { gUnk_0815A066, gUnk_0815A0BA, gUnk_0815B1D2, gUnk_0815A078, gUnk_0815A0CC, gUnk_0815B1A8, (u16*)gLevelUpDisabledText };
 u16* gLevelUpRikuTexts[7] = { gUnk_0815A066, gUnk_0815A116, gUnk_0815A158, gUnk_0815A0F4, gUnk_0815A130, gUnk_0815A176, (u16*)gLevelUpDisabledText };
 #endif
-const void* gLevelUpBgMapBlocks[2] = { gUnk_08125E24, gLevelUpStatsMap };
+const void* gLevelUpBgMapBlocks[2] = { gDefaultBgMap, gLevelUpStatsMap };
 
 void* gLevelUpOptionBgMaps[3] = { gLevelUpBonusAMap, gLevelUpBonusBMap, gLevelUpBonusCMap };
 

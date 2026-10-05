@@ -1113,8 +1113,8 @@ static const MapTileAnimationFrame sMapTileAnim0Frames1[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim0Tracks[2] = {
-    {sMapTileAnim0Frames0, gUnk_09468FF8, 4, 3232, 864},
-    {sMapTileAnim0Frames1, gUnk_09469B58, 4, 0, 3232},
+    {sMapTileAnim0Frames0, gMapTileAnim0Track0Tiles, 4, 3232, 864},
+    {sMapTileAnim0Frames1, gMapTileAnim0Track1Tiles, 4, 0, 3232},
 };
 
 static const MapTileAnimationDef sMapTileAnim0Def = {
@@ -1164,12 +1164,12 @@ static const MapTileAnimationFrame sMapTileAnim1Frames5[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim1Tracks[6] = {
-    {sMapTileAnim1Frames0, gUnk_098EA844, 4, 2048, 192},
-    {sMapTileAnim1Frames1, gUnk_098EAA84, 4, 2240, 192},
-    {sMapTileAnim1Frames2, gUnk_098EACC4, 4, 2432, 96},
-    {sMapTileAnim1Frames3, gUnk_098EADE4, 4, 2528, 128},
-    {sMapTileAnim1Frames4, gUnk_098EAF64, 4, 3072, 352},
-    {sMapTileAnim1Frames5, gUnk_098EB224, 4, 3424, 128},
+    {sMapTileAnim1Frames0, gMapTileAnim1Track0Tiles, 4, 2048, 192},
+    {sMapTileAnim1Frames1, gMapTileAnim1Track1Tiles, 4, 2240, 192},
+    {sMapTileAnim1Frames2, gMapTileAnim1Track2Tiles, 4, 2432, 96},
+    {sMapTileAnim1Frames3, gMapTileAnim1Track3Tiles, 4, 2528, 128},
+    {sMapTileAnim1Frames4, gMapTileAnim1Track4Tiles, 4, 3072, 352},
+    {sMapTileAnim1Frames5, gMapTileAnim1Track5Tiles, 4, 3424, 128},
 };
 
 static const MapTileAnimationDef sMapTileAnim1Def = {
@@ -1185,7 +1185,7 @@ static const MapTileAnimationFrame sMapTileAnim2Frames[5] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim2Track = {
-    sMapTileAnim2Frames, gUnk_0948A918, 5, 3072, 896,
+    sMapTileAnim2Frames, gMapTileAnim2Tiles, 5, 3072, 896,
 };
 
 static const MapTileAnimationDef sMapTileAnim2Def = {
@@ -1200,7 +1200,7 @@ static const MapTileAnimationFrame sMapTileAnim3Frames[4] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim3Track = {
-    sMapTileAnim3Frames, gUnk_094EABF8, 4, -15360, 3072,
+    sMapTileAnim3Frames, gMapTileAnim3Tiles, 4, -15360, 3072,
 };
 
 static const MapTileAnimationDef sMapTileAnim3Def = {
@@ -1217,7 +1217,7 @@ static const MapTileAnimationFrame sMapTileAnim4Frames[6] = {
 };
 
 static const MapTileAnimationTrack sMapTileAnim4Track = {
-    sMapTileAnim4Frames, gUnk_094F4238, 6, -5120, 1024,
+    sMapTileAnim4Frames, gMapTileAnim4Tiles, 6, -5120, 1024,
 };
 
 static const MapTileAnimationDef sMapTileAnim4Def = {

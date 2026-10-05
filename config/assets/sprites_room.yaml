@@ -50,140 +50,140 @@ objects:
     start: 0x09A9A220
     end: 0x09A9A360
 entries:
-- name: gUnk_09EF9684
+- name: gBosGaTorsoFrames
   record: SpriteTable
-  items: [gUnk_0999389C, gUnk_099938C4, gUnk_099938EC, gUnk_09993914, gUnk_09993942, gUnk_0999395E, gUnk_09993986, gUnk_099939A2]
+  items: [gBosGaTorsoFrame0, gBosGaTorsoFrame1, gBosGaTorsoFrame2, gBosGaTorsoFrame3, gBosGaTorsoFrame4, gBosGaTorsoFrame5, gBosGaTorsoFrame6, gBosGaTorsoFrame7]
   us:
     address: 0x09EF9684
   jp:
     address: 0x09ED0A70
   eu:
     address: 0x09F85100
-- name: gUnk_09EF96A4
+- name: gBosGaTorsoAnims
   record: AnimTable
-  items: [gUnk_099939C4, gUnk_099939DA, gUnk_099939F0]
+  items: [gBosGaTorsoAnim0, gBosGaTorsoAnim1, gBosGaTorsoAnim2]
   us:
     address: 0x09EF96A4
   jp:
     address: 0x09ED0A90
   eu:
     address: 0x09F85120
-- name: gUnk_09EF96B0
+- name: gBosGaHeadFrames
   record: SpriteTable
-  items: [gUnk_09995E3C, gUnk_09995E46, gUnk_09995E50, gUnk_09995E5A, gUnk_09995E64, gUnk_09995E6E]
+  items: [gBosGaHeadFrame0, gBosGaHeadFrame1, gBosGaHeadFrame2, gBosGaHeadFrame3, gBosGaHeadFrame4, gBosGaHeadFrame5]
   us:
     address: 0x09EF96B0
   jp:
     address: 0x09ED0A9C
   eu:
     address: 0x09F8512C
-- name: gUnk_09EF96C8
+- name: gBosGaHeadAnims
   record: AnimTable
-  items: [gUnk_09995E78, gUnk_09995E82]
+  items: [gBosGaHeadAnim0, gBosGaHeadAnim1]
   us:
     address: 0x09EF96C8
   jp:
     address: 0x09ED0AB4
   eu:
     address: 0x09F85144
-- name: gUnk_09EF96D0
+- name: gBosGaNearHandFrames
   record: SpriteTable
-  items: [gUnk_09996A9C, gUnk_09996AC4, gUnk_09996AE0, gUnk_09996AF6, gUnk_09996B12, gUnk_09996B28, gUnk_09996B3E]
+  items: [gBosGaNearHandFrame0, gBosGaNearHandFrame1, gBosGaNearHandFrame2, gBosGaNearHandFrame3, gBosGaNearHandFrame4, gBosGaNearHandFrame5, gBosGaNearHandFrame6]
   us:
     address: 0x09EF96D0
   jp:
     address: 0x09ED0ABC
   eu:
     address: 0x09F8514C
-- name: gUnk_09EF96EC
+- name: gBosGaNearHandAnims
   record: AnimTable
-  items: [gUnk_09996B5A, gUnk_09996B64]
+  items: [gBosGaNearHandAnim0, gBosGaNearHandAnim1]
   us:
     address: 0x09EF96EC
   jp:
     address: 0x09ED0AD8
   eu:
     address: 0x09F85168
-- name: gUnk_09EF96F4
+- name: gBosGaFarHandFrames
   record: SpriteTable
-  items: [gUnk_09997E84, gUnk_09997EA0, gUnk_09997EB6, gUnk_09997ED2, gUnk_09997EEE, gUnk_09997F0A, gUnk_09997F20]
+  items: [gBosGaFarHandFrame0, gBosGaFarHandFrame1, gBosGaFarHandFrame2, gBosGaFarHandFrame3, gBosGaFarHandFrame4, gBosGaFarHandFrame5, gBosGaFarHandFrame6]
   us:
     address: 0x09EF96F4
   jp:
     address: 0x09ED0AE0
   eu:
     address: 0x09F85170
-- name: gUnk_09EF9710
+- name: gBosGaFarHandAnims
   record: AnimTable
-  items: [gUnk_09997F3C, gUnk_09997F46]
+  items: [gBosGaFarHandAnim0, gBosGaFarHandAnim1]
   us:
     address: 0x09EF9710
   jp:
     address: 0x09ED0AFC
   eu:
     address: 0x09F8518C
-- name: gUnk_09EF9718
+- name: gBosGaNearFootFrames
   record: SpriteTable
-  items: [gUnk_09999224]
+  items: [gBosGaNearFootFrame0]
   us:
     address: 0x09EF9718
   jp:
     address: 0x09ED0B04
   eu:
     address: 0x09F85194
-- name: gUnk_09EF971C
+- name: gBosGaNearFootAnims
   record: AnimTable
-  items: [gUnk_0999923A]
+  items: [gBosGaNearFootAnim0]
   us:
     address: 0x09EF971C
   jp:
     address: 0x09ED0B08
   eu:
     address: 0x09F85198
-- name: gUnk_09EF9720
+- name: gBosGaFarFootFrames
   record: SpriteTable
-  items: [gUnk_099995C4]
+  items: [gBosGaFarFootFrame0]
   us:
     address: 0x09EF9720
   jp:
     address: 0x09ED0B0C
   eu:
     address: 0x09F8519C
-- name: gUnk_09EF9724
+- name: gBosGaFarFootAnims
   record: AnimTable
-  items: [gUnk_099995F2]
+  items: [gBosGaFarFootAnim0]
   us:
     address: 0x09EF9724
   jp:
     address: 0x09ED0B10
   eu:
     address: 0x09F851A0
-- name: gUnk_09EF9728
+- name: gBosGaCollarFrames
   record: SpriteTable
-  items: [gUnk_0999991C, gUnk_09999938, gUnk_09999954, gUnk_09999970]
+  items: [gBosGaCollarFrame0, gBosGaCollarFrame1, gBosGaCollarFrame2, gBosGaCollarFrame3]
   us:
     address: 0x09EF9728
   jp:
     address: 0x09ED0B14
   eu:
     address: 0x09F851A4
-- name: gUnk_09EF9738
+- name: gBosGaCollarAnims
   record: AnimTable
-  items: [gUnk_0999998C, gUnk_099999A2]
+  items: [gBosGaCollarAnim0, gBosGaCollarAnim1]
   us:
     address: 0x09EF9738
   jp:
     address: 0x09ED0B24
   eu:
     address: 0x09F851B4
-- name: gRoomAsset_099939FA
+- name: gBosGaTorsoTiles
   format: sprite_sheet
   align: 4
   cell: [54, 71]
   anchor: [26, 38]
   columns: 8
   frames:
-  - symbol: gUnk_0999389C
+  - symbol: gBosGaTorsoFrame0
     pieces:
     - [32x64, -17, -38]
     - [8x8, -24, -23, {layer: 1}]
@@ -191,7 +191,7 @@ entries:
     - [8x8, -1, 25]
     - [16x32, 7, -6]
     - [16x16, -25, -38]
-  - symbol: gUnk_099938C4
+  - symbol: gBosGaTorsoFrame1
     pieces:
     - [32x64, -18, -37]
     - [8x8, -25, 14]
@@ -199,7 +199,7 @@ entries:
     - [8x32, 13, -5]
     - [8x16, 20, 1]
     - [16x16, -26, -37]
-  - symbol: gUnk_099938EC
+  - symbol: gBosGaTorsoFrame2
     pieces:
     - [32x64, -15, -37]
     - [8x16, -22, -37]
@@ -207,7 +207,7 @@ entries:
     - [8x16, -22, 5]
     - [8x16, 16, -1]
     - [8x8, 16, 14]
-  - symbol: gUnk_09993914
+  - symbol: gBosGaTorsoFrame3
     pieces:
     - [32x64, -12, -38]
     - [8x16, -19, -37]
@@ -216,13 +216,13 @@ entries:
     - [8x8, -19, 17]
     - [8x8, -4, 25]
     - [8x16, 19, 2]
-  - symbol: gUnk_09993942
+  - symbol: gBosGaTorsoFrame4
     pieces:
     - [32x64, -17, -37]
     - [8x16, -24, 3]
     - [8x8, -24, 18]
     - [8x16, 14, 1, {layer: 1}]
-  - symbol: gUnk_0999395E
+  - symbol: gBosGaTorsoFrame5
     pieces:
     - [8x16, -23, 4]
     - [8x16, 15, 4]
@@ -230,13 +230,13 @@ entries:
     - [32x16, -24, -34]
     - [16x16, 7, -34]
     - [32x8, -16, -19]
-  - symbol: gUnk_09993986
+  - symbol: gBosGaTorsoFrame6
     pieces:
     - [32x64, -15, -37, {hflip: true}]
     - [8x16, 16, 3, {hflip: true}]
     - [8x8, 16, 18, {hflip: true}]
     - [8x16, -22, 1, {hflip: true, same: [4, 3]}]
-  - symbol: gUnk_099939A2
+  - symbol: gBosGaTorsoFrame7
     pieces:
     - [32x64, -16, -34]
     - [8x32, -23, -2]
@@ -244,13 +244,13 @@ entries:
     - [8x16, -23, -34]
     - [8x16, 15, -34]
   animations:
-  - symbol: gUnk_099939C4
+  - symbol: gBosGaTorsoAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12]]
-  - symbol: gUnk_099939DA
+  - symbol: gBosGaTorsoAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 5], [5, 5], [6, 5], [7, 5]]
-  - symbol: gUnk_099939F0
+  - symbol: gBosGaTorsoAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -262,36 +262,36 @@ entries:
   eu:
     address: 0x09999B58
     size: 9630
-- name: gRoomAsset_09995E9C
+- name: gBosGaHeadTiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [16, 18]
   columns: 6
   frames:
-  - symbol: gUnk_09995E3C
+  - symbol: gBosGaHeadFrame0
     pieces:
     - [32x32, -16, -18]
-  - symbol: gUnk_09995E46
+  - symbol: gBosGaHeadFrame1
     pieces:
     - [32x32, -16, -18]
-  - symbol: gUnk_09995E50
+  - symbol: gBosGaHeadFrame2
     pieces:
     - [32x32, -16, -18]
-  - symbol: gUnk_09995E5A
+  - symbol: gBosGaHeadFrame3
     pieces:
     - [32x32, -16, -18]
-  - symbol: gUnk_09995E64
+  - symbol: gBosGaHeadFrame4
     pieces:
     - [32x32, -16, -18]
-  - symbol: gUnk_09995E6E
+  - symbol: gBosGaHeadFrame5
     pieces:
     - [32x32, -16, -18]
   animations:
-  - symbol: gUnk_09995E78
+  - symbol: gBosGaHeadAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_09995E82
+  - symbol: gBosGaHeadAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   us:
@@ -303,14 +303,14 @@ entries:
   eu:
     address: 0x0999C0F8
     size: 3168
-- name: gRoomAsset_09996B82
+- name: gBosGaNearHandTiles
   format: sprite_sheet
   align: 4
   cell: [61, 58]
   anchor: [33, 26]
   columns: 7
   frames:
-  - symbol: gUnk_09996A9C
+  - symbol: gBosGaNearHandFrame0
     pieces:
     - [16x16, 6, -23]
     - [32x32, -26, -7]
@@ -318,44 +318,44 @@ entries:
     - [8x8, -1, -14, {layer: 2}]
     - [8x8, -33, 9]
     - [8x8, -18, 24]
-  - symbol: gUnk_09996AC4
+  - symbol: gBosGaNearHandFrame1
     pieces:
     - [16x16, -1, -24]
     - [32x32, -17, -9]
     - [16x8, -17, 22]
     - [8x8, -2, 22]
-  - symbol: gUnk_09996AE0
+  - symbol: gBosGaNearHandFrame2
     pieces:
     - [16x16, -14, -26]
     - [32x32, -14, -11]
     - [32x8, -14, 20]
-  - symbol: gUnk_09996AF6
+  - symbol: gBosGaNearHandFrame3
     pieces:
     - [16x16, -26, -17]
     - [32x32, -11, -9]
     - [8x8, -11, -16]
     - [8x16, 20, -1]
-  - symbol: gUnk_09996B12
+  - symbol: gBosGaNearHandFrame4
     pieces:
     - [16x32, -12, -20]
     - [8x32, 3, -20]
     - [16x8, -5, 11, {layer: 1}]
-  - symbol: gUnk_09996B28
+  - symbol: gBosGaNearHandFrame5
     pieces:
     - [8x16, 10, -17]
     - [32x32, -21, -17]
     - [8x8, 3, 14]
-  - symbol: gUnk_09996B3E
+  - symbol: gBosGaNearHandFrame6
     pieces:
     - [16x16, 7, -23]
     - [32x32, -25, -7]
     - [8x16, 6, -8]
     - [16x8, -8, -14, {layer: 1}]
   animations:
-  - symbol: gUnk_09996B5A
+  - symbol: gBosGaNearHandAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_09996B64
+  - symbol: gBosGaNearHandAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7]]
   us:
@@ -367,58 +367,58 @@ entries:
   eu:
     address: 0x0999CD58
     size: 5094
-- name: gRoomAsset_09997F64
+- name: gBosGaFarHandTiles
   format: sprite_sheet
   align: 4
   cell: [54, 57]
   anchor: [27, 28]
   columns: 7
   frames:
-  - symbol: gUnk_09997E84
+  - symbol: gBosGaFarHandFrame0
     pieces:
     - [16x16, 7, -23]
     - [32x32, -24, -7]
     - [8x16, 7, -8]
     - [16x8, -8, -14]
-  - symbol: gUnk_09997EA0
+  - symbol: gBosGaFarHandFrame1
     pieces:
     - [16x16, 2, -28]
     - [32x32, -14, -13]
     - [32x8, -14, 18]
-  - symbol: gUnk_09997EB6
+  - symbol: gBosGaFarHandFrame2
     pieces:
     - [16x16, -15, -25]
     - [32x32, -15, -10]
     - [16x8, -7, 21]
     - [8x8, 9, 21]
-  - symbol: gUnk_09997ED2
+  - symbol: gBosGaFarHandFrame3
     pieces:
     - [16x16, -23, -23]
     - [32x32, -7, -8]
     - [16x8, -8, -15]
     - [8x16, -14, -8]
-  - symbol: gUnk_09997EEE
+  - symbol: gBosGaFarHandFrame4
     pieces:
     - [8x16, -18, -16]
     - [32x32, -11, -16]
     - [8x8, -18, 0]
     - [8x8, -11, 15]
-  - symbol: gUnk_09997F0A
+  - symbol: gBosGaFarHandFrame5
     pieces:
     - [16x32, -11, -18]
     - [8x32, 4, -18]
     - [8x8, -11, 13]
-  - symbol: gUnk_09997F20
+  - symbol: gBosGaFarHandFrame6
     pieces:
     - [16x16, 11, -19]
     - [32x32, -20, -11]
     - [8x8, 4, -18]
     - [8x8, -27, 2]
   animations:
-  - symbol: gUnk_09997F3C
+  - symbol: gBosGaFarHandAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_09997F46
+  - symbol: gBosGaFarHandAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7]]
   us:
@@ -430,20 +430,20 @@ entries:
   eu:
     address: 0x0999E140
     size: 5024
-- name: gRoomAsset_09999244
+- name: gBosGaNearFootTiles
   format: sprite_sheet
   align: 4
   cell: [32, 54]
   anchor: [14, 28]
   columns: 1
   frames:
-  - symbol: gUnk_09999224
+  - symbol: gBosGaNearFootFrame0
     pieces:
     - [32x32, -14, -28]
     - [32x16, -14, 3]
     - [32x8, -14, 18]
   animations:
-  - symbol: gUnk_0999923A
+  - symbol: gBosGaNearFootAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -455,14 +455,14 @@ entries:
   eu:
     address: 0x0999F4E0
     size: 928
-- name: gRoomAsset_099995FC
+- name: gBosGaFarFootTiles
   format: sprite_sheet
   align: 4
   cell: [47, 45]
   anchor: [29, 30]
   columns: 1
   frames:
-  - symbol: gUnk_099995C4
+  - symbol: gBosGaFarFootFrame0
     pieces:
     - [32x16, -29, -8]
     - [16x16, 2, -8]
@@ -472,7 +472,7 @@ entries:
     - [8x16, 2, -23, {layer: 1}]
     - [8x8, -5, -30]
   animations:
-  - symbol: gUnk_099995F2
+  - symbol: gBosGaFarFootAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -484,42 +484,42 @@ entries:
   eu:
     address: 0x0999F880
     size: 856
-- name: gUnk_099999AC
+- name: gBosGaCollarTiles
   format: sprite_sheet
   align: 4
   cell: [28, 32]
   anchor: [10, 37]
   columns: 4
   frames:
-  - symbol: gUnk_0999991C
+  - symbol: gBosGaCollarFrame0
     pieces:
     - [16x16, -1, -30]
     - [8x8, 7, -37]
     - [8x8, -8, -22, {layer: 1}]
     - [16x8, -9, -15, {layer: 2}]
-  - symbol: gUnk_09999938
+  - symbol: gBosGaCollarFrame1
     pieces:
     - [16x16, -10, -29]
     - [16x8, -10, -14]
     - [8x16, 5, -36]
     - [8x8, 5, -21]
-  - symbol: gUnk_09999954
+  - symbol: gBosGaCollarFrame2
     pieces:
     - [16x16, -8, -28]
     - [16x8, -8, -13]
     - [8x16, 7, -36]
     - [8x8, 7, -21]
-  - symbol: gUnk_09999970
+  - symbol: gBosGaCollarFrame3
     pieces:
     - [16x16, -5, -29]
     - [16x8, -5, -14]
     - [8x16, 10, -37]
     - [8x8, 10, -22]
   animations:
-  - symbol: gUnk_0999998C
+  - symbol: gBosGaCollarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12]]
-  - symbol: gUnk_099999A2
+  - symbol: gBosGaCollarAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -531,7 +531,7 @@ entries:
   eu:
     address: 0x0999FBD8
     size: 1264
-- name: gRoomAsset_09A1E0DC
+- name: gBosGaBgTopLeftMap
   format: tilemap
   us:
     address: 0x09A1E0DC
@@ -542,7 +542,7 @@ entries:
   eu:
     address: 0x09A6FCA0
     size: 2048
-- name: gRoomAsset_09A1E8DC
+- name: gBosGaBgBottomLeftMap
   format: tilemap
   us:
     address: 0x09A1E8DC
@@ -553,7 +553,7 @@ entries:
   eu:
     address: 0x09A704A0
     size: 2048
-- name: gRoomAsset_09A1F0DC
+- name: gBosGaBgTopRightMap
   format: tilemap
   us:
     address: 0x09A1F0DC
@@ -564,7 +564,7 @@ entries:
   eu:
     address: 0x09A70CA0
     size: 2048
-- name: gRoomAsset_09A1F8DC
+- name: gBosGaBgBottomRightMap
   format: tilemap
   us:
     address: 0x09A1F8DC
@@ -575,7 +575,7 @@ entries:
   eu:
     address: 0x09A714A0
     size: 4096
-- name: gRoomAsset_09A3C75C
+- name: gBosGaBgPalette
   format: palette
   us:
     address: 0x09A3C75C

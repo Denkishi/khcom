@@ -44,59 +44,59 @@
 
 #ifdef VERSION_EU
 static void* sMapInspectScrollMarkerSpritesByLanguage[5] = {
-    gUnk_0999D9C0,
-    gUnkEu_099A6BA8,
-    gUnkEu_099A9128,
-    gUnkEu_099A84A8,
-    gUnkEu_099A7828,
+    gMapInspectBarFrame4,
+    gMapInspectBarFrFrame4,
+    gMapInspectBarDeFrame4,
+    gMapInspectBarItFrame4,
+    gMapInspectBarEsFrame4,
 };
 
 static void* sMapInspectTitleSpritesByLanguage[5] = {
-    gUnk_0999D9CA,
-    gUnkEu_099A6BB2,
-    gUnkEu_099A9132,
-    gUnkEu_099A84B2,
-    gUnkEu_099A7832,
+    gMapInspectBarFrame5,
+    gMapInspectBarFrFrame5,
+    gMapInspectBarDeFrame5,
+    gMapInspectBarItFrame5,
+    gMapInspectBarEsFrame5,
 };
 
 static void* sMapInspectTopBarSpritesByLanguage[5] = {
-    gUnk_0999D9E6,
-    gUnkEu_099A6BC8,
-    gUnkEu_099A9148,
-    gUnkEu_099A84C8,
-    gUnkEu_099A7848,
+    gMapInspectBarFrame6,
+    gMapInspectBarFrFrame6,
+    gMapInspectBarDeFrame6,
+    gMapInspectBarItFrame6,
+    gMapInspectBarEsFrame6,
 };
 
 static void* sMapInspectBottomBarSpritesByLanguage[5] = {
-    gUnk_0999DA1A,
-    gUnkEu_099A6BFC,
-    gUnkEu_099A917C,
-    gUnkEu_099A84FC,
-    gUnkEu_099A787C,
+    gMapInspectBarFrame7,
+    gMapInspectBarFrFrame7,
+    gMapInspectBarDeFrame7,
+    gMapInspectBarItFrame7,
+    gMapInspectBarEsFrame7,
 };
 
 static void* sMapInspectBarTilesByLanguage[5] = {
-    gUnk_0999DAEC,
-    gUnkEu_099A6CCE,
-    gUnkEu_099A924E,
-    gUnkEu_099A85CE,
-    gUnkEu_099A794E,
+    gMapInspectBarTiles,
+    gMapInspectBarFrTiles,
+    gMapInspectBarDeTiles,
+    gMapInspectBarItTiles,
+    gMapInspectBarEsTiles,
 };
 
 static AnimHeader** sMapInspectCursorAnimsByLanguage[5] = {
-    gUnk_09EF981C,
-    gUnkEu_09F8533C,
-    gUnkEu_09F85408,
-    gUnkEu_09F853C4,
-    gUnkEu_09F85380,
+    gMapInspectBarAnims,
+    gMapInspectBarFrAnims,
+    gMapInspectBarDeAnims,
+    gMapInspectBarItAnims,
+    gMapInspectBarEsAnims,
 };
 
 static void** sMapInspectCursorFramesByLanguage[5] = {
-    gUnk_09EF97EC,
-    gUnkEu_09F8530C,
-    gUnkEu_09F853D8,
-    gUnkEu_09F85394,
-    gUnkEu_09F85350,
+    gMapInspectBarFrames,
+    gMapInspectBarFrFrames,
+    gMapInspectBarDeFrames,
+    gMapInspectBarItFrames,
+    gMapInspectBarEsFrames,
 };
 #endif
 
@@ -325,7 +325,7 @@ void MapInspectLoadSelectedCard() {
         sMapInspectCardBackTiles = LoadObjTiles(gMapCardBackDefs[k].tiles, gMapCardBackDefs[k].tilesSize);
         sMapInspectCardBackSprite = *gMapCardBackDefs[k].sprites;
         sMapInspectCardPremium = p->category == 3;
-        sMapInspectCategoryPalette = LoadObjPalette(gUnk_09A3D2FC + p->category * 16, 32);
+        sMapInspectCategoryPalette = LoadObjPalette(gMapInspectCategoryPalettes + p->category * 16, 32);
         q = &sMapInspectNameTextCount;
         *q = LoadTextSlots(GetRoomName(p->cardType), sMapInspectNameText);
 
@@ -362,8 +362,8 @@ s16 GetMapInspectSelectedValue() {
 }
 
 void MapInspectDrawCardTotal() {
-    LoadDecimalDigitTiles(sMapInspectCardTotal, gUnk_09A0693C, (u8*)GetBgCharBase(0) + 0x3A0, 32, 2);
-    LoadDecimalDigitTiles(99, gUnk_09A0693C, (u8*)GetBgCharBase(0) + 0x3E0, 32, 2);
+    LoadDecimalDigitTiles(sMapInspectCardTotal, gMapInspectTotalDigitTiles, (u8*)GetBgCharBase(0) + 0x3A0, 32, 2);
+    LoadDecimalDigitTiles(99, gMapInspectTotalDigitTiles, (u8*)GetBgCharBase(0) + 0x3E0, 32, 2);
 }
 
 void MapInspectDrawCategoryCounts() {
@@ -374,9 +374,9 @@ void MapInspectDrawCategoryCounts() {
         v = sMapInspectCategoryCardCount[i];
 
         if (v != 0) {
-            LoadDecimalDigitTiles(v, gUnk_09A0669C, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
+            LoadDecimalDigitTiles(v, gMapInspectCategoryDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
         } else {
-            LoadDecimalDigitTiles(0, gUnk_09A0667C, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
+            LoadDecimalDigitTiles(0, gMapInspectCategoryZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x2A0), 32, 2);
         }
     }
 }
@@ -389,54 +389,54 @@ void MapInspectDrawValueCounts() {
     p = GetMapInspectSelectedEntry();
 
     if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-        LoadPalette(gUnk_09A3D23C + p->category * 16, (void*)PLTT, 12);
+        LoadPalette(gMapInspectCategoryBgPalettes + p->category * 16, (void*)PLTT, 12);
     }
 
     if (sMapInspectMenuState == 1) {
         for (i = 0; i <= 9; i++) {
-            LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-            LoadPalette(gUnk_09A3D2C8, (void*)(PLTT + (i + 6) * 2), 2);
+            LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
+            LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
         }
     } else if (p->category == 3) {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-            LoadBgMap(1, gUnk_09A3551C, 0x500);
+            LoadBgMap(1, gMapInspectPremiumValuesMap, 0x500);
         }
 
         for (i = 0; i <= 9; i++) {
             v = p->countsByValue[i];
 
             if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
-                LoadDecimalDigitTiles(v, gUnk_09A067FC, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-                LoadPalette(gUnk_09A3D248, (void*)(BG_PLTT + 0xC), 2);
+                LoadDecimalDigitTiles(v, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
+                LoadPalette(gMapInspectValueDigitPalette, (void*)(BG_PLTT + 0xC), 2);
                 break;
             }
         }
 
         if (i > 9) {
-            LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
-            LoadPalette(gUnk_09A3D2C8, (void*)(BG_PLTT + 0xC), 2);
+            LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + 0x40, 32, 1);
+            LoadPalette(gMapInspectValueZeroPalette, (void*)(BG_PLTT + 0xC), 2);
         }
     } else {
         if (GetMapInspectTabCount(sMapInspectTab) > 0) {
-            LoadBgMap(1, gUnk_09A3501C, 0x500);
+            LoadBgMap(1, gMapInspectValuesMap, 0x500);
         }
 
         for (i = 0; i <= 9; i++) {
             v = p->countsByValue[i];
 
             if (v != 0 && GetMapInspectTabCount(sMapInspectTab) > 0) {
-                LoadDecimalDigitTiles(v, gUnk_09A067FC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gUnk_09A3D248, (void*)(PLTT + (i + 6) * 2), 2);
+                LoadDecimalDigitTiles(v, gMapInspectValueDigitTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
+                LoadPalette(gMapInspectValueDigitPalette, (void*)(PLTT + (i + 6) * 2), 2);
             } else {
-                LoadDecimalDigitTiles(0, gUnk_09A067DC, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
-                LoadPalette(gUnk_09A3D2C8, (void*)(PLTT + (i + 6) * 2), 2);
+                LoadDecimalDigitTiles(0, gMapInspectValueZeroTiles, (u8*)GetBgCharBase(0) + (i * 64 + 0x40), 32, 1);
+                LoadPalette(gMapInspectValueZeroPalette, (void*)(PLTT + (i + 6) * 2), 2);
             }
         }
     }
 }
 
 void MapInspectDrawTab(s16 a) {
-    RequestTilemapRectCopy(gUnk_09A34D9C, GetBgScreenBase(0), 0, sMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
+    RequestTilemapRectCopy(gMapInspectTabsMap, GetBgScreenBase(0), 0, sMapCardCategoryDefs[a].displayIndex * 2, 0, 2, 11, 2);
 }
 
 void MapInspectDeleteCard() {
@@ -632,13 +632,13 @@ void MapInspectHandleGridInput() {
             m4aSongNumStart(SONG_SYS_BEEP);
         }
     } else if (keys & B_BUTTON) {
-        LoadBgMap(0, gUnk_09A3439C, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 1;
         sMapInspectSteps = 16;
         sMapInspectState = 3;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gUnk_09A3439C, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -706,7 +706,7 @@ void MapInspectHandleTabInput() {
 
     if ((keys & A_BUTTON) == 0) {
         if (keys & START_BUTTON) {
-            LoadBgMap(0, gUnk_09A3439C, 0x500);
+            LoadBgMap(0, gMapInspectBgMap, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
@@ -724,7 +724,7 @@ void MapInspectHandleTabInput() {
                 sMapInspectMenuState = 0;
                 MapInspectDrawValueCounts();
             } else if (keys & B_BUTTON) {
-                LoadBgMap(0, gUnk_09A3439C, 0x500);
+                LoadBgMap(0, gMapInspectBgMap, 0x500);
                 m4aSongNumStart(SONG_SYS_CLOSE);
                 sMapInspectReturnToMenu = 1;
                 sMapInspectSteps = 16;
@@ -810,7 +810,7 @@ void MapInspectHandleValueInput() {
             AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
             sMapInspectMenuState = 0;
         } else if (keys & START_BUTTON) {
-            LoadBgMap(0, gUnk_09A3439C, 0x500);
+            LoadBgMap(0, gMapInspectBgMap, 0x500);
             m4aSongNumStart(SONG_SYS_CLOSE);
             sMapInspectReturnToMenu = 0;
             FadeStartOut(FADE_MODE_BLACK, 16);
@@ -897,7 +897,7 @@ void MapInspectHandleConfirmInput() {
         AnimStart(&sMapInspectHighlightAnim, 1, ANIM_FLAG_LOOP);
         sMapInspectMenuState = 2;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gUnk_09A3439C, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -923,7 +923,7 @@ void MapInspectHandleNoticeInput() {
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectMenuState = 2;
     } else if (keys & START_BUTTON) {
-        LoadBgMap(0, gUnk_09A3439C, 0x500);
+        LoadBgMap(0, gMapInspectBgMap, 0x500);
         m4aSongNumStart(SONG_SYS_CLOSE);
         sMapInspectReturnToMenu = 0;
         FadeStartOut(FADE_MODE_BLACK, 16);
@@ -943,21 +943,21 @@ void MapInspectDraw() {
 #ifdef VERSION_EU
             sMapInspectTitleSpritesByLanguage[gLanguage],
 #else
-            gUnk_0999D9CA,
+            gMapInspectBarFrame5,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB8);
         DrawSprite(128, sMapInspectBarY[0] >> 8,
 #ifdef VERSION_EU
             sMapInspectTopBarSpritesByLanguage[gLanguage],
 #else
-            gUnk_0999D9E6,
+            gMapInspectBarFrame6,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
         DrawSprite(128, sMapInspectBarY[1] >> 8,
 #ifdef VERSION_EU
             sMapInspectBottomBarSpritesByLanguage[gLanguage],
 #else
-            gUnk_0999DA1A,
+            gMapInspectBarFrame7,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(3), 0xBB9);
     }
@@ -974,7 +974,7 @@ void MapInspectDraw() {
 #ifdef VERSION_EU
             sMapInspectScrollMarkerSpritesByLanguage[gLanguage],
 #else
-            gUnk_0999D9C0,
+            gMapInspectBarFrame4,
 #endif
             sMapInspectBarTiles, sMapInspectBarPalette, NULL, SPRITE_PRIORITY(2), 0x898);
 
@@ -1127,7 +1127,7 @@ void mode_mapinspect_0() {
     sMapInspectCategoryPalette = NULL;
     sMapInspectValueCol = 0;
     sMapInspectValueRow = 0;
-    LoadBgPalette(0, gUnk_09A3D0DC, 0x160);
+    LoadBgPalette(0, gMapInspectPalettes, 0x160);
 #ifdef VERSION_EU
     LoadBgTiles(0, gMapInspectTiles, 0x2C00);
 
@@ -1157,35 +1157,35 @@ void mode_mapinspect_0() {
     LoadBgPalette(2, gCard00Palette, 0x20);
     LoadBgTiles(2, gConfirmWinTiles, 0x140);
     LoadBgMap(2, gConfirmWinMap, 0x800);
-    LoadBgMap(0, gUnk_09A3439C, 0x500);
+    LoadBgMap(0, gMapInspectBgMap, 0x500);
 
     if (GetMapInspectSelectedEntry()->category == 3) {
-        LoadBgMap(1, gUnk_09A3551C, 0x500);
+        LoadBgMap(1, gMapInspectPremiumValuesMap, 0x500);
     } else {
-        LoadBgMap(1, gUnk_09A3501C, 0x500);
+        LoadBgMap(1, gMapInspectValuesMap, 0x500);
     }
 
     MapInspectDrawTab(sMapInspectTab);
     MapInspectDrawCardTotal();
     MapInspectDrawCategoryCounts();
     MapInspectDrawValueCounts();
-    sMapInspectBarPalette = LoadObjPalette(gUnk_09A3D2DC, 0x20);
+    sMapInspectBarPalette = LoadObjPalette(gMapInspectBarPalette, 0x20);
 #ifdef VERSION_EU
     sMapInspectBarTiles = LoadObjTiles(sMapInspectBarTilesByLanguage[gLanguage], sMapInspectBarTileSizesByLanguage[gLanguage]);
     AnimInit(&sMapInspectCursorAnim, sMapInspectCursorAnimsByLanguage[gLanguage], sMapInspectCursorFramesByLanguage[gLanguage]);
 #else
 #ifdef VERSION_JP
-    sMapInspectBarTiles = LoadObjTiles(gUnk_0999DAEC, 0xA80);
+    sMapInspectBarTiles = LoadObjTiles(gMapInspectBarTiles, 0xA80);
 #else
-    sMapInspectBarTiles = LoadObjTiles(gUnk_0999DAEC, 0xAC0);
+    sMapInspectBarTiles = LoadObjTiles(gMapInspectBarTiles, 0xAC0);
 #endif
-    AnimInit(&sMapInspectCursorAnim, gUnk_09EF981C, gUnk_09EF97EC);
+    AnimInit(&sMapInspectCursorAnim, gMapInspectBarAnims, gMapInspectBarFrames);
 #endif
     AnimStart(&sMapInspectCursorAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectHighlightTiles = LoadObjTiles(gUnk_0999E69E, 0xD60);
-    AnimInit(&sMapInspectHighlightAnim, gUnk_09EF9858, gUnk_09EF9830);
+    sMapInspectHighlightTiles = LoadObjTiles(gMapInspectHighlightTiles, 0xD60);
+    AnimInit(&sMapInspectHighlightAnim, gMapInspectHighlightAnims, gMapInspectHighlightFrames);
     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectBarPalette2 = LoadObjPalette(gUnk_09A3D2DC, 0x20);
+    sMapInspectBarPalette2 = LoadObjPalette(gMapInspectBarPalette, 0x20);
     sMapInspectPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
     AnimInit(&sMapInspectPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMapInspectPremiumAnim, 0, ANIM_FLAG_LOOP);
@@ -1293,7 +1293,7 @@ void mode_mapinspect_1() {
         sMapInspectSteps--;
 
         if (sMapInspectSteps <= 0) {
-            LoadBgMap(0, gUnk_09A3489C, 0x500);
+            LoadBgMap(0, gMapInspectBgHeaderMap, 0x500);
             sMapInspectState = 2;
         }
 

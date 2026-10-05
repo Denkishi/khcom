@@ -111,9 +111,9 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     work->beamLength = 0;
     work->beamScale = 0x133;
     work->extraClipRows = 0;
-    gBosJfMajinMapBlockTable[0] = gUnk_08125E24;
-    gBosJfMajinMapBlockTable[1] = gUnk_08125E24;
-    gBosJfMajinMapBlockTable[2] = gUnk_08125E24;
+    gBosJfMajinMapBlockTable[0] = gDefaultBgMap;
+    gBosJfMajinMapBlockTable[1] = gDefaultBgMap;
+    gBosJfMajinMapBlockTable[2] = gDefaultBgMap;
     gBosJfMajinMapBlockTable[3] = gBosJfMajinMapBuffer;
     RequestDma3Copy(gBosJfMajinFrame8Map, gBosJfMajinMapBuffer, 0x800);
     gBosJfMajinMapBlocks = gBosJfMajinMapBlockTable;
@@ -2069,7 +2069,7 @@ void* gBosJfMajinFrameMaps[48] = {
     gBosJfMajinFrame47Map,
 };
 
-const u16* gUnk_09EF28CC = gUnk_08125E24;
+const u16* gUnk_09EF28CC = gDefaultBgMap;
 
 void* gBosJfMajinFrameTiles[48] = {
     gBosJfMajinFrame0Tiles,

@@ -2378,10 +2378,10 @@ const s32 gMsgwinTextY[4] = {
 };
 
 static const u16* sMsgwinMapBlockPairs[4][2] = {
-    {gUnk_08125E24, gMsgwinTopFaceRightMap},
-    {gUnk_08125E24, gMsgwinBottomFaceRightMap},
-    {gMsgwinTopFaceLeftMap, gUnk_08125E24},
-    {gMsgwinBottomFaceLeftMap, gUnk_08125E24},
+    {gDefaultBgMap, gMsgwinTopFaceRightMap},
+    {gDefaultBgMap, gMsgwinBottomFaceRightMap},
+    {gMsgwinTopFaceLeftMap, gDefaultBgMap},
+    {gMsgwinBottomFaceLeftMap, gDefaultBgMap},
 };
 
 const void* gMsgwinMapBlocks[4] = {
@@ -6154,7 +6154,7 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
 
     LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
     LoadBgPalette(work->bg, gMsgwinPalette, 32);
-    LoadBgMap(work->bg, gUnk_08125E24, 0x800);
+    LoadBgMap(work->bg, gDefaultBgMap, 0x800);
     SetBgPriority(work->bg, 0);
     t = gEventSequenceDefs[work->eventId];
     work->palette = NULL;

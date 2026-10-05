@@ -119,10 +119,10 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
     if (!work->isEventDoor) {
         if (work->requiredValue == 0) {
             work->tiles4 = AllocSpriteFrameTiles(0x80);
-            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[0], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[0], gMapSelectRequirementTiles);
         } else {
             work->tiles4 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[1], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[1], gMapSelectRequirementTiles);
             RequestDma3Copy(work->tiles4->src + (work->requiredValue << 7),
                            (void*)(OBJ_VRAM0 + ((work->tiles4->index + 4) << 5)), 0x80);
             RequestDma3Copy(work->tiles4->src + 0x500,
@@ -238,19 +238,19 @@ u8 MapSelect_1(MapSelectWork* work, void* a) {
         break;
     case LANGUAGE_FRENCH:
         work->tiles3 = LoadObjTiles(gMapSelectTitleFrenchTiles, 0x400);
-        RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_GERMAN:
         work->tiles3 = LoadObjTiles(gMapSelectTitleGermanTiles, 0x400);
-        RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_ITALIAN:
         work->tiles3 = LoadObjTiles(gMapSelectTitleItalianTiles, 0x400);
-        RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_SPANISH:
         work->tiles3 = LoadObjTiles(gMapSelectTitleSpanishTiles, 0x400);
-        RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     }
 #else
@@ -366,16 +366,16 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
             break;
         }
 #endif
@@ -451,16 +451,16 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
             break;
         }
 #endif
@@ -513,16 +513,16 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* a) {
                         case LANGUAGE_ENGLISH:
                             break;
                         case LANGUAGE_FRENCH:
-                            RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         case LANGUAGE_GERMAN:
-                            RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         case LANGUAGE_ITALIAN:
-                            RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         case LANGUAGE_SPANISH:
-                            RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
                             break;
                         }
 #endif
@@ -1563,7 +1563,7 @@ s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work) {
                 gMapCardCounts[i] = count;
             }
 
-            src = &gUnk_09507F38[(count + 1) * 32];
+            src = &gMapSelectCountBlankTiles[(count + 1) * 32];
             base = GetBgCharBase(1);
             base += gMapSelectCountTileIndices[i - a] * 32;
             RequestDma3Copy(src, base, 32);
@@ -1571,7 +1571,7 @@ s32 LoadMapSelectValueCounts(u16 a, MapSelectWork* work) {
         } else {
             base = GetBgCharBase(1);
             base += gMapSelectCountTileIndices[i - a] * 32;
-            RequestDma3Copy(gUnk_09507F58, base, 32);
+            RequestDma3Copy(gMapSelectCountDigitTiles, base, 32);
             work->valueCounts[j] = 0;
         }
     }
@@ -2821,7 +2821,7 @@ void** gMapCardUiSpritesByLanguage[5] = {
 #endif
 
 const void* gMapSelectBgMapBlocks[2] = {
-    gUnk_08125E24, gMapSelectMap,
+    gDefaultBgMap, gMapSelectMap,
 };
 
 s16 gMapSelectValueColumnX[5] = {
@@ -2860,266 +2860,266 @@ MapCardBackDef gMapCardBackDefs[5] = {
 };
 
 MapCardDef gMapCardDefs[260] = {
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 0, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 1, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 2, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 3, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 4, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 5, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 6, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 7, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 8, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 9, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 0, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 1, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 2, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 3, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 4, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 5, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 6, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 7, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 8, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 9, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 0, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 1, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 2, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 3, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 4, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 5, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 6, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 7, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 8, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 9, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 0, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 1, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 2, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 3, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 4, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 5, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 6, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 7, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 8, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 9, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 0, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 1, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 2, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 3, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 4, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 5, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 6, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 7, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 8, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 9, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 0, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 1, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 2, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 3, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 4, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 5, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 6, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 7, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 8, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 9, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 0, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 1, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 2, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 3, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 4, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 5, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 6, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 7, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 8, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 9, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 0, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 1, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 2, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 3, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 4, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 5, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 6, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 7, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 8, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 9, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 0, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 1, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 2, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 3, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 4, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 5, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 6, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 7, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 8, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 9, 2 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 0, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 1, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 2, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 3, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 4, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 5, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 6, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 7, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 8, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 9, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 0, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 1, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 2, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 3, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 4, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 5, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 6, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 7, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 8, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 9, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 0, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 1, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 2, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 3, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 4, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 5, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 6, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 7, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 8, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 9, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 0, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 1, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 2, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 3, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 4, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 5, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 6, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 7, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 8, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 9, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 0, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 1, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 2, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 3, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 4, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 5, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 6, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 7, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 8, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 9, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 0, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 1, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 2, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 3, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 4, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 5, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 6, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 7, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 8, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 9, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 0, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 1, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 2, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 3, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 4, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 5, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 6, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 7, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 8, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 9, 1 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 0, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 1, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 2, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 3, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 4, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 5, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 6, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 7, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 8, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 9, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 0, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 1, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 2, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 3, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 4, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 5, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 6, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 7, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 8, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 9, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 0, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 1, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 2, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 3, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 4, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 5, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 6, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 7, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 8, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 9, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 0, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 1, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 2, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 3, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 4, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 5, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 6, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 7, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 8, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 9, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 0, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 1, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 2, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 3, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 4, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 5, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 6, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 7, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 8, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 9, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 0, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 1, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 2, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 3, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 4, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 5, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 6, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 7, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 8, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 9, 3 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 0, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 1, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 2, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 3, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 4, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 5, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 6, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 7, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 8, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 9, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 0, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 1, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 2, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 3, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 4, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 5, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 6, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 7, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 8, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 9, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 0, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 1, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 2, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 3, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 4, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 5, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 6, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 7, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 8, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 9, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 0, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 1, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 2, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 3, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 4, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 5, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 6, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 7, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 8, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 9, 4 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 0, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 1, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 2, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 3, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 4, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 5, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 6, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 7, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 8, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gTranquilDarknessSmallCardTiles, gTranquilDarknessSmallCardPalette, gTranquilDarknessSmallCardFrames, 512, 32, 256, 2, 1, 9, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 0, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 1, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 2, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 3, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 4, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 5, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 6, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 7, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 8, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gTeemingDarknessSmallCardTiles, gTeemingDarknessSmallCardPalette, gTeemingDarknessSmallCardFrames, 512, 32, 256, 2, 0, 9, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 0, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 1, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 2, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 3, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 4, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 5, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 6, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 7, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 8, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gFeebleDarknessSmallCardTiles, gFeebleDarknessSmallCardPalette, gFeebleDarknessSmallCardFrames, 512, 32, 256, 2, 6, 9, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 0, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 1, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 2, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 3, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 4, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 5, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 6, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 7, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 8, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gAlmightyDarknessSmallCardTiles, gAlmightyDarknessSmallCardPalette, gAlmightyDarknessSmallCardFrames, 512, 32, 256, 2, 7, 9, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 0, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 1, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 2, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 3, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 4, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 5, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 6, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 7, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 8, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gSleepingDarknessSmallCardTiles, gSleepingDarknessSmallCardPalette, gSleepingDarknessSmallCardFrames, 512, 32, 256, 2, 4, 9, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 0, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 1, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 2, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 3, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 4, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 5, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 6, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 7, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 8, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gLoomingDarknessSmallCardTiles, gLoomingDarknessSmallCardPalette, gLoomingDarknessSmallCardFrames, 512, 32, 256, 2, 3, 9, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 0, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 1, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 2, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 3, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 4, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 5, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 6, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 7, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 8, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gPremiumRoomSmallCardTiles, gPremiumRoomSmallCardPalette, gPremiumRoomSmallCardFrames, 512, 32, 256, 2, 19, 9, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 0, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 1, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 2, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 3, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 4, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 5, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 6, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 7, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 8, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gWhiteRoomSmallCardTiles, gWhiteRoomSmallCardPalette, gWhiteRoomSmallCardFrames, 512, 32, 256, 2, 20, 9, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 0, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 1, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 2, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 3, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 4, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 5, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 6, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 7, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 8, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gBlackRoomSmallCardTiles, gBlackRoomSmallCardPalette, gBlackRoomSmallCardFrames, 512, 32, 256, 2, 21, 9, 2 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 0, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 1, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 2, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 3, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 4, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 5, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 6, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 7, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 8, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gMartialWakingSmallCardTiles, gMartialWakingSmallCardPalette, gMartialWakingSmallCardFrames, 512, 32, 256, 1, 12, 9, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 0, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 1, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 2, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 3, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 4, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 5, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 6, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 7, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 8, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gSorcerousWakingSmallCardTiles, gSorcerousWakingSmallCardPalette, gSorcerousWakingSmallCardFrames, 512, 32, 256, 1, 11, 9, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 0, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 1, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 2, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 3, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 4, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 5, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 6, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 7, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 8, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gAlchemicWakingSmallCardTiles, gAlchemicWakingSmallCardPalette, gAlchemicWakingSmallCardFrames, 512, 32, 256, 1, 13, 9, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 0, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 1, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 2, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 3, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 4, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 5, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 6, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 7, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 8, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gMeetingGroundSmallCardTiles, gMeetingGroundSmallCardPalette, gMeetingGroundSmallCardFrames, 512, 32, 256, 1, 14, 9, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 0, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 1, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 2, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 3, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 4, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 5, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 6, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 7, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 8, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gStagnantSpaceSmallCardTiles, gStagnantSpaceSmallCardPalette, gStagnantSpaceSmallCardFrames, 512, 32, 256, 1, 18, 9, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 0, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 1, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 2, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 3, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 4, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 5, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 6, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 7, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 8, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gStrongInitiativeSmallCardTiles, gStrongInitiativeSmallCardPalette, gStrongInitiativeSmallCardFrames, 512, 32, 256, 1, 16, 9, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 0, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 1, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 2, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 3, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 4, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 5, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 6, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 7, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 8, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gLastingDazeSmallCardTiles, gLastingDazeSmallCardPalette, gLastingDazeSmallCardFrames, 512, 32, 256, 1, 17, 9, 1 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 0, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 1, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 2, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 3, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 4, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 5, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 6, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 7, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 8, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gCalmBountySmallCardTiles, gCalmBountySmallCardPalette, gCalmBountySmallCardFrames, 512, 32, 256, 3, 8, 9, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 0, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 1, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 2, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 3, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 4, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 5, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 6, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 7, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 8, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gGuardedTroveSmallCardTiles, gGuardedTroveSmallCardPalette, gGuardedTroveSmallCardFrames, 512, 32, 256, 3, 2, 9, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 0, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 1, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 2, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 3, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 4, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 5, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 6, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 7, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 8, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gFalseBountySmallCardTiles, gFalseBountySmallCardPalette, gFalseBountySmallCardFrames, 512, 32, 256, 3, 9, 9, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 0, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 1, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 2, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 3, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 4, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 5, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 6, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 7, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 8, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gMomentsReprieveSmallCardTiles, gMomentsReprieveSmallCardPalette, gMomentsReprieveSmallCardFrames, 512, 32, 256, 3, 5, 9, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 0, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 1, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 2, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 3, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 4, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 5, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 6, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 7, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 8, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gMinglingWorldsSmallCardTiles, gMinglingWorldsSmallCardPalette, gMinglingWorldsSmallCardFrames, 512, 32, 256, 3, 15, 9, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 0, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 1, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 2, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 3, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 4, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 5, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 6, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 7, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 8, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gMoogleRoomSmallCardTiles, gMoogleRoomSmallCardPalette, gMoogleRoomSmallCardFrames, 512, 32, 256, 3, 10, 9, 3 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 0, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 1, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 2, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 3, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 4, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 5, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 6, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 7, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 8, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gKeyOfBeginningsSmallCardTiles, gKeyOfBeginningsSmallCardPalette, gKeyOfBeginningsSmallCardFrames, 512, 32, 256, 4, 22, 9, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 0, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 1, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 2, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 3, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 4, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 5, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 6, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 7, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 8, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gKeyOfGuidanceSmallCardTiles, gKeyOfGuidanceSmallCardPalette, gKeyOfGuidanceSmallCardFrames, 512, 32, 256, 4, 23, 9, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 0, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 1, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 2, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 3, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 4, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 5, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 6, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 7, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 8, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gKeyToTruthSmallCardTiles, gKeyToTruthSmallCardPalette, gKeyToTruthSmallCardFrames, 512, 32, 256, 4, 24, 9, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 0, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 1, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 2, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 3, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 4, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 5, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 6, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 7, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 8, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gKeyToRewardsSmallCardTiles, gKeyToRewardsSmallCardPalette, gKeyToRewardsSmallCardFrames, 512, 32, 256, 4, 25, 9, 4 },
 };
 
 s16 gMapcardSlotX[6] = {

@@ -259,7 +259,7 @@ void MapEnmSpawnFixed(MapEnmArgs* w, u8 a, u8 b) {
     const MapEnmDef* d;
     u8 ok;
 
-    t = gUnk_0984D134[gMapRoomState->roomType];
+    t = gMapRoomShapes[gMapRoomState->roomType];
     e = GetMapFloorRoom(gMapFloorState.room);
 
     if (sMapEnmCount >= t[1]) {
@@ -357,7 +357,7 @@ void MapEnmUpdateAnim(MapEnmWork* work) {
 }
 
 u8 GetRandomBattleId() {
-    const u8* q = gUnk_0984D134[gMapRoomState->roomType];
+    const u8* q = gMapRoomShapes[gMapRoomState->roomType];
     u8 v = q[3] + GetRandom() % (q[4] - q[3] + 1);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -535,7 +535,7 @@ void MapEnmUpdateSpawner() {
     const MapEnmDef* d;
     MapEnmArgs w;
 
-    t = gUnk_0984D134[gMapRoomState->roomType];
+    t = gMapRoomShapes[gMapRoomState->roomType];
     gFieldState->flags &= ~FIELD_FLAG_ENEMY_FRAME_CHANGED;
 
     if (sMapEnmSpawnTimer != 0) {
@@ -3530,15 +3530,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_ENGLISH:
         if (b) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnk_09963D64[c];
+                src = gSaveSlotRikuFloorSelectedTiles[c];
             } else {
                 src = gUnkEu_09955250[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnk_09964EE4[c];
+                src = gSaveSlotRikuFloorTiles[c];
             } else {
-                src = gUnk_09962BE4[c];
+                src = gSaveSlotSoraFloorTiles[c];
             }
         }
 
@@ -3546,15 +3546,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_FRENCH:
         if (b) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_0995BB50[c];
+                src = gSaveSlotRikuFloorSelectedFrenchTiles[c];
             } else {
-                src = gUnkEu_09959850[c];
+                src = gSaveSlotSoraFloorSelectedFrenchTiles[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_0995CCD0[c];
+                src = gSaveSlotRikuFloorFrenchTiles[c];
             } else {
-                src = gUnkEu_0995A9D0[c];
+                src = gSaveSlotSoraFloorFrenchTiles[c];
             }
         }
 
@@ -3562,15 +3562,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_SPANISH:
         if (b) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_09960150[c];
+                src = gSaveSlotRikuFloorSelectedSpanishTiles[c];
             } else {
-                src = gUnkEu_0995DE50[c];
+                src = gSaveSlotSoraFloorSelectedSpanishTiles[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_099612D0[c];
+                src = gSaveSlotRikuFloorSpanishTiles[c];
             } else {
-                src = gUnkEu_0995EFD0[c];
+                src = gSaveSlotSoraFloorSpanishTiles[c];
             }
         }
 
@@ -3578,15 +3578,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_ITALIAN:
         if (b) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_09964750[c];
+                src = gSaveSlotRikuFloorSelectedItalianTiles[c];
             } else {
-                src = gUnkEu_09962450[c];
+                src = gSaveSlotSoraFloorSelectedItalianTiles[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_099658D0[c];
+                src = gSaveSlotRikuFloorItalianTiles[c];
             } else {
-                src = gUnkEu_099635D0[c];
+                src = gSaveSlotSoraFloorItalianTiles[c];
             }
         }
 
@@ -3595,15 +3595,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     default:
         if (b) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_09968D50[c];
+                src = gSaveSlotRikuFloorSelectedGermanTiles[c];
             } else {
-                src = gUnkEu_09966A50[c];
+                src = gSaveSlotSoraFloorSelectedGermanTiles[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                src = gUnkEu_09969ED0[c];
+                src = gSaveSlotRikuFloorGermanTiles[c];
             } else {
-                src = gUnkEu_09967BD0[c];
+                src = gSaveSlotSoraFloorGermanTiles[c];
             }
         }
 
@@ -3612,15 +3612,15 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
 #else
     if (b) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnk_09963D64[c];
+            src = gSaveSlotRikuFloorSelectedTiles[c];
         } else {
             src = gUnk_09961A64[c];
         }
     } else {
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnk_09964EE4[c];
+            src = gSaveSlotRikuFloorTiles[c];
         } else {
-            src = gUnk_09962BE4[c];
+            src = gSaveSlotSoraFloorTiles[c];
         }
     }
 #endif
@@ -3643,7 +3643,7 @@ void NewGameSlotMenuLoadLevelTiles(u8 a, u16 v) {
     q = &d[1];
 
     while (i <= 2) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
         q++;
         i++;
     }
@@ -3672,7 +3672,7 @@ void NewGameSlotMenuLoadTimeTiles(u8 a, u32 b) {
     q = &d[0];
 
     while (i <= 5) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
         q++;
         i++;
     }
@@ -3713,17 +3713,17 @@ void NewGameSlotMenuSelectSlot(u8 a) {
 
     if (sNewGameSlotMenuWork->selectedSlot == 0) {
         if (sNewGameSlotMenuWork->isRiku != 0) {
-            LoadBgMap(1, &gUnk_0998CF44[0xC00], 0x800);
+            LoadBgMap(1, &gMenuNewMaps[0xC00], 0x800);
         } else {
-            LoadBgMap(1, &gUnk_0998CF44[0x400], 0x800);
+            LoadBgMap(1, &gMenuNewMaps[0x400], 0x800);
         }
 
         SetBgScroll(1, 0, (u16)-9);
     } else {
         if (sNewGameSlotMenuWork->isRiku != 0) {
-            LoadBgMap(1, &gUnk_0998CF44[0x1000], 0x800);
+            LoadBgMap(1, &gMenuNewMaps[0x1000], 0x800);
         } else {
-            LoadBgMap(1, &gUnk_0998CF44[0x800], 0x800);
+            LoadBgMap(1, &gMenuNewMaps[0x800], 0x800);
         }
 
         SetBgScroll(1, 0, (u16)-6);
@@ -3747,9 +3747,9 @@ void NewGameSlotMenuDraw() {
     s32 t;
     s32 u;
 
-    DrawSprite(128, sNewGameSlotMenuWork->y >> 8, gUnk_09EF8D68[1], sNewGameSlotMenuWork->tiles2,
+    DrawSprite(128, sNewGameSlotMenuWork->y >> 8, gMenuLoadTitleFrames[1], sNewGameSlotMenuWork->tiles2,
         sNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(128, sNewGameSlotMenuWork->y2 >> 8, gUnk_09EF8D68[2], sNewGameSlotMenuWork->tiles2,
+    DrawSprite(128, sNewGameSlotMenuWork->y2 >> 8, gMenuLoadTitleFrames[2], sNewGameSlotMenuWork->tiles2,
         sNewGameSlotMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
 
     if (sNewGameSlotMenuWork->isRiku == 0) {
@@ -3764,7 +3764,7 @@ void NewGameSlotMenuDraw() {
             SPRITE_PRIORITY(1), 81);
     }
 
-    DrawSprite(0, 16, gMapUiSprite_098A8F28, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(0, 16, gSaveSlotCharaWinFrame0, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
     t = 45;
     u = sNewGameSlotMenuWork->selectedSlot * t;
     ApproachValueHalf(&sNewGameSlotMenuWork->y3, (sNewGameSlotMenuWork->slotBaseY + u) << 8);
@@ -3884,39 +3884,39 @@ void Mode_MenuNew_0() {
     SetBgPriority(1, 0);
     SetBgPriority(0, 0);
 #ifdef VERSION_EU
-    LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
+    LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy((void*)gUnkEu_0996D130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy((void*)gUnkEu_0996D930, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy((void*)gUnkEu_0996E130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy((void*)gUnkEu_0996E930, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
         break;
     }
 
-    LoadBgPalette(3, gUnk_09991D44, 0x200);
-    LoadBgMap(3, gUnk_0998CF44, 0x800);
-    LoadBgPalette(1, gUnk_09991D44, 0x200);
+    LoadBgPalette(3, gMenuNewBgPalette, 0x200);
+    LoadBgMap(3, gMenuNewMaps, 0x800);
+    LoadBgPalette(1, gMenuNewBgPalette, 0x200);
 #else
-    LoadBgTiles(3, gUnk_099661A4, 0x1FA0);
-    LoadBgPalette(3, gUnk_09991D44, 0x200);
-    LoadBgMap(3, gUnk_0998CF44, 0x800);
-    LoadBgTiles(1, gUnk_099661A4, 0x1FA0);
-    LoadBgPalette(1, gUnk_09991D44, 0x200);
-    LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
+    LoadBgTiles(3, gSaveSlotBgTiles, 0x1FA0);
+    LoadBgPalette(3, gMenuNewBgPalette, 0x200);
+    LoadBgMap(3, gMenuNewMaps, 0x800);
+    LoadBgTiles(1, gSaveSlotBgTiles, 0x1FA0);
+    LoadBgPalette(1, gMenuNewBgPalette, 0x200);
+    LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
 #endif
-    LoadBgPalette(0, gUnk_09991D44, 0x200);
-    LoadBgMap(0, gUnk_0998F744, 0x800);
+    LoadBgPalette(0, gMenuNewBgPalette, 0x200);
+    LoadBgMap(0, gMenuNewMsgWinMap, 0x800);
     SetBgScroll(0, 0, 0xFFFC);
     sNewGameSlotMenuWork->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
-    sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
+    sNewGameSlotMenuWork->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
     sNewGameSlotMenuWork->y = -0x800;
     sNewGameSlotMenuWork->y2 = 0xA000;
     sNewGameSlotMenuWork->tiles4 = AllocObjTiles(0x340, gSor1ff00Tiles);
@@ -3928,10 +3928,10 @@ void Mode_MenuNew_0() {
     sNewGameSlotMenuWork->tiles7 = AllocObjTiles(0x400, gRikuFf00Tiles);
     sNewGameSlotMenuWork->palette7 = LoadObjPalette(gRikuPalette, 32);
     sNewGameSlotMenuWork->palette3 = LoadObjPalette(gFileMenuWindowPalette, 32);
-    sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gUnk_098A8F8A, 0x4C0);
+    sNewGameSlotMenuWork->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
     sNewGameSlotMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, 32);
-    sNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
-    AnimInit(&sNewGameSlotMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
+    sNewGameSlotMenuWork->tiles = AllocObjTiles(0x120, gSaveSlotCursorTiles);
+    AnimInit(&sNewGameSlotMenuWork->anim, gSaveSlotCursorAnims, gSaveSlotCursorFrames);
     AnimStart(&sNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
     sNewGameSlotMenuWork->palette8 = LoadObjPalette(gSaveFloorSoraPalette, 32);
     sNewGameSlotMenuWork->textSlotCount = 0;
@@ -4040,13 +4040,13 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
             if (b) {
                 src = gUnkEu_09955250[c];
             } else {
-                src = gUnk_09962BE4[c];
+                src = gSaveSlotSoraFloorTiles[c];
             }
         } else {
             if (b) {
-                src = gUnk_09963D64[c];
+                src = gSaveSlotRikuFloorSelectedTiles[c];
             } else {
-                src = gUnk_09964EE4[c];
+                src = gSaveSlotRikuFloorTiles[c];
             }
         }
 
@@ -4054,15 +4054,15 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_FRENCH:
         if (a <= 1) {
             if (b) {
-                src = gUnkEu_09959850[c];
+                src = gSaveSlotSoraFloorSelectedFrenchTiles[c];
             } else {
-                src = gUnkEu_0995A9D0[c];
+                src = gSaveSlotSoraFloorFrenchTiles[c];
             }
         } else {
             if (b) {
-                src = gUnkEu_0995BB50[c];
+                src = gSaveSlotRikuFloorSelectedFrenchTiles[c];
             } else {
-                src = gUnkEu_0995CCD0[c];
+                src = gSaveSlotRikuFloorFrenchTiles[c];
             }
         }
 
@@ -4070,15 +4070,15 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_SPANISH:
         if (a <= 1) {
             if (b) {
-                src = gUnkEu_0995DE50[c];
+                src = gSaveSlotSoraFloorSelectedSpanishTiles[c];
             } else {
-                src = gUnkEu_0995EFD0[c];
+                src = gSaveSlotSoraFloorSpanishTiles[c];
             }
         } else {
             if (b) {
-                src = gUnkEu_09960150[c];
+                src = gSaveSlotRikuFloorSelectedSpanishTiles[c];
             } else {
-                src = gUnkEu_099612D0[c];
+                src = gSaveSlotRikuFloorSpanishTiles[c];
             }
         }
 
@@ -4086,15 +4086,15 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_ITALIAN:
         if (a <= 1) {
             if (b) {
-                src = gUnkEu_09962450[c];
+                src = gSaveSlotSoraFloorSelectedItalianTiles[c];
             } else {
-                src = gUnkEu_099635D0[c];
+                src = gSaveSlotSoraFloorItalianTiles[c];
             }
         } else {
             if (b) {
-                src = gUnkEu_09964750[c];
+                src = gSaveSlotRikuFloorSelectedItalianTiles[c];
             } else {
-                src = gUnkEu_099658D0[c];
+                src = gSaveSlotRikuFloorItalianTiles[c];
             }
         }
 
@@ -4103,15 +4103,15 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     default:
         if (a <= 1) {
             if (b) {
-                src = gUnkEu_09966A50[c];
+                src = gSaveSlotSoraFloorSelectedGermanTiles[c];
             } else {
-                src = gUnkEu_09967BD0[c];
+                src = gSaveSlotSoraFloorGermanTiles[c];
             }
         } else {
             if (b) {
-                src = gUnkEu_09968D50[c];
+                src = gSaveSlotRikuFloorSelectedGermanTiles[c];
             } else {
-                src = gUnkEu_09969ED0[c];
+                src = gSaveSlotRikuFloorGermanTiles[c];
             }
         }
 
@@ -4122,13 +4122,13 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         if (b) {
             src = gUnk_09961A64[c];
         } else {
-            src = gUnk_09962BE4[c];
+            src = gSaveSlotSoraFloorTiles[c];
         }
     } else {
         if (b) {
-            src = gUnk_09963D64[c];
+            src = gSaveSlotRikuFloorSelectedTiles[c];
         } else {
-            src = gUnk_09964EE4[c];
+            src = gSaveSlotRikuFloorTiles[c];
         }
     }
 #endif
@@ -4150,7 +4150,7 @@ void LoadGameMenuLoadLevelTiles(u8 a, u16 v) {
     q = &d[1];
 
     while (i <= 2) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
         q++;
         i++;
     }
@@ -4178,7 +4178,7 @@ void LoadGameMenuLoadTimeTiles(u8 a, u32 v) {
     q = d;
 
     while (i <= 5) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(1) + off + i * 32, 0x20);
         q++;
         i++;
     }
@@ -4233,53 +4233,53 @@ void LoadGameMenuDraw() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleFrames[1], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleFrames[2], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], sLoadGameMenuWork->tiles2,
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleFrames[0], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_FRENCH:
-        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843D8[1], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleFrenchFrames[1], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843D8[2], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleFrenchFrames[2], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843D8[0], sLoadGameMenuWork->tiles2,
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleFrenchFrames[0], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_SPANISH:
-        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843E8[1], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleSpanishFrames[1], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843E8[2], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleSpanishFrames[2], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843E8[0], sLoadGameMenuWork->tiles2,
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleSpanishFrames[0], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_ITALIAN:
-        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F843F8[1], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleItalianFrames[1], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F843F8[2], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleItalianFrames[2], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F843F8[0], sLoadGameMenuWork->tiles2,
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleItalianFrames[0], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     case LANGUAGE_GERMAN:
     default:
-        DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnkEu_09F84408[1], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleGermanFrames[1], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnkEu_09F84408[2], sLoadGameMenuWork->tiles2,
+        DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleGermanFrames[2], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnkEu_09F84408[0], sLoadGameMenuWork->tiles2,
+        DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleGermanFrames[0], sLoadGameMenuWork->tiles2,
             sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
         break;
     }
 #else
-    DrawSprite(128, sLoadGameMenuWork->y >> 8, gUnk_09EF8D68[1], sLoadGameMenuWork->tiles2,
+    DrawSprite(128, sLoadGameMenuWork->y >> 8, gMenuLoadTitleFrames[1], sLoadGameMenuWork->tiles2,
         sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gUnk_09EF8D68[2], sLoadGameMenuWork->tiles2,
+    DrawSprite(128, sLoadGameMenuWork->y2 >> 8, gMenuLoadTitleFrames[2], sLoadGameMenuWork->tiles2,
         sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 90);
-    DrawSprite(sLoadGameMenuWork->x >> 8, 0, gUnk_09EF8D68[0], sLoadGameMenuWork->tiles2,
+    DrawSprite(sLoadGameMenuWork->x >> 8, 0, gMenuLoadTitleFrames[0], sLoadGameMenuWork->tiles2,
         sLoadGameMenuWork->palette2, NULL, SPRITE_PRIORITY(3), 80);
 #endif
 
@@ -4329,30 +4329,30 @@ void LoadGameMenuMoveCursor(LoadGameMenuWork* work) {
         switch (work->selectedSlot) {
         case 0:
             if (work->showRikuSlots != 0) {
-                LoadBgMap(1, gUnk_09988F44, 0x800);
+                LoadBgMap(1, gMenuLoadFourSlotMaps, 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
-                LoadBgMap(1, gUnk_09987F44, 0x800);
+                LoadBgMap(1, gMenuLoadTwoSlotMaps, 0x800);
                 SetBgScroll(1, 0, (u16)-3);
             }
 
             break;
         case 1:
             if (work->showRikuSlots != 0) {
-                LoadBgMap(1, &gUnk_09988F44[0x400], 0x800);
+                LoadBgMap(1, &gMenuLoadFourSlotMaps[0x400], 0x800);
                 SetBgScroll(1, 0, (u16)-1);
             } else {
-                LoadBgMap(1, &gUnk_09987F44[0x400], 0x800);
+                LoadBgMap(1, &gMenuLoadTwoSlotMaps[0x400], 0x800);
                 SetBgScroll(1, 0, 0);
             }
 
             break;
         case 2:
-            LoadBgMap(1, &gUnk_09988F44[0x800], 0x800);
+            LoadBgMap(1, &gMenuLoadFourSlotMaps[0x800], 0x800);
             SetBgScroll(1, 0, (u16)-1);
             break;
         case 3:
-            LoadBgMap(1, &gUnk_09988F44[0xC00], 0x800);
+            LoadBgMap(1, &gMenuLoadFourSlotMaps[0xC00], 0x800);
             SetBgScroll(1, 0, (u16)-1);
             break;
         }
@@ -4501,43 +4501,43 @@ void Mode_MenuLoad_0(s32 arg) {
     SetupBg(1, 0, 30, 0);
     SetupBg(0, 3, 31, 0);
 #ifdef VERSION_EU
-    LoadBgTiles(1, gUnk_09959A64, 0x8000);
+    LoadBgTiles(1, gMenuLoadBgTiles, 0x8000);
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
         RequestDma3Copy(gUnk_09961A64, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy((void*)gUnkEu_09953BF0, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy((void*)gMenuLoadLabelsSpanishTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy((void*)gUnkEu_099543F0, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy((void*)gMenuLoadLabelsItalianTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy((void*)gUnkEu_09954BF0, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy((void*)gMenuLoadLabelsGermanTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     }
 
     LoadBgPalette(3, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(3, gUnk_09986F44, 0x800);
+    LoadBgMap(3, gMenuLoadBackdropMap, 0x800);
     LoadBgPalette(2, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(2, gUnk_09987744, 0x800);
+    LoadBgMap(2, gMenuLoadCharaWinMap, 0x800);
 #else
-    LoadBgTiles(3, gUnk_09959A64, 0x8000);
+    LoadBgTiles(3, gMenuLoadBgTiles, 0x8000);
     LoadBgPalette(3, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(3, gUnk_09986F44, 0x800);
-    LoadBgTiles(2, gUnk_09959A64, 0x8000);
+    LoadBgMap(3, gMenuLoadBackdropMap, 0x800);
+    LoadBgTiles(2, gMenuLoadBgTiles, 0x8000);
     LoadBgPalette(2, gLoadMenuBgPalettes, 0x200);
-    LoadBgMap(2, gUnk_09987744, 0x800);
-    LoadBgTiles(1, gUnk_09959A64, 0x8000);
+    LoadBgMap(2, gMenuLoadCharaWinMap, 0x800);
+    LoadBgTiles(1, gMenuLoadBgTiles, 0x8000);
 #endif
     LoadBgPalette(1, gLoadMenuBgPalettes, 0x200);
 
     if (sLoadGameMenuWork->showRikuSlots != 0) {
-        LoadBgMap(1, gUnk_09988F44, 0x800);
+        LoadBgMap(1, gMenuLoadFourSlotMaps, 0x800);
         SetBgScroll(1, 0, 0xFFFF);
     } else {
-        LoadBgMap(1, gUnk_09987F44, 0x800);
+        LoadBgMap(1, gMenuLoadTwoSlotMaps, 0x800);
         SetBgScroll(1, 0, 0xFFFD);
     }
 
@@ -4546,24 +4546,24 @@ void Mode_MenuLoad_0(s32 arg) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, 0x2C0);
         break;
     case LANGUAGE_FRENCH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988519C, 0x300);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleFrenchTiles, 0x300);
         break;
     case LANGUAGE_SPANISH:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_0988551E, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleSpanishTiles, 0x2C0);
         break;
     case LANGUAGE_ITALIAN:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885862, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleItalianTiles, 0x2C0);
         break;
     case LANGUAGE_GERMAN:
     default:
-        sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnkEu_09885BA6, 0x2C0);
+        sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleGermanTiles, 0x2C0);
         break;
     }
 #else
-    sLoadGameMenuWork->tiles2 = LoadObjTiles(gUnk_098A87AA, 0x2C0);
+    sLoadGameMenuWork->tiles2 = LoadObjTiles(gMenuLoadTitleTiles, 0x2C0);
 #endif
     sLoadGameMenuWork->y = -0x800;
     sLoadGameMenuWork->y2 = 0xA000;
@@ -4577,8 +4577,8 @@ void Mode_MenuLoad_0(s32 arg) {
     sLoadGameMenuWork->tiles6 = AllocObjTiles(0x400, gRikuFf00Tiles);
     sLoadGameMenuWork->palette6 = LoadObjPalette(gRikuPalette, 32);
     sLoadGameMenuWork->palette = LoadObjPalette(gFileMenuCursorPalette, 32);
-    sLoadGameMenuWork->tiles = AllocObjTiles(0x120, gUnk_098A8AE2);
-    AnimInit(&sLoadGameMenuWork->anim, gUnk_09EF8D88, gUnk_09EF8D78);
+    sLoadGameMenuWork->tiles = AllocObjTiles(0x120, gSaveSlotCursorTiles);
+    AnimInit(&sLoadGameMenuWork->anim, gSaveSlotCursorAnims, gSaveSlotCursorFrames);
     AnimStart(&sLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
     sLoadGameMenuWork->palette7 = LoadObjPalette(gSaveFloorSoraPalette, 32);
     sLoadGameMenuWork->textSlotCount = 0;
@@ -5008,7 +5008,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
 
     switch (p->side) {
     case 0:
-        work->sprite = gMapUiSprite_098A94A0;
+        work->sprite = gMapDoorSide0Frame0;
         work->openSrc = q->side0Open;
         work->closedSrc = q->side0Closed;
         e->angle = 173;
@@ -5016,7 +5016,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 10;
         break;
     case 1:
-        work->sprite = gMapUiSprite_098A94B4;
+        work->sprite = gMapDoorSide1Frame0;
         work->openSrc = q->side1Open;
         work->closedSrc = q->side1Closed;
         e->angle = 45;
@@ -5024,7 +5024,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 2:
-        work->sprite = gMapUiSprite_098A94C8;
+        work->sprite = gMapDoorSide2Frame0;
         work->openSrc = q->side2Open;
         work->closedSrc = q->side2Closed;
         e->angle = 211;
@@ -5032,7 +5032,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 3:
-        work->sprite = gMapUiSprite_098A948C;
+        work->sprite = gMapDoorSide3Frame0;
         work->openSrc = q->side3Open;
         work->closedSrc = q->side3Closed;
         e->angle = 83;
@@ -5056,13 +5056,13 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
     switch (p->side) {
     case 0:
     case 1:
-        work->sprite2 = gMapUiSprite_098A94DC;
+        work->sprite2 = gMapDoorEmblemSide01Frame0;
         work->openSrc2 = gMapDoorEmblemTiles[0][1];
         work->closedSrc2 = gMapDoorEmblemTiles[1][1];
         break;
     case 2:
     case 3:
-        work->sprite2 = gMapUiSprite_098A94FC;
+        work->sprite2 = gMapDoorEmblemSide23Frame0;
         work->openSrc2 = gMapDoorEmblemTiles[0][0];
         work->closedSrc2 = gMapDoorEmblemTiles[1][0];
         break;
@@ -5186,7 +5186,7 @@ void MapMenuWriteDigits3(ObjTiles* p, u8 a, u16 v) {
     d[2] = v - d[0] * 100 - d[1] * 10;
 
     for (i = 0, q = d; i < 3; i++) {
-        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
+        RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
         q++;
     }
 }
@@ -5203,7 +5203,7 @@ void MapMenuWriteDigits5(ObjTiles* p, u8 a, u32 v) {
     d[4] = v - d[0] * 10000 - d[1] * 1000 - d[2] * 100 - d[3] * 10;
 
     for (i = 0, q = d; i < 5; i++) {
-        RequestDma3Copy((void*)&gUnk_099581A4[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
+        RequestDma3Copy((void*)&gMapMenuDigitTiles[*q * 32], (void*)(OBJ_VRAM0 + (p->index + a + i) * 32), 0x20);
         q++;
     }
 }
@@ -5256,7 +5256,7 @@ void MapMenuFreeConfirm(MapMenuWork* work) {
 
 s32 MapMenuOpen(MapMenuWork* work) {
     work->palette2 = LoadObjPalette(gMapMenuBarPalette, 32);
-    work->tiles2 = LoadObjTiles(gUnk_09958124, 0x80);
+    work->tiles2 = LoadObjTiles(gMapMenuBarsTiles, 0x80);
     work->y = -0x800;
     work->y2 = 0xA000;
 
@@ -5301,24 +5301,24 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles5 = LoadObjTiles(gUnk_09954B64, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
             break;
         case LANGUAGE_FRENCH:
             work->tiles5 = LoadObjTiles(gUnk_09956724, 0x1BC0);
             break;
         case LANGUAGE_SPANISH:
-            work->tiles5 = LoadObjTiles(gUnkEu_09938170, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusSpanishTiles, 0x1BC0);
             break;
         case LANGUAGE_ITALIAN:
-            work->tiles5 = LoadObjTiles(gUnkEu_09939D30, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusItalianTiles, 0x1BC0);
             break;
         case LANGUAGE_GERMAN:
         default:
-            work->tiles5 = LoadObjTiles(gUnkEu_0993B8F0, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusGermanTiles, 0x1BC0);
             break;
         }
 #else
-        work->tiles5 = LoadObjTiles(gUnk_09954B64, 0x1BC0);
+        work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
 #endif
         work->palette3 = LoadObjPalette(gMapMenuStatusPalette, 32);
         work->x3 = 0x11800;
@@ -5341,7 +5341,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gUnk_099582E4, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
             } else {
                 work->tiles6 = LoadObjTiles(gUnkEu_0993D4B0, 0x1500);
             }
@@ -5349,41 +5349,41 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
             break;
         case LANGUAGE_FRENCH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gUnkEu_099452B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsFrenchTiles, 0x1500);
             } else {
-                work->tiles6 = LoadObjTiles(gUnkEu_0993E9B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsFrenchTiles, 0x1500);
             }
 
             break;
         case LANGUAGE_SPANISH:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gUnkEu_099467B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsSpanishTiles, 0x1500);
             } else {
-                work->tiles6 = LoadObjTiles(gUnkEu_0993FEB0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsSpanishTiles, 0x1500);
             }
 
             break;
         case LANGUAGE_ITALIAN:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gUnkEu_09947CB0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsItalianTiles, 0x1500);
             } else {
-                work->tiles6 = LoadObjTiles(gUnkEu_099413B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsItalianTiles, 0x1500);
             }
 
             break;
         case LANGUAGE_GERMAN:
         default:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                work->tiles6 = LoadObjTiles(gUnkEu_099491B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsGermanTiles, 0x1500);
             } else {
-                work->tiles6 = LoadObjTiles(gUnkEu_099428B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsGermanTiles, 0x1500);
             }
 
             break;
         }
 #else
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            work->tiles6 = LoadObjTiles(gUnk_099582E4, 0x1500);
+            work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
         } else {
             work->tiles6 = LoadObjTiles(gUnk_09956724, 0x1500);
         }
@@ -5391,8 +5391,8 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 
         work->x6 = -0x7800;
         work->palette = LoadObjPalette(gMapMenuCursorPalette, 32);
-        work->tiles = AllocObjTiles(0x120, gUnk_098A8628);
-        AnimInit(&work->anim, gUnk_09EF8D58, gUnk_09EF8D48);
+        work->tiles = AllocObjTiles(0x120, gMapMenuCursorTiles);
+        AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
 
         for (i = 0; i < 3; i++) {
@@ -5409,27 +5409,27 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles3 = LoadObjTiles(gUnk_09957F24, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
             break;
         case LANGUAGE_FRENCH:
-            work->tiles3 = LoadObjTiles(gUnk_09957F24, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
             break;
         case LANGUAGE_SPANISH:
-            work->tiles3 = LoadObjTiles(gUnkEu_0994A8B0, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleSpanishTiles, 0x200);
             break;
         case LANGUAGE_ITALIAN:
-            work->tiles3 = LoadObjTiles(gUnk_09957F24, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
             break;
         case LANGUAGE_GERMAN:
         default:
-            work->tiles3 = LoadObjTiles(gUnkEu_0994AAB0, 0x200);
+            work->tiles3 = LoadObjTiles(gMapMenuTitleGermanTiles, 0x200);
             break;
         }
 #else
-        work->tiles3 = LoadObjTiles(gUnk_09957F24, 0x200);
+        work->tiles3 = LoadObjTiles(gMapMenuTitleTiles, 0x200);
 #endif
         work->x = -0x8000;
-        work->tiles4 = LoadObjTiles(gUnk_09957C24, 0x300);
+        work->tiles4 = LoadObjTiles(gMapMenuCharaWinTiles, 0x300);
         work->x2 = 0xF800;
         MapMenuSetPanelPalettesExcluded(work, 1);
         work->panelsVisible = 1;
@@ -5730,8 +5730,8 @@ void Task_MapMenu_2(MapMenuWork* work) {
     s32 i;
     s32 k;
 
-    DrawSprite(128, work->y >> 8, gUnk_09EF8E74[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-    DrawSprite(128, work->y2 >> 8, gUnk_09EF8E74[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, work->y >> 8, gMapMenuBarsFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, work->y2 >> 8, gMapMenuBarsFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
 
     if (
 #ifdef VERSION_EU
@@ -5754,62 +5754,62 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_SPANISH:
-            DrawSprite(work->x >> 8, 0, gUnkEu_09F84720[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x >> 8, 0, gMapMenuTitleSpanishFrames[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
             break;
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
         case LANGUAGE_ITALIAN:
-            DrawSprite(work->x >> 8, 0, gUnk_09EF8E6C[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x >> 8, 0, gMapMenuTitleFrames[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
             break;
         case LANGUAGE_GERMAN:
         default:
-            DrawSprite(work->x >> 8, 0, gUnkEu_09F84728[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x >> 8, 0, gMapMenuTitleGermanFrames[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
             break;
         }
 #else
-        DrawSprite(work->x >> 8, 0, gUnk_09EF8E6C[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(work->x >> 8, 0, gMapMenuTitleFrames[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
 #endif
-        DrawSprite(work->x2 >> 8, 14, gUnk_09EF8E64[0], work->tiles4, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x2 >> 8, 14, gMapMenuCharaWinFrames[0], work->tiles4, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnk_09EF8E80[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_FRENCH:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84574[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84574[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84574[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrenchFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrenchFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusFrenchFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_SPANISH:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84588[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84588[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84588[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusSpanishFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusSpanishFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusSpanishFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_ITALIAN:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F8459C[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F8459C[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F8459C[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusItalianFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusItalianFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusItalianFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_GERMAN:
             default:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F845B0[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F845B0[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F845B0[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusGermanFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusGermanFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusGermanFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-            DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-            DrawSprite(work->x4 >> 8, 103, gUnk_09EF8E80[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+            DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x3 >> 8, 0, gMapMenuRikuStatusFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+            DrawSprite(work->x4 >> 8, 103, gMapMenuRikuStatusFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                 81);
 #endif
 
@@ -5821,41 +5821,41 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E0C[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E0C[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnk_09EF8E0C[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_FRENCH:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84510[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84510[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84510[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrenchFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrenchFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusFrenchFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_SPANISH:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84524[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84524[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84524[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusSpanishFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusSpanishFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusSpanishFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_ITALIAN:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84538[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84538[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84538[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusItalianFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusItalianFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusItalianFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_GERMAN:
             default:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F8454C[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F8454C[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F8454C[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusGermanFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusGermanFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusGermanFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E0C[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-            DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E0C[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-            DrawSprite(work->x4 >> 8, 103, gUnk_09EF8E0C[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+            DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrames[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x3 >> 8, 0, gMapMenuSoraStatusFrames[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+            DrawSprite(work->x4 >> 8, 103, gMapMenuSoraStatusFrames[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                 81);
 #endif
 
@@ -5873,29 +5873,29 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                DrawSprite(work->x5 >> 8, 144, gUnk_09EF8E0C[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_FRENCH:
-                DrawSprite(work->x5 >> 8, 144, gUnkEu_09F84510[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusFrenchFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_SPANISH:
-                DrawSprite(work->x5 >> 8, 144, gUnkEu_09F84524[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusSpanishFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_ITALIAN:
-                DrawSprite(work->x5 >> 8, 144, gUnkEu_09F84538[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusItalianFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_GERMAN:
             default:
-                DrawSprite(work->x5 >> 8, 144, gUnkEu_09F8454C[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusGermanFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             }
 #else
-            DrawSprite(work->x5 >> 8, 144, gUnk_09EF8E0C[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+            DrawSprite(work->x5 >> 8, 144, gMapMenuSoraStatusFrames[3], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                 81);
 #endif
             DrawTextSlots((work->x5 >> 8) + 16, 145, work->textSlots, work->palette8, 50,
@@ -5906,48 +5906,48 @@ void Task_MapMenu_2(MapMenuWork* work) {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrames[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E44[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightFrames[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 
             break;
         case LANGUAGE_FRENCH:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F845E8[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrenchFrames[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84698[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightFrenchFrames[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F845E8[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrenchFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 
             break;
         case LANGUAGE_SPANISH:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F8460C[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsSpanishFrames[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F846B8[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightSpanishFrames[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F8460C[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsSpanishFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 
             break;
         case LANGUAGE_ITALIAN:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84630[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsItalianFrames[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F846D8[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightItalianFrames[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84630[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsItalianFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 
@@ -5955,12 +5955,12 @@ void Task_MapMenu_2(MapMenuWork* work) {
         case LANGUAGE_GERMAN:
         default:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84654[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsGermanFrames[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F846F8[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightGermanFrames[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84654[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsGermanFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 
@@ -5968,12 +5968,12 @@ void Task_MapMenu_2(MapMenuWork* work) {
         }
 #else
         if (work->cursorVisible) {
-            DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[work->cursor], work->tiles6, work->palette5, NULL,
+            DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrames[work->cursor], work->tiles6, work->palette5, NULL,
                 SPRITE_PRIORITY(1), 81);
-            DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E44[work->cursor], work->tiles6, work->palette4, NULL,
+            DrawSprite(work->x6 >> 8, 26, gMapMenuCommandHighlightFrames[work->cursor], work->tiles6, work->palette4, NULL,
                 SPRITE_PRIORITY(1), 81);
         } else {
-            DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+            DrawSprite(work->x6 >> 8, 26, gMapMenuCommandsFrames[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                 80);
         }
 #endif
@@ -6075,7 +6075,7 @@ void MapSaveLoadFloorTiles(u8 a) {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnk_09963D64[a];
+            src = gSaveSlotRikuFloorSelectedTiles[a];
         } else {
             src = gUnkEu_09955250[a];
         }
@@ -6083,41 +6083,41 @@ void MapSaveLoadFloorTiles(u8 a) {
         break;
     case LANGUAGE_FRENCH:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnkEu_0995BB50[a];
+            src = gSaveSlotRikuFloorSelectedFrenchTiles[a];
         } else {
-            src = gUnkEu_09959850[a];
+            src = gSaveSlotSoraFloorSelectedFrenchTiles[a];
         }
 
         break;
     case LANGUAGE_SPANISH:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnkEu_09960150[a];
+            src = gSaveSlotRikuFloorSelectedSpanishTiles[a];
         } else {
-            src = gUnkEu_0995DE50[a];
+            src = gSaveSlotSoraFloorSelectedSpanishTiles[a];
         }
 
         break;
     case LANGUAGE_ITALIAN:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnkEu_09964750[a];
+            src = gSaveSlotRikuFloorSelectedItalianTiles[a];
         } else {
-            src = gUnkEu_09962450[a];
+            src = gSaveSlotSoraFloorSelectedItalianTiles[a];
         }
 
         break;
     case LANGUAGE_GERMAN:
     default:
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            src = gUnkEu_09968D50[a];
+            src = gSaveSlotRikuFloorSelectedGermanTiles[a];
         } else {
-            src = gUnkEu_09966A50[a];
+            src = gSaveSlotSoraFloorSelectedGermanTiles[a];
         }
 
         break;
     }
 #else
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        src = gUnk_09963D64[a];
+        src = gSaveSlotRikuFloorSelectedTiles[a];
     } else {
         src = gUnk_09961A64[a];
     }
@@ -6139,7 +6139,7 @@ void MapSaveLoadLevelTiles(u16 v) {
     q = &d[1];
 
     for (i = 0; i < 2; i++) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
 
         // fakematch
         do {
@@ -6171,7 +6171,7 @@ void MapSaveLoadTimeTiles(u32 t) {
     q = d;
 
     for (i = 0; i < 6; i++) {
-        RequestDma3Copy((void*)&gUnk_09966064[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
+        RequestDma3Copy((void*)&gSaveSlotDigitTiles[*q * 32], (u8*)GetBgCharBase(0) + off, 0x20);
         off += 0x20;
         q++;
     }
@@ -6234,34 +6234,34 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         SetupBg(0, 3, 31, 11);
         SetBgPriority(0, 0);
         LoadBgPalette(0, gMapSaveBgPalettes, 128);
-        LoadBgTiles(0, gUnk_099661A4, 0x1FA0);
+        LoadBgTiles(0, gSaveSlotBgTiles, 0x1FA0);
 
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy((void*)gUnkEu_0996D130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy((void*)gUnkEu_0996D930, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy((void*)gUnkEu_0996E130, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy((void*)gUnkEu_0996E930, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         }
 #endif
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
-                LoadBgMap(0, gUnk_0998C744, 0x800);
+                LoadBgMap(0, gMapSaveRikuFile2Map, 0x800);
 
                 if (SaveRepairFileSmall(1) == SAVE_OK) {
                     MapSaveShowSummary(work, 3);
                 }
             } else {
-                LoadBgMap(0, gUnk_0998BF44, 0x800);
+                LoadBgMap(0, gMapSaveRikuFile1Map, 0x800);
 
                 if (SaveRepairFileSmall(0) == SAVE_OK) {
                     MapSaveShowSummary(work, 2);
@@ -6269,13 +6269,13 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
             }
         } else {
             if (gGameState.flags & GAME_FLAG_SECOND_FILE) {
-                LoadBgMap(0, gUnk_0998B744, 0x800);
+                LoadBgMap(0, gMapSaveSoraFile2Map, 0x800);
 
                 if (SaveRepairFileLarge(1) == SAVE_OK) {
                     MapSaveShowSummary(work, 1);
                 }
             } else {
-                LoadBgMap(0, gUnk_0998AF44, 0x800);
+                LoadBgMap(0, gMapSaveSoraFile1Map, 0x800);
 
                 if (SaveRepairFileLarge(0) == SAVE_OK) {
                     MapSaveShowSummary(work, 0);
@@ -6287,10 +6287,10 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         work->tiles5 = AllocObjTiles(0x280, gDonaFl00Tiles);
         work->tiles6 = AllocObjTiles(0x400, gGoofyFl00Tiles);
         work->palette3 = LoadObjPalette(gFileMenuWindowPalette, 32);
-        work->tiles3 = LoadObjTiles(gUnk_098A8F8A, 0x4C0);
+        work->tiles3 = LoadObjTiles(gSaveSlotCharaWinTiles, 0x4C0);
         work->palette = LoadObjPalette(gMapMenuCursorPalette, 32);
-        work->tiles = AllocObjTiles(0x120, gUnk_098A8628);
-        AnimInit(&work->anim, gUnk_09EF8D58, gUnk_09EF8D48);
+        work->tiles = AllocObjTiles(0x120, gMapMenuCursorTiles);
+        AnimInit(&work->anim, gMapMenuCursorAnims, gMapMenuCursorFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         work->palette8 = LoadTextPalette(1);
         p1 = work->textSlots2;
@@ -6428,27 +6428,27 @@ void Task_MapSave_0(MapSaveWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
         break;
     case LANGUAGE_FRENCH:
-        work->tiles2 = LoadObjTiles(gUnkEu_098863B2, 0x400);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleFrenchTiles, 0x400);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles2 = LoadObjTiles(gUnkEu_0988683C, 0x3C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleSpanishTiles, 0x3C0);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles2 = LoadObjTiles(gUnkEu_09886C7E, 0x2C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleItalianTiles, 0x2C0);
         break;
     case LANGUAGE_GERMAN:
     default:
-        work->tiles2 = LoadObjTiles(gUnkEu_09886FC8, 0x3C0);
+        work->tiles2 = LoadObjTiles(gMapSaveTitleGermanTiles, 0x3C0);
         break;
     }
 
     work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
 #else
     work->palette2 = LoadObjPalette(gSaveMenuTitlePalette, 32);
-    work->tiles2 = LoadObjTiles(gUnk_098A8C66, 0x2C0);
+    work->tiles2 = LoadObjTiles(gMapSaveTitleTiles, 0x2C0);
 #endif
     work->y = -0x800;
     work->y2 = 0xA000;
@@ -6500,36 +6500,36 @@ void Task_MapSave_2(MapSaveWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        DrawSprite(128, work->y >> 8, gUnk_09EF8D8C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnk_09EF8D8C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnk_09EF8D8C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(128, work->y >> 8, gMapSaveTitleFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gMapSaveTitleFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gMapSaveTitleFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     case LANGUAGE_FRENCH:
-        DrawSprite(128, work->y >> 8, gUnkEu_09F8443C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8443C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnkEu_09F8443C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(128, work->y >> 8, gMapSaveTitleFrenchFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gMapSaveTitleFrenchFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gMapSaveTitleFrenchFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     case LANGUAGE_SPANISH:
-        DrawSprite(128, work->y >> 8, gUnkEu_09F8444C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8444C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnkEu_09F8444C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(128, work->y >> 8, gMapSaveTitleSpanishFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gMapSaveTitleSpanishFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gMapSaveTitleSpanishFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     case LANGUAGE_ITALIAN:
-        DrawSprite(128, work->y >> 8, gUnkEu_09F8445C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8445C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnkEu_09F8445C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(128, work->y >> 8, gMapSaveTitleItalianFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gMapSaveTitleItalianFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gMapSaveTitleItalianFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     case LANGUAGE_GERMAN:
     default:
-        DrawSprite(128, work->y >> 8, gUnkEu_09F8446C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(128, work->y2 >> 8, gUnkEu_09F8446C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-        DrawSprite(work->x >> 8, 0, gUnkEu_09F8446C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+        DrawSprite(128, work->y >> 8, gMapSaveTitleGermanFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(128, work->y2 >> 8, gMapSaveTitleGermanFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(work->x >> 8, 0, gMapSaveTitleGermanFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
         break;
     }
 #else
-    DrawSprite(128, work->y >> 8, gUnk_09EF8D8C[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-    DrawSprite(128, work->y2 >> 8, gUnk_09EF8D8C[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
-    DrawSprite(work->x >> 8, 0, gUnk_09EF8D8C[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+    DrawSprite(128, work->y >> 8, gMapSaveTitleFrames[1], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(128, work->y2 >> 8, gMapSaveTitleFrames[2], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(work->x >> 8, 0, gMapSaveTitleFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
 #endif
 
     if (gMapRoomState->flags & ROOM_FLAG_HIDE_PLAYER) {
@@ -6548,7 +6548,7 @@ void Task_MapSave_2(MapSaveWork* work) {
             DrawSprite(40, 96, gGoofyFl00Frames[0], work->tiles6, work->palette7, NULL, SPRITE_PRIORITY(1), 81);
         }
 
-        DrawSprite(0, 16, gMapUiSprite_098A8F28, work->tiles3, work->palette3, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(0, 16, gSaveSlotCharaWinFrame0, work->tiles3, work->palette3, NULL, SPRITE_PRIORITY(1), 90);
         DrawTextSlots(100, 59, work->textSlots, work->palette4, 50, work->textSlotCount);
 
         if (work->confirmCursor != 0) {
@@ -6867,20 +6867,20 @@ TaskDesc gTaskDescMapFix = {
 };
 
 const MapDoorGfx gWorldMapDoorGfx[14] = {
-    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
-    { gMapDoorAgrabahPalette, gUnk_0993BF64, gUnk_0993C364, gUnk_0993B764, gUnk_0993BB64, gUnk_0993CF64, gUnk_0993D364, gUnk_0993C764, gUnk_0993CB64 },
-    { gMapDoorAtlanticaPalette, gUnk_0993DF64, gUnk_0993E364, gUnk_0993D764, gUnk_0993DB64, gUnk_0993EF64, gUnk_0993F364, gUnk_0993E764, gUnk_0993EB64 },
-    { gMapDoorOlympusColiseumPalette, gUnk_0993FF64, gUnk_09940364, gUnk_0993F764, gUnk_0993FB64, gUnk_09940F64, gUnk_09941364, gUnk_09940764, gUnk_09940B64 },
-    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
-    { gMapDoorMonstroPalette, gUnk_09947F64, gUnk_09948364, gUnk_09947764, gUnk_09947B64, gUnk_09948F64, gUnk_09949364, gUnk_09948764, gUnk_09948B64 },
-    { gMapDoorHalloweenTownPalette, gUnk_09943F64, gUnk_09944364, gUnk_09943764, gUnk_09943B64, gUnk_09944F64, gUnk_09945364, gUnk_09944764, gUnk_09944B64 },
-    { gMapDoorNeverLandPalette, gUnk_09949F64, gUnk_0994A364, gUnk_09949764, gUnk_09949B64, gUnk_0994AF64, gUnk_0994B364, gUnk_0994A764, gUnk_0994AB64 },
-    { gMapDoorHollowBastionPalette, gUnk_09945F64, gUnk_09946364, gUnk_09945764, gUnk_09945B64, gUnk_09946F64, gUnk_09947364, gUnk_09946764, gUnk_09946B64 },
-    { gMapDoorDestinyIslandsPalette, gUnk_09941F64, gUnk_09942364, gUnk_09941764, gUnk_09941B64, gUnk_09942F64, gUnk_09943364, gUnk_09942764, gUnk_09942B64 },
-    { gMapDoorTraverseTownPalette, gUnk_0994BF64, gUnk_0994C364, gUnk_0994B764, gUnk_0994BB64, gUnk_0994CF64, gUnk_0994D364, gUnk_0994C764, gUnk_0994CB64 },
-    { gMapDoorTwilightTownPalette, gUnk_09951F64, gUnk_09952364, gUnk_09951764, gUnk_09951B64, gUnk_09952F64, gUnk_09953364, gUnk_09952764, gUnk_09952B64 },
-    { gMapDoorCastleOblivionPalette, gUnk_0994FF64, gUnk_09950364, gUnk_0994F764, gUnk_0994FB64, gUnk_09950F64, gUnk_09951364, gUnk_09950764, gUnk_09950B64 },
-    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
+    { gMapDoorWonderlandPalette, gMapDoorWonderlandSide0ClosedTiles, gMapDoorWonderlandSide0OpenTiles, gMapDoorWonderlandSide3ClosedTiles, gMapDoorWonderlandSide3OpenTiles, gMapDoorWonderlandSide2ClosedTiles, gMapDoorWonderlandSide2OpenTiles, gMapDoorWonderlandSide1ClosedTiles, gMapDoorWonderlandSide1OpenTiles },
+    { gMapDoorAgrabahPalette, gMapDoorAgrabahSide0ClosedTiles, gMapDoorAgrabahSide0OpenTiles, gMapDoorAgrabahSide3ClosedTiles, gMapDoorAgrabahSide3OpenTiles, gMapDoorAgrabahSide2ClosedTiles, gMapDoorAgrabahSide2OpenTiles, gMapDoorAgrabahSide1ClosedTiles, gMapDoorAgrabahSide1OpenTiles },
+    { gMapDoorAtlanticaPalette, gMapDoorAtlanticaSide0ClosedTiles, gMapDoorAtlanticaSide0OpenTiles, gMapDoorAtlanticaSide3ClosedTiles, gMapDoorAtlanticaSide3OpenTiles, gMapDoorAtlanticaSide2ClosedTiles, gMapDoorAtlanticaSide2OpenTiles, gMapDoorAtlanticaSide1ClosedTiles, gMapDoorAtlanticaSide1OpenTiles },
+    { gMapDoorOlympusColiseumPalette, gMapDoorOlympusColiseumSide0ClosedTiles, gMapDoorOlympusColiseumSide0OpenTiles, gMapDoorOlympusColiseumSide3ClosedTiles, gMapDoorOlympusColiseumSide3OpenTiles, gMapDoorOlympusColiseumSide2ClosedTiles, gMapDoorOlympusColiseumSide2OpenTiles, gMapDoorOlympusColiseumSide1ClosedTiles, gMapDoorOlympusColiseumSide1OpenTiles },
+    { gMapDoorWonderlandPalette, gMapDoorWonderlandSide0ClosedTiles, gMapDoorWonderlandSide0OpenTiles, gMapDoorWonderlandSide3ClosedTiles, gMapDoorWonderlandSide3OpenTiles, gMapDoorWonderlandSide2ClosedTiles, gMapDoorWonderlandSide2OpenTiles, gMapDoorWonderlandSide1ClosedTiles, gMapDoorWonderlandSide1OpenTiles },
+    { gMapDoorMonstroPalette, gMapDoorMonstroSide0ClosedTiles, gMapDoorMonstroSide0OpenTiles, gMapDoorMonstroSide3ClosedTiles, gMapDoorMonstroSide3OpenTiles, gMapDoorMonstroSide2ClosedTiles, gMapDoorMonstroSide2OpenTiles, gMapDoorMonstroSide1ClosedTiles, gMapDoorMonstroSide1OpenTiles },
+    { gMapDoorHalloweenTownPalette, gMapDoorHalloweenTownSide0ClosedTiles, gMapDoorHalloweenTownSide0OpenTiles, gMapDoorHalloweenTownSide3ClosedTiles, gMapDoorHalloweenTownSide3OpenTiles, gMapDoorHalloweenTownSide2ClosedTiles, gMapDoorHalloweenTownSide2OpenTiles, gMapDoorHalloweenTownSide1ClosedTiles, gMapDoorHalloweenTownSide1OpenTiles },
+    { gMapDoorNeverLandPalette, gMapDoorNeverLandSide0ClosedTiles, gMapDoorNeverLandSide0OpenTiles, gMapDoorNeverLandSide3ClosedTiles, gMapDoorNeverLandSide3OpenTiles, gMapDoorNeverLandSide2ClosedTiles, gMapDoorNeverLandSide2OpenTiles, gMapDoorNeverLandSide1ClosedTiles, gMapDoorNeverLandSide1OpenTiles },
+    { gMapDoorHollowBastionPalette, gMapDoorHollowBastionSide0ClosedTiles, gMapDoorHollowBastionSide0OpenTiles, gMapDoorHollowBastionSide3ClosedTiles, gMapDoorHollowBastionSide3OpenTiles, gMapDoorHollowBastionSide2ClosedTiles, gMapDoorHollowBastionSide2OpenTiles, gMapDoorHollowBastionSide1ClosedTiles, gMapDoorHollowBastionSide1OpenTiles },
+    { gMapDoorDestinyIslandsPalette, gMapDoorDestinyIslandsSide0ClosedTiles, gMapDoorDestinyIslandsSide0OpenTiles, gMapDoorDestinyIslandsSide3ClosedTiles, gMapDoorDestinyIslandsSide3OpenTiles, gMapDoorDestinyIslandsSide2ClosedTiles, gMapDoorDestinyIslandsSide2OpenTiles, gMapDoorDestinyIslandsSide1ClosedTiles, gMapDoorDestinyIslandsSide1OpenTiles },
+    { gMapDoorTraverseTownPalette, gMapDoorTraverseTownSide0ClosedTiles, gMapDoorTraverseTownSide0OpenTiles, gMapDoorTraverseTownSide3ClosedTiles, gMapDoorTraverseTownSide3OpenTiles, gMapDoorTraverseTownSide2ClosedTiles, gMapDoorTraverseTownSide2OpenTiles, gMapDoorTraverseTownSide1ClosedTiles, gMapDoorTraverseTownSide1OpenTiles },
+    { gMapDoorTwilightTownPalette, gMapDoorTwilightTownSide0ClosedTiles, gMapDoorTwilightTownSide0OpenTiles, gMapDoorTwilightTownSide3ClosedTiles, gMapDoorTwilightTownSide3OpenTiles, gMapDoorTwilightTownSide2ClosedTiles, gMapDoorTwilightTownSide2OpenTiles, gMapDoorTwilightTownSide1ClosedTiles, gMapDoorTwilightTownSide1OpenTiles },
+    { gMapDoorCastleOblivionPalette, gMapDoorCastleOblivionSide0ClosedTiles, gMapDoorCastleOblivionSide0OpenTiles, gMapDoorCastleOblivionSide3ClosedTiles, gMapDoorCastleOblivionSide3OpenTiles, gMapDoorCastleOblivionSide2ClosedTiles, gMapDoorCastleOblivionSide2OpenTiles, gMapDoorCastleOblivionSide1ClosedTiles, gMapDoorCastleOblivionSide1OpenTiles },
+    { gMapDoorWonderlandPalette, gMapDoorWonderlandSide0ClosedTiles, gMapDoorWonderlandSide0OpenTiles, gMapDoorWonderlandSide3ClosedTiles, gMapDoorWonderlandSide3OpenTiles, gMapDoorWonderlandSide2ClosedTiles, gMapDoorWonderlandSide2OpenTiles, gMapDoorWonderlandSide1ClosedTiles, gMapDoorWonderlandSide1OpenTiles },
 };
 
 TaskDesc gTaskDescMapDoor = {

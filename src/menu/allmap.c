@@ -73,19 +73,19 @@ static TaskDesc sTaskDescAllmapRoomname = {
 
 #ifdef VERSION_EU
 static void* sAllmapBarSprites[5] = {
-    gUnk_0976D880,
-    gUnkEu_09738554,
-    gUnkEu_09738590,
-    gUnkEu_0973857A,
-    gUnkEu_09738564,
+    gAllmapBarTitleFrame0,
+    gAllmapBarTitleFrame1,
+    gAllmapBarTitleFrame4,
+    gAllmapBarTitleFrame3,
+    gAllmapBarTitleFrame2,
 };
 
 static void* sAllmapBarBgMapsByLanguage[5] = {
-    gUnkEu_0980F840,
-    gUnkEu_0980FD40,
-    gUnkEu_09810C40,
-    gUnkEu_09810740,
-    gUnkEu_09810240,
+    gAllmapBarBgEnglishMap,
+    gAllmapBarBgFrenchMap,
+    gAllmapBarBgGermanMap,
+    gAllmapBarBgItalianMap,
+    gAllmapBarBgSpanishMap,
 };
 #endif
 
@@ -155,11 +155,11 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     work->shape = SetupAllmapRoomDoors(work);
 
     if (!work->asSprite) {
-        work->tiles = LoadObjTiles(gUnk_0976B340, 0x2400);
+        work->tiles = LoadObjTiles(gAllmapRoomTiles, 0x2400);
         work->gfx2 = NULL;
     } else {
-        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6424, 17), gUnk_0976B340);
-        work->gfx2 = gUnk_09EF6424[work->shape];
+        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapRoomFrames, 17), gAllmapRoomTiles);
+        work->gfx2 = gAllmapRoomFrames[work->shape];
     }
 
     if (!work->asSprite && work->room == gMapFloorState.room) {
@@ -289,9 +289,9 @@ void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg) {
     work->dropTargetY = work->screenY << 8;
     work->x = work->drawX = work->screenX << 8;
     work->y = work->drawY = work->screenY << 8;
-    work->tiles = LoadObjTiles(gUnk_0976D7C0, 0xC0);
+    work->tiles = LoadObjTiles(gAllmapCursorTiles, 0xC0);
     work->palette = LoadObjPalette(gAllmapObjPalette, 32);
-    AnimInit(&work->anim, gUnk_09EF64C4, gUnk_09EF64B4);
+    AnimInit(&work->anim, gAllmapCursorAnims, gAllmapCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->moveSteps = 0;
@@ -312,7 +312,7 @@ s32 task_allmap_cursor_1(AllmapCursorWork* work) {
     }
 
     if (gAllmapModeState != 3) {
-        work->gfx = gUnk_09EF64B4[0];
+        work->gfx = gAllmapCursorFrames[0];
         return 1;
     }
 
@@ -375,7 +375,7 @@ s16 AllmapDrawRoomnameFrame(u16 a) {
     q = v / 8;
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gUnk_0983B7B4 - q;
+    p = gAllmapRoomnameFrameMap - q;
     RequestDma3Copy(p, dst, 32);
     dst = base + 92;
     p += 32;
@@ -432,7 +432,7 @@ void AllmapClearRoomnameFrame() {
 
     base = GetBgScreenBase(2);
     dst = base + 28;
-    p = gUnk_08125E24;
+    p = gDefaultBgMap;
     RequestDma3Copy(p, dst, 32);
     dst = base + 92;
     p += 32;
@@ -455,7 +455,7 @@ void AllmapBarStartClose(AllmapBarWork* work) {
         work->steps = 16;
     }
 
-    LoadBgMap(3, gUnk_0983AD98, 0x500);
+    LoadBgMap(3, gAllmapBackdropMap, 0x500);
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
     work->targetX = -0x8000;
@@ -464,11 +464,11 @@ void AllmapBarStartClose(AllmapBarWork* work) {
 void task_allmap_bar_0(AllmapBarWork* work) {
     gStockMesDispWork = work;
 #ifdef VERSION_EU
-    work->tiles = LoadObjTiles(gUnk_0976D8A6, 0xDC0);
+    work->tiles = LoadObjTiles(gAllmapBarTitleTiles, 0xDC0);
 #else
-    work->tiles = LoadObjTiles(gUnk_0976D8A6, 0x2C0);
+    work->tiles = LoadObjTiles(gAllmapBarTitleTiles, 0x2C0);
 #endif
-    work->tiles2 = LoadObjTiles(gUnk_0976DBDA, 0xC0);
+    work->tiles2 = LoadObjTiles(gAllmapBarBandTiles, 0xC0);
     work->palette = LoadObjPalette(gAllmapObjPalette, 32);
     work->steps = 16;
     work->state = 0;
@@ -510,7 +510,7 @@ s32 task_allmap_bar_1(AllmapBarWork* work) {
 #ifdef VERSION_EU
             LoadBgMap(3, sAllmapBarBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(3, gUnk_0983B298, 0x500);
+            LoadBgMap(3, gAllmapBarBgMap, 0x500);
 #endif
             work->state = 2;
             gAllmapModeState = 2;
@@ -588,10 +588,10 @@ void task_allmap_bar_2(AllmapBarWork* work) {
     DrawSprite(work->x >> 8, 0, sAllmapBarSprites[gLanguage], work->tiles, work->palette, NULL,
         SPRITE_PRIORITY(3), 1000);
 #else
-    DrawSprite(work->x >> 8, 0, gUnk_0976D880, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 1000);
+    DrawSprite(work->x >> 8, 0, gAllmapBarTitleFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 1000);
 #endif
-    DrawSprite(128, work->y >> 8, gUnk_0976DB68, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1001);
-    DrawSprite(128, work->y2 >> 8, gUnk_0976DB9C, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1002);
+    DrawSprite(128, work->y >> 8, gAllmapBarBandFrame0, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1001);
+    DrawSprite(128, work->y2 >> 8, gAllmapBarBandFrame1, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(3), 1002);
 }
 
 void task_allmap_bar_3(AllmapBarWork* work) {
@@ -655,7 +655,7 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
             work->doors[i].sprite.gfx2 = gCardOutlineWhiteFrames[0];
             FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
             FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
-            work->gfx2[i] = gUnk_09EF64E8[i];
+            work->gfx2[i] = gAllmapDoorinfoArrowFrames[i];
             work->count++;
         } else {
             work->gfx2[i] = NULL;
@@ -663,11 +663,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
     }
 
     if (work->count != 0) {
-        work->tiles = LoadObjTiles(gUnk_0976DD62, 0x80);
+        work->tiles = LoadObjTiles(gAllmapDoorinfoArrowTiles, 0x80);
         work->palette = LoadObjPalette(gAllmapObjPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
-        work->tiles2 = LoadObjTiles(gUnk_0976B340, 0x2400);
-        work->gfx = gUnk_09EF6424[0];
+        work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
+        work->gfx = gAllmapRoomFrames[0];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
         FadeSetPaletteExcluded(work->palette2->index + 16, 1);
     }
@@ -721,13 +721,13 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
         }
     }
 
-    work->tiles2 = LoadObjTiles(gUnk_0976B340, 0x2400);
+    work->tiles2 = LoadObjTiles(gAllmapRoomTiles, 0x2400);
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
-        work->gfx = gUnk_09EF6424[1];
+        work->gfx = gAllmapRoomFrames[1];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapEventRoomPalette, 32);
     } else {
-        work->gfx = gUnk_09EF6424[0];
+        work->gfx = gAllmapRoomFrames[0];
         InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
     }
 
@@ -866,9 +866,9 @@ void task_allmap_pusha_0(AllmapPushaWork* work, AllmapCursorWork* arg) {
     work->cursor = arg;
     work->x = arg->pos.x * 24 - gAllmapCameraX;
     work->y = arg->pos.y * 24 - gAllmapCameraY;
-    work->tiles = LoadObjTiles(gUnk_0976DCB0, 0x80);
+    work->tiles = LoadObjTiles(gAllmapPushaTiles, 0x80);
     work->palette = LoadObjPalette(gAllmapObjPalette, 32);
-    work->gfx = gUnk_0976DC9C;
+    work->gfx = gAllmapPushaFrame0;
     work->angle = 0;
     TaskPoolInit(&work->tasks, 1);
     work->task = NULL;

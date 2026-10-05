@@ -146,7 +146,7 @@ void LoadEventBgEffect(EventBgEffectWork* work) {
 void ClearEventBgEffect(EventBgEffectWork* work) {
     LoadBgTiles(0, gMsgwinTiles, 1280);
     LoadBgPalette(0, gMsgwinPalette, 32);
-    LoadBgMap(0, gUnk_08125E24, 2048);
+    LoadBgMap(0, gDefaultBgMap, 2048);
 }
 
 void StartEventBgEffectFadeOut(EventBgEffectWork* work) {

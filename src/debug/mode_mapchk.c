@@ -349,7 +349,7 @@ void MapChkEditWorld(MapChkWork* work) {
     }
 
     if (v != work->world) {
-        t = gUnk_0984B458[0];
+        t = gMapChkWorldNames[0];
         n = work->world * 8;
         t += 4;
         DebugTextPrint(80, 44, 2, *(const char**)(t + n));
@@ -551,7 +551,7 @@ void Mode_MapChk_0() {
     DebugTextPrint(24, 128, 2, sMapChkDeepLabel);
     DebugTextPrint(80, 68, 2, sMapChkOffText);
     DebugTextPrint(80, 32, 2, sMapChkModeNames[sMapChkWork->mode]);
-    t = gUnk_0984B458[0];
+    t = gMapChkWorldNames[0];
     n = sMapChkWork->world * 8;
     t += 4;
     DebugTextPrint(80, 44, 2, *(const char**)(t + n));
@@ -598,10 +598,10 @@ void Mode_MapChk_1() {
 
         switch (e->mode) {
         case 1:
-            gGameState.floors[e->floor].world = gUnk_0984B458[e->world][0];
+            gGameState.floors[e->floor].world = gMapChkWorldNames[e->world][0];
             MapChkSetFloorProgress(sMapChkWork->floor, 0);
             GoToFloor(sMapChkWork->floor);
-            SetFloorWorld(gUnk_0984B458[sMapChkWork->world][0]);
+            SetFloorWorld(gMapChkWorldNames[sMapChkWork->world][0]);
             gMapFloorState.flags |= FLOOR_FLAG_LOGO_SHOWN;
             EnterFloorWorld();
             RequestMapMode();
@@ -615,7 +615,7 @@ void Mode_MapChk_1() {
             RequestMapMode();
             break;
         case 3:
-            gGameState.floors[sMapChkWork->floor].world = gUnk_0984B458[sMapChkWork->world][0];
+            gGameState.floors[sMapChkWork->floor].world = gMapChkWorldNames[sMapChkWork->world][0];
             MapChkSetFloorProgress(sMapChkWork->floor, 1);
             GoToFloor(sMapChkWork->floor);
             gMapFloorState.room = MAP_ROOM_EXIT_HALL;
@@ -632,10 +632,10 @@ void Mode_MapChk_1() {
             break;
         default:
             gGameState.floors[sMapChkWork->floor].world =
-                gUnk_0984B458[sMapChkWork->world][0];
+                gMapChkWorldNames[sMapChkWork->world][0];
             MapChkSetFloorProgress(sMapChkWork->floor, 0);
             GoToFloor(sMapChkWork->floor);
-            SetFloorWorld(gUnk_0984B458[sMapChkWork->world][0]);
+            SetFloorWorld(gMapChkWorldNames[sMapChkWork->world][0]);
             EnterFloorWorld();
             ModeRequest(&gModeMapDbg, 0);
             break;

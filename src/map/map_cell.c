@@ -540,14 +540,14 @@ u8 FldPosHeightExceeds(FldPos* p, u16 a) {
 }
 
 u8 GetRandomPieceVariant(u8 a) {
-    const u8* p = gUnk_0984D32C[a];
+    const u8* p = gMapCellBg2Pieces[a];
     return GetRandom() % p[3];
 }
 
 void MapCellSetBg3Piece(MapCell* p, s32 n) {
     if (p != NULL) {
         u16* base = sMapRoomDef->map3;
-        const u8* q = gUnk_0984D314[n];
+        const u8* q = gMapCellBg3Pieces[n];
         u8 m = GetRandom() % q[3];
         s32 u = ((m & 7) + q[1]) * 4;
         s32 v = (m >> 3) + q[2];
@@ -558,7 +558,7 @@ void MapCellSetBg3Piece(MapCell* p, s32 n) {
 
 void MapCellSetBg2Piece(MapCell* p, u8 n, u8 v) {
     if (p != NULL) {
-        const u8* q = gUnk_0984D32C[n];
+        const u8* q = gMapCellBg2Pieces[n];
         u16* base;
         u16 t;
 
@@ -614,7 +614,7 @@ void MapCellSetBg2EdgePiece(MapCell* p, s32 n) {
     }
 
     base = sMapRoomDef->map3;
-    t = gUnk_0984D32C[n];
+    t = gMapCellBg2Pieces[n];
     r = GetRandom() % t[3];
     off = (r % 8 + t[1]) * 4 + (r / 8 + t[2]) * 64;
 
@@ -640,7 +640,7 @@ void MapCellSetBg2CornerPiece(MapCell* p, s32 n) {
         return;
     }
 
-    t = gUnk_0984D32C[n];
+    t = gMapCellBg2Pieces[n];
     off = t[1] * 4 + t[2] * 64;
     base = sMapRoomDef->map2;
 
@@ -676,7 +676,7 @@ void MapCellSetBg2CornerPiece(MapCell* p, s32 n) {
 void MapCellSetBg2PieceVariant(MapCell* p, s32 n, u8 v) {
     if (p != NULL) {
         u16* base = sMapRoomDef->map2;
-        const u8* q = gUnk_0984D32C[n];
+        const u8* q = gMapCellBg2Pieces[n];
         s32 t;
 
         if (v == 0xFF) {
@@ -1349,7 +1349,7 @@ void MapCellSetBg1Piece(s16 x, s16 y, u8 n) {
 
     if (p != NULL) {
         u16* base = sMapRoomDef->map;
-        const u8* q = gUnk_0984D3F8[n];
+        const u8* q = gMapCellBg1Pieces[n];
         s32 t = q[1] * 4 + q[2] * 64;
         p->bg1Piece = n;
         p->bg1Map = base + t;
@@ -3178,9 +3178,9 @@ void* GetMapBgBuffer() {
 
 void LoadMapForm(u8 a) {
     if (a != 0x10) {
-        gMapForm = gUnk_0984D1F4[a];
+        gMapForm = gMapFormDefs[a];
     } else {
-        gMapForm = gUnk_0984D1F4[GetRandom() % 15];
+        gMapForm = gMapFormDefs[GetRandom() % 15];
     }
 }
 

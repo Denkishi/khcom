@@ -278,7 +278,7 @@ void InitPrintLayer(u8 bg) {
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
     LoadBgTiles(bg, gPrintFontTiles, 0x1C00);
-    LoadBgMap(bg, gUnk_08125E24, 0x800);
+    LoadBgMap(bg, gDefaultBgMap, 0x800);
     LoadBgPalette(bg, gPrintFontPalettes, 0x80);
     EnableBg(bg);
     sPrintBg = bg;

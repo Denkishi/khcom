@@ -728,90 +728,90 @@ entries:
     address: 0x09EB6E60
   eu:
     address: 0x09F5A03C
-- name: gUnk_09EDF5F4
+- name: gRikuClimbFrames
   record: SpriteTable
-  items: [gUnk_0893DBC8, gUnk_0893DBDE, gUnk_0893DBF4, gUnk_0893DC0A, gUnk_0893DC20, gUnk_0893DC36]
+  items: [gRikuClimbFrame0, gRikuClimbFrame1, gRikuClimbFrame2, gRikuClimbFrame3, gRikuClimbFrame4, gRikuClimbFrame5]
   us:
     address: 0x09EDF5F4
   jp:
     address: 0x09EB7070
   eu:
     address: 0x09F5A24C
-- name: gUnk_09EDF60C
+- name: gRikuClimbAnims
   record: AnimTable
-  items: [gUnk_0893DC4C, gUnk_0893DCD2]
+  items: [gRikuClimbAnim0, gRikuClimbAnim1]
   us:
     address: 0x09EDF60C
   jp:
     address: 0x09EB7088
   eu:
     address: 0x09F5A264
-- name: gUnk_09EDF614
+- name: gRikuLedgeFrames
   record: SpriteTable
-  items: [gUnk_0893EFBC, gUnk_0893EFD2, gUnk_0893EFE2, gUnk_0893EFF2, gUnk_0893F002, gUnk_0893F00C, gUnk_0893F022, gUnk_0893F038]
+  items: [gRikuLedgeFrame0, gRikuLedgeFrame1, gRikuLedgeFrame2, gRikuLedgeFrame3, gRikuLedgeFrame4, gRikuLedgeFrame5, gRikuLedgeFrame6, gRikuLedgeFrame7]
   us:
     address: 0x09EDF614
   jp:
     address: 0x09EB7090
   eu:
     address: 0x09F5A26C
-- name: gUnk_09EDF634
+- name: gRikuLedgeAnims
   record: AnimTable
-  items: [gUnk_0893F04E, gUnk_0893F060, gUnk_0893F06A]
+  items: [gRikuLedgeAnim0, gRikuLedgeAnim1, gRikuLedgeAnim2]
   us:
     address: 0x09EDF634
   jp:
     address: 0x09EB70B0
   eu:
     address: 0x09F5A28C
-- name: gUnk_09EDF640
+- name: gRikuLedgeBackFrames
   record: SpriteTable
-  items: [gUnk_08940CC0, gUnk_08940CDC, gUnk_08940CE6, gUnk_08940D02, gUnk_08940D0C, gUnk_08940D22, gUnk_08940D38, gUnk_08940D48]
+  items: [gRikuLedgeBackFrame0, gRikuLedgeBackFrame1, gRikuLedgeBackFrame2, gRikuLedgeBackFrame3, gRikuLedgeBackFrame4, gRikuLedgeBackFrame5, gRikuLedgeBackFrame6, gRikuLedgeBackFrame7]
   us:
     address: 0x09EDF640
   jp:
     address: 0x09EB70BC
   eu:
     address: 0x09F5A298
-- name: gUnk_09EDF660
+- name: gRikuLedgeBackAnims
   record: AnimTable
-  items: [gUnk_08940D5E, gUnk_08940D70, gUnk_08940D7A]
+  items: [gRikuLedgeBackAnim0, gRikuLedgeBackAnim1, gRikuLedgeBackAnim2]
   us:
     address: 0x09EDF660
   jp:
     address: 0x09EB70DC
   eu:
     address: 0x09F5A2B8
-- name: gUnk_09EDF66C
+- name: gRikuCardPoseFrames
   record: SpriteTable
-  items: [gUnk_08942950, gUnk_08942966, gUnk_0894297C]
+  items: [gRikuCardPoseFrame0, gRikuCardPoseFrame1, gRikuCardPoseFrame2]
   us:
     address: 0x09EDF66C
   jp:
     address: 0x09EB70E8
   eu:
     address: 0x09F5A2C4
-- name: gUnk_09EDF678
+- name: gRikuCardPoseAnims
   record: AnimTable
-  items: [gUnk_08942992, gUnk_089429A4]
+  items: [gRikuCardPoseAnim0, gRikuCardPoseAnim1]
   us:
     address: 0x09EDF678
   jp:
     address: 0x09EB70F4
   eu:
     address: 0x09F5A2D0
-- name: gUnk_09EDF680
+- name: gRikuCardPoseBackFrames
   record: SpriteTable
-  items: [gUnk_08943470, gUnk_08943486, gUnk_0894349C]
+  items: [gRikuCardPoseBackFrame0, gRikuCardPoseBackFrame1, gRikuCardPoseBackFrame2]
   us:
     address: 0x09EDF680
   jp:
     address: 0x09EB70FC
   eu:
     address: 0x09F5A2D8
-- name: gUnk_09EDF68C
+- name: gRikuCardPoseBackAnims
   record: AnimTable
-  items: [gUnk_089434AC, gUnk_089434BE]
+  items: [gRikuCardPoseBackAnim0, gRikuCardPoseBackAnim1]
   us:
     address: 0x09EDF68C
   jp:
@@ -3343,48 +3343,48 @@ entries:
   eu:
     address: 0x0894F4F4
     size: 7908
-- name: gUnk_0893DCDC
+- name: gRikuClimbTiles
   format: sprite_sheet
   align: 4
   cell: [33, 67]
   anchor: [10, 57]
   columns: 6
   frames:
-  - symbol: gUnk_0893DBC8
+  - symbol: gRikuClimbFrame0
     pieces:
     - [32x32, -9, -44]
     - [32x16, -9, -12]
     - [16x8, -1, -52]
-  - symbol: gUnk_0893DBDE
+  - symbol: gRikuClimbFrame1
     pieces:
     - [32x32, -9, -46]
     - [16x16, -1, -14]
     - [16x8, -1, 2]
-  - symbol: gUnk_0893DBF4
+  - symbol: gRikuClimbFrame2
     pieces:
     - [32x32, -9, -49]
     - [32x16, -9, -17]
     - [16x8, -9, -57]
-  - symbol: gUnk_0893DC0A
+  - symbol: gRikuClimbFrame3
     pieces:
     - [32x32, -9, -52]
     - [32x16, -9, -20]
     - [16x8, -1, -4]
-  - symbol: gUnk_0893DC20
+  - symbol: gRikuClimbFrame4
     pieces:
     - [32x32, -10, -46]
     - [32x16, -10, -14]
     - [8x8, 6, 2]
-  - symbol: gUnk_0893DC36
+  - symbol: gRikuClimbFrame5
     pieces:
     - [32x32, -9, -48]
     - [32x16, -9, -16]
     - [16x8, -1, -56]
   animations:
-  - symbol: gUnk_0893DC4C
+  - symbol: gRikuClimbAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1], [0, 1], [0, 1], [0, 1], [0, 1], [0, 1], [5, 1], [5, 1], [5, 1], [5, 1], [5, 1], [4, 1], [4, 1], [4, 1], [4, 1], [4, 1], [3, 1], [3, 1], [3, 1], [3, 1], [3, 1], [3, 1], [2, 1], [2, 1], [2, 1], [2, 1], [2, 1], [1, 1], [1, 1], [1, 1], [1, 1], [1, 1]]
-  - symbol: gUnk_0893DCD2
+  - symbol: gRikuClimbAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -3396,56 +3396,56 @@ entries:
   eu:
     address: 0x089694EC
     size: 5108
-- name: gUnk_0893F080
+- name: gRikuLedgeTiles
   format: sprite_sheet
   align: 4
   cell: [53, 77]
   anchor: [28, 54]
   columns: 8
   frames:
-  - symbol: gUnk_0893EFBC
+  - symbol: gRikuLedgeFrame0
     pieces:
     - [32x32, -14, -42]
     - [32x16, -14, -10]
     - [16x8, -8, -50]
-  - symbol: gUnk_0893EFD2
+  - symbol: gRikuLedgeFrame1
     pieces:
     - [32x64, -14, -49]
     - [8x8, -6, 15]
-  - symbol: gUnk_0893EFE2
+  - symbol: gRikuLedgeFrame2
     pieces:
     - [16x32, -7, -50]
     - [32x32, -7, -18]
-  - symbol: gUnk_0893EFF2
+  - symbol: gRikuLedgeFrame3
     pieces:
     - [32x64, -14, -49]
     - [8x8, -8, 15]
-  - symbol: gUnk_0893F002
+  - symbol: gRikuLedgeFrame4
     pieces:
     - [32x64, -20, -50]
-  - symbol: gUnk_0893F00C
+  - symbol: gRikuLedgeFrame5
     pieces:
     - [32x32, -15, -54]
     - [32x16, -15, -22]
     - [8x8, -7, -6]
-  - symbol: gUnk_0893F022
+  - symbol: gRikuLedgeFrame6
     pieces:
     - [32x32, -20, -51]
     - [8x8, -28, -27]
     - [32x16, -20, -19]
-  - symbol: gUnk_0893F038
+  - symbol: gRikuLedgeFrame7
     pieces:
     - [32x32, -20, -51]
     - [32x16, -21, -19]
     - [16x16, -5, -3]
   animations:
-  - symbol: gUnk_0893F04E
+  - symbol: gRikuLedgeAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 10]]
-  - symbol: gUnk_0893F060
+  - symbol: gRikuLedgeAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnk_0893F06A
+  - symbol: gRikuLedgeAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 5], [5, 6], [6, 6], [7, 8]]
   us:
@@ -3457,58 +3457,58 @@ entries:
   eu:
     address: 0x0896A8E0
     size: 7428
-- name: gUnk_08940D90
+- name: gRikuLedgeBackTiles
   format: sprite_sheet
   align: 4
   cell: [55, 68]
   anchor: [28, 52]
   columns: 8
   frames:
-  - symbol: gUnk_08940CC0
+  - symbol: gRikuLedgeBackFrame0
     pieces:
     - [32x32, -11, -42]
     - [32x16, -11, -10]
     - [8x8, -3, -50]
     - [8x8, -10, 6]
-  - symbol: gUnk_08940CDC
+  - symbol: gRikuLedgeBackFrame1
     pieces:
     - [32x64, -13, -49]
-  - symbol: gUnk_08940CE6
+  - symbol: gRikuLedgeBackFrame2
     pieces:
     - [32x32, -20, -33]
     - [16x16, -4, -49]
     - [32x16, -28, -1]
     - [8x8, 4, -1]
-  - symbol: gUnk_08940D02
+  - symbol: gRikuLedgeBackFrame3
     pieces:
     - [32x64, -16, -49]
-  - symbol: gUnk_08940D0C
+  - symbol: gRikuLedgeBackFrame4
     pieces:
     - [32x32, -14, -48]
     - [16x16, 10, -16]
     - [16x32, -10, -16]
-  - symbol: gUnk_08940D22
+  - symbol: gRikuLedgeBackFrame5
     pieces:
     - [32x32, -13, -48]
     - [32x16, -13, -16]
     - [8x8, 19, -23]
-  - symbol: gUnk_08940D38
+  - symbol: gRikuLedgeBackFrame6
     pieces:
     - [32x32, -11, -50]
     - [32x16, -11, -18]
-  - symbol: gUnk_08940D48
+  - symbol: gRikuLedgeBackFrame7
     pieces:
     - [32x32, -12, -52]
     - [32x16, -12, -20]
     - [16x8, -5, -4]
   animations:
-  - symbol: gUnk_08940D5E
+  - symbol: gRikuLedgeBackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 10]]
-  - symbol: gUnk_08940D70
+  - symbol: gRikuLedgeBackAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnk_08940D7A
+  - symbol: gRikuLedgeBackAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 5], [5, 6], [6, 6], [7, 8]]
   us:
@@ -3520,33 +3520,33 @@ entries:
   eu:
     address: 0x0896C5E4
     size: 7312
-- name: gUnk_089429AE
+- name: gRikuCardPoseTiles
   format: sprite_sheet
   align: 4
   cell: [43, 75]
   anchor: [18, 64]
   columns: 3
   frames:
-  - symbol: gUnk_08942950
+  - symbol: gRikuCardPoseFrame0
     pieces:
     - [32x32, -10, -45]
     - [32x16, -18, -13]
     - [16x8, -2, 3]
-  - symbol: gUnk_08942966
+  - symbol: gRikuCardPoseFrame1
     pieces:
     - [32x32, -13, -46]
     - [32x16, -14, -14]
     - [16x8, 2, 2]
-  - symbol: gUnk_0894297C
+  - symbol: gRikuCardPoseFrame2
     pieces:
     - [32x64, -15, -56]
     - [8x8, -14, -64]
     - [8x8, 17, -16]
   animations:
-  - symbol: gUnk_08942992
+  - symbol: gRikuCardPoseAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 10], [1, 10], [2, 10]]
-  - symbol: gUnk_089429A4
+  - symbol: gRikuCardPoseAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
   us:
@@ -3558,32 +3558,32 @@ entries:
   eu:
     address: 0x0896E274
     size: 2846
-- name: gUnk_089434C8
+- name: gRikuCardPoseBackTiles
   format: sprite_sheet
   align: 4
   cell: [40, 73]
   anchor: [16, 64]
   columns: 3
   frames:
-  - symbol: gUnk_08943470
+  - symbol: gRikuCardPoseBackFrame0
     pieces:
     - [32x32, -8, -47]
     - [32x16, -16, -15]
     - [16x8, -15, 1]
-  - symbol: gUnk_08943486
+  - symbol: gRikuCardPoseBackFrame1
     pieces:
     - [16x8, -5, -49]
     - [32x32, -15, -41]
     - [32x16, -15, -9]
-  - symbol: gUnk_0894349C
+  - symbol: gRikuCardPoseBackFrame2
     pieces:
     - [32x64, -16, -56]
     - [8x8, -15, -64]
   animations:
-  - symbol: gUnk_089434AC
+  - symbol: gRikuCardPoseBackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 10], [1, 10], [2, 10]]
-  - symbol: gUnk_089434BE
+  - symbol: gRikuCardPoseBackAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
   us:

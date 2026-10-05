@@ -1460,7 +1460,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
 #endif
         break;
     case 4:
-        LoadBgMap(0, gUnk_08125E24, 0x800);
+        LoadBgMap(0, gDefaultBgMap, 0x800);
         break;
 #ifndef VERSION_EU
     case 5:
@@ -1472,7 +1472,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
         break;
 #endif
     case 7:
-        LoadBgMap(1, gUnk_08125E24, 0x800);
+        LoadBgMap(1, gDefaultBgMap, 0x800);
         break;
 #ifndef VERSION_EU
     case 8:
@@ -1484,7 +1484,7 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
         break;
 #endif
     case 10:
-        LoadBgMap(2, gUnk_08125E24, 0x800);
+        LoadBgMap(2, gDefaultBgMap, 0x800);
         break;
     case 11:
         SetBgScroll(0, (u16)-88, (u16)-16);
@@ -3430,9 +3430,9 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gUnk_08125E24, 0x800);
-    LoadBgMap(1, gUnk_08125E24, 0x800);
-    LoadBgMap(2, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
+    LoadBgMap(1, gDefaultBgMap, 0x800);
+    LoadBgMap(2, gDefaultBgMap, 0x800);
     HighlightDeckTab(work, work->deckIndex);
     LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);
@@ -3730,9 +3730,9 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gUnk_08125E24, 0x800);
-    LoadBgMap(1, gUnk_08125E24, 0x800);
-    LoadBgMap(2, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
+    LoadBgMap(1, gDefaultBgMap, 0x800);
+    LoadBgMap(2, gDefaultBgMap, 0x800);
     HighlightDeckTab(work, work->deckIndex);
     LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);
@@ -4041,9 +4041,9 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a) {
     SetupBg(1, 2, 23, 0);
     SetupBg(0, 3, 31, 0);
 #endif
-    LoadBgMap(0, gUnk_08125E24, 0x800);
-    LoadBgMap(1, gUnk_08125E24, 0x800);
-    LoadBgMap(2, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
+    LoadBgMap(1, gDefaultBgMap, 0x800);
+    LoadBgMap(2, gDefaultBgMap, 0x800);
     HighlightDeckTab(work, work->deckIndex);
     LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);

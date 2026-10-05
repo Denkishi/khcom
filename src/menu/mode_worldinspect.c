@@ -107,7 +107,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         0, 0,
     },
     {
-        1, WORLD_AGRABAH, gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, gWorldImageAgrabahPalette, 32, gWorldImageAgrabahTiles, 4096, gUnk_099A8824,
+        1, WORLD_AGRABAH, gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gWorldImageAgrabahPalette, 32, gWorldImageAgrabahTiles, 4096, gWorldImageAgrabahFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E3A0,
 #elif defined(VERSION_JP)
@@ -118,7 +118,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         0, 0,
     },
     {
-        2, WORLD_ATLANTICA, gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, gWorldImageAtlanticaPalette, 32, gWorldImageAtlanticaTiles, 4096, gUnk_099A8880,
+        2, WORLD_ATLANTICA, gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gWorldImageAtlanticaPalette, 32, gWorldImageAtlanticaTiles, 4096, gWorldImageAtlanticaFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E578,
 #elif defined(VERSION_JP)
@@ -129,7 +129,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         2, 2,
     },
     {
-        4, WORLD_OLYMPUS_COLISEUM, gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, gWorldImageOlympusColiseumPalette, 32, gWorldImageOlympusColiseumTiles, 4096, gUnk_099A87F8,
+        4, WORLD_OLYMPUS_COLISEUM, gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gWorldImageOlympusColiseumPalette, 32, gWorldImageOlympusColiseumTiles, 4096, gWorldImageOlympusColiseumFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E530,
 #elif defined(VERSION_JP)
@@ -140,7 +140,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         6, 6,
     },
     {
-        8, WORLD_WONDERLAND, gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, gWorldImageWonderlandPalette, 32, gWorldImageWonderlandTiles, 4096, gUnk_099A8758,
+        8, WORLD_WONDERLAND, gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gWorldImageWonderlandPalette, 32, gWorldImageWonderlandTiles, 4096, gWorldImageWonderlandFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E410,
 #elif defined(VERSION_JP)
@@ -151,7 +151,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         4, 4,
     },
     {
-        16, WORLD_MONSTRO, gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, gWorldImageMonstroPalette, 32, gWorldImageMonstroTiles, 4096, gUnk_099A884C,
+        16, WORLD_MONSTRO, gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gWorldImageMonstroPalette, 32, gWorldImageMonstroTiles, 4096, gWorldImageMonstroFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E450,
 #elif defined(VERSION_JP)
@@ -162,7 +162,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         3, 3,
     },
     {
-        32, WORLD_HALLOWEEN_TOWN, gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, gWorldImageHalloweenTownPalette, 32, gWorldImageHalloweenTownTiles, 4096, gUnk_099A88A0,
+        32, WORLD_HALLOWEEN_TOWN, gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gWorldImageHalloweenTownPalette, 32, gWorldImageHalloweenTownTiles, 4096, gWorldImageHalloweenTownFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E4C0,
 #elif defined(VERSION_JP)
@@ -173,7 +173,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         5, 5,
     },
     {
-        64, WORLD_NEVER_LAND, gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, gWorldImageNeverLandPalette, 32, gWorldImageNeverLandTiles, 4096, gUnk_099A88D4,
+        64, WORLD_NEVER_LAND, gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gWorldImageNeverLandPalette, 32, gWorldImageNeverLandTiles, 4096, gWorldImageNeverLandFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E5DC,
 #elif defined(VERSION_JP)
@@ -184,7 +184,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         1, 1,
     },
     {
-        128, WORLD_HOLLOW_BASTION, gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, gWorldImageHollowBastionPalette, 32, gWorldImageHollowBastionTiles, 4096, gUnk_099A8930,
+        128, WORLD_HOLLOW_BASTION, gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gWorldImageHollowBastionPalette, 32, gWorldImageHollowBastionTiles, 4096, gWorldImageHollowBastionFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E6BC,
 #elif defined(VERSION_JP)
@@ -195,7 +195,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         7, 7,
     },
     {
-        256, WORLD_DESTINY_ISLANDS, gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, gWorldImageDestinyIslandsPalette, 32, gWorldImageDestinyIslandsTiles, 4096, gUnk_099A8780,
+        256, WORLD_DESTINY_ISLANDS, gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gWorldImageDestinyIslandsPalette, 32, gWorldImageDestinyIslandsTiles, 4096, gWorldImageDestinyIslandsFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E72C,
 #elif defined(VERSION_JP)
@@ -206,7 +206,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         8, 8,
     },
     {
-        512, WORLD_TRAVERSE_TOWN, gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, gWorldImageTraverseTownPalette, 32, gWorldImageTraverseTownTiles, 4096, gUnk_099A87C0,
+        512, WORLD_TRAVERSE_TOWN, gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gWorldImageTraverseTownPalette, 32, gWorldImageTraverseTownTiles, 4096, gWorldImageTraverseTownFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E364,
 #elif defined(VERSION_JP)
@@ -217,7 +217,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         9, 9,
     },
     {
-        2048, WORLD_TWILIGHT_TOWN, gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, gWorldImageTwilightTownPalette, 32, gWorldImageTwilightTownTiles, 4096, gUnk_099A895C,
+        2048, WORLD_TWILIGHT_TOWN, gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gWorldImageTwilightTownPalette, 32, gWorldImageTwilightTownTiles, 4096, gWorldImageTwilightTownFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E78C,
 #elif defined(VERSION_JP)
@@ -228,7 +228,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         10, 10,
     },
     {
-        4096, WORLD_CASTLE_OBLIVION, gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, gWorldImageCastleOblivionPalette, 32, gWorldImageCastleOblivionTiles, 4096, gUnk_099A897C,
+        4096, WORLD_CASTLE_OBLIVION, gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gWorldImageCastleOblivionPalette, 32, gWorldImageCastleOblivionTiles, 4096, gWorldImageCastleOblivionFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E804,
 #elif defined(VERSION_JP)
@@ -239,7 +239,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         11, 13,
     },
     {
-        1024, WORLD_100_ACRE_WOOD, gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, gWorldImage100AcreWoodPalette, 32, gWorldImage100AcreWoodTiles, 4096, gUnk_099A8900,
+        1024, WORLD_100_ACRE_WOOD, gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gWorldImage100AcreWoodPalette, 32, gWorldImage100AcreWoodTiles, 4096, gWorldImage100AcreWoodFrame0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E654,
 #elif defined(VERSION_JP)
@@ -346,43 +346,43 @@ void WorldInspectLoadFloorTiles(s16 index) {
     case LANGUAGE_ENGLISH:
 #endif
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            src = gUnk_09A020FC;
+            src = gWorldInspectFloorTiles;
         } else {
-            src = gUnk_09A02EFC;
+            src = gWorldInspectRikuFloorTiles;
         }
 
 #ifdef VERSION_EU
         break;
     case LANGUAGE_FRENCH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            src = gUnkEu_09A30C00;
+            src = gWorldInspectFloorFrenchTiles;
         } else {
-            src = gUnkEu_09A34400;
+            src = gWorldInspectRikuFloorFrenchTiles;
         }
 
         break;
     case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            src = gUnkEu_09A31A00;
+            src = gWorldInspectFloorSpanishTiles;
         } else {
-            src = gUnkEu_09A35200;
+            src = gWorldInspectRikuFloorSpanishTiles;
         }
 
         break;
     case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            src = gUnkEu_09A32800;
+            src = gWorldInspectFloorItalianTiles;
         } else {
-            src = gUnkEu_09A38C00;
+            src = gWorldInspectRikuFloorItalianTiles;
         }
 
         break;
     case LANGUAGE_GERMAN:
     default:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-            src = gUnkEu_09A33600;
+            src = gWorldInspectFloorGermanTiles;
         } else {
-            src = gUnkEu_09A39A00;
+            src = gWorldInspectRikuFloorGermanTiles;
         }
 
         break;
@@ -443,7 +443,7 @@ void WorldInspectHandleInput() {
             if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
                 sWorldInspectDetailPalettes[1] = LoadObjPalette(gPooAltImagePalettes, 64);
                 sWorldInspectDetailTiles[1] = LoadObjTiles(gPooAltImageTiles, 0x1000);
-                sWorldInspectDetailSprites[1] = gUnk_099A8914;
+                sWorldInspectDetailSprites[1] = gPooAltImageFrame0;
             } else {
                 sWorldInspectDetailPalettes[1] =
                     LoadObjPalette(sWorldinspectMsgs[sWorldInspectWorlds[sWorldInspectCursor]].palette2,
@@ -464,7 +464,7 @@ void WorldInspectHandleInput() {
         }
     } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        LoadBgMap(0, gUnk_09A324DC, 0x500);
+        LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
@@ -473,7 +473,7 @@ void WorldInspectHandleInput() {
         sWorldInspectState = 3;
     } else if (keys & START_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        LoadBgMap(0, gUnk_09A324DC, 0x500);
+        LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
@@ -578,7 +578,7 @@ void WorldInspectHandleDetailInput() {
 #endif
 
         if (keys & START_BUTTON) {
-            LoadBgMap(0, gUnk_09A324DC, 0x500);
+            LoadBgMap(0, gWorldInspectBgMap, 0x500);
 #ifndef VERSION_EU
             sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 32);
 #endif
@@ -604,25 +604,25 @@ void WorldInspectDraw() {
         third = gUnkEu_099A426C;
         break;
     case LANGUAGE_FRENCH:
-        first = gUnkEu_099A4C4C;
-        second = gUnkEu_099A4C68;
-        third = gUnkEu_099A4C9C;
+        first = gWorldInspectBarFrenchFrame0;
+        second = gWorldInspectBarFrenchFrame1;
+        third = gWorldInspectBarFrenchFrame2;
         break;
     case LANGUAGE_SPANISH:
-        first = gUnkEu_099A511C;
-        second = gUnkEu_099A5138;
-        third = gUnkEu_099A516C;
+        first = gWorldInspectBarSpanishFrame0;
+        second = gWorldInspectBarSpanishFrame1;
+        third = gWorldInspectBarSpanishFrame2;
         break;
     case LANGUAGE_ITALIAN:
-        first = gUnkEu_099A55AC;
-        second = gUnkEu_099A55C8;
-        third = gUnkEu_099A55FC;
+        first = gWorldInspectBarItalianFrame0;
+        second = gWorldInspectBarItalianFrame1;
+        third = gWorldInspectBarItalianFrame2;
         break;
     case LANGUAGE_GERMAN:
     default:
-        first = gUnkEu_099A5A3C;
-        second = gUnkEu_099A5A58;
-        third = gUnkEu_099A5A8C;
+        first = gWorldInspectBarGermanFrame0;
+        second = gWorldInspectBarGermanFrame1;
+        third = gWorldInspectBarGermanFrame2;
         break;
     }
 #endif
@@ -636,7 +636,7 @@ void WorldInspectDraw() {
 #ifdef VERSION_EU
                       first,
 #else
-                      gUnk_0999CF38,
+                      gWorldInspectBarFrame0,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3000);
@@ -649,7 +649,7 @@ void WorldInspectDraw() {
 #ifdef VERSION_EU
                       second,
 #else
-                      gUnk_0999CF54,
+                      gWorldInspectBarFrame1,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3001);
@@ -657,7 +657,7 @@ void WorldInspectDraw() {
 #ifdef VERSION_EU
                       third,
 #else
-                      gUnk_0999CF88,
+                      gWorldInspectBarFrame2,
 #endif
                       sWorldInspectBarTiles, sWorldInspectBarPalette, NULL,
                       SPRITE_PRIORITY(3), 3001);
@@ -793,48 +793,48 @@ void mode_worldinspect_0() {
         }
     }
 
-    LoadBgTiles(0, gUnk_099FB53C, 0x6BC0);
+    LoadBgTiles(0, gWorldInspectTiles, 0x6BC0);
 
 #ifdef VERSION_EU
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_09A2D440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_09A2E440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_09A2F440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_09A30440, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
             break;
         }
     } else {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_09A2CC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_09A2DC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_09A2EC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_09A2FC40, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
             break;
         }
     }
 #endif
 
-    LoadBgMap(0, gUnk_09A324DC, 0x500);
-    DmaCopy16(3, gUnk_09A32EDC, sWorldInspectTilemap, 0x500);
+    LoadBgMap(0, gWorldInspectBgMap, 0x500);
+    DmaCopy16(3, gWorldInspectFloorMap, sWorldInspectTilemap, 0x500);
 
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {
-            WorldInspectCopyTilemapRect(7, 4, gUnk_09A333DC, 0, 0, sWorldInspectTilemap, sWorldinspectNavs[i].x, sWorldinspectNavs[i].y);
+            WorldInspectCopyTilemapRect(7, 4, gWorldInspectFloorPartsMap, 0, 0, sWorldInspectTilemap, sWorldinspectNavs[i].x, sWorldinspectNavs[i].y);
         }
     }
 
@@ -842,7 +842,7 @@ void mode_worldinspect_0() {
         if (sWorldInspectWorlds[i] != 0 && sWorldInspectWorlds[i + 1] != 0) {
             const WorldinspectConn* conn = sWorldinspectConns;
             id = sWorldinspectNavs[i].rect;
-            WorldInspectCopyTilemapRect(conn[id].width, conn[id].height, gUnk_09A333DC, conn[id].x, conn[id].y, sWorldInspectTilemap, sWorldinspectNavs[i].x2, sWorldinspectNavs[i].y2);
+            WorldInspectCopyTilemapRect(conn[id].width, conn[id].height, gWorldInspectFloorPartsMap, conn[id].x, conn[id].y, sWorldInspectTilemap, sWorldinspectNavs[i].x2, sWorldinspectNavs[i].y2);
         }
     }
 
@@ -850,15 +850,15 @@ void mode_worldinspect_0() {
         if (sWorldInspectWorlds[i] != 0) {
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                 if (i <= 8) {
-                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, i * 3, 9, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(3, 1, gWorldInspectFloorPartsMap, i * 3, 9, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 } else {
-                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, (i - 9) * 4, 10, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(4, 1, gWorldInspectFloorPartsMap, (i - 9) * 4, 10, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 }
             } else {
                 if (i <= 2) {
-                    WorldInspectCopyTilemapRect(4, 1, gUnk_09A333DC, i * 4, 0x15, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(4, 1, gWorldInspectFloorPartsMap, i * 4, 0x15, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 } else {
-                    WorldInspectCopyTilemapRect(3, 1, gUnk_09A333DC, (i - 3) * 3, 0x16, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
+                    WorldInspectCopyTilemapRect(3, 1, gWorldInspectFloorPartsMap, (i - 3) * 3, 0x16, sWorldInspectTilemap, sWorldinspectNavs[i].x + 3, sWorldinspectNavs[i].y + 2);
                 }
             }
         }
@@ -873,16 +873,16 @@ void mode_worldinspect_0() {
     }
 
     LoadBgMap(1, sWorldInspectTilemap, 0x500);
-    LoadBgMap(2, gUnk_09A33E9C, 0x500);
-    LoadBgMap(3, gUnk_09A3399C, 0x500);
+    LoadBgMap(2, gWorldInspectShadeMap, 0x500);
+    LoadBgMap(3, gWorldInspectDetailMap, 0x500);
     WorldInspectLoadFloorTiles(sWorldInspectCursor);
-    sWorldInspectHighlightPalette = LoadObjPalette(gUnk_09A3D09C, 0x20);
-    sWorldInspectHighlightTiles = LoadObjTiles(gUnk_0999D41A, 0x400);
-    AnimInit(&sWorldInspectHighlightAnim, gUnk_09EF97C4, gUnk_09EF97B0);
+    sWorldInspectHighlightPalette = LoadObjPalette(gWorldInspectHighlightPalette, 0x20);
+    sWorldInspectHighlightTiles = LoadObjTiles(gWorldInspectHighlightTiles, 0x400);
+    AnimInit(&sWorldInspectHighlightAnim, gWorldInspectHighlightAnims, gWorldInspectHighlightFrames);
     AnimStart(&sWorldInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
-    sWorldInspectCursorPalette = LoadObjPalette(gUnk_09A3D0BC, 0x20);
-    sWorldInspectCursorTiles = LoadObjTiles(gUnk_0999D8A8, 0xC0);
-    AnimInit(&sWorldInspectCursorAnim, gUnk_09EF97DC, gUnk_09EF97CC);
+    sWorldInspectCursorPalette = LoadObjPalette(gWorldInspectCursorPalette, 0x20);
+    sWorldInspectCursorTiles = LoadObjTiles(gWorldInspectCursorTiles, 0xC0);
+    AnimInit(&sWorldInspectCursorAnim, gWorldInspectCursorAnims, gWorldInspectCursorFrames);
     AnimStart(&sWorldInspectCursorAnim, 0, ANIM_FLAG_LOOP);
 #ifdef VERSION_EU
     InitTextSlots(sWorldInspectNameText, 0x30);
@@ -900,26 +900,26 @@ void mode_worldinspect_0() {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        sWorldInspectBarTiles = LoadObjTiles(gUnk_0999CFC6, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x400);
         break;
     case LANGUAGE_FRENCH:
-        sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A4CDA, 0x440);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarFrenchTiles, 0x440);
         break;
     case LANGUAGE_SPANISH:
-        sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A51AA, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarSpanishTiles, 0x400);
         break;
     case LANGUAGE_ITALIAN:
-        sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A563A, 0x400);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarItalianTiles, 0x400);
         break;
     case LANGUAGE_GERMAN:
     default:
-        sWorldInspectBarTiles = LoadObjTiles(gUnkEu_099A5ACA, 0x440);
+        sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarGermanTiles, 0x440);
         break;
     }
 #elif defined(VERSION_JP)
-    sWorldInspectBarTiles = LoadObjTiles(gUnk_0999CFC6, 0x3C0);
+    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x3C0);
 #else
-    sWorldInspectBarTiles = LoadObjTiles(gUnk_0999CFC6, 0x400);
+    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, 0x400);
 #endif
     EnableBg(0);
     EnableBg(1);
@@ -948,7 +948,7 @@ void mode_worldinspect_1() {
         sWorldInspectSteps--;
 
         if (sWorldInspectSteps <= 0) {
-            LoadBgMap(0, gUnk_09A329DC, 0x500);
+            LoadBgMap(0, gWorldInspectBgHeaderMap, 0x500);
 #ifndef VERSION_EU
             ReleaseObjPalette(sWorldInspectBarPalette);
 #endif

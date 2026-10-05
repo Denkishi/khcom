@@ -614,7 +614,7 @@ entries:
     address: 0x0980135C
   eu:
     address: 0x0982921C
-- name: gUnk_0984C868
+- name: gMapFloorDefs
   record: MapFloorDef
   elements:
   - [1, 7, 0, 0, gMapFloorLinks00, gMapFloorRooms00]
@@ -1026,7 +1026,7 @@ entries:
     address: 0x098016D4
   eu:
     address: 0x09829594
-- name: gUnk_0984CBD0
+- name: gRikuMapFloorDefs
   record: MapFloorDef
   elements:
   - [0, 9, 0, 0, gRikuMapFloorLinks00, gRikuMapFloorRooms00]
@@ -1921,7 +1921,7 @@ entries:
     address: 0x098019E0
   eu:
     address: 0x098298A0
-- name: gUnk_0984D0CC
+- name: gMapRoomCodes
   record: MapRoomCodes
   values:
   - [0, 1, 0, 0]
@@ -1956,7 +1956,7 @@ entries:
     address: 0x09801BE0
   eu:
     address: 0x09829AA0
-- name: gUnk_0984D134
+- name: gMapRoomShapes
   record: MapRoomShapes
   values:
   - [0, 1, 5, 0, 4, 0, 2, 0]
@@ -1989,7 +1989,7 @@ entries:
     address: 0x09801C48
   eu:
     address: 0x09829B08
-- name: gUnk_0984D1F4
+- name: gMapFormDefs
   record: MapFormDef
   elements:
   - [3, 16, 16, 2, 6, 3, 16, 0]

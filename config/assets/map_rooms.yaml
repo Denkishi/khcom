@@ -275,7 +275,7 @@ objects:
     start: 0x09997F30
     end: 0x099981B4
 entries:
-- name: gUnk_0984D2D4
+- name: gMapRoom00Events
   record: MapRoomEvent
   declare: false
   elements:
@@ -287,26 +287,26 @@ entries:
   eu:
     address: 0x09829CA8
 - name: map_room_00
-  symbol: gUnk_0984D2D8
+  symbol: gMapRoom00Def
   record: MapRoomDef
   fields:
-    palette: gUnk_0998FF44
+    palette: gMapRoom00Palette
     paletteSize: 96
     unk_06: [0, 0]
-    tiles: gUnk_098A9C84
+    tiles: gMapRoom00Tiles
     tilesSize: 32192
     unk_0E: [0, 0]
-    tiles2: gUnk_098B1A44
+    tiles2: gMapRoom00Bg1Tiles
     tilesSize2: 8192
     unk_16: [0, 0]
-    map3: gUnk_09968144
-    map2: gUnk_09968944
-    map: gUnk_09969944
+    map3: gMapRoom00Bg3Map
+    map2: gMapRoom00Bg2Map
+    map: gMapRoom00Bg1Map
     layer1DecorRules: 0
     layer2DecorRules: 0
     tileAnims: 0
-    soraEvents: gUnk_0984D2D4
-    rikuEvents: gUnk_0984D2D4
+    soraEvents: gMapRoom00Events
+    rikuEvents: gMapRoom00Events
     unk_38: 13
   index: [0, 13]
   us:
@@ -315,7 +315,7 @@ entries:
     address: 0x09801DEC
   eu:
     address: 0x09829CAC
-- name: gUnk_0984D314
+- name: gMapCellBg3Pieces
   record: MapCellTable
   values:
   - [0, 0, 1, 4]
@@ -330,7 +330,7 @@ entries:
     address: 0x09801E28
   eu:
     address: 0x09829CE8
-- name: gUnk_0984D32C
+- name: gMapCellBg2Pieces
   record: MapCellTable
   values:
   - [0, 0, 0, 0]
@@ -390,7 +390,7 @@ entries:
     address: 0x09801E40
   eu:
     address: 0x09829D00
-- name: gUnk_0984D3F8
+- name: gMapCellBg1Pieces
   record: MapCellTable
   values:
   - [2, 0, 0, 0]
@@ -438,7 +438,7 @@ entries:
     address: 0x09801F0C
   eu:
     address: 0x09829DCC
-- name: gUnk_0984D494
+- name: gMapRoom01SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -452,7 +452,7 @@ entries:
     address: 0x09801FA8
   eu:
     address: 0x09829E68
-- name: gUnk_0984D4A4
+- name: gMapRoom01RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -1275,41 +1275,41 @@ entries:
     address: 0x098027FC
   eu:
     address: 0x0982A6BC
-- name: gUnk_0984DCF0
+- name: gMapRoom01Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom01Unk24Pattern00, 2, 3, 100, 0, gMapRoom01Unk24Pieces00, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern01, 2, 3, 100, 0, gMapRoom01Unk24Pieces01, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern02, 2, 2, 100, 0, gMapRoom01Unk24Pieces02, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern03, 2, 2, 100, 0, gMapRoom01Unk24Pieces03, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern04, 2, 3, 100, 0, gMapRoom01Unk24Pieces04, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern05, 2, 2, 100, 0, gMapRoom01Unk24Pieces05, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern06, 1, 4, 100, 0, gMapRoom01Unk24Pieces06, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern07, 1, 4, 100, 0, gMapRoom01Unk24Pieces07, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern08, 1, 3, 100, 0, gMapRoom01Unk24Pieces08, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern09, 1, 2, 100, 0, gMapRoom01Unk24Pieces09, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern10, 1, 2, 100, 0, gMapRoom01Unk24Pieces10, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern11, 3, 4, 8, 0, gMapRoom01Unk24Pieces11, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern12, 3, 4, 8, 0, gMapRoom01Unk24Pieces12, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern13, 1, 3, 8, 0, gMapRoom01Unk24Pieces13, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern14, 1, 3, 8, 0, gMapRoom01Unk24Pieces14, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern15, 2, 2, 100, 0, gMapRoom01Unk24Pieces15, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern16, 2, 2, 15, 0, gMapRoom01Unk24Pieces16, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern17, 2, 3, 8, 0, gMapRoom01Unk24Pieces17, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern18, 2, 3, 8, 0, gMapRoom01Unk24Pieces18, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern19, 1, 4, 15, 0, gMapRoom01Unk24Pieces19, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern20, 1, 4, 15, 0, gMapRoom01Unk24Pieces20, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern21, 1, 3, 15, 0, gMapRoom01Unk24Pieces21, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern22, 1, 3, 15, 0, gMapRoom01Unk24Pieces22, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern23, 1, 3, 15, 0, gMapRoom01Unk24Pieces23, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern24, 1, 2, 15, 0, gMapRoom01Unk24Pieces24, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern25, 1, 2, 15, 0, gMapRoom01Unk24Pieces25, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern26, 1, 2, 15, 0, gMapRoom01Unk24Pieces26, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern27, 1, 5, 10, 0, gMapRoom01Unk24Pieces27, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern28, 1, 5, 10, 0, gMapRoom01Unk24Pieces28, gUnk_0996A444+0x1000]
-  - [gMapRoom01Unk24Pattern29, 1, 3, 10, 0, gMapRoom01Unk24Pieces29, gUnk_0996A444+0x800]
-  - [gMapRoom01Unk24Pattern30, 1, 1, 10, 0, gMapRoom01Unk24Pieces30, gUnk_0996A444+0x800]
+  - [gMapRoom01Unk24Pattern00, 2, 3, 100, 0, gMapRoom01Unk24Pieces00, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern01, 2, 3, 100, 0, gMapRoom01Unk24Pieces01, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern02, 2, 2, 100, 0, gMapRoom01Unk24Pieces02, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern03, 2, 2, 100, 0, gMapRoom01Unk24Pieces03, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern04, 2, 3, 100, 0, gMapRoom01Unk24Pieces04, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern05, 2, 2, 100, 0, gMapRoom01Unk24Pieces05, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern06, 1, 4, 100, 0, gMapRoom01Unk24Pieces06, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern07, 1, 4, 100, 0, gMapRoom01Unk24Pieces07, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern08, 1, 3, 100, 0, gMapRoom01Unk24Pieces08, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern09, 1, 2, 100, 0, gMapRoom01Unk24Pieces09, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern10, 1, 2, 100, 0, gMapRoom01Unk24Pieces10, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern11, 3, 4, 8, 0, gMapRoom01Unk24Pieces11, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern12, 3, 4, 8, 0, gMapRoom01Unk24Pieces12, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern13, 1, 3, 8, 0, gMapRoom01Unk24Pieces13, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern14, 1, 3, 8, 0, gMapRoom01Unk24Pieces14, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern15, 2, 2, 100, 0, gMapRoom01Unk24Pieces15, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern16, 2, 2, 15, 0, gMapRoom01Unk24Pieces16, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern17, 2, 3, 8, 0, gMapRoom01Unk24Pieces17, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern18, 2, 3, 8, 0, gMapRoom01Unk24Pieces18, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern19, 1, 4, 15, 0, gMapRoom01Unk24Pieces19, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern20, 1, 4, 15, 0, gMapRoom01Unk24Pieces20, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern21, 1, 3, 15, 0, gMapRoom01Unk24Pieces21, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern22, 1, 3, 15, 0, gMapRoom01Unk24Pieces22, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern23, 1, 3, 15, 0, gMapRoom01Unk24Pieces23, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern24, 1, 2, 15, 0, gMapRoom01Unk24Pieces24, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern25, 1, 2, 15, 0, gMapRoom01Unk24Pieces25, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern26, 1, 2, 15, 0, gMapRoom01Unk24Pieces26, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern27, 1, 5, 10, 0, gMapRoom01Unk24Pieces27, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern28, 1, 5, 10, 0, gMapRoom01Unk24Pieces28, gMapRoom01Bg2Map+0x1000]
+  - [gMapRoom01Unk24Pattern29, 1, 3, 10, 0, gMapRoom01Unk24Pieces29, gMapRoom01Bg2Map+0x800]
+  - [gMapRoom01Unk24Pattern30, 1, 1, 10, 0, gMapRoom01Unk24Pieces30, gMapRoom01Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984DCF0
@@ -1461,16 +1461,16 @@ entries:
     address: 0x09802A74
   eu:
     address: 0x0982A934
-- name: gUnk_0984DF68
+- name: gMapRoom01Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom01Unk28Check00, 1, 2, 100, 0, gMapRoom01Unk28Pieces00, gUnk_0996BC44+0x300]
-  - [gMapRoom01Unk28Check01, 1, 2, 100, 0, gMapRoom01Unk28Pieces01, gUnk_0996BC44+0x300]
-  - [gMapRoom01Unk28Check02, 1, 2, 100, 0, gMapRoom01Unk28Pieces02, gUnk_0996BC44+0x300]
-  - [gMapRoom01Unk28Check03, 1, 2, 100, 0, gMapRoom01Unk28Pieces03, gUnk_0996BC44+0x300]
-  - [gMapRoom01Unk28Check04, 1, 2, 100, 0, gMapRoom01Unk28Pieces04, gUnk_0996BC44+0x300]
-  - [gMapRoom01Unk28Check05, 1, 2, 100, 0, gMapRoom01Unk28Pieces05, gUnk_0996BC44+0x300]
+  - [gMapRoom01Unk28Check00, 1, 2, 100, 0, gMapRoom01Unk28Pieces00, gMapRoom01Bg1Map+0x300]
+  - [gMapRoom01Unk28Check01, 1, 2, 100, 0, gMapRoom01Unk28Pieces01, gMapRoom01Bg1Map+0x300]
+  - [gMapRoom01Unk28Check02, 1, 2, 100, 0, gMapRoom01Unk28Pieces02, gMapRoom01Bg1Map+0x300]
+  - [gMapRoom01Unk28Check03, 1, 2, 100, 0, gMapRoom01Unk28Pieces03, gMapRoom01Bg1Map+0x300]
+  - [gMapRoom01Unk28Check04, 1, 2, 100, 0, gMapRoom01Unk28Pieces04, gMapRoom01Bg1Map+0x300]
+  - [gMapRoom01Unk28Check05, 1, 2, 100, 0, gMapRoom01Unk28Pieces05, gMapRoom01Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984DF68
@@ -1479,26 +1479,26 @@ entries:
   eu:
     address: 0x0982A93C
 - name: map_room_01
-  symbol: gUnk_0984DFD8
+  symbol: gMapRoom01Def
   record: MapRoomDef
   fields:
-    palette: gUnk_0998FFA4
+    palette: gMapRoom01Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_098B3A44
+    tiles: gMapRoom01Tiles
     tilesSize: 30720
     unk_0E: [0, 0]
-    tiles2: gUnk_098BB244
+    tiles2: gMapRoom01Bg1Tiles
     tilesSize2: 10240
     unk_16: [0, 0]
-    map3: gUnk_09969C44
-    map2: gUnk_0996A444
-    map: gUnk_0996BC44
-    layer1DecorRules: gUnk_0984DCF0
-    layer2DecorRules: gUnk_0984DF68
+    map3: gMapRoom01Bg3Map
+    map2: gMapRoom01Bg2Map
+    map: gMapRoom01Bg1Map
+    layer1DecorRules: gMapRoom01Layer1DecorRules
+    layer2DecorRules: gMapRoom01Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_0984D494
-    rikuEvents: gUnk_0984D4A4
+    soraEvents: gMapRoom01SoraEvents
+    rikuEvents: gMapRoom01RikuEvents
     unk_38: 31
   index: [1]
   us:
@@ -1507,7 +1507,7 @@ entries:
     address: 0x09802AEC
   eu:
     address: 0x0982A9AC
-- name: gUnk_0984E014
+- name: gMapRoom02SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -1521,7 +1521,7 @@ entries:
     address: 0x09802B28
   eu:
     address: 0x0982A9E8
-- name: gUnk_0984E024
+- name: gMapRoom02RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -1564,11 +1564,11 @@ entries:
     address: 0x09802B52
   eu:
     address: 0x0982AA12
-- name: gUnk_0984E054
+- name: gMapRoom02TileAnims
   record: MapAnmEntry
   declare: false
   elements:
-  - [gMapRoom02AnimScript0, gUnk_098C87C4, 1024, 0, 0]
+  - [gMapRoom02AnimScript0, gMapRoom02AnimTiles0, 1024, 0, 0]
   - [gMapRoom02AnimScript1, gMapRoom02AnimTiles1, 512, 32, 0]
   - [0, 0, 0, 0, 0]
   us:
@@ -1969,46 +1969,46 @@ entries:
     address: 0x09802F98
   eu:
     address: 0x0982AE58
-- name: gUnk_0984E48C
+- name: gMapRoom02Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom02Unk24Pattern00, 1, 4, 50, 0, gMapRoom02Unk24Pieces00, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern01, 1, 4, 50, 0, gMapRoom02Unk24Pieces01, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern02, 1, 4, 50, 0, gMapRoom02Unk24Pieces02, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern03, 1, 4, 50, 0, gMapRoom02Unk24Pieces03, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern04, 1, 4, 50, 0, gMapRoom02Unk24Pieces04, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern05, 1, 4, 50, 0, gMapRoom02Unk24Pieces05, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern06, 1, 4, 50, 0, gMapRoom02Unk24Pieces06, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern07, 1, 4, 50, 0, gMapRoom02Unk24Pieces07, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern08, 1, 4, 50, 0, gMapRoom02Unk24Pieces08, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern09, 2, 2, 80, 0, gMapRoom02Unk24Pieces09, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern10, 2, 2, 80, 0, gMapRoom02Unk24Pieces10, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern11, 2, 3, 50, 0, gMapRoom02Unk24Pieces11, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern12, 1, 3, 30, 0, gMapRoom02Unk24Pieces12, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern13, 2, 3, 50, 0, gMapRoom02Unk24Pieces13, gUnk_0996C944+0x1000]
-  - [gMapRoom02Unk24Pattern14, 1, 3, 30, 0, gMapRoom02Unk24Pieces14, gUnk_0996C944+0x1000]
-  - [gUnk_098566B4, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern21, 2, 2, 15, 0, gMapRoom02Unk24Pieces21, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern22, 2, 2, 15, 0, gMapRoom02Unk24Pieces22, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern23, 2, 2, 15, 0, gMapRoom02Unk24Pieces23, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern24, 1, 4, 15, 0, gMapRoom02Unk24Pieces24, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern25, 1, 4, 15, 0, gMapRoom02Unk24Pieces25, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern26, 1, 4, 15, 0, gMapRoom02Unk24Pieces26, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern27, 1, 2, 15, 0, gMapRoom02Unk24Pieces27, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern28, 1, 2, 15, 0, gMapRoom02Unk24Pieces28, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern29, 1, 2, 15, 0, gMapRoom02Unk24Pieces29, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern30, 2, 2, 15, 0, gMapRoom02Unk24Pieces30, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern31, 2, 2, 15, 0, gMapRoom02Unk24Pieces31, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern32, 2, 2, 15, 0, gMapRoom02Unk24Pieces32, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern33, 1, 2, 15, 0, gMapRoom02Unk24Pieces33, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern34, 1, 2, 15, 0, gMapRoom02Unk24Pieces34, gUnk_0996C944+0x800]
-  - [gMapRoom02Unk24Pattern35, 1, 2, 15, 0, gMapRoom02Unk24Pieces35, gUnk_0996C944+0x800]
+  - [gMapRoom02Unk24Pattern00, 1, 4, 50, 0, gMapRoom02Unk24Pieces00, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern01, 1, 4, 50, 0, gMapRoom02Unk24Pieces01, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern02, 1, 4, 50, 0, gMapRoom02Unk24Pieces02, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern03, 1, 4, 50, 0, gMapRoom02Unk24Pieces03, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern04, 1, 4, 50, 0, gMapRoom02Unk24Pieces04, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern05, 1, 4, 50, 0, gMapRoom02Unk24Pieces05, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern06, 1, 4, 50, 0, gMapRoom02Unk24Pieces06, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern07, 1, 4, 50, 0, gMapRoom02Unk24Pieces07, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern08, 1, 4, 50, 0, gMapRoom02Unk24Pieces08, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern09, 2, 2, 80, 0, gMapRoom02Unk24Pieces09, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern10, 2, 2, 80, 0, gMapRoom02Unk24Pieces10, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern11, 2, 3, 50, 0, gMapRoom02Unk24Pieces11, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern12, 1, 3, 30, 0, gMapRoom02Unk24Pieces12, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern13, 2, 3, 50, 0, gMapRoom02Unk24Pieces13, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern14, 1, 3, 30, 0, gMapRoom02Unk24Pieces14, gMapRoom02Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern15, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern21, 2, 2, 15, 0, gMapRoom02Unk24Pieces21, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern22, 2, 2, 15, 0, gMapRoom02Unk24Pieces22, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern23, 2, 2, 15, 0, gMapRoom02Unk24Pieces23, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern24, 1, 4, 15, 0, gMapRoom02Unk24Pieces24, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern25, 1, 4, 15, 0, gMapRoom02Unk24Pieces25, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern26, 1, 4, 15, 0, gMapRoom02Unk24Pieces26, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern27, 1, 2, 15, 0, gMapRoom02Unk24Pieces27, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern28, 1, 2, 15, 0, gMapRoom02Unk24Pieces28, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern29, 1, 2, 15, 0, gMapRoom02Unk24Pieces29, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern30, 2, 2, 15, 0, gMapRoom02Unk24Pieces30, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern31, 2, 2, 15, 0, gMapRoom02Unk24Pieces31, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern32, 2, 2, 15, 0, gMapRoom02Unk24Pieces32, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern33, 1, 2, 15, 0, gMapRoom02Unk24Pieces33, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern34, 1, 2, 15, 0, gMapRoom02Unk24Pieces34, gMapRoom02Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern35, 1, 2, 15, 0, gMapRoom02Unk24Pieces35, gMapRoom02Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984E48C
@@ -2064,12 +2064,12 @@ entries:
     address: 0x09803210
   eu:
     address: 0x0982B0D0
-- name: gUnk_0984E704
+- name: gMapRoom02Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom02Unk28Check00, 1, 2, 50, 0, gMapRoom02Unk28Pieces00, gUnk_0996E144+0x300]
-  - [gMapRoom02Unk28Check01, 1, 2, 50, 0, gMapRoom02Unk28Pieces01, gUnk_0996E144+0x300]
+  - [gMapRoom02Unk28Check00, 1, 2, 50, 0, gMapRoom02Unk28Pieces00, gMapRoom02Bg1Map+0x300]
+  - [gMapRoom02Unk28Check01, 1, 2, 50, 0, gMapRoom02Unk28Pieces01, gMapRoom02Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984E704
@@ -2078,26 +2078,26 @@ entries:
   eu:
     address: 0x0982B0D8
 - name: map_room_02
-  symbol: gUnk_0984E734
+  symbol: gMapRoom02Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990104
+    palette: gMapRoom02Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_098BDA44
+    tiles: gMapRoom02Tiles
     tilesSize: 32256
     unk_0E: [0, 0]
-    tiles2: gUnk_098C5844
+    tiles2: gMapRoom02Bg1Tiles
     tilesSize2: 12160
     unk_16: [0, 0]
-    map3: gUnk_0996C144
-    map2: gUnk_0996C944
-    map: gUnk_0996E144
-    layer1DecorRules: gUnk_0984E48C
-    layer2DecorRules: gUnk_0984E704
-    tileAnims: gUnk_0984E054
-    soraEvents: gUnk_0984E014
-    rikuEvents: gUnk_0984E024
+    map3: gMapRoom02Bg3Map
+    map2: gMapRoom02Bg2Map
+    map: gMapRoom02Bg1Map
+    layer1DecorRules: gMapRoom02Layer1DecorRules
+    layer2DecorRules: gMapRoom02Layer2DecorRules
+    tileAnims: gMapRoom02TileAnims
+    soraEvents: gMapRoom02SoraEvents
+    rikuEvents: gMapRoom02RikuEvents
     unk_38: 22
   index: [2]
   us:
@@ -2106,7 +2106,7 @@ entries:
     address: 0x09803248
   eu:
     address: 0x0982B108
-- name: gUnk_0984E770
+- name: gMapRoom12SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -2120,7 +2120,7 @@ entries:
     address: 0x09803284
   eu:
     address: 0x0982B144
-- name: gUnk_0984E780
+- name: gMapRoom12RikuEvents
   record: MapRoomEvent
   declare: false
   us:
@@ -3162,50 +3162,50 @@ entries:
     address: 0x09803E28
   eu:
     address: 0x0982BCE8
-- name: gUnk_0984F31C
+- name: gMapRoom12Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom12Unk24Pattern00, 2, 4, 70, 0, gMapRoom12Unk24Pieces00, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern01, 2, 6, 70, 0, gMapRoom12Unk24Pieces01, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern02, 2, 6, 70, 0, gMapRoom12Unk24Pieces02, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern03, 1, 6, 100, 0, gMapRoom12Unk24Pieces03, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern04, 1, 7, 100, 0, gMapRoom12Unk24Pieces04, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern05, 1, 7, 100, 0, gMapRoom12Unk24Pieces05, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern06, 1, 7, 100, 0, gMapRoom12Unk24Pieces06, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern07, 1, 7, 100, 0, gMapRoom12Unk24Pieces07, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern08, 1, 4, 100, 0, gMapRoom12Unk24Pieces08, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern09, 1, 5, 100, 0, gMapRoom12Unk24Pieces09, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern10, 1, 5, 100, 0, gMapRoom12Unk24Pieces10, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern11, 1, 5, 100, 0, gMapRoom12Unk24Pieces11, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern12, 1, 5, 100, 0, gMapRoom12Unk24Pieces12, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern13, 1, 3, 100, 0, gMapRoom12Unk24Pieces13, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern14, 1, 4, 100, 0, gMapRoom12Unk24Pieces14, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern15, 1, 4, 100, 0, gMapRoom12Unk24Pieces15, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern16, 1, 4, 100, 0, gMapRoom12Unk24Pieces14, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern17, 1, 4, 100, 0, gMapRoom12Unk24Pieces15, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern18, 1, 2, 100, 0, gMapRoom12Unk24Pieces18, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern19, 1, 3, 100, 0, gMapRoom12Unk24Pieces19, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern20, 1, 3, 100, 0, gMapRoom12Unk24Pieces20, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern21, 1, 3, 100, 0, gMapRoom12Unk24Pieces21, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern22, 1, 3, 100, 0, gMapRoom12Unk24Pieces22, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern23, 1, 3, 100, 0, gMapRoom12Unk24Pieces23, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern24, 1, 3, 100, 0, gMapRoom12Unk24Pieces24, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern25, 1, 3, 100, 0, gMapRoom12Unk24Pieces23, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern26, 1, 3, 100, 0, gMapRoom12Unk24Pieces24, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern27, 1, 2, 100, 0, gMapRoom12Unk24Pieces27, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern28, 1, 4, 40, 0, gMapRoom12Unk24Pieces28, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern29, 1, 4, 40, 0, gMapRoom12Unk24Pieces29, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern30, 1, 3, 30, 0, gMapRoom12Unk24Pieces30, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern31, 1, 3, 30, 0, gMapRoom12Unk24Pieces31, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern32, 1, 2, 30, 0, gMapRoom12Unk24Pieces32, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern33, 1, 2, 30, 0, gMapRoom12Unk24Pieces33, gUnk_09983244+0x800]
-  - [gMapRoom12Unk24Pattern34, 2, 2, 30, 0, gMapRoom12Unk24Pieces34, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern35, 2, 2, 25, 0, gMapRoom12Unk24Pieces35, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern36, 2, 2, 25, 0, gMapRoom12Unk24Pieces36, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern37, 1, 2, 25, 0, gMapRoom12Unk24Pieces37, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern38, 1, 2, 25, 0, gMapRoom12Unk24Pieces38, gUnk_09983244+0x1000]
-  - [gMapRoom12Unk24Pattern39, 1, 2, 25, 0, gMapRoom12Unk24Pieces39, gUnk_09983244+0x1000]
+  - [gMapRoom12Unk24Pattern00, 2, 4, 70, 0, gMapRoom12Unk24Pieces00, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern01, 2, 6, 70, 0, gMapRoom12Unk24Pieces01, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern02, 2, 6, 70, 0, gMapRoom12Unk24Pieces02, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern03, 1, 6, 100, 0, gMapRoom12Unk24Pieces03, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern04, 1, 7, 100, 0, gMapRoom12Unk24Pieces04, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern05, 1, 7, 100, 0, gMapRoom12Unk24Pieces05, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern06, 1, 7, 100, 0, gMapRoom12Unk24Pieces06, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern07, 1, 7, 100, 0, gMapRoom12Unk24Pieces07, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern08, 1, 4, 100, 0, gMapRoom12Unk24Pieces08, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern09, 1, 5, 100, 0, gMapRoom12Unk24Pieces09, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern10, 1, 5, 100, 0, gMapRoom12Unk24Pieces10, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern11, 1, 5, 100, 0, gMapRoom12Unk24Pieces11, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern12, 1, 5, 100, 0, gMapRoom12Unk24Pieces12, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern13, 1, 3, 100, 0, gMapRoom12Unk24Pieces13, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern14, 1, 4, 100, 0, gMapRoom12Unk24Pieces14, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern15, 1, 4, 100, 0, gMapRoom12Unk24Pieces15, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern16, 1, 4, 100, 0, gMapRoom12Unk24Pieces14, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern17, 1, 4, 100, 0, gMapRoom12Unk24Pieces15, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern18, 1, 2, 100, 0, gMapRoom12Unk24Pieces18, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern19, 1, 3, 100, 0, gMapRoom12Unk24Pieces19, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern20, 1, 3, 100, 0, gMapRoom12Unk24Pieces20, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern21, 1, 3, 100, 0, gMapRoom12Unk24Pieces21, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern22, 1, 3, 100, 0, gMapRoom12Unk24Pieces22, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern23, 1, 3, 100, 0, gMapRoom12Unk24Pieces23, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern24, 1, 3, 100, 0, gMapRoom12Unk24Pieces24, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern25, 1, 3, 100, 0, gMapRoom12Unk24Pieces23, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern26, 1, 3, 100, 0, gMapRoom12Unk24Pieces24, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern27, 1, 2, 100, 0, gMapRoom12Unk24Pieces27, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern28, 1, 4, 40, 0, gMapRoom12Unk24Pieces28, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern29, 1, 4, 40, 0, gMapRoom12Unk24Pieces29, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern30, 1, 3, 30, 0, gMapRoom12Unk24Pieces30, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern31, 1, 3, 30, 0, gMapRoom12Unk24Pieces31, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern32, 1, 2, 30, 0, gMapRoom12Unk24Pieces32, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern33, 1, 2, 30, 0, gMapRoom12Unk24Pieces33, gMapRoom12Bg2Map+0x800]
+  - [gMapRoom12Unk24Pattern34, 2, 2, 30, 0, gMapRoom12Unk24Pieces34, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern35, 2, 2, 25, 0, gMapRoom12Unk24Pieces35, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern36, 2, 2, 25, 0, gMapRoom12Unk24Pieces36, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern37, 1, 2, 25, 0, gMapRoom12Unk24Pieces37, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern38, 1, 2, 25, 0, gMapRoom12Unk24Pieces38, gMapRoom12Bg2Map+0x1000]
+  - [gMapRoom12Unk24Pattern39, 1, 2, 25, 0, gMapRoom12Unk24Pieces39, gMapRoom12Bg2Map+0x1000]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984F31C
@@ -3357,16 +3357,16 @@ entries:
     address: 0x09804130
   eu:
     address: 0x0982BFF0
-- name: gUnk_0984F624
+- name: gMapRoom12Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom12Unk28Check00, 1, 2, 100, 0, gMapRoom12Unk28Pieces00, gUnk_09984A44+0x300]
-  - [gMapRoom12Unk28Check01, 1, 2, 100, 0, gMapRoom12Unk28Pieces01, gUnk_09984A44+0x300]
-  - [gMapRoom12Unk28Check02, 1, 2, 100, 0, gMapRoom12Unk28Pieces02, gUnk_09984A44+0x300]
-  - [gMapRoom12Unk28Check03, 1, 2, 100, 0, gMapRoom12Unk28Pieces03, gUnk_09984A44+0x300]
-  - [gMapRoom12Unk28Check04, 1, 2, 100, 0, gMapRoom12Unk28Pieces04, gUnk_09984A44+0x300]
-  - [gMapRoom12Unk28Check05, 1, 2, 100, 0, gMapRoom12Unk28Pieces05, gUnk_09984A44+0x300]
+  - [gMapRoom12Unk28Check00, 1, 2, 100, 0, gMapRoom12Unk28Pieces00, gMapRoom12Bg1Map+0x300]
+  - [gMapRoom12Unk28Check01, 1, 2, 100, 0, gMapRoom12Unk28Pieces01, gMapRoom12Bg1Map+0x300]
+  - [gMapRoom12Unk28Check02, 1, 2, 100, 0, gMapRoom12Unk28Pieces02, gMapRoom12Bg1Map+0x300]
+  - [gMapRoom12Unk28Check03, 1, 2, 100, 0, gMapRoom12Unk28Pieces03, gMapRoom12Bg1Map+0x300]
+  - [gMapRoom12Unk28Check04, 1, 2, 100, 0, gMapRoom12Unk28Pieces04, gMapRoom12Bg1Map+0x300]
+  - [gMapRoom12Unk28Check05, 1, 2, 100, 0, gMapRoom12Unk28Pieces05, gMapRoom12Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0984F624
@@ -3375,26 +3375,26 @@ entries:
   eu:
     address: 0x0982BFF8
 - name: map_room_12
-  symbol: gUnk_0984F694
+  symbol: gMapRoom12Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990F44
+    palette: gMapRoom12Palette
     paletteSize: 384
     unk_06: [0, 0]
-    tiles: gUnk_0992FF64
+    tiles: gMapRoom12Tiles
     tilesSize: 32768
     unk_0E: [0, 0]
-    tiles2: gUnk_09937F64
+    tiles2: gMapRoom12Bg1Tiles
     tilesSize2: 12288
     unk_16: [0, 0]
-    map3: gUnk_09982A44
-    map2: gUnk_09983244
-    map: gUnk_09984A44
-    layer1DecorRules: gUnk_0984F31C
-    layer2DecorRules: gUnk_0984F624
+    map3: gMapRoom12Bg3Map
+    map2: gMapRoom12Bg2Map
+    map: gMapRoom12Bg1Map
+    layer1DecorRules: gMapRoom12Layer1DecorRules
+    layer2DecorRules: gMapRoom12Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_0984E770
-    rikuEvents: gUnk_0984E780
+    soraEvents: gMapRoom12SoraEvents
+    rikuEvents: gMapRoom12RikuEvents
     unk_38: 38
   index: [12]
   us:
@@ -3403,7 +3403,7 @@ entries:
     address: 0x098041A8
   eu:
     address: 0x0982C068
-- name: gUnk_0984F6D0
+- name: gMapRoom03SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -3417,7 +3417,7 @@ entries:
     address: 0x098041E4
   eu:
     address: 0x0982C0A4
-- name: gUnk_0984F6E0
+- name: gMapRoom03RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -4142,33 +4142,33 @@ entries:
     address: 0x09804D54
   eu:
     address: 0x0982CC14
-- name: gUnk_09850250
+- name: gMapRoom03Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom03Unk24Pattern00, 2, 3, 50, 0, gMapRoom03Unk24Pieces00, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern01, 2, 3, 50, 0, gMapRoom03Unk24Pieces01, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern02, 2, 2, 50, 0, gMapRoom03Unk24Pieces02, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern03, 2, 2, 50, 0, gMapRoom03Unk24Pieces03, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern04, 2, 5, 100, 0, gMapRoom03Unk24Pieces04, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern05, 2, 4, 100, 0, gMapRoom03Unk24Pieces05, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern06, 2, 8, 30, 0, gMapRoom03Unk24Pieces06, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern07, 2, 8, 30, 0, gMapRoom03Unk24Pieces07, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern08, 2, 6, 100, 0, gMapRoom03Unk24Pieces08, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern09, 2, 5, 100, 0, gMapRoom03Unk24Pieces09, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern10, 3, 2, 30, 0, gMapRoom03Unk24Pieces10, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern11, 3, 4, 30, 0, gMapRoom03Unk24Pieces11, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern12, 3, 4, 30, 0, gMapRoom03Unk24Pieces12, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern13, 2, 7, 50, 0, gMapRoom03Unk24Pieces13, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern14, 2, 7, 50, 0, gMapRoom03Unk24Pieces14, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern15, 2, 5, 50, 0, gMapRoom03Unk24Pieces15, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern16, 2, 5, 80, 0, gMapRoom03Unk24Pieces16, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern17, 2, 5, 80, 0, gMapRoom03Unk24Pieces17, gUnk_0996ED44+0x1000]
-  - [gMapRoom03Unk24Pattern18, 1, 4, 40, 0, gMapRoom03Unk24Pieces18, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern19, 1, 5, 40, 0, gMapRoom03Unk24Pieces19, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern20, 1, 5, 40, 0, gMapRoom03Unk24Pieces20, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern21, 1, 2, 20, 0, gMapRoom03Unk24Pieces21, gUnk_0996ED44+0x800]
-  - [gMapRoom03Unk24Pattern22, 1, 2, 20, 0, gMapRoom03Unk24Pieces22, gUnk_0996ED44+0x800]
+  - [gMapRoom03Unk24Pattern00, 2, 3, 50, 0, gMapRoom03Unk24Pieces00, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern01, 2, 3, 50, 0, gMapRoom03Unk24Pieces01, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern02, 2, 2, 50, 0, gMapRoom03Unk24Pieces02, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern03, 2, 2, 50, 0, gMapRoom03Unk24Pieces03, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern04, 2, 5, 100, 0, gMapRoom03Unk24Pieces04, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern05, 2, 4, 100, 0, gMapRoom03Unk24Pieces05, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern06, 2, 8, 30, 0, gMapRoom03Unk24Pieces06, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern07, 2, 8, 30, 0, gMapRoom03Unk24Pieces07, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern08, 2, 6, 100, 0, gMapRoom03Unk24Pieces08, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern09, 2, 5, 100, 0, gMapRoom03Unk24Pieces09, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern10, 3, 2, 30, 0, gMapRoom03Unk24Pieces10, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern11, 3, 4, 30, 0, gMapRoom03Unk24Pieces11, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern12, 3, 4, 30, 0, gMapRoom03Unk24Pieces12, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern13, 2, 7, 50, 0, gMapRoom03Unk24Pieces13, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern14, 2, 7, 50, 0, gMapRoom03Unk24Pieces14, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern15, 2, 5, 50, 0, gMapRoom03Unk24Pieces15, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern16, 2, 5, 80, 0, gMapRoom03Unk24Pieces16, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern17, 2, 5, 80, 0, gMapRoom03Unk24Pieces17, gMapRoom03Bg2Map+0x1000]
+  - [gMapRoom03Unk24Pattern18, 1, 4, 40, 0, gMapRoom03Unk24Pieces18, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern19, 1, 5, 40, 0, gMapRoom03Unk24Pieces19, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern20, 1, 5, 40, 0, gMapRoom03Unk24Pieces20, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern21, 1, 2, 20, 0, gMapRoom03Unk24Pieces21, gMapRoom03Bg2Map+0x800]
+  - [gMapRoom03Unk24Pattern22, 1, 2, 20, 0, gMapRoom03Unk24Pieces22, gMapRoom03Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09850250
@@ -4224,12 +4224,12 @@ entries:
     address: 0x09804F04
   eu:
     address: 0x0982CDC4
-- name: gUnk_098503F8
+- name: gMapRoom03Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom03Unk28Check00, 1, 2, 50, 0, gMapRoom03Unk28Pieces00, gUnk_09970544+0x300]
-  - [gMapRoom03Unk28Check01, 1, 2, 50, 0, gMapRoom03Unk28Pieces01, gUnk_09970544+0x300]
+  - [gMapRoom03Unk28Check00, 1, 2, 50, 0, gMapRoom03Unk28Pieces00, gMapRoom03Bg1Map+0x300]
+  - [gMapRoom03Unk28Check01, 1, 2, 50, 0, gMapRoom03Unk28Pieces01, gMapRoom03Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x098503F8
@@ -4238,26 +4238,26 @@ entries:
   eu:
     address: 0x0982CDCC
 - name: map_room_03
-  symbol: gUnk_09850428
+  symbol: gMapRoom03Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990264
+    palette: gMapRoom03Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_098C9D84
+    tiles: gMapRoom03Tiles
     tilesSize: 30720
     unk_0E: [0, 0]
-    tiles2: gUnk_098D1584
+    tiles2: gMapRoom03Bg1Tiles
     tilesSize2: 12160
     unk_16: [0, 0]
-    map3: gUnk_0996E544
-    map2: gUnk_0996ED44
-    map: gUnk_09970544
-    layer1DecorRules: gUnk_09850250
-    layer2DecorRules: gUnk_098503F8
+    map3: gMapRoom03Bg3Map
+    map2: gMapRoom03Bg2Map
+    map: gMapRoom03Bg1Map
+    layer1DecorRules: gMapRoom03Layer1DecorRules
+    layer2DecorRules: gMapRoom03Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_0984F6D0
-    rikuEvents: gUnk_0984F6E0
+    soraEvents: gMapRoom03SoraEvents
+    rikuEvents: gMapRoom03RikuEvents
     unk_38: 21
   index: [3]
   us:
@@ -4266,7 +4266,7 @@ entries:
     address: 0x09804F3C
   eu:
     address: 0x0982CDFC
-- name: gUnk_09850464
+- name: gMapRoom09SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -4279,7 +4279,7 @@ entries:
     address: 0x09804F78
   eu:
     address: 0x0982CE38
-- name: gUnk_09850470
+- name: gMapRoom09RikuEvents
   record: MapRoomEvent
   declare: false
   us:
@@ -4930,33 +4930,33 @@ entries:
     address: 0x09805720
   eu:
     address: 0x0982D5E0
-- name: gUnk_09850C1C
+- name: gMapRoom09Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom09Unk24Pattern00, 3, 6, 100, 0, gMapRoom09Unk24Pieces00, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern01, 2, 3, 50, 0, gMapRoom09Unk24Pieces01, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern02, 1, 2, 100, 0, gMapRoom09Unk24Pieces02, gUnk_0997C544+0x1000]
-  - [gMapRoom09Unk24Pattern03, 1, 2, 100, 0, gMapRoom09Unk24Pieces02, gUnk_0997C544+0x1000]
-  - [gMapRoom09Unk24Pattern04, 2, 4, 40, 0, gMapRoom09Unk24Pieces04, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern05, 2, 4, 40, 0, gMapRoom09Unk24Pieces05, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern06, 1, 4, 50, 0, gMapRoom09Unk24Pieces06, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern07, 2, 3, 50, 0, gMapRoom09Unk24Pieces07, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern08, 1, 4, 50, 0, gMapRoom09Unk24Pieces08, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern09, 2, 5, 70, 0, gMapRoom09Unk24Pieces09, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern10, 2, 5, 70, 0, gMapRoom09Unk24Pieces10, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern11, 2, 3, 40, 0, gMapRoom09Unk24Pieces11, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern12, 2, 2, 40, 0, gMapRoom09Unk24Pieces12, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern13, 1, 2, 40, 0, gMapRoom09Unk24Pieces13, gUnk_0997C544+0x1000]
-  - [gMapRoom09Unk24Pattern14, 1, 4, 90, 0, gMapRoom09Unk24Pieces14, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern15, 1, 4, 90, 0, gMapRoom09Unk24Pieces15, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern16, 1, 4, 90, 0, gMapRoom09Unk24Pieces16, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern17, 1, 2, 80, 0, gMapRoom09Unk24Pieces17, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern18, 1, 2, 80, 0, gMapRoom09Unk24Pieces18, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern19, 1, 2, 80, 0, gMapRoom09Unk24Pieces19, gUnk_0997C544+0x800]
-  - [gMapRoom09Unk24Pattern20, 2, 2, 40, 0, gMapRoom09Unk24Pieces20, gUnk_0997C544+0x1000]
-  - [gMapRoom09Unk24Pattern21, 2, 2, 40, 0, gMapRoom09Unk24Pieces21, gUnk_0997C544+0x1000]
-  - [gMapRoom09Unk24Pattern22, 2, 2, 20, 0, gMapRoom09Unk24Pieces22, gUnk_0997C544+0x1000]
+  - [gMapRoom09Unk24Pattern00, 3, 6, 100, 0, gMapRoom09Unk24Pieces00, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern01, 2, 3, 50, 0, gMapRoom09Unk24Pieces01, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern02, 1, 2, 100, 0, gMapRoom09Unk24Pieces02, gMapRoom09Bg2Map+0x1000]
+  - [gMapRoom09Unk24Pattern03, 1, 2, 100, 0, gMapRoom09Unk24Pieces02, gMapRoom09Bg2Map+0x1000]
+  - [gMapRoom09Unk24Pattern04, 2, 4, 40, 0, gMapRoom09Unk24Pieces04, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern05, 2, 4, 40, 0, gMapRoom09Unk24Pieces05, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern06, 1, 4, 50, 0, gMapRoom09Unk24Pieces06, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern07, 2, 3, 50, 0, gMapRoom09Unk24Pieces07, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern08, 1, 4, 50, 0, gMapRoom09Unk24Pieces08, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern09, 2, 5, 70, 0, gMapRoom09Unk24Pieces09, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern10, 2, 5, 70, 0, gMapRoom09Unk24Pieces10, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern11, 2, 3, 40, 0, gMapRoom09Unk24Pieces11, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern12, 2, 2, 40, 0, gMapRoom09Unk24Pieces12, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern13, 1, 2, 40, 0, gMapRoom09Unk24Pieces13, gMapRoom09Bg2Map+0x1000]
+  - [gMapRoom09Unk24Pattern14, 1, 4, 90, 0, gMapRoom09Unk24Pieces14, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern15, 1, 4, 90, 0, gMapRoom09Unk24Pieces15, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern16, 1, 4, 90, 0, gMapRoom09Unk24Pieces16, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern17, 1, 2, 80, 0, gMapRoom09Unk24Pieces17, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern18, 1, 2, 80, 0, gMapRoom09Unk24Pieces18, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern19, 1, 2, 80, 0, gMapRoom09Unk24Pieces19, gMapRoom09Bg2Map+0x800]
+  - [gMapRoom09Unk24Pattern20, 2, 2, 40, 0, gMapRoom09Unk24Pieces20, gMapRoom09Bg2Map+0x1000]
+  - [gMapRoom09Unk24Pattern21, 2, 2, 40, 0, gMapRoom09Unk24Pieces21, gMapRoom09Bg2Map+0x1000]
+  - [gMapRoom09Unk24Pattern22, 2, 2, 20, 0, gMapRoom09Unk24Pieces22, gMapRoom09Bg2Map+0x1000]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09850C1C
@@ -5012,12 +5012,12 @@ entries:
     address: 0x098058D0
   eu:
     address: 0x0982D790
-- name: gUnk_09850DC4
+- name: gMapRoom09Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom09Unk28Check00, 1, 2, 50, 0, gMapRoom09Unk28Pieces00, gUnk_0997DD44+0x300]
-  - [gMapRoom09Unk28Check01, 1, 2, 50, 0, gMapRoom09Unk28Pieces01, gUnk_0997DD44+0x300]
+  - [gMapRoom09Unk28Check00, 1, 2, 50, 0, gMapRoom09Unk28Pieces00, gMapRoom09Bg1Map+0x300]
+  - [gMapRoom09Unk28Check01, 1, 2, 50, 0, gMapRoom09Unk28Pieces01, gMapRoom09Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09850DC4
@@ -5026,26 +5026,26 @@ entries:
   eu:
     address: 0x0982D798
 - name: map_room_09
-  symbol: gUnk_09850DF4
+  symbol: gMapRoom09Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990B04
+    palette: gMapRoom09Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_0990EA44
+    tiles: gMapRoom09Tiles
     tilesSize: 32768
     unk_0E: [0, 0]
-    tiles2: gUnk_09916A44
+    tiles2: gMapRoom09Bg1Tiles
     tilesSize2: 12160
     unk_16: [0, 0]
-    map3: gUnk_0997BD44
-    map2: gUnk_0997C544
-    map: gUnk_0997DD44
-    layer1DecorRules: gUnk_09850C1C
-    layer2DecorRules: gUnk_09850DC4
+    map3: gMapRoom09Bg3Map
+    map2: gMapRoom09Bg2Map
+    map: gMapRoom09Bg1Map
+    layer1DecorRules: gMapRoom09Layer1DecorRules
+    layer2DecorRules: gMapRoom09Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_09850464
-    rikuEvents: gUnk_09850470
+    soraEvents: gMapRoom09SoraEvents
+    rikuEvents: gMapRoom09RikuEvents
     unk_38: 33
   index: [9]
   us:
@@ -5054,7 +5054,7 @@ entries:
     address: 0x09805908
   eu:
     address: 0x0982D7C8
-- name: gUnk_09850E30
+- name: gMapRoom06SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -5068,7 +5068,7 @@ entries:
     address: 0x09805944
   eu:
     address: 0x0982D804
-- name: gUnk_09850E40
+- name: gMapRoom06RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -5095,11 +5095,11 @@ entries:
     address: 0x0980595C
   eu:
     address: 0x0982D81C
-- name: gUnk_09850E5C
+- name: gMapRoom06TileAnims
   record: MapAnmEntry
   declare: false
   elements:
-  - [gMapRoom06AnimScript0, gUnk_098F5DA4, 1408, 0, 0]
+  - [gMapRoom06AnimScript0, gMapRoom06AnimTiles0, 1408, 0, 0]
   - [0, 0, 0, 0, 0]
   us:
     address: 0x09850E5C
@@ -6492,64 +6492,64 @@ entries:
     address: 0x09806960
   eu:
     address: 0x0982E820
-- name: gUnk_09851E54
+- name: gMapRoom06Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom06Unk24Pattern00, 2, 4, 100, 0, gMapRoom06Unk24Pieces00, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern01, 2, 3, 100, 0, gMapRoom06Unk24Pieces01, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern02, 1, 3, 100, 0, gMapRoom06Unk24Pieces02, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern03, 1, 3, 100, 0, gMapRoom06Unk24Pieces03, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern04, 1, 3, 100, 0, gMapRoom06Unk24Pieces04, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern05, 1, 3, 100, 0, gMapRoom06Unk24Pieces05, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern06, 2, 5, 100, 0, gMapRoom06Unk24Pieces06, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern07, 2, 4, 100, 0, gMapRoom06Unk24Pieces07, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern08, 1, 3, 100, 0, gMapRoom06Unk24Pieces08, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern09, 1, 3, 100, 0, gMapRoom06Unk24Pieces09, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern10, 2, 5, 100, 0, gMapRoom06Unk24Pieces10, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern11, 2, 4, 100, 0, gMapRoom06Unk24Pieces11, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern12, 1, 3, 80, 0, gMapRoom06Unk24Pieces12, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern13, 1, 3, 100, 0, gMapRoom06Unk24Pieces13, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern14, 1, 3, 80, 0, gMapRoom06Unk24Pieces14, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern15, 1, 3, 100, 0, gMapRoom06Unk24Pieces15, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern16, 1, 3, 100, 0, gMapRoom06Unk24Pieces08, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern17, 1, 3, 80, 0, gMapRoom06Unk24Pieces09, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern18, 2, 7, 100, 0, gMapRoom06Unk24Pieces18, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern19, 2, 6, 100, 0, gMapRoom06Unk24Pieces19, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern20, 2, 7, 100, 0, gMapRoom06Unk24Pieces20, gUnk_09975944+0x800]
-  - [gMapRoom06Unk24Pattern21, 2, 5, 80, 0, gMapRoom06Unk24Pieces21, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern22, 2, 5, 80, 0, gMapRoom06Unk24Pieces22, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern23, 1, 4, 80, 0, gMapRoom06Unk24Pieces23, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern24, 1, 4, 80, 0, gMapRoom06Unk24Pieces24, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern25, 1, 4, 80, 0, gMapRoom06Unk24Pieces25, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern26, 1, 4, 80, 0, gMapRoom06Unk24Pieces25, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern27, 1, 4, 80, 0, gMapRoom06Unk24Pieces27, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern28, 1, 4, 80, 0, gMapRoom06Unk24Pieces28, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern29, 1, 4, 80, 0, gMapRoom06Unk24Pieces29, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern30, 2, 4, 80, 0, gMapRoom06Unk24Pieces30, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern31, 1, 3, 80, 0, gMapRoom06Unk24Pieces31, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern32, 1, 3, 80, 0, gMapRoom06Unk24Pieces32, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern33, 1, 3, 80, 0, gMapRoom06Unk24Pieces33, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern34, 1, 3, 80, 0, gMapRoom06Unk24Pieces34, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern35, 2, 3, 80, 0, gMapRoom06Unk24Pieces35, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern36, 1, 3, 80, 0, gMapRoom06Unk24Pieces36, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern37, 1, 3, 80, 0, gMapRoom06Unk24Pieces37, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern38, 1, 3, 80, 0, gMapRoom06Unk24Pieces38, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern39, 1, 3, 80, 0, gMapRoom06Unk24Pieces39, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern40, 2, 4, 80, 0, gMapRoom06Unk24Pieces40, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern41, 1, 3, 80, 0, gMapRoom06Unk24Pieces41, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern42, 1, 3, 80, 0, gMapRoom06Unk24Pieces41, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern43, 1, 3, 80, 0, gMapRoom06Unk24Pieces43, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern44, 1, 3, 80, 0, gMapRoom06Unk24Pieces43, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern45, 1, 2, 40, 0, gMapRoom06Unk24Pieces45, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern46, 1, 2, 40, 0, gMapRoom06Unk24Pieces46, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern47, 1, 2, 40, 0, gMapRoom06Unk24Pieces47, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern48, 1, 2, 40, 0, gMapRoom06Unk24Pieces48, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern49, 1, 2, 40, 0, gMapRoom06Unk24Pieces49, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern50, 1, 2, 40, 0, gMapRoom06Unk24Pieces50, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern51, 2, 2, 90, 0, gMapRoom06Unk24Pieces51, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern52, 2, 2, 90, 0, gMapRoom06Unk24Pieces52, gUnk_09975944+0x1000]
-  - [gMapRoom06Unk24Pattern53, 2, 2, 90, 0, gMapRoom06Unk24Pieces53, gUnk_09975944+0x1000]
+  - [gMapRoom06Unk24Pattern00, 2, 4, 100, 0, gMapRoom06Unk24Pieces00, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern01, 2, 3, 100, 0, gMapRoom06Unk24Pieces01, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern02, 1, 3, 100, 0, gMapRoom06Unk24Pieces02, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern03, 1, 3, 100, 0, gMapRoom06Unk24Pieces03, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern04, 1, 3, 100, 0, gMapRoom06Unk24Pieces04, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern05, 1, 3, 100, 0, gMapRoom06Unk24Pieces05, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern06, 2, 5, 100, 0, gMapRoom06Unk24Pieces06, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern07, 2, 4, 100, 0, gMapRoom06Unk24Pieces07, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern08, 1, 3, 100, 0, gMapRoom06Unk24Pieces08, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern09, 1, 3, 100, 0, gMapRoom06Unk24Pieces09, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern10, 2, 5, 100, 0, gMapRoom06Unk24Pieces10, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern11, 2, 4, 100, 0, gMapRoom06Unk24Pieces11, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern12, 1, 3, 80, 0, gMapRoom06Unk24Pieces12, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern13, 1, 3, 100, 0, gMapRoom06Unk24Pieces13, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern14, 1, 3, 80, 0, gMapRoom06Unk24Pieces14, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern15, 1, 3, 100, 0, gMapRoom06Unk24Pieces15, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern16, 1, 3, 100, 0, gMapRoom06Unk24Pieces08, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern17, 1, 3, 80, 0, gMapRoom06Unk24Pieces09, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern18, 2, 7, 100, 0, gMapRoom06Unk24Pieces18, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern19, 2, 6, 100, 0, gMapRoom06Unk24Pieces19, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern20, 2, 7, 100, 0, gMapRoom06Unk24Pieces20, gMapRoom06Bg2Map+0x800]
+  - [gMapRoom06Unk24Pattern21, 2, 5, 80, 0, gMapRoom06Unk24Pieces21, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern22, 2, 5, 80, 0, gMapRoom06Unk24Pieces22, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern23, 1, 4, 80, 0, gMapRoom06Unk24Pieces23, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern24, 1, 4, 80, 0, gMapRoom06Unk24Pieces24, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern25, 1, 4, 80, 0, gMapRoom06Unk24Pieces25, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern26, 1, 4, 80, 0, gMapRoom06Unk24Pieces25, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern27, 1, 4, 80, 0, gMapRoom06Unk24Pieces27, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern28, 1, 4, 80, 0, gMapRoom06Unk24Pieces28, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern29, 1, 4, 80, 0, gMapRoom06Unk24Pieces29, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern30, 2, 4, 80, 0, gMapRoom06Unk24Pieces30, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern31, 1, 3, 80, 0, gMapRoom06Unk24Pieces31, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern32, 1, 3, 80, 0, gMapRoom06Unk24Pieces32, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern33, 1, 3, 80, 0, gMapRoom06Unk24Pieces33, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern34, 1, 3, 80, 0, gMapRoom06Unk24Pieces34, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern35, 2, 3, 80, 0, gMapRoom06Unk24Pieces35, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern36, 1, 3, 80, 0, gMapRoom06Unk24Pieces36, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern37, 1, 3, 80, 0, gMapRoom06Unk24Pieces37, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern38, 1, 3, 80, 0, gMapRoom06Unk24Pieces38, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern39, 1, 3, 80, 0, gMapRoom06Unk24Pieces39, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern40, 2, 4, 80, 0, gMapRoom06Unk24Pieces40, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern41, 1, 3, 80, 0, gMapRoom06Unk24Pieces41, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern42, 1, 3, 80, 0, gMapRoom06Unk24Pieces41, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern43, 1, 3, 80, 0, gMapRoom06Unk24Pieces43, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern44, 1, 3, 80, 0, gMapRoom06Unk24Pieces43, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern45, 1, 2, 40, 0, gMapRoom06Unk24Pieces45, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern46, 1, 2, 40, 0, gMapRoom06Unk24Pieces46, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern47, 1, 2, 40, 0, gMapRoom06Unk24Pieces47, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern48, 1, 2, 40, 0, gMapRoom06Unk24Pieces48, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern49, 1, 2, 40, 0, gMapRoom06Unk24Pieces49, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern50, 1, 2, 40, 0, gMapRoom06Unk24Pieces50, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern51, 2, 2, 90, 0, gMapRoom06Unk24Pieces51, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern52, 2, 2, 90, 0, gMapRoom06Unk24Pieces52, gMapRoom06Bg2Map+0x1000]
+  - [gMapRoom06Unk24Pattern53, 2, 2, 90, 0, gMapRoom06Unk24Pieces53, gMapRoom06Bg2Map+0x1000]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09851E54
@@ -6605,12 +6605,12 @@ entries:
     address: 0x09806CF8
   eu:
     address: 0x0982EBB8
-- name: gUnk_098521EC
+- name: gMapRoom06Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom06Unk28Check00, 1, 2, 50, 0, gMapRoom06Unk28Pieces00, gUnk_09977144+0x300]
-  - [gMapRoom06Unk28Check01, 1, 2, 50, 0, gMapRoom06Unk28Pieces01, gUnk_09977144+0x300]
+  - [gMapRoom06Unk28Check00, 1, 2, 50, 0, gMapRoom06Unk28Pieces00, gMapRoom06Bg1Map+0x300]
+  - [gMapRoom06Unk28Check01, 1, 2, 50, 0, gMapRoom06Unk28Pieces01, gMapRoom06Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x098521EC
@@ -6619,26 +6619,26 @@ entries:
   eu:
     address: 0x0982EBC0
 - name: map_room_06
-  symbol: gUnk_0985221C
+  symbol: gMapRoom06Def
   record: MapRoomDef
   fields:
-    palette: gUnk_099906A4
+    palette: gMapRoom06Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_098EB324
+    tiles: gMapRoom06Tiles
     tilesSize: 32128
     unk_0E: [0, 0]
-    tiles2: gUnk_098F30A4
+    tiles2: gMapRoom06Bg1Tiles
     tilesSize2: 11520
     unk_16: [0, 0]
-    map3: gUnk_09975144
-    map2: gUnk_09975944
-    map: gUnk_09977144
-    layer1DecorRules: gUnk_09851E54
-    layer2DecorRules: gUnk_098521EC
-    tileAnims: gUnk_09850E5C
-    soraEvents: gUnk_09850E30
-    rikuEvents: gUnk_09850E40
+    map3: gMapRoom06Bg3Map
+    map2: gMapRoom06Bg2Map
+    map: gMapRoom06Bg1Map
+    layer1DecorRules: gMapRoom06Layer1DecorRules
+    layer2DecorRules: gMapRoom06Layer2DecorRules
+    tileAnims: gMapRoom06TileAnims
+    soraEvents: gMapRoom06SoraEvents
+    rikuEvents: gMapRoom06RikuEvents
     unk_38: 15
   index: [6]
   us:
@@ -6647,7 +6647,7 @@ entries:
     address: 0x09806D30
   eu:
     address: 0x0982EBF0
-- name: gUnk_09852258
+- name: gMapRoom08SoraEvents
   record: MapRoomEvent
   declare: false
   us:
@@ -6671,7 +6671,7 @@ entries:
     - [1, 129, 26, 0]
     - [2, 130, 26, 0]
     - [255, 255, 26, 0]
-- name: gUnk_09852268
+- name: gMapRoom08RikuEvents
   record: MapRoomEvent
   declare: false
   us:
@@ -7522,40 +7522,40 @@ entries:
     address: 0x09807774
   eu:
     address: 0x0982F634
-- name: gUnk_09852C68
+- name: gMapRoom08Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom08Unk24Pattern00, 2, 8, 100, 0, gMapRoom08Unk24Pieces00, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern01, 2, 7, 100, 0, gMapRoom08Unk24Pieces01, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern02, 1, 6, 50, 0, gMapRoom08Unk24Pieces02, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern03, 1, 5, 30, 0, gMapRoom08Unk24Pieces03, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern04, 1, 4, 50, 0, gMapRoom08Unk24Pieces04, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern05, 1, 3, 40, 0, gMapRoom08Unk24Pieces05, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern06, 1, 2, 40, 0, gMapRoom08Unk24Pieces06, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern07, 2, 1, 20, 0, gMapRoom08Unk24Pieces07, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern08, 1, 3, 60, 0, gMapRoom08Unk24Pieces08, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern09, 1, 2, 90, 0, gMapRoom08Unk24Pieces09, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern10, 1, 7, 40, 0, gMapRoom08Unk24Pieces10, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern11, 1, 5, 20, 0, gMapRoom08Unk24Pieces11, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern12, 1, 4, 30, 0, gMapRoom08Unk24Pieces12, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern13, 2, 5, 30, 0, gMapRoom08Unk24Pieces13, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern14, 1, 4, 40, 0, gMapRoom08Unk24Pieces14, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern15, 1, 3, 40, 0, gMapRoom08Unk24Pieces15, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern16, 2, 3, 20, 0, gMapRoom08Unk24Pieces16, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern17, 1, 2, 90, 0, gMapRoom08Unk24Pieces17, gUnk_0997A144+0x800]
-  - [gMapRoom08Unk24Pattern18, 1, 7, 40, 0, gMapRoom08Unk24Pieces18, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern19, 1, 5, 20, 0, gMapRoom08Unk24Pieces19, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern20, 1, 4, 30, 0, gMapRoom08Unk24Pieces20, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern21, 2, 5, 30, 0, gMapRoom08Unk24Pieces21, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern22, 1, 4, 40, 0, gMapRoom08Unk24Pieces22, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern23, 1, 3, 40, 0, gMapRoom08Unk24Pieces23, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern24, 2, 3, 20, 0, gMapRoom08Unk24Pieces24, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern25, 1, 2, 90, 0, gMapRoom08Unk24Pieces25, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern26, 2, 2, 60, 0, gMapRoom08Unk24Pieces26, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern27, 2, 2, 60, 0, gMapRoom08Unk24Pieces27, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern28, 3, 3, 60, 0, gMapRoom08Unk24Pieces28, gUnk_0997A144+0x1000]
-  - [gMapRoom08Unk24Pattern29, 2, 2, 80, 0, gMapRoom08Unk24Pieces29, gUnk_0997A144+0x1000]
+  - [gMapRoom08Unk24Pattern00, 2, 8, 100, 0, gMapRoom08Unk24Pieces00, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern01, 2, 7, 100, 0, gMapRoom08Unk24Pieces01, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern02, 1, 6, 50, 0, gMapRoom08Unk24Pieces02, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern03, 1, 5, 30, 0, gMapRoom08Unk24Pieces03, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern04, 1, 4, 50, 0, gMapRoom08Unk24Pieces04, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern05, 1, 3, 40, 0, gMapRoom08Unk24Pieces05, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern06, 1, 2, 40, 0, gMapRoom08Unk24Pieces06, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern07, 2, 1, 20, 0, gMapRoom08Unk24Pieces07, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern08, 1, 3, 60, 0, gMapRoom08Unk24Pieces08, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern09, 1, 2, 90, 0, gMapRoom08Unk24Pieces09, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern10, 1, 7, 40, 0, gMapRoom08Unk24Pieces10, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern11, 1, 5, 20, 0, gMapRoom08Unk24Pieces11, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern12, 1, 4, 30, 0, gMapRoom08Unk24Pieces12, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern13, 2, 5, 30, 0, gMapRoom08Unk24Pieces13, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern14, 1, 4, 40, 0, gMapRoom08Unk24Pieces14, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern15, 1, 3, 40, 0, gMapRoom08Unk24Pieces15, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern16, 2, 3, 20, 0, gMapRoom08Unk24Pieces16, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern17, 1, 2, 90, 0, gMapRoom08Unk24Pieces17, gMapRoom08Bg2Map+0x800]
+  - [gMapRoom08Unk24Pattern18, 1, 7, 40, 0, gMapRoom08Unk24Pieces18, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern19, 1, 5, 20, 0, gMapRoom08Unk24Pieces19, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern20, 1, 4, 30, 0, gMapRoom08Unk24Pieces20, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern21, 2, 5, 30, 0, gMapRoom08Unk24Pieces21, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern22, 1, 4, 40, 0, gMapRoom08Unk24Pieces22, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern23, 1, 3, 40, 0, gMapRoom08Unk24Pieces23, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern24, 2, 3, 20, 0, gMapRoom08Unk24Pieces24, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern25, 1, 2, 90, 0, gMapRoom08Unk24Pieces25, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern26, 2, 2, 60, 0, gMapRoom08Unk24Pieces26, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern27, 2, 2, 60, 0, gMapRoom08Unk24Pieces27, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern28, 3, 3, 60, 0, gMapRoom08Unk24Pieces28, gMapRoom08Bg2Map+0x1000]
+  - [gMapRoom08Unk24Pattern29, 2, 2, 80, 0, gMapRoom08Unk24Pieces29, gMapRoom08Bg2Map+0x1000]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09852C68
@@ -7707,16 +7707,16 @@ entries:
     address: 0x098079E8
   eu:
     address: 0x0982F8A8
-- name: gUnk_09852EDC
+- name: gMapRoom08Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom08Unk28Check00, 1, 2, 30, 0, gMapRoom08Unk28Pieces00, gUnk_0997B944+0x300]
-  - [gMapRoom08Unk28Check01, 1, 2, 40, 0, gMapRoom08Unk28Pieces01, gUnk_0997B944+0x300]
-  - [gMapRoom08Unk28Check02, 1, 2, 40, 0, gMapRoom08Unk28Pieces02, gUnk_0997B944+0x300]
-  - [gMapRoom08Unk28Check03, 1, 1, 30, 0, gMapRoom08Unk28Pieces03, gUnk_0997B944+0x300]
-  - [gMapRoom08Unk28Check04, 1, 1, 30, 0, gMapRoom08Unk28Pieces04, gUnk_0997B944+0x300]
-  - [gMapRoom08Unk28Check05, 1, 1, 30, 0, gMapRoom08Unk28Pieces05, gUnk_0997B944+0x300]
+  - [gMapRoom08Unk28Check00, 1, 2, 30, 0, gMapRoom08Unk28Pieces00, gMapRoom08Bg1Map+0x300]
+  - [gMapRoom08Unk28Check01, 1, 2, 40, 0, gMapRoom08Unk28Pieces01, gMapRoom08Bg1Map+0x300]
+  - [gMapRoom08Unk28Check02, 1, 2, 40, 0, gMapRoom08Unk28Pieces02, gMapRoom08Bg1Map+0x300]
+  - [gMapRoom08Unk28Check03, 1, 1, 30, 0, gMapRoom08Unk28Pieces03, gMapRoom08Bg1Map+0x300]
+  - [gMapRoom08Unk28Check04, 1, 1, 30, 0, gMapRoom08Unk28Pieces04, gMapRoom08Bg1Map+0x300]
+  - [gMapRoom08Unk28Check05, 1, 1, 30, 0, gMapRoom08Unk28Pieces05, gMapRoom08Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09852EDC
@@ -7725,26 +7725,26 @@ entries:
   eu:
     address: 0x0982F8B0
 - name: map_room_08
-  symbol: gUnk_09852F4C
+  symbol: gMapRoom08Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990984
+    palette: gMapRoom08Palette
     paletteSize: 384
     unk_06: [0, 0]
-    tiles: gUnk_09902DA4
+    tiles: gMapRoom08Tiles
     tilesSize: 32768
     unk_0E: [0, 0]
-    tiles2: gUnk_0990ADA4
+    tiles2: gMapRoom08Bg1Tiles
     tilesSize2: 15520
     unk_16: [0, 0]
-    map3: gUnk_09979944
-    map2: gUnk_0997A144
-    map: gUnk_0997B944
-    layer1DecorRules: gUnk_09852C68
-    layer2DecorRules: gUnk_09852EDC
+    map3: gMapRoom08Bg3Map
+    map2: gMapRoom08Bg2Map
+    map: gMapRoom08Bg1Map
+    layer1DecorRules: gMapRoom08Layer1DecorRules
+    layer2DecorRules: gMapRoom08Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_09852258
-    rikuEvents: gUnk_09852268
+    soraEvents: gMapRoom08SoraEvents
+    rikuEvents: gMapRoom08RikuEvents
     unk_38: 25
   index: [8]
   us:
@@ -7753,7 +7753,7 @@ entries:
     address: 0x09807A60
   eu:
     address: 0x0982F920
-- name: gUnk_09852F88
+- name: gMapRoom05SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -7767,7 +7767,7 @@ entries:
     address: 0x09807A9C
   eu:
     address: 0x0982F95C
-- name: gUnk_09852F98
+- name: gMapRoom05RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -7854,15 +7854,15 @@ entries:
     address: 0x09807AFC
   eu:
     address: 0x0982F9BC
-- name: gUnk_09852FFC
+- name: gMapRoom05TileAnims
   record: MapAnmEntry
   declare: false
   elements:
-  - [gMapRoom05AnimScript0, gUnk_098EA844, 192, 0, 0]
-  - [gMapRoom05AnimScript1, gUnk_098EAA84, 192, 6, 0]
-  - [gMapRoom05AnimScript2, gUnk_098EACC4, 96, 12, 0]
-  - [gMapRoom05AnimScript3, gUnk_098EAF64, 352, 32, 0]
-  - [gMapRoom05AnimScript4, gUnk_098EB224, 128, 43, 0]
+  - [gMapRoom05AnimScript0, gMapTileAnim1Track0Tiles, 192, 0, 0]
+  - [gMapRoom05AnimScript1, gMapTileAnim1Track1Tiles, 192, 6, 0]
+  - [gMapRoom05AnimScript2, gMapTileAnim1Track2Tiles, 96, 12, 0]
+  - [gMapRoom05AnimScript3, gMapTileAnim1Track4Tiles, 352, 32, 0]
+  - [gMapRoom05AnimScript4, gMapTileAnim1Track5Tiles, 128, 43, 0]
   - [0, 0, 0, 0, 0]
   us:
     address: 0x09852FFC
@@ -8159,42 +8159,42 @@ entries:
     address: 0x09807E60
   eu:
     address: 0x0982FD20
-- name: gUnk_09853354
+- name: gMapRoom05Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom05Unk24Pattern00, 2, 5, 100, 0, gMapRoom05Unk24Pieces00, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern01, 2, 5, 100, 0, gMapRoom05Unk24Pieces01, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern02, 1, 3, 40, 0, gMapRoom05Unk24Pieces02, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern03, 1, 3, 40, 0, gMapRoom05Unk24Pieces03, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern04, 1, 3, 40, 0, gMapRoom05Unk24Pieces04, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern05, 1, 3, 40, 0, gMapRoom05Unk24Pieces05, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern06, 1, 3, 40, 0, gMapRoom05Unk24Pieces06, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern07, 1, 3, 40, 0, gMapRoom05Unk24Pieces07, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern08, 1, 3, 40, 0, gMapRoom05Unk24Pieces08, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern09, 1, 3, 40, 0, gMapRoom05Unk24Pieces09, gUnk_09973544+0x1000]
-  - [gMapRoom05Unk24Pattern10, 1, 3, 40, 0, gMapRoom05Unk24Pieces10, gUnk_09973544+0x1000]
-  - [gUnk_098566B4, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern21, 2, 2, 15, 0, gMapRoom02Unk24Pieces21, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern22, 2, 2, 15, 0, gMapRoom02Unk24Pieces22, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern23, 2, 2, 15, 0, gMapRoom02Unk24Pieces23, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern24, 1, 4, 15, 0, gMapRoom02Unk24Pieces24, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern25, 1, 4, 15, 0, gMapRoom02Unk24Pieces25, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern26, 1, 4, 15, 0, gMapRoom02Unk24Pieces26, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern27, 1, 2, 15, 0, gMapRoom02Unk24Pieces27, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern28, 1, 2, 15, 0, gMapRoom02Unk24Pieces28, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern29, 1, 2, 15, 0, gMapRoom02Unk24Pieces29, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern30, 2, 2, 15, 0, gMapRoom02Unk24Pieces30, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern31, 2, 2, 15, 0, gMapRoom02Unk24Pieces31, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern32, 2, 2, 15, 0, gMapRoom02Unk24Pieces32, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern33, 1, 2, 15, 0, gMapRoom02Unk24Pieces33, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern34, 1, 2, 15, 0, gMapRoom02Unk24Pieces34, gUnk_09973544+0x800]
-  - [gMapRoom02Unk24Pattern35, 1, 2, 15, 0, gMapRoom02Unk24Pieces35, gUnk_09973544+0x800]
+  - [gMapRoom05Unk24Pattern00, 2, 5, 100, 0, gMapRoom05Unk24Pieces00, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern01, 2, 5, 100, 0, gMapRoom05Unk24Pieces01, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern02, 1, 3, 40, 0, gMapRoom05Unk24Pieces02, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern03, 1, 3, 40, 0, gMapRoom05Unk24Pieces03, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern04, 1, 3, 40, 0, gMapRoom05Unk24Pieces04, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern05, 1, 3, 40, 0, gMapRoom05Unk24Pieces05, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern06, 1, 3, 40, 0, gMapRoom05Unk24Pieces06, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern07, 1, 3, 40, 0, gMapRoom05Unk24Pieces07, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern08, 1, 3, 40, 0, gMapRoom05Unk24Pieces08, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern09, 1, 3, 40, 0, gMapRoom05Unk24Pieces09, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom05Unk24Pattern10, 1, 3, 40, 0, gMapRoom05Unk24Pieces10, gMapRoom05Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern15, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern21, 2, 2, 15, 0, gMapRoom02Unk24Pieces21, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern22, 2, 2, 15, 0, gMapRoom02Unk24Pieces22, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern23, 2, 2, 15, 0, gMapRoom02Unk24Pieces23, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern24, 1, 4, 15, 0, gMapRoom02Unk24Pieces24, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern25, 1, 4, 15, 0, gMapRoom02Unk24Pieces25, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern26, 1, 4, 15, 0, gMapRoom02Unk24Pieces26, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern27, 1, 2, 15, 0, gMapRoom02Unk24Pieces27, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern28, 1, 2, 15, 0, gMapRoom02Unk24Pieces28, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern29, 1, 2, 15, 0, gMapRoom02Unk24Pieces29, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern30, 2, 2, 15, 0, gMapRoom02Unk24Pieces30, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern31, 2, 2, 15, 0, gMapRoom02Unk24Pieces31, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern32, 2, 2, 15, 0, gMapRoom02Unk24Pieces32, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern33, 1, 2, 15, 0, gMapRoom02Unk24Pieces33, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern34, 1, 2, 15, 0, gMapRoom02Unk24Pieces34, gMapRoom05Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern35, 1, 2, 15, 0, gMapRoom02Unk24Pieces35, gMapRoom05Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09853354
@@ -8250,12 +8250,12 @@ entries:
     address: 0x09808098
   eu:
     address: 0x0982FF58
-- name: gUnk_0985358C
+- name: gMapRoom05Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom05Unk28Check00, 1, 2, 50, 0, gMapRoom05Unk28Pieces00, gUnk_09974D44+0x300]
-  - [gMapRoom05Unk28Check01, 1, 2, 50, 0, gMapRoom05Unk28Pieces01, gUnk_09974D44+0x300]
+  - [gMapRoom05Unk28Check00, 1, 2, 50, 0, gMapRoom05Unk28Pieces00, gMapRoom05Bg1Map+0x300]
+  - [gMapRoom05Unk28Check01, 1, 2, 50, 0, gMapRoom05Unk28Pieces01, gMapRoom05Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x0985358C
@@ -8264,26 +8264,26 @@ entries:
   eu:
     address: 0x0982FF60
 - name: map_room_05
-  symbol: gUnk_098535BC
+  symbol: gMapRoom05Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990524
+    palette: gMapRoom05Palette
     paletteSize: 384
     unk_06: [0, 0]
-    tiles: gUnk_098DF184
+    tiles: gMapRoom05Tiles
     tilesSize: 32768
     unk_0E: [0, 0]
-    tiles2: gUnk_098E7184
+    tiles2: gMapRoom05Bg1Tiles
     tilesSize2: 14016
     unk_16: [0, 0]
-    map3: gUnk_09972D44
-    map2: gUnk_09973544
-    map: gUnk_09974D44
-    layer1DecorRules: gUnk_09853354
-    layer2DecorRules: gUnk_0985358C
-    tileAnims: gUnk_09852FFC
-    soraEvents: gUnk_09852F88
-    rikuEvents: gUnk_09852F98
+    map3: gMapRoom05Bg3Map
+    map2: gMapRoom05Bg2Map
+    map: gMapRoom05Bg1Map
+    layer1DecorRules: gMapRoom05Layer1DecorRules
+    layer2DecorRules: gMapRoom05Layer2DecorRules
+    tileAnims: gMapRoom05TileAnims
+    soraEvents: gMapRoom05SoraEvents
+    rikuEvents: gMapRoom05RikuEvents
     unk_38: 8
   index: [5]
   us:
@@ -8292,7 +8292,7 @@ entries:
     address: 0x098080D0
   eu:
     address: 0x0982FF90
-- name: gUnk_098535F8
+- name: gMapRoom07SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -8306,7 +8306,7 @@ entries:
     address: 0x0980810C
   eu:
     address: 0x0982FFCC
-- name: gUnk_09853608
+- name: gMapRoom07RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -8333,11 +8333,11 @@ entries:
     address: 0x09808124
   eu:
     address: 0x0982FFE4
-- name: gUnk_09853624
+- name: gMapRoom07TileAnims
   record: MapAnmEntry
   declare: false
   elements:
-  - [gMapRoom07AnimScript0, gUnk_099021A4, 1024, 32, 0]
+  - [gMapRoom07AnimScript0, gMapRoom07AnimTiles0, 1024, 32, 0]
   - [0, 0, 0, 0, 0]
   us:
     address: 0x09853624
@@ -9025,33 +9025,33 @@ entries:
     address: 0x09808B8C
   eu:
     address: 0x09830A4C
-- name: gUnk_09854080
+- name: gMapRoom07Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom07Unk24Pattern00, 2, 4, 100, 0, gMapRoom07Unk24Pieces00, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern01, 2, 4, 100, 0, gMapRoom07Unk24Pieces01, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern02, 2, 6, 100, 0, gMapRoom07Unk24Pieces02, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern03, 2, 5, 100, 0, gMapRoom07Unk24Pieces03, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern04, 2, 4, 100, 0, gMapRoom07Unk24Pieces04, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern05, 2, 5, 50, 0, gMapRoom07Unk24Pieces05, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern06, 2, 6, 50, 0, gMapRoom07Unk24Pieces06, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern07, 2, 6, 50, 0, gMapRoom07Unk24Pieces07, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern08, 2, 5, 50, 0, gMapRoom07Unk24Pieces08, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern09, 2, 5, 50, 0, gMapRoom07Unk24Pieces09, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern10, 2, 5, 50, 0, gMapRoom07Unk24Pieces10, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern11, 1, 5, 50, 0, gMapRoom07Unk24Pieces11, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern12, 1, 5, 50, 0, gMapRoom07Unk24Pieces12, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern13, 1, 5, 50, 0, gMapRoom07Unk24Pieces13, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern14, 1, 2, 50, 0, gMapRoom07Unk24Pieces14, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern15, 1, 2, 50, 0, gMapRoom07Unk24Pieces15, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern16, 2, 6, 50, 0, gMapRoom07Unk24Pieces16, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern17, 3, 4, 50, 0, gMapRoom07Unk24Pieces17, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern18, 2, 6, 50, 0, gMapRoom07Unk24Pieces18, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern19, 2, 6, 50, 0, gMapRoom07Unk24Pieces19, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern20, 2, 4, 50, 0, gMapRoom07Unk24Pieces20, gUnk_09977D44+0x1000]
-  - [gMapRoom07Unk24Pattern21, 2, 2, 30, 0, gMapRoom07Unk24Pieces21, gUnk_09977D44+0x800]
-  - [gMapRoom07Unk24Pattern22, 2, 2, 30, 0, gMapRoom07Unk24Pieces21, gUnk_09977D44+0x800]
+  - [gMapRoom07Unk24Pattern00, 2, 4, 100, 0, gMapRoom07Unk24Pieces00, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern01, 2, 4, 100, 0, gMapRoom07Unk24Pieces01, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern02, 2, 6, 100, 0, gMapRoom07Unk24Pieces02, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern03, 2, 5, 100, 0, gMapRoom07Unk24Pieces03, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern04, 2, 4, 100, 0, gMapRoom07Unk24Pieces04, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern05, 2, 5, 50, 0, gMapRoom07Unk24Pieces05, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern06, 2, 6, 50, 0, gMapRoom07Unk24Pieces06, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern07, 2, 6, 50, 0, gMapRoom07Unk24Pieces07, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern08, 2, 5, 50, 0, gMapRoom07Unk24Pieces08, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern09, 2, 5, 50, 0, gMapRoom07Unk24Pieces09, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern10, 2, 5, 50, 0, gMapRoom07Unk24Pieces10, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern11, 1, 5, 50, 0, gMapRoom07Unk24Pieces11, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern12, 1, 5, 50, 0, gMapRoom07Unk24Pieces12, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern13, 1, 5, 50, 0, gMapRoom07Unk24Pieces13, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern14, 1, 2, 50, 0, gMapRoom07Unk24Pieces14, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern15, 1, 2, 50, 0, gMapRoom07Unk24Pieces15, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern16, 2, 6, 50, 0, gMapRoom07Unk24Pieces16, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern17, 3, 4, 50, 0, gMapRoom07Unk24Pieces17, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern18, 2, 6, 50, 0, gMapRoom07Unk24Pieces18, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern19, 2, 6, 50, 0, gMapRoom07Unk24Pieces19, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern20, 2, 4, 50, 0, gMapRoom07Unk24Pieces20, gMapRoom07Bg2Map+0x1000]
+  - [gMapRoom07Unk24Pattern21, 2, 2, 30, 0, gMapRoom07Unk24Pieces21, gMapRoom07Bg2Map+0x800]
+  - [gMapRoom07Unk24Pattern22, 2, 2, 30, 0, gMapRoom07Unk24Pieces21, gMapRoom07Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09854080
@@ -9107,12 +9107,12 @@ entries:
     address: 0x09808D34
   eu:
     address: 0x09830BF4
-- name: gUnk_09854228
+- name: gMapRoom07Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom07Unk28Check00, 1, 2, 100, 0, gMapRoom07Unk28Pieces00, gUnk_09979544+0x300]
-  - [gMapRoom07Unk28Check01, 1, 2, 100, 0, gMapRoom07Unk28Pieces01, gUnk_09979544+0x300]
+  - [gMapRoom07Unk28Check00, 1, 2, 100, 0, gMapRoom07Unk28Pieces00, gMapRoom07Bg1Map+0x300]
+  - [gMapRoom07Unk28Check01, 1, 2, 100, 0, gMapRoom07Unk28Pieces01, gMapRoom07Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09854228
@@ -9121,26 +9121,26 @@ entries:
   eu:
     address: 0x09830BFC
 - name: map_room_07
-  symbol: gUnk_09854258
+  symbol: gMapRoom07Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990804
+    palette: gMapRoom07Palette
     paletteSize: 384
     unk_06: [0, 0]
-    tiles: gUnk_098F71A4
+    tiles: gMapRoom07Tiles
     tilesSize: 32768
     unk_0E: [0, 0]
-    tiles2: gUnk_098FF1A4
+    tiles2: gMapRoom07Bg1Tiles
     tilesSize2: 12288
     unk_16: [0, 0]
-    map3: gUnk_09977544
-    map2: gUnk_09977D44
-    map: gUnk_09979544
-    layer1DecorRules: gUnk_09854080
-    layer2DecorRules: gUnk_09854228
-    tileAnims: gUnk_09853624
-    soraEvents: gUnk_098535F8
-    rikuEvents: gUnk_09853608
+    map3: gMapRoom07Bg3Map
+    map2: gMapRoom07Bg2Map
+    map: gMapRoom07Bg1Map
+    layer1DecorRules: gMapRoom07Layer1DecorRules
+    layer2DecorRules: gMapRoom07Layer2DecorRules
+    tileAnims: gMapRoom07TileAnims
+    soraEvents: gMapRoom07SoraEvents
+    rikuEvents: gMapRoom07RikuEvents
     unk_38: 10
   index: [7]
   us:
@@ -9149,7 +9149,7 @@ entries:
     address: 0x09808D6C
   eu:
     address: 0x09830C2C
-- name: gUnk_09854294
+- name: gMapRoom11SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -9161,7 +9161,7 @@ entries:
     address: 0x09808DA8
   eu:
     address: 0x09830C68
-- name: gUnk_0985429C
+- name: gMapRoom11RikuEvents
   record: MapRoomEvent
   declare: false
   us:
@@ -10268,50 +10268,50 @@ entries:
     address: 0x09809A7C
   eu:
     address: 0x0983193C
-- name: gUnk_09854F70
+- name: gMapRoom11Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom11Unk24Pattern00, 2, 2, 50, 0, gMapRoom11Unk24Pieces00, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern01, 3, 2, 100, 0, gMapRoom11Unk24Pieces01, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern02, 2, 4, 100, 0, gMapRoom11Unk24Pieces02, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern03, 2, 2, 100, 0, gMapRoom11Unk24Pieces03, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern04, 1, 2, 50, 0, gMapRoom11Unk24Pieces04, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern05, 2, 6, 90, 0, gMapRoom11Unk24Pieces05, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern06, 2, 6, 90, 0, gMapRoom11Unk24Pieces06, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern07, 1, 5, 90, 0, gMapRoom11Unk24Pieces07, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern08, 1, 4, 90, 0, gMapRoom11Unk24Pieces08, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern09, 1, 4, 90, 0, gMapRoom11Unk24Pieces09, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern10, 1, 3, 90, 0, gMapRoom11Unk24Pieces10, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern11, 1, 5, 90, 0, gMapRoom11Unk24Pieces11, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern12, 1, 4, 90, 0, gMapRoom11Unk24Pieces12, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern13, 1, 6, 90, 0, gMapRoom11Unk24Pieces13, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern14, 1, 6, 90, 0, gMapRoom11Unk24Pieces14, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern15, 1, 6, 90, 0, gMapRoom11Unk24Pieces15, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern16, 1, 6, 90, 0, gMapRoom11Unk24Pieces16, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern17, 1, 6, 90, 0, gMapRoom11Unk24Pieces17, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern18, 1, 6, 90, 0, gMapRoom11Unk24Pieces18, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern19, 1, 4, 90, 0, gMapRoom11Unk24Pieces19, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern20, 1, 4, 90, 0, gMapRoom11Unk24Pieces20, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern21, 1, 5, 90, 0, gMapRoom11Unk24Pieces21, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern22, 1, 5, 90, 0, gMapRoom11Unk24Pieces22, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern23, 1, 5, 90, 0, gMapRoom11Unk24Pieces23, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern24, 1, 5, 90, 0, gMapRoom11Unk24Pieces24, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern25, 1, 5, 90, 0, gMapRoom11Unk24Pieces25, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern26, 1, 5, 90, 0, gMapRoom11Unk24Pieces26, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern27, 1, 4, 90, 0, gMapRoom11Unk24Pieces27, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern28, 1, 4, 90, 0, gMapRoom11Unk24Pieces28, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern29, 1, 4, 90, 0, gMapRoom11Unk24Pieces29, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern30, 1, 4, 90, 0, gMapRoom11Unk24Pieces30, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern31, 1, 4, 90, 0, gMapRoom11Unk24Pieces31, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern32, 1, 4, 90, 0, gMapRoom11Unk24Pieces32, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern33, 1, 4, 90, 0, gMapRoom11Unk24Pieces33, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern34, 1, 4, 90, 0, gMapRoom11Unk24Pieces34, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern35, 1, 3, 90, 0, gMapRoom11Unk24Pieces35, gUnk_09980E44+0x1000]
-  - [gMapRoom11Unk24Pattern36, 2, 3, 60, 0, gMapRoom11Unk24Pieces36, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern37, 2, 4, 60, 0, gMapRoom11Unk24Pieces37, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern38, 2, 4, 60, 0, gMapRoom11Unk24Pieces38, gUnk_09980E44+0x800]
-  - [gMapRoom11Unk24Pattern39, 2, 2, 60, 0, gMapRoom11Unk24Pieces39, gUnk_09980E44+0x800]
+  - [gMapRoom11Unk24Pattern00, 2, 2, 50, 0, gMapRoom11Unk24Pieces00, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern01, 3, 2, 100, 0, gMapRoom11Unk24Pieces01, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern02, 2, 4, 100, 0, gMapRoom11Unk24Pieces02, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern03, 2, 2, 100, 0, gMapRoom11Unk24Pieces03, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern04, 1, 2, 50, 0, gMapRoom11Unk24Pieces04, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern05, 2, 6, 90, 0, gMapRoom11Unk24Pieces05, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern06, 2, 6, 90, 0, gMapRoom11Unk24Pieces06, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern07, 1, 5, 90, 0, gMapRoom11Unk24Pieces07, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern08, 1, 4, 90, 0, gMapRoom11Unk24Pieces08, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern09, 1, 4, 90, 0, gMapRoom11Unk24Pieces09, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern10, 1, 3, 90, 0, gMapRoom11Unk24Pieces10, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern11, 1, 5, 90, 0, gMapRoom11Unk24Pieces11, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern12, 1, 4, 90, 0, gMapRoom11Unk24Pieces12, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern13, 1, 6, 90, 0, gMapRoom11Unk24Pieces13, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern14, 1, 6, 90, 0, gMapRoom11Unk24Pieces14, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern15, 1, 6, 90, 0, gMapRoom11Unk24Pieces15, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern16, 1, 6, 90, 0, gMapRoom11Unk24Pieces16, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern17, 1, 6, 90, 0, gMapRoom11Unk24Pieces17, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern18, 1, 6, 90, 0, gMapRoom11Unk24Pieces18, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern19, 1, 4, 90, 0, gMapRoom11Unk24Pieces19, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern20, 1, 4, 90, 0, gMapRoom11Unk24Pieces20, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern21, 1, 5, 90, 0, gMapRoom11Unk24Pieces21, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern22, 1, 5, 90, 0, gMapRoom11Unk24Pieces22, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern23, 1, 5, 90, 0, gMapRoom11Unk24Pieces23, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern24, 1, 5, 90, 0, gMapRoom11Unk24Pieces24, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern25, 1, 5, 90, 0, gMapRoom11Unk24Pieces25, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern26, 1, 5, 90, 0, gMapRoom11Unk24Pieces26, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern27, 1, 4, 90, 0, gMapRoom11Unk24Pieces27, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern28, 1, 4, 90, 0, gMapRoom11Unk24Pieces28, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern29, 1, 4, 90, 0, gMapRoom11Unk24Pieces29, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern30, 1, 4, 90, 0, gMapRoom11Unk24Pieces30, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern31, 1, 4, 90, 0, gMapRoom11Unk24Pieces31, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern32, 1, 4, 90, 0, gMapRoom11Unk24Pieces32, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern33, 1, 4, 90, 0, gMapRoom11Unk24Pieces33, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern34, 1, 4, 90, 0, gMapRoom11Unk24Pieces34, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern35, 1, 3, 90, 0, gMapRoom11Unk24Pieces35, gMapRoom11Bg2Map+0x1000]
+  - [gMapRoom11Unk24Pattern36, 2, 3, 60, 0, gMapRoom11Unk24Pieces36, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern37, 2, 4, 60, 0, gMapRoom11Unk24Pieces37, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern38, 2, 4, 60, 0, gMapRoom11Unk24Pieces38, gMapRoom11Bg2Map+0x800]
+  - [gMapRoom11Unk24Pattern39, 2, 2, 60, 0, gMapRoom11Unk24Pieces39, gMapRoom11Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09854F70
@@ -10463,16 +10463,16 @@ entries:
     address: 0x09809D84
   eu:
     address: 0x09831C44
-- name: gUnk_09855278
+- name: gMapRoom11Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom11Unk28Check00, 1, 2, 100, 0, gMapRoom11Unk28Pieces00, gUnk_09982644+0x300]
-  - [gMapRoom11Unk28Check01, 1, 2, 100, 0, gMapRoom11Unk28Pieces01, gUnk_09982644+0x300]
-  - [gMapRoom11Unk28Check02, 1, 2, 100, 0, gMapRoom11Unk28Pieces02, gUnk_09982644+0x300]
-  - [gMapRoom11Unk28Check03, 1, 2, 100, 0, gMapRoom11Unk28Pieces03, gUnk_09982644+0x300]
-  - [gMapRoom11Unk28Check04, 1, 2, 100, 0, gMapRoom11Unk28Pieces04, gUnk_09982644+0x300]
-  - [gMapRoom11Unk28Check05, 1, 2, 100, 0, gMapRoom11Unk28Pieces05, gUnk_09982644+0x300]
+  - [gMapRoom11Unk28Check00, 1, 2, 100, 0, gMapRoom11Unk28Pieces00, gMapRoom11Bg1Map+0x300]
+  - [gMapRoom11Unk28Check01, 1, 2, 100, 0, gMapRoom11Unk28Pieces01, gMapRoom11Bg1Map+0x300]
+  - [gMapRoom11Unk28Check02, 1, 2, 100, 0, gMapRoom11Unk28Pieces02, gMapRoom11Bg1Map+0x300]
+  - [gMapRoom11Unk28Check03, 1, 2, 100, 0, gMapRoom11Unk28Pieces03, gMapRoom11Bg1Map+0x300]
+  - [gMapRoom11Unk28Check04, 1, 2, 100, 0, gMapRoom11Unk28Pieces04, gMapRoom11Bg1Map+0x300]
+  - [gMapRoom11Unk28Check05, 1, 2, 100, 0, gMapRoom11Unk28Pieces05, gMapRoom11Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09855278
@@ -10481,26 +10481,26 @@ entries:
   eu:
     address: 0x09831C4C
 - name: map_room_11
-  symbol: gUnk_098552E8
+  symbol: gMapRoom11Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990DC4
+    palette: gMapRoom11Palette
     paletteSize: 384
     unk_06: [0, 0]
-    tiles: gUnk_09924184
+    tiles: gMapRoom11Tiles
     tilesSize: 32736
     unk_0E: [0, 0]
-    tiles2: gUnk_0992C164
+    tiles2: gMapRoom11Bg1Tiles
     tilesSize2: 15872
     unk_16: [0, 0]
-    map3: gUnk_09980644
-    map2: gUnk_09980E44
-    map: gUnk_09982644
-    layer1DecorRules: gUnk_09854F70
-    layer2DecorRules: gUnk_09855278
+    map3: gMapRoom11Bg3Map
+    map2: gMapRoom11Bg2Map
+    map: gMapRoom11Bg1Map
+    layer1DecorRules: gMapRoom11Layer1DecorRules
+    layer2DecorRules: gMapRoom11Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_09854294
-    rikuEvents: gUnk_0985429C
+    soraEvents: gMapRoom11SoraEvents
+    rikuEvents: gMapRoom11RikuEvents
     unk_38: 36
   index: [11]
   us:
@@ -10509,7 +10509,7 @@ entries:
     address: 0x09809DFC
   eu:
     address: 0x09831CBC
-- name: gUnk_09855324
+- name: gMapRoom10SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -10523,7 +10523,7 @@ entries:
     address: 0x09809E38
   eu:
     address: 0x09831CF8
-- name: gUnk_09855334
+- name: gMapRoom10RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -11389,44 +11389,44 @@ entries:
     address: 0x0980A79C
   eu:
     address: 0x0983265C
-- name: gUnk_09855C90
+- name: gMapRoom10Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom10Unk24Pattern00, 1, 6, 100, 0, gMapRoom10Unk24Pieces00, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern01, 1, 7, 100, 0, gMapRoom10Unk24Pieces01, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern02, 1, 7, 100, 0, gMapRoom10Unk24Pieces02, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern03, 1, 7, 100, 0, gMapRoom10Unk24Pieces03, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern04, 1, 7, 100, 0, gMapRoom10Unk24Pieces04, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern05, 1, 4, 100, 0, gMapRoom10Unk24Pieces05, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern06, 1, 5, 100, 0, gMapRoom10Unk24Pieces06, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern07, 1, 5, 100, 0, gMapRoom10Unk24Pieces07, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern08, 1, 5, 100, 0, gMapRoom10Unk24Pieces08, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern09, 1, 5, 100, 0, gMapRoom10Unk24Pieces09, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern10, 1, 3, 100, 0, gMapRoom10Unk24Pieces10, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern11, 1, 4, 100, 0, gMapRoom10Unk24Pieces11, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern12, 1, 4, 100, 0, gMapRoom10Unk24Pieces12, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern13, 1, 4, 100, 0, gMapRoom10Unk24Pieces11, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern14, 1, 4, 100, 0, gMapRoom10Unk24Pieces12, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern15, 1, 2, 100, 0, gMapRoom10Unk24Pieces15, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern16, 1, 3, 100, 0, gMapRoom10Unk24Pieces16, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern17, 1, 3, 100, 0, gMapRoom10Unk24Pieces17, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern18, 1, 3, 100, 0, gMapRoom10Unk24Pieces18, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern19, 1, 3, 100, 0, gMapRoom10Unk24Pieces19, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern20, 1, 3, 100, 0, gMapRoom10Unk24Pieces20, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern21, 1, 3, 100, 0, gMapRoom10Unk24Pieces21, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern22, 1, 3, 100, 0, gMapRoom10Unk24Pieces20, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern23, 1, 3, 100, 0, gMapRoom10Unk24Pieces21, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern24, 1, 2, 100, 0, gMapRoom10Unk24Pieces24, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern25, 1, 4, 40, 0, gMapRoom10Unk24Pieces25, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern26, 1, 4, 40, 0, gMapRoom10Unk24Pieces26, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern27, 1, 3, 30, 0, gMapRoom10Unk24Pieces27, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern28, 1, 3, 30, 0, gMapRoom10Unk24Pieces28, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern29, 1, 2, 30, 0, gMapRoom10Unk24Pieces29, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern30, 1, 2, 30, 0, gMapRoom10Unk24Pieces30, gUnk_0997E944+0x800]
-  - [gMapRoom10Unk24Pattern31, 2, 2, 30, 0, gMapRoom10Unk24Pieces31, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern32, 2, 2, 50, 0, gMapRoom10Unk24Pieces32, gUnk_0997E944+0x1000]
-  - [gMapRoom10Unk24Pattern33, 2, 2, 50, 0, gMapRoom10Unk24Pieces33, gUnk_0997E944+0x1000]
+  - [gMapRoom10Unk24Pattern00, 1, 6, 100, 0, gMapRoom10Unk24Pieces00, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern01, 1, 7, 100, 0, gMapRoom10Unk24Pieces01, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern02, 1, 7, 100, 0, gMapRoom10Unk24Pieces02, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern03, 1, 7, 100, 0, gMapRoom10Unk24Pieces03, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern04, 1, 7, 100, 0, gMapRoom10Unk24Pieces04, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern05, 1, 4, 100, 0, gMapRoom10Unk24Pieces05, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern06, 1, 5, 100, 0, gMapRoom10Unk24Pieces06, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern07, 1, 5, 100, 0, gMapRoom10Unk24Pieces07, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern08, 1, 5, 100, 0, gMapRoom10Unk24Pieces08, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern09, 1, 5, 100, 0, gMapRoom10Unk24Pieces09, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern10, 1, 3, 100, 0, gMapRoom10Unk24Pieces10, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern11, 1, 4, 100, 0, gMapRoom10Unk24Pieces11, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern12, 1, 4, 100, 0, gMapRoom10Unk24Pieces12, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern13, 1, 4, 100, 0, gMapRoom10Unk24Pieces11, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern14, 1, 4, 100, 0, gMapRoom10Unk24Pieces12, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern15, 1, 2, 100, 0, gMapRoom10Unk24Pieces15, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern16, 1, 3, 100, 0, gMapRoom10Unk24Pieces16, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern17, 1, 3, 100, 0, gMapRoom10Unk24Pieces17, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern18, 1, 3, 100, 0, gMapRoom10Unk24Pieces18, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern19, 1, 3, 100, 0, gMapRoom10Unk24Pieces19, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern20, 1, 3, 100, 0, gMapRoom10Unk24Pieces20, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern21, 1, 3, 100, 0, gMapRoom10Unk24Pieces21, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern22, 1, 3, 100, 0, gMapRoom10Unk24Pieces20, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern23, 1, 3, 100, 0, gMapRoom10Unk24Pieces21, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern24, 1, 2, 100, 0, gMapRoom10Unk24Pieces24, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern25, 1, 4, 40, 0, gMapRoom10Unk24Pieces25, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern26, 1, 4, 40, 0, gMapRoom10Unk24Pieces26, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern27, 1, 3, 30, 0, gMapRoom10Unk24Pieces27, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern28, 1, 3, 30, 0, gMapRoom10Unk24Pieces28, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern29, 1, 2, 30, 0, gMapRoom10Unk24Pieces29, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern30, 1, 2, 30, 0, gMapRoom10Unk24Pieces30, gMapRoom10Bg2Map+0x800]
+  - [gMapRoom10Unk24Pattern31, 2, 2, 30, 0, gMapRoom10Unk24Pieces31, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern32, 2, 2, 50, 0, gMapRoom10Unk24Pieces32, gMapRoom10Bg2Map+0x1000]
+  - [gMapRoom10Unk24Pattern33, 2, 2, 50, 0, gMapRoom10Unk24Pieces33, gMapRoom10Bg2Map+0x1000]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09855C90
@@ -11578,16 +11578,16 @@ entries:
     address: 0x0980AA44
   eu:
     address: 0x09832904
-- name: gUnk_09855F38
+- name: gMapRoom10Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom10Unk28Check00, 1, 2, 100, 0, gMapRoom10Unk28Pieces00, gUnk_09980144+0x300]
-  - [gMapRoom10Unk28Check01, 1, 2, 100, 0, gMapRoom10Unk28Pieces01, gUnk_09980144+0x300]
-  - [gMapRoom10Unk28Check02, 1, 2, 100, 0, gMapRoom10Unk28Pieces02, gUnk_09980144+0x300]
-  - [gMapRoom10Unk28Check03, 1, 2, 100, 0, gMapRoom10Unk28Pieces03, gUnk_09980144+0x300]
-  - [gMapRoom10Unk28Check04, 1, 2, 100, 0, gMapRoom10Unk28Pieces04, gUnk_09980144+0x300]
-  - [gMapRoom10Unk28Check05, 1, 2, 100, 0, gMapRoom10Unk28Pieces05, gUnk_09980144+0x300]
+  - [gMapRoom10Unk28Check00, 1, 2, 100, 0, gMapRoom10Unk28Pieces00, gMapRoom10Bg1Map+0x300]
+  - [gMapRoom10Unk28Check01, 1, 2, 100, 0, gMapRoom10Unk28Pieces01, gMapRoom10Bg1Map+0x300]
+  - [gMapRoom10Unk28Check02, 1, 2, 100, 0, gMapRoom10Unk28Pieces02, gMapRoom10Bg1Map+0x300]
+  - [gMapRoom10Unk28Check03, 1, 2, 100, 0, gMapRoom10Unk28Pieces03, gMapRoom10Bg1Map+0x300]
+  - [gMapRoom10Unk28Check04, 1, 2, 100, 0, gMapRoom10Unk28Pieces04, gMapRoom10Bg1Map+0x300]
+  - [gMapRoom10Unk28Check05, 1, 2, 100, 0, gMapRoom10Unk28Pieces05, gMapRoom10Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09855F38
@@ -11596,26 +11596,26 @@ entries:
   eu:
     address: 0x0983290C
 - name: map_room_10
-  symbol: gUnk_09855FA8
+  symbol: gMapRoom10Def
   record: MapRoomDef
   fields:
-    palette: gUnk_09990C64
+    palette: gMapRoom10Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_099199C4
+    tiles: gMapRoom10Tiles
     tilesSize: 30720
     unk_0E: [0, 0]
-    tiles2: gUnk_099211C4
+    tiles2: gMapRoom10Bg1Tiles
     tilesSize2: 12224
     unk_16: [0, 0]
-    map3: gUnk_0997E144
-    map2: gUnk_0997E944
-    map: gUnk_09980144
-    layer1DecorRules: gUnk_09855C90
-    layer2DecorRules: gUnk_09855F38
+    map3: gMapRoom10Bg3Map
+    map2: gMapRoom10Bg2Map
+    map: gMapRoom10Bg1Map
+    layer1DecorRules: gMapRoom10Layer1DecorRules
+    layer2DecorRules: gMapRoom10Layer2DecorRules
     tileAnims: 0
-    soraEvents: gUnk_09855324
-    rikuEvents: gUnk_09855334
+    soraEvents: gMapRoom10SoraEvents
+    rikuEvents: gMapRoom10RikuEvents
     unk_38: 13
   index: [10]
   us:
@@ -11624,7 +11624,7 @@ entries:
     address: 0x0980AABC
   eu:
     address: 0x0983297C
-- name: gUnk_09855FE4
+- name: gMapRoom04SoraEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -11638,7 +11638,7 @@ entries:
     address: 0x0980AAF8
   eu:
     address: 0x098329B8
-- name: gUnk_09855FF4
+- name: gMapRoom04RikuEvents
   record: MapRoomEvent
   declare: false
   elements:
@@ -11665,11 +11665,11 @@ entries:
     address: 0x0980AB10
   eu:
     address: 0x098329D0
-- name: gUnk_09856010
+- name: gMapRoom04TileAnims
   record: MapAnmEntry
   declare: false
   elements:
-  - [gMapRoom04AnimScript0, gUnk_098DEDC4, 320, 0, 0]
+  - [gMapRoom04AnimScript0, gMapRoom04AnimTiles0, 320, 0, 0]
   - [0, 0, 0, 0, 0]
   us:
     address: 0x09856010
@@ -12003,43 +12003,43 @@ entries:
     address: 0x0980AF0C
   eu:
     address: 0x09832DCC
-- name: gUnk_09856400
+- name: gMapRoom04Layer1DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom04Unk24Pattern00, 1, 5, 50, 0, gMapRoom04Unk24Pieces00, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern01, 1, 5, 50, 0, gMapRoom04Unk24Pieces01, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern02, 2, 4, 50, 0, gMapRoom04Unk24Pieces02, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern03, 2, 4, 50, 0, gMapRoom04Unk24Pieces03, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern04, 2, 3, 100, 0, gMapRoom04Unk24Pieces04, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern05, 1, 3, 100, 0, gMapRoom04Unk24Pieces05, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern06, 1, 3, 100, 0, gMapRoom04Unk24Pieces06, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern07, 1, 3, 100, 0, gMapRoom04Unk24Pieces07, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern08, 1, 3, 100, 0, gMapRoom04Unk24Pieces08, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern09, 1, 5, 80, 0, gMapRoom04Unk24Pieces09, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern10, 1, 5, 50, 0, gMapRoom04Unk24Pieces10, gUnk_09971144+0x1000]
-  - [gMapRoom04Unk24Pattern11, 2, 4, 5, 0, gMapRoom04Unk24Pieces11, gUnk_09971144+0x1000]
-  - [gUnk_098566B4, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern21, 2, 2, 8, 0, gMapRoom02Unk24Pieces21, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern22, 2, 2, 8, 0, gMapRoom02Unk24Pieces22, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern23, 2, 2, 8, 0, gMapRoom02Unk24Pieces23, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern24, 1, 4, 8, 0, gMapRoom02Unk24Pieces24, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern25, 1, 4, 8, 0, gMapRoom02Unk24Pieces25, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern26, 1, 4, 8, 0, gMapRoom02Unk24Pieces26, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern27, 1, 2, 8, 0, gMapRoom02Unk24Pieces27, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern28, 1, 2, 8, 0, gMapRoom02Unk24Pieces28, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern29, 1, 2, 8, 0, gMapRoom02Unk24Pieces29, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern30, 2, 2, 8, 0, gMapRoom02Unk24Pieces30, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern31, 2, 2, 8, 0, gMapRoom02Unk24Pieces31, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern32, 2, 2, 8, 0, gMapRoom02Unk24Pieces32, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern33, 1, 2, 8, 0, gMapRoom02Unk24Pieces33, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern34, 1, 2, 8, 0, gMapRoom02Unk24Pieces34, gUnk_09971144+0x800]
-  - [gMapRoom02Unk24Pattern35, 1, 2, 8, 0, gMapRoom02Unk24Pieces35, gUnk_09971144+0x800]
+  - [gMapRoom04Unk24Pattern00, 1, 5, 50, 0, gMapRoom04Unk24Pieces00, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern01, 1, 5, 50, 0, gMapRoom04Unk24Pieces01, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern02, 2, 4, 50, 0, gMapRoom04Unk24Pieces02, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern03, 2, 4, 50, 0, gMapRoom04Unk24Pieces03, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern04, 2, 3, 100, 0, gMapRoom04Unk24Pieces04, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern05, 1, 3, 100, 0, gMapRoom04Unk24Pieces05, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern06, 1, 3, 100, 0, gMapRoom04Unk24Pieces06, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern07, 1, 3, 100, 0, gMapRoom04Unk24Pieces07, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern08, 1, 3, 100, 0, gMapRoom04Unk24Pieces08, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern09, 1, 5, 80, 0, gMapRoom04Unk24Pieces09, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern10, 1, 5, 50, 0, gMapRoom04Unk24Pieces10, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom04Unk24Pattern11, 2, 4, 5, 0, gMapRoom04Unk24Pieces11, gMapRoom04Bg2Map+0x1000]
+  - [gMapRoom02Unk24Pattern15, 1, 4, 25, 0, gMapRoom02Unk24Pieces15, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern16, 1, 4, 25, 0, gMapRoom02Unk24Pieces16, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern17, 1, 4, 25, 0, gMapRoom02Unk24Pieces17, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern18, 1, 4, 25, 0, gMapRoom02Unk24Pieces18, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern19, 1, 4, 25, 0, gMapRoom02Unk24Pieces19, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern20, 1, 4, 25, 0, gMapRoom02Unk24Pieces20, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern21, 2, 2, 8, 0, gMapRoom02Unk24Pieces21, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern22, 2, 2, 8, 0, gMapRoom02Unk24Pieces22, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern23, 2, 2, 8, 0, gMapRoom02Unk24Pieces23, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern24, 1, 4, 8, 0, gMapRoom02Unk24Pieces24, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern25, 1, 4, 8, 0, gMapRoom02Unk24Pieces25, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern26, 1, 4, 8, 0, gMapRoom02Unk24Pieces26, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern27, 1, 2, 8, 0, gMapRoom02Unk24Pieces27, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern28, 1, 2, 8, 0, gMapRoom02Unk24Pieces28, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern29, 1, 2, 8, 0, gMapRoom02Unk24Pieces29, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern30, 2, 2, 8, 0, gMapRoom02Unk24Pieces30, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern31, 2, 2, 8, 0, gMapRoom02Unk24Pieces31, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern32, 2, 2, 8, 0, gMapRoom02Unk24Pieces32, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern33, 1, 2, 8, 0, gMapRoom02Unk24Pieces33, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern34, 1, 2, 8, 0, gMapRoom02Unk24Pieces34, gMapRoom04Bg2Map+0x800]
+  - [gMapRoom02Unk24Pattern35, 1, 2, 8, 0, gMapRoom02Unk24Pieces35, gMapRoom04Bg2Map+0x800]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09856400
@@ -12095,12 +12095,12 @@ entries:
     address: 0x0980B154
   eu:
     address: 0x09833014
-- name: gUnk_09856648
+- name: gMapRoom04Layer2DecorRules
   record: MapDecorRule
   declare: false
   elements:
-  - [gMapRoom04Unk28Check00, 1, 2, 50, 0, gMapRoom04Unk28Pieces00, gUnk_09972944+0x300]
-  - [gMapRoom04Unk28Check01, 1, 2, 50, 0, gMapRoom04Unk28Pieces01, gUnk_09972944+0x300]
+  - [gMapRoom04Unk28Check00, 1, 2, 50, 0, gMapRoom04Unk28Pieces00, gMapRoom04Bg1Map+0x300]
+  - [gMapRoom04Unk28Check01, 1, 2, 50, 0, gMapRoom04Unk28Pieces01, gMapRoom04Bg1Map+0x300]
   - [0, 0, 0, 0, 0, 0, 0]
   us:
     address: 0x09856648
@@ -12109,26 +12109,26 @@ entries:
   eu:
     address: 0x0983301C
 - name: map_room_04
-  symbol: gUnk_09856678
+  symbol: gMapRoom04Def
   record: MapRoomDef
   fields:
-    palette: gUnk_099903C4
+    palette: gMapRoom04Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_098D4504
+    tiles: gMapRoom04Tiles
     tilesSize: 31040
     unk_0E: [0, 0]
-    tiles2: gUnk_098DBE44
+    tiles2: gMapRoom04Bg1Tiles
     tilesSize2: 12160
     unk_16: [0, 0]
-    map3: gUnk_09970944
-    map2: gUnk_09971144
-    map: gUnk_09972944
-    layer1DecorRules: gUnk_09856400
-    layer2DecorRules: gUnk_09856648
-    tileAnims: gUnk_09856010
-    soraEvents: gUnk_09855FE4
-    rikuEvents: gUnk_09855FF4
+    map3: gMapRoom04Bg3Map
+    map2: gMapRoom04Bg2Map
+    map: gMapRoom04Bg1Map
+    layer1DecorRules: gMapRoom04Layer1DecorRules
+    layer2DecorRules: gMapRoom04Layer2DecorRules
+    tileAnims: gMapRoom04TileAnims
+    soraEvents: gMapRoom04SoraEvents
+    rikuEvents: gMapRoom04RikuEvents
     unk_38: 2
   index: [4]
   us:
@@ -12137,7 +12137,7 @@ entries:
     address: 0x0980B18C
   eu:
     address: 0x0983304C
-- name: gUnk_098566B4
+- name: gMapRoom02Unk24Pattern15
   record: UnkStruct_080E87EC
   declare: false
   elements:
@@ -12677,7 +12677,7 @@ entries:
     address: 0x0980B6F4
   eu:
     address: 0x098335B4
-- name: gUnk_09856BE8
+- name: gMapFixed0Gimmicks
   record: MapFixedGmk
   declare: false
   elements:
@@ -12695,7 +12695,7 @@ entries:
     address: 0x0980B6FC
   eu:
     address: 0x098335BC
-- name: gUnk_09856C48
+- name: gMapFixed0Colliders
   record: MapFixedCollider
   declare: false
   elements:
@@ -12712,7 +12712,7 @@ entries:
   eu:
     address: 0x0983361C
 - name: map_fixed_0
-  symbol: gUnk_09856C90
+  symbol: gMapFixed0Def
   record: MapFixedDef
   fields:
     palette: gEventBg000Palette
@@ -12731,8 +12731,8 @@ entries:
     mapHeight: 3
     unk_26: [0, 0]
     cellTypes: gMapFixed0CellTypes
-    gimmicks: gUnk_09856BE8
-    colliders: gUnk_09856C48
+    gimmicks: gMapFixed0Gimmicks
+    colliders: gMapFixed0Colliders
     unk_34: 30
     unk_36: [0, 0]
     stairX: 203264
@@ -12752,7 +12752,7 @@ entries:
       tilesSize: 13896
       tilesSize2: 13896
       unk_50: 0
-- name: gUnk_09856CE0
+- name: gMapFixed1Gimmicks
   record: MapFixedGmk
   declare: false
   elements:
@@ -12765,7 +12765,7 @@ entries:
     address: 0x0980B7F4
   eu:
     address: 0x098336B8
-- name: gUnk_09856D04
+- name: gMapFixed1Colliders
   record: MapFixedCollider
   declare: false
   elements:
@@ -12780,7 +12780,7 @@ entries:
   eu:
     address: 0x098336DC
 - name: map_fixed_1
-  symbol: gUnk_09856D34
+  symbol: gMapFixed1Def
   record: MapFixedDef
   fields:
     palette: gEventBg001Palette
@@ -12799,8 +12799,8 @@ entries:
     mapHeight: 2
     unk_26: [0, 0]
     cellTypes: gMapFixed1CellTypes
-    gimmicks: gUnk_09856CE0
-    colliders: gUnk_09856D04
+    gimmicks: gMapFixed1Gimmicks
+    colliders: gMapFixed1Colliders
     unk_34: 30
     unk_36: [0, 0]
     stairX: 137728
@@ -12819,7 +12819,7 @@ entries:
     fields:
       tilesSize: 11092
       unk_50: 0
-- name: gUnk_09856D84
+- name: gMapFixed2Gimmicks
   record: MapFixedGmk
   declare: false
   elements:
@@ -12832,7 +12832,7 @@ entries:
     address: 0x0980B898
   eu:
     address: 0x09833760
-- name: gUnk_09856DA8
+- name: gMapFixed2Colliders
   record: MapFixedCollider
   declare: false
   elements:
@@ -12848,7 +12848,7 @@ entries:
   eu:
     address: 0x09833784
 - name: map_fixed_2
-  symbol: gUnk_09856DE4
+  symbol: gMapFixed2Def
   record: MapFixedDef
   fields:
     palette: gEventBg010Palette
@@ -12867,8 +12867,8 @@ entries:
     mapHeight: 2
     unk_26: [0, 0]
     cellTypes: gMapFixed2CellTypes
-    gimmicks: gUnk_09856D84
-    colliders: gUnk_09856DA8
+    gimmicks: gMapFixed2Gimmicks
+    colliders: gMapFixed2Colliders
     unk_34: 30
     unk_36: [0, 0]
     stairX: 158208
@@ -12887,7 +12887,7 @@ entries:
     fields:
       tilesSize: 6096
       unk_50: 0
-- name: gUnk_09856E34
+- name: gMapFixed3Gimmicks
   record: MapFixedGmk
   declare: false
   elements:
@@ -12898,7 +12898,7 @@ entries:
     address: 0x0980B948
   eu:
     address: 0x09833814
-- name: gUnk_09856E40
+- name: gMapFixed3Colliders
   record: MapFixedCollider
   declare: false
   elements:
@@ -12915,7 +12915,7 @@ entries:
   eu:
     address: 0x09833820
 - name: map_fixed_3
-  symbol: gUnk_09856E88
+  symbol: gMapFixed3Def
   record: MapFixedDef
   fields:
     palette: gEventBg066Palette
@@ -12934,8 +12934,8 @@ entries:
     mapHeight: 2
     unk_26: [0, 0]
     cellTypes: gMapFixed3CellTypes
-    gimmicks: gUnk_09856E34
-    colliders: gUnk_09856E40
+    gimmicks: gMapFixed3Gimmicks
+    colliders: gMapFixed3Colliders
     unk_34: 30
     unk_36: [0, 0]
     stairX: 159744
@@ -12954,7 +12954,7 @@ entries:
     fields:
       tilesSize: 8232
       unk_50: 0
-- name: gUnk_09856ED8
+- name: gMapFixed4Gimmicks
   record: MapFixedGmk
   declare: false
   elements:
@@ -12970,16 +12970,16 @@ entries:
   eu:
     address: 0x098338BC
 - name: map_fixed_4
-  symbol: gUnk_09856F14
+  symbol: gMapFixed4Def
   record: MapFixedDef
   fields:
-    palette: gUnk_09990C64
+    palette: gMapRoom10Palette
     paletteSize: 352
     unk_06: [0, 0]
-    tiles: gUnk_099199C4
+    tiles: gMapRoom10Tiles
     tilesSize: 30720
     unk_0E: [0, 0]
-    tiles2: gUnk_099211C4
+    tiles2: gMapRoom10Bg1Tiles
     tilesSize2: 12224
     unk_16: [0, 0]
     map3: gMapFixed4Bg3Blocks
@@ -12989,7 +12989,7 @@ entries:
     mapHeight: 2
     unk_26: [0, 0]
     cellTypes: gMapFixed4CellTypes
-    gimmicks: gUnk_09856ED8
+    gimmicks: gMapFixed4Gimmicks
     colliders: 0
     unk_34: 28
     unk_36: [0, 0]
@@ -13009,7 +13009,7 @@ entries:
     fields:
       unk_50: 1
 - name: map_fixed_5
-  symbol: gUnk_09856F64
+  symbol: gMapFixed5Def
   record: MapFixedDef
   fields:
     palette: gEventBg001Palette
@@ -13028,8 +13028,8 @@ entries:
     mapHeight: 2
     unk_26: [0, 0]
     cellTypes: gMapFixed1CellTypes
-    gimmicks: gUnk_09856CE0
-    colliders: gUnk_09856D04
+    gimmicks: gMapFixed1Gimmicks
+    colliders: gMapFixed1Colliders
     unk_34: 30
     unk_36: [0, 0]
     stairX: 137728
@@ -13048,10 +13048,10 @@ entries:
     fields:
       tilesSize: 11092
       unk_50: 0
-- name: gUnk_098A9C84
+- name: gMapRoom00Tiles
   format: tiles4
   width: 2
-  palette: gUnk_0998FF44
+  palette: gMapRoom00Palette
   us:
     address: 0x098A9C84
     size: 32192
@@ -13061,10 +13061,10 @@ entries:
   eu:
     address: 0x09889B10
     size: 32192
-- name: gUnk_098B1A44
+- name: gMapRoom00Bg1Tiles
   format: tiles4
   width: 32
-  palette: gUnk_0998FF44
+  palette: gMapRoom00Palette
   us:
     address: 0x098B1A44
     size: 8192
@@ -13074,10 +13074,10 @@ entries:
   eu:
     address: 0x098918D0
     size: 8192
-- name: gUnk_098B3A44
+- name: gMapRoom01Tiles
   format: tiles4
   width: 32
-  palette: gUnk_0998FFA4
+  palette: gMapRoom01Palette
   us:
     address: 0x098B3A44
     size: 30720
@@ -13087,10 +13087,10 @@ entries:
   eu:
     address: 0x098938D0
     size: 30720
-- name: gUnk_098BB244
+- name: gMapRoom01Bg1Tiles
   format: tiles4
   width: 32
-  palette: gUnk_0998FFA4
+  palette: gMapRoom01Palette
   us:
     address: 0x098BB244
     size: 10240
@@ -13100,10 +13100,10 @@ entries:
   eu:
     address: 0x0989B0D0
     size: 10240
-- name: gUnk_098BDA44
+- name: gMapRoom02Tiles
   format: tiles4
   width: 28
-  palette: gUnk_09990104
+  palette: gMapRoom02Palette
   us:
     address: 0x098BDA44
     size: 32256
@@ -13113,10 +13113,10 @@ entries:
   eu:
     address: 0x0989D8D0
     size: 32256
-- name: gUnk_098C5844
+- name: gMapRoom02Bg1Tiles
   format: tiles4
   width: 20
-  palette: gUnk_09990104
+  palette: gMapRoom02Palette
   us:
     address: 0x098C5844
     size: 12160
@@ -13126,10 +13126,10 @@ entries:
   eu:
     address: 0x098A56D0
     size: 12160
-- name: gUnk_098C87C4
+- name: gMapRoom02AnimTiles0
   format: tiles4
   width: 2
-  palette: gUnk_09990104
+  palette: gMapRoom02Palette
   us:
     address: 0x098C87C4
     size: 3008
@@ -13142,7 +13142,7 @@ entries:
 - name: gMapRoom02AnimTiles1
   format: tiles4
   width: 2
-  palette: gUnk_09990104
+  palette: gMapRoom02Palette
   us:
     address: 0x098C9384
     size: 2560
@@ -13152,10 +13152,10 @@ entries:
   eu:
     address: 0x098A9210
     size: 2560
-- name: gUnk_098C9D84
+- name: gMapRoom03Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990264
+  palette: gMapRoom03Palette
   us:
     address: 0x098C9D84
     size: 30720
@@ -13165,10 +13165,10 @@ entries:
   eu:
     address: 0x098A9C10
     size: 30720
-- name: gUnk_098D1584
+- name: gMapRoom03Bg1Tiles
   format: tiles4
   width: 20
-  palette: gUnk_09990264
+  palette: gMapRoom03Palette
   us:
     address: 0x098D1584
     size: 12160
@@ -13178,10 +13178,10 @@ entries:
   eu:
     address: 0x098B1410
     size: 12160
-- name: gUnk_098D4504
+- name: gMapRoom04Tiles
   format: tiles4
   width: 10
-  palette: gUnk_099903C4
+  palette: gMapRoom04Palette
   us:
     address: 0x098D4504
     size: 31040
@@ -13191,10 +13191,10 @@ entries:
   eu:
     address: 0x098B4390
     size: 31040
-- name: gUnk_098DBE44
+- name: gMapRoom04Bg1Tiles
   format: tiles4
   width: 20
-  palette: gUnk_099903C4
+  palette: gMapRoom04Palette
   us:
     address: 0x098DBE44
     size: 12160
@@ -13204,10 +13204,10 @@ entries:
   eu:
     address: 0x098BBCD0
     size: 12160
-- name: gUnk_098DEDC4
+- name: gMapRoom04AnimTiles0
   format: tiles4
   width: 2
-  palette: gUnk_099903C4
+  palette: gMapRoom04Palette
   us:
     address: 0x098DEDC4
     size: 960
@@ -13217,10 +13217,10 @@ entries:
   eu:
     address: 0x098BEC50
     size: 960
-- name: gUnk_098DF184
+- name: gMapRoom05Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990524
+  palette: gMapRoom05Palette
   us:
     address: 0x098DF184
     size: 32768
@@ -13230,10 +13230,10 @@ entries:
   eu:
     address: 0x098BF010
     size: 32768
-- name: gUnk_098E7184
+- name: gMapRoom05Bg1Tiles
   format: tiles4
   width: 6
-  palette: gUnk_09990524
+  palette: gMapRoom05Palette
   us:
     address: 0x098E7184
     size: 14016
@@ -13243,10 +13243,10 @@ entries:
   eu:
     address: 0x098C7010
     size: 14016
-- name: gUnk_098EB324
+- name: gMapRoom06Tiles
   format: tiles4
   width: 4
-  palette: gUnk_099906A4
+  palette: gMapRoom06Palette
   us:
     address: 0x098EB324
     size: 32128
@@ -13256,10 +13256,10 @@ entries:
   eu:
     address: 0x098CB1B0
     size: 32128
-- name: gUnk_098F30A4
+- name: gMapRoom06Bg1Tiles
   format: tiles4
   width: 30
-  palette: gUnk_099906A4
+  palette: gMapRoom06Palette
   us:
     address: 0x098F30A4
     size: 11520
@@ -13269,10 +13269,10 @@ entries:
   eu:
     address: 0x098D2F30
     size: 11520
-- name: gUnk_098F5DA4
+- name: gMapRoom06AnimTiles0
   format: tiles4
   width: 2
-  palette: gUnk_099906A4
+  palette: gMapRoom06Palette
   us:
     address: 0x098F5DA4
     size: 5120
@@ -13282,10 +13282,10 @@ entries:
   eu:
     address: 0x098D5C30
     size: 5120
-- name: gUnk_098F71A4
+- name: gMapRoom07Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990804
+  palette: gMapRoom07Palette
   us:
     address: 0x098F71A4
     size: 32768
@@ -13295,10 +13295,10 @@ entries:
   eu:
     address: 0x098D7030
     size: 32768
-- name: gUnk_098FF1A4
+- name: gMapRoom07Bg1Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990804
+  palette: gMapRoom07Palette
   us:
     address: 0x098FF1A4
     size: 12288
@@ -13308,10 +13308,10 @@ entries:
   eu:
     address: 0x098DF030
     size: 12288
-- name: gUnk_099021A4
+- name: gMapRoom07AnimTiles0
   format: tiles4
   width: 2
-  palette: gUnk_09990804
+  palette: gMapRoom07Palette
   us:
     address: 0x099021A4
     size: 3072
@@ -13321,10 +13321,10 @@ entries:
   eu:
     address: 0x098E2030
     size: 3072
-- name: gUnk_09902DA4
+- name: gMapRoom08Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990984
+  palette: gMapRoom08Palette
   us:
     address: 0x09902DA4
     size: 32768
@@ -13334,10 +13334,10 @@ entries:
   eu:
     address: 0x098E2C30
     size: 32768
-- name: gUnk_0990ADA4
+- name: gMapRoom08Bg1Tiles
   format: tiles4
   width: 5
-  palette: gUnk_09990984
+  palette: gMapRoom08Palette
   us:
     address: 0x0990ADA4
     size: 15520
@@ -13347,10 +13347,10 @@ entries:
   eu:
     address: 0x098EAC30
     size: 15520
-- name: gUnk_0990EA44
+- name: gMapRoom09Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990B04
+  palette: gMapRoom09Palette
   us:
     address: 0x0990EA44
     size: 32768
@@ -13360,10 +13360,10 @@ entries:
   eu:
     address: 0x098EE8D0
     size: 32768
-- name: gUnk_09916A44
+- name: gMapRoom09Bg1Tiles
   format: tiles4
   width: 20
-  palette: gUnk_09990B04
+  palette: gMapRoom09Palette
   us:
     address: 0x09916A44
     size: 12160
@@ -13373,10 +13373,10 @@ entries:
   eu:
     address: 0x098F68D0
     size: 12160
-- name: gUnk_099199C4
+- name: gMapRoom10Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990C64
+  palette: gMapRoom10Palette
   us:
     address: 0x099199C4
     size: 30720
@@ -13386,10 +13386,10 @@ entries:
   eu:
     address: 0x098F9850
     size: 30720
-- name: gUnk_099211C4
+- name: gMapRoom10Bg1Tiles
   format: tiles4
   width: 2
-  palette: gUnk_09990C64
+  palette: gMapRoom10Palette
   us:
     address: 0x099211C4
     size: 12224
@@ -13399,10 +13399,10 @@ entries:
   eu:
     address: 0x09901050
     size: 12224
-- name: gUnk_09924184
+- name: gMapRoom11Tiles
   format: tiles4
   width: 31
-  palette: gUnk_09990DC4
+  palette: gMapRoom11Palette
   us:
     address: 0x09924184
     size: 32736
@@ -13412,10 +13412,10 @@ entries:
   eu:
     address: 0x09904010
     size: 32736
-- name: gUnk_0992C164
+- name: gMapRoom11Bg1Tiles
   format: tiles4
   width: 31
-  palette: gUnk_09990DC4
+  palette: gMapRoom11Palette
   us:
     address: 0x0992C164
     size: 15872
@@ -13425,10 +13425,10 @@ entries:
   eu:
     address: 0x0990BFF0
     size: 15872
-- name: gUnk_0992FF64
+- name: gMapRoom12Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990F44
+  palette: gMapRoom12Palette
   us:
     address: 0x0992FF64
     size: 32768
@@ -13438,10 +13438,10 @@ entries:
   eu:
     address: 0x0990FDF0
     size: 32768
-- name: gUnk_09937F64
+- name: gMapRoom12Bg1Tiles
   format: tiles4
   width: 32
-  palette: gUnk_09990F44
+  palette: gMapRoom12Palette
   us:
     address: 0x09937F64
     size: 12288
@@ -13451,7 +13451,7 @@ entries:
   eu:
     address: 0x09917DF0
     size: 12288
-- name: gUnk_09968144
+- name: gMapRoom00Bg3Map
   format: tilemap
   us:
     address: 0x09968144
@@ -13462,7 +13462,7 @@ entries:
   eu:
     address: 0x0996F130
     size: 2048
-- name: gUnk_09968944
+- name: gMapRoom00Bg2Map
   format: tilemap
   us:
     address: 0x09968944
@@ -13473,7 +13473,7 @@ entries:
   eu:
     address: 0x0996F930
     size: 4096
-- name: gUnk_09969944
+- name: gMapRoom00Bg1Map
   format: tilemap
   us:
     address: 0x09969944
@@ -13484,7 +13484,7 @@ entries:
   eu:
     address: 0x09970930
     size: 768
-- name: gUnk_09969C44
+- name: gMapRoom01Bg3Map
   format: tilemap
   us:
     address: 0x09969C44
@@ -13495,7 +13495,7 @@ entries:
   eu:
     address: 0x09970C30
     size: 2048
-- name: gUnk_0996A444
+- name: gMapRoom01Bg2Map
   format: tilemap
   us:
     address: 0x0996A444
@@ -13506,7 +13506,7 @@ entries:
   eu:
     address: 0x09971430
     size: 6144
-- name: gUnk_0996BC44
+- name: gMapRoom01Bg1Map
   format: tilemap
   us:
     address: 0x0996BC44
@@ -13517,7 +13517,7 @@ entries:
   eu:
     address: 0x09972C30
     size: 1280
-- name: gUnk_0996C144
+- name: gMapRoom02Bg3Map
   format: tilemap
   us:
     address: 0x0996C144
@@ -13528,7 +13528,7 @@ entries:
   eu:
     address: 0x09973130
     size: 2048
-- name: gUnk_0996C944
+- name: gMapRoom02Bg2Map
   format: tilemap
   us:
     address: 0x0996C944
@@ -13539,7 +13539,7 @@ entries:
   eu:
     address: 0x09973930
     size: 6144
-- name: gUnk_0996E144
+- name: gMapRoom02Bg1Map
   format: tilemap
   us:
     address: 0x0996E144
@@ -13550,7 +13550,7 @@ entries:
   eu:
     address: 0x09975130
     size: 1024
-- name: gUnk_0996E544
+- name: gMapRoom03Bg3Map
   format: tilemap
   us:
     address: 0x0996E544
@@ -13561,7 +13561,7 @@ entries:
   eu:
     address: 0x09975530
     size: 2048
-- name: gUnk_0996ED44
+- name: gMapRoom03Bg2Map
   format: tilemap
   us:
     address: 0x0996ED44
@@ -13572,7 +13572,7 @@ entries:
   eu:
     address: 0x09975D30
     size: 6144
-- name: gUnk_09970544
+- name: gMapRoom03Bg1Map
   format: tilemap
   us:
     address: 0x09970544
@@ -13583,7 +13583,7 @@ entries:
   eu:
     address: 0x09977530
     size: 1024
-- name: gUnk_09970944
+- name: gMapRoom04Bg3Map
   format: tilemap
   us:
     address: 0x09970944
@@ -13594,7 +13594,7 @@ entries:
   eu:
     address: 0x09977930
     size: 2048
-- name: gUnk_09971144
+- name: gMapRoom04Bg2Map
   format: tilemap
   us:
     address: 0x09971144
@@ -13605,7 +13605,7 @@ entries:
   eu:
     address: 0x09978130
     size: 6144
-- name: gUnk_09972944
+- name: gMapRoom04Bg1Map
   format: tilemap
   us:
     address: 0x09972944
@@ -13616,7 +13616,7 @@ entries:
   eu:
     address: 0x09979930
     size: 1024
-- name: gUnk_09972D44
+- name: gMapRoom05Bg3Map
   format: tilemap
   us:
     address: 0x09972D44
@@ -13627,7 +13627,7 @@ entries:
   eu:
     address: 0x09979D30
     size: 2048
-- name: gUnk_09973544
+- name: gMapRoom05Bg2Map
   format: tilemap
   us:
     address: 0x09973544
@@ -13638,7 +13638,7 @@ entries:
   eu:
     address: 0x0997A530
     size: 6144
-- name: gUnk_09974D44
+- name: gMapRoom05Bg1Map
   format: tilemap
   us:
     address: 0x09974D44
@@ -13649,7 +13649,7 @@ entries:
   eu:
     address: 0x0997BD30
     size: 1024
-- name: gUnk_09975144
+- name: gMapRoom06Bg3Map
   format: tilemap
   us:
     address: 0x09975144
@@ -13660,7 +13660,7 @@ entries:
   eu:
     address: 0x0997C130
     size: 2048
-- name: gUnk_09975944
+- name: gMapRoom06Bg2Map
   format: tilemap
   us:
     address: 0x09975944
@@ -13671,7 +13671,7 @@ entries:
   eu:
     address: 0x0997C930
     size: 6144
-- name: gUnk_09977144
+- name: gMapRoom06Bg1Map
   format: tilemap
   us:
     address: 0x09977144
@@ -13682,7 +13682,7 @@ entries:
   eu:
     address: 0x0997E130
     size: 1024
-- name: gUnk_09977544
+- name: gMapRoom07Bg3Map
   format: tilemap
   us:
     address: 0x09977544
@@ -13693,7 +13693,7 @@ entries:
   eu:
     address: 0x0997E530
     size: 2048
-- name: gUnk_09977D44
+- name: gMapRoom07Bg2Map
   format: tilemap
   us:
     address: 0x09977D44
@@ -13704,7 +13704,7 @@ entries:
   eu:
     address: 0x0997ED30
     size: 6144
-- name: gUnk_09979544
+- name: gMapRoom07Bg1Map
   format: tilemap
   us:
     address: 0x09979544
@@ -13715,7 +13715,7 @@ entries:
   eu:
     address: 0x09980530
     size: 1024
-- name: gUnk_09979944
+- name: gMapRoom08Bg3Map
   format: tilemap
   us:
     address: 0x09979944
@@ -13726,7 +13726,7 @@ entries:
   eu:
     address: 0x09980930
     size: 2048
-- name: gUnk_0997A144
+- name: gMapRoom08Bg2Map
   format: tilemap
   us:
     address: 0x0997A144
@@ -13737,7 +13737,7 @@ entries:
   eu:
     address: 0x09981130
     size: 6144
-- name: gUnk_0997B944
+- name: gMapRoom08Bg1Map
   format: tilemap
   us:
     address: 0x0997B944
@@ -13748,7 +13748,7 @@ entries:
   eu:
     address: 0x09982930
     size: 1024
-- name: gUnk_0997BD44
+- name: gMapRoom09Bg3Map
   format: tilemap
   us:
     address: 0x0997BD44
@@ -13759,7 +13759,7 @@ entries:
   eu:
     address: 0x09982D30
     size: 2048
-- name: gUnk_0997C544
+- name: gMapRoom09Bg2Map
   format: tilemap
   us:
     address: 0x0997C544
@@ -13770,7 +13770,7 @@ entries:
   eu:
     address: 0x09983530
     size: 6144
-- name: gUnk_0997DD44
+- name: gMapRoom09Bg1Map
   format: tilemap
   us:
     address: 0x0997DD44
@@ -13781,7 +13781,7 @@ entries:
   eu:
     address: 0x09984D30
     size: 1024
-- name: gUnk_0997E144
+- name: gMapRoom10Bg3Map
   format: tilemap
   us:
     address: 0x0997E144
@@ -13792,7 +13792,7 @@ entries:
   eu:
     address: 0x09985130
     size: 2048
-- name: gUnk_0997E944
+- name: gMapRoom10Bg2Map
   format: tilemap
   us:
     address: 0x0997E944
@@ -13803,7 +13803,7 @@ entries:
   eu:
     address: 0x09985930
     size: 6144
-- name: gUnk_09980144
+- name: gMapRoom10Bg1Map
   format: tilemap
   us:
     address: 0x09980144
@@ -13814,7 +13814,7 @@ entries:
   eu:
     address: 0x09987130
     size: 1280
-- name: gUnk_09980644
+- name: gMapRoom11Bg3Map
   format: tilemap
   us:
     address: 0x09980644
@@ -13825,7 +13825,7 @@ entries:
   eu:
     address: 0x09987630
     size: 2048
-- name: gUnk_09980E44
+- name: gMapRoom11Bg2Map
   format: tilemap
   us:
     address: 0x09980E44
@@ -13836,7 +13836,7 @@ entries:
   eu:
     address: 0x09987E30
     size: 6144
-- name: gUnk_09982644
+- name: gMapRoom11Bg1Map
   format: tilemap
   us:
     address: 0x09982644
@@ -13847,7 +13847,7 @@ entries:
   eu:
     address: 0x09989630
     size: 1024
-- name: gUnk_09982A44
+- name: gMapRoom12Bg3Map
   format: tilemap
   us:
     address: 0x09982A44
@@ -13858,7 +13858,7 @@ entries:
   eu:
     address: 0x09989A30
     size: 2048
-- name: gUnk_09983244
+- name: gMapRoom12Bg2Map
   format: tilemap
   us:
     address: 0x09983244
@@ -13869,7 +13869,7 @@ entries:
   eu:
     address: 0x0998A230
     size: 6144
-- name: gUnk_09984A44
+- name: gMapRoom12Bg1Map
   format: tilemap
   us:
     address: 0x09984A44
@@ -13880,7 +13880,7 @@ entries:
   eu:
     address: 0x0998BA30
     size: 1280
-- name: gUnk_09984F44
+- name: gMapFixed5Bg2Block3Map
   format: tilemap
   us:
     address: 0x09984F44
@@ -13892,7 +13892,7 @@ entries:
     address: 0x09997F30
     size: 348
     compress: lz77
-- name: gUnk_09985744
+- name: gMapFixed5Bg2Block4Map
   format: tilemap
   us:
     address: 0x09985744
@@ -13904,7 +13904,7 @@ entries:
     address: 0x0999808C
     size: 296
     compress: lz77
-- name: gUnk_0998FF44
+- name: gMapRoom00Palette
   format: palette
   us:
     address: 0x0998FF44
@@ -13915,7 +13915,7 @@ entries:
   eu:
     address: 0x09995F30
     size: 96
-- name: gUnk_0998FFA4
+- name: gMapRoom01Palette
   format: palette
   us:
     address: 0x0998FFA4
@@ -13926,7 +13926,7 @@ entries:
   eu:
     address: 0x09995F90
     size: 352
-- name: gUnk_09990104
+- name: gMapRoom02Palette
   format: palette
   us:
     address: 0x09990104
@@ -13937,7 +13937,7 @@ entries:
   eu:
     address: 0x099960F0
     size: 352
-- name: gUnk_09990264
+- name: gMapRoom03Palette
   format: palette
   us:
     address: 0x09990264
@@ -13948,7 +13948,7 @@ entries:
   eu:
     address: 0x09996250
     size: 352
-- name: gUnk_099903C4
+- name: gMapRoom04Palette
   format: palette
   us:
     address: 0x099903C4
@@ -13959,7 +13959,7 @@ entries:
   eu:
     address: 0x099963B0
     size: 352
-- name: gUnk_09990524
+- name: gMapRoom05Palette
   format: palette
   us:
     address: 0x09990524
@@ -13970,7 +13970,7 @@ entries:
   eu:
     address: 0x09996510
     size: 384
-- name: gUnk_099906A4
+- name: gMapRoom06Palette
   format: palette
   us:
     address: 0x099906A4
@@ -13981,7 +13981,7 @@ entries:
   eu:
     address: 0x09996690
     size: 352
-- name: gUnk_09990804
+- name: gMapRoom07Palette
   format: palette
   us:
     address: 0x09990804
@@ -13992,7 +13992,7 @@ entries:
   eu:
     address: 0x099967F0
     size: 384
-- name: gUnk_09990984
+- name: gMapRoom08Palette
   format: palette
   us:
     address: 0x09990984
@@ -14003,7 +14003,7 @@ entries:
   eu:
     address: 0x09996970
     size: 384
-- name: gUnk_09990B04
+- name: gMapRoom09Palette
   format: palette
   us:
     address: 0x09990B04
@@ -14014,7 +14014,7 @@ entries:
   eu:
     address: 0x09996AF0
     size: 352
-- name: gUnk_09990C64
+- name: gMapRoom10Palette
   format: palette
   us:
     address: 0x09990C64
@@ -14025,7 +14025,7 @@ entries:
   eu:
     address: 0x09996C50
     size: 352
-- name: gUnk_09990DC4
+- name: gMapRoom11Palette
   format: palette
   us:
     address: 0x09990DC4
@@ -14036,7 +14036,7 @@ entries:
   eu:
     address: 0x09996DB0
     size: 384
-- name: gUnk_09990F44
+- name: gMapRoom12Palette
   format: palette
   us:
     address: 0x09990F44

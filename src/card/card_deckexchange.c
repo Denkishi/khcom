@@ -227,7 +227,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
         LoadBgTiles(0, gDeck1PanelTiles, 0xC00);
         break;
     case 4:
-        LoadBgMap(0, gUnk_08125E24, 0x800);
+        LoadBgMap(0, gDefaultBgMap, 0x800);
         break;
     case 5:
         LoadBgTiles(1, gDeck2PanelTiles, 0x2000);
@@ -237,7 +237,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
                         (u8*)GetBgCharBase(1) + 0x2000, 0x1E20);
         break;
     case 7:
-        LoadBgMap(1, gUnk_08125E24, 0x800);
+        LoadBgMap(1, gDefaultBgMap, 0x800);
         break;
     case 8:
         LoadBgTiles(2, gDeck3PanelTiles, 0x2000);
@@ -247,7 +247,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* a) {
                         (u8*)GetBgCharBase(2) + 0x2000, 0x1E20);
         break;
     case 10:
-        LoadBgMap(2, gUnk_08125E24, 0x800);
+        LoadBgMap(2, gDefaultBgMap, 0x800);
         break;
     case 12:
         work->step = 0;

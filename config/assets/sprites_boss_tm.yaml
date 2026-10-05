@@ -853,7 +853,7 @@ entries:
     size: 1590
 - name: gWlogoWonCardFrame0
   format: sprite_sheet
-  tiles: gUnk_09630CC4
+  tiles: gWlogoWonCardTiles
   align: 4
   cell: [32, 40]
   anchor: [13, 24]

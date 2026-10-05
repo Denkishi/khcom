@@ -67,19 +67,19 @@ static const PooPalStep sAllmapPalSteps[9] = {
 
 #ifdef VERSION_EU
 u8* gAllmapFloorTilesByLanguage[5] = {
-    gUnk_097B7218,
-    gUnkEu_097966A0,
-    gUnkEu_09799760,
-    gUnkEu_09798720,
-    gUnkEu_097976E0,
+    gAllmapFloorTiles,
+    gAllmapFloorFrenchTiles,
+    gAllmapFloorGermanTiles,
+    gAllmapFloorItalianTiles,
+    gAllmapFloorSpanishTiles,
 };
 
 u8* gAllmapRikuFloorTilesByLanguage[5] = {
     gAllmapRikuFloorTiles,
-    gUnkEu_0979B7E0,
-    gUnkEu_0979E8A0,
-    gUnkEu_0979D860,
-    gUnkEu_0979C820,
+    gAllmapRikuFloorFrenchTiles,
+    gAllmapRikuFloorGermanTiles,
+    gAllmapRikuFloorItalianTiles,
+    gAllmapRikuFloorSpanishTiles,
 };
 #endif
 
@@ -199,7 +199,7 @@ void AllmapLoadFloorTiles() {
 #ifdef VERSION_EU
         src = gAllmapFloorTilesByLanguage[gLanguage] + gGameState.floor * 0x140;
 #else
-        src = &gUnk_097B7218[gGameState.floor * 0x140];
+        src = &gAllmapFloorTiles[gGameState.floor * 0x140];
 #endif
     }
 
@@ -225,20 +225,20 @@ void mode_allmap_0(s32 a) {
     SetupBg(3, 1, 28, 8);
     SetBgPriority(3, 3);
 #ifdef VERSION_EU
-    LoadBgTiles(3, gUnk_097B62B8, 0x1A40);
+    LoadBgTiles(3, gAllmapBackdropTiles, 0x1A40);
 #else
-    LoadBgTiles(3, gUnk_097B62B8, 0xF60);
+    LoadBgTiles(3, gAllmapBackdropTiles, 0xF60);
 #endif
     LoadBgPalette(3, gAllmapBgPalettes, 0x100);
-    LoadBgMap(3, gUnk_0983AD98, 0x500);
+    LoadBgMap(3, gAllmapBackdropMap, 0x500);
     SetupBg(2, 1, 29, 8);
     SetBgPriority(2, 0);
-    LoadBgMap(2, gUnk_08125E24, 0x200);
+    LoadBgMap(2, gDefaultBgMap, 0x200);
     AllmapLoadWorldBg();
     AllmapLoadFloorTiles();
     SetupBg(0, 0, 26, 0);
     SetBgPriority(0, 2);
-    LoadBgTiles(0, gUnk_0976B340, 0x2400);
+    LoadBgTiles(0, gAllmapRoomTiles, 0x2400);
     LoadBgPalette(0, gAllmapRoomPalettes, 0xE0);
     AllmapAllocBgMaps();
     SetBgMapBlocks(0, gAllmapBg0MapBlocks, 2, 4);
@@ -410,24 +410,24 @@ s32 SetupAllmapRoomDoors(AllmapRoomWork* work) {
         mask += 1 << i;
 
         if (AllmapDoorLeadsToHall(work->room, i)) {
-            AnimInit(&work->anim[i], gUnk_09EF653C, gUnk_09EF64FC);
+            AnimInit(&work->anim[i], gAllmapHallDoorAnims, gAllmapHallDoorFrames);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
             if (!work->asSprite) {
-                work->tiles2[i] = LoadObjTiles(gUnk_0976DEDC, 0x500);
+                work->tiles2[i] = LoadObjTiles(gAllmapHallDoorTiles, 0x500);
             } else {
-                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF64FC, 16), gUnk_0976DEDC);
+                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapHallDoorFrames, 16), gAllmapHallDoorTiles);
             }
         } else if (!AllmapDoorIsOpen(work->room, i)) {
-            AnimInit(&work->anim[i], gUnk_09EF658C, gUnk_09EF654C);
+            AnimInit(&work->anim[i], gAllmapClosedDoorAnims, gAllmapClosedDoorFrames);
             AnimStart(&work->anim[i], dirs.animIds[i], ANIM_FLAG_LOOP);
             work->gfx[i] = AnimGetGfx(&work->anim[i]);
 
             if (!work->asSprite) {
-                work->tiles2[i] = LoadObjTiles(gUnk_0976E4D4, 0x500);
+                work->tiles2[i] = LoadObjTiles(gAllmapClosedDoorTiles, 0x500);
             } else {
-                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF654C, 16), gUnk_0976E4D4);
+                work->tiles2[i] = AllocObjTiles(GetMaxSpriteTileBytes(gAllmapClosedDoorFrames, 16), gAllmapClosedDoorTiles);
             }
         }
     }

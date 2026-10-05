@@ -59,168 +59,168 @@ objects:
     start: 0x0981E8A0
     end: 0x0981EAC0
 entries:
-- name: gUnk_09EF6424
+- name: gAllmapRoomFrames
   record: SpriteTable
-  items: [gUnk_0976B1D8, gUnk_0976B1E2, gUnk_0976B1EC, gUnk_0976B1F6, gUnk_0976B200, gUnk_0976B20A, gUnk_0976B214, gUnk_0976B21E, gUnk_0976B228, gUnk_0976B232, gUnk_0976B23C, gUnk_0976B246, gUnk_0976B250, gUnk_0976B25A, gUnk_0976B264, gUnk_0976B26E, gUnk_0976B278, gUnk_0976B282]
+  items: [gAllmapRoomFrame0, gAllmapRoomFrame1, gAllmapRoomFrame2, gAllmapRoomFrame3, gAllmapRoomFrame4, gAllmapRoomFrame5, gAllmapRoomFrame6, gAllmapRoomFrame7, gAllmapRoomFrame8, gAllmapRoomFrame9, gAllmapRoomFrame10, gAllmapRoomFrame11, gAllmapRoomFrame12, gAllmapRoomFrame13, gAllmapRoomFrame14, gAllmapRoomFrame15, gAllmapRoomFrame16, gAllmapRoomFrame17]
   us:
     address: 0x09EF6424
   jp:
     address: 0x09ECD810
   eu:
     address: 0x09F81834
-- name: gUnk_09EF646C
+- name: gAllmapRoomAnims
   record: AnimTable
-  items: [gUnk_0976B28C, gUnk_0976B296, gUnk_0976B2A0, gUnk_0976B2AA, gUnk_0976B2B4, gUnk_0976B2BE, gUnk_0976B2C8, gUnk_0976B2D2, gUnk_0976B2DC, gUnk_0976B2E6, gUnk_0976B2F0, gUnk_0976B2FA, gUnk_0976B304, gUnk_0976B30E, gUnk_0976B318, gUnk_0976B322, gUnk_0976B32C, gUnk_0976B336]
+  items: [gAllmapRoomAnim0, gAllmapRoomAnim1, gAllmapRoomAnim2, gAllmapRoomAnim3, gAllmapRoomAnim4, gAllmapRoomAnim5, gAllmapRoomAnim6, gAllmapRoomAnim7, gAllmapRoomAnim8, gAllmapRoomAnim9, gAllmapRoomAnim10, gAllmapRoomAnim11, gAllmapRoomAnim12, gAllmapRoomAnim13, gAllmapRoomAnim14, gAllmapRoomAnim15, gAllmapRoomAnim16, gAllmapRoomAnim17]
   us:
     address: 0x09EF646C
   jp:
     address: 0x09ECD858
   eu:
     address: 0x09F8187C
-- name: gUnk_09EF64B4
+- name: gAllmapCursorFrames
   record: SpriteTable
-  items: [gUnk_0976D740, gUnk_0976D756, gUnk_0976D76C, gUnk_0976D782]
+  items: [gAllmapCursorFrame0, gAllmapCursorFrame1, gAllmapCursorFrame2, gAllmapCursorFrame3]
   us:
     address: 0x09EF64B4
   jp:
     address: 0x09ECD8A0
   eu:
     address: 0x09F818C4
-- name: gUnk_09EF64C4
+- name: gAllmapCursorAnims
   record: AnimTable
-  items: [gUnk_0976D798, gUnk_0976D7B6]
+  items: [gAllmapCursorAnim0, gAllmapCursorAnim1]
   us:
     address: 0x09EF64C4
   jp:
     address: 0x09ECD8B0
   eu:
     address: 0x09F818D4
-- name: gUnk_09EF64CC
+- name: gAllmapBarTitleFrames
   record: SpriteTable
-  items: [gUnk_0976D880]
+  items: [gAllmapBarTitleFrame0]
   us:
     address: 0x09EF64CC
   jp:
     address: 0x09ECD8B8
-- name: gUnk_09EF64D0
+- name: gAllmapBarTitleAnims
   record: AnimTable
-  items: [gUnk_0976D89C]
+  items: [gAllmapBarTitleAnim0]
   us:
     address: 0x09EF64D0
   jp:
     address: 0x09ECD8BC
   eu:
     address: 0x09F81830
-- name: gUnk_09EF64D4
+- name: gAllmapBarBandFrames
   record: SpriteTable
-  items: [gUnk_0976DB68, gUnk_0976DB9C]
+  items: [gAllmapBarBandFrame0, gAllmapBarBandFrame1]
   us:
     address: 0x09EF64D4
   jp:
     address: 0x09ECD8C0
   eu:
     address: 0x09F818DC
-- name: gUnk_09EF64DC
+- name: gAllmapBarBandAnims
   record: AnimTable
-  items: [gUnk_0976DBD0]
+  items: [gAllmapBarBandAnim0]
   us:
     address: 0x09EF64DC
   jp:
     address: 0x09ECD8C8
   eu:
     address: 0x09F818E4
-- name: gUnk_09EF64E0
+- name: gAllmapPushaFrames
   record: SpriteTable
-  items: [gUnk_0976DC9C]
+  items: [gAllmapPushaFrame0]
   us:
     address: 0x09EF64E0
   jp:
     address: 0x09ECD8CC
   eu:
     address: 0x09F818E8
-- name: gUnk_09EF64E4
+- name: gAllmapPushaAnims
   record: AnimTable
-  items: [gUnk_0976DCA6]
+  items: [gAllmapPushaAnim0]
   us:
     address: 0x09EF64E4
   jp:
     address: 0x09ECD8D0
   eu:
     address: 0x09F818EC
-- name: gUnk_09EF64E8
+- name: gAllmapDoorinfoArrowFrames
   record: SpriteTable
-  items: [gUnk_0976DD30, gUnk_0976DD3A, gUnk_0976DD44, gUnk_0976DD4E]
+  items: [gAllmapDoorinfoArrowFrame0, gAllmapDoorinfoArrowFrame1, gAllmapDoorinfoArrowFrame2, gAllmapDoorinfoArrowFrame3]
   us:
     address: 0x09EF64E8
   jp:
     address: 0x09ECD8D4
   eu:
     address: 0x09F818F0
-- name: gUnk_09EF64F8
+- name: gAllmapDoorinfoArrowAnims
   record: AnimTable
-  items: [gUnk_0976DD58]
+  items: [gAllmapDoorinfoArrowAnim0]
   us:
     address: 0x09EF64F8
   jp:
     address: 0x09ECD8E4
   eu:
     address: 0x09F81900
-- name: gUnk_09EF64FC
+- name: gAllmapHallDoorFrames
   record: SpriteTable
-  items: [gUnk_0976DDE4, gUnk_0976DDEE, gUnk_0976DDF8, gUnk_0976DE02, gUnk_0976DE0C, gUnk_0976DE16, gUnk_0976DE20, gUnk_0976DE2A, gUnk_0976DE34, gUnk_0976DE3E, gUnk_0976DE48, gUnk_0976DE52, gUnk_0976DE5C, gUnk_0976DE66, gUnk_0976DE70, gUnk_0976DE7A]
+  items: [gAllmapHallDoorFrame0, gAllmapHallDoorFrame1, gAllmapHallDoorFrame2, gAllmapHallDoorFrame3, gAllmapHallDoorFrame4, gAllmapHallDoorFrame5, gAllmapHallDoorFrame6, gAllmapHallDoorFrame7, gAllmapHallDoorFrame8, gAllmapHallDoorFrame9, gAllmapHallDoorFrame10, gAllmapHallDoorFrame11, gAllmapHallDoorFrame12, gAllmapHallDoorFrame13, gAllmapHallDoorFrame14, gAllmapHallDoorFrame15]
   us:
     address: 0x09EF64FC
   jp:
     address: 0x09ECD8E8
   eu:
     address: 0x09F81904
-- name: gUnk_09EF653C
+- name: gAllmapHallDoorAnims
   record: AnimTable
-  items: [gUnk_0976DE84, gUnk_0976DE9A, gUnk_0976DEB0, gUnk_0976DEC6]
+  items: [gAllmapHallDoorAnim0, gAllmapHallDoorAnim1, gAllmapHallDoorAnim2, gAllmapHallDoorAnim3]
   us:
     address: 0x09EF653C
   jp:
     address: 0x09ECD928
   eu:
     address: 0x09F81944
-- name: gUnk_09EF654C
+- name: gAllmapClosedDoorFrames
   record: SpriteTable
-  items: [gUnk_0976E3DC, gUnk_0976E3E6, gUnk_0976E3F0, gUnk_0976E3FA, gUnk_0976E404, gUnk_0976E40E, gUnk_0976E418, gUnk_0976E422, gUnk_0976E42C, gUnk_0976E436, gUnk_0976E440, gUnk_0976E44A, gUnk_0976E454, gUnk_0976E45E, gUnk_0976E468, gUnk_0976E472]
+  items: [gAllmapClosedDoorFrame0, gAllmapClosedDoorFrame1, gAllmapClosedDoorFrame2, gAllmapClosedDoorFrame3, gAllmapClosedDoorFrame4, gAllmapClosedDoorFrame5, gAllmapClosedDoorFrame6, gAllmapClosedDoorFrame7, gAllmapClosedDoorFrame8, gAllmapClosedDoorFrame9, gAllmapClosedDoorFrame10, gAllmapClosedDoorFrame11, gAllmapClosedDoorFrame12, gAllmapClosedDoorFrame13, gAllmapClosedDoorFrame14, gAllmapClosedDoorFrame15]
   us:
     address: 0x09EF654C
   jp:
     address: 0x09ECD938
   eu:
     address: 0x09F81954
-- name: gUnk_09EF658C
+- name: gAllmapClosedDoorAnims
   record: AnimTable
-  items: [gUnk_0976E47C, gUnk_0976E492, gUnk_0976E4A8, gUnk_0976E4BE]
+  items: [gAllmapClosedDoorAnim0, gAllmapClosedDoorAnim1, gAllmapClosedDoorAnim2, gAllmapClosedDoorAnim3]
   us:
     address: 0x09EF658C
   jp:
     address: 0x09ECD978
   eu:
     address: 0x09F81994
-- name: gUnkEu_09F8181C
+- name: gAllmapBarTitleFramesEu
   record: SpriteTable
-  items: [gUnk_0976D880, gUnkEu_09738554, gUnkEu_09738564, gUnkEu_0973857A, gUnkEu_09738590]
+  items: [gAllmapBarTitleFrame0, gAllmapBarTitleFrame1, gAllmapBarTitleFrame2, gAllmapBarTitleFrame3, gAllmapBarTitleFrame4]
   eu:
     address: 0x09F8181C
-- name: gUnk_0976D8A6
+- name: gAllmapBarTitleTiles
   format: sprite_sheet
   align: 4
   cell: [96, 16]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_0976D880
+  - symbol: gAllmapBarTitleFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
     - [8x16, 80, 0]
   animations:
-  - symbol: gUnk_0976D89C
+  - symbol: gAllmapBarTitleAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -233,145 +233,145 @@ entries:
     address: 0x09738538
     size: 3640
     frames:
-    - symbol: gUnk_0976D880
+    - symbol: gAllmapBarTitleFrame0
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
       - [16x16, 64, 0]
       - [8x16, 80, 0]
-    - symbol: gUnkEu_09738554
+    - symbol: gAllmapBarTitleFrame1
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
-    - symbol: gUnkEu_09738564
-      pieces:
-      - [32x16, 0, 0]
-      - [32x16, 32, 0]
-      - [32x16, 64, 0]
-    - symbol: gUnkEu_0973857A
+    - symbol: gAllmapBarTitleFrame2
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
       - [32x16, 64, 0]
-    - symbol: gUnkEu_09738590
+    - symbol: gAllmapBarTitleFrame3
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
       - [32x16, 64, 0]
-- name: gUnk_0976B340
+    - symbol: gAllmapBarTitleFrame4
+      pieces:
+      - [32x16, 0, 0]
+      - [32x16, 32, 0]
+      - [32x16, 64, 0]
+- name: gAllmapRoomTiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnk_0976B1D8
+  - symbol: gAllmapRoomFrame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B1E2
+  - symbol: gAllmapRoomFrame1
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B1EC
+  - symbol: gAllmapRoomFrame2
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B1F6
+  - symbol: gAllmapRoomFrame3
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B200
+  - symbol: gAllmapRoomFrame4
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B20A
+  - symbol: gAllmapRoomFrame5
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B214
+  - symbol: gAllmapRoomFrame6
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B21E
+  - symbol: gAllmapRoomFrame7
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B228
+  - symbol: gAllmapRoomFrame8
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B232
+  - symbol: gAllmapRoomFrame9
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B23C
+  - symbol: gAllmapRoomFrame10
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B246
+  - symbol: gAllmapRoomFrame11
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B250
+  - symbol: gAllmapRoomFrame12
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B25A
+  - symbol: gAllmapRoomFrame13
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B264
+  - symbol: gAllmapRoomFrame14
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B26E
+  - symbol: gAllmapRoomFrame15
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B278
+  - symbol: gAllmapRoomFrame16
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976B282
+  - symbol: gAllmapRoomFrame17
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_0976B28C
+  - symbol: gAllmapRoomAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_0976B296
+  - symbol: gAllmapRoomAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
-  - symbol: gUnk_0976B2A0
+  - symbol: gAllmapRoomAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
-  - symbol: gUnk_0976B2AA
+  - symbol: gAllmapRoomAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnk_0976B2B4
+  - symbol: gAllmapRoomAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
-  - symbol: gUnk_0976B2BE
+  - symbol: gAllmapRoomAnim5
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 4]]
-  - symbol: gUnk_0976B2C8
+  - symbol: gAllmapRoomAnim6
     fields: {unk_00: 64, unk_02: 64}
     frames: [[6, 4]]
-  - symbol: gUnk_0976B2D2
+  - symbol: gAllmapRoomAnim7
     fields: {unk_00: 64, unk_02: 64}
     frames: [[7, 4]]
-  - symbol: gUnk_0976B2DC
+  - symbol: gAllmapRoomAnim8
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 4]]
-  - symbol: gUnk_0976B2E6
+  - symbol: gAllmapRoomAnim9
     fields: {unk_00: 64, unk_02: 64}
     frames: [[9, 4]]
-  - symbol: gUnk_0976B2F0
+  - symbol: gAllmapRoomAnim10
     fields: {unk_00: 64, unk_02: 64}
     frames: [[10, 4]]
-  - symbol: gUnk_0976B2FA
+  - symbol: gAllmapRoomAnim11
     fields: {unk_00: 64, unk_02: 64}
     frames: [[11, 4]]
-  - symbol: gUnk_0976B304
+  - symbol: gAllmapRoomAnim12
     fields: {unk_00: 64, unk_02: 64}
     frames: [[12, 4]]
-  - symbol: gUnk_0976B30E
+  - symbol: gAllmapRoomAnim13
     fields: {unk_00: 64, unk_02: 64}
     frames: [[13, 4]]
-  - symbol: gUnk_0976B318
+  - symbol: gAllmapRoomAnim14
     fields: {unk_00: 64, unk_02: 64}
     frames: [[14, 4]]
-  - symbol: gUnk_0976B322
+  - symbol: gAllmapRoomAnim15
     fields: {unk_00: 64, unk_02: 64}
     frames: [[15, 4]]
-  - symbol: gUnk_0976B32C
+  - symbol: gAllmapRoomAnim16
     fields: {unk_00: 64, unk_02: 64}
     frames: [[16, 4]]
-  - symbol: gUnk_0976B336
+  - symbol: gAllmapRoomAnim17
     fields: {unk_00: 64, unk_02: 64}
     frames: [[17, 4]]
   us:
@@ -383,14 +383,14 @@ entries:
   eu:
     address: 0x09739370
     size: 9576
-- name: gUnk_0976DBDA
+- name: gAllmapBarBandTiles
   format: sprite_sheet
   align: 4
   cell: [240, 8]
   anchor: [128, 0]
   columns: 2
   frames:
-  - symbol: gUnk_0976DB68
+  - symbol: gAllmapBarBandFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -400,7 +400,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnk_0976DB9C
+  - symbol: gAllmapBarBandFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -411,7 +411,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gUnk_0976DBD0
+  - symbol: gAllmapBarBandAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -423,18 +423,18 @@ entries:
   eu:
     address: 0x0973BA18
     size: 306
-- name: gUnk_0976DCB0
+- name: gAllmapPushaTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [-19, 6]
   columns: 1
   frames:
-  - symbol: gUnk_0976DC9C
+  - symbol: gAllmapPushaFrame0
     pieces:
     - [16x16, 19, -6]
   animations:
-  - symbol: gUnk_0976DCA6
+  - symbol: gAllmapPushaAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -446,27 +446,27 @@ entries:
   eu:
     address: 0x0973BB4C
     size: 148
-- name: gUnk_0976DD62
+- name: gAllmapDoorinfoArrowTiles
   format: sprite_sheet
   align: 4
   cell: [48, 46]
   anchor: [8, 8]
   columns: 4
   frames:
-  - symbol: gUnk_0976DD30
+  - symbol: gAllmapDoorinfoArrowFrame0
     pieces:
     - [16x16, -8, 22]
-  - symbol: gUnk_0976DD3A
+  - symbol: gAllmapDoorinfoArrowFrame1
     pieces:
     - [16x16, 24, 22, {hflip: true}]
-  - symbol: gUnk_0976DD44
+  - symbol: gAllmapDoorinfoArrowFrame2
     pieces:
     - [16x16, 24, -8, {hflip: true, vflip: true}]
-  - symbol: gUnk_0976DD4E
+  - symbol: gAllmapDoorinfoArrowFrame3
     pieces:
     - [16x16, -8, -8, {vflip: true}]
   animations:
-  - symbol: gUnk_0976DD58
+  - symbol: gAllmapDoorinfoArrowAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -478,38 +478,38 @@ entries:
   eu:
     address: 0x0973BBE0
     size: 178
-- name: gUnk_0976D7C0
+- name: gAllmapCursorTiles
   format: sprite_sheet
   align: 4
   cell: [24, 27]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnk_0976D740
+  - symbol: gAllmapCursorFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x8, 10, 16]
     - [8x8, 16, 8]
-  - symbol: gUnk_0976D756
+  - symbol: gAllmapCursorFrame1
     pieces:
     - [16x16, 0, 1]
     - [8x8, 10, 17]
     - [8x8, 16, 9]
-  - symbol: gUnk_0976D76C
+  - symbol: gAllmapCursorFrame2
     pieces:
     - [16x16, 0, 2]
     - [8x8, 10, 18]
     - [8x8, 16, 10]
-  - symbol: gUnk_0976D782
+  - symbol: gAllmapCursorFrame3
     pieces:
     - [16x16, 0, 3]
     - [8x8, 10, 19]
     - [8x8, 16, 11]
   animations:
-  - symbol: gUnk_0976D798
+  - symbol: gAllmapCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
-  - symbol: gUnk_0976D7B6
+  - symbol: gAllmapCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -521,72 +521,72 @@ entries:
   eu:
     address: 0x0973B8D8
     size: 320
-- name: gUnk_0976DEDC
+- name: gAllmapHallDoorTiles
   format: sprite_sheet
   align: 4
   cell: [32, 30]
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnk_0976DDE4
+  - symbol: gAllmapHallDoorFrame0
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976DDEE
+  - symbol: gAllmapHallDoorFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976DDF8
+  - symbol: gAllmapHallDoorFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976DE02
+  - symbol: gAllmapHallDoorFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976DE0C
+  - symbol: gAllmapHallDoorFrame4
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976DE16
+  - symbol: gAllmapHallDoorFrame5
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976DE20
+  - symbol: gAllmapHallDoorFrame6
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976DE2A
+  - symbol: gAllmapHallDoorFrame7
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976DE34
+  - symbol: gAllmapHallDoorFrame8
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976DE3E
+  - symbol: gAllmapHallDoorFrame9
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976DE48
+  - symbol: gAllmapHallDoorFrame10
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976DE52
+  - symbol: gAllmapHallDoorFrame11
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976DE5C
+  - symbol: gAllmapHallDoorFrame12
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976DE66
+  - symbol: gAllmapHallDoorFrame13
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976DE70
+  - symbol: gAllmapHallDoorFrame14
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976DE7A
+  - symbol: gAllmapHallDoorFrame15
     pieces:
     - [8x8, 21, 22]
   animations:
-  - symbol: gUnk_0976DE84
+  - symbol: gAllmapHallDoorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8]]
-  - symbol: gUnk_0976DE9A
+  - symbol: gAllmapHallDoorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 8]]
-  - symbol: gUnk_0976DEB0
+  - symbol: gAllmapHallDoorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 8], [9, 8], [10, 8], [11, 8]]
-  - symbol: gUnk_0976DEC6
+  - symbol: gAllmapHallDoorAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[12, 8], [13, 8], [14, 8], [15, 8]]
   us:
@@ -598,72 +598,72 @@ entries:
   eu:
     address: 0x0973BC94
     size: 1528
-- name: gUnk_0976E4D4
+- name: gAllmapClosedDoorTiles
   format: sprite_sheet
   align: 4
   cell: [32, 30]
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnk_0976E3DC
+  - symbol: gAllmapClosedDoorFrame0
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976E3E6
+  - symbol: gAllmapClosedDoorFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976E3F0
+  - symbol: gAllmapClosedDoorFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976E3FA
+  - symbol: gAllmapClosedDoorFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0976E404
+  - symbol: gAllmapClosedDoorFrame4
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976E40E
+  - symbol: gAllmapClosedDoorFrame5
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976E418
+  - symbol: gAllmapClosedDoorFrame6
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976E422
+  - symbol: gAllmapClosedDoorFrame7
     pieces:
     - [16x16, 16, 0]
-  - symbol: gUnk_0976E42C
+  - symbol: gAllmapClosedDoorFrame8
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976E436
+  - symbol: gAllmapClosedDoorFrame9
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976E440
+  - symbol: gAllmapClosedDoorFrame10
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976E44A
+  - symbol: gAllmapClosedDoorFrame11
     pieces:
     - [8x8, 3, 22]
-  - symbol: gUnk_0976E454
+  - symbol: gAllmapClosedDoorFrame12
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976E45E
+  - symbol: gAllmapClosedDoorFrame13
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976E468
+  - symbol: gAllmapClosedDoorFrame14
     pieces:
     - [8x8, 21, 22]
-  - symbol: gUnk_0976E472
+  - symbol: gAllmapClosedDoorFrame15
     pieces:
     - [8x8, 21, 22]
   animations:
-  - symbol: gUnk_0976E47C
+  - symbol: gAllmapClosedDoorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8]]
-  - symbol: gUnk_0976E492
+  - symbol: gAllmapClosedDoorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 8]]
-  - symbol: gUnk_0976E4A8
+  - symbol: gAllmapClosedDoorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 8], [9, 8], [10, 8], [11, 8]]
-  - symbol: gUnk_0976E4BE
+  - symbol: gAllmapClosedDoorAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[12, 8], [13, 8], [14, 8], [15, 8]]
   us:
@@ -675,7 +675,7 @@ entries:
   eu:
     address: 0x0973C28C
     size: 1528
-- name: gUnk_097B62B8
+- name: gAllmapBackdropTiles
   format: tiles4
   us:
     address: 0x097B62B8
@@ -686,7 +686,7 @@ entries:
   eu:
     address: 0x09793C20
     size: 3936
-- name: gUnk_097B7218
+- name: gAllmapFloorTiles
   format: tiles4
   width: 2
   us:
@@ -853,7 +853,7 @@ entries:
   eu:
     address: 0x097AC940
     size: 5312
-- name: gUnk_0983AD98
+- name: gAllmapBackdropMap
   format: tilemap
   us:
     address: 0x0983AD98
@@ -864,7 +864,7 @@ entries:
   eu:
     address: 0x09811140
     size: 1280
-- name: gUnk_0983B298
+- name: gAllmapBarBgMap
   format: tilemap
   us:
     address: 0x0983B298
@@ -872,7 +872,7 @@ entries:
   jp:
     address: 0x097F076C
     size: 1308
-- name: gUnk_0983B7B4
+- name: gAllmapRoomnameFrameMap
   format: tilemap
   us:
     address: 0x0983B7B4
@@ -1193,84 +1193,84 @@ entries:
   eu:
     address: 0x0981EAA0
     size: 32
-- name: gUnkEu_09811640
+- name: gAllmapRoomnameFrameHeadMap
   format: tilemap
   eu:
     address: 0x09811640
     size: 28
-- name: gUnkEu_09794B80
+- name: gAllmapBackdropTilesEu
   format: tiles4
   eu:
     address: 0x09794B80
     size: 2784
-- name: gUnkEu_0980F840
+- name: gAllmapBarBgEnglishMap
   format: tilemap
   eu:
     address: 0x0980F840
     size: 1280
-- name: gUnkEu_0980FD40
+- name: gAllmapBarBgFrenchMap
   format: tilemap
   eu:
     address: 0x0980FD40
     size: 1280
-- name: gUnkEu_09810240
+- name: gAllmapBarBgSpanishMap
   format: tilemap
   eu:
     address: 0x09810240
     size: 1280
-- name: gUnkEu_09810740
+- name: gAllmapBarBgItalianMap
   format: tilemap
   eu:
     address: 0x09810740
     size: 1280
-- name: gUnkEu_09810C40
+- name: gAllmapBarBgGermanMap
   format: tilemap
   eu:
     address: 0x09810C40
     size: 1280
-- name: gUnkEu_097966A0
+- name: gAllmapFloorFrenchTiles
   format: tiles4
   width: 2
   eu:
     address: 0x097966A0
     size: 4160
-- name: gUnkEu_097976E0
+- name: gAllmapFloorSpanishTiles
   format: tiles4
   width: 2
   eu:
     address: 0x097976E0
     size: 4160
-- name: gUnkEu_09798720
+- name: gAllmapFloorItalianTiles
   format: tiles4
   width: 2
   eu:
     address: 0x09798720
     size: 4160
-- name: gUnkEu_09799760
+- name: gAllmapFloorGermanTiles
   format: tiles4
   width: 2
   eu:
     address: 0x09799760
     size: 4160
-- name: gUnkEu_0979B7E0
+- name: gAllmapRikuFloorFrenchTiles
   format: tiles4
   width: 2
   eu:
     address: 0x0979B7E0
     size: 4160
-- name: gUnkEu_0979C820
+- name: gAllmapRikuFloorSpanishTiles
   format: tiles4
   width: 2
   eu:
     address: 0x0979C820
     size: 4160
-- name: gUnkEu_0979D860
+- name: gAllmapRikuFloorItalianTiles
   format: tiles4
   width: 2
   eu:
     address: 0x0979D860
     size: 4160
-- name: gUnkEu_0979E8A0
+- name: gAllmapRikuFloorGermanTiles
   format: tiles4
   width: 2
   eu:

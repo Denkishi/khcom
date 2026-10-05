@@ -271,8 +271,8 @@ static s32 Continue_1(ContinueWork* work) {
         if (!FadeIsActive()) {
             DisableBg(0);
             DisableBg(2);
-            LoadBgMap(0, gUnk_08125E24, 0x800);
-            LoadBgMap(2, gUnk_08125E24, 0x800);
+            LoadBgMap(0, gDefaultBgMap, 0x800);
+            LoadBgMap(2, gDefaultBgMap, 0x800);
             work->state = 3;
         }
     }
@@ -291,8 +291,8 @@ static void Continue_2(ContinueWork* work) {
 static void Continue_3(ContinueWork* work) {
     DisableBg(0);
     DisableBg(2);
-    LoadBgMap(0, gUnk_08125E24, 0x800);
-    LoadBgMap(2, gUnk_08125E24, 0x800);
+    LoadBgMap(0, gDefaultBgMap, 0x800);
+    LoadBgMap(2, gDefaultBgMap, 0x800);
     ReleaseObjTiles(work->tiles2);
     ReleaseObjPalette(work->palette2);
     ReleaseObjPalette(work->palette);

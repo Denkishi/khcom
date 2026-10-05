@@ -14,7 +14,7 @@ objects:
     start: 0x08124944
     end: 0x08125240
 entries:
-- name: gUnk_08125E24
+- name: gDefaultBgMap
   format: tilemap
   us:
     address: 0x08125E24
@@ -25,7 +25,7 @@ entries:
   eu:
     address: 0x08124944
     size: 2048
-- name: gUnkEu_08125144
+- name: gDefaultBgMapLz77
   format: tilemap
   eu:
     address: 0x08125144

@@ -41,7 +41,7 @@ objects:
     start: 0x098CA6D0
     end: 0x098CB1B0
 entries:
-- name: gUnk_09468FF8
+- name: gMapTileAnim0Track0Tiles
   format: tiles4
   us:
     address: 0x09468FF8
@@ -52,7 +52,7 @@ entries:
   eu:
     address: 0x09519544
     size: 2912
-- name: gUnk_09469B58
+- name: gMapTileAnim0Track1Tiles
   format: tiles4
   width: 4
   us:
@@ -64,7 +64,7 @@ entries:
   eu:
     address: 0x0951A0A4
     size: 12928
-- name: gUnk_0948A918
+- name: gMapTileAnim2Tiles
   format: tiles4
   width: 4
   us:
@@ -76,7 +76,7 @@ entries:
   eu:
     address: 0x0951D324
     size: 4992
-- name: gUnk_094EABF8
+- name: gMapTileAnim3Tiles
   format: tiles4
   width: 8
   us:
@@ -88,7 +88,7 @@ entries:
   eu:
     address: 0x0951E6A4
     size: 12032
-- name: gUnk_094F4238
+- name: gMapTileAnim4Tiles
   format: tiles4
   width: 2
   us:
@@ -100,7 +100,7 @@ entries:
   eu:
     address: 0x095215A4
     size: 5952
-- name: gUnk_098EA844
+- name: gMapTileAnim1Track0Tiles
   format: tiles4
   width: 2
   us:
@@ -112,7 +112,7 @@ entries:
   eu:
     address: 0x098CA6D0
     size: 576
-- name: gUnk_098EAA84
+- name: gMapTileAnim1Track1Tiles
   format: tiles4
   width: 2
   us:
@@ -124,7 +124,7 @@ entries:
   eu:
     address: 0x098CA910
     size: 576
-- name: gUnk_098EACC4
+- name: gMapTileAnim1Track2Tiles
   format: tiles4
   us:
     address: 0x098EACC4
@@ -135,7 +135,7 @@ entries:
   eu:
     address: 0x098CAB50
     size: 288
-- name: gUnk_098EADE4
+- name: gMapTileAnim1Track3Tiles
   format: tiles4
   width: 4
   us:
@@ -147,7 +147,7 @@ entries:
   eu:
     address: 0x098CAC70
     size: 384
-- name: gUnk_098EAF64
+- name: gMapTileAnim1Track4Tiles
   format: tiles4
   width: 2
   us:
@@ -159,7 +159,7 @@ entries:
   eu:
     address: 0x098CADF0
     size: 704
-- name: gUnk_098EB224
+- name: gMapTileAnim1Track5Tiles
   format: tiles4
   width: 8
   us:

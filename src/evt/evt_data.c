@@ -22,7 +22,7 @@ static const EvtAnimDef sEvtAnimDefs[500] = {
     { gKoukyuFrames, gKoukyuAnims, gKoukyuTiles },
     { gEventDarknessFrames, gEventDarknessAnims, gEventDarknessTiles },
     { gEventHeartFrames, gEventHeartAnims, gEventHeartTiles },
-    { gUnk_09EF8C70, gUnk_09EF8C74, gUnk_098A364E },
+    { gEventBg000Object4Frames, gEventBg000Object4Anims, gEventBg000Object4Tiles },
     { gEventStreetLampFrames, gEventStreetLampAnims, gEventStreetLampTiles },
     { gFEventFrames, gFEventAnims, gFEventTiles },
     { gGlowNoseFrames, gGlowNoseAnims, gGlowNoseTiles },

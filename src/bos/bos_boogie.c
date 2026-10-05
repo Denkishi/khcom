@@ -58,7 +58,7 @@ static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_L
 
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gBosBoogieBgTiles, 0x7F00, gBosBoogieBgPalette, 0x140,
-    { gUnk_08125E24, gBosBoogieBgMaps[1], gUnk_08125E24, gBosBoogieBgMaps[0] },
+    { gDefaultBgMap, gBosBoogieBgMaps[1], gDefaultBgMap, gBosBoogieBgMaps[0] },
 };
 
 void BosBoogieApplyDiceFace(BoogieWork* work) {

@@ -109,15 +109,14 @@ entries:
     address: 0x09F7705C
 - name: gUnk_09EEAFF0
   record: SpriteTable
+  items: [gUnk_090A3E20]
   us:
     address: 0x09EEAFF0
-    items: [gUnk_090A3E20]
   jp:
     address: 0x09EC23E4
     items: [gUnk_090A4168]
   eu:
     address: 0x09F77060
-    items: [gUnk_090A3E20]
 - name: gUnk_09EEAFF4
   record: AnimTable
   items: [gUnk_090A3E3C]
@@ -143,15 +142,13 @@ entries:
     address: 0x09F7706C
 - name: gUnk_09EEB000
   record: SpriteTable
+  items: [gUnk_090A44B0]
   us:
     address: 0x09EEB000
-    items: [gUnk_090A44B0]
   jp:
     address: 0x09EC23EC
-    items: [gUnk_090A44B0]
   eu:
     address: 0x09F77120
-    items: [gUnkEu_091933AC]
 - name: gUnk_09EEB004
   record: AnimTable
   items: [gUnk_090A44BA]
@@ -163,7 +160,7 @@ entries:
     address: 0x09F77124
 - name: gUnkEu_09F77070
   record: SpriteTable
-  items: [gUnk_090A44B0, gUnkEu_09189F1C]
+  items: [gUnkEu_09189F0C, gUnkEu_09189F1C]
   eu:
     address: 0x09F77070
 - name: gUnkEu_09F77078
@@ -984,7 +981,7 @@ entries:
   eu:
     address: 0x094EAD64
     size: 1856
-- name: gUnk_09410378
+- name: gUnkUs_09410378
   format: tiles4
   width: 2
   us:
@@ -1059,7 +1056,7 @@ entries:
   eu:
     address: 0x09533B24
     size: 2048
-- name: gUnk_09513AB8
+- name: gUnkUs_09513AB8
   format: tilemap
   us:
     address: 0x09513AB8
@@ -1475,7 +1472,6 @@ entries:
   columns: 1
   frames:
   - symbol: gUnk_090A4168
-    jp: {symbol: gUnk_090A3E20}
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
@@ -1483,7 +1479,6 @@ entries:
     - [8x8, 96, 0]
   animations:
   - symbol: gUnk_090A4184
-    jp: {symbol: gUnk_090A3E3C}
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -1519,10 +1514,6 @@ entries:
   eu:
     address: 0x091933AC
     size: 52
-    frames:
-    - symbol: gUnkEu_091933AC
-      pieces:
-      - [8x8, 0, 0]
 - name: gUnkEu_09189F36
   format: sprite_sheet
   align: 4
@@ -1530,7 +1521,7 @@ entries:
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnk_090A44B0
+  - symbol: gUnkEu_09189F0C
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]

@@ -5289,25 +5289,25 @@ entries:
   eu:
     address: 0x09A52BC0
     size: 1984
-- name: gUnk_09A53380
+- name: gUnkEu_09A53380
   format: tiles4
   width: 8
   eu:
     address: 0x09A53380
     size: 3328
-- name: gUnk_09A54080
+- name: gUnkEu_09A54080
   format: tiles4
   width: 8
   eu:
     address: 0x09A54080
     size: 3328
-- name: gUnk_09A54D80
+- name: gUnkEu_09A54D80
   format: tiles4
   width: 8
   eu:
     address: 0x09A54D80
     size: 3328
-- name: gUnk_09A55A80
+- name: gUnkEu_09A55A80
   format: tiles4
   width: 8
   eu:
@@ -5337,25 +5337,25 @@ entries:
   eu:
     address: 0x09A58E80
     size: 3328
-- name: gUnk_09A59B80
+- name: gUnkEu_09A59B80
   format: tiles4
   width: 8
   eu:
     address: 0x09A59B80
     size: 3328
-- name: gUnk_09A5A880
+- name: gUnkEu_09A5A880
   format: tiles4
   width: 8
   eu:
     address: 0x09A5A880
     size: 3328
-- name: gUnk_09A5B580
+- name: gUnkEu_09A5B580
   format: tiles4
   width: 8
   eu:
     address: 0x09A5B580
     size: 3328
-- name: gUnk_09A5C280
+- name: gUnkEu_09A5C280
   format: tiles4
   width: 8
   eu:

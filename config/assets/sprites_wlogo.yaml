@@ -151,7 +151,7 @@ entries:
     address: 0x09F7E8F8
 - name: gUnk_09EF36D0
   record: SpriteTable
-  items: [gUnkUs_0961F9F0]
+  items: [gUnk_0961F9F0]
   us:
     address: 0x09EF36D0
   jp:
@@ -160,7 +160,7 @@ entries:
     address: 0x09F7E91C
 - name: gUnk_09EF36D4
   record: AnimTable
-  items: [gUnkUs_0961FA1E]
+  items: [gUnk_0961FA1E]
   us:
     address: 0x09EF36D4
   jp:
@@ -716,9 +716,7 @@ entries:
   anchor: [0, 24]
   columns: 1
   frames:
-  - symbol: gUnkUs_0961F9F0
-    jp: {symbol: gUnkJp_095D84CC}
-    eu: {symbol: gUnkEu_095E0ED0}
+  - symbol: gUnk_0961F9F0
     pieces:
     - [64x64, 0, -16]
     - [32x64, 64, -16]
@@ -728,9 +726,7 @@ entries:
     - [8x32, 96, -16]
     - [8x32, 96, 16]
   animations:
-  - symbol: gUnkUs_0961FA1E
-    jp: {symbol: gUnkJp_095D84FA}
-    eu: {symbol: gUnkEu_095E0EFE}
+  - symbol: gUnk_0961FA1E
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:

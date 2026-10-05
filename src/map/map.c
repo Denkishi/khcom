@@ -3764,7 +3764,7 @@ void NewGameSlotMenuDraw() {
             SPRITE_PRIORITY(1), 81);
     }
 
-    DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
+    DrawSprite(0, 16, gMapUiSprite_098A8F28, sNewGameSlotMenuWork->tiles3, sNewGameSlotMenuWork->palette3, NULL, SPRITE_PRIORITY(1), 90);
     t = 45;
     u = sNewGameSlotMenuWork->selectedSlot * t;
     ApproachValueHalf(&sNewGameSlotMenuWork->y3, (sNewGameSlotMenuWork->slotBaseY + u) << 8);
@@ -5011,7 +5011,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
 
     switch (p->side) {
     case 0:
-        work->sprite = gMapUiSpriteUs_098A94A0;
+        work->sprite = gMapUiSprite_098A94A0;
         work->openSrc = q->side0Open;
         work->closedSrc = q->side0Closed;
         e->angle = 173;
@@ -5019,7 +5019,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 10;
         break;
     case 1:
-        work->sprite = gMapUiSpriteUs_098A94B4;
+        work->sprite = gMapUiSprite_098A94B4;
         work->openSrc = q->side1Open;
         work->closedSrc = q->side1Closed;
         e->angle = 45;
@@ -5027,7 +5027,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 2:
-        work->sprite = gMapUiSpriteUs_098A94C8;
+        work->sprite = gMapUiSprite_098A94C8;
         work->openSrc = q->side2Open;
         work->closedSrc = q->side2Closed;
         e->angle = 211;
@@ -5035,7 +5035,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
         e->fieldPosition.y = (p->cellY << 4) + 6;
         break;
     case 3:
-        work->sprite = gMapUiSpriteUs_098A948C;
+        work->sprite = gMapUiSprite_098A948C;
         work->openSrc = q->side3Open;
         work->closedSrc = q->side3Closed;
         e->angle = 83;
@@ -5059,13 +5059,13 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
     switch (p->side) {
     case 0:
     case 1:
-        work->sprite2 = gMapUiSpriteUs_098A94DC;
+        work->sprite2 = gMapUiSprite_098A94DC;
         work->openSrc2 = gMapDoorEmblemTiles[0][1];
         work->closedSrc2 = gMapDoorEmblemTiles[1][1];
         break;
     case 2:
     case 3:
-        work->sprite2 = gMapUiSpriteUs_098A94FC;
+        work->sprite2 = gMapUiSprite_098A94FC;
         work->openSrc2 = gMapDoorEmblemTiles[0][0];
         work->closedSrc2 = gMapDoorEmblemTiles[1][0];
         break;
@@ -6557,7 +6557,7 @@ void Task_MapSave_2(MapSaveWork* work) {
             DrawSprite(40, 96, gGoofyFl00Frames[0], work->tiles6, work->palette7, NULL, SPRITE_PRIORITY(1), 81);
         }
 
-        DrawSprite(0, 16, gMapUiSpriteUs_098A8F28, work->tiles3, work->palette3, NULL, SPRITE_PRIORITY(1), 90);
+        DrawSprite(0, 16, gMapUiSprite_098A8F28, work->tiles3, work->palette3, NULL, SPRITE_PRIORITY(1), 90);
         DrawTextSlots(100, 59, work->textSlots, work->palette4, 50, work->textSlotCount);
 
         if (work->confirmCursor != 0) {

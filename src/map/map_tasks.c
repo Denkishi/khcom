@@ -2201,7 +2201,7 @@ u8 MapGmkTutorialWaitCard(MapGmkTutorialWork* work) {
 
 u8 MapGmkTutorialWaitOpen(MapGmkTutorialWork* work) {
     if (gFieldState->flags & FIELD_FLAG_DOOR_OPENED) {
-        UpdateSpriteFrameTiles(work->tiles, gMapUiSpriteUs_098A94A0, gUnk_0994C364);
+        UpdateSpriteFrameTiles(work->tiles, gMapUiSprite_098A94A0, gUnk_0994C364);
         work->opened = 1;
         work->update = MapGmkTutorialIdle;
     }
@@ -2224,7 +2224,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->obj.height = 32;
     work->palette = LoadObjPalette(gUnk_09991204, 32);
     work->tiles = AllocSpriteFrameTiles(0x400);
-    UpdateSpriteFrameTiles(work->tiles, gMapUiSpriteUs_098A94A0, gUnk_0994BF64);
+    UpdateSpriteFrameTiles(work->tiles, gMapUiSprite_098A94A0, gUnk_0994BF64);
     ColliderInit(&work->collider, 6, 16, 0);
     ColliderSetPosition(&work->collider, work->obj.fieldPosition.x, work->obj.fieldPosition.y, work->obj.fieldPosition.z);
     work->opened = 0;

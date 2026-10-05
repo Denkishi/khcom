@@ -107,12 +107,11 @@ entries:
     address: 0x09F5D4A4
 - name: gUnk_09EE2650
   record: SpriteTable
+  items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4]
   us:
     address: 0x09EE2650
-    items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4]
   jp:
     address: 0x09EBA0CC
-    items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4]
   eu:
     address: 0x09F5D474
     items: [gUnk_08C6A690, gUnk_08C6A69A, gUnk_08C6A6A4, gUnkEu_08C9BD82, gUnkEu_08C9BD8C, gUnkEu_08C9BD9C, gUnkEu_08C9BDAC]

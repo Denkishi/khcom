@@ -61,7 +61,7 @@ objects:
 entries:
 - name: gUnk_09EEA19C
   record: SpriteTable
-  items: [gUnkUs_0908C630, gUnkUs_0908C640, gUnkUs_0908C64A, gUnkUs_0908C654, gUnkUs_0908C65E, gUnkUs_0908C668, gUnkUs_0908C672]
+  items: [gUnk_0908C630, gUnk_0908C640, gUnk_0908C64A, gUnk_0908C654, gUnk_0908C65E, gUnk_0908C668, gUnk_0908C672]
   us:
     address: 0x09EEA19C
   jp:
@@ -70,7 +70,7 @@ entries:
     address: 0x09F75FD4
 - name: gUnk_09EEA1B8
   record: AnimTable
-  items: [gUnkUs_0908C67C]
+  items: [gUnk_0908C67C]
   us:
     address: 0x09EEA1B8
   jp:
@@ -79,7 +79,7 @@ entries:
     address: 0x09F75FF0
 - name: gUnk_09EEA1BC
   record: SpriteTable
-  items: [gUnkUs_0908CA68, gUnkUs_0908CA72, gUnkUs_0908CA7C, gUnkUs_0908CA86, gUnkUs_0908CA90, gUnkUs_0908CA9A, gUnkUs_0908CAA4, gUnkUs_0908CAAE, gUnkUs_0908CAB8, gUnkUs_0908CAC2, gUnkUs_0908CACC]
+  items: [gUnk_0908CA68, gUnk_0908CA72, gUnk_0908CA7C, gUnk_0908CA86, gUnk_0908CA90, gUnk_0908CA9A, gUnk_0908CAA4, gUnk_0908CAAE, gUnk_0908CAB8, gUnk_0908CAC2, gUnk_0908CACC]
   us:
     address: 0x09EEA1BC
   jp:
@@ -88,7 +88,7 @@ entries:
     address: 0x09F75FF4
 - name: gUnk_09EEA1E8
   record: AnimTable
-  items: [gUnkUs_0908CAE2]
+  items: [gUnk_0908CAE2]
   us:
     address: 0x09EEA1E8
   jp:
@@ -97,7 +97,7 @@ entries:
     address: 0x09F76020
 - name: gUnk_09EEA1EC
   record: SpriteTable
-  items: [gUnkUs_0908CFEC, gUnkUs_0908D020]
+  items: [gUnk_0908CFEC, gUnk_0908D020]
   us:
     address: 0x09EEA1EC
   jp:
@@ -106,7 +106,7 @@ entries:
     address: 0x09F76024
 - name: gUnk_09EEA1F4
   record: AnimTable
-  items: [gUnkUs_0908D054]
+  items: [gUnk_0908D054]
   us:
     address: 0x09EEA1F4
   jp:
@@ -115,7 +115,7 @@ entries:
     address: 0x09F7602C
 - name: gUnk_09EEA1F8
   record: SpriteTable
-  items: [gUnkUs_0908D420, gUnkUs_0908D42A, gUnkUs_0908D434, gUnkUs_0908D43E, gUnkUs_0908D448, gUnkUs_0908D452, gUnkUs_0908D45C, gUnkUs_0908D466, gUnkUs_0908D470, gUnkUs_0908D47A, gUnkUs_0908D484, gUnkUs_0908D48E, gUnkUs_0908D498, gUnkUs_0908D4A2, gUnkUs_0908D4AC, gUnkUs_0908D4B6, gUnkUs_0908D4C0, gUnkUs_0908D4CA, gUnkUs_0908D4D4, gUnkUs_0908D4DE, gUnkUs_0908D4E8, gUnkUs_0908D4F2, gUnkUs_0908D4FC, gUnkUs_0908D506, gUnkUs_0908D510, gUnkUs_0908D51A, gUnkUs_0908D524, gUnkUs_0908D52E]
+  items: [gUnk_0908D420, gUnk_0908D42A, gUnk_0908D434, gUnk_0908D43E, gUnk_0908D448, gUnk_0908D452, gUnk_0908D45C, gUnk_0908D466, gUnk_0908D470, gUnk_0908D47A, gUnk_0908D484, gUnk_0908D48E, gUnk_0908D498, gUnk_0908D4A2, gUnk_0908D4AC, gUnk_0908D4B6, gUnk_0908D4C0, gUnk_0908D4CA, gUnk_0908D4D4, gUnk_0908D4DE, gUnk_0908D4E8, gUnk_0908D4F2, gUnk_0908D4FC, gUnk_0908D506, gUnk_0908D510, gUnk_0908D51A, gUnk_0908D524, gUnk_0908D52E]
   us:
     address: 0x09EEA1F8
   jp:
@@ -124,7 +124,7 @@ entries:
     address: 0x09F76030
 - name: gUnk_09EEA268
   record: AnimTable
-  items: [gUnkUs_0908D538]
+  items: [gUnk_0908D538]
   us:
     address: 0x09EEA268
   jp:
@@ -133,7 +133,7 @@ entries:
     address: 0x09F760A0
 - name: gUnk_09EEA26C
   record: SpriteTable
-  items: [gUnkUs_0908F144, gUnkUs_0908F14E, gUnkUs_0908F158, gUnkUs_0908F162, gUnkUs_0908F16C]
+  items: [gUnk_0908F144, gUnk_0908F14E, gUnk_0908F158, gUnk_0908F162, gUnk_0908F16C]
   us:
     address: 0x09EEA26C
   jp:
@@ -142,7 +142,7 @@ entries:
     address: 0x09F760A4
 - name: gUnk_09EEA280
   record: AnimTable
-  items: [gUnkUs_0908F176]
+  items: [gUnk_0908F176]
   us:
     address: 0x09EEA280
   jp:
@@ -151,7 +151,7 @@ entries:
     address: 0x09F760B8
 - name: gUnk_09EEA284
   record: SpriteTable
-  items: [gUnkUs_0908F410]
+  items: [gUnk_0908F410]
   us:
     address: 0x09EEA284
   jp:
@@ -160,7 +160,7 @@ entries:
     address: 0x09F760BC
 - name: gUnk_09EEA288
   record: AnimTable
-  items: [gUnkUs_0908F426]
+  items: [gUnk_0908F426]
   us:
     address: 0x09EEA288
   jp:
@@ -169,7 +169,7 @@ entries:
     address: 0x09F760C0
 - name: gUnk_09EEA28C
   record: SpriteTable
-  items: [gUnkUs_0908FCB0]
+  items: [gUnk_0908FCB0]
   us:
     address: 0x09EEA28C
   jp:
@@ -178,7 +178,7 @@ entries:
     address: 0x09F760C4
 - name: gUnk_09EEA290
   record: AnimTable
-  items: [gUnkUs_0908FCE4]
+  items: [gUnk_0908FCE4]
   us:
     address: 0x09EEA290
   jp:
@@ -187,7 +187,7 @@ entries:
     address: 0x09F760C8
 - name: gUnk_09EEA294
   record: SpriteTable
-  items: [gUnkUs_09090F90]
+  items: [gUnk_09090F90]
   us:
     address: 0x09EEA294
   jp:
@@ -196,7 +196,7 @@ entries:
     address: 0x09F760CC
 - name: gUnk_09EEA298
   record: AnimTable
-  items: [gUnkUs_09090FC4]
+  items: [gUnk_09090FC4]
   us:
     address: 0x09EEA298
   jp:
@@ -205,7 +205,7 @@ entries:
     address: 0x09F760D0
 - name: gUnk_09EEA29C
   record: SpriteTable
-  items: [gUnkUs_09091C90, gUnkUs_09091CC4, gUnkUs_09091CF8]
+  items: [gUnk_09091C90, gUnk_09091CC4, gUnk_09091CF8]
   us:
     address: 0x09EEA29C
   jp:
@@ -214,7 +214,7 @@ entries:
     address: 0x09F760D4
 - name: gUnk_09EEA2A8
   record: AnimTable
-  items: [gUnkUs_09091D2C]
+  items: [gUnk_09091D2C]
   us:
     address: 0x09EEA2A8
   jp:
@@ -223,7 +223,7 @@ entries:
     address: 0x09F760E0
 - name: gUnk_09EEA2AC
   record: SpriteTable
-  items: [gUnkUs_09093578, gUnkUs_090935AC, gUnkUs_090935E0]
+  items: [gUnk_09093578, gUnk_090935AC, gUnk_090935E0]
   us:
     address: 0x09EEA2AC
   jp:
@@ -232,7 +232,7 @@ entries:
     address: 0x09F760E4
 - name: gUnk_09EEA2B8
   record: AnimTable
-  items: [gUnkUs_09093614]
+  items: [gUnk_09093614]
   us:
     address: 0x09EEA2B8
   jp:
@@ -241,7 +241,7 @@ entries:
     address: 0x09F760F0
 - name: gUnk_09EEA2BC
   record: SpriteTable
-  items: [gUnkUs_09094FA0, gUnkUs_09094FD4, gUnkUs_09095008, gUnkUs_0909503C, gUnkUs_09095076, gUnkUs_090950B0]
+  items: [gUnk_09094FA0, gUnk_09094FD4, gUnk_09095008, gUnk_0909503C, gUnk_09095076, gUnk_090950B0]
   us:
     address: 0x09EEA2BC
   jp:
@@ -250,7 +250,7 @@ entries:
     address: 0x09F760F4
 - name: gUnk_09EEA2D4
   record: AnimTable
-  items: [gUnkUs_090950EA]
+  items: [gUnk_090950EA]
   us:
     address: 0x09EEA2D4
   jp:
@@ -259,18 +259,16 @@ entries:
     address: 0x09F7610C
 - name: gUnk_09EEA2D8
   record: SpriteTable
+  items: [gUnk_09096B34, gUnk_09096B68, gUnk_09096B9C, gUnk_09096BD0, gUnk_09096C0A, gUnk_09096C44]
   us:
     address: 0x09EEA2D8
-    items: [gUnkUs_09096B34, gUnkUs_09096B68, gUnkUs_09096B9C, gUnkUs_09096BD0, gUnkUs_09096C0A, gUnkUs_09096C44]
   jp:
     address: 0x09EC16CC
-    items: [gUnkUs_09096B34, gUnkUs_09096B68, gUnkUs_09096B9C, gUnkUs_09096BD0, gUnkUs_09096C0A, gUnkUs_09096C44]
   eu:
     address: 0x09F76110
-    items: [gUnkUs_09096B34, gUnkUs_09096B68, gUnkUs_09096B9C, gUnkEu_0916DD04, gUnkEu_0916DD3E, gUnkEu_0916DD78]
 - name: gUnk_09EEA2F0
   record: AnimTable
-  items: [gUnkUs_09096C7E]
+  items: [gUnk_09096C7E]
   us:
     address: 0x09EEA2F0
   jp:
@@ -454,46 +452,30 @@ entries:
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnkUs_0908C630
-    jp: {symbol: gUnkJp_09047EA0}
-    eu: {symbol: gUnkEu_09163764}
+  - symbol: gUnk_0908C630
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnkUs_0908C640
-    jp: {symbol: gUnkJp_09047EB0}
-    eu: {symbol: gUnkEu_09163774}
+  - symbol: gUnk_0908C640
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkUs_0908C64A
-    jp: {symbol: gUnkJp_09047EBA}
-    eu: {symbol: gUnkEu_0916377E}
+  - symbol: gUnk_0908C64A
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkUs_0908C654
-    jp: {symbol: gUnkJp_09047EC4}
-    eu: {symbol: gUnkEu_09163788}
+  - symbol: gUnk_0908C654
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkUs_0908C65E
-    jp: {symbol: gUnkJp_09047ECE}
-    eu: {symbol: gUnkEu_09163792}
+  - symbol: gUnk_0908C65E
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkUs_0908C668
-    jp: {symbol: gUnkJp_09047ED8}
-    eu: {symbol: gUnkEu_0916379C}
+  - symbol: gUnk_0908C668
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkUs_0908C672
-    jp: {symbol: gUnkJp_09047EE2}
-    eu: {symbol: gUnkEu_091637A6}
+  - symbol: gUnk_0908C672
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnkUs_0908C67C
-    jp: {symbol: gUnkJp_09047EEC}
-    eu: {symbol: gUnkEu_091637B0}
+  - symbol: gUnk_0908C67C
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -512,67 +494,43 @@ entries:
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnkUs_0908CA68
-    jp: {symbol: gUnkJp_090482D8}
-    eu: {symbol: gUnkEu_09163B9C}
+  - symbol: gUnk_0908CA68
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CA72
-    jp: {symbol: gUnkJp_090482E2}
-    eu: {symbol: gUnkEu_09163BA6}
+  - symbol: gUnk_0908CA72
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CA7C
-    jp: {symbol: gUnkJp_090482EC}
-    eu: {symbol: gUnkEu_09163BB0}
+  - symbol: gUnk_0908CA7C
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CA86
-    jp: {symbol: gUnkJp_090482F6}
-    eu: {symbol: gUnkEu_09163BBA}
+  - symbol: gUnk_0908CA86
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CA90
-    jp: {symbol: gUnkJp_09048300}
-    eu: {symbol: gUnkEu_09163BC4}
+  - symbol: gUnk_0908CA90
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CA9A
-    jp: {symbol: gUnkJp_0904830A}
-    eu: {symbol: gUnkEu_09163BCE}
+  - symbol: gUnk_0908CA9A
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CAA4
-    jp: {symbol: gUnkJp_09048314}
-    eu: {symbol: gUnkEu_09163BD8}
+  - symbol: gUnk_0908CAA4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CAAE
-    jp: {symbol: gUnkJp_0904831E}
-    eu: {symbol: gUnkEu_09163BE2}
+  - symbol: gUnk_0908CAAE
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CAB8
-    jp: {symbol: gUnkJp_09048328}
-    eu: {symbol: gUnkEu_09163BEC}
+  - symbol: gUnk_0908CAB8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CAC2
-    jp: {symbol: gUnkJp_09048332}
-    eu: {symbol: gUnkEu_09163BF6}
+  - symbol: gUnk_0908CAC2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkUs_0908CACC
-    jp: {symbol: gUnkJp_0904833C}
-    eu: {symbol: gUnkEu_09163C00}
+  - symbol: gUnk_0908CACC
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
   animations:
-  - symbol: gUnkUs_0908CAE2
-    jp: {symbol: gUnkJp_09048352}
-    eu: {symbol: gUnkEu_09163C16}
+  - symbol: gUnk_0908CAE2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -591,9 +549,7 @@ entries:
   anchor: [128, 0]
   columns: 2
   frames:
-  - symbol: gUnkUs_0908CFEC
-    jp: {symbol: gUnkJp_0904885C}
-    eu: {symbol: gUnkEu_09164120}
+  - symbol: gUnk_0908CFEC
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0, {fresh: true}]
@@ -603,9 +559,7 @@ entries:
     - [32x8, 32, 0, {fresh: true}]
     - [32x8, 64, 0, {fresh: true}]
     - [16x8, 96, 0]
-  - symbol: gUnkUs_0908D020
-    jp: {symbol: gUnkJp_09048890}
-    eu: {symbol: gUnkEu_09164154}
+  - symbol: gUnk_0908D020
     pieces:
     - [32x8, -128, 0, {vflip: true, same: [0, 0]}]
     - [32x8, -96, 0, {vflip: true, same: [0, 1]}]
@@ -616,9 +570,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gUnkUs_0908D054
-    jp: {symbol: gUnkJp_090488C4}
-    eu: {symbol: gUnkEu_09164188}
+  - symbol: gUnk_0908D054
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -637,150 +589,92 @@ entries:
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnkUs_0908D420
-    jp: {symbol: gUnkJp_09048C90}
-    eu: {symbol: gUnkEu_09164554}
+  - symbol: gUnk_0908D420
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D42A
-    jp: {symbol: gUnkJp_09048C9A}
-    eu: {symbol: gUnkEu_0916455E}
+  - symbol: gUnk_0908D42A
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D434
-    jp: {symbol: gUnkJp_09048CA4}
-    eu: {symbol: gUnkEu_09164568}
+  - symbol: gUnk_0908D434
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D43E
-    jp: {symbol: gUnkJp_09048CAE}
-    eu: {symbol: gUnkEu_09164572}
+  - symbol: gUnk_0908D43E
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D448
-    jp: {symbol: gUnkJp_09048CB8}
-    eu: {symbol: gUnkEu_0916457C}
+  - symbol: gUnk_0908D448
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D452
-    jp: {symbol: gUnkJp_09048CC2}
-    eu: {symbol: gUnkEu_09164586}
+  - symbol: gUnk_0908D452
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D45C
-    jp: {symbol: gUnkJp_09048CCC}
-    eu: {symbol: gUnkEu_09164590}
+  - symbol: gUnk_0908D45C
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D466
-    jp: {symbol: gUnkJp_09048CD6}
-    eu: {symbol: gUnkEu_0916459A}
+  - symbol: gUnk_0908D466
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D470
-    jp: {symbol: gUnkJp_09048CE0}
-    eu: {symbol: gUnkEu_091645A4}
+  - symbol: gUnk_0908D470
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D47A
-    jp: {symbol: gUnkJp_09048CEA}
-    eu: {symbol: gUnkEu_091645AE}
+  - symbol: gUnk_0908D47A
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D484
-    jp: {symbol: gUnkJp_09048CF4}
-    eu: {symbol: gUnkEu_091645B8}
+  - symbol: gUnk_0908D484
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D48E
-    jp: {symbol: gUnkJp_09048CFE}
-    eu: {symbol: gUnkEu_091645C2}
+  - symbol: gUnk_0908D48E
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D498
-    jp: {symbol: gUnkJp_09048D08}
-    eu: {symbol: gUnkEu_091645CC}
+  - symbol: gUnk_0908D498
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4A2
-    jp: {symbol: gUnkJp_09048D12}
-    eu: {symbol: gUnkEu_091645D6}
+  - symbol: gUnk_0908D4A2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4AC
-    jp: {symbol: gUnkJp_09048D1C}
-    eu: {symbol: gUnkEu_091645E0}
+  - symbol: gUnk_0908D4AC
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4B6
-    jp: {symbol: gUnkJp_09048D26}
-    eu: {symbol: gUnkEu_091645EA}
+  - symbol: gUnk_0908D4B6
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4C0
-    jp: {symbol: gUnkJp_09048D30}
-    eu: {symbol: gUnkEu_091645F4}
+  - symbol: gUnk_0908D4C0
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4CA
-    jp: {symbol: gUnkJp_09048D3A}
-    eu: {symbol: gUnkEu_091645FE}
+  - symbol: gUnk_0908D4CA
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4D4
-    jp: {symbol: gUnkJp_09048D44}
-    eu: {symbol: gUnkEu_09164608}
+  - symbol: gUnk_0908D4D4
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4DE
-    jp: {symbol: gUnkJp_09048D4E}
-    eu: {symbol: gUnkEu_09164612}
+  - symbol: gUnk_0908D4DE
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4E8
-    jp: {symbol: gUnkJp_09048D58}
-    eu: {symbol: gUnkEu_0916461C}
+  - symbol: gUnk_0908D4E8
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4F2
-    jp: {symbol: gUnkJp_09048D62}
-    eu: {symbol: gUnkEu_09164626}
+  - symbol: gUnk_0908D4F2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D4FC
-    jp: {symbol: gUnkJp_09048D6C}
-    eu: {symbol: gUnkEu_09164630}
+  - symbol: gUnk_0908D4FC
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D506
-    jp: {symbol: gUnkJp_09048D76}
-    eu: {symbol: gUnkEu_0916463A}
+  - symbol: gUnk_0908D506
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D510
-    jp: {symbol: gUnkJp_09048D80}
-    eu: {symbol: gUnkEu_09164644}
+  - symbol: gUnk_0908D510
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D51A
-    jp: {symbol: gUnkJp_09048D8A}
-    eu: {symbol: gUnkEu_0916464E}
+  - symbol: gUnk_0908D51A
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D524
-    jp: {symbol: gUnkJp_09048D94}
-    eu: {symbol: gUnkEu_09164658}
+  - symbol: gUnk_0908D524
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkUs_0908D52E
-    jp: {symbol: gUnkJp_09048D9E}
-    eu: {symbol: gUnkEu_09164662}
+  - symbol: gUnk_0908D52E
     pieces:
     - [32x16, 0, 0]
   animations:
-  - symbol: gUnkUs_0908D538
-    jp: {symbol: gUnkJp_09048DA8}
-    eu: {symbol: gUnkEu_0916466C}
+  - symbol: gUnk_0908D538
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -799,35 +693,23 @@ entries:
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnkUs_0908F144
-    jp: {symbol: gUnkJp_0904A9B4}
-    eu: {symbol: gUnkEu_09166278}
+  - symbol: gUnk_0908F144
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkUs_0908F14E
-    jp: {symbol: gUnkJp_0904A9BE}
-    eu: {symbol: gUnkEu_09166282}
+  - symbol: gUnk_0908F14E
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkUs_0908F158
-    jp: {symbol: gUnkJp_0904A9C8}
-    eu: {symbol: gUnkEu_0916628C}
+  - symbol: gUnk_0908F158
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkUs_0908F162
-    jp: {symbol: gUnkJp_0904A9D2}
-    eu: {symbol: gUnkEu_09166296}
+  - symbol: gUnk_0908F162
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkUs_0908F16C
-    jp: {symbol: gUnkJp_0904A9DC}
-    eu: {symbol: gUnkEu_091662A0}
+  - symbol: gUnk_0908F16C
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnkUs_0908F176
-    jp: {symbol: gUnkJp_0904A9E6}
-    eu: {symbol: gUnkEu_091662AA}
+  - symbol: gUnk_0908F176
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 7], [2, 6], [3, 7], [4, 6]]
   us:
@@ -846,17 +728,13 @@ entries:
   anchor: [68, 12]
   columns: 1
   frames:
-  - symbol: gUnkUs_0908F410
-    jp: {symbol: gUnkJp_0904AC80}
-    eu: {symbol: gUnkEu_09166544}
+  - symbol: gUnk_0908F410
     pieces:
     - [64x32, -68, -12]
     - [64x32, -4, -12]
     - [8x32, 60, -12]
   animations:
-  - symbol: gUnkUs_0908F426
-    jp: {symbol: gUnkJp_0904AC96}
-    eu: {symbol: gUnkEu_0916655A}
+  - symbol: gUnk_0908F426
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -875,9 +753,7 @@ entries:
   anchor: [76, 28]
   columns: 1
   frames:
-  - symbol: gUnkUs_0908FCB0
-    jp: {symbol: gUnkJp_0904B520}
-    eu: {symbol: gUnkEu_09166DE4}
+  - symbol: gUnk_0908FCB0
     pieces:
     - [64x64, -76, -28]
     - [64x64, -12, -28]
@@ -888,9 +764,7 @@ entries:
     - [16x8, 52, 20]
     - [8x8, 68, 20]
   animations:
-  - symbol: gUnkUs_0908FCE4
-    jp: {symbol: gUnkJp_0904B554}
-    eu: {symbol: gUnkEu_09166E18}
+  - symbol: gUnk_0908FCE4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -909,9 +783,7 @@ entries:
   anchor: [68, 24]
   columns: 1
   frames:
-  - symbol: gUnkUs_09090F90
-    jp: {symbol: gUnkJp_0904C800}
-    eu: {symbol: gUnkEu_091680C4}
+  - symbol: gUnk_09090F90
     pieces:
     - [64x32, -68, -24]
     - [64x32, -4, -24]
@@ -922,9 +794,7 @@ entries:
     - [8x32, 60, -24]
     - [8x16, 60, 8]
   animations:
-  - symbol: gUnkUs_09090FC4
-    jp: {symbol: gUnkJp_0904C834}
-    eu: {symbol: gUnkEu_091680F8}
+  - symbol: gUnk_09090FC4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -943,9 +813,7 @@ entries:
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnkUs_09091C90
-    jp: {symbol: gUnkJp_0904D500}
-    eu: {symbol: gUnkEu_09168DC4}
+  - symbol: gUnk_09091C90
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -955,9 +823,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkUs_09091CC4
-    jp: {symbol: gUnkJp_0904D534}
-    eu: {symbol: gUnkEu_09168DF8}
+  - symbol: gUnk_09091CC4
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -967,9 +833,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_09091CF8
-    jp: {symbol: gUnkJp_0904D568}
-    eu: {symbol: gUnkEu_09168E2C}
+  - symbol: gUnk_09091CF8
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -980,9 +844,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnkUs_09091D2C
-    jp: {symbol: gUnkJp_0904D59C}
-    eu: {symbol: gUnkEu_09168E60}
+  - symbol: gUnk_09091D2C
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1001,9 +863,7 @@ entries:
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnkUs_09093578
-    jp: {symbol: gUnkJp_0904EDE8}
-    eu: {symbol: gUnkEu_0916A6AC}
+  - symbol: gUnk_09093578
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1013,9 +873,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkUs_090935AC
-    jp: {symbol: gUnkJp_0904EE1C}
-    eu: {symbol: gUnkEu_0916A6E0}
+  - symbol: gUnk_090935AC
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1025,9 +883,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_090935E0
-    jp: {symbol: gUnkJp_0904EE50}
-    eu: {symbol: gUnkEu_0916A714}
+  - symbol: gUnk_090935E0
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1038,9 +894,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnkUs_09093614
-    jp: {symbol: gUnkJp_0904EE84}
-    eu: {symbol: gUnkEu_0916A748}
+  - symbol: gUnk_09093614
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1059,9 +913,7 @@ entries:
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnkUs_09094FA0
-    jp: {symbol: gUnkJp_09050810}
-    eu: {symbol: gUnkEu_0916C0D4}
+  - symbol: gUnk_09094FA0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1071,9 +923,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkUs_09094FD4
-    jp: {symbol: gUnkJp_09050844}
-    eu: {symbol: gUnkEu_0916C108}
+  - symbol: gUnk_09094FD4
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1083,9 +933,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_09095008
-    jp: {symbol: gUnkJp_09050878}
-    eu: {symbol: gUnkEu_0916C13C}
+  - symbol: gUnk_09095008
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1095,9 +943,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_0909503C
-    jp: {symbol: gUnkJp_090508AC}
-    eu: {symbol: gUnkEu_0916C170}
+  - symbol: gUnk_0909503C
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -1108,9 +954,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkUs_09095076
-    jp: {symbol: gUnkJp_090508E6}
-    eu: {symbol: gUnkEu_0916C1AA}
+  - symbol: gUnk_09095076
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -1121,9 +965,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnkUs_090950B0
-    jp: {symbol: gUnkJp_09050920}
-    eu: {symbol: gUnkEu_0916C1E4}
+  - symbol: gUnk_090950B0
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -1135,9 +977,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnkUs_090950EA
-    jp: {symbol: gUnkJp_0905095A}
-    eu: {symbol: gUnkEu_0916C21E}
+  - symbol: gUnk_090950EA
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1156,9 +996,7 @@ entries:
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnkUs_09096B34
-    jp: {symbol: gUnkJp_090523A4}
-    eu: {symbol: gUnkEu_0916DC68}
+  - symbol: gUnk_09096B34
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1168,9 +1006,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkUs_09096B68
-    jp: {symbol: gUnkJp_090523D8}
-    eu: {symbol: gUnkEu_0916DC9C}
+  - symbol: gUnk_09096B68
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1180,9 +1016,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_09096B9C
-    jp: {symbol: gUnkJp_0905240C}
-    eu: {symbol: gUnkEu_0916DCD0}
+  - symbol: gUnk_09096B9C
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1192,9 +1026,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkUs_09096BD0
-    jp: {symbol: gUnkJp_09052440}
-    eu: {symbol: gUnkEu_0916DD04}
+  - symbol: gUnk_09096BD0
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -1205,9 +1037,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkUs_09096C0A
-    jp: {symbol: gUnkJp_0905247A}
-    eu: {symbol: gUnkEu_0916DD3E}
+  - symbol: gUnk_09096C0A
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1218,9 +1048,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnkUs_09096C44
-    jp: {symbol: gUnkJp_090524B4}
-    eu: {symbol: gUnkEu_0916DD78}
+  - symbol: gUnk_09096C44
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1232,9 +1060,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnkUs_09096C7E
-    jp: {symbol: gUnkJp_090524EE}
-    eu: {symbol: gUnkEu_0916DDB2}
+  - symbol: gUnk_09096C7E
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:

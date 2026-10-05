@@ -73,7 +73,7 @@ static TaskDesc sTaskDescAllmapRoomname = {
 
 #ifdef VERSION_EU
 static void* sAllmapBarSprites[5] = {
-    gUnkEu_09738538,
+    gUnk_0976D880,
     gUnkEu_09738554,
     gUnkEu_09738590,
     gUnkEu_0973857A,

@@ -2473,37 +2473,35 @@ entries:
     address: 0x09F84438
 - name: gUnk_09EF8D8C
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A8BE4, gMapUiSpriteUs_098A8BF4, gMapUiSpriteUs_098A8C28]
+  items: [gMapUiSprite_098A8BE4, gMapUiSprite_098A8BF4, gMapUiSprite_098A8C28]
   us:
     address: 0x09EF8D8C
   jp:
     address: 0x09ED0178
   eu:
     address: 0x09F8447C
-    items: [gMapUiSpriteEu_09887388, gMapUiSpriteEu_09887398, gMapUiSpriteEu_098873CC]
 - name: gUnkEu_09F8443C
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A8BE4, gMapUiSpriteUs_098A8BF4, gMapUiSpriteUs_098A8C28]
+  items: [gMapUiSpriteEu_09886324, gMapUiSpriteEu_09886340, gMapUiSpriteEu_09886374]
   eu:
     address: 0x09F8443C
 - name: gUnk_09EF8D98
   record: AnimTable
-  items: [gMapUiAnimUs_098A8C5C]
+  items: [gMapUiAnim_098A8C5C]
   us:
     address: 0x09EF8D98
   jp:
     address: 0x09ED0184
   eu:
     address: 0x09F84488
-    items: [gMapUiAnimEu_09887400]
 - name: gUnkEu_09F84448
   record: AnimTable
-  items: [gMapUiAnimUs_098A8C5C]
+  items: [gMapUiAnimEu_098863A8]
   eu:
     address: 0x09F84448
 - name: gUnk_09EF8D9C
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A8F28]
+  items: [gMapUiSprite_098A8F28]
   us:
     address: 0x09EF8D9C
   jp:
@@ -2512,7 +2510,7 @@ entries:
     address: 0x09F8448C
 - name: gUnk_09EF8DA0
   record: AnimTable
-  items: [gMapUiAnimUs_098A8F80]
+  items: [gMapUiAnim_098A8F80]
   us:
     address: 0x09EF8DA0
   jp:
@@ -2521,7 +2519,7 @@ entries:
     address: 0x09F84490
 - name: gUnk_09EF8DA4
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A944C]
+  items: [gMapUiSprite_098A944C]
   us:
     address: 0x09EF8DA4
   jp:
@@ -2530,7 +2528,7 @@ entries:
     address: 0x09F84494
 - name: gUnk_09EF8DA8
   record: AnimTable
-  items: [gMapUiAnimUs_098A9480]
+  items: [gMapUiAnim_098A9480]
   us:
     address: 0x09EF8DA8
   jp:
@@ -2539,7 +2537,7 @@ entries:
     address: 0x09F84498
 - name: gUnk_09EF8DAC
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A948C]
+  items: [gMapUiSprite_098A948C]
   us:
     address: 0x09EF8DAC
   jp:
@@ -2548,7 +2546,7 @@ entries:
     address: 0x09F8449C
 - name: gUnk_09EF8DB0
   record: AnimTable
-  items: [gMapUiAnimUs_098A9496]
+  items: [gMapUiAnim_098A9496]
   us:
     address: 0x09EF8DB0
   jp:
@@ -2557,7 +2555,7 @@ entries:
     address: 0x09F844A0
 - name: gUnk_09EF8DB4
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A94A0]
+  items: [gMapUiSprite_098A94A0]
   us:
     address: 0x09EF8DB4
   jp:
@@ -2566,7 +2564,7 @@ entries:
     address: 0x09F844A4
 - name: gUnk_09EF8DB8
   record: AnimTable
-  items: [gMapUiAnimUs_098A94AA]
+  items: [gMapUiAnim_098A94AA]
   us:
     address: 0x09EF8DB8
   jp:
@@ -2575,7 +2573,7 @@ entries:
     address: 0x09F844A8
 - name: gUnk_09EF8DBC
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A94B4]
+  items: [gMapUiSprite_098A94B4]
   us:
     address: 0x09EF8DBC
   jp:
@@ -2584,7 +2582,7 @@ entries:
     address: 0x09F844AC
 - name: gUnk_09EF8DC0
   record: AnimTable
-  items: [gMapUiAnimUs_098A94BE]
+  items: [gMapUiAnim_098A94BE]
   us:
     address: 0x09EF8DC0
   jp:
@@ -2593,7 +2591,7 @@ entries:
     address: 0x09F844B0
 - name: gUnk_09EF8DC4
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A94C8]
+  items: [gMapUiSprite_098A94C8]
   us:
     address: 0x09EF8DC4
   jp:
@@ -2602,7 +2600,7 @@ entries:
     address: 0x09F844B4
 - name: gUnk_09EF8DC8
   record: AnimTable
-  items: [gMapUiAnimUs_098A94D2]
+  items: [gMapUiAnim_098A94D2]
   us:
     address: 0x09EF8DC8
   jp:
@@ -2611,7 +2609,7 @@ entries:
     address: 0x09F844B8
 - name: gUnk_09EF8DCC
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A94DC]
+  items: [gMapUiSprite_098A94DC]
   us:
     address: 0x09EF8DCC
   jp:
@@ -2620,7 +2618,7 @@ entries:
     address: 0x09F844BC
 - name: gUnk_09EF8DD0
   record: AnimTable
-  items: [gMapUiAnimUs_098A94F2]
+  items: [gMapUiAnim_098A94F2]
   us:
     address: 0x09EF8DD0
   jp:
@@ -2629,7 +2627,7 @@ entries:
     address: 0x09F844C0
 - name: gUnk_09EF8DD4
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A94FC]
+  items: [gMapUiSprite_098A94FC]
   us:
     address: 0x09EF8DD4
   jp:
@@ -2638,7 +2636,7 @@ entries:
     address: 0x09F844C4
 - name: gUnk_09EF8DD8
   record: AnimTable
-  items: [gMapUiAnimUs_098A9512]
+  items: [gMapUiAnim_098A9512]
   us:
     address: 0x09EF8DD8
   jp:
@@ -2647,7 +2645,7 @@ entries:
     address: 0x09F844C8
 - name: gUnk_09EF8DDC
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A951C, gMapUiSpriteUs_098A9526, gMapUiSpriteUs_098A9530, gMapUiSpriteUs_098A953A, gMapUiSpriteUs_098A9544, gMapUiSpriteUs_098A954E, gMapUiSpriteUs_098A9558, gMapUiSpriteUs_098A9562]
+  items: [gMapUiSprite_098A951C, gMapUiSprite_098A9526, gMapUiSprite_098A9530, gMapUiSprite_098A953A, gMapUiSprite_098A9544, gMapUiSprite_098A954E, gMapUiSprite_098A9558, gMapUiSprite_098A9562]
   us:
     address: 0x09EF8DDC
   jp:
@@ -2656,7 +2654,7 @@ entries:
     address: 0x09F844CC
 - name: gUnk_09EF8DFC
   record: AnimTable
-  items: [gMapUiAnimUs_098A956C, gMapUiAnimUs_098A958A, gMapUiAnimUs_098A95A8, gMapUiAnimUs_098A95C6]
+  items: [gMapUiAnim_098A956C, gMapUiAnim_098A958A, gMapUiAnim_098A95A8, gMapUiAnim_098A95C6]
   us:
     address: 0x09EF8DFC
   jp:
@@ -2665,7 +2663,7 @@ entries:
     address: 0x09F844EC
 - name: gUnk_09EF8E0C
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A95E4, gMapUiSpriteUs_098A9636, gMapUiSpriteUs_098A9658, gMapUiSpriteUs_098A967A]
+  items: [gMapUiSprite_098A95E4, gMapUiSprite_098A9636, gMapUiSprite_098A9658, gMapUiSprite_098A967A]
   us:
     address: 0x09EF8E0C
   jp:
@@ -2674,7 +2672,7 @@ entries:
     address: 0x09F844FC
 - name: gUnk_09EF8E1C
   record: AnimTable
-  items: [gMapUiAnimUs_098A9696]
+  items: [gMapUiAnim_098A9696]
   us:
     address: 0x09EF8E1C
   jp:
@@ -2683,7 +2681,7 @@ entries:
     address: 0x09F8450C
 - name: gUnk_09EF8E20
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A96A0, gMapUiSpriteUs_098A9710, gMapUiSpriteUs_098A9780, gMapUiSpriteUs_098A97F0, gMapUiSpriteUs_098A9860, gMapUiSpriteUs_098A98D0, gMapUiSpriteUs_098A9940, gMapUiSpriteUs_098A99B0]
+  items: [gMapUiSprite_098A96A0, gMapUiSprite_098A9710, gMapUiSprite_098A9780, gMapUiSprite_098A97F0, gMapUiSprite_098A9860, gMapUiSprite_098A98D0, gMapUiSprite_098A9940, gMapUiSprite_098A99B0]
   us:
     address: 0x09EF8E20
   jp:
@@ -2693,14 +2691,14 @@ entries:
     items: [gMapUiSpriteEu_098884A4, gMapUiSpriteEu_09888514, gMapUiSpriteEu_09888584, gMapUiSpriteEu_098885F4, gMapUiSpriteEu_09888664, gMapUiSpriteEu_098886D4, gMapUiSpriteEu_09888744, gMapUiSpriteEu_098887B4]
 - name: gUnk_09EF8E40
   record: AnimTable
-  items: [gMapUiAnimUs_098A9A32]
+  items: [gMapUiAnim_098A9A32]
   us:
     address: 0x09EF8E40
   jp:
     address: 0x09ED022C
 - name: gUnk_09EF8E44
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9A3C, gMapUiSpriteUs_098A9A52, gMapUiSpriteUs_098A9A68, gMapUiSpriteUs_098A9A7E, gMapUiSpriteUs_098A9A94, gMapUiSpriteUs_098A9AAA, gMapUiSpriteUs_098A9AC0]
+  items: [gMapUiSprite_098A9A3C, gMapUiSprite_098A9A52, gMapUiSprite_098A9A68, gMapUiSprite_098A9A7E, gMapUiSprite_098A9A94, gMapUiSprite_098A9AAA, gMapUiSprite_098A9AC0]
   us:
     address: 0x09EF8E44
   jp:
@@ -2710,7 +2708,7 @@ entries:
     items: [gMapUiSpriteEu_098896B0, gMapUiSpriteEu_098896C6, gMapUiSpriteEu_098896DC, gMapUiSpriteEu_098896F2, gMapUiSpriteEu_09889708, gMapUiSpriteEu_0988971E, gMapUiSpriteEu_09889734]
 - name: gUnk_09EF8E60
   record: AnimTable
-  items: [gMapUiAnimUs_098A9AD6]
+  items: [gMapUiAnim_098A9AD6]
   us:
     address: 0x09EF8E60
   jp:
@@ -2720,7 +2718,7 @@ entries:
     items: [gMapUiAnimEu_0988974A]
 - name: gUnk_09EF8E64
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9AE0]
+  items: [gMapUiSprite_098A9AE0]
   us:
     address: 0x09EF8E64
   jp:
@@ -2729,7 +2727,7 @@ entries:
     address: 0x09F84730
 - name: gUnk_09EF8E68
   record: AnimTable
-  items: [gMapUiAnimUs_098A9B38]
+  items: [gMapUiAnim_098A9B38]
   us:
     address: 0x09EF8E68
   jp:
@@ -2738,7 +2736,7 @@ entries:
     address: 0x09F84734
 - name: gUnk_09EF8E6C
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9B44]
+  items: [gMapUiSprite_098A9B44]
   us:
     address: 0x09EF8E6C
   jp:
@@ -2747,7 +2745,7 @@ entries:
     address: 0x09F84718
 - name: gUnk_09EF8E70
   record: AnimTable
-  items: [gMapUiAnimUs_098A9B54]
+  items: [gMapUiAnim_098A9B54]
   us:
     address: 0x09EF8E70
   jp:
@@ -2756,7 +2754,7 @@ entries:
     address: 0x09F8471C
 - name: gUnk_09EF8E74
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9B60, gMapUiSpriteUs_098A9B94]
+  items: [gMapUiSprite_098A9B60, gMapUiSprite_098A9B94]
   us:
     address: 0x09EF8E74
   jp:
@@ -2765,7 +2763,7 @@ entries:
     address: 0x09F84738
 - name: gUnk_09EF8E7C
   record: AnimTable
-  items: [gMapUiAnimUs_098A9BC8]
+  items: [gMapUiAnim_098A9BC8]
   us:
     address: 0x09EF8E7C
   jp:
@@ -2774,7 +2772,7 @@ entries:
     address: 0x09F84740
 - name: gUnk_09EF8E80
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9BD4, gMapUiSpriteUs_098A9C20, gMapUiSpriteUs_098A9C42, gMapUiSpriteUs_098A9C5E]
+  items: [gMapUiSprite_098A9BD4, gMapUiSprite_098A9C20, gMapUiSprite_098A9C42, gMapUiSprite_098A9C5E]
   us:
     address: 0x09EF8E80
   jp:
@@ -2783,7 +2781,7 @@ entries:
     address: 0x09F84560
 - name: gUnk_09EF8E90
   record: AnimTable
-  items: [gMapUiAnimUs_098A9C7A]
+  items: [gMapUiAnim_098A9C7A]
   us:
     address: 0x09EF8E90
   jp:
@@ -2862,12 +2860,12 @@ entries:
     address: 0x09F84478
 - name: gUnkEu_09F84510
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A96A0, gMapUiSpriteUs_098A9710, gMapUiSpriteUs_098A9780, gMapUiSpriteUs_098A97F0]
+  items: [gMapUiSprite_098A96A0, gMapUiSprite_098A9710, gMapUiSprite_098A9780, gMapUiSprite_098A97F0]
   eu:
     address: 0x09F84510
 - name: gUnkEu_09F84520
   record: AnimTable
-  items: [gMapUiAnimEu_09887EF6]
+  items: [gMapUiAnim_098A9A32]
   eu:
     address: 0x09F84520
 - name: gUnkEu_09F84524
@@ -3037,12 +3035,12 @@ entries:
     address: 0x09F84724
 - name: gUnkEu_09F84728
   record: SpriteTable
-  items: [gMapUiSpriteUs_098A9AC0]
+  items: [gMapUiSpriteEu_09889A1C]
   eu:
     address: 0x09F84728
 - name: gUnkEu_09F8472C
   record: AnimTable
-  items: [gMapUiAnimUs_098A9AD6]
+  items: [gMapUiAnimEu_09889A2C]
   eu:
     address: 0x09F8472C
 - name: gUnk_093EDD5E
@@ -10320,11 +10318,11 @@ entries:
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gMapUiSpriteUs_098A8BE4
+  - symbol: gMapUiSprite_098A8BE4
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
-  - symbol: gMapUiSpriteUs_098A8BF4
+  - symbol: gMapUiSprite_098A8BF4
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -10334,7 +10332,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gMapUiSpriteUs_098A8C28
+  - symbol: gMapUiSprite_098A8C28
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -10345,7 +10343,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gMapUiAnimUs_098A8C5C
+  - symbol: gMapUiAnim_098A8C5C
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10358,36 +10356,6 @@ entries:
   eu:
     address: 0x09887388
     size: 834
-    frames:
-    - symbol: gMapUiSpriteEu_09887388
-      pieces:
-      - [32x16, 0, 0]
-      - [32x16, 32, 0]
-    - symbol: gMapUiSpriteEu_09887398
-      pieces:
-      - [32x8, -128, 0]
-      - [32x8, -96, 0]
-      - [32x8, -64, 0]
-      - [32x8, -32, 0]
-      - [32x8, 0, 0]
-      - [32x8, 32, 0]
-      - [32x8, 64, 0]
-      - [16x8, 96, 0]
-    - symbol: gMapUiSpriteEu_098873CC
-      pieces:
-      - [32x8, -128, 0, {vflip: true}]
-      - [32x8, -96, 0, {vflip: true}]
-      - [32x8, -64, 0, {vflip: true}]
-      - [32x8, -32, 0, {vflip: true}]
-      - [32x8, 0, 0, {vflip: true}]
-      - [32x8, 32, 0, {vflip: true}]
-      - [32x8, 64, 0, {vflip: true}]
-      - [16x8, 96, 0, {vflip: true}]
-    animations:
-    - symbol: gMapUiAnimEu_09887400
-      declare: false
-      fields: {unk_00: 64, unk_02: 64}
-      frames: [[0, 4]]
 - name: gUnkEu_098863B2
   format: sprite_sheet
   align: 4
@@ -10395,13 +10363,13 @@ entries:
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gMapUiSpriteUs_098A8BE4
+  - symbol: gMapUiSpriteEu_09886324
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x16, 96, 0]
-  - symbol: gMapUiSpriteUs_098A8BF4
+  - symbol: gMapUiSpriteEu_09886340
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -10411,7 +10379,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gMapUiSpriteUs_098A8C28
+  - symbol: gMapUiSpriteEu_09886374
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -10422,7 +10390,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gMapUiAnimUs_098A8C5C
+  - symbol: gMapUiAnimEu_098863A8
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10554,7 +10522,7 @@ entries:
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A8F28
+  - symbol: gMapUiSprite_098A8F28
     pieces:
     - [32x8, 0, 0]
     - [8x32, 0, 8]
@@ -10571,7 +10539,7 @@ entries:
     - [8x32, 96, 0]
     - [32x8, 64, 0]
   animations:
-  - symbol: gMapUiAnimUs_098A8F80
+  - symbol: gMapUiAnim_098A8F80
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10584,7 +10552,7 @@ entries:
   eu:
     address: 0x098876CC
     size: 1314
-- name: gMapUiSpriteUs_098A944C
+- name: gMapUiSprite_098A944C
   format: sprite_sheet
   tiles: gUnk_0993AF64
   palette: gUnk_099910C4
@@ -10593,7 +10561,7 @@ entries:
   anchor: [120, 8]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A944C
+  - symbol: gMapUiSprite_098A944C
     pieces:
     - [32x16, -88, -8, {tile: 0}]
     - [32x16, -56, -8, {tile: 0}]
@@ -10604,7 +10572,7 @@ entries:
     - [32x16, 72, -8, {tile: 0}]
     - [16x16, 104, -8, {tile: 0}]
   animations:
-  - symbol: gMapUiAnimUs_098A9480
+  - symbol: gMapUiAnim_098A9480
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10617,7 +10585,7 @@ entries:
   eu:
     address: 0x09887BF0
     size: 62
-- name: gMapUiSpriteUs_098A948C
+- name: gMapUiSprite_098A948C
   format: sprite_sheet
   tiles: gUnk_0994D764
   palette: gUnk_09991224
@@ -10626,11 +10594,11 @@ entries:
   anchor: [16, 56]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A948C
+  - symbol: gMapUiSprite_098A948C
     pieces:
     - [32x64, -16, -56, {tile: 0}]
   animations:
-  - symbol: gMapUiAnimUs_098A9496
+  - symbol: gMapUiAnim_098A9496
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10643,7 +10611,7 @@ entries:
   eu:
     address: 0x09887C30
     size: 20
-- name: gMapUiSpriteUs_098A94A0
+- name: gMapUiSprite_098A94A0
   format: sprite_sheet
   tiles: gUnk_0994DF64
   palette: gUnk_09991224
@@ -10651,11 +10619,11 @@ entries:
   anchor: [16, 56]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A94A0
+  - symbol: gMapUiSprite_098A94A0
     pieces:
     - [32x64, -16, -56, {tile: 0}]
   animations:
-  - symbol: gMapUiAnimUs_098A94AA
+  - symbol: gMapUiAnim_098A94AA
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10668,7 +10636,7 @@ entries:
   eu:
     address: 0x09887C44
     size: 20
-- name: gMapUiSpriteUs_098A94B4
+- name: gMapUiSprite_098A94B4
   format: sprite_sheet
   tiles: gUnk_0994E764
   palette: gUnk_09991224
@@ -10676,11 +10644,11 @@ entries:
   anchor: [16, 56]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A94B4
+  - symbol: gMapUiSprite_098A94B4
     pieces:
     - [32x64, -16, -56, {tile: 0}]
   animations:
-  - symbol: gMapUiAnimUs_098A94BE
+  - symbol: gMapUiAnim_098A94BE
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10693,7 +10661,7 @@ entries:
   eu:
     address: 0x09887C58
     size: 20
-- name: gMapUiSpriteUs_098A94C8
+- name: gMapUiSprite_098A94C8
   format: sprite_sheet
   tiles: gUnk_0994EF64
   palette: gUnk_09991224
@@ -10701,11 +10669,11 @@ entries:
   anchor: [16, 56]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A94C8
+  - symbol: gMapUiSprite_098A94C8
     pieces:
     - [32x64, -16, -56, {tile: 0}]
   animations:
-  - symbol: gMapUiAnimUs_098A94D2
+  - symbol: gMapUiAnim_098A94D2
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10718,7 +10686,7 @@ entries:
   eu:
     address: 0x09887C6C
     size: 20
-- name: gMapUiSpriteUs_098A94DC
+- name: gMapUiSprite_098A94DC
   format: sprite_sheet
   tiles: gMapDoorEmblemTiles
   tiles_offset: 0x300
@@ -10727,13 +10695,13 @@ entries:
   anchor: [15, 76]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A94DC
+  - symbol: gMapUiSprite_098A94DC
     pieces:
     - [16x8, -7, -76, {tile: 0}]
     - [16x16, -7, -68, {tile: 2}]
     - [8x16, -15, -76, {tile: 6}]
   animations:
-  - symbol: gMapUiAnimUs_098A94F2
+  - symbol: gMapUiAnim_098A94F2
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10746,7 +10714,7 @@ entries:
   eu:
     address: 0x09887C80
     size: 32
-- name: gMapUiSpriteUs_098A94FC
+- name: gMapUiSprite_098A94FC
   format: sprite_sheet
   tiles: gMapDoorEmblemTiles
   tiles_offset: 0x200
@@ -10755,13 +10723,13 @@ entries:
   anchor: [9, 76]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A94FC
+  - symbol: gMapUiSprite_098A94FC
     pieces:
     - [16x8, -9, -76, {tile: 0}]
     - [16x16, -9, -68, {tile: 2}]
     - [8x16, 7, -76, {tile: 6}]
   animations:
-  - symbol: gMapUiAnimUs_098A9512
+  - symbol: gMapUiAnim_098A9512
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10774,51 +10742,51 @@ entries:
   eu:
     address: 0x09887CA0
     size: 32
-- name: gMapUiSpriteUs_098A951C
+- name: gMapUiSprite_098A951C
   format: sprite_sheet
   tiles: gUnk_09953B64
   cell: [32, 64]
   anchor: [16, 56]
   columns: 8
   frames:
-  - symbol: gMapUiSpriteUs_098A951C
+  - symbol: gMapUiSprite_098A951C
     pieces:
     - [32x64, -16, -56, {tile: 0}]
-  - symbol: gMapUiSpriteUs_098A9526
+  - symbol: gMapUiSprite_098A9526
     pieces:
     - [32x64, -16, -56, {tile: 32}]
-  - symbol: gMapUiSpriteUs_098A9530
+  - symbol: gMapUiSprite_098A9530
     pieces:
     - [32x64, -16, -56, {tile: 64}]
-  - symbol: gMapUiSpriteUs_098A953A
+  - symbol: gMapUiSprite_098A953A
     pieces:
     - [32x64, -16, -56, {tile: 96}]
-  - symbol: gMapUiSpriteUs_098A9544
+  - symbol: gMapUiSprite_098A9544
     pieces:
     - [32x64, -16, -56, {hflip: true, tile: 0}]
-  - symbol: gMapUiSpriteUs_098A954E
+  - symbol: gMapUiSprite_098A954E
     pieces:
     - [32x64, -16, -56, {hflip: true, tile: 32}]
-  - symbol: gMapUiSpriteUs_098A9558
+  - symbol: gMapUiSprite_098A9558
     pieces:
     - [32x64, -16, -56, {hflip: true, tile: 64}]
-  - symbol: gMapUiSpriteUs_098A9562
+  - symbol: gMapUiSprite_098A9562
     pieces:
     - [32x64, -16, -56, {hflip: true, tile: 96}]
   animations:
-  - symbol: gMapUiAnimUs_098A956C
+  - symbol: gMapUiAnim_098A956C
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 24], [2, 8], [1, 8]]
-  - symbol: gMapUiAnimUs_098A958A
+  - symbol: gMapUiAnim_098A958A
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 24], [6, 8], [5, 8]]
-  - symbol: gMapUiAnimUs_098A95A8
+  - symbol: gMapUiAnim_098A95A8
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 24], [2, 8], [1, 8]]
-  - symbol: gMapUiAnimUs_098A95C6
+  - symbol: gMapUiAnim_098A95C6
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 24], [6, 8], [5, 8]]
@@ -10831,7 +10799,7 @@ entries:
   eu:
     address: 0x09887CC0
     size: 200
-- name: gMapUiSpriteUs_098A95E4
+- name: gMapUiSprite_098A95E4
   format: sprite_sheet
   tiles: gUnk_09954B64
   palette: gUnk_09991924
@@ -10839,7 +10807,7 @@ entries:
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gMapUiSpriteUs_098A95E4
+  - symbol: gMapUiSprite_098A95E4
     pieces:
     - [8x8, 64, 4, {tile: 1}]
     - [8x8, 72, 4, {tile: 2}]
@@ -10854,28 +10822,28 @@ entries:
     - [8x8, 56, 34, {tile: 11}]
     - [8x8, 64, 34, {tile: 12}]
     - [8x8, 72, 34, {tile: 13}]
-  - symbol: gMapUiSpriteUs_098A9636
+  - symbol: gMapUiSprite_098A9636
     pieces:
     - [64x32, 0, 0, {tile: 76}]
     - [32x32, 64, 0, {tile: 108}]
     - [32x16, 0, 32, {tile: 124}]
     - [32x16, 32, 32, {tile: 132}]
     - [32x16, 64, 32, {tile: 140}]
-  - symbol: gMapUiSpriteUs_098A9658
+  - symbol: gMapUiSprite_098A9658
     pieces:
     - [64x32, 0, 0, {tile: 26}]
     - [32x8, 0, 32, {tile: 58}]
     - [32x8, 32, 32, {tile: 62}]
     - [8x8, 64, 32, {tile: 66}]
     - [8x32, 64, 0, {tile: 67}]
-  - symbol: gMapUiSpriteUs_098A967A
+  - symbol: gMapUiSprite_098A967A
     pieces:
     - [16x16, 0, 0, {tile: 14}]
     - [32x16, 16, 0, {tile: 18}]
     - [32x16, 80, 0, {tile: 18}]
     - [32x16, 48, 0, {tile: 18}]
   animations:
-  - symbol: gMapUiAnimUs_098A9696
+  - symbol: gMapUiAnim_098A9696
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -10888,7 +10856,7 @@ entries:
   eu:
     address: 0x09887D88
     size: 188
-- name: gMapUiSpriteUs_098A96A0
+- name: gMapUiSprite_098A96A0
   format: sprite_sheet
   tiles: gUnk_09956724
   palette: gUnk_09991944
@@ -10896,7 +10864,7 @@ entries:
   anchor: [0, 8]
   columns: 8
   frames:
-  - symbol: gMapUiSpriteUs_098A96A0
+  - symbol: gMapUiSprite_098A96A0
     pieces:
     - [32x16, 0, 11, {tile: 24}]
     - [32x16, 32, 11, {tile: 32}]
@@ -10916,7 +10884,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A9710
+  - symbol: gMapUiSprite_098A9710
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10936,7 +10904,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A9780
+  - symbol: gMapUiSprite_098A9780
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10956,7 +10924,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A97F0
+  - symbol: gMapUiSprite_098A97F0
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10976,7 +10944,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A9860
+  - symbol: gMapUiSprite_098A9860
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10996,7 +10964,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A98D0
+  - symbol: gMapUiSprite_098A98D0
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -11016,7 +10984,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteUs_098A9940
+  - symbol: gMapUiSprite_098A9940
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -11036,7 +11004,7 @@ entries:
     - [32x16, 0, 87, {tile: 120}]
     - [32x16, 32, 87, {tile: 128}]
     - [32x16, 64, 87, {tile: 136}]
-  - symbol: gMapUiSpriteUs_098A99B0
+  - symbol: gMapUiSprite_098A99B0
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -11060,7 +11028,7 @@ entries:
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
   animations:
-  - symbol: gMapUiAnimUs_098A9A32
+  - symbol: gMapUiAnim_098A9A32
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
@@ -11071,7 +11039,7 @@ entries:
     address: 0x0985E1B4
     size: 924
     animations:
-    - symbol: gMapUiAnimUs_098A9A32
+    - symbol: gMapUiAnim_098A9A32
       declare: false
       fields: {unk_00: 64, unk_02: 64}
       frames: [[0, 2]]
@@ -11079,7 +11047,7 @@ entries:
     address: 0x09887E44
     size: 188
     frames:
-    - symbol: gMapUiSpriteUs_098A96A0
+    - symbol: gMapUiSprite_098A96A0
       pieces:
       - [8x8, 64, 4, {tile: 1}]
       - [8x8, 72, 4, {tile: 2}]
@@ -11094,28 +11062,28 @@ entries:
       - [8x8, 56, 34, {tile: 11}]
       - [8x8, 64, 34, {tile: 12}]
       - [8x8, 72, 34, {tile: 13}]
-    - symbol: gMapUiSpriteUs_098A9710
+    - symbol: gMapUiSprite_098A9710
       pieces:
       - [64x32, 0, 0, {tile: 76}]
       - [32x32, 64, 0, {tile: 108}]
       - [32x16, 0, 32, {tile: 124}]
       - [32x16, 32, 32, {tile: 132}]
       - [32x16, 64, 32, {tile: 140}]
-    - symbol: gMapUiSpriteUs_098A9780
+    - symbol: gMapUiSprite_098A9780
       pieces:
       - [64x32, 0, 0, {tile: 26}]
       - [32x8, 0, 32, {tile: 58}]
       - [32x8, 32, 32, {tile: 62}]
       - [8x8, 64, 32, {tile: 66}]
       - [8x32, 64, 0, {tile: 67}]
-    - symbol: gMapUiSpriteUs_098A97F0
+    - symbol: gMapUiSprite_098A97F0
       pieces:
       - [16x16, 0, 0, {tile: 14}]
       - [32x16, 16, 0, {tile: 18}]
       - [32x16, 80, 0, {tile: 18}]
       - [32x16, 48, 0, {tile: 18}]
     animations:
-    - symbol: gMapUiAnimEu_09887EF6
+    - symbol: gMapUiAnim_098A9A32
       declare: false
       fields: {unk_00: 64, unk_02: 64}
       frames: [[0, 4]]
@@ -12639,7 +12607,7 @@ entries:
   eu:
     address: 0x09889A00
     size: 26
-- name: gMapUiSpriteUs_098A9A3C
+- name: gMapUiSprite_098A9A3C
   format: sprite_sheet
   tiles: gUnk_09956724
   palette: gUnk_09991964
@@ -12647,43 +12615,43 @@ entries:
   anchor: [-8, 8]
   columns: 7
   frames:
-  - symbol: gMapUiSpriteUs_098A9A3C
+  - symbol: gMapUiSprite_098A9A3C
     pieces:
     - [32x16, 8, -8, {tile: 0}]
     - [32x16, 40, -8, {tile: 8}]
     - [32x16, 72, -8, {tile: 16}]
-  - symbol: gMapUiSpriteUs_098A9A52
+  - symbol: gMapUiSprite_098A9A52
     pieces:
     - [32x16, 8, 11, {tile: 24}]
     - [32x16, 40, 11, {tile: 32}]
     - [32x16, 72, 11, {tile: 40}]
-  - symbol: gMapUiSpriteUs_098A9A68
+  - symbol: gMapUiSprite_098A9A68
     pieces:
     - [32x16, 8, 30, {tile: 48}]
     - [32x16, 40, 30, {tile: 56}]
     - [32x16, 72, 30, {tile: 64}]
-  - symbol: gMapUiSpriteUs_098A9A7E
+  - symbol: gMapUiSprite_098A9A7E
     pieces:
     - [32x16, 8, 49, {tile: 72}]
     - [32x16, 40, 49, {tile: 80}]
     - [32x16, 72, 49, {tile: 88}]
-  - symbol: gMapUiSpriteUs_098A9A94
+  - symbol: gMapUiSprite_098A9A94
     pieces:
     - [32x16, 8, 68, {tile: 96}]
     - [32x16, 40, 68, {tile: 104}]
     - [32x16, 72, 68, {tile: 112}]
-  - symbol: gMapUiSpriteUs_098A9AAA
+  - symbol: gMapUiSprite_098A9AAA
     pieces:
     - [32x16, 8, 87, {tile: 120}]
     - [32x16, 40, 87, {tile: 128}]
     - [32x16, 72, 87, {tile: 136}]
-  - symbol: gMapUiSpriteUs_098A9AC0
+  - symbol: gMapUiSprite_098A9AC0
     pieces:
     - [32x16, 8, 106, {tile: 144}]
     - [32x16, 40, 106, {tile: 152}]
     - [32x16, 72, 106, {tile: 160}]
   animations:
-  - symbol: gMapUiAnimUs_098A9AD6
+  - symbol: gMapUiAnim_098A9AD6
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 2]]
@@ -12694,11 +12662,11 @@ entries:
     address: 0x0985E550
     size: 164
     animations:
-    - symbol: gMapUiAnimUs_098A9AD6
+    - symbol: gMapUiAnim_098A9AD6
       declare: false
       fields: {unk_00: 64, unk_02: 64}
       frames: [[0, 1]]
-- name: gMapUiSpriteUs_098A9AC0
+- name: gMapUiSpriteEu_09889A1C
   format: sprite_sheet
   tiles: gUnkEu_0994AAB0
   palette: gUnk_09991984
@@ -12707,19 +12675,19 @@ entries:
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A9AC0
+  - symbol: gMapUiSpriteEu_09889A1C
     pieces:
     - [32x16, 32, 0, {tile: 0}]
     - [32x16, 0, 0, {tile: 8}]
   animations:
-  - symbol: gMapUiAnimUs_098A9AD6
+  - symbol: gMapUiAnimEu_09889A2C
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09889A1C
     size: 26
-- name: gMapUiSpriteUs_098A9AE0
+- name: gMapUiSprite_098A9AE0
   format: sprite_sheet
   tiles: gUnk_09957C24
   palette: gUnk_09991984
@@ -12728,7 +12696,7 @@ entries:
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A9AE0
+  - symbol: gMapUiSprite_098A9AE0
     pieces:
     - [32x8, 0, 0, {tile: 0}]
     - [32x8, 32, 0, {tile: 20}]
@@ -12745,7 +12713,7 @@ entries:
     - [32x8, 15, 115, {tile: 16}]
     - [32x8, 0, 115, {hflip: true, tile: 8}]
   animations:
-  - symbol: gMapUiAnimUs_098A9B38
+  - symbol: gMapUiAnim_098A9B38
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -12758,7 +12726,7 @@ entries:
   eu:
     address: 0x09889A38
     size: 98
-- name: gMapUiSpriteUs_098A9B44
+- name: gMapUiSprite_098A9B44
   format: sprite_sheet
   tiles: gUnk_09957F24
   palette: gUnk_09991984
@@ -12767,13 +12735,12 @@ entries:
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gMapUiSpriteUs_098A9B44
+  - symbol: gMapUiSprite_098A9B44
     pieces:
     - [32x16, 32, 0, {tile: 0}]
     - [32x16, 0, 0, {tile: 8}]
   animations:
-  - symbol: gMapUiAnimUs_098A9B54
-    eu: {symbol: gMapUiAnimEu_098899F4}
+  - symbol: gMapUiAnim_098A9B54
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -12786,7 +12753,7 @@ entries:
   eu:
     address: 0x098899E4
     size: 26
-- name: gMapUiSpriteUs_098A9B60
+- name: gMapUiSprite_098A9B60
   format: sprite_sheet
   tiles: gUnk_09958124
   palette: gUnk_09991984
@@ -12795,7 +12762,7 @@ entries:
   anchor: [128, 0]
   columns: 2
   frames:
-  - symbol: gMapUiSpriteUs_098A9B60
+  - symbol: gMapUiSprite_098A9B60
     pieces:
     - [32x8, -128, 0, {tile: 0}]
     - [32x8, -96, 0, {tile: 0}]
@@ -12805,7 +12772,7 @@ entries:
     - [32x8, 32, 0, {tile: 0}]
     - [32x8, 64, 0, {tile: 0}]
     - [16x8, 96, 0, {tile: 2}]
-  - symbol: gMapUiSpriteUs_098A9B94
+  - symbol: gMapUiSprite_098A9B94
     pieces:
     - [32x8, -128, 0, {vflip: true, tile: 0}]
     - [32x8, -96, 0, {vflip: true, tile: 0}]
@@ -12816,7 +12783,7 @@ entries:
     - [32x8, 64, 0, {vflip: true, tile: 0}]
     - [16x8, 96, 0, {vflip: true, tile: 2}]
   animations:
-  - symbol: gMapUiAnimUs_098A9BC8
+  - symbol: gMapUiAnim_098A9BC8
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -12829,7 +12796,7 @@ entries:
   eu:
     address: 0x09889A9C
     size: 114
-- name: gMapUiSpriteUs_098A9BD4
+- name: gMapUiSprite_098A9BD4
   format: sprite_sheet
   tiles: gUnk_09954B64
   palette: gUnk_09991924
@@ -12838,7 +12805,7 @@ entries:
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gMapUiSpriteUs_098A9BD4
+  - symbol: gMapUiSprite_098A9BD4
     pieces:
     - [8x8, 56, 4, {tile: 0}]
     - [8x8, 64, 4, {tile: 1}]
@@ -12852,31 +12819,27 @@ entries:
     - [8x8, 56, 27, {tile: 9}]
     - [8x8, 64, 27, {tile: 10}]
     - [8x8, 72, 27, {tile: 11}]
-  - symbol: gMapUiSpriteUs_098A9C20
-    eu: {symbol: gMapUiSpriteEu_09888180}
+  - symbol: gMapUiSprite_098A9C20
     pieces:
     - [32x32, 64, 0, {tile: 108}]
     - [64x32, 0, 0, {tile: 153}]
     - [32x8, 0, 32, {tile: 185}]
     - [32x8, 32, 32, {tile: 189}]
     - [32x8, 64, 32, {tile: 193}]
-  - symbol: gMapUiSpriteUs_098A9C42
-    eu: {symbol: gMapUiSpriteEu_098881A2}
+  - symbol: gMapUiSprite_098A9C42
     pieces:
     - [32x32, 0, 0, {tile: 197}]
     - [8x32, 32, 0, {tile: 213}]
     - [32x8, 0, 32, {tile: 217}]
     - [8x8, 32, 32, {tile: 221}]
-  - symbol: gMapUiSpriteUs_098A9C5E
-    eu: {symbol: gMapUiSpriteEu_098881BE}
+  - symbol: gMapUiSprite_098A9C5E
     pieces:
     - [16x16, 0, 0, {tile: 14}]
     - [32x16, 16, 0, {tile: 18}]
     - [32x16, 80, 0, {tile: 18}]
     - [32x16, 48, 0, {tile: 18}]
   animations:
-  - symbol: gMapUiAnimUs_098A9C7A
-    eu: {symbol: gMapUiAnimEu_098881DA}
+  - symbol: gMapUiAnim_098A9C7A
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]

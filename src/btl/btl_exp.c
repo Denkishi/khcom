@@ -125,7 +125,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->gfx = gUnkEu_08B55C58;
+            work->gfx = gUnk_08B25E40;
             break;
         case LANGUAGE_FRENCH:
             work->gfx = gUnkEu_08B55CFE;

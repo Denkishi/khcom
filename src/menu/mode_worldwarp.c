@@ -294,34 +294,34 @@ void WorldWarpHandleInput() {
             break;
         case LANGUAGE_FRENCH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A53380, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_SPANISH:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54080, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_ITALIAN:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
         case LANGUAGE_GERMAN:
         default:
             if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
             } else {
-                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+                WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
             }
 
             break;
@@ -594,30 +594,30 @@ void mode_worldwarp_0() {
     case LANGUAGE_FRENCH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A56780, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A53380, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A53380, (u8*)GetBgCharBase(0) + 0x20);
         } else {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5CF80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A59B80, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_SPANISH:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A57480, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54080, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54080, (u8*)GetBgCharBase(0) + 0x20);
         } else {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5DC80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5A880, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
     case LANGUAGE_ITALIAN:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58180, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A54D80, (u8*)GetBgCharBase(0) + 0x20);
         } else {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5E980, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5B580, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;
@@ -625,10 +625,10 @@ void mode_worldwarp_0() {
     default:
         if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A58E80, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A55A80, (u8*)GetBgCharBase(0) + 0x20);
         } else {
             WorldWarpLoadFloorTiles(gGameState.floor, gUnkEu_09A5F680, (u8*)GetBgCharBase(0) + 0x120);
-            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnk_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
+            WorldWarpLoadFloorTiles(sWorldWarpCursor, gUnkEu_09A5C280, (u8*)GetBgCharBase(0) + 0x20);
         }
 
         break;

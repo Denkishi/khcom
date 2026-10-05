@@ -150,10 +150,6 @@ s32 GetAllmapRoomAt(AllmapCursorPos a);
 void AllmapAddRoom(u8 a, u16 b, u16 c);
 
 extern u8 gUnk_05000160[];
-extern u16 gUnk_0976D880[];
-extern u16 gUnk_0976DB68[];
-extern u16 gUnk_0976DB9C[];
-extern u16 gUnk_0976DC9C[];
 
 extern u8 gAllmapCursorRoom;
 extern s16 gAllmapCameraY;

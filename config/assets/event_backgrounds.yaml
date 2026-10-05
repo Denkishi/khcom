@@ -4771,7 +4771,7 @@ entries:
     items: [gUnk_0955B2B8, gUnkEu_08125144, gUnkEu_08125144, gUnkEu_08125144]
 - name: gUnk_09EE2EF8
   record: SpriteTable
-  items: [gUnk_09864E28, gUnk_09866668, gUnk_0986700C, gMapUiSpriteUs_098A94A0]
+  items: [gUnk_09864E28, gUnk_09866668, gUnk_0986700C, gMapUiSprite_098A94A0]
   us:
     address: 0x09EE2EF8
   jp:

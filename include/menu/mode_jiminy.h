@@ -16,10 +16,6 @@ void JiminyDetailUpdate();
 void JiminyOpenPlainList(s16 a, s16 b, const u16* const* c, s16 d, s16 e, s16 f);
 void SplitThreeDecimalDigits(s16 a, u8* out);
 
-#ifdef VERSION_EU
-extern u8 gUnkEu_099FBE00[];
-#endif
-
 void mode_jiminy_1();
 
 #endif

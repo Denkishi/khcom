@@ -50,18 +50,18 @@ entries:
     address: 0x09EB622C
   eu:
     address: 0x09F59408
-- name: gUnk_09EDE7B4
+- name: gSmnTinkEffFrames
   record: SpriteTable
-  items: [gUnk_088A5CC0, gUnk_088A5CCA, gUnk_088A5CD4, gUnk_088A5CDE, gUnk_088A5CE8, gUnk_088A5CF2, gUnk_088A5CFC, gUnk_088A5D06, gUnk_088A5D10, gUnk_088A5D1A, gUnk_088A5D24, gUnk_088A5D2E]
+  items: [gSmnTinkEffFrame0, gSmnTinkEffFrame1, gSmnTinkEffFrame2, gSmnTinkEffFrame3, gSmnTinkEffFrame4, gSmnTinkEffFrame5, gSmnTinkEffFrame6, gSmnTinkEffFrame7, gSmnTinkEffFrame8, gSmnTinkEffFrame9, gSmnTinkEffFrame10, gSmnTinkEffFrame11]
   us:
     address: 0x09EDE7B4
   jp:
     address: 0x09EB6230
   eu:
     address: 0x09F5940C
-- name: gUnk_09EDE7E4
+- name: gSmnTinkEffAnims
   record: AnimTable
-  items: [gUnk_088A5D38, gUnk_088A5D4E, gUnk_088A5D64]
+  items: [gSmnTinkEffAnim0, gSmnTinkEffAnim1, gSmnTinkEffAnim2]
   us:
     address: 0x09EDE7E4
   jp:
@@ -104,18 +104,18 @@ entries:
     address: 0x09EB62B0
   eu:
     address: 0x09F5948C
-- name: gUnk_09EDE848
+- name: gSmnDumboFrames
   record: SpriteTable
-  items: [gUnk_088ABEF4, gUnk_088ABEFE, gUnk_088ABF08, gUnk_088ABF12, gUnk_088ABF1C, gUnk_088ABF26, gUnk_088ABF30, gUnk_088ABF3A, gUnk_088ABF44]
+  items: [gSmnDumboFrame0, gSmnDumboFrame1, gSmnDumboFrame2, gSmnDumboFrame3, gSmnDumboFrame4, gSmnDumboFrame5, gSmnDumboFrame6, gSmnDumboFrame7, gSmnDumboFrame8]
   us:
     address: 0x09EDE848
   jp:
     address: 0x09EB62C4
   eu:
     address: 0x09F594A0
-- name: gUnk_09EDE86C
+- name: gSmnDumboAnims
   record: AnimTable
-  items: [gUnk_088ABF4E, gUnk_088ABF5C, gUnk_088ABF7A]
+  items: [gSmnDumboAnim0, gSmnDumboAnim1, gSmnDumboAnim2]
   us:
     address: 0x09EDE86C
   jp:
@@ -212,57 +212,57 @@ entries:
   eu:
     address: 0x088D0360
     size: 4738
-- name: gUnk_088A5D7A
+- name: gSmnTinkEffTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gUnk_088A5CC0
+  - symbol: gSmnTinkEffFrame0
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_088A5CCA
+  - symbol: gSmnTinkEffFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_088A5CD4
+  - symbol: gSmnTinkEffFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_088A5CDE
+  - symbol: gSmnTinkEffFrame3
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_088A5CE8
+  - symbol: gSmnTinkEffFrame4
     pieces:
     - [16x16, -8, -8, {hflip: true}]
-  - symbol: gUnk_088A5CF2
+  - symbol: gSmnTinkEffFrame5
     pieces:
     - [16x16, -8, -8, {hflip: true}]
-  - symbol: gUnk_088A5CFC
+  - symbol: gSmnTinkEffFrame6
     pieces:
     - [16x16, -8, -8, {hflip: true}]
-  - symbol: gUnk_088A5D06
+  - symbol: gSmnTinkEffFrame7
     pieces:
     - [16x16, -8, -8, {hflip: true}]
-  - symbol: gUnk_088A5D10
+  - symbol: gSmnTinkEffFrame8
     pieces:
     - [16x16, -8, -8, {vflip: true}]
-  - symbol: gUnk_088A5D1A
+  - symbol: gSmnTinkEffFrame9
     pieces:
     - [16x16, -8, -8, {vflip: true}]
-  - symbol: gUnk_088A5D24
+  - symbol: gSmnTinkEffFrame10
     pieces:
     - [16x16, -8, -8, {vflip: true}]
-  - symbol: gUnk_088A5D2E
+  - symbol: gSmnTinkEffFrame11
     pieces:
     - [16x16, -8, -8, {vflip: true}]
   animations:
-  - symbol: gUnk_088A5D38
+  - symbol: gSmnTinkEffAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6]]
-  - symbol: gUnk_088A5D4E
+  - symbol: gSmnTinkEffAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 6], [5, 6], [6, 6], [7, 6]]
-  - symbol: gUnk_088A5D64
+  - symbol: gSmnTinkEffAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 6], [9, 6], [10, 6], [11, 6]]
   us:
@@ -394,48 +394,48 @@ entries:
   eu:
     address: 0x088D6348
     size: 5326
-- name: gUnk_088ABF88
+- name: gSmnDumboTiles
   format: sprite_sheet
   align: 4
   cell: [74, 76]
   anchor: [48, 57]
   columns: 8
   frames:
-  - symbol: gUnk_088ABEF4
+  - symbol: gSmnDumboFrame0
     pieces:
     - [64x64, -45, -45]
-  - symbol: gUnk_088ABEFE
+  - symbol: gSmnDumboFrame1
     pieces:
     - [64x64, -46, -51]
-  - symbol: gUnk_088ABF08
+  - symbol: gSmnDumboFrame2
     pieces:
     - [64x64, -48, -49]
-  - symbol: gUnk_088ABF12
+  - symbol: gSmnDumboFrame3
     pieces:
     - [64x64, -43, -51]
-  - symbol: gUnk_088ABF1C
+  - symbol: gSmnDumboFrame4
     pieces:
     - [64x64, -38, -54]
-  - symbol: gUnk_088ABF26
+  - symbol: gSmnDumboFrame5
     pieces:
     - [64x64, -42, -50]
-  - symbol: gUnk_088ABF30
+  - symbol: gSmnDumboFrame6
     pieces:
     - [64x64, -44, -46]
-  - symbol: gUnk_088ABF3A
+  - symbol: gSmnDumboFrame7
     pieces:
     - [64x64, -42, -48]
-  - symbol: gUnk_088ABF44
+  - symbol: gSmnDumboFrame8
     pieces:
     - [64x64, -39, -57]
   animations:
-  - symbol: gUnk_088ABF4E
+  - symbol: gSmnDumboAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 7]]
-  - symbol: gUnk_088ABF5C
+  - symbol: gSmnDumboAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
-  - symbol: gUnk_088ABF7A
+  - symbol: gSmnDumboAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 7], [0, 4]]
   us:

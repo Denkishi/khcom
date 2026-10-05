@@ -272,18 +272,18 @@ entries:
     address: 0x09EB9228
   eu:
     address: 0x09F5C5B8
-- name: gUnk_09EE17B4
+- name: gHumHookMoonFrames
   record: SpriteTable
-  items: [gUnk_08B5A854, gUnk_08B5A85E]
+  items: [gHumHookMoonFrame0, gHumHookMoonFrame1]
   us:
     address: 0x09EE17B4
   jp:
     address: 0x09EB9230
   eu:
     address: 0x09F5C5C0
-- name: gUnk_09EE17BC
+- name: gHumHookMoonAnims
   record: AnimTable
-  items: [gUnk_08B5A868]
+  items: [gHumHookMoonAnim0]
   us:
     address: 0x09EE17BC
   jp:
@@ -1154,18 +1154,18 @@ entries:
     address: 0x09EB99E8
   eu:
     address: 0x09F5CD78
-- name: gUnk_09EE1F90
+- name: gHumAxcelPtcFrames
   record: SpriteTable
-  items: [gUnk_08BF730C, gUnk_08BF7316, gUnk_08BF7320, gUnk_08BF732A, gUnk_08BF7334, gUnk_08BF733E, gUnk_08BF7348, gUnk_08BF7352, gUnk_08BF735C, gUnk_08BF7366, gUnk_08BF7370, gUnk_08BF737A]
+  items: [gHumAxcelPtcFrame0, gHumAxcelPtcFrame1, gHumAxcelPtcFrame2, gHumAxcelPtcFrame3, gHumAxcelPtcFrame4, gHumAxcelPtcFrame5, gHumAxcelPtcFrame6, gHumAxcelPtcFrame7, gHumAxcelPtcFrame8, gHumAxcelPtcFrame9, gHumAxcelPtcFrame10, gHumAxcelPtcFrame11]
   us:
     address: 0x09EE1F90
   jp:
     address: 0x09EB9A0C
   eu:
     address: 0x09F5CD9C
-- name: gUnk_09EE1FC0
+- name: gHumAxcelPtcAnims
   record: AnimTable
-  items: [gUnk_08BF737C, gUnk_08BF7396, gUnk_08BF73B0]
+  items: [gHumAxcelPtcAnim0, gHumAxcelPtcAnim1, gHumAxcelPtcAnim2]
   us:
     address: 0x09EE1FC0
   jp:
@@ -1316,18 +1316,18 @@ entries:
     address: 0x09EB9B04
   eu:
     address: 0x09F5CE94
-- name: gUnk_09EE2098
+- name: gHumVixenCastFrames
   record: SpriteTable
-  items: [gUnk_08C08D8C, gUnk_08C08DB4, gUnk_08C08DD0, gUnk_08C08DEC]
+  items: [gHumVixenCastFrame0, gHumVixenCastFrame1, gHumVixenCastFrame2, gHumVixenCastFrame3]
   us:
     address: 0x09EE2098
   jp:
     address: 0x09EB9B14
   eu:
     address: 0x09F5CEA4
-- name: gUnk_09EE20A8
+- name: gHumVixenCastAnims
   record: AnimTable
-  items: [gUnk_08C08E26, gUnk_08C08E30, gUnk_08C08E3E]
+  items: [gHumVixenCastAnim0, gHumVixenCastAnim1, gHumVixenCastAnim2]
   us:
     address: 0x09EE20A8
   jp:
@@ -1856,36 +1856,36 @@ entries:
     address: 0x09EBA048
   eu:
     address: 0x09F5D3D8
-- name: gUnk_09EE25D0
+- name: gHumLeonGunbladeFrames
   record: SpriteTable
-  items: [gUnk_08C665DC, gUnk_08C665F2, gUnk_08C66608, gUnk_08C66624, gUnk_08C66640]
+  items: [gHumLeonGunbladeFrame0, gHumLeonGunbladeFrame1, gHumLeonGunbladeFrame2, gHumLeonGunbladeFrame3, gHumLeonGunbladeFrame4]
   us:
     address: 0x09EE25D0
   jp:
     address: 0x09EBA04C
   eu:
     address: 0x09F5D3DC
-- name: gUnk_09EE25E4
+- name: gHumLeonGunbladeAnims
   record: AnimTable
-  items: [gUnk_08C66656, gUnk_08C66664, gUnk_08C6666E, gUnk_08C66680]
+  items: [gHumLeonGunbladeAnim0, gHumLeonGunbladeAnim1, gHumLeonGunbladeAnim2, gHumLeonGunbladeAnim3]
   us:
     address: 0x09EE25E4
   jp:
     address: 0x09EBA060
   eu:
     address: 0x09F5D3F0
-- name: gUnk_09EE25F4
+- name: gHumRobeGuardFrames
   record: SpriteTable
-  items: [gUnk_08C67F30, gUnk_08C67F40, gUnk_08C67F50, gUnk_08C67F60]
+  items: [gHumRobeGuardFrame0, gHumRobeGuardFrame1, gHumRobeGuardFrame2, gHumRobeGuardFrame3]
   us:
     address: 0x09EE25F4
   jp:
     address: 0x09EBA070
   eu:
     address: 0x09F5D400
-- name: gUnk_09EE2604
+- name: gHumRobeGuardAnims
   record: AnimTable
-  items: [gUnk_08C67F70]
+  items: [gHumRobeGuardAnim0]
   us:
     address: 0x09EE2604
   jp:
@@ -2654,21 +2654,21 @@ entries:
   eu:
     address: 0x08B89DB0
     size: 2642
-- name: gUnk_08B5A872
+- name: gHumHookMoonTiles
   format: sprite_sheet
   align: 4
   cell: [96, 64]
   anchor: [32, 32]
   columns: 2
   frames:
-  - symbol: gUnk_08B5A854
+  - symbol: gHumHookMoonFrame0
     pieces:
     - [64x64, -32, -32]
-  - symbol: gUnk_08B5A85E
+  - symbol: gHumHookMoonFrame1
     pieces:
     - [64x32, 0, 0]
   animations:
-  - symbol: gUnk_08B5A868
+  - symbol: gHumHookMoonAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -6365,56 +6365,56 @@ entries:
   eu:
     address: 0x08C24D9C
     size: 9502
-- name: gUnk_08BF73C6
+- name: gHumAxcelPtcTiles
   format: sprite_sheet
   align: 4
   cell: [19, 18]
   anchor: [8, 10]
   columns: 8
   frames:
-  - symbol: gUnk_08BF730C
+  - symbol: gHumAxcelPtcFrame0
     pieces:
     - [16x16, -7, -8]
-  - symbol: gUnk_08BF7316
+  - symbol: gHumAxcelPtcFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_08BF7320
+  - symbol: gHumAxcelPtcFrame2
     pieces:
     - [8x8, -1, -7]
-  - symbol: gUnk_08BF732A
+  - symbol: gHumAxcelPtcFrame3
     pieces:
     - [8x8, 1, -10]
-  - symbol: gUnk_08BF7334
+  - symbol: gHumAxcelPtcFrame4
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_08BF733E
+  - symbol: gHumAxcelPtcFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_08BF7348
+  - symbol: gHumAxcelPtcFrame6
     pieces:
     - [16x8, -5, -4]
-  - symbol: gUnk_08BF7352
+  - symbol: gHumAxcelPtcFrame7
     pieces:
     - [8x8, -5, -4]
-  - symbol: gUnk_08BF735C
+  - symbol: gHumAxcelPtcFrame8
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnk_08BF7366
+  - symbol: gHumAxcelPtcFrame9
     pieces:
     - [8x8, -3, -5]
-  - symbol: gUnk_08BF7370
+  - symbol: gHumAxcelPtcFrame10
     pieces:
     - [8x8, -3, -7]
-  - symbol: gUnk_08BF737A
+  - symbol: gHumAxcelPtcFrame11
     pieces: []
   animations:
-  - symbol: gUnk_08BF737C
+  - symbol: gHumAxcelPtcAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [11, 4]]
-  - symbol: gUnk_08BF7396
+  - symbol: gHumAxcelPtcAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4], [5, 4], [6, 4], [7, 4], [11, 4]]
-  - symbol: gUnk_08BF73B0
+  - symbol: gHumAxcelPtcAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 4], [9, 4], [10, 4], [11, 4]]
   us:
@@ -6925,14 +6925,14 @@ entries:
   eu:
     address: 0x08C366AC
     size: 9872
-- name: gUnk_08C08E48
+- name: gHumVixenCastTiles
   format: sprite_sheet
   align: 4
   cell: [71, 95]
   anchor: [24, 88]
   columns: 4
   frames:
-  - symbol: gUnk_08C08D8C
+  - symbol: gHumVixenCastFrame0
     pieces:
     - [32x64, -9, -88]
     - [32x32, -17, -25]
@@ -6940,19 +6940,19 @@ entries:
     - [16x16, 22, -49]
     - [8x8, 22, -56]
     - [16x16, -24, -64]
-  - symbol: gUnk_08C08DB4
+  - symbol: gHumVixenCastFrame1
     pieces:
     - [64x64, -24, -88]
     - [32x32, -16, -25]
     - [16x32, 15, -25]
     - [8x8, 39, -64]
-  - symbol: gUnk_08C08DD0
+  - symbol: gHumVixenCastFrame2
     pieces:
     - [64x64, -24, -88]
     - [32x32, -16, -25]
     - [16x32, 15, -25]
     - [8x8, 39, -64, {fresh: true}]
-  - symbol: gUnk_08C08DEC
+  - symbol: gHumVixenCastFrame3
     pieces:
     - [32x64, -8, -80]
     - [8x8, 0, -87]
@@ -6964,13 +6964,13 @@ entries:
     - [8x32, 23, -56]
     - [8x16, 30, -40]
   animations:
-  - symbol: gUnk_08C08E26
+  - symbol: gHumVixenCastAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8]]
-  - symbol: gUnk_08C08E30
+  - symbol: gHumVixenCastAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 8], [2, 8]]
-  - symbol: gUnk_08C08E3E
+  - symbol: gHumVixenCastAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 8]]
   us:
@@ -9442,50 +9442,50 @@ entries:
   eu:
     address: 0x08EF077C
     size: 2048
-- name: gUnk_08C6668E
+- name: gHumLeonGunbladeTiles
   format: sprite_sheet
   cell: [57, 73]
   anchor: [32, 64]
   columns: 5
   frames:
-  - symbol: gUnk_08C665DC
+  - symbol: gHumLeonGunbladeFrame0
     pieces:
     - [32x64, -17, -64]
     - [16x8, -1, -1]
     - [8x32, -24, -56]
-  - symbol: gUnk_08C665F2
+  - symbol: gHumLeonGunbladeFrame1
     pieces:
     - [32x64, -17, -64]
     - [16x8, -1, -1]
     - [16x16, -32, -58]
-  - symbol: gUnk_08C66608
+  - symbol: gHumLeonGunbladeFrame2
     pieces:
     - [32x64, -15, -64]
     - [8x8, 16, -35]
     - [16x8, 1, -1]
     - [16x16, -30, -56]
-  - symbol: gUnk_08C66624
+  - symbol: gHumLeonGunbladeFrame3
     pieces:
     - [32x64, -14, -62]
     - [16x16, -29, -55]
     - [16x8, 2, 1]
     - [8x16, 17, -43, {layer: 1}]
-  - symbol: gUnk_08C66640
+  - symbol: gHumLeonGunbladeFrame4
     pieces:
     - [32x64, -17, -64]
     - [16x8, -1, -1]
     - [16x32, -32, -56]
   animations:
-  - symbol: gUnk_08C66656
+  - symbol: gHumLeonGunbladeAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4]]
-  - symbol: gUnk_08C66664
+  - symbol: gHumLeonGunbladeAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
-  - symbol: gUnk_08C6666E
+  - symbol: gHumLeonGunbladeAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4], [3, 7], [2, 5]]
-  - symbol: gUnk_08C66680
+  - symbol: gHumLeonGunbladeAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4], [4, 4]]
   us:
@@ -9497,31 +9497,31 @@ entries:
   eu:
     address: 0x08C9658C
     size: 6482
-- name: gUnk_08C67F86
+- name: gHumRobeGuardTiles
   format: sprite_sheet
   align: 4
   cell: [36, 74]
   anchor: [19, 64]
   columns: 4
   frames:
-  - symbol: gUnk_08C67F30
+  - symbol: gHumRobeGuardFrame0
     pieces:
     - [32x64, -15, -61]
     - [32x8, -15, 2]
-  - symbol: gUnk_08C67F40
+  - symbol: gHumRobeGuardFrame1
     pieces:
     - [32x64, -19, -62]
     - [32x8, -19, 1]
-  - symbol: gUnk_08C67F50
+  - symbol: gHumRobeGuardFrame2
     pieces:
     - [32x64, -18, -64]
     - [32x8, -18, -1]
-  - symbol: gUnk_08C67F60
+  - symbol: gHumRobeGuardFrame3
     pieces:
     - [32x64, -15, -62]
     - [32x8, -15, 1]
   animations:
-  - symbol: gUnk_08C67F70
+  - symbol: gHumRobeGuardAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 8], [2, 10], [3, 8]]
   us:

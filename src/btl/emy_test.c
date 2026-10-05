@@ -15,12 +15,12 @@
 #include "types.h"
 
 static const AnimDef sEmyTestCommonAnimDefs[3] = {
-    { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0 },
-    { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0 },
-    { gUnk_09EE2608, gUnk_09EE2618, gUnk_08C69204, 0 },
+    { gEmyTestFrames, gEmyTestAnims, gEmyTestTiles, 0 },
+    { gEmyTestFrames, gEmyTestAnims, gEmyTestTiles, 0 },
+    { gEmyTestFrames, gEmyTestAnims, gEmyTestTiles, 0 },
 };
 
-static const EmyDef sEmyTestDef = { gUnk_08F6DD44, sEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { 28, 260, 16, 8, 16, 100, 0 } };
+static const EmyDef sEmyTestDef = { gEmyTestPalette, sEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { 28, 260, 16, 8, 16, 100, 0 } };
 
 void task_emy_test_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmyTestDef, obj);

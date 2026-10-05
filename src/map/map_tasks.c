@@ -54,9 +54,9 @@
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
-    { gUnk_09EDF860, gUnk_09EDF880, gUnk_08958AC8, 0 },
+    { gEmy00L00BackFrames, gEmy00L00BackAnims, gEmy00L00BackTiles, 0 },
     { gEmy00L00Frames, gEmy00L00Anims, gEmy00L00Tiles, 0 },
-    { gUnk_09EDF8A8, gUnk_09EDF8C8, gUnk_0895B2C0, 0 },
+    { gEmy00L02BackFrames, gEmy00L02BackAnims, gEmy00L02BackTiles, 0 },
     { gEmy00L02Frames, gEmy00L02Anims, gEmy00L02Tiles, 0 },
     { gUnk_09EDF97C, gUnk_09EDF9A4, gUnk_0896213C, 0 },
     { gEmy00L07Frames, gEmy00L07Anims, gEmy00L07Tiles, 0 },

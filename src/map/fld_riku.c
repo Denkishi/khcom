@@ -33,8 +33,8 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sFldRikuAnimDefs[15][5] = {
-    { { gUnk_09EDF4C0, gUnk_09EDF4C4, gUnk_08933A34, 0 }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0 }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0 }, { gUnk_09EDF4C8, gUnk_09EDF4CC, gUnk_08933D94, 0 }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0 } },
-    { { gUnk_09EDF4F4, gUnk_09EDF514, gUnk_08935BC2, 0 }, { gUnk_09EDF4D0, gUnk_09EDF4F0, gUnk_0893416A, 0 }, { gRik1fl01Frames, gRik1fl01Anims, gRik1fl01Tiles, 0 }, { gRik1ll01Frames, gRik1ll01Anims, gRik1ll01Tiles, 0 }, { gRik1bl01Frames, gRik1bl01Anims, gRik1bl01Tiles, 0 } },
+    { { gRikuBb00Frames, gRikuBb00Anims, gRikuBb00Tiles, 0 }, { gRikuFf00Frames, gRikuFf00Anims, gRikuFf00Tiles, 0 }, { gRikuFl00Frames, gRikuFl00Anims, gRikuFl00Tiles, 0 }, { gRikuLl00Frames, gRikuLl00Anims, gRikuLl00Tiles, 0 }, { gRikuBl00Frames, gRikuBl00Anims, gRikuBl00Tiles, 0 } },
+    { { gRik1bb01Frames, gRik1bb01Anims, gRik1bb01Tiles, 0 }, { gRik1ff01Frames, gRik1ff01Anims, gRik1ff01Tiles, 0 }, { gRik1fl01Frames, gRik1fl01Anims, gRik1fl01Tiles, 0 }, { gRik1ll01Frames, gRik1ll01Anims, gRik1ll01Tiles, 0 }, { gRik1bl01Frames, gRik1bl01Anims, gRik1bl01Tiles, 0 } },
     { { gRik1bb02Frames, gRik1bb02Anims, gRik1bb02Tiles, 0 }, { gRik1ff02Frames, gRik1ff02Anims, gRik1ff02Tiles, 0 }, { gRik1fl02Frames, gRik1fl02Anims, gRik1fl02Tiles, 0 }, { gRik1ll02Frames, gRik1ll02Anims, gRik1ll02Tiles, 0 }, { gRik1bl02Frames, gRik1bl02Anims, gRik1bl02Tiles, 0 } },
     { { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 0 }, { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 0 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 0 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 0 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 0 } },
     { { gRik1bb03Frames, gRik1bb03Anims, gRik1bb03Tiles, 1 }, { gRik1ff03Frames, gRik1ff03Anims, gRik1ff03Tiles, 1 }, { gRik1fl03Frames, gRik1fl03Anims, gRik1fl03Tiles, 1 }, { gRik1ll03Frames, gRik1ll03Anims, gRik1ll03Tiles, 1 }, { gRik1bl03Frames, gRik1bl03Anims, gRik1bl03Tiles, 1 } },

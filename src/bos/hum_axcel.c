@@ -970,9 +970,9 @@ void task_hum_axcel_ptc_0(AxcelPtcWork* work, s32* args) {
     work->x = args[0];
     work->y = args[1];
     work->z = args[2];
-    work->tiles = LoadObjTiles(gUnk_08BF73C6, 0x300);
+    work->tiles = LoadObjTiles(gHumAxcelPtcTiles, 0x300);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    AnimInit(&work->anim, gUnk_09EE1FC0, gUnk_09EE1F90);
+    AnimInit(&work->anim, gHumAxcelPtcAnims, gHumAxcelPtcFrames);
 
     switch (GetRandom() % 3) {
     case 0:

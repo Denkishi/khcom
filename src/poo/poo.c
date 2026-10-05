@@ -2855,9 +2855,9 @@ void task_poo_trap_0(PooTrapWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y;
     work->z = 0;
-    work->tiles = LoadObjTiles(gUnk_0972BD8C, 0x100);
+    work->tiles = LoadObjTiles(gPooTrapTiles, 0x100);
     work->palette = LoadObjPalette(gUnk_09849AB8, 0x20);
-    work->gfx = gUnk_0972BD78;
+    work->gfx = gPooTrapFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
     work->colliderActive = 0;
 }
@@ -2943,9 +2943,9 @@ void task_poo_balloon_0(PooBalloonObjWork* work, PooPos* p) {
     work->pos = p;
 
     if (p->x == 0x3FD00 && p->y == 0x21B00) {
-        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF5E38, 3), gUnk_0974B4D8);
+        work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooBalloonFrames, 3), gPooBalloonTiles);
         work->palette = LoadObjPalette(gUnk_09849C98, 0x20);
-        AnimInit(&work->anim, gUnk_09EF5E44, gUnk_09EF5E38);
+        AnimInit(&work->anim, gPooBalloonAnims, gPooBalloonFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     } else {
         work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gTrap0006Frames, 4), gTrap0006Tiles);
@@ -3219,16 +3219,16 @@ s32 GetPooGaugeFrame(u16 x) {
 
 void task_poo_gauge_0(PooGaugeWork* work) {
     work->blinkTimer = 0;
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF5B2C, 4), gUnk_097356F4);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooGaugeFrames, 4), gPooGaugeTiles);
     work->palette = LoadObjPalette(gPoohGaugePalette, 0x20);
     work->paletteSrc = gPoohGaugePalette;
-    work->gfx = gUnk_09EF5B2C[GetPooGaugeFrame(work->blinkTimer)];
+    work->gfx = gPooGaugeFrames[GetPooGaugeFrame(work->blinkTimer)];
     work->warning = 0;
 }
 
 u8 task_poo_gauge_1(PooGaugeWork* work) {
     work->blinkTimer++;
-    work->gfx = gUnk_09EF5B2C[GetPooGaugeFrame(work->blinkTimer)];
+    work->gfx = gPooGaugeFrames[GetPooGaugeFrame(work->blinkTimer)];
 
     if (gPoohGauge <= 1 && gPoohGaugeTimer <= 0x1CD) {
         work->warning = 1;
@@ -3382,9 +3382,9 @@ void task_poo_owlballoon_0(PooOwlBalloonWork* work, PooPos* p) {
     work->pos = *p;
     work->pos.z = 0;
     work->pos.ground = 0;
-    work->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF5E38, 3);
+    work->tileBytes = GetMaxSpriteTileBytes(gPooBalloonFrames, 3);
     work->palette = NULL;
-    AnimInit(&work->anim, gUnk_09EF5E44, gUnk_09EF5E38);
+    AnimInit(&work->anim, gPooBalloonAnims, gPooBalloonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     TaskPoolInit(&work->tasks, 2);
@@ -3423,7 +3423,7 @@ void task_poo_owlballoon_2(PooOwlBalloonWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->tiles = AllocObjTiles(work->tileBytes, gUnk_0974B4D8);
+            work->tiles = AllocObjTiles(work->tileBytes, gPooBalloonTiles);
             work->palette = LoadObjPalette(gUnk_09849C98, 0x20);
             ColliderInit(&work->collider, 10, 8, 16);
         }
@@ -3762,7 +3762,7 @@ void task_poo_pile_0(PooPileWork* work, PooPileArgs* a) {
     work->pos.y = a->y;
     work->pos.z = 0;
     work->palette = NULL;
-    AnimInit(&work->anim, gUnk_09EF5C8C, gUnk_09EF5C6C);
+    AnimInit(&work->anim, gPooPileAnims, gPooPileFrames);
 
     if (a->stage == 8) {
         work->stage = GetRandomPooPileStage();
@@ -3855,7 +3855,7 @@ void task_poo_pile_2(PooPileWork* work) {
         work->gfx = AnimUpdate(&work->anim);
 
         if (work->palette == NULL) {
-            work->tiles = LoadObjTiles(gUnk_09742CC2, 0x300);
+            work->tiles = LoadObjTiles(gPooPileTiles, 0x300);
             work->palette = LoadObjPalette(gUnk_09849BF8, 0x20);
         }
 
@@ -3907,7 +3907,7 @@ void task_poo_tigerstump_0(PooStumpWork* work, PooPos* p) {
     work->y = p->y + 0x800;
     work->unk_2C = 0;
     work->palette = NULL;
-    work->gfx = gUnk_097561D4;
+    work->gfx = gPooTigerStumpFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
 }
 
@@ -3937,7 +3937,7 @@ void task_poo_tigerstump_2(PooStumpWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->tiles = LoadObjTiles(gUnk_097561E8, 0x400);
+            work->tiles = LoadObjTiles(gPooTigerStumpTiles, 0x400);
             work->palette = LoadObjPalette(gUnk_09849D38, 0x20);
             ColliderInit(&work->collider, 7, 15, 24);
         }
@@ -3959,7 +3959,7 @@ void task_poo_poohstump_0(PooStumpWork* work, PooPos* p) {
     work->y = p->y;
     work->unk_2C = 0;
     work->palette = NULL;
-    work->gfx = gUnk_09755F34;
+    work->gfx = gPooPoohStumpFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
 }
 
@@ -3991,7 +3991,7 @@ void task_poo_poohstump_2(PooStumpWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->tiles = LoadObjTiles(gUnk_09755F54, 0x280);
+            work->tiles = LoadObjTiles(gPooPoohStumpTiles, 0x280);
             work->palette = LoadObjPalette(gUnk_09849D38, 0x20);
             ColliderInit(&work->collider, 7, 7, 14);
         }
@@ -5142,9 +5142,9 @@ void task_poo_leaf_0(PooLeafWork* work, PooSpawnArgs* a) {
     work->y = a->pos.y;
     work->z = 0;
     work->prizeId = a->prizeId;
-    work->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF610C, 5);
+    work->tileBytes = GetMaxSpriteTileBytes(gPooLeafFrames, 5);
     work->palette = NULL;
-    AnimInit(&work->anim, gUnk_09EF612C, gUnk_09EF610C);
+    AnimInit(&work->anim, gPooLeafAnims, gPooLeafFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
     ColliderSetPosition(&work->collider, work->x + 0x1C00, work->y + 0x1000, work->z);
@@ -5185,7 +5185,7 @@ void task_poo_leaf_2(PooLeafWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->tiles = AllocObjTiles(work->tileBytes, gUnk_0975C3E2);
+            work->tiles = AllocObjTiles(work->tileBytes, gPooLeafTiles);
             work->palette = LoadObjPalette(gUnk_09849DF8, 0x20);
             ColliderInit(&work->collider, 6, 28, 0);
         }
@@ -5217,13 +5217,13 @@ void task_poo_tanpopo_0(PooTanpopoWork* work, PooSpawnArgs* a) {
     work->y = a->pos.y;
     work->z = 0;
     work->prizeId = a->prizeId;
-    work->tileBytes = GetMaxSpriteTileBytes(gUnk_09EF6130, 2);
-    work->tileBytes2 = GetMaxSpriteTileBytes(gUnk_09EF613C, 6);
+    work->tileBytes = GetMaxSpriteTileBytes(gPooTanpopoFrames, 2);
+    work->tileBytes2 = GetMaxSpriteTileBytes(gPooTanpopoSeedFrames, 6);
     work->palette = NULL;
-    AnimInit(&work->anim, gUnk_09EF6138, gUnk_09EF6130);
+    AnimInit(&work->anim, gPooTanpopoAnims, gPooTanpopoFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
-    AnimInit(&work->anim2, gUnk_09EF6154, gUnk_09EF613C);
+    AnimInit(&work->anim2, gPooTanpopoSeedAnims, gPooTanpopoSeedFrames);
     AnimStart(&work->anim2, 0, 0);
     work->gfx2 = AnimGetGfx(&work->anim2);
     ColliderSetPosition(&work->collider, work->x + 0x1800, work->y + 0x1000, work->z);
@@ -5265,8 +5265,8 @@ void task_poo_tanpopo_2(PooTanpopoWork* work) {
         }
     } else {
         if (work->palette == NULL) {
-            work->tiles = LoadObjTiles(gUnk_0975E40E, 0x800);
-            work->tiles2 = LoadObjTiles(gUnk_0975EC8E, 0x1800);
+            work->tiles = LoadObjTiles(gPooTanpopoTiles, 0x800);
+            work->tiles2 = LoadObjTiles(gPooTanpopoSeedTiles, 0x1800);
             work->palette = LoadObjPalette(gUnk_09849E18, 0x20);
             ColliderInit(&work->collider, 6, 24, 0);
         }
@@ -5300,9 +5300,9 @@ void task_poo_ti_board_0(PooBoardWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y;
     work->z = 0;
-    work->tiles = LoadObjTiles(gUnk_097565FC, 0x200);
+    work->tiles = LoadObjTiles(gPooTiBoardTiles, 0x200);
     work->palette = NULL;
-    work->gfx = gUnk_097565E8;
+    work->gfx = gPooTiBoardFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
 }
 
@@ -7146,9 +7146,9 @@ void task_poo_mapbee_0(PooMapBeeWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y;
     work->z = 0;
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6158, 1), gUnk_097606E8);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooMapbeeFrames, 1), gPooMapbeeTiles);
     work->palette = LoadObjPalette(gUnk_09849E38, 0x20);
-    AnimInit(&work->anim, gUnk_09EF6200, gUnk_09EF6158);
+    AnimInit(&work->anim, gPooMapbeeAnims, gPooMapbeeFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->onScreen = 1;
@@ -7274,9 +7274,9 @@ void task_poo_mapbutterfly_0(PooMapButterflyWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y;
     work->z = 0;
-    work->tiles = AllocObjTiles(0x40, gUnk_09760986);
+    work->tiles = AllocObjTiles(0x40, gPooMapbutterflyTiles);
     work->palette = LoadObjPalette(gUnk_09849E58, 0x20);
-    AnimInit(&work->anim, gUnk_09EF6298, gUnk_09EF6208);
+    AnimInit(&work->anim, gPooMapbutterflyAnims, gPooMapbutterflyFrames);
     AnimStart(&work->anim, 0, 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->onScreen = 1;
@@ -8531,9 +8531,9 @@ static const BosMapanimeFrame sPooMapanimeFrames0[4] = { { 18, 0 }, { 18, 1 }, {
 
 static const BosMapanimeFrame sPooMapanimeFrames1[4] = { { 18, 0 }, { 18, 1 }, { 18, 2 }, { 18, 3 } };
 
-const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, gUnk_097B4578, 0x2080, 0x0240, 0x0400, 3 };
+const BosMapanimeDef gPooMapanimeDef0 = { sPooMapanimeFrames0, 4, gPooMapanime0Tiles, 0x2080, 0x0240, 0x0400, 3 };
 
-const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, gUnk_097B5418, 0x3880, 0x0240, 0x0400, 3 };
+const BosMapanimeDef gPooMapanimeDef1 = { sPooMapanimeFrames1, 4, gPooMapanime1Tiles, 0x3880, 0x0240, 0x0400, 3 };
 
 TaskDesc gTaskDescPooMapanime = {
     "task_poo_mapanime",
@@ -8837,16 +8837,16 @@ TaskDesc gTaskDescPooCabbageborn = {
 };
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
-    { gUnk_09760D00, 5, gUnk_09EF62B4, gUnk_09EF629C, gUnk_09849E78 },
-    { gUnk_09761824, 11, gUnk_09EF62E4, gUnk_09EF62B8, gUnk_09849E98 },
-    { gUnk_09762542, 24, gUnk_09EF6348, gUnk_09EF62E8, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, gUnk_09EF6358, gUnk_09EF634C, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, gUnk_09EF6380, gUnk_09EF635C, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, gUnk_09EF638C, gUnk_09EF6384, gUnk_09849F18 },
-    { gUnk_09765012, 6, gUnk_09EF63AC, gUnk_09EF6394, gUnk_09849F38 },
-    { gUnk_0976626E, 6, gUnk_09EF63C8, gUnk_09EF63B0, gUnk_09849F38 },
-    { gUnk_09767562, 10, gUnk_09EF63F4, gUnk_09EF63CC, gUnk_09849F58 },
-    { gUnk_09769416, 10, gUnk_09EF6420, gUnk_09EF63F8, gUnk_09849F58 },
+    { gPooMapObjHit0Tiles, 5, gPooMapObjHit0Anims, gPooMapObjHit0Frames, gUnk_09849E78 },
+    { gPooMapObjHit1Tiles, 11, gPooMapObjHit1Anims, gPooMapObjHit1Frames, gUnk_09849E98 },
+    { gPooMapObjHit2Tiles, 24, gPooMapObjHit2Anims, gPooMapObjHit2Frames, gUnk_09849EB8 },
+    { gPooMapObjHit3Tiles, 3, gPooMapObjHit3Anims, gPooMapObjHit3Frames, gUnk_09849ED8 },
+    { gPooMapObjHit4Tiles, 9, gPooMapObjHit4Anims, gPooMapObjHit4Frames, gUnk_09849EF8 },
+    { gPooMapObjHit5Tiles, 2, gPooMapObjHit5Anims, gPooMapObjHit5Frames, gUnk_09849F18 },
+    { gPooMapObjHit6Tiles, 6, gPooMapObjHit6Anims, gPooMapObjHit6Frames, gUnk_09849F38 },
+    { gPooMapObjHit7Tiles, 6, gPooMapObjHit7Anims, gPooMapObjHit7Frames, gUnk_09849F38 },
+    { gPooMapObjHit8Tiles, 10, gPooMapObjHit8Anims, gPooMapObjHit8Frames, gUnk_09849F58 },
+    { gPooMapObjHit9Tiles, 10, gPooMapObjHit9Anims, gPooMapObjHit9Frames, gUnk_09849F58 },
 };
 
 TaskDesc gTaskDescPooMapobjhit = {

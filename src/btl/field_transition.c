@@ -56,8 +56,8 @@ void FieldTransitionUpdate() {
 
             switch (gGameState.fieldAngle) {
             case 0:
-                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF514, gUnk_09EDF4F4);
-                SetObjTileSource(sFieldTransitionWork->tiles, gUnk_08935BC2);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bb01Anims, gRik1bb01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1bb01Tiles);
                 break;
             case 45:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
@@ -75,8 +75,8 @@ void FieldTransitionUpdate() {
                 sFieldTransitionWork->flipped = 1;
                 break;
             case 128:
-                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gUnk_09EDF4F0, gUnk_09EDF4D0);
-                SetObjTileSource(sFieldTransitionWork->tiles, gUnk_0893416A);
+                AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ff01Anims, gRik1ff01Frames);
+                SetObjTileSource(sFieldTransitionWork->tiles, gRik1ff01Tiles);
                 break;
             case 173:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);

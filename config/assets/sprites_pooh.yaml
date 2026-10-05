@@ -956,18 +956,18 @@ entries:
     address: 0x09ECCC0C
   eu:
     address: 0x09F80C18
-- name: gUnk_09EF5824
+- name: gPoohOwlDescentFrames
   record: SpriteTable
-  items: [gUnk_09724B6C, gUnk_09724B82, gUnk_09724B98, gUnk_09724BAE, gUnk_09724BC4, gUnk_09724BDA]
+  items: [gPoohOwlDescentFrame0, gPoohOwlDescentFrame1, gPoohOwlDescentFrame2, gPoohOwlDescentFrame3, gPoohOwlDescentFrame4, gPoohOwlDescentFrame5]
   us:
     address: 0x09EF5824
   jp:
     address: 0x09ECCC10
   eu:
     address: 0x09F80C1C
-- name: gUnk_09EF583C
+- name: gPoohOwlDescentAnims
   record: AnimTable
-  items: [gUnk_09724BF0, gUnk_09724C06]
+  items: [gPoohOwlDescentAnim0, gPoohOwlDescentAnim1]
   us:
     address: 0x09EF583C
   jp:
@@ -1028,18 +1028,18 @@ entries:
     address: 0x09ECCD9C
   eu:
     address: 0x09F80DA8
-- name: gUnk_09EF59BC
+- name: gPooTrapFrames
   record: SpriteTable
-  items: [gUnk_0972BD78]
+  items: [gPooTrapFrame0]
   us:
     address: 0x09EF59BC
   jp:
     address: 0x09ECCDA8
   eu:
     address: 0x09F80DB4
-- name: gUnk_09EF59C0
+- name: gPooTrapAnims
   record: AnimTable
-  items: [gUnk_0972BD82]
+  items: [gPooTrapAnim0]
   us:
     address: 0x09EF59C0
   jp:
@@ -1298,36 +1298,36 @@ entries:
     address: 0x09ECCF08
   eu:
     address: 0x09F80F14
-- name: gUnk_09EF5B2C
+- name: gPooGaugeFrames
   record: SpriteTable
-  items: [gUnk_097355E8, gUnk_09735604, gUnk_09735620, gUnk_0973563C, gUnk_09735658, gUnk_09735674, gUnk_09735690, gUnk_097356AC]
+  items: [gPooGaugeFrame0, gPooGaugeFrame1, gPooGaugeFrame2, gPooGaugeFrame3, gPooGaugeFrame4, gPooGaugeFrame5, gPooGaugeFrame6, gPooGaugeFrame7]
   us:
     address: 0x09EF5B2C
   jp:
     address: 0x09ECCF18
   eu:
     address: 0x09F80F24
-- name: gUnk_09EF5B4C
+- name: gPooGaugeAnims
   record: AnimTable
-  items: [gUnk_097356C8, gUnk_097356DE]
+  items: [gPooGaugeAnim0, gPooGaugeAnim1]
   us:
     address: 0x09EF5B4C
   jp:
     address: 0x09ECCF38
   eu:
     address: 0x09F80F44
-- name: gUnk_09EF5C6C
+- name: gPooPileFrames
   record: SpriteTable
-  items: [gUnk_09742B98, gUnk_09742BB4, gUnk_09742BD0, gUnk_09742BEC, gUnk_09742C02, gUnk_09742C18, gUnk_09742C28, gUnk_09742C38]
+  items: [gPooPileFrame0, gPooPileFrame1, gPooPileFrame2, gPooPileFrame3, gPooPileFrame4, gPooPileFrame5, gPooPileFrame6, gPooPileFrame7]
   us:
     address: 0x09EF5C6C
   jp:
     address: 0x09ECD058
   eu:
     address: 0x09F81064
-- name: gUnk_09EF5C8C
+- name: gPooPileAnims
   record: AnimTable
-  items: [gUnk_09742C42, gUnk_09742C4C, gUnk_09742C66, gUnk_09742C70, gUnk_09742C8A, gUnk_09742C94, gUnk_09742CAE, gUnk_09742CB8]
+  items: [gPooPileAnim0, gPooPileAnim1, gPooPileAnim2, gPooPileAnim3, gPooPileAnim4, gPooPileAnim5, gPooPileAnim6, gPooPileAnim7]
   us:
     address: 0x09EF5C8C
   jp:
@@ -1460,18 +1460,18 @@ entries:
     address: 0x09ECD210
   eu:
     address: 0x09F8121C
-- name: gUnk_09EF5E38
+- name: gPooBalloonFrames
   record: SpriteTable
-  items: [gUnk_0974B484, gUnk_0974B49A, gUnk_0974B4B0]
+  items: [gPooBalloonFrame0, gPooBalloonFrame1, gPooBalloonFrame2]
   us:
     address: 0x09EF5E38
   jp:
     address: 0x09ECD224
   eu:
     address: 0x09F81230
-- name: gUnk_09EF5E44
+- name: gPooBalloonAnims
   record: AnimTable
-  items: [gUnk_0974B4C6]
+  items: [gPooBalloonAnim0]
   us:
     address: 0x09EF5E44
   jp:
@@ -1550,54 +1550,54 @@ entries:
     address: 0x09ECD3BC
   eu:
     address: 0x09F813C8
-- name: gUnk_09EF5FD8
+- name: gPooPoohStumpFrames
   record: SpriteTable
-  items: [gUnk_09755F34]
+  items: [gPooPoohStumpFrame0]
   us:
     address: 0x09EF5FD8
   jp:
     address: 0x09ECD3C4
   eu:
     address: 0x09F813D0
-- name: gUnk_09EF5FDC
+- name: gPooPoohStumpAnims
   record: AnimTable
-  items: [gUnk_09755F4A]
+  items: [gPooPoohStumpAnim0]
   us:
     address: 0x09EF5FDC
   jp:
     address: 0x09ECD3C8
   eu:
     address: 0x09F813D4
-- name: gUnk_09EF5FE0
+- name: gPooTigerStumpFrames
   record: SpriteTable
-  items: [gUnk_097561D4]
+  items: [gPooTigerStumpFrame0]
   us:
     address: 0x09EF5FE0
   jp:
     address: 0x09ECD3CC
   eu:
     address: 0x09F813D8
-- name: gUnk_09EF5FE4
+- name: gPooTigerStumpAnims
   record: AnimTable
-  items: [gUnk_097561DE]
+  items: [gPooTigerStumpAnim0]
   us:
     address: 0x09EF5FE4
   jp:
     address: 0x09ECD3D0
   eu:
     address: 0x09F813DC
-- name: gUnk_09EF5FE8
+- name: gPooTiBoardFrames
   record: SpriteTable
-  items: [gUnk_097565E8]
+  items: [gPooTiBoardFrame0]
   us:
     address: 0x09EF5FE8
   jp:
     address: 0x09ECD3D4
   eu:
     address: 0x09F813E0
-- name: gUnk_09EF5FEC
+- name: gPooTiBoardAnims
   record: AnimTable
-  items: [gUnk_097565F2]
+  items: [gPooTiBoardAnim0]
   us:
     address: 0x09EF5FEC
   jp:
@@ -1694,270 +1694,270 @@ entries:
     address: 0x09ECD4E0
   eu:
     address: 0x09F814EC
-- name: gUnk_09EF610C
+- name: gPooLeafFrames
   record: SpriteTable
-  items: [gUnk_0975C36C, gUnk_0975C376, gUnk_0975C380, gUnk_0975C38A, gUnk_0975C394, gUnk_0975C39E, gUnk_0975C3A8, gUnk_0975C3B2]
+  items: [gPooLeafFrame0, gPooLeafFrame1, gPooLeafFrame2, gPooLeafFrame3, gPooLeafFrame4, gPooLeafFrame5, gPooLeafFrame6, gPooLeafFrame7]
   us:
     address: 0x09EF610C
   jp:
     address: 0x09ECD4F8
   eu:
     address: 0x09F81504
-- name: gUnk_09EF612C
+- name: gPooLeafAnims
   record: AnimTable
-  items: [gUnk_0975C3BC]
+  items: [gPooLeafAnim0]
   us:
     address: 0x09EF612C
   jp:
     address: 0x09ECD518
   eu:
     address: 0x09F81524
-- name: gUnk_09EF6130
+- name: gPooTanpopoFrames
   record: SpriteTable
-  items: [gUnk_0975E3E4, gUnk_0975E3EE]
+  items: [gPooTanpopoFrame0, gPooTanpopoFrame1]
   us:
     address: 0x09EF6130
   jp:
     address: 0x09ECD51C
   eu:
     address: 0x09F81528
-- name: gUnk_09EF6138
+- name: gPooTanpopoAnims
   record: AnimTable
-  items: [gUnk_0975E3F8]
+  items: [gPooTanpopoAnim0]
   us:
     address: 0x09EF6138
   jp:
     address: 0x09ECD524
   eu:
     address: 0x09F81530
-- name: gUnk_09EF613C
+- name: gPooTanpopoSeedFrames
   record: SpriteTable
-  items: [gUnk_0975EC10, gUnk_0975EC20, gUnk_0975EC30, gUnk_0975EC40, gUnk_0975EC50, gUnk_0975EC60]
+  items: [gPooTanpopoSeedFrame0, gPooTanpopoSeedFrame1, gPooTanpopoSeedFrame2, gPooTanpopoSeedFrame3, gPooTanpopoSeedFrame4, gPooTanpopoSeedFrame5]
   us:
     address: 0x09EF613C
   jp:
     address: 0x09ECD528
   eu:
     address: 0x09F81534
-- name: gUnk_09EF6154
+- name: gPooTanpopoSeedAnims
   record: AnimTable
-  items: [gUnk_0975EC70]
+  items: [gPooTanpopoSeedAnim0]
   us:
     address: 0x09EF6154
   jp:
     address: 0x09ECD540
   eu:
     address: 0x09F8154C
-- name: gUnk_09EF6158
+- name: gPooMapbeeFrames
   record: SpriteTable
-  items: [gUnk_09760490, gUnk_0976049A, gUnk_097604A4, gUnk_097604AE, gUnk_097604B8, gUnk_097604C2, gUnk_097604CC, gUnk_097604D6, gUnk_097604E0, gUnk_097604EA, gUnk_097604F4, gUnk_097604FE, gUnk_09760508, gUnk_09760512, gUnk_0976051C, gUnk_09760526, gUnk_09760530, gUnk_0976053A, gUnk_09760544, gUnk_0976054E, gUnk_09760558, gUnk_09760562, gUnk_0976056C, gUnk_09760576, gUnk_09760580, gUnk_0976058A, gUnk_09760594, gUnk_0976059E, gUnk_097605A8, gUnk_097605B2, gUnk_097605BC, gUnk_097605C6, gUnk_097605D0, gUnk_097605DA, gUnk_097605E4, gUnk_097605EE, gUnk_097605F8, gUnk_09760602, gUnk_0976060C, gUnk_09760616, gUnk_09760620, gUnk_0976062A]
+  items: [gPooMapbeeFrame0, gPooMapbeeFrame1, gPooMapbeeFrame2, gPooMapbeeFrame3, gPooMapbeeFrame4, gPooMapbeeFrame5, gPooMapbeeFrame6, gPooMapbeeFrame7, gPooMapbeeFrame8, gPooMapbeeFrame9, gPooMapbeeFrame10, gPooMapbeeFrame11, gPooMapbeeFrame12, gPooMapbeeFrame13, gPooMapbeeFrame14, gPooMapbeeFrame15, gPooMapbeeFrame16, gPooMapbeeFrame17, gPooMapbeeFrame18, gPooMapbeeFrame19, gPooMapbeeFrame20, gPooMapbeeFrame21, gPooMapbeeFrame22, gPooMapbeeFrame23, gPooMapbeeFrame24, gPooMapbeeFrame25, gPooMapbeeFrame26, gPooMapbeeFrame27, gPooMapbeeFrame28, gPooMapbeeFrame29, gPooMapbeeFrame30, gPooMapbeeFrame31, gPooMapbeeFrame32, gPooMapbeeFrame33, gPooMapbeeFrame34, gPooMapbeeFrame35, gPooMapbeeFrame36, gPooMapbeeFrame37, gPooMapbeeFrame38, gPooMapbeeFrame39, gPooMapbeeFrame40, gPooMapbeeFrame41]
   us:
     address: 0x09EF6158
   jp:
     address: 0x09ECD544
   eu:
     address: 0x09F81550
-- name: gUnk_09EF6200
+- name: gPooMapbeeAnims
   record: AnimTable
-  items: [gUnk_09760634, gUnk_0976063E]
+  items: [gPooMapbeeAnim0, gPooMapbeeAnim1]
   us:
     address: 0x09EF6200
   jp:
     address: 0x09ECD5EC
   eu:
     address: 0x09F815F8
-- name: gUnk_09EF6208
+- name: gPooMapbutterflyFrames
   record: SpriteTable
-  items: [gUnk_09760788, gUnk_09760792, gUnk_0976079C, gUnk_097607A6, gUnk_097607B0, gUnk_097607BA, gUnk_097607C4, gUnk_097607CE, gUnk_097607D8, gUnk_097607E2, gUnk_097607EC, gUnk_097607F6, gUnk_09760800, gUnk_0976080A, gUnk_09760814, gUnk_0976081E, gUnk_09760828, gUnk_09760832, gUnk_0976083C, gUnk_09760846, gUnk_09760850, gUnk_0976085A, gUnk_09760864, gUnk_0976086E, gUnk_09760878, gUnk_09760882, gUnk_0976088C, gUnk_09760896, gUnk_097608A0, gUnk_097608AA, gUnk_097608B4, gUnk_097608BE, gUnk_097608C8, gUnk_097608D2, gUnk_097608DC, gUnk_097608E6]
+  items: [gPooMapbutterflyFrame0, gPooMapbutterflyFrame1, gPooMapbutterflyFrame2, gPooMapbutterflyFrame3, gPooMapbutterflyFrame4, gPooMapbutterflyFrame5, gPooMapbutterflyFrame6, gPooMapbutterflyFrame7, gPooMapbutterflyFrame8, gPooMapbutterflyFrame9, gPooMapbutterflyFrame10, gPooMapbutterflyFrame11, gPooMapbutterflyFrame12, gPooMapbutterflyFrame13, gPooMapbutterflyFrame14, gPooMapbutterflyFrame15, gPooMapbutterflyFrame16, gPooMapbutterflyFrame17, gPooMapbutterflyFrame18, gPooMapbutterflyFrame19, gPooMapbutterflyFrame20, gPooMapbutterflyFrame21, gPooMapbutterflyFrame22, gPooMapbutterflyFrame23, gPooMapbutterflyFrame24, gPooMapbutterflyFrame25, gPooMapbutterflyFrame26, gPooMapbutterflyFrame27, gPooMapbutterflyFrame28, gPooMapbutterflyFrame29, gPooMapbutterflyFrame30, gPooMapbutterflyFrame31, gPooMapbutterflyFrame32, gPooMapbutterflyFrame33, gPooMapbutterflyFrame34, gPooMapbutterflyFrame35]
   us:
     address: 0x09EF6208
   jp:
     address: 0x09ECD5F4
   eu:
     address: 0x09F81600
-- name: gUnk_09EF6298
+- name: gPooMapbutterflyAnims
   record: AnimTable
-  items: [gUnk_097608F0]
+  items: [gPooMapbutterflyAnim0]
   us:
     address: 0x09EF6298
   jp:
     address: 0x09ECD684
   eu:
     address: 0x09F81690
-- name: gUnk_09EF629C
+- name: gPooMapObjHit0Frames
   record: SpriteTable
-  items: [gUnk_09760C88, gUnk_09760C98, gUnk_09760CA8, gUnk_09760CB8, gUnk_09760CC8, gUnk_09760CD8]
+  items: [gPooMapObjHit0Frame0, gPooMapObjHit0Frame1, gPooMapObjHit0Frame2, gPooMapObjHit0Frame3, gPooMapObjHit0Frame4, gPooMapObjHit0Frame5]
   us:
     address: 0x09EF629C
   jp:
     address: 0x09ECD688
   eu:
     address: 0x09F81694
-- name: gUnk_09EF62B4
+- name: gPooMapObjHit0Anims
   record: AnimTable
-  items: [gUnk_09760CE2]
+  items: [gPooMapObjHit0Anim0]
   us:
     address: 0x09EF62B4
   jp:
     address: 0x09ECD6A0
   eu:
     address: 0x09F816AC
-- name: gUnk_09EF62B8
+- name: gPooMapObjHit1Frames
   record: SpriteTable
-  items: [gUnk_09761720, gUnk_0976172A, gUnk_09761734, gUnk_0976174A, gUnk_09761760, gUnk_09761776, gUnk_0976178C, gUnk_097617A2, gUnk_097617B8, gUnk_097617CE, gUnk_097617DE]
+  items: [gPooMapObjHit1Frame0, gPooMapObjHit1Frame1, gPooMapObjHit1Frame2, gPooMapObjHit1Frame3, gPooMapObjHit1Frame4, gPooMapObjHit1Frame5, gPooMapObjHit1Frame6, gPooMapObjHit1Frame7, gPooMapObjHit1Frame8, gPooMapObjHit1Frame9, gPooMapObjHit1Frame10]
   us:
     address: 0x09EF62B8
   jp:
     address: 0x09ECD6A4
   eu:
     address: 0x09F816B0
-- name: gUnk_09EF62E4
+- name: gPooMapObjHit1Anims
   record: AnimTable
-  items: [gUnk_097617EE]
+  items: [gPooMapObjHit1Anim0]
   us:
     address: 0x09EF62E4
   jp:
     address: 0x09ECD6D0
   eu:
     address: 0x09F816DC
-- name: gUnk_09EF62E8
+- name: gPooMapObjHit2Frames
   record: SpriteTable
-  items: [gUnk_097623A4, gUnk_097623BA, gUnk_097623D6, gUnk_097623F2, gUnk_09762402, gUnk_09762412, gUnk_09762422, gUnk_09762432, gUnk_0976243C, gUnk_09762446, gUnk_09762450, gUnk_0976245A, gUnk_09762464, gUnk_0976246E, gUnk_09762478, gUnk_09762482, gUnk_0976248C, gUnk_09762496, gUnk_097624A0, gUnk_097624AA, gUnk_097624B4, gUnk_097624BE, gUnk_097624C8, gUnk_097624D2]
+  items: [gPooMapObjHit2Frame0, gPooMapObjHit2Frame1, gPooMapObjHit2Frame2, gPooMapObjHit2Frame3, gPooMapObjHit2Frame4, gPooMapObjHit2Frame5, gPooMapObjHit2Frame6, gPooMapObjHit2Frame7, gPooMapObjHit2Frame8, gPooMapObjHit2Frame9, gPooMapObjHit2Frame10, gPooMapObjHit2Frame11, gPooMapObjHit2Frame12, gPooMapObjHit2Frame13, gPooMapObjHit2Frame14, gPooMapObjHit2Frame15, gPooMapObjHit2Frame16, gPooMapObjHit2Frame17, gPooMapObjHit2Frame18, gPooMapObjHit2Frame19, gPooMapObjHit2Frame20, gPooMapObjHit2Frame21, gPooMapObjHit2Frame22, gPooMapObjHit2Frame23]
   us:
     address: 0x09EF62E8
   jp:
     address: 0x09ECD6D4
   eu:
     address: 0x09F816E0
-- name: gUnk_09EF6348
+- name: gPooMapObjHit2Anims
   record: AnimTable
-  items: [gUnk_097624DC]
+  items: [gPooMapObjHit2Anim0]
   us:
     address: 0x09EF6348
   jp:
     address: 0x09ECD734
   eu:
     address: 0x09F81740
-- name: gUnk_09EF634C
+- name: gPooMapObjHit3Frames
   record: SpriteTable
-  items: [gUnk_09763484, gUnk_0976348E, gUnk_09763498]
+  items: [gPooMapObjHit3Frame0, gPooMapObjHit3Frame1, gPooMapObjHit3Frame2]
   us:
     address: 0x09EF634C
   jp:
     address: 0x09ECD738
   eu:
     address: 0x09F81744
-- name: gUnk_09EF6358
+- name: gPooMapObjHit3Anims
   record: AnimTable
-  items: [gUnk_097634A2]
+  items: [gPooMapObjHit3Anim0]
   us:
     address: 0x09EF6358
   jp:
     address: 0x09ECD744
   eu:
     address: 0x09F81750
-- name: gUnk_09EF635C
+- name: gPooMapObjHit4Frames
   record: SpriteTable
-  items: [gUnk_09763AD0, gUnk_09763ADA, gUnk_09763AE4, gUnk_09763AEE, gUnk_09763AF8, gUnk_09763B02, gUnk_09763B0C, gUnk_09763B16, gUnk_09763B20]
+  items: [gPooMapObjHit4Frame0, gPooMapObjHit4Frame1, gPooMapObjHit4Frame2, gPooMapObjHit4Frame3, gPooMapObjHit4Frame4, gPooMapObjHit4Frame5, gPooMapObjHit4Frame6, gPooMapObjHit4Frame7, gPooMapObjHit4Frame8]
   us:
     address: 0x09EF635C
   jp:
     address: 0x09ECD748
   eu:
     address: 0x09F81754
-- name: gUnk_09EF6380
+- name: gPooMapObjHit4Anims
   record: AnimTable
-  items: [gUnk_09763B2A]
+  items: [gPooMapObjHit4Anim0]
   us:
     address: 0x09EF6380
   jp:
     address: 0x09ECD76C
   eu:
     address: 0x09F81778
-- name: gUnk_09EF6384
+- name: gPooMapObjHit5Frames
   record: SpriteTable
-  items: [gUnk_09764B74, gUnk_09764B7E]
+  items: [gPooMapObjHit5Frame0, gPooMapObjHit5Frame1]
   us:
     address: 0x09EF6384
   jp:
     address: 0x09ECD770
   eu:
     address: 0x09F8177C
-- name: gUnk_09EF638C
+- name: gPooMapObjHit5Anims
   record: AnimTable
-  items: [gUnk_09764B88, gUnk_09764BAE]
+  items: [gPooMapObjHit5Anim0, gPooMapObjHit5Anim1]
   us:
     address: 0x09EF638C
   jp:
     address: 0x09ECD778
   eu:
     address: 0x09F81784
-- name: gUnk_09EF6394
+- name: gPooMapObjHit6Frames
   record: SpriteTable
-  items: [gUnk_09764FB8, gUnk_09764FC2, gUnk_09764FCC, gUnk_09764FD6, gUnk_09764FE0, gUnk_09764FEA]
+  items: [gPooMapObjHit6Frame0, gPooMapObjHit6Frame1, gPooMapObjHit6Frame2, gPooMapObjHit6Frame3, gPooMapObjHit6Frame4, gPooMapObjHit6Frame5]
   us:
     address: 0x09EF6394
   jp:
     address: 0x09ECD780
   eu:
     address: 0x09F8178C
-- name: gUnk_09EF63AC
+- name: gPooMapObjHit6Anims
   record: AnimTable
-  items: [gUnk_09764FF4]
+  items: [gPooMapObjHit6Anim0]
   us:
     address: 0x09EF63AC
   jp:
     address: 0x09ECD798
   eu:
     address: 0x09F817A4
-- name: gUnk_09EF63B0
+- name: gPooMapObjHit7Frames
   record: SpriteTable
-  items: [gUnk_09766214, gUnk_0976621E, gUnk_09766228, gUnk_09766232, gUnk_0976623C, gUnk_09766246]
+  items: [gPooMapObjHit7Frame0, gPooMapObjHit7Frame1, gPooMapObjHit7Frame2, gPooMapObjHit7Frame3, gPooMapObjHit7Frame4, gPooMapObjHit7Frame5]
   us:
     address: 0x09EF63B0
   jp:
     address: 0x09ECD79C
   eu:
     address: 0x09F817A8
-- name: gUnk_09EF63C8
+- name: gPooMapObjHit7Anims
   record: AnimTable
-  items: [gUnk_09766250]
+  items: [gPooMapObjHit7Anim0]
   us:
     address: 0x09EF63C8
   jp:
     address: 0x09ECD7B4
   eu:
     address: 0x09F817C0
-- name: gUnk_09EF63CC
+- name: gPooMapObjHit8Frames
   record: SpriteTable
-  items: [gUnk_09767470, gUnk_0976747A, gUnk_09767484, gUnk_0976748E, gUnk_0976749E, gUnk_097674BA, gUnk_097674D6, gUnk_097674F2, gUnk_0976750E, gUnk_0976752A]
+  items: [gPooMapObjHit8Frame0, gPooMapObjHit8Frame1, gPooMapObjHit8Frame2, gPooMapObjHit8Frame3, gPooMapObjHit8Frame4, gPooMapObjHit8Frame5, gPooMapObjHit8Frame6, gPooMapObjHit8Frame7, gPooMapObjHit8Frame8, gPooMapObjHit8Frame9]
   us:
     address: 0x09EF63CC
   jp:
     address: 0x09ECD7B8
   eu:
     address: 0x09F817C4
-- name: gUnk_09EF63F4
+- name: gPooMapObjHit8Anims
   record: AnimTable
-  items: [gUnk_09767534]
+  items: [gPooMapObjHit8Anim0]
   us:
     address: 0x09EF63F4
   jp:
     address: 0x09ECD7E0
   eu:
     address: 0x09F817EC
-- name: gUnk_09EF63F8
+- name: gPooMapObjHit9Frames
   record: SpriteTable
-  items: [gUnk_09769324, gUnk_0976932E, gUnk_09769338, gUnk_09769342, gUnk_09769352, gUnk_0976936E, gUnk_0976938A, gUnk_097693A6, gUnk_097693C2, gUnk_097693DE]
+  items: [gPooMapObjHit9Frame0, gPooMapObjHit9Frame1, gPooMapObjHit9Frame2, gPooMapObjHit9Frame3, gPooMapObjHit9Frame4, gPooMapObjHit9Frame5, gPooMapObjHit9Frame6, gPooMapObjHit9Frame7, gPooMapObjHit9Frame8, gPooMapObjHit9Frame9]
   us:
     address: 0x09EF63F8
   jp:
     address: 0x09ECD7E4
   eu:
     address: 0x09F817F0
-- name: gUnk_09EF6420
+- name: gPooMapObjHit9Anims
   record: AnimTable
-  items: [gUnk_097693E8]
+  items: [gPooMapObjHit9Anim0]
   us:
     address: 0x09EF6420
   jp:
@@ -4242,48 +4242,48 @@ entries:
   eu:
     address: 0x096F0F4C
     size: 3966
-- name: gUnk_09724C1C
+- name: gPoohOwlDescentTiles
   format: sprite_sheet
   align: 4
   cell: [34, 100]
   anchor: [16, 50]
   columns: 6
   frames:
-  - symbol: gUnk_09724B6C
+  - symbol: gPoohOwlDescentFrame0
     pieces:
     - [32x32, -15, -6]
     - [32x16, -15, 26]
     - [32x8, -15, 42]
-  - symbol: gUnk_09724B82
+  - symbol: gPoohOwlDescentFrame1
     pieces:
     - [32x16, -15, -6]
     - [32x32, -14, 10]
     - [32x8, -14, 42]
-  - symbol: gUnk_09724B98
+  - symbol: gPoohOwlDescentFrame2
     pieces:
     - [32x16, -15, -6]
     - [32x32, -16, 10]
     - [32x8, -16, 42]
-  - symbol: gUnk_09724BAE
+  - symbol: gPoohOwlDescentFrame3
     pieces:
     - [32x32, -15, -50]
     - [32x16, -15, -18]
     - [32x8, -15, -2]
-  - symbol: gUnk_09724BC4
+  - symbol: gPoohOwlDescentFrame4
     pieces:
     - [32x16, -15, -50]
     - [32x32, -14, -34]
     - [32x8, -14, -2]
-  - symbol: gUnk_09724BDA
+  - symbol: gPoohOwlDescentFrame5
     pieces:
     - [32x16, -15, -50]
     - [32x32, -16, -34]
     - [32x8, -16, -2]
   animations:
-  - symbol: gUnk_09724BF0
+  - symbol: gPoohOwlDescentAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 20], [0, 8], [2, 13], [0, 5]]
-  - symbol: gUnk_09724C06
+  - symbol: gPoohOwlDescentAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 20], [3, 8], [5, 13], [3, 5]]
   us:
@@ -4715,18 +4715,18 @@ entries:
   eu:
     address: 0x096F7240
     size: 7830
-- name: gUnk_0972BD8C
+- name: gPooTrapTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [16, 10]
   columns: 1
   frames:
-  - symbol: gUnk_0972BD78
+  - symbol: gPooTrapFrame0
     pieces:
     - [32x16, -16, -10]
   animations:
-  - symbol: gUnk_0972BD82
+  - symbol: gPooTrapAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -4913,38 +4913,38 @@ entries:
   eu:
     address: 0x096FB0FC
     size: 1988
-- name: gUnk_09760D00
+- name: gPooMapObjHit0Tiles
   format: sprite_sheet
   align: 4
   cell: [72, 32]
   anchor: [16, 8]
   columns: 6
   frames:
-  - symbol: gUnk_09760C88
+  - symbol: gPooMapObjHit0Frame0
     pieces:
     - [16x32, -8, -8]
     - [16x32, 33, -8]
-  - symbol: gUnk_09760C98
+  - symbol: gPooMapObjHit0Frame1
     pieces:
     - [16x32, -13, -8]
     - [16x32, 40, -8]
-  - symbol: gUnk_09760CA8
+  - symbol: gPooMapObjHit0Frame2
     pieces:
     - [16x32, -16, -8]
     - [16x32, 40, -8]
-  - symbol: gUnk_09760CB8
+  - symbol: gPooMapObjHit0Frame3
     pieces:
     - [16x32, -14, -8]
     - [16x32, 40, -8]
-  - symbol: gUnk_09760CC8
+  - symbol: gPooMapObjHit0Frame4
     pieces:
     - [16x32, -8, -8]
     - [16x32, 40, -8]
-  - symbol: gUnk_09760CD8
+  - symbol: gPooMapObjHit0Frame5
     pieces:
     - [8x8, 0, 0]
   animations:
-  - symbol: gUnk_09760CE2
+  - symbol: gPooMapObjHit0Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 11], [2, 13], [3, 12], [4, 11], [5, 30]]
   us:
@@ -4991,64 +4991,64 @@ entries:
   eu:
     address: 0x096FB8C0
     size: 1988
-- name: gUnk_09761824
+- name: gPooMapObjHit1Tiles
   format: sprite_sheet
   align: 4
   cell: [72, 40]
   anchor: [13, 8]
   columns: 8
   frames:
-  - symbol: gUnk_09761720
+  - symbol: gPooMapObjHit1Frame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976172A
+  - symbol: gPooMapObjHit1Frame1
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09761734
+  - symbol: gPooMapObjHit1Frame2
     pieces:
     - [16x16, 2, -8, {layer: 1}]
     - [16x16, 16, -6, {hflip: true, same: [2, 0]}]
     - [32x32, 0, 0, {same: [0, 0]}]
-  - symbol: gUnk_0976174A
+  - symbol: gPooMapObjHit1Frame3
     pieces:
     - [16x16, -5, -8, {layer: 1}]
     - [16x16, 18, -8, {layer: 1}]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_09761760
+  - symbol: gPooMapObjHit1Frame4
     pieces:
     - [16x16, -13, 0, {layer: 1}]
     - [16x16, 26, -8, {layer: 1}]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_09761776
+  - symbol: gPooMapObjHit1Frame5
     pieces:
     - [16x16, -13, 0, {layer: 1}]
     - [16x16, 26, 0, {layer: 1}]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_0976178C
+  - symbol: gPooMapObjHit1Frame6
     pieces:
     - [16x16, -13, 0, {layer: 1}]
     - [16x16, 32, 0]
     - [32x32, 0, 0]
-  - symbol: gUnk_097617A2
+  - symbol: gPooMapObjHit1Frame7
     pieces:
     - [16x16, -13, 0, {layer: 1}]
     - [16x16, 34, 0]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_097617B8
+  - symbol: gPooMapObjHit1Frame8
     pieces:
     - [16x16, -5, 0, {layer: 1}]
     - [16x16, 43, 0]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_097617CE
+  - symbol: gPooMapObjHit1Frame9
     pieces:
     - [16x16, -5, 8, {layer: 1}]
     - [32x32, 0, 0, {same: [1, 0]}]
-  - symbol: gUnk_097617DE
+  - symbol: gPooMapObjHit1Frame10
     pieces:
     - [16x16, 0, 0, {layer: 1}]
     - [32x32, 0, 0, {same: [1, 0]}]
   animations:
-  - symbol: gUnk_097617EE
+  - symbol: gPooMapObjHit1Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 9], [10, 9], [1, 10]]
   us:
@@ -5130,99 +5130,99 @@ entries:
   eu:
     address: 0x096FC848
     size: 1988
-- name: gUnk_09762542
+- name: gPooMapObjHit2Tiles
   format: sprite_sheet
   align: 4
   cell: [64, 36]
   anchor: [16, 20]
   columns: 8
   frames:
-  - symbol: gUnk_097623A4
+  - symbol: gPooMapObjHit2Frame0
     pieces:
     - [8x8, 14, 0]
     - [32x32, -8, -16, {layer: 1}]
     - [16x32, 24, -16]
-  - symbol: gUnk_097623BA
+  - symbol: gPooMapObjHit2Frame1
     pieces:
     - [8x16, 15, -4]
     - [32x32, -8, -16, {layer: 1}]
     - [16x32, 24, -16]
     - [8x32, 40, -16]
-  - symbol: gUnk_097623D6
+  - symbol: gPooMapObjHit2Frame2
     pieces:
     - [8x16, 17, -6]
     - [32x32, -8, -16, {same: [1, 1]}]
     - [16x32, 24, -16, {same: [1, 2]}]
     - [8x32, 40, -16]
-  - symbol: gUnk_097623F2
+  - symbol: gPooMapObjHit2Frame3
     pieces:
     - [8x16, 20, -7]
     - [64x32, -16, -16, {layer: 1}]
-  - symbol: gUnk_09762402
+  - symbol: gPooMapObjHit2Frame4
     pieces:
     - [8x16, 21, -10]
     - [64x32, -16, -16, {same: [3, 1]}]
-  - symbol: gUnk_09762412
+  - symbol: gPooMapObjHit2Frame5
     pieces:
     - [8x16, 21, -12]
     - [64x32, -16, -16, {layer: 1}]
-  - symbol: gUnk_09762422
+  - symbol: gPooMapObjHit2Frame6
     pieces:
     - [8x16, 21, -13]
     - [64x32, -16, -16, {same: [5, 1]}]
-  - symbol: gUnk_09762432
+  - symbol: gPooMapObjHit2Frame7
     pieces:
     - [8x16, 20, -14, {hflip: true}]
-  - symbol: gUnk_0976243C
+  - symbol: gPooMapObjHit2Frame8
     pieces:
     - [8x16, 19, -16, {hflip: true}]
-  - symbol: gUnk_09762446
+  - symbol: gPooMapObjHit2Frame9
     pieces:
     - [8x16, 20, -18, {hflip: true}]
-  - symbol: gUnk_09762450
+  - symbol: gPooMapObjHit2Frame10
     pieces:
     - [8x16, 21, -20, {hflip: true}]
-  - symbol: gUnk_0976245A
+  - symbol: gPooMapObjHit2Frame11
     pieces:
     - [8x16, 22, -20]
-  - symbol: gUnk_09762464
+  - symbol: gPooMapObjHit2Frame12
     pieces:
     - [8x16, 23, -18]
-  - symbol: gUnk_0976246E
+  - symbol: gPooMapObjHit2Frame13
     pieces:
     - [8x16, 24, -16]
-  - symbol: gUnk_09762478
+  - symbol: gPooMapObjHit2Frame14
     pieces:
     - [8x16, 24, -14]
-  - symbol: gUnk_09762482
+  - symbol: gPooMapObjHit2Frame15
     pieces:
     - [8x16, 23, -13]
-  - symbol: gUnk_0976248C
+  - symbol: gPooMapObjHit2Frame16
     pieces:
     - [8x16, 22, -12]
-  - symbol: gUnk_09762496
+  - symbol: gPooMapObjHit2Frame17
     pieces:
     - [8x16, 22, -10]
-  - symbol: gUnk_097624A0
+  - symbol: gPooMapObjHit2Frame18
     pieces:
     - [8x16, 22, -7]
-  - symbol: gUnk_097624AA
+  - symbol: gPooMapObjHit2Frame19
     pieces:
     - [8x16, 24, -6]
-  - symbol: gUnk_097624B4
+  - symbol: gPooMapObjHit2Frame20
     pieces:
     - [8x16, 26, -5]
-  - symbol: gUnk_097624BE
+  - symbol: gPooMapObjHit2Frame21
     pieces:
     - [8x16, 26, -3]
-  - symbol: gUnk_097624C8
+  - symbol: gPooMapObjHit2Frame22
     pieces:
     - [8x8, 27, 1]
-  - symbol: gUnk_097624D2
+  - symbol: gPooMapObjHit2Frame23
     pieces:
     - [8x8, 0, 0]
   animations:
-  - symbol: gUnk_097624DC
+  - symbol: gPooMapObjHit2Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 4], [16, 4], [17, 4], [18, 4], [19, 4], [20, 4], [21, 4], [22, 4], [23, 20]]
   us:
@@ -5295,24 +5295,24 @@ entries:
   eu:
     address: 0x096FD00C
     size: 9044
-- name: gUnk_097634D0
+- name: gPooMapObjHit3Tiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnk_09763484
+  - symbol: gPooMapObjHit3Frame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976348E
+  - symbol: gPooMapObjHit3Frame1
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09763498
+  - symbol: gPooMapObjHit3Frame2
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_097634A2
+  - symbol: gPooMapObjHit3Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 3], [2, 6], [1, 3], [0, 6], [1, 3], [2, 6], [1, 3], [0, 6], [1, 30]]
   us:
@@ -5324,42 +5324,42 @@ entries:
   eu:
     address: 0x097307E4
     size: 1612
-- name: gUnk_09763B54
+- name: gPooMapObjHit4Tiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [0, 24]
   columns: 8
   frames:
-  - symbol: gUnk_09763AD0
+  - symbol: gPooMapObjHit4Frame0
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763ADA
+  - symbol: gPooMapObjHit4Frame1
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763AE4
+  - symbol: gPooMapObjHit4Frame2
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763AEE
+  - symbol: gPooMapObjHit4Frame3
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763AF8
+  - symbol: gPooMapObjHit4Frame4
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763B02
+  - symbol: gPooMapObjHit4Frame5
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763B0C
+  - symbol: gPooMapObjHit4Frame6
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763B16
+  - symbol: gPooMapObjHit4Frame7
     pieces:
     - [32x32, 0, -24]
-  - symbol: gUnk_09763B20
+  - symbol: gPooMapObjHit4Frame8
     pieces:
     - [8x8, 0, 0]
   animations:
-  - symbol: gUnk_09763B2A
+  - symbol: gPooMapObjHit4Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 7], [5, 26], [6, 7], [7, 6], [8, 25]]
   us:
@@ -5371,24 +5371,24 @@ entries:
   eu:
     address: 0x09730E30
     size: 4260
-- name: gUnk_09764BB8
+- name: gPooMapObjHit5Tiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnk_09764B74
+  - symbol: gPooMapObjHit5Frame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09764B7E
+  - symbol: gPooMapObjHit5Frame1
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_09764B88
+  - symbol: gPooMapObjHit5Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 9], [0, 9], [1, 9], [0, 9], [1, 9], [0, 9], [1, 30]]
-  - symbol: gUnk_09764BAE
+  - symbol: gPooMapObjHit5Anim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -5470,33 +5470,33 @@ entries:
   eu:
     address: 0x096FF568
     size: 1706
-- name: gUnk_09765012
+- name: gPooMapObjHit6Tiles
   format: sprite_sheet
   align: 4
   cell: [64, 32]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnk_09764FB8
+  - symbol: gPooMapObjHit6Frame0
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_09764FC2
+  - symbol: gPooMapObjHit6Frame1
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_09764FCC
+  - symbol: gPooMapObjHit6Frame2
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_09764FD6
+  - symbol: gPooMapObjHit6Frame3
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09764FE0
+  - symbol: gPooMapObjHit6Frame4
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09764FEA
+  - symbol: gPooMapObjHit6Frame5
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_09764FF4
+  - symbol: gPooMapObjHit6Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 30]]
   us:
@@ -5588,33 +5588,33 @@ entries:
   eu:
     address: 0x097002C0
     size: 2294
-- name: gUnk_0976626E
+- name: gPooMapObjHit7Tiles
   format: sprite_sheet
   align: 4
   cell: [64, 32]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnk_09766214
+  - symbol: gPooMapObjHit7Frame0
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_0976621E
+  - symbol: gPooMapObjHit7Frame1
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_09766228
+  - symbol: gPooMapObjHit7Frame2
     pieces:
     - [64x32, -16, 0]
-  - symbol: gUnk_09766232
+  - symbol: gPooMapObjHit7Frame3
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976623C
+  - symbol: gPooMapObjHit7Frame4
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09766246
+  - symbol: gPooMapObjHit7Frame5
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_09766250
+  - symbol: gPooMapObjHit7Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 30]]
   us:
@@ -5699,61 +5699,61 @@ entries:
   eu:
     address: 0x09700BB8
     size: 7568
-- name: gUnk_09767562
+- name: gPooMapObjHit8Tiles
   format: sprite_sheet
   align: 4
   cell: [48, 48]
   anchor: [8, 16]
   columns: 8
   frames:
-  - symbol: gUnk_09767470
+  - symbol: gPooMapObjHit8Frame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976747A
+  - symbol: gPooMapObjHit8Frame1
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09767484
+  - symbol: gPooMapObjHit8Frame2
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976748E
+  - symbol: gPooMapObjHit8Frame3
     pieces:
     - [32x32, -8, -8]
     - [16x32, 24, -8]
-  - symbol: gUnk_0976749E
+  - symbol: gPooMapObjHit8Frame4
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16]
-  - symbol: gUnk_097674BA
+  - symbol: gPooMapObjHit8Frame5
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_097674D6
+  - symbol: gPooMapObjHit8Frame6
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_097674F2
+  - symbol: gPooMapObjHit8Frame7
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_0976750E
+  - symbol: gPooMapObjHit8Frame8
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16]
-  - symbol: gUnk_0976752A
+  - symbol: gPooMapObjHit8Frame9
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_09767534
+  - symbol: gPooMapObjHit8Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 30]]
   us:
@@ -5765,66 +5765,66 @@ entries:
   eu:
     address: 0x097347D0
     size: 7858
-- name: gUnk_097356F4
+- name: gPooGaugeTiles
   format: sprite_sheet
   align: 4
   cell: [40, 40]
   anchor: [20, 20]
   columns: 8
   frames:
-  - symbol: gUnk_097355E8
+  - symbol: gPooGaugeFrame0
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20]
     - [32x8, -20, 12]
     - [8x8, 12, 12]
-  - symbol: gUnk_09735604
+  - symbol: gPooGaugeFrame1
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12, {fresh: true}]
     - [8x8, 12, 12, {fresh: true}]
-  - symbol: gUnk_09735620
+  - symbol: gPooGaugeFrame2
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12, {fresh: true}]
     - [8x8, 12, 12, {fresh: true}]
-  - symbol: gUnk_0973563C
+  - symbol: gPooGaugeFrame3
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12]
     - [8x8, 12, 12, {fresh: true}]
-  - symbol: gUnk_09735658
+  - symbol: gPooGaugeFrame4
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20]
     - [32x8, -20, 12]
     - [8x8, 12, 12]
-  - symbol: gUnk_09735674
+  - symbol: gPooGaugeFrame5
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12, {fresh: true}]
     - [8x8, 12, 12, {fresh: true}]
-  - symbol: gUnk_09735690
+  - symbol: gPooGaugeFrame6
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12, {fresh: true}]
     - [8x8, 12, 12, {fresh: true}]
-  - symbol: gUnk_097356AC
+  - symbol: gPooGaugeFrame7
     pieces:
     - [32x32, -20, -20]
     - [8x32, 12, -20, {fresh: true}]
     - [32x8, -20, 12]
     - [8x8, 12, 12, {fresh: true}]
   animations:
-  - symbol: gUnk_097356C8
+  - symbol: gPooGaugeAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 40], [1, 40], [2, 40], [3, 40]]
-  - symbol: gUnk_097356DE
+  - symbol: gPooGaugeAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 40], [5, 40], [6, 40], [7, 40]]
   us:
@@ -5836,61 +5836,61 @@ entries:
   eu:
     address: 0x09702948
     size: 6668
-- name: gUnk_09769416
+- name: gPooMapObjHit9Tiles
   format: sprite_sheet
   align: 4
   cell: [48, 48]
   anchor: [8, 16]
   columns: 8
   frames:
-  - symbol: gUnk_09769324
+  - symbol: gPooMapObjHit9Frame0
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_0976932E
+  - symbol: gPooMapObjHit9Frame1
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09769338
+  - symbol: gPooMapObjHit9Frame2
     pieces:
     - [32x32, 0, 0]
-  - symbol: gUnk_09769342
+  - symbol: gPooMapObjHit9Frame3
     pieces:
     - [32x32, -8, -8]
     - [16x32, 24, -8]
-  - symbol: gUnk_09769352
+  - symbol: gPooMapObjHit9Frame4
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16]
-  - symbol: gUnk_0976936E
+  - symbol: gPooMapObjHit9Frame5
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_0976938A
+  - symbol: gPooMapObjHit9Frame6
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_097693A6
+  - symbol: gPooMapObjHit9Frame7
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16, {fresh: true}]
-  - symbol: gUnk_097693C2
+  - symbol: gPooMapObjHit9Frame8
     pieces:
     - [32x32, -8, -16]
     - [16x32, 24, -16]
     - [32x8, -8, 16]
     - [16x8, 24, 16]
-  - symbol: gUnk_097693DE
+  - symbol: gPooMapObjHit9Frame9
     pieces:
     - [32x32, 0, 0]
   animations:
-  - symbol: gUnk_097693E8
+  - symbol: gPooMapObjHit9Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [9, 30]]
   us:
@@ -5902,75 +5902,75 @@ entries:
   eu:
     address: 0x09736684
     size: 7858
-- name: gUnk_09742CC2
+- name: gPooPileTiles
   format: sprite_sheet
   align: 4
   cell: [17, 48]
   anchor: [8, 39]
   columns: 8
   frames:
-  - symbol: gUnk_09742B98
+  - symbol: gPooPileFrame0
     pieces:
     - [16x8, -8, 1]
     - [16x16, -8, -15]
     - [16x16, -8, -31]
     - [16x8, -8, -39]
-  - symbol: gUnk_09742BB4
+  - symbol: gPooPileFrame1
     pieces:
     - [16x8, -8, 1]
     - [16x8, -8, -7]
     - [16x16, -8, -23]
     - [16x8, -8, -31]
-  - symbol: gUnk_09742BD0
+  - symbol: gPooPileFrame2
     pieces:
     - [16x8, -7, 1]
     - [16x8, -7, -7]
     - [16x16, -7, -23]
     - [16x8, -7, -31]
-  - symbol: gUnk_09742BEC
+  - symbol: gPooPileFrame3
     pieces:
     - [16x8, -8, -23]
     - [16x16, -8, -15]
     - [16x8, -8, 1]
-  - symbol: gUnk_09742C02
+  - symbol: gPooPileFrame4
     pieces:
     - [16x8, -7, -23]
     - [16x16, -7, -15]
     - [16x8, -7, 1]
-  - symbol: gUnk_09742C18
+  - symbol: gPooPileFrame5
     pieces:
     - [16x16, -8, -15]
     - [16x8, -8, 1]
-  - symbol: gUnk_09742C28
+  - symbol: gPooPileFrame6
     pieces:
     - [16x16, -7, -15]
     - [16x8, -7, 1]
-  - symbol: gUnk_09742C38
+  - symbol: gPooPileFrame7
     pieces:
     - [16x8, -8, -4]
   animations:
-  - symbol: gUnk_09742C42
+  - symbol: gPooPileAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7]]
-  - symbol: gUnk_09742C4C
+  - symbol: gPooPileAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 7], [2, 7], [1, 7], [2, 7], [1, 7]]
-  - symbol: gUnk_09742C66
+  - symbol: gPooPileAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 7]]
-  - symbol: gUnk_09742C70
+  - symbol: gPooPileAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 7], [4, 7], [3, 7], [4, 7], [3, 7]]
-  - symbol: gUnk_09742C8A
+  - symbol: gPooPileAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnk_09742C94
+  - symbol: gPooPileAnim5
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 7], [6, 7], [5, 7], [6, 7], [5, 7]]
-  - symbol: gUnk_09742CAE
+  - symbol: gPooPileAnim6
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 4]]
-  - symbol: gUnk_09742CB8
+  - symbol: gPooPileAnim7
     fields: {unk_00: 64, unk_02: 64}
     frames: [[7, 4]]
   us:
@@ -6434,30 +6434,30 @@ entries:
   eu:
     address: 0x0971423C
     size: 17830
-- name: gUnk_0974B4D8
+- name: gPooBalloonTiles
   format: sprite_sheet
   align: 4
   cell: [40, 48]
   anchor: [13, 66]
   columns: 3
   frames:
-  - symbol: gUnk_0974B484
+  - symbol: gPooBalloonFrame0
     pieces:
     - [32x32, -13, -66]
     - [8x32, 19, -66]
     - [32x16, -13, -34]
-  - symbol: gUnk_0974B49A
+  - symbol: gPooBalloonFrame1
     pieces:
     - [32x32, -13, -66]
     - [8x32, 19, -66]
     - [32x16, -13, -34]
-  - symbol: gUnk_0974B4B0
+  - symbol: gPooBalloonFrame2
     pieces:
     - [32x32, -13, -66]
     - [8x32, 19, -66]
     - [32x16, -13, -34]
   animations:
-  - symbol: gUnk_0974B4C6
+  - symbol: gPooBalloonAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 15], [1, 15], [2, 15]]
   us:
@@ -6962,20 +6962,20 @@ entries:
   eu:
     address: 0x09722D54
     size: 1344
-- name: gUnk_09755F54
+- name: gPooPoohStumpTiles
   format: sprite_sheet
   align: 4
   cell: [40, 40]
   anchor: [17, 23]
   columns: 1
   frames:
-  - symbol: gUnk_09755F34
+  - symbol: gPooPoohStumpFrame0
     pieces:
     - [32x32, -17, -23]
     - [8x16, 15, -7]
     - [16x8, -9, 9]
   animations:
-  - symbol: gUnk_09755F4A
+  - symbol: gPooPoohStumpAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -6987,18 +6987,18 @@ entries:
   eu:
     address: 0x09723294
     size: 672
-- name: gUnk_097561E8
+- name: gPooTigerStumpTiles
   format: sprite_sheet
   align: 4
   cell: [64, 32]
   anchor: [31, 29]
   columns: 1
   frames:
-  - symbol: gUnk_097561D4
+  - symbol: gPooTigerStumpFrame0
     pieces:
     - [64x32, -31, -29]
   animations:
-  - symbol: gUnk_097561DE
+  - symbol: gPooTigerStumpAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -7010,18 +7010,18 @@ entries:
   eu:
     address: 0x09723534
     size: 1044
-- name: gUnk_097565FC
+- name: gPooTiBoardTiles
   format: sprite_sheet
   align: 4
   cell: [32, 32]
   anchor: [12, 20]
   columns: 1
   frames:
-  - symbol: gUnk_097565E8
+  - symbol: gPooTiBoardFrame0
     pieces:
     - [32x32, -12, -20]
   animations:
-  - symbol: gUnk_097565F2
+  - symbol: gPooTiBoardAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -7412,39 +7412,39 @@ entries:
   eu:
     address: 0x097273F4
     size: 8918
-- name: gUnk_0975C3E2
+- name: gPooLeafTiles
   format: sprite_sheet
   align: 4
   cell: [64, 32]
   anchor: [0, 3]
   columns: 8
   frames:
-  - symbol: gUnk_0975C36C
+  - symbol: gPooLeafFrame0
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C376
+  - symbol: gPooLeafFrame1
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C380
+  - symbol: gPooLeafFrame2
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C38A
+  - symbol: gPooLeafFrame3
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C394
+  - symbol: gPooLeafFrame4
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C39E
+  - symbol: gPooLeafFrame5
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C3A8
+  - symbol: gPooLeafFrame6
     pieces:
     - [64x32, 0, -3]
-  - symbol: gUnk_0975C3B2
+  - symbol: gPooLeafFrame7
     pieces:
     - [64x32, 0, -3]
   animations:
-  - symbol: gUnk_0975C3BC
+  - symbol: gPooLeafAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 10], [2, 10], [3, 12], [4, 12], [5, 12], [6, 12], [7, 12]]
   us:
@@ -7456,21 +7456,21 @@ entries:
   eu:
     address: 0x097296CC
     size: 8310
-- name: gUnk_0975E40E
+- name: gPooTanpopoTiles
   format: sprite_sheet
   align: 4
   cell: [64, 32]
   anchor: [8, 0]
   columns: 2
   frames:
-  - symbol: gUnk_0975E3E4
+  - symbol: gPooTanpopoFrame0
     pieces:
     - [64x32, -8, 0]
-  - symbol: gUnk_0975E3EE
+  - symbol: gPooTanpopoFrame1
     pieces:
     - [64x32, -8, 0]
   animations:
-  - symbol: gUnk_0975E3F8
+  - symbol: gPooTanpopoAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7], [1, 7], [0, 7], [1, 22]]
   us:
@@ -7482,39 +7482,39 @@ entries:
   eu:
     address: 0x0972B744
     size: 2090
-- name: gUnk_0975EC8E
+- name: gPooTanpopoSeedTiles
   format: sprite_sheet
   align: 4
   cell: [70, 40]
   anchor: [11, 18]
   columns: 6
   frames:
-  - symbol: gUnk_0975EC10
+  - symbol: gPooTanpopoSeedFrame0
     pieces:
     - [32x32, -8, -10]
     - [32x32, 24, -10]
-  - symbol: gUnk_0975EC20
+  - symbol: gPooTanpopoSeedFrame1
     pieces:
     - [32x32, -9, -10]
     - [32x32, 25, -10]
-  - symbol: gUnk_0975EC30
+  - symbol: gPooTanpopoSeedFrame2
     pieces:
     - [32x32, -10, -10]
     - [32x32, 26, -10]
-  - symbol: gUnk_0975EC40
+  - symbol: gPooTanpopoSeedFrame3
     pieces:
     - [32x32, -11, -18]
     - [32x32, 27, -18]
-  - symbol: gUnk_0975EC50
+  - symbol: gPooTanpopoSeedFrame4
     pieces:
     - [32x32, -11, -18]
     - [32x32, 27, -18]
-  - symbol: gUnk_0975EC60
+  - symbol: gPooTanpopoSeedFrame5
     pieces:
     - [32x32, -11, -16]
     - [32x32, 27, -16]
   animations:
-  - symbol: gUnk_0975EC70
+  - symbol: gPooTanpopoSeedAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 6], [5, 5]]
   us:
@@ -7526,144 +7526,144 @@ entries:
   eu:
     address: 0x0972BF70
     size: 6270
-- name: gUnk_097606E8
+- name: gPooMapbeeTiles
   format: sprite_sheet
   align: 4
   cell: [25, 24]
   anchor: [-4, 4]
   columns: 8
   frames:
-  - symbol: gUnk_09760490
+  - symbol: gPooMapbeeFrame0
     pieces:
     - [8x16, 12, 0]
-  - symbol: gUnk_0976049A
+  - symbol: gPooMapbeeFrame1
     pieces:
     - [8x16, 11, -1]
-  - symbol: gUnk_097604A4
+  - symbol: gPooMapbeeFrame2
     pieces:
     - [8x16, 10, -2]
-  - symbol: gUnk_097604AE
+  - symbol: gPooMapbeeFrame3
     pieces:
     - [8x16, 9, -3]
-  - symbol: gUnk_097604B8
+  - symbol: gPooMapbeeFrame4
     pieces:
     - [8x16, 8, -4]
-  - symbol: gUnk_097604C2
+  - symbol: gPooMapbeeFrame5
     pieces:
     - [8x16, 7, -4]
-  - symbol: gUnk_097604CC
+  - symbol: gPooMapbeeFrame6
     pieces:
     - [8x16, 6, -4]
-  - symbol: gUnk_097604D6
+  - symbol: gPooMapbeeFrame7
     pieces:
     - [8x16, 5, -3]
-  - symbol: gUnk_097604E0
+  - symbol: gPooMapbeeFrame8
     pieces:
     - [8x16, 4, -2]
-  - symbol: gUnk_097604EA
+  - symbol: gPooMapbeeFrame9
     pieces:
     - [8x16, 4, -1]
-  - symbol: gUnk_097604F4
+  - symbol: gPooMapbeeFrame10
     pieces:
     - [8x16, 4, 0]
-  - symbol: gUnk_097604FE
+  - symbol: gPooMapbeeFrame11
     pieces:
     - [8x16, 4, 1]
-  - symbol: gUnk_09760508
+  - symbol: gPooMapbeeFrame12
     pieces:
     - [8x16, 4, 2]
-  - symbol: gUnk_09760512
+  - symbol: gPooMapbeeFrame13
     pieces:
     - [8x16, 5, 3]
-  - symbol: gUnk_0976051C
+  - symbol: gPooMapbeeFrame14
     pieces:
     - [8x16, 6, 4]
-  - symbol: gUnk_09760526
+  - symbol: gPooMapbeeFrame15
     pieces:
     - [8x16, 7, 4]
-  - symbol: gUnk_09760530
+  - symbol: gPooMapbeeFrame16
     pieces:
     - [8x16, 9, 4, {hflip: true}]
-  - symbol: gUnk_0976053A
+  - symbol: gPooMapbeeFrame17
     pieces:
     - [8x16, 10, 3, {hflip: true}]
-  - symbol: gUnk_09760544
+  - symbol: gPooMapbeeFrame18
     pieces:
     - [8x16, 11, 2, {hflip: true}]
-  - symbol: gUnk_0976054E
+  - symbol: gPooMapbeeFrame19
     pieces:
     - [8x16, 12, 1, {hflip: true}]
-  - symbol: gUnk_09760558
+  - symbol: gPooMapbeeFrame20
     pieces:
     - [8x16, 13, 0, {hflip: true}]
-  - symbol: gUnk_09760562
+  - symbol: gPooMapbeeFrame21
     pieces:
     - [8x16, 14, -1, {hflip: true}]
-  - symbol: gUnk_0976056C
+  - symbol: gPooMapbeeFrame22
     pieces:
     - [8x16, 15, -2, {hflip: true}]
-  - symbol: gUnk_09760576
+  - symbol: gPooMapbeeFrame23
     pieces:
     - [8x16, 16, -3, {hflip: true}]
-  - symbol: gUnk_09760580
+  - symbol: gPooMapbeeFrame24
     pieces:
     - [8x16, 17, -4, {hflip: true}]
-  - symbol: gUnk_0976058A
+  - symbol: gPooMapbeeFrame25
     pieces:
     - [8x16, 18, -4, {hflip: true}]
-  - symbol: gUnk_09760594
+  - symbol: gPooMapbeeFrame26
     pieces:
     - [8x16, 19, -4, {hflip: true}]
-  - symbol: gUnk_0976059E
+  - symbol: gPooMapbeeFrame27
     pieces:
     - [8x16, 20, -3, {hflip: true}]
-  - symbol: gUnk_097605A8
+  - symbol: gPooMapbeeFrame28
     pieces:
     - [8x16, 21, -2, {hflip: true}]
-  - symbol: gUnk_097605B2
+  - symbol: gPooMapbeeFrame29
     pieces:
     - [8x16, 21, -1, {hflip: true}]
-  - symbol: gUnk_097605BC
+  - symbol: gPooMapbeeFrame30
     pieces:
     - [8x16, 21, 0, {hflip: true}]
-  - symbol: gUnk_097605C6
+  - symbol: gPooMapbeeFrame31
     pieces:
     - [8x16, 21, 1, {hflip: true}]
-  - symbol: gUnk_097605D0
+  - symbol: gPooMapbeeFrame32
     pieces:
     - [8x16, 21, 2, {hflip: true}]
-  - symbol: gUnk_097605DA
+  - symbol: gPooMapbeeFrame33
     pieces:
     - [8x16, 20, 3, {hflip: true}]
-  - symbol: gUnk_097605E4
+  - symbol: gPooMapbeeFrame34
     pieces:
     - [8x16, 19, 4, {hflip: true}]
-  - symbol: gUnk_097605EE
+  - symbol: gPooMapbeeFrame35
     pieces:
     - [8x16, 18, 4, {hflip: true}]
-  - symbol: gUnk_097605F8
+  - symbol: gPooMapbeeFrame36
     pieces:
     - [8x16, 16, 4]
-  - symbol: gUnk_09760602
+  - symbol: gPooMapbeeFrame37
     pieces:
     - [8x16, 15, 3]
-  - symbol: gUnk_0976060C
+  - symbol: gPooMapbeeFrame38
     pieces:
     - [8x16, 14, 2]
-  - symbol: gUnk_09760616
+  - symbol: gPooMapbeeFrame39
     pieces:
     - [8x16, 13, 1]
-  - symbol: gUnk_09760620
+  - symbol: gPooMapbeeFrame40
     pieces:
     - [8x16, 12, 0]
-  - symbol: gUnk_0976062A
+  - symbol: gPooMapbeeFrame41
     pieces:
     - [8x8, 12, 4]
   animations:
-  - symbol: gUnk_09760634
+  - symbol: gPooMapbeeAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[41, 4]]
-  - symbol: gUnk_0976063E
+  - symbol: gPooMapbeeAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 4], [16, 4], [17, 4], [18, 4], [19, 4], [20, 4], [21, 4], [22, 4], [23, 4], [24, 4], [25, 4], [26, 4], [27, 4], [28, 4], [29, 4], [30, 4], [31, 4], [32, 4], [33, 4], [34, 4], [35, 4], [36, 4], [37, 4], [38, 4], [39, 4], [40, 4]]
   us:
@@ -7675,123 +7675,123 @@ entries:
   eu:
     address: 0x0972D7F0
     size: 760
-- name: gUnk_09760986
+- name: gPooMapbutterflyTiles
   format: sprite_sheet
   align: 4
   cell: [44, 12]
   anchor: [10, 3]
   columns: 8
   frames:
-  - symbol: gUnk_09760788
+  - symbol: gPooMapbutterflyFrame0
     pieces:
     - [8x8, 12, 0]
-  - symbol: gUnk_09760792
+  - symbol: gPooMapbutterflyFrame1
     pieces:
     - [8x8, 14, -1]
-  - symbol: gUnk_0976079C
+  - symbol: gPooMapbutterflyFrame2
     pieces:
     - [8x8, 16, 0]
-  - symbol: gUnk_097607A6
+  - symbol: gPooMapbutterflyFrame3
     pieces:
     - [8x8, 18, 1]
-  - symbol: gUnk_097607B0
+  - symbol: gPooMapbutterflyFrame4
     pieces:
     - [8x8, 20, 1]
-  - symbol: gUnk_097607BA
+  - symbol: gPooMapbutterflyFrame5
     pieces:
     - [8x8, 22, 0]
-  - symbol: gUnk_097607C4
+  - symbol: gPooMapbutterflyFrame6
     pieces:
     - [8x8, 24, -1]
-  - symbol: gUnk_097607CE
+  - symbol: gPooMapbutterflyFrame7
     pieces:
     - [8x8, 26, -2]
-  - symbol: gUnk_097607D8
+  - symbol: gPooMapbutterflyFrame8
     pieces:
     - [8x8, 24, -2]
-  - symbol: gUnk_097607E2
+  - symbol: gPooMapbutterflyFrame9
     pieces:
     - [8x8, 22, -3]
-  - symbol: gUnk_097607EC
+  - symbol: gPooMapbutterflyFrame10
     pieces:
     - [8x8, 20, -2]
-  - symbol: gUnk_097607F6
+  - symbol: gPooMapbutterflyFrame11
     pieces:
     - [8x8, 18, -1]
-  - symbol: gUnk_09760800
+  - symbol: gPooMapbutterflyFrame12
     pieces:
     - [16x8, 16, 0]
-  - symbol: gUnk_0976080A
+  - symbol: gPooMapbutterflyFrame13
     pieces:
     - [8x8, 14, -1]
-  - symbol: gUnk_09760814
+  - symbol: gPooMapbutterflyFrame14
     pieces:
     - [8x8, 12, 1]
-  - symbol: gUnk_0976081E
+  - symbol: gPooMapbutterflyFrame15
     pieces:
     - [16x8, 10, 0]
-  - symbol: gUnk_09760828
+  - symbol: gPooMapbutterflyFrame16
     pieces:
     - [8x8, 8, 0, {hflip: true}]
-  - symbol: gUnk_09760832
+  - symbol: gPooMapbutterflyFrame17
     pieces:
     - [8x8, 6, -1, {hflip: true}]
-  - symbol: gUnk_0976083C
+  - symbol: gPooMapbutterflyFrame18
     pieces:
     - [8x8, 4, 0, {hflip: true}]
-  - symbol: gUnk_09760846
+  - symbol: gPooMapbutterflyFrame19
     pieces:
     - [8x8, 2, 1, {hflip: true}]
-  - symbol: gUnk_09760850
+  - symbol: gPooMapbutterflyFrame20
     pieces:
     - [8x8, 0, 0, {hflip: true}]
-  - symbol: gUnk_0976085A
+  - symbol: gPooMapbutterflyFrame21
     pieces:
     - [8x8, -2, -1, {hflip: true}]
-  - symbol: gUnk_09760864
+  - symbol: gPooMapbutterflyFrame22
     pieces:
     - [8x8, -4, 0, {hflip: true}]
-  - symbol: gUnk_0976086E
+  - symbol: gPooMapbutterflyFrame23
     pieces:
     - [8x8, -6, 0, {hflip: true}]
-  - symbol: gUnk_09760878
+  - symbol: gPooMapbutterflyFrame24
     pieces:
     - [8x8, -8, 0, {hflip: true}]
-  - symbol: gUnk_09760882
+  - symbol: gPooMapbutterflyFrame25
     pieces:
     - [8x8, -10, 0, {hflip: true}]
-  - symbol: gUnk_0976088C
+  - symbol: gPooMapbutterflyFrame26
     pieces:
     - [8x8, -8, 1, {hflip: true}]
-  - symbol: gUnk_09760896
+  - symbol: gPooMapbutterflyFrame27
     pieces:
     - [8x8, -6, 1, {hflip: true}]
-  - symbol: gUnk_097608A0
+  - symbol: gPooMapbutterflyFrame28
     pieces:
     - [16x8, -4, 1]
-  - symbol: gUnk_097608AA
+  - symbol: gPooMapbutterflyFrame29
     pieces:
     - [8x8, -2, 0]
-  - symbol: gUnk_097608B4
+  - symbol: gPooMapbutterflyFrame30
     pieces:
     - [8x8, 0, 1]
-  - symbol: gUnk_097608BE
+  - symbol: gPooMapbutterflyFrame31
     pieces:
     - [16x8, 2, 0]
-  - symbol: gUnk_097608C8
+  - symbol: gPooMapbutterflyFrame32
     pieces:
     - [16x8, 4, 0]
-  - symbol: gUnk_097608D2
+  - symbol: gPooMapbutterflyFrame33
     pieces:
     - [8x8, 6, -1]
-  - symbol: gUnk_097608DC
+  - symbol: gPooMapbutterflyFrame34
     pieces:
     - [8x8, 8, 0]
-  - symbol: gUnk_097608E6
+  - symbol: gPooMapbutterflyFrame35
     pieces:
     - [16x8, 10, 0]
   animations:
-  - symbol: gUnk_097608F0
+  - symbol: gPooMapbutterflyAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6]]
   us:
@@ -7815,7 +7815,7 @@ entries:
   eu:
     address: 0x0978C6E0
     size: 22528
-- name: gUnk_097B4578
+- name: gPooMapanime0Tiles
   format: tiles4
   us:
     address: 0x097B4578
@@ -7826,7 +7826,7 @@ entries:
   eu:
     address: 0x09791EE0
     size: 3744
-- name: gUnk_097B5418
+- name: gPooMapanime1Tiles
   format: tiles4
   us:
     address: 0x097B5418

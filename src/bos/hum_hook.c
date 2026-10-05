@@ -782,7 +782,7 @@ void task_hum_hook_3(HookWork* work) {
 }
 
 void task_hum_hook_moon_0(HookMoonWork* work) {
-    work->tiles = LoadObjTiles(gUnk_08B5A872, 0xC00);
+    work->tiles = LoadObjTiles(gHumHookMoonTiles, 0xC00);
     PushPaletteEffect(0);
     work->palette = LoadObjPalette(gUnk_08F6DC64, 0x20);
     PopPaletteEffect();
@@ -807,12 +807,12 @@ void task_hum_hook_moon_2(HookMoonWork* work) {
     y = 208 - (gBtlWork->viewY >> 9);
     s = gSineTable[(u8)work->angle];
     y += s >> 5;
-    DrawSprite(x + 64, y - 28, gUnk_08B5A854, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFF);
-    DrawSprite(x - 144, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x - 88, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x - 32, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x + 24, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
-    DrawSprite(x + 80, y, gUnk_08B5A85E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 64, y - 28, gHumHookMoonFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFF);
+    DrawSprite(x - 144, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 88, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x - 32, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 24, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
+    DrawSprite(x + 80, y, gHumHookMoonFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 0xFFFE);
     v = FadeGetAmount();
 
     if (v != 0) {

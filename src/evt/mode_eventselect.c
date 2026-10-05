@@ -463,8 +463,8 @@ void TinkerbellParticleInit(EffectWork* work, EventCharaWork* chara) {
     work->vx = GetRandom() % 232 + 76;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(work->tiles, gUnk_088A5D7A);
-    AnimInit(&work->anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
+    SetObjTileSource(work->tiles, gSmnTinkEffTiles);
+    AnimInit(&work->anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
     AnimStart(&work->anim, GetRandom() % 3, 0);
     work->gfx = AnimGetGfx(&work->anim);
     work->followFlip = 0;

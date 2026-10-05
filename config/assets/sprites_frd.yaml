@@ -104,36 +104,36 @@ entries:
     address: 0x09EB6000
   eu:
     address: 0x09F591DC
-- name: gUnk_09EDE594
+- name: gFrdJackFrames
   record: SpriteTable
-  items: [gUnk_08874FE4, gUnk_08875006, gUnk_08875010, gUnk_0887504A, gUnk_0887505A, gUnk_08875076, gUnk_0887508C, gUnk_088750A8]
+  items: [gFrdJackFrame0, gFrdJackFrame1, gFrdJackFrame2, gFrdJackFrame3, gFrdJackFrame4, gFrdJackFrame5, gFrdJackFrame6, gFrdJackFrame7]
   us:
     address: 0x09EDE594
   jp:
     address: 0x09EB6010
   eu:
     address: 0x09F591EC
-- name: gUnk_09EDE5B4
+- name: gFrdJackAnims
   record: AnimTable
-  items: [gUnk_088750D0, gUnk_088750F6, gUnk_08875100, gUnk_0887510A, gUnk_08875114]
+  items: [gFrdJackAnim0, gFrdJackAnim1, gFrdJackAnim2, gFrdJackAnim3, gFrdJackAnim4]
   us:
     address: 0x09EDE5B4
   jp:
     address: 0x09EB6030
   eu:
     address: 0x09F5920C
-- name: gUnk_09EDE5C8
+- name: gFrdArielFrames
   record: SpriteTable
-  items: [gUnk_08877704, gUnk_0887771A, gUnk_0887772A, gUnk_08877740, gUnk_08877750, gUnk_08877766, gUnk_0887777C, gUnk_08877792, gUnk_088777A2, gUnk_088777AC]
+  items: [gFrdArielFrame0, gFrdArielFrame1, gFrdArielFrame2, gFrdArielFrame3, gFrdArielFrame4, gFrdArielFrame5, gFrdArielFrame6, gFrdArielFrame7, gFrdArielFrame8, gFrdArielFrame9]
   us:
     address: 0x09EDE5C8
   jp:
     address: 0x09EB6044
   eu:
     address: 0x09F59220
-- name: gUnk_09EDE5F0
+- name: gFrdArielAnims
   record: AnimTable
-  items: [gUnk_088777BC, gUnk_088777D2, gUnk_088777DC]
+  items: [gFrdArielAnim0, gFrdArielAnim1, gFrdArielAnim2]
   us:
     address: 0x09EDE5F0
   jp:
@@ -440,24 +440,24 @@ entries:
   eu:
     address: 0x0889DC7C
     size: 11402
-- name: gUnk_08875122
+- name: gFrdJackTiles
   format: sprite_sheet
   align: 4
   cell: [94, 76]
   anchor: [48, 69]
   columns: 8
   frames:
-  - symbol: gUnk_08874FE4
+  - symbol: gFrdJackFrame0
     pieces:
     - [32x32, -11, -29]
     - [8x16, -18, -21]
     - [32x16, -19, -44]
     - [16x8, -19, -51]
     - [8x16, -26, -52, {layer: 1}]
-  - symbol: gUnk_08875006
+  - symbol: gFrdJackFrame1
     pieces:
     - [32x64, -7, -57]
-  - symbol: gUnk_08875010
+  - symbol: gFrdJackFrame2
     pieces:
     - [32x32, -10, -62]
     - [16x8, 6, -69]
@@ -468,28 +468,28 @@ entries:
     - [16x16, 14, -38]
     - [16x16, -18, -30]
     - [16x16, -10, -38]
-  - symbol: gUnk_0887504A
+  - symbol: gFrdJackFrame3
     pieces:
     - [32x64, -13, -65]
     - [16x16, 11, -9]
-  - symbol: gUnk_0887505A
+  - symbol: gFrdJackFrame4
     pieces:
     - [32x64, -17, -58]
     - [8x16, 14, -10]
     - [32x16, -48, -42]
     - [8x8, -24, -49]
-  - symbol: gUnk_08875076
+  - symbol: gFrdJackFrame5
     pieces:
     - [32x64, -10, -58]
     - [32x16, -41, -34, {layer: 1}]
     - [8x8, -17, -41]
-  - symbol: gUnk_0887508C
+  - symbol: gFrdJackFrame6
     pieces:
     - [64x32, -26, -49]
     - [32x16, -10, -18]
     - [8x8, 14, -3]
     - [8x8, 14, -56, {layer: 1}]
-  - symbol: gUnk_088750A8
+  - symbol: gFrdJackFrame7
     pieces:
     - [32x32, -9, -45]
     - [32x16, -9, -14]
@@ -498,19 +498,19 @@ entries:
     - [16x16, -24, -45]
     - [8x8, -16, -30, {layer: 1}]
   animations:
-  - symbol: gUnk_088750D0
+  - symbol: gFrdJackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 10], [1, 10], [2, 11], [3, 8], [4, 7], [5, 16], [6, 8], [7, 10]]
-  - symbol: gUnk_088750F6
+  - symbol: gFrdJackAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[3, 4]]
-  - symbol: gUnk_08875100
+  - symbol: gFrdJackAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[7, 4]]
-  - symbol: gUnk_0887510A
+  - symbol: gFrdJackAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
-  - symbol: gUnk_08875114
+  - symbol: gFrdJackAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [7, 4]]
   us:
@@ -522,65 +522,65 @@ entries:
   eu:
     address: 0x088A0908
     size: 10014
-- name: gUnk_088777F6
+- name: gFrdArielTiles
   format: sprite_sheet
   align: 4
   cell: [88, 62]
   anchor: [28, 36]
   columns: 8
   frames:
-  - symbol: gUnk_08877704
+  - symbol: gFrdArielFrame0
     pieces:
     - [64x32, -28, -30]
     - [32x16, 28, -14]
     - [16x16, -12, 0]
-  - symbol: gUnk_0887771A
+  - symbol: gFrdArielFrame1
     pieces:
     - [64x32, -28, -19]
     - [32x16, 28, -19]
-  - symbol: gUnk_0887772A
+  - symbol: gFrdArielFrame2
     pieces:
     - [64x32, -25, -17, {layer: 1}]
     - [8x16, -9, -31]
     - [16x16, 37, -17, {layer: 2}]
-  - symbol: gUnk_08877740
+  - symbol: gFrdArielFrame3
     pieces:
     - [64x32, -28, -25]
     - [32x16, 28, -17]
-  - symbol: gUnk_08877750
+  - symbol: gFrdArielFrame4
     pieces:
     - [32x32, -18, -36]
     - [32x32, -2, -6]
     - [8x8, 12, -20]
-  - symbol: gUnk_08877766
+  - symbol: gFrdArielFrame5
     pieces:
     - [32x32, -25, -34]
     - [16x32, -1, -10]
     - [8x16, 5, -25]
-  - symbol: gUnk_0887777C
+  - symbol: gFrdArielFrame6
     pieces:
     - [32x32, -16, -23]
     - [8x32, 15, -23]
     - [32x8, -8, 8]
-  - symbol: gUnk_08877792
+  - symbol: gFrdArielFrame7
     pieces:
     - [32x32, -12, -25]
     - [16x32, 18, -25]
-  - symbol: gUnk_088777A2
+  - symbol: gFrdArielFrame8
     pieces:
     - [64x32, -26, -25]
-  - symbol: gUnk_088777AC
+  - symbol: gFrdArielFrame9
     pieces:
     - [64x32, -26, -26]
     - [32x16, 22, -18]
   animations:
-  - symbol: gUnk_088777BC
+  - symbol: gFrdArielAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5]]
-  - symbol: gUnk_088777D2
+  - symbol: gFrdArielAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
-  - symbol: gUnk_088777DC
+  - symbol: gFrdArielAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 8], [6, 9], [7, 10], [8, 7], [9, 6]]
   us:

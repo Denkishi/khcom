@@ -107,18 +107,18 @@ entries:
     address: 0x09EB7278
   eu:
     address: 0x09F5A454
-- name: gUnk_09EDF800
+- name: gEmy00EmergeFrames
   record: SpriteTable
-  items: [gUnk_089559BC, gUnk_089559BE, gUnk_089559CE, gUnk_089559D8, gUnk_089559F4, gUnk_08955A04, gUnk_08955A14, gUnk_08955A24, gUnk_08955A34, gUnk_08955A3E, gUnk_08955A48, gUnk_08955A52]
+  items: [gEmy00EmergeFrame0, gEmy00EmergeFrame1, gEmy00EmergeFrame2, gEmy00EmergeFrame3, gEmy00EmergeFrame4, gEmy00EmergeFrame5, gEmy00EmergeFrame6, gEmy00EmergeFrame7, gEmy00EmergeFrame8, gEmy00EmergeFrame9, gEmy00EmergeFrame10, gEmy00EmergeFrame11]
   us:
     address: 0x09EDF800
   jp:
     address: 0x09EB727C
   eu:
     address: 0x09F5A458
-- name: gUnk_09EDF830
+- name: gEmy00EmergeAnims
   record: AnimTable
-  items: [gUnk_08955A62]
+  items: [gEmy00EmergeAnim0]
   us:
     address: 0x09EDF830
   jp:
@@ -143,18 +143,18 @@ entries:
     address: 0x09EB72D8
   eu:
     address: 0x09F5A4B4
-- name: gUnk_09EDF860
+- name: gEmy00L00BackFrames
   record: SpriteTable
-  items: [gUnk_08958A10, gUnk_08958A20, gUnk_08958A30, gUnk_08958A46, gUnk_08958A5C, gUnk_08958A72, gUnk_08958A82, gUnk_08958A92]
+  items: [gEmy00L00BackFrame0, gEmy00L00BackFrame1, gEmy00L00BackFrame2, gEmy00L00BackFrame3, gEmy00L00BackFrame4, gEmy00L00BackFrame5, gEmy00L00BackFrame6, gEmy00L00BackFrame7]
   us:
     address: 0x09EDF860
   jp:
     address: 0x09EB72DC
   eu:
     address: 0x09F5A4B8
-- name: gUnk_09EDF880
+- name: gEmy00L00BackAnims
   record: AnimTable
-  items: [gUnk_08958AA2]
+  items: [gEmy00L00BackAnim0]
   us:
     address: 0x09EDF880
   jp:
@@ -179,18 +179,18 @@ entries:
     address: 0x09EB7320
   eu:
     address: 0x09F5A4FC
-- name: gUnk_09EDF8A8
+- name: gEmy00L02BackFrames
   record: SpriteTable
-  items: [gUnk_0895B22C, gUnk_0895B23C, gUnk_0895B24C, gUnk_0895B25C, gUnk_0895B26C, gUnk_0895B27C, gUnk_0895B286, gUnk_0895B290]
+  items: [gEmy00L02BackFrame0, gEmy00L02BackFrame1, gEmy00L02BackFrame2, gEmy00L02BackFrame3, gEmy00L02BackFrame4, gEmy00L02BackFrame5, gEmy00L02BackFrame6, gEmy00L02BackFrame7]
   us:
     address: 0x09EDF8A8
   jp:
     address: 0x09EB7324
   eu:
     address: 0x09F5A500
-- name: gUnk_09EDF8C8
+- name: gEmy00L02BackAnims
   record: AnimTable
-  items: [gUnk_0895B29A]
+  items: [gEmy00L02BackAnim0]
   us:
     address: 0x09EDF8C8
   jp:
@@ -215,18 +215,18 @@ entries:
     address: 0x09EB7368
   eu:
     address: 0x09F5A544
-- name: gUnk_09EDF8F0
+- name: gEmy00L04BackFrames
   record: SpriteTable
-  items: [gUnk_0895D908, gUnk_0895D918, gUnk_0895D92E, gUnk_0895D944, gUnk_0895D954, gUnk_0895D95E, gUnk_0895D96E, gUnk_0895D97E]
+  items: [gEmy00L04BackFrame0, gEmy00L04BackFrame1, gEmy00L04BackFrame2, gEmy00L04BackFrame3, gEmy00L04BackFrame4, gEmy00L04BackFrame5, gEmy00L04BackFrame6, gEmy00L04BackFrame7]
   us:
     address: 0x09EDF8F0
   jp:
     address: 0x09EB736C
   eu:
     address: 0x09F5A548
-- name: gUnk_09EDF910
+- name: gEmy00L04BackAnims
   record: AnimTable
-  items: [gUnk_0895D994]
+  items: [gEmy00L04BackAnim0]
   us:
     address: 0x09EDF910
   jp:
@@ -989,18 +989,18 @@ entries:
     address: 0x09EB7A54
   eu:
     address: 0x09F5AC30
-- name: gUnk_09EDFFDC
+- name: gEmy08GasFrames
   record: SpriteTable
-  items: [gUnk_089C2868, gUnk_089C2878, gUnk_089C2888, gUnk_089C2898, gUnk_089C28A2, gUnk_089C28B2, gUnk_089C28C2, gUnk_089C28CC, gUnk_089C28D6, gUnk_089C28E6]
+  items: [gEmy08GasFrame0, gEmy08GasFrame1, gEmy08GasFrame2, gEmy08GasFrame3, gEmy08GasFrame4, gEmy08GasFrame5, gEmy08GasFrame6, gEmy08GasFrame7, gEmy08GasFrame8, gEmy08GasFrame9]
   us:
     address: 0x09EDFFDC
   jp:
     address: 0x09EB7A58
   eu:
     address: 0x09F5AC34
-- name: gUnk_09EE0004
+- name: gEmy08GasAnims
   record: AnimTable
-  items: [gUnk_089C28F6]
+  items: [gEmy08GasAnim0]
   us:
     address: 0x09EE0004
   jp:
@@ -3059,18 +3059,18 @@ entries:
     address: 0x09EB8B50
   eu:
     address: 0x09F5BD2C
-- name: gUnk_09EE2608
+- name: gEmyTestFrames
   record: SpriteTable
-  items: [gUnk_08C69188, gUnk_08C69198, gUnk_08C691A8, gUnk_08C691B8]
+  items: [gEmyTestFrame0, gEmyTestFrame1, gEmyTestFrame2, gEmyTestFrame3]
   us:
     address: 0x09EE2608
   jp:
     address: 0x09EBA084
   eu:
     address: 0x09F5D414
-- name: gUnk_09EE2618
+- name: gEmyTestAnims
   record: AnimTable
-  items: [gUnk_08C691C8, gUnk_08C691D2, gUnk_08C691DC, gUnk_08C691E6]
+  items: [gEmyTestAnim0, gEmyTestAnim1, gEmyTestAnim2, gEmyTestAnim3]
   us:
     address: 0x09EE2618
   jp:
@@ -3237,59 +3237,59 @@ entries:
   eu:
     address: 0x0897EE54
     size: 9356
-- name: gUnk_08955A94
+- name: gEmy00EmergeTiles
   format: sprite_sheet
   align: 4
   cell: [44, 45]
   anchor: [23, 36]
   columns: 8
   frames:
-  - symbol: gUnk_089559BC
+  - symbol: gEmy00EmergeFrame0
     pieces: []
-  - symbol: gUnk_089559BE
+  - symbol: gEmy00EmergeFrame1
     pieces:
     - [16x8, -11, -4]
     - [8x8, 5, -4]
-  - symbol: gUnk_089559CE
+  - symbol: gEmy00EmergeFrame2
     pieces:
     - [32x16, -15, -10]
-  - symbol: gUnk_089559D8
+  - symbol: gEmy00EmergeFrame3
     pieces:
     - [32x16, -20, -15]
     - [8x16, 12, -15]
     - [32x8, -20, 1]
     - [8x8, 12, 1]
-  - symbol: gUnk_089559F4
+  - symbol: gEmy00EmergeFrame4
     pieces:
     - [32x32, -20, -23]
     - [16x32, 4, -23]
-  - symbol: gUnk_08955A04
+  - symbol: gEmy00EmergeFrame5
     pieces:
     - [32x32, -20, -23]
     - [16x32, 4, -23]
-  - symbol: gUnk_08955A14
+  - symbol: gEmy00EmergeFrame6
     pieces:
     - [32x32, -20, -23]
     - [16x32, 4, -23]
-  - symbol: gUnk_08955A24
+  - symbol: gEmy00EmergeFrame7
     pieces:
     - [32x32, -15, -26]
     - [16x16, -23, -18]
-  - symbol: gUnk_08955A34
+  - symbol: gEmy00EmergeFrame8
     pieces:
     - [32x32, -15, -26]
-  - symbol: gUnk_08955A3E
+  - symbol: gEmy00EmergeFrame9
     pieces:
     - [32x32, -15, -26]
-  - symbol: gUnk_08955A48
+  - symbol: gEmy00EmergeFrame10
     pieces:
     - [32x32, -17, -28]
-  - symbol: gUnk_08955A52
+  - symbol: gEmy00EmergeFrame11
     pieces:
     - [32x32, -11, -28]
     - [16x16, -11, -36]
   animations:
-  - symbol: gUnk_08955A62
+  - symbol: gEmy00EmergeAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [6, 7], [7, 7], [8, 7], [9, 7], [10, 7], [11, 7]]
   us:
@@ -3360,50 +3360,50 @@ entries:
   eu:
     address: 0x08982AF8
     size: 6204
-- name: gUnk_08958AC8
+- name: gEmy00L00BackTiles
   format: sprite_sheet
   align: 4
   cell: [48, 42]
   anchor: [25, 34]
   columns: 8
   frames:
-  - symbol: gUnk_08958A10
+  - symbol: gEmy00L00BackFrame0
     pieces:
     - [32x32, -19, -34]
     - [32x16, -19, -10]
-  - symbol: gUnk_08958A20
+  - symbol: gEmy00L00BackFrame1
     pieces:
     - [32x32, -22, -34]
     - [32x16, -22, -10]
-  - symbol: gUnk_08958A30
+  - symbol: gEmy00L00BackFrame2
     pieces:
     - [32x32, -21, -34]
     - [8x8, 10, -26, {layer: 1}]
     - [32x8, -21, -3]
-  - symbol: gUnk_08958A46
+  - symbol: gEmy00L00BackFrame3
     pieces:
     - [32x32, -17, -32]
     - [16x16, -9, -8]
     - [16x8, 7, -24]
-  - symbol: gUnk_08958A5C
+  - symbol: gEmy00L00BackFrame4
     pieces:
     - [32x32, -19, -32]
     - [16x16, -3, -8]
     - [16x16, 5, -24]
-  - symbol: gUnk_08958A72
+  - symbol: gEmy00L00BackFrame5
     pieces:
     - [32x32, -17, -24]
     - [16x16, -25, -24]
-  - symbol: gUnk_08958A82
+  - symbol: gEmy00L00BackFrame6
     pieces:
     - [32x32, -13, -24]
     - [16x16, -21, -24]
-  - symbol: gUnk_08958A92
+  - symbol: gEmy00L00BackFrame7
     pieces:
     - [32x32, -16, -26]
     - [16x16, -16, -34]
   animations:
-  - symbol: gUnk_08958AA2
+  - symbol: gEmy00L00BackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 11], [1, 11], [2, 11], [3, 11], [4, 11], [5, 11], [6, 11], [7, 11]]
   us:
@@ -3463,44 +3463,44 @@ entries:
   eu:
     address: 0x089859CC
     size: 4482
-- name: gUnk_0895B2C0
+- name: gEmy00L02BackTiles
   format: sprite_sheet
   align: 4
   cell: [41, 44]
   anchor: [22, 30]
   columns: 8
   frames:
-  - symbol: gUnk_0895B22C
+  - symbol: gEmy00L02BackFrame0
     pieces:
     - [32x32, -21, -26]
     - [16x16, 3, -10]
-  - symbol: gUnk_0895B23C
+  - symbol: gEmy00L02BackFrame1
     pieces:
     - [32x32, -19, -30]
     - [16x16, -11, -6]
-  - symbol: gUnk_0895B24C
+  - symbol: gEmy00L02BackFrame2
     pieces:
     - [32x32, -22, -29]
     - [16x16, -6, -5]
-  - symbol: gUnk_0895B25C
+  - symbol: gEmy00L02BackFrame3
     pieces:
     - [32x32, -22, -27]
     - [16x16, -6, -3]
-  - symbol: gUnk_0895B26C
+  - symbol: gEmy00L02BackFrame4
     pieces:
     - [32x32, -19, -26]
     - [16x16, -3, -2]
-  - symbol: gUnk_0895B27C
+  - symbol: gEmy00L02BackFrame5
     pieces:
     - [32x32, -18, -24]
-  - symbol: gUnk_0895B286
+  - symbol: gEmy00L02BackFrame6
     pieces:
     - [32x32, -18, -25]
-  - symbol: gUnk_0895B290
+  - symbol: gEmy00L02BackFrame7
     pieces:
     - [32x32, -17, -27]
   animations:
-  - symbol: gUnk_0895B29A
+  - symbol: gEmy00L02BackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9]]
   us:
@@ -3566,49 +3566,49 @@ entries:
   eu:
     address: 0x08987E64
     size: 5062
-- name: gUnk_0895D9BA
+- name: gEmy00L04BackTiles
   format: sprite_sheet
   align: 4
   cell: [51, 48]
   anchor: [29, 37]
   columns: 8
   frames:
-  - symbol: gUnk_0895D908
+  - symbol: gEmy00L04BackFrame0
     pieces:
     - [32x32, -26, -27]
     - [16x16, -2, -27]
-  - symbol: gUnk_0895D918
+  - symbol: gEmy00L04BackFrame1
     pieces:
     - [32x32, -26, -29]
     - [16x16, -26, -5]
     - [16x8, -2, -5]
-  - symbol: gUnk_0895D92E
+  - symbol: gEmy00L04BackFrame2
     pieces:
     - [32x32, -21, -30]
     - [16x16, -29, -22]
     - [8x16, 3, -6]
-  - symbol: gUnk_0895D944
+  - symbol: gEmy00L04BackFrame3
     pieces:
     - [32x32, -21, -37]
     - [16x16, -5, -13]
-  - symbol: gUnk_0895D954
+  - symbol: gEmy00L04BackFrame4
     pieces:
     - [32x32, -19, -33]
-  - symbol: gUnk_0895D95E
+  - symbol: gEmy00L04BackFrame5
     pieces:
     - [32x32, -18, -29]
     - [16x8, 6, -13]
-  - symbol: gUnk_0895D96E
+  - symbol: gEmy00L04BackFrame6
     pieces:
     - [32x32, -22, -29]
     - [16x16, 2, -13]
-  - symbol: gUnk_0895D97E
+  - symbol: gEmy00L04BackFrame7
     pieces:
     - [32x32, -19, -29]
     - [16x16, 5, -13]
     - [16x16, -27, -29]
   animations:
-  - symbol: gUnk_0895D994
+  - symbol: gEmy00L04BackAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
@@ -6337,52 +6337,52 @@ entries:
   eu:
     address: 0x089ECA3C
     size: 5966
-- name: gUnk_089C292C
+- name: gEmy08GasTiles
   format: sprite_sheet
   align: 4
   cell: [40, 56]
   anchor: [16, 50]
   columns: 8
   frames:
-  - symbol: gUnk_089C2868
+  - symbol: gEmy08GasFrame0
     pieces:
     - [32x32, -16, -34]
     - [32x16, -16, -10]
-  - symbol: gUnk_089C2878
+  - symbol: gEmy08GasFrame1
     pieces:
     - [32x32, -16, -50]
     - [32x16, -16, -20]
-  - symbol: gUnk_089C2888
+  - symbol: gEmy08GasFrame2
     pieces:
     - [32x32, -16, -42]
     - [32x16, -16, -12]
-  - symbol: gUnk_089C2898
+  - symbol: gEmy08GasFrame3
     pieces:
     - [32x32, -16, -26]
-  - symbol: gUnk_089C28A2
+  - symbol: gEmy08GasFrame4
     pieces:
     - [32x32, -16, -34]
     - [32x16, -16, -10]
-  - symbol: gUnk_089C28B2
+  - symbol: gEmy08GasFrame5
     pieces:
     - [32x32, -15, -50]
     - [16x32, -7, -26]
-  - symbol: gUnk_089C28C2
+  - symbol: gEmy08GasFrame6
     pieces:
     - [32x32, -14, -26]
-  - symbol: gUnk_089C28CC
+  - symbol: gEmy08GasFrame7
     pieces:
     - [32x32, -14, -26]
-  - symbol: gUnk_089C28D6
+  - symbol: gEmy08GasFrame8
     pieces:
     - [32x32, -16, -26]
     - [16x32, 8, -26]
-  - symbol: gUnk_089C28E6
+  - symbol: gEmy08GasFrame9
     pieces:
     - [32x32, -16, -42]
     - [32x16, -16, -12]
   animations:
-  - symbol: gUnk_089C28F6
+  - symbol: gEmy08GasAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 12], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [4, 8], [6, 10], [7, 12], [8, 24], [4, 8], [9, 8]]
   us:
@@ -13985,7 +13985,7 @@ entries:
   eu:
     address: 0x08B472B8
     size: 7828
-- name: gUnk_08F6DD44
+- name: gEmyTestPalette
   format: palette
   us:
     address: 0x08F6DD44
@@ -13996,39 +13996,39 @@ entries:
   eu:
     address: 0x08F6A29C
     size: 32
-- name: gUnk_08C69204
+- name: gEmyTestTiles
   format: sprite_sheet
   cell: [32, 40]
   anchor: [16, 32]
   columns: 4
   frames:
-  - symbol: gUnk_08C69188
+  - symbol: gEmyTestFrame0
     pieces:
     - [32x32, -16, -32]
     - [32x8, -16, -1]
-  - symbol: gUnk_08C69198
+  - symbol: gEmyTestFrame1
     pieces:
     - [32x32, -16, -32]
     - [32x8, -16, -1]
-  - symbol: gUnk_08C691A8
+  - symbol: gEmyTestFrame2
     pieces:
     - [32x32, -16, -31]
     - [32x8, -16, 0]
-  - symbol: gUnk_08C691B8
+  - symbol: gEmyTestFrame3
     pieces:
     - [32x32, -16, -32]
     - [32x8, -16, -1]
   animations:
-  - symbol: gUnk_08C691C8
+  - symbol: gEmyTestAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_08C691D2
+  - symbol: gEmyTestAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
-  - symbol: gUnk_08C691DC
+  - symbol: gEmyTestAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[2, 4]]
-  - symbol: gUnk_08C691E6
+  - symbol: gEmyTestAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [2, 4], [1, 4]]
   us:

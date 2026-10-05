@@ -103,7 +103,7 @@ static AnimDef sTrap0002Anim1Def = { gTrap0002Frames, gTrap0002Anims, gTrap0002T
 
 static AnimDef sTrap0003Anim0Def = { gTrap0003Frames, gTrap0003Anims, gTrap0003Tiles, 0 };
 
-static AnimDef sPoohOwlDescentAnimDef = { gUnk_09EF5824, gUnk_09EF583C, gUnk_09724C1C, 1 };
+static AnimDef sPoohOwlDescentAnimDef = { gPoohOwlDescentFrames, gPoohOwlDescentAnims, gPoohOwlDescentTiles, 1 };
 
 static AnimDef sPooh03AnimDefs[2] = {
     { gPoohBl03Frames, gPoohBl03Anims, gPoohBl03Tiles, 0 },

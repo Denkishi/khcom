@@ -19,7 +19,7 @@
 
 static const AnimDef sHumRobeAnimDefs[2] = {
     { gRobeFl00Frames, gRobeFl00Anims, gRobeFl00Tiles, 5 },
-    { gUnk_09EE25F4, gUnk_09EE2604, gUnk_08C67F86, 0 },
+    { gHumRobeGuardFrames, gHumRobeGuardAnims, gHumRobeGuardTiles, 0 },
 };
 
 static const HumDef sHumRobeDef = { 128, gRobePalette, 0, { 51, 99, 64, 14, 32, 99, 0 } };

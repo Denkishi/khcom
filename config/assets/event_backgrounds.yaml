@@ -1071,7 +1071,7 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gUnk_09755F54, 640, 0]
+  - [gPooPoohStumpTiles, 640, 0]
   - [ra_vegetables, 7456, 0]
   us:
     address: 0x08F7E068
@@ -4609,7 +4609,7 @@ entries:
     address: 0x09F6E4BC
 - name: gEventBg141ObjectFrames
   record: SpriteTable
-  items: [gUnk_09755F34, gRaVegetablesFrame9]
+  items: [gPooPoohStumpFrame0, gRaVegetablesFrame9]
   us:
     address: 0x09EE2DA4
   jp:

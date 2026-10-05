@@ -57,10 +57,10 @@ void task_sroll_b_crtn_0(SrollBCrtnWork* work, SrollBCrtnArg* a) {
         work->x = a->x + t;
         t = GetSrollCurtainOffset();
         work->y = a->y + t;
-        work->tiles = AllocObjTiles(128, gUnk_088A5D7A);
+        work->tiles = AllocObjTiles(128, gSmnTinkEffTiles);
         work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
         anim = &work->anim;
-        AnimInit(anim, gUnk_09EDE7E4, gUnk_09EDE7B4);
+        AnimInit(anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
         AnimStart(anim, work->kind, 0);
         break;
     }

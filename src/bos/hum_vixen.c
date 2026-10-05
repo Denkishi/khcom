@@ -58,9 +58,9 @@ static const AnimDef sHumVixenAnimDefs[15] = {
     { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 0 },
     { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 1 },
     { gVixenM1aFrames, gVixenM1aAnims, gVixenM1aTiles, 2 },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 0 },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 1 },
-    { gUnk_09EE2098, gUnk_09EE20A8, gUnk_08C08E48, 2 },
+    { gHumVixenCastFrames, gHumVixenCastAnims, gHumVixenCastTiles, 0 },
+    { gHumVixenCastFrames, gHumVixenCastAnims, gHumVixenCastTiles, 1 },
+    { gHumVixenCastFrames, gHumVixenCastAnims, gHumVixenCastTiles, 2 },
 };
 
 static const HumDef sHumVixenDef = { 83, gVixenPalette, 0, { 50, 99, 80, 14, 48, 99, 0 } };

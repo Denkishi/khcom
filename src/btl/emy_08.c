@@ -30,7 +30,7 @@ static const AnimDef sEmy08CommonAnimDefs[3] = {
 
 static const AnimDef sEmy08AnimDefs[6] = {
     { gEmy07Fl10Frames, gEmy07Fl10Anims, gEmy07Fl10Tiles, 0 },
-    { gUnk_09EDFFDC, gUnk_09EE0004, gUnk_089C292C, 0 },
+    { gEmy08GasFrames, gEmy08GasAnims, gEmy08GasTiles, 0 },
     { gEmy07Fl10tFrames, gEmy07Fl10tAnims, gEmy07Fl10tTiles, 0 },
     { gEmy07Fl10fFrames, gEmy07Fl10fAnims, gEmy07Fl10fTiles, 0 },
     { gEmy07Fl11tFrames, gEmy07Fl11tAnims, gEmy07Fl11tTiles, 0 },

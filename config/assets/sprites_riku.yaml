@@ -104,72 +104,72 @@ entries:
     address: 0x09EB6F34
   eu:
     address: 0x09F5A110
-- name: gUnk_09EDF4C0
+- name: gRikuBb00Frames
   record: SpriteTable
-  items: [gUnk_08933A14]
+  items: [gRikuBb00Frame0]
   us:
     address: 0x09EDF4C0
   jp:
     address: 0x09EB6F3C
   eu:
     address: 0x09F5A118
-- name: gUnk_09EDF4C4
+- name: gRikuBb00Anims
   record: AnimTable
-  items: [gUnk_08933A2A]
+  items: [gRikuBb00Anim0]
   us:
     address: 0x09EDF4C4
   jp:
     address: 0x09EB6F40
   eu:
     address: 0x09F5A11C
-- name: gUnk_09EDF4C8
+- name: gRikuLl00Frames
   record: SpriteTable
-  items: [gUnk_08933D74]
+  items: [gRikuLl00Frame0]
   us:
     address: 0x09EDF4C8
   jp:
     address: 0x09EB6F44
   eu:
     address: 0x09F5A120
-- name: gUnk_09EDF4CC
+- name: gRikuLl00Anims
   record: AnimTable
-  items: [gUnk_08933D8A]
+  items: [gRikuLl00Anim0]
   us:
     address: 0x09EDF4CC
   jp:
     address: 0x09EB6F48
   eu:
     address: 0x09F5A124
-- name: gUnk_09EDF4D0
+- name: gRik1ff01Frames
   record: SpriteTable
-  items: [gUnk_08934094, gUnk_089340AA, gUnk_089340C0, gUnk_089340D6, gUnk_089340EC, gUnk_08934102, gUnk_08934118, gUnk_0893412E]
+  items: [gRik1ff01Frame0, gRik1ff01Frame1, gRik1ff01Frame2, gRik1ff01Frame3, gRik1ff01Frame4, gRik1ff01Frame5, gRik1ff01Frame6, gRik1ff01Frame7]
   us:
     address: 0x09EDF4D0
   jp:
     address: 0x09EB6F4C
   eu:
     address: 0x09F5A128
-- name: gUnk_09EDF4F0
+- name: gRik1ff01Anims
   record: AnimTable
-  items: [gUnk_08934144]
+  items: [gRik1ff01Anim0]
   us:
     address: 0x09EDF4F0
   jp:
     address: 0x09EB6F6C
   eu:
     address: 0x09F5A148
-- name: gUnk_09EDF4F4
+- name: gRik1bb01Frames
   record: SpriteTable
-  items: [gUnk_08935AEC, gUnk_08935B02, gUnk_08935B18, gUnk_08935B2E, gUnk_08935B44, gUnk_08935B5A, gUnk_08935B70, gUnk_08935B86]
+  items: [gRik1bb01Frame0, gRik1bb01Frame1, gRik1bb01Frame2, gRik1bb01Frame3, gRik1bb01Frame4, gRik1bb01Frame5, gRik1bb01Frame6, gRik1bb01Frame7]
   us:
     address: 0x09EDF4F4
   jp:
     address: 0x09EB6F70
   eu:
     address: 0x09F5A14C
-- name: gUnk_09EDF514
+- name: gRik1bb01Anims
   record: AnimTable
-  items: [gUnk_08935B9C]
+  items: [gRik1bb01Anim0]
   us:
     address: 0x09EDF514
   jp:
@@ -538,20 +538,20 @@ entries:
   eu:
     address: 0x0895CE2C
     size: 9484
-- name: gUnk_08933A34
+- name: gRikuBb00Tiles
   format: sprite_sheet
   align: 4
   cell: [32, 56]
   anchor: [16, 49]
   columns: 1
   frames:
-  - symbol: gUnk_08933A14
+  - symbol: gRikuBb00Frame0
     pieces:
     - [32x32, -16, -41]
     - [32x16, -16, -9]
     - [16x8, -8, -49]
   animations:
-  - symbol: gUnk_08933A2A
+  - symbol: gRikuBb00Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -563,20 +563,20 @@ entries:
   eu:
     address: 0x0895F338
     size: 864
-- name: gUnk_08933D94
+- name: gRikuLl00Tiles
   format: sprite_sheet
   align: 4
   cell: [32, 56]
   anchor: [16, 49]
   columns: 1
   frames:
-  - symbol: gUnk_08933D74
+  - symbol: gRikuLl00Frame0
     pieces:
     - [32x32, -16, -49]
     - [32x8, -16, -17]
     - [16x16, -8, -9]
   animations:
-  - symbol: gUnk_08933D8A
+  - symbol: gRikuLl00Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -588,55 +588,55 @@ entries:
   eu:
     address: 0x0895F698
     size: 800
-- name: gUnk_0893416A
+- name: gRik1ff01Tiles
   format: sprite_sheet
   align: 4
   cell: [33, 58]
   anchor: [16, 50]
   columns: 8
   frames:
-  - symbol: gUnk_08934094
+  - symbol: gRik1ff01Frame0
     pieces:
     - [32x32, -16, -50]
     - [32x16, -16, -18]
     - [16x8, -8, -2]
-  - symbol: gUnk_089340AA
+  - symbol: gRik1ff01Frame1
     pieces:
     - [32x32, -16, -48]
     - [32x8, -16, -16]
     - [16x16, -8, -8]
-  - symbol: gUnk_089340C0
+  - symbol: gRik1ff01Frame2
     pieces:
     - [32x32, -16, -48]
     - [32x16, -16, -16]
     - [16x8, -16, 0]
-  - symbol: gUnk_089340D6
+  - symbol: gRik1ff01Frame3
     pieces:
     - [32x32, -16, -48]
     - [32x16, -16, -16]
     - [16x8, -8, 0]
-  - symbol: gUnk_089340EC
+  - symbol: gRik1ff01Frame4
     pieces:
     - [32x32, -16, -50]
     - [32x16, -16, -18]
     - [16x8, -8, -2]
-  - symbol: gUnk_08934102
+  - symbol: gRik1ff01Frame5
     pieces:
     - [32x32, -15, -48]
     - [32x8, -15, -16]
     - [16x16, -7, -8]
-  - symbol: gUnk_08934118
+  - symbol: gRik1ff01Frame6
     pieces:
     - [32x32, -16, -48]
     - [32x16, -16, -16]
     - [16x8, 0, 0]
-  - symbol: gUnk_0893412E
+  - symbol: gRik1ff01Frame7
     pieces:
     - [32x32, -16, -48]
     - [32x16, -16, -16]
     - [16x8, 0, 0]
   animations:
-  - symbol: gUnk_08934144
+  - symbol: gRik1ff01Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
@@ -648,55 +648,55 @@ entries:
   eu:
     address: 0x0895F9B8
     size: 6742
-- name: gUnk_08935BC2
+- name: gRik1bb01Tiles
   format: sprite_sheet
   align: 4
   cell: [33, 58]
   anchor: [16, 50]
   columns: 8
   frames:
-  - symbol: gUnk_08935AEC
+  - symbol: gRik1bb01Frame0
     pieces:
     - [32x32, -16, -42]
     - [32x16, -16, -10]
     - [16x8, -8, -50]
-  - symbol: gUnk_08935B02
+  - symbol: gRik1bb01Frame1
     pieces:
     - [32x32, -16, -50]
     - [32x16, -16, -18]
     - [16x8, 0, -2]
-  - symbol: gUnk_08935B18
+  - symbol: gRik1bb01Frame2
     pieces:
     - [32x32, -15, -40]
     - [16x8, -7, -48]
     - [16x16, -7, -8]
-  - symbol: gUnk_08935B2E
+  - symbol: gRik1bb01Frame3
     pieces:
     - [32x32, -15, -48]
     - [32x16, -15, -16]
     - [16x8, -7, 0]
-  - symbol: gUnk_08935B44
+  - symbol: gRik1bb01Frame4
     pieces:
     - [32x32, -16, -42]
     - [32x16, -16, -10]
     - [16x8, -8, -50]
-  - symbol: gUnk_08935B5A
+  - symbol: gRik1bb01Frame5
     pieces:
     - [32x32, -16, -50]
     - [32x16, -16, -18]
     - [16x8, -8, -2]
-  - symbol: gUnk_08935B70
+  - symbol: gRik1bb01Frame6
     pieces:
     - [32x32, -16, -40]
     - [16x16, -8, -8]
     - [16x8, -8, -48]
-  - symbol: gUnk_08935B86
+  - symbol: gRik1bb01Frame7
     pieces:
     - [32x32, -16, -48]
     - [32x16, -16, -16]
     - [16x8, -8, 0]
   animations:
-  - symbol: gUnk_08935B9C
+  - symbol: gRik1bb01Anim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:

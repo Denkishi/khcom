@@ -74,8 +74,8 @@ static u8 sMsTopMessageStarted;
 static s16 sMsTopIntroIndex;
 
 static const WarpDef sWarpDefs[2] = {
-    {&gModeMsShop, gUnk_09A36EDC, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gWorldwarpAsset_09A3D81C, 32, gWorldwarpAsset_099A2F84, 832, gUnk_09EF999C, gUnk_09EF9998, 0}, {192, 84, gMoguPalette, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 1}}},
-    {&gModeMsCharge, gUnk_09A373DC, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gWorldwarpAsset_09A3D83C, 32, gWorldwarpAsset_099A32E4, 832, gUnk_09EF99A4, gUnk_09EF99A0, 0}, {160, 84, gUnk_09A3D77C, 32, gUnk_099A2194, 2368, gUnk_09EF9978, gUnk_09EF9928, 0}}},
+    {&gModeMsShop, gMsTopRoomBgMap, 1280, 104, 48, 1, 136, 80, 0, 48, 66, {{64, 64, gMsTopPacksPalette, 32, gMsTopPacksTiles, 832, gMsTopPacksAnims, gMsTopPacksFrames, 0}, {192, 84, gMoguPalette, 32, gMsChargeMoogleTiles, 2368, gMsChargeMoogleAnims, gMsChargeMoogleFrames, 1}}},
+    {&gModeMsCharge, gMsTopSpotlightBgMap, 1280, 76, 48, 0, 112, 80, 1, 32, 32, {{32, 64, gMsTopPacksDimPalette, 32, gMsTopPacksDimTiles, 832, gMsTopPacksDimAnims, gMsTopPacksDimFrames, 0}, {160, 84, gMsTopMoogleDimPalette, 32, gMsChargeMoogleTiles, 2368, gMsChargeMoogleAnims, gMsChargeMoogleFrames, 0}}},
 };
 
 static const u16 sMsTopIntroMessages[3] = {
@@ -86,43 +86,43 @@ static const u16 sMsTopIntroMessages[3] = {
 
 #ifdef VERSION_EU
 static void* sMsTopBgMapsByLanguage[5] = {
-    gUnk_09A378DC,
+    gMsTopBgMap,
     gUnk_09A382DC,
-    gUnkEu_09A8C1A0,
-    gUnkEu_09A8BCA0,
-    gUnkEu_09A8B7A0,
+    gMsTopBgGermanMap,
+    gMsTopBgItalianMap,
+    gMsTopBgSpanishMap,
 };
 
 static void* sMsTopBarBgMapsByLanguage[5] = {
-    gUnk_09A37DDC,
-    gUnkEu_09A8C6A0,
-    gUnkEu_09A8D5A0,
-    gUnkEu_09A8D0A0,
-    gUnkEu_09A8CBA0,
+    gMsTopBarBgMap,
+    gMsTopBarBgFrenchMap,
+    gMsTopBarBgGermanMap,
+    gMsTopBarBgItalianMap,
+    gMsTopBarBgSpanishMap,
 };
 
 static void* sMsTopTitleSpritesByLanguage[5] = {
-    gUnk_099A2AD4,
-    gUnkEu_099AFC68,
-    gUnkEu_099B0A58,
-    gUnkEu_099B0588,
-    gUnkEu_099B00F8,
+    gMsTopBarFrame0,
+    gMsTopBarFrenchFrame0,
+    gMsTopBarGermanFrame0,
+    gMsTopBarItalianFrame0,
+    gMsTopBarSpanishFrame0,
 };
 
 static void* sMsTopTopBarSpritesByLanguage[5] = {
-    gUnk_099A2AF0,
-    gUnkEu_099AFC84,
-    gUnkEu_099B0A74,
-    gUnkEu_099B05A4,
-    gUnkEu_099B0114,
+    gMsTopBarFrame1,
+    gMsTopBarFrenchFrame1,
+    gMsTopBarGermanFrame1,
+    gMsTopBarItalianFrame1,
+    gMsTopBarSpanishFrame1,
 };
 
 static void* sMsTopBottomBarSpritesByLanguage[5] = {
-    gUnk_099A2B24,
-    gUnkEu_099AFCB8,
-    gUnkEu_099B0AA8,
-    gUnkEu_099B05D8,
-    gUnkEu_099B0148,
+    gMsTopBarFrame2,
+    gMsTopBarFrenchFrame2,
+    gMsTopBarGermanFrame2,
+    gMsTopBarItalianFrame2,
+    gMsTopBarSpanishFrame2,
 };
 #endif
 
@@ -191,7 +191,7 @@ void UpdateMsTopMooglePalette() {
     }
 
     ReleaseObjPalette(sMsTopMooglePalette);
-    sMsTopMooglePalette = LoadObjPalette(!flag ? gMoguPalette : gUnk_09A3D77C, 0x20);
+    sMsTopMooglePalette = LoadObjPalette(!flag ? gMoguPalette : gMsTopMoogleDimPalette, 0x20);
 }
 
 void UpdateMsTopWarpGfx() {
@@ -263,7 +263,7 @@ void MsTopHandleInput() {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gUnk_09A378DC, 0x500);
+        LoadBgMap(2, gMsTopBgMap, 0x500);
 #endif
         sMsTopSteps = 16;
         sMsTopState = 9;
@@ -274,7 +274,7 @@ void MsTopHandleInput() {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gUnk_09A378DC, 0x500);
+        LoadBgMap(2, gMsTopBgMap, 0x500);
 #endif
         FadeStartOut(FADE_MODE_BLACK, 16);
         FadeLock();
@@ -314,9 +314,9 @@ void MsTopDraw() {
         DrawSprite(0x80, sMsTopBarY[0] >> 8, sMsTopTopBarSpritesByLanguage[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
         DrawSprite(0x80, sMsTopBarY[1] >> 8, sMsTopBottomBarSpritesByLanguage[gLanguage], sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
 #else
-        DrawSprite(sMsTopBarX >> 8, 0, gUnk_099A2AD4, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
-        DrawSprite(0x80, sMsTopBarY[0] >> 8, gUnk_099A2AF0, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
-        DrawSprite(0x80, sMsTopBarY[1] >> 8, gUnk_099A2B24, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(sMsTopBarX >> 8, 0, gMsTopBarFrame0, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D0);
+        DrawSprite(0x80, sMsTopBarY[0] >> 8, gMsTopBarFrame1, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
+        DrawSprite(0x80, sMsTopBarY[1] >> 8, gMsTopBarFrame2, sMsTopBarTiles, sMsTopBarPalette, NULL, SPRITE_PRIORITY(2), 0x7D1);
 #endif
     }
 
@@ -415,27 +415,27 @@ void mode_ms_top_0(u32 a) {
     sMsTopPendingMessage = -1;
     sMsTopPendingOptionMessage = -1;
     sMsTopMessageStarted = 0;
-    LoadBgPalette(0, gUnk_09A3D79C, 0x60);
+    LoadBgPalette(0, gMsTopBgPalette, 0x60);
 #ifdef VERSION_EU
-    LoadBgTiles(0, gUnk_09A10A3C, 0x24C0);
+    LoadBgTiles(0, gMsTopBgTiles, 0x24C0);
 #else
-    LoadBgTiles(0, gUnk_09A10A3C, 0x19A0);
+    LoadBgTiles(0, gMsTopBgTiles, 0x19A0);
 #endif
-    LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A123DC, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
-    LoadBgMap(0, gUnk_09A36EDC, 0x500);
-    LoadBgMap(1, gUnk_09A373DC, 0x500);
+    LoadDecimalDigitTiles(GetMooglePoints(), gMsTopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
+    LoadBgMap(0, gMsTopRoomBgMap, 0x500);
+    LoadBgMap(1, gMsTopSpotlightBgMap, 0x500);
 
     if (sMsTopBarVisible) {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gUnk_09A378DC, 0x500);
+        LoadBgMap(2, gMsTopBgMap, 0x500);
 #endif
     } else {
 #ifdef VERSION_EU
         LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
-        LoadBgMap(2, gUnk_09A37DDC, 0x500);
+        LoadBgMap(2, gMsTopBarBgMap, 0x500);
 #endif
     }
 
@@ -444,11 +444,11 @@ void mode_ms_top_0(u32 a) {
         sMsTopWarpTiles[i] = NULL;
     }
 
-    sMsTopBarPalette = LoadObjPalette(gUnk_09A3D7FC, 0x20);
-    sMsTopBarTiles = LoadObjTiles(gUnk_099A2B62, 0x400);
-    sMsTopWorldwarpPalette = LoadObjPalette(gUnk_09A3D85C, 0x20);
-    sMsTopWorldwarpTiles = LoadObjTiles(gUnk_099A36F8, 0x500);
-    AnimInit(&sWorldwarpAnim, gUnk_09EF99D0, gUnk_09EF99A8);
+    sMsTopBarPalette = LoadObjPalette(gMsTopBarPalette, 0x20);
+    sMsTopBarTiles = LoadObjTiles(gMsTopBarTiles, 0x400);
+    sMsTopWorldwarpPalette = LoadObjPalette(gMsTopArrowPalette, 0x20);
+    sMsTopWorldwarpTiles = LoadObjTiles(gMsTopArrowTiles, 0x500);
+    AnimInit(&sWorldwarpAnim, gMsTopArrowAnims, gMsTopArrowFrames);
     sMsTopSoraPalette = LoadObjPalette(gSoraPalette, 0x20);
     sMsTopSoraTiles = LoadObjTiles(gSor1ll00Tiles, 0x300);
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
@@ -491,7 +491,7 @@ void mode_ms_top_1() {
 #ifdef VERSION_EU
             LoadBgMap(2, sMsTopBarBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(2, gUnk_09A37DDC, 0x500);
+            LoadBgMap(2, gMsTopBarBgMap, 0x500);
 #endif
             sMsTopState = 2;
         }
@@ -548,7 +548,7 @@ void mode_ms_top_1() {
             SetMoogleFreePackFlag(gMapFloorState.room);
             SetupBg(3, 3, 31, 14);
             DisableBg(3);
-            LoadDecimalDigitTiles(GetMooglePoints(), gUnk_09A123DC, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
+            LoadDecimalDigitTiles(GetMooglePoints(), gMsTopPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
             FadeToOriginal(FADE_MODE_BLACK, 8);
             sMsTopState = 7;
         }

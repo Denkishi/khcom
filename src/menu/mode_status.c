@@ -92,38 +92,38 @@ void mode_status_0() {
     SetBgPriority(2, 2);
     SetBgPriority(3, 3);
 #ifdef VERSION_EU
-    LoadBgTiles(3, gUnk_097FFB98, 0x2060);
+    LoadBgTiles(3, gStatusBgTiles, 0x2060);
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gUnkEu_097D8300, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgFrenchTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy(gUnkEu_097DA700, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgGermanTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gUnkEu_097D9B00, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgItalianTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gUnkEu_097D8F00, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgSpanishTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_ENGLISH:
     default:
         break;
     }
 #else
-    LoadBgTiles(3, gUnk_097FFB98, 0x2100);
+    LoadBgTiles(3, gStatusBgTiles, 0x2100);
 #endif
-    LoadBgPalette(3, gUnk_0984B118, 0xA0);
-    LoadBgMap(3, gUnk_09848198, 0x500);
+    LoadBgPalette(3, gStatusBgPalette, 0xA0);
+    LoadBgMap(3, gStatusBgMap, 0x500);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        LoadBgMap(2, gUnk_09847C98, 0x500);
+        LoadBgMap(2, gStatusRikuBgMap, 0x500);
     } else {
-        LoadBgMap(2, gUnk_09847798, 0x500);
+        LoadBgMap(2, gStatusSoraBgMap, 0x500);
     }
 
-    LoadBgMap(0, gUnk_09848B98, 0x500);
+    LoadBgMap(0, gStatusMesWindowMap, 0x500);
     DisableBg(0);
     LoadStatusNumberTiles();
     TaskPoolInit(&sStatusTaskPool, 4);

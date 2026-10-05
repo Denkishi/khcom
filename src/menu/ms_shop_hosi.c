@@ -21,7 +21,7 @@ void task_ms_shop_hosi_0(MsShopHosiWork* work, MsShopHosiArg* arg) {
     work->frame = 0;
     work->timer = work->frameDuration = GetRandom() % 8 + 4;
     work->palette = arg->palette;
-    work->tiles = LoadObjTiles(gUnk_099A6962, 0x1E0);
+    work->tiles = LoadObjTiles(gMsShopHosiTiles, 0x1E0);
 }
 
 s32 task_ms_shop_hosi_1(MsShopHosiWork* work) {
@@ -46,7 +46,7 @@ s32 task_ms_shop_hosi_1(MsShopHosiWork* work) {
 
 void task_ms_shop_hosi_2(MsShopHosiWork* work) {
     if (work->timer & 1) {
-        DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EF9A4C[work->frame], work->tiles, work->palette, NULL, 0, 0);
+        DrawSprite(work->x >> 8, work->y >> 8, gMsShopHosiFrames[work->frame], work->tiles, work->palette, NULL, 0, 0);
     }
 }
 

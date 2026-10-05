@@ -54,19 +54,19 @@ static const u16 sStatusBarTileSizes[5] = {736, 608, 736, 640, 704};
 
 #ifdef VERSION_EU
 static void* sStatusBarTiles[5] = {
-    gUnk_097A18EC,
-    gUnkEu_0977DE68,
-    gUnk_097A18EC,
-    gUnkEu_0977E494,
-    gUnkEu_0977E14A,
+    gStatusBarTiles,
+    gStatusBarFrenchTiles,
+    gStatusBarTiles,
+    gStatusBarItalianTiles,
+    gStatusBarSpanishTiles,
 };
 
 static void** sStatusBarSprites[5] = {
-    gUnk_09EF68E0,
-    gUnkEu_09F81ED8,
-    gUnk_09EF68E0,
-    gUnkEu_09F81EF8,
-    gUnkEu_09F81EE8,
+    gStatusBarFrames,
+    gStatusBarFrenchFrames,
+    gStatusBarFrames,
+    gStatusBarItalianFrames,
+    gStatusBarSpanishFrames,
 };
 #endif
 
@@ -81,19 +81,19 @@ TaskDesc gTaskDescStatusBar = {
 
 #ifdef VERSION_EU
 static void* sStatusTabTiles[5] = {
-    gUnk_097A24A6,
-    gUnkEu_0977EFAE,
-    gUnkEu_0977EB7A,
-    gUnkEu_0977F3E2,
-    gUnkEu_0977EB7A,
+    gStatusTabTiles,
+    gStatusTabFrenchTiles,
+    gStatusTabGermanSpanishTiles,
+    gStatusTabItalianTiles,
+    gStatusTabGermanSpanishTiles,
 };
 
 static void** sStatusTabSprites[5] = {
-    gUnk_09EF6920,
-    gUnkEu_09F81F30,
-    gUnkEu_09F81F1C,
-    gUnkEu_09F81F44,
-    gUnkEu_09F81F1C,
+    gStatusTabFrames,
+    gStatusTabFrenchFrames,
+    gStatusTabGermanSpanishFrames,
+    gStatusTabItalianFrames,
+    gStatusTabGermanSpanishFrames,
 };
 #endif
 
@@ -141,19 +141,19 @@ static const u16 sStatusNewMarkTileSizes[5] = {64, 128, 64, 128, 128};
 
 #ifdef VERSION_EU
 static void* sStatusNewMarkTiles[5] = {
-    gUnkEu_0977F7F8,
-    gUnkEu_0977F84C,
-    gUnkEu_0977FA08,
-    gUnkEu_0977F974,
-    gUnkEu_0977F8E0,
+    gStatusNewMarkEnglishTiles,
+    gStatusNewMarkFrenchTiles,
+    gStatusNewMarkGermanTiles,
+    gStatusNewMarkItalianTiles,
+    gStatusNewMarkSpanishTiles,
 };
 
 static void* sStatusNewMarkSprites[5] = {
-    gUnkEu_0977F7E4,
-    gUnkEu_0977F838,
-    gUnkEu_0977F9F4,
-    gUnkEu_0977F960,
-    gUnkEu_0977F8CC,
+    gStatusNewMarkEnglishFrame0,
+    gStatusNewMarkFrenchFrame0,
+    gStatusNewMarkGermanFrame0,
+    gStatusNewMarkItalianFrame0,
+    gStatusNewMarkSpanishFrame0,
 };
 #endif
 
@@ -379,7 +379,7 @@ void StatusBarStartClose(StatusBarWork* work) {
         work->steps = 16;
     }
 
-    LoadBgMap(3, gUnk_09848198, 0x500);
+    LoadBgMap(3, gStatusBgMap, 0x500);
     work->targetY = -0x800;
     work->targetY2 = 0xA000;
     work->targetX = -0x8000;
@@ -389,9 +389,9 @@ void task_status_bar_0(StatusBarWork* work) {
 #ifdef VERSION_EU
     work->tiles = LoadObjTiles(sStatusBarTiles[gLanguage], sStatusBarTileSizes[gLanguage]);
 #else
-    work->tiles = LoadObjTiles(gUnk_097A18EC, 0x2E0);
+    work->tiles = LoadObjTiles(gStatusBarTiles, 0x2E0);
 #endif
-    work->palette = LoadObjPalette(gUnk_0984B1B8, 0x20);
+    work->palette = LoadObjPalette(gStatusBarPalette, 0x20);
     work->steps = 16;
     gStatusBarState = 0;
     work->y = -0x800;
@@ -422,7 +422,7 @@ u8 task_status_bar_1(StatusBarWork* work) {
         work->steps--;
 
         if (work->steps == 0) {
-            LoadBgMap(3, gUnk_09848698, 0x500);
+            LoadBgMap(3, gStatusBarBgMap, 0x500);
             gStatusBarState = 2;
         }
 
@@ -485,7 +485,7 @@ void task_status_bar_2(StatusBarWork* work) {
     DrawSprite(work->x >> 8, 0, (sStatusBarSprites[gLanguage])[2], work->tiles,
         work->palette, NULL, SPRITE_PRIORITY(3), 29);
 #else
-    DrawSprite(work->x >> 8, 0, gUnk_097A18CC, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 29);
+    DrawSprite(work->x >> 8, 0, gStatusBarFrame2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 29);
 #endif
 
     if (gStatusBarState != 2) {
@@ -495,8 +495,8 @@ void task_status_bar_2(StatusBarWork* work) {
         DrawSprite(128, work->y2 >> 8, (sStatusBarSprites[gLanguage])[1], work->tiles,
             work->palette, NULL, SPRITE_PRIORITY(3), 31);
 #else
-        DrawSprite(128, work->y >> 8, gUnk_097A1864, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 30);
-        DrawSprite(128, work->y2 >> 8, gUnk_097A1898, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 31);
+        DrawSprite(128, work->y >> 8, gStatusBarFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 30);
+        DrawSprite(128, work->y2 >> 8, gStatusBarFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(3), 31);
 #endif
     }
 }
@@ -520,26 +520,26 @@ void task_status_tab_0(StatusTabWork* work, s32* arg) {
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(sStatusTabSprites[gLanguage], 4),
         sStatusTabTiles[gLanguage]);
 #else
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6920, 4), gUnk_097A24A6);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabFrames, 4), gStatusTabTiles);
 #endif
-    work->palette = LoadObjPalette(gUnk_0984B218, 0x20);
+    work->palette = LoadObjPalette(gStatusTabPalette, 0x20);
 #ifdef VERSION_EU
     work->gfx = (sStatusTabSprites[gLanguage])[*work->tab];
 #else
-    work->gfx = gUnk_09EF6920[*work->tab];
+    work->gfx = gStatusTabFrames[*work->tab];
 #endif
-    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6934, 4), gUnk_097A28DA);
-    work->palette2 = LoadObjPalette(gUnk_0984B238, 0x20);
-    work->gfx2 = gUnk_09EF6934[*work->tab];
+    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStatusTabRightFrames, 4), gStatusTabRightTiles);
+    work->palette2 = LoadObjPalette(gStatusTabRightPalette, 0x20);
+    work->gfx2 = gStatusTabRightFrames[*work->tab];
 }
 
 u8 task_status_tab_1(StatusTabWork* work) {
 #ifdef VERSION_EU
     work->gfx = (sStatusTabSprites[gLanguage])[*work->tab];
 #else
-    work->gfx = gUnk_09EF6920[*work->tab];
+    work->gfx = gStatusTabFrames[*work->tab];
 #endif
-    work->gfx2 = gUnk_09EF6934[*work->tab];
+    work->gfx2 = gStatusTabRightFrames[*work->tab];
     return 1;
 }
 
@@ -601,7 +601,7 @@ void task_status_deckname_0(StatusDecknameWork* work, u8* arg) {
     InitTextSlots(work->textSlots, 10);
     work->mesWindowOpen = arg;
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
-    work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
+    work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
 }
 
 u8 task_status_deckname_1(StatusDecknameWork* work) {
@@ -621,14 +621,14 @@ void task_status_deckname_3(StatusDecknameWork* work) {
 
 void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
     work->cursor = arg;
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68F0, 5), gUnk_097A1C54);
-    work->palette = LoadObjPalette(gUnk_0984B1D8, 0x20);
-    AnimInit(&work->anim[0], gUnk_09EF6904, gUnk_09EF68F0);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusRowHighlightFrames, 5), gStatusRowHighlightTiles);
+    work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
+    AnimInit(&work->anim[0], gStatusRowHighlightAnims, gStatusRowHighlightFrames);
     AnimStart(&work->anim[0], 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim[0]);
-    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6908, 4), gUnk_097A2394);
-    work->palette2 = LoadObjPalette(gUnk_0984B1F8, 0x20);
-    AnimInit(&work->anim[1], gUnk_09EF691C, gUnk_09EF6908);
+    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStatusCursorFrames, 4), gStatusCursorTiles);
+    work->palette2 = LoadObjPalette(gStatusCursorPalette, 0x20);
+    AnimInit(&work->anim[1], gStatusCursorAnims, gStatusCursorFrames);
     AnimStart(&work->anim[1], 0, ANIM_FLAG_LOOP);
     work->gfx[1] = AnimGetGfx(&work->anim[1]);
     work->lastCursor = *work->cursor;
@@ -730,13 +730,13 @@ void task_status_stocklist_0(StatusStocklistWork* work, s32* arg) {
 #ifdef VERSION_EU
     work->tiles = LoadObjTiles(sStatusNewMarkTiles[gLanguage], sStatusNewMarkTileSizes[gLanguage]);
 #else
-    work->tiles = LoadObjTiles(gUnk_097A2E16, 0xC0);
+    work->tiles = LoadObjTiles(gStatusNewMarkTiles, 0xC0);
 #endif
-    work->palette2 = LoadObjPalette(gUnk_0984B278, 0x20);
+    work->palette2 = LoadObjPalette(gStatusNewMarkPalette, 0x20);
 #ifdef VERSION_EU
     work->gfx = sStatusNewMarkSprites[gLanguage];
 #else
-    work->gfx = gUnk_097A2DF8;
+    work->gfx = gStatusNewMarkFrame0;
 #endif
     work->timer = 0;
     work->blink = 0;
@@ -1058,9 +1058,9 @@ s16 GetStatusScrollcursorY(StatusScrollcursorWork* work) {
 
 void task_status_scrollcursor_0(StatusScrollcursorWork* work, u16* arg) {
     work->scroll = arg;
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6908, 4), gUnk_097A2394);
-    work->palette = LoadObjPalette(gUnk_0984B1F8, 0x20);
-    work->gfx = gUnk_09EF6908[4];
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gStatusCursorFrames, 4), gStatusCursorTiles);
+    work->palette = LoadObjPalette(gStatusCursorPalette, 0x20);
+    work->gfx = gStatusCursorFrames[4];
     work->y = GetStatusScrollcursorY(work);
 }
 
@@ -1134,7 +1134,7 @@ void task_status_message_0(StatusMessageWork* work, StatusMessageParam* arg) {
     InitTextSlots(work->textSlots, 100);
     work->param = *arg;
     work->textSlotCount = LoadTextSlots(work->param.text, work->textSlots);
-    work->palette = LoadObjPalette(gUnk_0984B1B8, 0x20);
+    work->palette = LoadObjPalette(gStatusBarPalette, 0x20);
 }
 
 u8 task_status_message_1(StatusMessageWork* work) {
@@ -1244,12 +1244,12 @@ void stock_mes_disp_0(StockMesDispWork* work, StatusMesParam* arg) {
     TaskPoolInit(&work->tasks, 1);
     work->task = CreateStatusMessageTask(&work->tasks, work->x + 6, work->y + 16,
                                         GetCardHelpText(work->helpIndex, work->textIndex));
-    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6948, 2), gUnk_097A2CF6);
-    work->palette2 = LoadObjPalette(gUnk_0984B258, 0x20);
-    work->gfx = gUnk_09EF6948[0];
-    work->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6948, 2), gUnk_097A2CF6);
-    work->palette3 = LoadObjPalette(gUnk_0984B258, 0x20);
-    work->gfx2 = gUnk_09EF6948[1];
+    work->tiles2 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, 2), gStockMesDispArrowTiles);
+    work->palette2 = LoadObjPalette(gStockMesDispArrowPalette, 0x20);
+    work->gfx = gStockMesDispArrowFrames[0];
+    work->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gStockMesDispArrowFrames, 2), gStockMesDispArrowTiles);
+    work->palette3 = LoadObjPalette(gStockMesDispArrowPalette, 0x20);
+    work->gfx2 = gStockMesDispArrowFrames[1];
     work->frame = 0;
 }
 

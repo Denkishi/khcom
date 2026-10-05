@@ -1643,8 +1643,8 @@ TARGET_ONLY_SYMBOLS = {
         "gSioChgCardHighlightTiles": 0x095ef388,
         "gUnk_096FBE24": 0x096c934c,
         "gUnk_096FBF04": 0x096c942c,
-        "gUnk_097A2DF8": 0x09780840,
-        "gUnk_097A2E16": 0x0978085e,
+        "gStatusNewMarkFrame0": 0x09780840,
+        "gStatusNewMarkTiles": 0x0978085e,
     },
 }
 

@@ -59,246 +59,246 @@ objects:
     start: 0x0981F7C0
     end: 0x0981F940
 entries:
-- name: gUnk_09EF68E0
+- name: gStatusBarFrames
   record: SpriteTable
-  items: [gUnk_097A1864, gUnk_097A1898, gUnk_097A18CC]
+  items: [gStatusBarFrame0, gStatusBarFrame1, gStatusBarFrame2]
   us:
     address: 0x09EF68E0
   jp:
     address: 0x09ECDCCC
   eu:
     address: 0x09F81EC8
-- name: gUnk_09EF68EC
+- name: gStatusBarAnims
   record: AnimTable
-  items: [gUnk_097A18E2]
+  items: [gStatusBarAnim0]
   us:
     address: 0x09EF68EC
   jp:
     address: 0x09ECDCD8
   eu:
     address: 0x09F81ED4
-- name: gUnk_09EF68F0
+- name: gStatusRowHighlightFrames
   record: SpriteTable
-  items: [gUnk_097A1BCC, gUnk_097A1BE2, gUnk_097A1BF8, gUnk_097A1C0E, gUnk_097A1C24]
+  items: [gStatusRowHighlightFrame0, gStatusRowHighlightFrame1, gStatusRowHighlightFrame2, gStatusRowHighlightFrame3, gStatusRowHighlightFrame4]
   us:
     address: 0x09EF68F0
   jp:
     address: 0x09ECDCDC
   eu:
     address: 0x09F81F80
-- name: gUnk_09EF6904
+- name: gStatusRowHighlightAnims
   record: AnimTable
-  items: [gUnk_097A1C3A]
+  items: [gStatusRowHighlightAnim0]
   us:
     address: 0x09EF6904
   jp:
     address: 0x09ECDCF0
   eu:
     address: 0x09F81F94
-- name: gUnk_09EF6908
+- name: gStatusCursorFrames
   record: SpriteTable
-  items: [gUnk_097A2314, gUnk_097A232A, gUnk_097A2340, gUnk_097A2356, gUnk_097A236C]
+  items: [gStatusCursorFrame0, gStatusCursorFrame1, gStatusCursorFrame2, gStatusCursorFrame3, gStatusCursorFrame4]
   us:
     address: 0x09EF6908
   jp:
     address: 0x09ECDCF4
   eu:
     address: 0x09F81F98
-- name: gUnk_09EF691C
+- name: gStatusCursorAnims
   record: AnimTable
-  items: [gUnk_097A2376]
+  items: [gStatusCursorAnim0]
   us:
     address: 0x09EF691C
   jp:
     address: 0x09ECDD08
   eu:
     address: 0x09F81FAC
-- name: gUnk_09EF6920
+- name: gStatusTabFrames
   record: SpriteTable
-  items: [gUnk_097A2474, gUnk_097A247E, gUnk_097A2488, gUnk_097A2492]
+  items: [gStatusTabFrame0, gStatusTabFrame1, gStatusTabFrame2, gStatusTabFrame3]
   us:
     address: 0x09EF6920
   jp:
     address: 0x09ECDD0C
   eu:
     address: 0x09F81F08
-- name: gUnk_09EF6930
+- name: gStatusTabAnims
   record: AnimTable
-  items: [gUnk_097A249C]
+  items: [gStatusTabAnim0]
   us:
     address: 0x09EF6930
   jp:
     address: 0x09ECDD1C
   eu:
     address: 0x09F81F18
-- name: gUnk_09EF6934
+- name: gStatusTabRightFrames
   record: SpriteTable
-  items: [gUnk_097A28A8, gUnk_097A28B2, gUnk_097A28BC, gUnk_097A28C6]
+  items: [gStatusTabRightFrame0, gStatusTabRightFrame1, gStatusTabRightFrame2, gStatusTabRightFrame3]
   us:
     address: 0x09EF6934
   jp:
     address: 0x09ECDD20
   eu:
     address: 0x09F81FB0
-- name: gUnk_09EF6944
+- name: gStatusTabRightAnims
   record: AnimTable
-  items: [gUnk_097A28D0]
+  items: [gStatusTabRightAnim0]
   us:
     address: 0x09EF6944
   jp:
     address: 0x09ECDD30
   eu:
     address: 0x09F81FC0
-- name: gUnk_09EF6948
+- name: gStockMesDispArrowFrames
   record: SpriteTable
-  items: [gUnk_097A2CDC, gUnk_097A2CE6]
+  items: [gStockMesDispArrowFrame0, gStockMesDispArrowFrame1]
   us:
     address: 0x09EF6948
   jp:
     address: 0x09ECDD34
   eu:
     address: 0x09F81FC4
-- name: gUnk_09EF6950
+- name: gStockMesDispArrowAnims
   record: AnimTable
-  items: [gUnk_097A2CF0]
+  items: [gStockMesDispArrowAnim0]
   us:
     address: 0x09EF6950
   jp:
     address: 0x09ECDD3C
   eu:
     address: 0x09F81FCC
-- name: gUnk_09EF6954
+- name: gStatusNewMarkFrames
   record: SpriteTable
-  items: [gUnk_097A2DF8, gUnk_097A2E02]
+  items: [gStatusNewMarkFrame0, gStatusNewMarkFrame1]
   us:
     address: 0x09EF6954
   jp:
     address: 0x09ECDD40
-- name: gUnk_09EF695C
+- name: gStatusNewMarkAnims
   record: AnimTable
-  items: [gUnk_097A2E0C]
+  items: [gStatusNewMarkAnim0]
   us:
     address: 0x09EF695C
   jp:
     address: 0x09ECDD48
-- name: gUnkEu_09F81ED8
+- name: gStatusBarFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0977DDE0, gUnkEu_0977DE14, gUnkEu_0977DE48]
+  items: [gStatusBarFrenchFrame0, gStatusBarFrenchFrame1, gStatusBarFrenchFrame2]
   eu:
     address: 0x09F81ED8
-- name: gUnkEu_09F81EE4
+- name: gStatusBarFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0977DE5E]
+  items: [gStatusBarFrenchAnim0]
   eu:
     address: 0x09F81EE4
-- name: gUnkEu_09F81EE8
+- name: gStatusBarSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0977E0C8, gUnkEu_0977E0FC, gUnkEu_0977E130]
+  items: [gStatusBarSpanishFrame0, gStatusBarSpanishFrame1, gStatusBarSpanishFrame2]
   eu:
     address: 0x09F81EE8
-- name: gUnkEu_09F81EF4
+- name: gStatusBarSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0977E140]
+  items: [gStatusBarSpanishAnim0]
   eu:
     address: 0x09F81EF4
-- name: gUnkEu_09F81EF8
+- name: gStatusBarItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0977E40C, gUnkEu_0977E440, gUnkEu_0977E474]
+  items: [gStatusBarItalianFrame0, gStatusBarItalianFrame1, gStatusBarItalianFrame2]
   eu:
     address: 0x09F81EF8
-- name: gUnkEu_09F81F04
+- name: gStatusBarItalianAnims
   record: AnimTable
-  items: [gUnkEu_0977E48A]
+  items: [gStatusBarItalianAnim0]
   eu:
     address: 0x09F81F04
-- name: gUnkEu_09F81F1C
+- name: gStatusTabGermanSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0977EB48, gUnkEu_0977EB52, gUnkEu_0977EB5C, gUnkEu_0977EB66]
+  items: [gStatusTabGermanSpanishFrame0, gStatusTabGermanSpanishFrame1, gStatusTabGermanSpanishFrame2, gStatusTabGermanSpanishFrame3]
   eu:
     address: 0x09F81F1C
-- name: gUnkEu_09F81F2C
+- name: gStatusTabGermanSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0977EB70]
+  items: [gStatusTabGermanSpanishAnim0]
   eu:
     address: 0x09F81F2C
-- name: gUnkEu_09F81F30
+- name: gStatusTabFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0977EF7C, gUnkEu_0977EF86, gUnkEu_0977EF90, gUnkEu_0977EF9A]
+  items: [gStatusTabFrenchFrame0, gStatusTabFrenchFrame1, gStatusTabFrenchFrame2, gStatusTabFrenchFrame3]
   eu:
     address: 0x09F81F30
-- name: gUnkEu_09F81F40
+- name: gStatusTabFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0977EFA4]
+  items: [gStatusTabFrenchAnim0]
   eu:
     address: 0x09F81F40
-- name: gUnkEu_09F81F44
+- name: gStatusTabItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0977F3B0, gUnkEu_0977F3BA, gUnkEu_0977F3C4, gUnkEu_0977F3CE]
+  items: [gStatusTabItalianFrame0, gStatusTabItalianFrame1, gStatusTabItalianFrame2, gStatusTabItalianFrame3]
   eu:
     address: 0x09F81F44
-- name: gUnkEu_09F81F54
+- name: gStatusTabItalianAnims
   record: AnimTable
-  items: [gUnkEu_0977F3D8]
+  items: [gStatusTabItalianAnim0]
   eu:
     address: 0x09F81F54
-- name: gUnkEu_09F81F58
+- name: gStatusNewMarkEnglishFrames
   record: SpriteTable
-  items: [gUnkEu_0977F7E4]
+  items: [gStatusNewMarkEnglishFrame0]
   eu:
     address: 0x09F81F58
-- name: gUnkEu_09F81F5C
+- name: gStatusNewMarkEnglishAnims
   record: AnimTable
-  items: [gUnkEu_0977F7EE]
+  items: [gStatusNewMarkEnglishAnim0]
   eu:
     address: 0x09F81F5C
-- name: gUnkEu_09F81F60
+- name: gStatusNewMarkFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0977F838]
+  items: [gStatusNewMarkFrenchFrame0]
   eu:
     address: 0x09F81F60
-- name: gUnkEu_09F81F64
+- name: gStatusNewMarkFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0977F842]
+  items: [gStatusNewMarkFrenchAnim0]
   eu:
     address: 0x09F81F64
-- name: gUnkEu_09F81F68
+- name: gStatusNewMarkSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0977F8CC]
+  items: [gStatusNewMarkSpanishFrame0]
   eu:
     address: 0x09F81F68
-- name: gUnkEu_09F81F6C
+- name: gStatusNewMarkSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0977F8D6]
+  items: [gStatusNewMarkSpanishAnim0]
   eu:
     address: 0x09F81F6C
-- name: gUnkEu_09F81F70
+- name: gStatusNewMarkItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0977F960]
+  items: [gStatusNewMarkItalianFrame0]
   eu:
     address: 0x09F81F70
-- name: gUnkEu_09F81F74
+- name: gStatusNewMarkItalianAnims
   record: AnimTable
-  items: [gUnkEu_0977F96A]
+  items: [gStatusNewMarkItalianAnim0]
   eu:
     address: 0x09F81F74
-- name: gUnkEu_09F81F78
+- name: gStatusNewMarkGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0977F9F4]
+  items: [gStatusNewMarkGermanFrame0]
   eu:
     address: 0x09F81F78
-- name: gUnkEu_09F81F7C
+- name: gStatusNewMarkGermanAnims
   record: AnimTable
-  items: [gUnkEu_0977F9FE]
+  items: [gStatusNewMarkGermanAnim0]
   eu:
     address: 0x09F81F7C
-- name: gUnk_097A18EC
+- name: gStatusBarTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gUnk_097A1864
+  - symbol: gStatusBarFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -308,7 +308,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnk_097A1898
+  - symbol: gStatusBarFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -318,13 +318,13 @@ entries:
     - [32x8, 32, 0, {vflip: true}]
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
-  - symbol: gUnk_097A18CC
+  - symbol: gStatusBarFrame2
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [8x8, 64, 0]
   animations:
-  - symbol: gUnk_097A18E2
+  - symbol: gStatusBarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -336,57 +336,57 @@ entries:
   eu:
     address: 0x0977DA78
     size: 872
-- name: gUnkEu_0977FA08
+- name: gStatusNewMarkGermanTiles
   format: sprite_sheet
   align: 4
   cell: [16, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0977F9F4
+  - symbol: gStatusNewMarkGermanFrame0
     pieces:
     - [16x8, 0, 0]
   animations:
-  - symbol: gUnkEu_0977F9FE
+  - symbol: gStatusNewMarkGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F9F4
     size: 84
-- name: gUnk_097A1C54
+- name: gStatusRowHighlightTiles
   format: sprite_sheet
   align: 4
   cell: [80, 16]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_097A1BCC
+  - symbol: gStatusRowHighlightFrame0
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [32x16, 48, 0, {hflip: true}]
-  - symbol: gUnk_097A1BE2
+  - symbol: gStatusRowHighlightFrame1
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [32x16, 48, 0, {hflip: true}]
-  - symbol: gUnk_097A1BF8
+  - symbol: gStatusRowHighlightFrame2
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [32x16, 48, 0, {hflip: true}]
-  - symbol: gUnk_097A1C0E
+  - symbol: gStatusRowHighlightFrame3
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [32x16, 48, 0, {hflip: true}]
-  - symbol: gUnk_097A1C24
+  - symbol: gStatusRowHighlightFrame4
     pieces:
     - [32x8, 0, 4]
     - [16x8, 32, 4]
     - [32x8, 48, 4, {hflip: true}]
   animations:
-  - symbol: gUnk_097A1C3A
+  - symbol: gStatusRowHighlightAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
@@ -398,38 +398,38 @@ entries:
   eu:
     address: 0x0977FA48
     size: 1864
-- name: gUnk_097A2394
+- name: gStatusCursorTiles
   format: sprite_sheet
   align: 4
   cell: [24, 27]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_097A2314
+  - symbol: gStatusCursorFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x8, 16, 7]
     - [8x8, 10, 16]
-  - symbol: gUnk_097A232A
+  - symbol: gStatusCursorFrame1
     pieces:
     - [16x16, 0, 1]
     - [8x8, 16, 8]
     - [8x8, 10, 17]
-  - symbol: gUnk_097A2340
+  - symbol: gStatusCursorFrame2
     pieces:
     - [16x16, 0, 2]
     - [8x8, 16, 9]
     - [8x8, 10, 18]
-  - symbol: gUnk_097A2356
+  - symbol: gStatusCursorFrame3
     pieces:
     - [16x16, 0, 3]
     - [8x8, 16, 10]
     - [8x8, 10, 19]
-  - symbol: gUnk_097A236C
+  - symbol: gStatusCursorFrame4
     pieces:
     - [8x8, 0, 0]
   animations:
-  - symbol: gUnk_097A2376
+  - symbol: gStatusCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   us:
@@ -441,27 +441,27 @@ entries:
   eu:
     address: 0x09780190
     size: 352
-- name: gUnk_097A24A6
+- name: gStatusTabTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnk_097A2474
+  - symbol: gStatusTabFrame0
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnk_097A247E
+  - symbol: gStatusTabFrame1
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnk_097A2488
+  - symbol: gStatusTabFrame2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnk_097A2492
+  - symbol: gStatusTabFrame3
     pieces:
     - [32x16, 0, 0, {fresh: true}]
   animations:
-  - symbol: gUnk_097A249C
+  - symbol: gStatusTabAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -473,27 +473,27 @@ entries:
   eu:
     address: 0x0977E714
     size: 1074
-- name: gUnk_097A28DA
+- name: gStatusTabRightTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [-32, 0]
   columns: 4
   frames:
-  - symbol: gUnk_097A28A8
+  - symbol: gStatusTabRightFrame0
     pieces:
     - [32x16, 32, 0]
-  - symbol: gUnk_097A28B2
+  - symbol: gStatusTabRightFrame1
     pieces:
     - [32x16, 32, 0]
-  - symbol: gUnk_097A28BC
+  - symbol: gStatusTabRightFrame2
     pieces:
     - [32x16, 32, 0]
-  - symbol: gUnk_097A28C6
+  - symbol: gStatusTabRightFrame3
     pieces:
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnk_097A28D0
+  - symbol: gStatusTabRightAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -505,21 +505,21 @@ entries:
   eu:
     address: 0x097802F0
     size: 1074
-- name: gUnk_097A2CF6
+- name: gStockMesDispArrowTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnk_097A2CDC
+  - symbol: gStockMesDispArrowFrame0
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_097A2CE6
+  - symbol: gStockMesDispArrowFrame1
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_097A2CF0
+  - symbol: gStockMesDispArrowAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: []
   us:
@@ -531,21 +531,21 @@ entries:
   eu:
     address: 0x09780724
     size: 282
-- name: gUnk_097A2E16
+- name: gStatusNewMarkTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnk_097A2DF8
+  - symbol: gStatusNewMarkFrame0
     pieces:
     - [16x8, 0, 0]
-  - symbol: gUnk_097A2E02
+  - symbol: gStatusNewMarkFrame1
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_097A2E0C
+  - symbol: gStatusNewMarkAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -554,14 +554,14 @@ entries:
   jp:
     address: 0x0975D28C
     size: 222
-- name: gUnkEu_0977DE68
+- name: gStatusBarFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0977DDE0
+  - symbol: gStatusBarFrenchFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -571,7 +571,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnkEu_0977DE14
+  - symbol: gStatusBarFrenchFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -581,26 +581,26 @@ entries:
     - [32x8, 32, 0, {vflip: true}]
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
-  - symbol: gUnkEu_0977DE48
+  - symbol: gStatusBarFrenchFrame2
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [8x8, 48, 2]
   animations:
-  - symbol: gUnkEu_0977DE5E
+  - symbol: gStatusBarFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977DDE0
     size: 744
-- name: gUnkEu_0977E14A
+- name: gStatusBarSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0977E0C8
+  - symbol: gStatusBarSpanishFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -610,7 +610,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnkEu_0977E0FC
+  - symbol: gStatusBarSpanishFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -620,25 +620,25 @@ entries:
     - [32x8, 32, 0, {vflip: true}]
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
-  - symbol: gUnkEu_0977E130
+  - symbol: gStatusBarSpanishFrame2
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnkEu_0977E140
+  - symbol: gStatusBarSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977E0C8
     size: 834
-- name: gUnkEu_0977E494
+- name: gStatusBarItalianTiles
   format: sprite_sheet
   align: 4
   cell: [240, 16]
   anchor: [128, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_0977E40C
+  - symbol: gStatusBarItalianFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0]
@@ -648,7 +648,7 @@ entries:
     - [32x8, 32, 0]
     - [32x8, 64, 0]
     - [16x8, 96, 0]
-  - symbol: gUnkEu_0977E440
+  - symbol: gStatusBarItalianFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true}]
     - [32x8, -96, 0, {vflip: true}]
@@ -658,165 +658,165 @@ entries:
     - [32x8, 32, 0, {vflip: true}]
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
-  - symbol: gUnkEu_0977E474
+  - symbol: gStatusBarItalianFrame2
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
     - [8x16, 48, 0]
   animations:
-  - symbol: gUnkEu_0977E48A
+  - symbol: gStatusBarItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977E40C
     size: 776
-- name: gUnkEu_0977EB7A
+- name: gStatusTabGermanSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnkEu_0977EB48
+  - symbol: gStatusTabGermanSpanishFrame0
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EB52
+  - symbol: gStatusTabGermanSpanishFrame1
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EB5C
+  - symbol: gStatusTabGermanSpanishFrame2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EB66
+  - symbol: gStatusTabGermanSpanishFrame3
     pieces:
     - [32x16, 0, 0, {fresh: true}]
   animations:
-  - symbol: gUnkEu_0977EB70
+  - symbol: gStatusTabGermanSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977EB48
     size: 1074
-- name: gUnkEu_0977EFAE
+- name: gStatusTabFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnkEu_0977EF7C
+  - symbol: gStatusTabFrenchFrame0
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EF86
+  - symbol: gStatusTabFrenchFrame1
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EF90
+  - symbol: gStatusTabFrenchFrame2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977EF9A
+  - symbol: gStatusTabFrenchFrame3
     pieces:
     - [32x16, 0, 0, {fresh: true}]
   animations:
-  - symbol: gUnkEu_0977EFA4
+  - symbol: gStatusTabFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977EF7C
     size: 1074
-- name: gUnkEu_0977F3E2
+- name: gStatusTabItalianTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [0, 0]
   columns: 4
   frames:
-  - symbol: gUnkEu_0977F3B0
+  - symbol: gStatusTabItalianFrame0
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977F3BA
+  - symbol: gStatusTabItalianFrame1
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977F3C4
+  - symbol: gStatusTabItalianFrame2
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_0977F3CE
+  - symbol: gStatusTabItalianFrame3
     pieces:
     - [32x16, 0, 0, {fresh: true}]
   animations:
-  - symbol: gUnkEu_0977F3D8
+  - symbol: gStatusTabItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F3B0
     size: 1074
-- name: gUnkEu_0977F7F8
+- name: gStatusNewMarkEnglishTiles
   format: sprite_sheet
   align: 4
   cell: [16, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0977F7E4
+  - symbol: gStatusNewMarkEnglishFrame0
     pieces:
     - [16x8, 0, 0]
   animations:
-  - symbol: gUnkEu_0977F7EE
+  - symbol: gStatusNewMarkEnglishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F7E4
     size: 84
-- name: gUnkEu_0977F84C
+- name: gStatusNewMarkFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [32, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0977F838
+  - symbol: gStatusNewMarkFrenchFrame0
     pieces:
     - [32x8, 0, 0]
   animations:
-  - symbol: gUnkEu_0977F842
+  - symbol: gStatusNewMarkFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F838
     size: 148
-- name: gUnkEu_0977F8E0
+- name: gStatusNewMarkSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [32, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0977F8CC
+  - symbol: gStatusNewMarkSpanishFrame0
     pieces:
     - [32x8, 0, 0]
   animations:
-  - symbol: gUnkEu_0977F8D6
+  - symbol: gStatusNewMarkSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F8CC
     size: 148
-- name: gUnkEu_0977F974
+- name: gStatusNewMarkItalianTiles
   format: sprite_sheet
   align: 4
   cell: [32, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0977F960
+  - symbol: gStatusNewMarkItalianFrame0
     pieces:
     - [32x8, 0, 0]
   animations:
-  - symbol: gUnkEu_0977F96A
+  - symbol: gStatusNewMarkItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F960
     size: 148
-- name: gUnk_097FFB98
+- name: gStatusBgTiles
   format: tiles4
   us:
     address: 0x097FFB98
@@ -827,7 +827,7 @@ entries:
   eu:
     address: 0x097D62A0
     size: 8288
-- name: gUnk_09847798
+- name: gStatusSoraBgMap
   format: tilemap
   us:
     address: 0x09847798
@@ -838,7 +838,7 @@ entries:
   eu:
     address: 0x0981BE40
     size: 1280
-- name: gUnk_09847C98
+- name: gStatusRikuBgMap
   format: tilemap
   us:
     address: 0x09847C98
@@ -849,7 +849,7 @@ entries:
   eu:
     address: 0x0981C340
     size: 1280
-- name: gUnk_09848198
+- name: gStatusBgMap
   format: tilemap
   us:
     address: 0x09848198
@@ -860,7 +860,7 @@ entries:
   eu:
     address: 0x0981C840
     size: 1280
-- name: gUnk_09848698
+- name: gStatusBarBgMap
   format: tilemap
   us:
     address: 0x09848698
@@ -871,7 +871,7 @@ entries:
   eu:
     address: 0x0981CD40
     size: 1280
-- name: gUnk_09848B98
+- name: gStatusMesWindowMap
   format: tilemap
   us:
     address: 0x09848B98
@@ -882,7 +882,7 @@ entries:
   eu:
     address: 0x0981D240
     size: 1280
-- name: gUnk_0984B118
+- name: gStatusBgPalette
   format: palette
   us:
     address: 0x0984B118
@@ -893,7 +893,7 @@ entries:
   eu:
     address: 0x0981F7C0
     size: 160
-- name: gUnk_0984B1B8
+- name: gStatusBarPalette
   format: palette
   us:
     address: 0x0984B1B8
@@ -904,7 +904,7 @@ entries:
   eu:
     address: 0x0981F860
     size: 32
-- name: gUnk_0984B1D8
+- name: gStatusRowHighlightPalette
   format: palette
   us:
     address: 0x0984B1D8
@@ -915,7 +915,7 @@ entries:
   eu:
     address: 0x0981F880
     size: 32
-- name: gUnk_0984B1F8
+- name: gStatusCursorPalette
   format: palette
   us:
     address: 0x0984B1F8
@@ -926,7 +926,7 @@ entries:
   eu:
     address: 0x0981F8A0
     size: 32
-- name: gUnk_0984B218
+- name: gStatusTabPalette
   format: palette
   us:
     address: 0x0984B218
@@ -937,7 +937,7 @@ entries:
   eu:
     address: 0x0981F8C0
     size: 32
-- name: gUnk_0984B238
+- name: gStatusTabRightPalette
   format: palette
   us:
     address: 0x0984B238
@@ -948,7 +948,7 @@ entries:
   eu:
     address: 0x0981F8E0
     size: 32
-- name: gUnk_0984B258
+- name: gStockMesDispArrowPalette
   format: palette
   us:
     address: 0x0984B258
@@ -959,7 +959,7 @@ entries:
   eu:
     address: 0x0981F900
     size: 32
-- name: gUnk_0984B278
+- name: gStatusNewMarkPalette
   format: palette
   us:
     address: 0x0984B278
@@ -970,25 +970,25 @@ entries:
   eu:
     address: 0x0981F920
     size: 32
-- name: gUnkEu_097D8300
+- name: gStatusBgFrenchTiles
   format: tiles4
   width: 32
   eu:
     address: 0x097D8300
     size: 3072
-- name: gUnkEu_097D8F00
+- name: gStatusBgSpanishTiles
   format: tiles4
   width: 32
   eu:
     address: 0x097D8F00
     size: 3072
-- name: gUnkEu_097D9B00
+- name: gStatusBgItalianTiles
   format: tiles4
   width: 32
   eu:
     address: 0x097D9B00
     size: 3072
-- name: gUnkEu_097DA700
+- name: gStatusBgGermanTiles
   format: tiles4
   eu:
     address: 0x097DA700

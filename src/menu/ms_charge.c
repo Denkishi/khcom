@@ -44,35 +44,35 @@
 
 #ifdef VERSION_EU
 static void* sMsChargeBgMapsByLanguage[5] = {
-    gUnkEu_09A94E20,
-    gUnkEu_09A95320,
-    gUnkEu_09A96220,
-    gUnkEu_09A95D20,
-    gUnkEu_09A95820,
+    gMsChargeBgMap,
+    gMsChargeBgFrenchMap,
+    gMsChargeBgGermanMap,
+    gMsChargeBgItalianMap,
+    gMsChargeBgSpanishMap,
 };
 
 static void* sMsChargeTabTilemapsByLanguage[5] = {
-    gUnk_09A3B75C,
-    gUnkEu_09A96820,
-    gUnkEu_09A96920,
-    gUnkEu_09A96A20,
-    gUnkEu_09A96920,
+    gMsChargeTabMap,
+    gMsChargeTabFrenchMap,
+    gMsChargeTabGermanSpanishMap,
+    gMsChargeTabItalianMap,
+    gMsChargeTabGermanSpanishMap,
 };
 
 static void* sMsChargeValueCountBgMapsByLanguage[5] = {
-    gUnk_09A3B85C,
-    gUnkEu_09A97A20,
-    gUnkEu_09A98920,
-    gUnkEu_09A98420,
-    gUnkEu_09A97F20,
+    gMsChargeValueCountBgMap,
+    gMsChargeValueCountBgFrenchMap,
+    gMsChargeValueCountBgGermanMap,
+    gMsChargeValueCountBgItalianMap,
+    gMsChargeValueCountBgSpanishMap,
 };
 
 static void* sMsChargeEnemyCountBgMapsByLanguage[5] = {
-    gUnk_09A3BD5C,
-    gUnkEu_09A98E20,
-    gUnkEu_09A99D20,
-    gUnkEu_09A99820,
-    gUnkEu_09A99320,
+    gMsChargeEnemyCountBgMap,
+    gMsChargeEnemyCountBgFrenchMap,
+    gMsChargeEnemyCountBgGermanMap,
+    gMsChargeEnemyCountBgItalianMap,
+    gMsChargeEnemyCountBgSpanishMap,
 };
 #endif
 
@@ -316,7 +316,7 @@ void MsChargeDrawPoints() {
     u32 v;
 
     v = GetMooglePoints();
-    LoadDecimalDigitTiles(v, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
+    LoadDecimalDigitTiles(v, gMsChargeDigitTiles, (u8*)GetBgCharBase(0) + 0x20, 0x20, 5);
 
     if (sMsChargeMenuState >= 2 && sMsChargeMenuState <= 3) {
         v = GetMsChargeCardPoints(GetMsChargeSelectedIndex());
@@ -324,12 +324,12 @@ void MsChargeDrawPoints() {
         v = 0;
     }
 
-    LoadDecimalDigitTiles(v, gUnk_09A1DCDC, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
+    LoadDecimalDigitTiles(v, gMsChargeCardPointsDigitTiles, (u8*)GetBgCharBase(0) + 0x180, 0x20, 2);
 }
 
 void MsChargeDrawCardCounts() {
-    LoadDecimalDigitTiles(sMsChargeDeckCardCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0xC0, 0x20, 3);
-    LoadDecimalDigitTiles(sMsChargeCollectionCount, gUnk_09A1DB9C, (u8*)GetBgCharBase(0) + 0x120, 0x20, 3);
+    LoadDecimalDigitTiles(sMsChargeDeckCardCount, gMsChargeDigitTiles, (u8*)GetBgCharBase(0) + 0xC0, 0x20, 3);
+    LoadDecimalDigitTiles(sMsChargeCollectionCount, gMsChargeDigitTiles, (u8*)GetBgCharBase(0) + 0x120, 0x20, 3);
 }
 
 void MsChargeDrawCategoryCounts() {
@@ -340,9 +340,9 @@ void MsChargeDrawCategoryCounts() {
         v = sMsChargeCategoryCardCount[i];
 
         if (v != 0) {
-            LoadDecimalDigitTiles(v, gUnk_09A1DE3C, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
+            LoadDecimalDigitTiles(v, gMsChargeCategoryCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
         } else {
-            LoadDecimalDigitTiles(0, gUnk_09A1DE1C, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
+            LoadDecimalDigitTiles(0, gMsChargeCategoryCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 3 * 0x20 + 0x1C0), 0x20, 3);
         }
     }
 }
@@ -355,20 +355,20 @@ void MsChargeDrawValueCounts() {
     card = GetMsChargeSelectedCard();
 
     if (GetMsChargeTabCount(sMsChargeTab) > 0) {
-        LoadPalette(gUnk_09A3DD7C + card->category * 0x10, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP), 0x0C);
+        LoadPalette(gMsChargeCategoryBgPalettes + card->category * 0x10, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP), 0x0C);
     }
 
     if (sMsChargeMenuState == 1) {
         for (i = 0; i < 10; i++) {
-            LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-            LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+            LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
+            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
         }
     } else if (card->category == 3) {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
             LoadBgMap(1, sMsChargeEnemyCountBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gUnk_09A3BD5C, 0x500);
+            LoadBgMap(1, gMsChargeEnemyCountBgMap, 0x500);
 #endif
         }
 
@@ -376,22 +376,22 @@ void MsChargeDrawValueCounts() {
             v = card->values[i][0];
 
             if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
-                LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-                LoadPalette(gUnk_09A3DD88, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
+                LoadDecimalDigitTiles(v, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
+                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
                 break;
             }
         }
 
         if (i > 9) {
-            LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
-            LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
+            LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + 0x340, 0x20, 2);
+            LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC), 2);
         }
     } else {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
             LoadBgMap(1, sMsChargeValueCountBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gUnk_09A3B85C, 0x500);
+            LoadBgMap(1, gMsChargeValueCountBgMap, 0x500);
 #endif
         }
 
@@ -399,11 +399,11 @@ void MsChargeDrawValueCounts() {
             v = card->values[i][0];
 
             if (v != 0 && GetMsChargeTabCount(sMsChargeTab) > 0) {
-                LoadDecimalDigitTiles(v, gUnk_09A1DF9C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gUnk_09A3DD88, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+                LoadDecimalDigitTiles(v, gMsChargeValueCountDigitTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
+                LoadPalette(gMsChargeValueOwnedPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
             } else {
-                LoadDecimalDigitTiles(0, gUnk_09A1DF7C, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
-                LoadPalette(gUnk_09A3DE08, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
+                LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
+                LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), 2);
             }
         }
     }
@@ -418,7 +418,7 @@ void MsChargeDrawTab(s16 a) {
 #ifdef VERSION_EU
     RequestTilemapRectCopy(sMsChargeTabTilemapsByLanguage[gLanguage], base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
 #else
-    RequestTilemapRectCopy(gUnk_09A3B75C, base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
+    RequestTilemapRectCopy(gMsChargeTabMap, base, t % 3 * 10, t / 3 * 2, 20, 2, 10, 2);
 #endif
 }
 
@@ -1004,7 +1004,7 @@ void MsChargeDraw() {
         v = 0;
     }
 
-    DrawSprite(160, v + 40, gUnk_099A7C64, sMsChargeScrollbarTiles, sMsChargeCard00Palette, NULL, SPRITE_PRIORITY(2), 0x898);
+    DrawSprite(160, v + 40, gMsChargeScrollbarFrame0, sMsChargeScrollbarTiles, sMsChargeCard00Palette, NULL, SPRITE_PRIORITY(2), 0x898);
     DrawSprite(24, 58, AnimUpdate(&sMsChargeMoogleAnim), sMsChargeMoogleTiles, sMsChargeMooglePalette, NULL, SPRITE_PRIORITY(2) | SPRITE_FLAG_HFLIP, 0x834);
 
     if (sMsChargeState == 1) {
@@ -1160,8 +1160,8 @@ void mode_ms_charge_0() {
     sMsChargeBobPhase = 0;
     sMsChargeMoogleAnimId = -1;
     sMsChargeMoogleAnimTimer = 0;
-    LoadBgPalette(0, gUnk_09A3DBDC, 0x1A0);
-    LoadBgTiles(0, gUnk_09A1913C,
+    LoadBgPalette(0, gMsChargeBgPalette, 0x1A0);
+    LoadBgTiles(0, gMsChargeBgTiles,
 #ifdef VERSION_EU
         0x61C0
 #else
@@ -1181,7 +1181,7 @@ void mode_ms_charge_0() {
 #ifdef VERSION_EU
         sMsChargeEnemyCountBgMapsByLanguage[gLanguage]
 #else
-        gUnk_09A3BD5C
+        gMsChargeEnemyCountBgMap
 #endif
     , 0x500);
     } else {
@@ -1189,14 +1189,14 @@ void mode_ms_charge_0() {
 #ifdef VERSION_EU
         sMsChargeValueCountBgMapsByLanguage[gLanguage]
 #else
-        gUnk_09A3B85C
+        gMsChargeValueCountBgMap
 #endif
     , 0x500);
     }
 
     MsChargeDrawTab(sMsChargeTab);
     LoadBgMap(2,
-        gUnk_09A3C25C
+        gMsChargeWindowMap
     , 0x500);
     MsChargeDrawPoints();
     MsChargeDrawCardCounts();
@@ -1209,31 +1209,31 @@ void mode_ms_charge_0() {
     sMsChargeGridPremiumTiles = LoadObjTiles(gUnk_0908C3CE, 0x260);
     AnimInit(&sMsChargeGridPremiumAnim, gUnk_09EEA198, gUnk_09EEA180);
     AnimStart(&sMsChargeGridPremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMsChargeScrollbarTiles = LoadObjTiles(gUnk_099A7C78, 32);
+    sMsChargeScrollbarTiles = LoadObjTiles(gMsChargeScrollbarTiles, 32);
     sMsChargeCategoryPalette = LoadObjPalette(gUnk_09A3DE7C, 32);
-    sMsChargeHighlightTiles = LoadObjTiles(gUnk_099A6C82, 0xFE0);
-    AnimInit(&sMsChargeArrowAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
+    sMsChargeHighlightTiles = LoadObjTiles(gMsChargeHighlightTiles, 0xFE0);
+    AnimInit(&sMsChargeArrowAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeArrowAnim, 1, ANIM_FLAG_LOOP);
-    AnimInit(&sMsChargeHighlightAnim, gUnk_09EF9AA4, gUnk_09EF9A68);
+    AnimInit(&sMsChargeHighlightAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeHighlightAnim, 2, ANIM_FLAG_LOOP);
     sMsChargeMooglePalette = LoadObjPalette(gMoguPalette, 32);
     sMsChargeMoogleTiles = LoadObjTiles(
 #ifdef VERSION_EU
         gUnkEu_099AEE98
 #else
-        gUnk_099A2194
+        gMsChargeMoogleTiles
 #endif
     , 0x940);
     AnimInit(&sMsChargeCursorAnim,
-        gUnk_09EF9978
+        gMsChargeMoogleAnims
     ,
-        gUnk_09EF9928
+        gMsChargeMoogleFrames
     );
     AnimStart(&sMsChargeCursorAnim, 3, ANIM_FLAG_LOOP);
     AnimInit(&sMsChargeMoogleAnim,
-        gUnk_09EF9978
+        gMsChargeMoogleAnims
     ,
-        gUnk_09EF9928
+        gMsChargeMoogleFrames
     );
     AnimStart(&sMsChargeMoogleAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeConfirmCursorPalette = LoadObjPalette(gMoguPalette, 32);

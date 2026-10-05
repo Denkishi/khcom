@@ -10,7 +10,7 @@ typedef struct HcEffectDef {
     void*** sprites;
 #else
     void* tiles;
-    u32 unk_04;
+    u32 tilesSize;
     void** sprites;
 #endif
     u16 spriteIndex;

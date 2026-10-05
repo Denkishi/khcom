@@ -325,7 +325,7 @@ entries:
     - [8x8, 64, 0]
   animations:
   - symbol: gStatusBarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097A1864
@@ -348,7 +348,7 @@ entries:
     - [16x8, 0, 0]
   animations:
   - symbol: gStatusNewMarkGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F9F4
@@ -387,7 +387,7 @@ entries:
     - [32x8, 48, 4, {hflip: true}]
   animations:
   - symbol: gStatusRowHighlightAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
     address: 0x097A1BCC
@@ -430,7 +430,7 @@ entries:
     - [8x8, 0, 0]
   animations:
   - symbol: gStatusCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   us:
     address: 0x097A2314
@@ -462,7 +462,7 @@ entries:
     - [32x16, 0, 0, {fresh: true}]
   animations:
   - symbol: gStatusTabAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097A2474
@@ -494,7 +494,7 @@ entries:
     - [32x16, 32, 0]
   animations:
   - symbol: gStatusTabRightAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097A28A8
@@ -520,7 +520,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gStockMesDispArrowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   us:
     address: 0x097A2CDC
@@ -546,7 +546,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gStatusNewMarkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097A2DF8
@@ -588,7 +588,7 @@ entries:
     - [8x8, 48, 2]
   animations:
   - symbol: gStatusBarFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977DDE0
@@ -626,7 +626,7 @@ entries:
     - [32x16, 32, 0]
   animations:
   - symbol: gStatusBarSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977E0C8
@@ -665,7 +665,7 @@ entries:
     - [8x16, 48, 0]
   animations:
   - symbol: gStatusBarItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977E40C
@@ -691,7 +691,7 @@ entries:
     - [32x16, 0, 0, {fresh: true}]
   animations:
   - symbol: gStatusTabGermanSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977EB48
@@ -717,7 +717,7 @@ entries:
     - [32x16, 0, 0, {fresh: true}]
   animations:
   - symbol: gStatusTabFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977EF7C
@@ -743,7 +743,7 @@ entries:
     - [32x16, 0, 0, {fresh: true}]
   animations:
   - symbol: gStatusTabItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F3B0
@@ -760,7 +760,7 @@ entries:
     - [16x8, 0, 0]
   animations:
   - symbol: gStatusNewMarkEnglishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F7E4
@@ -777,7 +777,7 @@ entries:
     - [32x8, 0, 0]
   animations:
   - symbol: gStatusNewMarkFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F838
@@ -794,7 +794,7 @@ entries:
     - [32x8, 0, 0]
   animations:
   - symbol: gStatusNewMarkSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F8CC
@@ -811,7 +811,7 @@ entries:
     - [32x8, 0, 0]
   animations:
   - symbol: gStatusNewMarkItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0977F960

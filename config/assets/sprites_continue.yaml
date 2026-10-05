@@ -182,10 +182,10 @@ entries:
     - [64x32, -31, -12, {pal: 8}]
   animations:
   - symbol: gContinueCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [3, 8], [2, 8], [1, 8]]
   - symbol: gContinueCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 13], [6, 13], [7, 13], [8, 13], [9, 13], [10, 13], [11, 13], [12, 13], [13, 13], [14, 13], [15, 13], [16, 13]]
   us:
     address: 0x090A6A20
@@ -225,7 +225,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gContinueLineAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A7D28
@@ -283,7 +283,7 @@ entries:
     - [64x32, -31, -12]
   animations:
   - symbol: gSoraContinueAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [1, 13], [2, 13], [3, 13], [4, 13], [5, 13], [6, 13], [7, 13], [8, 13], [9, 13], [10, 13], [11, 13]]
   us:
     address: 0x090A7E5C
@@ -341,10 +341,10 @@ entries:
     - [64x32, -28, -16]
   animations:
   - symbol: gRikuContinueAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [1, 13], [2, 13], [3, 13], [4, 13], [5, 13], [6, 13], [7, 13], [8, 13], [9, 13], [10, 13], [11, 13]]
   - symbol: gRikuContinueAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A8F0C

@@ -141,19 +141,19 @@ entries:
     - [8x8, -24, 0]
   animations:
   - symbol: gBHpgagEAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBHpgagEAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gBHpgagEAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gBHpgagEAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gBHpgagEAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x08B24C98
@@ -179,7 +179,7 @@ entries:
     - [16x16, -8, -8]
   animations:
   - symbol: gLockonCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [1, 10], [0, 10]]
   us:
     address: 0x090D7C50

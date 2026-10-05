@@ -16,8 +16,8 @@ typedef struct AnimFrame {
 } AnimFrame;
 
 typedef struct AnimHeader {
-    u16 unk_00;
-    u16 unk_02;
+    u16 originX;
+    u16 originY;
     u16 frameCount;
     AnimFrame frames[0];
 } __attribute__((packed, aligned(2))) AnimHeader;

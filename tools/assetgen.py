@@ -837,7 +837,7 @@ def emit_sheet(manifest, entry, version, sheet, lines):
         symbol = manifest.item_symbol(anim, version)
         lines.append(f"\t.global {symbol}")
         lines.append(f"{symbol}:")
-        lines.append(f"\t.hword {anim['fields']['unk_00']}, {anim['fields']['unk_02']}, {len(anim['frames'])}")
+        lines.append(f"\t.hword {anim['fields']['originX']}, {anim['fields']['originY']}, {len(anim['frames'])}")
         for frame in anim["frames"]:
             lines.append(f"\t.hword {words(frame)}")
     binary = manifest.binary(entry, version)
@@ -890,7 +890,7 @@ def emit_s(manifest, version, members, out_path, tmp, obj, sheets, resolve):
         elif kind == "anim":
             fields = manifest.fields(entry, version)
             frames = manifest.data(entry, version, "frames")
-            lines.append(f"\t.hword {fields['unk_00']}, {fields['unk_02']}, {len(frames)}")
+            lines.append(f"\t.hword {fields['originX']}, {fields['originY']}, {len(frames)}")
             for frame in frames:
                 lines.append(f"\t.hword {words(frame)}")
         elif kind is not None:

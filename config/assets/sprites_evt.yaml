@@ -7458,25 +7458,25 @@ entries:
     - [8x16, 0, -8]
   animations:
   - symbol: gSoraKeybladeAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 4]]
   - symbol: gSoraKeybladeAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gSoraKeybladeAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [1, 6]]
   - symbol: gSoraKeybladeAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4], [5, 16]]
   - symbol: gSoraKeybladeAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gSoraKeybladeAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4], [7, 16]]
   - symbol: gSoraKeybladeAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   us:
     address: 0x088D8110
@@ -7500,7 +7500,7 @@ entries:
     - [32x8, 0, 14]
   animations:
   - symbol: gEventBg089Object0Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919752C
@@ -7523,7 +7523,7 @@ entries:
     - [32x32, 6, -112]
   animations:
   - symbol: gEventBg089Object1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09197648
@@ -7555,13 +7555,13 @@ entries:
     - [32x64, -40, -16]
   animations:
   - symbol: gHalloweenTownGateLeftDoorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20]]
   - symbol: gHalloweenTownGateLeftDoorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4]]
   - symbol: gHalloweenTownGateLeftDoorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x0919785C
@@ -7597,13 +7597,13 @@ entries:
     - [64x64, 24, -24]
   animations:
   - symbol: gHalloweenTownGateRightDoorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gHalloweenTownGateRightDoorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4]]
   - symbol: gHalloweenTownGateRightDoorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x0919A0B4
@@ -7627,7 +7627,7 @@ entries:
     - [32x32, 0, -32]
   animations:
   - symbol: gEventBg122Object8Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919C91C
@@ -7650,7 +7650,7 @@ entries:
     - [64x64, -2, 0]
   animations:
   - symbol: gEventBg122Object3Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919CF38
@@ -7674,7 +7674,7 @@ entries:
     - [32x32, 0, 64]
   animations:
   - symbol: gEventBg122Object4Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919D74C
@@ -7698,7 +7698,7 @@ entries:
     - [32x64, 63, -10]
   animations:
   - symbol: gEventBg122Object7Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919DD68
@@ -7724,7 +7724,7 @@ entries:
     - [32x8, -16, 0]
   animations:
   - symbol: gDonaBb00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919E984
@@ -7750,7 +7750,7 @@ entries:
     - [32x8, -16, 1]
   animations:
   - symbol: gDonaFf00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0919EC20
@@ -7792,13 +7792,13 @@ entries:
     - [32x8, -13, 2]
   animations:
   - symbol: gDonaLl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gDonaLl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 32], [3, 8]]
   - symbol: gDonaLl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x0919EEBC
@@ -7925,25 +7925,25 @@ entries:
     - [8x32, 14, -11]
   animations:
   - symbol: gDonaFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gDonaFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
   - symbol: gDonaFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 8], [10, 8], [11, 8], [10, 8], [11, 8], [12, 8], [0, 8]]
   - symbol: gDonaFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 30], [15, 8], [14, 6], [13, 5]]
   - symbol: gDonaFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 10], [0, 10]]
   - symbol: gDonaFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4], [19, 4], [20, 4], [21, 4], [22, 4], [23, 4], [24, 4], [25, 4]]
   - symbol: gDonaFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   us:
     address: 0x0919FBB4
@@ -8146,52 +8146,52 @@ entries:
     - [32x8, -16, 2]
   animations:
   - symbol: gDonaBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gDonaBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
   - symbol: gDonaBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 4], [16, 4]]
   - symbol: gDonaBl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 7], [18, 7]]
   - symbol: gDonaBl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 7]]
   - symbol: gDonaBl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 7], [17, 7]]
   - symbol: gDonaBl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 10], [0, 10]]
   - symbol: gDonaBl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 8], [22, 8], [23, 32]]
   - symbol: gDonaBl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 10], [23, 10]]
   - symbol: gDonaBl00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 9]]
   - symbol: gDonaBl00Anim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 6], [26, 10], [27, 7], [29, 10], [30, 4], [27, 6], [25, 4]]
   - symbol: gDonaBl00Anim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 6], [26, 8], [27, 6], [28, 6], [27, 5]]
   - symbol: gDonaBl00Anim12
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 8], [32, 8], [33, 8], [34, 8], [35, 8]]
   - symbol: gDonaBl00Anim13
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[36, 8], [37, 8], [38, 8], [39, 8], [40, 8]]
   - symbol: gDonaBl00Anim14
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 9], [27, 6], [26, 8]]
   - symbol: gDonaBl00Anim15
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[41, 8], [0, 7], [42, 7]]
   us:
     address: 0x091A3F58
@@ -8216,7 +8216,7 @@ entries:
     - [32x64, -15, -57]
   animations:
   - symbol: gGoofyBb00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091AB168
@@ -8241,7 +8241,7 @@ entries:
     - [32x64, -17, -55]
   animations:
   - symbol: gGoofyFf00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091AB57C
@@ -8266,7 +8266,7 @@ entries:
     - [32x64, -22, -54]
   animations:
   - symbol: gGoofyLl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091AB990
@@ -8291,7 +8291,7 @@ entries:
     - [32x64, -17, -54]
   animations:
   - symbol: gGoofyFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091ABDA4
@@ -8316,7 +8316,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGoofyBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091AC1B8
@@ -8372,7 +8372,7 @@ entries:
     - [16x16, -1, 0]
   animations:
   - symbol: gGoofy01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x091AC5CC
@@ -8429,7 +8429,7 @@ entries:
     - [16x16, -26, -24]
   animations:
   - symbol: gGoofy02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x091AEE00
@@ -8490,7 +8490,7 @@ entries:
     - [16x16, -31, -31]
   animations:
   - symbol: gGoofy03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x091B16B8
@@ -8555,7 +8555,7 @@ entries:
     - [16x16, -25, -27]
   animations:
   - symbol: gGoofy04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x091B45C8
@@ -8594,13 +8594,13 @@ entries:
     - [32x16, -37, -30]
   animations:
   - symbol: gGoofy06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 9]]
   - symbol: gGoofy06Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8]]
   - symbol: gGoofy06Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 9], [0, 12]]
   us:
     address: 0x091B7730
@@ -8638,13 +8638,13 @@ entries:
     - [32x32, -39, -45]
   animations:
   - symbol: gGoofy07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 8]]
   - symbol: gGoofy07Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 9]]
   - symbol: gGoofy07Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [0, 12]]
   us:
     address: 0x091B869C
@@ -8682,10 +8682,10 @@ entries:
     - [16x32, -27, -32]
   animations:
   - symbol: gGoofy08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 5], [2, 5], [3, 25]]
   - symbol: gGoofy08Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x091B9784
@@ -8713,7 +8713,7 @@ entries:
     - [32x64, -17, -54]
   animations:
   - symbol: gGoofy09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12]]
   us:
     address: 0x091BAB64
@@ -8753,7 +8753,7 @@ entries:
     - [16x16, -32, -19]
   animations:
   - symbol: gGoofy10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 4], [2, 10], [3, 4]]
   us:
     address: 0x091BB388
@@ -8785,10 +8785,10 @@ entries:
     - [8x8, -31, -38]
   animations:
   - symbol: gGoofy11Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12]]
   - symbol: gGoofy11Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [2, 13], [1, 15]]
   us:
     address: 0x091BC26C
@@ -8816,7 +8816,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGoofy12Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12]]
   us:
     address: 0x091BCED0
@@ -8854,10 +8854,10 @@ entries:
     - [16x32, -27, -32]
   animations:
   - symbol: gGoofy13Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 5], [2, 5], [3, 25]]
   - symbol: gGoofy13Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x091BD6F4
@@ -8883,7 +8883,7 @@ entries:
     - [32x16, -22, -25]
   animations:
   - symbol: gGoofy17Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091BEAD4
@@ -8915,7 +8915,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGoofy18Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 12], [2, 15]]
   us:
     address: 0x091BEFF0
@@ -8957,10 +8957,10 @@ entries:
     - [8x32, -28, -37]
   animations:
   - symbol: gGoofy19Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 32], [2, 8]]
   - symbol: gGoofy19Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x091BFC68
@@ -9019,13 +9019,13 @@ entries:
     - [32x32, -39, -45]
   animations:
   - symbol: gGoofy20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 19], [1, 8], [2, 9], [3, 11], [4, 8]]
   - symbol: gGoofy20Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 10]]
   - symbol: gGoofy20Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 8], [7, 8], [0, 8]]
   us:
     address: 0x091C0FDC
@@ -9141,34 +9141,34 @@ entries:
     - [8x32, 16, -49]
   animations:
   - symbol: gRobeFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRobeFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 9], [5, 9], [6, 9], [7, 9], [8, 9], [1, 9], [2, 9], [3, 9]]
   - symbol: gRobeFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 9], [10, 9], [11, 9]]
   - symbol: gRobeFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gRobeFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 9]]
   - symbol: gRobeFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gRobeFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [15, 8], [16, 5], [17, 6]]
   - symbol: gRobeFl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gRobeFl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [15, 4]]
   - symbol: gRobeFl00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 5], [17, 5]]
   us:
     address: 0x091C35B0
@@ -9227,10 +9227,10 @@ entries:
     - [32x8, -16, 1]
   animations:
   - symbol: gRobeBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRobeBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 9], [7, 9], [8, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9]]
   us:
     address: 0x091C90C0
@@ -9262,7 +9262,7 @@ entries:
     - [16x8, -8, -48]
   animations:
   - symbol: gSor1fl20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 40]]
   us:
     address: 0x091CBA48
@@ -9324,25 +9324,25 @@ entries:
     - [32x8, -16, -8]
   animations:
   - symbol: gSor1bl21Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 4], [3, 4]]
   - symbol: gSor1bl21Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gSor1bl21Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [1, 6], [0, 6]]
   - symbol: gSor1bl21Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [4, 16]]
   - symbol: gSor1bl21Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gSor1bl21Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 6], [6, 16]]
   - symbol: gSor1bl21Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   us:
     address: 0x091CC104
@@ -9377,19 +9377,19 @@ entries:
     - [16x16, -16, -21]
   animations:
   - symbol: gUnk_091CD872
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 4]]
   - symbol: gUnk_091CD884
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gUnk_091CD88E
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [1, 6]]
   - symbol: gUnk_091CD89C
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [4, 16]]
   - symbol: gUnk_091CD8AA
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x091CD840
@@ -9432,19 +9432,19 @@ entries:
     - [32x16, -19, -17]
   animations:
   - symbol: gUnk_091CDAD6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 4]]
   - symbol: gUnk_091CDAE8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gUnk_091CDAF2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [1, 4]]
   - symbol: gUnk_091CDB00
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4], [4, 16]]
   - symbol: gUnk_091CDB0E
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x091CDA74
@@ -9479,7 +9479,7 @@ entries:
     - [32x16, -24, -14]
   animations:
   - symbol: gSor1bl22Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 14], [2, 12], [1, 20]]
   us:
     address: 0x091CE0F8
@@ -9516,10 +9516,10 @@ entries:
     - [16x8, -8, -48]
   animations:
   - symbol: gSor1fl23Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 8], [2, 32]]
   - symbol: gSor1fl23Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8]]
   us:
     address: 0x091CEA84
@@ -9587,28 +9587,28 @@ entries:
     - [8x8, 7, -38]
   animations:
   - symbol: gSor1fl26Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSor1fl26Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gSor1fl26Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gSor1fl26Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [3, 10], [4, 10]]
   - symbol: gSor1fl26Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gSor1fl26Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8]]
   - symbol: gSor1fl26Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gSor1fl26Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   us:
     address: 0x091CF4A4
@@ -9645,10 +9645,10 @@ entries:
     - [16x8, -8, -48]
   animations:
   - symbol: gSor1fl28Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 64], [2, 12], [1, 14], [2, 14]]
   - symbol: gSor1fl28Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x091D07B4
@@ -9689,7 +9689,7 @@ entries:
     - [8x8, -3, -48]
   animations:
   - symbol: gSor1bl24Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 10], [2, 24], [3, 32]]
   us:
     address: 0x091D11DC
@@ -9720,7 +9720,7 @@ entries:
     - [32x16, -16, -9]
   animations:
   - symbol: gSor1bl25Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 11], [0, 10], [1, 10], [0, 8], [1, 8], [0, 10], [1, 10], [0, 6]]
   us:
     address: 0x091D1EE4
@@ -9746,7 +9746,7 @@ entries:
     - [16x8, -16, -8]
   animations:
   - symbol: gSor1bl26Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091D2554
@@ -9779,7 +9779,7 @@ entries:
     - [32x16, -24, -6]
   animations:
   - symbol: gSoraGestureAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 14], [2, 12], [1, 20]]
   us:
     address: 0x091D27B0
@@ -9815,10 +9815,10 @@ entries:
     - [32x16, -16, -9]
   animations:
   - symbol: gSor1bl23Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 8], [2, 32]]
   - symbol: gSor1bl23Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8]]
   us:
     address: 0x091D311C
@@ -9850,7 +9850,7 @@ entries:
     - [16x8, -8, -48]
   animations:
   - symbol: gSor1bl20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 8]]
   us:
     address: 0x091D3AF4
@@ -9896,10 +9896,10 @@ entries:
     - [32x8, -16, 0]
   animations:
   - symbol: gSor1fl27Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 32], [2, 8]]
   - symbol: gSor1fl27Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x091D41B0
@@ -10006,16 +10006,16 @@ entries:
     - [16x16, -39, -24]
   animations:
   - symbol: gSor1fl29Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSor1fl29Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 8], [2, 7], [3, 10], [4, 16]]
   - symbol: gSor1fl29Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 16]]
   - symbol: gSor1fl29Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 5], [9, 7], [10, 7], [11, 11], [12, 10], [13, 8], [14, 16]]
   us:
     address: 0x091D51F4
@@ -10081,10 +10081,10 @@ entries:
     - [8x8, 12, -24]
   animations:
   - symbol: gSor1bl29Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSor1bl29Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 7], [2, 7], [3, 11], [4, 10], [5, 8], [6, 16]]
   us:
     address: 0x091D8514
@@ -10123,10 +10123,10 @@ entries:
     - [8x16, -57, -60]
   animations:
   - symbol: gTrumpH00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTrumpH00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4]]
   us:
     address: 0x091D9F10
@@ -10159,10 +10159,10 @@ entries:
     - [8x32, -23, -80]
   animations:
   - symbol: gTrumpH01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5]]
   - symbol: gTrumpH01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x091DB7BC
@@ -10211,7 +10211,7 @@ entries:
     - [16x32, -32, -81]
   animations:
   - symbol: gTrumpH02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x091DC2C4
@@ -10260,7 +10260,7 @@ entries:
     - [16x16, -2, -5]
   animations:
   - symbol: gTrumpH03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x091DF994
@@ -10299,10 +10299,10 @@ entries:
     - [16x16, 2, -3]
   animations:
   - symbol: gTrumpS00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTrumpS00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4]]
   us:
     address: 0x091E31A4
@@ -10335,10 +10335,10 @@ entries:
     - [16x16, -24, -34]
   animations:
   - symbol: gTrumpS01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5]]
   - symbol: gTrumpS01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x091E4890
@@ -10386,7 +10386,7 @@ entries:
     - [16x16, -40, -65]
   animations:
   - symbol: gTrumpS02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x091E5658
@@ -10434,7 +10434,7 @@ entries:
     - [32x8, -37, -68]
   animations:
   - symbol: gTrumpS03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x091E8AE4
@@ -10470,10 +10470,10 @@ entries:
     - [16x8, -9, -56]
   animations:
   - symbol: gQenF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gQenF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091EBF70
@@ -10556,7 +10556,7 @@ entries:
     - [8x16, -21, -40]
   animations:
   - symbol: gQenF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x091EC888
@@ -10629,10 +10629,10 @@ entries:
     - [16x8, -8, -64]
   animations:
   - symbol: gQenF02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [2, 9], [1, 11], [2, 8], [0, 9], [3, 11], [0, 8], [2, 12], [1, 15], [2, 8], [0, 12], [3, 15], [0, 7], [2, 6], [1, 8], [2, 7], [0, 6], [3, 8]]
   - symbol: gQenF02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 12], [6, 24]]
   us:
     address: 0x091EF4DC
@@ -10660,10 +10660,10 @@ entries:
     - [8x32, -23, -49]
   animations:
   - symbol: gQenB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gQenB00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091F1D18
@@ -10729,7 +10729,7 @@ entries:
     - [16x8, -11, -62]
   animations:
   - symbol: gQenB01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 12], [6, 12], [7, 12]]
   us:
     address: 0x091F2288
@@ -10759,7 +10759,7 @@ entries:
     - [16x8, -6, -64]
   animations:
   - symbol: gQenStdAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091F49D8
@@ -10902,19 +10902,19 @@ entries:
     - [8x8, -19, -32]
   animations:
   - symbol: gAliceBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gAliceBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10], [8, 10]]
   - symbol: gAliceBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6]]
   - symbol: gAliceBl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gAliceBl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 9], [19, 17]]
   us:
     address: 0x091F4FCC
@@ -11038,13 +11038,13 @@ entries:
     - [8x16, 5, -12]
   animations:
   - symbol: gAliceFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gAliceFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10], [8, 10]]
   - symbol: gAliceFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6]]
   us:
     address: 0x091F7F90
@@ -11093,10 +11093,10 @@ entries:
     - [16x32, -8, -24]
   animations:
   - symbol: gJimFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gJimFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]]
   us:
     address: 0x091FA804
@@ -11156,10 +11156,10 @@ entries:
     - [32x32, -15, -33]
   animations:
   - symbol: gJimFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 14], [2, 8], [3, 10], [0, 14]]
   - symbol: gJimFl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [0, 12]]
   us:
     address: 0x091FB190
@@ -11208,10 +11208,10 @@ entries:
     - [16x32, -8, -24]
   animations:
   - symbol: gJimBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gJimBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7], [8, 7]]
   us:
     address: 0x091FB85C
@@ -11245,7 +11245,7 @@ entries:
     - [32x32, -16, -25]
   animations:
   - symbol: gJimBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 14], [2, 8], [3, 10], [0, 14]]
   us:
     address: 0x091FC1E8
@@ -11281,13 +11281,13 @@ entries:
     - [16x16, -7, -40]
   animations:
   - symbol: gPinoF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gPinoF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6]]
   - symbol: gPinoF00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x091FC72C
@@ -11337,13 +11337,13 @@ entries:
     - [16x8, -9, -4]
   animations:
   - symbol: gPinoF03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 12]]
   - symbol: gPinoF03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [3, 12]]
   - symbol: gPinoF03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 12]]
   us:
     address: 0x091FCA68
@@ -11477,13 +11477,13 @@ entries:
     - [32x16, -16, -9, {same: [7, 1]}]
   animations:
   - symbol: gPinoFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   - symbol: gPinoFl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 8], [10, 8], [11, 8], [12, 8], [13, 8], [14, 8], [15, 8]]
   - symbol: gPinoFl01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 8], [17, 8], [18, 8], [19, 8], [20, 8], [21, 8], [22, 8], [23, 8]]
   us:
     address: 0x091FD00C
@@ -11583,13 +11583,13 @@ entries:
     - [8x8, -8, -2, {same: [5, 1]}]
   animations:
   - symbol: gPinoFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   - symbol: gPinoFl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6]]
   - symbol: gPinoFl02Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6]]
   us:
     address: 0x091FEAC0
@@ -11723,13 +11723,13 @@ entries:
     - [8x8, -12, -23]
   animations:
   - symbol: gPinoBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   - symbol: gPinoBl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 8], [10, 8], [11, 8], [12, 8], [13, 8], [14, 8], [15, 8]]
   - symbol: gPinoBl01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 8], [17, 8], [18, 8], [19, 8], [20, 8], [21, 8], [22, 8], [23, 8]]
   us:
     address: 0x091FF980
@@ -11835,13 +11835,13 @@ entries:
     - [8x8, -14, -23, {same: [12, 2]}]
   animations:
   - symbol: gPinoBl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   - symbol: gPinoBl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6]]
   - symbol: gPinoBl02Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6]]
   us:
     address: 0x09200F54
@@ -11877,13 +11877,13 @@ entries:
     - [16x8, -8, -1]
   animations:
   - symbol: gPinoB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gPinoB00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gPinoB00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x09201F98
@@ -11933,13 +11933,13 @@ entries:
     - [16x8, -9, -4]
   animations:
   - symbol: gPinoB03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 12]]
   - symbol: gPinoB03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [3, 12]]
   - symbol: gPinoB03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 12]]
   us:
     address: 0x09202294
@@ -11997,10 +11997,10 @@ entries:
     - [16x32, -6, -27]
   animations:
   - symbol: gMoguFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [1, 20], [2, 20], [3, 20]]
   - symbol: gMoguFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [8, 8], [9, 8], [10, 8], [11, 8], [4, 8], [5, 8], [6, 8]]
   us:
     address: 0x09202838
@@ -12058,10 +12058,10 @@ entries:
     - [16x32, -8, -27]
   animations:
   - symbol: gMoguBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [1, 20], [2, 20], [3, 20]]
   - symbol: gMoguBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [8, 8], [9, 8], [10, 8], [11, 8], [4, 8], [5, 8], [6, 8]]
   us:
     address: 0x092034EC
@@ -12087,7 +12087,7 @@ entries:
     - [32x16, -18, -8]
   animations:
   - symbol: gUsagif00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092041A0
@@ -12113,7 +12113,7 @@ entries:
     - [32x16, -18, -8]
   animations:
   - symbol: gUsagib00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092044BC
@@ -12167,7 +12167,7 @@ entries:
     - [8x8, 11, 1, {fresh: true}]
   animations:
   - symbol: gUsagi01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 7], [4, 8], [5, 8]]
   us:
     address: 0x092047D8
@@ -12211,7 +12211,7 @@ entries:
     - [32x32, -16, -32]
   animations:
   - symbol: gUsagi02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x09205AA8
@@ -12249,7 +12249,7 @@ entries:
     - [32x8, -18, -2]
   animations:
   - symbol: gUsagi03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7]]
   us:
     address: 0x0920691C
@@ -12279,7 +12279,7 @@ entries:
     - [32x8, -19, -1]
   animations:
   - symbol: gUsagi04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 15]]
   us:
     address: 0x09207374
@@ -12305,7 +12305,7 @@ entries:
     - [32x8, -15, 0]
   animations:
   - symbol: gAladdin00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092078A4
@@ -12356,7 +12356,7 @@ entries:
     - [32x8, -14, 1]
   animations:
   - symbol: gAladdin01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8]]
   us:
     address: 0x09207D40
@@ -12404,7 +12404,7 @@ entries:
     - [8x32, 9, -46]
   animations:
   - symbol: gAladdin02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x09209DD8
@@ -12439,7 +12439,7 @@ entries:
     - [32x8, -20, 1]
   animations:
   - symbol: gAladdin03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 14]]
   us:
     address: 0x0920BB64
@@ -12476,7 +12476,7 @@ entries:
     - [16x32, 16, -26]
   animations:
   - symbol: gAladdin04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 7], [2, 12]]
   us:
     address: 0x0920C62C
@@ -12506,7 +12506,7 @@ entries:
     - [32x8, -16, 1, {fresh: true}]
   animations:
   - symbol: gAladdin05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 15]]
   us:
     address: 0x0920D780
@@ -12554,7 +12554,7 @@ entries:
     - [16x16, 7, -6]
   animations:
   - symbol: gAladdin06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 8], [2, 7], [3, 14]]
   us:
     address: 0x0920E0B0
@@ -12592,7 +12592,7 @@ entries:
     - [64x32, -37, -19]
   animations:
   - symbol: gAladdin07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 8], [3, 13]]
   us:
     address: 0x0920FB64
@@ -12635,7 +12635,7 @@ entries:
     - [16x8, -18, 1]
   animations:
   - symbol: gAladdin08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 6], [2, 12]]
   us:
     address: 0x0921113C
@@ -12680,13 +12680,13 @@ entries:
     - [32x16, -18, -7]
   animations:
   - symbol: gAladdin09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gAladdin09Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 9], [2, 9], [3, 12]]
   - symbol: gAladdin09Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 9]]
   us:
     address: 0x09212874
@@ -12712,7 +12712,7 @@ entries:
     - [32x8, -17, -2]
   animations:
   - symbol: gAladdinB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09213B5C
@@ -12764,7 +12764,7 @@ entries:
     - [32x8, -17, -1]
   animations:
   - symbol: gAladdinB01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8]]
   us:
     address: 0x09213FF8
@@ -12814,7 +12814,7 @@ entries:
     - [32x8, -19, 1]
   animations:
   - symbol: gAladdinB02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x09216098
@@ -12853,7 +12853,7 @@ entries:
     - [32x16, -20, -11]
   animations:
   - symbol: gAladdinB03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 14]]
   us:
     address: 0x09217EF0
@@ -12891,7 +12891,7 @@ entries:
     - [8x32, 29, -26]
   animations:
   - symbol: gAladdinB04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 7], [2, 12]]
   us:
     address: 0x09218BB0
@@ -12921,7 +12921,7 @@ entries:
     - [32x8, -17, -3, {fresh: true}]
   animations:
   - symbol: gAladdinB05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 14]]
   us:
     address: 0x09219E8C
@@ -12947,7 +12947,7 @@ entries:
     - [16x8, -7, -5, {layer: 2}]
   animations:
   - symbol: gJackFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0921A7BC
@@ -12973,7 +12973,7 @@ entries:
     - [16x8, -12, -5, {layer: 1}]
   animations:
   - symbol: gJackBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0921AC18
@@ -13030,7 +13030,7 @@ entries:
     - [8x8, -15, -1]
   animations:
   - symbol: gJackWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 9], [5, 9], [6, 9], [7, 9], [0, 9], [1, 9], [2, 9], [3, 9]]
   us:
     address: 0x0921B074
@@ -13088,7 +13088,7 @@ entries:
     - [8x16, 10, -21]
   animations:
   - symbol: gJackRunAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0921D2EC
@@ -13137,16 +13137,16 @@ entries:
     - [16x16, -2, -67]
   animations:
   - symbol: gJackAppealAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10]]
   - symbol: gJackAppealAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gJackAppealAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gJackAppealAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x0921F7EC
@@ -13204,7 +13204,7 @@ entries:
     - [8x8, -2, -2]
   animations:
   - symbol: gJackWalkBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 9], [5, 9], [6, 9], [7, 9], [0, 9], [1, 9], [2, 9], [3, 9]]
   us:
     address: 0x09221138
@@ -13260,7 +13260,7 @@ entries:
     - [8x16, 17, -32]
   animations:
   - symbol: gJackRunBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092233B8
@@ -13325,7 +13325,7 @@ entries:
     - [32x16, -24, -8]
   animations:
   - symbol: gJackClaimAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 8], [3, 5], [4, 5], [5, 6], [6, 8], [7, 9]]
   us:
     address: 0x092257CC
@@ -13402,34 +13402,34 @@ entries:
     - [8x8, -17, -48]
   animations:
   - symbol: gPeterFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gPeterFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gPeterFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4], [3, 4], [4, 4]]
   - symbol: gPeterFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4], [3, 4], [0, 4]]
   - symbol: gPeterFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8]]
   - symbol: gPeterFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 12], [9, 10], [8, 12], [9, 10]]
   - symbol: gPeterFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gPeterFl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 6], [12, 12]]
   - symbol: gPeterFl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gPeterFl00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 6], [1, 4]]
   us:
     address: 0x092287B4
@@ -13477,19 +13477,19 @@ entries:
     - [16x16, 16, -16]
   animations:
   - symbol: gPeterBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gPeterBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gPeterBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [3, 12]]
   - symbol: gPeterBl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gPeterBl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [1, 12]]
   us:
     address: 0x0922B9C8
@@ -13519,10 +13519,10 @@ entries:
     - [8x16, -18, -46]
   animations:
   - symbol: gArielF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gArielF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x0922C480
@@ -13559,10 +13559,10 @@ entries:
     - [32x16, -13, -3]
   animations:
   - symbol: gArielF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 5], [2, 10]]
   - symbol: gArielF01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x0922CD14
@@ -13597,10 +13597,10 @@ entries:
     - [32x16, -14, -10]
   animations:
   - symbol: gArielFrontGestureAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 5], [2, 10]]
   - symbol: gArielFrontGestureAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x0922D7B4
@@ -13628,10 +13628,10 @@ entries:
     - [32x64, -16, -50]
   animations:
   - symbol: gArielB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gArielB00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x0922E1D4
@@ -13664,10 +13664,10 @@ entries:
     - [32x64, -14, -56]
   animations:
   - symbol: gArielBackGestureAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 5], [2, 10]]
   - symbol: gArielBackGestureAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x0922E9FC
@@ -13715,10 +13715,10 @@ entries:
     - [64x32, -22, -37]
   animations:
   - symbol: gArielSwimFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   - symbol: gArielSwimFAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x0922F4D0
@@ -13774,10 +13774,10 @@ entries:
     - [32x32, 10, -11]
   animations:
   - symbol: gArielSwimBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   - symbol: gArielSwimBAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x09231638
@@ -13871,7 +13871,7 @@ entries:
     - [8x16, 21, -7, {layer: 1}]
   animations:
   - symbol: gBeastBlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092338D0
@@ -13901,7 +13901,7 @@ entries:
     - [8x32, 30, -40, {layer: 2}]
   animations:
   - symbol: gBeastBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09239648
@@ -13983,7 +13983,7 @@ entries:
     - [16x8, 10, -6]
   animations:
   - symbol: gBeastFlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 8], [0, 8], [1, 8], [2, 8], [3, 8]]
   us:
     address: 0x0923A0DC
@@ -14012,7 +14012,7 @@ entries:
     - [8x16, -39, -57, {layer: 1}]
   animations:
   - symbol: gBeastFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0923EF8C
@@ -14091,7 +14091,7 @@ entries:
     - [16x32, 13, -64]
   animations:
   - symbol: gBeastKamaeBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 6], [2, 5], [3, 8]]
   us:
     address: 0x0923FA38
@@ -14230,7 +14230,7 @@ entries:
     - [8x8, -2, 0]
   animations:
   - symbol: gBeastRunBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x09242264
@@ -14292,7 +14292,7 @@ entries:
     - [32x8, -28, -5]
   animations:
   - symbol: gBeastSyucyoFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 8], [2, 8]]
   us:
     address: 0x09246E68
@@ -14356,7 +14356,7 @@ entries:
     - [8x8, -35, -51]
   animations:
   - symbol: gBeastOdorokiFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   us:
     address: 0x09248DB4
@@ -14410,7 +14410,7 @@ entries:
     - [16x16, -1, -75]
   animations:
   - symbol: gBeastOdorokiBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   us:
     address: 0x0924B1AC
@@ -14468,16 +14468,16 @@ entries:
     - [32x8, -18, -4]
   animations:
   - symbol: gCheshireAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7]]
   - symbol: gCheshireAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gCheshireAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gCheshireAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [2, 7], [3, 7], [4, 8], [5, 12], [6, 8], [7, 20]]
   us:
     address: 0x0924D128
@@ -14502,7 +14502,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGeppettoF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0924E9F8
@@ -14527,7 +14527,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGeppettoB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0924EE0C
@@ -14572,7 +14572,7 @@ entries:
     - [32x64, -17, -51]
   animations:
   - symbol: gGeppetto01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8]]
   us:
     address: 0x0924F220
@@ -14599,7 +14599,7 @@ entries:
     - [16x32, 16, -24]
   animations:
   - symbol: gCroudF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09250ED4
@@ -14653,7 +14653,7 @@ entries:
     - [32x8, -17, 0]
   animations:
   - symbol: gCroudF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9]]
   us:
     address: 0x092514F4
@@ -14707,10 +14707,10 @@ entries:
     - [8x8, 18, 0]
   animations:
   - symbol: gCroudF02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   - symbol: gCroudF02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 8], [4, 8]]
   us:
     address: 0x09255C1C
@@ -14737,7 +14737,7 @@ entries:
     - [16x32, 17, -26]
   animations:
   - symbol: gCroudB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09257874
@@ -14794,7 +14794,7 @@ entries:
     - [32x8, -12, -64]
   animations:
   - symbol: gCroudB01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9]]
   us:
     address: 0x09257E14
@@ -14834,7 +14834,7 @@ entries:
     - [16x8, 16, -1]
   animations:
   - symbol: gCroudB02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6]]
   us:
     address: 0x0925C24C
@@ -14893,7 +14893,7 @@ entries:
     - [16x8, 16, -1, {fresh: true}]
   animations:
   - symbol: gCroudB03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 6], [2, 7], [3, 16], [4, 7], [5, 8]]
   us:
     address: 0x0925D3F4
@@ -14936,7 +14936,7 @@ entries:
     - [64x64, -23, -59]
   animations:
   - symbol: gCroudB04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9]]
   us:
     address: 0x0925F0C0
@@ -14966,7 +14966,7 @@ entries:
     - [64x32, -28, -8]
   animations:
   - symbol: gArthraFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092621EC
@@ -14999,7 +14999,7 @@ entries:
     - [16x8, 34, 1]
   animations:
   - symbol: gArthraBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092630A0
@@ -15066,10 +15066,10 @@ entries:
     - [16x16, -1, -80]
   animations:
   - symbol: gArthraFWarauAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gArthraFWarauAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 7], [3, 8]]
   us:
     address: 0x09263F04
@@ -15148,7 +15148,7 @@ entries:
     - [8x32, 36, -32]
   animations:
   - symbol: gArthraFArukuAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 11], [2, 11], [3, 11], [4, 11], [5, 11], [6, 11]]
   us:
     address: 0x09266110
@@ -15223,7 +15223,7 @@ entries:
     - [16x16, 6, 9]
   animations:
   - symbol: gArthraWalkBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 11], [2, 11], [3, 11], [4, 11], [5, 11], [6, 11]]
   us:
     address: 0x0926AAD0
@@ -15305,10 +15305,10 @@ entries:
     - [16x16, -8, -72]
   animations:
   - symbol: gArthraFTefuriAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 12], [2, 10], [3, 10], [4, 34]]
   - symbol: gArthraFTefuriAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   us:
     address: 0x0926F324
@@ -15380,7 +15380,7 @@ entries:
     - [16x8, -36, -81]
   animations:
   - symbol: gArthraFAoguAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 12], [2, 12], [3, 50]]
   us:
     address: 0x092735A0
@@ -15406,7 +15406,7 @@ entries:
     - [64x32, -24, -15, {layer: 1}]
   animations:
   - symbol: gBugiFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092764C4
@@ -15432,7 +15432,7 @@ entries:
     - [64x32, -29, -16]
   animations:
   - symbol: gBugiBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092770E0
@@ -15492,16 +15492,16 @@ entries:
     - [16x32, 6, -77]
   animations:
   - symbol: gBugiBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 11], [4, 10], [5, 4]]
   - symbol: gBugiBl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 10], [3, 10], [2, 10], [6, 4]]
   - symbol: gBugiBl01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gBugiBl01Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 10], [3, 10], [2, 10]]
   us:
     address: 0x09277CFC
@@ -15562,7 +15562,7 @@ entries:
     - [16x8, 7, 8]
   animations:
   - symbol: gBugiFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [3, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10]]
   us:
     address: 0x0927C338
@@ -15619,10 +15619,10 @@ entries:
     - [64x32, -29, -20]
   animations:
   - symbol: gBugiFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 4], [4, 4], [5, 5], [6, 5], [7, 4]]
   - symbol: gBugiFl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0928035C
@@ -15688,10 +15688,10 @@ entries:
     - [8x8, -7, 4]
   animations:
   - symbol: gBugiFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBugiFl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 12], [2, 12], [1, 12], [2, 12], [1, 12], [2, 12], [3, 10], [4, 9], [5, 15], [4, 50]]
   us:
     address: 0x0928627C
@@ -15725,10 +15725,10 @@ entries:
     - [16x8, -5, -64]
   animations:
   - symbol: gBellFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBellFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 10]]
   us:
     address: 0x0928A5CC
@@ -15784,7 +15784,7 @@ entries:
     - [8x8, -22, -5]
   animations:
   - symbol: gBellFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x0928B2D4
@@ -15833,7 +15833,7 @@ entries:
     - [8x8, -12, 0]
   animations:
   - symbol: gBellFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8]]
   us:
     address: 0x0928D5C8
@@ -15865,7 +15865,7 @@ entries:
     - [8x32, 10, -32]
   animations:
   - symbol: gBellFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 40]]
   us:
     address: 0x0928F4D8
@@ -15892,7 +15892,7 @@ entries:
     - [8x8, 14, -5]
   animations:
   - symbol: gBellBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0928FF14
@@ -15954,7 +15954,7 @@ entries:
     - [8x16, 13, -9]
   animations:
   - symbol: gBellBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x09290394
@@ -16042,16 +16042,16 @@ entries:
     - [8x8, 2, -82]
   animations:
   - symbol: gPhilFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gPhilFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [1, 8], [2, 8], [3, 8]]
   - symbol: gPhilFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 15], [9, 15]]
   - symbol: gPhilFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 15], [12, 6], [13, 6], [14, 8], [13, 6], [12, 6], [11, 10]]
   us:
     address: 0x0929284C
@@ -16077,7 +16077,7 @@ entries:
     - [16x8, -7, 1]
   animations:
   - symbol: gPhilBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092949A0
@@ -16134,7 +16134,7 @@ entries:
     - [32x8, -19, -1]
   animations:
   - symbol: gPhilBlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09294BFC
@@ -16162,7 +16162,7 @@ entries:
     - [8x32, 12, -60, {layer: 1}]
   animations:
   - symbol: gHeraclesFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09296034
@@ -16190,7 +16190,7 @@ entries:
     - [8x8, 13, -43]
   animations:
   - symbol: gHeraclesBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0929661C
@@ -16261,7 +16261,7 @@ entries:
     - [8x8, -17, -77]
   animations:
   - symbol: gHeraclesFlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09296BA4
@@ -16359,7 +16359,7 @@ entries:
     - [8x8, 21, -18]
   animations:
   - symbol: gHeraclesRunBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x092996B0
@@ -16448,7 +16448,7 @@ entries:
     - [8x8, 7, -2]
   animations:
   - symbol: gHeraclesWalkBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0929CA00
@@ -16489,7 +16489,7 @@ entries:
     - [8x8, -4, 10]
   animations:
   - symbol: gHeraclesKamaeFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   us:
     address: 0x0929F858
@@ -16547,10 +16547,10 @@ entries:
     - [8x16, -29, -19]
   animations:
   - symbol: gHeraclesHizaFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 8], [3, 8]]
   - symbol: gHeraclesHizaFAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8], [3, 8]]
   us:
     address: 0x092A0784
@@ -16595,7 +16595,7 @@ entries:
     - [8x8, 9, -77]
   animations:
   - symbol: gHeraclesOdorokiFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 8]]
   us:
     address: 0x092A1C04
@@ -16659,7 +16659,7 @@ entries:
     - [32x32, -16, -89, {layer: 1}]
   animations:
   - symbol: gHadesFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7]]
   us:
     address: 0x092A2D88
@@ -16717,7 +16717,7 @@ entries:
     - [32x32, -16, -88]
   animations:
   - symbol: gHadesBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7]]
   us:
     address: 0x092A3F74
@@ -16800,7 +16800,7 @@ entries:
     - [8x16, 15, -17]
   animations:
   - symbol: gHadesWalkFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092A50FC
@@ -16883,7 +16883,7 @@ entries:
     - [8x16, -23, -22]
   animations:
   - symbol: gHadesWalkBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092A8D30
@@ -16979,10 +16979,10 @@ entries:
     - [16x16, 37, -74]
   animations:
   - symbol: gHadesMagicAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 7], [6, 7], [7, 7], [8, 7]]
   - symbol: gHadesMagicAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 7], [6, 7], [7, 7], [8, 7]]
   us:
     address: 0x092ACB44
@@ -17106,13 +17106,13 @@ entries:
     - [16x16, -55, -47]
   animations:
   - symbol: gHadesAngryAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 6], [6, 23]]
   - symbol: gHadesAngryAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 6], [8, 6], [9, 6], [10, 6], [11, 6]]
   - symbol: gHadesAngryAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7]]
   us:
     address: 0x092B0158
@@ -17150,7 +17150,7 @@ entries:
     - [64x64, -41, -96]
   animations:
   - symbol: gHadesFlameAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 35], [1, 6], [2, 5], [3, 5], [4, 6], [5, 7]]
   us:
     address: 0x092B4524
@@ -17212,7 +17212,7 @@ entries:
     - [8x8, 0, -8, {pal: 2}]
   animations:
   - symbol: gShougekihaAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 2], [3, 2], [2, 3], [1, 3], [0, 3], [5, 10]]
   us:
     address: 0x092B6DA0
@@ -17271,7 +17271,7 @@ entries:
     - [16x32, 29, -16]
   animations:
   - symbol: gShougekiha2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 5], [4, 5], [5, 3], [6, 3], [7, 4], [8, 5], [9, 5], [0, 10]]
   us:
     address: 0x092B75E0
@@ -17298,7 +17298,7 @@ entries:
     - [32x8, -37, -39]
   animations:
   - symbol: gDamboAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092BA1BC
@@ -17324,7 +17324,7 @@ entries:
     - [32x16, -15, -6]
   animations:
   - symbol: gFinklF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092BA69C
@@ -17350,7 +17350,7 @@ entries:
     - [32x16, -17, -8]
   animations:
   - symbol: gFinklB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092BA9B8
@@ -17384,7 +17384,7 @@ entries:
     - [32x16, -15, -6]
   animations:
   - symbol: gFinkl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7]]
   us:
     address: 0x092BACD4
@@ -17418,7 +17418,7 @@ entries:
     - [32x16, -17, -8]
   animations:
   - symbol: gFinkl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7]]
   us:
     address: 0x092BB618
@@ -17446,7 +17446,7 @@ entries:
     - [8x8, 46, -15]
   animations:
   - symbol: gMarefF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092BBF5C
@@ -17513,7 +17513,7 @@ entries:
     - [32x32, -5, -85]
   animations:
   - symbol: gMaref01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9]]
   us:
     address: 0x092BCC24
@@ -17588,7 +17588,7 @@ entries:
     - [8x16, -23, -31]
   animations:
   - symbol: gMaref02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x092C2C98
@@ -17626,7 +17626,7 @@ entries:
     - [16x16, -13, -101]
   animations:
   - symbol: gMaref03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 17]]
   us:
     address: 0x092C7CB8
@@ -17676,10 +17676,10 @@ entries:
     - [8x32, -30, -63]
   animations:
   - symbol: gMaref04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 28]]
   - symbol: gMaref04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 9], [2, 9], [0, 9]]
   us:
     address: 0x092CA314
@@ -17709,7 +17709,7 @@ entries:
     - [32x8, 16, 16]
   animations:
   - symbol: gMarefB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x092CC844
@@ -17735,7 +17735,7 @@ entries:
     - [16x8, -8, -3]
   animations:
   - symbol: gBanbStandAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092CD238
@@ -17765,7 +17765,7 @@ entries:
     - [32x8, -6, 5]
   animations:
   - symbol: gShinbaF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092CD494
@@ -17793,10 +17793,10 @@ entries:
     - [32x32, -17, -26]
   animations:
   - symbol: gMushuF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMushuF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x092CDC48
@@ -17832,10 +17832,10 @@ entries:
     - [32x8, -16, -3]
   animations:
   - symbol: gKairF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gKairF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 10], [1, 16]]
   us:
     address: 0x092CDE90
@@ -17860,7 +17860,7 @@ entries:
     - [32x64, -15, -57]
   animations:
   - symbol: gEarF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092CE4A4
@@ -17906,7 +17906,7 @@ entries:
     - [32x64, -15, -56]
   animations:
   - symbol: gEarF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092CE8B8
@@ -17931,7 +17931,7 @@ entries:
     - [32x64, -17, -57]
   animations:
   - symbol: gEarB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D0930
@@ -17978,7 +17978,7 @@ entries:
     - [32x64, -16, -57]
   animations:
   - symbol: gEarB01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092D0D44
@@ -18039,16 +18039,16 @@ entries:
     - [32x32, -17, -28]
   animations:
   - symbol: gTinkF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTinkF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 4], [4, 4]]
   - symbol: gTinkF00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 5]]
   - symbol: gTinkF00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 5], [8, 4], [9, 4], [10, 4], [9, 4], [10, 4], [11, 6], [12, 6]]
   us:
     address: 0x092D2DE0
@@ -18085,10 +18085,10 @@ entries:
     - [16x32, -8, -24]
   animations:
   - symbol: gTinkB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gTinkB00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 4], [4, 4]]
   us:
     address: 0x092D44D8
@@ -18114,7 +18114,7 @@ entries:
     - [8x16, 2, -15]
   animations:
   - symbol: gSebastianFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D4B4C
@@ -18140,7 +18140,7 @@ entries:
     - [8x32, 4, -24]
   animations:
   - symbol: gSebastianBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D4CA8
@@ -18194,7 +18194,7 @@ entries:
     - [8x16, 6, -25]
   animations:
   - symbol: gSebastianFlSwimAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092D4E44
@@ -18248,7 +18248,7 @@ entries:
     - [32x8, -17, -11]
   animations:
   - symbol: gSebastianBlSwimAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x092D588C
@@ -18273,7 +18273,7 @@ entries:
     - [32x32, -16, -21]
   animations:
   - symbol: gFlounderFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D6530
@@ -18298,7 +18298,7 @@ entries:
     - [32x32, -13, -23]
   animations:
   - symbol: gFlounderBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D6744
@@ -18348,7 +18348,7 @@ entries:
     - [32x32, -13, -23]
   animations:
   - symbol: gFlounderSwimBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 12], [6, 12], [7, 12], [8, 12], [9, 12]]
   us:
     address: 0x092D6958
@@ -18424,7 +18424,7 @@ entries:
     - [8x8, 6, 0]
   animations:
   - symbol: gFlounderSwimFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 12], [6, 12], [7, 12], [8, 12], [9, 12]]
   us:
     address: 0x092D7DEC
@@ -18458,16 +18458,16 @@ entries:
     - [32x16, -16, -6]
   animations:
   - symbol: gAcceleFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 30]]
   - symbol: gAcceleFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 5]]
   - symbol: gAcceleFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gAcceleFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 9]]
   us:
     address: 0x092D8890
@@ -18493,7 +18493,7 @@ entries:
     - [32x16, -13, -6]
   animations:
   - symbol: gAcceleBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092D97E8
@@ -18539,7 +18539,7 @@ entries:
     - [32x16, -16, -3]
   animations:
   - symbol: gAcceleBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10]]
   us:
     address: 0x092D9D04
@@ -18577,7 +18577,7 @@ entries:
     - [32x16, -11, -6]
   animations:
   - symbol: gAcceleBl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 7], [2, 7], [3, 4]]
   us:
     address: 0x092DBB84
@@ -18608,10 +18608,10 @@ entries:
     - [8x8, -20, -28]
   animations:
   - symbol: gAcceleBl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10]]
   - symbol: gAcceleBl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10]]
   us:
     address: 0x092DCFDC
@@ -18729,16 +18729,16 @@ entries:
     - [8x8, -8, -59]
   animations:
   - symbol: gAcceleFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 9], [2, 9], [3, 9], [4, 10], [5, 4]]
   - symbol: gAcceleFl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4], [7, 4], [8, 4], [9, 4]]
   - symbol: gAcceleFl01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gAcceleFl01Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   us:
     address: 0x092DDA3C
@@ -18785,7 +18785,7 @@ entries:
     - [8x8, 18, -4]
   animations:
   - symbol: gAcceleFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10]]
   us:
     address: 0x092E1724
@@ -18839,7 +18839,7 @@ entries:
     - [8x16, 23, -14]
   animations:
   - symbol: gAcceleFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 8], [2, 7], [3, 7]]
   us:
     address: 0x092E35C8
@@ -18908,16 +18908,16 @@ entries:
     - [32x32, -14, -18]
   animations:
   - symbol: gAcceleFl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gAcceleFl04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 9], [5, 11]]
   - symbol: gAcceleFl04Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 11]]
   - symbol: gAcceleFl04Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [8, 4]]
   us:
     address: 0x092E4DA0
@@ -18960,10 +18960,10 @@ entries:
     - [16x8, -30, -43]
   animations:
   - symbol: gAcceleFl05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 10], [2, 4]]
   - symbol: gAcceleFl05Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 2], [3, 4]]
   us:
     address: 0x092E8070
@@ -18994,7 +18994,7 @@ entries:
     - [16x8, -14, 15]
   animations:
   - symbol: gAcceleFl06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092E95F4
@@ -19033,7 +19033,7 @@ entries:
     - [32x16, -17, -2]
   animations:
   - symbol: gAcceleFl07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10]]
   us:
     address: 0x092E9A4C
@@ -19074,7 +19074,7 @@ entries:
     - [8x32, -20, -66, {same: [2, 2]}]
   animations:
   - symbol: gAcceleWeponAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4]]
   us:
     address: 0x092EAE48
@@ -19099,7 +19099,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gRikuFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092EB274
@@ -19168,10 +19168,10 @@ entries:
     - [16x8, 14, -43]
   animations:
   - symbol: gRikuFf00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRikuFf00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 32], [2, 10], [3, 6], [4, 10], [5, 9], [6, 11], [7, 8], [8, 64]]
   us:
     address: 0x092EB688
@@ -19196,7 +19196,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gRikuBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x092ED56C
@@ -19242,7 +19242,7 @@ entries:
     - [32x64, -13, -54]
   animations:
   - symbol: gRik1fl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x092ED980
@@ -19305,7 +19305,7 @@ entries:
     - [8x8, 10, 0]
   animations:
   - symbol: gRik1ll01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x092EF9F8
@@ -19366,7 +19366,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gRik1bl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x092F1514
@@ -19429,7 +19429,7 @@ entries:
     - [16x16, -16, -11]
   animations:
   - symbol: gRik1fl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4]]
   us:
     address: 0x092F3104
@@ -19462,10 +19462,10 @@ entries:
     - [32x8, -16, 0]
   animations:
   - symbol: gRik1fl20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 8], [2, 16]]
   - symbol: gRik1fl20Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x092F4920
@@ -19493,10 +19493,10 @@ entries:
     - [32x64, -15, -56]
   animations:
   - symbol: gRik1fl21Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8]]
   - symbol: gRik1fl21Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x092F54E8
@@ -19526,10 +19526,10 @@ entries:
     - [32x8, -16, 0]
   animations:
   - symbol: gRik1fl24Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 8]]
   - symbol: gRik1fl24Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x092F5D14
@@ -19591,7 +19591,7 @@ entries:
     - [16x16, -16, -16]
   animations:
   - symbol: gRik1ll02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4]]
   us:
     address: 0x092F64CC
@@ -19653,7 +19653,7 @@ entries:
     - [32x16, -12, -15]
   animations:
   - symbol: gRik1bl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4]]
   us:
     address: 0x092F8744
@@ -19690,10 +19690,10 @@ entries:
     - [32x8, -16, -2, {fresh: true}]
   animations:
   - symbol: gRik1bl20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 8], [2, 16]]
   - symbol: gRik1bl20Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x092FA49C
@@ -19736,16 +19736,16 @@ entries:
     - [16x16, -38, -25]
   animations:
   - symbol: gRik1bl21Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8]]
   - symbol: gRik1bl21Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRik1bl21Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [3, 8]]
   - symbol: gRik1bl21Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x092FAF7C
@@ -19782,10 +19782,10 @@ entries:
     - [32x16, -20, -10]
   animations:
   - symbol: gRik1bl22Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   - symbol: gRik1bl22Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x092FBE6C
@@ -19827,10 +19827,10 @@ entries:
     - [32x16, -16, -10]
   animations:
   - symbol: gRik1bl23Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 12], [2, 8], [3, 12]]
   - symbol: gRik1bl23Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x092FC88C
@@ -19862,10 +19862,10 @@ entries:
     - [32x16, -16, -10]
   animations:
   - symbol: gRik1bl24Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 8]]
   - symbol: gRik1bl24Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x092FD644
@@ -19923,7 +19923,7 @@ entries:
     - [8x8, 0, -5]
   animations:
   - symbol: gRik1bb02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4]]
   us:
     address: 0x092FDD08
@@ -19981,7 +19981,7 @@ entries:
     - [16x16, -9, -7]
   animations:
   - symbol: gRik1ff02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4]]
   us:
     address: 0x092FF848
@@ -20014,7 +20014,7 @@ entries:
     - [16x16, -29, -34]
   animations:
   - symbol: gRikuEv00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 15]]
   us:
     address: 0x09300F88
@@ -20042,7 +20042,7 @@ entries:
     - [32x64, -17, -50]
   animations:
   - symbol: gRikuEv01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 15]]
   us:
     address: 0x093020C4
@@ -20106,16 +20106,16 @@ entries:
     - [16x8, -1, 2]
   animations:
   - symbol: gRikuEv02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 15]]
   - symbol: gRikuEv02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 9], [5, 9], [6, 1]]
   - symbol: gRikuEv02Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4], [7, 9], [8, 9]]
   - symbol: gRikuEv02Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x093028E8
@@ -20144,10 +20144,10 @@ entries:
     - [64x64, -38, -43]
   animations:
   - symbol: gRikuEv03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 15]]
   - symbol: gRikuEv03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x093044C0
@@ -20197,16 +20197,16 @@ entries:
     - [32x32, -18, -49]
   animations:
   - symbol: gRikuEv04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 9]]
   - symbol: gRikuEv04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRikuEv04Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [3, 8], [4, 17]]
   - symbol: gRikuEv04Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 7]]
   us:
     address: 0x09305174
@@ -20242,7 +20242,7 @@ entries:
     - [16x8, -5, 7]
   animations:
   - symbol: gRikuEv05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 6], [2, 15]]
   us:
     address: 0x093077E0
@@ -20273,10 +20273,10 @@ entries:
     - [32x64, -18, -45]
   animations:
   - symbol: gRikuEv06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 15]]
   - symbol: gRikuEv06Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 7], [0, 7]]
   us:
     address: 0x093080F0
@@ -20313,10 +20313,10 @@ entries:
     - [32x64, -19, -54]
   animations:
   - symbol: gRikuEv07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 14], [2, 6], [3, 6], [4, 15]]
   - symbol: gRikuEv07Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 7], [3, 7], [4, 15]]
   us:
     address: 0x09308D30
@@ -20344,7 +20344,7 @@ entries:
     - [32x64, -15, -54]
   animations:
   - symbol: gRikuEv08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [1, 15]]
   us:
     address: 0x0930A190
@@ -20391,16 +20391,16 @@ entries:
     - [8x16, 3, -42]
   animations:
   - symbol: gRikuEv09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 5], [0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 15]]
   - symbol: gRikuEv09Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gRikuEv09Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 5], [0, 5]]
   - symbol: gRikuEv09Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   us:
     address: 0x0930A9B4
@@ -20432,7 +20432,7 @@ entries:
     - [32x64, -14, -49]
   animations:
   - symbol: gRikuEv10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 14]]
   us:
     address: 0x0930DDD8
@@ -20458,7 +20458,7 @@ entries:
     - [8x8, -5, 0]
   animations:
   - symbol: gSariFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0930EA90
@@ -20484,10 +20484,10 @@ entries:
     - [16x8, -8, -2, {layer: 1}]
   animations:
   - symbol: gSariBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSariBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0930EECC
@@ -20530,13 +20530,13 @@ entries:
     - [8x8, -8, -8]
   animations:
   - symbol: gSariDrugAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7]]
   - symbol: gSariDrugAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 7], [2, 7], [1, 7], [0, 7]]
   - symbol: gSariDrugAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0930F330
@@ -20590,7 +20590,7 @@ entries:
     - [32x16, -17, -5]
   animations:
   - symbol: gSariWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9], [7, 9]]
   us:
     address: 0x093104DC
@@ -20615,7 +20615,7 @@ entries:
     - [8x8, -4, -6]
   animations:
   - symbol: gDrugAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   us:
     address: 0x09312D84
@@ -20643,7 +20643,7 @@ entries:
     - [16x32, 11, -25]
   animations:
   - symbol: gHookF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09312DB8
@@ -20702,7 +20702,7 @@ entries:
     - [8x16, 15, -33]
   animations:
   - symbol: gHookF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10]]
   us:
     address: 0x093135E0
@@ -20744,7 +20744,7 @@ entries:
     - [64x32, -41, -19]
   animations:
   - symbol: gHookF02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 10], [2, 15]]
   us:
     address: 0x09315DAC
@@ -20832,19 +20832,19 @@ entries:
     - [32x8, -11, 2]
   animations:
   - symbol: gHookF03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   - symbol: gHookF03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10]]
   - symbol: gHookF03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8]]
   - symbol: gHookF03Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 9], [4, 9], [5, 9], [6, 9]]
   - symbol: gHookF03Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 10], [8, 11], [9, 10]]
   us:
     address: 0x093178E0
@@ -20873,7 +20873,7 @@ entries:
     - [8x32, 10, -25]
   animations:
   - symbol: gHookB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0931D944
@@ -20918,7 +20918,7 @@ entries:
     - [8x32, 2, -25]
   animations:
   - symbol: gHookB02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 10], [2, 15]]
   us:
     address: 0x0931E0F0
@@ -20946,7 +20946,7 @@ entries:
     - [8x32, 6, -27]
   animations:
   - symbol: gJasmineF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x0931F8F4
@@ -20972,7 +20972,7 @@ entries:
     - [16x8, -13, -33]
   animations:
   - symbol: gJasmine01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x0931FC1C
@@ -20998,7 +20998,7 @@ entries:
     - [32x32, -8, -17]
   animations:
   - symbol: gJasmine02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x0931FE78
@@ -21025,7 +21025,7 @@ entries:
     - [8x8, -18, -8]
   animations:
   - symbol: gJasmine03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09320294
@@ -21151,34 +21151,34 @@ entries:
     - [16x16, -12, -15]
   animations:
   - symbol: gFEventAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 3], [1, 3], [2, 4], [3, 24]]
   - symbol: gFEventAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 32], [5, 32], [6, 32], [7, 48]]
   - symbol: gFEventAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 9], [9, 9], [8, 9], [10, 9]]
   - symbol: gFEventAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 3], [11, 3], [12, 3], [13, 3], [14, 3], [13, 3], [12, 3], [11, 3]]
   - symbol: gFEventAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 1], [16, 1], [17, 4], [18, 3], [19, 2], [20, 40]]
   - symbol: gFEventAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4], [22, 4], [23, 4]]
   - symbol: gFEventAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 8], [24, 8], [23, 8], [25, 8]]
   - symbol: gFEventAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 32], [27, 32], [28, 32], [29, 48]]
   - symbol: gFEventAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 4], [31, 4], [32, 4]]
   - symbol: gFEventAnim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[32, 8], [33, 8], [32, 8], [34, 8]]
   us:
     address: 0x09320554
@@ -21215,7 +21215,7 @@ entries:
     pieces: []
   animations:
   - symbol: gEventSmokeAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 1], [2, 4], [3, 3], [4, 2], [5, 40]]
   us:
     address: 0x09321578
@@ -21259,10 +21259,10 @@ entries:
     - [16x16, -8, -8]
   animations:
   - symbol: gGlowNoseAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [2, 4], [1, 4], [2, 4], [3, 4], [2, 4], [1, 4], [0, 4]]
   - symbol: gGlowNoseAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 2], [5, 2], [6, 2], [7, 2]]
   us:
     address: 0x0932176C
@@ -21389,61 +21389,61 @@ entries:
     - [8x8, -8, -8, {pal: 15}]
   animations:
   - symbol: gEventCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gEventCardAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [3, 8], [5, 8], [1, 8]]
   - symbol: gEventCardAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gEventCardAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 8], [7, 8], [8, 8], [9, 8], [10, 8], [9, 8], [11, 8], [7, 8]]
   - symbol: gEventCardAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gEventCardAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 8], [13, 8], [14, 8], [15, 8], [16, 8], [15, 8], [17, 8], [13, 8]]
   - symbol: gEventCardAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gEventCardAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gEventCardAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   - symbol: gEventCardAnim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4]]
   - symbol: gEventCardAnim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 4]]
   - symbol: gEventCardAnim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 4]]
   - symbol: gEventCardAnim12
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gEventCardAnim13
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 4]]
   - symbol: gEventCardAnim14
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   - symbol: gEventCardAnim15
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[27, 4]]
   - symbol: gEventCardAnim16
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 20], [31, 20], [31, 16]]
   - symbol: gEventCardAnim17
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 62], [29, 4]]
   - symbol: gEventCardAnim18
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 24], [31, 16], [31, 14]]
   us:
     address: 0x09321C04
@@ -21496,34 +21496,34 @@ entries:
     - [16x16, -16, -28]
   animations:
   - symbol: gFItemAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gFItemAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gFItemAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gFItemAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gFItemAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gFItemAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gFItemAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gFItemAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gFItemAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gFItemAnim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   us:
     address: 0x0932294C
@@ -21548,7 +21548,7 @@ entries:
     - [32x64, -18, -54]
   animations:
   - symbol: gGoofy2Fl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09322F3C
@@ -21573,7 +21573,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGoofy2Bl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09323350
@@ -21629,7 +21629,7 @@ entries:
     - [16x16, -2, 1]
   animations:
   - symbol: gGoofy201Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x09323764
@@ -21686,7 +21686,7 @@ entries:
     - [16x16, -26, -24]
   animations:
   - symbol: gGoofy202Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x09325F98
@@ -21747,7 +21747,7 @@ entries:
     - [16x16, -32, -33]
   animations:
   - symbol: gGoofy203Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x09328850
@@ -21781,13 +21781,13 @@ entries:
     - [32x32, -39, -43]
   animations:
   - symbol: gGoofy207Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 8]]
   - symbol: gGoofy207Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 9]]
   - symbol: gGoofy207Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [0, 12]]
   us:
     address: 0x0932B760
@@ -21815,7 +21815,7 @@ entries:
     - [32x64, -17, -54]
   animations:
   - symbol: gGoofy209Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12]]
   us:
     address: 0x0932C838
@@ -21843,7 +21843,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gGoofy210Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12]]
   us:
     address: 0x0932D05C
@@ -21881,10 +21881,10 @@ entries:
     - [16x32, -27, -32]
   animations:
   - symbol: gGoofy213Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 5], [2, 5], [3, 25]]
   - symbol: gGoofy213Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x0932D880
@@ -21976,16 +21976,16 @@ entries:
     - [32x8, -20, 0]
   animations:
   - symbol: gDona2Fl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gDona2Fl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
   - symbol: gDona2Fl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 4], [16, 4]]
   - symbol: gDona2Fl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 10], [0, 10]]
   us:
     address: 0x0932EC60
@@ -22084,16 +22084,16 @@ entries:
     - [32x16, -14, 1]
   animations:
   - symbol: gDona2Bl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gDona2Bl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
   - symbol: gDona2Bl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 4], [16, 4]]
   - symbol: gDona2Bl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [17, 10]]
   us:
     address: 0x09331838
@@ -22149,16 +22149,16 @@ entries:
     - [32x8, -6, 4]
   animations:
   - symbol: gDona2Bl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7]]
   - symbol: gDona2Bl01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 7]]
   - symbol: gDona2Bl01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [0, 7]]
   - symbol: gDona2Bl01Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0933495C
@@ -22200,7 +22200,7 @@ entries:
     - [32x8, -6, 4]
   animations:
   - symbol: gDona2Bl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]]
   us:
     address: 0x09335E98
@@ -22238,13 +22238,13 @@ entries:
     - [32x8, -13, 0]
   animations:
   - symbol: gDona2Bl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   - symbol: gDona2Bl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 10], [2, 10]]
   - symbol: gDona2Bl03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 9]]
   us:
     address: 0x09336B84
@@ -22282,7 +22282,7 @@ entries:
     - [32x8, -16, -16]
   animations:
   - symbol: gDona2Bl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 8], [2, 6], [3, 6], [2, 5]]
   us:
     address: 0x09337670
@@ -22309,7 +22309,7 @@ entries:
     - [8x16, 16, -46]
   animations:
   - symbol: gShidoF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093380CC
@@ -22336,7 +22336,7 @@ entries:
     - [8x16, 16, -48]
   animations:
   - symbol: gShidoB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093385AC
@@ -22388,7 +22388,7 @@ entries:
     - [32x16, -14, -2]
   animations:
   - symbol: gShidoF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 9], [3, 9], [4, 9], [5, 9], [6, 9]]
   us:
     address: 0x09338A8C
@@ -22435,7 +22435,7 @@ entries:
     - [32x8, -18, 1, {fresh: true}]
   animations:
   - symbol: gShidoF02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 8], [2, 9], [3, 7], [4, 11], [5, 7]]
   us:
     address: 0x0933ACCC
@@ -22464,7 +22464,7 @@ entries:
     - [16x8, -9, -50]
   animations:
   - symbol: gSelphieFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0933C890
@@ -22492,7 +22492,7 @@ entries:
     - [8x8, 8, -35]
   animations:
   - symbol: gSelphieBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0933CAFC
@@ -22554,7 +22554,7 @@ entries:
     - [16x8, -8, -50]
   animations:
   - symbol: gSelphieFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0933CCE4
@@ -22619,7 +22619,7 @@ entries:
     - [8x8, 8, -35, {fresh: true}]
   animations:
   - symbol: gSelphieBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0933E0FC
@@ -22677,7 +22677,7 @@ entries:
     - [16x8, -8, -3]
   animations:
   - symbol: gSelphieFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x0933F404
@@ -22705,7 +22705,7 @@ entries:
     - [8x8, -24, -8]
   animations:
   - symbol: gJafferFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093408E4
@@ -22733,7 +22733,7 @@ entries:
     - [8x32, -28, -57]
   animations:
   - symbol: gJafferBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09340FAC
@@ -22808,7 +22808,7 @@ entries:
     - [16x32, 18, -28]
   animations:
   - symbol: gJafferFlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x093418D4
@@ -22914,7 +22914,7 @@ entries:
     - [8x8, -7, 7]
   animations:
   - symbol: gJafferWalkBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09344B98
@@ -22990,10 +22990,10 @@ entries:
     - [8x16, -3, -80]
   animations:
   - symbol: gJafferLampAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 30]]
   - symbol: gJafferLampAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 10], [4, 8], [6, 8]]
   us:
     address: 0x09348758
@@ -23025,10 +23025,10 @@ entries:
     - [16x16, -36, -15]
   animations:
   - symbol: gReonFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gReonFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0934B7AC
@@ -23054,7 +23054,7 @@ entries:
     - [32x64, -15, -57]
   animations:
   - symbol: gReonBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0934BF6C
@@ -23112,7 +23112,7 @@ entries:
     - [32x8, -19, 0]
   animations:
   - symbol: gReonFlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8]]
   us:
     address: 0x0934C408
@@ -23171,7 +23171,7 @@ entries:
     - [32x16, -16, -6]
   animations:
   - symbol: gReonBlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8]]
   us:
     address: 0x0934EE44
@@ -23225,16 +23225,16 @@ entries:
     - [16x8, -2, 0]
   animations:
   - symbol: gReonEventAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8], [3, 30]]
   - symbol: gReonEventAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 30]]
   - symbol: gReonEventAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [7, 8], [6, 30]]
   - symbol: gReonEventAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [2, 8], [3, 30]]
   us:
     address: 0x09351C44
@@ -23287,7 +23287,7 @@ entries:
     - [32x16, -16, -4]
   animations:
   - symbol: gReonCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 7], [2, 8], [3, 12], [4, 7], [5, 7], [6, 20]]
   us:
     address: 0x09353F8C
@@ -23313,7 +23313,7 @@ entries:
     - [32x8, -16, 7]
   animations:
   - symbol: gWakkaF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09356430
@@ -23388,7 +23388,7 @@ entries:
     - [8x8, -6, 7]
   animations:
   - symbol: gWakkaFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x093568CC
@@ -23418,7 +23418,7 @@ entries:
     - [8x16, -48, -32]
   animations:
   - symbol: gGenieF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09357F10
@@ -23446,7 +23446,7 @@ entries:
     - [16x16, 20, -2]
   animations:
   - symbol: gGenieB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09358A04
@@ -23498,7 +23498,7 @@ entries:
     - [8x8, -9, -76]
   animations:
   - symbol: gGenie01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12], [4, 12], [5, 12]]
   us:
     address: 0x093593AC
@@ -23558,7 +23558,7 @@ entries:
     - [32x32, -17, -10]
   animations:
   - symbol: gGenie02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 8], [2, 12], [3, 8], [4, 8], [5, 15], [6, 10], [7, 10]]
   us:
     address: 0x0935C810
@@ -23616,7 +23616,7 @@ entries:
     - [8x8, -14, -74]
   animations:
   - symbol: gGenie03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 8], [5, 10], [6, 12], [7, 10], [8, 10]]
   us:
     address: 0x0936121C
@@ -23675,7 +23675,7 @@ entries:
     - [16x16, 9, 7]
   animations:
   - symbol: gGenie04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 8], [2, 8], [3, 15], [4, 10], [5, 10]]
   us:
     address: 0x09365398
@@ -23702,7 +23702,7 @@ entries:
     - [16x8, 17, 1]
   animations:
   - symbol: gGenie05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x093694E4
@@ -23740,7 +23740,7 @@ entries:
     - [64x64, -29, -56]
   animations:
   - symbol: gGenie06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 30]]
   us:
     address: 0x09369F44
@@ -23776,7 +23776,7 @@ entries:
     - [32x32, -10, -23]
   animations:
   - symbol: gGenie07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 4], [2, 30]]
   us:
     address: 0x0936C25C
@@ -23820,7 +23820,7 @@ entries:
     - [8x8, -11, -95]
   animations:
   - symbol: gGenie08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 6], [2, 6], [3, 30]]
   us:
     address: 0x0936DFCC
@@ -23846,7 +23846,7 @@ entries:
     - [32x32, -18, -23]
   animations:
   - symbol: gGenieFoot00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09370708
@@ -23875,7 +23875,7 @@ entries:
     - [8x32, 8, -48]
   animations:
   - symbol: gTidusFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09371124
@@ -23934,7 +23934,7 @@ entries:
     - [8x8, 12, -21]
   animations:
   - symbol: gTidusFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x093713B0
@@ -23964,7 +23964,7 @@ entries:
     - [8x8, -15, -3]
   animations:
   - symbol: gTidusBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09372914
@@ -24000,10 +24000,10 @@ entries:
     - [8x8, 4, -19]
   animations:
   - symbol: gWendyFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gWendyFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09372B88
@@ -24031,7 +24031,7 @@ entries:
     - [8x8, 8, -12]
   animations:
   - symbol: gWendyBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09373080
@@ -24060,7 +24060,7 @@ entries:
     - [8x8, -16, -5]
   animations:
   - symbol: gYuffieFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09373288
@@ -24088,7 +24088,7 @@ entries:
     - [8x8, 8, -42]
   animations:
   - symbol: gYuffieBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09373514
@@ -24164,7 +24164,7 @@ entries:
     - [8x16, 8, -15]
   animations:
   - symbol: gYuffieFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0937377C
@@ -24240,7 +24240,7 @@ entries:
     - [8x16, 8, -9]
   animations:
   - symbol: gYuffieBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09374EE8
@@ -24267,7 +24267,7 @@ entries:
     - [16x8, -5, 7]
   animations:
   - symbol: gAnsemFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09376554
@@ -24339,7 +24339,7 @@ entries:
     - [8x16, 17, -17]
   animations:
   - symbol: gAnsemFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09376AB4
@@ -24395,10 +24395,10 @@ entries:
     - [8x16, 15, -14]
   animations:
   - symbol: gAnsemFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   - symbol: gAnsemFl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 7], [5, 8]]
   us:
     address: 0x09379888
@@ -24441,7 +24441,7 @@ entries:
     - [32x64, -18, -51]
   animations:
   - symbol: gAnsemFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7]]
   us:
     address: 0x0937B92C
@@ -24501,7 +24501,7 @@ entries:
     - [8x8, -25, -49]
   animations:
   - symbol: gAnsemFl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 7], [2, 6], [3, 6], [4, 3], [5, 9]]
   us:
     address: 0x0937C804
@@ -24528,7 +24528,7 @@ entries:
     - [8x8, -21, -1]
   animations:
   - symbol: gAnsemBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0937E398
@@ -24558,7 +24558,7 @@ entries:
     - [16x8, -6, -50]
   animations:
   - symbol: gNiseFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0937E8D8
@@ -24629,7 +24629,7 @@ entries:
     - [8x8, 37, -33]
   animations:
   - symbol: gNiserikuFuiuchiFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 4], [6, 7]]
   us:
     address: 0x0937EC4C
@@ -24652,7 +24652,7 @@ entries:
     - [32x32, -14, -26]
   animations:
   - symbol: gIagoAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09393218
@@ -24684,13 +24684,13 @@ entries:
     - [32x32, 0, 14]
   animations:
   - symbol: gEventStreetLampAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10]]
   - symbol: gEventStreetLampAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gEventStreetLampAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [0, 4]]
   us:
     address: 0x0939342C
@@ -24804,31 +24804,31 @@ entries:
     - [8x32, -18, -22]
   animations:
   - symbol: gVixenFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gVixenFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 8], [3, 9], [4, 22], [5, 8], [6, 9]]
   - symbol: gVixenFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gVixenFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 11], [8, 10], [9, 9], [10, 9], [11, 4]]
   - symbol: gVixenFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 12]]
   - symbol: gVixenFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gVixenFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 8], [13, 10], [14, 4]]
   - symbol: gVixenFl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gVixenFl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 8], [12, 8], [0, 4]]
   us:
     address: 0x09393A8C
@@ -24870,7 +24870,7 @@ entries:
     - [8x8, -19, 2]
   animations:
   - symbol: gVixenFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 20]]
   us:
     address: 0x0939906C
@@ -24928,13 +24928,13 @@ entries:
     - [8x16, -19, -10]
   animations:
   - symbol: gVixenFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 8], [2, 24], [1, 8]]
   - symbol: gVixenFl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 20]]
   - symbol: gVixenFl03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 8], [4, 8], [5, 8], [6, 6], [0, 60]]
   us:
     address: 0x0939A2A0
@@ -24991,16 +24991,16 @@ entries:
     - [8x8, 17, 1]
   animations:
   - symbol: gVixenFl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 30]]
   - symbol: gVixenFl04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 10]]
   - symbol: gVixenFl04Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 10], [4, 10], [5, 60]]
   - symbol: gVixenFl04Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60]]
   us:
     address: 0x0939B9DC
@@ -25046,13 +25046,13 @@ entries:
     - [32x16, -10, -4]
   animations:
   - symbol: gVixenBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gVixenBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 8], [3, 24], [2, 8], [0, 8]]
   - symbol: gVixenBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [5, 30], [4, 10], [0, 30]]
   us:
     address: 0x0939D618
@@ -25107,7 +25107,7 @@ entries:
     - [8x16, -22, -38]
   animations:
   - symbol: gVixenBl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x0939F4B4
@@ -25153,7 +25153,7 @@ entries:
     - [8x8, -8, -8]
   animations:
   - symbol: gEventSmokeDisperseAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 7], [4, 7], [5, 9], [6, 4]]
   us:
     address: 0x093A1DA0
@@ -25217,7 +25217,7 @@ entries:
     - [32x16, -8, -8]
   animations:
   - symbol: gEventSmokeCloudAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5], [8, 5], [9, 5]]
   us:
     address: 0x093A3148
@@ -25261,7 +25261,7 @@ entries:
     - [16x16, -7, -17, {hflip: true}]
   animations:
   - symbol: gEventHeartAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x093AE9BC
@@ -25287,7 +25287,7 @@ entries:
     - [32x8, -14, 0]
   animations:
   - symbol: gMaruxha2Fl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093AECB4
@@ -25343,7 +25343,7 @@ entries:
     - [32x8, -18, 1]
   animations:
   - symbol: gMaruxha2Fl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x093AF150
@@ -25390,10 +25390,10 @@ entries:
     - [8x8, -19, -12]
   animations:
   - symbol: gMaruxha2Fl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10]]
   - symbol: gMaruxha2Fl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 5], [3, 8], [4, 8], [2, 7]]
   us:
     address: 0x093B1644
@@ -25522,16 +25522,16 @@ entries:
     - [8x16, -21, -38, {fresh: true}]
   animations:
   - symbol: gMaruxha2Fl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8]]
   - symbol: gMaruxha2Fl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 7], [4, 7], [5, 7], [6, 7]]
   - symbol: gMaruxha2Fl03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gMaruxha2Fl03Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 7], [10, 5], [11, 6], [12, 4]]
   us:
     address: 0x093B2EBC
@@ -25639,10 +25639,10 @@ entries:
     - [16x16, 41, -112]
   animations:
   - symbol: gMaruxha2Fl03WepAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [2, 8], [1, 8]]
   - symbol: gMaruxha2Fl03WepAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [4, 2], [5, 2], [6, 1], [7, 1], [8, 3], [9, 4], [10, 4], [11, 3], [12, 3], [13, 3], [14, 2], [15, 2], [16, 2], [17, 2], [18, 2], [19, 4]]
   us:
     address: 0x093B7444
@@ -25668,7 +25668,7 @@ entries:
     - [32x8, -12, 2]
   animations:
   - symbol: gMaruxha2Bl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093B8030
@@ -25723,7 +25723,7 @@ entries:
     - [32x8, -17, 2]
   animations:
   - symbol: gMaruxha2Bl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 10]]
   us:
     address: 0x093B84CC
@@ -25757,7 +25757,7 @@ entries:
     - [32x8, -14, 3]
   animations:
   - symbol: gMaruxha2Bl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10]]
   us:
     address: 0x093BA998
@@ -25868,34 +25868,34 @@ entries:
     - [32x64, -19, -60]
   animations:
   - symbol: gLaxineFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gLaxineFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8], [3, 8], [4, 8], [5, 10], [6, 10], [1, 8], [0, 4]]
   - symbol: gLaxineFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 10], [8, 10], [9, 8], [11, 8], [10, 4]]
   - symbol: gLaxineFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gLaxineFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 10], [9, 10]]
   - symbol: gLaxineFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 10], [0, 10]]
   - symbol: gLaxineFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4], [13, 8]]
   - symbol: gLaxineFl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gLaxineFl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4], [0, 8]]
   - symbol: gLaxineFl00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 6], [15, 6], [16, 8], [17, 20], [18, 8], [19, 8], [20, 20], [21, 8], [0, 8]]
   us:
     address: 0x093BB75C
@@ -25961,19 +25961,19 @@ entries:
     - [32x64, -14, -59]
   animations:
   - symbol: gLaxineBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gLaxineBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [3, 12], [4, 10], [5, 10], [1, 8], [0, 4]]
   - symbol: gLaxineBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 10], [7, 10], [8, 8], [9, 12]]
   - symbol: gLaxineBl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gLaxineBl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 10], [0, 4]]
   us:
     address: 0x093C1344
@@ -26027,7 +26027,7 @@ entries:
     - [32x8, -16, -62, {fresh: true}]
   animations:
   - symbol: gLaxineBl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x093C3DD8
@@ -26073,10 +26073,10 @@ entries:
     - [8x8, -5, 3]
   animations:
   - symbol: gLaxineFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8], [3, 20], [4, 10], [5, 10]]
   - symbol: gLaxineFl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x093C6280
@@ -26130,7 +26130,7 @@ entries:
     - [32x8, -16, 2]
   animations:
   - symbol: gLaxineFl04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x093C7B44
@@ -26234,13 +26234,13 @@ entries:
     - [32x32, -9, -61]
   animations:
   - symbol: gLaxineFl06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 20], [3, 6], [4, 16]]
   - symbol: gLaxineFl06Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gLaxineFl06Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 4], [15, 8], [16, 8]]
   us:
     address: 0x093C9FEC
@@ -26284,7 +26284,7 @@ entries:
     - [8x8, 18, -38]
   animations:
   - symbol: gLaxineFl09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 6], [2, 16], [3, 6], [4, 20]]
   us:
     address: 0x093CD8EC
@@ -26321,16 +26321,16 @@ entries:
     - [32x8, -21, -31]
   animations:
   - symbol: gLaxineFl10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 50]]
   - symbol: gLaxineFl10Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 50]]
   - symbol: gLaxineFl10Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 50]]
   - symbol: gLaxineFl10Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x093CEDE4
@@ -26357,7 +26357,7 @@ entries:
     - [8x32, 18, -56, {layer: 1}]
   animations:
   - symbol: gRexeusFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093CF208
@@ -26384,7 +26384,7 @@ entries:
     - [8x8, -20, -9, {layer: 1}]
   animations:
   - symbol: gRexeusBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093CF8A8
@@ -26447,7 +26447,7 @@ entries:
     - [32x8, -14, -1]
   animations:
   - symbol: gRexeusFlWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x093CFEE8
@@ -26476,7 +26476,7 @@ entries:
     - [16x32, -28, -9]
   animations:
   - symbol: gRexeusH1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093D2EE4
@@ -26527,10 +26527,10 @@ entries:
     - [8x8, -21, -56]
   animations:
   - symbol: gRexeusK1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8]]
   - symbol: gRexeusK1Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x093D3550
@@ -26590,7 +26590,7 @@ entries:
     - [8x8, -19, -3]
   animations:
   - symbol: gRexeusP1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 3], [4, 3], [3, 3], [4, 3], [3, 3], [4, 4], [3, 6], [4, 8], [5, 20]]
   us:
     address: 0x093D525C
@@ -26726,49 +26726,49 @@ entries:
     - [8x8, -5, -32]
   animations:
   - symbol: gXexionFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gXexionFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 8], [3, 24]]
   - symbol: gXexionFl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 24]]
   - symbol: gXexionFl00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [9, 6], [0, 40]]
   - symbol: gXexionFl00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [4, 6], [5, 16], [6, 8], [7, 10], [8, 40]]
   - symbol: gXexionFl00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 40]]
   - symbol: gXexionFl00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 8], [0, 40]]
   - symbol: gXexionFl00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 8], [20, 40]]
   - symbol: gXexionFl00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 40]]
   - symbol: gXexionFl00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 6], [0, 40]]
   - symbol: gXexionFl00Anim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 6], [11, 10], [12, 16], [13, 6], [14, 30]]
   - symbol: gXexionFl00Anim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 8], [16, 14], [17, 10], [18, 40]]
   - symbol: gXexionFl00Anim12
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 40]]
   - symbol: gXexionFl00Anim13
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gXexionFl00Anim14
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 28], [22, 8], [21, 8], [0, 28]]
   us:
     address: 0x093D7908
@@ -26807,13 +26807,13 @@ entries:
     - [8x8, 9, -28]
   animations:
   - symbol: gXexionBl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gXexionBl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gXexionBl00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 28], [2, 8], [1, 8], [0, 28]]
   us:
     address: 0x093DE4DC
@@ -26870,10 +26870,10 @@ entries:
     - [32x16, -4, -4]
   animations:
   - symbol: gDizFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gDizFl00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 6], [3, 14], [4, 15]]
   us:
     address: 0x093DF56C
@@ -26929,22 +26929,22 @@ entries:
     - [16x16, -10, -10]
   animations:
   - symbol: gNamiF00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gNamiF00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6]]
   - symbol: gNamiF00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gNamiF00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [0, 6]]
   - symbol: gNamiF00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 8], [4, 14], [5, 12], [6, 12], [5, 12]]
   - symbol: gNamiF00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   us:
     address: 0x093E1DF8
@@ -27016,25 +27016,25 @@ entries:
     - [8x8, -22, -18]
   animations:
   - symbol: gNamiF01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gNamiF01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10], [2, 10], [3, 10], [2, 10]]
   - symbol: gNamiF01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gNamiF01Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [5, 6]]
   - symbol: gNamiF01Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gNamiF01Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 6], [7, 8], [8, 8], [9, 8]]
   - symbol: gNamiF01Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [0, 6]]
   us:
     address: 0x093E2BC0
@@ -27149,43 +27149,43 @@ entries:
     - [16x8, -17, 3]
   animations:
   - symbol: gNamiB00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gNamiB00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6]]
   - symbol: gNamiB00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gNamiB00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [0, 6]]
   - symbol: gNamiB00Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 8], [4, 14], [5, 12], [6, 12], [5, 12]]
   - symbol: gNamiB00Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gNamiB00Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 5], [8, 7], [9, 4], [10, 6]]
   - symbol: gNamiB00Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gNamiB00Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 6], [12, 8], [13, 6], [14, 6], [15, 6], [16, 6]]
   - symbol: gNamiB00Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gNamiB00Anim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [17, 8], [18, 24], [19, 12], [18, 14], [19, 14]]
   - symbol: gNamiB00Anim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gNamiB00Anim12
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   us:
     address: 0x093E3CE4
@@ -27239,7 +27239,7 @@ entries:
     - [32x16, -16, -11]
   animations:
   - symbol: gNamiRunBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x093E6438
@@ -27295,7 +27295,7 @@ entries:
     - [16x16, -8, -10]
   animations:
   - symbol: gNamiRunFAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5], [6, 5], [7, 5]]
   us:
     address: 0x093E7BE0
@@ -27356,7 +27356,7 @@ entries:
     - [8x8, 8, -2]
   animations:
   - symbol: gNamiWalkBAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7], [7, 7]]
   us:
     address: 0x093E90F4
@@ -27379,7 +27379,7 @@ entries:
     - [32x64, -16, -56]
   animations:
   - symbol: gEventBg004Object1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093E9F04
@@ -27431,7 +27431,7 @@ entries:
     pieces: []
   animations:
   - symbol: gEventDarknessAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4]]
   us:
     address: 0x093EA318
@@ -27471,10 +27471,10 @@ entries:
     - [16x16, -8, -8]
   animations:
   - symbol: gKoukyuAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [1, 12]]
   - symbol: gKoukyuAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 12], [4, 12], [5, 12], [4, 12]]
   us:
     address: 0x093EB464
@@ -27536,13 +27536,13 @@ entries:
     - [8x32, 4, -24]
   animations:
   - symbol: gPoohFl08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10]]
   - symbol: gPoohFl08Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 10], [5, 10], [6, 10]]
   - symbol: gPoohFl08Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 12], [7, 12], [8, 12], [9, 10]]
   us:
     address: 0x093EB7CC
@@ -27600,10 +27600,10 @@ entries:
     - [32x32, -16, -16]
   animations:
   - symbol: gMareficentBallAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [3, 4], [4, 4], [0, 10], [3, 4], [2, 4], [1, 6], [5, 6], [0, 10], [10, 4], [11, 4]]
   - symbol: gMareficentBallAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4], [7, 5], [8, 6], [9, 6], [10, 3], [11, 3], [10, 3], [0, 7], [3, 4], [4, 4], [0, 10], [3, 4], [2, 4], [1, 6], [5, 6], [0, 10], [10, 4], [11, 4]]
   us:
     address: 0x093EC7AC
@@ -27629,7 +27629,7 @@ entries:
     - [32x16, -13, -11]
   animations:
   - symbol: gTiggerFl00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09736FF4
@@ -27689,7 +27689,7 @@ entries:
     - [32x16, -14, -13]
   animations:
   - symbol: gTiggerFl01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [5, 10], [6, 10], [7, 12], [8, 12]]
   us:
     address: 0x09737310
@@ -27750,10 +27750,10 @@ entries:
     - [32x8, -18, 2]
   animations:
   - symbol: gTiggerFl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 7], [3, 7], [4, 7], [5, 7], [6, 6], [7, 6]]
   - symbol: gTiggerFl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 3], [1, 4], [2, 5], [3, 6], [4, 6], [5, 5], [6, 4], [7, 3]]
   us:
     address: 0x09738F18
@@ -27819,10 +27819,10 @@ entries:
     - [32x16, -18, -12]
   animations:
   - symbol: gTiggerBl02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 7], [3, 7], [4, 7], [5, 7], [6, 6], [7, 6]]
   - symbol: gTiggerBl02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 3], [1, 4], [2, 5], [3, 6], [4, 6], [5, 5], [6, 4], [7, 3]]
   us:
     address: 0x0973AB50
@@ -27884,13 +27884,13 @@ entries:
     - [32x16, -12, -12]
   animations:
   - symbol: gTiggerFl03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [0, 8]]
   - symbol: gTiggerFl03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 9], [9, 40]]
   - symbol: gTiggerFl03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 8], [7, 8], [8, 8], [0, 10]]
   us:
     address: 0x0973CAA4
@@ -27970,13 +27970,13 @@ entries:
     - [8x8, -1, 3]
   animations:
   - symbol: gTiggerFl02sAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 6], [6, 7], [7, 3], [8, 4], [7, 3], [3, 7], [4, 6]]
   - symbol: gTiggerFl02sAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 10], [5, 8], [4, 8], [6, 8], [8, 10], [9, 7], [10, 12], [0, 40]]
   - symbol: gTiggerFl02sAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 8], [8, 10], [9, 7], [10, 12], [0, 40]]
   us:
     address: 0x0973E9AC
@@ -28032,10 +28032,10 @@ entries:
     - [8x8, 15, -70]
   animations:
   - symbol: gTiggerBl02sAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 8], [2, 9], [3, 10], [4, 12]]
   - symbol: gTiggerBl02sAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 6], [6, 7], [7, 3], [8, 4], [7, 3], [3, 7], [4, 6]]
   us:
     address: 0x09740D18
@@ -28058,7 +28058,7 @@ entries:
     - [16x32, -8, -27]
   animations:
   - symbol: gPigletStandFrontAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09742FC4
@@ -28081,7 +28081,7 @@ entries:
     - [16x32, -8, -27]
   animations:
   - symbol: gPigletStandBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097430D8
@@ -28125,7 +28125,7 @@ entries:
     - [16x32, -8, -28]
   animations:
   - symbol: gPigletWalkFrontAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x097431EC
@@ -28169,7 +28169,7 @@ entries:
     - [16x32, -8, -28]
   animations:
   - symbol: gPigletWalkBackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x09743A64
@@ -28236,7 +28236,7 @@ entries:
     - [16x8, -35, -57]
   animations:
   - symbol: gBosBoogieIdleAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 11], [2, 10], [3, 11], [4, 11], [5, 10], [6, 11]]
   us:
     address: 0x0977A438
@@ -28291,7 +28291,7 @@ entries:
     - [64x32, -29, -15]
   animations:
   - symbol: gBosBoogieWalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8]]
   us:
     address: 0x0977F6FC
@@ -28350,10 +28350,10 @@ entries:
     - [16x16, 33, -55]
   animations:
   - symbol: gBosBoogieDiceThrowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 8], [3, 9], [4, 10], [5, 5], [6, 7], [7, 10], [8, 8], [2, 9], [1, 7], [0, 7]]
   - symbol: gBosBoogieDiceThrowAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 9], [2, 8], [3, 9], [4, 10], [5, 8], [4, 5], [6, 9], [1, 7], [0, 8]]
   us:
     address: 0x097855F4
@@ -28396,13 +28396,13 @@ entries:
     - [64x32, -29, -18]
   animations:
   - symbol: gBosBoogieHurtAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 5], [4, 7]]
   - symbol: gBosBoogieHurtAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 11], [2, 11], [3, 11], [4, 11], [0, 11], [1, 11], [2, 11]]
   - symbol: gBosBoogieHurtAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x0978A43C
@@ -28446,7 +28446,7 @@ entries:
     - [64x32, -33, -83]
   animations:
   - symbol: gBosBoogieAttackHitAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 7], [2, 8], [3, 10], [4, 10], [3, 10], [2, 10], [3, 10], [4, 10], [3, 10], [5, 10]]
   us:
     address: 0x0978DEE8
@@ -28497,10 +28497,10 @@ entries:
     - [32x16, 19, -63, {layer: 1}]
   animations:
   - symbol: gBosBoogieDiceFaceAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [1, 11], [2, 8], [3, 4], [4, 4]]
   - symbol: gBosBoogieDiceFaceAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 10]]
   us:
     address: 0x0979201C

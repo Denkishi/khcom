@@ -177,19 +177,19 @@ entries:
     - [32x8, -16, 12]
   animations:
   - symbol: gBosMdDaiAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gBosMdDaiAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gBosMdDaiAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gBosMdDaiAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gBosMdDaiAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x09999E0C
@@ -220,7 +220,7 @@ entries:
     - [16x32, -45, -1, {layer: 1}]
   animations:
   - symbol: gWorldselectCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0999A350
@@ -266,7 +266,7 @@ entries:
     - [16x32, -26, -9]
   animations:
   - symbol: gWorldselectCardFlipAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   us:
     address: 0x0999AFD4
@@ -299,7 +299,7 @@ entries:
     - [32x32, -16, -16, {tile: 48}]
   animations:
   - symbol: gBosMdFireAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12]]
   us:
     address: 0x099A8718

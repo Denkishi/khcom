@@ -476,7 +476,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gLvupLogoAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908C630
@@ -531,7 +531,7 @@ entries:
     - [16x16, 64, 0]
   animations:
   - symbol: gLevelUpHeaderAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908CA68
@@ -571,7 +571,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gLevelUpBarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908CFEC
@@ -675,7 +675,7 @@ entries:
     - [32x16, 0, 0]
   animations:
   - symbol: gUnk_0908D538
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908D420
@@ -710,7 +710,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gLevelUpChosenCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 7], [2, 6], [3, 7], [4, 6]]
   us:
     address: 0x0908F144
@@ -735,7 +735,7 @@ entries:
     - [8x32, 60, -12]
   animations:
   - symbol: gUnk_0908F426
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908F410
@@ -765,7 +765,7 @@ entries:
     - [8x8, 68, 20]
   animations:
   - symbol: gStockInfoWindowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0908FCB0
@@ -795,7 +795,7 @@ entries:
     - [8x16, 60, 8]
   animations:
   - symbol: gUnk_09090FC4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09090F90
@@ -845,7 +845,7 @@ entries:
     - [64x32, -16, 16]
   animations:
   - symbol: gLevelUpRikuBonusAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09091C90
@@ -895,7 +895,7 @@ entries:
     - [64x32, -16, 16]
   animations:
   - symbol: gLevelUpRikuBonusChosenAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09093578
@@ -978,7 +978,7 @@ entries:
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
   - symbol: gLevelUpSoraBonusAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09094FA0
@@ -1061,7 +1061,7 @@ entries:
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
   - symbol: gLevelUpSoraBonusChosenAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09096B34
@@ -1103,7 +1103,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gLvupLogoFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0916F93C
@@ -1139,7 +1139,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gLvupLogoSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0916FD74
@@ -1175,7 +1175,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gLvupLogoItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091701AC
@@ -1211,7 +1211,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gLvupLogoGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091705E4
@@ -1260,7 +1260,7 @@ entries:
     - [16x16, 64, 0]
   animations:
   - symbol: gLevelUpHeaderFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09170A1C
@@ -1309,7 +1309,7 @@ entries:
     - [16x16, 64, 0]
   animations:
   - symbol: gLevelUpHeaderSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09170FA0
@@ -1358,7 +1358,7 @@ entries:
     - [16x16, 64, 0]
   animations:
   - symbol: gLevelUpHeaderItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09171524
@@ -1407,7 +1407,7 @@ entries:
     - [32x16, 64, 0]
   animations:
   - symbol: gLevelUpHeaderGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09171AA8
@@ -1484,7 +1484,7 @@ entries:
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
   - symbol: gLevelUpSoraBonusItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091720AC
@@ -1561,7 +1561,7 @@ entries:
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
   - symbol: gLevelUpSoraBonusChosenItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09173C40
@@ -1605,7 +1605,7 @@ entries:
     - [64x32, -16, 16]
   animations:
   - symbol: gLevelUpRikuBonusItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09175914
@@ -1649,7 +1649,7 @@ entries:
     - [64x32, -16, 16]
   animations:
   - symbol: gLevelUpRikuBonusChosenItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091771FC
@@ -1718,7 +1718,7 @@ entries:
     - [8x8, 50, 0]
   animations:
   - symbol: gLevelUpOptionAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09178C24
@@ -1790,7 +1790,7 @@ entries:
     - [8x8, 50, 0]
   animations:
   - symbol: gLevelUpOptionFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09179BC0
@@ -1856,7 +1856,7 @@ entries:
     - [8x8, 50, 0]
   animations:
   - symbol: gLevelUpOptionSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917AE30
@@ -1922,7 +1922,7 @@ entries:
     - [8x8, 50, 0]
   animations:
   - symbol: gLevelUpOptionItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917BE9C
@@ -1996,7 +1996,7 @@ entries:
     - [8x8, 50, 0]
   animations:
   - symbol: gLevelUpOptionGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917CEA8

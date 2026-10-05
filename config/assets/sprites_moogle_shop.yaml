@@ -464,16 +464,16 @@ entries:
     - [16x8, 1, 9]
   animations:
   - symbol: gMsChargeMoogleAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [5, 20], [6, 20], [7, 20]]
   - symbol: gMsChargeMoogleAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10]]
   - symbol: gMsChargeMoogleAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 4], [3, 4], [4, 4]]
   - symbol: gMsChargeMoogleAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 8], [18, 8], [19, 8], [16, 8], [17, 8], [14, 8], [15, 8], [12, 8], [13, 8], [10, 8], [11, 8]]
   us:
     address: 0x099A1F44
@@ -519,7 +519,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gMsTopBarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A2AD4
@@ -544,7 +544,7 @@ entries:
     - [16x8, 16, 32]
   animations:
   - symbol: gMsTopPacksAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A2F64
@@ -569,7 +569,7 @@ entries:
     - [16x8, 16, 32]
   animations:
   - symbol: gMsTopPacksDimAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A32C4
@@ -629,10 +629,10 @@ entries:
     - [16x16, 56, 0]
   animations:
   - symbol: gMsTopArrowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 7], [2, 6], [3, 7], [4, 6]]
   - symbol: gMsTopArrowAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 7], [7, 6], [8, 7], [9, 6]]
   us:
     address: 0x099A3624
@@ -692,10 +692,10 @@ entries:
     - [16x8, 4, 16, {hflip: true}]
   animations:
   - symbol: gMoogleShopCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   - symbol: gMoogleShopCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4], [5, 3], [6, 3], [7, 4], [6, 3], [5, 3]]
   us:
     address: 0x099A3BF8
@@ -720,7 +720,7 @@ entries:
     - [8x8, 24, 32]
   animations:
   - symbol: gMooglePackTier0Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A3EA4
@@ -745,7 +745,7 @@ entries:
     - [8x8, 26, 32]
   animations:
   - symbol: gMooglePackTier1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A41E4
@@ -770,7 +770,7 @@ entries:
     - [8x8, 26, 32]
   animations:
   - symbol: gMooglePackTier2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A4464
@@ -795,7 +795,7 @@ entries:
     - [16x32, 0, 0]
   animations:
   - symbol: gMooglePackTier3Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A46E4
@@ -867,7 +867,7 @@ entries:
     - [8x8, 8, 8]
   animations:
   - symbol: gMooglePackCardSpinAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 8], [6, 8], [7, 8], [8, 8], [9, 8]]
   us:
     address: 0x099A4A84
@@ -905,7 +905,7 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gMsShopHosiAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   us:
     address: 0x099A691C
@@ -985,13 +985,13 @@ entries:
     - [16x8, 8, 24]
   animations:
   - symbol: gMsChargeHighlightAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   - symbol: gMsChargeHighlightAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 7], [7, 6], [8, 7], [9, 6]]
   - symbol: gMsChargeHighlightAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 5], [11, 5], [12, 4], [13, 4], [14, 3]]
   us:
     address: 0x099A6B44
@@ -1014,7 +1014,7 @@ entries:
     - [8x8, 0, 0]
   animations:
   - symbol: gMsChargeScrollbarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099A7C64
@@ -1060,7 +1060,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gMsTopBarFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x099AFC68
@@ -1100,7 +1100,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gMsTopBarSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x099B00F8
@@ -1140,7 +1140,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gMsTopBarItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x099B0588
@@ -1180,7 +1180,7 @@ entries:
     - [16x8, 96, 0, {vflip: true}]
   animations:
   - symbol: gMsTopBarGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x099B0A58

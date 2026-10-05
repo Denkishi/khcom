@@ -192,16 +192,16 @@ entries:
     - [32x8, 4, -5]
   animations:
   - symbol: gCroud00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gCroud00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gCroud00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gCroud00Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 6], [4, 10]]
   us:
     address: 0x08885B78
@@ -278,13 +278,13 @@ entries:
     - [8x8, -31, -19]
   animations:
   - symbol: gCroud01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2], [1, 3], [2, 6], [3, 14], [4, 2], [5, 3], [6, 6], [7, 12], [8, 6], [9, 4]]
   - symbol: gCroud01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2], [1, 3], [2, 5], [3, 14], [4, 2], [5, 2], [6, 2], [7, 16], [8, 6], [9, 4]]
   - symbol: gCroud01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2], [1, 3], [2, 5], [3, 14], [4, 2], [5, 2], [6, 2], [7, 16]]
   us:
     address: 0x08888BC8
@@ -364,10 +364,10 @@ entries:
     - [32x32, -58, -52]
   animations:
   - symbol: gCroud02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2], [1, 3], [2, 6], [3, 10], [4, 4], [5, 3], [6, 6], [7, 10], [8, 5], [9, 5], [10, 3]]
   - symbol: gCroud02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 3], [1, 3], [2, 3], [3, 9], [8, 3], [9, 3]]
   us:
     address: 0x0888F0C4
@@ -401,7 +401,7 @@ entries:
     - [16x8, 28, -29]
   animations:
   - symbol: gCroud10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [2, 2], [1, 4], [2, 2]]
   us:
     address: 0x08895A38
@@ -462,7 +462,7 @@ entries:
     - [8x8, 22, -4]
   animations:
   - symbol: gCroud11Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 9], [3, 3], [4, 6], [5, 4], [6, 4]]
   us:
     address: 0x088973C0
@@ -523,7 +523,7 @@ entries:
     - [64x64, -28, -54]
   animations:
   - symbol: gCroud12Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [4, 5], [5, 8], [6, 5], [7, 4]]
   us:
     address: 0x0889B0D4
@@ -596,7 +596,7 @@ entries:
     - [8x16, -31, -30]
   animations:
   - symbol: gCroud13Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [2, 3], [3, 3], [4, 3], [5, 6], [6, 6], [7, 3], [8, 3], [0, 2]]
   us:
     address: 0x0889F624

@@ -396,8 +396,8 @@ def parse_records(data, frame_count, anim_count):
         if count and halfwords(1)[0]:
             raise SheetError("a sprite record does not end with a zero halfword")
     for _ in range(anim_count):
-        first, second, count = halfwords(3)
-        anims.append({"fields": {"unk_00": first, "unk_02": second}, "frames": [halfwords(2) for _ in range(count)]})
+        origin_x, origin_y, count = halfwords(3)
+        anims.append({"fields": {"originX": origin_x, "originY": origin_y}, "frames": [halfwords(2) for _ in range(count)]})
     return frames, anims, bytes(data[position:])
 
 
@@ -408,7 +408,7 @@ def frame_words(oam):
 
 def anim_words(anim):
     fields = anim["fields"]
-    return [fields["unk_00"], fields["unk_02"], len(anim["frames"])] + [value for frame in anim["frames"] for value in frame]
+    return [fields["originX"], fields["originY"], len(anim["frames"])] + [value for frame in anim["frames"] for value in frame]
 
 
 def record_bytes(oam_frames, anims):

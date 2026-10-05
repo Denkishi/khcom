@@ -3050,7 +3050,7 @@ entries:
     - [32x32, -16, -14]
   animations:
   - symbol: gUnk_093EDD54
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EDD44
@@ -3149,7 +3149,7 @@ entries:
     - [8x8, 24, 2]
   animations:
   - symbol: gUnk_093EE14A
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EDFE0
@@ -3174,7 +3174,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EF054
@@ -3199,7 +3199,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EF268
@@ -3224,7 +3224,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EF47C
@@ -3249,7 +3249,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EF690
@@ -3274,7 +3274,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EF8A4
@@ -3299,7 +3299,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EFAB8
@@ -3324,7 +3324,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EFCCC
@@ -3349,7 +3349,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093EFEE0
@@ -3374,7 +3374,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F00F4
@@ -3399,7 +3399,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0308
@@ -3424,7 +3424,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom11Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F051C
@@ -3449,7 +3449,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom12Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0730
@@ -3474,7 +3474,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom13Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0944
@@ -3499,7 +3499,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom14Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0B58
@@ -3524,7 +3524,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom15Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0D6C
@@ -3549,7 +3549,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom16Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F0F80
@@ -3574,7 +3574,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom17Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F1194
@@ -3599,7 +3599,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom18Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F13A8
@@ -3624,7 +3624,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom19Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F15BC
@@ -3649,7 +3649,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom20Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F17D0
@@ -3674,7 +3674,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom21Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F19E4
@@ -3699,7 +3699,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom22Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F1BF8
@@ -3724,7 +3724,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardRoom23Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F1E0C
@@ -3749,7 +3749,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardEve00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3E3C
@@ -3774,7 +3774,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardEve01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F4050
@@ -3799,7 +3799,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gCardEve02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F4264
@@ -3830,10 +3830,10 @@ entries:
     - [32x8, -16, 1, {fresh: true}]
   animations:
   - symbol: gMapGmk01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 50]]
   - symbol: gMapGmk01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x098582E0
@@ -3948,10 +3948,10 @@ entries:
     - [8x8, -8, -8]
   animations:
   - symbol: gMapGmkBarrelAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20]]
   - symbol: gMapGmkBarrelAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 3], [2, 4], [3, 3], [4, 3], [5, 2], [14, 2], [6, 2], [14, 2], [7, 2], [14, 2], [8, 2], [14, 2], [9, 2], [14, 3], [10, 2], [14, 4], [12, 2], [14, 5], [13, 2], [14, 2]]
   us:
     address: 0x09858920
@@ -4000,13 +4000,13 @@ entries:
     - [32x32, -16, -27]
   animations:
   - symbol: gMapGmkJumpAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [1, 8], [2, 13], [1, 8]]
   - symbol: gMapGmkJumpAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 50]]
   - symbol: gMapGmkJumpAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [4, 1], [5, 2], [6, 5], [7, 2], [4, 2], [0, 5], [4, 7]]
   us:
     address: 0x0985A33C
@@ -4038,7 +4038,7 @@ entries:
     - [32x64, -16, -40]
   animations:
   - symbol: gMapGmk04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6]]
   us:
     address: 0x0985AD6C
@@ -4070,7 +4070,7 @@ entries:
     - [32x32, -16, -25]
   animations:
   - symbol: gMapGmk06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 11], [2, 11], [3, 11]]
   us:
     address: 0x0985BDAC
@@ -4094,7 +4094,7 @@ entries:
     - [64x32, -32, -8]
   animations:
   - symbol: gUnk_0985C5FC
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985C5EC
@@ -4118,7 +4118,7 @@ entries:
     - [64x32, -32, -8]
   animations:
   - symbol: gEventBg110Object4Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985D208
@@ -4141,7 +4141,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gUnk_0985DE2E
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985DE24
@@ -4164,7 +4164,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkAgrabah00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985E638
@@ -4187,7 +4187,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkAgrabah01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985EE4C
@@ -4211,10 +4211,10 @@ entries:
     - [64x64, -32, -32]
   animations:
   - symbol: gMapGmkAgrabah02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkAgrabah02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0985F660
@@ -4239,7 +4239,7 @@ entries:
     - [32x32, -10, -36, {same: [0, 0]}]
   animations:
   - symbol: gMapGmkAgrabah03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09860684
@@ -4274,10 +4274,10 @@ entries:
     - [64x64, -31, -52]
   animations:
   - symbol: gMapGmkAgrabah04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 80]]
   - symbol: gMapGmkAgrabah04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 1], [1, 2], [0, 4], [3, 2], [4, 1], [3, 2], [0, 4], [1, 4], [0, 4], [3, 4], [0, 5], [1, 5], [0, 5], [3, 5]]
   us:
     address: 0x098610A4
@@ -4312,10 +4312,10 @@ entries:
     - [32x32, -15, -27]
   animations:
   - symbol: gMapGmkAgrabah05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 80]]
   - symbol: gMapGmkAgrabah05Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 2], [1, 2], [0, 2], [2, 2], [4, 2], [0, 3], [1, 3], [0, 3], [2, 3], [0, 4], [1, 4], [0, 4], [2, 4], [0, 4]]
   us:
     address: 0x09862924
@@ -4339,7 +4339,7 @@ entries:
     - [32x16, -20, -4]
   animations:
   - symbol: gMapGmkAgrabah06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09862FA0
@@ -4362,7 +4362,7 @@ entries:
     - [32x32, -16, -16]
   animations:
   - symbol: gMapGmkAgrabah07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098631BC
@@ -4386,7 +4386,7 @@ entries:
     - [32x16, -12, -4]
   animations:
   - symbol: gMapGmkAgrabah08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098633D0
@@ -4409,7 +4409,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkAgrabah09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098635EC
@@ -4432,7 +4432,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkAgrabah10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09863E00
@@ -4455,7 +4455,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkAgrabah11Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09864614
@@ -4484,13 +4484,13 @@ entries:
     - [64x64, -32, -56]
   animations:
   - symbol: gMapGmkWonderland00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkWonderland00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8]]
   - symbol: gMapGmkWonderland00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09864E28
@@ -4525,13 +4525,13 @@ entries:
     - [16x8, -8, 0]
   animations:
   - symbol: gMapGmkWonderland01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 16]]
   - symbol: gMapGmkWonderland01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8], [2, 8]]
   - symbol: gMapGmkWonderland01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09866668
@@ -4557,10 +4557,10 @@ entries:
     - [32x64, 16, -56]
   animations:
   - symbol: gMapGmkWonderland02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkWonderland02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   us:
     address: 0x0986700C
@@ -4594,13 +4594,13 @@ entries:
     - [8x8, -3, 1]
   animations:
   - symbol: gWorldMapGmkWonderlandAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40]]
   - symbol: gWorldMapGmkWonderlandAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 10]]
   - symbol: gWorldMapGmkWonderlandAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 40], [1, 8]]
   us:
     address: 0x09868838
@@ -4641,13 +4641,13 @@ entries:
     - [16x16, 24, 0, {same: [0, 4]}]
   animations:
   - symbol: gMapGmkMonstro00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6]]
   - symbol: gMapGmkMonstro00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6]]
   - symbol: gMapGmkMonstro00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x098693B8
@@ -4682,13 +4682,13 @@ entries:
     - [16x32, 30, -22, {same: [0, 2]}]
   animations:
   - symbol: gMapGmkMonstro01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkMonstro01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6]]
   - symbol: gMapGmkMonstro01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x0986A2C0
@@ -4723,13 +4723,13 @@ entries:
     - [16x32, -46, -22, {hflip: true, same: [0, 2]}]
   animations:
   - symbol: gMapGmkMonstro02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkMonstro02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6]]
   - symbol: gMapGmkMonstro02Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x0986B424
@@ -4761,13 +4761,13 @@ entries:
     - [32x64, 20, -62]
   animations:
   - symbol: gMapGmkMonstro03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkMonstro03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [0, 6], [1, 6], [0, 8], [1, 8]]
   - symbol: gMapGmkMonstro03Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [0, 6], [1, 6]]
   us:
     address: 0x0986C588
@@ -4799,13 +4799,13 @@ entries:
     - [16x8, 8, 0]
   animations:
   - symbol: gMapGmkMonstro04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkMonstro04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [0, 6], [1, 6], [0, 8], [1, 8]]
   - symbol: gMapGmkMonstro04Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4], [0, 6], [1, 6]]
   us:
     address: 0x0986E280
@@ -4829,10 +4829,10 @@ entries:
     - [32x64, -16, -32]
   animations:
   - symbol: gMapGmkAtlantica00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkAtlantica00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   us:
     address: 0x0986EA78
@@ -4897,10 +4897,10 @@ entries:
     - [8x8, 20, -64]
   animations:
   - symbol: gMapGmkAtlantica01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkAtlantica01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4]]
   us:
     address: 0x0986F298
@@ -5022,13 +5022,13 @@ entries:
     - [8x8, -15, -45]
   animations:
   - symbol: gWorldMapGmkAtlanticaAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40]]
   - symbol: gWorldMapGmkAtlanticaAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 8]]
   - symbol: gWorldMapGmkAtlanticaAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 2], [4, 4], [5, 4], [6, 4], [7, 4], [8, 4], [9, 4], [10, 4], [11, 4], [12, 4], [13, 4], [14, 8], [1, 8]]
   us:
     address: 0x0986FEEC
@@ -5089,10 +5089,10 @@ entries:
     - [32x32, -16, -22]
   animations:
   - symbol: gWorldMapGmkHalloweenTownAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [7, 8], [8, 8], [7, 8]]
   - symbol: gWorldMapGmkHalloweenTownAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [6, 2], [2, 2], [3, 3], [4, 4], [5, 4]]
   us:
     address: 0x09871288
@@ -5115,7 +5115,7 @@ entries:
     - [32x16, -16, -11]
   animations:
   - symbol: gEventBg087Object1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x098729AC
@@ -5138,7 +5138,7 @@ entries:
     - [16x32, -8, -24]
   animations:
   - symbol: gEventBg087Object2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09872AC0
@@ -5161,7 +5161,7 @@ entries:
     - [16x32, -8, -24]
   animations:
   - symbol: gEventBg087Object3Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09872BD4
@@ -5184,7 +5184,7 @@ entries:
     - [64x64, -32, -44]
   animations:
   - symbol: gEventBg087Object4Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09872CE8
@@ -5207,7 +5207,7 @@ entries:
     - [64x64, -32, -49]
   animations:
   - symbol: gEventBg087Object5Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x098734FC
@@ -5302,10 +5302,10 @@ entries:
     pieces: []
   animations:
   - symbol: gMapGmkHalloweenTown00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkHalloweenTown00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 4], [18, 1], [13, 2], [18, 1], [14, 1], [18, 1], [15, 1], [18, 1], [16, 1], [18, 1], [17, 1]]
   us:
     address: 0x09873D10
@@ -5400,10 +5400,10 @@ entries:
     pieces: []
   animations:
   - symbol: gMapGmkHalloweenTown01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkHalloweenTown01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 4], [18, 1], [13, 2], [18, 1], [14, 1], [18, 1], [15, 1], [18, 1], [16, 1], [18, 1], [17, 1]]
   us:
     address: 0x09875260
@@ -5428,7 +5428,7 @@ entries:
     - [64x64, -16, -40]
   animations:
   - symbol: gEventBg087Object8Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x098767B0
@@ -5451,7 +5451,7 @@ entries:
     - [64x64, -32, -40]
   animations:
   - symbol: gEventBg087Object9Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09877BD0
@@ -5475,7 +5475,7 @@ entries:
     - [64x32, -32, 4]
   animations:
   - symbol: gEventBg087Object10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098783E4
@@ -5499,7 +5499,7 @@ entries:
     - [64x32, -32, 4]
   animations:
   - symbol: gEventBg087Object11Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09879000
@@ -5525,7 +5525,7 @@ entries:
     - [32x64, 16, -32]
   animations:
   - symbol: gEventBg087Object12Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09879C1C
@@ -5549,7 +5549,7 @@ entries:
     - [64x32, -32, 2]
   animations:
   - symbol: gMapGmkHalloweenTown07Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0987B444
@@ -5575,7 +5575,7 @@ entries:
     - [32x64, 16, -48]
   animations:
   - symbol: gEventBg087Object14Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0987C060
@@ -5599,7 +5599,7 @@ entries:
     - [64x32, -32, -8]
   animations:
   - symbol: gMapGmkHalloweenTown08Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0987D888
@@ -5625,7 +5625,7 @@ entries:
     - [32x64, -48, -48]
   animations:
   - symbol: gEventBg087Object16Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0987E4A4
@@ -5649,7 +5649,7 @@ entries:
     - [64x32, -32, -8]
   animations:
   - symbol: gMapGmkHalloweenTown09Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0987FCCC
@@ -5689,10 +5689,10 @@ entries:
     - [32x64, -16, -96]
   animations:
   - symbol: gMapGmkHalloweenTown10Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkHalloweenTown10Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 2], [1, 2], [0, 2], [3, 2], [4, 2], [3, 2], [1, 2], [2, 2], [1, 2], [0, 2], [3, 2], [4, 2], [3, 2], [0, 2], [0, 2]]
   us:
     address: 0x098808E8
@@ -5722,10 +5722,10 @@ entries:
     - [32x8, 0, 8]
   animations:
   - symbol: gMapGmkHalloweenTown02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHalloweenTown02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09882188
@@ -5751,10 +5751,10 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkHalloweenTown03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHalloweenTown03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x098830C8
@@ -5821,10 +5821,10 @@ entries:
     - [32x16, -24, -64]
   animations:
   - symbol: gMapGmkHalloweenTown04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6]]
   - symbol: gMapGmkHalloweenTown04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 6], [1, 6], [2, 5], [3, 5], [4, 4], [5, 4], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3]]
   us:
     address: 0x098840F0
@@ -5861,10 +5861,10 @@ entries:
     - [32x32, 0, -48, {layer: 2}]
   animations:
   - symbol: gMapGmkHalloweenTown05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6]]
   - symbol: gMapGmkHalloweenTown05Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [0, 6], [2, 6], [0, 5], [1, 5], [0, 5], [2, 5]]
   us:
     address: 0x09884B88
@@ -5887,7 +5887,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkHalloweenTown06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09886804
@@ -5916,13 +5916,13 @@ entries:
     - [64x64, -24, -48]
   animations:
   - symbol: gMapGmkNeverLand00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 30]]
   - symbol: gMapGmkNeverLand00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7]]
   - symbol: gMapGmkNeverLand00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 30], [1, 7]]
   us:
     address: 0x09887018
@@ -5958,13 +5958,13 @@ entries:
     - [8x8, 16, -16]
   animations:
   - symbol: gMapGmkNeverLand01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gMapGmkNeverLand01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6]]
   - symbol: gMapGmkNeverLand01Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 30], [1, 6]]
   us:
     address: 0x09888858
@@ -6016,10 +6016,10 @@ entries:
     - [16x8, -40, 3]
   animations:
   - symbol: gMapGmkNeverLand02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6]]
   - symbol: gMapGmkNeverLand02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x098894A4
@@ -6044,7 +6044,7 @@ entries:
     - [32x16, 0, 0]
   animations:
   - symbol: gMapGmkNeverLand03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0988A5B0
@@ -6067,7 +6067,7 @@ entries:
     - [64x64, -28, -48]
   animations:
   - symbol: gMapGmkNeverLand04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0988ABD0
@@ -6122,10 +6122,10 @@ entries:
     - [16x16, 16, 3]
   animations:
   - symbol: gMapGmkNeverLand05Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkNeverLand05Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 3], [2, 4], [3, 4], [4, 3], [5, 6], [6, 6], [7, 6]]
   us:
     address: 0x0988B3E4
@@ -6210,10 +6210,10 @@ entries:
     - [32x16, 0, 16]
   animations:
   - symbol: gMapGmkNeverLand06Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkNeverLand06Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 3], [2, 4], [3, 4], [4, 3], [5, 6], [6, 6], [7, 6], [8, 3], [9, 4], [10, 4], [11, 3], [12, 6], [13, 6], [14, 6]]
   us:
     address: 0x0988D0E4
@@ -6294,10 +6294,10 @@ entries:
     - [8x8, 26, 10]
   animations:
   - symbol: gMapGmkOlympusColiseum00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkOlympusColiseum00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 5], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6]]
   us:
     address: 0x0988F6DC
@@ -6378,10 +6378,10 @@ entries:
     - [8x8, 26, 10]
   animations:
   - symbol: gMapGmkOlympusColiseum01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gMapGmkOlympusColiseum01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 5], [7, 5], [8, 6], [9, 6], [10, 6], [11, 6]]
   us:
     address: 0x0988FE88
@@ -6404,7 +6404,7 @@ entries:
     - [64x64, -32, -40]
   animations:
   - symbol: gMapGmkOlympusColiseum02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [0, 4]]
   us:
     address: 0x09890634
@@ -6427,7 +6427,7 @@ entries:
     - [64x64, -32, -40]
   animations:
   - symbol: gEventBg122Object6Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [0, 4]]
   us:
     address: 0x09890E4C
@@ -6450,7 +6450,7 @@ entries:
     - [64x64, -26, -32]
   animations:
   - symbol: gMapGmkOlympusColiseum03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [0, 4]]
   us:
     address: 0x09891664
@@ -6475,7 +6475,7 @@ entries:
     - [32x16, 0, 0]
   animations:
   - symbol: gMapGmkOlympusColiseum04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x09891E7C
@@ -6536,10 +6536,10 @@ entries:
     - [16x8, -9, -73]
   animations:
   - symbol: gWorldMapGmkHollowBastion00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 30]]
   - symbol: gWorldMapGmkHollowBastion00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 5], [3, 6], [4, 7], [5, 8], [6, 8], [7, 7], [8, 5]]
   us:
     address: 0x0989289C
@@ -6609,10 +6609,10 @@ entries:
     - [16x8, -10, -89]
   animations:
   - symbol: gWorldMapGmkHollowBastion01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 30]]
   - symbol: gWorldMapGmkHollowBastion01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 5], [3, 6], [4, 7], [5, 8], [6, 8], [7, 7], [8, 5]]
   us:
     address: 0x098933BC
@@ -6776,10 +6776,10 @@ entries:
     - [8x8, -50, -16, {hflip: true}]
   animations:
   - symbol: gMapGmkHollowBastion00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHollowBastion00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 2], [3, 2], [4, 2], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 4], [12, 2], [13, 2]]
   us:
     address: 0x09894010
@@ -6949,10 +6949,10 @@ entries:
     - [8x8, -50, -16, {hflip: true}]
   animations:
   - symbol: gMapGmkHollowBastion01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHollowBastion01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 2], [3, 2], [4, 2], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 4], [12, 2], [13, 2]]
   us:
     address: 0x09894724
@@ -7121,10 +7121,10 @@ entries:
     - [8x8, -50, -16, {hflip: true}]
   animations:
   - symbol: gMapGmkHollowBastion02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHollowBastion02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 2], [3, 2], [4, 2], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 4], [12, 2], [13, 2]]
   us:
     address: 0x0989515C
@@ -7294,10 +7294,10 @@ entries:
     - [8x8, -50, -16, {hflip: true}]
   animations:
   - symbol: gMapGmkHollowBastion03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkHollowBastion03Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 2], [2, 2], [3, 2], [4, 2], [5, 3], [6, 3], [7, 3], [8, 3], [9, 3], [10, 3], [11, 4], [12, 2], [13, 2]]
   us:
     address: 0x09896190
@@ -7320,7 +7320,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkHollowBastion04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09896EC8
@@ -7364,13 +7364,13 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkDestinyIslands00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkDestinyIslands00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 4], [3, 4]]
   - symbol: gMapGmkDestinyIslands00Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x098976DC
@@ -7393,7 +7393,7 @@ entries:
     - [64x64, -32, -32]
   animations:
   - symbol: gUnk_09898D16
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09898D0C
@@ -7416,7 +7416,7 @@ entries:
     - [64x64, -32, -32]
   animations:
   - symbol: gUnk_0989952A
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09899520
@@ -7439,7 +7439,7 @@ entries:
     - [64x64, -32, -40]
   animations:
   - symbol: gMapGmkDestinyIslands01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09899D34
@@ -7462,7 +7462,7 @@ entries:
     - [64x64, -32, -37]
   animations:
   - symbol: gMapGmkDestinyIslands02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0989A548
@@ -7486,7 +7486,7 @@ entries:
     - [16x32, 30, -18]
   animations:
   - symbol: gMapGmkDestinyIslands03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0989AD5C
@@ -7550,10 +7550,10 @@ entries:
     - [8x8, -45, -16]
   animations:
   - symbol: gMapGmkDestinyIslands04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7]]
   - symbol: gMapGmkDestinyIslands04Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 5], [3, 4], [4, 4], [5, 4], [6, 2], [7, 2], [8, 3], [9, 3], [10, 2], [11, 2], [12, 2]]
   us:
     address: 0x0989B678
@@ -7585,10 +7585,10 @@ entries:
     - [32x16, -16, -4]
   animations:
   - symbol: gMapGmkTraverseTown00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4]]
   - symbol: gMapGmkTraverseTown00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8]]
   us:
     address: 0x0989D0B8
@@ -7611,7 +7611,7 @@ entries:
     - [64x64, -32, -48]
   animations:
   - symbol: gMapGmkTraverseTown01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0989DE00
@@ -7651,10 +7651,10 @@ entries:
     - [16x8, 5, -51]
   animations:
   - symbol: gWorldMapGmkTraverseTownAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40]]
   - symbol: gWorldMapGmkTraverseTownAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6]]
   us:
     address: 0x0989E614
@@ -7677,10 +7677,10 @@ entries:
     - [64x64, -32, -46]
   animations:
   - symbol: gMapGmkTwilightTown00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapGmkTwilightTown00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0989FBE8
@@ -7711,10 +7711,10 @@ entries:
     - [32x64, -16, -56, {same: [0, 0]}]
   animations:
   - symbol: gMapGmkTwilightTown01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 4]]
   - symbol: gMapGmkTwilightTown01Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8]]
   us:
     address: 0x098A0408
@@ -7741,7 +7741,7 @@ entries:
     - [8x16, 32, -8]
   animations:
   - symbol: gMapGmkTwilightTown02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A094C
@@ -7820,10 +7820,10 @@ entries:
     - [8x8, 3, -20]
   animations:
   - symbol: gMapGmkCastleOblivion00Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   - symbol: gMapGmkCastleOblivion00Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4], [2, 4], [3, 6], [4, 6], [5, 8], [6, 8], [7, 8], [8, 6], [9, 6]]
   us:
     address: 0x098A12D8
@@ -7847,7 +7847,7 @@ entries:
     - [32x16, -16, -10]
   animations:
   - symbol: gMapGmkCastleOblivion03Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A21E0
@@ -7871,7 +7871,7 @@ entries:
     - [32x8, -16, 8]
   animations:
   - symbol: gMapGmkCastleOblivion01Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A24FC
@@ -7895,7 +7895,7 @@ entries:
     - [32x8, -16, 8]
   animations:
   - symbol: gMapGmkCastleOblivion04Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A2D98
@@ -7919,7 +7919,7 @@ entries:
     - [32x16, -16, -8]
   animations:
   - symbol: gEventBg000Object4Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A3634
@@ -7943,7 +7943,7 @@ entries:
     - [32x16, -16, -1]
   animations:
   - symbol: gEventBg000Object5Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A3950
@@ -7983,13 +7983,13 @@ entries:
     - [64x32, -32, -15, {same: [0, 1]}]
   animations:
   - symbol: gMapGmkCastleOblivion02Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 50]]
   - symbol: gMapGmkCastleOblivion02Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 15], [3, 4], [2, 5], [1, 6], [0, 100]]
   - symbol: gMapGmkCastleOblivion02Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40]]
   us:
     address: 0x098A3C6C
@@ -8033,10 +8033,10 @@ entries:
     - [32x32, -16, -16]
   animations:
   - symbol: gMapSparkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 3], [1, 3], [2, 4], [3, 4]]
   - symbol: gMapSparkAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 3], [5, 4], [6, 4], [7, 3]]
   us:
     address: 0x098A4AEC
@@ -8062,10 +8062,10 @@ entries:
     - [16x16, -8, -8]
   animations:
   - symbol: gMapTalkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapTalkAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x098A5B68
@@ -8100,19 +8100,19 @@ entries:
     - [8x8, -4, -4]
   animations:
   - symbol: gMapPrizeAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMapPrizeAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gMapPrizeAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gMapPrizeAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gMapPrizeAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x098A5C90
@@ -8164,13 +8164,13 @@ entries:
     - [8x16, 4, -9]
   animations:
   - symbol: gEmy00PeekAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 11], [1, 8], [2, 8], [3, 10], [2, 8], [3, 12], [1, 8]]
   - symbol: gEmy00PeekAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 10], [5, 10]]
   - symbol: gEmy00PeekAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 10], [4, 10]]
   us:
     address: 0x098A5E54
@@ -8214,7 +8214,7 @@ entries:
     - [32x64, -18, -48]
   animations:
   - symbol: gEmy0600BackAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [1, 13], [2, 13], [3, 13], [4, 13], [5, 13], [6, 13], [7, 13]]
   us:
     address: 0x098A6524
@@ -8254,16 +8254,16 @@ entries:
     - [16x8, 4, 16]
   animations:
   - symbol: gMapMenuCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   - symbol: gMapMenuCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   - symbol: gMapMenuCursorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   - symbol: gMapMenuCursorAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A859C
@@ -10032,7 +10032,7 @@ entries:
   animations:
   - symbol: gMenuLoadTitleFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09885114
@@ -10070,7 +10070,7 @@ entries:
   animations:
   - symbol: gMenuLoadTitleSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0988549C
@@ -10109,7 +10109,7 @@ entries:
   animations:
   - symbol: gMenuLoadTitleItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x098857E0
@@ -10148,7 +10148,7 @@ entries:
   animations:
   - symbol: gMenuLoadTitleGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09885B24
@@ -10251,7 +10251,7 @@ entries:
   animations:
   - symbol: gMenuLoadTitleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A8728
@@ -10292,7 +10292,7 @@ entries:
   animations:
   - symbol: gSaveSlotCursorAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   us:
     address: 0x098A8A6C
@@ -10337,7 +10337,7 @@ entries:
   animations:
   - symbol: gMapSaveTitleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A8BE4
@@ -10384,7 +10384,7 @@ entries:
   animations:
   - symbol: gMapSaveTitleFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09886324
@@ -10424,7 +10424,7 @@ entries:
   animations:
   - symbol: gMapSaveTitleSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x098867B4
@@ -10462,7 +10462,7 @@ entries:
   animations:
   - symbol: gMapSaveTitleItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09886BFC
@@ -10502,7 +10502,7 @@ entries:
   animations:
   - symbol: gMapSaveTitleGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09886F40
@@ -10533,7 +10533,7 @@ entries:
   animations:
   - symbol: gSaveSlotCharaWinAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A8F28
@@ -10566,7 +10566,7 @@ entries:
   animations:
   - symbol: gMapNameBarAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A944C
@@ -10592,7 +10592,7 @@ entries:
   animations:
   - symbol: gMapDoorSide3Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A948C
@@ -10617,7 +10617,7 @@ entries:
   animations:
   - symbol: gMapDoorSide0Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A94A0
@@ -10642,7 +10642,7 @@ entries:
   animations:
   - symbol: gMapDoorSide1Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A94B4
@@ -10667,7 +10667,7 @@ entries:
   animations:
   - symbol: gMapDoorSide2Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A94C8
@@ -10695,7 +10695,7 @@ entries:
   animations:
   - symbol: gMapDoorEmblemSide01Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A94DC
@@ -10723,7 +10723,7 @@ entries:
   animations:
   - symbol: gMapDoorEmblemSide23Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A94FC
@@ -10768,19 +10768,19 @@ entries:
   animations:
   - symbol: gMapUiAnim_098A956C
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 24], [2, 8], [1, 8]]
   - symbol: gMapUiAnim_098A958A
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 24], [6, 8], [5, 8]]
   - symbol: gMapUiAnim_098A95A8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 24], [2, 8], [1, 8]]
   - symbol: gMapUiAnim_098A95C6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 24], [6, 8], [5, 8]]
   us:
     address: 0x098A951C
@@ -10837,7 +10837,7 @@ entries:
   animations:
   - symbol: gMapMenuSoraStatusAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A95E4
@@ -11022,7 +11022,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandsAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x098A96A0
@@ -11033,7 +11033,7 @@ entries:
     animations:
     - symbol: gMapMenuCommandsAnim0
       declare: false
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[0, 2]]
   eu:
     address: 0x098884A4
@@ -11084,7 +11084,7 @@ entries:
   animations:
   - symbol: gMapMenuSoraStatusFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09887E44
@@ -11135,7 +11135,7 @@ entries:
   animations:
   - symbol: gMapMenuSoraStatusSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09887F00
@@ -11186,7 +11186,7 @@ entries:
   animations:
   - symbol: gMapMenuSoraStatusItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09887FBC
@@ -11237,7 +11237,7 @@ entries:
   animations:
   - symbol: gMapMenuSoraStatusGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09888078
@@ -11286,7 +11286,7 @@ entries:
   animations:
   - symbol: gMapMenuRikuStatusFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x098881E4
@@ -11335,7 +11335,7 @@ entries:
   animations:
   - symbol: gMapMenuRikuStatusSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09888294
@@ -11384,7 +11384,7 @@ entries:
   animations:
   - symbol: gMapMenuRikuStatusItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09888344
@@ -11433,7 +11433,7 @@ entries:
   animations:
   - symbol: gMapMenuRikuStatusGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x098883F4
@@ -11612,7 +11612,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandsFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09888840
@@ -11791,7 +11791,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandsSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09888BDC
@@ -11970,7 +11970,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandsItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09888F78
@@ -12149,7 +12149,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandsGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09889314
@@ -12200,7 +12200,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandHighlightFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   eu:
     address: 0x09889754
@@ -12251,7 +12251,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandHighlightSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   eu:
     address: 0x098897F8
@@ -12302,7 +12302,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandHighlightItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   eu:
     address: 0x0988989C
@@ -12353,7 +12353,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandHighlightGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   eu:
     address: 0x09889940
@@ -12374,7 +12374,7 @@ entries:
   animations:
   - symbol: gMapMenuTitleSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09889A00
@@ -12425,7 +12425,7 @@ entries:
   animations:
   - symbol: gMapMenuCommandHighlightAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 2]]
   us:
     address: 0x098A9A3C
@@ -12436,7 +12436,7 @@ entries:
     animations:
     - symbol: gMapMenuCommandHighlightAnim0
       declare: false
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[0, 1]]
   eu:
     address: 0x098896B0
@@ -12457,7 +12457,7 @@ entries:
   animations:
   - symbol: gMapMenuTitleGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09889A1C
@@ -12490,7 +12490,7 @@ entries:
   animations:
   - symbol: gMapMenuCharaWinAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A9AE0
@@ -12517,7 +12517,7 @@ entries:
   animations:
   - symbol: gMapMenuTitleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A9B44
@@ -12560,7 +12560,7 @@ entries:
   animations:
   - symbol: gMapMenuBarsAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A9B60
@@ -12616,7 +12616,7 @@ entries:
   animations:
   - symbol: gMapMenuRikuStatusAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x098A9BD4

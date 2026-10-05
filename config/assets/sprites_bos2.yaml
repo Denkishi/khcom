@@ -582,91 +582,91 @@ entries:
     - [16x8, -8, -2, {pal: 2, tile: 212}]
   animations:
   - symbol: gBosJfObjAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   - symbol: gBosJfObjAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 12], [7, 12], [8, 12], [9, 12], [10, 12], [11, 12]]
   - symbol: gBosJfObjAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gBosJfObjAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gBosJfObjAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gBosJfObjAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 2]]
   - symbol: gBosJfObjAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 5], [17, 5], [18, 5], [19, 5], [20, 4], [21, 5], [22, 4], [23, 4], [24, 4], [57, 9]]
   - symbol: gBosJfObjAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 7], [26, 7], [27, 7], [28, 7]]
   - symbol: gBosJfObjAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[29, 7], [30, 7], [31, 7], [32, 7]]
   - symbol: gBosJfObjAnim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[38, 2]]
   - symbol: gBosJfObjAnim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[39, 2]]
   - symbol: gBosJfObjAnim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[40, 2]]
   - symbol: gBosJfObjAnim12
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[41, 2]]
   - symbol: gBosJfObjAnim13
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[42, 2]]
   - symbol: gBosJfObjAnim14
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[43, 2]]
   - symbol: gBosJfObjAnim15
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[44, 2]]
   - symbol: gBosJfObjAnim16
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[45, 2]]
   - symbol: gBosJfObjAnim17
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[46, 2]]
   - symbol: gBosJfObjAnim18
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[47, 2]]
   - symbol: gBosJfObjAnim19
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[48, 2]]
   - symbol: gBosJfObjAnim20
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[49, 2]]
   - symbol: gBosJfObjAnim21
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[50, 2]]
   - symbol: gBosJfObjAnim22
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[51, 2]]
   - symbol: gBosJfObjAnim23
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[52, 2]]
   - symbol: gBosJfObjAnim24
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[53, 2]]
   - symbol: gBosJfObjAnim25
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[54, 2]]
   - symbol: gBosJfObjAnim26
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[56, 2]]
   - symbol: gBosJfObjAnim27
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[33, 7], [34, 7], [35, 7], [36, 7]]
   - symbol: gBosJfObjAnim28
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[58, 7], [59, 7], [60, 7], [61, 7]]
   us:
     address: 0x0962EC5C
@@ -975,7 +975,7 @@ entries:
     - [16x8, 8, -8, {pal: 8, tile: 86}]
   animations:
   - symbol: gUnk_0962FB28
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 8], [2, 6], [3, 4], [4, 4], [5, 4], [6, 4], [7, 4], [8, 8], [7, 8], [6, 4], [5, 4], [4, 4], [3, 4], [2, 6], [1, 8]]
   us:
     address: 0x0962F4B0
@@ -1032,7 +1032,7 @@ entries:
     - [32x8, -16, -8, {tile: 92}]
   animations:
   - symbol: gBosJfIagoAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   us:
     address: 0x0962FB70
@@ -1068,16 +1068,16 @@ entries:
     - [16x16, -8, -8, {tile: 54}]
   animations:
   - symbol: gBosDsdItaAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBosDsdItaAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gBosDsdItaAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gBosDsdItaAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x0962FC38
@@ -1101,7 +1101,7 @@ entries:
     - [64x32, -32, -16, {tile: 0}]
   animations:
   - symbol: gBosDsdItaShadowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0962FC9C
@@ -1167,7 +1167,7 @@ entries:
     - [16x32, 96, 66, {tile: 112}]
   animations:
   - symbol: gBosDsdLegAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [3, 10], [2, 10], [1, 10]]
   us:
     address: 0x0962FCB0
@@ -1283,7 +1283,7 @@ entries:
     - [32x16, 88, 64, {tile: 141}]
   animations:
   - symbol: gBosDsdArmAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [2, 10], [3, 10], [4, 10], [3, 10], [2, 10], [1, 10]]
   us:
     address: 0x0962FDBC
@@ -1336,25 +1336,25 @@ entries:
     - [64x32, 0, -16, {prio: 3, tile: 32}]
   animations:
   - symbol: gBosDsdCircleAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   - symbol: gBosDsdCircleAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gBosDsdCircleAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gBosDsdCircleAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gBosDsdCircleAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gBosDsdCircleAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gBosDsdCircleAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   us:
     address: 0x0962FFF4

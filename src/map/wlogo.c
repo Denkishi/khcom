@@ -813,8 +813,8 @@ void task_wlogo_col_0(WlogoColWork* work) {
     RequestDma3Copy(gWlogoColTiles, GetBgCharBase(0), 0x620);
     work->tiles = LoadObjTiles(gWlogoColSparkleTiles, 0x1140);
     work->palette = LoadObjPalette(gWlogoColPalette, 0x20);
-    work->x = gWlogoColSparkleAnim0.unk_00;
-    work->y = gWlogoColSparkleAnim0.unk_02;
+    work->x = gWlogoColSparkleAnim0.originX;
+    work->y = gWlogoColSparkleAnim0.originY;
     work->timer = 0;
     work->state = 0;
     work->blend = 0;

@@ -539,19 +539,19 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gHandCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   - symbol: gHandCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gHandCursorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4], [5, 3], [6, 3], [7, 4], [6, 3], [5, 3]]
   - symbol: gHandCursorAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gHandCursorAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4], [9, 3], [10, 3], [11, 4], [10, 3], [9, 3]]
   us:
     address: 0x090A44E4
@@ -596,7 +596,7 @@ entries:
     - [16x8, 8, 24]
   animations:
   - symbol: gDeckCardCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
     address: 0x090A4984
@@ -636,7 +636,7 @@ entries:
     - [8x8, 36, 4]
   animations:
   - symbol: gDeckRowCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
     address: 0x090A518C
@@ -674,7 +674,7 @@ entries:
     - [8x8, 68, 0]
   animations:
   - symbol: gDeckMenuBarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A57D8
@@ -730,13 +730,13 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gDeckKeyboardCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   - symbol: gDeckKeyboardCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
   - symbol: gDeckKeyboardCursorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   us:
     address: 0x090A5E60
@@ -792,13 +792,13 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gDeckKeyboardCursorItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   - symbol: gDeckKeyboardCursorItalianAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
   - symbol: gDeckKeyboardCursorItalianAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   eu:
     address: 0x0919591C
@@ -856,13 +856,13 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gDeckKeyboardCursorGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   - symbol: gDeckKeyboardCursorGermanAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
   - symbol: gDeckKeyboardCursorGermanAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   eu:
     address: 0x091964DC
@@ -1364,7 +1364,7 @@ entries:
   animations:
   - symbol: gDeckButtonLabelAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x090A1F88
@@ -1401,7 +1401,7 @@ entries:
   animations:
   - symbol: gDeckCardsInUseAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A2234
@@ -1428,7 +1428,7 @@ entries:
   animations:
   - symbol: gDeckCommandMenuAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A25F8
@@ -1455,7 +1455,7 @@ entries:
   animations:
   - symbol: gDeckTitleBannerAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A3E20
@@ -1479,7 +1479,7 @@ entries:
   animations:
   - symbol: gRikuDeckTitleBannerAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A4168
@@ -1502,7 +1502,7 @@ entries:
     - [8x8, 0, 0]
   animations:
   - symbol: gDeckScrollThumbAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090A44B0
@@ -1531,7 +1531,7 @@ entries:
   animations:
   - symbol: gDeckButtonLabelFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09189F0C
@@ -1554,7 +1554,7 @@ entries:
   animations:
   - symbol: gDeckButtonLabelSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A1B8
@@ -1577,7 +1577,7 @@ entries:
   animations:
   - symbol: gDeckButtonLabelItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A464
@@ -1600,7 +1600,7 @@ entries:
   animations:
   - symbol: gDeckButtonLabelGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A710
@@ -1631,7 +1631,7 @@ entries:
   animations:
   - symbol: gDeckCardsInUseFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918A9BC
@@ -1662,7 +1662,7 @@ entries:
   animations:
   - symbol: gDeckCardsInUseSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918AD80
@@ -1693,7 +1693,7 @@ entries:
   animations:
   - symbol: gDeckCardsInUseItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B144
@@ -1724,7 +1724,7 @@ entries:
   animations:
   - symbol: gDeckCardsInUseGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B508
@@ -1745,7 +1745,7 @@ entries:
   animations:
   - symbol: gDeckCommandMenuFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B8CC
@@ -1766,7 +1766,7 @@ entries:
   animations:
   - symbol: gDeckCommandMenuSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918D0F4
@@ -1787,7 +1787,7 @@ entries:
   animations:
   - symbol: gDeckCommandMenuItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918E91C
@@ -1808,7 +1808,7 @@ entries:
   animations:
   - symbol: gDeckCommandMenuGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09190144
@@ -1829,7 +1829,7 @@ entries:
   animations:
   - symbol: gDeckTitleBannerFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0919196C
@@ -1850,7 +1850,7 @@ entries:
   animations:
   - symbol: gDeckTitleBannerSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09191CB4
@@ -1871,7 +1871,7 @@ entries:
   animations:
   - symbol: gDeckTitleBannerItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09191FFC
@@ -1892,7 +1892,7 @@ entries:
   animations:
   - symbol: gDeckTitleBannerGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09192344
@@ -1913,7 +1913,7 @@ entries:
   animations:
   - symbol: gRikuDeckTitleBannerFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0919268C
@@ -1934,7 +1934,7 @@ entries:
   animations:
   - symbol: gRikuDeckTitleBannerSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091929D4
@@ -1955,7 +1955,7 @@ entries:
   animations:
   - symbol: gRikuDeckTitleBannerItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09192D1C
@@ -1976,7 +1976,7 @@ entries:
   animations:
   - symbol: gRikuDeckTitleBannerGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09193064

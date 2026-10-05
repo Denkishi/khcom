@@ -548,7 +548,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gTeemingDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2020
@@ -571,7 +571,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gTranquilDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2134
@@ -594,7 +594,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gGuardedTroveSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2248
@@ -617,7 +617,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gLoomingDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F235C
@@ -640,7 +640,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gSleepingDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2470
@@ -663,7 +663,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gMomentsReprieveSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2584
@@ -686,7 +686,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gFeebleDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2698
@@ -709,7 +709,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gAlmightyDarknessSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F27AC
@@ -732,7 +732,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gCalmBountySmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F28C0
@@ -755,7 +755,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gFalseBountySmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F29D4
@@ -778,7 +778,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gMoogleRoomSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2AE8
@@ -801,7 +801,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gSorcerousWakingSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2BFC
@@ -824,7 +824,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gMartialWakingSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2D10
@@ -847,7 +847,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gAlchemicWakingSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2E24
@@ -870,7 +870,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gMeetingGroundSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F2F38
@@ -893,7 +893,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gMinglingWorldsSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F304C
@@ -916,7 +916,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gStrongInitiativeSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3160
@@ -939,7 +939,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gLastingDazeSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3274
@@ -962,7 +962,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gStagnantSpaceSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3388
@@ -985,7 +985,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gPremiumRoomSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F349C
@@ -1008,7 +1008,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gWhiteRoomSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F35B0
@@ -1031,7 +1031,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gBlackRoomSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F36C4
@@ -1054,7 +1054,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gKeyToRewardsSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F37D8
@@ -1077,7 +1077,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gKeyOfBeginningsSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F38EC
@@ -1100,7 +1100,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gKeyOfGuidanceSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3A00
@@ -1123,7 +1123,7 @@ entries:
     - [16x32, -8, -20]
   animations:
   - symbol: gKeyToTruthSmallCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3B14
@@ -1146,7 +1146,7 @@ entries:
     - [32x32, -16, -12]
   animations:
   - symbol: gUnk_093F3C32
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F3C28

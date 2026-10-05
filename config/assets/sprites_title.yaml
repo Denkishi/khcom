@@ -642,7 +642,7 @@ entries:
     - [32x8, 24, 0]
   animations:
   - symbol: gTitleGameStartAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09771420
@@ -667,7 +667,7 @@ entries:
     - [8x16, 28, -60]
   animations:
   - symbol: gTitleLogoDisneySquareEnixAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0976E9D4
@@ -692,7 +692,7 @@ entries:
     - [8x8, 20, -4]
   animations:
   - symbol: gTitleLogoKanaAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0976EC34
@@ -718,7 +718,7 @@ entries:
     - [16x16, 39, -16]
   animations:
   - symbol: gTitleLogoChainOfMemoriesAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0976ED34
@@ -742,7 +742,7 @@ entries:
     - [8x16, 2, -46]
   animations:
   - symbol: gTitleLogoCrownAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0976F0DC
@@ -771,7 +771,7 @@ entries:
     - [16x8, 53, 0]
   animations:
   - symbol: gTitleLogoKingdomHeartsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0976F1B8
@@ -828,10 +828,10 @@ entries:
     - [8x16, -64, 8]
   animations:
   - symbol: gTitleLogoHeartAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gTitleLogoHeartAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   us:
     address: 0x0976FCB0
@@ -911,7 +911,7 @@ entries:
     - [16x8, 0, -8]
   animations:
   - symbol: gTitlePressStartFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x0973FB04
@@ -975,7 +975,7 @@ entries:
     - [32x16, -40, -16]
   animations:
   - symbol: gTitlePressStartSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x0974040C
@@ -1039,7 +1039,7 @@ entries:
     - [32x16, -40, -16]
   animations:
   - symbol: gTitlePressStartItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x09740C38
@@ -1118,7 +1118,7 @@ entries:
     - [8x8, 16, -8]
   animations:
   - symbol: gTitlePressStartGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   eu:
     address: 0x09741464
@@ -1169,7 +1169,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuSelectedEntryFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097429BC
@@ -1221,7 +1221,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuSelectedEntrySpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09743754
@@ -1272,7 +1272,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuSelectedEntryItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097444F4
@@ -1322,7 +1322,7 @@ entries:
     - [8x16, 80, 0]
   animations:
   - symbol: gTitleMenuSelectedEntryGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09744FCC
@@ -1357,7 +1357,7 @@ entries:
     - [32x16, 56, 0]
   animations:
   - symbol: gTitleSoraLumiFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09746C34
@@ -1392,7 +1392,7 @@ entries:
     - [32x16, 56, 0]
   animations:
   - symbol: gTitleSoraLumiSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097473E4
@@ -1427,7 +1427,7 @@ entries:
     - [32x16, 56, 0]
   animations:
   - symbol: gTitleSoraLumiItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09747B94
@@ -1462,7 +1462,7 @@ entries:
     - [32x16, 56, 0]
   animations:
   - symbol: gTitleSoraLumiGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09748344
@@ -1519,7 +1519,7 @@ entries:
     - [8x16, 80, 0]
   animations:
   - symbol: gTitleMenuEntryFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974A1A8
@@ -1577,7 +1577,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuEntrySpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974B224
@@ -1634,7 +1634,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuEntryItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974C428
@@ -1690,7 +1690,7 @@ entries:
     - [32x16, 88, 0]
   animations:
   - symbol: gTitleMenuEntryGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974D3A4
@@ -1725,7 +1725,7 @@ entries:
     - [32x16, -40, 0]
   animations:
   - symbol: gTitleRikuLumiFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974EC0C
@@ -1760,7 +1760,7 @@ entries:
     - [32x16, -40, 0]
   animations:
   - symbol: gTitleRikuLumiSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974F3BC
@@ -1795,7 +1795,7 @@ entries:
     - [32x16, -40, 0]
   animations:
   - symbol: gTitleRikuLumiItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0974FB6C
@@ -1830,7 +1830,7 @@ entries:
     - [32x16, -40, 0]
   animations:
   - symbol: gTitleRikuLumiGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0975031C
@@ -1851,7 +1851,7 @@ entries:
     - [32x16, -32, 0]
   animations:
   - symbol: gTitleDevelopedByFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09750EB8
@@ -1871,7 +1871,7 @@ entries:
     - [32x16, 32, 0]
   animations:
   - symbol: gTitleDevelopedBySpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097512A4
@@ -1892,7 +1892,7 @@ entries:
     - [8x16, 48, 0]
   animations:
   - symbol: gTitleDevelopedByItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x097516CC
@@ -1912,7 +1912,7 @@ entries:
     - [32x16, 32, 0]
   animations:
   - symbol: gTitleDevelopedByGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09751AB8
@@ -2002,7 +2002,7 @@ entries:
     - [16x8, 77, 45, {fresh: true}]
   animations:
   - symbol: gTitleLogoReverseRebirthAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09775EB4
@@ -2031,10 +2031,10 @@ entries:
     - [8x8, -36, -8]
   animations:
   - symbol: gTitleWorkInProgressAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTitleWorkInProgressAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09770ED8
@@ -2061,7 +2061,7 @@ entries:
     - [8x16, 48, 0]
   animations:
   - symbol: gTitleDevelopedByAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09771034
@@ -2131,7 +2131,7 @@ entries:
     - [32x8, 24, -8, {same: [0, 4]}]
   animations:
   - symbol: gTitlePressStartAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   us:
     address: 0x0977153C
@@ -2166,7 +2166,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gTitleMenuCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6], [1, 6]]
   us:
     address: 0x09771D68
@@ -2222,7 +2222,7 @@ entries:
     - [8x16, 112, 0]
   animations:
   - symbol: gTitleMenuSelectedEntryAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09772040
@@ -2278,7 +2278,7 @@ entries:
     - [32x8, 0, 8]
   animations:
   - symbol: gTitleMenuSelectedBarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09772C14
@@ -2354,7 +2354,7 @@ entries:
     - [8x16, 96, 0]
   animations:
   - symbol: gTitleSoraLumiAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x097733C8
@@ -2429,7 +2429,7 @@ entries:
     - [32x16, 96, 0]
   animations:
   - symbol: gTitleMenuEntryAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09773D68
@@ -2497,7 +2497,7 @@ entries:
     - [16x16, -104, 0, {hflip: true}]
   animations:
   - symbol: gTitleRikuLumiAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0977541C
@@ -2545,7 +2545,7 @@ entries:
     - [16x8, 40, -1]
   animations:
   - symbol: gTitlePremiumShowcaseAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09775CCC

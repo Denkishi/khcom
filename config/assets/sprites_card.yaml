@@ -507,7 +507,7 @@ entries:
     - [8x8, -8, 4]
   animations:
   - symbol: gCardPremiumSmallAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 50], [1, 5], [2, 5], [3, 5], [4, 5], [5, 5]]
   us:
     address: 0x0908C374
@@ -605,31 +605,31 @@ entries:
     - [32x8, -16, -16]
   animations:
   - symbol: gRiCardF0RedAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRiCardF0RedAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 1], [2, 4], [3, 5], [2, 3]]
   - symbol: gRiCardF0RedAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 1], [5, 4], [6, 5], [5, 3]]
   - symbol: gRiCardF0RedAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 1], [8, 4], [9, 5], [8, 3]]
   - symbol: gRiCardF0RedAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 1], [11, 4], [12, 5], [11, 3]]
   - symbol: gRiCardF0RedAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 1], [14, 4], [15, 5], [14, 3]]
   - symbol: gRiCardF0RedAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 1], [17, 4], [18, 5], [17, 3]]
   - symbol: gRiCardF0RedAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 1], [20, 4], [21, 5], [20, 3]]
   - symbol: gRiCardF0RedAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 1], [23, 4], [24, 5], [23, 3]]
   us:
     address: 0x090A0ACC
@@ -655,7 +655,7 @@ entries:
     - [8x16, 96, 0]
   animations:
   - symbol: gPremireChanceTitleFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09162904
@@ -674,7 +674,7 @@ entries:
     - [32x16, 64, 0]
   animations:
   - symbol: gPremireChanceTitleSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09162C6C
@@ -695,7 +695,7 @@ entries:
     - [8x16, 112, 0]
   animations:
   - symbol: gPremireChanceTitleItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09162F8C
@@ -716,7 +716,7 @@ entries:
     - [8x16, 112, 0]
   animations:
   - symbol: gPremireChanceTitleGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09163378
@@ -746,7 +746,7 @@ entries:
   animations:
   - symbol: gReloadRedAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 4], [2, 5], [3, 3]]
   us:
     address: 0x09098808
@@ -783,7 +783,7 @@ entries:
   animations:
   - symbol: gReloadBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 4], [2, 5], [3, 3]]
   us:
     address: 0x09098AE0
@@ -820,7 +820,7 @@ entries:
   animations:
   - symbol: gReloadGreenAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 4], [2, 5], [3, 3]]
   us:
     address: 0x09098DB8
@@ -857,7 +857,7 @@ entries:
   animations:
   - symbol: gReloadBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1], [1, 4], [2, 5], [3, 3]]
   us:
     address: 0x09099090
@@ -881,7 +881,7 @@ entries:
   animations:
   - symbol: gReloadChildRedAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09099368
@@ -904,7 +904,7 @@ entries:
   animations:
   - symbol: gReloadChildBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090993FC
@@ -927,7 +927,7 @@ entries:
   animations:
   - symbol: gReloadChildWhiteAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09099490
@@ -950,7 +950,7 @@ entries:
   animations:
   - symbol: gReloadChildBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09099524
@@ -1037,79 +1037,79 @@ entries:
   animations:
   - symbol: gReloadCounterRedAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gReloadCounterRedAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gReloadCounterRedAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gReloadCounterRedAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gReloadCounterRedAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gReloadCounterRedAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gReloadCounterRedAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gReloadCounterRedAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gReloadCounterRedAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gReloadCounterRedAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gReloadCounterRedAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gReloadCounterRedAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gReloadCounterRedAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gReloadCounterRedAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gReloadCounterRedAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gReloadCounterRedAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gReloadCounterRedAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gReloadCounterRedAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gReloadCounterRedAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   us:
     address: 0x090995B8
@@ -1196,79 +1196,79 @@ entries:
   animations:
   - symbol: gReloadCounterBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gReloadCounterBlueAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gReloadCounterBlueAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gReloadCounterBlueAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gReloadCounterBlueAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gReloadCounterBlueAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gReloadCounterBlueAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gReloadCounterBlueAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gReloadCounterBlueAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gReloadCounterBlueAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gReloadCounterBlueAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gReloadCounterBlueAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gReloadCounterBlueAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gReloadCounterBlueAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gReloadCounterBlueAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gReloadCounterBlueAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gReloadCounterBlueAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gReloadCounterBlueAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gReloadCounterBlueAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   us:
     address: 0x09099C70
@@ -1355,79 +1355,79 @@ entries:
   animations:
   - symbol: gReloadCounterWhiteAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gReloadCounterWhiteAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gReloadCounterWhiteAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gReloadCounterWhiteAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gReloadCounterWhiteAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gReloadCounterWhiteAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gReloadCounterWhiteAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gReloadCounterWhiteAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gReloadCounterWhiteAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gReloadCounterWhiteAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gReloadCounterWhiteAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gReloadCounterWhiteAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gReloadCounterWhiteAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gReloadCounterWhiteAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gReloadCounterWhiteAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gReloadCounterWhiteAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gReloadCounterWhiteAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gReloadCounterWhiteAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gReloadCounterWhiteAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   us:
     address: 0x0909A328
@@ -1514,79 +1514,79 @@ entries:
   animations:
   - symbol: gReloadCounterBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   - symbol: gReloadCounterBlackAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gReloadCounterBlackAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gReloadCounterBlackAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gReloadCounterBlackAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gReloadCounterBlackAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gReloadCounterBlackAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gReloadCounterBlackAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gReloadCounterBlackAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gReloadCounterBlackAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gReloadCounterBlackAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gReloadCounterBlackAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gReloadCounterBlackAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gReloadCounterBlackAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gReloadCounterBlackAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gReloadCounterBlackAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gReloadCounterBlackAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gReloadCounterBlackAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gReloadCounterBlackAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   us:
     address: 0x0909A9E0
@@ -2092,163 +2092,163 @@ entries:
   animations:
   - symbol: gRevCountRedAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRevCountRedAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRevCountRedAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gRevCountRedAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gRevCountRedAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gRevCountRedAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gRevCountRedAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gRevCountRedAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gRevCountRedAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gRevCountRedAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gRevCountRedAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gRevCountRedAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gRevCountRedAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gRevCountRedAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gRevCountRedAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gRevCountRedAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gRevCountRedAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gRevCountRedAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gRevCountRedAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gRevCountRedAnim19
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gRevCountRedAnim20
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   - symbol: gRevCountRedAnim21
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4]]
   - symbol: gRevCountRedAnim22
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 4]]
   - symbol: gRevCountRedAnim23
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 4]]
   - symbol: gRevCountRedAnim24
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gRevCountRedAnim25
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 4]]
   - symbol: gRevCountRedAnim26
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   - symbol: gRevCountRedAnim27
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[27, 4]]
   - symbol: gRevCountRedAnim28
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 4]]
   - symbol: gRevCountRedAnim29
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[29, 4]]
   - symbol: gRevCountRedAnim30
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 4]]
   - symbol: gRevCountRedAnim31
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 4]]
   - symbol: gRevCountRedAnim32
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[32, 4]]
   - symbol: gRevCountRedAnim33
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[33, 4]]
   - symbol: gRevCountRedAnim34
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[34, 4]]
   - symbol: gRevCountRedAnim35
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[35, 4]]
   - symbol: gRevCountRedAnim36
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[36, 4]]
   - symbol: gRevCountRedAnim37
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[37, 4]]
   - symbol: gRevCountRedAnim38
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[38, 4]]
   - symbol: gRevCountRedAnim39
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[39, 4]]
   us:
     address: 0x0909B098
@@ -2754,163 +2754,163 @@ entries:
   animations:
   - symbol: gRevCountBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRevCountBlueAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRevCountBlueAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gRevCountBlueAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gRevCountBlueAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gRevCountBlueAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gRevCountBlueAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gRevCountBlueAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gRevCountBlueAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gRevCountBlueAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gRevCountBlueAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gRevCountBlueAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gRevCountBlueAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gRevCountBlueAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gRevCountBlueAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gRevCountBlueAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gRevCountBlueAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gRevCountBlueAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gRevCountBlueAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gRevCountBlueAnim19
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gRevCountBlueAnim20
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   - symbol: gRevCountBlueAnim21
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4]]
   - symbol: gRevCountBlueAnim22
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 4]]
   - symbol: gRevCountBlueAnim23
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 4]]
   - symbol: gRevCountBlueAnim24
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gRevCountBlueAnim25
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 4]]
   - symbol: gRevCountBlueAnim26
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   - symbol: gRevCountBlueAnim27
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[27, 4]]
   - symbol: gRevCountBlueAnim28
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 4]]
   - symbol: gRevCountBlueAnim29
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[29, 4]]
   - symbol: gRevCountBlueAnim30
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 4]]
   - symbol: gRevCountBlueAnim31
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 4]]
   - symbol: gRevCountBlueAnim32
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[32, 4]]
   - symbol: gRevCountBlueAnim33
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[33, 4]]
   - symbol: gRevCountBlueAnim34
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[34, 4]]
   - symbol: gRevCountBlueAnim35
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[35, 4]]
   - symbol: gRevCountBlueAnim36
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[36, 4]]
   - symbol: gRevCountBlueAnim37
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[37, 4]]
   - symbol: gRevCountBlueAnim38
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[38, 4]]
   - symbol: gRevCountBlueAnim39
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[39, 4]]
   us:
     address: 0x0909BCB4
@@ -3416,163 +3416,163 @@ entries:
   animations:
   - symbol: gRevCountBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRevCountBlackAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRevCountBlackAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gRevCountBlackAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gRevCountBlackAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gRevCountBlackAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gRevCountBlackAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gRevCountBlackAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gRevCountBlackAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gRevCountBlackAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gRevCountBlackAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gRevCountBlackAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gRevCountBlackAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gRevCountBlackAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gRevCountBlackAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gRevCountBlackAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gRevCountBlackAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gRevCountBlackAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gRevCountBlackAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gRevCountBlackAnim19
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gRevCountBlackAnim20
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   - symbol: gRevCountBlackAnim21
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4]]
   - symbol: gRevCountBlackAnim22
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 4]]
   - symbol: gRevCountBlackAnim23
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 4]]
   - symbol: gRevCountBlackAnim24
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gRevCountBlackAnim25
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 4]]
   - symbol: gRevCountBlackAnim26
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   - symbol: gRevCountBlackAnim27
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[27, 4]]
   - symbol: gRevCountBlackAnim28
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 4]]
   - symbol: gRevCountBlackAnim29
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[29, 4]]
   - symbol: gRevCountBlackAnim30
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 4]]
   - symbol: gRevCountBlackAnim31
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 4]]
   - symbol: gRevCountBlackAnim32
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[32, 4]]
   - symbol: gRevCountBlackAnim33
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[33, 4]]
   - symbol: gRevCountBlackAnim34
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[34, 4]]
   - symbol: gRevCountBlackAnim35
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[35, 4]]
   - symbol: gRevCountBlackAnim36
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[36, 4]]
   - symbol: gRevCountBlackAnim37
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[37, 4]]
   - symbol: gRevCountBlackAnim38
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[38, 4]]
   - symbol: gRevCountBlackAnim39
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[39, 4]]
   us:
     address: 0x0909C8D0
@@ -4078,163 +4078,163 @@ entries:
   animations:
   - symbol: gRevCountGrayAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gRevCountGrayAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gRevCountGrayAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gRevCountGrayAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gRevCountGrayAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gRevCountGrayAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gRevCountGrayAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gRevCountGrayAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gRevCountGrayAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gRevCountGrayAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gRevCountGrayAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gRevCountGrayAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   - symbol: gRevCountGrayAnim12
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gRevCountGrayAnim13
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gRevCountGrayAnim14
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   - symbol: gRevCountGrayAnim15
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 4]]
   - symbol: gRevCountGrayAnim16
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 4]]
   - symbol: gRevCountGrayAnim17
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 4]]
   - symbol: gRevCountGrayAnim18
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 4]]
   - symbol: gRevCountGrayAnim19
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[19, 4]]
   - symbol: gRevCountGrayAnim20
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 4]]
   - symbol: gRevCountGrayAnim21
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[21, 4]]
   - symbol: gRevCountGrayAnim22
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[22, 4]]
   - symbol: gRevCountGrayAnim23
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[23, 4]]
   - symbol: gRevCountGrayAnim24
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 4]]
   - symbol: gRevCountGrayAnim25
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[25, 4]]
   - symbol: gRevCountGrayAnim26
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[26, 4]]
   - symbol: gRevCountGrayAnim27
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[27, 4]]
   - symbol: gRevCountGrayAnim28
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[28, 4]]
   - symbol: gRevCountGrayAnim29
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[29, 4]]
   - symbol: gRevCountGrayAnim30
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[30, 4]]
   - symbol: gRevCountGrayAnim31
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[31, 4]]
   - symbol: gRevCountGrayAnim32
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[32, 4]]
   - symbol: gRevCountGrayAnim33
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[33, 4]]
   - symbol: gRevCountGrayAnim34
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[34, 4]]
   - symbol: gRevCountGrayAnim35
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[35, 4]]
   - symbol: gRevCountGrayAnim36
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[36, 4]]
   - symbol: gRevCountGrayAnim37
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[37, 4]]
   - symbol: gRevCountGrayAnim38
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[38, 4]]
   - symbol: gRevCountGrayAnim39
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[39, 4]]
   us:
     address: 0x0909D4EC
@@ -4294,23 +4294,23 @@ entries:
   animations:
   - symbol: gReloadCardBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gReloadCardBlueAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 1], [2, 4], [3, 5], [2, 3]]
   - symbol: gReloadCardBlueAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 1], [5, 4], [6, 5], [5, 3]]
   - symbol: gReloadCardBlueAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 1], [8, 4], [9, 5], [8, 3]]
   - symbol: gReloadCardBlueAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 1], [11, 4], [12, 5], [11, 3]]
   us:
     address: 0x0909E108
@@ -4371,23 +4371,23 @@ entries:
   animations:
   - symbol: gReloadCardBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gReloadCardBlackAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 1], [2, 4], [3, 5], [2, 3]]
   - symbol: gReloadCardBlackAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 1], [5, 4], [6, 5], [5, 3]]
   - symbol: gReloadCardBlackAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 1], [8, 4], [9, 5], [8, 3]]
   - symbol: gReloadCardBlackAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 1], [11, 4], [12, 5], [11, 3]]
   us:
     address: 0x0909EEF4
@@ -4448,23 +4448,23 @@ entries:
   animations:
   - symbol: gReloadCardGreenAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gReloadCardGreenAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 1], [2, 4], [3, 5], [2, 3]]
   - symbol: gReloadCardGreenAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 1], [5, 4], [6, 5], [5, 3]]
   - symbol: gReloadCardGreenAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 1], [8, 4], [9, 5], [8, 3]]
   - symbol: gReloadCardGreenAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 1], [11, 4], [12, 5], [11, 3]]
   us:
     address: 0x0909FCE0
@@ -4524,19 +4524,19 @@ entries:
   animations:
   - symbol: gSmallHandCursorAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   - symbol: gSmallHandCursorAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSmallHandCursorAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4], [5, 3], [6, 3], [7, 4], [6, 3], [5, 3]]
   - symbol: gSmallHandCursorAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   us:
     address: 0x093F4478
@@ -4587,7 +4587,7 @@ entries:
   animations:
   - symbol: gCardSelectBoxAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
     address: 0x093F4738
@@ -4623,7 +4623,7 @@ entries:
   animations:
   - symbol: gKeyValueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   us:
     address: 0x093F51E4
@@ -4664,7 +4664,7 @@ entries:
   animations:
   - symbol: gMapSelectBarAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F53B0
@@ -4710,7 +4710,7 @@ entries:
   animations:
   - symbol: gMapSelectValueBoxAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
     address: 0x093F54E4
@@ -4733,7 +4733,7 @@ entries:
   animations:
   - symbol: gMapSelectScrollBarAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F5C2C
@@ -4757,7 +4757,7 @@ entries:
   animations:
   - symbol: gMapCardBorderGreenAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F5C60
@@ -4782,7 +4782,7 @@ entries:
   animations:
   - symbol: gMapCardBorderRedAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F5EFC
@@ -4807,7 +4807,7 @@ entries:
   animations:
   - symbol: gMapCardBorderBlueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F6198
@@ -4832,7 +4832,7 @@ entries:
   animations:
   - symbol: gMapCardBorderBlackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F6434
@@ -4880,7 +4880,7 @@ entries:
   animations:
   - symbol: gMapCardUiExtraAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   us:
     address: 0x093F66D0
@@ -4909,7 +4909,7 @@ entries:
   animations:
   - symbol: gSelmapEventKeyTitleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F6A94
@@ -4943,7 +4943,7 @@ entries:
   animations:
   - symbol: gMapSelectTitleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F714C
@@ -4970,7 +4970,7 @@ entries:
   animations:
   - symbol: gMapSelectTitleFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C6BFC
@@ -4991,7 +4991,7 @@ entries:
   animations:
   - symbol: gMapSelectTitleSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C7024
@@ -5012,7 +5012,7 @@ entries:
   animations:
   - symbol: gMapSelectTitleItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C744C
@@ -5033,7 +5033,7 @@ entries:
   animations:
   - symbol: gMapSelectTitleGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C7874
@@ -5056,7 +5056,7 @@ entries:
   animations:
   - symbol: gSelmapEventKeyTitleFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C7C9C
@@ -5080,7 +5080,7 @@ entries:
   animations:
   - symbol: gSelmapEventKeyTitleSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C8250
@@ -5104,7 +5104,7 @@ entries:
   animations:
   - symbol: gSelmapEventKeyTitleItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C8908
@@ -5128,7 +5128,7 @@ entries:
   animations:
   - symbol: gSelmapEventKeyTitleGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094C9148
@@ -5169,7 +5169,7 @@ entries:
   animations:
   - symbol: gMapCardUiExtraFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   eu:
     address: 0x094C9800
@@ -5210,7 +5210,7 @@ entries:
   animations:
   - symbol: gMapCardUiExtraSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   eu:
     address: 0x094C9BC0
@@ -5261,15 +5261,15 @@ entries:
   animations:
   - symbol: gCardSparkleAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [3, 8]]
   - symbol: gCardSparkleAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [5, 8], [6, 8], [7, 8]]
   - symbol: gCardSparkleAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 8], [10, 8], [11, 8]]
   us:
     address: 0x093F7574
@@ -5309,7 +5309,7 @@ entries:
   animations:
   - symbol: gMsgBoxAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093F7C30
@@ -5337,7 +5337,7 @@ entries:
   animations:
   - symbol: gDialogBoxAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x093F8C5C
@@ -5363,7 +5363,7 @@ entries:
   animations:
   - symbol: gLargeDialogBoxAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   us:
     address: 0x093F9890
@@ -5388,7 +5388,7 @@ entries:
   animations:
   - symbol: gWorldSelBeforeCardAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093FB0AC
@@ -5413,7 +5413,7 @@ entries:
   animations:
   - symbol: gWorldSelBeforeRingAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   us:
     address: 0x093FB18C
@@ -5466,7 +5466,7 @@ entries:
   animations:
   - symbol: gDarkPointAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 1]]
   us:
     address: 0x093FB64C
@@ -5507,7 +5507,7 @@ entries:
   animations:
   - symbol: gHcEffectCountUnitAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093FB904
@@ -5548,7 +5548,7 @@ entries:
   animations:
   - symbol: gHcEffectCountUnitFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094CE440
@@ -5583,7 +5583,7 @@ entries:
   animations:
   - symbol: gHcEffectCountUnitSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094CE570
@@ -5618,7 +5618,7 @@ entries:
   animations:
   - symbol: gHcEffectCountUnitItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094CE6A0
@@ -5653,7 +5653,7 @@ entries:
   animations:
   - symbol: gHcEffectCountUnitGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x094CE7D0
@@ -5671,7 +5671,7 @@ entries:
   animations:
   - symbol: gStockValueAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093FBA34
@@ -5710,7 +5710,7 @@ entries:
   animations:
   - symbol: gSysMsgWinFallbackAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x093FBA48

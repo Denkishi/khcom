@@ -3179,16 +3179,16 @@ entries:
     - [8x8, 6, 24, {same: [0, 5]}]
   animations:
   - symbol: gTalk0000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk0000Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk0000Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x090D7E04
@@ -3263,10 +3263,10 @@ entries:
     - [8x8, 6, -64]
   animations:
   - symbol: gTalk0001Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0001Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x090D90EC
@@ -3329,10 +3329,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk0002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x090D9EFC
@@ -3396,10 +3396,10 @@ entries:
     - [16x8, -10, -55]
   animations:
   - symbol: gTalk0003Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0003Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x090DAB84
@@ -3443,10 +3443,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk0004Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk0004Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x090DBA10
@@ -3545,16 +3545,16 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk0005Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0005Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk0005Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk0005Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   us:
     address: 0x090DC640
@@ -3664,16 +3664,16 @@ entries:
     - [16x8, -7, -56]
   animations:
   - symbol: gTalk0100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [1, 6], [2, 8], [0, 40], [1, 6], [2, 8]]
   - symbol: gTalk0100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [4, 8], [3, 8], [0, 10]]
   - symbol: gTalk0100Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 20], [6, 6], [7, 8], [5, 40], [6, 6], [7, 8]]
   - symbol: gTalk0100Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [9, 8], [8, 8], [9, 8], [5, 10]]
   us:
     address: 0x090DD94C
@@ -3768,16 +3768,16 @@ entries:
     - [32x16, -14, -48]
   animations:
   - symbol: gTalk0101Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0101Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [3, 4], [4, 8], [3, 4], [0, 8]]
   - symbol: gTalk0101Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 40], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk0101Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 6], [8, 4], [9, 8], [8, 4], [5, 8]]
   us:
     address: 0x090DF79C
@@ -3857,16 +3857,16 @@ entries:
     - [32x16, -11, -48]
   animations:
   - symbol: gTalk0102Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0102Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [3, 4], [4, 8], [3, 4], [0, 8]]
   - symbol: gTalk0102Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 40], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk0102Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 6], [8, 4], [9, 8], [8, 4], [5, 8]]
   us:
     address: 0x090E17F4
@@ -3981,16 +3981,16 @@ entries:
     - [8x16, 26, 0]
   animations:
   - symbol: gTalk0103Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 20], [1, 4], [2, 6], [4, 40], [1, 4], [2, 6]]
   - symbol: gTalk0103Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 6], [3, 4], [4, 8], [3, 4]]
   - symbol: gTalk0103Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 20], [6, 4], [7, 6], [9, 40], [6, 4], [7, 6]]
   - symbol: gTalk0103Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [9, 6], [8, 4], [9, 8], [8, 4]]
   us:
     address: 0x090E35D0
@@ -4050,10 +4050,10 @@ entries:
     - [32x8, -22, -48]
   animations:
   - symbol: gTalk0104Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0104Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [3, 4], [4, 8], [3, 4], [0, 8]]
   us:
     address: 0x090E5B00
@@ -4160,16 +4160,16 @@ entries:
     - [8x8, 18, -16, {same: [5, 7]}]
   animations:
   - symbol: gTalk0105Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 40], [3, 3], [4, 6], [1, 20], [3, 3], [4, 6]]
   - symbol: gTalk0105Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [2, 10], [1, 8], [0, 6], [1, 10]]
   - symbol: gTalk0105Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 40], [8, 3], [9, 6], [6, 20], [8, 3], [9, 6]]
   - symbol: gTalk0105Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 6], [7, 10], [6, 8], [5, 6], [6, 10]]
   us:
     address: 0x090E6B94
@@ -4331,16 +4331,16 @@ entries:
     - [16x8, 18, 8, {same: [8, 12]}]
   animations:
   - symbol: gTalk0200Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 80], [1, 6], [2, 7], [0, 15], [1, 6], [2, 7]]
   - symbol: gTalk0200Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [4, 8], [3, 8], [0, 10]]
   - symbol: gTalk0200Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 80], [6, 6], [7, 7], [5, 15], [6, 6], [7, 7]]
   - symbol: gTalk0200Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 8], [8, 8], [9, 8], [8, 8], [5, 10]]
   us:
     address: 0x090E9074
@@ -4465,16 +4465,16 @@ entries:
     - [16x16, 14, -61]
   animations:
   - symbol: gTalk0201Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 50], [1, 4], [2, 6], [0, 15], [1, 5], [2, 7], [0, 50], [1, 4], [2, 6]]
   - symbol: gTalk0201Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 10], [0, 6], [3, 10], [4, 10], [0, 6], [3, 20], [0, 6], [3, 10]]
   - symbol: gTalk0201Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 50], [6, 4], [7, 6], [5, 15], [6, 5], [7, 7], [5, 50], [6, 4], [7, 6]]
   - symbol: gTalk0201Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 10], [5, 6], [8, 10], [9, 10], [5, 6], [8, 20], [5, 6], [8, 10]]
   us:
     address: 0x090EB61C
@@ -4613,16 +4613,16 @@ entries:
     - [8x16, 25, 0]
   animations:
   - symbol: gTalk0202Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 40], [3, 4], [4, 6], [1, 10], [3, 4], [4, 6]]
   - symbol: gTalk0202Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [1, 4], [0, 8], [2, 6], [1, 4], [0, 10], [2, 6], [1, 4], [0, 8]]
   - symbol: gTalk0202Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 40], [8, 4], [9, 6], [6, 10], [8, 4], [9, 6]]
   - symbol: gTalk0202Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 6], [6, 4], [5, 8], [7, 6], [6, 4], [5, 10], [7, 6], [6, 4], [5, 8]]
   us:
     address: 0x090EE7D8
@@ -4677,10 +4677,10 @@ entries:
     - [64x64, -30, -32, {same: [0, 2]}]
   animations:
   - symbol: gTalk0203Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [1, 4], [2, 6], [0, 10], [1, 4], [2, 6]]
   - symbol: gTalk0203Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [4, 7], [3, 5], [0, 20], [4, 7], [3, 5]]
   us:
     address: 0x090F0B78
@@ -4760,10 +4760,10 @@ entries:
     - [16x8, -15, -8, {same: [3, 9]}]
   animations:
   - symbol: gTalk0204Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 40], [1, 4], [2, 6], [0, 10], [1, 4], [2, 6]]
   - symbol: gTalk0204Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 6], [3, 4], [4, 6], [3, 4], [0, 6]]
   us:
     address: 0x090F1C54
@@ -4798,10 +4798,10 @@ entries:
     - [8x8, -14, -47]
   animations:
   - symbol: gTalk0300Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk0300Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [1, 8], [0, 8], [1, 8]]
   us:
     address: 0x090F3500
@@ -4850,10 +4850,10 @@ entries:
     - [64x64, -30, -56]
   animations:
   - symbol: gTalk0400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9], [3, 9]]
   us:
     address: 0x090F40C0
@@ -4924,10 +4924,10 @@ entries:
     - [32x32, -22, 8, {same: [0, 2]}]
   animations:
   - symbol: gTalk0401Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0401Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 7], [4, 6], [5, 6], [0, 6], [4, 6], [3, 7], [6, 7]]
   us:
     address: 0x090F6878
@@ -4976,10 +4976,10 @@ entries:
     - [64x64, -30, -56]
   animations:
   - symbol: gTalk0402Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0402Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [3, 9], [4, 6], [3, 9], [4, 7], [3, 9]]
   us:
     address: 0x090F846C
@@ -5028,10 +5028,10 @@ entries:
     - [64x64, -30, -56]
   animations:
   - symbol: gTalk0403Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0403Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [3, 7], [4, 7], [3, 7], [4, 8], [3, 10]]
   us:
     address: 0x090FA124
@@ -5185,28 +5185,28 @@ entries:
     - [32x16, 9, 8]
   animations:
   - symbol: gTalk0500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [4, 9], [3, 9], [4, 9], [3, 9]]
   - symbol: gTalk0500Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk0500Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 9], [6, 9], [7, 9], [6, 9], [7, 9]]
   - symbol: gTalk0500Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60], [9, 4], [10, 6], [8, 20], [9, 4], [10, 6]]
   - symbol: gTalk0500Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   - symbol: gTalk0500Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 60], [14, 4], [15, 6], [13, 20], [14, 4], [15, 6]]
   - symbol: gTalk0500Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 9], [13, 9], [17, 9], [13, 9], [17, 9]]
   us:
     address: 0x090FBDDC
@@ -5408,34 +5408,34 @@ entries:
     - [16x8, -6, 27]
   animations:
   - symbol: gTalk0600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   - symbol: gTalk0600Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk0600Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [9, 8], [8, 8], [9, 8], [8, 8]]
   - symbol: gTalk0600Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 2], [12, 4], [10, 20], [11, 2], [12, 4]]
   - symbol: gTalk0600Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [14, 8], [13, 8], [14, 8], [13, 8]]
   - symbol: gTalk0600Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 60]]
   - symbol: gTalk0600Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 8], [17, 8], [16, 8], [17, 8], [16, 8]]
   - symbol: gTalk0600Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 60], [19, 4], [20, 6], [18, 20], [19, 4], [20, 6]]
   - symbol: gTalk0600Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[18, 8], [22, 8], [21, 8], [22, 8], [21, 8]]
   us:
     address: 0x090FD770
@@ -5471,10 +5471,10 @@ entries:
     - [8x32, 11, -64]
   animations:
   - symbol: gTalk0700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gTalk0700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [1, 10], [0, 6], [1, 10], [0, 10], [1, 9]]
   us:
     address: 0x091007B4
@@ -5589,16 +5589,16 @@ entries:
     - [16x8, -14, 24]
   animations:
   - symbol: gTalk0800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   - symbol: gTalk0800Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk0800Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 9], [8, 9], [5, 9], [8, 9], [5, 9]]
   us:
     address: 0x091012C0
@@ -5655,10 +5655,10 @@ entries:
     - [32x16, 2, -8]
   animations:
   - symbol: gTalk0900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk0900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 7], [5, 10], [4, 7], [3, 7], [4, 9], [5, 9], [4, 8], [3, 8]]
   us:
     address: 0x09102970
@@ -5849,40 +5849,40 @@ entries:
     - [32x16, 9, 8]
   animations:
   - symbol: gTalk1000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk1000Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1000Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1000Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1000Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [13, 8], [14, 8], [13, 8], [14, 8]]
   - symbol: gTalk1000Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 50]]
   - symbol: gTalk1000Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 8], [15, 8], [16, 8], [15, 8], [16, 8]]
   - symbol: gTalk1000Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 50]]
   - symbol: gTalk1000Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [17, 8], [18, 8], [17, 8], [18, 8]]
   - symbol: gTalk1000Anim10
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 50]]
   - symbol: gTalk1000Anim11
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 8], [19, 8], [20, 8], [19, 8], [20, 8]]
   us:
     address: 0x091048E0
@@ -6006,22 +6006,22 @@ entries:
     - [32x8, -22, -54]
   animations:
   - symbol: gTalk1002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk1002Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1002Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1002Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1002Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [13, 8], [14, 8], [13, 8], [14, 8]]
   us:
     address: 0x09105BA4
@@ -6150,22 +6150,22 @@ entries:
     - [8x8, 15, 16]
   animations:
   - symbol: gTalk1003Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1003Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk1003Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1003Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1003Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1003Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [13, 8], [14, 8], [13, 8], [14, 8]]
   us:
     address: 0x09106B58
@@ -6305,22 +6305,22 @@ entries:
     - [8x8, -30, -56]
   animations:
   - symbol: gTalk1004Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1004Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk1004Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1004Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1004Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1004Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [13, 8], [14, 8], [13, 8], [14, 8]]
   us:
     address: 0x09107AAC
@@ -6360,10 +6360,10 @@ entries:
     - [32x16, -14, 18]
   animations:
   - symbol: gTalk1100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 15]]
   - symbol: gTalk1100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 15], [2, 8], [1, 7], [0, 10], [2, 8], [1, 7], [2, 8], [1, 7]]
   us:
     address: 0x09108AA0
@@ -6405,10 +6405,10 @@ entries:
     - [8x32, 34, -41]
   animations:
   - symbol: gTalk1101Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gTalk1101Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [2, 7], [1, 6], [0, 8], [2, 6], [1, 5]]
   us:
     address: 0x09109784
@@ -6449,10 +6449,10 @@ entries:
     - [32x16, -14, 18]
   animations:
   - symbol: gTalk1102Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk1102Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [2, 8], [1, 6], [0, 6], [2, 8], [1, 6], [2, 8], [1, 6]]
   us:
     address: 0x0910A5AC
@@ -6494,10 +6494,10 @@ entries:
     - [64x64, -30, -46, {same: [0, 1]}]
   animations:
   - symbol: gTalk1103Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10]]
   - symbol: gTalk1103Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [2, 9], [1, 8], [0, 14], [2, 9], [1, 8]]
   us:
     address: 0x0910B4B8
@@ -6535,10 +6535,10 @@ entries:
     - [32x16, -14, 18]
   animations:
   - symbol: gTalk1104Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk1104Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [2, 8], [1, 6], [0, 8], [2, 8], [1, 6], [0, 10]]
   us:
     address: 0x0910C1A0
@@ -6589,10 +6589,10 @@ entries:
     - [32x16, -7, -48]
   animations:
   - symbol: gTalk1200Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1200Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0910D014
@@ -6643,10 +6643,10 @@ entries:
     - [32x16, -7, -48]
   animations:
   - symbol: gTalk1201Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1201Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0910F578
@@ -6690,10 +6690,10 @@ entries:
     - [64x32, -31, -48, {same: [0, 1]}]
   animations:
   - symbol: gTalk1202Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1202Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09111ABC
@@ -6744,10 +6744,10 @@ entries:
     - [32x16, -7, -48]
   animations:
   - symbol: gTalk1203Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1203Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09113D54
@@ -6887,28 +6887,28 @@ entries:
     - [8x8, 18, 16]
   animations:
   - symbol: gTalk1300Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1300Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9]]
   - symbol: gTalk1300Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1300Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 9], [8, 9], [9, 9], [8, 9], [9, 9]]
   - symbol: gTalk1300Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gTalk1300Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 9], [11, 9], [12, 9], [11, 9], [12, 9]]
   - symbol: gTalk1300Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 60], [14, 4], [15, 6], [13, 20], [14, 4], [15, 6]]
   - symbol: gTalk1300Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[17, 9], [13, 9], [16, 9], [13, 9], [16, 9]]
   us:
     address: 0x09116398
@@ -6991,16 +6991,16 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk1301Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1301Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9]]
   - symbol: gTalk1301Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 72], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1301Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 9], [8, 9], [9, 9], [8, 9], [9, 9]]
   us:
     address: 0x09118238
@@ -7048,10 +7048,10 @@ entries:
     - [32x32, -22, -64]
   animations:
   - symbol: gTalk1400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [3, 10], [4, 10], [3, 10], [4, 10], [3, 10]]
   us:
     address: 0x09119188
@@ -7103,10 +7103,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk1401Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1401Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [3, 10], [4, 10], [3, 10], [4, 10], [3, 10]]
   us:
     address: 0x0911A2B8
@@ -7164,10 +7164,10 @@ entries:
     - [32x16, 1, 0]
   animations:
   - symbol: gTalk1402Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1402Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 10], [3, 10], [4, 10], [3, 10], [4, 10], [3, 10]]
   us:
     address: 0x0911BBA0
@@ -7299,22 +7299,22 @@ entries:
     - [16x8, -7, 25]
   animations:
   - symbol: gTalk1500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk1500Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1500Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1500Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1500Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [13, 8], [10, 8], [13, 8], [10, 8]]
   us:
     address: 0x0911D50C
@@ -7364,10 +7364,10 @@ entries:
     - [32x16, -14, 19]
   animations:
   - symbol: gTalk1502Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1502Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0911E850
@@ -7417,10 +7417,10 @@ entries:
     - [32x16, -14, 21]
   animations:
   - symbol: gTalk1503Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1503Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0911F448
@@ -7653,28 +7653,28 @@ entries:
     - [8x16, 17, -64]
   animations:
   - symbol: gTalk1600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9]]
   - symbol: gTalk1600Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1600Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk1600Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1600Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 9], [13, 9], [14, 9], [13, 9], [14, 9]]
   - symbol: gTalk1600Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 60], [16, 4], [17, 6], [15, 20], [16, 4], [17, 6]]
   - symbol: gTalk1600Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 9], [18, 9], [19, 9], [18, 9], [19, 9]]
   us:
     address: 0x09120040
@@ -7806,22 +7806,22 @@ entries:
     - [16x8, 10, -56]
   animations:
   - symbol: gTalk1700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 21], [1, 4], [2, 6]]
   - symbol: gTalk1700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   - symbol: gTalk1700Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [5, 60], [6, 4], [7, 6], [5, 21], [6, 4], [7, 6]]
   - symbol: gTalk1700Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [9, 8], [8, 8], [9, 8], [8, 8]]
   - symbol: gTalk1700Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 6]]
   - symbol: gTalk1700Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [12, 8], [11, 8], [12, 8], [11, 8]]
   us:
     address: 0x091228F4
@@ -7933,22 +7933,22 @@ entries:
     - [32x32, -7, -48, {same: [10, 3]}]
   animations:
   - symbol: gTalk1800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk1800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9]]
   - symbol: gTalk1800Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk1800Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 9], [8, 9], [9, 9], [8, 9], [9, 9]]
   - symbol: gTalk1800Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk1800Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 9], [13, 9], [14, 9], [13, 9], [14, 9]]
   us:
     address: 0x09123AD8
@@ -8023,22 +8023,22 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk1900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk1900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 8], [2, 8], [1, 8]]
   - symbol: gTalk1900Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gTalk1900Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 7], [4, 8], [5, 8], [4, 8]]
   - symbol: gTalk1900Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gTalk1900Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 7], [7, 8], [8, 8], [7, 8]]
   us:
     address: 0x09125BE4
@@ -8094,10 +8094,10 @@ entries:
     - [8x8, -38, -48]
   animations:
   - symbol: gTalk2000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 50], [2, 4], [1, 6]]
   - symbol: gTalk2000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 9], [4, 9]]
   us:
     address: 0x0912765C
@@ -8168,10 +8168,10 @@ entries:
     - [8x8, 8, 24]
   animations:
   - symbol: gTalk2001Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 50], [2, 4], [1, 6]]
   - symbol: gTalk2001Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09128518
@@ -8232,10 +8232,10 @@ entries:
     - [32x32, -1, 0]
   animations:
   - symbol: gTalk2002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 50], [2, 4], [1, 6]]
   - symbol: gTalk2002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x09129210
@@ -8306,10 +8306,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk2003Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 50], [2, 4], [1, 6]]
   - symbol: gTalk2003Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09129FEC
@@ -8368,10 +8368,10 @@ entries:
     - [32x8, -14, 24]
   animations:
   - symbol: gTalk2100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 8]]
   - symbol: gTalk2100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0912AD44
@@ -8428,10 +8428,10 @@ entries:
     - [32x16, -6, -47]
   animations:
   - symbol: gTalk2101Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 8]]
   - symbol: gTalk2101Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0912CB58
@@ -8483,10 +8483,10 @@ entries:
     - [32x32, -6, -48, {same: [0, 3]}]
   animations:
   - symbol: gTalk2102Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 8]]
   - symbol: gTalk2102Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0912E9A0
@@ -8529,10 +8529,10 @@ entries:
     - [16x16, -6, -56]
   animations:
   - symbol: gTalk2103Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk2103Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8], [1, 8]]
   us:
     address: 0x09130AA8
@@ -8582,10 +8582,10 @@ entries:
     - [64x64, -30, -32]
   animations:
   - symbol: gTalk2104Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 8]]
   - symbol: gTalk2104Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09132A38
@@ -8643,10 +8643,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09134814
@@ -8704,10 +8704,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2401Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2401Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09135410
@@ -8765,10 +8765,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2402Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2402Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09135F8C
@@ -8826,10 +8826,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2403Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2403Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09136BC8
@@ -8871,10 +8871,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2404Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gTalk2404Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x09137804
@@ -8932,10 +8932,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2405Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2405Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x091382A8
@@ -8998,10 +8998,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09138EE4
@@ -9064,10 +9064,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2501Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2501Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09139AE0
@@ -9130,10 +9130,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2502Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2502Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0913A6DC
@@ -9196,10 +9196,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2503Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2503Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0913B2D8
@@ -9262,10 +9262,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2504Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2504Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0913BED4
@@ -9328,10 +9328,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2505Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6]]
   - symbol: gTalk2505Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x0913CAD0
@@ -9384,10 +9384,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0913D6CC
@@ -9426,10 +9426,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2601Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20]]
   - symbol: gTalk2601Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x0913E178
@@ -9660,34 +9660,34 @@ entries:
     - [64x64, -31, -48, {same: [20, 4]}]
   animations:
   - symbol: gTalk2700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk2700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk2700Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 60], [6, 4], [7, 6], [9, 20], [6, 4], [7, 6]]
   - symbol: gTalk2700Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 8], [8, 8], [5, 8], [8, 8], [5, 8]]
   - symbol: gTalk2700Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk2700Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [10, 8], [13, 8], [10, 8], [13, 8]]
   - symbol: gTalk2700Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 60], [16, 4], [17, 6], [15, 20], [16, 4], [17, 6]]
   - symbol: gTalk2700Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 8], [18, 8], [19, 8], [18, 8], [19, 8]]
   - symbol: gTalk2700Anim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 60], [21, 4], [22, 6], [20, 20], [21, 4], [22, 6]]
   - symbol: gTalk2700Anim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[24, 8], [23, 8], [20, 8], [23, 8], [20, 8]]
   us:
     address: 0x0913EB8C
@@ -9740,10 +9740,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09142C44
@@ -9782,10 +9782,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2801Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gTalk2801Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [2, 8], [1, 8], [2, 8], [1, 8]]
   us:
     address: 0x09143730
@@ -9838,10 +9838,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2802Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2802Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09144104
@@ -9894,10 +9894,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2803Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2803Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x09144BF0
@@ -9950,10 +9950,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2804Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2804Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   us:
     address: 0x091456DC
@@ -9992,10 +9992,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2805Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gTalk2805Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x091461C8
@@ -10053,10 +10053,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09146B9C
@@ -10109,10 +10109,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2901Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2901Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09147704
@@ -10151,10 +10151,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2902Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20]]
   - symbol: gTalk2902Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x091482B0
@@ -10212,10 +10212,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2903Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2903Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09148D44
@@ -10268,10 +10268,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk2904Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk2904Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x0914994C
@@ -10331,10 +10331,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914A4B8
@@ -10397,10 +10397,10 @@ entries:
     - [8x8, 9, -56]
   animations:
   - symbol: gTalk3001Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3001Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914B18C
@@ -10465,10 +10465,10 @@ entries:
     - [8x8, 9, -56]
   animations:
   - symbol: gTalk3002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914BDD4
@@ -10528,10 +10528,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3003Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3003Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x0914CAA8
@@ -10591,10 +10591,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914D77C
@@ -10654,10 +10654,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3101Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3101Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914E450
@@ -10717,10 +10717,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3102Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3102Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0914F124
@@ -10780,10 +10780,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3103Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3103Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x0914FDF8
@@ -10846,10 +10846,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3200Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3200Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09150ACC
@@ -10912,10 +10912,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3201Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3201Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091518D4
@@ -10983,10 +10983,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3202Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3202Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091526DC
@@ -11069,16 +11069,16 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3300Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3300Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk3300Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk3300Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   us:
     address: 0x091534A0
@@ -11136,10 +11136,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3301Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3301Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0915414C
@@ -11197,10 +11197,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3302Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3302Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09154D54
@@ -11258,10 +11258,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3303Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3303Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x0915595C
@@ -11319,10 +11319,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3304Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3304Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09156564
@@ -11380,10 +11380,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0915716C
@@ -11448,10 +11448,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09157D74
@@ -11516,10 +11516,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3501Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3501Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09158A48
@@ -11579,10 +11579,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3502Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3502Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0915971C
@@ -11638,10 +11638,10 @@ entries:
     - [64x64, -30, -48, {same: [0, 2]}]
   animations:
   - symbol: gTalk3600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 9], [3, 9], [4, 9], [3, 9], [4, 9]]
   us:
     address: 0x0915A3B0
@@ -11727,16 +11727,16 @@ entries:
     - [16x8, -4, -40]
   animations:
   - symbol: gTalk3700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   - symbol: gTalk3700Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk3700Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x0915B0EC
@@ -11874,22 +11874,22 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk3800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk3800Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk3800Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8], [8, 5]]
   - symbol: gTalk3800Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gTalk3800Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   us:
     address: 0x0915CA10
@@ -11952,10 +11952,10 @@ entries:
     - [8x8, -14, -64]
   animations:
   - symbol: gTalk3802Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3802Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 4]]
   us:
     address: 0x0915E838
@@ -12018,10 +12018,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk3803Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3803Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0915F684
@@ -12196,28 +12196,28 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk3900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk3900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk3900Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk3900Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   - symbol: gTalk3900Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60], [9, 4], [10, 6], [8, 20], [9, 4], [10, 6]]
   - symbol: gTalk3900Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   - symbol: gTalk3900Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 60], [14, 4], [15, 6], [13, 20], [14, 4], [15, 6]]
   - symbol: gTalk3900Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 8], [16, 8], [13, 8], [16, 8], [17, 8]]
   us:
     address: 0x091606CC
@@ -12243,7 +12243,7 @@ entries:
     - [8x8, 18, 16]
   animations:
   - symbol: gTalk39UnusedFace1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09161EE0
@@ -12269,7 +12269,7 @@ entries:
     - [8x8, 18, 16]
   animations:
   - symbol: gTalk39UnusedFace2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09162848
@@ -12295,7 +12295,7 @@ entries:
     - [8x8, 18, 16]
   animations:
   - symbol: gTalk39UnusedFace3Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x091631B0
@@ -12357,10 +12357,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk4000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09163B18
@@ -12419,10 +12419,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk4001Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4001Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09164BF8
@@ -12484,10 +12484,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk4002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09165EC8
@@ -12543,10 +12543,10 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk4003Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4003Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09167028
@@ -12650,16 +12650,16 @@ entries:
     - [8x8, 17, 16]
   animations:
   - symbol: gTalk4100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk4100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [4, 8], [3, 8], [4, 8], [3, 8]]
   - symbol: gTalk4100Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4100Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x091682A4
@@ -12762,16 +12762,16 @@ entries:
     - [64x32, -30, 0]
   animations:
   - symbol: gTalk4101Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4101Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4101Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4101Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x09169390
@@ -12902,22 +12902,22 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk4200Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4200Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4200Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4200Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk4200Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk4200Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [13, 8], [10, 8], [13, 8], [10, 8]]
   us:
     address: 0x0916AD98
@@ -13065,22 +13065,22 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk4300Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4300Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4300Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4300Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 8], [8, 8], [5, 8], [8, 8], [5, 8]]
   - symbol: gTalk4300Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk4300Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [13, 8], [14, 8], [13, 8], [14, 8]]
   us:
     address: 0x0916CA58
@@ -13195,16 +13195,16 @@ entries:
     - [8x16, 16, -40]
   animations:
   - symbol: gTalk4400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4400Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4400Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x0916DFBC
@@ -13307,16 +13307,16 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk4500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4500Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4500Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x0916FC4C
@@ -13442,22 +13442,22 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk4600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4600Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk4600Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [7, 8], [6, 8], [5, 8], [6, 8]]
   - symbol: gTalk4600Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60], [9, 4], [10, 6], [8, 20], [9, 4], [10, 6]]
   - symbol: gTalk4600Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   us:
     address: 0x09170C34
@@ -13575,22 +13575,22 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk4700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4700Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk4700Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   - symbol: gTalk4700Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60], [9, 4], [10, 6], [8, 20], [9, 4], [10, 6]]
   - symbol: gTalk4700Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   us:
     address: 0x09172650
@@ -13652,10 +13652,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk4800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091742FC
@@ -13722,10 +13722,10 @@ entries:
     - [16x8, 1, -56]
   animations:
   - symbol: gTalk4801Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4801Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0917501C
@@ -13792,10 +13792,10 @@ entries:
     - [16x8, 6, -56]
   animations:
   - symbol: gTalk4802Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4802Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09175D5C
@@ -13855,10 +13855,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk4803Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4803Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x09176A9C
@@ -13920,10 +13920,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk4804Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4804Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091778F0
@@ -14076,28 +14076,28 @@ entries:
     - [64x32, -30, -32, {same: [13, 3]}]
   animations:
   - symbol: gTalk4900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk4900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk4900Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk4900Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk4900Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gTalk4900Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 8], [11, 8], [12, 8], [11, 8], [12, 8]]
   - symbol: gTalk4900Anim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 60], [14, 4], [15, 6], [13, 20], [14, 4], [15, 6]]
   - symbol: gTalk4900Anim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 8], [16, 8], [17, 8], [16, 8], [17, 8]]
   us:
     address: 0x09178610
@@ -14121,7 +14121,7 @@ entries:
     - [64x64, -30, -32]
   animations:
   - symbol: gTalk49UnusedFace1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0917B440
@@ -14145,7 +14145,7 @@ entries:
     - [64x64, -30, -32]
   animations:
   - symbol: gTalk49UnusedFace2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0917BD5C
@@ -14169,7 +14169,7 @@ entries:
     - [64x64, -30, -32]
   animations:
   - symbol: gTalk49UnusedFace3Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0917C678
@@ -14241,10 +14241,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk5000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0917CF94
@@ -14366,16 +14366,16 @@ entries:
     - [32x8, -22, -88]
   animations:
   - symbol: gTalk5001Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5001Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk5001Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk5001Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x0917E0D0
@@ -14442,10 +14442,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5002Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5002Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0917F688
@@ -14548,16 +14548,16 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk5100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk5100Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk5100Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x091806C8
@@ -14602,10 +14602,10 @@ entries:
     - [8x8, 14, -72]
   animations:
   - symbol: gTalk5102Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk5102Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x09181590
@@ -14651,10 +14651,10 @@ entries:
     - [16x8, -7, 25]
   animations:
   - symbol: gTalk5200Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5200Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 5]]
   us:
     address: 0x091820E8
@@ -14702,10 +14702,10 @@ entries:
     - [16x8, -7, 25]
   animations:
   - symbol: gTalk5201Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5201Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 3]]
   us:
     address: 0x09182E4C
@@ -14753,10 +14753,10 @@ entries:
     - [16x8, -6, 25]
   animations:
   - symbol: gTalk5202Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5202Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 5]]
   us:
     address: 0x09183BBC
@@ -14805,10 +14805,10 @@ entries:
     - [8x8, 10, -31]
   animations:
   - symbol: gTalk5203Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5203Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 5]]
   us:
     address: 0x0918492C
@@ -14856,10 +14856,10 @@ entries:
     - [16x8, -6, 25]
   animations:
   - symbol: gTalk5204Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5204Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8], [3, 5]]
   us:
     address: 0x09185A44
@@ -14917,10 +14917,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5300Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5300Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091867B4
@@ -14980,10 +14980,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5301Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5301Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x091874FC
@@ -15043,10 +15043,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5302Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5302Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09188110
@@ -15106,10 +15106,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5303Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5303Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09188D24
@@ -15174,10 +15174,10 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5304Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5304Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x09189938
@@ -15252,10 +15252,10 @@ entries:
     - [64x64, -30, -48, {same: [0, 6]}]
   animations:
   - symbol: gTalk5400Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5400Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0918A58C
@@ -15337,10 +15337,10 @@ entries:
     - [8x8, 16, 16]
   animations:
   - symbol: gTalk5401Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5401Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0918B43C
@@ -15425,10 +15425,10 @@ entries:
     - [8x8, 9, -32, {same: [0, 8]}]
   animations:
   - symbol: gTalk5402Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5402Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   us:
     address: 0x0918C3D4
@@ -15508,16 +15508,16 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk5500Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5500Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk5500Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk5500Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [6, 8], [5, 8], [6, 8], [5, 8]]
   us:
     address: 0x0918D3C0
@@ -15558,10 +15558,10 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk5502Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   - symbol: gTalk5502Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x0918E238
@@ -15612,10 +15612,10 @@ entries:
     - [16x8, 10, 16]
   animations:
   - symbol: gTalk5503Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5503Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x0918ED78
@@ -15700,16 +15700,16 @@ entries:
     - [64x64, -31, -32, {same: [0, 0]}]
   animations:
   - symbol: gTalk5600Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5600Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   - symbol: gTalk5600Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk5600Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   us:
     address: 0x0918F9F8
@@ -15765,10 +15765,10 @@ entries:
     - [32x16, -21, -48]
   animations:
   - symbol: gTalk5602Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5602Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   us:
     address: 0x09190934
@@ -15832,16 +15832,16 @@ entries:
     - [8x8, 2, 24]
   animations:
   - symbol: gTalk5700Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5700Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk5700Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk5700Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 8], [6, 8], [5, 8], [6, 8], [5, 8]]
   us:
     address: 0x091914D0
@@ -15882,10 +15882,10 @@ entries:
     - [32x8, -14, 24]
   animations:
   - symbol: gTalk5702Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gTalk5702Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [1, 8], [2, 8], [1, 8], [2, 8]]
   us:
     address: 0x091923C8
@@ -15950,16 +15950,16 @@ entries:
     - [16x8, -7, 25]
   animations:
   - symbol: gTalk5800Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 4], [1, 6], [0, 20], [2, 4], [1, 6]]
   - symbol: gTalk5800Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [0, 8], [3, 8]]
   - symbol: gTalk5800Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gTalk5800Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   us:
     address: 0x09193208
@@ -16111,22 +16111,22 @@ entries:
     - [16x8, -2, -53]
   animations:
   - symbol: gTalk5900Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [1, 4], [2, 6], [0, 20], [1, 4], [2, 6]]
   - symbol: gTalk5900Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8], [3, 8], [4, 8], [3, 8], [4, 8]]
   - symbol: gTalk5900Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 60], [6, 4], [7, 6], [5, 20], [6, 4], [7, 6]]
   - symbol: gTalk5900Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [8, 8], [9, 8], [8, 8], [9, 8]]
   - symbol: gTalk5900Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 60], [11, 4], [12, 6], [10, 20], [11, 4], [12, 6]]
   - symbol: gTalk5900Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 8], [13, 8], [10, 8], [13, 8], [10, 8]]
   us:
     address: 0x09193F68
@@ -16174,10 +16174,10 @@ entries:
     - [16x8, -10, 28]
   animations:
   - symbol: gTalk6000Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 6], [1, 4], [0, 20], [2, 6], [1, 4]]
   - symbol: gTalk6000Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 13], [3, 13], [4, 13], [3, 13], [4, 13]]
   us:
     address: 0x091956A4
@@ -16271,22 +16271,22 @@ entries:
     - [32x16, -17, -48, {same: [0, 1]}]
   animations:
   - symbol: gTalk6100Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60], [2, 6], [1, 4], [0, 20], [2, 6], [1, 4]]
   - symbol: gTalk6100Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 8], [3, 8], [0, 8], [3, 8], [0, 8]]
   - symbol: gTalk6100Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8]]
   - symbol: gTalk6100Anim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 8], [6, 8], [7, 8], [6, 8], [7, 8]]
   - symbol: gTalk6100Anim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60], [9, 4], [10, 6], [8, 20], [9, 4], [10, 6]]
   - symbol: gTalk6100Anim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 8], [11, 8], [8, 8], [11, 8], [8, 8]]
   us:
     address: 0x09196150
@@ -16576,7 +16576,7 @@ entries:
   animations:
   - symbol: gBgTextSmallFontAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090AA3C4
@@ -17362,7 +17362,7 @@ entries:
   animations:
   - symbol: gMsgFontBank0Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090AABA8
@@ -18148,7 +18148,7 @@ entries:
   animations:
   - symbol: gMsgFontBank1Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090B35B4
@@ -18934,7 +18934,7 @@ entries:
   animations:
   - symbol: gMsgFontBank2Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090BBFC0
@@ -19552,7 +19552,7 @@ entries:
   animations:
   - symbol: gMsgFontBank3Anim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090C49CC
@@ -20338,7 +20338,7 @@ entries:
   animations:
   - symbol: gMsgLatinFontAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090CB5A8
@@ -21263,7 +21263,7 @@ entries:
   animations:
   - symbol: gSmallFontAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090D3FB4
@@ -21289,11 +21289,11 @@ entries:
   animations:
   - symbol: gUnk_090D4734
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gUnk_090D473E
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x090D4720
@@ -21545,51 +21545,51 @@ entries:
   animations:
   - symbol: gMenuAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gMenuAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gMenuAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gMenuAnim3
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gMenuAnim4
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gMenuAnim5
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gMenuAnim6
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 4]]
   - symbol: gMenuAnim7
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4]]
   - symbol: gMenuAnim8
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 4]]
   - symbol: gMenuAnim9
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[9, 4]]
   - symbol: gMenuAnim10
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[10, 4]]
   - symbol: gMenuAnim11
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[11, 4]]
   us:
     address: 0x090D4848

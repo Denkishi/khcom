@@ -1868,7 +1868,7 @@ entries:
     - [8x8, 24, -16]
   animations:
   - symbol: gUnk_09C5B8DE
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C5B8B0
@@ -1909,7 +1909,7 @@ entries:
     - [8x8, 19, 73]
   animations:
   - symbol: gUnk_09C5BB56
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C5BAE8
@@ -1948,13 +1948,13 @@ entries:
     - [16x32, 8, -17]
   animations:
   - symbol: gSrollLogoAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollLogoAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gSrollLogoAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x09C5CC04
@@ -2015,10 +2015,10 @@ entries:
     - [8x16, 27, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnScenarioAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnScenarioAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5D83C
@@ -2096,10 +2096,10 @@ entries:
     - [8x16, 62, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnRatingProofreadingAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnRatingProofreadingAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   jp:
     address: 0x09C5DAB4
@@ -2148,10 +2148,10 @@ entries:
     - [16x16, 12, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecn2DArtAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecn2DArtAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5DC84
@@ -2220,10 +2220,10 @@ entries:
     - [8x16, 41, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecn3DAnimationAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecn3DAnimationAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5E048
@@ -2318,10 +2318,10 @@ entries:
     - [16x16, 92, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnInformationTechnologyAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnInformationTechnologyAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   jp:
     address: 0x09C5E320
@@ -2376,10 +2376,10 @@ entries:
     - [8x16, 23, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnPlanningAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnPlanningAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5E600
@@ -2448,10 +2448,10 @@ entries:
     - [8x16, 39, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnEventCreationAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnEventCreationAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5EA48
@@ -2513,10 +2513,10 @@ entries:
     - [32x16, 21, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnPublicityTeamAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnPublicityTeamAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   jp:
     address: 0x09C5EF34
@@ -2572,10 +2572,10 @@ entries:
     - [16x16, 27, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnProgrammingAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnProgrammingAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5F040
@@ -2662,10 +2662,10 @@ entries:
     - [16x16, 75, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnSalesMarketingAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnSalesMarketingAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   jp:
     address: 0x09C5F540
@@ -2721,10 +2721,10 @@ entries:
     - [32x16, 21, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnGraphicDesignAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnGraphicDesignAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5F58C
@@ -2778,10 +2778,10 @@ entries:
     - [8x16, 15, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnSoundAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnSoundAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5FB98
@@ -2850,10 +2850,10 @@ entries:
     - [8x16, 39, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnEndingThemeAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnEndingThemeAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C5FEF4
@@ -2941,10 +2941,10 @@ entries:
     - [32x16, 67, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnSalesAdministrationAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnSalesAdministrationAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   jp:
     address: 0x09C5FFA4
@@ -3023,10 +3023,10 @@ entries:
     - [8x16, 72, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnBuenaVistaGamesJapanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnBuenaVistaGamesJapanAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C604EC
@@ -3096,10 +3096,10 @@ entries:
     - [16x16, 44, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnBuenaVistaGamesAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnBuenaVistaGamesAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C60E04
@@ -3184,10 +3184,10 @@ entries:
     - [8x16, 72, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnVoiceTalentsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnVoiceTalentsAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 4], [2, 4], [3, 4], [4, 4], [5, 4], [6, 4], [7, 64]]
   us:
     address: 0x09C61500
@@ -3256,10 +3256,10 @@ entries:
     - [16x16, 35, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnVoiceRecordingAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnVoiceRecordingAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C61E18
@@ -3337,10 +3337,10 @@ entries:
     - [8x16, 56, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnOutsideContractorsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnOutsideContractorsAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C62450
@@ -3402,10 +3402,10 @@ entries:
     - [16x16, 28, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnManagementAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnManagementAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C62BDC
@@ -3475,10 +3475,10 @@ entries:
     - [16x16, 46, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnQualityAssuranceAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnQualityAssuranceAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C63128
@@ -3523,10 +3523,10 @@ entries:
     - [8x8, 45, 21]
   animations:
   - symbol: gSrollNameOrnamentAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollNameOrnamentAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   us:
     address: 0x09C63824
@@ -3825,13 +3825,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C63D20
@@ -4345,13 +4345,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNamePlanningDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNamePlanningDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNamePlanningDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C65938
@@ -4865,13 +4865,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameScenarioWriterAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameScenarioWriterAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameScenarioWriterAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C67550
@@ -5604,19 +5604,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollRikuEpilogueAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [65, 750]]
   - symbol: gSrollRikuEpilogueAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [65, 624]]
   - symbol: gSrollRikuEpilogueAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 124], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [65, 396]]
   - symbol: gSrollRikuEpilogueAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 564], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 248], [63, 8], [62, 8], [61, 8], [60, 8], [59, 8], [65, 8]]
   - symbol: gSrollRikuEpilogueAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 900]]
   us:
     address: 0x09C8E7BC
@@ -5976,19 +5976,19 @@ entries:
       pieces: []
     animations:
     - symbol: gSrollRikuEpilogueAnim0
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[0, 8], [1, 8], [2, 8], [3, 8], [4, 8], [5, 130], [4, 8], [3, 8], [2, 8], [1, 8], [0, 8], [62, 640]]
     - symbol: gSrollRikuEpilogueAnim1
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[62, 234], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [62, 466]]
     - symbol: gSrollRikuEpilogueAnim2
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[62, 336], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [53, 6], [54, 6], [55, 6], [62, 364]]
     - symbol: gSrollRikuEpilogueAnim3
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[62, 514], [56, 8], [57, 8], [58, 8], [59, 8], [60, 8], [61, 248], [60, 8], [59, 8], [58, 8], [57, 8], [56, 8], [62, 8]]
     - symbol: gSrollRikuEpilogueAnim4
-      fields: {unk_00: 64, unk_02: 64}
+      fields: {originX: 64, originY: 64}
       frames: [[62, 730]]
   eu:
     address: 0x09CECE1C
@@ -6248,13 +6248,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameEventPlanningDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameEventPlanningDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameEventPlanningDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C69168
@@ -6768,13 +6768,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameCharacterModelingDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameCharacterModelingDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameCharacterModelingDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C6AD80
@@ -7288,13 +7288,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameAnimationDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameAnimationDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameAnimationDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C6C998
@@ -7808,13 +7808,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameCharacterArtDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameCharacterArtDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameCharacterArtDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C6E5B0
@@ -8328,13 +8328,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameBgArtDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameBgArtDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameBgArtDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C701C8
@@ -8848,13 +8848,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameBgModelingDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameBgModelingDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameBgModelingDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C71DE0
@@ -9368,13 +9368,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameMenuDesignDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameMenuDesignDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameMenuDesignDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C739F8
@@ -9888,13 +9888,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameVfxDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameVfxDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameVfxDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C75610
@@ -10408,13 +10408,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameTeamDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameTeamDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameTeamDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C77228
@@ -10928,13 +10928,13 @@ entries:
     - [16x16, 104, 13, {pal: 13}]
   animations:
   - symbol: gSrollNameMainProgrammersAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameMainProgrammersAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameMainProgrammersAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C78E40
@@ -11448,13 +11448,13 @@ entries:
     - [16x16, 104, 13, {pal: 13}]
   animations:
   - symbol: gSrollNameCharacterDirectorsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameCharacterDirectorsAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameCharacterDirectorsAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C7AA18
@@ -11968,13 +11968,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameBgDirectorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameBgDirectorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameBgDirectorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C7C5F0
@@ -12488,13 +12488,13 @@ entries:
     - [16x16, 104, 13, {pal: 13}]
   animations:
   - symbol: gSrollNameBossBattleMenuDirectorsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameBossBattleMenuDirectorsAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameBossBattleMenuDirectorsAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C7E208
@@ -13008,13 +13008,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameMusicAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameMusicAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameMusicAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C7FDE0
@@ -13528,13 +13528,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameProducer1Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameProducer1Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameProducer1Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C819F8
@@ -14048,13 +14048,13 @@ entries:
     - [16x16, 104, 13]
   animations:
   - symbol: gSrollNameProducer2Anim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gSrollNameProducer2Anim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 60]]
   - symbol: gSrollNameProducer2Anim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 6], [2, 60]]
   us:
     address: 0x09C83610
@@ -14397,10 +14397,10 @@ entries:
     - [8x16, 96, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnLegalAffairsAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnLegalAffairsAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C85228
@@ -14471,10 +14471,10 @@ entries:
     - [16x16, 44, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnLocalizationTeamAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnLocalizationTeamAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C85DBC
@@ -14541,10 +14541,10 @@ entries:
     - [8x16, 48, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnSquareEnixIncAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnSquareEnixIncAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C864E0
@@ -14603,10 +14603,10 @@ entries:
     - [32x16, 21, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnSpecialThanksAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnSpecialThanksAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C86B7C
@@ -14684,10 +14684,10 @@ entries:
     - [8x16, 58, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnJupiterCorporationAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnJupiterCorporationAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   us:
     address: 0x09C87188
@@ -14748,13 +14748,13 @@ entries:
     - [8x32, 64, 24]
   animations:
   - symbol: gSrollSecnThemeSongAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnThemeSongAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gSrollSecnThemeSongAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   us:
     address: 0x09C87914
@@ -15489,19 +15489,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollSoraEpilogueAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [93, 830]]
   - symbol: gSrollSoraEpilogueAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [93, 704]]
   - symbol: gSrollSoraEpilogueAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 120], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [93, 480]]
   - symbol: gSrollSoraEpilogueAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 560], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 8], [65, 8], [66, 8], [67, 8], [68, 8], [69, 8], [70, 280], [71, 8], [72, 8], [73, 8], [74, 8], [75, 8], [93, 12]]
   - symbol: gSrollSoraEpilogueAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 640], [76, 8], [77, 8], [78, 8], [79, 8], [80, 8], [81, 8], [82, 8], [83, 8], [84, 8], [85, 8], [86, 8], [87, 200], [88, 8], [89, 8], [90, 8], [91, 8], [92, 8], [93, 12]]
   us:
     address: 0x09C8C5D0
@@ -16035,8 +16035,8 @@ entries:
 - name: gUnk_09C90A58
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 10]
@@ -16092,8 +16092,8 @@ entries:
 - name: gUnk_09C90A98
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16146,8 +16146,8 @@ entries:
 - name: gUnk_09C90ACC
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16200,8 +16200,8 @@ entries:
 - name: gUnk_09C90B00
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16254,8 +16254,8 @@ entries:
 - name: gUnk_09C90B34
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16308,8 +16308,8 @@ entries:
 - name: gUnk_09C90B68
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16362,8 +16362,8 @@ entries:
 - name: gUnk_09C90B9C
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16416,8 +16416,8 @@ entries:
 - name: gUnk_09C90BD0
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 4]
   us:
@@ -16490,8 +16490,8 @@ entries:
 - name: gUnk_09C90C18
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16569,8 +16569,8 @@ entries:
 - name: gUnk_09C90C74
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16648,8 +16648,8 @@ entries:
 - name: gUnk_09C90CD0
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16727,8 +16727,8 @@ entries:
 - name: gUnk_09C90D2C
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16806,8 +16806,8 @@ entries:
 - name: gUnk_09C90D88
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16885,8 +16885,8 @@ entries:
 - name: gUnk_09C90DE4
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -16964,8 +16964,8 @@ entries:
 - name: gUnk_09C90E40
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -17043,8 +17043,8 @@ entries:
 - name: gUnk_09C90E9C
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -17102,8 +17102,8 @@ entries:
 - name: gUnk_09C90EE4
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -17169,8 +17169,8 @@ entries:
 - name: gUnk_09C90F2E
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 6]
@@ -17227,8 +17227,8 @@ entries:
 - name: gUnk_09C90F70
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 6]
   - [1, 6]
@@ -17284,8 +17284,8 @@ entries:
 - name: gUnk_09C90FB0
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -17341,8 +17341,8 @@ entries:
 - name: gUnk_09C90FF0
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 10]
@@ -17398,8 +17398,8 @@ entries:
 - name: gUnk_09C91030
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 6]
@@ -17455,8 +17455,8 @@ entries:
 - name: gUnk_09C91070
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 10]
@@ -17524,8 +17524,8 @@ entries:
 - name: gUnk_09C910F8
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 12]
   - [1, 12]
@@ -17606,8 +17606,8 @@ entries:
 - name: gUnk_09C9119C
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 12]
   - [1, 8]
@@ -17676,8 +17676,8 @@ entries:
 - name: gUnk_09C91228
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 10]
   - [1, 10]
@@ -17745,8 +17745,8 @@ entries:
 - name: gUnk_09C912B0
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 14]
   - [1, 14]
@@ -17814,8 +17814,8 @@ entries:
 - name: gUnk_09C91338
   record: AnimHeader
   fields:
-    unk_00: 64
-    unk_02: 64
+    originX: 64
+    originY: 64
   frames:
   - [0, 8]
   - [1, 8]
@@ -17866,7 +17866,7 @@ entries:
     - [8x8, 8, 0, {hflip: true, pal: 1, tile: 13}]
   animations:
   - symbol: gBosPcFldAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C91350
@@ -17951,10 +17951,10 @@ entries:
     - [8x16, 72, -8, {pal: 7}]
   animations:
   - symbol: gSrollSecnBuenaVistaGamesEmeaAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gSrollSecnBuenaVistaGamesEmeaAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 4], [1, 6], [2, 7], [3, 6], [4, 5], [5, 5], [6, 4], [7, 64]]
   eu:
     address: 0x09CE565C
@@ -18670,19 +18670,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollSoraEpilogueFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [93, 830]]
   - symbol: gSrollSoraEpilogueFrenchAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [93, 704]]
   - symbol: gSrollSoraEpilogueFrenchAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 120], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [93, 480]]
   - symbol: gSrollSoraEpilogueFrenchAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 560], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 8], [65, 8], [66, 8], [67, 8], [68, 8], [69, 8], [70, 280], [71, 8], [72, 8], [73, 8], [74, 8], [75, 8], [93, 12]]
   - symbol: gSrollSoraEpilogueFrenchAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 640], [76, 8], [77, 8], [78, 8], [79, 8], [80, 8], [81, 8], [82, 8], [83, 8], [84, 8], [85, 8], [86, 8], [87, 200], [88, 8], [89, 8], [90, 8], [91, 8], [92, 8], [93, 12]]
   eu:
     address: 0x09CEEA9C
@@ -19261,19 +19261,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollRikuEpilogueFrenchAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [65, 750]]
   - symbol: gSrollRikuEpilogueFrenchAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [65, 624]]
   - symbol: gSrollRikuEpilogueFrenchAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 124], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [65, 396]]
   - symbol: gSrollRikuEpilogueFrenchAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 564], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 248], [63, 8], [62, 8], [61, 8], [60, 8], [59, 8], [65, 8]]
   - symbol: gSrollRikuEpilogueFrenchAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 900]]
   eu:
     address: 0x09CF0EE8
@@ -20048,19 +20048,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollSoraEpilogueSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [93, 830]]
   - symbol: gSrollSoraEpilogueSpanishAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [93, 704]]
   - symbol: gSrollSoraEpilogueSpanishAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 120], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [93, 480]]
   - symbol: gSrollSoraEpilogueSpanishAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 560], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 8], [65, 8], [66, 8], [67, 8], [68, 8], [69, 8], [70, 280], [71, 8], [72, 8], [73, 8], [74, 8], [75, 8], [93, 12]]
   - symbol: gSrollSoraEpilogueSpanishAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 640], [76, 8], [77, 8], [78, 8], [79, 8], [80, 8], [81, 8], [82, 8], [83, 8], [84, 8], [85, 8], [86, 8], [87, 200], [88, 8], [89, 8], [90, 8], [91, 8], [92, 8], [93, 12]]
   eu:
     address: 0x09CF2F40
@@ -20716,19 +20716,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollRikuEpilogueSpanishAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [65, 750]]
   - symbol: gSrollRikuEpilogueSpanishAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [65, 624]]
   - symbol: gSrollRikuEpilogueSpanishAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 124], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [65, 396]]
   - symbol: gSrollRikuEpilogueSpanishAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 564], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 248], [63, 8], [62, 8], [61, 8], [60, 8], [59, 8], [65, 8]]
   - symbol: gSrollRikuEpilogueSpanishAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 900]]
   eu:
     address: 0x09CF54D0
@@ -21311,19 +21311,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollSoraEpilogueItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [93, 830]]
   - symbol: gSrollSoraEpilogueItalianAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [93, 704]]
   - symbol: gSrollSoraEpilogueItalianAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 120], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [93, 480]]
   - symbol: gSrollSoraEpilogueItalianAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 560], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 8], [65, 8], [66, 8], [67, 8], [68, 8], [69, 8], [70, 280], [71, 8], [72, 8], [73, 8], [74, 8], [75, 8], [93, 12]]
   - symbol: gSrollSoraEpilogueItalianAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 640], [76, 8], [77, 8], [78, 8], [79, 8], [80, 8], [81, 8], [82, 8], [83, 8], [84, 8], [85, 8], [86, 8], [87, 200], [88, 8], [89, 8], [90, 8], [91, 8], [92, 8], [93, 12]]
   eu:
     address: 0x09CF7A74
@@ -21921,19 +21921,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollRikuEpilogueItalianAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [65, 750]]
   - symbol: gSrollRikuEpilogueItalianAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [65, 624]]
   - symbol: gSrollRikuEpilogueItalianAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 124], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [65, 396]]
   - symbol: gSrollRikuEpilogueItalianAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 564], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 248], [63, 8], [62, 8], [61, 8], [60, 8], [59, 8], [65, 8]]
   - symbol: gSrollRikuEpilogueItalianAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 900]]
   eu:
     address: 0x09CF9864
@@ -22745,19 +22745,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollSoraEpilogueGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [93, 830]]
   - symbol: gSrollSoraEpilogueGermanAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [93, 704]]
   - symbol: gSrollSoraEpilogueGermanAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 120], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [93, 480]]
   - symbol: gSrollSoraEpilogueGermanAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 560], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 8], [65, 8], [66, 8], [67, 8], [68, 8], [69, 8], [70, 280], [71, 8], [72, 8], [73, 8], [74, 8], [75, 8], [93, 12]]
   - symbol: gSrollSoraEpilogueGermanAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[93, 640], [76, 8], [77, 8], [78, 8], [79, 8], [80, 8], [81, 8], [82, 8], [83, 8], [84, 8], [85, 8], [86, 8], [87, 200], [88, 8], [89, 8], [90, 8], [91, 8], [92, 8], [93, 12]]
   eu:
     address: 0x09CFB9AC
@@ -23351,19 +23351,19 @@ entries:
     pieces: []
   animations:
   - symbol: gSrollRikuEpilogueGermanAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [11, 6], [12, 6], [13, 6], [14, 6], [15, 6], [16, 6], [17, 6], [18, 6], [19, 6], [20, 6], [21, 6], [22, 6], [23, 6], [24, 6], [65, 750]]
   - symbol: gSrollRikuEpilogueGermanAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 108], [25, 6], [26, 6], [27, 6], [28, 6], [29, 6], [30, 6], [31, 6], [32, 6], [33, 6], [34, 6], [35, 6], [36, 6], [37, 6], [38, 6], [39, 6], [40, 6], [41, 6], [42, 6], [43, 6], [44, 6], [45, 6], [46, 6], [47, 6], [48, 6], [49, 6], [50, 6], [51, 6], [52, 6], [65, 624]]
   - symbol: gSrollRikuEpilogueGermanAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 300], [53, 8], [54, 8], [55, 8], [56, 8], [57, 8], [58, 124], [57, 8], [56, 8], [55, 8], [54, 8], [53, 8], [65, 396]]
   - symbol: gSrollRikuEpilogueGermanAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 564], [59, 8], [60, 8], [61, 8], [62, 8], [63, 8], [64, 248], [63, 8], [62, 8], [61, 8], [60, 8], [59, 8], [65, 8]]
   - symbol: gSrollRikuEpilogueGermanAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[65, 900]]
   eu:
     address: 0x09CFE2B8
@@ -24540,7 +24540,7 @@ entries:
   animations:
   - symbol: gSrollTimerAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C9043C
@@ -24722,7 +24722,7 @@ entries:
   animations:
   - symbol: gBosPcLayerAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 0]]
   us:
     address: 0x09C90614
@@ -24844,7 +24844,7 @@ entries:
   animations:
   - symbol: gBosPcStandaloneAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C44708

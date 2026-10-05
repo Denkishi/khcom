@@ -708,7 +708,7 @@ entries:
     - [8x16, 80, 0, {fresh: true}]
   animations:
   - symbol: gJiminyTitleAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C69C04
@@ -785,7 +785,7 @@ entries:
     - [32x16, 64, 0]
   animations:
   - symbol: gJiminyTitleLocalizedAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08C9A4CC
@@ -810,7 +810,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gJiminyScrollArrowAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C6A51C
@@ -839,7 +839,7 @@ entries:
     - [16x8, 0, 0]
   animations:
   - symbol: gJiminyRowMarkAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C6A690
@@ -886,7 +886,7 @@ entries:
     - [16x8, 0, 0]
   animations:
   - symbol: gJiminyBinderRingAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C6A878
@@ -925,16 +925,16 @@ entries:
     - [16x8, -2, 16, {hflip: true}]
   animations:
   - symbol: gJiminyCursorAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   - symbol: gJiminyCursorAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: []
   - symbol: gJiminyCursorAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
   - symbol: gJiminyCursorAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C6A8CC
@@ -959,7 +959,7 @@ entries:
     - [32x32, -32, -8]
   animations:
   - symbol: gJiminyPremiumCardAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08C6AA58

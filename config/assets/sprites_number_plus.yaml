@@ -62,7 +62,7 @@ entries:
     - [16x16, 0, 0]
   animations:
   - symbol: gNumberPlusAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x090451AC

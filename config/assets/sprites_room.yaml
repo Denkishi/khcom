@@ -245,13 +245,13 @@ entries:
     - [8x16, 15, -34]
   animations:
   - symbol: gBosGaTorsoAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12]]
   - symbol: gBosGaTorsoAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 5], [5, 5], [6, 5], [7, 5]]
   - symbol: gBosGaTorsoAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0999389C
@@ -289,10 +289,10 @@ entries:
     - [32x32, -16, -18]
   animations:
   - symbol: gBosGaHeadAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBosGaHeadAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6]]
   us:
     address: 0x09995E3C
@@ -353,10 +353,10 @@ entries:
     - [16x8, -8, -14, {layer: 1}]
   animations:
   - symbol: gBosGaNearHandAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBosGaNearHandAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7]]
   us:
     address: 0x09996A9C
@@ -416,10 +416,10 @@ entries:
     - [8x8, -27, 2]
   animations:
   - symbol: gBosGaFarHandAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBosGaFarHandAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 7], [2, 7], [3, 7], [4, 7], [5, 7], [6, 7]]
   us:
     address: 0x09997E84
@@ -444,7 +444,7 @@ entries:
     - [32x8, -14, 18]
   animations:
   - symbol: gBosGaNearFootAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09999224
@@ -473,7 +473,7 @@ entries:
     - [8x8, -5, -30]
   animations:
   - symbol: gBosGaFarFootAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x099995C4
@@ -517,10 +517,10 @@ entries:
     - [8x8, 10, -22]
   animations:
   - symbol: gBosGaCollarAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 12], [1, 12], [2, 12], [3, 12]]
   - symbol: gBosGaCollarAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x0999991C

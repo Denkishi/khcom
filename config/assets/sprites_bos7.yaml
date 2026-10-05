@@ -217,10 +217,10 @@ entries:
     - [16x16, -9, -8, {hflip: true, pal: 1}]
   animations:
   - symbol: gBosLstEdgAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [5, 6], [6, 6], [7, 6], [8, 6]]
   - symbol: gBosLstEdgAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x09C5C460
@@ -270,16 +270,16 @@ entries:
     - [16x16, -8, -8]
   animations:
   - symbol: gBosLstCtrAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 60]]
   - symbol: gBosLstCtrAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gBosLstCtrAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   - symbol: gBosLstCtrAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 6], [6, 6], [7, 6], [8, 6], [9, 6], [10, 6], [9, 6], [8, 6], [7, 6], [6, 6]]
   us:
     address: 0x09C5C664
@@ -367,34 +367,34 @@ entries:
     - [16x8, -8, -14, {tile: 70}]
   animations:
   - symbol: gBosLstBitAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 6], [1, 6], [2, 8], [3, 2], [4, 2], [0, 1]]
   - symbol: gBosLstBitAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[5, 4]]
   - symbol: gBosLstBitAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[6, 60]]
   - symbol: gBosLstBitAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[7, 60]]
   - symbol: gBosLstBitAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 60]]
   - symbol: gBosLstBitAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gBosLstBitAnim6
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[15, 1], [16, 2], [17, 4], [18, 2], [19, 3], [20, 4], [8, 1]]
   - symbol: gBosLstBitAnim7
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 4]]
   - symbol: gBosLstBitAnim8
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[13, 4]]
   - symbol: gBosLstBitAnim9
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[14, 4]]
   us:
     address: 0x09C913F4
@@ -429,10 +429,10 @@ entries:
     - [16x16, -8, -8, {pal: 1, tile: 12}]
   animations:
   - symbol: gBosLstPtlAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 60]]
   - symbol: gBosLstPtlAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 6], [2, 6], [3, 6], [4, 6], [3, 6], [2, 6]]
   us:
     address: 0x09C9156C
@@ -458,7 +458,7 @@ entries:
     - [16x32, -4, 0, {tile: 8}]
   animations:
   - symbol: gBosLstSnpAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 8]]
   us:
     address: 0x09C915C0
@@ -551,22 +551,22 @@ entries:
     - [16x16, -8, -8, {tile: 52}]
   animations:
   - symbol: gBosLstFalAnim0
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 7], [1, 7], [2, 7], [3, 7]]
   - symbol: gBosLstFalAnim1
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 7], [5, 7], [6, 7], [7, 7]]
   - symbol: gBosLstFalAnim2
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 7], [9, 7], [10, 7], [11, 7]]
   - symbol: gBosLstFalAnim3
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[12, 7], [13, 7], [14, 7], [15, 7]]
   - symbol: gBosLstFalAnim4
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[16, 7], [17, 7], [18, 7], [19, 7]]
   - symbol: gBosLstFalAnim5
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[20, 7], [21, 7], [22, 7], [23, 7]]
   us:
     address: 0x09C915E0

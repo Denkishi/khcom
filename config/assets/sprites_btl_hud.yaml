@@ -58,7 +58,7 @@ entries:
   animations:
   - symbol: gMonsgageAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08B2556C
@@ -127,7 +127,7 @@ entries:
   animations:
   - symbol: gBtlExpNextAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08B25A34
@@ -197,7 +197,7 @@ entries:
   animations:
   - symbol: gBtlExpNextLvAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   us:
     address: 0x08B25E40
@@ -314,7 +314,7 @@ entries:
   animations:
   - symbol: gBtlPopCardBreakSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50A30
@@ -333,7 +333,7 @@ entries:
   animations:
   - symbol: gBtlPopCardBreakItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50BCC
@@ -352,7 +352,7 @@ entries:
   animations:
   - symbol: gBtlPopCardBreakGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50D68
@@ -370,7 +370,7 @@ entries:
   animations:
   - symbol: gBtlPopRecoverFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50F04
@@ -387,7 +387,7 @@ entries:
   animations:
   - symbol: gBtlPopRecoverSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51018
@@ -404,7 +404,7 @@ entries:
   animations:
   - symbol: gBtlPopRecoverItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B5112C
@@ -421,7 +421,7 @@ entries:
   animations:
   - symbol: gBtlPopRecoverGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51240
@@ -438,7 +438,7 @@ entries:
   animations:
   - symbol: gBtlPopGuardFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51354
@@ -455,7 +455,7 @@ entries:
   animations:
   - symbol: gBtlPopGuardSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51468
@@ -472,7 +472,7 @@ entries:
   animations:
   - symbol: gBtlPopGuardItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B5157C
@@ -489,7 +489,7 @@ entries:
   animations:
   - symbol: gBtlPopGuardGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51690
@@ -506,7 +506,7 @@ entries:
   animations:
   - symbol: gBtlPopMissFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B517A4
@@ -523,7 +523,7 @@ entries:
   animations:
   - symbol: gBtlPopMissSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B518B8
@@ -540,7 +540,7 @@ entries:
   animations:
   - symbol: gBtlPopMissItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B519CC
@@ -557,7 +557,7 @@ entries:
   animations:
   - symbol: gBtlPopMissGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51A60
@@ -579,11 +579,11 @@ entries:
   animations:
   - symbol: gBtlPauseItalianSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBtlPauseItalianSpanishAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   eu:
     address: 0x08B51B74
@@ -606,7 +606,7 @@ entries:
   animations:
   - symbol: gBtlEscapeFrenchAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51D28
@@ -629,7 +629,7 @@ entries:
   animations:
   - symbol: gBtlEscapeSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51F90
@@ -652,7 +652,7 @@ entries:
   animations:
   - symbol: gBtlEscapeItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B521F8
@@ -675,7 +675,7 @@ entries:
   animations:
   - symbol: gBtlEscapeGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B52460
@@ -733,7 +733,7 @@ entries:
   animations:
   - symbol: gBtlPopCbSpanishAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B526C8
@@ -792,7 +792,7 @@ entries:
   animations:
   - symbol: gBtlPopCbItalianAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B53304
@@ -851,7 +851,7 @@ entries:
   animations:
   - symbol: gBtlPopCbGermanAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B53F40
@@ -1045,23 +1045,23 @@ entries:
   animations:
   - symbol: gBHpgagEAnim0Eu
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 4]]
   - symbol: gBHpgagEAnim1Eu
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[1, 4]]
   - symbol: gBHpgagEAnim2Eu
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[2, 4]]
   - symbol: gBHpgagEAnim3Eu
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[3, 4]]
   - symbol: gBHpgagEAnim4Eu
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 4]]
   eu:
     address: 0x08B54B7C
@@ -1136,15 +1136,15 @@ entries:
   animations:
   - symbol: gTutorialArrowAnim0
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[0, 20], [1, 5], [2, 6], [3, 20], [2, 5], [1, 6]]
   - symbol: gTutorialArrowAnim1
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[4, 20], [5, 5], [6, 6], [7, 20], [6, 5], [5, 6]]
   - symbol: gTutorialArrowAnim2
     declare: false
-    fields: {unk_00: 64, unk_02: 64}
+    fields: {originX: 64, originY: 64}
     frames: [[8, 20], [9, 5], [10, 6], [11, 20], [10, 5], [9, 6]]
   us:
     address: 0x08B26270

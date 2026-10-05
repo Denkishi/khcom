@@ -8837,18 +8837,6 @@ TaskDesc gTaskDescPooCabbageborn = {
 };
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
-#ifdef VERSION_EU
-    { gUnk_09760D00, 5, gUnkEu_09F816AC, gUnkEu_09F81694, gUnk_09849E78 },
-    { gUnk_09761824, 11, gUnkEu_09F816DC, gUnkEu_09F816B0, gUnk_09849E98 },
-    { gUnk_09762542, 24, gUnkEu_09F81740, gUnkEu_09F816E0, gUnk_09849EB8 },
-    { gUnk_097634D0, 3, gUnkEu_09F81750, gUnkEu_09F81744, gUnk_09849ED8 },
-    { gUnk_09763B54, 9, gUnkEu_09F81778, gUnkEu_09F81754, gUnk_09849EF8 },
-    { gUnk_09764BB8, 2, gUnkEu_09F81784, gUnkEu_09F8177C, gUnk_09849F18 },
-    { gUnk_09765012, 6, gUnkEu_09F817A4, gUnkEu_09F8178C, gUnk_09849F38 },
-    { gUnk_0976626E, 6, gUnkEu_09F817C0, gUnkEu_09F817A8, gUnk_09849F38 },
-    { gUnk_09767562, 10, gUnkEu_09F817EC, gUnkEu_09F817C4, gUnk_09849F58 },
-    { gUnk_09769416, 10, gUnkEu_09F81818, gUnkEu_09F817F0, gUnk_09849F58 },
-#else
     { gUnk_09760D00, 5, gUnk_09EF62B4, gUnk_09EF629C, gUnk_09849E78 },
     { gUnk_09761824, 11, gUnk_09EF62E4, gUnk_09EF62B8, gUnk_09849E98 },
     { gUnk_09762542, 24, gUnk_09EF6348, gUnk_09EF62E8, gUnk_09849EB8 },
@@ -8859,7 +8847,6 @@ const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
     { gUnk_0976626E, 6, gUnk_09EF63C8, gUnk_09EF63B0, gUnk_09849F38 },
     { gUnk_09767562, 10, gUnk_09EF63F4, gUnk_09EF63CC, gUnk_09849F58 },
     { gUnk_09769416, 10, gUnk_09EF6420, gUnk_09EF63F8, gUnk_09849F58 },
-#endif
 };
 
 TaskDesc gTaskDescPooMapobjhit = {

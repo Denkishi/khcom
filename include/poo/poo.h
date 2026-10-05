@@ -427,7 +427,7 @@ typedef struct PooFootmarkWork {
     s32 x;
     s32 y;
     s32 z;
-    u8 ground[0x04];
+    s32 ground;
     PooNode node;
 } PooFootmarkWork;
 
@@ -734,7 +734,7 @@ typedef struct PooTrapWork {
     s32 x;
     s32 y;
     s32 z;
-    u8 ground[0x04];
+    s32 ground;
     Collider collider;
     TaskPool tasks;
     u8 colliderActive;

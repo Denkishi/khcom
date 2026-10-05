@@ -4183,162 +4183,16 @@ entries:
   eu:
     address: 0x09F6E208
     items: [gEventBg076Bg2Map0, gEventBg076Bg2Map1, gDefaultBgMapLz77, gDefaultBgMapLz77, gEventBg076Bg2Map4, gEventBg076Bg2Map5, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77]
-- name: gUnk_09EE2B28
+- name: gEventBg076UnusedBg1MapBlocks
   record: MapTable
-  items: [gEventBg076UnusedMap0]
+  items: [gEventBg076UnusedMap0, gEventBg076UnusedMap1, gDefaultBgMap, gDefaultBgMap, gEventBg076UnusedMap4, gEventBg076UnusedMap5, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap]
   us:
     address: 0x09EE2B28
   jp:
     address: 0x09EBA5A4
   eu:
     address: 0x09F6E248
-- name: gUnk_09EE2B2C
-  record: MapTable
-  items: [gEventBg076UnusedMap1]
-  us:
-    address: 0x09EE2B2C
-  jp:
-    address: 0x09EBA5A8
-  eu:
-    address: 0x09F6E24C
-- name: gUnk_09EE2B30
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B30
-  jp:
-    address: 0x09EBA5AC
-  eu:
-    address: 0x09F6E250
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B34
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B34
-  jp:
-    address: 0x09EBA5B0
-  eu:
-    address: 0x09F6E254
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B38
-  record: MapTable
-  items: [gEventBg076UnusedMap4]
-  us:
-    address: 0x09EE2B38
-  jp:
-    address: 0x09EBA5B4
-  eu:
-    address: 0x09F6E258
-- name: gUnk_09EE2B3C
-  record: MapTable
-  items: [gEventBg076UnusedMap5]
-  us:
-    address: 0x09EE2B3C
-  jp:
-    address: 0x09EBA5B8
-  eu:
-    address: 0x09F6E25C
-- name: gUnk_09EE2B40
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B40
-  jp:
-    address: 0x09EBA5BC
-  eu:
-    address: 0x09F6E260
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B44
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B44
-  jp:
-    address: 0x09EBA5C0
-  eu:
-    address: 0x09F6E264
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B48
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B48
-  jp:
-    address: 0x09EBA5C4
-  eu:
-    address: 0x09F6E268
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B4C
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B4C
-  jp:
-    address: 0x09EBA5C8
-  eu:
-    address: 0x09F6E26C
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B50
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B50
-  jp:
-    address: 0x09EBA5CC
-  eu:
-    address: 0x09F6E270
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B54
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B54
-  jp:
-    address: 0x09EBA5D0
-  eu:
-    address: 0x09F6E274
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B58
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B58
-  jp:
-    address: 0x09EBA5D4
-  eu:
-    address: 0x09F6E278
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B5C
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B5C
-  jp:
-    address: 0x09EBA5D8
-  eu:
-    address: 0x09F6E27C
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B60
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B60
-  jp:
-    address: 0x09EBA5DC
-  eu:
-    address: 0x09F6E280
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2B64
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2B64
-  jp:
-    address: 0x09EBA5E0
-  eu:
-    address: 0x09F6E284
-    items: [gDefaultBgMapLz77]
+    items: [gEventBg076UnusedMap0, gEventBg076UnusedMap1, gDefaultBgMapLz77, gDefaultBgMapLz77, gEventBg076UnusedMap4, gEventBg076UnusedMap5, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77]
 - name: gEventBg125Maps
   record: MapTable
   items: [gBtlBgHadesMap]
@@ -4484,120 +4338,14 @@ entries:
     items: [gEventBg089Bg2Map0, gEventBg089Bg2Map1, gDefaultBgMapLz77, gDefaultBgMapLz77, gEventBg089Bg2Map4, gEventBg089Bg2Map5, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77]
 - name: gEventBgUnusedGridBg3MapBlocks
   record: MapTable
-  items: [gEventBgUnusedGridBg3Map0]
+  items: [gEventBgUnusedGridBg3Map0, gEventBgUnusedGridBg3Map1, gDefaultBgMap, gDefaultBgMap, gEventBgUnusedGridBg3Map4, gEventBgUnusedGridBg3Map5, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap, gDefaultBgMap]
   us:
     address: 0x09EE2D6C
   jp:
     address: 0x09EBA7E8
   eu:
     address: 0x09F6E48C
-- name: gUnk_09EE2D70
-  record: MapTable
-  items: [gEventBgUnusedGridBg3Map1]
-  us:
-    address: 0x09EE2D70
-  jp:
-    address: 0x09EBA7EC
-  eu:
-    address: 0x09F6E490
-- name: gUnk_09EE2D74
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D74
-  jp:
-    address: 0x09EBA7F0
-  eu:
-    address: 0x09F6E494
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D78
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D78
-  jp:
-    address: 0x09EBA7F4
-  eu:
-    address: 0x09F6E498
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D7C
-  record: MapTable
-  items: [gEventBgUnusedGridBg3Map4]
-  us:
-    address: 0x09EE2D7C
-  jp:
-    address: 0x09EBA7F8
-  eu:
-    address: 0x09F6E49C
-- name: gUnk_09EE2D80
-  record: MapTable
-  items: [gEventBgUnusedGridBg3Map5]
-  us:
-    address: 0x09EE2D80
-  jp:
-    address: 0x09EBA7FC
-  eu:
-    address: 0x09F6E4A0
-- name: gUnk_09EE2D84
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D84
-  jp:
-    address: 0x09EBA800
-  eu:
-    address: 0x09F6E4A4
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D88
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D88
-  jp:
-    address: 0x09EBA804
-  eu:
-    address: 0x09F6E4A8
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D8C
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D8C
-  jp:
-    address: 0x09EBA808
-  eu:
-    address: 0x09F6E4AC
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D90
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D90
-  jp:
-    address: 0x09EBA80C
-  eu:
-    address: 0x09F6E4B0
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D94
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D94
-  jp:
-    address: 0x09EBA810
-  eu:
-    address: 0x09F6E4B4
-    items: [gDefaultBgMapLz77]
-- name: gUnk_09EE2D98
-  record: MapTable
-  items: [gDefaultBgMap]
-  us:
-    address: 0x09EE2D98
-  jp:
-    address: 0x09EBA814
-  eu:
-    address: 0x09F6E4B8
-    items: [gDefaultBgMapLz77]
+    items: [gEventBgUnusedGridBg3Map0, gEventBgUnusedGridBg3Map1, gDefaultBgMapLz77, gDefaultBgMapLz77, gEventBgUnusedGridBg3Map4, gEventBgUnusedGridBg3Map5, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77, gDefaultBgMapLz77]
 - name: gEventBgUnusedParasiteCageBattleBg3MapBlocks
   record: MapTable
   items: [gBosPcBgLeftMap, gBosPcBgRightMap]
@@ -5037,24 +4785,15 @@ entries:
     address: 0x09EBABDC
   eu:
     address: 0x09F6E880
-- name: gUnk_09EE3168
+- name: gEventBg121UnusedBg1MapBlocks
   record: MapTable
-  items: [gEventBg121UnusedMap0]
+  items: [gEventBg121UnusedMap0, gEventBg121UnusedMap1]
   us:
     address: 0x09EE3168
   jp:
     address: 0x09EBABE4
   eu:
     address: 0x09F6E888
-- name: gUnk_09EE316C
-  record: MapTable
-  items: [gEventBg121UnusedMap1]
-  us:
-    address: 0x09EE316C
-  jp:
-    address: 0x09EBABE8
-  eu:
-    address: 0x09F6E88C
 - name: gEventBg120Bg3MapBlocks
   record: MapTable
   items: [gEventBg120Bg3Map0]
@@ -5438,42 +5177,15 @@ entries:
     address: 0x09EBB068
   eu:
     address: 0x09F6ED0C
-- name: gUnk_09EE35FC
+- name: gEventBg044UnusedBg1MapBlocks
   record: MapTable
-  items: [gEventBg044UnusedMap0]
+  items: [gEventBg044UnusedMap0, gEventBg044UnusedMap1, gEventBg044UnusedMap2, gEventBg044UnusedMap3]
   us:
     address: 0x09EE35FC
   jp:
     address: 0x09EBB078
   eu:
     address: 0x09F6ED1C
-- name: gUnk_09EE3600
-  record: MapTable
-  items: [gEventBg044UnusedMap1]
-  us:
-    address: 0x09EE3600
-  jp:
-    address: 0x09EBB07C
-  eu:
-    address: 0x09F6ED20
-- name: gUnk_09EE3604
-  record: MapTable
-  items: [gEventBg044UnusedMap2]
-  us:
-    address: 0x09EE3604
-  jp:
-    address: 0x09EBB080
-  eu:
-    address: 0x09F6ED24
-- name: gUnk_09EE3608
-  record: MapTable
-  items: [gEventBg044UnusedMap3]
-  us:
-    address: 0x09EE3608
-  jp:
-    address: 0x09EBB084
-  eu:
-    address: 0x09F6ED28
 - name: gEventBg053ObjectFrames
   record: SpriteTable
   items: [gMapGmkDestinyIslands03Frame0, gMapGmkDestinyIslands04Frame0]

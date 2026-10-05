@@ -356,8 +356,4 @@ void SioBtlCardgetLoad1PWin();
 void SioBtlCardgetLoad2PWin();
 void SioBtlOptionPlayWorldBgm();
 
-#ifdef VERSION_JP
-extern u8 gSioErrorText[];
-#endif
-
 #endif /* GUARD_MODE_SIO_H */

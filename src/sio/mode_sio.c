@@ -3852,8 +3852,6 @@ void mode_sioError_0(s32 arg) {
     InitTextSlots(sSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
 #ifdef VERSION_EU
     sSioErrorWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gSioErrorTextByLanguage), sSioErrorWork->textSlots);
-#elif defined(VERSION_JP)
-    sSioErrorWork->textSlotCount = LoadTextSlots(gSioErrorText, sSioErrorWork->textSlots);
 #else
     sSioErrorWork->textSlotCount = LoadTextSlots(gSioErrorText, sSioErrorWork->textSlots);
 #endif

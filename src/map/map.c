@@ -6772,37 +6772,7 @@ Mode gModeMapFld = {
 };
 
 u8 gWorldEntryEvents[14] = {
-#if defined(VERSION_US)
-    255,
-    107,
-    101,
-    120,
-    94,
-    74,
-    87,
-    115,
-    129,
-    53,
-    2,
-    44,
-    61,
-    135,
-#elif defined(VERSION_JP)
-    255,
-    107,
-    101,
-    120,
-    94,
-    74,
-    87,
-    115,
-    129,
-    53,
-    2,
-    44,
-    61,
-    135,
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     255,
     107,
     101,
@@ -6817,6 +6787,21 @@ u8 gWorldEntryEvents[14] = {
     44,
     61,
     133,
+#else
+    255,
+    107,
+    101,
+    120,
+    94,
+    74,
+    87,
+    115,
+    129,
+    53,
+    2,
+    44,
+    61,
+    135,
 #endif
 };
 

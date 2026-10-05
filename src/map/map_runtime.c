@@ -1181,37 +1181,7 @@ u8 gRikuRoomTypes[14] = {
 };
 
 const MapNameText* gMapWorldNames[14] = {
-#if defined(VERSION_US)
-    gWorldNameCastleOblivionHall,
-    gWorldNameAgrabah,
-    gWorldNameAtlantica,
-    gWorldNameOlympusColiseum,
-    gWorldNameWonderland,
-    gWorldNameMonstro,
-    gWorldNameHalloweenTown,
-    gWorldNameNeverLand,
-    gWorldNameHollowBastion,
-    gWorldNameDestinyIslands,
-    gWorldNameTraverseTown,
-    gWorldNameTwilightTown,
-    gWorldNameCastleOblivion,
-    gWorldName100AcreWood,
-#elif defined(VERSION_JP)
-    gWorldNameCastleOblivionHall,
-    gWorldNameAgrabah,
-    gWorldNameAtlantica,
-    gWorldNameOlympusColiseum,
-    gWorldNameWonderland,
-    gWorldNameMonstro,
-    gWorldNameHalloweenTown,
-    gWorldNameNeverLand,
-    gWorldNameHollowBastion,
-    gWorldNameDestinyIslands,
-    gWorldNameTraverseTown,
-    gWorldNameTwilightTown,
-    gWorldNameCastleOblivion,
-    gWorldName100AcreWood,
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     &gWorldNameCastleOblivionHallByLanguage,
     &gWorldNameAgrabahByLanguage,
     &gWorldNameAtlanticaByLanguage,
@@ -1226,5 +1196,20 @@ const MapNameText* gMapWorldNames[14] = {
     &gWorldNameTwilightTownByLanguage,
     &gWorldNameCastleOblivionByLanguage,
     &gWorldName100AcreWoodByLanguage,
+#else
+    gWorldNameCastleOblivionHall,
+    gWorldNameAgrabah,
+    gWorldNameAtlantica,
+    gWorldNameOlympusColiseum,
+    gWorldNameWonderland,
+    gWorldNameMonstro,
+    gWorldNameHalloweenTown,
+    gWorldNameNeverLand,
+    gWorldNameHollowBastion,
+    gWorldNameDestinyIslands,
+    gWorldNameTraverseTown,
+    gWorldNameTwilightTown,
+    gWorldNameCastleOblivion,
+    gWorldName100AcreWood,
 #endif
 };

@@ -34,9 +34,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 80);
     InitTextSlots(work->textSlots3, 80);
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
-#ifdef VERSION_JP
-    work->textSlotCount2 = LoadTextSlots(gDeckEquipText, work->textSlots2);
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckEquipTextByLanguage), work->textSlots2);
 #else
     work->textSlotCount2 = LoadTextSlots(gDeckEquipText, work->textSlots2);

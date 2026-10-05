@@ -608,583 +608,477 @@ u8 CloseMessageWindow() {
 CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText000ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText00,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText00,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText001ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText01,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText01,
 #endif
         0,
     },
     {
         1, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText002ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText02,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText02,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText003ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText03,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText03,
 #endif
         0,
     },
     {
         1, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText004ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText04,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText04,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText005ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText05,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText05,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText006ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText06,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText06,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText007ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText07,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText07,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText008ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText08,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText08,
 #endif
         0,
     },
     {
         1, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText009ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText09,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText09,
 #endif
         0,
     },
     {
         1, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText010ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText10,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText10,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText011ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText11,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText11,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText012ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText12,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText12,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText013ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText13,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText13,
 #endif
         0,
     },
     {
         1, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText014ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText14,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText14,
 #endif
         0,
     },
     {
         1, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText015ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText15,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText15,
 #endif
         0,
     },
     {
         1, 3, 2, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText016ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText16,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText16,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText017ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText17,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText17,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText018ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText18,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText18,
 #endif
         0,
     },
     {
         1, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText019ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText19,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText19,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText020ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText20,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText20,
 #endif
         0,
     },
     {
         1, 3, 2, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText021ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText21,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText21,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText022ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText22,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText22,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText023ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldTalkText23,
-#elif defined(VERSION_US)
+#else
         gDonaldTalkText23,
 #endif
         0,
     },
     {
         1, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText024ByLanguage,
-#elif defined(VERSION_JP)
-        gDonaldExitHallTalkText,
-#elif defined(VERSION_US)
+#else
         gDonaldExitHallTalkText,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText025ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText00,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText00,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText026ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText01,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText01,
 #endif
         0,
     },
     {
         2, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText027ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText02,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText02,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText028ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText03,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText03,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText029ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText04,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText04,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText030ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText05,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText05,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText031ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText06,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText06,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText032ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText07,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText07,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText033ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText08,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText08,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText034ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText09,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText09,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText035ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText10,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText10,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText036ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText11,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText11,
 #endif
         0,
     },
     {
         2, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText037ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText12,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText12,
 #endif
         0,
     },
     {
         2, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText038ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText13,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText13,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText039ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText14,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText14,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText040ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText15,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText15,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText041ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText16,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText16,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText042ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText17,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText17,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText043ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText18,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText18,
 #endif
         0,
     },
     {
         2, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText044ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText19,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText19,
 #endif
         0,
     },
     {
         2, 3, 3, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText045ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText20,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText20,
 #endif
         0,
     },
     {
         2, 3, 2, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText046ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText21,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText21,
 #endif
         0,
     },
     {
         2, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText047ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText22,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText22,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText048ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyTalkText23,
-#elif defined(VERSION_US)
+#else
         gGoofyTalkText23,
 #endif
         0,
     },
     {
         2, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText049ByLanguage,
-#elif defined(VERSION_JP)
-        gGoofyExitHallTalkText,
-#elif defined(VERSION_US)
+#else
         gGoofyExitHallTalkText,
 #endif
         0,
     },
     {
         60, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText050ByLanguage,
-#elif defined(VERSION_JP)
-        gNamineTalkText0,
-#elif defined(VERSION_US)
+#else
         gNamineTalkText0,
 #endif
         0,
     },
     {
         60, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText051ByLanguage,
-#elif defined(VERSION_JP)
-        gNamineTalkText1,
-#elif defined(VERSION_US)
+#else
         gNamineTalkText1,
 #endif
         0,
     },
     {
         27, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText052ByLanguage,
-#elif defined(VERSION_JP)
-        gRikuReplicaTalkText,
-#elif defined(VERSION_US)
+#else
         gRikuReplicaTalkText,
 #endif
         0,
@@ -1202,143 +1096,117 @@ CardMessageDef gCardMessageDefs[] = {
     },
     {
         47, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText054ByLanguage,
-#elif defined(VERSION_JP)
-        gPigletTalkText,
-#elif defined(VERSION_US)
+#else
         gPigletTalkText,
 #endif
         0,
     },
     {
         48, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText055ByLanguage,
-#elif defined(VERSION_JP)
-        gOwlTalkText,
-#elif defined(VERSION_US)
+#else
         gOwlTalkText,
 #endif
         0,
     },
     {
         50, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText056ByLanguage,
-#elif defined(VERSION_JP)
-        gEeyoreTalkText0,
-#elif defined(VERSION_US)
+#else
         gEeyoreTalkText0,
 #endif
         0,
     },
     {
         50, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText057ByLanguage,
-#elif defined(VERSION_JP)
-        gEeyoreTalkText1,
-#elif defined(VERSION_US)
+#else
         gEeyoreTalkText1,
 #endif
         0,
     },
     {
         51, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText058ByLanguage,
-#elif defined(VERSION_JP)
-        gRooTalkText,
-#elif defined(VERSION_US)
+#else
         gRooTalkText,
 #endif
         0,
     },
     {
         49, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText059ByLanguage,
-#elif defined(VERSION_JP)
-        gRabbitTalkText0,
-#elif defined(VERSION_US)
+#else
         gRabbitTalkText0,
 #endif
         0,
     },
     {
         49, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText060ByLanguage,
-#elif defined(VERSION_JP)
-        gRabbitTalkText1,
-#elif defined(VERSION_US)
+#else
         gRabbitTalkText1,
 #endif
         0,
     },
     {
         61, 3, 4, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText061ByLanguage,
-#elif defined(VERSION_JP)
-        gMickeyTalkText0,
-#elif defined(VERSION_US)
+#else
         gMickeyTalkText0,
 #endif
         0,
     },
     {
         61, 3, 1, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText062ByLanguage,
-#elif defined(VERSION_JP)
-        gMickeyTalkText1,
-#elif defined(VERSION_US)
+#else
         gMickeyTalkText1,
 #endif
         0,
     },
     {
         61, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText063ByLanguage,
-#elif defined(VERSION_JP)
-        gMickeyTalkText2,
-#elif defined(VERSION_US)
+#else
         gMickeyTalkText2,
 #endif
         0,
     },
     {
         7, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText064ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopShopOptionText,
-#elif defined(VERSION_US)
+#else
         gMsTopShopOptionText,
 #endif
         0,
     },
     {
         7, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText065ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopChargeOptionText,
-#elif defined(VERSION_US)
+#else
         gMsTopChargeOptionText,
 #endif
         0,
     },
     {
         7, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText066ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopFreePackText,
-#elif defined(VERSION_US)
+#else
         gMsTopFreePackText,
 #endif
         0,
@@ -1367,156 +1235,124 @@ CardMessageDef gCardMessageDefs[] = {
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText069ByLanguage,
-#elif defined(VERSION_JP)
-        gPoohLeaveWorldText,
-#elif defined(VERSION_US)
+#else
         gPoohLeaveWorldText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END | CARD_MSG_FLAG_CHOICE_WINDOW,
     },
     {
         3, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText070ByLanguage,
-#elif defined(VERSION_JP)
-        gWorldselectTutorialText0,
-#elif defined(VERSION_US)
+#else
         gWorldselectTutorialText0,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText071ByLanguage,
-#elif defined(VERSION_JP)
-        gWorldselectTutorialText1,
-#elif defined(VERSION_US)
+#else
         gWorldselectTutorialText1,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText072ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText00,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText00,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText073ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText01,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText01,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText074ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText02,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText02,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText075ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText03,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText03,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText076ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText04,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText04,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText077ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText05,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText05,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText078ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText06,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText06,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText079ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText07,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText07,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText080ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText08,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText08,
 #endif
         0,
@@ -1530,325 +1366,255 @@ CardMessageDef gCardMessageDefs[] = {
 #elif defined(VERSION_US)
         gRobeTutorialText09,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText082ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText10,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText10,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText083ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText11,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText11,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText084ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText12,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText12,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText085ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText13,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText13,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText086ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText14,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText14,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText087ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText15,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText15,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText088ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText16,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText16,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText089ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText17,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText17,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText090ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText18,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText18,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText091ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText19,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText19,
 #endif
         0,
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText092ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText20,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText20,
 #endif
         0,
     },
     {
         62, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText093ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText21,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText21,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         3, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText094ByLanguage,
-#elif defined(VERSION_JP)
-        gRobeTutorialText22,
-#elif defined(VERSION_US)
+#else
         gRobeTutorialText22,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText095ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectTutorialText0,
-#elif defined(VERSION_US)
+#else
         gMapSelectTutorialText0,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText096ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectTutorialText1,
-#elif defined(VERSION_US)
+#else
         gMapSelectTutorialText1,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText097ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectTutorialText2,
-#elif defined(VERSION_US)
+#else
         gMapSelectTutorialText2,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText098ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectTutorialText3,
-#elif defined(VERSION_US)
+#else
         gMapSelectTutorialText3,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText099ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectValueTutorialText0,
-#elif defined(VERSION_US)
+#else
         gMapSelectValueTutorialText0,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText100ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectValueTutorialText1,
-#elif defined(VERSION_US)
+#else
         gMapSelectValueTutorialText1,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText101ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectValueTutorialText2,
-#elif defined(VERSION_US)
+#else
         gMapSelectValueTutorialText2,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText102ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectValueTutorialText3,
-#elif defined(VERSION_US)
+#else
         gMapSelectValueTutorialText3,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText103ByLanguage,
-#elif defined(VERSION_JP)
-        gSavePointTutorialText,
-#elif defined(VERSION_US)
+#else
         gSavePointTutorialText,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
@@ -1861,811 +1627,657 @@ CardMessageDef gCardMessageDefs[] = {
 #elif defined(VERSION_US)
         gSavePointTutorialText,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText105ByLanguage,
-#elif defined(VERSION_JP)
-        gQuickSaveTutorialText,
-#elif defined(VERSION_US)
+#else
         gQuickSaveTutorialText,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText106ByLanguage,
-#elif defined(VERSION_JP)
-        gMapTutorialText0,
-#elif defined(VERSION_US)
+#else
         gMapTutorialText0,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText107ByLanguage,
-#elif defined(VERSION_JP)
-        gMapTutorialText1,
-#elif defined(VERSION_US)
+#else
         gMapTutorialText1,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText108ByLanguage,
-#elif defined(VERSION_JP)
-        gMapTutorialText2,
-#elif defined(VERSION_US)
+#else
         gMapTutorialText2,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText109ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectEventDoorTutorialText0,
-#elif defined(VERSION_US)
+#else
         gMapSelectEventDoorTutorialText0,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText110ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectEventDoorTutorialText1,
-#elif defined(VERSION_US)
+#else
         gMapSelectEventDoorTutorialText1,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText111ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectEventDoorTutorialText2,
-#elif defined(VERSION_US)
+#else
         gMapSelectEventDoorTutorialText2,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText112ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectEventDoorTutorialText3,
-#elif defined(VERSION_US)
+#else
         gMapSelectEventDoorTutorialText3,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText113ByLanguage,
-#elif defined(VERSION_JP)
-        gMapSelectEventDoorTutorialText4,
-#elif defined(VERSION_US)
+#else
         gMapSelectEventDoorTutorialText4,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText114ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText00,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText00,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText115ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText01,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText01,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText116ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText02,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText02,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText117ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText03,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText03,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText118ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText04,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText04,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText119ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText05,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText05,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText120ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText06,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText06,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText121ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText07,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText07,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText122ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText08,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText08,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText123ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText09,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText09,
 #endif
         0,
     },
     {
         62, 1, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText124ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText10,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText10,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         31, 1, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText125ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText11,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText11,
 #endif
         0,
     },
     {
         62, 1, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText126ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText12,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText12,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         31, 1, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText127ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText13,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText13,
 #endif
         0,
     },
     {
         31, 0, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText128ByLanguage,
-#elif defined(VERSION_JP)
-        gLeonTutorialText14,
-#elif defined(VERSION_US)
+#else
         gLeonTutorialText14,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText129ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopIntroText0,
-#elif defined(VERSION_US)
+#else
         gMsTopIntroText0,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText130ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopIntroText1,
-#elif defined(VERSION_US)
+#else
         gMsTopIntroText1,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText131ByLanguage,
-#elif defined(VERSION_JP)
-        gMsTopIntroText2,
-#elif defined(VERSION_US)
+#else
         gMsTopIntroText2,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText132ByLanguage,
-#elif defined(VERSION_JP)
-        gWarpPointTutorialText,
-#elif defined(VERSION_US)
+#else
         gWarpPointTutorialText,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText133ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedWarpinatorText,
-#elif defined(VERSION_US)
+#else
         gLearnedWarpinatorText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText134ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedTerrorText,
-#elif defined(VERSION_US)
+#else
         gLearnedTerrorText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText135ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedSynchroText,
-#elif defined(VERSION_US)
+#else
         gLearnedSynchroText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText136ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedBindText,
-#elif defined(VERSION_US)
+#else
         gLearnedBindText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText137ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedIdyllRompText,
-#elif defined(VERSION_US)
+#else
         gLearnedIdyllRompText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText138ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedTrinityLimitText,
-#elif defined(VERSION_US)
+#else
         gLearnedTrinityLimitText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText139ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedConfuseText,
-#elif defined(VERSION_US)
+#else
         gLearnedConfuseText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText140ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedThunderRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedThunderRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText141ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedGiftedMiracleText,
-#elif defined(VERSION_US)
+#else
         gLearnedGiftedMiracleText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText142ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedGravityRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedGravityRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText143ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedFireRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedFireRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText144ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedAquaSplashText,
-#elif defined(VERSION_US)
+#else
         gLearnedAquaSplashText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText145ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedBlizzardRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedBlizzardRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText146ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedStopRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedStopRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText147ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedShockImpactText,
-#elif defined(VERSION_US)
+#else
         gLearnedShockImpactText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText148ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedHomingBlizzaraText,
-#elif defined(VERSION_US)
+#else
         gLearnedHomingBlizzaraText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText149ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedQuakeText,
-#elif defined(VERSION_US)
+#else
         gLearnedQuakeText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText150ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedBlazingDonaldText,
-#elif defined(VERSION_US)
+#else
         gLearnedBlazingDonaldText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText151ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedHomingFiraText,
-#elif defined(VERSION_US)
+#else
         gLearnedHomingFiraText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText152ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedTeleportText,
-#elif defined(VERSION_US)
+#else
         gLearnedTeleportText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText153ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedTornadoText,
-#elif defined(VERSION_US)
+#else
         gLearnedTornadoText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText154ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedCrossSlashPlusText,
-#elif defined(VERSION_US)
+#else
         gLearnedCrossSlashPlusText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText155ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedReflectRaidText,
-#elif defined(VERSION_US)
+#else
         gLearnedReflectRaidText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText156ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedFiragaBreakText,
-#elif defined(VERSION_US)
+#else
         gLearnedFiragaBreakText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText157ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedWarpText,
-#elif defined(VERSION_US)
+#else
         gLearnedWarpText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText158ByLanguage,
-#elif defined(VERSION_JP)
-        gLearnedJudgmentText,
-#elif defined(VERSION_US)
+#else
         gLearnedJudgmentText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText159ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedElixirText,
-#elif defined(VERSION_US)
+#else
         gObtainedElixirText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText160ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedSpellbinderText,
-#elif defined(VERSION_US)
+#else
         gObtainedSpellbinderText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText161ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedGenieText,
-#elif defined(VERSION_US)
+#else
         gObtainedGenieText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText162ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedCloudText,
-#elif defined(VERSION_US)
+#else
         gObtainedCloudText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText163ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedOathkeeperText,
-#elif defined(VERSION_US)
+#else
         gObtainedOathkeeperText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText164ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedOblivionText,
-#elif defined(VERSION_US)
+#else
         gObtainedOblivionText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText165ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedBambiText,
-#elif defined(VERSION_US)
+#else
         gObtainedBambiText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText166ByLanguage,
-#elif defined(VERSION_JP)
-        gEventSaveConfirmText,
-#elif defined(VERSION_US)
+#else
         gEventSaveConfirmText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText167ByLanguage,
-#elif defined(VERSION_JP)
-        gMapStairTutorialText,
-#elif defined(VERSION_US)
+#else
         gMapStairTutorialText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText168ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedKeyOfBeginningsText,
-#elif defined(VERSION_US)
+#else
         gObtainedKeyOfBeginningsText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText169ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedKeyOfGuidanceText,
-#elif defined(VERSION_US)
+#else
         gObtainedKeyOfGuidanceText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText170ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedKeyToTruthText,
-#elif defined(VERSION_US)
+#else
         gObtainedKeyToTruthText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText171ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedKeyToRewardsText,
-#elif defined(VERSION_US)
+#else
         gObtainedKeyToRewardsText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText172ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedTinkerBellText,
-#elif defined(VERSION_US)
+#else
         gObtainedTinkerBellText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText173ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedWorldCardText,
-#elif defined(VERSION_US)
+#else
         gObtainedWorldCardText,
 #endif
         0,
@@ -2683,50 +2295,40 @@ CardMessageDef gCardMessageDefs[] = {
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText175ByLanguage,
-#elif defined(VERSION_JP)
-        gObtainedSimbaText,
-#elif defined(VERSION_US)
+#else
         gObtainedSimbaText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText176ByLanguage,
-#elif defined(VERSION_JP)
-        gSaveDataLostText,
-#elif defined(VERSION_US)
+#else
         gSaveDataLostText,
 #endif
         0,
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText177ByLanguage,
-#elif defined(VERSION_JP)
-        gRikuDeckTutorialText,
-#elif defined(VERSION_US)
+#else
         gRikuDeckTutorialText,
 #endif
-#if defined(VERSION_EU)
-        CARD_MSG_FLAG_ALT_HIGHLIGHT,
-#elif defined(VERSION_JP)
+#ifdef VERSION_JP
         0,
-#elif defined(VERSION_US)
+#else
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
 #endif
     },
     {
         62, 3, 0, 3,
-#if defined(VERSION_EU)
+#ifdef VERSION_EU
         &gCardMessageText178ByLanguage,
-#elif defined(VERSION_JP)
-        gRikuBattleTutorialText,
-#elif defined(VERSION_US)
+#else
         gRikuBattleTutorialText,
 #endif
         0,
@@ -2734,9 +2336,7 @@ CardMessageDef gCardMessageDefs[] = {
 #ifndef VERSION_EU
     {
         62, 3, 0, 3,
-#if defined(VERSION_JP)
-        gQuickSaveCompleteText,
-#elif defined(VERSION_US)
+#ifndef VERSION_EU
         gQuickSaveCompleteText,
 #endif
         0,

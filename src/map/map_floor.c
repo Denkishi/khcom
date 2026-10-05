@@ -86,35 +86,7 @@ void Task_MapFloor_3(MapFloorWork* work) {
 }
 
 const MapNameText* gFloorNames[13] = {
-#if defined(VERSION_US)
-    gFloorName1,
-    gFloorName2,
-    gFloorName3,
-    gFloorName4,
-    gFloorName5,
-    gFloorName6,
-    gFloorName7,
-    gFloorName8,
-    gFloorName9,
-    gFloorName10,
-    gFloorName11,
-    gFloorName12,
-    gFloorName13,
-#elif defined(VERSION_JP)
-    gFloorName1,
-    gFloorName2,
-    gFloorName3,
-    gFloorName4,
-    gFloorName5,
-    gFloorName6,
-    gFloorName7,
-    gFloorName8,
-    gFloorName9,
-    gFloorName10,
-    gFloorName11,
-    gFloorName12,
-    gFloorName13,
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     &gFloorName1ByLanguage,
     &gFloorName2ByLanguage,
     &gFloorName3ByLanguage,
@@ -128,37 +100,25 @@ const MapNameText* gFloorNames[13] = {
     &gFloorName11ByLanguage,
     &gFloorName12ByLanguage,
     &gFloorName13ByLanguage,
+#else
+    gFloorName1,
+    gFloorName2,
+    gFloorName3,
+    gFloorName4,
+    gFloorName5,
+    gFloorName6,
+    gFloorName7,
+    gFloorName8,
+    gFloorName9,
+    gFloorName10,
+    gFloorName11,
+    gFloorName12,
+    gFloorName13,
 #endif
 };
 
 const MapNameText* gBasementFloorNames[12] = {
-#if defined(VERSION_US)
-    gBasementFloorName12,
-    gBasementFloorName11,
-    gBasementFloorName10,
-    gBasementFloorName9,
-    gBasementFloorName8,
-    gBasementFloorName7,
-    gBasementFloorName6,
-    gBasementFloorName5,
-    gBasementFloorName4,
-    gBasementFloorName3,
-    gBasementFloorName2,
-    gBasementFloorName1,
-#elif defined(VERSION_JP)
-    gBasementFloorName12,
-    gBasementFloorName11,
-    gBasementFloorName10,
-    gBasementFloorName9,
-    gBasementFloorName8,
-    gBasementFloorName7,
-    gBasementFloorName6,
-    gBasementFloorName5,
-    gBasementFloorName4,
-    gBasementFloorName3,
-    gBasementFloorName2,
-    gBasementFloorName1,
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     &gBasementFloorName12ByLanguage,
     &gBasementFloorName11ByLanguage,
     &gBasementFloorName10ByLanguage,
@@ -171,6 +131,19 @@ const MapNameText* gBasementFloorNames[12] = {
     &gBasementFloorName3ByLanguage,
     &gBasementFloorName2ByLanguage,
     &gBasementFloorName1ByLanguage,
+#else
+    gBasementFloorName12,
+    gBasementFloorName11,
+    gBasementFloorName10,
+    gBasementFloorName9,
+    gBasementFloorName8,
+    gBasementFloorName7,
+    gBasementFloorName6,
+    gBasementFloorName5,
+    gBasementFloorName4,
+    gBasementFloorName3,
+    gBasementFloorName2,
+    gBasementFloorName1,
 #endif
 };
 

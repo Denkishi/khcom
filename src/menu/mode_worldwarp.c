@@ -93,37 +93,7 @@ static WarpIcon sWarpIcons[13] = {
 };
 
 static WorldSelectDef sWorldSelectDefs[14] = {
-#if defined(VERSION_US)
-    {NULL, 0, NULL, 0, NULL, NULL},
-    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gWorldNameAgrabah},
-    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gWorldNameAtlantica},
-    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gWorldNameOlympusColiseum},
-    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gWorldNameWonderland},
-    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gWorldNameMonstro},
-    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gWorldNameHalloweenTown},
-    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gWorldNameNeverLand},
-    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gWorldNameHollowBastion},
-    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gWorldNameDestinyIslands},
-    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gWorldNameTraverseTown},
-    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gWorldNameTwilightTown},
-    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gWorldNameCastleOblivion},
-    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gWorldName100AcreWood},
-#elif defined(VERSION_JP)
-    {NULL, 0, NULL, 0, NULL, NULL},
-    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gWorldNameAgrabah},
-    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gWorldNameAtlantica},
-    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gWorldNameOlympusColiseum},
-    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gWorldNameWonderland},
-    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gWorldNameMonstro},
-    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gWorldNameHalloweenTown},
-    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gWorldNameNeverLand},
-    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gWorldNameHollowBastion},
-    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gWorldNameDestinyIslands},
-    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gWorldNameTraverseTown},
-    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gWorldNameTwilightTown},
-    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gWorldNameCastleOblivion},
-    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gWorldName100AcreWood},
-#elif defined(VERSION_EU)
+#ifdef VERSION_EU
     {NULL, 0, NULL, 0, NULL, NULL},
     {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, &gWorldNameAgrabahByLanguage},
     {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, &gWorldNameAtlanticaByLanguage},
@@ -138,6 +108,21 @@ static WorldSelectDef sWorldSelectDefs[14] = {
     {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, &gWorldNameTwilightTownByLanguage},
     {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, &gWorldNameCastleOblivionByLanguage},
     {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, &gWorldName100AcreWoodByLanguage},
+#else
+    {NULL, 0, NULL, 0, NULL, NULL},
+    {gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gWorldNameAgrabah},
+    {gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gWorldNameAtlantica},
+    {gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gWorldNameOlympusColiseum},
+    {gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gWorldNameWonderland},
+    {gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gWorldNameMonstro},
+    {gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gWorldNameHalloweenTown},
+    {gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gWorldNameNeverLand},
+    {gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gWorldNameHollowBastion},
+    {gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gWorldNameDestinyIslands},
+    {gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gWorldNameTraverseTown},
+    {gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gWorldNameTwilightTown},
+    {gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gWorldNameCastleOblivion},
+    {gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gWorldName100AcreWood},
 #endif
 };
 

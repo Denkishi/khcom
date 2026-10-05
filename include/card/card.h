@@ -1180,7 +1180,7 @@ typedef struct BossPrizeWork {
     s16 x2;
     s16 y2;
     s16 scale;
-    s16 unk_E4;
+    s16 moveAngle;
     u8 rotation;
     u8 unk_E7;
     u8 flipAngleY;

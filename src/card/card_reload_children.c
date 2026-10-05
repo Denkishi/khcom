@@ -550,7 +550,7 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->rotation = 24;
     work->vz = -(GetRandom() % 129 + 0x300);
     work->speed = GetRandom() % 129 + 0x80;
-    work->unk_E4 = GetRandom() % 256;
+    work->moveAngle = GetRandom() % 256;
     work->scaleX = 0x80;
     work->scaleY = 0x80;
     work->scale = 0x80;

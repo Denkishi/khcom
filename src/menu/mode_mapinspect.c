@@ -1198,47 +1198,23 @@ void mode_mapinspect_0() {
     sMapInspectDescText = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(sMapInspectDescText, 0x5A);
 
-#ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gDeleteCardConfirmTextByLanguage));
-#else
-    length = GetTextLength(gDeleteCardConfirmText);
-#endif
+    length = GetTextLength(LOCALIZED_STRING(gDeleteCardConfirmText));
     sMapInspectConfirmTextLength = length;
     sMapInspectConfirmText = EwramAlloc(sMapInspectConfirmTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectConfirmText, sMapInspectConfirmTextLength);
-#ifdef VERSION_EU
-    sMapInspectConfirmTextCount = LoadTextSlots(GetLocalizedString(&gDeleteCardConfirmTextByLanguage), sMapInspectConfirmText);
-#else
-    sMapInspectConfirmTextCount = LoadTextSlots(gDeleteCardConfirmText, sMapInspectConfirmText);
-#endif
+    sMapInspectConfirmTextCount = LoadTextSlots(LOCALIZED_STRING(gDeleteCardConfirmText), sMapInspectConfirmText);
 
-#ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gYesChoiceTextByLanguage));
-#else
-    length = GetTextLength(gYesChoiceText);
-#endif
+    length = GetTextLength(LOCALIZED_STRING(gYesChoiceText));
     sMapInspectYesTextLength = length;
     sMapInspectYesText = EwramAlloc(sMapInspectYesTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectYesText, sMapInspectYesTextLength);
-#ifdef VERSION_EU
-    sMapInspectYesTextCount = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), sMapInspectYesText);
-#else
-    sMapInspectYesTextCount = LoadTextSlots(gYesChoiceText, sMapInspectYesText);
-#endif
+    sMapInspectYesTextCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), sMapInspectYesText);
 
-#ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gNoChoiceTextByLanguage));
-#else
-    length = GetTextLength(gNoChoiceText);
-#endif
+    length = GetTextLength(LOCALIZED_STRING(gNoChoiceText));
     sMapInspectNoTextLength = length;
     sMapInspectNoText = EwramAlloc(sMapInspectNoTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoText, sMapInspectNoTextLength);
-#ifdef VERSION_EU
-    sMapInspectNoTextCount = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), sMapInspectNoText);
-#else
-    sMapInspectNoTextCount = LoadTextSlots(gNoChoiceText, sMapInspectNoText);
-#endif
+    sMapInspectNoTextCount = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), sMapInspectNoText);
 
 #ifdef VERSION_JP
     sMapInspectNoticeTextLength[0] = GetTextLength(gDeckErrorAnyMoreText);

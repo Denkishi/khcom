@@ -22,6 +22,7 @@
 #include "types.h"
 #include "card_lvup_msg.h"
 #include "sprite_palettes.h"
+#include "text_types.h"
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";
@@ -43,29 +44,13 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
     work->active = a->done;
 
     if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
-#ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgHpTextByLanguage), work->textSlots);
-#else
-        work->textSlotCount = LoadTextSlots(gLvupMsgHpText, work->textSlots);
-#endif
+        work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gLvupMsgHpText), work->textSlots);
     } else if (args.flags & STAT_INCREASE_FLAG_DP) {
-#ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgDpTextByLanguage), work->textSlots);
-#else
-        work->textSlotCount = LoadTextSlots(gLvupMsgDpText, work->textSlots);
-#endif
+        work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gLvupMsgDpText), work->textSlots);
     } else if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-#ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgCpTextByLanguage), work->textSlots);
-#else
-        work->textSlotCount = LoadTextSlots(gLvupMsgCpText, work->textSlots);
-#endif
+        work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gLvupMsgCpText), work->textSlots);
     } else {
-#ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgApTextByLanguage), work->textSlots);
-#else
-        work->textSlotCount = LoadTextSlots(gLvupMsgApText, work->textSlots);
-#endif
+        work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gLvupMsgApText), work->textSlots);
     }
 
     work->textSlotCount2 = LoadTwoDigitTextSlots(work->amount, work->textSlots2);

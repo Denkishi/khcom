@@ -236,13 +236,8 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
             work->choice = 1;
             work->x = 0x5800;
             work->cursorY = gMsgwaitYesnoCursorY[work->choice] - 0x500;
-#ifdef VERSION_EU
-            work->textSlotCount = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots);
-            work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots2);
-#else
-            work->textSlotCount = LoadTextSlots(gYesChoiceText, work->textSlots);
-            work->textSlotCount2 = LoadTextSlots(gNoChoiceText, work->textSlots2);
-#endif
+            work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
+            work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
             work->textPalette = LoadTextPalette(1);
             work->choiceVisible = 1;
             work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
@@ -629,13 +624,8 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
     work->choice = 1;
     work->x = 0x8500;
     work->cursorY = 0x5000;
-#ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots2);
-#else
-    work->textSlotCount = LoadTextSlots(gYesChoiceText, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gNoChoiceText, work->textSlots2);
-#endif
+    work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
     work->textPalette = LoadTextPalette(1);
     work->choiceVisible = 1;
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);

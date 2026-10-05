@@ -516,11 +516,7 @@ void mode_sio_btl_connect_0(s32 arg) {
     sSioBtlConnectWork->state = 0;
     sSioBtlConnectWork->textSlotCount = 0;
     InitTextSlots(sSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
-#ifdef VERSION_EU
-    sSioBtlConnectWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gSioBtlConnectTextByLanguage), sSioBtlConnectWork->textSlots);
-#else
-    sSioBtlConnectWork->textSlotCount = LoadTextSlots(gSioBtlConnectText, sSioBtlConnectWork->textSlots);
-#endif
+    sSioBtlConnectWork->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gSioBtlConnectText), sSioBtlConnectWork->textSlots);
     sSioBtlConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 
 #ifdef VERSION_EU
@@ -1264,11 +1260,7 @@ void SioBtlOptionHandleMenu() {
 
             sSioBtlOptionWork->menuOpen = 0;
             sSioBtlOptionWork->messageVisible = 1;
-#ifdef VERSION_EU
-            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
-#else
-            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlWaitingText, sSioBtlOptionWork->textSlots4);
-#endif
+            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlWaitingText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
             sSioBtlOptionWork->x = 68;
 #else
@@ -1575,11 +1567,7 @@ void SioBtlOptionWaitReady() {
 
     if (sSioBtlOptionWork->player1Ready == 1 && sSioBtlOptionWork->player2Ready == 1) {
         sSioBtlOptionWork->timer = 0;
-#ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlReadyTextByLanguage), sSioBtlOptionWork->textSlots4);
-#else
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlReadyText, sSioBtlOptionWork->textSlots4);
-#endif
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlReadyText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
         sSioBtlOptionWork->x = 61;
 #else
@@ -1608,11 +1596,7 @@ void SioBtlOptionConfirm() {
     if (gSioCommandRecv[1][0] == 0xA926 || gSioCommandRecv[1][1] == 0xA926) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
-#ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlSendingDeckTextByLanguage), sSioBtlOptionWork->textSlots4);
-#else
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlSendingDeckText, sSioBtlOptionWork->textSlots4);
-#endif
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gSioBtlSendingDeckText), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
         sSioBtlOptionWork->x = 74;
 #else
@@ -3850,11 +3834,7 @@ void mode_sioError_0(s32 arg) {
     SetBgScroll(0, 0xFFE9, 0xFFD0);
 #endif
     InitTextSlots(sSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
-#ifdef VERSION_EU
-    sSioErrorWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gSioErrorTextByLanguage), sSioErrorWork->textSlots);
-#else
-    sSioErrorWork->textSlotCount = LoadTextSlots(gSioErrorText, sSioErrorWork->textSlots);
-#endif
+    sSioErrorWork->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gSioErrorText), sSioErrorWork->textSlots);
     sSioErrorWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 }
 

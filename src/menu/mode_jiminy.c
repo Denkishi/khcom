@@ -1743,11 +1743,7 @@ void mode_jiminy_1() {
 #ifdef VERSION_JP
         sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gJiminyChooseEntryText);
 #else
-#ifdef VERSION_EU
-        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gJiminyChooseEntryTextByLanguage));
-#else
-        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gJiminyChooseEntryText);
-#endif
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, LOCALIZED_STRING(gJiminyChooseEntryText));
 #endif
         DisableBg(3);
         DisableBg(0);

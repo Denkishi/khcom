@@ -3938,11 +3938,7 @@ void Mode_MenuNew_0() {
     InitTextSlots(sNewGameSlotMenuWork->textSlots, 36);
     InitTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
     sNewGameSlotMenuWork->palette9 = LoadObjPalette(gFileMenuCursorPalette, 32);
-#ifdef VERSION_EU
-    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gNewGameSlotMenuTextByLanguage), sNewGameSlotMenuWork->textSlots2);
-#else
-    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gNewGameSlotMenuText, sNewGameSlotMenuWork->textSlots2);
-#endif
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNewGameSlotMenuText), sNewGameSlotMenuWork->textSlots2);
 
     if (sNewGameSlotMenuWork->isRiku != 0) {
         v = NewGameSlotMenuShowSummary(2);
@@ -6303,15 +6299,9 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         InitTextSlots(p2, 6);
         p3 = work->textSlots4;
         InitTextSlots(p3, 9);
-#ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapSaveConfirmTextByLanguage), p1);
-        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), p2);
-        work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), p3);
-#else
-        work->textSlotCount2 = LoadTextSlots(gMapSaveConfirmText, p1);
-        work->textSlotCount3 = LoadTextSlots(gYesChoiceText, p2);
-        work->textSlotCount4 = LoadTextSlots(gNoChoiceText, p3);
-#endif
+        work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveConfirmText), p1);
+        work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), p2);
+        work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), p3);
         MapSaveSetPanelPalettesExcluded(work, 1);
         work->dialogVisible = 1;
         work->confirmCursor = 2;
@@ -6365,11 +6355,7 @@ s32 MapSaveInput(MapSaveWork* work) {
             }
         }
 
-#ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapSaveCompleteTextByLanguage), work->textSlots2);
-#else
-        work->textSlotCount2 = LoadTextSlots(gMapSaveCompleteText, work->textSlots2);
-#endif
+        work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveCompleteText), work->textSlots2);
         work->textSlotCount3 = 0;
         work->textSlotCount4 = 0;
         work->confirmCursor = 0;

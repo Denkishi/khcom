@@ -15,8 +15,10 @@ typedef struct LocalizedText {
 
 #ifdef VERSION_EU
 #define LOCALIZED(name) (&name##ByLanguage)
+#define LOCALIZED_STRING(name) GetLocalizedString(&name##ByLanguage)
 #else
 #define LOCALIZED(name) (name)
+#define LOCALIZED_STRING(name) (name)
 #endif
 
 typedef struct TextSlot {

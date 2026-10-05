@@ -25,6 +25,7 @@
 #include "card_deckmenu2.h"
 #include "ui_text.h"
 #include "sprite_palettes.h"
+#include "text_types.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount = 0;
@@ -34,11 +35,7 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 80);
     InitTextSlots(work->textSlots3, 80);
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
-#ifdef VERSION_EU
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckEquipTextByLanguage), work->textSlots2);
-#else
-    work->textSlotCount2 = LoadTextSlots(gDeckEquipText, work->textSlots2);
-#endif
+    work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gDeckEquipText), work->textSlots2);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
@@ -243,15 +240,9 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots, 0x50);
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
-#ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gDeleteCardConfirmTextByLanguage), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots3);
-#else
-    work->textSlotCount = LoadTextSlots(gDeleteCardConfirmText, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gYesChoiceText, work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(gNoChoiceText, work->textSlots3);
-#endif
+    work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gDeleteCardConfirmText), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
@@ -281,15 +272,9 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots, 0x50);
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
-#ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gDeckClearConfirmTextByLanguage), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots3);
-#else
-    work->textSlotCount = LoadTextSlots(gDeckClearConfirmText, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gYesChoiceText, work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(gNoChoiceText, work->textSlots3);
-#endif
+    work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gDeckClearConfirmText), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);

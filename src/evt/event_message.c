@@ -54,6 +54,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "default_bg_map.h"
+#include "text_types.h"
 
 static void msgwin_0(MsgWinWork* work, u8* arg);
 static u8 msgwin_1(MsgWinWork* work, void* a);
@@ -6996,13 +6997,8 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
     InitTextSlots(work->textSlots, 10);
     InitTextSlots(work->textSlots2, 10);
     work->palette4 = LoadTextPalette(1);
-#ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots2);
-#else
-    work->textSlotCount = LoadTextSlots(gYesChoiceText, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gNoChoiceText, work->textSlots2);
-#endif
+    work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
     work->x = 0x5800;
     work->cursor = 1;
     work->y = gMsgwaitYesnoCursorY[1];

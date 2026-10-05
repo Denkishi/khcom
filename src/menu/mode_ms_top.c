@@ -87,7 +87,7 @@ static const u16 sMsTopIntroMessages[3] = {
 #ifdef VERSION_EU
 static void* sMsTopBgMapsByLanguage[5] = {
     gMsTopBgMap,
-    gUnk_09A382DC,
+    gMsTopBgFrenchMap,
     gMsTopBgGermanMap,
     gMsTopBgItalianMap,
     gMsTopBgSpanishMap,

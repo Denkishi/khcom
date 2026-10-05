@@ -1172,7 +1172,7 @@ void mode_ms_charge_0() {
 #ifdef VERSION_EU
         sMsChargeBgMapsByLanguage[gLanguage]
 #else
-        gUnk_09A3B25C
+        gMsChargeBgMap
 #endif
     , 0x500);
 

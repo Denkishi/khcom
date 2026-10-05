@@ -1380,7 +1380,7 @@ entries:
   eu:
     address: 0x09A8ADA0
     size: 1280
-- name: gUnk_09A382DC
+- name: gMoogleShopBgMap
   format: tilemap
   us:
     address: 0x09A382DC
@@ -1389,7 +1389,7 @@ entries:
     address: 0x099ECD64
     size: 1280
   eu:
-    address: 0x09A8B2A0
+    address: 0x09A8DAA0
     size: 1280
 - name: gMooglePackSelectionTopLeftMap
   format: tilemap
@@ -1479,7 +1479,7 @@ entries:
   eu:
     address: 0x09A90520
     size: 1280
-- name: gUnk_09A3B25C
+- name: gMsChargeBgMap
   format: tilemap
   us:
     address: 0x09A3B25C
@@ -1488,7 +1488,7 @@ entries:
     address: 0x099EFCE4
     size: 1280
   eu:
-    address: 0x09A90A20
+    address: 0x09A94E20
     size: 1280
 - name: gMsChargeTabMap
   format: tilemap
@@ -1748,6 +1748,11 @@ entries:
   eu:
     address: 0x09A9B8CC
     size: 116
+- name: gMsTopBgFrenchMap
+  format: tilemap
+  eu:
+    address: 0x09A8B2A0
+    size: 1280
 - name: gMsTopBgSpanishMap
   format: tilemap
   eu:
@@ -1783,10 +1788,10 @@ entries:
   eu:
     address: 0x09A8D5A0
     size: 1280
-- name: gMoogleShopBgMap
+- name: gMoogleShopBgFrenchMap
   format: tilemap
   eu:
-    address: 0x09A8DAA0
+    address: 0x09A90A20
     size: 1280
 - name: gMoogleShopBgItalianMap
   format: tilemap
@@ -1828,11 +1833,6 @@ entries:
   eu:
     address: 0x09A94620
     size: 2048
-- name: gMsChargeBgMap
-  format: tilemap
-  eu:
-    address: 0x09A94E20
-    size: 1280
 - name: gMsChargeBgFrenchMap
   format: tilemap
   eu:

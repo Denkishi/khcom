@@ -44,7 +44,7 @@
 #ifdef VERSION_EU
 static void* sMoogleShopBgMapsByLanguage[5] = {
     gMoogleShopBgMap,
-    gUnk_09A3B25C,
+    gMoogleShopBgFrenchMap,
     gMoogleShopBgGermanMap,
     gMoogleShopBgItalianMap,
     gMoogleShopBgSpanishMap,
@@ -1152,7 +1152,7 @@ void mode_ms_shop_0() {
 #ifdef VERSION_EU
     LoadBgMap(0, sMoogleShopBgMapsByLanguage[gLanguage], size);
 #else
-    LoadBgMap(0, gUnk_09A382DC, size);
+    LoadBgMap(0, gMoogleShopBgMap, size);
 #endif
     DrawMoogleShopCategoryLabels(sMoogleShopRowCursor);
 
@@ -1212,7 +1212,7 @@ void mode_ms_shop_1() {
 #ifdef VERSION_EU
             LoadBgMap(0, sMoogleShopBgMapsByLanguage[gLanguage], 0x500);
 #else
-            LoadBgMap(0, gUnk_09A382DC, 0x500);
+            LoadBgMap(0, gMoogleShopBgMap, 0x500);
 #endif
 
             if (sMoogleShopRowCursor > 0) {

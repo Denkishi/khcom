@@ -115,13 +115,13 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     gBosJfMajinMapBlockTable[1] = gUnk_08125E24;
     gBosJfMajinMapBlockTable[2] = gUnk_08125E24;
     gBosJfMajinMapBlockTable[3] = gBosJfMajinMapBuffer;
-    RequestDma3Copy(gUnk_096CAC64, gBosJfMajinMapBuffer, 0x800);
+    RequestDma3Copy(gBosJfMajinFrame8Map, gBosJfMajinMapBuffer, 0x800);
     gBosJfMajinMapBlocks = gBosJfMajinMapBlockTable;
-    LoadBgPalette(1, gUnk_096FB584, 32);
-    LoadBgTiles(1, gUnk_09665C04, 0x2700);
+    LoadBgPalette(1, gBosJfMajinPalette, 32);
+    LoadBgTiles(1, gBosJfMajinFrame8Tiles, 0x2700);
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
-    work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
+    work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     work->spriteVisible = 1;
     work->unk_30 = 0x2A200;
@@ -129,7 +129,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     work->y = 0;
     work->idleStep = 0;
     x = 0x308;
-    AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
+    AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     y.bounds = gBtlWork;
@@ -209,14 +209,14 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
                 LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
                 gfx = work->palette2;
             } else {
-                LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
+                LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
                 gfx = work->palette;
             }
         } else {
             gfx = work->palette;
         }
     } else {
-        LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
+        LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
         gfx = work->palette;
     }
 
@@ -1512,14 +1512,14 @@ void task_bos_jf_rock_0(JfRockWork* work, JfWork* arg) {
     work->riseSteps = 120;
     work->throwTimer = 0;
     work->state = 0;
-    work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
-    AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
+    work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
+    AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim, gBosJfRockAnims[work->animIndex], 0);
     work->gfx = AnimGetGfx(&work->anim);
-    work->tiles2 = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->palette2 = LoadObjPalette(gUnk_096FB5A4, 0x60);
-    work->gfx2 = gUnk_09EF3A48[gBosJfRockGfx2Frames[work->gfx2Index]];
+    work->tiles2 = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->palette2 = LoadObjPalette(gBosJfObjPalette, 0x60);
+    work->gfx2 = gBosJfObjFrames[gBosJfRockGfx2Frames[work->gfx2Index]];
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosJfShadow, &work->body);
 }
@@ -1545,7 +1545,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
+            LoadObjPaletteBank(work->palette->index + 2, gBosJfRockPalettes + (work->paletteFrame << 4));
         }
 
         if (work->riseSteps > 0) {
@@ -1586,7 +1586,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 }
             }
 
-            work->gfx2 = gUnk_09EF3A48[gBosJfRockGfx2Frames[work->gfx2Index]];
+            work->gfx2 = gBosJfObjFrames[gBosJfRockGfx2Frames[work->gfx2Index]];
         } else {
             work->targetX = (b = gBtlWork->actor)->x;
             work->targetY = b->y;
@@ -1617,7 +1617,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
+            LoadObjPaletteBank(work->palette->index + 2, gBosJfRockPalettes + (work->paletteFrame << 4));
         }
 
         work->throwTimer++;
@@ -1635,7 +1635,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->z2 = jf->body.z - 0x1000;
             }
 
-            work->gfx2 = gUnk_09EF3A48[15];
+            work->gfx2 = gBosJfObjFrames[15];
             m4aSongNumStart(SONG_BTL_JF_BALLTHR);
             work->shadowVisible = 1;
             work->state++;
@@ -1661,7 +1661,7 @@ u8 task_bos_jf_rock_1(JfRockWork* work) {
                 work->paletteFrame = 0;
             }
 
-            LoadObjPaletteBank(work->palette->index + 2, gUnk_096FB604 + (work->paletteFrame << 4));
+            LoadObjPaletteBank(work->palette->index + 2, gBosJfRockPalettes + (work->paletteFrame << 4));
         }
 
         work->body.x += work->vx;
@@ -1828,21 +1828,21 @@ void task_bos_jf_borderline_0(JfBorderlineWork* work, JfWork* arg) {
     work->unk_0B2 = 0;
     work->unk_0B4 = 0;
     work->wide = 0;
-    work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
-    AnimInit(&work->anim, gUnk_09EF3B40, gUnk_09EF3A48);
+    work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
+    AnimInit(&work->anim, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim, 27, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
-    AnimInit(&work->anim2, gUnk_09EF3B40, gUnk_09EF3A48);
+    AnimInit(&work->anim2, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim2, 8, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    AnimInit(&work->anim3, gUnk_09EF3B40, gUnk_09EF3A48);
+    AnimInit(&work->anim3, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim3, 7, ANIM_FLAG_LOOP);
     work->gfx3 = AnimGetGfx(&work->anim3);
-    AnimInit(&work->anim4, gUnk_09EF3B40, gUnk_09EF3A48);
+    AnimInit(&work->anim4, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim4, 28, ANIM_FLAG_LOOP);
     work->gfx4 = AnimGetGfx(&work->anim4);
-    AnimInit(&work->anim5, gUnk_09EF3B40, gUnk_09EF3A48);
+    AnimInit(&work->anim5, gBosJfObjAnims, gBosJfObjFrames);
     AnimStart(&work->anim5, 6, ANIM_FLAG_LOOP);
     work->gfx5 = AnimGetGfx(&work->anim5);
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
@@ -2019,107 +2019,107 @@ const u16 gBosJfPillarPatterns[16][3] = {
 };
 
 void* gBosJfMajinFrameMaps[48] = {
-    gUnk_096D5C64,
-    gUnk_096D6464,
-    gUnk_096D6C64,
-    gUnk_096D7464,
-    gUnk_096D7C64,
-    gUnk_096D8464,
-    gUnk_096D8C64,
-    gUnk_096D9464,
-    gUnk_096CAC64,
-    gUnk_096CB464,
-    gUnk_096CBC64,
-    gUnk_096CC464,
-    gUnk_096CCC64,
-    gUnk_096CD464,
-    gUnk_096D0C64,
-    gUnk_096D1464,
-    gUnk_096D1C64,
-    gUnk_096D2464,
-    gUnk_096D2C64,
-    gUnk_096D9C64,
-    gUnk_096DA464,
-    gUnk_096DAC64,
-    gUnk_096DB464,
-    gUnk_096DBC64,
-    gUnk_096DC464,
-    gUnk_096DFC64,
-    gUnk_096E0464,
-    gUnk_096E0C64,
-    gUnk_096CDC64,
-    gUnk_096CE464,
-    gUnk_096CEC64,
-    gUnk_096CF464,
-    gUnk_096CFC64,
-    gUnk_096D0464,
-    gUnk_096D3464,
-    gUnk_096D3C64,
-    gUnk_096D4464,
-    gUnk_096D4C64,
-    gUnk_096D5464,
-    gUnk_096DCC64,
-    gUnk_096DD464,
-    gUnk_096DDC64,
-    gUnk_096DE464,
-    gUnk_096DEC64,
-    gUnk_096DF464,
-    gUnk_096E1464,
-    gUnk_096E1C64,
-    gUnk_096E2464,
+    gBosJfMajinFrame0Map,
+    gBosJfMajinFrame1Map,
+    gBosJfMajinFrame2Map,
+    gBosJfMajinFrame3Map,
+    gBosJfMajinFrame4Map,
+    gBosJfMajinFrame5Map,
+    gBosJfMajinFrame6Map,
+    gBosJfMajinFrame7Map,
+    gBosJfMajinFrame8Map,
+    gBosJfMajinFrame9Map,
+    gBosJfMajinFrame10Map,
+    gBosJfMajinFrame11Map,
+    gBosJfMajinFrame12Map,
+    gBosJfMajinFrame13Map,
+    gBosJfMajinFrame14Map,
+    gBosJfMajinFrame15Map,
+    gBosJfMajinFrame16Map,
+    gBosJfMajinFrame17Map,
+    gBosJfMajinFrame18Map,
+    gBosJfMajinFrame19Map,
+    gBosJfMajinFrame20Map,
+    gBosJfMajinFrame21Map,
+    gBosJfMajinFrame22Map,
+    gBosJfMajinFrame23Map,
+    gBosJfMajinFrame24Map,
+    gBosJfMajinFrame25Map,
+    gBosJfMajinFrame26Map,
+    gBosJfMajinFrame27Map,
+    gBosJfMajinFrame28Map,
+    gBosJfMajinFrame29Map,
+    gBosJfMajinFrame30Map,
+    gBosJfMajinFrame31Map,
+    gBosJfMajinFrame32Map,
+    gBosJfMajinFrame33Map,
+    gBosJfMajinFrame34Map,
+    gBosJfMajinFrame35Map,
+    gBosJfMajinFrame36Map,
+    gBosJfMajinFrame37Map,
+    gBosJfMajinFrame38Map,
+    gBosJfMajinFrame39Map,
+    gBosJfMajinFrame40Map,
+    gBosJfMajinFrame41Map,
+    gBosJfMajinFrame42Map,
+    gBosJfMajinFrame43Map,
+    gBosJfMajinFrame44Map,
+    gBosJfMajinFrame45Map,
+    gBosJfMajinFrame46Map,
+    gBosJfMajinFrame47Map,
 };
 
 const u16* gUnk_09EF28CC = gUnk_08125E24;
 
 void* gBosJfMajinFrameTiles[48] = {
-    gUnk_09671DE4,
-    gUnk_09672CE4,
-    gUnk_09673964,
-    gUnk_096748A4,
-    gUnk_09675A24,
-    gUnk_09676984,
-    gUnk_09677604,
-    gUnk_096784C4,
-    gUnk_09665C04,
-    gUnk_09668304,
-    gUnk_09669164,
-    gUnk_09669F64,
-    gUnk_0966ADA4,
-    gUnk_0966BB64,
-    gUnk_0966C944,
-    gUnk_0966DAC4,
-    gUnk_0966EBA4,
-    gUnk_0966FAE4,
-    gUnk_09670C64,
-    gUnk_09679584,
-    gUnk_0967A764,
-    gUnk_0967B924,
-    gUnk_0967CA84,
-    gUnk_0967DC04,
-    gUnk_0967ED84,
-    gUnk_0967FF04,
-    gUnk_09680E24,
-    gUnk_09681C64,
-    gUnk_09665C04,
-    gUnk_09668304,
-    gUnk_09669164,
-    gUnk_09669F64,
-    gUnk_0966ADA4,
-    gUnk_0966BB64,
-    gUnk_0966C944,
-    gUnk_0966DAC4,
-    gUnk_0966EBA4,
-    gUnk_0966FAE4,
-    gUnk_09670C64,
-    gUnk_09679584,
-    gUnk_0967A764,
-    gUnk_0967B924,
-    gUnk_0967CA84,
-    gUnk_0967DC04,
-    gUnk_0967ED84,
-    gUnk_0967FF04,
-    gUnk_09680E24,
-    gUnk_09681C64,
+    gBosJfMajinFrame0Tiles,
+    gBosJfMajinFrame1Tiles,
+    gBosJfMajinFrame2Tiles,
+    gBosJfMajinFrame3Tiles,
+    gBosJfMajinFrame4Tiles,
+    gBosJfMajinFrame5Tiles,
+    gBosJfMajinFrame6Tiles,
+    gBosJfMajinFrame7Tiles,
+    gBosJfMajinFrame8Tiles,
+    gBosJfMajinFrame9Tiles,
+    gBosJfMajinFrame10Tiles,
+    gBosJfMajinFrame11Tiles,
+    gBosJfMajinFrame12Tiles,
+    gBosJfMajinFrame13Tiles,
+    gBosJfMajinFrame14Tiles,
+    gBosJfMajinFrame15Tiles,
+    gBosJfMajinFrame16Tiles,
+    gBosJfMajinFrame17Tiles,
+    gBosJfMajinFrame18Tiles,
+    gBosJfMajinFrame19Tiles,
+    gBosJfMajinFrame20Tiles,
+    gBosJfMajinFrame21Tiles,
+    gBosJfMajinFrame22Tiles,
+    gBosJfMajinFrame23Tiles,
+    gBosJfMajinFrame24Tiles,
+    gBosJfMajinFrame25Tiles,
+    gBosJfMajinFrame26Tiles,
+    gBosJfMajinFrame27Tiles,
+    gBosJfMajinFrame8Tiles,
+    gBosJfMajinFrame9Tiles,
+    gBosJfMajinFrame10Tiles,
+    gBosJfMajinFrame11Tiles,
+    gBosJfMajinFrame12Tiles,
+    gBosJfMajinFrame13Tiles,
+    gBosJfMajinFrame14Tiles,
+    gBosJfMajinFrame15Tiles,
+    gBosJfMajinFrame16Tiles,
+    gBosJfMajinFrame17Tiles,
+    gBosJfMajinFrame18Tiles,
+    gBosJfMajinFrame19Tiles,
+    gBosJfMajinFrame20Tiles,
+    gBosJfMajinFrame21Tiles,
+    gBosJfMajinFrame22Tiles,
+    gBosJfMajinFrame23Tiles,
+    gBosJfMajinFrame24Tiles,
+    gBosJfMajinFrame25Tiles,
+    gBosJfMajinFrame26Tiles,
+    gBosJfMajinFrame27Tiles,
 };
 
 void* gUnk_09EF2990 = NULL;

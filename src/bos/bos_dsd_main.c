@@ -63,21 +63,21 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     work->energy2Task = NULL;
     work->lastBreakDifference = gBtlWork->breakDifference;
     SetBgMapBlocks(1, gBosDsdFrameMaps, 2, 2);
-    work->tiles = LoadObjTiles(gUnk_096983E4, 0x12A0);
-    AnimInit(&work->anim, gUnk_09EF3C34, gUnk_09EF3C20);
+    work->tiles = LoadObjTiles(gBosDsdLimbTiles, 0x12A0);
+    AnimInit(&work->anim, gBosDsdLegAnims, gBosDsdLegFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     arg->body[0].y++;
     arg->body[0].y--;
-    work->tiles2 = LoadObjTiles(gUnk_096983E4, 0x12A0);
-    AnimInit(&work->anim2, gUnk_09EF3C4C, gUnk_09EF3C38);
+    work->tiles2 = LoadObjTiles(gBosDsdLimbTiles, 0x12A0);
+    AnimInit(&work->anim2, gBosDsdArmAnims, gBosDsdArmFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
     work->palette = LoadObjPalette(gUnk_096FB8C4, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    work->dsd->tiles = AllocObjTiles(0x800, gUnk_096A2F04);
+    work->dsd->tiles = AllocObjTiles(0x800, gBosDsdCircleTiles);
     work->dsd->palette = LoadObjPalette(gUnk_096FB8E4, 32);
-    work->dsd->tiles2 = LoadObjTiles(gUnk_096869A4, 0x740);
+    work->dsd->tiles2 = LoadObjTiles(gBosDsdItaTiles, 0x740);
     work->dsd->palette2 = LoadObjPalette(gUnk_096FB864, 32);
     work->dsd->palette3 = LoadObjPalette(gUnk_096FB884, 32);
     work->dsd->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
@@ -161,14 +161,14 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
     s16 y;
 
     if (gBtlWork->paused) {
-        LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
+        LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
         gfx = work->palette;
     } else if (d->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
             LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
             gfx = work->palette2;
         } else {
-            LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
             gfx = work->palette;
         }
     } else {
@@ -331,13 +331,13 @@ void BosDsdMainUpdateAttackStart(DsdMainWork* work) {
         switch (d->attackState) {
         case 4:
         case 5:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, gUnk_09699684);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x2C8, 8, gBosDsdFrame8Tiles);
             break;
         case 6:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x280, 8, gUnk_096A3F44);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x280, 8, gBosDsdFrame36Tiles);
             break;
         case 7:
-            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x200, 8, gUnk_096A8BA4);
+            CreateBgTileTransferTask(&work->tasks, 1, 0, 0x200, 8, gBosDsdFrame41Tiles);
             break;
         }
 
@@ -404,7 +404,7 @@ void BosDsdMainUpdateReturn(DsdMainWork* work) {
 
         break;
     case 2:
-        CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, gUnk_096874E4);
+        CreateBgTileTransferTask(&work->tasks, 1, 0, 0x120, 3, gBosDsdBgTiles);
         work->stepTimer = 0;
         work->dsd->stateStep++;
         break;
@@ -907,7 +907,7 @@ void BosDsdMainUpdateEnergy2Attack(DsdMainWork* work) {
         break;
     case 2:
         BosDsdMainLoopMapFrames(work);
-        LoadPalette(gUnk_096FB744, (void*)PLTT, 32);
+        LoadPalette(gBosDsdBgPalette, (void*)PLTT, 32);
         work->energy2Task = TaskCreate(&work->tasks, &gTaskDescBosDsdEnergy2, work->dsd);
         work->dsd->stateStep++;
         break;
@@ -1133,8 +1133,8 @@ void BosDsdMainChooseAttack(DsdMainWork* work) {
 }
 
 void task_bos_dsd_map_0() {
-    LoadBgTiles(0, gUnk_096874E4, 0x8000);
-    LoadBgPalette(0, gUnk_096FB744, 0x120);
+    LoadBgTiles(0, gBosDsdBgTiles, 0x8000);
+    LoadBgPalette(0, gBosDsdBgPalette, 0x120);
     SetBgMapBlocks(0, gBosDsdMapBlocks, 2, 2);
     gBtlWork->scale = 0x100;
     gBtlWork->zoomScale = 0x100;
@@ -1198,52 +1198,52 @@ const s16 gBosDsdFrameDurations[47] = {
 const s8 gBosDsdIdleBob[10] = { -1, 1, 1, 1, 1, -1, -1, -1, 0, 0 };
 
 const u16* gBosDsdFrameMaps[46][4] = {
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E3C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E4464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E4C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E5464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E5C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E5464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E4C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E4464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E7464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E6C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E6464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E6C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E7464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E7C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E8464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E8C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E9464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E9C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E9464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E8C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096E8464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EA464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EAC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EB464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EBC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EC464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096ECC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096ED464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EDC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EE464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EEC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EF464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EFC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EF464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EEC64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096EE464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F0464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F0C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F1464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F1C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F2464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F2C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F3464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F3C64, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F4464, gUnk_08125E24 },
-    { gUnk_08125E24, gUnk_08125E24, gUnk_096F4C64, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame0Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame1Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame2Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame3Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame4Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame3Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame2Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame1Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame8Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame9Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame10Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame9Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame8Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame13Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame14Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame15Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame16Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame17Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame16Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame15Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame14Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame21Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame22Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame23Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame24Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame25Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame26Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame27Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame28Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame29Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame30Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame31Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame32Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame31Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame30Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame29Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame36Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame37Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame38Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame39Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame40Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame41Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame42Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame43Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame44Map, gUnk_08125E24 },
+    { gUnk_08125E24, gUnk_08125E24, gBosDsdFrame45Map, gUnk_08125E24 },
 };
 
 const u16* gUnk_09EF2D84 = gUnk_08125E24;
@@ -1255,62 +1255,62 @@ const u16* gUnk_09EF2D8C = gUnk_08125E24;
 const u16* gUnk_09EF2D90 = gUnk_08125E24;
 
 void* gBosDsdFrameTiles[37] = {
-    gUnk_096874E4,
-    gUnk_0968F4E4,
-    gUnk_096918A4,
-    gUnk_09693C64,
-    gUnk_09696024,
-    gUnk_09693C64,
-    gUnk_096918A4,
-    gUnk_0968F4E4,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_0969EF04,
-    gUnk_0969FF04,
-    gUnk_096A0F04,
-    gUnk_096A1F04,
-    gUnk_096A0F04,
-    gUnk_0969FF04,
-    gUnk_0969EF04,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_09699684,
-    gUnk_0969EF04,
-    gUnk_0969FF04,
-    gUnk_096A0F04,
-    gUnk_096A1F04,
-    gUnk_096A0F04,
-    gUnk_0969FF04,
-    gUnk_0969EF04,
-    gUnk_096A3F44,
+    gBosDsdBgTiles,
+    gBosDsdFrame1Tiles,
+    gBosDsdFrame2Tiles,
+    gBosDsdFrame3Tiles,
+    gBosDsdFrame4Tiles,
+    gBosDsdFrame3Tiles,
+    gBosDsdFrame2Tiles,
+    gBosDsdFrame1Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame14Tiles,
+    gBosDsdFrame15Tiles,
+    gBosDsdFrame16Tiles,
+    gBosDsdFrame17Tiles,
+    gBosDsdFrame16Tiles,
+    gBosDsdFrame15Tiles,
+    gBosDsdFrame14Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame8Tiles,
+    gBosDsdFrame14Tiles,
+    gBosDsdFrame15Tiles,
+    gBosDsdFrame16Tiles,
+    gBosDsdFrame17Tiles,
+    gBosDsdFrame16Tiles,
+    gBosDsdFrame15Tiles,
+    gBosDsdFrame14Tiles,
+    gBosDsdFrame36Tiles,
 };
 
-void* gUnk_09EF2E28 = gUnk_096A3F44;
+void* gUnk_09EF2E28 = gBosDsdFrame36Tiles;
 
-void* gUnk_09EF2E2C = gUnk_096A3F44;
+void* gUnk_09EF2E2C = gBosDsdFrame36Tiles;
 
-void* gUnk_09EF2E30 = gUnk_096A3F44;
+void* gUnk_09EF2E30 = gBosDsdFrame36Tiles;
 
-void* gUnk_09EF2E34 = gUnk_096A3F44;
+void* gUnk_09EF2E34 = gBosDsdFrame36Tiles;
 
-void* gUnk_09EF2E38 = gUnk_096A8BA4;
+void* gUnk_09EF2E38 = gBosDsdFrame41Tiles;
 
-void* gUnk_09EF2E3C = gUnk_096A8BA4;
+void* gUnk_09EF2E3C = gBosDsdFrame41Tiles;
 
-void* gUnk_09EF2E40 = gUnk_096A8BA4;
+void* gUnk_09EF2E40 = gBosDsdFrame41Tiles;
 
-void* gUnk_09EF2E44 = gUnk_096A8BA4;
+void* gUnk_09EF2E44 = gBosDsdFrame41Tiles;
 
-void* gUnk_09EF2E48 = gUnk_096A8BA4;
+void* gUnk_09EF2E48 = gBosDsdFrame41Tiles;
 
 void* gUnk_09EF2E4C = NULL;
 
@@ -1324,9 +1324,9 @@ TaskDesc gTaskDescBosDsdMain = {
 };
 
 const u16* gBosDsdMapBlocks[4] = {
-    gBossMapBlock_096E2C64,
+    gBosDsdBgMap0,
     gUnk_08125E24,
-    gBossMapBlock_096E3464,
+    gBosDsdBgMap2,
     gUnk_08125E24,
 };
 

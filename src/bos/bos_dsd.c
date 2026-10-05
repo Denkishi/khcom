@@ -149,7 +149,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
         if ((s16)work->timer <= 0) {
             work->unk_34C = 0;
             work->flags &= ~DSD_FLAG_HURT;
-            LoadPaletteWithEffect(gUnk_096FB744, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
             ClearBtlObjActionFlags(b);
 
             if (b->hp > 0) {

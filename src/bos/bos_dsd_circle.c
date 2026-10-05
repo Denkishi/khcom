@@ -34,7 +34,7 @@ void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
     work->frame = 0;
     work->summonTimer = 0;
     work->endTimer = 0;
-    work->gfx = gUnk_09EF3C50[0];
+    work->gfx = gBosDsdCircleFrames[0];
 }
 
 u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
@@ -52,7 +52,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
     switch (d->stateStep) {
     case 1:
         work->frame = work->dsd->bgFrame - 21;
-        work->gfx = gUnk_09EF3C50[work->frame];
+        work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
@@ -86,13 +86,13 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
         break;
     case 5:
         work->frame = work->dsd->bgFrame - 21;
-        work->gfx = gUnk_09EF3C50[work->frame];
+        work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;
     case 6:
         work->frame = 0;
-        work->gfx = gUnk_09EF3C50[work->frame];
+        work->gfx = gBosDsdCircleFrames[work->frame];
         work->x = (gBosDsdCircleOffsetsX[work->frame] << 8) + 0xDC00;
         work->y = (gBosDsdCircleOffsetsY[work->frame] << 8) + 0x16800;
         break;

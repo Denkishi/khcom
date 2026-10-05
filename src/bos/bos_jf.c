@@ -67,14 +67,14 @@ void task_bos_jf_0(JfWork* work, s32 a) {
     gBosJfLeftPillarLevel = 7;
     gBosJfMiddlePillarLevel = 0;
     gBosJfRightPillarLevel = 0;
-    gJfMapArg.tiles = gUnk_0965DC04;
+    gJfMapArg.tiles = gBosJfBgTiles;
     gJfMapArg.tilesSize = 0x8000;
-    gJfMapArg.palette = gUnk_096FB404;
+    gJfMapArg.palette = gBosJfBgPalette;
     gJfMapArg.paletteSize = 128;
-    gJfMapArg.maps[0] = gUnk_096C4C64;
-    gJfMapArg.maps[1] = gUnk_096C5464;
+    gJfMapArg.maps[0] = gBosJfBgMap0;
+    gJfMapArg.maps[1] = gBosJfBgMap1;
     gJfMapArg.maps[2] = gBosJfMapBuffer;
-    gJfMapArg.maps[3] = gUnk_096C6464;
+    gJfMapArg.maps[3] = gBosJfBgMap3;
     TaskPoolInit(&work->tasks, 4);
 
     if (work->flags & JF_FLAG_IN_EVENT) {
@@ -191,7 +191,7 @@ u8 task_bos_jf_1(JfWork* work) {
         if (--work->hurtTimer <= 0) {
             work->unk_240 = 0;
             work->flags &= ~JF_FLAG_HURT;
-            LoadPaletteWithEffect(gUnk_096FB584, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
             ClearBtlObjActionFlags(sub);
 
             if (sub->hp > 0) {
@@ -565,7 +565,7 @@ u8 BosJfGetGroundZ(s32* p, s32* a, s32* b, s32* out) {
 }
 
 void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
-    RequestDma3Copy(gUnk_096C5C64, gBosJfMapBuffer, 0x800);
+    RequestDma3Copy(gBosJfBgMap2, gBosJfMapBuffer, 0x800);
     gBosJfMapBlocks = arg->maps;
     BosJfDrawPillars();
     LoadBgTiles(0, arg->tiles, arg->tilesSize);
@@ -607,7 +607,7 @@ u8 task_bos_jf_map_1(JfMapWork* work) {
             work->paletteFrame = 0;
         }
 
-        LoadPalette(gUnk_096FB484 + work->paletteFrame * 16, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 0x20);
+        LoadPalette(gBosJfBgCyclePalettes + work->paletteFrame * 16, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 0x20);
     }
 
     BtlMapUpdateShake();
@@ -685,11 +685,11 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     speed.fraction = 0x80;
     work->jf = arg;
     work->vx = speed.integer * 256 + speed.fraction;
-    work->tiles = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->gfx = gUnk_09EF3A48[12];
-    work->tiles2 = LoadObjTiles(gUnk_09682AA4, 0x2800);
-    work->gfx2 = gUnk_09EF3A48[14];
-    work->palette = LoadObjPalette(gUnk_096FB5A4, 0x60);
+    work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->gfx = gBosJfObjFrames[12];
+    work->tiles2 = LoadObjTiles(gBosJfObjTiles, 0x2800);
+    work->gfx2 = gBosJfObjFrames[14];
+    work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
     work->moveSteps = 0;
@@ -871,7 +871,7 @@ u8 task_bos_jf_lamp_1(JfLampWork* work) {
         }
 
         p = work->tiles2;
-        RequestDma3Copy(gUnk_09685DA4 + (work->tiles2Frame << 9), gUnk_06010000 + (p->index << 5), 512);
+        RequestDma3Copy(gBosJfIagoTiles + (work->tiles2Frame << 9), gUnk_06010000 + (p->index << 5), 512);
     }
 
     work->tiles2Timer++;
@@ -1009,38 +1009,38 @@ TaskDesc gTaskDescBosJf = {
 
 void* gBosJfPillarMaps[2][15] = {
     {
-        gUnk_096C6C64,
-        gUnk_096C6C64 + 7,
-        gUnk_096C6C64 + 14,
-        gUnk_096C6C64 + 21,
-        gUnk_096C7464,
-        gUnk_096C7464 + 7,
-        gUnk_096C7464 + 14,
-        gUnk_096C7464 + 21,
-        gUnk_096C7C64,
-        gUnk_096C7C64 + 7,
-        gUnk_096C7C64 + 14,
-        gUnk_096C7C64 + 21,
-        gUnk_096C8464,
-        gUnk_096C8464 + 7,
-        gUnk_096C8464 + 14,
+        gBosJfSidePillarMap0,
+        gBosJfSidePillarMap0 + 7,
+        gBosJfSidePillarMap0 + 14,
+        gBosJfSidePillarMap0 + 21,
+        gBosJfSidePillarMap1,
+        gBosJfSidePillarMap1 + 7,
+        gBosJfSidePillarMap1 + 14,
+        gBosJfSidePillarMap1 + 21,
+        gBosJfSidePillarMap2,
+        gBosJfSidePillarMap2 + 7,
+        gBosJfSidePillarMap2 + 14,
+        gBosJfSidePillarMap2 + 21,
+        gBosJfSidePillarMap3,
+        gBosJfSidePillarMap3 + 7,
+        gBosJfSidePillarMap3 + 14,
     },
     {
-        gUnk_096C8C64,
-        gUnk_096C8C64 + 7,
-        gUnk_096C8C64 + 14,
-        gUnk_096C8C64 + 21,
-        gUnk_096C9464,
-        gUnk_096C9464 + 7,
-        gUnk_096C9464 + 14,
-        gUnk_096C9464 + 21,
-        gUnk_096C9C64,
-        gUnk_096C9C64 + 7,
-        gUnk_096C9C64 + 14,
-        gUnk_096C9C64 + 21,
-        gUnk_096CA464,
-        gUnk_096CA464 + 7,
-        gUnk_096CA464 + 14,
+        gBosJfMiddlePillarMap0,
+        gBosJfMiddlePillarMap0 + 7,
+        gBosJfMiddlePillarMap0 + 14,
+        gBosJfMiddlePillarMap0 + 21,
+        gBosJfMiddlePillarMap1,
+        gBosJfMiddlePillarMap1 + 7,
+        gBosJfMiddlePillarMap1 + 14,
+        gBosJfMiddlePillarMap1 + 21,
+        gBosJfMiddlePillarMap2,
+        gBosJfMiddlePillarMap2 + 7,
+        gBosJfMiddlePillarMap2 + 14,
+        gBosJfMiddlePillarMap2 + 21,
+        gBosJfMiddlePillarMap3,
+        gBosJfMiddlePillarMap3 + 7,
+        gBosJfMiddlePillarMap3 + 14,
     },
 };
 

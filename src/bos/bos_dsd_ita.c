@@ -32,8 +32,8 @@ void task_bos_dsd_ita_0(DsdItaWork* work, void* arg) {
     work->dipOffset = 0;
     ColliderInit(&work->collider, 7, 0x20, 3);
     ColliderSetPosition(&work->collider, work->x, work->y, work->z);
-    work->gfx = gUnk_09EF3BF8[0];
-    work->gfx2 = gUnk_09EF3C18[0];
+    work->gfx = gBosDsdItaFrames[0];
+    work->gfx2 = gBosDsdItaShadowFrames[0];
 }
 
 u8 task_bos_dsd_ita_1(DsdItaWork* work) {
@@ -234,7 +234,7 @@ void task_bos_dsd_rock_0(DsdRockWork* work, DsdWork* arg) {
 
     work->dsd = arg;
     work->front = GetRandom() % 2;
-    work->gfx = gUnk_09EF3BF8[GetRandom() % 3 + 1];
+    work->gfx = gBosDsdItaFrames[GetRandom() % 3 + 1];
 
     if (work->dsd->driftX > 0) {
         if (work->front != 0) {

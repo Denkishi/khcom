@@ -27,6 +27,7 @@
 #include <stddef.h>
 #include "map.h"
 #include "map_room_tables.h"
+#include "text_types.h"
 
 extern u8 gWorldBattleStages[];
 extern u8 gRikuRoomTypes[];
@@ -1181,35 +1182,18 @@ u8 gRikuRoomTypes[14] = {
 };
 
 const MapNameText* gMapWorldNames[14] = {
-#ifdef VERSION_EU
-    &gWorldNameCastleOblivionHallByLanguage,
-    &gWorldNameAgrabahByLanguage,
-    &gWorldNameAtlanticaByLanguage,
-    &gWorldNameOlympusColiseumByLanguage,
-    &gWorldNameWonderlandByLanguage,
-    &gWorldNameMonstroByLanguage,
-    &gWorldNameHalloweenTownByLanguage,
-    &gWorldNameNeverLandByLanguage,
-    &gWorldNameHollowBastionByLanguage,
-    &gWorldNameDestinyIslandsByLanguage,
-    &gWorldNameTraverseTownByLanguage,
-    &gWorldNameTwilightTownByLanguage,
-    &gWorldNameCastleOblivionByLanguage,
-    &gWorldName100AcreWoodByLanguage,
-#else
-    gWorldNameCastleOblivionHall,
-    gWorldNameAgrabah,
-    gWorldNameAtlantica,
-    gWorldNameOlympusColiseum,
-    gWorldNameWonderland,
-    gWorldNameMonstro,
-    gWorldNameHalloweenTown,
-    gWorldNameNeverLand,
-    gWorldNameHollowBastion,
-    gWorldNameDestinyIslands,
-    gWorldNameTraverseTown,
-    gWorldNameTwilightTown,
-    gWorldNameCastleOblivion,
-    gWorldName100AcreWood,
-#endif
+    LOCALIZED(gWorldNameCastleOblivionHall),
+    LOCALIZED(gWorldNameAgrabah),
+    LOCALIZED(gWorldNameAtlantica),
+    LOCALIZED(gWorldNameOlympusColiseum),
+    LOCALIZED(gWorldNameWonderland),
+    LOCALIZED(gWorldNameMonstro),
+    LOCALIZED(gWorldNameHalloweenTown),
+    LOCALIZED(gWorldNameNeverLand),
+    LOCALIZED(gWorldNameHollowBastion),
+    LOCALIZED(gWorldNameDestinyIslands),
+    LOCALIZED(gWorldNameTraverseTown),
+    LOCALIZED(gWorldNameTwilightTown),
+    LOCALIZED(gWorldNameCastleOblivion),
+    LOCALIZED(gWorldName100AcreWood),
 };

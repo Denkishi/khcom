@@ -3905,7 +3905,7 @@ void CreatePooPileTask(void* pool, u16 b, s32 x, s32 y) {
 void task_poo_tigerstump_0(PooStumpWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y + 0x800;
-    work->unk_2C = 0;
+    work->z = 0;
     work->palette = NULL;
     work->gfx = gPooTigerStumpFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
@@ -3957,7 +3957,7 @@ void task_poo_tigerstump_3(PooStumpWork* work) {
 void task_poo_poohstump_0(PooStumpWork* work, PooPos* p) {
     work->x = p->x;
     work->y = p->y;
-    work->unk_2C = 0;
+    work->z = 0;
     work->palette = NULL;
     work->gfx = gPooPoohStumpFrame0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
@@ -4233,7 +4233,7 @@ void task_poo_eeyore_0(PooEeyoreWork* work) {
     work->x = 0x82700;
     work->y = 0x47E00;
     work->z = 0;
-    work->unk_30 = 0;
+    work->ground = 0;
     work->tileBytes = GetMaxSpriteTileBytes(gEeyoreFl00Frames, 0x10);
     work->tiles = NULL;
     work->palette = NULL;
@@ -4470,7 +4470,7 @@ void task_poo_rabbit_0(PooRabbitWork* work) {
     work->x = 0x1B700;
     work->y = 0x16E00;
     work->z = 0;
-    work->unk_34 = 0;
+    work->ground = 0;
     work->palette = NULL;
     m = 0;
 
@@ -5084,7 +5084,7 @@ u8 IsPooRooAnimFinished() {
 void task_poo_roo_footmark_0(PooFootmarkWork* work) {
     work->x = 0x4A700;
     work->y = 0x28E00;
-    work->unk_14 = 0;
+    work->z = 0;
     work->tiles = LoadObjTiles(gRoFootmarkTiles, 0x500);
     work->palette = NULL;
 
@@ -5352,7 +5352,7 @@ void task_poo_eeyoretail_0(PooEeyoreTailWork* work) {
     work->x = 0x7CD00;
     work->y = 0x49E00;
     work->z = -0x2000;
-    work->unk_18 = 0;
+    work->ground = 0;
     work->tileBytes = GetMaxSpriteTileBytes(gEeyoreFl00Frames, 0x10);
     work->palette = NULL;
     work->gfx = gEeyoreFl00Frame15;
@@ -5437,7 +5437,7 @@ void task_poo_honeycomb_0(PooHoneycombWork* work) {
     work->x = 0x8DE00;
     work->y = 0x46600;
     work->z = -0xA00;
-    work->unk_30 = 0;
+    work->ground = 0;
     work->tileBytes = GetMaxSpriteTileBytes(gEeHoneycombFrames, 1);
     work->palette = NULL;
     work->gfx = gEeHoneycombFrame0;
@@ -5551,7 +5551,7 @@ void task_poo_vegetable_0(PooVegetableWork* work) {
     work->x = 0x1AC00;
     work->y = 0x18000;
     work->z = 0;
-    work->unk_30 = 0;
+    work->ground = 0;
     work->tileBytes = GetMaxSpriteTileBytes(gRaVegetablesFrames, 1);
     work->palette = NULL;
     work->gfx = gRaVegetablesFrame0;
@@ -6032,7 +6032,7 @@ void task_poo_wagonwheel_0(PooWheelWork* work) {
 
     work->startX = work->x;
     work->z = 0;
-    work->unk_30 = 0;
+    work->ground = 0;
     work->tileBytes = 0x180;
     work->palette = NULL;
     AnimInit(&work->anim, gRaWagonAnims, gRaWagonFrames);
@@ -6156,7 +6156,7 @@ void task_poo_bee_0(PooBeeWork* work) {
     work->x = 0x8DE00;
     work->y = 0x46600;
     work->z = -0xA00;
-    work->unk_B0 = 0;
+    work->ground = 0;
     i = 0;
     a = gEeBeeAnims;
     b = gEeBeeFrames;
@@ -6288,7 +6288,7 @@ void task_poo_beeAfterEvent_0(PooBeeAfterEventWork* work) {
     work->x = 0x8DE00;
     work->y = 0x46600;
     work->z = -0xA00;
-    work->unk_50 = 0;
+    work->ground = 0;
     AnimInit(&work->anim, gEeBeeAnims, gEeBeeFrames);
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -7207,7 +7207,7 @@ void task_poo_mapbeeborn_0(PooMapBornWork* work, PooPos* p) {
     work->pos.z = 0;
     work->x = p->x + 0x400;
     work->y = p->y + 0x1800;
-    work->unk_08 = 0;
+    work->z = 0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
     work->colliderActive = 0;
     work->unk_7C = 0;
@@ -7316,7 +7316,7 @@ void task_poo_mapbutterflyborn_0(PooMapBornWork* work, PooPos* p) {
     work->pos.z = 0;
     work->x = p->x + 0x1000;
     work->y = p->y + 0x1800;
-    work->unk_08 = 0;
+    work->z = 0;
     ColliderSetPosition(&work->collider, work->x, work->y, 0);
     work->colliderActive = 0;
     work->unk_7C = 0;
@@ -7377,7 +7377,7 @@ void task_poo_rabbitAfterEvent_0(PooRabbitAfterEventWork* work) {
     work->x = 0xA9B00;
     work->y = 0x57200;
     work->z = 0;
-    work->unk_30 = 0;
+    work->ground = 0;
     work->palette = NULL;
     work->tileBytes = GetMaxSpriteTileBytes(gRabbitBl00Frames, 15);
     AnimInit(&work->anim, gRabbitBl00Anims, gRabbitBl00Frames);
@@ -7444,8 +7444,8 @@ void task_poo_rabbitAfterEvent_3(PooRabbitAfterEventWork* work) {
 void task_poo_cabbageAfterEvent_0(PooCabbageAfterEventWork* work) {
     work->x = 0xAB300;
     work->y = 0x57100;
-    work->unk_14 = 0;
-    work->unk_18 = 0;
+    work->z = 0;
+    work->ground = 0;
     work->palette = NULL;
     work->tileBytes = GetMaxSpriteTileBytes(gRaVegetablesFrames, 13);
     work->gfx = gRaVegetablesFrame9;

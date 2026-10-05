@@ -64,7 +64,7 @@ typedef struct PooGaugeWork {
 typedef struct PooMapBornWork {
     s32 x;
     s32 y;
-    s32 unk_08;
+    s32 z;
     u8 unk_0C[0x04];
     PooPos pos;
     Collider collider;
@@ -106,13 +106,13 @@ typedef char PooNode_size[(sizeof(PooNode) == 0x20) ? 1 : -1];
 
 typedef struct PooFrame {
     u16 duration;
-    u16 unk_02;
+    u16 nextGfxIndex;
 } PooFrame;
 
 typedef struct PooAnimData {
     u8 unk_00[0x04];
     u16 frameCount;
-    u16 unk_06;
+    u16 firstGfxIndex;
     PooFrame frames[1];
 } PooAnimData;
 
@@ -171,7 +171,7 @@ typedef struct PooPigletWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_34;
+    s32 ground;
     Collider collider;
     TaskPool tasks;
     u32 state;
@@ -188,7 +188,7 @@ typedef struct PooEeyoreWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     Collider collider;
     TaskPool tasks;
     s32 animId;
@@ -207,7 +207,7 @@ typedef struct PooRabbitWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_34;
+    s32 ground;
     TaskPool tasks;
     Collider collider;
     s32 animIndex;
@@ -308,7 +308,7 @@ typedef struct PooEeyoreTailWork {
     u32 x;
     u32 y;
     s32 z;
-    s32 unk_18;
+    s32 ground;
     u16 tileBytes;
     u32 height;
     TaskPool tasks;
@@ -415,7 +415,7 @@ typedef struct PooStumpWork {
     AnimState anim;
     s32 x;
     s32 y;
-    s32 unk_2C;
+    s32 z;
     u8 unk_30[0x04];
     Collider collider;
 } PooStumpWork;
@@ -426,8 +426,8 @@ typedef struct PooFootmarkWork {
     void* gfx;
     s32 x;
     s32 y;
-    s32 unk_14;
-    u8 unk_18[0x04];
+    s32 z;
+    u8 ground[0x04];
     PooNode node;
 } PooFootmarkWork;
 
@@ -450,7 +450,7 @@ typedef struct PooVegetableWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     u16 tileBytes;
     Collider collider;
 } PooVegetableWork;
@@ -482,7 +482,7 @@ typedef struct PooHoneycombWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     u16 tileBytes;
     Collider collider;
     u16 shakeTimer;
@@ -510,7 +510,7 @@ typedef struct PooBeeWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_B0;
+    s32 ground;
     s32 dx;
     s32 dy;
     u8 unk_BC[0x0A];
@@ -541,7 +541,7 @@ typedef struct PooWheelWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     u16 tileBytes;
     u16 animId;
     s32 speed;
@@ -557,7 +557,7 @@ typedef struct PooCabbageWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     s32 targetX;
     s32 targetY;
     s32 targetZ;
@@ -651,8 +651,8 @@ typedef struct PooCabbageAfterEventWork {
     void* gfx;
     s32 x;
     s32 y;
-    s32 unk_14;
-    s32 unk_18;
+    s32 z;
+    s32 ground;
     u16 tileBytes;
 } PooCabbageAfterEventWork;
 
@@ -664,7 +664,7 @@ typedef struct PooRabbitAfterEventWork {
     s32 x;
     s32 y;
     s32 z;
-    s32 unk_30;
+    s32 ground;
     TaskPool tasks;
     Collider collider;
     u16 tileBytes;
@@ -682,7 +682,7 @@ typedef struct PooBeeAfterEventWork {
     s32 x;
     s32 y;
     s32 z;
-    u32 unk_50;
+    u32 ground;
 } PooBeeAfterEventWork;
 
 typedef struct PooMapAnimeWork {
@@ -734,7 +734,7 @@ typedef struct PooTrapWork {
     s32 x;
     s32 y;
     s32 z;
-    u8 unk_18[0x04];
+    u8 ground[0x04];
     Collider collider;
     TaskPool tasks;
     u8 colliderActive;

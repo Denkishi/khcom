@@ -349,7 +349,7 @@ entries:
   eu:
     address: 0x096C718C
     size: 2048
-- name: gUnkEu_096C798C
+- name: gSysMsgWinFrenchSpanishMap
   format: tilemap
   eu:
     address: 0x096C798C

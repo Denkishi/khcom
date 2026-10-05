@@ -1006,6 +1006,7 @@ u16 GetBossCardValue() {
         return sBossCardValue;
     }
 
+    // @bug Oogie Boogie's intro polls this before the card battle state exists (NULL read).
     return gCardBattleState->nextEnemyCardIndex;
 }
 

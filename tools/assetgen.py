@@ -1029,12 +1029,30 @@ def check_symbols(manifest, version, members_by_object):
         raise ManifestError(f"{manifest.group}: {version} symbols.txt still defines {', '.join(clashes[:5])}")
 
 
+def check_names(manifests, version):
+    owners = {}
+    for manifest in manifests:
+        for entry in manifest.entries:
+            if version not in entry:
+                continue
+            keys = []
+            if entry.get("format") == "sprite_sheet":
+                keys = [item["symbol"] for item in manifest.frames(entry, version) + manifest.animations(entry, version)]
+                if len(keys) != len(set(keys)):
+                    raise ManifestError(f"{manifest.group}: {entry['name']} names an item twice in {version}")
+            for symbol in set(keys) | set(manifest.symbols(entry, version)):
+                owner = owners.setdefault(symbol, entry["name"])
+                if owner != entry["name"]:
+                    raise ManifestError(f"{version}: {symbol} is defined by both {owner} and {entry['name']}")
+
+
 def generate(version, manifest_path, all_manifests=None):
     manifest = Manifest(manifest_path)
     all_manifests = load_manifests() if all_manifests is None else all_manifests
     members_by_object = manifest.members(version)
     if not GBAGFX.exists():
         raise ManifestError(f"{GBAGFX.relative_to(ROOT)} is missing; run sh tools/fetch_gbagfx.sh")
+    check_names(all_manifests, version)
     check_symbols(manifest, version, members_by_object)
     gen = ROOT / "build" / version / "gen"
     gen.mkdir(parents=True, exist_ok=True)

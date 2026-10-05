@@ -45,22 +45,22 @@ static const MessageScriptEntry sEvent108Script[17] = {
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent108Script[16] = {
-    { 1, 4, 3, 1, &gEvent108Text00, 0, 240 },
-    { 15, 2, 3, 1, &gEvent108Text01, 0, 270 },
-    { 15, 2, 3, 1, &gEvent108Text02, 0, 350 },
-    { 15, 2, 4, 1, &gEvent108Text03, 0, 352 },
-    { 21, 3, 1, 0, &gEvent108Text04, 0, 525 },
-    { 21, 3, 4, 0, &gEvent108Text05, 0, 527 },
-    { 2, 2, 3, 1, &gEvent108Text06, 0, 750 },
-    { 1, 3, 2, 1, &gEvent108Text07, 0, 770 },
-    { 15, 0, 1, 1, &gEvent108Text08, 0, 800 },
-    { 21, 0, 1, 0, &gEvent108Text09, 0, 840 },
-    { 21, 3, 4, 0, &gEvent108Text10, 0, 842 },
-    { 0, 0, 1, 1, &gEvent108Text11, 0, 920 },
-    { 15, 0, 3, 1, &gEvent108Text12, 0, 940 },
-    { 2, 0, 3, 1, &gEvent108Text13, 0, 970 },
-    { 0, 4, 1, 1, &gEvent108Text14, 0, 1000 },
-    { 15, 1, 3, 1, &gEvent108Text15, MSG_SCRIPT_FLAG_END, 1020 },
+    { 1, 4, 3, 1, &gEvent108Text00ByLanguage, 0, 240 },
+    { 15, 2, 3, 1, &gEvent108Text01ByLanguage, 0, 270 },
+    { 15, 2, 3, 1, &gEvent108Text02ByLanguage, 0, 350 },
+    { 15, 2, 4, 1, &gEvent108Text03ByLanguage, 0, 352 },
+    { 21, 3, 1, 0, &gEvent108Text04ByLanguage, 0, 525 },
+    { 21, 3, 4, 0, &gEvent108Text05ByLanguage, 0, 527 },
+    { 2, 2, 3, 1, &gEvent108Text06ByLanguage, 0, 750 },
+    { 1, 3, 2, 1, &gEvent108Text07ByLanguage, 0, 770 },
+    { 15, 0, 1, 1, &gEvent108Text08ByLanguage, 0, 800 },
+    { 21, 0, 1, 0, &gEvent108Text09ByLanguage, 0, 840 },
+    { 21, 3, 4, 0, &gEvent108Text10ByLanguage, 0, 842 },
+    { 0, 0, 1, 1, &gEvent108Text11ByLanguage, 0, 920 },
+    { 15, 0, 3, 1, &gEvent108Text12ByLanguage, 0, 940 },
+    { 2, 0, 3, 1, &gEvent108Text13ByLanguage, 0, 970 },
+    { 0, 4, 1, 1, &gEvent108Text14ByLanguage, 0, 1000 },
+    { 15, 1, 3, 1, &gEvent108Text15ByLanguage, MSG_SCRIPT_FLAG_END, 1020 },
 };
 #endif
 

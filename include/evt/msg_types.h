@@ -70,7 +70,7 @@ typedef struct MessageScriptEntry {
 #endif
 
 #ifdef VERSION_EU
-#define EVENT_TEXT(name) (&name)
+#define EVENT_TEXT(name) (&name##ByLanguage)
 #else
 #define EVENT_TEXT(name) (name)
 #endif

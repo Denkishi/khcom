@@ -23,12 +23,12 @@ static const MessageScriptEntry sEvent079Script[6] = {
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent079Script[6] = {
-    { 10, 8, 3, 1, &gEvent078Text00, 0, 250 },
-    { 0, 2, 2, 1, &gEvent078Text01, 0, 320 },
-    { 10, 11, 1, 1, &gEvent078Text02, 0, 340 },
-    { 0, 2, 2, 1, &gEvent078Text03, 0, 420 },
-    { 10, 2, 1, 1, &gEvent078Text04, 0, 630 },
-    { 10, 14, 4, 1, &gEvent078Text05, MSG_SCRIPT_FLAG_END, 635 },
+    { 10, 8, 3, 1, &gEvent078Text00ByLanguage, 0, 250 },
+    { 0, 2, 2, 1, &gEvent078Text01ByLanguage, 0, 320 },
+    { 10, 11, 1, 1, &gEvent078Text02ByLanguage, 0, 340 },
+    { 0, 2, 2, 1, &gEvent078Text03ByLanguage, 0, 420 },
+    { 10, 2, 1, 1, &gEvent078Text04ByLanguage, 0, 630 },
+    { 10, 14, 4, 1, &gEvent078Text05ByLanguage, MSG_SCRIPT_FLAG_END, 635 },
 };
 #endif
 

@@ -8574,17 +8574,17 @@ TaskDesc gTaskDescPooPoohstump = {
 };
 
 const PooAnimDesc gPooPigletAnimDescs[4] = {
-    { gUnk_09EF5CB0, gUnk_09EF5CAC, gUnk_09742FD8, 0 },
-    { gUnk_09EF5CB8, gUnk_09EF5CB4, gUnk_097430EC, 0 },
-    { gUnk_09EF5CDC, gUnk_09EF5CBC, gUnk_09743262, 0 },
-    { gUnk_09EF5D00, gUnk_09EF5CE0, gUnk_09743ADA, 0 },
+    { gPigletStandFrontAnims, gPigletStandFrontFrames, gPigletStandFrontTiles, 0 },
+    { gPigletStandBackAnims, gPigletStandBackFrames, gPigletStandBackTiles, 0 },
+    { gPigletWalkFrontAnims, gPigletWalkFrontFrames, gPigletWalkFrontTiles, 0 },
+    { gPigletWalkBackAnims, gPigletWalkBackFrames, gPigletWalkBackTiles, 0 },
 };
 
 const PooGfxDesc gPooPigletGfxDescs[4] = {
-    { gUnk_09EF5CAC, 1 },
-    { gUnk_09EF5CB4, 1 },
-    { gUnk_09EF5CBC, 8 },
-    { gUnk_09EF5CE0, 8 },
+    { gPigletStandFrontFrames, 1 },
+    { gPigletStandBackFrames, 1 },
+    { gPigletWalkFrontFrames, 8 },
+    { gPigletWalkBackFrames, 8 },
 };
 
 TaskDesc gTaskDescPooPiglet = {

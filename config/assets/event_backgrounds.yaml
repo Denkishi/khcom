@@ -898,8 +898,8 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gUnk_09197546, 256, 0]
-  - [gUnk_0919765C, 512, 0]
+  - [gEventBg089Object0Tiles, 256, 0]
+  - [gEventBg089Object1Tiles, 512, 0]
   us:
     address: 0x08F7DF5C
   jp:
@@ -1715,7 +1715,7 @@ entries:
     address: 0x090586E0
     fields:
       compression: [2, 0]
-- name: gEventBg107ObjectTiles
+- name: gEventBg110ObjectTiles
   record: PrizeMapCardGroupList
   declare: false
   elements:
@@ -1772,9 +1772,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg107ObjectTiles
+    tileResources: gEventBg110ObjectTiles
     paletteResources: gEventBg110ObjectPalettes
-    sprites: gEventBg107ObjectFrames
+    sprites: gEventBg110ObjectFrames
     placements: gEventBg110ObjectPlacements
     placementCount: 9
   us:
@@ -1832,9 +1832,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg107ObjectTiles
+    tileResources: gEventBg110ObjectTiles
     paletteResources: gEventBg110ObjectPalettes
-    sprites: gEventBg107ObjectFrames
+    sprites: gEventBg110ObjectFrames
     placements: gEventBg112ObjectPlacements
     placementCount: 3
   us:
@@ -1892,9 +1892,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg107ObjectTiles
+    tileResources: gEventBg110ObjectTiles
     paletteResources: gEventBg110ObjectPalettes
-    sprites: gEventBg107ObjectFrames
+    sprites: gEventBg110ObjectFrames
     placements: gEventBg109ObjectPlacements
     placementCount: 3
   us:
@@ -1952,9 +1952,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg107ObjectTiles
+    tileResources: gEventBg110ObjectTiles
     paletteResources: gEventBg110ObjectPalettes
-    sprites: gEventBg107ObjectFrames
+    sprites: gEventBg110ObjectFrames
     placements: gEventBg107ObjectPlacements
     placementCount: 4
   us:
@@ -2228,19 +2228,19 @@ entries:
     fields:
       tilesSize: 6536
       compression: [3, 0]
-- name: gEventBg120ObjectTiles
+- name: gEventBg122ObjectTiles
   record: PrizeMapCardGroupList
   declare: false
   elements:
   - [gUnk_0989064C, 2048, 0]
   - [gUnk_0988FFD2, 1632, 0]
   - [gUnk_09891E9C, 2560, 0]
-  - [gUnk_0919CF4C, 2048, 0]
-  - [gUnk_0919D766, 1536, 0]
+  - [gEventBg122Object3Tiles, 2048, 0]
+  - [gEventBg122Object4Tiles, 1536, 0]
   - [gUnk_0989167C, 2048, 0]
   - [gUnk_09890E64, 2048, 0]
-  - [gUnk_0919DD82, 3072, 0]
-  - [gUnk_0919C936, 1536, 0]
+  - [gEventBg122Object7Tiles, 3072, 0]
+  - [gEventBg122Object8Tiles, 1536, 0]
   - [gUnk_0988F826, 1632, 0]
   us:
     address: 0x08F7E914
@@ -2290,9 +2290,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg120ObjectTiles
+    tileResources: gEventBg122ObjectTiles
     paletteResources: gEventBg122ObjectPalettes
-    sprites: gEventBg120ObjectFrames
+    sprites: gEventBg122ObjectFrames
     placements: gEventBg122ObjectPlacements
     placementCount: 8
   us:
@@ -2351,9 +2351,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg120ObjectTiles
+    tileResources: gEventBg122ObjectTiles
     paletteResources: gEventBg122ObjectPalettes
-    sprites: gEventBg120ObjectFrames
+    sprites: gEventBg122ObjectFrames
     placements: gEventBg121ObjectPlacements
     placementCount: 5
   us:
@@ -2410,9 +2410,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg120ObjectTiles
+    tileResources: gEventBg122ObjectTiles
     paletteResources: gEventBg122ObjectPalettes
-    sprites: gEventBg120ObjectFrames
+    sprites: gEventBg122ObjectFrames
     placements: gEventBg120ObjectPlacements
     placementCount: 3
   us:
@@ -2471,9 +2471,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg120ObjectTiles
+    tileResources: gEventBg122ObjectTiles
     paletteResources: gEventBg122ObjectPalettes
-    sprites: gEventBg120ObjectFrames
+    sprites: gEventBg122ObjectFrames
     placements: gEventBgUnusedColiseumObjectPlacements
     placementCount: 5
   us:
@@ -2532,9 +2532,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg120ObjectTiles
+    tileResources: gEventBg122ObjectTiles
     paletteResources: gEventBg122ObjectPalettes
-    sprites: gEventBg120ObjectFrames
+    sprites: gEventBg122ObjectFrames
     placements: gEventBg124ObjectPlacements
     placementCount: 6
   us:
@@ -3666,12 +3666,12 @@ entries:
     address: 0x09059554
     fields:
       compression: [2, 0]
-- name: gEventBg002ObjectTiles
+- name: gEventBg004ObjectTiles
   record: PrizeMapCardGroupList
   declare: false
   elements:
   - [gUnk_0989D100, 3328, 0]
-  - [gUnk_093E9F18, 1024, 0]
+  - [gEventBg004Object1Tiles, 1024, 0]
   us:
     address: 0x08F7F3A4
   jp:
@@ -3708,9 +3708,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg002ObjectTiles
+    tileResources: gEventBg004ObjectTiles
     paletteResources: gEventBg004ObjectPalettes
-    sprites: gEventBg002ObjectFrames
+    sprites: gEventBg004ObjectFrames
     placements: gEventBg004ObjectPlacements
     placementCount: 4
   us:
@@ -3834,9 +3834,9 @@ entries:
   record: EventMapObjectDef
   declare: false
   fields:
-    tileResources: gEventBg002ObjectTiles
+    tileResources: gEventBg004ObjectTiles
     paletteResources: gEventBg004ObjectPalettes
-    sprites: gEventBg002ObjectFrames
+    sprites: gEventBg004ObjectFrames
     placements: gEventBg002ObjectPlacements
     placementCount: 5
   us:
@@ -4435,7 +4435,7 @@ entries:
     address: 0x09F6E39C
 - name: gEventBg089ObjectFrames
   record: SpriteTable
-  items: [gUnk_0919752C, gUnk_09197648]
+  items: [gEventBg089Object0Frame0, gEventBg089Object1Frame0]
   us:
     address: 0x09EE2CC4
   jp:
@@ -4827,7 +4827,7 @@ entries:
   eu:
     address: 0x09F6E6F8
     items: [gEventBg097Bg2Map0, gEventBg097Bg2Map1, gEventBg097Bg2Map2, gUnkEu_08125144]
-- name: gEventBg107ObjectFrames
+- name: gEventBg110ObjectFrames
   record: SpriteTable
   items: [gUnk_09860684, gUnk_09862924, gUnk_09863E00, gUnk_0985F660, gUnk_0985D208, gUnk_0985E638, gUnk_098635EC]
   us:
@@ -4990,9 +4990,9 @@ entries:
     address: 0x09EBAB1C
   eu:
     address: 0x09F6E7C0
-- name: gEventBg120ObjectFrames
+- name: gEventBg122ObjectFrames
   record: SpriteTable
-  items: [gUnk_09890634, gUnk_0988FE88, gUnk_09891E7C, gUnk_0919CF38, gUnk_0919D74C, gUnk_09891664, gUnk_09890E4C, gUnk_0919DD68, gUnk_0919C91C, gUnk_0988F6DC]
+  items: [gUnk_09890634, gUnk_0988FE88, gUnk_09891E7C, gEventBg122Object3Frame0, gEventBg122Object4Frame0, gUnk_09891664, gUnk_09890E4C, gEventBg122Object7Frame0, gEventBg122Object8Frame0, gUnk_0988F6DC]
   us:
     address: 0x09EE30B0
   jp:
@@ -5561,9 +5561,9 @@ entries:
     address: 0x09EBB144
   eu:
     address: 0x09F6EDE8
-- name: gEventBg002ObjectFrames
+- name: gEventBg004ObjectFrames
   record: SpriteTable
-  items: [gUnk_0989D0B8, gUnk_093E9F04]
+  items: [gUnk_0989D0B8, gEventBg004Object1Frame0]
   us:
     address: 0x09EE36CC
   jp:

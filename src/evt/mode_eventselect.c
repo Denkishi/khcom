@@ -322,8 +322,8 @@ void smoke_0(EffectWork* work, EventCharaWork* chara) {
     work->y = b->y - 0x800;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(work->tiles, gUnk_093215CA);
-    AnimInit(&work->anim, gUnk_09EEFD78, gUnk_09EEFD60);
+    SetObjTileSource(work->tiles, gEventSmokeTiles);
+    AnimInit(&work->anim, gEventSmokeAnims, gEventSmokeFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->followFlip = 1;
@@ -514,8 +514,8 @@ void GlowNose_0(EffectWork* work, EventCharaWork* chara) {
     work->y = b->y + 3072;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(work->tiles, gUnk_09321804);
-    AnimInit(&work->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
+    SetObjTileSource(work->tiles, gGlowNoseTiles);
+    AnimInit(&work->anim, gGlowNoseAnims, gGlowNoseFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->followFlip = 1;
@@ -552,8 +552,8 @@ void GlowNose2_0(EffectWork* work, EventCharaWork* chara) {
 
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    SetObjTileSource(work->tiles, gUnk_09321804);
-    AnimInit(&work->anim, gUnk_09EEFD9C, gUnk_09EEFD7C);
+    SetObjTileSource(work->tiles, gGlowNoseTiles);
+    AnimInit(&work->anim, gGlowNoseAnims, gGlowNoseFrames);
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->followFlip = 1;

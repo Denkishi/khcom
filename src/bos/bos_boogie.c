@@ -34,24 +34,24 @@
 static BoogieWork* sBoogieWork;
 
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnk_09EF66C4, gUnk_09EF66A8, gUnk_0977A53C, 0 },
-    { gUnk_09EF66E8, gUnk_09EF66C8, gUnk_0977F7B4, 0 },
-    { gUnk_09EF6710, gUnk_09EF66EC, gUnk_097856FA, 0 },
-    { gUnk_09EF6710, gUnk_09EF66EC, gUnk_097856FA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
-    { gUnk_09EF6750, gUnk_09EF6738, gUnk_0978DF7A, 0 },
-    { gUnk_09EF676C, gUnk_09EF6754, gUnk_097920CA, 0 },
-    { gUnk_09EF676C, gUnk_09EF6754, gUnk_097920CA, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
+    { gBosBoogieIdleAnims, gBosBoogieIdleFrames, gBosBoogieIdleTiles, 0 },
+    { gBosBoogieWalkAnims, gBosBoogieWalkFrames, gBosBoogieWalkTiles, 0 },
+    { gBosBoogieDiceThrowAnims, gBosBoogieDiceThrowFrames, gBosBoogieDiceThrowTiles, 0 },
+    { gBosBoogieDiceThrowAnims, gBosBoogieDiceThrowFrames, gBosBoogieDiceThrowTiles, 1 },
+    { gBosBoogieHurtAnims, gBosBoogieHurtFrames, gBosBoogieHurtTiles, 0 },
+    { gBosBoogieAttackHitAnims, gBosBoogieAttackHitFrames, gBosBoogieAttackHitTiles, 0 },
+    { gBosBoogieDiceFaceAnims, gBosBoogieDiceFaceFrames, gBosBoogieDiceFaceTiles, 0 },
+    { gBosBoogieDiceFaceAnims, gBosBoogieDiceFaceFrames, gBosBoogieDiceFaceTiles, 1 },
+    { gBosBoogieHurtAnims, gBosBoogieHurtFrames, gBosBoogieHurtTiles, 2 },
 };
 
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnk_09EF66A8, 7 },
-    { gUnk_09EF66C8, 8 },
-    { gUnk_09EF66EC, 9 },
-    { gUnk_09EF6718, 5 },
-    { gUnk_09EF6738, 6 },
-    { gUnk_09EF6754, 6 },
+    { gBosBoogieIdleFrames, 7 },
+    { gBosBoogieWalkFrames, 8 },
+    { gBosBoogieDiceThrowFrames, 9 },
+    { gBosBoogieHurtFrames, 5 },
+    { gBosBoogieAttackHitFrames, 6 },
+    { gBosBoogieDiceFaceFrames, 6 },
 };
 
 static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };

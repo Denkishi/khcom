@@ -40,7 +40,7 @@ u8 BosLstPtlIsActive(Task* task) {
 
 void task_bos_lst_ptl_0(LstPtlWork* work, LstPtlArg* arg) {
     work->state = 0;
-    work->unk_002 = 0;
+    work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
     work->x = arg->x;
@@ -64,7 +64,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
 
         if (work->delay <= 0) {
             work->state = 1;
-            work->unk_002 = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
             AnimReset(&work->anim);
@@ -81,7 +81,7 @@ u8 task_bos_lst_ptl_1(LstPtlWork* work) {
 
         if ((work->y >> 8) > 0xA8) {
             work->state = 2;
-            work->unk_002 = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }

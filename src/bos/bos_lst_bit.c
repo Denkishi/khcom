@@ -154,9 +154,9 @@ void BosLstBitStartHover(Task* task) {
     s = task->work;
     zero = 0;
     s->state = 1;
-    s->unk_004 = zero;
+    s->step = zero;
     s->timer = zero;
-    s->unk_008 = zero;
+    s->delay = zero;
 }
 
 void BosLstBitStartFiring(Task* task, s16 a) {
@@ -166,9 +166,9 @@ void BosLstBitStartFiring(Task* task, s16 a) {
     s = task->work;
     zero = 0;
     s->state = 2;
-    s->unk_004 = zero;
+    s->step = zero;
     s->timer = zero;
-    s->unk_008 = zero;
+    s->delay = zero;
     s->shots = a;
 }
 
@@ -183,9 +183,9 @@ void BosLstBitStartReturn(Task* task) {
 #endif
         zero = 0;
         s->state = 5;
-        s->unk_004 = zero;
+        s->step = zero;
         s->timer = zero;
-        s->unk_008 = zero;
+        s->delay = zero;
 #ifdef VERSION_EU
     }
 #endif
@@ -220,9 +220,9 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
 
     if (s->state != 0 && s->state != 5) {
         s->state = 7;
-        s->unk_004 = 0;
+        s->step = 0;
         s->timer = 0;
-        s->unk_008 = 0;
+        s->delay = 0;
 
         if (gBtlWork->actor->z > -0xC000) {
             s->targetZ = -0x6000;
@@ -232,9 +232,9 @@ u8 BosLstBitInterrupt(Task* task, u8 a) {
     }
 #else
     s->state = 7;
-    s->unk_004 = 0;
+    s->step = 0;
     s->timer = 0;
-    s->unk_008 = 0;
+    s->delay = 0;
 #endif
 
     return result;
@@ -332,9 +332,9 @@ void task_bos_lst_bit_0(LstState* work, LstBitArg* arg) {
 
     work->animSet = 0;
     work->state = 0;
-    work->unk_004 = 0;
+    work->step = 0;
     work->timer = 0;
-    work->unk_008 = 0;
+    work->delay = 0;
     work->hurtTimer = 0;
     work->bobFrame = 0;
     work->kind = arg->kind;
@@ -439,9 +439,9 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
         if (work->timer > 29) {
             work->state = 1;
-            work->unk_004 = 0;
+            work->step = 0;
             work->timer = 0;
-            work->unk_008 = 0;
+            work->delay = 0;
             work->scaleX = 0x100;
             work->scaleY = 0x100;
         }
@@ -592,9 +592,9 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
         if (work->timer > 59) {
             work->state = 6;
-            work->unk_004 = 0;
+            work->step = 0;
             work->timer = 0;
-            work->unk_008 = 0;
+            work->delay = 0;
         }
 
         break;

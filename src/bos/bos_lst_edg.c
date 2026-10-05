@@ -43,7 +43,7 @@ u8 BosLstEdgIsActive(Task* task) {
 
 void task_bos_lst_edg_0(LstEdgWork* work, LstEdgArg* arg) {
     work->state = 0;
-    work->unk_002 = 0;
+    work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
     work->x = arg->x;
@@ -67,7 +67,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
         if (work->delay <= 0) {
             work->state = 1;
-            work->unk_002 = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
             p = gBtlWork->actor;
@@ -86,7 +86,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
         if (work->timer > 49) {
             work->state = 2;
-            work->unk_002 = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }
@@ -101,7 +101,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
 
         if (work->timer > 49) {
             work->state = 3;
-            work->unk_002 = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }
@@ -110,7 +110,7 @@ u8 task_bos_lst_edg_1(LstEdgWork* work) {
         break;
     case 3:
         work->state = 4;
-        work->unk_002 = 0;
+        work->step = 0;
         work->timer = 0;
         work->delay = 0;
         break;

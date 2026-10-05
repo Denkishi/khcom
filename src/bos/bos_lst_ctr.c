@@ -85,7 +85,7 @@ void task_bos_lst_ctr_0(LstCtrWork* work, LstCtrArg* arg) {
     work->count = arg->count;
     work->index = arg->index;
     work->state = 0;
-    work->unk_00A = 0;
+    work->step = 0;
     work->timer = 0;
     work->delay = arg->delay;
     work->offsetX = 0;
@@ -127,7 +127,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
             work->y2 = p->y;
             work->z2 = -0x1000;
             work->state = 1;
-            work->unk_00A = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
             WorldToScreen(&x1, &y1, work->x, work->y, work->z);
@@ -150,7 +150,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
         if (work->timer >= work->duration) {
             work->state = 2;
-            work->unk_00A = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
         }
@@ -165,7 +165,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
         if (work->timer > 2) {
             work->state = 3;
-            work->unk_00A = 0;
+            work->step = 0;
             work->timer = 0;
             work->delay = 0;
             work->curX = work->x2;
@@ -183,7 +183,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
             if (work->curX < 0x6000) {
                 work->state = 4;
-                work->unk_00A = 0;
+                work->step = 0;
                 work->timer = 0;
                 work->delay = 0;
             }
@@ -193,7 +193,7 @@ u8 task_bos_lst_ctr_1(LstCtrWork* work) {
 
             if (work->curX > 0x19000) {
                 work->state = 4;
-                work->unk_00A = 0;
+                work->step = 0;
                 work->timer = 0;
                 work->delay = 0;
             }

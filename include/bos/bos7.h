@@ -11,9 +11,9 @@
 typedef struct LstState {
     s16 animSet;
     s16 state;
-    u16 unk_004;
+    u16 step;
     s16 timer;
-    s16 unk_008;
+    s16 delay;
     s16 hurtTimer;
     s16 bobFrame;
     s16 kind;
@@ -61,7 +61,7 @@ typedef struct LstState {
 
 typedef struct LstEdgWork {
     s16 state;
-    s16 unk_002;
+    s16 step;
     s16 timer;
     s16 delay;
     s32 x;
@@ -83,7 +83,7 @@ typedef struct LstCtrWork {
     s16 count;
     s16 index;
     s16 state;
-    s16 unk_00A;
+    s16 step;
     s16 timer;
     s16 delay;
     u8 unk_010;
@@ -150,7 +150,7 @@ typedef struct LstLsrWork {
 
 typedef struct LstPtlWork {
     s16 state;
-    s16 unk_002;
+    s16 step;
     s16 timer;
     s16 delay;
     s32 x;

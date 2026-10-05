@@ -85,7 +85,7 @@ void menu_0(MenuWork* work) {
     work->y = 0x4800;
     work->cursor = 0;
     work->state = 0;
-    work->tiles = LoadObjTiles(gUnk_090D4DD0, 0x2E80);
+    work->tiles = LoadObjTiles(gMenuTiles, 0x2E80);
     work->palette = LoadObjPalette(gUnk_096148B8, 0x20);
     m4aSongNumStart(SONG_SYS_CANSEL);
 }
@@ -244,7 +244,7 @@ u8 menu_1(MenuWork* work) {
 }
 
 void menu_2(MenuWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEC600[work->cursor], work->tiles, work->palette, NULL, 0, 80);
+    DrawSprite(work->x >> 8, work->y >> 8, gMenuFrames[work->cursor], work->tiles, work->palette, NULL, 0, 80);
 }
 
 void menu_3(MenuWork* work) {

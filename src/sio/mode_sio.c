@@ -3836,7 +3836,7 @@ void mode_sioError_0(s32 arg) {
         LoadBgMap(0, gUnkEu_096C798C, 0x800);
         SetBgScroll(0, 0xFFE9, 0xFFCD);
     } else {
-        LoadBgMap(0, gUnk_096112B8, 0x800);
+        LoadBgMap(0, gSysMsgWinMap, 0x800);
         SetBgScroll(0, 0xFFE9, 0xFFD0);
     }
 #elif defined(VERSION_JP)
@@ -3845,7 +3845,7 @@ void mode_sioError_0(s32 arg) {
     LoadBgPalette(0, gCard00Palette, 32);
 #else
     LoadBgTiles(0, gSysMsgWinTiles, 0x140);
-    LoadBgMap(0, gUnk_096112B8, 0x800);
+    LoadBgMap(0, gSysMsgWinMap, 0x800);
     LoadBgPalette(0, gCard00Palette, 32);
     SetBgScroll(0, 0xFFE9, 0xFFD0);
 #endif

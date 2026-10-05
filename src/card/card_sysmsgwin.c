@@ -129,7 +129,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
     case 1:
         pal = &gUnk_050001C0[0x20];
         LoadBgTiles(work->args.bg, gSysMsgWinTiles, 0x140);
-        LoadBgMap(work->args.bg, gUnk_096112B8, 0x800);
+        LoadBgMap(work->args.bg, gSysMsgWinMap, 0x800);
         LoadPalette(gCard00Palette, pal, 32);
 
         switch (work->messageDef->positionIndex) {

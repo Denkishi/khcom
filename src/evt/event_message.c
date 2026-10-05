@@ -2378,10 +2378,10 @@ const s32 gMsgwinTextY[4] = {
 };
 
 static const u16* sMsgwinMapBlockPairs[4][2] = {
-    {gUnk_08125E24, gUnk_0951D2B8},
-    {gUnk_08125E24, gUnk_0951DAB8},
-    {gUnk_0951E2B8, gUnk_08125E24},
-    {gUnk_0951EAB8, gUnk_08125E24},
+    {gUnk_08125E24, gMsgwinTopFaceRightMap},
+    {gUnk_08125E24, gMsgwinBottomFaceRightMap},
+    {gMsgwinTopFaceLeftMap, gUnk_08125E24},
+    {gMsgwinBottomFaceLeftMap, gUnk_08125E24},
 };
 
 const void* gMsgwinMapBlocks[4] = {
@@ -6201,7 +6201,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
 
                     pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
                     LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
-                    LoadBgMap(work->bg, gUnk_096112B8, 0x800);
+                    LoadBgMap(work->bg, gSysMsgWinMap, 0x800);
                     LoadPalette(gCard00Palette, pal, 32);
 
                     if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
@@ -6257,7 +6257,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
 
             pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
             LoadBgTiles(work->bg, gSysMsgWinTiles, 0x140);
-            LoadBgMap(work->bg, gUnk_096112B8, 0x800);
+            LoadBgMap(work->bg, gSysMsgWinMap, 0x800);
             LoadPalette(gCard00Palette, pal, 32);
 
             if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {

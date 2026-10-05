@@ -5435,9 +5435,9 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->animIndex = 0;
     work->animTimer = 0;
     work->shared.hpRatio = 0;
-    work->shared.unk_02 = 0;
+    work->shared.fltShrunk = 0;
     work->shared.unk_03 = 0;
-    work->shared.unk_04 = 0;
+    work->shared.forceRipple = 0;
     work->shared.fltStopTimer = 0;
     work->shared.gimmickTimer = 0;
     work->flash = 0;
@@ -5473,7 +5473,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     } else {
         work->state = 7;
         work->shared.gimmickTimer = 0x34BC0;
-        work->shared.unk_04 = 1;
+        work->shared.forceRipple = 1;
         work->shared.inEvent = 1;
         BosPcSetAnim(work, 12);
     }
@@ -5588,7 +5588,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
         if (x <= 0x109) {
             sel = (y >= 0x144 && y <= 0x162 && x > 175 && (GetRandom() & 0x300)) ? 8 : 7;
         } else {
-            if ((GetRandom() & 3) == 3 && work->shared.unk_02 == 0 && work->shared.gimmickTimer <= 0) {
+            if ((GetRandom() & 3) == 3 && work->shared.fltShrunk == 0 && work->shared.gimmickTimer <= 0) {
                 sel = 6;
             } else if (y > 0x161) {
                 sel = 10;
@@ -5640,7 +5640,7 @@ u8 BosPcUpdateAttack(PcWork* work, Task* task) {
             break;
         case 3:
             if (work->shared.gimmickTimer <= 0) {
-                work->shared.unk_02 = 1;
+                work->shared.fltShrunk = 1;
             }
 
             break;
@@ -5884,7 +5884,7 @@ u8 task_bos_pc_1(PcWork* work, Task* task) {
     BosPcUpdatePaletteCycle(work);
 
     if (ConsumeGimmickFlag(0) == 1) {
-        work->shared.unk_02 = 0;
+        work->shared.fltShrunk = 0;
         work->shared.gimmickTimer = 0x259;
     }
 

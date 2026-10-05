@@ -173,9 +173,9 @@ typedef struct PcShot {
 
 typedef struct PcShared {
     s16 hpRatio;
-    u8 unk_02;
+    u8 fltShrunk;
     u8 unk_03;
-    u8 unk_04;
+    u8 forceRipple;
     u8 inEvent;
     s32 fltStopTimer;
     s32 gimmickTimer;

@@ -125,7 +125,7 @@ void BosPcFltUpdateFloat(PcFltWork* work) {
 
     work->z = work->baseZ;
 
-    if (work->shared->unk_02 == 0) {
+    if (work->shared->fltShrunk == 0) {
         if (IsPlayerOnPlatform(&work->collider) == 1) {
             work->z += 0x200;
 
@@ -194,7 +194,7 @@ void BosPcFltUpdateSubmerged(PcFltWork* work) {
     work->timer -= 1;
 
     if (work->timer < 0) {
-        if (work->shared->unk_02 == 0) {
+        if (work->shared->fltShrunk == 0) {
             work->state = 4;
             work->timer = 0;
             AnimChange(&work->anim, 4, 0);
@@ -236,7 +236,7 @@ void BosPcFltUpdateState5(PcFltWork* work) {
 void BosPcFltUpdateState6(PcFltWork* work) {
     work->z = work->baseZ;
 
-    if (work->shared->unk_02 == 0) {
+    if (work->shared->fltShrunk == 0) {
         work->state = 7;
         work->timer = 0;
         AnimChange(&work->anim, 6, 0);
@@ -302,7 +302,7 @@ void BosPcFltUpdateMotion(PcFltWork* work) {
         work->sinkTimer = 360;
     }
 
-    if (work->shared->unk_02 == 0) {
+    if (work->shared->fltShrunk == 0) {
         if (work->centerX > 0xF400) {
             work->centerX -= 32;
         }

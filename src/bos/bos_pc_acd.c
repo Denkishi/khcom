@@ -118,7 +118,7 @@ void task_bos_pc_acd_2(PcAcdWork* work) {
     work->y = pos->y - 0x400;
     work->z = 0;
 
-    if (shared->unk_04 == 1) {
+    if (shared->forceRipple == 1) {
         tbl = gBosPcAcdFrames;
         ofs = AnimGetGfxIndex(&work->anim) + 5;
         gfx = tbl[ofs];

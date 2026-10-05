@@ -52,7 +52,7 @@ static const s32 sTitleMenuChoiceOrder[4] = {4, 5, 1, 2};
 
 #ifdef VERSION_EU
 static void** sTitleMenuEntrySpritesEu[5] = {
-    gUnkEu_09F81B78,
+    gUnk_09EF6668,
     gUnkEu_09F81B94,
     gUnkEu_09F81BE8,
     gUnkEu_09F81BCC,
@@ -205,8 +205,8 @@ void task_title_obj_0(TitleObjWork* work) {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->sprites[0].tiles = LoadObjTiles(gUnkEu_09750AF8, 0x3C0);
-        work->sprites[0].gfx = gUnkEu_09F81C54[0];
+        work->sprites[0].tiles = LoadObjTiles(gUnk_09771060, 0x3C0);
+        work->sprites[0].gfx = gUnk_09EF65E0[0];
         break;
     case LANGUAGE_FRENCH:
         work->sprites[0].tiles = LoadObjTiles(gUnkEu_09750EE4, 0x3C0);
@@ -253,7 +253,7 @@ void task_title_obj_0(TitleObjWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->sprites[1].tiles = LoadObjTiles(gUnkEu_0973F402, 0x700);
+        work->sprites[1].tiles = LoadObjTiles(gUnk_09771666, 0x700);
         break;
     case LANGUAGE_FRENCH:
         work->sprites[1].tiles = LoadObjTiles(gUnkEu_0973FC6A, 0x7A0);
@@ -282,7 +282,7 @@ void task_title_obj_0(TitleObjWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        AnimInit(&work->anim, gUnkEu_09F81A1C, gUnkEu_09F81A08);
+        AnimInit(&work->anim, gUnk_09EF6604, gUnk_09EF65F0);
         break;
     case LANGUAGE_FRENCH:
         AnimInit(&work->anim, gUnkEu_09F81A34, gUnkEu_09F81A20);
@@ -305,17 +305,9 @@ void task_title_obj_0(TitleObjWork* work) {
 #endif
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->sprites[1].gfx = AnimGetGfx(&work->anim);
-#ifdef VERSION_EU
-    work->sprites[2].tiles = LoadObjTiles(gUnkEu_0973EEFE, 0x100);
-#else
     work->sprites[2].tiles = LoadObjTiles(gUnk_0977143A, 0x100);
-#endif
     work->sprites[2].palette = LoadObjPalette(&gUnk_0984A778[t], 0x20);
-#ifdef VERSION_EU
-    work->sprites[2].gfx = gUnk_09EF65E0[0];
-#else
     work->sprites[2].gfx = gUnk_09EF65E8[0];
-#endif
     work->sprites[2].x = 0x15800;
     work->sprites[2].targetX = 0xB800;
     work->sprites[2].y = 0x91;
@@ -398,7 +390,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gUnkEu_09748BA6, 0x1600);
+        work->tiles = LoadObjTiles(gUnk_09773E1A, 0x1600);
         break;
     case LANGUAGE_FRENCH:
         work->tiles = LoadObjTiles(gUnkEu_0974A284, 0xFA0);
@@ -426,11 +418,11 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     work->palette = LoadObjPalette(gUnk_0984A7F8, 0x20);
     TitleCopyToPaletteBuffer(work->palette->index + 16, gUnk_0984A7F8, 0x20);
 #ifdef VERSION_EU
-    work->tiles2[0] = LoadObjTiles(gUnkEu_0973F058, 0x280);
+    work->tiles2[0] = LoadObjTiles(gUnk_09771DC0, 0x280);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles2[1] = LoadObjTiles(gUnkEu_09741E9A, 0xB20);
+        work->tiles2[1] = LoadObjTiles(gUnk_097720F2, 0xB20);
         break;
     case LANGUAGE_FRENCH:
         work->tiles2[1] = LoadObjTiles(gUnkEu_09742A74, 0xCE0);
@@ -449,7 +441,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
         break;
     }
 
-    work->tiles2[2] = LoadObjTiles(gUnkEu_09745B92, 0x700);
+    work->tiles2[2] = LoadObjTiles(gUnk_09772CC6, 0x700);
 #else
     work->tiles2[0] = LoadObjTiles(gUnk_09771DC0, 0x280);
     work->tiles2[1] = LoadObjTiles(gUnk_097720F2, 0xB20);
@@ -466,18 +458,14 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
     work->palette2[2] = LoadObjPalette(pal2, 0x20);
     TitleCopyToPaletteBuffer(work->palette2[0]->index + 16, pal, 0x20);
     TitleCopyToPaletteBuffer(work->palette2[2]->index + 16, pal2, 0x20);
-#ifdef VERSION_EU
-    AnimInit(&work->anim, gUnkEu_09F81A04, gUnk_09EF65E8);
-#else
     AnimInit(&work->anim, gUnk_09EF661C, gUnk_09EF6608);
-#endif
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx[0] = AnimGetGfx(&work->anim);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
+        work->gfx[1] = gUnk_09EF6620[work->choice[0]];
         break;
     case LANGUAGE_FRENCH:
         work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
@@ -496,7 +484,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* arg) {
         break;
     }
 
-    work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
     work->gfx[2] = gUnk_09EF663C[work->choice[0]];
@@ -696,7 +684,7 @@ void task_title_menu_2(TitleMenuWork* work) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->gfx[1] = gUnkEu_09F81A80[work->choice[0]];
+        work->gfx[1] = gUnk_09EF6620[work->choice[0]];
         break;
     case LANGUAGE_FRENCH:
         work->gfx[1] = gUnkEu_09F81A9C[work->choice[0]];
@@ -715,7 +703,7 @@ void task_title_menu_2(TitleMenuWork* work) {
         break;
     }
 
-    work->gfx[2] = gUnkEu_09F81B0C[work->choice[0]];
+    work->gfx[2] = gUnk_09EF663C[work->choice[0]];
 #else
     work->gfx[1] = gUnk_09EF6620[work->choice[0]];
     work->gfx[2] = gUnk_09EF663C[work->choice[0]];
@@ -759,7 +747,7 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles = LoadObjTiles(gUnkEu_0974E3CC, 0x840);
+            work->tiles = LoadObjTiles(gUnk_0977548C, 0x840);
             break;
         case LANGUAGE_FRENCH:
             work->tiles = LoadObjTiles(gUnkEu_0974EC7C, 0x740);
@@ -785,7 +773,7 @@ void task_title_lumichange_0(TitleLumiChangeWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->tiles = LoadObjTiles(gUnkEu_097462F2, 0x940);
+            work->tiles = LoadObjTiles(gUnk_09773426, 0x940);
             break;
         case LANGUAGE_FRENCH:
             work->tiles = LoadObjTiles(gUnkEu_09746CA4, 0x740);
@@ -887,7 +875,7 @@ void task_title_lumichange_3(TitleLumiChangeWork* work) {
 
 #ifdef VERSION_EU
 void** gTitleLumiSpritesEu[5] = {
-    gUnkEu_09F81B28,
+    gUnk_09EF6658,
     gUnkEu_09F81B38,
     gUnkEu_09F81B68,
     gUnkEu_09F81B58,
@@ -895,7 +883,7 @@ void** gTitleLumiSpritesEu[5] = {
 };
 
 void** gTitleLumiSpritesAltEu[5] = {
-    gUnkEu_09F81C04,
+    gUnk_09EF6684,
     gUnkEu_09F81C14,
     gUnkEu_09F81C44,
     gUnkEu_09F81C34,

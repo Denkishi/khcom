@@ -33,19 +33,6 @@
 
 static BoogieWork* sBoogieWork;
 
-#ifdef VERSION_EU
-static const StatusAnimDef sBosBoogieAnimDefs[9] = {
-    { gUnkEu_09F81CAC, gUnkEu_09F81C90, gUnkEu_09756750, 0 },
-    { gUnkEu_09F81CD0, gUnkEu_09F81CB0, gUnkEu_0975B9C8, 0 },
-    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 0 },
-    { gUnkEu_09F81CF8, gUnkEu_09F81CD4, gUnkEu_0976190E, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 0 },
-    { gUnkEu_09F81D38, gUnkEu_09F81D20, gUnkEu_0976A18E, 0 },
-    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 0 },
-    { gUnkEu_09F81D54, gUnkEu_09F81D3C, gUnkEu_0976E2DE, 1 },
-    { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
-};
-#else
 static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnk_09EF66C4, gUnk_09EF66A8, gUnk_0977A53C, 0 },
     { gUnk_09EF66E8, gUnk_09EF66C8, gUnk_0977F7B4, 0 },
@@ -57,18 +44,7 @@ static const StatusAnimDef sBosBoogieAnimDefs[9] = {
     { gUnk_09EF676C, gUnk_09EF6754, gUnk_097920CA, 1 },
     { gUnk_09EF672C, gUnk_09EF6718, gUnk_0978A4E8, 2 },
 };
-#endif
 
-#ifdef VERSION_EU
-static const StatusObjDef sBosBoogieSpriteDefs[6] = {
-    { gUnkEu_09F81C90, 7 },
-    { gUnkEu_09F81CB0, 8 },
-    { gUnkEu_09F81CD4, 9 },
-    { gUnk_09EF6718, 5 },
-    { gUnkEu_09F81D20, 6 },
-    { gUnkEu_09F81D3C, 6 },
-};
-#else
 static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnk_09EF66A8, 7 },
     { gUnk_09EF66C8, 8 },
@@ -77,7 +53,6 @@ static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gUnk_09EF6738, 6 },
     { gUnk_09EF6754, 6 },
 };
-#endif
 
 static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
 

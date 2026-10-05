@@ -226,33 +226,33 @@ u8 gMapFixed4CellTypes[512] = {
 };
 
 const void* gMapFixed0Bg3Blocks[12] = {
-    gUnk_095A72B8,
-    gUnk_095A7AB8,
-    gUnk_095A82B8,
-    gUnk_095A8AB8,
-    gUnk_095A92B8,
-    gUnk_095A9AB8,
-    gUnk_095AA2B8,
-    gUnk_095AAAB8,
-    gUnk_095AB2B8,
-    gUnk_095ABAB8,
-    gUnk_095AC2B8,
-    gUnk_095ACAB8,
+    gEventBg000Bg3Map0,
+    gEventBg000Bg3Map1,
+    gEventBg000Bg3Map2,
+    gEventBg000Bg3Map3,
+    gEventBg000Bg3Map4,
+    gEventBg000Bg3Map5,
+    gEventBg000Bg3Map6,
+    gEventBg000Bg3Map7,
+    gEventBg000Bg3Map8,
+    gEventBg000Bg3Map9,
+    gEventBg000Bg3Map10,
+    gEventBg000Bg3Map11,
 };
 
 const void* gMapFixed0Bg2Blocks[12] = {
-    gUnk_095AF2B8,
-    gUnk_095AFAB8,
-    gUnk_095B02B8,
-    gUnk_095B0AB8,
-    gUnk_095B12B8,
-    gUnk_095B22B8,
-    gUnk_095B3AB8,
-    gUnk_095B42B8,
-    gUnk_095B4AB8,
-    gUnk_095B52B8,
-    gUnk_095B62B8,
-    gUnk_095B6AB8,
+    gEventBg000Bg2Map0,
+    gEventBg000Bg2Map1,
+    gEventBg000Bg2Map2,
+    gEventBg000Bg2Map3,
+    gEventBg000Bg2Map4,
+    gEventBg000Bg2Map5,
+    gEventBg000Bg2Map6,
+    gEventBg000Bg2Map7,
+    gEventBg000Bg2Map8,
+    gEventBg000Bg2Map9,
+    gEventBg000Bg2Map10,
+    gEventBg000Bg2Map11,
 };
 
 const void* gMapFixed0Bg1Blocks[12] = {
@@ -267,8 +267,8 @@ const void* gMapFixed0Bg1Blocks[12] = {
     gUnk_08125E24,
     gUnk_08125E24,
 #endif
-    gUnk_095B1AB8,
-    gUnk_095B32B8,
+    gEventBg000Bg1Map4,
+    gEventBg000UnusedDoorMap,
 #ifdef VERSION_EU
     gUnkEu_08125144,
     gUnkEu_08125144,
@@ -278,7 +278,7 @@ const void* gMapFixed0Bg1Blocks[12] = {
     gUnk_08125E24,
     gUnk_08125E24,
 #endif
-    gUnk_095B5AB8,
+    gEventBg000Bg1Map9,
 #ifdef VERSION_EU
     gUnkEu_08125144,
     gUnkEu_08125144,
@@ -289,87 +289,87 @@ const void* gMapFixed0Bg1Blocks[12] = {
 };
 
 const void* gMapFixed1Bg3Blocks[6] = {
-    gUnk_095B9AB8,
-    gUnk_095BA2B8,
-    gUnk_095BAAB8,
-    gUnk_095BBAB8,
-    gUnk_095BC2B8,
-    gUnk_095BCAB8,
+    gEventBg001Bg3Map1,
+    gEventBg001Bg3Map2,
+    gEventBg001Bg3Map3,
+    gEventBg001Bg3Map5,
+    gEventBg001Bg3Map6,
+    gEventBg001Bg3Map7,
 };
 
 const void* gMapFixed1Bg2Blocks[6] = {
-    gUnk_095C1AB8,
-    gUnk_095C22B8,
-    gUnk_095C2AB8,
-    gUnk_095C3AB8,
-    gUnk_095C42B8,
-    gUnk_095C4AB8,
+    gEventBg001Bg2Map1,
+    gEventBg001Bg2Map2,
+    gEventBg001Bg2Map3,
+    gEventBg001Bg2Map5,
+    gEventBg001Bg2Map6,
+    gEventBg001Bg2Map7,
 };
 
 const void* gMapFixed2Bg3Blocks[6] = {
-    gUnk_095CAAB8,
-    gUnk_095CB2B8,
-    gUnk_095CBAB8,
-    gUnk_095CCAB8,
-    gUnk_095CD2B8,
-    gUnk_095CDAB8,
+    gEventBg010Bg3Map1,
+    gEventBg010Bg3Map2,
+    gEventBg010Bg3Map3,
+    gEventBg010Bg3Map5,
+    gEventBg010Bg3Map6,
+    gEventBg010Bg3Map7,
 };
 
 const void* gMapFixed2Bg2Blocks[6] = {
-    gUnk_095D2AB8,
-    gUnk_095D32B8,
-    gUnk_095D3AB8,
-    gUnk_095D4AB8,
-    gUnk_095D52B8,
-    gUnk_095D5AB8,
+    gEventBg010Bg2Map1,
+    gEventBg010Bg2Map2,
+    gEventBg010Bg2Map3,
+    gEventBg010Bg2Map5,
+    gEventBg010Bg2Map6,
+    gEventBg010Bg2Map7,
 };
 
 const void* gMapFixed3Bg3Blocks[6] = {
-    gUnk_095E92B8,
-    gUnk_095E9AB8,
-    gUnk_095EA2B8,
-    gUnk_095EB2B8,
-    gUnk_095EBAB8,
-    gUnk_095EC2B8,
+    gEventBg066Bg3Map1,
+    gEventBg066Bg3Map2,
+    gEventBg066Bg3Map3,
+    gEventBg066Bg3Map5,
+    gEventBg066Bg3Map6,
+    gEventBg066Bg3Map7,
 };
 
 const void* gMapFixed3Bg2Blocks[6] = {
-    gUnk_095F12B8,
-    gUnk_095F1AB8,
-    gUnk_095F22B8,
-    gUnk_095F42B8,
-    gUnk_095F4AB8,
-    gUnk_095F52B8,
+    gEventBg066Bg2Map1,
+    gEventBg066Bg2Map2,
+    gEventBg066Bg2Map3,
+    gEventBg066Bg2Map5,
+    gEventBg066Bg2Map6,
+    gEventBg066Bg2Map7,
 };
 
 const void* gMapFixed4Bg3Blocks[4] = {
-    gUnk_09522AB8,
-    gUnk_095232B8,
-    gUnk_09523AB8,
-    gUnk_095242B8,
+    gEventBg002Bg3Map0,
+    gEventBg002Bg3Map1,
+    gEventBg002Bg3Map4,
+    gEventBg002Bg3Map5,
 };
 
 const void* gMapFixed4Bg2Blocks[4] = {
-    gUnk_09524AB8,
-    gUnk_095252B8,
-    gUnk_09525AB8,
-    gUnk_095262B8,
+    gEventBg002Bg2Map0,
+    gEventBg002Bg2Map1,
+    gEventBg002Bg2Map4,
+    gEventBg002Bg2Map5,
 };
 
 const void* gMapFixed4Bg1Blocks[4] = {
-    gUnk_09526AB8,
-    gUnk_095272B8,
-    gUnk_09527AB8,
-    gUnk_095282B8,
+    gEventBg002Bg1Map0,
+    gEventBg002Bg1Map1,
+    gEventBg002Bg1Map4,
+    gEventBg002Bg1Map5,
 };
 
 const void* gMapFixed5Bg2Blocks[6] = {
-    gUnk_095C1AB8,
-    gUnk_095C22B8,
-    gUnk_095C2AB8,
+    gEventBg001Bg2Map1,
+    gEventBg001Bg2Map2,
+    gEventBg001Bg2Map3,
     gUnk_09984F44,
     gUnk_09985744,
-    gUnk_095C4AB8,
+    gEventBg001Bg2Map7,
 };
 
 const MapFixedDef* gMapFixedDefs[6] = {

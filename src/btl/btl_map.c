@@ -55,15 +55,15 @@ void task_btl_map_0(BtlMapWork* work) {
             break;
         case 0xA0:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CB06E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBattleBgHadesTiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CB06E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBattleBgHadesTiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F69404, 0xC0);
+            LoadBgPalette(gBtlWork->mapBg, gBattleBgHadesPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFD384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBattleBgHadesMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFD384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBattleBgHadesMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;

@@ -12715,13 +12715,13 @@ entries:
   symbol: gUnk_09856C90
   record: MapFixedDef
   fields:
-    palette: gUnk_09616D58
+    palette: gEventBg000Palette
     paletteSize: 320
     unk_06: [0, 0]
-    tiles: gUnk_094B9798
+    tiles: gEventBg000Tiles
     tilesSize: 28256
     unk_0E: [0, 0]
-    tiles2: gUnk_094B9798
+    tiles2: gEventBg000Tiles
     tilesSize2: 28256
     unk_16: [0, 0]
     map3: gMapFixed0Bg3Blocks
@@ -12783,10 +12783,10 @@ entries:
   symbol: gUnk_09856D34
   record: MapFixedDef
   fields:
-    palette: gUnk_09616E98
+    palette: gEventBg001Palette
     paletteSize: 320
     unk_06: [0, 0]
-    tiles: gUnk_094C05F8
+    tiles: gEventBg001Tiles
     tilesSize: 23936
     unk_0E: [0, 0]
     tiles2: 0
@@ -12851,10 +12851,10 @@ entries:
   symbol: gUnk_09856DE4
   record: MapFixedDef
   fields:
-    palette: gUnk_09616FD8
+    palette: gEventBg010Palette
     paletteSize: 320
     unk_06: [0, 0]
-    tiles: gUnk_094C6378
+    tiles: gEventBg010Tiles
     tilesSize: 14816
     unk_0E: [0, 0]
     tiles2: 0
@@ -12918,10 +12918,10 @@ entries:
   symbol: gUnk_09856E88
   record: MapFixedDef
   fields:
-    palette: gUnk_09617438
+    palette: gEventBg066Palette
     paletteSize: 320
     unk_06: [0, 0]
-    tiles: gUnk_094D7E58
+    tiles: gEventBg066Tiles
     tilesSize: 13280
     unk_0E: [0, 0]
     tiles2: 0
@@ -13012,10 +13012,10 @@ entries:
   symbol: gUnk_09856F64
   record: MapFixedDef
   fields:
-    palette: gUnk_09616E98
+    palette: gEventBg001Palette
     paletteSize: 320
     unk_06: [0, 0]
-    tiles: gUnk_094C05F8
+    tiles: gEventBg001Tiles
     tilesSize: 23936
     unk_0E: [0, 0]
     tiles2: 0

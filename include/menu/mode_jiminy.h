@@ -5,7 +5,7 @@
 #include "text_types.h"
 #include "jiminy_types.h"
 
-extern TextChar gUnk_08159FE0[];
+extern TextChar gJiminyChooseEntryText[];
 
 void JiminyFreeRows();
 u8 JiminyHandleListInput();

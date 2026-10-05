@@ -16,49 +16,49 @@ objects:
     ctype: u8
 entries:
   us:
-  - {name: gUnk_08159DF0, declare: false}
-  - gUnk_08159E10
-  - gUnk_08159E18
-  - {name: gUnk_08159E1E, declare: false}
-  - {name: gUnk_08159E4A, declare: false}
-  - {name: gUnk_08159EC4, declare: false}
+  - {name: gMapSaveConfirmText, declare: false}
+  - gYesChoiceText
+  - gNoChoiceText
+  - {name: gNewGameSlotMenuText, declare: false}
+  - {name: gSioBtlConnectText, declare: false}
+  - {name: gSioChgConnectText, declare: false}
   - {name: common_text_006, declare: false}
-  - {name: common_text_007, declare: false}
-  - gUnk_08159F38
-  - common_text_009
-  - gUnk_08159FBC
-  - {name: gUnk_08159FE0, declare: false}
-  - gUnk_0815A002
-  - gUnk_0815A00E
-  - gUnk_0815A024
-  - {name: gUnk_0815A03A, declare: false}
-  - {name: gUnk_0815A066, declare: false}
-  - {name: gUnk_0815A078, declare: false}
-  - gUnk_0815A09A
-  - gUnk_0815A0A0
-  - {name: gUnk_0815A0BA, declare: false}
-  - {name: gUnk_0815A0CC, declare: false}
-  - gUnk_0815A0EE
-  - {name: gUnk_0815A0F4, declare: false}
-  - {name: gUnk_0815A116, declare: false}
-  - {name: gUnk_0815A130, declare: false}
-  - gUnk_0815A152
-  - {name: gUnk_0815A158, declare: false}
-  - {name: gUnk_0815A176, declare: false}
-  - gUnk_0815A198
+  - {name: gLeaveWorldText, declare: false}
+  - gMsChargeConfirmText
+  - gDeckErrorCpText
+  - gDeleteCardConfirmText
+  - {name: gJiminyChooseEntryText, declare: false}
+  - gJiminyMenuStoryName
+  - gJiminyMenuCardIndexName
+  - gJiminyMenuCharactersName
+  - {name: gMapQuickSaveConfirmText, declare: false}
+  - {name: gLevelUpHpBoostText, declare: false}
+  - {name: gLevelUpRaiseSoraHpText, declare: false}
+  - gLvupMsgHpText
+  - gLvupMsgIncreasedText
+  - {name: gLevelUpCpBoostText, declare: false}
+  - {name: gLevelUpRaiseSoraCpText, declare: false}
+  - gLvupMsgCpText
+  - {name: gLevelUpRaiseRikuHpText, declare: false}
+  - {name: gLevelUpAttackBoostText, declare: false}
+  - {name: gLevelUpRaiseRikuApText, declare: false}
+  - gLvupMsgApText
+  - {name: gLevelUpDarknessBoostText, declare: false}
+  - {name: gLevelUpRaiseRikuDpText, declare: false}
+  - gLvupMsgDpText
   - {name: common_text_030, declare: false}
   - {name: common_text_031, declare: false}
-  - {name: gUnk_0815A20C, declare: false}
-  - {name: gUnk_0815A23C, declare: false}
-  - {name: common_text_034, declare: false}
-  - {name: common_text_035, declare: false}
-  - {name: gUnk_0815A2BE, declare: false}
-  - {name: gUnk_0815A394, declare: false}
-  - {name: gUnk_0815A3C0, declare: false}
-  - {name: gUnk_0815A404, declare: false}
-  - {name: gUnk_0815A428, declare: false}
-  - {name: common_text_041, declare: false}
-  - gUnk_0815A4B6
+  - {name: gSioBtlWaitingText, declare: false}
+  - {name: gSioBtlReadyText, declare: false}
+  - {name: gSioSavingText, declare: false}
+  - {name: gSioSaveCompleteText, declare: false}
+  - {name: gSioErrorText, declare: false}
+  - {name: gSioChgWaitingText, declare: false}
+  - {name: gSioChgSwapConfirmText, declare: false}
+  - {name: gSioChgSwappingText, declare: false}
+  - {name: gSioChgSwapCompleteText, declare: false}
+  - {name: gSioChgFailedPointsText, declare: false}
+  - gSioChgFailedFullText
   - gWorldNameTraverseTown
   - gWorldNameWonderland
   - gWorldNameOlympusColiseum
@@ -208,8 +208,8 @@ entries:
   - gCharacterNameTidus
   - gCharacterNameCid
   - gCharacterNameMoogles
-  - {name: gUnk_0815B1A8, declare: false}
-  - {name: gUnk_0815B1D2, declare: false}
+  - {name: gLevelUpLearnSleightText, declare: false}
+  - {name: gLevelUpSleightsText, declare: false}
   - gCharacterNameJasmine
   - gCharacterNameIago
   - gCharacterNameJafarGenie
@@ -236,25 +236,25 @@ entries:
   - gCharacterNameEeyore
   - gCharacterNameTigger
   - gCharacterNameRabbit
-  - {name: gUnk_0815B3D4, declare: false}
-  - {name: gUnk_0815B3FA, declare: false}
-  - gUnk_0815B418
+  - {name: gSioBtlSendingDeckText, declare: false}
+  - {name: gSioChgSaveCompleteText, declare: false}
+  - gJiminyMenuHeartlessName
   - gCharacterNameJiminyCricket
-  - gUnk_0815B452
-  - gUnk_0815B46C
-  - gUnk_0815B484
-  - gUnk_0815B49A
-  - gUnk_0815B4B4
-  - gUnk_0815B4CC
-  - gUnk_0815B4E6
-  - gUnk_0815B502
-  - gUnk_0815B51E
-  - gUnk_0815B53C
-  - gUnk_0815B55C
+  - gJiminyMenuAttackCardsName
+  - gJiminyMenuMagicCardsName
+  - gJiminyMenuItemCardsName
+  - gJiminyMenuFriendCardsName
+  - gJiminyMenuEnemyCardsName
+  - gJiminyMenuCharacters1Name
+  - gJiminyMenuCharacters2Name
+  - gJiminyStoryTale1Name
+  - gJiminyStoryTale2Name
+  - gJiminyStoryTale3Name
+  - gJiminyStoryTale4Name
   - gWorldNameCastleOblivionHall
-  - {name: gUnk_0815B5A6, declare: false}
+  - {name: gMapSaveCompleteText, declare: false}
   - gRoomNameHiddenChamber
-  - gUnk_0815B5E2
+  - gJiminyMenuMapCardsName
   - gFloorName1
   - gFloorName2
   - gFloorName3
@@ -330,27 +330,27 @@ entries:
   - {name: gEnemyCardEffectNameDash, declare: false}
   - {name: gEnemyCardEffectNameWarpBreak, declare: false}
   - gCharacterNameZexion
-  - gUnk_0815C01E
-  - gUnk_0815C03A
-  - gUnk_0815C058
-  - gUnk_0815C078
-  - gUnk_0815C096
-  - gUnk_0815C0B2
+  - gJiminyRikuStoryTale1Name
+  - gJiminyRikuStoryTale2Name
+  - gJiminyRikuStoryTale3Name
+  - gJiminyRikuStoryTale4Name
+  - gJiminyRikuStoryTale5Name
+  - gJiminyRikuStoryTale6Name
   - gCharacterNameRikuReplica
   - gCharacterNameDiZ
-  - gUnk_0815C0F2
-  - gUnk_0815C10E
-  - {name: gUnk_0815C136, declare: false}
+  - gJiminyMenuPremiumCardsName
+  - gJiminyPremiumCardsName
+  - {name: gMapInspectNoticeText, declare: false}
   - gEnemyNameCardSoldier
   - {name: common_text_326, declare: false}
   - {name: common_text_327, declare: false}
   - {name: common_text_328, declare: false}
-  - {name: gUnk_0815C1C2, declare: false}
-  - gUnk_0815C204
-  - common_text_331
-  - common_text_332
-  - common_text_333
-  - common_text_334
+  - {name: gDeckClearConfirmText, declare: false}
+  - gMsChargeNoticeText
+  - gDeckEquipText
+  - gDeckErrorDeckFullText
+  - gDeckErrorLastAttackCardText
+  - gDeckErrorNoAttackCardText
   - gCardNameKing
   - gCardNameSoulEater
   jp:
@@ -433,7 +433,7 @@ entries:
   - gEnemyNameAxel
   - gEnemyNameVexen
   - gEnemyNameMarluxia
-  - gUnkJp_0814E9E0
+  - gJiminyMenuHeartlessName
   - gEnemyNameShadow
   - gEnemyNameSoldier
   - gEnemyNamePowerwild
@@ -475,11 +475,11 @@ entries:
   - gEnemyNameHook
   - gEnemyNameDragonMaleficent
   - gEnemyNameDarkside
-  - {name: gUnk_0815A066, declare: false}
-  - {name: gUnk_0815A0BA, declare: false}
-  - {name: gUnk_0815B1D2, declare: false}
-  - {name: gUnk_0815A078, declare: false}
-  - {name: gUnk_0815A0CC, declare: false}
+  - {name: gLevelUpHpBoostText, declare: false}
+  - {name: gLevelUpCpBoostText, declare: false}
+  - {name: gLevelUpSleightsText, declare: false}
+  - {name: gLevelUpRaiseSoraHpText, declare: false}
+  - {name: gLevelUpRaiseSoraCpText, declare: false}
   - gCharacterNameJasmine
   - gCharacterNameIago
   - gCharacterNameJafarGenie
@@ -509,61 +509,61 @@ entries:
   - gCharacterNameEeyore
   - gCharacterNameTigger
   - gCharacterNameRabbit
-  - gUnk_08159E10
-  - gUnk_08159E18
-  - gUnk_08159FBC
-  - gUnk_08159F38
+  - gYesChoiceText
+  - gNoChoiceText
+  - gDeleteCardConfirmText
+  - gMsChargeConfirmText
   - gEnemyNameLexaeus
   - gEnemyNameAnsem
   - gCardNameKing
   - gCardNameSoulEater
-  - {name: gUnk_0815A116, declare: false}
-  - {name: gUnk_0815A158, declare: false}
-  - {name: gUnk_0815A0F4, declare: false}
-  - {name: gUnk_0815A130, declare: false}
-  - {name: gUnk_0815A176, declare: false}
-  - gUnk_0815A0A0
-  - gUnk_0815A09A
-  - gUnk_0815A198
-  - gUnk_0815A0EE
-  - gUnk_0815A152
-  - {name: gUnk_0815B1A8, declare: false}
-  - {name: gUnk_08159E4A, declare: false}
-  - {name: gUnk_0815A20C, declare: false}
-  - {name: gUnk_0815A23C, declare: false}
-  - {name: gUnk_0815B3D4, declare: false}
-  - {name: common_text_178, declare: false}
-  - {name: common_text_179, declare: false}
-  - {name: gUnk_08159EC4, declare: false}
-  - {name: gUnk_0815A394, declare: false}
-  - {name: gUnk_0815A3C0, declare: false}
-  - {name: gUnk_0815A404, declare: false}
-  - {name: gUnk_0815A428, declare: false}
-  - {name: gUnk_0815B3FA, declare: false}
-  - {name: common_text_186, declare: false}
-  - gUnk_0815A4B6
-  - {name: gUnk_0814F180, declare: false}
-  - gUnkJp_0814F1CC
-  - gUnkJp_0814F1DC
-  - gUnkJp_0814F1EC
-  - gUnkJp_0814F1FC
-  - gUnkJp_0814F20C
-  - gUnkJp_0814F21C
-  - {name: gUnk_08159FE0, declare: false}
-  - gUnkJp_0814F23C
-  - gUnkJp_0814F24C
-  - gUnkJp_0814F25C
-  - gUnkJp_0814F270
-  - gUnkJp_0814F284
-  - gUnkJp_0814F298
-  - gUnkJp_0814F2AC
-  - gUnkJp_0814F2C0
-  - gUnkJp_0814F2CC
+  - {name: gLevelUpAttackBoostText, declare: false}
+  - {name: gLevelUpDarknessBoostText, declare: false}
+  - {name: gLevelUpRaiseRikuHpText, declare: false}
+  - {name: gLevelUpRaiseRikuApText, declare: false}
+  - {name: gLevelUpRaiseRikuDpText, declare: false}
+  - gLvupMsgIncreasedText
+  - gLvupMsgHpText
+  - gLvupMsgDpText
+  - gLvupMsgCpText
+  - gLvupMsgApText
+  - {name: gLevelUpLearnSleightText, declare: false}
+  - {name: gSioBtlConnectText, declare: false}
+  - {name: gSioBtlWaitingText, declare: false}
+  - {name: gSioBtlReadyText, declare: false}
+  - {name: gSioBtlSendingDeckText, declare: false}
+  - {name: gSioSavingText, declare: false}
+  - {name: gSioSaveCompleteText, declare: false}
+  - {name: gSioChgConnectText, declare: false}
+  - {name: gSioChgWaitingText, declare: false}
+  - {name: gSioChgSwapConfirmText, declare: false}
+  - {name: gSioChgSwappingText, declare: false}
+  - {name: gSioChgSwapCompleteText, declare: false}
+  - {name: gSioChgSaveCompleteText, declare: false}
+  - {name: gSioChgFailedPointsText, declare: false}
+  - gSioChgFailedFullText
+  - {name: gSioErrorText, declare: false}
+  - gJiminyMenuAttackCardsName
+  - gJiminyMenuMagicCardsName
+  - gJiminyMenuItemCardsName
+  - gJiminyMenuFriendCardsName
+  - gJiminyMenuEnemyCardsName
+  - gJiminyMenuMapCardsName
+  - {name: gJiminyChooseEntryText, declare: false}
+  - gJiminyMenuCharacters1Name
+  - gJiminyMenuCharacters2Name
+  - gJiminyStoryTale1Name
+  - gJiminyStoryTale2Name
+  - gJiminyStoryTale3Name
+  - gJiminyStoryTale4Name
+  - gJiminyMenuStoryName
+  - gJiminyMenuCardIndexName
+  - gJiminyMenuCharactersName
   - gWorldNameCastleOblivionHall
-  - {name: gUnk_08159E1E, declare: false}
-  - {name: gUnk_0815A03A, declare: false}
-  - {name: gUnk_08159DF0, declare: false}
-  - {name: gUnk_0815B5A6, declare: false}
+  - {name: gNewGameSlotMenuText, declare: false}
+  - {name: gMapQuickSaveConfirmText, declare: false}
+  - {name: gMapSaveConfirmText, declare: false}
+  - {name: gMapSaveCompleteText, declare: false}
   - gRoomNameTeemingDarkness
   - gRoomNameTranquilDarkness
   - gRoomNameGuardedTrove
@@ -667,25 +667,25 @@ entries:
   - {name: gEnemyCardEffectNameDash, declare: false}
   - {name: gEnemyCardEffectNameWarpBreak, declare: false}
   - gCharacterNameZexion
-  - gUnkJp_0814FA18
-  - gUnkJp_0814FA2C
-  - gUnkJp_0814FA40
-  - gUnkJp_0814FA54
-  - gUnkJp_0814FA68
-  - gUnkJp_0814FA7C
+  - gJiminyRikuStoryTale1Name
+  - gJiminyRikuStoryTale2Name
+  - gJiminyRikuStoryTale3Name
+  - gJiminyRikuStoryTale4Name
+  - gJiminyRikuStoryTale5Name
+  - gJiminyRikuStoryTale6Name
   - gCharacterNameRikuReplica
   - gCharacterNameDiZ
-  - gUnkJp_0814FAA8
-  - gUnkJp_0814FAB8
-  - {name: common_text_323, declare: false}
-  - gUnk_0815C204
+  - gJiminyMenuPremiumCardsName
+  - gJiminyPremiumCardsName
+  - {name: gMapInspectNoticeText, declare: false}
+  - gMsChargeNoticeText
   - gEnemyNameCardSoldier
-  - gUnkJp_0814FB18
-  - {name: gUnkJp_0814FB28, declare: false}
-  - gUnkJp_0814FB30
-  - common_text_329
-  - gUnk_0814FBB0
-  - gUnk_0814FBBC
-  - {name: gUnk_0814FBD4, declare: false}
-  - {name: gUnkJp_0814FBE8, declare: false}
-  - {name: gUnk_0815C1C2, declare: false}
+  - gDeckEquipText
+  - {name: gDeckErrorTitleText, declare: false}
+  - gDeckErrorCpText
+  - gDeckErrorNoAttackCardText
+  - gDeckErrorAnyMoreText
+  - gDeckErrorLastAttackCardText
+  - {name: gDeckErrorDeckFullText, declare: false}
+  - {name: gYesNoChoiceText, declare: false}
+  - {name: gDeckClearConfirmText, declare: false}

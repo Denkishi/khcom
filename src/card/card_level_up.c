@@ -1885,8 +1885,8 @@ void** gLevelUpOptionSpritesByLanguage[5] = {
 #endif
 
 #ifndef VERSION_EU
-u16* gLevelUpSoraTexts[7] = { gUnk_0815A066, gUnk_0815A0BA, gUnk_0815B1D2, gUnk_0815A078, gUnk_0815A0CC, gUnk_0815B1A8, (u16*)gLevelUpDisabledText };
-u16* gLevelUpRikuTexts[7] = { gUnk_0815A066, gUnk_0815A116, gUnk_0815A158, gUnk_0815A0F4, gUnk_0815A130, gUnk_0815A176, (u16*)gLevelUpDisabledText };
+u16* gLevelUpSoraTexts[7] = { gLevelUpHpBoostText, gLevelUpCpBoostText, gLevelUpSleightsText, gLevelUpRaiseSoraHpText, gLevelUpRaiseSoraCpText, gLevelUpLearnSleightText, (u16*)gLevelUpDisabledText };
+u16* gLevelUpRikuTexts[7] = { gLevelUpHpBoostText, gLevelUpAttackBoostText, gLevelUpDarknessBoostText, gLevelUpRaiseRikuHpText, gLevelUpRaiseRikuApText, gLevelUpRaiseRikuDpText, (u16*)gLevelUpDisabledText };
 #endif
 const void* gLevelUpBgMapBlocks[2] = { gDefaultBgMap, gLevelUpStatsMap };
 

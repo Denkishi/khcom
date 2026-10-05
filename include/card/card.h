@@ -316,7 +316,7 @@ typedef struct WorldSelAnim {
 
 extern WorldSelAnim gWorldSelAnims[30];
 extern const s32 gSysmsgwinChoiceCursorX[];
-extern u8 gUnk_0815C1C2[];
+extern u8 gDeckClearConfirmText[];
 
 typedef struct CardMessageArgs {
     u32 bg;
@@ -2051,17 +2051,17 @@ extern const u8 gLevelUpDisabledText[];
 #else
 extern const u16 gLevelUpDisabledText[];
 #endif
-extern u16 gUnk_0815A066[];
-extern u16 gUnk_0815A0BA[];
-extern u16 gUnk_0815B1D2[];
-extern u16 gUnk_0815A078[];
-extern u16 gUnk_0815A0CC[];
-extern u16 gUnk_0815B1A8[];
-extern u16 gUnk_0815A116[];
-extern u16 gUnk_0815A158[];
-extern u16 gUnk_0815A0F4[];
-extern u16 gUnk_0815A130[];
-extern u16 gUnk_0815A176[];
+extern u16 gLevelUpHpBoostText[];
+extern u16 gLevelUpCpBoostText[];
+extern u16 gLevelUpSleightsText[];
+extern u16 gLevelUpRaiseSoraHpText[];
+extern u16 gLevelUpRaiseSoraCpText[];
+extern u16 gLevelUpLearnSleightText[];
+extern u16 gLevelUpAttackBoostText[];
+extern u16 gLevelUpDarknessBoostText[];
+extern u16 gLevelUpRaiseRikuHpText[];
+extern u16 gLevelUpRaiseRikuApText[];
+extern u16 gLevelUpRaiseRikuDpText[];
 extern u16* gLevelUpSoraTexts[7];
 extern u16* gLevelUpRikuTexts[7];
 #endif
@@ -2157,7 +2157,7 @@ extern const CardHelpText* gDarkFiragaHelpTexts[];
 extern const CardHelpText* gDarkAuraHelpTexts[];
 extern const CardHelpDef* gCardHelpDefs[];
 #ifdef VERSION_EU
-extern u8 gUnkEu_090D1DA5[];
+extern u8 gLeaveWorldText[];
 extern u8* gLeaveWorldTextByLanguage[5];
 extern void* gRikuDeckTitleBannerTiles[5];
 extern u8* gRikuDeckEquipMarkerTilesByLanguage[5];
@@ -2395,7 +2395,7 @@ void BuildDebugMixedDeck(u8 a);
 void func_080AB964();
 void func_080AB968();
 #ifdef VERSION_JP
-extern u8 gUnk_0814FBD4[];
+extern u8 gDeckErrorDeckFullText[];
 #endif
 
 #endif /* GUARD_CARD_H */

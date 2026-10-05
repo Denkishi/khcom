@@ -56,10 +56,10 @@ void CardName_0(CardNameWork* work) {
 #else
     work->textSlotCount = LoadTextSlots(q->cardDef->name, work->textSlots);
 #ifdef VERSION_JP
-    work->textSlotCount3 = LoadTextSlots((u16*)gUnkJp_09009748, work->textSlots3);
-    work->textSlotCount2 = LoadTextSlots((u16*)gUnkJp_0900974C, work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixText, work->textSlots3);
+    work->textSlotCount2 = LoadTextSlots((u16*)gPremiumCardMessageText, work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(gUnk_090362A4, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gPremiumCardMessageText, work->textSlots2);
 #endif
 #endif
 #ifndef VERSION_JP
@@ -80,7 +80,7 @@ void CardName_0(CardNameWork* work) {
         work->messageX = v;
         break;
     case LANGUAGE_FRENCH:
-        work->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF648, work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixTextFrench, work->textSlots3);
         v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
         work->nameX = v;
         t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
@@ -89,7 +89,7 @@ void CardName_0(CardNameWork* work) {
         work->messageX = v;
         break;
     case LANGUAGE_SPANISH:
-        work->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_090CF64D, work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixTextSpanish, work->textSlots3);
         v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
         work->nameX = v;
         work->suffixX = v - 3;

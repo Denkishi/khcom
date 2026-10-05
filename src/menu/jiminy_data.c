@@ -1544,11 +1544,11 @@ JiminyTextChar* gJiminyHeartlessNeoshadowLines[3] = {
 };
 
 JiminyTextChar* gJiminyRootNames[3] = {
-    gUnk_0815A002, gUnk_0815A00E, gUnk_0815A024,
+    gJiminyMenuStoryName, gJiminyMenuCardIndexName, gJiminyMenuCharactersName,
 };
 
 JiminyTextChar* gJiminyEntry01Names[17] = {
-    gUnk_0815B502, gUnk_0815B51E, gUnk_0815B53C, gUnk_0815B55C,
+    gJiminyStoryTale1Name, gJiminyStoryTale2Name, gJiminyStoryTale3Name, gJiminyStoryTale4Name,
     gWorldNameTraverseTown, gWorldNameWonderland, gWorldNameOlympusColiseum, gWorldNameAgrabah,
     gWorldNameHalloweenTown, gWorldNameMonstro, gWorldNameAtlantica, gWorldNameNeverLand,
     gWorldNameHollowBastion, gWorldName100AcreWood, gWorldNameTwilightTown, gWorldNameDestinyIslands,
@@ -1556,12 +1556,12 @@ JiminyTextChar* gJiminyEntry01Names[17] = {
 };
 
 JiminyTextChar* gJiminyEntry02Names[7] = {
-    gUnk_0815B452, gUnk_0815B46C, gUnk_0815B484, gUnk_0815B49A,
-    gUnk_0815B4B4, gUnk_0815B5E2, gUnk_0815C0F2,
+    gJiminyMenuAttackCardsName, gJiminyMenuMagicCardsName, gJiminyMenuItemCardsName, gJiminyMenuFriendCardsName,
+    gJiminyMenuEnemyCardsName, gJiminyMenuMapCardsName, gJiminyMenuPremiumCardsName,
 };
 
 JiminyTextChar* gJiminyEntry03Names[3] = {
-    gUnk_0815B4CC, gUnk_0815B4E6, gUnk_0815B418,
+    gJiminyMenuCharacters1Name, gJiminyMenuCharacters2Name, gJiminyMenuHeartlessName,
 };
 
 JiminyTextChar* gJiminyEntry04Names[17] = {
@@ -1616,7 +1616,7 @@ JiminyTextChar* gJiminyEntry09Names[26] = {
 };
 
 JiminyTextChar* gJiminyEntry10Names[1] = {
-    gUnk_0815C10E,
+    gJiminyPremiumCardsName,
 };
 
 JiminyTextChar* gJiminyEntry11Names[25] = {
@@ -1655,8 +1655,8 @@ JiminyTextChar* gJiminyEntry13Names[35] = {
 };
 
 JiminyTextChar* gJiminyEntry15Names[6] = {
-    gUnk_0815C01E, gUnk_0815C03A, gUnk_0815C058, gUnk_0815C078,
-    gUnk_0815C096, gUnk_0815C0B2,
+    gJiminyRikuStoryTale1Name, gJiminyRikuStoryTale2Name, gJiminyRikuStoryTale3Name, gJiminyRikuStoryTale4Name,
+    gJiminyRikuStoryTale5Name, gJiminyRikuStoryTale6Name,
 };
 
 JiminyTextChar* gJiminyEntry18Names[14] = {
@@ -3110,11 +3110,11 @@ JiminyTextChar* gJiminyRikuHeartlessDarksideLines[5] = {
 };
 
 JiminyTextChar* gJiminyRootNames[3] = {
-    gUnkJp_0814F2AC, gUnkJp_0814F2C0, gUnkJp_0814F2CC,
+    gJiminyMenuStoryName, gJiminyMenuCardIndexName, gJiminyMenuCharactersName,
 };
 
 JiminyTextChar* gJiminyEntry01Names[17] = {
-    gUnkJp_0814F25C, gUnkJp_0814F270, gUnkJp_0814F284, gUnkJp_0814F298,
+    gJiminyStoryTale1Name, gJiminyStoryTale2Name, gJiminyStoryTale3Name, gJiminyStoryTale4Name,
     gWorldNameTraverseTown, gWorldNameWonderland, gWorldNameOlympusColiseum, gWorldNameAgrabah,
     gWorldNameHalloweenTown, gWorldNameMonstro, gWorldNameAtlantica, gWorldNameNeverLand,
     gWorldNameHollowBastion, gWorldName100AcreWood, gWorldNameTwilightTown, gWorldNameDestinyIslands,
@@ -3122,12 +3122,12 @@ JiminyTextChar* gJiminyEntry01Names[17] = {
 };
 
 JiminyTextChar* gJiminyEntry02Names[7] = {
-    gUnkJp_0814F1CC, gUnkJp_0814F1DC, gUnkJp_0814F1EC, gUnkJp_0814F1FC,
-    gUnkJp_0814F20C, gUnkJp_0814F21C, gUnkJp_0814FAA8,
+    gJiminyMenuAttackCardsName, gJiminyMenuMagicCardsName, gJiminyMenuItemCardsName, gJiminyMenuFriendCardsName,
+    gJiminyMenuEnemyCardsName, gJiminyMenuMapCardsName, gJiminyMenuPremiumCardsName,
 };
 
 JiminyTextChar* gJiminyEntry03Names[3] = {
-    gUnkJp_0814F23C, gUnkJp_0814F24C, gUnkJp_0814E9E0,
+    gJiminyMenuCharacters1Name, gJiminyMenuCharacters2Name, gJiminyMenuHeartlessName,
 };
 
 JiminyTextChar* gJiminyEntry04Names[17] = {
@@ -3182,7 +3182,7 @@ JiminyTextChar* gJiminyEntry09Names[26] = {
 };
 
 JiminyTextChar* gJiminyEntry10Names[1] = {
-    gUnkJp_0814FAB8,
+    gJiminyPremiumCardsName,
 };
 
 JiminyTextChar* gJiminyEntry11Names[25] = {
@@ -3221,8 +3221,8 @@ JiminyTextChar* gJiminyEntry13Names[35] = {
 };
 
 JiminyTextChar* gJiminyEntry15Names[6] = {
-    gUnkJp_0814FA18, gUnkJp_0814FA2C, gUnkJp_0814FA40, gUnkJp_0814FA54,
-    gUnkJp_0814FA68, gUnkJp_0814FA7C,
+    gJiminyRikuStoryTale1Name, gJiminyRikuStoryTale2Name, gJiminyRikuStoryTale3Name, gJiminyRikuStoryTale4Name,
+    gJiminyRikuStoryTale5Name, gJiminyRikuStoryTale6Name,
 };
 
 JiminyTextChar* gJiminyEntry18Names[14] = {
@@ -11215,11 +11215,11 @@ const JiminyTextChar* gJiminyRikuHeartlessDarksideLinesSpanish[10] = {
 };
 
 const JiminyLocalizedName* gJiminyRootNames[3] = {
-    &gUnkEu_088925D8, &gUnkEu_08892620, &gUnkEu_0889266C,
+    &gJiminyMenuStoryNameByLanguage, &gJiminyMenuCardIndexNameByLanguage, &gJiminyMenuCharactersNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry01Names[17] = {
-    &gUnkEu_08892450, &gUnkEu_088924BC, &gUnkEu_0889252C, &gUnkEu_08892598,
+    &gJiminyStoryTale1NameByLanguage, &gJiminyStoryTale2NameByLanguage, &gJiminyStoryTale3NameByLanguage, &gJiminyStoryTale4NameByLanguage,
     &gWorldNameTraverseTownByLanguage, &gJiminyStoryWonderlandNameByLanguage, &gWorldNameOlympusColiseumByLanguage, &gWorldNameAgrabahByLanguage,
     &gWorldNameHalloweenTownByLanguage, &gWorldNameMonstroByLanguage, &gWorldNameAtlanticaByLanguage, &gWorldNameNeverLandByLanguage,
     &gWorldNameHollowBastionByLanguage, &gJiminyStory100AcreWoodNameByLanguage, &gWorldNameTwilightTownByLanguage, &gWorldNameDestinyIslandsByLanguage,
@@ -11227,12 +11227,12 @@ const JiminyLocalizedName* gJiminyEntry01Names[17] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry02Names[7] = {
-    &gUnkEu_0889211C, &gUnkEu_08892170, &gUnkEu_088921C4, &gUnkEu_08892220,
-    &gUnkEu_08892278, &gUnkEu_088922C8, &gUnkEu_088957DC,
+    &gJiminyMenuAttackCardsNameByLanguage, &gJiminyMenuMagicCardsNameByLanguage, &gJiminyMenuItemCardsNameByLanguage, &gJiminyMenuFriendCardsNameByLanguage,
+    &gJiminyMenuEnemyCardsNameByLanguage, &gJiminyMenuMapCardsNameByLanguage, &gJiminyMenuPremiumCardsNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry03Names[3] = {
-    &gUnkEu_0889238C, &gUnkEu_088923E8, &gUnkEu_0888F840,
+    &gJiminyMenuCharacters1NameByLanguage, &gJiminyMenuCharacters2NameByLanguage, &gJiminyMenuHeartlessNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry04Names[17] = {
@@ -11287,7 +11287,7 @@ const JiminyLocalizedName* gJiminyEntry09Names[26] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry10Names[1] = {
-    &gUnkEu_08895850,
+    &gJiminyPremiumCardsNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry11Names[25] = {
@@ -11326,8 +11326,8 @@ const JiminyLocalizedName* gJiminyEntry13Names[35] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry15Names[6] = {
-    &gUnkEu_088954F4, &gUnkEu_08895560, &gUnkEu_088955D0, &gUnkEu_0889563C,
-    &gUnkEu_088956A4, &gUnkEu_08895710,
+    &gJiminyRikuStoryTale1NameByLanguage, &gJiminyRikuStoryTale2NameByLanguage, &gJiminyRikuStoryTale3NameByLanguage, &gJiminyRikuStoryTale4NameByLanguage,
+    &gJiminyRikuStoryTale5NameByLanguage, &gJiminyRikuStoryTale6NameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry18Names[14] = {

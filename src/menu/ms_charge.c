@@ -1261,9 +1261,9 @@ void mode_ms_charge_0() {
     InitTextSlots(sMsChargeDescText, 90);
     length = GetTextLength(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890F40)
+        GetLocalizedString(&gMsChargeConfirmTextByLanguage)
 #else
-        gUnk_08159F38
+        gMsChargeConfirmText
 #endif
     );
     sMsChargeConfirmTextLength = length;
@@ -1277,16 +1277,16 @@ void mode_ms_charge_0() {
     pb = &sMsChargeConfirmTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890F40)
+        GetLocalizedString(&gMsChargeConfirmTextByLanguage)
 #else
-        gUnk_08159F38
+        gMsChargeConfirmText
 #endif
     , sMsChargeConfirmText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08895960)
+        GetLocalizedString(&gMsChargeNoticeTextByLanguage)
 #else
-        gUnk_0815C204
+        gMsChargeNoticeText
 #endif
     );
     sMsChargeNoticeTextLength = length;
@@ -1300,16 +1300,16 @@ void mode_ms_charge_0() {
     pb = &sMsChargeNoticeTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08895960)
+        GetLocalizedString(&gMsChargeNoticeTextByLanguage)
 #else
-        gUnk_0815C204
+        gMsChargeNoticeText
 #endif
     , sMsChargeNoticeText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890E1C)
+        GetLocalizedString(&gYesChoiceTextByLanguage)
 #else
-        gUnk_08159E10
+        gYesChoiceText
 #endif
     );
     sMsChargeYesTextLength = length;
@@ -1323,16 +1323,16 @@ void mode_ms_charge_0() {
     pb = &sMsChargeYesTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890E1C)
+        GetLocalizedString(&gYesChoiceTextByLanguage)
 #else
-        gUnk_08159E10
+        gYesChoiceText
 #endif
     , sMsChargeYesText);
     length = GetTextLength(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890E44)
+        GetLocalizedString(&gNoChoiceTextByLanguage)
 #else
-        gUnk_08159E18
+        gNoChoiceText
 #endif
     );
     sMsChargeNoTextLength = length;
@@ -1346,9 +1346,9 @@ void mode_ms_charge_0() {
     pb = &sMsChargeNoTextCount;
     *pb = LoadTextSlots(
 #ifdef VERSION_EU
-        GetLocalizedString(&gUnkEu_08890E44)
+        GetLocalizedString(&gNoChoiceTextByLanguage)
 #else
-        gUnk_08159E18
+        gNoChoiceText
 #endif
     , sMsChargeNoText);
     MsChargeLoadGrid();

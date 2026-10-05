@@ -78,10 +78,10 @@ static const JiminyEntry sJiminyEntries[21] = {
 
 #if defined(VERSION_US)
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { gUnk_0815B502, gJiminyStoryTale1Lines, 22, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B51E, gJiminyStoryTale2Lines, 19, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B53C, gJiminyStoryTale3Lines, 18, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B55C, gJiminyStoryTale4Lines, 22, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale1Name, gJiminyStoryTale1Lines, 22, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale2Name, gJiminyStoryTale2Lines, 19, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale3Name, gJiminyStoryTale3Lines, 18, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale4Name, gJiminyStoryTale4Lines, 22, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameTraverseTown, gJiminyStoryTraverseTownLines, 20, gWorldImageTraverseTownFrame0, gWorldImageTraverseTownPalette, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameWonderland, gJiminyStoryWonderlandLines, 26, gWorldImageWonderlandFrame0, gWorldImageWonderlandPalette, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameOlympusColiseum, gJiminyStoryOlympusColiseumLines, 17, gWorldImageOlympusColiseumFrame0, gWorldImageOlympusColiseumPalette, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
@@ -98,12 +98,12 @@ static const JiminyDetail sJiminyEntry01Details[17] = {
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { gUnk_0815C01E, gJiminyRikuStoryTale1Lines, 41, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C03A, gJiminyRikuStoryTale2Lines, 26, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C058, gJiminyRikuStoryTale3Lines, 20, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C078, gJiminyRikuStoryTale4Lines, 20, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C096, gJiminyRikuStoryTale5Lines, 23, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C0B2, gJiminyRikuStoryTale6Lines, 31, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale1Name, gJiminyRikuStoryTale1Lines, 41, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale2Name, gJiminyRikuStoryTale2Lines, 26, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale3Name, gJiminyRikuStoryTale3Lines, 20, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale4Name, gJiminyRikuStoryTale4Lines, 20, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale5Name, gJiminyRikuStoryTale5Lines, 23, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale6Name, gJiminyRikuStoryTale6Lines, 31, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -245,7 +245,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { gUnk_0815C10E, gJiminyPremiumCardsLines, 17, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyPremiumCardsName, gJiminyPremiumCardsLines, 17, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -447,10 +447,10 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #elif defined(VERSION_JP)
 
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { gUnkJp_0814F25C, gJiminyStoryTale1Lines, 12, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F270, gJiminyStoryTale2Lines, 14, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F284, gJiminyStoryTale3Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F298, gJiminyStoryTale4Lines, 18, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale1Name, gJiminyStoryTale1Lines, 12, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale2Name, gJiminyStoryTale2Lines, 14, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale3Name, gJiminyStoryTale3Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyStoryTale4Name, gJiminyStoryTale4Lines, 18, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameTraverseTown, gJiminyStoryTraverseTownLines, 16, gWorldImageTraverseTownFrame0, gWorldImageTraverseTownPalette, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameWonderland, gJiminyStoryWonderlandLines, 16, gWorldImageWonderlandFrame0, gWorldImageWonderlandPalette, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { gWorldNameOlympusColiseum, gJiminyStoryOlympusColiseumLines, 16, gWorldImageOlympusColiseumFrame0, gWorldImageOlympusColiseumPalette, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
@@ -467,12 +467,12 @@ static const JiminyDetail sJiminyEntry01Details[17] = {
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { gUnkJp_0814FA18, gJiminyRikuStoryTale1Lines, 28, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA2C, gJiminyRikuStoryTale2Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA40, gJiminyRikuStoryTale3Lines, 13, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA54, gJiminyRikuStoryTale4Lines, 14, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA68, gJiminyRikuStoryTale5Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA7C, gJiminyRikuStoryTale6Lines, 23, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale1Name, gJiminyRikuStoryTale1Lines, 28, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale2Name, gJiminyRikuStoryTale2Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale3Name, gJiminyRikuStoryTale3Lines, 13, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale4Name, gJiminyRikuStoryTale4Lines, 14, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale5Name, gJiminyRikuStoryTale5Lines, 16, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyRikuStoryTale6Name, gJiminyRikuStoryTale6Lines, 23, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -614,7 +614,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { gUnkJp_0814FAB8, gJiminyPremiumCardsLines, 13, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gJiminyPremiumCardsName, gJiminyPremiumCardsLines, 13, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -816,10 +816,10 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #elif defined(VERSION_EU)
 
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { &gUnkEu_08892450, &gJiminyStoryTale1Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088924BC, &gJiminyStoryTale2Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0889252C, &gJiminyStoryTale3Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08892598, &gJiminyStoryTale4Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyStoryTale1NameByLanguage, &gJiminyStoryTale1Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyStoryTale2NameByLanguage, &gJiminyStoryTale2Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyStoryTale3NameByLanguage, &gJiminyStoryTale3Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyStoryTale4NameByLanguage, &gJiminyStoryTale4Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { &gWorldNameTraverseTownByLanguage, &gJiminyStoryTraverseTownText, gWorldImageTraverseTownFrame0, gWorldImageTraverseTownPalette, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { &gWorldNameWonderlandByLanguage, &gJiminyStoryWonderlandText, gWorldImageWonderlandFrame0, gWorldImageWonderlandPalette, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
     { &gWorldNameOlympusColiseumByLanguage, &gJiminyStoryOlympusColiseumText, gWorldImageOlympusColiseumFrame0, gWorldImageOlympusColiseumPalette, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
@@ -836,12 +836,12 @@ static const JiminyDetail sJiminyEntry01Details[17] = {
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { &gUnkEu_088954F4, &gJiminyRikuStoryTale1Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08895560, &gJiminyRikuStoryTale2Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088955D0, &gJiminyRikuStoryTale3Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0889563C, &gJiminyRikuStoryTale4Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088956A4, &gJiminyRikuStoryTale5Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08895710, &gJiminyRikuStoryTale6Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale1NameByLanguage, &gJiminyRikuStoryTale1Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale2NameByLanguage, &gJiminyRikuStoryTale2Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale3NameByLanguage, &gJiminyRikuStoryTale3Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale4NameByLanguage, &gJiminyRikuStoryTale4Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale5NameByLanguage, &gJiminyRikuStoryTale5Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyRikuStoryTale6NameByLanguage, &gJiminyRikuStoryTale6Text, gWorldImageCastleOblivionFrame0, gWorldImageCastleOblivionPalette, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -983,7 +983,7 @@ static const JiminyDetail sJiminyEntry09Details[26] = {
 };
 
 static const JiminyDetail sJiminyEntry10Details[1] = {
-    { &gUnkEu_08895850, &gJiminyPremiumCardsText, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gJiminyPremiumCardsNameByLanguage, &gJiminyPremiumCardsText, gJiminyPremiumCardFrame0, gJiminyPremiumCardPalette, gJiminyPremiumCardTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry16Details[22] = {
@@ -1610,11 +1610,11 @@ void mode_jiminy_0() {
 
     InitMsgGlyphSprites(0);
 #ifdef VERSION_JP
-    sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
+    sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gJiminyChooseEntryText);
 #elif defined(VERSION_EU)
-    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gUnkEu_08892334));
+    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gJiminyChooseEntryTextByLanguage));
 #else
-    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
+    sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gJiminyChooseEntryText);
 #endif
 
     for (j = 0; j <= 0x14; j++) {
@@ -1741,12 +1741,12 @@ void mode_jiminy_1() {
         e = &sJiminyEntries[sJiminyWork->entry];
         p = &sJiminyWork->pairs[sJiminyWork->entry];
 #ifdef VERSION_JP
-        sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gUnk_08159FE0);
+        sJiminyWork->charCount = LayoutMsgGlyphsSjis(0x400, 0x2600, gJiminyChooseEntryText);
 #else
 #ifdef VERSION_EU
-        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gUnkEu_08892334));
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, GetLocalizedString(&gJiminyChooseEntryTextByLanguage));
 #else
-        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gUnk_08159FE0);
+        sJiminyWork->charCount = LayoutMsgGlyphs(0x200, 0x2400, gJiminyChooseEntryText);
 #endif
 #endif
         DisableBg(3);

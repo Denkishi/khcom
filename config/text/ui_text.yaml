@@ -53,7 +53,7 @@ fragments:
     ctype: const u16
     count: exact
     entries:
-    - gUnk_090362A4
+    - gPremiumCardMessageText
   - name: deck_equip_suffix.inc
     start: 0x0903C008
     end: 0x0903C00C
@@ -62,7 +62,7 @@ fragments:
     ctype: const u16
     count: exact
     entries:
-    - gUnk_0903C008
+    - gDeckEquipSuffixText
   - name: deck_names.inc
     start: 0x09EE4AC8
     end: 0x09EE4AF2
@@ -71,9 +71,9 @@ fragments:
     ctype: u16
     count: exact
     entries:
-    - gUnk_09EE4AC8
-    - gUnk_09EE4AD6
-    - gUnk_09EE4AE4
+    - gDefaultDeckName0Text
+    - gDefaultDeckName1Text
+    - gDefaultDeckName2Text
   jp:
   - name: riku_deck_names.inc
     start: 0x0900740E
@@ -113,9 +113,9 @@ fragments:
     form: string
     count: slot
     entries:
-    - gUnkJp_090089B0
-    - gUnkJp_090089BC
-    - gUnkJp_090089C8
+    - gDefaultDeckName0TextJapanese
+    - gDefaultDeckName1TextJapanese
+    - gDefaultDeckName2TextJapanese
   - name: deck_keyboard.inc
     start: 0x09008A2C
     end: 0x09008CA3
@@ -153,8 +153,8 @@ fragments:
     ctype: const u8
     form: string
     entries:
-    - gUnkJp_09009748
-    - gUnkJp_0900974C
+    - gPremiumCardSuffixText
+    - gPremiumCardMessageText
   - name: deck_equip_suffix.inc
     start: 0x0900D48C
     end: 0x0900D48F
@@ -163,7 +163,7 @@ fragments:
     ctype: const u8
     form: string
     entries:
-    - gUnk_0903C008
+    - gDeckEquipSuffixText
   - name: deck_names.inc
     start: 0x09EBC0E8
     end: 0x09EBC112
@@ -172,9 +172,9 @@ fragments:
     ctype: u16
     count: exact
     entries:
-    - gUnk_09EE4AC8
-    - gUnk_09EE4AD6
-    - gUnk_09EE4AE4
+    - gDefaultDeckName0Text
+    - gDefaultDeckName1Text
+    - gDefaultDeckName2Text
   eu:
   - name: riku_deck_names.inc
     start: 0x090CD43E
@@ -236,8 +236,8 @@ fragments:
     ctype: const u8
     count: exact
     entries:
-    - gUnkEu_090CF648
-    - gUnkEu_090CF64D
+    - gPremiumCardSuffixTextFrench
+    - gPremiumCardSuffixTextSpanish
   - name: deck_equip_suffix.inc
     start: 0x090D1884
     end: 0x090D1886
@@ -246,7 +246,7 @@ fragments:
     ctype: const u8
     form: string
     entries:
-    - gUnk_0903C008
+    - gDeckEquipSuffixText
   - name: link_deck_names.inc
     start: 0x095DA860
     end: 0x095DA86F
@@ -255,8 +255,8 @@ fragments:
     ctype: const u8
     count: exact
     entries:
-    - gUnkEu_095DA860
-    - gUnkEu_095DA867
+    - gSioDebugDeckName0Text
+    - gSioDebugDeckName1Text
   - name: deck_names.inc
     start: 0x09F6FD74
     end: 0x09F6FD89
@@ -265,6 +265,6 @@ fragments:
     ctype: u8
     count: exact
     entries:
-    - gUnkEu_09F6FD74
-    - gUnkEu_09F6FD7B
-    - gUnkEu_09F6FD82
+    - gDefaultDeckName0Text
+    - gDefaultDeckName1Text
+    - gDefaultDeckName2Text

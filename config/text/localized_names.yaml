@@ -471,12 +471,12 @@ fragments:
     - gEnemyNameMarluxiaItalian
     - gEnemyNameMarluxiaSpanish
     - {name: gEnemyNameMarluxiaByLanguage, record: JiminyLocalizedName, strings: [gEnemyNameMarluxia, gEnemyNameMarluxiaFrench, gEnemyNameMarluxiaGerman, gEnemyNameMarluxiaItalian, gEnemyNameMarluxiaSpanish]}
-    - gUnkEu_0888F7FC
-    - gUnkEu_0888F80A
-    - gUnkEu_0888F818
-    - gUnkEu_0888F826
-    - gUnkEu_0888F830
-    - {name: gUnkEu_0888F840, record: JiminyLocalizedName, strings: [gUnkEu_0888F7FC, gUnkEu_0888F80A, gUnkEu_0888F818, gUnkEu_0888F826, gUnkEu_0888F830]}
+    - gJiminyMenuHeartlessName
+    - gJiminyMenuHeartlessNameFrench
+    - gJiminyMenuHeartlessNameGerman
+    - gJiminyMenuHeartlessNameItalian
+    - gJiminyMenuHeartlessNameSpanish
+    - {name: gJiminyMenuHeartlessNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuHeartlessName, gJiminyMenuHeartlessNameFrench, gJiminyMenuHeartlessNameGerman, gJiminyMenuHeartlessNameItalian, gJiminyMenuHeartlessNameSpanish]}
     - gEnemyNameShadow
     - gEnemyNameShadowFrench
     - gEnemyNameShadowGerman
@@ -723,36 +723,36 @@ fragments:
     - gEnemyNameDarksideItalian
     - gEnemyNameDarksideSpanish
     - {name: gEnemyNameDarksideByLanguage, record: JiminyLocalizedName, strings: [gEnemyNameDarkside, gEnemyNameDarksideFrench, gEnemyNameDarksideGerman, gEnemyNameDarksideItalian, gEnemyNameDarksideSpanish]}
-    - gUnkEu_08890498
-    - gUnkEu_088904A1
-    - gUnkEu_088904AC
-    - gUnkEu_088904B8
-    - gUnkEu_088904BD
-    - {name: gUnkEu_088904C8, record: JiminyLocalizedName, strings: [gUnkEu_08890498, gUnkEu_088904A1, gUnkEu_088904AC, gUnkEu_088904B8, gUnkEu_088904BD]}
-    - gUnkEu_088904DC
-    - gUnkEu_088904E5
-    - gUnkEu_088904F0
-    - gUnkEu_088904FC
-    - gUnkEu_08890501
-    - {name: gUnkEu_0889050C, record: JiminyLocalizedName, strings: [gUnkEu_088904DC, gUnkEu_088904E5, gUnkEu_088904F0, gUnkEu_088904FC, gUnkEu_08890501]}
-    - gUnkEu_08890520
-    - gUnkEu_08890529
-    - gUnkEu_0889052F
-    - gUnkEu_0889053D
-    - gUnkEu_08890545
-    - {name: gUnkEu_0889054C, record: JiminyLocalizedName, strings: [gUnkEu_08890520, gUnkEu_08890529, gUnkEu_0889052F, gUnkEu_0889053D, gUnkEu_08890545]}
-    - gUnkEu_08890560
-    - gUnkEu_08890571
-    - gUnkEu_08890583
-    - gUnkEu_08890596
-    - gUnkEu_088905AE
-    - {name: gUnkEu_088905C4, record: JiminyLocalizedName, strings: [gUnkEu_08890560, gUnkEu_08890571, gUnkEu_08890583, gUnkEu_08890596, gUnkEu_088905AE]}
-    - gUnkEu_088905D8
-    - gUnkEu_088905E9
-    - gUnkEu_088905FB
-    - gUnkEu_0889060E
-    - gUnkEu_08890626
-    - {name: gUnkEu_0889063C, record: JiminyLocalizedName, strings: [gUnkEu_088905D8, gUnkEu_088905E9, gUnkEu_088905FB, gUnkEu_0889060E, gUnkEu_08890626]}
+    - gLevelUpHpBoostText
+    - gLevelUpHpBoostTextFrench
+    - gLevelUpHpBoostTextGerman
+    - gLevelUpHpBoostTextItalian
+    - gLevelUpHpBoostTextSpanish
+    - {name: gLevelUpHpBoostTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpHpBoostText, gLevelUpHpBoostTextFrench, gLevelUpHpBoostTextGerman, gLevelUpHpBoostTextItalian, gLevelUpHpBoostTextSpanish]}
+    - gLevelUpCpBoostText
+    - gLevelUpCpBoostTextFrench
+    - gLevelUpCpBoostTextGerman
+    - gLevelUpCpBoostTextItalian
+    - gLevelUpCpBoostTextSpanish
+    - {name: gLevelUpCpBoostTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpCpBoostText, gLevelUpCpBoostTextFrench, gLevelUpCpBoostTextGerman, gLevelUpCpBoostTextItalian, gLevelUpCpBoostTextSpanish]}
+    - gLevelUpSleightsText
+    - gLevelUpSleightsTextFrench
+    - gLevelUpSleightsTextGerman
+    - gLevelUpSleightsTextItalian
+    - gLevelUpSleightsTextSpanish
+    - {name: gLevelUpSleightsTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpSleightsText, gLevelUpSleightsTextFrench, gLevelUpSleightsTextGerman, gLevelUpSleightsTextItalian, gLevelUpSleightsTextSpanish]}
+    - gLevelUpRaiseSoraHpText
+    - gLevelUpRaiseSoraHpTextFrench
+    - gLevelUpRaiseSoraHpTextGerman
+    - gLevelUpRaiseSoraHpTextItalian
+    - gLevelUpRaiseSoraHpTextSpanish
+    - {name: gLevelUpRaiseSoraHpTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpRaiseSoraHpText, gLevelUpRaiseSoraHpTextFrench, gLevelUpRaiseSoraHpTextGerman, gLevelUpRaiseSoraHpTextItalian, gLevelUpRaiseSoraHpTextSpanish]}
+    - gLevelUpRaiseSoraCpText
+    - gLevelUpRaiseSoraCpTextFrench
+    - gLevelUpRaiseSoraCpTextGerman
+    - gLevelUpRaiseSoraCpTextItalian
+    - gLevelUpRaiseSoraCpTextSpanish
+    - {name: gLevelUpRaiseSoraCpTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpRaiseSoraCpText, gLevelUpRaiseSoraCpTextFrench, gLevelUpRaiseSoraCpTextGerman, gLevelUpRaiseSoraCpTextItalian, gLevelUpRaiseSoraCpTextSpanish]}
     - gCharacterNameJasmine
     - gCharacterNameJasmineFrench
     - gCharacterNameJasmineGerman
@@ -921,30 +921,30 @@ fragments:
     - gCharacterNameRabbitItalian
     - gCharacterNameRabbitSpanish
     - {name: gCharacterNameRabbitByLanguage, record: JiminyLocalizedName, strings: [gCharacterNameRabbit, gCharacterNameRabbitFrench, gCharacterNameRabbitGerman, gCharacterNameRabbitItalian, gCharacterNameRabbitSpanish]}
-    - gUnkEu_08890E08
-    - gUnkEu_08890E0C
-    - gUnkEu_08890E10
-    - gUnkEu_08890E13
-    - gUnkEu_08890E17
-    - {name: gUnkEu_08890E1C, record: JiminyLocalizedName, strings: [gUnkEu_08890E08, gUnkEu_08890E0C, gUnkEu_08890E10, gUnkEu_08890E13, gUnkEu_08890E17]}
-    - gUnkEu_08890E30
-    - gUnkEu_08890E33
-    - gUnkEu_08890E37
-    - gUnkEu_08890E3C
-    - gUnkEu_08890E40
-    - {name: gUnkEu_08890E44, record: JiminyLocalizedName, strings: [gUnkEu_08890E30, gUnkEu_08890E33, gUnkEu_08890E37, gUnkEu_08890E3C, gUnkEu_08890E40]}
-    - gUnkEu_08890E58
-    - gUnkEu_08890E6A
-    - gUnkEu_08890E7E
-    - gUnkEu_08890E93
-    - gUnkEu_08890EAA
-    - {name: gUnkEu_08890EC0, record: JiminyLocalizedName, strings: [gUnkEu_08890E58, gUnkEu_08890E6A, gUnkEu_08890E7E, gUnkEu_08890E93, gUnkEu_08890EAA]}
-    - gUnkEu_08890ED4
-    - gUnkEu_08890EE9
-    - gUnkEu_08890F00
-    - gUnkEu_08890F17
-    - gUnkEu_08890F2B
-    - {name: gUnkEu_08890F40, record: JiminyLocalizedName, strings: [gUnkEu_08890ED4, gUnkEu_08890EE9, gUnkEu_08890F00, gUnkEu_08890F17, gUnkEu_08890F2B]}
+    - gYesChoiceText
+    - gYesChoiceTextFrench
+    - gYesChoiceTextGerman
+    - gYesChoiceTextItalian
+    - gYesChoiceTextSpanish
+    - {name: gYesChoiceTextByLanguage, record: JiminyLocalizedName, strings: [gYesChoiceText, gYesChoiceTextFrench, gYesChoiceTextGerman, gYesChoiceTextItalian, gYesChoiceTextSpanish]}
+    - gNoChoiceText
+    - gNoChoiceTextFrench
+    - gNoChoiceTextGerman
+    - gNoChoiceTextItalian
+    - gNoChoiceTextSpanish
+    - {name: gNoChoiceTextByLanguage, record: JiminyLocalizedName, strings: [gNoChoiceText, gNoChoiceTextFrench, gNoChoiceTextGerman, gNoChoiceTextItalian, gNoChoiceTextSpanish]}
+    - gDeleteCardConfirmText
+    - gDeleteCardConfirmTextFrench
+    - gDeleteCardConfirmTextGerman
+    - gDeleteCardConfirmTextItalian
+    - gDeleteCardConfirmTextSpanish
+    - {name: gDeleteCardConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gDeleteCardConfirmText, gDeleteCardConfirmTextFrench, gDeleteCardConfirmTextGerman, gDeleteCardConfirmTextItalian, gDeleteCardConfirmTextSpanish]}
+    - gMsChargeConfirmText
+    - gMsChargeConfirmTextFrench
+    - gMsChargeConfirmTextGerman
+    - gMsChargeConfirmTextItalian
+    - gMsChargeConfirmTextSpanish
+    - {name: gMsChargeConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gMsChargeConfirmText, gMsChargeConfirmTextFrench, gMsChargeConfirmTextGerman, gMsChargeConfirmTextItalian, gMsChargeConfirmTextSpanish]}
     - gEnemyNameLexaeus
     - gEnemyNameLexaeusFrench
     - gEnemyNameLexaeusGerman
@@ -969,288 +969,288 @@ fragments:
     - gCardNameSoulEaterItalian
     - gCardNameSoulEaterSpanish
     - {name: gCardNameSoulEaterByLanguage, record: JiminyLocalizedName, strings: [gCardNameSoulEater, gCardNameSoulEaterFrench, gCardNameSoulEaterGerman, gCardNameSoulEaterItalian, gCardNameSoulEaterSpanish]}
-    - gUnkEu_08891050
-    - gUnkEu_0889105D
-    - gUnkEu_0889106C
-    - gUnkEu_0889107F
-    - gUnkEu_08891089
-    - {name: gUnkEu_08891098, record: JiminyLocalizedName, strings: [gUnkEu_08891050, gUnkEu_0889105D, gUnkEu_0889106C, gUnkEu_0889107F, gUnkEu_08891089]}
-    - gUnkEu_088910AC
-    - gUnkEu_088910BB
-    - gUnkEu_088910C8
-    - gUnkEu_088910D6
-    - gUnkEu_088910E1
-    - {name: gUnkEu_088910F0, record: JiminyLocalizedName, strings: [gUnkEu_088910AC, gUnkEu_088910BB, gUnkEu_088910C8, gUnkEu_088910D6, gUnkEu_088910E1]}
-    - gUnkEu_08891104
-    - gUnkEu_08891115
-    - gUnkEu_08891127
-    - gUnkEu_0889113A
-    - gUnkEu_08891152
-    - {name: gUnkEu_08891168, record: JiminyLocalizedName, strings: [gUnkEu_08891104, gUnkEu_08891115, gUnkEu_08891127, gUnkEu_0889113A, gUnkEu_08891152]}
-    - gUnkEu_0889117C
-    - gUnkEu_0889118D
-    - gUnkEu_0889119F
-    - gUnkEu_088911B2
-    - gUnkEu_088911CA
-    - {name: gUnkEu_088911E0, record: JiminyLocalizedName, strings: [gUnkEu_0889117C, gUnkEu_0889118D, gUnkEu_0889119F, gUnkEu_088911B2, gUnkEu_088911CA]}
-    - gUnkEu_088911F4
-    - gUnkEu_08891205
-    - gUnkEu_08891217
-    - gUnkEu_0889122A
-    - gUnkEu_08891242
-    - {name: gUnkEu_08891258, record: JiminyLocalizedName, strings: [gUnkEu_088911F4, gUnkEu_08891205, gUnkEu_08891217, gUnkEu_0889122A, gUnkEu_08891242]}
-    - gUnkEu_0889126C
-    - gUnkEu_08891279
-    - gUnkEu_0889127B
-    - gUnkEu_0889128B
-    - gUnkEu_0889128D
-    - {name: gUnkEu_088912A0, record: JiminyLocalizedName, strings: [gUnkEu_0889126C, gUnkEu_08891279, gUnkEu_0889127B, gUnkEu_0889128B, gUnkEu_0889128D]}
-    - gUnkEu_088912B4
-    - gUnkEu_088912B7
-    - gUnkEu_088912BA
-    - gUnkEu_088912C0
-    - gUnkEu_088912C3
-    - {name: gUnkEu_088912C8, record: JiminyLocalizedName, strings: [gUnkEu_088912B4, gUnkEu_088912B7, gUnkEu_088912BA, gUnkEu_088912C0, gUnkEu_088912C3]}
-    - gUnkEu_088912DC
-    - gUnkEu_088912DF
-    - gUnkEu_088912E2
-    - gUnkEu_088912E8
-    - gUnkEu_088912EB
-    - {name: gUnkEu_088912F0, record: JiminyLocalizedName, strings: [gUnkEu_088912DC, gUnkEu_088912DF, gUnkEu_088912E2, gUnkEu_088912E8, gUnkEu_088912EB]}
-    - gUnkEu_08891304
-    - gUnkEu_08891307
-    - gUnkEu_0889130A
-    - gUnkEu_08891310
-    - gUnkEu_08891313
-    - {name: gUnkEu_08891318, record: JiminyLocalizedName, strings: [gUnkEu_08891304, gUnkEu_08891307, gUnkEu_0889130A, gUnkEu_08891310, gUnkEu_08891313]}
-    - gUnkEu_0889132C
-    - gUnkEu_0889132F
-    - gUnkEu_08891332
-    - gUnkEu_08891338
-    - gUnkEu_0889133B
-    - {name: gUnkEu_08891340, record: JiminyLocalizedName, strings: [gUnkEu_0889132C, gUnkEu_0889132F, gUnkEu_08891332, gUnkEu_08891338, gUnkEu_0889133B]}
-    - gUnkEu_08891354
-    - gUnkEu_08891369
-    - gUnkEu_08891381
-    - gUnkEu_08891399
-    - gUnkEu_088913AE
-    - {name: gUnkEu_088913C8, record: JiminyLocalizedName, strings: [gUnkEu_08891354, gUnkEu_08891369, gUnkEu_08891381, gUnkEu_08891399, gUnkEu_088913AE]}
-    - gUnkEu_088913DC
-    - gUnkEu_08891419
-    - gUnkEu_0889143C
-    - gUnkEu_08891483
-    - gUnkEu_088914C8
-    - {name: gUnkEu_08891508, record: JiminyLocalizedName, strings: [gUnkEu_088913DC, gUnkEu_08891419, gUnkEu_0889143C, gUnkEu_08891483, gUnkEu_088914C8]}
-    - gUnkEu_0889151C
-    - gUnkEu_08891532
-    - gUnkEu_08891548
-    - gUnkEu_0889155D
-    - gUnkEu_08891568
-    - {name: gUnkEu_08891580, record: JiminyLocalizedName, strings: [gUnkEu_0889151C, gUnkEu_08891532, gUnkEu_08891548, gUnkEu_0889155D, gUnkEu_08891568]}
-    - gUnkEu_08891594
-    - gUnkEu_088915BD
-    - gUnkEu_088915E4
-    - gUnkEu_0889160E
-    - gUnkEu_08891640
-    - {name: gUnkEu_08891670, record: JiminyLocalizedName, strings: [gUnkEu_08891594, gUnkEu_088915BD, gUnkEu_088915E4, gUnkEu_0889160E, gUnkEu_08891640]}
-    - gUnkEu_08891684
-    - gUnkEu_08891697
-    - gUnkEu_088916AE
-    - gUnkEu_088916D4
-    - gUnkEu_08891701
-    - {name: gUnkEu_08891714, record: JiminyLocalizedName, strings: [gUnkEu_08891684, gUnkEu_08891697, gUnkEu_088916AE, gUnkEu_088916D4, gUnkEu_08891701]}
-    - gUnkEu_08891728
-    - gUnkEu_08891757
-    - gUnkEu_08891789
-    - gUnkEu_088917C4
-    - gUnkEu_088917FC
-    - {name: gUnkEu_08891834, record: JiminyLocalizedName, strings: [gUnkEu_08891728, gUnkEu_08891757, gUnkEu_08891789, gUnkEu_088917C4, gUnkEu_088917FC]}
-    - gUnkEu_08891848
-    - gUnkEu_08891852
-    - gUnkEu_08891860
-    - gUnkEu_08891877
-    - gUnkEu_0889188F
-    - {name: gUnkEu_0889189C, record: JiminyLocalizedName, strings: [gUnkEu_08891848, gUnkEu_08891852, gUnkEu_08891860, gUnkEu_08891877, gUnkEu_0889188F]}
-    - gUnkEu_088918B0
-    - gUnkEu_088918BF
-    - gUnkEu_088918D5
-    - gUnkEu_088918EC
-    - gUnkEu_08891904
-    - {name: gUnkEu_08891918, record: JiminyLocalizedName, strings: [gUnkEu_088918B0, gUnkEu_088918BF, gUnkEu_088918D5, gUnkEu_088918EC, gUnkEu_08891904]}
-    - gUnkEu_0889192C
-    - gUnkEu_08891941
-    - gUnkEu_0889195C
-    - gUnkEu_08891971
-    - gUnkEu_0889197C
-    - {name: gUnkEu_08891998, record: JiminyLocalizedName, strings: [gUnkEu_0889192C, gUnkEu_08891941, gUnkEu_0889195C, gUnkEu_08891971, gUnkEu_0889197C]}
-    - gUnkEu_088919AC
-    - gUnkEu_088919EF
-    - gUnkEu_08891A35
-    - gUnkEu_08891A84
-    - gUnkEu_08891AC7
-    - {name: gUnkEu_08891B10, record: JiminyLocalizedName, strings: [gUnkEu_088919AC, gUnkEu_088919EF, gUnkEu_08891A35, gUnkEu_08891A84, gUnkEu_08891AC7]}
-    - gUnkEu_08891B24
-    - gUnkEu_08891B34
-    - gUnkEu_08891B49
-    - gUnkEu_08891B64
-    - gUnkEu_08891B81
-    - {name: gUnkEu_08891B9C, record: JiminyLocalizedName, strings: [gUnkEu_08891B24, gUnkEu_08891B34, gUnkEu_08891B49, gUnkEu_08891B64, gUnkEu_08891B81]}
-    - gUnkEu_08891BB0
-    - gUnkEu_08891BCC
-    - gUnkEu_08891BF4
-    - gUnkEu_08891C27
-    - gUnkEu_08891C5C
-    - {name: gUnkEu_08891C84, record: JiminyLocalizedName, strings: [gUnkEu_08891BB0, gUnkEu_08891BCC, gUnkEu_08891BF4, gUnkEu_08891C27, gUnkEu_08891C5C]}
-    - gUnkEu_08891C98
-    - gUnkEu_08891CA7
-    - gUnkEu_08891CBD
-    - gUnkEu_08891CD4
-    - gUnkEu_08891CEC
-    - {name: gUnkEu_08891D00, record: JiminyLocalizedName, strings: [gUnkEu_08891C98, gUnkEu_08891CA7, gUnkEu_08891CBD, gUnkEu_08891CD4, gUnkEu_08891CEC]}
-    - gUnkEu_08891D14
-    - gUnkEu_08891D3F
-    - gUnkEu_08891D40
-    - gUnkEu_08891D41
-    - gUnkEu_08891D42
-    - {name: gUnkEu_08891D44, record: JiminyLocalizedName, strings: [gUnkEu_08891D14, gUnkEu_08891D3F, gUnkEu_08891D40, gUnkEu_08891D41, gUnkEu_08891D42]}
-    - gUnkEu_08891D58
-    - gUnkEu_08891D89
-    - gUnkEu_08891DB3
-    - gUnkEu_08891E00
-    - gUnkEu_08891E31
-    - {name: gUnkEu_08891E64, record: JiminyLocalizedName, strings: [gUnkEu_08891D58, gUnkEu_08891D89, gUnkEu_08891DB3, gUnkEu_08891E00, gUnkEu_08891E31]}
-    - gUnkEu_08891E78
-    - gUnkEu_08891EE3
-    - gUnkEu_08891F51
-    - gUnkEu_08891FBF
-    - gUnkEu_08892038
-    - {name: gUnkEu_088920BC, record: JiminyLocalizedName, strings: [gUnkEu_08891E78, gUnkEu_08891EE3, gUnkEu_08891F51, gUnkEu_08891FBF, gUnkEu_08892038]}
-    - gUnkEu_088920D0
-    - gUnkEu_088920DD
-    - gUnkEu_088920EC
-    - gUnkEu_088920FB
-    - gUnkEu_08892109
-    - {name: gUnkEu_0889211C, record: JiminyLocalizedName, strings: [gUnkEu_088920D0, gUnkEu_088920DD, gUnkEu_088920EC, gUnkEu_088920FB, gUnkEu_08892109]}
-    - gUnkEu_08892130
-    - gUnkEu_0889213C
-    - gUnkEu_08892149
-    - gUnkEu_08892155
-    - gUnkEu_08892161
-    - {name: gUnkEu_08892170, record: JiminyLocalizedName, strings: [gUnkEu_08892130, gUnkEu_0889213C, gUnkEu_08892149, gUnkEu_08892155, gUnkEu_08892161]}
-    - gUnkEu_08892184
-    - gUnkEu_0889218F
-    - gUnkEu_0889219C
-    - gUnkEu_088921A8
-    - gUnkEu_088921B6
-    - {name: gUnkEu_088921C4, record: JiminyLocalizedName, strings: [gUnkEu_08892184, gUnkEu_0889218F, gUnkEu_0889219C, gUnkEu_088921A8, gUnkEu_088921B6]}
-    - gUnkEu_088921D8
-    - gUnkEu_088921E5
-    - gUnkEu_088921F2
-    - gUnkEu_08892201
-    - gUnkEu_0889220F
-    - {name: gUnkEu_08892220, record: JiminyLocalizedName, strings: [gUnkEu_088921D8, gUnkEu_088921E5, gUnkEu_088921F2, gUnkEu_08892201, gUnkEu_0889220F]}
-    - gUnkEu_08892234
-    - gUnkEu_08892240
-    - gUnkEu_0889224D
-    - gUnkEu_0889225B
-    - gUnkEu_08892268
-    - {name: gUnkEu_08892278, record: JiminyLocalizedName, strings: [gUnkEu_08892234, gUnkEu_08892240, gUnkEu_0889224D, gUnkEu_0889225B, gUnkEu_08892268]}
-    - gUnkEu_0889228C
-    - gUnkEu_08892296
-    - gUnkEu_088922A2
-    - gUnkEu_088922AD
-    - gUnkEu_088922B9
-    - {name: gUnkEu_088922C8, record: JiminyLocalizedName, strings: [gUnkEu_0889228C, gUnkEu_08892296, gUnkEu_088922A2, gUnkEu_088922AD, gUnkEu_088922B9]}
-    - gUnkEu_088922DC
-    - gUnkEu_088922ED
-    - gUnkEu_088922FF
-    - gUnkEu_0889230F
-    - gUnkEu_08892320
-    - {name: gUnkEu_08892334, record: JiminyLocalizedName, strings: [gUnkEu_088922DC, gUnkEu_088922ED, gUnkEu_088922FF, gUnkEu_0889230F, gUnkEu_08892320]}
-    - gUnkEu_08892348
-    - gUnkEu_08892355
-    - gUnkEu_08892363
-    - gUnkEu_08892370
-    - gUnkEu_0889237F
-    - {name: gUnkEu_0889238C, record: JiminyLocalizedName, strings: [gUnkEu_08892348, gUnkEu_08892355, gUnkEu_08892363, gUnkEu_08892370, gUnkEu_0889237F]}
-    - gUnkEu_088923A0
-    - gUnkEu_088923AE
-    - gUnkEu_088923BC
-    - gUnkEu_088923CA
-    - gUnkEu_088923D9
-    - {name: gUnkEu_088923E8, record: JiminyLocalizedName, strings: [gUnkEu_088923A0, gUnkEu_088923AE, gUnkEu_088923BC, gUnkEu_088923CA, gUnkEu_088923D9]}
-    - gUnkEu_088923FC
-    - gUnkEu_0889240A
-    - gUnkEu_08892417
-    - gUnkEu_0889242A
-    - gUnkEu_0889243C
-    - {name: gUnkEu_08892450, record: JiminyLocalizedName, strings: [gUnkEu_088923FC, gUnkEu_0889240A, gUnkEu_08892417, gUnkEu_0889242A, gUnkEu_0889243C]}
-    - gUnkEu_08892464
-    - gUnkEu_08892473
-    - gUnkEu_08892481
-    - gUnkEu_08892495
-    - gUnkEu_088924A8
-    - {name: gUnkEu_088924BC, record: JiminyLocalizedName, strings: [gUnkEu_08892464, gUnkEu_08892473, gUnkEu_08892481, gUnkEu_08892495, gUnkEu_088924A8]}
-    - gUnkEu_088924D0
-    - gUnkEu_088924E0
-    - gUnkEu_088924EF
-    - gUnkEu_08892504
-    - gUnkEu_08892518
-    - {name: gUnkEu_0889252C, record: JiminyLocalizedName, strings: [gUnkEu_088924D0, gUnkEu_088924E0, gUnkEu_088924EF, gUnkEu_08892504, gUnkEu_08892518]}
-    - gUnkEu_08892540
-    - gUnkEu_0889254F
-    - gUnkEu_0889255D
-    - gUnkEu_08892571
-    - gUnkEu_08892584
-    - {name: gUnkEu_08892598, record: JiminyLocalizedName, strings: [gUnkEu_08892540, gUnkEu_0889254F, gUnkEu_0889255D, gUnkEu_08892571, gUnkEu_08892584]}
-    - gUnkEu_088925AC
-    - gUnkEu_088925B2
-    - gUnkEu_088925BB
-    - gUnkEu_088925C6
-    - gUnkEu_088925CD
-    - {name: gUnkEu_088925D8, record: JiminyLocalizedName, strings: [gUnkEu_088925AC, gUnkEu_088925B2, gUnkEu_088925BB, gUnkEu_088925C6, gUnkEu_088925CD]}
-    - gUnkEu_088925EC
-    - gUnkEu_088925F7
-    - gUnkEu_08892604
-    - gUnkEu_08892610
-    - gUnkEu_08892616
-    - {name: gUnkEu_08892620, record: JiminyLocalizedName, strings: [gUnkEu_088925EC, gUnkEu_088925F7, gUnkEu_08892604, gUnkEu_08892610, gUnkEu_08892616]}
-    - gUnkEu_08892634
-    - gUnkEu_0889263F
-    - gUnkEu_0889264B
-    - gUnkEu_08892656
-    - gUnkEu_08892661
-    - {name: gUnkEu_0889266C, record: JiminyLocalizedName, strings: [gUnkEu_08892634, gUnkEu_0889263F, gUnkEu_0889264B, gUnkEu_08892656, gUnkEu_08892661]}
+    - gLevelUpAttackBoostText
+    - gLevelUpAttackBoostTextFrench
+    - gLevelUpAttackBoostTextGerman
+    - gLevelUpAttackBoostTextItalian
+    - gLevelUpAttackBoostTextSpanish
+    - {name: gLevelUpAttackBoostTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpAttackBoostText, gLevelUpAttackBoostTextFrench, gLevelUpAttackBoostTextGerman, gLevelUpAttackBoostTextItalian, gLevelUpAttackBoostTextSpanish]}
+    - gLevelUpDarknessBoostText
+    - gLevelUpDarknessBoostTextFrench
+    - gLevelUpDarknessBoostTextGerman
+    - gLevelUpDarknessBoostTextItalian
+    - gLevelUpDarknessBoostTextSpanish
+    - {name: gLevelUpDarknessBoostTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpDarknessBoostText, gLevelUpDarknessBoostTextFrench, gLevelUpDarknessBoostTextGerman, gLevelUpDarknessBoostTextItalian, gLevelUpDarknessBoostTextSpanish]}
+    - gLevelUpRaiseRikuHpText
+    - gLevelUpRaiseRikuHpTextFrench
+    - gLevelUpRaiseRikuHpTextGerman
+    - gLevelUpRaiseRikuHpTextItalian
+    - gLevelUpRaiseRikuHpTextSpanish
+    - {name: gLevelUpRaiseRikuHpTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpRaiseRikuHpText, gLevelUpRaiseRikuHpTextFrench, gLevelUpRaiseRikuHpTextGerman, gLevelUpRaiseRikuHpTextItalian, gLevelUpRaiseRikuHpTextSpanish]}
+    - gLevelUpRaiseRikuApText
+    - gLevelUpRaiseRikuApTextFrench
+    - gLevelUpRaiseRikuApTextGerman
+    - gLevelUpRaiseRikuApTextItalian
+    - gLevelUpRaiseRikuApTextSpanish
+    - {name: gLevelUpRaiseRikuApTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpRaiseRikuApText, gLevelUpRaiseRikuApTextFrench, gLevelUpRaiseRikuApTextGerman, gLevelUpRaiseRikuApTextItalian, gLevelUpRaiseRikuApTextSpanish]}
+    - gLevelUpRaiseRikuDpText
+    - gLevelUpRaiseRikuDpTextFrench
+    - gLevelUpRaiseRikuDpTextGerman
+    - gLevelUpRaiseRikuDpTextItalian
+    - gLevelUpRaiseRikuDpTextSpanish
+    - {name: gLevelUpRaiseRikuDpTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpRaiseRikuDpText, gLevelUpRaiseRikuDpTextFrench, gLevelUpRaiseRikuDpTextGerman, gLevelUpRaiseRikuDpTextItalian, gLevelUpRaiseRikuDpTextSpanish]}
+    - gLvupMsgIncreasedText
+    - gLvupMsgIncreasedTextFrench
+    - gLvupMsgIncreasedTextGerman
+    - gLvupMsgIncreasedTextItalian
+    - gLvupMsgIncreasedTextSpanish
+    - {name: gLvupMsgIncreasedTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgIncreasedText, gLvupMsgIncreasedTextFrench, gLvupMsgIncreasedTextGerman, gLvupMsgIncreasedTextItalian, gLvupMsgIncreasedTextSpanish]}
+    - gLvupMsgHpText
+    - gLvupMsgHpTextFrench
+    - gLvupMsgHpTextGerman
+    - gLvupMsgHpTextItalian
+    - gLvupMsgHpTextSpanish
+    - {name: gLvupMsgHpTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgHpText, gLvupMsgHpTextFrench, gLvupMsgHpTextGerman, gLvupMsgHpTextItalian, gLvupMsgHpTextSpanish]}
+    - gLvupMsgDpText
+    - gLvupMsgDpTextFrench
+    - gLvupMsgDpTextGerman
+    - gLvupMsgDpTextItalian
+    - gLvupMsgDpTextSpanish
+    - {name: gLvupMsgDpTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgDpText, gLvupMsgDpTextFrench, gLvupMsgDpTextGerman, gLvupMsgDpTextItalian, gLvupMsgDpTextSpanish]}
+    - gLvupMsgCpText
+    - gLvupMsgCpTextFrench
+    - gLvupMsgCpTextGerman
+    - gLvupMsgCpTextItalian
+    - gLvupMsgCpTextSpanish
+    - {name: gLvupMsgCpTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgCpText, gLvupMsgCpTextFrench, gLvupMsgCpTextGerman, gLvupMsgCpTextItalian, gLvupMsgCpTextSpanish]}
+    - gLvupMsgApText
+    - gLvupMsgApTextFrench
+    - gLvupMsgApTextGerman
+    - gLvupMsgApTextItalian
+    - gLvupMsgApTextSpanish
+    - {name: gLvupMsgApTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgApText, gLvupMsgApTextFrench, gLvupMsgApTextGerman, gLvupMsgApTextItalian, gLvupMsgApTextSpanish]}
+    - gLevelUpLearnSleightText
+    - gLevelUpLearnSleightTextFrench
+    - gLevelUpLearnSleightTextGerman
+    - gLevelUpLearnSleightTextItalian
+    - gLevelUpLearnSleightTextSpanish
+    - {name: gLevelUpLearnSleightTextByLanguage, record: JiminyLocalizedName, strings: [gLevelUpLearnSleightText, gLevelUpLearnSleightTextFrench, gLevelUpLearnSleightTextGerman, gLevelUpLearnSleightTextItalian, gLevelUpLearnSleightTextSpanish]}
+    - gSioBtlConnectText
+    - gSioBtlConnectTextFrench
+    - gSioBtlConnectTextGerman
+    - gSioBtlConnectTextItalian
+    - gSioBtlConnectTextSpanish
+    - {name: gSioBtlConnectTextByLanguage, record: JiminyLocalizedName, strings: [gSioBtlConnectText, gSioBtlConnectTextFrench, gSioBtlConnectTextGerman, gSioBtlConnectTextItalian, gSioBtlConnectTextSpanish]}
+    - gSioBtlWaitingText
+    - gSioBtlWaitingTextFrench
+    - gSioBtlWaitingTextGerman
+    - gSioBtlWaitingTextItalian
+    - gSioBtlWaitingTextSpanish
+    - {name: gSioBtlWaitingTextByLanguage, record: JiminyLocalizedName, strings: [gSioBtlWaitingText, gSioBtlWaitingTextFrench, gSioBtlWaitingTextGerman, gSioBtlWaitingTextItalian, gSioBtlWaitingTextSpanish]}
+    - gSioBtlReadyText
+    - gSioBtlReadyTextFrench
+    - gSioBtlReadyTextGerman
+    - gSioBtlReadyTextItalian
+    - gSioBtlReadyTextSpanish
+    - {name: gSioBtlReadyTextByLanguage, record: JiminyLocalizedName, strings: [gSioBtlReadyText, gSioBtlReadyTextFrench, gSioBtlReadyTextGerman, gSioBtlReadyTextItalian, gSioBtlReadyTextSpanish]}
+    - gSioBtlSendingDeckText
+    - gSioBtlSendingDeckTextFrench
+    - gSioBtlSendingDeckTextGerman
+    - gSioBtlSendingDeckTextItalian
+    - gSioBtlSendingDeckTextSpanish
+    - {name: gSioBtlSendingDeckTextByLanguage, record: JiminyLocalizedName, strings: [gSioBtlSendingDeckText, gSioBtlSendingDeckTextFrench, gSioBtlSendingDeckTextGerman, gSioBtlSendingDeckTextItalian, gSioBtlSendingDeckTextSpanish]}
+    - gSioChgConnectText
+    - gSioChgConnectTextFrench
+    - gSioChgConnectTextGerman
+    - gSioChgConnectTextItalian
+    - gSioChgConnectTextSpanish
+    - {name: gSioChgConnectTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgConnectText, gSioChgConnectTextFrench, gSioChgConnectTextGerman, gSioChgConnectTextItalian, gSioChgConnectTextSpanish]}
+    - gSioSavingText
+    - gSioSavingTextFrench
+    - gSioSavingTextGerman
+    - gSioSavingTextItalian
+    - gSioSavingTextSpanish
+    - {name: gSioSavingTextByLanguage, record: JiminyLocalizedName, strings: [gSioSavingText, gSioSavingTextFrench, gSioSavingTextGerman, gSioSavingTextItalian, gSioSavingTextSpanish]}
+    - gSioSaveCompleteText
+    - gSioSaveCompleteTextFrench
+    - gSioSaveCompleteTextGerman
+    - gSioSaveCompleteTextItalian
+    - gSioSaveCompleteTextSpanish
+    - {name: gSioSaveCompleteTextByLanguage, record: JiminyLocalizedName, strings: [gSioSaveCompleteText, gSioSaveCompleteTextFrench, gSioSaveCompleteTextGerman, gSioSaveCompleteTextItalian, gSioSaveCompleteTextSpanish]}
+    - gSioChgWaitingText
+    - gSioChgWaitingTextFrench
+    - gSioChgWaitingTextGerman
+    - gSioChgWaitingTextItalian
+    - gSioChgWaitingTextSpanish
+    - {name: gSioChgWaitingTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgWaitingText, gSioChgWaitingTextFrench, gSioChgWaitingTextGerman, gSioChgWaitingTextItalian, gSioChgWaitingTextSpanish]}
+    - gSioChgSwapConfirmText
+    - gSioChgSwapConfirmTextFrench
+    - gSioChgSwapConfirmTextGerman
+    - gSioChgSwapConfirmTextItalian
+    - gSioChgSwapConfirmTextSpanish
+    - {name: gSioChgSwapConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgSwapConfirmText, gSioChgSwapConfirmTextFrench, gSioChgSwapConfirmTextGerman, gSioChgSwapConfirmTextItalian, gSioChgSwapConfirmTextSpanish]}
+    - gSioChgSwappingText
+    - gSioChgSwappingTextFrench
+    - gSioChgSwappingTextGerman
+    - gSioChgSwappingTextItalian
+    - gSioChgSwappingTextSpanish
+    - {name: gSioChgSwappingTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgSwappingText, gSioChgSwappingTextFrench, gSioChgSwappingTextGerman, gSioChgSwappingTextItalian, gSioChgSwappingTextSpanish]}
+    - gSioChgSwapCompleteText
+    - gSioChgSwapCompleteTextFrench
+    - gSioChgSwapCompleteTextGerman
+    - gSioChgSwapCompleteTextItalian
+    - gSioChgSwapCompleteTextSpanish
+    - {name: gSioChgSwapCompleteTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgSwapCompleteText, gSioChgSwapCompleteTextFrench, gSioChgSwapCompleteTextGerman, gSioChgSwapCompleteTextItalian, gSioChgSwapCompleteTextSpanish]}
+    - gSioChgSaveCompleteText
+    - gSioChgSaveCompleteTextFrench
+    - gSioChgSaveCompleteTextGerman
+    - gSioChgSaveCompleteTextItalian
+    - gSioChgSaveCompleteTextSpanish
+    - {name: gSioChgSaveCompleteTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgSaveCompleteText, gSioChgSaveCompleteTextFrench, gSioChgSaveCompleteTextGerman, gSioChgSaveCompleteTextItalian, gSioChgSaveCompleteTextSpanish]}
+    - gSioChgFailedPointsText
+    - gSioChgFailedPointsTextFrench
+    - gSioChgFailedPointsTextGerman
+    - gSioChgFailedPointsTextItalian
+    - gSioChgFailedPointsTextSpanish
+    - {name: gSioChgFailedPointsTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgFailedPointsText, gSioChgFailedPointsTextFrench, gSioChgFailedPointsTextGerman, gSioChgFailedPointsTextItalian, gSioChgFailedPointsTextSpanish]}
+    - gSioChgFailedFullText
+    - gSioChgFailedFullTextFrench
+    - gSioChgFailedFullTextGerman
+    - gSioChgFailedFullTextItalian
+    - gSioChgFailedFullTextSpanish
+    - {name: gSioChgFailedFullTextByLanguage, record: JiminyLocalizedName, strings: [gSioChgFailedFullText, gSioChgFailedFullTextFrench, gSioChgFailedFullTextGerman, gSioChgFailedFullTextItalian, gSioChgFailedFullTextSpanish]}
+    - gSioErrorText
+    - gSioErrorTextFrench
+    - gSioErrorTextGerman
+    - gSioErrorTextItalian
+    - gSioErrorTextSpanish
+    - {name: gSioErrorTextByLanguage, record: JiminyLocalizedName, strings: [gSioErrorText, gSioErrorTextFrench, gSioErrorTextGerman, gSioErrorTextItalian, gSioErrorTextSpanish]}
+    - gJiminyMenuAttackCardsName
+    - gJiminyMenuAttackCardsNameFrench
+    - gJiminyMenuAttackCardsNameGerman
+    - gJiminyMenuAttackCardsNameItalian
+    - gJiminyMenuAttackCardsNameSpanish
+    - {name: gJiminyMenuAttackCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuAttackCardsName, gJiminyMenuAttackCardsNameFrench, gJiminyMenuAttackCardsNameGerman, gJiminyMenuAttackCardsNameItalian, gJiminyMenuAttackCardsNameSpanish]}
+    - gJiminyMenuMagicCardsName
+    - gJiminyMenuMagicCardsNameFrench
+    - gJiminyMenuMagicCardsNameGerman
+    - gJiminyMenuMagicCardsNameItalian
+    - gJiminyMenuMagicCardsNameSpanish
+    - {name: gJiminyMenuMagicCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuMagicCardsName, gJiminyMenuMagicCardsNameFrench, gJiminyMenuMagicCardsNameGerman, gJiminyMenuMagicCardsNameItalian, gJiminyMenuMagicCardsNameSpanish]}
+    - gJiminyMenuItemCardsName
+    - gJiminyMenuItemCardsNameFrench
+    - gJiminyMenuItemCardsNameGerman
+    - gJiminyMenuItemCardsNameItalian
+    - gJiminyMenuItemCardsNameSpanish
+    - {name: gJiminyMenuItemCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuItemCardsName, gJiminyMenuItemCardsNameFrench, gJiminyMenuItemCardsNameGerman, gJiminyMenuItemCardsNameItalian, gJiminyMenuItemCardsNameSpanish]}
+    - gJiminyMenuFriendCardsName
+    - gJiminyMenuFriendCardsNameFrench
+    - gJiminyMenuFriendCardsNameGerman
+    - gJiminyMenuFriendCardsNameItalian
+    - gJiminyMenuFriendCardsNameSpanish
+    - {name: gJiminyMenuFriendCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuFriendCardsName, gJiminyMenuFriendCardsNameFrench, gJiminyMenuFriendCardsNameGerman, gJiminyMenuFriendCardsNameItalian, gJiminyMenuFriendCardsNameSpanish]}
+    - gJiminyMenuEnemyCardsName
+    - gJiminyMenuEnemyCardsNameFrench
+    - gJiminyMenuEnemyCardsNameGerman
+    - gJiminyMenuEnemyCardsNameItalian
+    - gJiminyMenuEnemyCardsNameSpanish
+    - {name: gJiminyMenuEnemyCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuEnemyCardsName, gJiminyMenuEnemyCardsNameFrench, gJiminyMenuEnemyCardsNameGerman, gJiminyMenuEnemyCardsNameItalian, gJiminyMenuEnemyCardsNameSpanish]}
+    - gJiminyMenuMapCardsName
+    - gJiminyMenuMapCardsNameFrench
+    - gJiminyMenuMapCardsNameGerman
+    - gJiminyMenuMapCardsNameItalian
+    - gJiminyMenuMapCardsNameSpanish
+    - {name: gJiminyMenuMapCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuMapCardsName, gJiminyMenuMapCardsNameFrench, gJiminyMenuMapCardsNameGerman, gJiminyMenuMapCardsNameItalian, gJiminyMenuMapCardsNameSpanish]}
+    - gJiminyChooseEntryText
+    - gJiminyChooseEntryTextFrench
+    - gJiminyChooseEntryTextGerman
+    - gJiminyChooseEntryTextItalian
+    - gJiminyChooseEntryTextSpanish
+    - {name: gJiminyChooseEntryTextByLanguage, record: JiminyLocalizedName, strings: [gJiminyChooseEntryText, gJiminyChooseEntryTextFrench, gJiminyChooseEntryTextGerman, gJiminyChooseEntryTextItalian, gJiminyChooseEntryTextSpanish]}
+    - gJiminyMenuCharacters1Name
+    - gJiminyMenuCharacters1NameFrench
+    - gJiminyMenuCharacters1NameGerman
+    - gJiminyMenuCharacters1NameItalian
+    - gJiminyMenuCharacters1NameSpanish
+    - {name: gJiminyMenuCharacters1NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuCharacters1Name, gJiminyMenuCharacters1NameFrench, gJiminyMenuCharacters1NameGerman, gJiminyMenuCharacters1NameItalian, gJiminyMenuCharacters1NameSpanish]}
+    - gJiminyMenuCharacters2Name
+    - gJiminyMenuCharacters2NameFrench
+    - gJiminyMenuCharacters2NameGerman
+    - gJiminyMenuCharacters2NameItalian
+    - gJiminyMenuCharacters2NameSpanish
+    - {name: gJiminyMenuCharacters2NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuCharacters2Name, gJiminyMenuCharacters2NameFrench, gJiminyMenuCharacters2NameGerman, gJiminyMenuCharacters2NameItalian, gJiminyMenuCharacters2NameSpanish]}
+    - gJiminyStoryTale1Name
+    - gJiminyStoryTale1NameFrench
+    - gJiminyStoryTale1NameGerman
+    - gJiminyStoryTale1NameItalian
+    - gJiminyStoryTale1NameSpanish
+    - {name: gJiminyStoryTale1NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyStoryTale1Name, gJiminyStoryTale1NameFrench, gJiminyStoryTale1NameGerman, gJiminyStoryTale1NameItalian, gJiminyStoryTale1NameSpanish]}
+    - gJiminyStoryTale2Name
+    - gJiminyStoryTale2NameFrench
+    - gJiminyStoryTale2NameGerman
+    - gJiminyStoryTale2NameItalian
+    - gJiminyStoryTale2NameSpanish
+    - {name: gJiminyStoryTale2NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyStoryTale2Name, gJiminyStoryTale2NameFrench, gJiminyStoryTale2NameGerman, gJiminyStoryTale2NameItalian, gJiminyStoryTale2NameSpanish]}
+    - gJiminyStoryTale3Name
+    - gJiminyStoryTale3NameFrench
+    - gJiminyStoryTale3NameGerman
+    - gJiminyStoryTale3NameItalian
+    - gJiminyStoryTale3NameSpanish
+    - {name: gJiminyStoryTale3NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyStoryTale3Name, gJiminyStoryTale3NameFrench, gJiminyStoryTale3NameGerman, gJiminyStoryTale3NameItalian, gJiminyStoryTale3NameSpanish]}
+    - gJiminyStoryTale4Name
+    - gJiminyStoryTale4NameFrench
+    - gJiminyStoryTale4NameGerman
+    - gJiminyStoryTale4NameItalian
+    - gJiminyStoryTale4NameSpanish
+    - {name: gJiminyStoryTale4NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyStoryTale4Name, gJiminyStoryTale4NameFrench, gJiminyStoryTale4NameGerman, gJiminyStoryTale4NameItalian, gJiminyStoryTale4NameSpanish]}
+    - gJiminyMenuStoryName
+    - gJiminyMenuStoryNameFrench
+    - gJiminyMenuStoryNameGerman
+    - gJiminyMenuStoryNameItalian
+    - gJiminyMenuStoryNameSpanish
+    - {name: gJiminyMenuStoryNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuStoryName, gJiminyMenuStoryNameFrench, gJiminyMenuStoryNameGerman, gJiminyMenuStoryNameItalian, gJiminyMenuStoryNameSpanish]}
+    - gJiminyMenuCardIndexName
+    - gJiminyMenuCardIndexNameFrench
+    - gJiminyMenuCardIndexNameGerman
+    - gJiminyMenuCardIndexNameItalian
+    - gJiminyMenuCardIndexNameSpanish
+    - {name: gJiminyMenuCardIndexNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuCardIndexName, gJiminyMenuCardIndexNameFrench, gJiminyMenuCardIndexNameGerman, gJiminyMenuCardIndexNameItalian, gJiminyMenuCardIndexNameSpanish]}
+    - gJiminyMenuCharactersName
+    - gJiminyMenuCharactersNameFrench
+    - gJiminyMenuCharactersNameGerman
+    - gJiminyMenuCharactersNameItalian
+    - gJiminyMenuCharactersNameSpanish
+    - {name: gJiminyMenuCharactersNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuCharactersName, gJiminyMenuCharactersNameFrench, gJiminyMenuCharactersNameGerman, gJiminyMenuCharactersNameItalian, gJiminyMenuCharactersNameSpanish]}
     - {name: gWorldNameCastleOblivionHall, ctype: const u8}
     - {name: gWorldNameCastleOblivionHallFrench, ctype: const u8}
     - {name: gWorldNameCastleOblivionHallGerman, ctype: const u8}
     - {name: gWorldNameCastleOblivionHallItalian, ctype: const u8}
     - {name: gWorldNameCastleOblivionHallSpanish, ctype: const u8}
     - {name: gWorldNameCastleOblivionHallByLanguage, record: LocalizedText, strings: [gWorldNameCastleOblivionHall, gWorldNameCastleOblivionHallFrench, gWorldNameCastleOblivionHallGerman, gWorldNameCastleOblivionHallItalian, gWorldNameCastleOblivionHallSpanish]}
-    - gUnkEu_08892710
-    - gUnkEu_08892726
-    - gUnkEu_0889273A
-    - gUnkEu_08892756
-    - gUnkEu_0889276B
-    - {name: gUnkEu_08892780, record: JiminyLocalizedName, strings: [gUnkEu_08892710, gUnkEu_08892726, gUnkEu_0889273A, gUnkEu_08892756, gUnkEu_0889276B]}
-    - gUnkEu_08892794
-    - gUnkEu_088927AA
-    - gUnkEu_088927BE
-    - gUnkEu_088927D0
-    - gUnkEu_088927DE
-    - {name: gUnkEu_088927F4, record: JiminyLocalizedName, strings: [gUnkEu_08892794, gUnkEu_088927AA, gUnkEu_088927BE, gUnkEu_088927D0, gUnkEu_088927DE]}
-    - gUnkEu_08892808
-    - gUnkEu_08892818
-    - gUnkEu_08892826
-    - gUnkEu_08892842
-    - gUnkEu_08892850
-    - {name: gUnkEu_08892864, record: JiminyLocalizedName, strings: [gUnkEu_08892808, gUnkEu_08892818, gUnkEu_08892826, gUnkEu_08892842, gUnkEu_08892850]}
-    - gUnkEu_08892878
-    - gUnkEu_08892887
-    - gUnkEu_0889289D
-    - gUnkEu_088928B6
-    - gUnkEu_088928CE
-    - {name: gUnkEu_088928E4, record: JiminyLocalizedName, strings: [gUnkEu_08892878, gUnkEu_08892887, gUnkEu_0889289D, gUnkEu_088928B6, gUnkEu_088928CE]}
+    - gNewGameSlotMenuText
+    - gNewGameSlotMenuTextFrench
+    - gNewGameSlotMenuTextGerman
+    - gNewGameSlotMenuTextItalian
+    - gNewGameSlotMenuTextSpanish
+    - {name: gNewGameSlotMenuTextByLanguage, record: JiminyLocalizedName, strings: [gNewGameSlotMenuText, gNewGameSlotMenuTextFrench, gNewGameSlotMenuTextGerman, gNewGameSlotMenuTextItalian, gNewGameSlotMenuTextSpanish]}
+    - gMapQuickSaveConfirmText
+    - gMapQuickSaveConfirmTextFrench
+    - gMapQuickSaveConfirmTextGerman
+    - gMapQuickSaveConfirmTextItalian
+    - gMapQuickSaveConfirmTextSpanish
+    - {name: gMapQuickSaveConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gMapQuickSaveConfirmText, gMapQuickSaveConfirmTextFrench, gMapQuickSaveConfirmTextGerman, gMapQuickSaveConfirmTextItalian, gMapQuickSaveConfirmTextSpanish]}
+    - gMapSaveConfirmText
+    - gMapSaveConfirmTextFrench
+    - gMapSaveConfirmTextGerman
+    - gMapSaveConfirmTextItalian
+    - gMapSaveConfirmTextSpanish
+    - {name: gMapSaveConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gMapSaveConfirmText, gMapSaveConfirmTextFrench, gMapSaveConfirmTextGerman, gMapSaveConfirmTextItalian, gMapSaveConfirmTextSpanish]}
+    - gMapSaveCompleteText
+    - gMapSaveCompleteTextFrench
+    - gMapSaveCompleteTextGerman
+    - gMapSaveCompleteTextItalian
+    - gMapSaveCompleteTextSpanish
+    - {name: gMapSaveCompleteTextByLanguage, record: JiminyLocalizedName, strings: [gMapSaveCompleteText, gMapSaveCompleteTextFrench, gMapSaveCompleteTextGerman, gMapSaveCompleteTextItalian, gMapSaveCompleteTextSpanish]}
     - gRoomNameTeemingDarkness
     - gRoomNameTeemingDarknessFrench
     - gRoomNameTeemingDarknessGerman
@@ -1869,42 +1869,42 @@ fragments:
     - gCharacterNameZexionItalian
     - gCharacterNameZexionSpanish
     - {name: gCharacterNameZexionByLanguage, record: JiminyLocalizedName, strings: [gCharacterNameZexion, gCharacterNameZexionFrench, gCharacterNameZexionGerman, gCharacterNameZexionItalian, gCharacterNameZexionSpanish]}
-    - gUnkEu_088954A0
-    - gUnkEu_088954AE
-    - gUnkEu_088954BB
-    - gUnkEu_088954CE
-    - gUnkEu_088954E0
-    - {name: gUnkEu_088954F4, record: JiminyLocalizedName, strings: [gUnkEu_088954A0, gUnkEu_088954AE, gUnkEu_088954BB, gUnkEu_088954CE, gUnkEu_088954E0]}
-    - gUnkEu_08895508
-    - gUnkEu_08895517
-    - gUnkEu_08895525
-    - gUnkEu_08895539
-    - gUnkEu_0889554C
-    - {name: gUnkEu_08895560, record: JiminyLocalizedName, strings: [gUnkEu_08895508, gUnkEu_08895517, gUnkEu_08895525, gUnkEu_08895539, gUnkEu_0889554C]}
-    - gUnkEu_08895574
-    - gUnkEu_08895584
-    - gUnkEu_08895593
-    - gUnkEu_088955A8
-    - gUnkEu_088955BC
-    - {name: gUnkEu_088955D0, record: JiminyLocalizedName, strings: [gUnkEu_08895574, gUnkEu_08895584, gUnkEu_08895593, gUnkEu_088955A8, gUnkEu_088955BC]}
-    - gUnkEu_088955E4
-    - gUnkEu_088955F3
-    - gUnkEu_08895601
-    - gUnkEu_08895615
-    - gUnkEu_08895628
-    - {name: gUnkEu_0889563C, record: JiminyLocalizedName, strings: [gUnkEu_088955E4, gUnkEu_088955F3, gUnkEu_08895601, gUnkEu_08895615, gUnkEu_08895628]}
-    - gUnkEu_08895650
-    - gUnkEu_0889565E
-    - gUnkEu_0889566B
-    - gUnkEu_0889567E
-    - gUnkEu_08895690
-    - {name: gUnkEu_088956A4, record: JiminyLocalizedName, strings: [gUnkEu_08895650, gUnkEu_0889565E, gUnkEu_0889566B, gUnkEu_0889567E, gUnkEu_08895690]}
-    - gUnkEu_088956B8
-    - gUnkEu_088956C7
-    - gUnkEu_088956D5
-    - gUnkEu_088956E9
-    - gUnkEu_088956FC
-    - {name: gUnkEu_08895710, record: JiminyLocalizedName, strings: [gUnkEu_088956B8, gUnkEu_088956C7, gUnkEu_088956D5, gUnkEu_088956E9, gUnkEu_088956FC]}
+    - gJiminyRikuStoryTale1Name
+    - gJiminyRikuStoryTale1NameFrench
+    - gJiminyRikuStoryTale1NameGerman
+    - gJiminyRikuStoryTale1NameItalian
+    - gJiminyRikuStoryTale1NameSpanish
+    - {name: gJiminyRikuStoryTale1NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale1Name, gJiminyRikuStoryTale1NameFrench, gJiminyRikuStoryTale1NameGerman, gJiminyRikuStoryTale1NameItalian, gJiminyRikuStoryTale1NameSpanish]}
+    - gJiminyRikuStoryTale2Name
+    - gJiminyRikuStoryTale2NameFrench
+    - gJiminyRikuStoryTale2NameGerman
+    - gJiminyRikuStoryTale2NameItalian
+    - gJiminyRikuStoryTale2NameSpanish
+    - {name: gJiminyRikuStoryTale2NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale2Name, gJiminyRikuStoryTale2NameFrench, gJiminyRikuStoryTale2NameGerman, gJiminyRikuStoryTale2NameItalian, gJiminyRikuStoryTale2NameSpanish]}
+    - gJiminyRikuStoryTale3Name
+    - gJiminyRikuStoryTale3NameFrench
+    - gJiminyRikuStoryTale3NameGerman
+    - gJiminyRikuStoryTale3NameItalian
+    - gJiminyRikuStoryTale3NameSpanish
+    - {name: gJiminyRikuStoryTale3NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale3Name, gJiminyRikuStoryTale3NameFrench, gJiminyRikuStoryTale3NameGerman, gJiminyRikuStoryTale3NameItalian, gJiminyRikuStoryTale3NameSpanish]}
+    - gJiminyRikuStoryTale4Name
+    - gJiminyRikuStoryTale4NameFrench
+    - gJiminyRikuStoryTale4NameGerman
+    - gJiminyRikuStoryTale4NameItalian
+    - gJiminyRikuStoryTale4NameSpanish
+    - {name: gJiminyRikuStoryTale4NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale4Name, gJiminyRikuStoryTale4NameFrench, gJiminyRikuStoryTale4NameGerman, gJiminyRikuStoryTale4NameItalian, gJiminyRikuStoryTale4NameSpanish]}
+    - gJiminyRikuStoryTale5Name
+    - gJiminyRikuStoryTale5NameFrench
+    - gJiminyRikuStoryTale5NameGerman
+    - gJiminyRikuStoryTale5NameItalian
+    - gJiminyRikuStoryTale5NameSpanish
+    - {name: gJiminyRikuStoryTale5NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale5Name, gJiminyRikuStoryTale5NameFrench, gJiminyRikuStoryTale5NameGerman, gJiminyRikuStoryTale5NameItalian, gJiminyRikuStoryTale5NameSpanish]}
+    - gJiminyRikuStoryTale6Name
+    - gJiminyRikuStoryTale6NameFrench
+    - gJiminyRikuStoryTale6NameGerman
+    - gJiminyRikuStoryTale6NameItalian
+    - gJiminyRikuStoryTale6NameSpanish
+    - {name: gJiminyRikuStoryTale6NameByLanguage, record: JiminyLocalizedName, strings: [gJiminyRikuStoryTale6Name, gJiminyRikuStoryTale6NameFrench, gJiminyRikuStoryTale6NameGerman, gJiminyRikuStoryTale6NameItalian, gJiminyRikuStoryTale6NameSpanish]}
     - gCharacterNameRikuReplica
     - gCharacterNameRikuReplicaFrench
     - gCharacterNameRikuReplicaGerman
@@ -1917,78 +1917,78 @@ fragments:
     - gCharacterNameDiZItalian
     - gCharacterNameDiZSpanish
     - {name: gCharacterNameDiZByLanguage, record: JiminyLocalizedName, strings: [gCharacterNameDiZ, gCharacterNameDiZFrench, gCharacterNameDiZGerman, gCharacterNameDiZItalian, gCharacterNameDiZSpanish]}
-    - gUnkEu_08895798
-    - gUnkEu_088957A6
-    - gUnkEu_088957B3
-    - gUnkEu_088957C1
-    - gUnkEu_088957CF
-    - {name: gUnkEu_088957DC, record: JiminyLocalizedName, strings: [gUnkEu_08895798, gUnkEu_088957A6, gUnkEu_088957B3, gUnkEu_088957C1, gUnkEu_088957CF]}
-    - gUnkEu_088957F0
-    - gUnkEu_08895804
-    - gUnkEu_08895817
-    - gUnkEu_0889582A
-    - gUnkEu_0889583C
-    - {name: gUnkEu_08895850, record: JiminyLocalizedName, strings: [gUnkEu_088957F0, gUnkEu_08895804, gUnkEu_08895817, gUnkEu_0889582A, gUnkEu_0889583C]}
-    - gUnkEu_08895864
-    - gUnkEu_08895885
-    - gUnkEu_088958AA
-    - gUnkEu_088958D5
-    - gUnkEu_088958F6
-    - {name: gUnkEu_08895918, record: JiminyLocalizedName, strings: [gUnkEu_08895864, gUnkEu_08895885, gUnkEu_088958AA, gUnkEu_088958D5, gUnkEu_088958F6]}
-    - gUnkEu_0889592C
-    - gUnkEu_08895959
-    - gUnkEu_0889595A
-    - gUnkEu_0889595B
-    - gUnkEu_0889595C
-    - {name: gUnkEu_08895960, record: JiminyLocalizedName, strings: [gUnkEu_0889592C, gUnkEu_08895959, gUnkEu_0889595A, gUnkEu_0889595B, gUnkEu_0889595C]}
+    - gJiminyMenuPremiumCardsName
+    - gJiminyMenuPremiumCardsNameFrench
+    - gJiminyMenuPremiumCardsNameGerman
+    - gJiminyMenuPremiumCardsNameItalian
+    - gJiminyMenuPremiumCardsNameSpanish
+    - {name: gJiminyMenuPremiumCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyMenuPremiumCardsName, gJiminyMenuPremiumCardsNameFrench, gJiminyMenuPremiumCardsNameGerman, gJiminyMenuPremiumCardsNameItalian, gJiminyMenuPremiumCardsNameSpanish]}
+    - gJiminyPremiumCardsName
+    - gJiminyPremiumCardsNameFrench
+    - gJiminyPremiumCardsNameGerman
+    - gJiminyPremiumCardsNameItalian
+    - gJiminyPremiumCardsNameSpanish
+    - {name: gJiminyPremiumCardsNameByLanguage, record: JiminyLocalizedName, strings: [gJiminyPremiumCardsName, gJiminyPremiumCardsNameFrench, gJiminyPremiumCardsNameGerman, gJiminyPremiumCardsNameItalian, gJiminyPremiumCardsNameSpanish]}
+    - gMapInspectNoticeText
+    - gMapInspectNoticeTextFrench
+    - gMapInspectNoticeTextGerman
+    - gMapInspectNoticeTextItalian
+    - gMapInspectNoticeTextSpanish
+    - {name: gMapInspectNoticeTextByLanguage, record: JiminyLocalizedName, strings: [gMapInspectNoticeText, gMapInspectNoticeTextFrench, gMapInspectNoticeTextGerman, gMapInspectNoticeTextItalian, gMapInspectNoticeTextSpanish]}
+    - gMsChargeNoticeText
+    - gMsChargeNoticeTextFrench
+    - gMsChargeNoticeTextGerman
+    - gMsChargeNoticeTextItalian
+    - gMsChargeNoticeTextSpanish
+    - {name: gMsChargeNoticeTextByLanguage, record: JiminyLocalizedName, strings: [gMsChargeNoticeText, gMsChargeNoticeTextFrench, gMsChargeNoticeTextGerman, gMsChargeNoticeTextItalian, gMsChargeNoticeTextSpanish]}
     - gEnemyNameCardSoldier
     - gEnemyNameCardSoldierFrench
     - gEnemyNameCardSoldierGerman
     - gEnemyNameCardSoldierItalian
     - gEnemyNameCardSoldierSpanish
     - {name: gEnemyNameCardSoldierByLanguage, record: JiminyLocalizedName, strings: [gEnemyNameCardSoldier, gEnemyNameCardSoldierFrench, gEnemyNameCardSoldierGerman, gEnemyNameCardSoldierItalian, gEnemyNameCardSoldierSpanish]}
-    - gUnkEu_088959CC
-    - gUnkEu_088959D5
-    - gUnkEu_088959DE
-    - gUnkEu_088959E5
-    - gUnkEu_088959F3
-    - {name: gUnkEu_08895A00, record: JiminyLocalizedName, strings: [gUnkEu_088959CC, gUnkEu_088959D5, gUnkEu_088959DE, gUnkEu_088959E5, gUnkEu_088959F3]}
-    - gUnkEu_08895A14
-    - gUnkEu_08895A41
-    - gUnkEu_08895A67
-    - gUnkEu_08895A97
-    - gUnkEu_08895AC9
-    - {name: gUnkEu_08895AF4, record: JiminyLocalizedName, strings: [gUnkEu_08895A14, gUnkEu_08895A41, gUnkEu_08895A67, gUnkEu_08895A97, gUnkEu_08895AC9]}
-    - gUnkEu_08895B08
-    - gUnkEu_08895B41
-    - gUnkEu_08895B77
-    - gUnkEu_08895BB6
-    - gUnkEu_08895BF2
-    - {name: gUnkEu_08895C30, record: JiminyLocalizedName, strings: [gUnkEu_08895B08, gUnkEu_08895B41, gUnkEu_08895B77, gUnkEu_08895BB6, gUnkEu_08895BF2]}
-    - gUnkEu_08895C44
-    - gUnkEu_08895C65
-    - gUnkEu_08895C8A
-    - gUnkEu_08895CB5
-    - gUnkEu_08895CD6
-    - {name: gUnkEu_08895CF8, record: JiminyLocalizedName, strings: [gUnkEu_08895C44, gUnkEu_08895C65, gUnkEu_08895C8A, gUnkEu_08895CB5, gUnkEu_08895CD6]}
-    - gUnkEu_08895D0C
-    - gUnkEu_08895D2A
-    - gUnkEu_08895D50
-    - gUnkEu_08895D7B
-    - gUnkEu_08895D9C
-    - {name: gUnkEu_08895DBC, record: JiminyLocalizedName, strings: [gUnkEu_08895D0C, gUnkEu_08895D2A, gUnkEu_08895D50, gUnkEu_08895D7B, gUnkEu_08895D9C]}
-    - gUnkEu_08895DD0
-    - gUnkEu_08895DF1
-    - gUnkEu_08895E17
-    - gUnkEu_08895E44
-    - gUnkEu_08895E6A
-    - {name: gUnkEu_08895E94, record: JiminyLocalizedName, strings: [gUnkEu_08895DD0, gUnkEu_08895DF1, gUnkEu_08895E17, gUnkEu_08895E44, gUnkEu_08895E6A]}
-    - gUnkEu_08895EA8
-    - gUnkEu_08895EB5
-    - gUnkEu_08895EB7
-    - gUnkEu_08895EC7
-    - gUnkEu_08895EC9
-    - {name: gUnkEu_08895EDC, record: JiminyLocalizedName, strings: [gUnkEu_08895EA8, gUnkEu_08895EB5, gUnkEu_08895EB7, gUnkEu_08895EC7, gUnkEu_08895EC9]}
+    - gDeckEquipText
+    - gDeckEquipTextFrench
+    - gDeckEquipTextGerman
+    - gDeckEquipTextItalian
+    - gDeckEquipTextSpanish
+    - {name: gDeckEquipTextByLanguage, record: JiminyLocalizedName, strings: [gDeckEquipText, gDeckEquipTextFrench, gDeckEquipTextGerman, gDeckEquipTextItalian, gDeckEquipTextSpanish]}
+    - gDeckErrorCpText
+    - gDeckErrorCpTextFrench
+    - gDeckErrorCpTextGerman
+    - gDeckErrorCpTextItalian
+    - gDeckErrorCpTextSpanish
+    - {name: gDeckErrorCpTextByLanguage, record: JiminyLocalizedName, strings: [gDeckErrorCpText, gDeckErrorCpTextFrench, gDeckErrorCpTextGerman, gDeckErrorCpTextItalian, gDeckErrorCpTextSpanish]}
+    - gDeckErrorNoAttackCardText
+    - gDeckErrorNoAttackCardTextFrench
+    - gDeckErrorNoAttackCardTextGerman
+    - gDeckErrorNoAttackCardTextItalian
+    - gDeckErrorNoAttackCardTextSpanish
+    - {name: gDeckErrorNoAttackCardTextByLanguage, record: JiminyLocalizedName, strings: [gDeckErrorNoAttackCardText, gDeckErrorNoAttackCardTextFrench, gDeckErrorNoAttackCardTextGerman, gDeckErrorNoAttackCardTextItalian, gDeckErrorNoAttackCardTextSpanish]}
+    - gDeckErrorLastAttackCardText
+    - gDeckErrorLastAttackCardTextFrench
+    - gDeckErrorLastAttackCardTextGerman
+    - gDeckErrorLastAttackCardTextItalian
+    - gDeckErrorLastAttackCardTextSpanish
+    - {name: gDeckErrorLastAttackCardTextByLanguage, record: JiminyLocalizedName, strings: [gDeckErrorLastAttackCardText, gDeckErrorLastAttackCardTextFrench, gDeckErrorLastAttackCardTextGerman, gDeckErrorLastAttackCardTextItalian, gDeckErrorLastAttackCardTextSpanish]}
+    - gDeckErrorDeckFullText
+    - gDeckErrorDeckFullTextFrench
+    - gDeckErrorDeckFullTextGerman
+    - gDeckErrorDeckFullTextItalian
+    - gDeckErrorDeckFullTextSpanish
+    - {name: gDeckErrorDeckFullTextByLanguage, record: JiminyLocalizedName, strings: [gDeckErrorDeckFullText, gDeckErrorDeckFullTextFrench, gDeckErrorDeckFullTextGerman, gDeckErrorDeckFullTextItalian, gDeckErrorDeckFullTextSpanish]}
+    - gDeckClearConfirmText
+    - gDeckClearConfirmTextFrench
+    - gDeckClearConfirmTextGerman
+    - gDeckClearConfirmTextItalian
+    - gDeckClearConfirmTextSpanish
+    - {name: gDeckClearConfirmTextByLanguage, record: JiminyLocalizedName, strings: [gDeckClearConfirmText, gDeckClearConfirmTextFrench, gDeckClearConfirmTextGerman, gDeckClearConfirmTextItalian, gDeckClearConfirmTextSpanish]}
+    - gLvupMsgHpIncreasedText
+    - gLvupMsgHpIncreasedTextFrench
+    - gLvupMsgHpIncreasedTextGerman
+    - gLvupMsgHpIncreasedTextItalian
+    - gLvupMsgHpIncreasedTextSpanish
+    - {name: gLvupMsgHpIncreasedTextByLanguage, record: JiminyLocalizedName, strings: [gLvupMsgHpIncreasedText, gLvupMsgHpIncreasedTextFrench, gLvupMsgHpIncreasedTextGerman, gLvupMsgHpIncreasedTextItalian, gLvupMsgHpIncreasedTextSpanish]}
     - gJiminyStoryWonderlandName
     - gJiminyStoryWonderlandNameFrench
     - gJiminyStoryWonderlandNameGerman

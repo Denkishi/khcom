@@ -1053,13 +1053,13 @@ void InitSoraDecks() {
     SetDeckName(1, gDefaultDeckName1.strings[gLanguage]);
     SetDeckName(2, gDefaultDeckName2.strings[gLanguage]);
 #elif defined(VERSION_JP)
-    SetDeckName(0, gUnkJp_090089B0);
-    SetDeckName(1, gUnkJp_090089BC);
-    SetDeckName(2, gUnkJp_090089C8);
+    SetDeckName(0, gDefaultDeckName0TextJapanese);
+    SetDeckName(1, gDefaultDeckName1TextJapanese);
+    SetDeckName(2, gDefaultDeckName2TextJapanese);
 #else
-    SetDeckName(0, gUnk_09EE4AC8);
-    SetDeckName(1, gUnk_09EE4AD6);
-    SetDeckName(2, gUnk_09EE4AE4);
+    SetDeckName(0, gDefaultDeckName0Text);
+    SetDeckName(1, gDefaultDeckName1Text);
+    SetDeckName(2, gDefaultDeckName2Text);
 #endif
 }
 
@@ -1076,13 +1076,13 @@ void InitDebugDecks() {
     SetDeckName(1, gDefaultDeckName1.strings[gLanguage]);
     SetDeckName(2, gDefaultDeckName2.strings[gLanguage]);
 #elif defined(VERSION_JP)
-    SetDeckName(0, gUnkJp_090089B0);
-    SetDeckName(1, gUnkJp_090089BC);
-    SetDeckName(2, gUnkJp_090089C8);
+    SetDeckName(0, gDefaultDeckName0TextJapanese);
+    SetDeckName(1, gDefaultDeckName1TextJapanese);
+    SetDeckName(2, gDefaultDeckName2TextJapanese);
 #else
-    SetDeckName(0, gUnk_09EE4AC8);
-    SetDeckName(1, gUnk_09EE4AD6);
-    SetDeckName(2, gUnk_09EE4AE4);
+    SetDeckName(0, gDefaultDeckName0Text);
+    SetDeckName(1, gDefaultDeckName1Text);
+    SetDeckName(2, gDefaultDeckName2Text);
 #endif
 }
 

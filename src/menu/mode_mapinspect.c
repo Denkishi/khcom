@@ -1199,69 +1199,69 @@ void mode_mapinspect_0() {
     InitTextSlots(sMapInspectDescText, 0x5A);
 
 #ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gUnkEu_08890EC0));
+    length = GetTextLength(GetLocalizedString(&gDeleteCardConfirmTextByLanguage));
 #else
-    length = GetTextLength(gUnk_08159FBC);
+    length = GetTextLength(gDeleteCardConfirmText);
 #endif
     sMapInspectConfirmTextLength = length;
     sMapInspectConfirmText = EwramAlloc(sMapInspectConfirmTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectConfirmText, sMapInspectConfirmTextLength);
 #ifdef VERSION_EU
-    sMapInspectConfirmTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890EC0), sMapInspectConfirmText);
+    sMapInspectConfirmTextCount = LoadTextSlots(GetLocalizedString(&gDeleteCardConfirmTextByLanguage), sMapInspectConfirmText);
 #else
-    sMapInspectConfirmTextCount = LoadTextSlots(gUnk_08159FBC, sMapInspectConfirmText);
+    sMapInspectConfirmTextCount = LoadTextSlots(gDeleteCardConfirmText, sMapInspectConfirmText);
 #endif
 
 #ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gUnkEu_08890E1C));
+    length = GetTextLength(GetLocalizedString(&gYesChoiceTextByLanguage));
 #else
-    length = GetTextLength(gUnk_08159E10);
+    length = GetTextLength(gYesChoiceText);
 #endif
     sMapInspectYesTextLength = length;
     sMapInspectYesText = EwramAlloc(sMapInspectYesTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectYesText, sMapInspectYesTextLength);
 #ifdef VERSION_EU
-    sMapInspectYesTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), sMapInspectYesText);
+    sMapInspectYesTextCount = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), sMapInspectYesText);
 #else
-    sMapInspectYesTextCount = LoadTextSlots(gUnk_08159E10, sMapInspectYesText);
+    sMapInspectYesTextCount = LoadTextSlots(gYesChoiceText, sMapInspectYesText);
 #endif
 
 #ifdef VERSION_EU
-    length = GetTextLength(GetLocalizedString(&gUnkEu_08890E44));
+    length = GetTextLength(GetLocalizedString(&gNoChoiceTextByLanguage));
 #else
-    length = GetTextLength(gUnk_08159E18);
+    length = GetTextLength(gNoChoiceText);
 #endif
     sMapInspectNoTextLength = length;
     sMapInspectNoText = EwramAlloc(sMapInspectNoTextLength * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoText, sMapInspectNoTextLength);
 #ifdef VERSION_EU
-    sMapInspectNoTextCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), sMapInspectNoText);
+    sMapInspectNoTextCount = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), sMapInspectNoText);
 #else
-    sMapInspectNoTextCount = LoadTextSlots(gUnk_08159E18, sMapInspectNoText);
+    sMapInspectNoTextCount = LoadTextSlots(gNoChoiceText, sMapInspectNoText);
 #endif
 
 #ifdef VERSION_JP
-    sMapInspectNoticeTextLength[0] = GetTextLength(gUnk_0814FBB0);
+    sMapInspectNoticeTextLength[0] = GetTextLength(gDeckErrorAnyMoreText);
     sMapInspectNoticeText[0] = EwramAlloc(sMapInspectNoticeTextLength[0] * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoticeText[0], sMapInspectNoticeTextLength[0]);
-    sMapInspectNoticeTextCount[0] = LoadTextSlots(gUnk_0814FBB0, sMapInspectNoticeText[0]);
+    sMapInspectNoticeTextCount[0] = LoadTextSlots(gDeckErrorAnyMoreText, sMapInspectNoticeText[0]);
 
-    sMapInspectNoticeTextLength[1] = GetTextLength(gUnk_0814FBBC);
+    sMapInspectNoticeTextLength[1] = GetTextLength(gDeckErrorLastAttackCardText);
     sMapInspectNoticeText[1] = EwramAlloc(sMapInspectNoticeTextLength[1] * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoticeText[1], sMapInspectNoticeTextLength[1]);
-    sMapInspectNoticeTextCount[1] = LoadTextSlots(gUnk_0814FBBC, sMapInspectNoticeText[1]);
+    sMapInspectNoticeTextCount[1] = LoadTextSlots(gDeckErrorLastAttackCardText, sMapInspectNoticeText[1]);
 #else
 #ifdef VERSION_EU
-    sMapInspectNoticeTextLength[0] = GetTextLength(GetLocalizedString(&gUnkEu_08895CF8));
+    sMapInspectNoticeTextLength[0] = GetTextLength(GetLocalizedString(&gDeckErrorLastAttackCardTextByLanguage));
 #else
-    sMapInspectNoticeTextLength[0] = GetTextLength(gUnk_0815C136);
+    sMapInspectNoticeTextLength[0] = GetTextLength(gMapInspectNoticeText);
 #endif
     sMapInspectNoticeText[0] = EwramAlloc(sMapInspectNoticeTextLength[0] * sizeof(TextSlot));
     InitTextSlots(sMapInspectNoticeText[0], sMapInspectNoticeTextLength[0]);
 #ifdef VERSION_EU
-    sMapInspectNoticeTextCount[0] = LoadTextSlots(GetLocalizedString(&gUnkEu_08895CF8), sMapInspectNoticeText[0]);
+    sMapInspectNoticeTextCount[0] = LoadTextSlots(GetLocalizedString(&gDeckErrorLastAttackCardTextByLanguage), sMapInspectNoticeText[0]);
 #else
-    sMapInspectNoticeTextCount[0] = LoadTextSlots(gUnk_0815C136, sMapInspectNoticeText[0]);
+    sMapInspectNoticeTextCount[0] = LoadTextSlots(gMapInspectNoticeText, sMapInspectNoticeText[0]);
 #endif
 #endif
 

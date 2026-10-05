@@ -44,27 +44,27 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
 
     if (args.flags & STAT_INCREASE_FLAG_MAX_HP) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_088912C8), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgHpTextByLanguage), work->textSlots);
 #else
-        work->textSlotCount = LoadTextSlots(gUnk_0815A09A, work->textSlots);
+        work->textSlotCount = LoadTextSlots(gLvupMsgHpText, work->textSlots);
 #endif
     } else if (args.flags & STAT_INCREASE_FLAG_DP) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_088912F0), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgDpTextByLanguage), work->textSlots);
 #else
-        work->textSlotCount = LoadTextSlots(gUnk_0815A198, work->textSlots);
+        work->textSlotCount = LoadTextSlots(gLvupMsgDpText, work->textSlots);
 #endif
     } else if (!(gGameState.flags & GAME_FLAG_RIKU)) {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08891318), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgCpTextByLanguage), work->textSlots);
 #else
-        work->textSlotCount = LoadTextSlots(gUnk_0815A0EE, work->textSlots);
+        work->textSlotCount = LoadTextSlots(gLvupMsgCpText, work->textSlots);
 #endif
     } else {
 #ifdef VERSION_EU
-        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08891340), work->textSlots);
+        work->textSlotCount = LoadTextSlots(GetLocalizedString(&gLvupMsgApTextByLanguage), work->textSlots);
 #else
-        work->textSlotCount = LoadTextSlots(gUnk_0815A152, work->textSlots);
+        work->textSlotCount = LoadTextSlots(gLvupMsgApText, work->textSlots);
 #endif
     }
 
@@ -72,12 +72,12 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
 
 #ifdef VERSION_EU
     if ((args.flags & STAT_INCREASE_FLAG_MAX_HP) && gLanguage == LANGUAGE_SPANISH) {
-        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895EDC), work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gLvupMsgHpIncreasedTextByLanguage), work->textSlots3);
     } else {
-        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_088912A0), work->textSlots3);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gLvupMsgIncreasedTextByLanguage), work->textSlots3);
     }
 #else
-    work->textSlotCount3 = LoadTextSlots(gUnk_0815A0A0, work->textSlots3);
+    work->textSlotCount3 = LoadTextSlots(gLvupMsgIncreasedText, work->textSlots3);
 #endif
     work->textPalette = LoadTextPalette(1);
     FadeSetPaletteExcluded(work->textPalette->index + 16, 1);

@@ -835,10 +835,10 @@ extern const u8 gSoraFloorEvents[13];
 extern const u8 gRikuFloorEvents[13];
 extern const u8 gCellMasks[][8];
 extern u8 gUnk_050001C0[];
-extern u8 gUnk_0815A03A[];
-extern u8 gUnk_0815B5A6[];
-extern u8 gUnk_08159E1E[];
-extern u8 gUnk_08159DF0[];
+extern u8 gMapQuickSaveConfirmText[];
+extern u8 gMapSaveCompleteText[];
+extern u8 gNewGameSlotMenuText[];
+extern u8 gMapSaveConfirmText[];
 extern const MapDoorGfx gWorldMapDoorGfx[14];
 
 void MapMenuInitConfirm(MapMenuWork* work);

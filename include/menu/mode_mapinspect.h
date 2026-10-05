@@ -3,7 +3,7 @@
 
 #include "types.h"
 #include "ms_types.h"
-extern u16 gUnk_0815C136[];
+extern u16 gMapInspectNoticeText[];
 
 s16 GetMapInspectTabStart(s16 a);
 s16 GetMapInspectSelectedIndex();

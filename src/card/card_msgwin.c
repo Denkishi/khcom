@@ -380,11 +380,11 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
             work->cursorX = 0x5800;
             work->cursorY = gMsgwaitYesnoCursorY[work->choice];
 #ifdef VERSION_EU
-            work->textSlotCounts[0] = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots);
-            work->textSlotCounts[1] = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots2);
+            work->textSlotCounts[0] = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots);
+            work->textSlotCounts[1] = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots2);
 #else
-            work->textSlotCounts[0] = LoadTextSlots(gUnk_08159E10, work->textSlots);
-            work->textSlotCounts[1] = LoadTextSlots(gUnk_08159E18, work->textSlots2);
+            work->textSlotCounts[0] = LoadTextSlots(gYesChoiceText, work->textSlots);
+            work->textSlotCounts[1] = LoadTextSlots(gNoChoiceText, work->textSlots2);
 #endif
             work->textPalette = LoadTextPalette(1);
             SetTaskUpdate(a, (TaskUpdateFunc)UpdateCardMsgwinChoice);

@@ -432,4 +432,4 @@ entries:
   - {name: card_message_text_45, declare: false}
   - {name: card_message_text_46, declare: false}
   - {name: card_message_text_47, declare: false}
-  - {name: gUnkEu_090D1DA5, declare: false}
+  - {name: gLeaveWorldText, declare: false}

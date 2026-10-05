@@ -35,17 +35,17 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots3, 80);
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
 #ifdef VERSION_JP
-    work->textSlotCount2 = LoadTextSlots(gUnkJp_0814FB18, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckEquipText, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895A00), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckEquipTextByLanguage), work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(common_text_331, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckEquipText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
-    work->textSlotCount3 = LoadTextSlots((u16*)gUnk_0903C008, work->textSlots3);
+    work->textSlotCount3 = LoadTextSlots((u16*)gDeckEquipSuffixText, work->textSlots3);
     work->x = (233 - GetTextSlotsWidth(work->textSlots, work->textSlotCount) - GetTextSlotsWidth(work->textSlots3, work->textSlotCount3)) / 2;
     work->x3 = work->x + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
     work->y3 = 66;
@@ -85,11 +85,11 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_JP
     work->textSlotCount = 0;
-    work->textSlotCount2 = LoadTextSlots(gUnkJp_0814FB30, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorCpText, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895AF4), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckErrorCpTextByLanguage), work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(common_text_009, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorCpText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -118,11 +118,11 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_JP
     work->textSlotCount = 0;
-    work->textSlotCount2 = LoadTextSlots(common_text_329, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorNoAttackCardText, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895C30), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckErrorNoAttackCardTextByLanguage), work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(common_text_334, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorNoAttackCardText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -150,12 +150,12 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_JP
-    work->textSlotCount = LoadTextSlots(gUnk_0814FBB0, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gUnk_0814FBBC, work->textSlots2);
+    work->textSlotCount = LoadTextSlots(gDeckErrorAnyMoreText, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorLastAttackCardText, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895CF8), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckErrorLastAttackCardTextByLanguage), work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(common_text_333, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorLastAttackCardText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -181,12 +181,12 @@ void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_JP
-    work->textSlotCount = LoadTextSlots(gUnk_0814FBB0, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gUnk_0814FBD4, work->textSlots2);
+    work->textSlotCount = LoadTextSlots(gDeckErrorAnyMoreText, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorDeckFullText, work->textSlots2);
 #elif defined(VERSION_EU)
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08895DBC), work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gDeckErrorDeckFullTextByLanguage), work->textSlots2);
 #else
-    work->textSlotCount2 = LoadTextSlots(common_text_332, work->textSlots2);
+    work->textSlotCount2 = LoadTextSlots(gDeckErrorDeckFullText, work->textSlots2);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -246,13 +246,13 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08890EC0), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots3);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gDeleteCardConfirmTextByLanguage), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots3);
 #else
-    work->textSlotCount = LoadTextSlots(gUnk_08159FBC, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(gUnk_08159E18, work->textSlots3);
+    work->textSlotCount = LoadTextSlots(gDeleteCardConfirmText, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gYesChoiceText, work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(gNoChoiceText, work->textSlots3);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -284,13 +284,13 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
     InitTextSlots(work->textSlots2, 0x50);
     InitTextSlots(work->textSlots3, 0x50);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08895E94), work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), work->textSlots3);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(&gDeckClearConfirmTextByLanguage), work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), work->textSlots3);
 #else
-    work->textSlotCount = LoadTextSlots(gUnk_0815C1C2, work->textSlots);
-    work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);
-    work->textSlotCount3 = LoadTextSlots(gUnk_08159E18, work->textSlots3);
+    work->textSlotCount = LoadTextSlots(gDeckClearConfirmText, work->textSlots);
+    work->textSlotCount2 = LoadTextSlots(gYesChoiceText, work->textSlots2);
+    work->textSlotCount3 = LoadTextSlots(gNoChoiceText, work->textSlots3);
 #endif
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
@@ -425,5 +425,5 @@ TaskDesc gTaskDescDeckErrorDeckFull = {
 };
 
 #ifdef VERSION_EU
-u8* gLeaveWorldTextByLanguage[5] = { gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5, gUnkEu_090D1DA5 };
+u8* gLeaveWorldTextByLanguage[5] = { gLeaveWorldText, gLeaveWorldText, gLeaveWorldText, gLeaveWorldText, gLeaveWorldText };
 #endif

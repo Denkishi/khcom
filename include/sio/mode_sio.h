@@ -253,17 +253,17 @@ typedef struct SioBtlOptionWork {
     u16 unk_418;
 } SioBtlOptionWork;
 
-extern u8 gUnk_0815A2BE[];
-extern u8 gUnk_08159E4A[];
-extern u8 gUnk_08159EC4[];
-extern u8 gUnk_0815A20C[];
-extern u8 gUnk_0815A3C0[];
-extern u8 gUnk_0815A404[];
-extern u8 gUnk_0815A428[];
-extern u8 gUnk_0815B3FA[];
-extern u8 gUnk_0815A23C[];
-extern u8 gUnk_0815B3D4[];
-extern u8 gUnk_0815A394[];
+extern u8 gSioErrorText[];
+extern u8 gSioBtlConnectText[];
+extern u8 gSioChgConnectText[];
+extern u8 gSioBtlWaitingText[];
+extern u8 gSioChgSwapConfirmText[];
+extern u8 gSioChgSwappingText[];
+extern u8 gSioChgSwapCompleteText[];
+extern u8 gSioChgSaveCompleteText[];
+extern u8 gSioBtlReadyText[];
+extern u8 gSioBtlSendingDeckText[];
+extern u8 gSioChgWaitingText[];
 extern Mode gModeDeckExchange;
 
 void mode_sio_btl_connect_0(s32 arg);
@@ -357,7 +357,7 @@ void SioBtlCardgetLoad2PWin();
 void SioBtlOptionPlayWorldBgm();
 
 #ifdef VERSION_JP
-extern u8 gUnk_0814F180[];
+extern u8 gSioErrorText[];
 #endif
 
 #endif /* GUARD_MODE_SIO_H */

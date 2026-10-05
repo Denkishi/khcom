@@ -3939,9 +3939,9 @@ void Mode_MenuNew_0() {
     InitTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
     sNewGameSlotMenuWork->palette9 = LoadObjPalette(gFileMenuCursorPalette, 32);
 #ifdef VERSION_EU
-    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08892780), sNewGameSlotMenuWork->textSlots2);
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gNewGameSlotMenuTextByLanguage), sNewGameSlotMenuWork->textSlots2);
 #else
-    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gUnk_08159E1E, sNewGameSlotMenuWork->textSlots2);
+    sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(gNewGameSlotMenuText, sNewGameSlotMenuWork->textSlots2);
 #endif
 
     if (sNewGameSlotMenuWork->isRiku != 0) {
@@ -5226,18 +5226,18 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     InitTextSlots(p2, 6);
     p3 = work->textSlots4;
     InitTextSlots(p3, 9);
-    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_088927F4), p1);
-    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), p2);
-    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), p3);
+    work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapQuickSaveConfirmTextByLanguage), p1);
+    work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), p2);
+    work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), p3);
 #else
     InitTextSlots(p1, 33);
     p2 = work->textSlots3;
     InitTextSlots(p2, 6);
     p3 = work->textSlots4;
     InitTextSlots(p3, 9);
-    work->textSlotCount2 = LoadTextSlots(gUnk_0815A03A, p1);
-    work->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
-    work->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
+    work->textSlotCount2 = LoadTextSlots(gMapQuickSaveConfirmText, p1);
+    work->textSlotCount3 = LoadTextSlots(gYesChoiceText, p2);
+    work->textSlotCount4 = LoadTextSlots(gNoChoiceText, p3);
 #endif
 }
 
@@ -6304,13 +6304,13 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         p3 = work->textSlots4;
         InitTextSlots(p3, 9);
 #ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_08892864), p1);
-        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E1C), p2);
-        work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08890E44), p3);
+        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapSaveConfirmTextByLanguage), p1);
+        work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), p2);
+        work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), p3);
 #else
-        work->textSlotCount2 = LoadTextSlots(gUnk_08159DF0, p1);
-        work->textSlotCount3 = LoadTextSlots(gUnk_08159E10, p2);
-        work->textSlotCount4 = LoadTextSlots(gUnk_08159E18, p3);
+        work->textSlotCount2 = LoadTextSlots(gMapSaveConfirmText, p1);
+        work->textSlotCount3 = LoadTextSlots(gYesChoiceText, p2);
+        work->textSlotCount4 = LoadTextSlots(gNoChoiceText, p3);
 #endif
         MapSaveSetPanelPalettesExcluded(work, 1);
         work->dialogVisible = 1;
@@ -6366,9 +6366,9 @@ s32 MapSaveInput(MapSaveWork* work) {
         }
 
 #ifdef VERSION_EU
-        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gUnkEu_088928E4), work->textSlots2);
+        work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapSaveCompleteTextByLanguage), work->textSlots2);
 #else
-        work->textSlotCount2 = LoadTextSlots(gUnk_0815B5A6, work->textSlots2);
+        work->textSlotCount2 = LoadTextSlots(gMapSaveCompleteText, work->textSlots2);
 #endif
         work->textSlotCount3 = 0;
         work->textSlotCount4 = 0;

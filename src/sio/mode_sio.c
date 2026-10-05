@@ -517,9 +517,9 @@ void mode_sio_btl_connect_0(s32 arg) {
     sSioBtlConnectWork->textSlotCount = 0;
     InitTextSlots(sSioBtlConnectWork->textSlots, SIO_CONNECT_TEXT_SLOTS);
 #ifdef VERSION_EU
-    sSioBtlConnectWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_08891508), sSioBtlConnectWork->textSlots);
+    sSioBtlConnectWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gSioBtlConnectTextByLanguage), sSioBtlConnectWork->textSlots);
 #else
-    sSioBtlConnectWork->textSlotCount = LoadTextSlots(gUnk_08159E4A, sSioBtlConnectWork->textSlots);
+    sSioBtlConnectWork->textSlotCount = LoadTextSlots(gSioBtlConnectText, sSioBtlConnectWork->textSlots);
 #endif
     sSioBtlConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 
@@ -700,8 +700,8 @@ void mode_sio_btl_option_0(s32 arg) {
         sSioBtlOptionWork->textSlotCount2 = LoadTextSlots(gSioDeckNames[0], sSioBtlOptionWork->textSlots2);
         sSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], sSioBtlOptionWork->textSlots3);
     } else {
-        sSioBtlOptionWork->textSlotCount2 = LoadTextSlots((u16*)gUnkEu_095DA860, sSioBtlOptionWork->textSlots2);
-        sSioBtlOptionWork->textSlotCount3 = LoadTextSlots((u16*)gUnkEu_095DA867, sSioBtlOptionWork->textSlots3);
+        sSioBtlOptionWork->textSlotCount2 = LoadTextSlots((u16*)gSioDebugDeckName0Text, sSioBtlOptionWork->textSlots2);
+        sSioBtlOptionWork->textSlotCount3 = LoadTextSlots((u16*)gSioDebugDeckName1Text, sSioBtlOptionWork->textSlots3);
     }
 #else
     InitTextSlots(sSioBtlOptionWork->textSlots, 20);
@@ -844,10 +844,10 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->messageVisible = 0;
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots4, 120);
-    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
 #else
     InitTextSlots(sSioBtlOptionWork->textSlots4, 60);
-    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, sSioBtlOptionWork->textSlots4);
+    sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlWaitingText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
     sSioBtlOptionWork->x = 68;
@@ -1265,9 +1265,9 @@ void SioBtlOptionHandleMenu() {
             sSioBtlOptionWork->menuOpen = 0;
             sSioBtlOptionWork->messageVisible = 1;
 #ifdef VERSION_EU
-            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
 #else
-            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A20C, sSioBtlOptionWork->textSlots4);
+            sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlWaitingText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
             sSioBtlOptionWork->x = 68;
@@ -1364,7 +1364,7 @@ void SioBtlOptionHandleMenu() {
                 gSioDebugReady[0] = 1;
                 sSioBtlOptionWork->menuOpen = 0;
                 sSioBtlOptionWork->messageVisible = 1;
-                sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891580), sSioBtlOptionWork->textSlots4);
+                sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
 #ifdef VERSION_JP
                 sSioBtlOptionWork->x = 68;
 #else
@@ -1576,9 +1576,9 @@ void SioBtlOptionWaitReady() {
     if (sSioBtlOptionWork->player1Ready == 1 && sSioBtlOptionWork->player2Ready == 1) {
         sSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891670), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlReadyTextByLanguage), sSioBtlOptionWork->textSlots4);
 #else
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815A23C, sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlReadyText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
         sSioBtlOptionWork->x = 61;
@@ -1609,9 +1609,9 @@ void SioBtlOptionConfirm() {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
 #ifdef VERSION_EU
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlSendingDeckTextByLanguage), sSioBtlOptionWork->textSlots4);
 #else
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gUnk_0815B3D4, sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlSendingDeckText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
         sSioBtlOptionWork->x = 74;
@@ -1631,7 +1631,7 @@ void SioBtlOptionConfirm() {
     } else if (GetKeysPressed() & A_BUTTON) {
         m4aSongNumStart(SONG_SYS_ITEMGET);
         sSioBtlOptionWork->timer = 0;
-        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gUnkEu_08891714), sSioBtlOptionWork->textSlots4);
+        sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlSendingDeckTextByLanguage), sSioBtlOptionWork->textSlots4);
         sSioBtlOptionWork->x = 72;
         sSioBtlOptionWork->y2 = 124;
         sSioBtlOptionWork->state++;
@@ -2721,7 +2721,7 @@ void mode_sio_chg_connect_0(s32 arg) {
     sSioChgConnectWork->state = 0;
     sSioChgConnectWork->textSlotCount = 0;
     InitTextSlots(sSioChgConnectWork->textSlots, 0x5A);
-    sSioChgConnectWork->textSlotCount = LoadTextSlots(gUnk_08159EC4, sSioChgConnectWork->textSlots);
+    sSioChgConnectWork->textSlotCount = LoadTextSlots(gSioChgConnectText, sSioChgConnectWork->textSlots);
     sSioChgConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
     SioReset();
     SioConnectInit(SioChgConnectOnConnect, SioChgConnectOnCancel, 1);
@@ -2931,7 +2931,7 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->gfx6 = gUnk_09EF1278[0];
     sSioChgCardWork->messageVisible = 0;
     InitTextSlots(sSioChgCardWork->textSlots, 42);
-    sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A394, sSioChgCardWork->textSlots);
+    sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
     sSioChgCardWork->x3 = 68;
     sSioChgCardWork->y3 = 124;
     InitTextSlots(sSioChgCardWork->textSlots2, 20);
@@ -3067,7 +3067,7 @@ void SioChgCardSelect() {
     if (gSioChgCardReady[0] == 1 && gSioChgCardReady[1] == 1) {
         sSioChgCardWork->timer = 0;
         m4aSongNumStart(SONG_SYS_ITEMGET);
-        sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A3C0, sSioChgCardWork->textSlots);
+        sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwapConfirmText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 64;
         sSioChgCardWork->y3 = 114;
         sSioChgCardWork->state++;
@@ -3115,7 +3115,7 @@ void SioChgCardConfirm() {
 
     if (gSioCommandRecv[1][0] == 0xEF01 || gSioCommandRecv[1][1] == 0xEF01) {
         sSioChgCardWork->timer = 0;
-        sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A404, sSioChgCardWork->textSlots);
+        sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwappingText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 71;
         sSioChgCardWork->y3 = 124;
         sSioChgCardWork->state++;
@@ -3161,7 +3161,7 @@ void SioChgCardWaitTradeResult() {
 
     if (gSioCommandRecv[1][0] == 0x1269 || gSioCommandRecv[1][1] == 0x1269) {
         m4aSongNumStart(SONG_SYS_BEEP);
-        sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A4B6, sSioChgCardWork->textSlots);
+        sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgFailedFullText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 63;
         sSioChgCardWork->y3 = 118;
         SioChgCardRestoreCollection();
@@ -3218,7 +3218,7 @@ void SioChgCardWaitMove() {
     if (sSioChgCardWork->timer > 199) {
         sSioChgCardWork->timer = 0;
         sSioChgCardWork->messageVisible = 1;
-        sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A428, sSioChgCardWork->textSlots);
+        sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSwapCompleteText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 70;
         sSioChgCardWork->y3 = 119;
         sSioChgCardWork->state++;
@@ -3230,7 +3230,7 @@ void SioChgCardShowSecondMessage() {
 
     if (sSioChgCardWork->timer > 119) {
         sSioChgCardWork->timer = 0;
-        sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815B3FA, sSioChgCardWork->textSlots);
+        sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgSaveCompleteText, sSioChgCardWork->textSlots);
         sSioChgCardWork->x3 = 83;
         sSioChgCardWork->y3 = 124;
         sSioChgCardWork->state++;
@@ -3503,7 +3503,7 @@ void SioChgCardHandleInput() {
             if (v == 2) {
                 if (SioChgCardHasOwnCards() == 1) {
                     sSioChgCardWork->ready = 1;
-                    sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A394, sSioChgCardWork->textSlots);
+                    sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
                     sSioChgCardWork->x3 = 68;
                     sSioChgCardWork->y3 = 124;
                     sSioChgCardWork->messageVisible = 1;
@@ -3563,7 +3563,7 @@ void SioChgCardHandleInput() {
             if (v == 2) {
                 if (SioChgCardHasOwnCards() == 1) {
                     sSioChgCardWork->ready = 1;
-                    sSioChgCardWork->textSlotCount = LoadTextSlots(gUnk_0815A394, sSioChgCardWork->textSlots);
+                    sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
                     sSioChgCardWork->x3 = 68;
                     sSioChgCardWork->y3 = 124;
                     sSioChgCardWork->messageVisible = 1;
@@ -3851,11 +3851,11 @@ void mode_sioError_0(s32 arg) {
 #endif
     InitTextSlots(sSioErrorWork->textSlots, SIO_ERROR_TEXT_SLOTS);
 #ifdef VERSION_EU
-    sSioErrorWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gUnkEu_088920BC), sSioErrorWork->textSlots);
+    sSioErrorWork->textSlotCount = LoadTextSlots(GetLocalizedString(&gSioErrorTextByLanguage), sSioErrorWork->textSlots);
 #elif defined(VERSION_JP)
-    sSioErrorWork->textSlotCount = LoadTextSlots(gUnk_0814F180, sSioErrorWork->textSlots);
+    sSioErrorWork->textSlotCount = LoadTextSlots(gSioErrorText, sSioErrorWork->textSlots);
 #else
-    sSioErrorWork->textSlotCount = LoadTextSlots(gUnk_0815A2BE, sSioErrorWork->textSlots);
+    sSioErrorWork->textSlotCount = LoadTextSlots(gSioErrorText, sSioErrorWork->textSlots);
 #endif
     sSioErrorWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 }

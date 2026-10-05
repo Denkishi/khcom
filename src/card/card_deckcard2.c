@@ -125,7 +125,7 @@ void DeckCard2_2(DeckCard2Work* work) {
     }
 
     if (work->args.panel == 0 && work->cardDef->category != 3) {
-        DrawSprite((work->x >> 8) - 3, (work->y >> 8) - 4, gUnk_09EE981C[work->cardDef->value], work->tiles2, work->palette2, NULL, 0, 0x31);
+        DrawSprite((work->x >> 8) - 3, (work->y >> 8) - 4, gCardValueDigitFrames[work->cardDef->value], work->tiles2, work->palette2, NULL, 0, 0x31);
     }
 }
 
@@ -146,7 +146,7 @@ void DeckCard2LoadGfx(DeckCard2Work* work) {
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->tiles = LoadObjTiles(work->cardDef->tiles2, 0x200);
     work->palette = LoadObjPalette(work->cardDef->palette2, 32);
-    work->tiles2 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles2 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
 
     if (work->tiles != NULL && work->palette != NULL) {
         work->flags |= DECK_CARD2_FLAG_GFX_LOADED;

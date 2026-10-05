@@ -98,9 +98,9 @@ void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* a) {
                          + GetTextSlotsWidth(work->textSlots3, work->textSlotCount3))) / 2) << 8;
 #ifdef VERSION_EU
     work->tiles = AllocSpriteFrameTiles(0x780);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF126C[0], gUnk_093F7C9C);
+    UpdateSpriteFrameTiles(work->tiles, gMsgBoxFrames[0], gMsgBoxTiles);
 #else
-    work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
 #endif
     work->palette = LoadObjPalette(gCard00Palette, 32);
 }
@@ -174,7 +174,7 @@ void Lvup_msg_2(LvupMsgWork* work) {
 #ifdef VERSION_EU
     DrawSprite(72, work->y >> 8, NULL, work->tiles, work->palette, NULL, 0, 41);
 #else
-    DrawSprite(72, work->y >> 8, gUnk_09EF126C[0], work->tiles, work->palette, NULL, 0, 41);
+    DrawSprite(72, work->y >> 8, gMsgBoxFrames[0], work->tiles, work->palette, NULL, 0, 41);
 #endif
     DrawTextSlots(work->x >> 8, work->y2 >> 8, work->textSlots, work->textPalette, 40, work->textSlotCount);
     DrawTextSlots(work->x2 >> 8, work->y3 >> 8, work->textSlots2, work->textPalette, 40, work->textSlotCount2);

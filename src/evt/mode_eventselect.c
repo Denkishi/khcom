@@ -321,7 +321,7 @@ void smoke_0(EffectWork* work, EventCharaWork* chara) {
     work->x = b->x;
     work->y = b->y - 0x800;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gEventSmokeTiles);
     AnimInit(&work->anim, gEventSmokeAnims, gEventSmokeFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -338,7 +338,7 @@ void Exclamation_0(EffectWork* work, EventCharaWork* chara) {
     work->x = b->x;
     work->y = b->y;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
 
     if (!FadeIsActive()) {
         FadeSetPaletteExcluded(((ObjPaletteHeader*)work->palette)->index + 16, 1);
@@ -360,7 +360,7 @@ void balloon_0(EffectWork* work, EventCharaWork* chara) {
     work->x = b->x;
     work->y = b->y;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gFEventTiles);
     AnimInit(&work->anim, gFEventAnims, gFEventFrames);
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
@@ -419,7 +419,7 @@ void Question_0(EffectWork* work, EventCharaWork* chara) {
     work->x = b->x;
     work->y = b->y;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gFEventTiles);
     AnimInit(&work->anim, gFEventAnims, gFEventFrames);
     AnimStart(&work->anim, 5, 0);
@@ -462,7 +462,7 @@ void TinkerbellParticleInit(EffectWork* work, EventCharaWork* chara) {
     work->z2 = b->z;
     work->vx = GetRandom() % 232 + 76;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gSmnTinkEffTiles);
     AnimInit(&work->anim, gSmnTinkEffAnims, gSmnTinkEffFrames);
     AnimStart(&work->anim, GetRandom() % 3, 0);
@@ -513,7 +513,7 @@ void GlowNose_0(EffectWork* work, EventCharaWork* chara) {
     work->x = b->x - 1536;
     work->y = b->y + 3072;
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gGlowNoseTiles);
     AnimInit(&work->anim, gGlowNoseAnims, gGlowNoseFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -551,7 +551,7 @@ void GlowNose2_0(EffectWork* work, EventCharaWork* chara) {
     }
 
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     SetObjTileSource(work->tiles, gGlowNoseTiles);
     AnimInit(&work->anim, gGlowNoseAnims, gGlowNoseFrames);
     AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);

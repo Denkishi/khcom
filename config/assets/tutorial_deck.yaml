@@ -34,7 +34,7 @@ objects:
     start: 0x090D1E58
     end: 0x090D1F68
 entries:
-- name: gUnk_09041F70
+- name: gTutorialDeckCardIds
   record: CardIdTable
   values: [4, 5, 6, 1, 3, 9, 0, 2, 7, 7, 6, 5, 4, 5, 6, 1, 3, 9, 0, 2, 7, 7, 6, 5]
   us:
@@ -43,7 +43,7 @@ entries:
     address: 0x090105B0
   eu:
     address: 0x090D1E58
-- name: gUnk_09041FA0
+- name: gTutorialDeck
   record: Deck
   fields:
     cards: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

@@ -10555,7 +10555,7 @@ entries:
 - name: gMapUiSprite_098A944C
   format: sprite_sheet
   tiles: gUnk_0993AF64
-  palette: gUnk_099910C4
+  palette: gMapFloorNamePalette
   align: 4
   cell: [240, 16]
   anchor: [120, 8]
@@ -10588,7 +10588,7 @@ entries:
 - name: gMapUiSprite_098A948C
   format: sprite_sheet
   tiles: gUnk_0994D764
-  palette: gUnk_09991224
+  palette: gMapDoorWonderlandPalette
   align: 4
   cell: [32, 64]
   anchor: [16, 56]
@@ -10614,7 +10614,7 @@ entries:
 - name: gMapUiSprite_098A94A0
   format: sprite_sheet
   tiles: gUnk_0994DF64
-  palette: gUnk_09991224
+  palette: gMapDoorWonderlandPalette
   cell: [32, 64]
   anchor: [16, 56]
   columns: 1
@@ -10639,7 +10639,7 @@ entries:
 - name: gMapUiSprite_098A94B4
   format: sprite_sheet
   tiles: gUnk_0994E764
-  palette: gUnk_09991224
+  palette: gMapDoorWonderlandPalette
   cell: [32, 64]
   anchor: [16, 56]
   columns: 1
@@ -10664,7 +10664,7 @@ entries:
 - name: gMapUiSprite_098A94C8
   format: sprite_sheet
   tiles: gUnk_0994EF64
-  palette: gUnk_09991224
+  palette: gMapDoorWonderlandPalette
   cell: [32, 64]
   anchor: [16, 56]
   columns: 1
@@ -10690,7 +10690,7 @@ entries:
   format: sprite_sheet
   tiles: gMapDoorEmblemTiles
   tiles_offset: 0x300
-  palette: gUnk_09991284
+  palette: gMapDoorEmblemPalette
   cell: [24, 24]
   anchor: [15, 76]
   columns: 1
@@ -10718,7 +10718,7 @@ entries:
   format: sprite_sheet
   tiles: gMapDoorEmblemTiles
   tiles_offset: 0x200
-  palette: gUnk_09991284
+  palette: gMapDoorEmblemPalette
   cell: [24, 24]
   anchor: [9, 76]
   columns: 1
@@ -10802,7 +10802,7 @@ entries:
 - name: gMapUiSprite_098A95E4
   format: sprite_sheet
   tiles: gUnk_09954B64
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 48]
   anchor: [0, 0]
   columns: 4
@@ -11090,7 +11090,7 @@ entries:
 - name: gMapUiSpriteEu_09887F00
   format: sprite_sheet
   tiles: gUnkEu_09938170
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 48]
   anchor: [0, 0]
   columns: 4
@@ -11141,7 +11141,7 @@ entries:
 - name: gMapUiSpriteEu_09887FBC
   format: sprite_sheet
   tiles: gUnkEu_09939D30
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 48]
   anchor: [0, 0]
   columns: 4
@@ -11192,7 +11192,7 @@ entries:
 - name: gMapUiSpriteEu_09888078
   format: sprite_sheet
   tiles: gUnkEu_0993B8F0
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 48]
   anchor: [0, 0]
   columns: 4
@@ -11243,7 +11243,7 @@ entries:
 - name: gMapUiSpriteEu_098881E4
   format: sprite_sheet
   tiles: gUnk_09956724
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 40]
   anchor: [0, 0]
   columns: 4
@@ -11292,7 +11292,7 @@ entries:
 - name: gMapUiSpriteEu_09888294
   format: sprite_sheet
   tiles: gUnkEu_09938170
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 40]
   anchor: [0, 0]
   columns: 4
@@ -11341,7 +11341,7 @@ entries:
 - name: gMapUiSpriteEu_09888344
   format: sprite_sheet
   tiles: gUnkEu_09939D30
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 40]
   anchor: [0, 0]
   columns: 4
@@ -11390,7 +11390,7 @@ entries:
 - name: gMapUiSpriteEu_098883F4
   format: sprite_sheet
   tiles: gUnkEu_0993B8F0
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   cell: [112, 40]
   anchor: [0, 0]
   columns: 4
@@ -12799,7 +12799,7 @@ entries:
 - name: gMapUiSprite_098A9BD4
   format: sprite_sheet
   tiles: gUnk_09954B64
-  palette: gUnk_09991924
+  palette: gMapMenuStatusPalette
   align: 4
   cell: [112, 40]
   anchor: [0, 0]

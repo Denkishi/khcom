@@ -163,9 +163,9 @@ void task_allmap_room_0(AllmapRoomWork* work, AllmapRoomArg* arg) {
     }
 
     if (!work->asSprite && work->room == gMapFloorState.room) {
-        pal = gUnk_0984A138;
+        pal = gAllmapCurrentRoomPalettes;
     } else {
-        pal = gUnk_0984A0F8 + GetAllmapRoomPaletteOffset(work->room);
+        pal = gAllmapRoomPalettes + GetAllmapRoomPaletteOffset(work->room);
     }
 
     work->palette = LoadObjPalette(pal, 32);
@@ -290,7 +290,7 @@ void task_allmap_cursor_0(AllmapCursorWork* work, AllmapCursorPos* arg) {
     work->x = work->drawX = work->screenX << 8;
     work->y = work->drawY = work->screenY << 8;
     work->tiles = LoadObjTiles(gUnk_0976D7C0, 0xC0);
-    work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
+    work->palette = LoadObjPalette(gAllmapObjPalette, 32);
     AnimInit(&work->anim, gUnk_09EF64C4, gUnk_09EF64B4);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -408,7 +408,7 @@ void task_allmap_roomname_0(AllmapRoomnameWork* work, u8* arg) {
     work->textSlotCount = LoadTextSlots(GetRoomName(arg[0]), work->textSlots);
     pal = GetAllmapRoomnamePaletteOffset(arg[0]);
     work->palette = LoadObjPalette(gAllmapRoomnamePalettes + pal, 32);
-    LoadPalette(gUnk_0984A078 + pal, gUnk_05000160, 32);
+    LoadPalette(gAllmapRoomnameBgPalettes + pal, gUnk_05000160, 32);
     work->x = AllmapDrawRoomnameFrame(GetTextSlotsWidth(work->textSlots, work->textSlotCount));
 }
 
@@ -469,7 +469,7 @@ void task_allmap_bar_0(AllmapBarWork* work) {
     work->tiles = LoadObjTiles(gUnk_0976D8A6, 0x2C0);
 #endif
     work->tiles2 = LoadObjTiles(gUnk_0976DBDA, 0xC0);
-    work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
+    work->palette = LoadObjPalette(gAllmapObjPalette, 32);
     work->steps = 16;
     work->state = 0;
     work->y = -0x800;
@@ -648,11 +648,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
             }
 
             work->doors[i].sprite.tiles = AllocKeyValueTiles(n);
-            work->doors[i].sprite.palette = LoadObjPalette(gUnk_09618D38, 32);
+            work->doors[i].sprite.palette = LoadObjPalette(gDoorCardPalette, 32);
             work->doors[i].sprite.gfx = NULL;
-            work->doors[i].sprite.tiles2 = LoadObjTiles(gUnk_0905E3BA, 0x600);
-            work->doors[i].sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
-            work->doors[i].sprite.gfx2 = gUnk_09EE97F4[0];
+            work->doors[i].sprite.tiles2 = LoadObjTiles(gCardOutlineWhiteTiles, 0x600);
+            work->doors[i].sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
+            work->doors[i].sprite.gfx2 = gCardOutlineWhiteFrames[0];
             FadeSetPaletteExcluded(work->doors[i].sprite.palette->index + 16, 1);
             FadeSetPaletteExcluded(work->doors[i].sprite.palette2->index + 16, 1);
             work->gfx2[i] = gUnk_09EF64E8[i];
@@ -664,11 +664,11 @@ void AllmapDoorinfoLoadDoors(AllmapDoorinfoWork* work) {
 
     if (work->count != 0) {
         work->tiles = LoadObjTiles(gUnk_0976DD62, 0x80);
-        work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
+        work->palette = LoadObjPalette(gAllmapObjPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
         work->tiles2 = LoadObjTiles(gUnk_0976B340, 0x2400);
         work->gfx = gUnk_09EF6424[0];
-        InitObjPaletteAtSlot(work->palette2, 15, gUnk_0984A0F8, 32);
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
         FadeSetPaletteExcluded(work->palette2->index + 16, 1);
     }
 }
@@ -725,10 +725,10 @@ void AllmapDoorinfoLoadKeys(AllmapDoorinfoWork* work) {
 
     if (GetEventRoomKind(work->room) == 1 || GetEventRoomKind(work->room) == 4) {
         work->gfx = gUnk_09EF6424[1];
-        InitObjPaletteAtSlot(work->palette2, 15, gUnk_0984A118, 32);
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapEventRoomPalette, 32);
     } else {
         work->gfx = gUnk_09EF6424[0];
-        InitObjPaletteAtSlot(work->palette2, 15, gUnk_0984A0F8, 32);
+        InitObjPaletteAtSlot(work->palette2, 15, gAllmapRoomPalettes, 32);
     }
 
     FadeSetPaletteExcluded(work->palette2->index + 16, 1);
@@ -867,7 +867,7 @@ void task_allmap_pusha_0(AllmapPushaWork* work, AllmapCursorWork* arg) {
     work->x = arg->pos.x * 24 - gAllmapCameraX;
     work->y = arg->pos.y * 24 - gAllmapCameraY;
     work->tiles = LoadObjTiles(gUnk_0976DCB0, 0x80);
-    work->palette = LoadObjPalette(gUnk_0984A1D8, 32);
+    work->palette = LoadObjPalette(gAllmapObjPalette, 32);
     work->gfx = gUnk_0976DC9C;
     work->angle = 0;
     TaskPoolInit(&work->tasks, 1);

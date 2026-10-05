@@ -154,7 +154,7 @@ void task_evt_shadow_0(EvtShadowWork* work, EvtObj* obj) {
     work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->tiles2 = LoadObjTiles(gBtlShadowLargeTiles, 0x140);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
 }
 
 s32 task_evt_shadow_1() {

@@ -4,20 +4,20 @@
 #ifdef VERSION_EU
 extern void* gHcEffectNameTilesByLanguage[5];
 extern void** gHcEffectNameSpritesByLanguage[5];
-extern void* gUnkEu_09F5D59C[5];
-extern void** gUnkEu_09F5D5B0[5];
-extern void* gUnkEu_09F5D5C4[5];
-extern void** gUnkEu_09F5D5D8[5];
-extern void* gUnkEu_09F5D5EC[5];
-extern void** gUnkEu_09F5D600[5];
-extern void* gUnkEu_09F5D614[5];
-extern void** gUnkEu_09F5D628[5];
-extern void* gUnkEu_09F5D63C[5];
-extern void** gUnkEu_09F5D650[5];
-extern void* gUnkEu_09F5D664[5];
-extern void** gUnkEu_09F5D678[5];
-extern void* gUnkEu_09F5D68C[5];
-extern void** gUnkEu_09F5D6A0[5];
+extern void* gStockNameAttackTilesByLanguage[5];
+extern void** gStockNameAttackSpritesByLanguage[5];
+extern void* gStockNameMagicTilesByLanguage[5];
+extern void** gStockNameMagicSpritesByLanguage[5];
+extern void* gStockNameFriendTilesByLanguage[5];
+extern void** gStockNameFriendSpritesByLanguage[5];
+extern void* gStockNameMmMiracleTilesByLanguage[5];
+extern void** gStockNameMmMiracleSpritesByLanguage[5];
+extern void* gStockNameRikuTilesByLanguage[5];
+extern void** gStockNameRikuSpritesByLanguage[5];
+extern void* gStockNameBossTilesByLanguage[5];
+extern void** gStockNameBossSpritesByLanguage[5];
+extern void* gStockNameWorldBossTilesByLanguage[5];
+extern void** gStockNameWorldBossSpritesByLanguage[5];
 #endif
 
 #endif

@@ -2606,12 +2606,12 @@ void task_bos_lst_2(BosLstWork* work) {
             LoadPalette(gBosLstBgPalette, (void*)PLTT, 0x60);
             LoadPalette(gBosLstObjPalette, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 0x60);
         } else {
-            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(OBJ_PLTT + PLTT_SIZE_4BPP + ((work->palette->index & 15) << 5)), 32);
-            LoadPalette(gUnk_08F69BC4, (void*)(OBJ_PLTT + 2 * PLTT_SIZE_4BPP + ((work->palette->index & 15) << 5)), 32);
+            LoadPalette(gHitFlashPalette, (void*)PLTT, 32);
+            LoadPalette(gHitFlashPalette, (void*)(BG_PLTT + PLTT_SIZE_4BPP), 32);
+            LoadPalette(gHitFlashPalette, (void*)(BG_PLTT + 2 * PLTT_SIZE_4BPP), 32);
+            LoadPalette(gHitFlashPalette, (void*)(OBJ_PLTT + ((work->palette->index & 15) << 5)), 32);
+            LoadPalette(gHitFlashPalette, (void*)(OBJ_PLTT + PLTT_SIZE_4BPP + ((work->palette->index & 15) << 5)), 32);
+            LoadPalette(gHitFlashPalette, (void*)(OBJ_PLTT + 2 * PLTT_SIZE_4BPP + ((work->palette->index & 15) << 5)), 32);
         }
 
         work->prevFlash = work->flash;

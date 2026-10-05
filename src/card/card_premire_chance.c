@@ -144,10 +144,10 @@ void PremireChanceCard_2(PremireChanceCardWork* work) {
                    sPremireChanceCardPriorities[work->position] + 69);
 
         if (!work->premium) {
-            DrawSprite(work->x + work->x2, work->y + work->y2, gUnk_09EE981C[work->cardDef->value], work->tiles3, work->palette3,
+            DrawSprite(work->x + work->x2, work->y + work->y2, gCardValueDigitFrames[work->cardDef->value], work->tiles3, work->palette3,
                        affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[work->position] + 68);
         } else {
-            DrawSprite(work->x + work->x2, work->y + work->y2, gUnk_09EE9894[work->cardDef->value], work->tiles5, work->palette,
+            DrawSprite(work->x + work->x2, work->y + work->y2, gCardPremiumValueDigitFrames[work->cardDef->value], work->tiles5, work->palette,
                        affine, SPRITE_PRIORITY(1), sPremireChanceCardPriorities[work->position] + 68);
         }
     }
@@ -191,8 +191,8 @@ void LoadPremireChanceCardGfx(PremireChanceCardWork* work) {
         work->palette3 = LoadObjPalette(gCard00Palette, 32);
         work->tiles = LoadObjTiles(work->cardDef->tiles, 0x200);
         work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-        work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-        work->tiles5 = LoadObjTiles(gUnk_0905ED36, 0x140);
+        work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+        work->tiles5 = LoadObjTiles(gCardPremiumValueDigitTiles, 0x140);
         work->palette = LoadObjPalette(gBStatesPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
         FadeSetPaletteExcluded(work->palette3->index + 16, 1);
@@ -235,8 +235,8 @@ u8 UpdatePremireChanceCardToCenter(PremireChanceCardWork* work, void* a) {
 
 u8 StartPremireChanceCardAnim(PremireChanceCardWork* work, void* a) {
     work->tiles4 = AllocObjTiles(640, NULL);
-    SetObjTileSource(work->tiles4, gUnk_0908B1B4);
-    AnimInit(&work->anim, gUnk_09EEA164, gUnk_09EEA148);
+    SetObjTileSource(work->tiles4, gCardPremiumTiles);
+    AnimInit(&work->anim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdatePremireChanceCardAnim);

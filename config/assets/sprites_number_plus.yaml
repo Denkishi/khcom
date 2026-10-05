@@ -32,36 +32,36 @@ objects:
     data_start: 0x09F74628
     data_end: 0x09F74630
 entries:
-- name: gUnk_09EE91A8
+- name: gNumberPlusFrames
   record: SpriteTable
-  items: [gUnk_090451AC]
+  items: [gNumberPlusFrame0]
   us:
     address: 0x09EE91A8
   jp:
     address: 0x09EC07EC
   eu:
     address: 0x09F74628
-- name: gUnk_09EE91AC
+- name: gNumberPlusAnims
   record: AnimTable
-  items: [gUnk_090451B6]
+  items: [gNumberPlusAnim0]
   us:
     address: 0x09EE91AC
   jp:
     address: 0x09EC07F0
   eu:
     address: 0x09F7462C
-- name: gUnk_090451C0
+- name: gNumberPlusTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_090451AC
+  - symbol: gNumberPlusFrame0
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_090451B6
+  - symbol: gNumberPlusAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:

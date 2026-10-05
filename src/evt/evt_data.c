@@ -1526,7 +1526,7 @@ const EvtObjResTable gEvtObjResources[94] = {
     { { 50, { 0 }, gMickeyPalette }, { 0 } },
     { { 30, { 0 }, gPoohPalette }, { 0 } },
     { { 2, { 0 }, gTrap0100Palette }, { 0 } },
-    { { 12, { 0 }, gUnk_09849C18 }, { 0 } },
+    { { 12, { 0 }, gPigletPalette }, { 0 } },
     { { 32, { 0 }, gOwlPalette }, { 0 } },
     { { 20, { 0 }, gRooPalette }, { 0 } },
     { { 30, { 0 }, gEeyorePalette }, { 0 } },

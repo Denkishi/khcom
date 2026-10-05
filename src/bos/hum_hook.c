@@ -784,7 +784,7 @@ void task_hum_hook_3(HookWork* work) {
 void task_hum_hook_moon_0(HookMoonWork* work) {
     work->tiles = LoadObjTiles(gHumHookMoonTiles, 0xC00);
     PushPaletteEffect(0);
-    work->palette = LoadObjPalette(gUnk_08F6DC64, 0x20);
+    work->palette = LoadObjPalette(gHumHookMoonPalette, 0x20);
     PopPaletteEffect();
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
     work->backdropSet = 0;

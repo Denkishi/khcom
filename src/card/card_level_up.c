@@ -100,7 +100,7 @@ void Level_Up_0(LevelUpWork* work) {
     work->tiles5[1] = AllocSpriteFrameTiles(0x500);
     work->tiles5[2] = AllocSpriteFrameTiles(0x500);
 #endif
-    work->tilesPalettes[7] = LoadObjPalette(gUnk_09613EF8, 32);
+    work->tilesPalettes[7] = LoadObjPalette(gLevelUpHeaderPalette, 32);
     FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, 1);
     work->tiles2 = LoadObjTiles(gLevelUpBarTiles, 0x3C0);
     TaskPoolInit(&work->pool, 10);
@@ -309,10 +309,10 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #endif
 
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                    LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                    LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                 } else {
                     LoadLevelUpRikuBgTiles();
-                    LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                    LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                 }
 
                 LoadBgMap(1, gLevelUpStatsMap, mapSize);
@@ -346,10 +346,10 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     }
 
                     SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
@@ -381,10 +381,10 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gUnk_09614018, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                     }
 
                     SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
@@ -427,8 +427,8 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613F18, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, 32);
             } else {
                 work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
                 work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
@@ -448,8 +448,8 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, 32);
             }
 
 #ifdef VERSION_EU
@@ -481,10 +481,10 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
             work->tiles = AllocObjTiles(0x3C0, NULL);
-            work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
+            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
             FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-            SetObjTileSource(work->tiles, gUnk_093F4578);
-            AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+            SetObjTileSource(work->tiles, gSmallHandCursorTiles);
+            AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
             AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
             work->gfx2 = AnimGetGfx(&work->anim);
             work->loaded[0] = 1;
@@ -636,8 +636,8 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #endif
                         }
 
-                        work->palette = LoadObjPalette(gUnk_09613F98, 32);
-                        work->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
+                        work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, 32);
+                        work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, 32);
                     } else {
                         if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -698,8 +698,8 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #endif
                         }
 
-                        work->palette = LoadObjPalette(gUnk_09613FD8, 32);
-                        work->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
+                        work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, 32);
+                        work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
                     }
 
                     FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -809,7 +809,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
         ReleaseObjTiles(work->tiles);
         ReleaseObjPalette(work->palette3);
         work->tiles = AllocObjTiles(128, NULL);
-        work->palette3 = LoadObjPalette(gUnk_09613F58, 32);
+        work->palette3 = LoadObjPalette(gLevelUpChosenCursorPalette, 32);
         FadeSetPaletteExcluded(work->palette3->index + 16, 1);
         SetObjTileSource(work->tiles, gLevelUpChosenCursorTiles);
         AnimInit(&work->anim, gLevelUpChosenCursorAnims, gLevelUpChosenCursorFrames);
@@ -1455,8 +1455,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613F18, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613F38, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpSoraBonusPalette, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpSoraBonusSelectedPalette, 32);
             } else {
                 work->tilesPalettes[0] = AllocSpriteFrameTiles(tileSize);
                 work->tilesPalettes[1] = AllocSpriteFrameTiles(tileSize);
@@ -1476,8 +1476,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
                 }
 #endif
 
-                work->tilesPalettes[4] = LoadObjPalette(gUnk_09613EB8, 32);
-                work->tilesPalettes[5] = LoadObjPalette(gUnk_09613ED8, 32);
+                work->tilesPalettes[4] = LoadObjPalette(gLevelUpRikuBonusPalette, 32);
+                work->tilesPalettes[5] = LoadObjPalette(gLevelUpRikuBonusSelectedPalette, 32);
             }
 
 #ifdef VERSION_EU
@@ -1509,10 +1509,10 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[5])->index + 16, 1);
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
             work->tiles = AllocObjTiles(0x3C0, NULL);
-            work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
+            work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
             FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-            SetObjTileSource(work->tiles, gUnk_093F4578);
-            AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+            SetObjTileSource(work->tiles, gSmallHandCursorTiles);
+            AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
             AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
             work->gfx2 = AnimGetGfx(&work->anim);
             work->loaded[0] = 1;
@@ -1627,8 +1627,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #endif
             }
 
-            work->palette = LoadObjPalette(gUnk_09613F98, 32);
-            work->palette2 = LoadObjPalette(gUnk_09613FB8, 32);
+            work->palette = LoadObjPalette(gLevelUpSoraOptionSelectedPalette, 32);
+            work->palette2 = LoadObjPalette(gLevelUpSoraOptionPalette, 32);
         } else {
             if (gGameState.progression.maxHp > 559) {
 #ifdef VERSION_EU
@@ -1689,8 +1689,8 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #endif
             }
 
-            work->palette = LoadObjPalette(gUnk_09613FD8, 32);
-            work->palette2 = LoadObjPalette(gUnk_09613FF8, 32);
+            work->palette = LoadObjPalette(gLevelUpRikuOptionSelectedPalette, 32);
+            work->palette2 = LoadObjPalette(gLevelUpRikuOptionPalette, 32);
         }
 
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -1856,7 +1856,7 @@ s32 IsLevelUpApUnlocked() {
 }
 
 #ifdef VERSION_EU
-void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gLevelUpStatLabelFrenchTiles, gLevelUpStatLabelGermanTiles, gLevelUpStatLabelItalianTiles, gLevelUpStatLabelSpanishTiles };
+void* gLevelUpBgTilesByLanguage[5] = { gLevelUpStatLabelTiles, gLevelUpStatLabelFrenchTiles, gLevelUpStatLabelGermanTiles, gLevelUpStatLabelItalianTiles, gLevelUpStatLabelSpanishTiles };
 void* gLevelUpHeaderTilesByLanguage[5] = { gLevelUpHeaderTiles, gLevelUpHeaderFrenchTiles, gLevelUpHeaderGermanTiles, gLevelUpHeaderItalianTiles, gLevelUpHeaderSpanishTiles };
 
 void** gLevelUpHeaderSpritesByLanguage[5] = {

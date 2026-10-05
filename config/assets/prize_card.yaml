@@ -36,7 +36,7 @@ entries:
   eu:
     address: 0x09522CE4
     size: 1024
-- name: gUnk_09501778
+- name: gSpotLightTiles
   format: tiles4
   width: 2
   us:
@@ -48,7 +48,7 @@ entries:
   eu:
     address: 0x095230E4
     size: 26560
-- name: gUnk_0960F2B8
+- name: gSpotLightMap
   format: tilemap
   us:
     address: 0x0960F2B8

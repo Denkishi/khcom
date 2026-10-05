@@ -137,9 +137,9 @@ void mode_sio_battle_0(s32 a) {
     SetBgMode0();
     SetupBg(0, 0, 7, 0);
     SetupBg(1, 0, 31, 0);
-    LoadBgTiles(1, gUnk_096ACA44, 0xBC0);
-    LoadBgPalette(1, gUnk_096FBA04, 64);
-    LoadBgMap(1, gUnk_096F5464, 0x800);
+    LoadBgTiles(1, gSioBgTiles, 0xBC0);
+    LoadBgPalette(1, gSioBgPalettes, 64);
+    LoadBgMap(1, gSioBattleBgMap, 0x800);
     EnableBg(1);
     sSioBattleWork->state = 0;
     sSioBattleWork->slideTimer = 0;
@@ -148,15 +148,15 @@ void mode_sio_battle_0(s32 a) {
     sSioBattleWork->y = -0x800;
     sSioBattleWork->y2 = 0xA000;
     sSioBattleWork->tiles = LoadObjTiles(gSioBattleLinkTiles, 0x240);
-    sSioBattleWork->palette = LoadObjPalette(gUnk_096FBA44, 32);
+    sSioBattleWork->palette = LoadObjPalette(gSioBattleLinkPalette, 32);
 
     for (i = 0; i < 3; i++) {
         sSioBattleWork->gfx2[i] = gSioBattleLinkFrames[i];
     }
 
 #ifdef VERSION_EU
-    sSioBattleWork->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
-    sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    sSioBattleWork->palette2 = LoadObjPalette(gSioBattleMenuPalette, 32);
+    sSioBattleWork->palette3 = LoadObjPalette(gSioBattleMenuSelectedPalette, 32);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -183,12 +183,12 @@ void mode_sio_battle_0(s32 a) {
     }
 #else
     sSioBattleWork->tiles2 = LoadObjTiles(gSioBattleMenuTiles, 0x600);
-    sSioBattleWork->palette2 = LoadObjPalette(gUnk_096FBA64, 32);
+    sSioBattleWork->palette2 = LoadObjPalette(gSioBattleMenuPalette, 32);
     sSioBattleWork->tiles3 = LoadObjTiles(gSioBattleMenuSelectedTiles, 0x600);
-    sSioBattleWork->palette3 = LoadObjPalette(gUnk_096FBA84, 32);
+    sSioBattleWork->palette3 = LoadObjPalette(gSioBattleMenuSelectedPalette, 32);
 #endif
     sSioBattleWork->tiles4 = LoadObjTiles(gSioCursorTiles, 0x1C0);
-    sSioBattleWork->palette4 = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioBattleWork->palette4 = LoadObjPalette(gSioCursorPalette, 32);
     AnimInit(&sSioBattleWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBattleWork->anim, 1, ANIM_FLAG_LOOP);
     gfx = AnimGetGfx(&sSioBattleWork->anim);
@@ -505,12 +505,12 @@ void mode_sio_btl_connect_0(s32 arg) {
     SetupBg(1, 1, 31, 0);
     EnableBg(0);
     EnableBg(1);
-    LoadBgTiles(0, gUnk_096AD604, 0x140);
-    LoadBgMap(0, gUnk_096F6464, 0x800);
+    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
+    LoadBgMap(0, gSioMsgWinMap, 0x800);
     LoadBgPalette(0, gCard00Palette, 0x20);
-    LoadBgTiles(1, gUnk_096ACA44, 0xBC0);
-    LoadBgPalette(1, gUnk_096FBA04, 0x40);
-    LoadBgMap(1, gUnk_096F5C64, 0x800);
+    LoadBgTiles(1, gSioBgTiles, 0xBC0);
+    LoadBgPalette(1, gSioBgPalettes, 0x40);
+    LoadBgMap(1, gSioConnectBgMap, 0x800);
     sSioBtlConnectWork->unk_00 = 0;
     sSioBtlConnectWork->timer = 0;
     sSioBtlConnectWork->state = 0;
@@ -521,7 +521,7 @@ void mode_sio_btl_connect_0(s32 arg) {
 #else
     sSioBtlConnectWork->textSlotCount = LoadTextSlots(gUnk_08159E4A, sSioBtlConnectWork->textSlots);
 #endif
-    sSioBtlConnectWork->palette = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioBtlConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 
 #ifdef VERSION_EU
     if (!gSioDebugMode) {
@@ -690,7 +690,7 @@ void mode_sio_btl_option_0(s32 arg) {
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
     SetBgSize(2, 0x8000);
-    RequestDma3Copy(gUnk_096AD744, GetBgCharBase(0), 0x2000);
+    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(0), 0x2000);
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots, 40);
     InitTextSlots(sSioBtlOptionWork->textSlots2, 20);
@@ -721,38 +721,38 @@ void mode_sio_btl_option_0(s32 arg) {
 }
 
 void SioBtlOptionLoadBg() {
-    RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(0) + 0x2000, 0x800);
+    RequestDma3Copy(gSioBtlVsTiles, (u8*)GetBgCharBase(0) + 0x2000, 0x800);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        LoadBgMap(0, gUnk_096F6C64, 0x800);
-        LoadBgMap(1, gUnk_096F7464, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0Map, 0x800);
+        LoadBgMap(1, gSioBtlOptionBg1Map, 0x800);
         break;
     case LANGUAGE_ITALIAN:
-        LoadBgMap(0, gUnkEu_096C298C, 0x800);
-        LoadBgMap(1, gUnkEu_096C498C, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0ItalianMap, 0x800);
+        LoadBgMap(1, gSioBtlOptionBg1ItalianMap, 0x800);
         break;
     case LANGUAGE_FRENCH:
-        LoadBgMap(0, gUnkEu_096C198C, 0x800);
-        LoadBgMap(1, gUnkEu_096C398C, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0FrenchMap, 0x800);
+        LoadBgMap(1, gSioBtlOptionBg1FrenchMap, 0x800);
         break;
     case LANGUAGE_SPANISH:
-        LoadBgMap(0, gUnkEu_096C218C, 0x800);
-        LoadBgMap(1, gUnkEu_096C418C, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0SpanishMap, 0x800);
+        LoadBgMap(1, gSioBtlOptionBg1SpanishMap, 0x800);
         break;
     case LANGUAGE_GERMAN:
     default:
-        LoadBgMap(0, gUnkEu_096C318C, 0x800);
-        LoadBgMap(1, gUnkEu_096C518C, 0x800);
+        LoadBgMap(0, gSioBtlOptionBg0GermanMap, 0x800);
+        LoadBgMap(1, gSioBtlOptionBg1GermanMap, 0x800);
         break;
     }
 #else
-    LoadBgMap(0, gUnk_096F6C64, 0x800);
+    LoadBgMap(0, gSioBtlOptionBg0Map, 0x800);
 #endif
-    LoadBgPalette(0, gUnk_096FBC04, 0xC0);
+    LoadBgPalette(0, gSioBtlOptionBgPalettes, 0xC0);
 #ifndef VERSION_EU
-    LoadBgMap(1, gUnk_096F7464, 0x800);
+    LoadBgMap(1, gSioBtlOptionBg1Map, 0x800);
 #endif
     DisableBg(0);
     DisableBg(1);
@@ -763,7 +763,7 @@ void SioBtlOptionInitObjs() {
     s32 i;
 
 #ifdef VERSION_EU
-    RequestDma3Copy(gUnkEu_0967CB6C, (u8*)GetBgCharBase(0) + 0x49E0, 0x1620);
+    RequestDma3Copy(gSioBtlOptionExtraTiles, (u8*)GetBgCharBase(0) + 0x49E0, 0x1620);
 #endif
 
     if (sSioBtlOptionWork->modeArg == 1) {
@@ -795,14 +795,14 @@ void SioBtlOptionInitObjs() {
 
     if (gSioPlayerId == 0) {
         sSioBtlOptionWork->playerTilesPalettes[2] = LoadObjPalette(gSoraPalette, 32);
-        sSioBtlOptionWork->playerTilesPalettes[3] = LoadObjPalette(gUnk_096FAC64, 32);
+        sSioBtlOptionWork->playerTilesPalettes[3] = LoadObjPalette(gBtlOtherSidePalette, 32);
     } else {
-        sSioBtlOptionWork->playerTilesPalettes[2] = LoadObjPalette(gUnk_096FAC64, 32);
+        sSioBtlOptionWork->playerTilesPalettes[2] = LoadObjPalette(gBtlOtherSidePalette, 32);
         sSioBtlOptionWork->playerTilesPalettes[3] = LoadObjPalette(gSoraPalette, 32);
     }
 
 #ifdef VERSION_EU
-    sSioBtlOptionWork->palette = LoadObjPalette(gUnk_096FBD24, 32);
+    sSioBtlOptionWork->palette = LoadObjPalette(gSioBtlOptionMenuPalette, 32);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -829,16 +829,16 @@ void SioBtlOptionInitObjs() {
     }
 #else
     sSioBtlOptionWork->tiles = LoadObjTiles(gSioBtlOptionMenuTiles, 0xC00);
-    sSioBtlOptionWork->palette = LoadObjPalette(gUnk_096FBD24, 32);
+    sSioBtlOptionWork->palette = LoadObjPalette(gSioBtlOptionMenuPalette, 32);
     sSioBtlOptionWork->gfx = gSioBtlOptionMenuFrames[0];
 #endif
     sSioBtlOptionWork->tiles2 = LoadObjTiles(gSioCursorTiles, 0x1C0);
-    sSioBtlOptionWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioBtlOptionWork->palette2 = LoadObjPalette(gSioCursorPalette, 32);
     AnimInit(&sSioBtlOptionWork->anim, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioBtlOptionWork->anim, 1, ANIM_FLAG_LOOP);
     sSioBtlOptionWork->gfx2 = AnimGetGfx(&sSioBtlOptionWork->anim);
     sSioBtlOptionWork->cursorVisible = 1;
-    sSioBtlOptionWork->tiles3 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    sSioBtlOptionWork->tiles3 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioBtlOptionWork->palette3 = LoadObjPalette(gCard00Palette, 32);
     sSioBtlOptionWork->gfx3 = gUnk_09EF1278[0];
     sSioBtlOptionWork->messageVisible = 0;
@@ -855,9 +855,9 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->x = 65;
 #endif
     sSioBtlOptionWork->y2 = 124;
-    sSioBtlOptionWork->palette6 = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioBtlOptionWork->palette6 = LoadObjPalette(gSioCursorPalette, 32);
     sSioBtlOptionWork->tiles4 = LoadObjTiles(gSioBtlOptionLrTiles, 0x120);
-    sSioBtlOptionWork->palette4 = LoadObjPalette(gUnk_096FBD44, 32);
+    sSioBtlOptionWork->palette4 = LoadObjPalette(gSioBtlOptionLrPalette, 32);
     sSioBtlOptionWork->gfx4 = gSioBtlOptionLrFrames[0];
     sSioBtlOptionWork->gfx7 = gSioBtlOptionLrFrames[1];
     sSioBtlOptionWork->gfx8 = gSioBtlOptionLrFrames[2];
@@ -2322,43 +2322,43 @@ void mode_sio_btl_cardget_0(s32 arg) {
     SetBgPriority(1, 1);
     SetupBg(2, 0, 24, 0);
     SetBgPriority(2, 2);
-    RequestDma3Copy(gUnk_096AD744, GetBgCharBase(1), 0x2000);
+    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(1), 0x2000);
     sSioBtlCardgetWork->state = 0;
 }
 
 void SioBtlCardgetLoadBgTiles() {
-    RequestDma3Copy(gUnk_096AF744, (u8*)GetBgCharBase(1) + 0x2000, 0x2000);
+    RequestDma3Copy(gSioBtlVsTiles, (u8*)GetBgCharBase(1) + 0x2000, 0x2000);
 }
 
 void SioBtlCardgetLoadBg() {
 #ifdef VERSION_EU
-    RequestDma3Copy(gUnk_096B1744, (u8*)GetBgCharBase(1) + 0x4000, 0x2000);
+    RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, 0x2000);
 #else
-    RequestDma3Copy(gUnk_096B1744, (u8*)GetBgCharBase(1) + 0x4000, 0x9E0);
+    RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, 0x9E0);
 #endif
-    LoadBgPalette(1, gUnk_096FBAC4, 0x200);
+    LoadBgPalette(1, gSioBtlCardgetBgPalettes, 0x200);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        LoadBgMap(1, gUnk_096F7C64, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgMap, 0x800);
         break;
     case LANGUAGE_ITALIAN:
-        LoadBgMap(1, gUnkEu_096C698C, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgItalianMap, 0x800);
         break;
     case LANGUAGE_FRENCH:
-        LoadBgMap(1, gUnkEu_096C598C, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgFrenchMap, 0x800);
         break;
     case LANGUAGE_SPANISH:
-        LoadBgMap(1, gUnkEu_096C618C, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgSpanishMap, 0x800);
         break;
     case LANGUAGE_GERMAN:
     default:
-        LoadBgMap(1, gUnkEu_096C718C, 0x800);
+        LoadBgMap(1, gSioBtlCardgetBgGermanMap, 0x800);
         break;
     }
 #else
-    LoadBgMap(1, gUnk_096F7C64, 0x800);
+    LoadBgMap(1, gSioBtlCardgetBgMap, 0x800);
 #endif
     DisableBg(1);
 }
@@ -2380,10 +2380,10 @@ void SioBtlCardgetShowResult() {
         if (gSioPlayerId == 0) {
             SioBtlCardgetLoad1PWin();
             sSioBtlCardgetWork->palette = LoadObjPalette(gSoraPalette, 32);
-            sSioBtlCardgetWork->palette2 = LoadObjPalette(gUnk_096FAC64, 32);
+            sSioBtlCardgetWork->palette2 = LoadObjPalette(gBtlOtherSidePalette, 32);
         } else {
             SioBtlCardgetLoad2PWin();
-            sSioBtlCardgetWork->palette = LoadObjPalette(gUnk_096FAC64, 32);
+            sSioBtlCardgetWork->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
             sSioBtlCardgetWork->palette2 = LoadObjPalette(gSoraPalette, 32);
         }
     } else {
@@ -2396,10 +2396,10 @@ void SioBtlCardgetShowResult() {
         if (gSioPlayerId == 0) {
             SioBtlCardgetLoad2PWin();
             sSioBtlCardgetWork->palette = LoadObjPalette(gSoraPalette, 32);
-            sSioBtlCardgetWork->palette2 = LoadObjPalette(gUnk_096FAC64, 32);
+            sSioBtlCardgetWork->palette2 = LoadObjPalette(gBtlOtherSidePalette, 32);
         } else {
             SioBtlCardgetLoad1PWin();
-            sSioBtlCardgetWork->palette = LoadObjPalette(gUnk_096FAC64, 32);
+            sSioBtlCardgetWork->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
             sSioBtlCardgetWork->palette2 = LoadObjPalette(gSoraPalette, 32);
         }
     }
@@ -2580,14 +2580,14 @@ void SioBtlCardgetDraw() {
 }
 
 void SioBtlCardgetLoad1PWin() {
-    LoadBgMap(2, gUnk_096F8C64, 0x800);
+    LoadBgMap(2, gSioBtlCardget1PWinMap, 0x800);
     sSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1ff00Tiles);
     sSioBtlCardgetWork->gfx = gSor1ff00Frames[18];
     sSioBtlCardgetWork->tiles2 = AllocObjTiles(0xC80, gSor1fl26Tiles);
     sSioBtlCardgetWork->gfx2 = gSor1fl26Frames[6];
 #ifdef VERSION_EU
-    sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBDE4, 32);
-    sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBE04, 32);
+    sSioBtlCardgetWork->palette3 = LoadObjPalette(gSioBtlCardgetWinPalette, 32);
+    sSioBtlCardgetWork->palette4 = LoadObjPalette(gSioBtlCardgetLosePalette, 32);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -2628,27 +2628,27 @@ void SioBtlCardgetLoad1PWin() {
 #else
     sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
 #endif
-    sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBDE4, 32);
+    sSioBtlCardgetWork->palette3 = LoadObjPalette(gSioBtlCardgetWinPalette, 32);
     sSioBtlCardgetWork->gfx3 = gSioBtlCardgetWinFrames[0];
 #ifdef VERSION_JP
     sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x480);
 #else
     sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
 #endif
-    sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBE04, 32);
+    sSioBtlCardgetWork->palette4 = LoadObjPalette(gSioBtlCardgetLosePalette, 32);
     sSioBtlCardgetWork->gfx4 = gSioBtlCardgetLoseFrames[0];
 #endif
 }
 
 void SioBtlCardgetLoad2PWin() {
-    LoadBgMap(2, gUnk_096F8464, 0x800);
+    LoadBgMap(2, gSioBtlCardget2PWinMap, 0x800);
     sSioBtlCardgetWork->tiles = AllocObjTiles(0xC80, gSor1fl26Tiles);
     sSioBtlCardgetWork->gfx = gSor1fl26Frames[6];
     sSioBtlCardgetWork->tiles2 = AllocObjTiles(0xC80, gSor1ff00Tiles);
     sSioBtlCardgetWork->gfx2 = gSor1ff00Frames[18];
 #ifdef VERSION_EU
-    sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBE04, 32);
-    sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBDE4, 32);
+    sSioBtlCardgetWork->palette3 = LoadObjPalette(gSioBtlCardgetLosePalette, 32);
+    sSioBtlCardgetWork->palette4 = LoadObjPalette(gSioBtlCardgetWinPalette, 32);
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
@@ -2689,14 +2689,14 @@ void SioBtlCardgetLoad2PWin() {
 #else
     sSioBtlCardgetWork->tiles3 = LoadObjTiles(gSioBtlCardgetLoseTiles, 0x600);
 #endif
-    sSioBtlCardgetWork->palette3 = LoadObjPalette(gUnk_096FBE04, 32);
+    sSioBtlCardgetWork->palette3 = LoadObjPalette(gSioBtlCardgetLosePalette, 32);
     sSioBtlCardgetWork->gfx3 = gSioBtlCardgetLoseFrames[0];
 #ifdef VERSION_JP
     sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x500);
 #else
     sSioBtlCardgetWork->tiles4 = LoadObjTiles(gSioBtlCardgetWinTiles, 0x680);
 #endif
-    sSioBtlCardgetWork->palette4 = LoadObjPalette(gUnk_096FBDE4, 32);
+    sSioBtlCardgetWork->palette4 = LoadObjPalette(gSioBtlCardgetWinPalette, 32);
     sSioBtlCardgetWork->gfx4 = gSioBtlCardgetWinFrames[0];
 #endif
 }
@@ -2710,19 +2710,19 @@ void mode_sio_chg_connect_0(s32 arg) {
     SetupBg(1, 1, 31, 0);
     EnableBg(0);
     EnableBg(1);
-    LoadBgTiles(0, gUnk_096AD604, 0x140);
-    LoadBgMap(0, gUnk_096F6464, 0x800);
+    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
+    LoadBgMap(0, gSioMsgWinMap, 0x800);
     LoadBgPalette(0, gCard00Palette, 0x20);
-    LoadBgTiles(1, gUnk_096ACA44, 0xBC0);
-    LoadBgPalette(1, gUnk_096FBA04, 0x40);
-    LoadBgMap(1, gUnk_096F5C64, 0x800);
+    LoadBgTiles(1, gSioBgTiles, 0xBC0);
+    LoadBgPalette(1, gSioBgPalettes, 0x40);
+    LoadBgMap(1, gSioConnectBgMap, 0x800);
     sSioChgConnectWork->unk_00 = 0;
     sSioChgConnectWork->timer = 0;
     sSioChgConnectWork->state = 0;
     sSioChgConnectWork->textSlotCount = 0;
     InitTextSlots(sSioChgConnectWork->textSlots, 0x5A);
     sSioChgConnectWork->textSlotCount = LoadTextSlots(gUnk_08159EC4, sSioChgConnectWork->textSlots);
-    sSioChgConnectWork->palette = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioChgConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
     SioReset();
     SioConnectInit(SioChgConnectOnConnect, SioChgConnectOnCancel, 1);
 }
@@ -2822,7 +2822,7 @@ void mode_sio_chg_card_0(s32 arg) {
     SetBgPriority(2, 2);
     SetBgOverflow(2, 1);
     SetBgSize(2, 0);
-    RequestDma3Copy(gUnk_096B2BE4, GetBgCharBase(0), 0x2000);
+    RequestDma3Copy(gSioChgCardBgTiles, GetBgCharBase(0), 0x2000);
     DisableBg(0);
     DisableBg(1);
     DisableBg(2);
@@ -2839,9 +2839,9 @@ void mode_sio_chg_card_0(s32 arg) {
 
 #ifndef VERSION_EU
 void SioChgCardLoadBg() {
-    RequestDma3Copy(gUnk_096B4BE4, (u8*)GetBgCharBase(0) + 0x2000, 0x11C0);
-    LoadBgPalette(0, gUnk_096FBE24, 0xE0);
-    LoadBgMap(0, gUnk_096FA464, 0x800);
+    RequestDma3Copy(gSioChgCardTitleTiles, (u8*)GetBgCharBase(0) + 0x2000, 0x11C0);
+    LoadBgPalette(0, gSioChgCardBgPalettes, 0xE0);
+    LoadBgMap(0, gSioChgCardBg0Map, 0x800);
     DisableBg(0);
     DisableBg(1);
     DisableBg(2);
@@ -2855,8 +2855,8 @@ void SioChgCardInitObjs() {
     s32 i;
     s16 n;
     FadeStartIn(FADE_MODE_BLACK, 16);
-    LoadBgMap(1, gUnk_096F9C64, 0x800);
-    LoadBgMap(2, gUnk_096F9464, 0x800);
+    LoadBgMap(1, gSioChgCardBg1Map, 0x800);
+    LoadBgMap(2, gSioChgCardBg2Map, 0x800);
     DisableBg(0);
     EnableBg(1);
     EnableBg(2);
@@ -2881,19 +2881,19 @@ void SioChgCardInitObjs() {
 
     if (gSioPlayerId == 0) {
         sSioChgCardWork->playerTilesPalettes[2] = LoadObjPalette(gSoraPalette, 32);
-        sSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gUnk_096FAC64, 32);
+        sSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gBtlOtherSidePalette, 32);
     } else {
-        sSioChgCardWork->playerTilesPalettes[2] = LoadObjPalette(gUnk_096FAC64, 32);
+        sSioChgCardWork->playerTilesPalettes[2] = LoadObjPalette(gBtlOtherSidePalette, 32);
         sSioChgCardWork->playerTilesPalettes[3] = LoadObjPalette(gSoraPalette, 32);
     }
 
     sSioChgCardWork->tiles = LoadObjTiles(gSioChgCardHighlightTiles, 0x780);
-    sSioChgCardWork->palette = LoadObjPalette(gUnk_096FBF04, 32);
+    sSioChgCardWork->palette = LoadObjPalette(gSioChgCardHighlightPalette, 32);
     AnimInit(&sSioChgCardWork->anim2, gSioChgCardHighlightAnims, gSioChgCardHighlightFrames);
     AnimStart(&sSioChgCardWork->anim2, 0, ANIM_FLAG_LOOP);
     sSioChgCardWork->gfx2 = AnimGetGfx(&sSioChgCardWork->anim2);
     sSioChgCardWork->tiles2 = LoadObjTiles(gSioCursorTiles, 0x1C0);
-    sSioChgCardWork->palette2 = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioChgCardWork->palette2 = LoadObjPalette(gSioCursorPalette, 32);
     AnimInit(&sSioChgCardWork->anim3, gSioCursorAnims, gSioCursorFrames);
     AnimStart(&sSioChgCardWork->anim3, 0, ANIM_FLAG_LOOP);
     sSioChgCardWork->gfx3 = AnimGetGfx(&sSioChgCardWork->anim3);
@@ -2906,7 +2906,7 @@ void SioChgCardInitObjs() {
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].gfx2;
-            sSioChgCardWork->gfx5[i] = gUnk_09EE981C[0];
+            sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[0];
             sSioChgCardWork->scaleX[i] = 0x100;
             sSioChgCardWork->scaleY[i] = 0x100;
             sSioChgCardWork->angle[i] = 0;
@@ -2918,16 +2918,16 @@ void SioChgCardInitObjs() {
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[n].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[n].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[n].gfx2;
-            sSioChgCardWork->gfx5[i] = gUnk_09EE981C[gCardDefs[n].value];
+            sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[gCardDefs[n].value];
             sSioChgCardWork->scaleX[i] = 0x100;
             sSioChgCardWork->scaleY[i] = 0x100;
             sSioChgCardWork->angle[i] = 0;
         }
     }
 
-    sSioChgCardWork->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    sSioChgCardWork->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     sSioChgCardWork->palette4 = LoadObjPalette(gCard00Palette, 32);
-    sSioChgCardWork->tiles5 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    sSioChgCardWork->tiles5 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioChgCardWork->gfx6 = gUnk_09EF1278[0];
     sSioChgCardWork->messageVisible = 0;
     InitTextSlots(sSioChgCardWork->textSlots, 42);
@@ -3356,7 +3356,7 @@ void SioChgCardSetSlot(u16 a) {
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].gfx2;
-            sSioChgCardWork->gfx5[i] = gUnk_09EE981C[0];
+            sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[0];
             gSioChgCardSlots[i] = slot;
 
             if (sSioChgCardWork->cardInfoVisible == 1) {
@@ -3371,7 +3371,7 @@ void SioChgCardSetSlot(u16 a) {
             sSioChgCardWork->tiles3[i] = LoadObjTiles(gCardDefs[slot].tiles2, 0x200);
             sSioChgCardWork->palette3[i] = LoadObjPalette(gCardDefs[slot].palette2, 32);
             sSioChgCardWork->gfx4[i] = gCardDefs[slot].gfx2;
-            sSioChgCardWork->gfx5[i] = gUnk_09EE981C[gCardDefs[slot].value];
+            sSioChgCardWork->gfx5[i] = gCardValueDigitFrames[gCardDefs[slot].value];
             gSioChgCardSlots[i] = slot;
         }
     }
@@ -3431,9 +3431,9 @@ void SioChgCardDrawPointTotals() {
     digits[1] = v / 10;
     v = v % 10;
     digits[2] = v;
-    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[0] * 32], (void*)(BG_VRAM + 13 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[1] * 32], (void*)(BG_VRAM + 14 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[2] * 32], (void*)(BG_VRAM + 15 * TILE_SIZE_4BPP), 32);
     sum = 0;
 
     for (j = 5; j < 10; j++) {
@@ -3450,9 +3450,9 @@ void SioChgCardDrawPointTotals() {
     digits[1] = v / 10;
     v = v % 10;
     digits[2] = v;
-    RequestDma3Copy(&gUnk_096B5DA4[digits[0] * 32], (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[1] * 32], (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
-    RequestDma3Copy(&gUnk_096B5DA4[digits[2] * 32], (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[0] * 32], (void*)(BG_VRAM + 16 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[1] * 32], (void*)(BG_VRAM + 17 * TILE_SIZE_4BPP), 32);
+    RequestDma3Copy(&gSioChgCardDigitTiles[digits[2] * 32], (void*)(BG_VRAM + 18 * TILE_SIZE_4BPP), 32);
 }
 
 void SioChgCardHandleInput() {
@@ -3661,8 +3661,8 @@ void SioChgCardShowInfo() {
     defs = gCardDefs;
     def = &defs[n];
     off = def->category << 4;
-    LoadPalette(gUnk_096FBF84 + off, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 32);
-    LoadObjPaletteBank(sSioChgCardWork->palette->index, gUnk_096FBF04 + off);
+    LoadPalette(gSioChgCardCategoryPalettes + off, (void*)(BG_PLTT + 5 * PLTT_SIZE_4BPP), 32);
+    LoadObjPaletteBank(sSioChgCardWork->palette->index, gSioChgCardHighlightPalette + off);
     nameId = def->kind;
     defs = (CardDef*)&defs->name;
     sSioChgCardWork->textSlotCount2 = LoadTextSlots(defs[n].gfx, sSioChgCardWork->textSlots2);
@@ -3818,9 +3818,9 @@ void mode_sioError_0(s32 arg) {
     SetupBg(0, 0, 7, 15);
     SetupBg(1, 1, 31, 0);
     SetBgSize(1, 0);
-    LoadBgTiles(1, gUnk_096ACA44, 0xBC0);
-    LoadBgPalette(1, gUnk_096FBA04, 0x40);
-    LoadBgMap(1, gUnk_096F5C64, 0x800);
+    LoadBgTiles(1, gSioBgTiles, 0xBC0);
+    LoadBgPalette(1, gSioBgPalettes, 0x40);
+    LoadBgMap(1, gSioConnectBgMap, 0x800);
     EnableBg(0);
     EnableBg(1);
     DisableBg(2);
@@ -3840,8 +3840,8 @@ void mode_sioError_0(s32 arg) {
         SetBgScroll(0, 0xFFE9, 0xFFD0);
     }
 #elif defined(VERSION_JP)
-    LoadBgTiles(0, gUnk_096AD604, 0x140);
-    LoadBgMap(0, gUnk_096F6464, 0x800);
+    LoadBgTiles(0, gSioMsgWinTiles, 0x140);
+    LoadBgMap(0, gSioMsgWinMap, 0x800);
     LoadBgPalette(0, gCard00Palette, 32);
 #else
     LoadBgTiles(0, gSysMsgWinTiles, 0x140);
@@ -3857,7 +3857,7 @@ void mode_sioError_0(s32 arg) {
 #else
     sSioErrorWork->textSlotCount = LoadTextSlots(gUnk_0815A2BE, sSioErrorWork->textSlots);
 #endif
-    sSioErrorWork->palette = LoadObjPalette(gUnk_096FBAA4, 32);
+    sSioErrorWork->palette = LoadObjPalette(gSioCursorPalette, 32);
 }
 
 void mode_sioError_1() {

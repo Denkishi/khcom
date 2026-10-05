@@ -5050,7 +5050,7 @@ void Task_MapDoor_0(MapDoorWork* work, MapDoor* p) {
     e->kind = 3;
     work->tiles = AllocSpriteFrameTiles(0x400);
     work->palette = LoadObjPalette(q->palette, 32);
-    work->palette2 = LoadObjPalette(gUnk_09991284, 32);
+    work->palette2 = LoadObjPalette(gMapDoorEmblemPalette, 32);
     work->tiles2 = AllocSpriteFrameTiles(0x100);
 
     switch (p->side) {
@@ -5267,7 +5267,7 @@ s32 MapMenuOpen(MapMenuWork* work) {
     }
 
     work->tiles7 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette7 = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette7 = LoadObjPalette(gCommonObjPalette, 32);
     work->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
     work->x8 = work->playerStartX;
@@ -5320,7 +5320,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
 #else
         work->tiles5 = LoadObjTiles(gUnk_09954B64, 0x1BC0);
 #endif
-        work->palette3 = LoadObjPalette(gUnk_09991924, 32);
+        work->palette3 = LoadObjPalette(gMapMenuStatusPalette, 32);
         work->x3 = 0x11800;
         work->x4 = 0xF000;
         work->x5 = 0x10000;
@@ -6867,20 +6867,20 @@ TaskDesc gTaskDescMapFix = {
 };
 
 const MapDoorGfx gWorldMapDoorGfx[14] = {
-    { gUnk_09991224, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
-    { gUnk_09991104, gUnk_0993BF64, gUnk_0993C364, gUnk_0993B764, gUnk_0993BB64, gUnk_0993CF64, gUnk_0993D364, gUnk_0993C764, gUnk_0993CB64 },
-    { gUnk_09991124, gUnk_0993DF64, gUnk_0993E364, gUnk_0993D764, gUnk_0993DB64, gUnk_0993EF64, gUnk_0993F364, gUnk_0993E764, gUnk_0993EB64 },
-    { gUnk_09991144, gUnk_0993FF64, gUnk_09940364, gUnk_0993F764, gUnk_0993FB64, gUnk_09940F64, gUnk_09941364, gUnk_09940764, gUnk_09940B64 },
-    { gUnk_09991224, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
-    { gUnk_099911C4, gUnk_09947F64, gUnk_09948364, gUnk_09947764, gUnk_09947B64, gUnk_09948F64, gUnk_09949364, gUnk_09948764, gUnk_09948B64 },
-    { gUnk_09991184, gUnk_09943F64, gUnk_09944364, gUnk_09943764, gUnk_09943B64, gUnk_09944F64, gUnk_09945364, gUnk_09944764, gUnk_09944B64 },
-    { gUnk_099911E4, gUnk_09949F64, gUnk_0994A364, gUnk_09949764, gUnk_09949B64, gUnk_0994AF64, gUnk_0994B364, gUnk_0994A764, gUnk_0994AB64 },
-    { gUnk_099911A4, gUnk_09945F64, gUnk_09946364, gUnk_09945764, gUnk_09945B64, gUnk_09946F64, gUnk_09947364, gUnk_09946764, gUnk_09946B64 },
-    { gUnk_09991164, gUnk_09941F64, gUnk_09942364, gUnk_09941764, gUnk_09941B64, gUnk_09942F64, gUnk_09943364, gUnk_09942764, gUnk_09942B64 },
-    { gUnk_09991204, gUnk_0994BF64, gUnk_0994C364, gUnk_0994B764, gUnk_0994BB64, gUnk_0994CF64, gUnk_0994D364, gUnk_0994C764, gUnk_0994CB64 },
-    { gUnk_09991264, gUnk_09951F64, gUnk_09952364, gUnk_09951764, gUnk_09951B64, gUnk_09952F64, gUnk_09953364, gUnk_09952764, gUnk_09952B64 },
-    { gUnk_09991244, gUnk_0994FF64, gUnk_09950364, gUnk_0994F764, gUnk_0994FB64, gUnk_09950F64, gUnk_09951364, gUnk_09950764, gUnk_09950B64 },
-    { gUnk_09991224, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
+    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
+    { gMapDoorAgrabahPalette, gUnk_0993BF64, gUnk_0993C364, gUnk_0993B764, gUnk_0993BB64, gUnk_0993CF64, gUnk_0993D364, gUnk_0993C764, gUnk_0993CB64 },
+    { gMapDoorAtlanticaPalette, gUnk_0993DF64, gUnk_0993E364, gUnk_0993D764, gUnk_0993DB64, gUnk_0993EF64, gUnk_0993F364, gUnk_0993E764, gUnk_0993EB64 },
+    { gMapDoorOlympusColiseumPalette, gUnk_0993FF64, gUnk_09940364, gUnk_0993F764, gUnk_0993FB64, gUnk_09940F64, gUnk_09941364, gUnk_09940764, gUnk_09940B64 },
+    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
+    { gMapDoorMonstroPalette, gUnk_09947F64, gUnk_09948364, gUnk_09947764, gUnk_09947B64, gUnk_09948F64, gUnk_09949364, gUnk_09948764, gUnk_09948B64 },
+    { gMapDoorHalloweenTownPalette, gUnk_09943F64, gUnk_09944364, gUnk_09943764, gUnk_09943B64, gUnk_09944F64, gUnk_09945364, gUnk_09944764, gUnk_09944B64 },
+    { gMapDoorNeverLandPalette, gUnk_09949F64, gUnk_0994A364, gUnk_09949764, gUnk_09949B64, gUnk_0994AF64, gUnk_0994B364, gUnk_0994A764, gUnk_0994AB64 },
+    { gMapDoorHollowBastionPalette, gUnk_09945F64, gUnk_09946364, gUnk_09945764, gUnk_09945B64, gUnk_09946F64, gUnk_09947364, gUnk_09946764, gUnk_09946B64 },
+    { gMapDoorDestinyIslandsPalette, gUnk_09941F64, gUnk_09942364, gUnk_09941764, gUnk_09941B64, gUnk_09942F64, gUnk_09943364, gUnk_09942764, gUnk_09942B64 },
+    { gMapDoorTraverseTownPalette, gUnk_0994BF64, gUnk_0994C364, gUnk_0994B764, gUnk_0994BB64, gUnk_0994CF64, gUnk_0994D364, gUnk_0994C764, gUnk_0994CB64 },
+    { gMapDoorTwilightTownPalette, gUnk_09951F64, gUnk_09952364, gUnk_09951764, gUnk_09951B64, gUnk_09952F64, gUnk_09953364, gUnk_09952764, gUnk_09952B64 },
+    { gMapDoorCastleOblivionPalette, gUnk_0994FF64, gUnk_09950364, gUnk_0994F764, gUnk_0994FB64, gUnk_09950F64, gUnk_09951364, gUnk_09950764, gUnk_09950B64 },
+    { gMapDoorWonderlandPalette, gUnk_0994DF64, gUnk_0994E364, gUnk_0994D764, gUnk_0994DB64, gUnk_0994EF64, gUnk_0994F364, gUnk_0994E764, gUnk_0994EB64 },
 };
 
 TaskDesc gTaskDescMapDoor = {

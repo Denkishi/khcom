@@ -91,7 +91,7 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     }
 
     work->palette = LoadObjPalette(gCard00Palette, 32);
-    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
@@ -135,7 +135,7 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
 
     work->tiles = LoadObjTiles(gCardBacks[work->backCategory].tiles, 0x280);
     work->palette = LoadObjPalette(gCard00Palette, 32);
-    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
@@ -172,7 +172,7 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->cardDef = &gCardDefs[args->cardId];
     work->backCategory = work->cardDef->category;
     work->palette = LoadObjPalette(gCard00Palette, 32);
-    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
@@ -663,7 +663,7 @@ void PickupCardDraw(PickupCardWork* work) {
                    work->tiles2, work->palette2, affine,
                    work->spriteFlags, work->priority + 1);
         kind = work->cardDef->value;
-        DrawSprite(x, y - 8, gUnk_09EE981C[kind],
+        DrawSprite(x, y - 8, gCardValueDigitFrames[kind],
                    work->tiles3, work->palette, affine,
                    work->spriteFlags, work->priority - 2);
         v = 204 - ((work->floor - work->posZ) >> 7);
@@ -1026,45 +1026,45 @@ void Premire_Chance_0(PremireChanceWork* work) {
     CpuFill32(0, work->slots, sizeof(CardSlot) * 100);
     cards = GetActiveDeck()->cards;
     work->tiles2 = AllocObjTiles(0x120, NULL);
-    work->palette2 = LoadObjPalette(gUnk_09618CD8, 32);
-    SetObjTileSource(work->tiles2, gUnk_093F4578);
-    AnimInit(&work->anim, gUnk_09EF1170, gUnk_09EF1150);
+    work->palette2 = LoadObjPalette(gSmallHandCursorPalette, 32);
+    SetObjTileSource(work->tiles2, gSmallHandCursorTiles);
+    AnimInit(&work->anim, gSmallHandCursorAnims, gSmallHandCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gUnkEu_0916292A, 0x340);
+        work->tiles = LoadObjTiles(gPremireChanceTitleFrenchTiles, 0x340);
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gUnkEu_091633A4, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleGermanTiles, 0x3C0);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gUnkEu_09162FB8, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleItalianTiles, 0x3C0);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gUnkEu_09162C8C, 0x300);
+        work->tiles = LoadObjTiles(gPremireChanceTitleSpanishTiles, 0x300);
         break;
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
         break;
     default:
-        work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+        work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gUnk_0908BB80, 0x3C0);
+    work->tiles = LoadObjTiles(gPremireChanceTitleTiles, 0x3C0);
 #endif
-    work->palette = LoadObjPalette(gUnk_09613E98, 32);
-    work->tiles5 = LoadObjTiles(gUnk_0908BFB2, 0x3C0);
+    work->palette = LoadObjPalette(gPremireChancePalette, 32);
+    work->tiles5 = LoadObjTiles(gPremireChanceBarTiles, 0x3C0);
     work->tiles3 = AllocObjTiles(0x3C0, NULL);
-    work->palette3 = LoadObjPalette(gUnk_09618D18, 32);
-    SetObjTileSource(work->tiles3, gUnk_093F47E4);
-    AnimInit(&work->anim2, gUnk_09EF1194, gUnk_09EF1180);
+    work->palette3 = LoadObjPalette(gCardSelectBoxPalette, 32);
+    SetObjTileSource(work->tiles3, gCardSelectBoxTiles);
+    AnimInit(&work->anim2, gCardSelectBoxAnims, gCardSelectBoxFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles4 = LoadObjTiles(gUnk_0905F03C, 0x80);
+    work->tiles4 = LoadObjTiles(gAButtonIconTiles, 0x80);
     work->palette4 = LoadObjPalette(gBStatesPalette, 32);
     FadeToAmount(FADE_MODE_BLACK, 16, 16);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -1255,16 +1255,16 @@ void Premire_Chance_2(PremireChanceWork* work) {
     }
 
     if (work->inputEnabled != 0) {
-        DrawSprite(88, 70, gUnk_09EE98EC[0], work->tiles4, work->palette4, NULL, 0, 0);
+        DrawSprite(88, 70, gAButtonIconFrames[0], work->tiles4, work->palette4, NULL, 0, 0);
     }
 
 #ifdef VERSION_EU
     DrawSprite(work->titleX, 0, gPremireChanceTitles[gLanguage][0], work->tiles, work->palette, NULL, 0, 0);
 #else
-    DrawSprite(work->titleX, 0, gUnk_09EEA16C[0], work->tiles, work->palette, NULL, 0, 0);
+    DrawSprite(work->titleX, 0, gPremireChanceTitleFrames[0], work->tiles, work->palette, NULL, 0, 0);
 #endif
-    DrawSprite(120, work->topY >> 8, gUnk_09EEA174[0], work->tiles5, work->palette, NULL, 0, 60);
-    DrawSprite(120, work->bottomY >> 8, gUnk_09EEA174[1], work->tiles5, work->palette, NULL, 0, 60);
+    DrawSprite(120, work->topY >> 8, gPremireChanceBarFrames[0], work->tiles5, work->palette, NULL, 0, 60);
+    DrawSprite(120, work->bottomY >> 8, gPremireChanceBarFrames[1], work->tiles5, work->palette, NULL, 0, 60);
     TaskPoolDraw(&work->tasks);
     TaskPoolDraw(&gCardListWork->effectTasks);
 }
@@ -1460,7 +1460,7 @@ TaskDesc gTaskDescStockNameRiku = {
 };
 
 #ifdef VERSION_EU
-void** gPremireChanceTitles[5] = { gUnk_09EEA16C, gUnkEu_09F75FB4, gUnkEu_09F75FCC, gUnkEu_09F75FC4, gUnkEu_09F75FBC };
+void** gPremireChanceTitles[5] = { gPremireChanceTitleFrames, gPremireChanceTitleFrenchFrames, gPremireChanceTitleGermanFrames, gPremireChanceTitleItalianFrames, gPremireChanceTitleSpanishFrames };
 #endif
 
 TaskDesc gTaskDescPremireChance = {

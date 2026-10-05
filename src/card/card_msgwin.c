@@ -234,7 +234,7 @@ static void msgwin_2(CardMsgWinWork* work) {
     }
 
     if (work->tiles2 != NULL) {
-        p = gUnk_09EF126C;
+        p = gMsgBoxFrames;
         DrawSprite(120, 80, p[1], work->tiles2, work->palette4, NULL, 0, 10);
         DrawTextSlots((240 - work->textSlotCounts[0] * 10) >> 1, 67, work->textSlots, work->textPalette, 0, work->textSlotCounts[0]);
         DrawTextSlots((240 - work->textSlotCounts[1] * 10) >> 1, 82, work->textSlots2, work->textPalette, 0, work->textSlotCounts[1]);
@@ -309,7 +309,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* a) {
 
             if (work->tiles4 == NULL) {
                 work->tiles4 = AllocObjTiles(0x40, NULL);
-                work->palette2 = LoadObjPalette(gUnk_08F69BE4, 32);
+                work->palette2 = LoadObjPalette(gCommonObjPalette, 32);
                 SetObjTileSource(work->tiles4, gFEventTiles);
                 AnimInit(&work->anim2, gFEventAnims, gFEventFrames);
                 AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
@@ -367,14 +367,14 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
             work->tiles4 = NULL;
             work->palette2 = NULL;
             work->tiles = AllocObjTiles(0x120, NULL);
-            pal = gUnk_09614418;
+            pal = gDialogBoxPalette;
             work->palette3 = LoadObjPalette(pal, 32);
             LoadObjPaletteBank(work->palette3->index, pal);
             SetObjTileSource(work->tiles, gHandCursorTiles);
             AnimInit(&work->anim3, gHandCursorAnims, gHandCursorFrames);
             AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim3);
-            work->tiles2 = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+            work->tiles2 = LoadObjTiles(gMsgBoxTiles, 0xFC0);
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
             work->choice = 0;
             work->cursorX = 0x5800;

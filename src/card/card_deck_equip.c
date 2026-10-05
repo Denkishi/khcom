@@ -41,8 +41,8 @@ void Deck_Equip_0(DeckConfirmWork* work, u8* a) {
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_331, work->textSlots2);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
     work->textSlotCount3 = LoadTextSlots((u16*)gUnk_0903C008, work->textSlots3);
@@ -91,8 +91,8 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* a) {
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_009, work->textSlots2);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
     work->x2 = (207 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
@@ -124,8 +124,8 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* a) {
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_334, work->textSlots2);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->x = (250 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 64;
@@ -157,8 +157,8 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* a) {
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_333, work->textSlots2);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->x = (242 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -188,8 +188,8 @@ void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* a) {
 #else
     work->textSlotCount2 = LoadTextSlots(common_text_332, work->textSlots2);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->x = (243 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -254,8 +254,8 @@ void Deck_Yes_No_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(gUnk_08159E18, work->textSlots3);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->y = 66;
@@ -292,8 +292,8 @@ void Deck_Clear_0(DeckConfirmWork* work, u8* a) {
     work->textSlotCount2 = LoadTextSlots(gUnk_08159E10, work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(gUnk_08159E18, work->textSlots3);
 #endif
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
-    work->tiles = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
+    work->tiles = LoadObjTiles(gDialogBoxTiles, 0xC00);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
     work->x2 = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2 - DECK_PROMPT_LEFT_DX;

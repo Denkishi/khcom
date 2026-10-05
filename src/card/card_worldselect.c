@@ -119,10 +119,10 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
     if (!work->isEventDoor) {
         if (work->requiredValue == 0) {
             work->tiles4 = AllocSpriteFrameTiles(0x80);
-            UpdateSpriteFrameTiles(work->tiles4, gUnk_09EF1198[0], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[0], gUnk_0950C478);
         } else {
             work->tiles4 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->tiles4, gUnk_09EF1198[1], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->tiles4, gKeyValueFrames[1], gUnk_0950C478);
             RequestDma3Copy(work->tiles4->src + (work->requiredValue << 7),
                            (void*)(OBJ_VRAM0 + ((work->tiles4->index + 4) << 5)), 0x80);
             RequestDma3Copy(work->tiles4->src + 0x500,
@@ -130,33 +130,33 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
         }
 
         work->tiles2 = LoadObjTiles(gCardBacks[4].tiles2, 0x300);
-        work->palette = LoadObjPalette(gUnk_09618D38, 32);
+        work->palette = LoadObjPalette(gDoorCardPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
     } else {
         work->tiles4 = NULL;
         work->tiles2 = NULL;
-        work->palette = LoadObjPalette(gUnk_09618D38, 32);
+        work->palette = LoadObjPalette(gDoorCardPalette, 32);
         FadeSetPaletteExcluded(work->palette->index + 16, 1);
     }
 
     gMapCardUiResources.tiles = AllocObjTiles(0x280, NULL);
-    SetObjTileSource(gMapCardUiResources.tiles, gUnk_0908B1B4);
-    AnimInit(&gMapCardUiResources.anim, gUnk_09EEA164, gUnk_09EEA148);
+    SetObjTileSource(gMapCardUiResources.tiles, gCardPremiumTiles);
+    AnimInit(&gMapCardUiResources.anim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&gMapCardUiResources.anim, 0, ANIM_FLAG_LOOP);
     gMapCardUiResources.gfx = AnimGetGfx(&gMapCardUiResources.anim);
     work->tiles = AllocObjTiles(0x3C0, NULL);
-    work->palette2 = LoadObjPalette(gUnk_09618D18, 32);
-    SetObjTileSource(work->tiles, gUnk_093F47E4);
-    AnimInit(&work->anim, gUnk_09EF1194, gUnk_09EF1180);
+    work->palette2 = LoadObjPalette(gCardSelectBoxPalette, 32);
+    SetObjTileSource(work->tiles, gCardSelectBoxTiles);
+    AnimInit(&work->anim, gCardSelectBoxAnims, gCardSelectBoxFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->tiles5 = AllocObjTiles(0x120, NULL);
-    work->palette3 = LoadObjPalette(gUnk_09618CD8, 32);
-    SetObjTileSource(work->tiles5, gUnk_093F4578);
-    AnimInit(&work->anim2, gUnk_09EF1170, gUnk_09EF1150);
+    work->palette3 = LoadObjPalette(gSmallHandCursorPalette, 32);
+    SetObjTileSource(work->tiles5, gSmallHandCursorTiles);
+    AnimInit(&work->anim2, gSmallHandCursorAnims, gSmallHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles7 = LoadObjTiles(gUnk_093F5422, 0xC0);
+    work->tiles7 = LoadObjTiles(gMapSelectBarTiles, 0xC0);
     work->y3 = -0x800;
     work->y4 = 0xA000;
     work->barSteps = 16;
@@ -170,15 +170,15 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
 #ifdef VERSION_EU
     gMapCardUiResources.extraTiles = LoadObjTiles(gMapCardUiExtraTilesByLanguage[gLanguage], gMapCardUiExtraTileSizes[gLanguage]);
 #else
-    gMapCardUiResources.extraTiles = LoadObjTiles(gUnk_093F6734, 0x360);
+    gMapCardUiResources.extraTiles = LoadObjTiles(gMapCardUiExtraTiles, 0x360);
 #endif
     gMapCardUiResources.palette = work->palette3;
 #ifdef VERSION_EU
     gMapCardUiResources.sprites = gMapCardUiSpritesByLanguage[gLanguage];
 #else
-    gMapCardUiResources.sprites = gUnk_09EF11F8;
+    gMapCardUiResources.sprites = gMapCardUiExtraFrames;
 #endif
-    work->tiles6 = LoadObjTiles(gUnk_093F5C40, 32);
+    work->tiles6 = LoadObjTiles(gMapSelectScrollBarTiles, 32);
     work->page = 0;
     work->lastPage = 0;
     work->card = ListPoolFirst(&work->cards);
@@ -234,31 +234,31 @@ u8 MapSelect_1(MapSelectWork* work, void* a) {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles3 = LoadObjTiles(gUnk_093F7172, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, 0x400);
         break;
     case LANGUAGE_FRENCH:
-        work->tiles3 = LoadObjTiles(gUnkEu_094C6C22, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleFrenchTiles, 0x400);
         RequestDma3Copy(gUnkEu_0952DDE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_GERMAN:
-        work->tiles3 = LoadObjTiles(gUnkEu_094C789A, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleGermanTiles, 0x400);
         RequestDma3Copy(gUnkEu_0952E0E4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles3 = LoadObjTiles(gUnkEu_094C7472, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleItalianTiles, 0x400);
         RequestDma3Copy(gUnkEu_0952DFE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles3 = LoadObjTiles(gUnkEu_094C704A, 0x400);
+        work->tiles3 = LoadObjTiles(gMapSelectTitleSpanishTiles, 0x400);
         RequestDma3Copy(gUnkEu_0952DEE4, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
         break;
     }
 #else
-    work->tiles3 = LoadObjTiles(gUnk_093F7172, 0x400);
+    work->tiles3 = LoadObjTiles(gMapSelectTitleTiles, 0x400);
     LoadBgTiles(1, gMapSelectTiles, 0x2020);
 #endif
-    LoadPalette(gUnk_09618C58, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
-    LoadPalette(&gUnk_09618C58[0x40], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 64);
+    LoadPalette(gMapSelectBgPalettes, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(&gMapSelectBgPalettes[0x40], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 64);
     FadeSetPaletteExcluded(12, 1);
     FadeSetPaletteExcluded(14, 1);
     FadeSetPaletteExcluded(15, 1);
@@ -386,8 +386,8 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectValueInput);
         ReleaseObjTiles(work->tiles);
         work->tiles = AllocObjTiles(0x1E0, NULL);
-        SetObjTileSource(work->tiles, gUnk_093F556C);
-        AnimInit(&work->anim, gUnk_09EF11CC, gUnk_09EF11B8);
+        SetObjTileSource(work->tiles, gMapSelectValueBoxTiles);
+        AnimInit(&work->anim, gMapSelectValueBoxAnims, gMapSelectValueBoxFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
         work->savedCursorX = work->x2 >> 8;
@@ -599,8 +599,8 @@ u8 UpdateMapSelectLeaveValues(MapSelectWork* work, void* a) {
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateMapSelectKindInput);
         ReleaseObjTiles(work->tiles);
         work->tiles = AllocObjTiles(0x3C0, NULL);
-        SetObjTileSource(work->tiles, gUnk_093F47E4);
-        AnimInit(&work->anim, gUnk_09EF1194, gUnk_09EF1180);
+        SetObjTileSource(work->tiles, gCardSelectBoxTiles);
+        AnimInit(&work->anim, gCardSelectBoxAnims, gCardSelectBoxFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx = AnimGetGfx(&work->anim);
         work->x2 = work->savedCursorX << 8;
@@ -805,7 +805,7 @@ void MapSelect_2(MapSelectWork* work) {
 #ifdef VERSION_EU
                    gMapSelectTitleSpritesByLanguage[gLanguage][0],
 #else
-                   gUnk_09EF1228[0],
+                   gMapSelectTitleFrames[0],
 #endif
                    work->tiles3, work->palette3, NULL, 0, 80);
     }
@@ -848,8 +848,8 @@ void MapSelect_2(MapSelectWork* work) {
         DrawSprite(120, 56, gCardBacks[4].gfx2, work->tiles2, work->palette, NULL, SPRITE_FLAG_MOSAIC, 60);
     }
 
-    DrawSprite(128, work->y3 >> 8, gUnk_09EF11AC[0], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
-    DrawSprite(128, work->y4 >> 8, gUnk_09EF11AC[1], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, work->y3 >> 8, gMapSelectBarFrames[0], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
+    DrawSprite(128, work->y4 >> 8, gMapSelectBarFrames[1], work->tiles7, work->palette3, NULL, SPRITE_PRIORITY(2), 80);
     DrawTextSlots(16, work->nameY >> 8, work->textSlots, work->palette4, 50, work->textSlotCounts[0]);
     TaskPoolDraw(&work->tasks);
 }
@@ -1468,12 +1468,12 @@ void LoadMapSelectKindPalette(u16 a, MapSelectWork* work) {
 
     for (i = 0; i < 22; i++) {
         pal = work->paletteBuffer;
-        pal[i] = gUnk_09619098[i + 32];
+        pal[i] = gMapSelectGridPalettes[i + 32];
     }
 
     for (i = 22; i < 32; i++) {
         pal = work->paletteBuffer;
-        pal[i] = gUnk_09618C58[i + 64];
+        pal[i] = gMapSelectBgPalettes[i + 64];
     }
 
     for (i = a, j = 2; i < a + 10; i++, j += 2) {
@@ -1487,9 +1487,9 @@ void LoadMapSelectKindPalette(u16 a, MapSelectWork* work) {
                 k = j + 1;
                 pal[k] = 0x7F;
             } else {
-                pal[j] = gUnk_09618C58[j];
+                pal[j] = gMapSelectBgPalettes[j];
                 k2 = j + 1;
-                pal[k2] = gUnk_09618C58[k2];
+                pal[k2] = gMapSelectBgPalettes[k2];
             }
         }
     }
@@ -1506,7 +1506,7 @@ void LoadMapSelectGridPalette(u16 a, MapSelectWork* work) {
 
     for (i = 0; i < 22; i++) {
         pal = work->paletteBuffer;
-        pal[i] = gUnk_09619098[i + 32];
+        pal[i] = gMapSelectGridPalettes[i + 32];
     }
 
     for (i = 22, j = 2; i < 26; i++, j++) {
@@ -1515,23 +1515,23 @@ void LoadMapSelectGridPalette(u16 a, MapSelectWork* work) {
 
         switch ((*mp)->cardDef->backIndex) {
         case 1:
-            pal[i] = gUnk_09619098[j + 0x60];
+            pal[i] = gMapSelectGridPalettes[j + 0x60];
             break;
         case 2:
-            pal[i] = gUnk_09619098[j + 0x40];
+            pal[i] = gMapSelectGridPalettes[j + 0x40];
             break;
         case 3:
-            pal[i] = gUnk_09619098[j + 0xA0];
+            pal[i] = gMapSelectGridPalettes[j + 0xA0];
             break;
         case 4:
-            pal[i] = gUnk_09619098[j + 0x80];
+            pal[i] = gMapSelectGridPalettes[j + 0x80];
             break;
         }
     }
 
     for (i = 26; i < 32; i++) {
         pal = work->paletteBuffer;
-        pal[i] = gUnk_09618C58[i];
+        pal[i] = gMapSelectBgPalettes[i];
     }
 
     for (i = a, j = 2; i < a + 10; i++, j += 2) {
@@ -2192,7 +2192,7 @@ void UpdateMapcardGfx(MapcardWork* work) {
             work->palette = LoadObjPalette(a->palette, 32);
             work->tiles3 = LoadObjTiles(b->tiles, b->tilesSize);
             work->palette2 = LoadObjPalette(b->palette, 32);
-            work->tiles = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+            work->tiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
             FadeSetPaletteExcluded(work->palette->index + 16, 1);
             FadeSetPaletteExcluded(work->palette2->index + 16, 1);
             t = work->flags | MAPCARD_FLAG_GFX_LOADED;
@@ -2324,7 +2324,7 @@ void Reload_Gage_0(CardDisplayWork* work, CardDisplayArgs* a) {
     work->tiles4 = AllocObjTiles(0x80, NULL);
     SetObjTileSource(work->tiles4, gReloadCardTiles[1]);
     InitReloadGageAnims(work->reloadGauge, work, work->args.listIndex);
-    work->tiles = LoadObjTiles(gUnk_0905F03C, 0x80);
+    work->tiles = LoadObjTiles(gAButtonIconTiles, 0x80);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     work->tiles5 = AllocObjTiles(0x100, NULL);
     SetObjTileSource(work->tiles5, gReloadCounterTiles[work->args.listIndex]);
@@ -2812,11 +2812,11 @@ const u16 gMapCardUiExtraTileSizes[5] = {
 
 #ifdef VERSION_EU
 void* gMapCardUiExtraTilesByLanguage[5] = {
-    gUnk_093F6734, gUnkEu_094C9860, gUnk_093F6734, gUnkEu_094C9860, gUnkEu_094C9C20,
+    gMapCardUiExtraTiles, gMapCardUiExtraFrenchTiles, gMapCardUiExtraTiles, gMapCardUiExtraFrenchTiles, gMapCardUiExtraSpanishTiles,
 };
 
 void** gMapCardUiSpritesByLanguage[5] = {
-    gUnk_09EF11F8, gUnkEu_09F7C454, gUnk_09EF11F8, gUnkEu_09F7C454, gUnkEu_09F7C47C,
+    gMapCardUiExtraFrames, gMapCardUiExtraFrenchFrames, gMapCardUiExtraFrames, gMapCardUiExtraFrenchFrames, gMapCardUiExtraSpanishFrames,
 };
 #endif
 
@@ -2834,7 +2834,7 @@ s16 gMapSelectValueRowY[2] = {
 
 #ifdef VERSION_EU
 void** gMapSelectTitleSpritesByLanguage[5] = {
-    gUnk_09EF1228, gUnkEu_09F7C414, gUnkEu_09F7C42C, gUnkEu_09F7C424, gUnkEu_09F7C41C,
+    gMapSelectTitleFrames, gMapSelectTitleFrenchFrames, gMapSelectTitleGermanFrames, gMapSelectTitleItalianFrames, gMapSelectTitleSpanishFrames,
 };
 #endif
 
@@ -2852,274 +2852,274 @@ u16 gMapSelectCountTileIndices[10] = {
 };
 
 MapCardBackDef gMapCardBackDefs[5] = {
-    { gUnk_093F61B2, gUnk_09618D78, gUnk_09EF11E8, gUnk_0905E3BA, gUnk_09EE97F4, 640, 32, 640 },
-    { gUnk_093F5C7A, gUnk_09618D78, gUnk_09EF11D8, gUnk_0905C862, gUnk_09EE9764, 640, 32, 640 },
-    { gUnk_093F5F16, gUnk_09618D78, gUnk_09EF11E0, gUnk_0905D64E, gUnk_09EE97AC, 640, 32, 640 },
-    { gUnk_093F61B2, gUnk_09618D78, gUnk_09EF11E8, gUnk_0905AC8A, gUnk_09EE96D4, 640, 32, 640 },
-    { gUnk_093F644E, gUnk_09618D78, gUnk_09EF11F0, gUnk_0905E3BA, gUnk_09EE97F4, 640, 32, 640 },
+    { gMapCardBorderBlueTiles, gMapCardBorderPalettes, gMapCardBorderBlueFrames, gCardOutlineWhiteTiles, gCardOutlineWhiteFrames, 640, 32, 640 },
+    { gMapCardBorderGreenTiles, gMapCardBorderPalettes, gMapCardBorderGreenFrames, gCardOutlineGreenTiles, gCardOutlineGreenFrames, 640, 32, 640 },
+    { gMapCardBorderRedTiles, gMapCardBorderPalettes, gMapCardBorderRedFrames, gCardOutlineRedTiles, gCardOutlineRedFrames, 640, 32, 640 },
+    { gMapCardBorderBlueTiles, gMapCardBorderPalettes, gMapCardBorderBlueFrames, gCardOutlineBlueTiles, gCardOutlineBlueFrames, 640, 32, 640 },
+    { gMapCardBorderBlackTiles, gMapCardBorderPalettes, gMapCardBorderBlackFrames, gCardOutlineWhiteTiles, gCardOutlineWhiteFrames, 640, 32, 640 },
 };
 
 MapCardDef gMapCardDefs[260] = {
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 0, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 1, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 2, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 3, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 4, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 5, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 6, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 7, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 8, 2 },
-    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gUnk_09618898, gUnk_09EF1068, 512, 32, 256, 2, 1, 9, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 0, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 1, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 2, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 3, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 4, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 5, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 6, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 7, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 8, 2 },
-    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gUnk_09618878, gUnk_09EF1060, 512, 32, 256, 2, 0, 9, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 0, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 1, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 2, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 3, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 4, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 5, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 6, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 7, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 8, 2 },
-    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gUnk_09618938, gUnk_09EF1090, 512, 32, 256, 2, 6, 9, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 0, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 1, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 2, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 3, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 4, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 5, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 6, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 7, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 8, 2 },
-    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gUnk_09618958, gUnk_09EF1098, 512, 32, 256, 2, 7, 9, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 0, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 1, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 2, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 3, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 4, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 5, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 6, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 7, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 8, 2 },
-    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gUnk_096188F8, gUnk_09EF1080, 512, 32, 256, 2, 4, 9, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 0, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 1, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 2, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 3, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 4, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 5, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 6, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 7, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 8, 2 },
-    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gUnk_096188D8, gUnk_09EF1078, 512, 32, 256, 2, 3, 9, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 0, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 1, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 2, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 3, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 4, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 5, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 6, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 7, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 8, 2 },
-    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gUnk_09618AD8, gUnk_09EF10F8, 512, 32, 256, 2, 19, 9, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 0, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 1, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 2, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 3, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 4, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 5, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 6, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 7, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 8, 2 },
-    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gUnk_09618AF8, gUnk_09EF1100, 512, 32, 256, 2, 20, 9, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 0, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 1, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 2, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 3, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 4, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 5, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 6, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 7, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 8, 2 },
-    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gUnk_09618B18, gUnk_09EF1108, 512, 32, 256, 2, 21, 9, 2 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 0, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 1, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 2, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 3, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 4, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 5, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 6, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 7, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 8, 1 },
-    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gUnk_096189F8, gUnk_09EF10C0, 512, 32, 256, 1, 12, 9, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 0, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 1, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 2, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 3, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 4, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 5, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 6, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 7, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 8, 1 },
-    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gUnk_096189D8, gUnk_09EF10B8, 512, 32, 256, 1, 11, 9, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 0, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 1, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 2, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 3, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 4, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 5, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 6, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 7, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 8, 1 },
-    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gUnk_09618A18, gUnk_09EF10C8, 512, 32, 256, 1, 13, 9, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 0, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 1, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 2, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 3, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 4, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 5, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 6, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 7, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 8, 1 },
-    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gUnk_09618A38, gUnk_09EF10D0, 512, 32, 256, 1, 14, 9, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 0, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 1, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 2, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 3, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 4, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 5, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 6, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 7, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 8, 1 },
-    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gUnk_09618AB8, gUnk_09EF10F0, 512, 32, 256, 1, 18, 9, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 0, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 1, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 2, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 3, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 4, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 5, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 6, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 7, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 8, 1 },
-    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gUnk_09618A78, gUnk_09EF10E0, 512, 32, 256, 1, 16, 9, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 0, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 1, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 2, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 3, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 4, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 5, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 6, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 7, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 8, 1 },
-    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gUnk_09618A98, gUnk_09EF10E8, 512, 32, 256, 1, 17, 9, 1 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 0, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 1, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 2, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 3, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 4, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 5, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 6, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 7, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 8, 3 },
-    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gUnk_09618978, gUnk_09EF10A0, 512, 32, 256, 3, 8, 9, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 0, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 1, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 2, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 3, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 4, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 5, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 6, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 7, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 8, 3 },
-    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gUnk_096188B8, gUnk_09EF1070, 512, 32, 256, 3, 2, 9, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 0, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 1, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 2, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 3, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 4, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 5, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 6, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 7, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 8, 3 },
-    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gUnk_09618998, gUnk_09EF10A8, 512, 32, 256, 3, 9, 9, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 0, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 1, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 2, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 3, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 4, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 5, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 6, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 7, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 8, 3 },
-    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gUnk_09618918, gUnk_09EF1088, 512, 32, 256, 3, 5, 9, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 0, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 1, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 2, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 3, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 4, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 5, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 6, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 7, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 8, 3 },
-    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gUnk_09618A58, gUnk_09EF10D8, 512, 32, 256, 3, 15, 9, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 0, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 1, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 2, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 3, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 4, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 5, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 6, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 7, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 8, 3 },
-    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gUnk_096189B8, gUnk_09EF10B0, 512, 32, 256, 3, 10, 9, 3 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 0, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 1, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 2, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 3, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 4, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 5, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 6, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 7, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 8, 4 },
-    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gUnk_09618B58, gUnk_09EF1118, 512, 32, 256, 4, 22, 9, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 0, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 1, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 2, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 3, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 4, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 5, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 6, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 7, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 8, 4 },
-    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gUnk_09618B78, gUnk_09EF1120, 512, 32, 256, 4, 23, 9, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 0, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 1, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 2, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 3, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 4, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 5, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 6, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 7, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 8, 4 },
-    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gUnk_09618B98, gUnk_09EF1128, 512, 32, 256, 4, 24, 9, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 0, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 1, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 2, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 3, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 4, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 5, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 6, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 7, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 8, 4 },
-    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gUnk_09618B38, gUnk_09EF1110, 512, 32, 256, 4, 25, 9, 4 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 0, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 1, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 2, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 3, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 4, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 5, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 6, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 7, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 8, 2 },
+    { gCardRoom02Tiles, gCardRoom02Palette, gCardRoom02Frames, gUnk_093F2148, gTranquilDarknessSmallCardPalette, gUnk_09EF1068, 512, 32, 256, 2, 1, 9, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 0, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 1, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 2, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 3, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 4, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 5, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 6, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 7, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 8, 2 },
+    { gCardRoom01Tiles, gCardRoom01Palette, gCardRoom01Frames, gUnk_093F2034, gTeemingDarknessSmallCardPalette, gUnk_09EF1060, 512, 32, 256, 2, 0, 9, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 0, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 1, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 2, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 3, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 4, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 5, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 6, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 7, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 8, 2 },
+    { gCardRoom07Tiles, gCardRoom07Palette, gCardRoom07Frames, gUnk_093F26AC, gFeebleDarknessSmallCardPalette, gUnk_09EF1090, 512, 32, 256, 2, 6, 9, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 0, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 1, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 2, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 3, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 4, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 5, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 6, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 7, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 8, 2 },
+    { gCardRoom08Tiles, gCardRoom08Palette, gCardRoom08Frames, gUnk_093F27C0, gAlmightyDarknessSmallCardPalette, gUnk_09EF1098, 512, 32, 256, 2, 7, 9, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 0, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 1, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 2, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 3, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 4, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 5, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 6, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 7, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 8, 2 },
+    { gCardRoom05Tiles, gCardRoom05Palette, gCardRoom05Frames, gUnk_093F2484, gSleepingDarknessSmallCardPalette, gUnk_09EF1080, 512, 32, 256, 2, 4, 9, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 0, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 1, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 2, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 3, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 4, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 5, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 6, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 7, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 8, 2 },
+    { gCardRoom04Tiles, gCardRoom04Palette, gCardRoom04Frames, gUnk_093F2370, gLoomingDarknessSmallCardPalette, gUnk_09EF1078, 512, 32, 256, 2, 3, 9, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 0, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 1, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 2, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 3, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 4, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 5, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 6, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 7, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 8, 2 },
+    { gCardRoom20Tiles, gCardRoom20Palette, gCardRoom20Frames, gUnk_093F34B0, gPremiumRoomSmallCardPalette, gUnk_09EF10F8, 512, 32, 256, 2, 19, 9, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 0, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 1, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 2, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 3, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 4, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 5, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 6, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 7, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 8, 2 },
+    { gCardRoom21Tiles, gCardRoom21Palette, gCardRoom21Frames, gUnk_093F35C4, gWhiteRoomSmallCardPalette, gUnk_09EF1100, 512, 32, 256, 2, 20, 9, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 0, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 1, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 2, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 3, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 4, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 5, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 6, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 7, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 8, 2 },
+    { gCardRoom22Tiles, gCardRoom22Palette, gCardRoom22Frames, gUnk_093F36D8, gBlackRoomSmallCardPalette, gUnk_09EF1108, 512, 32, 256, 2, 21, 9, 2 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 0, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 1, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 2, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 3, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 4, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 5, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 6, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 7, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 8, 1 },
+    { gCardRoom13Tiles, gCardRoom13Palette, gCardRoom13Frames, gUnk_093F2D24, gMartialWakingSmallCardPalette, gUnk_09EF10C0, 512, 32, 256, 1, 12, 9, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 0, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 1, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 2, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 3, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 4, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 5, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 6, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 7, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 8, 1 },
+    { gCardRoom12Tiles, gCardRoom12Palette, gCardRoom12Frames, gUnk_093F2C10, gSorcerousWakingSmallCardPalette, gUnk_09EF10B8, 512, 32, 256, 1, 11, 9, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 0, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 1, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 2, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 3, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 4, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 5, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 6, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 7, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 8, 1 },
+    { gCardRoom14Tiles, gCardRoom14Palette, gCardRoom14Frames, gUnk_093F2E38, gAlchemicWakingSmallCardPalette, gUnk_09EF10C8, 512, 32, 256, 1, 13, 9, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 0, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 1, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 2, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 3, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 4, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 5, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 6, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 7, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 8, 1 },
+    { gCardRoom15Tiles, gCardRoom15Palette, gCardRoom15Frames, gUnk_093F2F4C, gMeetingGroundSmallCardPalette, gUnk_09EF10D0, 512, 32, 256, 1, 14, 9, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 0, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 1, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 2, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 3, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 4, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 5, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 6, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 7, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 8, 1 },
+    { gCardRoom19Tiles, gCardRoom19Palette, gCardRoom19Frames, gUnk_093F339C, gStagnantSpaceSmallCardPalette, gUnk_09EF10F0, 512, 32, 256, 1, 18, 9, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 0, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 1, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 2, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 3, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 4, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 5, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 6, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 7, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 8, 1 },
+    { gCardRoom17Tiles, gCardRoom17Palette, gCardRoom17Frames, gUnk_093F3174, gStrongInitiativeSmallCardPalette, gUnk_09EF10E0, 512, 32, 256, 1, 16, 9, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 0, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 1, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 2, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 3, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 4, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 5, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 6, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 7, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 8, 1 },
+    { gCardRoom18Tiles, gCardRoom18Palette, gCardRoom18Frames, gUnk_093F3288, gLastingDazeSmallCardPalette, gUnk_09EF10E8, 512, 32, 256, 1, 17, 9, 1 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 0, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 1, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 2, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 3, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 4, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 5, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 6, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 7, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 8, 3 },
+    { gCardRoom09Tiles, gCardRoom09Palette, gCardRoom09Frames, gUnk_093F28D4, gCalmBountySmallCardPalette, gUnk_09EF10A0, 512, 32, 256, 3, 8, 9, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 0, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 1, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 2, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 3, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 4, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 5, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 6, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 7, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 8, 3 },
+    { gCardRoom03Tiles, gCardRoom03Palette, gCardRoom03Frames, gUnk_093F225C, gGuardedTroveSmallCardPalette, gUnk_09EF1070, 512, 32, 256, 3, 2, 9, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 0, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 1, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 2, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 3, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 4, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 5, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 6, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 7, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 8, 3 },
+    { gCardRoom10Tiles, gCardRoom10Palette, gCardRoom10Frames, gUnk_093F29E8, gFalseBountySmallCardPalette, gUnk_09EF10A8, 512, 32, 256, 3, 9, 9, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 0, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 1, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 2, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 3, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 4, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 5, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 6, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 7, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 8, 3 },
+    { gCardRoom06Tiles, gCardRoom06Palette, gCardRoom06Frames, gUnk_093F2598, gMomentsReprieveSmallCardPalette, gUnk_09EF1088, 512, 32, 256, 3, 5, 9, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 0, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 1, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 2, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 3, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 4, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 5, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 6, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 7, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 8, 3 },
+    { gCardRoom16Tiles, gCardRoom16Palette, gCardRoom16Frames, gUnk_093F3060, gMinglingWorldsSmallCardPalette, gUnk_09EF10D8, 512, 32, 256, 3, 15, 9, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 0, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 1, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 2, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 3, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 4, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 5, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 6, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 7, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 8, 3 },
+    { gCardRoom11Tiles, gCardRoom11Palette, gCardRoom11Frames, gUnk_093F2AFC, gMoogleRoomSmallCardPalette, gUnk_09EF10B0, 512, 32, 256, 3, 10, 9, 3 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 0, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 1, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 2, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 3, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 4, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 5, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 6, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 7, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 8, 4 },
+    { gCardEve00Tiles, gCardEve00Palette, gCardEve00Frames, gUnk_093F3900, gKeyOfBeginningsSmallCardPalette, gUnk_09EF1118, 512, 32, 256, 4, 22, 9, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 0, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 1, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 2, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 3, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 4, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 5, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 6, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 7, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 8, 4 },
+    { gCardEve01Tiles, gCardEve01Palette, gCardEve01Frames, gUnk_093F3A14, gKeyOfGuidanceSmallCardPalette, gUnk_09EF1120, 512, 32, 256, 4, 23, 9, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 0, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 1, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 2, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 3, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 4, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 5, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 6, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 7, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 8, 4 },
+    { gCardEve02Tiles, gCardEve02Palette, gCardEve02Frames, gUnk_093F3B28, gKeyToTruthSmallCardPalette, gUnk_09EF1128, 512, 32, 256, 4, 24, 9, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 0, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 1, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 2, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 3, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 4, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 5, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 6, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 7, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 8, 4 },
+    { gCardRoom23Tiles, gCardRoom23Palette, gCardRoom23Frames, gUnk_093F37EC, gKeyToRewardsSmallCardPalette, gUnk_09EF1110, 512, 32, 256, 4, 25, 9, 4 },
 };
 
 s16 gMapcardSlotX[6] = {
@@ -3160,43 +3160,43 @@ TaskDesc gTaskDescReloadGage = {
 };
 
 void* gReloadCounterTiles[4] = {
-    gUnk_0909A4E0,
-    gUnk_0909AB98,
-    gUnk_09099E28,
-    gUnk_0909AB98,
+    gReloadCounterWhiteTiles,
+    gReloadCounterBlackTiles,
+    gReloadCounterBlueTiles,
+    gReloadCounterBlackTiles,
 };
 
 AnimHeader** gReloadCounterAnims[4] = {
-    gUnk_09EEA4E0,
-    gUnk_09EEA578,
-    gUnk_09EEA448,
-    gUnk_09EEA578,
+    gReloadCounterWhiteAnims,
+    gReloadCounterBlackAnims,
+    gReloadCounterBlueAnims,
+    gReloadCounterBlackAnims,
 };
 
 void** gReloadCounterFrames[4] = {
-    gUnk_09EEA494,
-    gUnk_09EEA52C,
-    gUnk_09EEA3FC,
-    gUnk_09EEA52C,
+    gReloadCounterWhiteFrames,
+    gReloadCounterBlackFrames,
+    gReloadCounterBlueFrames,
+    gReloadCounterBlackFrames,
 };
 
 void* gReloadCardTiles[4] = {
-    gUnk_0909FDCA,
+    gReloadCardGreenTiles,
     gRiCardF0RedTiles,
-    gUnk_0909EFDE,
-    gUnk_0909EFDE,
+    gReloadCardBlackTiles,
+    gReloadCardBlackTiles,
 };
 
 void** gReloadGaugeFrames[4] = {
-    gUnk_09EEAF04,
-    gUnk_09EEAEBC,
-    gUnk_09EEAE74,
-    gUnk_09EEAEBC,
+    gReloadCardGreenFrames,
+    gReloadCardBlackFrames,
+    gReloadCardBlueFrames,
+    gReloadCardBlackFrames,
 };
 
 AnimHeader** gReloadGaugeAnims[4] = {
-    gUnk_09EEAF38,
-    gUnk_09EEAEF0,
-    gUnk_09EEAEA8,
-    gUnk_09EEAEF0,
+    gReloadCardGreenAnims,
+    gReloadCardBlackAnims,
+    gReloadCardBlueAnims,
+    gReloadCardBlackAnims,
 };

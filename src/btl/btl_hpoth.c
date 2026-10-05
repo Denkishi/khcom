@@ -16,7 +16,7 @@
 #include "sprite_palettes.h"
 
 void task_btl_hpoth_0(BtlHpothWork* work) {
-    work->palette = LoadObjPalette(gUnk_096FAC64, 32);
+    work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
     work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
     work->gfx = gBtlHpSoraFaceFrame0;
     AnimInit(&work->anim, gBtlHpSoraFaceAnims, gBtlHpSoraFaceFrames);

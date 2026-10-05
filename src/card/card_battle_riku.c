@@ -662,7 +662,7 @@ static void cardbattle_0(CardBattleWork* work) {
     gCardBattleState->rikuWork = work;
     work->tiles = AllocSpriteFrameTiles(0x80);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8);
+    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;
     work->listIndex = 0;
@@ -2172,7 +2172,7 @@ u8 StockRikuCard(CardBattleWork* work) {
     gCardBattleState->rikuStockedCount++;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 
@@ -2537,7 +2537,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* work) {
         sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
         if (work->stockValue > 1) {
-            UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
+            UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
             work->xSteps = 8;
         }
 
@@ -2921,11 +2921,11 @@ static void card_2(CardDisplayWork* work) {
         }
 
         if (work->valueModified) {
-            DrawSprite(work->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardModifiedValueDigitFrames[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, work->priority - 2);
         } else if (work->premium) {
-            DrawSprite(work->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardPremiumValueDigitFrames[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, work->priority - 2);
         } else {
-            DrawSprite(work->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardValueDigitFrames[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, work->priority - 2);
         }
 
         if (work->premium) {
@@ -2950,16 +2950,16 @@ static void card_2(CardDisplayWork* work) {
     }
 
     if (work->valueModified) {
-        DrawSprite((work->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, sy - 4, gCardValueDigitFrames[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, flags, work->priority - 10);
 
         if (work->premium) {
             DrawSprite(work->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, work->priority - 11);
         }
     } else if (work->premium) {
-        DrawSprite((work->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, sy - 4, gCardValueDigitFrames[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, flags, work->priority - 10);
         DrawSprite(work->x >> 8, sy, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, flags, work->priority - 11);
     } else {
-        DrawSprite((work->x >> 8) - 3, sy - 4, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, sy - 4, gCardValueDigitFrames[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, flags, work->priority - 10);
     }
 }
 
@@ -3898,7 +3898,7 @@ void Reload_Card_2(CardDisplayWork* work) {
 }
 
 void InitRikuReloadCounterAnim(ReloadGauge* p, void* a, u8 b, s8 c) {
-    AnimInit(&p->anim, gUnk_09EEA4E0, gUnk_09EEA494);
+    AnimInit(&p->anim, gReloadCounterWhiteAnims, gReloadCounterWhiteFrames);
 
     if (c >= 0) {
         AnimStart(&p->anim, c, 0);
@@ -3914,10 +3914,10 @@ void LoadRikuReloadCardGfx(CardDisplayWork* work) {
 
     q = work->reloadGauge;
     work->tiles = AllocObjTiles(128, NULL);
-    SetObjTileSource(work->tiles, gUnk_0909A4E0);
+    SetObjTileSource(work->tiles, gReloadCounterWhiteTiles);
     InitRikuReloadCounterAnim(work->reloadGauge, work->tiles, work->args.listIndex, gCardBattleState->rikuReloadCounter);
     work->palette = NULL;
-    work->tiles2 = LoadObjTiles(gUnk_0909FDCA, 0x280);
+    work->tiles2 = LoadObjTiles(gReloadCardGreenTiles, 0x280);
     work->palette2 = NULL;
     work->tiles3 = AllocObjTiles(0x200, NULL);
     SetObjTileSource(work->tiles3, gRiCardF0RedTiles);

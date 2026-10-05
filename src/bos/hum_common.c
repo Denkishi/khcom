@@ -740,7 +740,7 @@ void HumDraw(HumWork* work) {
         }
     } else if (StepHitFlash(c)) {
         work->flags |= HUM_FLAG_FLASH_PALETTE;
-        LoadObjPaletteBank(work->palette->index, gUnk_08F69BC4);
+        LoadObjPaletteBank(work->palette->index, gHitFlashPalette);
     } else if (work->flags & HUM_FLAG_FLASH_PALETTE) {
         work->flags &= ~HUM_FLAG_FLASH_PALETTE;
         LoadObjPaletteBank(work->palette->index, work->paletteData);

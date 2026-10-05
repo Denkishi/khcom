@@ -5276,7 +5276,7 @@ void BosPcDraw(PcWork* work) {
         if (work->flash == 0) {
             LoadPalette(gBosPcBgPalette, (void*)PLTT, 32);
         } else {
-            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
+            LoadPalette(gHitFlashPalette, (void*)PLTT, 32);
         }
 
         work->prevFlash = work->flash;
@@ -5460,7 +5460,7 @@ void task_bos_pc_0(PcWork* work, TaskPool* pool) {
     work->tiles2[0] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
     work->tiles2[1] = AllocObjTiles(0x400, gBosPcStandaloneTiles);
     work->palette = LoadObjPalette(gBosPcObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 0x20);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 0x20);
     SetBtlPaletteFadeExcluded(0, 1);
     work->flt[0] = NULL;
     work->flt[1] = NULL;

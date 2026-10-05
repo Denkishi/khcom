@@ -135,11 +135,11 @@ void EnemyCardDraw(CardDisplayWork* work) {
 
                 if (work->valueModified) {
                     DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
-                               gUnk_09EE981C[work->value], gCardBattleState->tiles7,
+                               gCardValueDigitFrames[work->value], gCardBattleState->tiles7,
                                gCardBattleState->palette2, affine, flags, work->priority - 2);
                 } else {
                     DrawSprite(work->x >> 8, (work->y >> 8) + (gSineTable[work->bobAngle] >> 8),
-                               gUnk_09EE981C[work->value], gCardBattleState->tiles5,
+                               gCardValueDigitFrames[work->value], gCardBattleState->tiles5,
                                gCardBattleState->palette, affine, flags, work->priority - 2);
                 }
             }

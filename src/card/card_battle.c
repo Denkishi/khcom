@@ -261,9 +261,9 @@ void CreateCardBattleState() {
     gCardBattleState->tiles[1] = LoadObjTiles(gCardBacks[1].tiles, 640);
     gCardBattleState->tiles[2] = LoadObjTiles(gCardBacks[2].tiles, 640);
     gCardBattleState->tiles[3] = LoadObjTiles(gCardBacks[3].tiles, 640);
-    gCardBattleState->tiles5 = LoadObjTiles(gUnk_0905EAE8, 320);
-    gCardBattleState->tiles6 = LoadObjTiles(gUnk_0905ED36, 320);
-    gCardBattleState->tiles7 = LoadObjTiles(gUnk_0905EEE6, 320);
+    gCardBattleState->tiles5 = LoadObjTiles(gCardValueDigitTiles, 320);
+    gCardBattleState->tiles6 = LoadObjTiles(gCardPremiumValueDigitTiles, 320);
+    gCardBattleState->tiles7 = LoadObjTiles(gCardModifiedValueDigitTiles, 320);
     gCardBattleState->palette = LoadObjPalette(gCard00Palette, 32);
     gCardBattleState->palette2 = LoadObjPalette(gBStatesPalette, 32);
     FadeSetPaletteExcluded(((ObjPaletteHeader*)gCardBattleState->palette)->index + 16, 1);
@@ -525,7 +525,7 @@ static void cardbattle_0(CardBattleWork* work) {
     ClearSoraCardPlayFlags();
     work->tiles = AllocSpriteFrameTiles(128);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8);
+    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;
     work->listIndex = 0;
@@ -555,8 +555,8 @@ static void cardbattle_0(CardBattleWork* work) {
     work->stockNameChecked = 0;
 
     if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
-        work->slotCounts[0] = gUnk_09041FA0.cardCount + 15;
-        work->cardsLeft[0] = gUnk_09041FA0.cardCount + 1;
+        work->slotCounts[0] = gTutorialDeck.cardCount + 15;
+        work->cardsLeft[0] = gTutorialDeck.cardCount + 1;
         work->slotCounts[3] = work->cardsLeft[3] = 0;
         work->slotCounts[2] = work->cardsLeft[2] = 0;
         work->slotCounts[1] = work->cardsLeft[1] = 0;
@@ -1566,13 +1566,13 @@ void LoadTutorialDeckCardSlots(CardSlot* slots) {
     u16 n;
     u16 i;
 
-    n = gUnk_09041FA0.cardCount;
+    n = gTutorialDeck.cardCount;
 
     for (i = 0; i < n; i++) {
         slots[i].unk_06 = 0;
         slots[i].stocked = 0;
         slots[i].removed = 0;
-        slots[i].cardId = gUnk_09041F70[gUnk_09041FA0.cards[i]];
+        slots[i].cardId = gTutorialDeckCardIds[gTutorialDeck.cards[i]];
         slots[i].index = i;
         slots[i].restoreOnReload = 0;
     }
@@ -1606,7 +1606,7 @@ void ShuffleCardSlots(CardSlot* slots, u8 n) {
 }
 
 void InitSoraTutorialCardList(CardBattleWork* work, s32 mode) {
-    u16 n = gUnk_09041FA0.cardCount;
+    u16 n = gTutorialDeck.cardCount;
 
     switch (mode) {
     case 0: {
@@ -2560,7 +2560,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 
@@ -2833,7 +2833,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     gCardBattleState->soraStockedCount++;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gUnk_093FBAB8 + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 
@@ -3704,13 +3704,13 @@ u8 CanUseSoraSelectedCard() {
 
 void LoadPremiumCardGfx(CardBattleState* p) {
     p->premiumTiles = AllocObjTiles(0x280, NULL);
-    SetObjTileSource(p->premiumTiles, gUnk_0908B1B4);
-    AnimInit(&p->anim, gUnk_09EEA164, gUnk_09EEA148);
+    SetObjTileSource(p->premiumTiles, gCardPremiumTiles);
+    AnimInit(&p->anim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&p->anim, 0, ANIM_FLAG_LOOP);
     p->gfx = AnimGetGfx(&p->anim);
     p->premiumTiles2 = AllocObjTiles(0x100, NULL);
-    SetObjTileSource(p->premiumTiles2, gUnk_0908C3CE);
-    AnimInit(&p->anim2, gUnk_09EEA198, gUnk_09EEA180);
+    SetObjTileSource(p->premiumTiles2, gCardPremiumSmallTiles);
+    AnimInit(&p->anim2, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&p->anim2, 0, ANIM_FLAG_LOOP);
     p->gfx2 = AnimGetGfx(&p->anim2);
 }
@@ -4143,11 +4143,11 @@ static void card_2(CardDisplayWork* work) {
         }
 
         if (work->valueModified) {
-            DrawSprite(work->x >> 8, y, gUnk_09EE98C0[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardModifiedValueDigitFrames[j], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, work->priority - 2);
         } else if (work->premium) {
-            DrawSprite(work->x >> 8, y, gUnk_09EE9894[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardPremiumValueDigitFrames[j], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, work->priority - 2);
         } else {
-            DrawSprite(work->x >> 8, y, gUnk_09EE981C[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, work->priority - 2);
+            DrawSprite(work->x >> 8, y, gCardValueDigitFrames[j], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, work->priority - 2);
         }
 
         if (work->premium) {
@@ -4166,16 +4166,16 @@ static void card_2(CardDisplayWork* work) {
     }
 
     if (work->valueModified) {
-        DrawSprite((work->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, y - 4, gCardValueDigitFrames[k], gCardBattleState->tiles7, gCardBattleState->palette2, aff, attr, work->priority - 10);
 
         if (work->premium) {
             DrawSprite(work->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, work->priority - 11);
         }
     } else if (work->premium) {
-        DrawSprite((work->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, y - 4, gCardValueDigitFrames[k], gCardBattleState->tiles6, gCardBattleState->palette2, aff, attr, work->priority - 10);
         DrawSprite(work->x >> 8, y, gCardBattleState->gfx2, gCardBattleState->premiumTiles2, gCardBattleState->palette, aff, attr, work->priority - 11);
     } else {
-        DrawSprite((work->x >> 8) - 3, y - 4, gUnk_09EE981C[k], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, work->priority - 10);
+        DrawSprite((work->x >> 8) - 3, y - 4, gCardValueDigitFrames[k], gCardBattleState->tiles5, gCardBattleState->palette, aff, attr, work->priority - 10);
     }
 }
 
@@ -5215,7 +5215,7 @@ u8 card_reload_1(CardDisplayWork* work, void* a) {
 }
 
 void InitSoraReloadCounterAnim(ReloadGauge* p, void* a, u8 b, s8 c) {
-    AnimInit(&p->anim, gUnk_09EEA4E0, gUnk_09EEA494);
+    AnimInit(&p->anim, gReloadCounterWhiteAnims, gReloadCounterWhiteFrames);
 
     if (c >= 0) {
         AnimStart(&p->anim, c, 0);
@@ -5244,10 +5244,10 @@ void LoadSoraReloadCardGfx(CardDisplayWork* work) {
 
     d = work->reloadGauge;
     work->tiles = AllocObjTiles(0x80, NULL);
-    SetObjTileSource(work->tiles, gUnk_0909A4E0);
+    SetObjTileSource(work->tiles, gReloadCounterWhiteTiles);
     InitSoraReloadCounterAnim(work->reloadGauge, work->tiles, work->args.listIndex, gCardBattleState->soraReloadCounter);
     work->palette = NULL;
-    work->tiles2 = LoadObjTiles(gUnk_0909FDCA, 0x280);
+    work->tiles2 = LoadObjTiles(gReloadCardGreenTiles, 0x280);
     work->palette2 = NULL;
     work->tiles3 = AllocObjTiles(0x200, NULL);
     SetObjTileSource(work->tiles3, gRiCardF0RedTiles);

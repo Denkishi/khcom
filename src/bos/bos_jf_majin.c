@@ -122,7 +122,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* p) {
     SetBgMapBlocks(1, gBosJfMajinMapBlocks, 2, 2);
     work->tiles = LoadObjTiles(gBosJfObjTiles, 0x2800);
     work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->spriteVisible = 1;
     work->unk_30 = 0x2A200;
     work->unk_34 = 0x12600;
@@ -206,7 +206,7 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     if (!gBtlWork->paused) {
         if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
-                LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
+                LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
                 gfx = work->palette2;
             } else {
                 LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);

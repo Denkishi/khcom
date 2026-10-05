@@ -690,7 +690,7 @@ void task_bos_jf_lamp_0(JfLampWork* work, JfWork* arg) {
     work->tiles2 = LoadObjTiles(gBosJfObjTiles, 0x2800);
     work->gfx2 = gBosJfObjFrames[14];
     work->palette = LoadObjPalette(gBosJfObjPalette, 0x60);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
     work->moveSteps = 0;
     work->tiles2Frame = 0;

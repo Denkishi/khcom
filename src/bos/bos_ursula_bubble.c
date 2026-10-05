@@ -219,8 +219,8 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
 #else
     work->tiles = LoadObjTiles(gBosUrsulaBubbleTiles, 0xA80);
 #endif
-    work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
 #ifdef VERSION_EU
     BosUrsulaBubbleAnimChange(0, 1);
 #else

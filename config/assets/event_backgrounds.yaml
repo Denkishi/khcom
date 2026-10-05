@@ -1083,7 +1083,7 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gUnk_09849D38, 32, 0]
+  - [gPooStumpPalette, 32, 0]
   - [gRaVegetablesPalette, 32, 0]
   us:
     address: 0x08F7E078

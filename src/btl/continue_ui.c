@@ -42,10 +42,10 @@ static void* sContinueLanguageBgTiles[5] = {
 void LoadContinueCursorPalette(s32 a) {
     switch (a) {
     case 0:
-        LoadBgPalette(0, gUnk_096145D8, 0x40);
+        LoadBgPalette(0, gContinueCursor0BgPalettes, 0x40);
         break;
     case 1:
-        LoadBgPalette(0, gUnk_09614618, 0x40);
+        LoadBgPalette(0, gContinueCursor1BgPalettes, 0x40);
         break;
     }
 }
@@ -79,11 +79,11 @@ void ContinueSora_0(ContinueWork* work) {
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
     work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);
-    work->palette3 = LoadObjPalette(gUnk_096146F8, 32);
+    work->palette3 = LoadObjPalette(gContinueLinePalette, 32);
     LoadContinueCursorPalette(work->cursor);
     work->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
-    work->palette = LoadObjPalette(gUnk_09614658, 160);
+    work->palette = LoadObjPalette(gContinueCursorPalettes, 160);
     PopPaletteEffect();
     SetObjTileSource(work->tiles, gContinueCursorTiles);
     AnimInit(&work->anim, gContinueCursorAnims, gContinueCursorFrames);
@@ -149,11 +149,11 @@ void ContinueRiku_0(ContinueWork* work) {
     BgAnimStart(&gBgAnimDefCharaDefeatEnd, 120, 46);
     BgAnimSetLoopStartFrame(0);
     work->tiles3 = LoadObjTiles(gContinueLineTiles, 192);
-    work->palette3 = LoadObjPalette(gUnk_096146F8, 32);
+    work->palette3 = LoadObjPalette(gContinueLinePalette, 32);
     LoadContinueCursorPalette(work->cursor);
     work->tiles = AllocObjTiles(512, NULL);
     PushPaletteEffect(0);
-    work->palette = LoadObjPalette(gUnk_09614658, 160);
+    work->palette = LoadObjPalette(gContinueCursorPalettes, 160);
     PopPaletteEffect();
     SetObjTileSource(work->tiles, gContinueCursorTiles);
     AnimInit(&work->anim, gContinueCursorAnims, gContinueCursorFrames);

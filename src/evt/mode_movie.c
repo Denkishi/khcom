@@ -703,8 +703,8 @@ void mode_movie_1() {
         EwramHeapInit(GetEwramHeapStart(), GetEwramHeapSize());
         SetEwramHeapName(sMovieHeapName);
         SetIwramHeapName(sMovieHeapName);
-        CpuCopy16(gUnk_08F69C04, (void*)OBJ_PLTT, 32);
-        CpuCopy16(gUnk_09614718, (void*)(OBJ_PLTT + PLTT_SIZE_4BPP), 32);
+        CpuCopy16(gMovieObjPalette, (void*)OBJ_PLTT, 32);
+        CpuCopy16(gTextWhitePalette, (void*)(OBJ_PLTT + PLTT_SIZE_4BPP), 32);
         MovieSetCallbacks(IwramAlloc, EwramAlloc, IwramFree, EwramFree);
 
         switch (sMovieId) {

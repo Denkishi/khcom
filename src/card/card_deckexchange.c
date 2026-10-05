@@ -55,7 +55,7 @@ static const s16 sDeckExchangeValueGridX[2] = { 80, 128 };
 
 static const s16 sDeckExchangeValueGridY[5] = { 80, 88, 96, 104, 112 };
 
-static const u16 sUnk_09041F3E[4] = { 45, 93, 141, 30 };
+static const u16 sDeckExchangeRowY[4] = { 45, 93, 141, 30 };
 
 void deckexchange_0(DeckExchangeWork* work, void* a) {
     u16 n;
@@ -99,10 +99,10 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->y2 = sDeckExchangeTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckExchangeFrameCursor(work, 0);
-    work->palette4 = LoadObjPalette(gUnk_09614438, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     work->step = 0;
     work->cursorCol = 0;
     work->cursorRow = 0;
@@ -132,10 +132,10 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->y7 = 113;
     work->textSlotCount5 = 0;
     work->unk_6C4 = 79;
-    n = sUnk_09041F3E[work->deckIndex];
+    n = sDeckExchangeRowY[work->deckIndex];
     work->unk_6C6 = n;
     work->unk_6C8 = 225;
-    n = sUnk_09041F3E[work->deckIndex];
+    n = sDeckExchangeRowY[work->deckIndex];
     work->unk_6CA = n;
     work->unk_70F = 0;
     work->inputDelay = 0;
@@ -1258,7 +1258,7 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
     switch (b) {
     case 0:
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, 32);
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[9], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
@@ -1278,7 +1278,7 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         break;
     case 1:
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, 32);
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
@@ -1298,7 +1298,7 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 b) {
         break;
     case 2:
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, 32);
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[8], pal, 32);
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
@@ -1487,19 +1487,19 @@ void LoadDeckExchangeCardNameText(DeckExchangeWork* work, s32 id) {
 
     switch (def->category) {
     case 0:
-        LoadPalette(gUnk_09614458, (void*)(work->palette4->index * 32 + OBJ_PLTT),
+        LoadPalette(gDeckMenuTextRedPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 1:
-        LoadPalette(gUnk_09614478, (void*)(work->palette4->index * 32 + OBJ_PLTT),
+        LoadPalette(gDeckMenuTextBluePalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 2:
-        LoadPalette(gUnk_09614498, (void*)(work->palette4->index * 32 + OBJ_PLTT),
+        LoadPalette(gDeckMenuTextGreenPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 3:
-        LoadPalette(gUnk_096144B8, (void*)(work->palette4->index * 32 + OBJ_PLTT),
+        LoadPalette(gDeckMenuTextGrayPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     }
@@ -1544,7 +1544,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
 
         work->entryIndex = i;
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
+        LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
         for (j = 0; j < 10; j++) {
             DrawValueCount(work->entries[i].valueCounts[j], j);

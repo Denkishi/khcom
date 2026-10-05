@@ -643,7 +643,7 @@ void mode_worldwarp_0() {
     }
 #endif
 
-    sWorldWarpBarPalette = LoadObjPalette(gUnk_09A3D57C, 32);
+    sWorldWarpBarPalette = LoadObjPalette(gWorldWarpBarPalette, 32);
 
 #ifdef VERSION_EU
     switch (gLanguage) {
@@ -667,13 +667,13 @@ void mode_worldwarp_0() {
 #else
     sWorldWarpBarTiles = LoadObjTiles(gUnk_0999F488, 0x500);
 #endif
-    sWorldWarpHighlightPalette = LoadObjPalette(gUnk_09A3D59C, 32);
+    sWorldWarpHighlightPalette = LoadObjPalette(gWorldWarpHighlightPalette, 32);
     sWorldWarpHighlightTiles = LoadObjTiles(gUnk_0999FA20, 0x680);
     AnimInit(&sWorldWarpHighlightAnim, gUnk_09EF9898, gUnk_09EF9870);
     AnimStart(&sWorldWarpHighlightAnim, 0, ANIM_FLAG_LOOP);
     AnimInit(&sWorldWarpArrowAnim, gUnk_09EF9898, gUnk_09EF9870);
     AnimStart(&sWorldWarpArrowAnim, 1, ANIM_FLAG_LOOP);
-    sWorldWarpCursorPalette = LoadObjPalette(gUnk_09A3D5BC, 32);
+    sWorldWarpCursorPalette = LoadObjPalette(gWorldWarpCursorPalette, 32);
     sWorldWarpCursorTiles = LoadObjTiles(gUnk_099A012C, 192);
     AnimInit(&sWorldWarpCursorAnim, gUnk_09EF98B0, gUnk_09EF98A0);
     AnimStart(&sWorldWarpCursorAnim, 0, ANIM_FLAG_LOOP);

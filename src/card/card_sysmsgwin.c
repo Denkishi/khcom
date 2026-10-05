@@ -162,7 +162,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* a) {
             break;
         }
 
-        work->tiles2 = LoadObjTiles(gUnk_093F98AC, 0x1800);
+        work->tiles2 = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
 
         if (work->tiles2 == NULL) {
             work->fallbackFrame = 1;
@@ -221,7 +221,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
             work->tiles3 = NULL;
             work->palette = NULL;
             work->tiles4 = AllocObjTiles(0x120, NULL);
-            pal = gUnk_09614418;
+            pal = gDialogBoxPalette;
             work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
             FadeSetPaletteExcluded(work->palette2->index + 16, 1);
@@ -245,7 +245,7 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
 #endif
             work->textPalette = LoadTextPalette(1);
             work->choiceVisible = 1;
-            work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+            work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
             work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
             FadeSetPaletteExcluded(work->palette3->index + 16, 1);
@@ -349,7 +349,7 @@ void sysmsgwin_2(SysMsgWinWork* work) {
     }
 
     if (work->choiceVisible) {
-        DrawSprite(120, 75, gUnk_09EF126C[1], work->tiles, work->palette3, NULL, 0, 10);
+        DrawSprite(120, 75, gMsgBoxFrames[1], work->tiles, work->palette3, NULL, 0, 10);
         DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 62, work->textSlots,
                       work->textPalette, 0, work->textSlotCount);
         DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 77, work->textSlots2,
@@ -597,7 +597,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* a) {
             break;
         }
 
-        work->tiles2 = LoadObjTiles(gUnk_093F8C8E, 0xC00);
+        work->tiles2 = LoadObjTiles(gDialogBoxTiles, 0xC00);
         work->palette4 = LoadObjPalette(gCard00Palette, 32);
         FadeSetPaletteExcluded(work->palette4->index + 16, 1);
         break;
@@ -614,7 +614,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
     u16* pal;
 
     work->tiles4 = AllocObjTiles(0x120, NULL);
-    pal = gUnk_09614418;
+    pal = gDialogBoxPalette;
     work->palette2 = LoadObjPalette(pal, 32);
 #ifdef VERSION_EU
     FadeSetPaletteExcluded(work->palette2->index + 16, 1);
@@ -638,7 +638,7 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
 #endif
     work->textPalette = LoadTextPalette(1);
     work->choiceVisible = 1;
-    work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette3 = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_EU
     FadeSetPaletteExcluded(work->palette3->index + 16, 1);

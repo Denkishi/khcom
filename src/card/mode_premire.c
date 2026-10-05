@@ -141,7 +141,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* a) {
         UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][work->countUnit], gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
         work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->soraHcEffect);
-        UpdateSpriteFrameTiles(work->tiles3, gUnk_09EF12C8[work->countUnit], gUnk_093FB954);
+        UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
 
         if (gCardBattleState->soraHcEffect == 0) {
@@ -161,7 +161,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* a) {
         UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitSpritesByLanguage[gLanguage][work->countUnit], gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
         work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->rikuHcEffect);
-        UpdateSpriteFrameTiles(work->tiles3, gUnk_09EF12C8[work->countUnit], gUnk_093FB954);
+        UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
 
         if (gCardBattleState->rikuHcEffect == 0) {
@@ -306,7 +306,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a) {
                          gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
             work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->soraHcEffect);
-            UpdateSpriteFrameTiles(work->tiles3, gUnk_09EF12C8[work->countUnit], gUnk_093FB954);
+            UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
         } else {
@@ -338,7 +338,7 @@ u8 UpdateHcEffectNameShuffle(HcEffectNameWork* work, void* a) {
                          gHcEffectCountUnitTilesByLanguage[gLanguage]);
 #else
             work->countUnit = GetHcEffectCountUnit(work, gCardBattleState->rikuHcEffect);
-            UpdateSpriteFrameTiles(work->tiles3, gUnk_09EF12C8[work->countUnit], gUnk_093FB954);
+            UpdateSpriteFrameTiles(work->tiles3, gHcEffectCountUnitFrames[work->countUnit], gHcEffectCountUnitTiles);
 #endif
             SetTaskUpdate(a, (TaskUpdateFunc)HCEffectName_1);
         } else {
@@ -392,7 +392,7 @@ void HCEffectName_3(HcEffectNameWork* work) {
 
 void NumberPlus_0(NumberPlusWork* work, NumberPlusArgs* args) {
     work->args = *args;
-    work->tiles = LoadObjTiles(gUnk_090451C0, 128);
+    work->tiles = LoadObjTiles(gNumberPlusTiles, 128);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     work->x = work->args.x >> 8;
     work->y = (work->args.y >> 8) - 20;
@@ -416,7 +416,7 @@ s32 NumberPlus_1(NumberPlusWork* work) {
 }
 
 void NumberPlus_2(NumberPlusWork* work) {
-    DrawSprite(work->x, work->y, gUnk_09EE91A8[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
+    DrawSprite(work->x, work->y, gNumberPlusFrames[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 0);
 }
 
 void NumberPlus_3(NumberPlusWork* work) {
@@ -432,8 +432,8 @@ Mode gModePremire = {
 };
 
 #ifdef VERSION_EU
-void* gHcEffectCountUnitTilesByLanguage[5] = { gUnk_093FB954, gUnkEu_094CE490, gUnkEu_094CE820, gUnkEu_094CE6F0, gUnkEu_094CE5C0 };
-void** gHcEffectCountUnitSpritesByLanguage[5] = { gUnk_09EF12C8, gUnkEu_09F7C55C, gUnkEu_09F7C57C, gUnkEu_09F7C59C, gUnkEu_09F7C5BC };
+void* gHcEffectCountUnitTilesByLanguage[5] = { gHcEffectCountUnitTiles, gHcEffectCountUnitFrenchTiles, gHcEffectCountUnitGermanTiles, gHcEffectCountUnitItalianTiles, gHcEffectCountUnitSpanishTiles };
+void** gHcEffectCountUnitSpritesByLanguage[5] = { gHcEffectCountUnitFrames, gHcEffectCountUnitFrenchFrames, gHcEffectCountUnitSpanishFrames, gHcEffectCountUnitItalianFrames, gHcEffectCountUnitGermanFrames };
 #endif
 
 TaskDesc gTaskDescHCEffectName = {

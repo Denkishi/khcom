@@ -524,7 +524,7 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->tiles2 = AllocObjTiles(0x440, gBosTmFootTiles);
     work->tiles3 = AllocObjTiles(0x440, gBosTmFootTiles);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->gfx = gBosTmFootFrames[2];
     work->gfx2 = gBosTmFootFrames[2];
     work->gfx3 = gBosTmShoe0Frames[0];
@@ -1026,7 +1026,7 @@ void task_bos_tm_arm_0(TmArmWork* work, TmArmSrc* arg) {
     work->src = arg;
     work->tiles = LoadObjTiles(gBosTmObjTiles, 0x1D80);
     work->palette = LoadObjPalette(gBoss03objPalette, 0x60);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->timer = 0;
     work->timer2 = 0;
     work->clbSwapped = 1;

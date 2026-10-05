@@ -1186,11 +1186,11 @@ void mode_mapinspect_0() {
     AnimInit(&sMapInspectHighlightAnim, gUnk_09EF9858, gUnk_09EF9830);
     AnimStart(&sMapInspectHighlightAnim, 0, ANIM_FLAG_LOOP);
     sMapInspectBarPalette2 = LoadObjPalette(gUnk_09A3D2DC, 0x20);
-    sMapInspectPremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
-    AnimInit(&sMapInspectPremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
+    sMapInspectPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    AnimInit(&sMapInspectPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMapInspectPremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMapInspectGridPremiumTiles = LoadObjTiles(gUnk_0908C3CE, 0x260);
-    AnimInit(&sMapInspectGridPremiumAnim, gUnk_09EEA198, gUnk_09EEA180);
+    sMapInspectGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, 0x260);
+    AnimInit(&sMapInspectGridPremiumAnim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&sMapInspectGridPremiumAnim, 0, ANIM_FLAG_LOOP);
 
     sMapInspectNameText = EwramAlloc(0x24 * sizeof(TextSlot));

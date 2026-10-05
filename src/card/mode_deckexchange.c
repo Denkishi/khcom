@@ -61,7 +61,7 @@ void Mode_DeckExchange_2() {
 #endif
 
 void DarkPoint_0(DarkPointWork* work) {
-    work->tiles = LoadObjTiles(gUnk_093FB6C4, 576);
+    work->tiles = LoadObjTiles(gDarkPointTiles, 576);
     work->slideTimer = 8;
     work->x = -0x2000;
     SplitFourDigits(gBtlWork->darkPoints, &work->thousands);
@@ -79,17 +79,17 @@ s32 DarkPoint_1(DarkPointWork* work) {
 }
 
 void DarkPoint_2(DarkPointWork* work) {
-    DrawSprite(work->x >> 8, 27, gUnk_09EF1298[0], work->tiles, gCardBattleState->palette, NULL, 0, 30);
+    DrawSprite(work->x >> 8, 27, gDarkPointFrames[0], work->tiles, gCardBattleState->palette, NULL, 0, 30);
 
     if (work->hundreds != 0) {
-        DrawSprite((work->x >> 8) + 11, 30, gUnk_09EF1298[work->hundreds + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((work->x >> 8) + 17, 30, gUnk_09EF1298[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((work->x >> 8) + 23, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 11, 30, gDarkPointFrames[work->hundreds + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 17, 30, gDarkPointFrames[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 23, 30, gDarkPointFrames[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
     } else if (work->tens != 0) {
-        DrawSprite((work->x >> 8) + 15, 30, gUnk_09EF1298[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
-        DrawSprite((work->x >> 8) + 21, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 15, 30, gDarkPointFrames[work->tens + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 21, 30, gDarkPointFrames[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
     } else {
-        DrawSprite((work->x >> 8) + 17, 30, gUnk_09EF1298[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
+        DrawSprite((work->x >> 8) + 17, 30, gDarkPointFrames[work->ones + 1], work->tiles, gCardBattleState->palette, NULL, 0, 29);
     }
 }
 

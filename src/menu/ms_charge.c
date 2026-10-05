@@ -277,7 +277,7 @@ void MsChargeLoadSelectedCard() {
 #endif
         q = &sMsChargeDescTextCount;
         *q = LoadTextSlots((void*)LANGSTR(gCardKindDescriptions[card->kind]), sMsChargeDescText);
-        LoadObjPaletteBank(sMsChargeCategoryPalette->index, gUnk_09A3DE7C + card->category * 0x10);
+        LoadObjPaletteBank(sMsChargeCategoryPalette->index, gMsChargeCategoryPalettes + card->category * 0x10);
     } else {
         sMsChargeCardPalette = NULL;
         sMsChargeCardTiles = NULL;
@@ -1203,14 +1203,14 @@ void mode_ms_charge_0() {
     MsChargeDrawCategoryCounts();
     MsChargeDrawValueCounts();
     sMsChargeCard00Palette = LoadObjPalette(gCard00Palette, 32);
-    sMsChargePremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
-    AnimInit(&sMsChargePremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
+    sMsChargePremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    AnimInit(&sMsChargePremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMsChargePremiumAnim, 0, ANIM_FLAG_LOOP);
-    sMsChargeGridPremiumTiles = LoadObjTiles(gUnk_0908C3CE, 0x260);
-    AnimInit(&sMsChargeGridPremiumAnim, gUnk_09EEA198, gUnk_09EEA180);
+    sMsChargeGridPremiumTiles = LoadObjTiles(gCardPremiumSmallTiles, 0x260);
+    AnimInit(&sMsChargeGridPremiumAnim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&sMsChargeGridPremiumAnim, 0, ANIM_FLAG_LOOP);
     sMsChargeScrollbarTiles = LoadObjTiles(gMsChargeScrollbarTiles, 32);
-    sMsChargeCategoryPalette = LoadObjPalette(gUnk_09A3DE7C, 32);
+    sMsChargeCategoryPalette = LoadObjPalette(gMsChargeCategoryPalettes, 32);
     sMsChargeHighlightTiles = LoadObjTiles(gMsChargeHighlightTiles, 0xFE0);
     AnimInit(&sMsChargeArrowAnim, gMsChargeHighlightAnims, gMsChargeHighlightFrames);
     AnimStart(&sMsChargeArrowAnim, 1, ANIM_FLAG_LOOP);

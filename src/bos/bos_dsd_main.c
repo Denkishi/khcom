@@ -73,12 +73,12 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     AnimInit(&work->anim2, gBosDsdArmAnims, gBosDsdArmFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->palette = LoadObjPalette(gUnk_096FB8C4, 32);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette = LoadObjPalette(gBosDsdLimbPalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->dsd->tiles = AllocObjTiles(0x800, gBosDsdCircleTiles);
-    work->dsd->palette = LoadObjPalette(gUnk_096FB8E4, 32);
+    work->dsd->palette = LoadObjPalette(gBosDsdCirclePalette, 32);
     work->dsd->tiles2 = LoadObjTiles(gBosDsdItaTiles, 0x740);
-    work->dsd->palette2 = LoadObjPalette(gUnk_096FB864, 32);
+    work->dsd->palette2 = LoadObjPalette(gBosDsdItaPalette, 32);
     work->dsd->palette3 = LoadObjPalette(gUnk_096FB884, 32);
     work->dsd->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->dsd->palette4 = LoadObjPalette(gBStatesPalette, 32);
@@ -165,7 +165,7 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
         gfx = work->palette;
     } else if (d->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
-            LoadPaletteWithEffect(gUnk_08F69BC4, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
             gfx = work->palette2;
         } else {
             LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);

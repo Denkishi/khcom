@@ -43,7 +43,7 @@ void Task_MapFloor_0(MapFloorWork* work) {
     gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
     work->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
-    work->palette = LoadObjPalette(gUnk_099910C4, 32);
+    work->palette = LoadObjPalette(gMapFloorNamePalette, 32);
     work->gfx = gUnk_09EF8DA4[0];
     work->timer = 120;
 #ifdef VERSION_EU

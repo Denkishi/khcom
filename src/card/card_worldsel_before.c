@@ -23,15 +23,15 @@ void WorldSel_Before_0(WorldSelBeforeWork* work, WorldSelBeforeArgs* a) {
 
     FadeToAmount(FADE_MODE_BLACK, 16, 8);
     work->pos = *a;
-    work->tiles = LoadObjTiles(gUnk_093FB0CC, 0xC0);
-    work->palette = LoadObjPalette(gUnk_09619378, 32);
-    work->tiles2 = LoadObjTiles(gUnk_093FB1AC, 0x4A0);
+    work->tiles = LoadObjTiles(gWorldSelBeforeCardTiles, 0xC0);
+    work->palette = LoadObjPalette(gWorldSelBeforeCardPalette, 32);
+    work->tiles2 = LoadObjTiles(gWorldSelBeforeRingTiles, 0x4A0);
     work->palette2 = AllocObjPalette(32);
     work->spriteCount = 6;
     work->animStep = 0;
     work->animTimer = 0;
     work->risenCount = 0;
-    UpdateAllocatedObjPalette(work->palette2, &gUnk_09619178[gWorldSelAnims[work->animStep].palette << 4]);
+    UpdateAllocatedObjPalette(work->palette2, &gWorldSelBeforeRingPalettes[gWorldSelAnims[work->animStep].palette << 4]);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
     FadeSetPaletteExcluded(work->palette2->index + 16, 1);
 
@@ -69,7 +69,7 @@ s32 WorldSel_Before_1(WorldSelBeforeWork* work) {
         } while (0);
 
         work->animTimer = 0;
-        UpdateAllocatedObjPalette(work->palette2, &gUnk_09619178[gWorldSelAnims[work->animStep].palette << 4]);
+        UpdateAllocatedObjPalette(work->palette2, &gWorldSelBeforeRingPalettes[gWorldSelAnims[work->animStep].palette << 4]);
     }
 
     return 1;

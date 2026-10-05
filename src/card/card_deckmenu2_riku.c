@@ -56,7 +56,7 @@ const s16 gRikuDeckValueGridX[2] = { 80, 128 };
 
 const s16 gRikuDeckValueGridY[5] = { 80, 88, 96, 104, 112 };
 
-static const u16 sUnk_09041EEE[4] = { 45, 93, 141, 30 };
+static const u16 sRikuDeckRowY[4] = { 45, 93, 141, 30 };
 
 static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     u16 v;
@@ -95,11 +95,11 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     work->y = sRikuDeckTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
     work->handVisible = 0;
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetRikuDeckMenuFrameCursor(work, 0);
-    work->palette4 = LoadObjPalette(gUnk_09614438, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     work->tiles10 = NULL;
     work->tiles7 = NULL;
     work->tiles8 = NULL;
@@ -141,12 +141,12 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
-    work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     work->unk_4BC = 79;
-    v = sUnk_09041EEE[work->deckIndex];
+    v = sRikuDeckRowY[work->deckIndex];
     work->unk_4BE = v;
     work->unk_4C0 = 225;
-    v = sUnk_09041EEE[work->deckIndex];
+    v = sRikuDeckRowY[work->deckIndex];
     work->unk_4C2 = v;
     work->unk_503 = 0;
     work->inputDelay = 0;
@@ -222,7 +222,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
 
     base = GetBgCharBase(1);
     pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-    LoadPalette(gUnk_096142F8, pal, 32);
+    LoadPalette(gDeckTabHighlightPalette, pal, 32);
 #ifdef VERSION_EU
     RequestDma3Copy(gRikuDeckEquipMarkerTilesByLanguage[gLanguage] + 0x20, base + 0x2D80, 0x1E0);
 #else
@@ -444,7 +444,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
     work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
-    work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     work->x5 = 0x7800;
     work->y5 = 0;
@@ -836,25 +836,25 @@ void LoadRikuCardNameText(RikuDeckMenuWork* work, s32 id) {
 
     switch (def->category) {
     case 0:
-        LoadPalette(gUnk_09614458,
+        LoadPalette(gDeckMenuTextRedPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 1:
-        LoadPalette(gUnk_09614478,
+        LoadPalette(gDeckMenuTextBluePalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 2:
-        LoadPalette(gUnk_09614498,
+        LoadPalette(gDeckMenuTextGreenPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 3:
-        LoadPalette(gUnk_096144B8,
+        LoadPalette(gDeckMenuTextGrayPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
@@ -910,8 +910,8 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
     if (id != 0xFFFF) {
         if (id & 0x8000) {
             work->tiles10 = AllocObjTiles(0x280, NULL);
-            SetObjTileSource(work->tiles10, gUnk_0908B1B4);
-            AnimInit(&work->anim, gUnk_09EEA164, gUnk_09EEA148);
+            SetObjTileSource(work->tiles10, gCardPremiumTiles);
+            AnimInit(&work->anim, gCardPremiumAnims, gCardPremiumFrames);
             AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim);
         }
@@ -926,13 +926,13 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         work->gfx5 = def->gfx;
 
         if (def->category != 3) {
-            work->tiles9 = LoadObjTiles(gUnk_0905EAE8, 480);
-            work->gfx6 = gUnk_09EE981C[def->value];
+            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, 480);
+            work->gfx6 = gCardValueDigitFrames[def->value];
         }
 
         DrawRikuCpCost(def->cpCost);
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
+        LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
         LoadRikuCardNameText(work, t);
         LoadRikuCardDescriptionText(work, t);
         work->previewShown = 1;

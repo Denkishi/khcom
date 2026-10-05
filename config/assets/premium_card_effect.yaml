@@ -14,7 +14,7 @@ objects:
     start: 0x090CF67C
     end: 0x090D12FC
 entries:
-- name: gUnk_09036300
+- name: gPrintFontPalettes
   format: palette
   us:
     address: 0x09036300
@@ -25,7 +25,7 @@ entries:
   eu:
     address: 0x090CF67C
     size: 128
-- name: gUnk_09036380
+- name: gPrintFontTiles
   format: tiles4
   width: 32
   us:

@@ -104,7 +104,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         work->mainSide = 0;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gRikuBtlWork->actor;
-        work->palette = LoadObjPalette(gUnk_096FAC64, 32);
+        work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
     }
 
     AnimInit(&work->anim, NULL, NULL);

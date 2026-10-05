@@ -1292,7 +1292,7 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     work->y = sDeckTabPointerY[0] << 8;
     work->handFlags = 0;
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
-    work->palette = LoadObjPalette(gUnk_09614418, 32);
+    work->palette = LoadObjPalette(gDialogBoxPalette, 32);
 #ifdef VERSION_EU
     work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
@@ -1307,11 +1307,11 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
 #endif
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckMenuFrameCursor(work, 0);
-    work->palette4 = LoadObjPalette(gUnk_09614438, 32);
+    work->palette4 = LoadObjPalette(gDeckMenuTextPalette, 32);
     gCardUiSpriteState.tiles = AllocObjTiles(0x100, NULL);
     gCardUiSpriteState.palette = LoadObjPalette(gCard00Palette, 32);
-    SetObjTileSource(gCardUiSpriteState.tiles, gUnk_0908C3CE);
-    AnimInit(&gCardUiSpriteState.anim, gUnk_09EEA198, gUnk_09EEA180);
+    SetObjTileSource(gCardUiSpriteState.tiles, gCardPremiumSmallTiles);
+    AnimInit(&gCardUiSpriteState.anim, gCardPremiumSmallAnims, gCardPremiumSmallFrames);
     AnimStart(&gCardUiSpriteState.anim, 0, ANIM_FLAG_LOOP);
     gCardUiSpriteState.gfx = AnimUpdate(&gCardUiSpriteState.anim);
     work->tiles10 = NULL;
@@ -1553,7 +1553,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
 #else
         work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
-        work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+        work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
         work->step = 0;
         work->timer = 16;
         return 1;
@@ -2871,7 +2871,7 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* a) {
 #else
     work->tiles3 = LoadObjTiles(gUnk_090A261E, 0x1800);
 #endif
-    work->palette2 = LoadObjPalette(gUnk_096144D8, 32);
+    work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, 32);
     SetDeckMenuFrameCursor(work, 1);
     p = &work->view;
     z = 0;
@@ -3447,7 +3447,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(gUnk_09614438,
+    LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
                 work->palette4->count << 5);
@@ -3747,7 +3747,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(gUnk_09614438,
+    LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
                 work->palette4->count << 5);
@@ -4058,7 +4058,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a) {
     ApproachValueHalf(&work->x, sDeckTabPointerX[work->cursorCol] << 8);
     ApproachValueHalf(&work->y, sDeckTabPointerY[work->cursorRow] << 8);
     SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
-    LoadPalette(gUnk_09614438,
+    LoadPalette(gDeckMenuTextPalette,
                 (void*)(work->palette4->index * 32 +
                         OBJ_PLTT),
                 work->palette4->count << 5);
@@ -4092,7 +4092,7 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
     work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
 
-    work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
+    work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     LoadBgMap(3, gDeckMenuMap, 0x800);
     work->x5 = 0x7800;
     work->y5 = 0;
@@ -4824,7 +4824,7 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
     switch (b) {
     case 0:
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, dst, 32);
+        LoadPalette(gDeckTabHighlightPalette, dst, 32);
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[9], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
@@ -4844,7 +4844,7 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         break;
     case 1:
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, dst, 32);
+        LoadPalette(gDeckTabHighlightPalette, dst, 32);
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
@@ -4864,7 +4864,7 @@ void HighlightDeckTab(DeckMenuWork* work, u8 b) {
         break;
     case 2:
         dst = (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gUnk_096142F8, dst, 32);
+        LoadPalette(gDeckTabHighlightPalette, dst, 32);
         dst = (void*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
         LoadPalette(gDeckMenuPalettes[8], dst, 32);
         dst = (void*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
@@ -5144,25 +5144,25 @@ void LoadCardNameText(DeckMenuWork* work, s32 id) {
 
     switch (def->category) {
     case 0:
-        LoadPalette(gUnk_09614458,
+        LoadPalette(gDeckMenuTextRedPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 1:
-        LoadPalette(gUnk_09614478,
+        LoadPalette(gDeckMenuTextBluePalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 2:
-        LoadPalette(gUnk_09614498,
+        LoadPalette(gDeckMenuTextGreenPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
     case 3:
-        LoadPalette(gUnk_096144B8,
+        LoadPalette(gDeckMenuTextGrayPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
@@ -5210,8 +5210,8 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
         if (flag != 0) {
             work->tiles10 = AllocObjTiles(0x280, NULL);
-            SetObjTileSource(work->tiles10, gUnk_0908B1B4);
-            AnimInit(&work->anim, gUnk_09EEA164, gUnk_09EEA148);
+            SetObjTileSource(work->tiles10, gCardPremiumTiles);
+            AnimInit(&work->anim, gCardPremiumAnims, gCardPremiumFrames);
             AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim);
         }
@@ -5240,7 +5240,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
         work->entryIndex = i;
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
+        LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
 
         for (j = 0; j <= 9; j++) {
             DrawValueCount(work->entries[i].valueCounts[j], j);
@@ -5342,8 +5342,8 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
     if (id != 0xFFFF) {
         if (id & 0x8000) {
             work->tiles10 = AllocObjTiles(0x280, NULL);
-            SetObjTileSource(work->tiles10, gUnk_0908B1B4);
-            AnimInit(&work->anim, gUnk_09EEA164, gUnk_09EEA148);
+            SetObjTileSource(work->tiles10, gCardPremiumTiles);
+            AnimInit(&work->anim, gCardPremiumAnims, gCardPremiumFrames);
             AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim);
         }
@@ -5357,13 +5357,13 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
         work->gfx5 = def->gfx;
 
         if ((id & CARD_ID_MASK) <= 0x1C1) {
-            work->tiles9 = LoadObjTiles(gUnk_0905EAE8, 480);
-            work->gfx6 = gUnk_09EE981C[def->value];
+            work->tiles9 = LoadObjTiles(gCardValueDigitTiles, 480);
+            work->gfx6 = gCardValueDigitFrames[def->value];
         }
 
         DrawCpCost(GetCardCpCost(id));
         dst = gUnk_05000160;
-        LoadPalette(&gUnk_09614318[def->category * 16], dst, 32);
+        LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
         LoadCardNameText(work, id & CARD_ID_MASK);
         LoadCardDescriptionText(work, id & CARD_ID_MASK);
     } else {
@@ -6856,7 +6856,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
 #else
         work->tiles11 = AllocObjTiles(0x200, NULL);
 #endif
-        work->palette7 = LoadObjPalette(gUnk_096145B8, 32);
+        work->palette7 = LoadObjPalette(gDeckKeyboardCursorPalette, 32);
         work->tiles13 = AllocSpriteFrameTiles(0x80);
 #ifdef VERSION_EU
         SetObjTileSource(work->tiles11, gDeckKeyboardCursorTiles[gLanguage]);
@@ -6930,7 +6930,7 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
         break;
     case 5:
         LoadBgMap(3, gDeckKeyboardMap, 0x800);
-        LoadBgPalette(3, gUnk_09614518, 0xA0);
+        LoadBgPalette(3, gDeckKeyboardPalettes, 0xA0);
         break;
     case 6:
         SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuKeyboard);

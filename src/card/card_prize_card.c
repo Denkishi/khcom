@@ -55,7 +55,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* p) {
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
     work->tiles3 = LoadObjTiles(back->tiles3, 0x600);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
-    work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
     work->pos.x = args.x;
@@ -306,7 +306,7 @@ static void PrizeCard_2(PrizeCardWork* work) {
     back = &gCardBacks[work->stat.category];
     DrawSprite(work->x, (u16)work->y2 - 8, back->gfx, work->tiles2, work->palette2,
                affine, pal, work->priority);
-    gfx = gUnk_09EE981C[work->stat.value];
+    gfx = gCardValueDigitFrames[work->stat.value];
     DrawSprite(work->x, (u16)work->y2 - 8, gfx, work->tiles4, work->palette2, affine,
                pal, work->priority - 1);
 

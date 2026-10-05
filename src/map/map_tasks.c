@@ -2222,7 +2222,7 @@ void Task_MapGmk_Tutorial_0(MapGmkTutorialWork* work) {
     work->obj.fieldPosition.y -= work->obj.fieldPosition.ground;
     work->obj.angle = 0xAD;
     work->obj.height = 32;
-    work->palette = LoadObjPalette(gUnk_09991204, 32);
+    work->palette = LoadObjPalette(gMapDoorTraverseTownPalette, 32);
     work->tiles = AllocSpriteFrameTiles(0x400);
     UpdateSpriteFrameTiles(work->tiles, gMapUiSprite_098A94A0, gUnk_0994BF64);
     ColliderInit(&work->collider, 6, 16, 0);
@@ -4095,7 +4095,7 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->speed = GetRandom() % 155 + 153;
     work->angle = GetRandom();
     work->tiles = LoadObjTiles(gUnk_098A5CF4, 0x160);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     work->kind = arg->id;
 
     switch (work->kind) {
@@ -4372,8 +4372,8 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     q = &gCardBacks[work->stat.category];
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
     work->tiles2 = LoadObjTiles(q->tiles, 0x280);
-    work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    work->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->tiles3 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
+    work->palette3 = LoadObjPalette(gCommonObjPalette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->posX = p->x;
     work->posY = p->y;
@@ -4447,7 +4447,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
         work->palette2, affine, work->spriteFlags, work->priority);
 
     if (work->stat.category != 3) {
-        t = gUnk_09EE981C[work->stat.value];
+        t = gCardValueDigitFrames[work->stat.value];
         DrawSprite(work->x, work->y - 8, t, work->tiles3,
             work->palette2, affine, work->spriteFlags, work->priority - 1);
     }
@@ -4572,7 +4572,7 @@ void Task_MapSpark_0(MapSparkWork* work, FldObj* obj) {
 
     work->obj = obj;
     work->tiles = AllocObjTiles(0x200, gUnk_098A4B68);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     a = &work->anim;
     AnimInit(a, gUnk_09EF8CC0, gUnk_09EF8CA0);
 
@@ -4618,7 +4618,7 @@ void Task_MapSpark_3(MapSparkWork* work) {
 void Task_MapTalk_0(MapTalkWork* work, FldObj* obj) {
     work->obj = obj;
     work->tiles = AllocObjTiles(0x200, &gUnk_098A4B68[0x1028]);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     AnimInit(&work->anim, gUnk_09EF8CD0, gUnk_09EF8CC8);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->playerOnRight = 0;

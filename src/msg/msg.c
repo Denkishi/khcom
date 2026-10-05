@@ -153,7 +153,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
         UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[i], gSmallFontFrames[idx], gSmallFontTiles);
     }
 
-    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    sSpriteTextLines[sTextEntryCount].palette = LoadObjPalette(gCommonObjPalette, 32);
     sTextEntryCount++;
 }
 
@@ -348,13 +348,13 @@ void* InitSpriteTextSlots(s32 a) {
 
         switch (a) {
         case 0:
-            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614718, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gTextWhitePalette, 32);
             break;
         case 1:
-            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614738, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gTextGrayPalette, 32);
             break;
         case 2:
-            sSpriteTextLines[i].palette = LoadObjPalette(gUnk_09614758, 32);
+            sSpriteTextLines[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
         }
     }
@@ -1349,13 +1349,13 @@ u16 InitMsgGlyphSprites(s32 a) {
 
         switch (a) {
         case 0:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614758, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
         case 1:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614718, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextWhitePalette, 32);
             break;
         case 2:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614738, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextGrayPalette, 32);
             break;
         }
 
@@ -1382,13 +1382,13 @@ u16 InitMsgGlyphSpritesAltPalette5(s32 a) {
 
         switch (a) {
         case 0:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614758, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
         case 1:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614718, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextWhitePalette, 32);
             break;
         case 2:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614738, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextGrayPalette, 32);
             break;
         }
 
@@ -1417,13 +1417,13 @@ u16 InitMsgGlyphSpritesAltPalette3(s32 a) {
 
         switch (a) {
         case 0:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614758, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 32);
             break;
         case 1:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614718, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextWhitePalette, 32);
             break;
         case 2:
-            sMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614738, 32);
+            sMsgGlyphSprites[i].palette = LoadObjPalette(gTextGrayPalette, 32);
             break;
         }
 
@@ -2761,22 +2761,22 @@ void* LoadTextPalette(s32 a) {
 
     switch (a) {
     case 0:
-        r = LoadObjPalette(gUnk_09614758, 32);
+        r = LoadObjPalette(gTextBrownPalette, 32);
         break;
     case 1:
-        r = LoadObjPalette(gUnk_09614718, 32);
+        r = LoadObjPalette(gTextWhitePalette, 32);
         break;
     case 2:
-        r = LoadObjPalette(gUnk_09614738, 32);
+        r = LoadObjPalette(gTextGrayPalette, 32);
         break;
     case 3:
-        r = LoadObjPalette(gUnk_09614798, 32);
+        r = LoadObjPalette(gTextYellowPalette, 32);
         break;
     case 4:
-        r = LoadObjPalette(gUnk_096147B8, 32);
+        r = LoadObjPalette(gTextGreenPalette, 32);
         break;
     case 5:
-        r = LoadObjPalette(gUnk_09614778, 32);
+        r = LoadObjPalette(gTextCyanPalette, 32);
         break;
     }
 
@@ -2925,7 +2925,7 @@ void* LoadSmallFontTiles() {
 }
 
 void* LoadSmallFontPalette() {
-    return LoadObjPalette(gUnk_08F69BE4, 0x20);
+    return LoadObjPalette(gCommonObjPalette, 0x20);
 }
 
 void FreeSmallFontResources(void* a, void* b) {
@@ -6273,13 +6273,13 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
 
         switch (mode) {
         case 0:
-            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614758, 0x20);
+            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gTextBrownPalette, 0x20);
             break;
         case 1:
-            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614718, 0x20);
+            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gTextWhitePalette, 0x20);
             break;
         case 2:
-            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gUnk_09614738, 0x20);
+            sCardMsgGlyphSprites[i].palette = LoadObjPalette(gTextGrayPalette, 0x20);
             break;
         }
 

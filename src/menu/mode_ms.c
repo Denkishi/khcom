@@ -445,10 +445,10 @@ void InitMooglePackOpening(s16 x, s16 y) {
 
     sMooglePackCard00Palette = LoadObjPalette(gCard00Palette, 0x20);
     FadeSetPaletteExcluded(sMooglePackCard00Palette->index + 0x10, 1);
-    sMooglePackValueTiles = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    sMooglePackValueTiles = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     sMooglePackPremiumValuePalette = LoadObjPalette(gBStatesPalette, 0x20);
     FadeSetPaletteExcluded(sMooglePackPremiumValuePalette->index + 0x10, 1);
-    sMooglePackPremiumValueTiles = LoadObjTiles(gUnk_0905ED36, 0x140);
+    sMooglePackPremiumValueTiles = LoadObjTiles(gCardPremiumValueDigitTiles, 0x140);
     sMooglePackCursorPalette = LoadObjPalette(gMoogleShopCursorPalette, 0x20);
     sMooglePackCursorTiles = LoadObjTiles(gMoogleShopCursorTiles, 0x1C0);
     AnimInit(&sMooglePackCursorAnim, gMoogleShopCursorAnims, gMoogleShopCursorFrames);
@@ -462,8 +462,8 @@ void InitMooglePackOpening(s16 x, s16 y) {
     p = &sMooglePackDescText;
     *p = EwramAlloc(0x5A * sizeof(TextSlot));
     InitTextSlots(sMooglePackDescText, 0x5A);
-    sMooglePackPremiumTiles = LoadObjTiles(gUnk_0908B1B4, 0x9A0);
-    AnimInit(&sMooglePackPremiumAnim, gUnk_09EEA164, gUnk_09EEA148);
+    sMooglePackPremiumTiles = LoadObjTiles(gCardPremiumTiles, 0x9A0);
+    AnimInit(&sMooglePackPremiumAnim, gCardPremiumAnims, gCardPremiumFrames);
     AnimStart(&sMooglePackPremiumAnim, 0, ANIM_FLAG_LOOP);
 
     for (i = 0; i < 5; i++) {
@@ -534,10 +534,10 @@ void DrawMooglePackOpening() {
                 DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, sMooglePackCards[i].gfx, sMooglePackCards[i].tiles, sMooglePackCards[i].palette, affine, 0, 0x58);
 
                 if (sMooglePackCards[i].premium) {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE9894[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardPremiumValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackPremiumValueTiles, sMooglePackPremiumValuePalette, affine, 0, 0x48);
                     DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, anim, sMooglePackPremiumTiles, sMooglePackCard00Palette, affine, 0, 0x40);
                 } else {
-                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gUnk_09EE981C[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackValueTiles, sMooglePackCard00Palette, affine, 0, 0x48);
+                    DrawSprite(sMooglePackCards[i].x >> 8, sMooglePackCards[i].y >> 8, gCardValueDigitFrames[gCardDefs[sMooglePackCardIds[i] & 0xFFF].value], sMooglePackValueTiles, sMooglePackCard00Palette, affine, 0, 0x48);
                 }
             }
         }

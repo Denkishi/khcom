@@ -37,7 +37,7 @@
 static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
-    gBosUrsulaBgTiles, 0x7000, gUnk_0984AFF8, 0xe0, { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
+    gBosUrsulaBgTiles, 0x7000, gBosUrsulaBgPalettes, 0xe0, { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
 };
 
 static const u16* sBosUrsulaMapBlocksLeft[12] = {
@@ -820,7 +820,7 @@ void task_bos_ursula_map_3() {
 
 void task_bos_ursula_border_0(UrsulaBorderWork* work) {
     work->tiles = LoadObjTiles(gBosUrsulaBorderTiles, 0x800);
-    work->palette = LoadObjPalette(gUnk_0984B0D8, 0x20);
+    work->palette = LoadObjPalette(gBosUrsulaBorderPalette, 0x20);
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 0);
 }
 
@@ -902,8 +902,8 @@ void task_bos_ursula_tako_0(UrsulaTakoWork* work, u8* arg) {
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaTakoFrames, 6), gBosUrsulaTakoTiles);
-    work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     AnimInit(&work->anim, gBosUrsulaTakoAnims, gBosUrsulaTakoFrames);
     AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     work->state = 0;
@@ -1202,7 +1202,7 @@ void task_bos_ursula_backtako_0(UrsulaBacktakoWork* work, u8* arg) {
     }
 
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaTakoFrames, 8), gBosUrsulaTakoTiles);
-    work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
+    work->palette = LoadObjPalette(gBosUrsulaTakoPalette, 32);
     AnimInit(&work->anim, gBosUrsulaTakoAnims, gBosUrsulaTakoFrames);
     AnimStart(&work->anim, work->animBase + 4, ANIM_FLAG_LOOP);
     AnimSetFrame(&work->anim, GetRandom() % work->anim.frameCount + 1);

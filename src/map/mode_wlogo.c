@@ -198,9 +198,9 @@ void WLogoInitWorldSelect() {
     SetBgMode0();
     SetupBg(1, 2, 31, 0);
     SetBgSize(1, 0);
-    LoadBgTiles(1, gUnk_096ACA44, 0xBC0);
-    LoadBgPalette(1, gUnk_096FBA04, 0x40);
-    LoadBgMap(1, gUnk_096F5464, 0x800);
+    LoadBgTiles(1, gSioBgTiles, 0xBC0);
+    LoadBgPalette(1, gSioBgPalettes, 0x40);
+    LoadBgMap(1, gSioBattleBgMap, 0x800);
     DisableBg(0);
     EnableBg(1);
     sWLogoState = 0;

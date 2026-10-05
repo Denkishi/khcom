@@ -1004,7 +1004,7 @@ void DispCardname_0(DispCardnameWork* work, u16* a) {
     work->textPalette = p;
     FadeSetPaletteExcluded(p->index + 16, 1);
     work->textSlotCount = LoadTextSlots(a, work->textSlots);
-    work->tiles = LoadObjTiles(gUnk_093F7C9C, 0xFC0);
+    work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
     v = (240 - work->textSlotCount * 10) / 2;
@@ -1021,7 +1021,7 @@ s32 DispCardname_1() {
 void DispCardname_2(DispCardnameWork* work) {
     DrawTextSlots(work->x, 120, work->textSlots, work->textPalette, 50,
                   work->textSlotCount);
-    DrawSprite(120, 125, gUnk_09EF126C[0], work->tiles,
+    DrawSprite(120, 125, gMsgBoxFrames[0], work->tiles,
                work->palette, NULL, 0, 55);
 }
 
@@ -1072,9 +1072,9 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->tiles2 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
     work->tiles3 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
     work->palette2 = LoadObjPalette(work->cardBack->palette, work->cardBack->paletteSize);
-    work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
-    work->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette3 = LoadObjPalette(gCommonObjPalette, 32);
     work->posX = args[0];
     work->posY = args[1];
     work->posZ = 0;
@@ -1323,7 +1323,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
                work->priority);
 
     if (work->cardDef->backIndex != 4) {
-        gfx = gUnk_09EE981C[work->value];
+        gfx = gCardValueDigitFrames[work->value];
         DrawSprite(work->x, (u16)work->y2 - 8, gfx,
                    work->tiles4, work->palette2, affine, pal,
                    work->priority - 1);
@@ -1414,10 +1414,10 @@ void SpotLight_0(SpotlightWork* work, u8* src) {
         work->ownEndFlag = 0;
     }
 
-    LoadBgTiles(0, gUnk_09501778, 0xCA0);
-    LoadPalette(gUnk_09618C38, gUnk_050001A0, 32);
+    LoadBgTiles(0, gSpotLightTiles, 0xCA0);
+    LoadPalette(gSpotLightPalette, gUnk_050001A0, 32);
     FadeSetPaletteExcluded(13, 1);
-    LoadBgMap(0, gUnk_0960F2B8, 0x800);
+    LoadBgMap(0, gSpotLightMap, 0x800);
     SetBgScroll(0, 0, 0);
     work->steps = 30;
     work->blendB = 0x1000;
@@ -1501,8 +1501,8 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* a) {
 #else
     work->tiles = AllocObjTiles(0x6C0, NULL);
 #endif
-    SetObjTileSource(work->tiles, gUnk_093F6ACC);
-    AnimInit(&work->anim, gUnk_09EF1224, gUnk_09EF1220);
+    SetObjTileSource(work->tiles, gSelmapEventKeyTitleTiles);
+    AnimInit(&work->anim, gSelmapEventKeyTitleAnims, gSelmapEventKeyTitleFrames);
 #endif
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
@@ -1741,13 +1741,13 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     case 1:
         if (key->value <= 9) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + 0x500, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
@@ -1758,13 +1758,13 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     case 2:
         if (key->value <= 9) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + 0x580, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
@@ -1775,13 +1775,13 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     case 3:
         if (key->value <= 9) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[1], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[1], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + 0x600, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[3], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[3], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 8) * 32], 128);
@@ -1792,12 +1792,12 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     case 4:
         if (key->value <= 9) {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[0], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + key->value * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
         } else {
             work->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
-            UpdateSpriteFrameTiles(work->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
+            UpdateSpriteFrameTiles(work->sprite.tiles3, gKeyValueFrames[2], gUnk_0950C478);
             work->sprite.gfx3 = z;
             RequestDma3Copy(work->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[work->sprite.tiles3->index * 32], 128);
             RequestDma3Copy(work->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(work->sprite.tiles3->index + 4) * 32], 128);
@@ -1812,12 +1812,12 @@ void InitEventKeyCard(EventKeyCard* work, EventKey* key) {
     work->sprite.tiles = NULL;
     work->sprite.palette = NULL;
     work->sprite.gfx = NULL;
-    work->sprite.palette3 = LoadObjPalette(gUnk_09618D38, 32);
+    work->sprite.palette3 = LoadObjPalette(gDoorCardPalette, 32);
 
     if (work->sprite.tiles2 == NULL) {
         cb = &gCardBacks[4];
         work->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
-        work->sprite.palette2 = LoadObjPalette(gUnk_09618D38, 32);
+        work->sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
         work->sprite.gfx2 = cb->gfx2;
     }
 }
@@ -1827,12 +1827,12 @@ void UpdateEventKeyTotal(EventKeyCard* w) {
 
     if (w->total <= 9) {
         z = NULL;
-        UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[0], gUnk_0950C478);
+        UpdateSpriteFrameTiles(w->sprite.tiles3, gKeyValueFrames[0], gUnk_0950C478);
         w->sprite.gfx3 = z;
         RequestDma3Copy(w->sprite.tiles3->src + w->total * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
     } else {
         z = NULL;
-        UpdateSpriteFrameTiles(w->sprite.tiles3, gUnk_09EF1198[2], gUnk_0950C478);
+        UpdateSpriteFrameTiles(w->sprite.tiles3, gKeyValueFrames[2], gUnk_0950C478);
         w->sprite.gfx3 = z;
         RequestDma3Copy(w->sprite.tiles3->src + (u16)(w->total / 10) * 128, &gUnk_06010000[w->sprite.tiles3->index * 32], 128);
         RequestDma3Copy(w->sprite.tiles3->src + (w->total - (u16)(w->total / 10) * 10) * 128, &gUnk_06010000[(w->sprite.tiles3->index + 4) * 32], 128);
@@ -1883,12 +1883,12 @@ ObjTiles* AllocKeyValueTiles(u8 a) {
 
     if (a != 0) {
         obj = AllocSpriteFrameTiles(256);
-        UpdateSpriteFrameTiles(obj, gUnk_09EF1198[1], gUnk_0950C478);
+        UpdateSpriteFrameTiles(obj, gKeyValueFrames[1], gUnk_0950C478);
         RequestDma3Copy(&(obj->src)[a * 128], (void*)(OBJ_VRAM0 + (obj->index + 4) * 32), 128);
         RequestDma3Copy(&(obj->src)[0x500], (void*)(OBJ_VRAM0 + obj->index * 32), 128);
     } else {
         obj = AllocSpriteFrameTiles(128);
-        UpdateSpriteFrameTiles(obj, gUnk_09EF1198[0], gUnk_0950C478);
+        UpdateSpriteFrameTiles(obj, gKeyValueFrames[0], gUnk_0950C478);
     }
 
     return obj;
@@ -2066,9 +2066,9 @@ TaskDesc gTaskDescSpotLight = {
 };
 
 #ifdef VERSION_EU
-void* gSelmapEventKeyTitleAnimsByLanguage[5] = { gUnk_09EF1224, gUnkEu_09F7C438, gUnkEu_09F7C450, gUnkEu_09F7C448, gUnkEu_09F7C440 };
-void* gSelmapEventKeyTitleFramesByLanguage[5] = { gUnk_09EF1220, gUnkEu_09F7C434, gUnkEu_09F7C44C, gUnkEu_09F7C444, gUnkEu_09F7C43C };
-void* gSelmapEventKeyTitleTilesByLanguage[5] = { gUnk_093F6ACC, gUnkEu_094C7CCE, gUnkEu_094C9180, gUnkEu_094C8946, gUnkEu_094C8288 };
+void* gSelmapEventKeyTitleAnimsByLanguage[5] = { gSelmapEventKeyTitleAnims, gSelmapEventKeyTitleFrenchAnims, gSelmapEventKeyTitleGermanAnims, gSelmapEventKeyTitleItalianAnims, gSelmapEventKeyTitleSpanishAnims };
+void* gSelmapEventKeyTitleFramesByLanguage[5] = { gSelmapEventKeyTitleFrames, gSelmapEventKeyTitleFrenchFrames, gSelmapEventKeyTitleGermanFrames, gSelmapEventKeyTitleItalianFrames, gSelmapEventKeyTitleSpanishFrames };
+void* gSelmapEventKeyTitleTilesByLanguage[5] = { gSelmapEventKeyTitleTiles, gSelmapEventKeyTitleFrenchTiles, gSelmapEventKeyTitleGermanTiles, gSelmapEventKeyTitleItalianTiles, gSelmapEventKeyTitleSpanishTiles };
 #endif
 
 TaskDesc gTaskDescSELMAPEVKEY = {

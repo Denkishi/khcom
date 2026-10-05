@@ -316,7 +316,7 @@ void LoadBtlRikuPalette(BtlRikuWork* work) {
     if (work->mainSide) {
         work->palette = LoadObjPalette(work->paletteData, 0x20);
     } else {
-        work->palette = LoadObjPalette(gUnk_096FAC64, 0x20);
+        work->palette = LoadObjPalette(gBtlOtherSidePalette, 0x20);
     }
 }
 
@@ -4687,7 +4687,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         u16 t = work->flags | BTL_RIKU_FLAG_HIT_FLASH;
 
         work->flags = t;
-        LoadObjPaletteBank(work->palette->index, gUnk_08F69BC4);
+        LoadObjPaletteBank(work->palette->index, gHitFlashPalette);
     } else if (work->flags & BTL_RIKU_FLAG_HIT_FLASH) {
         u16 t = work->flags & ~BTL_RIKU_FLAG_HIT_FLASH;
 
@@ -4696,7 +4696,7 @@ void task_btl_riku_2(BtlRikuWork* work) {
         if (work->mainSide) {
             LoadObjPaletteBank(work->palette->index, work->paletteData);
         } else {
-            LoadObjPaletteBank(work->palette->index, gUnk_096FAC64);
+            LoadObjPaletteBank(work->palette->index, gBtlOtherSidePalette);
         }
     }
 

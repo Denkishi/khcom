@@ -35,7 +35,7 @@
 static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static const MdMapData sMdMapData = {
-    gBosMdBgTiles, 32768, gUnk_09A3C8BC, 192, { gBosMdBgMap0, gBosMdBgMap1, gBosMdBgMap2, gBosMdBgMap3 }
+    gBosMdBgTiles, 32768, gBosMdBgPalettes, 192, { gBosMdBgMap0, gBosMdBgMap1, gBosMdBgMap2, gBosMdBgMap3 }
 };
 
 static const MdFrameDef sMdFrameDefs[41] = {
@@ -1027,12 +1027,12 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     BosMdSetFrame(work, 0);
     MdAnimStart(work, 0);
-    LoadPalette(gUnk_09A3C97C, (void*)PLTT, 32);
+    LoadPalette(gBosMdPalette, (void*)PLTT, 32);
     SetBtlPaletteFadeExcluded(0, 1);
-    work->bgPalette = gUnk_09A3C97C;
-    work->palette = LoadObjPalette(gUnk_09A3C97C, 32);
+    work->bgPalette = gBosMdPalette;
+    work->palette = LoadObjPalette(gBosMdPalette, 32);
     SetBtlPaletteFadeExcluded(work->palette->index + 16, 1);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     SetBtlPaletteFadeExcluded(work->palette2->index + 16, 1);
     TaskPoolInit(&work->tasks, 6);
     TaskPoolInit(&work->tasks2, 1);
@@ -1115,16 +1115,16 @@ void task_bos_md_2(MdWork* work) {
     }
 
     if (StepHitFlash(&work->sub[0])) {
-        if (work->bgPalette != gUnk_08F69BC4) {
-            LoadPalette(gUnk_08F69BC4, (void*)PLTT, 32);
-            work->bgPalette = gUnk_08F69BC4;
+        if (work->bgPalette != gHitFlashPalette) {
+            LoadPalette(gHitFlashPalette, (void*)PLTT, 32);
+            work->bgPalette = gHitFlashPalette;
         }
 
         pal = work->palette2;
     } else {
-        if (work->bgPalette != gUnk_09A3C97C) {
-            LoadPalette(gUnk_09A3C97C, (void*)PLTT, 32);
-            work->bgPalette = gUnk_09A3C97C;
+        if (work->bgPalette != gBosMdPalette) {
+            LoadPalette(gBosMdPalette, (void*)PLTT, 32);
+            work->bgPalette = gBosMdPalette;
         }
 
         pal = work->palette;
@@ -1443,8 +1443,8 @@ void task_bos_md_fire_0(MdFireWork* work, MdFireArg* arg) {
     work->sub.hp = 20;
     work->sub.maxHp = 20;
     SetBtlObjUnhittable(&work->sub, 1);
-    work->palette = LoadObjPalette(gUnk_09A3C99C, 32);
-    work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
+    work->palette = LoadObjPalette(gBosMdFirePalette, 32);
+    work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->tiles = LoadObjTiles(gBosMdFireTiles, 0x800);
     AnimInit(&work->anim, gBosMdFireAnims, gBosMdFireFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
@@ -1539,7 +1539,7 @@ void task_bos_md_dai_0(MdDaiWork* work, void** args) {
     ColliderInit(p, 7, 24, 24);
     ColliderSetPosition(p, work->x, work->y, work->z);
     ColliderSetDisabled(p, 1);
-    work->palette = LoadObjPalette(gUnk_09A3C9BC, 32);
+    work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
 }
 
@@ -1671,7 +1671,7 @@ void task_bos_md_hahen_0(MdHahenWork* work, s32* src) {
     work->vy = gSineTable[angle] * speed >> 8;
     work->vz = -((GetRandom() & 0x1FF) + 0x100);
     work->timer = 3;
-    work->palette = LoadObjPalette(gUnk_09A3C9BC, 32);
+    work->palette = LoadObjPalette(gBosMdDaiPalette, 32);
     work->tiles = LoadObjTiles(gBosMdDaiTiles, 0x480);
     work->gfx = gBosMdDaiFrames[GetRandom() % 2];
 }

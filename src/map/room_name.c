@@ -111,7 +111,7 @@ const MapNameText* gRoomNames[28] = {
 
 void task_room_name_0(RoomNameWork* work, s32 arg) {
     work->tiles = LoadObjTiles(gUnk_0993AF64, 0x800);
-    work->palette = LoadObjPalette(gUnk_099910C4, 0x20);
+    work->palette = LoadObjPalette(gMapFloorNamePalette, 0x20);
     work->gfx = gUnk_09EF8DA4[0];
     work->nameId = arg;
     work->x2 = 0x5C00;

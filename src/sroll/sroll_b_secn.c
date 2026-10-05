@@ -34,7 +34,7 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* a) {
 #else
         work->tiles = LoadObjTiles(gSrollSecnThemeSongTiles, 606 * 32);
 #endif
-        work->palette = LoadObjPalette(gUnk_09D6CF34, 32);
+        work->palette = LoadObjPalette(gSrollSecnThemeSongPalette, 32);
         AnimInit(&work->anim, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);
         AnimStart(&work->anim, 0, 0);
         AnimInit(&work->anim2, gSrollSecnThemeSongAnims, gSrollSecnThemeSongFrames);

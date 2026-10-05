@@ -59,8 +59,8 @@ static const CardHelpDef sBlizzaraHelpDef = {
 #include "card_help_pages.inc"
 #endif
 #if defined(VERSION_JP)
-static const CardHelpDef sUnk_0903BFB4 = {
-    gUnk_09EE7D44,
+static const CardHelpDef sSecretHelpDef = {
+    gSecretHelpTexts,
     2,
 };
 #endif
@@ -363,8 +363,8 @@ static const CardHelpDef sConfuseHelpDef = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
-static const CardHelpDef sUnk_0903BED4 = {
-    gUnk_09EE7D74,
+static const CardHelpDef sSleight57HelpDef = {
+    gSleight57HelpTexts,
     2,
 };
 #endif
@@ -420,8 +420,8 @@ static const CardHelpDef sBlazingDonaldHelpDef = {
 };
 
 #if defined(VERSION_US) || defined(VERSION_JP)
-static const CardHelpDef sUnk_0903BF2C = {
-    gUnk_09EE7D7C,
+static const CardHelpDef sSleight68HelpDef = {
+    gSleight68HelpTexts,
     2,
 };
 #endif
@@ -507,8 +507,8 @@ static const CardHelpDef sDarkAuraHelpDef = {
 };
 
 #if defined(VERSION_US)
-static const CardHelpDef sUnk_0903BFB4 = {
-    gUnk_09EE7D44,
+static const CardHelpDef sSecretHelpDef = {
+    gSecretHelpTexts,
     4,
 };
 #endif
@@ -1325,7 +1325,7 @@ const CardHelpText* gMmMiracleHelpTexts[] = {
     gCardHelpTextJp_0900D158,
 };
 
-const CardHelpText* gUnk_09EE7D44[] = {
+const CardHelpText* gSecretHelpTexts[] = {
     gCardHelpTextJp_0900D16C,
     gCardHelpTextJp_0900D174,
 };
@@ -1437,7 +1437,7 @@ const CardHelpText* gConfuseHelpTexts[] = {
 };
 
 #if defined(VERSION_JP)
-const CardHelpText* gUnk_09EE7D74[] = {
+const CardHelpText* gSleight57HelpTexts[] = {
     gCardHelpTextJp_0900C6E0,
     gCardHelpTextJp_0900C718,
 };
@@ -1574,7 +1574,7 @@ const CardHelpText* gBlazingDonaldHelpTexts[] = {
 };
 
 #if defined(VERSION_JP)
-const CardHelpText* gUnk_09EE7D7C[] = {
+const CardHelpText* gSleight68HelpTexts[] = {
     gCardHelpTextJp_0900CAC4,
     gCardHelpTextJp_0900CAFC,
 };
@@ -1795,7 +1795,7 @@ const CardHelpText* gDarkAuraHelpTexts[] = {
 };
 
 #if defined(VERSION_US)
-const CardHelpText* gUnk_09EE7D44[] = {
+const CardHelpText* gSecretHelpTexts[] = {
     gCardHelpTextUs_0903BCFA,
     gCardHelpTextUs_0903BCFA,
     gCardHelpTextUs_0903BCFA,
@@ -1816,12 +1816,12 @@ const CardHelpText* gMmMiraclePairHelpTexts[] = {
     gCardHelpTextUs_0903BCB8,
 };
 
-const CardHelpText* gUnk_09EE7D74[] = {
+const CardHelpText* gSleight57HelpTexts[] = {
     gCardHelpTextUs_0903BCFA,
     gCardHelpTextUs_0903BCFA,
 };
 
-const CardHelpText* gUnk_09EE7D7C[] = {
+const CardHelpText* gSleight68HelpTexts[] = {
     gCardHelpTextUs_0903BCFA,
     gCardHelpTextUs_0903BCFA,
 };
@@ -1857,7 +1857,7 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
     work->active = active;
     TaskPoolInit(&work->tasks, 1);
     work->tiles = LoadObjTiles(gStockInfoWindowTiles, 0x12A0);
-    work->palette = LoadObjPalette(gUnk_09613F78, 32);
+    work->palette = LoadObjPalette(gStockInfoWindowPalette, 32);
 
     for (i = 16; i < 32; i++) {
         FadeSetPaletteExcluded(i, 1);
@@ -2017,7 +2017,7 @@ const CardHelpDef* gCardHelpDefs[] = {
     &sTerrorHelpDef,
     &sConfuseHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &sUnk_0903BED4,
+    &sSleight57HelpDef,
 #elif defined(VERSION_EU)
     NULL,
 #endif
@@ -2032,7 +2032,7 @@ const CardHelpDef* gCardHelpDefs[] = {
     &sHolyHelpDef,
     &sBlazingDonaldHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &sUnk_0903BF2C,
+    &sSleight68HelpDef,
 #elif defined(VERSION_EU)
     NULL,
 #endif
@@ -2053,28 +2053,28 @@ const CardHelpDef* gCardHelpDefs[] = {
     &sDarkFiragaHelpDef,
     &sDarkAuraHelpDef,
 #if defined(VERSION_US) || defined(VERSION_JP)
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
-    &sUnk_0903BFB4,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
+    &sSecretHelpDef,
 #endif
 };
 

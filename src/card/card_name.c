@@ -63,7 +63,7 @@ void CardName_0(CardNameWork* work) {
 #endif
 #endif
 #ifndef VERSION_JP
-    work->palette = LoadObjPalette(gUnk_09614798, 32);
+    work->palette = LoadObjPalette(gTextYellowPalette, 32);
 #endif
 
 #ifdef VERSION_EU
@@ -108,7 +108,7 @@ void CardName_0(CardNameWork* work) {
     v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
     work->messageX = v;
 #endif
-    work->tiles = LoadObjTiles(gUnk_093F98AC, 0x1800);
+    work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
     work->palette2 = pal;
     FadeSetPaletteExcluded(pal->index + 16, 1);
@@ -156,9 +156,9 @@ void CardName_3(CardNameWork* work) {
 
 void PremireEffectInit(PremiumCardEffectWork* work, s16* a) {
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_09619158, 32);
-    SetObjTileSource(work->tiles, gUnk_093F762E);
-    AnimInit(&work->anim, gUnk_09EF1260, gUnk_09EF1230);
+    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    SetObjTileSource(work->tiles, gCardSparkleTiles);
+    AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->centerX = a[1] << 8;
@@ -176,9 +176,9 @@ void PremireEffectInit(PremiumCardEffectWork* work, s16* a) {
 
 void PremireEffectConvergeInit(PremiumCardEffectWork* work, s16* a) {
     work->tiles = AllocObjTiles(128, NULL);
-    work->palette = LoadObjPalette(gUnk_09619158, 32);
-    SetObjTileSource(work->tiles, gUnk_093F762E);
-    AnimInit(&work->anim, gUnk_09EF1260, gUnk_09EF1230);
+    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    SetObjTileSource(work->tiles, gCardSparkleTiles);
+    AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->centerX = a[1] << 8;
@@ -277,9 +277,9 @@ void InitPrintLayer(u8 bg) {
 
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
-    LoadBgTiles(bg, gUnk_09036380, 0x1C00);
+    LoadBgTiles(bg, gPrintFontTiles, 0x1C00);
     LoadBgMap(bg, gUnk_08125E24, 0x800);
-    LoadBgPalette(bg, gUnk_09036300, 0x80);
+    LoadBgPalette(bg, gPrintFontPalettes, 0x80);
     EnableBg(bg);
     sPrintBg = bg;
     p = &sPrintLines;

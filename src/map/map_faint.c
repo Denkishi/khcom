@@ -20,7 +20,7 @@
 void Task_MapFaint_0(MapFaintWork* work, FldObj* obj) {
     work->obj = obj;
     work->tiles = AllocObjTiles(0x80, gBtlBadstatusStunTiles);
-    work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
+    work->palette = LoadObjPalette(gCommonObjPalette, 32);
     AnimInit(&work->anim, gBtlBadstatusStunAnims, gBtlBadstatusStunFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 }

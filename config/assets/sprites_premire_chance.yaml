@@ -32,50 +32,50 @@ objects:
     data_start: 0x09F75F84
     data_end: 0x09F75F98
 entries:
-- name: gUnk_09EEA16C
+- name: gPremireChanceTitleFrames
   record: SpriteTable
-  items: [gUnk_0908BB54]
+  items: [gPremireChanceTitleFrame0]
   us:
     address: 0x09EEA16C
   jp:
     address: 0x09EC1560
   eu:
     address: 0x09F75F84
-- name: gUnk_09EEA170
+- name: gPremireChanceTitleAnims
   record: AnimTable
-  items: [gUnk_0908BB76]
+  items: [gPremireChanceTitleAnim0]
   us:
     address: 0x09EEA170
   jp:
     address: 0x09EC1564
   eu:
     address: 0x09F75F88
-- name: gUnk_09EEA174
+- name: gPremireChanceBarFrames
   record: SpriteTable
-  items: [gUnk_0908BF40, gUnk_0908BF74]
+  items: [gPremireChanceBarFrame0, gPremireChanceBarFrame1]
   us:
     address: 0x09EEA174
   jp:
     address: 0x09EC1568
   eu:
     address: 0x09F75F8C
-- name: gUnk_09EEA17C
+- name: gPremireChanceBarAnims
   record: AnimTable
-  items: [gUnk_0908BFA8]
+  items: [gPremireChanceBarAnim0]
   us:
     address: 0x09EEA17C
   jp:
     address: 0x09EC1570
   eu:
     address: 0x09F75F94
-- name: gUnk_0908BB80
+- name: gPremireChanceTitleTiles
   format: sprite_sheet
   align: 4
   cell: [120, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_0908BB54
+  - symbol: gPremireChanceTitleFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
@@ -83,7 +83,7 @@ entries:
     - [16x16, 96, 0]
     - [8x16, 112, 0]
   animations:
-  - symbol: gUnk_0908BB76
+  - symbol: gPremireChanceTitleAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -95,14 +95,14 @@ entries:
   eu:
     address: 0x09161E28
     size: 1004
-- name: gUnk_0908BFB2
+- name: gPremireChanceBarTiles
   format: sprite_sheet
   align: 4
   cell: [240, 8]
   anchor: [120, 0]
   columns: 2
   frames:
-  - symbol: gUnk_0908BF40
+  - symbol: gPremireChanceBarFrame0
     pieces:
     - [32x8, -120, 0]
     - [32x8, -88, 0, {fresh: true}]
@@ -112,7 +112,7 @@ entries:
     - [32x8, 40, 0, {fresh: true}]
     - [32x8, 72, 0, {fresh: true}]
     - [16x8, 104, 0]
-  - symbol: gUnk_0908BF74
+  - symbol: gPremireChanceBarFrame1
     pieces:
     - [32x8, -120, 0, {vflip: true, same: [0, 0]}]
     - [32x8, -88, 0, {vflip: true, same: [0, 1]}]
@@ -123,7 +123,7 @@ entries:
     - [32x8, 72, 0, {vflip: true}]
     - [16x8, 104, 0, {vflip: true}]
   animations:
-  - symbol: gUnk_0908BFA8
+  - symbol: gPremireChanceBarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:

@@ -173,7 +173,7 @@ void RELOAD_CHILDREN_2(ReloadChildWork* work) {
     if (work->args.index <= 3) {
         x = (work->offsetX + *work->args.parentX) >> 8;
         y = (work->offsetY + *work->args.parentY) >> 8;
-        DrawSprite(x, y + (gSineTable[work->angle] >> 8), gUnk_09EEA344[0], work->tiles, work->palette, NULL, 0, 50);
+        DrawSprite(x, y + (gSineTable[work->angle] >> 8), gReloadChildRedFrames[0], work->tiles, work->palette, NULL, 0, 50);
     }
 
     if ((s8)work->args.index < 0) {
@@ -540,7 +540,7 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->tiles2 = LoadObjTiles(back->tiles, 0x280);
     work->tiles3 = LoadObjTiles(back->tiles3, 0x600);
     work->palette2 = LoadObjPalette(gCard00Palette, 32);
-    work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
+    work->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
     work->posX = args->x;
@@ -640,7 +640,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
     back = &gCardBacks[work->stat.category];
     DrawSprite(work->x, (u16)work->y - 8, back->gfx, work->tiles2, work->palette2, affine, pal,
                work->priority);
-    gfx = gUnk_09EE981C[work->stat.value];
+    gfx = gCardValueDigitFrames[work->stat.value];
 
     if (def->category != 3) {
         DrawSprite(work->x, (u16)work->y - 8, gfx, work->tiles4, work->palette2, affine, pal,
@@ -877,9 +877,9 @@ void Card_EFFECT_0(CardEffectWork* work, CardEffectArgs* a) {
     }
 
     work->tiles = AllocObjTiles(0x80, NULL);
-    work->palette = LoadObjPalette(gUnk_09619158, 32);
-    SetObjTileSource(work->tiles, gUnk_093F762E);
-    AnimInit(&work->anim, gUnk_09EF1260, gUnk_09EF1230);
+    work->palette = LoadObjPalette(gCardSparklePalette, 32);
+    SetObjTileSource(work->tiles, gCardSparkleTiles);
+    AnimInit(&work->anim, gCardSparkleAnims, gCardSparkleFrames);
     AnimStart(&work->anim, GetRandom() % 3, 0);
     work->gfx = AnimGetGfx(&work->anim);
     (*work->args.count)++;
@@ -1002,10 +1002,10 @@ ScrollBarWork* CreateScrollbar(void* pool, u16 a, u16 b, u16 c, u16 d, u16 e) {
 }
 
 void* gReloadChildTiles[4] = {
-    gUnk_090994A4,
-    gUnk_0909937C,
-    gUnk_09099410,
-    gUnk_09099538,
+    gReloadChildWhiteTiles,
+    gReloadChildRedTiles,
+    gReloadChildBlueTiles,
+    gReloadChildBlackTiles,
 };
 
 TaskDesc gTaskDescReloadChildren = {
@@ -1018,26 +1018,26 @@ TaskDesc gTaskDescReloadChildren = {
 };
 
 void* gRevCountTileSources[4] = {
-    gUnk_0909D2AC,
-    gUnk_0909D2AC,
-    gUnk_0909D2AC,
-    gUnk_0909D2AC,
+    gRevCountBlackTiles,
+    gRevCountBlackTiles,
+    gRevCountBlackTiles,
+    gRevCountBlackTiles,
 };
 
 void** gRevCountSprites[4] = {
-    gUnk_09EEA5C4,
-    gUnk_09EEA5C4,
-    gUnk_09EEA5C4,
-    gUnk_09EEA5C4,
+    gRevCountRedFrames,
+    gRevCountRedFrames,
+    gRevCountRedFrames,
+    gRevCountRedFrames,
 };
 
-AnimHeader** gUnk_09EE76E0 = gUnk_09EEA750;
+AnimHeader** gUnk_09EE76E0 = gRevCountRedAnims;
 
-AnimHeader** gUnk_09EE76E4 = gUnk_09EEABA8;
+AnimHeader** gUnk_09EE76E4 = gRevCountBlackAnims;
 
-AnimHeader** gUnk_09EE76E8 = gUnk_09EEA97C;
+AnimHeader** gUnk_09EE76E8 = gRevCountBlueAnims;
 
-AnimHeader** gUnk_09EE76EC = gUnk_09EEADD4;
+AnimHeader** gUnk_09EE76EC = gRevCountGrayAnims;
 
 TaskDesc gTaskDescREVCOUNT = {
     "REV_COUNT",
@@ -1049,21 +1049,21 @@ TaskDesc gTaskDescREVCOUNT = {
 };
 
 void* gReloadTiles[3] = {
-    gUnk_0909885E,
-    gUnk_09098E0E,
-    gUnk_09098B36,
+    gReloadRedTiles,
+    gReloadGreenTiles,
+    gReloadBlueTiles,
 };
 
 AnimHeader** gReloadAnims[3] = {
-    gUnk_09EEA304,
-    gUnk_09EEA32C,
-    gUnk_09EEA318,
+    gReloadRedAnims,
+    gReloadGreenAnims,
+    gReloadBlueAnims,
 };
 
 void** gReloadFrames[3] = {
-    gUnk_09EEA2F4,
-    gUnk_09EEA31C,
-    gUnk_09EEA308,
+    gReloadRedFrames,
+    gReloadGreenFrames,
+    gReloadBlueFrames,
 };
 
 TaskDesc gTaskDescRELOAD = {

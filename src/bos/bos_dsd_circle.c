@@ -70,7 +70,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
             }
 
             LoadObjPaletteBank(work->dsd->palette->index,
-                               &gUnk_096FB904[work->paletteFrame * 16]);
+                               &gBosDsdCircleCyclePalettes[work->paletteFrame * 16]);
         }
 
         if (work->summonTimer == 60 || work->summonTimer == 110) {
@@ -81,7 +81,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
         work->summonTimer++;
         break;
     case 4:
-        LoadObjPaletteBank(work->dsd->palette->index, gUnk_096FB904);
+        LoadObjPaletteBank(work->dsd->palette->index, gBosDsdCircleCyclePalettes);
         work->frame = work->dsd->bgFrame - 21;
         break;
     case 5:

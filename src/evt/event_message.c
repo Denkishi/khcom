@@ -1532,7 +1532,7 @@ static const MsgFaceAnim sTalk50FaceAnims[4] = {
     },
     {
         gTalk5001Tiles,
-        gUnk_09615058,
+        gTalk5001Palette,
         gTalk5001Frames,
         gTalk5001Anims + 2,
         4,
@@ -6222,7 +6222,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
                     }
 
                     if (work->palette == NULL) {
-                        work->palette = LoadObjPalette(gUnk_09614718, 32);
+                        work->palette = LoadObjPalette(gTextWhitePalette, 32);
 
                         if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                             FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -6278,7 +6278,7 @@ static u8 msgwin_1(MsgWinWork* work, void* a) {
             }
 
             if (work->palette == NULL) {
-                work->palette = LoadObjPalette(gUnk_09614718, 32);
+                work->palette = LoadObjPalette(gTextWhitePalette, 32);
 
                 if ((e->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                 FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -6983,13 +6983,13 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     work->timer = 0;
     work->tiles2 = AllocObjTiles(288, NULL);
-    work->palette2 = LoadObjPalette(gUnk_09614418, 32);
-    LoadObjPaletteBank(work->palette2->index, gUnk_09614418);
+    work->palette2 = LoadObjPalette(gDialogBoxPalette, 32);
+    LoadObjPaletteBank(work->palette2->index, gDialogBoxPalette);
     SetObjTileSource(work->tiles2, gHandCursorTiles);
     AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
-    work->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);
+    work->tiles3 = LoadObjTiles(gMsgBoxTiles, 4032);
     work->palette3 = LoadObjPalette(gCard00Palette, 32);
     LoadObjPaletteBank(work->palette3->index, gCard00Palette);
     FadeSetPaletteExcluded(work->palette->index + 16, 1);
@@ -7093,7 +7093,7 @@ void msgwait_yesno_2(MsgWaitWork* work) {
 
         break;
     case 1:
-        DrawSprite(120, 80, gUnk_09EF126C[1], work->tiles3, work->palette3, NULL, 0, 10);
+        DrawSprite(120, 80, gMsgBoxFrames[1], work->tiles3, work->palette3, NULL, 0, 10);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
         DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 67, work->textSlots, work->palette4, 0, work->textSlotCount);
         DrawTextSlots((240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) >> 1, 82, work->textSlots2, work->palette4, 0, work->textSlotCount2);

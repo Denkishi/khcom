@@ -2782,7 +2782,7 @@ entries:
     size: 3198
 - name: gUnk_099A7C98
   format: sprite_sheet
-  tiles: gUnk_099D42FC
+  tiles: gBosMdForearmTiles
   align: 4
   cell: [72, 64]
   anchor: [32, 40]
@@ -2867,7 +2867,7 @@ entries:
     size: 362
 - name: gUnk_099A7E04
   format: sprite_sheet
-  tiles: gUnk_099D559C
+  tiles: gBosMdFrame0ArmTiles
   align: 4
   cell: [56, 120]
   anchor: [-44, -7]
@@ -2901,7 +2901,7 @@ entries:
     size: 80
 - name: gUnk_099A7E54
   format: sprite_sheet
-  tiles: gUnk_099D5D3C
+  tiles: gBosMdFrame2ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-43, -4]
@@ -2934,7 +2934,7 @@ entries:
     size: 74
 - name: gUnk_099A7EA0
   format: sprite_sheet
-  tiles: gUnk_099D65BC
+  tiles: gBosMdFrame3ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-40, -2]
@@ -2969,7 +2969,7 @@ entries:
     size: 86
 - name: gUnk_099A7EF8
   format: sprite_sheet
-  tiles: gUnk_099D6DBC
+  tiles: gBosMdFrame7ArmTiles
   align: 4
   cell: [56, 152]
   anchor: [-40, 24]
@@ -3003,7 +3003,7 @@ entries:
     size: 80
 - name: gUnk_099A7F48
   format: sprite_sheet
-  tiles: gUnk_099D76FC
+  tiles: gBosMdFrame8ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-41, 0]
@@ -3040,7 +3040,7 @@ entries:
     size: 98
 - name: gUnk_099A7FAC
   format: sprite_sheet
-  tiles: gUnk_099D7E9C
+  tiles: gBosMdFrame9ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-42, 0]
@@ -3075,7 +3075,7 @@ entries:
     size: 86
 - name: gUnk_099A8004
   format: sprite_sheet
-  tiles: gUnk_099D86DC
+  tiles: gBosMdFrame10ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-40, 0]
@@ -3110,7 +3110,7 @@ entries:
     size: 86
 - name: gUnk_099A805C
   format: sprite_sheet
-  tiles: gUnk_099D8EFC
+  tiles: gBosMdFrame11ArmTiles
   align: 4
   cell: [56, 136]
   anchor: [-42, 7]
@@ -3150,7 +3150,7 @@ entries:
     size: 116
 - name: gUnk_099A80D0
   format: sprite_sheet
-  tiles: gUnk_099D983C
+  tiles: gBosMdFrame12ArmTiles
   align: 4
   cell: [57, 136]
   anchor: [-40, 9]
@@ -3187,7 +3187,7 @@ entries:
     size: 98
 - name: gUnk_099A8134
   format: sprite_sheet
-  tiles: gUnk_099DA1BC
+  tiles: gBosMdFrame13ArmTiles
   align: 4
   cell: [56, 144]
   anchor: [-40, 16]
@@ -3223,7 +3223,7 @@ entries:
     size: 92
 - name: gUnk_099A8190
   format: sprite_sheet
-  tiles: gUnk_099DAA5C
+  tiles: gBosMdFrame14ArmTiles
   align: 4
   cell: [56, 128]
   anchor: [-40, 0]
@@ -3257,7 +3257,7 @@ entries:
     size: 80
 - name: gUnk_099A81E0
   format: sprite_sheet
-  tiles: gUnk_099DB23C
+  tiles: gBosMdFrame15ArmTiles
   align: 4
   cell: [64, 136]
   anchor: [-36, 6]
@@ -3287,7 +3287,7 @@ entries:
     size: 56
 - name: gUnk_099A8218
   format: sprite_sheet
-  tiles: gUnk_099DBB5C
+  tiles: gBosMdFrame16ArmTiles
   align: 4
   cell: [64, 128]
   anchor: [-32, -2]
@@ -3322,7 +3322,7 @@ entries:
     size: 86
 - name: gUnk_099A8270
   format: sprite_sheet
-  tiles: gUnk_099DC2DC
+  tiles: gBosMdFrame17ArmTiles
   align: 4
   cell: [64, 120]
   anchor: [-32, -8]
@@ -3353,7 +3353,7 @@ entries:
     size: 62
 - name: gUnk_099A82B0
   format: sprite_sheet
-  tiles: gUnk_099DC93C
+  tiles: gBosMdFrame18ArmTiles
   align: 4
   cell: [64, 112]
   anchor: [-32, -16]
@@ -3382,7 +3382,7 @@ entries:
     size: 50
 - name: gUnk_099A82E4
   format: sprite_sheet
-  tiles: gUnk_099DCEBC
+  tiles: gBosMdFrame19ArmTiles
   align: 4
   cell: [88, 96]
   anchor: [-8, 16]
@@ -3414,7 +3414,7 @@ entries:
     size: 68
 - name: gUnk_099A8328
   format: sprite_sheet
-  tiles: gUnk_099DD73C
+  tiles: gBosMdFrame20ArmTiles
   align: 4
   cell: [72, 88]
   anchor: [-24, 8]
@@ -3445,7 +3445,7 @@ entries:
     size: 62
 - name: gUnk_099A8368
   format: sprite_sheet
-  tiles: gUnk_099DDEBC
+  tiles: gBosMdFrame21ArmTiles
   align: 4
   cell: [64, 104]
   anchor: [-35, -3]
@@ -3478,7 +3478,7 @@ entries:
     size: 74
 - name: gUnk_099A83B4
   format: sprite_sheet
-  tiles: gUnk_099DE5DC
+  tiles: gBosMdFrame22ArmTiles
   align: 4
   cell: [56, 120]
   anchor: [-43, -7]
@@ -3511,7 +3511,7 @@ entries:
     size: 74
 - name: gUnk_099A8400
   format: sprite_sheet
-  tiles: gUnk_099DED9C
+  tiles: gBosMdFrame4ArmTiles
   align: 4
   cell: [72, 136]
   anchor: [-22, 4]
@@ -3641,7 +3641,7 @@ entries:
     size: 3198
 - name: gUnk_099A8468
   format: sprite_sheet
-  tiles: gUnk_099DF6DC
+  tiles: gBosMdFrame5ArmTiles
   align: 4
   cell: [72, 128]
   anchor: [-23, 1]
@@ -3677,7 +3677,7 @@ entries:
     size: 92
 - name: gUnk_099A84C4
   format: sprite_sheet
-  tiles: gUnk_099E003C
+  tiles: gBosMdFrame6ArmTiles
   align: 4
   cell: [72, 128]
   anchor: [-19, 0]
@@ -3717,7 +3717,7 @@ entries:
     size: 116
 - name: gUnk_099A8538
   format: sprite_sheet
-  tiles: gUnk_099E09BC
+  tiles: gBosMdFrame34ArmTiles
   align: 4
   cell: [72, 128]
   anchor: [-21, -2]
@@ -3752,7 +3752,7 @@ entries:
     size: 86
 - name: gUnk_099A8590
   format: sprite_sheet
-  tiles: gUnk_099E133C
+  tiles: gBosMdFrame35ArmTiles
   align: 4
   cell: [72, 128]
   anchor: [-17, 0]
@@ -3791,7 +3791,7 @@ entries:
     size: 110
 - name: gUnk_099A8600
   format: sprite_sheet
-  tiles: gUnk_099E1C9C
+  tiles: gBosMdFrame36ArmTiles
   align: 4
   cell: [72, 112]
   anchor: [-25, -16]
@@ -3827,7 +3827,7 @@ entries:
     size: 92
 - name: gUnk_099A865C
   format: sprite_sheet
-  tiles: gUnk_099E25DC
+  tiles: gBosMdFrame23ArmTiles
   align: 4
   cell: [72, 120]
   anchor: [-24, -12]
@@ -3864,7 +3864,7 @@ entries:
     size: 98
 - name: gUnk_099A86C0
   format: sprite_sheet
-  tiles: gUnk_099E2EFC
+  tiles: gBosMdFrame38ArmTiles
   align: 4
   cell: [55, 119]
   anchor: [-44, -8]
@@ -3899,7 +3899,7 @@ entries:
     size: 86
 - name: gUnk_099A8758
   format: sprite_sheet
-  tiles: gUnk_099E3E7C
+  tiles: gWorldImageWonderlandTiles
   align: 4
   cell: [64, 106]
   anchor: [35, 60]
@@ -3926,7 +3926,7 @@ entries:
     size: 38
 - name: gUnk_099A8780
   format: sprite_sheet
-  tiles: gUnk_099E4E7C
+  tiles: gWorldImageDestinyIslandsTiles
   align: 4
   cell: [86, 93]
   anchor: [42, 48]
@@ -3957,7 +3957,7 @@ entries:
     size: 62
 - name: gUnk_099A87C0
   format: sprite_sheet
-  tiles: gUnk_099E5E7C
+  tiles: gWorldImageTraverseTownTiles
   align: 4
   cell: [86, 93]
   anchor: [43, 39]
@@ -3987,7 +3987,7 @@ entries:
     size: 56
 - name: gUnk_099A87F8
   format: sprite_sheet
-  tiles: gUnk_099E6E7C
+  tiles: gWorldImageOlympusColiseumTiles
   align: 4
   cell: [71, 86]
   anchor: [40, 38]
@@ -4015,7 +4015,7 @@ entries:
     size: 44
 - name: gUnk_099A8824
   format: sprite_sheet
-  tiles: gUnk_099E7E7C
+  tiles: gWorldImageAgrabahTiles
   align: 4
   cell: [64, 109]
   anchor: [35, 49]
@@ -4042,7 +4042,7 @@ entries:
     size: 38
 - name: gUnk_099A884C
   format: sprite_sheet
-  tiles: gUnk_099E8E7C
+  tiles: gWorldImageMonstroTiles
   align: 4
   cell: [102, 39]
   anchor: [50, 15]
@@ -4071,7 +4071,7 @@ entries:
     size: 50
 - name: gUnk_099A8880
   format: sprite_sheet
-  tiles: gUnk_099E9E7C
+  tiles: gWorldImageAtlanticaTiles
   align: 4
   cell: [78, 64]
   anchor: [39, 27]
@@ -4097,7 +4097,7 @@ entries:
     size: 32
 - name: gUnk_099A88A0
   format: sprite_sheet
-  tiles: gUnk_099EAE7C
+  tiles: gWorldImageHalloweenTownTiles
   align: 4
   cell: [79, 117]
   anchor: [40, 47]
@@ -4126,7 +4126,7 @@ entries:
     size: 50
 - name: gUnk_099A88D4
   format: sprite_sheet
-  tiles: gUnk_099EBE7C
+  tiles: gWorldImageNeverLandTiles
   align: 4
   cell: [64, 117]
   anchor: [42, 63]
@@ -4154,7 +4154,7 @@ entries:
     size: 44
 - name: gUnk_099A8900
   format: sprite_sheet
-  tiles: gUnk_099ECE7C
+  tiles: gWorldImage100AcreWoodTiles
   align: 4
   cell: [64, 64]
   anchor: [36, 29]
@@ -4178,7 +4178,7 @@ entries:
     size: 20
 - name: gUnk_099A8914
   format: sprite_sheet
-  tiles: gUnk_099EDE7C
+  tiles: gPooAltImageTiles
   palette: gPooAltImagePalettes
   align: 4
   cell: [64, 64]
@@ -4204,7 +4204,7 @@ entries:
     size: 26
 - name: gUnk_099A8930
   format: sprite_sheet
-  tiles: gUnk_099EEE7C
+  tiles: gWorldImageHollowBastionTiles
   align: 4
   cell: [64, 116]
   anchor: [37, 53]
@@ -4232,7 +4232,7 @@ entries:
     size: 44
 - name: gUnk_099A895C
   format: sprite_sheet
-  tiles: gUnk_099EFE7C
+  tiles: gWorldImageTwilightTownTiles
   align: 4
   cell: [70, 70]
   anchor: [38, 25]
@@ -4258,7 +4258,7 @@ entries:
     size: 32
 - name: gUnk_099A897C
   format: sprite_sheet
-  tiles: gUnk_099F0E7C
+  tiles: gWorldImageCastleOblivionTiles
   align: 4
   cell: [78, 70]
   anchor: [44, 25]

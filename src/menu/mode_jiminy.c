@@ -78,32 +78,32 @@ static const JiminyEntry sJiminyEntries[21] = {
 
 #if defined(VERSION_US)
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { gUnk_0815B502, gJiminyStoryTale1Lines, 22, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B51E, gJiminyStoryTale2Lines, 19, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B53C, gJiminyStoryTale3Lines, 18, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815B55C, gJiminyStoryTale4Lines, 22, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A518, gJiminyStoryTraverseTownLines, 20, gUnk_099A87C0, gUnk_09A3CCDC, gUnk_099E5E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A534, gJiminyStoryWonderlandLines, 26, gUnk_099A8758, gUnk_09A3CC9C, gUnk_099E3E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A54A, gJiminyStoryOlympusColiseumLines, 17, gUnk_099A87F8, gUnk_09A3CCFC, gUnk_099E6E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A56C, gJiminyStoryAgrabahLines, 32, gUnk_099A8824, gUnk_09A3CD1C, gUnk_099E7E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A57C, gJiminyStoryHalloweenTownLines, 22, gUnk_099A88A0, gUnk_09A3CD7C, gUnk_099EAE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A59A, gJiminyStoryMonstroLines, 25, gUnk_099A884C, gUnk_09A3CD3C, gUnk_099E8E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
-    { gUnk_0815A5AA, gJiminyStoryAtlanticaLines, 25, gUnk_099A8880, gUnk_09A3CD5C, gUnk_099E9E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A5BE, gJiminyStoryNeverLandLines, 27, gUnk_099A88D4, gUnk_09A3CD9C, gUnk_099EBE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A5D4, gJiminyStoryHollowBastionLines, 25, gUnk_099A8930, gUnk_09A3CE1C, gUnk_099EEE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A5F2, gJiminyStory100AcreWoodLines, 9, gUnk_099A8900, gUnk_09A3CDBC, gUnk_099ECE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A60E, gJiminyStoryTwilightTownLines, 15, gUnk_099A895C, gUnk_09A3CE3C, gUnk_099EFE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A62A, gJiminyStoryDestinyIslandsLines, 16, gUnk_099A8780, gUnk_09A3CCBC, gUnk_099E4E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815A64A, gJiminyStoryCastleOblivionLines, 24, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815B502, gJiminyStoryTale1Lines, 22, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815B51E, gJiminyStoryTale2Lines, 19, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815B53C, gJiminyStoryTale3Lines, 18, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815B55C, gJiminyStoryTale4Lines, 22, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A518, gJiminyStoryTraverseTownLines, 20, gUnk_099A87C0, gUnk_09A3CCDC, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A534, gJiminyStoryWonderlandLines, 26, gUnk_099A8758, gUnk_09A3CC9C, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A54A, gJiminyStoryOlympusColiseumLines, 17, gUnk_099A87F8, gUnk_09A3CCFC, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A56C, gJiminyStoryAgrabahLines, 32, gUnk_099A8824, gUnk_09A3CD1C, gWorldImageAgrabahTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A57C, gJiminyStoryHalloweenTownLines, 22, gUnk_099A88A0, gUnk_09A3CD7C, gWorldImageHalloweenTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A59A, gJiminyStoryMonstroLines, 25, gUnk_099A884C, gUnk_09A3CD3C, gWorldImageMonstroTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
+    { gUnk_0815A5AA, gJiminyStoryAtlanticaLines, 25, gUnk_099A8880, gUnk_09A3CD5C, gWorldImageAtlanticaTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A5BE, gJiminyStoryNeverLandLines, 27, gUnk_099A88D4, gUnk_09A3CD9C, gWorldImageNeverLandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A5D4, gJiminyStoryHollowBastionLines, 25, gUnk_099A8930, gUnk_09A3CE1C, gWorldImageHollowBastionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A5F2, gJiminyStory100AcreWoodLines, 9, gUnk_099A8900, gUnk_09A3CDBC, gWorldImage100AcreWoodTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A60E, gJiminyStoryTwilightTownLines, 15, gUnk_099A895C, gUnk_09A3CE3C, gWorldImageTwilightTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A62A, gJiminyStoryDestinyIslandsLines, 16, gUnk_099A8780, gUnk_09A3CCBC, gWorldImageDestinyIslandsTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815A64A, gJiminyStoryCastleOblivionLines, 24, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { gUnk_0815C01E, gJiminyRikuStoryTale1Lines, 41, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C03A, gJiminyRikuStoryTale2Lines, 26, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C058, gJiminyRikuStoryTale3Lines, 20, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C078, gJiminyRikuStoryTale4Lines, 20, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C096, gJiminyRikuStoryTale5Lines, 23, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnk_0815C0B2, gJiminyRikuStoryTale6Lines, 31, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C01E, gJiminyRikuStoryTale1Lines, 41, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C03A, gJiminyRikuStoryTale2Lines, 26, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C058, gJiminyRikuStoryTale3Lines, 20, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C078, gJiminyRikuStoryTale4Lines, 20, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C096, gJiminyRikuStoryTale5Lines, 23, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnk_0815C0B2, gJiminyRikuStoryTale6Lines, 31, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -447,32 +447,32 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #elif defined(VERSION_JP)
 
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { gUnkJp_0814F25C, gJiminyStoryTale1Lines, 12, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F270, gJiminyStoryTale2Lines, 14, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F284, gJiminyStoryTale3Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814F298, gJiminyStoryTale4Lines, 18, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E57C, gJiminyStoryTraverseTownLines, 16, gUnk_099A87C0, gUnk_09A3CCDC, gUnk_099E5E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E59C, gJiminyStoryWonderlandLines, 16, gUnk_099A8758, gUnk_09A3CC9C, gUnk_099E3E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E5CC, gJiminyStoryOlympusColiseumLines, 16, gUnk_099A87F8, gUnk_09A3CCFC, gUnk_099E6E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E590, gJiminyStoryAgrabahLines, 26, gUnk_099A8824, gUnk_09A3CD1C, gUnk_099E7E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E5B8, gJiminyStoryHalloweenTownLines, 19, gUnk_099A88A0, gUnk_09A3CD7C, gUnk_099EAE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E5AC, gJiminyStoryMonstroLines, 22, gUnk_099A884C, gUnk_09A3CD3C, gUnk_099E8E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
-    { gUnkJp_0814E5E4, gJiminyStoryAtlanticaLines, 21, gUnk_099A8880, gUnk_09A3CD5C, gUnk_099E9E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E5F4, gJiminyStoryNeverLandLines, 22, gUnk_099A88D4, gUnk_09A3CD9C, gUnk_099EBE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E618, gJiminyStoryHollowBastionLines, 21, gUnk_099A8930, gUnk_09A3CE1C, gUnk_099EEE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E604, gJiminyStory100AcreWoodLines, 10, gUnk_099A8900, gUnk_09A3CDBC, gUnk_099ECE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E644, gJiminyStoryTwilightTownLines, 10, gUnk_099A895C, gUnk_09A3CE3C, gUnk_099EFE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E62C, gJiminyStoryDestinyIslandsLines, 11, gUnk_099A8780, gUnk_09A3CCBC, gUnk_099E4E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814E658, gJiminyStoryCastleOblivionLines, 16, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814F25C, gJiminyStoryTale1Lines, 12, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814F270, gJiminyStoryTale2Lines, 14, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814F284, gJiminyStoryTale3Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814F298, gJiminyStoryTale4Lines, 18, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E57C, gJiminyStoryTraverseTownLines, 16, gUnk_099A87C0, gUnk_09A3CCDC, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E59C, gJiminyStoryWonderlandLines, 16, gUnk_099A8758, gUnk_09A3CC9C, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E5CC, gJiminyStoryOlympusColiseumLines, 16, gUnk_099A87F8, gUnk_09A3CCFC, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E590, gJiminyStoryAgrabahLines, 26, gUnk_099A8824, gUnk_09A3CD1C, gWorldImageAgrabahTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E5B8, gJiminyStoryHalloweenTownLines, 19, gUnk_099A88A0, gUnk_09A3CD7C, gWorldImageHalloweenTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E5AC, gJiminyStoryMonstroLines, 22, gUnk_099A884C, gUnk_09A3CD3C, gWorldImageMonstroTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
+    { gUnkJp_0814E5E4, gJiminyStoryAtlanticaLines, 21, gUnk_099A8880, gUnk_09A3CD5C, gWorldImageAtlanticaTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E5F4, gJiminyStoryNeverLandLines, 22, gUnk_099A88D4, gUnk_09A3CD9C, gWorldImageNeverLandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E618, gJiminyStoryHollowBastionLines, 21, gUnk_099A8930, gUnk_09A3CE1C, gWorldImageHollowBastionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E604, gJiminyStory100AcreWoodLines, 10, gUnk_099A8900, gUnk_09A3CDBC, gWorldImage100AcreWoodTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E644, gJiminyStoryTwilightTownLines, 10, gUnk_099A895C, gUnk_09A3CE3C, gWorldImageTwilightTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E62C, gJiminyStoryDestinyIslandsLines, 11, gUnk_099A8780, gUnk_09A3CCBC, gWorldImageDestinyIslandsTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814E658, gJiminyStoryCastleOblivionLines, 16, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { gUnkJp_0814FA18, gJiminyRikuStoryTale1Lines, 28, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA2C, gJiminyRikuStoryTale2Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA40, gJiminyRikuStoryTale3Lines, 13, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA54, gJiminyRikuStoryTale4Lines, 14, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA68, gJiminyRikuStoryTale5Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { gUnkJp_0814FA7C, gJiminyRikuStoryTale6Lines, 23, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA18, gJiminyRikuStoryTale1Lines, 28, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA2C, gJiminyRikuStoryTale2Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA40, gJiminyRikuStoryTale3Lines, 13, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA54, gJiminyRikuStoryTale4Lines, 14, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA68, gJiminyRikuStoryTale5Lines, 16, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { gUnkJp_0814FA7C, gJiminyRikuStoryTale6Lines, 23, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -816,32 +816,32 @@ static const JiminyDetail sJiminyEntry20Details[33] = {
 #elif defined(VERSION_EU)
 
 static const JiminyDetail sJiminyEntry01Details[17] = {
-    { &gUnkEu_08892450, &gUnkEu_0883FB1C, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088924BC, &gUnkEu_088402A4, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0889252C, &gUnkEu_08840A14, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08892598, &gUnkEu_08841350, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E364, &gUnkEu_08841BD8, gUnk_099A87C0, gUnk_09A3CCDC, gUnk_099E5E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E410, &gUnkEu_088425D4, gUnk_099A8758, gUnk_09A3CC9C, gUnk_099E3E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E530, &gUnkEu_08842D0C, gUnk_099A87F8, gUnk_09A3CCFC, gUnk_099E6E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E3A0, &gUnkEu_08843A70, gUnk_099A8824, gUnk_09A3CD1C, gUnk_099E7E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E4C0, &gUnkEu_088443FC, gUnk_099A88A0, gUnk_09A3CD7C, gUnk_099EAE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E450, &gUnkEu_08844E8C, gUnk_099A884C, gUnk_09A3CD3C, gUnk_099E8E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
-    { &gUnkEu_0888E578, &gUnkEu_08845978, gUnk_099A8880, gUnk_09A3CD5C, gUnk_099E9E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E5DC, &gUnkEu_0884642C, gUnk_099A88D4, gUnk_09A3CD9C, gUnk_099EBE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E6BC, &gUnkEu_08846E6C, gUnk_099A8930, gUnk_09A3CE1C, gUnk_099EEE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E654, &gUnkEu_0884721C, gUnk_099A8900, gUnk_09A3CDBC, gUnk_099ECE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E78C, &gUnkEu_0884783C, gUnk_099A895C, gUnk_09A3CE3C, gUnk_099EFE7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E72C, &gUnkEu_08847E04, gUnk_099A8780, gUnk_09A3CCBC, gUnk_099E4E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0888E804, &gUnkEu_08848808, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_08892450, &gUnkEu_0883FB1C, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_088924BC, &gUnkEu_088402A4, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0889252C, &gUnkEu_08840A14, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_08892598, &gUnkEu_08841350, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E364, &gUnkEu_08841BD8, gUnk_099A87C0, gUnk_09A3CCDC, gWorldImageTraverseTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E410, &gUnkEu_088425D4, gUnk_099A8758, gUnk_09A3CC9C, gWorldImageWonderlandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E530, &gUnkEu_08842D0C, gUnk_099A87F8, gUnk_09A3CCFC, gWorldImageOlympusColiseumTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E3A0, &gUnkEu_08843A70, gUnk_099A8824, gUnk_09A3CD1C, gWorldImageAgrabahTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E4C0, &gUnkEu_088443FC, gUnk_099A88A0, gUnk_09A3CD7C, gWorldImageHalloweenTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E450, &gUnkEu_08844E8C, gUnk_099A884C, gUnk_09A3CD3C, gWorldImageMonstroTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, -8, 0 },
+    { &gUnkEu_0888E578, &gUnkEu_08845978, gUnk_099A8880, gUnk_09A3CD5C, gWorldImageAtlanticaTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E5DC, &gUnkEu_0884642C, gUnk_099A88D4, gUnk_09A3CD9C, gWorldImageNeverLandTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E6BC, &gUnkEu_08846E6C, gUnk_099A8930, gUnk_09A3CE1C, gWorldImageHollowBastionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E654, &gUnkEu_0884721C, gUnk_099A8900, gUnk_09A3CDBC, gWorldImage100AcreWoodTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E78C, &gUnkEu_0884783C, gUnk_099A895C, gUnk_09A3CE3C, gWorldImageTwilightTownTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E72C, &gUnkEu_08847E04, gUnk_099A8780, gUnk_09A3CCBC, gWorldImageDestinyIslandsTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0888E804, &gUnkEu_08848808, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry15Details[6] = {
-    { &gUnkEu_088954F4, &gUnkEu_08849768, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08895560, &gUnkEu_0884A1C8, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088955D0, &gUnkEu_0884AA20, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_0889563C, &gUnkEu_0884B1AC, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_088956A4, &gUnkEu_0884BB40, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
-    { &gUnkEu_08895710, &gUnkEu_0884C7C0, gUnk_099A897C, gUnk_09A3CE5C, gUnk_099F0E7C, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_088954F4, &gUnkEu_08849768, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_08895560, &gUnkEu_0884A1C8, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_088955D0, &gUnkEu_0884AA20, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_0889563C, &gUnkEu_0884B1AC, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_088956A4, &gUnkEu_0884BB40, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
+    { &gUnkEu_08895710, &gUnkEu_0884C7C0, gUnk_099A897C, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, 0, 0 },
 };
 
 static const JiminyDetail sJiminyEntry04Details[17] = {
@@ -2331,7 +2331,7 @@ void JiminyDetailUpdate() {
             if (sJiminyWork->detail->palette == gUnk_09A3CDBC && IsPooAltImageActive()) {
                 LoadObjPaletteBank(sJiminyWork->palette8->index, gPooAltImagePalettes[0]);
                 LoadObjPaletteBank(sJiminyWork->palette8->index + 1, gPooAltImagePalettes[1]);
-                SetObjTileSource(sJiminyWork->tiles7, gUnk_099EDE7C);
+                SetObjTileSource(sJiminyWork->tiles7, gPooAltImageTiles);
             } else
 #endif
             {

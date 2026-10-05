@@ -107,7 +107,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         0, 0,
     },
     {
-        1, WORLD_AGRABAH, gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, gUnk_09A3CD1C, 32, gUnk_099E7E7C, 4096, gUnk_099A8824,
+        1, WORLD_AGRABAH, gUnk_09A3D65C, 32, gUnk_099A0B5C, 576, gUnk_099A0B3C, gUnk_09A3CD1C, 32, gWorldImageAgrabahTiles, 4096, gUnk_099A8824,
 #if defined(VERSION_EU)
         &gUnkEu_0888E3A0,
 #elif defined(VERSION_JP)
@@ -118,7 +118,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         0, 0,
     },
     {
-        2, WORLD_ATLANTICA, gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, gUnk_09A3CD5C, 32, gUnk_099E9E7C, 4096, gUnk_099A8880,
+        2, WORLD_ATLANTICA, gUnk_09A3D69C, 32, gUnk_099A0F70, 512, gUnk_099A0F5C, gUnk_09A3CD5C, 32, gWorldImageAtlanticaTiles, 4096, gUnk_099A8880,
 #if defined(VERSION_EU)
         &gUnkEu_0888E578,
 #elif defined(VERSION_JP)
@@ -129,7 +129,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         2, 2,
     },
     {
-        4, WORLD_OLYMPUS_COLISEUM, gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, gUnk_09A3CCFC, 32, gUnk_099E6E7C, 4096, gUnk_099A87F8,
+        4, WORLD_OLYMPUS_COLISEUM, gUnk_09A3D63C, 32, gUnk_099A08BA, 640, gUnk_099A08A0, gUnk_09A3CCFC, 32, gWorldImageOlympusColiseumTiles, 4096, gUnk_099A87F8,
 #if defined(VERSION_EU)
         &gUnkEu_0888E530,
 #elif defined(VERSION_JP)
@@ -140,7 +140,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         6, 6,
     },
     {
-        8, WORLD_WONDERLAND, gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, gUnk_09A3CC9C, 32, gUnk_099E3E7C, 4096, gUnk_099A8758,
+        8, WORLD_WONDERLAND, gUnk_09A3D5DC, 32, gUnk_099A0206, 544, gUnk_099A01EC, gUnk_09A3CC9C, 32, gWorldImageWonderlandTiles, 4096, gUnk_099A8758,
 #if defined(VERSION_EU)
         &gUnkEu_0888E410,
 #elif defined(VERSION_JP)
@@ -151,7 +151,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         4, 4,
     },
     {
-        16, WORLD_MONSTRO, gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, gUnk_09A3CD3C, 32, gUnk_099E8E7C, 4096, gUnk_099A884C,
+        16, WORLD_MONSTRO, gUnk_09A3D67C, 32, gUnk_099A0DBC, 416, gUnk_099A0D9C, gUnk_09A3CD3C, 32, gWorldImageMonstroTiles, 4096, gUnk_099A884C,
 #if defined(VERSION_EU)
         &gUnkEu_0888E450,
 #elif defined(VERSION_JP)
@@ -162,7 +162,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         3, 3,
     },
     {
-        32, WORLD_HALLOWEEN_TOWN, gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, gUnk_09A3CD7C, 32, gUnk_099EAE7C, 4096, gUnk_099A88A0,
+        32, WORLD_HALLOWEEN_TOWN, gUnk_09A3D6BC, 32, gUnk_099A118A, 544, gUnk_099A1170, gUnk_09A3CD7C, 32, gWorldImageHalloweenTownTiles, 4096, gUnk_099A88A0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E4C0,
 #elif defined(VERSION_JP)
@@ -173,7 +173,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         5, 5,
     },
     {
-        64, WORLD_NEVER_LAND, gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, gUnk_09A3CD9C, 32, gUnk_099EBE7C, 4096, gUnk_099A88D4,
+        64, WORLD_NEVER_LAND, gUnk_09A3D6DC, 32, gUnk_099A13CC, 544, gUnk_099A13AC, gUnk_09A3CD9C, 32, gWorldImageNeverLandTiles, 4096, gUnk_099A88D4,
 #if defined(VERSION_EU)
         &gUnkEu_0888E5DC,
 #elif defined(VERSION_JP)
@@ -184,7 +184,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         1, 1,
     },
     {
-        128, WORLD_HOLLOW_BASTION, gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, gUnk_09A3CE1C, 32, gUnk_099EEE7C, 4096, gUnk_099A8930,
+        128, WORLD_HOLLOW_BASTION, gUnk_09A3D71C, 32, gUnk_099A181A, 768, gUnk_099A1800, gUnk_09A3CE1C, 32, gWorldImageHollowBastionTiles, 4096, gUnk_099A8930,
 #if defined(VERSION_EU)
         &gUnkEu_0888E6BC,
 #elif defined(VERSION_JP)
@@ -195,7 +195,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         7, 7,
     },
     {
-        256, WORLD_DESTINY_ISLANDS, gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, gUnk_09A3CCBC, 32, gUnk_099E4E7C, 4096, gUnk_099A8780,
+        256, WORLD_DESTINY_ISLANDS, gUnk_09A3D5FC, 32, gUnk_099A0442, 544, gUnk_099A0428, gUnk_09A3CCBC, 32, gWorldImageDestinyIslandsTiles, 4096, gUnk_099A8780,
 #if defined(VERSION_EU)
         &gUnkEu_0888E72C,
 #elif defined(VERSION_JP)
@@ -206,7 +206,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         8, 8,
     },
     {
-        512, WORLD_TRAVERSE_TOWN, gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, gUnk_09A3CCDC, 32, gUnk_099E5E7C, 4096, gUnk_099A87C0,
+        512, WORLD_TRAVERSE_TOWN, gUnk_09A3D61C, 32, gUnk_099A067E, 544, gUnk_099A0664, gUnk_09A3CCDC, 32, gWorldImageTraverseTownTiles, 4096, gUnk_099A87C0,
 #if defined(VERSION_EU)
         &gUnkEu_0888E364,
 #elif defined(VERSION_JP)
@@ -217,7 +217,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         9, 9,
     },
     {
-        2048, WORLD_TWILIGHT_TOWN, gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, gUnk_09A3CE3C, 32, gUnk_099EFE7C, 4096, gUnk_099A895C,
+        2048, WORLD_TWILIGHT_TOWN, gUnk_09A3D73C, 32, gUnk_099A1B30, 512, gUnk_099A1B1C, gUnk_09A3CE3C, 32, gWorldImageTwilightTownTiles, 4096, gUnk_099A895C,
 #if defined(VERSION_EU)
         &gUnkEu_0888E78C,
 #elif defined(VERSION_JP)
@@ -228,7 +228,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         10, 10,
     },
     {
-        4096, WORLD_CASTLE_OBLIVION, gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, gUnk_09A3CE5C, 32, gUnk_099F0E7C, 4096, gUnk_099A897C,
+        4096, WORLD_CASTLE_OBLIVION, gUnk_09A3D75C, 32, gUnk_099A1D44, 512, gUnk_099A1D30, gUnk_09A3CE5C, 32, gWorldImageCastleOblivionTiles, 4096, gUnk_099A897C,
 #if defined(VERSION_EU)
         &gUnkEu_0888E804,
 #elif defined(VERSION_JP)
@@ -239,7 +239,7 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
         11, 13,
     },
     {
-        1024, WORLD_100_ACRE_WOOD, gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, gUnk_09A3CDBC, 32, gUnk_099ECE7C, 4096, gUnk_099A8900,
+        1024, WORLD_100_ACRE_WOOD, gUnk_09A3D6FC, 32, gUnk_099A1600, 512, gUnk_099A15EC, gUnk_09A3CDBC, 32, gWorldImage100AcreWoodTiles, 4096, gUnk_099A8900,
 #if defined(VERSION_EU)
         &gUnkEu_0888E654,
 #elif defined(VERSION_JP)
@@ -421,8 +421,8 @@ void WorldInspectHandleInput() {
             sWorldInspectBarPalette = NULL;
 #endif
             sWorldInspectDetailPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
-            sWorldInspectDetailTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
-            sWorldInspectDetailSprites[0] = gUnk_0999A350;
+            sWorldInspectDetailTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
+            sWorldInspectDetailSprites[0] = gWorldselectCardFrame0;
 
             if (sWorldInspectCursor <= 9) {
                 for (i = 10; i < 12; i++) {
@@ -442,7 +442,7 @@ void WorldInspectHandleInput() {
 
             if (sWorldInspectWorlds[sWorldInspectCursor] == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
                 sWorldInspectDetailPalettes[1] = LoadObjPalette(gPooAltImagePalettes, 64);
-                sWorldInspectDetailTiles[1] = LoadObjTiles(gUnk_099EDE7C, 0x1000);
+                sWorldInspectDetailTiles[1] = LoadObjTiles(gPooAltImageTiles, 0x1000);
                 sWorldInspectDetailSprites[1] = gUnk_099A8914;
             } else {
                 sWorldInspectDetailPalettes[1] =

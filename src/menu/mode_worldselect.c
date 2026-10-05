@@ -36,19 +36,19 @@
 
 #ifdef VERSION_EU
 static void* sWorldselectBg1Maps[5] = {
-    gUnk_09A31FDC,
-    gUnkEu_09A840A0,
-    gUnkEu_09A84FA0,
-    gUnkEu_09A84AA0,
-    gUnkEu_09A845A0,
+    gWorldselectTitleMap,
+    gWorldselectTitleFrenchMap,
+    gWorldselectTitleGermanMap,
+    gWorldselectTitleItalianMap,
+    gWorldselectTitleSpanishMap,
 };
 
 static void* sWorldselectNameTileData[5] = {
-    gUnk_099F4D3C,
-    gUnkEu_09A0A480,
-    gUnkEu_09A1DC80,
-    gUnkEu_09A17480,
-    gUnkEu_09A10C80,
+    gWorldselectNameWonderlandTiles,
+    gWorldselectNameFrenchTiles,
+    gWorldselectNameGermanTiles,
+    gWorldselectNameItalianTiles,
+    gWorldselectNameSpanishTiles,
 };
 
 static void* sWorldselectTitleGfx[5] = {
@@ -107,69 +107,69 @@ static const WorldselectTileSizes sWorldselectTitleTileSizes = { { 896, 960, 102
 
 static const WorldselectWorldDef sWorldselectWorldDefs[13] = {
 #ifdef VERSION_EU
-    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, sWorldselectNameTileData, 8192 },
+    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gWorldImageAgrabahTiles, gUnk_099A8824, sWorldselectNameTileData, 8192 },
 #else
-    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gUnk_099E7E7C, gUnk_099A8824, gUnk_099F6D3C },
+    { 1, WORLD_AGRABAH, 107, -1, gUnk_09A3CD1C, gWorldImageAgrabahTiles, gUnk_099A8824, gWorldselectNameAgrabahTiles },
 #endif
 #ifdef VERSION_EU
-    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, sWorldselectNameTileData, 12288 },
+    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gWorldImageAtlanticaTiles, gUnk_099A8880, sWorldselectNameTileData, 12288 },
 #else
-    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gUnk_099E9E7C, gUnk_099A8880, gUnk_099F7D3C },
+    { 2, WORLD_ATLANTICA, 101, -1, gUnk_09A3CD5C, gWorldImageAtlanticaTiles, gUnk_099A8880, gWorldselectNameAtlanticaTiles },
 #endif
 #ifdef VERSION_EU
-    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, sWorldselectNameTileData, 6144 },
+    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gWorldImageOlympusColiseumTiles, gUnk_099A87F8, sWorldselectNameTileData, 6144 },
 #else
-    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gUnk_099E6E7C, gUnk_099A87F8, gUnk_099F653C },
+    { 4, WORLD_OLYMPUS_COLISEUM, 120, -1, gUnk_09A3CCFC, gWorldImageOlympusColiseumTiles, gUnk_099A87F8, gWorldselectNameOlympusColiseumTiles },
 #endif
 #ifdef VERSION_EU
-    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, sWorldselectNameTileData, 0 },
+    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gWorldImageWonderlandTiles, gUnk_099A8758, sWorldselectNameTileData, 0 },
 #else
-    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gUnk_099E3E7C, gUnk_099A8758, gUnk_099F4D3C },
+    { 8, WORLD_WONDERLAND, 94, -1, gUnk_09A3CC9C, gWorldImageWonderlandTiles, gUnk_099A8758, gWorldselectNameWonderlandTiles },
 #endif
 #ifdef VERSION_EU
-    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, sWorldselectNameTileData, 10240 },
+    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gWorldImageMonstroTiles, gUnk_099A884C, sWorldselectNameTileData, 10240 },
 #else
-    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gUnk_099E8E7C, gUnk_099A884C, gUnk_099F753C },
+    { 16, WORLD_MONSTRO, 74, -1, gUnk_09A3CD3C, gWorldImageMonstroTiles, gUnk_099A884C, gWorldselectNameMonstroTiles },
 #endif
 #ifdef VERSION_EU
-    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, sWorldselectNameTileData, 14336 },
+    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gWorldImageHalloweenTownTiles, gUnk_099A88A0, sWorldselectNameTileData, 14336 },
 #else
-    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gUnk_099EAE7C, gUnk_099A88A0, gUnk_099F853C },
+    { 32, WORLD_HALLOWEEN_TOWN, 87, -1, gUnk_09A3CD7C, gWorldImageHalloweenTownTiles, gUnk_099A88A0, gWorldselectNameHalloweenTownTiles },
 #endif
 #ifdef VERSION_EU
-    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, sWorldselectNameTileData, 16384 },
+    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gWorldImageNeverLandTiles, gUnk_099A88D4, sWorldselectNameTileData, 16384 },
 #else
-    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gUnk_099EBE7C, gUnk_099A88D4, gUnk_099F8D3C },
+    { 64, WORLD_NEVER_LAND, 115, -1, gUnk_09A3CD9C, gWorldImageNeverLandTiles, gUnk_099A88D4, gWorldselectNameNeverLandTiles },
 #endif
 #ifdef VERSION_EU
-    { 128, WORLD_HOLLOW_BASTION, 127, 149, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, sWorldselectNameTileData, 20480 },
+    { 128, WORLD_HOLLOW_BASTION, 127, 149, gUnk_09A3CE1C, gWorldImageHollowBastionTiles, gUnk_099A8930, sWorldselectNameTileData, 20480 },
 #else
-    { 128, WORLD_HOLLOW_BASTION, 129, 151, gUnk_09A3CE1C, gUnk_099EEE7C, gUnk_099A8930, gUnk_099F9D3C },
+    { 128, WORLD_HOLLOW_BASTION, 129, 151, gUnk_09A3CE1C, gWorldImageHollowBastionTiles, gUnk_099A8930, gWorldselectNameHollowBastionTiles },
 #endif
 #ifdef VERSION_EU
-    { 256, WORLD_DESTINY_ISLANDS, 53, 175, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, sWorldselectNameTileData, 2048 },
+    { 256, WORLD_DESTINY_ISLANDS, 53, 175, gUnk_09A3CCBC, gWorldImageDestinyIslandsTiles, gUnk_099A8780, sWorldselectNameTileData, 2048 },
 #else
-    { 256, WORLD_DESTINY_ISLANDS, 53, 177, gUnk_09A3CCBC, gUnk_099E4E7C, gUnk_099A8780, gUnk_099F553C },
+    { 256, WORLD_DESTINY_ISLANDS, 53, 177, gUnk_09A3CCBC, gWorldImageDestinyIslandsTiles, gUnk_099A8780, gWorldselectNameDestinyIslandsTiles },
 #endif
 #ifdef VERSION_EU
-    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, sWorldselectNameTileData, 4096 },
+    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gWorldImageTraverseTownTiles, gUnk_099A87C0, sWorldselectNameTileData, 4096 },
 #else
-    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gUnk_099E5E7C, gUnk_099A87C0, gUnk_099F5D3C },
+    { 512, WORLD_TRAVERSE_TOWN, 1, -1, gUnk_09A3CCDC, gWorldImageTraverseTownTiles, gUnk_099A87C0, gWorldselectNameTraverseTownTiles },
 #endif
 #ifdef VERSION_EU
-    { 2048, WORLD_TWILIGHT_TOWN, 44, 184, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, sWorldselectNameTileData, 22528 },
+    { 2048, WORLD_TWILIGHT_TOWN, 44, 184, gUnk_09A3CE3C, gWorldImageTwilightTownTiles, gUnk_099A895C, sWorldselectNameTileData, 22528 },
 #else
-    { 2048, WORLD_TWILIGHT_TOWN, 44, 186, gUnk_09A3CE3C, gUnk_099EFE7C, gUnk_099A895C, gUnk_099FA53C },
+    { 2048, WORLD_TWILIGHT_TOWN, 44, 186, gUnk_09A3CE3C, gWorldImageTwilightTownTiles, gUnk_099A895C, gWorldselectNameTwilightTownTiles },
 #endif
 #ifdef VERSION_EU
-    { 4096, WORLD_CASTLE_OBLIVION, 61, 190, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, sWorldselectNameTileData, 24576 },
+    { 4096, WORLD_CASTLE_OBLIVION, 61, 190, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, gUnk_099A897C, sWorldselectNameTileData, 24576 },
 #else
-    { 4096, WORLD_CASTLE_OBLIVION, 61, 192, gUnk_09A3CE5C, gUnk_099F0E7C, gUnk_099A897C, gUnk_099FAD3C },
+    { 4096, WORLD_CASTLE_OBLIVION, 61, 192, gUnk_09A3CE5C, gWorldImageCastleOblivionTiles, gUnk_099A897C, gWorldselectNameCastleOblivionTiles },
 #endif
 #ifdef VERSION_EU
-    { 1024, WORLD_100_ACRE_WOOD, 132, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, sWorldselectNameTileData, 18432 },
+    { 1024, WORLD_100_ACRE_WOOD, 132, -1, gUnk_09A3CDBC, gWorldImage100AcreWoodTiles, gUnk_099A8900, sWorldselectNameTileData, 18432 },
 #else
-    { 1024, WORLD_100_ACRE_WOOD, 134, -1, gUnk_09A3CDBC, gUnk_099ECE7C, gUnk_099A8900, gUnk_099F953C },
+    { 1024, WORLD_100_ACRE_WOOD, 134, -1, gUnk_09A3CDBC, gWorldImage100AcreWoodTiles, gUnk_099A8900, gWorldselectName100AcreWoodTiles },
 #endif
 };
 
@@ -227,7 +227,7 @@ void WorldselectLoadSlotTiles(s16 model, s16 slot) {
     void* src;
 
     if (sWorldselectWorldDefs[model].world == WORLD_100_ACRE_WOOD && IsPooAltImageActive()) {
-        src = gUnk_099EDE7C;
+        src = gPooAltImageTiles;
     } else {
         src = sWorldselectWorldDefs[model].tiles;
     }
@@ -287,8 +287,8 @@ void WorldselectHandleInput() {
             sWorldselectStep = 4;
         } else if ((GetKeysPressed() & B_BUTTON) && sWorldselectFirstVisit == 0) {
             m4aSongNumStart(SONG_SYS_CLOSE);
-            LoadBgMap(0, gUnk_09A310DC, 0x500);
-            LoadBgMap(1, gUnk_09A31ADC, 0x500);
+            LoadBgMap(0, gWorldselectGlowMap, 0x500);
+            LoadBgMap(1, gWorldselectBarMap, 0x500);
             sWorldselectCancelled = 1;
             sWorldselectTimer = 16;
             sWorldselectStep = 5;
@@ -558,7 +558,7 @@ void WorldselectDraw() {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[0];
                 pal = sWorldselectCardPalettes[0];
-                anim = gUnk_0999A350;
+                anim = gWorldselectCardFrame0;
 
                 if (sWorldselectStep > 3 && !sWorldselectCancelled) {
                     BgAnimSetPosition(x - 1, y - 5);
@@ -567,17 +567,17 @@ void WorldselectDraw() {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[1];
                 pal = sWorldselectCardPalettes[1];
-                anim = gUnk_09EF9770[(62 - t) / 13];
+                anim = gWorldselectCardFlipFrames[(62 - t) / 13];
             } else if (t > 194) {
                 sprite = NULL;
                 tiles = sWorldselectCardTiles[1];
                 pal = sWorldselectCardPalettes[1];
-                anim = gUnk_09EF9770[(t - 194) / 13];
+                anim = gWorldselectCardFlipFrames[(t - 194) / 13];
             } else {
                 sprite = AllocObjAffine(0, w, d, 0);
                 tiles = sWorldselectCardTiles[0];
                 pal = sWorldselectCardPalettes[0];
-                anim = gUnk_0999A350;
+                anim = gWorldselectCardFrame0;
             }
 
             DrawSprite(x, y, anim, tiles, pal, sprite, SPRITE_PRIORITY(2),
@@ -722,13 +722,13 @@ void mode_worldselect_0() {
     sWorldselectTitleX = -32768;
     LoadBgPalette(0, gUnk_09A3C9DC, 96);
 #ifdef VERSION_EU
-    LoadBgTiles(0, gUnk_099F1E7C, 16000);
+    LoadBgTiles(0, gWorldselectBgTiles, 16000);
 #else
-    LoadBgTiles(0, gUnk_099F1E7C, 11968);
+    LoadBgTiles(0, gWorldselectBgTiles, 11968);
 #endif
     WorldselectDrawName(sWorldselectNameWorld, sWorldselectNameWidth);
-    LoadBgMap(0, gUnk_09A310DC, 0x500);
-    LoadBgMap(1, gUnk_09A31ADC, 0x500);
+    LoadBgMap(0, gWorldselectGlowMap, 0x500);
+    LoadBgMap(1, gWorldselectBarMap, 0x500);
 
     if (sWorldselectFirstVisit == 0) {
         BgAnimInit(2, 0x8000, 128);
@@ -738,9 +738,9 @@ void mode_worldselect_0() {
     }
 
     sWorldselectCardPalettes[0] = LoadObjPalette(gUnk_09A3CC3C, 32);
-    sWorldselectCardTiles[0] = LoadObjTiles(gUnk_0999A394, 0xC40);
+    sWorldselectCardTiles[0] = LoadObjTiles(gWorldselectCardTiles, 0xC40);
     sWorldselectCardPalettes[1] = LoadObjPalette(gUnk_09A3CC5C, 32);
-    sWorldselectCardTiles[1] = LoadObjTiles(gUnk_0999B052, 0x1340);
+    sWorldselectCardTiles[1] = LoadObjTiles(gWorldselectCardFlipTiles, 0x1340);
     sWorldselectOverlayPalette = LoadObjPalette(gUnk_09A3CC7C, 32);
 #ifdef VERSION_EU
     sWorldselectTitleTiles = LoadObjTiles(sWorldselectTitleTileData[gLanguage], sWorldselectTitleTileSizes.sizes[gLanguage]);
@@ -791,11 +791,11 @@ void mode_worldselect_1() {
                 sWorldselectStep = 3;
             }
 
-            LoadBgMap(0, gUnk_09A315DC, 0x500);
+            LoadBgMap(0, gWorldselectGlowLineMap, 0x500);
 #ifdef VERSION_EU
             LoadBgMap(1, sWorldselectBg1Maps[gLanguage], 0x500);
 #else
-            LoadBgMap(1, gUnk_09A31FDC, 0x500);
+            LoadBgMap(1, gWorldselectTitleMap, 0x500);
 #endif
         }
 
@@ -822,8 +822,8 @@ void mode_worldselect_1() {
         break;
     case 4:
         if (BgAnimIsStopped()) {
-            LoadBgMap(0, gUnk_09A310DC, 0x500);
-            LoadBgMap(1, gUnk_09A31ADC, 0x500);
+            LoadBgMap(0, gWorldselectGlowMap, 0x500);
+            LoadBgMap(1, gWorldselectBarMap, 0x500);
             sWorldselectTimer = 16;
             sWorldselectStep = 5;
         }

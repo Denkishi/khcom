@@ -124,9 +124,9 @@ u16 BosUrsulaSpawnTenBubbles(UrsulaBubbleWork* work) {
 void task_bos_ursula_bubble_0(UrsulaBubbleWork* work) {
 #ifdef VERSION_EU
     sUrsulaBubbleWork = work;
-    AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
+    AnimInit(&work->anim, gBosUrsulaBubbleAnims, gBosUrsulaBubbleFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
-    gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF68C0, 6), gUnk_097A0DE4);
+    gBtlWork->tiles3 = AllocObjTiles(GetMaxSpriteTileBytes(gBosUrsulaBubbleFrames, 6), gBosUrsulaBubbleTiles);
 #endif
     TaskPoolInit(&work->tasks, 10);
     work->bubbleCount = 0;
@@ -217,14 +217,14 @@ void task_bos_ursula_bubble_single_0(UrsulaBubbleSingleWork* work, u8* arg) {
 #ifdef VERSION_EU
     work->tiles = gBtlWork->tiles3;
 #else
-    work->tiles = LoadObjTiles(gUnk_097A0DE4, 0xA80);
+    work->tiles = LoadObjTiles(gBosUrsulaBubbleTiles, 0xA80);
 #endif
     work->palette = LoadObjPalette(gUnk_0984B0F8, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
 #ifdef VERSION_EU
     BosUrsulaBubbleAnimChange(0, 1);
 #else
-    AnimInit(&work->anim, gUnk_09EF68D8, gUnk_09EF68C0);
+    AnimInit(&work->anim, gBosUrsulaBubbleAnims, gBosUrsulaBubbleFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 #endif
     work->state = 0;

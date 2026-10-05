@@ -61,12 +61,12 @@ TaskDesc gTaskDescBosBoogieDice = {
 };
 
 static void* const sBoogieDiceFaces[6][3] = {
-    { gUnk_09EF67A8, gUnk_09EF679C, gUnk_097976DC },
-    { gUnk_09EF67B8, gUnk_09EF67AC, gUnk_09797D0C },
-    { gUnk_09EF67C8, gUnk_09EF67BC, gUnk_0979833C },
-    { gUnk_09EF67D8, gUnk_09EF67CC, gUnk_0979896C },
-    { gUnk_09EF67E8, gUnk_09EF67DC, gUnk_09798F9C },
-    { gUnk_09EF67F8, gUnk_09EF67EC, gUnk_097995CC },
+    { gBosBoogieDiceFace0Anims, gBosBoogieDiceFace0Frames, gBosBoogieDiceFace0Tiles },
+    { gBosBoogieDiceFace1Anims, gBosBoogieDiceFace1Frames, gBosBoogieDiceFace1Tiles },
+    { gBosBoogieDiceFace2Anims, gBosBoogieDiceFace2Frames, gBosBoogieDiceFace2Tiles },
+    { gBosBoogieDiceFace3Anims, gBosBoogieDiceFace3Frames, gBosBoogieDiceFace3Tiles },
+    { gBosBoogieDiceFace4Anims, gBosBoogieDiceFace4Frames, gBosBoogieDiceFace4Tiles },
+    { gBosBoogieDiceFace5Anims, gBosBoogieDiceFace5Frames, gBosBoogieDiceFace5Tiles },
 };
 
 static const EmyKind sBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
@@ -100,11 +100,11 @@ TaskDesc gTaskDescBosBoogieMap = {
 
 static const BosMapanimeFrame sBosBoogieMapanimeFrames[5] = { { 5, 0 }, { 5, 1 }, { 5, 2 }, { 5, 3 }, { 5, 4 } };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef0 = { sBosBoogieMapanimeFrames, 5, gUnk_097ED478, 0x7C00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef0 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime0Tiles, 0x7C00, 0x0100, 0x0300, 0 };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef1 = { sBosBoogieMapanimeFrames, 5, gUnk_097ED578, 0x7D00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef1 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime1Tiles, 0x7D00, 0x0100, 0x0300, 0 };
 
-static const BosMapanimeDef sBosBoogieMapanimeDef2 = { sBosBoogieMapanimeFrames, 5, gUnk_097ED678, 0x7E00, 0x0100, 0x0300, 0 };
+static const BosMapanimeDef sBosBoogieMapanimeDef2 = { sBosBoogieMapanimeFrames, 5, gBosBoogieMapanime2Tiles, 0x7E00, 0x0100, 0x0300, 0 };
 
 TaskDesc gTaskDescBosBoogieMapanime = {
     "task_bos_boogie_mapanime",
@@ -241,10 +241,10 @@ void task_bos_boogie_dice_0(BoogieDiceWork* work, BoogieWork* arg) {
 #else
     work->obj.flags |= BTLOBJ_FLAG_HIT_LOCKED;
 #endif
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6788, 4), gUnk_09796EAA);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosBoogieDiceFrames, 4), gBosBoogieDiceTiles);
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    AnimInit(&work->anim, gUnk_09EF6798, gUnk_09EF6788);
+    AnimInit(&work->anim, gBosBoogieDiceAnims, gBosBoogieDiceFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     r = GetRandom();
     AnimSetFrame(&work->anim, r & 3);
@@ -641,10 +641,10 @@ void task_bos_boogie_explosiondice_0(BoogieExplosiondiceWork* work, BoogieWork* 
     work->obj.y = p->y;
     work->obj.z = -0xA000;
     ColliderInit(&work->obj.collider, 8, sBosBoogieExplosiondiceEmyKind.radius, sBosBoogieExplosiondiceEmyKind.height);
-    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gUnk_09EF6774, 4), gUnk_0979666A);
+    work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gBosBoogieExplosiondiceFrames, 4), gBosBoogieExplosiondiceTiles);
     work->palette = LoadObjPalette(gUnk_0984AF98, 32);
     work->palette2 = LoadObjPalette(gUnk_08F69BC4, 32);
-    AnimInit(&work->anim, gUnk_09EF6784, gUnk_09EF6774);
+    AnimInit(&work->anim, gBosBoogieExplosiondiceAnims, gBosBoogieExplosiondiceFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBosShadow, &work->obj);

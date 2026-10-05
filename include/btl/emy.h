@@ -21,7 +21,7 @@ typedef struct Emy03Work {
     EmyWork base;
     u32 targetX;
     u32 targetY;
-    u32 unk_18C;
+    u32 targetZ;
 } Emy03Work;
 
 typedef struct Emy04Work {

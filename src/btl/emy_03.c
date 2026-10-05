@@ -90,7 +90,7 @@ u8 task_emy_03_1(Emy03Work* work) {
             AnimChangeWithDef(sEmy03AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         } else if (work->base.stateTimer == 1) {
             GetEnemyTargetPosition(act, &w->targetX, &w->targetY, NULL);
-            w->unk_18C = 0;
+            w->targetZ = 0;
             BgFxStartThunder(0, act->x, act->y, act->z - 0x1000, w->targetX,
                 w->targetY, 0, 0xAC);
         }

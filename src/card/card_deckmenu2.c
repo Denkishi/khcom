@@ -7516,13 +7516,13 @@ void* gDeckKeyboardCursorAnims[5] = { gUnk_09EEB0B8, gUnk_09EEB0B8, gDeckKeyboar
 #ifdef VERSION_US
 #include "deck_keyboard.inc"
 const u8* gDeckKeyboardRows[7] = {
-    (const u8*)gKeyboardTextUs_09035742,
-    (const u8*)gKeyboardTextUs_09035762,
-    (const u8*)gKeyboardTextUs_0903577A,
-    (const u8*)gKeyboardTextUs_0903579A,
-    (const u8*)gKeyboardTextUs_090357B2,
-    (const u8*)gKeyboardTextUs_090357D2,
-    (const u8*)gKeyboardTextUs_090357F2,
+    (const u8*)gDeckKeyboardRow0,
+    (const u8*)gDeckKeyboardRow1,
+    (const u8*)gDeckKeyboardRow2,
+    (const u8*)gDeckKeyboardRow3,
+    (const u8*)gDeckKeyboardRow4,
+    (const u8*)gDeckKeyboardRow5,
+    (const u8*)gDeckKeyboardRow6,
 };
 #endif
 #ifdef VERSION_JP
@@ -7560,24 +7560,24 @@ const u8* gDeckKeyboardAlphanumericRows[7] = {
 #ifdef VERSION_EU
 #include "deck_keyboard.inc"
 const u8* gDeckKeyboardLetterRows[8] = {
-    gKeyboardTextEu_090CEA56,
-    gKeyboardTextEu_090CEA66,
-    gKeyboardTextEu_090CEA72,
-    gKeyboardTextEu_090CEA82,
-    gKeyboardTextEu_090CEA8E,
-    gKeyboardTextEu_090CEA9E,
-    gKeyboardTextEu_090CEAA9,
-    gKeyboardTextEu_090CEAB9,
+    gDeckKeyboardLetterRow0,
+    gDeckKeyboardLetterRow1,
+    gDeckKeyboardLetterRow2,
+    gDeckKeyboardLetterRow3,
+    gDeckKeyboardLetterRow4,
+    gDeckKeyboardLetterRow5,
+    gDeckKeyboardLetterRow6,
+    gDeckKeyboardLetterRow7,
 };
 
 const u8* gDeckKeyboardSymbolRows[7] = {
-    gKeyboardTextEu_090CEAC4,
-    gKeyboardTextEu_090CEAD4,
-    gKeyboardTextEu_090CEADF,
-    gKeyboardTextEu_090CEAEF,
-    gKeyboardTextEu_090CEAFF,
-    gKeyboardTextEu_090CEB05,
-    gKeyboardTextEu_090CEB15,
+    gDeckKeyboardSymbolRow0,
+    gDeckKeyboardSymbolRow1,
+    gDeckKeyboardSymbolRow2,
+    gDeckKeyboardSymbolRow3,
+    gDeckKeyboardSymbolRow4,
+    gDeckKeyboardSymbolRow5,
+    gDeckKeyboardSymbolRow6,
 };
 #endif
 

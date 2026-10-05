@@ -38,13 +38,13 @@ fragments:
     ctype: const u16
     count: exact
     entries:
-    - gKeyboardTextUs_09035742
-    - gKeyboardTextUs_09035762
-    - gKeyboardTextUs_0903577A
-    - gKeyboardTextUs_0903579A
-    - gKeyboardTextUs_090357B2
-    - gKeyboardTextUs_090357D2
-    - gKeyboardTextUs_090357F2
+    - gDeckKeyboardRow0
+    - gDeckKeyboardRow1
+    - gDeckKeyboardRow2
+    - gDeckKeyboardRow3
+    - gDeckKeyboardRow4
+    - gDeckKeyboardRow5
+    - gDeckKeyboardRow6
   - name: premium_message.inc
     start: 0x090362A4
     end: 0x090362D2
@@ -213,21 +213,21 @@ fragments:
     ctype: const u8
     count: exact
     entries:
-    - gKeyboardTextEu_090CEA56
-    - gKeyboardTextEu_090CEA66
-    - gKeyboardTextEu_090CEA72
-    - gKeyboardTextEu_090CEA82
-    - gKeyboardTextEu_090CEA8E
-    - gKeyboardTextEu_090CEA9E
-    - gKeyboardTextEu_090CEAA9
-    - gKeyboardTextEu_090CEAB9
-    - gKeyboardTextEu_090CEAC4
-    - gKeyboardTextEu_090CEAD4
-    - gKeyboardTextEu_090CEADF
-    - gKeyboardTextEu_090CEAEF
-    - gKeyboardTextEu_090CEAFF
-    - gKeyboardTextEu_090CEB05
-    - gKeyboardTextEu_090CEB15
+    - gDeckKeyboardLetterRow0
+    - gDeckKeyboardLetterRow1
+    - gDeckKeyboardLetterRow2
+    - gDeckKeyboardLetterRow3
+    - gDeckKeyboardLetterRow4
+    - gDeckKeyboardLetterRow5
+    - gDeckKeyboardLetterRow6
+    - gDeckKeyboardLetterRow7
+    - gDeckKeyboardSymbolRow0
+    - gDeckKeyboardSymbolRow1
+    - gDeckKeyboardSymbolRow2
+    - gDeckKeyboardSymbolRow3
+    - gDeckKeyboardSymbolRow4
+    - gDeckKeyboardSymbolRow5
+    - gDeckKeyboardSymbolRow6
   - name: premium_message.inc
     start: 0x090CF648
     end: 0x090CF64F

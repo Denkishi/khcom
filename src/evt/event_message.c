@@ -2451,7 +2451,7 @@ void event_seq_0(EventSeqWork* work, u8* a) {
     gBtlWork = NULL;
     work->task = NULL;
     work->eventId = a[0];
-    work->unk_2E = a[1];
+    work->fromGame = a[1];
     work->seqDef = gEventSequenceDefs[work->eventId];
     work->unk_30 = 0;
     work->unk_31 = 0;

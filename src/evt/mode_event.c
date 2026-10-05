@@ -92,9 +92,9 @@ void Event_0(s32 arg) {
     gEventState->eventId = arg & 0x7FFF;
 
     if (arg & 0x8000) {
-        cfg.unk_08 = 0;
+        cfg.fromGame = 0;
     } else {
-        cfg.unk_08 = 1;
+        cfg.fromGame = 1;
     }
 
     // @bug? Should mask with 0x7FFF.

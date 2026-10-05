@@ -7,7 +7,7 @@
 
 typedef struct EvtArg {
     u32 eventId : 8;
-    u32 unk_08 : 8;
+    u32 fromGame : 8;
     u32 unk_10 : 16;
 } EvtArg;
 

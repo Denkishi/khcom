@@ -76,7 +76,7 @@ typedef struct EventSeqWork {
     TaskPool tasks2;
     Task* task;
     u16 eventId;
-    u8 unk_2E;
+    u8 fromGame;
     u8 ending;
     u8 unk_30;
     u8 unk_31;

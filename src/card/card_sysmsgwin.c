@@ -229,8 +229,8 @@ u8 UpdateSysmsgwinWaitInput(SysMsgWinWork* work, void* a) {
             FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
             LoadObjPaletteBank(work->palette2->index, pal);
-            SetObjTileSource(work->tiles4, gUnk_090A4664);
-            AnimInit(&work->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+            SetObjTileSource(work->tiles4, gHandCursorTiles);
+            AnimInit(&work->anim3, gHandCursorAnims, gHandCursorFrames);
             AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
             work->gfx = AnimGetGfx(&work->anim3);
             work->choice = 1;
@@ -622,8 +622,8 @@ u8 UpdateSysmsgwinChoiceSetup(SysMsgWinWork* work, void* a) {
     FadeSetPaletteExcluded(work->palette4->index + 16, 1);
 #endif
     LoadObjPaletteBank(work->palette2->index, pal);
-    SetObjTileSource(work->tiles4, gUnk_090A4664);
-    AnimInit(&work->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+    SetObjTileSource(work->tiles4, gHandCursorTiles);
+    AnimInit(&work->anim3, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim3);
     work->choice = 1;

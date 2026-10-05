@@ -91,14 +91,14 @@ void deckexchange_0(DeckExchangeWork* work, void* a) {
     work->deckIndex = GetActiveDeckIndex();
     CreateDeckExchangeDeckGridCards(work, 0);
     work->tiles = AllocObjTiles(0x120, NULL);
-    SetObjTileSource(work->tiles, gUnk_090A4664);
-    AnimInit(&work->anim, gUnk_09EEB03C, gUnk_09EEB008);
+    SetObjTileSource(work->tiles, gHandCursorTiles);
+    AnimInit(&work->anim, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->x2 = sDeckExchangeTabPointerX[0] << 8;
     work->y2 = sDeckExchangeTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles3 = LoadObjTiles(gUnk_090A44C4, 32);
+    work->tiles3 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gUnk_09614418, 32);
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckExchangeFrameCursor(work, 0);
@@ -557,9 +557,9 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* a) {
     SetBgScroll(0, 0, 0);
     SetBgScroll(1, 0, 0);
     SetBgScroll(2, 0, 16);
-    LoadBgMap(3, gUnk_09515AB8, 0x800);
-    LoadBgMap(2, gUnk_095182B8, 0x800);
-    LoadBgMap(1, gUnk_09514AB8, 0x800);
+    LoadBgMap(3, gDeckExchangeGridMap, 0x800);
+    LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
+    LoadBgMap(1, gDeckCardsInUseMap, 0x800);
     DisableBg(0);
     CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
@@ -880,7 +880,7 @@ void deckexchange_2(DeckExchangeWork* work) {
         DrawSprite((work->x2 >> 8) - 16, (work->y2 >> 8) - 30, work->gfx, work->tiles, work->palette, NULL, work->handFlags, 3);
     }
 
-    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEB000[0], work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+    DrawSprite(work->x >> 8, work->y >> 8, gDeckScrollThumbFrames[0], work->tiles3, work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     switch (work->view) {
     case 0:
@@ -1344,10 +1344,10 @@ void DrawDeckExchangeDeckCardCount(u8 deck) {
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x60, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x80, 32);
 }
 
 void DrawDeckExchangeEquipMarker(u8 mode) {
@@ -1407,12 +1407,12 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0xA0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0xC0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[2] + 1) * 32], base + 0xE0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x100, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x120, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], base + 0x140, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0xA0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0xC0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[2] + 1) * 32], base + 0xE0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x100, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x120, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[2] + 1) * 32], base + 0x140, 32);
 }
 
 void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
@@ -1462,12 +1462,12 @@ void DrawDeckExchangeCardTotals() {
     d2[1] = b / 10 - d2[0] * 10;
     d2[2] = b - d2[0] * 100 - d2[1] * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0x2A0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0x2C0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0x2E0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], base + 0x300, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], base + 0x320, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x340, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[2] + 1) * 32], base + 0x340, 32);
 }
 
 void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* work) {
@@ -1554,10 +1554,10 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
         LoadDeckExchangeCardDescriptionText(work, id);
 
         if (def->kind > 46) {
-            LoadBgMap(2, gUnk_09518AB8, 0x800);
+            LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
             DrawDeckExchangeCpCost(0);
         } else {
-            LoadBgMap(2, gUnk_095182B8, 0x800);
+            LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
             DrawDeckExchangeCpCost(0);
         }
     } else {
@@ -1608,11 +1608,11 @@ void DrawDeckExchangeCpCost(u8 a) {
     if (a != 0) {
         d[0] = a / 10;
         d[1] = a - d[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(d[0] + 3) * 32], base + 0xCE0, 32);
-        RequestDma3Copy(&gUnk_0940FA98[(d[1] + 3) * 32], base + 0xD00, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(d[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(d[1] + 3) * 32], base + 0xD00, 32);
     } else {
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xCE0, 32);
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xCE0, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xD00, 32);
     }
 }
 
@@ -1841,14 +1841,14 @@ void FreeDeckExchangeCollectionEntries(DeckExchangeWork* work) {
 void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 kind) {
     switch (kind) {
     case 0:
-        SetObjTileSource(work->tiles2, gUnk_090A4A0C);
-        AnimInit(&work->anim2, gUnk_09EEB064, gUnk_09EEB050);
+        SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
+        AnimInit(&work->anim2, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim2);
         break;
     case 1:
-        SetObjTileSource(work->tiles2, gUnk_090A51F6);
-        AnimInit(&work->anim2, gUnk_09EEB07C, gUnk_09EEB068);
+        SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
+        AnimInit(&work->anim2, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim2);
         break;

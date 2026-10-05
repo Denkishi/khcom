@@ -370,8 +370,8 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* a) {
             pal = gUnk_09614418;
             work->palette3 = LoadObjPalette(pal, 32);
             LoadObjPaletteBank(work->palette3->index, pal);
-            SetObjTileSource(work->tiles, gUnk_090A4664);
-            AnimInit(&work->anim3, gUnk_09EEB03C, gUnk_09EEB008);
+            SetObjTileSource(work->tiles, gHandCursorTiles);
+            AnimInit(&work->anim3, gHandCursorAnims, gHandCursorFrames);
             AnimStart(&work->anim3, 2, ANIM_FLAG_LOOP);
             work->gfx3 = AnimGetGfx(&work->anim3);
             work->tiles2 = LoadObjTiles(gUnk_093F7C9C, 0xFC0);

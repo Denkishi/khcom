@@ -6985,8 +6985,8 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* a) {
     work->tiles2 = AllocObjTiles(288, NULL);
     work->palette2 = LoadObjPalette(gUnk_09614418, 32);
     LoadObjPaletteBank(work->palette2->index, gUnk_09614418);
-    SetObjTileSource(work->tiles2, gUnk_090A4664);
-    AnimInit(&work->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    SetObjTileSource(work->tiles2, gHandCursorTiles);
+    AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
     work->gfx2 = AnimGetGfx(&work->anim2);
     work->tiles3 = LoadObjTiles(gUnk_093F7C9C, 4032);

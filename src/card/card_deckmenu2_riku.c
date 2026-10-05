@@ -87,14 +87,14 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     work->deckIndex = GetActiveDeckIndex();
     CreateRikuDeckGridCards(work, 0);
     work->tiles = AllocObjTiles(0x120, NULL);
-    SetObjTileSource(work->tiles, gUnk_090A4664);
-    AnimInit(&work->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    SetObjTileSource(work->tiles, gHandCursorTiles);
+    AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim2);
     work->x = sRikuDeckTabPointerX[0] << 8;
     work->y = sRikuDeckTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
+    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gUnk_09614418, 32);
     work->handVisible = 0;
     work->tiles2 = AllocObjTiles(0x280, NULL);
@@ -140,7 +140,7 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
 #else
     work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
-    work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
     work->unk_4BC = 79;
     v = sUnk_09041EEE[work->deckIndex];
@@ -185,16 +185,16 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* a) {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gUnkEu_094E20E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy(gUnkEu_094E74E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gUnkEu_094E58E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gUnkEu_094E3CE4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
         break;
     }
 
@@ -228,7 +228,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* a) {
 #else
     RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base + 0x1A0, 0x1E0);
 #endif
-    LoadBgMap(0, gUnk_095172B8, 0x800);
+    LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
     LoadBgMap(1, gRikuDeckPanelMap, 0x800);
     DrawRikuDeckCategoryCount(work->deckAttackCount, 0);
     DrawRikuDeckCategoryCount(work->deckMagicCount, 1);
@@ -271,7 +271,7 @@ u8 UpdateRikuDeckMenuSlideIn(RikuDeckMenuWork* work, void* a) {
             n = --work->timer;
 
             if (n == 0) {
-                LoadBgMap(3, gUnk_095162B8, 0x800);
+                LoadBgMap(3, gRikuDeckReviewGridMap, 0x800);
                 ReleaseObjTiles(work->tiles12);
                 work->tiles12 = NULL;
                 ReleaseObjTiles(work->tiles6);
@@ -443,7 +443,7 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
 #else
     work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
 #endif
-    work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gUnk_096144F8, 32);
     LoadBgMap(3, gRikuDeckMenuMap, 0x800);
     work->x5 = 0x7800;
@@ -494,9 +494,9 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
     }
 
     if (work->tiles6 != NULL) {
-        DrawSprite(work->x5 >> 8, work->y5 >> 8, gUnk_09EEB080[0], work->tiles6,
+        DrawSprite(work->x5 >> 8, work->y5 >> 8, gDeckMenuBarFrames[0], work->tiles6,
                    work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(work->x6 >> 8, work->y6 >> 8, gUnk_09EEB080[1], work->tiles6,
+        DrawSprite(work->x6 >> 8, work->y6 >> 8, gDeckMenuBarFrames[1], work->tiles6,
                    work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
@@ -507,7 +507,7 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
                    work->tiles2, work->palette4, NULL, 0, 8);
     }
 
-    DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000[0], work->tiles4,
+    DrawSprite(work->x2 >> 8, work->y2 >> 8, gDeckScrollThumbFrames[0], work->tiles4,
                work->palette, NULL, SPRITE_PRIORITY(2), 10);
 
     if (work->tiles7 != NULL) {
@@ -723,8 +723,8 @@ void DrawRikuDeckCategoryCount(u8 a, u8 b) {
     d[0] = a / 10;
     d[1] = a - (u8)(a / 10) * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
-    RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
 }
 
 void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
@@ -779,15 +779,15 @@ void DrawRikuDeckCardCount(u8 deck) {
     }
 
 #ifdef VERSION_EU
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x2C00, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x2C20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x2C40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x2C60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x2C00, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x2C20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x2C40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x2C60, 32);
 #else
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x60, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x80, 32);
 #endif
 }
 
@@ -807,12 +807,12 @@ void DrawRikuCardTotals() {
     e[1] = b / 10 - e[0] * 10;
     e[2] = b - e[0] * 100 - e[1] * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x2A0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x2C0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[2] + 1) * 32], base + 0x2E0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x300, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x320, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[2] + 1) * 32], base + 0x340, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[2] + 1) * 32], base + 0x340, 32);
 }
 
 void LoadRikuDeckNameTexts(RikuDeckMenuWork* work) {
@@ -951,11 +951,11 @@ void DrawRikuCpCost(u8 a) {
     if (a != 0) {
         v[0] = a / 10;
         v[1] = a - v[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(v[0] + 3) * 32], base + 0xCE0, 32);
-        RequestDma3Copy(&gUnk_0940FA98[(v[1] + 3) * 32], base + 0xD00, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(v[1] + 3) * 32], base + 0xD00, 32);
     } else {
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xCE0, 32);
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xCE0, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xD00, 32);
     }
 }
 
@@ -986,14 +986,14 @@ void ReleaseRikuCommandMenuGfx(RikuDeckMenuWork* work) {
 void SetRikuDeckMenuFrameCursor(RikuDeckMenuWork* work, u8 mode) {
     switch (mode) {
     case 0:
-        SetObjTileSource(work->tiles2, gUnk_090A4A0C);
-        AnimInit(&work->anim3, gUnk_09EEB064, gUnk_09EEB050);
+        SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
+        AnimInit(&work->anim3, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
     case 1:
-        SetObjTileSource(work->tiles2, gUnk_090A51F6);
-        AnimInit(&work->anim3, gUnk_09EEB07C, gUnk_09EEB068);
+        SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
+        AnimInit(&work->anim3, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
@@ -1048,17 +1048,17 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
 }
 
 #ifdef VERSION_EU
-void* gRikuDeckTitleBannerTiles[5] = { gUnk_090A418E, gUnkEu_091926B2, gUnkEu_0919308A, gUnkEu_09192D42, gUnkEu_091929FA };
+void* gRikuDeckTitleBannerTiles[5] = { gUnk_090A418E, gRikuDeckTitleBannerFrenchTiles, gRikuDeckTitleBannerGermanTiles, gRikuDeckTitleBannerItalianTiles, gRikuDeckTitleBannerSpanishTiles };
 
 void** gRikuDeckTitleBannerSprites[5] = {
     gUnk_09EEAFF8,
-    gUnkEu_09F77100,
-    gUnkEu_09F77118,
-    gUnkEu_09F77110,
-    gUnkEu_09F77108,
+    gRikuDeckTitleBannerFrenchFrames,
+    gRikuDeckTitleBannerGermanFrames,
+    gRikuDeckTitleBannerItalianFrames,
+    gRikuDeckTitleBannerSpanishFrames,
 };
 
-u8* gRikuDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
+u8* gRikuDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gDeckEquipMarkerFrenchTiles, gDeckEquipMarkerGermanTiles, gDeckEquipMarkerItalianTiles, gDeckEquipMarkerSpanishTiles };
 #endif
 
 TaskDesc gTaskDescDeckmenu2Riku = {

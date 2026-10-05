@@ -71,18 +71,18 @@ entries:
     address: 0x09EC23D0
   eu:
     address: 0x09F7704C
-- name: gUnk_09EEAFE0
+- name: gDeckCardsInUseFrames
   record: SpriteTable
-  items: [gUnk_090A2234]
+  items: [gDeckCardsInUseFrame0]
   us:
     address: 0x09EEAFE0
   jp:
     address: 0x09EC23D4
   eu:
     address: 0x09F77050
-- name: gUnk_09EEAFE4
+- name: gDeckCardsInUseAnims
   record: AnimTable
-  items: [gUnk_090A228C]
+  items: [gDeckCardsInUseAnim0]
   us:
     address: 0x09EEAFE4
   jp:
@@ -140,290 +140,290 @@ entries:
     address: 0x09EC23E8
   eu:
     address: 0x09F7706C
-- name: gUnk_09EEB000
+- name: gDeckScrollThumbFrames
   record: SpriteTable
-  items: [gUnk_090A44B0]
+  items: [gDeckScrollThumbFrame0]
   us:
     address: 0x09EEB000
   jp:
     address: 0x09EC23EC
   eu:
     address: 0x09F77120
-- name: gUnk_09EEB004
+- name: gDeckScrollThumbAnims
   record: AnimTable
-  items: [gUnk_090A44BA]
+  items: [gDeckScrollThumbAnim0]
   us:
     address: 0x09EEB004
   jp:
     address: 0x09EC23F0
   eu:
     address: 0x09F77124
-- name: gUnkEu_09F77070
+- name: gDeckButtonLabelFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_09189F0C, gUnkEu_09189F1C]
+  items: [gDeckButtonLabelFrenchFrame0, gDeckButtonLabelFrenchFrame1]
   eu:
     address: 0x09F77070
-- name: gUnkEu_09F77078
+- name: gDeckButtonLabelFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09189F2C]
+  items: [gDeckButtonLabelFrenchAnim0]
   eu:
     address: 0x09F77078
-- name: gUnkEu_09F7707C
+- name: gDeckButtonLabelSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0918A1B8, gUnkEu_0918A1C8]
+  items: [gDeckButtonLabelSpanishFrame0, gDeckButtonLabelSpanishFrame1]
   eu:
     address: 0x09F7707C
-- name: gUnkEu_09F77084
+- name: gDeckButtonLabelSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0918A1D8]
+  items: [gDeckButtonLabelSpanishAnim0]
   eu:
     address: 0x09F77084
-- name: gUnkEu_09F77088
+- name: gDeckButtonLabelItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0918A464, gUnkEu_0918A474]
+  items: [gDeckButtonLabelItalianFrame0, gDeckButtonLabelItalianFrame1]
   eu:
     address: 0x09F77088
-- name: gUnkEu_09F77090
+- name: gDeckButtonLabelItalianAnims
   record: AnimTable
-  items: [gUnkEu_0918A484]
+  items: [gDeckButtonLabelItalianAnim0]
   eu:
     address: 0x09F77090
-- name: gUnkEu_09F77094
+- name: gDeckButtonLabelGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0918A710, gUnkEu_0918A720]
+  items: [gDeckButtonLabelGermanFrame0, gDeckButtonLabelGermanFrame1]
   eu:
     address: 0x09F77094
-- name: gUnkEu_09F7709C
+- name: gDeckButtonLabelGermanAnims
   record: AnimTable
-  items: [gUnkEu_0918A730]
+  items: [gDeckButtonLabelGermanAnim0]
   eu:
     address: 0x09F7709C
-- name: gUnkEu_09F770A0
+- name: gDeckCardsInUseFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0918A9BC]
+  items: [gDeckCardsInUseFrenchFrame0]
   eu:
     address: 0x09F770A0
-- name: gUnkEu_09F770A4
+- name: gDeckCardsInUseFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0918AA14]
+  items: [gDeckCardsInUseFrenchAnim0]
   eu:
     address: 0x09F770A4
-- name: gUnkEu_09F770A8
+- name: gDeckCardsInUseSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0918AD80]
+  items: [gDeckCardsInUseSpanishFrame0]
   eu:
     address: 0x09F770A8
-- name: gUnkEu_09F770AC
+- name: gDeckCardsInUseSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0918ADD8]
+  items: [gDeckCardsInUseSpanishAnim0]
   eu:
     address: 0x09F770AC
-- name: gUnkEu_09F770B0
+- name: gDeckCardsInUseItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0918B144]
+  items: [gDeckCardsInUseItalianFrame0]
   eu:
     address: 0x09F770B0
-- name: gUnkEu_09F770B4
+- name: gDeckCardsInUseItalianAnims
   record: AnimTable
-  items: [gUnkEu_0918B19C]
+  items: [gDeckCardsInUseItalianAnim0]
   eu:
     address: 0x09F770B4
-- name: gUnkEu_09F770B8
+- name: gDeckCardsInUseGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0918B508]
+  items: [gDeckCardsInUseGermanFrame0]
   eu:
     address: 0x09F770B8
-- name: gUnkEu_09F770BC
+- name: gDeckCardsInUseGermanAnims
   record: AnimTable
-  items: [gUnkEu_0918B560]
+  items: [gDeckCardsInUseGermanAnim0]
   eu:
     address: 0x09F770BC
-- name: gUnkEu_09F770C0
+- name: gDeckCommandMenuFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0918B8CC]
+  items: [gDeckCommandMenuFrenchFrame0]
   eu:
     address: 0x09F770C0
-- name: gUnkEu_09F770C4
+- name: gDeckCommandMenuFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0918B8E8]
+  items: [gDeckCommandMenuFrenchAnim0]
   eu:
     address: 0x09F770C4
-- name: gUnkEu_09F770C8
+- name: gDeckCommandMenuSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0918D0F4]
+  items: [gDeckCommandMenuSpanishFrame0]
   eu:
     address: 0x09F770C8
-- name: gUnkEu_09F770CC
+- name: gDeckCommandMenuSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0918D110]
+  items: [gDeckCommandMenuSpanishAnim0]
   eu:
     address: 0x09F770CC
-- name: gUnkEu_09F770D0
+- name: gDeckCommandMenuItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0918E91C]
+  items: [gDeckCommandMenuItalianFrame0]
   eu:
     address: 0x09F770D0
-- name: gUnkEu_09F770D4
+- name: gDeckCommandMenuItalianAnims
   record: AnimTable
-  items: [gUnkEu_0918E938]
+  items: [gDeckCommandMenuItalianAnim0]
   eu:
     address: 0x09F770D4
-- name: gUnkEu_09F770D8
+- name: gDeckCommandMenuGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09190144]
+  items: [gDeckCommandMenuGermanFrame0]
   eu:
     address: 0x09F770D8
-- name: gUnkEu_09F770DC
+- name: gDeckCommandMenuGermanAnims
   record: AnimTable
-  items: [gUnkEu_09190160]
+  items: [gDeckCommandMenuGermanAnim0]
   eu:
     address: 0x09F770DC
-- name: gUnkEu_09F770E0
+- name: gDeckTitleBannerFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0919196C]
+  items: [gDeckTitleBannerFrenchFrame0]
   eu:
     address: 0x09F770E0
-- name: gUnkEu_09F770E4
+- name: gDeckTitleBannerFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09191988]
+  items: [gDeckTitleBannerFrenchAnim0]
   eu:
     address: 0x09F770E4
-- name: gUnkEu_09F770E8
+- name: gDeckTitleBannerSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_09191CB4]
+  items: [gDeckTitleBannerSpanishFrame0]
   eu:
     address: 0x09F770E8
-- name: gUnkEu_09F770EC
+- name: gDeckTitleBannerSpanishAnims
   record: AnimTable
-  items: [gUnkEu_09191CD0]
+  items: [gDeckTitleBannerSpanishAnim0]
   eu:
     address: 0x09F770EC
-- name: gUnkEu_09F770F0
+- name: gDeckTitleBannerItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09191FFC]
+  items: [gDeckTitleBannerItalianFrame0]
   eu:
     address: 0x09F770F0
-- name: gUnkEu_09F770F4
+- name: gDeckTitleBannerItalianAnims
   record: AnimTable
-  items: [gUnkEu_09192018]
+  items: [gDeckTitleBannerItalianAnim0]
   eu:
     address: 0x09F770F4
-- name: gUnkEu_09F770F8
+- name: gDeckTitleBannerGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09192344]
+  items: [gDeckTitleBannerGermanFrame0]
   eu:
     address: 0x09F770F8
-- name: gUnkEu_09F770FC
+- name: gDeckTitleBannerGermanAnims
   record: AnimTable
-  items: [gUnkEu_09192360]
+  items: [gDeckTitleBannerGermanAnim0]
   eu:
     address: 0x09F770FC
-- name: gUnkEu_09F77100
+- name: gRikuDeckTitleBannerFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0919268C]
+  items: [gRikuDeckTitleBannerFrenchFrame0]
   eu:
     address: 0x09F77100
-- name: gUnkEu_09F77104
+- name: gRikuDeckTitleBannerFrenchAnims
   record: AnimTable
-  items: [gUnkEu_091926A8]
+  items: [gRikuDeckTitleBannerFrenchAnim0]
   eu:
     address: 0x09F77104
-- name: gUnkEu_09F77108
+- name: gRikuDeckTitleBannerSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_091929D4]
+  items: [gRikuDeckTitleBannerSpanishFrame0]
   eu:
     address: 0x09F77108
-- name: gUnkEu_09F7710C
+- name: gRikuDeckTitleBannerSpanishAnims
   record: AnimTable
-  items: [gUnkEu_091929F0]
+  items: [gRikuDeckTitleBannerSpanishAnim0]
   eu:
     address: 0x09F7710C
-- name: gUnkEu_09F77110
+- name: gRikuDeckTitleBannerItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09192D1C]
+  items: [gRikuDeckTitleBannerItalianFrame0]
   eu:
     address: 0x09F77110
-- name: gUnkEu_09F77114
+- name: gRikuDeckTitleBannerItalianAnims
   record: AnimTable
-  items: [gUnkEu_09192D38]
+  items: [gRikuDeckTitleBannerItalianAnim0]
   eu:
     address: 0x09F77114
-- name: gUnkEu_09F77118
+- name: gRikuDeckTitleBannerGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09193064]
+  items: [gRikuDeckTitleBannerGermanFrame0]
   eu:
     address: 0x09F77118
-- name: gUnkEu_09F7711C
+- name: gRikuDeckTitleBannerGermanAnims
   record: AnimTable
-  items: [gUnkEu_09193080]
+  items: [gRikuDeckTitleBannerGermanAnim0]
   eu:
     address: 0x09F7711C
-- name: gUnk_09EEB008
+- name: gHandCursorFrames
   record: SpriteTable
-  items: [gUnk_090A44E4, gUnk_090A44FA, gUnk_090A4510, gUnk_090A4526, gUnk_090A453C, gUnk_090A4552, gUnk_090A4568, gUnk_090A457E, gUnk_090A4594, gUnk_090A45AA, gUnk_090A45C0, gUnk_090A45D6, gUnk_090A45EC]
+  items: [gHandCursorFrame0, gHandCursorFrame1, gHandCursorFrame2, gHandCursorFrame3, gHandCursorFrame4, gHandCursorFrame5, gHandCursorFrame6, gHandCursorFrame7, gHandCursorFrame8, gHandCursorFrame9, gHandCursorFrame10, gHandCursorFrame11, gHandCursorFrame12]
   us:
     address: 0x09EEB008
   jp:
     address: 0x09EC23F4
   eu:
     address: 0x09F77128
-- name: gUnk_09EEB03C
+- name: gHandCursorAnims
   record: AnimTable
-  items: [gUnk_090A45F6, gUnk_090A4614, gUnk_090A461E, gUnk_090A463C, gUnk_090A4646]
+  items: [gHandCursorAnim0, gHandCursorAnim1, gHandCursorAnim2, gHandCursorAnim3, gHandCursorAnim4]
   us:
     address: 0x09EEB03C
   jp:
     address: 0x09EC2428
   eu:
     address: 0x09F7715C
-- name: gUnk_09EEB050
+- name: gDeckCardCursorFrames
   record: SpriteTable
-  items: [gUnk_090A4984, gUnk_090A49A0, gUnk_090A49BC, gUnk_090A49D2, gUnk_090A49E2]
+  items: [gDeckCardCursorFrame0, gDeckCardCursorFrame1, gDeckCardCursorFrame2, gDeckCardCursorFrame3, gDeckCardCursorFrame4]
   us:
     address: 0x09EEB050
   jp:
     address: 0x09EC243C
   eu:
     address: 0x09F77170
-- name: gUnk_09EEB064
+- name: gDeckCardCursorAnims
   record: AnimTable
-  items: [gUnk_090A49F2]
+  items: [gDeckCardCursorAnim0]
   us:
     address: 0x09EEB064
   jp:
     address: 0x09EC2450
   eu:
     address: 0x09F77184
-- name: gUnk_09EEB068
+- name: gDeckRowCursorFrames
   record: SpriteTable
-  items: [gUnk_090A518C, gUnk_090A519C, gUnk_090A51AC, gUnk_090A51BC, gUnk_090A51CC]
+  items: [gDeckRowCursorFrame0, gDeckRowCursorFrame1, gDeckRowCursorFrame2, gDeckRowCursorFrame3, gDeckRowCursorFrame4]
   us:
     address: 0x09EEB068
   jp:
     address: 0x09EC2454
   eu:
     address: 0x09F77188
-- name: gUnk_09EEB07C
+- name: gDeckRowCursorAnims
   record: AnimTable
-  items: [gUnk_090A51DC]
+  items: [gDeckRowCursorAnim0]
   us:
     address: 0x09EEB07C
   jp:
     address: 0x09EC2468
   eu:
     address: 0x09F7719C
-- name: gUnk_09EEB080
+- name: gDeckMenuBarFrames
   record: SpriteTable
-  items: [gUnk_090A57D8, gUnk_090A580C]
+  items: [gDeckMenuBarFrame0, gDeckMenuBarFrame1]
   us:
     address: 0x09EEB080
   jp:
     address: 0x09EC246C
   eu:
     address: 0x09F771A0
-- name: gUnk_09EEB088
+- name: gDeckMenuBarAnims
   record: AnimTable
-  items: [gUnk_090A5834]
+  items: [gDeckMenuBarAnim0]
   us:
     address: 0x09EEB088
   jp:
@@ -448,110 +448,110 @@ entries:
     address: 0x09EC24A4
   eu:
     address: 0x09F771D8
-- name: gUnkEu_09F771E4
+- name: gDeckKeyboardCursorItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0919591C, gUnkEu_09195926, gUnkEu_09195930, gUnkEu_0919593A, gUnkEu_09195944, gUnkEu_0919594E, gUnkEu_0919595E, gUnkEu_0919596E, gUnkEu_0919597E, gUnkEu_09195988, gUnkEu_09195992]
+  items: [gDeckKeyboardCursorItalianFrame0, gDeckKeyboardCursorItalianFrame1, gDeckKeyboardCursorItalianFrame2, gDeckKeyboardCursorItalianFrame3, gDeckKeyboardCursorItalianFrame4, gDeckKeyboardCursorItalianFrame5, gDeckKeyboardCursorItalianFrame6, gDeckKeyboardCursorItalianFrame7, gDeckKeyboardCursorItalianFrame8, gDeckKeyboardCursorItalianFrame9, gDeckKeyboardCursorItalianFrame10]
   eu:
     address: 0x09F771E4
-- name: gUnkEu_09F77210
+- name: gDeckKeyboardCursorItalianAnims
   record: AnimTable
-  items: [gUnkEu_0919599C, gUnkEu_091959B6, gUnkEu_091959D0]
+  items: [gDeckKeyboardCursorItalianAnim0, gDeckKeyboardCursorItalianAnim1, gDeckKeyboardCursorItalianAnim2]
   eu:
     address: 0x09F77210
-- name: gUnkEu_09F7721C
+- name: gDeckKeyboardCursorGermanFrames
   record: SpriteTable
-  items: [gUnkEu_091964DC, gUnkEu_091964E6, gUnkEu_091964F0, gUnkEu_091964FA, gUnkEu_09196504, gUnkEu_0919650E, gUnkEu_0919652A, gUnkEu_09196552, gUnkEu_0919656E, gUnkEu_09196578, gUnkEu_09196582]
+  items: [gDeckKeyboardCursorGermanFrame0, gDeckKeyboardCursorGermanFrame1, gDeckKeyboardCursorGermanFrame2, gDeckKeyboardCursorGermanFrame3, gDeckKeyboardCursorGermanFrame4, gDeckKeyboardCursorGermanFrame5, gDeckKeyboardCursorGermanFrame6, gDeckKeyboardCursorGermanFrame7, gDeckKeyboardCursorGermanFrame8, gDeckKeyboardCursorGermanFrame9, gDeckKeyboardCursorGermanFrame10]
   eu:
     address: 0x09F7721C
-- name: gUnkEu_09F77248
+- name: gDeckKeyboardCursorGermanAnims
   record: AnimTable
-  items: [gUnkEu_0919658C, gUnkEu_091965A6, gUnkEu_091965C0]
+  items: [gDeckKeyboardCursorGermanAnim0, gDeckKeyboardCursorGermanAnim1, gDeckKeyboardCursorGermanAnim2]
   eu:
     address: 0x09F77248
-- name: gUnk_090A4664
+- name: gHandCursorTiles
   format: sprite_sheet
   align: 4
   cell: [27, 35]
   anchor: [3, 2]
   columns: 8
   frames:
-  - symbol: gUnk_090A44E4
+  - symbol: gHandCursorFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x8, 10, 16]
     - [8x8, 16, 8]
-  - symbol: gUnk_090A44FA
+  - symbol: gHandCursorFrame1
     pieces:
     - [16x16, 0, 1]
     - [8x8, 10, 17]
     - [8x8, 16, 9]
-  - symbol: gUnk_090A4510
+  - symbol: gHandCursorFrame2
     pieces:
     - [16x16, 0, 2]
     - [8x8, 10, 18]
     - [8x8, 16, 10]
-  - symbol: gUnk_090A4526
+  - symbol: gHandCursorFrame3
     pieces:
     - [16x16, 0, 3]
     - [8x8, 10, 19]
     - [8x8, 16, 11]
-  - symbol: gUnk_090A453C
+  - symbol: gHandCursorFrame4
     pieces:
     - [16x16, 0, 0]
     - [8x16, 16, 0]
     - [16x8, 7, 16]
-  - symbol: gUnk_090A4552
+  - symbol: gHandCursorFrame5
     pieces:
     - [16x16, -1, 0]
     - [8x16, 15, 0]
     - [16x8, 6, 16]
-  - symbol: gUnk_090A4568
+  - symbol: gHandCursorFrame6
     pieces:
     - [16x16, -2, 0]
     - [8x16, 14, 0]
     - [16x8, 5, 16]
-  - symbol: gUnk_090A457E
+  - symbol: gHandCursorFrame7
     pieces:
     - [16x16, -3, 0]
     - [8x16, 13, 0]
     - [16x8, 4, 16]
-  - symbol: gUnk_090A4594
+  - symbol: gHandCursorFrame8
     pieces:
     - [16x16, 3, -2]
     - [16x8, 3, 14]
     - [8x8, 3, 22]
-  - symbol: gUnk_090A45AA
+  - symbol: gHandCursorFrame9
     pieces:
     - [16x16, 3, -1]
     - [16x8, 3, 15]
     - [8x8, 3, 23]
-  - symbol: gUnk_090A45C0
+  - symbol: gHandCursorFrame10
     pieces:
     - [16x16, 3, 0]
     - [16x8, 3, 16]
     - [8x8, 3, 24]
-  - symbol: gUnk_090A45D6
+  - symbol: gHandCursorFrame11
     pieces:
     - [16x16, 3, 1]
     - [16x8, 3, 17]
     - [8x8, 3, 25]
-  - symbol: gUnk_090A45EC
+  - symbol: gHandCursorFrame12
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_090A45F6
+  - symbol: gHandCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4], [1, 3], [2, 3], [3, 4], [2, 3], [1, 3]]
-  - symbol: gUnk_090A4614
+  - symbol: gHandCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnk_090A461E
+  - symbol: gHandCursorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4], [5, 3], [6, 3], [7, 4], [6, 3], [5, 3]]
-  - symbol: gUnk_090A463C
+  - symbol: gHandCursorAnim3
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 4]]
-  - symbol: gUnk_090A4646
+  - symbol: gHandCursorAnim4
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 4], [9, 3], [10, 3], [11, 4], [10, 3], [9, 3]]
   us:
@@ -563,40 +563,40 @@ entries:
   eu:
     address: 0x091933E0
     size: 1184
-- name: gUnk_090A4A0C
+- name: gDeckCardCursorTiles
   format: sprite_sheet
   align: 4
   cell: [32, 40]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_090A4984
+  - symbol: gDeckCardCursorFrame0
     pieces:
     - [32x8, 0, 0]
     - [8x32, 0, 8]
     - [8x32, 24, 8]
     - [16x8, 8, 32]
-  - symbol: gUnk_090A49A0
+  - symbol: gDeckCardCursorFrame1
     pieces:
     - [32x8, 0, 0]
     - [8x32, 0, 8]
     - [8x32, 24, 8]
     - [16x8, 8, 32]
-  - symbol: gUnk_090A49BC
+  - symbol: gDeckCardCursorFrame2
     pieces:
     - [16x32, 0, 0]
     - [16x32, 16, 0]
     - [32x8, 0, 32]
-  - symbol: gUnk_090A49D2
+  - symbol: gDeckCardCursorFrame3
     pieces:
     - [16x16, 8, 8]
     - [16x8, 8, 24]
-  - symbol: gUnk_090A49E2
+  - symbol: gDeckCardCursorFrame4
     pieces:
     - [16x16, 8, 8]
     - [16x8, 8, 24]
   animations:
-  - symbol: gUnk_090A49F2
+  - symbol: gDeckCardCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
@@ -608,35 +608,35 @@ entries:
   eu:
     address: 0x09193880
     size: 2056
-- name: gUnk_090A51F6
+- name: gDeckRowCursorTiles
   format: sprite_sheet
   align: 4
   cell: [48, 16]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_090A518C
+  - symbol: gDeckRowCursorFrame0
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
-  - symbol: gUnk_090A519C
+  - symbol: gDeckRowCursorFrame1
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
-  - symbol: gUnk_090A51AC
+  - symbol: gDeckRowCursorFrame2
     pieces:
     - [32x16, 0, 0]
     - [16x16, 32, 0]
-  - symbol: gUnk_090A51BC
+  - symbol: gDeckRowCursorFrame3
     pieces:
     - [32x8, 0, 4]
     - [16x8, 32, 4]
-  - symbol: gUnk_090A51CC
+  - symbol: gDeckRowCursorFrame4
     pieces:
     - [32x8, 4, 4]
     - [8x8, 36, 4]
   animations:
-  - symbol: gUnk_090A51DC
+  - symbol: gDeckRowCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
   us:
@@ -648,14 +648,14 @@ entries:
   eu:
     address: 0x09194088
     size: 1610
-- name: gUnk_090A583E
+- name: gDeckMenuBarTiles
   format: sprite_sheet
   align: 4
   cell: [240, 8]
   anchor: [120, 0]
   columns: 2
   frames:
-  - symbol: gUnk_090A57D8
+  - symbol: gDeckMenuBarFrame0
     pieces:
     - [32x8, -120, 0]
     - [32x8, -88, 0, {fresh: true}]
@@ -665,7 +665,7 @@ entries:
     - [32x8, 40, 0, {fresh: true}]
     - [32x8, 72, 0, {fresh: true}]
     - [16x8, 104, 0]
-  - symbol: gUnk_090A580C
+  - symbol: gDeckMenuBarFrame1
     pieces:
     - [32x8, -76, 0]
     - [32x8, -44, 0, {fresh: true}]
@@ -674,7 +674,7 @@ entries:
     - [16x8, 52, 0]
     - [8x8, 68, 0]
   animations:
-  - symbol: gUnk_090A5834
+  - symbol: gDeckMenuBarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -748,91 +748,91 @@ entries:
   eu:
     address: 0x09194D5C
     size: 3006
-- name: gUnkEu_091959DA
+- name: gDeckKeyboardCursorItalianTiles
   format: sprite_sheet
   align: 4
   cell: [40, 32]
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_0919591C
+  - symbol: gDeckKeyboardCursorItalianFrame0
     pieces:
     - [32x32, -8, -8]
-  - symbol: gUnkEu_09195926
+  - symbol: gDeckKeyboardCursorItalianFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_09195930
+  - symbol: gDeckKeyboardCursorItalianFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_0919593A
+  - symbol: gDeckKeyboardCursorItalianFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_09195944
+  - symbol: gDeckKeyboardCursorItalianFrame4
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_0919594E
+  - symbol: gDeckKeyboardCursorItalianFrame5
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnkEu_0919595E
+  - symbol: gDeckKeyboardCursorItalianFrame6
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnkEu_0919596E
+  - symbol: gDeckKeyboardCursorItalianFrame7
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnkEu_0919597E
+  - symbol: gDeckKeyboardCursorItalianFrame8
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_09195988
+  - symbol: gDeckKeyboardCursorItalianFrame9
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_09195992
+  - symbol: gDeckKeyboardCursorItalianFrame10
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnkEu_0919599C
+  - symbol: gDeckKeyboardCursorItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
-  - symbol: gUnkEu_091959B6
+  - symbol: gDeckKeyboardCursorItalianAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
-  - symbol: gUnkEu_091959D0
+  - symbol: gDeckKeyboardCursorItalianAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[10, 4]]
   eu:
     address: 0x0919591C
     size: 3006
-- name: gUnkEu_091965CA
+- name: gDeckKeyboardCursorGermanTiles
   format: sprite_sheet
   align: 4
   cell: [48, 32]
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_091964DC
+  - symbol: gDeckKeyboardCursorGermanFrame0
     pieces:
     - [32x32, -8, -8]
-  - symbol: gUnkEu_091964E6
+  - symbol: gDeckKeyboardCursorGermanFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_091964F0
+  - symbol: gDeckKeyboardCursorGermanFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_091964FA
+  - symbol: gDeckKeyboardCursorGermanFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_09196504
+  - symbol: gDeckKeyboardCursorGermanFrame4
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnkEu_0919650E
+  - symbol: gDeckKeyboardCursorGermanFrame5
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
     - [32x8, 0, 16]
     - [8x8, 32, 16]
-  - symbol: gUnkEu_0919652A
+  - symbol: gDeckKeyboardCursorGermanFrame6
     pieces:
     - [32x8, 0, 16, {layer: 1}]
     - [8x8, 32, 16, {layer: 1}]
@@ -840,29 +840,29 @@ entries:
     - [8x16, 32, 0]
     - [32x8, 0, 16]
     - [8x8, 32, 16]
-  - symbol: gUnkEu_09196552
+  - symbol: gDeckKeyboardCursorGermanFrame7
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
     - [32x8, 0, 16]
     - [8x8, 32, 16, {fresh: true}]
-  - symbol: gUnkEu_0919656E
+  - symbol: gDeckKeyboardCursorGermanFrame8
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_09196578
+  - symbol: gDeckKeyboardCursorGermanFrame9
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnkEu_09196582
+  - symbol: gDeckKeyboardCursorGermanFrame10
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnkEu_0919658C
+  - symbol: gDeckKeyboardCursorGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
-  - symbol: gUnkEu_091965A6
+  - symbol: gDeckKeyboardCursorGermanAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
-  - symbol: gUnkEu_091965C0
+  - symbol: gDeckKeyboardCursorGermanAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[10, 4]]
   eu:
@@ -913,7 +913,7 @@ entries:
   eu:
     address: 0x094E0CE4
     size: 5120
-- name: gUnk_0940F7B8
+- name: gDeckCategoryDigitTiles
   format: tiles4
   us:
     address: 0x0940F7B8
@@ -924,7 +924,7 @@ entries:
   eu:
     address: 0x094EA8E4
     size: 352
-- name: gUnk_0940F918
+- name: gDeckCategoryZeroTiles
   format: tiles4
   us:
     address: 0x0940F918
@@ -935,7 +935,7 @@ entries:
   eu:
     address: 0x094EAA44
     size: 32
-- name: gUnk_0940F938
+- name: gDeckCountDigitTiles
   format: tiles4
   us:
     address: 0x0940F938
@@ -946,7 +946,7 @@ entries:
   eu:
     address: 0x094EAA64
     size: 352
-- name: gUnk_0940FA98
+- name: gDeckValueDigitTiles
   format: tiles4
   width: 2
   us:
@@ -958,7 +958,7 @@ entries:
   eu:
     address: 0x094EABC4
     size: 64
-- name: gUnk_0940FAD8
+- name: gDeckValueZeroTiles
   format: tiles4
   us:
     address: 0x0940FAD8
@@ -987,7 +987,7 @@ entries:
   us:
     address: 0x09410378
     size: 28672
-- name: gUnk_09417438
+- name: gDeckKeyboard0Tiles
   format: tiles4
   width: 32
   us:
@@ -999,7 +999,7 @@ entries:
   eu:
     address: 0x094EB564
     size: 4096
-- name: gUnk_09418438
+- name: gDeckKeyboard1Tiles
   format: tiles4
   width: 32
   us:
@@ -1011,7 +1011,7 @@ entries:
   eu:
     address: 0x094EC564
     size: 4096
-- name: gUnk_09419438
+- name: gDeckKeyboard2Tiles
   format: tiles4
   us:
     address: 0x09419438
@@ -1022,7 +1022,7 @@ entries:
   eu:
     address: 0x094ED564
     size: 11840
-- name: gUnk_09417378
+- name: gDeckKeyboardDeckNumberTiles
   format: tiles4
   width: 2
   us:
@@ -1034,7 +1034,7 @@ entries:
   eu:
     address: 0x094EB4A4
     size: 192
-- name: gUnk_09512AB8
+- name: gDeckReviewGridMap
   format: tilemap
   us:
     address: 0x09512AB8
@@ -1061,7 +1061,7 @@ entries:
   us:
     address: 0x09513AB8
     size: 2048
-- name: gUnk_095142B8
+- name: gDeckAddGridMap
   format: tilemap
   us:
     address: 0x095142B8
@@ -1072,7 +1072,7 @@ entries:
   eu:
     address: 0x09535324
     size: 2048
-- name: gUnk_09514AB8
+- name: gDeckCardsInUseMap
   format: tilemap
   us:
     address: 0x09514AB8
@@ -1094,7 +1094,7 @@ entries:
   eu:
     address: 0x09537B24
     size: 2048
-- name: gUnk_09515AB8
+- name: gDeckExchangeGridMap
   format: tilemap
   us:
     address: 0x09515AB8
@@ -1102,7 +1102,7 @@ entries:
   jp:
     address: 0x094CD594
     size: 2048
-- name: gUnk_095162B8
+- name: gRikuDeckReviewGridMap
   format: tilemap
   us:
     address: 0x095162B8
@@ -1124,7 +1124,7 @@ entries:
   eu:
     address: 0x09533324
     size: 2048
-- name: gUnk_095172B8
+- name: gDeckDescriptionWindowMap
   format: tilemap
   us:
     address: 0x095172B8
@@ -1135,7 +1135,7 @@ entries:
   eu:
     address: 0x09534324
     size: 2048
-- name: gUnk_09517AB8
+- name: gDeckCpLabelMap
   format: tilemap
   us:
     address: 0x09517AB8
@@ -1146,7 +1146,7 @@ entries:
   eu:
     address: 0x09534B24
     size: 2048
-- name: gUnk_095182B8
+- name: gDeckCollectionInfoMap
   format: tilemap
   us:
     address: 0x095182B8
@@ -1157,7 +1157,7 @@ entries:
   eu:
     address: 0x09535B24
     size: 2048
-- name: gUnk_09518AB8
+- name: gDeckCollectionEnemyInfoMap
   format: tilemap
   us:
     address: 0x09518AB8
@@ -1168,7 +1168,7 @@ entries:
   eu:
     address: 0x09536324
     size: 2048
-- name: gUnk_095192B8
+- name: gDeckDeleteGridMap
   format: tilemap
   us:
     address: 0x095192B8
@@ -1239,7 +1239,7 @@ entries:
   eu:
     address: 0x0953B324
     size: 2048
-- name: gUnk_0951C2B8
+- name: gDeckKeyboardMap
   format: tilemap
   us:
     address: 0x0951C2B8
@@ -1250,100 +1250,100 @@ entries:
   eu:
     address: 0x0953BB24
     size: 2048
-- name: gUnkEu_094E04E4
+- name: gDeckMenuTextTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094E04E4
     size: 2048
-- name: gUnkEu_094E20E4
+- name: gDeckMenuTextFrenchTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094E20E4
     size: 7168
-- name: gUnkEu_094E3CE4
+- name: gDeckMenuTextSpanishTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094E3CE4
     size: 7168
-- name: gUnkEu_094E58E4
+- name: gDeckMenuTextItalianTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094E58E4
     size: 7168
-- name: gUnkEu_094E74E4
+- name: gDeckMenuTextGermanTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094E74E4
     size: 7168
-- name: gUnkEu_094E90E4
+- name: gDeckEquipMarkerFrenchTiles
   format: tiles4
   width: 16
   eu:
     address: 0x094E90E4
     size: 1536
-- name: gUnkEu_094E96E4
+- name: gDeckEquipMarkerSpanishTiles
   format: tiles4
   width: 16
   eu:
     address: 0x094E96E4
     size: 1536
-- name: gUnkEu_094E9CE4
+- name: gDeckEquipMarkerItalianTiles
   format: tiles4
   width: 16
   eu:
     address: 0x094E9CE4
     size: 1536
-- name: gUnkEu_094EA2E4
+- name: gDeckEquipMarkerGermanTiles
   format: tiles4
   width: 16
   eu:
     address: 0x094EA2E4
     size: 1536
-- name: gUnkJp_093D1694
+- name: gDeckKeyboard3Tiles
   format: tiles4
   width: 32
   jp:
     address: 0x093D1694
     size: 4096
-- name: gUnkJp_094D4594
+- name: gDeckKeyboardKatakanaMap
   format: tilemap
   jp:
     address: 0x094D4594
     size: 2048
-- name: gUnkJp_094D4D94
+- name: gDeckKeyboardAlphanumericMap
   format: tilemap
   jp:
     address: 0x094D4D94
     size: 2048
-- name: gUnkEu_094F03A4
+- name: gDeckKeyboardTextFrenchTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094F03A4
     size: 2048
-- name: gUnkEu_094F0BA4
+- name: gDeckKeyboardTextSpanishTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094F0BA4
     size: 2048
-- name: gUnkEu_094F13A4
+- name: gDeckKeyboardTextItalianTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094F13A4
     size: 2048
-- name: gUnkEu_094F1BA4
+- name: gDeckKeyboardTextGermanTiles
   format: tiles4
   eu:
     address: 0x094F1BA4
     size: 1824
-- name: gUnkEu_0953C324
+- name: gDeckKeyboardSymbolMap
   format: tilemap
   eu:
     address: 0x0953C324
@@ -1376,14 +1376,14 @@ entries:
   eu:
     address: 0x091879E4
     size: 682
-- name: gUnk_090A2296
+- name: gDeckCardsInUseTiles
   format: sprite_sheet
   align: 4
   cell: [72, 24]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_090A2234
+  - symbol: gDeckCardsInUseFrame0
     pieces:
     - [32x8, 8, 16]
     - [32x8, 40, 16]
@@ -1400,7 +1400,7 @@ entries:
     - [8x16, 0, 0]
     - [8x8, 0, 16]
   animations:
-  - symbol: gUnk_090A228C
+  - symbol: gDeckCardsInUseAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -1491,18 +1491,18 @@ entries:
   eu:
     address: 0x09189BC4
     size: 838
-- name: gUnk_090A44C4
+- name: gDeckScrollThumbTiles
   format: sprite_sheet
   align: 4
   cell: [8, 8]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_090A44B0
+  - symbol: gDeckScrollThumbFrame0
     pieces:
     - [8x8, 0, 0]
   animations:
-  - symbol: gUnk_090A44BA
+  - symbol: gDeckScrollThumbAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1514,106 +1514,106 @@ entries:
   eu:
     address: 0x091933AC
     size: 52
-- name: gUnkEu_09189F36
+- name: gDeckButtonLabelFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [40, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnkEu_09189F0C
+  - symbol: gDeckButtonLabelFrenchFrame0
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
-  - symbol: gUnkEu_09189F1C
+  - symbol: gDeckButtonLabelFrenchFrame1
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
   animations:
-  - symbol: gUnkEu_09189F2C
+  - symbol: gDeckButtonLabelFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
   eu:
     address: 0x09189F0C
     size: 682
-- name: gUnkEu_0918A1E2
+- name: gDeckButtonLabelSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [40, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnkEu_0918A1B8
+  - symbol: gDeckButtonLabelSpanishFrame0
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
-  - symbol: gUnkEu_0918A1C8
+  - symbol: gDeckButtonLabelSpanishFrame1
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
   animations:
-  - symbol: gUnkEu_0918A1D8
+  - symbol: gDeckButtonLabelSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A1B8
     size: 682
-- name: gUnkEu_0918A48E
+- name: gDeckButtonLabelItalianTiles
   format: sprite_sheet
   align: 4
   cell: [40, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnkEu_0918A464
+  - symbol: gDeckButtonLabelItalianFrame0
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
-  - symbol: gUnkEu_0918A474
+  - symbol: gDeckButtonLabelItalianFrame1
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
   animations:
-  - symbol: gUnkEu_0918A484
+  - symbol: gDeckButtonLabelItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A464
     size: 682
-- name: gUnkEu_0918A73A
+- name: gDeckButtonLabelGermanTiles
   format: sprite_sheet
   align: 4
   cell: [40, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnkEu_0918A710
+  - symbol: gDeckButtonLabelGermanFrame0
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
-  - symbol: gUnkEu_0918A720
+  - symbol: gDeckButtonLabelGermanFrame1
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
   animations:
-  - symbol: gUnkEu_0918A730
+  - symbol: gDeckButtonLabelGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
   eu:
     address: 0x0918A710
     size: 682
-- name: gUnkEu_0918AA1E
+- name: gDeckCardsInUseFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [72, 24]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918A9BC
+  - symbol: gDeckCardsInUseFrenchFrame0
     pieces:
     - [32x8, 8, 16]
     - [32x8, 40, 16]
@@ -1630,21 +1630,21 @@ entries:
     - [8x16, 0, 0]
     - [8x8, 0, 16]
   animations:
-  - symbol: gUnkEu_0918AA14
+  - symbol: gDeckCardsInUseFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918A9BC
     size: 962
-- name: gUnkEu_0918ADE2
+- name: gDeckCardsInUseSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [72, 24]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918AD80
+  - symbol: gDeckCardsInUseSpanishFrame0
     pieces:
     - [32x8, 8, 16]
     - [32x8, 40, 16]
@@ -1661,21 +1661,21 @@ entries:
     - [8x16, 0, 0]
     - [8x8, 0, 16]
   animations:
-  - symbol: gUnkEu_0918ADD8
+  - symbol: gDeckCardsInUseSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918AD80
     size: 962
-- name: gUnkEu_0918B1A6
+- name: gDeckCardsInUseItalianTiles
   format: sprite_sheet
   align: 4
   cell: [72, 24]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918B144
+  - symbol: gDeckCardsInUseItalianFrame0
     pieces:
     - [32x8, 8, 16]
     - [32x8, 40, 16]
@@ -1692,21 +1692,21 @@ entries:
     - [8x16, 0, 0]
     - [8x8, 0, 16]
   animations:
-  - symbol: gUnkEu_0918B19C
+  - symbol: gDeckCardsInUseItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B144
     size: 962
-- name: gUnkEu_0918B56A
+- name: gDeckCardsInUseGermanTiles
   format: sprite_sheet
   align: 4
   cell: [72, 24]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918B508
+  - symbol: gDeckCardsInUseGermanFrame0
     pieces:
     - [32x8, 8, 16]
     - [32x8, 40, 16]
@@ -1723,259 +1723,259 @@ entries:
     - [8x16, 0, 0]
     - [8x8, 0, 16]
   animations:
-  - symbol: gUnkEu_0918B560
+  - symbol: gDeckCardsInUseGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B508
     size: 962
-- name: gUnkEu_0918B8F2
+- name: gDeckCommandMenuFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [96, 128]
   anchor: [48, 62]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918B8CC
+  - symbol: gDeckCommandMenuFrenchFrame0
     pieces:
     - [64x64, -48, -62]
     - [32x64, 16, -62]
     - [64x64, -48, 2]
     - [32x64, 16, 2]
   animations:
-  - symbol: gUnkEu_0918B8E8
+  - symbol: gDeckCommandMenuFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918B8CC
     size: 6182
-- name: gUnkEu_0918D11A
+- name: gDeckCommandMenuSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [96, 128]
   anchor: [48, 62]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918D0F4
+  - symbol: gDeckCommandMenuSpanishFrame0
     pieces:
     - [64x64, -48, -62]
     - [32x64, 16, -62]
     - [64x64, -48, 2]
     - [32x64, 16, 2]
   animations:
-  - symbol: gUnkEu_0918D110
+  - symbol: gDeckCommandMenuSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918D0F4
     size: 6182
-- name: gUnkEu_0918E942
+- name: gDeckCommandMenuItalianTiles
   format: sprite_sheet
   align: 4
   cell: [96, 128]
   anchor: [48, 62]
   columns: 1
   frames:
-  - symbol: gUnkEu_0918E91C
+  - symbol: gDeckCommandMenuItalianFrame0
     pieces:
     - [64x64, -48, -62]
     - [32x64, 16, -62]
     - [64x64, -48, 2]
     - [32x64, 16, 2]
   animations:
-  - symbol: gUnkEu_0918E938
+  - symbol: gDeckCommandMenuItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0918E91C
     size: 6182
-- name: gUnkEu_0919016A
+- name: gDeckCommandMenuGermanTiles
   format: sprite_sheet
   align: 4
   cell: [96, 128]
   anchor: [48, 62]
   columns: 1
   frames:
-  - symbol: gUnkEu_09190144
+  - symbol: gDeckCommandMenuGermanFrame0
     pieces:
     - [64x64, -48, -62]
     - [32x64, 16, -62]
     - [64x64, -48, 2]
     - [32x64, 16, 2]
   animations:
-  - symbol: gUnkEu_09190160
+  - symbol: gDeckCommandMenuGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09190144
     size: 6182
-- name: gUnkEu_09191992
+- name: gDeckTitleBannerFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0919196C
+  - symbol: gDeckTitleBannerFrenchFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09191988
+  - symbol: gDeckTitleBannerFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0919196C
     size: 838
-- name: gUnkEu_09191CDA
+- name: gDeckTitleBannerSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09191CB4
+  - symbol: gDeckTitleBannerSpanishFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09191CD0
+  - symbol: gDeckTitleBannerSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09191CB4
     size: 838
-- name: gUnkEu_09192022
+- name: gDeckTitleBannerItalianTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09191FFC
+  - symbol: gDeckTitleBannerItalianFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09192018
+  - symbol: gDeckTitleBannerItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09191FFC
     size: 838
-- name: gUnkEu_0919236A
+- name: gDeckTitleBannerGermanTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09192344
+  - symbol: gDeckTitleBannerGermanFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09192360
+  - symbol: gDeckTitleBannerGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09192344
     size: 838
-- name: gUnkEu_091926B2
+- name: gRikuDeckTitleBannerFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_0919268C
+  - symbol: gRikuDeckTitleBannerFrenchFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_091926A8
+  - symbol: gRikuDeckTitleBannerFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0919268C
     size: 838
-- name: gUnkEu_091929FA
+- name: gRikuDeckTitleBannerSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_091929D4
+  - symbol: gRikuDeckTitleBannerSpanishFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_091929F0
+  - symbol: gRikuDeckTitleBannerSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091929D4
     size: 838
-- name: gUnkEu_09192D42
+- name: gRikuDeckTitleBannerItalianTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09192D1C
+  - symbol: gRikuDeckTitleBannerItalianFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09192D38
+  - symbol: gRikuDeckTitleBannerItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09192D1C
     size: 838
-- name: gUnkEu_0919308A
+- name: gRikuDeckTitleBannerGermanTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnkEu_09193064
+  - symbol: gRikuDeckTitleBannerGermanFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnkEu_09193080
+  - symbol: gRikuDeckTitleBannerGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]

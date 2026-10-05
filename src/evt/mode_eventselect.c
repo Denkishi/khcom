@@ -595,7 +595,7 @@ void down_0(EffectWork* work, EventCharaWork* chara) {
     }
 
     work->tiles = AllocSpriteFrameTiles(32);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EEA19C[3], gUnk_0908C686);
+    UpdateSpriteFrameTiles(work->tiles, gLvupLogoFrames[3], gLvupLogoTiles);
     work->palette = LoadObjPalette(gCard00Palette, 32);
     work->down = EwramAlloc(sizeof(DownWork));
     s = work->down;

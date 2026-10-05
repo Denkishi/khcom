@@ -1856,7 +1856,7 @@ void StockInfo_0(StockInfoWork* work, u8* active) {
 
     work->active = active;
     TaskPoolInit(&work->tasks, 1);
-    work->tiles = LoadObjTiles(gUnk_0908FCEE, 0x12A0);
+    work->tiles = LoadObjTiles(gStockInfoWindowTiles, 0x12A0);
     work->palette = LoadObjPalette(gUnk_09613F78, 32);
 
     for (i = 16; i < 32; i++) {
@@ -1927,7 +1927,7 @@ s32 UpdateStockInfoMessage(StockInfoWork* work) {
 }
 
 void StockInfo_2(StockInfoWork* work) {
-    DrawSprite(work->x >> 8, work->y >> 8, gUnk_09EEA28C[0], work->tiles, work->palette, NULL, 0, 50);
+    DrawSprite(work->x >> 8, work->y >> 8, gStockInfoWindowFrames[0], work->tiles, work->palette, NULL, 0, 50);
     TaskPoolDraw(&work->tasks);
 }
 

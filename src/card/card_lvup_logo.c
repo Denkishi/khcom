@@ -55,26 +55,26 @@ void LVUP_EFFECT_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
         break;
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
         break;
     default:
-        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+    work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
     work->palette = LoadObjPalette(gCard00Palette, 32);
 
@@ -218,15 +218,15 @@ void LVUP_EFFECT_3(LevelUpEffectWork* work) {
     }
 }
 
-void* gLvupEffectSprites[6] = { gUnk_0908C640, gUnk_0908C64A, gUnk_0908C654, gUnk_0908C65E, gUnk_0908C668, gUnk_0908C672 };
+void* gLvupEffectSprites[6] = { gLvupLogoFrame1, gLvupLogoFrame2, gLvupLogoFrame3, gLvupLogoFrame4, gLvupLogoFrame5, gLvupLogoFrame6 };
 #ifdef VERSION_EU
-static void* sLvupEffectSpritesFrench[6] = { gUnkEu_0916F94C, gUnkEu_0916F956, gUnkEu_0916F960, gUnkEu_0916F96A, gUnkEu_0916F974, gUnkEu_0916F97E };
+static void* sLvupEffectSpritesFrench[6] = { gLvupLogoFrenchFrame1, gLvupLogoFrenchFrame2, gLvupLogoFrenchFrame3, gLvupLogoFrenchFrame4, gLvupLogoFrenchFrame5, gLvupLogoFrenchFrame6 };
 
-static void* sLvupEffectSpritesSpanish[6] = { gUnkEu_0916FD84, gUnkEu_0916FD8E, gUnkEu_0916FD98, gUnkEu_0916FDA2, gUnkEu_0916FDAC, gUnkEu_0916FDB6 };
+static void* sLvupEffectSpritesSpanish[6] = { gLvupLogoSpanishFrame1, gLvupLogoSpanishFrame2, gLvupLogoSpanishFrame3, gLvupLogoSpanishFrame4, gLvupLogoSpanishFrame5, gLvupLogoSpanishFrame6 };
 
-static void* sLvupEffectSpritesItalian[6] = { gUnkEu_091701BC, gUnkEu_091701C6, gUnkEu_091701D0, gUnkEu_091701DA, gUnkEu_091701E4, gUnkEu_091701EE };
+static void* sLvupEffectSpritesItalian[6] = { gLvupLogoItalianFrame1, gLvupLogoItalianFrame2, gLvupLogoItalianFrame3, gLvupLogoItalianFrame4, gLvupLogoItalianFrame5, gLvupLogoItalianFrame6 };
 
-static void* sLvupEffectSpritesGerman[6] = { gUnkEu_091705F4, gUnkEu_091705FE, gUnkEu_09170608, gUnkEu_09170612, gUnkEu_0917061C, gUnkEu_09170626 };
+static void* sLvupEffectSpritesGerman[6] = { gLvupLogoGermanFrame1, gLvupLogoGermanFrame2, gLvupLogoGermanFrame3, gLvupLogoGermanFrame4, gLvupLogoGermanFrame5, gLvupLogoGermanFrame6 };
 
 void** gLvupEffectSpritesByLanguage[5] = { gLvupEffectSprites, sLvupEffectSpritesFrench, sLvupEffectSpritesGerman, sLvupEffectSpritesItalian, sLvupEffectSpritesSpanish };
 #endif
@@ -256,26 +256,26 @@ void Lvup_Logo_0(LevelUpEffectWork* work, LevelUpEffectArgs* a) {
 #ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
         break;
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
         break;
     case LANGUAGE_GERMAN:
-        work->tiles = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
         break;
     default:
-        work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+        work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gUnk_0908C686, 0x3E0);
+    work->tiles = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
     LoadObjPalette(gCard00Palette, 32);
     work->tiles = a->tiles;
@@ -302,7 +302,7 @@ s32 Lvup_Logo_1(LevelUpEffectWork* work) {
 }
 
 void Lvup_Logo_2(LevelUpEffectWork* work) {
-    DrawSprite(work->x[0] >> 8, work->y[0] >> 8, gUnk_09EEA19C[work->frame], work->tiles, work->palette, NULL, 0, 10);
+    DrawSprite(work->x[0] >> 8, work->y[0] >> 8, gLvupLogoFrames[work->frame], work->tiles, work->palette, NULL, 0, 10);
 }
 
 void Lvup_Logo_3(LevelUpEffectWork* work) {
@@ -425,4 +425,4 @@ TaskDesc gTaskDescEvMapObj = {
     sizeof(EventMapObjectWork),
 };
 
-void* gEventBgEffectMaps[7] = { gUnk_0951F2B8, gUnk_0951FAB8, gUnk_095202B8, gUnk_095212B8, gUnk_09520AB8, gUnk_09521AB8, gUnk_095222B8 };
+void* gEventBgEffectMaps[7] = { gEventBgEffect0Map, gEventBgEffect1Map, gEventBgEffect2Map, gEventBgEffect3Map, gEventBgEffect4Map, gEventBgEffect5Map, gEventBgEffect6Map };

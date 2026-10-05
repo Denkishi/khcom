@@ -1284,14 +1284,14 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     work->deckIndex = GetActiveDeckIndex();
     CreateDeckGridCards(work, 0);
     work->tiles = AllocObjTiles(0x120, NULL);
-    SetObjTileSource(work->tiles, gUnk_090A4664);
-    AnimInit(&work->anim2, gUnk_09EEB03C, gUnk_09EEB008);
+    SetObjTileSource(work->tiles, gHandCursorTiles);
+    AnimInit(&work->anim2, gHandCursorAnims, gHandCursorFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim2);
     work->x = sDeckTabPointerX[0] << 8;
     work->y = sDeckTabPointerY[0] << 8;
     work->handFlags = 0;
-    work->tiles4 = LoadObjTiles(gUnk_090A44C4, 32);
+    work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gUnk_09614418, 32);
 #ifdef VERSION_EU
     work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
@@ -1440,19 +1440,19 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            RequestDma3Copy(gUnkEu_094E04E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_094E20E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_094E74E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_094E58E4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_094E3CE4, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         }
 #else
@@ -1541,7 +1541,7 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
         LoadDeckNameTexts(work);
         work->x = sDeckTabPointerX[work->cursorCol] << 8;
         work->y = sDeckTabPointerY[work->cursorRow] << 8;
-        work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+        work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
 #ifdef VERSION_EU
         work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
@@ -1591,7 +1591,7 @@ u8 UpdateDeckMenuSlideIn(DeckMenuWork* work, void* a) {
                 work->tiles12 = NULL;
                 work->palette3 = NULL;
                 work->handVisible = 1;
-                LoadBgMap(3, gUnk_09512AB8, 0x800);
+                LoadBgMap(3, gDeckReviewGridMap, 0x800);
                 SetTaskUpdate(a, (TaskUpdateFunc)UpdateDeckMenuDeckSelect);
             }
 
@@ -3080,8 +3080,8 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gDeck1PanelMap, 0x180);
-        LoadBgMap(1, gUnk_095182B8, 0x800);
-        LoadBgMap(2, gUnk_09514AB8, 0x800);
+        LoadBgMap(1, gDeckCollectionInfoMap, 0x800);
+        LoadBgMap(2, gDeckCardsInUseMap, 0x800);
         SetBgScroll(0, 0, 0xFFF0);
         SetBgScroll(1, 0, 0);
         SetBgScroll(2, 0, 0);
@@ -3101,9 +3101,9 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_095182B8, 0x800);
+        LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
         LoadBgMap(1, gDeck2PanelMap, 0x180);
-        LoadBgMap(2, gUnk_09514AB8, 0x800);
+        LoadBgMap(2, gDeckCardsInUseMap, 0x800);
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0xFFF0);
         SetBgScroll(2, 0, 0);
@@ -3123,8 +3123,8 @@ u8 UpdateDeckMenuOpenAddMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 1, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_095182B8, 0x800);
-        LoadBgMap(1, gUnk_09514AB8, 0x800);
+        LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
+        LoadBgMap(1, gDeckCardsInUseMap, 0x800);
         LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, 0, 0);
         SetBgScroll(1, 0, 0);
@@ -3167,7 +3167,7 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* a) {
         ReleaseCommandMenuGfx(work);
         SetDeckMenuFrameCursor(work, 0);
         ClearCardGrid(work);
-        LoadBgMap(3, gUnk_095142B8, 0x800);
+        LoadBgMap(3, gDeckAddGridMap, 0x800);
         count = &work->entryCount;
         *count = n = 0x11E;
         work->kindEntries = EwramAlloc(n * sizeof(CardKindEntry));
@@ -3434,7 +3434,7 @@ u8 UpdateDeckMenuCloseAddMode(DeckMenuWork* work, void* a) {
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gUnk_09512AB8, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -3478,8 +3478,8 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
 #endif
         SetupBg(3, 0, 30, 0);
         LoadBgMap(0, gDeck1PanelMap, 0x180);
-        LoadBgMap(1, gUnk_095172B8, 0x800);
-        LoadBgMap(2, gUnk_09517AB8, 0x800);
+        LoadBgMap(1, gDeckDescriptionWindowMap, 0x800);
+        LoadBgMap(2, gDeckCpLabelMap, 0x800);
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-88, (u16)-112);
         SetBgScroll(2, (u16)-140, (u16)-96);
@@ -3499,9 +3499,9 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 0, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_095172B8, 0x800);
+        LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
         LoadBgMap(1, gDeck2PanelMap, 0x180);
-        LoadBgMap(2, gUnk_09517AB8, 0x800);
+        LoadBgMap(2, gDeckCpLabelMap, 0x800);
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-88, (u16)-16);
         SetBgScroll(2, (u16)-140, (u16)-96);
@@ -3521,8 +3521,8 @@ u8 UpdateDeckMenuOpenRemoveMode(DeckMenuWork* work, void* a) {
         SetupBg(2, 1, 15, 0);
 #endif
         SetupBg(3, 0, 30, 0);
-        LoadBgMap(0, gUnk_095172B8, 0x800);
-        LoadBgMap(1, gUnk_09517AB8, 0x800);
+        LoadBgMap(0, gDeckDescriptionWindowMap, 0x800);
+        LoadBgMap(1, gDeckCpLabelMap, 0x800);
         LoadBgMap(2, gDeck3PanelMap, 0x180);
         SetBgScroll(0, (u16)-88, (u16)-112);
         SetBgScroll(1, (u16)-140, (u16)-96);
@@ -3734,7 +3734,7 @@ u8 UpdateDeckMenuCloseRemoveMode(DeckMenuWork* work, void* a) {
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gUnk_09512AB8, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -3768,9 +3768,9 @@ u8 UpdateDeckMenuOpenDeleteMode(DeckMenuWork* work, void* a) {
     SetBgScroll(0, 0, 0);
     SetBgScroll(1, 0, 0);
     SetBgScroll(2, 0, 16);
-    LoadBgMap(3, gUnk_095192B8, 0x800);
-    LoadBgMap(2, gUnk_095182B8, 0x800);
-    LoadBgMap(1, gUnk_09514AB8, 0x800);
+    LoadBgMap(3, gDeckDeleteGridMap, 0x800);
+    LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
+    LoadBgMap(1, gDeckCardsInUseMap, 0x800);
     DisableBg(0);
     CountCardsNotInDeckByCategory(3, work->collectionCategoryCounts);
     DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
@@ -4045,7 +4045,7 @@ u8 UpdateDeckMenuCloseDeleteMode(DeckMenuWork* work, void* a) {
     LoadBgMap(1, gUnk_08125E24, 0x800);
     LoadBgMap(2, gUnk_08125E24, 0x800);
     HighlightDeckTab(work, work->deckIndex);
-    LoadBgMap(3, gUnk_09512AB8, 0x800);
+    LoadBgMap(3, gDeckReviewGridMap, 0x800);
     FreeCollectionEntries(work);
     ClearCardGrid(work);
     work->categoryFilter = 0;
@@ -4078,7 +4078,7 @@ u8 UpdateDeckMenuFadeOut(DeckMenuWork* work) {
 }
 
 u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
-    work->tiles6 = LoadObjTiles(gUnk_090A583E, 0x620);
+    work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
 
 #ifdef VERSION_EU
     work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
@@ -4171,12 +4171,12 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     }
 
     if (work->view != 13) {
-        DrawSprite(work->x2 >> 8, work->y2 >> 8, gUnk_09EEB000[0], work->tiles4, work->palette, NULL, SPRITE_PRIORITY(2), 10);
+        DrawSprite(work->x2 >> 8, work->y2 >> 8, gDeckScrollThumbFrames[0], work->tiles4, work->palette, NULL, SPRITE_PRIORITY(2), 10);
     }
 
     if (work->tiles6 != NULL) {
-        DrawSprite(work->x5 >> 8, work->y5 >> 8, gUnk_09EEB080[0], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
-        DrawSprite(work->x6 >> 8, work->y6 >> 8, gUnk_09EEB080[1], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(work->x5 >> 8, work->y5 >> 8, gDeckMenuBarFrames[0], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
+        DrawSprite(work->x6 >> 8, work->y6 >> 8, gDeckMenuBarFrames[1], work->tiles6, work->palette3, NULL, SPRITE_PRIORITY(3), 10000);
     }
 
     if (work->tiles12 != NULL) {
@@ -4759,14 +4759,14 @@ void DrawDeckCategoryCount(u8 a, u8 b) {
 
     if (a == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gUnk_0940F918, base + (b * 64 + 0x360), 32);
-        RequestDma3Copy(gUnk_0940F918, base + (b * 64 + 0x360) + 32, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 64 + 0x360), 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 64 + 0x360) + 32, 32);
     } else {
         d[0] = a / 10;
         d[1] = a - (u8)(a / 10) * 10;
         base = GetBgCharBase(3);
-        RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
-        RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 64 + 0x360), 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 64 + 0x360) + 32, 32);
     }
 }
 
@@ -4776,17 +4776,17 @@ void DrawCollectionCategoryCount(u16 a, u8 b) {
 
     if (a == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120), 32);
-        RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120) + 32, 32);
-        RequestDma3Copy(gUnk_0940F918, base + (b * 96 + 0x120) + 64, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120), 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120) + 32, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (b * 96 + 0x120) + 64, 32);
     } else {
         d[0] = a / 100;
         d[1] = a / 10 - d[0] * 10;
         d[2] = a - d[0] * 100 - d[1] * 10;
         base = GetBgCharBase(3);
-        RequestDma3Copy(&gUnk_0940F7B8[(d[0] + 1) * 32], base + (b * 96 + 0x120), 32);
-        RequestDma3Copy(&gUnk_0940F7B8[(d[1] + 1) * 32], base + (b * 96 + 0x120) + 32, 32);
-        RequestDma3Copy(&gUnk_0940F7B8[(d[2] + 1) * 32], base + (b * 96 + 0x120) + 64, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (b * 96 + 0x120), 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (b * 96 + 0x120) + 32, 32);
+        RequestDma3Copy(&gDeckCategoryDigitTiles[(d[2] + 1) * 32], base + (b * 96 + 0x120) + 64, 32);
     }
 }
 
@@ -4922,10 +4922,10 @@ void DrawDeckCardCount(u8 deck) {
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d[0] + 1) * 32], base + 0x20, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d[1] + 1) * 32], base + 0x40, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[0] + 1) * 32], base + 0x60, 32);
-    RequestDma3Copy(&gUnk_0940F938[(e[1] + 1) * 32], base + 0x80, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x80, 32);
 }
 
 void DrawDeckEquipMarker(u8 mode) {
@@ -5025,14 +5025,14 @@ void DrawDeckCpCost(u8 mode) {
         break;
     }
 
-    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0xA0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0xC0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0xE0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[3] + 1) * 32], base + 0x100, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], base + 0x120, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], base + 0x140, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x160, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[3] + 1) * 32], base + 0x180, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[0] + 1) * 32], base + 0xA0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[1] + 1) * 32], base + 0xC0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[2] + 1) * 32], base + 0xE0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[3] + 1) * 32], base + 0x100, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[0] + 1) * 32], base + 0x120, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[1] + 1) * 32], base + 0x140, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[2] + 1) * 32], base + 0x160, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[3] + 1) * 32], base + 0x180, 32);
 }
 #ifdef VERSION_EU
 #define CARD_SLOT_OFFSET(slot, fixed) ((fixed) * 128)
@@ -5115,12 +5115,12 @@ void DrawCardTotals() {
     d2[1] = b / 10 - d2[0] * 10;
     d2[2] = b - d2[0] * 100 - d2[1] * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_0940F938[(d1[0] + 1) * 32], base + 0x2A0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[1] + 1) * 32], base + 0x2C0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d1[2] + 1) * 32], base + 0x2E0, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[0] + 1) * 32], base + 0x300, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[1] + 1) * 32], base + 0x320, 32);
-    RequestDma3Copy(&gUnk_0940F938[(d2[2] + 1) * 32], base + 0x340, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d1[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(d2[2] + 1) * 32], base + 0x340, 32);
 }
 
 void LoadDeckNameTexts(DeckMenuWork* work) {
@@ -5252,21 +5252,21 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
         if (work->view >= 9 &&work->view <= 12) {
             if (def->kind > 46) {
-                LoadBgMap(2, gUnk_09518AB8, 0x800);
+                LoadBgMap(2, gDeckCollectionEnemyInfoMap, 0x800);
                 DrawCpCost(GetCardCpCost(id));
                 return id;
             }
 
-            LoadBgMap(2, gUnk_095182B8, 0x800);
+            LoadBgMap(2, gDeckCollectionInfoMap, 0x800);
             DrawCpCost(0);
         } else if (def->kind > 46) {
             switch (work->deckIndex) {
             case 0:
-                LoadBgMap(1, gUnk_09518AB8, 0x800);
+                LoadBgMap(1, gDeckCollectionEnemyInfoMap, 0x800);
                 break;
             case 1:
             case 2:
-                LoadBgMap(0, gUnk_09518AB8, 0x800);
+                LoadBgMap(0, gDeckCollectionEnemyInfoMap, 0x800);
                 break;
             }
 
@@ -5274,11 +5274,11 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
         } else {
             switch (work->deckIndex) {
             case 0:
-                LoadBgMap(1, gUnk_095182B8, 0x800);
+                LoadBgMap(1, gDeckCollectionInfoMap, 0x800);
                 break;
             case 1:
             case 2:
-                LoadBgMap(0, gUnk_095182B8, 0x800);
+                LoadBgMap(0, gDeckCollectionInfoMap, 0x800);
                 break;
             }
 
@@ -5382,13 +5382,13 @@ void DrawValueCount(u8 a, u16 b) {
 
         v[0] = a / 10;
         v[1] = a - v[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(v[0] + 3) * 32], dst = base + (b * 64 + 0xD20), 32);
-        RequestDma3Copy(&gUnk_0940FA98[(v[1] + 3) * 32], dst += 32, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], dst = base + (b * 64 + 0xD20), 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(v[1] + 3) * 32], dst += 32, 32);
     } else {
         u8* dst;
 
-        RequestDma3Copy(gUnk_0940FAD8, dst = base + (b * 64 + 0xD20), 32);
-        RequestDma3Copy(gUnk_0940FAD8, dst += 32, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, dst = base + (b * 64 + 0xD20), 32);
+        RequestDma3Copy(gDeckValueZeroTiles, dst += 32, 32);
         LoadPalette(gUnk_09614406, (void*)(b * 2 + BG_PLTT + 11 * PLTT_SIZE_4BPP + 0xC), 2);
     }
 }
@@ -5409,11 +5409,11 @@ void DrawCpCost(u8 a) {
     if (a != 0) {
         d[0] = a / 10;
         d[1] = a - d[0] * 10;
-        RequestDma3Copy(&gUnk_0940FA98[(d[0] + 3) * 32], base + 0xCE0, 32);
-        RequestDma3Copy(&gUnk_0940FA98[(d[1] + 3) * 32], base + 0xD00, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(d[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(d[1] + 3) * 32], base + 0xD00, 32);
     } else {
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xCE0, 32);
-        RequestDma3Copy(gUnk_0940FAD8, base + 0xD00, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xCE0, 32);
+        RequestDma3Copy(gDeckValueZeroTiles, base + 0xD00, 32);
     }
 }
 
@@ -5708,14 +5708,14 @@ void ReleaseCommandMenuGfx(DeckMenuWork* work) {
 void SetDeckMenuFrameCursor(DeckMenuWork* work, u8 kind) {
     switch (kind) {
     case 0:
-        SetObjTileSource(work->tiles2, gUnk_090A4A0C);
-        AnimInit(&work->anim3, gUnk_09EEB064, gUnk_09EEB050);
+        SetObjTileSource(work->tiles2, gDeckCardCursorTiles);
+        AnimInit(&work->anim3, gDeckCardCursorAnims, gDeckCardCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
     case 1:
-        SetObjTileSource(work->tiles2, gUnk_090A51F6);
-        AnimInit(&work->anim3, gUnk_09EEB07C, gUnk_09EEB068);
+        SetObjTileSource(work->tiles2, gDeckRowCursorTiles);
+        AnimInit(&work->anim3, gDeckRowCursorAnims, gDeckRowCursorFrames);
         AnimStart(&work->anim3, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim3);
         break;
@@ -6538,7 +6538,7 @@ void DrawKeyboardDeckNumber(u8 a) {
     u8* base;
 
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gUnk_09417378[a * 64], base + 32, 64);
+    RequestDma3Copy(&gDeckKeyboardDeckNumberTiles[a * 64], base + 32, 64);
 }
 
 void CopyDeckNameToBuffer(DeckMenuWork* work) {
@@ -6814,20 +6814,20 @@ void func_jp_0808F34C(DeckMenuWork* work) {
     switch (work->keyboardPage) {
 #ifdef VERSION_JP
     case 0:
-        LoadBgMap(3, gUnk_0951C2B8, 0x800);
+        LoadBgMap(3, gDeckKeyboardMap, 0x800);
         break;
     case 1:
-        LoadBgMap(3, gUnkJp_094D4594, 0x800);
+        LoadBgMap(3, gDeckKeyboardKatakanaMap, 0x800);
         break;
     case 2:
-        LoadBgMap(3, gUnkJp_094D4D94, 0x800);
+        LoadBgMap(3, gDeckKeyboardAlphanumericMap, 0x800);
         break;
 #else
     case 2:
-        LoadBgMap(3, gUnk_0951C2B8, 0x800);
+        LoadBgMap(3, gDeckKeyboardMap, 0x800);
         break;
     case 3:
-        LoadBgMap(3, gUnkEu_0953C324, 0x800);
+        LoadBgMap(3, gDeckKeyboardSymbolMap, 0x800);
         break;
 #endif
     }
@@ -6884,52 +6884,52 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
         break;
     case 1:
 #ifdef VERSION_JP
-        LoadBgTiles(3, gUnk_09417438, 0x2000);
+        LoadBgTiles(3, gDeckKeyboard0Tiles, 0x2000);
 #else
-        LoadBgTiles(3, gUnk_09417438, 0x1000);
+        LoadBgTiles(3, gDeckKeyboard0Tiles, 0x1000);
 #endif
         break;
     case 2:
 #ifdef VERSION_JP
-        RequestDma3Copy(gUnk_09418438, (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
+        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
 #else
-        RequestDma3Copy(gUnk_09418438, (u8*)GetBgCharBase(3) + 0x1000, 0x1000);
+        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x1000, 0x1000);
 #endif
         break;
     case 3:
 #ifdef VERSION_JP
-        RequestDma3Copy(gUnk_09419438, (u8*)GetBgCharBase(3) + 0x4000, 0x2000);
+        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x4000, 0x2000);
 #elif defined(VERSION_EU)
-        RequestDma3Copy(gUnk_09419438, (u8*)GetBgCharBase(3) + 0x2000, 0x2E40);
+        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0x2E40);
 #else
-        RequestDma3Copy(gUnk_09419438, (u8*)GetBgCharBase(3) + 0x2000, 0xFE0);
+        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0xFE0);
 #endif
         break;
     case 4:
 #ifdef VERSION_JP
-        RequestDma3Copy(gUnkJp_093D1694, (u8*)GetBgCharBase(3) + 0x6000, 0x1000);
+        RequestDma3Copy(gDeckKeyboard3Tiles, (u8*)GetBgCharBase(3) + 0x6000, 0x1000);
 #elif defined(VERSION_EU)
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gUnkEu_094F03A4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gUnkEu_094F1BA4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextGermanTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gUnkEu_094F13A4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextItalianTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gUnkEu_094F0BA4, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         }
 #endif
 
         break;
     case 5:
-        LoadBgMap(3, gUnk_0951C2B8, 0x800);
+        LoadBgMap(3, gDeckKeyboardMap, 0x800);
         LoadBgPalette(3, gUnk_09614518, 0xA0);
         break;
     case 6:
@@ -7473,29 +7473,29 @@ const u16* gRikuDeckEnemyCards[12] = {
 
 #include "deck_names.inc"
 #ifdef VERSION_EU
-void* gDeckButtonLabelTiles[5] = { gUnk_090A1FB2, gUnkEu_09189F36, gUnkEu_0918A73A, gUnkEu_0918A48E, gUnkEu_0918A1E2 };
-void** gDeckButtonLabelSprites[5] = { gUnk_09EEAFD4, gUnkEu_09F77070, gUnkEu_09F77094, gUnkEu_09F77088, gUnkEu_09F7707C };
-void* gDeckCommandMenuTiles[5] = { gUnk_090A261E, gUnkEu_0918B8F2, gUnkEu_0919016A, gUnkEu_0918E942, gUnkEu_0918D11A };
+void* gDeckButtonLabelTiles[5] = { gUnk_090A1FB2, gDeckButtonLabelFrenchTiles, gDeckButtonLabelGermanTiles, gDeckButtonLabelItalianTiles, gDeckButtonLabelSpanishTiles };
+void** gDeckButtonLabelSprites[5] = { gUnk_09EEAFD4, gDeckButtonLabelFrenchFrames, gDeckButtonLabelGermanFrames, gDeckButtonLabelItalianFrames, gDeckButtonLabelSpanishFrames };
+void* gDeckCommandMenuTiles[5] = { gUnk_090A261E, gDeckCommandMenuFrenchTiles, gDeckCommandMenuGermanTiles, gDeckCommandMenuItalianTiles, gDeckCommandMenuSpanishTiles };
 
 void** gDeckCommandMenuSprites[5] = {
     gUnk_09EEAFE8,
-    gUnkEu_09F770C0,
-    gUnkEu_09F770D8,
-    gUnkEu_09F770D0,
-    gUnkEu_09F770C8,
+    gDeckCommandMenuFrenchFrames,
+    gDeckCommandMenuGermanFrames,
+    gDeckCommandMenuItalianFrames,
+    gDeckCommandMenuSpanishFrames,
 };
 
-void* gDeckTitleBannerTiles[5] = { gUnk_090A3E46, gUnkEu_09191992, gUnkEu_0919236A, gUnkEu_09192022, gUnkEu_09191CDA };
+void* gDeckTitleBannerTiles[5] = { gUnk_090A3E46, gDeckTitleBannerFrenchTiles, gDeckTitleBannerGermanTiles, gDeckTitleBannerItalianTiles, gDeckTitleBannerSpanishTiles };
 
 void** gDeckTitleBannerSprites[5] = {
     gUnk_09EEAFF0,
-    gUnkEu_09F770E0,
-    gUnkEu_09F770F8,
-    gUnkEu_09F770F0,
-    gUnkEu_09F770E8,
+    gDeckTitleBannerFrenchFrames,
+    gDeckTitleBannerGermanFrames,
+    gDeckTitleBannerItalianFrames,
+    gDeckTitleBannerSpanishFrames,
 };
 
-u8* gDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gUnkEu_094E90E4, gUnkEu_094EA2E4, gUnkEu_094E9CE4, gUnkEu_094E96E4 };
+u8* gDeckEquipMarkerTilesByLanguage[5] = { gDeckEquipMarkerTiles, gDeckEquipMarkerFrenchTiles, gDeckEquipMarkerGermanTiles, gDeckEquipMarkerItalianTiles, gDeckEquipMarkerSpanishTiles };
 #endif
 
 TaskDesc gTaskDescDeckmenu2 = {
@@ -7508,9 +7508,9 @@ TaskDesc gTaskDescDeckmenu2 = {
 };
 
 #ifdef VERSION_EU
-void* gDeckKeyboardCursorTiles[5] = { gUnk_090A5F1E, gUnk_090A5F1E, gUnkEu_091965CA, gUnkEu_091959DA, gUnk_090A5F1E };
-void** gDeckKeyboardCursorSprites[5] = { gUnk_09EEB08C, gUnk_09EEB08C, gUnkEu_09F7721C, gUnkEu_09F771E4, gUnk_09EEB08C };
-void* gDeckKeyboardCursorAnims[5] = { gUnk_09EEB0B8, gUnk_09EEB0B8, gUnkEu_09F77248, gUnkEu_09F77210, gUnk_09EEB0B8 };
+void* gDeckKeyboardCursorTiles[5] = { gUnk_090A5F1E, gUnk_090A5F1E, gDeckKeyboardCursorGermanTiles, gDeckKeyboardCursorItalianTiles, gUnk_090A5F1E };
+void** gDeckKeyboardCursorSprites[5] = { gUnk_09EEB08C, gUnk_09EEB08C, gDeckKeyboardCursorGermanFrames, gDeckKeyboardCursorItalianFrames, gUnk_09EEB08C };
+void* gDeckKeyboardCursorAnims[5] = { gUnk_09EEB0B8, gUnk_09EEB0B8, gDeckKeyboardCursorGermanAnims, gDeckKeyboardCursorItalianAnims, gUnk_09EEB0B8 };
 #endif
 
 #ifdef VERSION_US

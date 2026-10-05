@@ -93,7 +93,7 @@ void Level_Up_0(LevelUpWork* work) {
     InitTextSlots(work->textSlots[3], 36);
     InitTextSlots(work->textSlots[4], 36);
     InitTextSlots(work->textSlots[5], 36);
-    work->tilesPalettes[6] = LoadObjTiles(gUnk_0908CAEC, 0x500);
+    work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTiles, 0x500);
 #else
     work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
     work->tiles5[0] = AllocSpriteFrameTiles(0x500);
@@ -102,7 +102,7 @@ void Level_Up_0(LevelUpWork* work) {
 #endif
     work->tilesPalettes[7] = LoadObjPalette(gUnk_09613EF8, 32);
     FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[7])->index + 16, 1);
-    work->tiles2 = LoadObjTiles(gUnk_0908D05E, 0x3C0);
+    work->tiles2 = LoadObjTiles(gLevelUpBarTiles, 0x3C0);
     TaskPoolInit(&work->pool, 10);
 
     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
@@ -243,29 +243,29 @@ void LoadLevelUpRikuBgTiles() {
 
     if (gBtlWork->battleId == 151) {
         base = GetBgCharBase(0);
-        RequestDma3Copy(gUnk_093FEEB8, base + CARD_E7A4_DST, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x400], base + CARD_E7A4_DST + 0x120, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x800], base + CARD_E7A4_DST + 0x240, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[288], base + CARD_E7A4_DST + 0x360, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x520], base + CARD_E7A4_DST + 0x480, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
+        RequestDma3Copy(gLevelUpRikuIconTiles, base + CARD_E7A4_DST, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x400], base + CARD_E7A4_DST + 0x120, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x800], base + CARD_E7A4_DST + 0x240, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[288], base + CARD_E7A4_DST + 0x360, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x520], base + CARD_E7A4_DST + 0x480, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
 #ifdef VERSION_EU
         RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, base + 0x800, 0xA80);
 #else
-        RequestDma3Copy(gUnk_093FD438, base + 0x2C00, 0xA80);
+        RequestDma3Copy(gLevelUpRikuStatLabelTiles, base + 0x2C00, 0xA80);
 #endif
     } else {
         base = GetBgCharBase(1);
-        RequestDma3Copy(gUnk_093FEEB8, base + CARD_E7A4_DST, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x400], base + CARD_E7A4_DST + 0x120, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x800], base + CARD_E7A4_DST + 0x240, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[288], base + CARD_E7A4_DST + 0x360, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x520], base + CARD_E7A4_DST + 0x480, 288);
-        RequestDma3Copy(&gUnk_093FEEB8[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
+        RequestDma3Copy(gLevelUpRikuIconTiles, base + CARD_E7A4_DST, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x400], base + CARD_E7A4_DST + 0x120, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x800], base + CARD_E7A4_DST + 0x240, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[288], base + CARD_E7A4_DST + 0x360, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x520], base + CARD_E7A4_DST + 0x480, 288);
+        RequestDma3Copy(&gLevelUpRikuIconTiles[0x920], base + CARD_E7A4_DST + 0x5A0, 288);
 #ifdef VERSION_EU
         RequestDma3Copy((u8*)gLevelUpBgTilesByLanguage[gLanguage] + 0xC00, base + 0x800, 0xA80);
 #else
-        RequestDma3Copy(gUnk_093FD438, base + 0x2C00, 0xA80);
+        RequestDma3Copy(gLevelUpRikuStatLabelTiles, base + 0x2C00, 0xA80);
 #endif
     }
 }
@@ -283,26 +283,26 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 
         if (work->timer > 7) {
             if (!work->bossBattle) {
-                LoadBgTiles(1, gUnk_093FF8F8, bgSize);
+                LoadBgTiles(1, gLevelUpBgTiles, bgSize);
 
 #ifdef VERSION_EU
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
                     break;
                 case LANGUAGE_FRENCH:
-                    RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_GERMAN:
-                    RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(1) + 0x2400, 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_ITALIAN:
-                    RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_SPANISH:
-                    RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, 0x800);
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 }
@@ -315,31 +315,31 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
                     LoadPalette(gUnk_09614098, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
                 }
 
-                LoadBgMap(1, gUnk_0950F2B8, mapSize);
+                LoadBgMap(1, gLevelUpStatsMap, mapSize);
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
                 RedrawBgMapAt(1, 0, 0);
             } else {
                 if (gBtlWork->battleId == 151) {
-                    LoadBgTiles(0, gUnk_093FF8F8, bgSize);
+                    LoadBgTiles(0, gLevelUpBgTiles, bgSize);
 
 #ifdef VERSION_EU
                     switch (gLanguage) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(0) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
-                        RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(0) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(0) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(0) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     }
@@ -355,26 +355,26 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
                     SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
                     RedrawBgMapAt(0, 0, 0);
                 } else {
-                    LoadBgTiles(1, gUnk_093FF8F8, bgSize);
+                    LoadBgTiles(1, gLevelUpBgTiles, bgSize);
 
 #ifdef VERSION_EU
                     switch (gLanguage) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gUnkEu_094D53C4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
-                        RequestDma3Copy(gUnkEu_094D6BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerGermanTiles, GetBgCharBase(1) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gUnkEu_094D63C4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gUnkEu_094D5BC4, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, 0x800);
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     }
@@ -416,14 +416,14 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpSoraBonusFrames[0], gLevelUpSoraBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpSoraBonusFrames[1], gLevelUpSoraBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpSoraBonusFrames[2], gLevelUpSoraBonusTiles);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpSoraBonusItalianFrames[0], gLevelUpSoraBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpSoraBonusItalianFrames[1], gLevelUpSoraBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpSoraBonusItalianFrames[2], gLevelUpSoraBonusItalianTiles);
                 }
 #endif
 
@@ -437,14 +437,14 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpRikuBonusFrames[0], gLevelUpRikuBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpRikuBonusFrames[1], gLevelUpRikuBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpRikuBonusFrames[2], gLevelUpRikuBonusTiles);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpRikuBonusItalianFrames[0], gLevelUpRikuBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpRikuBonusItalianFrames[1], gLevelUpRikuBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpRikuBonusItalianFrames[2], gLevelUpRikuBonusItalianTiles);
                 }
 #endif
 
@@ -455,26 +455,26 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
                 break;
             case LANGUAGE_FRENCH:
-                work->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
                 break;
             case LANGUAGE_GERMAN:
-                work->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
                 break;
             case LANGUAGE_ITALIAN:
-                work->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
                 break;
             case LANGUAGE_SPANISH:
-                work->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
                 break;
             default:
-                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
                 break;
             }
 #else
-            work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+            work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
@@ -569,9 +569,9 @@ u8 Level_Up_1(LevelUpWork* work, void* a) {
                     u8 i;
 
                     if (gBtlWork->battleId == 151) {
-                        LoadBgMap(0, gUnk_095112B8, mapSize);
+                        LoadBgMap(0, gLevelUpBonusAMap, mapSize);
                     } else {
-                        LoadBgMap(1, gUnk_095112B8, mapSize);
+                        LoadBgMap(1, gLevelUpBonusAMap, mapSize);
                     }
 
                     work->state = 1;
@@ -811,8 +811,8 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* a) {
         work->tiles = AllocObjTiles(128, NULL);
         work->palette3 = LoadObjPalette(gUnk_09613F58, 32);
         FadeSetPaletteExcluded(work->palette3->index + 16, 1);
-        SetObjTileSource(work->tiles, gUnk_0908F190);
-        AnimInit(&work->anim, gUnk_09EEA280, gUnk_09EEA26C);
+        SetObjTileSource(work->tiles, gLevelUpChosenCursorTiles);
+        AnimInit(&work->anim, gLevelUpChosenCursorAnims, gLevelUpChosenCursorFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         work->gfx2 = AnimGetGfx(&work->anim);
         work->cursorSteps = 16;
@@ -1076,7 +1076,7 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
-                       gUnk_09EEA1BC[10],
+                       gLevelUpHeaderFrames[10],
 #endif
                        work->tilesPalettes[6], work->tilesPalettes[7], NULL, 0, 50);
 
@@ -1084,10 +1084,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[0], work->y4[0], gUnk_09EEA2BC[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gLevelUpSoraBonusFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[0], work->y4[0], gUnkEu_09F7626C[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[0], work->y4[0], gLevelUpSoraBonusItalianFrames[0], work->tilesPalettes[0], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1096,10 +1096,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[1], work->y4[1], gUnk_09EEA2BC[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gLevelUpSoraBonusFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[1], work->y4[1], gUnkEu_09F7626C[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[1], work->y4[1], gLevelUpSoraBonusItalianFrames[1], work->tilesPalettes[1], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
@@ -1108,16 +1108,16 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    DrawSprite(work->x4[2], work->y4[2], gUnk_09EEA2BC[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gLevelUpSoraBonusFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                 } else {
-                    DrawSprite(work->x4[2], work->y4[2], gUnkEu_09F7626C[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
+                    DrawSprite(work->x4[2], work->y4[2], gLevelUpSoraBonusItalianFrames[2], work->tilesPalettes[2], work->tilesPalettes[4], NULL, 0, 50);
                 }
 #endif
             }
 
-            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x, work->y >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         case 1:
             for (; i < 3; i++) {
@@ -1149,7 +1149,7 @@ void Level_Up_2(LevelUpWork* work) {
                     DrawTextSlots(work->x5[i] + 22, work->y5[i] - 5, work->textSlots[i], work->palette, 40, work->textSlotCounts[i]);
                     DrawTextSlots(work->x5[i] + 4, work->y5[i] + 13, work->textSlots[i + 3], work->palette, 40, work->textSlotCounts[i + 3]);
 #endif
-                    DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2D8[i], work->tilesPalettes[i], work->tilesPalettes[5], NULL, 0, 50);
+                    DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusChosenFrames[i], work->tilesPalettes[i], work->tilesPalettes[5], NULL, 0, 50);
                 } else {
                     if (work->tilesPalettes[i] != NULL) {
 #ifdef VERSION_EU
@@ -1161,10 +1161,10 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                         if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                            DrawSprite(work->x4[i], work->y4[i], gUnk_09EEA2BC[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
 #ifdef VERSION_EU
                         } else {
-                            DrawSprite(work->x4[i], work->y4[i], gUnkEu_09F7626C[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
+                            DrawSprite(work->x4[i], work->y4[i], gLevelUpSoraBonusItalianFrames[i], work->tilesPalettes[i], work->tilesPalettes[4], NULL, 0, 50);
                         }
 #endif
                     }
@@ -1185,17 +1185,17 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
-                       gUnk_09EEA1BC[10],
+                       gLevelUpHeaderFrames[10],
 #endif
                        work->tilesPalettes[6], work->tilesPalettes[7], NULL, 0, 50);
-            DrawSprite(work->x, work->y >> 8, gUnk_09EEA1EC[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
-            DrawSprite(work->x2, work->y2 >> 8, gUnk_09EEA1EC[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x, work->y >> 8, gLevelUpBarFrames[0], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
+            DrawSprite(work->x2, work->y2 >> 8, gLevelUpBarFrames[1], work->tiles2, work->tilesPalettes[7], NULL, SPRITE_PRIORITY(1), 51);
             break;
         }
 
 #ifdef VERSION_JP
         if (work->blinkOn != 0) {
-            DrawSprite(192, 82, gUnk_09EEA19C[0], work->tiles3, work->palette4, NULL, 0, 10);
+            DrawSprite(192, 82, gLvupLogoFrames[0], work->tiles3, work->palette4, NULL, 0, 10);
         }
 #endif
 
@@ -1204,21 +1204,21 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->levelDigits, 0);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->maxHpDigits, 1);
             DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->cpDigits, 2);
         } else {
@@ -1226,28 +1226,28 @@ void Level_Up_2(LevelUpWork* work) {
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->levelDigits, 0);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->maxHpDigits, 1);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->apDigits, 4);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
                        gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
-                       gUnk_09EEA1BC,
+                       gLevelUpHeaderFrames,
 #endif
                        work->dpDigits, 3);
         }
@@ -1444,14 +1444,14 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA2BC[0], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA2BC[1], gUnk_090950F4);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA2BC[2], gUnk_090950F4);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpSoraBonusFrames[0], gLevelUpSoraBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpSoraBonusFrames[1], gLevelUpSoraBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpSoraBonusFrames[2], gLevelUpSoraBonusTiles);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F7626C[0], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F7626C[1], gUnkEu_09172200);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F7626C[2], gUnkEu_09172200);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpSoraBonusItalianFrames[0], gLevelUpSoraBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpSoraBonusItalianFrames[1], gLevelUpSoraBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpSoraBonusItalianFrames[2], gLevelUpSoraBonusItalianTiles);
                 }
 #endif
 
@@ -1465,14 +1465,14 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
                 if (gLanguage != LANGUAGE_ITALIAN) {
 #endif
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnk_09EEA29C[0], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnk_09EEA29C[1], gUnk_09091D36);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnk_09EEA29C[2], gUnk_09091D36);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpRikuBonusFrames[0], gLevelUpRikuBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpRikuBonusFrames[1], gLevelUpRikuBonusTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpRikuBonusFrames[2], gLevelUpRikuBonusTiles);
 #ifdef VERSION_EU
                 } else {
-                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gUnkEu_09F762A4[0], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gUnkEu_09F762A4[1], gUnkEu_091759BA);
-                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gUnkEu_09F762A4[2], gUnkEu_091759BA);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[0], gLevelUpRikuBonusItalianFrames[0], gLevelUpRikuBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[1], gLevelUpRikuBonusItalianFrames[1], gLevelUpRikuBonusItalianTiles);
+                    UpdateSpriteFrameTiles(work->tilesPalettes[2], gLevelUpRikuBonusItalianFrames[2], gLevelUpRikuBonusItalianTiles);
                 }
 #endif
 
@@ -1483,26 +1483,26 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
                 break;
             case LANGUAGE_FRENCH:
-                work->tiles3 = LoadObjTiles(gUnkEu_0916F992, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoFrenchTiles, 0x3E0);
                 break;
             case LANGUAGE_GERMAN:
-                work->tiles3 = LoadObjTiles(gUnkEu_0917063A, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoGermanTiles, 0x3E0);
                 break;
             case LANGUAGE_ITALIAN:
-                work->tiles3 = LoadObjTiles(gUnkEu_09170202, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoItalianTiles, 0x3E0);
                 break;
             case LANGUAGE_SPANISH:
-                work->tiles3 = LoadObjTiles(gUnkEu_0916FDCA, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoSpanishTiles, 0x3E0);
                 break;
             default:
-                work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+                work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
                 break;
             }
 #else
-            work->tiles3 = LoadObjTiles(gUnk_0908C686, 0x3E0);
+            work->tiles3 = LoadObjTiles(gLvupLogoTiles, 0x3E0);
 #endif
             work->palette4 = LoadObjPalette(gCard00Palette, 32);
             FadeSetPaletteExcluded(((ObjPalette*)work->tilesPalettes[4])->index + 16, 1);
@@ -1560,9 +1560,9 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* a) {
         u8 i;
 
         if (gBtlWork->battleId == 151) {
-            LoadBgMap(0, gUnk_095112B8, mapSize);
+            LoadBgMap(0, gLevelUpBonusAMap, mapSize);
         } else {
-            LoadBgMap(1, gUnk_095112B8, mapSize);
+            LoadBgMap(1, gLevelUpBonusAMap, mapSize);
         }
 
         work->state = 1;
@@ -1856,31 +1856,31 @@ s32 IsLevelUpApUnlocked() {
 }
 
 #ifdef VERSION_EU
-void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gUnkEu_094D72E4, gUnkEu_094DB664, gUnkEu_094D9FE4, gUnkEu_094D8964 };
-void* gLevelUpHeaderTilesByLanguage[5] = { gUnk_0908CAEC, gUnkEu_09170AA0, gUnkEu_09171B2C, gUnkEu_091715A8, gUnkEu_09171024 };
+void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gLevelUpStatLabelFrenchTiles, gLevelUpStatLabelGermanTiles, gLevelUpStatLabelItalianTiles, gLevelUpStatLabelSpanishTiles };
+void* gLevelUpHeaderTilesByLanguage[5] = { gLevelUpHeaderTiles, gLevelUpHeaderFrenchTiles, gLevelUpHeaderGermanTiles, gLevelUpHeaderItalianTiles, gLevelUpHeaderSpanishTiles };
 
 void** gLevelUpHeaderSpritesByLanguage[5] = {
-    gUnk_09EEA1BC,
-    gUnkEu_09F761AC,
-    gUnkEu_09F7623C,
-    gUnkEu_09F7620C,
-    gUnkEu_09F761DC,
+    gLevelUpHeaderFrames,
+    gLevelUpHeaderFrenchFrames,
+    gLevelUpHeaderGermanFrames,
+    gLevelUpHeaderItalianFrames,
+    gLevelUpHeaderSpanishFrames,
 };
 
 void* gLevelUpOptionTilesByLanguage[5] = {
-    gUnkEu_09178D40,
-    gUnkEu_09179CEE,
-    gUnkEu_0917CFE2,
-    gUnkEu_0917BFA6,
-    gUnkEu_0917AF3A,
+    gLevelUpOptionTiles,
+    gLevelUpOptionFrenchTiles,
+    gLevelUpOptionGermanTiles,
+    gLevelUpOptionItalianTiles,
+    gLevelUpOptionSpanishTiles,
 };
 
 void** gLevelUpOptionSpritesByLanguage[5] = {
-    gUnkEu_09F762C4,
-    gUnkEu_09F762E4,
-    gUnkEu_09F76344,
-    gUnkEu_09F76324,
-    gUnkEu_09F76304,
+    gLevelUpOptionFrames,
+    gLevelUpOptionFrenchFrames,
+    gLevelUpOptionGermanFrames,
+    gLevelUpOptionItalianFrames,
+    gLevelUpOptionSpanishFrames,
 };
 #endif
 
@@ -1888,9 +1888,9 @@ void** gLevelUpOptionSpritesByLanguage[5] = {
 u16* gLevelUpSoraTexts[7] = { gUnk_0815A066, gUnk_0815A0BA, gUnk_0815B1D2, gUnk_0815A078, gUnk_0815A0CC, gUnk_0815B1A8, (u16*)gLevelUpDisabledText };
 u16* gLevelUpRikuTexts[7] = { gUnk_0815A066, gUnk_0815A116, gUnk_0815A158, gUnk_0815A0F4, gUnk_0815A130, gUnk_0815A176, (u16*)gLevelUpDisabledText };
 #endif
-const void* gLevelUpBgMapBlocks[2] = { gUnk_08125E24, gUnk_0950F2B8 };
+const void* gLevelUpBgMapBlocks[2] = { gUnk_08125E24, gLevelUpStatsMap };
 
-void* gLevelUpOptionBgMaps[3] = { gUnk_095112B8, gUnk_09511AB8, gUnk_095122B8 };
+void* gLevelUpOptionBgMaps[3] = { gLevelUpBonusAMap, gLevelUpBonusBMap, gLevelUpBonusCMap };
 
 TaskDesc gTaskDescLevelUp = {
     "Level_Up",

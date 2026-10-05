@@ -59,54 +59,54 @@ objects:
     start: 0x0953EB24
     end: 0x09542324
 entries:
-- name: gUnk_09EEA19C
+- name: gLvupLogoFrames
   record: SpriteTable
-  items: [gUnk_0908C630, gUnk_0908C640, gUnk_0908C64A, gUnk_0908C654, gUnk_0908C65E, gUnk_0908C668, gUnk_0908C672]
+  items: [gLvupLogoFrame0, gLvupLogoFrame1, gLvupLogoFrame2, gLvupLogoFrame3, gLvupLogoFrame4, gLvupLogoFrame5, gLvupLogoFrame6]
   us:
     address: 0x09EEA19C
   jp:
     address: 0x09EC1590
   eu:
     address: 0x09F75FD4
-- name: gUnk_09EEA1B8
+- name: gLvupLogoAnims
   record: AnimTable
-  items: [gUnk_0908C67C]
+  items: [gLvupLogoAnim0]
   us:
     address: 0x09EEA1B8
   jp:
     address: 0x09EC15AC
   eu:
     address: 0x09F75FF0
-- name: gUnk_09EEA1BC
+- name: gLevelUpHeaderFrames
   record: SpriteTable
-  items: [gUnk_0908CA68, gUnk_0908CA72, gUnk_0908CA7C, gUnk_0908CA86, gUnk_0908CA90, gUnk_0908CA9A, gUnk_0908CAA4, gUnk_0908CAAE, gUnk_0908CAB8, gUnk_0908CAC2, gUnk_0908CACC]
+  items: [gLevelUpHeaderFrame0, gLevelUpHeaderFrame1, gLevelUpHeaderFrame2, gLevelUpHeaderFrame3, gLevelUpHeaderFrame4, gLevelUpHeaderFrame5, gLevelUpHeaderFrame6, gLevelUpHeaderFrame7, gLevelUpHeaderFrame8, gLevelUpHeaderFrame9, gLevelUpHeaderFrame10]
   us:
     address: 0x09EEA1BC
   jp:
     address: 0x09EC15B0
   eu:
     address: 0x09F75FF4
-- name: gUnk_09EEA1E8
+- name: gLevelUpHeaderAnims
   record: AnimTable
-  items: [gUnk_0908CAE2]
+  items: [gLevelUpHeaderAnim0]
   us:
     address: 0x09EEA1E8
   jp:
     address: 0x09EC15DC
   eu:
     address: 0x09F76020
-- name: gUnk_09EEA1EC
+- name: gLevelUpBarFrames
   record: SpriteTable
-  items: [gUnk_0908CFEC, gUnk_0908D020]
+  items: [gLevelUpBarFrame0, gLevelUpBarFrame1]
   us:
     address: 0x09EEA1EC
   jp:
     address: 0x09EC15E0
   eu:
     address: 0x09F76024
-- name: gUnk_09EEA1F4
+- name: gLevelUpBarAnims
   record: AnimTable
-  items: [gUnk_0908D054]
+  items: [gLevelUpBarAnim0]
   us:
     address: 0x09EEA1F4
   jp:
@@ -131,18 +131,18 @@ entries:
     address: 0x09EC165C
   eu:
     address: 0x09F760A0
-- name: gUnk_09EEA26C
+- name: gLevelUpChosenCursorFrames
   record: SpriteTable
-  items: [gUnk_0908F144, gUnk_0908F14E, gUnk_0908F158, gUnk_0908F162, gUnk_0908F16C]
+  items: [gLevelUpChosenCursorFrame0, gLevelUpChosenCursorFrame1, gLevelUpChosenCursorFrame2, gLevelUpChosenCursorFrame3, gLevelUpChosenCursorFrame4]
   us:
     address: 0x09EEA26C
   jp:
     address: 0x09EC1660
   eu:
     address: 0x09F760A4
-- name: gUnk_09EEA280
+- name: gLevelUpChosenCursorAnims
   record: AnimTable
-  items: [gUnk_0908F176]
+  items: [gLevelUpChosenCursorAnim0]
   us:
     address: 0x09EEA280
   jp:
@@ -167,18 +167,18 @@ entries:
     address: 0x09EC167C
   eu:
     address: 0x09F760C0
-- name: gUnk_09EEA28C
+- name: gStockInfoWindowFrames
   record: SpriteTable
-  items: [gUnk_0908FCB0]
+  items: [gStockInfoWindowFrame0]
   us:
     address: 0x09EEA28C
   jp:
     address: 0x09EC1680
   eu:
     address: 0x09F760C4
-- name: gUnk_09EEA290
+- name: gStockInfoWindowAnims
   record: AnimTable
-  items: [gUnk_0908FCE4]
+  items: [gStockInfoWindowAnim0]
   us:
     address: 0x09EEA290
   jp:
@@ -203,279 +203,279 @@ entries:
     address: 0x09EC168C
   eu:
     address: 0x09F760D0
-- name: gUnk_09EEA29C
+- name: gLevelUpRikuBonusFrames
   record: SpriteTable
-  items: [gUnk_09091C90, gUnk_09091CC4, gUnk_09091CF8]
+  items: [gLevelUpRikuBonusFrame0, gLevelUpRikuBonusFrame1, gLevelUpRikuBonusFrame2]
   us:
     address: 0x09EEA29C
   jp:
     address: 0x09EC1690
   eu:
     address: 0x09F760D4
-- name: gUnk_09EEA2A8
+- name: gLevelUpRikuBonusAnims
   record: AnimTable
-  items: [gUnk_09091D2C]
+  items: [gLevelUpRikuBonusAnim0]
   us:
     address: 0x09EEA2A8
   jp:
     address: 0x09EC169C
   eu:
     address: 0x09F760E0
-- name: gUnk_09EEA2AC
+- name: gLevelUpRikuBonusChosenFrames
   record: SpriteTable
-  items: [gUnk_09093578, gUnk_090935AC, gUnk_090935E0]
+  items: [gLevelUpRikuBonusChosenFrame0, gLevelUpRikuBonusChosenFrame1, gLevelUpRikuBonusChosenFrame2]
   us:
     address: 0x09EEA2AC
   jp:
     address: 0x09EC16A0
   eu:
     address: 0x09F760E4
-- name: gUnk_09EEA2B8
+- name: gLevelUpRikuBonusChosenAnims
   record: AnimTable
-  items: [gUnk_09093614]
+  items: [gLevelUpRikuBonusChosenAnim0]
   us:
     address: 0x09EEA2B8
   jp:
     address: 0x09EC16AC
   eu:
     address: 0x09F760F0
-- name: gUnk_09EEA2BC
+- name: gLevelUpSoraBonusFrames
   record: SpriteTable
-  items: [gUnk_09094FA0, gUnk_09094FD4, gUnk_09095008, gUnk_0909503C, gUnk_09095076, gUnk_090950B0]
+  items: [gLevelUpSoraBonusFrame0, gLevelUpSoraBonusFrame1, gLevelUpSoraBonusFrame2, gLevelUpSoraBonusFrame3, gLevelUpSoraBonusFrame4, gLevelUpSoraBonusFrame5]
   us:
     address: 0x09EEA2BC
   jp:
     address: 0x09EC16B0
   eu:
     address: 0x09F760F4
-- name: gUnk_09EEA2D4
+- name: gLevelUpSoraBonusAnims
   record: AnimTable
-  items: [gUnk_090950EA]
+  items: [gLevelUpSoraBonusAnim0]
   us:
     address: 0x09EEA2D4
   jp:
     address: 0x09EC16C8
   eu:
     address: 0x09F7610C
-- name: gUnk_09EEA2D8
+- name: gLevelUpSoraBonusChosenFrames
   record: SpriteTable
-  items: [gUnk_09096B34, gUnk_09096B68, gUnk_09096B9C, gUnk_09096BD0, gUnk_09096C0A, gUnk_09096C44]
+  items: [gLevelUpSoraBonusChosenFrame0, gLevelUpSoraBonusChosenFrame1, gLevelUpSoraBonusChosenFrame2, gLevelUpSoraBonusChosenFrame3, gLevelUpSoraBonusChosenFrame4, gLevelUpSoraBonusChosenFrame5]
   us:
     address: 0x09EEA2D8
   jp:
     address: 0x09EC16CC
   eu:
     address: 0x09F76110
-- name: gUnk_09EEA2F0
+- name: gLevelUpSoraBonusChosenAnims
   record: AnimTable
-  items: [gUnk_09096C7E]
+  items: [gLevelUpSoraBonusChosenAnim0]
   us:
     address: 0x09EEA2F0
   jp:
     address: 0x09EC16E4
   eu:
     address: 0x09F76128
-- name: gUnkEu_09F7612C
+- name: gLvupLogoFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_0916F93C, gUnkEu_0916F94C, gUnkEu_0916F956, gUnkEu_0916F960, gUnkEu_0916F96A, gUnkEu_0916F974, gUnkEu_0916F97E]
+  items: [gLvupLogoFrenchFrame0, gLvupLogoFrenchFrame1, gLvupLogoFrenchFrame2, gLvupLogoFrenchFrame3, gLvupLogoFrenchFrame4, gLvupLogoFrenchFrame5, gLvupLogoFrenchFrame6]
   eu:
     address: 0x09F7612C
-- name: gUnkEu_09F76148
+- name: gLvupLogoFrenchAnims
   record: AnimTable
-  items: [gUnkEu_0916F988]
+  items: [gLvupLogoFrenchAnim0]
   eu:
     address: 0x09F76148
-- name: gUnkEu_09F7614C
+- name: gLvupLogoSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0916FD74, gUnkEu_0916FD84, gUnkEu_0916FD8E, gUnkEu_0916FD98, gUnkEu_0916FDA2, gUnkEu_0916FDAC, gUnkEu_0916FDB6]
+  items: [gLvupLogoSpanishFrame0, gLvupLogoSpanishFrame1, gLvupLogoSpanishFrame2, gLvupLogoSpanishFrame3, gLvupLogoSpanishFrame4, gLvupLogoSpanishFrame5, gLvupLogoSpanishFrame6]
   eu:
     address: 0x09F7614C
-- name: gUnkEu_09F76168
+- name: gLvupLogoSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0916FDC0]
+  items: [gLvupLogoSpanishAnim0]
   eu:
     address: 0x09F76168
-- name: gUnkEu_09F7616C
+- name: gLvupLogoItalianFrames
   record: SpriteTable
-  items: [gUnkEu_091701AC, gUnkEu_091701BC, gUnkEu_091701C6, gUnkEu_091701D0, gUnkEu_091701DA, gUnkEu_091701E4, gUnkEu_091701EE]
+  items: [gLvupLogoItalianFrame0, gLvupLogoItalianFrame1, gLvupLogoItalianFrame2, gLvupLogoItalianFrame3, gLvupLogoItalianFrame4, gLvupLogoItalianFrame5, gLvupLogoItalianFrame6]
   eu:
     address: 0x09F7616C
-- name: gUnkEu_09F76188
+- name: gLvupLogoItalianAnims
   record: AnimTable
-  items: [gUnkEu_091701F8]
+  items: [gLvupLogoItalianAnim0]
   eu:
     address: 0x09F76188
-- name: gUnkEu_09F7618C
+- name: gLvupLogoGermanFrames
   record: SpriteTable
-  items: [gUnkEu_091705E4, gUnkEu_091705F4, gUnkEu_091705FE, gUnkEu_09170608, gUnkEu_09170612, gUnkEu_0917061C, gUnkEu_09170626]
+  items: [gLvupLogoGermanFrame0, gLvupLogoGermanFrame1, gLvupLogoGermanFrame2, gLvupLogoGermanFrame3, gLvupLogoGermanFrame4, gLvupLogoGermanFrame5, gLvupLogoGermanFrame6]
   eu:
     address: 0x09F7618C
-- name: gUnkEu_09F761A8
+- name: gLvupLogoGermanAnims
   record: AnimTable
-  items: [gUnkEu_09170630]
+  items: [gLvupLogoGermanAnim0]
   eu:
     address: 0x09F761A8
-- name: gUnkEu_09F761AC
+- name: gLevelUpHeaderFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_09170A1C, gUnkEu_09170A26, gUnkEu_09170A30, gUnkEu_09170A3A, gUnkEu_09170A44, gUnkEu_09170A4E, gUnkEu_09170A58, gUnkEu_09170A62, gUnkEu_09170A6C, gUnkEu_09170A76, gUnkEu_09170A80]
+  items: [gLevelUpHeaderFrenchFrame0, gLevelUpHeaderFrenchFrame1, gLevelUpHeaderFrenchFrame2, gLevelUpHeaderFrenchFrame3, gLevelUpHeaderFrenchFrame4, gLevelUpHeaderFrenchFrame5, gLevelUpHeaderFrenchFrame6, gLevelUpHeaderFrenchFrame7, gLevelUpHeaderFrenchFrame8, gLevelUpHeaderFrenchFrame9, gLevelUpHeaderFrenchFrame10]
   eu:
     address: 0x09F761AC
-- name: gUnkEu_09F761D8
+- name: gLevelUpHeaderFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09170A96]
+  items: [gLevelUpHeaderFrenchAnim0]
   eu:
     address: 0x09F761D8
-- name: gUnkEu_09F761DC
+- name: gLevelUpHeaderSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_09170FA0, gUnkEu_09170FAA, gUnkEu_09170FB4, gUnkEu_09170FBE, gUnkEu_09170FC8, gUnkEu_09170FD2, gUnkEu_09170FDC, gUnkEu_09170FE6, gUnkEu_09170FF0, gUnkEu_09170FFA, gUnkEu_09171004]
+  items: [gLevelUpHeaderSpanishFrame0, gLevelUpHeaderSpanishFrame1, gLevelUpHeaderSpanishFrame2, gLevelUpHeaderSpanishFrame3, gLevelUpHeaderSpanishFrame4, gLevelUpHeaderSpanishFrame5, gLevelUpHeaderSpanishFrame6, gLevelUpHeaderSpanishFrame7, gLevelUpHeaderSpanishFrame8, gLevelUpHeaderSpanishFrame9, gLevelUpHeaderSpanishFrame10]
   eu:
     address: 0x09F761DC
-- name: gUnkEu_09F76208
+- name: gLevelUpHeaderSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0917101A]
+  items: [gLevelUpHeaderSpanishAnim0]
   eu:
     address: 0x09F76208
-- name: gUnkEu_09F7620C
+- name: gLevelUpHeaderItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09171524, gUnkEu_0917152E, gUnkEu_09171538, gUnkEu_09171542, gUnkEu_0917154C, gUnkEu_09171556, gUnkEu_09171560, gUnkEu_0917156A, gUnkEu_09171574, gUnkEu_0917157E, gUnkEu_09171588]
+  items: [gLevelUpHeaderItalianFrame0, gLevelUpHeaderItalianFrame1, gLevelUpHeaderItalianFrame2, gLevelUpHeaderItalianFrame3, gLevelUpHeaderItalianFrame4, gLevelUpHeaderItalianFrame5, gLevelUpHeaderItalianFrame6, gLevelUpHeaderItalianFrame7, gLevelUpHeaderItalianFrame8, gLevelUpHeaderItalianFrame9, gLevelUpHeaderItalianFrame10]
   eu:
     address: 0x09F7620C
-- name: gUnkEu_09F76238
+- name: gLevelUpHeaderItalianAnims
   record: AnimTable
-  items: [gUnkEu_0917159E]
+  items: [gLevelUpHeaderItalianAnim0]
   eu:
     address: 0x09F76238
-- name: gUnkEu_09F7623C
+- name: gLevelUpHeaderGermanFrames
   record: SpriteTable
-  items: [gUnkEu_09171AA8, gUnkEu_09171AB2, gUnkEu_09171ABC, gUnkEu_09171AC6, gUnkEu_09171AD0, gUnkEu_09171ADA, gUnkEu_09171AE4, gUnkEu_09171AEE, gUnkEu_09171AF8, gUnkEu_09171B02, gUnkEu_09171B0C]
+  items: [gLevelUpHeaderGermanFrame0, gLevelUpHeaderGermanFrame1, gLevelUpHeaderGermanFrame2, gLevelUpHeaderGermanFrame3, gLevelUpHeaderGermanFrame4, gLevelUpHeaderGermanFrame5, gLevelUpHeaderGermanFrame6, gLevelUpHeaderGermanFrame7, gLevelUpHeaderGermanFrame8, gLevelUpHeaderGermanFrame9, gLevelUpHeaderGermanFrame10]
   eu:
     address: 0x09F7623C
-- name: gUnkEu_09F76268
+- name: gLevelUpHeaderGermanAnims
   record: AnimTable
-  items: [gUnkEu_09171B22]
+  items: [gLevelUpHeaderGermanAnim0]
   eu:
     address: 0x09F76268
-- name: gUnkEu_09F7626C
+- name: gLevelUpSoraBonusItalianFrames
   record: SpriteTable
-  items: [gUnkEu_091720AC, gUnkEu_091720E0, gUnkEu_09172114, gUnkEu_09172148, gUnkEu_09172182, gUnkEu_091721BC]
+  items: [gLevelUpSoraBonusItalianFrame0, gLevelUpSoraBonusItalianFrame1, gLevelUpSoraBonusItalianFrame2, gLevelUpSoraBonusItalianFrame3, gLevelUpSoraBonusItalianFrame4, gLevelUpSoraBonusItalianFrame5]
   eu:
     address: 0x09F7626C
-- name: gUnkEu_09F76284
+- name: gLevelUpSoraBonusItalianAnims
   record: AnimTable
-  items: [gUnkEu_091721F6]
+  items: [gLevelUpSoraBonusItalianAnim0]
   eu:
     address: 0x09F76284
-- name: gUnkEu_09F76288
+- name: gLevelUpSoraBonusChosenItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09173C40, gUnkEu_09173C74, gUnkEu_09173CA8, gUnkEu_09173CDC, gUnkEu_09173D16, gUnkEu_09173D50]
+  items: [gLevelUpSoraBonusChosenItalianFrame0, gLevelUpSoraBonusChosenItalianFrame1, gLevelUpSoraBonusChosenItalianFrame2, gLevelUpSoraBonusChosenItalianFrame3, gLevelUpSoraBonusChosenItalianFrame4, gLevelUpSoraBonusChosenItalianFrame5]
   eu:
     address: 0x09F76288
-- name: gUnkEu_09F762A0
+- name: gLevelUpSoraBonusChosenItalianAnims
   record: AnimTable
-  items: [gUnkEu_09173D8A]
+  items: [gLevelUpSoraBonusChosenItalianAnim0]
   eu:
     address: 0x09F762A0
-- name: gUnkEu_09F762A4
+- name: gLevelUpRikuBonusItalianFrames
   record: SpriteTable
-  items: [gUnkEu_09175914, gUnkEu_09175948, gUnkEu_0917597C]
+  items: [gLevelUpRikuBonusItalianFrame0, gLevelUpRikuBonusItalianFrame1, gLevelUpRikuBonusItalianFrame2]
   eu:
     address: 0x09F762A4
-- name: gUnkEu_09F762B0
+- name: gLevelUpRikuBonusItalianAnims
   record: AnimTable
-  items: [gUnkEu_091759B0]
+  items: [gLevelUpRikuBonusItalianAnim0]
   eu:
     address: 0x09F762B0
-- name: gUnkEu_09F762B4
+- name: gLevelUpRikuBonusChosenItalianFrames
   record: SpriteTable
-  items: [gUnkEu_091771FC, gUnkEu_09177230, gUnkEu_09177264]
+  items: [gLevelUpRikuBonusChosenItalianFrame0, gLevelUpRikuBonusChosenItalianFrame1, gLevelUpRikuBonusChosenItalianFrame2]
   eu:
     address: 0x09F762B4
-- name: gUnkEu_09F762C0
+- name: gLevelUpRikuBonusChosenItalianAnims
   record: AnimTable
-  items: [gUnkEu_09177298]
+  items: [gLevelUpRikuBonusChosenItalianAnim0]
   eu:
     address: 0x09F762C0
-- name: gUnkEu_09F762C4
+- name: gLevelUpOptionFrames
   record: SpriteTable
-  items: [gUnkEu_09178C24, gUnkEu_09178C4C, gUnkEu_09178C74, gUnkEu_09178CA8, gUnkEu_09178CD0, gUnkEu_09178CF8, gUnkEu_09178D26]
+  items: [gLevelUpOptionFrame0, gLevelUpOptionFrame1, gLevelUpOptionFrame2, gLevelUpOptionFrame3, gLevelUpOptionFrame4, gLevelUpOptionFrame5, gLevelUpOptionFrame6]
   eu:
     address: 0x09F762C4
-- name: gUnkEu_09F762E0
+- name: gLevelUpOptionAnims
   record: AnimTable
-  items: [gUnkEu_09178D36]
+  items: [gLevelUpOptionAnim0]
   eu:
     address: 0x09F762E0
-- name: gUnkEu_09F762E4
+- name: gLevelUpOptionFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_09179BC0, gUnkEu_09179BE8, gUnkEu_09179C16, gUnkEu_09179C3E, gUnkEu_09179C6C, gUnkEu_09179CA6, gUnkEu_09179CD4]
+  items: [gLevelUpOptionFrenchFrame0, gLevelUpOptionFrenchFrame1, gLevelUpOptionFrenchFrame2, gLevelUpOptionFrenchFrame3, gLevelUpOptionFrenchFrame4, gLevelUpOptionFrenchFrame5, gLevelUpOptionFrenchFrame6]
   eu:
     address: 0x09F762E4
-- name: gUnkEu_09F76300
+- name: gLevelUpOptionFrenchAnims
   record: AnimTable
-  items: [gUnkEu_09179CE4]
+  items: [gLevelUpOptionFrenchAnim0]
   eu:
     address: 0x09F76300
-- name: gUnkEu_09F76304
+- name: gLevelUpOptionSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_0917AE30, gUnkEu_0917AE58, gUnkEu_0917AE80, gUnkEu_0917AEAE, gUnkEu_0917AED0, gUnkEu_0917AEF8, gUnkEu_0917AF20]
+  items: [gLevelUpOptionSpanishFrame0, gLevelUpOptionSpanishFrame1, gLevelUpOptionSpanishFrame2, gLevelUpOptionSpanishFrame3, gLevelUpOptionSpanishFrame4, gLevelUpOptionSpanishFrame5, gLevelUpOptionSpanishFrame6]
   eu:
     address: 0x09F76304
-- name: gUnkEu_09F76320
+- name: gLevelUpOptionSpanishAnims
   record: AnimTable
-  items: [gUnkEu_0917AF30]
+  items: [gLevelUpOptionSpanishAnim0]
   eu:
     address: 0x09F76320
-- name: gUnkEu_09F76324
+- name: gLevelUpOptionItalianFrames
   record: SpriteTable
-  items: [gUnkEu_0917BE9C, gUnkEu_0917BEBE, gUnkEu_0917BEE0, gUnkEu_0917BF0E, gUnkEu_0917BF30, gUnkEu_0917BF58, gUnkEu_0917BF8C]
+  items: [gLevelUpOptionItalianFrame0, gLevelUpOptionItalianFrame1, gLevelUpOptionItalianFrame2, gLevelUpOptionItalianFrame3, gLevelUpOptionItalianFrame4, gLevelUpOptionItalianFrame5, gLevelUpOptionItalianFrame6]
   eu:
     address: 0x09F76324
-- name: gUnkEu_09F76340
+- name: gLevelUpOptionItalianAnims
   record: AnimTable
-  items: [gUnkEu_0917BF9C]
+  items: [gLevelUpOptionItalianAnim0]
   eu:
     address: 0x09F76340
-- name: gUnkEu_09F76344
+- name: gLevelUpOptionGermanFrames
   record: SpriteTable
-  items: [gUnkEu_0917CEA8, gUnkEu_0917CED6, gUnkEu_0917CF04, gUnkEu_0917CF32, gUnkEu_0917CF66, gUnkEu_0917CF9A, gUnkEu_0917CFC8]
+  items: [gLevelUpOptionGermanFrame0, gLevelUpOptionGermanFrame1, gLevelUpOptionGermanFrame2, gLevelUpOptionGermanFrame3, gLevelUpOptionGermanFrame4, gLevelUpOptionGermanFrame5, gLevelUpOptionGermanFrame6]
   eu:
     address: 0x09F76344
-- name: gUnkEu_09F76360
+- name: gLevelUpOptionGermanAnims
   record: AnimTable
-  items: [gUnkEu_0917CFD8]
+  items: [gLevelUpOptionGermanAnim0]
   eu:
     address: 0x09F76360
-- name: gUnk_0908C686
+- name: gLvupLogoTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnk_0908C630
+  - symbol: gLvupLogoFrame0
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnk_0908C640
+  - symbol: gLvupLogoFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_0908C64A
+  - symbol: gLvupLogoFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_0908C654
+  - symbol: gLvupLogoFrame3
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnk_0908C65E
+  - symbol: gLvupLogoFrame4
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnk_0908C668
+  - symbol: gLvupLogoFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnk_0908C672
+  - symbol: gLvupLogoFrame6
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnk_0908C67C
+  - symbol: gLvupLogoAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -487,50 +487,50 @@ entries:
   eu:
     address: 0x09163764
     size: 1078
-- name: gUnk_0908CAEC
+- name: gLevelUpHeaderTiles
   format: sprite_sheet
   align: 4
   cell: [84, 24]
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnk_0908CA68
+  - symbol: gLevelUpHeaderFrame0
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CA72
+  - symbol: gLevelUpHeaderFrame1
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CA7C
+  - symbol: gLevelUpHeaderFrame2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CA86
+  - symbol: gLevelUpHeaderFrame3
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CA90
+  - symbol: gLevelUpHeaderFrame4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CA9A
+  - symbol: gLevelUpHeaderFrame5
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CAA4
+  - symbol: gLevelUpHeaderFrame6
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CAAE
+  - symbol: gLevelUpHeaderFrame7
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CAB8
+  - symbol: gLevelUpHeaderFrame8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CAC2
+  - symbol: gLevelUpHeaderFrame9
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnk_0908CACC
+  - symbol: gLevelUpHeaderFrame10
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
   animations:
-  - symbol: gUnk_0908CAE2
+  - symbol: gLevelUpHeaderAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -542,14 +542,14 @@ entries:
   eu:
     address: 0x09163B9C
     size: 1412
-- name: gUnk_0908D05E
+- name: gLevelUpBarTiles
   format: sprite_sheet
   align: 4
   cell: [240, 8]
   anchor: [128, 0]
   columns: 2
   frames:
-  - symbol: gUnk_0908CFEC
+  - symbol: gLevelUpBarFrame0
     pieces:
     - [32x8, -128, 0]
     - [32x8, -96, 0, {fresh: true}]
@@ -559,7 +559,7 @@ entries:
     - [32x8, 32, 0, {fresh: true}]
     - [32x8, 64, 0, {fresh: true}]
     - [16x8, 96, 0]
-  - symbol: gUnk_0908D020
+  - symbol: gLevelUpBarFrame1
     pieces:
     - [32x8, -128, 0, {vflip: true, same: [0, 0]}]
     - [32x8, -96, 0, {vflip: true, same: [0, 1]}]
@@ -570,7 +570,7 @@ entries:
     - [32x8, 64, 0, {vflip: true}]
     - [16x8, 96, 0, {vflip: true}]
   animations:
-  - symbol: gUnk_0908D054
+  - symbol: gLevelUpBarAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -686,30 +686,30 @@ entries:
   eu:
     address: 0x09164554
     size: 7458
-- name: gUnk_0908F190
+- name: gLevelUpChosenCursorTiles
   format: sprite_sheet
   align: 4
   cell: [16, 16]
   anchor: [0, 0]
   columns: 5
   frames:
-  - symbol: gUnk_0908F144
+  - symbol: gLevelUpChosenCursorFrame0
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0908F14E
+  - symbol: gLevelUpChosenCursorFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0908F158
+  - symbol: gLevelUpChosenCursorFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0908F162
+  - symbol: gLevelUpChosenCursorFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_0908F16C
+  - symbol: gLevelUpChosenCursorFrame4
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_0908F176
+  - symbol: gLevelUpChosenCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 7], [2, 6], [3, 7], [4, 6]]
   us:
@@ -746,14 +746,14 @@ entries:
   eu:
     address: 0x09166544
     size: 2208
-- name: gUnk_0908FCEE
+- name: gStockInfoWindowTiles
   format: sprite_sheet
   align: 4
   cell: [152, 64]
   anchor: [76, 28]
   columns: 1
   frames:
-  - symbol: gUnk_0908FCB0
+  - symbol: gStockInfoWindowFrame0
     pieces:
     - [64x64, -76, -28]
     - [64x64, -12, -28]
@@ -764,7 +764,7 @@ entries:
     - [16x8, 52, 20]
     - [8x8, 68, 20]
   animations:
-  - symbol: gUnk_0908FCE4
+  - symbol: gStockInfoWindowAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -806,14 +806,14 @@ entries:
   eu:
     address: 0x091680C4
     size: 3326
-- name: gUnk_09091D36
+- name: gLevelUpRikuBonusTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnk_09091C90
+  - symbol: gLevelUpRikuBonusFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -823,7 +823,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnk_09091CC4
+  - symbol: gLevelUpRikuBonusFrame1
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -833,7 +833,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_09091CF8
+  - symbol: gLevelUpRikuBonusFrame2
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -844,7 +844,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnk_09091D2C
+  - symbol: gLevelUpRikuBonusAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -856,14 +856,14 @@ entries:
   eu:
     address: 0x09168DC4
     size: 6374
-- name: gUnk_0909361E
+- name: gLevelUpRikuBonusChosenTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnk_09093578
+  - symbol: gLevelUpRikuBonusChosenFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -873,7 +873,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnk_090935AC
+  - symbol: gLevelUpRikuBonusChosenFrame1
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -883,7 +883,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_090935E0
+  - symbol: gLevelUpRikuBonusChosenFrame2
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -894,7 +894,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnk_09093614
+  - symbol: gLevelUpRikuBonusChosenAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -906,14 +906,14 @@ entries:
   eu:
     address: 0x0916A6AC
     size: 6694
-- name: gUnk_090950F4
+- name: gLevelUpSoraBonusTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnk_09094FA0
+  - symbol: gLevelUpSoraBonusFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -923,7 +923,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnk_09094FD4
+  - symbol: gLevelUpSoraBonusFrame1
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -933,7 +933,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_09095008
+  - symbol: gLevelUpSoraBonusFrame2
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -943,7 +943,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_0909503C
+  - symbol: gLevelUpSoraBonusFrame3
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -954,7 +954,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnk_09095076
+  - symbol: gLevelUpSoraBonusFrame4
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -965,7 +965,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnk_090950B0
+  - symbol: gLevelUpSoraBonusFrame5
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -977,7 +977,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnk_090950EA
+  - symbol: gLevelUpSoraBonusAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -989,14 +989,14 @@ entries:
   eu:
     address: 0x0916C0D4
     size: 7060
-- name: gUnk_09096C88
+- name: gLevelUpSoraBonusChosenTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnk_09096B34
+  - symbol: gLevelUpSoraBonusChosenFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1006,7 +1006,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnk_09096B68
+  - symbol: gLevelUpSoraBonusChosenFrame1
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1016,7 +1016,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_09096B9C
+  - symbol: gLevelUpSoraBonusChosenFrame2
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1026,7 +1026,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnk_09096BD0
+  - symbol: gLevelUpSoraBonusChosenFrame3
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -1037,7 +1037,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnk_09096C0A
+  - symbol: gLevelUpSoraBonusChosenFrame4
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1048,7 +1048,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnk_09096C44
+  - symbol: gLevelUpSoraBonusChosenFrame5
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1060,7 +1060,7 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnk_09096C7E
+  - symbol: gLevelUpSoraBonusChosenAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -1072,354 +1072,354 @@ entries:
   eu:
     address: 0x0916DC68
     size: 7380
-- name: gUnkEu_0916F992
+- name: gLvupLogoFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnkEu_0916F93C
+  - symbol: gLvupLogoFrenchFrame0
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnkEu_0916F94C
+  - symbol: gLvupLogoFrenchFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916F956
+  - symbol: gLvupLogoFrenchFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916F960
+  - symbol: gLvupLogoFrenchFrame3
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_0916F96A
+  - symbol: gLvupLogoFrenchFrame4
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_0916F974
+  - symbol: gLvupLogoFrenchFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916F97E
+  - symbol: gLvupLogoFrenchFrame6
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnkEu_0916F988
+  - symbol: gLvupLogoFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0916F93C
     size: 1078
-- name: gUnkEu_0916FDCA
+- name: gLvupLogoSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnkEu_0916FD74
+  - symbol: gLvupLogoSpanishFrame0
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnkEu_0916FD84
+  - symbol: gLvupLogoSpanishFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916FD8E
+  - symbol: gLvupLogoSpanishFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916FD98
+  - symbol: gLvupLogoSpanishFrame3
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_0916FDA2
+  - symbol: gLvupLogoSpanishFrame4
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_0916FDAC
+  - symbol: gLvupLogoSpanishFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_0916FDB6
+  - symbol: gLvupLogoSpanishFrame6
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnkEu_0916FDC0
+  - symbol: gLvupLogoSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0916FD74
     size: 1078
-- name: gUnkEu_09170202
+- name: gLvupLogoItalianTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnkEu_091701AC
+  - symbol: gLvupLogoItalianFrame0
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnkEu_091701BC
+  - symbol: gLvupLogoItalianFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_091701C6
+  - symbol: gLvupLogoItalianFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_091701D0
+  - symbol: gLvupLogoItalianFrame3
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_091701DA
+  - symbol: gLvupLogoItalianFrame4
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_091701E4
+  - symbol: gLvupLogoItalianFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_091701EE
+  - symbol: gLvupLogoItalianFrame6
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnkEu_091701F8
+  - symbol: gLvupLogoItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091701AC
     size: 1078
-- name: gUnkEu_0917063A
+- name: gLvupLogoGermanTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [32, 8]
   columns: 7
   frames:
-  - symbol: gUnkEu_091705E4
+  - symbol: gLvupLogoGermanFrame0
     pieces:
     - [32x16, -32, -8]
     - [32x16, 0, -8]
-  - symbol: gUnkEu_091705F4
+  - symbol: gLvupLogoGermanFrame1
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_091705FE
+  - symbol: gLvupLogoGermanFrame2
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_09170608
+  - symbol: gLvupLogoGermanFrame3
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_09170612
+  - symbol: gLvupLogoGermanFrame4
     pieces:
     - [8x8, -4, -4]
-  - symbol: gUnkEu_0917061C
+  - symbol: gLvupLogoGermanFrame5
     pieces:
     - [16x16, -8, -8]
-  - symbol: gUnkEu_09170626
+  - symbol: gLvupLogoGermanFrame6
     pieces:
     - [8x8, -4, -4]
   animations:
-  - symbol: gUnkEu_09170630
+  - symbol: gLvupLogoGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091705E4
     size: 1078
-- name: gUnkEu_09170AA0
+- name: gLevelUpHeaderFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [84, 24]
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_09170A1C
+  - symbol: gLevelUpHeaderFrenchFrame0
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A26
+  - symbol: gLevelUpHeaderFrenchFrame1
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A30
+  - symbol: gLevelUpHeaderFrenchFrame2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A3A
+  - symbol: gLevelUpHeaderFrenchFrame3
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A44
+  - symbol: gLevelUpHeaderFrenchFrame4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A4E
+  - symbol: gLevelUpHeaderFrenchFrame5
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A58
+  - symbol: gLevelUpHeaderFrenchFrame6
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A62
+  - symbol: gLevelUpHeaderFrenchFrame7
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A6C
+  - symbol: gLevelUpHeaderFrenchFrame8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A76
+  - symbol: gLevelUpHeaderFrenchFrame9
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170A80
+  - symbol: gLevelUpHeaderFrenchFrame10
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
   animations:
-  - symbol: gUnkEu_09170A96
+  - symbol: gLevelUpHeaderFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09170A1C
     size: 1412
-- name: gUnkEu_09171024
+- name: gLevelUpHeaderSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [84, 24]
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_09170FA0
+  - symbol: gLevelUpHeaderSpanishFrame0
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FAA
+  - symbol: gLevelUpHeaderSpanishFrame1
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FB4
+  - symbol: gLevelUpHeaderSpanishFrame2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FBE
+  - symbol: gLevelUpHeaderSpanishFrame3
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FC8
+  - symbol: gLevelUpHeaderSpanishFrame4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FD2
+  - symbol: gLevelUpHeaderSpanishFrame5
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FDC
+  - symbol: gLevelUpHeaderSpanishFrame6
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FE6
+  - symbol: gLevelUpHeaderSpanishFrame7
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FF0
+  - symbol: gLevelUpHeaderSpanishFrame8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09170FFA
+  - symbol: gLevelUpHeaderSpanishFrame9
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171004
+  - symbol: gLevelUpHeaderSpanishFrame10
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
   animations:
-  - symbol: gUnkEu_0917101A
+  - symbol: gLevelUpHeaderSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09170FA0
     size: 1412
-- name: gUnkEu_091715A8
+- name: gLevelUpHeaderItalianTiles
   format: sprite_sheet
   align: 4
   cell: [84, 24]
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_09171524
+  - symbol: gLevelUpHeaderItalianFrame0
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_0917152E
+  - symbol: gLevelUpHeaderItalianFrame1
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171538
+  - symbol: gLevelUpHeaderItalianFrame2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171542
+  - symbol: gLevelUpHeaderItalianFrame3
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_0917154C
+  - symbol: gLevelUpHeaderItalianFrame4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171556
+  - symbol: gLevelUpHeaderItalianFrame5
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171560
+  - symbol: gLevelUpHeaderItalianFrame6
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_0917156A
+  - symbol: gLevelUpHeaderItalianFrame7
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171574
+  - symbol: gLevelUpHeaderItalianFrame8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_0917157E
+  - symbol: gLevelUpHeaderItalianFrame9
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171588
+  - symbol: gLevelUpHeaderItalianFrame10
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [16x16, 64, 0]
   animations:
-  - symbol: gUnkEu_0917159E
+  - symbol: gLevelUpHeaderItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09171524
     size: 1412
-- name: gUnkEu_09171B2C
+- name: gLevelUpHeaderGermanTiles
   format: sprite_sheet
   align: 4
   cell: [100, 24]
   anchor: [4, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_09171AA8
+  - symbol: gLevelUpHeaderGermanFrame0
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AB2
+  - symbol: gLevelUpHeaderGermanFrame1
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171ABC
+  - symbol: gLevelUpHeaderGermanFrame2
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AC6
+  - symbol: gLevelUpHeaderGermanFrame3
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AD0
+  - symbol: gLevelUpHeaderGermanFrame4
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171ADA
+  - symbol: gLevelUpHeaderGermanFrame5
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AE4
+  - symbol: gLevelUpHeaderGermanFrame6
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AEE
+  - symbol: gLevelUpHeaderGermanFrame7
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171AF8
+  - symbol: gLevelUpHeaderGermanFrame8
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171B02
+  - symbol: gLevelUpHeaderGermanFrame9
     pieces:
     - [8x16, -4, -8]
-  - symbol: gUnkEu_09171B0C
+  - symbol: gLevelUpHeaderGermanFrame10
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
   animations:
-  - symbol: gUnkEu_09171B22
+  - symbol: gLevelUpHeaderGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09171AA8
     size: 1540
-- name: gUnkEu_09172200
+- name: gLevelUpSoraBonusItalianTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_091720AC
+  - symbol: gLevelUpSoraBonusItalianFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1429,7 +1429,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkEu_091720E0
+  - symbol: gLevelUpSoraBonusItalianFrame1
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1439,7 +1439,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_09172114
+  - symbol: gLevelUpSoraBonusItalianFrame2
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1449,7 +1449,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_09172148
+  - symbol: gLevelUpSoraBonusItalianFrame3
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -1460,7 +1460,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkEu_09172182
+  - symbol: gLevelUpSoraBonusItalianFrame4
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -1471,7 +1471,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnkEu_091721BC
+  - symbol: gLevelUpSoraBonusItalianFrame5
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [64x32, 48, 8]
@@ -1483,20 +1483,20 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnkEu_091721F6
+  - symbol: gLevelUpSoraBonusItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091720AC
     size: 7060
-- name: gUnkEu_09173D94
+- name: gLevelUpSoraBonusChosenItalianTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 6
   frames:
-  - symbol: gUnkEu_09173C40
+  - symbol: gLevelUpSoraBonusChosenItalianFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1506,7 +1506,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkEu_09173C74
+  - symbol: gLevelUpSoraBonusChosenItalianFrame1
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1516,7 +1516,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_09173CA8
+  - symbol: gLevelUpSoraBonusChosenItalianFrame2
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1526,7 +1526,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_09173CDC
+  - symbol: gLevelUpSoraBonusChosenItalianFrame3
     pieces:
     - [32x32, -8, 8, {layer: 1}]
     - [32x16, -16, 0, {same: [0, 0]}]
@@ -1537,7 +1537,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkEu_09173D16
+  - symbol: gLevelUpSoraBonusChosenItalianFrame4
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1548,7 +1548,7 @@ entries:
     - [32x16, -16, 0, {same: [1, 5]}]
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [1, 7]}]
-  - symbol: gUnkEu_09173D50
+  - symbol: gLevelUpSoraBonusChosenItalianFrame5
     pieces:
     - [32x32, -8, 8, {same: [3, 0]}]
     - [32x16, 48, 0]
@@ -1560,20 +1560,20 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16, {same: [2, 7]}]
   animations:
-  - symbol: gUnkEu_09173D8A
+  - symbol: gLevelUpSoraBonusChosenItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09173C40
     size: 7380
-- name: gUnkEu_091759BA
+- name: gLevelUpRikuBonusItalianTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_09175914
+  - symbol: gLevelUpRikuBonusItalianFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1583,7 +1583,7 @@ entries:
     - [32x8, 48, 40]
     - [32x8, 80, 40]
     - [16x8, 112, 40]
-  - symbol: gUnkEu_09175948
+  - symbol: gLevelUpRikuBonusItalianFrame1
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1593,7 +1593,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_0917597C
+  - symbol: gLevelUpRikuBonusItalianFrame2
     pieces:
     - [64x32, 48, 8]
     - [16x32, 112, 8]
@@ -1604,20 +1604,20 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnkEu_091759B0
+  - symbol: gLevelUpRikuBonusItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09175914
     size: 6374
-- name: gUnkEu_091772A2
+- name: gLevelUpRikuBonusChosenItalianTiles
   format: sprite_sheet
   align: 4
   cell: [144, 48]
   anchor: [16, 0]
   columns: 3
   frames:
-  - symbol: gUnkEu_091771FC
+  - symbol: gLevelUpRikuBonusChosenItalianFrame0
     pieces:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
@@ -1627,7 +1627,7 @@ entries:
     - [16x16, 112, 0]
     - [64x32, 48, 16]
     - [16x32, 112, 16]
-  - symbol: gUnkEu_09177230
+  - symbol: gLevelUpRikuBonusChosenItalianFrame1
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1637,7 +1637,7 @@ entries:
     - [32x16, -16, 0]
     - [32x16, 16, 0]
     - [64x32, -16, 16]
-  - symbol: gUnkEu_09177264
+  - symbol: gLevelUpRikuBonusChosenItalianFrame2
     pieces:
     - [32x16, 48, 0]
     - [32x16, 80, 0]
@@ -1648,20 +1648,20 @@ entries:
     - [32x16, 16, 0]
     - [64x32, -16, 16]
   animations:
-  - symbol: gUnkEu_09177298
+  - symbol: gLevelUpRikuBonusChosenItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x091771FC
     size: 6694
-- name: gUnkEu_09178D40
+- name: gLevelUpOptionTiles
   format: sprite_sheet
   align: 4
   cell: [104, 34]
   anchor: [0, 0]
   columns: 7
   frames:
-  - symbol: gUnkEu_09178C24
+  - symbol: gLevelUpOptionFrame0
     pieces:
     - [32x8, 18, 0]
     - [16x8, 50, 0]
@@ -1669,7 +1669,7 @@ entries:
     - [32x8, 32, 18]
     - [16x8, 64, 18]
     - [8x8, 48, 10]
-  - symbol: gUnkEu_09178C4C
+  - symbol: gLevelUpOptionFrame1
     pieces:
     - [32x8, 18, 0]
     - [16x8, 50, 0, {fresh: true}]
@@ -1677,7 +1677,7 @@ entries:
     - [32x8, 32, 18, {fresh: true}]
     - [16x8, 64, 18]
     - [8x8, 48, 10, {fresh: true}]
-  - symbol: gUnkEu_09178C74
+  - symbol: gLevelUpOptionFrame2
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
@@ -1687,7 +1687,7 @@ entries:
     - [32x8, 64, 18]
     - [8x8, 96, 18]
     - [8x8, 80, 26, {fresh: true}]
-  - symbol: gUnkEu_09178CA8
+  - symbol: gLevelUpOptionFrame3
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [16x8, 50, 0, {fresh: true}]
@@ -1695,7 +1695,7 @@ entries:
     - [32x8, 32, 18]
     - [16x8, 64, 18]
     - [8x8, 48, 10]
-  - symbol: gUnkEu_09178CD0
+  - symbol: gLevelUpOptionFrame4
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1703,7 +1703,7 @@ entries:
     - [32x8, 32, 18]
     - [16x8, 64, 18]
     - [8x8, 48, 10, {fresh: true}]
-  - symbol: gUnkEu_09178CF8
+  - symbol: gLevelUpOptionFrame5
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1712,25 +1712,25 @@ entries:
     - [32x8, 32, 18]
     - [16x8, 64, 18]
     - [8x8, 48, 10, {fresh: true}]
-  - symbol: gUnkEu_09178D26
+  - symbol: gLevelUpOptionFrame6
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
   animations:
-  - symbol: gUnkEu_09178D36
+  - symbol: gLevelUpOptionAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09178C24
     size: 3996
-- name: gUnkEu_09179CEE
+- name: gLevelUpOptionFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [128, 34]
   anchor: [0, 0]
   columns: 7
   frames:
-  - symbol: gUnkEu_09179BC0
+  - symbol: gLevelUpOptionFrenchFrame0
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1738,7 +1738,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18]
     - [16x8, 8, 26]
-  - symbol: gUnkEu_09179BE8
+  - symbol: gLevelUpOptionFrenchFrame1
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [16x8, 50, 0]
@@ -1747,7 +1747,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18, {fresh: true}]
     - [16x8, 8, 26, {fresh: true}]
-  - symbol: gUnkEu_09179C16
+  - symbol: gLevelUpOptionFrenchFrame2
     pieces:
     - [32x8, 18, 0]
     - [32x8, 0, 18]
@@ -1755,7 +1755,7 @@ entries:
     - [32x8, 64, 18]
     - [32x8, 96, 18]
     - [16x8, 0, 26]
-  - symbol: gUnkEu_09179C3E
+  - symbol: gLevelUpOptionFrenchFrame3
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [32x8, 50, 0, {fresh: true}]
@@ -1764,7 +1764,7 @@ entries:
     - [16x8, 64, 18]
     - [8x8, 80, 18]
     - [16x8, 8, 26, {fresh: true}]
-  - symbol: gUnkEu_09179C6C
+  - symbol: gLevelUpOptionFrenchFrame4
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [32x8, 50, 0]
@@ -1775,7 +1775,7 @@ entries:
     - [8x8, 80, 18, {fresh: true}]
     - [16x8, 8, 26, {fresh: true}]
     - [8x8, 82, 8]
-  - symbol: gUnkEu_09179CA6
+  - symbol: gLevelUpOptionFrenchFrame5
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [32x8, 50, 0]
@@ -1784,25 +1784,25 @@ entries:
     - [32x8, 32, 18]
     - [16x8, 8, 26, {fresh: true}]
     - [32x8, 64, 18]
-  - symbol: gUnkEu_09179CD4
+  - symbol: gLevelUpOptionFrenchFrame6
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
   animations:
-  - symbol: gUnkEu_09179CE4
+  - symbol: gLevelUpOptionFrenchAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x09179BC0
     size: 4718
-- name: gUnkEu_0917AF3A
+- name: gLevelUpOptionSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [128, 34]
   anchor: [0, 0]
   columns: 7
   frames:
-  - symbol: gUnkEu_0917AE30
+  - symbol: gLevelUpOptionSpanishFrame0
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
@@ -1810,7 +1810,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18]
     - [8x8, 96, 18]
-  - symbol: gUnkEu_0917AE58
+  - symbol: gLevelUpOptionSpanishFrame1
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
@@ -1818,7 +1818,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18, {fresh: true}]
     - [8x8, 96, 18, {fresh: true}]
-  - symbol: gUnkEu_0917AE80
+  - symbol: gLevelUpOptionSpanishFrame2
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
@@ -1827,14 +1827,14 @@ entries:
     - [32x8, 64, 18]
     - [32x8, 96, 18]
     - [8x8, 0, 26]
-  - symbol: gUnkEu_0917AEAE
+  - symbol: gLevelUpOptionSpanishFrame3
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [8x8, 50, 0, {fresh: true}]
     - [32x8, 0, 18, {fresh: true}]
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
-  - symbol: gUnkEu_0917AED0
+  - symbol: gLevelUpOptionSpanishFrame4
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1842,7 +1842,7 @@ entries:
     - [32x8, 0, 18, {fresh: true}]
     - [32x8, 32, 18]
     - [32x8, 64, 18, {fresh: true}]
-  - symbol: gUnkEu_0917AEF8
+  - symbol: gLevelUpOptionSpanishFrame5
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1850,39 +1850,39 @@ entries:
     - [32x8, 0, 18, {fresh: true}]
     - [32x8, 32, 18]
     - [32x8, 64, 18, {fresh: true}]
-  - symbol: gUnkEu_0917AF20
+  - symbol: gLevelUpOptionSpanishFrame6
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
   animations:
-  - symbol: gUnkEu_0917AF30
+  - symbol: gLevelUpOptionSpanishAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917AE30
     size: 4202
-- name: gUnkEu_0917BFA6
+- name: gLevelUpOptionItalianTiles
   format: sprite_sheet
   align: 4
   cell: [112, 42]
   anchor: [0, 8]
   columns: 7
   frames:
-  - symbol: gUnkEu_0917BE9C
+  - symbol: gLevelUpOptionItalianFrame0
     pieces:
     - [32x8, 0, 18]
     - [32x8, 32, 18]
     - [32x8, 64, 18]
     - [16x8, 96, 18]
     - [32x8, 18, 0]
-  - symbol: gUnkEu_0917BEBE
+  - symbol: gLevelUpOptionItalianFrame1
     pieces:
     - [32x8, 18, 0]
     - [32x8, 0, 18, {fresh: true}]
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 96, 18, {fresh: true}]
-  - symbol: gUnkEu_0917BEE0
+  - symbol: gLevelUpOptionItalianFrame2
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
@@ -1891,14 +1891,14 @@ entries:
     - [32x8, 64, 18]
     - [8x8, 96, 18]
     - [8x8, 8, 26]
-  - symbol: gUnkEu_0917BF0E
+  - symbol: gLevelUpOptionItalianFrame3
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [32x8, 0, 18, {fresh: true}]
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 96, 18]
-  - symbol: gUnkEu_0917BF30
+  - symbol: gLevelUpOptionItalianFrame4
     pieces:
     - [32x8, 18, 0]
     - [16x8, 50, 0]
@@ -1906,7 +1906,7 @@ entries:
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 96, 18, {fresh: true}]
-  - symbol: gUnkEu_0917BF58
+  - symbol: gLevelUpOptionItalianFrame5
     pieces:
     - [32x8, 18, 0]
     - [16x8, 50, 0]
@@ -1916,25 +1916,25 @@ entries:
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 96, 18, {fresh: true}]
-  - symbol: gUnkEu_0917BF8C
+  - symbol: gLevelUpOptionItalianFrame6
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
   animations:
-  - symbol: gUnkEu_0917BF9C
+  - symbol: gLevelUpOptionItalianAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917BE9C
     size: 4106
-- name: gUnkEu_0917CFE2
+- name: gLevelUpOptionGermanTiles
   format: sprite_sheet
   align: 4
   cell: [128, 34]
   anchor: [0, 0]
   columns: 7
   frames:
-  - symbol: gUnkEu_0917CEA8
+  - symbol: gLevelUpOptionGermanFrame0
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1943,7 +1943,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18]
     - [16x8, 16, 26]
-  - symbol: gUnkEu_0917CED6
+  - symbol: gLevelUpOptionGermanFrame1
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0, {fresh: true}]
@@ -1952,7 +1952,7 @@ entries:
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 16, 26, {fresh: true}]
-  - symbol: gUnkEu_0917CF04
+  - symbol: gLevelUpOptionGermanFrame2
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1961,7 +1961,7 @@ entries:
     - [32x8, 32, 18]
     - [32x8, 64, 18]
     - [32x8, 96, 18]
-  - symbol: gUnkEu_0917CF32
+  - symbol: gLevelUpOptionGermanFrame3
     pieces:
     - [32x8, 18, 0, {fresh: true}]
     - [32x8, 50, 0, {fresh: true}]
@@ -1971,7 +1971,7 @@ entries:
     - [8x8, 80, 18]
     - [16x8, 16, 26, {fresh: true}]
     - [8x8, 50, 8, {fresh: true}]
-  - symbol: gUnkEu_0917CF66
+  - symbol: gLevelUpOptionGermanFrame4
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1981,7 +1981,7 @@ entries:
     - [32x8, 64, 18]
     - [16x8, 16, 26, {fresh: true}]
     - [8x8, 58, 8]
-  - symbol: gUnkEu_0917CF9A
+  - symbol: gLevelUpOptionGermanFrame5
     pieces:
     - [32x8, 18, 0]
     - [32x8, 50, 0]
@@ -1990,18 +1990,18 @@ entries:
     - [32x8, 32, 18, {fresh: true}]
     - [32x8, 64, 18]
     - [16x8, 16, 26, {fresh: true}]
-  - symbol: gUnkEu_0917CFC8
+  - symbol: gLevelUpOptionGermanFrame6
     pieces:
     - [32x8, 18, 0]
     - [8x8, 50, 0]
   animations:
-  - symbol: gUnkEu_0917CFD8
+  - symbol: gLevelUpOptionGermanAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x0917CEA8
     size: 5050
-- name: gUnk_093FEEB8
+- name: gLevelUpRikuIconTiles
   format: tiles4
   width: 2
   us:
@@ -2013,7 +2013,7 @@ entries:
   eu:
     address: 0x094D1D84
     size: 2624
-- name: gUnk_093FF8F8
+- name: gLevelUpBgTiles
   format: tiles4
   width: 4
   us:
@@ -2025,7 +2025,7 @@ entries:
   eu:
     address: 0x094D27C4
     size: 11264
-- name: gUnk_093FD438
+- name: gLevelUpRikuStatLabelTiles
   format: tiles4
   width: 4
   us:
@@ -2053,7 +2053,7 @@ entries:
   eu:
     address: 0x09530824
     size: 2560
-- name: gUnk_0950F2B8
+- name: gLevelUpStatsMap
   format: tilemap
   us:
     address: 0x0950F2B8
@@ -2064,7 +2064,7 @@ entries:
   eu:
     address: 0x09532624
     size: 1280
-- name: gUnk_095112B8
+- name: gLevelUpBonusAMap
   format: tilemap
   us:
     address: 0x095112B8
@@ -2075,7 +2075,7 @@ entries:
   eu:
     address: 0x09531224
     size: 1280
-- name: gUnk_09511AB8
+- name: gLevelUpBonusBMap
   format: tilemap
   us:
     address: 0x09511AB8
@@ -2086,7 +2086,7 @@ entries:
   eu:
     address: 0x09531724
     size: 1280
-- name: gUnk_095122B8
+- name: gLevelUpBonusCMap
   format: tilemap
   us:
     address: 0x095122B8
@@ -2097,7 +2097,7 @@ entries:
   eu:
     address: 0x09531C24
     size: 1280
-- name: gUnk_0951F2B8
+- name: gEventBgEffect0Map
   format: tilemap
   us:
     address: 0x0951F2B8
@@ -2108,7 +2108,7 @@ entries:
   eu:
     address: 0x0953EB24
     size: 2048
-- name: gUnk_0951FAB8
+- name: gEventBgEffect1Map
   format: tilemap
   us:
     address: 0x0951FAB8
@@ -2119,7 +2119,7 @@ entries:
   eu:
     address: 0x0953F324
     size: 2048
-- name: gUnk_095202B8
+- name: gEventBgEffect2Map
   format: tilemap
   us:
     address: 0x095202B8
@@ -2130,7 +2130,7 @@ entries:
   eu:
     address: 0x0953FB24
     size: 2048
-- name: gUnk_09520AB8
+- name: gEventBgEffect4Map
   format: tilemap
   us:
     address: 0x09520AB8
@@ -2141,7 +2141,7 @@ entries:
   eu:
     address: 0x09540324
     size: 2048
-- name: gUnk_095212B8
+- name: gEventBgEffect3Map
   format: tilemap
   us:
     address: 0x095212B8
@@ -2152,7 +2152,7 @@ entries:
   eu:
     address: 0x09540B24
     size: 2048
-- name: gUnk_09521AB8
+- name: gEventBgEffect5Map
   format: tilemap
   us:
     address: 0x09521AB8
@@ -2163,7 +2163,7 @@ entries:
   eu:
     address: 0x09541324
     size: 2048
-- name: gUnk_095222B8
+- name: gEventBgEffect6Map
   format: tilemap
   us:
     address: 0x095222B8
@@ -2174,48 +2174,48 @@ entries:
   eu:
     address: 0x09541B24
     size: 2048
-- name: gUnkEu_094D53C4
+- name: gLevelUpBannerFrenchTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094D53C4
     size: 2048
-- name: gUnkEu_094D5BC4
+- name: gLevelUpBannerSpanishTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094D5BC4
     size: 2048
-- name: gUnkEu_094D63C4
+- name: gLevelUpBannerItalianTiles
   format: tiles4
   width: 32
   eu:
     address: 0x094D63C4
     size: 2048
-- name: gUnkEu_094D6BC4
+- name: gLevelUpBannerGermanTiles
   format: tiles4
   eu:
     address: 0x094D6BC4
     size: 1824
-- name: gUnkEu_094D72E4
+- name: gLevelUpStatLabelFrenchTiles
   format: tiles4
   width: 4
   eu:
     address: 0x094D72E4
     size: 5760
-- name: gUnkEu_094D8964
+- name: gLevelUpStatLabelSpanishTiles
   format: tiles4
   width: 4
   eu:
     address: 0x094D8964
     size: 5760
-- name: gUnkEu_094D9FE4
+- name: gLevelUpStatLabelItalianTiles
   format: tiles4
   width: 4
   eu:
     address: 0x094D9FE4
     size: 5760
-- name: gUnkEu_094DB664
+- name: gLevelUpStatLabelGermanTiles
   format: tiles4
   width: 4
   eu:

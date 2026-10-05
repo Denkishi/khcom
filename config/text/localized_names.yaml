@@ -1004,31 +1004,31 @@ fragments:
     - gUnkEu_0889127B
     - gUnkEu_0889128B
     - gUnkEu_0889128D
-    - {name: gUnk_0815A0A0, record: JiminyLocalizedName, strings: [gUnkEu_0889126C, gUnkEu_08891279, gUnkEu_0889127B, gUnkEu_0889128B, gUnkEu_0889128D]}
+    - {name: gUnkEu_088912A0, record: JiminyLocalizedName, strings: [gUnkEu_0889126C, gUnkEu_08891279, gUnkEu_0889127B, gUnkEu_0889128B, gUnkEu_0889128D]}
     - gUnkEu_088912B4
     - gUnkEu_088912B7
     - gUnkEu_088912BA
     - gUnkEu_088912C0
     - gUnkEu_088912C3
-    - {name: gUnk_0815A09A, record: JiminyLocalizedName, strings: [gUnkEu_088912B4, gUnkEu_088912B7, gUnkEu_088912BA, gUnkEu_088912C0, gUnkEu_088912C3]}
+    - {name: gUnkEu_088912C8, record: JiminyLocalizedName, strings: [gUnkEu_088912B4, gUnkEu_088912B7, gUnkEu_088912BA, gUnkEu_088912C0, gUnkEu_088912C3]}
     - gUnkEu_088912DC
     - gUnkEu_088912DF
     - gUnkEu_088912E2
     - gUnkEu_088912E8
     - gUnkEu_088912EB
-    - {name: gUnk_0815A198, record: JiminyLocalizedName, strings: [gUnkEu_088912DC, gUnkEu_088912DF, gUnkEu_088912E2, gUnkEu_088912E8, gUnkEu_088912EB]}
+    - {name: gUnkEu_088912F0, record: JiminyLocalizedName, strings: [gUnkEu_088912DC, gUnkEu_088912DF, gUnkEu_088912E2, gUnkEu_088912E8, gUnkEu_088912EB]}
     - gUnkEu_08891304
     - gUnkEu_08891307
     - gUnkEu_0889130A
     - gUnkEu_08891310
     - gUnkEu_08891313
-    - {name: gUnk_0815A0EE, record: JiminyLocalizedName, strings: [gUnkEu_08891304, gUnkEu_08891307, gUnkEu_0889130A, gUnkEu_08891310, gUnkEu_08891313]}
+    - {name: gUnkEu_08891318, record: JiminyLocalizedName, strings: [gUnkEu_08891304, gUnkEu_08891307, gUnkEu_0889130A, gUnkEu_08891310, gUnkEu_08891313]}
     - gUnkEu_0889132C
     - gUnkEu_0889132F
     - gUnkEu_08891332
     - gUnkEu_08891338
     - gUnkEu_0889133B
-    - {name: gUnk_0815A152, record: JiminyLocalizedName, strings: [gUnkEu_0889132C, gUnkEu_0889132F, gUnkEu_08891332, gUnkEu_08891338, gUnkEu_0889133B]}
+    - {name: gUnkEu_08891340, record: JiminyLocalizedName, strings: [gUnkEu_0889132C, gUnkEu_0889132F, gUnkEu_08891332, gUnkEu_08891338, gUnkEu_0889133B]}
     - gUnkEu_08891354
     - gUnkEu_08891369
     - gUnkEu_08891381
@@ -1050,9 +1050,9 @@ fragments:
     - gUnkEu_08891594
     - gUnkEu_088915BD
     - gUnkEu_088915E4
-    - gUnk_0815A4B6
+    - gUnkEu_0889160E
     - gUnkEu_08891640
-    - {name: gUnkEu_08891670, record: JiminyLocalizedName, strings: [gUnkEu_08891594, gUnkEu_088915BD, gUnkEu_088915E4, gUnk_0815A4B6, gUnkEu_08891640]}
+    - {name: gUnkEu_08891670, record: JiminyLocalizedName, strings: [gUnkEu_08891594, gUnkEu_088915BD, gUnkEu_088915E4, gUnkEu_0889160E, gUnkEu_08891640]}
     - gUnkEu_08891684
     - gUnkEu_08891697
     - gUnkEu_088916AE

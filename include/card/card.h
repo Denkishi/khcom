@@ -1254,7 +1254,7 @@ typedef struct MapSelectWork {
     s32 y2;
     s32 unk_260;
     s32 cursorTargetX;
-    s32 unk_268;
+    s32 cursorTargetY;
     s32 y3;
     s32 y4;
     void* gfx;

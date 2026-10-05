@@ -190,7 +190,7 @@ void MapSelect_0(MapSelectWork* work, u8* a) {
     work->unk_28D[0] = 0;
     work->unk_260 = 0;
     work->cursorTargetX = 0x1600;
-    work->unk_268 = 0x6400;
+    work->cursorTargetY = 0x6400;
     work->unk_28D[1] = 0;
     work->steps = 0;
 

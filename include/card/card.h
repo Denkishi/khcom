@@ -958,11 +958,11 @@ typedef struct PrintLine {
 } PrintLine;
 
 typedef struct NumberPlusArgs {
-    s32 unk_00;
+    s32 cardDef;
     s32 x;
     s32 y;
-    s32 unk_0C;
-    s32 unk_10;
+    s32 scaleX;
+    s32 scaleY;
     s32 unk_14;
     s32 unk_18;
 } NumberPlusArgs;

@@ -155,7 +155,7 @@ typedef struct BtlRikuWork {
     AnimState anim;
     TaskPool tasks;
     u32 state;
-    u32 unk_040;
+    u32 nextState;
     BtlObj actor;
     s32 vz;
     s16 stateTimer;
@@ -175,7 +175,7 @@ typedef struct BtlRikuWork {
     s32 platformY;
     s32 platformZ;
     const u16* groundSongs;
-    u32 unk_18C;
+    u32 task;
     TaskDesc* summonDesc;
     s32 unk_194;
     u8 unk_198[0x4];

@@ -582,7 +582,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     SetBtlRikuAnimation(work, 0, 1);
     work->gfx = AnimGetGfx(&work->anim);
     work->state = 0;
-    work->unk_040 = 0;
+    work->nextState = 0;
     work->vz = 0;
     e->vx = 0;
     e->vy = 0;
@@ -593,7 +593,7 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
     work->comboCount = 0;
     work->tapTimers[0] = 0;
     work->tapTimers[1] = 0;
-    work->unk_18C = 0;
+    work->task = 0;
     work->scaleX = work->scaleY = 0x100;
     work->frameCount = 0;
 

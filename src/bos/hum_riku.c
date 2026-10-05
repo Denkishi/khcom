@@ -85,7 +85,7 @@ void RikuJumpOffset(RikuWork* work, s16 a, s32 b) {
     w->state = 19;
     w->stateTimer = 0;
     work->unk_1C4 = -b;
-    work->unk_1C8 = 0;
+    work->state = 0;
 }
 
 void RikuJumpTo(RikuWork* work, s32 a, s32 b) {

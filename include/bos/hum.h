@@ -349,7 +349,7 @@ typedef struct RikuWork {
     HumWork base;
     HumSub sub;
     s32 unk_1C4;
-    u16 unk_1C8;
+    u16 state;
     u16 flags;
     s16 afterimageTimer;
     RikuSpawn spawns[9];

@@ -1522,7 +1522,7 @@ entries:
     size: 322
 - name: gBosTmClubFrame0
   format: sprite_sheet
-  tiles: gBosTmObjTiles
+  tiles: gBosTmClubTiles
   align: 4
   cell: [16, 42]
   anchor: [8, 58]

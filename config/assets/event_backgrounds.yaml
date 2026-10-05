@@ -845,15 +845,15 @@ entries:
   elements:
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
-  - [gMapGimmick18Palette, 32, 0]
+  - [gMapGmkHalloweenTown00Palette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
-  - [gMapGimmick18Palette, 32, 0]
-  - [gMapGimmick18Palette, 32, 0]
+  - [gMapGmkHalloweenTown00Palette, 32, 0]
+  - [gMapGmkHalloweenTown00Palette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
-  - [gMapGimmick20Palette, 32, 0]
+  - [gMapGmkHalloweenTown01Palette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
   - [gWorldMapGmkHalloweenTownPalette, 32, 0]
@@ -1249,8 +1249,8 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick14Palette, 32, 0]
-  - [gMapGimmick15Palette, 32, 0]
+  - [gMapGmkAtlantica00Palette, 32, 0]
+  - [gMapGmkAtlantica01Palette, 32, 0]
   us:
     address: 0x08F7E18C
   jp:
@@ -1436,11 +1436,11 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick09Palette, 32, 0]
-  - [gMapGimmick10Palette, 32, 0]
-  - [gMapGimmick11Palette, 32, 0]
-  - [gMapGimmick12Palette, 32, 0]
-  - [gMapGimmick13Palette, 32, 0]
+  - [gMapGmkMonstro00Palette, 32, 0]
+  - [gMapGmkMonstro01Palette, 32, 0]
+  - [gMapGmkMonstro02Palette, 32, 0]
+  - [gMapGmkMonstro03Palette, 32, 0]
+  - [gMapGmkMonstro04Palette, 32, 0]
   us:
     address: 0x08F7E2F8
   jp:
@@ -1583,9 +1583,9 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick07Palette, 32, 0]
-  - [gMapGimmick07Palette, 32, 0]
-  - [gMapGimmick07Palette, 32, 0]
+  - [gMapGmkWonderland00Palette, 32, 0]
+  - [gMapGmkWonderland00Palette, 32, 0]
+  - [gMapGmkWonderland00Palette, 32, 0]
   - [gUnk_099910E4, 32, 0]
   us:
     address: 0x08F7E410
@@ -1736,13 +1736,13 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick02Palette, 32, 0]
-  - [gMapGimmick02Palette, 32, 0]
-  - [gMapGimmick05Palette, 32, 0]
-  - [gMapGimmick02Palette, 32, 0]
-  - [gMapGimmick02Palette, 32, 0]
-  - [gMapGimmick04Palette, 32, 0]
-  - [gMapGimmick02Palette, 32, 0]
+  - [gMapGmkAgrabah01Palette, 32, 0]
+  - [gMapGmkAgrabah01Palette, 32, 0]
+  - [gMapGmkAgrabah02Palette, 32, 0]
+  - [gMapGmkAgrabah01Palette, 32, 0]
+  - [gMapGmkAgrabah01Palette, 32, 0]
+  - [gMapGmkAgrabah00Palette, 32, 0]
+  - [gMapGmkAgrabah01Palette, 32, 0]
   us:
     address: 0x08F7E568
   jp:
@@ -2011,9 +2011,9 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick24Palette, 32, 0]
-  - [gMapGimmick24Palette, 32, 0]
-  - [gMapGimmick24Palette, 32, 0]
+  - [gMapGmkNeverLand02Palette, 32, 0]
+  - [gMapGmkNeverLand02Palette, 32, 0]
+  - [gMapGmkNeverLand02Palette, 32, 0]
   us:
     address: 0x08F7E7AC
   jp:
@@ -2252,16 +2252,16 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick28Palette, 32, 0]
-  - [gMapGimmick27Palette, 32, 0]
-  - [gMapGimmick30Palette, 32, 0]
+  - [gMapGmkOlympusColiseum01Palette, 32, 0]
+  - [gMapGmkOlympusColiseum00Palette, 32, 0]
+  - [gMapGmkOlympusColiseum03Palette, 32, 0]
   - [gUnk_09615FD8, 32, 0]
   - [gUnk_09615FD8+0x20, 32, 0]
-  - [gMapGimmick29Palette, 32, 0]
-  - [gMapGimmick28Palette, 32, 0]
+  - [gMapGmkOlympusColiseum02Palette, 32, 0]
+  - [gMapGmkOlympusColiseum01Palette, 32, 0]
   - [gUnk_09615FD8+0x40, 32, 0]
   - [gUnk_09615FD8+0x60, 32, 0]
-  - [gMapGimmick27Palette, 32, 0]
+  - [gMapGmkOlympusColiseum00Palette, 32, 0]
   us:
     address: 0x08F7E964
   jp:
@@ -2591,8 +2591,8 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick32Palette, 32, 0]
-  - [gMapGimmick33Palette, 32, 0]
+  - [gMapGmkHollowBastion00Palette, 32, 0]
+  - [gMapGmkHollowBastion01Palette, 32, 0]
   us:
     address: 0x08F7EC5C
   jp:
@@ -2802,10 +2802,10 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
   - [gMapGimmick44Palette, 32, 0]
   - [gMapGimmick44Palette, 32, 0]
   us:
@@ -3421,8 +3421,8 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick35Palette, 32, 0]
-  - [gMapGimmick36Palette, 32, 0]
+  - [gMapGmkDestinyIslands01Palette, 32, 0]
+  - [gMapGmkDestinyIslands02Palette, 32, 0]
   us:
     address: 0x08F7F20C
   jp:
@@ -3682,7 +3682,7 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick37Palette, 32, 0]
+  - [gMapGmkTraverseTown00Palette, 32, 0]
   - [gUnk_096184F8, 32, 0]
   us:
     address: 0x08F7F3B4
@@ -3898,10 +3898,10 @@ entries:
   record: PrizeMapCardGroupList
   declare: false
   elements:
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
-  - [gMapGimmick43Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
+  - [gMapGmkCastleOblivion00Palette, 32, 0]
   - [gMapGimmick44Palette, 32, 0]
   - [gMapGimmick44Palette, 32, 0]
   - [gMapGimmick45Palette, 32, 0]

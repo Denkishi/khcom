@@ -1887,7 +1887,7 @@ entries:
   eu:
     address: 0x09997350
     size: 32
-- name: gMapGimmick02Palette
+- name: gMapGmkAgrabah01Palette
   format: palette
   us:
     address: 0x09991384
@@ -1909,7 +1909,7 @@ entries:
   eu:
     address: 0x09997390
     size: 32
-- name: gMapGimmick04Palette
+- name: gMapGmkAgrabah00Palette
   format: palette
   us:
     address: 0x099913C4
@@ -1920,7 +1920,7 @@ entries:
   eu:
     address: 0x099973B0
     size: 32
-- name: gMapGimmick05Palette
+- name: gMapGmkAgrabah02Palette
   format: palette
   us:
     address: 0x099913E4
@@ -1931,7 +1931,7 @@ entries:
   eu:
     address: 0x099973D0
     size: 32
-- name: gMapGimmick06Palette
+- name: gMapGmkAgrabah03Palette
   format: palette
   us:
     address: 0x09991404
@@ -1942,7 +1942,7 @@ entries:
   eu:
     address: 0x099973F0
     size: 32
-- name: gMapGimmick07Palette
+- name: gMapGmkWonderland00Palette
   format: palette
   us:
     address: 0x09991424
@@ -1964,7 +1964,7 @@ entries:
   eu:
     address: 0x09997430
     size: 32
-- name: gMapGimmick09Palette
+- name: gMapGmkMonstro00Palette
   format: palette
   us:
     address: 0x09991464
@@ -1975,7 +1975,7 @@ entries:
   eu:
     address: 0x09997450
     size: 32
-- name: gMapGimmick10Palette
+- name: gMapGmkMonstro01Palette
   format: palette
   us:
     address: 0x09991484
@@ -1986,7 +1986,7 @@ entries:
   eu:
     address: 0x09997470
     size: 32
-- name: gMapGimmick11Palette
+- name: gMapGmkMonstro02Palette
   format: palette
   us:
     address: 0x099914A4
@@ -1997,7 +1997,7 @@ entries:
   eu:
     address: 0x09997490
     size: 32
-- name: gMapGimmick12Palette
+- name: gMapGmkMonstro03Palette
   format: palette
   us:
     address: 0x099914C4
@@ -2008,7 +2008,7 @@ entries:
   eu:
     address: 0x099974B0
     size: 32
-- name: gMapGimmick13Palette
+- name: gMapGmkMonstro04Palette
   format: palette
   us:
     address: 0x099914E4
@@ -2019,7 +2019,7 @@ entries:
   eu:
     address: 0x099974D0
     size: 32
-- name: gMapGimmick14Palette
+- name: gMapGmkAtlantica00Palette
   format: palette
   us:
     address: 0x09991504
@@ -2030,7 +2030,7 @@ entries:
   eu:
     address: 0x099974F0
     size: 32
-- name: gMapGimmick15Palette
+- name: gMapGmkAtlantica01Palette
   format: palette
   us:
     address: 0x09991524
@@ -2063,7 +2063,7 @@ entries:
   eu:
     address: 0x09997550
     size: 32
-- name: gMapGimmick18Palette
+- name: gMapGmkHalloweenTown00Palette
   format: palette
   us:
     address: 0x09991584
@@ -2085,7 +2085,7 @@ entries:
   eu:
     address: 0x09997590
     size: 32
-- name: gMapGimmick20Palette
+- name: gMapGmkHalloweenTown01Palette
   format: palette
   us:
     address: 0x099915C4
@@ -2096,7 +2096,7 @@ entries:
   eu:
     address: 0x099975B0
     size: 32
-- name: gMapGimmick21Palette
+- name: gMapGmkHalloweenTown02Palette
   format: palette
   us:
     address: 0x099915E4
@@ -2107,7 +2107,7 @@ entries:
   eu:
     address: 0x099975D0
     size: 32
-- name: gMapGimmick22Palette
+- name: gMapGmkNeverLand00Palette
   format: palette
   us:
     address: 0x09991604
@@ -2118,7 +2118,7 @@ entries:
   eu:
     address: 0x099975F0
     size: 32
-- name: gMapGimmick23Palette
+- name: gMapGmkNeverLand01Palette
   format: palette
   us:
     address: 0x09991624
@@ -2129,7 +2129,7 @@ entries:
   eu:
     address: 0x09997610
     size: 32
-- name: gMapGimmick24Palette
+- name: gMapGmkNeverLand02Palette
   format: palette
   us:
     address: 0x09991644
@@ -2140,7 +2140,7 @@ entries:
   eu:
     address: 0x09997630
     size: 32
-- name: gMapGimmick25Palette
+- name: gMapGmkNeverLand03Palette
   format: palette
   us:
     address: 0x09991664
@@ -2151,7 +2151,7 @@ entries:
   eu:
     address: 0x09997650
     size: 32
-- name: gMapGimmick26Palette
+- name: gMapGmkNeverLand04Palette
   format: palette
   us:
     address: 0x09991684
@@ -2162,7 +2162,7 @@ entries:
   eu:
     address: 0x09997670
     size: 32
-- name: gMapGimmick27Palette
+- name: gMapGmkOlympusColiseum00Palette
   format: palette
   us:
     address: 0x099916A4
@@ -2173,7 +2173,7 @@ entries:
   eu:
     address: 0x09997690
     size: 32
-- name: gMapGimmick28Palette
+- name: gMapGmkOlympusColiseum01Palette
   format: palette
   us:
     address: 0x099916C4
@@ -2184,7 +2184,7 @@ entries:
   eu:
     address: 0x099976B0
     size: 32
-- name: gMapGimmick29Palette
+- name: gMapGmkOlympusColiseum02Palette
   format: palette
   us:
     address: 0x099916E4
@@ -2195,7 +2195,7 @@ entries:
   eu:
     address: 0x099976D0
     size: 32
-- name: gMapGimmick30Palette
+- name: gMapGmkOlympusColiseum03Palette
   format: palette
   us:
     address: 0x09991704
@@ -2217,7 +2217,7 @@ entries:
   eu:
     address: 0x09997710
     size: 32
-- name: gMapGimmick32Palette
+- name: gMapGmkHollowBastion00Palette
   format: palette
   us:
     address: 0x09991744
@@ -2228,7 +2228,7 @@ entries:
   eu:
     address: 0x09997730
     size: 32
-- name: gMapGimmick33Palette
+- name: gMapGmkHollowBastion01Palette
   format: palette
   us:
     address: 0x09991764
@@ -2239,7 +2239,7 @@ entries:
   eu:
     address: 0x09997750
     size: 32
-- name: gMapGimmick34Palette
+- name: gMapGmkDestinyIslands00Palette
   format: palette
   us:
     address: 0x09991784
@@ -2250,7 +2250,7 @@ entries:
   eu:
     address: 0x09997770
     size: 32
-- name: gMapGimmick35Palette
+- name: gMapGmkDestinyIslands01Palette
   format: palette
   us:
     address: 0x099917A4
@@ -2261,7 +2261,7 @@ entries:
   eu:
     address: 0x09997790
     size: 32
-- name: gMapGimmick36Palette
+- name: gMapGmkDestinyIslands02Palette
   format: palette
   us:
     address: 0x099917C4
@@ -2272,7 +2272,7 @@ entries:
   eu:
     address: 0x099977B0
     size: 32
-- name: gMapGimmick37Palette
+- name: gMapGmkTraverseTown00Palette
   format: palette
   us:
     address: 0x099917E4
@@ -2283,7 +2283,7 @@ entries:
   eu:
     address: 0x099977D0
     size: 32
-- name: gMapGimmick38Palette
+- name: gMapGmkTraverseTown01Palette
   format: palette
   us:
     address: 0x09991804
@@ -2305,7 +2305,7 @@ entries:
   eu:
     address: 0x09997810
     size: 32
-- name: gMapGimmick40Palette
+- name: gMapGmkTwilightTown00Palette
   format: palette
   us:
     address: 0x09991844
@@ -2316,7 +2316,7 @@ entries:
   eu:
     address: 0x09997830
     size: 32
-- name: gMapGimmick41Palette
+- name: gMapGmkTwilightTown01Palette
   format: palette
   us:
     address: 0x09991864
@@ -2327,7 +2327,7 @@ entries:
   eu:
     address: 0x09997850
     size: 32
-- name: gMapGimmick42Palette
+- name: gMapGmkTwilightTown02Palette
   format: palette
   us:
     address: 0x09991884
@@ -2338,7 +2338,7 @@ entries:
   eu:
     address: 0x09997870
     size: 32
-- name: gMapGimmick43Palette
+- name: gMapGmkCastleOblivion00Palette
   format: palette
   us:
     address: 0x099918A4
@@ -2371,7 +2371,7 @@ entries:
   eu:
     address: 0x099978D0
     size: 32
-- name: gMapGimmick46Palette
+- name: gMapGmkCastleOblivion01Palette
   format: palette
   us:
     address: 0x09991904

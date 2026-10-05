@@ -54,11 +54,11 @@ typedef struct CardBack {
 } CardBack;
 
 typedef struct CardStat {
-    u16 unk_00;
-    u16 unk_02;
+    u16 kind;
+    u16 flags;
     u8 value;
-    u32 unk_08;
-    u16 unk_0C;
+    u32 move;
+    u16 catalogNumber;
     u8 category;
     u16 cpCost;
     u8 unk_12[0x06];

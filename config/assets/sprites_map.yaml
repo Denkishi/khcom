@@ -2681,21 +2681,22 @@ entries:
     address: 0x09F8450C
 - name: gMapMenuCommandsFrames
   record: SpriteTable
-  items: [gMapUiSprite_098A96A0, gMapUiSprite_098A9710, gMapUiSprite_098A9780, gMapUiSprite_098A97F0, gMapUiSprite_098A9860, gMapUiSprite_098A98D0, gMapUiSprite_098A9940, gMapUiSprite_098A99B0]
+  items: [gMapMenuCommandsFrame0, gMapMenuCommandsFrame1, gMapMenuCommandsFrame2, gMapMenuCommandsFrame3, gMapMenuCommandsFrame4, gMapMenuCommandsFrame5, gMapMenuCommandsFrame6, gMapMenuCommandsFrame7]
   us:
     address: 0x09EF8E20
   jp:
     address: 0x09ED020C
   eu:
     address: 0x09F845C4
-    items: [gMapUiSpriteEu_098884A4, gMapUiSpriteEu_09888514, gMapUiSpriteEu_09888584, gMapUiSpriteEu_098885F4, gMapUiSpriteEu_09888664, gMapUiSpriteEu_098886D4, gMapUiSpriteEu_09888744, gMapUiSpriteEu_098887B4]
 - name: gMapMenuCommandsAnims
   record: AnimTable
-  items: [gMapUiAnim_098A9A32]
+  items: [gMapMenuCommandsAnim0]
   us:
     address: 0x09EF8E40
   jp:
     address: 0x09ED022C
+  eu:
+    address: 0x09F845E4
 - name: gMapMenuCommandHighlightFrames
   record: SpriteTable
   items: [gMapMenuCommandHighlightFrame0, gMapMenuCommandHighlightFrame1, gMapMenuCommandHighlightFrame2, gMapMenuCommandHighlightFrame3, gMapMenuCommandHighlightFrame4, gMapMenuCommandHighlightFrame5, gMapMenuCommandHighlightFrame6]
@@ -2705,7 +2706,6 @@ entries:
     address: 0x09ED0230
   eu:
     address: 0x09F84678
-    items: [gMapUiSpriteEu_098896B0, gMapUiSpriteEu_098896C6, gMapUiSpriteEu_098896DC, gMapUiSpriteEu_098896F2, gMapUiSpriteEu_09889708, gMapUiSpriteEu_0988971E, gMapUiSpriteEu_09889734]
 - name: gMapMenuCommandHighlightAnims
   record: AnimTable
   items: [gMapMenuCommandHighlightAnim0]
@@ -2715,7 +2715,6 @@ entries:
     address: 0x09ED024C
   eu:
     address: 0x09F84694
-    items: [gMapUiAnimEu_0988974A]
 - name: gMapMenuCharaWinFrames
   record: SpriteTable
   items: [gMapMenuCharaWinFrame0]
@@ -2860,12 +2859,12 @@ entries:
     address: 0x09F84478
 - name: gMapMenuSoraStatusFrenchFrames
   record: SpriteTable
-  items: [gMapUiSprite_098A96A0, gMapUiSprite_098A9710, gMapUiSprite_098A9780, gMapUiSprite_098A97F0]
+  items: [gMapMenuSoraStatusFrenchFrame0, gMapMenuSoraStatusFrenchFrame1, gMapMenuSoraStatusFrenchFrame2, gMapMenuSoraStatusFrenchFrame3]
   eu:
     address: 0x09F84510
 - name: gMapMenuSoraStatusFrenchAnims
   record: AnimTable
-  items: [gMapUiAnim_098A9A32]
+  items: [gMapMenuSoraStatusFrenchAnim0]
   eu:
     address: 0x09F84520
 - name: gMapMenuSoraStatusSpanishFrames
@@ -2938,11 +2937,6 @@ entries:
   items: [gMapMenuRikuStatusGermanAnim0]
   eu:
     address: 0x09F845C0
-- name: gUnkEu_09F845E4
-  record: AnimTable
-  items: [gMapUiAnimEu_09888836]
-  eu:
-    address: 0x09F845E4
 - name: gMapMenuCommandsFrenchFrames
   record: SpriteTable
   items: [gMapMenuCommandsFrenchFrame0, gMapMenuCommandsFrenchFrame1, gMapMenuCommandsFrenchFrame2, gMapMenuCommandsFrenchFrame3, gMapMenuCommandsFrenchFrame4, gMapMenuCommandsFrenchFrame5, gMapMenuCommandsFrenchFrame6, gMapMenuCommandsFrenchFrame7]
@@ -9469,7 +9463,7 @@ entries:
   eu:
     address: 0x099349F0
     size: 7104
-- name: gUnk_09956724
+- name: gMapMenuSoraCommandsTiles
   format: tiles4
   width: 2
   us:
@@ -9479,8 +9473,8 @@ entries:
     address: 0x0990B238
     size: 5376
   eu:
-    address: 0x099365B0
-    size: 7104
+    address: 0x0993D4B0
+    size: 5376
 - name: gMapMenuCharaWinTiles
   format: tiles4
   width: 8
@@ -9578,21 +9572,20 @@ entries:
   eu:
     address: 0x0994B3F0
     size: 32768
-- name: gUnk_09961A64
+- name: gSaveSlotSoraFloorSelectedTiles
   format: tiles4
   width: 4
+  shape: [14, 320]
   const: true
   us:
     address: 0x09961A64
     size: 4480
-    shape: [14, 320]
   jp:
     address: 0x09916578
     size: 4480
-    shape: [14, 320]
   eu:
-    address: 0x099533F0
-    size: 2048
+    address: 0x09955250
+    size: 4480
 - name: gSaveSlotSoraFloorTiles
   format: tiles4
   width: 4
@@ -9659,6 +9652,12 @@ entries:
   eu:
     address: 0x0996B190
     size: 8096
+- name: gMapMenuStatusFrenchTiles
+  format: tiles4
+  width: 2
+  eu:
+    address: 0x099365B0
+    size: 7104
 - name: gMapMenuStatusSpanishTiles
   format: tiles4
   width: 2
@@ -9732,12 +9731,6 @@ entries:
   eu:
     address: 0x0998DF30
     size: 4096
-- name: gUnkEu_0993D4B0
-  format: tiles4
-  width: 8
-  eu:
-    address: 0x0993D4B0
-    size: 5376
 - name: gMenuLoadFourSlotMaps
   format: tilemap
   us:
@@ -9850,6 +9843,13 @@ entries:
   eu:
     address: 0x09997D30
     size: 512
+- name: gMenuLoadLabelsFrenchTiles
+  format: tiles4
+  width: 32
+  const: true
+  eu:
+    address: 0x099533F0
+    size: 2048
 - name: gMenuLoadLabelsSpanishTiles
   format: tiles4
   width: 32
@@ -9870,14 +9870,6 @@ entries:
   eu:
     address: 0x09954BF0
     size: 1632
-- name: gUnkEu_09955250
-  format: tiles4
-  width: 4
-  shape: [14, 320]
-  const: true
-  eu:
-    address: 0x09955250
-    size: 4480
 - name: gSaveSlotSoraFloorSelectedFrenchTiles
   format: tiles4
   width: 4
@@ -10856,15 +10848,15 @@ entries:
   eu:
     address: 0x09887D88
     size: 188
-- name: gMapUiSprite_098A96A0
+- name: gMapMenuCommandsFrame0
   format: sprite_sheet
-  tiles: gUnk_09956724
+  tiles: gMapMenuSoraCommandsTiles
   palette: gMapMenuPanelPalette
-  cell: [112, 130]
+  cell: [96, 130]
   anchor: [0, 8]
   columns: 8
   frames:
-  - symbol: gMapUiSprite_098A96A0
+  - symbol: gMapMenuCommandsFrame0
     pieces:
     - [32x16, 0, 11, {tile: 24}]
     - [32x16, 32, 11, {tile: 32}]
@@ -10884,7 +10876,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A9710
+  - symbol: gMapMenuCommandsFrame1
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10904,7 +10896,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A9780
+  - symbol: gMapMenuCommandsFrame2
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10924,7 +10916,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A97F0
+  - symbol: gMapMenuCommandsFrame3
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10944,7 +10936,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A9860
+  - symbol: gMapMenuCommandsFrame4
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10964,7 +10956,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A98D0
+  - symbol: gMapMenuCommandsFrame5
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -10984,7 +10976,7 @@ entries:
     - [32x16, 0, 106, {tile: 144}]
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSprite_098A9940
+  - symbol: gMapMenuCommandsFrame6
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -11004,7 +10996,7 @@ entries:
     - [32x16, 0, 87, {tile: 120}]
     - [32x16, 32, 87, {tile: 128}]
     - [32x16, 64, 87, {tile: 136}]
-  - symbol: gMapUiSprite_098A99B0
+  - symbol: gMapMenuCommandsFrame7
     pieces:
     - [32x16, 0, -8, {tile: 0}]
     - [32x16, 32, -8, {tile: 8}]
@@ -11028,7 +11020,7 @@ entries:
     - [32x16, 32, 106, {tile: 152}]
     - [32x16, 64, 106, {tile: 160}]
   animations:
-  - symbol: gMapUiAnim_098A9A32
+  - symbol: gMapMenuCommandsAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
@@ -11039,54 +11031,64 @@ entries:
     address: 0x0985E1B4
     size: 924
     animations:
-    - symbol: gMapUiAnim_098A9A32
+    - symbol: gMapMenuCommandsAnim0
       declare: false
       fields: {unk_00: 64, unk_02: 64}
       frames: [[0, 2]]
   eu:
+    address: 0x098884A4
+    size: 924
+- name: gMapMenuSoraStatusFrenchFrame0
+  format: sprite_sheet
+  tiles: gMapMenuStatusFrenchTiles
+  palette: gMapMenuStatusPalette
+  cell: [112, 48]
+  anchor: [0, 0]
+  columns: 4
+  frames:
+  - symbol: gMapMenuSoraStatusFrenchFrame0
+    pieces:
+    - [8x8, 64, 4, {tile: 1}]
+    - [8x8, 72, 4, {tile: 2}]
+    - [8x8, 24, 15, {tile: 3}]
+    - [8x8, 32, 15, {tile: 4}]
+    - [8x8, 40, 15, {tile: 5}]
+    - [8x8, 56, 15, {tile: 6}]
+    - [8x8, 64, 15, {tile: 7}]
+    - [8x8, 72, 15, {tile: 8}]
+    - [8x8, 40, 34, {tile: 9}]
+    - [8x8, 48, 34, {tile: 10}]
+    - [8x8, 56, 34, {tile: 11}]
+    - [8x8, 64, 34, {tile: 12}]
+    - [8x8, 72, 34, {tile: 13}]
+  - symbol: gMapMenuSoraStatusFrenchFrame1
+    pieces:
+    - [64x32, 0, 0, {tile: 76}]
+    - [32x32, 64, 0, {tile: 108}]
+    - [32x16, 0, 32, {tile: 124}]
+    - [32x16, 32, 32, {tile: 132}]
+    - [32x16, 64, 32, {tile: 140}]
+  - symbol: gMapMenuSoraStatusFrenchFrame2
+    pieces:
+    - [64x32, 0, 0, {tile: 26}]
+    - [32x8, 0, 32, {tile: 58}]
+    - [32x8, 32, 32, {tile: 62}]
+    - [8x8, 64, 32, {tile: 66}]
+    - [8x32, 64, 0, {tile: 67}]
+  - symbol: gMapMenuSoraStatusFrenchFrame3
+    pieces:
+    - [16x16, 0, 0, {tile: 14}]
+    - [32x16, 16, 0, {tile: 18}]
+    - [32x16, 80, 0, {tile: 18}]
+    - [32x16, 48, 0, {tile: 18}]
+  animations:
+  - symbol: gMapMenuSoraStatusFrenchAnim0
+    declare: false
+    fields: {unk_00: 64, unk_02: 64}
+    frames: [[0, 4]]
+  eu:
     address: 0x09887E44
     size: 188
-    frames:
-    - symbol: gMapUiSprite_098A96A0
-      pieces:
-      - [8x8, 64, 4, {tile: 1}]
-      - [8x8, 72, 4, {tile: 2}]
-      - [8x8, 24, 15, {tile: 3}]
-      - [8x8, 32, 15, {tile: 4}]
-      - [8x8, 40, 15, {tile: 5}]
-      - [8x8, 56, 15, {tile: 6}]
-      - [8x8, 64, 15, {tile: 7}]
-      - [8x8, 72, 15, {tile: 8}]
-      - [8x8, 40, 34, {tile: 9}]
-      - [8x8, 48, 34, {tile: 10}]
-      - [8x8, 56, 34, {tile: 11}]
-      - [8x8, 64, 34, {tile: 12}]
-      - [8x8, 72, 34, {tile: 13}]
-    - symbol: gMapUiSprite_098A9710
-      pieces:
-      - [64x32, 0, 0, {tile: 76}]
-      - [32x32, 64, 0, {tile: 108}]
-      - [32x16, 0, 32, {tile: 124}]
-      - [32x16, 32, 32, {tile: 132}]
-      - [32x16, 64, 32, {tile: 140}]
-    - symbol: gMapUiSprite_098A9780
-      pieces:
-      - [64x32, 0, 0, {tile: 26}]
-      - [32x8, 0, 32, {tile: 58}]
-      - [32x8, 32, 32, {tile: 62}]
-      - [8x8, 64, 32, {tile: 66}]
-      - [8x32, 64, 0, {tile: 67}]
-    - symbol: gMapUiSprite_098A97F0
-      pieces:
-      - [16x16, 0, 0, {tile: 14}]
-      - [32x16, 16, 0, {tile: 18}]
-      - [32x16, 80, 0, {tile: 18}]
-      - [32x16, 48, 0, {tile: 18}]
-    animations:
-    - symbol: gMapUiAnim_098A9A32
-      declare: false
-      fields: {unk_00: 64, unk_02: 64}
-      frames: [[0, 4]]
 - name: gMapMenuSoraStatusSpanishFrame0
   format: sprite_sheet
   tiles: gMapMenuStatusSpanishTiles
@@ -11242,7 +11244,7 @@ entries:
     size: 188
 - name: gMapMenuRikuStatusFrenchFrame0
   format: sprite_sheet
-  tiles: gUnk_09956724
+  tiles: gMapMenuStatusFrenchTiles
   palette: gMapMenuStatusPalette
   cell: [112, 40]
   anchor: [0, 0]
@@ -11436,185 +11438,6 @@ entries:
   eu:
     address: 0x098883F4
     size: 176
-- name: gMapUiSpriteEu_098884A4
-  format: sprite_sheet
-  tiles: gUnkEu_0993D4B0
-  palette: gMapMenuPanelPalette
-  cell: [96, 130]
-  anchor: [0, 8]
-  columns: 8
-  frames:
-  - symbol: gMapUiSpriteEu_098884A4
-    pieces:
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_09888514
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_09888584
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_098885F4
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_09888664
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_098886D4
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  - symbol: gMapUiSpriteEu_09888744
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-  - symbol: gMapUiSpriteEu_098887B4
-    pieces:
-    - [32x16, 0, -8, {tile: 0}]
-    - [32x16, 32, -8, {tile: 8}]
-    - [32x16, 64, -8, {tile: 16}]
-    - [32x16, 0, 11, {tile: 24}]
-    - [32x16, 32, 11, {tile: 32}]
-    - [32x16, 64, 11, {tile: 40}]
-    - [32x16, 0, 30, {tile: 48}]
-    - [32x16, 32, 30, {tile: 56}]
-    - [32x16, 64, 30, {tile: 64}]
-    - [32x16, 0, 49, {tile: 72}]
-    - [32x16, 32, 49, {tile: 80}]
-    - [32x16, 64, 49, {tile: 88}]
-    - [32x16, 0, 68, {tile: 96}]
-    - [32x16, 32, 68, {tile: 104}]
-    - [32x16, 64, 68, {tile: 112}]
-    - [32x16, 0, 87, {tile: 120}]
-    - [32x16, 32, 87, {tile: 128}]
-    - [32x16, 64, 87, {tile: 136}]
-    - [32x16, 0, 106, {tile: 144}]
-    - [32x16, 32, 106, {tile: 152}]
-    - [32x16, 64, 106, {tile: 160}]
-  animations:
-  - symbol: gMapUiAnimEu_09888836
-    declare: false
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 1]]
-  eu:
-    address: 0x098884A4
-    size: 924
 - name: gMapMenuCommandsFrenchFrame0
   format: sprite_sheet
   tiles: gMapMenuSoraCommandsFrenchTiles
@@ -12331,57 +12154,6 @@ entries:
   eu:
     address: 0x09889314
     size: 924
-- name: gMapUiSpriteEu_098896B0
-  format: sprite_sheet
-  tiles: gUnkEu_0993D4B0
-  palette: gMapMenuHighlightPalette
-  cell: [96, 130]
-  anchor: [-8, 8]
-  columns: 7
-  frames:
-  - symbol: gMapUiSpriteEu_098896B0
-    pieces:
-    - [32x16, 8, -8, {tile: 0}]
-    - [32x16, 40, -8, {tile: 8}]
-    - [32x16, 72, -8, {tile: 16}]
-  - symbol: gMapUiSpriteEu_098896C6
-    pieces:
-    - [32x16, 8, 11, {tile: 24}]
-    - [32x16, 40, 11, {tile: 32}]
-    - [32x16, 72, 11, {tile: 40}]
-  - symbol: gMapUiSpriteEu_098896DC
-    pieces:
-    - [32x16, 8, 30, {tile: 48}]
-    - [32x16, 40, 30, {tile: 56}]
-    - [32x16, 72, 30, {tile: 64}]
-  - symbol: gMapUiSpriteEu_098896F2
-    pieces:
-    - [32x16, 8, 49, {tile: 72}]
-    - [32x16, 40, 49, {tile: 80}]
-    - [32x16, 72, 49, {tile: 88}]
-  - symbol: gMapUiSpriteEu_09889708
-    pieces:
-    - [32x16, 8, 68, {tile: 96}]
-    - [32x16, 40, 68, {tile: 104}]
-    - [32x16, 72, 68, {tile: 112}]
-  - symbol: gMapUiSpriteEu_0988971E
-    pieces:
-    - [32x16, 8, 87, {tile: 120}]
-    - [32x16, 40, 87, {tile: 128}]
-    - [32x16, 72, 87, {tile: 136}]
-  - symbol: gMapUiSpriteEu_09889734
-    pieces:
-    - [32x16, 8, 106, {tile: 144}]
-    - [32x16, 40, 106, {tile: 152}]
-    - [32x16, 72, 106, {tile: 160}]
-  animations:
-  - symbol: gMapUiAnimEu_0988974A
-    declare: false
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 2]]
-  eu:
-    address: 0x098896B0
-    size: 164
 - name: gMapMenuCommandHighlightFrenchFrame0
   format: sprite_sheet
   tiles: gMapMenuSoraCommandsFrenchTiles
@@ -12609,7 +12381,7 @@ entries:
     size: 26
 - name: gMapMenuCommandHighlightFrame0
   format: sprite_sheet
-  tiles: gUnk_09956724
+  tiles: gMapMenuSoraCommandsTiles
   palette: gMapMenuHighlightPalette
   cell: [96, 130]
   anchor: [-8, 8]
@@ -12666,6 +12438,9 @@ entries:
       declare: false
       fields: {unk_00: 64, unk_02: 64}
       frames: [[0, 1]]
+  eu:
+    address: 0x098896B0
+    size: 164
 - name: gMapMenuTitleGermanFrame0
   format: sprite_sheet
   tiles: gMapMenuTitleGermanTiles

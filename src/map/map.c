@@ -3532,7 +3532,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 src = gSaveSlotRikuFloorSelectedTiles[c];
             } else {
-                src = gUnkEu_09955250[c];
+                src = gSaveSlotSoraFloorSelectedTiles[c];
             }
         } else {
             if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -3614,7 +3614,7 @@ void NewGameSlotMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gSaveSlotRikuFloorSelectedTiles[c];
         } else {
-            src = gUnk_09961A64[c];
+            src = gSaveSlotSoraFloorSelectedTiles[c];
         }
     } else {
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -4038,7 +4038,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
     case LANGUAGE_ENGLISH:
         if (a <= 1) {
             if (b) {
-                src = gUnkEu_09955250[c];
+                src = gSaveSlotSoraFloorSelectedTiles[c];
             } else {
                 src = gSaveSlotSoraFloorTiles[c];
             }
@@ -4120,7 +4120,7 @@ void LoadGameMenuLoadFloorTiles(u8 a, u8 b, u8 c) {
 #else
     if (a <= 1) {
         if (b) {
-            src = gUnk_09961A64[c];
+            src = gSaveSlotSoraFloorSelectedTiles[c];
         } else {
             src = gSaveSlotSoraFloorTiles[c];
         }
@@ -4505,7 +4505,7 @@ void Mode_MenuLoad_0(s32 arg) {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gUnk_09961A64, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy(gMenuLoadLabelsFrenchTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
         break;
     case LANGUAGE_SPANISH:
         RequestDma3Copy((void*)gMenuLoadLabelsSpanishTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
@@ -5304,7 +5304,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
             work->tiles5 = LoadObjTiles(gMapMenuStatusTiles, 0x1BC0);
             break;
         case LANGUAGE_FRENCH:
-            work->tiles5 = LoadObjTiles(gUnk_09956724, 0x1BC0);
+            work->tiles5 = LoadObjTiles(gMapMenuStatusFrenchTiles, 0x1BC0);
             break;
         case LANGUAGE_SPANISH:
             work->tiles5 = LoadObjTiles(gMapMenuStatusSpanishTiles, 0x1BC0);
@@ -5343,7 +5343,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
             if (gGameState.flags & GAME_FLAG_RIKU) {
                 work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
             } else {
-                work->tiles6 = LoadObjTiles(gUnkEu_0993D4B0, 0x1500);
+                work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, 0x1500);
             }
 
             break;
@@ -5385,7 +5385,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             work->tiles6 = LoadObjTiles(gMapMenuRikuCommandsTiles, 0x1500);
         } else {
-            work->tiles6 = LoadObjTiles(gUnk_09956724, 0x1500);
+            work->tiles6 = LoadObjTiles(gMapMenuSoraCommandsTiles, 0x1500);
         }
 #endif
 
@@ -6077,7 +6077,7 @@ void MapSaveLoadFloorTiles(u8 a) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
             src = gSaveSlotRikuFloorSelectedTiles[a];
         } else {
-            src = gUnkEu_09955250[a];
+            src = gSaveSlotSoraFloorSelectedTiles[a];
         }
 
         break;
@@ -6119,7 +6119,7 @@ void MapSaveLoadFloorTiles(u8 a) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         src = gSaveSlotRikuFloorSelectedTiles[a];
     } else {
-        src = gUnk_09961A64[a];
+        src = gSaveSlotSoraFloorSelectedTiles[a];
     }
 #endif
 

@@ -1,6 +1,6 @@
 #ifdef VERSION_US
 static const MessageScriptEntry sEvent138Script[1] = {
-    { 48, 1, 1, 1, gCardMessageTextUs_0903C186, MSG_SCRIPT_FLAG_END, 150 },
+    { 48, 1, 1, 1, gOwlTalkText, MSG_SCRIPT_FLAG_END, 150 },
 };
 #endif
 

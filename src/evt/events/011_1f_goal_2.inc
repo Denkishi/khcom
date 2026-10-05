@@ -1,7 +1,7 @@
 #ifdef VERSION_US
 #include "event_011_text.inc"
 static const MessageScriptEntry sEvent011Script[27] = {
-    { 62, 0, 3, 1, gCardMessageTextUs_09041CD6, 0, 2 },
+    { 62, 0, 3, 1, gObtainedWorldCardsText, 0, 2 },
     { 2, 0, 3, 1, gEvent011Text01, 0, 100 },
     { 6, 0, 2, 1, gEvent011Text02, 0, 130 },
     { 0, 0, 1, 1, gEvent011Text03, 0, 160 },

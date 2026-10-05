@@ -611,9 +611,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText000ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0901048C,
+        gDonaldTalkText00,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F5B8,
+        gDonaldTalkText00,
 #endif
         0,
     },
@@ -622,9 +622,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText001ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010454,
+        gDonaldTalkText01,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F642,
+        gDonaldTalkText01,
 #endif
         0,
     },
@@ -633,9 +633,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText002ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010410,
+        gDonaldTalkText02,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F6A2,
+        gDonaldTalkText02,
 #endif
         0,
     },
@@ -644,9 +644,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText003ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090103D0,
+        gDonaldTalkText03,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F714,
+        gDonaldTalkText03,
 #endif
         0,
     },
@@ -655,9 +655,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText004ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010394,
+        gDonaldTalkText04,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F778,
+        gDonaldTalkText04,
 #endif
         0,
     },
@@ -666,9 +666,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText005ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010348,
+        gDonaldTalkText05,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F7F0,
+        gDonaldTalkText05,
 #endif
         0,
     },
@@ -677,9 +677,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText006ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010314,
+        gDonaldTalkText06,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F87C,
+        gDonaldTalkText06,
 #endif
         0,
     },
@@ -688,9 +688,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText007ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090102E0,
+        gDonaldTalkText07,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F8E4,
+        gDonaldTalkText07,
 #endif
         0,
     },
@@ -699,9 +699,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText008ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090102A0,
+        gDonaldTalkText08,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F94C,
+        gDonaldTalkText08,
 #endif
         0,
     },
@@ -710,9 +710,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText009ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010250,
+        gDonaldTalkText09,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F9BC,
+        gDonaldTalkText09,
 #endif
         0,
     },
@@ -721,9 +721,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText010ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010218,
+        gDonaldTalkText10,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FA2A,
+        gDonaldTalkText10,
 #endif
         0,
     },
@@ -732,9 +732,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText011ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090101DC,
+        gDonaldTalkText11,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FAB2,
+        gDonaldTalkText11,
 #endif
         0,
     },
@@ -743,9 +743,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText012ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090101A0,
+        gDonaldTalkText12,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FB04,
+        gDonaldTalkText12,
 #endif
         0,
     },
@@ -754,9 +754,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText013ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010184,
+        gDonaldTalkText13,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FB76,
+        gDonaldTalkText13,
 #endif
         0,
     },
@@ -765,9 +765,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText014ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010154,
+        gDonaldTalkText14,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FBAC,
+        gDonaldTalkText14,
 #endif
         0,
     },
@@ -776,9 +776,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText015ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010124,
+        gDonaldTalkText15,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FBFA,
+        gDonaldTalkText15,
 #endif
         0,
     },
@@ -787,9 +787,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText016ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090100E8,
+        gDonaldTalkText16,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FC6A,
+        gDonaldTalkText16,
 #endif
         0,
     },
@@ -798,9 +798,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText017ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_090100A4,
+        gDonaldTalkText17,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FCDE,
+        gDonaldTalkText17,
 #endif
         0,
     },
@@ -809,9 +809,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText018ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010078,
+        gDonaldTalkText18,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FD46,
+        gDonaldTalkText18,
 #endif
         0,
     },
@@ -820,9 +820,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText019ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0901003C,
+        gDonaldTalkText19,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FDAA,
+        gDonaldTalkText19,
 #endif
         0,
     },
@@ -831,9 +831,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText020ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_09010000,
+        gDonaldTalkText20,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FE34,
+        gDonaldTalkText20,
 #endif
         0,
     },
@@ -842,9 +842,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText021ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FFD0,
+        gDonaldTalkText21,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FEA2,
+        gDonaldTalkText21,
 #endif
         0,
     },
@@ -853,9 +853,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText022ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FF8C,
+        gDonaldTalkText22,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FEF8,
+        gDonaldTalkText22,
 #endif
         0,
     },
@@ -864,9 +864,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText023ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FF54,
+        gDonaldTalkText23,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FF4E,
+        gDonaldTalkText23,
 #endif
         0,
     },
@@ -875,9 +875,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText024ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FF08,
+        gDonaldExitHallTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903FFC4,
+        gDonaldExitHallTalkText,
 #endif
         0,
     },
@@ -886,9 +886,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText025ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FED0,
+        gGoofyTalkText00,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040042,
+        gGoofyTalkText00,
 #endif
         0,
     },
@@ -897,9 +897,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText026ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FEA0,
+        gGoofyTalkText01,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090400DC,
+        gGoofyTalkText01,
 #endif
         0,
     },
@@ -908,9 +908,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText027ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FE58,
+        gGoofyTalkText02,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040170,
+        gGoofyTalkText02,
 #endif
         0,
     },
@@ -919,9 +919,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText028ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FE14,
+        gGoofyTalkText03,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090401E4,
+        gGoofyTalkText03,
 #endif
         0,
     },
@@ -930,9 +930,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText029ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FDE8,
+        gGoofyTalkText04,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904026E,
+        gGoofyTalkText04,
 #endif
         0,
     },
@@ -941,9 +941,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText030ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FDC0,
+        gGoofyTalkText05,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090402D0,
+        gGoofyTalkText05,
 #endif
         0,
     },
@@ -952,9 +952,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText031ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FD8C,
+        gGoofyTalkText06,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040328,
+        gGoofyTalkText06,
 #endif
         0,
     },
@@ -963,9 +963,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText032ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FD50,
+        gGoofyTalkText07,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090403A0,
+        gGoofyTalkText07,
 #endif
         0,
     },
@@ -974,9 +974,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText033ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FD18,
+        gGoofyTalkText08,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904041C,
+        gGoofyTalkText08,
 #endif
         0,
     },
@@ -985,9 +985,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText034ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FCD0,
+        gGoofyTalkText09,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090404AA,
+        gGoofyTalkText09,
 #endif
         0,
     },
@@ -996,9 +996,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText035ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FC80,
+        gGoofyTalkText10,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040552,
+        gGoofyTalkText10,
 #endif
         0,
     },
@@ -1007,9 +1007,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText036ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FC38,
+        gGoofyTalkText11,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090405D8,
+        gGoofyTalkText11,
 #endif
         0,
     },
@@ -1018,9 +1018,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText037ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FC00,
+        gGoofyTalkText12,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040662,
+        gGoofyTalkText12,
 #endif
         0,
     },
@@ -1029,9 +1029,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText038ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FBCC,
+        gGoofyTalkText13,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090406E4,
+        gGoofyTalkText13,
 #endif
         0,
     },
@@ -1040,9 +1040,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText039ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FB90,
+        gGoofyTalkText14,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040758,
+        gGoofyTalkText14,
 #endif
         0,
     },
@@ -1051,9 +1051,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText040ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FB5C,
+        gGoofyTalkText15,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090407B2,
+        gGoofyTalkText15,
 #endif
         0,
     },
@@ -1062,9 +1062,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText041ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FB20,
+        gGoofyTalkText16,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904083C,
+        gGoofyTalkText16,
 #endif
         0,
     },
@@ -1073,9 +1073,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText042ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FAE8,
+        gGoofyTalkText17,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090408CC,
+        gGoofyTalkText17,
 #endif
         0,
     },
@@ -1084,9 +1084,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText043ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FA90,
+        gGoofyTalkText18,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040932,
+        gGoofyTalkText18,
 #endif
         0,
     },
@@ -1095,9 +1095,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText044ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FA60,
+        gGoofyTalkText19,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090409E6,
+        gGoofyTalkText19,
 #endif
         0,
     },
@@ -1106,9 +1106,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText045ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FA2C,
+        gGoofyTalkText20,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040A5C,
+        gGoofyTalkText20,
 #endif
         0,
     },
@@ -1117,9 +1117,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText046ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900FA04,
+        gGoofyTalkText21,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040AEE,
+        gGoofyTalkText21,
 #endif
         0,
     },
@@ -1128,9 +1128,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText047ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F9C4,
+        gGoofyTalkText22,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040B46,
+        gGoofyTalkText22,
 #endif
         0,
     },
@@ -1139,9 +1139,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText048ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F998,
+        gGoofyTalkText23,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040BA8,
+        gGoofyTalkText23,
 #endif
         0,
     },
@@ -1150,9 +1150,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText049ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F968,
+        gGoofyExitHallTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040C0C,
+        gGoofyExitHallTalkText,
 #endif
         0,
     },
@@ -1161,9 +1161,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText050ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F934,
+        gNamineTalkText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040C98,
+        gNamineTalkText0,
 #endif
         0,
     },
@@ -1172,9 +1172,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText051ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F8F4,
+        gNamineTalkText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040D0E,
+        gNamineTalkText1,
 #endif
         0,
     },
@@ -1183,9 +1183,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText052ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F8D0,
+        gRikuReplicaTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040D90,
+        gRikuReplicaTalkText,
 #endif
         0,
     },
@@ -1194,7 +1194,7 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText053ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F8B0,
+        gPoohTalkText,
 #elif defined(VERSION_US)
         gEventTextUs_0900868C,
 #endif
@@ -1205,9 +1205,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText054ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F880,
+        gPigletTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C10C,
+        gPigletTalkText,
 #endif
         0,
     },
@@ -1216,9 +1216,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText055ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F844,
+        gOwlTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C186,
+        gOwlTalkText,
 #endif
         0,
     },
@@ -1227,9 +1227,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText056ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F820,
+        gEeyoreTalkText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C0D4,
+        gEeyoreTalkText0,
 #endif
         0,
     },
@@ -1238,9 +1238,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText057ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F7E0,
+        gEeyoreTalkText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C060,
+        gEeyoreTalkText1,
 #endif
         0,
     },
@@ -1249,9 +1249,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText058ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F798,
+        gRooTalkText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C20C,
+        gRooTalkText,
 #endif
         0,
     },
@@ -1260,9 +1260,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText059ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F75C,
+        gRabbitTalkText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C2F4,
+        gRabbitTalkText0,
 #endif
         0,
     },
@@ -1271,9 +1271,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText060ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F720,
+        gRabbitTalkText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C272,
+        gRabbitTalkText1,
 #endif
         0,
     },
@@ -1282,9 +1282,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText061ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F6E8,
+        gMickeyTalkText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040DDA,
+        gMickeyTalkText0,
 #endif
         0,
     },
@@ -1293,9 +1293,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText062ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F6B4,
+        gMickeyTalkText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040E4C,
+        gMickeyTalkText1,
 #endif
         0,
     },
@@ -1304,9 +1304,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText063ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F668,
+        gMickeyTalkText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040ED6,
+        gMickeyTalkText2,
 #endif
         0,
     },
@@ -1315,9 +1315,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText064ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F638,
+        gMsTopShopOptionText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090411BA,
+        gMsTopShopOptionText,
 #endif
         0,
     },
@@ -1326,9 +1326,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText065ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F608,
+        gMsTopChargeOptionText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041224,
+        gMsTopChargeOptionText,
 #endif
         0,
     },
@@ -1337,9 +1337,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText066ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F5E8,
+        gMsTopFreePackText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041176,
+        gMsTopFreePackText,
 #endif
         0,
     },
@@ -1348,9 +1348,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText065ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F5C8,
+        gMsTopNothingToSellText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041E66,
+        gCardMessageNoText,
 #endif
         0,
     },
@@ -1359,9 +1359,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText065ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F5A0,
+        gMsTopNothingToTradeText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041E66,
+        gCardMessageNoText,
 #endif
         0,
     },
@@ -1370,9 +1370,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText069ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F588,
+        gPoohLeaveWorldText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C03C,
+        gPoohLeaveWorldText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END | CARD_MSG_FLAG_CHOICE_WINDOW,
     },
@@ -1381,9 +1381,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText070ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F554,
+        gWorldselectTutorialText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C37E,
+        gWorldselectTutorialText0,
 #endif
         0,
     },
@@ -1392,9 +1392,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText071ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F50C,
+        gWorldselectTutorialText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C410,
+        gWorldselectTutorialText1,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1409,9 +1409,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText072ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F4D4,
+        gRobeTutorialText00,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C656,
+        gRobeTutorialText00,
 #endif
         0,
     },
@@ -1420,9 +1420,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText073ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F4AC,
+        gRobeTutorialText01,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C6F0,
+        gRobeTutorialText01,
 #endif
         0,
     },
@@ -1431,9 +1431,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText074ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F498,
+        gRobeTutorialText02,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C76E,
+        gRobeTutorialText02,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1448,9 +1448,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText075ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F424,
+        gRobeTutorialText03,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C79A,
+        gRobeTutorialText03,
 #endif
         0,
     },
@@ -1459,9 +1459,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText076ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F40C,
+        gRobeTutorialText04,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C86C,
+        gRobeTutorialText04,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1476,9 +1476,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText077ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F3A8,
+        gRobeTutorialText05,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C898,
+        gRobeTutorialText05,
 #endif
         0,
     },
@@ -1487,9 +1487,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText078ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F2E8,
+        gRobeTutorialText06,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C97C,
+        gRobeTutorialText06,
 #endif
         0,
     },
@@ -1498,9 +1498,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText079ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F2A8,
+        gRobeTutorialText07,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CAD0,
+        gRobeTutorialText07,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1515,9 +1515,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText080ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F274,
+        gRobeTutorialText08,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CB7C,
+        gRobeTutorialText08,
 #endif
         0,
     },
@@ -1526,9 +1526,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText081ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F40C,
+        gRobeTutorialText04,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CBE4,
+        gRobeTutorialText09,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1543,9 +1543,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText082ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F234,
+        gRobeTutorialText10,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CC10,
+        gRobeTutorialText10,
 #endif
         0,
     },
@@ -1554,9 +1554,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText083ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F1FC,
+        gRobeTutorialText11,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CC80,
+        gRobeTutorialText11,
 #endif
         0,
     },
@@ -1565,9 +1565,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText084ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F1B4,
+        gRobeTutorialText12,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CCF2,
+        gRobeTutorialText12,
 #endif
         0,
     },
@@ -1576,9 +1576,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText085ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F180,
+        gRobeTutorialText13,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CD96,
+        gRobeTutorialText13,
 #endif
         0,
     },
@@ -1587,9 +1587,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText086ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F134,
+        gRobeTutorialText14,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CE0C,
+        gRobeTutorialText14,
 #endif
         0,
     },
@@ -1598,9 +1598,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText087ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F0EC,
+        gRobeTutorialText15,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CEC4,
+        gRobeTutorialText15,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1615,9 +1615,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText088ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900F010,
+        gRobeTutorialText16,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903CF58,
+        gRobeTutorialText16,
 #endif
         0,
     },
@@ -1626,9 +1626,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText089ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EF60,
+        gRobeTutorialText17,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D0BE,
+        gRobeTutorialText17,
 #endif
         0,
     },
@@ -1637,9 +1637,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText090ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EF2C,
+        gRobeTutorialText18,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D1FA,
+        gRobeTutorialText18,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1654,9 +1654,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText091ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EEE4,
+        gRobeTutorialText19,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D294,
+        gRobeTutorialText19,
 #endif
         0,
     },
@@ -1665,9 +1665,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText092ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EE28,
+        gRobeTutorialText20,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D32E,
+        gRobeTutorialText20,
 #endif
         0,
     },
@@ -1676,9 +1676,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText093ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EE00,
+        gRobeTutorialText21,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D47A,
+        gRobeTutorialText21,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1693,9 +1693,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText094ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900ED7C,
+        gRobeTutorialText22,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D4C2,
+        gRobeTutorialText22,
 #endif
         0,
     },
@@ -1704,9 +1704,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText095ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900ED44,
+        gMapSelectTutorialText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E7EC,
+        gMapSelectTutorialText0,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1721,9 +1721,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText096ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900ED0C,
+        gMapSelectTutorialText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E854,
+        gMapSelectTutorialText1,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1738,9 +1738,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText097ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900ECD4,
+        gMapSelectTutorialText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E8C4,
+        gMapSelectTutorialText2,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1755,9 +1755,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText098ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EC94,
+        gMapSelectTutorialText3,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E91C,
+        gMapSelectTutorialText3,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1772,9 +1772,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText099ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EC58,
+        gMapSelectValueTutorialText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E9C8,
+        gMapSelectValueTutorialText0,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1789,9 +1789,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText100ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EC14,
+        gMapSelectValueTutorialText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903EA78,
+        gMapSelectValueTutorialText1,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1806,9 +1806,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText101ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EBD8,
+        gMapSelectValueTutorialText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903EB28,
+        gMapSelectValueTutorialText2,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1823,9 +1823,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText102ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EB18,
+        gMapSelectValueTutorialText3,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903EB8E,
+        gMapSelectValueTutorialText3,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1840,9 +1840,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText103ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EAA0,
+        gSavePointTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903ED16,
+        gSavePointTutorialText,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1857,9 +1857,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText103ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900EA28,
+        gSaveMenuTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903ED16,
+        gSavePointTutorialText,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1874,9 +1874,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText105ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E980,
+        gQuickSaveTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903EE14,
+        gQuickSaveTutorialText,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -1891,9 +1891,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText106ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E914,
+        gMapTutorialText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903EF68,
+        gMapTutorialText0,
 #endif
         0,
     },
@@ -1902,9 +1902,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText107ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E8E8,
+        gMapTutorialText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F02C,
+        gMapTutorialText1,
 #endif
         0,
     },
@@ -1913,9 +1913,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText108ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E854,
+        gMapTutorialText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F098,
+        gMapTutorialText2,
 #endif
         0,
     },
@@ -1924,9 +1924,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText109ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E824,
+        gMapSelectEventDoorTutorialText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F180,
+        gMapSelectEventDoorTutorialText0,
 #endif
         0,
     },
@@ -1935,9 +1935,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText110ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E7F0,
+        gMapSelectEventDoorTutorialText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F1E2,
+        gMapSelectEventDoorTutorialText1,
 #endif
         0,
     },
@@ -1946,9 +1946,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText111ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E7C4,
+        gMapSelectEventDoorTutorialText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F25A,
+        gMapSelectEventDoorTutorialText2,
 #endif
         0,
     },
@@ -1957,9 +1957,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText112ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E768,
+        gMapSelectEventDoorTutorialText3,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F2D0,
+        gMapSelectEventDoorTutorialText3,
 #endif
         0,
     },
@@ -1968,9 +1968,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText113ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E710,
+        gMapSelectEventDoorTutorialText4,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F410,
+        gMapSelectEventDoorTutorialText4,
 #endif
         0,
     },
@@ -1979,9 +1979,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText114ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E648,
+        gLeonTutorialText00,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D5E8,
+        gLeonTutorialText00,
 #endif
         0,
     },
@@ -1990,9 +1990,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText115ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E5E4,
+        gLeonTutorialText01,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D774,
+        gLeonTutorialText01,
 #endif
         0,
     },
@@ -2001,9 +2001,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText116ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E528,
+        gLeonTutorialText02,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903D872,
+        gLeonTutorialText02,
 #endif
         0,
     },
@@ -2012,9 +2012,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText117ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E4F4,
+        gLeonTutorialText03,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DA40,
+        gLeonTutorialText03,
 #endif
         0,
     },
@@ -2023,9 +2023,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText118ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E450,
+        gLeonTutorialText04,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DA92,
+        gLeonTutorialText04,
 #endif
         0,
     },
@@ -2034,9 +2034,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText119ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E3E8,
+        gLeonTutorialText05,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DC44,
+        gLeonTutorialText05,
 #endif
         0,
     },
@@ -2045,9 +2045,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText120ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E398,
+        gLeonTutorialText06,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DD36,
+        gLeonTutorialText06,
 #endif
         0,
     },
@@ -2056,9 +2056,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText121ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E364,
+        gLeonTutorialText07,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DDCA,
+        gLeonTutorialText07,
 #endif
         0,
     },
@@ -2067,9 +2067,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText122ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E2EC,
+        gLeonTutorialText08,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DE28,
+        gLeonTutorialText08,
 #endif
         0,
     },
@@ -2078,9 +2078,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText123ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E240,
+        gLeonTutorialText09,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903DF44,
+        gLeonTutorialText09,
 #endif
         0,
     },
@@ -2089,9 +2089,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText124ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E210,
+        gLeonTutorialText10,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E0CA,
+        gLeonTutorialText10,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2106,9 +2106,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText125ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E144,
+        gLeonTutorialText11,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E142,
+        gLeonTutorialText11,
 #endif
         0,
     },
@@ -2117,9 +2117,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText126ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E0F8,
+        gLeonTutorialText12,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E2C8,
+        gLeonTutorialText12,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2134,9 +2134,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText127ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900E00C,
+        gLeonTutorialText13,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E370,
+        gLeonTutorialText13,
 #endif
         0,
     },
@@ -2145,9 +2145,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText128ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DF14,
+        gLeonTutorialText14,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903E5D4,
+        gLeonTutorialText14,
 #endif
         0,
     },
@@ -2156,9 +2156,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText129ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DED0,
+        gMsTopIntroText0,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040F4E,
+        gMsTopIntroText0,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2173,9 +2173,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText130ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DE50,
+        gMsTopIntroText1,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09040FE2,
+        gMsTopIntroText1,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2190,9 +2190,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText131ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DE04,
+        gMsTopIntroText2,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090410E8,
+        gMsTopIntroText2,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2207,9 +2207,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText132ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DD60,
+        gWarpPointTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903C4C2,
+        gWarpPointTutorialText,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2224,9 +2224,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText133ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DD34,
+        gLearnedWarpinatorText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041492,
+        gLearnedWarpinatorText,
 #endif
         0,
     },
@@ -2235,9 +2235,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText134ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DCEC,
+        gLearnedTerrorText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090414BE,
+        gLearnedTerrorText,
 #endif
         0,
     },
@@ -2246,9 +2246,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText135ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DCC8,
+        gLearnedSynchroText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041522,
+        gLearnedSynchroText,
 #endif
         0,
     },
@@ -2257,9 +2257,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText136ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DCA4,
+        gLearnedBindText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041548,
+        gLearnedBindText,
 #endif
         0,
     },
@@ -2268,9 +2268,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText137ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DC74,
+        gLearnedIdyllRompText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041568,
+        gLearnedIdyllRompText,
 #endif
         0,
     },
@@ -2279,9 +2279,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText138ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DC20,
+        gLearnedTrinityLimitText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041594,
+        gLearnedTrinityLimitText,
 #endif
         0,
     },
@@ -2290,9 +2290,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText139ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DBFC,
+        gLearnedConfuseText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041606,
+        gLearnedConfuseText,
 #endif
         0,
     },
@@ -2301,9 +2301,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText140ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DBD0,
+        gLearnedThunderRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904162C,
+        gLearnedThunderRaidText,
 #endif
         0,
     },
@@ -2312,9 +2312,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText141ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DBA4,
+        gLearnedGiftedMiracleText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904165C,
+        gLearnedGiftedMiracleText,
 #endif
         0,
     },
@@ -2323,9 +2323,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText142ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DB78,
+        gLearnedGravityRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041690,
+        gLearnedGravityRaidText,
 #endif
         0,
     },
@@ -2334,9 +2334,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText143ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DB4C,
+        gLearnedFireRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090416C0,
+        gLearnedFireRaidText,
 #endif
         0,
     },
@@ -2345,9 +2345,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText144ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DB1C,
+        gLearnedAquaSplashText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090416EA,
+        gLearnedAquaSplashText,
 #endif
         0,
     },
@@ -2356,9 +2356,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText145ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DAF0,
+        gLearnedBlizzardRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041718,
+        gLearnedBlizzardRaidText,
 #endif
         0,
     },
@@ -2367,9 +2367,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText146ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DAC4,
+        gLearnedStopRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904174A,
+        gLearnedStopRaidText,
 #endif
         0,
     },
@@ -2378,9 +2378,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText147ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DA94,
+        gLearnedShockImpactText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041774,
+        gLearnedShockImpactText,
 #endif
         0,
     },
@@ -2389,9 +2389,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText148ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DA64,
+        gLearnedHomingBlizzaraText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090417A4,
+        gLearnedHomingBlizzaraText,
 #endif
         0,
     },
@@ -2400,9 +2400,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText149ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DA40,
+        gLearnedQuakeText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090417DA,
+        gLearnedQuakeText,
 #endif
         0,
     },
@@ -2411,9 +2411,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText150ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900DA14,
+        gLearnedBlazingDonaldText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090417FC,
+        gLearnedBlazingDonaldText,
 #endif
         0,
     },
@@ -2422,9 +2422,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText151ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D9E4,
+        gLearnedHomingFiraText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041830,
+        gLearnedHomingFiraText,
 #endif
         0,
     },
@@ -2433,9 +2433,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText152ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D9C0,
+        gLearnedTeleportText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904185E,
+        gLearnedTeleportText,
 #endif
         0,
     },
@@ -2444,9 +2444,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText153ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D99C,
+        gLearnedTornadoText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041886,
+        gLearnedTornadoText,
 #endif
         0,
     },
@@ -2455,9 +2455,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText154ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D974,
+        gLearnedCrossSlashPlusText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090418AC,
+        gLearnedCrossSlashPlusText,
 #endif
         0,
     },
@@ -2466,9 +2466,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText155ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D948,
+        gLearnedReflectRaidText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090418DC,
+        gLearnedReflectRaidText,
 #endif
         0,
     },
@@ -2477,9 +2477,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText156ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D91C,
+        gLearnedFiragaBreakText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904190C,
+        gLearnedFiragaBreakText,
 #endif
         0,
     },
@@ -2488,9 +2488,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText157ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D8F8,
+        gLearnedWarpText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904193C,
+        gLearnedWarpText,
 #endif
         0,
     },
@@ -2499,9 +2499,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText158ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D8CC,
+        gLearnedJudgmentText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904195C,
+        gLearnedJudgmentText,
 #endif
         0,
     },
@@ -2510,9 +2510,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText159ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D8B0,
+        gObtainedElixirText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090419E2,
+        gObtainedElixirText,
 #endif
         0,
     },
@@ -2521,9 +2521,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText160ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D88C,
+        gObtainedSpellbinderText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041A08,
+        gObtainedSpellbinderText,
 #endif
         0,
     },
@@ -2532,9 +2532,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText161ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D870,
+        gObtainedGenieText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041A38,
+        gObtainedGenieText,
 #endif
         0,
     },
@@ -2543,9 +2543,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText162ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D854,
+        gObtainedCloudText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041A5C,
+        gObtainedCloudText,
 #endif
         0,
     },
@@ -2554,9 +2554,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText163ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D834,
+        gObtainedOathkeeperText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041AE2,
+        gObtainedOathkeeperText,
 #endif
         0,
     },
@@ -2565,9 +2565,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText164ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D810,
+        gObtainedOblivionText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041CAC,
+        gObtainedOblivionText,
 #endif
         0,
     },
@@ -2576,9 +2576,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText165ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D7DC,
+        gObtainedBambiText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041B10,
+        gObtainedBambiText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
@@ -2587,9 +2587,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText166ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D7C4,
+        gEventSaveConfirmText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041B6C,
+        gEventSaveConfirmText,
 #endif
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
@@ -2598,9 +2598,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText167ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D728,
+        gMapStairTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0903F492,
+        gMapStairTutorialText,
 #endif
         0,
     },
@@ -2609,9 +2609,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText168ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D700,
+        gObtainedKeyOfBeginningsText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041BA0,
+        gObtainedKeyOfBeginningsText,
 #endif
         0,
     },
@@ -2620,9 +2620,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText169ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D6D8,
+        gObtainedKeyOfGuidanceText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041BDC,
+        gObtainedKeyOfGuidanceText,
 #endif
         0,
     },
@@ -2631,9 +2631,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText170ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D6B4,
+        gObtainedKeyToTruthText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041C14,
+        gObtainedKeyToTruthText,
 #endif
         0,
     },
@@ -2642,9 +2642,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText171ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D68C,
+        gObtainedKeyToRewardsText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041C46,
+        gObtainedKeyToRewardsText,
 #endif
         0,
     },
@@ -2653,9 +2653,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText172ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D670,
+        gObtainedTinkerBellText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041C7C,
+        gObtainedTinkerBellText,
 #endif
         0,
     },
@@ -2664,9 +2664,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText173ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D650,
+        gObtainedWorldCardText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041D06,
+        gObtainedWorldCardText,
 #endif
         0,
     },
@@ -2675,9 +2675,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText174ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D650,
+        gObtainedWorldCardText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041CD6,
+        gObtainedWorldCardsText,
 #endif
         0,
     },
@@ -2686,9 +2686,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText175ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D610,
+        gObtainedSimbaText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041D38,
+        gObtainedSimbaText,
 #endif
         0,
     },
@@ -2697,9 +2697,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText176ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D5E0,
+        gSaveDataLostText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041D98,
+        gSaveDataLostText,
 #endif
         0,
     },
@@ -2708,9 +2708,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText177ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D560,
+        gRikuDeckTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_0904128A,
+        gRikuDeckTutorialText,
 #endif
 #if defined(VERSION_EU)
         CARD_MSG_FLAG_ALT_HIGHLIGHT,
@@ -2725,9 +2725,9 @@ CardMessageDef gCardMessageDefs[] = {
 #if defined(VERSION_EU)
         &gCardMessageText178ByLanguage,
 #elif defined(VERSION_JP)
-        gCardMessageTextJp_0900D500,
+        gRikuBattleTutorialText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_090413BE,
+        gRikuBattleTutorialText,
 #endif
         0,
     },
@@ -2735,9 +2735,9 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #if defined(VERSION_JP)
-        gCardMessageTextJp_0900D4C0,
+        gQuickSaveCompleteText,
 #elif defined(VERSION_US)
-        gCardMessageTextUs_09041DE2,
+        gQuickSaveCompleteText,
 #endif
         0,
     },

@@ -47,7 +47,7 @@ typedef struct CardDef {
 typedef struct CardBack {
     void* gfx;
     void* gfx2;
-    void* unk_08;
+    void* gfx3;
     void* tiles;
     void* tiles2;
     void* tiles3;

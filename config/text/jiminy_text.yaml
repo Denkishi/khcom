@@ -4293,7 +4293,7 @@ entries:
   - gUnkEu_0883FAE2
   - gUnkEu_0883FAF4
   - gUnkEu_0883FB0A
-  - {name: gUnkEu_0883FB1C, record: JiminyLocalizedText, lines: [gUnk_09EDB7EC, gUnk_09EDB7ECFr, gUnk_09EDB7ECDe, gUnk_09EDB7ECIt, gUnk_09EDB7ECEs], lineCounts: [22, 25, 27, 27, 25]}
+  - {name: gUnkEu_0883FB1C, record: JiminyLocalizedText, lines: [gJiminyStoryTale1Lines, gJiminyStoryTale1LinesFrench, gJiminyStoryTale1LinesGerman, gJiminyStoryTale1LinesItalian, gJiminyStoryTale1LinesSpanish], lineCounts: [22, 25, 27, 27, 25]}
   - gUnkEu_0883FB3C
   - gUnkEu_0883FB52
   - gUnkEu_0883FB69
@@ -4401,7 +4401,7 @@ entries:
   - gUnkEu_08840281
   - gUnkEu_0884029A
   - gUnkEu_0884029C
-  - {name: gUnkEu_088402A4, record: JiminyLocalizedText, lines: [gUnk_09EDB844, gUnk_09EDB844Fr, gUnk_09EDB844De, gUnk_09EDB844It, gUnk_09EDB844Es], lineCounts: [19, 20, 24, 24, 20]}
+  - {name: gUnkEu_088402A4, record: JiminyLocalizedText, lines: [gJiminyStoryTale2Lines, gJiminyStoryTale2LinesFrench, gJiminyStoryTale2LinesGerman, gJiminyStoryTale2LinesItalian, gJiminyStoryTale2LinesSpanish], lineCounts: [19, 20, 24, 24, 20]}
   - gUnkEu_088402C4
   - gUnkEu_088402DB
   - gUnkEu_088402F2
@@ -4507,7 +4507,7 @@ entries:
   - gUnkEu_088409DE
   - gUnkEu_088409F5
   - gUnkEu_08840A0B
-  - {name: gUnkEu_08840A14, record: JiminyLocalizedText, lines: [gUnk_09EDD46C, gUnk_09EDD46CFr, gUnk_09EDD46CDe, gUnk_09EDD46CIt, gUnk_09EDD46CEs], lineCounts: [18, 19, 26, 22, 20]}
+  - {name: gUnkEu_08840A14, record: JiminyLocalizedText, lines: [gJiminyStoryTale3Lines, gJiminyStoryTale3LinesFrench, gJiminyStoryTale3LinesGerman, gJiminyStoryTale3LinesItalian, gJiminyStoryTale3LinesSpanish], lineCounts: [18, 19, 26, 22, 20]}
   - gUnkEu_08840A34
   - gUnkEu_08840A4A
   - gUnkEu_08840A5D
@@ -4639,7 +4639,7 @@ entries:
   - gUnkEu_08841321
   - gUnkEu_08841330
   - gUnkEu_08841341
-  - {name: gUnkEu_08841350, record: JiminyLocalizedText, lines: [gUnk_09EDB890, gUnk_09EDB890Fr, gUnk_09EDB890De, gUnk_09EDB890It, gUnk_09EDB890Es], lineCounts: [22, 23, 30, 30, 26]}
+  - {name: gUnkEu_08841350, record: JiminyLocalizedText, lines: [gJiminyStoryTale4Lines, gJiminyStoryTale4LinesFrench, gJiminyStoryTale4LinesGerman, gJiminyStoryTale4LinesItalian, gJiminyStoryTale4LinesSpanish], lineCounts: [22, 23, 30, 30, 26]}
   - gUnkEu_08841370
   - gUnkEu_08841384
   - gUnkEu_0884139B
@@ -4754,7 +4754,7 @@ entries:
   - gUnkEu_08841B96
   - gUnkEu_08841BA9
   - gUnkEu_08841BC0
-  - {name: gUnkEu_08841BD8, record: JiminyLocalizedText, lines: [gUnk_09EDD3B4, gUnk_09EDD3B4Fr, gUnk_09EDD3B4De, gUnk_09EDD3B4It, gUnk_09EDD3B4Es], lineCounts: [20, 21, 25, 25, 23]}
+  - {name: gUnkEu_08841BD8, record: JiminyLocalizedText, lines: [gJiminyStoryTraverseTownLines, gJiminyStoryTraverseTownLinesFrench, gJiminyStoryTraverseTownLinesGerman, gJiminyStoryTraverseTownLinesItalian, gJiminyStoryTraverseTownLinesSpanish], lineCounts: [20, 21, 25, 25, 23]}
   - gUnkEu_08841BF8
   - gUnkEu_08841C0D
   - gUnkEu_08841C22
@@ -4899,7 +4899,7 @@ entries:
   - gUnkEu_08842593
   - gUnkEu_088425AA
   - gUnkEu_088425BF
-  - {name: gUnkEu_088425D4, record: JiminyLocalizedText, lines: [gUnk_09EDD404, gUnk_09EDD404Fr, gUnk_09EDD404De, gUnk_09EDD404It, gUnk_09EDD404Es], lineCounts: [26, 29, 32, 31, 26]}
+  - {name: gUnkEu_088425D4, record: JiminyLocalizedText, lines: [gJiminyStoryWonderlandLines, gJiminyStoryWonderlandLinesFrench, gJiminyStoryWonderlandLinesGerman, gJiminyStoryWonderlandLinesItalian, gJiminyStoryWonderlandLinesSpanish], lineCounts: [26, 29, 32, 31, 26]}
   - gUnkEu_088425F4
   - gUnkEu_0884260B
   - gUnkEu_0884261F
@@ -4998,7 +4998,7 @@ entries:
   - gUnkEu_08842CD7
   - gUnkEu_08842CEE
   - gUnkEu_08842D02
-  - {name: gUnkEu_08842D0C, record: JiminyLocalizedText, lines: [gUnk_09EDB8E8, gUnk_09EDB8E8Fr, gUnk_09EDB8E8De, gUnk_09EDB8E8It, gUnk_09EDB8E8Es], lineCounts: [17, 18, 24, 20, 19]}
+  - {name: gUnkEu_08842D0C, record: JiminyLocalizedText, lines: [gJiminyStoryOlympusColiseumLines, gJiminyStoryOlympusColiseumLinesFrench, gJiminyStoryOlympusColiseumLinesGerman, gJiminyStoryOlympusColiseumLinesItalian, gJiminyStoryOlympusColiseumLinesSpanish], lineCounts: [17, 18, 24, 20, 19]}
   - gUnkEu_08842D2C
   - gUnkEu_08842D40
   - gUnkEu_08842D55
@@ -5183,7 +5183,7 @@ entries:
   - gUnkEu_08843A29
   - gUnkEu_08843A43
   - gUnkEu_08843A59
-  - {name: gUnkEu_08843A70, record: JiminyLocalizedText, lines: [gUnk_09EDB92C, gUnk_09EDB92CFr, gUnk_09EDB92CDe, gUnk_09EDB92CIt, gUnk_09EDB92CEs], lineCounts: [32, 32, 43, 43, 34]}
+  - {name: gUnkEu_08843A70, record: JiminyLocalizedText, lines: [gJiminyStoryAgrabahLines, gJiminyStoryAgrabahLinesFrench, gJiminyStoryAgrabahLinesGerman, gJiminyStoryAgrabahLinesItalian, gJiminyStoryAgrabahLinesSpanish], lineCounts: [32, 32, 43, 43, 34]}
   - gUnkEu_08843A90
   - gUnkEu_08843AA9
   - gUnkEu_08843AC0
@@ -5312,7 +5312,7 @@ entries:
   - gUnkEu_088443BC
   - gUnkEu_088443D4
   - gUnkEu_088443E3
-  - {name: gUnkEu_088443FC, record: JiminyLocalizedText, lines: [gUnk_09EDD4B4, gUnk_09EDD4B4Fr, gUnk_09EDD4B4De, gUnk_09EDD4B4It, gUnk_09EDD4B4Es], lineCounts: [22, 27, 28, 27, 24]}
+  - {name: gUnkEu_088443FC, record: JiminyLocalizedText, lines: [gJiminyStoryHalloweenTownLines, gJiminyStoryHalloweenTownLinesFrench, gJiminyStoryHalloweenTownLinesGerman, gJiminyStoryHalloweenTownLinesItalian, gJiminyStoryHalloweenTownLinesSpanish], lineCounts: [22, 27, 28, 27, 24]}
   - gUnkEu_0884441C
   - gUnkEu_0884442E
   - gUnkEu_08844444
@@ -5456,7 +5456,7 @@ entries:
   - gUnkEu_08844E58
   - gUnkEu_08844E6B
   - gUnkEu_08844E7B
-  - {name: gUnkEu_08844E8C, record: JiminyLocalizedText, lines: [gUnk_09EDB9AC, gUnk_09EDB9ACFr, gUnk_09EDB9ACDe, gUnk_09EDB9ACIt, gUnk_09EDB9ACEs], lineCounts: [25, 27, 35, 31, 25]}
+  - {name: gUnkEu_08844E8C, record: JiminyLocalizedText, lines: [gJiminyStoryMonstroLines, gJiminyStoryMonstroLinesFrench, gJiminyStoryMonstroLinesGerman, gJiminyStoryMonstroLinesItalian, gJiminyStoryMonstroLinesSpanish], lineCounts: [25, 27, 35, 31, 25]}
   - gUnkEu_08844EAC
   - gUnkEu_08844EBF
   - gUnkEu_08844ED6
@@ -5606,7 +5606,7 @@ entries:
   - gUnkEu_08845933
   - gUnkEu_08845949
   - gUnkEu_0884595F
-  - {name: gUnkEu_08845978, record: JiminyLocalizedText, lines: [gUnk_09EDDD48, gUnk_09EDDD48Fr, gUnk_09EDDD48De, gUnk_09EDDD48It, gUnk_09EDDD48Es], lineCounts: [25, 30, 33, 34, 27]}
+  - {name: gUnkEu_08845978, record: JiminyLocalizedText, lines: [gJiminyStoryAtlanticaLines, gJiminyStoryAtlanticaLinesFrench, gJiminyStoryAtlanticaLinesGerman, gJiminyStoryAtlanticaLinesItalian, gJiminyStoryAtlanticaLinesSpanish], lineCounts: [25, 30, 33, 34, 27]}
   - gUnkEu_08845998
   - gUnkEu_088459AE
   - gUnkEu_088459C5
@@ -5759,7 +5759,7 @@ entries:
   - gUnkEu_088463E6
   - gUnkEu_088463FB
   - gUnkEu_08846413
-  - {name: gUnkEu_0884642C, record: JiminyLocalizedText, lines: [gUnk_09EDBA10, gUnk_09EDBA10Fr, gUnk_09EDBA10De, gUnk_09EDBA10It, gUnk_09EDBA10Es], lineCounts: [27, 30, 35, 33, 27]}
+  - {name: gUnkEu_0884642C, record: JiminyLocalizedText, lines: [gJiminyStoryNeverLandLines, gJiminyStoryNeverLandLinesFrench, gJiminyStoryNeverLandLinesGerman, gJiminyStoryNeverLandLinesItalian, gJiminyStoryNeverLandLinesSpanish], lineCounts: [27, 30, 35, 33, 27]}
   - gUnkEu_0884644C
   - gUnkEu_0884645E
   - gUnkEu_08846470
@@ -5898,7 +5898,7 @@ entries:
   - gUnkEu_08846E3C
   - gUnkEu_08846E49
   - gUnkEu_08846E55
-  - {name: gUnkEu_08846E6C, record: JiminyLocalizedText, lines: [gUnk_09EDBA7C, gUnk_09EDBA7CFr, gUnk_09EDBA7CDe, gUnk_09EDBA7CIt, gUnk_09EDBA7CEs], lineCounts: [25, 27, 31, 29, 26]}
+  - {name: gUnkEu_08846E6C, record: JiminyLocalizedText, lines: [gJiminyStoryHollowBastionLines, gJiminyStoryHollowBastionLinesFrench, gJiminyStoryHollowBastionLinesGerman, gJiminyStoryHollowBastionLinesItalian, gJiminyStoryHollowBastionLinesSpanish], lineCounts: [25, 27, 31, 29, 26]}
   - gUnkEu_08846E8C
   - gUnkEu_08846EA0
   - gUnkEu_08846EB5
@@ -5950,7 +5950,7 @@ entries:
   - gUnkEu_088471E6
   - gUnkEu_088471FC
   - gUnkEu_08847210
-  - {name: gUnkEu_0884721C, record: JiminyLocalizedText, lines: [gUnk_09EDDDAC, gUnk_09EDDDACFr, gUnk_09EDDDACDe, gUnk_09EDDDACIt, gUnk_09EDDDACEs], lineCounts: [9, 10, 12, 9, 11]}
+  - {name: gUnkEu_0884721C, record: JiminyLocalizedText, lines: [gJiminyStory100AcreWoodLines, gJiminyStory100AcreWoodLinesFrench, gJiminyStory100AcreWoodLinesGerman, gJiminyStory100AcreWoodLinesItalian, gJiminyStory100AcreWoodLinesSpanish], lineCounts: [9, 10, 12, 9, 11]}
   - gUnkEu_0884723C
   - gUnkEu_08847253
   - gUnkEu_08847269
@@ -6036,7 +6036,7 @@ entries:
   - gUnkEu_088477F3
   - gUnkEu_08847809
   - gUnkEu_08847821
-  - {name: gUnkEu_0884783C, record: JiminyLocalizedText, lines: [gUnk_09EDBAE0, gUnk_09EDBAE0Fr, gUnk_09EDBAE0De, gUnk_09EDBAE0It, gUnk_09EDBAE0Es], lineCounts: [15, 16, 21, 17, 16]}
+  - {name: gUnkEu_0884783C, record: JiminyLocalizedText, lines: [gJiminyStoryTwilightTownLines, gJiminyStoryTwilightTownLinesFrench, gJiminyStoryTwilightTownLinesGerman, gJiminyStoryTwilightTownLinesItalian, gJiminyStoryTwilightTownLinesSpanish], lineCounts: [15, 16, 21, 17, 16]}
   - gUnkEu_0884785C
   - gUnkEu_08847871
   - gUnkEu_08847886
@@ -6118,7 +6118,7 @@ entries:
   - gUnkEu_08847DC0
   - gUnkEu_08847DD7
   - gUnkEu_08847DEE
-  - {name: gUnkEu_08847E04, record: JiminyLocalizedText, lines: [gUnk_09EDD50C, gUnk_09EDD50CFr, gUnk_09EDD50CDe, gUnk_09EDD50CIt, gUnk_09EDD50CEs], lineCounts: [16, 15, 17, 18, 15]}
+  - {name: gUnkEu_08847E04, record: JiminyLocalizedText, lines: [gJiminyStoryDestinyIslandsLines, gJiminyStoryDestinyIslandsLinesFrench, gJiminyStoryDestinyIslandsLinesGerman, gJiminyStoryDestinyIslandsLinesItalian, gJiminyStoryDestinyIslandsLinesSpanish], lineCounts: [16, 15, 17, 18, 15]}
   - gUnkEu_08847E24
   - gUnkEu_08847E3B
   - gUnkEu_08847E50
@@ -6261,7 +6261,7 @@ entries:
   - gUnkEu_088487D6
   - gUnkEu_088487E6
   - gUnkEu_088487FA
-  - {name: gUnkEu_08848808, record: JiminyLocalizedText, lines: [gUnk_09EDDE38, gUnk_09EDDE38Fr, gUnk_09EDDE38De, gUnk_09EDDE38It, gUnk_09EDDE38Es], lineCounts: [24, 28, 32, 29, 29]}
+  - {name: gUnkEu_08848808, record: JiminyLocalizedText, lines: [gJiminyStoryCastleOblivionLines, gJiminyStoryCastleOblivionLinesFrench, gJiminyStoryCastleOblivionLinesGerman, gJiminyStoryCastleOblivionLinesItalian, gJiminyStoryCastleOblivionLinesSpanish], lineCounts: [24, 28, 32, 29, 29]}
   - gUnkEu_08848828
   - gUnkEu_08848840
   - gUnkEu_08848859
@@ -6489,7 +6489,7 @@ entries:
   - gUnkEu_0884973E
   - gUnkEu_08849740
   - gUnkEu_08849756
-  - {name: gUnkEu_08849768, record: JiminyLocalizedText, lines: [gUnk_09EDD698, gUnk_09EDD698Fr, gUnk_09EDD698De, gUnk_09EDD698It, gUnk_09EDD698Es], lineCounts: [41, 42, 54, 47, 43]}
+  - {name: gUnkEu_08849768, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale1Lines, gJiminyRikuStoryTale1LinesFrench, gJiminyRikuStoryTale1LinesGerman, gJiminyRikuStoryTale1LinesItalian, gJiminyRikuStoryTale1LinesSpanish], lineCounts: [41, 42, 54, 47, 43]}
   - gUnkEu_08849788
   - gUnkEu_0884979C
   - gUnkEu_088497B5
@@ -6645,7 +6645,7 @@ entries:
   - gUnkEu_0884A18A
   - gUnkEu_0884A1A0
   - gUnkEu_0884A1B6
-  - {name: gUnkEu_0884A1C8, record: JiminyLocalizedText, lines: [gUnk_09EDBB1C, gUnk_09EDBB1CFr, gUnk_09EDBB1CDe, gUnk_09EDBB1CIt, gUnk_09EDBB1CEs], lineCounts: [26, 34, 35, 32, 28]}
+  - {name: gUnkEu_0884A1C8, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale2Lines, gJiminyRikuStoryTale2LinesFrench, gJiminyRikuStoryTale2LinesGerman, gJiminyRikuStoryTale2LinesItalian, gJiminyRikuStoryTale2LinesSpanish], lineCounts: [26, 34, 35, 32, 28]}
   - gUnkEu_0884A1E8
   - gUnkEu_0884A1FB
   - gUnkEu_0884A212
@@ -6762,7 +6762,7 @@ entries:
   - gUnkEu_0884A9EB
   - gUnkEu_0884AA01
   - gUnkEu_0884AA15
-  - {name: gUnkEu_0884AA20, record: JiminyLocalizedText, lines: [gUnk_09EDBB84, gUnk_09EDBB84Fr, gUnk_09EDBB84De, gUnk_09EDBB84It, gUnk_09EDBB84Es], lineCounts: [20, 22, 29, 24, 21]}
+  - {name: gUnkEu_0884AA20, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale3Lines, gJiminyRikuStoryTale3LinesFrench, gJiminyRikuStoryTale3LinesGerman, gJiminyRikuStoryTale3LinesItalian, gJiminyRikuStoryTale3LinesSpanish], lineCounts: [20, 22, 29, 24, 21]}
   - gUnkEu_0884AA40
   - gUnkEu_0884AA57
   - gUnkEu_0884AA6E
@@ -6871,7 +6871,7 @@ entries:
   - gUnkEu_0884B16E
   - gUnkEu_0884B183
   - gUnkEu_0884B197
-  - {name: gUnkEu_0884B1AC, record: JiminyLocalizedText, lines: [gUnk_09EDD73C, gUnk_09EDD73CFr, gUnk_09EDD73CDe, gUnk_09EDD73CIt, gUnk_09EDD73CEs], lineCounts: [20, 22, 23, 20, 23]}
+  - {name: gUnkEu_0884B1AC, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale4Lines, gJiminyRikuStoryTale4LinesFrench, gJiminyRikuStoryTale4LinesGerman, gJiminyRikuStoryTale4LinesItalian, gJiminyRikuStoryTale4LinesSpanish], lineCounts: [20, 22, 23, 20, 23]}
   - gUnkEu_0884B1CC
   - gUnkEu_0884B1E3
   - gUnkEu_0884B1FC
@@ -7005,7 +7005,7 @@ entries:
   - gUnkEu_0884BB07
   - gUnkEu_0884BB1E
   - gUnkEu_0884BB33
-  - {name: gUnkEu_0884BB40, record: JiminyLocalizedText, lines: [gUnk_09EDBBD4, gUnk_09EDBBD4Fr, gUnk_09EDBBD4De, gUnk_09EDBBD4It, gUnk_09EDBBD4Es], lineCounts: [23, 26, 31, 27, 26]}
+  - {name: gUnkEu_0884BB40, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale5Lines, gJiminyRikuStoryTale5LinesFrench, gJiminyRikuStoryTale5LinesGerman, gJiminyRikuStoryTale5LinesItalian, gJiminyRikuStoryTale5LinesSpanish], lineCounts: [23, 26, 31, 27, 26]}
   - gUnkEu_0884BB60
   - gUnkEu_0884BB77
   - gUnkEu_0884BB8F
@@ -7186,7 +7186,7 @@ entries:
   - gUnkEu_0884C77A
   - gUnkEu_0884C792
   - gUnkEu_0884C7AB
-  - {name: gUnkEu_0884C7C0, record: JiminyLocalizedText, lines: [gUnk_09EDD78C, gUnk_09EDD78CFr, gUnk_09EDD78CDe, gUnk_09EDD78CIt, gUnk_09EDD78CEs], lineCounts: [31, 35, 42, 39, 33]}
+  - {name: gUnkEu_0884C7C0, record: JiminyLocalizedText, lines: [gJiminyRikuStoryTale6Lines, gJiminyRikuStoryTale6LinesFrench, gJiminyRikuStoryTale6LinesGerman, gJiminyRikuStoryTale6LinesItalian, gJiminyRikuStoryTale6LinesSpanish], lineCounts: [31, 35, 42, 39, 33]}
   - gUnkEu_0884C7E0
   - gUnkEu_0884C7EC
   - gUnkEu_0884C7F8
@@ -7248,7 +7248,7 @@ entries:
   - gUnkEu_0884CB65
   - gUnkEu_0884CB79
   - gUnkEu_0884CB90
-  - {name: gUnkEu_0884CB9C, record: JiminyLocalizedText, lines: [gUnk_09EDD928, gUnk_09EDD928Fr, gUnk_09EDD928De, gUnk_09EDD928It, gUnk_09EDD928Es], lineCounts: [12, 11, 13, 13, 12]}
+  - {name: gUnkEu_0884CB9C, record: JiminyLocalizedText, lines: [gJiminyAttackCardKingdomKeyLines, gJiminyAttackCardKingdomKeyLinesFrench, gJiminyAttackCardKingdomKeyLinesGerman, gJiminyAttackCardKingdomKeyLinesItalian, gJiminyAttackCardKingdomKeyLinesSpanish], lineCounts: [12, 11, 13, 13, 12]}
   - gUnkEu_0884CBBC
   - gUnkEu_0884CBC8
   - gUnkEu_0884CBD4
@@ -7304,7 +7304,7 @@ entries:
   - gUnkEu_0884CECA
   - gUnkEu_0884CEDF
   - gUnkEu_0884CEF6
-  - {name: gUnkEu_0884CF0C, record: JiminyLocalizedText, lines: [gUnk_09EDD958, gUnk_09EDD958Fr, gUnk_09EDD958De, gUnk_09EDD958It, gUnk_09EDD958Es], lineCounts: [11, 11, 11, 11, 11]}
+  - {name: gUnkEu_0884CF0C, record: JiminyLocalizedText, lines: [gJiminyAttackCardThreeWishesLines, gJiminyAttackCardThreeWishesLinesFrench, gJiminyAttackCardThreeWishesLinesGerman, gJiminyAttackCardThreeWishesLinesItalian, gJiminyAttackCardThreeWishesLinesSpanish], lineCounts: [11, 11, 11, 11, 11]}
   - gUnkEu_0884CF2C
   - gUnkEu_0884CF37
   - gUnkEu_0884CF42
@@ -7366,7 +7366,7 @@ entries:
   - gUnkEu_0884D2C4
   - gUnkEu_0884D2DA
   - gUnkEu_0884D2F1
-  - {name: gUnkEu_0884D304, record: JiminyLocalizedText, lines: [gUnk_09EDD984, gUnk_09EDD984Fr, gUnk_09EDD984De, gUnk_09EDD984It, gUnk_09EDD984Es], lineCounts: [12, 11, 13, 13, 12]}
+  - {name: gUnkEu_0884D304, record: JiminyLocalizedText, lines: [gJiminyAttackCardCrabclawLines, gJiminyAttackCardCrabclawLinesFrench, gJiminyAttackCardCrabclawLinesGerman, gJiminyAttackCardCrabclawLinesItalian, gJiminyAttackCardCrabclawLinesSpanish], lineCounts: [12, 11, 13, 13, 12]}
   - gUnkEu_0884D324
   - gUnkEu_0884D330
   - gUnkEu_0884D33C
@@ -7430,7 +7430,7 @@ entries:
   - gUnkEu_0884D6D5
   - gUnkEu_0884D6E8
   - gUnkEu_0884D6FE
-  - {name: gUnkEu_0884D708, record: JiminyLocalizedText, lines: [gUnk_09EDD9B4, gUnk_09EDD9B4Fr, gUnk_09EDD9B4De, gUnk_09EDD9B4It, gUnk_09EDD9B4Es], lineCounts: [12, 12, 14, 13, 12]}
+  - {name: gUnkEu_0884D708, record: JiminyLocalizedText, lines: [gJiminyAttackCardPumpkinheadLines, gJiminyAttackCardPumpkinheadLinesFrench, gJiminyAttackCardPumpkinheadLinesGerman, gJiminyAttackCardPumpkinheadLinesItalian, gJiminyAttackCardPumpkinheadLinesSpanish], lineCounts: [12, 12, 14, 13, 12]}
   - gUnkEu_0884D728
   - gUnkEu_0884D734
   - gUnkEu_0884D740
@@ -7490,7 +7490,7 @@ entries:
   - gUnkEu_0884DA77
   - gUnkEu_0884DA8D
   - gUnkEu_0884DAA3
-  - {name: gUnkEu_0884DAB0, record: JiminyLocalizedText, lines: [gUnk_09EDD9E4, gUnk_09EDD9E4Fr, gUnk_09EDD9E4De, gUnk_09EDD9E4It, gUnk_09EDD9E4Es], lineCounts: [11, 12, 13, 11, 12]}
+  - {name: gUnkEu_0884DAB0, record: JiminyLocalizedText, lines: [gJiminyAttackCardFairyHarpLines, gJiminyAttackCardFairyHarpLinesFrench, gJiminyAttackCardFairyHarpLinesGerman, gJiminyAttackCardFairyHarpLinesItalian, gJiminyAttackCardFairyHarpLinesSpanish], lineCounts: [11, 12, 13, 11, 12]}
   - gUnkEu_0884DAD0
   - gUnkEu_0884DADB
   - gUnkEu_0884DAE6
@@ -7548,7 +7548,7 @@ entries:
   - gUnkEu_0884DE12
   - gUnkEu_0884DE28
   - gUnkEu_0884DE3D
-  - {name: gUnkEu_0884DE4C, record: JiminyLocalizedText, lines: [gUnk_09EDDA10, gUnk_09EDDA10Fr, gUnk_09EDDA10De, gUnk_09EDDA10It, gUnk_09EDDA10Es], lineCounts: [11, 11, 12, 12, 11]}
+  - {name: gUnkEu_0884DE4C, record: JiminyLocalizedText, lines: [gJiminyAttackCardWishingStarLines, gJiminyAttackCardWishingStarLinesFrench, gJiminyAttackCardWishingStarLinesGerman, gJiminyAttackCardWishingStarLinesItalian, gJiminyAttackCardWishingStarLinesSpanish], lineCounts: [11, 11, 12, 12, 11]}
   - gUnkEu_0884DE6C
   - gUnkEu_0884DE78
   - gUnkEu_0884DE83
@@ -7606,7 +7606,7 @@ entries:
   - gUnkEu_0884E188
   - gUnkEu_0884E19B
   - gUnkEu_0884E1B2
-  - {name: gUnkEu_0884E1C4, record: JiminyLocalizedText, lines: [gUnk_09EDDA3C, gUnk_09EDDA3CFr, gUnk_09EDDA3CDe, gUnk_09EDDA3CIt, gUnk_09EDDA3CEs], lineCounts: [11, 11, 12, 12, 11]}
+  - {name: gUnkEu_0884E1C4, record: JiminyLocalizedText, lines: [gJiminyAttackCardSpellbinderLines, gJiminyAttackCardSpellbinderLinesFrench, gJiminyAttackCardSpellbinderLinesGerman, gJiminyAttackCardSpellbinderLinesItalian, gJiminyAttackCardSpellbinderLinesSpanish], lineCounts: [11, 11, 12, 12, 11]}
   - gUnkEu_0884E1E4
   - gUnkEu_0884E1F0
   - gUnkEu_0884E1FC
@@ -7669,7 +7669,7 @@ entries:
   - gUnkEu_0884E594
   - gUnkEu_0884E5AC
   - gUnkEu_0884E5BF
-  - {name: gUnkEu_0884E5D0, record: JiminyLocalizedText, lines: [gUnk_09EDDA68, gUnk_09EDDA68Fr, gUnk_09EDDA68De, gUnk_09EDDA68It, gUnk_09EDDA68Es], lineCounts: [12, 12, 13, 13, 12]}
+  - {name: gUnkEu_0884E5D0, record: JiminyLocalizedText, lines: [gJiminyAttackCardMetalChocoboLines, gJiminyAttackCardMetalChocoboLinesFrench, gJiminyAttackCardMetalChocoboLinesGerman, gJiminyAttackCardMetalChocoboLinesItalian, gJiminyAttackCardMetalChocoboLinesSpanish], lineCounts: [12, 12, 13, 13, 12]}
   - gUnkEu_0884E5F0
   - gUnkEu_0884E5FC
   - gUnkEu_0884E608
@@ -7732,7 +7732,7 @@ entries:
   - gUnkEu_0884E991
   - gUnkEu_0884E9A8
   - gUnkEu_0884E9BF
-  - {name: gUnkEu_0884E9D4, record: JiminyLocalizedText, lines: [gUnk_09EDDA98, gUnk_09EDDA98Fr, gUnk_09EDDA98De, gUnk_09EDDA98It, gUnk_09EDDA98Es], lineCounts: [12, 12, 14, 12, 12]}
+  - {name: gUnkEu_0884E9D4, record: JiminyLocalizedText, lines: [gJiminyAttackCardOlympiaLines, gJiminyAttackCardOlympiaLinesFrench, gJiminyAttackCardOlympiaLinesGerman, gJiminyAttackCardOlympiaLinesItalian, gJiminyAttackCardOlympiaLinesSpanish], lineCounts: [12, 12, 14, 12, 12]}
   - gUnkEu_0884E9F4
   - gUnkEu_0884E9FF
   - gUnkEu_0884EA0A
@@ -7790,7 +7790,7 @@ entries:
   - gUnkEu_0884ECEF
   - gUnkEu_0884ED02
   - gUnkEu_0884ED15
-  - {name: gUnkEu_0884ED28, record: JiminyLocalizedText, lines: [gUnk_09EDDAC8, gUnk_09EDDAC8Fr, gUnk_09EDDAC8De, gUnk_09EDDAC8It, gUnk_09EDDAC8Es], lineCounts: [11, 11, 12, 12, 11]}
+  - {name: gUnkEu_0884ED28, record: JiminyLocalizedText, lines: [gJiminyAttackCardLionheartLines, gJiminyAttackCardLionheartLinesFrench, gJiminyAttackCardLionheartLinesGerman, gJiminyAttackCardLionheartLinesItalian, gJiminyAttackCardLionheartLinesSpanish], lineCounts: [11, 11, 12, 12, 11]}
   - gUnkEu_0884ED48
   - gUnkEu_0884ED54
   - gUnkEu_0884ED60
@@ -7849,7 +7849,7 @@ entries:
   - gUnkEu_0884F0A3
   - gUnkEu_0884F0B7
   - gUnkEu_0884F0CF
-  - {name: gUnkEu_0884F0D8, record: JiminyLocalizedText, lines: [gUnk_09EDDAF4, gUnk_09EDDAF4Fr, gUnk_09EDDAF4De, gUnk_09EDDAF4It, gUnk_09EDDAF4Es], lineCounts: [11, 11, 12, 12, 12]}
+  - {name: gUnkEu_0884F0D8, record: JiminyLocalizedText, lines: [gJiminyAttackCardLadyLuckLines, gJiminyAttackCardLadyLuckLinesFrench, gJiminyAttackCardLadyLuckLinesGerman, gJiminyAttackCardLadyLuckLinesItalian, gJiminyAttackCardLadyLuckLinesSpanish], lineCounts: [11, 11, 12, 12, 12]}
   - gUnkEu_0884F0F8
   - gUnkEu_0884F103
   - gUnkEu_0884F10F
@@ -7909,7 +7909,7 @@ entries:
   - gUnkEu_0884F43C
   - gUnkEu_0884F44D
   - gUnkEu_0884F460
-  - {name: gUnkEu_0884F478, record: JiminyLocalizedText, lines: [gUnk_09EDDB20, gUnk_09EDDB20Fr, gUnk_09EDDB20De, gUnk_09EDDB20It, gUnk_09EDDB20Es], lineCounts: [12, 12, 12, 11, 12]}
+  - {name: gUnkEu_0884F478, record: JiminyLocalizedText, lines: [gJiminyAttackCardDivineRoseLines, gJiminyAttackCardDivineRoseLinesFrench, gJiminyAttackCardDivineRoseLinesGerman, gJiminyAttackCardDivineRoseLinesItalian, gJiminyAttackCardDivineRoseLinesSpanish], lineCounts: [12, 12, 12, 11, 12]}
   - gUnkEu_0884F498
   - gUnkEu_0884F4A3
   - gUnkEu_0884F4AE
@@ -7964,7 +7964,7 @@ entries:
   - gUnkEu_0884F7A9
   - gUnkEu_0884F7AB
   - gUnkEu_0884F7BC
-  - {name: gUnkEu_0884F7D4, record: JiminyLocalizedText, lines: [gUnk_09EDDB50, gUnk_09EDDB50Fr, gUnk_09EDDB50De, gUnk_09EDDB50It, gUnk_09EDDB50Es], lineCounts: [11, 11, 11, 11, 10]}
+  - {name: gUnkEu_0884F7D4, record: JiminyLocalizedText, lines: [gJiminyAttackCardOathkeeperLines, gJiminyAttackCardOathkeeperLinesFrench, gJiminyAttackCardOathkeeperLinesGerman, gJiminyAttackCardOathkeeperLinesItalian, gJiminyAttackCardOathkeeperLinesSpanish], lineCounts: [11, 11, 11, 11, 10]}
   - gUnkEu_0884F7F4
   - gUnkEu_0884F7FF
   - gUnkEu_0884F80A
@@ -8028,7 +8028,7 @@ entries:
   - gUnkEu_0884FB96
   - gUnkEu_0884FBAF
   - gUnkEu_0884FBC2
-  - {name: gUnkEu_0884FBD8, record: JiminyLocalizedText, lines: [gUnk_09EDDB7C, gUnk_09EDDB7CFr, gUnk_09EDDB7CDe, gUnk_09EDDB7CIt, gUnk_09EDDB7CEs], lineCounts: [12, 12, 14, 13, 12]}
+  - {name: gUnkEu_0884FBD8, record: JiminyLocalizedText, lines: [gJiminyAttackCardOblivionLines, gJiminyAttackCardOblivionLinesFrench, gJiminyAttackCardOblivionLinesGerman, gJiminyAttackCardOblivionLinesItalian, gJiminyAttackCardOblivionLinesSpanish], lineCounts: [12, 12, 14, 13, 12]}
   - gUnkEu_0884FBF8
   - gUnkEu_0884FC04
   - gUnkEu_0884FC10
@@ -8093,7 +8093,7 @@ entries:
   - gUnkEu_0884FFB6
   - gUnkEu_0884FFC9
   - gUnkEu_0884FFE0
-  - {name: gUnkEu_0884FFF8, record: JiminyLocalizedText, lines: [gUnk_09EDDBAC, gUnk_09EDDBACFr, gUnk_09EDDBACDe, gUnk_09EDDBACIt, gUnk_09EDDBACEs], lineCounts: [12, 12, 14, 14, 12]}
+  - {name: gUnkEu_0884FFF8, record: JiminyLocalizedText, lines: [gJiminyAttackCardDiamondDustLines, gJiminyAttackCardDiamondDustLinesFrench, gJiminyAttackCardDiamondDustLinesGerman, gJiminyAttackCardDiamondDustLinesItalian, gJiminyAttackCardDiamondDustLinesSpanish], lineCounts: [12, 12, 14, 14, 12]}
   - gUnkEu_08850018
   - gUnkEu_08850023
   - gUnkEu_0885002E
@@ -8158,7 +8158,7 @@ entries:
   - gUnkEu_088503C3
   - gUnkEu_088503D6
   - gUnkEu_088503EB
-  - {name: gUnkEu_08850400, record: JiminyLocalizedText, lines: [gUnk_09EDDBDC, gUnk_09EDDBDCFr, gUnk_09EDDBDCDe, gUnk_09EDDBDCIt, gUnk_09EDDBDCEs], lineCounts: [12, 12, 13, 13, 14]}
+  - {name: gUnkEu_08850400, record: JiminyLocalizedText, lines: [gJiminyAttackCardOneWingedAngelLines, gJiminyAttackCardOneWingedAngelLinesFrench, gJiminyAttackCardOneWingedAngelLinesGerman, gJiminyAttackCardOneWingedAngelLinesItalian, gJiminyAttackCardOneWingedAngelLinesSpanish], lineCounts: [12, 12, 13, 13, 14]}
   - gUnkEu_08850420
   - gUnkEu_0885042B
   - gUnkEu_08850436
@@ -8211,7 +8211,7 @@ entries:
   - gUnkEu_088506E6
   - gUnkEu_088506FA
   - gUnkEu_0885070E
-  - {name: gUnkEu_08850724, record: JiminyLocalizedText, lines: [gUnk_09EDDE98, gUnk_09EDDE98Fr, gUnk_09EDDE98De, gUnk_09EDDE98It, gUnk_09EDDE98Es], lineCounts: [10, 10, 11, 10, 11]}
+  - {name: gUnkEu_08850724, record: JiminyLocalizedText, lines: [gJiminyAttackCardUltimaWeaponLines, gJiminyAttackCardUltimaWeaponLinesFrench, gJiminyAttackCardUltimaWeaponLinesGerman, gJiminyAttackCardUltimaWeaponLinesItalian, gJiminyAttackCardUltimaWeaponLinesSpanish], lineCounts: [10, 10, 11, 10, 11]}
   - gUnkEu_08850744
   - gUnkEu_0885075A
   - gUnkEu_08850771
@@ -8236,7 +8236,7 @@ entries:
   - gUnkEu_088508C4
   - gUnkEu_088508DA
   - gUnkEu_088508F1
-  - {name: gUnkEu_088508FC, record: JiminyLocalizedText, lines: [gUnk_09EDCCAC, gUnk_09EDCCACFr, gUnk_09EDCCACDe, gUnk_09EDCCACIt, gUnk_09EDCCACEs], lineCounts: [4, 4, 5, 6, 5]}
+  - {name: gUnkEu_088508FC, record: JiminyLocalizedText, lines: [gJiminyMagicCardFireLines, gJiminyMagicCardFireLinesFrench, gJiminyMagicCardFireLinesGerman, gJiminyMagicCardFireLinesItalian, gJiminyMagicCardFireLinesSpanish], lineCounts: [4, 4, 5, 6, 5]}
   - gUnkEu_0885091C
   - gUnkEu_08850931
   - gUnkEu_08850948
@@ -8260,7 +8260,7 @@ entries:
   - gUnkEu_08850AA6
   - gUnkEu_08850ABC
   - gUnkEu_08850AD4
-  - {name: gUnkEu_08850AE0, record: JiminyLocalizedText, lines: [gUnk_09EDCCBC, gUnk_09EDCCBCFr, gUnk_09EDCCBCDe, gUnk_09EDCCBCIt, gUnk_09EDCCBCEs], lineCounts: [4, 4, 4, 6, 5]}
+  - {name: gUnkEu_08850AE0, record: JiminyLocalizedText, lines: [gJiminyMagicCardBlizzardLines, gJiminyMagicCardBlizzardLinesFrench, gJiminyMagicCardBlizzardLinesGerman, gJiminyMagicCardBlizzardLinesItalian, gJiminyMagicCardBlizzardLinesSpanish], lineCounts: [4, 4, 4, 6, 5]}
   - gUnkEu_08850B00
   - gUnkEu_08850B11
   - gUnkEu_08850B2A
@@ -8286,7 +8286,7 @@ entries:
   - gUnkEu_08850C93
   - gUnkEu_08850CA9
   - gUnkEu_08850CBE
-  - {name: gUnkEu_08850CD0, record: JiminyLocalizedText, lines: [gUnk_09EDCCCC, gUnk_09EDCCCCFr, gUnk_09EDCCCCDe, gUnk_09EDCCCCIt, gUnk_09EDCCCCEs], lineCounts: [5, 4, 5, 6, 5]}
+  - {name: gUnkEu_08850CD0, record: JiminyLocalizedText, lines: [gJiminyMagicCardThunderLines, gJiminyMagicCardThunderLinesFrench, gJiminyMagicCardThunderLinesGerman, gJiminyMagicCardThunderLinesItalian, gJiminyMagicCardThunderLinesSpanish], lineCounts: [5, 4, 5, 6, 5]}
   - gUnkEu_08850CF0
   - gUnkEu_08850D08
   - gUnkEu_08850D1F
@@ -8307,7 +8307,7 @@ entries:
   - gUnkEu_08850E3C
   - gUnkEu_08850E53
   - gUnkEu_08850E6A
-  - {name: gUnkEu_08850E80, record: JiminyLocalizedText, lines: [gUnk_09EDCCE0, gUnk_09EDCCE0Fr, gUnk_09EDCCE0De, gUnk_09EDCCE0It, gUnk_09EDCCE0Es], lineCounts: [3, 4, 5, 4, 4]}
+  - {name: gUnkEu_08850E80, record: JiminyLocalizedText, lines: [gJiminyMagicCardCureLines, gJiminyMagicCardCureLinesFrench, gJiminyMagicCardCureLinesGerman, gJiminyMagicCardCureLinesItalian, gJiminyMagicCardCureLinesSpanish], lineCounts: [3, 4, 5, 4, 4]}
   - gUnkEu_08850EA0
   - gUnkEu_08850EB8
   - gUnkEu_08850ED0
@@ -8338,7 +8338,7 @@ entries:
   - gUnkEu_088510C9
   - gUnkEu_088510E1
   - gUnkEu_088510F7
-  - {name: gUnkEu_08851108, record: JiminyLocalizedText, lines: [gUnk_09EDCCEC, gUnk_09EDCCECFr, gUnk_09EDCCECDe, gUnk_09EDCCECIt, gUnk_09EDCCECEs], lineCounts: [5, 5, 7, 7, 6]}
+  - {name: gUnkEu_08851108, record: JiminyLocalizedText, lines: [gJiminyMagicCardGravityLines, gJiminyMagicCardGravityLinesFrench, gJiminyMagicCardGravityLinesGerman, gJiminyMagicCardGravityLinesItalian, gJiminyMagicCardGravityLinesSpanish], lineCounts: [5, 5, 7, 7, 6]}
   - gUnkEu_08851128
   - gUnkEu_0885113F
   - gUnkEu_08851152
@@ -8368,7 +8368,7 @@ entries:
   - gUnkEu_08851320
   - gUnkEu_08851336
   - gUnkEu_0885134D
-  - {name: gUnkEu_08851358, record: JiminyLocalizedText, lines: [gUnk_09EDCD00, gUnk_09EDCD00Fr, gUnk_09EDCD00De, gUnk_09EDCD00It, gUnk_09EDCD00Es], lineCounts: [5, 5, 7, 6, 6]}
+  - {name: gUnkEu_08851358, record: JiminyLocalizedText, lines: [gJiminyMagicCardStopLines, gJiminyMagicCardStopLinesFrench, gJiminyMagicCardStopLinesGerman, gJiminyMagicCardStopLinesItalian, gJiminyMagicCardStopLinesSpanish], lineCounts: [5, 5, 7, 6, 6]}
   - gUnkEu_08851378
   - gUnkEu_0885138E
   - gUnkEu_088513A1
@@ -8398,7 +8398,7 @@ entries:
   - gUnkEu_0885157D
   - gUnkEu_08851593
   - gUnkEu_088515AA
-  - {name: gUnkEu_088515B4, record: JiminyLocalizedText, lines: [gUnk_09EDCD14, gUnk_09EDCD14Fr, gUnk_09EDCD14De, gUnk_09EDCD14It, gUnk_09EDCD14Es], lineCounts: [5, 5, 7, 6, 6]}
+  - {name: gUnkEu_088515B4, record: JiminyLocalizedText, lines: [gJiminyMagicCardAeroLines, gJiminyMagicCardAeroLinesFrench, gJiminyMagicCardAeroLinesGerman, gJiminyMagicCardAeroLinesItalian, gJiminyMagicCardAeroLinesSpanish], lineCounts: [5, 5, 7, 6, 6]}
   - gUnkEu_088515D4
   - gUnkEu_088515EC
   - gUnkEu_08851603
@@ -8433,7 +8433,7 @@ entries:
   - gUnkEu_08851851
   - gUnkEu_08851867
   - gUnkEu_08851881
-  - {name: gUnkEu_0885188C, record: JiminyLocalizedText, lines: [gUnk_09EDCD28, gUnk_09EDCD28Fr, gUnk_09EDCD28De, gUnk_09EDCD28It, gUnk_09EDCD28Es], lineCounts: [6, 6, 8, 6, 8]}
+  - {name: gUnkEu_0885188C, record: JiminyLocalizedText, lines: [gJiminyMagicCardSimbaLines, gJiminyMagicCardSimbaLinesFrench, gJiminyMagicCardSimbaLinesGerman, gJiminyMagicCardSimbaLinesItalian, gJiminyMagicCardSimbaLinesSpanish], lineCounts: [6, 6, 8, 6, 8]}
   - gUnkEu_088518AC
   - gUnkEu_088518C2
   - gUnkEu_088518D6
@@ -8462,7 +8462,7 @@ entries:
   - gUnkEu_08851A9F
   - gUnkEu_08851AB4
   - gUnkEu_08851ACA
-  - {name: gUnkEu_08851ADC, record: JiminyLocalizedText, lines: [gUnk_09EDCD7C, gUnk_09EDCD7CFr, gUnk_09EDCD7CDe, gUnk_09EDCD7CIt, gUnk_09EDCD7CEs], lineCounts: [5, 5, 7, 5, 6]}
+  - {name: gUnkEu_08851ADC, record: JiminyLocalizedText, lines: [gJiminyMagicCardGenieLines, gJiminyMagicCardGenieLinesFrench, gJiminyMagicCardGenieLinesGerman, gJiminyMagicCardGenieLinesItalian, gJiminyMagicCardGenieLinesSpanish], lineCounts: [5, 5, 7, 5, 6]}
   - gUnkEu_08851AFC
   - gUnkEu_08851B10
   - gUnkEu_08851B23
@@ -8486,7 +8486,7 @@ entries:
   - gUnkEu_08851C9F
   - gUnkEu_08851CAD
   - gUnkEu_08851CC3
-  - {name: gUnkEu_08851CDC, record: JiminyLocalizedText, lines: [gUnk_09EDCD58, gUnk_09EDCD58Fr, gUnk_09EDCD58De, gUnk_09EDCD58It, gUnk_09EDCD58Es], lineCounts: [4, 4, 5, 5, 5]}
+  - {name: gUnkEu_08851CDC, record: JiminyLocalizedText, lines: [gJiminyMagicCardBambiLines, gJiminyMagicCardBambiLinesFrench, gJiminyMagicCardBambiLinesGerman, gJiminyMagicCardBambiLinesItalian, gJiminyMagicCardBambiLinesSpanish], lineCounts: [4, 4, 5, 5, 5]}
   - gUnkEu_08851CFC
   - gUnkEu_08851D11
   - gUnkEu_08851D27
@@ -8519,7 +8519,7 @@ entries:
   - gUnkEu_08851F30
   - gUnkEu_08851F46
   - gUnkEu_08851F59
-  - {name: gUnkEu_08851F64, record: JiminyLocalizedText, lines: [gUnk_09EDCD40, gUnk_09EDCD40Fr, gUnk_09EDCD40De, gUnk_09EDCD40It, gUnk_09EDCD40Es], lineCounts: [6, 6, 7, 6, 7]}
+  - {name: gUnkEu_08851F64, record: JiminyLocalizedText, lines: [gJiminyMagicCardDumboLines, gJiminyMagicCardDumboLinesFrench, gJiminyMagicCardDumboLinesGerman, gJiminyMagicCardDumboLinesItalian, gJiminyMagicCardDumboLinesSpanish], lineCounts: [6, 6, 7, 6, 7]}
   - gUnkEu_08851F84
   - gUnkEu_08851F9C
   - gUnkEu_08851FB4
@@ -8542,7 +8542,7 @@ entries:
   - gUnkEu_08852113
   - gUnkEu_08852126
   - gUnkEu_0885213B
-  - {name: gUnkEu_08852150, record: JiminyLocalizedText, lines: [gUnk_09EDCD90, gUnk_09EDCD90Fr, gUnk_09EDCD90De, gUnk_09EDCD90It, gUnk_09EDCD90Es], lineCounts: [4, 4, 5, 5, 4]}
+  - {name: gUnkEu_08852150, record: JiminyLocalizedText, lines: [gJiminyMagicCardTinkerBellLines, gJiminyMagicCardTinkerBellLinesFrench, gJiminyMagicCardTinkerBellLinesGerman, gJiminyMagicCardTinkerBellLinesItalian, gJiminyMagicCardTinkerBellLinesSpanish], lineCounts: [4, 4, 5, 5, 4]}
   - gUnkEu_08852170
   - gUnkEu_08852187
   - gUnkEu_0885219F
@@ -8572,7 +8572,7 @@ entries:
   - gUnkEu_08852364
   - gUnkEu_0885237A
   - gUnkEu_0885238E
-  - {name: gUnkEu_08852398, record: JiminyLocalizedText, lines: [gUnk_09EDCD68, gUnk_09EDCD68Fr, gUnk_09EDCD68De, gUnk_09EDCD68It, gUnk_09EDCD68Es], lineCounts: [5, 4, 8, 6, 6]}
+  - {name: gUnkEu_08852398, record: JiminyLocalizedText, lines: [gJiminyMagicCardMushuLines, gJiminyMagicCardMushuLinesFrench, gJiminyMagicCardMushuLinesGerman, gJiminyMagicCardMushuLinesItalian, gJiminyMagicCardMushuLinesSpanish], lineCounts: [5, 4, 8, 6, 6]}
   - gUnkEu_088523B8
   - gUnkEu_088523CC
   - gUnkEu_088523DD
@@ -8596,7 +8596,7 @@ entries:
   - gUnkEu_0885253E
   - gUnkEu_08852552
   - gUnkEu_08852568
-  - {name: gUnkEu_08852574, record: JiminyLocalizedText, lines: [gUnk_09EDCDA0, gUnk_09EDCDA0Fr, gUnk_09EDCDA0De, gUnk_09EDCDA0It, gUnk_09EDCDA0Es], lineCounts: [4, 4, 6, 4, 5]}
+  - {name: gUnkEu_08852574, record: JiminyLocalizedText, lines: [gJiminyMagicCardCloudLines, gJiminyMagicCardCloudLinesFrench, gJiminyMagicCardCloudLinesGerman, gJiminyMagicCardCloudLinesItalian, gJiminyMagicCardCloudLinesSpanish], lineCounts: [4, 4, 6, 4, 5]}
   - gUnkEu_08852594
   - gUnkEu_088525AB
   - gUnkEu_088525C0
@@ -8626,7 +8626,7 @@ entries:
   - gUnkEu_088527A9
   - gUnkEu_088527BA
   - gUnkEu_088527D2
-  - {name: gUnkEu_088527E4, record: JiminyLocalizedText, lines: [gUnk_09EDCDB0, gUnk_09EDCDB0Fr, gUnk_09EDCDB0De, gUnk_09EDCDB0It, gUnk_09EDCDB0Es], lineCounts: [5, 5, 7, 7, 5]}
+  - {name: gUnkEu_088527E4, record: JiminyLocalizedText, lines: [gJiminyItemCardPotionLines, gJiminyItemCardPotionLinesFrench, gJiminyItemCardPotionLinesGerman, gJiminyItemCardPotionLinesItalian, gJiminyItemCardPotionLinesSpanish], lineCounts: [5, 5, 7, 7, 5]}
   - gUnkEu_08852804
   - gUnkEu_0885281B
   - gUnkEu_08852830
@@ -8656,7 +8656,7 @@ entries:
   - gUnkEu_08852A1A
   - gUnkEu_08852A2A
   - gUnkEu_08852A3E
-  - {name: gUnkEu_08852A50, record: JiminyLocalizedText, lines: [gUnk_09EDCDC4, gUnk_09EDCDC4Fr, gUnk_09EDCDC4De, gUnk_09EDCDC4It, gUnk_09EDCDC4Es], lineCounts: [5, 5, 7, 7, 5]}
+  - {name: gUnkEu_08852A50, record: JiminyLocalizedText, lines: [gJiminyItemCardHiPotionLines, gJiminyItemCardHiPotionLinesFrench, gJiminyItemCardHiPotionLinesGerman, gJiminyItemCardHiPotionLinesItalian, gJiminyItemCardHiPotionLinesSpanish], lineCounts: [5, 5, 7, 7, 5]}
   - gUnkEu_08852A70
   - gUnkEu_08852A87
   - gUnkEu_08852A9C
@@ -8691,7 +8691,7 @@ entries:
   - gUnkEu_08852D0D
   - gUnkEu_08852D23
   - gUnkEu_08852D39
-  - {name: gUnkEu_08852D50, record: JiminyLocalizedText, lines: [gUnk_09EDCDD8, gUnk_09EDCDD8Fr, gUnk_09EDCDD8De, gUnk_09EDCDD8It, gUnk_09EDCDD8Es], lineCounts: [6, 6, 8, 8, 6]}
+  - {name: gUnkEu_08852D50, record: JiminyLocalizedText, lines: [gJiminyItemCardMegaPotionLines, gJiminyItemCardMegaPotionLinesFrench, gJiminyItemCardMegaPotionLinesGerman, gJiminyItemCardMegaPotionLinesItalian, gJiminyItemCardMegaPotionLinesSpanish], lineCounts: [6, 6, 8, 8, 6]}
   - gUnkEu_08852D70
   - gUnkEu_08852D86
   - gUnkEu_08852D9B
@@ -8721,7 +8721,7 @@ entries:
   - gUnkEu_08852F7B
   - gUnkEu_08852F8D
   - gUnkEu_08852FA5
-  - {name: gUnkEu_08852FB8, record: JiminyLocalizedText, lines: [gUnk_09EDCDF0, gUnk_09EDCDF0Fr, gUnk_09EDCDF0De, gUnk_09EDCDF0It, gUnk_09EDCDF0Es], lineCounts: [5, 5, 7, 7, 5]}
+  - {name: gUnkEu_08852FB8, record: JiminyLocalizedText, lines: [gJiminyItemCardEtherLines, gJiminyItemCardEtherLinesFrench, gJiminyItemCardEtherLinesGerman, gJiminyItemCardEtherLinesItalian, gJiminyItemCardEtherLinesSpanish], lineCounts: [5, 5, 7, 7, 5]}
   - gUnkEu_08852FD8
   - gUnkEu_08852FEE
   - gUnkEu_08853003
@@ -8756,7 +8756,7 @@ entries:
   - gUnkEu_0885326D
   - gUnkEu_08853282
   - gUnkEu_08853297
-  - {name: gUnkEu_088532A8, record: JiminyLocalizedText, lines: [gUnk_09EDCE04, gUnk_09EDCE04Fr, gUnk_09EDCE04De, gUnk_09EDCE04It, gUnk_09EDCE04Es], lineCounts: [6, 6, 8, 8, 6]}
+  - {name: gUnkEu_088532A8, record: JiminyLocalizedText, lines: [gJiminyItemCardMegaEtherLines, gJiminyItemCardMegaEtherLinesFrench, gJiminyItemCardMegaEtherLinesGerman, gJiminyItemCardMegaEtherLinesItalian, gJiminyItemCardMegaEtherLinesSpanish], lineCounts: [6, 6, 8, 8, 6]}
   - gUnkEu_088532C8
   - gUnkEu_088532DF
   - gUnkEu_088532F6
@@ -8780,7 +8780,7 @@ entries:
   - gUnkEu_08853467
   - gUnkEu_0885347C
   - gUnkEu_0885348F
-  - {name: gUnkEu_088534A4, record: JiminyLocalizedText, lines: [gUnk_09EDCE1C, gUnk_09EDCE1CFr, gUnk_09EDCE1CDe, gUnk_09EDCE1CIt, gUnk_09EDCE1CEs], lineCounts: [4, 5, 5, 5, 4]}
+  - {name: gUnkEu_088534A4, record: JiminyLocalizedText, lines: [gJiminyItemCardElixirLines, gJiminyItemCardElixirLinesFrench, gJiminyItemCardElixirLinesGerman, gJiminyItemCardElixirLinesItalian, gJiminyItemCardElixirLinesSpanish], lineCounts: [4, 5, 5, 5, 4]}
   - gUnkEu_088534C4
   - gUnkEu_088534DB
   - gUnkEu_088534F2
@@ -8814,7 +8814,7 @@ entries:
   - gUnkEu_08853716
   - gUnkEu_0885372A
   - gUnkEu_0885373D
-  - {name: gUnkEu_08853754, record: JiminyLocalizedText, lines: [gUnk_09EDCE2C, gUnk_09EDCE2CFr, gUnk_09EDCE2CDe, gUnk_09EDCE2CIt, gUnk_09EDCE2CEs], lineCounts: [6, 6, 8, 7, 6]}
+  - {name: gUnkEu_08853754, record: JiminyLocalizedText, lines: [gJiminyItemCardMegalixirLines, gJiminyItemCardMegalixirLinesFrench, gJiminyItemCardMegalixirLinesGerman, gJiminyItemCardMegalixirLinesItalian, gJiminyItemCardMegalixirLinesSpanish], lineCounts: [6, 6, 8, 7, 6]}
   - gUnkEu_08853774
   - gUnkEu_0885378A
   - gUnkEu_088537A3
@@ -8840,7 +8840,7 @@ entries:
   - gUnkEu_0885393B
   - gUnkEu_0885394F
   - gUnkEu_08853965
-  - {name: gUnkEu_08853980, record: JiminyLocalizedText, lines: [gUnk_09EDCE44, gUnk_09EDCE44Fr, gUnk_09EDCE44De, gUnk_09EDCE44It, gUnk_09EDCE44Es], lineCounts: [5, 4, 6, 5, 5]}
+  - {name: gUnkEu_08853980, record: JiminyLocalizedText, lines: [gJiminyFriendCardDonaldDuckLines, gJiminyFriendCardDonaldDuckLinesFrench, gJiminyFriendCardDonaldDuckLinesGerman, gJiminyFriendCardDonaldDuckLinesItalian, gJiminyFriendCardDonaldDuckLinesSpanish], lineCounts: [5, 4, 6, 5, 5]}
   - gUnkEu_088539A0
   - gUnkEu_088539B8
   - gUnkEu_088539CD
@@ -8867,7 +8867,7 @@ entries:
   - gUnkEu_08853B65
   - gUnkEu_08853B76
   - gUnkEu_08853B8E
-  - {name: gUnkEu_08853B98, record: JiminyLocalizedText, lines: [gUnk_09EDCE58, gUnk_09EDCE58Fr, gUnk_09EDCE58De, gUnk_09EDCE58It, gUnk_09EDCE58Es], lineCounts: [4, 4, 7, 5, 6]}
+  - {name: gUnkEu_08853B98, record: JiminyLocalizedText, lines: [gJiminyFriendCardGoofyLines, gJiminyFriendCardGoofyLinesFrench, gJiminyFriendCardGoofyLinesGerman, gJiminyFriendCardGoofyLinesItalian, gJiminyFriendCardGoofyLinesSpanish], lineCounts: [4, 4, 7, 5, 6]}
   - gUnkEu_08853BB8
   - gUnkEu_08853BCB
   - gUnkEu_08853BDE
@@ -8894,7 +8894,7 @@ entries:
   - gUnkEu_08853D72
   - gUnkEu_08853D85
   - gUnkEu_08853D96
-  - {name: gUnkEu_08853DAC, record: JiminyLocalizedText, lines: [gUnk_09EDCE68, gUnk_09EDCE68Fr, gUnk_09EDCE68De, gUnk_09EDCE68It, gUnk_09EDCE68Es], lineCounts: [5, 4, 7, 5, 5]}
+  - {name: gUnkEu_08853DAC, record: JiminyLocalizedText, lines: [gJiminyFriendCardAladdinLines, gJiminyFriendCardAladdinLinesFrench, gJiminyFriendCardAladdinLinesGerman, gJiminyFriendCardAladdinLinesItalian, gJiminyFriendCardAladdinLinesSpanish], lineCounts: [5, 4, 7, 5, 5]}
   - gUnkEu_08853DCC
   - gUnkEu_08853DE4
   - gUnkEu_08853DF9
@@ -8922,7 +8922,7 @@ entries:
   - gUnkEu_08853FA7
   - gUnkEu_08853FBB
   - gUnkEu_08853FCC
-  - {name: gUnkEu_08853FE4, record: JiminyLocalizedText, lines: [gUnk_09EDCE90, gUnk_09EDCE90Fr, gUnk_09EDCE90De, gUnk_09EDCE90It, gUnk_09EDCE90Es], lineCounts: [5, 4, 8, 5, 5]}
+  - {name: gUnkEu_08853FE4, record: JiminyLocalizedText, lines: [gJiminyFriendCardArielLines, gJiminyFriendCardArielLinesFrench, gJiminyFriendCardArielLinesGerman, gJiminyFriendCardArielLinesItalian, gJiminyFriendCardArielLinesSpanish], lineCounts: [5, 4, 8, 5, 5]}
   - gUnkEu_08854004
   - gUnkEu_08854015
   - gUnkEu_0885402B
@@ -8949,7 +8949,7 @@ entries:
   - gUnkEu_088541BF
   - gUnkEu_088541D3
   - gUnkEu_088541E6
-  - {name: gUnkEu_088541F8, record: JiminyLocalizedText, lines: [gUnk_09EDCE7C, gUnk_09EDCE7CFr, gUnk_09EDCE7CDe, gUnk_09EDCE7CIt, gUnk_09EDCE7CEs], lineCounts: [5, 4, 7, 5, 5]}
+  - {name: gUnkEu_088541F8, record: JiminyLocalizedText, lines: [gJiminyFriendCardJackLines, gJiminyFriendCardJackLinesFrench, gJiminyFriendCardJackLinesGerman, gJiminyFriendCardJackLinesItalian, gJiminyFriendCardJackLinesSpanish], lineCounts: [5, 4, 7, 5, 5]}
   - gUnkEu_08854218
   - gUnkEu_0885422F
   - gUnkEu_08854247
@@ -8973,7 +8973,7 @@ entries:
   - gUnkEu_0885439C
   - gUnkEu_088543AF
   - gUnkEu_088543C0
-  - {name: gUnkEu_088543D8, record: JiminyLocalizedText, lines: [gUnk_09EDCEA4, gUnk_09EDCEA4Fr, gUnk_09EDCEA4De, gUnk_09EDCEA4It, gUnk_09EDCEA4Es], lineCounts: [4, 4, 6, 5, 4]}
+  - {name: gUnkEu_088543D8, record: JiminyLocalizedText, lines: [gJiminyFriendCardPeterPanLines, gJiminyFriendCardPeterPanLinesFrench, gJiminyFriendCardPeterPanLinesGerman, gJiminyFriendCardPeterPanLinesItalian, gJiminyFriendCardPeterPanLinesSpanish], lineCounts: [4, 4, 6, 5, 4]}
   - gUnkEu_088543F8
   - gUnkEu_0885440C
   - gUnkEu_08854423
@@ -9000,7 +9000,7 @@ entries:
   - gUnkEu_088545BB
   - gUnkEu_088545D1
   - gUnkEu_088545E1
-  - {name: gUnkEu_088545F8, record: JiminyLocalizedText, lines: [gUnk_09EDCEB4, gUnk_09EDCEB4Fr, gUnk_09EDCEB4De, gUnk_09EDCEB4It, gUnk_09EDCEB4Es], lineCounts: [5, 4, 5, 7, 5]}
+  - {name: gUnkEu_088545F8, record: JiminyLocalizedText, lines: [gJiminyFriendCardBeastLines, gJiminyFriendCardBeastLinesFrench, gJiminyFriendCardBeastLinesGerman, gJiminyFriendCardBeastLinesItalian, gJiminyFriendCardBeastLinesSpanish], lineCounts: [5, 4, 5, 7, 5]}
   - gUnkEu_08854618
   - gUnkEu_08854626
   - gUnkEu_0885463C
@@ -9027,7 +9027,7 @@ entries:
   - gUnkEu_0885476C
   - gUnkEu_08854783
   - gUnkEu_08854785
-  - {name: gUnkEu_0885479C, record: JiminyLocalizedText, lines: [gUnk_09EDCEC8, gUnk_09EDCEC8Fr, gUnk_09EDCEC8De, gUnk_09EDCEC8It, gUnk_09EDCEC8Es], lineCounts: [5, 5, 5, 6, 5]}
+  - {name: gUnkEu_0885479C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardShadowLines, gJiminyEnemyCardShadowLinesFrench, gJiminyEnemyCardShadowLinesGerman, gJiminyEnemyCardShadowLinesItalian, gJiminyEnemyCardShadowLinesSpanish], lineCounts: [5, 5, 5, 6, 5]}
   - gUnkEu_088547BC
   - gUnkEu_088547C9
   - gUnkEu_088547DF
@@ -9055,7 +9055,7 @@ entries:
   - gUnkEu_08854921
   - gUnkEu_08854927
   - gUnkEu_08854929
-  - {name: gUnkEu_08854940, record: JiminyLocalizedText, lines: [gUnk_09EDCF08, gUnk_09EDCF08Fr, gUnk_09EDCF08De, gUnk_09EDCF08It, gUnk_09EDCF08Es], lineCounts: [5, 5, 6, 5, 6]}
+  - {name: gUnkEu_08854940, record: JiminyLocalizedText, lines: [gJiminyEnemyCardRedNocturneLines, gJiminyEnemyCardRedNocturneLinesFrench, gJiminyEnemyCardRedNocturneLinesGerman, gJiminyEnemyCardRedNocturneLinesItalian, gJiminyEnemyCardRedNocturneLinesSpanish], lineCounts: [5, 5, 6, 5, 6]}
   - gUnkEu_08854960
   - gUnkEu_08854971
   - gUnkEu_08854987
@@ -9082,7 +9082,7 @@ entries:
   - gUnkEu_08854AD1
   - gUnkEu_08854AD8
   - gUnkEu_08854ADA
-  - {name: gUnkEu_08854AF0, record: JiminyLocalizedText, lines: [gUnk_09EDCF1C, gUnk_09EDCF1CFr, gUnk_09EDCF1CDe, gUnk_09EDCF1CIt, gUnk_09EDCF1CEs], lineCounts: [5, 5, 5, 5, 6]}
+  - {name: gUnkEu_08854AF0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardBlueRhapsodyLines, gJiminyEnemyCardBlueRhapsodyLinesFrench, gJiminyEnemyCardBlueRhapsodyLinesGerman, gJiminyEnemyCardBlueRhapsodyLinesItalian, gJiminyEnemyCardBlueRhapsodyLinesSpanish], lineCounts: [5, 5, 5, 5, 6]}
   - gUnkEu_08854B10
   - gUnkEu_08854B20
   - gUnkEu_08854B36
@@ -9110,7 +9110,7 @@ entries:
   - gUnkEu_08854C84
   - gUnkEu_08854C8D
   - gUnkEu_08854C8F
-  - {name: gUnkEu_08854CA4, record: JiminyLocalizedText, lines: [gUnk_09EDCF30, gUnk_09EDCF30Fr, gUnk_09EDCF30De, gUnk_09EDCF30It, gUnk_09EDCF30Es], lineCounts: [5, 5, 6, 5, 6]}
+  - {name: gUnkEu_08854CA4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardYellowOperaLines, gJiminyEnemyCardYellowOperaLinesFrench, gJiminyEnemyCardYellowOperaLinesGerman, gJiminyEnemyCardYellowOperaLinesItalian, gJiminyEnemyCardYellowOperaLinesSpanish], lineCounts: [5, 5, 6, 5, 6]}
   - gUnkEu_08854CC4
   - gUnkEu_08854CD1
   - gUnkEu_08854CE6
@@ -9138,7 +9138,7 @@ entries:
   - gUnkEu_08854E19
   - gUnkEu_08854E1F
   - gUnkEu_08854E21
-  - {name: gUnkEu_08854E38, record: JiminyLocalizedText, lines: [gUnk_09EDCF44, gUnk_09EDCF44Fr, gUnk_09EDCF44De, gUnk_09EDCF44It, gUnk_09EDCF44Es], lineCounts: [5, 5, 6, 5, 6]}
+  - {name: gUnkEu_08854E38, record: JiminyLocalizedText, lines: [gJiminyEnemyCardGreenRequiemLines, gJiminyEnemyCardGreenRequiemLinesFrench, gJiminyEnemyCardGreenRequiemLinesGerman, gJiminyEnemyCardGreenRequiemLinesItalian, gJiminyEnemyCardGreenRequiemLinesSpanish], lineCounts: [5, 5, 6, 5, 6]}
   - gUnkEu_08854E58
   - gUnkEu_08854E68
   - gUnkEu_08854E7D
@@ -9167,7 +9167,7 @@ entries:
   - gUnkEu_08854FD7
   - gUnkEu_08854FE1
   - gUnkEu_08854FE3
-  - {name: gUnkEu_08854FF8, record: JiminyLocalizedText, lines: [gUnk_09EDCFE0, gUnk_09EDCFE0Fr, gUnk_09EDCFE0De, gUnk_09EDCFE0It, gUnk_09EDCFE0Es], lineCounts: [5, 6, 6, 5, 6]}
+  - {name: gUnkEu_08854FF8, record: JiminyLocalizedText, lines: [gJiminyEnemyCardSeaNeonLines, gJiminyEnemyCardSeaNeonLinesFrench, gJiminyEnemyCardSeaNeonLinesGerman, gJiminyEnemyCardSeaNeonLinesItalian, gJiminyEnemyCardSeaNeonLinesSpanish], lineCounts: [5, 6, 6, 5, 6]}
   - gUnkEu_08855018
   - gUnkEu_08855028
   - gUnkEu_0885503E
@@ -9199,7 +9199,7 @@ entries:
   - gUnkEu_088551E0
   - gUnkEu_088551EE
   - gUnkEu_088551F0
-  - {name: gUnkEu_08855208, record: JiminyLocalizedText, lines: [gUnk_09EDD0D4, gUnk_09EDD0D4Fr, gUnk_09EDD0D4De, gUnk_09EDD0D4It, gUnk_09EDD0D4Es], lineCounts: [6, 6, 7, 6, 6]}
+  - {name: gUnkEu_08855208, record: JiminyLocalizedText, lines: [gJiminyEnemyCardWhiteMushroomLines, gJiminyEnemyCardWhiteMushroomLinesFrench, gJiminyEnemyCardWhiteMushroomLinesGerman, gJiminyEnemyCardWhiteMushroomLinesItalian, gJiminyEnemyCardWhiteMushroomLinesSpanish], lineCounts: [6, 6, 7, 6, 6]}
   - gUnkEu_08855228
   - gUnkEu_08855237
   - gUnkEu_08855249
@@ -9226,7 +9226,7 @@ entries:
   - gUnkEu_08855380
   - gUnkEu_0885538F
   - gUnkEu_08855391
-  - {name: gUnkEu_088553A8, record: JiminyLocalizedText, lines: [gUnk_09EDD0EC, gUnk_09EDD0ECFr, gUnk_09EDD0ECDe, gUnk_09EDD0ECIt, gUnk_09EDD0ECEs], lineCounts: [5, 5, 6, 5, 5]}
+  - {name: gUnkEu_088553A8, record: JiminyLocalizedText, lines: [gJiminyEnemyCardBlackFungusLines, gJiminyEnemyCardBlackFungusLinesFrench, gJiminyEnemyCardBlackFungusLinesGerman, gJiminyEnemyCardBlackFungusLinesItalian, gJiminyEnemyCardBlackFungusLinesSpanish], lineCounts: [5, 5, 6, 5, 5]}
   - gUnkEu_088553C8
   - gUnkEu_088553D5
   - gUnkEu_088553E9
@@ -9253,7 +9253,7 @@ entries:
   - gUnkEu_08855517
   - gUnkEu_0885552E
   - gUnkEu_08855530
-  - {name: gUnkEu_08855548, record: JiminyLocalizedText, lines: [gUnk_09EDCEDC, gUnk_09EDCEDCFr, gUnk_09EDCEDCDe, gUnk_09EDCEDCIt, gUnk_09EDCEDCEs], lineCounts: [5, 5, 6, 5, 5]}
+  - {name: gUnkEu_08855548, record: JiminyLocalizedText, lines: [gJiminyEnemyCardSoldierLines, gJiminyEnemyCardSoldierLinesFrench, gJiminyEnemyCardSoldierLinesGerman, gJiminyEnemyCardSoldierLinesItalian, gJiminyEnemyCardSoldierLinesSpanish], lineCounts: [5, 5, 6, 5, 5]}
   - gUnkEu_08855568
   - gUnkEu_08855575
   - gUnkEu_0885558B
@@ -9294,7 +9294,7 @@ entries:
   - gUnkEu_08855804
   - gUnkEu_0885581C
   - gUnkEu_0885581E
-  - {name: gUnkEu_08855834, record: JiminyLocalizedText, lines: [gUnk_09EDCF58, gUnk_09EDCF58Fr, gUnk_09EDCF58De, gUnk_09EDCF58It, gUnk_09EDCF58Es], lineCounts: [8, 8, 8, 8, 8]}
+  - {name: gUnkEu_08855834, record: JiminyLocalizedText, lines: [gJiminyEnemyCardPowerwildLines, gJiminyEnemyCardPowerwildLinesFrench, gJiminyEnemyCardPowerwildLinesGerman, gJiminyEnemyCardPowerwildLinesItalian, gJiminyEnemyCardPowerwildLinesSpanish], lineCounts: [8, 8, 8, 8, 8]}
   - gUnkEu_08855854
   - gUnkEu_0885585B
   - gUnkEu_08855870
@@ -9326,7 +9326,7 @@ entries:
   - gUnkEu_088559EE
   - gUnkEu_088559FB
   - gUnkEu_088559FD
-  - {name: gUnkEu_08855A14, record: JiminyLocalizedText, lines: [gUnk_09EDCF78, gUnk_09EDCF78Fr, gUnk_09EDCF78De, gUnk_09EDCF78It, gUnk_09EDCF78Es], lineCounts: [6, 5, 7, 6, 7]}
+  - {name: gUnkEu_08855A14, record: JiminyLocalizedText, lines: [gJiminyEnemyCardBouncywildLines, gJiminyEnemyCardBouncywildLinesFrench, gJiminyEnemyCardBouncywildLinesGerman, gJiminyEnemyCardBouncywildLinesItalian, gJiminyEnemyCardBouncywildLinesSpanish], lineCounts: [6, 5, 7, 6, 7]}
   - gUnkEu_08855A34
   - gUnkEu_08855A45
   - gUnkEu_08855A5D
@@ -9353,7 +9353,7 @@ entries:
   - gUnkEu_08855BAC
   - gUnkEu_08855BB8
   - gUnkEu_08855BBA
-  - {name: gUnkEu_08855BD0, record: JiminyLocalizedText, lines: [gUnk_09EDCF90, gUnk_09EDCF90Fr, gUnk_09EDCF90De, gUnk_09EDCF90It, gUnk_09EDCF90Es], lineCounts: [4, 5, 6, 5, 6]}
+  - {name: gUnkEu_08855BD0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardAirSoldierLines, gJiminyEnemyCardAirSoldierLinesFrench, gJiminyEnemyCardAirSoldierLinesGerman, gJiminyEnemyCardAirSoldierLinesItalian, gJiminyEnemyCardAirSoldierLinesSpanish], lineCounts: [4, 5, 6, 5, 6]}
   - gUnkEu_08855BF0
   - gUnkEu_08855BFF
   - gUnkEu_08855C16
@@ -9385,7 +9385,7 @@ entries:
   - gUnkEu_08855DBC
   - gUnkEu_08855DCD
   - gUnkEu_08855DCF
-  - {name: gUnkEu_08855DE4, record: JiminyLocalizedText, lines: [gUnk_09EDCFA0, gUnk_09EDCFA0Fr, gUnk_09EDCFA0De, gUnk_09EDCFA0It, gUnk_09EDCFA0Es], lineCounts: [6, 6, 7, 6, 6]}
+  - {name: gUnkEu_08855DE4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardBanditLines, gJiminyEnemyCardBanditLinesFrench, gJiminyEnemyCardBanditLinesGerman, gJiminyEnemyCardBanditLinesItalian, gJiminyEnemyCardBanditLinesSpanish], lineCounts: [6, 6, 7, 6, 6]}
   - gUnkEu_08855E04
   - gUnkEu_08855E10
   - gUnkEu_08855E28
@@ -9410,7 +9410,7 @@ entries:
   - gUnkEu_08855F40
   - gUnkEu_08855F52
   - gUnkEu_08855F54
-  - {name: gUnkEu_08855F6C, record: JiminyLocalizedText, lines: [gUnk_09EDCFD0, gUnk_09EDCFD0Fr, gUnk_09EDCFD0De, gUnk_09EDCFD0It, gUnk_09EDCFD0Es], lineCounts: [4, 5, 5, 5, 5]}
+  - {name: gUnkEu_08855F6C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardBarrelSpiderLines, gJiminyEnemyCardBarrelSpiderLinesFrench, gJiminyEnemyCardBarrelSpiderLinesGerman, gJiminyEnemyCardBarrelSpiderLinesItalian, gJiminyEnemyCardBarrelSpiderLinesSpanish], lineCounts: [4, 5, 5, 5, 5]}
   - gUnkEu_08855F8C
   - gUnkEu_08855F94
   - gUnkEu_08855FA9
@@ -9449,7 +9449,7 @@ entries:
   - gUnkEu_088561DF
   - gUnkEu_088561EC
   - gUnkEu_088561EE
-  - {name: gUnkEu_08856204, record: JiminyLocalizedText, lines: [gUnk_09EDDDD0, gUnk_09EDDDD0Fr, gUnk_09EDDDD0De, gUnk_09EDDDD0It, gUnk_09EDDDD0Es], lineCounts: [7, 7, 8, 8, 8]}
+  - {name: gUnkEu_08856204, record: JiminyLocalizedText, lines: [gJiminyEnemyCardSearchGhostLines, gJiminyEnemyCardSearchGhostLinesFrench, gJiminyEnemyCardSearchGhostLinesGerman, gJiminyEnemyCardSearchGhostLinesItalian, gJiminyEnemyCardSearchGhostLinesSpanish], lineCounts: [7, 7, 8, 8, 8]}
   - gUnkEu_08856224
   - gUnkEu_08856232
   - gUnkEu_08856249
@@ -9475,7 +9475,7 @@ entries:
   - gUnkEu_0885637B
   - gUnkEu_08856392
   - gUnkEu_08856394
-  - {name: gUnkEu_088563AC, record: JiminyLocalizedText, lines: [gUnk_09EDCFF4, gUnk_09EDCFF4Fr, gUnk_09EDCFF4De, gUnk_09EDCFF4It, gUnk_09EDCFF4Es], lineCounts: [5, 5, 5, 5, 5]}
+  - {name: gUnkEu_088563AC, record: JiminyLocalizedText, lines: [gJiminyEnemyCardScrewdiverLines, gJiminyEnemyCardScrewdiverLinesFrench, gJiminyEnemyCardScrewdiverLinesGerman, gJiminyEnemyCardScrewdiverLinesItalian, gJiminyEnemyCardScrewdiverLinesSpanish], lineCounts: [5, 5, 5, 5, 5]}
   - gUnkEu_088563CC
   - gUnkEu_088563D4
   - gUnkEu_088563E5
@@ -9506,7 +9506,7 @@ entries:
   - gUnkEu_08856559
   - gUnkEu_08856563
   - gUnkEu_08856565
-  - {name: gUnkEu_0885657C, record: JiminyLocalizedText, lines: [gUnk_09EDD020, gUnk_09EDD020Fr, gUnk_09EDD020De, gUnk_09EDD020It, gUnk_09EDD020Es], lineCounts: [5, 5, 8, 6, 6]}
+  - {name: gUnkEu_0885657C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardWightKnightLines, gJiminyEnemyCardWightKnightLinesFrench, gJiminyEnemyCardWightKnightLinesGerman, gJiminyEnemyCardWightKnightLinesItalian, gJiminyEnemyCardWightKnightLinesSpanish], lineCounts: [5, 5, 8, 6, 6]}
   - gUnkEu_0885659C
   - gUnkEu_088565A5
   - gUnkEu_088565BA
@@ -9537,7 +9537,7 @@ entries:
   - gUnkEu_08856738
   - gUnkEu_08856749
   - gUnkEu_0885674B
-  - {name: gUnkEu_08856760, record: JiminyLocalizedText, lines: [gUnk_09EDD034, gUnk_09EDD034Fr, gUnk_09EDD034De, gUnk_09EDD034It, gUnk_09EDD034Es], lineCounts: [6, 6, 6, 6, 6]}
+  - {name: gUnkEu_08856760, record: JiminyLocalizedText, lines: [gJiminyEnemyCardGargoyleLines, gJiminyEnemyCardGargoyleLinesFrench, gJiminyEnemyCardGargoyleLinesGerman, gJiminyEnemyCardGargoyleLinesItalian, gJiminyEnemyCardGargoyleLinesSpanish], lineCounts: [6, 6, 6, 6, 6]}
   - gUnkEu_08856780
   - gUnkEu_0885678C
   - gUnkEu_088567A1
@@ -9563,7 +9563,7 @@ entries:
   - gUnkEu_088568CF
   - gUnkEu_088568E6
   - gUnkEu_088568E8
-  - {name: gUnkEu_08856900, record: JiminyLocalizedText, lines: [gUnk_09EDD04C, gUnk_09EDD04CFr, gUnk_09EDD04CDe, gUnk_09EDD04CIt, gUnk_09EDD04CEs], lineCounts: [5, 5, 5, 5, 5]}
+  - {name: gUnkEu_08856900, record: JiminyLocalizedText, lines: [gJiminyEnemyCardPirateLines, gJiminyEnemyCardPirateLinesFrench, gJiminyEnemyCardPirateLinesGerman, gJiminyEnemyCardPirateLinesItalian, gJiminyEnemyCardPirateLinesSpanish], lineCounts: [5, 5, 5, 5, 5]}
   - gUnkEu_08856920
   - gUnkEu_0885692E
   - gUnkEu_08856940
@@ -9594,7 +9594,7 @@ entries:
   - gUnkEu_08856AD3
   - gUnkEu_08856AE4
   - gUnkEu_08856AE6
-  - {name: gUnkEu_08856AFC, record: JiminyLocalizedText, lines: [gUnk_09EDD060, gUnk_09EDD060Fr, gUnk_09EDD060De, gUnk_09EDD060It, gUnk_09EDD060Es], lineCounts: [6, 6, 6, 6, 6]}
+  - {name: gUnkEu_08856AFC, record: JiminyLocalizedText, lines: [gJiminyEnemyCardAirPirateLines, gJiminyEnemyCardAirPirateLinesFrench, gJiminyEnemyCardAirPirateLinesGerman, gJiminyEnemyCardAirPirateLinesItalian, gJiminyEnemyCardAirPirateLinesSpanish], lineCounts: [6, 6, 6, 6, 6]}
   - gUnkEu_08856B1C
   - gUnkEu_08856B28
   - gUnkEu_08856B40
@@ -9621,7 +9621,7 @@ entries:
   - gUnkEu_08856C91
   - gUnkEu_08856C9B
   - gUnkEu_08856C9D
-  - {name: gUnkEu_08856CB4, record: JiminyLocalizedText, lines: [gUnk_09EDD078, gUnk_09EDD078Fr, gUnk_09EDD078De, gUnk_09EDD078It, gUnk_09EDD078Es], lineCounts: [5, 5, 5, 5, 6]}
+  - {name: gUnkEu_08856CB4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardDarkballLines, gJiminyEnemyCardDarkballLinesFrench, gJiminyEnemyCardDarkballLinesGerman, gJiminyEnemyCardDarkballLinesItalian, gJiminyEnemyCardDarkballLinesSpanish], lineCounts: [5, 5, 5, 5, 6]}
   - gUnkEu_08856CD4
   - gUnkEu_08856CE2
   - gUnkEu_08856CF1
@@ -9652,7 +9652,7 @@ entries:
   - gUnkEu_08856E84
   - gUnkEu_08856E99
   - gUnkEu_08856E9B
-  - {name: gUnkEu_08856EB4, record: JiminyLocalizedText, lines: [gUnk_09EDDDEC, gUnk_09EDDDECFr, gUnk_09EDDDECDe, gUnk_09EDDDECIt, gUnk_09EDDDECEs], lineCounts: [6, 5, 7, 6, 6]}
+  - {name: gUnkEu_08856EB4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardWyvernLines, gJiminyEnemyCardWyvernLinesFrench, gJiminyEnemyCardWyvernLinesGerman, gJiminyEnemyCardWyvernLinesItalian, gJiminyEnemyCardWyvernLinesSpanish], lineCounts: [6, 5, 7, 6, 6]}
   - gUnkEu_08856ED4
   - gUnkEu_08856EE2
   - gUnkEu_08856EF6
@@ -9687,7 +9687,7 @@ entries:
   - gUnkEu_088570B8
   - gUnkEu_088570C1
   - gUnkEu_088570C3
-  - {name: gUnkEu_088570D8, record: JiminyLocalizedText, lines: [gUnk_09EDD0A8, gUnk_09EDD0A8Fr, gUnk_09EDD0A8De, gUnk_09EDD0A8It, gUnk_09EDD0A8Es], lineCounts: [6, 6, 8, 7, 7]}
+  - {name: gUnkEu_088570D8, record: JiminyLocalizedText, lines: [gJiminyEnemyCardWizardLines, gJiminyEnemyCardWizardLinesFrench, gJiminyEnemyCardWizardLinesGerman, gJiminyEnemyCardWizardLinesItalian, gJiminyEnemyCardWizardLinesSpanish], lineCounts: [6, 6, 8, 7, 7]}
   - gUnkEu_088570F8
   - gUnkEu_088570FE
   - gUnkEu_08857113
@@ -9714,7 +9714,7 @@ entries:
   - gUnkEu_0885721C
   - gUnkEu_0885722A
   - gUnkEu_0885722C
-  - {name: gUnkEu_08857244, record: JiminyLocalizedText, lines: [gUnk_09EDD0C0, gUnk_09EDD0C0Fr, gUnk_09EDD0C0De, gUnk_09EDD0C0It, gUnk_09EDD0C0Es], lineCounts: [5, 5, 5, 5, 6]}
+  - {name: gUnkEu_08857244, record: JiminyLocalizedText, lines: [gJiminyEnemyCardNeoshadowLines, gJiminyEnemyCardNeoshadowLinesFrench, gJiminyEnemyCardNeoshadowLinesGerman, gJiminyEnemyCardNeoshadowLinesItalian, gJiminyEnemyCardNeoshadowLinesSpanish], lineCounts: [5, 5, 5, 5, 6]}
   - gUnkEu_08857264
   - gUnkEu_0885726C
   - gUnkEu_08857285
@@ -9746,7 +9746,7 @@ entries:
   - gUnkEu_08857430
   - gUnkEu_0885743A
   - gUnkEu_0885743C
-  - {name: gUnkEu_08857454, record: JiminyLocalizedText, lines: [gUnk_09EDCEF0, gUnk_09EDCEF0Fr, gUnk_09EDCEF0De, gUnk_09EDCEF0It, gUnk_09EDCEF0Es], lineCounts: [6, 6, 6, 6, 7]}
+  - {name: gUnkEu_08857454, record: JiminyLocalizedText, lines: [gJiminyEnemyCardLargeBodyLines, gJiminyEnemyCardLargeBodyLinesFrench, gJiminyEnemyCardLargeBodyLinesGerman, gJiminyEnemyCardLargeBodyLinesItalian, gJiminyEnemyCardLargeBodyLinesSpanish], lineCounts: [6, 6, 6, 6, 7]}
   - gUnkEu_08857474
   - gUnkEu_08857482
   - gUnkEu_08857497
@@ -9777,7 +9777,7 @@ entries:
   - gUnkEu_08857628
   - gUnkEu_08857638
   - gUnkEu_0885763A
-  - {name: gUnkEu_08857650, record: JiminyLocalizedText, lines: [gUnk_09EDCFB8, gUnk_09EDCFB8Fr, gUnk_09EDCFB8De, gUnk_09EDCFB8It, gUnk_09EDCFB8Es], lineCounts: [6, 6, 6, 6, 6]}
+  - {name: gUnkEu_08857650, record: JiminyLocalizedText, lines: [gJiminyEnemyCardFatBanditLines, gJiminyEnemyCardFatBanditLinesFrench, gJiminyEnemyCardFatBanditLinesGerman, gJiminyEnemyCardFatBanditLinesItalian, gJiminyEnemyCardFatBanditLinesSpanish], lineCounts: [6, 6, 6, 6, 6]}
   - gUnkEu_08857670
   - gUnkEu_0885767E
   - gUnkEu_08857693
@@ -9809,7 +9809,7 @@ entries:
   - gUnkEu_0885781F
   - gUnkEu_08857831
   - gUnkEu_08857833
-  - {name: gUnkEu_08857848, record: JiminyLocalizedText, lines: [gUnk_09EDD008, gUnk_09EDD008Fr, gUnk_09EDD008De, gUnk_09EDD008It, gUnk_09EDD008Es], lineCounts: [6, 6, 7, 6, 6]}
+  - {name: gUnkEu_08857848, record: JiminyLocalizedText, lines: [gJiminyEnemyCardAquatankLines, gJiminyEnemyCardAquatankLinesFrench, gJiminyEnemyCardAquatankLinesGerman, gJiminyEnemyCardAquatankLinesItalian, gJiminyEnemyCardAquatankLinesSpanish], lineCounts: [6, 6, 7, 6, 6]}
   - gUnkEu_08857868
   - gUnkEu_08857872
   - gUnkEu_08857887
@@ -9847,7 +9847,7 @@ entries:
   - gUnkEu_08857AA4
   - gUnkEu_08857ABB
   - gUnkEu_08857ABD
-  - {name: gUnkEu_08857AD4, record: JiminyLocalizedText, lines: [gUnk_09EDD08C, gUnk_09EDD08CFr, gUnk_09EDD08CDe, gUnk_09EDD08CIt, gUnk_09EDD08CEs], lineCounts: [7, 8, 8, 7, 7]}
+  - {name: gUnkEu_08857AD4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardDefenderLines, gJiminyEnemyCardDefenderLinesFrench, gJiminyEnemyCardDefenderLinesGerman, gJiminyEnemyCardDefenderLinesItalian, gJiminyEnemyCardDefenderLinesSpanish], lineCounts: [7, 8, 8, 7, 7]}
   - gUnkEu_08857AF4
   - gUnkEu_08857B03
   - gUnkEu_08857B17
@@ -9873,7 +9873,7 @@ entries:
   - gUnkEu_08857C50
   - gUnkEu_08857C5D
   - gUnkEu_08857C5F
-  - {name: gUnkEu_08857C74, record: JiminyLocalizedText, lines: [gUnk_09EDDE04, gUnk_09EDDE04Fr, gUnk_09EDDE04De, gUnk_09EDDE04It, gUnk_09EDDE04Es], lineCounts: [5, 5, 5, 5, 5]}
+  - {name: gUnkEu_08857C74, record: JiminyLocalizedText, lines: [gJiminyEnemyCardTornadoStepLines, gJiminyEnemyCardTornadoStepLinesFrench, gJiminyEnemyCardTornadoStepLinesGerman, gJiminyEnemyCardTornadoStepLinesItalian, gJiminyEnemyCardTornadoStepLinesSpanish], lineCounts: [5, 5, 5, 5, 5]}
   - gUnkEu_08857C94
   - gUnkEu_08857CA3
   - gUnkEu_08857CBA
@@ -9907,7 +9907,7 @@ entries:
   - gUnkEu_08857E79
   - gUnkEu_08857E8C
   - gUnkEu_08857E8E
-  - {name: gUnkEu_08857EA4, record: JiminyLocalizedText, lines: [gUnk_09EDD118, gUnk_09EDD118Fr, gUnk_09EDD118De, gUnk_09EDD118It, gUnk_09EDD118Es], lineCounts: [6, 6, 8, 7, 6]}
+  - {name: gUnkEu_08857EA4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardCrescendoLines, gJiminyEnemyCardCrescendoLinesFrench, gJiminyEnemyCardCrescendoLinesGerman, gJiminyEnemyCardCrescendoLinesItalian, gJiminyEnemyCardCrescendoLinesSpanish], lineCounts: [6, 6, 8, 7, 6]}
   - gUnkEu_08857EC4
   - gUnkEu_08857ED2
   - gUnkEu_08857EE4
@@ -9938,7 +9938,7 @@ entries:
   - gUnkEu_0885807F
   - gUnkEu_08858096
   - gUnkEu_08858098
-  - {name: gUnkEu_088580B0, record: JiminyLocalizedText, lines: [gUnk_09EDD100, gUnk_09EDD100Fr, gUnk_09EDD100De, gUnk_09EDD100It, gUnk_09EDD100Es], lineCounts: [6, 6, 6, 6, 6]}
+  - {name: gUnkEu_088580B0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardCreeperPlantLines, gJiminyEnemyCardCreeperPlantLinesFrench, gJiminyEnemyCardCreeperPlantLinesGerman, gJiminyEnemyCardCreeperPlantLinesItalian, gJiminyEnemyCardCreeperPlantLinesSpanish], lineCounts: [6, 6, 6, 6, 6]}
   - gUnkEu_088580D0
   - gUnkEu_088580DE
   - gUnkEu_088580F2
@@ -9967,7 +9967,7 @@ entries:
   - gUnkEu_08858261
   - gUnkEu_0885826C
   - gUnkEu_0885826E
-  - {name: gUnkEu_08858284, record: JiminyLocalizedText, lines: [gUnk_09EDD130, gUnk_09EDD130Fr, gUnk_09EDD130De, gUnk_09EDD130It, gUnk_09EDD130Es], lineCounts: [5, 5, 6, 6, 6]}
+  - {name: gUnkEu_08858284, record: JiminyLocalizedText, lines: [gJiminyEnemyCardGuardArmorLines, gJiminyEnemyCardGuardArmorLinesFrench, gJiminyEnemyCardGuardArmorLinesGerman, gJiminyEnemyCardGuardArmorLinesItalian, gJiminyEnemyCardGuardArmorLinesSpanish], lineCounts: [5, 5, 6, 6, 6]}
   - gUnkEu_088582A4
   - gUnkEu_088582B3
   - gUnkEu_088582C6
@@ -9995,7 +9995,7 @@ entries:
   - gUnkEu_08858431
   - gUnkEu_08858439
   - gUnkEu_0885843B
-  - {name: gUnkEu_08858454, record: JiminyLocalizedText, lines: [gUnk_09EDDCA8, gUnk_09EDDCA8Fr, gUnk_09EDDCA8De, gUnk_09EDDCA8It, gUnk_09EDDCA8Es], lineCounts: [5, 5, 5, 5, 7]}
+  - {name: gUnkEu_08858454, record: JiminyLocalizedText, lines: [gJiminyEnemyCardCardSoldierLines, gJiminyEnemyCardCardSoldierLinesFrench, gJiminyEnemyCardCardSoldierLinesGerman, gJiminyEnemyCardCardSoldierLinesItalian, gJiminyEnemyCardCardSoldierLinesSpanish], lineCounts: [5, 5, 5, 5, 7]}
   - gUnkEu_08858474
   - gUnkEu_0885847E
   - gUnkEu_08858491
@@ -10046,7 +10046,7 @@ entries:
   - gUnkEu_08858773
   - gUnkEu_08858789
   - gUnkEu_0885879B
-  - {name: gUnkEu_088587B0, record: JiminyLocalizedText, lines: [gUnk_09EDD144, gUnk_09EDD144Fr, gUnk_09EDD144De, gUnk_09EDD144It, gUnk_09EDD144Es], lineCounts: [9, 8, 12, 11, 10]}
+  - {name: gUnkEu_088587B0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardHadesLines, gJiminyEnemyCardHadesLinesFrench, gJiminyEnemyCardHadesLinesGerman, gJiminyEnemyCardHadesLinesItalian, gJiminyEnemyCardHadesLinesSpanish], lineCounts: [9, 8, 12, 11, 10]}
   - gUnkEu_088587D0
   - gUnkEu_088587DE
   - gUnkEu_088587F3
@@ -10089,7 +10089,7 @@ entries:
   - gUnkEu_08858A6A
   - gUnkEu_08858A79
   - gUnkEu_08858A7B
-  - {name: gUnkEu_08858A8C, record: JiminyLocalizedText, lines: [gUnk_09EDDC70, gUnk_09EDDC70Fr, gUnk_09EDDC70De, gUnk_09EDDC70It, gUnk_09EDDC70Es], lineCounts: [8, 8, 10, 8, 8]}
+  - {name: gUnkEu_08858A8C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardTrickmasterLines, gJiminyEnemyCardTrickmasterLinesFrench, gJiminyEnemyCardTrickmasterLinesGerman, gJiminyEnemyCardTrickmasterLinesItalian, gJiminyEnemyCardTrickmasterLinesSpanish], lineCounts: [8, 8, 10, 8, 8]}
   - gUnkEu_08858AAC
   - gUnkEu_08858ABC
   - gUnkEu_08858ACE
@@ -10121,7 +10121,7 @@ entries:
   - gUnkEu_08858C66
   - gUnkEu_08858C77
   - gUnkEu_08858C79
-  - {name: gUnkEu_08858C90, record: JiminyLocalizedText, lines: [gUnk_09EDDC90, gUnk_09EDDC90Fr, gUnk_09EDDC90De, gUnk_09EDDC90It, gUnk_09EDDC90Es], lineCounts: [6, 6, 7, 6, 6]}
+  - {name: gUnkEu_08858C90, record: JiminyLocalizedText, lines: [gJiminyEnemyCardJafarLines, gJiminyEnemyCardJafarLinesFrench, gJiminyEnemyCardJafarLinesGerman, gJiminyEnemyCardJafarLinesItalian, gJiminyEnemyCardJafarLinesSpanish], lineCounts: [6, 6, 7, 6, 6]}
   - gUnkEu_08858CB0
   - gUnkEu_08858CB8
   - gUnkEu_08858CCE
@@ -10162,7 +10162,7 @@ entries:
   - gUnkEu_08858F13
   - gUnkEu_08858F21
   - gUnkEu_08858F23
-  - {name: gUnkEu_08858F38, record: JiminyLocalizedText, lines: [gUnk_09EDD168, gUnk_09EDD168Fr, gUnk_09EDD168De, gUnk_09EDD168It, gUnk_09EDD168Es], lineCounts: [7, 8, 10, 7, 8]}
+  - {name: gUnkEu_08858F38, record: JiminyLocalizedText, lines: [gJiminyEnemyCardUrsulaLines, gJiminyEnemyCardUrsulaLinesFrench, gJiminyEnemyCardUrsulaLinesGerman, gJiminyEnemyCardUrsulaLinesItalian, gJiminyEnemyCardUrsulaLinesSpanish], lineCounts: [7, 8, 10, 7, 8]}
   - gUnkEu_08858F58
   - gUnkEu_08858F60
   - gUnkEu_08858F76
@@ -10197,7 +10197,7 @@ entries:
   - gUnkEu_0885914D
   - gUnkEu_08859164
   - gUnkEu_08859166
-  - {name: gUnkEu_0885917C, record: JiminyLocalizedText, lines: [gUnk_09EDDC24, gUnk_09EDDC24Fr, gUnk_09EDDC24De, gUnk_09EDDC24It, gUnk_09EDDC24Es], lineCounts: [6, 6, 7, 8, 7]}
+  - {name: gUnkEu_0885917C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardOogieBoogieLines, gJiminyEnemyCardOogieBoogieLinesFrench, gJiminyEnemyCardOogieBoogieLinesGerman, gJiminyEnemyCardOogieBoogieLinesItalian, gJiminyEnemyCardOogieBoogieLinesSpanish], lineCounts: [6, 6, 7, 8, 7]}
   - gUnkEu_0885919C
   - gUnkEu_088591A5
   - gUnkEu_088591B9
@@ -10231,7 +10231,7 @@ entries:
   - gUnkEu_088593D9
   - gUnkEu_088593EF
   - gUnkEu_08859406
-  - {name: gUnkEu_08859410, record: JiminyLocalizedText, lines: [gUnk_09EDDC3C, gUnk_09EDDC3CFr, gUnk_09EDDC3CDe, gUnk_09EDDC3CIt, gUnk_09EDDC3CEs], lineCounts: [6, 6, 9, 6, 6]}
+  - {name: gUnkEu_08859410, record: JiminyLocalizedText, lines: [gJiminyEnemyCardParasiteCageLines, gJiminyEnemyCardParasiteCageLinesFrench, gJiminyEnemyCardParasiteCageLinesGerman, gJiminyEnemyCardParasiteCageLinesItalian, gJiminyEnemyCardParasiteCageLinesSpanish], lineCounts: [6, 6, 9, 6, 6]}
   - gUnkEu_08859430
   - gUnkEu_08859440
   - gUnkEu_08859454
@@ -10277,7 +10277,7 @@ entries:
   - gUnkEu_0885972B
   - gUnkEu_0885973E
   - gUnkEu_08859753
-  - {name: gUnkEu_08859768, record: JiminyLocalizedText, lines: [gUnk_09EDD184, gUnk_09EDD184Fr, gUnk_09EDD184De, gUnk_09EDD184It, gUnk_09EDD184Es], lineCounts: [8, 9, 10, 10, 8]}
+  - {name: gUnkEu_08859768, record: JiminyLocalizedText, lines: [gJiminyEnemyCardHookLines, gJiminyEnemyCardHookLinesFrench, gJiminyEnemyCardHookLinesGerman, gJiminyEnemyCardHookLinesItalian, gJiminyEnemyCardHookLinesSpanish], lineCounts: [8, 9, 10, 10, 8]}
   - gUnkEu_08859788
   - gUnkEu_08859794
   - gUnkEu_088597AB
@@ -10310,7 +10310,7 @@ entries:
   - gUnkEu_08859945
   - gUnkEu_08859959
   - gUnkEu_0885995B
-  - {name: gUnkEu_08859974, record: JiminyLocalizedText, lines: [gUnk_09EDD1A4, gUnk_09EDD1A4Fr, gUnk_09EDD1A4De, gUnk_09EDD1A4It, gUnk_09EDD1A4Es], lineCounts: [6, 6, 7, 7, 6]}
+  - {name: gUnkEu_08859974, record: JiminyLocalizedText, lines: [gJiminyEnemyCardDragonMaleficentLines, gJiminyEnemyCardDragonMaleficentLinesFrench, gJiminyEnemyCardDragonMaleficentLinesGerman, gJiminyEnemyCardDragonMaleficentLinesItalian, gJiminyEnemyCardDragonMaleficentLinesSpanish], lineCounts: [6, 6, 7, 7, 6]}
   - gUnkEu_08859994
   - gUnkEu_0885999C
   - gUnkEu_088599B0
@@ -10344,7 +10344,7 @@ entries:
   - gUnkEu_08859BA9
   - gUnkEu_08859BC0
   - gUnkEu_08859BD4
-  - {name: gUnkEu_08859BE0, record: JiminyLocalizedText, lines: [gUnk_09EDDC0C, gUnk_09EDDC0CFr, gUnk_09EDDC0CDe, gUnk_09EDDC0CIt, gUnk_09EDDC0CEs], lineCounts: [6, 6, 9, 6, 6]}
+  - {name: gUnkEu_08859BE0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardDarksideLines, gJiminyEnemyCardDarksideLinesFrench, gJiminyEnemyCardDarksideLinesGerman, gJiminyEnemyCardDarksideLinesItalian, gJiminyEnemyCardDarksideLinesSpanish], lineCounts: [6, 6, 9, 6, 6]}
   - gUnkEu_08859C00
   - gUnkEu_08859C07
   - gUnkEu_08859C1F
@@ -10384,7 +10384,7 @@ entries:
   - gUnkEu_08859E1E
   - gUnkEu_08859E2F
   - gUnkEu_08859E46
-  - {name: gUnkEu_08859E54, record: JiminyLocalizedText, lines: [gUnk_09EDD1F8, gUnk_09EDD1F8Fr, gUnk_09EDD1F8De, gUnk_09EDD1F8It, gUnk_09EDD1F8Es], lineCounts: [7, 9, 8, 7, 8]}
+  - {name: gUnkEu_08859E54, record: JiminyLocalizedText, lines: [gJiminyEnemyCardLarxeneLines, gJiminyEnemyCardLarxeneLinesFrench, gJiminyEnemyCardLarxeneLinesGerman, gJiminyEnemyCardLarxeneLinesItalian, gJiminyEnemyCardLarxeneLinesSpanish], lineCounts: [7, 9, 8, 7, 8]}
   - gUnkEu_08859E74
   - gUnkEu_08859E83
   - gUnkEu_08859E96
@@ -10427,7 +10427,7 @@ entries:
   - gUnkEu_0885A102
   - gUnkEu_0885A116
   - gUnkEu_0885A12D
-  - {name: gUnkEu_0885A13C, record: JiminyLocalizedText, lines: [gUnk_09EDD1BC, gUnk_09EDD1BCFr, gUnk_09EDD1BCDe, gUnk_09EDD1BCIt, gUnk_09EDD1BCEs], lineCounts: [8, 8, 9, 8, 9]}
+  - {name: gUnkEu_0885A13C, record: JiminyLocalizedText, lines: [gJiminyEnemyCardRikuLines, gJiminyEnemyCardRikuLinesFrench, gJiminyEnemyCardRikuLinesGerman, gJiminyEnemyCardRikuLinesItalian, gJiminyEnemyCardRikuLinesSpanish], lineCounts: [8, 8, 9, 8, 9]}
   - gUnkEu_0885A15C
   - gUnkEu_0885A16D
   - gUnkEu_0885A182
@@ -10470,7 +10470,7 @@ entries:
   - gUnkEu_0885A414
   - gUnkEu_0885A429
   - gUnkEu_0885A43B
-  - {name: gUnkEu_0885A450, record: JiminyLocalizedText, lines: [gUnk_09EDD1DC, gUnk_09EDD1DCFr, gUnk_09EDD1DCDe, gUnk_09EDD1DCIt, gUnk_09EDD1DCEs], lineCounts: [7, 9, 9, 9, 8]}
+  - {name: gUnkEu_0885A450, record: JiminyLocalizedText, lines: [gJiminyEnemyCardAxelLines, gJiminyEnemyCardAxelLinesFrench, gJiminyEnemyCardAxelLinesGerman, gJiminyEnemyCardAxelLinesItalian, gJiminyEnemyCardAxelLinesSpanish], lineCounts: [7, 9, 9, 9, 8]}
   - gUnkEu_0885A470
   - gUnkEu_0885A47C
   - gUnkEu_0885A491
@@ -10520,7 +10520,7 @@ entries:
   - gUnkEu_0885A76B
   - gUnkEu_0885A77C
   - gUnkEu_0885A78E
-  - {name: gUnkEu_0885A7A4, record: JiminyLocalizedText, lines: [gUnk_09EDD214, gUnk_09EDD214Fr, gUnk_09EDD214De, gUnk_09EDD214It, gUnk_09EDD214Es], lineCounts: [9, 9, 11, 10, 10]}
+  - {name: gUnkEu_0885A7A4, record: JiminyLocalizedText, lines: [gJiminyEnemyCardVexenLines, gJiminyEnemyCardVexenLinesFrench, gJiminyEnemyCardVexenLinesGerman, gJiminyEnemyCardVexenLinesItalian, gJiminyEnemyCardVexenLinesSpanish], lineCounts: [9, 9, 11, 10, 10]}
   - gUnkEu_0885A7C4
   - gUnkEu_0885A7D1
   - gUnkEu_0885A7E9
@@ -10593,7 +10593,7 @@ entries:
   - gUnkEu_0885AC88
   - gUnkEu_0885AC9A
   - gUnkEu_0885ACB1
-  - {name: gUnkEu_0885ACC0, record: JiminyLocalizedText, lines: [gUnk_09EDD37C, gUnk_09EDD37CFr, gUnk_09EDD37CDe, gUnk_09EDD37CIt, gUnk_09EDD37CEs], lineCounts: [14, 13, 16, 14, 15]}
+  - {name: gUnkEu_0885ACC0, record: JiminyLocalizedText, lines: [gJiminyEnemyCardLexaeusLines, gJiminyEnemyCardLexaeusLinesFrench, gJiminyEnemyCardLexaeusLinesGerman, gJiminyEnemyCardLexaeusLinesItalian, gJiminyEnemyCardLexaeusLinesSpanish], lineCounts: [14, 13, 16, 14, 15]}
   - gUnkEu_0885ACE0
   - gUnkEu_0885ACEF
   - gUnkEu_0885AD04
@@ -10634,7 +10634,7 @@ entries:
   - gUnkEu_0885AF49
   - gUnkEu_0885AF5E
   - gUnkEu_0885AF75
-  - {name: gUnkEu_0885AF84, record: JiminyLocalizedText, lines: [gUnk_09EDDC54, gUnk_09EDDC54Fr, gUnk_09EDDC54De, gUnk_09EDDC54It, gUnk_09EDDC54Es], lineCounts: [7, 7, 10, 8, 8]}
+  - {name: gUnkEu_0885AF84, record: JiminyLocalizedText, lines: [gJiminyEnemyCardAnsemLines, gJiminyEnemyCardAnsemLinesFrench, gJiminyEnemyCardAnsemLinesGerman, gJiminyEnemyCardAnsemLinesItalian, gJiminyEnemyCardAnsemLinesSpanish], lineCounts: [7, 7, 10, 8, 8]}
   - gUnkEu_0885AFA4
   - gUnkEu_0885AFB5
   - gUnkEu_0885AFCB
@@ -10706,7 +10706,7 @@ entries:
   - gUnkEu_0885B49E
   - gUnkEu_0885B4AB
   - gUnkEu_0885B4C2
-  - {name: gUnkEu_0885B4CC, record: JiminyLocalizedText, lines: [gUnk_09EDD238, gUnk_09EDD238Fr, gUnk_09EDD238De, gUnk_09EDD238It, gUnk_09EDD238Es], lineCounts: [13, 13, 17, 14, 14]}
+  - {name: gUnkEu_0885B4CC, record: JiminyLocalizedText, lines: [gJiminyEnemyCardMarluxiaLines, gJiminyEnemyCardMarluxiaLinesFrench, gJiminyEnemyCardMarluxiaLinesGerman, gJiminyEnemyCardMarluxiaLinesItalian, gJiminyEnemyCardMarluxiaLinesSpanish], lineCounts: [13, 13, 17, 14, 14]}
   - gUnkEu_0885B4EC
   - gUnkEu_0885B502
   - gUnkEu_0885B515
@@ -10730,7 +10730,7 @@ entries:
   - gUnkEu_0885B66D
   - gUnkEu_0885B682
   - gUnkEu_0885B698
-  - {name: gUnkEu_0885B6AC, record: JiminyLocalizedText, lines: [gUnk_09EDBC30, gUnk_09EDBC30Fr, gUnk_09EDBC30De, gUnk_09EDBC30It, gUnk_09EDBC30Es], lineCounts: [4, 4, 5, 5, 5]}
+  - {name: gUnkEu_0885B6AC, record: JiminyLocalizedText, lines: [gJiminyRikuCardSoulEaterLines, gJiminyRikuCardSoulEaterLinesFrench, gJiminyRikuCardSoulEaterLinesGerman, gJiminyRikuCardSoulEaterLinesItalian, gJiminyRikuCardSoulEaterLinesSpanish], lineCounts: [4, 4, 5, 5, 5]}
   - gUnkEu_0885B6CC
   - gUnkEu_0885B6E2
   - gUnkEu_0885B6F2
@@ -10752,7 +10752,7 @@ entries:
   - gUnkEu_0885B82F
   - gUnkEu_0885B845
   - gUnkEu_0885B85B
-  - {name: gUnkEu_0885B870, record: JiminyLocalizedText, lines: [gUnk_09EDDD38, gUnk_09EDDD38Fr, gUnk_09EDDD38De, gUnk_09EDDD38It, gUnk_09EDDD38Es], lineCounts: [4, 4, 5, 4, 4]}
+  - {name: gUnkEu_0885B870, record: JiminyLocalizedText, lines: [gJiminyRikuCardKingLines, gJiminyRikuCardKingLinesFrench, gJiminyRikuCardKingLinesGerman, gJiminyRikuCardKingLinesItalian, gJiminyRikuCardKingLinesSpanish], lineCounts: [4, 4, 5, 4, 4]}
   - gUnkEu_0885B890
   - gUnkEu_0885B8A2
   - gUnkEu_0885B8B4
@@ -10776,7 +10776,7 @@ entries:
   - gUnkEu_0885BA1A
   - gUnkEu_0885BA30
   - gUnkEu_0885BA47
-  - {name: gUnkEu_0885BA50, record: JiminyLocalizedText, lines: [gUnk_09EDDCBC, gUnk_09EDDCBCFr, gUnk_09EDDCBCDe, gUnk_09EDDCBCIt, gUnk_09EDDCBCEs], lineCounts: [4, 4, 4, 6, 5]}
+  - {name: gUnkEu_0885BA50, record: JiminyLocalizedText, lines: [gJiminyMapCardTeemingDarknessLines, gJiminyMapCardTeemingDarknessLinesFrench, gJiminyMapCardTeemingDarknessLinesGerman, gJiminyMapCardTeemingDarknessLinesItalian, gJiminyMapCardTeemingDarknessLinesSpanish], lineCounts: [4, 4, 4, 6, 5]}
   - gUnkEu_0885BA70
   - gUnkEu_0885BA84
   - gUnkEu_0885BA9A
@@ -10790,7 +10790,7 @@ entries:
   - gUnkEu_0885BB1C
   - gUnkEu_0885BB2F
   - gUnkEu_0885BB40
-  - {name: gUnkEu_0885BB4C, record: JiminyLocalizedText, lines: [gUnk_09EDD26C, gUnk_09EDD26CFr, gUnk_09EDD26CDe, gUnk_09EDD26CIt, gUnk_09EDD26CEs], lineCounts: [2, 2, 3, 3, 3]}
+  - {name: gUnkEu_0885BB4C, record: JiminyLocalizedText, lines: [gJiminyMapCardTranquilDarknessLines, gJiminyMapCardTranquilDarknessLinesFrench, gJiminyMapCardTranquilDarknessLinesGerman, gJiminyMapCardTranquilDarknessLinesItalian, gJiminyMapCardTranquilDarknessLinesSpanish], lineCounts: [2, 2, 3, 3, 3]}
   - gUnkEu_0885BB6C
   - gUnkEu_0885BB79
   - gUnkEu_0885BB8D
@@ -10806,7 +10806,7 @@ entries:
   - gUnkEu_0885BC3E
   - gUnkEu_0885BC51
   - gUnkEu_0885BC60
-  - {name: gUnkEu_0885BC78, record: JiminyLocalizedText, lines: [gUnk_09EDD274, gUnk_09EDD274Fr, gUnk_09EDD274De, gUnk_09EDD274It, gUnk_09EDD274Es], lineCounts: [3, 3, 3, 3, 3]}
+  - {name: gUnkEu_0885BC78, record: JiminyLocalizedText, lines: [gJiminyMapCardGuardedTroveLines, gJiminyMapCardGuardedTroveLinesFrench, gJiminyMapCardGuardedTroveLinesGerman, gJiminyMapCardGuardedTroveLinesItalian, gJiminyMapCardGuardedTroveLinesSpanish], lineCounts: [3, 3, 3, 3, 3]}
   - gUnkEu_0885BC98
   - gUnkEu_0885BCA5
   - gUnkEu_0885BCB6
@@ -10832,7 +10832,7 @@ entries:
   - gUnkEu_0885BE3D
   - gUnkEu_0885BE4F
   - gUnkEu_0885BE61
-  - {name: gUnkEu_0885BE74, record: JiminyLocalizedText, lines: [gUnk_09EDDCCC, gUnk_09EDDCCCFr, gUnk_09EDDCCCDe, gUnk_09EDDCCCIt, gUnk_09EDDCCCEs], lineCounts: [5, 4, 5, 6, 5]}
+  - {name: gUnkEu_0885BE74, record: JiminyLocalizedText, lines: [gJiminyMapCardLoomingDarknessLines, gJiminyMapCardLoomingDarknessLinesFrench, gJiminyMapCardLoomingDarknessLinesGerman, gJiminyMapCardLoomingDarknessLinesItalian, gJiminyMapCardLoomingDarknessLinesSpanish], lineCounts: [5, 4, 5, 6, 5]}
   - gUnkEu_0885BE94
   - gUnkEu_0885BEA1
   - gUnkEu_0885BEB6
@@ -10849,7 +10849,7 @@ entries:
   - gUnkEu_0885BF93
   - gUnkEu_0885BFA6
   - gUnkEu_0885BFBA
-  - {name: gUnkEu_0885BFC4, record: JiminyLocalizedText, lines: [gUnk_09EDD280, gUnk_09EDD280Fr, gUnk_09EDD280De, gUnk_09EDD280It, gUnk_09EDD280Es], lineCounts: [3, 2, 4, 3, 4]}
+  - {name: gUnkEu_0885BFC4, record: JiminyLocalizedText, lines: [gJiminyMapCardSleepingDarknessLines, gJiminyMapCardSleepingDarknessLinesFrench, gJiminyMapCardSleepingDarknessLinesGerman, gJiminyMapCardSleepingDarknessLinesItalian, gJiminyMapCardSleepingDarknessLinesSpanish], lineCounts: [3, 2, 4, 3, 4]}
   - gUnkEu_0885BFE4
   - gUnkEu_0885BFF9
   - gUnkEu_0885C00D
@@ -10865,7 +10865,7 @@ entries:
   - gUnkEu_0885C0CA
   - gUnkEu_0885C0DD
   - gUnkEu_0885C0F0
-  - {name: gUnkEu_0885C108, record: JiminyLocalizedText, lines: [gUnk_09EDD28C, gUnk_09EDD28CFr, gUnk_09EDD28CDe, gUnk_09EDD28CIt, gUnk_09EDD28CEs], lineCounts: [2, 2, 5, 3, 3]}
+  - {name: gUnkEu_0885C108, record: JiminyLocalizedText, lines: [gJiminyMapCardMomentsReprieveLines, gJiminyMapCardMomentsReprieveLinesFrench, gJiminyMapCardMomentsReprieveLinesGerman, gJiminyMapCardMomentsReprieveLinesItalian, gJiminyMapCardMomentsReprieveLinesSpanish], lineCounts: [2, 2, 5, 3, 3]}
   - gUnkEu_0885C128
   - gUnkEu_0885C135
   - gUnkEu_0885C149
@@ -10880,7 +10880,7 @@ entries:
   - gUnkEu_0885C1F4
   - gUnkEu_0885C207
   - gUnkEu_0885C21B
-  - {name: gUnkEu_0885C230, record: JiminyLocalizedText, lines: [gUnk_09EDD294, gUnk_09EDD294Fr, gUnk_09EDD294De, gUnk_09EDD294It, gUnk_09EDD294Es], lineCounts: [3, 2, 3, 3, 3]}
+  - {name: gUnkEu_0885C230, record: JiminyLocalizedText, lines: [gJiminyMapCardFeebleDarknessLines, gJiminyMapCardFeebleDarknessLinesFrench, gJiminyMapCardFeebleDarknessLinesGerman, gJiminyMapCardFeebleDarknessLinesItalian, gJiminyMapCardFeebleDarknessLinesSpanish], lineCounts: [3, 2, 3, 3, 3]}
   - gUnkEu_0885C250
   - gUnkEu_0885C25D
   - gUnkEu_0885C273
@@ -10908,7 +10908,7 @@ entries:
   - gUnkEu_0885C41A
   - gUnkEu_0885C42C
   - gUnkEu_0885C43F
-  - {name: gUnkEu_0885C450, record: JiminyLocalizedText, lines: [gUnk_09EDDCE0, gUnk_09EDDCE0Fr, gUnk_09EDDCE0De, gUnk_09EDDCE0It, gUnk_09EDDCE0Es], lineCounts: [5, 5, 5, 6, 6]}
+  - {name: gUnkEu_0885C450, record: JiminyLocalizedText, lines: [gJiminyMapCardAlmightyDarknessLines, gJiminyMapCardAlmightyDarknessLinesFrench, gJiminyMapCardAlmightyDarknessLinesGerman, gJiminyMapCardAlmightyDarknessLinesItalian, gJiminyMapCardAlmightyDarknessLinesSpanish], lineCounts: [5, 5, 5, 6, 6]}
   - gUnkEu_0885C470
   - gUnkEu_0885C482
   - gUnkEu_0885C48C
@@ -10918,7 +10918,7 @@ entries:
   - gUnkEu_0885C4D9
   - gUnkEu_0885C4ED
   - gUnkEu_0885C500
-  - {name: gUnkEu_0885C514, record: JiminyLocalizedText, lines: [gUnk_09EDD2A0, gUnk_09EDD2A0Fr, gUnk_09EDD2A0De, gUnk_09EDD2A0It, gUnk_09EDD2A0Es], lineCounts: [2, 1, 2, 2, 2]}
+  - {name: gUnkEu_0885C514, record: JiminyLocalizedText, lines: [gJiminyMapCardCalmBountyLines, gJiminyMapCardCalmBountyLinesFrench, gJiminyMapCardCalmBountyLinesGerman, gJiminyMapCardCalmBountyLinesItalian, gJiminyMapCardCalmBountyLinesSpanish], lineCounts: [2, 1, 2, 2, 2]}
   - gUnkEu_0885C534
   - gUnkEu_0885C54A
   - gUnkEu_0885C562
@@ -10940,7 +10940,7 @@ entries:
   - gUnkEu_0885C6BB
   - gUnkEu_0885C6D2
   - gUnkEu_0885C6E6
-  - {name: gUnkEu_0885C6FC, record: JiminyLocalizedText, lines: [gUnk_09EDD2A8, gUnk_09EDD2A8Fr, gUnk_09EDD2A8De, gUnk_09EDD2A8It, gUnk_09EDD2A8Es], lineCounts: [4, 4, 4, 5, 4]}
+  - {name: gUnkEu_0885C6FC, record: JiminyLocalizedText, lines: [gJiminyMapCardFalseBountyLines, gJiminyMapCardFalseBountyLinesFrench, gJiminyMapCardFalseBountyLinesGerman, gJiminyMapCardFalseBountyLinesItalian, gJiminyMapCardFalseBountyLinesSpanish], lineCounts: [4, 4, 4, 5, 4]}
   - gUnkEu_0885C71C
   - gUnkEu_0885C733
   - gUnkEu_0885C74A
@@ -10958,7 +10958,7 @@ entries:
   - gUnkEu_0885C83B
   - gUnkEu_0885C850
   - gUnkEu_0885C864
-  - {name: gUnkEu_0885C86C, record: JiminyLocalizedText, lines: [gUnk_09EDD2B8, gUnk_09EDD2B8Fr, gUnk_09EDD2B8De, gUnk_09EDD2B8It, gUnk_09EDD2B8Es], lineCounts: [3, 3, 3, 4, 4]}
+  - {name: gUnkEu_0885C86C, record: JiminyLocalizedText, lines: [gJiminyMapCardMoogleRoomLines, gJiminyMapCardMoogleRoomLinesFrench, gJiminyMapCardMoogleRoomLinesGerman, gJiminyMapCardMoogleRoomLinesItalian, gJiminyMapCardMoogleRoomLinesSpanish], lineCounts: [3, 3, 3, 4, 4]}
   - gUnkEu_0885C88C
   - gUnkEu_0885C89F
   - gUnkEu_0885C8AE
@@ -10974,7 +10974,7 @@ entries:
   - gUnkEu_0885C957
   - gUnkEu_0885C96A
   - gUnkEu_0885C97D
-  - {name: gUnkEu_0885C990, record: JiminyLocalizedText, lines: [gUnk_09EDD2C4, gUnk_09EDD2C4Fr, gUnk_09EDD2C4De, gUnk_09EDD2C4It, gUnk_09EDD2C4Es], lineCounts: [3, 3, 3, 3, 3]}
+  - {name: gUnkEu_0885C990, record: JiminyLocalizedText, lines: [gJiminyMapCardSorcerousWakingLines, gJiminyMapCardSorcerousWakingLinesFrench, gJiminyMapCardSorcerousWakingLinesGerman, gJiminyMapCardSorcerousWakingLinesItalian, gJiminyMapCardSorcerousWakingLinesSpanish], lineCounts: [3, 3, 3, 3, 3]}
   - gUnkEu_0885C9B0
   - gUnkEu_0885C9C4
   - gUnkEu_0885C9D3
@@ -10990,7 +10990,7 @@ entries:
   - gUnkEu_0885CA83
   - gUnkEu_0885CA96
   - gUnkEu_0885CAAB
-  - {name: gUnkEu_0885CAC0, record: JiminyLocalizedText, lines: [gUnk_09EDD2D0, gUnk_09EDD2D0Fr, gUnk_09EDD2D0De, gUnk_09EDD2D0It, gUnk_09EDD2D0Es], lineCounts: [3, 3, 3, 3, 3]}
+  - {name: gUnkEu_0885CAC0, record: JiminyLocalizedText, lines: [gJiminyMapCardMartialWakingLines, gJiminyMapCardMartialWakingLinesFrench, gJiminyMapCardMartialWakingLinesGerman, gJiminyMapCardMartialWakingLinesItalian, gJiminyMapCardMartialWakingLinesSpanish], lineCounts: [3, 3, 3, 3, 3]}
   - gUnkEu_0885CAE0
   - gUnkEu_0885CAF2
   - gUnkEu_0885CB01
@@ -11006,7 +11006,7 @@ entries:
   - gUnkEu_0885CBAA
   - gUnkEu_0885CBBD
   - gUnkEu_0885CBCF
-  - {name: gUnkEu_0885CBE4, record: JiminyLocalizedText, lines: [gUnk_09EDD2DC, gUnk_09EDD2DCFr, gUnk_09EDD2DCDe, gUnk_09EDD2DCIt, gUnk_09EDD2DCEs], lineCounts: [3, 3, 3, 3, 3]}
+  - {name: gUnkEu_0885CBE4, record: JiminyLocalizedText, lines: [gJiminyMapCardAlchemicWakingLines, gJiminyMapCardAlchemicWakingLinesFrench, gJiminyMapCardAlchemicWakingLinesGerman, gJiminyMapCardAlchemicWakingLinesItalian, gJiminyMapCardAlchemicWakingLinesSpanish], lineCounts: [3, 3, 3, 3, 3]}
   - gUnkEu_0885CC04
   - gUnkEu_0885CC1A
   - gUnkEu_0885CC2E
@@ -11032,7 +11032,7 @@ entries:
   - gUnkEu_0885CDC5
   - gUnkEu_0885CDD6
   - gUnkEu_0885CDE6
-  - {name: gUnkEu_0885CDF0, record: JiminyLocalizedText, lines: [gUnk_09EDD2E8, gUnk_09EDD2E8Fr, gUnk_09EDD2E8De, gUnk_09EDD2E8It, gUnk_09EDD2E8Es], lineCounts: [5, 4, 5, 5, 6]}
+  - {name: gUnkEu_0885CDF0, record: JiminyLocalizedText, lines: [gJiminyMapCardMeetingGroundLines, gJiminyMapCardMeetingGroundLinesFrench, gJiminyMapCardMeetingGroundLinesGerman, gJiminyMapCardMeetingGroundLinesItalian, gJiminyMapCardMeetingGroundLinesSpanish], lineCounts: [5, 4, 5, 5, 6]}
   - gUnkEu_0885CE10
   - gUnkEu_0885CE26
   - gUnkEu_0885CE34
@@ -11043,7 +11043,7 @@ entries:
   - gUnkEu_0885CE9B
   - gUnkEu_0885CEAE
   - gUnkEu_0885CEBD
-  - {name: gUnkEu_0885CECC, record: JiminyLocalizedText, lines: [gUnk_09EDD2FC, gUnk_09EDD2FCFr, gUnk_09EDD2FCDe, gUnk_09EDD2FCIt, gUnk_09EDD2FCEs], lineCounts: [2, 1, 2, 2, 3]}
+  - {name: gUnkEu_0885CECC, record: JiminyLocalizedText, lines: [gJiminyMapCardMinglingWorldsLines, gJiminyMapCardMinglingWorldsLinesFrench, gJiminyMapCardMinglingWorldsLinesGerman, gJiminyMapCardMinglingWorldsLinesItalian, gJiminyMapCardMinglingWorldsLinesSpanish], lineCounts: [2, 1, 2, 2, 3]}
   - gUnkEu_0885CEEC
   - gUnkEu_0885CF02
   - gUnkEu_0885CF1A
@@ -11064,7 +11064,7 @@ entries:
   - gUnkEu_0885D040
   - gUnkEu_0885D050
   - gUnkEu_0885D060
-  - {name: gUnkEu_0885D06C, record: JiminyLocalizedText, lines: [gUnk_09EDD304, gUnk_09EDD304Fr, gUnk_09EDD304De, gUnk_09EDD304It, gUnk_09EDD304Es], lineCounts: [4, 3, 4, 4, 5]}
+  - {name: gUnkEu_0885D06C, record: JiminyLocalizedText, lines: [gJiminyMapCardStrongInitiativeLines, gJiminyMapCardStrongInitiativeLinesFrench, gJiminyMapCardStrongInitiativeLinesGerman, gJiminyMapCardStrongInitiativeLinesItalian, gJiminyMapCardStrongInitiativeLinesSpanish], lineCounts: [4, 3, 4, 4, 5]}
   - gUnkEu_0885D08C
   - gUnkEu_0885D0A2
   - gUnkEu_0885D0BB
@@ -11087,7 +11087,7 @@ entries:
   - gUnkEu_0885D215
   - gUnkEu_0885D22B
   - gUnkEu_0885D241
-  - {name: gUnkEu_0885D254, record: JiminyLocalizedText, lines: [gUnk_09EDD314, gUnk_09EDD314Fr, gUnk_09EDD314De, gUnk_09EDD314It, gUnk_09EDD314Es], lineCounts: [4, 3, 5, 5, 5]}
+  - {name: gUnkEu_0885D254, record: JiminyLocalizedText, lines: [gJiminyMapCardLastingDazeLines, gJiminyMapCardLastingDazeLinesFrench, gJiminyMapCardLastingDazeLinesGerman, gJiminyMapCardLastingDazeLinesItalian, gJiminyMapCardLastingDazeLinesSpanish], lineCounts: [4, 3, 5, 5, 5]}
   - gUnkEu_0885D274
   - gUnkEu_0885D285
   - gUnkEu_0885D29C
@@ -11101,7 +11101,7 @@ entries:
   - gUnkEu_0885D326
   - gUnkEu_0885D339
   - gUnkEu_0885D34B
-  - {name: gUnkEu_0885D364, record: JiminyLocalizedText, lines: [gUnk_09EDD324, gUnk_09EDD324Fr, gUnk_09EDD324De, gUnk_09EDD324It, gUnk_09EDD324Es], lineCounts: [2, 2, 3, 3, 3]}
+  - {name: gUnkEu_0885D364, record: JiminyLocalizedText, lines: [gJiminyMapCardStagnantSpaceLines, gJiminyMapCardStagnantSpaceLinesFrench, gJiminyMapCardStagnantSpaceLinesGerman, gJiminyMapCardStagnantSpaceLinesItalian, gJiminyMapCardStagnantSpaceLinesSpanish], lineCounts: [2, 2, 3, 3, 3]}
   - gUnkEu_0885D384
   - gUnkEu_0885D399
   - gUnkEu_0885D3B0
@@ -11119,7 +11119,7 @@ entries:
   - gUnkEu_0885D476
   - gUnkEu_0885D489
   - gUnkEu_0885D499
-  - {name: gUnkEu_0885D4B0, record: JiminyLocalizedText, lines: [gUnk_09EDD32C, gUnk_09EDD32CFr, gUnk_09EDD32CDe, gUnk_09EDD32CIt, gUnk_09EDD32CEs], lineCounts: [3, 3, 4, 4, 3]}
+  - {name: gUnkEu_0885D4B0, record: JiminyLocalizedText, lines: [gJiminyMapCardPremiumRoomLines, gJiminyMapCardPremiumRoomLinesFrench, gJiminyMapCardPremiumRoomLinesGerman, gJiminyMapCardPremiumRoomLinesItalian, gJiminyMapCardPremiumRoomLinesSpanish], lineCounts: [3, 3, 4, 4, 3]}
   - gUnkEu_0885D4D0
   - gUnkEu_0885D4E2
   - gUnkEu_0885D4F2
@@ -11143,7 +11143,7 @@ entries:
   - gUnkEu_0885D656
   - gUnkEu_0885D664
   - gUnkEu_0885D67A
-  - {name: gUnkEu_0885D688, record: JiminyLocalizedText, lines: [gUnk_09EDD338, gUnk_09EDD338Fr, gUnk_09EDD338De, gUnk_09EDD338It, gUnk_09EDD338Es], lineCounts: [5, 4, 5, 4, 5]}
+  - {name: gUnkEu_0885D688, record: JiminyLocalizedText, lines: [gJiminyMapCardWhiteRoomLines, gJiminyMapCardWhiteRoomLinesFrench, gJiminyMapCardWhiteRoomLinesGerman, gJiminyMapCardWhiteRoomLinesItalian, gJiminyMapCardWhiteRoomLinesSpanish], lineCounts: [5, 4, 5, 4, 5]}
   - gUnkEu_0885D6A8
   - gUnkEu_0885D6BA
   - gUnkEu_0885D6D1
@@ -11166,7 +11166,7 @@ entries:
   - gUnkEu_0885D823
   - gUnkEu_0885D830
   - gUnkEu_0885D847
-  - {name: gUnkEu_0885D85C, record: JiminyLocalizedText, lines: [gUnk_09EDD34C, gUnk_09EDD34CFr, gUnk_09EDD34CDe, gUnk_09EDD34CIt, gUnk_09EDD34CEs], lineCounts: [4, 4, 4, 5, 5]}
+  - {name: gUnkEu_0885D85C, record: JiminyLocalizedText, lines: [gJiminyMapCardBlackRoomLines, gJiminyMapCardBlackRoomLinesFrench, gJiminyMapCardBlackRoomLinesGerman, gJiminyMapCardBlackRoomLinesItalian, gJiminyMapCardBlackRoomLinesSpanish], lineCounts: [4, 4, 4, 5, 5]}
   - gUnkEu_0885D87C
   - gUnkEu_0885D890
   - gUnkEu_0885D8A0
@@ -11179,7 +11179,7 @@ entries:
   - gUnkEu_0885D914
   - gUnkEu_0885D927
   - gUnkEu_0885D939
-  - {name: gUnkEu_0885D950, record: JiminyLocalizedText, lines: [gUnk_09EDD35C, gUnk_09EDD35CFr, gUnk_09EDD35CDe, gUnk_09EDD35CIt, gUnk_09EDD35CEs], lineCounts: [2, 1, 3, 3, 3]}
+  - {name: gUnkEu_0885D950, record: JiminyLocalizedText, lines: [gJiminyMapCardKeyOfBeginningsLines, gJiminyMapCardKeyOfBeginningsLinesFrench, gJiminyMapCardKeyOfBeginningsLinesGerman, gJiminyMapCardKeyOfBeginningsLinesItalian, gJiminyMapCardKeyOfBeginningsLinesSpanish], lineCounts: [2, 1, 3, 3, 3]}
   - gUnkEu_0885D970
   - gUnkEu_0885D984
   - gUnkEu_0885D994
@@ -11193,7 +11193,7 @@ entries:
   - gUnkEu_0885DA0C
   - gUnkEu_0885DA1F
   - gUnkEu_0885DA31
-  - {name: gUnkEu_0885DA48, record: JiminyLocalizedText, lines: [gUnk_09EDD364, gUnk_09EDD364Fr, gUnk_09EDD364De, gUnk_09EDD364It, gUnk_09EDD364Es], lineCounts: [2, 2, 3, 3, 3]}
+  - {name: gUnkEu_0885DA48, record: JiminyLocalizedText, lines: [gJiminyMapCardKeyOfGuidanceLines, gJiminyMapCardKeyOfGuidanceLinesFrench, gJiminyMapCardKeyOfGuidanceLinesGerman, gJiminyMapCardKeyOfGuidanceLinesItalian, gJiminyMapCardKeyOfGuidanceLinesSpanish], lineCounts: [2, 2, 3, 3, 3]}
   - gUnkEu_0885DA68
   - gUnkEu_0885DA7C
   - gUnkEu_0885DA8C
@@ -11207,7 +11207,7 @@ entries:
   - gUnkEu_0885DB04
   - gUnkEu_0885DB17
   - gUnkEu_0885DB29
-  - {name: gUnkEu_0885DB40, record: JiminyLocalizedText, lines: [gUnk_09EDD36C, gUnk_09EDD36CFr, gUnk_09EDD36CDe, gUnk_09EDD36CIt, gUnk_09EDD36CEs], lineCounts: [2, 2, 3, 3, 3]}
+  - {name: gUnkEu_0885DB40, record: JiminyLocalizedText, lines: [gJiminyMapCardKeyToTruthLines, gJiminyMapCardKeyToTruthLinesFrench, gJiminyMapCardKeyToTruthLinesGerman, gJiminyMapCardKeyToTruthLinesItalian, gJiminyMapCardKeyToTruthLinesSpanish], lineCounts: [2, 2, 3, 3, 3]}
   - gUnkEu_0885DB60
   - gUnkEu_0885DB72
   - gUnkEu_0885DB84
@@ -11220,7 +11220,7 @@ entries:
   - gUnkEu_0885DC01
   - gUnkEu_0885DC14
   - gUnkEu_0885DC26
-  - {name: gUnkEu_0885DC30, record: JiminyLocalizedText, lines: [gUnk_09EDD374, gUnk_09EDD374Fr, gUnk_09EDD374De, gUnk_09EDD374It, gUnk_09EDD374Es], lineCounts: [2, 2, 3, 2, 3]}
+  - {name: gUnkEu_0885DC30, record: JiminyLocalizedText, lines: [gJiminyMapCardKeyToRewardsLines, gJiminyMapCardKeyToRewardsLinesFrench, gJiminyMapCardKeyToRewardsLinesGerman, gJiminyMapCardKeyToRewardsLinesItalian, gJiminyMapCardKeyToRewardsLinesSpanish], lineCounts: [2, 2, 3, 2, 3]}
   - gUnkEu_0885DC50
   - gUnkEu_0885DC64
   - gUnkEu_0885DC72
@@ -11311,7 +11311,7 @@ entries:
   - gUnkEu_0885E1A1
   - gUnkEu_0885E1B4
   - gUnkEu_0885E1C9
-  - {name: gUnkEu_0885E1D8, record: JiminyLocalizedText, lines: [gUnk_09EDDCF4, gUnk_09EDDCF4Fr, gUnk_09EDDCF4De, gUnk_09EDDCF4It, gUnk_09EDDCF4Es], lineCounts: [17, 17, 18, 19, 19]}
+  - {name: gUnkEu_0885E1D8, record: JiminyLocalizedText, lines: [gJiminyPremiumCardsLines, gJiminyPremiumCardsLinesFrench, gJiminyPremiumCardsLinesGerman, gJiminyPremiumCardsLinesItalian, gJiminyPremiumCardsLinesSpanish], lineCounts: [17, 17, 18, 19, 19]}
   - gUnkEu_0885E1F8
   - gUnkEu_0885E20E
   - gUnkEu_0885E220
@@ -11398,7 +11398,7 @@ entries:
   - gUnkEu_0885E77C
   - gUnkEu_0885E78D
   - gUnkEu_0885E7A4
-  - {name: gUnkEu_0885E7B8, record: JiminyLocalizedText, lines: [gUnk_09EDBC40, gUnk_09EDBC40Fr, gUnk_09EDBC40De, gUnk_09EDBC40It, gUnk_09EDBC40Es], lineCounts: [15, 19, 19, 18, 15]}
+  - {name: gUnkEu_0885E7B8, record: JiminyLocalizedText, lines: [gJiminyCharacterSoraLines, gJiminyCharacterSoraLinesFrench, gJiminyCharacterSoraLinesGerman, gJiminyCharacterSoraLinesItalian, gJiminyCharacterSoraLinesSpanish], lineCounts: [15, 19, 19, 18, 15]}
   - gUnkEu_0885E7D8
   - gUnkEu_0885E7EF
   - gUnkEu_0885E807
@@ -11480,7 +11480,7 @@ entries:
   - gUnkEu_0885ED25
   - gUnkEu_0885ED39
   - gUnkEu_0885ED4B
-  - {name: gUnkEu_0885ED64, record: JiminyLocalizedText, lines: [gUnk_09EDBC7C, gUnk_09EDBC7CFr, gUnk_09EDBC7CDe, gUnk_09EDBC7CIt, gUnk_09EDBC7CEs], lineCounts: [16, 16, 16, 18, 15]}
+  - {name: gUnkEu_0885ED64, record: JiminyLocalizedText, lines: [gJiminyCharacterDonaldDuckLines, gJiminyCharacterDonaldDuckLinesFrench, gJiminyCharacterDonaldDuckLinesGerman, gJiminyCharacterDonaldDuckLinesItalian, gJiminyCharacterDonaldDuckLinesSpanish], lineCounts: [16, 16, 16, 18, 15]}
   - gUnkEu_0885ED84
   - gUnkEu_0885ED9A
   - gUnkEu_0885EDB0
@@ -11547,7 +11547,7 @@ entries:
   - gUnkEu_0885F187
   - gUnkEu_0885F189
   - gUnkEu_0885F19B
-  - {name: gUnkEu_0885F1AC, record: JiminyLocalizedText, lines: [gUnk_09EDBCBC, gUnk_09EDBCBCFr, gUnk_09EDBCBCDe, gUnk_09EDBCBCIt, gUnk_09EDBCBCEs], lineCounts: [12, 13, 16, 13, 12]}
+  - {name: gUnkEu_0885F1AC, record: JiminyLocalizedText, lines: [gJiminyCharacterGoofyLines, gJiminyCharacterGoofyLinesFrench, gJiminyCharacterGoofyLinesGerman, gJiminyCharacterGoofyLinesItalian, gJiminyCharacterGoofyLinesSpanish], lineCounts: [12, 13, 16, 13, 12]}
   - gUnkEu_0885F1CC
   - gUnkEu_0885F1E4
   - gUnkEu_0885F1FD
@@ -11595,7 +11595,7 @@ entries:
   - gUnkEu_0885F4D5
   - gUnkEu_0885F4E3
   - gUnkEu_0885F4F9
-  - {name: gUnkEu_0885F518, record: JiminyLocalizedText, lines: [gUnk_09EDBCEC, gUnk_09EDBCECFr, gUnk_09EDBCECDe, gUnk_09EDBCECIt, gUnk_09EDBCECEs], lineCounts: [7, 10, 10, 12, 8]}
+  - {name: gUnkEu_0885F518, record: JiminyLocalizedText, lines: [gJiminyCharacterJiminyCricketLines, gJiminyCharacterJiminyCricketLinesFrench, gJiminyCharacterJiminyCricketLinesGerman, gJiminyCharacterJiminyCricketLinesItalian, gJiminyCharacterJiminyCricketLinesSpanish], lineCounts: [7, 10, 10, 12, 8]}
   - gUnkEu_0885F538
   - gUnkEu_0885F551
   - gUnkEu_0885F553
@@ -11688,7 +11688,7 @@ entries:
   - gUnkEu_0885FB0A
   - gUnkEu_0885FB0C
   - gUnkEu_0885FB21
-  - {name: gUnkEu_0885FB34, record: JiminyLocalizedText, lines: [gUnk_09EDBD08, gUnk_09EDBD08Fr, gUnk_09EDBD08De, gUnk_09EDBD08It, gUnk_09EDBD08Es], lineCounts: [16, 22, 21, 17, 16]}
+  - {name: gUnkEu_0885FB34, record: JiminyLocalizedText, lines: [gJiminyCharacterRikuLines, gJiminyCharacterRikuLinesFrench, gJiminyCharacterRikuLinesGerman, gJiminyCharacterRikuLinesItalian, gJiminyCharacterRikuLinesSpanish], lineCounts: [16, 22, 21, 17, 16]}
   - gUnkEu_0885FB54
   - gUnkEu_0885FB6D
   - gUnkEu_0885FB6F
@@ -11779,7 +11779,7 @@ entries:
   - gUnkEu_08860123
   - gUnkEu_08860125
   - gUnkEu_0886013B
-  - {name: gUnkEu_08860154, record: JiminyLocalizedText, lines: [gUnk_09EDD54C, gUnk_09EDD54CFr, gUnk_09EDD54CDe, gUnk_09EDD54CIt, gUnk_09EDD54CEs], lineCounts: [15, 19, 23, 17, 16]}
+  - {name: gUnkEu_08860154, record: JiminyLocalizedText, lines: [gJiminyCharacterKairiLines, gJiminyCharacterKairiLinesFrench, gJiminyCharacterKairiLinesGerman, gJiminyCharacterKairiLinesItalian, gJiminyCharacterKairiLinesSpanish], lineCounts: [15, 19, 23, 17, 16]}
   - gUnkEu_08860174
   - gUnkEu_0886018C
   - gUnkEu_088601A2
@@ -11818,7 +11818,7 @@ entries:
   - gUnkEu_088603D0
   - gUnkEu_088603E5
   - gUnkEu_088603FC
-  - {name: gUnkEu_0886040C, record: JiminyLocalizedText, lines: [gUnk_09EDBD48, gUnk_09EDBD48Fr, gUnk_09EDBD48De, gUnk_09EDBD48It, gUnk_09EDBD48Es], lineCounts: [7, 8, 9, 7, 7]}
+  - {name: gUnkEu_0886040C, record: JiminyLocalizedText, lines: [gJiminyCharacterSimbaLines, gJiminyCharacterSimbaLinesFrench, gJiminyCharacterSimbaLinesGerman, gJiminyCharacterSimbaLinesItalian, gJiminyCharacterSimbaLinesSpanish], lineCounts: [7, 8, 9, 7, 7]}
   - gUnkEu_0886042C
   - gUnkEu_08860445
   - gUnkEu_0886044F
@@ -11882,7 +11882,7 @@ entries:
   - gUnkEu_0886081D
   - gUnkEu_0886081F
   - gUnkEu_08860831
-  - {name: gUnkEu_08860848, record: JiminyLocalizedText, lines: [gUnk_09EDBD64, gUnk_09EDBD64Fr, gUnk_09EDBD64De, gUnk_09EDBD64It, gUnk_09EDBD64Es], lineCounts: [11, 13, 15, 12, 12]}
+  - {name: gUnkEu_08860848, record: JiminyLocalizedText, lines: [gJiminyCharacterDumboLines, gJiminyCharacterDumboLinesFrench, gJiminyCharacterDumboLinesGerman, gJiminyCharacterDumboLinesItalian, gJiminyCharacterDumboLinesSpanish], lineCounts: [11, 13, 15, 12, 12]}
   - gUnkEu_08860868
   - gUnkEu_0886087C
   - gUnkEu_08860894
@@ -11916,7 +11916,7 @@ entries:
   - gUnkEu_08860A48
   - gUnkEu_08860A4A
   - gUnkEu_08860A60
-  - {name: gUnkEu_08860A78, record: JiminyLocalizedText, lines: [gUnk_09EDBD90, gUnk_09EDBD90Fr, gUnk_09EDBD90De, gUnk_09EDBD90It, gUnk_09EDBD90Es], lineCounts: [6, 7, 7, 7, 6]}
+  - {name: gUnkEu_08860A78, record: JiminyLocalizedText, lines: [gJiminyCharacterBambiLines, gJiminyCharacterBambiLinesFrench, gJiminyCharacterBambiLinesGerman, gJiminyCharacterBambiLinesItalian, gJiminyCharacterBambiLinesSpanish], lineCounts: [6, 7, 7, 7, 6]}
   - gUnkEu_08860A98
   - gUnkEu_08860AAF
   - gUnkEu_08860AC4
@@ -11963,7 +11963,7 @@ entries:
   - gUnkEu_08860D8D
   - gUnkEu_08860D8F
   - gUnkEu_08860D9E
-  - {name: gUnkEu_08860DB4, record: JiminyLocalizedText, lines: [gUnk_09EDBDA8, gUnk_09EDBDA8Fr, gUnk_09EDBDA8De, gUnk_09EDBDA8It, gUnk_09EDBDA8Es], lineCounts: [8, 9, 10, 11, 8]}
+  - {name: gUnkEu_08860DB4, record: JiminyLocalizedText, lines: [gJiminyCharacterMushuLines, gJiminyCharacterMushuLinesFrench, gJiminyCharacterMushuLinesGerman, gJiminyCharacterMushuLinesItalian, gJiminyCharacterMushuLinesSpanish], lineCounts: [8, 9, 10, 11, 8]}
   - gUnkEu_08860DD4
   - gUnkEu_08860DE8
   - gUnkEu_08860DFD
@@ -12010,7 +12010,7 @@ entries:
   - gUnkEu_088610A8
   - gUnkEu_088610BF
   - gUnkEu_088610D4
-  - {name: gUnkEu_088610E8, record: JiminyLocalizedText, lines: [gUnk_09EDBDC8, gUnk_09EDBDC8Fr, gUnk_09EDBDC8De, gUnk_09EDBDC8It, gUnk_09EDBDC8Es], lineCounts: [8, 11, 9, 8, 10]}
+  - {name: gUnkEu_088610E8, record: JiminyLocalizedText, lines: [gJiminyCharacterMooglesLines, gJiminyCharacterMooglesLinesFrench, gJiminyCharacterMooglesLinesGerman, gJiminyCharacterMooglesLinesItalian, gJiminyCharacterMooglesLinesSpanish], lineCounts: [8, 11, 9, 8, 10]}
   - gUnkEu_08861108
   - gUnkEu_0886111D
   - gUnkEu_08861132
@@ -12083,7 +12083,7 @@ entries:
   - gUnkEu_088615F0
   - gUnkEu_08861607
   - gUnkEu_0886161E
-  - {name: gUnkEu_08861624, record: JiminyLocalizedText, lines: [gUnk_09EDBDE8, gUnk_09EDBDE8Fr, gUnk_09EDBDE8De, gUnk_09EDBDE8It, gUnk_09EDBDE8Es], lineCounts: [13, 12, 17, 16, 14]}
+  - {name: gUnkEu_08861624, record: JiminyLocalizedText, lines: [gJiminyCharacterLeonLines, gJiminyCharacterLeonLinesFrench, gJiminyCharacterLeonLinesGerman, gJiminyCharacterLeonLinesItalian, gJiminyCharacterLeonLinesSpanish], lineCounts: [13, 12, 17, 16, 14]}
   - gUnkEu_08861644
   - gUnkEu_0886165A
   - gUnkEu_08861671
@@ -12143,7 +12143,7 @@ entries:
   - gUnkEu_08861A3B
   - gUnkEu_08861A52
   - gUnkEu_08861A66
-  - {name: gUnkEu_08861A78, record: JiminyLocalizedText, lines: [gUnk_09EDBE1C, gUnk_09EDBE1CFr, gUnk_09EDBE1CDe, gUnk_09EDBE1CIt, gUnk_09EDBE1CEs], lineCounts: [11, 13, 13, 11, 11]}
+  - {name: gUnkEu_08861A78, record: JiminyLocalizedText, lines: [gJiminyCharacterYuffieLines, gJiminyCharacterYuffieLinesFrench, gJiminyCharacterYuffieLinesGerman, gJiminyCharacterYuffieLinesItalian, gJiminyCharacterYuffieLinesSpanish], lineCounts: [11, 13, 13, 11, 11]}
   - gUnkEu_08861A98
   - gUnkEu_08861AAA
   - gUnkEu_08861AC0
@@ -12210,7 +12210,7 @@ entries:
   - gUnkEu_08861F0D
   - gUnkEu_08861F21
   - gUnkEu_08861F38
-  - {name: gUnkEu_08861F4C, record: JiminyLocalizedText, lines: [gUnk_09EDBE48, gUnk_09EDBE48Fr, gUnk_09EDBE48De, gUnk_09EDBE48It, gUnk_09EDBE48Es], lineCounts: [12, 12, 16, 14, 12]}
+  - {name: gUnkEu_08861F4C, record: JiminyLocalizedText, lines: [gJiminyCharacterAerithLines, gJiminyCharacterAerithLinesFrench, gJiminyCharacterAerithLinesGerman, gJiminyCharacterAerithLinesItalian, gJiminyCharacterAerithLinesSpanish], lineCounts: [12, 12, 16, 14, 12]}
   - gUnkEu_08861F6C
   - gUnkEu_08861F7F
   - gUnkEu_08861F92
@@ -12251,7 +12251,7 @@ entries:
   - gUnkEu_088621EA
   - gUnkEu_088621EC
   - gUnkEu_08862202
-  - {name: gUnkEu_08862214, record: JiminyLocalizedText, lines: [gUnk_09EDBE78, gUnk_09EDBE78Fr, gUnk_09EDBE78De, gUnk_09EDBE78It, gUnk_09EDBE78Es], lineCounts: [8, 8, 9, 7, 8]}
+  - {name: gUnkEu_08862214, record: JiminyLocalizedText, lines: [gJiminyCharacterCidLines, gJiminyCharacterCidLinesFrench, gJiminyCharacterCidLinesGerman, gJiminyCharacterCidLinesItalian, gJiminyCharacterCidLinesSpanish], lineCounts: [8, 8, 9, 7, 8]}
   - gUnkEu_08862234
   - gUnkEu_08862249
   - gUnkEu_0886225B
@@ -12310,7 +12310,7 @@ entries:
   - gUnkEu_08862601
   - gUnkEu_08862613
   - gUnkEu_08862624
-  - {name: gUnkEu_08862634, record: JiminyLocalizedText, lines: [gUnk_09EDBE98, gUnk_09EDBE98Fr, gUnk_09EDBE98De, gUnk_09EDBE98It, gUnk_09EDBE98Es], lineCounts: [10, 12, 15, 11, 10]}
+  - {name: gUnkEu_08862634, record: JiminyLocalizedText, lines: [gJiminyCharacterCloudLines, gJiminyCharacterCloudLinesFrench, gJiminyCharacterCloudLinesGerman, gJiminyCharacterCloudLinesItalian, gJiminyCharacterCloudLinesSpanish], lineCounts: [10, 12, 15, 11, 10]}
   - gUnkEu_08862654
   - gUnkEu_08862665
   - gUnkEu_0886267B
@@ -12356,7 +12356,7 @@ entries:
   - gUnkEu_08862958
   - gUnkEu_08862969
   - gUnkEu_0886297E
-  - {name: gUnkEu_08862984, record: JiminyLocalizedText, lines: [gUnk_09EDD588, gUnk_09EDD588Fr, gUnk_09EDD588De, gUnk_09EDD588It, gUnk_09EDD588Es], lineCounts: [9, 9, 10, 8, 9]}
+  - {name: gUnkEu_08862984, record: JiminyLocalizedText, lines: [gJiminyCharacterTidusLines, gJiminyCharacterTidusLinesFrench, gJiminyCharacterTidusLinesGerman, gJiminyCharacterTidusLinesItalian, gJiminyCharacterTidusLinesSpanish], lineCounts: [9, 9, 10, 8, 9]}
   - gUnkEu_088629A4
   - gUnkEu_088629B6
   - gUnkEu_088629BF
@@ -12394,7 +12394,7 @@ entries:
   - gUnkEu_08862BE9
   - gUnkEu_08862C00
   - gUnkEu_08862C17
-  - {name: gUnkEu_08862C30, record: JiminyLocalizedText, lines: [gUnk_09EDD5AC, gUnk_09EDD5ACFr, gUnk_09EDD5ACDe, gUnk_09EDD5ACIt, gUnk_09EDD5ACEs], lineCounts: [7, 8, 8, 7, 7]}
+  - {name: gUnkEu_08862C30, record: JiminyLocalizedText, lines: [gJiminyCharacterWakkaLines, gJiminyCharacterWakkaLinesFrench, gJiminyCharacterWakkaLinesGerman, gJiminyCharacterWakkaLinesItalian, gJiminyCharacterWakkaLinesSpanish], lineCounts: [7, 8, 8, 7, 7]}
   - gUnkEu_08862C50
   - gUnkEu_08862C69
   - gUnkEu_08862C72
@@ -12434,7 +12434,7 @@ entries:
   - gUnkEu_08862EB4
   - gUnkEu_08862ECA
   - gUnkEu_08862EE0
-  - {name: gUnkEu_08862EEC, record: JiminyLocalizedText, lines: [gUnk_09EDD5C8, gUnk_09EDD5C8Fr, gUnk_09EDD5C8De, gUnk_09EDD5C8It, gUnk_09EDD5C8Es], lineCounts: [8, 7, 8, 8, 8]}
+  - {name: gUnkEu_08862EEC, record: JiminyLocalizedText, lines: [gJiminyCharacterSelphieLines, gJiminyCharacterSelphieLinesFrench, gJiminyCharacterSelphieLinesGerman, gJiminyCharacterSelphieLinesItalian, gJiminyCharacterSelphieLinesSpanish], lineCounts: [8, 7, 8, 8, 8]}
   - gUnkEu_08862F0C
   - gUnkEu_08862F1F
   - gUnkEu_08862F31
@@ -12513,7 +12513,7 @@ entries:
   - gUnkEu_0886344A
   - gUnkEu_0886344C
   - gUnkEu_08863463
-  - {name: gUnkEu_0886347C, record: JiminyLocalizedText, lines: [gUnk_09EDBEC0, gUnk_09EDBEC0Fr, gUnk_09EDBEC0De, gUnk_09EDBEC0It, gUnk_09EDBEC0Es], lineCounts: [15, 16, 19, 13, 15]}
+  - {name: gUnkEu_0886347C, record: JiminyLocalizedText, lines: [gJiminyCharacterNamineLines, gJiminyCharacterNamineLinesFrench, gJiminyCharacterNamineLinesGerman, gJiminyCharacterNamineLinesItalian, gJiminyCharacterNamineLinesSpanish], lineCounts: [15, 16, 19, 13, 15]}
   - gUnkEu_0886349C
   - gUnkEu_088634AE
   - gUnkEu_088634C4
@@ -12578,7 +12578,7 @@ entries:
   - gUnkEu_088638A3
   - gUnkEu_088638A5
   - gUnkEu_088638BC
-  - {name: gUnkEu_088638D4, record: JiminyLocalizedText, lines: [gUnk_09EDBEFC, gUnk_09EDBEFCFr, gUnk_09EDBEFCDe, gUnk_09EDBEFCIt, gUnk_09EDBEFCEs], lineCounts: [12, 14, 13, 12, 13]}
+  - {name: gUnkEu_088638D4, record: JiminyLocalizedText, lines: [gJiminyCharacterRikuReplicaLines, gJiminyCharacterRikuReplicaLinesFrench, gJiminyCharacterRikuReplicaLinesGerman, gJiminyCharacterRikuReplicaLinesItalian, gJiminyCharacterRikuReplicaLinesSpanish], lineCounts: [12, 14, 13, 12, 13]}
   - gUnkEu_088638F4
   - gUnkEu_08863908
   - gUnkEu_0886391D
@@ -12637,7 +12637,7 @@ entries:
   - gUnkEu_08863CCE
   - gUnkEu_08863CDE
   - gUnkEu_08863CF2
-  - {name: gUnkEu_08863D04, record: JiminyLocalizedText, lines: [gUnk_09EDBF2C, gUnk_09EDBF2CFr, gUnk_09EDBF2CDe, gUnk_09EDBF2CIt, gUnk_09EDBF2CEs], lineCounts: [11, 12, 12, 12, 11]}
+  - {name: gUnkEu_08863D04, record: JiminyLocalizedText, lines: [gJiminyCharacterAxelLines, gJiminyCharacterAxelLinesFrench, gJiminyCharacterAxelLinesGerman, gJiminyCharacterAxelLinesItalian, gJiminyCharacterAxelLinesSpanish], lineCounts: [11, 12, 12, 12, 11]}
   - gUnkEu_08863D24
   - gUnkEu_08863D3A
   - gUnkEu_08863D4F
@@ -12703,7 +12703,7 @@ entries:
   - gUnkEu_0886412A
   - gUnkEu_0886413C
   - gUnkEu_08864150
-  - {name: gUnkEu_08864160, record: JiminyLocalizedText, lines: [gUnk_09EDD5E8, gUnk_09EDD5E8Fr, gUnk_09EDD5E8De, gUnk_09EDD5E8It, gUnk_09EDD5E8Es], lineCounts: [13, 12, 14, 13, 13]}
+  - {name: gUnkEu_08864160, record: JiminyLocalizedText, lines: [gJiminyCharacterLarxeneLines, gJiminyCharacterLarxeneLinesFrench, gJiminyCharacterLarxeneLinesGerman, gJiminyCharacterLarxeneLinesItalian, gJiminyCharacterLarxeneLinesSpanish], lineCounts: [13, 12, 14, 13, 13]}
   - gUnkEu_08864180
   - gUnkEu_08864196
   - gUnkEu_088641AA
@@ -12765,7 +12765,7 @@ entries:
   - gUnkEu_088645B6
   - gUnkEu_088645CE
   - gUnkEu_088645E8
-  - {name: gUnkEu_088645FC, record: JiminyLocalizedText, lines: [gUnk_09EDBF58, gUnk_09EDBF58Fr, gUnk_09EDBF58De, gUnk_09EDBF58It, gUnk_09EDBF58Es], lineCounts: [11, 12, 14, 14, 10]}
+  - {name: gUnkEu_088645FC, record: JiminyLocalizedText, lines: [gJiminyCharacterVexenLines, gJiminyCharacterVexenLinesFrench, gJiminyCharacterVexenLinesGerman, gJiminyCharacterVexenLinesItalian, gJiminyCharacterVexenLinesSpanish], lineCounts: [11, 12, 14, 14, 10]}
   - gUnkEu_0886461C
   - gUnkEu_08864634
   - gUnkEu_08864648
@@ -12823,7 +12823,7 @@ entries:
   - gUnkEu_088649FF
   - gUnkEu_08864A17
   - gUnkEu_08864A2C
-  - {name: gUnkEu_08864A34, record: JiminyLocalizedText, lines: [gUnk_09EDBF84, gUnk_09EDBF84Fr, gUnk_09EDBF84De, gUnk_09EDBF84It, gUnk_09EDBF84Es], lineCounts: [10, 11, 14, 11, 11]}
+  - {name: gUnkEu_08864A34, record: JiminyLocalizedText, lines: [gJiminyCharacterMarluxiaLines, gJiminyCharacterMarluxiaLinesFrench, gJiminyCharacterMarluxiaLinesGerman, gJiminyCharacterMarluxiaLinesItalian, gJiminyCharacterMarluxiaLinesSpanish], lineCounts: [10, 11, 14, 11, 11]}
   - gUnkEu_08864A54
   - gUnkEu_08864A6A
   - gUnkEu_08864A80
@@ -12913,7 +12913,7 @@ entries:
   - gUnkEu_08865013
   - gUnkEu_08865029
   - gUnkEu_0886503E
-  - {name: gUnkEu_08865050, record: JiminyLocalizedText, lines: [gUnk_09EDBFAC, gUnk_09EDBFACFr, gUnk_09EDBFACDe, gUnk_09EDBFACIt, gUnk_09EDBFACEs], lineCounts: [16, 19, 19, 19, 16]}
+  - {name: gUnkEu_08865050, record: JiminyLocalizedText, lines: [gJiminyCharacterAladdinLines, gJiminyCharacterAladdinLinesFrench, gJiminyCharacterAladdinLinesGerman, gJiminyCharacterAladdinLinesItalian, gJiminyCharacterAladdinLinesSpanish], lineCounts: [16, 19, 19, 19, 16]}
   - gUnkEu_08865070
   - gUnkEu_08865085
   - gUnkEu_0886508B
@@ -12979,7 +12979,7 @@ entries:
   - gUnkEu_0886541C
   - gUnkEu_08865431
   - gUnkEu_08865443
-  - {name: gUnkEu_08865450, record: JiminyLocalizedText, lines: [gUnk_09EDBFEC, gUnk_09EDBFECFr, gUnk_09EDBFECDe, gUnk_09EDBFECIt, gUnk_09EDBFECEs], lineCounts: [11, 13, 14, 14, 13]}
+  - {name: gUnkEu_08865450, record: JiminyLocalizedText, lines: [gJiminyCharacterGenieLines, gJiminyCharacterGenieLinesFrench, gJiminyCharacterGenieLinesGerman, gJiminyCharacterGenieLinesItalian, gJiminyCharacterGenieLinesSpanish], lineCounts: [11, 13, 14, 14, 13]}
   - gUnkEu_08865470
   - gUnkEu_08865485
   - gUnkEu_08865487
@@ -13012,7 +13012,7 @@ entries:
   - gUnkEu_08865662
   - gUnkEu_0886567B
   - gUnkEu_08865692
-  - {name: gUnkEu_088656A0, record: JiminyLocalizedText, lines: [gUnk_09EDC018, gUnk_09EDC018Fr, gUnk_09EDC018De, gUnk_09EDC018It, gUnk_09EDC018Es], lineCounts: [6, 6, 7, 7, 6]}
+  - {name: gUnkEu_088656A0, record: JiminyLocalizedText, lines: [gJiminyCharacterJasmineLines, gJiminyCharacterJasmineLinesFrench, gJiminyCharacterJasmineLinesGerman, gJiminyCharacterJasmineLinesItalian, gJiminyCharacterJasmineLinesSpanish], lineCounts: [6, 6, 7, 7, 6]}
   - gUnkEu_088656C0
   - gUnkEu_088656D5
   - gUnkEu_088656DD
@@ -13047,7 +13047,7 @@ entries:
   - gUnkEu_08865896
   - gUnkEu_088658A9
   - gUnkEu_088658BD
-  - {name: gUnkEu_088658CC, record: JiminyLocalizedText, lines: [gUnk_09EDC030, gUnk_09EDC030Fr, gUnk_09EDC030De, gUnk_09EDC030It, gUnk_09EDC030Es], lineCounts: [7, 6, 7, 7, 7]}
+  - {name: gUnkEu_088658CC, record: JiminyLocalizedText, lines: [gJiminyCharacterIagoLines, gJiminyCharacterIagoLinesFrench, gJiminyCharacterIagoLinesGerman, gJiminyCharacterIagoLinesItalian, gJiminyCharacterIagoLinesSpanish], lineCounts: [7, 6, 7, 7, 7]}
   - gUnkEu_088658EC
   - gUnkEu_088658FB
   - gUnkEu_08865913
@@ -13091,7 +13091,7 @@ entries:
   - gUnkEu_08865B9B
   - gUnkEu_08865BAE
   - gUnkEu_08865BC0
-  - {name: gUnkEu_08865BD8, record: JiminyLocalizedText, lines: [gUnk_09EDC04C, gUnk_09EDC04CFr, gUnk_09EDC04CDe, gUnk_09EDC04CIt, gUnk_09EDC04CEs], lineCounts: [8, 9, 10, 7, 9]}
+  - {name: gUnkEu_08865BD8, record: JiminyLocalizedText, lines: [gJiminyCharacterJafarLines, gJiminyCharacterJafarLinesFrench, gJiminyCharacterJafarLinesGerman, gJiminyCharacterJafarLinesItalian, gJiminyCharacterJafarLinesSpanish], lineCounts: [8, 9, 10, 7, 9]}
   - gUnkEu_08865BF8
   - gUnkEu_08865C0C
   - gUnkEu_08865C0E
@@ -13136,7 +13136,7 @@ entries:
   - gUnkEu_08865EA2
   - gUnkEu_08865EB6
   - gUnkEu_08865ECD
-  - {name: gUnkEu_08865EE4, record: JiminyLocalizedText, lines: [gUnk_09EDC06C, gUnk_09EDC06CFr, gUnk_09EDC06CDe, gUnk_09EDC06CIt, gUnk_09EDC06CEs], lineCounts: [7, 9, 11, 9, 8]}
+  - {name: gUnkEu_08865EE4, record: JiminyLocalizedText, lines: [gJiminyCharacterJafarGenieLines, gJiminyCharacterJafarGenieLinesFrench, gJiminyCharacterJafarGenieLinesGerman, gJiminyCharacterJafarGenieLinesItalian, gJiminyCharacterJafarGenieLinesSpanish], lineCounts: [7, 9, 11, 9, 8]}
   - gUnkEu_08865F04
   - gUnkEu_08865F15
   - gUnkEu_08865F2C
@@ -13175,7 +13175,7 @@ entries:
   - gUnkEu_08866172
   - gUnkEu_08866188
   - gUnkEu_0886619D
-  - {name: gUnkEu_088661B0, record: JiminyLocalizedText, lines: [gUnk_09EDC088, gUnk_09EDC088Fr, gUnk_09EDC088De, gUnk_09EDC088It, gUnk_09EDC088Es], lineCounts: [7, 9, 8, 7, 7]}
+  - {name: gUnkEu_088661B0, record: JiminyLocalizedText, lines: [gJiminyCharacterJackLines, gJiminyCharacterJackLinesFrench, gJiminyCharacterJackLinesGerman, gJiminyCharacterJackLinesItalian, gJiminyCharacterJackLinesSpanish], lineCounts: [7, 9, 8, 7, 7]}
   - gUnkEu_088661D0
   - gUnkEu_088661E9
   - gUnkEu_08866201
@@ -13213,7 +13213,7 @@ entries:
   - gUnkEu_0886641A
   - gUnkEu_0886641C
   - gUnkEu_0886642B
-  - {name: gUnkEu_08866440, record: JiminyLocalizedText, lines: [gUnk_09EDC0A4, gUnk_09EDC0A4Fr, gUnk_09EDC0A4De, gUnk_09EDC0A4It, gUnk_09EDC0A4Es], lineCounts: [7, 7, 8, 8, 7]}
+  - {name: gUnkEu_08866440, record: JiminyLocalizedText, lines: [gJiminyCharacterSallyLines, gJiminyCharacterSallyLinesFrench, gJiminyCharacterSallyLinesGerman, gJiminyCharacterSallyLinesItalian, gJiminyCharacterSallyLinesSpanish], lineCounts: [7, 7, 8, 8, 7]}
   - gUnkEu_08866460
   - gUnkEu_08866475
   - gUnkEu_0886648B
@@ -13275,7 +13275,7 @@ entries:
   - gUnkEu_0886687D
   - gUnkEu_08866892
   - gUnkEu_088668A0
-  - {name: gUnkEu_088668B0, record: JiminyLocalizedText, lines: [gUnk_09EDC0C0, gUnk_09EDC0C0Fr, gUnk_09EDC0C0De, gUnk_09EDC0C0It, gUnk_09EDC0C0Es], lineCounts: [10, 12, 16, 12, 11]}
+  - {name: gUnkEu_088668B0, record: JiminyLocalizedText, lines: [gJiminyCharacterDrFinkelsteinLines, gJiminyCharacterDrFinkelsteinLinesFrench, gJiminyCharacterDrFinkelsteinLinesGerman, gJiminyCharacterDrFinkelsteinLinesItalian, gJiminyCharacterDrFinkelsteinLinesSpanish], lineCounts: [10, 12, 16, 12, 11]}
   - gUnkEu_088668D0
   - gUnkEu_088668E7
   - gUnkEu_088668FE
@@ -13326,7 +13326,7 @@ entries:
   - gUnkEu_08866C14
   - gUnkEu_08866C2A
   - gUnkEu_08866C3E
-  - {name: gUnkEu_08866C54, record: JiminyLocalizedText, lines: [gUnk_09EDC0E8, gUnk_09EDC0E8Fr, gUnk_09EDC0E8De, gUnk_09EDC0E8It, gUnk_09EDC0E8Es], lineCounts: [9, 10, 13, 10, 8]}
+  - {name: gUnkEu_08866C54, record: JiminyLocalizedText, lines: [gJiminyCharacterOogieBoogieLines, gJiminyCharacterOogieBoogieLinesFrench, gJiminyCharacterOogieBoogieLinesGerman, gJiminyCharacterOogieBoogieLinesItalian, gJiminyCharacterOogieBoogieLinesSpanish], lineCounts: [9, 10, 13, 10, 8]}
   - gUnkEu_08866C74
   - gUnkEu_08866C84
   - gUnkEu_08866C9B
@@ -13401,7 +13401,7 @@ entries:
   - gUnkEu_0886714D
   - gUnkEu_08867166
   - gUnkEu_0886717C
-  - {name: gUnkEu_08867190, record: JiminyLocalizedText, lines: [gUnk_09EDC10C, gUnk_09EDC10CFr, gUnk_09EDC10CDe, gUnk_09EDC10CIt, gUnk_09EDC10CEs], lineCounts: [13, 16, 17, 15, 13]}
+  - {name: gUnkEu_08867190, record: JiminyLocalizedText, lines: [gJiminyCharacterPinocchioLines, gJiminyCharacterPinocchioLinesFrench, gJiminyCharacterPinocchioLinesGerman, gJiminyCharacterPinocchioLinesItalian, gJiminyCharacterPinocchioLinesSpanish], lineCounts: [13, 16, 17, 15, 13]}
   - gUnkEu_088671B0
   - gUnkEu_088671C5
   - gUnkEu_088671DB
@@ -13477,7 +13477,7 @@ entries:
   - gUnkEu_08867653
   - gUnkEu_08867667
   - gUnkEu_0886767B
-  - {name: gUnkEu_08867690, record: JiminyLocalizedText, lines: [gUnk_09EDC140, gUnk_09EDC140Fr, gUnk_09EDC140De, gUnk_09EDC140It, gUnk_09EDC140Es], lineCounts: [14, 15, 17, 15, 14]}
+  - {name: gUnkEu_08867690, record: JiminyLocalizedText, lines: [gJiminyCharacterGeppettoLines, gJiminyCharacterGeppettoLinesFrench, gJiminyCharacterGeppettoLinesGerman, gJiminyCharacterGeppettoLinesItalian, gJiminyCharacterGeppettoLinesSpanish], lineCounts: [14, 15, 17, 15, 14]}
   - gUnkEu_088676B0
   - gUnkEu_088676C5
   - gUnkEu_088676DD
@@ -13532,7 +13532,7 @@ entries:
   - gUnkEu_088679EF
   - gUnkEu_088679F1
   - gUnkEu_08867A05
-  - {name: gUnkEu_08867A20, record: JiminyLocalizedText, lines: [gUnk_09EDC178, gUnk_09EDC178Fr, gUnk_09EDC178De, gUnk_09EDC178It, gUnk_09EDC178Es], lineCounts: [10, 12, 12, 10, 10]}
+  - {name: gUnkEu_08867A20, record: JiminyLocalizedText, lines: [gJiminyCharacterHerculesLines, gJiminyCharacterHerculesLinesFrench, gJiminyCharacterHerculesLinesGerman, gJiminyCharacterHerculesLinesItalian, gJiminyCharacterHerculesLinesSpanish], lineCounts: [10, 12, 12, 10, 10]}
   - gUnkEu_08867A40
   - gUnkEu_08867A55
   - gUnkEu_08867A67
@@ -13568,7 +13568,7 @@ entries:
   - gUnkEu_08867C32
   - gUnkEu_08867C47
   - gUnkEu_08867C5A
-  - {name: gUnkEu_08867C68, record: JiminyLocalizedText, lines: [gUnk_09EDC1A0, gUnk_09EDC1A0Fr, gUnk_09EDC1A0De, gUnk_09EDC1A0It, gUnk_09EDC1A0Es], lineCounts: [7, 7, 7, 7, 7]}
+  - {name: gUnkEu_08867C68, record: JiminyLocalizedText, lines: [gJiminyCharacterPhiloctetesLines, gJiminyCharacterPhiloctetesLinesFrench, gJiminyCharacterPhiloctetesLinesGerman, gJiminyCharacterPhiloctetesLinesItalian, gJiminyCharacterPhiloctetesLinesSpanish], lineCounts: [7, 7, 7, 7, 7]}
   - gUnkEu_08867C88
   - gUnkEu_08867C95
   - gUnkEu_08867CA1
@@ -13615,7 +13615,7 @@ entries:
   - gUnkEu_08867F60
   - gUnkEu_08867F73
   - gUnkEu_08867F8A
-  - {name: gUnkEu_08867FA0, record: JiminyLocalizedText, lines: [gUnk_09EDC1BC, gUnk_09EDC1BCFr, gUnk_09EDC1BCDe, gUnk_09EDC1BCIt, gUnk_09EDC1BCEs], lineCounts: [9, 8, 12, 8, 9]}
+  - {name: gUnkEu_08867FA0, record: JiminyLocalizedText, lines: [gJiminyCharacterHadesLines, gJiminyCharacterHadesLinesFrench, gJiminyCharacterHadesLinesGerman, gJiminyCharacterHadesLinesItalian, gJiminyCharacterHadesLinesSpanish], lineCounts: [9, 8, 12, 8, 9]}
   - gUnkEu_08867FC0
   - gUnkEu_08867FD8
   - gUnkEu_08867FED
@@ -13676,7 +13676,7 @@ entries:
   - gUnkEu_088683C2
   - gUnkEu_088683D4
   - gUnkEu_088683E6
-  - {name: gUnkEu_088683FC, record: JiminyLocalizedText, lines: [gUnk_09EDC1E0, gUnk_09EDC1E0Fr, gUnk_09EDC1E0De, gUnk_09EDC1E0It, gUnk_09EDC1E0Es], lineCounts: [11, 13, 13, 13, 10]}
+  - {name: gUnkEu_088683FC, record: JiminyLocalizedText, lines: [gJiminyCharacterAliceLines, gJiminyCharacterAliceLinesFrench, gJiminyCharacterAliceLinesGerman, gJiminyCharacterAliceLinesItalian, gJiminyCharacterAliceLinesSpanish], lineCounts: [11, 13, 13, 13, 10]}
   - gUnkEu_0886841C
   - gUnkEu_08868430
   - gUnkEu_08868444
@@ -13722,7 +13722,7 @@ entries:
   - gUnkEu_088686E2
   - gUnkEu_088686F3
   - gUnkEu_08868707
-  - {name: gUnkEu_0886871C, record: JiminyLocalizedText, lines: [gUnk_09EDC20C, gUnk_09EDC20CFr, gUnk_09EDC20CDe, gUnk_09EDC20CIt, gUnk_09EDC20CEs], lineCounts: [8, 10, 10, 9, 8]}
+  - {name: gUnkEu_0886871C, record: JiminyLocalizedText, lines: [gJiminyCharacterQueenOfHeartsLines, gJiminyCharacterQueenOfHeartsLinesFrench, gJiminyCharacterQueenOfHeartsLinesGerman, gJiminyCharacterQueenOfHeartsLinesItalian, gJiminyCharacterQueenOfHeartsLinesSpanish], lineCounts: [8, 10, 10, 9, 8]}
   - gUnkEu_0886873C
   - gUnkEu_08868754
   - gUnkEu_08868765
@@ -13754,7 +13754,7 @@ entries:
   - gUnkEu_0886891A
   - gUnkEu_0886892D
   - gUnkEu_08868942
-  - {name: gUnkEu_08868954, record: JiminyLocalizedText, lines: [gUnk_09EDC22C, gUnk_09EDC22CFr, gUnk_09EDC22CDe, gUnk_09EDC22CIt, gUnk_09EDC22CEs], lineCounts: [7, 6, 6, 6, 6]}
+  - {name: gUnkEu_08868954, record: JiminyLocalizedText, lines: [gJiminyCharacterWhiteRabbitLines, gJiminyCharacterWhiteRabbitLinesFrench, gJiminyCharacterWhiteRabbitLinesGerman, gJiminyCharacterWhiteRabbitLinesItalian, gJiminyCharacterWhiteRabbitLinesSpanish], lineCounts: [7, 6, 6, 6, 6]}
   - gUnkEu_08868974
   - gUnkEu_0886898A
   - gUnkEu_088689A2
@@ -13786,7 +13786,7 @@ entries:
   - gUnkEu_08868B3E
   - gUnkEu_08868B54
   - gUnkEu_08868B68
-  - {name: gUnkEu_08868B78, record: JiminyLocalizedText, lines: [gUnk_09EDC248, gUnk_09EDC248Fr, gUnk_09EDC248De, gUnk_09EDC248It, gUnk_09EDC248Es], lineCounts: [6, 7, 6, 6, 6]}
+  - {name: gUnkEu_08868B78, record: JiminyLocalizedText, lines: [gJiminyCharacterCardOfHeartsLines, gJiminyCharacterCardOfHeartsLinesFrench, gJiminyCharacterCardOfHeartsLinesGerman, gJiminyCharacterCardOfHeartsLinesItalian, gJiminyCharacterCardOfHeartsLinesSpanish], lineCounts: [6, 7, 6, 6, 6]}
   - gUnkEu_08868B98
   - gUnkEu_08868BAE
   - gUnkEu_08868BC6
@@ -13818,7 +13818,7 @@ entries:
   - gUnkEu_08868D62
   - gUnkEu_08868D78
   - gUnkEu_08868D8C
-  - {name: gUnkEu_08868D9C, record: JiminyLocalizedText, lines: [gUnk_09EDC260, gUnk_09EDC260Fr, gUnk_09EDC260De, gUnk_09EDC260It, gUnk_09EDC260Es], lineCounts: [6, 7, 6, 6, 6]}
+  - {name: gUnkEu_08868D9C, record: JiminyLocalizedText, lines: [gJiminyCharacterCardOfSpadesLines, gJiminyCharacterCardOfSpadesLinesFrench, gJiminyCharacterCardOfSpadesLinesGerman, gJiminyCharacterCardOfSpadesLinesItalian, gJiminyCharacterCardOfSpadesLinesSpanish], lineCounts: [6, 7, 6, 6, 6]}
   - gUnkEu_08868DBC
   - gUnkEu_08868DD3
   - gUnkEu_08868DEB
@@ -13859,7 +13859,7 @@ entries:
   - gUnkEu_08869038
   - gUnkEu_0886904B
   - gUnkEu_08869058
-  - {name: gUnkEu_08869070, record: JiminyLocalizedText, lines: [gUnk_09EDC278, gUnk_09EDC278Fr, gUnk_09EDC278De, gUnk_09EDC278It, gUnk_09EDC278Es], lineCounts: [8, 9, 8, 7, 8]}
+  - {name: gUnkEu_08869070, record: JiminyLocalizedText, lines: [gJiminyCharacterCheshireCatLines, gJiminyCharacterCheshireCatLinesFrench, gJiminyCharacterCheshireCatLinesGerman, gJiminyCharacterCheshireCatLinesItalian, gJiminyCharacterCheshireCatLinesSpanish], lineCounts: [8, 9, 8, 7, 8]}
   - gUnkEu_08869090
   - gUnkEu_088690A5
   - gUnkEu_088690B9
@@ -13942,7 +13942,7 @@ entries:
   - gUnkEu_088695DE
   - gUnkEu_088695F7
   - gUnkEu_08869606
-  - {name: gUnkEu_0886961C, record: JiminyLocalizedText, lines: [gUnk_09EDD61C, gUnk_09EDD61CFr, gUnk_09EDD61CDe, gUnk_09EDD61CIt, gUnk_09EDD61CEs], lineCounts: [15, 16, 18, 18, 15]}
+  - {name: gUnkEu_0886961C, record: JiminyLocalizedText, lines: [gJiminyCharacterArielLines, gJiminyCharacterArielLinesFrench, gJiminyCharacterArielLinesGerman, gJiminyCharacterArielLinesItalian, gJiminyCharacterArielLinesSpanish], lineCounts: [15, 16, 18, 18, 15]}
   - gUnkEu_0886963C
   - gUnkEu_08869654
   - gUnkEu_0886966A
@@ -13987,7 +13987,7 @@ entries:
   - gUnkEu_08869911
   - gUnkEu_08869927
   - gUnkEu_08869937
-  - {name: gUnkEu_08869944, record: JiminyLocalizedText, lines: [gUnk_09EDC298, gUnk_09EDC298Fr, gUnk_09EDC298De, gUnk_09EDC298It, gUnk_09EDC298Es], lineCounts: [8, 9, 8, 11, 8]}
+  - {name: gUnkEu_08869944, record: JiminyLocalizedText, lines: [gJiminyCharacterSebastianLines, gJiminyCharacterSebastianLinesFrench, gJiminyCharacterSebastianLinesGerman, gJiminyCharacterSebastianLinesItalian, gJiminyCharacterSebastianLinesSpanish], lineCounts: [8, 9, 8, 11, 8]}
   - gUnkEu_08869964
   - gUnkEu_08869972
   - gUnkEu_08869974
@@ -14040,7 +14040,7 @@ entries:
   - gUnkEu_08869C78
   - gUnkEu_08869C8E
   - gUnkEu_08869C9F
-  - {name: gUnkEu_08869CB0, record: JiminyLocalizedText, lines: [gUnk_09EDC2B8, gUnk_09EDC2B8Fr, gUnk_09EDC2B8De, gUnk_09EDC2B8It, gUnk_09EDC2B8Es], lineCounts: [10, 12, 11, 9, 10]}
+  - {name: gUnkEu_08869CB0, record: JiminyLocalizedText, lines: [gJiminyCharacterFlounderLines, gJiminyCharacterFlounderLinesFrench, gJiminyCharacterFlounderLinesGerman, gJiminyCharacterFlounderLinesItalian, gJiminyCharacterFlounderLinesSpanish], lineCounts: [10, 12, 11, 9, 10]}
   - gUnkEu_08869CD0
   - gUnkEu_08869CE4
   - gUnkEu_08869CFE
@@ -14086,7 +14086,7 @@ entries:
   - gUnkEu_08869FE6
   - gUnkEu_08869FFE
   - gUnkEu_0886A013
-  - {name: gUnkEu_0886A024, record: JiminyLocalizedText, lines: [gUnk_09EDC2E0, gUnk_09EDC2E0Fr, gUnk_09EDC2E0De, gUnk_09EDC2E0It, gUnk_09EDC2E0Es], lineCounts: [9, 10, 9, 8, 9]}
+  - {name: gUnkEu_0886A024, record: JiminyLocalizedText, lines: [gJiminyCharacterUrsulaLines, gJiminyCharacterUrsulaLinesFrench, gJiminyCharacterUrsulaLinesGerman, gJiminyCharacterUrsulaLinesItalian, gJiminyCharacterUrsulaLinesSpanish], lineCounts: [9, 10, 9, 8, 9]}
   - gUnkEu_0886A044
   - gUnkEu_0886A057
   - gUnkEu_0886A06C
@@ -14153,7 +14153,7 @@ entries:
   - gUnkEu_0886A455
   - gUnkEu_0886A46B
   - gUnkEu_0886A482
-  - {name: gUnkEu_0886A49C, record: JiminyLocalizedText, lines: [gUnk_09EDC304, gUnk_09EDC304Fr, gUnk_09EDC304De, gUnk_09EDC304It, gUnk_09EDC304Es], lineCounts: [13, 13, 15, 13, 12]}
+  - {name: gUnkEu_0886A49C, record: JiminyLocalizedText, lines: [gJiminyCharacterPeterPanLines, gJiminyCharacterPeterPanLinesFrench, gJiminyCharacterPeterPanLinesGerman, gJiminyCharacterPeterPanLinesItalian, gJiminyCharacterPeterPanLinesSpanish], lineCounts: [13, 13, 15, 13, 12]}
   - gUnkEu_0886A4BC
   - gUnkEu_0886A4D3
   - gUnkEu_0886A4EB
@@ -14175,7 +14175,7 @@ entries:
   - gUnkEu_0886A61A
   - gUnkEu_0886A62D
   - gUnkEu_0886A63F
-  - {name: gUnkEu_0886A654, record: JiminyLocalizedText, lines: [gUnk_09EDC338, gUnk_09EDC338Fr, gUnk_09EDC338De, gUnk_09EDC338It, gUnk_09EDC338Es], lineCounts: [4, 4, 5, 4, 4]}
+  - {name: gUnkEu_0886A654, record: JiminyLocalizedText, lines: [gJiminyCharacterTinkerBellLines, gJiminyCharacterTinkerBellLinesFrench, gJiminyCharacterTinkerBellLinesGerman, gJiminyCharacterTinkerBellLinesItalian, gJiminyCharacterTinkerBellLinesSpanish], lineCounts: [4, 4, 5, 4, 4]}
   - gUnkEu_0886A674
   - gUnkEu_0886A68B
   - gUnkEu_0886A6A0
@@ -14215,7 +14215,7 @@ entries:
   - gUnkEu_0886A907
   - gUnkEu_0886A91D
   - gUnkEu_0886A932
-  - {name: gUnkEu_0886A94C, record: JiminyLocalizedText, lines: [gUnk_09EDC348, gUnk_09EDC348Fr, gUnk_09EDC348De, gUnk_09EDC348It, gUnk_09EDC348Es], lineCounts: [7, 8, 8, 9, 7]}
+  - {name: gUnkEu_0886A94C, record: JiminyLocalizedText, lines: [gJiminyCharacterWendyLines, gJiminyCharacterWendyLinesFrench, gJiminyCharacterWendyLinesGerman, gJiminyCharacterWendyLinesItalian, gJiminyCharacterWendyLinesSpanish], lineCounts: [7, 8, 8, 9, 7]}
   - gUnkEu_0886A96C
   - gUnkEu_0886A981
   - gUnkEu_0886A996
@@ -14277,7 +14277,7 @@ entries:
   - gUnkEu_0886AD2C
   - gUnkEu_0886AD3E
   - gUnkEu_0886AD52
-  - {name: gUnkEu_0886AD64, record: JiminyLocalizedText, lines: [gUnk_09EDC364, gUnk_09EDC364Fr, gUnk_09EDC364De, gUnk_09EDC364It, gUnk_09EDC364Es], lineCounts: [12, 12, 13, 12, 12]}
+  - {name: gUnkEu_0886AD64, record: JiminyLocalizedText, lines: [gJiminyCharacterHookLines, gJiminyCharacterHookLinesFrench, gJiminyCharacterHookLinesGerman, gJiminyCharacterHookLinesItalian, gJiminyCharacterHookLinesSpanish], lineCounts: [12, 12, 13, 12, 12]}
   - gUnkEu_0886AD84
   - gUnkEu_0886AD99
   - gUnkEu_0886ADB1
@@ -14333,7 +14333,7 @@ entries:
   - gUnkEu_0886B13F
   - gUnkEu_0886B157
   - gUnkEu_0886B16A
-  - {name: gUnkEu_0886B178, record: JiminyLocalizedText, lines: [gUnk_09EDC394, gUnk_09EDC394Fr, gUnk_09EDC394De, gUnk_09EDC394It, gUnk_09EDC394Es], lineCounts: [10, 11, 13, 11, 10]}
+  - {name: gUnkEu_0886B178, record: JiminyLocalizedText, lines: [gJiminyCharacterBeastLines, gJiminyCharacterBeastLinesFrench, gJiminyCharacterBeastLinesGerman, gJiminyCharacterBeastLinesItalian, gJiminyCharacterBeastLinesSpanish], lineCounts: [10, 11, 13, 11, 10]}
   - gUnkEu_0886B198
   - gUnkEu_0886B1AA
   - gUnkEu_0886B1BE
@@ -14391,7 +14391,7 @@ entries:
   - gUnkEu_0886B535
   - gUnkEu_0886B54B
   - gUnkEu_0886B560
-  - {name: gUnkEu_0886B574, record: JiminyLocalizedText, lines: [gUnk_09EDC3BC, gUnk_09EDC3BCFr, gUnk_09EDC3BCDe, gUnk_09EDC3BCIt, gUnk_09EDC3BCEs], lineCounts: [11, 11, 12, 12, 11]}
+  - {name: gUnkEu_0886B574, record: JiminyLocalizedText, lines: [gJiminyCharacterBelleLines, gJiminyCharacterBelleLinesFrench, gJiminyCharacterBelleLinesGerman, gJiminyCharacterBelleLinesItalian, gJiminyCharacterBelleLinesSpanish], lineCounts: [11, 11, 12, 12, 11]}
   - gUnkEu_0886B594
   - gUnkEu_0886B5A9
   - gUnkEu_0886B5BD
@@ -14447,7 +14447,7 @@ entries:
   - gUnkEu_0886B937
   - gUnkEu_0886B94C
   - gUnkEu_0886B961
-  - {name: gUnkEu_0886B974, record: JiminyLocalizedText, lines: [gUnk_09EDC3E8, gUnk_09EDC3E8Fr, gUnk_09EDC3E8De, gUnk_09EDC3E8It, gUnk_09EDC3E8Es], lineCounts: [11, 10, 11, 12, 11]}
+  - {name: gUnkEu_0886B974, record: JiminyLocalizedText, lines: [gJiminyCharacterMaleficentLines, gJiminyCharacterMaleficentLinesFrench, gJiminyCharacterMaleficentLinesGerman, gJiminyCharacterMaleficentLinesItalian, gJiminyCharacterMaleficentLinesSpanish], lineCounts: [11, 10, 11, 12, 11]}
   - gUnkEu_0886B994
   - gUnkEu_0886B9A8
   - gUnkEu_0886B9AE
@@ -14489,7 +14489,7 @@ entries:
   - gUnkEu_0886BBEF
   - gUnkEu_0886BC08
   - gUnkEu_0886BC1D
-  - {name: gUnkEu_0886BC2C, record: JiminyLocalizedText, lines: [gUnk_09EDC414, gUnk_09EDC414Fr, gUnk_09EDC414De, gUnk_09EDC414It, gUnk_09EDC414Es], lineCounts: [8, 8, 10, 7, 8]}
+  - {name: gUnkEu_0886BC2C, record: JiminyLocalizedText, lines: [gJiminyCharacterDragonMaleficentLines, gJiminyCharacterDragonMaleficentLinesFrench, gJiminyCharacterDragonMaleficentLinesGerman, gJiminyCharacterDragonMaleficentLinesItalian, gJiminyCharacterDragonMaleficentLinesSpanish], lineCounts: [8, 8, 10, 7, 8]}
   - gUnkEu_0886BC4C
   - gUnkEu_0886BC64
   - gUnkEu_0886BC7A
@@ -14533,7 +14533,7 @@ entries:
   - gUnkEu_0886BF31
   - gUnkEu_0886BF42
   - gUnkEu_0886BF56
-  - {name: gUnkEu_0886BF6C, record: JiminyLocalizedText, lines: [gUnk_09EDD658, gUnk_09EDD658Fr, gUnk_09EDD658De, gUnk_09EDD658It, gUnk_09EDD658Es], lineCounts: [9, 9, 9, 8, 8]}
+  - {name: gUnkEu_0886BF6C, record: JiminyLocalizedText, lines: [gJiminyCharacterWinnieThePoohLines, gJiminyCharacterWinnieThePoohLinesFrench, gJiminyCharacterWinnieThePoohLinesGerman, gJiminyCharacterWinnieThePoohLinesItalian, gJiminyCharacterWinnieThePoohLinesSpanish], lineCounts: [9, 9, 9, 8, 8]}
   - gUnkEu_0886BF8C
   - gUnkEu_0886BFA3
   - gUnkEu_0886BFA5
@@ -14565,7 +14565,7 @@ entries:
   - gUnkEu_0886C17D
   - gUnkEu_0886C193
   - gUnkEu_0886C1A8
-  - {name: gUnkEu_0886C1B8, record: JiminyLocalizedText, lines: [gUnk_09EDC434, gUnk_09EDC434Fr, gUnk_09EDC434De, gUnk_09EDC434It, gUnk_09EDC434Es], lineCounts: [6, 6, 7, 6, 6]}
+  - {name: gUnkEu_0886C1B8, record: JiminyLocalizedText, lines: [gJiminyCharacterPigletLines, gJiminyCharacterPigletLinesFrench, gJiminyCharacterPigletLinesGerman, gJiminyCharacterPigletLinesItalian, gJiminyCharacterPigletLinesSpanish], lineCounts: [6, 6, 7, 6, 6]}
   - gUnkEu_0886C1D8
   - gUnkEu_0886C1F1
   - gUnkEu_0886C204
@@ -14596,7 +14596,7 @@ entries:
   - gUnkEu_0886C3A3
   - gUnkEu_0886C3A5
   - gUnkEu_0886C3BD
-  - {name: gUnkEu_0886C3D4, record: JiminyLocalizedText, lines: [gUnk_09EDC44C, gUnk_09EDC44CFr, gUnk_09EDC44CDe, gUnk_09EDC44CIt, gUnk_09EDC44CEs], lineCounts: [6, 7, 6, 6, 5]}
+  - {name: gUnkEu_0886C3D4, record: JiminyLocalizedText, lines: [gJiminyCharacterOwlLines, gJiminyCharacterOwlLinesFrench, gJiminyCharacterOwlLinesGerman, gJiminyCharacterOwlLinesItalian, gJiminyCharacterOwlLinesSpanish], lineCounts: [6, 7, 6, 6, 5]}
   - gUnkEu_0886C3F4
   - gUnkEu_0886C406
   - gUnkEu_0886C41C
@@ -14627,7 +14627,7 @@ entries:
   - gUnkEu_0886C59E
   - gUnkEu_0886C5B5
   - gUnkEu_0886C5C6
-  - {name: gUnkEu_0886C5E0, record: JiminyLocalizedText, lines: [gUnk_09EDC464, gUnk_09EDC464Fr, gUnk_09EDC464De, gUnk_09EDC464It, gUnk_09EDC464Es], lineCounts: [6, 6, 6, 6, 6]}
+  - {name: gUnkEu_0886C5E0, record: JiminyLocalizedText, lines: [gJiminyCharacterRooLines, gJiminyCharacterRooLinesFrench, gJiminyCharacterRooLinesGerman, gJiminyCharacterRooLinesItalian, gJiminyCharacterRooLinesSpanish], lineCounts: [6, 6, 6, 6, 6]}
   - gUnkEu_0886C600
   - gUnkEu_0886C616
   - gUnkEu_0886C62D
@@ -14669,7 +14669,7 @@ entries:
   - gUnkEu_0886C88D
   - gUnkEu_0886C8A1
   - gUnkEu_0886C8B5
-  - {name: gUnkEu_0886C8D0, record: JiminyLocalizedText, lines: [gUnk_09EDC47C, gUnk_09EDC47CFr, gUnk_09EDC47CDe, gUnk_09EDC47CIt, gUnk_09EDC47CEs], lineCounts: [8, 9, 9, 7, 8]}
+  - {name: gUnkEu_0886C8D0, record: JiminyLocalizedText, lines: [gJiminyCharacterEeyoreLines, gJiminyCharacterEeyoreLinesFrench, gJiminyCharacterEeyoreLinesGerman, gJiminyCharacterEeyoreLinesItalian, gJiminyCharacterEeyoreLinesSpanish], lineCounts: [8, 9, 9, 7, 8]}
   - gUnkEu_0886C8F0
   - gUnkEu_0886C902
   - gUnkEu_0886C918
@@ -14714,7 +14714,7 @@ entries:
   - gUnkEu_0886CBC6
   - gUnkEu_0886CBDD
   - gUnkEu_0886CBF0
-  - {name: gUnkEu_0886CC00, record: JiminyLocalizedText, lines: [gUnk_09EDC49C, gUnk_09EDC49CFr, gUnk_09EDC49CDe, gUnk_09EDC49CIt, gUnk_09EDC49CEs], lineCounts: [8, 10, 9, 9, 8]}
+  - {name: gUnkEu_0886CC00, record: JiminyLocalizedText, lines: [gJiminyCharacterTiggerLines, gJiminyCharacterTiggerLinesFrench, gJiminyCharacterTiggerLinesGerman, gJiminyCharacterTiggerLinesItalian, gJiminyCharacterTiggerLinesSpanish], lineCounts: [8, 10, 9, 9, 8]}
   - gUnkEu_0886CC20
   - gUnkEu_0886CC34
   - gUnkEu_0886CC4B
@@ -14760,7 +14760,7 @@ entries:
   - gUnkEu_0886CEE3
   - gUnkEu_0886CEF8
   - gUnkEu_0886CF09
-  - {name: gUnkEu_0886CF18, record: JiminyLocalizedText, lines: [gUnk_09EDC4BC, gUnk_09EDC4BCFr, gUnk_09EDC4BCDe, gUnk_09EDC4BCIt, gUnk_09EDC4BCEs], lineCounts: [9, 9, 9, 9, 9]}
+  - {name: gUnkEu_0886CF18, record: JiminyLocalizedText, lines: [gJiminyCharacterRabbitLines, gJiminyCharacterRabbitLinesFrench, gJiminyCharacterRabbitLinesGerman, gJiminyCharacterRabbitLinesItalian, gJiminyCharacterRabbitLinesSpanish], lineCounts: [9, 9, 9, 9, 9]}
   - gUnkEu_0886CF38
   - gUnkEu_0886CF49
   - gUnkEu_0886CF5F
@@ -14799,7 +14799,7 @@ entries:
   - gUnkEu_0886D169
   - gUnkEu_0886D17B
   - gUnkEu_0886D18C
-  - {name: gUnkEu_0886D198, record: JiminyLocalizedText, lines: [gUnk_09EDC4E0, gUnk_09EDC4E0Fr, gUnk_09EDC4E0De, gUnk_09EDC4E0It, gUnk_09EDC4E0Es], lineCounts: [6, 9, 8, 7, 8]}
+  - {name: gUnkEu_0886D198, record: JiminyLocalizedText, lines: [gJiminyHeartlessGuardArmorLines, gJiminyHeartlessGuardArmorLinesFrench, gJiminyHeartlessGuardArmorLinesGerman, gJiminyHeartlessGuardArmorLinesItalian, gJiminyHeartlessGuardArmorLinesSpanish], lineCounts: [6, 9, 8, 7, 8]}
   - gUnkEu_0886D1B8
   - gUnkEu_0886D1C9
   - gUnkEu_0886D1E1
@@ -14853,7 +14853,7 @@ entries:
   - gUnkEu_0886D51C
   - gUnkEu_0886D533
   - gUnkEu_0886D54A
-  - {name: gUnkEu_0886D560, record: JiminyLocalizedText, lines: [gUnk_09EDC4F8, gUnk_09EDC4F8Fr, gUnk_09EDC4F8De, gUnk_09EDC4F8It, gUnk_09EDC4F8Es], lineCounts: [10, 12, 12, 10, 9]}
+  - {name: gUnkEu_0886D560, record: JiminyLocalizedText, lines: [gJiminyHeartlessParasiteCageLines, gJiminyHeartlessParasiteCageLinesFrench, gJiminyHeartlessParasiteCageLinesGerman, gJiminyHeartlessParasiteCageLinesItalian, gJiminyHeartlessParasiteCageLinesSpanish], lineCounts: [10, 12, 12, 10, 9]}
   - gUnkEu_0886D580
   - gUnkEu_0886D591
   - gUnkEu_0886D5A7
@@ -14904,7 +14904,7 @@ entries:
   - gUnkEu_0886D8AF
   - gUnkEu_0886D8C5
   - gUnkEu_0886D8DC
-  - {name: gUnkEu_0886D8F0, record: JiminyLocalizedText, lines: [gUnk_09EDC520, gUnk_09EDC520Fr, gUnk_09EDC520De, gUnk_09EDC520It, gUnk_09EDC520Es], lineCounts: [8, 10, 11, 10, 11]}
+  - {name: gUnkEu_0886D8F0, record: JiminyLocalizedText, lines: [gJiminyHeartlessTrickmasterLines, gJiminyHeartlessTrickmasterLinesFrench, gJiminyHeartlessTrickmasterLinesGerman, gJiminyHeartlessTrickmasterLinesItalian, gJiminyHeartlessTrickmasterLinesSpanish], lineCounts: [8, 10, 11, 10, 11]}
   - gUnkEu_0886D910
   - gUnkEu_0886D923
   - gUnkEu_0886D939
@@ -14945,7 +14945,7 @@ entries:
   - gUnkEu_0886DBB1
   - gUnkEu_0886DBC7
   - gUnkEu_0886DBE0
-  - {name: gUnkEu_0886DBF8, record: JiminyLocalizedText, lines: [gUnk_09EDD67C, gUnk_09EDD67CFr, gUnk_09EDD67CDe, gUnk_09EDD67CIt, gUnk_09EDD67CEs], lineCounts: [7, 9, 10, 7, 7]}
+  - {name: gUnkEu_0886DBF8, record: JiminyLocalizedText, lines: [gJiminyHeartlessDarksideLines, gJiminyHeartlessDarksideLinesFrench, gJiminyHeartlessDarksideLinesGerman, gJiminyHeartlessDarksideLinesItalian, gJiminyHeartlessDarksideLinesSpanish], lineCounts: [7, 9, 10, 7, 7]}
   - gUnkEu_0886DC18
   - gUnkEu_0886DC2E
   - gUnkEu_0886DC49
@@ -14994,7 +14994,7 @@ entries:
   - gUnkEu_0886DF14
   - gUnkEu_0886DF2A
   - gUnkEu_0886DF3F
-  - {name: gUnkEu_0886DF4C, record: JiminyLocalizedText, lines: [gUnk_09EDC540, gUnk_09EDC540Fr, gUnk_09EDC540De, gUnk_09EDC540It, gUnk_09EDC540Es], lineCounts: [9, 9, 11, 9, 10]}
+  - {name: gUnkEu_0886DF4C, record: JiminyLocalizedText, lines: [gJiminyHeartlessShadowLines, gJiminyHeartlessShadowLinesFrench, gJiminyHeartlessShadowLinesGerman, gJiminyHeartlessShadowLinesItalian, gJiminyHeartlessShadowLinesSpanish], lineCounts: [9, 9, 11, 9, 10]}
   - gUnkEu_0886DF6C
   - gUnkEu_0886DF7B
   - gUnkEu_0886DF92
@@ -15034,7 +15034,7 @@ entries:
   - gUnkEu_0886E1C8
   - gUnkEu_0886E1D6
   - gUnkEu_0886E1EC
-  - {name: gUnkEu_0886E1FC, record: JiminyLocalizedText, lines: [gUnk_09EDC564, gUnk_09EDC564Fr, gUnk_09EDC564De, gUnk_09EDC564It, gUnk_09EDC564Es], lineCounts: [7, 9, 9, 7, 7]}
+  - {name: gUnkEu_0886E1FC, record: JiminyLocalizedText, lines: [gJiminyHeartlessSoldierLines, gJiminyHeartlessSoldierLinesFrench, gJiminyHeartlessSoldierLinesGerman, gJiminyHeartlessSoldierLinesItalian, gJiminyHeartlessSoldierLinesSpanish], lineCounts: [7, 9, 9, 7, 7]}
   - gUnkEu_0886E21C
   - gUnkEu_0886E230
   - gUnkEu_0886E232
@@ -15095,7 +15095,7 @@ entries:
   - gUnkEu_0886E5AF
   - gUnkEu_0886E5C8
   - gUnkEu_0886E5DD
-  - {name: gUnkEu_0886E5EC, record: JiminyLocalizedText, lines: [gUnk_09EDC580, gUnk_09EDC580Fr, gUnk_09EDC580De, gUnk_09EDC580It, gUnk_09EDC580Es], lineCounts: [10, 12, 14, 11, 13]}
+  - {name: gUnkEu_0886E5EC, record: JiminyLocalizedText, lines: [gJiminyHeartlessLargeBodyLines, gJiminyHeartlessLargeBodyLinesFrench, gJiminyHeartlessLargeBodyLinesGerman, gJiminyHeartlessLargeBodyLinesItalian, gJiminyHeartlessLargeBodyLinesSpanish], lineCounts: [10, 12, 14, 11, 13]}
   - gUnkEu_0886E60C
   - gUnkEu_0886E61D
   - gUnkEu_0886E633
@@ -15146,7 +15146,7 @@ entries:
   - gUnkEu_0886E96C
   - gUnkEu_0886E981
   - gUnkEu_0886E998
-  - {name: gUnkEu_0886E9AC, record: JiminyLocalizedText, lines: [gUnk_09EDC5A8, gUnk_09EDC5A8Fr, gUnk_09EDC5A8De, gUnk_09EDC5A8It, gUnk_09EDC5A8Es], lineCounts: [9, 9, 12, 11, 9]}
+  - {name: gUnkEu_0886E9AC, record: JiminyLocalizedText, lines: [gJiminyHeartlessRedNocturneLines, gJiminyHeartlessRedNocturneLinesFrench, gJiminyHeartlessRedNocturneLinesGerman, gJiminyHeartlessRedNocturneLinesItalian, gJiminyHeartlessRedNocturneLinesSpanish], lineCounts: [9, 9, 12, 11, 9]}
   - gUnkEu_0886E9CC
   - gUnkEu_0886E9DD
   - gUnkEu_0886E9F3
@@ -15191,7 +15191,7 @@ entries:
   - gUnkEu_0886EC7E
   - gUnkEu_0886EC95
   - gUnkEu_0886ECAC
-  - {name: gUnkEu_0886ECC0, record: JiminyLocalizedText, lines: [gUnk_09EDC5CC, gUnk_09EDC5CCFr, gUnk_09EDC5CCDe, gUnk_09EDC5CCIt, gUnk_09EDC5CCEs], lineCounts: [9, 10, 9, 8, 8]}
+  - {name: gUnkEu_0886ECC0, record: JiminyLocalizedText, lines: [gJiminyHeartlessBlueRhapsodyLines, gJiminyHeartlessBlueRhapsodyLinesFrench, gJiminyHeartlessBlueRhapsodyLinesGerman, gJiminyHeartlessBlueRhapsodyLinesItalian, gJiminyHeartlessBlueRhapsodyLinesSpanish], lineCounts: [9, 10, 9, 8, 8]}
   - gUnkEu_0886ECE0
   - gUnkEu_0886ECF1
   - gUnkEu_0886ED07
@@ -15234,7 +15234,7 @@ entries:
   - gUnkEu_0886EFA9
   - gUnkEu_0886EFC1
   - gUnkEu_0886EFD7
-  - {name: gUnkEu_0886EFE8, record: JiminyLocalizedText, lines: [gUnk_09EDC5F0, gUnk_09EDC5F0Fr, gUnk_09EDC5F0De, gUnk_09EDC5F0It, gUnk_09EDC5F0Es], lineCounts: [9, 8, 9, 8, 8]}
+  - {name: gUnkEu_0886EFE8, record: JiminyLocalizedText, lines: [gJiminyHeartlessYellowOperaLines, gJiminyHeartlessYellowOperaLinesFrench, gJiminyHeartlessYellowOperaLinesGerman, gJiminyHeartlessYellowOperaLinesItalian, gJiminyHeartlessYellowOperaLinesSpanish], lineCounts: [9, 8, 9, 8, 8]}
   - gUnkEu_0886F008
   - gUnkEu_0886F019
   - gUnkEu_0886F02F
@@ -15292,7 +15292,7 @@ entries:
   - gUnkEu_0886F3DC
   - gUnkEu_0886F3F2
   - gUnkEu_0886F407
-  - {name: gUnkEu_0886F410, record: JiminyLocalizedText, lines: [gUnk_09EDC614, gUnk_09EDC614Fr, gUnk_09EDC614De, gUnk_09EDC614It, gUnk_09EDC614Es], lineCounts: [11, 12, 13, 11, 10]}
+  - {name: gUnkEu_0886F410, record: JiminyLocalizedText, lines: [gJiminyHeartlessGreenRequiemLines, gJiminyHeartlessGreenRequiemLinesFrench, gJiminyHeartlessGreenRequiemLinesGerman, gJiminyHeartlessGreenRequiemLinesItalian, gJiminyHeartlessGreenRequiemLinesSpanish], lineCounts: [11, 12, 13, 11, 10]}
   - gUnkEu_0886F430
   - gUnkEu_0886F448
   - gUnkEu_0886F45B
@@ -15331,7 +15331,7 @@ entries:
   - gUnkEu_0886F67B
   - gUnkEu_0886F690
   - gUnkEu_0886F6A5
-  - {name: gUnkEu_0886F6B4, record: JiminyLocalizedText, lines: [gUnk_09EDC640, gUnk_09EDC640Fr, gUnk_09EDC640De, gUnk_09EDC640It, gUnk_09EDC640Es], lineCounts: [7, 6, 9, 8, 8]}
+  - {name: gUnkEu_0886F6B4, record: JiminyLocalizedText, lines: [gJiminyHeartlessPowerwildLines, gJiminyHeartlessPowerwildLinesFrench, gJiminyHeartlessPowerwildLinesGerman, gJiminyHeartlessPowerwildLinesItalian, gJiminyHeartlessPowerwildLinesSpanish], lineCounts: [7, 6, 9, 8, 8]}
   - gUnkEu_0886F6D4
   - gUnkEu_0886F6E8
   - gUnkEu_0886F6EA
@@ -15371,7 +15371,7 @@ entries:
   - gUnkEu_0886F908
   - gUnkEu_0886F920
   - gUnkEu_0886F936
-  - {name: gUnkEu_0886F94C, record: JiminyLocalizedText, lines: [gUnk_09EDC65C, gUnk_09EDC65CFr, gUnk_09EDC65CDe, gUnk_09EDC65CIt, gUnk_09EDC65CEs], lineCounts: [6, 8, 10, 7, 8]}
+  - {name: gUnkEu_0886F94C, record: JiminyLocalizedText, lines: [gJiminyHeartlessBouncywildLines, gJiminyHeartlessBouncywildLinesFrench, gJiminyHeartlessBouncywildLinesGerman, gJiminyHeartlessBouncywildLinesItalian, gJiminyHeartlessBouncywildLinesSpanish], lineCounts: [6, 8, 10, 7, 8]}
   - gUnkEu_0886F96C
   - gUnkEu_0886F980
   - gUnkEu_0886F994
@@ -15423,7 +15423,7 @@ entries:
   - gUnkEu_0886FC98
   - gUnkEu_0886FC9A
   - gUnkEu_0886FCAF
-  - {name: gUnkEu_0886FCC4, record: JiminyLocalizedText, lines: [gUnk_09EDC674, gUnk_09EDC674Fr, gUnk_09EDC674De, gUnk_09EDC674It, gUnk_09EDC674Es], lineCounts: [10, 10, 14, 9, 8]}
+  - {name: gUnkEu_0886FCC4, record: JiminyLocalizedText, lines: [gJiminyHeartlessAirSoldierLines, gJiminyHeartlessAirSoldierLinesFrench, gJiminyHeartlessAirSoldierLinesGerman, gJiminyHeartlessAirSoldierLinesItalian, gJiminyHeartlessAirSoldierLinesSpanish], lineCounts: [10, 10, 14, 9, 8]}
   - gUnkEu_0886FCE4
   - gUnkEu_0886FCFC
   - gUnkEu_0886FD10
@@ -15467,7 +15467,7 @@ entries:
   - gUnkEu_0886FF85
   - gUnkEu_0886FF9E
   - gUnkEu_0886FFB6
-  - {name: gUnkEu_0886FFC8, record: JiminyLocalizedText, lines: [gUnk_09EDC69C, gUnk_09EDC69CFr, gUnk_09EDC69CDe, gUnk_09EDC69CIt, gUnk_09EDC69CEs], lineCounts: [7, 10, 10, 7, 9]}
+  - {name: gUnkEu_0886FFC8, record: JiminyLocalizedText, lines: [gJiminyHeartlessBanditLines, gJiminyHeartlessBanditLinesFrench, gJiminyHeartlessBanditLinesGerman, gJiminyHeartlessBanditLinesItalian, gJiminyHeartlessBanditLinesSpanish], lineCounts: [7, 10, 10, 7, 9]}
   - gUnkEu_0886FFE8
   - gUnkEu_08870000
   - gUnkEu_08870014
@@ -15508,7 +15508,7 @@ entries:
   - gUnkEu_0887025F
   - gUnkEu_08870275
   - gUnkEu_0887028C
-  - {name: gUnkEu_08870298, record: JiminyLocalizedText, lines: [gUnk_09EDC6B8, gUnk_09EDC6B8Fr, gUnk_09EDC6B8De, gUnk_09EDC6B8It, gUnk_09EDC6B8Es], lineCounts: [7, 9, 8, 8, 8]}
+  - {name: gUnkEu_08870298, record: JiminyLocalizedText, lines: [gJiminyHeartlessFatBanditLines, gJiminyHeartlessFatBanditLinesFrench, gJiminyHeartlessFatBanditLinesGerman, gJiminyHeartlessFatBanditLinesItalian, gJiminyHeartlessFatBanditLinesSpanish], lineCounts: [7, 9, 8, 8, 8]}
   - gUnkEu_088702B8
   - gUnkEu_088702CB
   - gUnkEu_088702E1
@@ -15556,7 +15556,7 @@ entries:
   - gUnkEu_088705BB
   - gUnkEu_088705CD
   - gUnkEu_088705DD
-  - {name: gUnkEu_088705F0, record: JiminyLocalizedText, lines: [gUnk_09EDC6D4, gUnk_09EDC6D4Fr, gUnk_09EDC6D4De, gUnk_09EDC6D4It, gUnk_09EDC6D4Es], lineCounts: [9, 8, 12, 9, 9]}
+  - {name: gUnkEu_088705F0, record: JiminyLocalizedText, lines: [gJiminyHeartlessBarrelSpiderLines, gJiminyHeartlessBarrelSpiderLinesFrench, gJiminyHeartlessBarrelSpiderLinesGerman, gJiminyHeartlessBarrelSpiderLinesItalian, gJiminyHeartlessBarrelSpiderLinesSpanish], lineCounts: [9, 8, 12, 9, 9]}
   - gUnkEu_08870610
   - gUnkEu_08870624
   - gUnkEu_08870626
@@ -15598,7 +15598,7 @@ entries:
   - gUnkEu_08870889
   - gUnkEu_088708A0
   - gUnkEu_088708B6
-  - {name: gUnkEu_088708C4, record: JiminyLocalizedText, lines: [gUnk_09EDC6F8, gUnk_09EDC6F8Fr, gUnk_09EDC6F8De, gUnk_09EDC6F8It, gUnk_09EDC6F8Es], lineCounts: [7, 8, 10, 8, 8]}
+  - {name: gUnkEu_088708C4, record: JiminyLocalizedText, lines: [gJiminyHeartlessSearchGhostLines, gJiminyHeartlessSearchGhostLinesFrench, gJiminyHeartlessSearchGhostLinesGerman, gJiminyHeartlessSearchGhostLinesItalian, gJiminyHeartlessSearchGhostLinesSpanish], lineCounts: [7, 8, 10, 8, 8]}
   - gUnkEu_088708E4
   - gUnkEu_088708F5
   - gUnkEu_08870900
@@ -15643,7 +15643,7 @@ entries:
   - gUnkEu_08870B8D
   - gUnkEu_08870BA2
   - gUnkEu_08870BB3
-  - {name: gUnkEu_08870BC4, record: JiminyLocalizedText, lines: [gUnk_09EDDE18, gUnk_09EDDE18Fr, gUnk_09EDDE18De, gUnk_09EDDE18It, gUnk_09EDDE18Es], lineCounts: [8, 9, 11, 8, 8]}
+  - {name: gUnkEu_08870BC4, record: JiminyLocalizedText, lines: [gJiminyHeartlessSeaNeonLines, gJiminyHeartlessSeaNeonLinesFrench, gJiminyHeartlessSeaNeonLinesGerman, gJiminyHeartlessSeaNeonLinesItalian, gJiminyHeartlessSeaNeonLinesSpanish], lineCounts: [8, 9, 11, 8, 8]}
   - gUnkEu_08870BE4
   - gUnkEu_08870BFB
   - gUnkEu_08870C0F
@@ -15679,7 +15679,7 @@ entries:
   - gUnkEu_08870DF2
   - gUnkEu_08870E07
   - gUnkEu_08870E1B
-  - {name: gUnkEu_08870E2C, record: JiminyLocalizedText, lines: [gUnk_09EDC714, gUnk_09EDC714Fr, gUnk_09EDC714De, gUnk_09EDC714It, gUnk_09EDC714Es], lineCounts: [6, 7, 8, 7, 7]}
+  - {name: gUnkEu_08870E2C, record: JiminyLocalizedText, lines: [gJiminyHeartlessScrewdiverLines, gJiminyHeartlessScrewdiverLinesFrench, gJiminyHeartlessScrewdiverLinesGerman, gJiminyHeartlessScrewdiverLinesItalian, gJiminyHeartlessScrewdiverLinesSpanish], lineCounts: [6, 7, 8, 7, 7]}
   - gUnkEu_08870E4C
   - gUnkEu_08870E62
   - gUnkEu_08870E7A
@@ -15719,7 +15719,7 @@ entries:
   - gUnkEu_0887109A
   - gUnkEu_088710AF
   - gUnkEu_088710C3
-  - {name: gUnkEu_088710CC, record: JiminyLocalizedText, lines: [gUnk_09EDC72C, gUnk_09EDC72CFr, gUnk_09EDC72CDe, gUnk_09EDC72CIt, gUnk_09EDC72CEs], lineCounts: [8, 8, 9, 7, 7]}
+  - {name: gUnkEu_088710CC, record: JiminyLocalizedText, lines: [gJiminyHeartlessAquatankLines, gJiminyHeartlessAquatankLinesFrench, gJiminyHeartlessAquatankLinesGerman, gJiminyHeartlessAquatankLinesItalian, gJiminyHeartlessAquatankLinesSpanish], lineCounts: [8, 8, 9, 7, 7]}
   - gUnkEu_088710EC
   - gUnkEu_08871103
   - gUnkEu_08871116
@@ -15762,7 +15762,7 @@ entries:
   - gUnkEu_08871379
   - gUnkEu_0887138C
   - gUnkEu_0887139A
-  - {name: gUnkEu_088713AC, record: JiminyLocalizedText, lines: [gUnk_09EDC74C, gUnk_09EDC74CFr, gUnk_09EDC74CDe, gUnk_09EDC74CIt, gUnk_09EDC74CEs], lineCounts: [7, 6, 11, 10, 8]}
+  - {name: gUnkEu_088713AC, record: JiminyLocalizedText, lines: [gJiminyHeartlessWightKnightLines, gJiminyHeartlessWightKnightLinesFrench, gJiminyHeartlessWightKnightLinesGerman, gJiminyHeartlessWightKnightLinesItalian, gJiminyHeartlessWightKnightLinesSpanish], lineCounts: [7, 6, 11, 10, 8]}
   - gUnkEu_088713CC
   - gUnkEu_088713DF
   - gUnkEu_088713F6
@@ -15801,7 +15801,7 @@ entries:
   - gUnkEu_088715FC
   - gUnkEu_08871612
   - gUnkEu_08871626
-  - {name: gUnkEu_08871634, record: JiminyLocalizedText, lines: [gUnk_09EDC768, gUnk_09EDC768Fr, gUnk_09EDC768De, gUnk_09EDC768It, gUnk_09EDC768Es], lineCounts: [7, 8, 8, 7, 8]}
+  - {name: gUnkEu_08871634, record: JiminyLocalizedText, lines: [gJiminyHeartlessGargoyleLines, gJiminyHeartlessGargoyleLinesFrench, gJiminyHeartlessGargoyleLinesGerman, gJiminyHeartlessGargoyleLinesItalian, gJiminyHeartlessGargoyleLinesSpanish], lineCounts: [7, 8, 8, 7, 8]}
   - gUnkEu_08871654
   - gUnkEu_0887166C
   - gUnkEu_08871682
@@ -15861,7 +15861,7 @@ entries:
   - gUnkEu_08871A30
   - gUnkEu_08871A42
   - gUnkEu_08871A59
-  - {name: gUnkEu_08871A6C, record: JiminyLocalizedText, lines: [gUnk_09EDC784, gUnk_09EDC784Fr, gUnk_09EDC784De, gUnk_09EDC784It, gUnk_09EDC784Es], lineCounts: [10, 12, 14, 12, 11]}
+  - {name: gUnkEu_08871A6C, record: JiminyLocalizedText, lines: [gJiminyHeartlessPirateLines, gJiminyHeartlessPirateLinesFrench, gJiminyHeartlessPirateLinesGerman, gJiminyHeartlessPirateLinesItalian, gJiminyHeartlessPirateLinesSpanish], lineCounts: [10, 12, 14, 12, 11]}
   - gUnkEu_08871A8C
   - gUnkEu_08871A9F
   - gUnkEu_08871AB5
@@ -15911,7 +15911,7 @@ entries:
   - gUnkEu_08871DC0
   - gUnkEu_08871DD4
   - gUnkEu_08871DED
-  - {name: gUnkEu_08871E00, record: JiminyLocalizedText, lines: [gUnk_09EDC7AC, gUnk_09EDC7ACFr, gUnk_09EDC7ACDe, gUnk_09EDC7ACIt, gUnk_09EDC7ACEs], lineCounts: [9, 10, 11, 10, 9]}
+  - {name: gUnkEu_08871E00, record: JiminyLocalizedText, lines: [gJiminyHeartlessAirPirateLines, gJiminyHeartlessAirPirateLinesFrench, gJiminyHeartlessAirPirateLinesGerman, gJiminyHeartlessAirPirateLinesItalian, gJiminyHeartlessAirPirateLinesSpanish], lineCounts: [9, 10, 11, 10, 9]}
   - gUnkEu_08871E20
   - gUnkEu_08871E36
   - gUnkEu_08871E4A
@@ -15959,7 +15959,7 @@ entries:
   - gUnkEu_08872124
   - gUnkEu_0887213B
   - gUnkEu_0887214F
-  - {name: gUnkEu_0887215C, record: JiminyLocalizedText, lines: [gUnk_09EDC7D0, gUnk_09EDC7D0Fr, gUnk_09EDC7D0De, gUnk_09EDC7D0It, gUnk_09EDC7D0Es], lineCounts: [9, 8, 12, 9, 9]}
+  - {name: gUnkEu_0887215C, record: JiminyLocalizedText, lines: [gJiminyHeartlessDarkballLines, gJiminyHeartlessDarkballLinesFrench, gJiminyHeartlessDarkballLinesGerman, gJiminyHeartlessDarkballLinesItalian, gJiminyHeartlessDarkballLinesSpanish], lineCounts: [9, 8, 12, 9, 9]}
   - gUnkEu_0887217C
   - gUnkEu_0887218D
   - gUnkEu_088721A2
@@ -16032,7 +16032,7 @@ entries:
   - gUnkEu_08872637
   - gUnkEu_0887264E
   - gUnkEu_08872663
-  - {name: gUnkEu_08872678, record: JiminyLocalizedText, lines: [gUnk_09EDC7F4, gUnk_09EDC7F4Fr, gUnk_09EDC7F4De, gUnk_09EDC7F4It, gUnk_09EDC7F4Es], lineCounts: [13, 14, 17, 15, 13]}
+  - {name: gUnkEu_08872678, record: JiminyLocalizedText, lines: [gJiminyHeartlessDefenderLines, gJiminyHeartlessDefenderLinesFrench, gJiminyHeartlessDefenderLinesGerman, gJiminyHeartlessDefenderLinesItalian, gJiminyHeartlessDefenderLinesSpanish], lineCounts: [13, 14, 17, 15, 13]}
   - gUnkEu_08872698
   - gUnkEu_088726AE
   - gUnkEu_088726C5
@@ -16081,7 +16081,7 @@ entries:
   - gUnkEu_088729D3
   - gUnkEu_088729E5
   - gUnkEu_088729F7
-  - {name: gUnkEu_08872A00, record: JiminyLocalizedText, lines: [gUnk_09EDC828, gUnk_09EDC828Fr, gUnk_09EDC828De, gUnk_09EDC828It, gUnk_09EDC828Es], lineCounts: [10, 8, 10, 9, 11]}
+  - {name: gUnkEu_08872A00, record: JiminyLocalizedText, lines: [gJiminyHeartlessWyvernLines, gJiminyHeartlessWyvernLinesFrench, gJiminyHeartlessWyvernLinesGerman, gJiminyHeartlessWyvernLinesItalian, gJiminyHeartlessWyvernLinesSpanish], lineCounts: [10, 8, 10, 9, 11]}
   - gUnkEu_08872A20
   - gUnkEu_08872A37
   - gUnkEu_08872A41
@@ -16119,7 +16119,7 @@ entries:
   - gUnkEu_08872C53
   - gUnkEu_08872C6A
   - gUnkEu_08872C82
-  - {name: gUnkEu_08872C8C, record: JiminyLocalizedText, lines: [gUnk_09EDC850, gUnk_09EDC850Fr, gUnk_09EDC850De, gUnk_09EDC850It, gUnk_09EDC850Es], lineCounts: [8, 7, 7, 8, 7]}
+  - {name: gUnkEu_08872C8C, record: JiminyLocalizedText, lines: [gJiminyHeartlessWizardLines, gJiminyHeartlessWizardLinesFrench, gJiminyHeartlessWizardLinesGerman, gJiminyHeartlessWizardLinesItalian, gJiminyHeartlessWizardLinesSpanish], lineCounts: [8, 7, 7, 8, 7]}
   - gUnkEu_08872CAC
   - gUnkEu_08872CC4
   - gUnkEu_08872CD6
@@ -16137,7 +16137,7 @@ entries:
   - gUnkEu_08872DB1
   - gUnkEu_08872DC6
   - gUnkEu_08872DDA
-  - {name: gUnkEu_08872DE4, record: JiminyLocalizedText, lines: [gUnk_09EDDEC0, gUnk_09EDDEC0Fr, gUnk_09EDDEC0De, gUnk_09EDDEC0It, gUnk_09EDDEC0Es], lineCounts: [3, 5, 4, 2, 3]}
+  - {name: gUnkEu_08872DE4, record: JiminyLocalizedText, lines: [gJiminyHeartlessNeoshadowLines, gJiminyHeartlessNeoshadowLinesFrench, gJiminyHeartlessNeoshadowLinesGerman, gJiminyHeartlessNeoshadowLinesItalian, gJiminyHeartlessNeoshadowLinesSpanish], lineCounts: [3, 5, 4, 2, 3]}
   - gUnkEu_08872E04
   - gUnkEu_08872E18
   - gUnkEu_08872E2D
@@ -16181,7 +16181,7 @@ entries:
   - gUnkEu_0887308C
   - gUnkEu_0887309F
   - gUnkEu_088730B3
-  - {name: gUnkEu_088730C4, record: JiminyLocalizedText, lines: [gUnk_09EDC870, gUnk_09EDC870Fr, gUnk_09EDC870De, gUnk_09EDC870It, gUnk_09EDC870Es], lineCounts: [8, 9, 9, 9, 8]}
+  - {name: gUnkEu_088730C4, record: JiminyLocalizedText, lines: [gJiminyHeartlessWhiteMushroomLines, gJiminyHeartlessWhiteMushroomLinesFrench, gJiminyHeartlessWhiteMushroomLinesGerman, gJiminyHeartlessWhiteMushroomLinesItalian, gJiminyHeartlessWhiteMushroomLinesSpanish], lineCounts: [8, 9, 9, 9, 8]}
   - gUnkEu_088730E4
   - gUnkEu_088730F3
   - gUnkEu_08873108
@@ -16245,7 +16245,7 @@ entries:
   - gUnkEu_088734BE
   - gUnkEu_088734D6
   - gUnkEu_088734E9
-  - {name: gUnkEu_08873500, record: JiminyLocalizedText, lines: [gUnk_09EDC890, gUnk_09EDC890Fr, gUnk_09EDC890De, gUnk_09EDC890It, gUnk_09EDC890Es], lineCounts: [12, 13, 13, 13, 12]}
+  - {name: gUnkEu_08873500, record: JiminyLocalizedText, lines: [gJiminyHeartlessBlackFungusLines, gJiminyHeartlessBlackFungusLinesFrench, gJiminyHeartlessBlackFungusLinesGerman, gJiminyHeartlessBlackFungusLinesItalian, gJiminyHeartlessBlackFungusLinesSpanish], lineCounts: [12, 13, 13, 13, 12]}
   - gUnkEu_08873520
   - gUnkEu_08873539
   - gUnkEu_0887353B
@@ -16291,7 +16291,7 @@ entries:
   - gUnkEu_088737F8
   - gUnkEu_0887380D
   - gUnkEu_08873821
-  - {name: gUnkEu_08873838, record: JiminyLocalizedText, lines: [gUnk_09EDC8C0, gUnk_09EDC8C0Fr, gUnk_09EDC8C0De, gUnk_09EDC8C0It, gUnk_09EDC8C0Es], lineCounts: [8, 8, 12, 9, 8]}
+  - {name: gUnkEu_08873838, record: JiminyLocalizedText, lines: [gJiminyHeartlessCreeperPlantLines, gJiminyHeartlessCreeperPlantLinesFrench, gJiminyHeartlessCreeperPlantLinesGerman, gJiminyHeartlessCreeperPlantLinesItalian, gJiminyHeartlessCreeperPlantLinesSpanish], lineCounts: [8, 8, 12, 9, 8]}
   - gUnkEu_08873858
   - gUnkEu_0887386F
   - gUnkEu_08873889
@@ -16340,7 +16340,7 @@ entries:
   - gUnkEu_08873B67
   - gUnkEu_08873B7D
   - gUnkEu_08873B89
-  - {name: gUnkEu_08873B94, record: JiminyLocalizedText, lines: [gUnk_09EDC8E0, gUnk_09EDC8E0Fr, gUnk_09EDC8E0De, gUnk_09EDC8E0It, gUnk_09EDC8E0Es], lineCounts: [9, 9, 11, 9, 10]}
+  - {name: gUnkEu_08873B94, record: JiminyLocalizedText, lines: [gJiminyHeartlessTornadoStepLines, gJiminyHeartlessTornadoStepLinesFrench, gJiminyHeartlessTornadoStepLinesGerman, gJiminyHeartlessTornadoStepLinesItalian, gJiminyHeartlessTornadoStepLinesSpanish], lineCounts: [9, 9, 11, 9, 10]}
   - gUnkEu_08873BB4
   - gUnkEu_08873BC9
   - gUnkEu_08873BD4
@@ -16372,7 +16372,7 @@ entries:
   - gUnkEu_08873D70
   - gUnkEu_08873D81
   - gUnkEu_08873D99
-  - {name: gUnkEu_08873DB0, record: JiminyLocalizedText, lines: [gUnk_09EDC904, gUnk_09EDC904Fr, gUnk_09EDC904De, gUnk_09EDC904It, gUnk_09EDC904Es], lineCounts: [6, 7, 6, 6, 6]}
+  - {name: gUnkEu_08873DB0, record: JiminyLocalizedText, lines: [gJiminyHeartlessCrescendoLines, gJiminyHeartlessCrescendoLinesFrench, gJiminyHeartlessCrescendoLinesGerman, gJiminyHeartlessCrescendoLinesItalian, gJiminyHeartlessCrescendoLinesSpanish], lineCounts: [6, 7, 6, 6, 6]}
   - gUnkEu_08873DD0
   - gUnkEu_08873DE3
   - gUnkEu_08873DF9
@@ -16500,7 +16500,7 @@ entries:
   - gUnkEu_0887461A
   - gUnkEu_08874630
   - gUnkEu_08874643
-  - {name: gUnkEu_08874658, record: JiminyLocalizedText, lines: [gUnk_09EDD808, gUnk_09EDD808Fr, gUnk_09EDD808De, gUnk_09EDD808It, gUnk_09EDD808Es], lineCounts: [24, 25, 28, 25, 25]}
+  - {name: gUnkEu_08874658, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterRikuLines, gJiminyRikuCharacterRikuLinesFrench, gJiminyRikuCharacterRikuLinesGerman, gJiminyRikuCharacterRikuLinesItalian, gJiminyRikuCharacterRikuLinesSpanish], lineCounts: [24, 25, 28, 25, 25]}
   - gUnkEu_08874678
   - gUnkEu_0887468C
   - gUnkEu_088746A0
@@ -16581,7 +16581,7 @@ entries:
   - gUnkEu_08874B99
   - gUnkEu_08874BA9
   - gUnkEu_08874BBC
-  - {name: gUnkEu_08874BC8, record: JiminyLocalizedText, lines: [gUnk_09EDD868, gUnk_09EDD868Fr, gUnk_09EDD868De, gUnk_09EDD868It, gUnk_09EDD868Es], lineCounts: [15, 16, 19, 14, 16]}
+  - {name: gUnkEu_08874BC8, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterKingLines, gJiminyRikuCharacterKingLinesFrench, gJiminyRikuCharacterKingLinesGerman, gJiminyRikuCharacterKingLinesItalian, gJiminyRikuCharacterKingLinesSpanish], lineCounts: [15, 16, 19, 14, 16]}
   - gUnkEu_08874BE8
   - gUnkEu_08874BFF
   - gUnkEu_08874C15
@@ -16646,7 +16646,7 @@ entries:
   - gUnkEu_08875073
   - gUnkEu_08875087
   - gUnkEu_0887509F
-  - {name: gUnkEu_088750B8, record: JiminyLocalizedText, lines: [gUnk_09EDC91C, gUnk_09EDC91CFr, gUnk_09EDC91CDe, gUnk_09EDC91CIt, gUnk_09EDC91CEs], lineCounts: [13, 13, 14, 11, 13]}
+  - {name: gUnkEu_088750B8, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterSoraLines, gJiminyRikuCharacterSoraLinesFrench, gJiminyRikuCharacterSoraLinesGerman, gJiminyRikuCharacterSoraLinesItalian, gJiminyRikuCharacterSoraLinesSpanish], lineCounts: [13, 13, 14, 11, 13]}
   - gUnkEu_088750D8
   - gUnkEu_088750EF
   - gUnkEu_088750FB
@@ -16739,7 +16739,7 @@ entries:
   - gUnkEu_088756A2
   - gUnkEu_088756A4
   - gUnkEu_088756BA
-  - {name: gUnkEu_088756D4, record: JiminyLocalizedText, lines: [gUnk_09EDD8A4, gUnk_09EDD8A4Fr, gUnk_09EDD8A4De, gUnk_09EDD8A4It, gUnk_09EDD8A4Es], lineCounts: [16, 19, 21, 18, 18]}
+  - {name: gUnkEu_088756D4, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterKairiLines, gJiminyRikuCharacterKairiLinesFrench, gJiminyRikuCharacterKairiLinesGerman, gJiminyRikuCharacterKairiLinesItalian, gJiminyRikuCharacterKairiLinesSpanish], lineCounts: [16, 19, 21, 18, 18]}
   - gUnkEu_088756F4
   - gUnkEu_0887570A
   - gUnkEu_0887571F
@@ -16837,7 +16837,7 @@ entries:
   - gUnkEu_08875CFE
   - gUnkEu_08875D13
   - gUnkEu_08875D26
-  - {name: gUnkEu_08875D30, record: JiminyLocalizedText, lines: [gUnk_09EDC950, gUnk_09EDC950Fr, gUnk_09EDC950De, gUnk_09EDC950It, gUnk_09EDC950Es], lineCounts: [16, 20, 23, 20, 18]}
+  - {name: gUnkEu_08875D30, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterNamineLines, gJiminyRikuCharacterNamineLinesFrench, gJiminyRikuCharacterNamineLinesGerman, gJiminyRikuCharacterNamineLinesItalian, gJiminyRikuCharacterNamineLinesSpanish], lineCounts: [16, 20, 23, 20, 18]}
   - gUnkEu_08875D50
   - gUnkEu_08875D62
   - gUnkEu_08875D78
@@ -16888,7 +16888,7 @@ entries:
   - gUnkEu_088760D1
   - gUnkEu_088760E7
   - gUnkEu_088760F8
-  - {name: gUnkEu_08876100, record: JiminyLocalizedText, lines: [gUnk_09EDC990, gUnk_09EDC990Fr, gUnk_09EDC990De, gUnk_09EDC990It, gUnk_09EDC990Es], lineCounts: [8, 9, 12, 10, 11]}
+  - {name: gUnkEu_08876100, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterRikuReplicaLines, gJiminyRikuCharacterRikuReplicaLinesFrench, gJiminyRikuCharacterRikuReplicaLinesGerman, gJiminyRikuCharacterRikuReplicaLinesItalian, gJiminyRikuCharacterRikuReplicaLinesSpanish], lineCounts: [8, 9, 12, 10, 11]}
   - gUnkEu_08876120
   - gUnkEu_08876135
   - gUnkEu_08876137
@@ -16966,7 +16966,7 @@ entries:
   - gUnkEu_0887659E
   - gUnkEu_088765B3
   - gUnkEu_088765CB
-  - {name: gUnkEu_088765D4, record: JiminyLocalizedText, lines: [gUnk_09EDC9B0, gUnk_09EDC9B0Fr, gUnk_09EDC9B0De, gUnk_09EDC9B0It, gUnk_09EDC9B0Es], lineCounts: [14, 14, 16, 16, 17]}
+  - {name: gUnkEu_088765D4, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterAnsemLines, gJiminyRikuCharacterAnsemLinesFrench, gJiminyRikuCharacterAnsemLinesGerman, gJiminyRikuCharacterAnsemLinesItalian, gJiminyRikuCharacterAnsemLinesSpanish], lineCounts: [14, 14, 16, 16, 17]}
   - gUnkEu_088765F4
   - gUnkEu_08876601
   - gUnkEu_0887660F
@@ -17051,7 +17051,7 @@ entries:
   - gUnkEu_08876B90
   - gUnkEu_08876BA5
   - gUnkEu_08876BBC
-  - {name: gUnkEu_08876BC4, record: JiminyLocalizedText, lines: [gUnk_09EDC9E8, gUnk_09EDC9E8Fr, gUnk_09EDC9E8De, gUnk_09EDC9E8It, gUnk_09EDC9E8Es], lineCounts: [16, 18, 16, 18, 16]}
+  - {name: gUnkEu_08876BC4, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterVexenLines, gJiminyRikuCharacterVexenLinesFrench, gJiminyRikuCharacterVexenLinesGerman, gJiminyRikuCharacterVexenLinesItalian, gJiminyRikuCharacterVexenLinesSpanish], lineCounts: [16, 18, 16, 18, 16]}
   - gUnkEu_08876BE4
   - gUnkEu_08876BF1
   - gUnkEu_08876BFF
@@ -17143,7 +17143,7 @@ entries:
   - gUnkEu_0887717B
   - gUnkEu_08877191
   - gUnkEu_088771A5
-  - {name: gUnkEu_088771B0, record: JiminyLocalizedText, lines: [gUnk_09EDD8E4, gUnk_09EDD8E4Fr, gUnk_09EDD8E4De, gUnk_09EDD8E4It, gUnk_09EDD8E4Es], lineCounts: [17, 18, 19, 18, 19]}
+  - {name: gUnkEu_088771B0, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterLexaeusLines, gJiminyRikuCharacterLexaeusLinesFrench, gJiminyRikuCharacterLexaeusLinesGerman, gJiminyRikuCharacterLexaeusLinesItalian, gJiminyRikuCharacterLexaeusLinesSpanish], lineCounts: [17, 18, 19, 18, 19]}
   - gUnkEu_088771D0
   - gUnkEu_088771DD
   - gUnkEu_088771EB
@@ -17235,7 +17235,7 @@ entries:
   - gUnkEu_088777E3
   - gUnkEu_088777F6
   - gUnkEu_0887780A
-  - {name: gUnkEu_0887781C, record: JiminyLocalizedText, lines: [gUnk_09EDCA28, gUnk_09EDCA28Fr, gUnk_09EDCA28De, gUnk_09EDCA28It, gUnk_09EDCA28Es], lineCounts: [17, 18, 19, 17, 20]}
+  - {name: gUnkEu_0887781C, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterZexionLines, gJiminyRikuCharacterZexionLinesFrench, gJiminyRikuCharacterZexionLinesGerman, gJiminyRikuCharacterZexionLinesItalian, gJiminyRikuCharacterZexionLinesSpanish], lineCounts: [17, 18, 19, 17, 20]}
   - gUnkEu_0887783C
   - gUnkEu_08877849
   - gUnkEu_08877857
@@ -17331,7 +17331,7 @@ entries:
   - gUnkEu_08877E53
   - gUnkEu_08877E6B
   - gUnkEu_08877E80
-  - {name: gUnkEu_08877E8C, record: JiminyLocalizedText, lines: [gUnk_09EDCA6C, gUnk_09EDCA6CFr, gUnk_09EDCA6CDe, gUnk_09EDCA6CIt, gUnk_09EDCA6CEs], lineCounts: [19, 17, 20, 19, 20]}
+  - {name: gUnkEu_08877E8C, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterAxelLines, gJiminyRikuCharacterAxelLinesFrench, gJiminyRikuCharacterAxelLinesGerman, gJiminyRikuCharacterAxelLinesItalian, gJiminyRikuCharacterAxelLinesSpanish], lineCounts: [19, 17, 20, 19, 20]}
   - gUnkEu_08877EAC
   - gUnkEu_08877EBA
   - gUnkEu_08877EC8
@@ -17440,7 +17440,7 @@ entries:
   - gUnkEu_088785BE
   - gUnkEu_088785C0
   - gUnkEu_088785D8
-  - {name: gUnkEu_088785F0, record: JiminyLocalizedText, lines: [gUnk_09EDCAB8, gUnk_09EDCAB8Fr, gUnk_09EDCAB8De, gUnk_09EDCAB8It, gUnk_09EDCAB8Es], lineCounts: [19, 21, 26, 22, 20]}
+  - {name: gUnkEu_088785F0, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterMarluxiaLines, gJiminyRikuCharacterMarluxiaLinesFrench, gJiminyRikuCharacterMarluxiaLinesGerman, gJiminyRikuCharacterMarluxiaLinesItalian, gJiminyRikuCharacterMarluxiaLinesSpanish], lineCounts: [19, 21, 26, 22, 20]}
   - gUnkEu_08878610
   - gUnkEu_0887861E
   - gUnkEu_0887862C
@@ -17519,7 +17519,7 @@ entries:
   - gUnkEu_08878B2F
   - gUnkEu_08878B47
   - gUnkEu_08878B57
-  - {name: gUnkEu_08878B64, record: JiminyLocalizedText, lines: [gUnk_09EDCB04, gUnk_09EDCB04Fr, gUnk_09EDCB04De, gUnk_09EDCB04It, gUnk_09EDCB04Es], lineCounts: [13, 15, 17, 18, 15]}
+  - {name: gUnkEu_08878B64, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterLarxeneLines, gJiminyRikuCharacterLarxeneLinesFrench, gJiminyRikuCharacterLarxeneLinesGerman, gJiminyRikuCharacterLarxeneLinesItalian, gJiminyRikuCharacterLarxeneLinesSpanish], lineCounts: [13, 15, 17, 18, 15]}
   - gUnkEu_08878B84
   - gUnkEu_08878B95
   - gUnkEu_08878B97
@@ -17579,7 +17579,7 @@ entries:
   - gUnkEu_08878F1A
   - gUnkEu_08878F1C
   - gUnkEu_08878F30
-  - {name: gUnkEu_08878F40, record: JiminyLocalizedText, lines: [gUnk_09EDCB38, gUnk_09EDCB38Fr, gUnk_09EDCB38De, gUnk_09EDCB38It, gUnk_09EDCB38Es], lineCounts: [11, 13, 13, 11, 11]}
+  - {name: gUnkEu_08878F40, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterDiZLines, gJiminyRikuCharacterDiZLinesFrench, gJiminyRikuCharacterDiZLinesGerman, gJiminyRikuCharacterDiZLinesItalian, gJiminyRikuCharacterDiZLinesSpanish], lineCounts: [11, 13, 13, 11, 11]}
   - gUnkEu_08878F60
   - gUnkEu_08878F75
   - gUnkEu_08878F83
@@ -17648,7 +17648,7 @@ entries:
   - gUnkEu_088793D0
   - gUnkEu_088793E0
   - gUnkEu_088793F1
-  - {name: gUnkEu_088793FC, record: JiminyLocalizedText, lines: [gUnk_09EDCB64, gUnk_09EDCB64Fr, gUnk_09EDCB64De, gUnk_09EDCB64It, gUnk_09EDCB64Es], lineCounts: [13, 13, 14, 13, 15]}
+  - {name: gUnkEu_088793FC, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterMaleficentLines, gJiminyRikuCharacterMaleficentLinesFrench, gJiminyRikuCharacterMaleficentLinesGerman, gJiminyRikuCharacterMaleficentLinesItalian, gJiminyRikuCharacterMaleficentLinesSpanish], lineCounts: [13, 13, 14, 13, 15]}
   - gUnkEu_0887941C
   - gUnkEu_08879430
   - gUnkEu_08879448
@@ -17689,7 +17689,7 @@ entries:
   - gUnkEu_088796C9
   - gUnkEu_088796DC
   - gUnkEu_088796F0
-  - {name: gUnkEu_08879700, record: JiminyLocalizedText, lines: [gUnk_09EDCB98, gUnk_09EDCB98Fr, gUnk_09EDCB98De, gUnk_09EDCB98It, gUnk_09EDCB98Es], lineCounts: [8, 8, 9, 7, 8]}
+  - {name: gUnkEu_08879700, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterJafarGenieLines, gJiminyRikuCharacterJafarGenieLinesFrench, gJiminyRikuCharacterJafarGenieLinesGerman, gJiminyRikuCharacterJafarGenieLinesItalian, gJiminyRikuCharacterJafarGenieLinesSpanish], lineCounts: [8, 8, 9, 7, 8]}
   - gUnkEu_08879720
   - gUnkEu_08879732
   - gUnkEu_08879749
@@ -17737,7 +17737,7 @@ entries:
   - gUnkEu_08879A31
   - gUnkEu_08879A45
   - gUnkEu_08879A5D
-  - {name: gUnkEu_08879A6C, record: JiminyLocalizedText, lines: [gUnk_09EDCBB8, gUnk_09EDCBB8Fr, gUnk_09EDCBB8De, gUnk_09EDCBB8It, gUnk_09EDCBB8Es], lineCounts: [9, 10, 10, 9, 9]}
+  - {name: gUnkEu_08879A6C, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterUrsulaLines, gJiminyRikuCharacterUrsulaLinesFrench, gJiminyRikuCharacterUrsulaLinesGerman, gJiminyRikuCharacterUrsulaLinesItalian, gJiminyRikuCharacterUrsulaLinesSpanish], lineCounts: [9, 10, 10, 9, 9]}
   - gUnkEu_08879A8C
   - gUnkEu_08879AA2
   - gUnkEu_08879AB9
@@ -17778,7 +17778,7 @@ entries:
   - gUnkEu_08879CEC
   - gUnkEu_08879D00
   - gUnkEu_08879D18
-  - {name: gUnkEu_08879D24, record: JiminyLocalizedText, lines: [gUnk_09EDCBDC, gUnk_09EDCBDCFr, gUnk_09EDCBDCDe, gUnk_09EDCBDCIt, gUnk_09EDCBDCEs], lineCounts: [8, 8, 8, 8, 8]}
+  - {name: gUnkEu_08879D24, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterHadesLines, gJiminyRikuCharacterHadesLinesFrench, gJiminyRikuCharacterHadesLinesGerman, gJiminyRikuCharacterHadesLinesItalian, gJiminyRikuCharacterHadesLinesSpanish], lineCounts: [8, 8, 8, 8, 8]}
   - gUnkEu_08879D44
   - gUnkEu_08879D5B
   - gUnkEu_08879D6E
@@ -17820,7 +17820,7 @@ entries:
   - gUnkEu_08879FC5
   - gUnkEu_08879FD8
   - gUnkEu_08879FEF
-  - {name: gUnkEu_08879FFC, record: JiminyLocalizedText, lines: [gUnk_09EDCBFC, gUnk_09EDCBFCFr, gUnk_09EDCBFCDe, gUnk_09EDCBFCIt, gUnk_09EDCBFCEs], lineCounts: [8, 9, 8, 8, 8]}
+  - {name: gUnkEu_08879FFC, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterOogieBoogieLines, gJiminyRikuCharacterOogieBoogieLinesFrench, gJiminyRikuCharacterOogieBoogieLinesGerman, gJiminyRikuCharacterOogieBoogieLinesItalian, gJiminyRikuCharacterOogieBoogieLinesSpanish], lineCounts: [8, 9, 8, 8, 8]}
   - gUnkEu_0887A01C
   - gUnkEu_0887A034
   - gUnkEu_0887A036
@@ -17854,7 +17854,7 @@ entries:
   - gUnkEu_0887A215
   - gUnkEu_0887A229
   - gUnkEu_0887A241
-  - {name: gUnkEu_0887A250, record: JiminyLocalizedText, lines: [gUnk_09EDCC1C, gUnk_09EDCC1CFr, gUnk_09EDCC1CDe, gUnk_09EDCC1CIt, gUnk_09EDCC1CEs], lineCounts: [6, 7, 6, 7, 7]}
+  - {name: gUnkEu_0887A250, record: JiminyLocalizedText, lines: [gJiminyRikuCharacterHookLines, gJiminyRikuCharacterHookLinesFrench, gJiminyRikuCharacterHookLinesGerman, gJiminyRikuCharacterHookLinesItalian, gJiminyRikuCharacterHookLinesSpanish], lineCounts: [6, 7, 6, 7, 7]}
   - gUnkEu_0887A270
   - gUnkEu_0887A281
   - gUnkEu_0887A297
@@ -17891,7 +17891,7 @@ entries:
   - gUnkEu_0887A4A4
   - gUnkEu_0887A4B6
   - gUnkEu_0887A4CC
-  - {name: gUnkEu_0887A4D8, record: JiminyLocalizedText, lines: [gUnk_09EDCC34, gUnk_09EDCC34Fr, gUnk_09EDCC34De, gUnk_09EDCC34It, gUnk_09EDCC34Es], lineCounts: [7, 7, 8, 7, 7]}
+  - {name: gUnkEu_0887A4D8, record: JiminyLocalizedText, lines: [gJiminyRikuHeartlessGuardArmorLines, gJiminyRikuHeartlessGuardArmorLinesFrench, gJiminyRikuHeartlessGuardArmorLinesGerman, gJiminyRikuHeartlessGuardArmorLinesItalian, gJiminyRikuHeartlessGuardArmorLinesSpanish], lineCounts: [7, 7, 8, 7, 7]}
   - gUnkEu_0887A4F8
   - gUnkEu_0887A509
   - gUnkEu_0887A521
@@ -17928,7 +17928,7 @@ entries:
   - gUnkEu_0887A70F
   - gUnkEu_0887A721
   - gUnkEu_0887A737
-  - {name: gUnkEu_0887A744, record: JiminyLocalizedText, lines: [gUnk_09EDCC50, gUnk_09EDCC50Fr, gUnk_09EDCC50De, gUnk_09EDCC50It, gUnk_09EDCC50Es], lineCounts: [7, 7, 7, 7, 8]}
+  - {name: gUnkEu_0887A744, record: JiminyLocalizedText, lines: [gJiminyRikuHeartlessParasiteCageLines, gJiminyRikuHeartlessParasiteCageLinesFrench, gJiminyRikuHeartlessParasiteCageLinesGerman, gJiminyRikuHeartlessParasiteCageLinesItalian, gJiminyRikuHeartlessParasiteCageLinesSpanish], lineCounts: [7, 7, 7, 7, 8]}
   - gUnkEu_0887A764
   - gUnkEu_0887A777
   - gUnkEu_0887A78D
@@ -17970,7 +17970,7 @@ entries:
   - gUnkEu_0887A9D7
   - gUnkEu_0887A9E9
   - gUnkEu_0887A9FF
-  - {name: gUnkEu_0887AA0C, record: JiminyLocalizedText, lines: [gUnk_09EDCC6C, gUnk_09EDCC6CFr, gUnk_09EDCC6CDe, gUnk_09EDCC6CIt, gUnk_09EDCC6CEs], lineCounts: [8, 9, 8, 8, 8]}
+  - {name: gUnkEu_0887AA0C, record: JiminyLocalizedText, lines: [gJiminyRikuHeartlessTrickmasterLines, gJiminyRikuHeartlessTrickmasterLinesFrench, gJiminyRikuHeartlessTrickmasterLinesGerman, gJiminyRikuHeartlessTrickmasterLinesItalian, gJiminyRikuHeartlessTrickmasterLinesSpanish], lineCounts: [8, 9, 8, 8, 8]}
   - gUnkEu_0887AA2C
   - gUnkEu_0887AA3F
   - gUnkEu_0887AA55
@@ -18016,4 +18016,4 @@ entries:
   - gUnkEu_0887AD14
   - gUnkEu_0887AD26
   - gUnkEu_0887AD33
-  - {name: gUnkEu_0887AD44, record: JiminyLocalizedText, lines: [gUnk_09EDCC8C, gUnk_09EDCC8CFr, gUnk_09EDCC8CDe, gUnk_09EDCC8CIt, gUnk_09EDCC8CEs], lineCounts: [8, 10, 9, 8, 10]}
+  - {name: gUnkEu_0887AD44, record: JiminyLocalizedText, lines: [gJiminyRikuHeartlessDarksideLines, gJiminyRikuHeartlessDarksideLinesFrench, gJiminyRikuHeartlessDarksideLinesGerman, gJiminyRikuHeartlessDarksideLinesItalian, gJiminyRikuHeartlessDarksideLinesSpanish], lineCounts: [8, 10, 9, 8, 10]}

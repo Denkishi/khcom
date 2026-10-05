@@ -509,8 +509,6 @@ TARGET_ABSENT_SYMBOLS = {
         "gStockNameFriendTiles",
         "gStockNameBossTiles",
         "gStockNameWorldBossTiles",
-        "gUnk_0908A958",
-        "gUnk_0908AF32",
         "gBgTextSmallFontFrame0",
         "gBgTextSmallFontFrame1",
         "gBgTextSmallFontFrame2",

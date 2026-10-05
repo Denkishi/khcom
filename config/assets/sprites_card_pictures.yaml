@@ -5531,40 +5531,42 @@ entries:
     address: 0x09EC1520
   eu:
     address: 0x09F75E74
-- name: gUnk_09EEA130
+- name: gStockNameRikuFrames
   record: SpriteTable
-  items: [gUnk_0908A918, gUnk_0908A928, gUnk_0908A93E]
+  items: [gStockNameRikuFrame0, gStockNameRikuFrame1, gStockNameRikuFrame2]
   us:
     address: 0x09EEA130
   jp:
     address: 0x09EC1524
-- name: gUnk_09EEA13C
+  eu:
+    address: 0x09F75EE8
+- name: gStockNameRikuAnims
   record: AnimTable
-  items: [gUnk_0908A94E]
+  items: [gStockNameRikuAnim0]
   us:
     address: 0x09EEA13C
   jp:
     address: 0x09EC1530
   eu:
-    address: 0x09F75F54
-- name: gUnk_09EEA140
+    address: 0x09F75EF4
+- name: gStockNameMmMiracleFrames
   record: SpriteTable
-  items: [gUnk_0908AF18]
+  items: [gStockNameMmMiracleFrame0]
   us:
     address: 0x09EEA140
   jp:
     address: 0x09EC1534
   eu:
-    address: 0x09F75F58
-- name: gUnk_09EEA144
+    address: 0x09F75F38
+- name: gStockNameMmMiracleAnims
   record: AnimTable
-  items: [gUnk_0908AF28]
+  items: [gStockNameMmMiracleAnim0]
   us:
     address: 0x09EEA144
   jp:
     address: 0x09EC1538
   eu:
-    address: 0x09F75F5C
+    address: 0x09F75F3C
 - name: gCardPremiumFrames
   record: SpriteTable
   items: [gCardPremiumFrame0, gCardPremiumFrame1, gCardPremiumFrame2, gCardPremiumFrame3, gCardPremiumFrame4, gCardPremiumFrame5, gCardPremiumFrame6]
@@ -5823,16 +5825,6 @@ entries:
   items: [gStockNameWorldBossGermanAnim0]
   eu:
     address: 0x09F75EE4
-- name: gStockNameRikuFrames
-  record: SpriteTable
-  items: [gStockNameRikuFrame0, gStockNameRikuFrame1, gStockNameRikuFrame2]
-  eu:
-    address: 0x09F75EE8
-- name: gStockNameRikuAnims
-  record: AnimTable
-  items: [gStockNameRikuAnim0]
-  eu:
-    address: 0x09F75EF4
 - name: gStockNameRikuFrenchFrames
   record: SpriteTable
   items: [gStockNameRikuFrenchFrame0, gStockNameRikuFrenchFrame1, gStockNameRikuFrenchFrame2]
@@ -5873,16 +5865,6 @@ entries:
   items: [gStockNameRikuGermanAnim0]
   eu:
     address: 0x09F75F34
-- name: gStockNameMmMiracleFrames
-  record: SpriteTable
-  items: [gStockNameMmMiracleFrame0]
-  eu:
-    address: 0x09F75F38
-- name: gStockNameMmMiracleAnims
-  record: AnimTable
-  items: [gStockNameMmMiracleAnim0]
-  eu:
-    address: 0x09F75F3C
 - name: gStockNameMmMiracleFrenchFrames
   record: SpriteTable
   items: [gStockNameMmMiracleFrenchFrame0]
@@ -5903,11 +5885,26 @@ entries:
   items: [gStockNameMmMiracleSpanishAnim0]
   eu:
     address: 0x09F75F4C
-- name: gUnkEu_09F75F50
+- name: gStockNameMmMiracleItalianFrames
   record: SpriteTable
-  items: [gUnk_0908A918]
+  items: [gStockNameMmMiracleItalianFrame0]
   eu:
     address: 0x09F75F50
+- name: gStockNameMmMiracleItalianAnims
+  record: AnimTable
+  items: [gStockNameMmMiracleItalianAnim0]
+  eu:
+    address: 0x09F75F54
+- name: gStockNameMmMiracleGermanFrames
+  record: SpriteTable
+  items: [gStockNameMmMiracleGermanFrame0]
+  eu:
+    address: 0x09F75F58
+- name: gStockNameMmMiracleGermanAnims
+  record: AnimTable
+  items: [gStockNameMmMiracleGermanAnim0]
+  eu:
+    address: 0x09F75F5C
 - name: card_itm01
   format: sprite_sheet
   palette: gCardItm01Palette
@@ -18304,28 +18301,28 @@ entries:
   eu:
     address: 0x091580C0
     size: 8502
-- name: gUnk_0908A958
+- name: gStockNameRikuTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [0, 0]
   columns: 3
   frames:
-  - symbol: gUnk_0908A918
+  - symbol: gStockNameRikuFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
-  - symbol: gUnk_0908A928
+  - symbol: gStockNameRikuFrame1
     pieces:
     - [32x16, 0, 0, {fresh: true}]
     - [16x16, 32, 0]
     - [8x16, 48, 0]
-  - symbol: gUnk_0908A93E
+  - symbol: gStockNameRikuFrame2
     pieces:
     - [32x16, 0, 0, {fresh: true}]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnk_0908A94E
+  - symbol: gStockNameRikuAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -18336,28 +18333,22 @@ entries:
     address: 0x09046188
     size: 1536
     frames:
-    - symbol: gUnk_0908A918
+    - symbol: gStockNameRikuFrame0
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
-    - symbol: gUnk_0908A928
+    - symbol: gStockNameRikuFrame1
       pieces:
       - [32x16, 0, 0]
       - [32x16, 32, 0]
-    - symbol: gUnk_0908A93E
+    - symbol: gStockNameRikuFrame2
       pieces:
       - [32x16, 0, 0]
       - [16x16, 32, 0]
       - [8x16, 48, 0]
   eu:
-    address: 0x09160FC8
-    size: 480
-    frames:
-    - symbol: gUnk_0908A918
-      pieces:
-      - [32x16, 0, 0]
-      - [16x16, 32, 0]
-      - [8x16, 48, 0]
+    address: 0x0915E794
+    size: 1536
 - name: gStockNameWorldBossFrenchTiles
   format: sprite_sheet
   align: 4
@@ -18531,33 +18522,6 @@ entries:
   eu:
     address: 0x0915DA58
     size: 3388
-- name: gStockNameRikuTiles
-  format: sprite_sheet
-  cell: [64, 16]
-  anchor: [0, 0]
-  columns: 3
-  frames:
-  - symbol: gStockNameRikuFrame0
-    pieces:
-    - [32x16, 0, 0]
-    - [32x16, 32, 0]
-  - symbol: gStockNameRikuFrame1
-    pieces:
-    - [32x16, 0, 0, {fresh: true}]
-    - [16x16, 32, 0]
-    - [8x16, 48, 0]
-  - symbol: gStockNameRikuFrame2
-    pieces:
-    - [32x16, 0, 0, {fresh: true}]
-    - [32x16, 32, 0]
-  animations:
-  - symbol: gStockNameRikuAnim0
-    declare: false
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 4]]
-  eu:
-    address: 0x0915E794
-    size: 1536
 - name: gStockNameRikuFrenchTiles
   format: sprite_sheet
   cell: [80, 16]
@@ -18672,24 +18636,6 @@ entries:
   eu:
     address: 0x091602A8
     size: 1868
-- name: gStockNameMmMiracleTiles
-  format: sprite_sheet
-  cell: [64, 16]
-  anchor: [0, 0]
-  columns: 1
-  frames:
-  - symbol: gStockNameMmMiracleFrame0
-    pieces:
-    - [32x16, 0, 0]
-    - [32x16, 32, 0]
-  animations:
-  - symbol: gStockNameMmMiracleAnim0
-    declare: false
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 4]]
-  eu:
-    address: 0x091609F4
-    size: 538
 - name: gStockNameMmMiracleFrenchTiles
   format: sprite_sheet
   align: 4
@@ -18728,18 +18674,57 @@ entries:
   eu:
     address: 0x09160E2C
     size: 410
-- name: gUnk_0908AF32
+- name: gStockNameMmMiracleItalianTiles
+  format: sprite_sheet
+  align: 4
+  cell: [64, 16]
+  anchor: [0, 0]
+  columns: 1
+  frames:
+  - symbol: gStockNameMmMiracleItalianFrame0
+    pieces:
+    - [32x16, 0, 0]
+    - [16x16, 32, 0]
+    - [8x16, 48, 0]
+  animations:
+  - symbol: gStockNameMmMiracleItalianAnim0
+    declare: false
+    fields: {unk_00: 64, unk_02: 64}
+    frames: [[0, 4]]
+  eu:
+    address: 0x09160FC8
+    size: 480
+- name: gStockNameMmMiracleGermanTiles
   format: sprite_sheet
   cell: [72, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_0908AF18
+  - symbol: gStockNameMmMiracleGermanFrame0
+    pieces:
+    - [32x16, 0, 0]
+    - [32x16, 32, 0]
+    - [8x16, 64, 0]
+  animations:
+  - symbol: gStockNameMmMiracleGermanAnim0
+    declare: false
+    fields: {unk_00: 64, unk_02: 64}
+    frames: [[0, 4]]
+  eu:
+    address: 0x091611A8
+    size: 608
+- name: gStockNameMmMiracleTiles
+  format: sprite_sheet
+  cell: [64, 16]
+  anchor: [0, 0]
+  columns: 1
+  frames:
+  - symbol: gStockNameMmMiracleFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnk_0908AF28
+  - symbol: gStockNameMmMiracleAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -18750,14 +18735,8 @@ entries:
     address: 0x09046788
     size: 538
   eu:
-    address: 0x091611A8
-    size: 608
-    frames:
-    - symbol: gUnk_0908AF18
-      pieces:
-      - [32x16, 0, 0]
-      - [32x16, 32, 0]
-      - [8x16, 64, 0]
+    address: 0x091609F4
+    size: 538
 - name: gCardPremiumTiles
   format: sprite_sheet
   align: 4

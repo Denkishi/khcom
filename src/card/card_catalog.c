@@ -11903,12 +11903,12 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #ifdef VERSION_EU
         gStockNameMmMiracleTilesByLanguage,
 #else
-        gUnk_0908AF32,
+        gStockNameMmMiracleTiles,
 #endif
 #ifdef VERSION_EU
         gStockNameMmMiracleSpritesByLanguage,
 #else
-        gUnk_09EEA140,
+        gStockNameMmMiracleFrames,
 #endif
         640,
         0,
@@ -11917,12 +11917,12 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #ifdef VERSION_EU
         gStockNameMmMiracleTilesByLanguage,
 #else
-        gUnk_0908AF32,
+        gStockNameMmMiracleTiles,
 #endif
 #ifdef VERSION_EU
         gStockNameMmMiracleSpritesByLanguage,
 #else
-        gUnk_09EEA140,
+        gStockNameMmMiracleFrames,
 #endif
         640,
         0,
@@ -12613,12 +12613,12 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #ifdef VERSION_EU
         gStockNameRikuTilesByLanguage,
 #else
-        gUnk_0908A958,
+        gStockNameRikuTiles,
 #endif
 #ifdef VERSION_EU
         gStockNameRikuSpritesByLanguage,
 #else
-        gUnk_09EEA130,
+        gStockNameRikuFrames,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12633,12 +12633,12 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #ifdef VERSION_EU
         gStockNameRikuTilesByLanguage,
 #else
-        gUnk_0908A958,
+        gStockNameRikuTiles,
 #endif
 #ifdef VERSION_EU
         gStockNameRikuSpritesByLanguage,
 #else
-        gUnk_09EEA130,
+        gStockNameRikuFrames,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -12653,12 +12653,12 @@ const SpriteFrameResourceDef gStockNameSprites[106] = {
 #ifdef VERSION_EU
         gStockNameRikuTilesByLanguage,
 #else
-        gUnk_0908A958,
+        gStockNameRikuTiles,
 #endif
 #ifdef VERSION_EU
         gStockNameRikuSpritesByLanguage,
 #else
-        gUnk_09EEA130,
+        gStockNameRikuFrames,
 #endif
         640,
 #if defined(VERSION_EU)
@@ -13050,8 +13050,8 @@ void* gStockNameMagicTilesByLanguage[5] = { gStockNameMagicTiles, gStockNameMagi
 void** gStockNameMagicSpritesByLanguage[5] = { gStockNameMagicFrames, gStockNameMagicFrenchFrames, gStockNameMagicGermanFrames, gStockNameMagicItalianFrames, gStockNameMagicSpanishFrames };
 void* gStockNameFriendTilesByLanguage[5] = { gStockNameFriendTiles, gStockNameFriendFrenchTiles, gStockNameFriendGermanTiles, gStockNameFriendItalianTiles, gStockNameFriendSpanishTiles };
 void** gStockNameFriendSpritesByLanguage[5] = { gStockNameFriendFrames, gStockNameFriendFrenchFrames, gStockNameFriendGermanFrames, gStockNameFriendItalianFrames, gStockNameFriendSpanishFrames };
-void* gStockNameMmMiracleTilesByLanguage[5] = { gStockNameMmMiracleTiles, gStockNameMmMiracleFrenchTiles, gUnk_0908AF32, gUnk_0908A958, gStockNameMmMiracleSpanishTiles };
-void** gStockNameMmMiracleSpritesByLanguage[5] = { gStockNameMmMiracleFrames, gStockNameMmMiracleFrenchFrames, gUnk_09EEA140, gUnkEu_09F75F50, gStockNameMmMiracleSpanishFrames };
+void* gStockNameMmMiracleTilesByLanguage[5] = { gStockNameMmMiracleTiles, gStockNameMmMiracleFrenchTiles, gStockNameMmMiracleGermanTiles, gStockNameMmMiracleItalianTiles, gStockNameMmMiracleSpanishTiles };
+void** gStockNameMmMiracleSpritesByLanguage[5] = { gStockNameMmMiracleFrames, gStockNameMmMiracleFrenchFrames, gStockNameMmMiracleGermanFrames, gStockNameMmMiracleItalianFrames, gStockNameMmMiracleSpanishFrames };
 void* gStockNameRikuTilesByLanguage[5] = { gStockNameRikuTiles, gStockNameRikuFrenchTiles, gStockNameRikuGermanTiles, gStockNameRikuItalianTiles, gStockNameRikuSpanishTiles };
 void** gStockNameRikuSpritesByLanguage[5] = { gStockNameRikuFrames, gStockNameRikuFrenchFrames, gStockNameRikuGermanFrames, gStockNameRikuItalianFrames, gStockNameRikuSpanishFrames };
 void* gStockNameBossTilesByLanguage[5] = { gStockNameBossTiles, gStockNameBossFrenchTiles, gStockNameBossGermanTiles, gStockNameBossItalianTiles, gStockNameBossSpanishTiles };

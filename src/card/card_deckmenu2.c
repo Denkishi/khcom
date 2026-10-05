@@ -1294,16 +1294,16 @@ static void Deckmenu2_0(DeckMenuWork* work, void* a) {
     work->tiles4 = LoadObjTiles(gDeckScrollThumbTiles, 32);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
 #ifdef VERSION_EU
-    work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
+    work->tiles5 = LoadObjTiles(gDeckButtonLabelTilesByLanguage[gLanguage], sDeckButtonLabelTileSizes[gLanguage]);
 #else
-    work->tiles5 = LoadObjTiles(gUnk_090A1FB2, 0x280);
+    work->tiles5 = LoadObjTiles(gDeckButtonLabelTiles, 0x280);
 #endif
 #ifdef VERSION_EU
-    work->gfx7 = gDeckButtonLabelSprites[gLanguage][0];
-    work->gfx8 = gDeckButtonLabelSprites[gLanguage][1];
+    work->gfx7 = gDeckButtonLabelSpritesByLanguage[gLanguage][0];
+    work->gfx8 = gDeckButtonLabelSpritesByLanguage[gLanguage][1];
 #else
-    work->gfx7 = gUnk_09EEAFD4[0];
-    work->gfx8 = gUnk_09EEAFD4[1];
+    work->gfx7 = gDeckButtonLabelFrames[0];
+    work->gfx8 = gDeckButtonLabelFrames[1];
 #endif
     work->tiles2 = AllocObjTiles(0x280, NULL);
     SetDeckMenuFrameCursor(work, 0);
@@ -1543,15 +1543,15 @@ u8 UpdateDeckMenuLoadDeckInfo(DeckMenuWork* work, void* a) {
         work->y = sDeckTabPointerY[work->cursorRow] << 8;
         work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
 #ifdef VERSION_EU
-        work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
+        work->tiles12 = LoadObjTiles(gDeckTitleBannerTilesByLanguage[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+            work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
         } else {
-            work->tiles12 = LoadObjTiles(gUnk_090A3E46, 0x320);
+            work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, 0x320);
         }
 #else
-        work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
         work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
         work->step = 0;
@@ -2867,9 +2867,9 @@ u8 UpdateDeckMenuOpenCommands(DeckMenuWork* work, void* a) {
     u8 z;
 
 #ifdef VERSION_EU
-    work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles[gLanguage], sDeckCommandMenuTileSizes[gLanguage]);
+    work->tiles3 = LoadObjTiles(gDeckCommandMenuTilesByLanguage[gLanguage], sDeckCommandMenuTileSizes[gLanguage]);
 #else
-    work->tiles3 = LoadObjTiles(gUnk_090A261E, 0x1800);
+    work->tiles3 = LoadObjTiles(gDeckCommandMenuTiles, 0x1800);
 #endif
     work->palette2 = LoadObjPalette(gDeckCommandMenuPalette, 32);
     SetDeckMenuFrameCursor(work, 1);
@@ -4081,15 +4081,15 @@ u8 UpdateDeckMenuStartSlideOut(DeckMenuWork* work, void* a) {
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
 
 #ifdef VERSION_EU
-    work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
+    work->tiles12 = LoadObjTiles(gDeckTitleBannerTilesByLanguage[gLanguage], sDeckTitleBannerTileSizes[gLanguage]);
 #elif defined(VERSION_US)
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+        work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
     } else {
-        work->tiles12 = LoadObjTiles(gUnk_090A3E46, 0x320);
+        work->tiles12 = LoadObjTiles(gDeckTitleBannerTiles, 0x320);
     }
 #else
-    work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
 
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
@@ -4182,11 +4182,11 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     if (work->tiles12 != NULL) {
         DrawSprite(work->x7 >> 8, 0,
 #ifdef VERSION_EU
-                   gDeckTitleBannerSprites[gLanguage][0],
+                   gDeckTitleBannerSpritesByLanguage[gLanguage][0],
 #elif defined(VERSION_US)
-                   gUnk_09EEAFF0[0],
+                   gDeckTitleBannerFrames[0],
 #else
-                   gUnk_09EEAFF8[0],
+                   gRikuDeckTitleBannerFrames[0],
 #endif
                    work->tiles12, work->palette3, NULL, 0, 10);
     }
@@ -4205,10 +4205,10 @@ static void Deckmenu2_2(DeckMenuWork* work) {
     case 3:
 #ifdef VERSION_EU
         if (work->tiles3 != NULL) {
-            DrawSprite(120, 80, gDeckCommandMenuSprites[gLanguage][0], work->tiles3, work->palette2, NULL, 0, 8);
+            DrawSprite(120, 80, gDeckCommandMenuSpritesByLanguage[gLanguage][0], work->tiles3, work->palette2, NULL, 0, 8);
         }
 #else
-        DrawSprite(120, 80, gUnk_09EEAFE8[0], work->tiles3, work->palette2, NULL, 0, 8);
+        DrawSprite(120, 80, gDeckCommandMenuFrames[0], work->tiles3, work->palette2, NULL, 0, 8);
 #endif
         DrawDeckNames(work, 0);
         DrawSprite(work->removeLabelX, work->removeLabelY, work->gfx7, work->tiles5, work->palette, NULL, 0, 10);
@@ -6861,18 +6861,18 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* a) {
         work->palette7 = LoadObjPalette(gDeckKeyboardCursorPalette, 32);
         work->tiles13 = AllocSpriteFrameTiles(0x80);
 #ifdef VERSION_EU
-        SetObjTileSource(work->tiles11, gDeckKeyboardCursorTiles[gLanguage]);
-        AnimInit(&work->anim4, gDeckKeyboardCursorAnims[gLanguage], gDeckKeyboardCursorSprites[gLanguage]);
+        SetObjTileSource(work->tiles11, gDeckKeyboardCursorTilesByLanguage[gLanguage]);
+        AnimInit(&work->anim4, gDeckKeyboardCursorAnimsByLanguage[gLanguage], gDeckKeyboardCursorSpritesByLanguage[gLanguage]);
 #else
-        SetObjTileSource(work->tiles11, gUnk_090A5F1E);
-        AnimInit(&work->anim4, gUnk_09EEB0B8, gUnk_09EEB08C);
+        SetObjTileSource(work->tiles11, gDeckKeyboardCursorTiles);
+        AnimInit(&work->anim4, gDeckKeyboardCursorAnims, gDeckKeyboardCursorFrames);
 #endif
         AnimStart(&work->anim4, 0, ANIM_FLAG_LOOP);
         work->gfx9 = AnimGetGfx(&work->anim4);
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(work->tiles13, gDeckKeyboardCursorSprites[gLanguage][10], gDeckKeyboardCursorTiles[gLanguage]);
+        UpdateSpriteFrameTiles(work->tiles13, gDeckKeyboardCursorSpritesByLanguage[gLanguage][10], gDeckKeyboardCursorTilesByLanguage[gLanguage]);
 #else
-        UpdateSpriteFrameTiles(work->tiles13, gUnk_09EEB08C[10], gUnk_090A5F1E);
+        UpdateSpriteFrameTiles(work->tiles13, gDeckKeyboardCursorFrames[10], gDeckKeyboardCursorTiles);
 #endif
         FreeTextSlots(work->textSlots, 8);
         FreeTextSlots(work->textSlots2, 8);
@@ -7475,22 +7475,22 @@ const u16* gRikuDeckEnemyCards[12] = {
 
 #include "deck_names.inc"
 #ifdef VERSION_EU
-void* gDeckButtonLabelTiles[5] = { gUnk_090A1FB2, gDeckButtonLabelFrenchTiles, gDeckButtonLabelGermanTiles, gDeckButtonLabelItalianTiles, gDeckButtonLabelSpanishTiles };
-void** gDeckButtonLabelSprites[5] = { gUnk_09EEAFD4, gDeckButtonLabelFrenchFrames, gDeckButtonLabelGermanFrames, gDeckButtonLabelItalianFrames, gDeckButtonLabelSpanishFrames };
-void* gDeckCommandMenuTiles[5] = { gUnk_090A261E, gDeckCommandMenuFrenchTiles, gDeckCommandMenuGermanTiles, gDeckCommandMenuItalianTiles, gDeckCommandMenuSpanishTiles };
+void* gDeckButtonLabelTilesByLanguage[5] = { gDeckButtonLabelTiles, gDeckButtonLabelFrenchTiles, gDeckButtonLabelGermanTiles, gDeckButtonLabelItalianTiles, gDeckButtonLabelSpanishTiles };
+void** gDeckButtonLabelSpritesByLanguage[5] = { gDeckButtonLabelFrames, gDeckButtonLabelFrenchFrames, gDeckButtonLabelGermanFrames, gDeckButtonLabelItalianFrames, gDeckButtonLabelSpanishFrames };
+void* gDeckCommandMenuTilesByLanguage[5] = { gDeckCommandMenuTiles, gDeckCommandMenuFrenchTiles, gDeckCommandMenuGermanTiles, gDeckCommandMenuItalianTiles, gDeckCommandMenuSpanishTiles };
 
-void** gDeckCommandMenuSprites[5] = {
-    gUnk_09EEAFE8,
+void** gDeckCommandMenuSpritesByLanguage[5] = {
+    gDeckCommandMenuFrames,
     gDeckCommandMenuFrenchFrames,
     gDeckCommandMenuGermanFrames,
     gDeckCommandMenuItalianFrames,
     gDeckCommandMenuSpanishFrames,
 };
 
-void* gDeckTitleBannerTiles[5] = { gUnk_090A3E46, gDeckTitleBannerFrenchTiles, gDeckTitleBannerGermanTiles, gDeckTitleBannerItalianTiles, gDeckTitleBannerSpanishTiles };
+void* gDeckTitleBannerTilesByLanguage[5] = { gDeckTitleBannerTiles, gDeckTitleBannerFrenchTiles, gDeckTitleBannerGermanTiles, gDeckTitleBannerItalianTiles, gDeckTitleBannerSpanishTiles };
 
-void** gDeckTitleBannerSprites[5] = {
-    gUnk_09EEAFF0,
+void** gDeckTitleBannerSpritesByLanguage[5] = {
+    gDeckTitleBannerFrames,
     gDeckTitleBannerFrenchFrames,
     gDeckTitleBannerGermanFrames,
     gDeckTitleBannerItalianFrames,
@@ -7510,9 +7510,9 @@ TaskDesc gTaskDescDeckmenu2 = {
 };
 
 #ifdef VERSION_EU
-void* gDeckKeyboardCursorTiles[5] = { gUnk_090A5F1E, gUnk_090A5F1E, gDeckKeyboardCursorGermanTiles, gDeckKeyboardCursorItalianTiles, gUnk_090A5F1E };
-void** gDeckKeyboardCursorSprites[5] = { gUnk_09EEB08C, gUnk_09EEB08C, gDeckKeyboardCursorGermanFrames, gDeckKeyboardCursorItalianFrames, gUnk_09EEB08C };
-void* gDeckKeyboardCursorAnims[5] = { gUnk_09EEB0B8, gUnk_09EEB0B8, gDeckKeyboardCursorGermanAnims, gDeckKeyboardCursorItalianAnims, gUnk_09EEB0B8 };
+void* gDeckKeyboardCursorTilesByLanguage[5] = { gDeckKeyboardCursorTiles, gDeckKeyboardCursorTiles, gDeckKeyboardCursorGermanTiles, gDeckKeyboardCursorItalianTiles, gDeckKeyboardCursorTiles };
+void** gDeckKeyboardCursorSpritesByLanguage[5] = { gDeckKeyboardCursorFrames, gDeckKeyboardCursorFrames, gDeckKeyboardCursorGermanFrames, gDeckKeyboardCursorItalianFrames, gDeckKeyboardCursorFrames };
+void* gDeckKeyboardCursorAnimsByLanguage[5] = { gDeckKeyboardCursorAnims, gDeckKeyboardCursorAnims, gDeckKeyboardCursorGermanAnims, gDeckKeyboardCursorItalianAnims, gDeckKeyboardCursorAnims };
 #endif
 
 #ifdef VERSION_US

@@ -53,18 +53,18 @@ objects:
     start: 0x09532B24
     end: 0x0953CB24
 entries:
-- name: gUnk_09EEAFD4
+- name: gDeckButtonLabelFrames
   record: SpriteTable
-  items: [gUnk_090A1F88, gUnk_090A1F98]
+  items: [gDeckButtonLabelFrame0, gDeckButtonLabelFrame1]
   us:
     address: 0x09EEAFD4
   jp:
     address: 0x09EC23C8
   eu:
     address: 0x09F77044
-- name: gUnk_09EEAFDC
+- name: gDeckButtonLabelAnims
   record: AnimTable
-  items: [gUnk_090A1FA8]
+  items: [gDeckButtonLabelAnim0]
   us:
     address: 0x09EEAFDC
   jp:
@@ -89,50 +89,50 @@ entries:
     address: 0x09EC23D8
   eu:
     address: 0x09F77054
-- name: gUnk_09EEAFE8
+- name: gDeckCommandMenuFrames
   record: SpriteTable
-  items: [gUnk_090A25F8]
+  items: [gDeckCommandMenuFrame0]
   us:
     address: 0x09EEAFE8
   jp:
     address: 0x09EC23DC
   eu:
     address: 0x09F77058
-- name: gUnk_09EEAFEC
+- name: gDeckCommandMenuAnims
   record: AnimTable
-  items: [gUnk_090A2614]
+  items: [gDeckCommandMenuAnim0]
   us:
     address: 0x09EEAFEC
   jp:
     address: 0x09EC23E0
   eu:
     address: 0x09F7705C
-- name: gUnk_09EEAFF0
+- name: gDeckTitleBannerFrames
   record: SpriteTable
-  items: [gUnk_090A3E20]
+  items: [gDeckTitleBannerFrame0]
   us:
     address: 0x09EEAFF0
   eu:
     address: 0x09F77060
-- name: gUnk_09EEAFF4
+- name: gDeckTitleBannerAnims
   record: AnimTable
-  items: [gUnk_090A3E3C]
+  items: [gDeckTitleBannerAnim0]
   us:
     address: 0x09EEAFF4
   eu:
     address: 0x09F77064
-- name: gUnk_09EEAFF8
+- name: gRikuDeckTitleBannerFrames
   record: SpriteTable
-  items: [gUnk_090A4168]
+  items: [gRikuDeckTitleBannerFrame0]
   us:
     address: 0x09EEAFF8
   jp:
     address: 0x09EC23E4
   eu:
     address: 0x09F77068
-- name: gUnk_09EEAFFC
+- name: gRikuDeckTitleBannerAnims
   record: AnimTable
-  items: [gUnk_090A4184]
+  items: [gRikuDeckTitleBannerAnim0]
   us:
     address: 0x09EEAFFC
   jp:
@@ -429,18 +429,18 @@ entries:
     address: 0x09EC2474
   eu:
     address: 0x09F771A8
-- name: gUnk_09EEB08C
+- name: gDeckKeyboardCursorFrames
   record: SpriteTable
-  items: [gUnk_090A5E60, gUnk_090A5E6A, gUnk_090A5E74, gUnk_090A5E7E, gUnk_090A5E88, gUnk_090A5E92, gUnk_090A5EA2, gUnk_090A5EB2, gUnk_090A5EC2, gUnk_090A5ECC, gUnk_090A5ED6]
+  items: [gDeckKeyboardCursorFrame0, gDeckKeyboardCursorFrame1, gDeckKeyboardCursorFrame2, gDeckKeyboardCursorFrame3, gDeckKeyboardCursorFrame4, gDeckKeyboardCursorFrame5, gDeckKeyboardCursorFrame6, gDeckKeyboardCursorFrame7, gDeckKeyboardCursorFrame8, gDeckKeyboardCursorFrame9, gDeckKeyboardCursorFrame10]
   us:
     address: 0x09EEB08C
   jp:
     address: 0x09EC2478
   eu:
     address: 0x09F771AC
-- name: gUnk_09EEB0B8
+- name: gDeckKeyboardCursorAnims
   record: AnimTable
-  items: [gUnk_090A5EE0, gUnk_090A5EFA, gUnk_090A5F14]
+  items: [gDeckKeyboardCursorAnim0, gDeckKeyboardCursorAnim1, gDeckKeyboardCursorAnim2]
   us:
     address: 0x09EEB0B8
   jp:
@@ -685,57 +685,57 @@ entries:
   eu:
     address: 0x091946D4
     size: 1670
-- name: gUnk_090A5F1E
+- name: gDeckKeyboardCursorTiles
   format: sprite_sheet
   align: 4
   cell: [40, 32]
   anchor: [8, 8]
   columns: 8
   frames:
-  - symbol: gUnk_090A5E60
+  - symbol: gDeckKeyboardCursorFrame0
     pieces:
     - [32x32, -8, -8]
-  - symbol: gUnk_090A5E6A
+  - symbol: gDeckKeyboardCursorFrame1
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_090A5E74
+  - symbol: gDeckKeyboardCursorFrame2
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_090A5E7E
+  - symbol: gDeckKeyboardCursorFrame3
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_090A5E88
+  - symbol: gDeckKeyboardCursorFrame4
     pieces:
     - [16x16, 0, 0]
-  - symbol: gUnk_090A5E92
+  - symbol: gDeckKeyboardCursorFrame5
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnk_090A5EA2
+  - symbol: gDeckKeyboardCursorFrame6
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnk_090A5EB2
+  - symbol: gDeckKeyboardCursorFrame7
     pieces:
     - [32x16, 0, 0]
     - [32x8, 0, 16]
-  - symbol: gUnk_090A5EC2
+  - symbol: gDeckKeyboardCursorFrame8
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnk_090A5ECC
+  - symbol: gDeckKeyboardCursorFrame9
     pieces:
     - [32x16, 0, 0]
-  - symbol: gUnk_090A5ED6
+  - symbol: gDeckKeyboardCursorFrame10
     pieces:
     - [16x16, 0, 0]
   animations:
-  - symbol: gUnk_090A5EE0
+  - symbol: gDeckKeyboardCursorAnim0
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 5], [1, 5], [2, 4], [3, 4], [4, 3]]
-  - symbol: gUnk_090A5EFA
+  - symbol: gDeckKeyboardCursorAnim1
     fields: {unk_00: 64, unk_02: 64}
     frames: [[5, 5], [6, 5], [7, 4], [8, 4], [9, 3]]
-  - symbol: gUnk_090A5F14
+  - symbol: gDeckKeyboardCursorAnim2
     fields: {unk_00: 64, unk_02: 64}
     frames: [[10, 4]]
   us:
@@ -1347,22 +1347,22 @@ entries:
   eu:
     address: 0x0953C324
     size: 2048
-- name: gUnk_090A1FB2
+- name: gDeckButtonLabelTiles
   format: sprite_sheet
   cell: [40, 16]
   anchor: [0, 0]
   columns: 2
   frames:
-  - symbol: gUnk_090A1F88
+  - symbol: gDeckButtonLabelFrame0
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
-  - symbol: gUnk_090A1F98
+  - symbol: gDeckButtonLabelFrame1
     pieces:
     - [32x16, 0, 0]
     - [8x16, 32, 0]
   animations:
-  - symbol: gUnk_090A1FA8
+  - symbol: gDeckButtonLabelAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 1]]
@@ -1412,21 +1412,21 @@ entries:
   eu:
     address: 0x09187C90
     size: 962
-- name: gUnk_090A261E
+- name: gDeckCommandMenuTiles
   format: sprite_sheet
   align: 4
   cell: [96, 128]
   anchor: [48, 62]
   columns: 1
   frames:
-  - symbol: gUnk_090A25F8
+  - symbol: gDeckCommandMenuFrame0
     pieces:
     - [64x64, -48, -62]
     - [32x64, 16, -62]
     - [64x64, -48, 2]
     - [32x64, 16, 2]
   animations:
-  - symbol: gUnk_090A2614
+  - symbol: gDeckCommandMenuAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -1439,21 +1439,21 @@ entries:
   eu:
     address: 0x09188054
     size: 6182
-- name: gUnk_090A3E46
+- name: gDeckTitleBannerTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_090A3E20
+  - symbol: gDeckTitleBannerFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnk_090A3E3C
+  - symbol: gDeckTitleBannerAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -1463,21 +1463,21 @@ entries:
   eu:
     address: 0x0918987C
     size: 838
-- name: gUnk_090A418E
+- name: gRikuDeckTitleBannerTiles
   format: sprite_sheet
   align: 4
   cell: [104, 16]
   anchor: [0, 0]
   columns: 1
   frames:
-  - symbol: gUnk_090A4168
+  - symbol: gRikuDeckTitleBannerFrame0
     pieces:
     - [32x16, 0, 0]
     - [32x16, 32, 0]
     - [32x16, 64, 0]
     - [8x8, 96, 0]
   animations:
-  - symbol: gUnk_090A4184
+  - symbol: gRikuDeckTitleBannerAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]

@@ -136,9 +136,9 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* a) {
     work->x7 = -0x8000;
     work->holding = 0;
 #ifdef VERSION_EU
-    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
@@ -439,9 +439,9 @@ s32 UpdateRikuDeckMenuFadeOut(RikuDeckMenuWork* work) {
 
 u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* a) {
 #ifdef VERSION_EU
-    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTilesByLanguage[gLanguage], sRikuDeckTitleBannerTileSizes[gLanguage]);
 #else
-    work->tiles12 = LoadObjTiles(gUnk_090A418E, 0x320);
+    work->tiles12 = LoadObjTiles(gRikuDeckTitleBannerTiles, 0x320);
 #endif
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
@@ -485,9 +485,9 @@ u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* a) {
 static void Deckmenu2_2(RikuDeckMenuWork* work) {
     if (work->tiles12 != NULL) {
 #ifdef VERSION_EU
-        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSpritesByLanguage[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
 #else
-        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF8[0], work->tiles12, work->palette3, NULL, 0, 10);
+        DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerFrames[0], work->tiles12, work->palette3, NULL, 0, 10);
 #endif
     }
 
@@ -1046,10 +1046,10 @@ u8 FindRikuCardInDirection(RikuDeckMenuWork* work, s16 x, s16 y, u16 dir) {
 }
 
 #ifdef VERSION_EU
-void* gRikuDeckTitleBannerTiles[5] = { gUnk_090A418E, gRikuDeckTitleBannerFrenchTiles, gRikuDeckTitleBannerGermanTiles, gRikuDeckTitleBannerItalianTiles, gRikuDeckTitleBannerSpanishTiles };
+void* gRikuDeckTitleBannerTilesByLanguage[5] = { gRikuDeckTitleBannerTiles, gRikuDeckTitleBannerFrenchTiles, gRikuDeckTitleBannerGermanTiles, gRikuDeckTitleBannerItalianTiles, gRikuDeckTitleBannerSpanishTiles };
 
-void** gRikuDeckTitleBannerSprites[5] = {
-    gUnk_09EEAFF8,
+void** gRikuDeckTitleBannerSpritesByLanguage[5] = {
+    gRikuDeckTitleBannerFrames,
     gRikuDeckTitleBannerFrenchFrames,
     gRikuDeckTitleBannerGermanFrames,
     gRikuDeckTitleBannerItalianFrames,

@@ -2013,14 +2013,14 @@ extern const MapTileAnimationDef* gUnk_09EE4A4C;
 extern const u16* gRikuDeckCards[12];
 extern const u16* gRikuDeckEnemyCards[12];
 #ifdef VERSION_EU
-extern void* gDeckButtonLabelTiles[5];
-extern void** gDeckButtonLabelSprites[5];
-extern void* gDeckCommandMenuTiles[5];
-extern void* gDeckTitleBannerTiles[5];
+extern void* gDeckButtonLabelTilesByLanguage[5];
+extern void** gDeckButtonLabelSpritesByLanguage[5];
+extern void* gDeckCommandMenuTilesByLanguage[5];
+extern void* gDeckTitleBannerTilesByLanguage[5];
 extern u8* gDeckEquipMarkerTilesByLanguage[5];
-extern void* gDeckKeyboardCursorTiles[5];
-extern void** gDeckKeyboardCursorSprites[5];
-extern void* gDeckKeyboardCursorAnims[5];
+extern void* gDeckKeyboardCursorTilesByLanguage[5];
+extern void** gDeckKeyboardCursorSpritesByLanguage[5];
+extern void* gDeckKeyboardCursorAnimsByLanguage[5];
 extern const u8* gDeckKeyboardLetterRows[8];
 extern const u8* gDeckKeyboardSymbolRows[7];
 extern void* gMapCardUiExtraTilesByLanguage[5];
@@ -2159,7 +2159,7 @@ extern const CardHelpDef* gCardHelpDefs[];
 #ifdef VERSION_EU
 extern u8 gLeaveWorldText[];
 extern u8* gLeaveWorldTextByLanguage[5];
-extern void* gRikuDeckTitleBannerTiles[5];
+extern void* gRikuDeckTitleBannerTilesByLanguage[5];
 extern u8* gRikuDeckEquipMarkerTilesByLanguage[5];
 extern Mode gModeTextCheck;
 #else
@@ -2193,16 +2193,16 @@ extern const MapTileAnimationDef* gMapTileAnimationDefs[6];
 extern const u16* gRikuDeckCards[12];
 extern const u16* gRikuDeckEnemyCards[12];
 #ifdef VERSION_EU
-extern void* gDeckButtonLabelTiles[5];
-extern void** gDeckButtonLabelSprites[5];
-extern void* gDeckCommandMenuTiles[5];
-extern void** gDeckCommandMenuSprites[5];
-extern void* gDeckTitleBannerTiles[5];
-extern void** gDeckTitleBannerSprites[5];
+extern void* gDeckButtonLabelTilesByLanguage[5];
+extern void** gDeckButtonLabelSpritesByLanguage[5];
+extern void* gDeckCommandMenuTilesByLanguage[5];
+extern void** gDeckCommandMenuSpritesByLanguage[5];
+extern void* gDeckTitleBannerTilesByLanguage[5];
+extern void** gDeckTitleBannerSpritesByLanguage[5];
 extern u8* gDeckEquipMarkerTilesByLanguage[5];
-extern void* gDeckKeyboardCursorTiles[5];
-extern void** gDeckKeyboardCursorSprites[5];
-extern void* gDeckKeyboardCursorAnims[5];
+extern void* gDeckKeyboardCursorTilesByLanguage[5];
+extern void** gDeckKeyboardCursorSpritesByLanguage[5];
+extern void* gDeckKeyboardCursorAnimsByLanguage[5];
 #endif
 #ifdef VERSION_US
 extern const u8* gDeckKeyboardRows[7];
@@ -2322,8 +2322,8 @@ extern TaskDesc gTaskDescSysmsgwinChoice;
 extern WorldSelAnim gWorldSelAnims[30];
 extern TaskDesc gTaskDescWorldSelBefore;
 #ifdef VERSION_EU
-extern void* gRikuDeckTitleBannerTiles[5];
-extern void** gRikuDeckTitleBannerSprites[5];
+extern void* gRikuDeckTitleBannerTilesByLanguage[5];
+extern void** gRikuDeckTitleBannerSpritesByLanguage[5];
 extern u8* gRikuDeckEquipMarkerTilesByLanguage[5];
 #endif
 #ifndef VERSION_EU

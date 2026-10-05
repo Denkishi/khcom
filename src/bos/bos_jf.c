@@ -95,10 +95,10 @@ void task_bos_jf_0(JfWork* work, s32 a) {
         work->attackState = 0;
     }
 
-    work->unk_240 = 0;
+    work->hitCount = 0;
     work->hurtTimer = 0;
     work->stateStep = 0;
-    work->unk_246 = 0;
+    work->stepTimer = 0;
     work->bgFrame = 8;
     work->bgFrameTimer = 12;
     work->pillarPhase = 0;
@@ -189,7 +189,7 @@ u8 task_bos_jf_1(JfWork* work) {
 
     if (work->flags & JF_FLAG_HURT) {
         if (--work->hurtTimer <= 0) {
-            work->unk_240 = 0;
+            work->hitCount = 0;
             work->flags &= ~JF_FLAG_HURT;
             LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
             ClearBtlObjActionFlags(sub);

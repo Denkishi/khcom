@@ -55,7 +55,7 @@ void task_bos_dsd_main_0(DsdMainWork* work, DsdWork* arg) {
     SetBgPriority(1, 1);
     SetBgPriority(0, 3);
     work->dsd->state = arg->state;
-    work->unk_008 = 0;
+    work->step = 0;
     work->stepTimer = 0;
     work->moveSteps = 0;
     work->baseFrame = 0;

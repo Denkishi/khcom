@@ -43,10 +43,10 @@ typedef struct DsdWork {
     u32 bodyX;
     u32 bodyY;
     u32 bodyZ;
-    u16 unk_34C;
+    u16 hitCount;
     u16 timer;
     s16 stateStep;
-    s16 unk_352;
+    s16 stepTimer;
     s16 bgFrame;
     s16 bgFrameTimer;
     s16 flags;
@@ -141,7 +141,7 @@ typedef struct DsdMainWork {
     DsdWork* dsd;
     u16 moveSteps;
     s16 stepTimer;
-    u8 unk_008;
+    u8 step;
     s16 baseFrame;
     void* tiles;
     void* tiles2;
@@ -205,10 +205,10 @@ typedef struct JfWork {
     s32 bodyZ;
     u32 state;
     u32 attackState;
-    u16 unk_240;
+    u16 hitCount;
     s16 hurtTimer;
     s16 stateStep;
-    s16 unk_246;
+    s16 stepTimer;
     s16 bgFrame;
     s16 bgFrameTimer;
     s16 flags;

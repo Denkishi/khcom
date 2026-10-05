@@ -50,10 +50,10 @@ void task_bos_dsd_0(DsdWork* work, void* arg) {
     work->attackState = 1;
     work->lastState = 1;
     work->attackCycle = 0;
-    work->unk_34C = 0;
+    work->hitCount = 0;
     work->timer = 0;
     work->stateStep = 0;
-    work->unk_352 = 0;
+    work->stepTimer = 0;
     work->bgFrame = 0;
     work->bgFrameTimer = 0;
     work->hpPhase = 0;
@@ -147,7 +147,7 @@ u8 task_bos_dsd_1(DsdWork* work) {
         work->timer--;
 
         if ((s16)work->timer <= 0) {
-            work->unk_34C = 0;
+            work->hitCount = 0;
             work->flags &= ~DSD_FLAG_HURT;
             LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);
             ClearBtlObjActionFlags(b);

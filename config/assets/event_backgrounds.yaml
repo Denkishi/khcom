@@ -631,9 +631,9 @@ entries:
   symbol: gEventBgUnusedAtlanticaBattle
   record: EventBackgroundDef
   fields:
-    tiles: gUnk_08C88824
+    tiles: gBtlBgAtlanticaTiles
     tiles2: 0
-    palette: gUnk_08F689C4
+    palette: gBtlBgAtlanticaPalette
     maps: gEventBgUnusedAtlanticaBattleMaps
     maps2: 0
     maps3: 0
@@ -661,9 +661,9 @@ entries:
   symbol: gEventBgUnusedWonderlandBattle
   record: EventBackgroundDef
   fields:
-    tiles: gUnk_08C84824
+    tiles: gBtlBgWonderlandTiles
     tiles2: 0
-    palette: gUnk_08F68904
+    palette: gBtlBgWonderlandPalette
     maps: gEventBgUnusedWonderlandBattleMaps
     maps2: 0
     maps3: 0
@@ -691,9 +691,9 @@ entries:
   symbol: gEventBgUnusedMonstroBattle
   record: EventBackgroundDef
   fields:
-    tiles: gUnk_08C8C824
+    tiles: gBtlBgMonstroTiles
     tiles2: 0
-    palette: gUnk_08F68A84
+    palette: gBtlBgMonstroPalette
     maps: gEventBgUnusedMonstroBattleMaps
     maps2: 0
     maps3: 0
@@ -721,9 +721,9 @@ entries:
   symbol: gEventBgUnusedNeverLandBattle
   record: EventBackgroundDef
   fields:
-    tiles: gUnk_08C98824
+    tiles: gBtlBgNeverLandTiles
     tiles2: 0
-    palette: gUnk_08F68D64
+    palette: gBtlBgNeverLandPalette
     maps: gEventBgUnusedNeverLandBattleMaps
     maps2: 0
     maps3: 0
@@ -4350,7 +4350,7 @@ entries:
     address: 0x09F6E288
 - name: gEventBgUnusedAtlanticaBattleMaps
   record: MapTable
-  items: [gUnk_08EF3384]
+  items: [gBtlBgAtlanticaMap]
   us:
     address: 0x09EE2B6C
   jp:
@@ -4359,7 +4359,7 @@ entries:
     address: 0x09F6E28C
 - name: gEventBgUnusedWonderlandBattleMaps
   record: MapTable
-  items: [gUnk_08EF2384]
+  items: [gBtlBgWonderlandMap]
   us:
     address: 0x09EE2B70
   jp:
@@ -4368,7 +4368,7 @@ entries:
     address: 0x09F6E290
 - name: gEventBgUnusedMonstroBattleMaps
   record: MapTable
-  items: [gUnk_08EF4384]
+  items: [gBtlBgMonstroMap]
   us:
     address: 0x09EE2B74
   jp:
@@ -4377,7 +4377,7 @@ entries:
     address: 0x09F6E294
 - name: gEventBgUnusedNeverLandBattleMaps
   record: MapTable
-  items: [gUnk_08EF7384]
+  items: [gBtlBgNeverLandMap]
   us:
     address: 0x09EE2B78
   jp:

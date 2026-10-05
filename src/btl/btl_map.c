@@ -30,26 +30,26 @@ void task_btl_map_0(BtlMapWork* work) {
         switch (gBtlWork->battleId) {
         case 0xB2:
         case 0xB3:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C78824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68624, 0xC0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgTraverseTownTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgTraverseTownPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EEF384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgTraverseTownMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EEF384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgTraverseTownMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 5;
             break;
         case 0xB1:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CBC6E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgAnsem2Tiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CBC6E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgAnsem2Tiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F69604, 0x120);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgAnsem2Palette, 0x120);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08F00384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgAnsem2Map);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08F00384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgAnsem2Map, 0x1000);
 #endif
             gBtlWork->fadeAmount = 5;
             break;
@@ -69,210 +69,210 @@ void task_btl_map_0(BtlMapWork* work) {
             break;
         case 0x9E:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CAC6E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgHookTiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CAC6E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgHookTiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F692C4, 0x140);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgHookPalette, 0x140);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFC384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgHookMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFC384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgHookMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 9;
             break;
         case 0x9F:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C7C824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F686E4, 0xE0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgOlympusColiseumTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgOlympusColiseumPalette, 0xE0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF0384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgOlympusColiseumMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF0384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgOlympusColiseumMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case 0xAC:
         case 0xAF:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CB86E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgMansionTiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CB86E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgMansionTiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F69544, 0xC0);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgMansionPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFF384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgMansionMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFF384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgMansionMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case 0xA5:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CC06E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgMarluxiaTiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CC06E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgMarluxiaTiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F69724, 0x80);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgMarluxiaPalette, 0x80);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08F01384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgMarluxiaMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08F01384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgMarluxiaMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 20;
             break;
         default:
 #ifdef VERSION_EU
-            LoadBgTilesLz77(gBtlWork->mapBg, gUnk_08CB46E4);
+            LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgHumTiles);
 #else
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CB46E4, 0x4000);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgHumTiles, 0x4000);
 #endif
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F694C4, 0x80);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgHumPalette, 0x80);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFE384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgHumMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFE384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgHumMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 20;
             break;
         }
     } else if (gBtlWork->battleId == 0x78) {
-        LoadBgTiles(gBtlWork->mapBg, gUnk_08C80824, 0x4000);
-        LoadBgPalette(gBtlWork->mapBg, gUnk_08F687C4, 0x140);
+        LoadBgTiles(gBtlWork->mapBg, gBtlBgGardenTiles, 0x4000);
+        LoadBgPalette(gBtlWork->mapBg, gBtlBgGardenPalette, 0x140);
 #ifdef VERSION_EU
-        LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF1384);
+        LoadBgMapLz77(gBtlWork->mapBg, gBtlBgGardenMap);
 #else
-        LoadBgMap(gBtlWork->mapBg, gUnk_08EF1384, 0x1000);
+        LoadBgMap(gBtlWork->mapBg, gBtlBgGardenMap, 0x1000);
 #endif
         gBtlWork->fadeAmount = 10;
     } else {
         switch (gGameState.battleStage) {
         case BATTLE_STAGE_WONDERLAND:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C84824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68904, 0xC0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgWonderlandTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgWonderlandPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF2384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgWonderlandMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF2384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgWonderlandMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case 2:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C80824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F687C4, 0x140);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgGardenTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgGardenPalette, 0x140);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF1384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgGardenMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF1384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgGardenMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_AGRABAH:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C90824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68B84, 0x100);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgAgrabahTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgAgrabahPalette, 0x100);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF5384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgAgrabahMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF5384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgAgrabahMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_ATLANTICA:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C88824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F689C4, 0xC0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgAtlanticaTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgAtlanticaPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF3384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgAtlanticaMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF3384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgAtlanticaMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_MONSTRO:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C8C824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68A84, 0x100);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgMonstroTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgMonstroPalette, 0x100);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF4384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgMonstroMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF4384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgMonstroMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_HALLOWEEN_TOWN:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C94824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68C84, 0xE0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgHalloweenTownTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgHalloweenTownPalette, 0xE0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF6384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgHalloweenTownMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF6384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgHalloweenTownMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 5;
             break;
         case BATTLE_STAGE_NEVER_LAND:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C98824, 0x3EC0);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68D64, 0x140);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgNeverLandTiles, 0x3EC0);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgNeverLandPalette, 0x140);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF7384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgNeverLandMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF7384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgNeverLandMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 5;
             break;
         case BATTLE_STAGE_DESTINY_ISLANDS:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C9C6E4, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68EA4, 0x120);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgDestinyIslandsTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgDestinyIslandsPalette, 0x120);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF8384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgDestinyIslandsMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF8384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgDestinyIslandsMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_HOLLOW_BASTION:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CA06E4, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68FC4, 0xE0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgHollowBastionTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgHollowBastionPalette, 0xE0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF9384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgHollowBastionMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF9384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgHollowBastionMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         case BATTLE_STAGE_TRAVERSE_TOWN:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C78824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F68624, 0xC0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgTraverseTownTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgTraverseTownPalette, 0xC0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EEF384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgTraverseTownMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EEF384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgTraverseTownMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 5;
             break;
         case BATTLE_STAGE_CASTLE_OBLIVION:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CA86E4, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F691E4, 0xE0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgCastleOblivionTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgCastleOblivionPalette, 0xE0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFB384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgCastleOblivionMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFB384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgCastleOblivionMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 20;
             break;
         case BATTLE_STAGE_TWILIGHT_TOWN:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08CA46E4, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F690A4, 0x140);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgTwilightTownTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgTwilightTownPalette, 0x140);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EFA384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgTwilightTownMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EFA384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgTwilightTownMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 10;
             break;
         default:
-            LoadBgTiles(gBtlWork->mapBg, gUnk_08C7C824, 0x4000);
-            LoadBgPalette(gBtlWork->mapBg, gUnk_08F686E4, 0xE0);
+            LoadBgTiles(gBtlWork->mapBg, gBtlBgOlympusColiseumTiles, 0x4000);
+            LoadBgPalette(gBtlWork->mapBg, gBtlBgOlympusColiseumPalette, 0xE0);
 #ifdef VERSION_EU
-            LoadBgMapLz77(gBtlWork->mapBg, gUnk_08EF0384);
+            LoadBgMapLz77(gBtlWork->mapBg, gBtlBgOlympusColiseumMap);
 #else
-            LoadBgMap(gBtlWork->mapBg, gUnk_08EF0384, 0x1000);
+            LoadBgMap(gBtlWork->mapBg, gBtlBgOlympusColiseumMap, 0x1000);
 #endif
             gBtlWork->fadeAmount = 11;
             break;

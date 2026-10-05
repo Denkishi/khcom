@@ -62,7 +62,7 @@ objects:
     start: 0x08F7DB78
     end: 0x08F7EBF8
 entries:
-- name: gUnk_08C78824
+- name: gBtlBgTraverseTownTiles
   format: tiles4
   width: 32
   us:
@@ -74,7 +74,7 @@ entries:
   eu:
     address: 0x08C9CD3C
     size: 16384
-- name: gUnk_08C7C824
+- name: gBtlBgOlympusColiseumTiles
   format: tiles4
   width: 32
   us:
@@ -86,7 +86,7 @@ entries:
   eu:
     address: 0x08CA0D3C
     size: 16384
-- name: gUnk_08C80824
+- name: gBtlBgGardenTiles
   format: tiles4
   width: 32
   us:
@@ -98,7 +98,7 @@ entries:
   eu:
     address: 0x08CA4D3C
     size: 16384
-- name: gUnk_08C84824
+- name: gBtlBgWonderlandTiles
   format: tiles4
   width: 32
   us:
@@ -110,7 +110,7 @@ entries:
   eu:
     address: 0x08CA8D3C
     size: 16384
-- name: gUnk_08C88824
+- name: gBtlBgAtlanticaTiles
   format: tiles4
   width: 32
   us:
@@ -122,7 +122,7 @@ entries:
   eu:
     address: 0x08CACD3C
     size: 16384
-- name: gUnk_08C8C824
+- name: gBtlBgMonstroTiles
   format: tiles4
   width: 32
   us:
@@ -134,7 +134,7 @@ entries:
   eu:
     address: 0x08CB0D3C
     size: 16384
-- name: gUnk_08C90824
+- name: gBtlBgAgrabahTiles
   format: tiles4
   width: 32
   us:
@@ -146,7 +146,7 @@ entries:
   eu:
     address: 0x08CB4D3C
     size: 16384
-- name: gUnk_08C94824
+- name: gBtlBgHalloweenTownTiles
   format: tiles4
   width: 32
   us:
@@ -158,7 +158,7 @@ entries:
   eu:
     address: 0x08CB8D3C
     size: 16384
-- name: gUnk_08C98824
+- name: gBtlBgNeverLandTiles
   format: tiles4
   width: 2
   us:
@@ -170,7 +170,7 @@ entries:
   eu:
     address: 0x08CBCD3C
     size: 16064
-- name: gUnk_08C9C6E4
+- name: gBtlBgDestinyIslandsTiles
   format: tiles4
   width: 32
   us:
@@ -182,7 +182,7 @@ entries:
   eu:
     address: 0x08CC0BFC
     size: 16384
-- name: gUnk_08CA06E4
+- name: gBtlBgHollowBastionTiles
   format: tiles4
   width: 32
   us:
@@ -194,7 +194,7 @@ entries:
   eu:
     address: 0x08CC4BFC
     size: 16384
-- name: gUnk_08CA46E4
+- name: gBtlBgTwilightTownTiles
   format: tiles4
   width: 32
   us:
@@ -206,7 +206,7 @@ entries:
   eu:
     address: 0x08CC8BFC
     size: 16384
-- name: gUnk_08CA86E4
+- name: gBtlBgCastleOblivionTiles
   format: tiles4
   width: 32
   us:
@@ -218,7 +218,7 @@ entries:
   eu:
     address: 0x08CCCBFC
     size: 16384
-- name: gUnk_08CAC6E4
+- name: gBtlBgHookTiles
   format: tiles4
   width: 32
   us:
@@ -231,7 +231,7 @@ entries:
     address: 0x08F6EF3C
     size: 5360
     compress: lz77
-- name: gUnk_08CB46E4
+- name: gBtlBgHumTiles
   format: tiles4
   width: 32
   us:
@@ -244,7 +244,7 @@ entries:
     address: 0x08F71C40
     size: 3200
     compress: lz77
-- name: gUnk_08CB86E4
+- name: gBtlBgMansionTiles
   format: tiles4
   width: 32
   us:
@@ -257,7 +257,7 @@ entries:
     address: 0x08F728C0
     size: 7108
     compress: lz77
-- name: gUnk_08CBC6E4
+- name: gBtlBgAnsem2Tiles
   format: tiles4
   width: 32
   us:
@@ -270,7 +270,7 @@ entries:
     address: 0x08F74484
     size: 4728
     compress: lz77
-- name: gUnk_08CC06E4
+- name: gBtlBgMarluxiaTiles
   format: tiles4
   width: 32
   us:
@@ -283,7 +283,7 @@ entries:
     address: 0x08F756FC
     size: 6788
     compress: lz77
-- name: gUnk_08EEF384
+- name: gBtlBgTraverseTownMap
   format: tilemap
   us:
     address: 0x08EEF384
@@ -295,7 +295,7 @@ entries:
     address: 0x08F79520
     size: 1088
     compress: lz77
-- name: gUnk_08EF0384
+- name: gBtlBgOlympusColiseumMap
   format: tilemap
   us:
     address: 0x08EF0384
@@ -307,7 +307,7 @@ entries:
     address: 0x08F79960
     size: 1164
     compress: lz77
-- name: gUnk_08EF1384
+- name: gBtlBgGardenMap
   format: tilemap
   us:
     address: 0x08EF1384
@@ -319,7 +319,7 @@ entries:
     address: 0x08F79DEC
     size: 1080
     compress: lz77
-- name: gUnk_08EF2384
+- name: gBtlBgWonderlandMap
   format: tilemap
   us:
     address: 0x08EF2384
@@ -331,7 +331,7 @@ entries:
     address: 0x08F7A224
     size: 1412
     compress: lz77
-- name: gUnk_08EF3384
+- name: gBtlBgAtlanticaMap
   format: tilemap
   us:
     address: 0x08EF3384
@@ -343,7 +343,7 @@ entries:
     address: 0x08F7A7A8
     size: 1620
     compress: lz77
-- name: gUnk_08EF4384
+- name: gBtlBgMonstroMap
   format: tilemap
   us:
     address: 0x08EF4384
@@ -355,7 +355,7 @@ entries:
     address: 0x08F7ADFC
     size: 1692
     compress: lz77
-- name: gUnk_08EF5384
+- name: gBtlBgAgrabahMap
   format: tilemap
   us:
     address: 0x08EF5384
@@ -367,7 +367,7 @@ entries:
     address: 0x08F7B498
     size: 1216
     compress: lz77
-- name: gUnk_08EF6384
+- name: gBtlBgHalloweenTownMap
   format: tilemap
   us:
     address: 0x08EF6384
@@ -379,7 +379,7 @@ entries:
     address: 0x08F7B958
     size: 1312
     compress: lz77
-- name: gUnk_08EF7384
+- name: gBtlBgNeverLandMap
   format: tilemap
   us:
     address: 0x08EF7384
@@ -391,7 +391,7 @@ entries:
     address: 0x08F7BE78
     size: 1020
     compress: lz77
-- name: gUnk_08EF8384
+- name: gBtlBgDestinyIslandsMap
   format: tilemap
   us:
     address: 0x08EF8384
@@ -403,7 +403,7 @@ entries:
     address: 0x08F7C274
     size: 1112
     compress: lz77
-- name: gUnk_08EF9384
+- name: gBtlBgHollowBastionMap
   format: tilemap
   us:
     address: 0x08EF9384
@@ -415,7 +415,7 @@ entries:
     address: 0x08F7C6CC
     size: 1084
     compress: lz77
-- name: gUnk_08EFA384
+- name: gBtlBgTwilightTownMap
   format: tilemap
   us:
     address: 0x08EFA384
@@ -427,7 +427,7 @@ entries:
     address: 0x08F7CB08
     size: 1196
     compress: lz77
-- name: gUnk_08EFB384
+- name: gBtlBgCastleOblivionMap
   format: tilemap
   us:
     address: 0x08EFB384
@@ -439,7 +439,7 @@ entries:
     address: 0x08F7CFB4
     size: 868
     compress: lz77
-- name: gUnk_08EFC384
+- name: gBtlBgHookMap
   format: tilemap
   us:
     address: 0x08EFC384
@@ -451,7 +451,7 @@ entries:
     address: 0x08F7D318
     size: 1036
     compress: lz77
-- name: gUnk_08EFE384
+- name: gBtlBgHumMap
   format: tilemap
   us:
     address: 0x08EFE384
@@ -463,7 +463,7 @@ entries:
     address: 0x08F7DB78
     size: 856
     compress: lz77
-- name: gUnk_08EFF384
+- name: gBtlBgMansionMap
   format: tilemap
   us:
     address: 0x08EFF384
@@ -475,7 +475,7 @@ entries:
     address: 0x08F7DED0
     size: 1480
     compress: lz77
-- name: gUnk_08F00384
+- name: gBtlBgAnsem2Map
   format: tilemap
   us:
     address: 0x08F00384
@@ -487,7 +487,7 @@ entries:
     address: 0x08F7E498
     size: 932
     compress: lz77
-- name: gUnk_08F01384
+- name: gBtlBgMarluxiaMap
   format: tilemap
   us:
     address: 0x08F01384
@@ -499,7 +499,7 @@ entries:
     address: 0x08F7E83C
     size: 956
     compress: lz77
-- name: gUnk_08F68624
+- name: gBtlBgTraverseTownPalette
   format: palette
   us:
     address: 0x08F68624
@@ -510,7 +510,7 @@ entries:
   eu:
     address: 0x08F64B7C
     size: 192
-- name: gUnk_08F686E4
+- name: gBtlBgOlympusColiseumPalette
   format: palette
   us:
     address: 0x08F686E4
@@ -521,7 +521,7 @@ entries:
   eu:
     address: 0x08F64C3C
     size: 224
-- name: gUnk_08F687C4
+- name: gBtlBgGardenPalette
   format: palette
   us:
     address: 0x08F687C4
@@ -532,7 +532,7 @@ entries:
   eu:
     address: 0x08F64D1C
     size: 320
-- name: gUnk_08F68904
+- name: gBtlBgWonderlandPalette
   format: palette
   us:
     address: 0x08F68904
@@ -543,7 +543,7 @@ entries:
   eu:
     address: 0x08F64E5C
     size: 192
-- name: gUnk_08F689C4
+- name: gBtlBgAtlanticaPalette
   format: palette
   us:
     address: 0x08F689C4
@@ -554,7 +554,7 @@ entries:
   eu:
     address: 0x08F64F1C
     size: 192
-- name: gUnk_08F68A84
+- name: gBtlBgMonstroPalette
   format: palette
   us:
     address: 0x08F68A84
@@ -565,7 +565,7 @@ entries:
   eu:
     address: 0x08F64FDC
     size: 256
-- name: gUnk_08F68B84
+- name: gBtlBgAgrabahPalette
   format: palette
   us:
     address: 0x08F68B84
@@ -576,7 +576,7 @@ entries:
   eu:
     address: 0x08F650DC
     size: 256
-- name: gUnk_08F68C84
+- name: gBtlBgHalloweenTownPalette
   format: palette
   us:
     address: 0x08F68C84
@@ -587,7 +587,7 @@ entries:
   eu:
     address: 0x08F651DC
     size: 224
-- name: gUnk_08F68D64
+- name: gBtlBgNeverLandPalette
   format: palette
   us:
     address: 0x08F68D64
@@ -598,7 +598,7 @@ entries:
   eu:
     address: 0x08F652BC
     size: 320
-- name: gUnk_08F68EA4
+- name: gBtlBgDestinyIslandsPalette
   format: palette
   us:
     address: 0x08F68EA4
@@ -609,7 +609,7 @@ entries:
   eu:
     address: 0x08F653FC
     size: 288
-- name: gUnk_08F68FC4
+- name: gBtlBgHollowBastionPalette
   format: palette
   us:
     address: 0x08F68FC4
@@ -620,7 +620,7 @@ entries:
   eu:
     address: 0x08F6551C
     size: 224
-- name: gUnk_08F690A4
+- name: gBtlBgTwilightTownPalette
   format: palette
   us:
     address: 0x08F690A4
@@ -631,7 +631,7 @@ entries:
   eu:
     address: 0x08F655FC
     size: 320
-- name: gUnk_08F691E4
+- name: gBtlBgCastleOblivionPalette
   format: palette
   us:
     address: 0x08F691E4
@@ -642,7 +642,7 @@ entries:
   eu:
     address: 0x08F6573C
     size: 224
-- name: gUnk_08F692C4
+- name: gBtlBgHookPalette
   format: palette
   us:
     address: 0x08F692C4
@@ -653,7 +653,7 @@ entries:
   eu:
     address: 0x08F6581C
     size: 320
-- name: gUnk_08F694C4
+- name: gBtlBgHumPalette
   format: palette
   us:
     address: 0x08F694C4
@@ -664,7 +664,7 @@ entries:
   eu:
     address: 0x08F65A1C
     size: 128
-- name: gUnk_08F69544
+- name: gBtlBgMansionPalette
   format: palette
   us:
     address: 0x08F69544
@@ -675,7 +675,7 @@ entries:
   eu:
     address: 0x08F65A9C
     size: 192
-- name: gUnk_08F69604
+- name: gBtlBgAnsem2Palette
   format: palette
   us:
     address: 0x08F69604
@@ -686,7 +686,7 @@ entries:
   eu:
     address: 0x08F65B5C
     size: 288
-- name: gUnk_08F69724
+- name: gBtlBgMarluxiaPalette
   format: palette
   us:
     address: 0x08F69724

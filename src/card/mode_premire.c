@@ -38,12 +38,12 @@ void Mode_Premire_0() {
     SetupBg(3, 0, 12, 0);
     SetupBg(2, 2, 28, 10);
     SetBgSize(3, 0x8000);
-    LoadBgTiles(3, gUnk_08C8C824, 0x4000);
-    LoadBgPalette(3, gUnk_08F68A84, 0x100);
+    LoadBgTiles(3, gBtlBgMonstroTiles, 0x4000);
+    LoadBgPalette(3, gBtlBgMonstroPalette, 0x100);
 #ifdef VERSION_EU
-    LoadBgMapLz77(3, gUnk_08EF4384);
+    LoadBgMapLz77(3, gBtlBgMonstroMap);
 #else
-    LoadBgMap(3, gUnk_08EF4384, 0x1000);
+    LoadBgMap(3, gBtlBgMonstroMap, 0x1000);
 #endif
     SetBgAffine(3, 0, 0x100, 0x100, 0x10000, 0x16800);
     TaskPoolInit(&sModePremireTasks, 1);

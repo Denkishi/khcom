@@ -230,132 +230,132 @@ void WLogoStartLogo(u8 a) {
 
     switch (a) {
     case 4:
-        LoadBgTiles(2, gUnk_08C84824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68904, 0xC0);
+        LoadBgTiles(2, gBtlBgWonderlandTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgWonderlandPalette, 0xC0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF2384);
+        LoadBgMapLz77(2, gBtlBgWonderlandMap);
 #else
-        LoadBgMap(2, gUnk_08EF2384, 0x1000);
+        LoadBgMap(2, gBtlBgWonderlandMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoWon, NULL);
         break;
     case 5:
-        LoadBgTiles(2, gUnk_08C8C824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68A84, 0x100);
+        LoadBgTiles(2, gBtlBgMonstroTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgMonstroPalette, 0x100);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF4384);
+        LoadBgMapLz77(2, gBtlBgMonstroMap);
 #else
-        LoadBgMap(2, gUnk_08EF4384, 0x1000);
+        LoadBgMap(2, gBtlBgMonstroMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoMons, NULL);
         break;
     case 6:
-        LoadBgTiles(2, gUnk_08C94824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68C84, 0xE0);
+        LoadBgTiles(2, gBtlBgHalloweenTownTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgHalloweenTownPalette, 0xE0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF6384);
+        LoadBgMapLz77(2, gBtlBgHalloweenTownMap);
 #else
-        LoadBgMap(2, gUnk_08EF6384, 0x1000);
+        LoadBgMap(2, gBtlBgHalloweenTownMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHwt, NULL);
         break;
     case 2:
-        LoadBgTiles(2, gUnk_08C88824, 0x4000);
-        LoadBgPalette(2, gUnk_08F689C4, 0xC0);
+        LoadBgTiles(2, gBtlBgAtlanticaTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgAtlanticaPalette, 0xC0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF3384);
+        LoadBgMapLz77(2, gBtlBgAtlanticaMap);
 #else
-        LoadBgMap(2, gUnk_08EF3384, 0x1000);
+        LoadBgMap(2, gBtlBgAtlanticaMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAtl, NULL);
         break;
     case 7:
-        LoadBgTiles(2, gUnk_08C98824, 0x3EC0);
-        LoadBgPalette(2, gUnk_08F68D64, 0x140);
+        LoadBgTiles(2, gBtlBgNeverLandTiles, 0x3EC0);
+        LoadBgPalette(2, gBtlBgNeverLandPalette, 0x140);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF7384);
+        LoadBgMapLz77(2, gBtlBgNeverLandMap);
 #else
-        LoadBgMap(2, gUnk_08EF7384, 0x1000);
+        LoadBgMap(2, gBtlBgNeverLandMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoNvl, NULL);
         break;
     case 3:
-        LoadBgTiles(2, gUnk_08C7C824, 0x4000);
-        LoadBgPalette(2, gUnk_08F686E4, 0xE0);
+        LoadBgTiles(2, gBtlBgOlympusColiseumTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgOlympusColiseumPalette, 0xE0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF0384);
+        LoadBgMapLz77(2, gBtlBgOlympusColiseumMap);
 #else
-        LoadBgMap(2, gUnk_08EF0384, 0x1000);
+        LoadBgMap(2, gBtlBgOlympusColiseumMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoCol, NULL);
         break;
     case 8:
-        LoadBgTiles(2, gUnk_08CA06E4, 0x4000);
-        LoadBgPalette(2, gUnk_08F68FC4, 0xE0);
+        LoadBgTiles(2, gBtlBgHollowBastionTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgHollowBastionPalette, 0xE0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF9384);
+        LoadBgMapLz77(2, gBtlBgHollowBastionMap);
 #else
-        LoadBgMap(2, gUnk_08EF9384, 0x1000);
+        LoadBgMap(2, gBtlBgHollowBastionMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoHlw, NULL);
         break;
     case 9:
-        LoadBgTiles(2, gUnk_08C9C6E4, 0x4000);
-        LoadBgPalette(2, gUnk_08F68EA4, 0x120);
+        LoadBgTiles(2, gBtlBgDestinyIslandsTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgDestinyIslandsPalette, 0x120);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF8384);
+        LoadBgMapLz77(2, gBtlBgDestinyIslandsMap);
 #else
-        LoadBgMap(2, gUnk_08EF8384, 0x1000);
+        LoadBgMap(2, gBtlBgDestinyIslandsMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoDil, NULL);
         break;
     case 1:
-        LoadBgTiles(2, gUnk_08C90824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68B84, 0x100);
+        LoadBgTiles(2, gBtlBgAgrabahTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgAgrabahPalette, 0x100);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF5384);
+        LoadBgMapLz77(2, gBtlBgAgrabahMap);
 #else
-        LoadBgMap(2, gUnk_08EF5384, 0x1000);
+        LoadBgMap(2, gBtlBgAgrabahMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoAgr, NULL);
         break;
     case 10:
-        LoadBgTiles(2, gUnk_08C78824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68624, 0xC0);
+        LoadBgTiles(2, gBtlBgTraverseTownTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgTraverseTownPalette, 0xC0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EEF384);
+        LoadBgMapLz77(2, gBtlBgTraverseTownMap);
 #else
-        LoadBgMap(2, gUnk_08EEF384, 0x1000);
+        LoadBgMap(2, gBtlBgTraverseTownMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTvt, NULL);
         break;
     case 0:
-        LoadBgTiles(2, gUnk_08C84824, 0x4000);
-        LoadBgPalette(2, gUnk_08F68904, 0xC0);
+        LoadBgTiles(2, gBtlBgWonderlandTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgWonderlandPalette, 0xC0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EF2384);
+        LoadBgMapLz77(2, gBtlBgWonderlandMap);
 #else
-        LoadBgMap(2, gUnk_08EF2384, 0x1000);
+        LoadBgMap(2, gBtlBgWonderlandMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoPoo, NULL);
         break;
     case 11:
-        LoadBgTiles(2, gUnk_08CA46E4, 0x4000);
-        LoadBgPalette(2, gUnk_08F690A4, 0x140);
+        LoadBgTiles(2, gBtlBgTwilightTownTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgTwilightTownPalette, 0x140);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EFA384);
+        LoadBgMapLz77(2, gBtlBgTwilightTownMap);
 #else
-        LoadBgMap(2, gUnk_08EFA384, 0x1000);
+        LoadBgMap(2, gBtlBgTwilightTownMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoTt, NULL);
         break;
     case 12:
-        LoadBgTiles(2, gUnk_08CA86E4, 0x4000);
-        LoadBgPalette(2, gUnk_08F691E4, 0xE0);
+        LoadBgTiles(2, gBtlBgCastleOblivionTiles, 0x4000);
+        LoadBgPalette(2, gBtlBgCastleOblivionPalette, 0xE0);
 #ifdef VERSION_EU
-        LoadBgMapLz77(2, gUnk_08EFB384);
+        LoadBgMapLz77(2, gBtlBgCastleOblivionMap);
 #else
-        LoadBgMap(2, gUnk_08EFB384, 0x1000);
+        LoadBgMap(2, gBtlBgCastleOblivionMap, 0x1000);
 #endif
         sModeWLogoTask = TaskCreate(&sModeWLogoTasks, &gTaskDescWlogoBks, NULL);
         break;

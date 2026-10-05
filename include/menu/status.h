@@ -59,7 +59,7 @@ typedef struct StatusCursorWork {
     AnimState anim[2];
     s16* cursor;
     s16 lastCursor;
-    u16 unk_4E;
+    u16 moveSteps;
     s32 y;
     s32 targetY;
     s32 x;

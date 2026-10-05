@@ -131,7 +131,7 @@ typedef struct JiminyWork {
     u32 detailLayout;
     s32 detailTable;
     s32 unk_D38;
-    u16 unk_D3C;
+    u16 detailTimer;
     u16 frame;
 #ifdef VERSION_EU
     const u16* resolvedTexts[100];

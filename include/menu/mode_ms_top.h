@@ -19,8 +19,8 @@ typedef struct WarpGfx {
 
 typedef struct WarpDef {
     Mode* mode;
-    void* unk_04;
-    u16 unk_08;
+    void* map;
+    u16 mapSize;
     u16 x;
     s16 y;
     u16 animId;

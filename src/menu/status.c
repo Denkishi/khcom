@@ -645,7 +645,7 @@ void task_status_cursor_0(StatusCursorWork* work, s16* arg) {
         work->targetY = work->y;
     }
 
-    work->unk_4E = 0;
+    work->moveSteps = 0;
 }
 
 u8 task_status_cursor_1(StatusCursorWork* work) {
@@ -653,7 +653,7 @@ u8 task_status_cursor_1(StatusCursorWork* work) {
 
     if (work->lastCursor != *work->cursor) {
         work->lastCursor = *work->cursor;
-        work->unk_4E = 4;
+        work->moveSteps = 4;
 
         if (work->lastCursor < 0) {
             work->targetX = sStatusTabCursorX[~work->lastCursor];

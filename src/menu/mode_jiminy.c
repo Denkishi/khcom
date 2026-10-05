@@ -1600,7 +1600,7 @@ void mode_jiminy_0() {
 #endif
     sJiminyWork->tiles8 = AllocObjTiles(0x800, NULL);
     sJiminyWork->palette9 = LoadObjPalette(gCard00Palette, 0x20);
-    sJiminyWork->unk_D3C = 0;
+    sJiminyWork->detailTimer = 0;
     sJiminyWork->unk_D38 = 0x100;
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 
@@ -2498,7 +2498,7 @@ void JiminyDetailUpdate() {
             DisableBg(3);
         }
 
-        sJiminyWork->unk_D3C = 5;
+        sJiminyWork->detailTimer = 5;
         SetBlendAlpha(0, 16);
     case 9:
         if (sJiminyWork->cursor > 0) {
@@ -2638,8 +2638,8 @@ void JiminyDetailUpdate() {
         break;
     }
 
-    if ((s16)sJiminyWork->unk_D3C > 0) {
-        sJiminyWork->unk_D3C--;
+    if ((s16)sJiminyWork->detailTimer > 0) {
+        sJiminyWork->detailTimer--;
     }
 
     UpdatePlayTime();

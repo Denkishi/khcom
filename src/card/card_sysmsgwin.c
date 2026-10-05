@@ -325,10 +325,10 @@ void sysmsgwin_2(SysMsgWinWork* work) {
     case 3:
         if (work->tiles2 != NULL) {
             if (work->fallbackFrame != 0) {
-                DrawSprite(work->frameX >> 8, work->frameY >> 8, (&gUnk_09EF12E8[2])[0],
+                DrawSprite(work->frameX >> 8, work->frameY >> 8, gSysMsgWinFallbackFrames[0],
                            work->tiles2, work->palette4, NULL, 0, 10);
             } else {
-                DrawSprite(work->frameX >> 8, work->frameY >> 8, (&gUnk_09EF1278[2])[0],
+                DrawSprite(work->frameX >> 8, work->frameY >> 8, gLargeDialogBoxFrames[0],
                            work->tiles2, work->palette4, NULL, 0, 10);
             }
         }
@@ -726,7 +726,7 @@ void sysmsgwinChoice_2(SysMsgWinWork* work) {
     case 2:
     case 3:
         if (work->tiles2 != NULL) {
-            DrawSprite(work->frameX >> 8, work->frameY >> 8, gUnk_09EF1278[0], work->tiles2, work->palette4, NULL, 0, 20);
+            DrawSprite(work->frameX >> 8, work->frameY >> 8, gDialogBoxFrames[0], work->tiles2, work->palette4, NULL, 0, 20);
         }
 
         break;

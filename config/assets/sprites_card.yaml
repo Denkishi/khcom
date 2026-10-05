@@ -5682,14 +5682,14 @@ entries:
   eu:
     address: 0x094CE900
     size: 20
-- name: gUnk_093FBA48
+- name: gSysMsgWinFallbackFrame0
   format: sprite_sheet
-  tiles: gLargeDialogBoxTiles
+  tiles: gSysMsgWinFallbackTiles
   cell: [192, 64]
   anchor: [96, 30]
   columns: 1
   frames:
-  - symbol: gUnk_093FBA48
+  - symbol: gSysMsgWinFallbackFrame0
     pieces:
     - [32x16, -96, -30, {tile: 0}]
     - [32x16, -96, -14, {tile: 4}]
@@ -5708,7 +5708,7 @@ entries:
     - [32x32, 32, -30, {tile: 32}]
     - [32x32, 32, 2, {tile: 36}]
   animations:
-  - symbol: gUnk_093FBAAC
+  - symbol: gSysMsgWinFallbackAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -6004,15 +6004,69 @@ entries:
     address: 0x09EC8660
   eu:
     address: 0x09F7C4E8
-- name: gUnk_09EF1278
+- name: gDialogBoxFrames
   record: SpriteTable
-  items: [gDialogBoxFrame0, gDialogBoxAnim0, gLargeDialogBoxFrame0, gLargeDialogBoxAnim0, gWorldSelBeforeCardFrame0, gWorldSelBeforeCardAnim0, gWorldSelBeforeRingFrame0]
+  items: [gDialogBoxFrame0]
   us:
     address: 0x09EF1278
   jp:
     address: 0x09EC8664
   eu:
     address: 0x09F7C4EC
+- name: gDialogBoxAnims
+  record: AnimTable
+  items: [gDialogBoxAnim0]
+  us:
+    address: 0x09EF127C
+  jp:
+    address: 0x09EC8668
+  eu:
+    address: 0x09F7C4F0
+- name: gLargeDialogBoxFrames
+  record: SpriteTable
+  items: [gLargeDialogBoxFrame0]
+  us:
+    address: 0x09EF1280
+  jp:
+    address: 0x09EC866C
+  eu:
+    address: 0x09F7C4F4
+- name: gLargeDialogBoxAnims
+  record: AnimTable
+  items: [gLargeDialogBoxAnim0]
+  us:
+    address: 0x09EF1284
+  jp:
+    address: 0x09EC8670
+  eu:
+    address: 0x09F7C4F8
+- name: gWorldSelBeforeCardFrames
+  record: SpriteTable
+  items: [gWorldSelBeforeCardFrame0]
+  us:
+    address: 0x09EF1288
+  jp:
+    address: 0x09EC8674
+  eu:
+    address: 0x09F7C4FC
+- name: gWorldSelBeforeCardAnims
+  record: AnimTable
+  items: [gWorldSelBeforeCardAnim0]
+  us:
+    address: 0x09EF128C
+  jp:
+    address: 0x09EC8678
+  eu:
+    address: 0x09F7C500
+- name: gWorldSelBeforeRingFrames
+  record: SpriteTable
+  items: [gWorldSelBeforeRingFrame0]
+  us:
+    address: 0x09EF1290
+  jp:
+    address: 0x09EC867C
+  eu:
+    address: 0x09F7C504
 - name: gWorldSelBeforeRingAnims
   record: AnimTable
   items: [gWorldSelBeforeRingAnim0]
@@ -6058,18 +6112,36 @@ entries:
     address: 0x09EC86D0
   eu:
     address: 0x09F7C558
-- name: gUnk_09EF12E8
+- name: gStockValueFrames
   record: SpriteTable
-  items: [gStockValueFrame0, gStockValueAnim0, gUnk_093FBA48]
+  items: [gStockValueFrame0]
   us:
     address: 0x09EF12E8
   jp:
     address: 0x09EC86D4
   eu:
     address: 0x09F7C5DC
-- name: gUnk_09EF12F4
+- name: gStockValueAnims
   record: AnimTable
-  items: [gUnk_093FBAAC]
+  items: [gStockValueAnim0]
+  us:
+    address: 0x09EF12EC
+  jp:
+    address: 0x09EC86D8
+  eu:
+    address: 0x09F7C5E0
+- name: gSysMsgWinFallbackFrames
+  record: SpriteTable
+  items: [gSysMsgWinFallbackFrame0]
+  us:
+    address: 0x09EF12F0
+  jp:
+    address: 0x09EC86DC
+  eu:
+    address: 0x09F7C5E4
+- name: gSysMsgWinFallbackAnims
+  record: AnimTable
+  items: [gSysMsgWinFallbackAnim0]
   us:
     address: 0x09EF12F4
   jp:

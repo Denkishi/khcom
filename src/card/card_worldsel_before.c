@@ -81,13 +81,13 @@ void WorldSel_Before_2(WorldSelBeforeWork* work) {
     for (i = 0; i < work->spriteCount; i++) {
         DrawSprite((work->x2[i] >> 8) - (gFieldState->x >> 8),
                    (work->y2[i] >> 8) + ((work->pos.z + work->z2[i]) >> 8) - (gFieldState->y >> 8),
-                   (&gUnk_09EF1278[4])[0], work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
+                   gWorldSelBeforeCardFrames[0], work->tiles, work->palette, NULL, SPRITE_PRIORITY(2),
                    -0x1004 - (work->y2[i] >> 8) * 4);
     }
 
     DrawSprite((work->pos.x >> 8) - (gFieldState->x >> 8) - 32,
                (work->pos.y >> 8) + (work->pos.z >> 8) - (gFieldState->y >> 8) - 16,
-               (&gUnk_09EF1278[6])[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(2),
+               gWorldSelBeforeRingFrames[0], work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(2),
                -0x1004 - ((work->pos.y - 512) >> 8) * 4);
 }
 

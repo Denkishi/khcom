@@ -525,7 +525,7 @@ static void cardbattle_0(CardBattleWork* work) {
     ClearSoraCardPlayFlags();
     work->tiles = AllocSpriteFrameTiles(128);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles);
+    UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;
     work->listIndex = 0;
@@ -1305,7 +1305,7 @@ static void cardbattle_2(CardBattleWork* work) {
     gCardBattleState->gfx2 = AnimUpdate(&gCardBattleState->anim2);
 
     if (gCardBattleState->cardsOpen && work->stockCount != 0 && work->stockValue != 0) {
-        DrawSprite(work->x, 4, gUnk_09EF12E8[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC,
+        DrawSprite(work->x, 4, gStockValueFrames[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC,
                    12);
     }
 
@@ -2560,7 +2560,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
     sSoraSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 
@@ -2833,7 +2833,7 @@ s32 StockSoraCard(CardBattleWork* work) {
     gCardBattleState->soraStockedCount++;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 

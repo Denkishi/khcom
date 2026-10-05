@@ -662,7 +662,7 @@ static void cardbattle_0(CardBattleWork* work) {
     gCardBattleState->rikuWork = work;
     work->tiles = AllocSpriteFrameTiles(0x80);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles);
+    UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles);
     TaskPoolInit(&work->tasks, 30);
     work->stockCount = 0;
     work->listIndex = 0;
@@ -1425,7 +1425,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* a) {
 
 static void cardbattle_2(CardBattleWork* work) {
     if (gCardBattleState->cardsOpen && gRikuBtlWork->hcEffect != 28 && work->stockCount != 0 && work->stockValue != 0) {
-        DrawSprite(work->x, 4, gUnk_09EF12E8[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 12);
+        DrawSprite(work->x, 4, gStockValueFrames[0], work->tiles, work->palette, NULL, SPRITE_FLAG_NO_MOSAIC, 12);
     }
 
     TaskPoolDraw(&work->tasks);
@@ -2172,7 +2172,7 @@ u8 StockRikuCard(CardBattleWork* work) {
     gCardBattleState->rikuStockedCount++;
 
     if (work->stockValue != 0) {
-        UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
+        UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles + ((work->stockValue - 1) << 7));
         work->xSteps = 8;
     }
 
@@ -2537,7 +2537,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* work) {
         sRikuSelectedCard->flags &= ~CARD_DISP_FLAG_SETTLED;
 
         if (work->stockValue > 1) {
-            UpdateSpriteFrameTiles(work->tiles, gUnk_09EF12E8[0], gStockValueTiles + ((work->stockValue - 1) << 7));
+            UpdateSpriteFrameTiles(work->tiles, gStockValueFrames[0], gStockValueTiles + ((work->stockValue - 1) << 7));
             work->xSteps = 8;
         }
 

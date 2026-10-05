@@ -120,9 +120,7 @@ s32 CardName_1() {
 }
 
 void CardName_2(CardNameWork* work) {
-    void** p = &gUnk_09EF1278[2];
-
-    DrawSprite(120, 126, *p, work->tiles, work->palette2, NULL, 0, 50);
+    DrawSprite(120, 126, gLargeDialogBoxFrames[0], work->tiles, work->palette2, NULL, 0, 50);
 #ifdef VERSION_JP
     DrawTextSlots(work->nameX, 115, work->textSlots, work->textPalette, 30, work->textSlotCount);
 #else

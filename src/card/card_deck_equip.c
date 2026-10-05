@@ -218,7 +218,7 @@ void DeckConfirmDraw(DeckConfirmWork* work) {
     DrawTextSlots(work->x, work->y, work->textSlots, work->palette, 1, work->textSlotCount);
     DrawTextSlots(work->x2, work->y2, work->textSlots2, work->palette, 1, work->textSlotCount2);
     DrawTextSlots(work->x3, work->y3, work->textSlots3, work->palette, 1, work->textSlotCount3);
-    DrawSprite(120, 80, gUnk_09EF1278[0], work->tiles, work->palette2, NULL, 0, 2);
+    DrawSprite(120, 80, gDialogBoxFrames[0], work->tiles, work->palette2, NULL, 0, 2);
 }
 
 void DeckConfirmDestroy(DeckConfirmWork* work) {

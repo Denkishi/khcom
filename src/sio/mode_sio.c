@@ -840,7 +840,7 @@ void SioBtlOptionInitObjs() {
     sSioBtlOptionWork->cursorVisible = 1;
     sSioBtlOptionWork->tiles3 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioBtlOptionWork->palette3 = LoadObjPalette(gCard00Palette, 32);
-    sSioBtlOptionWork->gfx3 = gUnk_09EF1278[0];
+    sSioBtlOptionWork->gfx3 = gDialogBoxFrames[0];
     sSioBtlOptionWork->messageVisible = 0;
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots4, 120);
@@ -2928,7 +2928,7 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->tiles4 = LoadObjTiles(gCardValueDigitTiles, 0x1E0);
     sSioChgCardWork->palette4 = LoadObjPalette(gCard00Palette, 32);
     sSioChgCardWork->tiles5 = LoadObjTiles(gDialogBoxTiles, 0xC00);
-    sSioChgCardWork->gfx6 = gUnk_09EF1278[0];
+    sSioChgCardWork->gfx6 = gDialogBoxFrames[0];
     sSioChgCardWork->messageVisible = 0;
     InitTextSlots(sSioChgCardWork->textSlots, 42);
     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);

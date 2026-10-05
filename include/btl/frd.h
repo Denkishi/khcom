@@ -99,7 +99,7 @@ typedef struct FrdPanWork {
     s16 steps;
     s16 duration;
     s16 unk_154;
-    s32 unk_158;
+    s32 vz;
     s32 targetX;
     s32 unk_160;
     s32 hoverZ;

@@ -23,7 +23,7 @@ typedef struct SmnCloudWork {
     s32 scaleX;
     s32 scaleY;
     u8 unk_158;
-    s32 unk_15C;
+    s32 vz;
     u16 attackPhase;
     u8 variant;
     u8 mainSide;

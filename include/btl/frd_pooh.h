@@ -8,7 +8,7 @@
 
 #ifdef VERSION_EU
 typedef struct FrdPoohBody {
-    s32 unk_00;
+    s32 kind;
     s32 x;
     s32 y;
     s32 z;

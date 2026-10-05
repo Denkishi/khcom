@@ -170,7 +170,7 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
 
     work->variant = args->variant;
     work->palette = LoadObjPalette(gCroudPalette, 32);
-    work->unk_15C = 0;
+    work->vz = 0;
     AnimInit(&work->anim, NULL, NULL);
     AnimChangeWithDef(sSmnCloudAnimDefs, &work->anim, 0, 0, work->tiles);
     work->state = 0;

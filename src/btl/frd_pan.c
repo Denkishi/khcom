@@ -64,7 +64,7 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
     work->state = 0;
     work->stateTimer = 0;
     work->steps = 0;
-    work->unk_158 = 0;
+    work->vz = 0;
 
     if (work->actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
         body->x = (gBtlWork->xMax + 0x30) << 8;

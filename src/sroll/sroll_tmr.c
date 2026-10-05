@@ -38,7 +38,7 @@ static s32 Square(s32 x) {
 void task_sroll_tmr_0(SrollTmrWork* work, void* arg) {
     work->visible = 0;
     work->frameCount = 0;
-    work->tiles = LoadObjTiles(gUnk_09C904B4, 352);
+    work->tiles = LoadObjTiles(gSrollTimerTiles, 352);
     work->palette = LoadObjPalette(gUnk_09D6D114, 32);
 }
 
@@ -76,14 +76,14 @@ void task_sroll_tmr_2(SrollTmrWork* work) {
     m = t / 60 % 60;
     s = t % 60;
     z = 0;
-    DrawSprite(8, 8, gUnk_09EFBAE8[h / 10 % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(16, 8, gUnk_09EFBAE8[h % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(24, 8, gUnk_09EFBAE8[10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(32, 8, gUnk_09EFBAE8[m / 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(40, 8, gUnk_09EFBAE8[m % 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(48, 8, gUnk_09EFBAE8[10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(56, 8, gUnk_09EFBAE8[s / 10], work->tiles, work->palette, NULL, z, z);
-    DrawSprite(64, 8, gUnk_09EFBAE8[s % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(8, 8, gSrollTimerFrames[h / 10 % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(16, 8, gSrollTimerFrames[h % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(24, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(32, 8, gSrollTimerFrames[m / 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(40, 8, gSrollTimerFrames[m % 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(48, 8, gSrollTimerFrames[10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(56, 8, gSrollTimerFrames[s / 10], work->tiles, work->palette, NULL, z, z);
+    DrawSprite(64, 8, gSrollTimerFrames[s % 10], work->tiles, work->palette, NULL, z, z);
 }
 
 void task_sroll_tmr_3(SrollTmrWork* work) {

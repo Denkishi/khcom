@@ -25,14 +25,14 @@ void task_sroll_b_logo_0(SrollBLogoWork* work, SrollBLogoArg* a) {
     work->scrollY = a->scrollY;
     work->scrollSpeed = a->scrollSpeed;
 #ifdef VERSION_EU
-    work->palette = LoadObjPalette(gUnk_09D6BE34, 64);
-    work->tiles = LoadObjTiles(gUnk_09C5CC7C, 94 * 32);
+    work->palette = LoadObjPalette(gSrollLogoPalettes, 64);
+    work->tiles = LoadObjTiles(gSrollLogoTiles, 94 * 32);
 #else
-    work->tiles = LoadObjTiles(gUnk_09C5CC7C, 94 * 32);
-    work->palette = LoadObjPalette(gUnk_09D6BE34, 64);
+    work->tiles = LoadObjTiles(gSrollLogoTiles, 94 * 32);
+    work->palette = LoadObjPalette(gSrollLogoPalettes, 64);
 #endif
     anim = &work->anim;
-    AnimInit(anim, gUnk_09EFAF6C, gUnk_09EFAF60);
+    AnimInit(anim, gSrollLogoAnims, gSrollLogoFrames);
     AnimStart(anim, a->animId, 0);
 
     for (i = 0; i < 2; i++) {

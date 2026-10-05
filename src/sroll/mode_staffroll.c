@@ -2735,105 +2735,105 @@ static const u8* sStaffRollTildeText = gStaffRollTildeEu;
 #endif
 #ifdef VERSION_JP
 static const StaffRollScene sStaffRollSoraScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gUnk_09CD1774, 5120, gUnk_09D59A74, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gUnk_09CD2B74, 11200, gUnk_09D5A274, 2048, gUnk_09D69614, 512, 30720, 31744, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, gUnk_09D5AA74, 2048, gUnk_09D69814, 512, 30720, 31744, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CD5734, 11200, gUnk_09D5AA74, 2048, gUnk_09D69814, 512, 30720, 31744, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CD82F4, 11200, gUnk_09D5B274, 2048, gUnk_09D69A14, 512, 30720, 9216, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CD82F4, 11200, gUnk_09D5B274, 2048, gUnk_09D69A14, 512, 30720, 9216, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CDAEB4, 11200, gUnk_09D5BA74, 2048, gUnk_09D69C14, 512, 36864, 9216, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CDAEB4, 11200, gUnk_09D5BA74, 2048, gUnk_09D69C14, 512, 36864, 9216, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CDDA74, 11200, gUnk_09D5C274, 2048, gUnk_09D69E14, 512, 26624, 31744, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CDDA74, 11200, gUnk_09D5C274, 2048, gUnk_09D69E14, 512, 26624, 31744, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CE0634, 11200, gUnk_09D5CA74, 2048, gUnk_09D6A014, 512, 30720, 9216, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CE0634, 11200, gUnk_09D5CA74, 2048, gUnk_09D6A014, 512, 30720, 9216, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5D274, 2048, gUnk_09D695F4, 32, 30720, 52224, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gUnk_09CE31F4, 11200, gUnk_09D5DA74, 2048, gUnk_09D6A214, 512, 40960, 31744, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09CE5DB4, 11200, gUnk_09D5E274, 2048, gUnk_09D6A414, 512, 30720, 9216, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09CE5DB4, 11200, gUnk_09D5E274, 2048, gUnk_09D6A414, 512, 30720, 9216, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09CE8974, 11200, gUnk_09D5EA74, 2048, gUnk_09D6A614, 512, 34816, 33792, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09CE8974, 11200, gUnk_09D5EA74, 2048, gUnk_09D6A614, 512, 30720, 31744, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5F274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 9216, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 9216, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 9216, 0, 19 },
+    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 31744, 0, 1 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 2 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 3 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 4 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 5 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 6 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 7 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 8 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 9 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 10 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 11 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
+    { 1, 1, 1, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 31744, 0, 12 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 13 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 14 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 33792, 0, 15 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 30720, 31744, 1, 16 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 17 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 18 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 19 },
 };
 
 static const StaffRollScene sStaffRollRikuScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gUnk_09CD1774, 5120, gUnk_09D59A74, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gUnk_09CEE0F4, 11200, gUnk_09D60274, 2048, gUnk_09D6AA14, 512, 30720, 31744, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, gUnk_09D60A74, 2048, gUnk_09D6AC14, 512, 30720, 31744, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CF0CB4, 11200, gUnk_09D60A74, 2048, gUnk_09D6AC14, 512, 30720, 31744, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CF3874, 11200, gUnk_09D61274, 2048, gUnk_09D6AE14, 512, 30720, 9216, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CF3874, 11200, gUnk_09D61274, 2048, gUnk_09D6AE14, 512, 30720, 9216, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CF6434, 11200, gUnk_09D61A74, 2048, gUnk_09D6B014, 512, 36864, 9216, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CF6434, 11200, gUnk_09D61A74, 2048, gUnk_09D6B014, 512, 36864, 9216, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CF8FF4, 11200, gUnk_09D62274, 2048, gUnk_09D6B214, 512, 26624, 31744, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CF8FF4, 11200, gUnk_09D62274, 2048, gUnk_09D6B214, 512, 26624, 31744, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CFBBB4, 11200, gUnk_09D62A74, 2048, gUnk_09D6B414, 512, 30720, 9216, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CFBBB4, 11200, gUnk_09D62A74, 2048, gUnk_09D6B414, 512, 30720, 9216, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5D274, 2048, gUnk_09D695F4, 32, 30720, 52224, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gUnk_09CFE774, 11200, gUnk_09D63274, 2048, gUnk_09D6B614, 512, 40960, 31744, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09D01334, 11200, gUnk_09D63A74, 2048, gUnk_09D6B814, 512, 30720, 9216, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09D01334, 11200, gUnk_09D63A74, 2048, gUnk_09D6B814, 512, 30720, 9216, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09D03EF4, 11200, gUnk_09D64274, 2048, gUnk_09D6BA14, 512, 34816, 33792, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09D03EF4, 11200, gUnk_09D64274, 2048, gUnk_09D6BA14, 512, 30720, 31744, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5F274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 9216, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 9216, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 9216, 0, 19 },
+    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 31744, 0, 1 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 2 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 3 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 4 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 5 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 6 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 7 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 8 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 9 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 10 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 11 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
+    { 1, 1, 1, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 31744, 0, 12 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 13 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 14 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 33792, 0, 15 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 30720, 31744, 1, 16 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 17 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 18 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 19 },
 };
 
 #else
 
 static const StaffRollScene sStaffRollSoraScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gUnk_09CD1774, 5120, gUnk_09D59A74, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gUnk_09CD2B74, 11200, gUnk_09D5A274, 2048, gUnk_09D69614, 512, 30720, 32768, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CD5734, 11200, gUnk_09D5AA74, 2048, gUnk_09D69814, 512, 30720, 32768, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CD5734, 11200, gUnk_09D5AA74, 2048, gUnk_09D69814, 512, 30720, 32768, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CD82F4, 11200, gUnk_09D5B274, 2048, gUnk_09D69A14, 512, 30720, 11264, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CD82F4, 11200, gUnk_09D5B274, 2048, gUnk_09D69A14, 512, 30720, 11264, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CDAEB4, 11200, gUnk_09D5BA74, 2048, gUnk_09D69C14, 512, 36864, 10240, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CDAEB4, 11200, gUnk_09D5BA74, 2048, gUnk_09D69C14, 512, 36864, 10240, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CDDA74, 11200, gUnk_09D5C274, 2048, gUnk_09D69E14, 512, 26624, 32768, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CDDA74, 11200, gUnk_09D5C274, 2048, gUnk_09D69E14, 512, 26624, 32768, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CE0634, 11200, gUnk_09D5CA74, 2048, gUnk_09D6A014, 512, 30720, 10240, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CE0634, 11200, gUnk_09D5CA74, 2048, gUnk_09D6A014, 512, 30720, 10240, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5D274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gUnk_09CE31F4, 11200, gUnk_09D5DA74, 2048, gUnk_09D6A214, 512, 40960, 32768, 0, 12 },
-    { 1, 1, 0, 180, 0, 2048, gUnk_09CE5DB4, 11200, gUnk_09D5E274, 2048, gUnk_09D6A414, 512, 30720, 7168, 1, 13 },
-    { 1, 0, 1, 180, 0, 2048, gUnk_09CE5DB4, 11200, gUnk_09D5E274, 2048, gUnk_09D6A414, 512, 30720, 7168, 1, 14 },
-    { 1, 1, 0, 180, 0, -2048, gUnk_09CE8974, 11200, gUnk_09D5EA74, 2048, gUnk_09D6A614, 512, 34816, 32768, 0, 15 },
-    { 1, 0, 1, 180, 0, -2048, gUnk_09CE8974, 11200, gUnk_09D5EA74, 2048, gUnk_09D6A614, 512, 39936, 29696, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5F274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 10240, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 10240, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09CEB534, 11200, gUnk_09D5FA74, 2048, gUnk_09D6A814, 512, 30720, 10240, 0, 19 },
+    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 32768, 0, 1 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 2 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 3 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 4 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 5 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 6 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 7 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 8 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 9 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 10 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 11 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 32768, 0, 12 },
+    { 1, 1, 0, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 13 },
+    { 1, 0, 1, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 14 },
+    { 1, 1, 0, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 32768, 0, 15 },
+    { 1, 0, 1, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 39936, 29696, 1, 16 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 17 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 18 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 19 },
 };
 
 static const StaffRollScene sStaffRollRikuScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gUnk_09CD1774, 5120, gUnk_09D59A74, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gUnk_09CEE0F4, 11200, gUnk_09D60274, 2048, gUnk_09D6AA14, 512, 30720, 32768, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CF0CB4, 11200, gUnk_09D60A74, 2048, gUnk_09D6AC14, 512, 30720, 32768, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CF0CB4, 11200, gUnk_09D60A74, 2048, gUnk_09D6AC14, 512, 30720, 32768, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CF3874, 11200, gUnk_09D61274, 2048, gUnk_09D6AE14, 512, 30720, 11264, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CF3874, 11200, gUnk_09D61274, 2048, gUnk_09D6AE14, 512, 30720, 11264, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CF6434, 11200, gUnk_09D61A74, 2048, gUnk_09D6B014, 512, 36864, 10240, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CF6434, 11200, gUnk_09D61A74, 2048, gUnk_09D6B014, 512, 36864, 10240, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09CF8FF4, 11200, gUnk_09D62274, 2048, gUnk_09D6B214, 512, 26624, 32768, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gUnk_09CF8FF4, 11200, gUnk_09D62274, 2048, gUnk_09D6B214, 512, 26624, 32768, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gUnk_09CFBBB4, 11200, gUnk_09D62A74, 2048, gUnk_09D6B414, 512, 30720, 10240, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gUnk_09CFBBB4, 11200, gUnk_09D62A74, 2048, gUnk_09D6B414, 512, 30720, 10240, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5D274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gUnk_09CFE774, 11200, gUnk_09D63274, 2048, gUnk_09D6B614, 512, 40960, 32768, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09D01334, 11200, gUnk_09D63A74, 2048, gUnk_09D6B814, 512, 30720, 7168, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09D01334, 11200, gUnk_09D63A74, 2048, gUnk_09D6B814, 512, 30720, 7168, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gUnk_09D03EF4, 11200, gUnk_09D64274, 2048, gUnk_09D6BA14, 512, 34816, 32768, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gUnk_09D03EF4, 11200, gUnk_09D64274, 2048, gUnk_09D6BA14, 512, 39936, 29696, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gUnk_09CD1774, 5120, gUnk_09D5F274, 2048, gUnk_09D695F4, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 10240, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 10240, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gUnk_09D06AB4, 11200, gUnk_09D64A74, 2048, gUnk_09D6BC14, 512, 30720, 10240, 0, 19 },
+    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 32768, 0, 1 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 2 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 3 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 4 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 5 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 6 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 7 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 8 },
+    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 9 },
+    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 10 },
+    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 11 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 1, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 32768, 0, 12 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 13 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 14 },
+    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 32768, 0, 15 },
+    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 39936, 29696, 1, 16 },
+    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 17 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 18 },
+    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 19 },
 };
 #endif
 
@@ -3088,7 +3088,7 @@ void mode_StaffRoll_0() {
     *p = w;
     SetBackdropColor(0, 0, 0);
     SpriteReset();
-    w->palette = LoadObjPalette(gUnk_09D6BE74, 0x100);
+    w->palette = LoadObjPalette(gSrollSecnPalettes, 0x100);
     w->unk_000 = 1;
     w->unk_001 = 1;
     w->phase = 0;
@@ -3424,7 +3424,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         }
 
         SrollTextInit(&work->text, &sStaffRollTextInit);
-        LoadBgPalette(0, gUnk_09D6BE14, 32);
+        LoadBgPalette(0, gStaffRollTextPalette, 32);
         gDispCnt |= 0;
         gWinIn = (WININ_WIN0_BG0 | WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ);
         gWinOut = (WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ);
@@ -3797,9 +3797,9 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        LoadBgTiles(0, gUnk_09D09674, 0x7200);
-        LoadBgMap(0, gUnk_09D65274, 0x1000);
-        LoadBgPalette(0, gUnk_09D6BF74, 0x200);
+        LoadBgTiles(0, gStaffRollSoraImage1Tiles, 0x7200);
+        LoadBgMap(0, gStaffRollSoraImage1Map, 0x1000);
+        LoadBgPalette(0, gStaffRollSoraImage1Palette, 0x200);
         SetBgScroll(0, 0, 160);
         work->imageState = 1;
         work->imageTimer = 0;
@@ -3865,9 +3865,9 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
 
     switch (work->imageState) {
     case 0:
-        LoadBgTiles(0, gUnk_09D10874, 0x53C0);
-        LoadBgMap(0, gUnk_09D66274, 0x800);
-        LoadBgPalette(0, gUnk_09D6C174, 0x200);
+        LoadBgTiles(0, gStaffRollSoraImage2Tiles, 0x53C0);
+        LoadBgMap(0, gStaffRollSoraImage2Map, 0x800);
+        LoadBgPalette(0, gStaffRollSoraImage2Palette, 0x200);
         work->imageState = 1;
         work->imageTimer = 0;
     case 1:
@@ -3944,9 +3944,9 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
         DisableBg(1);
         DisableBg(2);
         DisableBg(3);
-        LoadBgTiles(0, gUnk_09D15C34, 0x53C0);
-        LoadBgMap(0, gUnk_09D66A74, 0x800);
-        LoadBgPalette(0, gUnk_09D6C374, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage1Tiles, 0x53C0);
+        LoadBgMap(0, gStaffRollRikuImage1Map, 0x800);
+        LoadBgPalette(0, gStaffRollRikuImage1Palette, 0x200);
         work->imageState = 1;
         work->imageTimer = 0;
     case 1:
@@ -3997,9 +3997,9 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
 
     switch (work->imageState) {
     case 0:
-        LoadBgTiles(0, gUnk_09D1AFF4, 0x53C0);
-        LoadBgMap(0, gUnk_09D67274, 0x800);
-        LoadBgPalette(0, gUnk_09D6C574, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage2Tiles, 0x53C0);
+        LoadBgMap(0, gStaffRollRikuImage2Map, 0x800);
+        LoadBgPalette(0, gStaffRollRikuImage2Palette, 0x200);
         work->imageState = 1;
         work->imageTimer = 0;
     case 1:
@@ -4049,9 +4049,9 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
 
     switch (work->imageState) {
     case 0:
-        LoadBgTiles(0, gUnk_09D203B4, 0x53C0);
-        LoadBgMap(0, gUnk_09D67A74, 0x800);
-        LoadBgPalette(0, gUnk_09D6C774, 0x200);
+        LoadBgTiles(0, gStaffRollRikuImage3Tiles, 0x53C0);
+        LoadBgMap(0, gStaffRollRikuImage3Map, 0x800);
+        LoadBgPalette(0, gStaffRollRikuImage3Palette, 0x200);
         work->imageState = 1;
         work->imageTimer = 0;
     case 1:
@@ -4113,56 +4113,56 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                LoadBgMap(1, gUnkEu_09DD69A0, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndMap, 0x800);
                 break;
             case LANGUAGE_FRENCH:
-                LoadBgMap(1, gUnkEu_09DD71A0, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndFrenchMap, 0x800);
                 break;
             case LANGUAGE_SPANISH:
-                LoadBgMap(1, gUnkEu_09DD79A0, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndSpanishMap, 0x800);
                 break;
             case LANGUAGE_ITALIAN:
-                LoadBgMap(1, gUnkEu_09DD81A0, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndItalianMap, 0x800);
                 break;
             case LANGUAGE_GERMAN:
             default:
-                LoadBgMap(1, gUnkEu_09DD89A0, 0x800);
+                LoadBgMap(1, gStaffRollRikuEndGermanMap, 0x800);
                 break;
             }
 
-            LoadBgTiles(1, gUnk_09D2B334, 0x45C0);
+            LoadBgTiles(1, gStaffRollRikuEndTiles, 0x45C0);
 #else
-            LoadBgTiles(1, gUnk_09D2B334, 0x7F40);
+            LoadBgTiles(1, gStaffRollRikuEndTiles, 0x7F40);
             LoadBgMap(1, gUnk_09D68A74, 0x800);
 #endif
-            LoadBgPalette(1, gUnk_09D6CB74, 0x200);
+            LoadBgPalette(1, gStaffRollRikuEndPalette, 0x200);
         } else {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                LoadBgMap(1, gUnk_09D68274, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndMap, 0x800);
                 break;
             case LANGUAGE_FRENCH:
                 LoadBgMap(1, gUnk_09D68A74, 0x800);
                 break;
             case LANGUAGE_SPANISH:
-                LoadBgMap(1, gUnkEu_09DD51A0, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndSpanishMap, 0x800);
                 break;
             case LANGUAGE_ITALIAN:
-                LoadBgMap(1, gUnkEu_09DD59A0, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndItalianMap, 0x800);
                 break;
             case LANGUAGE_GERMAN:
             default:
-                LoadBgMap(1, gUnkEu_09DD61A0, 0x800);
+                LoadBgMap(1, gStaffRollSoraEndGermanMap, 0x800);
                 break;
             }
 
-            LoadBgTiles(1, gUnk_09D25774, 0x5140);
+            LoadBgTiles(1, gStaffRollSoraEndTiles, 0x5140);
 #else
-            LoadBgTiles(1, gUnk_09D25774, 0x5BC0);
-            LoadBgMap(1, gUnk_09D68274, 0x800);
+            LoadBgTiles(1, gStaffRollSoraEndTiles, 0x5BC0);
+            LoadBgMap(1, gStaffRollSoraEndMap, 0x800);
 #endif
-            LoadBgPalette(1, gUnk_09D6C974, 0x200);
+            LoadBgPalette(1, gStaffRollSoraEndPalette, 0x200);
         }
 
         m4aSongNumStart(SONG_BGM_TITLE);

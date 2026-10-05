@@ -5293,12 +5293,12 @@ void BosPcDraw(PcWork* work) {
         cmd = &cmds[j];
 
         if (cmd->flags & PC_SPRITE_CMD_STANDALONE) {
-            DrawSprite(sx + cmd->x, sy + cmd->y, gUnk_09EFAB18[cmd->gfxIndex],
+            DrawSprite(sx + cmd->x, sy + cmd->y, gBosPcHandFrames[cmd->gfxIndex],
                 work->tiles2[j], gfx, NULL,
                 BosPcGetSpritePriority(work, work->y + PcLayerDepth(cmd->layer)),
                 BosPcGetSpriteDepth(work, work->y + PcLayerDepth(cmd->layer), 1));
         } else {
-            def = gUnk_09EFBB18[cmd->gfxIndex];
+            def = gBosPcArmSegmentFrames[cmd->gfxIndex];
             oam = &work->oam[cmd->layer];
             mask = 0xFF;
             t = (u8)def->attr0;

@@ -27,27 +27,27 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
 #endif
     if (kind == 0) {
 #ifdef VERSION_JP
-        work->tiles = LoadObjTiles(gUnk_09C8D47A, 200 * 16);
+        work->tiles = LoadObjTiles(gSrollSoraEpilogueTiles, 200 * 16);
 #else
-        work->tiles = LoadObjTiles(gUnk_09C8D47A, 154 * 32);
+        work->tiles = LoadObjTiles(gSrollSoraEpilogueTiles, 154 * 32);
 #endif
         work->palette = LoadObjPalette(gUnk_09D6CF54, 224);
 
         for (i = 0, p = work->anim; i <= 4; i++) {
-            AnimInit(p, gUnk_09EFB9B8, gUnk_09EFB840);
+            AnimInit(p, gSrollSoraEpilogueAnims, gSrollSoraEpilogueFrames);
             AnimStart(p, i, 0);
             p++;
         }
     } else {
 #ifdef VERSION_JP
-        work->tiles = LoadObjTiles(gUnk_09C8F1FA, 200 * 16);
+        work->tiles = LoadObjTiles(gSrollRikuEpilogueTiles, 200 * 16);
 #else
-        work->tiles = LoadObjTiles(gUnk_09C8F1FA, 146 * 32);
+        work->tiles = LoadObjTiles(gSrollRikuEpilogueTiles, 146 * 32);
 #endif
         work->palette = LoadObjPalette(gUnk_09D6D034, 224);
 
         for (i = 0, p = work->anim; i <= 4; i++) {
-            AnimInit(p, gUnk_09EFBAD4, gUnk_09EFB9CC);
+            AnimInit(p, gSrollRikuEpilogueAnims, gSrollRikuEpilogueFrames);
             AnimStart(p, i, 0);
             p++;
         }
@@ -57,20 +57,20 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
         break;
     case LANGUAGE_FRENCH:
         if (kind == 0) {
-            work->tiles = LoadObjTiles(gUnkEu_09CEF9E8, 168 * 32);
+            work->tiles = LoadObjTiles(gSrollSoraEpilogueFrenchTiles, 168 * 32);
             work->palette = LoadObjPalette(gUnk_09D6CF54, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F879D4, gUnkEu_09F8785C);
+                AnimInit(p, gSrollSoraEpilogueFrenchAnims, gSrollSoraEpilogueFrenchFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
         } else {
-            work->tiles = LoadObjTiles(gUnkEu_09CF1B7E, 158 * 32);
+            work->tiles = LoadObjTiles(gSrollRikuEpilogueFrenchTiles, 158 * 32);
             work->palette = LoadObjPalette(gUnk_09D6D034, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F87AF0, gUnkEu_09F879E8);
+                AnimInit(p, gSrollRikuEpilogueFrenchAnims, gSrollRikuEpilogueFrenchFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
@@ -79,20 +79,20 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
         break;
     case LANGUAGE_SPANISH:
         if (kind == 0) {
-            work->tiles = LoadObjTiles(gUnkEu_09CF3FEE, 167 * 32);
+            work->tiles = LoadObjTiles(gSrollSoraEpilogueSpanishTiles, 167 * 32);
             work->palette = LoadObjPalette(gUnk_09D6CF54, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F87C7C, gUnkEu_09F87B04);
+                AnimInit(p, gSrollSoraEpilogueSpanishAnims, gSrollSoraEpilogueSpanishFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
         } else {
-            work->tiles = LoadObjTiles(gUnkEu_09CF6334, 186 * 32);
+            work->tiles = LoadObjTiles(gSrollRikuEpilogueSpanishTiles, 186 * 32);
             work->palette = LoadObjPalette(gUnk_09D6D034, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F87D98, gUnkEu_09F87C90);
+                AnimInit(p, gSrollRikuEpilogueSpanishAnims, gSrollRikuEpilogueSpanishFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
@@ -101,20 +101,20 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
         break;
     case LANGUAGE_ITALIAN:
         if (kind == 0) {
-            work->tiles = LoadObjTiles(gUnkEu_09CF86A2, 142 * 32);
+            work->tiles = LoadObjTiles(gSrollSoraEpilogueItalianTiles, 142 * 32);
             work->palette = LoadObjPalette(gUnk_09D6CF54, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F87F24, gUnkEu_09F87DAC);
+                AnimInit(p, gSrollSoraEpilogueItalianAnims, gSrollSoraEpilogueItalianFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
         } else {
-            work->tiles = LoadObjTiles(gUnkEu_09CFA56C, 162 * 32);
+            work->tiles = LoadObjTiles(gSrollRikuEpilogueItalianTiles, 162 * 32);
             work->palette = LoadObjPalette(gUnk_09D6D034, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F88040, gUnkEu_09F87F38);
+                AnimInit(p, gSrollRikuEpilogueItalianAnims, gSrollRikuEpilogueItalianFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
@@ -124,20 +124,20 @@ void task_sroll_c_char_0(SrollCCharWork* work, s32 kind) {
     case LANGUAGE_GERMAN:
     default:
         if (kind == 0) {
-            work->tiles = LoadObjTiles(gUnkEu_09CFCB38, 188 * 32);
+            work->tiles = LoadObjTiles(gSrollSoraEpilogueGermanTiles, 188 * 32);
             work->palette = LoadObjPalette(gUnk_09D6CF54, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F881CC, gUnkEu_09F88054);
+                AnimInit(p, gSrollSoraEpilogueGermanAnims, gSrollSoraEpilogueGermanFrames);
                 AnimStart(p, i, 0);
                 p++;
             }
         } else {
-            work->tiles = LoadObjTiles(gUnkEu_09CFEFA8, 190 * 32);
+            work->tiles = LoadObjTiles(gSrollRikuEpilogueGermanTiles, 190 * 32);
             work->palette = LoadObjPalette(gUnk_09D6D034, 224);
 
             for (i = 0, p = work->anim; i <= 4; i++) {
-                AnimInit(p, gUnkEu_09F882E8, gUnkEu_09F881E0);
+                AnimInit(p, gSrollRikuEpilogueGermanAnims, gSrollRikuEpilogueGermanFrames);
                 AnimStart(p, i, 0);
                 p++;
             }

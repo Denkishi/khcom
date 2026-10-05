@@ -37,29 +37,29 @@ void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a) {
     switch (a->kind) {
     case 0:
 #ifdef VERSION_JP
-        work->tiles = LoadObjTiles(gUnk_09C638BE, 45 * 32);
+        work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, 45 * 32);
 #else
-        work->tiles = LoadObjTiles(gUnk_09C638BE, 35 * 32);
+        work->tiles = LoadObjTiles(gSrollNameOrnamentTiles, 35 * 32);
 #endif
         anim = &work->anim;
-        AnimInit(anim, gUnk_09EFB200, gUnk_09EFB1F8);
+        AnimInit(anim, gSrollNameOrnamentAnims, gSrollNameOrnamentFrames);
         AnimStart(anim, a->animId, 0);
         break;
     case 1:
-        work->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
+        work->tiles = LoadObjTiles(gSrollNameTileBlocks[a->nameIndex].tiles, gSrollNameTileBlocks[a->nameIndex].size);
         anim = &work->anim;
-        AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
+        AnimInit(anim, gSrollNameDirectorAnims, gSrollNameDirectorFrames);
         AnimStart(anim, a->animId, 0);
         break;
     case 2:
-        work->tiles = LoadObjTiles(gUnk_09A54218[a->nameIndex].tiles, gUnk_09A54218[a->nameIndex].size);
+        work->tiles = LoadObjTiles(gSrollNameTileBlocks[a->nameIndex].tiles, gSrollNameTileBlocks[a->nameIndex].size);
 
         if (a->animId == 1) {
             anim = &work->anim;
-            AnimInit(anim, gUnk_09EFB5EC, gUnk_09EFB5B0);
+            AnimInit(anim, gSrollNameCharacterDirectorsAnims, gSrollNameCharacterDirectorsFrames);
         } else {
             anim = &work->anim;
-            AnimInit(anim, gUnk_09EFB244, gUnk_09EFB208);
+            AnimInit(anim, gSrollNameDirectorAnims, gSrollNameDirectorFrames);
         }
 
         AnimStart(anim, 2, 0);
@@ -68,7 +68,7 @@ void task_sroll_a_name_0(SrollANameWork* work, SrollANameArg* a) {
         break;
     }
 
-    work->palette = LoadObjPalette(gUnk_09D6CD74, 64);
+    work->palette = LoadObjPalette(gSrollNamePalettes, 64);
 }
 
 u8 task_sroll_a_name_1(SrollANameWork* work) {
@@ -111,7 +111,7 @@ void task_sroll_a_name_2(SrollANameWork* work) {
     if (work->kind == 2) {
         flags = SPRITE_FLAG_BLEND;
         ofs = AnimGetFrame(&work->anim) * 16 + 16;
-        LoadPalette(&gUnk_09D6CD74[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((work->palette->index & 15) * 32), 32);
+        LoadPalette(&gSrollNamePalettes[ofs], (u8*)(OBJ_PLTT + PLTT_SIZE_4BPP) + ((work->palette->index & 15) * 32), 32);
     }
 
     DrawSprite(x >> 8, y >> 8, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, flags,

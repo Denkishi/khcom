@@ -135,55 +135,6 @@ entries:
   jp:
     address: 0x08B1901C
     size: 1034
-    frames:
-    - symbol: gUnk_08B25E40
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25E4A
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25E54
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25E5E
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25E6E
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25E78
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25E82
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25E8C
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25E96
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EA0
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EAA
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EB4
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EBE
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EC8
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25ED2
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25ACA
-      pieces:
-      - [8x8, 0, 0, {hflip: true}]
   eu:
     address: 0x08B50624
     size: 1034
@@ -254,57 +205,6 @@ entries:
   jp:
     address: 0x08B19428
     size: 1072
-    symbol: gUnkJp_08B194D8
-    frames:
-    - symbol: gUnk_08B25A34
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25A3E
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25A48
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnk_08B25A52
-      pieces:
-      - [32x8, 0, 0]
-      - [8x8, 32, 0]
-    - symbol: gUnk_08B25A66
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25A70
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25A7A
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25A84
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25A8E
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25A98
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25AA2
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25AAC
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25AB6
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25AC0
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnkJp_08B194BA
-      pieces:
-      - [8x8, 0, 0]
-    - symbol: gUnk_08B25EDC
-      pieces:
-      - [8x8, 0, 0, {hflip: true}]
   eu:
     address: 0x08B55C58
     size: 2988
@@ -1280,7 +1180,6 @@ entries:
     address: 0x09EE1538
   jp:
     address: 0x09EB8FB4
-    items: [gUnk_08B25E40, gUnk_08B25E4A, gUnk_08B25E54, gUnk_08B25E5E, gUnk_08B25E6E, gUnk_08B25E78, gUnk_08B25E82, gUnk_08B25E8C, gUnk_08B25E96, gUnk_08B25EA0, gUnk_08B25EAA, gUnk_08B25EB4, gUnk_08B25EBE, gUnk_08B25EC8, gUnk_08B25ED2, gUnk_08B25ACA]
   eu:
     address: 0x09F5C140
 - name: gUnk_09EE1578
@@ -1299,7 +1198,6 @@ entries:
     address: 0x09EE157C
   jp:
     address: 0x09EB8FF8
-    items: [gUnk_08B25A34, gUnk_08B25A3E, gUnk_08B25A48, gUnk_08B25A52, gUnk_08B25A66, gUnk_08B25A70, gUnk_08B25A7A, gUnk_08B25A84, gUnk_08B25A8E, gUnk_08B25A98, gUnk_08B25AA2, gUnk_08B25AAC, gUnk_08B25AB6, gUnk_08B25AC0, gUnkJp_08B194BA, gUnk_08B25EDC]
   eu:
     address: 0x09F5C394
     items: [gUnk_08B25E40, gUnk_08B25E4A, gUnk_08B25E54, gUnk_08B25E5E, gUnk_08B25E6E, gUnk_08B25E78, gUnk_08B25E82, gUnk_08B25E8C, gUnk_08B25E96, gUnk_08B25EA0, gUnk_08B25EAA, gUnk_08B25EB4, gUnk_08B25EBE, gUnk_08B25EC8, gUnk_08B25ED2, gUnk_08B25EDC, gUnkEu_08B55CFE, gUnkEu_08B55D08, gUnkEu_08B55D18, gUnkEu_08B55D22, gUnkEu_08B55D32, gUnkEu_08B55D3C, gUnkEu_08B55D4C, gUnkEu_08B55D56, gUnkEu_08B55D66, gUnkEu_08B55D70, gUnkEu_08B55D80, gUnkEu_08B55D8A]

@@ -1646,9 +1646,6 @@ TARGET_ONLY_SYMBOLS = {
         "gUnk_097A2DF8": 0x09780840,
         "gUnk_097A2E16": 0x0978085e,
     },
-    "jp": {
-        "gUnk_08B25EF0": 0x08B190C6,
-    },
 }
 
 TARGET_EXTRA_LABELS = {

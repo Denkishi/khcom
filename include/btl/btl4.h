@@ -63,10 +63,6 @@ typedef struct BtlHpothWork {
     u32 gaugeMode;
 } BtlHpothWork;
 
-#ifdef VERSION_JP
-extern u8 gUnk_08B25EF0[];
-#endif
-
 void CreatePersistentSysmsgwinTask(void* a, u16 b);
 
 void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src);

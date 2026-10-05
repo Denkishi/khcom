@@ -20,28 +20,68 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
     switch (digit) {
     case 0:
         if (leading) {
+#ifdef VERSION_JP
+            return gUnk_08B25A5C;
+#else
             return gUnk_08B25E6E;
+#endif
         }
 
         break;
     case 1:
+#ifdef VERSION_JP
+        return gUnk_08B25A66;
+#else
         return gUnk_08B25E78;
+#endif
     case 2:
+#ifdef VERSION_JP
+        return gUnk_08B25A70;
+#else
         return gUnk_08B25E82;
+#endif
     case 3:
+#ifdef VERSION_JP
+        return gUnk_08B25A7A;
+#else
         return gUnk_08B25E8C;
+#endif
     case 4:
+#ifdef VERSION_JP
+        return gUnk_08B25A84;
+#else
         return gUnk_08B25E96;
+#endif
     case 5:
+#ifdef VERSION_JP
+        return gUnk_08B25A8E;
+#else
         return gUnk_08B25EA0;
+#endif
     case 6:
+#ifdef VERSION_JP
+        return gUnk_08B25A98;
+#else
         return gUnk_08B25EAA;
+#endif
     case 7:
+#ifdef VERSION_JP
+        return gUnk_08B25AA2;
+#else
         return gUnk_08B25EB4;
+#endif
     case 8:
+#ifdef VERSION_JP
+        return gUnk_08B25AAC;
+#else
         return gUnk_08B25EBE;
+#endif
     case 9:
+#ifdef VERSION_JP
+        return gUnk_08B25AB6;
+#else
         return gUnk_08B25EC8;
+#endif
     }
 
     return NULL;
@@ -85,25 +125,32 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
 
 #ifdef VERSION_JP
     work->gfx2[4] = gUnk_09EE1538[value + 4];
+    work->gfx2[5] = gUnk_08B25AC0;
 #else
     work->gfx2[4] = gUnk_09EE157C[value + 4];
-#endif
     work->gfx2[5] = gUnk_08B25ED2;
+#endif
 }
 
 void task_btl_exp_0(BtlExpWork* work) {
     s32 i;
 
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-#ifdef VERSION_EU
+#if defined(VERSION_EU)
     work->tiles = AllocObjTiles(0xC0, gUnk_08B25EF0);
-#else
+#elif defined(VERSION_JP)
+    work->tiles = AllocObjTiles(0xA0, gUnk_08B25ADE);
+#elif defined(VERSION_US)
     work->tiles = AllocObjTiles(0xA0, gUnk_08B25EF0);
 #endif
     work->gfx = NULL;
 
     for (i = 0; i <= 5; i++) {
+#ifdef VERSION_JP
+        work->tiles2[i] = AllocObjTiles(32, gUnk_08B25ADE);
+#else
         work->tiles2[i] = AllocObjTiles(32, gUnk_08B25EF0);
+#endif
         work->gfx2[i] = NULL;
     }
 
@@ -122,7 +169,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
     if (work->level < gGameState.progression.level) {
         BtlExpSetNumber(work, gGameState.progression.level);
 
-#ifdef VERSION_EU
+#if defined(VERSION_EU)
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             work->gfx = gUnk_08B25E40;
@@ -141,7 +188,9 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             work->gfx = gUnkEu_08B55D66;
             break;
         }
-#else
+#elif defined(VERSION_JP)
+        work->gfx = gUnk_08B25A34;
+#elif defined(VERSION_US)
         work->gfx = gUnk_08B25E40;
 #endif
         work->timer = 0;
@@ -155,7 +204,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             work->gainedExp += gGameState.progression.exp - work->lastExp;
             BtlExpSetNumber(work, work->gainedExp);
 
-#ifdef VERSION_EU
+#if defined(VERSION_EU)
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
                 work->gfx = gUnk_08B25E54;
@@ -174,7 +223,9 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->gfx = gUnkEu_08B55D80;
                 break;
             }
-#else
+#elif defined(VERSION_JP)
+            work->gfx = gUnk_08B25A48;
+#elif defined(VERSION_US)
             work->gfx = gUnk_08B25E54;
 #endif
             work->timer = 0;
@@ -194,7 +245,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->state = 2;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 
-#ifdef VERSION_EU
+#if defined(VERSION_EU)
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
                     work->gfx = gUnk_08B25E5E;
@@ -213,7 +264,9 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                     work->gfx = gUnkEu_08B55D70;
                     break;
                 }
-#else
+#elif defined(VERSION_JP)
+                work->gfx = gUnk_08B25A52;
+#elif defined(VERSION_US)
                 work->gfx = gUnk_08B25E5E;
 #endif
             }
@@ -233,7 +286,7 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                 work->state = 2;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 
-#ifdef VERSION_EU
+#if defined(VERSION_EU)
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
                     work->gfx = gUnk_08B25E5E;
@@ -252,7 +305,9 @@ s32 task_btl_exp_1(BtlExpWork* work) {
                     work->gfx = gUnkEu_08B55D70;
                     break;
                 }
-#else
+#elif defined(VERSION_JP)
+                work->gfx = gUnk_08B25A52;
+#elif defined(VERSION_US)
                 work->gfx = gUnk_08B25E5E;
 #endif
             }

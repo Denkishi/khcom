@@ -75,7 +75,7 @@ u8* gAllmapFloorTilesByLanguage[5] = {
 };
 
 u8* gAllmapRikuFloorTilesByLanguage[5] = {
-    gUnkEu_0979A7A0,
+    gAllmapRikuFloorTiles,
     gUnkEu_0979B7E0,
     gUnkEu_0979E8A0,
     gUnkEu_0979D860,

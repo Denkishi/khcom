@@ -122,6 +122,8 @@ entries:
     address: 0x09EF6920
   jp:
     address: 0x09ECDD0C
+  eu:
+    address: 0x09F81F08
 - name: gUnk_09EF6930
   record: AnimTable
   items: [gUnkUs_097A249C]
@@ -129,6 +131,9 @@ entries:
     address: 0x09EF6930
   jp:
     address: 0x09ECDD1C
+  eu:
+    address: 0x09F81F18
+    items: [gUnkEu_0977E73C]
 - name: gUnk_09EF6934
   record: SpriteTable
   items: [gUnkUs_097A28A8, gUnkUs_097A28B2, gUnkUs_097A28BC, gUnkUs_097A28C6]
@@ -213,16 +218,6 @@ entries:
   items: [gUnkEu_0977E48A]
   eu:
     address: 0x09F81F04
-- name: gUnkEu_09F81F08
-  record: SpriteTable
-  items: [gUnkEu_0977E714, gUnkEu_0977E71E, gUnkEu_0977E728, gUnkEu_0977E732]
-  eu:
-    address: 0x09F81F08
-- name: gUnkEu_09F81F18
-  record: AnimTable
-  items: [gUnkEu_0977E73C]
-  eu:
-    address: 0x09F81F18
 - name: gUnkEu_09F81F1C
   record: SpriteTable
   items: [gUnkEu_0977EB48, gUnkEu_0977EB52, gUnkEu_0977EB5C, gUnkEu_0977EB66]
@@ -492,23 +487,28 @@ entries:
   frames:
   - symbol: gUnkUs_097A2474
     jp: {symbol: gUnkJp_0975C908}
+    eu: {symbol: gUnkEu_0977E714}
     pieces:
     - [32x16, 0, 0]
   - symbol: gUnkUs_097A247E
     jp: {symbol: gUnkJp_0975C912}
+    eu: {symbol: gUnkEu_0977E71E}
     pieces:
     - [32x16, 0, 0]
   - symbol: gUnkUs_097A2488
     jp: {symbol: gUnkJp_0975C91C}
+    eu: {symbol: gUnkEu_0977E728}
     pieces:
     - [32x16, 0, 0]
   - symbol: gUnkUs_097A2492
     jp: {symbol: gUnkJp_0975C926}
+    eu: {symbol: gUnkEu_0977E732}
     pieces:
     - [32x16, 0, 0, {fresh: true}]
   animations:
   - symbol: gUnkUs_097A249C
     jp: {symbol: gUnkJp_0975C930}
+    eu: {symbol: gUnkEu_0977E73C}
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   us:
@@ -516,6 +516,9 @@ entries:
     size: 1074
   jp:
     address: 0x0975C908
+    size: 1074
+  eu:
+    address: 0x0977E714
     size: 1074
 - name: gUnk_097A28DA
   format: sprite_sheet
@@ -740,32 +743,6 @@ entries:
   eu:
     address: 0x0977E40C
     size: 776
-- name: gUnkEu_0977E746
-  format: sprite_sheet
-  align: 4
-  cell: [32, 16]
-  anchor: [0, 0]
-  columns: 4
-  frames:
-  - symbol: gUnkEu_0977E714
-    pieces:
-    - [32x16, 0, 0]
-  - symbol: gUnkEu_0977E71E
-    pieces:
-    - [32x16, 0, 0]
-  - symbol: gUnkEu_0977E728
-    pieces:
-    - [32x16, 0, 0]
-  - symbol: gUnkEu_0977E732
-    pieces:
-    - [32x16, 0, 0, {fresh: true}]
-  animations:
-  - symbol: gUnkEu_0977E73C
-    fields: {unk_00: 64, unk_02: 64}
-    frames: [[0, 4]]
-  eu:
-    address: 0x0977E714
-    size: 1074
 - name: gUnkEu_0977EB7A
   format: sprite_sheet
   align: 4

@@ -71,30 +71,6 @@ objects:
     start: 0x08F6A25C
     end: 0x08F6A29C
 entries:
-- name: gUnk_09EE11D8_jp
-  record: AnimTable
-  items: [gUnkJp_08B12718]
-  symbol: gUnk_09EE11D8
-  jp:
-    address: 0x09EB8C54
-- name: gUnk_09EE11E0_jp
-  record: AnimTable
-  items: [gUnkJp_08B128B4]
-  symbol: gUnk_09EE11E0
-  jp:
-    address: 0x09EB8C5C
-- name: gUnk_09EE11E8_jp
-  record: AnimTable
-  items: [gUnkJp_08B12A50]
-  symbol: gUnk_09EE11E8
-  jp:
-    address: 0x09EB8C64
-- name: gUnk_09EE11F0_jp
-  record: AnimTable
-  items: [gUnkJp_08B12BEC]
-  symbol: gUnk_09EE11F0
-  jp:
-    address: 0x09EB8C6C
 - name: gSor1ll70Frames
   record: SpriteTable
   items: [gSor1ll70Frame0, gSor1ll70Frame1, gSor1ll70Frame2, gSor1ll70Frame3, gSor1ll70Frame4, gSor1ll70Frame5, gSor1ll70Frame6, gSor1ll70Frame7, gSor1ll70Frame8, gSor1ll70Frame9, gSor1ll70Frame10, gSor1ll70Frame11, gSor1ll70Frame12, gSor1ll70Frame13]
@@ -428,12 +404,13 @@ entries:
     address: 0x09EE11D4
   jp:
     address: 0x09EB8C50
-- name: gUnk_09EE11D8_us
+- name: gUnk_09EE11D8
   record: AnimTable
   items: [gUnkUs_08B1F130]
-  symbol: gUnk_09EE11D8
   us:
     address: 0x09EE11D8
+  jp:
+    address: 0x09EB8C54
 - name: gUnk_09EE11DC
   record: SpriteTable
   items: [gUnkUs_08B1F2BC]
@@ -441,12 +418,13 @@ entries:
     address: 0x09EE11DC
   jp:
     address: 0x09EB8C58
-- name: gUnk_09EE11E0_us
+- name: gUnk_09EE11E0
   record: AnimTable
   items: [gUnkUs_08B1F2CC]
-  symbol: gUnk_09EE11E0
   us:
     address: 0x09EE11E0
+  jp:
+    address: 0x09EB8C5C
 - name: gUnk_09EE11E4
   record: SpriteTable
   items: [gUnkUs_08B1F458]
@@ -454,12 +432,13 @@ entries:
     address: 0x09EE11E4
   jp:
     address: 0x09EB8C60
-- name: gUnk_09EE11E8_us
+- name: gUnk_09EE11E8
   record: AnimTable
   items: [gUnkUs_08B1F468]
-  symbol: gUnk_09EE11E8
   us:
     address: 0x09EE11E8
+  jp:
+    address: 0x09EB8C64
 - name: gUnk_09EE11EC
   record: SpriteTable
   items: [gUnkUs_08B1F5F4]
@@ -467,12 +446,13 @@ entries:
     address: 0x09EE11EC
   jp:
     address: 0x09EB8C68
-- name: gUnk_09EE11F0_us
+- name: gUnk_09EE11F0
   record: AnimTable
   items: [gUnkUs_08B1F604]
-  symbol: gUnk_09EE11F0
   us:
     address: 0x09EE11F0
+  jp:
+    address: 0x09EB8C6C
 - name: gUnk_09EE11F4
   record: SpriteTable
   items: [gUnkUs_08B1F750, gUnkUs_08B1F75A, gUnkUs_08B1F76A, gUnkUs_08B1F774]

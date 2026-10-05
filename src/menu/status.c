@@ -81,7 +81,7 @@ TaskDesc gTaskDescStatusBar = {
 
 #ifdef VERSION_EU
 static void* sStatusTabTiles[5] = {
-    gUnkEu_0977E746,
+    gUnk_097A24A6,
     gUnkEu_0977EFAE,
     gUnkEu_0977EB7A,
     gUnkEu_0977F3E2,
@@ -89,7 +89,7 @@ static void* sStatusTabTiles[5] = {
 };
 
 static void** sStatusTabSprites[5] = {
-    gUnkEu_09F81F08,
+    gUnk_09EF6920,
     gUnkEu_09F81F30,
     gUnkEu_09F81F1C,
     gUnkEu_09F81F44,

@@ -5768,7 +5768,7 @@ void Task_MapMenu_2(MapMenuWork* work) {
         case LANGUAGE_ENGLISH:
         case LANGUAGE_FRENCH:
         case LANGUAGE_ITALIAN:
-            DrawSprite(work->x >> 8, 0, gUnkEu_09F84718[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
+            DrawSprite(work->x >> 8, 0, gUnk_09EF8E6C[0], work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1), 80);
             break;
         case LANGUAGE_GERMAN:
         default:
@@ -5784,9 +5784,9 @@ void Task_MapMenu_2(MapMenuWork* work) {
 #ifdef VERSION_EU
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84560[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
-                DrawSprite(work->x3 >> 8, 0, gUnkEu_09F84560[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x4 >> 8, 103, gUnkEu_09F84560[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[0], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 80);
+                DrawSprite(work->x3 >> 8, 0, gUnk_09EF8E80[1], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1), 81);
+                DrawSprite(work->x4 >> 8, 103, gUnk_09EF8E80[2], work->tiles5, work->palette3, NULL, SPRITE_PRIORITY(1),
                     81);
                 break;
             case LANGUAGE_FRENCH:
@@ -5915,12 +5915,12 @@ void Task_MapMenu_2(MapMenuWork* work) {
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             if (work->cursorVisible) {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F845C4[work->cursor], work->tiles6, work->palette5, NULL,
+                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[work->cursor], work->tiles6, work->palette5, NULL,
                     SPRITE_PRIORITY(1), 81);
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F84678[work->cursor], work->tiles6, work->palette4, NULL,
+                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E44[work->cursor], work->tiles6, work->palette4, NULL,
                     SPRITE_PRIORITY(1), 81);
             } else {
-                DrawSprite(work->x6 >> 8, 26, gUnkEu_09F845C4[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
+                DrawSprite(work->x6 >> 8, 26, gUnk_09EF8E20[7], work->tiles6, work->palette5, NULL, SPRITE_PRIORITY(1),
                     80);
             }
 

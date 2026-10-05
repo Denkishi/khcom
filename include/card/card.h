@@ -2290,7 +2290,7 @@ extern TaskDesc gTaskDescNumberPlus;
 #ifdef VERSION_EU
 extern void* gLevelUpBgTilesByLanguage[5];
 extern void* gLevelUpHeaderTilesByLanguage[5];
-extern void** gUnk_09EEA1BC[5];
+extern void** gLevelUpHeaderSpritesByLanguage[5];
 extern void* gLevelUpOptionTilesByLanguage[5];
 extern void** gLevelUpOptionSpritesByLanguage[5];
 #endif

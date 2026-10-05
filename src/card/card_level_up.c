@@ -1074,7 +1074,7 @@ void Level_Up_2(LevelUpWork* work) {
         case 0:
             DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage][10],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
@@ -1183,7 +1183,7 @@ void Level_Up_2(LevelUpWork* work) {
             DrawSprite(work->x4[work->cursor], work->y4[work->cursor], NULL, work->tilesPalettes[work->cursor], work->tilesPalettes[5], NULL, 0, 50);
             DrawSprite(work->x6, 0,
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage][10],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage][10],
 #else
                        gUnk_09EEA1BC[10],
 #endif
@@ -1202,21 +1202,21 @@ void Level_Up_2(LevelUpWork* work) {
         if (!(gGameState.flags & GAME_FLAG_RIKU)) {
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->levelDigits, 0);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 111, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->maxHpDigits, 1);
             DrawLevelUpStatDigits(work->statsOffsetX + 206, 132, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
@@ -1224,28 +1224,28 @@ void Level_Up_2(LevelUpWork* work) {
         } else {
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 17, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->levelDigits, 0);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 106, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->maxHpDigits, 1);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 122, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
                        work->apDigits, 4);
             DrawLevelUpStatDigits(work->statsOffsetX + 214, 137, work->tilesPalettes[6], work->tilesPalettes[7],
 #ifdef VERSION_EU
-                       gUnk_09EEA1BC[gLanguage],
+                       gLevelUpHeaderSpritesByLanguage[gLanguage],
 #else
                        gUnk_09EEA1BC,
 #endif
@@ -1859,8 +1859,8 @@ s32 IsLevelUpApUnlocked() {
 void* gLevelUpBgTilesByLanguage[5] = { gUnkEu_094CF704, gUnkEu_094D72E4, gUnkEu_094DB664, gUnkEu_094D9FE4, gUnkEu_094D8964 };
 void* gLevelUpHeaderTilesByLanguage[5] = { gUnk_0908CAEC, gUnkEu_09170AA0, gUnkEu_09171B2C, gUnkEu_091715A8, gUnkEu_09171024 };
 
-void** gUnk_09EEA1BC[5] = {
-    gUnkEu_09F75FF4,
+void** gLevelUpHeaderSpritesByLanguage[5] = {
+    gUnk_09EEA1BC,
     gUnkEu_09F761AC,
     gUnkEu_09F7623C,
     gUnkEu_09F7620C,

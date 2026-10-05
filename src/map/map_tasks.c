@@ -1995,7 +1995,7 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     }
 
     work->jumpHeight = arg->spotLowerZ - arg->spotUpperZ;
-    work->palette = LoadObjPalette(&gMapGmkBarrelJumpPalettes[0x10], 32);
+    work->palette = LoadObjPalette(gMapGmkJumpPalette, 32);
     work->tiles = LoadObjTiles(gMapGmkJumpTiles, 0x980);
     a = &work->anim;
     AnimInit(a, gMapGmkJumpAnims, gMapGmkJumpFrames);
@@ -4676,7 +4676,7 @@ TaskDesc gTaskDescMapGmk01 = {
 };
 
 const MapGmkDef gMapGmkBarrelDef = {
-    gMapGmkBarrelJumpPalettes, gMapGmkBarrelTiles, 0x400, gMapGmkBarrelFrames, gMapGmkBarrelAnims,
+    gMapGmkBarrelPalette, gMapGmkBarrelTiles, 0x400, gMapGmkBarrelFrames, gMapGmkBarrelAnims,
     1, 0, 0, 0, 0, 12, 24, SONG_SYS_OBJ_BREAK, &gTaskDescMapGmkBarrel,
 };
 

@@ -1843,17 +1843,28 @@ entries:
   eu:
     address: 0x099972B0
     size: 32
-- name: gMapGmkBarrelJumpPalettes
+- name: gMapGmkBarrelPalette
   format: palette
   us:
     address: 0x099912E4
-    size: 64
+    size: 32
   jp:
     address: 0x09945DF8
-    size: 64
+    size: 32
   eu:
     address: 0x099972D0
-    size: 64
+    size: 32
+- name: gMapGmkJumpPalette
+  format: palette
+  us:
+    address: 0x09991304
+    size: 32
+  jp:
+    address: 0x09945E18
+    size: 32
+  eu:
+    address: 0x099972F0
+    size: 32
 - name: gMapGmk04Palette
   format: palette
   us:

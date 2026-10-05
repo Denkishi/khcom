@@ -63,7 +63,7 @@ void MapTutorialDropBarrel(MapTutorialWork* work) {
         work->obj.height = 24;
         work->obj.speed = 2;
         work->tiles = AllocObjTiles(0x400, gMapGmkBarrelTiles);
-        work->palette = LoadObjPalette(gMapGmkBarrelJumpPalettes, 32);
+        work->palette = LoadObjPalette(gMapGmkBarrelPalette, 32);
         a = &work->anim;
         AnimInit(a, gMapGmkBarrelAnims, gMapGmkBarrelFrames);
         AnimStart(a, 0, ANIM_FLAG_LOOP);

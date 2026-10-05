@@ -4183,8 +4183,10 @@ static void Deckmenu2_2(DeckMenuWork* work) {
         DrawSprite(work->x7 >> 8, 0,
 #ifdef VERSION_EU
                    gDeckTitleBannerSprites[gLanguage][0],
-#else
+#elif defined(VERSION_US)
                    gUnk_09EEAFF0[0],
+#else
+                   gUnk_09EEAFF8[0],
 #endif
                    work->tiles12, work->palette3, NULL, 0, 10);
     }

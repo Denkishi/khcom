@@ -486,8 +486,6 @@ static void Deckmenu2_2(RikuDeckMenuWork* work) {
     if (work->tiles12 != NULL) {
 #ifdef VERSION_EU
         DrawSprite(work->x7 >> 8, 0, gRikuDeckTitleBannerSprites[gLanguage][0], work->tiles12, work->palette3, NULL, 0, 10);
-#elif defined(VERSION_JP)
-        DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF0[0], work->tiles12, work->palette3, NULL, 0, 10);
 #else
         DrawSprite(work->x7 >> 8, 0, gUnk_09EEAFF8[0], work->tiles12, work->palette3, NULL, 0, 10);
 #endif

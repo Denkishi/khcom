@@ -112,9 +112,6 @@ entries:
   items: [gUnk_090A3E20]
   us:
     address: 0x09EEAFF0
-  jp:
-    address: 0x09EC23E4
-    items: [gUnk_090A4168]
   eu:
     address: 0x09F77060
 - name: gUnk_09EEAFF4
@@ -129,6 +126,8 @@ entries:
   items: [gUnk_090A4168]
   us:
     address: 0x09EEAFF8
+  jp:
+    address: 0x09EC23E4
   eu:
     address: 0x09F77068
 - name: gUnk_09EEAFFC

@@ -93,8 +93,8 @@ void ContinueSora_0(ContinueWork* work) {
     SetObjTileSource(work->tiles2, gSoraContinueTiles);
     AnimInit(&work->anim2, gSoraContinueAnims, gSoraContinueFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-    work->unk_58 = -2048;
-    work->unk_5C = 0xA000;
+    work->x2 = -2048;
+    work->y2 = 0xA000;
     work->steps = 16;
 
 #ifdef VERSION_EU
@@ -163,8 +163,8 @@ void ContinueRiku_0(ContinueWork* work) {
     SetObjTileSource(work->tiles2, gRikuContinueTiles);
     AnimInit(&work->anim2, gRikuContinueAnims, gRikuContinueFrames);
     AnimStart(&work->anim2, 0, ANIM_FLAG_LOOP);
-    work->unk_58 = -2048;
-    work->unk_5C = 0xA000;
+    work->x2 = -2048;
+    work->y2 = 0xA000;
     work->steps = 16;
 
 #ifdef VERSION_EU
@@ -214,8 +214,8 @@ static s32 Continue_1(ContinueWork* work) {
 
     if (work->state == 1) {
         if (work->steps > 0) {
-            ApproachValue(&work->unk_58, 0, work->steps);
-            ApproachValue(&work->unk_5C, 0x9800, work->steps);
+            ApproachValue(&work->x2, 0, work->steps);
+            ApproachValue(&work->y2, 0x9800, work->steps);
             work->steps--;
         }
 
@@ -257,8 +257,8 @@ static s32 Continue_1(ContinueWork* work) {
 
     if (work->state == 2) {
         if (work->steps > 0) {
-            ApproachValue(&work->unk_58, -2048, work->steps);
-            ApproachValue(&work->unk_5C, 0xA000, work->steps);
+            ApproachValue(&work->x2, -2048, work->steps);
+            ApproachValue(&work->y2, 0xA000, work->steps);
             work->steps--;
         }
 

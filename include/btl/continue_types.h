@@ -19,8 +19,8 @@ typedef struct ContinueWork {
     AnimState anim2;
     s32 x;
     s32 y;
-    s32 unk_58;
-    s32 unk_5C;
+    s32 x2;
+    s32 y2;
     s32 cursor;
     u8 unk_64;
     u16 blendAlpha;

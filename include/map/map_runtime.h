@@ -67,7 +67,7 @@ u8 GetFldPosClimbDir(FldPos* p);
 s32 FieldFloorAt(s32 x, s32 y, s32 z);
 
 #ifdef VERSION_EU
-extern const LocalizedText gMapWorldNameEu_088926FC;
+extern const LocalizedText gWorldNameCastleOblivionHallByLanguage;
 #endif
 
 #endif

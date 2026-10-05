@@ -1549,10 +1549,10 @@ JiminyTextChar* gJiminyRootNames[3] = {
 
 JiminyTextChar* gJiminyEntry01Names[17] = {
     gUnk_0815B502, gUnk_0815B51E, gUnk_0815B53C, gUnk_0815B55C,
-    gUnk_0815A518, gUnk_0815A534, gUnk_0815A54A, gUnk_0815A56C,
-    gUnk_0815A57C, gUnk_0815A59A, gUnk_0815A5AA, gUnk_0815A5BE,
-    gUnk_0815A5D4, gUnk_0815A5F2, gUnk_0815A60E, gUnk_0815A62A,
-    gUnk_0815A64A,
+    gWorldNameTraverseTown, gWorldNameWonderland, gWorldNameOlympusColiseum, gWorldNameAgrabah,
+    gWorldNameHalloweenTown, gWorldNameMonstro, gWorldNameAtlantica, gWorldNameNeverLand,
+    gWorldNameHollowBastion, gWorldName100AcreWood, gWorldNameTwilightTown, gWorldNameDestinyIslands,
+    gWorldNameCastleOblivion,
 };
 
 JiminyTextChar* gJiminyEntry02Names[7] = {
@@ -1565,54 +1565,54 @@ JiminyTextChar* gJiminyEntry03Names[3] = {
 };
 
 JiminyTextChar* gJiminyEntry04Names[17] = {
-    gUnk_0815A66A, gUnk_0815A682, gUnk_0815A69C, gUnk_0815A6AE,
-    gUnk_0815A6C6, gUnk_0815A6DC, gUnk_0815A6F6, gUnk_0815A70E,
-    gUnk_0815A72A, gUnk_0815A73A, gUnk_0815A74E, gUnk_0815A762,
-    gUnk_0815A77A, gUnk_0815A790, gUnk_0815A7BE, gUnk_0815A7D8,
-    gUnk_0815A7A2,
+    gCardNameKingdomKey, gCardNameThreeWishes, gCardNameCrabclaw, gCardNamePumpkinhead,
+    gCardNameFairyHarp, gCardNameWishingStar, gCardNameSpellbinder, gCardNameMetalChocobo,
+    gCardNameOlympia, gCardNameLionheart, gCardNameLadyLuck, gCardNameDivineRose,
+    gCardNameOathkeeper, gCardNameOblivion, gCardNameDiamondDust, gCardNameOneWingedAngel,
+    gCardNameUltimaWeapon,
 };
 
 JiminyTextChar* gJiminyEntry05Names[14] = {
-    gUnk_0815A7FA, gUnk_0815A804, gUnk_0815A816, gUnk_0815A826,
-    gUnk_0815A830, gUnk_0815A840, gUnk_0815A84A, gUnk_0815A854,
-    gUnk_0815A878, gUnk_0815A86C, gUnk_0815A89C, gUnk_0815A860,
-    gUnk_0815A884, gUnk_0815A8A8,
+    gCardNameFire, gCardNameBlizzard, gCardNameThunder, gCardNameCure,
+    gCardNameGravity, gCardNameStop, gCardNameAero, gCardNameSimba,
+    gCardNameDumbo, gCardNameBambi, gCardNameMushu, gCardNameGenie,
+    gCardNameTinkerBell, gCardNameCloud,
 };
 
 JiminyTextChar* gJiminyEntry06Names[7] = {
-    gUnk_0815A8B4, gUnk_0815A8C2, gUnk_0815A8D6, gUnk_0815A8EE,
-    gUnk_0815A8FA, gUnk_0815A910, gUnk_0815A91E,
+    gCardNamePotion, gCardNameHiPotion, gCardNameMegaPotion, gCardNameEther,
+    gCardNameMegaEther, gCardNameElixir, gCardNameMegalixir,
 };
 
 JiminyTextChar* gJiminyEntry07Names[7] = {
-    gUnk_0815A932, gUnk_0815A94A, gUnk_0815A956, gUnk_0815A972,
-    gUnk_0815A966, gUnk_0815A97C, gUnk_0815A990,
+    gCardNameDonaldDuck, gCardNameGoofy, gCardNameAladdin, gCardNameJack,
+    gCardNameAriel, gCardNamePeterPan, gCardNameBeast,
 };
 
 JiminyTextChar* gJiminyEntry08Names[49] = {
-    gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
-    gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
-    gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
-    gUnk_0815AAD8, gUnk_0815AB36, gUnk_0815AA18, gUnk_0815AB62,
-    gUnk_0815AB50, gUnk_0815AAF4, gUnk_0815AB24, gUnk_0815AA38,
-    gUnk_0815AB0E, gUnk_0815AB78, gUnk_0815AB98, gUnk_0815AB8A,
-    gUnk_0815AAB2, gUnk_0815AC2C, gUnk_0815ABAA, gUnk_0815ABC8,
-    gUnk_0815ABE2, gUnk_0815ABFE, gUnk_0815AC18, gUnk_0815AC40,
-    gUnk_0815ACB0, gUnk_0815AC64, gUnk_0815ACFA, gUnk_0815C178,
-    gUnk_0815AC58, gUnk_0815AC7C, gUnk_0815AC96, gUnk_0815AC88,
-    gUnk_0815ACCC, gUnk_0815ACD6, gUnk_0815B0F2, gUnk_0815AD0C,
-    gUnk_0815AD16, gUnk_0815AD40, gUnk_0815AD4C, gUnk_0815AD9A,
-    gUnk_0815ADAA,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameWhiteMushroom, gEnemyNameBlackFungus,
+    gEnemyNameCreeperPlant, gEnemyNameTornadoStep, gEnemyNameCrescendo, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside, gEnemyNameCardSoldier,
+    gEnemyNameHades, gEnemyNameJafar, gEnemyNameOogieBoogie, gEnemyNameUrsula,
+    gEnemyNameHook, gEnemyNameDragonMaleficent, gEnemyNameRiku, gEnemyNameAxel,
+    gEnemyNameLarxene, gEnemyNameVexen, gEnemyNameMarluxia, gEnemyNameLexaeus,
+    gEnemyNameAnsem,
 };
 
 JiminyTextChar* gJiminyEntry09Names[26] = {
-    gUnk_0815ADF4, gUnk_0815ADD2, gUnk_0815AE9E, gUnk_0815AEBE,
-    gUnk_0815AE56, gUnk_0815AE34, gUnk_0815AF8E, gUnk_0815AFA8,
-    gUnk_0815AFBE, gUnk_0815B02E, gUnk_0815AFEC, gUnk_0815B00E,
-    gUnk_0815AF70, gUnk_0815AF52, gUnk_0815AF14, gUnk_0815AF38,
-    gUnk_0815AEE2, gUnk_0815AE18, gUnk_0815AEFA, gUnk_0815AE7A,
-    gUnk_0815B04C, gUnk_0815AFD4, gUnk_0815B06C, gUnk_0815B090,
-    gUnk_0815B0B0, gUnk_0815B0CA,
+    gRoomNameTranquilDarkness, gRoomNameTeemingDarkness, gRoomNameFeebleDarkness, gRoomNameAlmightyDarkness,
+    gRoomNameSleepingDarkness, gRoomNameLoomingDarkness, gRoomNamePremiumRoom, gRoomNameWhiteRoom,
+    gRoomNameBlackRoom, gRoomNameMartialWaking, gRoomNameSorcerousWaking, gRoomNameAlchemicWaking,
+    gRoomNameMeetingGround, gRoomNameStagnantSpace, gRoomNameStrongInitiative, gRoomNameLastingDaze,
+    gRoomNameCalmBounty, gRoomNameGuardedTrove, gRoomNameFalseBounty, gRoomNameMomentsReprieve,
+    gRoomNameMinglingWorlds, gRoomNameMoogleRoom, gRoomNameKeyOfBeginnings, gRoomNameKeyOfGuidance,
+    gRoomNameKeyToTruth, gRoomNameKeyToRewards,
 };
 
 JiminyTextChar* gJiminyEntry10Names[1] = {
@@ -1620,38 +1620,38 @@ JiminyTextChar* gJiminyEntry10Names[1] = {
 };
 
 JiminyTextChar* gJiminyEntry11Names[25] = {
-    gUnk_0815B0E8, gUnk_0815A932, gUnk_0815A94A, gUnk_0815B434,
-    gUnk_0815B0F2, gUnk_0815B0FC, gUnk_0815A854, gUnk_0815A878,
-    gUnk_0815A86C, gUnk_0815A89C, gUnk_0815B190, gUnk_0815B14E,
-    gUnk_0815B116, gUnk_0815B124, gUnk_0815B188, gUnk_0815A8A8,
-    gUnk_0815B17C, gUnk_0815B132, gUnk_0815B16C, gUnk_0815B108,
-    gUnk_0815C0D0, gUnk_0815AD0C, gUnk_0815AD16, gUnk_0815AD40,
-    gUnk_0815AD4C,
+    gCharacterNameSora, gCardNameDonaldDuck, gCardNameGoofy, gCharacterNameJiminyCricket,
+    gEnemyNameRiku, gCharacterNameKairi, gCardNameSimba, gCardNameDumbo,
+    gCardNameBambi, gCardNameMushu, gCharacterNameMoogles, gCharacterNameLeon,
+    gCharacterNameYuffie, gCharacterNameAerith, gCharacterNameCid, gCardNameCloud,
+    gCharacterNameTidus, gCharacterNameWakka, gCharacterNameSelphie, gCharacterNameNamine,
+    gCharacterNameRikuReplica, gEnemyNameAxel, gEnemyNameLarxene, gEnemyNameVexen,
+    gEnemyNameMarluxia,
 };
 
 JiminyTextChar* gJiminyEntry12Names[40] = {
-    gUnk_0815B296, gUnk_0815B2A2, gUnk_0815B2CA, gUnk_0815AD5E,
-    gUnk_0815AD7C, gUnk_0815B2EC, gUnk_0815B26C, gUnk_0815B27E,
-    gUnk_0815AC58, gUnk_0815A956, gUnk_0815A860, gUnk_0815B1E4,
-    gUnk_0815B1F4, gUnk_0815AC7C, gUnk_0815B1FE, gUnk_0815A972,
-    gUnk_0815B21A, gUnk_0815B226, gUnk_0815AC96, gUnk_0815B246,
-    gUnk_0815B25A, gUnk_0815A966, gUnk_0815B30E, gUnk_0815B322,
-    gUnk_0815AC88, gUnk_0815A97C, gUnk_0815A884, gUnk_0815B334,
-    gUnk_0815B340, gUnk_0815A990, gUnk_0815B34A, gUnk_0815B356,
-    gUnk_0815ACD6, gUnk_0815B36C, gUnk_0815B38C, gUnk_0815B39A,
-    gUnk_0815B3A2, gUnk_0815B3AA, gUnk_0815B3B8, gUnk_0815B3C6,
+    gCharacterNameAlice, gCharacterNameQueenOfHearts, gCharacterNameWhiteRabbit, gCharacterNameCardOfHearts,
+    gCharacterNameCardOfSpades, gCharacterNameCheshireCat, gCharacterNameHercules, gCharacterNamePhiloctetes,
+    gEnemyNameHades, gCardNameAladdin, gCardNameGenie, gCharacterNameJasmine,
+    gCharacterNameIago, gEnemyNameJafar, gCharacterNameJafarGenie, gCardNameJack,
+    gCharacterNameSally, gCharacterNameDrFinkelstein, gEnemyNameOogieBoogie, gCharacterNamePinocchio,
+    gCharacterNameGeppetto, gCardNameAriel, gCharacterNameSebastian, gCharacterNameFlounder,
+    gEnemyNameUrsula, gCardNamePeterPan, gCardNameTinkerBell, gCharacterNameWendy,
+    gCharacterNameHook, gCardNameBeast, gCharacterNameBelle, gCharacterNameMaleficent,
+    gEnemyNameDragonMaleficent, gCharacterNameWinnieThePooh, gCharacterNamePiglet, gCharacterNameOwl,
+    gCharacterNameRoo, gCharacterNameEeyore, gCharacterNameTigger, gCharacterNameRabbit,
 };
 
 JiminyTextChar* gJiminyEntry13Names[35] = {
-    gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
-    gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
-    gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
-    gUnk_0815AAD8, gUnk_0815AB36, gUnk_0815AA18, gUnk_0815AB62,
-    gUnk_0815AB50, gUnk_0815AAF4, gUnk_0815AB24, gUnk_0815AA38,
-    gUnk_0815AB0E, gUnk_0815AB78, gUnk_0815AB98, gUnk_0815AB8A,
-    gUnk_0815AAB2, gUnk_0815AC2C, gUnk_0815ABAA, gUnk_0815ABC8,
-    gUnk_0815ABE2, gUnk_0815ABFE, gUnk_0815AC18, gUnk_0815AC40,
-    gUnk_0815ACB0, gUnk_0815AC64, gUnk_0815ACFA,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameWhiteMushroom, gEnemyNameBlackFungus,
+    gEnemyNameCreeperPlant, gEnemyNameTornadoStep, gEnemyNameCrescendo, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside,
 };
 
 JiminyTextChar* gJiminyEntry15Names[6] = {
@@ -1660,36 +1660,36 @@ JiminyTextChar* gJiminyEntry15Names[6] = {
 };
 
 JiminyTextChar* gJiminyEntry18Names[14] = {
-    gUnk_0815B0F2, gUnk_0815C360, gUnk_0815B0E8, gUnk_0815B0FC,
-    gUnk_0815B108, gUnk_0815C0D0, gUnk_0815ADAA, gUnk_0815AD40,
-    gUnk_0815AD9A, gUnk_0815C010, gUnk_0815AD0C, gUnk_0815AD4C,
-    gUnk_0815AD16, gUnk_0815C0EA,
+    gEnemyNameRiku, gCardNameKing, gCharacterNameSora, gCharacterNameKairi,
+    gCharacterNameNamine, gCharacterNameRikuReplica, gEnemyNameAnsem, gEnemyNameVexen,
+    gEnemyNameLexaeus, gCharacterNameZexion, gEnemyNameAxel, gEnemyNameMarluxia,
+    gEnemyNameLarxene, gCharacterNameDiZ,
 };
 
 JiminyTextChar* gJiminyEntry19Names[6] = {
-    gUnk_0815B356, gUnk_0815B1FE, gUnk_0815AC88, gUnk_0815AC58,
-    gUnk_0815AC96, gUnk_0815B340,
+    gCharacterNameMaleficent, gCharacterNameJafarGenie, gEnemyNameUrsula, gEnemyNameHades,
+    gEnemyNameOogieBoogie, gCharacterNameHook,
 };
 
 JiminyTextChar* gJiminyEntry20Names[33] = {
-    gUnk_0815A9A4, gUnk_0815A9B2, gUnk_0815A9EC, gUnk_0815AA46,
-    gUnk_0815AA60, gUnk_0815AA7C, gUnk_0815AA96, gUnk_0815A9C2,
-    gUnk_0815A9D6, gUnk_0815AAC0, gUnk_0815AA2A, gUnk_0815AA02,
-    gUnk_0815AAD8, gUnk_0815AB36, gUnk_0815AA18, gUnk_0815AB62,
-    gUnk_0815AB50, gUnk_0815AAF4, gUnk_0815AB24, gUnk_0815AA38,
-    gUnk_0815AB0E, gUnk_0815AB78, gUnk_0815AB98, gUnk_0815AB8A,
-    gUnk_0815AAB2, gUnk_0815AC2C, gUnk_0815ABE2, gUnk_0815ABFE,
-    gUnk_0815AC18, gUnk_0815AC40, gUnk_0815ACB0, gUnk_0815AC64,
-    gUnk_0815ACFA,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameCreeperPlant, gEnemyNameTornadoStep,
+    gEnemyNameCrescendo, gEnemyNameGuardArmor, gEnemyNameParasiteCage, gEnemyNameTrickmaster,
+    gEnemyNameDarkside,
 };
 
 JiminyTextChar* gJiminyEntry16Names[22] = {
-    gUnk_0815C372, gUnk_0815C360, gUnk_0815A9A4, gUnk_0815A9EC,
-    gUnk_0815A9C2, gUnk_0815AA02, gUnk_0815AB36, gUnk_0815AA18,
-    gUnk_0815AAF4, gUnk_0815AA38, gUnk_0815AB98, gUnk_0815AC40,
-    gUnk_0815ACB0, gUnk_0815AC64, gUnk_0815ACFA, gUnk_0815AC58,
-    gUnk_0815AC7C, gUnk_0815AC96, gUnk_0815AC88, gUnk_0815ACCC,
-    gUnk_0815ACD6, gUnk_0815AD9A,
+    gCardNameSoulEater, gCardNameKing, gEnemyNameShadow, gEnemyNameLargeBody,
+    gEnemyNamePowerwild, gEnemyNameFatBandit, gEnemyNameSearchGhost, gEnemyNameSeaNeon,
+    gEnemyNameWightKnight, gEnemyNamePirate, gEnemyNameDefender, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside, gEnemyNameHades,
+    gEnemyNameJafar, gEnemyNameOogieBoogie, gEnemyNameUrsula, gEnemyNameHook,
+    gEnemyNameDragonMaleficent, gEnemyNameLexaeus,
 };
 
 const JiminyTextChar* gJiminyHiddenTexts[13] = {
@@ -3115,10 +3115,10 @@ JiminyTextChar* gJiminyRootNames[3] = {
 
 JiminyTextChar* gJiminyEntry01Names[17] = {
     gUnkJp_0814F25C, gUnkJp_0814F270, gUnkJp_0814F284, gUnkJp_0814F298,
-    gUnkJp_0814E57C, gUnkJp_0814E59C, gUnkJp_0814E5CC, gUnkJp_0814E590,
-    gUnkJp_0814E5B8, gUnkJp_0814E5AC, gUnkJp_0814E5E4, gUnkJp_0814E5F4,
-    gUnkJp_0814E618, gUnkJp_0814E604, gUnkJp_0814E644, gUnkJp_0814E62C,
-    gUnkJp_0814E658,
+    gWorldNameTraverseTown, gWorldNameWonderland, gWorldNameOlympusColiseum, gWorldNameAgrabah,
+    gWorldNameHalloweenTown, gWorldNameMonstro, gWorldNameAtlantica, gWorldNameNeverLand,
+    gWorldNameHollowBastion, gWorldName100AcreWood, gWorldNameTwilightTown, gWorldNameDestinyIslands,
+    gWorldNameCastleOblivion,
 };
 
 JiminyTextChar* gJiminyEntry02Names[7] = {
@@ -3131,54 +3131,54 @@ JiminyTextChar* gJiminyEntry03Names[3] = {
 };
 
 JiminyTextChar* gJiminyEntry04Names[17] = {
-    gUnkJp_0814E664, gUnkJp_0814E678, gUnkJp_0814E68C, gUnkJp_0814E6A0,
-    gUnkJp_0814E6B4, gUnkJp_0814E6C8, gUnkJp_0814E6DC, gUnkJp_0814E6F0,
-    gUnkJp_0814E700, gUnkJp_0814E714, gUnkJp_0814E724, gUnkJp_0814E734,
-    gUnkJp_0814E748, gUnkJp_0814E758, gUnkJp_0814E780, gUnkJp_0814E794,
-    gUnkJp_0814E76C,
+    gCardNameKingdomKey, gCardNameThreeWishes, gCardNameCrabclaw, gCardNamePumpkinhead,
+    gCardNameFairyHarp, gCardNameWishingStar, gCardNameSpellbinder, gCardNameMetalChocobo,
+    gCardNameOlympia, gCardNameLionheart, gCardNameLadyLuck, gCardNameDivineRose,
+    gCardNameOathkeeper, gCardNameOblivion, gCardNameDiamondDust, gCardNameOneWingedAngel,
+    gCardNameUltimaWeapon,
 };
 
 JiminyTextChar* gJiminyEntry05Names[14] = {
-    gUnkJp_0814E7A0, gUnkJp_0814E7AC, gUnkJp_0814E7B8, gUnkJp_0814E7C4,
-    gUnkJp_0814E7CC, gUnkJp_0814E7D8, gUnkJp_0814E7E4, gUnkJp_0814E7EC,
-    gUnkJp_0814E814, gUnkJp_0814E80C, gUnkJp_0814E828, gUnkJp_0814E7F4,
-    gUnkJp_0814E81C, gUnkJp_0814E834,
+    gCardNameFire, gCardNameBlizzard, gCardNameThunder, gCardNameCure,
+    gCardNameGravity, gCardNameStop, gCardNameAero, gCardNameSimba,
+    gCardNameDumbo, gCardNameBambi, gCardNameMushu, gCardNameGenie,
+    gCardNameTinkerBell, gCardNameCloud,
 };
 
 JiminyTextChar* gJiminyEntry06Names[7] = {
-    gUnkJp_0814E840, gUnkJp_0814E84C, gUnkJp_0814E85C, gUnkJp_0814E86C,
-    gUnkJp_0814E878, gUnkJp_0814E888, gUnkJp_0814E894,
+    gCardNamePotion, gCardNameHiPotion, gCardNameMegaPotion, gCardNameEther,
+    gCardNameMegaEther, gCardNameElixir, gCardNameMegalixir,
 };
 
 JiminyTextChar* gJiminyEntry07Names[7] = {
-    gUnkJp_0814E8A8, gUnkJp_0814E8B8, gUnkJp_0814E8DC, gUnkJp_0814E8F4,
-    gUnkJp_0814E8E8, gUnkJp_0814E900, gUnkJp_0814E910,
+    gCardNameDonaldDuck, gCardNameGoofy, gCardNameAladdin, gCardNameJack,
+    gCardNameAriel, gCardNamePeterPan, gCardNameBeast,
 };
 
 JiminyTextChar* gJiminyEntry08Names[49] = {
-    gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
-    gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
-    gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
-    gUnkJp_0814EAE0, gUnkJp_0814EB20, gUnkJp_0814EA50, gUnkJp_0814EB40,
-    gUnkJp_0814EB30, gUnkJp_0814EAF4, gUnkJp_0814EB14, gUnkJp_0814EA6C,
-    gUnkJp_0814EB04, gUnkJp_0814EB54, gUnkJp_0814EB70, gUnkJp_0814EB64,
-    gUnkJp_0814EAC4, gUnkJp_0814EBE0, gUnkJp_0814EB80, gUnkJp_0814EB98,
-    gUnkJp_0814EBAC, gUnkJp_0814EBC0, gUnkJp_0814EBD4, gUnkJp_0814EBF0,
-    gUnkJp_0814EC3C, gUnkJp_0814EC08, gUnkJp_0814EC70, gUnkJp_0814FB0C,
-    gUnkJp_0814EC00, gUnkJp_0814EC1C, gUnkJp_0814EC34, gUnkJp_0814EC28,
-    gUnkJp_0814EC50, gUnkJp_0814EC58, gUnkJp_0814E924, gUnkJp_0814E9B8,
-    gUnkJp_0814E9AC, gUnkJp_0814E9C4, gUnkJp_0814E9D0, gUnkJp_0814EE88,
-    gUnkJp_0814EE94,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameWhiteMushroom, gEnemyNameBlackFungus,
+    gEnemyNameCreeperPlant, gEnemyNameTornadoStep, gEnemyNameCrescendo, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside, gEnemyNameCardSoldier,
+    gEnemyNameHades, gEnemyNameJafar, gEnemyNameOogieBoogie, gEnemyNameUrsula,
+    gEnemyNameHook, gEnemyNameDragonMaleficent, gEnemyNameRiku, gEnemyNameAxel,
+    gEnemyNameLarxene, gEnemyNameVexen, gEnemyNameMarluxia, gEnemyNameLexaeus,
+    gEnemyNameAnsem,
 };
 
 JiminyTextChar* gJiminyEntry09Names[26] = {
-    gUnkJp_0814F364, gUnkJp_0814F358, gUnkJp_0814F3A8, gUnkJp_0814F3B8,
-    gUnkJp_0814F390, gUnkJp_0814F380, gUnkJp_0814F484, gUnkJp_0814F494,
-    gUnkJp_0814F4A4, gUnkJp_0814F408, gUnkJp_0814F3F8, gUnkJp_0814F418,
-    gUnkJp_0814F428, gUnkJp_0814F474, gUnkJp_0814F448, gUnkJp_0814F460,
-    gUnkJp_0814F3C8, gUnkJp_0814F374, gUnkJp_0814F3D8, gUnkJp_0814F39C,
-    gUnkJp_0814F438, gUnkJp_0814F3E8, gUnkJp_0814F4B4, gUnkJp_0814F4CC,
-    gUnkJp_0814F4E4, gUnkJp_0814F4F8,
+    gRoomNameTranquilDarkness, gRoomNameTeemingDarkness, gRoomNameFeebleDarkness, gRoomNameAlmightyDarkness,
+    gRoomNameSleepingDarkness, gRoomNameLoomingDarkness, gRoomNamePremiumRoom, gRoomNameWhiteRoom,
+    gRoomNameBlackRoom, gRoomNameMartialWaking, gRoomNameSorcerousWaking, gRoomNameAlchemicWaking,
+    gRoomNameMeetingGround, gRoomNameStagnantSpace, gRoomNameStrongInitiative, gRoomNameLastingDaze,
+    gRoomNameCalmBounty, gRoomNameGuardedTrove, gRoomNameFalseBounty, gRoomNameMomentsReprieve,
+    gRoomNameMinglingWorlds, gRoomNameMoogleRoom, gRoomNameKeyOfBeginnings, gRoomNameKeyOfGuidance,
+    gRoomNameKeyToTruth, gRoomNameKeyToRewards,
 };
 
 JiminyTextChar* gJiminyEntry10Names[1] = {
@@ -3186,38 +3186,38 @@ JiminyTextChar* gJiminyEntry10Names[1] = {
 };
 
 JiminyTextChar* gJiminyEntry11Names[25] = {
-    gUnkJp_0814E91C, gUnkJp_0814E8A8, gUnkJp_0814E8B8, gUnkJp_0814E8C4,
-    gUnkJp_0814E924, gUnkJp_0814E92C, gUnkJp_0814E7EC, gUnkJp_0814E814,
-    gUnkJp_0814E80C, gUnkJp_0814E828, gUnkJp_0814E998, gUnkJp_0814E964,
-    gUnkJp_0814E93C, gUnkJp_0814E944, gUnkJp_0814E990, gUnkJp_0814E834,
-    gUnkJp_0814E984, gUnkJp_0814E950, gUnkJp_0814E978, gUnkJp_0814E934,
-    gUnkJp_0814FA90, gUnkJp_0814E9B8, gUnkJp_0814E9AC, gUnkJp_0814E9C4,
-    gUnkJp_0814E9D0,
+    gCharacterNameSora, gCardNameDonaldDuck, gCardNameGoofy, gCharacterNameJiminyCricket,
+    gEnemyNameRiku, gCharacterNameKairi, gCardNameSimba, gCardNameDumbo,
+    gCardNameBambi, gCardNameMushu, gCharacterNameMoogles, gCharacterNameLeon,
+    gCharacterNameYuffie, gCharacterNameAerith, gCharacterNameCid, gCardNameCloud,
+    gCharacterNameTidus, gCharacterNameWakka, gCharacterNameSelphie, gCharacterNameNamine,
+    gCharacterNameRikuReplica, gEnemyNameAxel, gEnemyNameLarxene, gEnemyNameVexen,
+    gEnemyNameMarluxia,
 };
 
 JiminyTextChar* gJiminyEntry12Names[40] = {
-    gUnkJp_0814ED50, gUnkJp_0814ED58, gUnkJp_0814ED68, gUnkJp_0814ED8C,
-    gUnkJp_0814ED74, gUnkJp_0814EDA0, gUnkJp_0814ED3C, gUnkJp_0814ED48,
-    gUnkJp_0814EC00, gUnkJp_0814E8DC, gUnkJp_0814E7F4, gUnkJp_0814ECDC,
-    gUnkJp_0814ECE8, gUnkJp_0814EC1C, gUnkJp_0814ECF4, gUnkJp_0814E8F4,
-    gUnkJp_0814ED00, gUnkJp_0814ED08, gUnkJp_0814EC34, gUnkJp_0814ED1C,
-    gUnkJp_0814ED28, gUnkJp_0814E8E8, gUnkJp_0814EDAC, gUnkJp_0814EDBC,
-    gUnkJp_0814EC28, gUnkJp_0814E900, gUnkJp_0814E81C, gUnkJp_0814EDD4,
-    gUnkJp_0814EDE0, gUnkJp_0814E910, gUnkJp_0814EDE8, gUnkJp_0814EDF0,
-    gUnkJp_0814EC58, gUnkJp_0814EE00, gUnkJp_0814EE08, gUnkJp_0814EE14,
-    gUnkJp_0814EE1C, gUnkJp_0814EE24, gUnkJp_0814EE30, gUnkJp_0814EE3C,
+    gCharacterNameAlice, gCharacterNameQueenOfHearts, gCharacterNameWhiteRabbit, gCharacterNameCardOfHearts,
+    gCharacterNameCardOfSpades, gCharacterNameCheshireCat, gCharacterNameHercules, gCharacterNamePhiloctetes,
+    gEnemyNameHades, gCardNameAladdin, gCardNameGenie, gCharacterNameJasmine,
+    gCharacterNameIago, gEnemyNameJafar, gCharacterNameJafarGenie, gCardNameJack,
+    gCharacterNameSally, gCharacterNameDrFinkelstein, gEnemyNameOogieBoogie, gCharacterNamePinocchio,
+    gCharacterNameGeppetto, gCardNameAriel, gCharacterNameSebastian, gCharacterNameFlounder,
+    gEnemyNameUrsula, gCardNamePeterPan, gCardNameTinkerBell, gCharacterNameWendy,
+    gCharacterNameHook, gCardNameBeast, gCharacterNameBelle, gCharacterNameMaleficent,
+    gEnemyNameDragonMaleficent, gCharacterNameWinnieThePooh, gCharacterNamePiglet, gCharacterNameOwl,
+    gCharacterNameRoo, gCharacterNameEeyore, gCharacterNameTigger, gCharacterNameRabbit,
 };
 
 JiminyTextChar* gJiminyEntry13Names[35] = {
-    gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
-    gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
-    gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
-    gUnkJp_0814EAE0, gUnkJp_0814EB20, gUnkJp_0814EA50, gUnkJp_0814EB40,
-    gUnkJp_0814EB30, gUnkJp_0814EAF4, gUnkJp_0814EB14, gUnkJp_0814EA6C,
-    gUnkJp_0814EB04, gUnkJp_0814EB54, gUnkJp_0814EB70, gUnkJp_0814EB64,
-    gUnkJp_0814EAC4, gUnkJp_0814EBE0, gUnkJp_0814EB80, gUnkJp_0814EB98,
-    gUnkJp_0814EBAC, gUnkJp_0814EBC0, gUnkJp_0814EBD4, gUnkJp_0814EBF0,
-    gUnkJp_0814EC3C, gUnkJp_0814EC08, gUnkJp_0814EC70,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameWhiteMushroom, gEnemyNameBlackFungus,
+    gEnemyNameCreeperPlant, gEnemyNameTornadoStep, gEnemyNameCrescendo, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside,
 };
 
 JiminyTextChar* gJiminyEntry15Names[6] = {
@@ -3226,36 +3226,36 @@ JiminyTextChar* gJiminyEntry15Names[6] = {
 };
 
 JiminyTextChar* gJiminyEntry18Names[14] = {
-    gUnkJp_0814E924, gUnkJp_0814EEA0, gUnkJp_0814E91C, gUnkJp_0814E92C,
-    gUnkJp_0814E934, gUnkJp_0814FA90, gUnkJp_0814EE94, gUnkJp_0814E9C4,
-    gUnkJp_0814EE88, gUnkJp_0814FA0C, gUnkJp_0814E9B8, gUnkJp_0814E9D0,
-    gUnkJp_0814E9AC, gUnkJp_0814FAA0,
+    gEnemyNameRiku, gCardNameKing, gCharacterNameSora, gCharacterNameKairi,
+    gCharacterNameNamine, gCharacterNameRikuReplica, gEnemyNameAnsem, gEnemyNameVexen,
+    gEnemyNameLexaeus, gCharacterNameZexion, gEnemyNameAxel, gEnemyNameMarluxia,
+    gEnemyNameLarxene, gCharacterNameDiZ,
 };
 
 JiminyTextChar* gJiminyEntry19Names[6] = {
-    gUnkJp_0814EDF0, gUnkJp_0814ECF4, gUnkJp_0814EC28, gUnkJp_0814EC00,
-    gUnkJp_0814EC34, gUnkJp_0814EDE0,
+    gCharacterNameMaleficent, gCharacterNameJafarGenie, gEnemyNameUrsula, gEnemyNameHades,
+    gEnemyNameOogieBoogie, gCharacterNameHook,
 };
 
 JiminyTextChar* gJiminyEntry20Names[33] = {
-    gUnkJp_0814E9EC, gUnkJp_0814E9F8, gUnkJp_0814EA28, gUnkJp_0814EA78,
-    gUnkJp_0814EA8C, gUnkJp_0814EAA0, gUnkJp_0814EAB0, gUnkJp_0814EA04,
-    gUnkJp_0814EA14, gUnkJp_0814EAD0, gUnkJp_0814EA5C, gUnkJp_0814EA38,
-    gUnkJp_0814EAE0, gUnkJp_0814EB20, gUnkJp_0814EA50, gUnkJp_0814EB40,
-    gUnkJp_0814EB30, gUnkJp_0814EAF4, gUnkJp_0814EB14, gUnkJp_0814EA6C,
-    gUnkJp_0814EB04, gUnkJp_0814EB54, gUnkJp_0814EB70, gUnkJp_0814EB64,
-    gUnkJp_0814EAC4, gUnkJp_0814EBE0, gUnkJp_0814EBAC, gUnkJp_0814EBC0,
-    gUnkJp_0814EBD4, gUnkJp_0814EBF0, gUnkJp_0814EC3C, gUnkJp_0814EC08,
-    gUnkJp_0814EC70,
+    gEnemyNameShadow, gEnemyNameSoldier, gEnemyNameLargeBody, gEnemyNameRedNocturne,
+    gEnemyNameBlueRhapsody, gEnemyNameYellowOpera, gEnemyNameGreenRequiem, gEnemyNamePowerwild,
+    gEnemyNameBouncywild, gEnemyNameAirSoldier, gEnemyNameBandit, gEnemyNameFatBandit,
+    gEnemyNameBarrelSpider, gEnemyNameSearchGhost, gEnemyNameSeaNeon, gEnemyNameScrewdiver,
+    gEnemyNameAquatank, gEnemyNameWightKnight, gEnemyNameGargoyle, gEnemyNamePirate,
+    gEnemyNameAirPirate, gEnemyNameDarkball, gEnemyNameDefender, gEnemyNameWyvern,
+    gEnemyNameWizard, gEnemyNameNeoshadow, gEnemyNameCreeperPlant, gEnemyNameTornadoStep,
+    gEnemyNameCrescendo, gEnemyNameGuardArmor, gEnemyNameParasiteCage, gEnemyNameTrickmaster,
+    gEnemyNameDarkside,
 };
 
 JiminyTextChar* gJiminyEntry16Names[22] = {
-    gUnkJp_0814EEA8, gUnkJp_0814EEA0, gUnkJp_0814E9EC, gUnkJp_0814EA28,
-    gUnkJp_0814EA04, gUnkJp_0814EA38, gUnkJp_0814EB20, gUnkJp_0814EA50,
-    gUnkJp_0814EAF4, gUnkJp_0814EA6C, gUnkJp_0814EB70, gUnkJp_0814EBF0,
-    gUnkJp_0814EC3C, gUnkJp_0814EC08, gUnkJp_0814EC70, gUnkJp_0814EC00,
-    gUnkJp_0814EC1C, gUnkJp_0814EC34, gUnkJp_0814EC28, gUnkJp_0814EC50,
-    gUnkJp_0814EC58, gUnkJp_0814EE88,
+    gCardNameSoulEater, gCardNameKing, gEnemyNameShadow, gEnemyNameLargeBody,
+    gEnemyNamePowerwild, gEnemyNameFatBandit, gEnemyNameSearchGhost, gEnemyNameSeaNeon,
+    gEnemyNameWightKnight, gEnemyNamePirate, gEnemyNameDefender, gEnemyNameGuardArmor,
+    gEnemyNameParasiteCage, gEnemyNameTrickmaster, gEnemyNameDarkside, gEnemyNameHades,
+    gEnemyNameJafar, gEnemyNameOogieBoogie, gEnemyNameUrsula, gEnemyNameHook,
+    gEnemyNameDragonMaleficent, gEnemyNameLexaeus,
 };
 
 const JiminyTextChar* gJiminyHiddenTexts[13] = {
@@ -11220,10 +11220,10 @@ const JiminyLocalizedName* gJiminyRootNames[3] = {
 
 const JiminyLocalizedName* gJiminyEntry01Names[17] = {
     &gUnkEu_08892450, &gUnkEu_088924BC, &gUnkEu_0889252C, &gUnkEu_08892598,
-    &gUnkEu_0888E364, &gUnkEu_08895F4C, &gUnkEu_0888E530, &gUnkEu_0888E3A0,
-    &gUnkEu_0888E4C0, &gUnkEu_0888E450, &gUnkEu_0888E578, &gUnkEu_0888E5DC,
-    &gUnkEu_0888E6BC, &gUnkEu_08895FC0, &gUnkEu_0888E78C, &gUnkEu_0888E72C,
-    &gUnkEu_08896038,
+    &gWorldNameTraverseTownByLanguage, &gJiminyStoryWonderlandNameByLanguage, &gWorldNameOlympusColiseumByLanguage, &gWorldNameAgrabahByLanguage,
+    &gWorldNameHalloweenTownByLanguage, &gWorldNameMonstroByLanguage, &gWorldNameAtlanticaByLanguage, &gWorldNameNeverLandByLanguage,
+    &gWorldNameHollowBastionByLanguage, &gJiminyStory100AcreWoodNameByLanguage, &gWorldNameTwilightTownByLanguage, &gWorldNameDestinyIslandsByLanguage,
+    &gJiminyStoryCastleOblivionNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry02Names[7] = {
@@ -11236,54 +11236,54 @@ const JiminyLocalizedName* gJiminyEntry03Names[3] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry04Names[17] = {
-    &gUnkEu_0888E860, &gUnkEu_0888E8B4, &gUnkEu_0888E904, &gUnkEu_0888E964,
-    &gUnkEu_0888E9B8, &gUnkEu_0888EA14, &gUnkEu_0888EA64, &gUnkEu_0888EAC0,
-    &gUnkEu_0888EB00, &gUnkEu_0888EB4C, &gUnkEu_0888EBA4, &gUnkEu_0888EBF0,
-    &gUnkEu_0888EC44, &gUnkEu_0888EC9C, &gUnkEu_0888ED48, &gUnkEu_0888EDAC,
-    &gUnkEu_0888ECE8,
+    &gCardNameKingdomKeyByLanguage, &gCardNameThreeWishesByLanguage, &gCardNameCrabclawByLanguage, &gCardNamePumpkinheadByLanguage,
+    &gCardNameFairyHarpByLanguage, &gCardNameWishingStarByLanguage, &gCardNameSpellbinderByLanguage, &gCardNameMetalChocoboByLanguage,
+    &gCardNameOlympiaByLanguage, &gCardNameLionheartByLanguage, &gCardNameLadyLuckByLanguage, &gCardNameDivineRoseByLanguage,
+    &gCardNameOathkeeperByLanguage, &gCardNameOblivionByLanguage, &gCardNameDiamondDustByLanguage, &gCardNameOneWingedAngelByLanguage,
+    &gCardNameUltimaWeaponByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry05Names[14] = {
-    &gUnkEu_0888EDE0, &gUnkEu_0888EE18, &gUnkEu_0888EE50, &gUnkEu_0888EE80,
-    &gUnkEu_0888EEC0, &gUnkEu_0888EEF0, &gUnkEu_0888EF20, &gUnkEu_0888EF54,
-    &gUnkEu_0888EFF4, &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888EF8C,
-    &gUnkEu_0888F03C, &gUnkEu_0888F0A4,
+    &gCardNameFireByLanguage, &gCardNameBlizzardByLanguage, &gCardNameThunderByLanguage, &gCardNameCureByLanguage,
+    &gCardNameGravityByLanguage, &gCardNameStopByLanguage, &gCardNameAeroByLanguage, &gCardNameSimbaByLanguage,
+    &gCardNameDumboByLanguage, &gCardNameBambiByLanguage, &gCardNameMushuByLanguage, &gCardNameGenieByLanguage,
+    &gCardNameTinkerBellByLanguage, &gCardNameCloudByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry06Names[7] = {
-    &gUnkEu_0888F0DC, &gUnkEu_0888F128, &gUnkEu_0888F178, &gUnkEu_0888F1AC,
-    &gUnkEu_0888F1F4, &gUnkEu_0888F22C, &gUnkEu_0888F278,
+    &gCardNamePotionByLanguage, &gCardNameHiPotionByLanguage, &gCardNameMegaPotionByLanguage, &gCardNameEtherByLanguage,
+    &gCardNameMegaEtherByLanguage, &gCardNameElixirByLanguage, &gCardNameMegalixirByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry07Names[7] = {
-    &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F394, &gUnkEu_0888F3F8,
-    &gUnkEu_0888F3C8, &gUnkEu_0888F440, &gUnkEu_0888F484,
+    &gCardNameDonaldDuckByLanguage, &gCardNameGoofyByLanguage, &gCardNameAladdinByLanguage, &gCardNameJackByLanguage,
+    &gCardNameArielByLanguage, &gCardNamePeterPanByLanguage, &gCardNameBeastByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry08Names[49] = {
-    &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
-    &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
-    &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
-    &gUnkEu_0888FD24, &gUnkEu_0888FE74, &gUnkEu_0888FA4C, &gUnkEu_0888FF00,
-    &gUnkEu_0888FEBC, &gUnkEu_0888FD80, &gUnkEu_0888FE18, &gUnkEu_0888FACC,
-    &gUnkEu_0888FDD4, &gUnkEu_0888FF50, &gUnkEu_0888FFCC, &gUnkEu_0888FF88,
-    &gUnkEu_0888FC74, &gUnkEu_088901A8, &gUnkEu_08890020, &gUnkEu_08890070,
-    &gUnkEu_088900CC, &gUnkEu_08890118, &gUnkEu_0889015C, &gUnkEu_08890200,
-    &gUnkEu_088903AC, &gUnkEu_08890290, &gUnkEu_08890484, &gUnkEu_088959B8,
-    &gUnkEu_08890230, &gUnkEu_088902C8, &gUnkEu_08890354, &gUnkEu_08890300,
-    &gUnkEu_088903E0, &gUnkEu_0889043C, &gUnkEu_0888F52C, &gUnkEu_0888F770,
-    &gUnkEu_0888F740, &gUnkEu_0888F7A4, &gUnkEu_0888F7E8, &gUnkEu_08890F7C,
-    &gUnkEu_08890FB0,
+    &gEnemyNameShadowByLanguage, &gEnemyNameSoldierByLanguage, &gEnemyNameLargeBodyByLanguage, &gEnemyNameRedNocturneByLanguage,
+    &gEnemyNameBlueRhapsodyByLanguage, &gEnemyNameYellowOperaByLanguage, &gEnemyNameGreenRequiemByLanguage, &gEnemyNamePowerwildByLanguage,
+    &gEnemyNameBouncywildByLanguage, &gEnemyNameAirSoldierByLanguage, &gEnemyNameBanditByLanguage, &gEnemyNameFatBanditByLanguage,
+    &gEnemyNameBarrelSpiderByLanguage, &gEnemyNameSearchGhostByLanguage, &gEnemyNameSeaNeonByLanguage, &gEnemyNameScrewdiverByLanguage,
+    &gEnemyNameAquatankByLanguage, &gEnemyNameWightKnightByLanguage, &gEnemyNameGargoyleByLanguage, &gEnemyNamePirateByLanguage,
+    &gEnemyNameAirPirateByLanguage, &gEnemyNameDarkballByLanguage, &gEnemyNameDefenderByLanguage, &gEnemyNameWyvernByLanguage,
+    &gEnemyNameWizardByLanguage, &gEnemyNameNeoshadowByLanguage, &gEnemyNameWhiteMushroomByLanguage, &gEnemyNameBlackFungusByLanguage,
+    &gEnemyNameCreeperPlantByLanguage, &gEnemyNameTornadoStepByLanguage, &gEnemyNameCrescendoByLanguage, &gEnemyNameGuardArmorByLanguage,
+    &gEnemyNameParasiteCageByLanguage, &gEnemyNameTrickmasterByLanguage, &gEnemyNameDarksideByLanguage, &gEnemyNameCardSoldierByLanguage,
+    &gEnemyNameHadesByLanguage, &gEnemyNameJafarByLanguage, &gEnemyNameOogieBoogieByLanguage, &gEnemyNameUrsulaByLanguage,
+    &gEnemyNameHookByLanguage, &gEnemyNameDragonMaleficentByLanguage, &gEnemyNameRikuByLanguage, &gEnemyNameAxelByLanguage,
+    &gEnemyNameLarxeneByLanguage, &gEnemyNameVexenByLanguage, &gEnemyNameMarluxiaByLanguage, &gEnemyNameLexaeusByLanguage,
+    &gEnemyNameAnsemByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry09Names[26] = {
-    &gUnkEu_088929B0, &gUnkEu_088960A0, &gUnkEu_08892BB0, &gUnkEu_08896168,
-    &gUnkEu_08892AE0, &gUnkEu_08896100, &gUnkEu_088930B0, &gUnkEu_08893108,
-    &gUnkEu_0889315C, &gUnkEu_08892DEC, &gUnkEu_08892D88, &gUnkEu_088961D0,
-    &gUnkEu_0889623C, &gUnkEu_088962FC, &gUnkEu_08892F94, &gUnkEu_08896298,
-    &gUnkEu_08892C74, &gUnkEu_08892A14, &gUnkEu_08892CD0, &gUnkEu_08892B48,
-    &gUnkEu_08892F24, &gUnkEu_08892D20, &gUnkEu_0889636C, &gUnkEu_088963D4,
-    &gUnkEu_08896440, &gUnkEu_088964AC,
+    &gRoomNameTranquilDarknessByLanguage, &gJiminyMapCardTeemingDarknessNameByLanguage, &gRoomNameFeebleDarknessByLanguage, &gJiminyMapCardAlmightyDarknessNameByLanguage,
+    &gRoomNameSleepingDarknessByLanguage, &gJiminyMapCardLoomingDarknessNameByLanguage, &gRoomNamePremiumRoomByLanguage, &gRoomNameWhiteRoomByLanguage,
+    &gRoomNameBlackRoomByLanguage, &gRoomNameMartialWakingByLanguage, &gRoomNameSorcerousWakingByLanguage, &gJiminyMapCardAlchemicWakingNameByLanguage,
+    &gJiminyMapCardMeetingGroundNameByLanguage, &gJiminyMapCardStagnantSpaceNameByLanguage, &gRoomNameStrongInitiativeByLanguage, &gJiminyMapCardLastingDazeNameByLanguage,
+    &gRoomNameCalmBountyByLanguage, &gRoomNameGuardedTroveByLanguage, &gRoomNameFalseBountyByLanguage, &gRoomNameMomentsReprieveByLanguage,
+    &gRoomNameMinglingWorldsByLanguage, &gRoomNameMoogleRoomByLanguage, &gJiminyMapCardKeyOfBeginningsNameByLanguage, &gJiminyMapCardKeyOfGuidanceNameByLanguage,
+    &gJiminyMapCardKeyToTruthNameByLanguage, &gJiminyMapCardKeyToRewardsNameByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry10Names[1] = {
@@ -11291,38 +11291,38 @@ const JiminyLocalizedName* gJiminyEntry10Names[1] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry11Names[25] = {
-    &gUnkEu_0888F4FC, &gUnkEu_0888F2C0, &gUnkEu_0888F2F4, &gUnkEu_0888F358,
-    &gUnkEu_0888F52C, &gUnkEu_0888F560, &gUnkEu_0888EF54, &gUnkEu_0888EFF4,
-    &gUnkEu_0888EFC0, &gUnkEu_0888F070, &gUnkEu_0888F4CC, &gUnkEu_0888F66C,
-    &gUnkEu_0888F5D0, &gUnkEu_0888F608, &gUnkEu_0888F704, &gUnkEu_0888F0A4,
-    &gUnkEu_0888F6DC, &gUnkEu_0888F63C, &gUnkEu_0888F6A8, &gUnkEu_0888F598,
-    &gUnkEu_0889575C, &gUnkEu_0888F770, &gUnkEu_0888F740, &gUnkEu_0888F7A4,
-    &gUnkEu_0888F7E8,
+    &gCharacterNameSoraByLanguage, &gCardNameDonaldDuckByLanguage, &gCardNameGoofyByLanguage, &gCharacterNameJiminyCricketByLanguage,
+    &gEnemyNameRikuByLanguage, &gCharacterNameKairiByLanguage, &gCardNameSimbaByLanguage, &gCardNameDumboByLanguage,
+    &gCardNameBambiByLanguage, &gCardNameMushuByLanguage, &gCharacterNameMooglesByLanguage, &gCharacterNameLeonByLanguage,
+    &gCharacterNameYuffieByLanguage, &gCharacterNameAerithByLanguage, &gCharacterNameCidByLanguage, &gCardNameCloudByLanguage,
+    &gCharacterNameTidusByLanguage, &gCharacterNameWakkaByLanguage, &gCharacterNameSelphieByLanguage, &gCharacterNameNamineByLanguage,
+    &gCharacterNameRikuReplicaByLanguage, &gEnemyNameAxelByLanguage, &gEnemyNameLarxeneByLanguage, &gEnemyNameVexenByLanguage,
+    &gEnemyNameMarluxiaByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry12Names[40] = {
-    &gUnkEu_088908E4, &gUnkEu_08890950, &gUnkEu_088909B4, &gUnkEu_08890A80,
-    &gUnkEu_08890A18, &gUnkEu_08890AE0, &gUnkEu_08890864, &gUnkEu_088908B0,
-    &gUnkEu_08890230, &gUnkEu_0888F394, &gUnkEu_0888EF8C, &gUnkEu_08890678,
-    &gUnkEu_088906A8, &gUnkEu_088902C8, &gUnkEu_08890700, &gUnkEu_0888F3F8,
-    &gUnkEu_08890734, &gUnkEu_0889079C, &gUnkEu_08890354, &gUnkEu_088907E0,
-    &gUnkEu_08890824, &gUnkEu_0888F3C8, &gUnkEu_08890B28, &gUnkEu_08890B68,
-    &gUnkEu_08890300, &gUnkEu_0888F440, &gUnkEu_0888F03C, &gUnkEu_08890B9C,
-    &gUnkEu_08890BD0, &gUnkEu_0888F484, &gUnkEu_08890C04, &gUnkEu_08890C48,
-    &gUnkEu_0889043C, &gUnkEu_08890CA8, &gUnkEu_08890CE0, &gUnkEu_08890D14,
-    &gUnkEu_08890D48, &gUnkEu_08890D80, &gUnkEu_08890DB8, &gUnkEu_08890DF4,
+    &gCharacterNameAliceByLanguage, &gCharacterNameQueenOfHeartsByLanguage, &gCharacterNameWhiteRabbitByLanguage, &gCharacterNameCardOfHeartsByLanguage,
+    &gCharacterNameCardOfSpadesByLanguage, &gCharacterNameCheshireCatByLanguage, &gCharacterNameHerculesByLanguage, &gCharacterNamePhiloctetesByLanguage,
+    &gEnemyNameHadesByLanguage, &gCardNameAladdinByLanguage, &gCardNameGenieByLanguage, &gCharacterNameJasmineByLanguage,
+    &gCharacterNameIagoByLanguage, &gEnemyNameJafarByLanguage, &gCharacterNameJafarGenieByLanguage, &gCardNameJackByLanguage,
+    &gCharacterNameSallyByLanguage, &gCharacterNameDrFinkelsteinByLanguage, &gEnemyNameOogieBoogieByLanguage, &gCharacterNamePinocchioByLanguage,
+    &gCharacterNameGeppettoByLanguage, &gCardNameArielByLanguage, &gCharacterNameSebastianByLanguage, &gCharacterNameFlounderByLanguage,
+    &gEnemyNameUrsulaByLanguage, &gCardNamePeterPanByLanguage, &gCardNameTinkerBellByLanguage, &gCharacterNameWendyByLanguage,
+    &gCharacterNameHookByLanguage, &gCardNameBeastByLanguage, &gCharacterNameBelleByLanguage, &gCharacterNameMaleficentByLanguage,
+    &gEnemyNameDragonMaleficentByLanguage, &gCharacterNameWinnieThePoohByLanguage, &gCharacterNamePigletByLanguage, &gCharacterNameOwlByLanguage,
+    &gCharacterNameRooByLanguage, &gCharacterNameEeyoreByLanguage, &gCharacterNameTiggerByLanguage, &gCharacterNameRabbitByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry13Names[35] = {
-    &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
-    &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
-    &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
-    &gUnkEu_0888FD24, &gUnkEu_0888FE74, &gUnkEu_0888FA4C, &gUnkEu_0888FF00,
-    &gUnkEu_0888FEBC, &gUnkEu_0888FD80, &gUnkEu_0888FE18, &gUnkEu_0888FACC,
-    &gUnkEu_0888FDD4, &gUnkEu_0888FF50, &gUnkEu_0888FFCC, &gUnkEu_0888FF88,
-    &gUnkEu_0888FC74, &gUnkEu_088901A8, &gUnkEu_08890020, &gUnkEu_08890070,
-    &gUnkEu_088900CC, &gUnkEu_08890118, &gUnkEu_0889015C, &gUnkEu_08890200,
-    &gUnkEu_088903AC, &gUnkEu_08890290, &gUnkEu_08890484,
+    &gEnemyNameShadowByLanguage, &gEnemyNameSoldierByLanguage, &gEnemyNameLargeBodyByLanguage, &gEnemyNameRedNocturneByLanguage,
+    &gEnemyNameBlueRhapsodyByLanguage, &gEnemyNameYellowOperaByLanguage, &gEnemyNameGreenRequiemByLanguage, &gEnemyNamePowerwildByLanguage,
+    &gEnemyNameBouncywildByLanguage, &gEnemyNameAirSoldierByLanguage, &gEnemyNameBanditByLanguage, &gEnemyNameFatBanditByLanguage,
+    &gEnemyNameBarrelSpiderByLanguage, &gEnemyNameSearchGhostByLanguage, &gEnemyNameSeaNeonByLanguage, &gEnemyNameScrewdiverByLanguage,
+    &gEnemyNameAquatankByLanguage, &gEnemyNameWightKnightByLanguage, &gEnemyNameGargoyleByLanguage, &gEnemyNamePirateByLanguage,
+    &gEnemyNameAirPirateByLanguage, &gEnemyNameDarkballByLanguage, &gEnemyNameDefenderByLanguage, &gEnemyNameWyvernByLanguage,
+    &gEnemyNameWizardByLanguage, &gEnemyNameNeoshadowByLanguage, &gEnemyNameWhiteMushroomByLanguage, &gEnemyNameBlackFungusByLanguage,
+    &gEnemyNameCreeperPlantByLanguage, &gEnemyNameTornadoStepByLanguage, &gEnemyNameCrescendoByLanguage, &gEnemyNameGuardArmorByLanguage,
+    &gEnemyNameParasiteCageByLanguage, &gEnemyNameTrickmasterByLanguage, &gEnemyNameDarksideByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry15Names[6] = {
@@ -11331,36 +11331,36 @@ const JiminyLocalizedName* gJiminyEntry15Names[6] = {
 };
 
 const JiminyLocalizedName* gJiminyEntry18Names[14] = {
-    &gUnkEu_0888F52C, &gUnkEu_08890FEC, &gUnkEu_0888F4FC, &gUnkEu_0888F560,
-    &gUnkEu_0888F598, &gUnkEu_0889575C, &gUnkEu_08890FB0, &gUnkEu_0888F7A4,
-    &gUnkEu_08890F7C, &gUnkEu_0889548C, &gUnkEu_0888F770, &gUnkEu_0888F7E8,
-    &gUnkEu_0888F740, &gUnkEu_08895784,
+    &gEnemyNameRikuByLanguage, &gCardNameKingByLanguage, &gCharacterNameSoraByLanguage, &gCharacterNameKairiByLanguage,
+    &gCharacterNameNamineByLanguage, &gCharacterNameRikuReplicaByLanguage, &gEnemyNameAnsemByLanguage, &gEnemyNameVexenByLanguage,
+    &gEnemyNameLexaeusByLanguage, &gCharacterNameZexionByLanguage, &gEnemyNameAxelByLanguage, &gEnemyNameMarluxiaByLanguage,
+    &gEnemyNameLarxeneByLanguage, &gCharacterNameDiZByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry19Names[6] = {
-    &gUnkEu_08890C48, &gUnkEu_08890700, &gUnkEu_08890300, &gUnkEu_08890230,
-    &gUnkEu_08890354, &gUnkEu_08890BD0,
+    &gCharacterNameMaleficentByLanguage, &gCharacterNameJafarGenieByLanguage, &gEnemyNameUrsulaByLanguage, &gEnemyNameHadesByLanguage,
+    &gEnemyNameOogieBoogieByLanguage, &gCharacterNameHookByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry20Names[33] = {
-    &gUnkEu_0888F880, &gUnkEu_0888F8C4, &gUnkEu_0888F9AC, &gUnkEu_0888FB28,
-    &gUnkEu_0888FB84, &gUnkEu_0888FBDC, &gUnkEu_0888FC34, &gUnkEu_0888F910,
-    &gUnkEu_0888F960, &gUnkEu_0888FCD0, &gUnkEu_0888FA8C, &gUnkEu_0888FA00,
-    &gUnkEu_0888FD24, &gUnkEu_0888FE74, &gUnkEu_0888FA4C, &gUnkEu_0888FF00,
-    &gUnkEu_0888FEBC, &gUnkEu_0888FD80, &gUnkEu_0888FE18, &gUnkEu_0888FACC,
-    &gUnkEu_0888FDD4, &gUnkEu_0888FF50, &gUnkEu_0888FFCC, &gUnkEu_0888FF88,
-    &gUnkEu_0888FC74, &gUnkEu_088901A8, &gUnkEu_088900CC, &gUnkEu_08890118,
-    &gUnkEu_0889015C, &gUnkEu_08890200, &gUnkEu_088903AC, &gUnkEu_08890290,
-    &gUnkEu_08890484,
+    &gEnemyNameShadowByLanguage, &gEnemyNameSoldierByLanguage, &gEnemyNameLargeBodyByLanguage, &gEnemyNameRedNocturneByLanguage,
+    &gEnemyNameBlueRhapsodyByLanguage, &gEnemyNameYellowOperaByLanguage, &gEnemyNameGreenRequiemByLanguage, &gEnemyNamePowerwildByLanguage,
+    &gEnemyNameBouncywildByLanguage, &gEnemyNameAirSoldierByLanguage, &gEnemyNameBanditByLanguage, &gEnemyNameFatBanditByLanguage,
+    &gEnemyNameBarrelSpiderByLanguage, &gEnemyNameSearchGhostByLanguage, &gEnemyNameSeaNeonByLanguage, &gEnemyNameScrewdiverByLanguage,
+    &gEnemyNameAquatankByLanguage, &gEnemyNameWightKnightByLanguage, &gEnemyNameGargoyleByLanguage, &gEnemyNamePirateByLanguage,
+    &gEnemyNameAirPirateByLanguage, &gEnemyNameDarkballByLanguage, &gEnemyNameDefenderByLanguage, &gEnemyNameWyvernByLanguage,
+    &gEnemyNameWizardByLanguage, &gEnemyNameNeoshadowByLanguage, &gEnemyNameCreeperPlantByLanguage, &gEnemyNameTornadoStepByLanguage,
+    &gEnemyNameCrescendoByLanguage, &gEnemyNameGuardArmorByLanguage, &gEnemyNameParasiteCageByLanguage, &gEnemyNameTrickmasterByLanguage,
+    &gEnemyNameDarksideByLanguage,
 };
 
 const JiminyLocalizedName* gJiminyEntry16Names[22] = {
-    &gUnkEu_0889103C, &gUnkEu_08890FEC, &gUnkEu_0888F880, &gUnkEu_0888F9AC,
-    &gUnkEu_0888F910, &gUnkEu_0888FA00, &gUnkEu_0888FE74, &gUnkEu_0888FA4C,
-    &gUnkEu_0888FD80, &gUnkEu_0888FACC, &gUnkEu_0888FFCC, &gUnkEu_08890200,
-    &gUnkEu_088903AC, &gUnkEu_08890290, &gUnkEu_08890484, &gUnkEu_08890230,
-    &gUnkEu_088902C8, &gUnkEu_08890354, &gUnkEu_08890300, &gUnkEu_088903E0,
-    &gUnkEu_0889043C, &gUnkEu_08890F7C,
+    &gCardNameSoulEaterByLanguage, &gCardNameKingByLanguage, &gEnemyNameShadowByLanguage, &gEnemyNameLargeBodyByLanguage,
+    &gEnemyNamePowerwildByLanguage, &gEnemyNameFatBanditByLanguage, &gEnemyNameSearchGhostByLanguage, &gEnemyNameSeaNeonByLanguage,
+    &gEnemyNameWightKnightByLanguage, &gEnemyNamePirateByLanguage, &gEnemyNameDefenderByLanguage, &gEnemyNameGuardArmorByLanguage,
+    &gEnemyNameParasiteCageByLanguage, &gEnemyNameTrickmasterByLanguage, &gEnemyNameDarksideByLanguage, &gEnemyNameHadesByLanguage,
+    &gEnemyNameJafarByLanguage, &gEnemyNameOogieBoogieByLanguage, &gEnemyNameUrsulaByLanguage, &gEnemyNameHookByLanguage,
+    &gEnemyNameDragonMaleficentByLanguage, &gEnemyNameLexaeusByLanguage,
 };
 
 const JiminyTextChar* gJiminyHiddenTexts[13] = {

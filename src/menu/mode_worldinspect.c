@@ -109,143 +109,143 @@ static WorldinspectMsg sWorldinspectMsgs[14] = {
     {
         1, WORLD_AGRABAH, gWorldIconAgrabahPalette, 32, gWorldIconAgrabahTiles, 576, gWorldIconAgrabahFrame0, gWorldImageAgrabahPalette, 32, gWorldImageAgrabahTiles, 4096, gWorldImageAgrabahFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E3A0,
+        &gWorldNameAgrabahByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E590,
+        gWorldNameAgrabah,
 #elif defined(VERSION_US)
-        gUnk_0815A56C,
+        gWorldNameAgrabah,
 #endif
         0, 0,
     },
     {
         2, WORLD_ATLANTICA, gWorldIconAtlanticaPalette, 32, gWorldIconAtlanticaTiles, 512, gWorldIconAtlanticaFrame0, gWorldImageAtlanticaPalette, 32, gWorldImageAtlanticaTiles, 4096, gWorldImageAtlanticaFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E578,
+        &gWorldNameAtlanticaByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E5E4,
+        gWorldNameAtlantica,
 #elif defined(VERSION_US)
-        gUnk_0815A5AA,
+        gWorldNameAtlantica,
 #endif
         2, 2,
     },
     {
         4, WORLD_OLYMPUS_COLISEUM, gWorldIconOlympusColiseumPalette, 32, gWorldIconOlympusColiseumTiles, 640, gWorldIconOlympusColiseumFrame0, gWorldImageOlympusColiseumPalette, 32, gWorldImageOlympusColiseumTiles, 4096, gWorldImageOlympusColiseumFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E530,
+        &gWorldNameOlympusColiseumByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E5CC,
+        gWorldNameOlympusColiseum,
 #elif defined(VERSION_US)
-        gUnk_0815A54A,
+        gWorldNameOlympusColiseum,
 #endif
         6, 6,
     },
     {
         8, WORLD_WONDERLAND, gWorldIconWonderlandPalette, 32, gWorldIconWonderlandTiles, 544, gWorldIconWonderlandFrame0, gWorldImageWonderlandPalette, 32, gWorldImageWonderlandTiles, 4096, gWorldImageWonderlandFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E410,
+        &gWorldNameWonderlandByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E59C,
+        gWorldNameWonderland,
 #elif defined(VERSION_US)
-        gUnk_0815A534,
+        gWorldNameWonderland,
 #endif
         4, 4,
     },
     {
         16, WORLD_MONSTRO, gWorldIconMonstroPalette, 32, gWorldIconMonstroTiles, 416, gWorldIconMonstroFrame0, gWorldImageMonstroPalette, 32, gWorldImageMonstroTiles, 4096, gWorldImageMonstroFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E450,
+        &gWorldNameMonstroByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E5AC,
+        gWorldNameMonstro,
 #elif defined(VERSION_US)
-        gUnk_0815A59A,
+        gWorldNameMonstro,
 #endif
         3, 3,
     },
     {
         32, WORLD_HALLOWEEN_TOWN, gWorldIconHalloweenTownPalette, 32, gWorldIconHalloweenTownTiles, 544, gWorldIconHalloweenTownFrame0, gWorldImageHalloweenTownPalette, 32, gWorldImageHalloweenTownTiles, 4096, gWorldImageHalloweenTownFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E4C0,
+        &gWorldNameHalloweenTownByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E5B8,
+        gWorldNameHalloweenTown,
 #elif defined(VERSION_US)
-        gUnk_0815A57C,
+        gWorldNameHalloweenTown,
 #endif
         5, 5,
     },
     {
         64, WORLD_NEVER_LAND, gWorldIconNeverLandPalette, 32, gWorldIconNeverLandTiles, 544, gWorldIconNeverLandFrame0, gWorldImageNeverLandPalette, 32, gWorldImageNeverLandTiles, 4096, gWorldImageNeverLandFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E5DC,
+        &gWorldNameNeverLandByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E5F4,
+        gWorldNameNeverLand,
 #elif defined(VERSION_US)
-        gUnk_0815A5BE,
+        gWorldNameNeverLand,
 #endif
         1, 1,
     },
     {
         128, WORLD_HOLLOW_BASTION, gWorldIconHollowBastionPalette, 32, gWorldIconHollowBastionTiles, 768, gWorldIconHollowBastionFrame0, gWorldImageHollowBastionPalette, 32, gWorldImageHollowBastionTiles, 4096, gWorldImageHollowBastionFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E6BC,
+        &gWorldNameHollowBastionByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E618,
+        gWorldNameHollowBastion,
 #elif defined(VERSION_US)
-        gUnk_0815A5D4,
+        gWorldNameHollowBastion,
 #endif
         7, 7,
     },
     {
         256, WORLD_DESTINY_ISLANDS, gWorldIconDestinyIslandsPalette, 32, gWorldIconDestinyIslandsTiles, 544, gWorldIconDestinyIslandsFrame0, gWorldImageDestinyIslandsPalette, 32, gWorldImageDestinyIslandsTiles, 4096, gWorldImageDestinyIslandsFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E72C,
+        &gWorldNameDestinyIslandsByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E62C,
+        gWorldNameDestinyIslands,
 #elif defined(VERSION_US)
-        gUnk_0815A62A,
+        gWorldNameDestinyIslands,
 #endif
         8, 8,
     },
     {
         512, WORLD_TRAVERSE_TOWN, gWorldIconTraverseTownPalette, 32, gWorldIconTraverseTownTiles, 544, gWorldIconTraverseTownFrame0, gWorldImageTraverseTownPalette, 32, gWorldImageTraverseTownTiles, 4096, gWorldImageTraverseTownFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E364,
+        &gWorldNameTraverseTownByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E57C,
+        gWorldNameTraverseTown,
 #elif defined(VERSION_US)
-        gUnk_0815A518,
+        gWorldNameTraverseTown,
 #endif
         9, 9,
     },
     {
         2048, WORLD_TWILIGHT_TOWN, gWorldIconTwilightTownPalette, 32, gWorldIconTwilightTownTiles, 512, gWorldIconTwilightTownFrame0, gWorldImageTwilightTownPalette, 32, gWorldImageTwilightTownTiles, 4096, gWorldImageTwilightTownFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E78C,
+        &gWorldNameTwilightTownByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E644,
+        gWorldNameTwilightTown,
 #elif defined(VERSION_US)
-        gUnk_0815A60E,
+        gWorldNameTwilightTown,
 #endif
         10, 10,
     },
     {
         4096, WORLD_CASTLE_OBLIVION, gWorldIconCastleOblivionPalette, 32, gWorldIconCastleOblivionTiles, 512, gWorldIconCastleOblivionFrame0, gWorldImageCastleOblivionPalette, 32, gWorldImageCastleOblivionTiles, 4096, gWorldImageCastleOblivionFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E804,
+        &gWorldNameCastleOblivionByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E658,
+        gWorldNameCastleOblivion,
 #elif defined(VERSION_US)
-        gUnk_0815A64A,
+        gWorldNameCastleOblivion,
 #endif
         11, 13,
     },
     {
         1024, WORLD_100_ACRE_WOOD, gWorldIcon100AcreWoodPalette, 32, gWorldIcon100AcreWoodTiles, 512, gWorldIcon100AcreWoodFrame0, gWorldImage100AcreWoodPalette, 32, gWorldImage100AcreWoodTiles, 4096, gWorldImage100AcreWoodFrame0,
 #if defined(VERSION_EU)
-        &gUnkEu_0888E654,
+        &gWorldName100AcreWoodByLanguage,
 #elif defined(VERSION_JP)
-        gUnkJp_0814E604,
+        gWorldName100AcreWood,
 #elif defined(VERSION_US)
-        gUnk_0815A5F2,
+        gWorldName100AcreWood,
 #endif
         12, 12,
     },

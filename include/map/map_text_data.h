@@ -16,33 +16,33 @@ extern const MapNameText* gRoomNames[28];
 
 #ifdef VERSION_EU
 
-extern const LocalizedText gMapNameEu_08893370;
-extern const LocalizedText gMapNameEu_088933D4;
-extern const LocalizedText gMapNameEu_08893480;
-extern const LocalizedText gMapNameEu_0889352C;
-extern const LocalizedText gMapNameEu_088935D8;
-extern const LocalizedText gMapNameEu_08893684;
-extern const LocalizedText gMapNameEu_08893730;
-extern const LocalizedText gMapNameEu_088937DC;
-extern const LocalizedText gMapNameEu_0889388C;
-extern const LocalizedText gMapNameEu_08893938;
-extern const LocalizedText gMapNameEu_088939E4;
-extern const LocalizedText gMapNameEu_08893A94;
-extern const LocalizedText gMapNameEu_08893B48;
-extern const LocalizedText gMapNameEu_08893BFC;
-extern const LocalizedText gMapNameEu_08893CB8;
-extern const LocalizedText gMapNameEu_08893D78;
-extern const LocalizedText gMapNameEu_08893E38;
-extern const LocalizedText gMapNameEu_08893EF4;
-extern const LocalizedText gMapNameEu_08893FAC;
-extern const LocalizedText gMapNameEu_08894068;
-extern const LocalizedText gMapNameEu_08894124;
-extern const LocalizedText gMapNameEu_088941DC;
-extern const LocalizedText gMapNameEu_08894294;
-extern const LocalizedText gMapNameEu_0889434C;
-extern const LocalizedText gMapNameEu_08894408;
-extern const LocalizedText gMapNameEu_088944C0;
-extern const LocalizedText gMapNameEu_08894578;
+extern const LocalizedText gRoomNameUnknownPlaceByLanguage;
+extern const LocalizedText gRoomNameHiddenChamberByLanguage;
+extern const LocalizedText gFloorName1ByLanguage;
+extern const LocalizedText gFloorName2ByLanguage;
+extern const LocalizedText gFloorName3ByLanguage;
+extern const LocalizedText gFloorName4ByLanguage;
+extern const LocalizedText gFloorName5ByLanguage;
+extern const LocalizedText gFloorName6ByLanguage;
+extern const LocalizedText gFloorName7ByLanguage;
+extern const LocalizedText gFloorName8ByLanguage;
+extern const LocalizedText gFloorName9ByLanguage;
+extern const LocalizedText gFloorName10ByLanguage;
+extern const LocalizedText gFloorName11ByLanguage;
+extern const LocalizedText gFloorName12ByLanguage;
+extern const LocalizedText gFloorName13ByLanguage;
+extern const LocalizedText gBasementFloorName12ByLanguage;
+extern const LocalizedText gBasementFloorName11ByLanguage;
+extern const LocalizedText gBasementFloorName10ByLanguage;
+extern const LocalizedText gBasementFloorName9ByLanguage;
+extern const LocalizedText gBasementFloorName8ByLanguage;
+extern const LocalizedText gBasementFloorName7ByLanguage;
+extern const LocalizedText gBasementFloorName6ByLanguage;
+extern const LocalizedText gBasementFloorName5ByLanguage;
+extern const LocalizedText gBasementFloorName4ByLanguage;
+extern const LocalizedText gBasementFloorName3ByLanguage;
+extern const LocalizedText gBasementFloorName2ByLanguage;
+extern const LocalizedText gBasementFloorName1ByLanguage;
 #endif
 
 #endif

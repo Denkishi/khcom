@@ -5,11 +5,11 @@
 
 #ifdef VERSION_EU
 
-extern const JiminyLocalizedName gUnkEu_0888E364;
-extern const JiminyLocalizedName gUnkEu_0888E3A0;
-extern const JiminyLocalizedName gUnkEu_0888E410;
-extern const JiminyLocalizedName gUnkEu_0888E450;
-extern const JiminyLocalizedName gUnkEu_0888E4C0;
+extern const JiminyLocalizedName gWorldNameTraverseTownByLanguage;
+extern const JiminyLocalizedName gWorldNameAgrabahByLanguage;
+extern const JiminyLocalizedName gWorldNameWonderlandByLanguage;
+extern const JiminyLocalizedName gWorldNameMonstroByLanguage;
+extern const JiminyLocalizedName gWorldNameHalloweenTownByLanguage;
 
 #endif
 

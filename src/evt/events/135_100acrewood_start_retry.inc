@@ -14,7 +14,7 @@ static const MessageScriptEntry sEvent135Script[1] = {
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, &gCardMessageText053ByLanguage, MSG_SCRIPT_FLAG_END, 300 },
+    { 36, 1, 1, 1, &gPoohTalkTextByLanguage, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 

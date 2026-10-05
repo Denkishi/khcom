@@ -609,7 +609,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText000ByLanguage,
+        &gDonaldTalkText00ByLanguage,
 #else
         gDonaldTalkText00,
 #endif
@@ -618,7 +618,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText001ByLanguage,
+        &gDonaldTalkText01ByLanguage,
 #else
         gDonaldTalkText01,
 #endif
@@ -627,7 +627,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText002ByLanguage,
+        &gDonaldTalkText02ByLanguage,
 #else
         gDonaldTalkText02,
 #endif
@@ -636,7 +636,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText003ByLanguage,
+        &gDonaldTalkText03ByLanguage,
 #else
         gDonaldTalkText03,
 #endif
@@ -645,7 +645,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText004ByLanguage,
+        &gDonaldTalkText04ByLanguage,
 #else
         gDonaldTalkText04,
 #endif
@@ -654,7 +654,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText005ByLanguage,
+        &gDonaldTalkText05ByLanguage,
 #else
         gDonaldTalkText05,
 #endif
@@ -663,7 +663,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText006ByLanguage,
+        &gDonaldTalkText06ByLanguage,
 #else
         gDonaldTalkText06,
 #endif
@@ -672,7 +672,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText007ByLanguage,
+        &gDonaldTalkText07ByLanguage,
 #else
         gDonaldTalkText07,
 #endif
@@ -681,7 +681,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText008ByLanguage,
+        &gDonaldTalkText08ByLanguage,
 #else
         gDonaldTalkText08,
 #endif
@@ -690,7 +690,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText009ByLanguage,
+        &gDonaldTalkText09ByLanguage,
 #else
         gDonaldTalkText09,
 #endif
@@ -699,7 +699,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText010ByLanguage,
+        &gDonaldTalkText10ByLanguage,
 #else
         gDonaldTalkText10,
 #endif
@@ -708,7 +708,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText011ByLanguage,
+        &gDonaldTalkText11ByLanguage,
 #else
         gDonaldTalkText11,
 #endif
@@ -717,7 +717,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText012ByLanguage,
+        &gDonaldTalkText12ByLanguage,
 #else
         gDonaldTalkText12,
 #endif
@@ -726,7 +726,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText013ByLanguage,
+        &gDonaldTalkText13ByLanguage,
 #else
         gDonaldTalkText13,
 #endif
@@ -735,7 +735,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText014ByLanguage,
+        &gDonaldTalkText14ByLanguage,
 #else
         gDonaldTalkText14,
 #endif
@@ -744,7 +744,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText015ByLanguage,
+        &gDonaldTalkText15ByLanguage,
 #else
         gDonaldTalkText15,
 #endif
@@ -753,7 +753,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 2, 3,
 #ifdef VERSION_EU
-        &gCardMessageText016ByLanguage,
+        &gDonaldTalkText16ByLanguage,
 #else
         gDonaldTalkText16,
 #endif
@@ -762,7 +762,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText017ByLanguage,
+        &gDonaldTalkText17ByLanguage,
 #else
         gDonaldTalkText17,
 #endif
@@ -771,7 +771,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText018ByLanguage,
+        &gDonaldTalkText18ByLanguage,
 #else
         gDonaldTalkText18,
 #endif
@@ -780,7 +780,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText019ByLanguage,
+        &gDonaldTalkText19ByLanguage,
 #else
         gDonaldTalkText19,
 #endif
@@ -789,7 +789,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText020ByLanguage,
+        &gDonaldTalkText20ByLanguage,
 #else
         gDonaldTalkText20,
 #endif
@@ -798,7 +798,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 2, 3,
 #ifdef VERSION_EU
-        &gCardMessageText021ByLanguage,
+        &gDonaldTalkText21ByLanguage,
 #else
         gDonaldTalkText21,
 #endif
@@ -807,7 +807,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText022ByLanguage,
+        &gDonaldTalkText22ByLanguage,
 #else
         gDonaldTalkText22,
 #endif
@@ -816,7 +816,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText023ByLanguage,
+        &gDonaldTalkText23ByLanguage,
 #else
         gDonaldTalkText23,
 #endif
@@ -825,7 +825,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         1, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText024ByLanguage,
+        &gDonaldExitHallTalkTextByLanguage,
 #else
         gDonaldExitHallTalkText,
 #endif
@@ -834,7 +834,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText025ByLanguage,
+        &gGoofyTalkText00ByLanguage,
 #else
         gGoofyTalkText00,
 #endif
@@ -843,7 +843,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText026ByLanguage,
+        &gGoofyTalkText01ByLanguage,
 #else
         gGoofyTalkText01,
 #endif
@@ -852,7 +852,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText027ByLanguage,
+        &gGoofyTalkText02ByLanguage,
 #else
         gGoofyTalkText02,
 #endif
@@ -861,7 +861,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText028ByLanguage,
+        &gGoofyTalkText03ByLanguage,
 #else
         gGoofyTalkText03,
 #endif
@@ -870,7 +870,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText029ByLanguage,
+        &gGoofyTalkText04ByLanguage,
 #else
         gGoofyTalkText04,
 #endif
@@ -879,7 +879,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText030ByLanguage,
+        &gGoofyTalkText05ByLanguage,
 #else
         gGoofyTalkText05,
 #endif
@@ -888,7 +888,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText031ByLanguage,
+        &gGoofyTalkText06ByLanguage,
 #else
         gGoofyTalkText06,
 #endif
@@ -897,7 +897,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText032ByLanguage,
+        &gGoofyTalkText07ByLanguage,
 #else
         gGoofyTalkText07,
 #endif
@@ -906,7 +906,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText033ByLanguage,
+        &gGoofyTalkText08ByLanguage,
 #else
         gGoofyTalkText08,
 #endif
@@ -915,7 +915,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText034ByLanguage,
+        &gGoofyTalkText09ByLanguage,
 #else
         gGoofyTalkText09,
 #endif
@@ -924,7 +924,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText035ByLanguage,
+        &gGoofyTalkText10ByLanguage,
 #else
         gGoofyTalkText10,
 #endif
@@ -933,7 +933,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText036ByLanguage,
+        &gGoofyTalkText11ByLanguage,
 #else
         gGoofyTalkText11,
 #endif
@@ -942,7 +942,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText037ByLanguage,
+        &gGoofyTalkText12ByLanguage,
 #else
         gGoofyTalkText12,
 #endif
@@ -951,7 +951,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText038ByLanguage,
+        &gGoofyTalkText13ByLanguage,
 #else
         gGoofyTalkText13,
 #endif
@@ -960,7 +960,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText039ByLanguage,
+        &gGoofyTalkText14ByLanguage,
 #else
         gGoofyTalkText14,
 #endif
@@ -969,7 +969,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText040ByLanguage,
+        &gGoofyTalkText15ByLanguage,
 #else
         gGoofyTalkText15,
 #endif
@@ -978,7 +978,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText041ByLanguage,
+        &gGoofyTalkText16ByLanguage,
 #else
         gGoofyTalkText16,
 #endif
@@ -987,7 +987,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText042ByLanguage,
+        &gGoofyTalkText17ByLanguage,
 #else
         gGoofyTalkText17,
 #endif
@@ -996,7 +996,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText043ByLanguage,
+        &gGoofyTalkText18ByLanguage,
 #else
         gGoofyTalkText18,
 #endif
@@ -1005,7 +1005,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText044ByLanguage,
+        &gGoofyTalkText19ByLanguage,
 #else
         gGoofyTalkText19,
 #endif
@@ -1014,7 +1014,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 3, 3,
 #ifdef VERSION_EU
-        &gCardMessageText045ByLanguage,
+        &gGoofyTalkText20ByLanguage,
 #else
         gGoofyTalkText20,
 #endif
@@ -1023,7 +1023,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 2, 3,
 #ifdef VERSION_EU
-        &gCardMessageText046ByLanguage,
+        &gGoofyTalkText21ByLanguage,
 #else
         gGoofyTalkText21,
 #endif
@@ -1032,7 +1032,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText047ByLanguage,
+        &gGoofyTalkText22ByLanguage,
 #else
         gGoofyTalkText22,
 #endif
@@ -1041,7 +1041,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText048ByLanguage,
+        &gGoofyTalkText23ByLanguage,
 #else
         gGoofyTalkText23,
 #endif
@@ -1050,7 +1050,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         2, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText049ByLanguage,
+        &gGoofyExitHallTalkTextByLanguage,
 #else
         gGoofyExitHallTalkText,
 #endif
@@ -1059,7 +1059,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         60, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText050ByLanguage,
+        &gNamineTalkText0ByLanguage,
 #else
         gNamineTalkText0,
 #endif
@@ -1068,7 +1068,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         60, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText051ByLanguage,
+        &gNamineTalkText1ByLanguage,
 #else
         gNamineTalkText1,
 #endif
@@ -1077,7 +1077,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         27, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText052ByLanguage,
+        &gRikuReplicaTalkTextByLanguage,
 #else
         gRikuReplicaTalkText,
 #endif
@@ -1086,7 +1086,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         36, 3, 1, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText053ByLanguage,
+        &gPoohTalkTextByLanguage,
 #elif defined(VERSION_JP)
         gPoohTalkText,
 #elif defined(VERSION_US)
@@ -1097,7 +1097,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         47, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText054ByLanguage,
+        &gPigletTalkTextByLanguage,
 #else
         gPigletTalkText,
 #endif
@@ -1106,7 +1106,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         48, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText055ByLanguage,
+        &gOwlTalkTextByLanguage,
 #else
         gOwlTalkText,
 #endif
@@ -1115,7 +1115,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         50, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText056ByLanguage,
+        &gEeyoreTalkText0ByLanguage,
 #else
         gEeyoreTalkText0,
 #endif
@@ -1124,7 +1124,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         50, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText057ByLanguage,
+        &gEeyoreTalkText1ByLanguage,
 #else
         gEeyoreTalkText1,
 #endif
@@ -1133,7 +1133,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         51, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText058ByLanguage,
+        &gRooTalkTextByLanguage,
 #else
         gRooTalkText,
 #endif
@@ -1142,7 +1142,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         49, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText059ByLanguage,
+        &gRabbitTalkText0ByLanguage,
 #else
         gRabbitTalkText0,
 #endif
@@ -1151,7 +1151,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         49, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText060ByLanguage,
+        &gRabbitTalkText1ByLanguage,
 #else
         gRabbitTalkText1,
 #endif
@@ -1160,7 +1160,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         61, 3, 4, 3,
 #ifdef VERSION_EU
-        &gCardMessageText061ByLanguage,
+        &gMickeyTalkText0ByLanguage,
 #else
         gMickeyTalkText0,
 #endif
@@ -1169,7 +1169,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         61, 3, 1, 3,
 #ifdef VERSION_EU
-        &gCardMessageText062ByLanguage,
+        &gMickeyTalkText1ByLanguage,
 #else
         gMickeyTalkText1,
 #endif
@@ -1178,7 +1178,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         61, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText063ByLanguage,
+        &gMickeyTalkText2ByLanguage,
 #else
         gMickeyTalkText2,
 #endif
@@ -1187,7 +1187,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         7, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText064ByLanguage,
+        &gMsTopShopOptionTextByLanguage,
 #else
         gMsTopShopOptionText,
 #endif
@@ -1196,7 +1196,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         7, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText065ByLanguage,
+        &gMsTopChargeOptionTextByLanguage,
 #else
         gMsTopChargeOptionText,
 #endif
@@ -1205,7 +1205,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         7, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText066ByLanguage,
+        &gMsTopFreePackTextByLanguage,
 #else
         gMsTopFreePackText,
 #endif
@@ -1214,7 +1214,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         7, 3, 0, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText065ByLanguage,
+        &gMsTopChargeOptionTextByLanguage,
 #elif defined(VERSION_JP)
         gMsTopNothingToSellText,
 #elif defined(VERSION_US)
@@ -1225,7 +1225,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         7, 3, 0, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText065ByLanguage,
+        &gMsTopChargeOptionTextByLanguage,
 #elif defined(VERSION_JP)
         gMsTopNothingToTradeText,
 #elif defined(VERSION_US)
@@ -1236,7 +1236,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText069ByLanguage,
+        &gPoohLeaveWorldTextByLanguage,
 #else
         gPoohLeaveWorldText,
 #endif
@@ -1245,7 +1245,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText070ByLanguage,
+        &gWorldselectTutorialText0ByLanguage,
 #else
         gWorldselectTutorialText0,
 #endif
@@ -1254,7 +1254,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText071ByLanguage,
+        &gWorldselectTutorialText1ByLanguage,
 #else
         gWorldselectTutorialText1,
 #endif
@@ -1267,7 +1267,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText072ByLanguage,
+        &gRobeTutorialText00ByLanguage,
 #else
         gRobeTutorialText00,
 #endif
@@ -1276,7 +1276,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText073ByLanguage,
+        &gRobeTutorialText01ByLanguage,
 #else
         gRobeTutorialText01,
 #endif
@@ -1285,7 +1285,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText074ByLanguage,
+        &gRobeTutorialText02ByLanguage,
 #else
         gRobeTutorialText02,
 #endif
@@ -1298,7 +1298,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText075ByLanguage,
+        &gRobeTutorialText03ByLanguage,
 #else
         gRobeTutorialText03,
 #endif
@@ -1307,7 +1307,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText076ByLanguage,
+        &gRobeTutorialText04ByLanguage,
 #else
         gRobeTutorialText04,
 #endif
@@ -1320,7 +1320,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText077ByLanguage,
+        &gRobeTutorialText05ByLanguage,
 #else
         gRobeTutorialText05,
 #endif
@@ -1329,7 +1329,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText078ByLanguage,
+        &gRobeTutorialText06ByLanguage,
 #else
         gRobeTutorialText06,
 #endif
@@ -1338,7 +1338,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText079ByLanguage,
+        &gRobeTutorialText07ByLanguage,
 #else
         gRobeTutorialText07,
 #endif
@@ -1351,7 +1351,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText080ByLanguage,
+        &gRobeTutorialText08ByLanguage,
 #else
         gRobeTutorialText08,
 #endif
@@ -1360,7 +1360,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText081ByLanguage,
+        &gRobeTutorialText09ByLanguage,
 #elif defined(VERSION_JP)
         gRobeTutorialText04,
 #elif defined(VERSION_US)
@@ -1375,7 +1375,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText082ByLanguage,
+        &gRobeTutorialText10ByLanguage,
 #else
         gRobeTutorialText10,
 #endif
@@ -1384,7 +1384,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText083ByLanguage,
+        &gRobeTutorialText11ByLanguage,
 #else
         gRobeTutorialText11,
 #endif
@@ -1393,7 +1393,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText084ByLanguage,
+        &gRobeTutorialText12ByLanguage,
 #else
         gRobeTutorialText12,
 #endif
@@ -1402,7 +1402,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText085ByLanguage,
+        &gRobeTutorialText13ByLanguage,
 #else
         gRobeTutorialText13,
 #endif
@@ -1411,7 +1411,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText086ByLanguage,
+        &gRobeTutorialText14ByLanguage,
 #else
         gRobeTutorialText14,
 #endif
@@ -1420,7 +1420,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText087ByLanguage,
+        &gRobeTutorialText15ByLanguage,
 #else
         gRobeTutorialText15,
 #endif
@@ -1433,7 +1433,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText088ByLanguage,
+        &gRobeTutorialText16ByLanguage,
 #else
         gRobeTutorialText16,
 #endif
@@ -1442,7 +1442,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText089ByLanguage,
+        &gRobeTutorialText17ByLanguage,
 #else
         gRobeTutorialText17,
 #endif
@@ -1451,7 +1451,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText090ByLanguage,
+        &gRobeTutorialText18ByLanguage,
 #else
         gRobeTutorialText18,
 #endif
@@ -1464,7 +1464,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText091ByLanguage,
+        &gRobeTutorialText19ByLanguage,
 #else
         gRobeTutorialText19,
 #endif
@@ -1473,7 +1473,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText092ByLanguage,
+        &gRobeTutorialText20ByLanguage,
 #else
         gRobeTutorialText20,
 #endif
@@ -1482,7 +1482,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText093ByLanguage,
+        &gRobeTutorialText21ByLanguage,
 #else
         gRobeTutorialText21,
 #endif
@@ -1495,7 +1495,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         3, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText094ByLanguage,
+        &gRobeTutorialText22ByLanguage,
 #else
         gRobeTutorialText22,
 #endif
@@ -1504,7 +1504,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText095ByLanguage,
+        &gMapSelectTutorialText0ByLanguage,
 #else
         gMapSelectTutorialText0,
 #endif
@@ -1517,7 +1517,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText096ByLanguage,
+        &gMapSelectTutorialText1ByLanguage,
 #else
         gMapSelectTutorialText1,
 #endif
@@ -1530,7 +1530,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText097ByLanguage,
+        &gMapSelectTutorialText2ByLanguage,
 #else
         gMapSelectTutorialText2,
 #endif
@@ -1543,7 +1543,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText098ByLanguage,
+        &gMapSelectTutorialText3ByLanguage,
 #else
         gMapSelectTutorialText3,
 #endif
@@ -1556,7 +1556,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText099ByLanguage,
+        &gMapSelectValueTutorialText0ByLanguage,
 #else
         gMapSelectValueTutorialText0,
 #endif
@@ -1569,7 +1569,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText100ByLanguage,
+        &gMapSelectValueTutorialText1ByLanguage,
 #else
         gMapSelectValueTutorialText1,
 #endif
@@ -1582,7 +1582,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText101ByLanguage,
+        &gMapSelectValueTutorialText2ByLanguage,
 #else
         gMapSelectValueTutorialText2,
 #endif
@@ -1595,7 +1595,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText102ByLanguage,
+        &gMapSelectValueTutorialText3ByLanguage,
 #else
         gMapSelectValueTutorialText3,
 #endif
@@ -1608,7 +1608,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText103ByLanguage,
+        &gSavePointTutorialTextByLanguage,
 #else
         gSavePointTutorialText,
 #endif
@@ -1621,7 +1621,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText103ByLanguage,
+        &gSavePointTutorialTextByLanguage,
 #elif defined(VERSION_JP)
         gSaveMenuTutorialText,
 #elif defined(VERSION_US)
@@ -1636,7 +1636,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText105ByLanguage,
+        &gQuickSaveTutorialTextByLanguage,
 #else
         gQuickSaveTutorialText,
 #endif
@@ -1649,7 +1649,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText106ByLanguage,
+        &gMapTutorialText0ByLanguage,
 #else
         gMapTutorialText0,
 #endif
@@ -1658,7 +1658,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText107ByLanguage,
+        &gMapTutorialText1ByLanguage,
 #else
         gMapTutorialText1,
 #endif
@@ -1667,7 +1667,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText108ByLanguage,
+        &gMapTutorialText2ByLanguage,
 #else
         gMapTutorialText2,
 #endif
@@ -1676,7 +1676,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText109ByLanguage,
+        &gMapSelectEventDoorTutorialText0ByLanguage,
 #else
         gMapSelectEventDoorTutorialText0,
 #endif
@@ -1685,7 +1685,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText110ByLanguage,
+        &gMapSelectEventDoorTutorialText1ByLanguage,
 #else
         gMapSelectEventDoorTutorialText1,
 #endif
@@ -1694,7 +1694,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText111ByLanguage,
+        &gMapSelectEventDoorTutorialText2ByLanguage,
 #else
         gMapSelectEventDoorTutorialText2,
 #endif
@@ -1703,7 +1703,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText112ByLanguage,
+        &gMapSelectEventDoorTutorialText3ByLanguage,
 #else
         gMapSelectEventDoorTutorialText3,
 #endif
@@ -1712,7 +1712,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText113ByLanguage,
+        &gMapSelectEventDoorTutorialText4ByLanguage,
 #else
         gMapSelectEventDoorTutorialText4,
 #endif
@@ -1721,7 +1721,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText114ByLanguage,
+        &gLeonTutorialText00ByLanguage,
 #else
         gLeonTutorialText00,
 #endif
@@ -1730,7 +1730,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText115ByLanguage,
+        &gLeonTutorialText01ByLanguage,
 #else
         gLeonTutorialText01,
 #endif
@@ -1739,7 +1739,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText116ByLanguage,
+        &gLeonTutorialText02ByLanguage,
 #else
         gLeonTutorialText02,
 #endif
@@ -1748,7 +1748,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText117ByLanguage,
+        &gLeonTutorialText03ByLanguage,
 #else
         gLeonTutorialText03,
 #endif
@@ -1757,7 +1757,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText118ByLanguage,
+        &gLeonTutorialText04ByLanguage,
 #else
         gLeonTutorialText04,
 #endif
@@ -1766,7 +1766,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText119ByLanguage,
+        &gLeonTutorialText05ByLanguage,
 #else
         gLeonTutorialText05,
 #endif
@@ -1775,7 +1775,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText120ByLanguage,
+        &gLeonTutorialText06ByLanguage,
 #else
         gLeonTutorialText06,
 #endif
@@ -1784,7 +1784,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText121ByLanguage,
+        &gLeonTutorialText07ByLanguage,
 #else
         gLeonTutorialText07,
 #endif
@@ -1793,7 +1793,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText122ByLanguage,
+        &gLeonTutorialText08ByLanguage,
 #else
         gLeonTutorialText08,
 #endif
@@ -1802,7 +1802,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText123ByLanguage,
+        &gLeonTutorialText09ByLanguage,
 #else
         gLeonTutorialText09,
 #endif
@@ -1811,7 +1811,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 1, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText124ByLanguage,
+        &gLeonTutorialText10ByLanguage,
 #else
         gLeonTutorialText10,
 #endif
@@ -1824,7 +1824,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 1, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText125ByLanguage,
+        &gLeonTutorialText11ByLanguage,
 #else
         gLeonTutorialText11,
 #endif
@@ -1833,7 +1833,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 1, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText126ByLanguage,
+        &gLeonTutorialText12ByLanguage,
 #else
         gLeonTutorialText12,
 #endif
@@ -1846,7 +1846,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 1, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText127ByLanguage,
+        &gLeonTutorialText13ByLanguage,
 #else
         gLeonTutorialText13,
 #endif
@@ -1855,7 +1855,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         31, 0, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText128ByLanguage,
+        &gLeonTutorialText14ByLanguage,
 #else
         gLeonTutorialText14,
 #endif
@@ -1864,7 +1864,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText129ByLanguage,
+        &gMsTopIntroText0ByLanguage,
 #else
         gMsTopIntroText0,
 #endif
@@ -1877,7 +1877,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText130ByLanguage,
+        &gMsTopIntroText1ByLanguage,
 #else
         gMsTopIntroText1,
 #endif
@@ -1890,7 +1890,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText131ByLanguage,
+        &gMsTopIntroText2ByLanguage,
 #else
         gMsTopIntroText2,
 #endif
@@ -1903,7 +1903,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText132ByLanguage,
+        &gWarpPointTutorialTextByLanguage,
 #else
         gWarpPointTutorialText,
 #endif
@@ -1916,7 +1916,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText133ByLanguage,
+        &gLearnedWarpinatorTextByLanguage,
 #else
         gLearnedWarpinatorText,
 #endif
@@ -1925,7 +1925,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText134ByLanguage,
+        &gLearnedTerrorTextByLanguage,
 #else
         gLearnedTerrorText,
 #endif
@@ -1934,7 +1934,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText135ByLanguage,
+        &gLearnedSynchroTextByLanguage,
 #else
         gLearnedSynchroText,
 #endif
@@ -1943,7 +1943,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText136ByLanguage,
+        &gLearnedBindTextByLanguage,
 #else
         gLearnedBindText,
 #endif
@@ -1952,7 +1952,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText137ByLanguage,
+        &gLearnedIdyllRompTextByLanguage,
 #else
         gLearnedIdyllRompText,
 #endif
@@ -1961,7 +1961,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText138ByLanguage,
+        &gLearnedTrinityLimitTextByLanguage,
 #else
         gLearnedTrinityLimitText,
 #endif
@@ -1970,7 +1970,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText139ByLanguage,
+        &gLearnedConfuseTextByLanguage,
 #else
         gLearnedConfuseText,
 #endif
@@ -1979,7 +1979,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText140ByLanguage,
+        &gLearnedThunderRaidTextByLanguage,
 #else
         gLearnedThunderRaidText,
 #endif
@@ -1988,7 +1988,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText141ByLanguage,
+        &gLearnedGiftedMiracleTextByLanguage,
 #else
         gLearnedGiftedMiracleText,
 #endif
@@ -1997,7 +1997,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText142ByLanguage,
+        &gLearnedGravityRaidTextByLanguage,
 #else
         gLearnedGravityRaidText,
 #endif
@@ -2006,7 +2006,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText143ByLanguage,
+        &gLearnedFireRaidTextByLanguage,
 #else
         gLearnedFireRaidText,
 #endif
@@ -2015,7 +2015,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText144ByLanguage,
+        &gLearnedAquaSplashTextByLanguage,
 #else
         gLearnedAquaSplashText,
 #endif
@@ -2024,7 +2024,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText145ByLanguage,
+        &gLearnedBlizzardRaidTextByLanguage,
 #else
         gLearnedBlizzardRaidText,
 #endif
@@ -2033,7 +2033,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText146ByLanguage,
+        &gLearnedStopRaidTextByLanguage,
 #else
         gLearnedStopRaidText,
 #endif
@@ -2042,7 +2042,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText147ByLanguage,
+        &gLearnedShockImpactTextByLanguage,
 #else
         gLearnedShockImpactText,
 #endif
@@ -2051,7 +2051,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText148ByLanguage,
+        &gLearnedHomingBlizzaraTextByLanguage,
 #else
         gLearnedHomingBlizzaraText,
 #endif
@@ -2060,7 +2060,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText149ByLanguage,
+        &gLearnedQuakeTextByLanguage,
 #else
         gLearnedQuakeText,
 #endif
@@ -2069,7 +2069,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText150ByLanguage,
+        &gLearnedBlazingDonaldTextByLanguage,
 #else
         gLearnedBlazingDonaldText,
 #endif
@@ -2078,7 +2078,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText151ByLanguage,
+        &gLearnedHomingFiraTextByLanguage,
 #else
         gLearnedHomingFiraText,
 #endif
@@ -2087,7 +2087,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText152ByLanguage,
+        &gLearnedTeleportTextByLanguage,
 #else
         gLearnedTeleportText,
 #endif
@@ -2096,7 +2096,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText153ByLanguage,
+        &gLearnedTornadoTextByLanguage,
 #else
         gLearnedTornadoText,
 #endif
@@ -2105,7 +2105,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText154ByLanguage,
+        &gLearnedCrossSlashPlusTextByLanguage,
 #else
         gLearnedCrossSlashPlusText,
 #endif
@@ -2114,7 +2114,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText155ByLanguage,
+        &gLearnedReflectRaidTextByLanguage,
 #else
         gLearnedReflectRaidText,
 #endif
@@ -2123,7 +2123,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText156ByLanguage,
+        &gLearnedFiragaBreakTextByLanguage,
 #else
         gLearnedFiragaBreakText,
 #endif
@@ -2132,7 +2132,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText157ByLanguage,
+        &gLearnedWarpTextByLanguage,
 #else
         gLearnedWarpText,
 #endif
@@ -2141,7 +2141,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText158ByLanguage,
+        &gLearnedJudgmentTextByLanguage,
 #else
         gLearnedJudgmentText,
 #endif
@@ -2150,7 +2150,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText159ByLanguage,
+        &gObtainedElixirTextByLanguage,
 #else
         gObtainedElixirText,
 #endif
@@ -2159,7 +2159,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText160ByLanguage,
+        &gObtainedSpellbinderTextByLanguage,
 #else
         gObtainedSpellbinderText,
 #endif
@@ -2168,7 +2168,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText161ByLanguage,
+        &gObtainedGenieTextByLanguage,
 #else
         gObtainedGenieText,
 #endif
@@ -2177,7 +2177,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText162ByLanguage,
+        &gObtainedCloudTextByLanguage,
 #else
         gObtainedCloudText,
 #endif
@@ -2186,7 +2186,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText163ByLanguage,
+        &gObtainedOathkeeperTextByLanguage,
 #else
         gObtainedOathkeeperText,
 #endif
@@ -2195,7 +2195,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText164ByLanguage,
+        &gObtainedOblivionTextByLanguage,
 #else
         gObtainedOblivionText,
 #endif
@@ -2204,7 +2204,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText165ByLanguage,
+        &gObtainedBambiTextByLanguage,
 #else
         gObtainedBambiText,
 #endif
@@ -2213,7 +2213,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText166ByLanguage,
+        &gEventSaveConfirmTextByLanguage,
 #else
         gEventSaveConfirmText,
 #endif
@@ -2222,7 +2222,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText167ByLanguage,
+        &gMapStairTutorialTextByLanguage,
 #else
         gMapStairTutorialText,
 #endif
@@ -2231,7 +2231,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText168ByLanguage,
+        &gObtainedKeyOfBeginningsTextByLanguage,
 #else
         gObtainedKeyOfBeginningsText,
 #endif
@@ -2240,7 +2240,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText169ByLanguage,
+        &gObtainedKeyOfGuidanceTextByLanguage,
 #else
         gObtainedKeyOfGuidanceText,
 #endif
@@ -2249,7 +2249,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText170ByLanguage,
+        &gObtainedKeyToTruthTextByLanguage,
 #else
         gObtainedKeyToTruthText,
 #endif
@@ -2258,7 +2258,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText171ByLanguage,
+        &gObtainedKeyToRewardsTextByLanguage,
 #else
         gObtainedKeyToRewardsText,
 #endif
@@ -2267,7 +2267,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText172ByLanguage,
+        &gObtainedTinkerBellTextByLanguage,
 #else
         gObtainedTinkerBellText,
 #endif
@@ -2276,7 +2276,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText173ByLanguage,
+        &gObtainedWorldCardTextByLanguage,
 #else
         gObtainedWorldCardText,
 #endif
@@ -2285,7 +2285,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #if defined(VERSION_EU)
-        &gCardMessageText174ByLanguage,
+        &gObtainedWorldCardsTextByLanguage,
 #elif defined(VERSION_JP)
         gObtainedWorldCardText,
 #elif defined(VERSION_US)
@@ -2296,7 +2296,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText175ByLanguage,
+        &gObtainedSimbaTextByLanguage,
 #else
         gObtainedSimbaText,
 #endif
@@ -2305,7 +2305,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText176ByLanguage,
+        &gSaveDataLostTextByLanguage,
 #else
         gSaveDataLostText,
 #endif
@@ -2314,7 +2314,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText177ByLanguage,
+        &gRikuDeckTutorialTextByLanguage,
 #else
         gRikuDeckTutorialText,
 #endif
@@ -2327,7 +2327,7 @@ CardMessageDef gCardMessageDefs[] = {
     {
         62, 3, 0, 3,
 #ifdef VERSION_EU
-        &gCardMessageText178ByLanguage,
+        &gQuickSaveCompleteTextByLanguage,
 #else
         gRikuBattleTutorialText,
 #endif

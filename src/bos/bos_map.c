@@ -83,7 +83,7 @@ s32 task_bos_map_1() {
 
 void task_bos_shadow_0(BosShadowWork* work, BtlObj* obj) {
     work->actor = obj;
-    work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 }
 
@@ -103,7 +103,7 @@ void task_bos_shadow_2(BosShadowWork* work) {
 
     obj = work->actor;
     flip = 0;
-    gfx = gUnk_08B22BA8;
+    gfx = gBtlShadowFrame0;
     frame = GetBattleSpritePriorityFlags(obj->y);
     size = 0x100 - ((obj->groundZ - obj->z) >> 7);
 

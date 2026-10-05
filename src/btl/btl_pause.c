@@ -27,20 +27,20 @@ void task_btl_pause_0(BtlPauseWork* work) {
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
 
     if (gLanguage <= LANGUAGE_GERMAN) {
-        work->tiles = LoadObjTiles(gUnk_08B1E7F4, 0x180);
-        p = gUnk_09EE115C;
+        work->tiles = LoadObjTiles(gBtlPauseTiles, 0x180);
+        p = gBtlPauseFrames;
     } else {
-        work->tiles = LoadObjTiles(gUnkEu_08B51BA8, 0x180);
-        p = gUnkEu_09F5C1FC;
+        work->tiles = LoadObjTiles(gBtlPauseItalianSpanishTiles, 0x180);
+        p = gBtlPauseItalianSpanishFrames;
     }
 
     work->gfx = p[0];
     work->gfx2 = p[1];
 #else
-    work->tiles = LoadObjTiles(gUnk_08B1E7F4, 0x180);
+    work->tiles = LoadObjTiles(gBtlPauseTiles, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->gfx = gUnk_09EE115C[0];
-    work->gfx2 = gUnk_09EE115C[1];
+    work->gfx = gBtlPauseFrames[0];
+    work->gfx2 = gBtlPauseFrames[1];
 #endif
     work->visible = 0;
     work->steps = 0;

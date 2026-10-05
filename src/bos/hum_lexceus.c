@@ -629,7 +629,7 @@ void task_hum_lex_tmh_0(LexTmhWork* work, VixenNdlArgs* args) {
     work->timer = 0;
     work->done = 0;
     work->vz = -0x980;
-    work->tiles2 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles2 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
     m4aSongNumStart(SONG_BTL_LEC_THRSW);
 }
@@ -740,7 +740,7 @@ void task_hum_lex_tmh_2(LexTmhWork* work) {
     }
 
     WorldToScreen(&x, &y, work->x, work->y, 0);
-    DrawSprite(x, y, gUnk_08B22BA8, work->tiles2, work->palette2, affine, attr, 0xFFF0);
+    DrawSprite(x, y, gBtlShadowFrame0, work->tiles2, work->palette2, affine, attr, 0xFFF0);
 }
 
 void task_hum_lex_tmh_3(LexTmhWork* work) {
@@ -833,7 +833,7 @@ void task_hum_lex_rock_0(LexRockWork* work, VixenNdlArgs* args) {
     work->z = args->z;
     work->state = 0;
     work->rockCount = 0;
-    work->tiles = LoadObjTiles(gUnk_08B22CE4, 0x200);
+    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     work->blinking = 0;
 }
@@ -1018,7 +1018,7 @@ void task_hum_lex_rock_2(LexRockWork* work) {
             DrawSprite(x, y, gfx, work->tiles2[i], work->palette2, NULL, attr,
                 -0x1006 - (e->y >> 8) * 4);
             WorldToScreen(&x, &y, e->x, e->y, 0);
-            DrawSprite(x, y, gUnk_08B22CBC, work->tiles, work->palette, NULL, attr, 0xFFFE);
+            DrawSprite(x, y, gBtlShadowSmallFrame0, work->tiles, work->palette, NULL, attr, 0xFFFE);
         }
     }
 }

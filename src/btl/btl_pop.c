@@ -22,15 +22,15 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     case LANGUAGE_ENGLISH:
         switch (src->kind) {
         case 0:
-            work->tiles = LoadObjTiles(gUnkEu_08B4A794, 0x100);
+            work->tiles = LoadObjTiles(gBtlPopGuardEnglishTiles, 0x100);
             AnimInit(&work->anim, gUnk_09EE11C0, gUnk_09EE11BC);
             break;
         case 2:
-            work->tiles = LoadObjTiles(gUnkEu_08B4A680, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5BE10, gUnkEu_09F5BE0C);
+            work->tiles = LoadObjTiles(gBtlPopMissEnglishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissEnglishAnims, gBtlPopMissEnglishFrames);
             break;
         case 9:
-            work->tiles = LoadObjTiles(gUnkEu_08B4A8AE, 0x180);
+            work->tiles = LoadObjTiles(gBtlPopCardBreakEnglishTiles, 0x180);
             AnimInit(&work->anim, gUnk_09EE11C8, gUnk_09EE11C4);
             break;
         case 10:
@@ -38,8 +38,8 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
             AnimInit(&work->anim, gUnk_09EE11D0, gUnk_09EE11CC);
             break;
         default:
-            work->tiles = LoadObjTiles(gUnkEu_08B4A680, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5BE10, gUnkEu_09F5BE0C);
+            work->tiles = LoadObjTiles(gBtlPopMissEnglishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissEnglishAnims, gBtlPopMissEnglishFrames);
             break;
         }
 
@@ -47,24 +47,24 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     case LANGUAGE_FRENCH:
         switch (src->kind) {
         case 0:
-            work->tiles = LoadObjTiles(gUnkEu_08B51368, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1C0, gUnkEu_09F5C1BC);
+            work->tiles = LoadObjTiles(gBtlPopGuardFrenchTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopGuardFrenchAnims, gBtlPopGuardFrenchFrames);
             break;
         case 2:
-            work->tiles = LoadObjTiles(gUnkEu_08B517B8, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1E0, gUnkEu_09F5C1DC);
+            work->tiles = LoadObjTiles(gBtlPopMissFrenchTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissFrenchAnims, gBtlPopMissFrenchFrames);
             break;
         case 9:
-            work->tiles = LoadObjTiles(gUnkEu_08B4A8AE, 0x180);
+            work->tiles = LoadObjTiles(gBtlPopCardBreakEnglishTiles, 0x180);
             AnimInit(&work->anim, gUnk_09EE11C8, gUnk_09EE11C4);
             break;
         case 10:
-            work->tiles = LoadObjTiles(gUnkEu_08B50F18, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1A0, gUnkEu_09F5C19C);
+            work->tiles = LoadObjTiles(gBtlPopRecoverFrenchTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopRecoverFrenchAnims, gBtlPopRecoverFrenchFrames);
             break;
         default:
-            work->tiles = LoadObjTiles(gUnkEu_08B517B8, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1E0, gUnkEu_09F5C1DC);
+            work->tiles = LoadObjTiles(gBtlPopMissFrenchTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissFrenchAnims, gBtlPopMissFrenchFrames);
             break;
         }
 
@@ -72,24 +72,24 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     case LANGUAGE_GERMAN:
         switch (src->kind) {
         case 0:
-            work->tiles = LoadObjTiles(gUnkEu_08B516A4, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1D8, gUnkEu_09F5C1D4);
+            work->tiles = LoadObjTiles(gBtlPopGuardGermanTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopGuardGermanAnims, gBtlPopGuardGermanFrames);
             break;
         case 2:
-            work->tiles = LoadObjTiles(gUnkEu_08B51A74, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1F8, gUnkEu_09F5C1F4);
+            work->tiles = LoadObjTiles(gBtlPopMissGermanTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissGermanAnims, gBtlPopMissGermanFrames);
             break;
         case 9:
-            work->tiles = LoadObjTiles(gUnkEu_08B50D82, 0x180);
-            AnimInit(&work->anim, gUnkEu_09F5C198, gUnkEu_09F5C194);
+            work->tiles = LoadObjTiles(gBtlPopCardBreakGermanTiles, 0x180);
+            AnimInit(&work->anim, gBtlPopCardBreakGermanAnims, gBtlPopCardBreakGermanFrames);
             break;
         case 10:
-            work->tiles = LoadObjTiles(gUnkEu_08B51254, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1B8, gUnkEu_09F5C1B4);
+            work->tiles = LoadObjTiles(gBtlPopRecoverGermanTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopRecoverGermanAnims, gBtlPopRecoverGermanFrames);
             break;
         default:
-            work->tiles = LoadObjTiles(gUnkEu_08B51A74, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1F8, gUnkEu_09F5C1F4);
+            work->tiles = LoadObjTiles(gBtlPopMissGermanTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissGermanAnims, gBtlPopMissGermanFrames);
             break;
         }
 
@@ -97,24 +97,24 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     case LANGUAGE_ITALIAN:
         switch (src->kind) {
         case 0:
-            work->tiles = LoadObjTiles(gUnkEu_08B51590, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1D0, gUnkEu_09F5C1CC);
+            work->tiles = LoadObjTiles(gBtlPopGuardItalianTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopGuardItalianAnims, gBtlPopGuardItalianFrames);
             break;
         case 2:
-            work->tiles = LoadObjTiles(gUnkEu_08B519E0, 0x80);
-            AnimInit(&work->anim, gUnkEu_09F5C1F0, gUnkEu_09F5C1EC);
+            work->tiles = LoadObjTiles(gBtlPopMissItalianTiles, 0x80);
+            AnimInit(&work->anim, gBtlPopMissItalianAnims, gBtlPopMissItalianFrames);
             break;
         case 9:
-            work->tiles = LoadObjTiles(gUnkEu_08B50BE6, 0x180);
-            AnimInit(&work->anim, gUnkEu_09F5C190, gUnkEu_09F5C18C);
+            work->tiles = LoadObjTiles(gBtlPopCardBreakItalianTiles, 0x180);
+            AnimInit(&work->anim, gBtlPopCardBreakItalianAnims, gBtlPopCardBreakItalianFrames);
             break;
         case 10:
-            work->tiles = LoadObjTiles(gUnkEu_08B51140, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1B0, gUnkEu_09F5C1AC);
+            work->tiles = LoadObjTiles(gBtlPopRecoverItalianTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopRecoverItalianAnims, gBtlPopRecoverItalianFrames);
             break;
         default:
-            work->tiles = LoadObjTiles(gUnkEu_08B519E0, 0x80);
-            AnimInit(&work->anim, gUnkEu_09F5C1F0, gUnkEu_09F5C1EC);
+            work->tiles = LoadObjTiles(gBtlPopMissItalianTiles, 0x80);
+            AnimInit(&work->anim, gBtlPopMissItalianAnims, gBtlPopMissItalianFrames);
             break;
         }
 
@@ -123,24 +123,24 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     default:
         switch (src->kind) {
         case 0:
-            work->tiles = LoadObjTiles(gUnkEu_08B5147C, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1C8, gUnkEu_09F5C1C4);
+            work->tiles = LoadObjTiles(gBtlPopGuardSpanishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopGuardSpanishAnims, gBtlPopGuardSpanishFrames);
             break;
         case 2:
-            work->tiles = LoadObjTiles(gUnkEu_08B518CC, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1E8, gUnkEu_09F5C1E4);
+            work->tiles = LoadObjTiles(gBtlPopMissSpanishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissSpanishAnims, gBtlPopMissSpanishFrames);
             break;
         case 9:
-            work->tiles = LoadObjTiles(gUnkEu_08B50A4A, 0x180);
-            AnimInit(&work->anim, gUnkEu_09F5C188, gUnkEu_09F5C184);
+            work->tiles = LoadObjTiles(gBtlPopCardBreakSpanishTiles, 0x180);
+            AnimInit(&work->anim, gBtlPopCardBreakSpanishAnims, gBtlPopCardBreakSpanishFrames);
             break;
         case 10:
-            work->tiles = LoadObjTiles(gUnkEu_08B5102C, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1A8, gUnkEu_09F5C1A4);
+            work->tiles = LoadObjTiles(gBtlPopRecoverSpanishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopRecoverSpanishAnims, gBtlPopRecoverSpanishFrames);
             break;
         default:
-            work->tiles = LoadObjTiles(gUnkEu_08B518CC, 0x100);
-            AnimInit(&work->anim, gUnkEu_09F5C1E8, gUnkEu_09F5C1E4);
+            work->tiles = LoadObjTiles(gBtlPopMissSpanishTiles, 0x100);
+            AnimInit(&work->anim, gBtlPopMissSpanishAnims, gBtlPopMissSpanishFrames);
             break;
         }
 
@@ -151,17 +151,17 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
 #else
     switch (src->kind) {
     case 0:
-        work->tiles = LoadObjTiles(gUnk_08B1F020, 0x100);
+        work->tiles = LoadObjTiles(gBtlPopGuardTiles, 0x100);
         AnimInit(&work->anim, gUnk_09EE11D0, gUnk_09EE11CC);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 1:
-        work->tiles = LoadObjTiles(gUnk_08B1ED76, 0x180);
+        work->tiles = LoadObjTiles(gBtlPopCounterTiles, 0x180);
         AnimInit(&work->anim, gUnk_09EE11C0, gUnk_09EE11BC);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 2:
-        work->tiles = LoadObjTiles(gUnk_08B1EF0C, 0x100);
+        work->tiles = LoadObjTiles(gBtlPopMissTiles, 0x100);
         AnimInit(&work->anim, gUnk_09EE11C8, gUnk_09EE11C4);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
@@ -171,39 +171,39 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 5:
-        work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
-        AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
+        work->tiles = LoadObjTiles(gBtlPopPercentTiles, 0x500);
+        AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 6:
-        work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
-        AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
+        work->tiles = LoadObjTiles(gBtlPopPercentTiles, 0x500);
+        AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
     case 7:
-        work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
-        AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
+        work->tiles = LoadObjTiles(gBtlPopPercentTiles, 0x500);
+        AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
     case 8:
-        work->tiles = LoadObjTiles(gUnk_08B1F7AC, 0x500);
-        AnimInit(&work->anim, gUnk_09EE1204, gUnk_09EE11F4);
+        work->tiles = LoadObjTiles(gBtlPopPercentTiles, 0x500);
+        AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
         break;
     case 9:
-        work->tiles = LoadObjTiles(gUnk_08B1F472, 0x180);
-        AnimInit(&work->anim, gUnk_09EE11E8, gUnk_09EE11E4);
+        work->tiles = LoadObjTiles(gBtlPopCardBreakTiles, 0x180);
+        AnimInit(&work->anim, gBtlPopCardBreakAnims, gBtlPopCardBreakFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 10:
-        work->tiles = LoadObjTiles(gUnk_08B1F60E, 0x140);
-        AnimInit(&work->anim, gUnk_09EE11F0, gUnk_09EE11EC);
+        work->tiles = LoadObjTiles(gBtlPopRecoverTiles, 0x140);
+        AnimInit(&work->anim, gBtlPopRecoverAnims, gBtlPopRecoverFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     case 4:
     default:
-        work->tiles = LoadObjTiles(gUnk_08B1F2D6, 0x180);
-        AnimInit(&work->anim, gUnk_09EE11E0, gUnk_09EE11DC);
+        work->tiles = LoadObjTiles(gBtlPopTimeBreakTiles, 0x180);
+        AnimInit(&work->anim, gBtlPopTimeBreakAnims, gBtlPopTimeBreakFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
     }

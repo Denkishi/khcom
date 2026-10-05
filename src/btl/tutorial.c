@@ -90,9 +90,9 @@ void task_tutorial_0(TutorialWork* work, s32 arg1) {
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK_USE;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_LIST_SWITCH;
-    work->tiles = AllocObjTiles(0x100, gUnk_08B263D2);
+    work->tiles = AllocObjTiles(0x100, gTutorialArrowTiles);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    AnimInit(&work->anim, gUnk_09EE15F0, gUnk_09EE15C0);
+    AnimInit(&work->anim, gTutorialArrowAnims, gTutorialArrowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     SeedRandom(2);
 }

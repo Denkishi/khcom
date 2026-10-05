@@ -39,9 +39,9 @@ TaskDesc gTaskDescBtlArea = {
 };
 
 void task_btl_lockon_0(BtlLockonWork* work) {
-    work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
+    work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    AnimInit(&work->anim, gUnk_09EE10F8, gUnk_09EE10EC);
+    AnimInit(&work->anim, gBtlLockonAnims, gBtlLockonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     work->timer = 0;
@@ -169,7 +169,7 @@ void task_btl_lockon_3(BtlLockonWork* work) {
 void task_btl_area_0(BtlAreaWork* work) {
     work->visible = 0;
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->tiles = LoadObjTiles(gUnk_08B1EA00, 0xE0);
+    work->tiles = LoadObjTiles(gBtlAreaTiles, 0xE0);
     work->timer = 0;
     work->enabled = 1;
 }
@@ -209,24 +209,24 @@ void task_btl_area_2(BtlAreaWork* work) {
 
     WorldToScreen(&x, &y, gBtlWork->x3 - (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 - (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 + (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 - (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 - (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 + (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3 + (gBtlWork->areaHalfX << 8),
                   gBtlWork->y3 + (gBtlWork->areaHalfY << 8), gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3, gBtlWork->z3);
-    DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3,
                   gBtlWork->z3 - (gBtlWork->areaHalfZ << 8));
-    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, 0, 0x101);
     WorldToScreen(&x, &y, gBtlWork->x3, gBtlWork->y3,
                   gBtlWork->z3 + (gBtlWork->areaHalfZ << 8));
-    DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, SPRITE_FLAG_VFLIP, 0x101);
+    DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, SPRITE_FLAG_VFLIP, 0x101);
 
     if (gBtlWork->soraOwnsPlay) {
         e = ListPoolFirst(&gBtlWork->pool);
@@ -234,42 +234,42 @@ void task_btl_area_2(BtlAreaWork* work) {
         while (e != NULL) {
             WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                           e->y - (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                           e->y - (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                           e->y + (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                           e->y + (e->radiusY << 8), e->z);
-            DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x, e->y, e->z);
-            DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, 0, 0x101);
             WorldToScreen(&x, &y, e->x, e->y,
                           e->z - (e->height << 8));
-            DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
+            DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, 0, 0x101);
             e = ListPoolNext(&e->node);
         }
     } else {
         e = gBtlWork->actor;
         WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                       e->y - (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                       e->y - (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x - (e->radiusX << 8),
                       e->y + (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x + (e->radiusX << 8),
                       e->y + (e->radiusY << 8), e->z);
-        DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x, e->y, e->z);
-        DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, 0, 0x101);
         WorldToScreen(&x, &y, e->x, e->y,
                       e->z - (e->height << 8));
-        DrawSprite(x, y, gUnk_08B1E99C, work->tiles, work->palette, NULL, 0, 0x101);
+        DrawSprite(x, y, gBtlAreaFrame4, work->tiles, work->palette, NULL, 0, 0x101);
     }
 }
 

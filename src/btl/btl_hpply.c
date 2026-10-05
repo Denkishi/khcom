@@ -21,14 +21,14 @@
 void task_btl_hpply_0(BtlHpplyWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         work->palette = LoadObjPalette(gRikuPalette, 0x20);
-        work->tiles = AllocObjTiles(0x280, gUnk_08B21438);
-        work->gfx = gUnk_08B213F0;
-        AnimInit(&work->anim, gUnk_09EE12C8, gUnk_09EE12BC);
+        work->tiles = AllocObjTiles(0x280, gBtlHpRikuFaceTiles);
+        work->gfx = gBtlHpRikuFaceFrame0;
+        AnimInit(&work->anim, gBtlHpRikuFaceAnims, gBtlHpRikuFaceFrames);
     } else {
         work->palette = LoadObjPalette(gSoraPalette, 0x20);
-        work->tiles = AllocObjTiles(0x280, gUnk_08B20D6E);
-        work->gfx = gUnk_08B20D20;
-        AnimInit(&work->anim, gUnk_09EE12B0, gUnk_09EE12A4);
+        work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
+        work->gfx = gBtlHpSoraFaceFrame0;
+        AnimInit(&work->anim, gBtlHpSoraFaceAnims, gBtlHpSoraFaceFrames);
     }
 
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);

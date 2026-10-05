@@ -21,66 +21,66 @@ void* GetExpDigitGfx(s32 digit, u8 leading) {
     case 0:
         if (leading) {
 #ifdef VERSION_JP
-            return gUnk_08B25A5C;
+            return gBtlExpNextFrame4;
 #else
-            return gUnk_08B25E6E;
+            return gBtlExpNextLvFrame4;
 #endif
         }
 
         break;
     case 1:
 #ifdef VERSION_JP
-        return gUnk_08B25A66;
+        return gBtlExpNextFrame5;
 #else
-        return gUnk_08B25E78;
+        return gBtlExpNextLvFrame5;
 #endif
     case 2:
 #ifdef VERSION_JP
-        return gUnk_08B25A70;
+        return gBtlExpNextFrame6;
 #else
-        return gUnk_08B25E82;
+        return gBtlExpNextLvFrame6;
 #endif
     case 3:
 #ifdef VERSION_JP
-        return gUnk_08B25A7A;
+        return gBtlExpNextFrame7;
 #else
-        return gUnk_08B25E8C;
+        return gBtlExpNextLvFrame7;
 #endif
     case 4:
 #ifdef VERSION_JP
-        return gUnk_08B25A84;
+        return gBtlExpNextFrame8;
 #else
-        return gUnk_08B25E96;
+        return gBtlExpNextLvFrame8;
 #endif
     case 5:
 #ifdef VERSION_JP
-        return gUnk_08B25A8E;
+        return gBtlExpNextFrame9;
 #else
-        return gUnk_08B25EA0;
+        return gBtlExpNextLvFrame9;
 #endif
     case 6:
 #ifdef VERSION_JP
-        return gUnk_08B25A98;
+        return gBtlExpNextFrame10;
 #else
-        return gUnk_08B25EAA;
+        return gBtlExpNextLvFrame10;
 #endif
     case 7:
 #ifdef VERSION_JP
-        return gUnk_08B25AA2;
+        return gBtlExpNextFrame11;
 #else
-        return gUnk_08B25EB4;
+        return gBtlExpNextLvFrame11;
 #endif
     case 8:
 #ifdef VERSION_JP
-        return gUnk_08B25AAC;
+        return gBtlExpNextFrame12;
 #else
-        return gUnk_08B25EBE;
+        return gBtlExpNextLvFrame12;
 #endif
     case 9:
 #ifdef VERSION_JP
-        return gUnk_08B25AB6;
+        return gBtlExpNextFrame13;
 #else
-        return gUnk_08B25EC8;
+        return gBtlExpNextLvFrame13;
 #endif
     }
 
@@ -124,11 +124,11 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     }
 
 #ifdef VERSION_JP
-    work->gfx2[4] = gUnk_09EE1538[value + 4];
-    work->gfx2[5] = gUnk_08B25AC0;
+    work->gfx2[4] = gBtlExpNextFrames[value + 4];
+    work->gfx2[5] = gBtlExpNextFrame14;
 #else
-    work->gfx2[4] = gUnk_09EE157C[value + 4];
-    work->gfx2[5] = gUnk_08B25ED2;
+    work->gfx2[4] = gBtlExpNextLvFrames[value + 4];
+    work->gfx2[5] = gBtlExpNextLvFrame14;
 #endif
 }
 
@@ -137,19 +137,19 @@ void task_btl_exp_0(BtlExpWork* work) {
 
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 #if defined(VERSION_EU)
-    work->tiles = AllocObjTiles(0xC0, gUnk_08B25EF0);
+    work->tiles = AllocObjTiles(0xC0, gBtlExpNextLvTiles);
 #elif defined(VERSION_JP)
-    work->tiles = AllocObjTiles(0xA0, gUnk_08B25ADE);
+    work->tiles = AllocObjTiles(0xA0, gBtlExpNextTiles);
 #elif defined(VERSION_US)
-    work->tiles = AllocObjTiles(0xA0, gUnk_08B25EF0);
+    work->tiles = AllocObjTiles(0xA0, gBtlExpNextLvTiles);
 #endif
     work->gfx = NULL;
 
     for (i = 0; i <= 5; i++) {
 #ifdef VERSION_JP
-        work->tiles2[i] = AllocObjTiles(32, gUnk_08B25ADE);
+        work->tiles2[i] = AllocObjTiles(32, gBtlExpNextTiles);
 #else
-        work->tiles2[i] = AllocObjTiles(32, gUnk_08B25EF0);
+        work->tiles2[i] = AllocObjTiles(32, gBtlExpNextLvTiles);
 #endif
         work->gfx2[i] = NULL;
     }
@@ -172,26 +172,26 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #if defined(VERSION_EU)
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
-            work->gfx = gUnk_08B25E40;
+            work->gfx = gBtlExpNextLvFrame0;
             break;
         case LANGUAGE_FRENCH:
-            work->gfx = gUnkEu_08B55CFE;
+            work->gfx = gBtlExpNextLvFrame16;
             break;
         case LANGUAGE_SPANISH:
-            work->gfx = gUnkEu_08B55D18;
+            work->gfx = gBtlExpNextLvFrame18;
             break;
         case LANGUAGE_ITALIAN:
-            work->gfx = gUnkEu_08B55D32;
+            work->gfx = gBtlExpNextLvFrame20;
             break;
         case LANGUAGE_GERMAN:
         default:
-            work->gfx = gUnkEu_08B55D66;
+            work->gfx = gBtlExpNextLvFrame24;
             break;
         }
 #elif defined(VERSION_JP)
-        work->gfx = gUnk_08B25A34;
+        work->gfx = gBtlExpNextFrame0;
 #elif defined(VERSION_US)
-        work->gfx = gUnk_08B25E40;
+        work->gfx = gBtlExpNextLvFrame0;
 #endif
         work->timer = 0;
         work->state = 3;
@@ -207,26 +207,26 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #if defined(VERSION_EU)
             switch (gLanguage) {
             case LANGUAGE_ENGLISH:
-                work->gfx = gUnk_08B25E54;
+                work->gfx = gBtlExpNextLvFrame2;
                 break;
             case LANGUAGE_FRENCH:
-                work->gfx = gUnk_08B25E54;
+                work->gfx = gBtlExpNextLvFrame2;
                 break;
             case LANGUAGE_SPANISH:
-                work->gfx = gUnk_08B25E54;
+                work->gfx = gBtlExpNextLvFrame2;
                 break;
             case LANGUAGE_ITALIAN:
-                work->gfx = gUnkEu_08B55D4C;
+                work->gfx = gBtlExpNextLvFrame22;
                 break;
             case LANGUAGE_GERMAN:
             default:
-                work->gfx = gUnkEu_08B55D80;
+                work->gfx = gBtlExpNextLvFrame26;
                 break;
             }
 #elif defined(VERSION_JP)
-            work->gfx = gUnk_08B25A48;
+            work->gfx = gBtlExpNextFrame2;
 #elif defined(VERSION_US)
-            work->gfx = gUnk_08B25E54;
+            work->gfx = gBtlExpNextLvFrame2;
 #endif
             work->timer = 0;
             work->state = 1;
@@ -248,26 +248,26 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #if defined(VERSION_EU)
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
-                    work->gfx = gUnk_08B25E5E;
+                    work->gfx = gBtlExpNextLvFrame3;
                     break;
                 case LANGUAGE_FRENCH:
-                    work->gfx = gUnkEu_08B55D08;
+                    work->gfx = gBtlExpNextLvFrame17;
                     break;
                 case LANGUAGE_SPANISH:
-                    work->gfx = gUnkEu_08B55D22;
+                    work->gfx = gBtlExpNextLvFrame19;
                     break;
                 case LANGUAGE_ITALIAN:
-                    work->gfx = gUnkEu_08B55D3C;
+                    work->gfx = gBtlExpNextLvFrame21;
                     break;
                 case LANGUAGE_GERMAN:
                 default:
-                    work->gfx = gUnkEu_08B55D70;
+                    work->gfx = gBtlExpNextLvFrame25;
                     break;
                 }
 #elif defined(VERSION_JP)
-                work->gfx = gUnk_08B25A52;
+                work->gfx = gBtlExpNextFrame3;
 #elif defined(VERSION_US)
-                work->gfx = gUnk_08B25E5E;
+                work->gfx = gBtlExpNextLvFrame3;
 #endif
             }
 
@@ -289,26 +289,26 @@ s32 task_btl_exp_1(BtlExpWork* work) {
 #if defined(VERSION_EU)
                 switch (gLanguage) {
                 case LANGUAGE_ENGLISH:
-                    work->gfx = gUnk_08B25E5E;
+                    work->gfx = gBtlExpNextLvFrame3;
                     break;
                 case LANGUAGE_FRENCH:
-                    work->gfx = gUnkEu_08B55D08;
+                    work->gfx = gBtlExpNextLvFrame17;
                     break;
                 case LANGUAGE_SPANISH:
-                    work->gfx = gUnkEu_08B55D22;
+                    work->gfx = gBtlExpNextLvFrame19;
                     break;
                 case LANGUAGE_ITALIAN:
-                    work->gfx = gUnkEu_08B55D3C;
+                    work->gfx = gBtlExpNextLvFrame21;
                     break;
                 case LANGUAGE_GERMAN:
                 default:
-                    work->gfx = gUnkEu_08B55D70;
+                    work->gfx = gBtlExpNextLvFrame25;
                     break;
                 }
 #elif defined(VERSION_JP)
-                work->gfx = gUnk_08B25A52;
+                work->gfx = gBtlExpNextFrame3;
 #elif defined(VERSION_US)
-                work->gfx = gUnk_08B25E5E;
+                work->gfx = gBtlExpNextLvFrame3;
 #endif
             }
 

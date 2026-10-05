@@ -55,7 +55,7 @@ static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt02Frames, gRikuBt02Anims, gRikuBt02Tiles, 1 },
     { gRikuBt04Frames, gRikuBt04Anims, gRikuBt04Tiles, 0 },
     { gRikuBt05Frames, gRikuBt05Anims, gRikuBt05Tiles, 0 },
-    { gUnk_09EDF3E8, gUnk_09EDF400, gUnk_08925B44, 0 },
+    { gBtlRikuStartFrames, gBtlRikuStartAnims, gBtlRikuStartTiles, 0 },
     { gNiserikuIdolFrames, gNiserikuIdolAnims, gNiserikuIdolTiles, 0 },
     { gNiserikuRunFrames, gNiserikuRunAnims, gNiserikuRunTiles, 0 },
     { gNiserikuDamageFrames, gNiserikuDamageAnims, gNiserikuDamageTiles, 0 },
@@ -2795,8 +2795,8 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->stateTimer == 0) {
             SetBtlRikuAnimation(work, 24, 0);
-            work->paletteData = gUnk_08F6DD04;
-            LoadObjPaletteBank(work->palette->index, gUnk_08F6DD04);
+            work->paletteData = gBtlRikuDarkModePalette;
+            LoadObjPaletteBank(work->palette->index, gBtlRikuDarkModePalette);
             gBtlWork->flags |= BTL_FLAG_DARK_MODE;
             gBtlWork->flags |= BTL_FLAG_DARK_MODE_CHANGED;
             gBtlWork->darkPoints = gGameState.progression.dp;

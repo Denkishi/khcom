@@ -5266,7 +5266,7 @@ s32 MapMenuOpen(MapMenuWork* work) {
         work->tiles8 = AllocObjTiles(0x340, gSor1ff00Tiles);
     }
 
-    work->tiles7 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles7 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette7 = LoadObjPalette(gUnk_08F69BE4, 32);
     work->playerStartX = gFieldState->actor.fieldPosition.x - gFieldState->x;
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
@@ -5746,7 +5746,7 @@ void Task_MapMenu_2(MapMenuWork* work) {
                 work->palette6, NULL, SPRITE_PRIORITY(1), 80);
         }
 
-        DrawSprite(work->x8 >> 8, work->y4 >> 8, gUnk_09EE1380[0], work->tiles7, work->palette7, NULL,
+        DrawSprite(work->x8 >> 8, work->y4 >> 8, gBtlShadowFrames[0], work->tiles7, work->palette7, NULL,
             SPRITE_PRIORITY(1), 81);
     }
 

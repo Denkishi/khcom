@@ -905,7 +905,7 @@ void task_hum_hook_bomb_0(HookBombWork* work, VixenNdlArgs* args) {
         break;
     }
 
-    work->tiles2 = LoadObjTiles(gUnk_08B22CE4, 0x200);
+    work->tiles2 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette2 = LoadObjPalette(gBStatesPalette, 0x20);
     work->visible = 1;
 }
@@ -1015,7 +1015,7 @@ void task_hum_hook_bomb_2(HookBombWork* work) {
     DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, attr,
         -0x1004 - ((work->y + 0x800) >> 8) * 4);
     WorldToScreen(&x, &y, work->x, work->y, 0);
-    DrawSprite(x, y, gUnk_08B22CBC, work->tiles2, work->palette2, NULL, attr, 0xFFF0);
+    DrawSprite(x, y, gBtlShadowSmallFrame0, work->tiles2, work->palette2, NULL, attr, 0xFFF0);
 }
 
 void task_hum_hook_bomb_3(HookBombWork* work) {

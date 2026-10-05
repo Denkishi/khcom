@@ -94,7 +94,7 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &work->collider;
     ColliderInit(p, 5, 8, 10);
@@ -138,7 +138,7 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &work->collider;
     ColliderInit(p, 5, 8, 10);
@@ -175,7 +175,7 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     work->tiles2 = LoadObjTiles(work->cardDef->tiles, 0x300);
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
-    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
     p = &work->collider;
     ColliderInit(p, 5, 8, 10);
@@ -677,7 +677,7 @@ void PickupCardDraw(PickupCardWork* work) {
                           work->posX, work->posY,
                           work->floor);
             DrawSprite(work->x, work->y,
-                       gUnk_09EE1380[0], work->tiles4,
+                       gBtlShadowFrames[0], work->tiles4,
                        work->palette3, AllocObjAffine(0, v, v, 0),
                        work->spriteFlags, work->priority + 2);
         }
@@ -723,7 +723,7 @@ void Heartless_card_2(PickupCardWork* work) {
                           work->posX, work->posY,
                           work->floor);
             DrawSprite(work->x, work->y,
-                       gUnk_09EE1380[0], work->tiles4,
+                       gBtlShadowFrames[0], work->tiles4,
                        work->palette3, AllocObjAffine(0, v, v, 0),
                        work->spriteFlags, work->priority + 2);
         }

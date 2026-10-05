@@ -1073,7 +1073,7 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->tiles3 = LoadObjTiles(work->cardBack->tiles, work->cardBack->tilesSize);
     work->palette2 = LoadObjPalette(work->cardBack->palette, work->cardBack->paletteSize);
     work->tiles4 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
-    work->tiles5 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles5 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
     work->posX = args[0];
     work->posY = args[1];
@@ -1336,7 +1336,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
             v = 2;
         }
 
-        DrawSprite(work->x2, work->y, gUnk_09EE1380[0],
+        DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
                    work->tiles5, work->palette3,
                    AllocObjAffine(0, v, v, 0), pal,
                    work->priority + 2);

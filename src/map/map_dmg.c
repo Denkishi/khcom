@@ -22,7 +22,7 @@ void Task_MapDmg_0(MapDmgWork* work) {
 
     work->visible = z;
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
-    work->tiles = LoadObjTiles(gUnk_08B1EA00, 224);
+    work->tiles = LoadObjTiles(gBtlAreaTiles, 224);
     work->timer = z;
     work->enabled = 1;
 }
@@ -55,23 +55,23 @@ void Task_MapDmg_2(MapDmgWork* work) {
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E974, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gBtlAreaFrame0, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY - 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E97E, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gBtlAreaFrame1, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX - 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E992, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gBtlAreaFrame3, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX + 0x1400) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY + 0x1400) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E988, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gBtlAreaFrame2, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 
     x = ((gMapRoomState->attackX) >> 8) - (gFieldState->x >> 8);
     y = ((gMapRoomState->attackY) >> 8) + (gMapRoomState->attackZ >> 8) - (gFieldState->y >> 8);
-    DrawSprite(x, y, gUnk_08B1E9A6, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
+    DrawSprite(x, y, gBtlAreaFrame5, work->tiles, work->palette, NULL, SPRITE_PRIORITY(2), 0x101);
 }
 
 void Task_MapDmg_3(MapDmgWork* work) {

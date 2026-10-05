@@ -180,7 +180,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         break;
     }
 
-    work->tiles = LoadObjTiles(gUnk_08B22CE4, 0x200);
+    work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
     work->palette2 = LoadObjPalette(gBStatesPalette, 32);
     m4aSongNumStart(SONG_BTL_LT2_SW);
 }
@@ -453,7 +453,7 @@ void task_btl_raid_2(BtlRaidWork* work) {
         DrawSprite(sx, sy, work->gfx, work->tiles2, work->palette, affine, flags,
                    -4100 - (((work->y + 0x1000) >> 8) * 4));
         WorldToScreen(&sx, &sy, work->x, work->y, 0);
-        DrawSprite(sx, sy, gUnk_08B22CBC, work->tiles, work->palette2, NULL, flags, 0xFFFE);
+        DrawSprite(sx, sy, gBtlShadowSmallFrame0, work->tiles, work->palette2, NULL, flags, 0xFFFE);
     }
 }
 

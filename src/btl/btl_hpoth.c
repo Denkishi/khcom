@@ -17,9 +17,9 @@
 
 void task_btl_hpoth_0(BtlHpothWork* work) {
     work->palette = LoadObjPalette(gUnk_096FAC64, 32);
-    work->tiles = AllocObjTiles(0x280, gUnk_08B20D6E);
-    work->gfx = gUnk_08B20D20;
-    AnimInit(&work->anim, gUnk_09EE12B0, gUnk_09EE12A4);
+    work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
+    work->gfx = gBtlHpSoraFaceFrame0;
+    AnimInit(&work->anim, gBtlHpSoraFaceAnims, gBtlHpSoraFaceFrames);
     work->palette2 = LoadObjPalette(gBStatesPalette, 32);
     work->tiles2 = AllocObjTiles(0x280, gBHpgagTiles);
     work->tiles3 = AllocObjTiles(0x120, gBHpgagTiles);

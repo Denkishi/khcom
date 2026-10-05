@@ -19,14 +19,14 @@ void task_btl_shadow_0(BtlShadowWork* work, BtlObj* actor) {
     work->actor = actor;
 
     if (actor->flags & BTLOBJ_FLAG_SMALL_SHADOW) {
-        work->tiles = LoadObjTiles(gUnk_08B22CE4, 0x200);
-        work->gfx = gUnk_08B22CBC;
+        work->tiles = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
+        work->gfx = gBtlShadowSmallFrame0;
     } else if (actor->flags & BTLOBJ_FLAG_LARGE_SHADOW) {
-        work->tiles = LoadObjTiles(gUnk_08B22EFE, 0x140);
-        work->gfx = gUnk_08B22EE4;
+        work->tiles = LoadObjTiles(gBtlShadowLargeTiles, 0x140);
+        work->gfx = gBtlShadowLargeFrame0;
     } else {
-        work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
-        work->gfx = gUnk_08B22BA8;
+        work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
+        work->gfx = gBtlShadowFrame0;
     }
 
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);

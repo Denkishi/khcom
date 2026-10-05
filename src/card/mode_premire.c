@@ -171,7 +171,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* a) {
         break;
     }
 
-    work->tiles = LoadObjTiles(gUnk_08B25ADE, 0x360);
+    work->tiles = LoadObjTiles(gBtlExpNextTiles, 0x360);
     work->countThousands = 0;
     work->countHundreds = 0;
     work->countTens = 0;
@@ -362,20 +362,20 @@ void HCEffectName_2(HcEffectNameWork* work) {
     if (work->visible == 1) {
         pri = 0x410;
         DrawSprite(work->x, 0x90, NULL, work->tiles2, work->palette, NULL, pri, 10);
-        DrawSprite(work->x, 0x8A, gUnk_09EE1538[15], work->tiles, work->palette, NULL, pri, 10);
-        DrawSprite(work->x + 8, 0x8A, gUnk_09EE1538[work->countTens + 4], work->tiles, work->palette, NULL, pri, 10);
-        DrawSprite(work->x + 16, 0x8A, gUnk_09EE1538[work->countOnes + 4], work->tiles, work->palette, NULL, pri, 10);
+        DrawSprite(work->x, 0x8A, gBtlExpNextFrames[15], work->tiles, work->palette, NULL, pri, 10);
+        DrawSprite(work->x + 8, 0x8A, gBtlExpNextFrames[work->countTens + 4], work->tiles, work->palette, NULL, pri, 10);
+        DrawSprite(work->x + 16, 0x8A, gBtlExpNextFrames[work->countOnes + 4], work->tiles, work->palette, NULL, pri, 10);
         DrawSprite(work->x + 24, 0x8A, NULL, work->tiles3, work->palette, NULL, pri, 10);
-        DrawSprite(work->x + 32, 0x8A, gUnk_09EE1538[14], work->tiles, work->palette, NULL, pri, 10);
+        DrawSprite(work->x + 32, 0x8A, gBtlExpNextFrames[14], work->tiles, work->palette, NULL, pri, 10);
     }
 #else
     if (work->visible == 1) {
         DrawSprite(work->x, 0x90, NULL, work->tiles2, work->palette, NULL, SPRITE_PRIORITY(1), 10);
-        DrawSprite(work->x, 0x8A, gUnk_09EE1538[15], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
-        DrawSprite(work->x + 8, 0x8A, gUnk_09EE1538[work->countTens + 4], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
-        DrawSprite(work->x + 16, 0x8A, gUnk_09EE1538[work->countOnes + 4], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(work->x, 0x8A, gBtlExpNextFrames[15], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(work->x + 8, 0x8A, gBtlExpNextFrames[work->countTens + 4], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(work->x + 16, 0x8A, gBtlExpNextFrames[work->countOnes + 4], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
         DrawSprite(work->x + 24, 0x8A, NULL, work->tiles3, work->palette, NULL, SPRITE_PRIORITY(1), 10);
-        DrawSprite(work->x + 32, 0x8A, gUnk_09EE1538[14], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
+        DrawSprite(work->x + 32, 0x8A, gBtlExpNextFrames[14], work->tiles, work->palette, NULL, SPRITE_PRIORITY(1), 10);
     }
 #endif
 }

@@ -151,9 +151,9 @@ void task_evt_obj_3(EvtObjWork* work) {
 
 void task_evt_shadow_0(EvtShadowWork* work, EvtObj* obj) {
     work->obj = obj;
-    work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
-    work->tiles3 = LoadObjTiles(gUnk_08B22CE4, 0x200);
-    work->tiles2 = LoadObjTiles(gUnk_08B22EFE, 0x140);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
+    work->tiles3 = LoadObjTiles(gBtlShadowSmallTiles, 0x200);
+    work->tiles2 = LoadObjTiles(gBtlShadowLargeTiles, 0x140);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 32);
 }
 
@@ -177,13 +177,13 @@ void task_evt_shadow_2(EvtShadowWork* work) {
     }
 
     if (obj->flags & EVTOBJ_FLAG_SHADOW_WIDE) {
-        gfx = gUnk_08B22EE4;
+        gfx = gBtlShadowLargeFrame0;
         vram = work->tiles2;
     } else if (obj->flags & EVTOBJ_FLAG_SHADOW_SMALL) {
-        gfx = gUnk_08B22CBC;
+        gfx = gBtlShadowSmallFrame0;
         vram = work->tiles3;
     } else {
-        gfx = gUnk_08B22BA8;
+        gfx = gBtlShadowFrame0;
         vram = work->tiles;
     }
 

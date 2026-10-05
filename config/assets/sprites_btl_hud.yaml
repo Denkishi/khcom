@@ -32,31 +32,31 @@ objects:
     data_start: 0x09F5C0EC
     data_end: 0x09F5C408
 entries:
-- name: gUnk_08B255B4
+- name: gMonsgageTiles
   format: sprite_sheet
   cell: [64, 20]
   anchor: [0, 4]
   columns: 5
   frames:
-  - symbol: gUnk_08B2556C
+  - symbol: gMonsgageFrame0
     pieces:
     - [32x8, 0, 0]
     - [32x16, 32, 0]
-  - symbol: gUnk_08B2557C
+  - symbol: gMonsgageFrame1
     pieces:
     - [32x8, 0, -4]
-  - symbol: gUnk_08B25586
+  - symbol: gMonsgageFrame2
     pieces:
     - [32x8, 0, -4]
-  - symbol: gUnk_08B25590
+  - symbol: gMonsgageFrame3
     pieces:
     - [32x8, 0, -4]
-  - symbol: gUnk_08B2559A
+  - symbol: gMonsgageFrame4
     pieces:
     - [32x8, 0, 0]
     - [32x16, 32, 0]
   animations:
-  - symbol: gUnk_08B255AA
+  - symbol: gMonsgageAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -69,63 +69,63 @@ entries:
   eu:
     address: 0x08B4FB78
     size: 1224
-- name: gUnk_08B25ADE
+- name: gBtlExpNextTiles
   format: sprite_sheet
   align: 4
   cell: [32, 8]
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnk_08B25A34
+  - symbol: gBtlExpNextFrame0
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25A3E
+  - symbol: gBtlExpNextFrame1
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25A48
+  - symbol: gBtlExpNextFrame2
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25A52
+  - symbol: gBtlExpNextFrame3
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25A5C
+  - symbol: gBtlExpNextFrame4
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A66
+  - symbol: gBtlExpNextFrame5
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A70
+  - symbol: gBtlExpNextFrame6
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A7A
+  - symbol: gBtlExpNextFrame7
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A84
+  - symbol: gBtlExpNextFrame8
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A8E
+  - symbol: gBtlExpNextFrame9
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25A98
+  - symbol: gBtlExpNextFrame10
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25AA2
+  - symbol: gBtlExpNextFrame11
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25AAC
+  - symbol: gBtlExpNextFrame12
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25AB6
+  - symbol: gBtlExpNextFrame13
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25AC0
+  - symbol: gBtlExpNextFrame14
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25ACA
+  - symbol: gBtlExpNextFrame15
     pieces:
     - [8x8, 0, 0, {hflip: true}]
   animations:
-  - symbol: gUnk_08B25AD4
+  - symbol: gBtlExpNextAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -138,64 +138,64 @@ entries:
   eu:
     address: 0x08B50624
     size: 1034
-- name: gUnk_08B25EF0
+- name: gBtlExpNextLvTiles
   format: sprite_sheet
   align: 4
   cell: [48, 8]
   anchor: [0, 0]
   columns: 8
   frames:
-  - symbol: gUnk_08B25E40
+  - symbol: gBtlExpNextLvFrame0
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25E4A
+  - symbol: gBtlExpNextLvFrame1
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25E54
+  - symbol: gBtlExpNextLvFrame2
     pieces:
     - [32x8, 0, 0]
-  - symbol: gUnk_08B25E5E
+  - symbol: gBtlExpNextLvFrame3
     pieces:
     - [32x8, 0, 0]
     - [8x8, 32, 0]
-  - symbol: gUnk_08B25E6E
+  - symbol: gBtlExpNextLvFrame4
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25E78
+  - symbol: gBtlExpNextLvFrame5
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25E82
+  - symbol: gBtlExpNextLvFrame6
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25E8C
+  - symbol: gBtlExpNextLvFrame7
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25E96
+  - symbol: gBtlExpNextLvFrame8
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EA0
+  - symbol: gBtlExpNextLvFrame9
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EAA
+  - symbol: gBtlExpNextLvFrame10
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EB4
+  - symbol: gBtlExpNextLvFrame11
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EBE
+  - symbol: gBtlExpNextLvFrame12
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EC8
+  - symbol: gBtlExpNextLvFrame13
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25ED2
+  - symbol: gBtlExpNextLvFrame14
     pieces:
     - [8x8, 0, 0]
-  - symbol: gUnk_08B25EDC
+  - symbol: gBtlExpNextLvFrame15
     pieces:
     - [8x8, 0, 0, {hflip: true}]
   animations:
-  - symbol: gUnk_08B25EE6
+  - symbol: gBtlExpNextLvAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -209,647 +209,647 @@ entries:
     address: 0x08B55C58
     size: 2988
     frames:
-    - symbol: gUnk_08B25E40
+    - symbol: gBtlExpNextLvFrame0
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnk_08B25E4A
+    - symbol: gBtlExpNextLvFrame1
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnk_08B25E54
+    - symbol: gBtlExpNextLvFrame2
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnk_08B25E5E
+    - symbol: gBtlExpNextLvFrame3
       pieces:
       - [32x8, 0, 0]
       - [16x8, 32, 0]
-    - symbol: gUnk_08B25E6E
+    - symbol: gBtlExpNextLvFrame4
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25E78
+    - symbol: gBtlExpNextLvFrame5
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25E82
+    - symbol: gBtlExpNextLvFrame6
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25E8C
+    - symbol: gBtlExpNextLvFrame7
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25E96
+    - symbol: gBtlExpNextLvFrame8
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EA0
+    - symbol: gBtlExpNextLvFrame9
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EAA
+    - symbol: gBtlExpNextLvFrame10
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EB4
+    - symbol: gBtlExpNextLvFrame11
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EBE
+    - symbol: gBtlExpNextLvFrame12
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EC8
+    - symbol: gBtlExpNextLvFrame13
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25ED2
+    - symbol: gBtlExpNextLvFrame14
       pieces:
       - [8x8, 0, 0]
-    - symbol: gUnk_08B25EDC
+    - symbol: gBtlExpNextLvFrame15
       pieces:
       - [8x8, 0, 0, {hflip: true}]
-    - symbol: gUnkEu_08B55CFE
+    - symbol: gBtlExpNextLvFrame16
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D08
-      pieces:
-      - [32x8, 0, 0]
-      - [16x8, 32, 0]
-    - symbol: gUnkEu_08B55D18
-      pieces:
-      - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D22
+    - symbol: gBtlExpNextLvFrame17
       pieces:
       - [32x8, 0, 0]
       - [16x8, 32, 0]
-    - symbol: gUnkEu_08B55D32
+    - symbol: gBtlExpNextLvFrame18
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D3C
+    - symbol: gBtlExpNextLvFrame19
       pieces:
       - [32x8, 0, 0]
       - [16x8, 32, 0]
-    - symbol: gUnkEu_08B55D4C
+    - symbol: gBtlExpNextLvFrame20
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D56
+    - symbol: gBtlExpNextLvFrame21
+      pieces:
+      - [32x8, 0, 0]
+      - [16x8, 32, 0]
+    - symbol: gBtlExpNextLvFrame22
+      pieces:
+      - [32x8, 0, 0]
+    - symbol: gBtlExpNextLvFrame23
       pieces:
       - [16x8, 0, 0]
       - [8x8, 16, 0]
-    - symbol: gUnkEu_08B55D66
+    - symbol: gBtlExpNextLvFrame24
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D70
+    - symbol: gBtlExpNextLvFrame25
       pieces:
       - [32x8, 0, 0]
       - [16x8, 32, 0]
-    - symbol: gUnkEu_08B55D80
+    - symbol: gBtlExpNextLvFrame26
       pieces:
       - [32x8, 0, 0]
-    - symbol: gUnkEu_08B55D8A
+    - symbol: gBtlExpNextLvFrame27
       pieces:
       - [16x8, 0, 0]
       - [8x8, 16, 0, {fresh: true}]
-- name: gUnkEu_08B50A4A
+- name: gBtlPopCardBreakSpanishTiles
   format: sprite_sheet
   align: 4
   cell: [48, 16]
   anchor: [24, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B50A30
+  - symbol: gBtlPopCardBreakSpanishFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
   animations:
-  - symbol: gUnkEu_08B50A40
+  - symbol: gBtlPopCardBreakSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50A30
     size: 410
-- name: gUnkEu_08B50BE6
+- name: gBtlPopCardBreakItalianTiles
   format: sprite_sheet
   align: 4
   cell: [48, 16]
   anchor: [24, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B50BCC
+  - symbol: gBtlPopCardBreakItalianFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
   animations:
-  - symbol: gUnkEu_08B50BDC
+  - symbol: gBtlPopCardBreakItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50BCC
     size: 410
-- name: gUnkEu_08B50D82
+- name: gBtlPopCardBreakGermanTiles
   format: sprite_sheet
   align: 4
   cell: [48, 16]
   anchor: [24, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B50D68
+  - symbol: gBtlPopCardBreakGermanFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
   animations:
-  - symbol: gUnkEu_08B50D78
+  - symbol: gBtlPopCardBreakGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50D68
     size: 410
-- name: gUnkEu_08B50F18
+- name: gBtlPopRecoverFrenchTiles
   format: sprite_sheet
   align: 4
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B50F04
+  - symbol: gBtlPopRecoverFrenchFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B50F0E
+  - symbol: gBtlPopRecoverFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B50F04
     size: 276
-- name: gUnkEu_08B5102C
+- name: gBtlPopRecoverSpanishTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51018
+  - symbol: gBtlPopRecoverSpanishFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B51022
+  - symbol: gBtlPopRecoverSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51018
     size: 276
-- name: gUnkEu_08B51140
+- name: gBtlPopRecoverItalianTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B5112C
+  - symbol: gBtlPopRecoverItalianFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B51136
+  - symbol: gBtlPopRecoverItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B5112C
     size: 276
-- name: gUnkEu_08B51254
+- name: gBtlPopRecoverGermanTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51240
+  - symbol: gBtlPopRecoverGermanFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B5124A
+  - symbol: gBtlPopRecoverGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51240
     size: 276
-- name: gUnkEu_08B51368
+- name: gBtlPopGuardFrenchTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51354
+  - symbol: gBtlPopGuardFrenchFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B5135E
+  - symbol: gBtlPopGuardFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51354
     size: 276
-- name: gUnkEu_08B5147C
+- name: gBtlPopGuardSpanishTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51468
+  - symbol: gBtlPopGuardSpanishFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B51472
+  - symbol: gBtlPopGuardSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51468
     size: 276
-- name: gUnkEu_08B51590
+- name: gBtlPopGuardItalianTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B5157C
+  - symbol: gBtlPopGuardItalianFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B51586
+  - symbol: gBtlPopGuardItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B5157C
     size: 276
-- name: gUnkEu_08B516A4
+- name: gBtlPopGuardGermanTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51690
+  - symbol: gBtlPopGuardGermanFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B5169A
+  - symbol: gBtlPopGuardGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51690
     size: 276
-- name: gUnkEu_08B517B8
+- name: gBtlPopMissFrenchTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B517A4
+  - symbol: gBtlPopMissFrenchFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B517AE
+  - symbol: gBtlPopMissFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B517A4
     size: 276
-- name: gUnkEu_08B518CC
+- name: gBtlPopMissSpanishTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B518B8
+  - symbol: gBtlPopMissSpanishFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B518C2
+  - symbol: gBtlPopMissSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B518B8
     size: 276
-- name: gUnkEu_08B519E0
+- name: gBtlPopMissItalianTiles
   format: sprite_sheet
   cell: [16, 16]
   anchor: [8, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B519CC
+  - symbol: gBtlPopMissItalianFrame0
     pieces:
     - [16x16, -8, -8]
   animations:
-  - symbol: gUnkEu_08B519D6
+  - symbol: gBtlPopMissItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B519CC
     size: 148
-- name: gUnkEu_08B51A74
+- name: gBtlPopMissGermanTiles
   format: sprite_sheet
   cell: [32, 16]
   anchor: [16, 8]
   columns: 1
   frames:
-  - symbol: gUnkEu_08B51A60
+  - symbol: gBtlPopMissGermanFrame0
     pieces:
     - [32x16, -16, -8]
   animations:
-  - symbol: gUnkEu_08B51A6A
+  - symbol: gBtlPopMissGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51A60
     size: 276
-- name: gUnkEu_08B51BA8
+- name: gBtlPauseItalianSpanishTiles
   format: sprite_sheet
   cell: [48, 16]
   anchor: [24, 8]
   columns: 2
   frames:
-  - symbol: gUnkEu_08B51B74
+  - symbol: gBtlPauseItalianSpanishFrame0
     pieces:
     - [32x8, -24, -8]
     - [16x8, 8, -8]
-  - symbol: gUnkEu_08B51B84
+  - symbol: gBtlPauseItalianSpanishFrame1
     pieces:
     - [32x8, -24, 0]
     - [16x8, 8, 0]
   animations:
-  - symbol: gUnkEu_08B51B94
+  - symbol: gBtlPauseItalianSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
-  - symbol: gUnkEu_08B51B9E
+  - symbol: gBtlPauseItalianSpanishAnim1
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[1, 4]]
   eu:
     address: 0x08B51B74
     size: 436
-- name: gUnkEu_08B51D50
+- name: gBtlEscapeFrenchTiles
   format: sprite_sheet
   cell: [35, 19]
   anchor: [7, 12]
   columns: 3
   frames:
-  - symbol: gUnkEu_08B51D28
+  - symbol: gBtlEscapeFrenchFrame0
     pieces:
     - [32x16, -4, -12]
-  - symbol: gUnkEu_08B51D32
+  - symbol: gBtlEscapeFrenchFrame1
     pieces:
     - [16x8, 0, -1]
-  - symbol: gUnkEu_08B51D3C
+  - symbol: gBtlEscapeFrenchFrame2
     pieces:
     - [32x16, -7, -12]
   animations:
-  - symbol: gUnkEu_08B51D46
+  - symbol: gBtlEscapeFrenchAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51D28
     size: 616
-- name: gUnkEu_08B51FB8
+- name: gBtlEscapeSpanishTiles
   format: sprite_sheet
   cell: [35, 19]
   anchor: [7, 12]
   columns: 3
   frames:
-  - symbol: gUnkEu_08B51F90
+  - symbol: gBtlEscapeSpanishFrame0
     pieces:
     - [32x16, -4, -12]
-  - symbol: gUnkEu_08B51F9A
+  - symbol: gBtlEscapeSpanishFrame1
     pieces:
     - [16x8, 0, -1]
-  - symbol: gUnkEu_08B51FA4
+  - symbol: gBtlEscapeSpanishFrame2
     pieces:
     - [32x16, -7, -12]
   animations:
-  - symbol: gUnkEu_08B51FAE
+  - symbol: gBtlEscapeSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B51F90
     size: 616
-- name: gUnkEu_08B52220
+- name: gBtlEscapeItalianTiles
   format: sprite_sheet
   cell: [35, 19]
   anchor: [7, 12]
   columns: 3
   frames:
-  - symbol: gUnkEu_08B521F8
+  - symbol: gBtlEscapeItalianFrame0
     pieces:
     - [32x16, -4, -12]
-  - symbol: gUnkEu_08B52202
+  - symbol: gBtlEscapeItalianFrame1
     pieces:
     - [16x8, 0, -1]
-  - symbol: gUnkEu_08B5220C
+  - symbol: gBtlEscapeItalianFrame2
     pieces:
     - [32x16, -7, -12]
   animations:
-  - symbol: gUnkEu_08B52216
+  - symbol: gBtlEscapeItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B521F8
     size: 616
-- name: gUnkEu_08B52488
+- name: gBtlEscapeGermanTiles
   format: sprite_sheet
   cell: [35, 19]
   anchor: [7, 12]
   columns: 3
   frames:
-  - symbol: gUnkEu_08B52460
+  - symbol: gBtlEscapeGermanFrame0
     pieces:
     - [32x16, -4, -12]
-  - symbol: gUnkEu_08B5246A
+  - symbol: gBtlEscapeGermanFrame1
     pieces:
     - [16x8, 0, -1]
-  - symbol: gUnkEu_08B52474
+  - symbol: gBtlEscapeGermanFrame2
     pieces:
     - [32x16, -7, -12]
   animations:
-  - symbol: gUnkEu_08B5247E
+  - symbol: gBtlEscapeGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B52460
     size: 616
-- name: gUnkEu_08B52782
+- name: gBtlPopCbSpanishTiles
   format: sprite_sheet
   cell: [64, 16]
   anchor: [28, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_08B526C8
+  - symbol: gBtlPopCbSpanishFrame0
     pieces:
     - [32x16, -23, -8]
     - [16x16, 9, -8]
-  - symbol: gUnkEu_08B526D8
+  - symbol: gBtlPopCbSpanishFrame1
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B526E8
+  - symbol: gBtlPopCbSpanishFrame2
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B526F8
+  - symbol: gBtlPopCbSpanishFrame3
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52708
+  - symbol: gBtlPopCbSpanishFrame4
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52718
+  - symbol: gBtlPopCbSpanishFrame5
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52728
+  - symbol: gBtlPopCbSpanishFrame6
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52738
+  - symbol: gBtlPopCbSpanishFrame7
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52748
+  - symbol: gBtlPopCbSpanishFrame8
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52758
+  - symbol: gBtlPopCbSpanishFrame9
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B52768
+  - symbol: gBtlPopCbSpanishFrame10
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
   animations:
-  - symbol: gUnkEu_08B52778
+  - symbol: gBtlPopCbSpanishAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B526C8
     size: 3130
-- name: gUnkEu_08B533BE
+- name: gBtlPopCbItalianTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [28, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_08B53304
+  - symbol: gBtlPopCbItalianFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
-  - symbol: gUnkEu_08B53314
+  - symbol: gBtlPopCbItalianFrame1
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53324
+  - symbol: gBtlPopCbItalianFrame2
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53334
+  - symbol: gBtlPopCbItalianFrame3
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53344
+  - symbol: gBtlPopCbItalianFrame4
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53354
+  - symbol: gBtlPopCbItalianFrame5
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53364
+  - symbol: gBtlPopCbItalianFrame6
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53374
+  - symbol: gBtlPopCbItalianFrame7
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53384
+  - symbol: gBtlPopCbItalianFrame8
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53394
+  - symbol: gBtlPopCbItalianFrame9
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B533A4
+  - symbol: gBtlPopCbItalianFrame10
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
   animations:
-  - symbol: gUnkEu_08B533B4
+  - symbol: gBtlPopCbItalianAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
   eu:
     address: 0x08B53304
     size: 3130
-- name: gUnkEu_08B53FFA
+- name: gBtlPopCbGermanTiles
   format: sprite_sheet
   align: 4
   cell: [64, 16]
   anchor: [28, 8]
   columns: 8
   frames:
-  - symbol: gUnkEu_08B53F40
+  - symbol: gBtlPopCbGermanFrame0
     pieces:
     - [32x16, -24, -8]
     - [16x16, 8, -8]
-  - symbol: gUnkEu_08B53F50
+  - symbol: gBtlPopCbGermanFrame1
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53F60
+  - symbol: gBtlPopCbGermanFrame2
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53F70
+  - symbol: gBtlPopCbGermanFrame3
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53F80
+  - symbol: gBtlPopCbGermanFrame4
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53F90
+  - symbol: gBtlPopCbGermanFrame5
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53FA0
+  - symbol: gBtlPopCbGermanFrame6
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53FB0
+  - symbol: gBtlPopCbGermanFrame7
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53FC0
+  - symbol: gBtlPopCbGermanFrame8
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53FD0
+  - symbol: gBtlPopCbGermanFrame9
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
-  - symbol: gUnkEu_08B53FE0
+  - symbol: gBtlPopCbGermanFrame10
     pieces:
     - [32x16, -28, -8]
     - [32x16, 4, -8]
   animations:
-  - symbol: gUnkEu_08B53FF0
+  - symbol: gBtlPopCbGermanAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 4]]
@@ -1067,82 +1067,82 @@ entries:
     address: 0x08B54B7C
     size: 4316
     symbol: gBHpgagETiles
-- name: gUnk_08B263D2
+- name: gTutorialArrowTiles
   format: sprite_sheet
   cell: [30, 24]
   anchor: [6, 0]
   columns: 8
   frames:
-  - symbol: gUnk_08B26270
+  - symbol: gTutorialArrowFrame0
     pieces:
     - [16x16, 0, 0]
     - [8x8, 16, 6]
     - [8x8, 2, 16]
-  - symbol: gUnk_08B26286
+  - symbol: gTutorialArrowFrame1
     pieces:
     - [8x8, 16, 6]
     - [8x8, 2, 16]
     - [16x16, 0, 0]
-  - symbol: gUnk_08B2629C
+  - symbol: gTutorialArrowFrame2
     pieces:
     - [8x8, 16, 6]
     - [8x8, 2, 16]
     - [16x16, 0, 0]
-  - symbol: gUnk_08B262B2
+  - symbol: gTutorialArrowFrame3
     pieces:
     - [8x8, 16, 6]
     - [8x8, 2, 16]
     - [16x16, 0, 0]
-  - symbol: gUnk_08B262C8
+  - symbol: gTutorialArrowFrame4
     pieces:
     - [16x16, 2, 0]
     - [8x8, -6, 7]
     - [8x8, 8, 16]
-  - symbol: gUnk_08B262DE
+  - symbol: gTutorialArrowFrame5
     pieces:
     - [8x8, -6, 7]
     - [8x8, 8, 16]
     - [16x16, 2, 0]
-  - symbol: gUnk_08B262F4
+  - symbol: gTutorialArrowFrame6
     pieces:
     - [8x8, -6, 7]
     - [8x8, 8, 16]
     - [16x16, 2, 0]
-  - symbol: gUnk_08B2630A
+  - symbol: gTutorialArrowFrame7
     pieces:
     - [8x8, -6, 7]
     - [8x8, 8, 16]
     - [16x16, 2, 0]
-  - symbol: gUnk_08B26320
+  - symbol: gTutorialArrowFrame8
     pieces:
     - [16x16, 0, 0, {hflip: true}]
     - [8x8, 16, 7, {hflip: true}]
     - [8x8, 2, 16, {hflip: true}]
-  - symbol: gUnk_08B26336
+  - symbol: gTutorialArrowFrame9
     pieces:
     - [8x8, 16, 7, {hflip: true}]
     - [8x8, 2, 16, {hflip: true}]
     - [16x16, 0, 0, {hflip: true}]
-  - symbol: gUnk_08B2634C
+  - symbol: gTutorialArrowFrame10
     pieces:
     - [8x8, 16, 7, {hflip: true}]
     - [8x8, 2, 16, {hflip: true}]
     - [16x16, 0, 0, {hflip: true}]
-  - symbol: gUnk_08B26362
+  - symbol: gTutorialArrowFrame11
     pieces:
     - [8x8, 16, 7, {hflip: true}]
     - [8x8, 2, 16, {hflip: true}]
     - [16x16, 0, 0, {hflip: true}]
   animations:
-  - symbol: gUnk_08B26378
+  - symbol: gTutorialArrowAnim0
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[0, 20], [1, 5], [2, 6], [3, 20], [2, 5], [1, 6]]
-  - symbol: gUnk_08B26396
+  - symbol: gTutorialArrowAnim1
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[4, 20], [5, 5], [6, 6], [7, 20], [6, 5], [5, 6]]
-  - symbol: gUnk_08B263B4
+  - symbol: gTutorialArrowAnim2
     declare: false
     fields: {unk_00: 64, unk_02: 64}
     frames: [[8, 20], [9, 5], [10, 6], [11, 20], [10, 5], [9, 6]]
@@ -1155,307 +1155,307 @@ entries:
   eu:
     address: 0x08B50040
     size: 1506
-- name: gUnk_09EE1520
+- name: gMonsgageFrames
   record: SpriteTable
-  items: [gUnk_08B2556C, gUnk_08B2557C, gUnk_08B25586, gUnk_08B25590, gUnk_08B2559A]
+  items: [gMonsgageFrame0, gMonsgageFrame1, gMonsgageFrame2, gMonsgageFrame3, gMonsgageFrame4]
   us:
     address: 0x09EE1520
   jp:
     address: 0x09EB8F9C
   eu:
     address: 0x09F5C0EC
-- name: gUnk_09EE1534
+- name: gMonsgageAnims
   record: AnimTable
-  items: [gUnk_08B255AA]
+  items: [gMonsgageAnim0]
   us:
     address: 0x09EE1534
   jp:
     address: 0x09EB8FB0
   eu:
     address: 0x09F5C100
-- name: gUnk_09EE1538
+- name: gBtlExpNextFrames
   record: SpriteTable
-  items: [gUnk_08B25A34, gUnk_08B25A3E, gUnk_08B25A48, gUnk_08B25A52, gUnk_08B25A5C, gUnk_08B25A66, gUnk_08B25A70, gUnk_08B25A7A, gUnk_08B25A84, gUnk_08B25A8E, gUnk_08B25A98, gUnk_08B25AA2, gUnk_08B25AAC, gUnk_08B25AB6, gUnk_08B25AC0, gUnk_08B25ACA]
+  items: [gBtlExpNextFrame0, gBtlExpNextFrame1, gBtlExpNextFrame2, gBtlExpNextFrame3, gBtlExpNextFrame4, gBtlExpNextFrame5, gBtlExpNextFrame6, gBtlExpNextFrame7, gBtlExpNextFrame8, gBtlExpNextFrame9, gBtlExpNextFrame10, gBtlExpNextFrame11, gBtlExpNextFrame12, gBtlExpNextFrame13, gBtlExpNextFrame14, gBtlExpNextFrame15]
   us:
     address: 0x09EE1538
   jp:
     address: 0x09EB8FB4
   eu:
     address: 0x09F5C140
-- name: gUnk_09EE1578
+- name: gBtlExpNextAnims
   record: AnimTable
-  items: [gUnk_08B25AD4]
+  items: [gBtlExpNextAnim0]
   us:
     address: 0x09EE1578
   jp:
     address: 0x09EB8FF4
   eu:
     address: 0x09F5C180
-- name: gUnk_09EE157C
+- name: gBtlExpNextLvFrames
   record: SpriteTable
-  items: [gUnk_08B25E40, gUnk_08B25E4A, gUnk_08B25E54, gUnk_08B25E5E, gUnk_08B25E6E, gUnk_08B25E78, gUnk_08B25E82, gUnk_08B25E8C, gUnk_08B25E96, gUnk_08B25EA0, gUnk_08B25EAA, gUnk_08B25EB4, gUnk_08B25EBE, gUnk_08B25EC8, gUnk_08B25ED2, gUnk_08B25EDC]
+  items: [gBtlExpNextLvFrame0, gBtlExpNextLvFrame1, gBtlExpNextLvFrame2, gBtlExpNextLvFrame3, gBtlExpNextLvFrame4, gBtlExpNextLvFrame5, gBtlExpNextLvFrame6, gBtlExpNextLvFrame7, gBtlExpNextLvFrame8, gBtlExpNextLvFrame9, gBtlExpNextLvFrame10, gBtlExpNextLvFrame11, gBtlExpNextLvFrame12, gBtlExpNextLvFrame13, gBtlExpNextLvFrame14, gBtlExpNextLvFrame15]
   us:
     address: 0x09EE157C
   jp:
     address: 0x09EB8FF8
   eu:
     address: 0x09F5C394
-    items: [gUnk_08B25E40, gUnk_08B25E4A, gUnk_08B25E54, gUnk_08B25E5E, gUnk_08B25E6E, gUnk_08B25E78, gUnk_08B25E82, gUnk_08B25E8C, gUnk_08B25E96, gUnk_08B25EA0, gUnk_08B25EAA, gUnk_08B25EB4, gUnk_08B25EBE, gUnk_08B25EC8, gUnk_08B25ED2, gUnk_08B25EDC, gUnkEu_08B55CFE, gUnkEu_08B55D08, gUnkEu_08B55D18, gUnkEu_08B55D22, gUnkEu_08B55D32, gUnkEu_08B55D3C, gUnkEu_08B55D4C, gUnkEu_08B55D56, gUnkEu_08B55D66, gUnkEu_08B55D70, gUnkEu_08B55D80, gUnkEu_08B55D8A]
-- name: gUnk_09EE15BC
+    items: [gBtlExpNextLvFrame0, gBtlExpNextLvFrame1, gBtlExpNextLvFrame2, gBtlExpNextLvFrame3, gBtlExpNextLvFrame4, gBtlExpNextLvFrame5, gBtlExpNextLvFrame6, gBtlExpNextLvFrame7, gBtlExpNextLvFrame8, gBtlExpNextLvFrame9, gBtlExpNextLvFrame10, gBtlExpNextLvFrame11, gBtlExpNextLvFrame12, gBtlExpNextLvFrame13, gBtlExpNextLvFrame14, gBtlExpNextLvFrame15, gBtlExpNextLvFrame16, gBtlExpNextLvFrame17, gBtlExpNextLvFrame18, gBtlExpNextLvFrame19, gBtlExpNextLvFrame20, gBtlExpNextLvFrame21, gBtlExpNextLvFrame22, gBtlExpNextLvFrame23, gBtlExpNextLvFrame24, gBtlExpNextLvFrame25, gBtlExpNextLvFrame26, gBtlExpNextLvFrame27]
+- name: gBtlExpNextLvAnims
   record: AnimTable
-  items: [gUnk_08B25EE6]
+  items: [gBtlExpNextLvAnim0]
   us:
     address: 0x09EE15BC
   jp:
     address: 0x09EB9038
   eu:
     address: 0x09F5C404
-- name: gUnk_09EE15C0
+- name: gTutorialArrowFrames
   record: SpriteTable
-  items: [gUnk_08B26270, gUnk_08B26286, gUnk_08B2629C, gUnk_08B262B2, gUnk_08B262C8, gUnk_08B262DE, gUnk_08B262F4, gUnk_08B2630A, gUnk_08B26320, gUnk_08B26336, gUnk_08B2634C, gUnk_08B26362]
+  items: [gTutorialArrowFrame0, gTutorialArrowFrame1, gTutorialArrowFrame2, gTutorialArrowFrame3, gTutorialArrowFrame4, gTutorialArrowFrame5, gTutorialArrowFrame6, gTutorialArrowFrame7, gTutorialArrowFrame8, gTutorialArrowFrame9, gTutorialArrowFrame10, gTutorialArrowFrame11]
   us:
     address: 0x09EE15C0
   jp:
     address: 0x09EB903C
   eu:
     address: 0x09F5C104
-- name: gUnk_09EE15F0
+- name: gTutorialArrowAnims
   record: AnimTable
-  items: [gUnk_08B26378, gUnk_08B26396, gUnk_08B263B4]
+  items: [gTutorialArrowAnim0, gTutorialArrowAnim1, gTutorialArrowAnim2]
   us:
     address: 0x09EE15F0
   jp:
     address: 0x09EB906C
   eu:
     address: 0x09F5C134
-- name: gUnkEu_09F5C184
+- name: gBtlPopCardBreakSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B50A30]
+  items: [gBtlPopCardBreakSpanishFrame0]
   eu:
     address: 0x09F5C184
-- name: gUnkEu_09F5C188
+- name: gBtlPopCardBreakSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B50A40]
+  items: [gBtlPopCardBreakSpanishAnim0]
   eu:
     address: 0x09F5C188
-- name: gUnkEu_09F5C18C
+- name: gBtlPopCardBreakItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B50BCC]
+  items: [gBtlPopCardBreakItalianFrame0]
   eu:
     address: 0x09F5C18C
-- name: gUnkEu_09F5C190
+- name: gBtlPopCardBreakItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B50BDC]
+  items: [gBtlPopCardBreakItalianAnim0]
   eu:
     address: 0x09F5C190
-- name: gUnkEu_09F5C194
+- name: gBtlPopCardBreakGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B50D68]
+  items: [gBtlPopCardBreakGermanFrame0]
   eu:
     address: 0x09F5C194
-- name: gUnkEu_09F5C198
+- name: gBtlPopCardBreakGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B50D78]
+  items: [gBtlPopCardBreakGermanAnim0]
   eu:
     address: 0x09F5C198
-- name: gUnkEu_09F5C19C
+- name: gBtlPopRecoverFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_08B50F04]
+  items: [gBtlPopRecoverFrenchFrame0]
   eu:
     address: 0x09F5C19C
-- name: gUnkEu_09F5C1A0
+- name: gBtlPopRecoverFrenchAnims
   record: AnimTable
-  items: [gUnkEu_08B50F0E]
+  items: [gBtlPopRecoverFrenchAnim0]
   eu:
     address: 0x09F5C1A0
-- name: gUnkEu_09F5C1A4
+- name: gBtlPopRecoverSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B51018]
+  items: [gBtlPopRecoverSpanishFrame0]
   eu:
     address: 0x09F5C1A4
-- name: gUnkEu_09F5C1A8
+- name: gBtlPopRecoverSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B51022]
+  items: [gBtlPopRecoverSpanishAnim0]
   eu:
     address: 0x09F5C1A8
-- name: gUnkEu_09F5C1AC
+- name: gBtlPopRecoverItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B5112C]
+  items: [gBtlPopRecoverItalianFrame0]
   eu:
     address: 0x09F5C1AC
-- name: gUnkEu_09F5C1B0
+- name: gBtlPopRecoverItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B51136]
+  items: [gBtlPopRecoverItalianAnim0]
   eu:
     address: 0x09F5C1B0
-- name: gUnkEu_09F5C1B4
+- name: gBtlPopRecoverGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B51240]
+  items: [gBtlPopRecoverGermanFrame0]
   eu:
     address: 0x09F5C1B4
-- name: gUnkEu_09F5C1B8
+- name: gBtlPopRecoverGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B5124A]
+  items: [gBtlPopRecoverGermanAnim0]
   eu:
     address: 0x09F5C1B8
-- name: gUnkEu_09F5C1BC
+- name: gBtlPopGuardFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_08B51354]
+  items: [gBtlPopGuardFrenchFrame0]
   eu:
     address: 0x09F5C1BC
-- name: gUnkEu_09F5C1C0
+- name: gBtlPopGuardFrenchAnims
   record: AnimTable
-  items: [gUnkEu_08B5135E]
+  items: [gBtlPopGuardFrenchAnim0]
   eu:
     address: 0x09F5C1C0
-- name: gUnkEu_09F5C1C4
+- name: gBtlPopGuardSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B51468]
+  items: [gBtlPopGuardSpanishFrame0]
   eu:
     address: 0x09F5C1C4
-- name: gUnkEu_09F5C1C8
+- name: gBtlPopGuardSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B51472]
+  items: [gBtlPopGuardSpanishAnim0]
   eu:
     address: 0x09F5C1C8
-- name: gUnkEu_09F5C1CC
+- name: gBtlPopGuardItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B5157C]
+  items: [gBtlPopGuardItalianFrame0]
   eu:
     address: 0x09F5C1CC
-- name: gUnkEu_09F5C1D0
+- name: gBtlPopGuardItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B51586]
+  items: [gBtlPopGuardItalianAnim0]
   eu:
     address: 0x09F5C1D0
-- name: gUnkEu_09F5C1D4
+- name: gBtlPopGuardGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B51690]
+  items: [gBtlPopGuardGermanFrame0]
   eu:
     address: 0x09F5C1D4
-- name: gUnkEu_09F5C1D8
+- name: gBtlPopGuardGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B5169A]
+  items: [gBtlPopGuardGermanAnim0]
   eu:
     address: 0x09F5C1D8
-- name: gUnkEu_09F5C1DC
+- name: gBtlPopMissFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_08B517A4]
+  items: [gBtlPopMissFrenchFrame0]
   eu:
     address: 0x09F5C1DC
-- name: gUnkEu_09F5C1E0
+- name: gBtlPopMissFrenchAnims
   record: AnimTable
-  items: [gUnkEu_08B517AE]
+  items: [gBtlPopMissFrenchAnim0]
   eu:
     address: 0x09F5C1E0
-- name: gUnkEu_09F5C1E4
+- name: gBtlPopMissSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B518B8]
+  items: [gBtlPopMissSpanishFrame0]
   eu:
     address: 0x09F5C1E4
-- name: gUnkEu_09F5C1E8
+- name: gBtlPopMissSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B518C2]
+  items: [gBtlPopMissSpanishAnim0]
   eu:
     address: 0x09F5C1E8
-- name: gUnkEu_09F5C1EC
+- name: gBtlPopMissItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B519CC]
+  items: [gBtlPopMissItalianFrame0]
   eu:
     address: 0x09F5C1EC
-- name: gUnkEu_09F5C1F0
+- name: gBtlPopMissItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B519D6]
+  items: [gBtlPopMissItalianAnim0]
   eu:
     address: 0x09F5C1F0
-- name: gUnkEu_09F5C1F4
+- name: gBtlPopMissGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B51A60]
+  items: [gBtlPopMissGermanFrame0]
   eu:
     address: 0x09F5C1F4
-- name: gUnkEu_09F5C1F8
+- name: gBtlPopMissGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B51A6A]
+  items: [gBtlPopMissGermanAnim0]
   eu:
     address: 0x09F5C1F8
-- name: gUnkEu_09F5C1FC
+- name: gBtlPauseItalianSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B51B74, gUnkEu_08B51B84]
+  items: [gBtlPauseItalianSpanishFrame0, gBtlPauseItalianSpanishFrame1]
   eu:
     address: 0x09F5C1FC
-- name: gUnkEu_09F5C204
+- name: gBtlPauseItalianSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B51B94, gUnkEu_08B51B9E]
+  items: [gBtlPauseItalianSpanishAnim0, gBtlPauseItalianSpanishAnim1]
   eu:
     address: 0x09F5C204
-- name: gUnkEu_09F5C20C
+- name: gBtlEscapeFrenchFrames
   record: SpriteTable
-  items: [gUnkEu_08B51D28, gUnkEu_08B51D32, gUnkEu_08B51D3C]
+  items: [gBtlEscapeFrenchFrame0, gBtlEscapeFrenchFrame1, gBtlEscapeFrenchFrame2]
   eu:
     address: 0x09F5C20C
-- name: gUnkEu_09F5C218
+- name: gBtlEscapeFrenchAnims
   record: AnimTable
-  items: [gUnkEu_08B51D46]
+  items: [gBtlEscapeFrenchAnim0]
   eu:
     address: 0x09F5C218
-- name: gUnkEu_09F5C21C
+- name: gBtlEscapeSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B51F90, gUnkEu_08B51F9A, gUnkEu_08B51FA4]
+  items: [gBtlEscapeSpanishFrame0, gBtlEscapeSpanishFrame1, gBtlEscapeSpanishFrame2]
   eu:
     address: 0x09F5C21C
-- name: gUnkEu_09F5C228
+- name: gBtlEscapeSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B51FAE]
+  items: [gBtlEscapeSpanishAnim0]
   eu:
     address: 0x09F5C228
-- name: gUnkEu_09F5C22C
+- name: gBtlEscapeItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B521F8, gUnkEu_08B52202, gUnkEu_08B5220C]
+  items: [gBtlEscapeItalianFrame0, gBtlEscapeItalianFrame1, gBtlEscapeItalianFrame2]
   eu:
     address: 0x09F5C22C
-- name: gUnkEu_09F5C238
+- name: gBtlEscapeItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B52216]
+  items: [gBtlEscapeItalianAnim0]
   eu:
     address: 0x09F5C238
-- name: gUnkEu_09F5C23C
+- name: gBtlEscapeGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B52460, gUnkEu_08B5246A, gUnkEu_08B52474]
+  items: [gBtlEscapeGermanFrame0, gBtlEscapeGermanFrame1, gBtlEscapeGermanFrame2]
   eu:
     address: 0x09F5C23C
-- name: gUnkEu_09F5C248
+- name: gBtlEscapeGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B5247E]
+  items: [gBtlEscapeGermanAnim0]
   eu:
     address: 0x09F5C248
-- name: gUnkEu_09F5C24C
+- name: gBtlPopCbSpanishFrames
   record: SpriteTable
-  items: [gUnkEu_08B526C8, gUnkEu_08B526D8, gUnkEu_08B526E8, gUnkEu_08B526F8, gUnkEu_08B52708, gUnkEu_08B52718, gUnkEu_08B52728, gUnkEu_08B52738, gUnkEu_08B52748, gUnkEu_08B52758, gUnkEu_08B52768]
+  items: [gBtlPopCbSpanishFrame0, gBtlPopCbSpanishFrame1, gBtlPopCbSpanishFrame2, gBtlPopCbSpanishFrame3, gBtlPopCbSpanishFrame4, gBtlPopCbSpanishFrame5, gBtlPopCbSpanishFrame6, gBtlPopCbSpanishFrame7, gBtlPopCbSpanishFrame8, gBtlPopCbSpanishFrame9, gBtlPopCbSpanishFrame10]
   eu:
     address: 0x09F5C24C
-- name: gUnkEu_09F5C278
+- name: gBtlPopCbSpanishAnims
   record: AnimTable
-  items: [gUnkEu_08B52778]
+  items: [gBtlPopCbSpanishAnim0]
   eu:
     address: 0x09F5C278
-- name: gUnkEu_09F5C27C
+- name: gBtlPopCbItalianFrames
   record: SpriteTable
-  items: [gUnkEu_08B53304, gUnkEu_08B53314, gUnkEu_08B53324, gUnkEu_08B53334, gUnkEu_08B53344, gUnkEu_08B53354, gUnkEu_08B53364, gUnkEu_08B53374, gUnkEu_08B53384, gUnkEu_08B53394, gUnkEu_08B533A4]
+  items: [gBtlPopCbItalianFrame0, gBtlPopCbItalianFrame1, gBtlPopCbItalianFrame2, gBtlPopCbItalianFrame3, gBtlPopCbItalianFrame4, gBtlPopCbItalianFrame5, gBtlPopCbItalianFrame6, gBtlPopCbItalianFrame7, gBtlPopCbItalianFrame8, gBtlPopCbItalianFrame9, gBtlPopCbItalianFrame10]
   eu:
     address: 0x09F5C27C
-- name: gUnkEu_09F5C2A8
+- name: gBtlPopCbItalianAnims
   record: AnimTable
-  items: [gUnkEu_08B533B4]
+  items: [gBtlPopCbItalianAnim0]
   eu:
     address: 0x09F5C2A8
-- name: gUnkEu_09F5C2AC
+- name: gBtlPopCbGermanFrames
   record: SpriteTable
-  items: [gUnkEu_08B53F40, gUnkEu_08B53F50, gUnkEu_08B53F60, gUnkEu_08B53F70, gUnkEu_08B53F80, gUnkEu_08B53F90, gUnkEu_08B53FA0, gUnkEu_08B53FB0, gUnkEu_08B53FC0, gUnkEu_08B53FD0, gUnkEu_08B53FE0]
+  items: [gBtlPopCbGermanFrame0, gBtlPopCbGermanFrame1, gBtlPopCbGermanFrame2, gBtlPopCbGermanFrame3, gBtlPopCbGermanFrame4, gBtlPopCbGermanFrame5, gBtlPopCbGermanFrame6, gBtlPopCbGermanFrame7, gBtlPopCbGermanFrame8, gBtlPopCbGermanFrame9, gBtlPopCbGermanFrame10]
   eu:
     address: 0x09F5C2AC
-- name: gUnkEu_09F5C2D8
+- name: gBtlPopCbGermanAnims
   record: AnimTable
-  items: [gUnkEu_08B53FF0]
+  items: [gBtlPopCbGermanAnim0]
   eu:
     address: 0x09F5C2D8
 - name: gBHpgagEFramesEu

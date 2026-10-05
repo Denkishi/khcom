@@ -16,9 +16,9 @@
 #include "sprite_palettes.h"
 
 void task_btl_vslockon_0(BtlVslockonWork* work) {
-    work->tiles = LoadObjTiles(gUnk_08B1D8BC, 0x180);
+    work->tiles = LoadObjTiles(gBtlLockonTiles, 0x180);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
-    AnimInit(&work->anim, gUnk_09EE10F8, gUnk_09EE10EC);
+    AnimInit(&work->anim, gBtlLockonAnims, gBtlLockonFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimGetGfx(&work->anim);
     gBtlWork->actor2 = gRikuBtlWork->actor;

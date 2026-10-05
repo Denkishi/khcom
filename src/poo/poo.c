@@ -3006,9 +3006,9 @@ void task_poo_shadowdodai_0(PooShadowWork* work, PooShadowArgs* a) {
     work->shadowInfo = a->shadowInfo;
     work->x = work->pos->x;
     work->y = work->pos->y;
-    work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
-    AnimInit(&work->anim, gUnk_09EE1384, gUnk_09EE1380);
+    AnimInit(&work->anim, gBtlShadowAnims, gBtlShadowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimUpdate(&work->anim);
 }
@@ -3056,9 +3056,9 @@ void task_poo_shadowscale_0(PooScaleWork* work, PooShadowArgs* a) {
     work->x = work->pos->x;
     work->y = work->pos->y;
     work->scale = a->scale;
-    work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette = LoadObjPalette(gUnk_08F69BE4, 0x20);
-    AnimInit(&work->anim, gUnk_09EE1384, gUnk_09EE1380);
+    AnimInit(&work->anim, gBtlShadowAnims, gBtlShadowFrames);
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
     work->gfx = AnimUpdate(&work->anim);
 }

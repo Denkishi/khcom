@@ -4374,7 +4374,7 @@ void Task_MapPrzCard_0(MapPrzCardWork* work, MapPrizeArgs* p) {
     work->tiles2 = LoadObjTiles(q->tiles, 0x280);
     work->tiles3 = LoadObjTiles(gUnk_0905EAE8, 0x1E0);
     work->palette3 = LoadObjPalette(gUnk_08F69BE4, 32);
-    work->tiles4 = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->posX = p->x;
     work->posY = p->y;
     work->posZ = p->z;
@@ -4461,7 +4461,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
             s = 2;
         }
 
-        DrawSprite(x, y, gUnk_09EE1380[0], work->tiles4, work->palette3,
+        DrawSprite(x, y, gBtlShadowFrames[0], work->tiles4, work->palette3,
             AllocObjAffine(0, s, s, 0), SPRITE_PRIORITY(2), work->priority + 2);
     }
 

@@ -27,31 +27,31 @@ void task_btl_escape_0(BtlEscapeWork* work) {
 
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
-        work->tiles = LoadObjTiles(gUnk_08B1EB1C, 0x240);
-        p = gUnk_09EE11A4;
+        work->tiles = LoadObjTiles(gBtlEscapeTiles, 0x240);
+        p = gBtlEscapeFrames;
         break;
     case LANGUAGE_FRENCH:
-        work->tiles = LoadObjTiles(gUnkEu_08B51D50, 0x240);
-        p = gUnkEu_09F5C20C;
+        work->tiles = LoadObjTiles(gBtlEscapeFrenchTiles, 0x240);
+        p = gBtlEscapeFrenchFrames;
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = LoadObjTiles(gUnkEu_08B51FB8, 0x240);
-        p = gUnkEu_09F5C21C;
+        work->tiles = LoadObjTiles(gBtlEscapeSpanishTiles, 0x240);
+        p = gBtlEscapeSpanishFrames;
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = LoadObjTiles(gUnkEu_08B52220, 0x240);
-        p = gUnkEu_09F5C22C;
+        work->tiles = LoadObjTiles(gBtlEscapeItalianTiles, 0x240);
+        p = gBtlEscapeItalianFrames;
         break;
     case LANGUAGE_GERMAN:
     default:
-        work->tiles = LoadObjTiles(gUnkEu_08B52488, 0x240);
-        p = gUnkEu_09F5C23C;
+        work->tiles = LoadObjTiles(gBtlEscapeGermanTiles, 0x240);
+        p = gBtlEscapeGermanFrames;
         break;
     }
 #else
-    work->tiles = LoadObjTiles(gUnk_08B1EB1C, 0x240);
+    work->tiles = LoadObjTiles(gBtlEscapeTiles, 0x240);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    p = gUnk_09EE11A4;
+    p = gBtlEscapeFrames;
 #endif
     work->gfx = p[0];
     work->gfx2 = p[2];

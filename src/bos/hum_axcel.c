@@ -140,7 +140,7 @@ void task_hum_axcel_0(AxcelWork* work) {
     work->scaleSteps = 0;
     work->sub.flags |= HUM_SUB_FLAG_HIDDEN;
     work->sub2.flags |= HUM_SUB_FLAG_HIDDEN;
-    work->tiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    work->tiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     TaskPoolInit(&work->tasks, 16);
 }
@@ -947,7 +947,7 @@ void AxcelDrawSubShadow(AxcelWork* work, HumSub* sub) {
         }
 
         WorldToScreen(&x, &y, sub->x, sub->y, 0);
-        DrawSprite(x, y, gUnk_08B22BA8, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFE);
+        DrawSprite(x, y, gBtlShadowFrame0, work->tiles, work->palette, affine, SPRITE_PRIORITY(2), 0xFFFE);
     }
 }
 

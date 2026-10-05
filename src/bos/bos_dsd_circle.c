@@ -143,7 +143,7 @@ void task_bos_dsd_energy1_0(DsdEnergy1Work* work, void* arg) {
     work->vx = gSineTable[work->angle] * work->speed >> 8;
     work->vy = 0;
     work->vz = -gSineTable[work->angle + 0x40] * work->speed >> 8;
-    work->gfx = gUnk_08B22CBC;
+    work->gfx = gBtlShadowSmallFrame0;
 }
 
 u8 task_bos_dsd_energy1_1(DsdEnergy1Work* work) {
@@ -306,7 +306,7 @@ void task_bos_dsd_energy2_0(DsdEnergy2Work* work, void* arg) {
     work->vz = -0x500;
     work->dropCount = 0;
     work->visible = 0;
-    work->gfx = gUnk_08B22CBC;
+    work->gfx = gBtlShadowSmallFrame0;
     BgFxStartDsdEnergy(work->x, work->y, work->z, work->scaleX, work->chargeTime, 0);
     m4aSongNumStart(SONG_SND_704);
 

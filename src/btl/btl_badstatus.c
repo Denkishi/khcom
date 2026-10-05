@@ -17,11 +17,11 @@
 #include "sprite_palettes.h"
 
 static const AnimDef sBtlBadstatusAnimDefs[5] = {
-    { gUnk_09EE12E8, gUnk_09EE130C, gUnk_08B21CFC, 0 },
-    { gUnk_09EE12D4, gUnk_09EE12E4, gUnk_08B21ACE, 0 },
-    { gUnk_09EE1318, gUnk_09EE132C, gUnk_08B2213C, 0 },
-    { gUnk_09EE1330, gUnk_09EE1360, gUnk_08B223E8, 0 },
-    { gUnk_09EE1368, gUnk_09EE137C, gUnk_08B229A8, 0 },
+    { gBtlBadstatusStopFrames, gBtlBadstatusStopAnims, gBtlBadstatusStopTiles, 0 },
+    { gBtlBadstatusStunFrames, gBtlBadstatusStunAnims, gBtlBadstatusStunTiles, 0 },
+    { gBtlBadstatusBindFrames, gBtlBadstatusBindAnims, gBtlBadstatusBindTiles, 0 },
+    { gBtlBadstatusConfuseFrames, gBtlBadstatusConfuseAnims, gBtlBadstatusConfuseTiles, 0 },
+    { gBtlBadstatusTerrorFrames, gBtlBadstatusTerrorAnims, gBtlBadstatusTerrorTiles, 0 },
 };
 
 void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {

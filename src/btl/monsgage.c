@@ -71,13 +71,13 @@ s32 GetLocalizedLineCount(const void* text) {
 #endif
 
 void task_monsgage_0(MonsgageWork* work) {
-    work->tiles = AllocObjTiles(0x200, gUnk_08B255B4);
-    work->tiles2 = AllocObjTiles(0x80, gUnk_08B255B4);
+    work->tiles = AllocObjTiles(0x200, gMonsgageTiles);
+    work->tiles2 = AllocObjTiles(0x80, gMonsgageTiles);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     work->shownValue = 0;
     work->value = 0;
-    work->gfx = gUnk_08B2556C;
-    work->gfx2 = gUnk_08B2557C;
+    work->gfx = gMonsgageFrame0;
+    work->gfx2 = gMonsgageFrame1;
     work->timer = 0;
     work->state = 0;
     work->visible = 1;
@@ -93,7 +93,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
         case 0:
             if (work->timer == 0) {
                 work->visible = 1;
-                work->gfx2 = gUnk_08B2557C;
+                work->gfx2 = gMonsgageFrame1;
             }
 
 #ifdef VERSION_EU
@@ -126,7 +126,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             break;
         case 1:
             if (work->timer == 0) {
-                work->gfx2 = gUnk_08B25586;
+                work->gfx2 = gMonsgageFrame2;
             }
 
             if (work->timer % 8 < 4) {
@@ -165,8 +165,8 @@ s32 task_monsgage_1(MonsgageWork* work) {
             break;
         case 2:
             if (work->timer == 0) {
-                work->gfx2 = gUnk_08B25590;
-                work->gfx = gUnk_08B2559A;
+                work->gfx2 = gMonsgageFrame3;
+                work->gfx = gMonsgageFrame4;
                 gBtlWork->flags |= BTL_FLAG_STOP_SPAWNING;
                 gBtlWork->flags |= 0x100000;
             }

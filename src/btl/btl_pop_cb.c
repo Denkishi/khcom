@@ -22,194 +22,194 @@ void task_btl_pop_cb_0(BtlPopCbWork* work, BtlPopSrc* src) {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
     case LANGUAGE_FRENCH:
-        work->tiles = AllocObjTiles(0x200, gUnkEu_08B4AC46);
+        work->tiles = AllocObjTiles(0x200, gBtlPopCbEnglishTiles);
 
         switch (src->number) {
         case 0:
-            work->gfx = gUnkEu_08B4AB9C;
+            work->gfx = gBtlPopCbEnglishFrame1;
             break;
         case 1:
-            work->gfx = gUnkEu_08B4ABAC;
+            work->gfx = gBtlPopCbEnglishFrame2;
             break;
         case 2:
-            work->gfx = gUnkEu_08B4ABBC;
+            work->gfx = gBtlPopCbEnglishFrame3;
             break;
         case 3:
-            work->gfx = gUnkEu_08B4ABCC;
+            work->gfx = gBtlPopCbEnglishFrame4;
             break;
         case 4:
-            work->gfx = gUnkEu_08B4ABDC;
+            work->gfx = gBtlPopCbEnglishFrame5;
             break;
         case 5:
-            work->gfx = gUnkEu_08B4ABEC;
+            work->gfx = gBtlPopCbEnglishFrame6;
             break;
         case 6:
-            work->gfx = gUnkEu_08B4ABFC;
+            work->gfx = gBtlPopCbEnglishFrame7;
             break;
         case 7:
-            work->gfx = gUnkEu_08B4AC0C;
+            work->gfx = gBtlPopCbEnglishFrame8;
             break;
         case 8:
-            work->gfx = gUnkEu_08B4AC1C;
+            work->gfx = gBtlPopCbEnglishFrame9;
             break;
         case 9:
         default:
-            work->gfx = gUnkEu_08B4AC2C;
+            work->gfx = gBtlPopCbEnglishFrame10;
             break;
         }
 
         break;
     case LANGUAGE_SPANISH:
-        work->tiles = AllocObjTiles(0x200, gUnkEu_08B52782);
+        work->tiles = AllocObjTiles(0x200, gBtlPopCbSpanishTiles);
 
         switch (src->number) {
         case 0:
-            work->gfx = gUnkEu_08B526D8;
+            work->gfx = gBtlPopCbSpanishFrame1;
             break;
         case 1:
-            work->gfx = gUnkEu_08B526E8;
+            work->gfx = gBtlPopCbSpanishFrame2;
             break;
         case 2:
-            work->gfx = gUnkEu_08B526F8;
+            work->gfx = gBtlPopCbSpanishFrame3;
             break;
         case 3:
-            work->gfx = gUnkEu_08B52708;
+            work->gfx = gBtlPopCbSpanishFrame4;
             break;
         case 4:
-            work->gfx = gUnkEu_08B52718;
+            work->gfx = gBtlPopCbSpanishFrame5;
             break;
         case 5:
-            work->gfx = gUnkEu_08B52728;
+            work->gfx = gBtlPopCbSpanishFrame6;
             break;
         case 6:
-            work->gfx = gUnkEu_08B52738;
+            work->gfx = gBtlPopCbSpanishFrame7;
             break;
         case 7:
-            work->gfx = gUnkEu_08B52748;
+            work->gfx = gBtlPopCbSpanishFrame8;
             break;
         case 8:
-            work->gfx = gUnkEu_08B52758;
+            work->gfx = gBtlPopCbSpanishFrame9;
             break;
         case 9:
         default:
-            work->gfx = gUnkEu_08B52768;
+            work->gfx = gBtlPopCbSpanishFrame10;
             break;
         }
 
         break;
     case LANGUAGE_ITALIAN:
-        work->tiles = AllocObjTiles(0x200, gUnkEu_08B533BE);
+        work->tiles = AllocObjTiles(0x200, gBtlPopCbItalianTiles);
 
         switch (src->number) {
         case 0:
-            work->gfx = gUnkEu_08B53314;
+            work->gfx = gBtlPopCbItalianFrame1;
             break;
         case 1:
-            work->gfx = gUnkEu_08B53324;
+            work->gfx = gBtlPopCbItalianFrame2;
             break;
         case 2:
-            work->gfx = gUnkEu_08B53334;
+            work->gfx = gBtlPopCbItalianFrame3;
             break;
         case 3:
-            work->gfx = gUnkEu_08B53344;
+            work->gfx = gBtlPopCbItalianFrame4;
             break;
         case 4:
-            work->gfx = gUnkEu_08B53354;
+            work->gfx = gBtlPopCbItalianFrame5;
             break;
         case 5:
-            work->gfx = gUnkEu_08B53364;
+            work->gfx = gBtlPopCbItalianFrame6;
             break;
         case 6:
-            work->gfx = gUnkEu_08B53374;
+            work->gfx = gBtlPopCbItalianFrame7;
             break;
         case 7:
-            work->gfx = gUnkEu_08B53384;
+            work->gfx = gBtlPopCbItalianFrame8;
             break;
         case 8:
-            work->gfx = gUnkEu_08B53394;
+            work->gfx = gBtlPopCbItalianFrame9;
             break;
         case 9:
         default:
-            work->gfx = gUnkEu_08B533A4;
+            work->gfx = gBtlPopCbItalianFrame10;
             break;
         }
 
         break;
     case LANGUAGE_GERMAN:
     default:
-        work->tiles = AllocObjTiles(0x200, gUnkEu_08B53FFA);
+        work->tiles = AllocObjTiles(0x200, gBtlPopCbGermanTiles);
 
         switch (src->number) {
         case 0:
-            work->gfx = gUnkEu_08B53F50;
+            work->gfx = gBtlPopCbGermanFrame1;
             break;
         case 1:
-            work->gfx = gUnkEu_08B53F60;
+            work->gfx = gBtlPopCbGermanFrame2;
             break;
         case 2:
-            work->gfx = gUnkEu_08B53F70;
+            work->gfx = gBtlPopCbGermanFrame3;
             break;
         case 3:
-            work->gfx = gUnkEu_08B53F80;
+            work->gfx = gBtlPopCbGermanFrame4;
             break;
         case 4:
-            work->gfx = gUnkEu_08B53F90;
+            work->gfx = gBtlPopCbGermanFrame5;
             break;
         case 5:
-            work->gfx = gUnkEu_08B53FA0;
+            work->gfx = gBtlPopCbGermanFrame6;
             break;
         case 6:
-            work->gfx = gUnkEu_08B53FB0;
+            work->gfx = gBtlPopCbGermanFrame7;
             break;
         case 7:
-            work->gfx = gUnkEu_08B53FC0;
+            work->gfx = gBtlPopCbGermanFrame8;
             break;
         case 8:
-            work->gfx = gUnkEu_08B53FD0;
+            work->gfx = gBtlPopCbGermanFrame9;
             break;
         case 9:
         default:
-            work->gfx = gUnkEu_08B53FE0;
+            work->gfx = gBtlPopCbGermanFrame10;
             break;
         }
 
         break;
     }
 #else
-    work->tiles = AllocObjTiles(0x200, gUnk_08B1FD66);
+    work->tiles = AllocObjTiles(0x200, gBtlPopCbTiles);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
 
     switch (src->number) {
     case 0:
-        work->gfx = gUnk_08B1FCBC;
+        work->gfx = gBtlPopCbFrame1;
         break;
     case 1:
-        work->gfx = gUnk_08B1FCCC;
+        work->gfx = gBtlPopCbFrame2;
         break;
     case 2:
-        work->gfx = gUnk_08B1FCDC;
+        work->gfx = gBtlPopCbFrame3;
         break;
     case 3:
-        work->gfx = gUnk_08B1FCEC;
+        work->gfx = gBtlPopCbFrame4;
         break;
     case 4:
-        work->gfx = gUnk_08B1FCFC;
+        work->gfx = gBtlPopCbFrame5;
         break;
     case 5:
-        work->gfx = gUnk_08B1FD0C;
+        work->gfx = gBtlPopCbFrame6;
         break;
     case 6:
-        work->gfx = gUnk_08B1FD1C;
+        work->gfx = gBtlPopCbFrame7;
         break;
     case 7:
-        work->gfx = gUnk_08B1FD2C;
+        work->gfx = gBtlPopCbFrame8;
         break;
     case 8:
-        work->gfx = gUnk_08B1FD3C;
+        work->gfx = gBtlPopCbFrame9;
         break;
     case 9:
     default:
-        work->gfx = gUnk_08B1FD4C;
+        work->gfx = gBtlPopCbFrame10;
         break;
     }
 #endif

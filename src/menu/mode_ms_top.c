@@ -345,7 +345,7 @@ void MsTopDraw() {
         AnimUpdate(&sMsTopSoraAnim), sMsTopSoraTiles, sMsTopSoraPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D0);
     DrawSprite(sWarpDefs[0].x2 + (sMsTopObjScrollX >> 8), sWarpDefs[0].y2,
-        gUnk_08B22BA8, sMsTopShadowTiles, sMsTopShadowPalette, NULL,
+        gBtlShadowFrame0, sMsTopShadowTiles, sMsTopShadowPalette, NULL,
         0x800 | sWarpDefs[sMsTopCursor].flags, 0x7D1);
 
     for (i = 0; i <= 1; i++) {
@@ -454,7 +454,7 @@ void mode_ms_top_0(u32 a) {
     AnimInit(&sMsTopSoraAnim, gSor1ll00Anims, gSor1ll00Frames);
     AnimStart(&sMsTopSoraAnim, 0, ANIM_FLAG_LOOP);
     sMsTopShadowPalette = LoadObjPalette(gBStatesPalette, 0x20);
-    sMsTopShadowTiles = LoadObjTiles(gUnk_08B22BBC, 0x100);
+    sMsTopShadowTiles = LoadObjTiles(gBtlShadowTiles, 0x100);
     sMsTopMooglePalette = LoadObjPalette(gMoguPalette, 0x20);
     sMsTopMoogleTiles = LoadObjTiles(gMoguFl00Tiles, 0xC00);
     AnimInit(&sMsTopMoogleAnim, gMoguFl00Anims, gMoguFl00Frames);

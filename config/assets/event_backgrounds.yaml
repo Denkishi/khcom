@@ -1572,7 +1572,7 @@ entries:
   - [gUnk_09864E68, 6144, 0]
   - [gUnk_098666CC, 2368, 0]
   - [gUnk_09867038, 6144, 0]
-  - [gUnk_09501378, 1024, 0]
+  - [gEventBg094Object3Tiles, 1024, 0]
   us:
     address: 0x08F7E3F0
   jp:
@@ -1586,7 +1586,7 @@ entries:
   - [gMapGmkWonderland00Palette, 32, 0]
   - [gMapGmkWonderland00Palette, 32, 0]
   - [gMapGmkWonderland00Palette, 32, 0]
-  - [gUnk_099910E4, 32, 0]
+  - [gEventBg094Object3Palette, 32, 0]
   us:
     address: 0x08F7E410
   jp:
@@ -3683,7 +3683,7 @@ entries:
   declare: false
   elements:
   - [gMapGmkTraverseTown00Palette, 32, 0]
-  - [gUnk_096184F8, 32, 0]
+  - [gEventBg004Object1Palette, 32, 0]
   us:
     address: 0x08F7F3B4
   jp:

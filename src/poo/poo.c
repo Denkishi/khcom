@@ -8837,16 +8837,16 @@ TaskDesc gTaskDescPooCabbageborn = {
 };
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
-    { gPooMapObjHit0Tiles, 5, gPooMapObjHit0Anims, gPooMapObjHit0Frames, gUnk_09849E78 },
-    { gPooMapObjHit1Tiles, 11, gPooMapObjHit1Anims, gPooMapObjHit1Frames, gUnk_09849E98 },
-    { gPooMapObjHit2Tiles, 24, gPooMapObjHit2Anims, gPooMapObjHit2Frames, gUnk_09849EB8 },
-    { gPooMapObjHit3Tiles, 3, gPooMapObjHit3Anims, gPooMapObjHit3Frames, gUnk_09849ED8 },
-    { gPooMapObjHit4Tiles, 9, gPooMapObjHit4Anims, gPooMapObjHit4Frames, gUnk_09849EF8 },
-    { gPooMapObjHit5Tiles, 2, gPooMapObjHit5Anims, gPooMapObjHit5Frames, gUnk_09849F18 },
-    { gPooMapObjHit6Tiles, 6, gPooMapObjHit6Anims, gPooMapObjHit6Frames, gUnk_09849F38 },
-    { gPooMapObjHit7Tiles, 6, gPooMapObjHit7Anims, gPooMapObjHit7Frames, gUnk_09849F38 },
-    { gPooMapObjHit8Tiles, 10, gPooMapObjHit8Anims, gPooMapObjHit8Frames, gUnk_09849F58 },
-    { gPooMapObjHit9Tiles, 10, gPooMapObjHit9Anims, gPooMapObjHit9Frames, gUnk_09849F58 },
+    { gPooMapObjHit0Tiles, 5, gPooMapObjHit0Anims, gPooMapObjHit0Frames, gPooMapObjHit0Palette },
+    { gPooMapObjHit1Tiles, 11, gPooMapObjHit1Anims, gPooMapObjHit1Frames, gPooMapObjHit1Palette },
+    { gPooMapObjHit2Tiles, 24, gPooMapObjHit2Anims, gPooMapObjHit2Frames, gPooMapObjHit2Palette },
+    { gPooMapObjHit3Tiles, 3, gPooMapObjHit3Anims, gPooMapObjHit3Frames, gPooMapObjHit3Palette },
+    { gPooMapObjHit4Tiles, 9, gPooMapObjHit4Anims, gPooMapObjHit4Frames, gPooMapObjHit4Palette },
+    { gPooMapObjHit5Tiles, 2, gPooMapObjHit5Anims, gPooMapObjHit5Frames, gPooMapObjHit5Palette },
+    { gPooMapObjHit6Tiles, 6, gPooMapObjHit6Anims, gPooMapObjHit6Frames, gPooMapObjHit6Palette },
+    { gPooMapObjHit7Tiles, 6, gPooMapObjHit7Anims, gPooMapObjHit7Frames, gPooMapObjHit6Palette },
+    { gPooMapObjHit8Tiles, 10, gPooMapObjHit8Anims, gPooMapObjHit8Frames, gPooMapObjHit8Palette },
+    { gPooMapObjHit9Tiles, 10, gPooMapObjHit9Anims, gPooMapObjHit9Frames, gPooMapObjHit8Palette },
 };
 
 TaskDesc gTaskDescPooMapobjhit = {

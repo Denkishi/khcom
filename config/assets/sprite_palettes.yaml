@@ -3784,7 +3784,7 @@ entries:
   eu:
     address: 0x0954AE44
     size: 32
-- name: gUnk_09617F78
+- name: gShougekihaPurplePalette
   format: palette
   us:
     address: 0x09617F78
@@ -4177,7 +4177,7 @@ entries:
   eu:
     address: 0x0954B264
     size: 32
-- name: gUnk_09618398
+- name: gEventStreetLampPalette
   format: palette
   us:
     address: 0x09618398
@@ -4200,7 +4200,7 @@ entries:
   eu:
     address: 0x0954B2A4
     size: 32
-- name: gUnk_096183D8
+- name: gEventSmokeCloudPalette
   format: palette
   us:
     address: 0x096183D8
@@ -4223,7 +4223,7 @@ entries:
   eu:
     address: 0x0954B2E4
     size: 32
-- name: gUnk_09618418
+- name: gEventHeartPalette
   format: palette
   us:
     address: 0x09618418
@@ -4306,7 +4306,7 @@ entries:
   eu:
     address: 0x0954B3C4
     size: 32
-- name: gUnk_096184F8
+- name: gEventBg004Object1Palette
   format: palette
   us:
     address: 0x096184F8
@@ -5090,7 +5090,7 @@ entries:
   eu:
     address: 0x096C8D8C
     size: 32
-- name: gUnk_096FB884
+- name: gBosDsdItaShadowPalette
   format: palette
   us:
     address: 0x096FB884
@@ -5669,7 +5669,7 @@ entries:
   eu:
     address: 0x0981E500
     size: 32
-- name: gUnk_09849E78
+- name: gPooMapObjHit0Palette
   format: palette
   us:
     address: 0x09849E78
@@ -5680,7 +5680,7 @@ entries:
   eu:
     address: 0x0981E520
     size: 32
-- name: gUnk_09849E98
+- name: gPooMapObjHit1Palette
   format: palette
   us:
     address: 0x09849E98
@@ -5691,7 +5691,7 @@ entries:
   eu:
     address: 0x0981E540
     size: 32
-- name: gUnk_09849EB8
+- name: gPooMapObjHit2Palette
   format: palette
   us:
     address: 0x09849EB8
@@ -5702,7 +5702,7 @@ entries:
   eu:
     address: 0x0981E560
     size: 32
-- name: gUnk_09849ED8
+- name: gPooMapObjHit3Palette
   format: palette
   us:
     address: 0x09849ED8
@@ -5713,7 +5713,7 @@ entries:
   eu:
     address: 0x0981E580
     size: 32
-- name: gUnk_09849EF8
+- name: gPooMapObjHit4Palette
   format: palette
   us:
     address: 0x09849EF8
@@ -5724,7 +5724,7 @@ entries:
   eu:
     address: 0x0981E5A0
     size: 32
-- name: gUnk_09849F18
+- name: gPooMapObjHit5Palette
   format: palette
   us:
     address: 0x09849F18
@@ -5735,7 +5735,7 @@ entries:
   eu:
     address: 0x0981E5C0
     size: 32
-- name: gUnk_09849F38
+- name: gPooMapObjHit6Palette
   format: palette
   us:
     address: 0x09849F38
@@ -5746,7 +5746,7 @@ entries:
   eu:
     address: 0x0981E5E0
     size: 32
-- name: gUnk_09849F58
+- name: gPooMapObjHit8Palette
   format: palette
   us:
     address: 0x09849F58
@@ -5914,7 +5914,7 @@ entries:
   eu:
     address: 0x099970B0
     size: 32
-- name: gUnk_099910E4
+- name: gEventBg094Object3Palette
   format: palette
   us:
     address: 0x099910E4
@@ -6079,7 +6079,7 @@ entries:
   eu:
     address: 0x09997910
     size: 32
-- name: gUnk_09991944
+- name: gMapMenuPanelPalette
   format: palette
   us:
     address: 0x09991944
@@ -6090,7 +6090,7 @@ entries:
   eu:
     address: 0x09997930
     size: 32
-- name: gUnk_09991964
+- name: gMapMenuHighlightPalette
   format: palette
   us:
     address: 0x09991964
@@ -6101,7 +6101,7 @@ entries:
   eu:
     address: 0x09997950
     size: 32
-- name: gUnk_09991984
+- name: gMapMenuBarPalette
   format: palette
   us:
     address: 0x09991984
@@ -6112,7 +6112,7 @@ entries:
   eu:
     address: 0x09997970
     size: 32
-- name: gUnk_099919A4
+- name: gMapMenuCursorPalette
   format: palette
   us:
     address: 0x099919A4
@@ -6123,7 +6123,7 @@ entries:
   eu:
     address: 0x09997990
     size: 32
-- name: gUnk_099919C4
+- name: gLoadMenuBgPalettes
   format: palette
   us:
     address: 0x099919C4
@@ -6134,7 +6134,7 @@ entries:
   eu:
     address: 0x099979B0
     size: 512
-- name: gUnk_09991BC4
+- name: gLoadMenuTitlePalette
   format: palette
   us:
     address: 0x09991BC4
@@ -6145,7 +6145,7 @@ entries:
   eu:
     address: 0x09997BB0
     size: 32
-- name: gUnk_09991BE4
+- name: gFileMenuCursorPalette
   format: palette
   us:
     address: 0x09991BE4
@@ -6156,7 +6156,7 @@ entries:
   eu:
     address: 0x09997BD0
     size: 32
-- name: gUnk_09991C04
+- name: gSaveFloorSoraPalette
   format: palette
   us:
     address: 0x09991C04
@@ -6178,7 +6178,7 @@ entries:
   eu:
     address: 0x09997C10
     size: 32
-- name: gUnk_09991C44
+- name: gSaveFloorRikuPalette
   format: palette
   us:
     address: 0x09991C44
@@ -6200,7 +6200,7 @@ entries:
   eu:
     address: 0x09997C50
     size: 32
-- name: gUnk_09991C84
+- name: gMapSaveBgPalettes
   format: palette
   us:
     address: 0x09991C84
@@ -6211,7 +6211,7 @@ entries:
   eu:
     address: 0x09997C70
     size: 128
-- name: gUnk_09991D04
+- name: gSaveMenuTitlePalette
   format: palette
   us:
     address: 0x09991D04
@@ -6222,7 +6222,7 @@ entries:
   eu:
     address: 0x09997CF0
     size: 32
-- name: gUnk_09991D24
+- name: gFileMenuWindowPalette
   format: palette
   us:
     address: 0x09991D24

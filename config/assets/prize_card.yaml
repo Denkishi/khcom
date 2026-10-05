@@ -23,10 +23,10 @@ objects:
     start: 0x09542324
     end: 0x09543324
 entries:
-- name: gUnk_09501378
+- name: gEventBg094Object3Tiles
   format: tiles4
   width: 32
-  palette: gUnk_099910E4
+  palette: gEventBg094Object3Palette
   us:
     address: 0x09501378
     size: 1024

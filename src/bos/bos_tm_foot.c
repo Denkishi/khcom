@@ -536,10 +536,10 @@ void task_bos_tm_foot_0(TmFootWork* work, TmWork* arg) {
     work->unk_000 = 0;
     work->unk_480 = -0x100;
     work->unk_002 = 0;
-    work->unk_130 = 0;
-    work->unk_248 = 0;
-    work->unk_360 = 0;
-    work->unk_478 = 0;
+    work->angle = 0;
+    work->angle2 = 0;
+    work->angle3 = 0;
+    work->angle4 = 0;
     f = work->tm->flags & TM_FLAG_IN_EVENT;
 
     if (f != 0) {

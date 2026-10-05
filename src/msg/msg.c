@@ -196,7 +196,7 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
         }
 
         sSpriteTextLines[sTextEntryCount].glyphTiles[k] = AllocSpriteFrameTiles(128);
-        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[k], gUnk_09EEB204[idx], gUnk_090AB5B2);
+        UpdateSpriteFrameTiles(sSpriteTextLines[sTextEntryCount].glyphTiles[k], gMsgFontBank0Frames[idx], gMsgFontBank0Tiles);
         k++;
     }
 
@@ -769,11 +769,11 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 a) {
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
-        g = ((u16*)gUnk_09EEB204[g])[3];
+        g = ((u16*)gMsgFontBank0Frames[g])[3];
 
         switch (kind) {
         case 0:
-            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[g * 32], 128);
+            sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[g * 32], 128);
             break;
         case 1:
             sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank1Tiles[g * 32], 128);
@@ -857,8 +857,8 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 a) {
             ReleaseObjTiles(sSpriteTextLines[slot].glyphTiles[j]);
         }
 
-        idx = ((u8*)gUnk_09EEB204[idx])[6];
-        sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gUnk_090AB5B2[idx * 32], 128);
+        idx = ((u8*)gMsgFontBank0Frames[idx])[6];
+        sSpriteTextLines[slot].glyphTiles[j] = LoadObjTiles(&gMsgFontBank0Tiles[idx * 32], 128);
         j++;
     }
 
@@ -900,7 +900,7 @@ void DrawSpriteTextSlots() {
         dx = 0;
 
         for (j = 0; j < sSpriteTextLines[i].length; j++) {
-            DrawSprite((x >> 8) + dx, y >> 8, gUnk_09EEB204[0], sSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
+            DrawSprite((x >> 8) + dx, y >> 8, gMsgFontBank0Frames[0], sSpriteTextLines[i].glyphTiles[j], g, NULL, 0, 50);
 
             if (sSpriteTextLines[i].font == 1) {
                 dx += 10;
@@ -1149,8 +1149,8 @@ void DrawBgTextLines() {
                 sy = sBgTextLines[n].y - ty * 8;
                 dst = (u8*)GetBgCharBase(sBgTextLines[n].bg) + (tx + 1) * 32 + ty * 1024;
                 screen = GetBgScreenBase(sBgTextLines[n].bg);
-                tile = ((u16*)gUnk_09EEB204[glyph])[3];
-                src = (u16*)&gUnk_090AB5B2[tile * 32];
+                tile = ((u16*)gMsgFontBank0Frames[glyph])[3];
+                src = (u16*)&gMsgFontBank0Tiles[tile * 32];
                 p = dst;
 
                 for (y = sy, yy = 0; y < sy + h; y++, yy += 2) {
@@ -1615,13 +1615,8 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
             cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
-#ifdef VERSION_EU
-                v = ((u16*)gUnk_09EEB204[v])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gUnk_090AB5B2[v * 32], 128);
-#else
                 v = ((u16*)gMsgLatinFontFrames[v])[3];
                 sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-#endif
             }
 
             sTextEntryCount++;
@@ -1746,13 +1741,8 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s) {
             cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
-#ifdef VERSION_EU
-                v = ((u16*)gUnk_09EEB204[v])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gUnk_090AB5B2[v * 32], 128);
-#else
                 v = ((u16*)gMsgLatinFontFrames[v])[3];
                 sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-#endif
             }
 
             sTextEntryCount++;
@@ -1962,8 +1952,8 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
 
             switch (t) {
             case 0:
-                w = ((u16*)gUnk_09EEB204[w])[3];
-                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gUnk_090AB5B2[w * 32], 128);
+                w = ((u16*)gMsgFontBank0Frames[w])[3];
+                sMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -1987,6 +1977,12 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
 }
 #endif
 
+#ifdef VERSION_EU
+#define MSG_FONT_FRAMES gMsgLatinFontFrames
+#else
+#define MSG_FONT_FRAMES gMsgFontBank0Frames
+#endif
+
 void DrawMsgGlyphs(u8 n) {
     u8 i;
 
@@ -1999,11 +1995,11 @@ void DrawMsgGlyphs(u8 n) {
 
             if (b[i].useAlternatePalette) {
                 if (b[i].tiles != NULL) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, 0);
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].alternatePalette, 0);
                 }
             } else {
                 if (b[i].tiles != NULL) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].palette, 0);
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].palette, 0);
                 }
             }
         }
@@ -2329,13 +2325,8 @@ s32 LoadLatinTextSlots(const u16* a, TextSlot* b) {
                 b->advance = 255;
             }
 
-#ifdef VERSION_EU
-            v = ((u16*)gUnk_09EEB204[v])[3];
-            b->tiles = LoadObjTiles(&gUnk_090AB5B2[v * 32], 128);
-#else
             v = ((u16*)gMsgLatinFontFrames[v])[3];
             b->tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-#endif
             b->useAlternatePalette = n;
         }
 
@@ -2533,8 +2524,8 @@ s32 LoadJapaneseTextSlots(const u16* a, TextSlot* b) {
 
             switch (t) {
             case 0:
-                w = ((u16*)gUnk_09EEB204[w])[3];
-                b->tiles = LoadObjTiles(&gUnk_090AB5B2[w * 32], 128);
+                w = ((u16*)gMsgFontBank0Frames[w])[3];
+                b->tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -2729,8 +2720,8 @@ s32 LoadTextTileArray(TextChar* a, void** p) {
 
             switch (t) {
             case 0:
-                w = ((u16*)gUnk_09EEB204[w])[3];
-                *p = LoadObjTiles(&gUnk_090AB5B2[w * 32], 128);
+                w = ((u16*)gMsgFontBank0Frames[w])[3];
+                *p = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -2797,7 +2788,7 @@ void DrawTextSlots(s16 x, s16 y, TextSlot* p, void* d, u16 h, u8 n) {
             cy += 12;
             x = x0;
         } else if (p->advance != -1) {
-            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, 0, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, 0, h);
             x += p->advance;
         } else {
             x += 3;
@@ -2821,7 +2812,7 @@ void DrawTextSlotsUnsorted(s16 x, s16 y, TextSlot* p, void* d, s32 e, u8 n) {
             cy += 12;
             x = x0;
         } else if (p->advance != -1) {
-            DrawSpriteUnsorted(x, cy, gUnk_09EEB204[0], p->tiles, d, 0);
+            DrawSpriteUnsorted(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, 0);
             x += p->advance;
         } else {
             x += 3;
@@ -2845,7 +2836,7 @@ void DrawTextSlotsWithFlags(s16 x, s32 y, TextSlot* p, void* d, u16 g, u16 h, u8
             cy += 12;
             x = x0;
         } else if (p->advance != -1) {
-            DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, g, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, g, h);
             x += p->advance;
         } else {
             x += 3;
@@ -2870,9 +2861,9 @@ void DrawTextSlotsWithTwoPalettes(s16 x, s32 y, TextSlot* p, void* d, void* e, u
             x = x0;
         } else if (p->advance != -1) {
             if (p->useAlternatePalette == 0) {
-                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, d, NULL, 0, h);
+                DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, d, NULL, 0, h);
             } else {
-                DrawSprite(x, cy, gUnk_09EEB204[0], p->tiles, e, NULL, 0, h);
+                DrawSprite(x, cy, MSG_FONT_FRAMES[0], p->tiles, e, NULL, 0, h);
             }
 
             x += p->advance;
@@ -2894,7 +2885,7 @@ void DrawTextTileArray(s16 x, s32 y, void** p, void* d, u16 h, u8 n) {
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, NULL, 0, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *p, d, NULL, 0, h);
             x += 10;
         }
 
@@ -2912,7 +2903,7 @@ void DrawTextTileArrayWithTwoPalettes(s16 x, s32 y, void** p, void* d, s32 e, u1
             cy += 12;
             x = x0;
         } else {
-            DrawSprite(x, cy, gUnk_09EEB204[0], *p, d, NULL, 0, h);
+            DrawSprite(x, cy, MSG_FONT_FRAMES[0], *p, d, NULL, 0, h);
             x += 10;
         }
 
@@ -6402,13 +6393,8 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** d) {
             cx += (s16)sLatinGlyphWidths.widths[v] << 8;
 
             if (v != 32) {
-#ifdef VERSION_EU
-                v = ((u16*)gUnk_09EEB204[v])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gUnk_090AB5B2[v * 32], 128);
-#else
                 v = ((u16*)gMsgLatinFontFrames[v])[3];
                 sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgLatinFontTiles[v * 32], 128);
-#endif
             }
 
             sTextEntryCount++;
@@ -6618,8 +6604,8 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** d) {
 
             switch (t) {
             case 0:
-                w = ((u16*)gUnk_09EEB204[w])[3];
-                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gUnk_090AB5B2[w * 32], 128);
+                w = ((u16*)gMsgFontBank0Frames[w])[3];
+                sCardMsgGlyphSprites[sTextEntryCount].tiles = LoadObjTiles(&gMsgFontBank0Tiles[w * 32], 128);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -6671,9 +6657,9 @@ void DrawCardMsgGlyphs(u8 n) {
 
             if (b[i].tiles != NULL) {
                 if (!b[i].useAlternatePalette) {
-                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].palette, NULL, 0, 0);
+                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].palette, NULL, 0, 0);
                 } else {
-                    DrawSprite(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, b[i].alternatePalette, NULL, 0, 0);
+                    DrawSprite(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, b[i].alternatePalette, NULL, 0, 0);
                 }
             }
         }
@@ -6712,9 +6698,9 @@ void DrawMsgGlyphsWithPalette(u8 n, void* a) {
 
             if (b[i].tiles != NULL) {
                 if (!b[i].useAlternatePalette) {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles, a, 0);
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles, a, 0);
                 } else {
-                    DrawSpriteUnsorted(x >> 8, y >> 8, gUnk_09EEB204[0], b[i].tiles,
+                    DrawSpriteUnsorted(x >> 8, y >> 8, MSG_FONT_FRAMES[0], b[i].tiles,
                                   b[i].alternatePalette, 0);
                 }
             }
@@ -6904,8 +6890,8 @@ s32 CopySjisGlyphsToVram(const TextChar* a) {
 
             switch (t) {
         case 0:
-            w = ((u16*)gUnk_09EEB204[w])[3];
-            CpuCopy16(&gUnk_090AB5B2[w * 32], dst, 0x80);
+            w = ((u16*)gMsgFontBank0Frames[w])[3];
+            CpuCopy16(&gMsgFontBank0Tiles[w * 32], dst, 0x80);
             break;
         case 1:
             w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -7088,8 +7074,8 @@ s32 CopySjisGlyphsToVramAt(const TextChar* a, u16 b) {
 
             switch (t) {
             case 0:
-                w = ((u16*)gUnk_09EEB204[w])[3];
-                CpuCopy16(&gUnk_090AB5B2[w * 32], dst, 0x80);
+                w = ((u16*)gMsgFontBank0Frames[w])[3];
+                CpuCopy16(&gMsgFontBank0Tiles[w * 32], dst, 0x80);
                 break;
             case 1:
                 w = ((u16*)gMsgFontBank1Frames[w])[3];
@@ -7196,13 +7182,8 @@ u8 CopyLatinGlyphsToVram(const TextChar* a, u16* b, u16 tile) {
 
             if (v != 32) {
                 *b = sLatinGlyphWidths.widths[v];
-#ifdef VERSION_EU
-                v = ((u16*)gUnk_09EEB204[v])[3];
-                CpuCopy16(&gUnk_090AB5B2[v * 32], dst, 0x80);
-#else
                 v = ((u16*)gMsgLatinFontFrames[v])[3];
                 CpuCopy16(&gMsgLatinFontTiles[v * 32], dst, 0x80);
-#endif
                 dst += 128;
                 sTextEntryCount++;
                 b++;

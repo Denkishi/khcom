@@ -124,7 +124,7 @@ u8 BosLstLsrSpawnFal(LstLsrWork* work) {
 
     spawned = FALSE;
 
-    if (work->kind != 0) {
+    if (work->kind != BOS_LST_BIT_KIND_BITS) {
         return FALSE;
     }
 

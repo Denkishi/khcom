@@ -5,6 +5,11 @@
 
 struct Task;
 
+enum BosLstBitKind {
+    BOS_LST_BIT_KIND_BITS,
+    BOS_LST_BIT_KIND_PLATFORM
+};
+
 typedef struct LstBitArg {
     s32 kind;
     s32 index;

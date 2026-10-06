@@ -66,7 +66,7 @@ u8 BosLstBitSpawnFal(LstState* work, s32 kind) {
 
     spawned = FALSE;
 
-    if (work->kind != 0) {
+    if (work->kind != BOS_LST_BIT_KIND_BITS) {
         return FALSE;
     }
 
@@ -466,7 +466,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
 #ifndef VERSION_EU
                 work->targetY = gBtlWork->actor->y;
 #endif
-            } else if (work->kind == 0) {
+            } else if (work->kind == BOS_LST_BIT_KIND_BITS) {
                 work->targetX = (GetRandom() % 113 << 8) + 0xC000;
                 work->targetY = gBtlWork->actor->y + (sBosLstBitHoverY[work->index] << 8);
             } else {
@@ -628,7 +628,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
         WorldToScreen(&x2, &y2, work->actorX, work->actorY, work->actorZ);
         work->angle += 2;
     } else {
-        if (work->kind == 0) {
+        if (work->kind == BOS_LST_BIT_KIND_BITS) {
             switch (work->state) {
             case BOS_LST_BIT_STATE_CHARGE:
             case BOS_LST_BIT_STATE_FIRE:
@@ -664,7 +664,7 @@ u8 task_bos_lst_bit_1(LstState* work) {
 
     work->angle &= 0xFF;
 
-    if (work->kind == 0) {
+    if (work->kind == BOS_LST_BIT_KIND_BITS) {
         work->orbitX = (-COS(work->angle) * 3 >> 6) << 8;
         work->orbitY = (SIN(work->angle) * 3 >> 6) << 8;
         work->orbitZ = work->orbitZ / 2;

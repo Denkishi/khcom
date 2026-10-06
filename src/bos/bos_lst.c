@@ -1012,7 +1012,7 @@ void BosLstMoveBits(BosLstWork* work) {
         arg.z = obj->z + 0x800;
 
         for (i = 0; i < work->lstTaskCount; i++) {
-            arg.kind = 0;
+            arg.kind = BOS_LST_BIT_KIND_BITS;
             arg.index = i;
             arg.facing = &work->facing;
             arg.falCount = &work->falCount;
@@ -1149,7 +1149,7 @@ void BosLstMovePlatform(BosLstWork* work) {
             arg.z = obj->z + 0x800;
 
             for (i = 0; i < work->lstTaskCount; i++) {
-                arg.kind = 1;
+                arg.kind = BOS_LST_BIT_KIND_PLATFORM;
                 arg.index = i;
                 arg.facing = &work->facing;
                 arg.falCount = &work->falCount;

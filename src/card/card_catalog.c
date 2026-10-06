@@ -1868,463 +1868,463 @@ const CardDef gCardDefs[950] = {
     },
     {
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, LOCALIZED(gEnemyNameShadow), gShadowSmallCardFrame0, gShadowSmallCardTiles, gShadowSmallCardPalette,
-        CARD_KIND_SHADOW, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SHADOW, 0x0, 1, HC_EFFECT_INCREMENTOR, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, LOCALIZED(gEnemyNameShadow), gShadowSmallCardFrame0, gShadowSmallCardTiles, gShadowSmallCardPalette,
-        CARD_KIND_SHADOW, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SHADOW, 0x0, 1, HC_EFFECT_INCREMENTOR, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy00Frame0, gCardEmy00Tiles, gEmy00Palette, LOCALIZED(gEnemyNameShadow), gShadowSmallCardFrame0, gShadowSmallCardTiles, gShadowSmallCardPalette,
-        CARD_KIND_SHADOW, 0x0, 1, 0x1, 450, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SHADOW, 0x0, 1, HC_EFFECT_INCREMENTOR, 450, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, LOCALIZED(gEnemyNameSoldier), gSoldierSmallCardFrame0, gSoldierSmallCardTiles, gSoldierSmallCardPalette,
-        CARD_KIND_SOLDIER, 0x0, 1, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOLDIER, 0x0, 1, HC_EFFECT_COMBO_PLUS, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, LOCALIZED(gEnemyNameSoldier), gSoldierSmallCardFrame0, gSoldierSmallCardTiles, gSoldierSmallCardPalette,
-        CARD_KIND_SOLDIER, 0x0, 2, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOLDIER, 0x0, 2, HC_EFFECT_COMBO_PLUS, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy14Frame0, gCardEmy14Tiles, gEmy14Palette, LOCALIZED(gEnemyNameSoldier), gSoldierSmallCardFrame0, gSoldierSmallCardTiles, gSoldierSmallCardPalette,
-        CARD_KIND_SOLDIER, 0x0, 2, 0x3, 453, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SOLDIER, 0x0, 2, HC_EFFECT_COMBO_PLUS, 453, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, LOCALIZED(gEnemyNameLargeBody), gLargeBodySmallCardFrame0, gLargeBodySmallCardTiles, gLargeBodySmallCardPalette,
-        CARD_KIND_LARGE_BODY, 0x0, 1, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_LARGE_BODY, 0x0, 1, HC_EFFECT_GUARD, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, LOCALIZED(gEnemyNameLargeBody), gLargeBodySmallCardFrame0, gLargeBodySmallCardTiles, gLargeBodySmallCardPalette,
-        CARD_KIND_LARGE_BODY, 0x0, 3, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_LARGE_BODY, 0x0, 3, HC_EFFECT_GUARD, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy38Frame0, gCardEmy38Tiles, gEmy38Palette, LOCALIZED(gEnemyNameLargeBody), gLargeBodySmallCardFrame0, gLargeBodySmallCardTiles, gLargeBodySmallCardPalette,
-        CARD_KIND_LARGE_BODY, 0x0, 4, 0x33, 456, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_LARGE_BODY, 0x0, 4, HC_EFFECT_GUARD, 456, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, LOCALIZED(gEnemyNameRedNocturne), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gRedNocturneSmallCardPalette,
-        CARD_KIND_RED_NOCTURNE, 0x0, 1, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_RED_NOCTURNE, 0x0, 1, HC_EFFECT_FIRE_BOOST, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, LOCALIZED(gEnemyNameRedNocturne), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gRedNocturneSmallCardPalette,
-        CARD_KIND_RED_NOCTURNE, 0x0, 2, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_RED_NOCTURNE, 0x0, 2, HC_EFFECT_FIRE_BOOST, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy01Frame0, gCardEmy01Tiles, gEmy01Palette, LOCALIZED(gEnemyNameRedNocturne), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gRedNocturneSmallCardPalette,
-        CARD_KIND_RED_NOCTURNE, 0x0, 4, 0x4, 459, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_RED_NOCTURNE, 0x0, 4, HC_EFFECT_FIRE_BOOST, 459, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gBlueRhapsodyCardFrame0, gBlueRhapsodyCardTiles, gEmy02Palette, LOCALIZED(gEnemyNameBlueRhapsody), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gBlueRhapsodySmallCardPalette,
-        CARD_KIND_BLUE_RHAPSODY, 0x0, 1, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLUE_RHAPSODY, 0x0, 1, HC_EFFECT_BLIZZARD_BOOST, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gBlueRhapsodyCardFrame0, gBlueRhapsodyCardTiles, gEmy02Palette, LOCALIZED(gEnemyNameBlueRhapsody), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gBlueRhapsodySmallCardPalette,
-        CARD_KIND_BLUE_RHAPSODY, 0x0, 2, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLUE_RHAPSODY, 0x0, 2, HC_EFFECT_BLIZZARD_BOOST, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gBlueRhapsodyCardFrame0, gBlueRhapsodyCardTiles, gEmy02Palette, LOCALIZED(gEnemyNameBlueRhapsody), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gBlueRhapsodySmallCardPalette,
-        CARD_KIND_BLUE_RHAPSODY, 0x0, 4, 0xb, 463, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLUE_RHAPSODY, 0x0, 4, HC_EFFECT_BLIZZARD_BOOST, 463, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gYellowOperaCardFrame0, gYellowOperaCardTiles, gEmy03Palette, LOCALIZED(gEnemyNameYellowOpera), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gYellowOperaSmallCardPalette,
-        CARD_KIND_YELLOW_OPERA, 0x0, 1, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_YELLOW_OPERA, 0x0, 1, HC_EFFECT_THUNDER_BOOST, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gYellowOperaCardFrame0, gYellowOperaCardTiles, gEmy03Palette, LOCALIZED(gEnemyNameYellowOpera), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gYellowOperaSmallCardPalette,
-        CARD_KIND_YELLOW_OPERA, 0x0, 2, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_YELLOW_OPERA, 0x0, 2, HC_EFFECT_THUNDER_BOOST, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gYellowOperaCardFrame0, gYellowOperaCardTiles, gEmy03Palette, LOCALIZED(gEnemyNameYellowOpera), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gYellowOperaSmallCardPalette,
-        CARD_KIND_YELLOW_OPERA, 0x0, 4, 0xc, 466, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_YELLOW_OPERA, 0x0, 4, HC_EFFECT_THUNDER_BOOST, 466, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gGreenRequiemCardFrame0, gGreenRequiemCardTiles, gEmy04Palette, LOCALIZED(gEnemyNameGreenRequiem), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gGreenRequiemSmallCardPalette,
-        CARD_KIND_GREEN_REQUIEM, 0x0, 1, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GREEN_REQUIEM, 0x0, 1, HC_EFFECT_CURE_BOOST, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gGreenRequiemCardFrame0, gGreenRequiemCardTiles, gEmy04Palette, LOCALIZED(gEnemyNameGreenRequiem), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gGreenRequiemSmallCardPalette,
-        CARD_KIND_GREEN_REQUIEM, 0x0, 2, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GREEN_REQUIEM, 0x0, 2, HC_EFFECT_CURE_BOOST, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gGreenRequiemCardFrame0, gGreenRequiemCardTiles, gEmy04Palette, LOCALIZED(gEnemyNameGreenRequiem), gRedNocturneSmallCardFrame0, gRedNocturneSmallCardTiles, gGreenRequiemSmallCardPalette,
-        CARD_KIND_GREEN_REQUIEM, 0x0, 4, 0xd, 469, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GREEN_REQUIEM, 0x0, 4, HC_EFFECT_CURE_BOOST, 469, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, LOCALIZED(gEnemyNamePowerwild), gPowerwildSmallCardFrame0, gPowerwildSmallCardTiles, gPowerwildSmallCardPalette,
-        CARD_KIND_POWERWILD, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_POWERWILD, 0x0, 3, HC_EFFECT_RETROGRADE, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, LOCALIZED(gEnemyNamePowerwild), gPowerwildSmallCardFrame0, gPowerwildSmallCardTiles, gPowerwildSmallCardPalette,
-        CARD_KIND_POWERWILD, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_POWERWILD, 0x0, 3, HC_EFFECT_RETROGRADE, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy15Frame0, gCardEmy15Tiles, gEmy15Palette, LOCALIZED(gEnemyNamePowerwild), gPowerwildSmallCardFrame0, gPowerwildSmallCardTiles, gPowerwildSmallCardPalette,
-        CARD_KIND_POWERWILD, 0x0, 3, 0x1f, 471, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_POWERWILD, 0x0, 3, HC_EFFECT_RETROGRADE, 471, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, LOCALIZED(gEnemyNameBouncywild), gBouncywildSmallCardFrame0, gBouncywildSmallCardTiles, gBouncywildSmallCardPalette,
-        CARD_KIND_BOUNCYWILD, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BOUNCYWILD, 0x0, 2, HC_EFFECT_DRAW, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, LOCALIZED(gEnemyNameBouncywild), gBouncywildSmallCardFrame0, gBouncywildSmallCardTiles, gBouncywildSmallCardPalette,
-        CARD_KIND_BOUNCYWILD, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BOUNCYWILD, 0x0, 2, HC_EFFECT_DRAW, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy16Frame0, gCardEmy16Tiles, gEmy16Palette, LOCALIZED(gEnemyNameBouncywild), gBouncywildSmallCardFrame0, gBouncywildSmallCardTiles, gBouncywildSmallCardPalette,
-        CARD_KIND_BOUNCYWILD, 0x0, 2, 0x6, 474, 3, 10, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BOUNCYWILD, 0x0, 2, HC_EFFECT_DRAW, 474, 3, 10, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, LOCALIZED(gEnemyNameAirSoldier), gAirSoldierSmallCardFrame0, gAirSoldierSmallCardTiles, gAirSoldierSmallCardPalette,
-        CARD_KIND_AIR_SOLDIER, 0x0, 3, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_SOLDIER, 0x0, 3, HC_EFFECT_RELOAD_KINESIS, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, LOCALIZED(gEnemyNameAirSoldier), gAirSoldierSmallCardFrame0, gAirSoldierSmallCardTiles, gAirSoldierSmallCardPalette,
-        CARD_KIND_AIR_SOLDIER, 0x0, 4, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_SOLDIER, 0x0, 4, HC_EFFECT_RELOAD_KINESIS, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy18Frame0, gCardEmy18Tiles, gEmy18Palette, LOCALIZED(gEnemyNameAirSoldier), gAirSoldierSmallCardFrame0, gAirSoldierSmallCardTiles, gAirSoldierSmallCardPalette,
-        CARD_KIND_AIR_SOLDIER, 0x0, 4, 0x1e, 477, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_SOLDIER, 0x0, 4, HC_EFFECT_RELOAD_KINESIS, 477, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, LOCALIZED(gEnemyNameBandit), gBanditSmallCardFrame0, gBanditSmallCardTiles, gBanditSmallCardPalette,
-        CARD_KIND_BANDIT, 0x0, 1, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BANDIT, 0x0, 1, HC_EFFECT_COMBO_FINISH, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, LOCALIZED(gEnemyNameBandit), gBanditSmallCardFrame0, gBanditSmallCardTiles, gBanditSmallCardPalette,
-        CARD_KIND_BANDIT, 0x0, 2, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BANDIT, 0x0, 2, HC_EFFECT_COMBO_FINISH, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy19Frame0, gCardEmy19Tiles, gEmy19Palette, LOCALIZED(gEnemyNameBandit), gBanditSmallCardFrame0, gBanditSmallCardTiles, gBanditSmallCardPalette,
-        CARD_KIND_BANDIT, 0x0, 2, 0x5, 480, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BANDIT, 0x0, 2, HC_EFFECT_COMBO_FINISH, 480, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, LOCALIZED(gEnemyNameFatBandit), gFatBanditSmallCardFrame0, gFatBanditSmallCardTiles, gFatBanditSmallCardPalette,
-        CARD_KIND_FAT_BANDIT, 0x0, 3, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_FAT_BANDIT, 0x0, 3, HC_EFFECT_BACK_ATTACK, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, LOCALIZED(gEnemyNameFatBandit), gFatBanditSmallCardFrame0, gFatBanditSmallCardTiles, gFatBanditSmallCardPalette,
-        CARD_KIND_FAT_BANDIT, 0x0, 1, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_FAT_BANDIT, 0x0, 1, HC_EFFECT_BACK_ATTACK, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy39Frame0, gCardEmy39Tiles, gEmy39Palette, LOCALIZED(gEnemyNameFatBandit), gFatBanditSmallCardFrame0, gFatBanditSmallCardTiles, gFatBanditSmallCardPalette,
-        CARD_KIND_FAT_BANDIT, 0x0, 6, 0x24, 483, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_FAT_BANDIT, 0x0, 6, HC_EFFECT_BACK_ATTACK, 483, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, LOCALIZED(gEnemyNameBarrelSpider), gBarrelSpiderSmallCardFrame0, gBarrelSpiderSmallCardTiles, gBarrelSpiderSmallCardPalette,
-        CARD_KIND_BARREL_SPIDER, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BARREL_SPIDER, 0x0, 4, HC_EFFECT_QUICKLOAD, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, LOCALIZED(gEnemyNameBarrelSpider), gBarrelSpiderSmallCardFrame0, gBarrelSpiderSmallCardTiles, gBarrelSpiderSmallCardPalette,
-        CARD_KIND_BARREL_SPIDER, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BARREL_SPIDER, 0x0, 4, HC_EFFECT_QUICKLOAD, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy21Frame0, gCardEmy21Tiles, gEmy21Palette, LOCALIZED(gEnemyNameBarrelSpider), gBarrelSpiderSmallCardFrame0, gBarrelSpiderSmallCardTiles, gBarrelSpiderSmallCardPalette,
-        CARD_KIND_BARREL_SPIDER, 0x0, 4, 0x9, 486, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BARREL_SPIDER, 0x0, 4, HC_EFFECT_QUICKLOAD, 486, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, LOCALIZED(gEnemyNameSearchGhost), gSearchGhostSmallCardFrame0, gSearchGhostSmallCardTiles, gSearchGhostSmallCardPalette,
-        CARD_KIND_SEARCH_GHOST, 0x0, 1, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEARCH_GHOST, 0x0, 1, HC_EFFECT_DRAIN, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, LOCALIZED(gEnemyNameSearchGhost), gSearchGhostSmallCardFrame0, gSearchGhostSmallCardTiles, gSearchGhostSmallCardPalette,
-        CARD_KIND_SEARCH_GHOST, 0x0, 2, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEARCH_GHOST, 0x0, 2, HC_EFFECT_DRAIN, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy22Frame0, gCardEmy22Tiles, gEmy22Palette, LOCALIZED(gEnemyNameSearchGhost), gSearchGhostSmallCardFrame0, gSearchGhostSmallCardTiles, gSearchGhostSmallCardPalette,
-        CARD_KIND_SEARCH_GHOST, 0x0, 2, 0x23, 489, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEARCH_GHOST, 0x0, 2, HC_EFFECT_DRAIN, 489, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, LOCALIZED(gEnemyNameSeaNeon), gSeaNeonSmallCardFrame0, gSeaNeonSmallCardTiles, gSeaNeonSmallCardPalette,
-        CARD_KIND_SEA_NEON, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEA_NEON, 0x0, 1, HC_EFFECT_RANDOM_VALUES, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, LOCALIZED(gEnemyNameSeaNeon), gSeaNeonSmallCardFrame0, gSeaNeonSmallCardTiles, gSeaNeonSmallCardPalette,
-        CARD_KIND_SEA_NEON, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEA_NEON, 0x0, 1, HC_EFFECT_RANDOM_VALUES, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy06Frame0, gCardEmy06Tiles, gEmy06Palette, LOCALIZED(gEnemyNameSeaNeon), gSeaNeonSmallCardFrame0, gSeaNeonSmallCardTiles, gSeaNeonSmallCardPalette,
-        CARD_KIND_SEA_NEON, 0x0, 1, 0x10, 492, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SEA_NEON, 0x0, 1, HC_EFFECT_RANDOM_VALUES, 492, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, LOCALIZED(gEnemyNameScrewdiver), gScrewdiverSmallCardFrame0, gScrewdiverSmallCardTiles, gScrewdiverSmallCardPalette,
-        CARD_KIND_SCREWDIVER, 0x0, 1, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SCREWDIVER, 0x0, 1, HC_EFFECT_DECREMENTOR, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, LOCALIZED(gEnemyNameScrewdiver), gScrewdiverSmallCardFrame0, gScrewdiverSmallCardTiles, gScrewdiverSmallCardPalette,
-        CARD_KIND_SCREWDIVER, 0x0, 2, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SCREWDIVER, 0x0, 2, HC_EFFECT_DECREMENTOR, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy23Frame0, gCardEmy23Tiles, gEmy23Palette, LOCALIZED(gEnemyNameScrewdiver), gScrewdiverSmallCardFrame0, gScrewdiverSmallCardTiles, gScrewdiverSmallCardPalette,
-        CARD_KIND_SCREWDIVER, 0x0, 2, 0x15, 495, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_SCREWDIVER, 0x0, 2, HC_EFFECT_DECREMENTOR, 495, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, LOCALIZED(gEnemyNameAquatank), gAquatankSmallCardFrame0, gAquatankSmallCardTiles, gAquatankSmallCardPalette,
-        CARD_KIND_AQUATANK, 0x0, 2, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AQUATANK, 0x0, 2, HC_EFFECT_AUTO_RELOAD, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, LOCALIZED(gEnemyNameAquatank), gAquatankSmallCardFrame0, gAquatankSmallCardTiles, gAquatankSmallCardPalette,
-        CARD_KIND_AQUATANK, 0x0, 1, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AQUATANK, 0x0, 1, HC_EFFECT_AUTO_RELOAD, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy41Frame0, gCardEmy41Tiles, gEmy41Palette, LOCALIZED(gEnemyNameAquatank), gAquatankSmallCardFrame0, gAquatankSmallCardTiles, gAquatankSmallCardPalette,
-        CARD_KIND_AQUATANK, 0x0, 7, 0x28, 498, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AQUATANK, 0x0, 7, HC_EFFECT_AUTO_RELOAD, 498, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, LOCALIZED(gEnemyNameWightKnight), gWightKnightSmallCardFrame0, gWightKnightSmallCardTiles, gWightKnightSmallCardPalette,
-        CARD_KIND_WIGHT_KNIGHT, 0x0, 2, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIGHT_KNIGHT, 0x0, 2, HC_EFFECT_FLOAT, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, LOCALIZED(gEnemyNameWightKnight), gWightKnightSmallCardFrame0, gWightKnightSmallCardTiles, gWightKnightSmallCardPalette,
-        CARD_KIND_WIGHT_KNIGHT, 0x0, 3, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIGHT_KNIGHT, 0x0, 3, HC_EFFECT_FLOAT, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy25Frame0, gCardEmy25Tiles, gEmy25Palette, LOCALIZED(gEnemyNameWightKnight), gWightKnightSmallCardFrame0, gWightKnightSmallCardTiles, gWightKnightSmallCardPalette,
-        CARD_KIND_WIGHT_KNIGHT, 0x0, 3, 0x35, 501, 3, 15, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIGHT_KNIGHT, 0x0, 3, HC_EFFECT_FLOAT, 501, 3, 15, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, LOCALIZED(gEnemyNameGargoyle), gGargoyleSmallCardFrame0, gGargoyleSmallCardTiles, gGargoyleSmallCardPalette,
-        CARD_KIND_GARGOYLE, 0x0, 3, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GARGOYLE, 0x0, 3, HC_EFFECT_VANISH, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, LOCALIZED(gEnemyNameGargoyle), gGargoyleSmallCardFrame0, gGargoyleSmallCardTiles, gGargoyleSmallCardPalette,
-        CARD_KIND_GARGOYLE, 0x0, 4, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GARGOYLE, 0x0, 4, HC_EFFECT_VANISH, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy26Frame0, gCardEmy26Tiles, gEmy26Palette, LOCALIZED(gEnemyNameGargoyle), gGargoyleSmallCardFrame0, gGargoyleSmallCardTiles, gGargoyleSmallCardPalette,
-        CARD_KIND_GARGOYLE, 0x0, 4, 0x13, 504, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GARGOYLE, 0x0, 4, HC_EFFECT_VANISH, 504, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, LOCALIZED(gEnemyNamePirate), gPirateSmallCardFrame0, gPirateSmallCardTiles, gPirateSmallCardPalette,
-        CARD_KIND_PIRATE, 0x0, 1, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PIRATE, 0x0, 1, HC_EFFECT_ALL_ZEROS, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, LOCALIZED(gEnemyNamePirate), gPirateSmallCardFrame0, gPirateSmallCardTiles, gPirateSmallCardPalette,
-        CARD_KIND_PIRATE, 0x0, 2, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PIRATE, 0x0, 2, HC_EFFECT_ALL_ZEROS, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy27Frame0, gCardEmy27Tiles, gEmy27Palette, LOCALIZED(gEnemyNamePirate), gPirateSmallCardFrame0, gPirateSmallCardTiles, gPirateSmallCardPalette,
-        CARD_KIND_PIRATE, 0x0, 2, 0x11, 507, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PIRATE, 0x0, 2, HC_EFFECT_ALL_ZEROS, 507, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, LOCALIZED(gEnemyNameAirPirate), gAirPirateSmallCardFrame0, gAirPirateSmallCardTiles, gAirPirateSmallCardPalette,
-        CARD_KIND_AIR_PIRATE, 0x0, 3, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_PIRATE, 0x0, 3, HC_EFFECT_ITEM_BRACER, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, LOCALIZED(gEnemyNameAirPirate), gAirPirateSmallCardFrame0, gAirPirateSmallCardTiles, gAirPirateSmallCardPalette,
-        CARD_KIND_AIR_PIRATE, 0x0, 4, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_PIRATE, 0x0, 4, HC_EFFECT_ITEM_BRACER, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy28Frame0, gCardEmy28Tiles, gEmy28Palette, LOCALIZED(gEnemyNameAirPirate), gAirPirateSmallCardFrame0, gAirPirateSmallCardTiles, gAirPirateSmallCardPalette,
-        CARD_KIND_AIR_PIRATE, 0x0, 4, 0x1d, 510, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AIR_PIRATE, 0x0, 4, HC_EFFECT_ITEM_BRACER, 510, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, LOCALIZED(gEnemyNameDarkball), gDarkballSmallCardFrame0, gDarkballSmallCardTiles, gDarkballSmallCardPalette,
-        CARD_KIND_DARKBALL, 0x0, 2, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKBALL, 0x0, 2, HC_EFFECT_CARDBLIND, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, LOCALIZED(gEnemyNameDarkball), gDarkballSmallCardFrame0, gDarkballSmallCardTiles, gDarkballSmallCardPalette,
-        CARD_KIND_DARKBALL, 0x0, 4, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKBALL, 0x0, 4, HC_EFFECT_CARDBLIND, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy29Frame0, gCardEmy29Tiles, gEmy29Palette, LOCALIZED(gEnemyNameDarkball), gDarkballSmallCardFrame0, gDarkballSmallCardTiles, gDarkballSmallCardPalette,
-        CARD_KIND_DARKBALL, 0x0, 6, 0x7, 513, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKBALL, 0x0, 6, HC_EFFECT_CARDBLIND, 513, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, LOCALIZED(gEnemyNameDefender), gDefenderSmallCardFrame0, gDefenderSmallCardTiles, gDefenderSmallCardPalette,
-        CARD_KIND_DEFENDER, 0x0, 5, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DEFENDER, 0x0, 5, HC_EFFECT_PROTECT, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, LOCALIZED(gEnemyNameDefender), gDefenderSmallCardFrame0, gDefenderSmallCardTiles, gDefenderSmallCardPalette,
-        CARD_KIND_DEFENDER, 0x0, 1, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DEFENDER, 0x0, 1, HC_EFFECT_PROTECT, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy44Frame0, gCardEmy44Tiles, gEmy44Palette, LOCALIZED(gEnemyNameDefender), gDefenderSmallCardFrame0, gDefenderSmallCardTiles, gDefenderSmallCardPalette,
-        CARD_KIND_DEFENDER, 0x0, 9, 0xe, 516, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DEFENDER, 0x0, 9, HC_EFFECT_PROTECT, 516, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, LOCALIZED(gEnemyNameWyvern), gWyvernSmallCardFrame0, gWyvernSmallCardTiles, gWyvernSmallCardPalette,
-        CARD_KIND_WYVERN, 0x0, 4, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WYVERN, 0x0, 4, HC_EFFECT_DRAW_2, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, LOCALIZED(gEnemyNameWyvern), gWyvernSmallCardFrame0, gWyvernSmallCardTiles, gWyvernSmallCardPalette,
-        CARD_KIND_WYVERN, 0x0, 5, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WYVERN, 0x0, 5, HC_EFFECT_DRAW_2, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy30Frame0, gCardEmy30Tiles, gEmy30Palette, LOCALIZED(gEnemyNameWyvern), gWyvernSmallCardFrame0, gWyvernSmallCardTiles, gWyvernSmallCardPalette,
-        CARD_KIND_WYVERN, 0x0, 5, 0x19, 519, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WYVERN, 0x0, 5, HC_EFFECT_DRAW_2, 519, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, LOCALIZED(gEnemyNameWizard), gWizardSmallCardFrame0, gWizardSmallCardTiles, gWizardSmallCardPalette,
-        CARD_KIND_WIZARD, 0x0, 3, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIZARD, 0x0, 3, HC_EFFECT_MAGIC_BOOST, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, LOCALIZED(gEnemyNameWizard), gWizardSmallCardFrame0, gWizardSmallCardTiles, gWizardSmallCardPalette,
-        CARD_KIND_WIZARD, 0x0, 1, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIZARD, 0x0, 1, HC_EFFECT_MAGIC_BOOST, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy31Frame0, gCardEmy31Tiles, gEmy31Palette, LOCALIZED(gEnemyNameWizard), gWizardSmallCardFrame0, gWizardSmallCardTiles, gWizardSmallCardPalette,
-        CARD_KIND_WIZARD, 0x0, 7, 0x26, 522, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WIZARD, 0x0, 7, HC_EFFECT_MAGIC_BOOST, 522, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, LOCALIZED(gEnemyNameNeoshadow), gNeoshadowSmallCardFrame0, gNeoshadowSmallCardTiles, gNeoshadowSmallCardPalette,
-        CARD_KIND_NEOSHADOW, 0x0, 7, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_NEOSHADOW, 0x0, 7, HC_EFFECT_BIO, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, LOCALIZED(gEnemyNameNeoshadow), gNeoshadowSmallCardFrame0, gNeoshadowSmallCardTiles, gNeoshadowSmallCardPalette,
-        CARD_KIND_NEOSHADOW, 0x0, 2, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_NEOSHADOW, 0x0, 2, HC_EFFECT_BIO, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy37Frame0, gCardEmy37Tiles, gEmy37Palette, LOCALIZED(gEnemyNameNeoshadow), gNeoshadowSmallCardFrame0, gNeoshadowSmallCardTiles, gNeoshadowSmallCardPalette,
-        CARD_KIND_NEOSHADOW, 0x0, 8, 0x18, 525, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_NEOSHADOW, 0x0, 8, HC_EFFECT_BIO, 525, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy07Frame0, gCardEmy07Tiles, gEmy07Palette, LOCALIZED(gEnemyNameWhiteMushroom), gWhiteMushroomSmallCardFrame0, gWhiteMushroomSmallCardTiles, gWhiteMushroomSmallCardPalette,
-        CARD_KIND_WHITE_MUSHROOM, 0x0, 2, 0x2a, 528, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_WHITE_MUSHROOM, 0x0, 2, HC_EFFECT_HYPER_HEALING, 528, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, LOCALIZED(gEnemyNameBlackFungus), gBlackFungusSmallCardFrame0, gBlackFungusSmallCardTiles, gBlackFungusSmallCardPalette,
-        CARD_KIND_BLACK_FUNGUS, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLACK_FUNGUS, 0x0, 7, HC_EFFECT_RANDOM_FLUSH, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, LOCALIZED(gEnemyNameBlackFungus), gBlackFungusSmallCardFrame0, gBlackFungusSmallCardTiles, gBlackFungusSmallCardPalette,
-        CARD_KIND_BLACK_FUNGUS, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLACK_FUNGUS, 0x0, 7, HC_EFFECT_RANDOM_FLUSH, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy08Frame0, gCardEmy08Tiles, gEmy07bPalette, LOCALIZED(gEnemyNameBlackFungus), gBlackFungusSmallCardFrame0, gBlackFungusSmallCardTiles, gBlackFungusSmallCardPalette,
-        CARD_KIND_BLACK_FUNGUS, 0x0, 7, 0x25, 529, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_BLACK_FUNGUS, 0x0, 7, HC_EFFECT_RANDOM_FLUSH, 529, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, LOCALIZED(gEnemyNameCreeperPlant), gCreeperPlantSmallCardFrame0, gCreeperPlantSmallCardTiles, gCreeperPlantSmallCardPalette,
-        CARD_KIND_CREEPER_PLANT, 0x0, 2, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CREEPER_PLANT, 0x0, 2, HC_EFFECT_LEAF_BRACER, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, LOCALIZED(gEnemyNameCreeperPlant), gCreeperPlantSmallCardFrame0, gCreeperPlantSmallCardTiles, gCreeperPlantSmallCardPalette,
-        CARD_KIND_CREEPER_PLANT, 0x0, 4, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CREEPER_PLANT, 0x0, 4, HC_EFFECT_LEAF_BRACER, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy83Frame0, gCardEmy83Tiles, gEmy83Palette, LOCALIZED(gEnemyNameCreeperPlant), gCreeperPlantSmallCardFrame0, gCreeperPlantSmallCardTiles, gCreeperPlantSmallCardPalette,
-        CARD_KIND_CREEPER_PLANT, 0x0, 6, 0x14, 532, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CREEPER_PLANT, 0x0, 6, HC_EFFECT_LEAF_BRACER, 532, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, LOCALIZED(gEnemyNameTornadoStep), gTornadoStepSmallCardFrame0, gTornadoStepSmallCardTiles, gTornadoStepSmallCardPalette,
-        CARD_KIND_TORNADO_STEP, 0x0, 2, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TORNADO_STEP, 0x0, 2, HC_EFFECT_COMBO_PLUS_2, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, LOCALIZED(gEnemyNameTornadoStep), gTornadoStepSmallCardFrame0, gTornadoStepSmallCardTiles, gTornadoStepSmallCardPalette,
-        CARD_KIND_TORNADO_STEP, 0x0, 4, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TORNADO_STEP, 0x0, 4, HC_EFFECT_COMBO_PLUS_2, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy81Frame0, gCardEmy81Tiles, gEmy81Palette, LOCALIZED(gEnemyNameTornadoStep), gTornadoStepSmallCardFrame0, gTornadoStepSmallCardTiles, gTornadoStepSmallCardPalette,
-        CARD_KIND_TORNADO_STEP, 0x0, 6, 0xa, 535, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TORNADO_STEP, 0x0, 6, HC_EFFECT_COMBO_PLUS_2, 535, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, LOCALIZED(gEnemyNameCrescendo), gCrescendoSmallCardFrame0, gCrescendoSmallCardTiles, gCrescendoSmallCardPalette,
-        CARD_KIND_CRESCENDO, 0x0, 2, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CRESCENDO, 0x0, 2, HC_EFFECT_SUMMON_BOOST, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, LOCALIZED(gEnemyNameCrescendo), gCrescendoSmallCardFrame0, gCrescendoSmallCardTiles, gCrescendoSmallCardPalette,
-        CARD_KIND_CRESCENDO, 0x0, 4, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CRESCENDO, 0x0, 4, HC_EFFECT_SUMMON_BOOST, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardEmy82Frame0, gCardEmy82Tiles, gEmy82Palette, LOCALIZED(gEnemyNameCrescendo), gCrescendoSmallCardFrame0, gCrescendoSmallCardTiles, gCrescendoSmallCardPalette,
-        CARD_KIND_CRESCENDO, 0x0, 6, 0x27, 538, 3, 20, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CRESCENDO, 0x0, 6, HC_EFFECT_SUMMON_BOOST, 538, 3, 20, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos01Frame0, gCardBos01Tiles, gBoss01objPalette, LOCALIZED(gEnemyNameGuardArmor), gGuardArmorSmallCardFrame0, gGuardArmorSmallCardTiles, gGuardArmorSmallCardPalette,
-        CARD_KIND_GUARD_ARMOR, 0x0, 1, 0x22, 575, 3, 30, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_GUARD_ARMOR, 0x0, 1, HC_EFFECT_WIDE_ATTACK_2, 575, 3, 30, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos04Frame0, gCardBos04Tiles, gBosPcBgPalette, LOCALIZED(gEnemyNameParasiteCage), gParasiteCageSmallCardFrame0, gParasiteCageSmallCardTiles, gParasiteCageSmallCardPalette,
-        CARD_KIND_PARASITE_CAGE, 0x0, 1, 0x29, 605, 3, 60, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_PARASITE_CAGE, 0x0, 1, HC_EFFECT_DISPEL, 605, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos03Frame0, gCardBos03Tiles, gBoss03objPalette, LOCALIZED(gEnemyNameTrickmaster), gTrickmasterSmallCardFrame0, gTrickmasterSmallCardTiles, gTrickmasterSmallCardPalette,
-        CARD_KIND_TRICKMASTER, 0x0, 1, 0x30, 595, 3, 25, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_TRICKMASTER, 0x0, 1, HC_EFFECT_VALUE_BREAK, 595, 3, 25, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gEnemyNameDarkside), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,
-        CARD_KIND_DARKSIDE, 0x0, 1, 0x2d, 565, 3, 99, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DARKSIDE, 0x0, 1, HC_EFFECT_MIMIC, 565, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierHeartSmallCardFrame0, gCardSoldierHeartSmallCardTiles, gCardSoldierHeartSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 2, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 2, HC_EFFECT_ATTACK_HASTE, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierHeartSmallCardFrame0, gCardSoldierHeartSmallCardTiles, gCardSoldierHeartSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 3, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 3, HC_EFFECT_ATTACK_HASTE, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw04Frame0, gCardNpcAw04Tiles, gTrumpHPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierHeartSmallCardFrame0, gCardSoldierHeartSmallCardTiles, gCardSoldierHeartSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 3, 0x2c, 545, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_HEART, 0x0, 3, HC_EFFECT_ATTACK_HASTE, 545, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierSpadeSmallCardFrame0, gCardSoldierSpadeSmallCardTiles, gCardSoldierSpadeSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 1, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 1, HC_EFFECT_ATTACK_HASTE, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierSpadeSmallCardFrame0, gCardSoldierSpadeSmallCardTiles, gCardSoldierSpadeSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 4, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 4, HC_EFFECT_ATTACK_HASTE, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardNpcAw03Frame0, gCardNpcAw03Tiles, gTrumpSPalette, LOCALIZED(gEnemyNameCardSoldier), gCardSoldierSpadeSmallCardFrame0, gCardSoldierSpadeSmallCardTiles, gCardSoldierSpadeSmallCardPalette,
-        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 4, 0x2c, 548, 3, 55, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_CARD_SOLDIER_SPADE, 0x0, 4, HC_EFFECT_ATTACK_HASTE, 548, 3, 55, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos11Frame0, gCardBos11Tiles, gCardBos11Palette, LOCALIZED(gEnemyNameHades), gHadesSmallCardFrame0, gHadesSmallCardTiles, gHadesSmallCardPalette,
-        CARD_KIND_HADES, 0x0, 9, 0x8, 551, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_HADES, 0x0, 9, HC_EFFECT_BERSERK, 551, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos05Frame0, gCardBos05Tiles, gCardBos05Palette, LOCALIZED(gEnemyNameJafar), gJafarSmallCardFrame0, gJafarSmallCardTiles, gJafarSmallCardPalette,
-        CARD_KIND_JAFAR, 0x0, 1, 0x2, 615, 3, 65, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_JAFAR, 0x0, 1, HC_EFFECT_ATTACK_BRACER, 615, 3, 65, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos02Frame0, gCardBos02Tiles, gBoss02objPalette, LOCALIZED(gEnemyNameOogieBoogie), gOogieBoogieSmallCardFrame0, gOogieBoogieSmallCardTiles, gOogieBoogieSmallCardPalette,
-        CARD_KIND_OOGIE_BOOGIE, 0x0, 1, 0x17, 585, 3, 40, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_OOGIE_BOOGIE, 0x0, 1, HC_EFFECT_REGEN, 585, 3, 40, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos06Frame0, gCardBos06Tiles, gCardBos06Palette, LOCALIZED(gEnemyNameUrsula), gUrsulaSmallCardFrame0, gUrsulaSmallCardTiles, gUrsulaSmallCardPalette,
-        CARD_KIND_URSULA, 0x0, 1, 0x2e, 625, 3, 50, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_URSULA, 0x0, 1, HC_EFFECT_SHELL, 625, 3, 50, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos10Frame0, gCardBos10Tiles, gCardBos10Palette, LOCALIZED(gEnemyNameHook), gHookSmallCardFrame0, gHookSmallCardTiles, gHookSmallCardPalette,
-        CARD_KIND_HOOK, 0x0, 9, 0x1a, 555, 3, 35, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_HOOK, 0x0, 9, HC_EFFECT_SECOND_CHANCE, 555, 3, 35, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos07Frame0, gCardBos07Tiles, gCardBos07Palette, LOCALIZED(gEnemyNameDragonMaleficent), gDragonMaleficentSmallCardFrame0, gDragonMaleficentSmallCardTiles, gDragonMaleficentSmallCardPalette,
-        CARD_KIND_DRAGON_MALEFICENT, 0x0, 1, 0x2b, 635, 3, 70, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_DRAGON_MALEFICENT, 0x0, 1, HC_EFFECT_OVERDRIVE, 635, 3, 70, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos12Frame0, gCardBos12Tiles, gCardBos12Palette, LOCALIZED(gEnemyNameRiku), gRikuSmallCardFrame0, gRikuSmallCardTiles, gRikuSmallCardPalette,
-        CARD_KIND_RIKU, 0x0, 9, 0xf, 557, 3, 80, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_RIKU, 0x0, 9, HC_EFFECT_SLEIGHT_LOCK, 557, 3, 80, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos13Frame0, gCardBos13Tiles, gCardBos13Palette, LOCALIZED(gEnemyNameAxel), gAxelSmallCardFrame0, gAxelSmallCardTiles, gAxelSmallCardPalette,
-        CARD_KIND_AXEL, 0x0, 9, 0x12, 558, 3, 75, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_AXEL, 0x0, 9, HC_EFFECT_QUICK_RECOVERY, 558, 3, 75, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos14Frame0, gCardBos14Tiles, gCardBos14Palette, LOCALIZED(gEnemyNameLarxene), gLarxeneSmallCardFrame0, gLarxeneSmallCardTiles, gLarxeneSmallCardPalette,
-        CARD_KIND_LARXENE, 0x0, 9, 0x32, 559, 3, 60, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_LARXENE, 0x0, 9, HC_EFFECT_DASH, 559, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos15Frame0, gCardBos15Tiles, gCardBos15Palette, LOCALIZED(gEnemyNameVexen), gVexenSmallCardFrame0, gVexenSmallCardTiles, gVexenSmallCardPalette,
-        CARD_KIND_VEXEN, 0x0, 9, 0x1b, 560, 3, 60, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_VEXEN, 0x0, 9, HC_EFFECT_AUTO_LIFE, 560, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos16Frame0, gCardBos16Tiles, gCardBos16Palette, LOCALIZED(gEnemyNameMarluxia), gMarluxiaSmallCardFrame0, gMarluxiaSmallCardTiles, gMarluxiaSmallCardPalette,
-        CARD_KIND_MARLUXIA, 0x0, 9, 0x2f, 561, 3, 99, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA, 0x0, 9, HC_EFFECT_DOUBLE_SLEIGHT, 561, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos08Frame0, gCardBos08Tiles, gCardBos08Palette, LOCALIZED(gEnemyNameMarluxia), gMarluxia2SmallCardFrame0, gMarluxia2SmallCardTiles, gMarluxia2SmallCardPalette,
-        CARD_KIND_MARLUXIA_2, 0x0, 1, 0x2b, 645, 3, 0, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_MARLUXIA_2, 0x0, 1, HC_EFFECT_OVERDRIVE, 645, 3, 0, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos17Frame0, gCardBos17Tiles, gCardBos17Palette, LOCALIZED(gEnemyNameLexaeus), gLexaeusSmallCardFrame0, gLexaeusSmallCardTiles, gLexaeusSmallCardPalette,
-        CARD_KIND_LEXAEUS, 0x0, 9, 0x31, 563, 3, 99, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_LEXAEUS, 0x0, 9, HC_EFFECT_WARP_BREAK, 563, 3, 99, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos18Frame0, gCardBos18Tiles, gCardBos18Palette, LOCALIZED(gEnemyNameAnsem), gAnsemSmallCardFrame0, gAnsemSmallCardTiles, gAnsemSmallCardPalette,
-        CARD_KIND_ANSEM, 0x0, 9, 0x1c, 564, 3, 60, {5, 0, 0, 0, 0, 0},
+        CARD_KIND_ANSEM, 0x0, 9, HC_EFFECT_SLEIGHTBLIND, 564, 3, 60, {5, 0, 0, 0, 0, 0},
     },
     {
         gCardBos00Frame0, gCardBos00Tiles, gBoss00ObjPalette, LOCALIZED(gCharacterNameCardOfSpades), gDarksideSmallCardFrame0, gDarksideSmallCardTiles, gDarksideSmallCardPalette,

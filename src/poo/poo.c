@@ -8629,10 +8629,10 @@ const PooAnimDesc gPooPigletAnimDescs[4] = {
 };
 
 const PooGfxDesc gPooPigletGfxDescs[4] = {
-    { gPigletStandFrontFrames, 1 },
-    { gPigletStandBackFrames, 1 },
-    { gPigletWalkFrontFrames, 8 },
-    { gPigletWalkBackFrames, 8 },
+    { gPigletStandFrontFrames, ARRAY_COUNT(gPigletStandFrontFrames) },
+    { gPigletStandBackFrames, ARRAY_COUNT(gPigletStandBackFrames) },
+    { gPigletWalkFrontFrames, ARRAY_COUNT(gPigletWalkFrontFrames) },
+    { gPigletWalkBackFrames, ARRAY_COUNT(gPigletWalkBackFrames) },
 };
 
 TaskDesc gTaskDescPooPiglet = {
@@ -8674,7 +8674,7 @@ const PooAnimDesc gPooRabbitAnimDescs[7] = {
 
 const PooGfxDesc gPooRabbitGfxDescs[2] = {
     { gRabbitFl00Frames, 14 },
-    { gRabbitBl00Frames, 15 },
+    { gRabbitBl00Frames, ARRAY_COUNT(gRabbitBl00Frames) },
 };
 
 TaskDesc gTaskDescPooRabbit = {
@@ -8694,10 +8694,10 @@ const PooAnimDesc gPooTiggerAnimDescs[4] = {
 };
 
 const PooGfxDesc gPooTiggerGfxDescs[4] = {
-    { gTiggerFl00Frames, 1 },
-    { gTiggerFl01Frames, 9 },
-    { gTiggerFl02Frames, 8 },
-    { gTiggerBl02Frames, 8 },
+    { gTiggerFl00Frames, ARRAY_COUNT(gTiggerFl00Frames) },
+    { gTiggerFl01Frames, ARRAY_COUNT(gTiggerFl01Frames) },
+    { gTiggerFl02Frames, ARRAY_COUNT(gTiggerFl02Frames) },
+    { gTiggerBl02Frames, ARRAY_COUNT(gTiggerBl02Frames) },
 };
 
 const s32 gPooTiggerHopCorners[8] = { 428288, 232704, 411904, 240896, 428288, 249088, 444672, 240896 };
@@ -8886,15 +8886,15 @@ TaskDesc gTaskDescPooCabbageborn = {
 
 const PooMapObjHitDesc gPooMapObjHitDescs[10] = {
     { gPooMapObjHit0Tiles, 5, gPooMapObjHit0Anims, gPooMapObjHit0Frames, gPooMapObjHit0Palette },
-    { gPooMapObjHit1Tiles, 11, gPooMapObjHit1Anims, gPooMapObjHit1Frames, gPooMapObjHit1Palette },
-    { gPooMapObjHit2Tiles, 24, gPooMapObjHit2Anims, gPooMapObjHit2Frames, gPooMapObjHit2Palette },
-    { gPooMapObjHit3Tiles, 3, gPooMapObjHit3Anims, gPooMapObjHit3Frames, gPooMapObjHit3Palette },
-    { gPooMapObjHit4Tiles, 9, gPooMapObjHit4Anims, gPooMapObjHit4Frames, gPooMapObjHit4Palette },
-    { gPooMapObjHit5Tiles, 2, gPooMapObjHit5Anims, gPooMapObjHit5Frames, gPooMapObjHit5Palette },
-    { gPooMapObjHit6Tiles, 6, gPooMapObjHit6Anims, gPooMapObjHit6Frames, gPooMapObjHit6Palette },
-    { gPooMapObjHit7Tiles, 6, gPooMapObjHit7Anims, gPooMapObjHit7Frames, gPooMapObjHit6Palette },
-    { gPooMapObjHit8Tiles, 10, gPooMapObjHit8Anims, gPooMapObjHit8Frames, gPooMapObjHit8Palette },
-    { gPooMapObjHit9Tiles, 10, gPooMapObjHit9Anims, gPooMapObjHit9Frames, gPooMapObjHit8Palette },
+    { gPooMapObjHit1Tiles, ARRAY_COUNT(gPooMapObjHit1Frames), gPooMapObjHit1Anims, gPooMapObjHit1Frames, gPooMapObjHit1Palette },
+    { gPooMapObjHit2Tiles, ARRAY_COUNT(gPooMapObjHit2Frames), gPooMapObjHit2Anims, gPooMapObjHit2Frames, gPooMapObjHit2Palette },
+    { gPooMapObjHit3Tiles, ARRAY_COUNT(gPooMapObjHit3Frames), gPooMapObjHit3Anims, gPooMapObjHit3Frames, gPooMapObjHit3Palette },
+    { gPooMapObjHit4Tiles, ARRAY_COUNT(gPooMapObjHit4Frames), gPooMapObjHit4Anims, gPooMapObjHit4Frames, gPooMapObjHit4Palette },
+    { gPooMapObjHit5Tiles, ARRAY_COUNT(gPooMapObjHit5Frames), gPooMapObjHit5Anims, gPooMapObjHit5Frames, gPooMapObjHit5Palette },
+    { gPooMapObjHit6Tiles, ARRAY_COUNT(gPooMapObjHit6Frames), gPooMapObjHit6Anims, gPooMapObjHit6Frames, gPooMapObjHit6Palette },
+    { gPooMapObjHit7Tiles, ARRAY_COUNT(gPooMapObjHit7Frames), gPooMapObjHit7Anims, gPooMapObjHit7Frames, gPooMapObjHit6Palette },
+    { gPooMapObjHit8Tiles, ARRAY_COUNT(gPooMapObjHit8Frames), gPooMapObjHit8Anims, gPooMapObjHit8Frames, gPooMapObjHit8Palette },
+    { gPooMapObjHit9Tiles, ARRAY_COUNT(gPooMapObjHit9Frames), gPooMapObjHit9Anims, gPooMapObjHit9Frames, gPooMapObjHit8Palette },
 };
 
 TaskDesc gTaskDescPooMapobjhit = {

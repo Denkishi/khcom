@@ -350,12 +350,12 @@ static const MdFirePoint sMdFirePoints1[4] = { { 128, 304, 0, 0 }, { 104, 324, 0
 static const MdFirePoint sMdFirePoints2[4] = { { 128, 288, 0, 0 }, { 156, 312, 0, 0 }, { 172, 336, 0, 0 }, { 144, 360, 0, 0 } };
 
 static const MdFireDef sMdFireDefs[6] = {
-    { sMdFirePoints0, 4 },
-    { sMdFirePoints1, 4 },
-    { sMdFirePoints2, 4 },
-    { sMdFirePoints0, 4 },
-    { sMdFirePoints0, 4 },
-    { sMdFirePoints0, 4 },
+    { sMdFirePoints0, ARRAY_COUNT(sMdFirePoints0) },
+    { sMdFirePoints1, ARRAY_COUNT(sMdFirePoints1) },
+    { sMdFirePoints2, ARRAY_COUNT(sMdFirePoints2) },
+    { sMdFirePoints0, ARRAY_COUNT(sMdFirePoints0) },
+    { sMdFirePoints0, ARRAY_COUNT(sMdFirePoints0) },
+    { sMdFirePoints0, ARRAY_COUNT(sMdFirePoints0) },
 };
 
 static const EmyKind sBosMdFireEmyKind = { ENEMY_DRAGON_MALEFICENT, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };

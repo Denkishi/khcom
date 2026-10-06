@@ -403,7 +403,7 @@ const EventSequenceDef gEvent000 = {
     EVENT_NONE,
     0,
     { 0, 2 },
-    1,
+    EVENT_EXIT_WORLD_SELECT,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

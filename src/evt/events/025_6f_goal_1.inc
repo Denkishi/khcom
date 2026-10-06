@@ -146,7 +146,7 @@ const EventSequenceDef gEvent025 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    10,
+    EVENT_EXIT_MOVIE_6F_GOAL,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

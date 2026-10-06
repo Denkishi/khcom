@@ -87,7 +87,7 @@ const EventSequenceDef gEvent019 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    5,
+    EVENT_EXIT_MAP_4F,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

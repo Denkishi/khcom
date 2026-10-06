@@ -224,7 +224,7 @@ const EventSequenceDef gEvent073 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    12,
+    EVENT_EXIT_MOVIE_ENDING,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

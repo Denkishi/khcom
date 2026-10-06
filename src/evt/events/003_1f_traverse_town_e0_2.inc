@@ -173,7 +173,7 @@ const EventSequenceDef gEvent003 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    3,
+    EVENT_EXIT_MAP_1F,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

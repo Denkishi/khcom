@@ -76,7 +76,7 @@ const EventSequenceDef gEvent195 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    13,
+    EVENT_EXIT_MOVIE_RIKU_ENDING,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

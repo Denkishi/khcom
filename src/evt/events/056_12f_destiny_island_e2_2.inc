@@ -196,7 +196,7 @@ const EventSequenceDef gEvent056 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    11,
+    EVENT_EXIT_MOVIE_12F_E2,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

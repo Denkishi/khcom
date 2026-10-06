@@ -258,7 +258,7 @@ const EventSequenceDef gEvent004 = {
     EVENT_NONE,
     0,
     { 0, 0 },
-    4,
+    EVENT_EXIT_BATTLE_TUTORIAL_1,
     0,
     WORLD_NONE,
     POOH_LEVEL_NONE,

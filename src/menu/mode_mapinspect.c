@@ -1145,9 +1145,9 @@ void mode_mapinspect_0() {
     sMapInspectValueCol = 0;
     sMapInspectValueRow = 0;
     LoadBgPalette(0, gMapInspectPalettes, sizeof(gMapInspectPalettes));
-#ifdef VERSION_EU
-    LoadBgTiles(0, gMapInspectTiles, 0x2C00);
+    LoadBgTiles(0, gMapInspectTiles, sizeof(gMapInspectTiles));
 
+#ifdef VERSION_EU
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         break;
@@ -1168,8 +1168,6 @@ void mode_mapinspect_0() {
         RequestDma3Copy(gMapInspectEsTiles + 0xC00, (u8*)GetBgCharBase(0) + 0x2400, 0x800);
         break;
     }
-#else
-    LoadBgTiles(0, gMapInspectTiles, sizeof(gMapInspectTiles));
 #endif
     LoadBgPalette(2, gCard00Palette, sizeof(gCard00Palette));
     LoadBgTiles(2, gConfirmWinTiles, sizeof(gConfirmWinTiles));

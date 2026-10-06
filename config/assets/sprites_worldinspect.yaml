@@ -4589,7 +4589,7 @@ entries:
     size: 10624
   eu:
     address: 0x09A42400
-    size: 10624
+    size: 11264
 - name: gMapInspectCategoryZeroTiles
   format: tiles4
   us:
@@ -5235,12 +5235,6 @@ entries:
   eu:
     address: 0x09A41000
     size: 5120
-- name: gMapInspectHeaderFillTiles
-  format: tiles4
-  width: 20
-  eu:
-    address: 0x09A44D80
-    size: 640
 - name: gWorldWarpFloorNumberFrenchTiles
   format: tiles4
   width: 32

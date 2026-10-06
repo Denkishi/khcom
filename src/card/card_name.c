@@ -37,10 +37,10 @@ static u8 sPrintBg;
 #include "premium_message.inc"
 #include "lockon.h"
 void CardName_0(CardNameWork* work) {
-    PremireChanceCardWork* q = gCardListWork->selectedCard;
+    PremireChanceCardWork* selectedCard = gCardListWork->selectedCard;
     ObjPalette* pal;
-    s32 v;
-    s16 t;
+    s32 x;
+    s16 suffixX;
 
     InitTextSlots(work->textSlots, 32);
     InitTextSlots(work->textSlots2, 32);
@@ -51,10 +51,10 @@ void CardName_0(CardNameWork* work) {
 #endif
     work->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
-    work->textSlotCount = LoadTextSlots(GetLocalizedString(q->cardDef->name), work->textSlots);
+    work->textSlotCount = LoadTextSlots(GetLocalizedString(selectedCard->cardDef->name), work->textSlots);
     work->textSlotCount2 = LoadTextSlots((u16*)gPremiumCardMessageTextByLanguage.strings[gLanguage], work->textSlots2);
 #else
-    work->textSlotCount = LoadTextSlots(q->cardDef->name, work->textSlots);
+    work->textSlotCount = LoadTextSlots(selectedCard->cardDef->name, work->textSlots);
 #ifdef VERSION_JP
     work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixText, work->textSlots3);
     work->textSlotCount2 = LoadTextSlots((u16*)gPremiumCardMessageText, work->textSlots2);
@@ -72,41 +72,41 @@ void CardName_0(CardNameWork* work) {
     case LANGUAGE_GERMAN:
     case LANGUAGE_ITALIAN:
         work->textSlotCount3 = 0;
-        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
-        work->nameX = v;
-        t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
-        work->suffixX = t;
-        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
-        work->messageX = v;
+        x = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = x;
+        suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+        work->suffixX = suffixX;
+        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = x;
         break;
     case LANGUAGE_FRENCH:
         work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixTextFrench, work->textSlots3);
-        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
-        work->nameX = v;
-        t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
-        work->suffixX = t;
-        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
-        work->messageX = v;
+        x = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = x;
+        suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+        work->suffixX = suffixX;
+        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = x;
         break;
     case LANGUAGE_SPANISH:
         work->textSlotCount3 = LoadTextSlots((u16*)gPremiumCardSuffixTextSpanish, work->textSlots3);
-        v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
-        work->nameX = v;
-        work->suffixX = v - 3;
-        v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
-        work->messageX = v;
+        x = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+        work->nameX = x;
+        work->suffixX = x - 3;
+        x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+        work->messageX = x;
         break;
     default:
         work->textSlotCount3 = 0;
         break;
     }
 #else
-    v = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
-    work->nameX = v;
-    t = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
-    work->suffixX = t;
-    v = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
-    work->messageX = v;
+    x = (230 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    work->nameX = x;
+    suffixX = (u16)work->nameX + GetTextSlotsWidth(work->textSlots, work->textSlotCount);
+    work->suffixX = suffixX;
+    x = (240 - GetTextSlotsWidth(work->textSlots2, work->textSlotCount2)) / 2;
+    work->messageX = x;
 #endif
     work->tiles = LoadObjTiles(gLargeDialogBoxTiles, 0x1800);
     pal = LoadObjPalette(gCard00Palette, 32);
@@ -254,24 +254,24 @@ void PremireEffectMoveFalling(PremiumCardEffectWork* work) {
 }
 
 void PremireEffectMoveToCenter(PremiumCardEffectWork* work) {
-    s32 v;
-    s32 d;
+    s32 speed;
+    s32 step;
 
     work->vx = work->centerX - work->x;
     work->vy = work->centerY - work->y;
     work->radius = NormalizeVector2D8(&work->vx, &work->vy);
-    v = work->speed;
-    d = v >> 8;
-    work->x += work->vx * d;
-    work->y += work->vy * d;
+    speed = work->speed;
+    step = speed >> 8;
+    work->x += work->vx * step;
+    work->y += work->vy * step;
 
     if (work->radius > 0) {
-        work->speed = v - 2;
+        work->speed = speed - 2;
     }
 }
 
 void InitPrintLayer(u8 bg) {
-    PrintLine** p;
+    PrintLine** lines;
 
     SetBgScroll(bg, 0, 0);
     SetBackdropColor(0, 0, 0);
@@ -280,8 +280,8 @@ void InitPrintLayer(u8 bg) {
     LoadBgPalette(bg, gPrintFontPalettes, 0x80);
     EnableBg(bg);
     sPrintBg = bg;
-    p = &sPrintLines;
-    *p = EwramAlloc(sizeof(PrintLine) * 32);
+    lines = &sPrintLines;
+    *lines = EwramAlloc(sizeof(PrintLine) * 32);
 }
 
 void FreePrintLayer() {
@@ -425,41 +425,41 @@ void PrintNumber(u16 x, u16 y, u16 color, s32 value) {
 }
 
 void PrintBinary16(u16 x, u16 y, u16 color, u16 bits) {
-    u16 v[16];
-    u8 s[17];
+    u16 masked[16];
+    u8 text[17];
     u16 i;
     u16 j;
 
     for (i = 0, j = 15; i < 16; i++, j--) {
-        v[i] = bits & (1 << i);
-        s[j] = (v[i] >> i) + '0';
+        masked[i] = bits & (1 << i);
+        text[j] = (masked[i] >> i) + '0';
     }
 
-    s[16] = 0;
-    PrintString(x, y, color, s);
+    text[16] = 0;
+    PrintString(x, y, color, text);
 }
 
 void PrintHex32(u16 x, u16 y, u16 color, u32 value) {
-    u8 s[11];
+    u8 text[11];
     s32 i;
 
-    s[0] = '0';
-    s[1] = 'x';
-    s[2] = value >> 28;
-    s[3] = (value & 0x0F000000) >> 24;
-    s[4] = (value & 0x00F00000) >> 20;
-    s[5] = (value & 0x000F0000) >> 16;
-    s[6] = (value & 0x0000F000) >> 12;
-    s[7] = (value & 0x00000F00) >> 8;
-    s[8] = (value & 0x000000F0) >> 4;
-    s[9] = value & 0x0000000F;
+    text[0] = '0';
+    text[1] = 'x';
+    text[2] = value >> 28;
+    text[3] = (value & 0x0F000000) >> 24;
+    text[4] = (value & 0x00F00000) >> 20;
+    text[5] = (value & 0x000F0000) >> 16;
+    text[6] = (value & 0x0000F000) >> 12;
+    text[7] = (value & 0x00000F00) >> 8;
+    text[8] = (value & 0x000000F0) >> 4;
+    text[9] = value & 0x0000000F;
 
     for (i = 0; i < 8; i++) {
-        s[i + 2] += s[i + 2] <= 9 ? '0' : '7';
+        text[i + 2] += text[i + 2] <= 9 ? '0' : '7';
     }
 
-    s[10] = 0;
-    PrintString(x, y, color, s);
+    text[10] = 0;
+    PrintString(x, y, color, text);
 }
 
 TaskDesc gTaskDescCardName = {

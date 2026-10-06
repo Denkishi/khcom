@@ -403,7 +403,7 @@ void sysmsgwin_3(SysMsgWinWork* work) {
 
 u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
 #ifndef VERSION_JP
-    TextChar** p;
+    TextChar** nextText;
 #endif
 
     if (work->keepOpen == 0) {
@@ -420,19 +420,19 @@ u8 UpdateSysmsgwinPersistent(SysMsgWinWork* work, void* task) {
             (TextChar*)(work->messageDef->text),
             &work->nextText);
 #else
-        p = &work->nextText;
+        nextText = &work->nextText;
 
-        if (*p != NULL) {
+        if (*nextText != NULL) {
             work->charCount = LayoutCardMsgGlyphsPage(
                 0x2E00,
                 sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
-                *p, p);
+                *nextText, nextText);
         } else {
             work->charCount = LayoutCardMsgGlyphsPage(
                 0x2E00,
                 sSysmsgwinTextY[work->messageDef->positionIndex] - 0x200,
                 (TextChar*)LANGSTR(work->messageDef->text),
-                p);
+                nextText);
         }
 #endif
 
@@ -655,9 +655,9 @@ s32 UpdateSysmsgwinChoiceClose(SysMsgWinWork* work) {
 }
 
 u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* task) {
-    s32 tbl[2];
+    s32 cursorX[2];
 
-    *(u64*)tbl = *(u64*)gSysmsgwinChoiceCursorX;
+    *(u64*)cursorX = *(u64*)gSysmsgwinChoiceCursorX;
     work->gfx = AnimUpdate(&work->anim3);
 
     switch (GetKeysPressed()) {
@@ -702,7 +702,7 @@ u8 UpdateSysmsgwinChoiceInput(SysMsgWinWork* work, void* task) {
     }
 
     if (work->cursorSteps != 0) {
-        ApproachValue(&work->x, tbl[work->choice], work->cursorSteps);
+        ApproachValue(&work->x, cursorX[work->choice], work->cursorSteps);
         work->cursorSteps--;
     }
 

@@ -263,7 +263,7 @@ u8 UpdateDeckExchangeLoadBgs(DeckExchangeWork* work, void* task) {
 }
 
 u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
-    s32 v;
+    s32 deckIndex;
 
     FadeStartIn(FADE_MODE_BLACK, 16);
 
@@ -302,8 +302,8 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
         DrawDeckExchangeCardTotals();
         work->x = 0x4800;
         work->y = 0x2800;
-        v = work->deckIndex;
-        work->cursorRow = v;
+        deckIndex = work->deckIndex;
+        work->cursorRow = deckIndex;
         ApproachValue(&work->x2, sDeckExchangeTabPointerX[work->cursorCol] << 8, work->timer);
         ApproachValue(&work->y2, sDeckExchangeTabPointerY[work->cursorRow] << 8, work->timer);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeOpenCollection);
@@ -318,8 +318,8 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
 }
 
 u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
-    s8 n;
-    s32 m;
+    s8 prevRow;
+    s32 saved;
 
     if (work->popupActive != 0) {
         TaskPoolUpdate(&work->tasks);
@@ -372,7 +372,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         DrawDeckExchangeValueCpCost(work);
         break;
     case DPAD_UP:
-        n = work->cursorRow;
+        prevRow = work->cursorRow;
 
         if (work->cursorRow > 0) {
             work->cursorRow--;
@@ -381,14 +381,14 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         work->timer = 4;
         MoveDeckExchangeValueCursor(work, 64);
 
-        if (n != work->cursorRow) {
+        if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
         DrawDeckExchangeValueCpCost(work);
         break;
     case DPAD_DOWN:
-        n = work->cursorRow;
+        prevRow = work->cursorRow;
 
         if (work->cursorRow <= 3) {
             work->cursorRow++;
@@ -397,7 +397,7 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
         work->timer = 4;
         MoveDeckExchangeValueCursor(work, 128);
 
-        if (n != work->cursorRow) {
+        if (prevRow != work->cursorRow) {
             m4aSongNumStart(SONG_SYS_CLICK);
         }
 
@@ -408,10 +408,10 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
     switch (GetKeysPressed()) {
     case B_BUTTON:
         SetDeckExchangeFrameCursor(work, 0);
-        m = (s8)work->savedCol;
-        work->cursorCol = m;
-        m = (s8)work->savedRow;
-        work->cursorRow = m;
+        saved = (s8)work->savedCol;
+        work->cursorCol = saved;
+        saved = (s8)work->savedRow;
+        work->cursorRow = saved;
         work->x2 = gCollectionGridColumnX[work->cursorCol] << 8;
         work->y2 = gCollectionGridRowY[work->cursorRow] << 8;
         ShowDeckExchangeCardPreview(work);
@@ -990,7 +990,7 @@ void deckexchange_2(DeckExchangeWork* work) {
 }
 
 void deckexchange_3(DeckExchangeWork* work) {
-    ObjPalette** p;
+    ObjPalette** palette4;
 
     if (work->tiles8 != NULL) {
         ReleaseObjTiles(work->tiles8);
@@ -1012,10 +1012,10 @@ void deckexchange_3(DeckExchangeWork* work) {
         ReleaseObjPalette(work->palette7);
     }
 
-    p = &work->palette4;
+    palette4 = &work->palette4;
 
-    if (*p != NULL) {
-        ReleaseObjPalette(*p);
+    if (*palette4 != NULL) {
+        ReleaseObjPalette(*palette4);
     }
 
     ReleaseDeckExchangeCardPreview(work);
@@ -1028,7 +1028,7 @@ void deckexchange_3(DeckExchangeWork* work) {
     FreeTextSlots(work->textSlots3, 8);
     FreeTextSlots(work->textSlots4, 30);
     FreeTextSlots(work->textSlots5, 90);
-    ReleaseObjPalette(*p);
+    ReleaseObjPalette(*palette4);
     TaskPoolDestroy(&work->tasks);
     TaskPoolDestroy(&work->tasks2);
     FreeDeckExchangeCollectionEntries(work);
@@ -1227,7 +1227,7 @@ u8 ScrollDeckExchangeGridUp(DeckExchangeWork* work) {
 }
 
 void SetDeckExchangeHandAnim(DeckExchangeWork* work) {
-    u16 t;
+    u16 handFlags;
 
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
@@ -1246,8 +1246,8 @@ void SetDeckExchangeHandAnim(DeckExchangeWork* work) {
     case DECK_MENU_VIEW_DECK_SELECT:
     case DECK_MENU_VIEW_COMMANDS:
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
-        t = work->handFlags | SPRITE_FLAG_HFLIP;
-        work->handFlags = t;
+        handFlags = work->handFlags | SPRITE_FLAG_HFLIP;
+        work->handFlags = handFlags;
         break;
     }
 }
@@ -1320,17 +1320,17 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
 }
 
 void DrawDeckExchangeDeckCardCount(u8 deck) {
-    u8 d[2];
-    u8 e[2];
+    u8 countDigits[2];
+    u8 maxDigits[2];
     u8* base;
     u16 n;
 
     base = NULL;
     n = GetDeckCardCount(deck);
-    d[0] = n / 10;
-    d[1] = n - (u16)(n / 10) * 10;
-    e[0] = 9;
-    e[1] = 9;
+    countDigits[0] = n / 10;
+    countDigits[1] = n - (u16)(n / 10) * 10;
+    maxDigits[0] = 9;
+    maxDigits[1] = 9;
 
     switch (deck) {
     case 0:
@@ -1344,56 +1344,56 @@ void DrawDeckExchangeDeckCardCount(u8 deck) {
         break;
     }
 
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x20, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x40, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x60, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x80, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[1] + 1) * 32], base + 0x80, 32);
 }
 
 void DrawDeckExchangeEquipMarker(u8 mode) {
-    u8* bg0;
-    u8* bg1;
-    u8* bg2;
+    u8* base0;
+    u8* base1;
+    u8* base2;
 
-    bg0 = GetBgCharBase(0);
-    bg1 = GetBgCharBase(1);
-    bg2 = GetBgCharBase(2);
+    base0 = GetBgCharBase(0);
+    base1 = GetBgCharBase(1);
+    base2 = GetBgCharBase(2);
 
     switch (mode) {
     case 0:
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base2 + 0x1A0, 0x1E0);
         break;
     case 1:
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base2 + 0x1A0, 0x1E0);
         break;
     case 2:
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg0 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, bg1 + 0x1A0, 0x1E0);
-        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, bg2 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base0 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x420, base1 + 0x1A0, 0x1E0);
+        RequestDma3Copy(gDeckEquipMarkerTiles + 0x20, base2 + 0x1A0, 0x1E0);
         break;
     }
 }
 
 void DrawDeckExchangeDeckCpCost(u8 kind) {
-    u8 d[3];
-    u8 e[3];
+    u8 costDigits[3];
+    u8 cpDigits[3];
     u8* base;
     u16 n;
-    u8* ep;
+    u8* out;
 
     base = NULL;
     n = GetDeckCpCost(kind);
-    d[0] = n / 100;
-    d[1] = n / 10 - d[0] * 10;
-    d[2] = n - d[0] * 100 - d[1] * 10;
-    ep = e;
-    ep[0] = gGameState.progression.cp / 100;
-    ep[1] = gGameState.progression.cp / 10 - ep[0] * 10;
-    ep[2] = gGameState.progression.cp - ep[0] * 100 - ep[1] * 10;
+    costDigits[0] = n / 100;
+    costDigits[1] = n / 10 - costDigits[0] * 10;
+    costDigits[2] = n - costDigits[0] * 100 - costDigits[1] * 10;
+    out = cpDigits;
+    out[0] = gGameState.progression.cp / 100;
+    out[1] = gGameState.progression.cp / 10 - out[0] * 10;
+    out[2] = gGameState.progression.cp - out[0] * 100 - out[1] * 10;
 
     switch (kind) {
     case 0:
@@ -1407,12 +1407,12 @@ void DrawDeckExchangeDeckCpCost(u8 kind) {
         break;
     }
 
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0xA0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0xC0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[2] + 1) * 32], base + 0xE0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x100, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x120, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[2] + 1) * 32], base + 0x140, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(costDigits[0] + 1) * 32], base + 0xA0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(costDigits[1] + 1) * 32], base + 0xC0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(costDigits[2] + 1) * 32], base + 0xE0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(cpDigits[0] + 1) * 32], base + 0x100, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(cpDigits[1] + 1) * 32], base + 0x120, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(cpDigits[2] + 1) * 32], base + 0x140, 32);
 }
 
 void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
@@ -1445,29 +1445,29 @@ void DrawDeckExchangeCollectionFilterTab(u8 kind, u8 slot) {
 }
 
 void DrawDeckExchangeCardTotals() {
-    u8 d1[3];
-    u8 d2[3];
-    u16 a;
-    u16 b;
+    u8 inDeckDigits[3];
+    u8 collectionDigits[3];
+    u16 inDeckCount;
+    u16 collectionCount;
 
     u8* base;
 
-    a = CountCardsInDecks();
-    b = CountCollectionCards();
+    inDeckCount = CountCardsInDecks();
+    collectionCount = CountCollectionCards();
 
-    d1[0] = a / 100;
-    d1[1] = a / 10 - d1[0] * 10;
-    d1[2] = a - d1[0] * 100 - d1[1] * 10;
-    d2[0] = b / 100;
-    d2[1] = b / 10 - d2[0] * 10;
-    d2[2] = b - d2[0] * 100 - d2[1] * 10;
+    inDeckDigits[0] = inDeckCount / 100;
+    inDeckDigits[1] = inDeckCount / 10 - inDeckDigits[0] * 10;
+    inDeckDigits[2] = inDeckCount - inDeckDigits[0] * 100 - inDeckDigits[1] * 10;
+    collectionDigits[0] = collectionCount / 100;
+    collectionDigits[1] = collectionCount / 10 - collectionDigits[0] * 10;
+    collectionDigits[2] = collectionCount - collectionDigits[0] * 100 - collectionDigits[1] * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d1[0] + 1) * 32], base + 0x2A0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d1[1] + 1) * 32], base + 0x2C0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d1[2] + 1) * 32], base + 0x2E0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d2[0] + 1) * 32], base + 0x300, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d2[1] + 1) * 32], base + 0x320, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d2[2] + 1) * 32], base + 0x340, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[2] + 1) * 32], base + 0x340, 32);
 }
 
 void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* work) {
@@ -1600,16 +1600,16 @@ void DrawDeckExchangeValueCpCost(DeckExchangeWork* work) {
 }
 
 void DrawDeckExchangeCpCost(u8 cpCost) {
-    u8 d[2];
+    u8 digits[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
     if (cpCost != 0) {
-        d[0] = cpCost / 10;
-        d[1] = cpCost - d[0] * 10;
-        RequestDma3Copy(&gDeckValueDigitTiles[(d[0] + 3) * 32], base + 0xCE0, 32);
-        RequestDma3Copy(&gDeckValueDigitTiles[(d[1] + 3) * 32], base + 0xD00, 32);
+        digits[0] = cpCost / 10;
+        digits[1] = cpCost - digits[0] * 10;
+        RequestDma3Copy(&gDeckValueDigitTiles[(digits[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(digits[1] + 3) * 32], base + 0xD00, 32);
     } else {
         RequestDma3Copy(gDeckValueZeroTiles, base + 0xCE0, 32);
         RequestDma3Copy(gDeckValueZeroTiles, base + 0xD00, 32);
@@ -1618,41 +1618,41 @@ void DrawDeckExchangeCpCost(u8 cpCost) {
 
 u32 SumDeckExchangeValueCounts(u16* data) {
     u32 sum;
-    u16* p;
+    u16* count;
     s32 i;
 
     sum = 0;
-    p = data;
+    count = data;
     i = 9;
 
     do {
-        sum += *p++;
+        sum += *count++;
     } while (--i >= 0);
 
     return sum;
 }
 
 s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
-    u8* tbl;
+    u8* entry;
     u8 idx;
-    u8 r0;
-    u8 c0;
-    u16 row0;
+    u8 startCol;
+    u8 startRow;
+    u16 cursorCol;
     s32 sum;
     s32 i;
-    s8 d;
+    s8 delta;
     s8 n;
     s32 ofs;
     s32 k;
-    u8* p;
+    u8* cursorRow;
 
     idx = work->cursorCol * 5 + (u8)work->cursorRow;
-    tbl = (u8*)&work->entries[work->entryIndex];
-    row0 = work->cursorCol;
-    r0 = work->cursorCol;
-    c0 = work->cursorRow;
+    entry = (u8*)&work->entries[work->entryIndex];
+    cursorCol = work->cursorCol;
+    startCol = work->cursorCol;
+    startRow = work->cursorRow;
 
-    if (*(u16*)&tbl[idx << 1] != 0) {
+    if (*(u16*)&entry[idx << 1] != 0) {
         return 1;
     }
 
@@ -1667,10 +1667,10 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
             idx = work->cursorCol * 5 + (u8)work->cursorRow;
 
-            if (work->cursorCol == r0 && work->cursorRow == c0) {
+            if (work->cursorCol == startCol && work->cursorRow == startRow) {
                 return 0;
             }
-        } while (*(u16*)&tbl[idx << 1] == 0);
+        } while (*(u16*)&entry[idx << 1] == 0);
 
         break;
     case 0x80:
@@ -1683,16 +1683,16 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
             idx = work->cursorCol * 5 + (u8)work->cursorRow;
 
-            if (work->cursorCol == r0 && work->cursorRow == c0) {
+            if (work->cursorCol == startCol && work->cursorRow == startRow) {
                 return 0;
             }
-        } while (*(u16*)&tbl[idx << 1] == 0);
+        } while (*(u16*)&entry[idx << 1] == 0);
 
         break;
     case 0x20:
-        if (*(u16*)&tbl[work->cursorRow << 1] != 0) {
-            if ((s16)row0 > 0) {
-                work->cursorCol = row0 - 1;
+        if (*(u16*)&entry[work->cursorRow << 1] != 0) {
+            if ((s16)cursorCol > 0) {
+                work->cursorCol = cursorCol - 1;
             }
 
             return 1;
@@ -1701,7 +1701,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
         sum = 0;
 
         for (i = 0; i < 5; i++) {
-            sum += *(u16*)&tbl[i * 2];
+            sum += *(u16*)&entry[i * 2];
         }
 
         if (sum == 0) {
@@ -1709,9 +1709,9 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
             return 0;
         }
 
-        p = (u8*)&work->cursorRow;
-        d = -1;
-        k = *p + d;
+        cursorRow = (u8*)&work->cursorRow;
+        delta = -1;
+        k = *cursorRow + delta;
 
         for (;;) {
             n = k;
@@ -1726,26 +1726,26 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
             ofs = n;
 
-            if (*(u16*)&tbl[ofs *= 2] != 0) {
+            if (*(u16*)&entry[ofs *= 2] != 0) {
                 break;
             }
 
-            if (d < 0) {
-                d = -d;
+            if (delta < 0) {
+                delta = -delta;
             } else {
-                d++;
-                d = -d;
+                delta++;
+                delta = -delta;
             }
 
-            k = *p + d;
+            k = *cursorRow + delta;
         }
 
         work->cursorRow = n;
         break;
     case 0x10:
-        if (*(u16*)&tbl[(work->cursorRow + 5) << 1] != 0) {
-            if ((s16)row0 <= 0) {
-                work->cursorCol = row0 + 1;
+        if (*(u16*)&entry[(work->cursorRow + 5) << 1] != 0) {
+            if ((s16)cursorCol <= 0) {
+                work->cursorCol = cursorCol + 1;
             }
 
             return 1;
@@ -1754,7 +1754,7 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
         sum = 0;
 
         for (i = 5; i < 10; i++) {
-            sum += *(u16*)&tbl[i * 2];
+            sum += *(u16*)&entry[i * 2];
         }
 
         if (sum == 0) {
@@ -1762,9 +1762,9 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
             return 0;
         }
 
-        p = (u8*)&work->cursorRow;
-        d = -1;
-        k = *p + d;
+        cursorRow = (u8*)&work->cursorRow;
+        delta = -1;
+        k = *cursorRow + delta;
 
         for (;;) {
             n = k;
@@ -1780,18 +1780,18 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
             ofs = n;
             ofs *= 2;
 
-            if (*(u16*)&tbl[ofs += 10] != 0) {
+            if (*(u16*)&entry[ofs += 10] != 0) {
                 break;
             }
 
-            if (d < 0) {
-                d = -d;
+            if (delta < 0) {
+                delta = -delta;
             } else {
-                d++;
-                d = -d;
+                delta++;
+                delta = -delta;
             }
 
-            k = *p + d;
+            k = *cursorRow + delta;
         }
 
         work->cursorRow = n;
@@ -1806,18 +1806,18 @@ s32 MoveDeckExchangeValueCursor(DeckExchangeWork* work, u16 key) {
 
             idx = work->cursorCol * 5 + (u8)work->cursorRow;
 
-            if (work->cursorCol == r0 && work->cursorRow == c0) {
+            if (work->cursorCol == startCol && work->cursorRow == startRow) {
                 if (work->cursorCol <= 0) {
                     work->cursorCol = work->cursorCol + 1;
                 } else {
                     work->cursorCol = 0;
                 }
 
-                if (SumDeckExchangeValueCounts((u16*)tbl) == 0) {
+                if (SumDeckExchangeValueCounts((u16*)entry) == 0) {
                     return 0;
                 }
             }
-        } while (*(u16*)&tbl[idx << 1] == 0);
+        } while (*(u16*)&entry[idx << 1] == 0);
 
         break;
     }
@@ -1857,23 +1857,23 @@ void SetDeckExchangeFrameCursor(DeckExchangeWork* work, u8 kind) {
 
 s32 TakeTradeCard(DeckExchangeWork* work) {
     u16 idx;
-    CardKindEntry* e;
+    CardKindEntry* entry;
     u16 i;
     s32 card;
     u16 id;
     const CardDef* def;
-    u16 kind;
+    u16 value;
 
     idx = work->cursorCol * 5 + work->cursorRow;
-    e = &work->entries[work->entryIndex];
+    entry = &work->entries[work->entryIndex];
 
-    if (e->valueCounts[idx] == 0) {
+    if (entry->valueCounts[idx] == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         return 1;
     }
 
-    for (i = 0; i < e->count; i++) {
-        card = e->indices[i];
+    for (i = 0; i < entry->count; i++) {
+        card = entry->indices[i];
 
         if (card != 0xFFFF) {
             id = gCardCollection[card] & CARD_ID_MASK;
@@ -1883,21 +1883,21 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
                 if (idx == 0) {
                     gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    e->indices[i] = 0xFFFF;
-                    e->valueCounts[0]--;
-                    DrawValueCount(e->valueCounts[0], 0);
+                    entry->indices[i] = 0xFFFF;
+                    entry->valueCounts[0]--;
+                    DrawValueCount(entry->valueCounts[0], 0);
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     return 1;
                 }
             } else {
-                kind = def->value;
+                value = def->value;
 
-                if (kind == idx) {
+                if (value == idx) {
                     gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    e->indices[i] = 0xFFFF;
-                    e->valueCounts[kind]--;
-                    DrawValueCount(e->valueCounts[kind], kind);
+                    entry->indices[i] = 0xFFFF;
+                    entry->valueCounts[value]--;
+                    DrawValueCount(entry->valueCounts[value], value);
                     m4aSongNumStart(SONG_SYS_KETTEI);
                     return 1;
                 }
@@ -1990,10 +1990,10 @@ u8 IsDeckExchangeCardAt(DeckExchangeWork* work, s16 x, s16 y) {
 }
 
 u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir) {
-    DeckCard2Work* n;
+    DeckCard2Work* node;
 
-    for (n = ListPoolFirst(&work->pool); n != NULL; n = ListPoolNext(&n->node)) {
-        if (n->args.col == x && n->args.row == y) {
+    for (node = ListPoolFirst(&work->pool); node != NULL; node = ListPoolNext(&node->node)) {
+        if (node->args.col == x && node->args.row == y) {
             return 1;
         }
     }
@@ -2013,10 +2013,10 @@ u8 FindDeckExchangeCardInDirection(DeckExchangeWork* work, s16 x, s16 y, u16 dir
 }
 
 void LoadDeckExchangeCardDescriptionText(DeckExchangeWork* work, u16 index) {
-    const CardDef* d;
+    const CardDef* def;
 
-    d = &gCardDefs[index];
-    work->textSlotCount5 = LoadTextSlots((void*)gCardKindDescriptions[d->kind], work->textSlots5);
+    def = &gCardDefs[index];
+    work->textSlotCount5 = LoadTextSlots((void*)gCardKindDescriptions[def->kind], work->textSlots5);
 }
 
 void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 cardCount) {
@@ -2028,10 +2028,10 @@ void SetDeckExchangeGridRowCount(DeckExchangeWork* work, s16 cardCount) {
 }
 
 void UpdateDeckExchangeGridScrollBar(DeckExchangeWork* work) {
-    s32 t;
+    s32 rowStep;
 
-    t = 0x5400 / (work->rowCount - 4);
-    work->y = t * (work->scrollRowEnd - 4) + 0x2800;
+    rowStep = 0x5400 / (work->rowCount - 4);
+    work->y = rowStep * (work->scrollRowEnd - 4) + 0x2800;
 
     if (work->y > 0x7C00) {
         work->y = 0x7C00;

@@ -181,7 +181,7 @@ void HCEffectName_0(HcEffectNameWork* work, u8* arg) {
 u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
     u8 done;
     s32 div;
-    CardBattleState* d;
+    CardBattleState* state;
 
     done = IsHcEffectNameShuffling(work);
 
@@ -197,27 +197,27 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
     case 1:
         div = gHcEffectDefs[gBtlWork->hcEffect].count << 8;
         work->blinkInterval = (u32)(((s16)gBtlWork->hcEffectCount << 16) / div) >> 3;
-        d = gCardBattleState;
+        state = gCardBattleState;
 
-        if (d->soraHcEffect == 0) {
-            d->soraHcEffectReplaced = 0;
+        if (state->soraHcEffect == 0) {
+            state->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->soraHcEffect != work->effect) {
-            d->soraHcEffectReplaced = 0;
+        if (state->soraHcEffect != work->effect) {
+            state->soraHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->soraHcEffectReplaced == 1) {
-            d->soraHcEffectReplaced = 0;
+        if (state->soraHcEffectReplaced == 1) {
+            state->soraHcEffectReplaced = 0;
             return 0;
         }
 
         if ((s16)gBtlWork->hcEffectCount <= 0) {
-            d->soraHcEffect = 0;
+            state->soraHcEffect = 0;
             gBtlWork->hcEffect = 0;
-            d->soraHcEffectReplaced = 0;
+            state->soraHcEffectReplaced = 0;
             return 0;
         }
 
@@ -226,27 +226,27 @@ u8 HCEffectName_1(HcEffectNameWork* work, void* task) {
     case 2:
         div = gHcEffectDefs[gRikuBtlWork->hcEffect].count << 8;
         work->blinkInterval = (u32)(((s16)gRikuBtlWork->hcEffectCount << 16) / div) >> 3;
-        d = gCardBattleState;
+        state = gCardBattleState;
 
-        if (d->rikuHcEffect == 0) {
-            d->rikuHcEffectReplaced = 0;
+        if (state->rikuHcEffect == 0) {
+            state->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->rikuHcEffect != work->effect) {
-            d->rikuHcEffectReplaced = 0;
+        if (state->rikuHcEffect != work->effect) {
+            state->rikuHcEffectReplaced = 0;
             return 0;
         }
 
-        if (d->rikuHcEffectReplaced == 1) {
-            d->rikuHcEffectReplaced = 0;
+        if (state->rikuHcEffectReplaced == 1) {
+            state->rikuHcEffectReplaced = 0;
             return 0;
         }
 
         if ((s16)gRikuBtlWork->hcEffectCount <= 0) {
-            d->rikuHcEffect = 0;
+            state->rikuHcEffect = 0;
             gRikuBtlWork->hcEffect = 0;
-            d->rikuHcEffectReplaced = 0;
+            state->rikuHcEffectReplaced = 0;
             return 0;
         }
 
@@ -401,13 +401,13 @@ void NumberPlus_0(NumberPlusWork* work, NumberPlusArgs* args) {
 }
 
 s32 NumberPlus_1(NumberPlusWork* work) {
-    s32 v;
+    s32 y;
 
-    v = work->y << 8;
+    y = work->y << 8;
 
     if (work->steps != 0) {
-        ApproachValue(&v, work->args.y - 0x2800, work->steps);
-        work->y = v >> 8;
+        ApproachValue(&y, work->args.y - 0x2800, work->steps);
+        work->y = y >> 8;
         work->steps--;
         return 1;
     }

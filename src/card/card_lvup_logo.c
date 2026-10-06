@@ -30,12 +30,12 @@ static u8 sLvupLogoActive;
 void TrackLevelUpEffectTarget(LevelUpEffectWork* work) {
     s16 x;
     s16 y;
-    BtlObj* t;
+    BtlObj* target;
 
-    t = work->target;
+    target = work->target;
 
-    if (t != NULL) {
-        WorldToScreen(&x, &y, t->x, t->y, t->z);
+    if (target != NULL) {
+        WorldToScreen(&x, &y, target->x, target->y, target->z);
         work->targetX = x;
         work->targetY = y - 16;
     }
@@ -330,22 +330,22 @@ u8 CreateLevelUpEffectTask(BtlObj* target, TaskPool* pool) {
 }
 
 void LoadEventMapObjectGfx(EventMapObjectWork* work, EventBackgroundDef* background) {
-    EventMapObjectDef* q;
+    EventMapObjectDef* def;
     EventMapObjectPlacement* entries;
     u8 i;
 
-    q = background->mapObjects;
-    entries = q->placements;
+    def = background->mapObjects;
+    entries = def->placements;
 
     for (i = 0; i < 10; i++) {
         work->tiles[i] = NULL;
         work->palettes[i] = NULL;
     }
 
-    for (i = 0; i < q->placementCount; i++) {
+    for (i = 0; i < def->placementCount; i++) {
         if (work->tiles[entries[i].spriteIndex] == NULL) {
-            work->tiles[entries[i].spriteIndex] = LoadObjTiles(q->tileResources[entries[i].spriteIndex].data, q->tileResources[entries[i].spriteIndex].size);
-            work->palettes[entries[i].spriteIndex] = LoadObjPalette(q->paletteResources[entries[i].spriteIndex].data, q->paletteResources[entries[i].spriteIndex].size);
+            work->tiles[entries[i].spriteIndex] = LoadObjTiles(def->tileResources[entries[i].spriteIndex].data, def->tileResources[entries[i].spriteIndex].size);
+            work->palettes[entries[i].spriteIndex] = LoadObjPalette(def->paletteResources[entries[i].spriteIndex].data, def->paletteResources[entries[i].spriteIndex].size);
         }
     }
 }
@@ -362,44 +362,44 @@ void ReleaseEventMapObjectGfx(EventMapObjectWork* work) {
 }
 
 void Ev_mapObj_0(EventMapObjectWork* work, u8* arg) {
-    EventBackgroundDef* t;
+    EventBackgroundDef* background;
 
     work->background = arg[0];
-    t = gEventBackgroundDefs[work->background];
+    background = gEventBackgroundDefs[work->background];
 
-    if (t->mapObjects != NULL) {
-        LoadEventMapObjectGfx(work, t);
-        work->definition = t->mapObjects;
+    if (background->mapObjects != NULL) {
+        LoadEventMapObjectGfx(work, background);
+        work->definition = background->mapObjects;
     }
 }
 
 u8 Ev_mapObj_1(EventMapObjectWork* work) {
-    EventMapObjectDef* p;
-    EventMapObjectPlacement* q;
+    EventMapObjectDef* def;
+    EventMapObjectPlacement* entries;
     u8 i;
 
-    p = work->definition;
-    q = p->placements;
+    def = work->definition;
+    entries = def->placements;
 
-    for (i = 0; i < p->placementCount; i++) {
-        FadeSetPaletteExcluded(work->palettes[q[i].spriteIndex]->index + 16, 0);
+    for (i = 0; i < def->placementCount; i++) {
+        FadeSetPaletteExcluded(work->palettes[entries[i].spriteIndex]->index + 16, 0);
     }
 
     return 1;
 }
 
 void Ev_mapObj_2(EventMapObjectWork* work) {
-    EventMapObjectDef* q;
+    EventMapObjectDef* def;
     EventMapObjectPlacement* entries;
-    EventMapObjectPlacement* e;
+    EventMapObjectPlacement* entry;
     u8 i;
 
-    q = work->definition;
-    entries = q->placements;
+    def = work->definition;
+    entries = def->placements;
 
-    for (i = 0; i < q->placementCount; i++) {
-        e = &entries[i];
-        DrawSprite(e->x - (gEventState->x >> 8), e->y - (gEventState->y >> 8), q->sprites[e->spriteIndex], work->tiles[e->spriteIndex], work->palettes[e->spriteIndex], NULL, SPRITE_PRIORITY(2), -0x1004 - e->y * 4);
+    for (i = 0; i < def->placementCount; i++) {
+        entry = &entries[i];
+        DrawSprite(entry->x - (gEventState->x >> 8), entry->y - (gEventState->y >> 8), def->sprites[entry->spriteIndex], work->tiles[entry->spriteIndex], work->palettes[entry->spriteIndex], NULL, SPRITE_PRIORITY(2), -0x1004 - entry->y * 4);
     }
 }
 

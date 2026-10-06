@@ -515,28 +515,28 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
         ApproachValue(&work->y2, 0x9800, work->barSteps);
         work->barSteps--;
     } else {
-        s32 x3 = work->bgScrollX << 8;
-        s32 x4 = work->statsOffsetX << 8;
-        ApproachValue(&x3, 0x10000, work->slideSteps);
-        ApproachValue(&x4, 0, work->slideSteps);
+        s32 bgScrollX = work->bgScrollX << 8;
+        s32 statsOffsetX = work->statsOffsetX << 8;
+        ApproachValue(&bgScrollX, 0x10000, work->slideSteps);
+        ApproachValue(&statsOffsetX, 0, work->slideSteps);
 
         if (gBtlWork->battleId == 151) {
-            ScrollBgMapTo(0, x3 >> 8, 0);
+            ScrollBgMapTo(0, bgScrollX >> 8, 0);
         } else {
-            ScrollBgMapTo(1, x3 >> 8, 0);
+            ScrollBgMapTo(1, bgScrollX >> 8, 0);
         }
 
-        work->bgScrollX = x3 >> 8;
-        work->statsOffsetX = x4 >> 8;
+        work->bgScrollX = bgScrollX >> 8;
+        work->statsOffsetX = statsOffsetX >> 8;
 
         if (work->slideSteps > 0) {
             work->slideSteps--;
         }
 
         if (work->slideSteps <= 11) {
-            s32 x5 = work->x6 << 8;
-            ApproachValue(&x5, 0, work->headerSteps);
-            work->x6 = x5 >> 8;
+            s32 headerX = work->x6 << 8;
+            ApproachValue(&headerX, 0, work->headerSteps);
+            work->x6 = headerX >> 8;
 
             if (work->headerSteps > 0) {
                 work->headerSteps--;
@@ -739,7 +739,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
     s32 x;
     s8 i;
-    u8* q;
+    u8* optionEnabled;
 #ifdef VERSION_EU
     enum { mapSize = 0x500 };
 #else
@@ -748,7 +748,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
 
     if (GetKeysRepeat() & DPAD_DOWN) {
         i = work->cursor;
-        q = work->optionEnabled;
+        optionEnabled = work->optionEnabled;
 
         do {
             i++;
@@ -756,7 +756,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
             if (i > 2) {
                 i = 0;
             }
-        } while (q[i] == 0);
+        } while (optionEnabled[i] == 0);
 
         if (i != work->cursor) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -775,7 +775,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
 
     if (GetKeysRepeat() & DPAD_UP) {
         i = work->cursor;
-        q = work->optionEnabled;
+        optionEnabled = work->optionEnabled;
 
         do {
             i--;
@@ -783,7 +783,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
             if (i < 0) {
                 i = 2;
             }
-        } while (q[i] == 0);
+        } while (optionEnabled[i] == 0);
 
         if (i != work->cursor) {
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -874,19 +874,19 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
 
     for (i = 0; i < 3; i++) {
         if (i != work->cursor) {
-            s32 x = work->x4[i] << 8;
-            s32 y = work->x5[i] << 8;
-            ApproachValue(&x, -0x10000, work->optionSteps[i]);
-            ApproachValue(&y, -0xF800, work->optionSteps[i]);
-            work->x4[i] = x >> 8;
-            work->x5[i] = y >> 8;
+            s32 bonusX = work->x4[i] << 8;
+            s32 textX = work->x5[i] << 8;
+            ApproachValue(&bonusX, -0x10000, work->optionSteps[i]);
+            ApproachValue(&textX, -0xF800, work->optionSteps[i]);
+            work->x4[i] = bonusX >> 8;
+            work->x5[i] = textX >> 8;
         } else {
-            s32 x = work->y4[i] << 8;
-            s32 y = work->y5[i] << 8;
-            ApproachValue(&x, 0x2000, work->optionSteps[i]);
-            ApproachValue(&y, 0x3100, work->optionSteps[i]);
-            work->y4[i] = x >> 8;
-            work->y5[i] = y >> 8;
+            s32 bonusY = work->y4[i] << 8;
+            s32 textY = work->y5[i] << 8;
+            ApproachValue(&bonusY, 0x2000, work->optionSteps[i]);
+            ApproachValue(&textY, 0x3100, work->optionSteps[i]);
+            work->y4[i] = bonusY >> 8;
+            work->y5[i] = textY >> 8;
         }
 
         if (work->optionSteps[i] > 0) {
@@ -1010,47 +1010,47 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
 }
 
 u8 UpdateLevelUpClose(LevelUpWork* work, void* task) {
-    s32 v1;
-    s32 v2;
-    s32 v3;
-    s32 v4;
-    s32 v0;
-    s8 n;
+    s32 bonusX;
+    s32 textX;
+    s32 bgScrollX;
+    s32 statsOffsetX;
+    s32 headerX;
+    s8 slideSteps;
 
-    v1 = work->x4[work->cursor] << 8;
-    v2 = work->x5[work->cursor] << 8;
-    v3 = work->bgScrollX << 8;
-    v4 = work->statsOffsetX << 8;
-    v0 = work->x6 << 8;
-    ApproachValue(&v0, -0x8000, work->headerSteps);
-    ApproachValue(&v1, -0x8000, work->optionSteps[work->cursor]);
-    ApproachValue(&v2, -0xF800, work->optionSteps[work->cursor]);
-    work->x4[work->cursor] = v1 >> 8;
-    work->x5[work->cursor] = v2 >> 8;
-    work->x6 = v0 >> 8;
+    bonusX = work->x4[work->cursor] << 8;
+    textX = work->x5[work->cursor] << 8;
+    bgScrollX = work->bgScrollX << 8;
+    statsOffsetX = work->statsOffsetX << 8;
+    headerX = work->x6 << 8;
+    ApproachValue(&headerX, -0x8000, work->headerSteps);
+    ApproachValue(&bonusX, -0x8000, work->optionSteps[work->cursor]);
+    ApproachValue(&textX, -0xF800, work->optionSteps[work->cursor]);
+    work->x4[work->cursor] = bonusX >> 8;
+    work->x5[work->cursor] = textX >> 8;
+    work->x6 = headerX >> 8;
     work->headerSteps--;
     work->optionSteps[work->cursor]--;
-    ApproachValue(&v3, 0, work->slideSteps);
-    ApproachValue(&v4, 0x10000, work->slideSteps);
+    ApproachValue(&bgScrollX, 0, work->slideSteps);
+    ApproachValue(&statsOffsetX, 0x10000, work->slideSteps);
     ApproachValue(&work->x7, 0x1BE00, work->slideSteps);
     ApproachValue(&work->y6, 0x4800, work->slideSteps);
 
     if (gBtlWork->battleId == 151) {
-        ScrollBgMapTo(0, v3 >> 8, 0);
+        ScrollBgMapTo(0, bgScrollX >> 8, 0);
     } else {
-        ScrollBgMapTo(1, v3 >> 8, 0);
+        ScrollBgMapTo(1, bgScrollX >> 8, 0);
     }
 
-    work->bgScrollX = v3 >> 8;
-    work->statsOffsetX = v4 >> 8;
+    work->bgScrollX = bgScrollX >> 8;
+    work->statsOffsetX = statsOffsetX >> 8;
 
     if (work->slideSteps > 0) {
         work->slideSteps--;
     }
 
-    n = work->slideSteps;
+    slideSteps = work->slideSteps;
 
-    if (n == 0) {
+    if (slideSteps == 0) {
         if (work->barSteps != 0) {
             ApproachValue(&work->y, -0x800, work->barSteps);
             ApproachValue(&work->y2, 0xA000, work->barSteps);
@@ -1388,42 +1388,42 @@ void DrawLevelUpStatDigits(s16 x, s16 y, void* tiles, void* pal, void** gfx, u16
 }
 
 void LevelUpSplitDigits2(u16 value, u16* digits) {
-    u16 q;
-    u16 r;
+    u16 tens;
+    u16 ones;
 
-    q = value / 10;
-    r = value - q * 10;
-    digits[1] = q;
-    digits[2] = r;
+    tens = value / 10;
+    ones = value - tens * 10;
+    digits[1] = tens;
+    digits[2] = ones;
 }
 
 void LevelUpSplitDigits3(u16 value, u16* digits) {
-    u16 h;
-    u16 t;
-    u16 o;
+    u16 hundreds;
+    u16 tens;
+    u16 ones;
 
-    h = value / 100;
-    t = value / 10 - h * 10;
-    o = value - h * 100 - t * 10;
-    digits[0] = h;
-    digits[1] = t;
-    digits[2] = o;
+    hundreds = value / 100;
+    tens = value / 10 - hundreds * 10;
+    ones = value - hundreds * 100 - tens * 10;
+    digits[0] = hundreds;
+    digits[1] = tens;
+    digits[2] = ones;
 }
 
 void LevelUpSplitDigits4(u16 value, u16* out) {
-    u16 d3;
-    u16 d2;
-    u16 d1;
-    u16 d0;
+    u16 thousands;
+    u16 hundreds;
+    u16 tens;
+    u16 ones;
 
-    d3 = value / 1000;
-    d2 = value / 100 - d3 * 10;
-    d1 = value / 10 - d2 * 10 - d3 * 100;
-    d0 = value - d3 * 1000 - d2 * 100 - d1 * 10;
-    out[0] = d3;
-    out[1] = d2;
-    out[2] = d1;
-    out[3] = d0;
+    thousands = value / 1000;
+    hundreds = value / 100 - thousands * 10;
+    tens = value / 10 - hundreds * 10 - thousands * 100;
+    ones = value - thousands * 1000 - hundreds * 100 - tens * 10;
+    out[0] = thousands;
+    out[1] = hundreds;
+    out[2] = tens;
+    out[3] = ones;
 }
 
 u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {

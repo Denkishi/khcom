@@ -60,15 +60,15 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
 }
 
 u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* task) {
-    s32 v;
+    s32 angle;
     u8 (*fn)(PremireChanceCardWork*, void*);
     u16 lim;
 
-    v = work->angle << 8;
+    angle = work->angle << 8;
 
     if (work->position <= 8) {
-        ApproachValue(&v, sPremireChanceCardAngles[work->position] << 8, work->steps);
-        work->angle = v >> 8;
+        ApproachValue(&angle, sPremireChanceCardAngles[work->position] << 8, work->steps);
+        work->angle = angle >> 8;
     } else {
         lim = 0xFFE0;
         work->angle = lim;
@@ -107,11 +107,11 @@ u8 UpdatePremireChanceCardSpin(PremireChanceCardWork* work, void* task) {
 }
 
 u8 PremireChanceCard_1(PremireChanceCardWork* work, void* task) {
-    s32 v;
+    s32 radius;
 
-    v = work->radius << 8;
-    ApproachValue(&v, 0x6800, work->steps);
-    work->radius = v >> 8;
+    radius = work->radius << 8;
+    ApproachValue(&radius, 0x6800, work->steps);
+    work->radius = radius >> 8;
     work->steps--;
     UpdatePremireChanceCardPos(work);
 
@@ -254,19 +254,19 @@ s32 UpdatePremireChanceCardAnim(PremireChanceCardWork* work) {
 }
 
 u8 UpdatePremireChanceCardMoveAway(PremireChanceCardWork* work, void* task) {
-    s32 v;
+    s32 angle;
 
-    v = work->angle << 8;
+    angle = work->angle << 8;
 
     if (work->position <= 2) {
-        ApproachValue(&v, -0x2000, work->steps);
+        ApproachValue(&angle, -0x2000, work->steps);
     }
 
     if ((u8)work->position >= 4 && (u8)work->position <= 7) {
-        ApproachValue(&v, 0x4400, work->steps);
+        ApproachValue(&angle, 0x4400, work->steps);
     }
 
-    work->angle = v >> 8;
+    work->angle = angle >> 8;
 
     if (work->steps != 0) {
         work->steps--;

@@ -32,19 +32,19 @@ static const s32 sEnemyCardLayout[10] = {
 };
 
 void LookupEnemyCardDef(CardDisplayArgs* args, const CardDef** out, u8 index) {
-    CardSlot* t;
-    s32 v;
+    CardSlot* slot;
+    s32 variant;
     s32 id;
 
-    t = args->slot;
-    v = args->variant;
+    slot = args->slot;
+    variant = args->variant;
 
-    if (v != -1) {
-        ((CardDisplayWork*)((u8*)out - offsetof(CardDisplayWork, cardDef)))->enemyKind = v;
+    if (variant != -1) {
+        ((CardDisplayWork*)((u8*)out - offsetof(CardDisplayWork, cardDef)))->enemyKind = variant;
     }
 
-    if (t != NULL) {
-        id = t[index].cardId;
+    if (slot != NULL) {
+        id = slot[index].cardId;
 
         if (id != 0xFFFF) {
             *out = &gCardDefs[id];
@@ -247,16 +247,16 @@ u8 EnemyCardClosed(CardDisplayWork* work, void* task) {
 }
 
 void UpdateEnemyCardRingPosition(CardDisplayWork* work) {
-    s32 t;
+    s32 wrappedAngle;
 
     if (work->ringAngleTarget - work->ringAngle > 0x7F00) {
         work->ringAngle += 0x10000;
     }
 
-    t = work->ringAngle - 0x10000;
+    wrappedAngle = work->ringAngle - 0x10000;
 
-    if (work->ringAngleTarget - t < work->ringAngle - work->ringAngleTarget) {
-        work->ringAngle = t;
+    if (work->ringAngleTarget - wrappedAngle < work->ringAngle - work->ringAngleTarget) {
+        work->ringAngle = wrappedAngle;
     }
 
     work->swingAngle += (work->swingAngleTarget - work->swingAngle) >> 2;
@@ -395,7 +395,7 @@ void DispatchEnemyCardCommand(CardDisplayWork* work, void* task) {
 }
 
 u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* task) {
-    s32 (*tbl)[2]; s32* q;
+    s32 (*layout)[2]; s32* px;
 
     if (gBtlWork->paused == 1) {
         return 1;
@@ -404,7 +404,7 @@ u8 EnemyStockMoveToSlot(CardDisplayWork* work, void* task) {
     UpdateCardDisplayFlip(work);
 
     if (work->flags & CARD_DISP_FLAG_OPEN) {
-        q = &work->x; tbl = (s32 (*)[2])sEnemyCardLayout; ApproachValue(q, tbl[3 - work->stockIndex][0], work->timer); ApproachValue(&work->y, ((s32 (*)[2])sEnemyCardLayout)[3 - work->stockIndex][1], work->timer);
+        px = &work->x; layout = (s32 (*)[2])sEnemyCardLayout; ApproachValue(px, layout[3 - work->stockIndex][0], work->timer); ApproachValue(&work->y, ((s32 (*)[2])sEnemyCardLayout)[3 - work->stockIndex][1], work->timer);
     } else {
         ApproachValue(&work->x, sEnemyCardLayout[8], work->timer);
         ApproachValue(&work->y, sEnemyCardLayout[9], work->timer);
@@ -485,7 +485,7 @@ u8 EnemyCardBreakFall(CardDisplayWork* work, void* task) {
 }
 
 void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
-    const s32* tbl;
+    const s32* cardIds;
     u8 n;
     s32 id;
 
@@ -502,24 +502,24 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
     work->flags = 0;
     work->priority = 50;
     work->timer = 0;
-    tbl = gEnemyCardIds[work->args.variant];
+    cardIds = gEnemyCardIds[work->args.variant];
     n = gEnemyCardCounts[work->args.variant];
     work->enemyKind = work->args.variant;
 
     if (n == 1) {
-        id = tbl[0];
+        id = cardIds[0];
     } else if ((s16)work->args.index != -1) {
         if ((s16)work->args.index > n) {
-            id = tbl[GetRandom() % n];
+            id = cardIds[GetRandom() % n];
         } else {
-            id = tbl[(s16)work->args.index - 1];
+            id = cardIds[(s16)work->args.index - 1];
         }
     } else {
         if (gCardBattleState->nextEnemyCardIndex > n) {
             gCardBattleState->nextEnemyCardIndex = n;
         }
 
-        id = tbl[gCardBattleState->nextEnemyCardIndex];
+        id = cardIds[gCardBattleState->nextEnemyCardIndex];
         gCardBattleState->nextEnemyCardIndex = GetRandom() % n;
     }
 
@@ -568,7 +568,7 @@ void EnemyUsecard_0(CardDisplayWork* work, CardDisplayArgs* args) {
 }
 
 void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* args) {
-    const s32* tbl;
+    const s32* cardIds;
     u8 n;
     s32 id;
 
@@ -581,16 +581,16 @@ void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* args) {
     work->flags = 0;
     work->priority = 50;
     work->timer = 0;
-    tbl = gEnemyCardIds[work->args.variant];
+    cardIds = gEnemyCardIds[work->args.variant];
     n = gEnemyCardCounts[work->args.variant];
     work->enemyKind = work->args.variant;
 
     if (n == 1) {
-        id = tbl[0];
+        id = cardIds[0];
     } else if ((s16)work->args.index < n) {
-        id = tbl[(s16)work->args.index];
+        id = cardIds[(s16)work->args.index];
     } else {
-        id = tbl[GetRandom() % n];
+        id = cardIds[GetRandom() % n];
     }
 
     work->cardDef = &gCardDefs[id];
@@ -611,7 +611,7 @@ void EnemyUsecardByIndexInit(CardDisplayWork* work, CardDisplayArgs* args) {
 }
 
 void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* args) {
-    const s32* tbl;
+    const s32* cardIds;
     u8 n;
     s32 id;
 
@@ -624,16 +624,16 @@ void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* args) {
     work->flags = 0;
     work->priority = 50;
     work->timer = 0;
-    tbl = gEnemyCardIds[work->args.variant];
+    cardIds = gEnemyCardIds[work->args.variant];
     n = gEnemyCardCounts[work->args.variant];
     work->enemyKind = work->args.variant;
 
     if (n == 1) {
-        id = tbl[0];
+        id = cardIds[0];
     } else if ((s16)work->args.index < n) {
-        id = tbl[GetRandom() % (s16)work->args.index];
+        id = cardIds[GetRandom() % (s16)work->args.index];
     } else {
-        id = tbl[GetRandom() % n];
+        id = cardIds[GetRandom() % n];
     }
 
     work->cardDef = &gCardDefs[id];
@@ -655,7 +655,7 @@ void EnemyUsecardRandomInit(CardDisplayWork* work, CardDisplayArgs* args) {
 
 void UseEnemyCard(u16 arg) {
     CardDisplayArgs args;
-    CardDisplayWork* p;
+    CardDisplayWork* card;
     u8 i;
     u8 flag;
     u8 found;
@@ -669,23 +669,23 @@ void UseEnemyCard(u16 arg) {
     args.variant = arg;
     args.index = sBossCardValue;
     args.listIndex = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
+    card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecard, &args)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
     gCardBattleState->enemyCardUsed = 1;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
-        p->flags |= CARD_DISP_FLAG_IN_PLAY;
-        gCardBattleState->activeCards[0] = p;
-        gCardBattleState->activeValue = p->value;
+        card->flags |= CARD_DISP_FLAG_IN_PLAY;
+        gCardBattleState->activeCards[0] = card;
+        gCardBattleState->activeValue = card->value;
         gCardBattleState->activeCardCount = 1;
         gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
 #ifdef VERSION_EU
-        if (gCardBattleState->activeValue <= p->value || p->value == 0) {
+        if (gCardBattleState->activeValue <= card->value || card->value == 0) {
 #else
-        if (gCardBattleState->activeValue <= p->value) {
+        if (gCardBattleState->activeValue <= card->value) {
 #endif
             found = 0;
 
@@ -745,23 +745,23 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
 
-                if (gCardBattleState->activeValue != p->value) {
-                    if (p->value == 0) {
+                if (gCardBattleState->activeValue != card->value) {
+                    if (card->value == 0) {
                         gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
-                        gBtlWork->breakDifference = gCardBattleState->activeValue - p->value;
+                        gBtlWork->breakDifference = gCardBattleState->activeValue - card->value;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
                     gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-                    gCardBattleState->activeCards[0] = p;
+                    gCardBattleState->activeCards[0] = card;
 
                     if (gBtlWork->hcEffect == 48) {
-                        if (p->value != 0) {
-                            gCardBattleState->activeValue = p->value - gCardBattleState->activeValue;
-                            p->value = gCardBattleState->activeValue;
+                        if (card->value != 0) {
+                            gCardBattleState->activeValue = card->value - gCardBattleState->activeValue;
+                            card->value = gCardBattleState->activeValue;
                         } else {
                             gCardBattleState->activeValue = 0;
                         }
@@ -772,12 +772,12 @@ void UseEnemyCard(u16 arg) {
 
                         gBtlWork->hcEffectCount--;
                     } else {
-                        gCardBattleState->activeValue = p->value;
+                        gCardBattleState->activeValue = card->value;
                     }
 
                     gCardBattleState->activeCardCount = 1;
                     gBtlWork->soraOwnsPlay = 0;
-                    p->flags |= CARD_DISP_FLAG_IN_PLAY;
+                    card->flags |= CARD_DISP_FLAG_IN_PLAY;
                     AddBreakDarkPoints();
                 } else {
                     m4aSongNumStart(SONG_SYS_DROW);
@@ -790,9 +790,9 @@ void UseEnemyCard(u16 arg) {
         }
     } else {
 #ifdef VERSION_EU
-        if (gCardBattleState->activeValue <= p->value || p->value == 0) {
+        if (gCardBattleState->activeValue <= card->value || card->value == 0) {
 #else
-        if (gCardBattleState->activeValue <= p->value) {
+        if (gCardBattleState->activeValue <= card->value) {
 #endif
             flag = 0;
 
@@ -851,24 +851,24 @@ void UseEnemyCard(u16 arg) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
 
-                if (gCardBattleState->activeValue != p->value) {
-                    if (p->value == 0) {
+                if (gCardBattleState->activeValue != card->value) {
+                    if (card->value == 0) {
                         gBtlWork->breakDifference = -(s8)gCardBattleState->activeValue;
                     } else {
-                        gBtlWork->breakDifference = gCardBattleState->activeValue - p->value;
+                        gBtlWork->breakDifference = gCardBattleState->activeValue - card->value;
                     }
 
                     m4aSongNumStart(SONG_SYS_CARDLOSE);
                     gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
                     gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
                     gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
-                    gCardBattleState->activeCards[0] = p;
+                    gCardBattleState->activeCards[0] = card;
 
 #ifdef VERSION_EU
                     if (gBtlWork->hcEffect == 48) {
-                        if (p->value != 0) {
-                            gCardBattleState->activeValue = p->value - gCardBattleState->activeValue;
-                            p->value = gCardBattleState->activeValue;
+                        if (card->value != 0) {
+                            gCardBattleState->activeValue = card->value - gCardBattleState->activeValue;
+                            card->value = gCardBattleState->activeValue;
                         } else {
                             gCardBattleState->activeValue = 0;
                         }
@@ -879,15 +879,15 @@ void UseEnemyCard(u16 arg) {
 
                         gBtlWork->hcEffectCount--;
                     } else {
-                        gCardBattleState->activeValue = p->value;
+                        gCardBattleState->activeValue = card->value;
                     }
 
 #else
-                    gCardBattleState->activeValue = p->value;
+                    gCardBattleState->activeValue = card->value;
 #endif
                     gCardBattleState->activeCardCount = 1;
                     gBtlWork->soraOwnsPlay = 0;
-                    p->flags |= CARD_DISP_FLAG_IN_PLAY;
+                    card->flags |= CARD_DISP_FLAG_IN_PLAY;
                     AddBreakDarkPoints();
                 } else {
                     m4aSongNumStart(SONG_SYS_DROW);
@@ -900,12 +900,12 @@ void UseEnemyCard(u16 arg) {
         }
     }
 
-    p->flags = (p->flags | CARD_DISP_FLAG_SELECTED) & ~CARD_DISP_FLAG_SETTLED;
+    card->flags = (card->flags | CARD_DISP_FLAG_SELECTED) & ~CARD_DISP_FLAG_SETTLED;
 }
 
 void UseEnemyCardByIndex(u16 variant, u8 index) {
     CardDisplayArgs arg;
-    CardDisplayWork* p;
+    CardDisplayWork* card;
     u8 i;
 
     arg.pool = NULL;
@@ -913,20 +913,20 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
     arg.variant = variant;
     arg.index = index;
     arg.listIndex = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardByIndex, &arg)->work;
+    card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardByIndex, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
-        p->flags |= CARD_DISP_FLAG_IN_PLAY;
-        gCardBattleState->activeCards[0] = p;
-        gCardBattleState->activeValue = p->cardDef->value;
+        card->flags |= CARD_DISP_FLAG_IN_PLAY;
+        gCardBattleState->activeCards[0] = card;
+        gCardBattleState->activeValue = card->cardDef->value;
         gCardBattleState->activeCardCount = 1;
         gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if ((gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) == 0) {
         if (gCardBattleState->soraHcEffect != 2) {
-            if (gCardBattleState->activeValue < p->cardDef->value) {
+            if (gCardBattleState->activeValue < card->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
@@ -935,22 +935,22 @@ void UseEnemyCardByIndex(u16 variant, u8 index) {
                 gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
                 gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
                 gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
-                gCardBattleState->activeCards[0] = p;
-                gCardBattleState->activeValue = p->cardDef->value;
+                gCardBattleState->activeCards[0] = card;
+                gCardBattleState->activeValue = card->cardDef->value;
                 gCardBattleState->activeCardCount = 1;
                 gBtlWork->soraOwnsPlay = 0;
-                p->flags |= CARD_DISP_FLAG_IN_PLAY;
+                card->flags |= CARD_DISP_FLAG_IN_PLAY;
             }
         }
     }
 
-    p->flags |= CARD_DISP_FLAG_SELECTED;
-    p->flags &= ~CARD_DISP_FLAG_SETTLED;
+    card->flags |= CARD_DISP_FLAG_SELECTED;
+    card->flags &= ~CARD_DISP_FLAG_SETTLED;
 }
 
 void UseRandomEnemyCard(u16 variant, u8 index) {
     CardDisplayArgs arg;
-    CardDisplayWork* p;
+    CardDisplayWork* card;
     u8 i;
 
     arg.pool = NULL;
@@ -958,20 +958,20 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
     arg.variant = variant;
     arg.index = index;
     arg.listIndex = 0;
-    p = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardRandom, &arg)->work;
+    card = TaskCreate(&gCardBattleState->tasks, &gTaskDescEnemyUsecardRandom, &arg)->work;
     gBtlWork->flags |= BTL_FLAG_OPPONENT_CARD_BUSY;
 
     if ((gBtlWork->flags & BTL_FLAG_CARD_ACTIVE) == 0) {
-        p->flags |= CARD_DISP_FLAG_IN_PLAY;
-        gCardBattleState->activeCards[0] = p;
-        gCardBattleState->activeValue = p->cardDef->value;
+        card->flags |= CARD_DISP_FLAG_IN_PLAY;
+        gCardBattleState->activeCards[0] = card;
+        gCardBattleState->activeValue = card->cardDef->value;
         gCardBattleState->activeCardCount = 1;
         gBtlWork->soraOwnsPlay = 0;
         gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
         gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
     } else if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_ENDED) {
         if (gBtlWork->hcEffect == 2) {
-            if (gCardBattleState->activeValue < p->cardDef->value) {
+            if (gCardBattleState->activeValue < card->cardDef->value) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
                     gCardBattleState->activeCards[i]->flags |= CARD_DISP_FLAG_BROKEN;
                 }
@@ -980,17 +980,17 @@ void UseRandomEnemyCard(u16 variant, u8 index) {
                 gBtlWork->flags |= BTL_FLAG_CARD_BREAK;
                 gBtlWork->flags |= BTL_FLAG_CARD_PLAY_START;
                 gBtlWork->flags |= BTL_FLAG_CARD_ACTIVE;
-                gCardBattleState->activeCards[0] = p;
-                gCardBattleState->activeValue = p->cardDef->value;
+                gCardBattleState->activeCards[0] = card;
+                gCardBattleState->activeValue = card->cardDef->value;
                 gCardBattleState->activeCardCount = 1;
                 gBtlWork->soraOwnsPlay = 0;
-                p->flags |= CARD_DISP_FLAG_IN_PLAY;
+                card->flags |= CARD_DISP_FLAG_IN_PLAY;
             }
         }
     }
 
-    p->flags |= CARD_DISP_FLAG_SELECTED;
-    p->flags &= ~CARD_DISP_FLAG_SETTLED;
+    card->flags |= CARD_DISP_FLAG_SELECTED;
+    card->flags &= ~CARD_DISP_FLAG_SETTLED;
 }
 
 void ResetBossCardValue() {

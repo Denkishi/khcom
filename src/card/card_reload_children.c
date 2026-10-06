@@ -121,17 +121,17 @@ u8 RELOAD_CHILDREN_1(ReloadChildWork* work, void* task) {
 }
 
 u8 UpdateReloadChildRetracted(ReloadChildWork* work, void* task) {
-    u8 (*f)(ReloadChildWork*, void*);
-    u16 v;
+    u8 (*fn)(ReloadChildWork*, void*);
+    u16 idle;
 
-    v = work->args.flags & RELOAD_CHILD_FLAG_IDLE;
+    idle = work->args.flags & RELOAD_CHILD_FLAG_IDLE;
 
-    if (v == 0) {
+    if (idle == 0) {
         work->steps = 8;
-        f = RELOAD_CHILDREN_1;
-        SetTaskUpdate(task, (TaskUpdateFunc)f);
+        fn = RELOAD_CHILDREN_1;
+        SetTaskUpdate(task, (TaskUpdateFunc)fn);
         work->retractTimer = 0;
-        return f(work, task);
+        return fn(work, task);
     }
 
     switch (work->args.side) {
@@ -168,7 +168,7 @@ s32 UpdateReloadChildAbsorb(ReloadChildWork* work) {
 void RELOAD_CHILDREN_2(ReloadChildWork* work) {
     s16 x;
     s16 y;
-    ObjAffine* aff;
+    ObjAffine* affine;
 
     if (work->args.index <= 3) {
         x = (work->offsetX + *work->args.parentX) >> 8;
@@ -179,8 +179,8 @@ void RELOAD_CHILDREN_2(ReloadChildWork* work) {
     if ((s8)work->args.index < 0) {
         x = (work->offsetX + *work->args.parentX) >> 8;
         y = (work->offsetY + *work->args.parentY) >> 8;
-        aff = AllocObjAffine(0, work->scale, work->scale, 0);
-        DrawSprite(x, y + (gSineTable[work->angle] >> 8), gCardBacks[work->args.listIndex].gfx2, work->tiles2, work->palette, aff, 0, 49);
+        affine = AllocObjAffine(0, work->scale, work->scale, 0);
+        DrawSprite(x, y + (gSineTable[work->angle] >> 8), gCardBacks[work->args.listIndex].gfx2, work->tiles2, work->palette, affine, 0, 49);
     }
 }
 
@@ -261,13 +261,13 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
                 UpdateSpriteFrameTiles(work->tiles, row[*count - 2],
                               gRevCountTileSources[work->list]);
             } else {
-                u8 (*f)(RevCountWork*, void*);
+                u8 (*fn)(RevCountWork*, void*);
 
                 work->steps = 8;
-                f = UpdateRevCountEmpty;
-                SetTaskUpdate(task, (TaskUpdateFunc)f);
+                fn = UpdateRevCountEmpty;
+                SetTaskUpdate(task, (TaskUpdateFunc)fn);
                 work->shownCount = *work->args.count;
-                return f(work, task);
+                return fn(work, task);
             }
         } else {
             if (*count >= 1 && *count <= 99) {
@@ -275,25 +275,25 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
                 UpdateSpriteFrameTiles(work->tiles, row[*count - 1],
                               gRevCountTileSources[work->list]);
             } else {
-                u8 (*f)(RevCountWork*, void*);
+                u8 (*fn)(RevCountWork*, void*);
 
                 work->steps = 8;
-                f = UpdateRevCountEmpty;
-                SetTaskUpdate(task, (TaskUpdateFunc)f);
+                fn = UpdateRevCountEmpty;
+                SetTaskUpdate(task, (TaskUpdateFunc)fn);
                 work->shownCount = *work->args.count;
-                return f(work, task);
+                return fn(work, task);
             }
         }
 
         work->shownCount = *work->args.count;
     } else if (*count <= 0) {
-        u8 (*f)(RevCountWork*, void*);
+        u8 (*fn)(RevCountWork*, void*);
 
         work->steps = 8;
-        f = UpdateRevCountEmpty;
-        SetTaskUpdate(task, (TaskUpdateFunc)f);
+        fn = UpdateRevCountEmpty;
+        SetTaskUpdate(task, (TaskUpdateFunc)fn);
         work->shownCount = *work->args.count;
-        return f(work, task);
+        return fn(work, task);
     }
 
     switch (work->args.side) {
@@ -310,12 +310,12 @@ u8 REV_COUNT_1(RevCountWork* work, void* task) {
     }
 
     if (work->args.list != *work->args.shownList) {
-        u8 (*f)(RevCountWork*, void*);
+        u8 (*fn)(RevCountWork*, void*);
 
-        f = (u8 (*)(RevCountWork*, void*))UpdateRevCountListChanged;
-        SetTaskUpdate(task, (TaskUpdateFunc)f);
+        fn = (u8 (*)(RevCountWork*, void*))UpdateRevCountListChanged;
+        SetTaskUpdate(task, (TaskUpdateFunc)fn);
         work->steps = 8;
-        return f(work, task);
+        return fn(work, task);
     }
 
     if (gBtlWork->phase == 4) {
@@ -353,7 +353,7 @@ u8 UpdateRevCountListChanged(RevCountWork* work) {
 }
 
 u8 UpdateRevCountHidden(RevCountWork* work, void* task) {
-    u8 (*f)(RevCountWork*, void*);
+    u8 (*fn)(RevCountWork*, void*);
 
     switch (work->args.side) {
     case 1:
@@ -372,16 +372,16 @@ u8 UpdateRevCountHidden(RevCountWork* work, void* task) {
 
     if (*work->args.visible == 1) {
         work->steps = 8;
-        f = REV_COUNT_1;
-        SetTaskUpdate(task, (TaskUpdateFunc)f);
-        return f(work, task);
+        fn = REV_COUNT_1;
+        SetTaskUpdate(task, (TaskUpdateFunc)fn);
+        return fn(work, task);
     }
 
     return 1;
 }
 
 u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
-    u8 (*f)(RevCountWork*, void*);
+    u8 (*fn)(RevCountWork*, void*);
 
     switch (work->args.side) {
     case 1:
@@ -400,17 +400,17 @@ u8 UpdateRevCountEmpty(RevCountWork* work, void* task) {
     do {
         if (work->list == 0) {
             if (*work->args.count > 1) {
-                f = REV_COUNT_1;
-                SetTaskUpdate(task, (TaskUpdateFunc)f);
+                fn = REV_COUNT_1;
+                SetTaskUpdate(task, (TaskUpdateFunc)fn);
                 work->steps = 8;
-                return f(work, task);
+                return fn(work, task);
             }
         } else {
             if (*work->args.count > 0) {
-                f = REV_COUNT_1;
-                SetTaskUpdate(task, (TaskUpdateFunc)f);
+                fn = REV_COUNT_1;
+                SetTaskUpdate(task, (TaskUpdateFunc)fn);
                 work->steps = 8;
-                return f(work, task);
+                return fn(work, task);
             }
         }
 
@@ -529,7 +529,7 @@ void RELOAD_3(ReloadWork* work) {
 void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     const CardDef* def;
     const CardBack* back;
-    Collider* p;
+    Collider* collider;
 
     work->cardId = args->cardId;
     def = &gCardDefs[args->cardId];
@@ -556,10 +556,10 @@ void PrizeBoss_0(BossPrizeWork* work, PrizeCardTaskArgs* args) {
     work->scale = 0x80;
     work->flipAngleY = 0;
     work->flipAngleX = 0;
-    p = &work->collider;
-    ColliderInit(p, 5, 8, 10);
-    ColliderSetDisabled(p, 1);
-    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 8, 10);
+    ColliderSetDisabled(collider, 1);
+    ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->timer = 0;
     work->collected = 0;
     work->steps = 0;
@@ -630,7 +630,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
     void* gfx;
     const CardBack* back;
     const CardDef* def;
-    s16 v;
+    s16 shadowScale;
 
     pal = !work->collected ? GetBattleSpritePriorityFlags(work->posY) : 0;
     affine = AllocObjAffine(work->rotation, work->scaleX, work->scaleY, 1);
@@ -648,14 +648,14 @@ void PrizeBoss_2(BossPrizeWork* work) {
     }
 
     if (!work->collected) {
-        v = 204 - ((work->groundZ - work->posZ) >> 7);
+        shadowScale = 204 - ((work->groundZ - work->posZ) >> 7);
 
-        if (v <= 2) {
-            v = 2;
+        if (shadowScale <= 2) {
+            shadowScale = 2;
         }
 
         DrawSprite(work->x2, work->y2, gBtlShadowFrames[0], work->tiles5, work->palette3,
-                   AllocObjAffine(0, v, v, 0), pal, work->priority + 2);
+                   AllocObjAffine(0, shadowScale, shadowScale, 0), pal, work->priority + 2);
     }
 
     TaskPoolDraw(&work->tasks);
@@ -713,12 +713,12 @@ void AimBossPrizeAtCenter(BossPrizeWork* work) {
 u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* task) {
     s32 dx;
     s32 dy;
-    u8 z;
-    u8 t;
+    u8 zero;
+    u8 rotation;
     s32 x;
     s32 y;
-    s16* q1;
-    s16* q2;
+    s16* px;
+    s16* py;
 
     if (work->speed < 0) {
         dx = 0x7800 - work->posX;
@@ -741,11 +741,11 @@ u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* task) {
 
     work->posX += (work->dirX * work->speed) >> 8;
     work->posY += (work->dirY * work->speed) >> 8;
-    t = work->rotation + 32;
-    z = 0;
-    work->rotation = t;
+    rotation = work->rotation + 32;
+    zero = 0;
+    work->rotation = rotation;
     work->flipAngleY += (64 - work->flipAngleY) >> 4;
-    work->flipAngleX = z;
+    work->flipAngleX = zero;
     work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
     work->speed -= work->vz;
     work->vz += 2;
@@ -755,39 +755,39 @@ u8 UpdateBossPrizeFlight(BossPrizeWork* work, void* task) {
     }
 
     x = work->posX >> 8;
-    q1 = &work->x;
-    *q1 = x;
+    px = &work->x;
+    *px = x;
     y = work->posY >> 8;
-    q2 = &work->y;
-    *q2 = y;
+    py = &work->y;
+    *py = y;
     UpdateBossPrizeScale(work);
     TaskPoolUpdate(&work->tasks);
     return 1;
 }
 
 u8 UpdateBossPrizeShow(BossPrizeWork* work, void* task) {
-    s32 v;
-    u16 t;
-    s32 c;
+    s32 rotation;
+    u16 scale;
+    s32 maxScale;
 
-    v = work->rotation << 8;
+    rotation = work->rotation << 8;
     ApproachValue((s32*)&work->flipAngleY, 0, work->steps);
-    ApproachValue(&v, 0, work->steps);
+    ApproachValue(&rotation, 0, work->steps);
     ApproachValue(&work->posX, 0x7800, work->steps);
     ApproachValue(&work->posY, 0x5800, work->steps);
-    work->rotation = v >> 8;
+    work->rotation = rotation >> 8;
 
     if (work->steps != 0) {
         work->steps--;
     }
 
-    t = work->scale;
+    scale = work->scale;
 
-    if ((s16)t <= 0xFF) {
-        work->scale = t + 2;
+    if ((s16)scale <= 0xFF) {
+        work->scale = scale + 2;
     } else {
-        c = 0x100;
-        work->scale = c;
+        maxScale = 0x100;
+        work->scale = maxScale;
     }
 
     work->x = work->posX >> 8;
@@ -905,13 +905,13 @@ u8 Card_EFFECT_1(CardEffectWork* work) {
 }
 
 void Card_EFFECT_2(CardEffectWork* work) {
-    s16 t;
-    s32 z;
+    s16 priority;
+    s32 flags;
 
-    t = -4100 - ((work->y >> 8) * 4);
-    z = 0;
-    work->priority = t;
-    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, z, work->priority);
+    priority = -4100 - ((work->y >> 8) * 4);
+    flags = 0;
+    work->priority = priority;
+    DrawSprite(work->x, work->y, work->gfx, work->tiles, work->palette, NULL, flags, work->priority);
 }
 
 void Card_EFFECT_3(CardEffectWork* work) {

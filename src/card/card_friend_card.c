@@ -61,7 +61,7 @@ static const u32 sFriendCardIds[8] = {
 };
 
 void Friend_card_0(PickupCardWork* work, s32* args) {
-    Collider* p;
+    Collider* collider;
 
     work->cardId = args[3];
     work->posX = args[0];
@@ -96,15 +96,15 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &work->collider;
-    ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 8, 10);
+    ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
 void Heartless_card_0(PickupCardWork* work, s32* args) {
-    Collider* p;
+    Collider* collider;
 
     work->cardId = args[3];
     work->posX = args[0];
@@ -140,15 +140,15 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &work->collider;
-    ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 8, 10);
+    ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
 
 void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
-    Collider* p;
+    Collider* collider;
 
     work->cardId = args->cardId;
     work->posX = args->x;
@@ -177,9 +177,9 @@ void Gimmick_card_0(PickupCardWork* work, GimmickCardArgs* args) {
     work->palette2 = LoadObjPalette(work->cardDef->palette, 32);
     work->tiles4 = LoadObjTiles(gBtlShadowTiles, 0x100);
     work->palette3 = LoadObjPalette(gBStatesPalette, 32);
-    p = &work->collider;
-    ColliderInit(p, 5, 8, 10);
-    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 8, 10);
+    ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     TaskPoolInit(&work->tasks, 1);
     gBtlWork->prizeCount++;
 }
@@ -209,8 +209,8 @@ void StartPickupCardFlight(PickupCardWork* work, u8 kind) {
 
 s32 Friend_card_1(PickupCardWork* work, void* task) {
     s16 sx;
-    s32 t;
-    u16 n;
+    s32 nextTimer;
+    u16 timer;
     s16 sy;
 
     if (gBtlWork->phase == 4) {
@@ -299,16 +299,16 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
         return 1;
     }
 
-    n = work->timer;
+    timer = work->timer;
 
-    if (n > 359) {
+    if (timer > 359) {
         return 0;
     }
 
-    t = n + 1;
-    work->timer = t;
+    nextTimer = timer + 1;
+    work->timer = nextTimer;
 
-    if (work->timer > 279 && t % 4 == 0) {
+    if (work->timer > 279 && nextTimer % 4 == 0) {
         work->visible ^= 1;
     }
 
@@ -317,8 +317,8 @@ s32 Friend_card_1(PickupCardWork* work, void* task) {
 
 s32 Gimmick_card_1(PickupCardWork* work, void* task) {
     s16 sx;
-    s32 t;
-    u16 n;
+    s32 nextTimer;
+    u16 timer;
     s16 sy;
 
     if (gBtlWork->phase == 4) {
@@ -403,17 +403,17 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
     work->priority = -0x1004 - (work->posY >> 8) * 4;
     TaskPoolUpdate(&work->tasks);
 
-    n = work->timer;
+    timer = work->timer;
 
-    if (n > 359) {
+    if (timer > 359) {
         gCardBattleState->gimmickCardCount -= 1;
         return 0;
     }
 
-    t = n + 1;
-    work->timer = t;
+    nextTimer = timer + 1;
+    work->timer = nextTimer;
 
-    if (work->timer > 279 && t % 4 == 0) {
+    if (work->timer > 279 && nextTimer % 4 == 0) {
         work->visible ^= 1;
     }
 
@@ -423,7 +423,7 @@ s32 Gimmick_card_1(PickupCardWork* work, void* task) {
 u8 FlyPickupCardToDeck(PickupCardWork* work) {
     s32 dx;
     s32 dy;
-    u16 t;
+    u16 scale;
 
     if (gBtlWork->phase == 4) {
         return 0;
@@ -455,10 +455,10 @@ u8 FlyPickupCardToDeck(PickupCardWork* work) {
     work->distance = VectorLength2D(-work->posX, 0xA000 - work->posY);
     work->speed -= work->vz;
     work->vz += 2;
-    t = work->scale;
+    scale = work->scale;
 
-    if ((s16)t <= 255) {
-        work->scale = t + 3;
+    if ((s16)scale <= 255) {
+        work->scale = scale + 3;
     }
 
     work->scaleX = (-COS(work->flipAngleX + 128) * work->scale) >> 8;
@@ -508,7 +508,7 @@ s32 WaitHeartlessCardName(PickupCardWork* work, void* task) {
 s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* task) {
     s32 dx = 0;
     s32 dy = 0;
-    u16 t;
+    u16 scale;
 
     if (work->speed < 0) {
         dx = 0x7800 - work->posX;
@@ -545,10 +545,10 @@ s32 FlyHeartlessCardToCenter(PickupCardWork* work, void* task) {
     work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
     work->speed -= work->vz;
     work->vz += 2;
-    t = work->scale;
+    scale = work->scale;
 
-    if ((s16)t <= 255) {
-        work->scale = t + 3;
+    if ((s16)scale <= 255) {
+        work->scale = scale + 3;
     }
 
     work->scaleX = (-COS(work->flipAngleX + 128) * work->scale) >> 8;
@@ -638,7 +638,7 @@ void PickupCardDraw(PickupCardWork* work) {
     s16 x;
     u16 y;
     ObjAffine* affine;
-    s16 v;
+    s16 shadowScale;
     u8 kind;
 
     if (work->visible != 0) {
@@ -666,10 +666,10 @@ void PickupCardDraw(PickupCardWork* work) {
         DrawSprite(x, y - 8, gCardValueDigitFrames[kind],
                    work->tiles3, work->palette, affine,
                    work->spriteFlags, work->priority - 2);
-        v = 204 - ((work->floor - work->posZ) >> 7);
+        shadowScale = 204 - ((work->floor - work->posZ) >> 7);
 
-        if (v <= 2) {
-            v = 2;
+        if (shadowScale <= 2) {
+            shadowScale = 2;
         }
 
         if (!work->screenSpace) {
@@ -678,7 +678,7 @@ void PickupCardDraw(PickupCardWork* work) {
                           work->floor);
             DrawSprite(work->x, work->y,
                        gBtlShadowFrames[0], work->tiles4,
-                       work->palette3, AllocObjAffine(0, v, v, 0),
+                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0),
                        work->spriteFlags, work->priority + 2);
         }
 
@@ -690,7 +690,7 @@ void Heartless_card_2(PickupCardWork* work) {
     s16 x;
     u16 y;
     ObjAffine* affine;
-    s16 v;
+    s16 shadowScale;
 
     if (work->visible != 0) {
         if (!work->screenSpace) {
@@ -712,10 +712,10 @@ void Heartless_card_2(PickupCardWork* work) {
         DrawSprite(x, y - 8, work->cardDef->gfx,
                    work->tiles2, work->palette2, affine,
                    work->spriteFlags, work->priority + 1);
-        v = 204 - ((work->floor - work->posZ) >> 7);
+        shadowScale = 204 - ((work->floor - work->posZ) >> 7);
 
-        if (v <= 2) {
-            v = 2;
+        if (shadowScale <= 2) {
+            shadowScale = 2;
         }
 
         if (!work->screenSpace) {
@@ -724,7 +724,7 @@ void Heartless_card_2(PickupCardWork* work) {
                           work->floor);
             DrawSprite(work->x, work->y,
                        gBtlShadowFrames[0], work->tiles4,
-                       work->palette3, AllocObjAffine(0, v, v, 0),
+                       work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0),
                        work->spriteFlags, work->priority + 2);
         }
 
@@ -776,13 +776,13 @@ void CreateFriendCardTask(void* pool, s16 x, s16 y, s16 z, u8 idx) {
 
 void CreateHeartlessCardTask(void* pool, s16 x, s16 y, s16 z, u16 kind) {
     s32 args[4];
-    const s32* t;
+    const s32* cardIds;
 
-    t = gEnemyCardIds[kind];
+    cardIds = gEnemyCardIds[kind];
     args[0] = x << 8;
     args[1] = y << 8;
     args[2] = z << 8;
-    args[3] = t[0];
+    args[3] = cardIds[0];
     TaskCreate(pool, &gTaskDescHeartlessCard, args);
 }
 
@@ -802,18 +802,18 @@ void CreateGimmickCardTask(void* pool, s16 x, s16 y, s16 z, u16 cardId) {
 void StockNameSora_0(StockNameWork* work, const s32* src) {
     u8 i;
     s32* dst;
-    s32* q;
-    const s32* s;
+    s32* name;
+    const s32* names;
     s32 z;
     ObjTiles* obj;
 
     if (src != NULL) {
-        s = src;
+        names = src;
 
         for (i = 0; i < 6; i++) {
             dst = work->stockNames;
-            q = &dst[i];
-            *q = s[i];
+            name = &dst[i];
+            *name = names[i];
         }
 
         work->cycling = 1;
@@ -829,23 +829,23 @@ void StockNameSora_0(StockNameWork* work, const s32* src) {
 
     if (!work->cycling) {
 #ifdef VERSION_EU
-        void** t;
-        void* u;
+        void** sprites;
+        void* srcTiles;
 
-        t = (void**)LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].sprites);
-        u = LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[gCardBattleState->soraStockName].spriteIndex], u);
+        sprites = (void**)LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].sprites);
+        srcTiles = LANGSTR(gStockNameSprites[gCardBattleState->soraStockName].tiles);
+        UpdateSpriteFrameTiles(obj, sprites[gStockNameSprites[gCardBattleState->soraStockName].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(obj, gStockNameSprites[gCardBattleState->soraStockName].sprites[gStockNameSprites[gCardBattleState->soraStockName].spriteIndex], gStockNameSprites[gCardBattleState->soraStockName].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
-        void** t;
-        void* u;
+        void** sprites;
+        void* srcTiles;
 
-        t = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
-        u = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[work->stockNames[0]].spriteIndex], u);
+        sprites = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
+        srcTiles = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(obj, gStockNameSprites[work->stockNames[0]].sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], gStockNameSprites[work->stockNames[0]].tiles);
 #endif
@@ -858,8 +858,8 @@ void StockNameSora_0(StockNameWork* work, const s32* src) {
 
 u8 StockNameSora_1(StockNameWork* work) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
-    void* u = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
+    void** sprites = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
+    void* srcTiles = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
 
     if (!gCardBattleState->soraStockNameShown || gCardBattleState->soraStockName != work->stockName) {
@@ -880,7 +880,7 @@ u8 StockNameSora_1(StockNameWork* work) {
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(work->tiles, t[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], u);
+        UpdateSpriteFrameTiles(work->tiles, sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(work->tiles, gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
@@ -904,18 +904,18 @@ void StockNameSora_2(StockNameWork* work) {
 void StockNameRiku_0(StockNameWork* work, const s32* src) {
     u8 i;
     s32* dst;
-    s32* q;
-    const s32* s;
+    s32* name;
+    const s32* names;
     s32 z;
     ObjTiles* obj;
 
     if (src != NULL) {
-        s = src;
+        names = src;
 
         for (i = 0; i < 6; i++) {
             dst = work->stockNames;
-            q = &dst[i];
-            *q = s[i];
+            name = &dst[i];
+            *name = names[i];
         }
 
         work->cycling = 1;
@@ -931,23 +931,23 @@ void StockNameRiku_0(StockNameWork* work, const s32* src) {
 
     if (!work->cycling) {
 #ifdef VERSION_EU
-        void** t;
-        void* u;
+        void** sprites;
+        void* srcTiles;
 
-        t = (void**)LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].sprites);
-        u = LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[gCardBattleState->rikuStockName].spriteIndex], u);
+        sprites = (void**)LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].sprites);
+        srcTiles = LANGSTR(gStockNameSprites[gCardBattleState->rikuStockName].tiles);
+        UpdateSpriteFrameTiles(obj, sprites[gStockNameSprites[gCardBattleState->rikuStockName].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(obj, gStockNameSprites[gCardBattleState->rikuStockName].sprites[gStockNameSprites[gCardBattleState->rikuStockName].spriteIndex], gStockNameSprites[gCardBattleState->rikuStockName].tiles);
 #endif
     } else {
 #ifdef VERSION_EU
-        void** t;
-        void* u;
+        void** sprites;
+        void* srcTiles;
 
-        t = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
-        u = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
-        UpdateSpriteFrameTiles(obj, t[gStockNameSprites[work->stockNames[0]].spriteIndex], u);
+        sprites = (void**)LANGSTR(gStockNameSprites[work->stockNames[0]].sprites);
+        srcTiles = LANGSTR(gStockNameSprites[work->stockNames[0]].tiles);
+        UpdateSpriteFrameTiles(obj, sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(obj, gStockNameSprites[work->stockNames[0]].sprites[gStockNameSprites[work->stockNames[0]].spriteIndex], gStockNameSprites[work->stockNames[0]].tiles);
 #endif
@@ -960,8 +960,8 @@ void StockNameRiku_0(StockNameWork* work, const s32* src) {
 
 u8 StockNameRiku_1(StockNameWork* work) {
 #ifdef VERSION_EU
-    void** t = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
-    void* u = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
+    void** sprites = (void**)LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites);
+    void* srcTiles = LANGSTR(gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
 
     if (!gCardBattleState->rikuStockNameShown || gCardBattleState->rikuStockName != work->stockName) {
@@ -982,7 +982,7 @@ u8 StockNameRiku_1(StockNameWork* work) {
         }
 
 #ifdef VERSION_EU
-        UpdateSpriteFrameTiles(work->tiles, t[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], u);
+        UpdateSpriteFrameTiles(work->tiles, sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], srcTiles);
 #else
         UpdateSpriteFrameTiles(work->tiles, gStockNameSprites[work->stockNames[work->stockNameIndex]].sprites[gStockNameSprites[work->stockNames[work->stockNameIndex]].spriteIndex], gStockNameSprites[work->stockNames[work->stockNameIndex]].tiles);
 #endif
@@ -1140,8 +1140,8 @@ void Premire_Chance_0(PremireChanceWork* work) {
 }
 
 u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
-    PremireChanceCardWork* n;
-    s32 t;
+    PremireChanceCardWork* card;
+    s32 steps;
     s32 z;
 
     if (work->inputEnabled != 0) {
@@ -1155,12 +1155,12 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
             work->titleSteps = 16;
             work->slideSteps = 16;
             SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceClose);
-            n = ListPoolFirst(&gCardListWork->cards);
+            card = ListPoolFirst(&gCardListWork->cards);
 
-            while (n != NULL) {
-                n->state |= PREMIRE_CHANCE_CARD_STATE_HIDDEN;
+            while (card != NULL) {
+                card->state |= PREMIRE_CHANCE_CARD_STATE_HIDDEN;
                 work->resultPending = 0;
-                n = ListPoolNext(&n->node);
+                card = ListPoolNext(&card->node);
             }
 
             TaskPoolUpdate(&work->tasks);
@@ -1172,26 +1172,26 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
         }
     }
 
-    n = ListPoolFirst(&gCardListWork->cards);
+    card = ListPoolFirst(&gCardListWork->cards);
 
     if (!work->stopped) {
-        while (n != NULL) {
-            t = n->steps;
+        while (card != NULL) {
+            steps = card->steps;
 
-            if (t == 0) {
+            if (steps == 0) {
                 m4aSongNumStart(SONG_SYS_CLICK);
 
-                if (n->position < work->cardCount - 1) {
-                    n->position++;
+                if (card->position < work->cardCount - 1) {
+                    card->position++;
                 } else {
-                    n->position = t;
+                    card->position = steps;
                 }
 
-                n->steps = work->spinDelay;
+                card->steps = work->spinDelay;
                 work->advanced = 1;
             }
 
-            n = ListPoolNext(&n->node);
+            card = ListPoolNext(&card->node);
         }
     } else {
         work->cursorHidden = 1;
@@ -1220,29 +1220,29 @@ u8 UpdatePremireChanceSpin(PremireChanceWork* work, void* task) {
 }
 
 u8 Premire_Chance_1(PremireChanceWork* work, void* task) {
-    s32 v;
-    u8* p;
-    PremireChanceCardWork* n;
+    s32 titleX;
+    u8* steps;
+    PremireChanceCardWork* card;
 
-    n = ListPoolFirst(&gCardListWork->cards);
+    card = ListPoolFirst(&gCardListWork->cards);
 
-    if (n != NULL && n->state == PREMIRE_CHANCE_CARD_STATE_SPIN) {
+    if (card != NULL && card->state == PREMIRE_CHANCE_CARD_STATE_SPIN) {
         SetTaskUpdate(task, (TaskUpdateFunc)UpdatePremireChanceSpin);
     }
 
-    p = &work->slideSteps;
+    steps = &work->slideSteps;
 
-    if (*p != 0) {
-        ApproachValue(&work->topY, 0, *p);
-        ApproachValue(&work->bottomY, 0x9800, *p);
+    if (*steps != 0) {
+        ApproachValue(&work->topY, 0, *steps);
+        ApproachValue(&work->bottomY, 0x9800, *steps);
     } else {
-        v = work->titleX << 8;
-        p = &work->titleSteps;
-        ApproachValue(&v, 0, *p);
-        work->titleX = v >> 8;
+        titleX = work->titleX << 8;
+        steps = &work->titleSteps;
+        ApproachValue(&titleX, 0, *steps);
+        work->titleX = titleX >> 8;
     }
 
-    (*p)--;
+    (*steps)--;
     TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;
@@ -1300,13 +1300,13 @@ void CreatePremireChanceCardTasks(PremireChanceWork* work) {
 }
 
 u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
-    PremireChanceCardWork* n;
+    PremireChanceCardWork* card;
     TaskPool* pool;
     u8 z;
-    u8 t;
-    u8* q;
+    u8 stopTimer;
+    u8* cursorHidden;
 
-    n = ListPoolFirst(&gCardListWork->cards);
+    card = ListPoolFirst(&gCardListWork->cards);
     work->gfx = AnimUpdate(&work->anim);
     work->gfx2 = AnimUpdate(&work->anim2);
     work->spinDelay = 0;
@@ -1314,29 +1314,29 @@ u8 UpdatePremireChanceStop(PremireChanceWork* work, void* task) {
     work->inputEnabled = 0;
 
     if (work->resultPending) {
-        while (n != NULL) {
-            if (n->steps == 0) {
-                if (n->position == 3) {
-                    n->state = PREMIRE_CHANCE_CARD_STATE_TO_CENTER;
-                    ConvertActiveDeckCardToPremium(n->deckIndex);
+        while (card != NULL) {
+            if (card->steps == 0) {
+                if (card->position == 3) {
+                    card->state = PREMIRE_CHANCE_CARD_STATE_TO_CENTER;
+                    ConvertActiveDeckCardToPremium(card->deckIndex);
                 } else {
-                    n->state = PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY;
+                    card->state = PREMIRE_CHANCE_CARD_STATE_MOVE_AWAY;
                 }
 
                 work->resultPending = 0;
             }
 
-            n = ListPoolNext(&n->node);
+            card = ListPoolNext(&card->node);
         }
     }
 
-    t = work->stopTimer;
+    stopTimer = work->stopTimer;
     pool = &work->tasks;
 
-    if (t == 30) {
-        q = &work->cursorHidden;
+    if (stopTimer == 30) {
+        cursorHidden = &work->cursorHidden;
         z = 0;
-        *q = 1;
+        *cursorHidden = 1;
         SetBgPriority(2, 0);
         BgAnimInit(2, 0x8000, 0x80);
         BgAnimStart(&gBgAnimDefPremireChance, 120, 60);
@@ -1388,27 +1388,27 @@ u8 UpdatePremireChanceResult(PremireChanceWork* work, void* task) {
 }
 
 u8 UpdatePremireChanceClose(PremireChanceWork* work, void* task) {
-    s32 v;
-    u8* p;
+    s32 titleX;
+    u8* steps;
 
-    p = &work->titleSteps;
+    steps = &work->titleSteps;
 
-    if (*p != 0) {
-        v = work->titleX << 8;
-        ApproachValue(&v, -0x8000, *p);
-        work->titleX = v >> 8;
+    if (*steps != 0) {
+        titleX = work->titleX << 8;
+        ApproachValue(&titleX, -0x8000, *steps);
+        work->titleX = titleX >> 8;
     } else {
-        p = &work->slideSteps;
+        steps = &work->slideSteps;
 
-        if (*p == 0) {
+        if (*steps == 0) {
             return 0;
         }
 
-        ApproachValue(&work->topY, -0x800, *p);
-        ApproachValue(&work->bottomY, 0xA000, *p);
+        ApproachValue(&work->topY, -0x800, *steps);
+        ApproachValue(&work->bottomY, 0xA000, *steps);
     }
 
-    (*p)--;
+    (*steps)--;
     TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&gCardListWork->effectTasks);
     return 1;

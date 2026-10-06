@@ -672,7 +672,7 @@ void PrizeCardInitInit(PrizeCardInitWork* work, PrizeCardArgs* args) {
 
 s32 PrizeCardInit_1(PrizeCardInitWork* work) {
     s32 args[9];
-    s32 v;
+    s32 battleId;
 
     if (!work->spawned) {
         if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
@@ -701,9 +701,9 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                 }
             }
         } else {
-            v = gBtlWork->battleId;
+            battleId = gBtlWork->battleId;
 
-            if (v >= 125 && v <= 127) {
+            if (battleId >= 125 && battleId <= 127) {
                 if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
                     if (GetRandom() % 100 < 20) {
                         *(PrizeCardArgs*)args = work->args;
@@ -737,7 +737,7 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
                         return 0;
                     }
                 }
-            } else if (v >= 131 && v <= 133) {
+            } else if (battleId >= 131 && battleId <= 133) {
 #ifdef VERSION_EU
                 if (CountRegularMapCards() <= 98) {
                     *(PrizeCardArgs*)args = work->args;
@@ -905,7 +905,7 @@ void PrizeCardInitDestroy(PrizeCardInitWork* work) {
 
 u16 PickPrizeMapCardKind(const PrizeMapCardGroup* groups, u16 groupCount) {
     s32 i;
-    const PrizeMapCardEntry* arr;
+    const PrizeMapCardEntry* entries;
     u16 cnt;
     u16 v;
     u16 card;
@@ -914,12 +914,12 @@ u16 PickPrizeMapCardKind(const PrizeMapCardGroup* groups, u16 groupCount) {
 
     if (CountRegularMapCards() <= 98) {
         while (i < groupCount) {
-            arr = groups[i].entries;
+            entries = groups[i].entries;
             cnt = groups[i].count;
             v = GetRandom() % 100;
 
             if (v <= groups[i].chance) {
-                card = arr[GetRandom() % cnt].cardId;
+                card = entries[GetRandom() % cnt].cardId;
                 v = CountMapCardsOfKind(card);
 
                 if (v <= 89) {
@@ -996,22 +996,22 @@ void CreateBossPrizeCardTask(void* pool, void* src) {
 }
 
 void DispCardname_0(DispCardnameWork* work, u16* text) {
-    ObjPalette* p;
-    s32 v;
+    ObjPalette* textPalette;
+    s32 x;
 
     InitTextSlots(work->textSlots, 32);
-    p = LoadTextPalette(1);
-    work->textPalette = p;
-    FadeSetPaletteExcluded(p->index + 16, 1);
+    textPalette = LoadTextPalette(1);
+    work->textPalette = textPalette;
+    FadeSetPaletteExcluded(textPalette->index + 16, 1);
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->tiles = LoadObjTiles(gMsgBoxTiles, 0xFC0);
     work->palette = LoadObjPalette(gCard00Palette, 32);
 #ifdef VERSION_JP
-    v = (240 - work->textSlotCount * 10) / 2;
+    x = (240 - work->textSlotCount * 10) / 2;
 #else
-    v = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
+    x = (240 - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
 #endif
-    work->x = v;
+    work->x = x;
 }
 
 s32 DispCardname_1() {
@@ -1061,7 +1061,7 @@ Task* CreateVersionDisplay(TaskPool* pool) {
 }
 
 static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
-    Collider* p;
+    Collider* collider;
 
     work->cardId = args[8];
     work->cardDef = &gMapCardDefs[args[8]];
@@ -1088,10 +1088,10 @@ static void PrizeCard_0(PrizeMapCardWork* work, s32* args) {
     work->scale = 0x80;
     work->flipAngleY = 0;
     work->flipAngleX = 0;
-    p = &work->collider;
-    ColliderInit(p, 5, 8, 10);
-    ColliderSetDisabled(p, 1);
-    ColliderSetPosition(p, work->posX, work->posY, work->posZ);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 8, 10);
+    ColliderSetDisabled(collider, 1);
+    ColliderSetPosition(collider, work->posX, work->posY, work->posZ);
     work->backAnimTimer = 0;
     work->backAnimStep = 0;
     work->backFrame = 0;
@@ -1188,12 +1188,12 @@ void AimPrizeMapCardAtCenter(PrizeMapCardWork* work) {
 u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* work, void* task) {
     s32 dx;
     s32 dy;
-    u8 z;
-    u8 t;
+    u8 zero;
+    u8 rotation;
     s32 x;
     s32 y;
-    s16* q1;
-    s16* q2;
+    s16* px;
+    s16* py;
 
     if (work->speed < 0) {
         dx = 0x7800 - work->posX;
@@ -1212,11 +1212,11 @@ u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* work, void* task) {
 
     work->posX += (work->dirX * work->speed) >> 8;
     work->posY += (work->dirY * work->speed) >> 8;
-    t = work->rotation + 32;
-    z = 0;
-    work->rotation = t;
+    rotation = work->rotation + 32;
+    zero = 0;
+    work->rotation = rotation;
     work->flipAngleY += (64 - work->flipAngleY) >> 4;
-    work->flipAngleX = z;
+    work->flipAngleX = zero;
     work->distance = VectorLength2D(0x7800 - work->posX, 0x5000 - work->posY);
     work->speed -= work->vz;
     work->vz += 2;
@@ -1226,27 +1226,27 @@ u8 UpdatePrizeMapCardFlight(PrizeMapCardWork* work, void* task) {
     }
 
     x = work->posX >> 8;
-    q1 = &work->x;
-    *q1 = x;
+    px = &work->x;
+    *px = x;
     y = work->posY >> 8;
-    q2 = &work->y2;
-    *q2 = y;
+    py = &work->y2;
+    *py = y;
     UpdatePrizeMapCardScale(work);
     return 1;
 }
 
 u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* task) {
-    s32 v;
+    s32 rotation;
     s16 lim;
     s32 x;
-    s16* q;
+    s16* screenCoord;
 
-    v = work->rotation << 8;
+    rotation = work->rotation << 8;
     ApproachValue((s32*)&work->flipAngleY, 0, work->steps);
-    ApproachValue(&v, 0, work->steps);
+    ApproachValue(&rotation, 0, work->steps);
     ApproachValue(&work->posX, 0x7800, work->steps);
     ApproachValue(&work->posY, 0x5800, work->steps);
-    work->rotation = v >> 8;
+    work->rotation = rotation >> 8;
 
     if (work->steps != 0) {
         work->steps--;
@@ -1261,11 +1261,11 @@ u8 UpdatePrizeMapCardShow(PrizeMapCardWork* work, void* task) {
     }
 
     x = work->posX >> 8;
-    q = &work->x;
-    *q = x;
+    screenCoord = &work->x;
+    *screenCoord = x;
     x = work->posY >> 8;
-    q = &work->y2;
-    *q = x;
+    screenCoord = &work->y2;
+    *screenCoord = x;
     UpdatePrizeMapCardScale(work);
     work->holdTimer++;
 
@@ -1297,7 +1297,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
     u16 pal;
     ObjAffine* affine;
     void* gfx;
-    s16 v;
+    s16 shadowScale;
 
     pal = !work->collected ? GetBattleSpritePriorityFlags(work->posY) : 0;
 
@@ -1330,15 +1330,15 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
     }
 
     if (!work->collected) {
-        v = 204 - ((work->groundZ - work->posZ) >> 7);
+        shadowScale = 204 - ((work->groundZ - work->posZ) >> 7);
 
-        if (v <= 2) {
-            v = 2;
+        if (shadowScale <= 2) {
+            shadowScale = 2;
         }
 
         DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
                    work->tiles5, work->palette3,
-                   AllocObjAffine(0, v, v, 0), pal,
+                   AllocObjAffine(0, shadowScale, shadowScale, 0), pal,
                    work->priority + 2);
     }
 
@@ -1376,26 +1376,26 @@ void UpdatePrizeMapCardScale(PrizeMapCardWork* work) {
 
 #ifndef VERSION_EU
 void UpdatePrizeMapCardBackAnim(PrizeMapCardWork* work) {
-    u8* p;
-    u8* q;
+    u8* backAnimTimer;
+    u8* backFrame;
     u8 k;
-    u8 v;
+    u8 sprite;
     u8 z;
-    v = gPrizeMapCardBackAnim[work->backAnimStep].sprite;
-    q = &work->backFrame;
+    sprite = gPrizeMapCardBackAnim[work->backAnimStep].sprite;
+    backFrame = &work->backFrame;
     z = 0;
-    *q = v;
-    p = &work->backAnimTimer;
+    *backFrame = sprite;
+    backAnimTimer = &work->backAnimTimer;
     k = work->backAnimStep;
 
-    if (*p == gPrizeMapCardBackAnim[k].duration) {
+    if (*backAnimTimer == gPrizeMapCardBackAnim[k].duration) {
         work->backAnimStep = k + 1;
 
         if (work->backAnimStep == 7) {
             work->backAnimStep = z;
         }
 
-        *p = z;
+        *backAnimTimer = z;
     }
 
     work->backAnimTimer++;
@@ -1446,7 +1446,7 @@ u8 SpotLight_1(SpotlightWork* work, void* task) {
 }
 
 s32 UpdateSpotLightFadeOut(SpotlightWork* work) {
-    s32 v;
+    s32 bldAlpha;
 
     ApproachValue(&work->blendA, 0, work->steps);
 
@@ -1454,9 +1454,9 @@ s32 UpdateSpotLightFadeOut(SpotlightWork* work) {
         work->steps--;
     }
 
-    v = ((work->blendB >> 8) << 8) | (work->blendA >> 8);
-    work->bldAlpha = v;
-    gBldAlpha = v;
+    bldAlpha = ((work->blendB >> 8) << 8) | (work->blendA >> 8);
+    work->bldAlpha = bldAlpha;
+    gBldAlpha = bldAlpha;
     return 1;
 }
 
@@ -1530,7 +1530,7 @@ void SELMAP_EVKEY_0(SelmapEventKeyWork* work, SelmapEventKeyArgs* args) {
 
 s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* task) {
     s32 i;
-    EventKey* r;
+    EventKey* key;
     u8 n;
 
     work->gfx = AnimUpdate(&work->anim);
@@ -1567,8 +1567,8 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* task) {
     }
 
     if (work->cards[work->paidCount].total != 0) {
-        r = GetEventKey(0);
-        work->cards[work->paidCount].total = r->value;
+        key = GetEventKey(0);
+        work->cards[work->paidCount].total = key->value;
         n = work->paidCount;
 
         if (work->cards[n].drawnTotal != work->cards[n].total) {
@@ -1581,22 +1581,22 @@ s32 SELMAP_EVKEY_1(SelmapEventKeyWork* work, void* task) {
 }
 
 s32 UpdateSelmapEventKeyClose(SelmapEventKeyWork* work) {
-    u8* a;
-    u8* b;
+    u8* mosaicX;
+    u8* mosaicY;
 
-    a = &work->mosaicX;
+    mosaicX = &work->mosaicX;
 
-    if (*a <= 14) {
-        (*a)++;
+    if (*mosaicX <= 14) {
+        (*mosaicX)++;
     }
 
-    b = &work->mosaicY;
+    mosaicY = &work->mosaicY;
 
-    if (*b <= 14) {
-        (*b)++;
+    if (*mosaicY <= 14) {
+        (*mosaicY)++;
     }
 
-    SetObjMosaicSize(*a, *b);
+    SetObjMosaicSize(*mosaicX, *mosaicY);
     return 1;
 }
 
@@ -1667,26 +1667,26 @@ void SELMAP_EVKEY_3(SelmapEventKeyWork* work) {
 }
 
 void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
-    MapCardDef* c;
-    MapCardBackDef* b;
-    MapCardBackDef* d;
-    const CardBack* cb;
+    MapCardDef* def;
+    MapCardBackDef* backDef;
+    MapCardBackDef* colorBackDef;
+    const CardBack* cardBack;
     u8 n;
-    void* z;
-    u8 t;
-    u8* q;
+    void* empty;
+    u8 total;
+    u8* color;
 
     CpuFill32(0, card, sizeof(EventKeyCard));
 
     if (key->kind != 255) {
-        c = &gMapCardDefs[key->kind * 10];
-        b = &gMapCardBackDefs[c->backIndex];
-        card->sprite.tiles = LoadObjTiles(c->tiles, c->tilesSize);
-        card->sprite.palette = LoadObjPalette(c->palette, c->paletteSize);
-        card->sprite.gfx = *c->sprites;
-        card->sprite.tiles2 = LoadObjTiles(b->tiles, b->tilesSize);
-        card->sprite.palette2 = LoadObjPalette(b->palette, b->paletteSize);
-        card->sprite.gfx2 = *b->sprites;
+        def = &gMapCardDefs[key->kind * 10];
+        backDef = &gMapCardBackDefs[def->backIndex];
+        card->sprite.tiles = LoadObjTiles(def->tiles, def->tilesSize);
+        card->sprite.palette = LoadObjPalette(def->palette, def->paletteSize);
+        card->sprite.gfx = *def->sprites;
+        card->sprite.tiles2 = LoadObjTiles(backDef->tiles, backDef->tilesSize);
+        card->sprite.palette2 = LoadObjPalette(backDef->palette, backDef->paletteSize);
+        card->sprite.gfx2 = *backDef->sprites;
         card->sprite.tiles3 = NULL;
         card->sprite.palette3 = NULL;
         return;
@@ -1704,10 +1704,10 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         card->sprite.palette2 = NULL;
         card->sprite.gfx2 = NULL;
     } else {
-        d = &gMapCardBackDefs[key->color];
-        card->sprite.tiles2 = LoadObjTiles(d->tiles2, d->tilesSize2);
-        card->sprite.palette2 = LoadObjPalette(d->palette, d->paletteSize);
-        card->sprite.gfx2 = *d->sprites2;
+        colorBackDef = &gMapCardBackDefs[key->color];
+        card->sprite.tiles2 = LoadObjTiles(colorBackDef->tiles2, colorBackDef->tilesSize2);
+        card->sprite.palette2 = LoadObjPalette(colorBackDef->palette, colorBackDef->paletteSize);
+        card->sprite.gfx2 = *colorBackDef->sprites2;
         card->sprite.tiles3 = NULL;
         card->sprite.tiles = NULL;
         card->sprite.palette = NULL;
@@ -1730,8 +1730,8 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         }
     }
 
-    q = &card->color;
-    *q = (z = NULL, n);
+    color = &card->color;
+    *color = (empty = NULL, n);
 
     if (key->rule == 0) {
         return;
@@ -1742,13 +1742,13 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x500, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x500, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
@@ -1759,13 +1759,13 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x580, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x580, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
@@ -1776,13 +1776,13 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[1], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x600, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x180);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[3], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 8) * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + 0x600, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
@@ -1793,19 +1793,19 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         if (key->value <= 9) {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x80);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + key->value * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         } else {
             card->sprite.tiles3 = AllocSpriteFrameTiles(0x100);
             UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
-            card->sprite.gfx3 = z;
+            card->sprite.gfx3 = empty;
             RequestDma3Copy(card->sprite.tiles3->src + (u8)(key->value / 10) * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
             RequestDma3Copy(card->sprite.tiles3->src + (key->value - (u8)(key->value / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
         }
 
-        t = key->value;
-        card->total = t;
-        card->drawnTotal = t;
+        total = key->value;
+        card->total = total;
+        card->drawnTotal = total;
         break;
     }
 
@@ -1815,25 +1815,25 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     card->sprite.palette3 = LoadObjPalette(gDoorCardPalette, 32);
 
     if (card->sprite.tiles2 == NULL) {
-        cb = &gCardBacks[4];
-        card->sprite.tiles2 = LoadObjTiles(cb->tiles2, 0x300);
+        cardBack = &gCardBacks[4];
+        card->sprite.tiles2 = LoadObjTiles(cardBack->tiles2, 0x300);
         card->sprite.palette2 = LoadObjPalette(gDoorCardPalette, 32);
-        card->sprite.gfx2 = cb->gfx2;
+        card->sprite.gfx2 = cardBack->gfx2;
     }
 }
 
 void UpdateEventKeyTotal(EventKeyCard* card) {
-    void* z;
+    void* empty;
 
     if (card->total <= 9) {
-        z = NULL;
+        empty = NULL;
         UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[0], gMapSelectRequirementTiles);
-        card->sprite.gfx3 = z;
+        card->sprite.gfx3 = empty;
         RequestDma3Copy(card->sprite.tiles3->src + card->total * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
     } else {
-        z = NULL;
+        empty = NULL;
         UpdateSpriteFrameTiles(card->sprite.tiles3, gKeyValueFrames[2], gMapSelectRequirementTiles);
-        card->sprite.gfx3 = z;
+        card->sprite.gfx3 = empty;
         RequestDma3Copy(card->sprite.tiles3->src + (u16)(card->total / 10) * 128, &gUnk_06010000[card->sprite.tiles3->index * 32], 128);
         RequestDma3Copy(card->sprite.tiles3->src + (card->total - (u16)(card->total / 10) * 10) * 128, &gUnk_06010000[(card->sprite.tiles3->index + 4) * 32], 128);
     }
@@ -1847,20 +1847,20 @@ void SetLayeredCardSpritePos(s32 x, s32 y, LayeredCardSprite* sprite) {
 }
 
 void DrawLayeredCardSpriteScaled(LayeredCardSprite* sprite, u16 flags, s16 dy, s16 scale) {
-    ObjAffine* aff;
+    ObjAffine* affine;
 
-    aff = AllocObjAffine(0, scale, scale, 1);
+    affine = AllocObjAffine(0, scale, scale, 1);
 
     if (sprite->tiles != NULL) {
-        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx, sprite->tiles, sprite->palette, aff, flags, 10);
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx, sprite->tiles, sprite->palette, affine, flags, 10);
     }
 
     if (sprite->tiles2 != NULL) {
-        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx2, sprite->tiles2, sprite->palette2, aff, flags, 9);
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx2, sprite->tiles2, sprite->palette2, affine, flags, 9);
     }
 
     if (sprite->tiles3 != NULL) {
-        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx3, sprite->tiles3, sprite->palette3, aff, flags, 8);
+        DrawSprite(sprite->x >> 8, dy + (sprite->y >> 8), sprite->gfx3, sprite->tiles3, sprite->palette3, affine, flags, 8);
     }
 }
 

@@ -37,7 +37,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     PrizeCardTaskArgs args;
     const CardDef* def;
     const CardBack* back;
-    Collider* q;
+    Collider* collider;
 
     args = *arg;
     work->cardId = args.cardId;
@@ -72,10 +72,10 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->scale = 0x80;
     work->flipAngleY = 0;
     work->flipAngleX = 0;
-    q = &work->collider;
-    ColliderInit(q, 5, 30, 10);
-    ColliderSetDisabled(q, 1);
-    ColliderSetPosition(q, work->pos.x, work->pos.y, work->pos.z);
+    collider = &work->collider;
+    ColliderInit(collider, 5, 30, 10);
+    ColliderSetDisabled(collider, 1);
+    ColliderSetPosition(collider, work->pos.x, work->pos.y, work->pos.z);
     work->timer = 0;
     work->collected[0] = 0;
     work->steps = 0;
@@ -160,26 +160,26 @@ static u8 PrizeCard_1(PrizeCardWork* work, void* task) {
 void AimFieldPrizeCardAtCenter(PrizeCardWork* work) {
     s32 cx = 0x7800;
     s32 cy = 0x5000;
-    s32 v[2];
+    s32 toCenter[2];
 
-    v[0] = cx - work->pos.x;
-    v[1] = cy - work->pos.y;
-    work->distance = NormalizeVector2D8(&v[0], &v[1]);
-    work->dirX = -v[0];
-    work->dirY = -v[1];
+    toCenter[0] = cx - work->pos.x;
+    toCenter[1] = cy - work->pos.y;
+    work->distance = NormalizeVector2D8(&toCenter[0], &toCenter[1]);
+    work->dirX = -toCenter[0];
+    work->dirY = -toCenter[1];
     work->speed = 0x300;
     work->vz = 2;
 }
 
 u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* task) {
-    s32 v[2];
+    s32 toCenter[2];
 
     if (work->speed < 0) {
-        v[0] = 0x7800 - work->pos.x;
-        v[1] = 0x5000 - work->pos.y;
-        NormalizeVector2D8(&v[0], &v[1]);
-        work->dirX = -v[0];
-        work->dirY = -v[1];
+        toCenter[0] = 0x7800 - work->pos.x;
+        toCenter[1] = 0x5000 - work->pos.y;
+        NormalizeVector2D8(&toCenter[0], &toCenter[1]);
+        work->dirX = -toCenter[0];
+        work->dirY = -toCenter[1];
 
         if (work->distance <= 0x7FF) {
             work->steps = 0;
@@ -218,14 +218,14 @@ u8 UpdateFieldPrizeCardFlight(PrizeCardWork* work, void* task) {
 }
 
 u8 UpdateFieldPrizeCardShow(PrizeCardWork* work, void* task) {
-    s32 v;
+    s32 rotation;
 
-    v = work->rotation << 8;
+    rotation = work->rotation << 8;
     ApproachValue((s32*)&work->flipAngleY, 0, work->steps);
-    ApproachValue(&v, 0, work->steps);
+    ApproachValue(&rotation, 0, work->steps);
     ApproachValue(&work->pos.x, 0x7800, work->steps);
     ApproachValue(&work->pos.y, 0x5800, work->steps);
-    work->rotation = v >> 8;
+    work->rotation = rotation >> 8;
 
     if (work->steps != 0) {
         work->steps--;
@@ -284,13 +284,13 @@ static void PrizeCard_2(PrizeCardWork* work) {
     void* gfx;
     const CardBack* back;
     const CardDef* def;
-    s16 v;
-    s32 t;
+    s16 shadowScale;
+    s32 collected;
 
-    t = work->collected[0];
+    collected = work->collected[0];
     pal = 0;
 
-    if (t == 0) {
+    if (collected == 0) {
         pal = 0x800;
     }
 
@@ -311,14 +311,14 @@ static void PrizeCard_2(PrizeCardWork* work) {
                pal, work->priority - 1);
 
     if (work->collected[0] == 0) {
-        v = 204 - ((work->pos.ground - work->pos.z) >> 7);
+        shadowScale = 204 - ((work->pos.ground - work->pos.z) >> 7);
 
-        if (v <= 2) {
-            v = 2;
+        if (shadowScale <= 2) {
+            shadowScale = 2;
         }
 
         DrawSprite(work->x2, work->y, gBtlShadowFrames[0],
-                   work->tiles5, work->palette3, AllocObjAffine(0, v, v, 0), pal,
+                   work->tiles5, work->palette3, AllocObjAffine(0, shadowScale, shadowScale, 0), pal,
                    work->priority + 2);
     }
 

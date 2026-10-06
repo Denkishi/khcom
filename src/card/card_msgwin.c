@@ -116,7 +116,7 @@ static void msgwin_0(CardMsgWinWork* work, CardMessageArgs* args) {
 }
 
 u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* task) {
-    const MsgFaceAnim* tbl;
+    const MsgFaceAnim* faceAnims;
 
     ApproachValue(&work->x, gMsgwinOpenScrollX[work->messageDef->positionIndex], work->steps);
     ApproachValue(&work->faceX, gMsgfaceShownX[work->messageDef->positionIndex], work->steps);
@@ -126,10 +126,10 @@ u8 UpdateCardMsgwinOpen(CardMsgWinWork* work, void* task) {
     if (work->steps != 0) {
         work->steps--;
     } else {
-        tbl = gMsgFaceAnims[work->messageDef->portraitId];
+        faceAnims = gMsgFaceAnims[work->messageDef->portraitId];
 
-        if (tbl[work->messageDef->expressionId].animCount > 1) {
-            AnimStart(&work->anim, 1, tbl[work->messageDef->expressionId].animFlags);
+        if (faceAnims[work->messageDef->expressionId].animCount > 1) {
+            AnimStart(&work->anim, 1, faceAnims[work->messageDef->expressionId].animFlags);
         }
 
         switch (work->args.mode) {
@@ -161,18 +161,18 @@ u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* task) {
                                (TextChar*)work->messageDef->text,
                                &work->nextText);
 #else
-    TextChar** p;
+    TextChar** nextText;
 
-    p = &work->nextText;
+    nextText = &work->nextText;
 
-    if (*p != NULL) {
+    if (*nextText != NULL) {
         work->charCount = LayoutCardMsgGlyphsPage(gMsgwinTextX[work->messageDef->positionIndex],
                                    gMsgwinTextY[work->messageDef->positionIndex] - 0x200,
-                                   *p, p);
+                                   *nextText, nextText);
     } else {
         work->charCount = LayoutCardMsgGlyphsPage(gMsgwinTextX[work->messageDef->positionIndex],
                                    gMsgwinTextY[work->messageDef->positionIndex] - 0x200,
-                                   (TextChar*)LANGSTR(work->messageDef->text), p);
+                                   (TextChar*)LANGSTR(work->messageDef->text), nextText);
     }
 #endif
 
@@ -184,19 +184,19 @@ u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* task) {
 }
 
 u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* task) {
-    CardMessageDef* sel;
-    const MsgFaceAnim* e;
+    CardMessageDef* messageDef;
+    const MsgFaceAnim* faceAnims;
 
     work->textVisible = 1;
-    sel = work->messageDef;
+    messageDef = work->messageDef;
 
-    if (sel->portraitId != 62) {
-        e = gMsgFaceAnims[sel->portraitId];
+    if (messageDef->portraitId != 62) {
+        faceAnims = gMsgFaceAnims[messageDef->portraitId];
         work->tiles3 = AllocObjTiles(0xD80, NULL);
-        work->palette = LoadObjPalette(e[work->messageDef->expressionId].palette, 32);
-        SetObjTileSource(work->tiles3, e[work->messageDef->expressionId].tiles);
-        AnimInit(&work->anim, e[work->messageDef->expressionId].anims, e[work->messageDef->expressionId].gfxTable);
-        AnimStart(&work->anim, 0, e[work->messageDef->expressionId].animFlags);
+        work->palette = LoadObjPalette(faceAnims[work->messageDef->expressionId].palette, 32);
+        SetObjTileSource(work->tiles3, faceAnims[work->messageDef->expressionId].tiles);
+        AnimInit(&work->anim, faceAnims[work->messageDef->expressionId].anims, faceAnims[work->messageDef->expressionId].gfxTable);
+        AnimStart(&work->anim, 0, faceAnims[work->messageDef->expressionId].animFlags);
         work->gfx = AnimGetGfx(&work->anim);
         work->faceX = gMsgfaceHiddenX[work->messageDef->positionIndex];
         work->faceY = gMsgfaceY[work->messageDef->positionIndex];
@@ -210,7 +210,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* task) {
 }
 
 static void msgwin_2(CardMsgWinWork* work) {
-    void** p;
+    void** frames;
 
     if (work->textVisible) {
         DrawCardMsgGlyphs(work->shownChars);
@@ -234,8 +234,8 @@ static void msgwin_2(CardMsgWinWork* work) {
     }
 
     if (work->tiles2 != NULL) {
-        p = gMsgBoxFrames;
-        DrawSprite(120, 80, p[1], work->tiles2, work->palette4, NULL, 0, 10);
+        frames = gMsgBoxFrames;
+        DrawSprite(120, 80, frames[1], work->tiles2, work->palette4, NULL, 0, 10);
         DrawTextSlots((240 - work->textSlotCounts[0] * 10) >> 1, 67, work->textSlots, work->textPalette, 0, work->textSlotCounts[0]);
         DrawTextSlots((240 - work->textSlotCounts[1] * 10) >> 1, 82, work->textSlots2, work->textPalette, 0, work->textSlotCounts[1]);
     }
@@ -287,8 +287,8 @@ static void msgwin_3(CardMsgWinWork* work) {
 }
 
 u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
-    CardMessageDef* sel;
-    const MsgFaceAnim* e;
+    CardMessageDef* messageDef;
+    const MsgFaceAnim* faceAnims;
 
     work->gfx = AnimUpdate(&work->anim);
 
@@ -297,15 +297,15 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
     }
 
     work->charTimer++;
-    sel = work->messageDef;
+    messageDef = work->messageDef;
 
-    if (work->charTimer >= sel->charDelay) {
+    if (work->charTimer >= messageDef->charDelay) {
         if (work->shownChars < work->charCount) {
             work->shownChars++;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
-            e = gMsgFaceAnims[sel->portraitId];
-            AnimStart(&work->anim, 0, e[sel->expressionId].animFlags);
+            faceAnims = gMsgFaceAnims[messageDef->portraitId];
+            AnimStart(&work->anim, 0, faceAnims[messageDef->expressionId].animFlags);
 
             if (work->tiles4 == NULL) {
                 work->tiles4 = AllocObjTiles(0x40, NULL);
@@ -327,7 +327,7 @@ u8 UpdateCardMsgwinTyping(CardMsgWinWork* work, void* task) {
 }
 
 u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
-    const MsgFaceAnim* e;
+    const MsgFaceAnim* faceAnims;
     u16* pal;
 
     work->gfx2 = AnimUpdate(&work->anim2);
@@ -348,10 +348,10 @@ u8 UpdateCardMsgwinWaitInput(CardMsgWinWork* work, void* task) {
 #endif
             work->charTimer = 0;
             work->shownChars = 0;
-            e = gMsgFaceAnims[work->messageDef->portraitId];
+            faceAnims = gMsgFaceAnims[work->messageDef->portraitId];
 
-            if (e[work->messageDef->expressionId].animCount > 1) {
-                AnimStart(&work->anim, 1, e[work->messageDef->expressionId].animFlags);
+            if (faceAnims[work->messageDef->expressionId].animCount > 1) {
+                AnimStart(&work->anim, 1, faceAnims[work->messageDef->expressionId].animFlags);
             }
 
             work->waitIconVisible = 0;
@@ -447,7 +447,7 @@ u8 UpdateCardMsgwinChoice(CardMsgWinWork* work, void* task) {
 }
 
 u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* task) {
-    const MsgFaceAnim* e;
+    const MsgFaceAnim* faceAnims;
 
     work->gfx = AnimUpdate(&work->anim);
 
@@ -462,8 +462,8 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* task) {
             work->shownChars++;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
-            e = gMsgFaceAnims[work->messageDef->portraitId];
-            AnimStart(&work->anim, 0, e[work->messageDef->expressionId].animFlags);
+            faceAnims = gMsgFaceAnims[work->messageDef->portraitId];
+            AnimStart(&work->anim, 0, faceAnims[work->messageDef->expressionId].animFlags);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinPersistent);
         }
 
@@ -475,7 +475,7 @@ u8 UpdateCardMsgwinTypingPersistent(CardMsgWinWork* work, void* task) {
 
 u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task) {
 #ifndef VERSION_JP
-    TextChar** p;
+    TextChar** nextText;
 #endif
     work->gfx = AnimUpdate(&work->anim);
 
@@ -489,15 +489,15 @@ u8 UpdateCardMsgwinPersistent(CardMsgWinWork* work, void* task) {
                                    gMsgwinTextY[work->messageDef->positionIndex],
                                    (TextChar*)work->messageDef->text, &work->nextText);
 #else
-        p = &work->nextText;
+        nextText = &work->nextText;
 
-        if (*p != NULL) {
+        if (*nextText != NULL) {
             work->charCount = LayoutCardMsgGlyphsPage(gMsgwinTextX[work->messageDef->positionIndex],
-                                       gMsgwinTextY[work->messageDef->positionIndex] - 0x200, *p, p);
+                                       gMsgwinTextY[work->messageDef->positionIndex] - 0x200, *nextText, nextText);
         } else {
             work->charCount = LayoutCardMsgGlyphsPage(gMsgwinTextX[work->messageDef->positionIndex],
                                        gMsgwinTextY[work->messageDef->positionIndex] - 0x200,
-                                       (TextChar*)LANGSTR(work->messageDef->text), p);
+                                       (TextChar*)LANGSTR(work->messageDef->text), nextText);
         }
 #endif
 

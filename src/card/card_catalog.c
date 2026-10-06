@@ -7561,7 +7561,7 @@ void** gStockNameWorldBossSpritesByLanguage[5] = { gStockNameWorldBossFrames, gS
 
 u16 GetCardCpCost(u16 cardId) {
     s32 n;
-    u16 v;
+    u16 cpCost;
     CardStat* stat;
 
     if (cardId & 0x8000) {
@@ -7577,22 +7577,22 @@ u16 GetCardCpCost(u16 cardId) {
         }
 
         n--;
-        v = stat->cpCost;
-        v += (v / 10) * n;
-        return v;
+        cpCost = stat->cpCost;
+        cpCost += (cpCost / 10) * n;
+        return cpCost;
     }
 
     return gCardDefs[cardId & 0x0FFF].cpCost;
 }
 
 u16 GetCardMooglePointValue(u16 cardId) {
-    u16 v;
+    u16 points;
 
     if ((cardId & 0x8000) == 0) {
-        v = GetCardCpCost(cardId) / 5 * 2;
+        points = GetCardCpCost(cardId) / 5 * 2;
     } else {
-        v = GetCardCpCost(cardId & 0x0FFF) / 5 * 2 + 10;
+        points = GetCardCpCost(cardId & 0x0FFF) / 5 * 2 + 10;
     }
 
-    return v;
+    return points;
 }

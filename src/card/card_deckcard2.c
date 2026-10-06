@@ -168,25 +168,25 @@ void DeckCard2ReleaseGfx(DeckCard2Work* work) {
 }
 
 u8 DeckCard2IsOnScreen(DeckCard2Work* work) {
-    s16 a;
-    s16 b;
+    s16 x;
+    s16 y;
 
-    a = work->x >> 8;
-    b = work->y >> 8;
+    x = work->x >> 8;
+    y = work->y >> 8;
 
-    if (a < 0) {
+    if (x < 0) {
         return 0;
     }
 
-    if (a > 240) {
+    if (x > 240) {
         return 0;
     }
 
-    if (b < 0) {
+    if (y < 0) {
         return 0;
     }
 
-    if (b > 160) {
+    if (y > 160) {
         return 0;
     }
 

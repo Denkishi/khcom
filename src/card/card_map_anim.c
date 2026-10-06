@@ -49,34 +49,34 @@ void map_anim_0(MapTileAnimationWork* work) {
 }
 
 u8 map_anim_1(MapTileAnimationWork* work) {
-    const MapTileAnimationDef* a;
-    const MapTileAnimationTrack* e;
-    const MapTileAnimationFrame* f;
-    const MapTileAnimationFrame* f2;
+    const MapTileAnimationDef* def;
+    const MapTileAnimationTrack* track;
+    const MapTileAnimationFrame* frame;
+    const MapTileAnimationFrame* nextFrame;
     u8 i;
     u8* dst;
 
-    a = work->definition;
+    def = work->definition;
 
-    if (a == NULL) {
+    if (def == NULL) {
         return 1;
     }
 
-    for (i = work->firstTrack; i < (a = work->definition)->trackCount; i++) {
-        e = &a->tracks[i];
-        f = &e->frames[work->frameIndices[i]];
+    for (i = work->firstTrack; i < (def = work->definition)->trackCount; i++) {
+        track = &def->tracks[i];
+        frame = &track->frames[work->frameIndices[i]];
         work->frameTimers[i]++;
 
-        if (work->frameTimers[i] == f->duration) {
+        if (work->frameTimers[i] == frame->duration) {
             work->frameIndices[i]++;
 
-            if (work->frameIndices[i] == e->frameCount) {
+            if (work->frameIndices[i] == track->frameCount) {
                 work->frameIndices[i] = 0;
             }
 
-            f2 = &e->frames[work->frameIndices[i]];
+            nextFrame = &track->frames[work->frameIndices[i]];
             dst = (u8*)GetBgCharBase(3) + 0x7000;
-            RequestDma3Copy(e->tiles + f2->tileOffset, dst + e->destOffset, e->copySize);
+            RequestDma3Copy(track->tiles + nextFrame->tileOffset, dst + track->destOffset, track->copySize);
             work->frameTimers[i] = 0;
         }
     }
@@ -235,14 +235,14 @@ void CopyLinkPartnerDeckCards(u8 kind, u16* out) {
 }
 
 void ObtainCardIntoActiveDeck(u16 cardId) {
-    s16 v;
+    s16 card;
 
-    v = ObtainCard(cardId);
+    card = ObtainCard(cardId);
 
     if (gCardDefs[cardId].value + GetDeckCpCost(GetActiveDeckIndex()) <=
             gGameState.progression.cp &&
-        v != -1) {
-        AddCardToActiveDeck(v);
+        card != -1) {
+        AddCardToActiveDeck(card);
     }
 }
 
@@ -318,12 +318,12 @@ u8 IsCardCollectionFull() {
 }
 
 void ExpandCardCollectionForNewCard(u16 cardId) {
-    u16 v;
-    u8 n;
+    u16 kind;
+    u8 jiminyFlag;
 
-    v = gCardDefs[cardId & CARD_ID_MASK].kind;
+    kind = gCardDefs[cardId & CARD_ID_MASK].kind;
 
-    if (v > 0x61) {
+    if (kind > 0x61) {
         if (gCardCount > 999) {
             gCardCount = 999;
         }
@@ -331,268 +331,268 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
         return;
     }
 
-    switch (v) {
+    switch (kind) {
     case 0:
-        n = 119;
+        jiminyFlag = 119;
         break;
     case 8:
-        n = 127;
+        jiminyFlag = 127;
         break;
     case 1:
-        n = 120;
+        jiminyFlag = 120;
         break;
     case 2:
-        n = 121;
+        jiminyFlag = 121;
         break;
     case 3:
-        n = 122;
+        jiminyFlag = 122;
         break;
     case 4:
-        n = 123;
+        jiminyFlag = 123;
         break;
     case 5:
-        n = 124;
+        jiminyFlag = 124;
         break;
     case 6:
-        n = 125;
+        jiminyFlag = 125;
         break;
     case 7:
-        n = 126;
+        jiminyFlag = 126;
         break;
     case 9:
-        n = 128;
+        jiminyFlag = 128;
         break;
     case 10:
-        n = 129;
+        jiminyFlag = 129;
         break;
     case 11:
-        n = 130;
+        jiminyFlag = 130;
         break;
     case 12:
-        n = 131;
+        jiminyFlag = 131;
         break;
     case 13:
-        n = 132;
+        jiminyFlag = 132;
         break;
     case 16:
-        n = 133;
+        jiminyFlag = 133;
         break;
     case 14:
-        n = 134;
+        jiminyFlag = 134;
         break;
     case 15:
-        n = 135;
+        jiminyFlag = 135;
         break;
     case 18:
-        n = 136;
+        jiminyFlag = 136;
         break;
     case 19:
-        n = 137;
+        jiminyFlag = 137;
         break;
     case 20:
-        n = 138;
+        jiminyFlag = 138;
         break;
     case 21:
-        n = 139;
+        jiminyFlag = 139;
         break;
     case 22:
-        n = 140;
+        jiminyFlag = 140;
         break;
     case 23:
-        n = 141;
+        jiminyFlag = 141;
         break;
     case 24:
-        n = 142;
+        jiminyFlag = 142;
         break;
     case 25:
-        n = 143;
+        jiminyFlag = 143;
         break;
     case 26:
-        n = 144;
+        jiminyFlag = 144;
         break;
     case 27:
-        n = 145;
+        jiminyFlag = 145;
         break;
     case 28:
-        n = 146;
+        jiminyFlag = 146;
         break;
     case 29:
-        n = 147;
+        jiminyFlag = 147;
         break;
     case 30:
-        n = 148;
+        jiminyFlag = 148;
         break;
     case 31:
-        n = 149;
+        jiminyFlag = 149;
         break;
     case 32:
-        n = 150;
+        jiminyFlag = 150;
         break;
     case 33:
-        n = 151;
+        jiminyFlag = 151;
         break;
     case 34:
-        n = 152;
+        jiminyFlag = 152;
         break;
     case 35:
-        n = 153;
+        jiminyFlag = 153;
         break;
     case 36:
-        n = 154;
+        jiminyFlag = 154;
         break;
     case 37:
-        n = 155;
+        jiminyFlag = 155;
         break;
     case 38:
-        n = 156;
+        jiminyFlag = 156;
         break;
     case 47:
-        n = 164;
+        jiminyFlag = 164;
         break;
     case 50:
-        n = 165;
+        jiminyFlag = 165;
         break;
     case 51:
-        n = 166;
+        jiminyFlag = 166;
         break;
     case 52:
-        n = 167;
+        jiminyFlag = 167;
         break;
     case 53:
-        n = 168;
+        jiminyFlag = 168;
         break;
     case 61:
-        n = 169;
+        jiminyFlag = 169;
         break;
     case 73:
-        n = 170;
+        jiminyFlag = 170;
         break;
     case 74:
-        n = 171;
+        jiminyFlag = 171;
         break;
     case 48:
-        n = 172;
+        jiminyFlag = 172;
         break;
     case 54:
-        n = 173;
+        jiminyFlag = 173;
         break;
     case 55:
-        n = 174;
+        jiminyFlag = 174;
         break;
     case 56:
-        n = 175;
+        jiminyFlag = 175;
         break;
     case 57:
-        n = 176;
+        jiminyFlag = 176;
         break;
     case 59:
-        n = 177;
+        jiminyFlag = 177;
         break;
     case 60:
-        n = 178;
+        jiminyFlag = 178;
         break;
     case 62:
-        n = 179;
+        jiminyFlag = 179;
         break;
     case 64:
-        n = 180;
+        jiminyFlag = 180;
         break;
     case 65:
-        n = 181;
+        jiminyFlag = 181;
         break;
     case 66:
-        n = 182;
+        jiminyFlag = 182;
         break;
     case 67:
-        n = 183;
+        jiminyFlag = 183;
         break;
     case 68:
-        n = 184;
+        jiminyFlag = 184;
         break;
     case 70:
-        n = 185;
+        jiminyFlag = 185;
         break;
     case 71:
-        n = 186;
+        jiminyFlag = 186;
         break;
     case 72:
-        n = 187;
+        jiminyFlag = 187;
         break;
     case 49:
-        n = 188;
+        jiminyFlag = 188;
         break;
     case 58:
-        n = 189;
+        jiminyFlag = 189;
         break;
     case 63:
-        n = 190;
+        jiminyFlag = 190;
         break;
     case 69:
-        n = 191;
+        jiminyFlag = 191;
         break;
     case 76:
-        n = 192;
+        jiminyFlag = 192;
         break;
     case 77:
-        n = 193;
+        jiminyFlag = 193;
         break;
     case 75:
-        n = 194;
+        jiminyFlag = 194;
         break;
     case 81:
-        n = 204;
+        jiminyFlag = 204;
         break;
     case 78:
-        n = 195;
+        jiminyFlag = 195;
         break;
     case 86:
-        n = 200;
+        jiminyFlag = 200;
         break;
     case 80:
-        n = 197;
+        jiminyFlag = 197;
         break;
     case 79:
-        n = 201;
+        jiminyFlag = 201;
         break;
     case 85:
-        n = 198;
+        jiminyFlag = 198;
         break;
     case 87:
-        n = 199;
+        jiminyFlag = 199;
         break;
     case 89:
-        n = 203;
+        jiminyFlag = 203;
         break;
     case 88:
-        n = 202;
+        jiminyFlag = 202;
         break;
     case 84:
-        n = 196;
+        jiminyFlag = 196;
         break;
     case 90:
-        n = 247;
+        jiminyFlag = 247;
         break;
     case 91:
-        n = 206;
+        jiminyFlag = 206;
         break;
     case 92:
-        n = 205;
+        jiminyFlag = 205;
         break;
     case 93:
-        n = 207;
+        jiminyFlag = 207;
         break;
     case 94:
-        n = 208;
+        jiminyFlag = 208;
         break;
     case 82:
     case 83:
-        n = 246;
+        jiminyFlag = 246;
         break;
     case 96:
-        n = 248;
+        jiminyFlag = 248;
         break;
     case 97:
-        n = 249;
+        jiminyFlag = 249;
         break;
     default:
         if (gCardCount > 999) {
@@ -602,7 +602,7 @@ void ExpandCardCollectionForNewCard(u16 cardId) {
         return;
     }
 
-    if (!IsJiminyFlagSet(n)) {
+    if (!IsJiminyFlagSet(jiminyFlag)) {
         gCardCount++;
     }
 

@@ -59,7 +59,7 @@ const s16 gRikuDeckValueGridY[5] = { 80, 88, 96, 104, 112 };
 static const u16 sRikuDeckRowY[4] = { 45, 93, 141, 30 };
 
 static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
-    u16 v;
+    u16 rowY;
 
     work->resultOut = resultOut;
     SetBgMode0();
@@ -143,11 +143,11 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->tiles6 = LoadObjTiles(gDeckMenuBarTiles, 0x620);
     work->palette3 = LoadObjPalette(gDeckTitleBannerPalette, 32);
     work->unk_4BC = 79;
-    v = sRikuDeckRowY[work->deckIndex];
-    work->unk_4BE = v;
+    rowY = sRikuDeckRowY[work->deckIndex];
+    work->unk_4BE = rowY;
     work->unk_4C0 = 225;
-    v = sRikuDeckRowY[work->deckIndex];
-    work->unk_4C2 = v;
+    rowY = sRikuDeckRowY[work->deckIndex];
+    work->unk_4C2 = rowY;
     work->unk_503 = 0;
     work->inputDelay = 0;
     work->textSlotCount = 0;
@@ -171,12 +171,12 @@ void DrawRikuCardDescription(RikuDeckMenuWork* work) {
 }
 
 void LoadRikuCardDescriptionText(RikuDeckMenuWork* work, u16 card) {
-    const CardDef* d;
-    void* s;
+    const CardDef* def;
+    void* description;
 
-    d = &gCardDefs[card];
-    s = gCardKindDescriptions[d->kind];
-    work->textSlotCount5 = LoadTextSlots(LANGSTR(s), work->textSlots5);
+    def = &gCardDefs[card];
+    description = gCardKindDescriptions[def->kind];
+    work->textSlotCount5 = LoadTextSlots(LANGSTR(description), work->textSlots5);
 }
 
 u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* task) {
@@ -459,20 +459,20 @@ u8 UpdateRikuDeckMenuStartSlideOut(RikuDeckMenuWork* work, void* task) {
 }
 
 u8 UpdateRikuDeckMenuSlideOut(RikuDeckMenuWork* work, void* task) {
-    u8* p;
+    u8* slideTimer;
 
-    p = &work->bannerSlideTimer;
+    slideTimer = &work->bannerSlideTimer;
 
-    if ((s8)*p > 0) {
-        ApproachValue(&work->x7, -0x8000, (s8)*p);
-        (*p)--;
+    if ((s8)*slideTimer > 0) {
+        ApproachValue(&work->x7, -0x8000, (s8)*slideTimer);
+        (*slideTimer)--;
     } else {
-        p = &work->barSlideTimer;
+        slideTimer = &work->barSlideTimer;
 
-        if ((s8)*p > 0) {
-            ApproachValue(&work->y5, -0x800, (s8)*p);
-            ApproachValue(&work->y6, 0xA000, (s8)*p);
-            (*p)--;
+        if ((s8)*slideTimer > 0) {
+            ApproachValue(&work->y5, -0x800, (s8)*slideTimer);
+            ApproachValue(&work->y6, 0xA000, (s8)*slideTimer);
+            (*slideTimer)--;
         } else {
             FadeStartOut(FADE_MODE_BLACK, 4);
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateRikuDeckMenuFadeOut);
@@ -715,18 +715,18 @@ DeckCard2Work* GetRikuCardAtCursor(RikuDeckMenuWork* work) {
 }
 
 void DrawRikuDeckCategoryCount(u8 count, u8 category) {
-    u8 d[2];
+    u8 digits[2];
     u8* base;
 
-    d[0] = count / 10;
-    d[1] = count - (u8)(count / 10) * 10;
+    digits[0] = count / 10;
+    digits[1] = count - (u8)(count / 10) * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[0] + 1) * 32], base + (category * 64 + 0x360), 32);
-    RequestDma3Copy(&gDeckCategoryDigitTiles[(d[1] + 1) * 32], base + (category * 64 + 0x360) + 32, 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(digits[0] + 1) * 32], base + (category * 64 + 0x360), 32);
+    RequestDma3Copy(&gDeckCategoryDigitTiles[(digits[1] + 1) * 32], base + (category * 64 + 0x360) + 32, 32);
 }
 
 void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
-    u16 t;
+    u16 handFlags;
 
     switch (work->view) {
     case DECK_MENU_VIEW_DECK_GRID:
@@ -745,24 +745,24 @@ void SetRikuDeckMenuHandAnim(RikuDeckMenuWork* work) {
     case DECK_MENU_VIEW_DECK_SELECT:
     case DECK_MENU_VIEW_COMMANDS:
         AnimStart(&work->anim2, 2, ANIM_FLAG_LOOP);
-        t = work->handFlags | SPRITE_FLAG_HFLIP;
-        work->handFlags = t;
+        handFlags = work->handFlags | SPRITE_FLAG_HFLIP;
+        work->handFlags = handFlags;
         break;
     }
 }
 
 void DrawRikuDeckCardCount(u8 deck) {
-    u8 d[2];
-    u8 e[2];
+    u8 countDigits[2];
+    u8 maxDigits[2];
     u8* base;
     u16 n;
 
     base = NULL;
     n = GetDeckCardCount(deck);
-    d[0] = n / 10;
-    d[1] = n - (u16)(n / 10) * 10;
-    e[0] = 9;
-    e[1] = 9;
+    countDigits[0] = n / 10;
+    countDigits[1] = n - (u16)(n / 10) * 10;
+    maxDigits[0] = 9;
+    maxDigits[1] = 9;
 
     switch (deck) {
     case 0:
@@ -777,40 +777,40 @@ void DrawRikuDeckCardCount(u8 deck) {
     }
 
 #ifdef VERSION_EU
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x2C00, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x2C20, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x2C40, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x2C60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[0] + 1) * 32], base + 0x2C00, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[1] + 1) * 32], base + 0x2C20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[0] + 1) * 32], base + 0x2C40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[1] + 1) * 32], base + 0x2C60, 32);
 #else
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x20, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x40, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x60, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x80, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[0] + 1) * 32], base + 0x20, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(countDigits[1] + 1) * 32], base + 0x40, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[0] + 1) * 32], base + 0x60, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(maxDigits[1] + 1) * 32], base + 0x80, 32);
 #endif
 }
 
 void DrawRikuCardTotals() {
-    u8 d[3];
-    u8 e[3];
-    u16 a;
-    u16 b;
+    u8 inDeckDigits[3];
+    u8 collectionDigits[3];
+    u16 inDeckCount;
+    u16 collectionCount;
     u8* base;
 
-    a = CountCardsInDecks();
-    b = CountCollectionCards();
-    d[0] = a / 100;
-    d[1] = a / 10 - d[0] * 10;
-    d[2] = a - d[0] * 100 - d[1] * 10;
-    e[0] = b / 100;
-    e[1] = b / 10 - e[0] * 10;
-    e[2] = b - e[0] * 100 - e[1] * 10;
+    inDeckCount = CountCardsInDecks();
+    collectionCount = CountCollectionCards();
+    inDeckDigits[0] = inDeckCount / 100;
+    inDeckDigits[1] = inDeckCount / 10 - inDeckDigits[0] * 10;
+    inDeckDigits[2] = inDeckCount - inDeckDigits[0] * 100 - inDeckDigits[1] * 10;
+    collectionDigits[0] = collectionCount / 100;
+    collectionDigits[1] = collectionCount / 10 - collectionDigits[0] * 10;
+    collectionDigits[2] = collectionCount - collectionDigits[0] * 100 - collectionDigits[1] * 10;
     base = GetBgCharBase(3);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[0] + 1) * 32], base + 0x2A0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[1] + 1) * 32], base + 0x2C0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(d[2] + 1) * 32], base + 0x2E0, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[0] + 1) * 32], base + 0x300, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[1] + 1) * 32], base + 0x320, 32);
-    RequestDma3Copy(&gDeckCountDigitTiles[(e[2] + 1) * 32], base + 0x340, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[0] + 1) * 32], base + 0x2A0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[1] + 1) * 32], base + 0x2C0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(inDeckDigits[2] + 1) * 32], base + 0x2E0, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[0] + 1) * 32], base + 0x300, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[1] + 1) * 32], base + 0x320, 32);
+    RequestDma3Copy(&gDeckCountDigitTiles[(collectionDigits[2] + 1) * 32], base + 0x340, 32);
 }
 
 void LoadRikuDeckNameTexts(RikuDeckMenuWork* work) {
@@ -889,7 +889,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
     const CardDef* def;
     void* dst;
     u16 id;
-    u32 t;
+    u32 defIndex;
 
     id = 0xFFFF;
     node = ListPoolFirst(&work->pool);
@@ -914,8 +914,8 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
             work->gfx3 = AnimGetGfx(&work->anim);
         }
 
-        t = id & CARD_ID_MASK;
-        def = &gCardDefs[t];
+        defIndex = id & CARD_ID_MASK;
+        def = &gCardDefs[defIndex];
         work->tiles7 = LoadObjTiles(gCardBacks[def->category].tiles, 768);
         work->tiles8 = LoadObjTiles(def->tiles, 512);
         work->palette6 = LoadObjPalette(def->palette, 32);
@@ -931,8 +931,8 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         DrawRikuCpCost(def->cpCost);
         dst = gUnk_05000160;
         LoadPalette(&gCardCategoryPalettes[def->category * 16], dst, 32);
-        LoadRikuCardNameText(work, t);
-        LoadRikuCardDescriptionText(work, t);
+        LoadRikuCardNameText(work, defIndex);
+        LoadRikuCardDescriptionText(work, defIndex);
         work->previewShown = 1;
     } else {
         DrawRikuCpCost(0);
@@ -941,16 +941,16 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
 }
 
 void DrawRikuCpCost(u8 cpCost) {
-    u8 v[2];
+    u8 digits[2];
     u8* base;
 
     base = GetBgCharBase(3);
 
     if (cpCost != 0) {
-        v[0] = cpCost / 10;
-        v[1] = cpCost - v[0] * 10;
-        RequestDma3Copy(&gDeckValueDigitTiles[(v[0] + 3) * 32], base + 0xCE0, 32);
-        RequestDma3Copy(&gDeckValueDigitTiles[(v[1] + 3) * 32], base + 0xD00, 32);
+        digits[0] = cpCost / 10;
+        digits[1] = cpCost - digits[0] * 10;
+        RequestDma3Copy(&gDeckValueDigitTiles[(digits[0] + 3) * 32], base + 0xCE0, 32);
+        RequestDma3Copy(&gDeckValueDigitTiles[(digits[1] + 3) * 32], base + 0xD00, 32);
     } else {
         RequestDma3Copy(gDeckValueZeroTiles, base + 0xCE0, 32);
         RequestDma3Copy(gDeckValueZeroTiles, base + 0xD00, 32);
@@ -958,7 +958,7 @@ void DrawRikuCpCost(u8 cpCost) {
 }
 
 void FreeRikuCollectionEntries(RikuDeckMenuWork* work) {
-    CardKindEntry** p;
+    CardKindEntry** entries;
     u16 i;
 
     if (work->entries != NULL) {
@@ -966,9 +966,9 @@ void FreeRikuCollectionEntries(RikuDeckMenuWork* work) {
             EwramFree(work->entries[i].indices);
         }
 
-        p = &work->entries;
-        EwramFree(*p);
-        *p = NULL;
+        entries = &work->entries;
+        EwramFree(*entries);
+        *entries = NULL;
     }
 }
 

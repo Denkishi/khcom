@@ -142,7 +142,7 @@ u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette
 
             do {
                 tileCount = GetObjTileCount(((ObjTileListEntry*)sprite)->attr0, ((ObjTileListEntry*)sprite)->attr1);
-                RequestDma3Copy(((ObjTiles*)obj)->src + ((((ObjTileListEntry*)sprite)->tile & 0x3FF) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), tileCount << 5);
+                RequestDma3Copy(((ObjTiles*)obj)->src + ((((ObjTileListEntry*)sprite)->tile & OAM_TILE_MASK) << 5), (void*)(((((ObjTiles*)obj)->index + base) << 5) + OBJ_VRAM0), tileCount << 5);
                 base += tileCount;
                 sprite = (u16*)sprite + 3;
             } while (--i);
@@ -757,7 +757,7 @@ void UpdateSpriteOam() {
     ObjTiles* tiles;
     u32 flip;
     u32 flags;
-    s16 yMask = 255;
+    s16 yMask = OAM_Y_MASK;
 
     if (gSpriteWork->oamUpdatesPaused) {
         return;
@@ -799,17 +799,17 @@ void UpdateSpriteOam() {
             attr0 = *parts++;
             attr1 = *parts++;
             attr2 = *parts++;
-            y = attr0 & 0xFF;
+            y = attr0 & OAM_Y_MASK;
 
             if (y & 0x80) {
                 y = yMask ^ y;
                 y = 0xFFFF ^ y;
             }
 
-            x = attr1 & 0x1FF;
+            x = attr1 & OAM_X_MASK;
 
             if (x & 0x100) {
-                x = 0x1FF ^ x;
+                x = OAM_X_MASK ^ x;
                 x = 0xFFFF ^ x;
             }
 
@@ -879,8 +879,8 @@ void UpdateSpriteOam() {
                 continue;
             }
 
-            oam[0] = (attr0 & 0xFF00) | (y & 0xFF);
-            oam[1] = (attr1 & 0xFE00) | (x & 0x1FF);
+            oam[0] = (attr0 & ~OAM_Y_MASK) | (y & OAM_Y_MASK);
+            oam[1] = (attr1 & ~OAM_X_MASK) | (x & OAM_X_MASK);
             tiles = entry->tiles;
 
             if (tiles->allocated) {
@@ -889,7 +889,7 @@ void UpdateSpriteOam() {
                 tileOffset += GetObjTileCount(oam[0], oam[1]);
             } else {
                 palette = (attr2 >> 12) + ((ObjPalette*)entry->palette)->index;
-                oam[2] = ((attr2 & 0xFFF) + tiles->index) | (palette << 12);
+                oam[2] = ((attr2 & ~OAM_PALETTE_MASK) + tiles->index) | (palette << 12);
             }
 
             oam[0] |= (entry->flags & SPRITE_FLAG_MOSAIC) << 9;
@@ -1008,19 +1008,19 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
         attr0 = *oam++;
         attr1 = *oam;
         oam += 2;
-        dx = attr1 & 0x1FF;
+        dx = attr1 & OAM_X_MASK;
         raw = dx;
 
         if (raw & 0x100) {
-            dx = raw ^ 0x1FF;
+            dx = raw ^ OAM_X_MASK;
             dx = ~dx;
         }
 
-        dy = attr0 & 0xFF;
+        dy = attr0 & OAM_Y_MASK;
         raw = dy;
 
         if (raw & 0x80) {
-            dy = raw ^ 0xFF;
+            dy = raw ^ OAM_Y_MASK;
             dy = ~dy;
         }
 
@@ -1161,7 +1161,7 @@ u8 UpdateSpriteFrameTiles(ObjTiles* tiles, u16* sprite, void* src) {
 
                 do {
                     tileCount = GetObjTileCount(sprite[0], sprite[1]);
-                    RequestDma3Copy(tiles->src + ((sprite[2] & 0x3FF) << 5),
+                    RequestDma3Copy(tiles->src + ((sprite[2] & OAM_TILE_MASK) << 5),
                                     (void*)(((tiles->index + tileOffset) << 5) + OBJ_VRAM0), tileCount * 32);
                     tileOffset = tileOffset + tileCount;
                     sprite += 3;

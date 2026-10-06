@@ -32,6 +32,7 @@
 #include "bos_pc.h"
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "gba/oam.h"
 
 static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gBosPcUnusedSlamFrame0,
@@ -5301,7 +5302,7 @@ void BosPcDraw(PcWork* work) {
         } else {
             def = gBosPcLayerFrames[cmd->gfxIndex];
             oam = &work->oam[cmd->layer];
-            mask = 0xFF;
+            mask = OAM_Y_MASK;
             oamY = (u8)def->attr0;
 
             if (oamY & 0x80) {
@@ -5313,8 +5314,8 @@ void BosPcDraw(PcWork* work) {
             y = y + sy;
 
             if ((u16)(y + 7) <= 0xAE) {
-                oam->attr[oam->count * 3 + 1] = (def->attr0 & 0xFF00) | (((u16)(def->attr0 + 0x40) + cmd->y) & mask);
-                oam->attr[oam->count * 3 + 2] = (def->attr1 & 0xFE00) | ((def->attr1 + cmd->x) & 0x1FF);
+                oam->attr[oam->count * 3 + 1] = (def->attr0 & ~OAM_Y_MASK) | (((u16)(def->attr0 + 0x40) + cmd->y) & mask);
+                oam->attr[oam->count * 3 + 2] = (def->attr1 & ~OAM_X_MASK) | ((def->attr1 + cmd->x) & OAM_X_MASK);
                 oam->attr[oam->count * 3 + 3] = def->attr2;
                 oam->count++;
             }

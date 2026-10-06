@@ -645,7 +645,7 @@ void PrizeBoss_2(BossPrizeWork* work) {
                work->priority);
     gfx = gCardValueDigitFrames[work->stat.value];
 
-    if (def->category != 3) {
+    if (def->category != CARD_CATEGORY_ENEMY) {
         DrawSprite(work->x, (u16)work->y - 8, gfx, work->tiles4, work->palette2, affine, pal,
                    work->priority - 1);
     }

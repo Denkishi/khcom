@@ -378,7 +378,7 @@ void MsChargeDrawValueCounts() {
             LoadDecimalDigitTiles(0, gMsChargeValueCountZeroTiles, (u8*)GetBgCharBase(0) + (i * 0x40 + 0x340), 0x20, 2);
             LoadPalette(gMsChargeValueEmptyPalette, (void*)(BG_PLTT + 7 * PLTT_SIZE_4BPP + 0xC + i * 2), sizeof(gMsChargeValueEmptyPalette[0]));
         }
-    } else if (card->category == 3) {
+    } else if (card->category == CARD_CATEGORY_ENEMY) {
         if (GetMsChargeTabCount(sMsChargeTab) > 0) {
 #ifdef VERSION_EU
             LoadBgMap(1, sMsChargeEnemyCountBgMapsByLanguage[gLanguage], 0x500);
@@ -896,7 +896,7 @@ void MsChargeHandleValueInput() {
         }
     }
 
-    if (card->category == 3) {
+    if (card->category == CARD_CATEGORY_ENEMY) {
         sMsChargeValueCol = oldCol;
         sMsChargeValueRow = oldRow;
     }
@@ -1038,7 +1038,7 @@ void MsChargeDraw() {
         case MS_CHARGE_MENU_STATE_VALUE:
             card = GetMsChargeSelectedCard();
 
-            if (card->category == 3) {
+            if (card->category == CARD_CATEGORY_ENEMY) {
                 col = 0;
                 row = 0;
             } else {
@@ -1185,7 +1185,7 @@ void mode_ms_charge_0() {
 #endif
     , 0x500);
 
-    if (GetMsChargeSelectedCard()->category == 3) {
+    if (GetMsChargeSelectedCard()->category == CARD_CATEGORY_ENEMY) {
         LoadBgMap(1,
 #ifdef VERSION_EU
         sMsChargeEnemyCountBgMapsByLanguage[gLanguage]

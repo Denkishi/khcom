@@ -37,6 +37,13 @@ enum CardDefFlag {
     CARD_DEF_FLAG_GIMMICK = 0x10
 };
 
+enum CardCategory {
+    CARD_CATEGORY_ATTACK,
+    CARD_CATEGORY_MAGIC,
+    CARD_CATEGORY_ITEM,
+    CARD_CATEGORY_ENEMY
+};
+
 typedef struct CardDef {
     void* gfx;
     void* tiles;
@@ -63,6 +70,14 @@ typedef struct CardBack {
     void* tiles2;
     void* tiles3;
 } CardBack;
+
+enum CardBackColor {
+    CARD_BACK_RED,
+    CARD_BACK_BLUE,
+    CARD_BACK_GREEN,
+    CARD_BACK_BLACK,
+    CARD_BACK_WHITE
+};
 
 typedef struct CardStat {
     u16 kind;

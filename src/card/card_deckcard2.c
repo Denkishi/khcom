@@ -67,7 +67,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
         work->cardDef = &gCardDefs[work->args.cardId & CARD_ID_MASK];
 
         if (work->cardDef->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
-            work->cardBack = &gCardBacks[3];
+            work->cardBack = &gCardBacks[CARD_CATEGORY_ENEMY];
         } else {
             work->cardBack = &gCardBacks[work->cardDef->category];
         }
@@ -126,7 +126,7 @@ void DeckCard2_2(DeckCard2Work* work) {
         }
     }
 
-    if (work->args.panel == 0 && work->cardDef->category != 3) {
+    if (work->args.panel == 0 && work->cardDef->category != CARD_CATEGORY_ENEMY) {
         DrawSprite((work->x >> 8) - 3, (work->y >> 8) - 4, gCardValueDigitFrames[work->cardDef->value], work->tiles2, work->palette2, NULL, 0, 0x31);
     }
 }

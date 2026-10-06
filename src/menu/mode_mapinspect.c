@@ -111,7 +111,9 @@ static MapCardCategoryDef sMapCardCategoryDefs[5] = {
 #ifdef VERSION_EU
 static const u16 sMapInspectBarTileSizesByLanguage[5] = {2752, 2816, 2816, 2816, 2816};
 #endif
-static const u16 sMapCardCategoryTypes[4] = {2, 1, 3, 4};
+#define MAP_CARD_INVENTORY_EMPTY 27
+
+static const u16 sMapCardCategoryTypes[4] = {MAP_CARD_COLOR_RED, MAP_CARD_COLOR_GREEN, MAP_CARD_COLOR_BLUE, MAP_CARD_COLOR_GOLD};
 
 enum MapInspectState {
     MAP_INSPECT_STATE_BARS_IN,
@@ -527,7 +529,7 @@ void MapInspectRemoveEntry(MapCardInventoryEntry* entry) {
     category = entry->category;
     DmaCopy16(3, entry + 1, entry, (26 - GetMapInspectSelectedIndex()) * sizeof(MapCardInventoryEntry));
     DmaFill16(3, 0, &sMapCardInventoryEntries[26], sizeof(MapCardInventoryEntry));
-    sMapCardInventoryEntries[26].cardType = 27;
+    sMapCardInventoryEntries[26].cardType = MAP_CARD_INVENTORY_EMPTY;
 
     for (j = category + 1; j <= 3; j++) {
         sMapInspectCategoryStart[j]--;
@@ -571,7 +573,7 @@ void MapInspectBuildInventory() {
     DmaFill16(3, 0, sMapCardInventoryEntries, 0x2F4);
 
     for (i = 0; i <= 26; i++) {
-        sMapCardInventoryEntries[i].cardType = 27;
+        sMapCardInventoryEntries[i].cardType = MAP_CARD_INVENTORY_EMPTY;
     }
 
     entryCount = 0;
@@ -591,7 +593,7 @@ void MapInspectBuildInventory() {
                     n = gMapCardCounts[(u16)(k * 10 + i)];
 
                     if (n != 0) {
-                        if (color != 4) {
+                        if (color != MAP_CARD_COLOR_GOLD) {
                             sMapInspectCardTotal += n;
                         }
 

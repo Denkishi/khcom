@@ -258,10 +258,10 @@ void CreateCardBattleState() {
     gCardBattleState->reloadGaugeFull[0] = 0;
     gCardBattleState->reloadGaugeFull[1] = 0;
     TaskPoolInit(&gCardBattleState->tasks, 6);
-    gCardBattleState->tiles[0] = LoadObjTiles(gCardBacks[0].tiles, 640);
-    gCardBattleState->tiles[1] = LoadObjTiles(gCardBacks[1].tiles, 640);
-    gCardBattleState->tiles[2] = LoadObjTiles(gCardBacks[2].tiles, 640);
-    gCardBattleState->tiles[3] = LoadObjTiles(gCardBacks[3].tiles, 640);
+    gCardBattleState->tiles[CARD_CATEGORY_ATTACK] = LoadObjTiles(gCardBacks[CARD_CATEGORY_ATTACK].tiles, 640);
+    gCardBattleState->tiles[CARD_CATEGORY_MAGIC] = LoadObjTiles(gCardBacks[CARD_CATEGORY_MAGIC].tiles, 640);
+    gCardBattleState->tiles[CARD_CATEGORY_ITEM] = LoadObjTiles(gCardBacks[CARD_CATEGORY_ITEM].tiles, 640);
+    gCardBattleState->tiles[CARD_CATEGORY_ENEMY] = LoadObjTiles(gCardBacks[CARD_CATEGORY_ENEMY].tiles, 640);
     gCardBattleState->tiles5 = LoadObjTiles(gCardValueDigitTiles, 320);
     gCardBattleState->tiles6 = LoadObjTiles(gCardPremiumValueDigitTiles, sizeof(gCardPremiumValueDigitTiles));
     gCardBattleState->tiles7 = LoadObjTiles(gCardModifiedValueDigitTiles, sizeof(gCardModifiedValueDigitTiles));
@@ -720,7 +720,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
             if (!(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
                 if (work->stockCount == 3) {
                     UseSoraStock(work);
-                } else if (sSoraSelectedCard->cardDef->category == 3) {
+                } else if (sSoraSelectedCard->cardDef->category == CARD_CATEGORY_ENEMY) {
                     m4aSongNumStart(SONG_SYS_BEEP);
                 } else if (work->reloadPending[work->listIndex] == 0) {
                     if (!(sSoraSelectedCard->flags & CARD_DISP_FLAG_NO_CARD)) {
@@ -746,7 +746,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
         case CARD_REQUEST_USE_CARD:
             sSoraCardRequest = CARD_REQUEST_NONE;
 
-            if (sSoraSelectedCard->cardDef->category != 3 && !(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
+            if (sSoraSelectedCard->cardDef->category != CARD_CATEGORY_ENEMY && !(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
                 if (work->reloadPending[work->listIndex] == 0) {
                     if (sSoraSelectedCard->cardDef->flags & CARD_DEF_FLAG_GIMMICK) {
                         UseSoraGimmickCard(work);
@@ -760,7 +760,7 @@ s32 cardbattleSora_1(CardBattleWork* work, Task* task) {
                         m4aSongNumStart(SONG_SYS_BEEP);
                     }
                 }
-            } else if (sSoraSelectedCard->cardDef->category == 3 && !(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
+            } else if (sSoraSelectedCard->cardDef->category == CARD_CATEGORY_ENEMY && !(sSoraSelectedCard->flags & CARD_DISP_FLAG_RELOAD_CARD)) {
                 UseSoraHeartlessCard(work);
             } else if (gGameState.flags & GAME_FLAG_RIKU) {
                 RemoveSoraCardDisplays(work);
@@ -1333,10 +1333,10 @@ static void cardbattle_3(CardBattleWork* work) {
     ReleaseObjPalette(gCardBattleState->palette2);
     ReleaseObjTiles(gCardBattleState->premiumTiles);
     ReleaseObjTiles(gCardBattleState->premiumTiles2);
-    ReleaseObjTiles(gCardBattleState->tiles[0]);
-    ReleaseObjTiles(gCardBattleState->tiles[1]);
-    ReleaseObjTiles(gCardBattleState->tiles[2]);
-    ReleaseObjTiles(gCardBattleState->tiles[3]);
+    ReleaseObjTiles(gCardBattleState->tiles[CARD_CATEGORY_ATTACK]);
+    ReleaseObjTiles(gCardBattleState->tiles[CARD_CATEGORY_MAGIC]);
+    ReleaseObjTiles(gCardBattleState->tiles[CARD_CATEGORY_ITEM]);
+    ReleaseObjTiles(gCardBattleState->tiles[CARD_CATEGORY_ENEMY]);
     EwramFree(gCardBattleState);
     gCardBattleState = NULL;
     ReleaseObjTiles(work->tiles);
@@ -1835,7 +1835,7 @@ u16 CountRemainingAttackCards(CardBattleWork* work, u8 listIndex) {
 
         if (!slots[i].removed) {
             if (slots[i].cardId != CARD_ID_RELOAD) {
-                if (gCardDefs[slots[i].cardId & CARD_ID_MASK].category == 0) {
+                if (gCardDefs[slots[i].cardId & CARD_ID_MASK].category == CARD_CATEGORY_ATTACK) {
                     count++;
                 }
             }
@@ -2283,7 +2283,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
     skip = FALSE;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ATTACK &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -2299,7 +2299,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
 
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
-                if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
+                if (gCardBattleState->activeCards[k]->cardDef->category == CARD_CATEGORY_ITEM &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
                     skip = TRUE;
                 }
@@ -2311,7 +2311,7 @@ void TrySoraCardBreak(CardBattleWork* work) {
             skip = TRUE;
         }
 
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ITEM &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -3107,7 +3107,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
     skip = FALSE;
 
     if (gBtlWork->flags & (BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 0 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER && gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ATTACK &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -3123,7 +3123,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
 
         if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
             for (k = 0; k < gCardBattleState->activeCardCount; k++) {
-                if (gCardBattleState->activeCards[k]->cardDef->category == 2 &&
+                if (gCardBattleState->activeCards[k]->cardDef->category == CARD_CATEGORY_ITEM &&
                     !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
                     skip = TRUE;
                 }
@@ -3135,7 +3135,7 @@ void TrySoraStockBreak(CardBattleWork* work) {
             skip = TRUE;
         }
 
-        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == 2 &&
+        if (gRikuBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER && gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ITEM &&
             !gCardBattleState->rikuStockActive) {
             skip = TRUE;
         }
@@ -3389,7 +3389,7 @@ u8 CountSoraCardDisplaysByCategory(CardBattleWork* work, u8 kind) {
 
     while (node != NULL) {
         if ((node->flags & (CARD_DISP_FLAG_NO_CARD | CARD_DISP_FLAG_RELOAD_GAUGE)) == 0) {
-            if (kind == 2) {
+            if (kind == CARD_CATEGORY_ITEM) {
                 count++;
             } else if (node->cardDef->category == kind) {
                 count++;
@@ -3725,7 +3725,7 @@ u8 UpdateSoraAutoCycle(CardBattleWork* work, void* task) {
 
 u8 CanUseSoraSelectedCard() {
     if (gBtlWork->hcEffect == HC_EFFECT_MAGIC_BOOST) {
-        if (sSoraSelectedCard->cardDef->category != 1) {
+        if (sSoraSelectedCard->cardDef->category != CARD_CATEGORY_MAGIC) {
             return TRUE;
         }
 
@@ -3735,7 +3735,7 @@ u8 CanUseSoraSelectedCard() {
 
         return FALSE;
     } else if (gBtlWork->hcEffect == HC_EFFECT_SUMMON_BOOST) {
-        if (sSoraSelectedCard->cardDef->category != 1) {
+        if (sSoraSelectedCard->cardDef->category != CARD_CATEGORY_MAGIC) {
             return TRUE;
         }
 
@@ -3788,11 +3788,11 @@ void RestoreCardsForPotion(CardBattleWork* work) {
             if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
-                if (category == 0) {
+                if (category == CARD_CATEGORY_ATTACK) {
                     if (!slots[i].removed) {
                         slots[i].unk_06 = 0;
                     }
-                } else if (category == 1) {
+                } else if (category == CARD_CATEGORY_MAGIC) {
                     if (slots[i].removed == TRUE || slots[i].stocked == TRUE || slots[i].used == TRUE) {
                         slots[i].unk_06 = 1;
                     }
@@ -3817,10 +3817,10 @@ void RestoreCardsForHiPotion(CardBattleWork* work) {
             if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
-                if (category == 0) {
+                if (category == CARD_CATEGORY_ATTACK) {
                     slots[i].removed = FALSE;
                     slots[i].unk_06 = 0;
-                } else if (category != 2) {
+                } else if (category != CARD_CATEGORY_ITEM) {
                     if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
@@ -3845,10 +3845,10 @@ void RestoreCardsForMegaPotion(CardBattleWork* work) {
             if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
-                if (category == 0) {
+                if (category == CARD_CATEGORY_ATTACK) {
                     slots[i].unk_06 = 0;
                     slots[i].removed = FALSE;
-                } else if (category != 2) {
+                } else if (category != CARD_CATEGORY_ITEM) {
                     if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
@@ -3873,11 +3873,11 @@ void RestoreCardsForEther(CardBattleWork* work) {
             if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
-                if (category == 1) {
+                if (category == CARD_CATEGORY_MAGIC) {
                     if (!slots[i].removed) {
                         slots[i].unk_06 = 0;
                     }
-                } else if (category != 2) {
+                } else if (category != CARD_CATEGORY_ITEM) {
                     if (slots[i].removed == TRUE || slots[i].stocked == TRUE || slots[i].used == TRUE) {
                         slots[i].unk_06 = 1;
                     }
@@ -3902,10 +3902,10 @@ void RestoreCardsForMegaEther(CardBattleWork* work) {
             if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
-                if (category == 1) {
+                if (category == CARD_CATEGORY_MAGIC) {
                     slots[i].unk_06 = 0;
                     slots[i].removed = FALSE;
-                } else if (category != 2) {
+                } else if (category != CARD_CATEGORY_ITEM) {
                     if (slots[i].used == TRUE || slots[i].removed == TRUE || slots[i].stocked == TRUE) {
                         slots[i].unk_06 = 1;
                     }
@@ -3924,7 +3924,7 @@ void RestoreCardsForElixir(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[CARD_LIST_MAIN]; i++) {
         if (slots[i].cardId != CARD_ID_NONE) {
             if (slots[i].cardId != CARD_ID_RELOAD) {
-                if (gCardDefs[slots[i].cardId & CARD_ID_MASK].category != 2) {
+                if (gCardDefs[slots[i].cardId & CARD_ID_MASK].category != CARD_CATEGORY_ITEM) {
                     slots[i].unk_06 = 0;
                     slots[i].removed = FALSE;
                 }
@@ -4185,7 +4185,7 @@ static void card_2(CardDisplayWork* work) {
         DrawSprite(work->x >> 8, y, gfx, work->tiles, work->palette, affine, attr, work->priority);
         j = work->value;
 
-        if (work->cardDef->category == 3) {
+        if (work->cardDef->category == CARD_CATEGORY_ENEMY) {
             return;
         }
 
@@ -4208,7 +4208,7 @@ static void card_2(CardDisplayWork* work) {
     DrawSprite(work->x >> 8, y, work->cardDef->gfx2, work->tiles, work->palette, affine, attr, work->priority);
     k = work->value;
 
-    if (work->cardDef->category == 3) {
+    if (work->cardDef->category == CARD_CATEGORY_ENEMY) {
         return;
     }
 
@@ -4325,7 +4325,7 @@ u8 SoraCardWaitPlayEnd(CardDisplayWork* work, void* task) {
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_ENDED;
         gBtlWork->flags &= ~BTL_FLAG_PLAYER_CARD_BUSY;
 
-        if (work->cardDef->category == 0) {
+        if (work->cardDef->category == CARD_CATEGORY_ATTACK) {
             TickSoraHcEffectOnAttackEnd();
         }
 
@@ -5487,7 +5487,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
 
         switch (gGameState.roomEffect) {
         case 7:
-            if (work->cardDef->category == 1) {
+            if (work->cardDef->category == CARD_CATEGORY_MAGIC) {
                 work->value += 2;
 
                 if (work->value > 9) {
@@ -5499,7 +5499,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
 
             break;
         case 8:
-            if (work->cardDef->category == 2 && (work->cardDef->flags & CARD_DEF_FLAG_ITEM)) {
+            if (work->cardDef->category == CARD_CATEGORY_ITEM && (work->cardDef->flags & CARD_DEF_FLAG_ITEM)) {
                 work->value += 2;
 
                 if (work->value > 9) {
@@ -5511,7 +5511,7 @@ void UpdateSoraCardValue(CardDisplayWork* work) {
 
             break;
         case 9:
-            if (work->cardDef->category == 0) {
+            if (work->cardDef->category == CARD_CATEGORY_ATTACK) {
                 work->value += 2;
 
                 if (work->value > 9) {

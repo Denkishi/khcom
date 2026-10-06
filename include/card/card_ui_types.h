@@ -64,6 +64,14 @@ typedef struct SpriteFrameResourceDef {
     u16 spriteIndex;
 } SpriteFrameResourceDef;
 
+enum MapCardColor {
+    MAP_CARD_COLOR_NONE,
+    MAP_CARD_COLOR_GREEN,
+    MAP_CARD_COLOR_RED,
+    MAP_CARD_COLOR_BLUE,
+    MAP_CARD_COLOR_GOLD
+};
+
 typedef struct MapCardDef {
     void* tiles;
     void* palette;

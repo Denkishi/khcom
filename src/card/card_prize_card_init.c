@@ -1309,7 +1309,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
                work->tiles, work->palette, affine, pal,
                work->priority + 1);
 
-    if (work->cardDef->backIndex == 4) {
+    if (work->cardDef->backIndex == MAP_CARD_COLOR_GOLD) {
         gfx = work->cardBack->sprites[work->backFrame];
     } else {
         gfx = work->cardBack->sprites[0];
@@ -1319,7 +1319,7 @@ static void PrizeCard_2(PrizeMapCardWork* work) {
                work->tiles2, work->palette2, affine, pal,
                work->priority);
 
-    if (work->cardDef->backIndex != 4) {
+    if (work->cardDef->backIndex != MAP_CARD_COLOR_GOLD) {
         gfx = gCardValueDigitFrames[work->value];
         DrawSprite(work->x, (u16)work->y - 8, gfx,
                    work->tiles4, work->palette2, affine, pal,
@@ -1617,20 +1617,20 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                               (gSineTable[(u8)work->pulseAngle] >> 8) * 8 + Q_8_8(1));
 
                 switch (work->cards[i].color) {
-                case 2:
+                case MAP_CARD_COLOR_RED:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[4], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
-                case 3:
+                case MAP_CARD_COLOR_BLUE:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[8], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
-                case 1:
+                case MAP_CARD_COLOR_GREEN:
                     DrawSprite(work->cards[i].sprite.x >> 8, (work->cards[i].sprite.y >> 8) + 8,
                                gMapCardUiResources.sprites[6], gMapCardUiResources.extraTiles, gMapCardUiResources.palette, NULL, SPRITE_FLAG_MOSAIC, 20);
                     break;
-                case 0:
-                case 4:
+                case MAP_CARD_COLOR_NONE:
+                case MAP_CARD_COLOR_GOLD:
                 default:
                     break;
                 }
@@ -1695,7 +1695,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     card->sprite.tiles3 = NULL;
     card->sprite.palette3 = NULL;
 
-    if (key->color == 0) {
+    if (key->color == MAP_CARD_COLOR_NONE) {
         n = key->color;
         card->sprite.tiles2 = NULL;
         card->sprite.palette2 = NULL;
@@ -1712,14 +1712,14 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
         card->sprite.palette3 = NULL;
 
         switch (key->color) {
-        case 1:
-            n = 1;
+        case MAP_CARD_COLOR_GREEN:
+            n = MAP_CARD_COLOR_GREEN;
             break;
-        case 2:
-            n = 2;
+        case MAP_CARD_COLOR_RED:
+            n = MAP_CARD_COLOR_RED;
             break;
-        case 3:
-            n = 3;
+        case MAP_CARD_COLOR_BLUE:
+            n = MAP_CARD_COLOR_BLUE;
             break;
         default:
             n = key->color;
@@ -1812,7 +1812,7 @@ void InitEventKeyCard(EventKeyCard* card, EventKey* key) {
     card->sprite.palette3 = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
 
     if (card->sprite.tiles2 == NULL) {
-        cardBack = &gCardBacks[4];
+        cardBack = &gCardBacks[CARD_BACK_WHITE];
         card->sprite.tiles2 = LoadObjTiles(cardBack->tiles2, 0x300);
         card->sprite.palette2 = LoadObjPalette(gDoorCardPalette, sizeof(gDoorCardPalette));
         card->sprite.gfx2 = cardBack->gfx2;

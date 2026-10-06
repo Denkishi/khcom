@@ -692,12 +692,12 @@ void UseEnemyCard(u16 arg) {
 
             if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
-                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ATTACK && !gCardBattleState->soraStockActive) {
                     found = TRUE;
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_ATTACK) {
                         found = TRUE;
                         break;
                     }
@@ -725,13 +725,13 @@ void UseEnemyCard(u16 arg) {
             if (gBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
 #ifdef VERSION_EU
                 for (k = 0; k < gCardBattleState->activeCardCount; k++) {
-                    if (gCardBattleState->activeCards[k]->cardDef->category == 2 && !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
+                    if (gCardBattleState->activeCards[k]->cardDef->category == CARD_CATEGORY_ITEM && !(gCardBattleState->activeCards[k]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
                         found = TRUE;
                     }
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_ITEM) {
                         found = TRUE;
                         break;
                     }
@@ -799,12 +799,12 @@ void UseEnemyCard(u16 arg) {
 
             if (gBtlWork->hcEffect == HC_EFFECT_ATTACK_BRACER) {
 #ifdef VERSION_EU
-                if (gCardBattleState->activeCards[0]->cardDef->category == 0 && !gCardBattleState->soraStockActive) {
+                if (gCardBattleState->activeCards[0]->cardDef->category == CARD_CATEGORY_ATTACK && !gCardBattleState->soraStockActive) {
                     flag = TRUE;
                 }
 #else
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 0) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_ATTACK) {
                         flag = TRUE;
                         break;
                     }
@@ -815,7 +815,7 @@ void UseEnemyCard(u16 arg) {
 #ifndef VERSION_EU
             if (gBtlWork->hcEffect == HC_EFFECT_INCREMENTOR_2) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 1) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_MAGIC) {
                         flag = TRUE;
                         break;
                     }
@@ -835,9 +835,9 @@ void UseEnemyCard(u16 arg) {
             if (gBtlWork->hcEffect == HC_EFFECT_ITEM_BRACER) {
                 for (i = 0; i < gCardBattleState->activeCardCount; i++) {
 #ifdef VERSION_EU
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 2 && !(gCardBattleState->activeCards[i]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_ITEM && !(gCardBattleState->activeCards[i]->cardDef->flags & CARD_DEF_FLAG_FRIEND)) {
 #else
-                    if (gCardBattleState->activeCards[i]->cardDef->category == 2) {
+                    if (gCardBattleState->activeCards[i]->cardDef->category == CARD_CATEGORY_ITEM) {
 #endif
                         flag = TRUE;
                         break;

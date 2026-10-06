@@ -390,14 +390,14 @@ s16 AllmapDrawRoomnameFrame(u16 width) {
 
 s32 GetAllmapRoomnamePaletteOffset(u8 nameId) {
     switch (GetRoomCardBackIndex(nameId)) {
-    case 1:
+    case MAP_CARD_COLOR_GREEN:
         return 64;
-    case 2:
+    case MAP_CARD_COLOR_RED:
         return 96;
-    case 4:
+    case MAP_CARD_COLOR_GOLD:
         return 0;
-    case 0:
-    case 3:
+    case MAP_CARD_COLOR_NONE:
+    case MAP_CARD_COLOR_BLUE:
     default:
         return 32;
     }

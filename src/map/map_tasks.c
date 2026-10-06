@@ -4455,7 +4455,7 @@ void Task_MapPrzCard_2(MapPrzCardWork* work) {
     DrawSprite(work->x, work->y - 8, back->gfx, work->tiles2,
         work->palette2, affine, work->spriteFlags, work->priority);
 
-    if (work->stat.category != 3) {
+    if (work->stat.category != CARD_CATEGORY_ENEMY) {
         digitGfx = gCardValueDigitFrames[work->stat.value];
         DrawSprite(work->x, work->y - 8, digitGfx, work->tiles3,
             work->palette2, affine, work->spriteFlags, work->priority - 1);

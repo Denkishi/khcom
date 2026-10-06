@@ -3386,7 +3386,7 @@ void SioChgCardDraw() {
             affine = AllocObjAffine(sSioChgCardWork->angle[i], sSioChgCardWork->scaleX[i], sSioChgCardWork->scaleY[i], TRUE);
             DrawSprite((sSioChgCardWork->x2[i] >> 8) + 16, (sSioChgCardWork->y2[i] >> 8) + 20, sSioChgCardWork->gfx4[i], sSioChgCardWork->tiles3[i], sSioChgCardWork->palette3[i], affine, SPRITE_PRIORITY(1), 0xFFF0);
 
-            if (gCardDefs[gSioChgCardSlots[i]].category != 3) {
+            if (gCardDefs[gSioChgCardSlots[i]].category != CARD_CATEGORY_ENEMY) {
                 DrawSprite((sSioChgCardWork->x2[i] >> 8) + 13, (sSioChgCardWork->y2[i] >> 8) + 16, sSioChgCardWork->gfx5[i], sSioChgCardWork->tiles4, sSioChgCardWork->palette4, affine, SPRITE_PRIORITY(1), 0xFFE0);
             }
         }

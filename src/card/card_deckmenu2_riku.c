@@ -119,11 +119,11 @@ static void Deckmenu2_0(RikuDeckMenuWork* work, void* resultOut) {
     work->prevCursorCard = NULL;
     work->mode = DECK_MENU_MODE_NONE;
     work->view = DECK_MENU_VIEW_DECK_GRID;
-    work->deckAttackCount = CountActiveDeckCardsOfCategory(0);
-    work->deckMagicCount = CountActiveDeckCardsOfCategory(1);
-    work->deckItemCount = CountActiveDeckCardsOfCategory(2);
-    work->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
-    work->categoryFilter = 0;
+    work->deckAttackCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ATTACK);
+    work->deckMagicCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_MAGIC);
+    work->deckItemCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ITEM);
+    work->deckEnemyCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ENEMY);
+    work->categoryFilter = CATEGORY_FILTER_DECK_ALL;
     work->entryCount = 0;
     work->entries = NULL;
     work->popupActive = 0;
@@ -231,10 +231,10 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
 #endif
     LoadBgMap(0, gDeckDescriptionWindowMap, sizeof(gDeckDescriptionWindowMap));
     LoadBgMap(1, gRikuDeckPanelMap, sizeof(gRikuDeckPanelMap));
-    DrawRikuDeckCategoryCount(work->deckAttackCount, 0);
-    DrawRikuDeckCategoryCount(work->deckMagicCount, 1);
-    DrawRikuDeckCategoryCount(work->deckItemCount, 2);
-    DrawRikuDeckCategoryCount(work->deckEnemyCount, 3);
+    DrawRikuDeckCategoryCount(work->deckAttackCount, CARD_CATEGORY_ATTACK);
+    DrawRikuDeckCategoryCount(work->deckMagicCount, CARD_CATEGORY_MAGIC);
+    DrawRikuDeckCategoryCount(work->deckItemCount, CARD_CATEGORY_ITEM);
+    DrawRikuDeckCategoryCount(work->deckEnemyCount, CARD_CATEGORY_ENEMY);
     DrawRikuDeckCardCount(0);
     DrawRikuCardTotals();
     work->thumbX = 0x4800;
@@ -578,7 +578,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 categoryFilter) {
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != CARD_NONE) {
-            if (categoryFilter == 0) {
+            if (categoryFilter == CATEGORY_FILTER_DECK_ALL) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -834,25 +834,25 @@ void LoadRikuCardNameText(RikuDeckMenuWork* work, s32 id) {
 #endif
 
     switch (def->category) {
-    case 0:
+    case CARD_CATEGORY_ATTACK:
         LoadPalette(gDeckMenuTextRedPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 1:
+    case CARD_CATEGORY_MAGIC:
         LoadPalette(gDeckMenuTextBluePalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 2:
+    case CARD_CATEGORY_ITEM:
         LoadPalette(gDeckMenuTextGreenPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 3:
+    case CARD_CATEGORY_ENEMY:
         LoadPalette(gDeckMenuTextGrayPalette,
                     (void*)(work->palette4->index * 32 +
                             OBJ_PLTT),
@@ -924,7 +924,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
         work->gfx4 = gCardBacks[def->category].gfx;
         work->gfx5 = def->gfx;
 
-        if (def->category != 3) {
+        if (def->category != CARD_CATEGORY_ENEMY) {
             work->tiles9 = LoadObjTiles(gCardValueDigitTiles, sizeof(gCardValueDigitTiles));
             work->gfx6 = gCardValueDigitFrames[def->value];
         }
@@ -1010,7 +1010,7 @@ u8 CheckRikuDeckCpCost(RikuDeckMenuWork* work) {
 }
 
 u8 CheckRikuDeckHasAttackCard(RikuDeckMenuWork* work) {
-    if (CountActiveDeckCardsOfCategory(0) == 0) {
+    if (CountActiveDeckCardsOfCategory(CARD_CATEGORY_ATTACK) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         TaskCreate(&work->cardpool, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
         return FALSE;

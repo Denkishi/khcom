@@ -48,7 +48,7 @@ static void PrizeCard_0(PrizeCardWork* work, PrizeCardTaskArgs* arg) {
     work->stat = *(CardStat*)&def->kind;
 
     if (gCardDefs[work->cardId].flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
-        back = &gCardBacks[3];
+        back = &gCardBacks[CARD_CATEGORY_ENEMY];
     } else {
         back = &gCardBacks[work->stat.category];
     }

@@ -185,7 +185,7 @@ u16 CountLinkPartnerDeckCards(u8 listIndex) {
             if (cards[i] != CARD_ID_NONE) {
                 category = gCardDefs[cards[i] & CARD_ID_MASK].category;
 
-                if (category <= 2) {
+                if (category <= CARD_CATEGORY_ITEM) {
                     count++;
                 }
             }
@@ -195,7 +195,7 @@ u16 CountLinkPartnerDeckCards(u8 listIndex) {
     case CARD_LIST_ENEMY:
         for (i = 0; i < DECK_SIZE; i++) {
             if (cards[i] != CARD_ID_NONE) {
-                if (gCardDefs[cards[i] & CARD_ID_MASK].category == 3) {
+                if (gCardDefs[cards[i] & CARD_ID_MASK].category == CARD_CATEGORY_ENEMY) {
                     count++;
                 }
             }
@@ -221,13 +221,13 @@ void CopyLinkPartnerDeckCards(u8 listIndex, u16* out) {
         if (deck->cards[i] != CARD_ID_NONE) {
             switch (listIndex) {
             case CARD_LIST_MAIN:
-                if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {
+                if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= CARD_CATEGORY_ITEM) {
                     *out++ = deck->cards[i];
                 }
 
                 break;
             case CARD_LIST_ENEMY:
-                if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category == 3) {
+                if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category == CARD_CATEGORY_ENEMY) {
                     *out++ = deck->cards[i];
                 }
 

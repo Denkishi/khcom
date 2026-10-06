@@ -43,7 +43,7 @@ void PremireChanceCard_0(PremireChanceCardWork* work, CardSlot* slot) {
     work->cardDef = def;
 
     if (def->flags & (CARD_DEF_FLAG_SUMMON | CARD_DEF_FLAG_FRIEND)) {
-        work->cardBack = &gCardBacks[1];
+        work->cardBack = &gCardBacks[CARD_CATEGORY_MAGIC];
     } else {
         work->cardBack = &gCardBacks[def->category];
     }

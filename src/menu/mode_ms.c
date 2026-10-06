@@ -1039,7 +1039,7 @@ void RollMooglePackCards(s16 category, s16 tier) {
 
                 id += RollMoogleCardValue();
 
-                if (gCardDefs[id].category <= 1) {
+                if (gCardDefs[id].category <= CARD_CATEGORY_MAGIC) {
                     if (GetRandom() % 100 <= 9) {
                         id |= CARD_FLAG_PREMIUM;
                     }

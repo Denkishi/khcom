@@ -113,11 +113,11 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->commandCursor = 0;
     work->mode = DECK_MENU_MODE_NONE;
     work->view = DECK_MENU_VIEW_DECK_GRID;
-    work->deckAttackCount = CountActiveDeckCardsOfCategory(0);
-    work->deckMagicCount = CountActiveDeckCardsOfCategory(1);
-    work->deckItemCount = CountActiveDeckCardsOfCategory(2);
-    work->deckEnemyCount = CountActiveDeckCardsOfCategory(3);
-    work->categoryFilter = 0;
+    work->deckAttackCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ATTACK);
+    work->deckMagicCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_MAGIC);
+    work->deckItemCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ITEM);
+    work->deckEnemyCount = CountActiveDeckCardsOfCategory(CARD_CATEGORY_ENEMY);
+    work->categoryFilter = CATEGORY_FILTER_DECK_ALL;
     work->entryCount = 0;
     work->popupActive = 0;
     work->exitRequested = FALSE;
@@ -279,16 +279,16 @@ u8 UpdateDeckExchangeLoadDeckInfo(DeckExchangeWork* work, void* task) {
         LoadBgMap(2, gDeck3PanelMap, 0x180);
         break;
     case 4:
-        DrawDeckCategoryCount(work->deckAttackCount, 0);
+        DrawDeckCategoryCount(work->deckAttackCount, CARD_CATEGORY_ATTACK);
         break;
     case 5:
-        DrawDeckCategoryCount(work->deckMagicCount, 1);
+        DrawDeckCategoryCount(work->deckMagicCount, CARD_CATEGORY_MAGIC);
         break;
     case 6:
-        DrawDeckCategoryCount(work->deckItemCount, 2);
+        DrawDeckCategoryCount(work->deckItemCount, CARD_CATEGORY_ITEM);
         break;
     case 7:
-        DrawDeckCategoryCount(work->deckEnemyCount, 3);
+        DrawDeckCategoryCount(work->deckEnemyCount, CARD_CATEGORY_ENEMY);
         break;
     case 8:
         HighlightDeckExchangeDeckTab(work, work->deckIndex);
@@ -426,10 +426,10 @@ u8 UpdateDeckExchangeValueSelect(DeckExchangeWork* work, void* task) {
 
         DrawDeckExchangeCardTotals();
         CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
-        DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
-        DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
-        DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
-        DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
+        DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ATTACK], CARD_CATEGORY_ATTACK);
+        DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_MAGIC], CARD_CATEGORY_MAGIC);
+        DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ITEM], CARD_CATEGORY_ITEM);
+        DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ENEMY], CARD_CATEGORY_ENEMY);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeClose);
         DrawDeckExchangeValueCpCost(work);
         work->timer = 4;
@@ -462,7 +462,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
 
     switch (GetKeysRepeat()) {
     case DPAD_LEFT:
-        if (work->cursorCol > 1) {
+        if (work->cursorCol > CATEGORY_FILTER_ATTACK) {
             work->cursorCol--;
             work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -478,7 +478,7 @@ u8 UpdateDeckExchangeCollectionFilter(DeckExchangeWork* work, void* task) {
 
         break;
     case DPAD_RIGHT:
-        if (work->cursorCol < 5) {
+        if (work->cursorCol < CATEGORY_FILTER_COLLECTION_ALL) {
             work->cursorCol++;
             work->timer = 4;
             m4aSongNumStart(SONG_SYS_CLICK);
@@ -563,10 +563,10 @@ u8 UpdateDeckExchangeOpenCollection(DeckExchangeWork* work, void* task) {
     LoadBgMap(1, gDeckCardsInUseMap, sizeof(gDeckCardsInUseMap));
     DisableBg(0);
     CountCardsNotInDeckByCategory(DECK_ANY, work->collectionCategoryCounts);
-    DrawCollectionCategoryCount(work->collectionCategoryCounts[0], 0);
-    DrawCollectionCategoryCount(work->collectionCategoryCounts[1], 1);
-    DrawCollectionCategoryCount(work->collectionCategoryCounts[2], 2);
-    DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
+    DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ATTACK], CARD_CATEGORY_ATTACK);
+    DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_MAGIC], CARD_CATEGORY_MAGIC);
+    DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ITEM], CARD_CATEGORY_ITEM);
+    DrawCollectionCategoryCount(work->collectionCategoryCounts[CARD_CATEGORY_ENEMY], CARD_CATEGORY_ENEMY);
     work->view = DECK_MENU_VIEW_DELETE_GRID;
     SetDeckExchangeFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     ClearDeckExchangeCardGrid(work);
@@ -627,7 +627,7 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
         EwramFree(work->kindEntries);
         break;
     case 5:
-        work->categoryFilter = 5;
+        work->categoryFilter = CATEGORY_FILTER_COLLECTION_ALL;
         work->gridEntryCount = CreateDeckExchangeCollectionGridCards(work, 5, TRUE);
         SetDeckExchangeHandAnim(work);
         work->handX = gCollectionGridColumnX[0] << 8;
@@ -820,7 +820,7 @@ u8 UpdateDeckExchangeGrid(DeckExchangeWork* work, void* task) {
 
 u8 UpdateDeckExchangeClose(DeckExchangeWork* work, void* task) {
     FadeStartOut(FADE_MODE_BLACK, 16);
-    work->categoryFilter = 0;
+    work->categoryFilter = CATEGORY_FILTER_DECK_ALL;
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateDeckExchangeFadeOut);
     TaskPoolUpdate(&work->tasks);
     TaskPoolUpdate(&work->tasks2);
@@ -1049,7 +1049,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 categoryFilter) 
 
     for (i = 0; i < DECK_SIZE; i++) {
         if (cards[i] != CARD_NONE) {
-            if (categoryFilter == 0) {
+            if (categoryFilter == CATEGORY_FILTER_DECK_ALL) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & (CARD_ID_MASK | CARD_FLAG_PREMIUM);
                 args.col = x;
@@ -1092,7 +1092,7 @@ s32 CreateDeckExchangeCollectionGridCards(DeckExchangeWork* work, u8 categoryFil
     y = 0;
 
     for (i = 0; i < work->entryCount; i++) {
-        if (categoryFilter == 5) {
+        if (categoryFilter == CATEGORY_FILTER_COLLECTION_ALL) {
             if (work->entries[i].kind <= CARD_KIND_CRESCENDO) {
                 args.pool = &work->pool;
                 args.cardId = GetCardIdForKind(work->entries[i].kind);
@@ -1422,23 +1422,23 @@ void DrawDeckExchangeCollectionFilterTab(u8 categoryFilter, u8 mode) {
     dst = (u8*)GetBgScreenBase(3) + 0xA8;
 
     switch (categoryFilter) {
-    case 5:
+    case CATEGORY_FILTER_COLLECTION_ALL:
         RequestDma3Copy(gDeckFilterTabMap + mode * 128, dst, 20);
         RequestDma3Copy(gDeckFilterTabMap + 0x20 + mode * 128, dst + 0x40, 20);
         break;
-    case 4:
+    case CATEGORY_FILTER_ENEMY:
         RequestDma3Copy(gDeckFilterTabMap + 0xA + mode * 128, dst, 20);
         RequestDma3Copy(gDeckFilterTabMap + 0xA + 0x20 + mode * 128, dst + 0x40, 20);
         break;
-    case 3:
+    case CATEGORY_FILTER_ITEM:
         RequestDma3Copy(gDeckFilterTabMap + 0x14 + mode * 128, dst, 20);
         RequestDma3Copy(gDeckFilterTabMap + 0x14 + 0x20 + mode * 128, dst + 0x40, 20);
         break;
-    case 2:
+    case CATEGORY_FILTER_MAGIC:
         RequestDma3Copy(gDeckFilterTabMap + 0x40 + mode * 128, dst, 20);
         RequestDma3Copy(gDeckFilterTabMap + 0x40 + 0x20 + mode * 128, dst + 0x40, 20);
         break;
-    case 1:
+    case CATEGORY_FILTER_ATTACK:
         RequestDma3Copy(gDeckFilterTabMap + 0x4A + mode * 128, dst, 20);
         RequestDma3Copy(gDeckFilterTabMap + 0x4A + 0x20 + mode * 128, dst + 0x40, 20);
         break;
@@ -1487,19 +1487,19 @@ void LoadDeckExchangeCardNameText(DeckExchangeWork* work, s32 id) {
     work->textSlotCount4 = LoadTextSlots(def->name, work->textSlots4);
 
     switch (def->category) {
-    case 0:
+    case CARD_CATEGORY_ATTACK:
         LoadPalette(gDeckMenuTextRedPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 1:
+    case CARD_CATEGORY_MAGIC:
         LoadPalette(gDeckMenuTextBluePalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 2:
+    case CARD_CATEGORY_ITEM:
         LoadPalette(gDeckMenuTextGreenPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
-    case 3:
+    case CARD_CATEGORY_ENEMY:
         LoadPalette(gDeckMenuTextGrayPalette, (void*)(work->palette4->index * 32 + OBJ_PLTT),
                     work->palette4->count << 5);
         break;
@@ -1922,7 +1922,7 @@ s32 CheckDeckExchangeCpCost(DeckExchangeWork* work) {
 }
 
 u8 CheckDeckExchangeHasAttackCard(DeckExchangeWork* work) {
-    if (CountActiveDeckCardsOfCategory(0) == 0) {
+    if (CountActiveDeckCardsOfCategory(CARD_CATEGORY_ATTACK) == 0) {
         m4aSongNumStart(SONG_SYS_BEEP);
         TaskCreate(&work->tasks2, &gTaskDescDeckErrorNoAttackCard, &work->popupActive);
         return FALSE;

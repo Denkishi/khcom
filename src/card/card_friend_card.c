@@ -86,7 +86,7 @@ void Friend_card_0(PickupCardWork* work, s32* args) {
     work->cardDef = &gCardDefs[args[3]];
 
     if (work->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        work->backCategory = 3;
+        work->backCategory = CARD_CATEGORY_ENEMY;
     } else {
         work->backCategory = work->cardDef->category;
     }
@@ -129,7 +129,7 @@ void Heartless_card_0(PickupCardWork* work, s32* args) {
     work->cardDef = &gCardDefs[args[3]];
 
     if (work->cardDef->flags & CARD_DEF_FLAG_FRIEND) {
-        work->backCategory = 3;
+        work->backCategory = CARD_CATEGORY_ENEMY;
     } else {
         work->backCategory = work->cardDef->category;
     }
@@ -1080,8 +1080,8 @@ void Premire_Chance_0(PremireChanceWork* work) {
 #endif
         if (cards[i] != CARD_NONE) {
             if (!(gCardCollection[cards[i]] & CARD_FLAG_PREMIUM)) {
-                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 3) {
-                    if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 2) {
+                if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != CARD_CATEGORY_ENEMY) {
+                    if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != CARD_CATEGORY_ITEM) {
                         work->slots[n].cardId = gCardCollection[cards[i]] & CARD_ID_MASK;
                         work->slots[n].index = i;
                         work->slots[n].unk_06 = n;
@@ -1099,8 +1099,8 @@ void Premire_Chance_0(PremireChanceWork* work) {
         do {
             if (cards[j] != CARD_NONE) {
                 if (!(gCardCollection[cards[j]] & CARD_FLAG_PREMIUM)) {
-                    if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 3) {
-                        if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 2) {
+                    if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != CARD_CATEGORY_ENEMY) {
+                        if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != CARD_CATEGORY_ITEM) {
                             work->slots[n].cardId = gCardCollection[cards[j]] & CARD_ID_MASK;
                             work->slots[n].index = j;
                             work->slots[n].unk_06 = n;

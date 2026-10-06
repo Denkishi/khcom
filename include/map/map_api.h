@@ -25,15 +25,15 @@ u8* GetMapRoomEvent(u8 step);
 void LoadMapForm(u8 form);
 MapDoor* MapGetDoor(u8 side);
 struct MapCell* MapFixCellAt(s16 x, s16 y);
-u8 MapCellMaskBitAt(struct MapCell* p, s32 x, s32 y);
-u8 SelectEventDoor(u8 a, u8 b);
+u8 MapCellMaskBitAt(struct MapCell* cell, s32 x, s32 y);
+u8 SelectEventDoor(u8 room, u8 side);
 u8 CountRemainingEventKeys();
-struct EventKey* GetEventKey(u8 a);
-u8 DoorAcceptsMapCard(struct MapCardAttributes* p);
-s32 PayEventKey(struct MapCardAttributes* p);
+struct EventKey* GetEventKey(u8 index);
+u8 DoorAcceptsMapCard(struct MapCardAttributes* card);
+s32 PayEventKey(struct MapCardAttributes* card);
 u8 AreWorldPrizesCollected();
-void CopyMapProgress(struct MapProgress* p);
-void RestoreMapProgress(struct MapProgress* p);
+void CopyMapProgress(struct MapProgress* progress);
+void RestoreMapProgress(struct MapProgress* progress);
 
 struct MapGmkPlacement;
 

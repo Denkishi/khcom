@@ -1613,7 +1613,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
 
         for (i = work->paidCount; i < work->keyCount; i++) {
             if (i == work->paidCount) {
-                DrawLayeredCardSpriteScaled(&work->cards[i].sprite, 0x808, 0,
+                DrawLayeredCardSpriteScaled(&work->cards[i].sprite, SPRITE_PRIORITY(2) | SPRITE_FLAG_MOSAIC, 0,
                               (gSineTable[(u8)work->pulseAngle] >> 8) * 8 + Q_8_8(1));
 
                 switch (work->cards[i].color) {
@@ -1635,7 +1635,7 @@ void SELMAP_EVKEY_2(SelmapEventKeyWork* work) {
                     break;
                 }
             } else {
-                DrawLayeredCardSprite(&work->cards[i].sprite, 0x808);
+                DrawLayeredCardSprite(&work->cards[i].sprite, SPRITE_PRIORITY(2) | SPRITE_FLAG_MOSAIC);
             }
         }
 

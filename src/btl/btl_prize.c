@@ -337,7 +337,7 @@ void task_btl_prize_2(BtlPrizeWork* work) {
     ObjAffine* affine;
 
     if (work->flags & BTL_PRIZE_FLAG_SPRITE_VISIBLE) {
-        s32 flags = 0x800;
+        s32 flags = SPRITE_PRIORITY(2);
 
         WorldToScreen(&x, &y, work->x, work->y, work->z);
         affine = AllocObjAffine(0, gBtlWork->scale, gBtlWork->scale, 1);

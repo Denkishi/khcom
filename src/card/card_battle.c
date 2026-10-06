@@ -4161,7 +4161,7 @@ static void card_2(CardDisplayWork* work) {
     u8 k;
     u16 attr;
 
-    attr = 0x410;
+    attr = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
 
     if (IsMessageWindowOpen() == TRUE) {
         y = work->y >> 8;
@@ -5323,7 +5323,7 @@ void card_reload_2(CardDisplayWork* work) {
             y = (work->y >> 8) + (gSineTable[work->bobAngle] >> 8);
         }
 
-        attr = 0x410;
+        attr = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
         DrawSprite(work->x >> 8, y, gCardBacks[3].gfx2, work->tiles2,
                    gCardBattleState->palette, NULL, attr, work->priority);
 

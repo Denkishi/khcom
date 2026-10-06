@@ -3857,7 +3857,7 @@ void Reload_Card_2(CardDisplayWork* work) {
     s16 y;
     u16 attr;
 
-    attr = 0x410;
+    attr = SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC;
     affine = AllocObjAffine(0, work->scaleX, Q_8_8(1), 0);
 
     if (work->flags & CARD_DISP_FLAG_GFX_LOADED) {

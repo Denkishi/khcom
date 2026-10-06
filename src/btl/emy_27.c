@@ -55,8 +55,8 @@ enum Emy27State {
 u8 task_emy_27_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 s;
-    s32 d;
+    u16 frame;
+    s32 dy;
     s32 y;
     s32 tx;
     s32 ty;
@@ -66,9 +66,9 @@ u8 task_emy_27_1(EmyWork* work) {
 
     if (EmyUpdateReaction(work)) {
         GetEnemyTargetPosition(act, NULL, &y, NULL);
-        d = act->y - y;
+        dy = act->y - y;
 
-        if (d >= 0 ? d <= 0xFFF : y - act->y <= 0xFFF) {
+        if (dy >= 0 ? dy <= 0xFFF : y - act->y <= 0xFFF) {
             work->state = EMY27_STATE_LUNGE;
         } else {
             work->state = EMY27_STATE_CHASE_SLASH;
@@ -108,9 +108,9 @@ u8 task_emy_27_1(EmyWork* work) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         }
 
-        s = AnimGetFrame(&work->anim);
+        frame = AnimGetFrame(&work->anim);
 
-        if (s == 2 || s == 5) {
+        if (frame == 2 || frame == 5) {
             if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)
                     ? ApplyAttackBox(0xC7, act->x - 0x1000, act->y, act->z, 0x14,
                         0x14, 0x20)

@@ -80,7 +80,7 @@ u8 task_emy_16_1(Emy16Work* work) {
     Emy16Work* w;
     BtlObj* act;
     EmySpawn spawn;
-    u16 r;
+    u16 roll;
 
     w = work;
     act = &work->base.actor;
@@ -89,9 +89,9 @@ u8 task_emy_16_1(Emy16Work* work) {
         if (IsTaskActiveNamed(work->bTask, sTaskDescEmy16B.name)) {
             work->base.state = EMY16_STATE_SHOOT;
         } else {
-            r = GetRandom();
+            roll = GetRandom();
 
-            switch (r & 1) {
+            switch (roll & 1) {
             case 0:
                 work->base.state = EMY16_STATE_SHOOT;
                 break;
@@ -294,32 +294,32 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
 
 void task_emy_16_b_2(Emy16bWork* work) {
     void* gfx;
-    u16 pri;
+    u16 flags;
     ObjAffine* affine;
-    s32 angle;
+    s32 scale;
     s16 x;
     s16 y;
 
     gfx = AnimGetGfx(&work->anim);
 
     if (work->visible) {
-        pri = GetBattleSpritePriorityFlags(work->y);
+        flags = GetBattleSpritePriorityFlags(work->y);
         WorldToScreen(&x, &y, work->x, work->y, work->z);
-        angle = gBtlWork->scale;
+        scale = gBtlWork->scale;
 
-        if (angle == 0x100) {
+        if (scale == 0x100) {
             affine = NULL;
 
             if (!work->facingLeft) {
-                pri |= 1;
+                flags |= 1;
             }
         } else if (!work->facingLeft) {
-            affine = AllocObjAffine(0, -angle, angle, 1);
+            affine = AllocObjAffine(0, -scale, scale, 1);
         } else {
-            affine = AllocObjAffine(0, angle, angle, 1);
+            affine = AllocObjAffine(0, scale, scale, 1);
         }
 
-        DrawSprite(x, y, gfx, work->tiles, work->palette, affine, pri,
+        DrawSprite(x, y, gfx, work->tiles, work->palette, affine, flags,
             -0x1004 - (work->y >> 8) * 4);
     }
 }
@@ -380,14 +380,14 @@ u8 task_emy_16_p_1(Emy16pWork* work) {
 
 void task_emy_16_p_2(Emy16pWork* work) {
     void* gfx;
-    u16 pri;
+    u16 flags;
     s16 x;
     s16 y;
 
     gfx = AnimGetGfx(&work->anim);
-    pri = GetBattleSpritePriorityFlags(work->y);
+    flags = GetBattleSpritePriorityFlags(work->y);
     WorldToScreen(&x, &y, work->x, work->y, work->z);
-    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, pri,
+    DrawSprite(x, y, gfx, work->tiles, work->palette, NULL, flags,
         -0x1004 - ((work->y + 0x1000) >> 8) * 4);
 }
 

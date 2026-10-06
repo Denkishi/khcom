@@ -65,22 +65,22 @@ enum Emy81State {
 u8 task_emy_81_1(Emy81Work* work) {
     Emy81Work* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
     u16 frame;
     u16 idleFrame;
-    s32 d;
+    s32 step;
     s32 hitX;
-    s32 a;
+    s32 pivotX;
     s32 z;
-    s32 b;
+    s32 pivotY;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->base.state = EMY81_STATE_LEAP_ATTACK;
             break;
@@ -109,12 +109,12 @@ u8 task_emy_81_1(Emy81Work* work) {
     case EMY81_STATE_TAKEOFF:
         AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
 
-        d = (-0x2800 - act->z) >> 4;
+        step = (-0x2800 - act->z) >> 4;
 
-        if (d < -w->speedX) {
+        if (step < -w->speedX) {
             w->speedX += 25;
         } else {
-            w->speedX = -d;
+            w->speedX = -step;
         }
 
         work->base.vz = 0;
@@ -129,10 +129,10 @@ u8 task_emy_81_1(Emy81Work* work) {
         break;
     case EMY81_STATE_FLY_OVER:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &a, &b, NULL);
+            GetEnemyTargetPosition(act, &pivotX, &pivotY, NULL);
             AnimChangeWithDef(sEmy81AnimDefs, &w->base.anim, 3, ANIM_FLAG_LOOP, w->base.tiles);
-            w->targetX = (a * 2) - act->x;
-            w->targetY = (b * 2) - act->y;
+            w->targetX = (pivotX * 2) - act->x;
+            w->targetY = (pivotY * 2) - act->y;
             w->speedX = 0;
             w->speedY = 0;
         }
@@ -147,32 +147,32 @@ u8 task_emy_81_1(Emy81Work* work) {
             act->z = current + ((sample - z) >> 3);
         }
 
-        d = (w->targetX - act->x) >> 4;
+        step = (w->targetX - act->x) >> 4;
 
-        if (d > w->speedX) {
-            d = w->speedX;
+        if (step > w->speedX) {
+            step = w->speedX;
             w->speedX += 51;
-        } else if (d < -w->speedX) {
-            d = -w->speedX;
+        } else if (step < -w->speedX) {
+            step = -w->speedX;
             w->speedX += 51;
         } else {
-            w->speedX = d < 0 ? -d : d;
+            w->speedX = step < 0 ? -step : step;
         }
 
-        act->x += d;
-        d = (w->targetY - act->y) >> 4;
+        act->x += step;
+        step = (w->targetY - act->y) >> 4;
 
-        if (d > w->speedY) {
-            d = w->speedY;
-            w->speedY = d + 2;
-        } else if (d < -w->speedY) {
-            d = -w->speedY;
+        if (step > w->speedY) {
+            step = w->speedY;
+            w->speedY = step + 2;
+        } else if (step < -w->speedY) {
+            step = -w->speedY;
             w->speedY += 2;
         } else {
-            w->speedY = d < 0 ? -d : d;
+            w->speedY = step < 0 ? -step : step;
         }
 
-        act->y += d;
+        act->y += step;
 
         if ((work->base.flags & EMY_FLAG_AT_FIELD_EDGE)
                 || ((w->targetX - act->x < 0

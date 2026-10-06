@@ -55,16 +55,16 @@ enum Emy38State {
 u8 task_emy_38_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
-    u8 ret;
+    u16 roll;
+    u8 alive;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY38_STATE_LUNGE;
             break;
@@ -102,7 +102,7 @@ u8 task_emy_38_1(EmyWork* work) {
         break;
     }
 
-    ret = EmyUpdateCommonStates(work);
+    alive = EmyUpdateCommonStates(work);
 
     if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
@@ -112,7 +112,7 @@ u8 task_emy_38_1(EmyWork* work) {
         work->actor.flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
 
-    return ret;
+    return alive;
 }
 
 void task_emy_38_2(EmyWork* work) {

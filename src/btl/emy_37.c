@@ -353,11 +353,11 @@ u8 task_emy_37_1(Emy37Work* work) {
 void task_emy_37_2(Emy37Work* work) {
     Emy37Work* w;
     BtlObj* act;
-    u16 pri;
+    u16 flags;
     ObjAffine* affine;
-    s32 rot;
-    s32 scale;
-    s32 zoom;
+    s32 sx;
+    s32 sy;
+    s32 scaleY;
     s16 x;
     s16 y;
 
@@ -365,54 +365,54 @@ void task_emy_37_2(Emy37Work* work) {
 
     if (work->base.visible) {
         act = &work->base.actor;
-        pri = GetBattleSpritePriorityFlags(act->y) | work->base.spriteFlags;
+        flags = GetBattleSpritePriorityFlags(act->y) | work->base.spriteFlags;
         WorldToScreen(&x, &y, act->x, act->y, act->z);
 
-        zoom = work->base.scaleY;
+        scaleY = work->base.scaleY;
 
-        if (zoom == 0x100) {
+        if (scaleY == 0x100) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                scale = gBtlWork->scale;
-                rot = scale;
-            } else if (work->rotation == 0 && gBtlWork->scale == zoom) {
-                scale = zoom;
-                rot = scale;
-                pri |= 1;
+                sy = gBtlWork->scale;
+                sx = sy;
+            } else if (work->rotation == 0 && gBtlWork->scale == scaleY) {
+                sy = scaleY;
+                sx = sy;
+                flags |= 1;
             } else {
-                rot = -gBtlWork->scale;
-                scale = gBtlWork->scale;
+                sx = -gBtlWork->scale;
+                sy = gBtlWork->scale;
             }
         } else {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                rot = gBtlWork->scale * work->base.scaleX >> 8;
-                scale = gBtlWork->scale;
+                sx = gBtlWork->scale * work->base.scaleX >> 8;
+                sy = gBtlWork->scale;
             } else {
-                rot = -(gBtlWork->scale * work->base.scaleX >> 8);
-                scale = gBtlWork->scale;
+                sx = -(gBtlWork->scale * work->base.scaleX >> 8);
+                sy = gBtlWork->scale;
             }
 
-            scale = scale * zoom >> 8;
+            sy = sy * scaleY >> 8;
         }
 
         if (w->rotation) {
-            affine = AllocObjAffine(w->rotation, rot, scale, 1);
-        } else if (scale == 0x100 && rot == scale) {
+            affine = AllocObjAffine(w->rotation, sx, sy, 1);
+        } else if (sy == 0x100 && sx == sy) {
             affine = NULL;
-        } else if (scale <= 0xFF) {
-            affine = AllocObjAffine(0, rot, scale, 0);
+        } else if (sy <= 0xFF) {
+            affine = AllocObjAffine(0, sx, sy, 0);
         } else {
-            affine = AllocObjAffine(0, rot, scale, 1);
+            affine = AllocObjAffine(0, sx, sy, 1);
         }
 
         if (StepHitFlash(act)) {
             DrawSprite(x, y, work->base.gfx, work->base.tiles, work->base.palette2, affine,
-                pri, -0x1004 - (act->y >> 8) * 4);
+                flags, -0x1004 - (act->y >> 8) * 4);
         } else if (work->base.state == EMY37_STATE_SUNK_MOVE) {
             DrawSprite(x, y, work->base.gfx, work->base.tiles, work->base.palette, affine,
-                pri, 0xFFFF);
+                flags, 0xFFFF);
         } else {
             DrawSprite(x, y, work->base.gfx, work->base.tiles, work->base.palette, affine,
-                pri, -0x1004 - (act->y >> 8) * 4);
+                flags, -0x1004 - (act->y >> 8) * 4);
         }
 
         TaskPoolDraw(&work->base.tasks);

@@ -51,17 +51,17 @@ enum Emy14State {
 u8 task_emy_14_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
+    s32 targetX;
+    s32 dx;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = act->x - pos;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = act->x - targetX;
 
-        if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
+        if (dx >= 0 ? dx <= 0x31FF : targetX - act->x <= 0x31FF) {
             work->state = EMY14_STATE_SHORT_LUNGE;
         } else {
             work->state = EMY14_STATE_LONG_LUNGE;

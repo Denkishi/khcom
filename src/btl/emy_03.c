@@ -57,15 +57,15 @@ enum Emy03State {
 u8 task_emy_03_1(Emy03Work* work) {
     Emy03Work* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->base.state = EMY03_STATE_THUNDER_LUNGE;
             break;

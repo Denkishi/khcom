@@ -53,9 +53,9 @@ enum Emy04State {
 u8 task_emy_04_1(Emy04Work* work) {
     Emy04Work* w;
     BtlObj* act;
-    BtlObj* p;
+    BtlObj* obj;
     BtlObj* best;
-    s16 bestv;
+    s16 missing;
 
     w = work;
     act = &work->base.actor;
@@ -77,14 +77,14 @@ u8 task_emy_04_1(Emy04Work* work) {
 
         if (work->base.stateTimer == 3) {
             best = NULL;
-            bestv = 0;
+            missing = 0;
 
-            for (p = ListPoolFirst(&gBtlWork->pool); p != NULL;
-                    p = ListPoolNext(&p->node)) {
-                if (!(p->flags & BTLOBJ_FLAG_INTANGIBLE)) {
-                    if (bestv < p->maxHp - p->hp) {
-                        bestv = p->maxHp - p->hp;
-                        best = p;
+            for (obj = ListPoolFirst(&gBtlWork->pool); obj != NULL;
+                    obj = ListPoolNext(&obj->node)) {
+                if (!(obj->flags & BTLOBJ_FLAG_INTANGIBLE)) {
+                    if (missing < obj->maxHp - obj->hp) {
+                        missing = obj->maxHp - obj->hp;
+                        best = obj;
                     }
                 }
             }

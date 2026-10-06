@@ -55,18 +55,18 @@ enum Emy23State {
 u8 task_emy_23_1(Emy23Work* work) {
     Emy23Work* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
-    s32 t;
+    s32 targetX;
+    s32 dx;
+    s32 diveTargetX;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = act->x - pos;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = act->x - targetX;
 
-        if (d >= 0 ? d <= 0x31FF : pos - act->x <= 0x31FF) {
+        if (dx >= 0 ? dx <= 0x31FF : targetX - act->x <= 0x31FF) {
             work->base.state = EMY23_STATE_STAB;
         } else {
             work->base.state = EMY23_STATE_DIVE;
@@ -86,9 +86,9 @@ u8 task_emy_23_1(Emy23Work* work) {
             break;
         case 3:
             if (work->base.anim.timer == 0) {
-                GetEnemyTargetPosition(act, &t, NULL, NULL);
+                GetEnemyTargetPosition(act, &diveTargetX, NULL, NULL);
                 work->base.vz = 0x200;
-                w->targetX = t;
+                w->targetX = diveTargetX;
             }
         case 4:
         case 5:

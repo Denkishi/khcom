@@ -70,8 +70,8 @@ u8 GetEmyApproachAngle(EmyWork* work) {
     BtlObj* act;
     s32 x;
     s32 y;
-    s32 d;
-    s32 t;
+    s32 targetX;
+    s32 offset;
     s32 lo;
     s32 actorX;
     s32 actorY;
@@ -81,24 +81,24 @@ u8 GetEmyApproachAngle(EmyWork* work) {
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
     if (x < (gBtlWork->xMin + 0x30) << 8) {
-        d = x + 0x28;
+        targetX = x + 0x28;
     } else if (x > (gBtlWork->xMax - 0x30) << 8) {
-        d = x - 0x28;
+        targetX = x - 0x28;
     } else {
-        t = (work->actor.attackOffset + ((lo = -work->actor.attackRangeX) +
+        offset = (work->actor.attackOffset + ((lo = -work->actor.attackRangeX) +
             GetRandom() % (work->actor.attackRangeX - lo + 1))) << 8;
 
         if (act->x < x) {
-            d = x - t;
+            targetX = x - offset;
         } else {
-            d = x + t;
+            targetX = x + offset;
         }
     }
 
     targetY = y;
     actorX = act->x;
     actorY = act->y;
-    return GetAngle(actorX, actorY, d, targetY);
+    return GetAngle(actorX, actorY, targetX, targetY);
 }
 
 u8 task_emy_82_1(Emy82Work* work) {
@@ -205,7 +205,7 @@ u8 task_emy_82_1(Emy82Work* work) {
         break;
     case EMY82_STATE_JUMP_ATTACK:
         {
-            s32 d;
+            s32 adjustedX;
             s32 currentX;
             s32 targetX;
             u32 frame;
@@ -219,15 +219,15 @@ u8 task_emy_82_1(Emy82Work* work) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 targetX = 0x3000;
                 currentX = act->x;
-                d = currentX + targetX;
+                adjustedX = currentX + targetX;
             } else {
                 targetX = -0x3000;
                 currentX = act->x;
-                d = currentX + targetX;
+                adjustedX = currentX + targetX;
             }
 
             targetX = act->originX;
-            targetX -= d;
+            targetX -= adjustedX;
             targetX >>= 4;
             currentX += targetX;
             act->x = currentX;

@@ -73,20 +73,20 @@ enum Emy29State {
 u8 task_emy_29_1(Emy29Work* work) {
     Emy29Work* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
-    s32 a;
-    s32 t;
-    s16 c;
+    s32 targetX;
+    s32 dx;
+    s32 sample;
+    s32 z;
+    s16 timer;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = act->x - pos;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = act->x - targetX;
 
-        if (d >= 0 ? d <= 0x27FF : pos - act->x <= 0x27FF) {
+        if (dx >= 0 ? dx <= 0x27FF : targetX - act->x <= 0x27FF) {
             work->base.state = EMY29_STATE_BOUNCE;
         } else {
             work->base.state = EMY29_STATE_BITE;
@@ -97,9 +97,9 @@ u8 task_emy_29_1(Emy29Work* work) {
     case EMY29_STATE_BITE:
         AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
-        a = -COS((u16)work->base.stateTimer * 2) << 4;
-        t = act->z + 0x1000;
-        act->z += (a - t) >> 2;
+        sample = -COS((u16)work->base.stateTimer * 2) << 4;
+        z = act->z + 0x1000;
+        act->z += (sample - z) >> 2;
 
         if (EmyLungeAttack(&work->base, 0x16, 0x64, 0x18, 0xCB, 0xB4, SONG_BTL_KAMITUKI, 0, 0, 0x0C) == 1) {
             EmyReturnToIdle(&work->base);
@@ -107,9 +107,9 @@ u8 task_emy_29_1(Emy29Work* work) {
 
         break;
     case EMY29_STATE_BOUNCE:
-        c = work->base.stateTimer;
+        timer = work->base.stateTimer;
 
-        if (c == 0) {
+        if (timer == 0) {
             AnimChangeWithDef(sEmy29AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             w->state = 0;
             w->steps = 8;

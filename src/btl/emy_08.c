@@ -67,7 +67,7 @@ enum Emy08State {
 u8 task_emy_08_1(Emy08Work* work) {
     Emy08Work* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
     s32 dx;
     s32 dy;
 
@@ -75,9 +75,9 @@ u8 task_emy_08_1(Emy08Work* work) {
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->base.state = EMY08_STATE_LUNGE;
             break;

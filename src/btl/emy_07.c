@@ -75,13 +75,13 @@ u8 task_emy_07_1(Emy07Work* work) {
     Emy07Work* w;
     BtlObj* act;
     EmySpawn spawn;
-    u32 state;
-    s32 pos;
-    s32 pos2;
+    u32 prevState;
+    s32 idleTargetX;
+    s32 wrongHitTargetX;
 
     w = work;
     act = &work->base.actor;
-    state = work->base.state;
+    prevState = work->base.state;
 
 #ifdef VERSION_EU
     act->hp = 0x7FFF;
@@ -99,7 +99,7 @@ u8 task_emy_07_1(Emy07Work* work) {
     case EMY_STATE_GRAVITY_SQUASH:
         work->base.state = EMY07_STATE_WRONG_HIT;
 
-        switch (state) {
+        switch (prevState) {
         case EMY07_STATE_REQUEST_FIRE:
             w->thunderRequested = 0;
 
@@ -141,9 +141,9 @@ u8 task_emy_07_1(Emy07Work* work) {
     case EMY07_STATE_IDLE:
         AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
             w->base.tiles);
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
+        GetEnemyTargetPosition(act, &idleTargetX, NULL, NULL);
 
-        if (act->x < pos) {
+        if (act->x < idleTargetX) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
@@ -247,9 +247,9 @@ u8 task_emy_07_1(Emy07Work* work) {
                 w->base.tiles);
         }
 
-        GetEnemyTargetPosition(act, &pos2, NULL, NULL);
+        GetEnemyTargetPosition(act, &wrongHitTargetX, NULL, NULL);
 
-        if (act->x < pos2) {
+        if (act->x < wrongHitTargetX) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;

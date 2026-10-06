@@ -84,7 +84,7 @@ u8 task_emy_31_1(Emy31Work* work) {
 
     switch (work->base.state) {
     case EMY31_STATE_FIRE: {
-        s32 x;
+        s32 targetX;
         s32 y;
         work->base.vz = 0;
 
@@ -110,13 +110,13 @@ u8 task_emy_31_1(Emy31Work* work) {
                 y = act->y;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    x = act->x - 0xC800;
+                    targetX = act->x - 0xC800;
                     BgFxStartFire(1, act->x - 0x4000, y, act->z,
-                        x, y, 0, 1, 0xCF);
+                        targetX, y, 0, 1, 0xCF);
                 } else {
-                    x = act->x + 0xC800;
+                    targetX = act->x + 0xC800;
                     BgFxStartFire(1, act->x + 0x4000, y, act->z,
-                        x, y, 0, 0, 0xCF);
+                        targetX, y, 0, 0, 0xCF);
                 }
             }
 
@@ -151,7 +151,7 @@ u8 task_emy_31_1(Emy31Work* work) {
         break;
     }
     case EMY31_STATE_BLIZZARD: {
-        s32 x;
+        s32 targetX;
         s32 y;
         work->base.vz = 0;
 
@@ -177,13 +177,13 @@ u8 task_emy_31_1(Emy31Work* work) {
                 y = act->y;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    x = act->x - 0x6400;
+                    targetX = act->x - 0x6400;
                     BgFxStartBlizzard(1, act->x - 0x4600, y, act->z,
-                        x, y, 0, 1, 0xD0);
+                        targetX, y, 0, 1, 0xD0);
                 } else {
-                    x = act->x + 0x6400;
+                    targetX = act->x + 0x6400;
                     BgFxStartBlizzard(1, act->x + 0x4600, y, act->z,
-                        x, y, 0, 0, 0xD0);
+                        targetX, y, 0, 0, 0xD0);
                 }
             }
 

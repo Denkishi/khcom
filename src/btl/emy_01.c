@@ -52,16 +52,16 @@ enum Emy01State {
 u8 task_emy_01_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
-    s32 x;
+    u16 roll;
+    s32 targetX;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY01_STATE_FIRE;
             break;
@@ -73,21 +73,21 @@ u8 task_emy_01_1(EmyWork* work) {
 
     switch (work->state) {
     case EMY01_STATE_FIRE: {
-        s32 z;
+        s32 y;
         AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 0, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer != 0) {
             if (work->stateTimer == 0x16) {
-                z = act->y;
+                y = act->y;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    x = act->x - 0x6400;
-                    BgFxStartFire(0, act->x - 0x2600, z, act->z - 0xC00, x, z, 0, 1,
+                    targetX = act->x - 0x6400;
+                    BgFxStartFire(0, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, 1,
                         0xA7);
                 } else {
-                    x = act->x + 0x6400;
-                    BgFxStartFire(0, act->x + 0x2600, z, act->z - 0xC00, x, z, 0, 0,
+                    targetX = act->x + 0x6400;
+                    BgFxStartFire(0, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, 0,
                         0xA7);
                 }
             }
@@ -102,21 +102,21 @@ u8 task_emy_01_1(EmyWork* work) {
         break;
     }
     case EMY01_STATE_FIRA: {
-        s32 z;
+        s32 y;
         AnimChangeWithDef(sEmy01AnimDefs, &w->anim, 1, 0, w->tiles);
         work->vz = 0;
 
         if (work->stateTimer != 0) {
             if (work->stateTimer == 0x16) {
-                z = act->y;
+                y = act->y;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    x = act->x - 0x6400;
-                    BgFxStartFire(1, act->x - 0x2600, z, act->z - 0xC00, x, z, 0, 1,
+                    targetX = act->x - 0x6400;
+                    BgFxStartFire(1, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, 1,
                         0xA8);
                 } else {
-                    x = act->x + 0x6400;
-                    BgFxStartFire(1, act->x + 0x2600, z, act->z - 0xC00, x, z, 0, 0,
+                    targetX = act->x + 0x6400;
+                    BgFxStartFire(1, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, 0,
                         0xA8);
                 }
             }

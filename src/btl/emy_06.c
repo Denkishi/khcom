@@ -57,14 +57,14 @@ enum Emy06State {
 u8 task_emy_06_1(Emy06Work* work) {
     Emy06Work* w;
     BtlObj* act;
-    s32* p;
-    u16 s;
-    u16 m;
-    s32 pos;
-    s32 d;
-    s32 t;
-    s32 v;
-    s32 e;
+    s32* targetZ;
+    u16 frame;
+    u16 timer;
+    s32 targetY;
+    s32 dy;
+    s32 z;
+    s32 adjustedX;
+    s32 step;
     s32 tx;
     s32 ty;
 
@@ -72,10 +72,10 @@ u8 task_emy_06_1(Emy06Work* work) {
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        GetEnemyTargetPosition(act, NULL, &pos, NULL);
-        d = act->y - pos;
+        GetEnemyTargetPosition(act, NULL, &targetY, NULL);
+        dy = act->y - targetY;
 
-        if (d >= 0 ? d <= 0xFFF : pos - act->y <= 0xFFF) {
+        if (dy >= 0 ? dy <= 0xFFF : targetY - act->y <= 0xFFF) {
             work->base.state = EMY06_STATE_STRAIGHT_DASH;
         } else {
             work->base.state = EMY06_STATE_HOMING_CHARGE;
@@ -88,16 +88,16 @@ u8 task_emy_06_1(Emy06Work* work) {
     case EMY06_STATE_HOMING_CHARGE:
         AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
         work->base.vz = 0;
-        p = &gBtlWork->targetZ;
-        t = act->z + 0xC00;
-        act->z += (*p - t) >> 4;
-        s = AnimGetFrame(&work->base.anim);
+        targetZ = &gBtlWork->targetZ;
+        z = act->z + 0xC00;
+        act->z += (*targetZ - z) >> 4;
+        frame = AnimGetFrame(&work->base.anim);
 
-        if (s >= 5 && s <= 20) {
-            m = work->base.stateTimer;
-            m &= 3;
+        if (frame >= 5 && frame <= 20) {
+            timer = work->base.stateTimer;
+            timer &= 3;
 
-            if (m == 0) {
+            if (timer == 0) {
                 GetEnemyTargetPosition(act, &tx, &ty, NULL);
                 work->base.angle = GetAngle(act->x, act->y, tx, ty);
             }
@@ -121,30 +121,30 @@ u8 task_emy_06_1(Emy06Work* work) {
     case EMY06_STATE_STRAIGHT_DASH:
         AnimChangeWithDef(sEmy06AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
         work->base.vz = 0;
-        p = &gBtlWork->targetZ;
-        t = act->z + 0xC00;
-        act->z += (*p - t) >> 4;
-        s = AnimGetFrame(&work->base.anim);
+        targetZ = &gBtlWork->targetZ;
+        z = act->z + 0xC00;
+        act->z += (*targetZ - z) >> 4;
+        frame = AnimGetFrame(&work->base.anim);
 
-        if (s >= 6 && s <= 16) {
+        if (frame >= 6 && frame <= 16) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                v = act->x;
-                v += 0x7800;
+                adjustedX = act->x;
+                adjustedX += 0x7800;
             } else {
-                v = act->x;
-                v -= 0x7800;
+                adjustedX = act->x;
+                adjustedX -= 0x7800;
             }
 
-            e = (act->originX - v) >> 3;
+            step = (act->originX - adjustedX) >> 3;
             w->speed += 0x33;
 
-            if (e > w->speed) {
-                e = w->speed;
-            } else if (e < -w->speed) {
-                e = -w->speed;
+            if (step > w->speed) {
+                step = w->speed;
+            } else if (step < -w->speed) {
+                step = -w->speed;
             }
 
-            act->x += e;
+            act->x += step;
 
             if (ApplyAttackBox(0xB0, act->x, act->y, act->z - 0x800, 0x10, 0x10,
                     8)) {

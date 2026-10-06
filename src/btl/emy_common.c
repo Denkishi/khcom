@@ -37,7 +37,7 @@ u16 gEnemyTileCounts[54] = {
 
 void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     BtlObj* actor = &work->actor;
-    u16 t;
+    u16 tileCount;
 
     InitEnemyBtlObj(actor, &def->kind, obj->x, obj->y, obj->z);
     actor->attackOffset = def->attackOffset;
@@ -50,9 +50,9 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     }
 
     actor->flags |= (BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
-    t = gEnemyTileCounts[actor->kind];
+    tileCount = gEnemyTileCounts[actor->kind];
     work->def = def;
-    work->tiles = AllocObjTiles(t * 32, NULL);
+    work->tiles = AllocObjTiles(tileCount * 32, NULL);
     work->palette = LoadObjPalette(def->palette, 32);
     work->palette2 = LoadObjPalette(gHitFlashPalette, 32);
     work->idleState = EMY_STATE_IDLE;
@@ -96,18 +96,18 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
         work->scaleY = 0x80;
     }
 
-    gBtlWork->enemyTileCount += t;
+    gBtlWork->enemyTileCount += tileCount;
     gBtlWork->pendingEnemies--;
 }
 
 s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 attack, s16 distance, u16 song, s16 dx, s16 dz, u16 halfSize) {
     BtlObj* actor = &work->actor;
-    s32 ret;
-    s32 v;
-    s32 target;
+    s32 hit;
+    s32 targetX;
+    s32 targetY;
     s16 steps;
 
-    ret = 0;
+    hit = 0;
 
     if (work->stateTimer == 0) {
         work->flags &= ~EMY_FLAG_LUNGE_HIT;
@@ -116,17 +116,17 @@ s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 att
     if (work->stateTimer >= delay) {
         if (work->stateTimer < delay + duration) {
             steps = (delay + duration) - work->stateTimer;
-            target = actor->originY;
+            targetY = actor->originY;
 
             if (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT) {
-                v = actor->originX - (distance << 8);
+                targetX = actor->originX - (distance << 8);
             } else {
-                v = actor->originX + (distance << 8);
+                targetX = actor->originX + (distance << 8);
             }
 
             if (actor->badStatus != BAD_STATUS_BIND) {
-                ApproachValueHalfSteps(&actor->x, v, steps);
-                ApproachValueHalfSteps(&actor->y, target, steps);
+                ApproachValueHalfSteps(&actor->x, targetX, steps);
+                ApproachValueHalfSteps(&actor->y, targetY, steps);
             }
 
             if (!(work->flags & EMY_FLAG_LUNGE_HIT)) {
@@ -134,12 +134,12 @@ s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 att
                     if (ApplyAttackBox(attack, actor->x - (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != 0) {
                         m4aSongNumStart(song);
                         work->flags |= EMY_FLAG_LUNGE_HIT;
-                        ret = 1;
+                        hit = 1;
                     }
                 } else {
                     if (ApplyAttackBox(attack, actor->x + (dx << 8), actor->y, actor->z + (dz << 8), halfSize, halfSize / 2, halfSize) != 0) {
                         m4aSongNumStart(song);
-                        ret = 1;
+                        hit = 1;
                         work->flags |= EMY_FLAG_LUNGE_HIT;
                     }
                 }
@@ -151,7 +151,7 @@ s16 EmyLungeAttack(EmyWork* work, s16 delay, s16 duration, s16 recovery, s32 att
     }
 
     work->stateTimer++;
-    return ret;
+    return hit;
 }
 
 void EmyReturnToIdle(EmyWork* work) {
@@ -312,29 +312,29 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
             s32 tx;
             s32 ty;
-            s32 d;
+            s32 step;
 
             tx = work->x;
             ty = work->y;
             work->speed += 51;
-            d = (tx - actor->x) >> 5;
+            step = (tx - actor->x) >> 5;
 
-            if (d > work->speed) {
-                d = work->speed;
-            } else if (d < -work->speed) {
-                d = -work->speed;
+            if (step > work->speed) {
+                step = work->speed;
+            } else if (step < -work->speed) {
+                step = -work->speed;
             }
 
-            actor->x += d;
-            d = (ty - actor->y) >> 5;
+            actor->x += step;
+            step = (ty - actor->y) >> 5;
 
-            if (d > work->speed) {
-                d = work->speed;
-            } else if (d < -work->speed) {
-                d = -work->speed;
+            if (step > work->speed) {
+                step = work->speed;
+            } else if (step < -work->speed) {
+                step = -work->speed;
             }
 
-            actor->y += d;
+            actor->y += step;
 
             if (work->stateTimer > 64) {
                 work->state = work->idleState;
@@ -461,7 +461,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
             s32 px;
             s32 tx;
             s32 ty;
-            s32 d;
+            s32 step;
 
             AnimChangeWithDef(work->def->animDef, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             TryEnemyCardUse(actor);
@@ -570,7 +570,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         if (work->stateTimer >= work->def->hitStunFrames) {
-            s32 ok = 0;
+            s32 facingTarget = 0;
 
             ClearBtlObjActionFlags(actor);
             work->state = EMY_STATE_HURT_RECOVER;
@@ -580,23 +580,23 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 5 == 0) {
                         actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-                        ok = 1;
+                        facingTarget = 1;
                     }
                 } else {
-                    ok = 1;
+                    facingTarget = 1;
                 }
             } else {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    ok = 1;
+                    facingTarget = 1;
                 } else {
                     if (GetRandom() % 5 == 0) {
                         actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
-                        ok = 1;
+                        facingTarget = 1;
                     }
                 }
             }
 
-            if (!ok) {
+            if (!facingTarget) {
                 break;
             }
 
@@ -733,7 +733,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         break;
     case EMY_STATE_DEFEATED:
         if (work->stateTimer == 0) {
-            s32 t;
+            s32 halfHeight;
 
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
 
@@ -758,12 +758,12 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
                 break;
             }
 
-            t = (actor->height / 2) * work->fxScale;
+            halfHeight = (actor->height / 2) * work->fxScale;
 
             if (work->flags & EMY_FLAG_DARK_DEATH) {
-                BgFxStartDarkDeath(actor->x, actor->y, actor->z - t, work->fxScale);
+                BgFxStartDarkDeath(actor->x, actor->y, actor->z - halfHeight, work->fxScale);
             } else {
-                BgFxStartEnemyDeath(actor->x, actor->y, actor->z - t, work->fxScale);
+                BgFxStartEnemyDeath(actor->x, actor->y, actor->z - halfHeight, work->fxScale);
             }
 
             work->stateTimer++;
@@ -899,7 +899,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
 void EmyDraw(EmyWork* work) {
     if (work->visible) {
         BtlObj* actor;
-        u16 g;
+        u16 flags;
         ObjAffine* affine;
         s32 sx;
         s32 sy;
@@ -907,7 +907,7 @@ void EmyDraw(EmyWork* work) {
         s16 y;
 
         actor = &work->actor;
-        g = GetBattleSpritePriorityFlags(actor->y) | work->spriteFlags;
+        flags = GetBattleSpritePriorityFlags(actor->y) | work->spriteFlags;
         WorldToScreen(&x, &y, actor->x, actor->y, actor->z);
 
         if (work->scaleX == 0x100 && work->scaleY == 0x100) {
@@ -917,7 +917,7 @@ void EmyDraw(EmyWork* work) {
             } else if (gBtlWork->scale == 0x100) {
                 sy = gBtlWork->scale;
                 sx = sy;
-                g |= 1;
+                flags |= 1;
             } else {
                 sy = gBtlWork->scale;
                 sx = -sy;
@@ -943,9 +943,9 @@ void EmyDraw(EmyWork* work) {
         }
 
         if (StepHitFlash(actor)) {
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, g, (-4100 - ((actor->y >> 8) << 2)) | 3);
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, flags, (-4100 - ((actor->y >> 8) << 2)) | 3);
         } else {
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, g, (-4100 - ((actor->y >> 8) << 2)) | 3);
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags, (-4100 - ((actor->y >> 8) << 2)) | 3);
         }
 
         TaskPoolDraw(&work->tasks);

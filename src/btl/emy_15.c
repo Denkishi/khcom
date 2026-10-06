@@ -59,15 +59,15 @@ enum Emy15State {
 u8 task_emy_15_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY15_STATE_DASH_WINDUP;
             break;

@@ -70,18 +70,18 @@ void task_emy_00_0(EmyWork* work, void* obj) {
 u8 task_emy_00_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
-    s32 pos;
-    s32 pos2;
-    u8 ret;
+    u16 roll;
+    s32 sunkTargetX;
+    s32 idleTargetX;
+    u8 alive;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY00_STATE_LUNGE;
             break;
@@ -118,7 +118,7 @@ u8 task_emy_00_1(EmyWork* work) {
         break;
     case EMY00_STATE_SUNK_MOVE:
         if (gBtlWork->flags & BTL_FLAG_ENEMY_MOVE_ENABLED) {
-            GetEnemyTargetPosition(act, &pos, NULL, NULL);
+            GetEnemyTargetPosition(act, &sunkTargetX, NULL, NULL);
             AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             act->x += gSineTable[w->angle] * w->speed >> 8;
             act->y += -gSineTable[w->angle + 64] * w->speed >> 8;
@@ -133,7 +133,7 @@ u8 task_emy_00_1(EmyWork* work) {
                 w->stateTimer++;
             }
 
-            if (act->x > pos) {
+            if (act->x > sunkTargetX) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -211,9 +211,9 @@ u8 task_emy_00_1(EmyWork* work) {
         }
 
         if (GetRandom() % w->def->turnInterval == 0) {
-            GetEnemyTargetPosition(act, &pos2, NULL, NULL);
+            GetEnemyTargetPosition(act, &idleTargetX, NULL, NULL);
 
-            if (act->x > pos2) {
+            if (act->x > idleTargetX) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -224,70 +224,70 @@ u8 task_emy_00_1(EmyWork* work) {
         break;
     }
 
-    ret = EmyUpdateCommonStates(w);
+    alive = EmyUpdateCommonStates(w);
 
     if (w->state == EMY_STATE_FLEE) {
         AnimChangeWithDef(sEmy00AnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
     }
 
-    return ret;
+    return alive;
 }
 
 void task_emy_00_2(EmyWork* work) {
     BtlObj* act;
-    u16 pri;
+    u16 flags;
     ObjAffine* affine;
-    s32 rot;
-    s32 scale;
-    s32 zoom;
+    s32 sx;
+    s32 sy;
+    s32 scaleY;
     s16 x;
     s16 y;
 
     if (work->visible) {
         act = &work->actor;
-        pri = GetBattleSpritePriorityFlags(act->y) | work->spriteFlags;
+        flags = GetBattleSpritePriorityFlags(act->y) | work->spriteFlags;
         WorldToScreen(&x, &y, act->x, act->y, act->z);
-        zoom = work->scaleY;
+        scaleY = work->scaleY;
 
-        if (zoom == 0x100) {
+        if (scaleY == 0x100) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                scale = gBtlWork->scale;
-                rot = scale;
-            } else if (gBtlWork->scale == zoom) {
-                scale = zoom;
-                rot = scale;
-                pri |= 1;
+                sy = gBtlWork->scale;
+                sx = sy;
+            } else if (gBtlWork->scale == scaleY) {
+                sy = scaleY;
+                sx = sy;
+                flags |= 1;
             } else {
-                rot = -gBtlWork->scale;
-                scale = gBtlWork->scale;
+                sx = -gBtlWork->scale;
+                sy = gBtlWork->scale;
             }
         } else {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                rot = gBtlWork->scale * work->scaleX >> 8;
-                scale = gBtlWork->scale;
+                sx = gBtlWork->scale * work->scaleX >> 8;
+                sy = gBtlWork->scale;
             } else {
-                rot = -(gBtlWork->scale * work->scaleX >> 8);
-                scale = gBtlWork->scale;
+                sx = -(gBtlWork->scale * work->scaleX >> 8);
+                sy = gBtlWork->scale;
             }
 
-            scale = scale * zoom >> 8;
+            sy = sy * scaleY >> 8;
         }
 
-        if (scale == 0x100 && rot == scale) {
+        if (sy == 0x100 && sx == sy) {
             affine = NULL;
-        } else if (scale <= 0xFF) {
-            affine = AllocObjAffine(0, rot, scale, 0);
+        } else if (sy <= 0xFF) {
+            affine = AllocObjAffine(0, sx, sy, 0);
         } else {
-            affine = AllocObjAffine(0, rot, scale, 1);
+            affine = AllocObjAffine(0, sx, sy, 1);
         }
 
         if (StepHitFlash(act)) {
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, pri,
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette2, affine, flags,
                 -0x1004 - (act->y >> 8) * 4);
         } else if (work->state == EMY00_STATE_SUNK_MOVE) {
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, pri, 0xFFFF);
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags, 0xFFFF);
         } else {
-            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, pri,
+            DrawSprite(x, y, work->gfx, work->tiles, work->palette, affine, flags,
                 -0x1004 - (act->y >> 8) * 4);
         }
 

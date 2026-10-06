@@ -57,21 +57,21 @@ enum Emy39State {
 u8 task_emy_39_1(Emy39Work* work) {
     Emy39Work* w;
     BtlObj* act;
-    u16 r;
-    s16 c;
-    s32 z;
-    s32 x;
-    s32 p;
-    s32 q;
-    u8 ret;
+    u16 roll;
+    s16 timer;
+    s32 y;
+    s32 targetX;
+    s32 halfX;
+    s32 halfY;
+    u8 alive;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->base.state = EMY39_STATE_FIRE;
             break;
@@ -86,15 +86,15 @@ u8 task_emy_39_1(Emy39Work* work) {
         AnimChangeWithDef(sEmy39AnimDefs, &w->base.anim, 0, 0, w->base.tiles);
 
         if (work->base.stateTimer == 0x30) {
-            z = act->y;
+            y = act->y;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                x = act->x - 0x6400;
-                BgFxStartFire(0, act->x - 0x4000, z, act->z - 0x2000, x, z, 0, 1,
+                targetX = act->x - 0x6400;
+                BgFxStartFire(0, act->x - 0x4000, y, act->z - 0x2000, targetX, y, 0, 1,
                     0xD6);
             } else {
-                x = act->x + 0x6400;
-                BgFxStartFire(0, act->x + 0x4000, z, act->z - 0x2000, x, z, 0, 0,
+                targetX = act->x + 0x6400;
+                BgFxStartFire(0, act->x + 0x4000, y, act->z - 0x2000, targetX, y, 0, 0,
                     0xD6);
             }
         }
@@ -107,25 +107,25 @@ u8 task_emy_39_1(Emy39Work* work) {
 
         break;
     case EMY39_STATE_BUMP:
-        c = work->base.stateTimer;
+        timer = work->base.stateTimer;
 
-        if (c == 0) {
+        if (timer == 0) {
             AnimChangeWithDef(sEmy39AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
             w->dashSpeed = 0;
         }
 
         switch (AnimGetFrame(&work->base.anim)) {
         case 0:
-            p = 24;
-            q = 20;
+            halfX = 24;
+            halfY = 20;
             break;
         case 1:
-            p = 30;
-            q = 16;
+            halfX = 30;
+            halfY = 16;
             break;
         case 2:
-            p = 24;
-            q = 20;
+            halfX = 24;
+            halfY = 20;
 
             if (work->base.anim.timer == 0) {
                 w->dashSpeed = 0x200;
@@ -133,16 +133,16 @@ u8 task_emy_39_1(Emy39Work* work) {
 
             break;
         case 3:
-            p = 24;
-            q = 16;
+            halfX = 24;
+            halfY = 16;
             break;
         case 4:
-            p = 48;
-            q = 20;
+            halfX = 48;
+            halfY = 20;
             break;
         case 5:
-            p = 30;
-            q = 16;
+            halfX = 30;
+            halfY = 16;
 
             if (work->base.anim.timer == 0) {
                 w->dashSpeed = 0x200;
@@ -150,13 +150,13 @@ u8 task_emy_39_1(Emy39Work* work) {
 
             break;
         case 6:
-            p = 48;
-            q = 20;
+            halfX = 48;
+            halfY = 20;
             break;
         case 7:
         default:
-            p = 24;
-            q = 20;
+            halfX = 24;
+            halfY = 20;
             break;
         }
 
@@ -172,7 +172,7 @@ u8 task_emy_39_1(Emy39Work* work) {
             w->dashSpeed = 0;
         }
 
-        if (ApplyAttackBox(0xD7, act->x, act->y, act->z, p, q, 0x28)) {
+        if (ApplyAttackBox(0xD7, act->x, act->y, act->z, halfX, halfY, 0x28)) {
             m4aSongNumStart(SONG_BTL_MON_HIT02);
         }
 
@@ -185,7 +185,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         break;
     }
 
-    ret = EmyUpdateCommonStates(&work->base);
+    alive = EmyUpdateCommonStates(&work->base);
 
     if ((gBtlWork->actor->x < work->base.actor.x
                 && (work->base.actor.flags & BTLOBJ_FLAG_FACING_LEFT))
@@ -196,7 +196,7 @@ u8 task_emy_39_1(Emy39Work* work) {
         work->base.actor.flags &= ~BTLOBJ_FLAG_GUARD_PHYSICAL;
     }
 
-    return ret;
+    return alive;
 }
 
 void task_emy_39_2(EmyWork* work) {

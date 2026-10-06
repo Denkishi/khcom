@@ -53,19 +53,19 @@ enum Emy25State {
 u8 task_emy_25_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
     s32 dx;
     u16 dy;
-    s16 e;
-    u16 f;
+    s16 spinDx;
+    u16 spinDy;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY25_STATE_SWIPE;
             break;
@@ -137,48 +137,48 @@ u8 task_emy_25_1(EmyWork* work) {
         if (AnimIsFinished(&work->anim)) {
             EmyReturnToIdle(work);
         } else if (work->anim.timer == 0) {
-            e = 0;
-            f = 0;
+            spinDx = 0;
+            spinDy = 0;
 
             switch (work->anim.frame) {
             case 8:
-                e = 4;
+                spinDx = 4;
                 break;
             case 9:
-                e = 2;
+                spinDx = 2;
                 break;
             case 10:
-                e = 2;
-                f = -1;
+                spinDx = 2;
+                spinDy = -1;
                 break;
             case 11:
-                e = 4;
+                spinDx = 4;
                 break;
             case 12:
-                e = 7;
-                f = -2;
+                spinDx = 7;
+                spinDy = -2;
                 break;
             case 13:
-                e = 1;
-                f = -2;
+                spinDx = 1;
+                spinDy = -2;
                 break;
             case 26:
-                e = -5;
-                f = 1;
+                spinDx = -5;
+                spinDy = 1;
                 break;
             case 27:
-                e = -15;
-                f = 4;
+                spinDx = -15;
+                spinDy = 4;
                 break;
             }
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                act->x -= e << 8;
+                act->x -= spinDx << 8;
             } else {
-                act->x += e << 8;
+                act->x += spinDx << 8;
             }
 
-            act->y -= (s16)f << 8;
+            act->y -= (s16)spinDy << 8;
 
             if (work->anim.frame >= 8 && work->anim.frame <= 22) {
                 if ((act->flags & BTLOBJ_FLAG_FACING_LEFT)

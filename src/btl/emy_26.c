@@ -55,19 +55,19 @@ enum Emy26State {
 u8 task_emy_26_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
+    u16 roll;
+    s32 y;
+    s32 targetX;
     s32 z;
-    s32 x;
-    s32 t;
-    s32* p;
+    s32* targetZ;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY26_STATE_DIVE_LUNGE;
             break;
@@ -92,9 +92,9 @@ u8 task_emy_26_1(EmyWork* work) {
         case 1:
         case 2:
             work->vz = 0;
-            p = &gBtlWork->targetZ;
-            t = act->z + 0x3C00;
-            act->z += (*p - t) >> 3;
+            targetZ = &gBtlWork->targetZ;
+            z = act->z + 0x3C00;
+            act->z += (*targetZ - z) >> 3;
             break;
         }
 
@@ -110,15 +110,15 @@ u8 task_emy_26_1(EmyWork* work) {
             break;
         case 1:
             if (AnimIsFinished(&work->anim)) {
-                z = act->y;
+                y = act->y;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    x = act->x - 0x6400;
-                    BgFxStartFire(1, act->x - 0x2600, z, act->z - 0x2000, x, z, 0, 1,
+                    targetX = act->x - 0x6400;
+                    BgFxStartFire(1, act->x - 0x2600, y, act->z - 0x2000, targetX, y, 0, 1,
                         0xC6);
                 } else {
-                    x = act->x + 0x6400;
-                    BgFxStartFire(1, act->x + 0x2600, z, act->z - 0x2000, x, z, 0, 0,
+                    targetX = act->x + 0x6400;
+                    BgFxStartFire(1, act->x + 0x2600, y, act->z - 0x2000, targetX, y, 0, 0,
                         0xC6);
                 }
 

@@ -61,17 +61,17 @@ enum Emy19State {
 u8 task_emy_19_1(Emy19Work* work) {
     Emy19Work* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
+    s32 targetX;
+    s32 dx;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = act->x - pos;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = act->x - targetX;
 
-        if (d >= 0 ? d <= 0x3BFF : pos - act->x <= 0x3BFF) {
+        if (dx >= 0 ? dx <= 0x3BFF : targetX - act->x <= 0x3BFF) {
             work->base.state = EMY19_STATE_SLASH;
         } else {
             work->base.state = EMY19_STATE_LEAP_WINDUP;

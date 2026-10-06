@@ -59,9 +59,9 @@ enum Emy22State {
 u8 task_emy_22_1(Emy22Work* work) {
     Emy22Work* w;
     BtlObj* act;
-    s32 pos;
-    s32 pos2;
-    s32 pos3;
+    s32 warpTargetX;
+    s32 drainTargetX;
+    s32 lungeTargetX;
 
     w = work;
     act = &work->base.actor;
@@ -113,11 +113,11 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case EMY22_STATE_WARP_IN:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos, NULL, NULL);
+            GetEnemyTargetPosition(act, &warpTargetX, NULL, NULL);
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP,
                 w->base.tiles);
 
-            if (act->x > pos) {
+            if (act->x > warpTargetX) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -152,9 +152,9 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case EMY22_STATE_DRAIN_LUNGE:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos2, NULL, NULL);
+            GetEnemyTargetPosition(act, &drainTargetX, NULL, NULL);
 
-            if (act->x > pos2) {
+            if (act->x > drainTargetX) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
@@ -178,9 +178,9 @@ u8 task_emy_22_1(Emy22Work* work) {
         break;
     case EMY22_STATE_LUNGE:
         if (work->base.stateTimer == 0) {
-            GetEnemyTargetPosition(act, &pos3, NULL, NULL);
+            GetEnemyTargetPosition(act, &lungeTargetX, NULL, NULL);
 
-            if (act->x > pos3) {
+            if (act->x > lungeTargetX) {
                 act->flags |= BTLOBJ_FLAG_FACING_LEFT;
             } else {
                 act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;

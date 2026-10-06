@@ -52,16 +52,16 @@ enum Emy02State {
 u8 task_emy_02_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    u16 r;
-    s32 p;
+    u16 roll;
+    s32 targetX;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY02_STATE_BLIZZARD;
             break;
@@ -83,12 +83,12 @@ u8 task_emy_02_1(EmyWork* work) {
             y = act->y;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                p = act->x - 0x3C00;
-                BgFxStartBlizzard(0, act->x - 0x2800, y, act->z - 0x800, p, y, 0, 1,
+                targetX = act->x - 0x3C00;
+                BgFxStartBlizzard(0, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
                     0xA9);
             } else {
-                p = act->x + 0x3C00;
-                BgFxStartBlizzard(0, act->x + 0x2800, y, act->z - 0x800, p, y, 0, 0,
+                targetX = act->x + 0x3C00;
+                BgFxStartBlizzard(0, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
                     0xA9);
             }
         }
@@ -112,12 +112,12 @@ u8 task_emy_02_1(EmyWork* work) {
             y = act->y;
 
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                p = act->x - 0x3C00;
-                BgFxStartBlizzard(1, act->x - 0x2800, y, act->z - 0x800, p, y, 0, 1,
+                targetX = act->x - 0x3C00;
+                BgFxStartBlizzard(1, act->x - 0x2800, y, act->z - 0x800, targetX, y, 0, 1,
                     0xAA);
             } else {
-                p = act->x + 0x3C00;
-                BgFxStartBlizzard(1, act->x + 0x2800, y, act->z - 0x800, p, y, 0, 0,
+                targetX = act->x + 0x3C00;
+                BgFxStartBlizzard(1, act->x + 0x2800, y, act->z - 0x800, targetX, y, 0, 0,
                     0xAA);
             }
         }

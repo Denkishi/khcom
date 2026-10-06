@@ -72,17 +72,17 @@ u8 task_emy_30_1(EmyWork* work) {
     BtlObj* act;
     s32 x;
     s32 y;
-    s32 d;
-    u16 r;
+    s32 frontX;
+    u16 roll;
 
     w = work;
     act = &work->actor;
     GetEnemyTargetPosition(act, &x, &y, NULL);
 
     if (EmyUpdateReaction(work)) {
-        r = GetRandom();
+        roll = GetRandom();
 
-        switch (r & 1) {
+        switch (roll & 1) {
         case 0:
             work->state = EMY30_STATE_BITE_APPROACH;
             break;
@@ -177,13 +177,13 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (currentX < targetX) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            d = currentX + 0x1400;
+            frontX = currentX + 0x1400;
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
-            d = currentX - 0x1400;
+            frontX = currentX - 0x1400;
         }
 
-        act->x = currentX + ((targetX - d) >> 3);
+        act->x = currentX + ((targetX - frontX) >> 3);
 
         if (AnimIsFinished(&work->anim)) {
             work->state = EMY30_STATE_BITE;
@@ -205,13 +205,13 @@ u8 task_emy_30_1(EmyWork* work) {
 
         if (currentX < targetX) {
             act->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-            d = currentX + 0x1400;
+            frontX = currentX + 0x1400;
         } else {
             act->flags |= BTLOBJ_FLAG_FACING_LEFT;
-            d = currentX - 0x1400;
+            frontX = currentX - 0x1400;
         }
 
-        act->x = currentX + ((targetX - d) >> 3);
+        act->x = currentX + ((targetX - frontX) >> 3);
 
         if (work->anim.timer == 0) {
             switch (AnimGetFrame(&work->anim)) {

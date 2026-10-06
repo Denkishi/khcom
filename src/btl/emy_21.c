@@ -61,17 +61,17 @@ enum Emy21State {
 u8 task_emy_21_1(Emy21Work* work) {
     Emy21Work* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
+    s32 targetX;
+    s32 dx;
 
     w = work;
     act = &work->base.actor;
 
     if (EmyUpdateReaction(&work->base)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = pos - act->x;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = targetX - act->x;
 
-        if (d >= 0 ? d <= 0x3FFF : act->x - pos <= 0x3FFF) {
+        if (dx >= 0 ? dx <= 0x3FFF : act->x - targetX <= 0x3FFF) {
             work->base.state = EMY21_STATE_FUSE;
         } else {
             work->base.state = EMY21_STATE_CHARGE_WINDUP;
@@ -95,11 +95,11 @@ u8 task_emy_21_1(Emy21Work* work) {
 
         break;
     case EMY21_STATE_EXPLODE: {
-        u16 t;
+        u16 timer;
 
-        t = work->base.stateTimer;
+        timer = work->base.stateTimer;
 
-        if (t >= 12 && t <= 39) {
+        if (timer >= 12 && timer <= 39) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 ApplyAttackBox(0xBD, act->x, act->y, act->z, 30, 30, 32);
             } else {

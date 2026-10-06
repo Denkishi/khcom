@@ -55,18 +55,18 @@ enum Emy44State {
 u8 task_emy_44_1(EmyWork* work) {
     EmyWork* w;
     BtlObj* act;
-    s32 pos;
-    s32 d;
-    u8 ret;
+    s32 targetX;
+    s32 dx;
+    u8 alive;
 
     w = work;
     act = &work->actor;
 
     if (EmyUpdateReaction(work)) {
-        GetEnemyTargetPosition(act, &pos, NULL, NULL);
-        d = act->x - pos;
+        GetEnemyTargetPosition(act, &targetX, NULL, NULL);
+        dx = act->x - targetX;
 
-        if (d >= 0 ? d <= 0x4FFF : pos - act->x <= 0x4FFF) {
+        if (dx >= 0 ? dx <= 0x4FFF : targetX - act->x <= 0x4FFF) {
             work->state = EMY44_STATE_BASH;
         } else {
             work->state = EMY44_STATE_FIRE;
@@ -118,7 +118,7 @@ u8 task_emy_44_1(EmyWork* work) {
         break;
     }
 
-    ret = EmyUpdateCommonStates(work);
+    alive = EmyUpdateCommonStates(work);
 
     if ((gBtlWork->actor->x < work->actor.x && (work->actor.flags & BTLOBJ_FLAG_FACING_LEFT)) ||
             (gBtlWork->actor->x > work->actor.x &&
@@ -128,7 +128,7 @@ u8 task_emy_44_1(EmyWork* work) {
         work->actor.flags &= ~(BTLOBJ_FLAG_GUARD_PHYSICAL | BTLOBJ_FLAG_IMMUNE_FIRE | BTLOBJ_FLAG_IMMUNE_BLIZZARD);
     }
 
-    return ret;
+    return alive;
 }
 
 void task_emy_44_2(EmyWork* work) {

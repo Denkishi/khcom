@@ -39,7 +39,7 @@ void task_roomcreate_0(RoomCreateWork* work) {
     ResetSelectedMapCard();
     gFieldState->flags |= FIELD_FLAG_ROOM_CREATE;
     gFieldState->flags |= FIELD_FLAG_HOLD_LOCKON;
-    work->mapSelectStatus = 0;
+    work->mapSelectStatus = MAP_SELECT_STATUS_OPEN;
     work->spotLightEnd = 0;
     work->timer = 0;
     work->state = ROOM_CREATE_STATE_APPROACH;
@@ -102,13 +102,13 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
         }
 
         switch (work->mapSelectStatus) {
-        case 1:
+        case MAP_SELECT_STATUS_CLOSED:
             work->state = ROOM_CREATE_STATE_WALK_BACK;
             work->timer = 0;
             MapRestoreBg1();
             SetBgPriority(1, 2);
             break;
-        case 2:
+        case MAP_SELECT_STATUS_CARD_CHOSEN:
             work->state = ROOM_CREATE_STATE_CARD_POSE;
             work->timer = 0;
             break;
@@ -136,7 +136,7 @@ u8 task_roomcreate_1(RoomCreateWork* work) {
             work->timer++;
         }
 
-        if (work->mapSelectStatus == 1) {
+        if (work->mapSelectStatus == MAP_SELECT_STATUS_CLOSED) {
             work->timer = 0;
             work->state = ROOM_CREATE_STATE_OPEN_DOOR;
         }

@@ -108,7 +108,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     ResetMessageWindowFlags();
     CpuFill32(0, work, sizeof(MapSelectWork));
     work->status = status;
-    *status = 0;
+    *status = MAP_SELECT_STATUS_OPEN;
     work->messageTimer = 0;
     work->cancelled = FALSE;
     work->pageScroll = MAP_SELECT_PAGE_SCROLL_NONE;
@@ -503,7 +503,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
                         if (work->remainingKeys == 0) {
                             work->card->value = sel;
                             work->card->flags |= MAPCARD_FLAG_CHOSEN;
-                            *work->status = 2;
+                            *work->status = MAP_SELECT_STATUS_CARD_CHOSEN;
                             work->slideSteps = 16;
                             work->barSteps = 16;
                             work->lastPage = 0;
@@ -549,7 +549,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
                 work->card->value = sel;
                 work->card->flags |= MAPCARD_FLAG_CHOSEN;
                 RemoveMapCard(work->card->args.baseCardId + sel);
-                *work->status = 2;
+                *work->status = MAP_SELECT_STATUS_CARD_CHOSEN;
                 work->slideSteps = 16;
                 work->barSteps = 16;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectClose);
@@ -685,7 +685,7 @@ u8 UpdateMapSelectKindInput(MapSelectWork* work, void* task) {
                                     }
                                 }
 
-                                *work->status = 2;
+                                *work->status = MAP_SELECT_STATUS_CARD_CHOSEN;
                                 work->slideSteps = 16;
                                 work->barSteps = 16;
                                 work->lastPage = 0;
@@ -897,7 +897,7 @@ void MapSelect_3(MapSelectWork* work) {
     ReleaseObjTiles(work->tiles7);
     FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette4);
-    *work->status = 1;
+    *work->status = MAP_SELECT_STATUS_CLOSED;
     ReleaseObjTiles(work->tiles6);
     ReleaseObjTiles(gMapCardUiResources.tiles);
     ReleaseObjTiles(gMapCardUiResources.extraTiles);

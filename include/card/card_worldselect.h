@@ -5,6 +5,12 @@
 #include "taskpool.h"
 #include "types.h"
 
+enum MapSelectStatus {
+    MAP_SELECT_STATUS_OPEN,
+    MAP_SELECT_STATUS_CLOSED,
+    MAP_SELECT_STATUS_CARD_CHOSEN
+};
+
 u8 UpdateMapSelectSetup(MapSelectWork* work, void* task);
 u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task);
 u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task);

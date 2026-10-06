@@ -693,35 +693,35 @@ u8 IsPooMapBeeVisible() {
 
 void SetPoohDir5Right(PoohWork* work) {
     switch (((work->angle + 16) & 0xFF) >> 5) {
-    case 1:
+    case DIR8_UP_RIGHT:
         work->dirIndex = 4;
         work->flipped = 0;
         break;
-    case 2:
+    case DIR8_RIGHT:
         work->dirIndex = 3;
         work->flipped = 0;
         break;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         work->dirIndex = 2;
         work->flipped = 0;
         break;
-    case 4:
+    case DIR8_DOWN:
         work->dirIndex = 1;
         work->flipped = 0;
         break;
-    case 5:
+    case DIR8_DOWN_LEFT:
         work->dirIndex = 2;
         work->flipped = 1;
         break;
-    case 6:
+    case DIR8_LEFT:
         work->dirIndex = 3;
         work->flipped = 1;
         break;
-    case 7:
+    case DIR8_UP_LEFT:
         work->dirIndex = 4;
         work->flipped = 1;
         break;
-    case 0:
+    case DIR8_UP:
     default:
         work->dirIndex = 0;
         work->flipped = 0;
@@ -731,35 +731,35 @@ void SetPoohDir5Right(PoohWork* work) {
 
 void SetPoohDir5Left(PoohWork* work) {
     switch (((work->angle + 16) & 0xFF) >> 5) {
-    case 1:
+    case DIR8_UP_RIGHT:
         work->dirIndex = 4;
         work->flipped = 1;
         break;
-    case 2:
+    case DIR8_RIGHT:
         work->dirIndex = 3;
         work->flipped = 1;
         break;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         work->dirIndex = 2;
         work->flipped = 1;
         break;
-    case 4:
+    case DIR8_DOWN:
         work->dirIndex = 1;
         work->flipped = 0;
         break;
-    case 5:
+    case DIR8_DOWN_LEFT:
         work->dirIndex = 2;
         work->flipped = 0;
         break;
-    case 6:
+    case DIR8_LEFT:
         work->dirIndex = 3;
         work->flipped = 0;
         break;
-    case 7:
+    case DIR8_UP_LEFT:
         work->dirIndex = 4;
         work->flipped = 0;
         break;
-    case 0:
+    case DIR8_UP:
     default:
         work->dirIndex = 0;
         work->flipped = 0;
@@ -771,28 +771,28 @@ void SetPoohDir8(PoohWork* work) {
     work->flipped = 0;
 
     switch (((work->angle + 16) & 0xFF) >> 5) {
-    case 0:
+    case DIR8_UP:
         work->dirIndex = 0;
         break;
-    case 1:
+    case DIR8_UP_RIGHT:
         work->dirIndex = 4;
         break;
-    case 2:
+    case DIR8_RIGHT:
         work->dirIndex = 3;
         break;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         work->dirIndex = 2;
         break;
-    case 4:
+    case DIR8_DOWN:
         work->dirIndex = 1;
         break;
-    case 5:
+    case DIR8_DOWN_LEFT:
         work->dirIndex = 5;
         break;
-    case 6:
+    case DIR8_LEFT:
         work->dirIndex = 6;
         break;
-    case 7:
+    case DIR8_UP_LEFT:
         work->dirIndex = 7;
         break;
     default:
@@ -803,26 +803,26 @@ void SetPoohDir8(PoohWork* work) {
 
 void SetPoohDir2(PoohWork* work) {
     switch (((work->angle + 16) & 0xFF) >> 5) {
-    case 0:
-    case 1:
+    case DIR8_UP:
+    case DIR8_UP_RIGHT:
         work->dirIndex = 0;
         work->flipped = 1;
         break;
-    case 2:
+    case DIR8_RIGHT:
         work->dirIndex = 1;
         work->flipped = 1;
         break;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         work->dirIndex = 1;
         work->flipped = 1;
         break;
-    case 4:
-    case 5:
-    case 6:
+    case DIR8_DOWN:
+    case DIR8_DOWN_LEFT:
+    case DIR8_LEFT:
         work->dirIndex = 1;
         work->flipped = 0;
         break;
-    case 7:
+    case DIR8_UP_LEFT:
     default:
         work->dirIndex = 0;
         work->flipped = 0;
@@ -845,15 +845,15 @@ void SetPoohDir3(PoohWork* work) {
 
 u8 IsAngleFacingRight(u8 angle) {
     switch (((angle + 16) & 0xFF) >> 5) {
-    case 1:
-    case 2:
-    case 3:
+    case DIR8_UP_RIGHT:
+    case DIR8_RIGHT:
+    case DIR8_DOWN_RIGHT:
         return 1;
-    case 0:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
+    case DIR8_UP:
+    case DIR8_DOWN:
+    case DIR8_DOWN_LEFT:
+    case DIR8_LEFT:
+    case DIR8_UP_LEFT:
         return 0;
     }
 

@@ -299,22 +299,22 @@ void SetBtlSoraDirAnimation(BtlSoraWork* work, u16 index, u16 flags) {
     dir = 0;
 
     switch (((work->angle + 16) & 0xFF) >> 5) {
-    case 0:
+    case DIR8_UP:
         dir = 1;
         break;
-    case 4:
+    case DIR8_DOWN:
         dir = 0;
         break;
-    case 3:
-    case 5:
+    case DIR8_DOWN_RIGHT:
+    case DIR8_DOWN_LEFT:
         dir = 2;
         break;
-    case 2:
-    case 6:
+    case DIR8_RIGHT:
+    case DIR8_LEFT:
         dir = 3;
         break;
-    case 1:
-    case 7:
+    case DIR8_UP_RIGHT:
+    case DIR8_UP_LEFT:
         dir = 4;
         break;
     }

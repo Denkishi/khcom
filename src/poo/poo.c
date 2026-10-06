@@ -1971,21 +1971,21 @@ u8 GetPooAngleToPooh(PooPos* pos) {
     angle = GetAngle(pos->x, pos->y, gPoohPos->x, gPoohPos->y);
 
     switch (((angle + 16) & 0xFF) >> 5) {
-    case 1:
+    case DIR8_UP_RIGHT:
         return 0x2D;
-    case 2:
+    case DIR8_RIGHT:
         return 0x40;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         return 0x53;
-    case 4:
+    case DIR8_DOWN:
         return 0x80;
-    case 5:
+    case DIR8_DOWN_LEFT:
         return 0xAD;
-    case 6:
+    case DIR8_LEFT:
         return 0xC0;
-    case 7:
+    case DIR8_UP_LEFT:
         return 0xD3;
-    case 0:
+    case DIR8_UP:
     default:
         return 0;
     }
@@ -7027,35 +7027,35 @@ void task_poo_zzz_3(PooZzzWork* work) {
 
 void PooBflyPartSetDir(PooBflyPart* part) {
     switch (((part->angle + 16) & 0xFF) >> 5) {
-    case 1:
+    case DIR8_UP_RIGHT:
         part->dirIndex = 4;
         part->flipped = 1;
         break;
-    case 2:
+    case DIR8_RIGHT:
         part->dirIndex = 3;
         part->flipped = 1;
         break;
-    case 3:
+    case DIR8_DOWN_RIGHT:
         part->dirIndex = 2;
         part->flipped = 1;
         break;
-    case 4:
+    case DIR8_DOWN:
         part->dirIndex = 1;
         part->flipped = 0;
         break;
-    case 5:
+    case DIR8_DOWN_LEFT:
         part->dirIndex = 2;
         part->flipped = 0;
         break;
-    case 6:
+    case DIR8_LEFT:
         part->dirIndex = 3;
         part->flipped = 0;
         break;
-    case 7:
+    case DIR8_UP_LEFT:
         part->dirIndex = 4;
         part->flipped = 0;
         break;
-    case 0:
+    case DIR8_UP:
     default:
         part->dirIndex = 0;
         part->flipped = 0;

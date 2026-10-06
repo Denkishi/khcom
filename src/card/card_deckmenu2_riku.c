@@ -223,7 +223,7 @@ u8 UpdateRikuDeckMenuLoadDeckInfo(RikuDeckMenuWork* work, void* task) {
 
     base = GetBgCharBase(1);
     pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-    LoadPalette(gDeckTabHighlightPalette, pal, 32);
+    LoadPalette(gDeckTabHighlightPalette, pal, sizeof(gDeckTabHighlightPalette));
 #ifdef VERSION_EU
     RequestDma3Copy(gRikuDeckEquipMarkerTilesByLanguage[gLanguage] + 0x20, base + 0x2D80, 0x1E0);
 #else

@@ -1749,7 +1749,7 @@ void task_wlogo_tt_0(WlogoTtWork* work) {
     LoadBgPalette(0, gWlogoTtPalette, sizeof(gWlogoTtPalette));
     LoadBgTiles(0, gWlogoTtTiles, sizeof(gWlogoTtTiles));
     LoadBgMap(0, gWlogoTtTownMap, sizeof(gWlogoTtTownMap));
-    LoadPalette(gWlogoTtPalettes[15], (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 0x20);
+    LoadPalette(gWlogoTtPalettes[15], (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), sizeof(gWlogoTtPalettes[0]));
     work->timer = 0;
     work->subStep = 0;
     work->state = WLOGO_TT_STATE_WAIT;
@@ -1963,7 +1963,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
     case WLOGO_TT_STATE_LOAD_NAME:
         work->visible[6] = 0;
         LoadBgMap(0, gWlogoTtMap, sizeof(gWlogoTtMap));
-        LoadPalette(gWlogoTtPalettes[8], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
+        LoadPalette(gWlogoTtPalettes[8], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), sizeof(gWlogoTtPalettes[0]));
         EnableBg(0);
         work->blend = 16;
         SetBgBlend(0, 0, 16);
@@ -1994,7 +1994,7 @@ u8 task_wlogo_tt_1(WlogoTtWork* work) {
         } else if (work->subStep > 1) {
             work->subStep = 0;
             work->paletteStep--;
-            LoadPalette(gWlogoTtPalettes[work->paletteStep], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
+            LoadPalette(gWlogoTtPalettes[work->paletteStep], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), sizeof(gWlogoTtPalettes[0]));
         } else {
             work->subStep++;
         }

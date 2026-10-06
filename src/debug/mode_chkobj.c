@@ -1359,7 +1359,7 @@ void mode_chkobj_0() {
     SetupBg(1, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(1, 0x5400, 0x500);
-    DebugTextLoadPalette(1, gWhitePalette, 0x20, 0x0F);
+    DebugTextLoadPalette(1, gWhitePalette, sizeof(gWhitePalette), 0x0F);
     DebugTextPrint(166, 0, 2, sChkObjEntries[0].name);
 }
 

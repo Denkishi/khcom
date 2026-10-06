@@ -95,7 +95,7 @@ void mode_sio_dbg_flg_0(s32 arg) {
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    DebugTextLoadPalette(0, gWhitePalette, sizeof(gWhitePalette), 0x0F);
     sSioDbgCursor = 0;
 #ifdef VERSION_EU
     zero = 0;

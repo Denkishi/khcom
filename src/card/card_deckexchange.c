@@ -1259,11 +1259,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
     switch (deckIndex) {
     case 0:
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckTabHighlightPalette, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, sizeof(gDeckTabHighlightPalette));
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[9], pal, 32);
+        LoadPalette(gDeckMenuPalettes[9], pal, sizeof(gDeckMenuPalettes[0]));
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[10], pal, 32);
+        LoadPalette(gDeckMenuPalettes[10], pal, sizeof(gDeckMenuPalettes[0]));
         LoadBgMap(0, gDeck1PanelMap + 0xC0, 0x180);
         LoadBgMap(1, gDeck2PanelMap, 0x180);
         LoadBgMap(2, gDeck3PanelMap, 0x180);
@@ -1279,11 +1279,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
         break;
     case 1:
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckTabHighlightPalette, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, sizeof(gDeckTabHighlightPalette));
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[8], pal, 32);
+        LoadPalette(gDeckMenuPalettes[8], pal, sizeof(gDeckMenuPalettes[0]));
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[10], pal, 32);
+        LoadPalette(gDeckMenuPalettes[10], pal, sizeof(gDeckMenuPalettes[0]));
         LoadBgMap(0, gDeck1PanelMap, 0x180);
         LoadBgMap(1, gDeck2PanelMap + 0xC0, 0x180);
         LoadBgMap(2, gDeck3PanelMap, 0x180);
@@ -1299,11 +1299,11 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
         break;
     case 2:
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckTabHighlightPalette, pal, 32);
+        LoadPalette(gDeckTabHighlightPalette, pal, sizeof(gDeckTabHighlightPalette));
         pal = (u16*)(BG_PLTT + 8 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[8], pal, 32);
+        LoadPalette(gDeckMenuPalettes[8], pal, sizeof(gDeckMenuPalettes[0]));
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
-        LoadPalette(gDeckMenuPalettes[9], pal, 32);
+        LoadPalette(gDeckMenuPalettes[9], pal, sizeof(gDeckMenuPalettes[0]));
         LoadBgMap(0, gDeck1PanelMap, 0x180);
         LoadBgMap(1, gDeck2PanelMap, 0x180);
         LoadBgMap(2, gDeck3PanelMap + 0xC0, 0x180);

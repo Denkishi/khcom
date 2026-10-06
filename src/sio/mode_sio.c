@@ -2243,18 +2243,18 @@ void SioBtlOptionUpdateHandicapGauges(u16 handicap1, u16 handicap2) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge1Palettes[0]));
         LoadPalette(&gSioHandicapGauge1Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 2), (6 - handicap1) * 2);
         break;
     case 6:
-        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge1Palettes[0]));
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge1Palettes[0], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge1Palettes[0]));
         LoadPalette(&gSioHandicapGauge1Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[0]->index * 32 + OBJ_PLTT + 0xC), (handicap1 - 6) * 2);
         break;
     }
@@ -2265,18 +2265,18 @@ void SioBtlOptionUpdateHandicapGauges(u16 handicap1, u16 handicap2) {
     case 3:
     case 4:
     case 5:
-        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge2Palettes[0]));
         LoadPalette(&gSioHandicapGauge2Palettes[1][1], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 2), (6 - handicap2) * 2);
         break;
     case 6:
-        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge2Palettes[0]));
         break;
     case 7:
     case 8:
     case 9:
     case 10:
     case 11:
-        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), 32);
+        LoadPalette(gSioHandicapGauge2Palettes[0], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT), sizeof(gSioHandicapGauge2Palettes[0]));
         LoadPalette(&gSioHandicapGauge2Palettes[1][6], (void*)(sSioBtlOptionWork->palette5[1]->index * 32 + OBJ_PLTT + 0xC), (handicap2 - 6) * 2);
         break;
     }

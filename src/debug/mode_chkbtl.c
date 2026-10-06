@@ -270,7 +270,7 @@ void mode_chkbtl_0() {
     SetupBg(0, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    DebugTextLoadPalette(0, gWhitePalette, sizeof(gWhitePalette), 0x0F);
     DebugTextPrint(0, 0, 2, "\x82\x63\x82\x64\x82\x62\x82\x6a\x81\x7c\x82\x72\x82\x64\x82\x6b\x82\x64\x82\x62\x82\x73\x81\x40\x82\x61\x82\x74\x82\x73\x82\x73\x82\x6e\x82\x6d");
     DebugTextPrint(24, 32, 2, "\x82\x64\x82\x6d\x82\x6c\x81\x46");
     DebugTextPrint(24, 44, 2, "\x82\x61\x82\x66\x81\x40\x81\x46");

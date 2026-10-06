@@ -41,7 +41,7 @@ void mode_backupstat_0() {
     SetupBg(0, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gWhitePalette, 32, 15);
+    DebugTextLoadPalette(0, gWhitePalette, sizeof(gWhitePalette), 15);
     sBackupStatCursor = 0;
     DebugTextPrint(0, 0, 2, "\x81\x84");
     sBackupStatCount = 6;

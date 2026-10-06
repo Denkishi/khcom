@@ -541,7 +541,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
 
             work->needleY = act->y;
             m4aSongNumStart(SONG_VO_VIC_ATTACK01);
-            InitObjTilesAtSlot(&work->needleTiles, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenE1Tiles, 0x7E0);
+            InitObjTilesAtSlot(&work->needleTiles, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenE1Tiles, sizeof(gVixenE1Tiles));
         }
 
         if (AnimGetFrame(&w->base.anim) > 2) {
@@ -1206,7 +1206,7 @@ void task_hum_vixen_frg_0(VixenFrgWork* work, VixenNdlArgs* args) {
     s32 angle;
     s32 speed;
 
-    InitObjTilesAtSlot(&work->tilesSlot, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, 0x4C0);
+    InitObjTilesAtSlot(&work->tilesSlot, ((ObjTiles*)gBtlWork->tiles2)->index, gVixenReitouHahenTiles, sizeof(gVixenReitouHahenTiles));
     work->tiles = &work->tilesSlot;
     work->palette = LoadObjPalette(gVixEPalette, sizeof(gVixEPalette));
     work->timer = 0;

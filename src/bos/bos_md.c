@@ -1065,7 +1065,7 @@ void task_bos_md_0(MdWork* work, void* arg) {
 
     BosMdSetFrame(work, 0);
     MdAnimStart(work, 0);
-    LoadPalette(gBosMdPalette, (void*)PLTT, 32);
+    LoadPalette(gBosMdPalette, (void*)PLTT, sizeof(gBosMdPalette));
     SetBtlPaletteFadeExcluded(0, TRUE);
     work->bgPalette = gBosMdPalette;
     work->palette = LoadObjPalette(gBosMdPalette, sizeof(gBosMdPalette));
@@ -1154,14 +1154,14 @@ void task_bos_md_2(MdWork* work) {
 
     if (StepHitFlash(&work->sub[0])) {
         if (work->bgPalette != gHitFlashPalette) {
-            LoadPalette(gHitFlashPalette, (void*)PLTT, 32);
+            LoadPalette(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));
             work->bgPalette = gHitFlashPalette;
         }
 
         pal = work->palette2;
     } else {
         if (work->bgPalette != gBosMdPalette) {
-            LoadPalette(gBosMdPalette, (void*)PLTT, 32);
+            LoadPalette(gBosMdPalette, (void*)PLTT, sizeof(gBosMdPalette));
             work->bgPalette = gBosMdPalette;
         }
 

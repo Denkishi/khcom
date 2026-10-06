@@ -105,10 +105,10 @@ void TitleExitToChoice() {
 void TitleShowLogo(u16 frames) {
     if ((gGameState.flags & GAME_FLAG_RIKU_TITLE) != 0) {
         LoadBgPalette(1, gTitleRikuBgPalette, sizeof(gTitleRikuBgPalette));
-        TitleCopyToPaletteBuffer(0, gTitleRikuBgPalette, 0x200);
+        TitleCopyToPaletteBuffer(0, gTitleRikuBgPalette, sizeof(gTitleRikuBgPalette));
     } else {
         LoadBgPalette(1, gTitleSoraBgPalette, sizeof(gTitleSoraBgPalette));
-        TitleCopyToPaletteBuffer(0, gTitleSoraBgPalette, 0x200);
+        TitleCopyToPaletteBuffer(0, gTitleSoraBgPalette, sizeof(gTitleSoraBgPalette));
     }
 
     EnableBg(0);

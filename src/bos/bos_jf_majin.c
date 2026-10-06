@@ -206,17 +206,17 @@ void task_bos_jf_majin_2(JfMajinWork* work) {
     if (!gBtlWork->paused) {
         if (jf->flags & JF_FLAG_HURT) {
             if (gFrameCounter & 1) {
-                LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
+                LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));
                 palette = work->palette2;
             } else {
-                LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
+                LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, sizeof(gBosJfMajinPalette));
                 palette = work->palette;
             }
         } else {
             palette = work->palette;
         }
     } else {
-        LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
+        LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, sizeof(gBosJfMajinPalette));
         palette = work->palette;
     }
 

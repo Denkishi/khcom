@@ -85,7 +85,7 @@ void BosPcFldEnableObject(Task* task, u8 on) {
         if (work->palette == NULL) {
             pal = LoadObjPalette(gBosPcObjPalette, sizeof(gBosPcObjPalette));
             work->palette = pal;
-            LoadPalette(gBosPcFldPalette, (void*)(OBJ_PLTT + (pal->index + 1) * PLTT_SIZE_4BPP), 32);
+            LoadPalette(gBosPcFldPalette, (void*)(OBJ_PLTT + (pal->index + 1) * PLTT_SIZE_4BPP), sizeof(gBosPcFldPalette));
         }
     }
 }

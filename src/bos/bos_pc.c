@@ -5275,9 +5275,9 @@ void BosPcDraw(PcWork* work) {
 
     if (work->flash != work->prevFlash) {
         if (work->flash == 0) {
-            LoadPalette(gBosPcBgPalette, (void*)PLTT, 32);
+            LoadPalette(gBosPcBgPalette, (void*)PLTT, sizeof(gBosPcBgPalette));
         } else {
-            LoadPalette(gHitFlashPalette, (void*)PLTT, 32);
+            LoadPalette(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));
         }
 
         work->prevFlash = work->flash;

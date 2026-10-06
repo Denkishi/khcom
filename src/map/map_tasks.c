@@ -4539,7 +4539,7 @@ void MapMsgInit(MapMsgWork* work, void* text) {
     LoadBgTiles(0, gMapMsgWinTiles, sizeof(gMapMsgWinTiles));
     LoadBgMap(0, gMapMsgWinMap, sizeof(gMapMsgWinMap));
     SetBgScroll(0, 0, (u16)-46);
-    LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), sizeof(gCard00Palette));
     InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->palette = LoadTextPalette(1);

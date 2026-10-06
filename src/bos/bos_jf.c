@@ -192,7 +192,7 @@ u8 task_bos_jf_1(JfWork* work) {
         if (--work->hurtTimer <= 0) {
             work->hitCount = 0;
             work->flags &= ~JF_FLAG_HURT;
-            LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gBosJfMajinPalette, (void*)PLTT, sizeof(gBosJfMajinPalette));
             ClearBtlObjActionFlags(sub);
 
             if (sub->hp > 0) {

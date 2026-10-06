@@ -166,7 +166,7 @@ void task_bos_dsd_main_2(DsdMainWork* work) {
         palette = work->palette;
     } else if (dsd->flags & DSD_FLAG_HURT) {
         if (gFrameCounter & 1) {
-            LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, 32);
+            LoadPaletteWithEffect(gHitFlashPalette, (void*)PLTT, sizeof(gHitFlashPalette));
             palette = work->palette2;
         } else {
             LoadPaletteWithEffect(gBosDsdBgPalette, (void*)PLTT, 32);

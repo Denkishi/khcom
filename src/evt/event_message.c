@@ -3409,7 +3409,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
     }
 
     if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
-        LoadPalette(gEventSilhouettePalette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
+        LoadPalette(gEventSilhouettePalette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), sizeof(gEventSilhouettePalette));
     } else if ((work->keyframes[work->keyframe - 1].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
         LoadPalette(gEvtObjResources[work->arg.chara].res.palette, (void*)(work->obj.paletteIndex * 32 + OBJ_PLTT), 32);
     }
@@ -6204,7 +6204,7 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
                     LoadBgTiles(work->bg, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
                     LoadBgMap(work->bg, gSysMsgWinMap, sizeof(gSysMsgWinMap));
-                    LoadPalette(gCard00Palette, palette, 32);
+                    LoadPalette(gCard00Palette, palette, sizeof(gCard00Palette));
 
                     if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                         FadeSetPaletteExcluded(15, TRUE);
@@ -6260,7 +6260,7 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
             LoadBgTiles(work->bg, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
             LoadBgMap(work->bg, gSysMsgWinMap, sizeof(gSysMsgWinMap));
-            LoadPalette(gCard00Palette, palette, 32);
+            LoadPalette(gCard00Palette, palette, sizeof(gCard00Palette));
 
             if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
                 FadeSetPaletteExcluded(15, TRUE);

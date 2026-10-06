@@ -426,7 +426,7 @@ void task_title_menu_0(TitleMenuWork* work, s16* choice) {
     work->tiles = LoadObjTiles(gTitleMenuEntryTiles, sizeof(gTitleMenuEntryTiles));
 #endif
     work->palette = LoadObjPalette(gTitleMenuEntryPalette, sizeof(gTitleMenuEntryPalette));
-    TitleCopyToPaletteBuffer(work->palette->index + 16, gTitleMenuEntryPalette, 0x20);
+    TitleCopyToPaletteBuffer(work->palette->index + 16, gTitleMenuEntryPalette, sizeof(gTitleMenuEntryPalette));
     work->tiles2[0] = LoadObjTiles(gTitleMenuCursorTiles, sizeof(gTitleMenuCursorTiles));
 #ifdef VERSION_EU
     switch (gLanguage) {

@@ -131,7 +131,7 @@ u8 sysmsgwin_1(SysMsgWinWork* work, void* task) {
         pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
         LoadBgTiles(work->args.bg, gSysMsgWinTiles, sizeof(gSysMsgWinTiles));
         LoadBgMap(work->args.bg, gSysMsgWinMap, sizeof(gSysMsgWinMap));
-        LoadPalette(gCard00Palette, pal, 32);
+        LoadPalette(gCard00Palette, pal, sizeof(gCard00Palette));
 
         switch (work->messageDef->positionIndex) {
         case 0:
@@ -561,7 +561,7 @@ u8 sysmsgwinChoice_1(SysMsgWinWork* work, void* task) {
         pal = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
         LoadBgTiles(work->args.bg, gConfirmWinTiles, sizeof(gConfirmWinTiles));
         LoadBgMap(work->args.bg, gConfirmWinMap, sizeof(gConfirmWinMap));
-        LoadPalette(gCard00Palette, pal, 32);
+        LoadPalette(gCard00Palette, pal, sizeof(gCard00Palette));
 
         switch (work->messageDef->positionIndex) {
         case 0:

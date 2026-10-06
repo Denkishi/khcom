@@ -1418,7 +1418,7 @@ void SpotLight_0(SpotlightWork* work, u8* src) {
     }
 
     LoadBgTiles(0, gSpotLightTiles, 0xCA0);
-    LoadPalette(gSpotLightPalette, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(gSpotLightPalette, (void*)(BG_PLTT + 13 * PLTT_SIZE_4BPP), sizeof(gSpotLightPalette));
     FadeSetPaletteExcluded(13, TRUE);
     LoadBgMap(0, gSpotLightMap, 0x800);
     SetBgScroll(0, 0, 0);

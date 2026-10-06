@@ -58,7 +58,7 @@ void mode_debflag_0(s32 arg) {
     SetupBg(0, 0, 0x0F, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gWhitePalette, 0x20, 0x0F);
+    DebugTextLoadPalette(0, gWhitePalette, sizeof(gWhitePalette), 0x0F);
     sDebflagCursor = 0;
     DebugTextPrint(0, 0, 2, "\x81\x84");
 

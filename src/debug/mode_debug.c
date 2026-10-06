@@ -71,7 +71,7 @@ void mode_debug_0() {
     SetBackdropColor(31, 31, 31);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, gDebugMenuTextPalette, 0x20, 0x0F);
+    DebugTextLoadPalette(0, gDebugMenuTextPalette, sizeof(gDebugMenuTextPalette), 0x0F);
     sDebugWork->tiles = LoadObjTiles(gDebugMenuCursorTiles, sizeof(gDebugMenuCursorTiles));
     sDebugWork->palette = LoadObjPalette(gDebugMenuCursorPalette, sizeof(gDebugMenuCursorPalette));
     AnimInit(&sDebugWork->anim, gDebugMenuCursorAnims, gDebugMenuCursorFrames);

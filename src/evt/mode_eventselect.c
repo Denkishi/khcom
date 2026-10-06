@@ -293,7 +293,7 @@ void mode_eventselect_0() {
     SetupBg(0, 0, 30, 0);
     EnableBg(0);
     DebugTextInit(0, 0x8000, 0x800);
-    DebugTextLoadPalette(0, gDebugFontPalette, 0x20, 0);
+    DebugTextLoadPalette(0, gDebugFontPalette, sizeof(gDebugFontPalette), 0);
 }
 
 void mode_eventselect_1() {

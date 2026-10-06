@@ -318,10 +318,10 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #endif
 
                 if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                    LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                    LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpSoraStatsPalettes));
                 } else {
                     LoadLevelUpRikuBgTiles();
-                    LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                    LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpRikuStatsPalettes));
                 }
 
                 LoadBgMap(1, gLevelUpStatsMap, mapSize);
@@ -355,10 +355,10 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpSoraStatsPalettes));
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpRikuStatsPalettes));
                     }
 
                     SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
@@ -390,10 +390,10 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
 #endif
 
                     if (!(gGameState.flags & GAME_FLAG_RIKU)) {
-                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpSoraStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpSoraStatsPalettes));
                     } else {
                         LoadLevelUpRikuBgTiles();
-                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), 0x80);
+                        LoadPalette(gLevelUpRikuStatsPalettes, (void*)(BG_PLTT + 10 * PLTT_SIZE_4BPP), sizeof(gLevelUpRikuStatsPalettes));
                     }
 
                     SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);

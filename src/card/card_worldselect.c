@@ -1505,7 +1505,7 @@ void LoadMapSelectKindPalette(u16 baseCardId, MapSelectWork* work) {
         }
     }
 
-    LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), sizeof(work->paletteBuffer));
 }
 
 void LoadMapSelectGridPalette(u16 baseCardId, MapSelectWork* work) {
@@ -1555,7 +1555,7 @@ void LoadMapSelectGridPalette(u16 baseCardId, MapSelectWork* work) {
         }
     }
 
-    LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), 32);
+    LoadPalette(work->paletteBuffer, (void*)(BG_PLTT + 12 * PLTT_SIZE_4BPP), sizeof(work->paletteBuffer));
 }
 
 s32 LoadMapSelectValueCounts(u16 baseCardId, MapSelectWork* work) {

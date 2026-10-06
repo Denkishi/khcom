@@ -539,7 +539,7 @@ void Mode_MapChk_0() {
     SetupBg(0, 0, 15, 0);
     EnableBg(0);
     DebugTextInit(0, 0x5400, 0x500);
-    DebugTextLoadPalette(0, sMapChkWhitePalette, 32, 15);
+    DebugTextLoadPalette(0, sMapChkWhitePalette, sizeof(sMapChkWhitePalette), 15);
     DebugTextPrint(0, 0, 2, sMapChkHelpText);
     DebugTextPrint(24, 32, 2, sMapChkModeLabel);
     DebugTextPrint(24, 44, 2, sMapChkWorldLabel);

@@ -16,6 +16,7 @@
 #include "m4a_song.h"
 #include "types.h"
 #include <stddef.h>
+#include "enemy_ids.h"
 
 static const BattleAttackDef sBattleAttackDefs[330] = {
     { 256, 204, 0, 3, BgFxStartRikuHit, ATTACK_FLAG_KIND_WEAPON | ATTACK_FLAG_ELEMENT_PHYSICAL },
@@ -566,10 +567,10 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     if (attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) {
         if (hit->flags & BTLOBJ_FLAG_GUARD_PHYSICAL) {
             switch ((u32)hit->kind) {
-            case 7:
-            case 28:
-            case 50:
-            case 52:
+            case ENEMY_BLACK_FUNGUS:
+            case ENEMY_DEFENDER:
+            case ENEMY_VEXEN:
+            case ENEMY_ANSEM:
                 m4aSongNumStart(SONG_BTL_GARD);
                 break;
             default:
@@ -593,9 +594,9 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     } else if (attack->flags & ATTACK_FLAG_ELEMENT_NEUTRAL) {
         if (hit->flags & BTLOBJ_FLAG_GUARD_NEUTRAL) {
             switch ((u32)hit->kind) {
-            case 7:
-            case 28:
-            case 50:
+            case ENEMY_BLACK_FUNGUS:
+            case ENEMY_DEFENDER:
+            case ENEMY_VEXEN:
                 m4aSongNumStart(SONG_BTL_GARD);
                 break;
             default:

@@ -16,6 +16,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "enemy_ids.h"
 
 void task_bos_dsd_0(DsdWork* work, void* arg) {
     s32 inEvent;
@@ -214,7 +215,7 @@ void task_bos_dsd_3(DsdWork* work) {
     ReleaseEnemyBtlObj(hand);
 }
 
-const EmyKind gBosDsdEmyKind = { 38, 1000, 16, 16, 40, 60, 0 };
+const EmyKind gBosDsdEmyKind = { ENEMY_DARKSIDE, 1000, 16, 16, 40, 60, 0 };
 
 TaskDesc gTaskDescBosDsd = {
     "task_bos_dsd",

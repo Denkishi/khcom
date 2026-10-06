@@ -31,8 +31,9 @@
 #include "bos_ga.h"
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
-static const EmyKind sBosMdEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
+static const EmyKind sBosMdEmyKind = { ENEMY_DRAGON_MALEFICENT, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static const MdMapData sMdMapData = {
     gBosMdBgTiles, 32768, gBosMdBgPalettes, 192, { gBosMdBgMap0, gBosMdBgMap1, gBosMdBgMap2, gBosMdBgMap3 }
@@ -356,7 +357,7 @@ static const MdFireDef sMdFireDefs[6] = {
     { sMdFirePoints0, 4 },
 };
 
-static const EmyKind sBosMdFireEmyKind = { 37, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
+static const EmyKind sBosMdFireEmyKind = { ENEMY_DRAGON_MALEFICENT, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static TaskDesc sTaskDescBosMdFire = {
     "task_bos_md_fire",

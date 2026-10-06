@@ -34,6 +34,7 @@
 #include <stddef.h>
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 extern const u16* gBosDsdFrameMaps[47][4];
 extern void* gBosDsdFrameTiles[47];
@@ -793,7 +794,7 @@ void BosDsdMainUpdateCircleAttack(DsdMainWork* work) {
         obj = ListPoolFirst(&gBtlWork->pool);
 
         while (obj != NULL) {
-            if (obj->kind == 0) {
+            if (obj->kind == ENEMY_SHADOW) {
                 obj->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }
@@ -1042,7 +1043,7 @@ void BosDsdMainUpdateDefeat(DsdMainWork* work) {
         obj = ListPoolFirst(&gBtlWork->pool);
 
         while (obj != NULL) {
-            if (obj->kind == 0) {
+            if (obj->kind == ENEMY_SHADOW) {
                 obj->flags |= BTLOBJ_FLAG_WARP_PENDING;
                 m4aSongNumStart(SONG_BTL_DARKDEAD);
             }

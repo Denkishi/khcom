@@ -23,6 +23,7 @@
 #include "btl.h"
 #include "btl_effect.h"
 #include "hum.h"
+#include "enemy_ids.h"
 
 static const BgAnimationChunk sBgAnimationChunks[108] = {
     { gBgAnimCure00Tiles, 29696 },
@@ -3766,7 +3767,7 @@ void BgFxTornadoLiftOpponents(u8 spin, u8 init) {
         target = ListPoolFirst(&gBtlWork->pool);
 
         while (target != NULL) {
-            if (!(target->flags & BTLOBJ_FLAG_BOSS) && target->kind != 31) {
+            if (!(target->flags & BTLOBJ_FLAG_BOSS) && target->kind != ENEMY_CREEPER_PLANT) {
                 BgFxTornadoLiftBtlObj(source, target, spin, init);
             }
 

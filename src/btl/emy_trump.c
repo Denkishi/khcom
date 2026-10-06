@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmyTrumpHCommonAnimDefs[3] = {
     { gTrumpH00bFrames, gTrumpH00bAnims, gTrumpH00bTiles, 0 },
@@ -27,7 +28,7 @@ static const AnimDef sEmyTrumpHCommonAnimDefs[3] = {
 
 static const AnimDef sEmyTrumpHAnimDef = { gTrumpH10Frames, gTrumpH10Anims, gTrumpH10Tiles, 0 };
 
-static const EmyDef sEmyTrumpHDef = { gTrumpHPalette, sEmyTrumpHCommonAnimDefs, 409, 130, 20, 20, 90, 32, 32, 10, 0, { 47, 200, 40, 16, 16, 100, 0 } };
+static const EmyDef sEmyTrumpHDef = { gTrumpHPalette, sEmyTrumpHCommonAnimDefs, 409, 130, 20, 20, 90, 32, 32, 10, 0, { ENEMY_CARD_SOLDIER_HEART, 200, 40, 16, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmyTrumpH = {
     "task_emy_trump_h",
@@ -46,7 +47,7 @@ static const AnimDef sEmyTrumpSCommonAnimDefs[3] = {
 
 static const AnimDef sEmyTrumpSAnimDef = { gTrumpS10Frames, gTrumpS10Anims, gTrumpS10Tiles, 0 };
 
-static const EmyDef sEmyTrumpSDef = { gTrumpSPalette, sEmyTrumpSCommonAnimDefs, 307, 130, 20, 20, 64, 32, 32, 10, 0, { 46, 200, 40, 16, 16, 100, 0 } };
+static const EmyDef sEmyTrumpSDef = { gTrumpSPalette, sEmyTrumpSCommonAnimDefs, 307, 130, 20, 20, 64, 32, 32, 10, 0, { ENEMY_CARD_SOLDIER_SPADE, 200, 40, 16, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmyTrumpS = {
     "task_emy_trump_s",

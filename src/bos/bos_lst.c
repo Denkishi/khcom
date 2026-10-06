@@ -29,8 +29,9 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
-static const EmyKind sBosLstEmyKind = { 40, 256, 8, 8, 0, 128, 0 };
+static const EmyKind sBosLstEmyKind = { ENEMY_MARLUXIA_2, 256, 8, 8, 0, 128, 0 };
 
 static const BattleBackgroundDef sBosLstBattleBackgroundDef = {
     gBosLstBgTiles, 0x8000, gBosLstBgPalette, 0x140, { gBosLstBgMap, gBosLstBgMap, gBosLstBgMap, gBosLstBgMap }

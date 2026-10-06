@@ -13,6 +13,7 @@
 #include "enemy_types.h"
 #include "taskpool.h"
 #include "types.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmyTestCommonAnimDefs[3] = {
     { gEmyTestFrames, gEmyTestAnims, gEmyTestTiles, 0 },
@@ -20,7 +21,7 @@ static const AnimDef sEmyTestCommonAnimDefs[3] = {
     { gEmyTestFrames, gEmyTestAnims, gEmyTestTiles, 0 },
 };
 
-static const EmyDef sEmyTestDef = { gEmyTestPalette, sEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { 28, 260, 16, 8, 16, 100, 0 } };
+static const EmyDef sEmyTestDef = { gEmyTestPalette, sEmyTestCommonAnimDefs, 0, 130, 20, 60, 64, 32, 32, 10, 0, { ENEMY_DEFENDER, 260, 16, 8, 16, 100, 0 } };
 
 void task_emy_test_0(EmyWork* work, void* obj) {
     EmyInit(work, &sEmyTestDef, obj);

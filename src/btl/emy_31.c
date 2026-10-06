@@ -17,6 +17,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmy31CommonAnimDefs[3] = {
     { gEmy3100Frames, gEmy3100Anims, gEmy3100Tiles, 0 },
@@ -30,7 +31,7 @@ static const AnimDef sEmy31AnimDefs[3] = {
     { gEmy3107Frames, gEmy3107Anims, gEmy3107Tiles, 0 },
 };
 
-static const EmyDef sEmy31Def = { gEmy31Palette, sEmy31CommonAnimDefs, 256, 100, 10, 20, 64, 32, 32, 10, 0, { 23, 95, 32, 12, 24, 100, 0 } };
+static const EmyDef sEmy31Def = { gEmy31Palette, sEmy31CommonAnimDefs, 256, 100, 10, 20, 64, 32, 32, 10, 0, { ENEMY_WIZARD, 95, 32, 12, 24, 100, 0 } };
 
 TaskDesc gTaskDescEmy31 = {
     "task_emy_31",

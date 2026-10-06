@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumCloudStockMoves[2][3] = {
     { 37, 37, 37 },
@@ -53,7 +54,7 @@ static const AnimDef sHumCloudAnimDefs[20] = {
     { gCroud02Frames, gCroud02Anims, gCroud02Tiles, 0 },
 };
 
-static const HumDef sHumCloudDef = { 128, gCroudPalette, 0, { 43, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumCloudDef = { 128, gCroudPalette, 0, { ENEMY_CLOUD, 99, 38, 14, 24, 99, 0 } };
 
 TaskDesc gTaskDescHumCloud = {
     "task_hum_cloud",

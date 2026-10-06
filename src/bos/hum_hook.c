@@ -30,6 +30,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumHookStockMovesA[3] = {
     36, 36, 38,
@@ -57,7 +58,7 @@ static const AnimDef sHumHookAnimDefs[15] = {
     { gHookF03Frames, gHookF03Anims, gHookF03Tiles, 3 },
 };
 
-static const HumDef sHumHookDef = { 128, gHookPalette, 0, { 42, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumHookDef = { 128, gHookPalette, 0, { ENEMY_HOOK, 99, 38, 14, 24, 99, 0 } };
 
 static const u8 sHumHookRollAmplitudes[8] = {
     0, 4, 4, 6, 8, 10, 8, 6,

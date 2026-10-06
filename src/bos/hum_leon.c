@@ -18,6 +18,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sHumLeonAnimDefs[5] = {
     { gReonFl00Frames, gReonFl00Anims, gReonFl00Tiles, 0 },
@@ -27,7 +28,7 @@ static const AnimDef sHumLeonAnimDefs[5] = {
     { gHumLeonGunbladeFrames, gHumLeonGunbladeAnims, gHumLeonGunbladeTiles, 2 },
 };
 
-static const HumDef sHumLeonDef = { 128, gReonPalette, 0, { 41, 99, 64, 14, 40, 99, 0 } };
+static const HumDef sHumLeonDef = { 128, gReonPalette, 0, { ENEMY_LEON, 99, 64, 14, 40, 99, 0 } };
 
 TaskDesc gTaskDescHumLeon = {
     "task_hum_leon",

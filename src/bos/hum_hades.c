@@ -24,6 +24,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumHadesStockMoves[3] = {
     36, 36, 36,
@@ -62,7 +63,7 @@ static const HumDef sHumHadesDef = {
 #else
         128
 #endif
-    , gHadesPalette, 0, { 44, 99, 90, 14, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
+    , gHadesPalette, 0, { ENEMY_HADES, 99, 90, 14, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumHades = {
     "task_hum_hades",

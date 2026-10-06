@@ -22,6 +22,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmy82CommonAnimDefs[3] = {
     { gEmy8200Frames, gEmy8200Anims, gEmy8200Tiles, 0 },
@@ -38,7 +39,7 @@ static const AnimDef sEmy82AnimDefs[6] = {
     { gEmy8212Frames, gEmy8212Anims, gEmy8212Tiles, 0 },
 };
 
-static const EmyDef sEmy82Def = { gEmy82Palette, sEmy82CommonAnimDefs, 204, 3, 20, 20, 48, 32, 32, 1, 0, { 30, 66, 32, 10, 16, 100, 0 } };
+static const EmyDef sEmy82Def = { gEmy82Palette, sEmy82CommonAnimDefs, 204, 3, 20, 20, 48, 32, 32, 1, 0, { ENEMY_CRESCENDO, 66, 32, 10, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy82 = {
     "task_emy_82",
@@ -363,7 +364,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                         x += offset;
                         offset = act->y;
 
-                        if (SpawnEnemy(9, x, offset, act->z - 0xC00) != spawnFailure) {
+                        if (SpawnEnemy(ENEMY_SOLDIER, x, offset, act->z - 0xC00) != spawnFailure) {
                             gBtlWork->pendingEnemies++;
                             w->spawnCount++;
                         } else {

@@ -30,6 +30,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "default_bg_map.h"
+#include "enemy_ids.h"
 
 static BoogieWork* sBoogieWork;
 
@@ -54,7 +55,7 @@ static const StatusObjDef sBosBoogieSpriteDefs[6] = {
     { gBosBoogieDiceFaceFrames, 6 },
 };
 
-static const EmyKind sBosBoogieEmyKind = { 39, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
+static const EmyKind sBosBoogieEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 68, 16, 32, 0, EMY_KIND_FLAG_LARGE_BODY };
 
 static const BattleBackgroundDef sBosBoogieBattleBackgroundDef = {
     gBosBoogieBgTiles, 0x7F00, gBosBoogieBgPalette, 0x140,
@@ -72,21 +73,21 @@ void BosBoogieApplyDiceFace(BoogieWork* work) {
         } else if (gBosBoogieDiceFace == 1) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
-            SpawnEnemy(18, 0xA000, 0x24000, 0);
-            SpawnEnemy(18, 0x15000, 0x24000, 0);
+            SpawnEnemy(ENEMY_GARGOYLE, 0xA000, 0x24000, 0);
+            SpawnEnemy(ENEMY_GARGOYLE, 0x15000, 0x24000, 0);
         } else if (gBosBoogieDiceFace == 2) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
-            SpawnEnemy(17, 0xA000, 0x24000, 0);
-            SpawnEnemy(17, 0x15000, 0x24000, 0);
+            SpawnEnemy(ENEMY_WIGHT_KNIGHT, 0xA000, 0x24000, 0);
+            SpawnEnemy(ENEMY_WIGHT_KNIGHT, 0x15000, 0x24000, 0);
         } else if (gBosBoogieDiceFace == 3) {
             work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKnifereader, NULL);
         } else if (gBosBoogieDiceFace == 4) {
             work->state = BOS_BOOGIE_STATE_SUMMON;
             work->timer = 0;
-            SpawnEnemy(15, 0xA000, 0x24000, 0);
-            SpawnEnemy(15, 0x15000, 0x24000, 0);
+            SpawnEnemy(ENEMY_SEARCH_GHOST, 0xA000, 0x24000, 0);
+            SpawnEnemy(ENEMY_SEARCH_GHOST, 0x15000, 0x24000, 0);
         } else {
             work->state = BOS_BOOGIE_STATE_WAIT_TASK;
             work->task = TaskCreate(&work->tasks, &gTaskDescBosBoogieKaihuku, work);
@@ -554,7 +555,7 @@ void BosBoogieRemoveOtherEnemies() {
     obj = ListPoolFirst(&gBtlWork->pool);
 
     while (obj != NULL) {
-        if (obj->kind != 39) {
+        if (obj->kind != ENEMY_OOGIE_BOOGIE) {
             obj->flags |= BTLOBJ_FLAG_WARP_PENDING;
             obj->hitFlags = 0;
         }

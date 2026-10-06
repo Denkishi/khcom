@@ -16,13 +16,14 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sHumRobeAnimDefs[2] = {
     { gRobeFl00Frames, gRobeFl00Anims, gRobeFl00Tiles, 5 },
     { gHumRobeGuardFrames, gHumRobeGuardAnims, gHumRobeGuardTiles, 0 },
 };
 
-static const HumDef sHumRobeDef = { 128, gRobePalette, 0, { 51, 99, 64, 14, 32, 99, 0 } };
+static const HumDef sHumRobeDef = { 128, gRobePalette, 0, { ENEMY_MARLUXIA, 99, 64, 14, 32, 99, 0 } };
 
 void task_hum_robe_0(RobeWork* work) {
     HumInit(&work->base, &sHumRobeDef);

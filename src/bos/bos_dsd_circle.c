@@ -23,6 +23,7 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 void task_bos_dsd_circle_0(DsdCircleWork* work, void* arg) {
     work->dsd = arg;
@@ -74,7 +75,7 @@ u8 task_bos_dsd_circle_1(DsdCircleWork* work) {
         }
 
         if (work->summonTimer == 60 || work->summonTimer == 110) {
-            SpawnEnemy(0, work->x + ((GetRandom() % 101 - 50) << 8),
+            SpawnEnemy(ENEMY_SHADOW, work->x + ((GetRandom() % 101 - 50) << 8),
                           work->y + ((GetRandom() % 17 - 8) << 8), 0);
         }
 

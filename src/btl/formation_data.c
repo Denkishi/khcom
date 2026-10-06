@@ -5,6 +5,7 @@
 
 #include "formation_data.h"
 #include "formation_types.h"
+#include "enemy_ids.h"
 
 #ifdef VERSION_EU
 #define FORMATION_LIST_DROP 1
@@ -13,1911 +14,1911 @@
 #endif
 
 static const BtlFormStep sBtlFormShadow8Steps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 65, -12, 0, 1 },
-    { 0, 85, 12, 0, 2 },
-    { 0, 55, 25, 0, 3 },
-    { 0, -55, 25, 0, 4 },
-    { 0, -85, 12, 0, 5 },
-    { 0, -65, -12, 0, 6 },
-    { 0, -25, -25, 0, 7 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 65, -12, 0, 1 },
+    { ENEMY_SHADOW, 85, 12, 0, 2 },
+    { ENEMY_SHADOW, 55, 25, 0, 3 },
+    { ENEMY_SHADOW, -55, 25, 0, 4 },
+    { ENEMY_SHADOW, -85, 12, 0, 5 },
+    { ENEMY_SHADOW, -65, -12, 0, 6 },
+    { ENEMY_SHADOW, -25, -25, 0, 7 },
 };
 
 static const BtlFormEntry sBtlFormShadow8 = { 8, sBtlFormShadow8Steps, 60 };
 
 static const BtlFormStep sBtlFormShadow7Steps[] = {
-    { 0, 90, 0, 0, 0 },
-    { 0, 55, 25, 0, 1 },
-    { 0, 40, 0, 0, 2 },
-    { 0, 25, -25, 0, 3 },
-    { 0, -25, -25, 0, 4 },
-    { 0, -55, 25, 0, 5 },
-    { 0, -64, 0, 0, 6 },
+    { ENEMY_SHADOW, 90, 0, 0, 0 },
+    { ENEMY_SHADOW, 55, 25, 0, 1 },
+    { ENEMY_SHADOW, 40, 0, 0, 2 },
+    { ENEMY_SHADOW, 25, -25, 0, 3 },
+    { ENEMY_SHADOW, -25, -25, 0, 4 },
+    { ENEMY_SHADOW, -55, 25, 0, 5 },
+    { ENEMY_SHADOW, -64, 0, 0, 6 },
 };
 
 static const BtlFormEntry sBtlFormShadow7 = { 7, sBtlFormShadow7Steps, 60 };
 
 static const BtlFormStep sBtlFormShadow6ASteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 40, 0, 0, 1 },
-    { 0, 25, 25, 0, 2 },
-    { 0, -25, 25, 0, 3 },
-    { 0, -40, 0, 0, 4 },
-    { 0, -25, -25, 0, 5 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 40, 0, 0, 1 },
+    { ENEMY_SHADOW, 25, 25, 0, 2 },
+    { ENEMY_SHADOW, -25, 25, 0, 3 },
+    { ENEMY_SHADOW, -40, 0, 0, 4 },
+    { ENEMY_SHADOW, -25, -25, 0, 5 },
 };
 
 static const BtlFormEntry sBtlFormShadow6A = { 6, sBtlFormShadow6ASteps, 60 };
 
 static const BtlFormStep sBtlFormShadow6BSteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 40, 0, 0, 1 },
-    { 0, 55, 25, 0, 2 },
-    { 0, -55, -25, 0, 3 },
-    { 0, -40, 0, 0, 4 },
-    { 0, -25, 25, 0, 5 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 40, 0, 0, 1 },
+    { ENEMY_SHADOW, 55, 25, 0, 2 },
+    { ENEMY_SHADOW, -55, -25, 0, 3 },
+    { ENEMY_SHADOW, -40, 0, 0, 4 },
+    { ENEMY_SHADOW, -25, 25, 0, 5 },
 };
 
 const BtlFormEntry gBtlFormShadow6B = { 6, sBtlFormShadow6BSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow6CSteps[] = {
-    { 0, 90, 0, 0, 0 },
-    { 0, 64, 0, 0, 1 },
-    { 0, 40, 0, 0, 2 },
-    { 0, -40, 0, 0, 3 },
-    { 0, -64, 0, 0, 4 },
-    { 0, -90, 0, 0, 5 },
+    { ENEMY_SHADOW, 90, 0, 0, 0 },
+    { ENEMY_SHADOW, 64, 0, 0, 1 },
+    { ENEMY_SHADOW, 40, 0, 0, 2 },
+    { ENEMY_SHADOW, -40, 0, 0, 3 },
+    { ENEMY_SHADOW, -64, 0, 0, 4 },
+    { ENEMY_SHADOW, -90, 0, 0, 5 },
 };
 
 const BtlFormEntry gBtlFormShadow6C = { 6, sBtlFormShadow6CSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow5ASteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 40, 0, 0, 1 },
-    { 0, 55, 25, 0, 2 },
-    { 0, 65, -12, 0, 3 },
-    { 0, 85, 12, 0, 4 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 40, 0, 0, 1 },
+    { ENEMY_SHADOW, 55, 25, 0, 2 },
+    { ENEMY_SHADOW, 65, -12, 0, 3 },
+    { ENEMY_SHADOW, 85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormShadow5A = { 5, sBtlFormShadow5ASteps, 60 };
 
 static const BtlFormStep sBtlFormShadow5BSteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 55, 25, 0, 1 },
-    { 0, 90, 0, 0, 2 },
-    { 0, -65, -12, 0, 3 },
-    { 0, -85, 12, 0, 4 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 55, 25, 0, 1 },
+    { ENEMY_SHADOW, 90, 0, 0, 2 },
+    { ENEMY_SHADOW, -65, -12, 0, 3 },
+    { ENEMY_SHADOW, -85, 12, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormShadow5B = { 5, sBtlFormShadow5BSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow5CSteps[] = {
-    { 0, 65, -12, 0, 0 },
-    { 0, 85, 12, 0, 1 },
-    { 0, -25, -25, 0, 2 },
-    { 0, -40, 0, 0, 3 },
-    { 0, -55, 25, 0, 4 },
+    { ENEMY_SHADOW, 65, -12, 0, 0 },
+    { ENEMY_SHADOW, 85, 12, 0, 1 },
+    { ENEMY_SHADOW, -25, -25, 0, 2 },
+    { ENEMY_SHADOW, -40, 0, 0, 3 },
+    { ENEMY_SHADOW, -55, 25, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormShadow5C = { 5, sBtlFormShadow5CSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow5DSteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 65, -12, 0, 1 },
-    { 0, 90, 0, 0, 2 },
-    { 0, 85, 12, 0, 3 },
-    { 0, 55, 25, 0, 4 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 65, -12, 0, 1 },
+    { ENEMY_SHADOW, 90, 0, 0, 2 },
+    { ENEMY_SHADOW, 85, 12, 0, 3 },
+    { ENEMY_SHADOW, 55, 25, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormShadow5D = { 5, sBtlFormShadow5DSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow4ASteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 55, 25, 0, 1 },
-    { 0, 65, -12, 0, 2 },
-    { 0, 85, 12, 0, 3 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 55, 25, 0, 1 },
+    { ENEMY_SHADOW, 65, -12, 0, 2 },
+    { ENEMY_SHADOW, 85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormShadow4A = { 4, sBtlFormShadow4ASteps, 60 };
 
 static const BtlFormStep sBtlFormShadow4BSteps[] = {
-    { 0, 40, 0, 0, 0 },
-    { 0, 65, -12, 0, 1 },
-    { 0, 85, 12, 0, 2 },
-    { 0, 90, 0, 0, 3 },
+    { ENEMY_SHADOW, 40, 0, 0, 0 },
+    { ENEMY_SHADOW, 65, -12, 0, 1 },
+    { ENEMY_SHADOW, 85, 12, 0, 2 },
+    { ENEMY_SHADOW, 90, 0, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormShadow4B = { 4, sBtlFormShadow4BSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow4CSteps[] = {
-    { 0, 65, -12, 0, 0 },
-    { 0, 85, 12, 0, 1 },
-    { 0, -65, -12, 0, 2 },
-    { 0, -85, 12, 0, 3 },
+    { ENEMY_SHADOW, 65, -12, 0, 0 },
+    { ENEMY_SHADOW, 85, 12, 0, 1 },
+    { ENEMY_SHADOW, -65, -12, 0, 2 },
+    { ENEMY_SHADOW, -85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormShadow4C = { 4, sBtlFormShadow4CSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow4DSteps[] = {
-    { 0, -55, 25, 0, 0 },
-    { 0, -85, 12, 0, 1 },
-    { 0, -65, -12, 0, 2 },
-    { 0, -25, -25, 0, 3 },
+    { ENEMY_SHADOW, -55, 25, 0, 0 },
+    { ENEMY_SHADOW, -85, 12, 0, 1 },
+    { ENEMY_SHADOW, -65, -12, 0, 2 },
+    { ENEMY_SHADOW, -25, -25, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormShadow4D = { 4, sBtlFormShadow4DSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3ASteps[] = {
-    { 0, 40, 0, 0, 0 },
-    { 0, 65, -12, 0, 1 },
-    { 0, 85, 12, 0, 2 },
+    { ENEMY_SHADOW, 40, 0, 0, 0 },
+    { ENEMY_SHADOW, 65, -12, 0, 1 },
+    { ENEMY_SHADOW, 85, 12, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3A = { 3, sBtlFormShadow3ASteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3BSteps[] = {
-    { 0, 65, -12, 0, 0 },
-    { 0, 85, 12, 0, 1 },
-    { 0, 90, 0, 0, 2 },
+    { ENEMY_SHADOW, 65, -12, 0, 0 },
+    { ENEMY_SHADOW, 85, 12, 0, 1 },
+    { ENEMY_SHADOW, 90, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3B = { 3, sBtlFormShadow3BSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3CSteps[] = {
-    { 0, 65, -12, 0, 0 },
-    { 0, 85, 12, 0, 1 },
-    { 0, -40, 0, 0, 2 },
+    { ENEMY_SHADOW, 65, -12, 0, 0 },
+    { ENEMY_SHADOW, 85, 12, 0, 1 },
+    { ENEMY_SHADOW, -40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3C = { 3, sBtlFormShadow3CSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3DSteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 64, 0, 0, 1 },
-    { 0, 55, 25, 0, 2 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 64, 0, 0, 1 },
+    { ENEMY_SHADOW, 55, 25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3D = { 3, sBtlFormShadow3DSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3ESteps[] = {
-    { 0, -25, 25, 0, 0 },
-    { 0, -64, 0, 0, 1 },
-    { 0, -55, -25, 0, 2 },
+    { ENEMY_SHADOW, -25, 25, 0, 0 },
+    { ENEMY_SHADOW, -64, 0, 0, 1 },
+    { ENEMY_SHADOW, -55, -25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3E = { 3, sBtlFormShadow3ESteps, 60 };
 
 static const BtlFormStep sBtlFormShadow3FSteps[] = {
-    { 0, -65, -12, 0, 0 },
-    { 0, -85, 12, 0, 1 },
-    { 0, 40, 0, 0, 2 },
+    { ENEMY_SHADOW, -65, -12, 0, 0 },
+    { ENEMY_SHADOW, -85, 12, 0, 1 },
+    { ENEMY_SHADOW, 40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormShadow3F = { 3, sBtlFormShadow3FSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2ASteps[] = {
-    { 0, 65, -12, 0, 0 },
-    { 0, 85, 12, 0, 1 },
+    { ENEMY_SHADOW, 65, -12, 0, 0 },
+    { ENEMY_SHADOW, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2A = { 2, sBtlFormShadow2ASteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2BSteps[] = {
-    { 0, 25, -25, 0, 0 },
-    { 0, 55, 25, 0, 1 },
+    { ENEMY_SHADOW, 25, -25, 0, 0 },
+    { ENEMY_SHADOW, 55, 25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2B = { 2, sBtlFormShadow2BSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2CSteps[] = {
-    { 0, 40, 0, 0, 0 },
-    { 0, -40, 0, 0, 1 },
+    { ENEMY_SHADOW, 40, 0, 0, 0 },
+    { ENEMY_SHADOW, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2C = { 2, sBtlFormShadow2CSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2DSteps[] = {
-    { 0, 40, 0, 0, 0 },
-    { 0, 90, 0, 0, 1 },
+    { ENEMY_SHADOW, 40, 0, 0, 0 },
+    { ENEMY_SHADOW, 90, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2D = { 2, sBtlFormShadow2DSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2ESteps[] = {
-    { 0, -65, -12, 0, 0 },
-    { 0, -85, 12, 0, 1 },
+    { ENEMY_SHADOW, -65, -12, 0, 0 },
+    { ENEMY_SHADOW, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2E = { 2, sBtlFormShadow2ESteps, 60 };
 
 static const BtlFormStep sBtlFormShadow2FSteps[] = {
-    { 0, -55, 25, 0, 0 },
-    { 0, -25, -25, 0, 1 },
+    { ENEMY_SHADOW, -55, 25, 0, 0 },
+    { ENEMY_SHADOW, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormShadow2F = { 2, sBtlFormShadow2FSteps, 60 };
 
 static const BtlFormStep sBtlFormShadow1Steps[] = {
-    { 0, 64, 0, 0, 0 },
+    { ENEMY_SHADOW, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormShadow1 = { 1, sBtlFormShadow1Steps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne5Steps[] = {
-    { 1, 25, -25, -30, 0 },
-    { 1, 40, 0, -30, 1 },
-    { 1, 55, 25, -30, 2 },
-    { 1, 65, -12, -40, 3 },
-    { 1, 85, 12, -40, 4 },
+    { ENEMY_RED_NOCTURNE, 25, -25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, 40, 0, -30, 1 },
+    { ENEMY_RED_NOCTURNE, 55, 25, -30, 2 },
+    { ENEMY_RED_NOCTURNE, 65, -12, -40, 3 },
+    { ENEMY_RED_NOCTURNE, 85, 12, -40, 4 },
 };
 
 const BtlFormEntry gBtlFormRedNocturne5 = { 5, sBtlFormRedNocturne5Steps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne4Steps[] = {
-    { 1, 25, -25, -30, 0 },
-    { 1, 55, 25, -30, 1 },
-    { 1, 65, -12, -40, 2 },
-    { 1, 85, 12, -40, 3 },
+    { ENEMY_RED_NOCTURNE, 25, -25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, 55, 25, -30, 1 },
+    { ENEMY_RED_NOCTURNE, 65, -12, -40, 2 },
+    { ENEMY_RED_NOCTURNE, 85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne4 = { 4, sBtlFormRedNocturne4Steps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne3ASteps[] = {
-    { 1, 40, 0, -30, 0 },
-    { 1, 65, -12, -40, 1 },
-    { 1, 85, 12, -40, 2 },
+    { ENEMY_RED_NOCTURNE, 40, 0, -30, 0 },
+    { ENEMY_RED_NOCTURNE, 65, -12, -40, 1 },
+    { ENEMY_RED_NOCTURNE, 85, 12, -40, 2 },
 };
 
 const BtlFormEntry gBtlFormRedNocturne3A = { 3, sBtlFormRedNocturne3ASteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne3BSteps[] = {
-    { 1, 65, -12, -40, 0 },
-    { 1, 85, 12, -40, 1 },
-    { 1, -40, 0, -30, 2 },
+    { ENEMY_RED_NOCTURNE, 65, -12, -40, 0 },
+    { ENEMY_RED_NOCTURNE, 85, 12, -40, 1 },
+    { ENEMY_RED_NOCTURNE, -40, 0, -30, 2 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne3B = { 3, sBtlFormRedNocturne3BSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne2ASteps[] = {
-    { 1, 65, -12, -40, 0 },
-    { 1, 85, 12, -40, 1 },
+    { ENEMY_RED_NOCTURNE, 65, -12, -40, 0 },
+    { ENEMY_RED_NOCTURNE, 85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne2A = { 2, sBtlFormRedNocturne2ASteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne2BSteps[] = {
-    { 1, -65, -12, -40, 0 },
-    { 1, -85, 12, -40, 1 },
+    { ENEMY_RED_NOCTURNE, -65, -12, -40, 0 },
+    { ENEMY_RED_NOCTURNE, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne2B = { 2, sBtlFormRedNocturne2BSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1ASteps[] = {
-    { 1, 64, 0, -50, 0 },
+    { ENEMY_RED_NOCTURNE, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne1A = { 1, sBtlFormRedNocturne1ASteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1BSteps[] = {
-    { 1, 25, -25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, 25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormRedNocturne1B = { 1, sBtlFormRedNocturne1BSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1CSteps[] = {
-    { 1, -25, -25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, -25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormRedNocturne1C = { 1, sBtlFormRedNocturne1CSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1DSteps[] = {
-    { 1, 55, 25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, 55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormRedNocturne1D = { 1, sBtlFormRedNocturne1DSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1ESteps[] = {
-    { 1, -55, 25, -30, 0 },
+    { ENEMY_RED_NOCTURNE, -55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormRedNocturne1E = { 1, sBtlFormRedNocturne1ESteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody5Steps[] = {
-    { 2, 25, -25, -30, 0 },
-    { 2, 55, 25, -30, 1 },
-    { 2, 90, 0, -50, 2 },
-    { 2, -65, -12, -40, 3 },
-    { 2, -85, 12, -40, 4 },
+    { ENEMY_BLUE_RHAPSODY, 25, -25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 55, 25, -30, 1 },
+    { ENEMY_BLUE_RHAPSODY, 90, 0, -50, 2 },
+    { ENEMY_BLUE_RHAPSODY, -65, -12, -40, 3 },
+    { ENEMY_BLUE_RHAPSODY, -85, 12, -40, 4 },
 };
 
 const BtlFormEntry gBtlFormBlueRhapsody5 = { 5, sBtlFormBlueRhapsody5Steps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody4Steps[] = {
-    { 2, 40, 0, -30, 0 },
-    { 2, 65, -12, -40, 1 },
-    { 2, 85, 12, -40, 2 },
-    { 2, 90, 0, -50, 3 },
+    { ENEMY_BLUE_RHAPSODY, 40, 0, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 65, -12, -40, 1 },
+    { ENEMY_BLUE_RHAPSODY, 85, 12, -40, 2 },
+    { ENEMY_BLUE_RHAPSODY, 90, 0, -50, 3 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody4 = { 4, sBtlFormBlueRhapsody4Steps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody3Steps[] = {
-    { 2, 65, -12, -40, 0 },
-    { 2, 85, 12, -40, 1 },
-    { 2, 90, 0, -50, 2 },
+    { ENEMY_BLUE_RHAPSODY, 65, -12, -40, 0 },
+    { ENEMY_BLUE_RHAPSODY, 85, 12, -40, 1 },
+    { ENEMY_BLUE_RHAPSODY, 90, 0, -50, 2 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody3 = { 3, sBtlFormBlueRhapsody3Steps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody2ASteps[] = {
-    { 2, 25, -25, -30, 0 },
-    { 2, 55, 25, -30, 1 },
+    { ENEMY_BLUE_RHAPSODY, 25, -25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody2A = { 2, sBtlFormBlueRhapsody2ASteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody2BSteps[] = {
-    { 2, -65, -12, -40, 0 },
-    { 2, -85, 12, -40, 1 },
+    { ENEMY_BLUE_RHAPSODY, -65, -12, -40, 0 },
+    { ENEMY_BLUE_RHAPSODY, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody2B = { 2, sBtlFormBlueRhapsody2BSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody2CSteps[] = {
-    { 2, -55, 25, -30, 0 },
-    { 2, -25, -25, -30, 1 },
+    { ENEMY_BLUE_RHAPSODY, -55, 25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody2C = { 2, sBtlFormBlueRhapsody2CSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1ASteps[] = {
-    { 2, 64, 0, -50, 0 },
+    { ENEMY_BLUE_RHAPSODY, 64, 0, -50, 0 },
 };
 
 const BtlFormEntry gBtlFormBlueRhapsody1A = { 1, sBtlFormBlueRhapsody1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1BSteps[] = {
-    { 2, 40, 0, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 40, 0, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody1B = { 1, sBtlFormBlueRhapsody1BSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1CSteps[] = {
-    { 2, -64, 0, -50, 0 },
+    { ENEMY_BLUE_RHAPSODY, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody1C = { 1, sBtlFormBlueRhapsody1CSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1DSteps[] = {
-    { 2, 25, -25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormBlueRhapsody1D = { 1, sBtlFormBlueRhapsody1DSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1ESteps[] = {
-    { 2, -25, -25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, -25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormBlueRhapsody1E = { 1, sBtlFormBlueRhapsody1ESteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1FSteps[] = {
-    { 2, 55, 25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, 55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormBlueRhapsody1F = { 1, sBtlFormBlueRhapsody1FSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1GSteps[] = {
-    { 2, -55, 25, -30, 0 },
+    { ENEMY_BLUE_RHAPSODY, -55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormBlueRhapsody1G = { 1, sBtlFormBlueRhapsody1GSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera5Steps[] = {
-    { 3, 65, -12, -40, 0 },
-    { 3, 85, 12, -40, 1 },
-    { 3, -25, -25, -30, 2 },
-    { 3, -40, 0, -30, 3 },
-    { 3, -55, 25, -30, 4 },
+    { ENEMY_YELLOW_OPERA, 65, -12, -40, 0 },
+    { ENEMY_YELLOW_OPERA, 85, 12, -40, 1 },
+    { ENEMY_YELLOW_OPERA, -25, -25, -30, 2 },
+    { ENEMY_YELLOW_OPERA, -40, 0, -30, 3 },
+    { ENEMY_YELLOW_OPERA, -55, 25, -30, 4 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera5 = { 5, sBtlFormYellowOpera5Steps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera4Steps[] = {
-    { 3, 65, -12, -40, 0 },
-    { 3, 85, 12, -40, 1 },
-    { 3, -65, -12, -40, 2 },
-    { 3, -85, 12, -40, 3 },
+    { ENEMY_YELLOW_OPERA, 65, -12, -40, 0 },
+    { ENEMY_YELLOW_OPERA, 85, 12, -40, 1 },
+    { ENEMY_YELLOW_OPERA, -65, -12, -40, 2 },
+    { ENEMY_YELLOW_OPERA, -85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera4 = { 4, sBtlFormYellowOpera4Steps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera3ASteps[] = {
-    { 3, 65, -12, -40, 0 },
-    { 3, 85, 12, -40, 1 },
-    { 3, -40, 0, -30, 2 },
+    { ENEMY_YELLOW_OPERA, 65, -12, -40, 0 },
+    { ENEMY_YELLOW_OPERA, 85, 12, -40, 1 },
+    { ENEMY_YELLOW_OPERA, -40, 0, -30, 2 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera3A = { 3, sBtlFormYellowOpera3ASteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera3BSteps[] = {
-    { 3, -25, 25, -30, 0 },
-    { 3, -64, 0, -50, 1 },
-    { 3, -55, -25, -30, 2 },
+    { ENEMY_YELLOW_OPERA, -25, 25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, -64, 0, -50, 1 },
+    { ENEMY_YELLOW_OPERA, -55, -25, -30, 2 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera3B = { 3, sBtlFormYellowOpera3BSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2ASteps[] = {
-    { 3, 65, -12, -40, 0 },
-    { 3, 85, 12, -40, 1 },
+    { ENEMY_YELLOW_OPERA, 65, -12, -40, 0 },
+    { ENEMY_YELLOW_OPERA, 85, 12, -40, 1 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera2A = { 2, sBtlFormYellowOpera2ASteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2BSteps[] = {
-    { 3, 25, -25, -30, 0 },
-    { 3, 55, 25, -30, 1 },
+    { ENEMY_YELLOW_OPERA, 25, -25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera2B = { 2, sBtlFormYellowOpera2BSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2CSteps[] = {
-    { 3, 40, 0, -30, 0 },
-    { 3, -40, 0, -30, 1 },
+    { ENEMY_YELLOW_OPERA, 40, 0, -30, 0 },
+    { ENEMY_YELLOW_OPERA, -40, 0, -30, 1 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera2C = { 2, sBtlFormYellowOpera2CSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2DSteps[] = {
-    { 3, 40, 0, -30, 0 },
-    { 3, 90, 0, -50, 1 },
+    { ENEMY_YELLOW_OPERA, 40, 0, -30, 0 },
+    { ENEMY_YELLOW_OPERA, 90, 0, -50, 1 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera2D = { 2, sBtlFormYellowOpera2DSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2ESteps[] = {
-    { 3, -65, -12, -40, 0 },
-    { 3, -85, 12, -40, 1 },
+    { ENEMY_YELLOW_OPERA, -65, -12, -40, 0 },
+    { ENEMY_YELLOW_OPERA, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera2E = { 2, sBtlFormYellowOpera2ESteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera2FSteps[] = {
-    { 3, -55, 25, -30, 0 },
-    { 3, -25, -25, -30, 1 },
+    { ENEMY_YELLOW_OPERA, -55, 25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera2F = { 2, sBtlFormYellowOpera2FSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1ASteps[] = {
-    { 3, 64, 0, -50, 0 },
+    { ENEMY_YELLOW_OPERA, 64, 0, -50, 0 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera1A = { 1, sBtlFormYellowOpera1ASteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1BSteps[] = {
-    { 3, 25, -25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, 25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera1B = { 1, sBtlFormYellowOpera1BSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1CSteps[] = {
-    { 3, -25, -25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, -25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormYellowOpera1C = { 1, sBtlFormYellowOpera1CSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1DSteps[] = {
-    { 3, 55, 25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, 55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera1D = { 1, sBtlFormYellowOpera1DSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1ESteps[] = {
-    { 3, -55, 25, -30, 0 },
+    { ENEMY_YELLOW_OPERA, -55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormYellowOpera1E = { 1, sBtlFormYellowOpera1ESteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem5Steps[] = {
-    { 4, 65, -12, -40, 0 },
-    { 4, 85, 12, -40, 1 },
-    { 4, -25, -25, -30, 2 },
-    { 4, -40, 0, -30, 3 },
-    { 4, -55, 25, -30, 4 },
+    { ENEMY_GREEN_REQUIEM, 65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, 85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, -25, -25, -30, 2 },
+    { ENEMY_GREEN_REQUIEM, -40, 0, -30, 3 },
+    { ENEMY_GREEN_REQUIEM, -55, 25, -30, 4 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem5 = { 5, sBtlFormGreenRequiem5Steps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem4Steps[] = {
-    { 4, 65, -12, -40, 0 },
-    { 4, 85, 12, -40, 1 },
-    { 4, -65, -12, -40, 2 },
-    { 4, -85, 12, -40, 3 },
+    { ENEMY_GREEN_REQUIEM, 65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, 85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, -65, -12, -40, 2 },
+    { ENEMY_GREEN_REQUIEM, -85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem4 = { 4, sBtlFormGreenRequiem4Steps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem3ASteps[] = {
-    { 4, 65, -12, -40, 0 },
-    { 4, 85, 12, -40, 1 },
-    { 4, -40, 0, -30, 2 },
+    { ENEMY_GREEN_REQUIEM, 65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, 85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, -40, 0, -30, 2 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem3A = { 3, sBtlFormGreenRequiem3ASteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem3BSteps[] = {
-    { 4, -65, -12, -40, 0 },
-    { 4, -85, 12, -40, 1 },
-    { 4, 40, 0, -30, 2 },
+    { ENEMY_GREEN_REQUIEM, -65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, -85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, 40, 0, -30, 2 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem3B = { 3, sBtlFormGreenRequiem3BSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem2ASteps[] = {
-    { 4, 65, -12, -40, 0 },
-    { 4, 85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, 65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, 85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem2A = { 2, sBtlFormGreenRequiem2ASteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem2BSteps[] = {
-    { 4, 25, -25, -30, 0 },
-    { 4, 55, 25, -30, 1 },
+    { ENEMY_GREEN_REQUIEM, 25, -25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, 55, 25, -30, 1 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem2B = { 2, sBtlFormGreenRequiem2BSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem2CSteps[] = {
-    { 4, 40, 0, -30, 0 },
-    { 4, -40, 0, -30, 1 },
+    { ENEMY_GREEN_REQUIEM, 40, 0, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem2C = { 2, sBtlFormGreenRequiem2CSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem2DSteps[] = {
-    { 4, -65, -12, -40, 0 },
-    { 4, -85, 12, -40, 1 },
+    { ENEMY_GREEN_REQUIEM, -65, -12, -40, 0 },
+    { ENEMY_GREEN_REQUIEM, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem2D = { 2, sBtlFormGreenRequiem2DSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem2ESteps[] = {
-    { 4, -55, 25, -30, 0 },
-    { 4, -25, -25, -30, 1 },
+    { ENEMY_GREEN_REQUIEM, -55, 25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem2E = { 2, sBtlFormGreenRequiem2ESteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1ASteps[] = {
-    { 4, 64, 0, -50, 0 },
+    { ENEMY_GREEN_REQUIEM, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem1A = { 1, sBtlFormGreenRequiem1ASteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1BSteps[] = {
-    { 4, 25, -25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, 25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem1B = { 1, sBtlFormGreenRequiem1BSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1CSteps[] = {
-    { 4, -25, -25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, -25, -25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem1C = { 1, sBtlFormGreenRequiem1CSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1DSteps[] = {
-    { 4, 55, 25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, 55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormGreenRequiem1D = { 1, sBtlFormGreenRequiem1DSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1ESteps[] = {
-    { 4, -55, 25, -30, 0 },
+    { ENEMY_GREEN_REQUIEM, -55, 25, -30, 0 },
 };
 
 const BtlFormEntry gBtlFormGreenRequiem1E = { 1, sBtlFormGreenRequiem1ESteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon6Steps[] = {
-    { 5, 25, -25, -30, 0 },
-    { 5, 40, 0, -30, 1 },
-    { 5, 25, 25, -30, 2 },
-    { 5, -25, 25, -30, 3 },
-    { 5, -40, 0, -30, 4 },
-    { 5, -25, -25, -30, 5 },
+    { ENEMY_SEA_NEON, 25, -25, -30, 0 },
+    { ENEMY_SEA_NEON, 40, 0, -30, 1 },
+    { ENEMY_SEA_NEON, 25, 25, -30, 2 },
+    { ENEMY_SEA_NEON, -25, 25, -30, 3 },
+    { ENEMY_SEA_NEON, -40, 0, -30, 4 },
+    { ENEMY_SEA_NEON, -25, -25, -30, 5 },
 };
 
 static const BtlFormEntry sBtlFormSeaNeon6 = { 6, sBtlFormSeaNeon6Steps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon5Steps[] = {
-    { 5, 25, -25, -30, 0 },
-    { 5, 40, 0, -30, 1 },
-    { 5, 55, 25, -30, 2 },
-    { 5, 65, -12, -40, 3 },
-    { 5, 85, 12, -40, 4 },
+    { ENEMY_SEA_NEON, 25, -25, -30, 0 },
+    { ENEMY_SEA_NEON, 40, 0, -30, 1 },
+    { ENEMY_SEA_NEON, 55, 25, -30, 2 },
+    { ENEMY_SEA_NEON, 65, -12, -40, 3 },
+    { ENEMY_SEA_NEON, 85, 12, -40, 4 },
 };
 
 const BtlFormEntry gBtlFormSeaNeon5 = { 5, sBtlFormSeaNeon5Steps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon4ASteps[] = {
-    { 5, 25, -25, -30, 0 },
-    { 5, 55, 25, -30, 1 },
-    { 5, 65, -12, -40, 2 },
-    { 5, 85, 12, -40, 3 },
+    { ENEMY_SEA_NEON, 25, -25, -30, 0 },
+    { ENEMY_SEA_NEON, 55, 25, -30, 1 },
+    { ENEMY_SEA_NEON, 65, -12, -40, 2 },
+    { ENEMY_SEA_NEON, 85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormSeaNeon4A = { 4, sBtlFormSeaNeon4ASteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon4BSteps[] = {
-    { 5, 65, -12, -40, 0 },
-    { 5, 85, 12, -40, 1 },
-    { 5, -65, -12, -40, 2 },
-    { 5, -85, 12, -40, 3 },
+    { ENEMY_SEA_NEON, 65, -12, -40, 0 },
+    { ENEMY_SEA_NEON, 85, 12, -40, 1 },
+    { ENEMY_SEA_NEON, -65, -12, -40, 2 },
+    { ENEMY_SEA_NEON, -85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormSeaNeon4B = { 4, sBtlFormSeaNeon4BSteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon3ASteps[] = {
-    { 5, 40, 0, -30, 0 },
-    { 5, 65, -12, -40, 1 },
-    { 5, 85, 12, -40, 2 },
+    { ENEMY_SEA_NEON, 40, 0, -30, 0 },
+    { ENEMY_SEA_NEON, 65, -12, -40, 1 },
+    { ENEMY_SEA_NEON, 85, 12, -40, 2 },
 };
 
 static const BtlFormEntry sBtlFormSeaNeon3A = { 3, sBtlFormSeaNeon3ASteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon3BSteps[] = {
-    { 5, -25, 25, -30, 0 },
-    { 5, -64, 0, -50, 1 },
-    { 5, -55, -25, -30, 2 },
+    { ENEMY_SEA_NEON, -25, 25, -30, 0 },
+    { ENEMY_SEA_NEON, -64, 0, -50, 1 },
+    { ENEMY_SEA_NEON, -55, -25, -30, 2 },
 };
 
 const BtlFormEntry gBtlFormSeaNeon3B = { 3, sBtlFormSeaNeon3BSteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon2Steps[] = {
-    { 5, 65, -12, -40, 0 },
-    { 5, 85, 12, -40, 1 },
+    { ENEMY_SEA_NEON, 65, -12, -40, 0 },
+    { ENEMY_SEA_NEON, 85, 12, -40, 1 },
 };
 
 const BtlFormEntry gBtlFormSeaNeon2 = { 2, sBtlFormSeaNeon2Steps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon1Steps[] = {
-    { 5, 64, 0, -50, 0 },
+    { ENEMY_SEA_NEON, 64, 0, -50, 0 },
 };
 
 const BtlFormEntry gBtlFormSeaNeon1 = { 1, sBtlFormSeaNeon1Steps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom4Steps[] = {
-    { 6, 65, -12, 0, 0 },
-    { 6, 85, 12, 0, 1 },
-    { 6, -65, -12, 0, 2 },
-    { 6, -85, 12, 0, 3 },
+    { ENEMY_WHITE_MUSHROOM, 65, -12, 0, 0 },
+    { ENEMY_WHITE_MUSHROOM, 85, 12, 0, 1 },
+    { ENEMY_WHITE_MUSHROOM, -65, -12, 0, 2 },
+    { ENEMY_WHITE_MUSHROOM, -85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormWhiteMushroom4 = { 4, sBtlFormWhiteMushroom4Steps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom3Steps[] = {
-    { 6, 40, 0, 0, 0 },
-    { 6, 65, -12, 0, 1 },
-    { 6, 85, 12, 0, 2 },
+    { ENEMY_WHITE_MUSHROOM, 40, 0, 0, 0 },
+    { ENEMY_WHITE_MUSHROOM, 65, -12, 0, 1 },
+    { ENEMY_WHITE_MUSHROOM, 85, 12, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormWhiteMushroom3 = { 3, sBtlFormWhiteMushroom3Steps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom2ASteps[] = {
-    { 6, 25, -25, 0, 0 },
-    { 6, 55, 25, 0, 1 },
+    { ENEMY_WHITE_MUSHROOM, 25, -25, 0, 0 },
+    { ENEMY_WHITE_MUSHROOM, 55, 25, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormWhiteMushroom2A = { 2, sBtlFormWhiteMushroom2ASteps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom2BSteps[] = {
-    { 6, 40, 0, 0, 0 },
-    { 6, -40, 0, 0, 1 },
+    { ENEMY_WHITE_MUSHROOM, 40, 0, 0, 0 },
+    { ENEMY_WHITE_MUSHROOM, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormWhiteMushroom2B = { 2, sBtlFormWhiteMushroom2BSteps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom1Steps[] = {
-    { 6, 64, 0, 0, 0 },
+    { ENEMY_WHITE_MUSHROOM, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormWhiteMushroom1 = { 1, sBtlFormWhiteMushroom1Steps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus4Steps[] = {
-    { 7, 65, -12, 0, 0 },
-    { 7, 85, 12, 0, 1 },
-    { 7, -65, -12, 0, 2 },
-    { 7, -85, 12, 0, 3 },
+    { ENEMY_BLACK_FUNGUS, 65, -12, 0, 0 },
+    { ENEMY_BLACK_FUNGUS, 85, 12, 0, 1 },
+    { ENEMY_BLACK_FUNGUS, -65, -12, 0, 2 },
+    { ENEMY_BLACK_FUNGUS, -85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormBlackFungus4 = { 4, sBtlFormBlackFungus4Steps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus3Steps[] = {
-    { 7, 65, -12, 0, 0 },
-    { 7, 85, 12, 0, 1 },
-    { 7, -40, 0, 0, 2 },
+    { ENEMY_BLACK_FUNGUS, 65, -12, 0, 0 },
+    { ENEMY_BLACK_FUNGUS, 85, 12, 0, 1 },
+    { ENEMY_BLACK_FUNGUS, -40, 0, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormBlackFungus3 = { 3, sBtlFormBlackFungus3Steps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus2ASteps[] = {
-    { 7, 65, -12, 0, 0 },
-    { 7, 85, 12, 0, 1 },
+    { ENEMY_BLACK_FUNGUS, 65, -12, 0, 0 },
+    { ENEMY_BLACK_FUNGUS, 85, 12, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormBlackFungus2A = { 2, sBtlFormBlackFungus2ASteps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus2BSteps[] = {
-    { 7, 40, 0, 0, 0 },
-    { 7, -40, 0, 0, 1 },
+    { ENEMY_BLACK_FUNGUS, 40, 0, 0, 0 },
+    { ENEMY_BLACK_FUNGUS, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBlackFungus2B = { 2, sBtlFormBlackFungus2BSteps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus1Steps[] = {
-    { 7, 64, 0, 0, 0 },
+    { ENEMY_BLACK_FUNGUS, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormBlackFungus1 = { 1, sBtlFormBlackFungus1Steps, 60 };
 
 static const BtlFormStep sBtlFormSoldier6Steps[] = {
-    { 9, 25, -25, 0, 0 },
-    { 9, 40, 0, 0, 1 },
-    { 9, 55, 25, 0, 2 },
-    { 9, -55, -25, 0, 3 },
-    { 9, -40, 0, 0, 4 },
-    { 9, -25, 25, 0, 5 },
+    { ENEMY_SOLDIER, 25, -25, 0, 0 },
+    { ENEMY_SOLDIER, 40, 0, 0, 1 },
+    { ENEMY_SOLDIER, 55, 25, 0, 2 },
+    { ENEMY_SOLDIER, -55, -25, 0, 3 },
+    { ENEMY_SOLDIER, -40, 0, 0, 4 },
+    { ENEMY_SOLDIER, -25, 25, 0, 5 },
 };
 
 static const BtlFormEntry sBtlFormSoldier6 = { 6, sBtlFormSoldier6Steps, 60 };
 
 static const BtlFormStep sBtlFormSoldier5ASteps[] = {
-    { 9, 25, -25, 0, 0 },
-    { 9, 55, 25, 0, 1 },
-    { 9, 90, 0, 0, 2 },
-    { 9, -65, -12, 0, 3 },
-    { 9, -85, 12, 0, 4 },
+    { ENEMY_SOLDIER, 25, -25, 0, 0 },
+    { ENEMY_SOLDIER, 55, 25, 0, 1 },
+    { ENEMY_SOLDIER, 90, 0, 0, 2 },
+    { ENEMY_SOLDIER, -65, -12, 0, 3 },
+    { ENEMY_SOLDIER, -85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormSoldier5A = { 5, sBtlFormSoldier5ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier5BSteps[] = {
-    { 9, 65, -12, -40, 0 },
-    { 9, 85, 12, -40, 1 },
-    { 9, -25, -25, -30, 2 },
-    { 9, -40, 0, -30, 3 },
-    { 9, -55, 25, -30, 4 },
+    { ENEMY_SOLDIER, 65, -12, -40, 0 },
+    { ENEMY_SOLDIER, 85, 12, -40, 1 },
+    { ENEMY_SOLDIER, -25, -25, -30, 2 },
+    { ENEMY_SOLDIER, -40, 0, -30, 3 },
+    { ENEMY_SOLDIER, -55, 25, -30, 4 },
 };
 
 const BtlFormEntry gBtlFormSoldier5B = { 5, sBtlFormSoldier5BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier4ASteps[] = {
-    { 9, 25, -25, 0, 0 },
-    { 9, 55, 25, 0, 1 },
-    { 9, 65, -12, 0, 2 },
-    { 9, 85, 12, 0, 3 },
+    { ENEMY_SOLDIER, 25, -25, 0, 0 },
+    { ENEMY_SOLDIER, 55, 25, 0, 1 },
+    { ENEMY_SOLDIER, 65, -12, 0, 2 },
+    { ENEMY_SOLDIER, 85, 12, 0, 3 },
 };
 
 const BtlFormEntry gBtlFormSoldier4A = { 4, sBtlFormSoldier4ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier4BSteps[] = {
-    { 9, 40, 0, -30, 0 },
-    { 9, 65, -12, -40, 1 },
-    { 9, 85, 12, -40, 2 },
-    { 9, 90, 0, -50, 3 },
+    { ENEMY_SOLDIER, 40, 0, -30, 0 },
+    { ENEMY_SOLDIER, 65, -12, -40, 1 },
+    { ENEMY_SOLDIER, 85, 12, -40, 2 },
+    { ENEMY_SOLDIER, 90, 0, -50, 3 },
 };
 
 static const BtlFormEntry sBtlFormSoldier4B = { 4, sBtlFormSoldier4BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier4CSteps[] = {
-    { 9, 65, -12, 0, 0 },
-    { 9, 85, 12, 0, 1 },
-    { 9, -65, -12, 0, 2 },
-    { 9, -85, 12, 0, 3 },
+    { ENEMY_SOLDIER, 65, -12, 0, 0 },
+    { ENEMY_SOLDIER, 85, 12, 0, 1 },
+    { ENEMY_SOLDIER, -65, -12, 0, 2 },
+    { ENEMY_SOLDIER, -85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormSoldier4C = { 4, sBtlFormSoldier4CSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier3ASteps[] = {
-    { 9, 40, 0, -30, 0 },
-    { 9, 65, -12, -40, 1 },
-    { 9, 85, 12, -40, 2 },
+    { ENEMY_SOLDIER, 40, 0, -30, 0 },
+    { ENEMY_SOLDIER, 65, -12, -40, 1 },
+    { ENEMY_SOLDIER, 85, 12, -40, 2 },
 };
 
 const BtlFormEntry gBtlFormSoldier3A = { 3, sBtlFormSoldier3ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier3BSteps[] = {
-    { 9, 65, -12, 0, 0 },
-    { 9, 85, 12, 0, 1 },
-    { 9, 90, 0, 0, 2 },
+    { ENEMY_SOLDIER, 65, -12, 0, 0 },
+    { ENEMY_SOLDIER, 85, 12, 0, 1 },
+    { ENEMY_SOLDIER, 90, 0, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormSoldier3B = { 3, sBtlFormSoldier3BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier3CSteps[] = {
-    { 9, 65, -12, -40, 0 },
-    { 9, 85, 12, -40, 1 },
-    { 9, -40, 0, -30, 2 },
+    { ENEMY_SOLDIER, 65, -12, -40, 0 },
+    { ENEMY_SOLDIER, 85, 12, -40, 1 },
+    { ENEMY_SOLDIER, -40, 0, -30, 2 },
 };
 
 const BtlFormEntry gBtlFormSoldier3C = { 3, sBtlFormSoldier3CSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier3DSteps[] = {
-    { 9, 25, -25, 0, 0 },
-    { 9, 64, 0, 0, 1 },
-    { 9, 55, 25, 0, 2 },
+    { ENEMY_SOLDIER, 25, -25, 0, 0 },
+    { ENEMY_SOLDIER, 64, 0, 0, 1 },
+    { ENEMY_SOLDIER, 55, 25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormSoldier3D = { 3, sBtlFormSoldier3DSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier3ESteps[] = {
-    { 9, -25, 25, 0, 0 },
-    { 9, -64, 0, 0, 1 },
-    { 9, -55, -25, 0, 2 },
+    { ENEMY_SOLDIER, -25, 25, 0, 0 },
+    { ENEMY_SOLDIER, -64, 0, 0, 1 },
+    { ENEMY_SOLDIER, -55, -25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormSoldier3E = { 3, sBtlFormSoldier3ESteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier2ASteps[] = {
-    { 9, 65, -12, 0, 0 },
-    { 9, 85, 12, 0, 1 },
+    { ENEMY_SOLDIER, 65, -12, 0, 0 },
+    { ENEMY_SOLDIER, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormSoldier2A = { 2, sBtlFormSoldier2ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier2BSteps[] = {
-    { 9, 25, -25, -30, 0 },
-    { 9, 55, 25, -30, 1 },
+    { ENEMY_SOLDIER, 25, -25, -30, 0 },
+    { ENEMY_SOLDIER, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormSoldier2B = { 2, sBtlFormSoldier2BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier2CSteps[] = {
-    { 9, 40, 0, 0, 0 },
-    { 9, -40, 0, 0, 1 },
+    { ENEMY_SOLDIER, 40, 0, 0, 0 },
+    { ENEMY_SOLDIER, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormSoldier2C = { 2, sBtlFormSoldier2CSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier2DSteps[] = {
-    { 9, -65, -12, 0, 0 },
-    { 9, -85, 12, 0, 1 },
+    { ENEMY_SOLDIER, -65, -12, 0, 0 },
+    { ENEMY_SOLDIER, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormSoldier2D = { 2, sBtlFormSoldier2DSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1ASteps[] = {
-    { 9, 64, 0, -50, 0 },
+    { ENEMY_SOLDIER, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormSoldier1A = { 1, sBtlFormSoldier1ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1BSteps[] = {
-    { 9, 40, 0, 0, 0 },
+    { ENEMY_SOLDIER, 40, 0, 0, 0 },
 };
 
 const BtlFormEntry gBtlFormSoldier1B = { 1, sBtlFormSoldier1BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1CSteps[] = {
-    { 9, -64, 0, 0, 0 },
+    { ENEMY_SOLDIER, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormSoldier1C = { 1, sBtlFormSoldier1CSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1DSteps[] = {
-    { 9, -40, 0, 0, 0 },
+    { ENEMY_SOLDIER, -40, 0, 0, 0 },
 };
 
 const BtlFormEntry gBtlFormSoldier1D = { 1, sBtlFormSoldier1DSteps, 60 };
 
 static const BtlFormStep sBtlFormPowerwild3Steps[] = {
-    { 10, 40, 0, 0, 0 },
-    { 10, 65, -12, 0, 1 },
-    { 10, 85, 12, 0, 2 },
+    { ENEMY_POWERWILD, 40, 0, 0, 0 },
+    { ENEMY_POWERWILD, 65, -12, 0, 1 },
+    { ENEMY_POWERWILD, 85, 12, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormPowerwild3 = { 3, sBtlFormPowerwild3Steps, 60 };
 
 static const BtlFormStep sBtlFormPowerwild2ASteps[] = {
-    { 10, 25, -25, 0, 0 },
-    { 10, 55, 25, 0, 1 },
+    { ENEMY_POWERWILD, 25, -25, 0, 0 },
+    { ENEMY_POWERWILD, 55, 25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormPowerwild2A = { 2, sBtlFormPowerwild2ASteps, 60 };
 
 static const BtlFormStep sBtlFormPowerwild2BSteps[] = {
-    { 10, -65, -12, 0, 0 },
-    { 10, -85, 12, 0, 1 },
+    { ENEMY_POWERWILD, -65, -12, 0, 0 },
+    { ENEMY_POWERWILD, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormPowerwild2B = { 2, sBtlFormPowerwild2BSteps, 60 };
 
 static const BtlFormStep sBtlFormPowerwild1Steps[] = {
-    { 10, 64, 0, 0, 0 },
+    { ENEMY_POWERWILD, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormPowerwild1 = { 1, sBtlFormPowerwild1Steps, 60 };
 
 static const BtlFormStep sBtlFormBouncywild3Steps[] = {
-    { 11, 65, -12, 0, 0 },
-    { 11, 85, 12, 0, 1 },
-    { 11, 90, 0, 0, 2 },
+    { ENEMY_BOUNCYWILD, 65, -12, 0, 0 },
+    { ENEMY_BOUNCYWILD, 85, 12, 0, 1 },
+    { ENEMY_BOUNCYWILD, 90, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormBouncywild3 = { 3, sBtlFormBouncywild3Steps, 60 };
 
 static const BtlFormStep sBtlFormBouncywild2ASteps[] = {
-    { 11, 40, 0, 0, 0 },
-    { 11, -40, 0, 0, 1 },
+    { ENEMY_BOUNCYWILD, 40, 0, 0, 0 },
+    { ENEMY_BOUNCYWILD, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBouncywild2A = { 2, sBtlFormBouncywild2ASteps, 60 };
 
 static const BtlFormStep sBtlFormBouncywild2BSteps[] = {
-    { 11, -55, 25, 0, 0 },
-    { 11, -25, -25, 0, 1 },
+    { ENEMY_BOUNCYWILD, -55, 25, 0, 0 },
+    { ENEMY_BOUNCYWILD, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBouncywild2B = { 2, sBtlFormBouncywild2BSteps, 60 };
 
 static const BtlFormStep sBtlFormBouncywild1Steps[] = {
-    { 11, 64, 0, 0, 0 },
+    { ENEMY_BOUNCYWILD, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormBouncywild1 = { 1, sBtlFormBouncywild1Steps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier4ASteps[] = {
-    { 12, 25, -25, -30, 0 },
-    { 12, 55, 25, -30, 1 },
-    { 12, 65, -12, -40, 2 },
-    { 12, 85, 12, -40, 3 },
+    { ENEMY_AIR_SOLDIER, 25, -25, -30, 0 },
+    { ENEMY_AIR_SOLDIER, 55, 25, -30, 1 },
+    { ENEMY_AIR_SOLDIER, 65, -12, -40, 2 },
+    { ENEMY_AIR_SOLDIER, 85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier4A = { 4, sBtlFormAirSoldier4ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier4BSteps[] = {
-    { 12, 65, -12, -40, 0 },
-    { 12, 85, 12, -40, 1 },
-    { 12, -65, -12, -40, 2 },
-    { 12, -85, 12, -40, 3 },
+    { ENEMY_AIR_SOLDIER, 65, -12, -40, 0 },
+    { ENEMY_AIR_SOLDIER, 85, 12, -40, 1 },
+    { ENEMY_AIR_SOLDIER, -65, -12, -40, 2 },
+    { ENEMY_AIR_SOLDIER, -85, 12, -40, 3 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier4B = { 4, sBtlFormAirSoldier4BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier3ASteps[] = {
-    { 12, 65, -12, -40, 0 },
-    { 12, 85, 12, -40, 1 },
-    { 12, 90, 0, -50, 2 },
+    { ENEMY_AIR_SOLDIER, 65, -12, -40, 0 },
+    { ENEMY_AIR_SOLDIER, 85, 12, -40, 1 },
+    { ENEMY_AIR_SOLDIER, 90, 0, -50, 2 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier3A = { 3, sBtlFormAirSoldier3ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier3BSteps[] = {
-    { 12, 65, -12, -40, 0 },
-    { 12, 85, 12, -40, 1 },
-    { 12, -40, 0, -30, 2 },
+    { ENEMY_AIR_SOLDIER, 65, -12, -40, 0 },
+    { ENEMY_AIR_SOLDIER, 85, 12, -40, 1 },
+    { ENEMY_AIR_SOLDIER, -40, 0, -30, 2 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier3B = { 3, sBtlFormAirSoldier3BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier2ASteps[] = {
-    { 12, 40, 0, -30, 0 },
-    { 12, -40, 0, -30, 1 },
+    { ENEMY_AIR_SOLDIER, 40, 0, -30, 0 },
+    { ENEMY_AIR_SOLDIER, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier2A = { 2, sBtlFormAirSoldier2ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier2BSteps[] = {
-    { 12, -55, 25, -30, 0 },
-    { 12, -25, -25, -30, 1 },
+    { ENEMY_AIR_SOLDIER, -55, 25, -30, 0 },
+    { ENEMY_AIR_SOLDIER, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormAirSoldier2B = { 2, sBtlFormAirSoldier2BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier1Steps[] = {
-    { 12, 64, 0, -50, 0 },
+    { ENEMY_AIR_SOLDIER, 64, 0, -50, 0 },
 };
 
 const BtlFormEntry gBtlFormAirSoldier1 = { 1, sBtlFormAirSoldier1Steps, 60 };
 
 static const BtlFormStep sBtlFormBandit5Steps[] = {
-    { 13, 25, -25, 0, 0 },
-    { 13, 55, 25, 0, 1 },
-    { 13, 90, 0, 0, 2 },
-    { 13, -65, -12, 0, 3 },
-    { 13, -85, 12, 0, 4 },
+    { ENEMY_BANDIT, 25, -25, 0, 0 },
+    { ENEMY_BANDIT, 55, 25, 0, 1 },
+    { ENEMY_BANDIT, 90, 0, 0, 2 },
+    { ENEMY_BANDIT, -65, -12, 0, 3 },
+    { ENEMY_BANDIT, -85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormBandit5 = { 5, sBtlFormBandit5Steps, 60 };
 
 static const BtlFormStep sBtlFormBandit4ASteps[] = {
-    { 13, 25, -25, 0, 0 },
-    { 13, 55, 25, 0, 1 },
-    { 13, 65, -12, 0, 2 },
-    { 13, 85, 12, 0, 3 },
+    { ENEMY_BANDIT, 25, -25, 0, 0 },
+    { ENEMY_BANDIT, 55, 25, 0, 1 },
+    { ENEMY_BANDIT, 65, -12, 0, 2 },
+    { ENEMY_BANDIT, 85, 12, 0, 3 },
 };
 
 const BtlFormEntry gBtlFormBandit4A = { 4, sBtlFormBandit4ASteps, 60 };
 
 static const BtlFormStep sBtlFormBandit4BSteps[] = {
-    { 13, 65, -12, 0, 0 },
-    { 13, 85, 12, 0, 1 },
-    { 13, -65, -12, 0, 2 },
-    { 13, -85, 12, 0, 3 },
+    { ENEMY_BANDIT, 65, -12, 0, 0 },
+    { ENEMY_BANDIT, 85, 12, 0, 1 },
+    { ENEMY_BANDIT, -65, -12, 0, 2 },
+    { ENEMY_BANDIT, -85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormBandit4B = { 4, sBtlFormBandit4BSteps, 60 };
 
 static const BtlFormStep sBtlFormBandit3Steps[] = {
-    { 13, 65, -12, 0, 0 },
-    { 13, 85, 12, 0, 1 },
-    { 13, -40, 0, 0, 2 },
+    { ENEMY_BANDIT, 65, -12, 0, 0 },
+    { ENEMY_BANDIT, 85, 12, 0, 1 },
+    { ENEMY_BANDIT, -40, 0, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormBandit3 = { 3, sBtlFormBandit3Steps, 60 };
 
 static const BtlFormStep sBtlFormBandit2ASteps[] = {
-    { 13, 25, -25, 0, 0 },
-    { 13, 55, 25, 0, 1 },
+    { ENEMY_BANDIT, 25, -25, 0, 0 },
+    { ENEMY_BANDIT, 55, 25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBandit2A = { 2, sBtlFormBandit2ASteps, 60 };
 
 static const BtlFormStep sBtlFormBandit2BSteps[] = {
-    { 13, -55, 25, 0, 0 },
-    { 13, -25, -25, 0, 1 },
+    { ENEMY_BANDIT, -55, 25, 0, 0 },
+    { ENEMY_BANDIT, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBandit2B = { 2, sBtlFormBandit2BSteps, 60 };
 
 static const BtlFormStep sBtlFormBandit1ASteps[] = {
-    { 13, 64, 0, 0, 0 },
+    { ENEMY_BANDIT, 64, 0, 0, 0 },
 };
 
 const BtlFormEntry gBtlFormBandit1A = { 1, sBtlFormBandit1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBandit1BSteps[] = {
-    { 13, 40, 0, 0, 0 },
+    { ENEMY_BANDIT, 40, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormBandit1B = { 1, sBtlFormBandit1BSteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider3Steps[] = {
-    { 14, 40, 0, 0, 0 },
-    { 14, 65, -12, 0, 1 },
-    { 14, 85, 12, 0, 2 },
+    { ENEMY_BARREL_SPIDER, 40, 0, 0, 0 },
+    { ENEMY_BARREL_SPIDER, 65, -12, 0, 1 },
+    { ENEMY_BARREL_SPIDER, 85, 12, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider3 = { 3, sBtlFormBarrelSpider3Steps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider2ASteps[] = {
-    { 14, 65, -12, 0, 0 },
-    { 14, 85, 12, 0, 1 },
+    { ENEMY_BARREL_SPIDER, 65, -12, 0, 0 },
+    { ENEMY_BARREL_SPIDER, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider2A = { 2, sBtlFormBarrelSpider2ASteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider2BSteps[] = {
-    { 14, 40, 0, 0, 0 },
-    { 14, -40, 0, 0, 1 },
+    { ENEMY_BARREL_SPIDER, 40, 0, 0, 0 },
+    { ENEMY_BARREL_SPIDER, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider2B = { 2, sBtlFormBarrelSpider2BSteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider2CSteps[] = {
-    { 14, -65, -12, 0, 0 },
-    { 14, -85, 12, 0, 1 },
+    { ENEMY_BARREL_SPIDER, -65, -12, 0, 0 },
+    { ENEMY_BARREL_SPIDER, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider2C = { 2, sBtlFormBarrelSpider2CSteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider1ASteps[] = {
-    { 14, 64, 0, 0, 0 },
+    { ENEMY_BARREL_SPIDER, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider1A = { 1, sBtlFormBarrelSpider1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider1BSteps[] = {
-    { 14, -64, 0, 0, 0 },
+    { ENEMY_BARREL_SPIDER, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormBarrelSpider1B = { 1, sBtlFormBarrelSpider1BSteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost3Steps[] = {
-    { 15, 65, -12, -40, 0 },
-    { 15, 85, 12, -40, 1 },
-    { 15, 90, 0, -50, 2 },
+    { ENEMY_SEARCH_GHOST, 65, -12, -40, 0 },
+    { ENEMY_SEARCH_GHOST, 85, 12, -40, 1 },
+    { ENEMY_SEARCH_GHOST, 90, 0, -50, 2 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost3 = { 3, sBtlFormSearchGhost3Steps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost2ASteps[] = {
-    { 15, 25, -25, -30, 0 },
-    { 15, 55, 25, -30, 1 },
+    { ENEMY_SEARCH_GHOST, 25, -25, -30, 0 },
+    { ENEMY_SEARCH_GHOST, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost2A = { 2, sBtlFormSearchGhost2ASteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost2BSteps[] = {
-    { 15, 40, 0, -30, 0 },
-    { 15, -40, 0, -30, 1 },
+    { ENEMY_SEARCH_GHOST, 40, 0, -30, 0 },
+    { ENEMY_SEARCH_GHOST, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost2B = { 2, sBtlFormSearchGhost2BSteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost2CSteps[] = {
-    { 15, -65, -12, -40, 0 },
-    { 15, -85, 12, -40, 1 },
+    { ENEMY_SEARCH_GHOST, -65, -12, -40, 0 },
+    { ENEMY_SEARCH_GHOST, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost2C = { 2, sBtlFormSearchGhost2CSteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost1ASteps[] = {
-    { 15, 64, 0, -50, 0 },
+    { ENEMY_SEARCH_GHOST, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost1A = { 1, sBtlFormSearchGhost1ASteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost1BSteps[] = {
-    { 15, -64, 0, -50, 0 },
+    { ENEMY_SEARCH_GHOST, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormSearchGhost1B = { 1, sBtlFormSearchGhost1BSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver2ASteps[] = {
-    { 16, 65, -12, -40, 0 },
-    { 16, 85, 12, -40, 1 },
+    { ENEMY_SCREWDIVER, 65, -12, -40, 0 },
+    { ENEMY_SCREWDIVER, 85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver2A = { 2, sBtlFormScrewdiver2ASteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver2BSteps[] = {
-    { 16, -55, 25, -30, 0 },
-    { 16, -25, -25, -30, 1 },
+    { ENEMY_SCREWDIVER, -55, 25, -30, 0 },
+    { ENEMY_SCREWDIVER, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver2B = { 2, sBtlFormScrewdiver2BSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1ASteps[] = {
-    { 16, 64, 0, -50, 0 },
+    { ENEMY_SCREWDIVER, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1A = { 1, sBtlFormScrewdiver1ASteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1BSteps[] = {
-    { 16, -64, 0, -50, 0 },
+    { ENEMY_SCREWDIVER, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1B = { 1, sBtlFormScrewdiver1BSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1CSteps[] = {
-    { 16, 25, -25, -30, 0 },
+    { ENEMY_SCREWDIVER, 25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1C = { 1, sBtlFormScrewdiver1CSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1DSteps[] = {
-    { 16, -25, -25, -30, 0 },
+    { ENEMY_SCREWDIVER, -25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1D = { 1, sBtlFormScrewdiver1DSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1ESteps[] = {
-    { 16, 55, 25, -30, 0 },
+    { ENEMY_SCREWDIVER, 55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1E = { 1, sBtlFormScrewdiver1ESteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1FSteps[] = {
-    { 16, -55, 25, -30, 0 },
+    { ENEMY_SCREWDIVER, -55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormScrewdiver1F = { 1, sBtlFormScrewdiver1FSteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight3Steps[] = {
-    { 17, 65, -12, 0, 0 },
-    { 17, 85, 12, 0, 1 },
-    { 17, -40, 0, 0, 2 },
+    { ENEMY_WIGHT_KNIGHT, 65, -12, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, 85, 12, 0, 1 },
+    { ENEMY_WIGHT_KNIGHT, -40, 0, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormWightKnight3 = { 3, sBtlFormWightKnight3Steps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight2ASteps[] = {
-    { 17, 25, -25, 0, 0 },
-    { 17, 55, 25, 0, 1 },
+    { ENEMY_WIGHT_KNIGHT, 25, -25, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, 55, 25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormWightKnight2A = { 2, sBtlFormWightKnight2ASteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight2BSteps[] = {
-    { 17, 40, 0, 0, 0 },
-    { 17, -40, 0, 0, 1 },
+    { ENEMY_WIGHT_KNIGHT, 40, 0, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, -40, 0, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormWightKnight2B = { 2, sBtlFormWightKnight2BSteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight2CSteps[] = {
-    { 17, 65, -12, 0, 0 },
-    { 17, 85, 12, 0, 1 },
+    { ENEMY_WIGHT_KNIGHT, 65, -12, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormWightKnight2C = { 2, sBtlFormWightKnight2CSteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight2DSteps[] = {
-    { 17, -55, 25, 0, 0 },
-    { 17, -25, -25, 0, 1 },
+    { ENEMY_WIGHT_KNIGHT, -55, 25, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormWightKnight2D = { 2, sBtlFormWightKnight2DSteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight1ASteps[] = {
-    { 17, 64, 0, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormWightKnight1A = { 1, sBtlFormWightKnight1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight1BSteps[] = {
-    { 17, -64, 0, 0, 0 },
+    { ENEMY_WIGHT_KNIGHT, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormWightKnight1B = { 1, sBtlFormWightKnight1BSteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle3Steps[] = {
-    { 18, 40, 0, -30, 0 },
-    { 18, 65, -12, -40, 1 },
-    { 18, 85, 12, -40, 2 },
+    { ENEMY_GARGOYLE, 40, 0, -30, 0 },
+    { ENEMY_GARGOYLE, 65, -12, -40, 1 },
+    { ENEMY_GARGOYLE, 85, 12, -40, 2 },
 };
 
 static const BtlFormEntry sBtlFormGargoyle3 = { 3, sBtlFormGargoyle3Steps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle2ASteps[] = {
-    { 18, 25, -25, -30, 0 },
-    { 18, 55, 25, -30, 1 },
+    { ENEMY_GARGOYLE, 25, -25, -30, 0 },
+    { ENEMY_GARGOYLE, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormGargoyle2A = { 2, sBtlFormGargoyle2ASteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle2BSteps[] = {
-    { 18, -55, 25, -30, 0 },
-    { 18, -25, -25, -30, 1 },
+    { ENEMY_GARGOYLE, -55, 25, -30, 0 },
+    { ENEMY_GARGOYLE, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormGargoyle2B = { 2, sBtlFormGargoyle2BSteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle1ASteps[] = {
-    { 18, 64, 0, -50, 0 },
+    { ENEMY_GARGOYLE, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormGargoyle1A = { 1, sBtlFormGargoyle1ASteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle1BSteps[] = {
-    { 18, -64, 0, -50, 0 },
+    { ENEMY_GARGOYLE, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormGargoyle1B = { 1, sBtlFormGargoyle1BSteps, 60 };
 
 static const BtlFormStep sBtlFormPirate5Steps[] = {
-    { 19, 25, -25, 0, 0 },
-    { 19, 40, 0, 0, 1 },
-    { 19, 55, 25, 0, 2 },
-    { 19, 65, -12, 0, 3 },
-    { 19, 85, 12, 0, 4 },
+    { ENEMY_PIRATE, 25, -25, 0, 0 },
+    { ENEMY_PIRATE, 40, 0, 0, 1 },
+    { ENEMY_PIRATE, 55, 25, 0, 2 },
+    { ENEMY_PIRATE, 65, -12, 0, 3 },
+    { ENEMY_PIRATE, 85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormPirate5 = { 5, sBtlFormPirate5Steps, 60 };
 
 static const BtlFormStep sBtlFormPirate4Steps[] = {
-    { 19, 65, -12, 0, 0 },
-    { 19, 85, 12, 0, 1 },
-    { 19, -65, -12, 0, 2 },
-    { 19, -85, 12, 0, 3 },
+    { ENEMY_PIRATE, 65, -12, 0, 0 },
+    { ENEMY_PIRATE, 85, 12, 0, 1 },
+    { ENEMY_PIRATE, -65, -12, 0, 2 },
+    { ENEMY_PIRATE, -85, 12, 0, 3 },
 };
 
 const BtlFormEntry gBtlFormPirate4 = { 4, sBtlFormPirate4Steps, 60 };
 
 static const BtlFormStep sBtlFormPirate3ASteps[] = {
-    { 19, 65, -12, 0, 0 },
-    { 19, 85, 12, 0, 1 },
-    { 19, 90, 0, 0, 2 },
+    { ENEMY_PIRATE, 65, -12, 0, 0 },
+    { ENEMY_PIRATE, 85, 12, 0, 1 },
+    { ENEMY_PIRATE, 90, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormPirate3A = { 3, sBtlFormPirate3ASteps, 60 };
 
 static const BtlFormStep sBtlFormPirate3BSteps[] = {
-    { 19, -65, -12, 0, 0 },
-    { 19, -85, 12, 0, 1 },
-    { 19, 40, 0, 0, 2 },
+    { ENEMY_PIRATE, -65, -12, 0, 0 },
+    { ENEMY_PIRATE, -85, 12, 0, 1 },
+    { ENEMY_PIRATE, 40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormPirate3B = { 3, sBtlFormPirate3BSteps, 60 };
 
 static const BtlFormStep sBtlFormPirate2ASteps[] = {
-    { 19, 65, -12, 0, 0 },
-    { 19, 85, 12, 0, 1 },
+    { ENEMY_PIRATE, 65, -12, 0, 0 },
+    { ENEMY_PIRATE, 85, 12, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormPirate2A = { 2, sBtlFormPirate2ASteps, 60 };
 
 static const BtlFormStep sBtlFormPirate2BSteps[] = {
-    { 19, -65, -12, 0, 0 },
-    { 19, -85, 12, 0, 1 },
+    { ENEMY_PIRATE, -65, -12, 0, 0 },
+    { ENEMY_PIRATE, -85, 12, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormPirate2B = { 2, sBtlFormPirate2BSteps, 60 };
 
 static const BtlFormStep sBtlFormPirate2CSteps[] = {
-    { 19, 40, 0, 0, 0 },
-    { 19, -40, 0, 0, 1 },
+    { ENEMY_PIRATE, 40, 0, 0, 0 },
+    { ENEMY_PIRATE, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormPirate2C = { 2, sBtlFormPirate2CSteps, 60 };
 
 static const BtlFormStep sBtlFormPirate1Steps[] = {
-    { 19, 64, 0, 0, 0 },
+    { ENEMY_PIRATE, 64, 0, 0, 0 },
 };
 
 const BtlFormEntry gBtlFormPirate1 = { 1, sBtlFormPirate1Steps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate2ASteps[] = {
-    { 20, 25, -25, -30, 0 },
-    { 20, 55, 25, -30, 1 },
+    { ENEMY_AIR_PIRATE, 25, -25, -30, 0 },
+    { ENEMY_AIR_PIRATE, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormAirPirate2A = { 2, sBtlFormAirPirate2ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate2BSteps[] = {
-    { 20, 40, 0, -30, 0 },
-    { 20, -40, 0, -30, 1 },
+    { ENEMY_AIR_PIRATE, 40, 0, -30, 0 },
+    { ENEMY_AIR_PIRATE, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormAirPirate2B = { 2, sBtlFormAirPirate2BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate2CSteps[] = {
-    { 20, -55, 25, -30, 0 },
-    { 20, -25, -25, -30, 1 },
+    { ENEMY_AIR_PIRATE, -55, 25, -30, 0 },
+    { ENEMY_AIR_PIRATE, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormAirPirate2C = { 2, sBtlFormAirPirate2CSteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate1ASteps[] = {
-    { 20, 64, 0, -50, 0 },
+    { ENEMY_AIR_PIRATE, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormAirPirate1A = { 1, sBtlFormAirPirate1ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate1BSteps[] = {
-    { 20, -64, 0, -50, 0 },
+    { ENEMY_AIR_PIRATE, -64, 0, -50, 0 },
 };
 
 const BtlFormEntry gBtlFormAirPirate1B = { 1, sBtlFormAirPirate1BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate1CSteps[] = {
-    { 20, 25, -25, -30, 0 },
+    { ENEMY_AIR_PIRATE, 25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormAirPirate1C = { 1, sBtlFormAirPirate1CSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2ASteps[] = {
-    { 21, 65, -12, -40, 0 },
-    { 21, 85, 12, -40, 1 },
+    { ENEMY_DARKBALL, 65, -12, -40, 0 },
+    { ENEMY_DARKBALL, 85, 12, -40, 1 },
 };
 
 const BtlFormEntry gBtlFormDarkball2A = { 2, sBtlFormDarkball2ASteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2BSteps[] = {
-    { 21, 25, -25, -30, 0 },
-    { 21, 55, 25, -30, 1 },
+    { ENEMY_DARKBALL, 25, -25, -30, 0 },
+    { ENEMY_DARKBALL, 55, 25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormDarkball2B = { 2, sBtlFormDarkball2BSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2CSteps[] = {
-    { 21, 40, 0, -30, 0 },
-    { 21, -40, 0, -30, 1 },
+    { ENEMY_DARKBALL, 40, 0, -30, 0 },
+    { ENEMY_DARKBALL, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormDarkball2C = { 2, sBtlFormDarkball2CSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2DSteps[] = {
-    { 21, 40, 0, -30, 0 },
-    { 21, 90, 0, -50, 1 },
+    { ENEMY_DARKBALL, 40, 0, -30, 0 },
+    { ENEMY_DARKBALL, 90, 0, -50, 1 },
 };
 
 static const BtlFormEntry sBtlFormDarkball2D = { 2, sBtlFormDarkball2DSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2ESteps[] = {
-    { 21, -65, -12, -40, 0 },
-    { 21, -85, 12, -40, 1 },
+    { ENEMY_DARKBALL, -65, -12, -40, 0 },
+    { ENEMY_DARKBALL, -85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormDarkball2E = { 2, sBtlFormDarkball2ESteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2FSteps[] = {
-    { 21, -55, 25, -30, 0 },
-    { 21, -25, -25, -30, 1 },
+    { ENEMY_DARKBALL, -55, 25, -30, 0 },
+    { ENEMY_DARKBALL, -25, -25, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormDarkball2F = { 2, sBtlFormDarkball2FSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1ASteps[] = {
-    { 21, 64, 0, -50, 0 },
+    { ENEMY_DARKBALL, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1A = { 1, sBtlFormDarkball1ASteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1BSteps[] = {
-    { 21, -64, 0, -50, 0 },
+    { ENEMY_DARKBALL, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1B = { 1, sBtlFormDarkball1BSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1CSteps[] = {
-    { 21, 25, -25, -30, 0 },
+    { ENEMY_DARKBALL, 25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1C = { 1, sBtlFormDarkball1CSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1DSteps[] = {
-    { 21, -25, -25, -30, 0 },
+    { ENEMY_DARKBALL, -25, -25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1D = { 1, sBtlFormDarkball1DSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1ESteps[] = {
-    { 21, 55, 25, -30, 0 },
+    { ENEMY_DARKBALL, 55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1E = { 1, sBtlFormDarkball1ESteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1FSteps[] = {
-    { 21, -55, 25, -30, 0 },
+    { ENEMY_DARKBALL, -55, 25, -30, 0 },
 };
 
 static const BtlFormEntry sBtlFormDarkball1F = { 1, sBtlFormDarkball1FSteps, 60 };
 
 static const BtlFormStep sBtlFormWyvern2Steps[] = {
-    { 22, 65, -12, -40, 0 },
-    { 22, 85, 12, -40, 1 },
+    { ENEMY_WYVERN, 65, -12, -40, 0 },
+    { ENEMY_WYVERN, 85, 12, -40, 1 },
 };
 
 static const BtlFormEntry sBtlFormWyvern2 = { 2, sBtlFormWyvern2Steps, 60 };
 
 static const BtlFormStep sBtlFormWyvern1ASteps[] = {
-    { 22, 64, 0, -50, 0 },
+    { ENEMY_WYVERN, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormWyvern1A = { 1, sBtlFormWyvern1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWyvern1BSteps[] = {
-    { 22, -64, 0, -50, 0 },
+    { ENEMY_WYVERN, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormWyvern1B = { 1, sBtlFormWyvern1BSteps, 60 };
 
 static const BtlFormStep sBtlFormWizard3Steps[] = {
-    { 23, 65, -12, -40, 0 },
-    { 23, 85, 12, -40, 1 },
-    { 23, 90, 0, -50, 2 },
+    { ENEMY_WIZARD, 65, -12, -40, 0 },
+    { ENEMY_WIZARD, 85, 12, -40, 1 },
+    { ENEMY_WIZARD, 90, 0, -50, 2 },
 };
 
 const BtlFormEntry gBtlFormWizard3 = { 3, sBtlFormWizard3Steps, 60 };
 
 static const BtlFormStep sBtlFormWizard2Steps[] = {
-    { 23, 40, 0, -30, 0 },
-    { 23, -40, 0, -30, 1 },
+    { ENEMY_WIZARD, 40, 0, -30, 0 },
+    { ENEMY_WIZARD, -40, 0, -30, 1 },
 };
 
 static const BtlFormEntry sBtlFormWizard2 = { 2, sBtlFormWizard2Steps, 60 };
 
 static const BtlFormStep sBtlFormWizard1ASteps[] = {
-    { 23, 64, 0, -50, 0 },
+    { ENEMY_WIZARD, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormWizard1A = { 1, sBtlFormWizard1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWizard1BSteps[] = {
-    { 23, -64, 0, -50, 0 },
+    { ENEMY_WIZARD, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormWizard1B = { 1, sBtlFormWizard1BSteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow3ASteps[] = {
-    { 24, 40, 0, 0, 0 },
-    { 24, 65, -12, 0, 1 },
-    { 24, 85, 12, 0, 2 },
+    { ENEMY_NEOSHADOW, 40, 0, 0, 0 },
+    { ENEMY_NEOSHADOW, 65, -12, 0, 1 },
+    { ENEMY_NEOSHADOW, 85, 12, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormNeoshadow3A = { 3, sBtlFormNeoshadow3ASteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow3BSteps[] = {
-    { 24, 65, -12, 0, 0 },
-    { 24, 85, 12, 0, 1 },
-    { 24, -40, 0, 0, 2 },
+    { ENEMY_NEOSHADOW, 65, -12, 0, 0 },
+    { ENEMY_NEOSHADOW, 85, 12, 0, 1 },
+    { ENEMY_NEOSHADOW, -40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormNeoshadow3B = { 3, sBtlFormNeoshadow3BSteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow2Steps[] = {
-    { 24, 65, -12, 0, 0 },
-    { 24, 85, 12, 0, 1 },
+    { ENEMY_NEOSHADOW, 65, -12, 0, 0 },
+    { ENEMY_NEOSHADOW, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormNeoshadow2 = { 2, sBtlFormNeoshadow2Steps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow1ASteps[] = {
-    { 24, 64, 0, 0, 0 },
+    { ENEMY_NEOSHADOW, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormNeoshadow1A = { 1, sBtlFormNeoshadow1ASteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow1BSteps[] = {
-    { 24, -64, 0, 0, 0 },
+    { ENEMY_NEOSHADOW, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormNeoshadow1B = { 1, sBtlFormNeoshadow1BSteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody2ASteps[] = {
-    { 25, 65, -12, 0, 0 },
-    { 25, 85, 12, 0, 1 },
+    { ENEMY_LARGE_BODY, 65, -12, 0, 0 },
+    { ENEMY_LARGE_BODY, 85, 12, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormLargeBody2A = { 2, sBtlFormLargeBody2ASteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody2BSteps[] = {
-    { 25, 40, 0, 0, 0 },
-    { 25, -40, 0, 0, 1 },
+    { ENEMY_LARGE_BODY, 40, 0, 0, 0 },
+    { ENEMY_LARGE_BODY, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormLargeBody2B = { 2, sBtlFormLargeBody2BSteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody1ASteps[] = {
-    { 25, 64, 0, 0, 0 },
+    { ENEMY_LARGE_BODY, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormLargeBody1A = { 1, sBtlFormLargeBody1ASteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody1BSteps[] = {
-    { 25, -64, 0, 0, 0 },
+    { ENEMY_LARGE_BODY, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormLargeBody1B = { 1, sBtlFormLargeBody1BSteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit2ASteps[] = {
-    { 26, 25, -25, 0, 0 },
-    { 26, 55, 25, 0, 1 },
+    { ENEMY_FAT_BANDIT, 25, -25, 0, 0 },
+    { ENEMY_FAT_BANDIT, 55, 25, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormFatBandit2A = { 2, sBtlFormFatBandit2ASteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit2BSteps[] = {
-    { 26, 40, 0, 0, 0 },
-    { 26, -40, 0, 0, 1 },
+    { ENEMY_FAT_BANDIT, 40, 0, 0, 0 },
+    { ENEMY_FAT_BANDIT, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormFatBandit2B = { 2, sBtlFormFatBandit2BSteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit1ASteps[] = {
-    { 26, -64, 0, 0, 0 },
+    { ENEMY_FAT_BANDIT, -64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormFatBandit1A = { 1, sBtlFormFatBandit1ASteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit1BSteps[] = {
-    { 26, 64, 0, 0, 0 },
+    { ENEMY_FAT_BANDIT, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormFatBandit1B = { 1, sBtlFormFatBandit1BSteps, 60 };
 
 static const BtlFormStep sBtlFormAquatank2Steps[] = {
-    { 27, 65, -12, -40, 0 },
-    { 27, 85, 12, -40, 1 },
+    { ENEMY_AQUATANK, 65, -12, -40, 0 },
+    { ENEMY_AQUATANK, 85, 12, -40, 1 },
 };
 
 const BtlFormEntry gBtlFormAquatank2 = { 2, sBtlFormAquatank2Steps, 60 };
 
 static const BtlFormStep sBtlFormAquatank1ASteps[] = {
-    { 27, 64, 0, -50, 0 },
+    { ENEMY_AQUATANK, 64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormAquatank1A = { 1, sBtlFormAquatank1ASteps, 60 };
 
 static const BtlFormStep sBtlFormAquatank1BSteps[] = {
-    { 27, -64, 0, -50, 0 },
+    { ENEMY_AQUATANK, -64, 0, -50, 0 },
 };
 
 static const BtlFormEntry sBtlFormAquatank1B = { 1, sBtlFormAquatank1BSteps, 60 };
 
 static const BtlFormStep sBtlFormDefender2Steps[] = {
-    { 28, 25, -25, 0, 0 },
-    { 28, 55, 25, 0, 1 },
+    { ENEMY_DEFENDER, 25, -25, 0, 0 },
+    { ENEMY_DEFENDER, 55, 25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormDefender2 = { 2, sBtlFormDefender2Steps, 60 };
 
 static const BtlFormStep sBtlFormDefender1Steps[] = {
-    { 28, 64, 0, 0, 0 },
+    { ENEMY_DEFENDER, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormDefender1 = { 1, sBtlFormDefender1Steps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep5ASteps[] = {
-    { 29, 25, -25, 0, 0 },
-    { 29, 40, 0, 0, 1 },
-    { 29, 55, 25, 0, 2 },
-    { 29, 65, -12, 0, 3 },
-    { 29, 85, 12, 0, 4 },
+    { ENEMY_TORNADO_STEP, 25, -25, 0, 0 },
+    { ENEMY_TORNADO_STEP, 40, 0, 0, 1 },
+    { ENEMY_TORNADO_STEP, 55, 25, 0, 2 },
+    { ENEMY_TORNADO_STEP, 65, -12, 0, 3 },
+    { ENEMY_TORNADO_STEP, 85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormTornadoStep5A = { 5, sBtlFormTornadoStep5ASteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep5BSteps[] = {
-    { 29, 25, -25, 0, 0 },
-    { 29, 55, 25, 0, 1 },
-    { 29, 90, 0, 0, 2 },
-    { 29, -65, -12, 0, 3 },
-    { 29, -85, 12, 0, 4 },
+    { ENEMY_TORNADO_STEP, 25, -25, 0, 0 },
+    { ENEMY_TORNADO_STEP, 55, 25, 0, 1 },
+    { ENEMY_TORNADO_STEP, 90, 0, 0, 2 },
+    { ENEMY_TORNADO_STEP, -65, -12, 0, 3 },
+    { ENEMY_TORNADO_STEP, -85, 12, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep5B = { 5, sBtlFormTornadoStep5BSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep4Steps[] = {
-    { 29, 25, -25, 0, 0 },
-    { 29, 55, 25, 0, 1 },
-    { 29, 65, -12, 0, 2 },
-    { 29, 85, 12, 0, 3 },
+    { ENEMY_TORNADO_STEP, 25, -25, 0, 0 },
+    { ENEMY_TORNADO_STEP, 55, 25, 0, 1 },
+    { ENEMY_TORNADO_STEP, 65, -12, 0, 2 },
+    { ENEMY_TORNADO_STEP, 85, 12, 0, 3 },
 };
 
 const BtlFormEntry gBtlFormTornadoStep4 = { 4, sBtlFormTornadoStep4Steps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep3ASteps[] = {
-    { 29, 40, 0, 0, 0 },
-    { 29, 65, -12, 0, 1 },
-    { 29, 85, 12, 0, 2 },
+    { ENEMY_TORNADO_STEP, 40, 0, 0, 0 },
+    { ENEMY_TORNADO_STEP, 65, -12, 0, 1 },
+    { ENEMY_TORNADO_STEP, 85, 12, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep3A = { 3, sBtlFormTornadoStep3ASteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep3BSteps[] = {
-    { 29, 25, -25, 0, 0 },
-    { 29, 64, 0, 0, 1 },
-    { 29, 55, 25, 0, 2 },
+    { ENEMY_TORNADO_STEP, 25, -25, 0, 0 },
+    { ENEMY_TORNADO_STEP, 64, 0, 0, 1 },
+    { ENEMY_TORNADO_STEP, 55, 25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep3B = { 3, sBtlFormTornadoStep3BSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep3CSteps[] = {
-    { 29, -25, 25, 0, 0 },
-    { 29, -64, 0, 0, 1 },
-    { 29, -55, -25, 0, 2 },
+    { ENEMY_TORNADO_STEP, -25, 25, 0, 0 },
+    { ENEMY_TORNADO_STEP, -64, 0, 0, 1 },
+    { ENEMY_TORNADO_STEP, -55, -25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep3C = { 3, sBtlFormTornadoStep3CSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep2ASteps[] = {
-    { 29, 65, -12, 0, 0 },
-    { 29, 85, 12, 0, 1 },
+    { ENEMY_TORNADO_STEP, 65, -12, 0, 0 },
+    { ENEMY_TORNADO_STEP, 85, 12, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormTornadoStep2A = { 2, sBtlFormTornadoStep2ASteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep2BSteps[] = {
-    { 29, 40, 0, 0, 0 },
-    { 29, -40, 0, 0, 1 },
+    { ENEMY_TORNADO_STEP, 40, 0, 0, 0 },
+    { ENEMY_TORNADO_STEP, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep2B = { 2, sBtlFormTornadoStep2BSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep2CSteps[] = {
-    { 29, -65, -12, 0, 0 },
-    { 29, -85, 12, 0, 1 },
+    { ENEMY_TORNADO_STEP, -65, -12, 0, 0 },
+    { ENEMY_TORNADO_STEP, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep2C = { 2, sBtlFormTornadoStep2CSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep2DSteps[] = {
-    { 29, -55, 25, 0, 0 },
-    { 29, -25, -25, 0, 1 },
+    { ENEMY_TORNADO_STEP, -55, 25, 0, 0 },
+    { ENEMY_TORNADO_STEP, -25, -25, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormTornadoStep2D = { 2, sBtlFormTornadoStep2DSteps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep1Steps[] = {
-    { 29, 64, 0, 0, 0 },
+    { ENEMY_TORNADO_STEP, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormTornadoStep1 = { 1, sBtlFormTornadoStep1Steps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo5Steps[] = {
-    { 30, 25, -25, 0, 0 },
-    { 30, 40, 0, 0, 1 },
-    { 30, 55, 25, 0, 2 },
-    { 30, 65, -12, 0, 3 },
-    { 30, 85, 12, 0, 4 },
+    { ENEMY_CRESCENDO, 25, -25, 0, 0 },
+    { ENEMY_CRESCENDO, 40, 0, 0, 1 },
+    { ENEMY_CRESCENDO, 55, 25, 0, 2 },
+    { ENEMY_CRESCENDO, 65, -12, 0, 3 },
+    { ENEMY_CRESCENDO, 85, 12, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo5 = { 5, sBtlFormCrescendo5Steps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo4Steps[] = {
-    { 30, 25, -25, 0, 0 },
-    { 30, 55, 25, 0, 1 },
-    { 30, 65, -12, 0, 2 },
-    { 30, 85, 12, 0, 3 },
+    { ENEMY_CRESCENDO, 25, -25, 0, 0 },
+    { ENEMY_CRESCENDO, 55, 25, 0, 1 },
+    { ENEMY_CRESCENDO, 65, -12, 0, 2 },
+    { ENEMY_CRESCENDO, 85, 12, 0, 3 },
 };
 
 const BtlFormEntry gBtlFormCrescendo4 = { 4, sBtlFormCrescendo4Steps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo3ASteps[] = {
-    { 30, 40, 0, 0, 0 },
-    { 30, 65, -12, 0, 1 },
-    { 30, 85, 12, 0, 2 },
+    { ENEMY_CRESCENDO, 40, 0, 0, 0 },
+    { ENEMY_CRESCENDO, 65, -12, 0, 1 },
+    { ENEMY_CRESCENDO, 85, 12, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormCrescendo3A = { 3, sBtlFormCrescendo3ASteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo3BSteps[] = {
-    { 30, 25, -25, 0, 0 },
-    { 30, 64, 0, 0, 1 },
-    { 30, 55, 25, 0, 2 },
+    { ENEMY_CRESCENDO, 25, -25, 0, 0 },
+    { ENEMY_CRESCENDO, 64, 0, 0, 1 },
+    { ENEMY_CRESCENDO, 55, 25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo3B = { 3, sBtlFormCrescendo3BSteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo3CSteps[] = {
-    { 30, -25, 25, 0, 0 },
-    { 30, -64, 0, 0, 1 },
-    { 30, -55, -25, 0, 2 },
+    { ENEMY_CRESCENDO, -25, 25, 0, 0 },
+    { ENEMY_CRESCENDO, -64, 0, 0, 1 },
+    { ENEMY_CRESCENDO, -55, -25, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo3C = { 3, sBtlFormCrescendo3CSteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo2ASteps[] = {
-    { 30, 65, -12, 0, 0 },
-    { 30, 85, 12, 0, 1 },
+    { ENEMY_CRESCENDO, 65, -12, 0, 0 },
+    { ENEMY_CRESCENDO, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo2A = { 2, sBtlFormCrescendo2ASteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo2BSteps[] = {
-    { 30, -65, -12, 0, 0 },
-    { 30, -85, 12, 0, 1 },
+    { ENEMY_CRESCENDO, -65, -12, 0, 0 },
+    { ENEMY_CRESCENDO, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo2B = { 2, sBtlFormCrescendo2BSteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo2CSteps[] = {
-    { 30, -55, 25, 0, 0 },
-    { 30, -25, -25, 0, 1 },
+    { ENEMY_CRESCENDO, -55, 25, 0, 0 },
+    { ENEMY_CRESCENDO, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo2C = { 2, sBtlFormCrescendo2CSteps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo1Steps[] = {
-    { 30, 64, 0, 0, 0 },
+    { ENEMY_CRESCENDO, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormCrescendo1 = { 1, sBtlFormCrescendo1Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant6Steps[] = {
-    { 31, 25, -25, 0, 0 },
-    { 31, 40, 0, 0, 1 },
-    { 31, 25, 25, 0, 2 },
-    { 31, -25, 25, 0, 3 },
-    { 31, -40, 0, 0, 4 },
-    { 31, -25, -25, 0, 5 },
+    { ENEMY_CREEPER_PLANT, 25, -25, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 40, 0, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 25, 25, 0, 2 },
+    { ENEMY_CREEPER_PLANT, -25, 25, 0, 3 },
+    { ENEMY_CREEPER_PLANT, -40, 0, 0, 4 },
+    { ENEMY_CREEPER_PLANT, -25, -25, 0, 5 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant6 = { 6, sBtlFormCreeperPlant6Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant5ASteps[] = {
-    { 31, 25, -25, 0, 0 },
-    { 31, 40, 0, 0, 1 },
-    { 31, 55, 25, 0, 2 },
-    { 31, 65, -12, 0, 3 },
-    { 31, 85, 12, 0, 4 },
+    { ENEMY_CREEPER_PLANT, 25, -25, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 40, 0, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 55, 25, 0, 2 },
+    { ENEMY_CREEPER_PLANT, 65, -12, 0, 3 },
+    { ENEMY_CREEPER_PLANT, 85, 12, 0, 4 },
 };
 
 const BtlFormEntry gBtlFormCreeperPlant5A = { 5, sBtlFormCreeperPlant5ASteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant5BSteps[] = {
-    { 31, 25, -25, 0, 0 },
-    { 31, 55, 25, 0, 1 },
-    { 31, 90, 0, 0, 2 },
-    { 31, -65, -12, 0, 3 },
-    { 31, -85, 12, 0, 4 },
+    { ENEMY_CREEPER_PLANT, 25, -25, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 55, 25, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 90, 0, 0, 2 },
+    { ENEMY_CREEPER_PLANT, -65, -12, 0, 3 },
+    { ENEMY_CREEPER_PLANT, -85, 12, 0, 4 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant5B = { 5, sBtlFormCreeperPlant5BSteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant4Steps[] = {
-    { 31, 25, -25, 0, 0 },
-    { 31, 55, 25, 0, 1 },
-    { 31, 65, -12, 0, 2 },
-    { 31, 85, 12, 0, 3 },
+    { ENEMY_CREEPER_PLANT, 25, -25, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 55, 25, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 65, -12, 0, 2 },
+    { ENEMY_CREEPER_PLANT, 85, 12, 0, 3 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant4 = { 4, sBtlFormCreeperPlant4Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant3ASteps[] = {
-    { 31, 40, 0, 0, 0 },
-    { 31, 65, -12, 0, 1 },
-    { 31, 85, 12, 0, 2 },
+    { ENEMY_CREEPER_PLANT, 40, 0, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 65, -12, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 85, 12, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormCreeperPlant3A = { 3, sBtlFormCreeperPlant3ASteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant3BSteps[] = {
-    { 31, -65, -12, 0, 0 },
-    { 31, -85, 12, 0, 1 },
-    { 31, 40, 0, 0, 2 },
+    { ENEMY_CREEPER_PLANT, -65, -12, 0, 0 },
+    { ENEMY_CREEPER_PLANT, -85, 12, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant3B = { 3, sBtlFormCreeperPlant3BSteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant2ASteps[] = {
-    { 31, 65, -12, 0, 0 },
-    { 31, 85, 12, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 65, -12, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant2A = { 2, sBtlFormCreeperPlant2ASteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant1Steps[] = {
-    { 31, 64, 0, 0, 0 },
+    { ENEMY_CREEPER_PLANT, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant1 = { 1, sBtlFormCreeperPlant1Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant2BSteps[] = {
-    { 31, 40, 0, 0, 0 },
-    { 31, -40, 0, 0, 1 },
+    { ENEMY_CREEPER_PLANT, 40, 0, 0, 0 },
+    { ENEMY_CREEPER_PLANT, -40, 0, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant2B = { 2, sBtlFormCreeperPlant2BSteps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant2CSteps[] = {
-    { 31, -65, -12, 0, 0 },
-    { 31, -85, 12, 0, 1 },
+    { ENEMY_CREEPER_PLANT, -65, -12, 0, 0 },
+    { ENEMY_CREEPER_PLANT, -85, 12, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCreeperPlant2C = { 2, sBtlFormCreeperPlant2CSteps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierSpade3Steps[] = {
-    { 46, 65, -12, 0, 0 },
-    { 46, 85, 12, 0, 1 },
-    { 46, -40, 0, 0, 2 },
+    { ENEMY_CARD_SOLDIER_SPADE, 65, -12, 0, 0 },
+    { ENEMY_CARD_SOLDIER_SPADE, 85, 12, 0, 1 },
+    { ENEMY_CARD_SOLDIER_SPADE, -40, 0, 0, 2 },
 };
 
 static const BtlFormEntry sBtlFormCardSoldierSpade3 = { 3, sBtlFormCardSoldierSpade3Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierSpade2Steps[] = {
-    { 46, -55, 25, 0, 0 },
-    { 46, -25, -25, 0, 1 },
+    { ENEMY_CARD_SOLDIER_SPADE, -55, 25, 0, 0 },
+    { ENEMY_CARD_SOLDIER_SPADE, -25, -25, 0, 1 },
 };
 
 static const BtlFormEntry sBtlFormCardSoldierSpade2 = { 2, sBtlFormCardSoldierSpade2Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierSpade1Steps[] = {
-    { 46, 64, 0, 0, 0 },
+    { ENEMY_CARD_SOLDIER_SPADE, 64, 0, 0, 0 },
 };
 
 const BtlFormEntry gBtlFormCardSoldierSpade1 = { 1, sBtlFormCardSoldierSpade1Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierHeart3Steps[] = {
-    { 47, 65, -12, 0, 0 },
-    { 47, 85, 12, 0, 1 },
-    { 47, 90, 0, 0, 2 },
+    { ENEMY_CARD_SOLDIER_HEART, 65, -12, 0, 0 },
+    { ENEMY_CARD_SOLDIER_HEART, 85, 12, 0, 1 },
+    { ENEMY_CARD_SOLDIER_HEART, 90, 0, 0, 2 },
 };
 
 const BtlFormEntry gBtlFormCardSoldierHeart3 = { 3, sBtlFormCardSoldierHeart3Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierHeart2Steps[] = {
-    { 47, 25, -25, 0, 0 },
-    { 47, 55, 25, 0, 1 },
+    { ENEMY_CARD_SOLDIER_HEART, 25, -25, 0, 0 },
+    { ENEMY_CARD_SOLDIER_HEART, 55, 25, 0, 1 },
 };
 
 const BtlFormEntry gBtlFormCardSoldierHeart2 = { 2, sBtlFormCardSoldierHeart2Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierHeart1Steps[] = {
-    { 47, 64, 0, 0, 0 },
+    { ENEMY_CARD_SOLDIER_HEART, 64, 0, 0, 0 },
 };
 
 static const BtlFormEntry sBtlFormCardSoldierHeart1 = { 1, sBtlFormCardSoldierHeart1Steps, 60 };

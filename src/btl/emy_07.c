@@ -23,6 +23,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmy07CommonAnimDefs[3] = {
     { gEmy07Fl00Frames, gEmy07Fl00Anims, gEmy07Fl00Tiles, 0 },
@@ -40,7 +41,7 @@ static const AnimDef sEmy07AnimDefs[7] = {
     { gEmy07Fl02Frames, gEmy07Fl02Anims, gEmy07Fl02Tiles, 0 },
 };
 
-static const EmyDef sEmy07Def = { gEmy07Palette, sEmy07CommonAnimDefs, 0, 130, 20, 20, 0, 0, 0, 1, 0, { 6, 40, 32, 12, 16, 100, 0 } };
+static const EmyDef sEmy07Def = { gEmy07Palette, sEmy07CommonAnimDefs, 0, 130, 20, 20, 0, 0, 0, 1, 0, { ENEMY_WHITE_MUSHROOM, 40, 32, 12, 16, 100, 0 } };
 
 TaskDesc gTaskDescEmy07 = {
     "task_emy_07",

@@ -28,6 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumRikuStockMoves[2][3] = {
     { 36, 36, 38 },
@@ -58,7 +59,7 @@ static const AnimDef sHumRikuAnimDefs[21] = {
     { gNiserikuYamiEndFrames, gNiserikuYamiEndAnims, gNiserikuYamiEndTiles, 0 },
 };
 
-static const HumDef sHumRikuDef = { 64, gNiserikuPalette, 0, { 45, 99, 38, 14, 24, 99, 0 } };
+static const HumDef sHumRikuDef = { 64, gNiserikuPalette, 0, { ENEMY_RIKU_REPLICA, 99, 38, 14, 24, 99, 0 } };
 
 static const HumSubDef sHumRikuSubDef = { gNiserikuPalette, 64 };
 

@@ -25,6 +25,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumLaxeneStockMoves[2][3] = {
     { 36, 38, 38 },
@@ -49,7 +50,7 @@ static const AnimDef sHumLaxeneAnimDefs[15] = {
     { gLaxineRenzokFrames, gLaxineRenzokAnims, gLaxineRenzokTiles, 4 },
 };
 
-static const HumDef sHumLaxeneDef = { 128, gLaxinePalette, 0, { 49, 99, 60, 14, 46, 99, 0 } };
+static const HumDef sHumLaxeneDef = { 128, gLaxinePalette, 0, { ENEMY_LARXENE, 99, 60, 14, 46, 99, 0 } };
 
 TaskDesc gTaskDescHumLaxene = {
     "task_hum_laxene",

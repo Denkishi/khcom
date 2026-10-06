@@ -23,6 +23,7 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 #include "sprites_btl.h"
+#include "enemy_ids.h"
 
 static const AnimDef sEmy83CommonAnimDefs[3] = {
     { gEmy8300Frames, gEmy8300Anims, gEmy8300Tiles, 0 },
@@ -37,7 +38,7 @@ static const AnimDef sEmy83AnimDefs[4] = {
     { gEmy8311Frames, gEmy8311Anims, gEmy8311Tiles, 2 },
 };
 
-static const EmyDef sEmy83Def = { gEmy83Palette, sEmy83CommonAnimDefs, 192, 130, 20, 20, 50, 50, 50, 10, 0, { 31, 66, 35, 12, 24, 100, 0 } };
+static const EmyDef sEmy83Def = { gEmy83Palette, sEmy83CommonAnimDefs, 192, 130, 20, 20, 50, 50, 50, 10, 0, { ENEMY_CREEPER_PLANT, 66, 35, 12, 24, 100, 0 } };
 
 TaskDesc gTaskDescEmy83 = {
     "task_emy_83",

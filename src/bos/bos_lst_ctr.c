@@ -20,8 +20,9 @@
 #include <stddef.h>
 #include "taskpool.h"
 #include "types.h"
+#include "enemy_ids.h"
 
-const EmyKind gBosLstCtrEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
+const EmyKind gBosLstCtrEmyKind = { ENEMY_SHADOW, 1, 8, 8, 0, 128, 0 };
 
 static const u32 sBosLstCtrAngles[6][5] = {
     { 0, 0, 0, 0, 0 },

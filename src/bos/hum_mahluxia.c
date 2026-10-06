@@ -28,6 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumMahluxiaStockMovesA[3] = {
     37, 36, 37,
@@ -57,7 +58,7 @@ static const AnimDef sHumMahluxiaEffAnimDef = { gMaruxhaBtEff1Frames, gMaruxhaBt
 
 static const HumSubDef sHumMahluxiaSubDef = { gMaruxhaBtEffPalette, 90 };
 
-static const HumDef sHumMahluxiaDef = { 90, gMaruxhaPalette, 0, { 51, 99, 60, 14, 40, 99, 0 } };
+static const HumDef sHumMahluxiaDef = { 90, gMaruxhaPalette, 0, { ENEMY_MARLUXIA, 99, 60, 14, 40, 99, 0 } };
 
 TaskDesc gTaskDescHumMahluxia = {
     "task_hum_mahluxia",

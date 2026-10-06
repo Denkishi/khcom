@@ -18,10 +18,11 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 BtlObj gBosTmBodyObjCopy EWRAM_COMMON(16);
 
-static const EmyKind sBosTmEmyKind = { 34, 1300, 28, 14, 20, 40, EMY_KIND_FLAG_NO_COLLIDER };
+static const EmyKind sBosTmEmyKind = { ENEMY_TRICKMASTER, 1300, 28, 14, 20, 40, EMY_KIND_FLAG_NO_COLLIDER };
 
 static u8 sBosTmBodyAngles[11] = { 0, 2, 5, 15, 18, 20, 20, 18, 15, 5, 2 };
 

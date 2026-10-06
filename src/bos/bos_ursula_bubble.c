@@ -23,6 +23,7 @@
 #include "types.h"
 #include "bos_ursula.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 #ifdef VERSION_EU
 static UrsulaBubbleWork* sUrsulaBubbleWork;
@@ -37,7 +38,7 @@ TaskDesc gTaskDescBosUrsulaBubble = {
     sizeof(UrsulaBubbleWork),
 };
 
-static const EmyKind sBosUrsulaBubbleSingleEmyKind = { 35, 0, 1, 1, 0, 0, 0 };
+static const EmyKind sBosUrsulaBubbleSingleEmyKind = { ENEMY_URSULA, 0, 1, 1, 0, 0, 0 };
 
 static TaskDesc sTaskDescBosUrsulaBubbleSingle = {
     "task_bos_ursula_bubble_single",

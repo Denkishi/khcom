@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumAnsemStockMovesA[3] = {
     36, 37, 37,
@@ -58,7 +59,7 @@ static const AnimDef sHumAnsemBackAnimDefs[10] = {
 
 static const HumSubDef sHumAnsemSubDef = { gAnsembackPalette, 128 };
 
-static const HumDef sHumAnsemDef = { 80, gAnsemPalette, 0, { 52, 99, 65, 14, 42, 99, 0 } };
+static const HumDef sHumAnsemDef = { 80, gAnsemPalette, 0, { ENEMY_ANSEM, 99, 65, 14, 42, 99, 0 } };
 
 TaskDesc gTaskDescHumAnsem = {
     "task_hum_ansem",

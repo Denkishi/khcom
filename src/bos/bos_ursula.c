@@ -33,8 +33,9 @@
 #include "bos_ursula.h"
 #include "sprite_palettes.h"
 #include "default_bg_map.h"
+#include "enemy_ids.h"
 
-static const EmyKind sBosUrsulaEmyKind = { 35, 0, 32, 24, 0, 0, 0 };
+static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
     gBosUrsulaBgTiles, 0x7000, gBosUrsulaBgPalettes, 0xe0, { gBosUrsulaBgMap0, gBosUrsulaBgMap1, gBosUrsulaBgMap2, gBosUrsulaBgMap3 }
@@ -127,7 +128,7 @@ static TaskDesc sTaskDescBosUrsulaBorder = {
     sizeof(UrsulaBorderWork),
 };
 
-static const EmyKind sBosUrsulaTakoEmyKind = { 35, 0, 48, 16, 24, 0, EMY_KIND_FLAG_NO_COLLIDER };
+static const EmyKind sBosUrsulaTakoEmyKind = { ENEMY_URSULA, 0, 48, 16, 24, 0, EMY_KIND_FLAG_NO_COLLIDER };
 
 static TaskDesc sTaskDescBosUrsulaTako = {
     "task_bos_ursula_tako",
@@ -684,7 +685,7 @@ u8 BosUrsulaObjectsGone() {
     u8 gone = 1;
 
     for (obj = ListPoolFirst(&gBtlWork->pool); obj != NULL; obj = ListPoolNext(&obj->node)) {
-        if (obj->kind == 0x23) {
+        if (obj->kind == ENEMY_URSULA) {
             gone = 0;
             break;
         }

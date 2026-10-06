@@ -31,6 +31,7 @@
 #include <stddef.h>
 #include "bos_pc.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const PcSpriteCmd* sBosPcSpriteCmdLists[96] = {
     gBosPcUnusedSlamFrame0,
@@ -148,7 +149,7 @@ static const PcAnimStep* sBosPcAnims[14] = {
     gBosPcEventAnim,
 };
 
-static const EmyKind sBosPcEmyKind = { 36, 256, 16, 8, 0, 128, 0 };
+static const EmyKind sBosPcEmyKind = { ENEMY_PARASITE_CAGE, 256, 16, 8, 0, 128, 0 };
 
 static const PcBattleBackgroundDef sBosPcBattleBackgroundDef = {
     gBosPcBgTiles, 0x3340, gBosPcBgPalette, 0x100,

@@ -33,6 +33,7 @@
 #include <stddef.h>
 #include "bos_boogie_dice.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 u16 gBosBoogieSakuOpenTime EWRAM_COMMON(4);
 u8 gBosBoogieDiceFace EWRAM_COMMON(4);
@@ -49,7 +50,7 @@ s32 gBosUrsulaBaseZ EWRAM_COMMON(4);
 u8 gMapChkUseParams EWRAM_COMMON(4);
 MapFloorState gMapFloorState EWRAM_COMMON(16);
 
-static const EmyKind sBosBoogieDiceEmyKind = { 39, 0, 16, 16, 0, 0, EMY_KIND_FLAG_NO_COLLIDER };
+static const EmyKind sBosBoogieDiceEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 16, 16, 0, 0, EMY_KIND_FLAG_NO_COLLIDER };
 
 TaskDesc gTaskDescBosBoogieDice = {
     "task_bos_boogie_dice",
@@ -69,7 +70,7 @@ static void* const sBoogieDiceFaces[6][3] = {
     { gBosBoogieDiceFace5Anims, gBosBoogieDiceFace5Frames, gBosBoogieDiceFace5Tiles },
 };
 
-static const EmyKind sBosBoogieExplosiondiceEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieExplosiondiceEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 16, 16, 0, 0, 0 };
 
 static TaskDesc sTaskDescBosBoogieExplosiondice = {
     "task_bos_boogie_explosiondice",
@@ -115,7 +116,7 @@ TaskDesc gTaskDescBosBoogieMapanime = {
     sizeof(BoogieMapanimeWork),
 };
 
-static const EmyKind sBosBoogieDiskEmyKind = { 39, 0, 16, 16, 0, 0, EMY_KIND_FLAG_LARGE_BODY };
+static const EmyKind sBosBoogieDiskEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 16, 16, 0, 0, EMY_KIND_FLAG_LARGE_BODY };
 
 TaskDesc gTaskDescBosBoogieDisk = {
     "task_bos_boogie_disk",
@@ -126,7 +127,7 @@ TaskDesc gTaskDescBosBoogieDisk = {
     sizeof(BoogieDiskWork),
 };
 
-static const EmyKind sBosBoogieKnifeEmyKind = { 39, 0, 192, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieKnifeEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 192, 16, 0, 0, 0 };
 
 static TaskDesc sTaskDescBosBoogieKnife = {
     "task_bos_boogie_knife",
@@ -137,7 +138,7 @@ static TaskDesc sTaskDescBosBoogieKnife = {
     sizeof(BoogieKnifeWork),
 };
 
-static const EmyKind sBosBoogieKnifereaderEmyKind = { 39, 0, 0, 0, 0, 0, 0 };
+static const EmyKind sBosBoogieKnifereaderEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 0, 0, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKnifereader = {
     "task_bos_boogie_knifereader",
@@ -148,7 +149,7 @@ TaskDesc gTaskDescBosBoogieKnifereader = {
     sizeof(BoogieKnifereaderWork),
 };
 
-static const EmyKind sBosBoogieKaihukuEmyKind = { 39, 0, 16, 16, 0, 0, 0 };
+static const EmyKind sBosBoogieKaihukuEmyKind = { ENEMY_OOGIE_BOOGIE, 0, 16, 16, 0, 0, 0 };
 
 TaskDesc gTaskDescBosBoogieKaihuku = {
     "task_bos_boogie_kaihuku",

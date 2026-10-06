@@ -45,6 +45,7 @@
 #include <stddef.h>
 #include "hum_common.h"
 #include "card_deckmenu2.h"
+#include "enemy_ids.h"
 #include "event_ids.h"
 
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
@@ -1379,97 +1380,97 @@ void EndBossDefeat() {
 
 void SetEnemyKindFlags(BtlObj* obj) {
     switch (obj->kind) {
-    case 1:
+    case ENEMY_RED_NOCTURNE:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
-    case 2:
+    case ENEMY_BLUE_RHAPSODY:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
-    case 3:
+    case ENEMY_YELLOW_OPERA:
         obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
-    case 4:
+    case ENEMY_GREEN_REQUIEM:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER);
         break;
-    case 5:
+    case ENEMY_SEA_NEON:
         obj->flags |= BTLOBJ_FLAG_WEAK_THUNDER;
         break;
-    case 7:
+    case ENEMY_BLACK_FUNGUS:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
         break;
-    case 16:
+    case ENEMY_SCREWDIVER:
         obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
-    case 23:
+    case ENEMY_WIZARD:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY);
         break;
-    case 27:
+    case ENEMY_AQUATANK:
         obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
-    case 32:
+    case ENEMY_GUARD_ARMOR:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 33:
+    case ENEMY_JAFAR:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 34:
+    case ENEMY_TRICKMASTER:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 35:
+    case ENEMY_URSULA:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 36:
+    case ENEMY_PARASITE_CAGE:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 37:
+    case ENEMY_DRAGON_MALEFICENT:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 38:
+    case ENEMY_DARKSIDE:
         obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 39:
+    case ENEMY_OOGIE_BOOGIE:
         obj->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 40:
+    case ENEMY_MARLUXIA_2:
         obj->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 42:
+    case ENEMY_HOOK:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 43:
+    case ENEMY_CLOUD:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 44:
+    case ENEMY_HADES:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 45:
+    case ENEMY_RIKU_REPLICA:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
-    case 46:
+    case ENEMY_CARD_SOLDIER_SPADE:
         obj->flags |= BTLOBJ_FLAG_WEAK_FIRE;
         break;
-    case 47:
+    case ENEMY_CARD_SOLDIER_HEART:
         obj->flags |= BTLOBJ_FLAG_WEAK_FIRE;
         break;
-    case 48:
+    case ENEMY_AXEL:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 49:
+    case ENEMY_LARXENE:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD);
         break;
-    case 50:
+    case ENEMY_VEXEN:
         obj->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 51:
+    case ENEMY_MARLUXIA:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 52:
+    case ENEMY_ANSEM:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
-    case 53:
+    case ENEMY_LEXAEUS:
         obj->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
         break;
-    case 0:
+    case ENEMY_SHADOW:
     default:
         break;
     }
@@ -1792,41 +1793,41 @@ void DropEnemyPrizes(BtlObj* obj) {
             enemyCard = 0;
         } else {
             switch (obj->kind) {
-            case 10:
-            case 15:
-            case 25:
-            case 26:
-            case 27:
-            case 31:
+            case ENEMY_POWERWILD:
+            case ENEMY_SEARCH_GHOST:
+            case ENEMY_LARGE_BODY:
+            case ENEMY_FAT_BANDIT:
+            case ENEMY_AQUATANK:
+            case ENEMY_CREEPER_PLANT:
                 chance = 2;
                 break;
-            case 0:
-            case 5:
-            case 6:
-            case 9:
-            case 11:
-            case 14:
-            case 16:
-            case 18:
-            case 20:
-            case 21:
-            case 22:
-            case 28:
-            case 29:
+            case ENEMY_SHADOW:
+            case ENEMY_SEA_NEON:
+            case ENEMY_WHITE_MUSHROOM:
+            case ENEMY_SOLDIER:
+            case ENEMY_BOUNCYWILD:
+            case ENEMY_BARREL_SPIDER:
+            case ENEMY_SCREWDIVER:
+            case ENEMY_GARGOYLE:
+            case ENEMY_AIR_PIRATE:
+            case ENEMY_DARKBALL:
+            case ENEMY_WYVERN:
+            case ENEMY_DEFENDER:
+            case ENEMY_TORNADO_STEP:
                 chance = 4;
                 break;
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 7:
-            case 12:
-            case 13:
-            case 17:
-            case 19:
-            case 23:
-            case 24:
-            case 30:
+            case ENEMY_RED_NOCTURNE:
+            case ENEMY_BLUE_RHAPSODY:
+            case ENEMY_YELLOW_OPERA:
+            case ENEMY_GREEN_REQUIEM:
+            case ENEMY_BLACK_FUNGUS:
+            case ENEMY_AIR_SOLDIER:
+            case ENEMY_BANDIT:
+            case ENEMY_WIGHT_KNIGHT:
+            case ENEMY_PIRATE:
+            case ENEMY_WIZARD:
+            case ENEMY_NEOSHADOW:
+            case ENEMY_CRESCENDO:
                 chance = 3;
                 break;
             default:
@@ -2023,115 +2024,115 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
     request.flags = 0;
 
     switch (id) {
-    case 0:
+    case ENEMY_SHADOW:
         request.desc = &gTaskDescEmy00;
         born = 0;
         break;
-    case 1:
+    case ENEMY_RED_NOCTURNE:
         request.desc = &gTaskDescEmy01;
         break;
-    case 2:
+    case ENEMY_BLUE_RHAPSODY:
         request.desc = &gTaskDescEmy02;
         break;
-    case 3:
+    case ENEMY_YELLOW_OPERA:
         request.desc = &gTaskDescEmy03;
         break;
-    case 4:
+    case ENEMY_GREEN_REQUIEM:
         request.desc = &gTaskDescEmy04;
         break;
-    case 5:
+    case ENEMY_SEA_NEON:
         request.desc = &gTaskDescEmy06;
         break;
-    case 6:
+    case ENEMY_WHITE_MUSHROOM:
         request.desc = &gTaskDescEmy07;
         break;
-    case 7:
+    case ENEMY_BLACK_FUNGUS:
         request.desc = &gTaskDescEmy08;
         break;
-    case 9:
+    case ENEMY_SOLDIER:
         request.desc = &gTaskDescEmy14;
         break;
-    case 10:
+    case ENEMY_POWERWILD:
         request.desc = &gTaskDescEmy15;
         break;
-    case 11:
+    case ENEMY_BOUNCYWILD:
         request.desc = &gTaskDescEmy16;
         break;
-    case 12:
+    case ENEMY_AIR_SOLDIER:
         request.desc = &gTaskDescEmy18;
         break;
-    case 13:
+    case ENEMY_BANDIT:
         request.desc = &gTaskDescEmy19;
         break;
-    case 14:
+    case ENEMY_BARREL_SPIDER:
         request.desc = &gTaskDescEmy21;
         break;
-    case 15:
+    case ENEMY_SEARCH_GHOST:
         request.desc = &gTaskDescEmy22;
         break;
-    case 16:
+    case ENEMY_SCREWDIVER:
         request.desc = &gTaskDescEmy23;
         break;
-    case 17:
+    case ENEMY_WIGHT_KNIGHT:
         request.desc = &gTaskDescEmy25;
         break;
-    case 18:
+    case ENEMY_GARGOYLE:
         request.desc = &gTaskDescEmy26;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 19:
+    case ENEMY_PIRATE:
         request.desc = &gTaskDescEmy27;
         break;
-    case 20:
+    case ENEMY_AIR_PIRATE:
         request.desc = &gTaskDescEmy28;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 21:
+    case ENEMY_DARKBALL:
         request.desc = &gTaskDescEmy29;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 22:
+    case ENEMY_WYVERN:
         request.desc = &gTaskDescEmy30;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 23:
+    case ENEMY_WIZARD:
         request.desc = &gTaskDescEmy31;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 24:
+    case ENEMY_NEOSHADOW:
         request.desc = &gTaskDescEmy37;
         born = 0;
         break;
-    case 25:
+    case ENEMY_LARGE_BODY:
         request.desc = &gTaskDescEmy38;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 26:
+    case ENEMY_FAT_BANDIT:
         request.desc = &gTaskDescEmy39;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 27:
+    case ENEMY_AQUATANK:
         request.desc = &gTaskDescEmy41;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 28:
+    case ENEMY_DEFENDER:
         request.desc = &gTaskDescEmy44;
         request.flags |= SPAWN_FLAG_LARGE_EFFECT;
         break;
-    case 29:
+    case ENEMY_TORNADO_STEP:
         request.desc = &gTaskDescEmy81;
         break;
-    case 30:
+    case ENEMY_CRESCENDO:
         request.desc = &gTaskDescEmy82;
         break;
-    case 31:
+    case ENEMY_CREEPER_PLANT:
         request.desc = &gTaskDescEmy83;
         break;
-    case 47:
+    case ENEMY_CARD_SOLDIER_HEART:
         request.desc = &gTaskDescEmyTrumpH;
         born = 0;
         break;
-    case 46:
+    case ENEMY_CARD_SOLDIER_SPADE:
         request.desc = &gTaskDescEmyTrumpS;
         born = 0;
         break;
@@ -2502,109 +2503,109 @@ void SetEnemyHpFromStats(BtlObj* obj, s32 id, s32 hpScale) {
 
 void SetEnemyJiminyFlag(BtlObj* obj) {
     switch (obj->kind) {
-    case 0:
+    case ENEMY_SHADOW:
         SetJiminyFlag(84);
         break;
-    case 1:
+    case ENEMY_RED_NOCTURNE:
         SetJiminyFlag(87);
         break;
-    case 2:
+    case ENEMY_BLUE_RHAPSODY:
         SetJiminyFlag(88);
         break;
-    case 3:
+    case ENEMY_YELLOW_OPERA:
         SetJiminyFlag(89);
         break;
-    case 4:
+    case ENEMY_GREEN_REQUIEM:
         SetJiminyFlag(90);
         break;
-    case 5:
+    case ENEMY_SEA_NEON:
         SetJiminyFlag(98);
         break;
-    case 6:
+    case ENEMY_WHITE_MUSHROOM:
         SetJiminyFlag(110);
         break;
-    case 7:
+    case ENEMY_BLACK_FUNGUS:
         SetJiminyFlag(111);
         break;
-    case 9:
+    case ENEMY_SOLDIER:
         SetJiminyFlag(85);
         break;
-    case 10:
+    case ENEMY_POWERWILD:
         SetJiminyFlag(91);
         break;
-    case 11:
+    case ENEMY_BOUNCYWILD:
         SetJiminyFlag(92);
         break;
-    case 12:
+    case ENEMY_AIR_SOLDIER:
         SetJiminyFlag(93);
         break;
-    case 13:
+    case ENEMY_BANDIT:
         SetJiminyFlag(94);
         break;
-    case 14:
+    case ENEMY_BARREL_SPIDER:
         SetJiminyFlag(96);
         break;
-    case 15:
+    case ENEMY_SEARCH_GHOST:
         SetJiminyFlag(97);
         break;
-    case 16:
+    case ENEMY_SCREWDIVER:
         SetJiminyFlag(99);
         break;
-    case 17:
+    case ENEMY_WIGHT_KNIGHT:
         SetJiminyFlag(101);
         break;
-    case 18:
+    case ENEMY_GARGOYLE:
         SetJiminyFlag(102);
         break;
-    case 19:
+    case ENEMY_PIRATE:
         SetJiminyFlag(103);
         break;
-    case 20:
+    case ENEMY_AIR_PIRATE:
         SetJiminyFlag(104);
         break;
-    case 21:
+    case ENEMY_DARKBALL:
         SetJiminyFlag(105);
         break;
-    case 22:
+    case ENEMY_WYVERN:
         SetJiminyFlag(107);
         break;
-    case 23:
+    case ENEMY_WIZARD:
         SetJiminyFlag(108);
         break;
-    case 24:
+    case ENEMY_NEOSHADOW:
         SetJiminyFlag(109);
         break;
-    case 25:
+    case ENEMY_LARGE_BODY:
         SetJiminyFlag(86);
         break;
-    case 26:
+    case ENEMY_FAT_BANDIT:
         SetJiminyFlag(95);
         break;
-    case 27:
+    case ENEMY_AQUATANK:
         SetJiminyFlag(100);
         break;
-    case 28:
+    case ENEMY_DEFENDER:
         SetJiminyFlag(106);
         break;
-    case 29:
+    case ENEMY_TORNADO_STEP:
         SetJiminyFlag(113);
         break;
-    case 30:
+    case ENEMY_CRESCENDO:
         SetJiminyFlag(114);
         break;
-    case 31:
+    case ENEMY_CREEPER_PLANT:
         SetJiminyFlag(112);
         break;
-    case 32:
+    case ENEMY_GUARD_ARMOR:
         SetJiminyFlag(115);
         break;
-    case 34:
+    case ENEMY_TRICKMASTER:
         SetJiminyFlag(117);
         break;
-    case 36:
+    case ENEMY_PARASITE_CAGE:
         SetJiminyFlag(116);
         break;
-    case 38:
+    case ENEMY_DARKSIDE:
         SetJiminyFlag(118);
         break;
     }

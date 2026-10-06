@@ -28,6 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumVixenStockMovesA[3] = {
     36, 37, 36,
@@ -63,7 +64,7 @@ static const AnimDef sHumVixenAnimDefs[15] = {
     { gHumVixenCastFrames, gHumVixenCastAnims, gHumVixenCastTiles, 2 },
 };
 
-static const HumDef sHumVixenDef = { 83, gVixenPalette, 0, { 50, 99, 80, 14, 48, 99, 0 } };
+static const HumDef sHumVixenDef = { 83, gVixenPalette, 0, { ENEMY_VEXEN, 99, 80, 14, 48, 99, 0 } };
 
 TaskDesc gTaskDescHumVixen = {
     "task_hum_vixen",

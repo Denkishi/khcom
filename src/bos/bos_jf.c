@@ -30,6 +30,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 s16 gBosJfActorX EWRAM_COMMON(8);
 JfMapArg gJfMapArg EWRAM_COMMON(16);
@@ -1017,7 +1018,7 @@ s32 BosJfLampChooseTargetX(JfLampWork* work) {
     return targetX;
 }
 
-const EmyKind gBosJfEmyKind = { 33, 1000, 16, 16, 24, 60, 0 };
+const EmyKind gBosJfEmyKind = { ENEMY_JAFAR, 1000, 16, 16, 24, 60, 0 };
 
 TaskDesc gTaskDescBosJf = {
     "task_bos_jf",

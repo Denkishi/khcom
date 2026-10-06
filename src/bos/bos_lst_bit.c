@@ -23,8 +23,9 @@
 #include "taskpool.h"
 #include "types.h"
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
-static const EmyKind sBosLstBitEmyKind = { 0, 1, 8, 8, 0, 128, 0 };
+static const EmyKind sBosLstBitEmyKind = { ENEMY_SHADOW, 1, 8, 8, 0, 128, 0 };
 
 static const s32 sBosLstBitTanTable[32] = {
     6, 12, 18, 25, 31, 37, 44, 50, 57, 64, 70, 77, 84, 91, 98, 106,

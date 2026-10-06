@@ -26,6 +26,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumLexceusStockMoves[3] = {
     36, 37, 36,
@@ -44,7 +45,7 @@ static const AnimDef sHumLexceusAnimDefs[10] = {
     { gRexeusImpFrames, gRexeusImpAnims, gRexeusImpTiles, 0 },
 };
 
-static const HumDef sHumLexceusDef = { 128, gRexeusPalette, 0, { 53, 99, 70, 24, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
+static const HumDef sHumLexceusDef = { 128, gRexeusPalette, 0, { ENEMY_LEXAEUS, 99, 70, 24, 52, 99, EMY_KIND_FLAG_LARGE_BODY } };
 
 TaskDesc gTaskDescHumLexceus = {
     "task_hum_lexceus",

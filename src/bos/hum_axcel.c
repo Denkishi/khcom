@@ -29,6 +29,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const u32 sHumAxcelStockMoves[2][3] = {
     { 36, 36, 36 },
@@ -73,7 +74,7 @@ static const HumDef sHumAxcelDef = {
 #else
         128
 #endif
-    , gAccelePalette, 0, { 48, 99, 60, 14, 32, 99, 0 } };
+    , gAccelePalette, 0, { ENEMY_AXEL, 99, 60, 14, 32, 99, 0 } };
 
 TaskDesc gTaskDescHumAxcel = {
     "task_hum_axcel",

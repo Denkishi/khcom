@@ -30,9 +30,10 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "enemy_ids.h"
 
 static const EmyKind sBosGaEmyKind =
-{32, 100, 16, 16, 0, 100, EMY_KIND_FLAG_NO_COLLIDER}
+{ENEMY_GUARD_ARMOR, 100, 16, 16, 0, 100, EMY_KIND_FLAG_NO_COLLIDER}
 ;
 
 static const GaEntryDef sGaEntryDefs[6] = {

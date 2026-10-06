@@ -7023,7 +7023,7 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     gEventState->msgWaitActive = TRUE;
     gEventState->askedYesNo = TRUE;
     gEventState->answerYes = FALSE;
-    work->choiceShown = 0;
+    work->choiceShown = FALSE;
 }
 
 u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* task) {
@@ -7087,7 +7087,7 @@ u8 msgwait_yesno_1(MsgWaitWork* work, void* task) {
 
     if (GetKeysPressed() & A_BUTTON) {
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
-        work->choiceShown = 1;
+        work->choiceShown = TRUE;
         m4aSongNumStart(SONG_SYS_CANSEL);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateMsgwaitYesnoChoice);
     }
@@ -7097,7 +7097,7 @@ u8 msgwait_yesno_1(MsgWaitWork* work, void* task) {
 
 void msgwait_yesno_2(MsgWaitWork* work) {
     switch (work->choiceShown) {
-    case 0:
+    case FALSE:
         if (gEventState->msgWinCentered) {
             DrawSprite(120, gMsgwaitIconPos[gEventState->msgWinPosition][1] >> 8, work->gfx, work->tiles, work->palette, NULL, 0, 0);
         } else {
@@ -7105,7 +7105,7 @@ void msgwait_yesno_2(MsgWaitWork* work) {
         }
 
         break;
-    case 1:
+    case TRUE:
         DrawSprite(120, 80, gMsgBoxFrames[1], work->tiles3, work->palette3, NULL, 0, 10);
         DrawSprite(work->x >> 8, work->y >> 8, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_FLAG_HFLIP, 9);
         DrawTextSlots((DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) >> 1, 67, work->textSlots, work->palette4, 0, work->textSlotCount);

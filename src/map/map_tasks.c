@@ -744,10 +744,10 @@ void MapEnm01UpdateHover(MapEnmWork* work, u8 moving) {
     s32 hoverZ;
 
     switch (moving) {
-    case 1:
+    case TRUE:
         hoverZ = work->targetZ + SIN(gFrameCounter) * 10;
         break;
-    case 0:
+    case FALSE:
     default:
         hoverZ = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
@@ -806,7 +806,7 @@ void MapEnm01Idle(MapEnmWork* work) {
     MapEnmSetAnim(work, 0, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm01UpdateHover(work, 0);
+    MapEnm01UpdateHover(work, FALSE);
 
     if (GetRandom() % 20 == 0) {
         obj->angle = GetAngle(work->obj.fieldPosition.x, obj->fieldPosition.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
@@ -849,7 +849,7 @@ void MapEnm01Fly(MapEnmWork* work) {
     MapEnmSetAnim(work, 1, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm01UpdateHover(work, 1);
+    MapEnm01UpdateHover(work, TRUE);
     prevPos = work->obj.fieldPosition;
 
     if (GetRandom() % 20 != 0) {
@@ -1055,10 +1055,10 @@ void MapEnm03UpdateHover(MapEnmWork* work, u8 moving) {
     s32 hoverZ;
 
     switch (moving) {
-    case 1:
+    case TRUE:
         hoverZ = work->targetZ + SIN(gFrameCounter) * 10;
         break;
-    case 0:
+    case FALSE:
     default:
         hoverZ = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
@@ -1146,7 +1146,7 @@ void MapEnm03Guard(MapEnmWork* work) {
     MapEnmSetAnim(work, 0, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm03UpdateHover(work, 0);
+    MapEnm03UpdateHover(work, FALSE);
 
     if (GetRandom() % 20 == 0) {
         obj->angle = GetAngle(work->obj.fieldPosition.x, obj->fieldPosition.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
@@ -1173,7 +1173,7 @@ void MapEnm03Charge(MapEnmWork* work) {
     MapEnmSetAnim(work, 1, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm03UpdateHover(work, 1);
+    MapEnm03UpdateHover(work, TRUE);
     prevPos = obj->fieldPosition;
 
     if (GetRandom() % 20 != 0) {
@@ -1217,7 +1217,7 @@ void MapEnm03Return(MapEnmWork* work) {
     MapEnmSetAnim(work, 1, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm03UpdateHover(work, 1);
+    MapEnm03UpdateHover(work, TRUE);
     save = obj->fieldPosition;
 
     if (GetRandom() % 20 != 0) {
@@ -1300,10 +1300,10 @@ void MapEnm04UpdateHover(MapEnmWork* work, u8 moving) {
     s32 hoverZ;
 
     switch (moving) {
-    case 1:
+    case TRUE:
         hoverZ = work->targetZ + SIN(gFrameCounter) * 10;
         break;
-    case 0:
+    case FALSE:
     default:
         hoverZ = work->targetZ + SIN(gFrameCounter * 2) * 12;
         break;
@@ -1364,7 +1364,7 @@ void MapEnm04Idle(MapEnmWork* work) {
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
     prevPos = work->obj.fieldPosition;
-    MapEnm04UpdateHover(work, 0);
+    MapEnm04UpdateHover(work, FALSE);
 
     if (GetRandom() % 20 == 0) {
         obj->angle = GetAngle(work->obj.fieldPosition.x, obj->fieldPosition.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
@@ -1407,7 +1407,7 @@ void MapEnm04Fly(MapEnmWork* work) {
     MapEnmSetAnim(work, 1, 3);
     MapEnmUpdateAnim(work);
     TaskPoolUpdate(&work->tasks);
-    MapEnm04UpdateHover(work, 1);
+    MapEnm04UpdateHover(work, TRUE);
     prevPos = work->obj.fieldPosition;
 
     if (GetRandom() % 20 != 0) {

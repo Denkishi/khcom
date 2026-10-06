@@ -392,7 +392,7 @@ void WorldInspectHandleInput() {
             EnableBg(2);
             EnableBg(3);
             m4aSongNumStart(SONG_SYS_KETTEI);
-            sWorldInspectDetailOpen = 1;
+            sWorldInspectDetailOpen = TRUE;
         }
     } else if (keys & B_BUTTON) {
         m4aSongNumStart(SONG_SYS_CLOSE);
@@ -503,7 +503,7 @@ void WorldInspectHandleDetailInput() {
         DisableBg(2);
         DisableBg(3);
         sWorldInspectReturnToMenu = TRUE;
-        sWorldInspectDetailOpen = 0;
+        sWorldInspectDetailOpen = FALSE;
 
 #ifdef VERSION_EU
         sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, sizeof(gWorldInspectBarPalette));
@@ -597,7 +597,7 @@ void WorldInspectDraw() {
 
     prio = SPRITE_PRIORITY(1);
 
-    if (sWorldInspectDetailOpen == 1) {
+    if (sWorldInspectDetailOpen == TRUE) {
         prio |= SPRITE_FLAG_BLEND;
     }
 
@@ -642,7 +642,7 @@ void WorldInspectDraw() {
                       28, sWorldInspectNameText, sWorldInspectCursorPalette, 1, sWorldInspectNameTextCount);
     }
 
-    if (sWorldInspectDetailOpen == 1) {
+    if (sWorldInspectDetailOpen == TRUE) {
         if (sWorldInspectDescTextCount != 0) {
             DrawTextSlots(97, 56, sWorldInspectDescText, sWorldInspectHighlightPalette, 0, sWorldInspectDescTextCount);
         }
@@ -699,7 +699,7 @@ void mode_worldinspect_0() {
         }
     }
 
-    sWorldInspectDetailOpen = 0;
+    sWorldInspectDetailOpen = FALSE;
     sWorldInspectBobPhase = 0;
     sWorldInspectCursorX = (sWorldinspectNavs[sWorldInspectCursor].x << 11) + 0x2000;
     sWorldInspectCursorY = (sWorldinspectNavs[sWorldInspectCursor].y << 11) - 0x600;
@@ -880,10 +880,10 @@ void mode_worldinspect_1() {
         break;
     case WORLD_INSPECT_STATE_SELECT:
         switch (sWorldInspectDetailOpen) {
-        case 0:
+        case FALSE:
             WorldInspectHandleInput();
             break;
-        case 1:
+        case TRUE:
             WorldInspectHandleDetailInput();
             break;
         }

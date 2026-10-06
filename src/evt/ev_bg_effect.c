@@ -136,7 +136,7 @@ void LoadEventBgEffect(EventBgEffectWork* work) {
     SetBgScroll(0, (u16)((gEventState->x >> 8) - (entry->x >> 8)), (u16)((gEventState->y >> 8) - (entry->y >> 8)));
 
     if (def->frames != NULL) {
-        work->animating = 1;
+        work->animating = TRUE;
     }
 
     SetBgBlend(0, 16, 16);
@@ -224,7 +224,7 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task) {
         if (entry->flags & EVENT_BG_EFFECT_FLAG_LOAD) {
             LoadEventBgEffect(work);
 
-            if (work->animating != 0) {
+            if (work->animating) {
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventBgEffectAnim);
             }
         }
@@ -277,7 +277,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
     const EventBgEffectDef* def;
     const EventBgEffectFrame* frames;
 
-    if (work->animating == 0) {
+    if (!work->animating) {
         return FALSE;
     }
 
@@ -294,7 +294,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
             RequestDma3Copy(def->tiles + frames[work->frame].tilesOffset, GetBgCharBase(0), def->tilesSize);
         } else {
             if (def->loopFrame == EVENT_BG_EFFECT_LOOP_NONE) {
-                work->animating = 0;
+                work->animating = FALSE;
                 return FALSE;
             }
 

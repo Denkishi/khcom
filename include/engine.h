@@ -114,9 +114,9 @@ typedef struct Spline2D {
 typedef char Spline2D_size[(sizeof(Spline2D) == 0x20) ? 1 : -1];
 
 void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* values, s32* coefficients);
-s32 SplineEvaluateAxis(s16* count, s32 t, s32* knots, s32* values, s32* coefficients);
-void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 count);
-void SplineEvaluate2D(Spline2D* spline, s32 t, s32* x, s32* y);
+s32 SplineEvaluateAxis(s16* pointCount, s32 position, s32* knots, s32* values, s32* coefficients);
+void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 pointCount);
+void SplineEvaluate2D(Spline2D* spline, s32 position, s32* outX, s32* outY);
 void SplineFreeBuffers(Spline2D* spline);
 
 u8 DrawSpriteAllocatedTiles(s16 x, s16 y, void* sprite, void* obj, void* palette, ObjAffine* affine, u16 flags, u16 priority);
@@ -132,11 +132,11 @@ void SetBgMosaic(s32 bg, u8 on);
 void FadeFree();
 u8 GetBgScrollX(u32 bg);
 u8 GetBgScrollY(u32 bg);
-void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src);
+void InitDynamicObjTilesAtSlot(ObjTiles* tiles, u16 slot, u16 size, void* src);
 void* GetBgMapBlock(BgEntry* entry, u16 x, u16 y);
 void SetSpriteOamUpdatesPaused(u8 paused);
 void SetBgMosaicSize(u8 x, u8 y);
-s32 Lerp8(s32 from, s32 to, s32 t);
+s32 Lerp8(s32 from, s32 to, s32 weight);
 
 void VTransInit();
 void BgInit();

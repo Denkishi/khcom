@@ -29,7 +29,7 @@ void SetBgAffine(s32 bg, u8 rot, s32 sx, s32 sy, s32 dx, s32 dy);
 void SetBgMapBlocks(s32 bg, const void* src, u8 w, u8 h);
 void RedrawBgMapAt(s32 bg, u16 x, u16 y);
 void ScrollBgMapTo(s32 bg, u16 x, u16 y);
-void SetBgColorMode(s32 bg, u16 mode);
+void SetBgColorMode(s32 bg, u16 colorMode);
 void SetBgOverflow(s32 bg, u8 on);
 void SetObjMosaicSize(u8 x, u8 y);
 

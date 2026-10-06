@@ -278,12 +278,12 @@ void func_08000A80() {
     func_08000A60(&sIwramHeap);
 }
 
-void SetEwramHeapAllocFlag(u8 v) {
-    sEwramHeap.allocFlag = v;
+void SetEwramHeapAllocFlag(u8 flag) {
+    sEwramHeap.allocFlag = flag;
 }
 
-void SetIwramHeapAllocFlag(u8 v) {
-    sIwramHeap.allocFlag = v;
+void SetIwramHeapAllocFlag(u8 flag) {
+    sIwramHeap.allocFlag = flag;
 }
 
 void func_08000AA8(Heap* heap) {

@@ -12,14 +12,14 @@ typedef struct KeyState {
     u8 off[10];
 } KeyState;
 
-u16 KeyGetHeld(KeyState* k);
-u16 KeyGetPressed(KeyState* k);
-u16 KeyGetRepeat(KeyState* k);
-void KeyStateClear(KeyState* k);
-u8 KeyGetHoldFrames(KeyState* k, u16 key);
-u8 KeyGetOffFrames(KeyState* k, u16 key);
-u16 KeyReadChord(KeyState* k, u16 key1, u16 key2);
-void KeyStateUpdate(KeyState* k, u16 keys);
+u16 KeyGetHeld(KeyState* state);
+u16 KeyGetPressed(KeyState* state);
+u16 KeyGetRepeat(KeyState* state);
+void KeyStateClear(KeyState* state);
+u8 KeyGetHoldFrames(KeyState* state, u16 key);
+u8 KeyGetOffFrames(KeyState* state, u16 key);
+u16 KeyReadChord(KeyState* state, u16 key1, u16 key2);
+void KeyStateUpdate(KeyState* state, u16 keys);
 void SioKeyInit();
 void SioKeyFree();
 u16 SioKeyGetHeldA();

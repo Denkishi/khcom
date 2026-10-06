@@ -1096,39 +1096,39 @@ u8 IsSpriteOutsideScreen(u16* oam, s16 x, s16 y) {
     return 1;
 }
 
-void InitObjTilesAtSlot(ObjTiles* t, u16 slot, void* src, u16 size) {
+void InitObjTilesAtSlot(ObjTiles* tiles, u16 slot, void* src, u16 size) {
     if (slot + (size >> 5) <= 0x400) {
-        t->type = OBJ_TILES_TYPE_SHARED;
-        t->count = size >> 5;
-        t->src = src;
-        t->refCount = 0;
-        t->sprite = NULL;
-        t->allocated = 0;
-        t->index = slot;
-        RequestDma3Copy(src, (void*)(OBJ_VRAM0 + t->index * TILE_SIZE_4BPP), size);
+        tiles->type = OBJ_TILES_TYPE_SHARED;
+        tiles->count = size >> 5;
+        tiles->src = src;
+        tiles->refCount = 0;
+        tiles->sprite = NULL;
+        tiles->allocated = 0;
+        tiles->index = slot;
+        RequestDma3Copy(src, (void*)(OBJ_VRAM0 + tiles->index * TILE_SIZE_4BPP), size);
     }
 }
 
-void InitDynamicObjTilesAtSlot(ObjTiles* t, u16 slot, u16 size, void* src) {
+void InitDynamicObjTilesAtSlot(ObjTiles* tiles, u16 slot, u16 size, void* src) {
     if (slot + (size >> 5) <= 0x400) {
-        t->type = OBJ_TILES_TYPE_ALLOCATED;
-        t->count = size >> 5;
-        t->src = src;
-        t->refCount = 0;
-        t->sprite = NULL;
-        t->allocated = 1;
-        t->index = slot;
+        tiles->type = OBJ_TILES_TYPE_ALLOCATED;
+        tiles->count = size >> 5;
+        tiles->src = src;
+        tiles->refCount = 0;
+        tiles->sprite = NULL;
+        tiles->allocated = 1;
+        tiles->index = slot;
     }
 }
 
-void InitObjPaletteAtSlot(ObjPalette* t, u16 slot, void* src, u16 size) {
+void InitObjPaletteAtSlot(ObjPalette* palette, u16 slot, void* src, u16 size) {
     if (slot + (size >> 5) <= 0x10) {
-        t->type = OBJ_PALETTE_TYPE_SHARED;
-        t->count = size >> 5;
-        t->src = src;
-        t->refCount = 0;
-        t->index = slot;
-        RequestDma3Copy(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), size);
+        palette->type = OBJ_PALETTE_TYPE_SHARED;
+        palette->count = size >> 5;
+        palette->src = src;
+        palette->refCount = 0;
+        palette->index = slot;
+        RequestDma3Copy(src, (void*)(OBJ_PLTT + palette->index * PLTT_SIZE_4BPP), size);
     }
 }
 
@@ -1239,13 +1239,13 @@ ObjPalette* AllocObjPalette(u16 size) {
     return NULL;
 }
 
-void UpdateAllocatedObjPalette(ObjPalette* t, void* src) {
-    if (t->type == OBJ_PALETTE_TYPE_ALLOCATED) {
-        LoadPalette(src, (void*)(OBJ_PLTT + t->index * PLTT_SIZE_4BPP), t->count << 5);
+void UpdateAllocatedObjPalette(ObjPalette* palette, void* src) {
+    if (palette->type == OBJ_PALETTE_TYPE_ALLOCATED) {
+        LoadPalette(src, (void*)(OBJ_PLTT + palette->index * PLTT_SIZE_4BPP), palette->count << 5);
     }
 }
 
-u8 CanAllocObjTiles(u16 n) {
+u8 CanAllocObjTiles(u16 count) {
     ObjTiles* cur;
     ObjTiles* next;
     u16 pos;
@@ -1259,7 +1259,7 @@ u8 CanAllocObjTiles(u16 n) {
 
     pos = gSpriteWork->tilePool.rangeStart;
 
-    if (n <= (s16)(cur->index - pos)) {
+    if (count <= (s16)(cur->index - pos)) {
         return 1;
     }
 
@@ -1271,7 +1271,7 @@ u8 CanAllocObjTiles(u16 n) {
         next = ListPoolNext(&cur->node);
         pos = cur->index + cur->count;
 
-        if ((s16)pos + n > gSpriteWork->tilePool.rangeEnd) {
+        if ((s16)pos + count > gSpriteWork->tilePool.rangeEnd) {
             break;
         }
 
@@ -1281,7 +1281,7 @@ u8 CanAllocObjTiles(u16 n) {
             end = gSpriteWork->tilePool.rangeEnd - pos;
         }
 
-        if (n <= end) {
+        if (count <= end) {
             return 1;
         }
 
@@ -1291,7 +1291,7 @@ u8 CanAllocObjTiles(u16 n) {
     return 0;
 }
 
-u8 CanAllocObjPalette(u16 n) {
+u8 CanAllocObjPalette(u16 count) {
     ObjPalette* cur;
     ObjPalette* next;
     u16 pos;
@@ -1305,7 +1305,7 @@ u8 CanAllocObjPalette(u16 n) {
 
     pos = gSpriteWork->palettePool.rangeStart;
 
-    if (n <= (s16)(cur->index - pos)) {
+    if (count <= (s16)(cur->index - pos)) {
         return 1;
     }
 
@@ -1317,7 +1317,7 @@ u8 CanAllocObjPalette(u16 n) {
         next = ListPoolNext(&cur->node);
         pos = cur->index + cur->count;
 
-        if ((s16)pos + n > gSpriteWork->palettePool.rangeEnd) {
+        if ((s16)pos + count > gSpriteWork->palettePool.rangeEnd) {
             break;
         }
 
@@ -1327,7 +1327,7 @@ u8 CanAllocObjPalette(u16 n) {
             end = gSpriteWork->palettePool.rangeEnd - pos;
         }
 
-        if (n <= end) {
+        if (count <= end) {
             return 1;
         }
 
@@ -1416,7 +1416,7 @@ s32 Sqrt8(s32 value) {
     return 0;
 }
 
-void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* xs, s32* coefficients) {
+void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* values, s32* coefficients) {
     s32* a;
     s32* b;
     s32 n;
@@ -1431,7 +1431,7 @@ void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* xs, s32* coe
 
     for (i = 0; i < n - 1; i++) {
         a[i] = knots[i + 1] - knots[i];
-        b[i + 1] = ((xs[i + 1] - xs[i]) << 8) / a[i];
+        b[i + 1] = ((values[i + 1] - values[i]) << 8) / a[i];
     }
 
     coefficients[1] = (b[2] - b[1]) - ((a[0] * coefficients[0]) >> 8);
@@ -1450,7 +1450,7 @@ void SplineBuildAxisCoefficients(Spline2D* spline, s32* knots, s32* xs, s32* coe
     }
 }
 
-s32 SplineEvaluateAxis(s16* n, s32 v, s32* knots, s32* values, s32* coefficients) {
+s32 SplineEvaluateAxis(s16* pointCount, s32 position, s32* knots, s32* values, s32* coefficients) {
     s32 lo;
     s32 hi;
     s32 mid;
@@ -1461,14 +1461,14 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* knots, s32* values, s32* coefficients
     s32 r;
     s32 cnt;
 
-    cnt = *n;
+    cnt = *pointCount;
     lo = 0;
     hi = cnt - 1;
 
     while (lo < hi) {
         mid = (lo + hi) / 2;
 
-        if (knots[mid] < v) {
+        if (knots[mid] < position) {
             lo = mid + 1;
         } else {
             hi = mid;
@@ -1480,7 +1480,7 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* knots, s32* values, s32* coefficients
     }
 
     dx = knots[lo + 1] - knots[lo];
-    t = v - knots[lo];
+    t = position - knots[lo];
     y1 = coefficients[lo + 1];
     y0 = coefficients[lo];
     r = (((t * (y1 - y0)) >> 8) << 8) / dx;
@@ -1489,7 +1489,7 @@ s32 SplineEvaluateAxis(s16* n, s32 v, s32* knots, s32* values, s32* coefficients
     return ((t * r) >> 8) + values[lo];
 }
 
-void SplineInit2D(Spline2D* spline, s32* xs, s32* ys, s16 n) {
+void SplineInit2D(Spline2D* spline, s32* xValues, s32* yValues, s16 pointCount) {
     s32 i;
     s32 len;
     s32* d;
@@ -1499,38 +1499,38 @@ void SplineInit2D(Spline2D* spline, s32* xs, s32* ys, s16 n) {
     s32 dy;
     s32 size;
 
-    size = n * 4;
+    size = pointCount * 4;
     len = 0;
-    spline->pointCount = n;
+    spline->pointCount = pointCount;
     spline->intervals = EwramAlloc(size);
     spline->scratch = EwramAlloc(size);
     spline->knots = EwramAlloc(size);
     spline->xCoefficients = EwramAlloc(size);
     spline->yCoefficients = EwramAlloc(size);
-    spline->xValues = xs;
-    spline->yValues = ys;
+    spline->xValues = xValues;
+    spline->yValues = yValues;
     d = spline->knots;
     e = spline->xCoefficients;
     f = spline->yCoefficients;
     d[0] = len;
 
-    for (i = 1; i < n; i++) {
-        dx = xs[i] - xs[i - 1];
-        dy = ys[i] - ys[i - 1];
+    for (i = 1; i < pointCount; i++) {
+        dx = xValues[i] - xValues[i - 1];
+        dy = yValues[i] - yValues[i - 1];
         d[i] = d[i - 1] + Sqrt8(((dx * dx) >> 8) + ((dy * dy) >> 8));
     }
 
-    for (i = 1; i < n; i++) {
-        d[i] = (d[i] << 8) / d[n - 1];
+    for (i = 1; i < pointCount; i++) {
+        d[i] = (d[i] << 8) / d[pointCount - 1];
     }
 
-    SplineBuildAxisCoefficients(spline, d, xs, e);
-    SplineBuildAxisCoefficients(spline, d, ys, f);
+    SplineBuildAxisCoefficients(spline, d, xValues, e);
+    SplineBuildAxisCoefficients(spline, d, yValues, f);
 }
 
-void SplineEvaluate2D(Spline2D* spline, s32 v, s32* outX, s32* outY) {
-    *outX = SplineEvaluateAxis(&spline->pointCount, v, spline->knots, spline->xValues, spline->xCoefficients);
-    *outY = SplineEvaluateAxis(&spline->pointCount, v, spline->knots, spline->yValues, spline->yCoefficients);
+void SplineEvaluate2D(Spline2D* spline, s32 position, s32* outX, s32* outY) {
+    *outX = SplineEvaluateAxis(&spline->pointCount, position, spline->knots, spline->xValues, spline->xCoefficients);
+    *outY = SplineEvaluateAxis(&spline->pointCount, position, spline->knots, spline->yValues, spline->yCoefficients);
 }
 
 void SplineFreeBuffers(Spline2D* spline) {
@@ -2410,15 +2410,15 @@ void SetBgPriority(s32 bg, u16 priority) {
     *p |= priority;
 }
 
-void SetBgSize(s32 bg, u16 v) {
+void SetBgSize(s32 bg, u16 size) {
     vu16* p = sBgControl[bg];
 
     *p &= ~BGCNT_SIZE_MASK;
-    *p |= v;
+    *p |= size;
 }
 
-void SetBgColorMode(s32 bg, u16 v) {
-    if (v == BGCNT_256COLOR) {
+void SetBgColorMode(s32 bg, u16 colorMode) {
+    if (colorMode == BGCNT_256COLOR) {
         vu16* p = sBgControl[bg];
 
         *p &= 0xFFFF;
@@ -2673,8 +2673,8 @@ void ApproachValueHalfSteps(s32* value, s32 target, u16 steps) {
     *value += d / GetHalfStepDivisor(steps);
 }
 
-s32 Lerp8(s32 from, s32 to, s32 t) {
-    return (from * (0x100 - t) >> 8) + (to * t >> 8);
+s32 Lerp8(s32 from, s32 to, s32 weight) {
+    return (from * (0x100 - weight) >> 8) + (to * weight >> 8);
 }
 
 void AnimInit(AnimState* anim, void* anims, void* gfxTable) {

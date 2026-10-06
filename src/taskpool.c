@@ -10,24 +10,24 @@
 #include <stddef.h>
 #include "types.h"
 
-Task* TaskDestroy(TaskPool* pool, Task* t) {
-    if (t->desc->destroy != NULL) {
-        t->desc->destroy(t->work);
+Task* TaskDestroy(TaskPool* pool, Task* task) {
+    if (task->desc->destroy != NULL) {
+        task->desc->destroy(task->work);
     }
 
-    EwramFree(t->work);
+    EwramFree(task->work);
 
-    return ListPoolRelease(&t->node, pool);
+    return ListPoolRelease(&task->node, pool);
 }
 
-void TaskKill(TaskPool* pool, Task* t) {
-    if (t->desc->destroy != NULL) {
-        t->desc->destroy(t->work);
+void TaskKill(TaskPool* pool, Task* task) {
+    if (task->desc->destroy != NULL) {
+        task->desc->destroy(task->work);
     }
 
-    EwramFree(t->work);
+    EwramFree(task->work);
 
-    ListPoolRelease(&t->node, pool);
+    ListPoolRelease(&task->node, pool);
 }
 
 Task* TaskCreate(TaskPool* pool, TaskDesc* desc, const void* arg) {
@@ -130,24 +130,24 @@ void func_08000F30(TaskPool* pool) {
     }
 }
 
-u8 IsTaskActive(Task* t) {
-    if (t == NULL || (t->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
+u8 IsTaskActive(Task* task) {
+    if (task == NULL || (task->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
         return 0;
     }
 
     return 1;
 }
 
-u8 IsTaskActiveNamed(Task* t, const char* name) {
-    if (t == NULL || name == NULL || t->desc->name != name || (t->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
+u8 IsTaskActiveNamed(Task* task, const char* name) {
+    if (task == NULL || name == NULL || task->desc->name != name || (task->node.flags & LIST_NODE_FLAG_ACTIVE) == 0) {
         return 0;
     }
 
     return 1;
 }
 
-const char* GetTaskName(Task* t) {
-    return t->desc->name;
+const char* GetTaskName(Task* task) {
+    return task->desc->name;
 }
 
 void SetTaskUpdate(Task* task, TaskUpdateFunc update) {

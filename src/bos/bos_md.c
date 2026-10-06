@@ -322,7 +322,7 @@ static const MdAnimDef sMdAnimDefs[11] = {
     { sMdBiteNearFrames, ARRAY_COUNT(sMdBiteNearFrames) },
     { sMdBiteFarFrames, ARRAY_COUNT(sMdBiteFarFrames) },
     { sMdBiteDoubleFrames, ARRAY_COUNT(sMdBiteDoubleFrames) },
-    { sMdDefeatFrames, 1 },
+    { sMdDefeatFrames, ARRAY_COUNT(sMdDefeatFrames) },
 };
 
 TaskDesc gTaskDescBosMd = {

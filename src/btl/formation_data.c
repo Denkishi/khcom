@@ -242,7 +242,7 @@ static const BtlFormStep sBtlFormShadow1Steps[] = {
     { ENEMY_SHADOW, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormShadow1 = { 1, sBtlFormShadow1Steps, 60 };
+static const BtlFormEntry sBtlFormShadow1 = { ARRAY_COUNT(sBtlFormShadow1Steps), sBtlFormShadow1Steps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne5Steps[] = {
     { ENEMY_RED_NOCTURNE, 25, -25, -30, 0 },
@@ -297,31 +297,31 @@ static const BtlFormStep sBtlFormRedNocturne1ASteps[] = {
     { ENEMY_RED_NOCTURNE, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormRedNocturne1A = { 1, sBtlFormRedNocturne1ASteps, 60 };
+static const BtlFormEntry sBtlFormRedNocturne1A = { ARRAY_COUNT(sBtlFormRedNocturne1ASteps), sBtlFormRedNocturne1ASteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1BSteps[] = {
     { ENEMY_RED_NOCTURNE, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormRedNocturne1B = { 1, sBtlFormRedNocturne1BSteps, 60 };
+static const BtlFormEntry sBtlFormRedNocturne1B = { ARRAY_COUNT(sBtlFormRedNocturne1BSteps), sBtlFormRedNocturne1BSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1CSteps[] = {
     { ENEMY_RED_NOCTURNE, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormRedNocturne1C = { 1, sBtlFormRedNocturne1CSteps, 60 };
+const BtlFormEntry gBtlFormRedNocturne1C = { ARRAY_COUNT(sBtlFormRedNocturne1CSteps), sBtlFormRedNocturne1CSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1DSteps[] = {
     { ENEMY_RED_NOCTURNE, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormRedNocturne1D = { 1, sBtlFormRedNocturne1DSteps, 60 };
+const BtlFormEntry gBtlFormRedNocturne1D = { ARRAY_COUNT(sBtlFormRedNocturne1DSteps), sBtlFormRedNocturne1DSteps, 60 };
 
 static const BtlFormStep sBtlFormRedNocturne1ESteps[] = {
     { ENEMY_RED_NOCTURNE, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormRedNocturne1E = { 1, sBtlFormRedNocturne1ESteps, 60 };
+const BtlFormEntry gBtlFormRedNocturne1E = { ARRAY_COUNT(sBtlFormRedNocturne1ESteps), sBtlFormRedNocturne1ESteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody5Steps[] = {
     { ENEMY_BLUE_RHAPSODY, 25, -25, -30, 0 },
@@ -375,43 +375,43 @@ static const BtlFormStep sBtlFormBlueRhapsody1ASteps[] = {
     { ENEMY_BLUE_RHAPSODY, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gBtlFormBlueRhapsody1A = { 1, sBtlFormBlueRhapsody1ASteps, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1A = { ARRAY_COUNT(sBtlFormBlueRhapsody1ASteps), sBtlFormBlueRhapsody1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1BSteps[] = {
     { ENEMY_BLUE_RHAPSODY, 40, 0, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormBlueRhapsody1B = { 1, sBtlFormBlueRhapsody1BSteps, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1B = { ARRAY_COUNT(sBtlFormBlueRhapsody1BSteps), sBtlFormBlueRhapsody1BSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1CSteps[] = {
     { ENEMY_BLUE_RHAPSODY, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormBlueRhapsody1C = { 1, sBtlFormBlueRhapsody1CSteps, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1C = { ARRAY_COUNT(sBtlFormBlueRhapsody1CSteps), sBtlFormBlueRhapsody1CSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1DSteps[] = {
     { ENEMY_BLUE_RHAPSODY, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormBlueRhapsody1D = { 1, sBtlFormBlueRhapsody1DSteps, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1D = { ARRAY_COUNT(sBtlFormBlueRhapsody1DSteps), sBtlFormBlueRhapsody1DSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1ESteps[] = {
     { ENEMY_BLUE_RHAPSODY, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormBlueRhapsody1E = { 1, sBtlFormBlueRhapsody1ESteps, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1E = { ARRAY_COUNT(sBtlFormBlueRhapsody1ESteps), sBtlFormBlueRhapsody1ESteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1FSteps[] = {
     { ENEMY_BLUE_RHAPSODY, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormBlueRhapsody1F = { 1, sBtlFormBlueRhapsody1FSteps, 60 };
+const BtlFormEntry gBtlFormBlueRhapsody1F = { ARRAY_COUNT(sBtlFormBlueRhapsody1FSteps), sBtlFormBlueRhapsody1FSteps, 60 };
 
 static const BtlFormStep sBtlFormBlueRhapsody1GSteps[] = {
     { ENEMY_BLUE_RHAPSODY, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormBlueRhapsody1G = { 1, sBtlFormBlueRhapsody1GSteps, 60 };
+static const BtlFormEntry sBtlFormBlueRhapsody1G = { ARRAY_COUNT(sBtlFormBlueRhapsody1GSteps), sBtlFormBlueRhapsody1GSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera5Steps[] = {
     { ENEMY_YELLOW_OPERA, 65, -12, -40, 0 },
@@ -494,31 +494,31 @@ static const BtlFormStep sBtlFormYellowOpera1ASteps[] = {
     { ENEMY_YELLOW_OPERA, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gBtlFormYellowOpera1A = { 1, sBtlFormYellowOpera1ASteps, 60 };
+const BtlFormEntry gBtlFormYellowOpera1A = { ARRAY_COUNT(sBtlFormYellowOpera1ASteps), sBtlFormYellowOpera1ASteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1BSteps[] = {
     { ENEMY_YELLOW_OPERA, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormYellowOpera1B = { 1, sBtlFormYellowOpera1BSteps, 60 };
+const BtlFormEntry gBtlFormYellowOpera1B = { ARRAY_COUNT(sBtlFormYellowOpera1BSteps), sBtlFormYellowOpera1BSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1CSteps[] = {
     { ENEMY_YELLOW_OPERA, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormYellowOpera1C = { 1, sBtlFormYellowOpera1CSteps, 60 };
+static const BtlFormEntry sBtlFormYellowOpera1C = { ARRAY_COUNT(sBtlFormYellowOpera1CSteps), sBtlFormYellowOpera1CSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1DSteps[] = {
     { ENEMY_YELLOW_OPERA, 55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormYellowOpera1D = { 1, sBtlFormYellowOpera1DSteps, 60 };
+const BtlFormEntry gBtlFormYellowOpera1D = { ARRAY_COUNT(sBtlFormYellowOpera1DSteps), sBtlFormYellowOpera1DSteps, 60 };
 
 static const BtlFormStep sBtlFormYellowOpera1ESteps[] = {
     { ENEMY_YELLOW_OPERA, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormYellowOpera1E = { 1, sBtlFormYellowOpera1ESteps, 60 };
+const BtlFormEntry gBtlFormYellowOpera1E = { ARRAY_COUNT(sBtlFormYellowOpera1ESteps), sBtlFormYellowOpera1ESteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem5Steps[] = {
     { ENEMY_GREEN_REQUIEM, 65, -12, -40, 0 },
@@ -594,31 +594,31 @@ static const BtlFormStep sBtlFormGreenRequiem1ASteps[] = {
     { ENEMY_GREEN_REQUIEM, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormGreenRequiem1A = { 1, sBtlFormGreenRequiem1ASteps, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem1A = { ARRAY_COUNT(sBtlFormGreenRequiem1ASteps), sBtlFormGreenRequiem1ASteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1BSteps[] = {
     { ENEMY_GREEN_REQUIEM, 25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormGreenRequiem1B = { 1, sBtlFormGreenRequiem1BSteps, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1B = { ARRAY_COUNT(sBtlFormGreenRequiem1BSteps), sBtlFormGreenRequiem1BSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1CSteps[] = {
     { ENEMY_GREEN_REQUIEM, -25, -25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormGreenRequiem1C = { 1, sBtlFormGreenRequiem1CSteps, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1C = { ARRAY_COUNT(sBtlFormGreenRequiem1CSteps), sBtlFormGreenRequiem1CSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1DSteps[] = {
     { ENEMY_GREEN_REQUIEM, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormGreenRequiem1D = { 1, sBtlFormGreenRequiem1DSteps, 60 };
+static const BtlFormEntry sBtlFormGreenRequiem1D = { ARRAY_COUNT(sBtlFormGreenRequiem1DSteps), sBtlFormGreenRequiem1DSteps, 60 };
 
 static const BtlFormStep sBtlFormGreenRequiem1ESteps[] = {
     { ENEMY_GREEN_REQUIEM, -55, 25, -30, 0 },
 };
 
-const BtlFormEntry gBtlFormGreenRequiem1E = { 1, sBtlFormGreenRequiem1ESteps, 60 };
+const BtlFormEntry gBtlFormGreenRequiem1E = { ARRAY_COUNT(sBtlFormGreenRequiem1ESteps), sBtlFormGreenRequiem1ESteps, 60 };
 
 static const BtlFormStep sBtlFormSeaNeon6Steps[] = {
     { ENEMY_SEA_NEON, 25, -25, -30, 0 },
@@ -686,7 +686,7 @@ static const BtlFormStep sBtlFormSeaNeon1Steps[] = {
     { ENEMY_SEA_NEON, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gBtlFormSeaNeon1 = { 1, sBtlFormSeaNeon1Steps, 60 };
+const BtlFormEntry gBtlFormSeaNeon1 = { ARRAY_COUNT(sBtlFormSeaNeon1Steps), sBtlFormSeaNeon1Steps, 60 };
 
 static const BtlFormStep sBtlFormWhiteMushroom4Steps[] = {
     { ENEMY_WHITE_MUSHROOM, 65, -12, 0, 0 },
@@ -723,7 +723,7 @@ static const BtlFormStep sBtlFormWhiteMushroom1Steps[] = {
     { ENEMY_WHITE_MUSHROOM, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormWhiteMushroom1 = { 1, sBtlFormWhiteMushroom1Steps, 60 };
+static const BtlFormEntry sBtlFormWhiteMushroom1 = { ARRAY_COUNT(sBtlFormWhiteMushroom1Steps), sBtlFormWhiteMushroom1Steps, 60 };
 
 static const BtlFormStep sBtlFormBlackFungus4Steps[] = {
     { ENEMY_BLACK_FUNGUS, 65, -12, 0, 0 },
@@ -760,7 +760,7 @@ static const BtlFormStep sBtlFormBlackFungus1Steps[] = {
     { ENEMY_BLACK_FUNGUS, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormBlackFungus1 = { 1, sBtlFormBlackFungus1Steps, 60 };
+static const BtlFormEntry sBtlFormBlackFungus1 = { ARRAY_COUNT(sBtlFormBlackFungus1Steps), sBtlFormBlackFungus1Steps, 60 };
 
 static const BtlFormStep sBtlFormSoldier6Steps[] = {
     { ENEMY_SOLDIER, 25, -25, 0, 0 },
@@ -892,25 +892,25 @@ static const BtlFormStep sBtlFormSoldier1ASteps[] = {
     { ENEMY_SOLDIER, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormSoldier1A = { 1, sBtlFormSoldier1ASteps, 60 };
+static const BtlFormEntry sBtlFormSoldier1A = { ARRAY_COUNT(sBtlFormSoldier1ASteps), sBtlFormSoldier1ASteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1BSteps[] = {
     { ENEMY_SOLDIER, 40, 0, 0, 0 },
 };
 
-const BtlFormEntry gBtlFormSoldier1B = { 1, sBtlFormSoldier1BSteps, 60 };
+const BtlFormEntry gBtlFormSoldier1B = { ARRAY_COUNT(sBtlFormSoldier1BSteps), sBtlFormSoldier1BSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1CSteps[] = {
     { ENEMY_SOLDIER, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormSoldier1C = { 1, sBtlFormSoldier1CSteps, 60 };
+static const BtlFormEntry sBtlFormSoldier1C = { ARRAY_COUNT(sBtlFormSoldier1CSteps), sBtlFormSoldier1CSteps, 60 };
 
 static const BtlFormStep sBtlFormSoldier1DSteps[] = {
     { ENEMY_SOLDIER, -40, 0, 0, 0 },
 };
 
-const BtlFormEntry gBtlFormSoldier1D = { 1, sBtlFormSoldier1DSteps, 60 };
+const BtlFormEntry gBtlFormSoldier1D = { ARRAY_COUNT(sBtlFormSoldier1DSteps), sBtlFormSoldier1DSteps, 60 };
 
 static const BtlFormStep sBtlFormPowerwild3Steps[] = {
     { ENEMY_POWERWILD, 40, 0, 0, 0 },
@@ -938,7 +938,7 @@ static const BtlFormStep sBtlFormPowerwild1Steps[] = {
     { ENEMY_POWERWILD, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormPowerwild1 = { 1, sBtlFormPowerwild1Steps, 60 };
+static const BtlFormEntry sBtlFormPowerwild1 = { ARRAY_COUNT(sBtlFormPowerwild1Steps), sBtlFormPowerwild1Steps, 60 };
 
 static const BtlFormStep sBtlFormBouncywild3Steps[] = {
     { ENEMY_BOUNCYWILD, 65, -12, 0, 0 },
@@ -966,7 +966,7 @@ static const BtlFormStep sBtlFormBouncywild1Steps[] = {
     { ENEMY_BOUNCYWILD, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormBouncywild1 = { 1, sBtlFormBouncywild1Steps, 60 };
+static const BtlFormEntry sBtlFormBouncywild1 = { ARRAY_COUNT(sBtlFormBouncywild1Steps), sBtlFormBouncywild1Steps, 60 };
 
 static const BtlFormStep sBtlFormAirSoldier4ASteps[] = {
     { ENEMY_AIR_SOLDIER, 25, -25, -30, 0 },
@@ -1020,7 +1020,7 @@ static const BtlFormStep sBtlFormAirSoldier1Steps[] = {
     { ENEMY_AIR_SOLDIER, 64, 0, -50, 0 },
 };
 
-const BtlFormEntry gBtlFormAirSoldier1 = { 1, sBtlFormAirSoldier1Steps, 60 };
+const BtlFormEntry gBtlFormAirSoldier1 = { ARRAY_COUNT(sBtlFormAirSoldier1Steps), sBtlFormAirSoldier1Steps, 60 };
 
 static const BtlFormStep sBtlFormBandit5Steps[] = {
     { ENEMY_BANDIT, 25, -25, 0, 0 },
@@ -1076,13 +1076,13 @@ static const BtlFormStep sBtlFormBandit1ASteps[] = {
     { ENEMY_BANDIT, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gBtlFormBandit1A = { 1, sBtlFormBandit1ASteps, 60 };
+const BtlFormEntry gBtlFormBandit1A = { ARRAY_COUNT(sBtlFormBandit1ASteps), sBtlFormBandit1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBandit1BSteps[] = {
     { ENEMY_BANDIT, 40, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormBandit1B = { 1, sBtlFormBandit1BSteps, 60 };
+static const BtlFormEntry sBtlFormBandit1B = { ARRAY_COUNT(sBtlFormBandit1BSteps), sBtlFormBandit1BSteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider3Steps[] = {
     { ENEMY_BARREL_SPIDER, 40, 0, 0, 0 },
@@ -1117,13 +1117,13 @@ static const BtlFormStep sBtlFormBarrelSpider1ASteps[] = {
     { ENEMY_BARREL_SPIDER, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormBarrelSpider1A = { 1, sBtlFormBarrelSpider1ASteps, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider1A = { ARRAY_COUNT(sBtlFormBarrelSpider1ASteps), sBtlFormBarrelSpider1ASteps, 60 };
 
 static const BtlFormStep sBtlFormBarrelSpider1BSteps[] = {
     { ENEMY_BARREL_SPIDER, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormBarrelSpider1B = { 1, sBtlFormBarrelSpider1BSteps, 60 };
+static const BtlFormEntry sBtlFormBarrelSpider1B = { ARRAY_COUNT(sBtlFormBarrelSpider1BSteps), sBtlFormBarrelSpider1BSteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost3Steps[] = {
     { ENEMY_SEARCH_GHOST, 65, -12, -40, 0 },
@@ -1158,13 +1158,13 @@ static const BtlFormStep sBtlFormSearchGhost1ASteps[] = {
     { ENEMY_SEARCH_GHOST, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormSearchGhost1A = { 1, sBtlFormSearchGhost1ASteps, 60 };
+static const BtlFormEntry sBtlFormSearchGhost1A = { ARRAY_COUNT(sBtlFormSearchGhost1ASteps), sBtlFormSearchGhost1ASteps, 60 };
 
 static const BtlFormStep sBtlFormSearchGhost1BSteps[] = {
     { ENEMY_SEARCH_GHOST, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormSearchGhost1B = { 1, sBtlFormSearchGhost1BSteps, 60 };
+static const BtlFormEntry sBtlFormSearchGhost1B = { ARRAY_COUNT(sBtlFormSearchGhost1BSteps), sBtlFormSearchGhost1BSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver2ASteps[] = {
     { ENEMY_SCREWDIVER, 65, -12, -40, 0 },
@@ -1184,37 +1184,37 @@ static const BtlFormStep sBtlFormScrewdiver1ASteps[] = {
     { ENEMY_SCREWDIVER, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1A = { 1, sBtlFormScrewdiver1ASteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1A = { ARRAY_COUNT(sBtlFormScrewdiver1ASteps), sBtlFormScrewdiver1ASteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1BSteps[] = {
     { ENEMY_SCREWDIVER, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1B = { 1, sBtlFormScrewdiver1BSteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1B = { ARRAY_COUNT(sBtlFormScrewdiver1BSteps), sBtlFormScrewdiver1BSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1CSteps[] = {
     { ENEMY_SCREWDIVER, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1C = { 1, sBtlFormScrewdiver1CSteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1C = { ARRAY_COUNT(sBtlFormScrewdiver1CSteps), sBtlFormScrewdiver1CSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1DSteps[] = {
     { ENEMY_SCREWDIVER, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1D = { 1, sBtlFormScrewdiver1DSteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1D = { ARRAY_COUNT(sBtlFormScrewdiver1DSteps), sBtlFormScrewdiver1DSteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1ESteps[] = {
     { ENEMY_SCREWDIVER, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1E = { 1, sBtlFormScrewdiver1ESteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1E = { ARRAY_COUNT(sBtlFormScrewdiver1ESteps), sBtlFormScrewdiver1ESteps, 60 };
 
 static const BtlFormStep sBtlFormScrewdiver1FSteps[] = {
     { ENEMY_SCREWDIVER, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormScrewdiver1F = { 1, sBtlFormScrewdiver1FSteps, 60 };
+static const BtlFormEntry sBtlFormScrewdiver1F = { ARRAY_COUNT(sBtlFormScrewdiver1FSteps), sBtlFormScrewdiver1FSteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight3Steps[] = {
     { ENEMY_WIGHT_KNIGHT, 65, -12, 0, 0 },
@@ -1256,13 +1256,13 @@ static const BtlFormStep sBtlFormWightKnight1ASteps[] = {
     { ENEMY_WIGHT_KNIGHT, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormWightKnight1A = { 1, sBtlFormWightKnight1ASteps, 60 };
+static const BtlFormEntry sBtlFormWightKnight1A = { ARRAY_COUNT(sBtlFormWightKnight1ASteps), sBtlFormWightKnight1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWightKnight1BSteps[] = {
     { ENEMY_WIGHT_KNIGHT, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormWightKnight1B = { 1, sBtlFormWightKnight1BSteps, 60 };
+static const BtlFormEntry sBtlFormWightKnight1B = { ARRAY_COUNT(sBtlFormWightKnight1BSteps), sBtlFormWightKnight1BSteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle3Steps[] = {
     { ENEMY_GARGOYLE, 40, 0, -30, 0 },
@@ -1290,13 +1290,13 @@ static const BtlFormStep sBtlFormGargoyle1ASteps[] = {
     { ENEMY_GARGOYLE, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormGargoyle1A = { 1, sBtlFormGargoyle1ASteps, 60 };
+static const BtlFormEntry sBtlFormGargoyle1A = { ARRAY_COUNT(sBtlFormGargoyle1ASteps), sBtlFormGargoyle1ASteps, 60 };
 
 static const BtlFormStep sBtlFormGargoyle1BSteps[] = {
     { ENEMY_GARGOYLE, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormGargoyle1B = { 1, sBtlFormGargoyle1BSteps, 60 };
+static const BtlFormEntry sBtlFormGargoyle1B = { ARRAY_COUNT(sBtlFormGargoyle1BSteps), sBtlFormGargoyle1BSteps, 60 };
 
 static const BtlFormStep sBtlFormPirate5Steps[] = {
     { ENEMY_PIRATE, 25, -25, 0, 0 },
@@ -1358,7 +1358,7 @@ static const BtlFormStep sBtlFormPirate1Steps[] = {
     { ENEMY_PIRATE, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gBtlFormPirate1 = { 1, sBtlFormPirate1Steps, 60 };
+const BtlFormEntry gBtlFormPirate1 = { ARRAY_COUNT(sBtlFormPirate1Steps), sBtlFormPirate1Steps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate2ASteps[] = {
     { ENEMY_AIR_PIRATE, 25, -25, -30, 0 },
@@ -1385,19 +1385,19 @@ static const BtlFormStep sBtlFormAirPirate1ASteps[] = {
     { ENEMY_AIR_PIRATE, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormAirPirate1A = { 1, sBtlFormAirPirate1ASteps, 60 };
+static const BtlFormEntry sBtlFormAirPirate1A = { ARRAY_COUNT(sBtlFormAirPirate1ASteps), sBtlFormAirPirate1ASteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate1BSteps[] = {
     { ENEMY_AIR_PIRATE, -64, 0, -50, 0 },
 };
 
-const BtlFormEntry gBtlFormAirPirate1B = { 1, sBtlFormAirPirate1BSteps, 60 };
+const BtlFormEntry gBtlFormAirPirate1B = { ARRAY_COUNT(sBtlFormAirPirate1BSteps), sBtlFormAirPirate1BSteps, 60 };
 
 static const BtlFormStep sBtlFormAirPirate1CSteps[] = {
     { ENEMY_AIR_PIRATE, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormAirPirate1C = { 1, sBtlFormAirPirate1CSteps, 60 };
+static const BtlFormEntry sBtlFormAirPirate1C = { ARRAY_COUNT(sBtlFormAirPirate1CSteps), sBtlFormAirPirate1CSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball2ASteps[] = {
     { ENEMY_DARKBALL, 65, -12, -40, 0 },
@@ -1445,37 +1445,37 @@ static const BtlFormStep sBtlFormDarkball1ASteps[] = {
     { ENEMY_DARKBALL, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1A = { 1, sBtlFormDarkball1ASteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1A = { ARRAY_COUNT(sBtlFormDarkball1ASteps), sBtlFormDarkball1ASteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1BSteps[] = {
     { ENEMY_DARKBALL, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1B = { 1, sBtlFormDarkball1BSteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1B = { ARRAY_COUNT(sBtlFormDarkball1BSteps), sBtlFormDarkball1BSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1CSteps[] = {
     { ENEMY_DARKBALL, 25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1C = { 1, sBtlFormDarkball1CSteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1C = { ARRAY_COUNT(sBtlFormDarkball1CSteps), sBtlFormDarkball1CSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1DSteps[] = {
     { ENEMY_DARKBALL, -25, -25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1D = { 1, sBtlFormDarkball1DSteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1D = { ARRAY_COUNT(sBtlFormDarkball1DSteps), sBtlFormDarkball1DSteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1ESteps[] = {
     { ENEMY_DARKBALL, 55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1E = { 1, sBtlFormDarkball1ESteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1E = { ARRAY_COUNT(sBtlFormDarkball1ESteps), sBtlFormDarkball1ESteps, 60 };
 
 static const BtlFormStep sBtlFormDarkball1FSteps[] = {
     { ENEMY_DARKBALL, -55, 25, -30, 0 },
 };
 
-static const BtlFormEntry sBtlFormDarkball1F = { 1, sBtlFormDarkball1FSteps, 60 };
+static const BtlFormEntry sBtlFormDarkball1F = { ARRAY_COUNT(sBtlFormDarkball1FSteps), sBtlFormDarkball1FSteps, 60 };
 
 static const BtlFormStep sBtlFormWyvern2Steps[] = {
     { ENEMY_WYVERN, 65, -12, -40, 0 },
@@ -1488,13 +1488,13 @@ static const BtlFormStep sBtlFormWyvern1ASteps[] = {
     { ENEMY_WYVERN, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormWyvern1A = { 1, sBtlFormWyvern1ASteps, 60 };
+static const BtlFormEntry sBtlFormWyvern1A = { ARRAY_COUNT(sBtlFormWyvern1ASteps), sBtlFormWyvern1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWyvern1BSteps[] = {
     { ENEMY_WYVERN, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormWyvern1B = { 1, sBtlFormWyvern1BSteps, 60 };
+static const BtlFormEntry sBtlFormWyvern1B = { ARRAY_COUNT(sBtlFormWyvern1BSteps), sBtlFormWyvern1BSteps, 60 };
 
 static const BtlFormStep sBtlFormWizard3Steps[] = {
     { ENEMY_WIZARD, 65, -12, -40, 0 },
@@ -1515,13 +1515,13 @@ static const BtlFormStep sBtlFormWizard1ASteps[] = {
     { ENEMY_WIZARD, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormWizard1A = { 1, sBtlFormWizard1ASteps, 60 };
+static const BtlFormEntry sBtlFormWizard1A = { ARRAY_COUNT(sBtlFormWizard1ASteps), sBtlFormWizard1ASteps, 60 };
 
 static const BtlFormStep sBtlFormWizard1BSteps[] = {
     { ENEMY_WIZARD, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormWizard1B = { 1, sBtlFormWizard1BSteps, 60 };
+static const BtlFormEntry sBtlFormWizard1B = { ARRAY_COUNT(sBtlFormWizard1BSteps), sBtlFormWizard1BSteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow3ASteps[] = {
     { ENEMY_NEOSHADOW, 40, 0, 0, 0 },
@@ -1550,13 +1550,13 @@ static const BtlFormStep sBtlFormNeoshadow1ASteps[] = {
     { ENEMY_NEOSHADOW, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormNeoshadow1A = { 1, sBtlFormNeoshadow1ASteps, 60 };
+static const BtlFormEntry sBtlFormNeoshadow1A = { ARRAY_COUNT(sBtlFormNeoshadow1ASteps), sBtlFormNeoshadow1ASteps, 60 };
 
 static const BtlFormStep sBtlFormNeoshadow1BSteps[] = {
     { ENEMY_NEOSHADOW, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormNeoshadow1B = { 1, sBtlFormNeoshadow1BSteps, 60 };
+static const BtlFormEntry sBtlFormNeoshadow1B = { ARRAY_COUNT(sBtlFormNeoshadow1BSteps), sBtlFormNeoshadow1BSteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody2ASteps[] = {
     { ENEMY_LARGE_BODY, 65, -12, 0, 0 },
@@ -1576,13 +1576,13 @@ static const BtlFormStep sBtlFormLargeBody1ASteps[] = {
     { ENEMY_LARGE_BODY, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormLargeBody1A = { 1, sBtlFormLargeBody1ASteps, 60 };
+static const BtlFormEntry sBtlFormLargeBody1A = { ARRAY_COUNT(sBtlFormLargeBody1ASteps), sBtlFormLargeBody1ASteps, 60 };
 
 static const BtlFormStep sBtlFormLargeBody1BSteps[] = {
     { ENEMY_LARGE_BODY, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormLargeBody1B = { 1, sBtlFormLargeBody1BSteps, 60 };
+static const BtlFormEntry sBtlFormLargeBody1B = { ARRAY_COUNT(sBtlFormLargeBody1BSteps), sBtlFormLargeBody1BSteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit2ASteps[] = {
     { ENEMY_FAT_BANDIT, 25, -25, 0, 0 },
@@ -1602,13 +1602,13 @@ static const BtlFormStep sBtlFormFatBandit1ASteps[] = {
     { ENEMY_FAT_BANDIT, -64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormFatBandit1A = { 1, sBtlFormFatBandit1ASteps, 60 };
+static const BtlFormEntry sBtlFormFatBandit1A = { ARRAY_COUNT(sBtlFormFatBandit1ASteps), sBtlFormFatBandit1ASteps, 60 };
 
 static const BtlFormStep sBtlFormFatBandit1BSteps[] = {
     { ENEMY_FAT_BANDIT, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormFatBandit1B = { 1, sBtlFormFatBandit1BSteps, 60 };
+static const BtlFormEntry sBtlFormFatBandit1B = { ARRAY_COUNT(sBtlFormFatBandit1BSteps), sBtlFormFatBandit1BSteps, 60 };
 
 static const BtlFormStep sBtlFormAquatank2Steps[] = {
     { ENEMY_AQUATANK, 65, -12, -40, 0 },
@@ -1621,13 +1621,13 @@ static const BtlFormStep sBtlFormAquatank1ASteps[] = {
     { ENEMY_AQUATANK, 64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormAquatank1A = { 1, sBtlFormAquatank1ASteps, 60 };
+static const BtlFormEntry sBtlFormAquatank1A = { ARRAY_COUNT(sBtlFormAquatank1ASteps), sBtlFormAquatank1ASteps, 60 };
 
 static const BtlFormStep sBtlFormAquatank1BSteps[] = {
     { ENEMY_AQUATANK, -64, 0, -50, 0 },
 };
 
-static const BtlFormEntry sBtlFormAquatank1B = { 1, sBtlFormAquatank1BSteps, 60 };
+static const BtlFormEntry sBtlFormAquatank1B = { ARRAY_COUNT(sBtlFormAquatank1BSteps), sBtlFormAquatank1BSteps, 60 };
 
 static const BtlFormStep sBtlFormDefender2Steps[] = {
     { ENEMY_DEFENDER, 25, -25, 0, 0 },
@@ -1640,7 +1640,7 @@ static const BtlFormStep sBtlFormDefender1Steps[] = {
     { ENEMY_DEFENDER, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormDefender1 = { 1, sBtlFormDefender1Steps, 60 };
+static const BtlFormEntry sBtlFormDefender1 = { ARRAY_COUNT(sBtlFormDefender1Steps), sBtlFormDefender1Steps, 60 };
 
 static const BtlFormStep sBtlFormTornadoStep5ASteps[] = {
     { ENEMY_TORNADO_STEP, 25, -25, 0, 0 },
@@ -1727,7 +1727,7 @@ static const BtlFormStep sBtlFormTornadoStep1Steps[] = {
     { ENEMY_TORNADO_STEP, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormTornadoStep1 = { 1, sBtlFormTornadoStep1Steps, 60 };
+static const BtlFormEntry sBtlFormTornadoStep1 = { ARRAY_COUNT(sBtlFormTornadoStep1Steps), sBtlFormTornadoStep1Steps, 60 };
 
 static const BtlFormStep sBtlFormCrescendo5Steps[] = {
     { ENEMY_CRESCENDO, 25, -25, 0, 0 },
@@ -1797,7 +1797,7 @@ static const BtlFormStep sBtlFormCrescendo1Steps[] = {
     { ENEMY_CRESCENDO, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormCrescendo1 = { 1, sBtlFormCrescendo1Steps, 60 };
+static const BtlFormEntry sBtlFormCrescendo1 = { ARRAY_COUNT(sBtlFormCrescendo1Steps), sBtlFormCrescendo1Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant6Steps[] = {
     { ENEMY_CREEPER_PLANT, 25, -25, 0, 0 },
@@ -1866,7 +1866,7 @@ static const BtlFormStep sBtlFormCreeperPlant1Steps[] = {
     { ENEMY_CREEPER_PLANT, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormCreeperPlant1 = { 1, sBtlFormCreeperPlant1Steps, 60 };
+static const BtlFormEntry sBtlFormCreeperPlant1 = { ARRAY_COUNT(sBtlFormCreeperPlant1Steps), sBtlFormCreeperPlant1Steps, 60 };
 
 static const BtlFormStep sBtlFormCreeperPlant2BSteps[] = {
     { ENEMY_CREEPER_PLANT, 40, 0, 0, 0 },
@@ -1901,7 +1901,7 @@ static const BtlFormStep sBtlFormCardSoldierSpade1Steps[] = {
     { ENEMY_CARD_SOLDIER_SPADE, 64, 0, 0, 0 },
 };
 
-const BtlFormEntry gBtlFormCardSoldierSpade1 = { 1, sBtlFormCardSoldierSpade1Steps, 60 };
+const BtlFormEntry gBtlFormCardSoldierSpade1 = { ARRAY_COUNT(sBtlFormCardSoldierSpade1Steps), sBtlFormCardSoldierSpade1Steps, 60 };
 
 static const BtlFormStep sBtlFormCardSoldierHeart3Steps[] = {
     { ENEMY_CARD_SOLDIER_HEART, 65, -12, 0, 0 },
@@ -1922,7 +1922,7 @@ static const BtlFormStep sBtlFormCardSoldierHeart1Steps[] = {
     { ENEMY_CARD_SOLDIER_HEART, 64, 0, 0, 0 },
 };
 
-static const BtlFormEntry sBtlFormCardSoldierHeart1 = { 1, sBtlFormCardSoldierHeart1Steps, 60 };
+static const BtlFormEntry sBtlFormCardSoldierHeart1 = { ARRAY_COUNT(sBtlFormCardSoldierHeart1Steps), sBtlFormCardSoldierHeart1Steps, 60 };
 
 static const BtlFormList sBtlFormLists[144] = {
     { 14, &gBtlFormListEntries[0], 256 },

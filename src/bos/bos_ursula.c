@@ -168,7 +168,7 @@ static const BosMapanimeDef sBosUrsulaMapanimeBubble = { sBosUrsulaMapanimeBubbl
 
 static const BosMapanimeDef sBosUrsulaMapanimeCharge = { sBosUrsulaMapanimeChargeFrames, ARRAY_COUNT(sBosUrsulaMapanimeChargeFrames), gBosUrsulaMapanimeChargeTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
-static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, 1, gBosUrsulaMapanimeRecoverTiles, 0x0C00, 0x0860, 0x0C00, 0 };
+static const BosMapanimeDef sBosUrsulaMapanimeRecover = { sBosUrsulaMapanimeRecoverFrames, ARRAY_COUNT(sBosUrsulaMapanimeRecoverFrames), gBosUrsulaMapanimeRecoverTiles, 0x0C00, 0x0860, 0x0C00, 0 };
 
 static TaskDesc sTaskDescBosUrsulaMapanime = {
     "task_bos_ursula_mapanime",

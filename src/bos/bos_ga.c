@@ -42,8 +42,8 @@ static const GaEntryDef sGaEntryDefs[6] = {
     {Q_8_8(1), -2560, 2048, -25088, 0, 0, gBosGaHeadTiles, gBosGaHeadAnims, gBosGaHeadFrames, ARRAY_COUNT(gBosGaHeadFrames)},
     {Q_8_8(1), 2560, 5632, -14848, 0, 0, gBosGaNearHandTiles, gBosGaNearHandAnims, gBosGaNearHandFrames, ARRAY_COUNT(gBosGaNearHandFrames)},
     {Q_8_8(1), -11264, -3328, -12288, 0, 0, gBosGaFarHandTiles, gBosGaFarHandAnims, gBosGaFarHandFrames, ARRAY_COUNT(gBosGaFarHandFrames)},
-    {Q_8_8(1), 3840, 512, -2048, 0, 0, gBosGaNearFootTiles, gBosGaNearFootAnims, gBosGaNearFootFrames, 1},
-    {Q_8_8(1), -3328, -1792, -2048, 0, 0, gBosGaFarFootTiles, gBosGaFarFootAnims, gBosGaFarFootFrames, 1},
+    {Q_8_8(1), 3840, 512, -2048, 0, 0, gBosGaNearFootTiles, gBosGaNearFootAnims, gBosGaNearFootFrames, ARRAY_COUNT(gBosGaNearFootFrames)},
+    {Q_8_8(1), -3328, -1792, -2048, 0, 0, gBosGaFarFootTiles, gBosGaFarFootAnims, gBosGaFarFootFrames, ARRAY_COUNT(gBosGaFarFootFrames)},
 };
 
 static const BosMapConfig sBosMapConfig =

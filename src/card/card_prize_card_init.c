@@ -63,7 +63,7 @@ static const PrizeMapCardEntry sSoraPrizeTraverseTownTier1[4] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeTraverseTownTiers[2] = {
-    { sSoraPrizeTraverseTownTier0, 1, 30 },
+    { sSoraPrizeTraverseTownTier0, ARRAY_COUNT(sSoraPrizeTraverseTownTier0), 30 },
     { sSoraPrizeTraverseTownTier1, ARRAY_COUNT(sSoraPrizeTraverseTownTier1), 100 },
 };
 
@@ -251,7 +251,7 @@ static const PrizeMapCardEntry sSoraPrizeAtlanticaTier2[9] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeAtlanticaTiers[3] = {
-    { sSoraPrizeAtlanticaTier0, 1, 20 },
+    { sSoraPrizeAtlanticaTier0, ARRAY_COUNT(sSoraPrizeAtlanticaTier0), 20 },
     { sSoraPrizeAtlanticaTier1, ARRAY_COUNT(sSoraPrizeAtlanticaTier1), 80 },
     { sSoraPrizeAtlanticaTier2, ARRAY_COUNT(sSoraPrizeAtlanticaTier2), 100 },
 };
@@ -281,7 +281,7 @@ static const PrizeMapCardEntry sSoraPrizeNeverLandTier2[9] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeNeverLandTiers[3] = {
-    { sSoraPrizeNeverLandTier0, 1, 20 },
+    { sSoraPrizeNeverLandTier0, ARRAY_COUNT(sSoraPrizeNeverLandTier0), 20 },
     { sSoraPrizeNeverLandTier1, ARRAY_COUNT(sSoraPrizeNeverLandTier1), 80 },
     { sSoraPrizeNeverLandTier2, ARRAY_COUNT(sSoraPrizeNeverLandTier2), 100 },
 };
@@ -311,7 +311,7 @@ static const PrizeMapCardEntry sSoraPrizeHollowBastionTier2[9] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeHollowBastionTiers[3] = {
-    { sSoraPrizeHollowBastionTier0, 1, 20 },
+    { sSoraPrizeHollowBastionTier0, ARRAY_COUNT(sSoraPrizeHollowBastionTier0), 20 },
     { sSoraPrizeHollowBastionTier1, ARRAY_COUNT(sSoraPrizeHollowBastionTier1), 80 },
     { sSoraPrizeHollowBastionTier2, ARRAY_COUNT(sSoraPrizeHollowBastionTier2), 100 },
 };
@@ -341,7 +341,7 @@ static const PrizeMapCardEntry sSoraPrizeTwilightTownTier2[8] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeTwilightTownTiers[3] = {
-    { sSoraPrizeTwilightTownTier0, 1, 20 },
+    { sSoraPrizeTwilightTownTier0, ARRAY_COUNT(sSoraPrizeTwilightTownTier0), 20 },
     { sSoraPrizeTwilightTownTier1, ARRAY_COUNT(sSoraPrizeTwilightTownTier1), 80 },
     { sSoraPrizeTwilightTownTier2, ARRAY_COUNT(sSoraPrizeTwilightTownTier2), 100 },
 };
@@ -366,7 +366,7 @@ static const PrizeMapCardEntry sSoraPrizeDestinyIslandsTier2[5] = {
 };
 
 static const PrizeMapCardGroup sSoraPrizeDestinyIslandsTiers[3] = {
-    { sSoraPrizeDestinyIslandsTier0, 1, 30 },
+    { sSoraPrizeDestinyIslandsTier0, ARRAY_COUNT(sSoraPrizeDestinyIslandsTier0), 30 },
     { sSoraPrizeDestinyIslandsTier1, ARRAY_COUNT(sSoraPrizeDestinyIslandsTier1), 80 },
     { sSoraPrizeDestinyIslandsTier2, ARRAY_COUNT(sSoraPrizeDestinyIslandsTier2), 100 },
 };
@@ -643,20 +643,20 @@ static const PrizeMapCardGroup sRikuPrizeCastleOblivionTiers[1] = {
 };
 
 static const PrizeMapCardGroupList sRikuPrizeMapCardGroups[14] = {
-    { sRikuPrizeTraverseTownTiers, 1 },
-    { sRikuPrizeAgrabahTiers, 1 },
-    { sRikuPrizeAtlanticaTiers, 1 },
-    { sRikuPrizeOlympusColiseumTiers, 1 },
-    { sRikuPrizeWonderlandTiers, 1 },
-    { sRikuPrizeMonstroTiers, 1 },
-    { sRikuPrizeHalloweenTownTiers, 1 },
-    { sRikuPrizeNeverLandTiers, 1 },
-    { sRikuPrizeHollowBastionTiers, 1 },
-    { sRikuPrizeDestinyIslandsTiers, 1 },
-    { sRikuPrizeTraverseTownTiers, 1 },
-    { sRikuPrizeTwilightTownTiers, 1 },
-    { sRikuPrizeCastleOblivionTiers, 1 },
-    { sRikuPrizeCastleOblivionTiers, 1 },
+    { sRikuPrizeTraverseTownTiers, ARRAY_COUNT(sRikuPrizeTraverseTownTiers) },
+    { sRikuPrizeAgrabahTiers, ARRAY_COUNT(sRikuPrizeAgrabahTiers) },
+    { sRikuPrizeAtlanticaTiers, ARRAY_COUNT(sRikuPrizeAtlanticaTiers) },
+    { sRikuPrizeOlympusColiseumTiers, ARRAY_COUNT(sRikuPrizeOlympusColiseumTiers) },
+    { sRikuPrizeWonderlandTiers, ARRAY_COUNT(sRikuPrizeWonderlandTiers) },
+    { sRikuPrizeMonstroTiers, ARRAY_COUNT(sRikuPrizeMonstroTiers) },
+    { sRikuPrizeHalloweenTownTiers, ARRAY_COUNT(sRikuPrizeHalloweenTownTiers) },
+    { sRikuPrizeNeverLandTiers, ARRAY_COUNT(sRikuPrizeNeverLandTiers) },
+    { sRikuPrizeHollowBastionTiers, ARRAY_COUNT(sRikuPrizeHollowBastionTiers) },
+    { sRikuPrizeDestinyIslandsTiers, ARRAY_COUNT(sRikuPrizeDestinyIslandsTiers) },
+    { sRikuPrizeTraverseTownTiers, ARRAY_COUNT(sRikuPrizeTraverseTownTiers) },
+    { sRikuPrizeTwilightTownTiers, ARRAY_COUNT(sRikuPrizeTwilightTownTiers) },
+    { sRikuPrizeCastleOblivionTiers, ARRAY_COUNT(sRikuPrizeCastleOblivionTiers) },
+    { sRikuPrizeCastleOblivionTiers, ARRAY_COUNT(sRikuPrizeCastleOblivionTiers) },
 };
 
 static const u16 sKeyToRewardsChances[16] = { 0, 0, 8, 0, 0, 0, 0, 8, 8, 12, 0, 12, 16, 16, 16, 0 };

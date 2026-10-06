@@ -59,10 +59,10 @@ u8 FrdDonaldApplyGravity(FrdDonaldWork* work) {
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
         work->vz = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
@@ -202,7 +202,7 @@ void task_frd_donald_0(FrdDonaldWork* work, FrdArgs* args) {
     default:
         m4aSongNumStart(SONG_VO_DL_ATTACK00);
         BgFxStartFlame(0, 0, 0, Q_8_8(1.5));
-        UpdateDonaldFlame(body, 0, 8, 8);
+        UpdateDonaldFlame(body, FALSE, 8, 8);
         break;
     }
 
@@ -236,7 +236,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         body->x += (work->unk_158 - body->x) >> 4;
         ClampBattlePosition(&body->x, &body->y, -16, 0);
 
-        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+        if (work->variant == 3) UpdateDonaldFlame(body, FALSE, 8, 8);
 
         if (FrdDonaldApplyGravity(work)) {
             work->stateTimer = 0;
@@ -330,7 +330,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
         ApproachValue(&body->x, work->unk_158, work->steps);
 
-        if (work->variant == 3) UpdateDonaldFlame(body, 0, 8, 8);
+        if (work->variant == 3) UpdateDonaldFlame(body, FALSE, 8, 8);
 
         FrdDonaldApplyGravity(work);
 
@@ -361,7 +361,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
         body->x += work->unk_158;
         body->y += work->vy;
         FrdDonaldApplyGravity(work);
-        UpdateDonaldFlame(body, 1, 2, 8);
+        UpdateDonaldFlame(body, TRUE, 2, 8);
 
         switch (ClampBattlePosition(&body->x, &body->y, 0, 0)) {
         case 1:
@@ -412,19 +412,19 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 123);
-                    else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 123);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 123);
+                    else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 123);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 124);
-                    else BgFxStartFire(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 124);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 124);
+                    else BgFxStartFire(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 124);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 125);
-                    else BgFxStartFire(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 125);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 125);
+                    else BgFxStartFire(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 125);
 
                     break;
                 }
@@ -475,19 +475,19 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 126);
-                    else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 126);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 126);
+                    else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 126);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 127);
-                    else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 127);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 127);
+                    else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 127);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, 1, 128);
-                    else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, 0, 128);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x5000, body->y, body->z - 0x800, x, y, z, TRUE, 128);
+                    else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x5000, body->y, body->z - 0x800, x, y, z, FALSE, 128);
 
                     break;
                 }

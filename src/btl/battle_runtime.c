@@ -750,7 +750,7 @@ void UpdateBattleState() {
     }
 
     if (gBtlWork->flags & BTL_FLAG_CARD_PLAY_START) {
-        changed = 1;
+        changed = TRUE;
         gBtlWork->flags &= ~BTL_FLAG_CARD_PLAY_START;
 
         if (gBtlWork->soraOwnsPlay) {
@@ -769,7 +769,7 @@ void UpdateBattleState() {
         gBtlWork->phase = BTL_PHASE_CARD_PLAY;
         gBtlWork->phaseStep = 0;
     } else {
-        changed = 0;
+        changed = FALSE;
     }
 
     if (gBtlWork->flags & BTL_FLAG_PLAYER_DEFEATED) {
@@ -820,7 +820,7 @@ void UpdateBattleState() {
         if (gBtlWork->phaseStep == BTL_START_STEP_EXCLUDE_PALETTES) {
             for (i = 0; i < 32; i++) {
                 if (gBtlWork->fadeExcludedPalettes & (s32)(1U << i)) {
-                    FadeSetPaletteExcluded(i, 1);
+                    FadeSetPaletteExcluded(i, TRUE);
                 }
             }
 
@@ -1038,10 +1038,10 @@ void UpdateBattleState() {
             break;
         }
 
-        busy = 0;
+        busy = FALSE;
 
         if (player->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
-            busy = 1;
+            busy = TRUE;
         }
 
         if (busy) {
@@ -1052,7 +1052,7 @@ void UpdateBattleState() {
 
         while (obj != NULL) {
             if (obj->flags & BTLOBJ_FLAG_IN_CARD_ACTION) {
-                busy = 1;
+                busy = TRUE;
                 break;
             }
 
@@ -1285,10 +1285,10 @@ u8 TryStartCardAction(BtlObj* obj) {
         obj->originX = obj->x;
         obj->originY = obj->y;
         obj->originZ = obj->z;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 UpdateBtlObjReaction(BtlObj* obj) {
@@ -1734,12 +1734,12 @@ u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaini
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
 
         if (++(*cnt) > 2) {
-            return 1;
+            return TRUE;
         }
     }
 
     *remaining = *remaining % value;
-    return 0;
+    return FALSE;
 }
 
 void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining) {
@@ -1761,7 +1761,7 @@ void DropBossPrizes(BtlObj* obj) {
     src.x = obj->x;
     src.y = obj->y;
     src.z = obj->z;
-    src.noTimeout = 1;
+    src.noTimeout = TRUE;
     remaining = obj->exp;
     CreateBtlPrizeTasks(&src, 0, 0x578, &remaining);
     CreateBtlPrizeTasks(&src, 8, 199, &remaining);
@@ -1789,13 +1789,13 @@ void DropEnemyPrizes(BtlObj* obj) {
     src.x = obj->x;
     src.y = obj->y;
     src.z = obj->z;
-    src.noTimeout = 0;
+    src.noTimeout = FALSE;
     remaining = obj->exp;
     cnt = 0;
 
     if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
         if (CountRegularMapCards() <= 4) {
-            enemyCard = 0;
+            enemyCard = FALSE;
         } else {
             switch (obj->kind) {
             case ENEMY_POWERWILD:
@@ -1841,9 +1841,9 @@ void DropEnemyPrizes(BtlObj* obj) {
             }
 
             if (chance > 99) {
-                enemyCard = 1;
+                enemyCard = TRUE;
             } else if (chance == 0) {
-                enemyCard = 0;
+                enemyCard = FALSE;
             } else {
                 if (gGameState.roomEffect == 1 || gGameState.roomEffect == 10) {
                     chance = (chance * 5 * 128) >> 8;
@@ -1851,10 +1851,10 @@ void DropEnemyPrizes(BtlObj* obj) {
 
                 chance = 100 / chance;
                 roll = GetRandom();
-                hit = 0;
+                hit = FALSE;
 
                 if ((u16)roll % chance == 0) {
-                    hit = 1;
+                    hit = TRUE;
                 }
 
                 enemyCard = hit;
@@ -1862,7 +1862,7 @@ void DropEnemyPrizes(BtlObj* obj) {
         }
 
         if (gGameState.flags & GAME_FLAG_RIKU) {
-            enemyCard = 0;
+            enemyCard = FALSE;
         }
 
         if (gBtlWork->battleId != BATTLE_CARD_SOLDIERS && gBtlWork->battleId != BATTLE_EVENT_AGRABAH_2) {
@@ -1935,15 +1935,15 @@ void TryDropPremireCard(BtlObj* obj) {
     src.x = obj->x;
     src.y = obj->y;
     src.z = obj->z;
-    src.noTimeout = 0;
+    src.noTimeout = FALSE;
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &src);
 }
 
 u8 IsPlayerOnPlatform(Collider* platform) {
     if (platform == gBtlWork->platform) {
-        return 1;
+        return TRUE;
     } else {
-        return 0;
+        return FALSE;
     }
 }
 
@@ -2025,13 +2025,13 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
     EnemySpawnRequest request;
     s32 born;
 
-    born = 1;
+    born = TRUE;
     request.flags = 0;
 
     switch (id) {
     case ENEMY_SHADOW:
         request.desc = &gTaskDescEmy00;
-        born = 0;
+        born = FALSE;
         break;
     case ENEMY_RED_NOCTURNE:
         request.desc = &gTaskDescEmy01;
@@ -2106,7 +2106,7 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
         break;
     case ENEMY_NEOSHADOW:
         request.desc = &gTaskDescEmy37;
-        born = 0;
+        born = FALSE;
         break;
     case ENEMY_LARGE_BODY:
         request.desc = &gTaskDescEmy38;
@@ -2135,11 +2135,11 @@ u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
         break;
     case ENEMY_CARD_SOLDIER_HEART:
         request.desc = &gTaskDescEmyTrumpH;
-        born = 0;
+        born = FALSE;
         break;
     case ENEMY_CARD_SOLDIER_SPADE:
         request.desc = &gTaskDescEmyTrumpS;
-        born = 0;
+        born = FALSE;
         break;
     default:
         request.desc = &gTaskDescEmy00;
@@ -2207,17 +2207,17 @@ u8 ConsumeGimmickFlag(u8 index) {
     u8 mask;
 
     if (index > 4) {
-        return 0;
+        return FALSE;
     }
 
     mask = 1 << index;
 
     if (gBtlWork->gimmickFlags & mask) {
         gBtlWork->gimmickFlags &= ~mask;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void DropGimmickCard(u8 index, s32 x, s32 y, s32 z) {
@@ -2617,40 +2617,40 @@ void SetEnemyJiminyFlag(BtlObj* obj) {
 }
 
 u8 StepHitFlash(BtlObj* obj) {
-    if (gBtlWork->paused == 1) {
-        return 0;
+    if (gBtlWork->paused == TRUE) {
+        return FALSE;
     }
 
     if (!(obj->flags & BTLOBJ_FLAG_HURT)) {
-        return 0;
+        return FALSE;
     }
 
     if (obj->hitFlashFrames > 0x17) {
-        return 0;
+        return FALSE;
     }
 
     obj->hitFlashFrames++;
 
     if (obj->hitFlashFrames & 1) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 StepHitFlashSolid(BtlObj* obj) {
-    if (gBtlWork->paused == 1) {
-        return 0;
+    if (gBtlWork->paused == TRUE) {
+        return FALSE;
     }
 
     if (!(obj->flags & BTLOBJ_FLAG_HURT)) {
-        return 0;
+        return FALSE;
     }
 
     if (obj->hitFlashFrames > 0x17) {
-        return 0;
+        return FALSE;
     }
 
     obj->hitFlashFrames++;
-    return 1;
+    return TRUE;
 }

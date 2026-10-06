@@ -340,15 +340,15 @@ void BgFxReset() {
 u8 BgFxIsBlocked(u8 priority) {
     if (BgAnimIsStopped()) {
         sBgFx->priority = priority;
-        return 0;
+        return FALSE;
     }
 
     if (sBgFx->priority < priority) {
-        return 1;
+        return TRUE;
     }
 
     sBgFx->priority = priority;
-    return 0;
+    return FALSE;
 }
 
 void BgFxReleaseEarly(s16 frames) {
@@ -372,7 +372,7 @@ void BgFxInit(u16 colorMode, u16 bg) {
     sBgFx = EwramAlloc(sizeof(BgFx));
 
     for (i = 10; i < 16; i++) {
-        FadeSetPaletteExcluded(i, 1);
+        FadeSetPaletteExcluded(i, TRUE);
     }
 
     if (colorMode == BGCNT_16COLOR) {
@@ -424,10 +424,10 @@ void BgFxUpdate() {
 
 u8 BgFxIsActive() {
     if (sBgFx->flags & BGFX_FLAG_ACTIVE) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void BgFxUpdateBase() {
@@ -3816,15 +3816,15 @@ void BgFxUpdateTornado() {
 
         if (sBgFx->flags & BGFX_FLAG_FLIP_X) {
             if ((u16)timer == 0) {
-                BgFxTornadoLiftOpponents(-timer * 8, 1);
+                BgFxTornadoLiftOpponents(-timer * 8, TRUE);
             } else {
-                BgFxTornadoLiftOpponents(-timer * 8, 0);
+                BgFxTornadoLiftOpponents(-timer * 8, FALSE);
             }
         } else {
             if ((u16)timer == 0) {
-                BgFxTornadoLiftOpponents(timer * 8, 1);
+                BgFxTornadoLiftOpponents(timer * 8, TRUE);
             } else {
-                BgFxTornadoLiftOpponents(timer * 8, 0);
+                BgFxTornadoLiftOpponents(timer * 8, FALSE);
             }
         }
 

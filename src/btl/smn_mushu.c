@@ -85,7 +85,7 @@ void task_smn_mushu_0(SmnMushuWork* work, SmnArgs* args) {
     work->stateTimer = 0;
     work->scaleSteps = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     work->unk_150 = 0;
 
     if (work->mainSide != 0) {
@@ -147,7 +147,7 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
         } else {
             work->state = SMN_MUSHU_STATE_FIRE_WINDUP;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         }
 
         break;
@@ -222,10 +222,10 @@ u8 task_smn_mushu_1(SmnMushuWork* work) {
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartFire(SPELL_TIER_BASE, body->x - 0x3800, body->y, body->z - 0x800,
-                              x, y, z, 1, attack);
+                              x, y, z, TRUE, attack);
             } else {
                 BgFxStartFire(SPELL_TIER_BASE, body->x + 0x3800, body->y, body->z - 0x800,
-                              x, y, z, 0, attack);
+                              x, y, z, FALSE, attack);
             }
         }
 

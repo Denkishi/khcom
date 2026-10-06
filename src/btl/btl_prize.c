@@ -115,7 +115,7 @@ void task_btl_prize_0(BtlPrizeWork* work, BtlPremireSrc* src) {
         break;
     }
 
-    work->collected = 0;
+    work->collected = FALSE;
     work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * speed) >> 8;
@@ -184,7 +184,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
         }
 
         if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
-            hit = 0;
+            hit = FALSE;
             flags = gBtlWork->flags;
 
             if (flags & BTL_FLAG_VS_BATTLE) {
@@ -195,10 +195,10 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     linkParent = flags & BTL_FLAG_VS_LINK_PARENT;
                     rikuNearer = linkParent != 0;
                 } else {
-                    rikuNearer = 1;
+                    rikuNearer = TRUE;
 
                     if (mainDist < rikuDist) {
-                        rikuNearer = 0;
+                        rikuNearer = FALSE;
                     }
                 }
 
@@ -213,7 +213,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
                         DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
                         work->actor = gRikuBtlWork->actor;
-                        hit = 1;
+                        hit = TRUE;
                     } else {
                         if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
@@ -224,7 +224,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                         if (DIST(gBtlWork->actor->x, work->x) < range &&
                             DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                             DIST(gBtlWork->actor->z, work->z) < 12800) {
-                            hit = 1;
+                            hit = TRUE;
                         }
                     }
                 } else {
@@ -237,7 +237,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     if (DIST(gBtlWork->actor->x, work->x) < range &&
                         DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
-                        hit = 1;
+                        hit = TRUE;
                     } else {
                         if (gRikuBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
@@ -249,7 +249,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                             DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
                             DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
                             work->actor = gRikuBtlWork->actor;
-                            hit = 1;
+                            hit = TRUE;
                         }
                     }
                 }
@@ -263,7 +263,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                 if (DIST(gBtlWork->actor->x, work->x) < range &&
                     DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                     DIST(gBtlWork->actor->z, work->z) < 12800) {
-                    hit = 1;
+                    hit = TRUE;
                 }
             }
 
@@ -286,7 +286,7 @@ s32 task_btl_prize_1(BtlPrizeWork* work) {
                     gGameState.progression.exp += work->exp;
                 }
 
-                work->collected = 1;
+                work->collected = TRUE;
                 work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
                 work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;

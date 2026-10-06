@@ -30,7 +30,7 @@ void FieldTransitionInit() {
     work->initialized = 0;
     work->tiles = NULL;
     work->palette = NULL;
-    work->flipped = 0;
+    work->flipped = FALSE;
 }
 
 void FieldTransitionUpdate() {
@@ -62,17 +62,17 @@ void FieldTransitionUpdate() {
             case 45:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1bl01Anims, gRik1bl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1bl01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 64:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ll01Anims, gRik1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1ll01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 83:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1fl01Anims, gRik1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gRik1fl01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 128:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gRik1ff01Anims, gRik1ff01Frames);
@@ -103,17 +103,17 @@ void FieldTransitionUpdate() {
             case 45:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1bl01Anims, gSor1bl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1bl01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 64:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ll01Anims, gSor1ll01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1ll01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 83:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1fl01Anims, gSor1fl01Frames);
                 SetObjTileSource(sFieldTransitionWork->tiles, gSor1fl01Tiles);
-                sFieldTransitionWork->flipped = 1;
+                sFieldTransitionWork->flipped = TRUE;
                 break;
             case 128:
                 AnimChangeWithTables(&sFieldTransitionWork->anim, 0, ANIM_FLAG_LOOP, gSor1ff01Anims, gSor1ff01Frames);

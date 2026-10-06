@@ -84,11 +84,11 @@ u8 task_emy_01_1(EmyWork* work) {
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     targetX = act->x - 0x6400;
-                    BgFxStartFire(SPELL_TIER_BASE, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, 1,
+                    BgFxStartFire(SPELL_TIER_BASE, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, TRUE,
                         0xA7);
                 } else {
                     targetX = act->x + 0x6400;
-                    BgFxStartFire(SPELL_TIER_BASE, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, 0,
+                    BgFxStartFire(SPELL_TIER_BASE, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, FALSE,
                         0xA7);
                 }
             }
@@ -113,11 +113,11 @@ u8 task_emy_01_1(EmyWork* work) {
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     targetX = act->x - 0x6400;
-                    BgFxStartFire(SPELL_TIER_RA, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, 1,
+                    BgFxStartFire(SPELL_TIER_RA, act->x - 0x2600, y, act->z - 0xC00, targetX, y, 0, TRUE,
                         0xA8);
                 } else {
                     targetX = act->x + 0x6400;
-                    BgFxStartFire(SPELL_TIER_RA, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, 0,
+                    BgFxStartFire(SPELL_TIER_RA, act->x + 0x2600, y, act->z - 0xC00, targetX, y, 0, FALSE,
                         0xA8);
                 }
             }

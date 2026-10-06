@@ -167,28 +167,28 @@ void task_btl_lockon_3(BtlLockonWork* work) {
 }
 
 void task_btl_area_0(BtlAreaWork* work) {
-    work->visible = 0;
+    work->visible = FALSE;
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
     work->tiles = LoadObjTiles(gBtlAreaTiles, 0xE0);
     work->timer = 0;
-    work->enabled = 1;
+    work->enabled = TRUE;
 }
 
 u8 task_btl_area_1(BtlAreaWork* work) {
     if (!work->enabled) {
-        work->visible = 0;
+        work->visible = FALSE;
         return 1;
     }
 
     if (gBtlWork->areaUpdated) {
         work->timer = 20;
-        gBtlWork->areaUpdated = 0;
+        gBtlWork->areaUpdated = FALSE;
     }
 
     if (work->timer > 0) {
-        work->visible = 1;
+        work->visible = TRUE;
     } else {
-        work->visible = 0;
+        work->visible = FALSE;
     }
 
     if (work->timer > 0) {

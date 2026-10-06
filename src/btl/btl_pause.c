@@ -42,7 +42,7 @@ void task_btl_pause_0(BtlPauseWork* work) {
     work->gfx = gBtlPauseFrames[0];
     work->gfx2 = gBtlPauseFrames[1];
 #endif
-    work->visible = 0;
+    work->visible = FALSE;
     work->steps = 0;
     work->unk_26 = 0;
     gBtlWork->flags |= BTL_FLAG_PAUSE_DISABLED;
@@ -53,7 +53,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 
     if (GetKeysPressed() & START_BUTTON) {
         if (!(gBtlWork->flags & BTL_FLAG_PAUSE_DISABLED)) {
-            gBtlWork->paused = !gBtlWork->paused ? 1 : 0;
+            gBtlWork->paused = !gBtlWork->paused ? TRUE : FALSE;
         }
     }
 
@@ -61,8 +61,8 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
 
     if (paused) {
         if (!work->visible) {
-            FadeSetPaused(1);
-            work->visible = 1;
+            FadeSetPaused(TRUE);
+            work->visible = TRUE;
             work->x = -0x4000;
             work->y = 0x5000;
             work->x2 = 0x13000;
@@ -124,7 +124,7 @@ s32 task_btl_pause_1(BtlPauseWork* work) {
         m4aMPlayVolumeControl(&gMPlayInfo24, 0xFF, 0x100);
         m4aMPlayVolumeControl(&gMPlayInfo25, 0xFF, 0x100);
         work->visible = paused;
-        FadeSetPaused(0);
+        FadeSetPaused(FALSE);
     }
 
     return 1;
@@ -138,7 +138,7 @@ void task_btl_pause_2(BtlPauseWork* work) {
 }
 
 void task_btl_pause_3(BtlPauseWork* work) {
-    FadeSetPaused(0);
+    FadeSetPaused(FALSE);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
 }

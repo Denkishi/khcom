@@ -87,7 +87,7 @@ void task_monsgage_0(MonsgageWork* work) {
     work->gfx2 = gMonsgageFrame1;
     work->timer = 0;
     work->state = MONSGAGE_STATE_HOLD;
-    work->visible = 1;
+    work->visible = TRUE;
 }
 
 s32 task_monsgage_1(MonsgageWork* work) {
@@ -99,7 +99,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
         switch (work->state) {
         case MONSGAGE_STATE_HOLD:
             if (work->timer == 0) {
-                work->visible = 1;
+                work->visible = TRUE;
                 work->gfx2 = gMonsgageFrame1;
             }
 
@@ -137,9 +137,9 @@ s32 task_monsgage_1(MonsgageWork* work) {
             }
 
             if (work->timer % 8 < 4) {
-                work->visible = 1;
+                work->visible = TRUE;
             } else {
-                work->visible = 0;
+                work->visible = FALSE;
             }
 
             if ((work->timer % 4) == 0) {
@@ -179,9 +179,9 @@ s32 task_monsgage_1(MonsgageWork* work) {
             }
 
             if (work->timer % 8 < 4) {
-                work->visible = 1;
+                work->visible = TRUE;
             } else {
-                work->visible = 0;
+                work->visible = FALSE;
             }
 
             if (work->timer > 99 && gBtlWork->enemyCount == 0) {

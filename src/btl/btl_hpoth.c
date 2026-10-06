@@ -139,7 +139,7 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
     }
 
     work->hpRatio = Q_8_8(1);
-    work->firstUpdate = 1;
+    work->firstUpdate = TRUE;
     work->unk_5C = 1;
     work->timer = 0;
     work->prevHp = 0;
@@ -162,9 +162,9 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     }
 
     if (work->gaugeMode != BTL_HPOTH_GAUGE_MODE_EXTRA_BAR && work->hpRatio < Q_8_8(0.25)) {
-        lowHp = 1;
+        lowHp = TRUE;
     } else {
-        lowHp = 0;
+        lowHp = FALSE;
     }
 
     if (actor->hp < work->prevHp) {
@@ -181,7 +181,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
     }
 
     if (work->firstUpdate) {
-        work->firstUpdate = 0;
+        work->firstUpdate = FALSE;
         work->displayHp = actor->hp;
     } else if (work->displayHp < actor->hp) {
         work->displayHp += 3;

@@ -189,7 +189,7 @@ u8 task_emy_37_1(Emy37Work* work) {
 
         if (AnimIsFinished(&work->base.anim)) {
             work->base.state = EMY37_STATE_SUNK_MOVE;
-            ColliderSetDisabled(&act->collider, 1);
+            ColliderSetDisabled(&act->collider, TRUE);
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
@@ -248,7 +248,7 @@ u8 task_emy_37_1(Emy37Work* work) {
             if (work->base.stateTimer > 160) {
                 w->rotation = 0;
                 work->base.state = EMY37_STATE_RISE;
-                ColliderSetDisabled(&act->collider, 0);
+                ColliderSetDisabled(&act->collider, FALSE);
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 20;
                 act->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
@@ -305,7 +305,7 @@ u8 task_emy_37_1(Emy37Work* work) {
     case EMY37_STATE_IDLE:
         if (work->base.stateTimer == 0) {
             act->centerHeight = 20;
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             AnimChangeWithDef(w->base.def->animDef, &w->base.anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START, w->base.tiles);
         }

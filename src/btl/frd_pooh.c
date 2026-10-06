@@ -54,10 +54,10 @@ u8 FrdPoohApplyGravity(FrdPoohWork* work) {
     if (body->z > body->ground) {
         body->z = body->ground;
         work->velocity = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 enum FrdPoohState {
@@ -126,41 +126,41 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
     switch (work->state) {
     case FRD_POOH_STATE_WANDER: {
-        s32 flip = 0;
+        s32 flip = FALSE;
         u8 angle = GetAngle(body->x, body->y, work->targetX, work->targetY);
 
         switch (((angle + 16) & 255) >> 5) {
         case 0:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
-            flip = 1;
+            flip = TRUE;
             break;
         case 1:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
-            flip = 1;
+            flip = TRUE;
             break;
         case 2:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
-            flip = 1;
+            flip = TRUE;
             break;
         case 3:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
-            flip = 1;
+            flip = TRUE;
             break;
         case 4:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
-            flip = 0;
+            flip = FALSE;
             break;
         case 5:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
-            flip = 0;
+            flip = FALSE;
             break;
         case 6:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
-            flip = 0;
+            flip = FALSE;
             break;
         case 7:
             AnimChangeWithDef(sFrdPoohAnimDefsEu, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
-            flip = 0;
+            flip = FALSE;
             break;
         }
 
@@ -197,7 +197,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
         if (ColliderIsTouchingType(&body->collider, 1)) {
             work->state = FRD_POOH_STATE_RIDE;
-            ColliderSetDisabled(&body->collider, 1);
+            ColliderSetDisabled(&body->collider, TRUE);
             work->bob = 0;
         }
 
@@ -260,7 +260,7 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
             work->counter = 0;
             work->velocity = -0x380;
             work->speed = 0x500;
-            work->bounce = 0;
+            work->bounce = FALSE;
         }
 
         break;
@@ -278,12 +278,12 @@ u8 task_frd_pooh_1(FrdPoohWork* work) {
 
             if (AnimIsFinished(&work->anim)) {
                 work->state = FRD_POOH_STATE_RECOVER;
-                ColliderSetDisabled(&body->collider, 0);
+                ColliderSetDisabled(&body->collider, FALSE);
             }
         }
 
         if (FrdPoohApplyGravity(work) && !work->bounce) {
-            work->bounce = 1;
+            work->bounce = TRUE;
             BtlMapStartShake();
         }
 

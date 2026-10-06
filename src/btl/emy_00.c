@@ -111,7 +111,7 @@ u8 task_emy_00_1(EmyWork* work) {
 
         if (AnimIsFinished(&w->anim)) {
             w->state = EMY00_STATE_SUNK_MOVE;
-            ColliderSetDisabled(&act->collider, 1);
+            ColliderSetDisabled(&act->collider, TRUE);
             act->flags |= BTLOBJ_FLAG_INTANGIBLE;
             act->centerHeight = 0;
         }
@@ -126,7 +126,7 @@ u8 task_emy_00_1(EmyWork* work) {
 
             if (w->stateTimer > 100) {
                 w->state = EMY00_STATE_RISE;
-                ColliderSetDisabled(&act->collider, 0);
+                ColliderSetDisabled(&act->collider, FALSE);
                 act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
                 act->centerHeight = 16;
                 w->stateTimer = 0;
@@ -181,7 +181,7 @@ u8 task_emy_00_1(EmyWork* work) {
         break;
     case EMY00_STATE_IDLE:
         if (w->stateTimer == 0) {
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             act->flags &= ~(BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_CARD_USE_BLOCKED);
             AnimChangeWithDef(work->def->animDef, &work->anim, 0, ANIM_FLAG_LOOP | ANIM_FLAG_RANDOM_START,
                 work->tiles);

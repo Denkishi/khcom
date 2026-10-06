@@ -60,7 +60,7 @@ void EmyInit(EmyWork* work, const EmyDef* def, EmyObj* obj) {
     work->stateTimer = 0;
     work->steps = 0;
     work->flags = 0;
-    work->visible = 1;
+    work->visible = TRUE;
     work->angle = 0;
     work->speed = def->speed;
     work->vz = 0;
@@ -173,11 +173,11 @@ u8 EmyUpdateReaction(EmyWork* work) {
     actor->prevY = actor->y;
 
     if (work->state == EMY_STATE_DEFEATED) {
-        return 0;
+        return FALSE;
     }
 
     if (work->state == EMY_STATE_WARPED) {
-        return 0;
+        return FALSE;
     }
 
     switch (UpdateBtlObjReaction(actor)) {
@@ -191,7 +191,7 @@ u8 EmyUpdateReaction(EmyWork* work) {
         work->stateTimer = 0;
         break;
     case BTL_REACTION_GRAVITY_DEFEATED:
-        SetBtlObjUnhittable(actor, 1);
+        SetBtlObjUnhittable(actor, TRUE);
         work->state = EMY_STATE_GRAVITY_SQUASH;
         work->stateTimer = 0;
         break;
@@ -201,12 +201,12 @@ u8 EmyUpdateReaction(EmyWork* work) {
         work->stateTimer = 0;
         break;
     case BTL_REACTION_WARPED:
-        SetBtlObjUnhittable(actor, 1);
+        SetBtlObjUnhittable(actor, TRUE);
         work->state = EMY_STATE_WARPED;
         work->stateTimer = 0;
         break;
     case BTL_REACTION_DEFEATED:
-        SetBtlObjUnhittable(actor, 1);
+        SetBtlObjUnhittable(actor, TRUE);
         EmyStartKnockback(work);
         work->state = EMY_STATE_DEFEATED;
         work->stateTimer = 0;
@@ -224,11 +224,11 @@ u8 EmyUpdateReaction(EmyWork* work) {
         break;
     case BTL_REACTION_CARD_ACTION:
         work->stateTimer = 0;
-        return 1;
+        return TRUE;
     case BTL_REACTION_CARD_BROKEN:
         work->state = EMY_STATE_CARD_BROKEN;
         work->stateTimer = 0;
-        work->visible = 1;
+        work->visible = TRUE;
         break;
     case BTL_REACTION_STOPPED:
         if (work->state != EMY_STATE_STOPPED) {
@@ -240,7 +240,7 @@ u8 EmyUpdateReaction(EmyWork* work) {
         break;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void EmyFinishSpawn(EmyWork* work) {
@@ -570,7 +570,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         }
 
         if (work->stateTimer >= work->def->hitStunFrames) {
-            s32 facingTarget = 0;
+            s32 facingTarget = FALSE;
 
             ClearBtlObjActionFlags(actor);
             work->state = EMY_STATE_HURT_RECOVER;
@@ -580,18 +580,18 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (GetRandom() % 5 == 0) {
                         actor->flags &= ~BTLOBJ_FLAG_FACING_LEFT;
-                        facingTarget = 1;
+                        facingTarget = TRUE;
                     }
                 } else {
-                    facingTarget = 1;
+                    facingTarget = TRUE;
                 }
             } else {
                 if (actor->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    facingTarget = 1;
+                    facingTarget = TRUE;
                 } else {
                     if (GetRandom() % 5 == 0) {
                         actor->flags |= BTLOBJ_FLAG_FACING_LEFT;
-                        facingTarget = 1;
+                        facingTarget = TRUE;
                     }
                 }
             }
@@ -617,7 +617,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         break;
     case EMY_STATE_GRAVITY_SQUASH:
         if (work->stateTimer == 0) {
-            ColliderSetDisabled(&actor->collider, 1);
+            ColliderSetDisabled(&actor->collider, TRUE);
             actor->flags |= BTLOBJ_FLAG_INTANGIBLE;
             AnimChangeWithDef(work->def->animDef, &work->anim, 1, 0, work->tiles);
             work->anim.frame = 0;
@@ -654,7 +654,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         break;
     case EMY_STATE_GRAVITY_RECOVER:
         if (work->stateTimer == 0) {
-            ColliderSetDisabled(&actor->collider, 0);
+            ColliderSetDisabled(&actor->collider, FALSE);
             work->steps = 10;
         }
 

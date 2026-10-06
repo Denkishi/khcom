@@ -304,13 +304,13 @@ void task_btl_map_0(BtlMapWork* work) {
 }
 
 void BtlMapResetShake() {
-    sBtlMapShakeActive = 0;
+    sBtlMapShakeActive = FALSE;
     sBtlMapShakeStep = 0;
     sBtlMapShakeOffset = 0;
 }
 
 void BtlMapStartShake() {
-    sBtlMapShakeActive = 1;
+    sBtlMapShakeActive = TRUE;
     sBtlMapShakeStep = 0;
     sBtlMapShakeOffset = 0;
 }
@@ -321,7 +321,7 @@ void BtlMapUpdateShake() {
         sBtlMapShakeStep++;
 
         if (sBtlMapShakeStep > 0x1F) {
-            sBtlMapShakeActive = 0;
+            sBtlMapShakeActive = FALSE;
             sBtlMapShakeOffset = 0;
             gBtlWork->rotation = 0;
         }

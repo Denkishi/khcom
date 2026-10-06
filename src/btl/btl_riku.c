@@ -565,18 +565,18 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         if (arg->side == 0) {
             act->x = 0xC000;
             act->flags = 0;
-            work->sioKeysA = 1;
+            work->sioKeysA = TRUE;
         } else {
             act->x = 0x14000;
             act->flags = BTLOBJ_FLAG_FACING_LEFT;
-            work->sioKeysA = 0;
+            work->sioKeysA = FALSE;
         }
 
         if (arg->mainSide != 0) {
-            work->mainSide = 1;
+            work->mainSide = TRUE;
             act->btl = gBtlWork;
         } else {
-            work->mainSide = 0;
+            work->mainSide = FALSE;
             act->btl = gRikuBtlWork;
         }
 
@@ -584,8 +584,8 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
         act->hp = 1000;
         act->attack = 10;
     } else {
-        work->mainSide = 1;
-        work->sioKeysA = 1;
+        work->mainSide = TRUE;
+        work->sioKeysA = TRUE;
         act->btl = gBtlWork;
 
         if (act->btl->flags & BTL_FLAG_HUM_BATTLE) {
@@ -996,7 +996,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         }
 
         work->scaleX = work->scaleY = Q_8_8(1);
-        ColliderSetDisabled(&act->collider, 0);
+        ColliderSetDisabled(&act->collider, FALSE);
         DisableBtlRikuPassThrough(work);
         act->flags &= 0xFFFFDFFBFF7FFFFFLL;
         work->speed = 0;
@@ -1371,7 +1371,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             SetBattleZoom(12, Q_8_8(1), gBtlWork->x2, gBtlWork->y2);
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             act->flags &= 0xFFFFDFFBFF7FFFFFLL;
             DisableBtlRikuPassThrough(work);
             act->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
@@ -1406,7 +1406,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             }
 
             work->scaleX = work->scaleY = Q_8_8(1);
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             DisableBtlRikuPassThrough(work);
             act->flags &= 0xFFFFDFFBFF7FFFFFLL;
             act->btl->flags |= BTL_FLAG_DISMISS_SUMMONS;
@@ -1818,15 +1818,15 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             enemy = work->target;
 
             if (enemy != NULL) {
-                ahead = 0;
+                ahead = FALSE;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                     if (enemy->x < act->x - 8192) {
-                        ahead = 1;
+                        ahead = TRUE;
                     }
                 } else {
                     if (enemy->x > act->x + 8192) {
-                        ahead = 1;
+                        ahead = TRUE;
                     }
                 }
 
@@ -1841,7 +1841,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             s32 launch;
 
             step = 0;
-            launch = 0;
+            launch = FALSE;
 
             switch (AnimGetFrame(&work->anim)) {
             case 0:
@@ -1858,7 +1858,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             case 6:
                 step = 7;
-                launch = 1;
+                launch = TRUE;
                 break;
             }
 
@@ -1872,9 +1872,9 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 work->flags |= BTL_RIKU_FLAG_FIRE_LAUNCHED;
 
                 if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartFire(SPELL_TIER_DARK, act->x - 18944, act->y, act->z - 6144, act->originX - 51200, act->originY, act->z - 6144, 1, 10);
+                    BgFxStartFire(SPELL_TIER_DARK, act->x - 18944, act->y, act->z - 6144, act->originX - 51200, act->originY, act->z - 6144, TRUE, 10);
                 } else {
-                    BgFxStartFire(SPELL_TIER_DARK, act->x + 18944, act->y, act->z - 6144, act->originX + 51200, act->originY, act->z - 6144, 0, 10);
+                    BgFxStartFire(SPELL_TIER_DARK, act->x + 18944, act->y, act->z - 6144, act->originX + 51200, act->originY, act->z - 6144, FALSE, 10);
                 }
             }
         }
@@ -2027,7 +2027,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             s32 attack;
 
             step = 0;
-            strike = 0;
+            strike = FALSE;
             attack = 4;
 
             switch (AnimGetGfxIndex(&work->anim)) {
@@ -2036,7 +2036,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             case 2:
                 step = 5;
-                strike = 1;
+                strike = TRUE;
                 attack = 4;
                 break;
             case 4:
@@ -2047,7 +2047,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             case 6:
                 step = 20;
-                strike = 1;
+                strike = TRUE;
                 attack = 5;
                 break;
             case 7:
@@ -2130,7 +2130,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             s32 attack;
 
             step = 0;
-            strike = 0;
+            strike = FALSE;
             attack = 4;
 
             switch (AnimGetGfxIndex(&work->anim)) {
@@ -2139,7 +2139,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             case 2:
                 step = 5;
-                strike = 1;
+                strike = TRUE;
                 attack = 4;
                 break;
             case 4:
@@ -2285,7 +2285,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
         if (work->anim.timer == 0) {
             step = 0;
-            strike = 0;
+            strike = FALSE;
             attack = 4;
 
             switch (AnimGetGfxIndex(&work->anim)) {
@@ -2303,7 +2303,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 break;
             case 6:
                 step = 20;
-                strike = 1;
+                strike = TRUE;
                 attack = 5;
                 break;
             case 7:
@@ -3975,7 +3975,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
     case BTL_RIKU_STATE_SUMMON_EXIT:
         if (work->stateTimer == 0) {
             work->steps = 20;
-            ColliderSetDisabled(&act->collider, 1);
+            ColliderSetDisabled(&act->collider, TRUE);
             act->flags |= BTLOBJ_FLAG_IGNORE_BOUNDS;
             act->flags |= BTLOBJ_FLAG_NO_BREAK_POP;
             act->originZ = act->z;
@@ -4082,7 +4082,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
             break;
         case 18:
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             act->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             act->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
             break;
@@ -4104,7 +4104,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
         break;
     case BTL_RIKU_STATE_SUMMON_RETURN_LAND:
         if (work->stateTimer == 0) {
-            ColliderSetDisabled(&act->collider, 0);
+            ColliderSetDisabled(&act->collider, FALSE);
             act->flags &= ~BTLOBJ_FLAG_IGNORE_BOUNDS;
             act->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
 

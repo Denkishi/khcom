@@ -67,10 +67,10 @@ enum Emy07State {
 void task_emy_07_0(Emy07Work* work, void* obj) {
     EmyInit(&work->base, &sEmy07Def, obj);
     work->successCount = 0;
-    work->thunderRequested = 0;
+    work->thunderRequested = FALSE;
     work->base.idleState = EMY07_STATE_IDLE;
     work->base.actor.flags |= BTLOBJ_FLAG_NEVER_USES_CARDS;
-    work->rewarded = 0;
+    work->rewarded = FALSE;
 }
 
 u8 task_emy_07_1(Emy07Work* work) {
@@ -103,7 +103,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         switch (prevState) {
         case EMY07_STATE_REQUEST_FIRE:
-            w->thunderRequested = 0;
+            w->thunderRequested = FALSE;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_FIRE) {
                 ClearBtlObjActionFlags(act);
@@ -113,7 +113,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             break;
         case EMY07_STATE_REQUEST_BLIZZARD:
-            w->thunderRequested = 0;
+            w->thunderRequested = FALSE;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_BLIZZARD) {
                 ClearBtlObjActionFlags(act);
@@ -123,7 +123,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
             break;
         case EMY07_STATE_REQUEST_THUNDER:
-            w->thunderRequested = 1;
+            w->thunderRequested = TRUE;
 
             if (act->hitFlags & ATTACK_FLAG_ELEMENT_THUNDER) {
                 ClearBtlObjActionFlags(act);
@@ -135,7 +135,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
 
         act->hp = act->maxHp;
-        ColliderSetDisabled(&act->collider, 0);
+        ColliderSetDisabled(&act->collider, FALSE);
         break;
     }
 
@@ -205,7 +205,7 @@ u8 task_emy_07_1(Emy07Work* work) {
 
         break;
     case EMY07_STATE_SATISFIED:
-        if (w->thunderRequested != 0) {
+        if (w->thunderRequested != FALSE) {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 2, 0, w->base.tiles);
         } else {
             AnimChangeWithDef(sEmy07AnimDefs, &w->base.anim, 1, 0, w->base.tiles);
@@ -218,7 +218,7 @@ u8 task_emy_07_1(Emy07Work* work) {
         }
 
         if (w->successCount == 2 && gFrameCounter % 10 == 0) {
-            spawn.facingLeft = 1;
+            spawn.facingLeft = TRUE;
             spawn.hitPhase = 0;
             spawn.x = act->x;
             spawn.y = act->y;
@@ -233,7 +233,7 @@ u8 task_emy_07_1(Emy07Work* work) {
             if (w->successCount > 2) {
                 work->base.stateTimer = 0;
                 work->base.state = EMY07_STATE_VANISH;
-                w->rewarded = 1;
+                w->rewarded = TRUE;
                 SetJiminyFlag(JIMINY_RECORD_HEARTLESS_WHITE_MUSHROOM);
             } else {
                 work->base.stateTimer = 0;

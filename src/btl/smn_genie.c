@@ -88,7 +88,7 @@ void task_smn_genie_0(SmnGenieWork* work, SmnArgs* args) {
     work->stateTimer = 0;
     work->steps = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     work->speedX = 0;
     work->speedY = 0;
 
@@ -249,7 +249,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         if (work->steps <= 0) {
             work->state = SMN_GENIE_STATE_IDLE;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         } else {
             work->stateTimer++;
             work->steps--;
@@ -302,7 +302,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
         SmnGenieFollowTarget(work);
 
         if ((s16)work->stateTimer > 40) {
-            work->fired = 0;
+            work->fired = FALSE;
 
             switch ((u16)(GetRandom() % 3)) {
             case 0:
@@ -355,7 +355,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                     BgFxStartThunder(SPELL_TIER_RA, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 146);
                 }
 
-                work->fired = 1;
+                work->fired = TRUE;
             }
         } else {
             BgAnimIsStopped();
@@ -395,12 +395,12 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 }
 
                 if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                    BgFxStartGravity(SPELL_TIER_RA, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, 1, 148);
+                    BgFxStartGravity(SPELL_TIER_RA, body->x - 0xD00, body->y, body->z - 0x6E00, x, y, z, TRUE, 148);
                 } else {
-                    BgFxStartGravity(SPELL_TIER_RA, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, 0, 148);
+                    BgFxStartGravity(SPELL_TIER_RA, body->x + 0xD00, body->y, body->z - 0x6E00, x, y, z, FALSE, 148);
                 }
 
-                work->fired = 1;
+                work->fired = TRUE;
                 FadeStartOut(FADE_MODE_GRAY, 8);
             }
         } else {
@@ -442,7 +442,7 @@ u8 task_smn_genie_1(SmnGenieWork* work) {
                 }
 
                 BgFxStartStop(SPELL_TIER_RA, x, y, z, 147);
-                work->fired = 1;
+                work->fired = TRUE;
             }
         }
 

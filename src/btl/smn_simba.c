@@ -80,7 +80,7 @@ void task_smn_simba_0(SmnSimbaWork* work, SmnArgs* args) {
     work->steps = 0;
     work->unk_14C = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     TaskPoolInit(&work->tasks, 2);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -117,7 +117,7 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
         } else {
             work->state = SMN_SIMBA_STATE_ROAR;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         }
 
         break;
@@ -168,9 +168,9 @@ u8 task_smn_simba_1(SmnSimbaWork* work) {
             SetBattleZoom(30, Q_8_8(0.8), 0x10000, 0x15E00);
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartShockwave(body->x - 0x1400, body->y + body->z - 0x1400, 1);
+                BgFxStartShockwave(body->x - 0x1400, body->y + body->z - 0x1400, TRUE);
             } else {
-                BgFxStartShockwave(body->x + 0x1400, body->y + body->z - 0x1400, 0);
+                BgFxStartShockwave(body->x + 0x1400, body->y + body->z - 0x1400, FALSE);
             }
 
             switch (work->variant) {

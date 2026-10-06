@@ -99,7 +99,7 @@ void task_smn_bambi_0(SmnBambiWork* work, SmnArgs* args) {
     work->hopTimer = 0;
     work->unk_150 = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     work->unk_160 = 0;
     work->target = NULL;
     work->targetIndex = 0;
@@ -120,10 +120,10 @@ u8 SmnBambiApplyGravity(SmnBambiWork* work) {
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
         work->vz = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 BtlObj* SmnBambiNextTarget(SmnBambiWork* work) {
@@ -207,7 +207,7 @@ u8 task_smn_bambi_1(SmnBambiWork* work) {
             }
 
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         }
 
         break;

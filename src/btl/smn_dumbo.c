@@ -84,7 +84,7 @@ void task_smn_dumbo_0(SmnDumboWork* work, SmnArgs* args) {
     work->steps = 0;
     work->unk_14C = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -118,7 +118,7 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
         } else {
             work->state = SMN_DUMBO_STATE_SPLASH_WINDUP;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         }
 
         break;
@@ -157,10 +157,10 @@ u8 task_smn_dumbo_1(SmnDumboWork* work) {
 
             if (body->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 BgFxStartDumboSplash(work->variant, body->x - 0x1C00, body->y,
-                              body->z - 0x1B00, 0, 0x9C);
+                              body->z - 0x1B00, FALSE, 0x9C);
             } else {
                 BgFxStartDumboSplash(work->variant, body->x + 0x1C00, body->y,
-                              body->z - 0x1B00, 1, 0x9C);
+                              body->z - 0x1B00, TRUE, 0x9C);
             }
 
             m4aSongNumStart(SONG_EF_DAMBO_SPLOOP);

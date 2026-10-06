@@ -225,9 +225,9 @@ u8 task_emy_08_1(Emy08Work* work) {
         if (work->base.anim.timer == 0
                 && AnimGetFrame(&work->base.anim) == 7) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
-                BgFxStartGas(act->x, act->y, act->z - 0xA00, 1);
+                BgFxStartGas(act->x, act->y, act->z - 0xA00, TRUE);
             } else {
-                BgFxStartGas(act->x, act->y, act->z - 0xA00, 0);
+                BgFxStartGas(act->x, act->y, act->z - 0xA00, FALSE);
             }
         }
 

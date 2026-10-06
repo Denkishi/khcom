@@ -43,10 +43,10 @@ u8 FrdBeastApplyGravity(FrdBeastWork* work) {
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
         work->vz = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 enum FrdBeastState {

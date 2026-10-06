@@ -162,10 +162,10 @@ u8 task_emy_83_1(Emy83Work* work) {
         if (AnimGetGfxIndex(&work->base.anim) == 6 && work->base.anim.timer == 0) {
             if (act->flags & BTLOBJ_FLAG_FACING_LEFT) {
                 spawn.x = act->x - 0x1000;
-                spawn.facingLeft = 1;
+                spawn.facingLeft = TRUE;
             } else {
                 spawn.x = act->x + 0x1000;
-                spawn.facingLeft = 0;
+                spawn.facingLeft = FALSE;
             }
 
             spawn.y = act->y;

@@ -98,7 +98,7 @@ void task_smn_tink_0(SmnTinkWork* work, SmnArgs* args) {
     work->stateTimer = 0;
     work->steps = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     work->unk_150 = 0;
     work->flyAngle = 0;
     work->frameCount = 0;
@@ -187,7 +187,7 @@ u8 task_smn_tink_1(SmnTinkWork* work) {
         if (work->steps <= 0) {
             work->state = SMN_TINK_STATE_HOVER;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
             m4aSongNumStart(SONG_EF_TINK_LOOP);
         } else {
             work->stateTimer++;

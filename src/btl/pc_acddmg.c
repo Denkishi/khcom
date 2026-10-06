@@ -14,7 +14,7 @@ void task_pc_acddmg_0(PcAcdDmgWork* work, BtlObj* obj) {
     work->actor = obj;
     work->groundFrames = 0;
     work->timer = 0x28;
-    work->grounded = 0;
+    work->grounded = FALSE;
 }
 
 s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
@@ -24,7 +24,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
         obj = work->actor;
 
         if (obj->z >= 0) {
-            work->grounded = 1;
+            work->grounded = TRUE;
 
             if (work->timer <= 0) {
                 if (work->groundFrames % 60 == 0) {
@@ -37,7 +37,7 @@ s32 task_pc_acddmg_1(PcAcdDmgWork* work) {
             }
         } else {
             if (work->grounded) {
-                work->grounded = 0;
+                work->grounded = FALSE;
                 work->groundFrames = 0;
                 work->timer = 0;
             }

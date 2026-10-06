@@ -94,7 +94,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     void* tens;
     u8 leading;
 
-    tenThousands = GetExpDigitGfx(value / 10000, 0);
+    tenThousands = GetExpDigitGfx(value / 10000, FALSE);
     work->gfx2[0] = tenThousands;
     value %= 10000;
     leading = tenThousands != NULL;
@@ -104,7 +104,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     value %= 1000;
 
     if (thousands != NULL) {
-        leading = 1;
+        leading = TRUE;
     }
 
     hundreds = GetExpDigitGfx(value / 100, leading);
@@ -112,7 +112,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     value %= 100;
 
     if (hundreds != NULL) {
-        leading = 1;
+        leading = TRUE;
     }
 
     tens = GetExpDigitGfx(value / 10, leading);
@@ -120,7 +120,7 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
     value %= 10;
 
     if (tens != NULL) {
-        leading = 1;
+        leading = TRUE;
     }
 
 #ifdef VERSION_JP

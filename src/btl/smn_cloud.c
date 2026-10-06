@@ -195,7 +195,7 @@ void task_smn_cloud_0(SmnCloudWork* work, SmnArgs* args) {
     work->unk_158 = 0;
     work->scaleX = 10;
     work->scaleY = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     work->attackPhase = SMN_CLOUD_ATTACK_PHASE_OPENER;
     work->target = NULL;
     work->attackCount = 0;
@@ -235,15 +235,15 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
             switch (work->variant) {
             case 0:
                 work->state = SMN_CLOUD_STATE_DOUBLE_SLASH;
-                work->animating = 1;
+                work->animating = TRUE;
                 break;
             case 1:
                 work->state = SMN_CLOUD_STATE_TRIPLE_SLASH;
-                work->animating = 1;
+                work->animating = TRUE;
                 break;
             case 2:
                 work->state = SMN_CLOUD_STATE_RISE;
-                work->animating = 1;
+                work->animating = TRUE;
                 break;
             default:
                 work->state = SMN_CLOUD_STATE_TELEPORT_OUT;
@@ -309,7 +309,7 @@ u8 task_smn_cloud_1(SmnCloudWork* work) {
         ApproachValue(&work->scaleY, Q_8_8(1), work->steps);
 
         if (--work->steps <= 0) {
-            work->animating = 1;
+            work->animating = TRUE;
             work->state = SMN_CLOUD_STATE_TRIPLE_SLASH;
             work->stateTimer = 0;
         } else work->stateTimer++;

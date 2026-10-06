@@ -73,7 +73,7 @@ void task_smn_king_0(SmnKingWork* work, SmnArgs* args) {
     work->steps = 0;
     work->unk_14C = 0;
     work->scale = 10;
-    work->animating = 0;
+    work->animating = FALSE;
     TaskPoolInit(&work->tasks, 1);
     TaskCreate(&work->tasks, &gTaskDescBtlShadow, body);
 }
@@ -89,10 +89,10 @@ u8 SmnKingApplyGravity(SmnKingWork* work) {
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
         work->vz = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 u8 task_smn_king_1(SmnKingWork* work) {
@@ -119,7 +119,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
         if (work->steps <= 0) {
             work->state = SMN_KING_STATE_FALL;
             work->stateTimer = 0;
-            work->animating = 1;
+            work->animating = TRUE;
         } else {
             work->stateTimer++;
             work->steps--;

@@ -59,7 +59,7 @@ void task_btl_escape_0(BtlEscapeWork* work) {
     work->gfx3 = frames[1];
     work->progressRatio = 0;
     work->progress = 0;
-    work->visible = 0;
+    work->visible = FALSE;
     work->timer = 0;
 }
 
@@ -71,22 +71,22 @@ s32 task_btl_escape_1(BtlEscapeWork* work) {
     if (!(gBtlWork->flags & BTL_FLAG_PUSHING_EDGE)) {
         if (work->visible) {
             work->progress = 0;
-            work->visible = 0;
+            work->visible = FALSE;
             work->timer = 0;
         }
     } else {
         if (work->timer <= 15) {
             work->timer++;
-            work->visible = 0;
+            work->visible = FALSE;
         } else {
-            work->visible = 1;
+            work->visible = TRUE;
             work->progressRatio = (work->progress << 8) / work->progressMax;
 
             if (work->progress >= work->progressMax) {
                 gGameState.flags |= GAME_FLAG_BATTLE_NOT_WON;
                 gBtlWork->flags |= BTL_FLAG_ESCAPED;
                 gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
-                work->visible = 0;
+                work->visible = FALSE;
             } else {
                 work->progress += 256;
             }

@@ -102,7 +102,7 @@ u8 task_emy_16_1(Emy16Work* work) {
             }
         }
 
-        w->pTaskStarted = 0;
+        w->pTaskStarted = FALSE;
     }
 
     switch (work->base.state) {
@@ -114,16 +114,16 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.x = act->x - 0x1000;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x1000;
-                spawn.facingLeft = 1;
+                spawn.facingLeft = TRUE;
             } else {
                 spawn.x = act->x + 0x1000;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x1000;
-                spawn.facingLeft = 0;
+                spawn.facingLeft = FALSE;
             }
 
             w->pTask = TaskCreate(&w->tasks, &sTaskDescEmy16P, &spawn);
-            w->pTaskStarted = 1;
+            w->pTaskStarted = TRUE;
         }
 
         if (w->pTaskStarted) {
@@ -141,12 +141,12 @@ u8 task_emy_16_1(Emy16Work* work) {
                 spawn.x = act->x - 0xC00;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x200;
-                spawn.facingLeft = 1;
+                spawn.facingLeft = TRUE;
             } else {
                 spawn.x = act->x + 0xC00;
                 spawn.y = act->y;
                 spawn.z = act->z - 0x200;
-                spawn.facingLeft = 0;
+                spawn.facingLeft = FALSE;
             }
 
             w->bTask = TaskCreate(&w->tasks, &sTaskDescEmy16B, &spawn);
@@ -182,9 +182,9 @@ enum Emy16bState {
 
 void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     if (spawn->facingLeft) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);
@@ -198,10 +198,10 @@ void task_emy_16_b_0(Emy16bWork* work, EmySpawn* spawn) {
     work->vx = 0x200;
     work->vz = -0x34C;
     work->timer = 0;
-    work->visible = 1;
-    work->bounced = 0;
+    work->visible = TRUE;
+    work->bounced = FALSE;
     ColliderInit(&work->collider, 0x0C, 4, 3);
-    ColliderSetDisabled(&work->collider, 1);
+    ColliderSetDisabled(&work->collider, TRUE);
 }
 
 u8 task_emy_16_b_1(Emy16bWork* work) {
@@ -220,7 +220,7 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         if (!work->bounced
                 && TestAttackBox(work->x, work->y, work->z, 4, 4, 4)) {
             work->vx = -(work->vx >> 1);
-            work->bounced = 1;
+            work->bounced = TRUE;
         }
 
         if (work->z >= 0) {
@@ -231,14 +231,14 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         break;
     case EMY16B_STATE_LANDED:
         if (work->timer == 0) {
-            ColliderSetDisabled(&work->collider, 0);
+            ColliderSetDisabled(&work->collider, FALSE);
             AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         }
 
         if (work->collider.colliding) {
             work->timer = 0;
             work->state = EMY16B_STATE_TRIGGERED;
-            ColliderSetDisabled(&work->collider, 1);
+            ColliderSetDisabled(&work->collider, TRUE);
         } else if (work->timer > 0x64) {
             work->timer = 0;
             work->state = EMY16B_STATE_FADE_OUT;
@@ -263,14 +263,14 @@ u8 task_emy_16_b_1(Emy16bWork* work) {
         break;
     case EMY16B_STATE_FADE_OUT:
         if ((work->timer & 3) == 0) {
-            work->visible = work->visible == 0;
+            work->visible = work->visible == FALSE;
         }
 
         if (work->collider.colliding) {
             work->timer = 0;
             work->state = EMY16B_STATE_TRIGGERED;
-            ColliderSetDisabled(&work->collider, 1);
-            work->visible = 1;
+            ColliderSetDisabled(&work->collider, TRUE);
+            work->visible = TRUE;
         } else if (work->timer > 0x3C) {
             return 0;
         } else {
@@ -333,9 +333,9 @@ void task_emy_16_b_3(Emy16bWork* work) {
 
 void task_emy_16_p_0(Emy16pWork* work, EmySpawn* spawn) {
     if (spawn->facingLeft) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     work->palette = LoadObjPalette(gEmy16Palette, 0x20);

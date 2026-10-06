@@ -29,7 +29,7 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles2 = AllocObjTiles(0x80, gBHpgagETiles);
     work->tiles3 = AllocObjTiles(0x20, gBHpgagETiles);
     work->palette = LoadObjPalette(gBStatesPalette, 0x20);
-    work->visible = 0;
+    work->visible = FALSE;
     work->hpRatio = Q_8_8(1);
     work->actor = NULL;
     work->gaugeSize = 0;
@@ -45,17 +45,17 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
 
     if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         actor = gRikuBtlWork->actor;
-        work->visible = 1;
+        work->visible = TRUE;
     } else {
         if (gBtlWork->actor2 == NULL) {
             if (work->visible) {
-                work->visible = 0;
+                work->visible = FALSE;
             }
 
             return 1;
         }
 
-        work->visible = 1;
+        work->visible = TRUE;
         actor = gBtlWork->actor2;
     }
 

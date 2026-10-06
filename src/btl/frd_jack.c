@@ -54,10 +54,10 @@ u8 FrdJackApplyGravity(FrdJackWork* work) {
     if (body->z > body->groundZ) {
         body->z = body->groundZ;
         work->vz = 0;
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 enum FrdJackState {
@@ -347,19 +347,19 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 133);
-                    else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 133);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 133);
+                    else BgFxStartFire(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 133);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 134);
-                    else BgFxStartFire(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 134);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 134);
+                    else BgFxStartFire(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 134);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 135);
-                    else BgFxStartFire(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 135);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartFire(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 135);
+                    else BgFxStartFire(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 135);
 
                     break;
                 }
@@ -412,19 +412,19 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_BASE, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 142);
-                    else BgFxStartGravity(SPELL_TIER_BASE, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 142);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_BASE, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 142);
+                    else BgFxStartGravity(SPELL_TIER_BASE, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 142);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_RA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 143);
-                    else BgFxStartGravity(SPELL_TIER_RA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 143);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_RA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 143);
+                    else BgFxStartGravity(SPELL_TIER_RA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 143);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_GA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, 1, 144);
-                    else BgFxStartGravity(SPELL_TIER_GA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, 0, 144);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartGravity(SPELL_TIER_GA, body->x - 0x2800, body->y, body->z - 0x1800, x, y, z, TRUE, 144);
+                    else BgFxStartGravity(SPELL_TIER_GA, body->x + 0x2800, body->y, body->z - 0x1800, x, y, z, FALSE, 144);
 
                     break;
                 }
@@ -470,19 +470,19 @@ u8 task_frd_jack_1(FrdJackWork* work) {
 
                 switch (work->variant) {
                 case 0:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 136);
-                    else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 136);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_BASE, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 136);
+                    else BgFxStartBlizzard(SPELL_TIER_BASE, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 136);
 
                     break;
                 case 1:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 137);
-                    else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 137);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_RA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 137);
+                    else BgFxStartBlizzard(SPELL_TIER_RA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 137);
 
                     break;
                 case 2:
                 default:
-                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, 1, 138);
-                    else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, 0, 138);
+                    if (body->flags & BTLOBJ_FLAG_FACING_LEFT) BgFxStartBlizzard(SPELL_TIER_GA, body->x - 0x4A00, body->y, body->z - 0x1800, x, y, z, TRUE, 138);
+                    else BgFxStartBlizzard(SPELL_TIER_GA, body->x + 0x4A00, body->y, body->z - 0x1800, x, y, z, FALSE, 138);
 
                     break;
                 }

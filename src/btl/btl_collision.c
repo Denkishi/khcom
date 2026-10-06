@@ -369,38 +369,38 @@ u8 CanAttackBoxHitBtlObj(BtlObj* obj, s32 x, s32 y, s32 z, s16 halfX, s16 halfY,
     }
 
     if (flags & (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_INTANGIBLE | BTLOBJ_FLAG_UNHITTABLE)) {
-        return 0;
+        return FALSE;
     }
 
     if (x - (halfX << 8) > obj->x + (obj->radiusX << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (x + (halfX << 8) < obj->x - (obj->radiusX << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (y - (halfY << 8) > obj->y + (obj->radiusY << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (y + (halfY << 8) < obj->y - (obj->radiusY << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (z - (halfZ << 8) > obj->z) {
-        return 0;
+        return FALSE;
     }
 
     if (z + (halfZ << 8) < obj->z - (obj->height << 8)) {
-        return 0;
+        return FALSE;
     }
 
     if (owner->invincibleTimer > 0) {
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 void AbsorbAttack(BtlObj* target, BtlObj* source, const BattleAttackDef* attack) {
@@ -783,7 +783,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
     BtlObj* opponent;
 
-    gBtlWork->areaUpdated = 1;
+    gBtlWork->areaUpdated = TRUE;
     gBtlWork->x3 = x;
     gBtlWork->y3 = y;
     gBtlWork->z3 = z;
@@ -799,29 +799,29 @@ u8 TestAttackBox(s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ) {
         }
 
         if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
-            return 1;
+            return TRUE;
         }
     } else if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
         opponent = ListPoolFirst(&gBtlWork->pool);
 
         while (opponent != NULL) {
             if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
-                return 1;
+                return TRUE;
             }
 
             opponent = ListPoolNext(&opponent->node);
         }
 
-        return 0;
+        return FALSE;
     } else {
         opponent = gBtlWork->actor;
 
         if (CanAttackBoxHitBtlObj(opponent, x, y, z, halfX, halfY, halfZ)) {
-            return 1;
+            return TRUE;
         }
     }
 
-    return 0;
+    return FALSE;
 }
 
 s32 ApplyAttackToBtlObj(s32 attack, BtlObj* obj) {
@@ -842,8 +842,8 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
 
     def = &sBattleAttackDefs[attack];
     hitCount = 0;
-    blocked = 0;
-    gBtlWork->areaUpdated = 1;
+    blocked = FALSE;
+    gBtlWork->areaUpdated = TRUE;
     gBtlWork->x3 = x;
     gBtlWork->y3 = y;
     gBtlWork->z3 = z;
@@ -893,7 +893,7 @@ s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 ha
                     break;
                 }
             } else if (enemyResult == 2) {
-                blocked = 1;
+                blocked = TRUE;
             }
 
             opponent = ListPoolNext(&opponent->node);
@@ -989,7 +989,7 @@ void ColliderPoolsInit() {
 void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height) {
     void* pool;
     collider->otherType = 0;
-    collider->colliding = 0;
+    collider->colliding = FALSE;
     collider->standFlags = 0;
     collider->flags = 0;
     collider->radius = radius << 8;
@@ -1028,7 +1028,7 @@ void ColliderClearPoolContacts(ListPool* pool) {
     Collider* collider = ListPoolFirst(pool);
 
     while (collider != NULL) {
-        collider->colliding = 0;
+        collider->colliding = FALSE;
         collider->touchedTypes = 0;
         collider->standFlags = 0;
         collider = ListPoolNext(&collider->node);
@@ -1072,8 +1072,8 @@ void ColliderCheckPoolPairs(ListPool* poolA, ListPool* poolB) {
                     dz = colliderA->z - colliderB->z;
 
                     if (dz < colliderA->height && -dz < colliderB->height) {
-                        colliderB->colliding = 1;
-                        colliderA->colliding = 1;
+                        colliderB->colliding = TRUE;
+                        colliderA->colliding = TRUE;
                         colliderA->otherType = colliderB->type;
                         colliderB->otherType = colliderA->type;
                         colliderA->touchedTypes |= 1 << colliderB->type;
@@ -1167,7 +1167,7 @@ void ColliderUpdateAll() {
 void ColliderSetDisabled(Collider* collider, u8 on) {
     if (on) {
         collider->node.flags |= LIST_NODE_FLAG_SKIP;
-        collider->colliding = 0;
+        collider->colliding = FALSE;
         collider->standFlags = 0;
     } else {
         collider->node.flags &= ~LIST_NODE_FLAG_SKIP;
@@ -1188,8 +1188,8 @@ void ColliderSetHeight(Collider* collider, u16 height) {
 
 u8 ColliderIsTouchingType(Collider* collider, s32 bit) {
     if (collider->touchedTypes & (1 << bit)) {
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }

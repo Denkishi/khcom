@@ -99,18 +99,18 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->variant = args->variant;
 
     if (args->facingLeft != 0) {
-        work->facingLeft = 1;
+        work->facingLeft = TRUE;
     } else {
-        work->facingLeft = 0;
+        work->facingLeft = FALSE;
     }
 
     if (args->mainSide != 0) {
-        work->mainSide = 1;
+        work->mainSide = TRUE;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gBtlWork->actor;
         work->palette = LoadObjPalette(gSoraPalette, 32);
     } else {
-        work->mainSide = 0;
+        work->mainSide = FALSE;
         work->tiles2 = gBtlWork->tiles2;
         work->actor = gRikuBtlWork->actor;
         work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);

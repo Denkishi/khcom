@@ -152,12 +152,12 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
     }
 
     work->hpRatio = Q_8_8(1);
-    work->firstUpdate = 1;
+    work->firstUpdate = TRUE;
     work->unk_5C = 1;
     work->timer = 0;
     work->prevHp = 0;
     work->displayHp = 0;
-    work->alarmPlaying = 0;
+    work->alarmPlaying = FALSE;
 }
 
 s32 task_btl_hpply_1(BtlHpplyWork* work) {
@@ -175,9 +175,9 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     }
 
     if (work->gaugeMode != BTL_HPPLY_GAUGE_MODE_EXTRA_BAR && work->hpRatio <= 63) {
-        lowHp = 1;
+        lowHp = TRUE;
     } else {
-        lowHp = 0;
+        lowHp = FALSE;
     }
 
     if (actor->hp < work->prevHp) {
@@ -194,7 +194,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
     }
 
     if (work->firstUpdate) {
-        work->firstUpdate = 0;
+        work->firstUpdate = FALSE;
         work->displayHp = actor->hp;
     } else if (work->displayHp < actor->hp) {
         work->displayHp += 3;
@@ -234,7 +234,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
 
     if (lowHp) {
         if (!work->alarmPlaying) {
-            work->alarmPlaying = 1;
+            work->alarmPlaying = TRUE;
             m4aSongNumStart(SONG_SYS_ALART);
         }
 
@@ -297,7 +297,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         }
 
         if (work->alarmPlaying) {
-            work->alarmPlaying = 0;
+            work->alarmPlaying = FALSE;
             m4aSongNumStop(SONG_SYS_ALART);
         }
     }

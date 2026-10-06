@@ -51,7 +51,7 @@ void task_btl_premire_0(BtlPremireWork* work, BtlPremireSrc* src) {
 
     work->bounceSpeed = 0x400;
     speed = 384;
-    work->collected = 0;
+    work->collected = FALSE;
     work->orbitRadius = 0x100;
     gBtlWork->prizeCount++;
     work->vx = (gSineTable[angle] * speed) >> 8;
@@ -107,7 +107,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
         }
 
         if (work->flags & BTL_PRIZE_FLAG_CAN_COLLECT) {
-            hit = 0;
+            hit = FALSE;
             flags = gBtlWork->flags;
 
             if (flags & BTL_FLAG_VS_BATTLE) {
@@ -122,7 +122,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
                         DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
                         work->actor = gRikuBtlWork->actor;
-                        hit = 1;
+                        hit = TRUE;
                     } else {
                         if (gBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
@@ -133,7 +133,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                         if (DIST(gBtlWork->actor->x, work->x) < range &&
                             DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                             DIST(gBtlWork->actor->z, work->z) < 12800) {
-                            hit = 1;
+                            hit = TRUE;
                         }
                     }
                 } else {
@@ -146,7 +146,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                     if (DIST(gBtlWork->actor->x, work->x) < range &&
                         DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                         DIST(gBtlWork->actor->z, work->z) < 12800) {
-                        hit = 1;
+                        hit = TRUE;
                     } else {
                         if (gRikuBtlWork->hcEffect == HC_EFFECT_DRAW) {
                             range = 0x10000;
@@ -158,7 +158,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                             DIST(gRikuBtlWork->actor->y, work->y) < (range >> 1) &&
                             DIST(gRikuBtlWork->actor->z, work->z) < 12800) {
                             work->actor = gRikuBtlWork->actor;
-                            hit = 1;
+                            hit = TRUE;
                         }
                     }
                 }
@@ -172,7 +172,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                 if (DIST(gBtlWork->actor->x, work->x) < range &&
                     DIST(gBtlWork->actor->y, work->y) < (range >> 1) &&
                     DIST(gBtlWork->actor->z, work->z) < 12800) {
-                    hit = 1;
+                    hit = TRUE;
                 }
             }
 
@@ -180,7 +180,7 @@ s32 task_btl_premire_1(BtlPremireWork* work) {
                 m4aSongNumStart(SONG_SYS_POWER_GET);
                 gBtlWork->flags |= BTL_FLAG_PREMIRE_COLLECTED;
                 work->timer = 0;
-                work->collected = 1;
+                work->collected = TRUE;
                 work->timer = 0;
                 work->angle = GetAngle(work->actor->x, work->actor->y, work->x, work->y);
                 work->flags &= ~BTL_PRIZE_FLAG_DRAW_SHADOW;

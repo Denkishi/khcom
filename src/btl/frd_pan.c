@@ -79,12 +79,12 @@ void task_frd_pan_0(FrdPanWork* work, FrdArgs* args) {
         body->x = (gBtlWork->xMax + 0x30) << 8;
         body->flags = (BTLOBJ_FLAG_FACING_LEFT | BTLOBJ_FLAG_LARGE_SHADOW);
         work->vx = -0x800;
-        work->flyLeft = 0;
+        work->flyLeft = FALSE;
     } else {
         body->x = (gBtlWork->xMin - 0x30) << 8;
         body->flags = BTLOBJ_FLAG_LARGE_SHADOW;
         work->vx = 0x800;
-        work->flyLeft = 1;
+        work->flyLeft = TRUE;
     }
 
     work->targetX = 0x10000;

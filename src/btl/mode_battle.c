@@ -84,7 +84,7 @@ void mode_battle_0(u32 mode) {
             SetBgPriority(0, 2);
             SetBgPriority(2, 0);
             SetBgPriority(1, 1);
-            SetBgOverflow(2, 0);
+            SetBgOverflow(2, FALSE);
             SetBgSize(1, BGCNT_TXT512x256);
             break;
         case BATTLE_GUARD_ARMOR:
@@ -101,7 +101,7 @@ void mode_battle_0(u32 mode) {
             SetBgPriority(0, 2);
             SetBgPriority(2, 0);
             SetBgPriority(1, 1);
-            SetBgOverflow(2, 0);
+            SetBgOverflow(2, FALSE);
             break;
         }
     } else if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
@@ -113,8 +113,8 @@ void mode_battle_0(u32 mode) {
         SetupBg(gBtlWork->bg, 2, 28, 10);
         SetBgPriority(gBtlWork->mapBg, 2);
         SetBgPriority(gBtlWork->bg, 0);
-        SetBgOverflow(gBtlWork->mapBg, 1);
-        SetBgOverflow(gBtlWork->bg, 0);
+        SetBgOverflow(gBtlWork->mapBg, TRUE);
+        SetBgOverflow(gBtlWork->bg, FALSE);
     } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         gBtlWork->bg = 2;
         gBtlWork->mapBg = 3;
@@ -148,8 +148,8 @@ void mode_battle_0(u32 mode) {
         SetupBg(2, 2, 28, 10);
         SetBgPriority(3, 2);
         SetBgPriority(2, 0);
-        SetBgOverflow(3, 1);
-        SetBgOverflow(2, 0);
+        SetBgOverflow(3, TRUE);
+        SetBgOverflow(2, FALSE);
     } else {
         gBtlWork->bg = 2;
         gBtlWork->mapBg = 3;
@@ -204,8 +204,8 @@ void mode_battle_0(u32 mode) {
         SetupBg(2, 2, 28, 10);
         SetBgPriority(3, 2);
         SetBgPriority(2, 0);
-        SetBgOverflow(3, 1);
-        SetBgOverflow(2, 0);
+        SetBgOverflow(3, TRUE);
+        SetBgOverflow(2, FALSE);
     }
 
     TaskPoolInit(&gBtlWork->taskPools[0], 40);

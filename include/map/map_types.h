@@ -143,6 +143,21 @@ typedef struct MapRoomState {
     TaskPool tasks;
 } MapRoomState;
 
+enum MapCellType {
+    MAP_CELL_TYPE_FLOOR,
+    MAP_CELL_TYPE_BACK_WALL_TOP,
+    MAP_CELL_TYPE_BACK_WALL_BASE,
+    MAP_CELL_TYPE_LEFT_WALL_TOP,
+    MAP_CELL_TYPE_LEFT_WALL_BASE,
+    MAP_CELL_TYPE_RIGHT_WALL_TOP,
+    MAP_CELL_TYPE_RIGHT_WALL_BASE,
+    MAP_CELL_TYPE_BACK_WALL_FACE,
+    MAP_CELL_TYPE_LEFT_WALL_FACE,
+    MAP_CELL_TYPE_RIGHT_WALL_FACE,
+    MAP_CELL_TYPE_NONE,
+    MAP_CELL_TYPE_UNSET
+};
+
 typedef struct MapCell {
     u16 flags;
     u8 type;

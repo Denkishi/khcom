@@ -173,10 +173,10 @@ u8 MapEnmPlaceAtStairs(MapEnmArgs* arg) {
                 s32 ground;
                 s32 coord;
 
-                if (cell->type == 4) {
+                if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE) {
                     arg->angle = 0x53;
                     coord = (x << 13) + 0x1800;
-                } else if (cell->type == 6) {
+                } else if (cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE) {
                     arg->angle = 0xAD;
                     coord = (x << 13) + 0x800;
                 } else {
@@ -845,7 +845,8 @@ s16 MapRowsToWallBase(s16 x, s16 y) {
             return 0;
         }
 
-        if (cell->type == 0 || cell->type == 4 || cell->type == 2 || cell->type == 6) {
+        if (cell->type == MAP_CELL_TYPE_FLOOR || cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE ||
+            cell->type == MAP_CELL_TYPE_BACK_WALL_BASE || cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE) {
             return i;
         }
     }
@@ -870,7 +871,7 @@ s32 MapWallFaceIsUnreserved(s16 x, s16 y, u16 width) {
                 return FALSE;
             }
 
-            if (cell->type < 7 || cell->type > 9) {
+            if (cell->type < MAP_CELL_TYPE_BACK_WALL_FACE || cell->type > MAP_CELL_TYPE_RIGHT_WALL_FACE) {
                 break;
             }
         }
@@ -891,7 +892,7 @@ u8 MapGmkFindFloor2x2(FldPos* pos) {
         s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 2, 2, 0)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 2, 2, MAP_CELL_TYPE_FLOOR)) {
                 MapReserveArea(rx, sy, 2, 2);
                 FldPosPlaceAtCell(pos, rx, sy, 2, 2);
                 return 1;
@@ -924,17 +925,18 @@ u8 MapGmkFindLeftWallBase2x3(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, 8)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, MAP_CELL_TYPE_LEFT_WALL_FACE)) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (MapCellIsFreeOfType(rx, y1, 4)) {
+                if (MapCellIsFreeOfType(rx, y1, MAP_CELL_TYPE_LEFT_WALL_BASE)) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (MapCellIsFreeOfType(rx, y2, 0)) {
+                    if (MapCellIsFreeOfType(rx, y2, MAP_CELL_TYPE_FLOOR)) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (MapCellIsFreeOfType(x1, sy, 4) && MapCellIsFreeOfType(x1, y1, 0) &&
-                            MapCellIsFreeOfType(x1, y2, 0) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
+                        if (MapCellIsFreeOfType(x1, sy, MAP_CELL_TYPE_LEFT_WALL_BASE) &&
+                            MapCellIsFreeOfType(x1, y1, MAP_CELL_TYPE_FLOOR) &&
+                            MapCellIsFreeOfType(x1, y2, MAP_CELL_TYPE_FLOOR) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(pos, rx, sy, 2, 3);
                             return 1;
@@ -971,10 +973,10 @@ u8 MapGmkFindLeftWallBase1x4(FldPos* pos) {
 
         for (j = 0; j < colRange; j++) {
             if ((u8)MapGmkIsAreaSparse(x, cy)) {
-                if (MapCellIsFreeOfType(x, cy, 4)) {
-                    if (MapCellIsFreeOfType(x, cy + 1, 0)) {
-                        if (MapCellIsFreeOfType(x, cy + 2, 0)) {
-                            if (MapCellIsFreeOfType(x, cy + 3, 0)) {
+                if (MapCellIsFreeOfType(x, cy, MAP_CELL_TYPE_LEFT_WALL_BASE)) {
+                    if (MapCellIsFreeOfType(x, cy + 1, MAP_CELL_TYPE_FLOOR)) {
+                        if (MapCellIsFreeOfType(x, cy + 2, MAP_CELL_TYPE_FLOOR)) {
+                            if (MapCellIsFreeOfType(x, cy + 3, MAP_CELL_TYPE_FLOOR)) {
                                 if ((u8)MapCellHeightExceeds(x, cy, 3)) {
                                     MapReserveArea(x, cy, 1, 4);
                                     FldPosPlaceAtCell(pos, x, cy, 1, 4);
@@ -1014,17 +1016,18 @@ u8 MapGmkFindRightWallBase2x3(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, 6)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, MAP_CELL_TYPE_RIGHT_WALL_BASE)) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (MapCellIsFreeOfType(rx, y1, 0)) {
+                if (MapCellIsFreeOfType(rx, y1, MAP_CELL_TYPE_FLOOR)) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (MapCellIsFreeOfType(rx, y2, 0)) {
+                    if (MapCellIsFreeOfType(rx, y2, MAP_CELL_TYPE_FLOOR)) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (MapCellIsFreeOfType(x1, sy, 9) && MapCellIsFreeOfType(x1, y1, 6) &&
-                            MapCellIsFreeOfType(x1, y2, 0) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
+                        if (MapCellIsFreeOfType(x1, sy, MAP_CELL_TYPE_RIGHT_WALL_FACE) &&
+                            MapCellIsFreeOfType(x1, y1, MAP_CELL_TYPE_RIGHT_WALL_BASE) &&
+                            MapCellIsFreeOfType(x1, y2, MAP_CELL_TYPE_FLOOR) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(pos, rx, sy, 2, 3);
                             return 1;
@@ -1060,7 +1063,7 @@ u8 MapGmkFindLeftWallFace3x3(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 8)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, MAP_CELL_TYPE_LEFT_WALL_FACE)) {
                 u16 leftRows;
                 u16 rightRows;
 
@@ -1106,7 +1109,7 @@ u8 MapGmkFindRightWallFace3x3(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 9)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, MAP_CELL_TYPE_RIGHT_WALL_FACE)) {
                 u16 leftRows;
                 u16 rightRows;
 
@@ -1152,10 +1155,10 @@ u8 MapGmkFindLeftWallTop2x2(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, 0)) {
-                if (MapCellIsFreeOfType(rx, sy + 1, 3)) {
-                    if (MapCellIsFreeOfType(rx + 1, sy, 3) &&
-                        MapCellIsFreeOfType(rx + 1, sy + 1, 8)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, MAP_CELL_TYPE_FLOOR)) {
+                if (MapCellIsFreeOfType(rx, sy + 1, MAP_CELL_TYPE_LEFT_WALL_TOP)) {
+                    if (MapCellIsFreeOfType(rx + 1, sy, MAP_CELL_TYPE_LEFT_WALL_TOP) &&
+                        MapCellIsFreeOfType(rx + 1, sy + 1, MAP_CELL_TYPE_LEFT_WALL_FACE)) {
                         u16 leftRows = MapRowsToWallBase(rx, sy + 1);
                         u16 rightRows = MapRowsToWallBase(rx + 1, sy);
 
@@ -1198,8 +1201,8 @@ u8 MapGmkFindBackWallTop1x2(FldPos* pos) {
 
         for (j = 0; j < colRange; j++) {
             if ((u8)MapGmkIsAreaSparse(x, cy)) {
-                if (MapCellIsFreeOfType(x, cy, 1)) {
-                    if (MapCellIsFreeOfType(x, cy + 1, 7)) {
+                if (MapCellIsFreeOfType(x, cy, MAP_CELL_TYPE_BACK_WALL_TOP)) {
+                    if (MapCellIsFreeOfType(x, cy + 1, MAP_CELL_TYPE_BACK_WALL_FACE)) {
                         wallRows = MapRowsToWallBase(x, cy);
 
                         if (wallRows > 8) {
@@ -1240,12 +1243,12 @@ u8 MapGmkFindRightWallTop2x2(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, 5)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, MAP_CELL_TYPE_RIGHT_WALL_TOP)) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (MapCellIsFreeOfType(rx, y1, 9)) {
-                    if (MapCellIsFreeOfType(rx + 1, sy, 0) &&
-                        MapCellIsFreeOfType(rx + 1, y1, 5)) {
+                if (MapCellIsFreeOfType(rx, y1, MAP_CELL_TYPE_RIGHT_WALL_FACE)) {
+                    if (MapCellIsFreeOfType(rx + 1, sy, MAP_CELL_TYPE_FLOOR) &&
+                        MapCellIsFreeOfType(rx + 1, y1, MAP_CELL_TYPE_RIGHT_WALL_TOP)) {
                         u16 leftRows = MapRowsToWallBase(rx, sy);
                         u16 rightRows = MapRowsToWallBase(rx + 1, y1);
 
@@ -1286,17 +1289,18 @@ u8 MapGmkFindBackWallBase2x3(FldPos* pos) {
         sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, 2)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && MapCellIsFreeOfType(rx, sy, MAP_CELL_TYPE_BACK_WALL_BASE)) {
                 s32 y1 = (s16)(sy + 1);
 
-                if (MapCellIsFreeOfType(rx, y1, 0)) {
+                if (MapCellIsFreeOfType(rx, y1, MAP_CELL_TYPE_FLOOR)) {
                     s32 y2 = (s16)(sy + 2);
 
-                    if (MapCellIsFreeOfType(rx, y2, 0)) {
+                    if (MapCellIsFreeOfType(rx, y2, MAP_CELL_TYPE_FLOOR)) {
                         s32 x1 = (s16)(rx + 1);
 
-                        if (MapCellIsFreeOfType(x1, sy, 2) && MapCellIsFreeOfType(x1, y1, 0) &&
-                            MapCellIsFreeOfType(x1, y2, 0) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
+                        if (MapCellIsFreeOfType(x1, sy, MAP_CELL_TYPE_BACK_WALL_BASE) &&
+                            MapCellIsFreeOfType(x1, y1, MAP_CELL_TYPE_FLOOR) &&
+                            MapCellIsFreeOfType(x1, y2, MAP_CELL_TYPE_FLOOR) && (u8)MapCellHeightExceeds(rx, sy, 3)) {
                             MapReserveArea(rx, sy, 2, 3);
                             FldPosPlaceAtCell(pos, rx, sy, 2, 3);
                             return 1;
@@ -1326,7 +1330,7 @@ u8 MapGmkFindFloor3x3(FldPos* pos) {
         s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, 0)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 3, 3, MAP_CELL_TYPE_FLOOR)) {
                 MapReserveArea(rx, sy, 3, 3);
                 FldPosPlaceAtCell(pos, rx, sy, 3, 3);
                 return 1;
@@ -1353,7 +1357,7 @@ u8 MapGmkFindFloor4x4(FldPos* pos) {
         s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 4, 4, 0)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 4, 4, MAP_CELL_TYPE_FLOOR)) {
                 MapReserveArea(rx, sy, 4, 4);
                 FldPosPlaceAtCell(pos, rx, sy, 4, 4);
                 return 1;
@@ -1380,7 +1384,7 @@ u8 MapGmkFindFloor5x5(FldPos* pos) {
         s16 sy = gMapRoomState->topRow + ry;
 
         for (i = 0; i < w; i++) {
-            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 5, 5, 0)) {
+            if ((u8)MapGmkIsAreaSparse(rx, sy) && (u8)MapAreaIsFreeOfType(rx, sy, 5, 5, MAP_CELL_TYPE_FLOOR)) {
                 MapReserveArea(rx, sy, 5, 5);
                 FldPosPlaceAtCell(pos, rx, sy, 5, 5);
                 return 1;
@@ -1410,7 +1414,7 @@ u8 MapGmkFindBaseFloor2x2(FldPos* pos) {
         for (i = 0; i < w; i++) {
             s32 sx = (s16)(platform->left + rx);
 
-            if ((u8)MapAreaIsFreeOfType(sx, sy, 2, 2, 0) && platform->z == MapCellAt(sx, sy)->lowerZ) {
+            if ((u8)MapAreaIsFreeOfType(sx, sy, 2, 2, MAP_CELL_TYPE_FLOOR) && platform->z == MapCellAt(sx, sy)->lowerZ) {
                 MapReserveArea(sx, sy, 2, 2);
                 FldPosPlaceAtCell(pos, sx, sy, 2, 2);
                 return 1;
@@ -1780,23 +1784,23 @@ void* GetCellMaskTable(u8 type) {
     s32 i;
 
     switch (type) {
-    case 1:
-    case 2:
-    case 7:
-    case 8:
-    case 9:
+    case MAP_CELL_TYPE_BACK_WALL_TOP:
+    case MAP_CELL_TYPE_BACK_WALL_BASE:
+    case MAP_CELL_TYPE_BACK_WALL_FACE:
+    case MAP_CELL_TYPE_LEFT_WALL_FACE:
+    case MAP_CELL_TYPE_RIGHT_WALL_FACE:
         i = 1;
         break;
-    case 3:
+    case MAP_CELL_TYPE_LEFT_WALL_TOP:
         i = 2;
         break;
-    case 5:
+    case MAP_CELL_TYPE_RIGHT_WALL_TOP:
         i = 3;
         break;
-    case 4:
+    case MAP_CELL_TYPE_LEFT_WALL_BASE:
         i = 4;
         break;
-    case 6:
+    case MAP_CELL_TYPE_RIGHT_WALL_BASE:
         i = 5;
         break;
     default:

@@ -1991,13 +1991,13 @@ void Task_MapGmk_Jump_0(MapGmkJumpWork* work, MapPlatform* arg) {
     obj->fieldPosition.y -= work->obj.fieldPosition.ground;
 
     switch (arg->spotType) {
-    case 3:
+    case MAP_CELL_TYPE_LEFT_WALL_TOP:
         obj->angle = 211;
         break;
-    case 5:
+    case MAP_CELL_TYPE_RIGHT_WALL_TOP:
         obj->angle = 45;
         break;
-    case 0:
+    case MAP_CELL_TYPE_FLOOR:
     default:
         obj->angle = 0;
         break;

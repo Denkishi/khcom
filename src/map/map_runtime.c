@@ -1137,15 +1137,15 @@ u8 GetFldPosClimbDir(FldPos* pos) {
 
     if (cell->flags & MAP_CELL_FLAG_STAIRS) {
         switch (cell->type) {
-        case 3:
-        case 4:
-        case 8:
+        case MAP_CELL_TYPE_LEFT_WALL_TOP:
+        case MAP_CELL_TYPE_LEFT_WALL_BASE:
+        case MAP_CELL_TYPE_LEFT_WALL_FACE:
             return 2;
-        case 5:
-        case 6:
-        case 9:
+        case MAP_CELL_TYPE_RIGHT_WALL_TOP:
+        case MAP_CELL_TYPE_RIGHT_WALL_BASE:
+        case MAP_CELL_TYPE_RIGHT_WALL_FACE:
             return 1;
-        case 7:
+        case MAP_CELL_TYPE_BACK_WALL_FACE:
             return 0;
         }
     }
@@ -1164,7 +1164,7 @@ s32 FieldFloorAt(s32 x, s32 y, s32 z) {
         return 0;
     }
 
-    if (cell->type == 4 || cell->type == 6) {
+    if (cell->type == MAP_CELL_TYPE_LEFT_WALL_BASE || cell->type == MAP_CELL_TYPE_RIGHT_WALL_BASE) {
         if (MapCellMaskBitAt(cell, x, y) != 0) {
             floorZ = cell->lowerZ;
         } else {

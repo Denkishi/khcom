@@ -44,7 +44,7 @@ void MapTutorialWaitStart(MapTutorialWork* work) {
     if (gFieldState->lockonTarget == NULL) {
         flags = gFieldState->flags;
 
-        if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.tutorialFlags & 0x10)) {
+        if (!(flags & FIELD_FLAG_MENU_OPEN) && !(gMapRoomState->flags & ROOM_FLAG_SAVE_MENU_OPEN) && (gGameState.progression.tutorialFlags & TUTORIAL_FLAG_SAVE_POINT)) {
             gMapRoomState->flags |= ROOM_FLAG_TUTORIAL_ACTIVE;
             gFieldState->flags = flags | FIELD_FLAG_FREEZE_PLAYER;
             CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_TUTORIAL_0);
@@ -119,7 +119,7 @@ void MapTutorialBarrelBreak(MapTutorialWork* work) {
 
 void MapTutorialWaitPrizeCard(MapTutorialWork* work) {
     if ((gMapRoomState->flags & ROOM_FLAG_PRIZE_CARD_ACTIVE) == 0) {
-        gGameState.progression.tutorialFlags |= 0x2000;
+        gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP_BARREL;
         gFieldState->flags |= FIELD_FLAG_FREEZE_PLAYER;
         CreateCardMessageTask(&work->tasks, 0, CARD_MSG_MAP_TUTORIAL_1);
         work->update = MapTutorialSpawnEnemy;
@@ -225,7 +225,7 @@ void Task_MapTutorial_0(MapTutorialWork* work) {
     work->tiles = NULL;
     work->palette = NULL;
     work->flip = FALSE;
-    barrelDone = gGameState.progression.tutorialFlags & 0x2000;
+    barrelDone = gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP_BARREL;
 
     if (barrelDone == 0) {
         work->shadowVisible = FALSE;

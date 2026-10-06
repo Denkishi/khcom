@@ -517,7 +517,7 @@ void mode_ms_top_1() {
 
         break;
     case MS_TOP_STATE_CHECK_INTRO:
-        if ((gGameState.progression.tutorialFlags & 0x80) == 0) {
+        if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MOOGLE_SHOP) == 0) {
             sMsTopIntroIndex = 0;
             sMsTopState = MS_TOP_STATE_INTRO;
         } else {
@@ -530,7 +530,7 @@ void mode_ms_top_1() {
 
         if (sMsTopIntroIndex > 2 && sMsTopPendingMessage < 0 && !IsMessageWindowOpen()) {
             SetJiminyFlag(JIMINY_RECORD_CHARACTER_MOOGLES);
-            gGameState.progression.tutorialFlags |= 0x80;
+            gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MOOGLE_SHOP;
             sMsTopState = MS_TOP_STATE_CHECK_FREE_PACK;
         }
 

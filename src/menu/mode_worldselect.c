@@ -36,6 +36,7 @@
 #include "card_ids.h"
 #include "card_message_data.h"
 #include "event_ids.h"
+#include "player_progression_types.h"
 
 #ifdef VERSION_EU
 static void* sWorldselectBg1Maps[5] = {
@@ -693,7 +694,7 @@ void mode_worldselect_0() {
     void** bufferPtr;
 
     SpriteReset();
-    sWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ 1) & 1;
+    sWorldselectFirstVisit = (gGameState.progression.tutorialFlags ^ TUTORIAL_FLAG_WORLDSELECT) & TUTORIAL_FLAG_WORLDSELECT;
     sWorldselectBgAnimActive = FALSE;
     sWorldselectCancelled = FALSE;
     FadeStartIn(FADE_MODE_ADD_WHITE, 16);
@@ -830,7 +831,7 @@ void mode_worldselect_1() {
                 CreateCardMessageTask(&sWorldselectTaskPool, 2, CARD_MSG_WORLDSELECT_TUTORIAL_1);
                 sWorldselectTutorialStep++;
             } else {
-                gGameState.progression.tutorialFlags |= 1;
+                gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_WORLDSELECT;
                 WorldselectSetBgMode1();
                 BgAnimInit(2, BGCNT_AFF512x512, BGCNT_256COLOR);
                 BgAnimStart(&gBgAnimDefWorldSelect, 120, 110);

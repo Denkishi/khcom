@@ -130,7 +130,7 @@ void UpdatePlayTime() {
 
 void SetupRikuNewGame() {
     InitStartFloor(0, 0);
-    gGameState.progression.tutorialFlags = 0xE7FF;
+    gGameState.progression.tutorialFlags = ~(TUTORIAL_FLAG_RIKU_DECK | TUTORIAL_FLAG_RIKU_BATTLE);
     gGameState.progression.friendFlags = FRIEND_FLAG_THE_KING;
     InitRikuDeckForWorld(0);
     gGameState.flags |= GAME_FLAG_RIKU;

@@ -1078,7 +1078,7 @@ u8 MapFindOpenDoor(FldPos* pos) {
         return FALSE;
     }
 
-    if ((gGameState.progression.tutorialFlags & 0x200) == 0) {
+    if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_ROOM_CREATE) == 0) {
         return FALSE;
     }
 

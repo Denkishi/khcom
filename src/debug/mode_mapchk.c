@@ -593,7 +593,9 @@ void Mode_MapChk_1() {
         gMapChkUseParams = sMapChkWork->useParams;
         gGameState.progression.friendFlags |= FRIEND_FLAG_DONALD_DUCK;
         gGameState.progression.friendFlags |= FRIEND_FLAG_GOOFY;
-        gGameState.progression.tutorialFlags |= 0x778;
+        gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP_SELECT | TUTORIAL_FLAG_SAVE_POINT | TUTORIAL_FLAG_MAP |
+            TUTORIAL_FLAG_MAP_SELECT_EVENT_DOOR | TUTORIAL_FLAG_WARP_POINT | TUTORIAL_FLAG_ROOM_CREATE |
+            TUTORIAL_FLAG_MAP_STAIR;
         work = sMapChkWork;
 
         switch (work->mode) {

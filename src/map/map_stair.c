@@ -85,7 +85,7 @@ void MapStairWaitMessage(MapStairWork* work) {
     if (!IsMessageWindowOpen()) {
         gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
         gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
-        gGameState.progression.tutorialFlags |= 0x400;
+        gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP_STAIR;
         work->update = MapStairWaitStepOn;
     }
 }
@@ -105,7 +105,7 @@ void Task_MapStair_0(MapStairWork* work, FldObj* arg) {
 
     switch (work->obj.angle) {
     case FLD_ANGLE_UP_RIGHT:
-        if ((gGameState.progression.tutorialFlags & 0x400) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
+        if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP_STAIR) == 0 && gMapFloorState.room == MAP_ROOM_EXIT_HALL) {
             work->update = MapStairWaitApproach;
         } else {
             work->update = MapStairWaitStepOn;

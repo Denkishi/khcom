@@ -6,12 +6,12 @@
 
 s32 ApplyAttackBox(s32 attack, s32 x, s32 y, s32 z, s16 halfX, s16 halfY, s16 halfZ);
 void ColliderPoolsInit();
-void ColliderInit(Collider* collider, u32 type, u16 r, u16 height);
+void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height);
 void ColliderUnregister(Collider* collider);
 void ColliderSetPosition(Collider* collider, s32 x, s32 y, s32 z);
 void ColliderUpdateAll();
 void ColliderSetDisabled(Collider* collider, u8 on);
-void ColliderSetRadius(Collider* collider, u16 r);
+void ColliderSetRadius(Collider* collider, u16 radius);
 void ColliderSetHeight(Collider* collider, u16 height);
 u8 ColliderIsTouchingType(Collider* collider, s32 bit);
 

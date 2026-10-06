@@ -984,13 +984,13 @@ void ColliderPoolsInit() {
     ListPoolInit(&sColliderPoolObstacle);
 }
 
-void ColliderInit(Collider* collider, u32 type, u16 r, u16 height) {
+void ColliderInit(Collider* collider, u32 type, u16 radius, u16 height) {
     void* pool;
     collider->otherType = 0;
     collider->colliding = 0;
     collider->standFlags = 0;
     collider->flags = 0;
-    collider->radius = r << 8;
+    collider->radius = radius << 8;
     collider->height = height << 8;
     collider->type = type;
     collider->self = collider;
@@ -1176,8 +1176,8 @@ u8 ColliderIsColliding(Collider* collider) {
     return collider->colliding;
 }
 
-void ColliderSetRadius(Collider* collider, u16 r) {
-    collider->radius = r << 8;
+void ColliderSetRadius(Collider* collider, u16 radius) {
+    collider->radius = radius << 8;
 }
 
 void ColliderSetHeight(Collider* collider, u16 height) {

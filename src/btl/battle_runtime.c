@@ -56,10 +56,10 @@ void SetBattleZoom(u16 steps, s32 scale, s32 x, s32 y) {
     gBtlWork->zoomY = y;
 }
 
-void AnimChangeWithDef(const AnimDef* tbl, void* anim, u16 i, u16 j, void* obj) {
-    const AnimDef* e = &tbl[i];
-    AnimChangeWithTables(anim, e->animId, j, e->anims, e->gfxTable);
-    SetObjTileSource(obj, e->tiles);
+void AnimChangeWithDef(const AnimDef* defs, void* anim, u16 index, u16 flags, void* tiles) {
+    const AnimDef* e = &defs[index];
+    AnimChangeWithTables(anim, e->animId, flags, e->anims, e->gfxTable);
+    SetObjTileSource(tiles, e->tiles);
 }
 
 void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
@@ -1716,11 +1716,11 @@ void ReleaseEnemyBtlObj(BtlObj* obj) {
     }
 }
 
-u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* n, s16* cnt) {
+u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining, s16* cnt) {
     s16 i;
     s16 lim;
 
-    lim = *n / value;
+    lim = *remaining / value;
     src->kind = kind;
 
     for (i = 0; i < lim; i++) {
@@ -1731,21 +1731,21 @@ u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* n, s16*
         }
     }
 
-    *n = *n % value;
+    *remaining = *remaining % value;
     return 0;
 }
 
-void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* n) {
+void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* remaining) {
     s16 i;
     s16 lim;
-    lim = *n / value;
+    lim = *remaining / value;
     src->kind = kind;
 
     for (i = 0; i < lim; i++) {
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
     }
 
-    *n = *n % value;
+    *remaining = *remaining % value;
 }
 
 void DropBossPrizes(BtlObj* obj) {
@@ -2010,8 +2010,8 @@ void TryEnemyCardUse(BtlObj* obj) {
     gBtlWork->actor4 = obj;
 }
 
-void SetBtlObjParent(BtlObj* obj, BtlObj* v) {
-    obj->parent = v;
+void SetBtlObjParent(BtlObj* obj, BtlObj* parent) {
+    obj->parent = parent;
 }
 
 u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {

@@ -8,7 +8,7 @@ struct EmyKind;
 struct AnimDef;
 
 void SetBattleZoom(u16 steps, s32 scale, s32 x, s32 y);
-void AnimChangeWithDef(const struct AnimDef* tbl, void* anim, u16 i, u16 j, void* obj);
+void AnimChangeWithDef(const struct AnimDef* defs, void* anim, u16 index, u16 flags, void* tiles);
 void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz);
 void CreateBtlPopTask(BtlObj* obj, s16 kind);
 void MakeOpponentsHittable();
@@ -27,7 +27,7 @@ void DropEnemyPrizes(BtlObj* obj);
 void TryDropPremireCard(BtlObj* obj);
 void RequestEnemyCardUse(BtlObj* obj);
 void TryEnemyCardUse(BtlObj* obj);
-void SetBtlObjParent(BtlObj* obj, BtlObj* v);
+void SetBtlObjParent(BtlObj* obj, BtlObj* parent);
 u8 ConsumeGimmickFlag(u8 index);
 void SetBtlPaletteFadeExcluded(u8 index, u8 on);
 void SetBtlObjUnhittable(BtlObj* obj, u8 on);

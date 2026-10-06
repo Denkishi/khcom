@@ -129,8 +129,8 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->bottomBarY = 0xA000;
     work->bannerX = -0x8000;
     work->holding = 0;
-    work->x7 = 8;
-    work->y7 = 113;
+    work->descriptionX = 8;
+    work->descriptionY = 113;
     work->textSlotCount5 = 0;
     work->unk_6C4 = 79;
     n = sDeckExchangeRowY[work->deckIndex];
@@ -842,38 +842,38 @@ void DrawDeckExchangeDeckNames(DeckExchangeWork* work, u8 selectedOnly) {
     if (!selectedOnly) {
         switch (work->deckIndex) {
         case 0:
-            DrawTextSlots(work->x4, work->y4, work->textSlots, work->palette, 20, work->textSlotCount);
-            DrawTextSlots(work->x5, work->y5, work->textSlots2, work->palette4, 20, work->textSlotCount2);
-            DrawTextSlots(work->x6, work->y6, work->textSlots3, work->palette4, 20, work->textSlotCount3);
+            DrawTextSlots(work->deckNameX, work->deckNameY, work->textSlots, work->palette, 20, work->textSlotCount);
+            DrawTextSlots(work->deckName2X, work->deckName2Y, work->textSlots2, work->palette4, 20, work->textSlotCount2);
+            DrawTextSlots(work->deckName3X, work->deckName3Y, work->textSlots3, work->palette4, 20, work->textSlotCount3);
             break;
         case 1:
-            DrawTextSlots(work->x4, work->y4, work->textSlots, work->palette4, 20, work->textSlotCount);
-            DrawTextSlots(work->x5, work->y5, work->textSlots2, work->palette, 20, work->textSlotCount2);
-            DrawTextSlots(work->x6, work->y6, work->textSlots3, work->palette4, 20, work->textSlotCount3);
+            DrawTextSlots(work->deckNameX, work->deckNameY, work->textSlots, work->palette4, 20, work->textSlotCount);
+            DrawTextSlots(work->deckName2X, work->deckName2Y, work->textSlots2, work->palette, 20, work->textSlotCount2);
+            DrawTextSlots(work->deckName3X, work->deckName3Y, work->textSlots3, work->palette4, 20, work->textSlotCount3);
             break;
         case 2:
-            DrawTextSlots(work->x4, work->y4, work->textSlots, work->palette4, 20, work->textSlotCount);
-            DrawTextSlots(work->x5, work->y5, work->textSlots2, work->palette4, 20, work->textSlotCount2);
-            DrawTextSlots(work->x6, work->y6, work->textSlots3, work->palette, 20, work->textSlotCount3);
+            DrawTextSlots(work->deckNameX, work->deckNameY, work->textSlots, work->palette4, 20, work->textSlotCount);
+            DrawTextSlots(work->deckName2X, work->deckName2Y, work->textSlots2, work->palette4, 20, work->textSlotCount2);
+            DrawTextSlots(work->deckName3X, work->deckName3Y, work->textSlots3, work->palette, 20, work->textSlotCount3);
             break;
         }
     } else {
         switch (work->deckIndex) {
         case 0:
-            DrawTextSlots(work->x4, work->y4, work->textSlots, work->palette, 20, work->textSlotCount);
+            DrawTextSlots(work->deckNameX, work->deckNameY, work->textSlots, work->palette, 20, work->textSlotCount);
             break;
         case 1:
-            DrawTextSlots(work->x5, work->y5, work->textSlots2, work->palette, 20, work->textSlotCount2);
+            DrawTextSlots(work->deckName2X, work->deckName2Y, work->textSlots2, work->palette, 20, work->textSlotCount2);
             break;
         case 2:
-            DrawTextSlots(work->x6, work->y6, work->textSlots3, work->palette, 20, work->textSlotCount3);
+            DrawTextSlots(work->deckName3X, work->deckName3Y, work->textSlots3, work->palette, 20, work->textSlotCount3);
             break;
         }
     }
 }
 
 void DrawDeckExchangeCardDescription(DeckExchangeWork* work) {
-    DrawTextSlots(work->x7, work->y7, work->textSlots5, work->palette, 20, work->textSlotCount5);
+    DrawTextSlots(work->descriptionX, work->descriptionY, work->textSlots5, work->palette, 20, work->textSlotCount5);
 }
 
 void deckexchange_2(DeckExchangeWork* work) {
@@ -1270,12 +1270,12 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
         SetBgScroll(0, (u16)-76, (u16)-14);
         SetBgScroll(1, (u16)-88, (u16)-64);
         SetBgScroll(2, (u16)-88, (u16)-112);
-        work->x4 = 100;
-        work->y4 = 25;
-        work->x5 = 102;
-        work->y5 = 75;
-        work->x6 = 102;
-        work->y6 = 122;
+        work->deckNameX = 100;
+        work->deckNameY = 25;
+        work->deckName2X = 102;
+        work->deckName2Y = 75;
+        work->deckName3X = 102;
+        work->deckName3Y = 122;
         break;
     case 1:
         pal = (u16*)(BG_PLTT + 9 * PLTT_SIZE_4BPP);
@@ -1290,12 +1290,12 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-76, (u16)-62);
         SetBgScroll(2, (u16)-88, (u16)-112);
-        work->x4 = 102;
-        work->y4 = 27;
-        work->x5 = 100;
-        work->y5 = 73;
-        work->x6 = 102;
-        work->y6 = 122;
+        work->deckNameX = 102;
+        work->deckNameY = 27;
+        work->deckName2X = 100;
+        work->deckName2Y = 73;
+        work->deckName3X = 102;
+        work->deckName3Y = 122;
         break;
     case 2:
         pal = (u16*)(BG_PLTT + 10 * PLTT_SIZE_4BPP);
@@ -1310,12 +1310,12 @@ void HighlightDeckExchangeDeckTab(DeckExchangeWork* work, u8 deckIndex) {
         SetBgScroll(0, (u16)-88, (u16)-16);
         SetBgScroll(1, (u16)-88, (u16)-64);
         SetBgScroll(2, (u16)-76, (u16)-110);
-        work->x4 = 102;
-        work->y4 = 27;
-        work->x5 = 102;
-        work->y5 = 75;
-        work->x6 = 100;
-        work->y6 = 121;
+        work->deckNameX = 102;
+        work->deckNameY = 27;
+        work->deckName2X = 102;
+        work->deckName2Y = 75;
+        work->deckName3X = 100;
+        work->deckName3Y = 121;
         break;
     }
 }

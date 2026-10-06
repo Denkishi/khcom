@@ -5204,26 +5204,16 @@ entries:
     size: 32
 - name: gSioBtlCardgetBgPalettes
   format: palette
+  shape: [16, 16]
   us:
     address: 0x096FBAC4
-    size: 320
+    size: 512
   jp:
     address: 0x096B42A0
-    size: 320
+    size: 512
   eu:
     address: 0x096C8FEC
-    size: 320
-- name: gSioBtlOptionBgPalettes
-  format: palette
-  us:
-    address: 0x096FBC04
-    size: 192
-  jp:
-    address: 0x096B43E0
-    size: 192
-  eu:
-    address: 0x096C912C
-    size: 192
+    size: 512
 - name: gNameTextPalettes
   format: palette
   shape: [3, 16]

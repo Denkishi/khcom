@@ -802,7 +802,7 @@ void SioBtlOptionLoadBg() {
 #else
     LoadBgMap(0, gSioBtlOptionBg0Map, sizeof(gSioBtlOptionBg0Map));
 #endif
-    LoadBgPalette(0, gSioBtlOptionBgPalettes, sizeof(gSioBtlOptionBgPalettes));
+    LoadBgPalette(0, gSioBtlCardgetBgPalettes[10], 6 * sizeof(gSioBtlCardgetBgPalettes[0]));
 #ifndef VERSION_EU
     LoadBgMap(1, gSioBtlOptionBg1Map, sizeof(gSioBtlOptionBg1Map));
 #endif
@@ -2390,7 +2390,7 @@ void SioBtlCardgetLoadBg() {
 #else
     RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, sizeof(gSioBtlCardgetBgTiles));
 #endif
-    LoadBgPalette(1, gSioBtlCardgetBgPalettes, 0x200);
+    LoadBgPalette(1, gSioBtlCardgetBgPalettes, sizeof(gSioBtlCardgetBgPalettes));
 
 #ifdef VERSION_EU
     switch (gLanguage) {

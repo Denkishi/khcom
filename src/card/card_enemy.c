@@ -47,7 +47,7 @@ void LookupEnemyCardDef(CardDisplayArgs* args, const CardDef** out, u8 index) {
     if (slot != NULL) {
         id = slot[index].cardId;
 
-        if (id != 0xFFFF) {
+        if (id != CARD_ID_NONE) {
             *out = &gCardDefs[id];
         }
     }

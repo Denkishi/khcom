@@ -42,6 +42,8 @@ typedef struct CardSlot {
 
 typedef char CardSlot_size[(sizeof(CardSlot) == 0xC) ? 1 : -1];
 
+#define CARD_SLOT_NONE 0xFFFF
+
 typedef struct CardDisplayArgs {
     ListPool* pool;
     CardSlot* slot;

@@ -55,7 +55,7 @@ void DeckCard2_0(DeckCard2Work* work, DeckCard2Args* args) {
         break;
     }
 
-    if (work->args.cardId != 0xFFFF) {
+    if (work->args.cardId != CARD_ID_NONE) {
         if (!(work->args.cardId & 0x8000)) {
             work->premium = 0;
         } else {
@@ -135,7 +135,7 @@ void DeckCard2_3(DeckCard2Work* work) {
 }
 
 void DeckCard2LoadGfx(DeckCard2Work* work) {
-    if (work->args.cardId == 0xFFFF) {
+    if (work->args.cardId == CARD_ID_NONE) {
         return;
     }
 

@@ -573,7 +573,7 @@ void InitDecks() {
 
     for (i = 0; i < 3; i++) {
         for (j = 0; j < 99; j++) {
-            gDecks[i].cards[j] |= 0xFFFF;
+            gDecks[i].cards[j] |= CARD_NONE;
         }
 
         for (j = 0; j < 20; j++) {
@@ -604,9 +604,9 @@ void ClearDeck(u8 deck) {
     }
 
     for (i = 0; i < 99; i++) {
-        if (gDecks[deck].cards[i] != 0xFFFF) {
+        if (gDecks[deck].cards[i] != CARD_NONE) {
             gCardCollection[gDecks[deck].cards[i]] &= ~mask;
-            gDecks[deck].cards[i] |= 0xFFFF;
+            gDecks[deck].cards[i] |= CARD_NONE;
         }
     }
 
@@ -622,7 +622,7 @@ u8 AddCardToActiveDeck(u16 card) {
     i = 0;
     cards = GetActiveDeck()->cards;
 
-    while (cards[i] != 0xFFFF) {
+    while (cards[i] != CARD_NONE) {
         i++;
 
         if (i == 99) {
@@ -657,7 +657,7 @@ u8 AddCardToDeck(u16 card, u8 deck) {
 
     cards = GetDeck(deck)->cards;
 
-    for (i = 0; i < 99 && cards[i] != 0xFFFF; i++) {
+    for (i = 0; i < 99 && cards[i] != CARD_NONE; i++) {
     }
 
     if (i == 99) {
@@ -707,7 +707,7 @@ void RemoveCardFromActiveDeck(u16 slot) {
     cpCost = GetCardCpCost(gCardCollection[cards[slot]]);
     gDecks[sActiveDeck].cpCost -= cpCost;
     gDecks[sActiveDeck].cardCount--;
-    cards[slot] = 0xFFFF;
+    cards[slot] = CARD_NONE;
 }
 
 void RemoveCardFromDeck(u16* slot, u8 deck) {
@@ -728,7 +728,7 @@ void RemoveCardFromDeck(u16* slot, u8 deck) {
     cpCost = GetCardCpCost(gCardCollection[*slot]);
     gDecks[deck].cpCost -= cpCost;
     gDecks[deck].cardCount--;
-    *slot = 0xFFFF;
+    *slot = CARD_NONE;
 }
 
 void RecalculateInactiveDeckCpCosts() {
@@ -746,7 +746,7 @@ void RecalculateInactiveDeckCpCosts() {
         deck = GetDeck(i);
 
         for (j = 0; j < 99; j++) {
-            if (deck->cards[j] != 0xFFFF) {
+            if (deck->cards[j] != CARD_NONE) {
                 total += GetCardCpCost(gCardCollection[deck->cards[j]]);
             }
         }
@@ -776,7 +776,7 @@ u8 HasNonPremiumCardsInActiveDeck() {
     deck = GetActiveDeck();
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (deck->cards[i] != 0xFFFF) {
+        if (deck->cards[i] != CARD_NONE) {
             if (gCardCollection[deck->cards[i]] & 0x8000) {
                 count++;
             }
@@ -857,7 +857,7 @@ u16 CountActiveDeckCardsOfCategory(u8 category) {
     cards = GetActiveDeck()->cards;
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_NONE) {
             if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == category) {
                 count++;
             }
@@ -876,7 +876,7 @@ u16 CountDeckCardsOfCategory(u8 category, u8 deckIndex) {
     cards = GetDeck(deckIndex)->cards;
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_NONE) {
             if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == category) {
                 count++;
             }
@@ -897,7 +897,7 @@ s16 CountActiveDeckCards(s32 cardSet) {
     switch (cardSet) {
     case DECK_CARD_SET_MAIN:
         for (i = 0; i <= 98; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_NONE) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category <= 2) {
                     count = ((count << 16) + 0x10000) >> 16;
                 }
@@ -907,7 +907,7 @@ s16 CountActiveDeckCards(s32 cardSet) {
         break;
     case DECK_CARD_SET_ENEMY:
         for (i = 0; i <= 98; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_NONE) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category == 3) {
                     count = ((count << 16) + 0x10000) >> 16;
                 }
@@ -957,7 +957,7 @@ void CopyActiveDeckCards(s32 cardSet, u16* out) {
     switch (cardSet) {
     case DECK_CARD_SET_MAIN:
         for (i = 0; i < 99; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_NONE) {
                 if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category <= 2) {
                     *out++ = gCardCollection[cards[i]] & 0x8FFF;
                 }
@@ -967,7 +967,7 @@ void CopyActiveDeckCards(s32 cardSet, u16* out) {
         break;
     case DECK_CARD_SET_ENEMY:
         for (i = 0; i < 99; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_NONE) {
                 if (gCardDefs[gCardCollection[cards[i]] & 0xFFF].category == 3) {
                     *out++ = gCardCollection[cards[i]] & 0x8FFF;
                 }
@@ -1005,7 +1005,7 @@ u8 IsActiveDeckAllPremium() {
     deck = GetActiveDeck();
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (deck->cards[i] != 0xFFFF) {
+        if (deck->cards[i] != CARD_NONE) {
             if (GetCollectionCardCategory(deck->cards[i]) != 2) {
                 if (GetCollectionCardCategory(deck->cards[i]) != 3) {
                     attackMagicCount++;
@@ -1015,7 +1015,7 @@ u8 IsActiveDeckAllPremium() {
     }
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (deck->cards[i] != 0xFFFF) {
+        if (deck->cards[i] != CARD_NONE) {
             if (gCardCollection[deck->cards[i]] & 0x8000) {
                 premiumCount++;
             }
@@ -4439,7 +4439,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
 
     if (kind == 0) {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != 0xFFFF) {
+            if (deck[i] != CARD_NONE) {
                 if (kind == 0) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & 0x8FFF;
@@ -4459,7 +4459,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                 }
             } else {
                 args.pool = &work->pool;
-                args.cardId = 0xFFFF;
+                args.cardId = CARD_ID_NONE;
                 args.col = x;
                 args.row = y;
                 args.panel = 0;
@@ -4476,7 +4476,7 @@ void CreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != 0xFFFF && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & 0x8FFF;
                 args.col = x;
@@ -5193,7 +5193,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
     u8 j;
     u16 k;
 
-    id = 0xFFFF;
+    id = CARD_ID_NONE;
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
@@ -5208,7 +5208,7 @@ s32 ShowCollectionCardPreview(DeckMenuWork* work) {
 
     ReleaseCardPreview(work);
 
-    if (id != 0xFFFF) {
+    if (id != CARD_ID_NONE) {
         flag = id & 0x8000;
 
         if (flag != 0) {
@@ -5328,7 +5328,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
     void* dst;
     u16 id;
 
-    id = 0xFFFF;
+    id = CARD_ID_NONE;
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
@@ -5342,7 +5342,7 @@ void ShowDeckCardPreview(DeckMenuWork* work) {
 
     ReleaseCardPreview(work);
 
-    if (id != 0xFFFF) {
+    if (id != CARD_ID_NONE) {
         if (id & 0x8000) {
             work->tiles10 = AllocObjTiles(0x280, NULL);
             SetObjTileSource(work->tiles10, gCardPremiumTiles);
@@ -5732,7 +5732,7 @@ void RemoveCursorCardFromDeck(DeckMenuWork* work) {
 
     while (node != NULL) {
         if (node->args.row == work->cursorRow && node->args.col == work->cursorCol) {
-            if (node->args.cardId != 0xFFFF) {
+            if (node->args.cardId != CARD_ID_NONE) {
                 RemoveCardFromDeck(node->args.slot, work->deckIndex);
                 node->done = 1;
                 node->args.row = (u16)node->args.row | 0xFFFF;
@@ -5769,7 +5769,7 @@ u8 CheckCardDeletable(DeckMenuWork* work) {
     for (i = 0; i < entry->count; i++) {
         card = entry->indices[i];
 
-        if (card == 0xFFFF) {
+        if (card == CARD_NONE) {
             continue;
         }
 
@@ -5833,7 +5833,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
     for (i = 0; i < entry->count; i++) {
         card = entry->indices[i];
 
-        if (card != 0xFFFF) {
+        if (card != CARD_NONE) {
             id = gCardCollection[card] & CARD_ID_MASK;
             def = &gCardDefs[id];
 
@@ -5842,7 +5842,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                     if (def->category == 0) {
                         if (CountCollectionCardsOfCategory(def->category) > 1) {
                             ClearCardCollectionSlot(&gCardCollection[card]);
-                            entry->indices[i] = 0xFFFF;
+                            entry->indices[i] = CARD_NONE;
                             entry->valueCounts[idx]--;
                             DrawValueCount(entry->valueCounts[idx], idx);
                             m4aSongNumStart(SONG_SYS_CARD_DELETE);
@@ -5854,7 +5854,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                         }
                     } else {
                         ClearCardCollectionSlot(&gCardCollection[card]);
-                        entry->indices[i] = 0xFFFF;
+                        entry->indices[i] = CARD_NONE;
                         entry->valueCounts[idx]--;
                         DrawValueCount(entry->valueCounts[idx], idx);
                         m4aSongNumStart(SONG_SYS_CARD_DELETE);
@@ -5865,7 +5865,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                 if (def->category == 0) {
                     if (CountCollectionCardsOfCategory(def->category) > 1) {
                         ClearCardCollectionSlot(&gCardCollection[card]);
-                        entry->indices[i] = 0xFFFF;
+                        entry->indices[i] = CARD_NONE;
                         entry->valueCounts[idx]--;
                         DrawValueCount(entry->valueCounts[idx], idx);
                         m4aSongNumStart(SONG_SYS_CARD_DELETE);
@@ -5877,7 +5877,7 @@ u8 DeleteSelectedValueCard(DeckMenuWork* work) {
                     }
                 } else {
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    entry->indices[i] = 0xFFFF;
+                    entry->indices[i] = CARD_NONE;
                     entry->valueCounts[idx]--;
                     DrawValueCount(entry->valueCounts[idx], idx);
                     m4aSongNumStart(SONG_SYS_CARD_DELETE);
@@ -6025,7 +6025,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
 
     if (kind == 0) {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != 0xFFFF) {
+            if (deck[i] != CARD_NONE) {
                 if (kind == 0) {
                     args.pool = &work->pool;
                     args.cardId = gCardCollection[deck[i]] & 0x8FFF;
@@ -6045,7 +6045,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
                 }
             } else {
                 args.pool = &work->pool;
-                args.cardId = 0xFFFF;
+                args.cardId = CARD_ID_NONE;
                 args.col = x;
                 args.row = y;
                 args.panel = 0;
@@ -6062,7 +6062,7 @@ void RecreateDeckGridCards(DeckMenuWork* work, u8 kind) {
         }
     } else {
         for (i = 0; i < 99; i++) {
-            if (deck[i] != 0xFFFF && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
+            if (deck[i] != CARD_NONE && gCardDefs[gCardCollection[deck[i]] & 0xFFF].category == kind - 1) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[deck[i]] & 0x8FFF;
                 args.col = x;
@@ -6100,9 +6100,9 @@ u8 ToggleDeckSlotGap(DeckMenuWork* work) {
         card = ListPoolNext(&card->node);
     }
 
-    if (card->args.cardId != 0xFFFF) {
+    if (card->args.cardId != CARD_ID_NONE) {
         while (gap != NULL) {
-            if (gap->args.cardId == 0xFFFF) {
+            if (gap->args.cardId == CARD_ID_NONE) {
                 break;
             }
 
@@ -6120,7 +6120,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* work) {
                 gap = ListPoolPrev(&gap->node);
             }
 
-            *card->args.slot = 0xFFFF;
+            *card->args.slot = CARD_NONE;
             ClearCardGrid(work);
             TaskPoolUpdate(&work->taskpool);
             RecreateDeckGridCards(work, work->categoryFilter);
@@ -6150,7 +6150,7 @@ u8 ToggleDeckSlotGap(DeckMenuWork* work) {
             card = ListPoolNext(&card->node);
         }
 
-        *last->args.slot = 0xFFFF;
+        *last->args.slot = CARD_NONE;
         ClearCardGrid(work);
         TaskPoolUpdate(&work->taskpool);
         RecreateDeckGridCards(work, work->categoryFilter);

@@ -1048,7 +1048,7 @@ void CreateDeckExchangeDeckGridCards(DeckExchangeWork* work, u8 kind) {
     y = 0;
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_NONE) {
             if (kind == 0) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
@@ -1514,7 +1514,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
     u8 j;
     void* dst;
 
-    id = 0xFFFF;
+    id = CARD_ID_NONE;
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
@@ -1528,7 +1528,7 @@ void ShowDeckExchangeCardPreview(DeckExchangeWork* work) {
 
     ReleaseDeckExchangeCardPreview(work);
 
-    if (id != 0xFFFF) {
+    if (id != CARD_ID_NONE) {
         def = &gCardDefs[id & CARD_ID_MASK];
         work->tiles4 = LoadObjTiles(gCardBacks[def->category].tiles, 0x300);
         work->tiles5 = LoadObjTiles(def->tiles, 0x200);
@@ -1876,7 +1876,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
     for (i = 0; i < entry->count; i++) {
         card = entry->indices[i];
 
-        if (card != 0xFFFF) {
+        if (card != CARD_NONE) {
             id = gCardCollection[card] & CARD_ID_MASK;
             def = &gCardDefs[id];
 
@@ -1884,7 +1884,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
                 if (idx == 0) {
                     gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    entry->indices[i] = 0xFFFF;
+                    entry->indices[i] = CARD_NONE;
                     entry->valueCounts[0]--;
                     DrawValueCount(entry->valueCounts[0], 0);
                     m4aSongNumStart(SONG_SYS_KETTEI);
@@ -1896,7 +1896,7 @@ s32 TakeTradeCard(DeckExchangeWork* work) {
                 if (value == idx) {
                     gSioTradeCardId = gCardCollection[card] & CARD_ID_MASK;
                     ClearCardCollectionSlot(&gCardCollection[card]);
-                    entry->indices[i] = 0xFFFF;
+                    entry->indices[i] = CARD_NONE;
                     entry->valueCounts[value]--;
                     DrawValueCount(entry->valueCounts[value], value);
                     m4aSongNumStart(SONG_SYS_KETTEI);

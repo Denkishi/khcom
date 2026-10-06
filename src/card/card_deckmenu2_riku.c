@@ -576,7 +576,7 @@ void CreateRikuDeckGridCards(RikuDeckMenuWork* work, u8 kind) {
     y = 0;
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_NONE) {
             if (kind == 0) {
                 args.pool = &work->pool;
                 args.cardId = gCardCollection[cards[i]] & 0x8FFF;
@@ -891,7 +891,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
     u16 id;
     u32 defIndex;
 
-    id = 0xFFFF;
+    id = CARD_ID_NONE;
     node = ListPoolFirst(&work->pool);
 
     while (node != NULL) {
@@ -905,7 +905,7 @@ void ShowRikuDeckCardPreview(RikuDeckMenuWork* work) {
 
     ReleaseRikuCardPreview(work);
 
-    if (id != 0xFFFF) {
+    if (id != CARD_ID_NONE) {
         if (id & 0x8000) {
             work->tiles10 = AllocObjTiles(0x280, NULL);
             SetObjTileSource(work->tiles10, gCardPremiumTiles);

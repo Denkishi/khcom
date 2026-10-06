@@ -364,7 +364,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 listIndex) {
     CardDisplayWork* card;
     CardDisplayWork* node;
 
-    if (work->cursors[listIndex] != 0xFFFF) {
+    if (work->cursors[listIndex] != CARD_SLOT_NONE) {
         u32 index = work->cursors[listIndex];
         n = index;
         old = index;
@@ -442,7 +442,7 @@ void CreateSoraCardRing(CardBattleWork* work, u8 listIndex) {
     switch (count) {
         case 0:
             arg.pool = &work->cardDisplays[listIndex];
-            arg.index = 0xFFFF;
+            arg.index = CARD_SLOT_NONE;
             arg.slot = work->slots[listIndex];
             arg.listIndex = listIndex;
             TaskCreate(&work->tasks, &gTaskDescCardNotHave, &arg);
@@ -1692,7 +1692,7 @@ void InitSoraTutorialCardList(CardBattleWork* work, s32 cardSet) {
         CpuFill32(0, slot, sizeof(CardSlot));
         work->slots[3]->cardId = 0x30FF;
         cursor = &work->cursors[3];
-        k = 0xFFFF;
+        k = CARD_SLOT_NONE;
         *cursor = k;
         break;
     }
@@ -1740,7 +1740,7 @@ void InitSoraCardList(CardBattleWork* work, s32 cardSet) {
             CpuFill32(0, slot, sizeof(CardSlot));
             work->slots[0]->cardId = 0xFF;
             cursor = &work->cursors[0];
-            k = 0xFFFF;
+            k = CARD_SLOT_NONE;
             *cursor = k;
         }
 
@@ -1773,7 +1773,7 @@ void InitSoraCardList(CardBattleWork* work, s32 cardSet) {
             CpuFill32(0, slot, sizeof(CardSlot));
             work->slots[3]->cardId = 0x30FF;
             cursor = &work->cursors[3];
-            k = 0xFFFF;
+            k = CARD_SLOT_NONE;
             *cursor = k;
         }
 
@@ -1924,7 +1924,7 @@ void BeginSoraReloadDeal(CardBattleWork* work) {
         m4aSongNumStart(SONG_SYS_RELOAD);
     } else {
         args.pool = &work->cardDisplays[work->listIndex];
-        args.index = 0xFFFF;
+        args.index = CARD_SLOT_NONE;
         args.slot = work->slots[work->listIndex];
         args.listIndex = work->listIndex;
         card = TaskCreate(&work->tasks, &gTaskDescCardNotHave, &args)->work;
@@ -2652,7 +2652,7 @@ s32 UseSoraHeartlessCard(CardBattleWork* work) {
 
     if (sSoraSelectedCard == NULL) {
         args.pool = &work->cardDisplays[work->listIndex];
-        args.index = 0xFFFF;
+        args.index = CARD_SLOT_NONE;
         args.slot = work->slots[work->listIndex];
         args.listIndex = work->listIndex;
         card = TaskCreate(&work->tasks, &gTaskDescCardNotHave, &args)->work;
@@ -3784,8 +3784,8 @@ void RestoreCardsForPotion(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[0]; i++) {
         id = slots[i].cardId;
 
-        if (id != 0xFFFF) {
-            if (id != 0xFFFE) {
+        if (id != CARD_ID_NONE) {
+            if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 0) {
@@ -3813,8 +3813,8 @@ void RestoreCardsForHiPotion(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[0]; i++) {
         id = slots[i].cardId;
 
-        if (id != 0xFFFF) {
-            if (id != 0xFFFE) {
+        if (id != CARD_ID_NONE) {
+            if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 0) {
@@ -3841,8 +3841,8 @@ void RestoreCardsForMegaPotion(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[0]; i++) {
         id = slots[i].cardId;
 
-        if (id != 0xFFFF) {
-            if (id != 0xFFFE) {
+        if (id != CARD_ID_NONE) {
+            if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 0) {
@@ -3869,8 +3869,8 @@ void RestoreCardsForEther(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[0]; i++) {
         id = slots[i].cardId;
 
-        if (id != 0xFFFF) {
-            if (id != 0xFFFE) {
+        if (id != CARD_ID_NONE) {
+            if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 1) {
@@ -3898,8 +3898,8 @@ void RestoreCardsForMegaEther(CardBattleWork* work) {
     for (i = 0; i < work->slotCounts[0]; i++) {
         id = slots[i].cardId;
 
-        if (id != 0xFFFF) {
-            if (id != 0xFFFE) {
+        if (id != CARD_ID_NONE) {
+            if (id != CARD_ID_RELOAD) {
                 category = gCardDefs[id & CARD_ID_MASK].category;
 
                 if (category == 1) {

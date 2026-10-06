@@ -1078,7 +1078,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
 #else
     for (i = 0; i < DECK_SIZE; i++) {
 #endif
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_NONE) {
             if (!(gCardCollection[cards[i]] & 0x8000)) {
                 if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 3) {
                     if (gCardDefs[gCardCollection[cards[i]] & CARD_ID_MASK].category != 2) {
@@ -1097,7 +1097,7 @@ void Premire_Chance_0(PremireChanceWork* work) {
         j = 0;
 
         do {
-            if (cards[j] != 0xFFFF) {
+            if (cards[j] != CARD_NONE) {
                 if (!(gCardCollection[cards[j]] & 0x8000)) {
                     if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 3) {
                         if (gCardDefs[gCardCollection[cards[j]] & CARD_ID_MASK].category != 2) {

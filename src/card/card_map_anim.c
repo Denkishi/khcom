@@ -100,14 +100,14 @@ Deck* CreateLinkSendDeck() {
     gLinkSendDeck = EwramAlloc(sizeof(Deck));
 
     for (i = 0; i < 99; i++) {
-        gLinkSendDeck->cards[i] |= 0xFFFF;
+        gLinkSendDeck->cards[i] |= CARD_ID_NONE;
     }
 
     for (i = 0; i < 99; i++) {
-        if (active->cards[i] != 0xFFFF) {
+        if (active->cards[i] != CARD_NONE) {
             gLinkSendDeck->cards[i] = gCardCollection[active->cards[i]];
         } else {
-            gLinkSendDeck->cards[i] |= 0xFFFF;
+            gLinkSendDeck->cards[i] |= CARD_ID_NONE;
         }
     }
 
@@ -130,7 +130,7 @@ Deck* CreateLinkPartnerDeck() {
     gLinkPartnerDeck = EwramAlloc(sizeof(Deck));
 
     for (i = 0; i < 99; i++) {
-        gLinkPartnerDeck->cards[i] |= 0xFFFF;
+        gLinkPartnerDeck->cards[i] |= CARD_ID_NONE;
     }
 
     for (i = 0; i < 20; i++) {
@@ -159,7 +159,7 @@ u16 CountLinkPartnerDeckCardsOfCategory(u8 category) {
     cards = gLinkPartnerDeck->cards;
 
     for (i = 0; i < DECK_SIZE; i++) {
-        if (cards[i] != 0xFFFF) {
+        if (cards[i] != CARD_ID_NONE) {
             if (gCardDefs[cards[i] & CARD_ID_MASK].category == category) {
                 count++;
             }
@@ -181,7 +181,7 @@ u16 CountLinkPartnerDeckCards(u8 listIndex) {
     switch (listIndex) {
     case 0:
         for (i = 0; i < DECK_SIZE; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_ID_NONE) {
                 category = gCardDefs[cards[i] & CARD_ID_MASK].category;
 
                 if (category <= 2) {
@@ -193,7 +193,7 @@ u16 CountLinkPartnerDeckCards(u8 listIndex) {
         break;
     case 3:
         for (i = 0; i < DECK_SIZE; i++) {
-            if (cards[i] != 0xFFFF) {
+            if (cards[i] != CARD_ID_NONE) {
                 if (gCardDefs[cards[i] & CARD_ID_MASK].category == 3) {
                     count++;
                 }
@@ -217,7 +217,7 @@ void CopyLinkPartnerDeckCards(u8 listIndex, u16* out) {
     deck = GetLinkPartnerDeck();
 
     for (i = 0; i < 99; i++) {
-        if (deck->cards[i] != 0xFFFF) {
+        if (deck->cards[i] != CARD_ID_NONE) {
             switch (listIndex) {
             case 0:
                 if (gCardDefs[deck->cards[i] & CARD_ID_MASK].category <= 2) {

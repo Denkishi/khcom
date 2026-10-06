@@ -401,7 +401,7 @@ void CreateRikuCardDisplay(CardBattleWork* work, u8 listIndex) {
 
     count = 0;
 
-    if (work->cursors[listIndex] != 0xFFFF && work->slotCounts[listIndex] > 0) {
+    if (work->cursors[listIndex] != CARD_SLOT_NONE && work->slotCounts[listIndex] > 0) {
         id = work->cursors[listIndex];
         slot = FindNextAvailableSlot(work, listIndex, &id);
 
@@ -425,7 +425,7 @@ void CreateRikuCardDisplay(CardBattleWork* work, u8 listIndex) {
     switch (count) {
     case 0:
         args.pool = &work->cardDisplays[listIndex];
-        args.index = 0xFFFF;
+        args.index = CARD_SLOT_NONE;
         args.slot = work->slots[listIndex];
         args.listIndex = listIndex;
         node = TaskCreate(&work->tasks, &gTaskDescNOCard, &args)->work;
@@ -559,7 +559,7 @@ u16 FillCardSlotsFromIds(CardSlot* out, const u16* ids, u16 idCount, u8 listInde
     s32 i;
 
     for (i = 0; i < idCount; i++) {
-        if (ids[i] != 0xFFFF) {
+        if (ids[i] != CARD_ID_NONE) {
             switch (listIndex) {
             case 0:
                 if (gCardDefs[ids[i] & CARD_ID_MASK].category <= 2) {
@@ -651,7 +651,7 @@ void InitRikuCardList(CardBattleWork* work, s8 listIndex) {
         work->slots[listIndex]->restoreOnReload = 0;
         cursor = work->cursors;
         cursor += listIndex;
-        k = 0xFFFF;
+        k = CARD_SLOT_NONE;
         *cursor = k;
     }
 }
@@ -2092,7 +2092,7 @@ void BeginRikuReloadDeal(CardBattleWork* work) {
         }
     } else {
         args.pool = &work->cardDisplays[work->listIndex];
-        args.index = 0xFFFF;
+        args.index = CARD_SLOT_NONE;
         args.slot = work->slots[work->listIndex];
         args.listIndex = work->listIndex;
         noCard = TaskCreate(&work->tasks, &gTaskDescNOCard, &args)->work;
@@ -2578,7 +2578,7 @@ u8 UseRikuHeartlessCard(CardBattleWork* work) {
             sRikuSelectedCard = card;
         } else {
             args.pool = &work->cardDisplays[work->listIndex];
-            args.index = 0xFFFF;
+            args.index = CARD_SLOT_NONE;
             args.slot = work->slots[work->listIndex];
             args.listIndex = work->listIndex;
             card = TaskCreate(&work->tasks, &gTaskDescNOCard, &args)->work;

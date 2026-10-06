@@ -595,10 +595,10 @@ u8 UpdateDeckExchangeBuildList(DeckExchangeWork* work, void* task) {
         CpuFill32(0, work->kindEntries, work->entryCount * sizeof(CardKindEntry));
         break;
     case 1:
-        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 0, work->entryCount, work->unk_4F4);
+        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, FALSE, work->entryCount, work->unk_4F4);
         break;
     case 2:
-        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 0, work->entryCount, work->unk_4F4);
+        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, FALSE, work->entryCount, work->unk_4F4);
         break;
     case 3:
         work->entries = EwramAlloc(work->entryCount * sizeof(CardKindEntry));

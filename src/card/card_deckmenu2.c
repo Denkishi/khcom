@@ -370,7 +370,7 @@ void CountCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16
 
     mask = 0;
 
-    if (thisDeckOnly == 1) {
+    if (thisDeckOnly == TRUE) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;
@@ -416,7 +416,7 @@ u16 ListCardsNotInDeckByKind(CardKindEntry* out, u8 deck, u8 thisDeckOnly, u16 e
 
     mask = 0;
 
-    if (thisDeckOnly == 1) {
+    if (thisDeckOnly == TRUE) {
         switch (deck) {
         case 0:
             mask = CARD_FLAG_IN_DECK_1;
@@ -2003,7 +2003,7 @@ u8 UpdateDeckMenuDeletePrompt(DeckMenuWork* work, void* task) {
         DrawCollectionCategoryCount(work->collectionCategoryCounts[3], 3);
 
         if (!(u8)MoveValueCursor(work, 0)) {
-            RemoveEmptyCollectionEntry(work, 1);
+            RemoveEmptyCollectionEntry(work, TRUE);
 
             if (work->gridEntryCount != 0) {
                 SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
@@ -2409,7 +2409,7 @@ u8 UpdateDeckMenuAddValueSelect(DeckMenuWork* work, void* task) {
             work->timer = 1;
 
             if (!(u8)MoveValueCursor(work, 0)) {
-                RemoveEmptyCollectionEntry(work, 0);
+                RemoveEmptyCollectionEntry(work, FALSE);
 
                 if (work->gridEntryCount != 0) {
                     u8 ready;
@@ -3176,10 +3176,10 @@ u8 UpdateDeckMenuBuildAddList(DeckMenuWork* work, void* task) {
         work->entries = entries;
         break;
     case 1:
-        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 1, work->entryCount, work->unk_4FC);
+        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, TRUE, work->entryCount, work->unk_4FC);
         break;
     case 2:
-        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 1, work->entryCount, work->unk_4FC);
+        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, TRUE, work->entryCount, work->unk_4FC);
         break;
     case 3:
         if (work->entryCount != 0) {
@@ -3806,10 +3806,10 @@ u8 UpdateDeckMenuBuildDeleteList(DeckMenuWork* work, void* task) {
         work->descriptionY = 113;
         break;
     case 1:
-        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 0, work->entryCount, work->unk_4FC);
+        CountCardsNotInDeckByKind(work->kindEntries, work->deckIndex, FALSE, work->entryCount, work->unk_4FC);
         break;
     case 2:
-        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, 0, work->entryCount, work->unk_4FC);
+        work->entryCount = ListCardsNotInDeckByKind(work->kindEntries, work->deckIndex, FALSE, work->entryCount, work->unk_4FC);
         break;
     case 3:
         if (work->entryCount != 0) {

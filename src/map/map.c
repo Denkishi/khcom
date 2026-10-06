@@ -1688,29 +1688,29 @@ void CreateRandomMapPrizes(s32 x, s32 y, s32 z) {
         roll = GetRandom() % 10000;
 
         if (roll < 2500) {
-            CreateMapPrizeTasks(0, 2, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 2, x, y, z);
         } else if (roll < 6500) {
-            CreateMapPrizeTasks(0, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 5, x, y, z);
         } else if (roll < 9000) {
-            CreateMapPrizeTasks(1, 3, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 3, x, y, z);
         } else {
-            CreateMapPrizeTasks(1, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 5, x, y, z);
         }
     } else {
         roll = GetRandom() % 10000;
 
         if (roll < 2000) {
-            CreateMapPrizeTasks(0, 2, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 2, x, y, z);
         } else if (roll < 4000) {
-            CreateMapPrizeTasks(0, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 5, x, y, z);
         } else if (roll < 6000) {
-            CreateMapPrizeTasks(1, 3, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 3, x, y, z);
         } else if (roll < 6500) {
-            CreateMapPrizeTasks(1, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 5, x, y, z);
         } else if (roll < 8000) {
-            CreateMapPrizeTasks(2, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_MOOGLE_POINTS_SMALL, 5, x, y, z);
         } else {
-            CreateMapPrizeTasks(3, 5, x, y, z);
+            CreateMapPrizeTasks(MAP_PRIZE_MOOGLE_POINTS_LARGE, 5, x, y, z);
         }
     }
 }

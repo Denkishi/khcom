@@ -3544,21 +3544,21 @@ void MapGmkBarrelDropPrizes(FldPos* pos) {
         roll = GetRandom() % 10000;
 
         if (roll < 6000) {
-            CreateMapPrizeTasks(0, 5, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 5, pos->x, pos->y, pos->z);
         } else if (roll < 10000) {
-            CreateMapPrizeTasks(1, 3, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 3, pos->x, pos->y, pos->z);
         }
     } else {
         roll = GetRandom() % 10000;
 
         if (roll < 3000) {
-            CreateMapPrizeTasks(0, 5, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_SMALL, 5, pos->x, pos->y, pos->z);
         } else if (roll < 5000) {
-            CreateMapPrizeTasks(1, 3, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_HP_LARGE, 3, pos->x, pos->y, pos->z);
         } else if (roll < 8000) {
-            CreateMapPrizeTasks(2, 5, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_MOOGLE_POINTS_SMALL, 5, pos->x, pos->y, pos->z);
         } else {
-            CreateMapPrizeTasks(3, 5, pos->x, pos->y, pos->z);
+            CreateMapPrizeTasks(MAP_PRIZE_MOOGLE_POINTS_LARGE, 5, pos->x, pos->y, pos->z);
         }
     }
 }
@@ -4010,8 +4010,8 @@ void MapPrizeBounce(MapPrizeWork* work) {
         u16 maxHp;
 
         switch (work->kind) {
-        case 2:
-        case 3:
+        case MAP_PRIZE_MOOGLE_POINTS_SMALL:
+        case MAP_PRIZE_MOOGLE_POINTS_LARGE:
             m4aSongNumStart(SONG_SYS_POWER_GET);
             gGameState.progression.mooglePoints += work->amount;
 
@@ -4020,8 +4020,8 @@ void MapPrizeBounce(MapPrizeWork* work) {
             }
 
             break;
-        case 0:
-        case 1:
+        case MAP_PRIZE_HP_SMALL:
+        case MAP_PRIZE_HP_LARGE:
         default:
             m4aSongNumStart(SONG_SYS_POWER_GET);
             gGameState.hp += work->amount;
@@ -4098,19 +4098,19 @@ void Task_MapPrize_0(MapPrizeWork* work, MapPrizeArgs* arg) {
     work->kind = arg->id;
 
     switch (work->kind) {
-    case 3:
+    case MAP_PRIZE_MOOGLE_POINTS_LARGE:
         work->gfx = gMapPrizeFrame3;
         work->amount = 10;
         break;
-    case 2:
+    case MAP_PRIZE_MOOGLE_POINTS_SMALL:
         work->gfx = gMapPrizeFrame2;
         work->amount = 4;
         break;
-    case 1:
+    case MAP_PRIZE_HP_LARGE:
         work->gfx = gMapPrizeFrame1;
         work->amount = gGameState.progression.maxHp / 20;
         break;
-    case 0:
+    case MAP_PRIZE_HP_SMALL:
     default:
         work->gfx = gMapPrizeFrame0;
         work->amount = gGameState.progression.maxHp * 3 / 100;

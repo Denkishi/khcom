@@ -51,6 +51,7 @@
 #include "jiminy_records_index_data.h"
 #include "gba/defines.h"
 #include "fld_types.h"
+#include "map_types.h"
 
 u8 gPooAttackActive EWRAM_COMMON(4);
 s32 gPoohRequestX EWRAM_COMMON(4);
@@ -5189,7 +5190,7 @@ u8 task_poo_leaf_1(PooLeafWork* work) {
         m4aSongNumStart(SONG_SND_224);
 
         if (!IsPooPrizeDropped(work->prizeId)) {
-            if (SpawnPooPrizes(2, 3, work->x + 0x1C00, work->y + 0x2000, work->z) != 0) {
+            if (SpawnPooPrizes(MAP_PRIZE_MOOGLE_POINTS_SMALL, 3, work->x + 0x1C00, work->y + 0x2000, work->z) != 0) {
                 SetPooPrizeDropped(work->prizeId);
             }
         }
@@ -5268,7 +5269,7 @@ u8 task_poo_tanpopo_1(PooTanpopoWork* work) {
         AnimReset(&work->anim2);
 
         if (!IsPooPrizeDropped(work->prizeId)) {
-            if (SpawnPooPrizes(2, 1, work->x + 0x1800, work->y + 0x2000, work->z) != 0) {
+            if (SpawnPooPrizes(MAP_PRIZE_MOOGLE_POINTS_SMALL, 1, work->x + 0x1800, work->y + 0x2000, work->z) != 0) {
                 SetPooPrizeDropped(work->prizeId);
             }
         }
@@ -6710,7 +6711,7 @@ u8 task_poo_mapobjhit_1(PooMapObjHitWork* work) {
                 AnimReset(&work->anim);
 
                 if (!IsPooPrizeDropped(work->prizeId)) {
-                    if (SpawnPooPrizes(2, 1, work->x + 0x1000, work->y + 0x1800, work->z) != 0) {
+                    if (SpawnPooPrizes(MAP_PRIZE_MOOGLE_POINTS_SMALL, 1, work->x + 0x1000, work->y + 0x1800, work->z) != 0) {
                         SetPooPrizeDropped(work->prizeId);
                     }
                 }
@@ -6801,8 +6802,8 @@ void PooPrizeUpdateBounce(PooPrizeWork* work) {
 
     if (work->collider.colliding && ColliderIsTouchingType(&work->collider, 1)) {
         switch (work->kind) {
-        case 2:
-        case 3:
+        case MAP_PRIZE_MOOGLE_POINTS_SMALL:
+        case MAP_PRIZE_MOOGLE_POINTS_LARGE:
             m4aSongNumStart(SONG_SYS_POWER_GET);
             gGameState.progression.mooglePoints += work->amount;
 
@@ -6811,8 +6812,8 @@ void PooPrizeUpdateBounce(PooPrizeWork* work) {
             }
 
             break;
-        case 0:
-        case 1:
+        case MAP_PRIZE_HP_SMALL:
+        case MAP_PRIZE_HP_LARGE:
         default:
             m4aSongNumStart(SONG_SYS_POWER_GET);
             gGameState.hp += work->amount;
@@ -6897,19 +6898,19 @@ void task_poo_prize_0(PooPrizeWork* work, PoohPrizeArgs* args) {
     work->kind = args->kind;
 
     switch (work->kind) {
-    case 3:
+    case MAP_PRIZE_MOOGLE_POINTS_LARGE:
         work->gfx = gMapPrizeFrame3;
         work->amount = 10;
         break;
-    case 2:
+    case MAP_PRIZE_MOOGLE_POINTS_SMALL:
         work->gfx = gMapPrizeFrame2;
         work->amount = 4;
         break;
-    case 1:
+    case MAP_PRIZE_HP_LARGE:
         work->gfx = gMapPrizeFrame1;
         work->amount = 10;
         break;
-    case 0:
+    case MAP_PRIZE_HP_SMALL:
     default:
         work->gfx = gMapPrizeFrame0;
         work->amount = 3;

@@ -322,16 +322,16 @@ u8 UpdateMapSelectSlideIn(MapSelectWork* work, void* task) {
         if (work->slideSteps != 0) {
             work->slideSteps--;
         } else {
-            if ((gGameState.progression.tutorialFlags & 8) == 0) {
+            if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP_SELECT) == 0) {
                 work->inTutorial = TRUE;
                 ResetMessageWindowFlags();
                 work->tutorialMessage = CARD_MSG_MAP_SELECT_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectTutorial);
-            } else if ((gGameState.progression.tutorialFlags & 0x40) == 0 && work->isEventDoor == TRUE) {
+            } else if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP_SELECT_EVENT_DOOR) == 0 && work->isEventDoor == TRUE) {
                 ResetMessageWindowFlags();
                 work->tutorialMessage = CARD_MSG_MAP_SELECT_EVENT_DOOR_TUTORIAL_0;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectEventDoorTutorial);
-                gGameState.progression.tutorialFlags |= 0x40;
+                gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP_SELECT_EVENT_DOOR;
             } else {
                 node = ListPoolFirst(&work->cards);
                 SetBgMapBlocks(1, gMapSelectBgMapBlocks, 1, 2);
@@ -444,7 +444,7 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
     keys = GetKeysPressed();
     sel = work->valueColumn + work->valueRow * 5;
 
-    if ((gGameState.progression.tutorialFlags & 8) == 0) {
+    if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP_SELECT) == 0) {
         if (work->steps == 0) {
             SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueTutorial);
             TaskPoolUpdate(&work->tasks);
@@ -1794,7 +1794,7 @@ u8 UpdateMapSelectValueTutorial(MapSelectWork* work, void* task) {
                 CreateSysmsgwinTask(&work->tasks, work->tutorialMessage);
                 work->tutorialMessage++;
             } else {
-                gGameState.progression.tutorialFlags |= 8;
+                gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP_SELECT;
                 SetTaskUpdate(task, (TaskUpdateFunc)UpdateMapSelectValueInput);
             }
         } else {

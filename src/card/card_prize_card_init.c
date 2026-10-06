@@ -672,11 +672,11 @@ s32 PrizeCardInit_1(PrizeCardInitWork* work) {
     s32 battleId;
 
     if (!work->spawned) {
-        if ((gGameState.progression.tutorialFlags & 0x20) == 0) {
+        if ((gGameState.progression.tutorialFlags & TUTORIAL_FLAG_MAP) == 0) {
             *(PrizeCardArgs*)args = work->args;
             args[8] = MAP_CARD_ID(MAP_CARD_GROUP_TRANQUIL_DARKNESS, 2);
             CreatePrizeMapCardTask(&work->tasks, args);
-            gGameState.progression.tutorialFlags |= 0x20;
+            gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_MAP;
         } else if (gGameState.floor == 0) {
             if (CountZeroValueMapCards() == 0) {
                 *(PrizeCardArgs*)args = work->args;

@@ -48,7 +48,7 @@ void RikuTutorialModeInit(s32 arg) {
 void Mode_riku_btlTutorial_1() {
     u16 tutorialFlags;
 
-    tutorialFlags = gGameState.progression.tutorialFlags | 0x1000;
+    tutorialFlags = gGameState.progression.tutorialFlags | TUTORIAL_FLAG_RIKU_BATTLE;
     gGameState.progression.tutorialFlags = tutorialFlags;
     ModeRequest(&gModeBattle, sRikuTutorialModeArg);
     TaskPoolUpdate(&sRikuTutorialTasks);
@@ -67,7 +67,7 @@ void Mode_riku_deckTutorial_1() {
             break;
         case RIKU_DECK_TUTORIAL_STATE_WAIT_MESSAGE:
             if (!IsMessageWindowOpen()) {
-                gGameState.progression.tutorialFlags |= 0x800;
+                gGameState.progression.tutorialFlags |= TUTORIAL_FLAG_RIKU_DECK;
                 ModeRequest(&gModeDeck, sRikuTutorialModeArg);
             }
 

@@ -128,7 +128,7 @@ void mode_wLogo_1() {
             sWLogoWorld--;
 
             if (sWLogoWorld < 0) {
-                sWLogoWorld = 12;
+                sWLogoWorld = WORLD_CASTLE_OBLIVION;
             }
 
 #ifdef VERSION_EU
@@ -141,7 +141,7 @@ void mode_wLogo_1() {
         if (GetKeysPressed() & DPAD_RIGHT) {
             sWLogoWorld++;
 
-            if (sWLogoWorld > 12) {
+            if (sWLogoWorld > WORLD_CASTLE_OBLIVION) {
                 sWLogoWorld = 0;
             }
 

@@ -152,5 +152,5 @@ void SetupSoraNewGame() {
     SetJiminyFlag(JIMINY_RECORD_CHARACTER_JIMINY_CRICKET);
     SetJiminyFlag(JIMINY_RECORD_CHARACTER_RIKU);
     SetJiminyFlag(JIMINY_RECORD_CHARACTER_KAIRI);
-    InitStartFloor(0, 10);
+    InitStartFloor(0, WORLD_TRAVERSE_TOWN);
 }

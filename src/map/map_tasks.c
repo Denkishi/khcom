@@ -1847,7 +1847,7 @@ void MapDbgEditSeed(MapDbgWork* work) {
     work->seedTextLength = FormatSmallFontHex(floorRoom->seed, work->seedText);
 
     if (GetKeysPressed() & SELECT_BUTTON) {
-        if (++gMapFloorState.world > 12) {
+        if (++gMapFloorState.world > WORLD_CASTLE_OBLIVION) {
             gMapFloorState.world = 0;
         }
 
@@ -1870,7 +1870,7 @@ void MapDbgEditWorld(MapDbgWork* work) {
     }
 
     if ((GetKeysRepeat() & DPAD_DOWN) && work->codeCursor == 0) {
-        gMapFloorState.world = gMapFloorState.world != 0 ? gMapFloorState.world - 1 : 12;
+        gMapFloorState.world = gMapFloorState.world != 0 ? gMapFloorState.world - 1 : WORLD_CASTLE_OBLIVION;
     }
 
     work->codeTextLength = FormatSmallFontHex(GetMapRoomDebugCode(floorRoom), work->codeText);

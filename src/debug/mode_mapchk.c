@@ -341,7 +341,7 @@ void MapChkEditWorld(MapChkWork* work) {
     s32 offset;
 
     if ((GetKeysRepeat() & DPAD_LEFT) != 0) {
-        work->world = work->world == 0 ? 12 : work->world - 1;
+        work->world = work->world == 0 ? WORLD_CASTLE_OBLIVION : work->world - 1;
     }
 
     if ((GetKeysRepeat() & DPAD_RIGHT) != 0) {

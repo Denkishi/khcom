@@ -368,9 +368,7 @@ typedef struct BosLstWork {
     Task* task;
     Task* lstTasks[0x20];
     TaskPool tasks;
-    u8 bgMap[0x280];
-    u8 bgMapRow10[0x24];
-    u8 bgMapRow10Col18[0x55C];
+    u16 bgMap[0x400];
 } BosLstWork;
 
 void BosPcDraw(PcWork* work);

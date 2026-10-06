@@ -2784,23 +2784,23 @@ void task_bos_lst_2(BosLstWork* work) {
             bgFrame += 9;
         }
 
-        DmaCopy16(3, sLstAnimDefs[anim].bgMap, work->bgMap, 0x800);
+        DmaCopy16(3, sLstAnimDefs[anim].bgMap, work->bgMap, sizeof(work->bgMap));
         src = sBosLstBgFrames[bgFrame][1];
-        DmaCopy16(3, src, work->bgMap, sizeof(work->bgMap));
+        DmaCopy16(3, src, work->bgMap, 0x280);
 
         if (work->facing > 0) {
-            DmaCopy16(3, src + 160, work->bgMapRow10, 0x1C);
+            DmaCopy16(3, src + 160, &work->bgMap[10 * 32], 0x1C);
         } else {
-            DmaCopy16(3, src + 169, work->bgMapRow10Col18, 0x1C);
+            DmaCopy16(3, src + 169, &work->bgMap[10 * 32 + 18], 0x1C);
         }
 
         if (sy < 0) {
             CpuFastFill(0, work->bgMap, ((-sy) >> 3) * 64);
         } else if (sy <= DISPLAY_HEIGHT - 1) {
-            CpuFastFill(0, work->bgMap + ((20 - (sy >> 3)) << 6), ((sy >> 3) + 12) * 64);
+            CpuFastFill(0, &work->bgMap[(20 - (sy >> 3)) * 32], ((sy >> 3) + 12) * 64);
         }
 
-        LoadBgMap(1, work->bgMap, 0x800);
+        LoadBgMap(1, work->bgMap, sizeof(work->bgMap));
     }
 
     WorldToScreen(&sx, &sy, work->x + work->offsetX, work->y + work->offsetY, work->z + work->offsetZ);

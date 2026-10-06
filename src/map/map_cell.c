@@ -416,7 +416,7 @@ void InitFieldState() {
 void CreateMapRndTask() {
     LoadMapRoomState(gMapRoomState, gMapFloorState.room);
 
-    if (gMapRoomState->roomType == 5) {
+    if (gMapRoomState->roomType == ROOM_TYPE_SLEEPING_DARKNESS) {
         gFieldState->flags |= FIELD_FLAG_NO_ENEMY_SPAWN;
     }
 
@@ -1905,7 +1905,7 @@ void MapPlaceDoors() {
         }
     }
 
-    if (gMapRoomState->roomType != 3) {
+    if (gMapRoomState->roomType != ROOM_TYPE_GUARDED_TROVE) {
         if ((u8)MapPlaceLastPlatformDoor() != 2) {
             MapPlaceRightPlatformDoor(2);
 

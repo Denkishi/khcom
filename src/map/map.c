@@ -303,20 +303,20 @@ void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
 
 void MapEnmApplyRoomFlags(MapEnmWork* work) {
     switch (gMapRoomState->roomType) {
-    case 4:
+    case ROOM_TYPE_LOOMING_DARKNESS:
         work->flags |= MAP_ENM_FLAG_AGGRESSIVE;
         break;
-    case 5:
+    case ROOM_TYPE_SLEEPING_DARKNESS:
         work->flags |= MAP_ENM_FLAG_ASLEEP;
         work->flags |= MAP_ENM_FLAG_PERSISTENT;
         break;
-    case 18:
+    case ROOM_TYPE_STAGNANT_SPACE:
         work->flags |= MAP_ENM_FLAG_SLOW;
         break;
-    case 20:
+    case ROOM_TYPE_WHITE_ROOM:
         work->flags |= MAP_ENM_FLAG_WHITE_MUSHROOM;
         break;
-    case 21:
+    case ROOM_TYPE_BLACK_ROOM:
         work->flags |= MAP_ENM_FLAG_BLACK_FUNGUS;
         break;
     }
@@ -469,11 +469,11 @@ void MapEnmSpawnRoomSet() {
     s32 i;
 
     switch (gMapRoomState->roomType) {
-    case 3:
+    case ROOM_TYPE_GUARDED_TROVE:
         MapEnmSpawnFixed(&args, 3, 3);
         MapEnmSpawnFixed(&args, 2, 2);
         break;
-    case 5:
+    case ROOM_TYPE_SLEEPING_DARKNESS:
         for (i = 0; i < 3; i++) {
             if (gMapFloorState.world == WORLD_ATLANTICA) {
                 MapEnmSpawnFixed(&args, 4, 0);
@@ -568,10 +568,10 @@ void MapEnmUpdateSpawner() {
     }
 
     switch (gMapRoomState->roomType) {
-    case 20:
+    case ROOM_TYPE_WHITE_ROOM:
         def = gMapEnmDefs[5];
         break;
-    case 21:
+    case ROOM_TYPE_BLACK_ROOM:
         def = gMapEnmDefs[6];
         break;
     default:
@@ -1478,7 +1478,7 @@ void MapGmkPlaceGmk01() {
 
     floorRoom = GetMapFloorRoom(gMapFloorState.room);
 
-    if (gMapRoomState->roomType == 10) {
+    if (gMapRoomState->roomType == ROOM_TYPE_FALSE_BOUNTY) {
         u8* count;
 
         def = &gMapGmk01Def;
@@ -1503,8 +1503,8 @@ void MapGmkPlaceGmk01() {
         }
     }
 
-    if (gMapRoomState->roomType == 3 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 10 ||
-        gMapRoomState->roomType == 22) {
+    if (gMapRoomState->roomType == ROOM_TYPE_GUARDED_TROVE || gMapRoomState->roomType == ROOM_TYPE_CALM_BOUNTY ||
+        gMapRoomState->roomType == ROOM_TYPE_FALSE_BOUNTY || gMapRoomState->roomType == ROOM_TYPE_HIDDEN_CHAMBER) {
         MapCell* cell;
         u16 opened;
 
@@ -1531,7 +1531,7 @@ void MapGmkPlaceGmk01() {
 void MapGmkPlaceGmk04() {
     FldPos pos;
 
-    if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 0x17) {
+    if (gMapRoomState->roomType == ROOM_TYPE_MOMENTS_REPRIEVE || gMapRoomState->roomType == ROOM_TYPE_EXIT_ROOM) {
         MapGmkFindSpot(&pos, gMapGmk04Def.spotFinder);
         gMapGmkPlacements[sMapGmkCount].flags = 0;
         gMapGmkPlacements[sMapGmkCount].def = &gMapGmk04Def;
@@ -1545,7 +1545,7 @@ void MapGmkPlaceGmk04() {
 void MapGmkPlaceMoogle() {
     FldPos pos;
 
-    if (gMapRoomState->roomType == 11) {
+    if (gMapRoomState->roomType == ROOM_TYPE_MOOGLE_ROOM) {
         MapGmkFindSpot(&pos, gMapGmk05Def.spotFinder);
         gMapGmkPlacements[sMapGmkCount].flags = 0;
         gMapGmkPlacements[sMapGmkCount].def = &gMapGmk05Def;
@@ -1562,8 +1562,9 @@ void MapGmkPlaceWorldGimmicks() {
     s32 i;
     s32 newPalette;
 
-    if (gMapRoomState->roomType == 6 || gMapRoomState->roomType == 9 || gMapRoomState->roomType == 11 ||
-        gMapRoomState->roomType == 22 || gMapRoomState->roomType == 23) {
+    if (gMapRoomState->roomType == ROOM_TYPE_MOMENTS_REPRIEVE || gMapRoomState->roomType == ROOM_TYPE_CALM_BOUNTY ||
+        gMapRoomState->roomType == ROOM_TYPE_MOOGLE_ROOM || gMapRoomState->roomType == ROOM_TYPE_HIDDEN_CHAMBER ||
+        gMapRoomState->roomType == ROOM_TYPE_EXIT_ROOM) {
         return;
     }
 
@@ -2332,7 +2333,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
     for (; entry->unk_00[0] != 4; entry++) {
         switch (entry->unk_00[0]) {
         case 0:
-            if (gMapRoomState->roomType == 22) {
+            if (gMapRoomState->roomType == ROOM_TYPE_HIDDEN_CHAMBER) {
                 break;
             }
 
@@ -2346,7 +2347,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
             CreateMapPrzCardTask(prize, TRUE, x, y, z);
             return;
         case 1:
-            if (gMapRoomState->roomType == 22) {
+            if (gMapRoomState->roomType == ROOM_TYPE_HIDDEN_CHAMBER) {
                 break;
             }
 
@@ -2360,7 +2361,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
             TaskCreate(&gFieldState->tasks5, &gTaskDescMapPrzStock, prize);
             return;
         case 2:
-            if (gMapRoomState->roomType != 22) {
+            if (gMapRoomState->roomType != ROOM_TYPE_HIDDEN_CHAMBER) {
                 break;
             }
 
@@ -2375,7 +2376,7 @@ void CreateWorldPrize(s32 x, s32 y, s32 z) {
             gMapFloorState.flags |= FLOOR_FLAG_CHAMBER_PRIZE_TAKEN;
             return;
         case 3:
-            if (gMapRoomState->roomType != 22) {
+            if (gMapRoomState->roomType != ROOM_TYPE_HIDDEN_CHAMBER) {
                 break;
             }
 
@@ -3438,7 +3439,7 @@ void Mode_MapFix_0() {
     ColliderPoolsInit();
     gMapRoomState->flags |= ROOM_FLAG_FIXED_ROOM;
     gMapRoomState->nameId = ROOM_NAME_UNKNOWN_PLACE;
-    gMapRoomState->roomType = 0;
+    gMapRoomState->roomType = ROOM_TYPE_PLAIN;
 
     fixedDef = GetMapFixedDef();
     TaskCreate(&gFieldState->tasks, &gTaskDescMapFix, fixedDef);

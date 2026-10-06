@@ -95,7 +95,7 @@ void MarkEventRoomDone(MapEventDoor* door) {
         floorRoom = GetMapFloorRoom(door->room);
         floorRoom->cardValue = 0;
         floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
-        floorRoom->roomType = 0;
+        floorRoom->roomType = ROOM_TYPE_PLAIN;
         floorRoom->flags |= FLOOR_ROOM_FLAG_EVENT_DONE;
     }
 }
@@ -623,14 +623,14 @@ void SetCardlessRoomType(u8 room) {
             if (door->kind == EVENT_DOOR_HIDDEN_CHAMBER) {
                 floorRoom->cardValue = 0;
                 floorRoom->nameId = ROOM_NAME_HIDDEN_CHAMBER;
-                floorRoom->roomType = 22;
+                floorRoom->roomType = ROOM_TYPE_HIDDEN_CHAMBER;
                 return;
             }
 
             gMapFloorState.flags |= FLOOR_FLAG_EVENT_ROOM_OPEN;
             floorRoom->cardValue = 0;
             floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
-            floorRoom->roomType = 0;
+            floorRoom->roomType = ROOM_TYPE_PLAIN;
         }
 
         door++;
@@ -639,18 +639,18 @@ void SetCardlessRoomType(u8 room) {
     if (GetMapFloorDef(gGameState.floor)->exitRoom != room) {
         floorRoom->cardValue = 0;
         floorRoom->nameId = ROOM_NAME_UNKNOWN_PLACE;
-        floorRoom->roomType = 0;
+        floorRoom->roomType = ROOM_TYPE_PLAIN;
         return;
     }
 
     floorRoom->cardValue = 0;
     floorRoom->nameId = MAP_CARD_MOMENTS_REPRIEVE;
-    floorRoom->roomType = 23;
+    floorRoom->roomType = ROOM_TYPE_EXIT_ROOM;
 }
 
 u8 GetRandomRoomType() {
     if ((gGameState.flags & GAME_FLAG_RIKU) == 0) {
-        return GetRandom() % 21 + 1;
+        return GetRandom() % 21 + ROOM_TYPE_TEEMING_DARKNESS;
     }
 
     return gRikuRoomTypes[GetRandom() % 13];
@@ -675,7 +675,7 @@ void CreateMapRoom(u8 room, MapCardAttributes* card) {
         floorRoom->cardValue = card->value;
         floorRoom->nameId = row[0];
 
-        if (row[1] != 25) {
+        if (row[1] != ROOM_TYPE_RANDOM) {
             floorRoom->roomType = row[1];
         } else {
             floorRoom->roomType = GetRandomRoomType();
@@ -1194,19 +1194,19 @@ u8 gWorldBattleStages[14] = {
 };
 
 u8 gRikuRoomTypes[14] = {
-    1,
-    2,
-    4,
-    5,
-    6,
-    7,
-    8,
-    13,
-    14,
-    15,
-    16,
-    17,
-    18,
+    ROOM_TYPE_TEEMING_DARKNESS,
+    ROOM_TYPE_TRANQUIL_DARKNESS,
+    ROOM_TYPE_LOOMING_DARKNESS,
+    ROOM_TYPE_SLEEPING_DARKNESS,
+    ROOM_TYPE_MOMENTS_REPRIEVE,
+    ROOM_TYPE_FEEBLE_DARKNESS,
+    ROOM_TYPE_ALMIGHTY_DARKNESS,
+    ROOM_TYPE_MARTIAL_WAKING,
+    ROOM_TYPE_ALCHEMIC_WAKING,
+    ROOM_TYPE_MEETING_GROUND,
+    ROOM_TYPE_STRONG_INITIATIVE,
+    ROOM_TYPE_LASTING_DAZE,
+    ROOM_TYPE_STAGNANT_SPACE,
 };
 
 const MapNameText* gMapWorldNames[14] = {

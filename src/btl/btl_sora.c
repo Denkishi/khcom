@@ -2597,13 +2597,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_VO_SR_CAREL00);
         } else if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
-            case 0:
+            case SPELL_TIER_BASE:
                 BgFxStartCure(SPELL_TIER_BASE, act->x, act->y, act->z - 11264);
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 BgFxStartCure(SPELL_TIER_RA, act->x, act->y, act->z - 11264);
                 break;
-            case 2:
+            case SPELL_TIER_GA:
                 BgFxStartCure(SPELL_TIER_GA, act->x, act->y, act->z - 11264);
                 break;
             }
@@ -2617,13 +2617,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             switch (act->btl->hcEffect) {
             case HC_EFFECT_CURE_BOOST:
                 switch (work->variant[0]) {
-                case 0:
+                case SPELL_TIER_BASE:
                     act->hp += 75;
                     break;
-                case 1:
+                case SPELL_TIER_RA:
                     act->hp += 225;
                     break;
-                case 2:
+                case SPELL_TIER_GA:
                     act->hp += 450;
                     break;
                 }
@@ -2631,13 +2631,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 break;
             case HC_EFFECT_MAGIC_BOOST:
                 switch (work->variant[0]) {
-                case 0:
+                case SPELL_TIER_BASE:
                     act->hp += 65;
                     break;
-                case 1:
+                case SPELL_TIER_RA:
                     act->hp += 195;
                     break;
-                case 2:
+                case SPELL_TIER_GA:
                     act->hp += 390;
                     break;
                 }
@@ -2645,13 +2645,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 break;
             default:
                 switch (work->variant[0]) {
-                case 0:
+                case SPELL_TIER_BASE:
                     act->hp += 50;
                     break;
-                case 1:
+                case SPELL_TIER_RA:
                     act->hp += 150;
                     break;
-                case 2:
+                case SPELL_TIER_GA:
                     act->hp += 300;
                     break;
                 }
@@ -2704,13 +2704,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             }
 
             switch (work->variant[0]) {
-            case 0:
+            case SPELL_TIER_BASE:
                 BgFxStartStop(SPELL_TIER_BASE, x, y, z, 78);
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 BgFxStartStop(SPELL_TIER_RA, x, y, z, 79);
                 break;
-            case 2:
+            case SPELL_TIER_GA:
             default:
                 BgFxStartStop(work->variant[0], x, y, z, 80);
                 break;
@@ -3220,13 +3220,13 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
-            case 0:
+            case SPELL_TIER_BASE:
                 BgFxStartAero(SPELL_TIER_BASE, act->x, act->y, act->z, 81);
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 BgFxStartAero(SPELL_TIER_RA, act->x, act->y, act->z, 82);
                 break;
-            case 2:
+            case SPELL_TIER_GA:
                 BgFxStartAero(SPELL_TIER_GA, act->x, act->y, act->z, 83);
                 break;
             }
@@ -3517,7 +3517,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
-            case 0:
+            case SPELL_TIER_BASE:
                 enemy = act->btl->actor2;
 
                 if (enemy != NULL) {
@@ -3536,15 +3536,15 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 hit = 0;
                 BgFxStartThunder(SPELL_TIER_BASE, act->x, act->y, act->z - 16384, targetX, targetY, hit, 72);
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 BgFxStartWideThunder(SPELL_TIER_RA, act->x, act->y, act->z - 16384, act->groundZ, 73);
                 break;
-            case 2:
+            case SPELL_TIER_GA:
             default:
                 BgFxStartWideThunder(SPELL_TIER_GA, act->x, act->y, act->z - 16384, act->groundZ, 74);
                 break;
             }
-        } else if (work->variant[0] != 0 && (s16)work->stateTimer == 47) {
+        } else if (work->variant[0] != SPELL_TIER_BASE && (s16)work->stateTimer == 47) {
             SetBattleZoom(15, 148, 65536, 76800);
         } else if ((s16)work->stateTimer > 27 && !BgFxIsActive()) {
             SetBattleZoom(15, 256, gBtlWork->x2, gBtlWork->y2);
@@ -3772,10 +3772,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             default:
                 attack = 68;
                 break;
-            case 0:
+            case SPELL_TIER_BASE:
                 attack = 66;
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 attack = 67;
                 break;
             }
@@ -3865,10 +3865,10 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 27) {
             switch (work->variant[0]) {
-            case 0:
+            case SPELL_TIER_BASE:
                 attack = 69;
                 break;
-            case 1:
+            case SPELL_TIER_RA:
                 attack = 70;
                 break;
             default:

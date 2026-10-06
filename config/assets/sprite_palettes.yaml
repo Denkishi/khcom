@@ -5402,27 +5402,17 @@ entries:
     size: 32
 - name: pooh_gauge
   format: palette
-  symbol: gPoohGaugePalette
+  symbol: gPoohGaugePalettes
+  shape: [2, 16]
   us:
     address: 0x09849B98
-    size: 32
+    size: 64
   jp:
     address: 0x097FE86C
-    size: 32
+    size: 64
   eu:
     address: 0x0981E240
-    size: 32
-- name: gPooGaugePalette
-  format: palette
-  us:
-    address: 0x09849BB8
-    size: 32
-  jp:
-    address: 0x097FE88C
-    size: 32
-  eu:
-    address: 0x0981E260
-    size: 32
+    size: 64
 - name: tigger
   format: palette
   symbol: gTiggerPalette

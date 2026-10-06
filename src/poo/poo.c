@@ -3218,8 +3218,8 @@ s32 GetPooGaugeFrame(u16 timer) {
 void task_poo_gauge_0(PooGaugeWork* work) {
     work->blinkTimer = 0;
     work->tiles = AllocObjTiles(GetMaxSpriteTileBytes(gPooGaugeFrames, 4), gPooGaugeTiles);
-    work->palette = LoadObjPalette(gPoohGaugePalette, sizeof(gPoohGaugePalette));
-    work->paletteSrc = gPoohGaugePalette;
+    work->palette = LoadObjPalette(gPoohGaugePalettes[0], sizeof(gPoohGaugePalettes[0]));
+    work->paletteSrc = gPoohGaugePalettes[0];
     work->gfx = gPooGaugeFrames[GetPooGaugeFrame(work->blinkTimer)];
     work->warning = FALSE;
 }
@@ -3235,16 +3235,16 @@ u8 task_poo_gauge_1(PooGaugeWork* work) {
     }
 
     if (work->warning) {
-        if (work->paletteSrc != gPooGaugePalette) {
-            LoadObjPaletteBank(work->palette->index, gPooGaugePalette);
-            work->paletteSrc = gPooGaugePalette;
+        if (work->paletteSrc != gPoohGaugePalettes[1]) {
+            LoadObjPaletteBank(work->palette->index, gPoohGaugePalettes[1]);
+            work->paletteSrc = gPoohGaugePalettes[1];
         }
     }
 
     if (!work->warning) {
-        if (work->paletteSrc != gPoohGaugePalette) {
-            LoadObjPaletteBank(work->palette->index, gPoohGaugePalette);
-            work->paletteSrc = gPoohGaugePalette;
+        if (work->paletteSrc != gPoohGaugePalettes[0]) {
+            LoadObjPaletteBank(work->palette->index, gPoohGaugePalettes[0]);
+            work->paletteSrc = gPoohGaugePalettes[0];
         }
     }
 
@@ -3670,7 +3670,7 @@ void task_poo_honey_2(PooHoneyWork* work) {
     } else {
         if (work->palette == NULL) {
             work->tiles = AllocObjTiles(work->tileBytes, gPoohHoneyTiles);
-            work->palette = LoadObjPalette(gPoohGaugePalette, sizeof(gPoohGaugePalette));
+            work->palette = LoadObjPalette(gPoohGaugePalettes[0], sizeof(gPoohGaugePalettes[0]));
             ColliderInit(&work->collider, 10, 8, 16);
             AddPooNode(&work->node, 0x1FA4, &work->pos2);
         }

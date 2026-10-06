@@ -1279,7 +1279,7 @@ static ObjDef sChkObjPoohGameDefs[] = {
     { gRabbitBl00Frames, gRabbitBl00Anims, gRabbitBl00Tiles, ARRAY_COUNT(gRabbitBl00Anims), gRabbitPalettes, "rabbit_bl00.aob", "rabbit.acl", sizeof(gRabbitPalettes) },
     { gRaVegetablesFrames, gRaVegetablesAnims, gRaVegetablesTiles, ARRAY_COUNT(gRaVegetablesAnims), gRaVegetablesPalette, "ra_vegetables.aob", "ra_vegetables.acl", sizeof(gRaVegetablesPalette) },
     { gRaWagonFrames, gRaWagonAnims, gRaWagonTiles, ARRAY_COUNT(gRaWagonAnims), gRaWagonPalette, "ra_wagon.aob", "ra_wagon.acl", sizeof(gRaWagonPalette) },
-    { gPoohHoneyFrames, gPoohHoneyAnims, gPoohHoneyTiles, ARRAY_COUNT(gPoohHoneyAnims), gPoohGaugePalette, "pooh_honey.aob", "pooh_gauge.acl", 64 },
+    { gPoohHoneyFrames, gPoohHoneyAnims, gPoohHoneyTiles, ARRAY_COUNT(gPoohHoneyAnims), gPoohGaugePalettes, "pooh_honey.aob", "pooh_gauge.acl", sizeof(gPoohGaugePalettes) },
     { gPoohFf10Frames, gPoohFf10Anims, gPoohFf10Tiles, ARRAY_COUNT(gPoohFf10Anims), gPoohPalette, "pooh_ff10.aob", "pooh.acl", sizeof(gPoohPalette) },
     { gPoohLl10Frames, gPoohLl10Anims, gPoohLl10Tiles, ARRAY_COUNT(gPoohLl10Anims), gPoohPalette, "pooh_ll10.aob", "pooh.acl", sizeof(gPoohPalette) },
     { gRoFootmarkFrames, gRoFootmarkAnims, gRoFootmarkTiles, ARRAY_COUNT(gRoFootmarkAnims), gRoFootmarkPalette, "ro_footmark.aob", "ro_footmark.acl", sizeof(gRoFootmarkPalette) },

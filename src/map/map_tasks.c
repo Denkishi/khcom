@@ -52,6 +52,7 @@
 #include "sprite_palettes.h"
 #include "card_message_data.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 static const AnimDef sMapEnm00AnimDefs[10] = {
     { gEmy00L06Frames, gEmy00L06Anims, gEmy00L06Tiles, 0 },
@@ -4539,7 +4540,7 @@ void MapMsgInit(MapMsgWork* work, void* text) {
     LoadBgMap(0, gMapMsgWinMap, 0x800);
     SetBgScroll(0, 0, (u16)-46);
     LoadPalette(gCard00Palette, (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP), 32);
-    InitTextSlots(work->textSlots, 48);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->textSlotCount = LoadTextSlots(text, work->textSlots);
     work->palette = LoadTextPalette(1);
     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
@@ -4562,7 +4563,7 @@ void MapMsgDestroy(MapMsgWork* work) {
 
     FadeSetPaletteExcluded(work->palette->index + 0x10, FALSE);
     ReleaseObjPalette(work->palette);
-    FreeTextSlots(work->textSlots, 0x30);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
 }
 
 s32 Task_MapMsg2_1(MapMsgWork* work) {

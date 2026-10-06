@@ -51,6 +51,7 @@
 #include <stddef.h>
 #include "registration_data.h"
 #include "sprite_palettes.h"
+#include "macros.h"
 
 static const JiminyEntry sJiminyEntries[21] = {
     { gJiminyRootMap, gJiminyRootNames, 3, JIMINY_ENTRY_NONE, gJiminyEntry00Children, NULL, 0 },
@@ -1218,7 +1219,7 @@ void JiminyFreeRows() {
 
     for (i = 0; i < 8; i++) {
         sJiminyWork->rowStates[i] = JIMINY_ENTRY_STATE_INCOMPLETE;
-        FreeTextSlots(sJiminyWork->lines[i].textSlots, 48);
+        FreeTextSlots(sJiminyWork->lines[i].textSlots, ARRAY_COUNT(sJiminyWork->lines[i].textSlots));
 
         for (j = 0; j < 48; j++) {
             if (sJiminyWork->lines[i].textSlots[j].tiles != NULL) {
@@ -1631,7 +1632,7 @@ void mode_jiminy_0() {
     FadeStartIn(FADE_MODE_BLACK, 0x10);
 
     for (i = 0; i < 8; i++) {
-        InitTextSlots(sJiminyWork->lines[i].textSlots, 0x30);
+        InitTextSlots(sJiminyWork->lines[i].textSlots, ARRAY_COUNT(sJiminyWork->lines[i].textSlots));
     }
 
     InitMsgGlyphSprites(0);

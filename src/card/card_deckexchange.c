@@ -144,11 +144,11 @@ void deckexchange_0(DeckExchangeWork* work, void* resultOut) {
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
     work->textSlotCount4 = 0;
-    InitTextSlots(work->textSlots, 8);
-    InitTextSlots(work->textSlots2, 8);
-    InitTextSlots(work->textSlots3, 8);
-    InitTextSlots(work->textSlots4, 30);
-    InitTextSlots(work->textSlots5, 90);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    InitTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
+    InitTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
 }
 
 u8 deckexchange_1(DeckExchangeWork* work, void* task) {
@@ -1024,11 +1024,11 @@ void deckexchange_3(DeckExchangeWork* work) {
     ReleaseObjTiles(work->tiles2);
     ReleaseObjTiles(work->tiles3);
     ReleaseObjPalette(work->palette);
-    FreeTextSlots(work->textSlots, 8);
-    FreeTextSlots(work->textSlots2, 8);
-    FreeTextSlots(work->textSlots3, 8);
-    FreeTextSlots(work->textSlots4, 30);
-    FreeTextSlots(work->textSlots5, 90);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
+    FreeTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
     ReleaseObjPalette(*palette4);
     TaskPoolDestroy(&work->tasks);
     TaskPoolDestroy(&work->tasks2);
@@ -1472,9 +1472,9 @@ void DrawDeckExchangeCardTotals() {
 }
 
 void LoadDeckExchangeDeckNameTexts(DeckExchangeWork* work) {
-    InitTextSlots(work->textSlots, 8);
-    InitTextSlots(work->textSlots2, 8);
-    InitTextSlots(work->textSlots3, 8);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textSlotCount = LoadTextSlots(GetDeckName(0), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(GetDeckName(1), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(GetDeckName(2), work->textSlots3);

@@ -39,6 +39,7 @@
 #include "card_level_up.h"
 #include "default_bg_map.h"
 #include "battle_ids.h"
+#include "macros.h"
 
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
@@ -95,12 +96,12 @@ void Level_Up_0(LevelUpWork* work) {
     }
 
 #ifndef VERSION_EU
-    InitTextSlots(work->textSlots[0], 36);
-    InitTextSlots(work->textSlots[1], 36);
-    InitTextSlots(work->textSlots[2], 36);
-    InitTextSlots(work->textSlots[3], 36);
-    InitTextSlots(work->textSlots[4], 36);
-    InitTextSlots(work->textSlots[5], 36);
+    InitTextSlots(work->textSlots[0], ARRAY_COUNT(work->textSlots[0]));
+    InitTextSlots(work->textSlots[1], ARRAY_COUNT(work->textSlots[0]));
+    InitTextSlots(work->textSlots[2], ARRAY_COUNT(work->textSlots[0]));
+    InitTextSlots(work->textSlots[3], ARRAY_COUNT(work->textSlots[0]));
+    InitTextSlots(work->textSlots[4], ARRAY_COUNT(work->textSlots[0]));
+    InitTextSlots(work->textSlots[5], ARRAY_COUNT(work->textSlots[0]));
     work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTiles, 0x500);
 #else
     work->tilesPalettes[6] = LoadObjTiles(gLevelUpHeaderTilesByLanguage[gLanguage], sLevelUpHeaderTileSizesByLanguage[gLanguage]);
@@ -1279,12 +1280,12 @@ void Level_Up_3(LevelUpWork* work) {
         ReleaseObjTiles(work->tiles5[2]);
     }
 #else
-    FreeTextSlots(work->textSlots[0], 36);
-    FreeTextSlots(work->textSlots[1], 36);
-    FreeTextSlots(work->textSlots[2], 36);
-    FreeTextSlots(work->textSlots[3], 36);
-    FreeTextSlots(work->textSlots[4], 36);
-    FreeTextSlots(work->textSlots[5], 36);
+    FreeTextSlots(work->textSlots[0], ARRAY_COUNT(work->textSlots[0]));
+    FreeTextSlots(work->textSlots[1], ARRAY_COUNT(work->textSlots[0]));
+    FreeTextSlots(work->textSlots[2], ARRAY_COUNT(work->textSlots[0]));
+    FreeTextSlots(work->textSlots[3], ARRAY_COUNT(work->textSlots[0]));
+    FreeTextSlots(work->textSlots[4], ARRAY_COUNT(work->textSlots[0]));
+    FreeTextSlots(work->textSlots[5], ARRAY_COUNT(work->textSlots[0]));
 #endif
 
     if (work->tilesPalettes[6] != NULL) {

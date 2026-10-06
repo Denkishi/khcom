@@ -19,6 +19,7 @@
 #include "sprite_palettes.h"
 #include "text_types.h"
 #include "engine_math.h"
+#include "macros.h"
 
 const MapNameText* gRoomNames[28] = {
     LOCALIZED(gRoomNameTeemingDarkness),
@@ -73,7 +74,7 @@ void task_room_name_0(RoomNameWork* work, s32 nameId) {
     work->unk_2C = 0;
     work->state = ROOM_NAME_STATE_DELAY;
     work->scaleY = Q_8_8(0.1);
-    InitTextSlots(work->textSlots, 0x24);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->palette2 = LoadTextPalette(1);
 #ifdef VERSION_EU
     work->textSlotCount = LoadTextSlots(GetLocalizedString(gRoomNames[work->nameId]), work->textSlots);
@@ -153,7 +154,7 @@ void task_room_name_2(RoomNameWork* work) {
 
 void task_room_name_3(RoomNameWork* work) {
     ReleaseObjTiles(work->tiles);
-    FreeTextSlots(work->textSlots, 0x24);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette);
     ReleaseObjPalette(work->palette2);
 }

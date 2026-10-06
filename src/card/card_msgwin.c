@@ -177,8 +177,8 @@ u8 UpdateCardMsgwinLoadText(CardMsgWinWork* work, void* task) {
     }
 #endif
 
-    InitTextSlots(work->textSlots, 10);
-    InitTextSlots(work->textSlots2, 10);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     SetTaskUpdate(task, (TaskUpdateFunc)UpdateCardMsgwinLoadFace);
 
     return 1;
@@ -281,8 +281,8 @@ static void msgwin_3(CardMsgWinWork* work) {
         ReleaseObjPalette(work->textPalette);
     }
 
-    FreeTextSlots(work->textSlots, 10);
-    FreeTextSlots(work->textSlots2, 10);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     gMessageWindowOpen = FALSE;
     sActiveCardMsgwin = NULL;
 }

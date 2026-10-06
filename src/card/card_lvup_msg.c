@@ -23,6 +23,7 @@
 #include "card_lvup_msg.h"
 #include "sprite_palettes.h"
 #include "text_types.h"
+#include "macros.h"
 
 #ifdef VERSION_EU
 static const u8 sLvupMsgPeriod[] = ".";
@@ -33,11 +34,11 @@ static const u16 sLvupMsgPeriod[2] = { '.', 0 };
 void Lvup_msg_0(LvupMsgWork* work, StatIncreaseDisplayArgs* arg) {
     StatIncreaseDisplayArgs args = *arg;
 
-    InitTextSlots(work->textSlots, 20);
-    InitTextSlots(work->textSlots2, 20);
-    InitTextSlots(work->textSlots3, 20);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifndef VERSION_JP
-    InitTextSlots(work->textSlots4, 20);
+    InitTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
     work->textSlotCount4 = LoadTextSlots(sLvupMsgPeriod, work->textSlots4);
 #endif
     work->amount = arg->amount;
@@ -171,11 +172,11 @@ void Lvup_msg_2(LvupMsgWork* work) {
 }
 
 void Lvup_msg_3(LvupMsgWork* work) {
-    FreeTextSlots(work->textSlots, 20);
-    FreeTextSlots(work->textSlots2, 20);
-    FreeTextSlots(work->textSlots3, 20);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifndef VERSION_JP
-    FreeTextSlots(work->textSlots4, 20);
+    FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
 #endif
     ReleaseObjPalette(work->textPalette);
     ReleaseObjTiles(work->tiles);

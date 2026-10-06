@@ -1363,11 +1363,11 @@ static void Deckmenu2_0(DeckMenuWork* work, void* resultOut) {
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
     work->textSlotCount4 = 0;
-    InitTextSlots(work->textSlots, 8);
-    InitTextSlots(work->textSlots2, 8);
-    InitTextSlots(work->textSlots3, 8);
-    InitTextSlots(work->textSlots4, 30);
-    InitTextSlots(work->textSlots5, 90);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    InitTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
+    InitTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
     work->step = 0;
     work->result = DECK_MENU_RESULT_NONE;
 }
@@ -4411,11 +4411,11 @@ void DeckMenuDestroy(DeckMenuWork* work) {
     }
 
     ReleaseCommandMenuGfx(work);
-    FreeTextSlots(work->textSlots, 8);
-    FreeTextSlots(work->textSlots2, 8);
-    FreeTextSlots(work->textSlots3, 8);
-    FreeTextSlots(work->textSlots4, 30);
-    FreeTextSlots(work->textSlots5, 90);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
+    FreeTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
     ReleaseObjPalette(work->palette4);
     TaskPoolDestroy(&work->taskpool);
     TaskPoolDestroy(&work->cardpool);
@@ -5127,9 +5127,9 @@ void DrawCardTotals() {
 }
 
 void LoadDeckNameTexts(DeckMenuWork* work) {
-    InitTextSlots(work->textSlots, 8);
-    InitTextSlots(work->textSlots2, 8);
-    InitTextSlots(work->textSlots3, 8);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textSlotCount = LoadTextSlots(GetDeckName(0), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(GetDeckName(1), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(GetDeckName(2), work->textSlots3);
@@ -6875,12 +6875,12 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
 #else
         UpdateSpriteFrameTiles(work->tiles13, gDeckKeyboardCursorFrames[10], gDeckKeyboardCursorTiles);
 #endif
-        FreeTextSlots(work->textSlots, 8);
-        FreeTextSlots(work->textSlots2, 8);
-        FreeTextSlots(work->textSlots3, 8);
-        FreeTextSlots(work->textSlots4, 30);
-        FreeTextSlots(work->textSlots5, 90);
-        InitTextSlots(work->textSlots6, 8);
+        FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+        FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+        FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+        FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
+        FreeTextSlots(work->textSlots5, ARRAY_COUNT(work->textSlots5));
+        InitTextSlots(work->textSlots6, ARRAY_COUNT(work->textSlots6));
         CopyDeckNameToBuffer(work);
         work->textSlotCount6 = LoadTextSlots(work->nameBuffer, work->textSlots6);
         work->caretX = (GetTextSlotsWidth(work->textSlots6, work->textSlotCount6) << 8) + 0x8300;
@@ -7348,7 +7348,7 @@ u8 UpdateDeckMenuCloseKeyboard(DeckMenuWork* work, void* task) {
     work->view = DECK_MENU_VIEW_DECK_GRID;
     SetDeckMenuFrameCursor(work, DECK_FRAME_CURSOR_CARD);
     SetDeckMenuHandAnim(work);
-    FreeTextSlots(work->textSlots6, 8);
+    FreeTextSlots(work->textSlots6, ARRAY_COUNT(work->textSlots6));
     ReleaseObjTiles(work->tiles11);
     ReleaseObjTiles(work->tiles13);
     ReleaseObjPalette(work->palette7);

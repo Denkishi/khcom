@@ -607,7 +607,7 @@ void task_status_sora_3(StatusSoraWork* work) {
 }
 
 void task_status_deckname_0(StatusDecknameWork* work, u8* mesWindowOpen) {
-    InitTextSlots(work->textSlots, 10);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->mesWindowOpen = mesWindowOpen;
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->palette = LoadObjPalette(gStatusRowHighlightPalette, 0x20);
@@ -624,7 +624,7 @@ void task_status_deckname_2(StatusDecknameWork* work) {
 }
 
 void task_status_deckname_3(StatusDecknameWork* work) {
-    FreeTextSlots(work->textSlots, 10);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette);
 }
 
@@ -1140,7 +1140,7 @@ void task_status_meswindow_3(StatusMeswindowWork* work) {
 }
 
 void task_status_message_0(StatusMessageWork* work, StatusMessageParam* arg) {
-    InitTextSlots(work->textSlots, 100);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->param = *arg;
     work->textSlotCount = LoadTextSlots(work->param.text, work->textSlots);
     work->palette = LoadObjPalette(gStatusBarPalette, 0x20);
@@ -1155,7 +1155,7 @@ void task_status_message_2(StatusMessageWork* work) {
 }
 
 void task_status_message_3(StatusMessageWork* work) {
-    FreeTextSlots(work->textSlots, 100);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette);
 }
 

@@ -71,6 +71,7 @@
 #include "card_message_data.h"
 #include "event_ids.h"
 #include "mode_movie.h"
+#include "macros.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -3916,8 +3917,8 @@ void Mode_MenuNew_0() {
     AnimStart(&sNewGameSlotMenuWork->anim, 0, ANIM_FLAG_LOOP);
     sNewGameSlotMenuWork->palette8 = LoadObjPalette(gSaveFloorSoraPalette, 32);
     sNewGameSlotMenuWork->textSlotCount = 0;
-    InitTextSlots(sNewGameSlotMenuWork->textSlots, 36);
-    InitTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
+    InitTextSlots(sNewGameSlotMenuWork->textSlots, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots));
+    InitTextSlots(sNewGameSlotMenuWork->textSlots2, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots2));
     sNewGameSlotMenuWork->palette9 = LoadObjPalette(gFileMenuCursorPalette, 32);
     sNewGameSlotMenuWork->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNewGameSlotMenuText), sNewGameSlotMenuWork->textSlots2);
 
@@ -3964,9 +3965,9 @@ void Mode_MenuNew_2() {
     ReleaseObjPalette(sNewGameSlotMenuWork->palette7);
     ReleaseObjTiles(sNewGameSlotMenuWork->tiles7);
     ReleaseObjPalette(sNewGameSlotMenuWork->palette8);
-    FreeTextSlots(sNewGameSlotMenuWork->textSlots, 36);
+    FreeTextSlots(sNewGameSlotMenuWork->textSlots, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots));
     ReleaseObjPalette(sNewGameSlotMenuWork->palette9);
-    FreeTextSlots(sNewGameSlotMenuWork->textSlots2, 54);
+    FreeTextSlots(sNewGameSlotMenuWork->textSlots2, ARRAY_COUNT(sNewGameSlotMenuWork->textSlots2));
     EwramFree(sNewGameSlotMenuWork);
 }
 
@@ -4559,7 +4560,7 @@ void Mode_MenuLoad_0(s32 arg) {
     AnimStart(&sLoadGameMenuWork->anim, 0, ANIM_FLAG_LOOP);
     sLoadGameMenuWork->palette7 = LoadObjPalette(gSaveFloorSoraPalette, 32);
     sLoadGameMenuWork->textSlotCount = 0;
-    InitTextSlots(sLoadGameMenuWork->textSlots, 36);
+    InitTextSlots(sLoadGameMenuWork->textSlots, ARRAY_COUNT(sLoadGameMenuWork->textSlots));
 
     for (i = 0; i < 4; i++) {
         LoadGameMenuShowSummary(i);
@@ -4591,7 +4592,7 @@ void Mode_MenuLoad_2() {
     ReleaseObjPalette(sLoadGameMenuWork->palette6);
     ReleaseObjTiles(sLoadGameMenuWork->tiles6);
     ReleaseObjPalette(sLoadGameMenuWork->palette7);
-    FreeTextSlots(sLoadGameMenuWork->textSlots, 36);
+    FreeTextSlots(sLoadGameMenuWork->textSlots, ARRAY_COUNT(sLoadGameMenuWork->textSlots));
     EwramFree(sLoadGameMenuWork);
 }
 
@@ -5194,20 +5195,20 @@ void MapMenuInitConfirm(MapMenuWork* work) {
     work->confirmPalette = LoadTextPalette(1);
     promptSlots = work->textSlots2;
 #ifdef VERSION_EU
-    InitTextSlots(promptSlots, 66);
+    InitTextSlots(promptSlots, ARRAY_COUNT(work->textSlots2));
     yesSlots = work->textSlots3;
-    InitTextSlots(yesSlots, 6);
+    InitTextSlots(yesSlots, ARRAY_COUNT(work->textSlots3));
     noSlots = work->textSlots4;
-    InitTextSlots(noSlots, 9);
+    InitTextSlots(noSlots, ARRAY_COUNT(work->textSlots4));
     work->textSlotCount2 = LoadTextSlots(GetLocalizedString(&gMapQuickSaveConfirmTextByLanguage), promptSlots);
     work->textSlotCount3 = LoadTextSlots(GetLocalizedString(&gYesChoiceTextByLanguage), yesSlots);
     work->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gNoChoiceTextByLanguage), noSlots);
 #else
-    InitTextSlots(promptSlots, 33);
+    InitTextSlots(promptSlots, ARRAY_COUNT(work->textSlots2));
     yesSlots = work->textSlots3;
-    InitTextSlots(yesSlots, 6);
+    InitTextSlots(yesSlots, ARRAY_COUNT(work->textSlots3));
     noSlots = work->textSlots4;
-    InitTextSlots(noSlots, 9);
+    InitTextSlots(noSlots, ARRAY_COUNT(work->textSlots4));
     work->textSlotCount2 = LoadTextSlots(gMapQuickSaveConfirmText, promptSlots);
     work->textSlotCount3 = LoadTextSlots(gYesChoiceText, yesSlots);
     work->textSlotCount4 = LoadTextSlots(gNoChoiceText, noSlots);
@@ -5218,13 +5219,9 @@ void MapMenuFreeConfirm(MapMenuWork* work) {
     FadeSetPaletteExcluded(15, FALSE);
     DisableBg(0);
     ReleaseObjPalette(work->confirmPalette);
-#ifdef VERSION_EU
-    FreeTextSlots(work->textSlots2, 0x42);
-#else
-    FreeTextSlots(work->textSlots2, 0x21);
-#endif
-    FreeTextSlots(work->textSlots3, 6);
-    FreeTextSlots(work->textSlots4, 9);
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
 }
 
 s32 MapMenuOpen(MapMenuWork* work) {
@@ -5375,7 +5372,7 @@ s32 MapMenuSlideInY(MapMenuWork* work) {
         }
 
         LoadFriendCardSprites(work->tiles9, (void**)work->palette9, work->gfx);
-        InitTextSlots(work->textSlots, 24);
+        InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
         work->palette8 = LoadTextPalette(1);
         work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
 
@@ -6015,7 +6012,7 @@ void Task_MapMenu_3(MapMenuWork* work) {
         }
     }
 
-    FreeTextSlots(work->textSlots, 24);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette8);
     gMapRoomState->flags &= ~ROOM_FLAG_ATTACK_HIT;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
@@ -6203,7 +6200,7 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         }
 
         work->textSlotCount = 0;
-        InitTextSlots(work->textSlots, 36);
+        InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
         SetupBg(0, 3, 31, 11);
         SetBgPriority(0, 0);
         LoadBgPalette(0, gMapSaveBgPalettes, 128);
@@ -6267,15 +6264,11 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         work->palette8 = LoadTextPalette(1);
         promptSlots = work->textSlots2;
-#ifdef VERSION_EU
-        InitTextSlots(promptSlots, 54);
-#else
-        InitTextSlots(promptSlots, 27);
-#endif
+        InitTextSlots(promptSlots, ARRAY_COUNT(work->textSlots2));
         yesSlots = work->textSlots3;
-        InitTextSlots(yesSlots, 6);
+        InitTextSlots(yesSlots, ARRAY_COUNT(work->textSlots3));
         noSlots = work->textSlots4;
-        InitTextSlots(noSlots, 9);
+        InitTextSlots(noSlots, ARRAY_COUNT(work->textSlots4));
         work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveConfirmText), promptSlots);
         work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), yesSlots);
         work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), noSlots);
@@ -6566,15 +6559,11 @@ void Task_MapSave_3(MapSaveWork* work) {
     ReleaseObjPalette(work->palette7);
     ReleaseObjTiles(work->tiles6);
     ReleaseObjPalette(work->palette4);
-    FreeTextSlots(work->textSlots, 36);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette8);
-#ifdef VERSION_EU
-    FreeTextSlots(work->textSlots2, 54);
-#else
-    FreeTextSlots(work->textSlots2, 27);
-#endif
-    FreeTextSlots(work->textSlots3, 6);
-    FreeTextSlots(work->textSlots4, 9);
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
+    FreeTextSlots(work->textSlots4, ARRAY_COUNT(work->textSlots4));
     roomFlags = gMapRoomState->flags & ~ROOM_FLAG_ATTACK_HIT;
     gMapRoomState->flags = roomFlags;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;

@@ -7003,8 +7003,8 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     work->palette3 = LoadObjPalette(gCard00Palette, 32);
     LoadObjPaletteBank(work->palette3->index, gCard00Palette);
     FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
-    InitTextSlots(work->textSlots, 10);
-    InitTextSlots(work->textSlots2, 10);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     work->palette4 = LoadTextPalette(1);
     work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots2);
@@ -7112,8 +7112,8 @@ void msgwait_yesno_3(MsgWaitWork* work) {
     ReleaseObjPalette(work->palette3);
     ReleaseObjPalette(work->palette2);
     ReleaseObjPalette(work->palette4);
-    FreeTextSlots(work->textSlots, 10);
-    FreeTextSlots(work->textSlots2, 10);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
 }
 
 void HBlankIntrEventScanlineScroll() {

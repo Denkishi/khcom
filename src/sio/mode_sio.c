@@ -756,9 +756,9 @@ void mode_sio_btl_option_0(s32 arg) {
         sSioBtlOptionWork->textSlotCount3 = LoadTextSlots((u16*)gSioDebugDeckName1Text, sSioBtlOptionWork->textSlots3);
     }
 #else
-    InitTextSlots(sSioBtlOptionWork->textSlots, 20);
-    InitTextSlots(sSioBtlOptionWork->textSlots2, 10);
-    InitTextSlots(sSioBtlOptionWork->textSlots3, 10);
+    InitTextSlots(sSioBtlOptionWork->textSlots, ARRAY_COUNT(sSioBtlOptionWork->textSlots));
+    InitTextSlots(sSioBtlOptionWork->textSlots2, ARRAY_COUNT(sSioBtlOptionWork->textSlots2));
+    InitTextSlots(sSioBtlOptionWork->textSlots3, ARRAY_COUNT(sSioBtlOptionWork->textSlots3));
     sSioBtlOptionWork->textSlotCount2 = LoadTextSlots(gSioDeckNames[0], sSioBtlOptionWork->textSlots2);
     sSioBtlOptionWork->textSlotCount3 = LoadTextSlots(gSioDeckNames[1], sSioBtlOptionWork->textSlots3);
 #endif
@@ -898,7 +898,7 @@ void SioBtlOptionInitObjs() {
     InitTextSlots(sSioBtlOptionWork->textSlots4, 120);
     sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(GetLocalizedString(&gSioBtlWaitingTextByLanguage), sSioBtlOptionWork->textSlots4);
 #else
-    InitTextSlots(sSioBtlOptionWork->textSlots4, 60);
+    InitTextSlots(sSioBtlOptionWork->textSlots4, ARRAY_COUNT(sSioBtlOptionWork->textSlots4));
     sSioBtlOptionWork->textSlotCount4 = LoadTextSlots(gSioBtlWaitingText, sSioBtlOptionWork->textSlots4);
 #endif
 #ifdef VERSION_JP
@@ -1804,10 +1804,10 @@ void mode_sio_btl_option_2() {
     FreeTextSlots(sSioBtlOptionWork->textSlots3, 20);
     FreeTextSlots(sSioBtlOptionWork->textSlots4, 120);
 #else
-    FreeTextSlots(sSioBtlOptionWork->textSlots, 20);
-    FreeTextSlots(sSioBtlOptionWork->textSlots2, 10);
-    FreeTextSlots(sSioBtlOptionWork->textSlots3, 10);
-    FreeTextSlots(sSioBtlOptionWork->textSlots4, 60);
+    FreeTextSlots(sSioBtlOptionWork->textSlots, ARRAY_COUNT(sSioBtlOptionWork->textSlots));
+    FreeTextSlots(sSioBtlOptionWork->textSlots2, ARRAY_COUNT(sSioBtlOptionWork->textSlots2));
+    FreeTextSlots(sSioBtlOptionWork->textSlots3, ARRAY_COUNT(sSioBtlOptionWork->textSlots3));
+    FreeTextSlots(sSioBtlOptionWork->textSlots4, ARRAY_COUNT(sSioBtlOptionWork->textSlots4));
 #endif
     ReleaseObjTiles(sSioBtlOptionWork->tiles);
     ReleaseObjPalette(sSioBtlOptionWork->palette);
@@ -2779,7 +2779,7 @@ void mode_sio_chg_connect_0(s32 arg) {
     sSioChgConnectWork->timer = 0;
     sSioChgConnectWork->state = SIO_CHG_CONNECT_STATE_CONNECT;
     sSioChgConnectWork->textSlotCount = 0;
-    InitTextSlots(sSioChgConnectWork->textSlots, 0x5A);
+    InitTextSlots(sSioChgConnectWork->textSlots, ARRAY_COUNT(sSioChgConnectWork->textSlots));
     sSioChgConnectWork->textSlotCount = LoadTextSlots(gSioChgConnectText, sSioChgConnectWork->textSlots);
     sSioChgConnectWork->palette = LoadObjPalette(gSioCursorPalette, 32);
     SioReset();
@@ -2816,7 +2816,7 @@ void mode_sio_chg_connect_1() {
 #ifndef VERSION_EU
 void mode_sio_chg_connect_2() {
     ReleaseObjPalette(sSioChgConnectWork->palette);
-    FreeTextSlots(sSioChgConnectWork->textSlots, 0x5A);
+    FreeTextSlots(sSioChgConnectWork->textSlots, ARRAY_COUNT(sSioChgConnectWork->textSlots));
     EwramFree(sSioChgConnectWork);
 }
 #endif
@@ -3023,11 +3023,11 @@ void SioChgCardInitObjs() {
     sSioChgCardWork->tiles5 = LoadObjTiles(gDialogBoxTiles, 0xC00);
     sSioChgCardWork->gfx6 = gDialogBoxFrames[0];
     sSioChgCardWork->messageVisible = FALSE;
-    InitTextSlots(sSioChgCardWork->textSlots, 42);
+    InitTextSlots(sSioChgCardWork->textSlots, ARRAY_COUNT(sSioChgCardWork->textSlots));
     sSioChgCardWork->textSlotCount = LoadTextSlots(gSioChgWaitingText, sSioChgCardWork->textSlots);
     sSioChgCardWork->x3 = 68;
     sSioChgCardWork->y3 = 124;
-    InitTextSlots(sSioChgCardWork->textSlots2, 20);
+    InitTextSlots(sSioChgCardWork->textSlots2, ARRAY_COUNT(sSioChgCardWork->textSlots2));
     sSioChgCardWork->textSlotCount2 = LoadTextSlots(gCardDefs[CARD_ID(CARD_KINGDOM_KEY, 0)].name, sSioChgCardWork->textSlots2);
     sSioChgCardWork->cardInfoVisible = FALSE;
     TaskPoolInit(&sSioChgCardWork->tasks, 11);
@@ -3380,8 +3380,8 @@ void mode_sio_chg_card_2() {
     ReleaseObjTiles(sSioChgCardWork->tiles4);
     ReleaseObjPalette(sSioChgCardWork->palette4);
     ReleaseObjTiles(sSioChgCardWork->tiles5);
-    FreeTextSlots(sSioChgCardWork->textSlots, 42);
-    FreeTextSlots(sSioChgCardWork->textSlots2, 20);
+    FreeTextSlots(sSioChgCardWork->textSlots, ARRAY_COUNT(sSioChgCardWork->textSlots));
+    FreeTextSlots(sSioChgCardWork->textSlots2, ARRAY_COUNT(sSioChgCardWork->textSlots2));
     TaskPoolDestroy(&sSioChgCardWork->tasks);
     EwramFree(sSioChgCardWork);
 }

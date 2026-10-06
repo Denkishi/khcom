@@ -47,6 +47,7 @@
 #include "sprite_palettes.h"
 #include "battle_ids.h"
 #include "card_label_data.h"
+#include "macros.h"
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
@@ -1001,7 +1002,7 @@ void DispCardname_0(DispCardnameWork* work, u16* text) {
     ObjPalette* textPalette;
     s32 x;
 
-    InitTextSlots(work->textSlots, 32);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     textPalette = LoadTextPalette(1);
     work->textPalette = textPalette;
     FadeSetPaletteExcluded(textPalette->index + 16, TRUE);
@@ -1028,7 +1029,7 @@ void DispCardname_2(DispCardnameWork* work) {
 }
 
 void DispCardname_3(DispCardnameWork* work) {
-    FreeTextSlots(work->textSlots, 32);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjTiles(work->tiles);
     FadeSetPaletteExcluded(work->textPalette->index + 16, FALSE);
     ReleaseObjPalette(work->textPalette);

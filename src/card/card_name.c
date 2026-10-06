@@ -27,6 +27,7 @@
 #include "default_bg_map.h"
 #include "sprite_palettes.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 static PrintLine* sPrintLines;
 
@@ -43,13 +44,9 @@ void CardName_0(CardNameWork* work) {
     s32 x;
     s16 suffixX;
 
-    InitTextSlots(work->textSlots, 32);
-    InitTextSlots(work->textSlots2, 32);
-#ifdef VERSION_EU
-    InitTextSlots(work->textSlots3, 32);
-#else
-    InitTextSlots(work->textSlots3, 2);
-#endif
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textPalette = LoadTextPalette(1);
 #ifdef VERSION_EU
     work->textSlotCount = LoadTextSlots(GetLocalizedString(selectedCard->cardDef->name), work->textSlots);
@@ -134,16 +131,16 @@ void CardName_2(CardNameWork* work) {
 }
 
 void CardName_3(CardNameWork* work) {
-    FreeTextSlots(work->textSlots, 32);
-    FreeTextSlots(work->textSlots2, 32);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
 #ifdef VERSION_EU
-    FreeTextSlots(work->textSlots3, 32);
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->textPalette);
     ReleaseObjPalette(work->palette2);
     ReleaseObjPalette(work->palette);
 #else
-    FreeTextSlots(work->textSlots3, 2);
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->textPalette);
     ReleaseObjPalette(work->palette2);

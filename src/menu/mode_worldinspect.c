@@ -37,6 +37,7 @@
 #include "gba/macro.h"
 #include "sprite_palettes.h"
 #include <stddef.h>
+#include "macros.h"
 
 enum WorldInspectState {
     WORLD_INSPECT_STATE_BARS_IN,
@@ -815,17 +816,9 @@ void mode_worldinspect_0() {
     sWorldInspectCursorTiles = LoadObjTiles(gWorldInspectCursorTiles, 0xC0);
     AnimInit(&sWorldInspectCursorAnim, gWorldInspectCursorAnims, gWorldInspectCursorFrames);
     AnimStart(&sWorldInspectCursorAnim, 0, ANIM_FLAG_LOOP);
-#ifdef VERSION_EU
-    InitTextSlots(sWorldInspectNameText, 0x30);
-#else
-    InitTextSlots(sWorldInspectNameText, 0x18);
-#endif
+    InitTextSlots(sWorldInspectNameText, ARRAY_COUNT(sWorldInspectNameText));
     sWorldInspectNameTextCount = WorldInspectLoadName(sWorldInspectWorlds[sWorldInspectCursor]);
-#ifdef VERSION_EU
-    InitTextSlots(sWorldInspectDescText, 0x78);
-#else
-    InitTextSlots(sWorldInspectDescText, 0x3C);
-#endif
+    InitTextSlots(sWorldInspectDescText, ARRAY_COUNT(sWorldInspectDescText));
     sWorldInspectBarPalette = LoadObjPalette(gWorldInspectBarPalette, 0x20);
 
 #ifdef VERSION_EU
@@ -950,16 +943,8 @@ void mode_worldinspect_2() {
         }
     }
 
-#ifdef VERSION_EU
-    FreeTextSlots(sWorldInspectNameText, 0x30);
-#else
-    FreeTextSlots(sWorldInspectNameText, 0x18);
-#endif
-#ifdef VERSION_EU
-    FreeTextSlots(sWorldInspectDescText, 0x78);
-#else
-    FreeTextSlots(sWorldInspectDescText, 0x3C);
-#endif
+    FreeTextSlots(sWorldInspectNameText, ARRAY_COUNT(sWorldInspectNameText));
+    FreeTextSlots(sWorldInspectDescText, ARRAY_COUNT(sWorldInspectDescText));
     EwramFree(sWorldInspectTilemap);
 }
 

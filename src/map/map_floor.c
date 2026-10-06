@@ -21,6 +21,7 @@
 #include <stddef.h>
 #include "text_types.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 extern const MapNameText* gFloorNames[13];
 extern const MapNameText* gBasementFloorNames[12];
@@ -48,11 +49,7 @@ void Task_MapFloor_0(MapFloorWork* work) {
     work->palette = LoadObjPalette(gMapFloorNamePalette, 32);
     work->gfx = gMapNameBarFrames[0];
     work->timer = 120;
-#ifdef VERSION_EU
-    InitTextSlots(work->textSlots, 60);
-#else
-    InitTextSlots(work->textSlots, 40);
-#endif
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     work->palette2 = LoadTextPalette(1);
     work->textSlotCount = LoadTextSlots(GetFloorName(), work->textSlots);
     work->textX = (DISPLAY_WIDTH - GetTextSlotsWidth(work->textSlots, work->textSlotCount)) / 2;
@@ -78,11 +75,7 @@ void Task_MapFloor_3(MapFloorWork* work) {
     ReleaseObjPalette(work->palette);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette2);
-#ifdef VERSION_EU
-    FreeTextSlots(work->textSlots, 60);
-#else
-    FreeTextSlots(work->textSlots, 40);
-#endif
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_ENEMIES;
     gFieldState->flags &= ~FIELD_FLAG_FREEZE_PLAYER;
 }

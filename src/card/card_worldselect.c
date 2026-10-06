@@ -220,7 +220,7 @@ void MapSelect_0(MapSelectWork* work, u8* status) {
     work->textSlotCounts[0] = 0;
     work->textSlotCounts[1] = 0;
     work->textSlotCounts[2] = 0;
-    InitTextSlots(work->textSlots, 48);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
 
     if (work->card != NULL) {
         work->prevCard = work->card;
@@ -895,7 +895,7 @@ void MapSelect_3(MapSelectWork* work) {
     }
 
     ReleaseObjTiles(work->tiles7);
-    FreeTextSlots(work->textSlots, 48);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
     ReleaseObjPalette(work->palette4);
     *work->status = 1;
     ReleaseObjTiles(work->tiles6);

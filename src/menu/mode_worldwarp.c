@@ -32,6 +32,7 @@
 #include "gba/macro.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "macros.h"
 
 enum WorldWarpState {
     WORLD_WARP_STATE_BARS_IN,
@@ -654,13 +655,8 @@ void mode_worldwarp_0() {
     sWorldWarpCursorTiles = LoadObjTiles(gWorldWarpCursorTiles, 192);
     AnimInit(&sWorldWarpCursorAnim, gWorldWarpCursorAnims, gWorldWarpCursorFrames);
     AnimStart(&sWorldWarpCursorAnim, 0, ANIM_FLAG_LOOP);
-#ifdef VERSION_EU
-    InitTextSlots(sWorldWarpCurrentName, 48);
-    InitTextSlots(sWorldWarpSelectedName, 48);
-#else
-    InitTextSlots(sWorldWarpCurrentName, 24);
-    InitTextSlots(sWorldWarpSelectedName, 24);
-#endif
+    InitTextSlots(sWorldWarpCurrentName, ARRAY_COUNT(sWorldWarpCurrentName));
+    InitTextSlots(sWorldWarpSelectedName, ARRAY_COUNT(sWorldWarpSelectedName));
     sWorldWarpCurrentNameCount = WorldWarpLoadCurrentName(sWorldWarpFloorWorlds[gGameState.floor]);
     sWorldWarpSelectedNameCount = WorldWarpLoadSelectedName(sWorldWarpFloorWorlds[sWorldWarpCursor]);
     EnableBg(0);
@@ -750,16 +746,8 @@ void mode_worldwarp_2() {
         }
     }
 
-#ifdef VERSION_EU
-    FreeTextSlots(sWorldWarpCurrentName, 48);
-#else
-    FreeTextSlots(sWorldWarpCurrentName, 24);
-#endif
-#ifdef VERSION_EU
-    FreeTextSlots(sWorldWarpSelectedName, 48);
-#else
-    FreeTextSlots(sWorldWarpSelectedName, 24);
-#endif
+    FreeTextSlots(sWorldWarpCurrentName, ARRAY_COUNT(sWorldWarpCurrentName));
+    FreeTextSlots(sWorldWarpSelectedName, ARRAY_COUNT(sWorldWarpSelectedName));
     EwramFree(sWorldWarpTilemap);
 }
 

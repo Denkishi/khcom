@@ -34,6 +34,7 @@
 #include <stddef.h>
 #include "card_sysmsgwin.h"
 #include "sprite_palettes.h"
+#include "macros.h"
 
 static SysMsgWinWork* sActiveSysmsgwin;
 
@@ -87,8 +88,8 @@ void sysmsgwin_0(SysMsgWinWork* work, CardMessageArgs* args) {
     }
 #endif
 
-    InitTextSlots(work->textSlots, 10);
-    InitTextSlots(work->textSlots2, 10);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     gMessageWindowOpen = TRUE;
     gMessageWindowAnswerYes = FALSE;
     work->shownChars = work->charCount;
@@ -395,8 +396,8 @@ void sysmsgwin_3(SysMsgWinWork* work) {
         ReleaseObjPalette(work->textPalette);
     }
 
-    FreeTextSlots(work->textSlots, 10);
-    FreeTextSlots(work->textSlots2, 10);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     gMessageWindowOpen = FALSE;
     sActiveSysmsgwin = NULL;
 }
@@ -543,8 +544,8 @@ void sysmsgwinChoice_0(SysMsgWinWork* work, CardMessageArgs* args) {
     }
 #endif
 
-    InitTextSlots(work->textSlots, 10);
-    InitTextSlots(work->textSlots2, 10);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     gMessageWindowOpen = TRUE;
     gMessageWindowAnswerYes = FALSE;
     work->shownChars = work->charCount;
@@ -777,8 +778,8 @@ void sysmsgwinChoice_3(SysMsgWinWork* work) {
         ReleaseObjPalette(work->textPalette);
     }
 
-    FreeTextSlots(work->textSlots, 10);
-    FreeTextSlots(work->textSlots2, 10);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
     gMessageWindowOpen = FALSE;
     sActiveSysmsgwin = NULL;
 }

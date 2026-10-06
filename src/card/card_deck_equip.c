@@ -27,14 +27,15 @@
 #include "sprite_palettes.h"
 #include "text_types.h"
 #include "gba/defines.h"
+#include "macros.h"
 
 void Deck_Equip_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
-    InitTextSlots(work->textSlots, 80);
-    InitTextSlots(work->textSlots2, 80);
-    InitTextSlots(work->textSlots3, 80);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textSlotCount = LoadTextSlots(GetDeckName(GetActiveDeckIndex()), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gDeckEquipText), work->textSlots2);
     work->palette = LoadObjPalette(gDialogBoxPalette, 32);
@@ -76,9 +77,9 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
     work->textSlotCount3 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifdef VERSION_JP
     work->textSlotCount = 0;
     work->textSlotCount2 = LoadTextSlots(gDeckErrorCpText, work->textSlots2);
@@ -109,9 +110,9 @@ void DeckErrorCpInit(DeckConfirmWork* work, u8* active) {
 void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifdef VERSION_JP
     work->textSlotCount = 0;
     work->textSlotCount2 = LoadTextSlots(gDeckErrorNoAttackCardText, work->textSlots2);
@@ -142,9 +143,9 @@ void DeckErrorNoAttackCardInit(DeckConfirmWork* work, u8* active) {
 void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifdef VERSION_JP
     work->textSlotCount = LoadTextSlots(gDeckErrorAnyMoreText, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gDeckErrorLastAttackCardText, work->textSlots2);
@@ -173,9 +174,9 @@ void DeckErrorLastAttackCardInit(DeckConfirmWork* work, u8* active) {
 void DeckErrorDeckFullInit(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
 #ifdef VERSION_JP
     work->textSlotCount = LoadTextSlots(gDeckErrorAnyMoreText, work->textSlots);
     work->textSlotCount2 = LoadTextSlots(gDeckErrorDeckFullText, work->textSlots2);
@@ -218,9 +219,9 @@ void DeckConfirmDraw(DeckConfirmWork* work) {
 }
 
 void DeckConfirmDestroy(DeckConfirmWork* work) {
-    FreeTextSlots(work->textSlots, 80);
-    FreeTextSlots(work->textSlots2, 80);
-    FreeTextSlots(work->textSlots3, 80);
+    FreeTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    FreeTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    FreeTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     ReleaseObjPalette(work->palette);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette2);
@@ -238,9 +239,9 @@ void DeckConfirmDestroy(DeckConfirmWork* work) {
 void Deck_Yes_No_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gDeleteCardConfirmText), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);
@@ -270,9 +271,9 @@ s32 DeckConfirmYesNoUpdate() {
 void Deck_Clear_0(DeckConfirmWork* work, u8* active) {
     work->textSlotCount = 0;
     work->textSlotCount2 = 0;
-    InitTextSlots(work->textSlots, 0x50);
-    InitTextSlots(work->textSlots2, 0x50);
-    InitTextSlots(work->textSlots3, 0x50);
+    InitTextSlots(work->textSlots, ARRAY_COUNT(work->textSlots));
+    InitTextSlots(work->textSlots2, ARRAY_COUNT(work->textSlots2));
+    InitTextSlots(work->textSlots3, ARRAY_COUNT(work->textSlots3));
     work->textSlotCount = LoadTextSlots(LOCALIZED_STRING(gDeckClearConfirmText), work->textSlots);
     work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gYesChoiceText), work->textSlots2);
     work->textSlotCount3 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), work->textSlots3);

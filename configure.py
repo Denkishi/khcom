@@ -429,8 +429,8 @@ Path("objdiff.json").write_text(json.dumps(objdiff_config, indent=2) + "\n")
 
 root = Path.cwd()
 cc_args = [
-    "clang", "-nostdinc", "-fno-builtin", "--target=arm-none-eabi",
-    "-mthumb", "-std=gnu89", *[f"-I{d}" for d in include_dirs], "-Itools/agbcc/include",
+    "clang", "-nostdinc", "-fno-builtin", "--target=arm-none-eabi", "-mabi=apcs-gnu", "-fno-short-enums",
+    "-mthumb", "-std=gnu89", *[f"-I{d}" for d in include_dirs], f"-I{build_dir}/gen", "-Itools/agbcc/include",
     f"-DVERSION_{version.upper()}",
 ]
 compile_commands = [

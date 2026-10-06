@@ -25,7 +25,7 @@ static const AnimDef sBtlBadstatusAnimDefs[5] = {
 };
 
 void task_btl_badstatus_0(BtlBadStatusWork* work, BtlObj* obj) {
-    work->status = 0;
+    work->status = BAD_STATUS_NONE;
     work->actor = obj;
     work->tiles = AllocObjTiles(128, NULL);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
@@ -42,7 +42,7 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
     obj = work->actor;
     state = obj->badStatus;
 
-    if (state == 0) {
+    if (state == BAD_STATUS_NONE) {
         return 1;
     }
 
@@ -50,23 +50,23 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
         work->status = state;
 
         switch (state) {
-        case 2:
+        case BAD_STATUS_STOP:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 0, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
             break;
-        case 5:
+        case BAD_STATUS_BIND:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 2, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette2;
             break;
-        case 3:
+        case BAD_STATUS_CONFUSE:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 3, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
             break;
-        case 4:
+        case BAD_STATUS_TERROR:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 4, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette2;
             break;
-        case 1:
+        case BAD_STATUS_STUN:
         default:
             AnimChangeWithDef(sBtlBadstatusAnimDefs, &work->anim, 1, ANIM_FLAG_LOOP, work->tiles);
             work->palette3 = work->palette;
@@ -78,7 +78,7 @@ u8 task_btl_badstatus_1(BtlBadStatusWork* work) {
 
     if (obj->badStatusTimer <= 0) {
         obj->badStatus = BAD_STATUS_NONE;
-        work->status = 0;
+        work->status = BAD_STATUS_NONE;
     }
 
     return 1;

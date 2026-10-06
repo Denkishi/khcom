@@ -132,6 +132,13 @@ void BtlExpSetNumber(BtlExpWork* work, u32 value) {
 #endif
 }
 
+enum BtlExpState {
+    BTL_EXP_STATE_HIDDEN,
+    BTL_EXP_STATE_GAIN,
+    BTL_EXP_STATE_NEXT_LEVEL,
+    BTL_EXP_STATE_LEVEL_UP
+};
+
 void task_btl_exp_0(BtlExpWork* work) {
     s32 i;
 
@@ -157,7 +164,7 @@ void task_btl_exp_0(BtlExpWork* work) {
     work->timer = 0;
     work->level = gGameState.progression.level;
     work->lastExp = gGameState.progression.exp;
-    work->state = 0;
+    work->state = BTL_EXP_STATE_HIDDEN;
     work->gainedExp = 0;
 }
 
@@ -194,12 +201,12 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         work->gfx = gBtlExpNextLvFrame0;
 #endif
         work->timer = 0;
-        work->state = 3;
+        work->state = BTL_EXP_STATE_LEVEL_UP;
         work->level = gGameState.progression.level;
         work->gainedExp = 0;
     }
 
-    if (work->state != 3) {
+    if (work->state != BTL_EXP_STATE_LEVEL_UP) {
         if (work->lastExp < gGameState.progression.exp) {
             work->gainedExp += gGameState.progression.exp - work->lastExp;
             BtlExpSetNumber(work, work->gainedExp);
@@ -229,20 +236,20 @@ s32 task_btl_exp_1(BtlExpWork* work) {
             work->gfx = gBtlExpNextLvFrame2;
 #endif
             work->timer = 0;
-            work->state = 1;
+            work->state = BTL_EXP_STATE_GAIN;
             work->lastExp = gGameState.progression.exp;
         }
     }
 
     switch (work->state) {
-    case 0:
+    case BTL_EXP_STATE_HIDDEN:
         break;
-    case 3:
+    case BTL_EXP_STATE_LEVEL_UP:
         if (work->timer > 100) {
             if (gGameState.progression.level > 98) {
-                work->state = 0;
+                work->state = BTL_EXP_STATE_HIDDEN;
             } else {
-                work->state = 2;
+                work->state = BTL_EXP_STATE_NEXT_LEVEL;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 
 #if defined(VERSION_EU)
@@ -278,12 +285,12 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         }
 
         break;
-    case 1:
+    case BTL_EXP_STATE_GAIN:
         if (work->timer > 60) {
             if (gGameState.progression.level > 98) {
-                work->state = 0;
+                work->state = BTL_EXP_STATE_HIDDEN;
             } else {
-                work->state = 2;
+                work->state = BTL_EXP_STATE_NEXT_LEVEL;
                 BtlExpSetNumber(work, gGameState.progression.nextExp - gGameState.progression.exp);
 
 #if defined(VERSION_EU)
@@ -319,10 +326,10 @@ s32 task_btl_exp_1(BtlExpWork* work) {
         }
 
         break;
-    case 2:
+    case BTL_EXP_STATE_NEXT_LEVEL:
         if (work->timer > 100) {
             work->timer = 0;
-            work->state = 0;
+            work->state = BTL_EXP_STATE_HIDDEN;
         } else {
             work->timer++;
         }
@@ -338,7 +345,7 @@ void task_btl_exp_2(BtlExpWork* work) {
     s16 x;
     u16 y;
 
-    if (work->state != 0) {
+    if (work->state != BTL_EXP_STATE_HIDDEN) {
         y = 40;
         x = 0;
         DrawSprite(0, y, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, x);
@@ -346,7 +353,7 @@ void task_btl_exp_2(BtlExpWork* work) {
 #ifdef VERSION_JP
         x = 32;
 #else
-        if (work->state == 2) {
+        if (work->state == BTL_EXP_STATE_NEXT_LEVEL) {
 #ifdef VERSION_EU
             x = 48;
 #else

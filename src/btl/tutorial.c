@@ -37,16 +37,81 @@ void TutorialRestoreBgMode() {
     gDispCnt = (gDispCnt & ~DISPCNT_MODE_MASK) | DISPCNT_MODE_2;
 }
 
+enum TutorialState {
+    TUTORIAL_STATE_WAIT,
+    TUTORIAL_STATE_MESSAGE_DELAY,
+    TUTORIAL_STATE_MESSAGE,
+    TUTORIAL_STATE_PERSISTENT_DELAY,
+    TUTORIAL_STATE_PERSISTENT_MESSAGE,
+    TUTORIAL_STATE_SAY_FRIENDS_ARE_CARDS,
+    TUTORIAL_STATE_DROP_FRIEND_CARD,
+    TUTORIAL_STATE_SAY_PICK_UP_FRIENDS,
+    TUTORIAL_STATE_HELP_MOVE = 9,
+    TUTORIAL_STATE_PICK_UP_FRIEND_CARD,
+    TUTORIAL_STATE_SELECT_FRIEND_CARD,
+    TUTORIAL_STATE_SAY_CARDS_ON_TOP,
+    TUTORIAL_STATE_HELP_USE_FRIEND_CARD,
+    TUTORIAL_STATE_USE_FRIEND_CARD,
+    TUTORIAL_STATE_SAY_CARDS_REAPPEAR,
+    TUTORIAL_STATE_SAY_CARDS_RULE,
+    TUTORIAL_STATE_HELP_JUMP_AND_DODGE,
+    TUTORIAL_STATE_JUMP_AND_DODGE,
+    TUTORIAL_STATE_SAY_MOVE_THEN_USE,
+    TUTORIAL_STATE_HELP_USE_THREE_CARDS,
+    TUTORIAL_STATE_USE_THREE_CARDS,
+    TUTORIAL_STATE_SAY_CARDS_DISAPPEAR,
+    TUTORIAL_STATE_SAY_CARDS_RUN_OUT,
+    TUTORIAL_STATE_SAY_USE_UP_CARDS = 25,
+    TUTORIAL_STATE_USE_UP_CARDS,
+    TUTORIAL_STATE_SAY_NO_CARDS_LEFT,
+    TUTORIAL_STATE_SAY_FOCUS = 29,
+    TUTORIAL_STATE_HELP_RELOAD,
+    TUTORIAL_STATE_RELOAD,
+    TUTORIAL_STATE_SAY_CARDS_RETURNED,
+    TUTORIAL_STATE_SAY_CARDS_LIMITED,
+    TUTORIAL_STATE_HELP_CYCLE_CARDS,
+    TUTORIAL_STATE_CYCLE_CARDS,
+    TUTORIAL_STATE_SAY_CARD_CATEGORIES,
+    TUTORIAL_STATE_SAY_CATEGORY_CONTENTS,
+    TUTORIAL_STATE_HELP_SWITCH_CATEGORY,
+    TUTORIAL_STATE_SWITCH_CATEGORY,
+    TUTORIAL_STATE_SAY_ATTACK_OR_DEFEND,
+    TUTORIAL_STATE_ROBE_FINISH,
+    TUTORIAL_STATE_ROBE_END,
+    TUTORIAL_STATE_LEON_START,
+    TUTORIAL_STATE_SAY_CARD_VALUES,
+    TUTORIAL_STATE_PRACTICE_BREAKS,
+    TUTORIAL_STATE_PRACTICE_END,
+    TUTORIAL_STATE_SAY_CARD_BREAK,
+    TUTORIAL_STATE_SAY_DEFLECTED,
+    TUTORIAL_STATE_SAY_ZERO_SPECIAL,
+    TUTORIAL_STATE_SAY_ZERO_BREAKS_ALL,
+    TUTORIAL_STATE_SAY_ZERO_LAST,
+    TUTORIAL_STATE_SAY_DECK_COST,
+    TUTORIAL_STATE_SAY_STOCK_INTRO,
+    TUTORIAL_STATE_SAY_STOCKING,
+    TUTORIAL_STATE_SAY_STOCK_THREE,
+    TUTORIAL_STATE_HELP_STOCK_CARDS,
+    TUTORIAL_STATE_STOCK_CARDS,
+    TUTORIAL_STATE_SAY_STOCK_SUM,
+    TUTORIAL_STATE_HELP_USE_STOCK,
+    TUTORIAL_STATE_USE_STOCK,
+    TUTORIAL_STATE_SAY_SLEIGHTS,
+    TUTORIAL_STATE_SAY_SLEIGHT_COST,
+    TUTORIAL_STATE_LEON_FINISH,
+    TUTORIAL_STATE_LEON_END
+};
+
 void TutorialQueueMessage(TutorialWork* work, u16 message, u32 nextState) {
     work->timer = 0;
-    work->state = 1;
+    work->state = TUTORIAL_STATE_MESSAGE_DELAY;
     work->nextState = nextState;
     work->message = message;
 }
 
 void TutorialQueuePersistentMessage(TutorialWork* work, u16 message, u32 nextState) {
     work->timer = 0;
-    work->state = 3;
+    work->state = TUTORIAL_STATE_PERSISTENT_DELAY;
     work->nextState = nextState;
     work->message = message;
 }
@@ -57,7 +122,7 @@ void TutorialCloseMessage() {
 
 void TutorialWait(TutorialWork* work, u16 count, u32 nextState) {
     work->timer = 0;
-    work->state = 0;
+    work->state = TUTORIAL_STATE_WAIT;
     work->nextState = nextState;
     work->count = count;
 }
@@ -79,9 +144,9 @@ void task_tutorial_0(TutorialWork* work, s32 kind) {
     SetBgScroll(0, 0, 0);
     work->flags = 0;
     work->timer = 0;
-    work->state = 0;
+    work->state = TUTORIAL_STATE_WAIT;
     work->count = 120;
-    work->nextState = kind == 0 ? 5 : 0x2B;
+    work->nextState = kind == 0 ? TUTORIAL_STATE_SAY_FRIENDS_ARE_CARDS : TUTORIAL_STATE_LEON_START;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CONTROL;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_JUMP;
     gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_DODGE;
@@ -99,7 +164,7 @@ void task_tutorial_0(TutorialWork* work, s32 kind) {
 
 s32 task_tutorial_1(TutorialWork* work) {
     switch (work->state) {
-    case 0:
+    case TUTORIAL_STATE_WAIT:
         if (work->timer > work->count) {
             work->state = work->nextState;
             work->timer = 0;
@@ -108,18 +173,18 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         break;
-    case 1:
+    case TUTORIAL_STATE_MESSAGE_DELAY:
         gBtlWork->hitStop = 8;
 
         if (work->timer > 20) {
-            work->state = 2;
+            work->state = TUTORIAL_STATE_MESSAGE;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 2:
+    case TUTORIAL_STATE_MESSAGE:
         gBtlWork->hitStop = 8;
 
         if (work->timer == 0) {
@@ -140,18 +205,18 @@ s32 task_tutorial_1(TutorialWork* work) {
         work->state = work->nextState;
         work->timer = 0;
         break;
-    case 3:
+    case TUTORIAL_STATE_PERSISTENT_DELAY:
         gBtlWork->hitStop = 8;
 
         if (work->timer > 20) {
-            work->state = 4;
+            work->state = TUTORIAL_STATE_PERSISTENT_MESSAGE;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 4:
+    case TUTORIAL_STATE_PERSISTENT_MESSAGE:
         gBtlWork->hitStop = 8;
 
         if (BgFxIsActive()) {
@@ -162,29 +227,29 @@ s32 task_tutorial_1(TutorialWork* work) {
         work->state = work->nextState;
         work->timer = 0;
         break;
-    case 5:
-        TutorialQueueMessage(work, 0x48, 6);
+    case TUTORIAL_STATE_SAY_FRIENDS_ARE_CARDS:
+        TutorialQueueMessage(work, 0x48, TUTORIAL_STATE_DROP_FRIEND_CARD);
         break;
-    case 6:
+    case TUTORIAL_STATE_DROP_FRIEND_CARD:
         if (work->timer == 0) {
             CreateFriendCardTask(&gBtlWork->taskPools[0], 320, 0x181, 0, 1);
         }
 
         if (work->timer > 120) {
-            work->state = 7;
+            work->state = TUTORIAL_STATE_SAY_PICK_UP_FRIENDS;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 7:
-        TutorialQueueMessage(work, 0x49, 9);
+    case TUTORIAL_STATE_SAY_PICK_UP_FRIENDS:
+        TutorialQueueMessage(work, 0x49, TUTORIAL_STATE_HELP_MOVE);
         break;
-    case 9:
-        TutorialQueuePersistentMessage(work, 0x4A, 10);
+    case TUTORIAL_STATE_HELP_MOVE:
+        TutorialQueuePersistentMessage(work, 0x4A, TUTORIAL_STATE_PICK_UP_FRIEND_CARD);
         break;
-    case 10:
+    case TUTORIAL_STATE_PICK_UP_FRIEND_CARD:
         if (work->timer == 0) {
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_CONTROL;
         }
@@ -196,25 +261,25 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         TutorialCloseMessage();
         gBtlWork->flags &= ~0x20000000000ULL;
-        work->state = 11;
+        work->state = TUTORIAL_STATE_SELECT_FRIEND_CARD;
         work->timer = 0;
         break;
-    case 11:
+    case TUTORIAL_STATE_SELECT_FRIEND_CARD:
         if (work->timer > 20) {
             RequestSoraPrevCard();
-            TutorialWait(work, 30, 12);
+            TutorialWait(work, 30, TUTORIAL_STATE_SAY_CARDS_ON_TOP);
         } else {
             work->timer++;
         }
 
         break;
-    case 12:
-        TutorialQueueMessage(work, 0x4B, 13);
+    case TUTORIAL_STATE_SAY_CARDS_ON_TOP:
+        TutorialQueueMessage(work, 0x4B, TUTORIAL_STATE_HELP_USE_FRIEND_CARD);
         break;
-    case 13:
-        TutorialQueuePersistentMessage(work, 0x4C, 14);
+    case TUTORIAL_STATE_HELP_USE_FRIEND_CARD:
+        TutorialQueuePersistentMessage(work, 0x4C, TUTORIAL_STATE_USE_FRIEND_CARD);
         break;
-    case 14:
+    case TUTORIAL_STATE_USE_FRIEND_CARD:
         if (work->timer == 10) {
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_CARD_USE;
         }
@@ -226,23 +291,23 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         TutorialCloseMessage();
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_USE;
-        work->state = 15;
+        work->state = TUTORIAL_STATE_SAY_CARDS_REAPPEAR;
         work->timer = 0;
         break;
-    case 15:
+    case TUTORIAL_STATE_SAY_CARDS_REAPPEAR:
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             break;
         }
 
-        TutorialQueueMessage(work, 0x4D, 16);
+        TutorialQueueMessage(work, 0x4D, TUTORIAL_STATE_SAY_CARDS_RULE);
         break;
-    case 16:
-        TutorialQueueMessage(work, 0x4E, 17);
+    case TUTORIAL_STATE_SAY_CARDS_RULE:
+        TutorialQueueMessage(work, 0x4E, TUTORIAL_STATE_HELP_JUMP_AND_DODGE);
         break;
-    case 17:
-        TutorialQueuePersistentMessage(work, 0x4F, 18);
+    case TUTORIAL_STATE_HELP_JUMP_AND_DODGE:
+        TutorialQueuePersistentMessage(work, 0x4F, TUTORIAL_STATE_JUMP_AND_DODGE);
         break;
-    case 18:
+    case TUTORIAL_STATE_JUMP_AND_DODGE:
         if (work->timer == 0) {
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_DODGE;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_JUMP;
@@ -261,15 +326,15 @@ s32 task_tutorial_1(TutorialWork* work) {
         TutorialCloseMessage();
         gBtlWork->flags &= ~BTL_FLAG_DODGE_ROLL_DONE;
         gBtlWork->flags &= ~BTL_FLAG_JUMP_LANDED;
-        TutorialWait(work, 15, 19);
+        TutorialWait(work, 15, TUTORIAL_STATE_SAY_MOVE_THEN_USE);
         break;
-    case 19:
-        TutorialQueueMessage(work, 0x50, 20);
+    case TUTORIAL_STATE_SAY_MOVE_THEN_USE:
+        TutorialQueueMessage(work, 0x50, TUTORIAL_STATE_HELP_USE_THREE_CARDS);
         break;
-    case 20:
-        TutorialQueuePersistentMessage(work, 0x51, 21);
+    case TUTORIAL_STATE_HELP_USE_THREE_CARDS:
+        TutorialQueuePersistentMessage(work, 0x51, TUTORIAL_STATE_USE_THREE_CARDS);
         break;
-    case 21:
+    case TUTORIAL_STATE_USE_THREE_CARDS:
         if (work->timer == 0) {
             work->count = 0;
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
@@ -298,19 +363,19 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_USE;
-        TutorialWait(work, 30, 22);
+        TutorialWait(work, 30, TUTORIAL_STATE_SAY_CARDS_DISAPPEAR);
         break;
-    case 22:
-        TutorialQueueMessage(work, 0x52, 23);
+    case TUTORIAL_STATE_SAY_CARDS_DISAPPEAR:
+        TutorialQueueMessage(work, 0x52, TUTORIAL_STATE_SAY_CARDS_RUN_OUT);
         break;
-    case 23:
-        TutorialQueueMessage(work, 0x53, 25);
+    case TUTORIAL_STATE_SAY_CARDS_RUN_OUT:
+        TutorialQueueMessage(work, 0x53, TUTORIAL_STATE_SAY_USE_UP_CARDS);
         break;
-    case 25:
+    case TUTORIAL_STATE_SAY_USE_UP_CARDS:
         TutorialShowArrow(work, 14, 90, 0);
-        TutorialQueueMessage(work, 0x54, 26);
+        TutorialQueueMessage(work, 0x54, TUTORIAL_STATE_USE_UP_CARDS);
         break;
-    case 26:
+    case TUTORIAL_STATE_USE_UP_CARDS:
         if (work->timer == 0) {
             TutorialHideArrow(work);
         }
@@ -330,20 +395,20 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_USE;
-        TutorialWait(work, 60, 27);
+        TutorialWait(work, 60, TUTORIAL_STATE_SAY_NO_CARDS_LEFT);
         break;
-    case 27:
+    case TUTORIAL_STATE_SAY_NO_CARDS_LEFT:
         TutorialShowArrow(work, 14, 90, 0);
-        TutorialQueueMessage(work, 0x55, 29);
+        TutorialQueueMessage(work, 0x55, TUTORIAL_STATE_SAY_FOCUS);
         break;
-    case 29:
-        TutorialQueueMessage(work, 0x56, 30);
+    case TUTORIAL_STATE_SAY_FOCUS:
+        TutorialQueueMessage(work, 0x56, TUTORIAL_STATE_HELP_RELOAD);
         break;
-    case 30:
+    case TUTORIAL_STATE_HELP_RELOAD:
         TutorialHideArrow(work);
-        TutorialQueuePersistentMessage(work, 0x57, 31);
+        TutorialQueuePersistentMessage(work, 0x57, TUTORIAL_STATE_RELOAD);
         break;
-    case 31:
+    case TUTORIAL_STATE_RELOAD:
         if (work->timer == 10) {
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_CARD_USE;
         }
@@ -360,18 +425,18 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         TutorialCloseMessage();
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_USE;
-        TutorialWait(work, 30, 32);
+        TutorialWait(work, 30, TUTORIAL_STATE_SAY_CARDS_RETURNED);
         break;
-    case 32:
-        TutorialQueueMessage(work, 0x58, 33);
+    case TUTORIAL_STATE_SAY_CARDS_RETURNED:
+        TutorialQueueMessage(work, 0x58, TUTORIAL_STATE_SAY_CARDS_LIMITED);
         break;
-    case 33:
-        TutorialQueueMessage(work, 0x59, 34);
+    case TUTORIAL_STATE_SAY_CARDS_LIMITED:
+        TutorialQueueMessage(work, 0x59, TUTORIAL_STATE_HELP_CYCLE_CARDS);
         break;
-    case 34:
-        TutorialQueuePersistentMessage(work, 0x5A, 35);
+    case TUTORIAL_STATE_HELP_CYCLE_CARDS:
+        TutorialQueuePersistentMessage(work, 0x5A, TUTORIAL_STATE_CYCLE_CARDS);
         break;
-    case 35:
+    case TUTORIAL_STATE_CYCLE_CARDS:
         if (work->timer == 0) {
             work->count = 0;
             work->inputCooldown = 0;
@@ -393,20 +458,20 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         work->timer = 0;
-        work->state = 36;
+        work->state = TUTORIAL_STATE_SAY_CARD_CATEGORIES;
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_SELECT;
         TutorialCloseMessage();
         break;
-    case 36:
-        TutorialQueueMessage(work, 0x5B, 37);
+    case TUTORIAL_STATE_SAY_CARD_CATEGORIES:
+        TutorialQueueMessage(work, 0x5B, TUTORIAL_STATE_SAY_CATEGORY_CONTENTS);
         break;
-    case 37:
-        TutorialQueueMessage(work, 0x5C, 38);
+    case TUTORIAL_STATE_SAY_CATEGORY_CONTENTS:
+        TutorialQueueMessage(work, 0x5C, TUTORIAL_STATE_HELP_SWITCH_CATEGORY);
         break;
-    case 38:
-        TutorialQueuePersistentMessage(work, 0x5D, 39);
+    case TUTORIAL_STATE_HELP_SWITCH_CATEGORY:
+        TutorialQueuePersistentMessage(work, 0x5D, TUTORIAL_STATE_SWITCH_CATEGORY);
         break;
-    case 39:
+    case TUTORIAL_STATE_SWITCH_CATEGORY:
         if (work->timer == 0) {
             work->count = 0;
             gBtlWork->flags &= ~BTL_FLAG_TUTORIAL_NO_LIST_SWITCH;
@@ -423,24 +488,24 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         TutorialCloseMessage();
         work->timer = 0;
-        work->state = 40;
+        work->state = TUTORIAL_STATE_SAY_ATTACK_OR_DEFEND;
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_LIST_SWITCH;
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_SELECT;
         break;
-    case 40:
-        TutorialQueueMessage(work, 0x5E, 41);
+    case TUTORIAL_STATE_SAY_ATTACK_OR_DEFEND:
+        TutorialQueueMessage(work, 0x5E, TUTORIAL_STATE_ROBE_FINISH);
         break;
-    case 41:
-        TutorialWait(work, 0x50, 42);
+    case TUTORIAL_STATE_ROBE_FINISH:
+        TutorialWait(work, 0x50, TUTORIAL_STATE_ROBE_END);
         break;
-    case 43:
-        TutorialWait(work, 30, 44);
+    case TUTORIAL_STATE_LEON_START:
+        TutorialWait(work, 30, TUTORIAL_STATE_SAY_CARD_VALUES);
         break;
-    case 44:
+    case TUTORIAL_STATE_SAY_CARD_VALUES:
         TutorialShowArrow(work, 48, 144, 1);
-        TutorialQueueMessage(work, 0x72, 45);
+        TutorialQueueMessage(work, 0x72, TUTORIAL_STATE_PRACTICE_BREAKS);
         break;
-    case 45:
+    case TUTORIAL_STATE_PRACTICE_BREAKS:
         if (work->timer == 0) {
             TutorialHideArrow(work);
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
@@ -471,21 +536,21 @@ s32 task_tutorial_1(TutorialWork* work) {
         }
 
         work->timer = 0;
-        work->state = 46;
+        work->state = TUTORIAL_STATE_PRACTICE_END;
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_CARD_USE;
         gBtlWork->flags &= ~0x100000ULL;
         gBtlWork->flags &= ~0x20000000000ULL;
         break;
-    case 46:
+    case TUTORIAL_STATE_PRACTICE_END:
         if (work->timer > 30) {
             work->timer = 0;
-            work->state = 47;
+            work->state = TUTORIAL_STATE_SAY_CARD_BREAK;
         } else {
             work->timer++;
         }
 
         break;
-    case 47:
+    case TUTORIAL_STATE_SAY_CARD_BREAK:
         if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
             break;
         }
@@ -494,36 +559,36 @@ s32 task_tutorial_1(TutorialWork* work) {
             break;
         }
 
-        TutorialQueueMessage(work, 0x73, 48);
+        TutorialQueueMessage(work, 0x73, TUTORIAL_STATE_SAY_DEFLECTED);
         break;
-    case 48:
-        TutorialQueueMessage(work, 0x74, 49);
+    case TUTORIAL_STATE_SAY_DEFLECTED:
+        TutorialQueueMessage(work, 0x74, TUTORIAL_STATE_SAY_ZERO_SPECIAL);
         break;
-    case 49:
-        TutorialQueueMessage(work, 0x75, 50);
+    case TUTORIAL_STATE_SAY_ZERO_SPECIAL:
+        TutorialQueueMessage(work, 0x75, TUTORIAL_STATE_SAY_ZERO_BREAKS_ALL);
         break;
-    case 50:
-        TutorialQueueMessage(work, 0x76, 51);
+    case TUTORIAL_STATE_SAY_ZERO_BREAKS_ALL:
+        TutorialQueueMessage(work, 0x76, TUTORIAL_STATE_SAY_ZERO_LAST);
         break;
-    case 51:
-        TutorialQueueMessage(work, 0x77, 52);
+    case TUTORIAL_STATE_SAY_ZERO_LAST:
+        TutorialQueueMessage(work, 0x77, TUTORIAL_STATE_SAY_DECK_COST);
         break;
-    case 52:
-        TutorialQueueMessage(work, 0x78, 53);
+    case TUTORIAL_STATE_SAY_DECK_COST:
+        TutorialQueueMessage(work, 0x78, TUTORIAL_STATE_SAY_STOCK_INTRO);
         break;
-    case 53:
-        TutorialQueueMessage(work, 0x79, 54);
+    case TUTORIAL_STATE_SAY_STOCK_INTRO:
+        TutorialQueueMessage(work, 0x79, TUTORIAL_STATE_SAY_STOCKING);
         break;
-    case 54:
-        TutorialQueueMessage(work, 0x7A, 55);
+    case TUTORIAL_STATE_SAY_STOCKING:
+        TutorialQueueMessage(work, 0x7A, TUTORIAL_STATE_SAY_STOCK_THREE);
         break;
-    case 55:
-        TutorialQueueMessage(work, 0x7B, 56);
+    case TUTORIAL_STATE_SAY_STOCK_THREE:
+        TutorialQueueMessage(work, 0x7B, TUTORIAL_STATE_HELP_STOCK_CARDS);
         break;
-    case 56:
-        TutorialQueuePersistentMessage(work, 0x7C, 57);
+    case TUTORIAL_STATE_HELP_STOCK_CARDS:
+        TutorialQueuePersistentMessage(work, 0x7C, TUTORIAL_STATE_STOCK_CARDS);
         break;
-    case 57:
+    case TUTORIAL_STATE_STOCK_CARDS:
         if (work->timer == 0) {
             work->count = 0;
         }
@@ -544,15 +609,15 @@ s32 task_tutorial_1(TutorialWork* work) {
 
         gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK;
         work->timer = 0;
-        work->state = 58;
+        work->state = TUTORIAL_STATE_SAY_STOCK_SUM;
         break;
-    case 58:
-        TutorialQueueMessage(work, 0x7D, 59);
+    case TUTORIAL_STATE_SAY_STOCK_SUM:
+        TutorialQueueMessage(work, 0x7D, TUTORIAL_STATE_HELP_USE_STOCK);
         break;
-    case 59:
-        TutorialQueuePersistentMessage(work, 0x7E, 60);
+    case TUTORIAL_STATE_HELP_USE_STOCK:
+        TutorialQueuePersistentMessage(work, 0x7E, TUTORIAL_STATE_USE_STOCK);
         break;
-    case 60:
+    case TUTORIAL_STATE_USE_STOCK:
         if (work->timer == 0) {
             gBtlWork->flags |= 0x20000000000ULL;
             work->flags &= ~TUTORIAL_FLAG_CARD_ACTION_ACTIVE;
@@ -579,23 +644,23 @@ s32 task_tutorial_1(TutorialWork* work) {
         if (work->count > 0) {
             gBtlWork->flags |= BTL_FLAG_TUTORIAL_NO_STOCK_USE;
             gBtlWork->flags &= ~0x20000000000ULL;
-            TutorialWait(work, 30, 61);
+            TutorialWait(work, 30, TUTORIAL_STATE_SAY_SLEIGHTS);
         } else {
             work->timer++;
         }
 
         break;
-    case 61:
-        TutorialQueueMessage(work, 0x7F, 62);
+    case TUTORIAL_STATE_SAY_SLEIGHTS:
+        TutorialQueueMessage(work, 0x7F, TUTORIAL_STATE_SAY_SLEIGHT_COST);
         break;
-    case 62:
-        TutorialQueueMessage(work, 0x80, 63);
+    case TUTORIAL_STATE_SAY_SLEIGHT_COST:
+        TutorialQueueMessage(work, 0x80, TUTORIAL_STATE_LEON_FINISH);
         break;
-    case 63:
-        TutorialWait(work, 0x50, 64);
+    case TUTORIAL_STATE_LEON_FINISH:
+        TutorialWait(work, 0x50, TUTORIAL_STATE_LEON_END);
         break;
-    case 42:
-    case 64:
+    case TUTORIAL_STATE_ROBE_END:
+    case TUTORIAL_STATE_LEON_END:
         gBtlWork->flags |= BTL_FLAG_BATTLE_OVER;
         break;
     }

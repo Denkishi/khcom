@@ -82,6 +82,15 @@ void BtlRaidGetEffectPosition(BtlRaidWork* work, s32* outX, s32* outY, s32* outZ
     *outZ = work->z + (dz << 8);
 }
 
+enum BtlRaidState {
+    BTL_RAID_STATE_THROW,
+    BTL_RAID_STATE_BOUNCE,
+    BTL_RAID_STATE_STRIKE,
+    BTL_RAID_STATE_RICOCHET,
+    BTL_RAID_STATE_HOMING,
+    BTL_RAID_STATE_RETURN
+};
+
 void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     s32 x;
     s32 y;
@@ -114,7 +123,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
     work->y = args->y;
     work->z = args->z;
     work->timer = 100;
-    work->state = 0;
+    work->state = BTL_RAID_STATE_THROW;
     work->scale = 256;
     work->vx = 0x800;
     work->hitHalfSize = 10;
@@ -154,7 +163,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         break;
     case 6:
         work->attack = 105;
-        work->state = 3;
+        work->state = BTL_RAID_STATE_RICOCHET;
 
         if (work->facingLeft) {
             work->angle = 192;
@@ -167,7 +176,7 @@ void task_btl_raid_0(BtlRaidWork* work, BtlRaidArgs* args) {
         break;
     case 7:
         work->attack = 111;
-        work->state = 4;
+        work->state = BTL_RAID_STATE_HOMING;
 
         if (work->facingLeft) {
             work->angle = 192;
@@ -223,7 +232,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
     BtlMapFollowPosition(work->x, work->y, work->z + 0x1800);
 
     switch (work->state) {
-    case 4:
+    case BTL_RAID_STATE_HOMING:
         work->x += gSineTable[(u8)work->angle] * 5;
         work->z += -gSineTable[(u8)work->angle + 64] * 5;
 
@@ -255,14 +264,14 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         }
 
         if (obj == NULL || work->timer > 180) {
-            work->state = 5;
+            work->state = BTL_RAID_STATE_RETURN;
             work->timer = 0;
         } else {
             work->timer++;
         }
 
         break;
-    case 3:
+    case BTL_RAID_STATE_RICOCHET:
         work->x += gSineTable[(u8)work->angle] * 8;
         work->y -= gSineTable[(u8)work->angle + 64] * 4;
         hit = ClampBattlePosition(&work->x, &work->y, 0, 0);
@@ -288,7 +297,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         if (hit != 0) {
             if (work->timer > 180) {
-                work->state = 5;
+                work->state = BTL_RAID_STATE_RETURN;
                 work->timer = 0;
                 break;
             }
@@ -298,7 +307,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         work->timer++;
         break;
-    case 5:
+    case BTL_RAID_STATE_RETURN:
         if (work->timer == 0) {
             work->steps = 16;
         }
@@ -314,7 +323,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         work->timer++;
         break;
-    case 0:
+    case BTL_RAID_STATE_THROW:
         ApproachValue(&work->vx, -0x800, work->timer);
 
         if (work->facingLeft) {
@@ -325,7 +334,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         if (work->flags & BTL_RAID_FLAG_STRIKE_ON_CONTACT) {
             if (TestAttackBox(work->x, work->y, work->z, work->hitHalfSize, work->hitHalfSize, 32)) {
-                work->state = 2;
+                work->state = BTL_RAID_STATE_STRIKE;
                 work->timer = 0;
                 break;
             }
@@ -350,7 +359,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         switch (ClampBattlePosition(&work->x, &work->y, -20, 0)) {
         case 1:
         case 2:
-            work->state = 1;
+            work->state = BTL_RAID_STATE_BOUNCE;
             work->steps = work->timer >> 2;
             work->bounceVx = work->vx;
             break;
@@ -358,7 +367,7 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
 
         work->timer--;
         break;
-    case 1:
+    case BTL_RAID_STATE_BOUNCE:
         ApproachValue(&work->vx, -work->bounceVx, work->steps);
 
         if (work->facingLeft) {
@@ -375,13 +384,13 @@ u8 task_btl_raid_1(BtlRaidWork* work) {
         if (work->steps <= 0) {
             work->timer = 100 - work->timer;
             MakeOpponentsHittable();
-            work->state = 0;
+            work->state = BTL_RAID_STATE_THROW;
         } else {
             work->steps--;
         }
 
         break;
-    case 2:
+    case BTL_RAID_STATE_STRIKE:
         if (work->timer == 0) {
             work->steps = 30;
 

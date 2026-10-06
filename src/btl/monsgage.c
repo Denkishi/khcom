@@ -70,6 +70,12 @@ s32 GetLocalizedLineCount(const void* text) {
 }
 #endif
 
+enum MonsgageState {
+    MONSGAGE_STATE_HOLD,
+    MONSGAGE_STATE_DRAIN,
+    MONSGAGE_STATE_FULL
+};
+
 void task_monsgage_0(MonsgageWork* work) {
     work->tiles = AllocObjTiles(0x200, gMonsgageTiles);
     work->tiles2 = AllocObjTiles(0x80, gMonsgageTiles);
@@ -79,7 +85,7 @@ void task_monsgage_0(MonsgageWork* work) {
     work->gfx = gMonsgageFrame0;
     work->gfx2 = gMonsgageFrame1;
     work->timer = 0;
-    work->state = 0;
+    work->state = MONSGAGE_STATE_HOLD;
     work->visible = 1;
 }
 
@@ -90,7 +96,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
         }
 
         switch (work->state) {
-        case 0:
+        case MONSGAGE_STATE_HOLD:
             if (work->timer == 0) {
                 work->visible = 1;
                 work->gfx2 = gMonsgageFrame1;
@@ -103,12 +109,12 @@ s32 task_monsgage_1(MonsgageWork* work) {
 
                 if (work->value > 255) {
                     work->value = 256;
-                    work->state = 2;
+                    work->state = MONSGAGE_STATE_FULL;
                     work->timer = 0;
                     break;
                 }
             } else if (work->timer > 120) {
-                work->state = 1;
+                work->state = MONSGAGE_STATE_DRAIN;
                 work->timer = 0;
                 break;
             }
@@ -116,7 +122,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
             work->timer++;
 #else
             if (work->timer > 120) {
-                work->state = 1;
+                work->state = MONSGAGE_STATE_DRAIN;
                 work->timer = 0;
             } else {
                 work->timer++;
@@ -124,7 +130,7 @@ s32 task_monsgage_1(MonsgageWork* work) {
 #endif
 
             break;
-        case 1:
+        case MONSGAGE_STATE_DRAIN:
             if (work->timer == 0) {
                 work->gfx2 = gMonsgageFrame2;
             }
@@ -153,17 +159,17 @@ s32 task_monsgage_1(MonsgageWork* work) {
 #endif
 
                 if (work->value <= 255) {
-                    work->state = 0;
+                    work->state = MONSGAGE_STATE_HOLD;
                 } else {
                     work->value = 256;
-                    work->state = 2;
+                    work->state = MONSGAGE_STATE_FULL;
                 }
             } else {
                 work->timer++;
             }
 
             break;
-        case 2:
+        case MONSGAGE_STATE_FULL:
             if (work->timer == 0) {
                 work->gfx2 = gMonsgageFrame3;
                 work->gfx = gMonsgageFrame4;

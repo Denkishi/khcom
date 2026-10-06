@@ -6,6 +6,13 @@
 
 struct ObjPalette;
 
+enum ContinueState {
+    CONTINUE_STATE_FADE_IN,
+    CONTINUE_STATE_SELECT,
+    CONTINUE_STATE_FADE_OUT,
+    CONTINUE_STATE_DONE
+};
+
 typedef struct ContinueWork {
     void* tiles;
     struct ObjPalette* palette;

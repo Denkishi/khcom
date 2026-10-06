@@ -18,6 +18,12 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 
+enum BtlHpplyGaugeMode {
+    BTL_HPPLY_GAUGE_MODE_SINGLE,
+    BTL_HPPLY_GAUGE_MODE_EXTRA_BAR,
+    BTL_HPPLY_GAUGE_MODE_MAIN_BAR
+};
+
 void task_btl_hpply_0(BtlHpplyWork* work) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         work->palette = LoadObjPalette(gRikuPalette, 0x20);
@@ -41,52 +47,52 @@ void task_btl_hpply_0(BtlHpplyWork* work) {
 
     if (gBtlWork->actor->maxHp <= 40) {
         work->gaugeSize = 0;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 80) {
         work->gaugeSize = 1;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 120) {
         work->gaugeSize = 2;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 160) {
         work->gaugeSize = 3;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 200) {
         work->gaugeSize = 4;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 240) {
         work->gaugeSize = 5;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 280) {
         work->gaugeSize = 6;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_SINGLE;
     } else if (gBtlWork->actor->maxHp <= 320) {
         work->gaugeSize = 0;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 360) {
         work->gaugeSize = 1;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 400) {
         work->gaugeSize = 2;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 440) {
         work->gaugeSize = 3;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 480) {
         work->gaugeSize = 4;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 520) {
         work->gaugeSize = 5;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else if (gBtlWork->actor->maxHp <= 560) {
         work->gaugeSize = 6;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     } else {
         work->gaugeSize = 6;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
     }
 
-    if (work->gaugeMode == 0) {
+    if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_SINGLE) {
         switch (work->gaugeSize) {
         case 0:
         case 1:
@@ -167,7 +173,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         return 0;
     }
 
-    if (work->gaugeMode != 1 && work->hpRatio <= 63) {
+    if (work->gaugeMode != BTL_HPPLY_GAUGE_MODE_EXTRA_BAR && work->hpRatio <= 63) {
         flag = 1;
     } else {
         flag = 0;
@@ -203,24 +209,24 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
         }
     }
 
-    if (work->gaugeMode == 1) {
+    if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_EXTRA_BAR) {
         if (work->displayHp <= 280) {
-            work->gaugeMode = 2;
+            work->gaugeMode = BTL_HPPLY_GAUGE_MODE_MAIN_BAR;
         }
-    } else if (work->gaugeMode == 2) {
+    } else if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_MAIN_BAR) {
         if (work->displayHp > 280) {
-            work->gaugeMode = 1;
+            work->gaugeMode = BTL_HPPLY_GAUGE_MODE_EXTRA_BAR;
         }
     }
 
     switch (work->gaugeMode) {
-    case 0:
+    case BTL_HPPLY_GAUGE_MODE_SINGLE:
         work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         break;
-    case 1:
+    case BTL_HPPLY_GAUGE_MODE_EXTRA_BAR:
         work->hpRatio = ((work->displayHp - 280) << 8) / (actor->maxHp - 280);
         break;
-    case 2:
+    case BTL_HPPLY_GAUGE_MODE_MAIN_BAR:
         work->hpRatio = (work->displayHp << 8) / 280;
         break;
     }
@@ -231,7 +237,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             m4aSongNumStart(SONG_SYS_ALART);
         }
 
-        if (work->gaugeMode == 0) {
+        if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -260,7 +266,7 @@ s32 task_btl_hpply_1(BtlHpplyWork* work) {
             AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
         }
     } else {
-        if (work->gaugeMode == 0) {
+        if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -308,24 +314,24 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
     DrawSprite(4, 2, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 1);
 
     switch (work->gaugeMode) {
-    case 0:
+    case BTL_HPPLY_GAUGE_MODE_SINGLE:
         DrawSprite(4, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 4);
         break;
-    case 1:
+    case BTL_HPPLY_GAUGE_MODE_EXTRA_BAR:
         DrawSprite(4, 2, gBHpgagFrame27, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 4);
         DrawSprite(4, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 3);
         break;
-    case 2:
+    case BTL_HPPLY_GAUGE_MODE_MAIN_BAR:
         DrawSprite(4, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 4);
         DrawSprite(4, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 5);
         break;
     }
 
     switch (work->gaugeMode) {
-    case 2:
+    case BTL_HPPLY_GAUGE_MODE_MAIN_BAR:
         v = work->hpRatio;
         break;
-    case 0:
+    case BTL_HPPLY_GAUGE_MODE_SINGLE:
         switch (work->gaugeSize) {
         case 0:
         case 1:
@@ -352,7 +358,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
         }
 
         break;
-    case 1:
+    case BTL_HPPLY_GAUGE_MODE_EXTRA_BAR:
     default:
         switch (work->gaugeSize) {
         case 0:
@@ -397,7 +403,7 @@ void task_btl_hpply_2(BtlHpplyWork* work) {
             aff = AllocObjAffine(0, v, 0x100, 0);
         }
 
-        if (work->gaugeMode == 1) {
+        if (work->gaugeMode == BTL_HPPLY_GAUGE_MODE_EXTRA_BAR) {
             DrawSprite(31, 9, gBHpgagFrame26, work->tiles4, work->palette2, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         } else {
             DrawSprite(31, 6, gBHpgagFrame0, work->tiles4, work->palette2, aff, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

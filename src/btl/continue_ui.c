@@ -124,7 +124,7 @@ void ContinueSora_0(ContinueWork* work) {
     }
 
     work->blendAlpha = 0x1000;
-    work->state = 0;
+    work->state = CONTINUE_STATE_FADE_IN;
 }
 
 void ContinueRiku_0(ContinueWork* work) {
@@ -194,7 +194,7 @@ void ContinueRiku_0(ContinueWork* work) {
     }
 
     work->blendAlpha = 0x1000;
-    work->state = 0;
+    work->state = CONTINUE_STATE_FADE_IN;
 }
 
 static s32 Continue_1(ContinueWork* work) {
@@ -206,13 +206,13 @@ static s32 Continue_1(ContinueWork* work) {
     gBldCnt = (BLDCNT_TGT1_BG2 | BLDCNT_TGT1_OBJ | BLDCNT_EFFECT_BLEND | BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BG1 | BLDCNT_TGT2_BG3);
     gBldAlpha = work->blendAlpha;
 
-    if (work->state == 0) {
+    if (work->state == CONTINUE_STATE_FADE_IN) {
         if (!FadeIsActive()) {
-            work->state = 1;
+            work->state = CONTINUE_STATE_SELECT;
         }
     }
 
-    if (work->state == 1) {
+    if (work->state == CONTINUE_STATE_SELECT) {
         if (work->steps > 0) {
             ApproachValue(&work->x2, 0, work->steps);
             ApproachValue(&work->y2, 0x9800, work->steps);
@@ -250,12 +250,12 @@ static s32 Continue_1(ContinueWork* work) {
             }
 
             m4aSongNumStart(SONG_SYS_KETTEI);
-            work->state = 2;
+            work->state = CONTINUE_STATE_FADE_OUT;
             work->steps = 16;
         }
     }
 
-    if (work->state == 2) {
+    if (work->state == CONTINUE_STATE_FADE_OUT) {
         if (work->steps > 0) {
             ApproachValue(&work->x2, -2048, work->steps);
             ApproachValue(&work->y2, 0xA000, work->steps);
@@ -273,7 +273,7 @@ static s32 Continue_1(ContinueWork* work) {
             DisableBg(2);
             LoadBgMap(0, gDefaultBgMap, 0x800);
             LoadBgMap(2, gDefaultBgMap, 0x800);
-            work->state = 3;
+            work->state = CONTINUE_STATE_DONE;
         }
     }
 

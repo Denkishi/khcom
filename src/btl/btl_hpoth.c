@@ -15,6 +15,12 @@
 #include <stddef.h>
 #include "sprite_palettes.h"
 
+enum BtlHpothGaugeMode {
+    BTL_HPOTH_GAUGE_MODE_SINGLE,
+    BTL_HPOTH_GAUGE_MODE_EXTRA_BAR,
+    BTL_HPOTH_GAUGE_MODE_MAIN_BAR
+};
+
 void task_btl_hpoth_0(BtlHpothWork* work) {
     work->palette = LoadObjPalette(gBtlOtherSidePalette, 32);
     work->tiles = AllocObjTiles(0x280, gBtlHpSoraFaceTiles);
@@ -30,52 +36,52 @@ void task_btl_hpoth_0(BtlHpothWork* work) {
 
     if (gRikuBtlWork->actor->maxHp <= 40) {
         work->gaugeSize = 0;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 80) {
         work->gaugeSize = 1;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 120) {
         work->gaugeSize = 2;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 160) {
         work->gaugeSize = 3;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 200) {
         work->gaugeSize = 4;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 240) {
         work->gaugeSize = 5;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 280) {
         work->gaugeSize = 6;
-        work->gaugeMode = 0;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_SINGLE;
     } else if (gRikuBtlWork->actor->maxHp <= 320) {
         work->gaugeSize = 0;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 360) {
         work->gaugeSize = 1;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 400) {
         work->gaugeSize = 2;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 440) {
         work->gaugeSize = 3;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 480) {
         work->gaugeSize = 4;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 520) {
         work->gaugeSize = 5;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else if (gRikuBtlWork->actor->maxHp <= 560) {
         work->gaugeSize = 6;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     } else {
         work->gaugeSize = 6;
-        work->gaugeMode = 1;
+        work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
     }
 
-    if (work->gaugeMode == 0) {
+    if (work->gaugeMode == BTL_HPOTH_GAUGE_MODE_SINGLE) {
         switch (work->gaugeSize) {
         case 0:
         case 1:
@@ -154,7 +160,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         return 0;
     }
 
-    if (work->gaugeMode != 1 && work->hpRatio < 64) {
+    if (work->gaugeMode != BTL_HPOTH_GAUGE_MODE_EXTRA_BAR && work->hpRatio < 64) {
         flag = 1;
     } else {
         flag = 0;
@@ -190,32 +196,32 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
         }
     }
 
-    if (work->gaugeMode == 1) {
+    if (work->gaugeMode == BTL_HPOTH_GAUGE_MODE_EXTRA_BAR) {
         if (work->displayHp <= 280) {
-            work->gaugeMode = 2;
+            work->gaugeMode = BTL_HPOTH_GAUGE_MODE_MAIN_BAR;
         }
-    } else if (work->gaugeMode == 2) {
+    } else if (work->gaugeMode == BTL_HPOTH_GAUGE_MODE_MAIN_BAR) {
         if (work->displayHp > 280) {
-            work->gaugeMode = 1;
+            work->gaugeMode = BTL_HPOTH_GAUGE_MODE_EXTRA_BAR;
         }
     }
 
     state = work->gaugeMode;
 
     switch (state) {
-    case 0:
+    case BTL_HPOTH_GAUGE_MODE_SINGLE:
         work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         break;
-    case 1:
+    case BTL_HPOTH_GAUGE_MODE_EXTRA_BAR:
         work->hpRatio = ((work->displayHp - 280) << 8) / (actor->maxHp - 280);
         break;
-    case 2:
+    case BTL_HPOTH_GAUGE_MODE_MAIN_BAR:
         work->hpRatio = (work->displayHp << 8) / 280;
         break;
     }
 
     if (flag) {
-        if (state == 0) {
+        if (state == BTL_HPOTH_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -244,7 +250,7 @@ s32 task_btl_hpoth_1(BtlHpothWork* work) {
             AnimChange(&work->anim2, 12, ANIM_FLAG_LOOP);
         }
     } else {
-        if (state == 0) {
+        if (state == BTL_HPOTH_GAUGE_MODE_SINGLE) {
             switch (work->gaugeSize) {
             case 0:
             case 1:
@@ -285,24 +291,24 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
     DrawSprite(236, 2, work->gfx, work->tiles, work->palette, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 1);
 
     switch (work->gaugeMode) {
-    case 0:
+    case BTL_HPOTH_GAUGE_MODE_SINGLE:
         DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
         break;
-    case 1:
+    case BTL_HPOTH_GAUGE_MODE_EXTRA_BAR:
         DrawSprite(236, 2, gBHpgagFrame27, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
         DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 3);
         break;
-    case 2:
+    case BTL_HPOTH_GAUGE_MODE_MAIN_BAR:
         DrawSprite(236, 2, work->gfx2, work->tiles2, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 4);
         DrawSprite(236, 2, work->gfx3, work->tiles3, work->palette2, NULL, SPRITE_PRIORITY(1) | SPRITE_FLAG_HFLIP | SPRITE_FLAG_NO_MOSAIC, 5);
         break;
     }
 
     switch (work->gaugeMode) {
-    case 2:
+    case BTL_HPOTH_GAUGE_MODE_MAIN_BAR:
         scale = work->hpRatio;
         break;
-    case 0:
+    case BTL_HPOTH_GAUGE_MODE_SINGLE:
         switch (work->gaugeSize) {
         case 0:
         case 1:
@@ -327,7 +333,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
         }
 
         break;
-    case 1:
+    case BTL_HPOTH_GAUGE_MODE_EXTRA_BAR:
     default:
         switch (work->gaugeSize) {
         case 0:
@@ -370,7 +376,7 @@ void task_btl_hpoth_2(BtlHpothWork* work) {
             affine = AllocObjAffine(0, scale, 256, 0);
         }
 
-        if (work->gaugeMode == 1) {
+        if (work->gaugeMode == BTL_HPOTH_GAUGE_MODE_EXTRA_BAR) {
             DrawSprite(209, 9, gBHpgagFrame29, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);
         } else {
             DrawSprite(209, 6, gBHpgagFrame28, work->tiles4, work->palette2, affine, SPRITE_PRIORITY(1) | SPRITE_FLAG_NO_MOSAIC, 2);

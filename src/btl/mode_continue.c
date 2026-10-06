@@ -32,7 +32,7 @@ void ContinueModeUpdate() {
     TaskPoolDraw(&sContinueTaskPool);
     w = sContinueTask->work;
 
-    if (w->state == 3) {
+    if (w->state == CONTINUE_STATE_DONE) {
         switch (w->cursor) {
         case 0:
             RequestMapMode();

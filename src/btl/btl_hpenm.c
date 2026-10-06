@@ -16,6 +16,13 @@
 #include "sprite_palettes.h"
 #include "sprites_mode_test.h"
 
+enum BtlHpenmGaugeLayer {
+    BTL_HPENM_GAUGE_LAYER_GREEN,
+    BTL_HPENM_GAUGE_LAYER_BLUE,
+    BTL_HPENM_GAUGE_LAYER_YELLOW,
+    BTL_HPENM_GAUGE_LAYER_RED
+};
+
 void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->tiles = AllocObjTiles(0x140, gBHpgagETiles);
     work->tiles2 = AllocObjTiles(0x80, gBHpgagETiles);
@@ -25,7 +32,7 @@ void task_btl_hpenm_0(BtlHpenmWork* work) {
     work->hpRatio = 0x100;
     work->actor = NULL;
     work->gaugeSize = 0;
-    work->gaugeLayer = 0;
+    work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_GREEN;
 }
 
 s32 task_btl_hpenm_1(BtlHpenmWork* work) {
@@ -91,26 +98,26 @@ s32 task_btl_hpenm_1(BtlHpenmWork* work) {
     }
 
     if (work->displayHp <= 560) {
-        work->gaugeLayer = 0;
+        work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_GREEN;
     } else if (work->displayHp <= 1120) {
-        work->gaugeLayer = 1;
+        work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_BLUE;
     } else if (work->displayHp <= 1680) {
-        work->gaugeLayer = 2;
+        work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_YELLOW;
     } else {
-        work->gaugeLayer = 3;
+        work->gaugeLayer = BTL_HPENM_GAUGE_LAYER_RED;
     }
 
     switch (work->gaugeLayer) {
-    case 3:
+    case BTL_HPENM_GAUGE_LAYER_RED:
         work->hpRatio = ((work->displayHp - 1680) << 8) / 560;
         break;
-    case 2:
+    case BTL_HPENM_GAUGE_LAYER_YELLOW:
         work->hpRatio = ((work->displayHp - 1120) << 8) / 560;
         break;
-    case 1:
+    case BTL_HPENM_GAUGE_LAYER_BLUE:
         work->hpRatio = ((work->displayHp - 560) << 8) / 560;
         break;
-    case 0:
+    case BTL_HPENM_GAUGE_LAYER_GREEN:
         if (work->gaugeSize <= 6) {
             work->hpRatio = (work->displayHp << 8) / actor->maxHp;
         } else {
@@ -134,7 +141,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
     }
 
     switch (work->gaugeLayer) {
-    case 3:
+    case BTL_HPENM_GAUGE_LAYER_RED:
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -159,7 +166,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         bar = gBHpgagEFrame9;
 #endif
         break;
-    case 2:
+    case BTL_HPENM_GAUGE_LAYER_YELLOW:
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -184,7 +191,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         bar = gBHpgagEFrame8;
 #endif
         break;
-    case 1:
+    case BTL_HPENM_GAUGE_LAYER_BLUE:
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
@@ -209,7 +216,7 @@ void task_btl_hpenm_2(BtlHpenmWork* work) {
         bar = gBHpgagEFrame7;
 #endif
         break;
-    case 0:
+    case BTL_HPENM_GAUGE_LAYER_GREEN:
     default:
 #ifdef VERSION_EU
         switch (gLanguage) {

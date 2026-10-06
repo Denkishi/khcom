@@ -285,31 +285,31 @@ void EventUpdate() {
 
     if (seqDef->exitCode != EVENT_EXIT_NONE) {
         switch (seqDef->exitCode) {
-        case 2:
+        case EVENT_EXIT_BATTLE_TUTORIAL_0:
             ModeRequest(&gModeBattle, BATTLE_TUTORIAL_0);
             break;
-        case 4:
+        case EVENT_EXIT_BATTLE_TUTORIAL_1:
             ModeRequest(&gModeBattle, BATTLE_TUTORIAL_1);
             break;
-        case 12:
+        case EVENT_EXIT_MOVIE_ENDING:
             ModeRequestHeapReset(&gModeMovie, MOVIE_ENDING);
             break;
-        case 1:
+        case EVENT_EXIT_WORLD_SELECT:
             gGameState.availableWorlds = 512;
             ModeRequest(&gModeWorldselect, 0);
             break;
-        case 10:
+        case EVENT_EXIT_MOVIE_6F_GOAL:
             ModeRequestHeapReset(&gModeMovie, MOVIE_6F_GOAL);
             break;
-        case 11:
+        case EVENT_EXIT_MOVIE_12F_E2:
             ModeRequestHeapReset(&gModeMovie, MOVIE_12F_E2);
             break;
-        case 13:
+        case EVENT_EXIT_MOVIE_RIKU_ENDING:
             ModeRequestHeapReset(&gModeMovie, MOVIE_RIKU_ENDING);
             break;
-        case 3:
-        case 5:
-        case 6:
+        case EVENT_EXIT_MAP_1F:
+        case EVENT_EXIT_MAP_4F:
+        case EVENT_EXIT_MAP_6F:
             AdvanceFloorStory();
             RequestMapMode();
             break;

@@ -144,7 +144,20 @@ typedef struct EventBgEffectEntry {
     u16 flags;
 } EventBgEffectEntry;
 
-#define EVENT_EXIT_NONE 0xFFFF
+enum EventExitCode {
+    EVENT_EXIT_WORLD_SELECT = 1,
+    EVENT_EXIT_BATTLE_TUTORIAL_0,
+    EVENT_EXIT_MAP_1F,
+    EVENT_EXIT_BATTLE_TUTORIAL_1,
+    EVENT_EXIT_MAP_4F,
+    EVENT_EXIT_MAP_6F,
+    EVENT_EXIT_MOVIE_6F_GOAL = 10,
+    EVENT_EXIT_MOVIE_12F_E2,
+    EVENT_EXIT_MOVIE_ENDING,
+    EVENT_EXIT_MOVIE_RIKU_ENDING,
+    EVENT_EXIT_NONE = 0xFFFF
+};
+
 #define POOH_LEVEL_NONE 0xFF
 
 typedef struct EventSequenceDef {

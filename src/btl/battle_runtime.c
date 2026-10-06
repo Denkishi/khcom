@@ -49,20 +49,20 @@
 s32 gUnk_02039DC0 EWRAM_COMMON(4);
 s32* gLockonDoorPosition EWRAM_COMMON(4);
 
-void SetBattleZoom(u16 a, s32 b, s32 c, s32 d) {
-    gBtlWork->zoomScale = b;
-    gBtlWork->zoomSteps = a;
-    gBtlWork->zoomX = c;
-    gBtlWork->zoomY = d;
+void SetBattleZoom(u16 steps, s32 scale, s32 x, s32 y) {
+    gBtlWork->zoomScale = scale;
+    gBtlWork->zoomSteps = steps;
+    gBtlWork->zoomX = x;
+    gBtlWork->zoomY = y;
 }
 
-void AnimChangeWithDef(const AnimDef* tbl, void* a, u16 i, u16 j, void* obj) {
+void AnimChangeWithDef(const AnimDef* tbl, void* anim, u16 i, u16 j, void* obj) {
     const AnimDef* e = &tbl[i];
-    AnimChangeWithTables(a, e->animId, j, e->anims, e->gfxTable);
+    AnimChangeWithTables(anim, e->animId, j, e->anims, e->gfxTable);
     SetObjTileSource(obj, e->tiles);
 }
 
-void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
+void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz) {
     s16 x;
     s16 y;
     u8 ang;
@@ -81,8 +81,8 @@ void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
     }
 
     if (gBtlWork->rotation == 0) {
-        *a = x + 120;
-        *b = y + 80;
+        *outX = x + 120;
+        *outY = y + 80;
     } else {
         ang = -gBtlWork->rotation;
         sine = gSineTable;
@@ -92,20 +92,20 @@ void WorldToScreen(s16* a, s16* b, s32 px, s32 py, s32 pz) {
         v = sine[idx += 64] * x;
         u += sine[ang] * y;
         v += sine[c] * y;
-        *a = (u >> 8) + 120;
-        *b = (v >> 8) + 80;
+        *outX = (u >> 8) + 120;
+        *outY = (v >> 8) + 80;
     }
 }
 
-void CreateBtlPopTask(BtlObj* p, s16 b) {
+void CreateBtlPopTask(BtlObj* obj, s16 kind) {
     BtlPrizeSrc a;
     s16* t;
 
-    if (b != 9) {
-        if (p->parent != NULL) {
-            t = &p->parent->popCooldown;
+    if (kind != 9) {
+        if (obj->parent != NULL) {
+            t = &obj->parent->popCooldown;
         } else {
-            t = &p->popCooldown;
+            t = &obj->popCooldown;
         }
 
         if (*t > 0) {
@@ -115,26 +115,26 @@ void CreateBtlPopTask(BtlObj* p, s16 b) {
         *t = 50;
     }
 
-    a.x = p->x;
-    a.y = p->y;
-    a.z = p->z - ((p->height / 2) << 8);
+    a.x = obj->x;
+    a.y = obj->y;
+    a.z = obj->z - ((obj->height / 2) << 8);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        if (b == 9) {
+        if (kind == 9) {
             a.kind = abs(gBtlWork->breakDifference);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &a);
             return;
         }
 
-        a.kind = b;
+        a.kind = kind;
         TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPop, &a);
         return;
     }
 
-    a.kind = b;
+    a.kind = kind;
 
-    if (b == 9) {
-        if (p->flags & BTLOBJ_FLAG_NO_BREAK_POP) {
+    if (kind == 9) {
+        if (obj->flags & BTLOBJ_FLAG_NO_BREAK_POP) {
             return;
         }
 
@@ -557,7 +557,7 @@ void MakeOpponentsHittable() {
     p->flags &= ~BTLOBJ_FLAG_HIT_LOCKED;
 }
 
-void DropFriendCard(s32 a, s32 b, s32 c) {
+void DropFriendCard(s32 x, s32 y, s32 z) {
     u16 flags;
     s16 v;
 
@@ -570,7 +570,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         if (flags & FRIEND_FLAG_THE_KING) {
             SetJiminyFlag(244);
-            CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, 7);
+            CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, 7);
         }
 
         return;
@@ -633,7 +633,7 @@ void DropFriendCard(s32 a, s32 b, s32 c) {
     }
 
     if (v != -1) {
-        CreateFriendCardTask(gBtlWork->taskPools, a >> 8, b >> 8, c >> 8, v);
+        CreateFriendCardTask(gBtlWork->taskPools, x >> 8, y >> 8, z >> 8, v);
     }
 }
 
@@ -1130,128 +1130,128 @@ void SetBattleBounds(s32 xMin, s32 xMax, s32 yMin, s32 yMax) {
     SetGimmickTarget(((s16)a + (s16)b) << 7, ((s16)c + (s16)d) << 7, -0x2000);
 }
 
-s32 ApplyBtlObjHit(BtlObj* p) {
-    if (p->flags & BTLOBJ_FLAG_WARP_PENDING) {
-        p->flags &= ~BTLOBJ_FLAG_WARP_PENDING;
+s32 ApplyBtlObjHit(BtlObj* obj) {
+    if (obj->flags & BTLOBJ_FLAG_WARP_PENDING) {
+        obj->flags &= ~BTLOBJ_FLAG_WARP_PENDING;
 
-        if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
-            p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
+        if (obj->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
+            obj->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
         }
 
         return BTL_REACTION_WARPED;
     }
 
-    if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
-        p->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING);
-        p->hp -= p->damage;
+    if (obj->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+        obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING);
+        obj->hp -= obj->damage;
 
-        if (p->hp < 0) {
-            p->hp = 0;
+        if (obj->hp < 0) {
+            obj->hp = 0;
         }
 
-        p->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
+        obj->flags &= ~BTLOBJ_FLAG_CARD_ACTION_PENDING;
         gBtlWork->hitStop = gBtlWork->pendingHitStop;
-        p->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_HURT);
-        p->hitFlashFrames = 0;
+        obj->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_HURT);
+        obj->hitFlashFrames = 0;
 
-        if (p->hp <= 0) {
-            p->flags |= BTLOBJ_FLAG_INTANGIBLE;
-            p->flags &= ~(BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_STUN_PENDING);
-            p->flags |= BTLOBJ_FLAG_DEFEATED;
-            p->badStatus = BAD_STATUS_NONE;
-            p->badStatusTimer = 0;
+        if (obj->hp <= 0) {
+            obj->flags |= BTLOBJ_FLAG_INTANGIBLE;
+            obj->flags &= ~(BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_STUN_PENDING);
+            obj->flags |= BTLOBJ_FLAG_DEFEATED;
+            obj->badStatus = BAD_STATUS_NONE;
+            obj->badStatusTimer = 0;
 
-            if (p->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
-                p->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
+            if (obj->hitFlags & ATTACK_FLAG_NO_DEATH_EFFECT) {
+                obj->flags |= BTLOBJ_FLAG_NO_DEATH_FX;
             }
 
-            if (p->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
-                p->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
+            if (obj->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
+                obj->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
                 return BTL_REACTION_GRAVITY_DEFEATED;
             }
 
             return BTL_REACTION_DEFEATED;
         }
 
-        if (p->kind != 55 && GetRandom() % 8 == 0) {
-            DropFriendCard(p->x, p->y, p->z - 0x7800);
+        if (obj->kind != 55 && GetRandom() % 8 == 0) {
+            DropFriendCard(obj->x, obj->y, obj->z - 0x7800);
         }
 
-        if (p->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
-            p->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = BAD_STATUS_NONE;
-            p->badStatusTimer = 0;
+        if (obj->flags & BTLOBJ_FLAG_GRAVITY_PENDING) {
+            obj->flags &= ~BTLOBJ_FLAG_GRAVITY_PENDING;
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+            obj->badStatus = BAD_STATUS_NONE;
+            obj->badStatusTimer = 0;
             return BTL_REACTION_GRAVITY;
         }
 
-        if (p->flags & BTLOBJ_FLAG_STUN_PENDING) {
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+        if (obj->flags & BTLOBJ_FLAG_STUN_PENDING) {
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
 
-            if (p->badStatus != BAD_STATUS_STUN) {
-                p->badStatus = BAD_STATUS_STUN;
-                p->badStatusTimer = 240;
+            if (obj->badStatus != BAD_STATUS_STUN) {
+                obj->badStatus = BAD_STATUS_STUN;
+                obj->badStatusTimer = 240;
             }
 
             return BTL_REACTION_STUNNED;
         }
 
-        if (p->flags & BTLOBJ_FLAG_TERROR_PENDING) {
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = BAD_STATUS_TERROR;
-            p->badStatusTimer = 300;
+        if (obj->flags & BTLOBJ_FLAG_TERROR_PENDING) {
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+            obj->badStatus = BAD_STATUS_TERROR;
+            obj->badStatusTimer = 300;
             return BTL_REACTION_TERRIFIED;
         }
 
-        if (p->flags & BTLOBJ_FLAG_CONFUSE_PENDING) {
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->badStatus = BAD_STATUS_CONFUSE;
-            p->badStatusTimer = 300;
+        if (obj->flags & BTLOBJ_FLAG_CONFUSE_PENDING) {
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+            obj->badStatus = BAD_STATUS_CONFUSE;
+            obj->badStatusTimer = 300;
             return BTL_REACTION_HURT;
         }
 
-        if (p->flags & BTLOBJ_FLAG_BIND_PENDING) {
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+        if (obj->flags & BTLOBJ_FLAG_BIND_PENDING) {
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
 
-            if (p->badStatus != BAD_STATUS_BIND) {
-                p->badStatus = BAD_STATUS_BIND;
-                p->badStatusTimer = 600;
+            if (obj->badStatus != BAD_STATUS_BIND) {
+                obj->badStatus = BAD_STATUS_BIND;
+                obj->badStatusTimer = 600;
             }
 
             return BTL_REACTION_HURT;
         }
 
-        p->badStatus = BAD_STATUS_NONE;
-        p->badStatusTimer = 0;
+        obj->badStatus = BAD_STATUS_NONE;
+        obj->badStatusTimer = 0;
         return BTL_REACTION_HURT;
     }
 
-    if (p->flags & BTLOBJ_FLAG_HEAL_PENDING) {
-        p->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_HEAL_PENDING);
-        p->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED);
+    if (obj->flags & BTLOBJ_FLAG_HEAL_PENDING) {
+        obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_HEAL_PENDING);
+        obj->flags |= (BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED);
         return BTL_REACTION_HEALED;
     }
 
-    if (p->flags & BTLOBJ_FLAG_HAZARD_PENDING) {
-        p->flags &= ~BTLOBJ_FLAG_HAZARD_PENDING;
+    if (obj->flags & BTLOBJ_FLAG_HAZARD_PENDING) {
+        obj->flags &= ~BTLOBJ_FLAG_HAZARD_PENDING;
 
-        if (p->hp > 0) {
-            ClearBtlObjActionFlags(p);
+        if (obj->hp > 0) {
+            ClearBtlObjActionFlags(obj);
             return BTL_REACTION_HAZARD;
         }
 
         return BTL_REACTION_NONE;
     }
 
-    if (p->flags & BTLOBJ_FLAG_STOP_PENDING) {
-        p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+    if (obj->flags & BTLOBJ_FLAG_STOP_PENDING) {
+        obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
         gBtlWork->hitStop = gBtlWork->pendingHitStop;
-        ClearBtlObjActionFlags(p);
-        p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
+        ClearBtlObjActionFlags(obj);
+        obj->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
 
-        if (p->badStatus != BAD_STATUS_STOP) {
-            p->badStatus = BAD_STATUS_STOP;
-            p->badStatusTimer = p->damage;
+        if (obj->badStatus != BAD_STATUS_STOP) {
+            obj->badStatus = BAD_STATUS_STOP;
+            obj->badStatusTimer = obj->damage;
         }
 
         return BTL_REACTION_STOPPED;
@@ -1260,83 +1260,83 @@ s32 ApplyBtlObjHit(BtlObj* p) {
     return BTL_REACTION_NONE;
 }
 
-u8 TryStartCardAction(BtlObj* p) {
-    u64 f = p->flags;
+u8 TryStartCardAction(BtlObj* obj) {
+    u64 f = obj->flags;
 
     if (f & BTLOBJ_FLAG_CARD_ACTION_PENDING) {
-        p->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_HURT | BTLOBJ_FLAG_STUN_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
-        p->flags |= (BTLOBJ_FLAG_IN_CARD_ACTION | BTLOBJ_FLAG_HIT_LOCKED);
-        p->originX = p->x;
-        p->originY = p->y;
-        p->originZ = p->z;
+        obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_HEAL_PENDING | BTLOBJ_FLAG_HURT | BTLOBJ_FLAG_STUN_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
+        obj->flags |= (BTLOBJ_FLAG_IN_CARD_ACTION | BTLOBJ_FLAG_HIT_LOCKED);
+        obj->originX = obj->x;
+        obj->originY = obj->y;
+        obj->originZ = obj->z;
         return 1;
     }
 
     return 0;
 }
 
-s32 UpdateBtlObjReaction(BtlObj* p) {
+s32 UpdateBtlObjReaction(BtlObj* obj) {
     u16 t;
     u16 u;
     u16 v;
 
-    if (p->badStatus == BAD_STATUS_STOP) {
-        if (p->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
-            p->flags &= ~(BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+    if (obj->badStatus == BAD_STATUS_STOP) {
+        if (obj->flags & BTLOBJ_FLAG_DAMAGE_PENDING) {
+            obj->flags &= ~(BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_GRAVITY_PENDING);
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
             gBtlWork->hitStop = gBtlWork->pendingHitStop;
-            p->invincibleTimer = 30;
-            p->delayedDamage += p->damage;
+            obj->invincibleTimer = 30;
+            obj->delayedDamage += obj->damage;
         }
     } else {
-        t = p->delayedDamage;
+        t = obj->delayedDamage;
 
-        if ((s16)p->delayedDamage > 0) {
-            p->damage = t;
-            p->delayedDamage = 0;
+        if ((s16)obj->delayedDamage > 0) {
+            obj->damage = t;
+            obj->delayedDamage = 0;
             gBtlWork->pendingHitStop = 0;
-            p->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
-            p->flags |= BTLOBJ_FLAG_DAMAGE_PENDING;
-            p->hitFlags = 0;
-            p->knockbackSpeed = 0;
-            p->knockbackLift = 0;
+            obj->flags &= ~BTLOBJ_FLAGS_STATUS_PENDING;
+            obj->flags |= BTLOBJ_FLAG_DAMAGE_PENDING;
+            obj->hitFlags = 0;
+            obj->knockbackSpeed = 0;
+            obj->knockbackLift = 0;
         }
     }
 
-    u = p->invincibleTimer;
+    u = obj->invincibleTimer;
 
-    if (p->invincibleTimer > 0) {
-        p->invincibleTimer = u - 1;
+    if (obj->invincibleTimer > 0) {
+        obj->invincibleTimer = u - 1;
     }
 
-    v = p->popCooldown;
+    v = obj->popCooldown;
 
-    if (p->popCooldown > 0) {
-        p->popCooldown = v - 1;
+    if (obj->popCooldown > 0) {
+        obj->popCooldown = v - 1;
     }
 
-    if (p->flags & BTLOBJ_FLAG_CARD_BREAK_PENDING) {
-        p->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_CARD_BREAK_PENDING);
-        ClearBtlObjActionFlags(p);
-        p->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
-        CreateBtlPopTask(p, 9);
+    if (obj->flags & BTLOBJ_FLAG_CARD_BREAK_PENDING) {
+        obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_CARD_BREAK_PENDING);
+        ClearBtlObjActionFlags(obj);
+        obj->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
+        CreateBtlPopTask(obj, 9);
         gBtlWork->hitStop = 12;
         return BTL_REACTION_CARD_BROKEN;
     }
 
-    if (TryStartCardAction(p)) {
+    if (TryStartCardAction(obj)) {
         return BTL_REACTION_CARD_ACTION;
     }
 
-    return ApplyBtlObjHit(p);
+    return ApplyBtlObjHit(obj);
 }
 
-void ClearBtlObjActionFlags(BtlObj* p) {
-    p->flags &= ~(BTLOBJ_FLAG_IN_CARD_ACTION | BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_HURT);
+void ClearBtlObjActionFlags(BtlObj* obj) {
+    obj->flags &= ~(BTLOBJ_FLAG_IN_CARD_ACTION | BTLOBJ_FLAG_HIT_LOCKED | BTLOBJ_FLAG_CARD_USE_BLOCKED | BTLOBJ_FLAG_HURT);
 }
 
-u16 GetBattleSpritePriorityFlags(s32 a) {
-    if (a < gBtlWork->bossY + (gBtlWork->bossPriorityOffset << 8)) {
+u16 GetBattleSpritePriorityFlags(s32 y) {
+    if (y < gBtlWork->bossY + (gBtlWork->bossPriorityOffset << 8)) {
         return SPRITE_PRIORITY(2);
     }
 
@@ -1367,97 +1367,97 @@ void EndBossDefeat() {
     gBtlWork->flags &= ~BTL_FLAG_BOSS_DEFEATING;
 }
 
-void SetEnemyKindFlags(BtlObj* p) {
-    switch (p->kind) {
+void SetEnemyKindFlags(BtlObj* obj) {
+    switch (obj->kind) {
     case 1:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_WEAK_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 2:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_WEAK_FIRE | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 3:
-        p->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
+        obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
     case 4:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER);
         break;
     case 5:
-        p->flags |= BTLOBJ_FLAG_WEAK_THUNDER;
+        obj->flags |= BTLOBJ_FLAG_WEAK_THUNDER;
         break;
     case 7:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
         break;
     case 16:
-        p->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
+        obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
     case 23:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY);
         break;
     case 27:
-        p->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
+        obj->flags |= BTLOBJ_FLAG_ABSORB_THUNDER;
         break;
     case 32:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 33:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 34:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 35:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 36:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 37:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 38:
-        p->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 39:
-        p->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 40:
-        p->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 42:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 43:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 44:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 45:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER);
         break;
     case 46:
-        p->flags |= BTLOBJ_FLAG_WEAK_FIRE;
+        obj->flags |= BTLOBJ_FLAG_WEAK_FIRE;
         break;
     case 47:
-        p->flags |= BTLOBJ_FLAG_WEAK_FIRE;
+        obj->flags |= BTLOBJ_FLAG_WEAK_FIRE;
         break;
     case 48:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_FIRE | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 49:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_THUNDER | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD);
         break;
     case 50:
-        p->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_ABSORB_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 51:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_WEAK_PHYSICAL | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 52:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_BLIZZARD | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_NEUTRAL);
         break;
     case 53:
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_BLIZZARD | BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_RESIST_FIRE | BTLOBJ_FLAG_RESIST_THUNDER | BTLOBJ_FLAG_RESIST_PHYSICAL);
         break;
     case 0:
     default:
@@ -1465,7 +1465,7 @@ void SetEnemyKindFlags(BtlObj* p) {
     }
 }
 
-void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
+void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
     const EnemyBaseStats* e;
     enum EmyId {
         EMY_ID_32 = 32,
@@ -1489,10 +1489,10 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     s32 b;
     s32 c;
 
-    e = GetEnemyBaseStats(d->id);
+    e = GetEnemyBaseStats(kind->id);
 
     if (e != NULL) {
-        v = d->id;
+        v = kind->id;
 
         switch (v) {
         case EMY_ID_45:
@@ -1504,98 +1504,98 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
         case EMY_ID_53:
             switch (gBtlWork->battleId) {
             case 161:
-                p->maxHp = 1120;
-                p->attack = 5;
-                p->exp = 2775;
+                obj->maxHp = 1120;
+                obj->attack = 5;
+                obj->exp = 2775;
                 break;
             case 168:
-                p->maxHp = 1120;
-                p->attack = 5;
-                p->exp = 3225;
+                obj->maxHp = 1120;
+                obj->attack = 5;
+                obj->exp = 3225;
                 break;
             case 169:
-                p->maxHp = 1120;
-                p->attack = 8;
-                p->exp = 5700;
+                obj->maxHp = 1120;
+                obj->attack = 8;
+                obj->exp = 5700;
                 break;
             case 170:
-                p->maxHp = 1680;
-                p->attack = 10;
-                p->exp = 6825;
+                obj->maxHp = 1680;
+                obj->attack = 10;
+                obj->exp = 6825;
                 break;
             case 171:
-                p->maxHp = 1120;
-                p->attack = 5;
-                p->exp = 1875;
+                obj->maxHp = 1120;
+                obj->attack = 5;
+                obj->exp = 1875;
                 break;
             case 172:
-                p->maxHp = 1680;
-                p->attack = 10;
-                p->exp = 5700;
+                obj->maxHp = 1680;
+                obj->attack = 10;
+                obj->exp = 5700;
                 break;
             case 162:
-                p->maxHp = 320;
-                p->attack = 2;
-                p->exp = 75;
+                obj->maxHp = 320;
+                obj->attack = 2;
+                obj->exp = 75;
                 break;
             case 173:
-                p->maxHp = 1680;
-                p->attack = 15;
-                p->exp = 6825;
+                obj->maxHp = 1680;
+                obj->attack = 15;
+                obj->exp = 6825;
                 break;
             case 163:
-                p->maxHp = 1120;
-                p->attack = 5;
-                p->exp = 2325;
+                obj->maxHp = 1120;
+                obj->attack = 5;
+                obj->exp = 2325;
                 break;
             case 174:
-                p->maxHp = 1680;
-                p->attack = 15;
-                p->exp = 6263;
+                obj->maxHp = 1680;
+                obj->attack = 15;
+                obj->exp = 6263;
                 break;
             case 164:
-                p->maxHp = 1120;
-                p->attack = 15;
-                p->exp = 4125;
+                obj->maxHp = 1120;
+                obj->attack = 15;
+                obj->exp = 4125;
                 break;
             case 175:
-                p->maxHp = 1120;
-                p->attack = 20;
-                p->exp = 5700;
+                obj->maxHp = 1120;
+                obj->attack = 20;
+                obj->exp = 5700;
                 break;
             case 176:
-                p->maxHp = 1120;
-                p->attack = 3;
-                p->exp = 975;
+                obj->maxHp = 1120;
+                obj->attack = 3;
+                obj->exp = 975;
                 break;
             case 166:
-                p->maxHp = 400;
-                p->attack = 3;
-                p->exp = 133;
+                obj->maxHp = 400;
+                obj->attack = 3;
+                obj->exp = 133;
                 break;
             case 177:
-                p->maxHp = 2240;
-                p->attack = 25;
-                p->exp = 0;
+                obj->maxHp = 2240;
+                obj->attack = 25;
+                obj->exp = 0;
                 break;
             case 167:
-                p->maxHp = 1680;
-                p->attack = 15;
-                p->exp = 6517;
+                obj->maxHp = 1680;
+                obj->attack = 15;
+                obj->exp = 6517;
                 break;
             default:
-                p->maxHp = 2240;
-                p->attack = 27;
-                p->exp = 13131;
+                obj->maxHp = 2240;
+                obj->attack = 27;
+                obj->exp = 13131;
                 break;
             }
 
             break;
         case EMY_ID_37:
             if (gGameState.flags & GAME_FLAG_RIKU) {
-                p->maxHp = 300;
-                p->attack = 4;
-                p->exp = 150;
+                obj->maxHp = 300;
+                obj->attack = 4;
+                obj->exp = 150;
                 break;
             }
         default:
@@ -1609,51 +1609,51 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
                 c = 640;
             }
 
-            p->maxHp = ((gGameState.floor * a + 256) * e->hp) >> 8;
-            p->attack = ((gGameState.floor * b + 256) * e->attack) >> 8;
-            p->exp = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
+            obj->maxHp = ((gGameState.floor * a + 256) * e->hp) >> 8;
+            obj->attack = ((gGameState.floor * b + 256) * e->attack) >> 8;
+            obj->exp = ((c * gGameState.floor + 256) * (u16)e->exp) >> 8;
             break;
         }
     } else {
-        p->maxHp = d->maxHp;
-        p->attack = 0;
-        p->exp = 1;
-        v = d->id;
+        obj->maxHp = kind->maxHp;
+        obj->attack = 0;
+        obj->exp = 1;
+        v = kind->id;
     }
 
-    p->attackOffset = 80;
-    p->attackRangeX = 32;
-    p->attackRangeY = 32;
-    p->cardInterval = 100;
-    p->hp = p->maxHp;
-    p->self = p;
-    p->x = x;
-    p->y = y;
-    p->z = z;
-    p->groundZ = 0;
-    p->flags = 0;
-    p->kindFlags = d->flags;
-    p->height = d->height;
-    p->centerHeight = d->centerHeight;
-    p->centerOffsetX = 0;
-    p->radiusX = d->radius;
-    p->radiusY = d->radius >> 1;
-    p->kind = v;
-    p->damage = 0;
-    p->floorZ = 0;
-    p->parent = NULL;
-    p->invincibleTimer = 0;
-    p->delayedDamage = 0;
-    p->shadowPriority = 0xFFF1;
-    p->btl = NULL;
-    p->badStatus = BAD_STATUS_NONE;
-    p->badStatusTimer = 0;
-    p->confuseTargetX = gBtlWork->actor->x;
-    p->confuseTargetY = gBtlWork->actor->y;
-    p->confuseTargetZ = gBtlWork->actor->z;
-    p->vx = 0;
-    p->vy = 0;
-    p->popCooldown = 0;
+    obj->attackOffset = 80;
+    obj->attackRangeX = 32;
+    obj->attackRangeY = 32;
+    obj->cardInterval = 100;
+    obj->hp = obj->maxHp;
+    obj->self = obj;
+    obj->x = x;
+    obj->y = y;
+    obj->z = z;
+    obj->groundZ = 0;
+    obj->flags = 0;
+    obj->kindFlags = kind->flags;
+    obj->height = kind->height;
+    obj->centerHeight = kind->centerHeight;
+    obj->centerOffsetX = 0;
+    obj->radiusX = kind->radius;
+    obj->radiusY = kind->radius >> 1;
+    obj->kind = v;
+    obj->damage = 0;
+    obj->floorZ = 0;
+    obj->parent = NULL;
+    obj->invincibleTimer = 0;
+    obj->delayedDamage = 0;
+    obj->shadowPriority = 0xFFF1;
+    obj->btl = NULL;
+    obj->badStatus = BAD_STATUS_NONE;
+    obj->badStatusTimer = 0;
+    obj->confuseTargetX = gBtlWork->actor->x;
+    obj->confuseTargetY = gBtlWork->actor->y;
+    obj->confuseTargetZ = gBtlWork->actor->z;
+    obj->vx = 0;
+    obj->vy = 0;
+    obj->popCooldown = 0;
 
     switch (v) {
     case EMY_ID_32:
@@ -1665,31 +1665,31 @@ void InitEnemyBtlObj(BtlObj* p, const EmyKind* d, s32 x, s32 y, s32 z) {
     case EMY_ID_38:
     case EMY_ID_39:
     case EMY_ID_40:
-        if (!(d->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
-            ColliderInit(&p->collider, 8, d->radius, d->height);
+        if (!(kind->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
+            ColliderInit(&obj->collider, 8, kind->radius, kind->height);
         }
 
-        p->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_IMMUNE_BIND);
-        p->flags |= BTLOBJ_FLAG_BOSS;
+        obj->flags |= (BTLOBJ_FLAG_IMMUNE_STOP | BTLOBJ_FLAG_IMMUNE_GRAVITY | BTLOBJ_FLAG_IMMUNE_TERROR | BTLOBJ_FLAG_IMMUNE_WARP | BTLOBJ_FLAG_IMMUNE_CONFUSE | BTLOBJ_FLAG_IMMUNE_BIND);
+        obj->flags |= BTLOBJ_FLAG_BOSS;
         break;
     default:
-        if (!(d->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
-            if (d->flags & EMY_KIND_FLAG_NO_ENEMY_COLLISION) {
-                ColliderInit(&p->collider, 11, d->radius, d->height);
+        if (!(kind->flags & EMY_KIND_FLAG_NO_COLLIDER)) {
+            if (kind->flags & EMY_KIND_FLAG_NO_ENEMY_COLLISION) {
+                ColliderInit(&obj->collider, 11, kind->radius, kind->height);
             } else {
-                ColliderInit(&p->collider, 3, d->radius, d->height);
+                ColliderInit(&obj->collider, 3, kind->radius, kind->height);
             }
         }
     }
 
-    SetEnemyKindFlags(p);
+    SetEnemyKindFlags(obj);
 
-    if (d->flags & EMY_KIND_FLAG_LARGE_BODY) {
-        p->flags |= BTLOBJ_FLAG_LARGE_SHADOW;
+    if (kind->flags & EMY_KIND_FLAG_LARGE_BODY) {
+        obj->flags |= BTLOBJ_FLAG_LARGE_SHADOW;
     }
 
-    ListNodeInit(&p->node, &gBtlWork->pool, p);
-    ListPoolAppend(&p->node, &gBtlWork->pool);
+    ListNodeInit(&obj->node, &gBtlWork->pool, obj);
+    ListPoolAppend(&obj->node, &gBtlWork->pool);
     gBtlWork->enemyCount++;
 }
 
@@ -1707,46 +1707,46 @@ void ReleaseEnemyBtlObj(BtlObj* obj) {
     }
 }
 
-u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* p, u16 b, s16 c, s16* n, s16* cnt) {
+u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* n, s16* cnt) {
     s16 i;
     s16 lim;
 
-    lim = *n / c;
-    p->kind = b;
+    lim = *n / value;
+    src->kind = kind;
 
     for (i = 0; i < lim; i++) {
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, p);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
 
         if (++(*cnt) > 2) {
             return 1;
         }
     }
 
-    *n = *n % c;
+    *n = *n % value;
     return 0;
 }
 
-void CreateBtlPrizeTasks(BtlPrizeSrc* p, u16 b, s16 c, s16* n) {
+void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* n) {
     s16 i;
     s16 lim;
-    lim = *n / c;
-    p->kind = b;
+    lim = *n / value;
+    src->kind = kind;
 
     for (i = 0; i < lim; i++) {
-        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, p);
+        TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPrize, src);
     }
 
-    *n = *n % c;
+    *n = *n % value;
 }
 
-void DropBossPrizes(BtlObj* p) {
+void DropBossPrizes(BtlObj* obj) {
     BtlPrizeSrc a;
     s16 n;
-    a.x = p->x;
-    a.y = p->y;
-    a.z = p->z;
+    a.x = obj->x;
+    a.y = obj->y;
+    a.z = obj->z;
     a.noTimeout = 1;
-    n = p->exp;
+    n = obj->exp;
     CreateBtlPrizeTasks(&a, 0, 0x578, &n);
     CreateBtlPrizeTasks(&a, 8, 199, &n);
     CreateBtlPrizeTasks(&a, 5, 60, &n);
@@ -1756,7 +1756,7 @@ void DropBossPrizes(BtlObj* p) {
     CreateBtlPrizeTasks(&a, 3, 1, &n);
 }
 
-void DropEnemyPrizes(BtlObj* p) {
+void DropEnemyPrizes(BtlObj* obj) {
     BtlPrizeSrc a;
     BtlPrizeSrc b;
     s16 n;
@@ -1770,18 +1770,18 @@ void DropEnemyPrizes(BtlObj* p) {
         return;
     }
 
-    a.x = p->x;
-    a.y = p->y;
-    a.z = p->z;
+    a.x = obj->x;
+    a.y = obj->y;
+    a.z = obj->z;
     a.noTimeout = 0;
-    n = p->exp;
+    n = obj->exp;
     cnt = 0;
 
     if (gBtlWork->enemyCount == 1 && gBtlWork->pendingEnemies <= 0) {
         if (CountRegularMapCards() <= 4) {
             flag = 0;
         } else {
-            switch (p->kind) {
+            switch (obj->kind) {
             case 10:
             case 15:
             case 25:
@@ -1851,11 +1851,11 @@ void DropEnemyPrizes(BtlObj* p) {
 
         if (gBtlWork->battleId != 120 && gBtlWork->battleId != 124) {
             if (flag) {
-                CreateHeartlessCardTask(&gBtlWork->taskPools[0], p->x >> 8, p->y >> 8, p->z >> 8, p->kind);
+                CreateHeartlessCardTask(&gBtlWork->taskPools[0], obj->x >> 8, obj->y >> 8, obj->z >> 8, obj->kind);
             } else {
-                b.x = p->x;
-                b.y = p->y;
-                b.z = p->z;
+                b.x = obj->x;
+                b.y = obj->y;
+                b.z = obj->z;
                 CreatePrizeCardTask(&gBtlWork->taskPools[0], &b);
             }
         }
@@ -1888,7 +1888,7 @@ void DropEnemyPrizes(BtlObj* p) {
     CreateBtlPrizeTasksCapped(&a, 3, 1, &n, &cnt);
 }
 
-void TryDropPremireCard(BtlObj* p) {
+void TryDropPremireCard(BtlObj* obj) {
     BtlPrizeSrc a;
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -1916,34 +1916,34 @@ void TryDropPremireCard(BtlObj* p) {
     }
 
     gBtlWork->flags |= BTL_FLAG_PREMIRE_DROPPED;
-    a.x = p->x;
-    a.y = p->y;
-    a.z = p->z;
+    a.x = obj->x;
+    a.y = obj->y;
+    a.z = obj->z;
     a.noTimeout = 0;
     TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPremire, &a);
 }
 
-u8 IsPlayerOnPlatform(Collider* a) {
-    if (a == gBtlWork->platform) {
+u8 IsPlayerOnPlatform(Collider* platform) {
+    if (platform == gBtlWork->platform) {
         return 1;
     } else {
         return 0;
     }
 }
 
-void SetBattleActorPosition(s32 a, s32 b, s32 c) {
-    gBtlWork->actor->x = a;
-    gBtlWork->actor->y = b;
-    gBtlWork->actor->z = c;
+void SetBattleActorPosition(s32 x, s32 y, s32 z) {
+    gBtlWork->actor->x = x;
+    gBtlWork->actor->y = y;
+    gBtlWork->actor->z = z;
 }
 
-void RequestEnemyCardUse(BtlObj* p) {
-    if (!(p->flags & BTLOBJ_FLAGS_NO_CARD_USE)) {
-        gBtlWork->actor4 = p;
+void RequestEnemyCardUse(BtlObj* obj) {
+    if (!(obj->flags & BTLOBJ_FLAGS_NO_CARD_USE)) {
+        gBtlWork->actor4 = obj;
     }
 }
 
-void TryEnemyCardUse(BtlObj* p) {
+void TryEnemyCardUse(BtlObj* obj) {
     s32 x;
     s32 y;
     s32 cx;
@@ -1952,35 +1952,35 @@ void TryEnemyCardUse(BtlObj* p) {
     s32 y0;
     s32 y1;
 
-    if (p->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
+    if (obj->flags & BTLOBJ_FLAGS_NO_CARD_USE) {
         return;
     }
 
-    if (GetRandom() % (p->cardInterval * gBtlWork->enemyCount) != 0) {
+    if (GetRandom() % (obj->cardInterval * gBtlWork->enemyCount) != 0) {
         return;
     }
 
-    GetEnemyTargetPosition(p, &x, &y, NULL);
+    GetEnemyTargetPosition(obj, &x, &y, NULL);
 
-    if (p->attackRangeX == 0) {
-        gBtlWork->actor4 = p;
+    if (obj->attackRangeX == 0) {
+        gBtlWork->actor4 = obj;
         return;
     }
 
-    if (p->flags & BTLOBJ_FLAG_FACING_LEFT) {
-        cx = p->x - ((s16)(x1 = p->attackOffset) * 256);
-        x1 = p->attackRangeX;
+    if (obj->flags & BTLOBJ_FLAG_FACING_LEFT) {
+        cx = obj->x - ((s16)(x1 = obj->attackOffset) * 256);
+        x1 = obj->attackRangeX;
     } else {
-        x1 = p->attackOffset;
-        cx = p->x + (s16)x1 * 256;
-        x1 = p->attackRangeX;
+        x1 = obj->attackOffset;
+        cx = obj->x + (s16)x1 * 256;
+        x1 = obj->attackRangeX;
     }
 
     x1 -= 4;
     x0 = cx - (x1 *= 256);
-    y0 = p->y - (p->attackRangeY * 256);
-    x1 = x0 + ((p->attackRangeX + 4) * 512);
-    y1 = y0 + ((p->attackRangeY + 4) * 512);
+    y0 = obj->y - (obj->attackRangeY * 256);
+    x1 = x0 + ((obj->attackRangeX + 4) * 512);
+    y1 = y0 + ((obj->attackRangeY + 4) * 512);
 
     if (x0 > x) {
         return;
@@ -1998,11 +1998,11 @@ void TryEnemyCardUse(BtlObj* p) {
         return;
     }
 
-    gBtlWork->actor4 = p;
+    gBtlWork->actor4 = obj;
 }
 
-void SetBtlObjParent(BtlObj* p, BtlObj* v) {
-    p->parent = v;
+void SetBtlObjParent(BtlObj* obj, BtlObj* v) {
+    obj->parent = v;
 }
 
 u8 SpawnEnemy(s32 id, s32 x, s32 y, s32 z) {
@@ -2181,20 +2181,20 @@ void ReleaseBattleTiles() {
     }
 }
 
-void SetGimmickFlag(u8 a) {
-    if (a <= 4) {
-        gBtlWork->gimmickFlags |= 1 << a;
+void SetGimmickFlag(u8 index) {
+    if (index <= 4) {
+        gBtlWork->gimmickFlags |= 1 << index;
     }
 }
 
-u8 ConsumeGimmickFlag(u8 a) {
+u8 ConsumeGimmickFlag(u8 index) {
     u8 m;
 
-    if (a > 4) {
+    if (index > 4) {
         return 0;
     }
 
-    m = 1 << a;
+    m = 1 << index;
 
     if (gBtlWork->gimmickFlags & m) {
         gBtlWork->gimmickFlags &= ~m;
@@ -2204,10 +2204,10 @@ u8 ConsumeGimmickFlag(u8 a) {
     return 0;
 }
 
-void DropGimmickCard(u8 a, s32 x, s32 y, s32 z) {
+void DropGimmickCard(u8 index, s32 x, s32 y, s32 z) {
     u16 id;
 
-    switch (a) {
+    switch (index) {
     case 0:
         id = 0x28F;
         break;
@@ -2230,27 +2230,27 @@ void DropGimmickCard(u8 a, s32 x, s32 y, s32 z) {
     CreateGimmickCardTask(&gBtlWork->taskPools[0], x >> 8, y >> 8, z >> 8, id);
 }
 
-void SetGimmickTarget(s32 a, s32 b, s32 c) {
-    gBtlWork->gimmickX = a;
-    gBtlWork->gimmickY = b;
-    gBtlWork->gimmickZ = c;
+void SetGimmickTarget(s32 x, s32 y, s32 z) {
+    gBtlWork->gimmickX = x;
+    gBtlWork->gimmickY = y;
+    gBtlWork->gimmickZ = z;
 }
 
-void SetBtlPaletteFadeExcluded(u8 a, u8 b) {
-    if (a <= 0x1F) {
-        if (b) {
-            gBtlWork->fadeExcludedPalettes |= 1 << a;
+void SetBtlPaletteFadeExcluded(u8 index, u8 on) {
+    if (index <= 0x1F) {
+        if (on) {
+            gBtlWork->fadeExcludedPalettes |= 1 << index;
         } else {
-            gBtlWork->fadeExcludedPalettes &= ~(1 << a);
+            gBtlWork->fadeExcludedPalettes &= ~(1 << index);
         }
     }
 }
 
-void SetBtlObjUnhittable(BtlObj* p, u8 f) {
-    if (f) {
-        p->flags |= BTLOBJ_FLAG_UNHITTABLE;
+void SetBtlObjUnhittable(BtlObj* obj, u8 on) {
+    if (on) {
+        obj->flags |= BTLOBJ_FLAG_UNHITTABLE;
     } else {
-        p->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
+        obj->flags &= ~BTLOBJ_FLAG_UNHITTABLE;
     }
 }
 
@@ -2453,77 +2453,77 @@ void ExitBattle() {
     }
 }
 
-u8 ApplyBattleBounds(s32* a, s32* b, s32* c, s32* d) {
+u8 ApplyBattleBounds(s32* x, s32* y, s32* z, s32* floor) {
     if (gBtlWork->boundsCallback != NULL) {
-        return gBtlWork->boundsCallback(a, b, c, d);
+        return gBtlWork->boundsCallback(x, y, z, floor);
     }
 
     return 0;
 }
 
-void GetEnemyTargetPosition(BtlObj* a, s32* b, s32* c, s32* d) {
+void GetEnemyTargetPosition(BtlObj* obj, s32* x, s32* y, s32* z) {
     u16 n;
 
-    if (a->badStatus == BAD_STATUS_CONFUSE) {
-        if (b != NULL) {
-            *b = a->confuseTargetX;
+    if (obj->badStatus == BAD_STATUS_CONFUSE) {
+        if (x != NULL) {
+            *x = obj->confuseTargetX;
         }
 
-        if (c != NULL) {
-            *c = a->confuseTargetY;
+        if (y != NULL) {
+            *y = obj->confuseTargetY;
         }
 
-        if (d != NULL) {
-            *d = a->confuseTargetZ;
+        if (z != NULL) {
+            *z = obj->confuseTargetZ;
         }
 
         n = GetRandom() % 6;
 
         if (n == 0) {
-            if (b != NULL) {
-                *b = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
+            if (x != NULL) {
+                *x = (gBtlWork->xMin + GetRandom() % (gBtlWork->xMax - gBtlWork->xMin + 1)) << 8;
             }
 
-            if (c != NULL) {
-                *c = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
+            if (y != NULL) {
+                *y = (gBtlWork->yMin + GetRandom() % (gBtlWork->yMax - gBtlWork->yMin + 1)) << 8;
             }
 
-            if (d != NULL) {
-                *d = n;
+            if (z != NULL) {
+                *z = n;
             }
         }
     } else {
-        if (b != NULL) {
-            *b = gBtlWork->targetX;
+        if (x != NULL) {
+            *x = gBtlWork->targetX;
         }
 
-        if (c != NULL) {
-            *c = gBtlWork->targetY;
+        if (y != NULL) {
+            *y = gBtlWork->targetY;
         }
 
-        if (d != NULL) {
-            *d = gBtlWork->targetZ;
+        if (z != NULL) {
+            *z = gBtlWork->targetZ;
         }
     }
 }
 
-void SetEnemyHpFromStats(BtlObj* a, s32 id, s32 c) {
+void SetEnemyHpFromStats(BtlObj* obj, s32 id, s32 hpScale) {
     u16 b = id;
     const EnemyBaseStats* e = GetEnemyBaseStats(b);
 
     if (e != NULL) {
-        a->maxHp = (e->hp * c) >> 8;
+        obj->maxHp = (e->hp * hpScale) >> 8;
 
-        if (a->maxHp <= 0) {
-            a->maxHp = 1;
+        if (obj->maxHp <= 0) {
+            obj->maxHp = 1;
         }
 
-        a->hp = a->maxHp;
+        obj->hp = obj->maxHp;
     }
 }
 
-void SetEnemyJiminyFlag(BtlObj* p) {
-    switch (p->kind) {
+void SetEnemyJiminyFlag(BtlObj* obj) {
+    switch (obj->kind) {
     case 0:
         SetJiminyFlag(84);
         break;
@@ -2632,41 +2632,41 @@ void SetEnemyJiminyFlag(BtlObj* p) {
     }
 }
 
-u8 StepHitFlash(BtlObj* p) {
+u8 StepHitFlash(BtlObj* obj) {
     if (gBtlWork->paused == 1) {
         return 0;
     }
 
-    if (!(p->flags & BTLOBJ_FLAG_HURT)) {
+    if (!(obj->flags & BTLOBJ_FLAG_HURT)) {
         return 0;
     }
 
-    if (p->hitFlashFrames > 0x17) {
+    if (obj->hitFlashFrames > 0x17) {
         return 0;
     }
 
-    p->hitFlashFrames++;
+    obj->hitFlashFrames++;
 
-    if (p->hitFlashFrames & 1) {
+    if (obj->hitFlashFrames & 1) {
         return 1;
     }
 
     return 0;
 }
 
-u8 StepHitFlashSolid(BtlObj* p) {
+u8 StepHitFlashSolid(BtlObj* obj) {
     if (gBtlWork->paused == 1) {
         return 0;
     }
 
-    if (!(p->flags & BTLOBJ_FLAG_HURT)) {
+    if (!(obj->flags & BTLOBJ_FLAG_HURT)) {
         return 0;
     }
 
-    if (p->hitFlashFrames > 0x17) {
+    if (obj->hitFlashFrames > 0x17) {
         return 0;
     }
 
-    p->hitFlashFrames++;
+    obj->hitFlashFrames++;
     return 1;
 }

@@ -95,7 +95,7 @@ extern s32 gUnk_02039DC0;
 void* ColliderGetPool(u32 type);
 void HandleSoraCardInput();
 void HandleTutorialCardInput();
-void SetEnemyKindFlags(BtlObj* p);
+void SetEnemyKindFlags(BtlObj* obj);
 void CreateHeartlessCardTask(void* p, s16 x, s16 y, s16 z, u16 n);
 void BgFxReset();
 void BgFxUpdateBase();
@@ -137,7 +137,7 @@ void RequestBossCardOpen();
 void RequestBossCardClose();
 extern Mode gModeChkbtl;
 
-u8 TryStartCardAction(BtlObj* p);
+u8 TryStartCardAction(BtlObj* obj);
 void VsBtlWorkInit();
 void VsEndCardPlay();
 void VsBattleUpdate();
@@ -177,8 +177,8 @@ void BgFxStartRikuHit(s32 x, s32 y, s32 z);
 void BgFxStartSoraHit(s32 x, s32 y, s32 z);
 void BgFxUpdateFullscreen();
 void BgFxUpdateVixenIceFall();
-u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* p, u16 b, s16 c, s16* n, s16* cnt);
-void CreateBtlPrizeTasks(BtlPrizeSrc* p, u16 b, s16 c, s16* n);
+u8 CreateBtlPrizeTasksCapped(BtlPrizeSrc* src, u16 kind, s16 value, s16* n, s16* cnt);
+void CreateBtlPrizeTasks(BtlPrizeSrc* src, u16 kind, s16 value, s16* n);
 
 s32 LevelUpMaxHp();
 s32 LevelUpCp();
@@ -191,7 +191,7 @@ void RequestSwitchRikuCardList();
 u8 GetRikuStockCount();
 u8 IsRikuSelectionEmpty();
 u8 GetRikuCardListIndex();
-u8 StepHitFlashSolid(BtlObj* p);
+u8 StepHitFlashSolid(BtlObj* obj);
 
 void BgFxReleaseEarly(s16 a);
 void BgFxStartGuard(s32 x, s32 y, s32 z);
@@ -204,7 +204,7 @@ void ColliderClearPoolContacts(ListPool* pool);
 u8 BgFxIsBlocked(u8 a);
 
 u8 ColliderIsColliding(Collider* p);
-s32 ApplyBtlObjHit(BtlObj* p);
+s32 ApplyBtlObjHit(BtlObj* obj);
 void CreateGimmickCardTask(void* pool, s16 a, s16 b, s16 c, u16 d);
 
 typedef struct BtlPrizeArgs {

@@ -16,6 +16,7 @@
 #include "map_rooms.h"
 #include "types.h"
 #include "default_bg_map.h"
+#include "card_message_data.h"
 
 const MapRoomDef* gMapRoomDefs[14] = {
     &gMapRoom00Def,
@@ -781,25 +782,25 @@ const PrizeEntry gPrzCardKinds[40] = {
 };
 
 const PrizeEntry gPrzStocks[19] = {
-    { { 25, 0 }, 140 },
-    { { 44, 0 }, 141 },
-    { { 26, 0 }, 142 },
-    { { 23, 0 }, 143 },
-    { { 34, 0 }, 144 },
-    { { 24, 0 }, 145 },
-    { { 27, 0 }, 146 },
-    { { 35, 0 }, 147 },
-    { { 33, 0 }, 148 },
-    { { 37, 0 }, 149 },
-    { { 58, 0 }, 150 },
-    { { 30, 0 }, 151 },
-    { { 45, 0 }, 152 },
-    { { 36, 0 }, 153 },
-    { { 56, 0 }, 154 },
-    { { 29, 0 }, 155 },
-    { { 31, 0 }, 156 },
-    { { 39, 0 }, 157 },
-    { { 28, 0 }, 158 },
+    { { 25, 0 }, CARD_MSG_LEARNED_THUNDER_RAID },
+    { { 44, 0 }, CARD_MSG_LEARNED_GIFTED_MIRACLE },
+    { { 26, 0 }, CARD_MSG_LEARNED_GRAVITY_RAID },
+    { { 23, 0 }, CARD_MSG_LEARNED_FIRE_RAID },
+    { { 34, 0 }, CARD_MSG_LEARNED_AQUA_SPLASH },
+    { { 24, 0 }, CARD_MSG_LEARNED_BLIZZARD_RAID },
+    { { 27, 0 }, CARD_MSG_LEARNED_STOP_RAID },
+    { { 35, 0 }, CARD_MSG_LEARNED_SHOCK_IMPACT },
+    { { 33, 0 }, CARD_MSG_LEARNED_HOMING_BLIZZARA },
+    { { 37, 0 }, CARD_MSG_LEARNED_QUAKE },
+    { { 58, 0 }, CARD_MSG_LEARNED_BLAZING_DONALD },
+    { { 30, 0 }, CARD_MSG_LEARNED_HOMING_FIRA },
+    { { 45, 0 }, CARD_MSG_LEARNED_TELEPORT },
+    { { 36, 0 }, CARD_MSG_LEARNED_TORNADO },
+    { { 56, 0 }, CARD_MSG_LEARNED_CROSS_SLASH_PLUS },
+    { { 29, 0 }, CARD_MSG_LEARNED_REFLECT_RAID },
+    { { 31, 0 }, CARD_MSG_LEARNED_FIRAGA_BREAK },
+    { { 39, 0 }, CARD_MSG_LEARNED_WARP },
+    { { 28, 0 }, CARD_MSG_LEARNED_JUDGMENT },
 };
 
 const u16 gCardValueWeights[10] = { 500, 1500, 1500, 1600, 1400, 1000, 1000, 600, 500, 400 };

@@ -70,9 +70,9 @@ s32 task_sroll_b_char_1(SrollBCharWork* work) {
     }
 
     if ((work->obj->drawFlags & SPRITE_FLAG_BLEND) == 0) {
-        FadeSetPaletteExcluded((work->palette->index & 15) + 16, 0);
+        FadeSetPaletteExcluded((work->palette->index & 15) + 16, FALSE);
     } else {
-        FadeSetPaletteExcluded((work->palette->index & 15) + 16, 1);
+        FadeSetPaletteExcluded((work->palette->index & 15) + 16, TRUE);
     }
 
     AnimUpdate(&work->anim);

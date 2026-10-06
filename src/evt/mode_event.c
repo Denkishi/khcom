@@ -103,9 +103,9 @@ void Event_0(s32 arg) {
     gEventState->eventId = arg & 0x7FFF;
 
     if (arg & 0x8000) {
-        cfg.fromGame = 0;
+        cfg.fromGame = FALSE;
     } else {
-        cfg.fromGame = 1;
+        cfg.fromGame = TRUE;
     }
 
     // @bug? Should mask with 0x7FFF.
@@ -175,7 +175,7 @@ void EventUpdate() {
 
     SetJiminyFlagsAfterEvent();
 
-    if (IsMessageWindowAnswerYes() == 1) {
+    if (IsMessageWindowAnswerYes() == TRUE) {
         GrantRewardsAfterEvent();
         SaveAfterEvent();
         return;
@@ -266,13 +266,13 @@ void EventUpdate() {
         return;
     }
 
-    if (seqDef->toTitle != 0) {
+    if (seqDef->toTitle != FALSE) {
         FadeStartOut(FADE_MODE_BLACK, 16);
         ModeRequest(&gModeTitle, 0);
         return;
     }
 
-    if (seqDef->toCopyright != 0) {
+    if (seqDef->toCopyright != FALSE) {
         ModeRequest(&gModeCopyright1, 0);
         return;
     }
@@ -862,10 +862,10 @@ u8 HandleNoAnswerAfterEvent() {
     case EVENT_083_MONSTORO_E3_FAILURE_1:
     case EVENT_084_MONSTORO_E3_FAILURE_2:
         RequestMapMode();
-        return 1;
+        return TRUE;
     }
 
-    return 0;
+    return FALSE;
 }
 
 void UnlockCardKindsAfterEvent() {

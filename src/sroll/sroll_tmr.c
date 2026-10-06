@@ -58,7 +58,7 @@ u8 task_sroll_tmr_1(SrollTmrWork* work) {
         }
     }
 
-    FadeSetPaletteExcluded((work->palette->index & 15) + 16, 1);
+    FadeSetPaletteExcluded((work->palette->index & 15) + 16, TRUE);
     work->frameCount++;
     return alive;
 }
@@ -689,11 +689,11 @@ void SrollTextInit(SrollWork* work, const SrollInit* init) {
     work->tileData = init->tileData;
     work->tilemap = init->tilemap;
     SrollTextClearQueue(work);
-    SrollTextResetWindow(work, 1);
+    SrollTextResetWindow(work, TRUE);
 }
 
 void SrollTextClearWindowImmediate(SrollWork* work) {
-    SrollTextClearWindow(work, 1);
+    SrollTextClearWindow(work, TRUE);
 }
 
 void SrollTextClearQueue(SrollWork* work) {
@@ -704,10 +704,10 @@ void SrollTextClearQueue(SrollWork* work) {
 u8 SrollTextQueueIsEmpty(SrollWork* work) {
     u8 empty;
 
-    empty = 0;
+    empty = FALSE;
 
     if (work->writeIdx == work->readIdx) {
-        empty = 1;
+        empty = TRUE;
     }
 
     return empty;
@@ -769,7 +769,7 @@ void SrollTextClearWindow(SrollWork* work, u8 flush) {
         row += work->mapWidth;
     }
 
-    if (flush == 1) {
+    if (flush == TRUE) {
         SrollTextFlushTilemap(work);
     }
 }
@@ -892,7 +892,7 @@ void SrollTextResetWindow(SrollWork* work, u8 flush) {
 
     SrollTextSetCursorTile(work, 0, 0);
 
-    if (flush == 1) {
+    if (flush == TRUE) {
         SrollTextFlushTilemap(work);
     } else {
         flags = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
@@ -932,7 +932,7 @@ void SrollTextClearRect(SrollWork* work, u16 x, u16 y, u16 width, u16 height, u8
         i++;
     }
 
-    if (flush == 1) {
+    if (flush == TRUE) {
         SrollTextFlushTilemap(work);
     } else {
         flags = work->flags | SROLL_FLAG_TILEMAP_DIRTY;
@@ -987,7 +987,7 @@ u8 SrollTextProcessNextChar(SrollWork* work) {
     u8 drawn;
     u8 width;
 
-    drawn = 0;
+    drawn = FALSE;
 
     if (work->x >= work->textWidth * 8) {
         work->x = 0;
@@ -1018,7 +1018,7 @@ u8 SrollTextProcessNextChar(SrollWork* work) {
 
         work->x += width;
         work->flags |= SROLL_FLAG_TILEMAP_DIRTY;
-        drawn = 1;
+        drawn = TRUE;
     } else {
         switch (ch) {
         case '@':
@@ -1064,7 +1064,7 @@ u8 SrollTextProcessNextChar(SrollWork* work) {
 void SrollTextDrawNextGlyph(SrollWork* work, u8 flush) {
     u8 drawn;
 
-    drawn = 0;
+    drawn = FALSE;
 
     while (!SrollTextQueueIsEmpty(work) && !drawn) {
         drawn = SrollTextProcessNextChar(work);
@@ -1154,7 +1154,7 @@ void SrollTextDrawStringAtPixelX(SrollWork* work, u16 x, u16 y, u8* str, u8 flus
         SrollTextBlitGlyph(work, (u32*)(work->tileData + off), glyph, 8 - (work->x & 7));
     }
 
-    if (flush == 1 && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
+    if (flush == TRUE && (work->flags & SROLL_FLAG_TILEMAP_DIRTY)) {
         SrollTextFlushTilemap(work);
     }
 }
@@ -1166,8 +1166,8 @@ u16 SrollTextMapSingleByteChar(u8 ch) {
 void ScanlineDmaReset() {
 
     DmaStop(0);
-    sDmaStream.enabled = 0;
-    sDmaStream.swapPending = 0;
+    sDmaStream.enabled = FALSE;
+    sDmaStream.swapPending = FALSE;
     sDmaStream.update = NULL;
     sDmaStream.dst = NULL;
     sDmaStream.srcIdx = 0;
@@ -1195,7 +1195,7 @@ void ScanlineDmaUpdate() {
                 }
             }
 
-            sDmaStream.swapPending = 0;
+            sDmaStream.swapPending = FALSE;
         }
 
         if (sDmaStream.src[sDmaStream.srcIdx] != NULL && sDmaStream.dst != NULL &&
@@ -1243,19 +1243,19 @@ void ScanlineDmaInit(vu16* dst, void* src, u32 cnt) {
 
 void ScanlineDmaQueueBuffer(void* src) {
     sDmaStream.src[sDmaStream.srcIdx ^ 1] = src;
-    sDmaStream.swapPending = 1;
+    sDmaStream.swapPending = TRUE;
 }
 
 void ScanlineDmaEnable() {
-    sDmaStream.enabled = 1;
+    sDmaStream.enabled = TRUE;
 }
 
 void ScanlineDmaDisable() {
-    sDmaStream.enabled = 0;
+    sDmaStream.enabled = FALSE;
 }
 
 void BlockAudioStart() {
-    sBlockAudioPlaying = 1;
+    sBlockAudioPlaying = TRUE;
     AudioBlockStreamInit(GetBlockAudioData());
     PcmPlaybackInit(GetBlockAudioSampleRate());
     SetVBlankCallback(VBlankIntrBlockAudio);
@@ -1263,7 +1263,7 @@ void BlockAudioStart() {
 }
 
 void BlockAudioUpdate() {
-    if (sBlockAudioPlaying == 1) {
+    if (sBlockAudioPlaying == TRUE) {
         sBlockAudioPlaying = AudioBlockStreamUpdate();
 
         if (!sBlockAudioPlaying) {
@@ -1273,7 +1273,7 @@ void BlockAudioUpdate() {
 }
 
 void BlockAudioVBlank() {
-    if (sBlockAudioPlaying == 1) {
+    if (sBlockAudioPlaying == TRUE) {
         PcmPlaybackUpdate();
     }
 }

@@ -139,7 +139,7 @@ void LoadEventBgEffect(EventBgEffectWork* work) {
     }
 
     SetBgBlend(0, 16, 16);
-    gEventState->bgEffectActive = 1;
+    gEventState->bgEffectActive = TRUE;
     work->frame = work->frameTimer = work->fadingIn = 0;
 }
 
@@ -158,10 +158,10 @@ void StartEventBgEffectFadeOut(EventBgEffectWork* work) {
     entry = &work->entries[work->entry];
 
     for (i = 16; i <= 31; i++) {
-        FadeSetPaletteExcluded(i, 1);
+        FadeSetPaletteExcluded(i, TRUE);
     }
 
-    FadeSetPaletteExcluded(14, 1);
+    FadeSetPaletteExcluded(14, TRUE);
 
     if (entry->x > 0) {
         frames = entry->x;
@@ -180,7 +180,7 @@ void StartEventBgEffectFadeIn(EventBgEffectWork* work) {
 
     frames = 16;
     entry = &work->entries[work->entry];
-    FadeSetPaletteExcluded(14, 1);
+    FadeSetPaletteExcluded(14, TRUE);
 
     if (entry->x > 0) {
         frames = entry->x;
@@ -234,23 +234,23 @@ u8 EV_BG_EFFECT_1(EventBgEffectWork* work, void* task) {
 
         if (entry->flags & 8) {
             StartEventBgEffectFadeIn(work);
-            work->fadingIn = 1;
+            work->fadingIn = TRUE;
         }
 
         if (entry->flags & 2) {
             ClearEventBgEffect(work);
-            gEventState->bgEffectActive = 0;
+            gEventState->bgEffectActive = FALSE;
             gBldCnt = gEventState->bldCnt;
             gBldAlpha = gEventState->bldAlpha;
         }
     }
 
-    if (work->fadingIn == 1) {
+    if (work->fadingIn == TRUE) {
         if (!FadeIsActive()) {
-            work->fadingIn = 0;
+            work->fadingIn = FALSE;
 
             for (i = 16; i < 32; i++) {
-                FadeSetPaletteExcluded(i, 0);
+                FadeSetPaletteExcluded(i, FALSE);
             }
         }
     }
@@ -277,7 +277,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
     const EventBgEffectFrame* frames;
 
     if (work->animating == 0) {
-        return 0;
+        return FALSE;
     }
 
     def = gEventBgEffectDefs[work->effect];
@@ -294,7 +294,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
         } else {
             if (def->loopFrame == EVENT_BG_EFFECT_LOOP_NONE) {
                 work->animating = 0;
-                return 0;
+                return FALSE;
             }
 
             work->frame = def->loopFrame;
@@ -302,7 +302,7 @@ u8 StepEventBgEffectAnim(EventBgEffectWork* work) {
         }
     }
 
-    return 1;
+    return TRUE;
 }
 
 void EV_BG_EFFECT_2() {

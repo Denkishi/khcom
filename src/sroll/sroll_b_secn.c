@@ -50,7 +50,7 @@ void task_sroll_b_secn_0(SrollBSecnWork* work, SrollBSecnArg* arg) {
     }
 
     for (i = 0; i < 8; i++) {
-        FadeSetPaletteExcluded((work->palette->index + i) % 16 + 16, 1);
+        FadeSetPaletteExcluded((work->palette->index + i) % 16 + 16, TRUE);
     }
 }
 

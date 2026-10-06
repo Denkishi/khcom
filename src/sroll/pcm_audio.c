@@ -38,13 +38,13 @@ u8 LookupPcmPlaybackConfig(u32 sampleRate, u16* timerReload, u32* samplesPerBuff
         if (sPcmPlaybackConfigs[i].sampleRate == sampleRate) {
             *timerReload = sPcmPlaybackConfigs[i].timerReload;
             *samplesPerBuffer = sPcmPlaybackConfigs[i].samplesPerBuffer;
-            return 1;
+            return TRUE;
         }
 
         i++;
     } while (sPcmPlaybackConfigs[i].sampleRate != 0);
 
-    return 0;
+    return FALSE;
 }
 
 u8 PcmPlaybackInit(u32 sampleRate) {
@@ -52,7 +52,7 @@ u8 PcmPlaybackInit(u32 sampleRate) {
     s32 i;
 
     if (!LookupPcmPlaybackConfig(sampleRate, &timerReload, (u32*)&sPcmSamplesPerBuffer)) {
-        return 0;
+        return FALSE;
     }
 
     REG_SOUNDCNT_H = (SOUND_CGB_MIX_FULL | SOUND_A_MIX_FULL | SOUND_A_RIGHT_OUTPUT | SOUND_A_LEFT_OUTPUT | SOUND_A_FIFO_RESET);
@@ -67,7 +67,7 @@ u8 PcmPlaybackInit(u32 sampleRate) {
 
     sPcmActiveBufferIndex = 1;
     REG_DMA1SAD = (s32)sPcmOutputBufferA;
-    return 1;
+    return TRUE;
 }
 
 void PcmPlaybackStart() {

@@ -2736,105 +2736,105 @@ static const u8* sStaffRollTildeText = gStaffRollTildeEu;
 #endif
 #ifdef VERSION_JP
 static const StaffRollScene sStaffRollSoraScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 31744, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 31744, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 33792, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 30720, 31744, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 19 },
+    { FALSE, TRUE, TRUE, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 31744, 0, 1 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 2 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 31744, 0, 3 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 4 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 9216, 0, 5 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 6 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 9216, 0, 7 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 8 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 31744, 0, 9 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 10 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 9216, 0, 11 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 31744, 0, 12 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 13 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 9216, 1, 14 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 33792, 0, 15 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 30720, 31744, 1, 16 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 17 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 18 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 9216, 0, 19 },
 };
 
 static const StaffRollScene sStaffRollRikuScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 31744, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 31744, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 33792, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 30720, 31744, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 19 },
+    { FALSE, TRUE, TRUE, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 31744, 0, 1 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 2 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 31744, 0, 3 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 4 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 9216, 0, 5 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 6 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 9216, 0, 7 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 8 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 31744, 0, 9 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 10 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 9216, 0, 11 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 52224, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 31744, 0, 12 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 13 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 9216, 1, 14 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 33792, 0, 15 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 30720, 31744, 1, 16 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 17 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 18 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 9216, 0, 19 },
 };
 
 #else
 
 static const StaffRollScene sStaffRollSoraScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 32768, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 32768, 0, 12 },
-    { 1, 1, 0, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 13 },
-    { 1, 0, 1, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 14 },
-    { 1, 1, 0, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 32768, 0, 15 },
-    { 1, 0, 1, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 39936, 29696, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 19 },
+    { FALSE, TRUE, TRUE, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, -1024, -1024, gStaffRollSoraScene1Tiles, 11200, gStaffRollSoraScene1Map, 2048, gStaffRollSoraScene1Palette, 512, 30720, 32768, 0, 1 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 2 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollSoraScene2Tiles, 11200, gStaffRollSoraScene2Map, 2048, gStaffRollSoraScene2Palette, 512, 30720, 32768, 0, 3 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 4 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene4Tiles, 11200, gStaffRollSoraScene4Map, 2048, gStaffRollSoraScene4Palette, 512, 30720, 11264, 0, 5 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 6 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene6Tiles, 11200, gStaffRollSoraScene6Map, 2048, gStaffRollSoraScene6Palette, 512, 36864, 10240, 0, 7 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 8 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollSoraScene8Tiles, 11200, gStaffRollSoraScene8Map, 2048, gStaffRollSoraScene8Palette, 512, 26624, 32768, 0, 9 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 10 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollSoraScene10Tiles, 11200, gStaffRollSoraScene10Map, 2048, gStaffRollSoraScene10Palette, 512, 30720, 10240, 0, 11 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, 0, -1024, gStaffRollSoraScene13Tiles, 11200, gStaffRollSoraScene13Map, 2048, gStaffRollSoraScene13Palette, 512, 40960, 32768, 0, 12 },
+    { TRUE, TRUE, FALSE, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 13 },
+    { TRUE, FALSE, TRUE, 180, 0, 2048, gStaffRollSoraScene14Tiles, 11200, gStaffRollSoraScene14Map, 2048, gStaffRollSoraScene14Palette, 512, 30720, 7168, 1, 14 },
+    { TRUE, TRUE, FALSE, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 34816, 32768, 0, 15 },
+    { TRUE, FALSE, TRUE, 180, 0, -2048, gStaffRollSoraScene16Tiles, 11200, gStaffRollSoraScene16Map, 2048, gStaffRollSoraScene16Palette, 512, 39936, 29696, 1, 16 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 17 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 18 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollSoraScene19Tiles, 11200, gStaffRollSoraScene19Map, 2048, gStaffRollSoraScene19Palette, 512, 30720, 10240, 0, 19 },
 };
 
 static const StaffRollScene sStaffRollRikuScenes[22] = {
-    { 0, 1, 1, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 32768, 0, 1 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 2 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 3 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 4 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 5 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 6 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 7 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 8 },
-    { 1, 0, 1, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 9 },
-    { 1, 1, 0, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 10 },
-    { 1, 0, 1, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 11 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 1, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 32768, 0, 12 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 13 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 14 },
-    { 1, 1, 0, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 32768, 0, 15 },
-    { 1, 0, 1, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 39936, 29696, 1, 16 },
-    { 0, 1, 1, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
-    { 1, 1, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 17 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 18 },
-    { 1, 0, 0, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 19 },
+    { FALSE, TRUE, TRUE, 120, 0, -2048, gStaffRollCaptionTiles, 5120, gStaffRollSquareEnixCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, -1024, -1024, gStaffRollRikuScene1Tiles, 11200, gStaffRollRikuScene1Map, 2048, gStaffRollRikuScene1Palette, 512, 30720, 32768, 0, 1 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 2 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollRikuScene2Tiles, 11200, gStaffRollRikuScene2Map, 2048, gStaffRollRikuScene2Palette, 512, 30720, 32768, 0, 3 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 4 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene4Tiles, 11200, gStaffRollRikuScene4Map, 2048, gStaffRollRikuScene4Palette, 512, 30720, 11264, 0, 5 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 6 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene6Tiles, 11200, gStaffRollRikuScene6Map, 2048, gStaffRollRikuScene6Palette, 512, 36864, 10240, 0, 7 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 8 },
+    { TRUE, FALSE, TRUE, 180, -1024, -1024, gStaffRollRikuScene8Tiles, 11200, gStaffRollRikuScene8Map, 2048, gStaffRollRikuScene8Palette, 512, 26624, 32768, 0, 9 },
+    { TRUE, TRUE, FALSE, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 10 },
+    { TRUE, FALSE, TRUE, 180, 0, 1024, gStaffRollRikuScene10Tiles, 11200, gStaffRollRikuScene10Map, 2048, gStaffRollRikuScene10Palette, 512, 30720, 10240, 0, 11 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollJupiterCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, TRUE, 300, 0, -1024, gStaffRollRikuScene13Tiles, 11200, gStaffRollRikuScene13Map, 2048, gStaffRollRikuScene13Palette, 512, 40960, 32768, 0, 12 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 13 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollRikuScene14Tiles, 11200, gStaffRollRikuScene14Map, 2048, gStaffRollRikuScene14Palette, 512, 30720, 7168, 1, 14 },
+    { TRUE, TRUE, FALSE, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 34816, 32768, 0, 15 },
+    { TRUE, FALSE, TRUE, 180, 0, 0, gStaffRollRikuScene16Tiles, 11200, gStaffRollRikuScene16Map, 2048, gStaffRollRikuScene16Palette, 512, 39936, 29696, 1, 16 },
+    { FALSE, TRUE, TRUE, 120, 0, 0, gStaffRollCaptionTiles, 5120, gStaffRollAndCaptionMap, 2048, gStaffRollCaptionPalette, 32, 30720, 51200, 0, 0 },
+    { TRUE, TRUE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 17 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 18 },
+    { TRUE, FALSE, FALSE, 180, -1024, -1024, gStaffRollRikuScene19Tiles, 11200, gStaffRollRikuScene19Map, 2048, gStaffRollRikuScene19Palette, 512, 30720, 10240, 0, 19 },
 };
 #endif
 
@@ -2961,11 +2961,11 @@ void StaffRollBlendReset(StaffRollWork* work) {
 u8 StaffRollBlendIsActive(StaffRollWork* work) {
     u8 result;
 
-    result = 1;
+    result = TRUE;
 
     if (work->blendTimer >= work->blendDuration) {
         gBldCnt &= ~BLDCNT_EFFECT_MASK;
-        result = 0;
+        result = FALSE;
     }
 
     return result;
@@ -3049,7 +3049,7 @@ void StaffRollRunScript(StaffRollWork* work) {
         return;
     }
 
-    run = 1;
+    run = TRUE;
 
     while (run) {
         if (work->scriptFrame != work->script[work->scriptPos + 2]) {
@@ -3088,7 +3088,7 @@ void StaffRollRunScript(StaffRollWork* work) {
 
         switch (work->script[work->scriptPos]) {
         case STAFF_ROLL_SCRIPT_OP_END:
-            run = 0;
+            run = FALSE;
             continue;
         case STAFF_ROLL_SCRIPT_OP_RESTART:
             work->scriptPos = 0;
@@ -3197,7 +3197,7 @@ void mode_StaffRoll_0() {
     work->nextScene = 0;
     work->sceneScroll = 0;
     work->creditsState = STAFF_ROLL_CREDITS_STATE_SETUP;
-    work->creditsEnded = 0;
+    work->creditsEnded = FALSE;
     work->creditsTimer = 0;
     work->unk_0AC = 0;
     work->lastRow = -1;
@@ -3224,10 +3224,10 @@ void mode_StaffRoll_0() {
 u8 StaffRollWaitStart(StaffRollWork* work) {
     u8 result;
 
-    result = 1;
+    result = TRUE;
 
     if (work->phaseTimer > 74) {
-        result = 0;
+        result = FALSE;
     }
 
     work->phaseTimer++;
@@ -3240,7 +3240,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
     u8 result;
     s32 centerX;
 
-    result = 1;
+    result = TRUE;
 
     if ((gGameState.flags & GAME_FLAG_RIKU) != 0) {
         work->scene = sStaffRollRikuScenes;
@@ -3276,7 +3276,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         if (work->sceneIndex != work->nextScene) {
             work->sceneIndex = work->nextScene;
 
-            if (work->scene[work->sceneIndex].color256 == 1) {
+            if (work->scene[work->sceneIndex].color256 == TRUE) {
                 SetBgColorMode(0, BGCNT_256COLOR);
             } else {
                 SetBgColorMode(0, BGCNT_16COLOR);
@@ -3297,7 +3297,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         u8 blendActive;
 
             if (work->sceneStep == 0) {
-                if (work->scene[work->sceneIndex].fadeInBg == 1) {
+                if (work->scene[work->sceneIndex].fadeInBg == TRUE) {
                     StaffRollBlendFadeIn(work, 17, 30);
                 } else {
                     StaffRollBlendFadeIn(work, 16, 30);
@@ -3371,7 +3371,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         u8 blendActive;
 
             if (work->sceneStep == 0) {
-                if (work->scene[work->sceneIndex].fadeOutBg == 1) {
+                if (work->scene[work->sceneIndex].fadeOutBg == TRUE) {
                     StaffRollBlendFadeOut(work, 17, 30);
                 } else {
                     StaffRollBlendFadeOut(work, 16, 30);
@@ -3387,7 +3387,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
                 break;
             }
 
-            if (work->scene[work->sceneIndex].fadeOutBg == 1) {
+            if (work->scene[work->sceneIndex].fadeOutBg == TRUE) {
                 DisableBg(0);
             }
 
@@ -3440,7 +3440,7 @@ u8 StaffRollRunScenes(StaffRollWork* work) {
         StaffRollBlendUpdate(work);
 
         if (!StaffRollBlendIsActive(work)) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -3486,7 +3486,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
     s32 pixelY;
     s32 scriptIndex;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->creditsState) {
     case STAFF_ROLL_CREDITS_STATE_SETUP:
@@ -3514,7 +3514,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         DisableBg(3);
 
         for (i = 0; i < 32; i++) {
-            FadeSetPaletteExcluded(i, 1);
+            FadeSetPaletteExcluded(i, TRUE);
         }
 
         SrollTextInit(&work->text, &sStaffRollTextInit);
@@ -3541,21 +3541,21 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
 
             if (!work->creditsEnded && line == NULL) {
                 work->scrollSpeed = 0;
-                work->creditsEnded = 1;
+                work->creditsEnded = TRUE;
             }
 
             if (*line != '!') {
-                SrollTextClearRect(&work->text, 0, (row + 20) & 31, 30, 2, 1);
+                SrollTextClearRect(&work->text, 0, (row + 20) & 31, 30, 2, TRUE);
             }
 
             if (!work->creditsEnded) {
                 SrollTextSetColors(&work->text, 15, 13, 0, 14);
-                loop = 1;
+                loop = TRUE;
 
                 while (loop) {
                     switch (*line) {
                     case '!':
-                        loop = 0;
+                        loop = FALSE;
                         break;
                     case '*':
                         switch (line[1]) {
@@ -3575,7 +3575,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         logo.scrollY = &work->scrollY;
                         logo.scrollSpeed = &work->scrollSpeed;
                         TaskCreate(&work->tasks2, &gTaskDescSrollBLogo, &logo);
-                        loop = 0;
+                        loop = FALSE;
                         break;
                     case '<':
                         secn.index = work->secnCount;
@@ -3585,7 +3585,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         secn.scrollSpeed = &work->scrollSpeed;
                         TaskCreate(&work->tasks2, &gTaskDescSrollBSecn, &secn);
                         work->secnCount++;
-                        loop = 0;
+                        loop = FALSE;
                         break;
                     case '[':
                         secn.index = -1;
@@ -3594,7 +3594,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         secn.scrollY = &work->scrollY;
                         secn.scrollSpeed = &work->scrollSpeed;
                         TaskCreate(&work->tasks2, &gTaskDescSrollBSecn, &secn);
-                        loop = 0;
+                        loop = FALSE;
                         break;
                     case '#':
                         SrollTextSelectFont(&work->text, line[1] - '0');
@@ -3622,7 +3622,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
                         buf[n + 2] = ' ';
                         buf[n + 3] = 0;
                         width = SrollTextMeasureWidth(&work->text, buf);
-                        SrollTextDrawStringAtPixelX(&work->text, x, (row + 20) & 31, buf, 1);
+                        SrollTextDrawStringAtPixelX(&work->text, x, (row + 20) & 31, buf, TRUE);
                         line += n + 1;
 
                         for (n = 0; line[n] != 0; n++) {
@@ -3631,24 +3631,24 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
 
                         buf[n] = 0;
                         SrollTextSetColors(&work->text, 15, 13, 0, 14);
-                        SrollTextDrawStringAtPixelX(&work->text, x + width, (row + 20) & 31, buf, 1);
-                        loop = 0;
+                        SrollTextDrawStringAtPixelX(&work->text, x + width, (row + 20) & 31, buf, TRUE);
+                        loop = FALSE;
                         break;
                     case '=':
-                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1)) >> 1, (row + 20) & 31, line + 1, 1);
-                        loop = 0;
+                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1)) >> 1, (row + 20) & 31, line + 1, TRUE);
+                        loop = FALSE;
                         break;
                     case '-':
-                        SrollTextDrawStringAtPixelX(&work->text, 0, (row + 20) & 31, line + 1, 1);
-                        loop = 0;
+                        SrollTextDrawStringAtPixelX(&work->text, 0, (row + 20) & 31, line + 1, TRUE);
+                        loop = FALSE;
                         break;
                     case '+':
-                        SrollTextDrawStringAtPixelX(&work->text, DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1), (row + 20) & 31, line + 1, 1);
-                        loop = 0;
+                        SrollTextDrawStringAtPixelX(&work->text, DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line + 1), (row + 20) & 31, line + 1, TRUE);
+                        loop = FALSE;
                         break;
                     default:
-                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line)) >> 1, (row + 20) & 31, line, 1);
-                        loop = 0;
+                        SrollTextDrawStringAtPixelX(&work->text, (DISPLAY_WIDTH - SrollTextMeasureWidth(&work->text, line)) >> 1, (row + 20) & 31, line, TRUE);
+                        loop = FALSE;
                         break;
                     }
                 }
@@ -3696,7 +3696,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         break;
     case STAFF_ROLL_CREDITS_STATE_END:
         for (i = 0; i < 32; i++) {
-            FadeSetPaletteExcluded(i, 0);
+            FadeSetPaletteExcluded(i, FALSE);
         }
 
         gDispCnt &= ~DISPCNT_WIN0_ON;
@@ -3704,7 +3704,7 @@ u8 StaffRollRunCredits(StaffRollWork* work) {
         gWinOut = 0;
         gWin0H = 0;
         gWin0V = 0;
-        result = 0;
+        result = FALSE;
         break;
     }
 
@@ -3720,7 +3720,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->creditsState) {
     case STAFF_ROLL_TITLE_BG_STATE_LOAD:
@@ -3778,7 +3778,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
 
         if (work->creditsTimer > 119) {
             BlockAudioStop();
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -3796,7 +3796,7 @@ u8 StaffRollShowTitleBg(StaffRollWork* work) {
 u8 StaffRollShowCharacter(StaffRollWork* work) {
     u8 result;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
@@ -3848,7 +3848,7 @@ u8 StaffRollShowCharacter(StaffRollWork* work) {
         }
 
         if (!FadeIsActive()) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -3861,7 +3861,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_SORA_IMAGE1_STATE_SETUP:
@@ -3942,7 +3942,7 @@ u8 StaffRollShowSoraImage1(StaffRollWork* work) {
 
         if (!FadeIsActive()) {
             SetBgScroll(0, 0, 0);
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -3955,7 +3955,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
@@ -3995,7 +3995,7 @@ u8 StaffRollShowSoraImage2(StaffRollWork* work) {
         }
 
         if (!FadeIsActive()) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -4008,7 +4008,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
@@ -4074,7 +4074,7 @@ u8 StaffRollShowRikuImage1(StaffRollWork* work) {
         }
 
         if (!FadeIsActive()) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -4087,7 +4087,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
@@ -4126,7 +4126,7 @@ u8 StaffRollShowRikuImage2(StaffRollWork* work) {
         }
 
         if (!FadeIsActive()) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -4139,7 +4139,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->imageState) {
     case STAFF_ROLL_IMAGE_STATE_SETUP:
@@ -4179,7 +4179,7 @@ u8 StaffRollShowRikuImage3(StaffRollWork* work) {
         }
 
         if (!FadeIsActive()) {
-            result = 0;
+            result = FALSE;
         }
 
         break;
@@ -4192,7 +4192,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
     u8 result;
     u8 fading;
 
-    result = 1;
+    result = TRUE;
 
     switch (work->endState) {
     case STAFF_ROLL_END_STATE_LOAD:
@@ -4288,7 +4288,7 @@ u8 StaffRollShowEndScreen(StaffRollWork* work) {
         break;
     default:
         if ((GetKeysPressed() & (A_BUTTON | START_BUTTON)) != 0) {
-            result = 0;
+            result = FALSE;
         }
 
         break;

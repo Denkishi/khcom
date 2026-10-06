@@ -2458,29 +2458,29 @@ void event_seq_0(EventSeqWork* work, u8* arg) {
     work->unk_30 = 0;
     work->unk_31 = 0;
     gEventState->skipHoldTime = 0;
-    work->ending = 0;
-    work->hasBoss = 0;
+    work->ending = FALSE;
+    work->hasBoss = FALSE;
 
 #ifdef VERSION_EU
-    work->hasMapAnim = 0;
-    work->bg3MapUnpacked = 0;
-    work->bg2MapUnpacked = 0;
-    work->bg1MapUnpacked = 0;
+    work->hasMapAnim = FALSE;
+    work->bg3MapUnpacked = FALSE;
+    work->bg2MapUnpacked = FALSE;
+    work->bg1MapUnpacked = FALSE;
 #endif
 
     if (gEventState != NULL) {
-        gEventState->running = 1;
-        gEventState->talking = 0;
-        gEventState->hasBg2Map = 0;
-        gEventState->hasBg1Map = 0;
-        gEventState->fadedOut = 0;
+        gEventState->running = TRUE;
+        gEventState->talking = FALSE;
+        gEventState->hasBg2Map = FALSE;
+        gEventState->hasBg1Map = FALSE;
+        gEventState->fadedOut = FALSE;
         gEventState->shakeX = 0;
         gEventState->shakeY = 0;
-        gEventState->bgEffectActive = 0;
-        gEventState->ending = 0;
-        gEventState->answerYes = 0;
-        gEventState->askedYesNo = 0;
-        gEventState->endRequest = 0;
+        gEventState->bgEffectActive = FALSE;
+        gEventState->ending = FALSE;
+        gEventState->answerYes = FALSE;
+        gEventState->askedYesNo = FALSE;
+        gEventState->endRequest = FALSE;
 
 #ifndef VERSION_EU
         RequestDma3Clear(GetBgCharBase(1), 0x8000);
@@ -2561,10 +2561,10 @@ u8 LoadEventBg3(EventSeqWork* work) {
 
         if (bg->maps != NULL) {
             if (bg->compression[0] == 2 || bg->compression[0] == 3) {
-                work->bg3MapUnpacked = 1;
+                work->bg3MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(3, bg->maps, bg->mapWidth, bg->mapHeight);
             } else {
-                work->bg3MapUnpacked = 0;
+                work->bg3MapUnpacked = FALSE;
                 SetBgMapBlocks(3, bg->maps, bg->mapWidth, bg->mapHeight);
             }
 
@@ -2581,15 +2581,15 @@ u8 LoadEventBg2Map(EventSeqWork* work) {
     if (bg != NULL) {
         if (bg->maps2 != NULL) {
             if (bg->compression[0] == 2 || bg->compression[0] == 3) {
-                work->bg2MapUnpacked = 1;
+                work->bg2MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(2, bg->maps2, bg->mapWidth, bg->mapHeight);
             } else {
-                work->bg2MapUnpacked = 0;
+                work->bg2MapUnpacked = FALSE;
                 SetBgMapBlocks(2, bg->maps2, bg->mapWidth, bg->mapHeight);
             }
 
             RedrawBgMapAt(2, 0, 0);
-            gEventState->hasBg2Map = 1;
+            gEventState->hasBg2Map = TRUE;
         } else {
             DisableBg(2);
         }
@@ -2625,15 +2625,15 @@ u8 LoadEventBg1(EventSeqWork* work) {
             }
 
             if (bg->compression[0] == 2 || bg->compression[0] == 3) {
-                work->bg1MapUnpacked = 1;
+                work->bg1MapUnpacked = TRUE;
                 SetBgMapBlocksLz77(1, bg->maps3, bg->mapWidth, bg->mapHeight);
             } else {
-                work->bg1MapUnpacked = 0;
+                work->bg1MapUnpacked = FALSE;
                 SetBgMapBlocks(1, bg->maps3, bg->mapWidth, bg->mapHeight);
             }
 
             RedrawBgMapAt(1, 0, 0);
-            gEventState->hasBg1Map = 1;
+            gEventState->hasBg1Map = TRUE;
         } else {
             DisableBg(1);
         }
@@ -2652,19 +2652,19 @@ u8 InitEventState(EventSeqWork* work) {
     gEventState->cameraY = gEventState->centerY - 0x5000;
     gEventState->flags = 0;
     gEventState->frame = 0;
-    gEventState->focusSpeaker = 0;
+    gEventState->focusSpeaker = FALSE;
     gEventState->msgWinPosition = 0;
-    gEventState->msgWinOpen = 0;
+    gEventState->msgWinOpen = FALSE;
     gEventState->speaker = 0;
     gEventState->focusSteps = 0;
-    gEventState->msgWaitActive = 0;
+    gEventState->msgWaitActive = FALSE;
     gEventState->unk_7E = 0;
     gEventState->bossChara = 0;
 
     // @bug bg is NULL for events without a background (NULL read).
     if (bg->mapAnim != 5) {
         gEventState->mapAnim = bg->mapAnim;
-        work->hasMapAnim = 1;
+        work->hasMapAnim = TRUE;
     } else {
         gEventState->mapAnim = bg->mapAnim;
     }
@@ -2691,7 +2691,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
     u8 j;
 
 #ifndef VERSION_EU
-    flag = 0;
+    flag = FALSE;
 #endif
     bg = gEventBackgroundDefs[work->eventId];
 
@@ -2738,7 +2738,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
             if (bg->maps2 != NULL) {
                 SetBgMapBlocks(2, bg->maps2, bg->mapWidth, bg->mapHeight);
                 RedrawBgMapAt(2, 0, 0);
-                gEventState->hasBg2Map = 1;
+                gEventState->hasBg2Map = TRUE;
             } else {
                 DisableBg(2);
             }
@@ -2757,7 +2757,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
 
                 SetBgMapBlocks(1, bg->maps3, bg->mapWidth, bg->mapHeight);
                 RedrawBgMapAt(1, 0, 0);
-                gEventState->hasBg1Map = 1;
+                gEventState->hasBg1Map = TRUE;
             } else {
                 DisableBg(1);
             }
@@ -2771,19 +2771,19 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
     gEventState->cameraY = gEventState->centerY - 0x5000;
     gEventState->flags = 0;
     gEventState->frame = 0;
-    gEventState->focusSpeaker = 0;
+    gEventState->focusSpeaker = FALSE;
     gEventState->msgWinPosition = 0;
-    gEventState->msgWinOpen = 0;
+    gEventState->msgWinOpen = FALSE;
     gEventState->speaker = 0;
     gEventState->focusSteps = 0;
-    gEventState->msgWaitActive = 0;
+    gEventState->msgWaitActive = FALSE;
     gEventState->unk_7E = 0;
     gEventState->bossChara = 0;
 
     // @bug bg is NULL for events without a background (NULL read).
     if (bg->mapAnim != 5) {
         gEventState->mapAnim = bg->mapAnim;
-        flag = 1;
+        flag = TRUE;
     } else {
         gEventState->mapAnim = 5;
     }
@@ -2810,7 +2810,7 @@ u8 event_seq_1(EventSeqWork* work, void* task) {
         arg.track = j;
 
         if (arg.chara > 94) {
-            work->hasBoss = 1;
+            work->hasBoss = TRUE;
             gEventState->bossChara = arg.chara;
         }
 
@@ -2861,7 +2861,7 @@ u8 UpdateEventSeqSkip() {
     if (fading) {
         result = 1;
     } else {
-        gEventState->running = 0;
+        gEventState->running = FALSE;
         m4aMPlayAllStop();
         result = 0;
     }
@@ -2891,15 +2891,15 @@ u8 UpdateEventSeq(EventSeqWork* work, void* task) {
         gEventState->skipHoldTime = 0;
     }
 
-    if (gEventState->skipHoldTime > 64 || gEventState->endRequest == 1) {
+    if (gEventState->skipHoldTime > 64 || gEventState->endRequest == TRUE) {
         gEventState->skipHoldTime = 64;
-        work->ending = 1;
-        gEventState->ending = 1;
+        work->ending = TRUE;
+        gEventState->ending = TRUE;
         FadeStartOut(FADE_MODE_BLACK, 64);
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateEventSeqSkip);
 
         for (i = 0; i < 32; i++) {
-            FadeSetPaletteExcluded(i, 0);
+            FadeSetPaletteExcluded(i, FALSE);
         }
 
         return 1;
@@ -2938,17 +2938,17 @@ u8 UpdateEventSeq(EventSeqWork* work, void* task) {
             FadeStartOut(FADE_MODE_BLACK, 64);
         }
 
-        work->ending = 1;
-        gEventState->ending = 1;
+        work->ending = TRUE;
+        gEventState->ending = TRUE;
     }
 
-    if (work->ending == 1) {
+    if (work->ending == TRUE) {
         for (i = 0; i < 32; i++) {
-            FadeSetPaletteExcluded(i, 0);
+            FadeSetPaletteExcluded(i, FALSE);
         }
 
         if (!FadeIsActive()) {
-            gEventState->running = 0;
+            gEventState->running = FALSE;
             return 0;
         }
     }
@@ -3008,9 +3008,9 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
     work->palette = NULL;
     work->gfx = NULL;
     work->spriteFlipX = 0;
-    work->callbackActive = 0;
-    work->usesBtlWork = 0;
-    work->finished = 0;
+    work->callbackActive = FALSE;
+    work->usesBtlWork = FALSE;
+    work->finished = FALSE;
     work->bobPhase = 0;
     work->visible = 1;
     work->unk_1B8 = 0;
@@ -3024,7 +3024,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         gBtlWork->flags = 0;
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->viewX = gEventState->cameraX;
         gBtlWork->viewY = gEventState->cameraY;
         gBtlWork->scale = Q_8_8(1);
@@ -3052,7 +3052,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
@@ -3069,13 +3069,13 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
         SetBattleBounds(128, 424, 294, 384);
         gEventState->bossTask = TaskCreate(&work->tasks, &gTaskDescBosPc, &work->tasks);
-        work->hasObj = 0;
+        work->hasObj = FALSE;
         gEventState->cameraX = viewX = gBtlWork->viewX;
         gEventState->cameraY = viewY = gBtlWork->viewY;
         gEventState->centerX = gBtlWork->x;
@@ -3094,7 +3094,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->viewY = 0x5400;
         gBtlWork->scale = Q_8_8(1);
         gBtlWork->rotation = 0;
@@ -3114,7 +3114,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->x = 0x26600;
         gBtlWork->y = 0x12800;
         gBtlWork->viewX = 0x26600;
@@ -3140,7 +3140,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
         gBtlWork->flags = 0;
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         gBtlWork->x = 0x12C00;
         gBtlWork->y = 0x16800;
         gBtlWork->viewX = 0x12C00;
@@ -3172,7 +3172,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         TaskCreate(&work->tasks, &gTaskDescBosBoogie, NULL);
         gBtlWork->fadeAmount = 5;
         break;
@@ -3189,7 +3189,7 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         TaskCreate(&work->tasks, &gTaskDescBosUrsula, NULL);
         gBtlWork->fadeAmount = 5;
         break;
@@ -3206,16 +3206,16 @@ void event_chara_0(EventCharaWork* work, EventSeqArg* arg) {
         gBtlWork->flags = BTL_FLAG_BOSS_BATTLE;
         TaskPoolInit(&gBtlWork->taskPools[0], 32);
         TaskPoolInit(&gBtlWork->taskPools[1], 1);
-        work->usesBtlWork = 1;
+        work->usesBtlWork = TRUE;
         TaskCreate(&work->tasks, &gTaskDescBosGa, (void*)1);
         gBtlWork->fadeAmount = 5;
         break;
     default:
         if ((work->keyframes->flags & CHARA_KEYFRAME_FLAG_DEFER_SPAWN) == 0) {
             CreateEvtObjTask(&work->tasks, &work->obj, work->arg.chara, work->keyframes->anim, work->keyframes->x, work->keyframes->y, work->keyframes->z);
-            work->hasObj = 1;
+            work->hasObj = TRUE;
         } else {
-            work->hasObj = 0;
+            work->hasObj = FALSE;
         }
 
         SetupEventCharaShadow(work);
@@ -3248,9 +3248,9 @@ u8 event_chara_1(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3385,11 +3385,11 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
     u16 flags;
 
     if (work->keyframes[work->keyframe].frame > gEventState->frame) {
-        return 0;
+        return FALSE;
     }
 
     if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_END) != 0) {
-        return 0;
+        return FALSE;
     }
 
     work->keyframe++;
@@ -3400,12 +3400,12 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
         CreateEvtObjTask(&work->tasks, &work->obj, work->arg.chara, work->keyframes[work->keyframe].anim,
                       work->keyframes[work->keyframe].x, work->keyframes[work->keyframe].y,
                       work->keyframes[work->keyframe].z);
-        work->hasObj = 1;
+        work->hasObj = TRUE;
         SetupEventCharaShadow(work);
     }
 
     if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_DESPAWN) != 0) {
-        work->finished = 1;
+        work->finished = TRUE;
     }
 
     if ((work->keyframes[work->keyframe].flags & CHARA_KEYFRAME_FLAG_SILHOUETTE) != 0) {
@@ -3431,7 +3431,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
 
         EvtObjSetAnim(&work->obj, work->animId);
         ApplyEventCharaDrawFlags(work);
-        return 1;
+        return TRUE;
     }
 
     if (work->keyframes[work->keyframe].anim == 0x3AF) {
@@ -3442,7 +3442,7 @@ u8 AdvanceEventCharaKeyframe(EventCharaWork* work) {
         BosLstAdvanceEventStep(gEventState->bossTask);
     }
 
-    return 0;
+    return FALSE;
 }
 
 void UpdateEventCharaMotion(EventCharaWork* work) {
@@ -3568,9 +3568,9 @@ u8 EventCharaHopUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3621,9 +3621,9 @@ u8 EventCharaHopHighUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3674,9 +3674,9 @@ u8 EventCharaHopLowUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3723,9 +3723,9 @@ u8 EventCharaDropUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3748,9 +3748,9 @@ u8 EventCharaFadeOut(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -3799,9 +3799,9 @@ u8 EventCharaFadeOutUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
 
         {
@@ -3831,9 +3831,9 @@ u8 EventCharaFadeIn(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -3882,9 +3882,9 @@ u8 EventCharaFadeInUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
 
         {
@@ -3913,9 +3913,9 @@ u8 EventCharaBlendUp(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -3955,9 +3955,9 @@ u8 EventCharaBlendUpUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -3979,9 +3979,9 @@ u8 EventCharaBlendDown(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -4021,9 +4021,9 @@ u8 EventCharaBlendDownUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -4060,9 +4060,9 @@ u8 EventCharaCircleSlowUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -4099,9 +4099,9 @@ u8 EventCharaCircleFastUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -4139,9 +4139,9 @@ u8 EventCharaJitterUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -4255,9 +4255,9 @@ u8 EventCharaFadeToBlack(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -4297,9 +4297,9 @@ u8 EventCharaFadeToBlackUpdate(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -4321,9 +4321,9 @@ u8 EventCharaBlendDown2(void* work, void* task) {
 
         if (chara->keyframes[chara->keyframe].callback != NULL) {
             chara->keyframes[chara->keyframe].callback(chara);
-            chara->callbackActive = 1;
+            chara->callbackActive = TRUE;
         } else {
-            chara->callbackActive = 0;
+            chara->callbackActive = FALSE;
         }
     }
 
@@ -4364,9 +4364,9 @@ u8 EventCharaBlendDown2Update(EventCharaWork* work, void* task) {
 
         if (work->keyframes[work->keyframe].callback != NULL) {
             work->keyframes[work->keyframe].callback(work);
-            work->callbackActive = 1;
+            work->callbackActive = TRUE;
         } else {
-            work->callbackActive = 0;
+            work->callbackActive = FALSE;
         }
     }
 
@@ -5532,11 +5532,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
         if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 1) {
-                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, TRUE);
                 }
 
                 if (work->obj.anim->frame == 5) {
-                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, FALSE);
                 }
             }
         }
@@ -5549,11 +5549,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
         if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 2) {
-                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, TRUE);
                 }
 
                 if (work->obj.anim->frame == 6) {
-                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, FALSE);
                 }
             }
         }
@@ -5566,11 +5566,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
         if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 3) {
-                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, TRUE);
                 }
 
                 if (work->obj.anim->frame == 7) {
-                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
+                    PlayDonaldFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, FALSE);
                 }
             }
         }
@@ -5586,11 +5586,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
         if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 3) {
-                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
+                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, TRUE);
                 }
 
                 if (work->obj.anim->frame == 7) {
-                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
+                    PlayGoofyFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, FALSE);
                 }
             }
         }
@@ -5604,11 +5604,11 @@ s32 PlayEventCharaAnimSounds(EventCharaWork* work) {
         if (gEventBackgroundDefs[work->arg.eventId] != NULL) {
             if (work->obj.anim->timer == 0) {
                 if (work->obj.anim->frame == 3) {
-                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 1);
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, TRUE);
                 }
 
                 if (work->obj.anim->frame == 7) {
-                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, 0);
+                    PlaySoraFootstep(work, gEventBackgroundDefs[work->arg.eventId]->groundType, FALSE);
                 }
             }
         }
@@ -6165,15 +6165,15 @@ static void msgwin_0(MsgWinWork* work, u8* arg) {
     work->charTimer = 0;
     work->charCount = 0;
     work->scriptIndex = 0;
-    work->textLoaded = 0;
-    work->started = 0;
+    work->textLoaded = FALSE;
+    work->started = FALSE;
     work->script = seqDef->script;
-    work->waitCreated = 0;
+    work->waitCreated = FALSE;
     work->scrollX = 0;
     work->nextText = NULL;
-    gEventState->msgWinOpen = 0;
-    gEventState->msgWaitActive = 0;
-    gEventState->msgWinCentered = 0;
+    gEventState->msgWinOpen = FALSE;
+    gEventState->msgWaitActive = FALSE;
+    gEventState->msgWinCentered = FALSE;
     TaskPoolInit(&work->tasks, 2);
     CreateMsgfaceTask(&work->tasks, &work->face, work->script->portraitId, work->script->expressionId, work->script->positionIndex);
 }
@@ -6207,10 +6207,10 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     LoadPalette(gCard00Palette, palette, 32);
 
                     if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                        FadeSetPaletteExcluded(15, 1);
+                        FadeSetPaletteExcluded(15, TRUE);
                     }
 
-                    gEventState->msgWinOpen = 1;
+                    gEventState->msgWinOpen = TRUE;
 
                     switch (entry->positionIndex) {
                     case 0:
@@ -6227,13 +6227,13 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                         work->palette = LoadObjPalette(gTextWhitePalette, 32);
 
                         if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                            FadeSetPaletteExcluded(work->palette->index + 16, 1);
+                            FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
                         }
                     }
 
                     RequestMsgfaceSlideIn(&work->face);
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
-                    gEventState->msgWinCentered = 1;
+                    gEventState->msgWinCentered = TRUE;
                 } else {
                     LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
                     LoadBgPalette(work->bg, gMsgwinPalette, 32);
@@ -6241,14 +6241,14 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                     RedrawBgMapAt(work->bg, work->scrollX, 0);
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                     RequestMsgfaceSlideIn(&work->face);
-                    gEventState->msgWinOpen = 1;
+                    gEventState->msgWinOpen = TRUE;
 
                     if (work->palette != NULL) {
                         ReleaseObjPalette(work->palette);
                         work->palette = NULL;
                     }
 
-                    gEventState->msgWinCentered = 0;
+                    gEventState->msgWinCentered = FALSE;
                 }
             }
         } else {
@@ -6263,10 +6263,10 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             LoadPalette(gCard00Palette, palette, 32);
 
             if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                FadeSetPaletteExcluded(15, 1);
+                FadeSetPaletteExcluded(15, TRUE);
             }
 
-            gEventState->msgWinOpen = 1;
+            gEventState->msgWinOpen = TRUE;
 
             switch (entry->positionIndex) {
             case 0:
@@ -6283,13 +6283,13 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
                 work->palette = LoadObjPalette(gTextWhitePalette, 32);
 
                 if ((entry->flags & MSG_SCRIPT_FLAG_NO_FADE) != 0) {
-                FadeSetPaletteExcluded(work->palette->index + 16, 1);
+                FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
                 }
             }
 
             RequestMsgfaceSlideIn(&work->face);
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
-            gEventState->msgWinCentered = 1;
+            gEventState->msgWinCentered = TRUE;
         } else {
             LoadBgTiles(work->bg, gMsgwinTiles, 0x500);
             LoadBgPalette(work->bg, gMsgwinPalette, 32);
@@ -6297,24 +6297,24 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             RedrawBgMapAt(work->bg, work->scrollX, 0);
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             RequestMsgfaceSlideIn(&work->face);
-            gEventState->msgWinOpen = 1;
+            gEventState->msgWinOpen = TRUE;
 
             if (work->palette != NULL) {
                 ReleaseObjPalette(work->palette);
                 work->palette = NULL;
             }
 
-            gEventState->msgWinCentered = 0;
+            gEventState->msgWinCentered = FALSE;
         }
         }
     }
 
-    if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 0);
-        FadeSetPaletteExcluded(14, 0);
+    if (gEventState->ending == TRUE) {
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, FALSE);
+        FadeSetPaletteExcluded(14, FALSE);
     } else {
-        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
-        FadeSetPaletteExcluded(14, 1);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, TRUE);
+        FadeSetPaletteExcluded(14, TRUE);
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -6339,21 +6339,21 @@ u8 MsgwinContinueUpdate(MsgWinWork* work, void* task) {
             } else {
                 SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
                 RequestMsgfaceSlideIn(&work->face);
-                gEventState->msgWinOpen = 1;
+                gEventState->msgWinOpen = TRUE;
             }
         } else {
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinOpenUpdate);
             RequestMsgfaceSlideIn(&work->face);
-            gEventState->msgWinOpen = 1;
+            gEventState->msgWinOpen = TRUE;
         }
     }
 
-    if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 0);
-        FadeSetPaletteExcluded(14, 0);
+    if (gEventState->ending == TRUE) {
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, FALSE);
+        FadeSetPaletteExcluded(14, FALSE);
     } else {
-        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, 1);
-        FadeSetPaletteExcluded(14, 1);
+        FadeSetPaletteExcluded(work->glyphPaletteIndex + 16, TRUE);
+        FadeSetPaletteExcluded(14, TRUE);
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -6396,7 +6396,7 @@ u8 MsgwinOpenUpdate(MsgWinWork* work, void* task) {
         work->steps = 0;
 
         if ((entry->flags & 0xF) == 0) {
-            gEventState->talking = 1;
+            gEventState->talking = TRUE;
         }
 
         SetTaskUpdate(task, (TaskUpdateFunc)MsgwinTypeUpdate);
@@ -6419,14 +6419,14 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* task) {
         }
     }
 
-    if (work->waitCreated == 1 && !gEventState->msgWaitActive) {
+    if (work->waitCreated == TRUE && !gEventState->msgWaitActive) {
         MsgLatinChar* text = work->nextText;
 
         if (text != NULL) {
             work->steps = 0;
-            work->textLoaded = 0;
-            work->started = 1;
-            work->face.shown = 1;
+            work->textLoaded = FALSE;
+            work->started = TRUE;
+            work->face.shown = TRUE;
             SetTaskUpdate(task, (TaskUpdateFunc)MsgwinContinueUpdate);
         } else {
             HideMsgGlyphs();
@@ -6436,27 +6436,27 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* task) {
                     work->steps = 8;
                     RequestMsgfaceSlideOut(&work->face);
                     SetTaskUpdate(task, (TaskUpdateFunc)MsgwinCloseUpdate);
-                    gEventState->msgWinOpen = 0;
-                    work->face.shown = 0;
+                    gEventState->msgWinOpen = FALSE;
+                    work->face.shown = FALSE;
                 } else {
                     work->steps = 0;
-                    work->textLoaded = 0;
-                    work->started = 0;
+                    work->textLoaded = FALSE;
+                    work->started = FALSE;
                     work->scriptIndex++;
                     gEventState->flags &= ~EVENT_FLAG_PAUSED;
-                    work->face.shown = 1;
+                    work->face.shown = TRUE;
                     SetTaskUpdate(task, (TaskUpdateFunc)msgwin_1);
                 }
             } else {
                 work->steps = 8;
                 RequestMsgfaceSlideOut(&work->face);
                 SetTaskUpdate(task, (TaskUpdateFunc)MsgwinCloseUpdate);
-                gEventState->msgWinOpen = 0;
-                work->face.shown = 0;
+                gEventState->msgWinOpen = FALSE;
+                work->face.shown = FALSE;
             }
         }
 
-        work->waitCreated = 0;
+        work->waitCreated = FALSE;
     }
 
     TaskPoolUpdate(&work->tasks);
@@ -6483,11 +6483,11 @@ u8 MsgwinCloseUpdate(MsgWinWork* work, void* task) {
             gEventState->flags &= ~EVENT_FLAG_PAUSED;
         }
 
-        gEventState->focusSpeaker = 0;
+        gEventState->focusSpeaker = FALSE;
 
         if ((entry->flags & MSG_SCRIPT_FLAG_END) == 0) {
-            work->started = 0;
-            work->textLoaded = 0;
+            work->started = FALSE;
+            work->textLoaded = FALSE;
             work->scriptIndex++;
             SetTaskUpdate(task, (TaskUpdateFunc)msgwin_1);
         }
@@ -6509,9 +6509,9 @@ void MsgwinLoadEntry(MsgWinWork* work) {
     }
 
     if ((entry->flags & MSG_SCRIPT_FLAG_SILHOUETTE) != 0) {
-        work->face.silhouette = 1;
+        work->face.silhouette = TRUE;
     } else {
-        work->face.silhouette = 0;
+        work->face.silhouette = FALSE;
     }
 
     SetMsgfacePortrait(&work->face, entry->portraitId, entry->expressionId, work->position);
@@ -6540,7 +6540,7 @@ void MsgwinLoadEntry(MsgWinWork* work) {
 
     work->charTimer = 0;
     work->shownChars = 0;
-    work->textLoaded = 1;
+    work->textLoaded = TRUE;
 }
 
 void MsgwinTypeStep(MsgWinWork* work) {
@@ -6552,7 +6552,7 @@ void MsgwinTypeStep(MsgWinWork* work) {
             work->shownChars++;
             m4aSongNumStart(SONG_SYS_MESSAGE);
         } else {
-            gEventState->talking = 0;
+            gEventState->talking = FALSE;
 
             if (!work->waitCreated) {
                 if ((work->script[work->scriptIndex].flags & MSG_SCRIPT_FLAG_END) == 0) {
@@ -6571,7 +6571,7 @@ void MsgwinTypeStep(MsgWinWork* work) {
                     }
                 }
 
-                work->waitCreated = 1;
+                work->waitCreated = TRUE;
             }
         }
 
@@ -6587,15 +6587,15 @@ void MsgwinCheckStart(MsgWinWork* work) {
     if (gEventState->frame >= entry->frame) {
         if (!work->started) {
             gEventState->flags |= EVENT_FLAG_PAUSED;
-            work->started = 1;
+            work->started = TRUE;
             work->steps = 8;
 
             if ((entry->flags & MSG_SCRIPT_FLAG_FOCUS_SPEAKER) != 0) {
-                gEventState->focusSpeaker = 1;
+                gEventState->focusSpeaker = TRUE;
                 gEventState->speaker = entry->portraitId;
                 gEventState->focusSteps = 32;
             } else {
-                gEventState->focusSpeaker = 0;
+                gEventState->focusSpeaker = FALSE;
             }
         }
     }
@@ -6620,9 +6620,9 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     work->x = gMsgfaceHiddenX[position = work->face->positionIndex];
     work->y = gMsgfaceY[position];
     work->scaleX = Q_8_8(1);
-    work->arrived = 0;
-    work->talking = 0;
-    work->visible = 1;
+    work->arrived = FALSE;
+    work->talking = FALSE;
+    work->visible = TRUE;
 
     if (work->face->portraitId != PORTRAIT_NONE) {
         anim = gMsgFaceAnims[work->face->portraitId];
@@ -6631,9 +6631,9 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     }
 
     if (work->face->positionIndex <= 1) {
-        work->flipX = 1;
+        work->flipX = TRUE;
     } else if (work->face->positionIndex <= 3) {
-        work->flipX = 0;
+        work->flipX = FALSE;
     }
 
     if (work->face->portraitId != PORTRAIT_NONE) {
@@ -6657,9 +6657,9 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
 
     if (work->face->portraitId != PORTRAIT_NONE) {
         anim = gMsgFaceAnims[work->face->portraitId];
-        work->visible = 1;
+        work->visible = TRUE;
     } else {
-        work->visible = 0;
+        work->visible = FALSE;
     }
 
     switch (work->face->command) {
@@ -6672,7 +6672,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
         work->steps = 8;
 
         if (anim != NULL) {
-            if (work->face->silhouette == 1) {
+            if (work->face->silhouette == TRUE) {
                 UpdateAllocatedObjPalette(work->palette, gEventSilhouettePalette);
             } else {
                 UpdateAllocatedObjPalette(work->palette, anim[work->face->expressionId].palette);
@@ -6683,7 +6683,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
         break;
     case MSGFACE_COMMAND_SLIDE_OUT:
         work->steps = 8;
-        work->arrived = 0;
+        work->arrived = FALSE;
         SetTaskUpdate(task, (TaskUpdateFunc)MsgfaceSlideOutUpdate);
         break;
     case MSGFACE_COMMAND_FLIP:
@@ -6703,28 +6703,28 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
         break;
     }
 
-    if (gEventState->talking == 1) {
+    if (gEventState->talking == TRUE) {
         if (!work->talking) {
             if (anim != NULL && anim[work->face->expressionId].animCount > 1) {
                 AnimStart(&work->anim, 1, anim[work->face->expressionId].animFlags);
             }
 
-            work->talking = 1;
+            work->talking = TRUE;
         }
     } else {
-        if (work->talking == 1) {
+        if (work->talking == TRUE) {
             if (anim != NULL) {
                 AnimStart(&work->anim, 0, anim[work->face->expressionId].animFlags);
             }
 
-            work->talking = 0;
+            work->talking = FALSE;
         }
     }
 
-    if (gEventState->ending == 1) {
-        FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    if (gEventState->ending == TRUE) {
+        FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
     } else {
-        FadeSetPaletteExcluded(work->palette->index + 16, 1);
+        FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     }
 
     work->gfx = AnimUpdate(&work->anim);
@@ -6763,7 +6763,7 @@ u8 MsgfaceSlideInUpdate(MsgFaceWork* work, void* task) {
 
     if (work->steps == 0) {
         work->face->command = MSGFACE_COMMAND_NONE;
-        work->arrived = 1;
+        work->arrived = TRUE;
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
     }
 
@@ -6790,15 +6790,15 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
 
     if (work->face->portraitId != PORTRAIT_NONE) {
         anims = gMsgFaceAnims[work->face->portraitId];
-        work->visible = 1;
+        work->visible = TRUE;
     } else {
-        work->visible = 0;
+        work->visible = FALSE;
     }
 
     if (work->face->positionIndex <= 1) {
-        work->flipX = 1;
+        work->flipX = TRUE;
     } else if (work->face->positionIndex <= 3) {
-        work->flipX = 0;
+        work->flipX = FALSE;
     }
 
     if (anims != NULL) {
@@ -6807,7 +6807,7 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
         AnimInit(&work->anim, anims[work->face->expressionId].anims, anims[work->face->expressionId].gfxTable);
         AnimStart(&work->anim, 0, anims[work->face->expressionId].animFlags);
         work->gfx = AnimGetGfx(&work->anim);
-        work->arrived = 0;
+        work->arrived = FALSE;
         work->steps = 8;
         work->face->command = MSGFACE_COMMAND_NONE;
     }
@@ -6839,9 +6839,9 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* task) {
         }
 
         if (work->face->positionIndex <= 1) {
-            work->flipX = 1;
+            work->flipX = TRUE;
         } else if (work->face->positionIndex <= 3) {
-            work->flipX = 0;
+            work->flipX = FALSE;
         }
 
         if (anims != NULL) {
@@ -6850,7 +6850,7 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* task) {
             AnimInit(&work->anim, anims[work->face->expressionId].anims, anims[work->face->expressionId].gfxTable);
             AnimStart(&work->anim, 0, anims[work->face->expressionId].animFlags);
             work->gfx = AnimGetGfx(&work->anim);
-            work->arrived = 0;
+            work->arrived = FALSE;
             work->steps = 8;
         }
 
@@ -6870,7 +6870,7 @@ u8 MsgfaceFlipInUpdate(MsgFaceWork* work, void* task) {
     work->steps--;
 
     if (work->steps == 0) {
-        work->arrived = 1;
+        work->arrived = TRUE;
         work->face->command = MSGFACE_COMMAND_NONE;
         work->scaleX = Q_8_8(1);
         SetTaskUpdate(task, (TaskUpdateFunc)msgface_1);
@@ -6884,7 +6884,7 @@ void CreateMsgfaceTask(void* pool, MsgFaceControl* ctl, u8 portraitId, u8 expres
     ctl->expressionId = expressionId;
     ctl->positionIndex = positionIndex;
     ctl->command = MSGFACE_COMMAND_NONE;
-    ctl->silhouette = 0;
+    ctl->silhouette = FALSE;
     TaskCreate(pool, &sTaskDescMsgface, ctl);
 }
 
@@ -6920,12 +6920,12 @@ void msgwait_0(MsgWaitWork* work, u8* arg) {
     work->tiles = AllocObjTiles(64, NULL);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     LoadObjPaletteBank(work->palette->index, gBStatesPalette);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     SetObjTileSource(work->tiles, gFEventTiles);
     AnimInit(&work->anim, gFEventAnims, gFEventFrames);
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
     work->timer = 0;
-    gEventState->msgWaitActive = 1;
+    gEventState->msgWaitActive = TRUE;
 }
 
 u8 msgwait_1(MsgWaitWork* work, void* task) {
@@ -6935,7 +6935,7 @@ u8 msgwait_1(MsgWaitWork* work, void* task) {
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
 
         if (work->nextPosition == 4) {
-            gEventState->msgWaitActive = 0;
+            gEventState->msgWaitActive = FALSE;
             m4aSongNumStart(SONG_SYS_KETTEI);
             return 0;
         } else {
@@ -6956,7 +6956,7 @@ u8 UpdateMsgwaitClosing(MsgWaitWork* work) {
     if (work->timer <= 15) {
         active = 1;
     } else {
-        gEventState->msgWaitActive = 0;
+        gEventState->msgWaitActive = FALSE;
         active = 0;
     }
 
@@ -6977,7 +6977,7 @@ void msgwait_2(MsgWaitWork* work) {
 }
 
 void msgwait_3(MsgWaitWork* work) {
-    FadeSetPaletteExcluded(work->palette->index + 16, 0);
+    FadeSetPaletteExcluded(work->palette->index + 16, FALSE);
     ReleaseObjTiles(work->tiles);
     ReleaseObjPalette(work->palette);
 }
@@ -6987,7 +6987,7 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     work->tiles = AllocObjTiles(64, NULL);
     work->palette = LoadObjPalette(gBStatesPalette, 32);
     LoadObjPaletteBank(work->palette->index, gBStatesPalette);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     SetObjTileSource(work->tiles, gFEventTiles);
     AnimInit(&work->anim, gFEventAnims, gFEventFrames);
     AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
@@ -7002,7 +7002,7 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     work->tiles3 = LoadObjTiles(gMsgBoxTiles, 4032);
     work->palette3 = LoadObjPalette(gCard00Palette, 32);
     LoadObjPaletteBank(work->palette3->index, gCard00Palette);
-    FadeSetPaletteExcluded(work->palette->index + 16, 1);
+    FadeSetPaletteExcluded(work->palette->index + 16, TRUE);
     InitTextSlots(work->textSlots, 10);
     InitTextSlots(work->textSlots2, 10);
     work->palette4 = LoadTextPalette(1);
@@ -7012,9 +7012,9 @@ void msgwait_yesno_0(MsgWaitWork* work, u8* arg) {
     work->cursor = 1;
     work->y = gMsgwaitYesnoCursorY[1];
     work->timer = 0;
-    gEventState->msgWaitActive = 1;
-    gEventState->askedYesNo = 1;
-    gEventState->answerYes = 0;
+    gEventState->msgWaitActive = TRUE;
+    gEventState->askedYesNo = TRUE;
+    gEventState->answerYes = FALSE;
     work->choiceShown = 0;
 }
 
@@ -7039,29 +7039,29 @@ u8 UpdateMsgwaitYesnoChoice(MsgWaitWork* work, void* task) {
     case A_BUTTON:
     case START_BUTTON:
         if (work->cursor == 0) {
-            gEventState->answerYes = 1;
+            gEventState->answerYes = TRUE;
         } else {
-            gEventState->answerYes = 0;
+            gEventState->answerYes = FALSE;
 
             if (gEventState->eventId == EVENT_068_13F_CASTLE_OBLIVION_LAST3) {
-                gEventState->endRequest = 1;
+                gEventState->endRequest = TRUE;
                 gEventState->skipHoldTime = 255;
             }
         }
 
         m4aSongNumStart(SONG_SYS_KETTEI);
-        gEventState->msgWaitActive = 0;
+        gEventState->msgWaitActive = FALSE;
         return 0;
     case B_BUTTON:
-        gEventState->answerYes = 0;
+        gEventState->answerYes = FALSE;
 
         if (gEventState->eventId == EVENT_068_13F_CASTLE_OBLIVION_LAST3) {
-            gEventState->endRequest = 1;
+            gEventState->endRequest = TRUE;
             gEventState->skipHoldTime = 255;
         }
 
         m4aSongNumStart(SONG_SYS_KETTEI);
-        gEventState->msgWaitActive = 0;
+        gEventState->msgWaitActive = FALSE;
         return 0;
     }
 
@@ -7123,7 +7123,7 @@ void HBlankIntrEventScanlineScroll() {
     line = (line + 1) % 228;
 
     if (line < DISPLAY_HEIGHT) {
-        if (gEventScanlineScroll->enabled == 1) {
+        if (gEventScanlineScroll->enabled == TRUE) {
             REG_BG2HOFS = gEventScanlineScroll->scrollX[line];
             REG_BG3HOFS = gEventScanlineScroll->scrollX[line];
         }
@@ -7144,13 +7144,13 @@ void view_0(EventCameraWork* work, u8* arg) {
 
     gEventScanlineScroll = &work->scanline;
     work->wavePhase = 0;
-    work->scanline.enabled = 0;
+    work->scanline.enabled = FALSE;
     work->eventId = arg[0];
     work->keyframe = 0;
     work->steps = 0;
     work->angle = 0;
     work->approachMode = 0;
-    work->effectStarted = 0;
+    work->effectStarted = FALSE;
     seqDef = gEventSequenceDefs[work->eventId];
     bg = gEventBackgroundDefs[work->eventId];
     keyframe = seqDef->keyframes;
@@ -7198,7 +7198,7 @@ void ClearEventObjPaletteExclusions() {
     u8 i;
 
     for (i = 0; i < 16; i++) {
-        FadeSetPaletteExcluded(i + 16, 0);
+        FadeSetPaletteExcluded(i + 16, FALSE);
     }
 }
 
@@ -7222,7 +7222,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
         if (gEventState->frame >= (u16)keyframe->frame && !(keyframe->flags & CAMERA_KEYFRAME_FLAG_END)) {
             work->keyframe++;
             keyframe = &work->keyframes[work->keyframe];
-            work->effectStarted = 0;
+            work->effectStarted = FALSE;
 
             if (keyframe->callback != NULL) {
                 ((void (*)(EventCameraWork*))keyframe->callback)(work);
@@ -7260,8 +7260,8 @@ u8 view_1(EventCameraWork* work, Task* task) {
                     m4aSongNumStart(SONG_EV_FLASH01);
                 }
 
-                gEventState->fadedOut = 0;
-                work->effectStarted = 1;
+                gEventState->fadedOut = FALSE;
+                work->effectStarted = TRUE;
             }
         }
 
@@ -7269,8 +7269,8 @@ u8 view_1(EventCameraWork* work, Task* task) {
             if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_WHITE, keyframe->duration);
-                gEventState->fadedOut = 1;
-                work->effectStarted = 1;
+                gEventState->fadedOut = TRUE;
+                work->effectStarted = TRUE;
 
                 if (keyframe->flags & CAMERA_KEYFRAME_FLAG_END) {
                     m4aSongNumStart(SONG_EV_WHITEOUT);
@@ -7282,16 +7282,16 @@ u8 view_1(EventCameraWork* work, Task* task) {
             if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartOut(FADE_MODE_BLACK, keyframe->duration);
-                gEventState->fadedOut = 1;
-                work->effectStarted = 1;
+                gEventState->fadedOut = TRUE;
+                work->effectStarted = TRUE;
             }
         }
 
         if (keyframe->flags & CAMERA_KEYFRAME_FLAG_FADE_IN_WHITE) {
             if (!work->effectStarted) {
                 FadeStartIn(FADE_MODE_WHITE, keyframe->duration);
-                gEventState->fadedOut = 0;
-                work->effectStarted = 1;
+                gEventState->fadedOut = FALSE;
+                work->effectStarted = TRUE;
             }
         }
 
@@ -7299,8 +7299,8 @@ u8 view_1(EventCameraWork* work, Task* task) {
             if (!work->effectStarted) {
                 ClearEventObjPaletteExclusions();
                 FadeStartIn(FADE_MODE_BLACK, keyframe->duration);
-                gEventState->fadedOut = 0;
-                work->effectStarted = 1;
+                gEventState->fadedOut = FALSE;
+                work->effectStarted = TRUE;
             }
         }
 
@@ -7313,17 +7313,17 @@ u8 view_1(EventCameraWork* work, Task* task) {
                     m4aSongNumStart(SONG_EV_FLASH00);
                 }
 
-                work->effectStarted = 1;
+                work->effectStarted = TRUE;
             }
         }
 
         if (keyframe->flags & CAMERA_KEYFRAME_FLAG_WAVE_START) {
             StartBgWave(HBlankIntrEventBgWave);
-            work->scanline.enabled = 1;
+            work->scanline.enabled = TRUE;
         }
 
         if (keyframe->flags & CAMERA_KEYFRAME_FLAG_WAVE_STOP) {
-            work->scanline.enabled = 0;
+            work->scanline.enabled = FALSE;
             ResetHBlankCallback();
             DisableHBlankIntr();
         }
@@ -7333,7 +7333,7 @@ u8 view_1(EventCameraWork* work, Task* task) {
                 FadeStartIn(FADE_MODE_WHITE_BLEND, keyframe->duration);
             }
 
-            work->effectStarted = 1;
+            work->effectStarted = TRUE;
         }
 
         if (keyframe->flags & CAMERA_KEYFRAME_FLAG_SHAKE_SMALL) {
@@ -7613,7 +7613,7 @@ void UpdateEventScanlineWave(EventCameraWork* work) {
     u8 i;
     s32 wave;
 
-    if (work->scanline.enabled == 1) {
+    if (work->scanline.enabled == TRUE) {
         for (i = 0; i < DISPLAY_HEIGHT; i++) {
             work->scanline.scrollX[i] = (gEventState->x >> 8) + (wave = (u8)SIN((i + work->wavePhase) * 2)) / 32;
         }

@@ -121,7 +121,7 @@ const EventSequenceDef gEvent132 = {
     0,
     0,
     0,
-    153,
+    BATTLE_DRAGON_MALEFICENT,
     65535,
     0,
     { 0, 0 },

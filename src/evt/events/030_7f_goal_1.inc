@@ -130,7 +130,7 @@ const EventSequenceDef gEvent030 = {
     0,
     0,
     0,
-    161,
+    BATTLE_RIKU_1,
     65535,
     0,
     { 0, 0 },

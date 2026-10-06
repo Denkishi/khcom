@@ -25,6 +25,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 
 static const u32 sHumLaxeneStockMoves[2][3] = {
@@ -177,7 +178,7 @@ u8 task_hum_laxene_1(LaxeneWork* work) {
         break;
     }
 
-    if (gBtlWork->battleId == 163) {
+    if (gBtlWork->battleId == BATTLE_LARXENE_1) {
         if (HumChooseCardAction(&work->base, 15, 80, 80, 50)) {
             work->base.stockMoves = sHumLaxeneStockMoves[0];
         }

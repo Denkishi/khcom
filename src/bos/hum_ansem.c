@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 
 static const u32 sHumAnsemStockMovesA[3] = {
@@ -164,7 +165,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         break;
     }
 
-    if (gBtlWork->battleId == 166) {
+    if (gBtlWork->battleId == BATTLE_ANSEM_1) {
         HumChooseCardAction(&work->base, 30, 80, 80, 24);
     } else if (HumChooseCardAction(&work->base, 2, 80, 80, 24)) {
         if (GetRandom() % 2) {
@@ -194,7 +195,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             break;
         }
 
-        if (gBtlWork->battleId == 177) {
+        if (gBtlWork->battleId == BATTLE_ANSEM_2) {
             if ((u16)(GetRandom() % 15) == 0) {
                 if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                     work->base.state = HUM_ANSEM_STATE_GUARD;
@@ -227,7 +228,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
             }
         }
 
-        if (gBtlWork->battleId == 177) {
+        if (gBtlWork->battleId == BATTLE_ANSEM_2) {
             if ((u16)(GetRandom() % 30) == 0) {
                 if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
                     work->base.state = HUM_ANSEM_STATE_GUARD;
@@ -256,7 +257,7 @@ u8 task_hum_ansem_1(AnsemWork* work) {
         AnimChangeWithDef(sHumAnsemBackAnimDefs, &w->base.sub->anim, 1, 0, w->base.sub->tiles);
         break;
     case HUM_STATE_HURT_RECOVER:
-        if (gBtlWork->battleId != 177) {
+        if (gBtlWork->battleId != BATTLE_ANSEM_2) {
             break;
         }
 

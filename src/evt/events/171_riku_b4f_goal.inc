@@ -87,7 +87,7 @@ const EventSequenceDef gEvent171 = {
     0,
     0,
     0,
-    167,
+    BATTLE_LEXAEUS,
     65535,
     0,
     { 0, 0 },

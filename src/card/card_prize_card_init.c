@@ -45,6 +45,7 @@
 #include "card_prize_card_init.h"
 #include "battle.h"
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 static const u16 sPrizeMapCardValueChances[10] = { 10, 5, 5, 15, 15, 15, 15, 10, 5, 5 };
 
@@ -796,83 +797,83 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* work, void* task) {
         *(PrizeCardArgs*)&args = work->args;
 
         switch (gBtlWork->battleId) {
-        case 148:
+        case BATTLE_GUARD_ARMOR:
             args.cardId = CARD_GUARD_ARMOR_1;
             break;
-        case 149:
+        case BATTLE_JAFAR:
             args.cardId = CARD_JAFAR_1;
             break;
-        case 150:
+        case BATTLE_TRICKMASTER:
             args.cardId = CARD_TRICKMASTER_1;
             break;
-        case 151:
+        case BATTLE_URSULA:
             args.cardId = CARD_URSULA_1;
             break;
-        case 152:
+        case BATTLE_PARASITE_CAGE:
             args.cardId = CARD_PARASITE_CAGE_1;
             break;
-        case 153:
+        case BATTLE_DRAGON_MALEFICENT:
             args.cardId = CARD_DRAGON_MALEFICENT_1;
             break;
-        case 154:
+        case BATTLE_DARKSIDE:
             args.cardId = CARD_DARKSIDE_1;
             break;
-        case 155:
+        case BATTLE_OOGIE_BOOGIE:
             args.cardId = CARD_OOGIE_BOOGIE_1;
             break;
-        case 156:
+        case BATTLE_MARLUXIA_2:
             args.cardId = CARD_MARLUXIA_1;
             break;
-        case 120:
+        case BATTLE_CARD_SOLDIERS:
             args.cardId = CARD_CARD_SOLDIER_2;
             break;
-        case 162:
+        case BATTLE_AXEL_1:
             args.cardId = CARD_ID(CARD_FIRE, 5);
             break;
-        case 163:
+        case BATTLE_LARXENE_1:
             args.cardId = CARD_ID(CARD_THUNDER, 7);
             break;
-        case 161:
+        case BATTLE_RIKU_1:
             args.cardId = CARD_ID(CARD_AERO, 6);
             break;
-        case 157:
-        case 158:
+        case BATTLE_LEON:
+        case BATTLE_HOOK:
             args.cardId = CARD_HOOK_9;
             break;
-        case 159:
+        case BATTLE_CLOUD:
             args.cardId = CARD_ID(CARD_HI_POTION, 3);
             break;
-        case 160:
+        case BATTLE_HADES:
             args.cardId = CARD_HADES_9;
             break;
-        case 165:
+        case BATTLE_MARLUXIA:
             args.cardId = CARD_MARLUXIA_9;
             break;
-        case 164:
+        case BATTLE_VEXEN_1:
             args.cardId = CARD_ID(CARD_MEGA_ETHER, 4);
             break;
-        case 169:
+        case BATTLE_RIKU_3:
             args.cardId = CARD_ID(CARD_MEGA_POTION, 2);
             break;
-        case 170:
+        case BATTLE_RIKU_4:
             args.cardId = CARD_RIKU_9;
             break;
-        case 173:
+        case BATTLE_AXEL_2:
             args.cardId = CARD_AXEL_9;
             break;
-        case 174:
+        case BATTLE_LARXENE_2:
             args.cardId = CARD_LARXENE_9;
             break;
-        case 175:
+        case BATTLE_VEXEN_2:
             args.cardId = CARD_VEXEN_9;
             break;
-        case 121:
+        case BATTLE_SHADOW_100:
             args.cardId = CARD_ID(CARD_DUMBO, 3);
             break;
-        case 124:
+        case BATTLE_EVENT_AGRABAH_2:
             args.cardId = CARD_ID(CARD_ETHER, 3);
             break;
-        case 167:
+        case BATTLE_LEXAEUS:
             args.cardId = CARD_LEXAEUS_9;
             break;
         default:
@@ -880,7 +881,7 @@ s32 PrizeCardInit_Boss_1(PrizeCardInitWork* work, void* task) {
             return 1;
         }
 
-        if (gBtlWork->battleId != 121) {
+        if (gBtlWork->battleId != BATTLE_SHADOW_100) {
             if (!CollectionHasCard(args.cardId)) {
                 TaskCreate(&work->tasks, &gTaskDescPrizeBoss, &args);
             }

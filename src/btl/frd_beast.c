@@ -24,6 +24,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 static const AnimDef sFrdBeastAnimDefs[2] = {
     { gFelosiaslangeFrames, gFelosiaslangeAnims, gFelosiaslangeTiles, 0 },
@@ -162,7 +163,7 @@ u8 task_frd_beast_1(FrdBeastWork* work) {
         }
 
         if (work->vz > 0) {
-            if (gBtlWork->battleId == 0x99) {
+            if (gBtlWork->battleId == BATTLE_DRAGON_MALEFICENT) {
                 ApplyAttackBox(0xA3, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);
             } else {
                 ApplyAttackBox(0xA2, body->x, body->y, body->z - 0x1800, 0x28, 0x14, 0x10);

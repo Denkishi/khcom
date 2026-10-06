@@ -46,7 +46,7 @@ const EventSequenceDef gEvent113 = {
     0,
     0,
     0,
-    149,
+    BATTLE_JAFAR,
     65535,
     0,
     { 0, 0 },

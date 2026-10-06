@@ -35,6 +35,7 @@
 #include "card_map_anim.h"
 #include "card_enemy.h"
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 u8 gBossCardRequestValue EWRAM_COMMON(4);
 
@@ -447,88 +448,88 @@ void LoadRikuDeckCardSlots(CardBattleWork* work, CardSlot* slots, s8 listIndex, 
     u32 count;
 
     switch (gBtlWork->battleId) {
-    case 157:
-    case 179:
+    case BATTLE_LEON:
+    case BATTLE_TUTORIAL_1:
         deck = &sRikuDecks[20];
         cardCount = deck->cardCount;
         break;
-    case 158:
+    case BATTLE_HOOK:
         deck = &sRikuDecks[4];
         cardCount = deck->cardCount;
         break;
-    case 159:
+    case BATTLE_CLOUD:
         deck = &sRikuDecks[1];
         cardCount = deck->cardCount;
         break;
-    case 160:
+    case BATTLE_HADES:
         deck = &sRikuDecks[2];
         cardCount = deck->cardCount;
         break;
-    case 161:
+    case BATTLE_RIKU_1:
         deck = &sRikuDecks[5];
         cardCount = deck->cardCount;
         break;
-    case 162:
+    case BATTLE_AXEL_1:
         deck = &sRikuDecks[0];
         cardCount = deck->cardCount;
         break;
-    case 163:
+    case BATTLE_LARXENE_1:
         deck = &sRikuDecks[3];
         cardCount = deck->cardCount;
         break;
-    case 164:
+    case BATTLE_VEXEN_1:
         deck = &sRikuDecks[7];
         cardCount = deck->cardCount;
         break;
-    case 165:
+    case BATTLE_MARLUXIA:
         deck = &sRikuDecks[13];
         cardCount = deck->cardCount;
         break;
-    case 166:
+    case BATTLE_ANSEM_1:
         deck = &sRikuDecks[14];
         cardCount = deck->cardCount;
         break;
-    case 177:
+    case BATTLE_ANSEM_2:
         deck = &sRikuDecks[19];
         cardCount = deck->cardCount;
         break;
-    case 167:
+    case BATTLE_LEXAEUS:
         deck = &sRikuDecks[17];
         cardCount = deck->cardCount;
         break;
-    case 168:
+    case BATTLE_RIKU_2:
         deck = &sRikuDecks[6];
         cardCount = deck->cardCount;
         break;
-    case 169:
+    case BATTLE_RIKU_3:
         deck = &sRikuDecks[9];
         cardCount = deck->cardCount;
         break;
-    case 170:
+    case BATTLE_RIKU_4:
         deck = &sRikuDecks[10];
         cardCount = deck->cardCount;
         break;
-    case 171:
+    case BATTLE_RIKU_5:
         deck = &sRikuDecks[16];
         cardCount = deck->cardCount;
         break;
-    case 172:
+    case BATTLE_RIKU_6:
         deck = &sRikuDecks[18];
         cardCount = deck->cardCount;
         break;
-    case 173:
+    case BATTLE_AXEL_2:
         deck = &sRikuDecks[12];
         cardCount = deck->cardCount;
         break;
-    case 174:
+    case BATTLE_LARXENE_2:
         deck = &sRikuDecks[11];
         cardCount = deck->cardCount;
         break;
-    case 175:
+    case BATTLE_VEXEN_2:
         deck = &sRikuDecks[8];
         cardCount = deck->cardCount;
         break;
-    case 176:
+    case BATTLE_VEXEN_3:
         deck = &sRikuDecks[15];
         cardCount = deck->cardCount;
         break;
@@ -695,128 +696,128 @@ static void cardbattle_0(CardBattleWork* work) {
     ListPoolInit(&work->cardDisplays[3]);
 
     switch (gBtlWork->battleId) {
-    case 157:
-    case 179:
+    case BATTLE_LEON:
+    case BATTLE_TUTORIAL_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[20]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[20]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 158:
+    case BATTLE_HOOK:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[4]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[4]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 159:
+    case BATTLE_CLOUD:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[1]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[1]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 160:
+    case BATTLE_HADES:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[2]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[2]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 161:
+    case BATTLE_RIKU_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[5]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[5]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 162:
+    case BATTLE_AXEL_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[0]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[0]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 163:
+    case BATTLE_LARXENE_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[3]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[3]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 164:
+    case BATTLE_VEXEN_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[7]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[7]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 165:
+    case BATTLE_MARLUXIA:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[13]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[13]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 166:
+    case BATTLE_ANSEM_1:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[14]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[14]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 177:
+    case BATTLE_ANSEM_2:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[19]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[19]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 167:
+    case BATTLE_LEXAEUS:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[17]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[17]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 168:
+    case BATTLE_RIKU_2:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[6]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[6]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 169:
+    case BATTLE_RIKU_3:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[9]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[9]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 170:
+    case BATTLE_RIKU_4:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[10]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[10]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 171:
+    case BATTLE_RIKU_5:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[16]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[16]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 172:
+    case BATTLE_RIKU_6:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[18]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[18]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 173:
+    case BATTLE_AXEL_2:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[12]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[12]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 174:
+    case BATTLE_LARXENE_2:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[11]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[11]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 175:
+    case BATTLE_VEXEN_2:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[8]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[8]);
         InitRikuCardList(work, 0);
         InitRikuCardList(work, 3);
         break;
-    case 176:
+    case BATTLE_VEXEN_3:
         work->slotCounts[0] = work->cardsLeft[0] = CountDeckCards(0, &sRikuDecks[15]) + 1;
         work->slotCounts[3] = work->cardsLeft[3] = CountDeckCards(1, &sRikuDecks[15]);
         InitRikuCardList(work, 0);

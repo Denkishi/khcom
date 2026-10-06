@@ -40,6 +40,7 @@
 #include "key_state.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 static const AnimDef sBtlSoraAnimDefs[77] = {
     { gSor1ll50Frames, gSor1ll50Anims, gSor1ll50Tiles, 0 },
@@ -614,28 +615,28 @@ void task_btl_sora_0(BtlSoraWork* work, BtlTaskArg* arg) {
 
     if (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE)) {
         switch (gBtlWork->battleId) {
-        case 148:
-        case 150:
-        case 155:
-        case 161:
-        case 162:
-        case 163:
-        case 164:
-        case 165:
-        case 167:
-        case 168:
-        case 169:
-        case 170:
-        case 171:
-        case 172:
-        case 173:
-        case 174:
+        case BATTLE_GUARD_ARMOR:
+        case BATTLE_TRICKMASTER:
+        case BATTLE_OOGIE_BOOGIE:
+        case BATTLE_RIKU_1:
+        case BATTLE_AXEL_1:
+        case BATTLE_LARXENE_1:
+        case BATTLE_VEXEN_1:
+        case BATTLE_MARLUXIA:
+        case BATTLE_LEXAEUS:
+        case BATTLE_RIKU_2:
+        case BATTLE_RIKU_3:
+        case BATTLE_RIKU_4:
+        case BATTLE_RIKU_5:
+        case BATTLE_RIKU_6:
+        case BATTLE_AXEL_2:
+        case BATTLE_LARXENE_2:
             work->groundSongs = sBtlSoraGroundSongs[1];
             break;
-        case 152:
+        case BATTLE_PARASITE_CAGE:
             work->groundSongs = sBtlSoraGroundSongs[2];
             break;
-        case 158:
+        case BATTLE_HOOK:
             work->groundSongs = sBtlSoraGroundSongs[3];
             break;
         default:

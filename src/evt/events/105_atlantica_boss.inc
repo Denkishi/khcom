@@ -44,7 +44,7 @@ const EventSequenceDef gEvent105 = {
     0,
     0,
     0,
-    151,
+    BATTLE_URSULA,
     65535,
     0,
     { 0, 0 },

@@ -50,7 +50,7 @@ const EventSequenceDef gEvent099 = {
     0,
     0,
     0,
-    150,
+    BATTLE_TRICKMASTER,
     65535,
     0,
     { 0, 0 },

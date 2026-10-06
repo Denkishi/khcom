@@ -38,6 +38,7 @@
 #include <stddef.h>
 #include "card_level_up.h"
 #include "default_bg_map.h"
+#include "battle_ids.h"
 
 #ifdef VERSION_EU
 static const u16 sLevelUpHeaderTileSizesByLanguage[5] = { 0x500, 0x500, 0x580, 0x500, 0x500 };
@@ -170,19 +171,19 @@ void Level_Up_0(LevelUpWork* work) {
         work->bossBattle = 1;
 
         switch (gBtlWork->battleId) {
-        case 151:
+        case BATTLE_URSULA:
             SetBgSize(0, 0);
             SetupBg(0, 0, 26, 0);
             LoadBgMap(0, gDefaultBgMap, 0x800);
             DisableBg(0);
             break;
-        case 152:
+        case BATTLE_PARASITE_CAGE:
             SetBgSize(1, 0);
             SetupBg(1, 1, 24, 0);
             LoadBgMap(1, gDefaultBgMap, 0x800);
             DisableBg(1);
             break;
-        case 148:
+        case BATTLE_GUARD_ARMOR:
             SetBgSize(1, 0);
             SetupBg(1, 2, 26, 0);
             LoadBgMap(1, gDefaultBgMap, 0x800);
@@ -248,7 +249,7 @@ void Level_Up_0(LevelUpWork* work) {
 void LoadLevelUpRikuBgTiles() {
     u8* base;
 
-    if (gBtlWork->battleId == 151) {
+    if (gBtlWork->battleId == BATTLE_URSULA) {
         base = GetBgCharBase(0);
         RequestDma3Copy(gLevelUpRikuIconTiles, base + CARD_E7A4_DST, 288);
         RequestDma3Copy(&gLevelUpRikuIconTiles[0x400], base + CARD_E7A4_DST + 0x120, 288);
@@ -326,7 +327,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
                 RedrawBgMapAt(1, 0, 0);
             } else {
-                if (gBtlWork->battleId == 151) {
+                if (gBtlWork->battleId == BATTLE_URSULA) {
                     LoadBgTiles(0, gLevelUpBgTiles, bgSize);
 
 #ifdef VERSION_EU
@@ -520,7 +521,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
         ApproachValue(&bgScrollX, 0x10000, work->slideSteps);
         ApproachValue(&statsOffsetX, 0, work->slideSteps);
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             ScrollBgMapTo(0, bgScrollX >> 8, 0);
         } else {
             ScrollBgMapTo(1, bgScrollX >> 8, 0);
@@ -575,7 +576,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 if (work->optionSteps[2] == 0) {
                     u8 i;
 
-                    if (gBtlWork->battleId == 151) {
+                    if (gBtlWork->battleId == BATTLE_URSULA) {
                         LoadBgMap(0, gLevelUpBonusAMap, mapSize);
                     } else {
                         LoadBgMap(1, gLevelUpBonusAMap, mapSize);
@@ -722,7 +723,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     work->y3 = sLevelUpCursorY[work->cursor];
                     SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
-                    if (gBtlWork->battleId == 151) {
+                    if (gBtlWork->battleId == BATTLE_URSULA) {
                         LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
                     } else {
                         LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
@@ -764,7 +765,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
 
         work->cursor = i;
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
             LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
@@ -791,7 +792,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
 
         work->cursor = i;
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
             LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);
@@ -803,7 +804,7 @@ u8 UpdateLevelUpSelect(LevelUpWork* work, void* task) {
     while (GetKeysRepeat() & A_BUTTON) {
         work->state = LEVEL_UP_STATE_RESULT;
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             LoadBgMap(0, gLevelUpChosenMap, mapSize);
         } else {
             LoadBgMap(1, gLevelUpChosenMap, mapSize);
@@ -977,7 +978,7 @@ u8 UpdateLevelUpResult(LevelUpWork* work, void* task) {
 
     if (work->timer == 180) {
         if (GetKeysPressed() & A_BUTTON) {
-            if (gBtlWork->battleId == 151) {
+            if (gBtlWork->battleId == BATTLE_URSULA) {
                 SetBgMapBlocks(0, gLevelUpBgMapBlocks, 2, 1);
             } else {
                 SetBgMapBlocks(1, gLevelUpBgMapBlocks, 2, 1);
@@ -1035,7 +1036,7 @@ u8 UpdateLevelUpClose(LevelUpWork* work, void* task) {
     ApproachValue(&work->x7, 0x1BE00, work->slideSteps);
     ApproachValue(&work->y6, 0x4800, work->slideSteps);
 
-    if (gBtlWork->battleId == 151) {
+    if (gBtlWork->battleId == BATTLE_URSULA) {
         ScrollBgMapTo(0, bgScrollX >> 8, 0);
     } else {
         ScrollBgMapTo(1, bgScrollX >> 8, 0);
@@ -1566,7 +1567,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
     if (work->optionSteps[2] == 0) {
         u8 i;
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             LoadBgMap(0, gLevelUpBonusAMap, mapSize);
         } else {
             LoadBgMap(1, gLevelUpBonusAMap, mapSize);
@@ -1713,7 +1714,7 @@ u8 UpdateLevelUpNextSlideIn(LevelUpWork* work, void* task) {
         work->y3 = sLevelUpCursorY[work->cursor];
         SetTaskUpdate(task, (TaskUpdateFunc)UpdateLevelUpSelect);
 
-        if (gBtlWork->battleId == 151) {
+        if (gBtlWork->battleId == BATTLE_URSULA) {
             LoadBgMap(0, gLevelUpOptionBgMaps[work->cursor], 0x800);
         } else {
             LoadBgMap(1, gLevelUpOptionBgMaps[work->cursor], 0x800);

@@ -246,7 +246,7 @@ const EventSequenceDef gEvent066 = {
     0,
     0,
     0,
-    165,
+    BATTLE_MARLUXIA,
     65535,
     0,
     { 0, 0 },

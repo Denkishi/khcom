@@ -77,7 +77,7 @@ const EventSequenceDef gEvent160 = {
     0,
     0,
     0,
-    176,
+    BATTLE_VEXEN_3,
     65535,
     0,
     { 0, 0 },

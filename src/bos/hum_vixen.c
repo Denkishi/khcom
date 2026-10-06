@@ -28,6 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 
 static const u32 sHumVixenStockMovesA[3] = {
@@ -285,13 +286,13 @@ u8 task_hum_vixen_1(VixenWork* work) {
     }
 
     switch (gBtlWork->battleId) {
-    case 164:
+    case BATTLE_VEXEN_1:
         if (HumChooseCardAction(&w->base, 30, 40, 40, 24)) {
             w->base.stockMoves = sHumVixenStockMovesA;
         }
 
         break;
-    case 175:
+    case BATTLE_VEXEN_2:
         if (HumChooseCardAction(&w->base, 5, 40, 40, 24)) {
             switch (GetRandom() % 3) {
             case 0:
@@ -307,7 +308,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
         }
 
         break;
-    case 176:
+    case BATTLE_VEXEN_3:
     default:
         if (HumChooseCardAction(&w->base, 30, 40, 40, 24)) {
             switch (GetRandom() % 3) {

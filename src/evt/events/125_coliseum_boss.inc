@@ -46,7 +46,7 @@ const EventSequenceDef gEvent125 = {
     0,
     0,
     0,
-    160,
+    BATTLE_HADES,
     65535,
     0,
     { 0, 0 },

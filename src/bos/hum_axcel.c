@@ -29,6 +29,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 
 static const u32 sHumAxcelStockMoves[2][3] = {
@@ -217,7 +218,7 @@ u8 task_hum_axcel_1(AxcelWork* work) {
         break;
     }
 
-    if (gBtlWork->battleId == 162) {
+    if (gBtlWork->battleId == BATTLE_AXEL_1) {
         if (HumChooseCardAction(&work->base, 20, 40, 40, 24)) {
             work->base.stockMoves = sHumAxcelStockMoves[0];
         }

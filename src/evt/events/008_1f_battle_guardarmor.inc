@@ -54,7 +54,7 @@ const EventSequenceDef gEvent008 = {
     0,
     0,
     0,
-    148,
+    BATTLE_GUARD_ARMOR,
     65535,
     0,
     { 0, 0 },

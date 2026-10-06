@@ -75,7 +75,7 @@ const EventSequenceDef gEvent085 = {
     0,
     0,
     0,
-    121,
+    BATTLE_SHADOW_100,
     65535,
     0,
     { 0, 0 },

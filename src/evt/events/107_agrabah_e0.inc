@@ -126,7 +126,7 @@ const EventSequenceDef gEvent107 = {
     0,
     0,
     0,
-    123,
+    BATTLE_EVENT_AGRABAH_1,
     65535,
     0,
     { 0, 0 },

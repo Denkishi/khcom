@@ -115,7 +115,7 @@ const EventSequenceDef gEvent064 = {
     0,
     0,
     0,
-    173,
+    BATTLE_AXEL_2,
     65535,
     0,
     { 0, 0 },

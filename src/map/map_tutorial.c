@@ -28,10 +28,11 @@
 #include "taskpool.h"
 #include "types.h"
 #include <stddef.h>
+#include "battle_ids.h"
 
 void MapTutorialStartBattle() {
     gFieldState->flags |= FIELD_FLAG_FREEZE_ENEMIES;
-    gMapRoomState->battleId = 10;
+    gMapRoomState->battleId = BATTLE_TRAVERSE_TOWN_0;
     gMapRoomState->flags &= ~ROOM_FLAG_TUTORIAL_ACTIVE;
     gMapRoomState->flags |= ROOM_FLAG_START_BATTLE;
 }

@@ -131,7 +131,7 @@ const EventSequenceDef gEvent155 = {
     0,
     0,
     0,
-    166,
+    BATTLE_ANSEM_1,
     65535,
     0,
     { 0, 0 },

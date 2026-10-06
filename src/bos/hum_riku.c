@@ -28,6 +28,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 
 static const u32 sHumRikuStockMoves[2][3] = {
@@ -224,7 +225,7 @@ void task_hum_riku_0(RikuWork* work) {
     work->sub.flags |= (HUM_SUB_FLAG_IN_FRONT | HUM_SUB_FLAG_HIDDEN);
     work->afterimageTimer = 0;
 
-    if (gBtlWork->battleId != 0xA1) {
+    if (gBtlWork->battleId != BATTLE_RIKU_1) {
         work->base.stockMoves = sHumRikuStockMoves[0];
     }
 
@@ -284,24 +285,24 @@ u8 task_hum_riku_1(RikuWork* work) {
     }
 
     switch (gBtlWork->battleId) {
-    case 161:
+    case BATTLE_RIKU_1:
         HumChooseCardAction(&work->base, 20, 40, 40, 20);
         break;
-    case 168:
-    case 171:
+    case BATTLE_RIKU_2:
+    case BATTLE_RIKU_5:
         if (HumChooseCardAction(&work->base, 15, 40, 40, 20)) {
             work->base.stockMoves = sHumRikuStockMoves[0];
         }
 
         break;
-    case 169:
+    case BATTLE_RIKU_3:
         if (HumChooseCardAction(&work->base, 10, 40, 40, 20)) {
             work->base.stockMoves = sHumRikuStockMoves[0];
         }
 
         break;
-    case 170:
-    case 172:
+    case BATTLE_RIKU_4:
+    case BATTLE_RIKU_6:
         if (HumChooseCardAction(&work->base, 3, 40, 40, 20)) {
             if (GetRandom() % 2) {
                 work->base.stockMoves = sHumRikuStockMoves[0];

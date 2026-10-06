@@ -12,6 +12,7 @@
 #include "msg_types.h"
 #include <stddef.h>
 #include "types.h"
+#include "battle_ids.h"
 #include "event_ids.h"
 #include "world_types.h"
 

@@ -195,7 +195,7 @@ const EventSequenceDef gEvent118 = {
     0,
     0,
     0,
-    158,
+    BATTLE_HOOK,
     65535,
     0,
     { 0, 0 },

@@ -44,7 +44,7 @@ const EventSequenceDef gEvent092 = {
     0,
     0,
     0,
-    155,
+    BATTLE_OOGIE_BOOGIE,
     65535,
     0,
     { 0, 0 },

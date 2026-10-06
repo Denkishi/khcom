@@ -66,6 +66,7 @@
 #include "card_deckmenu2.h"
 #include "map_room_tables.h"
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 #include "event_ids.h"
 
 extern u8 gSoraWorldBattleBase[];
@@ -6689,37 +6690,37 @@ static const char sModeNameMenuLoad[] = "Mode_MenuLoad";
 static const char sModeNameMenuMsg[] = "Mode_MenuMsg";
 
 u8 gSoraWorldBattleBase[14] = {
-    40,
-    40,
-    50,
-    30,
-    20,
-    80,
-    60,
-    70,
-    100,
-    0,
-    10,
-    90,
-    110,
-    40,
+    BATTLE_AGRABAH_0,
+    BATTLE_AGRABAH_0,
+    BATTLE_ATLANTICA_0,
+    BATTLE_OLYMPUS_COLISEUM_0,
+    BATTLE_WONDERLAND_0,
+    BATTLE_MONSTRO_0,
+    BATTLE_HALLOWEEN_TOWN_0,
+    BATTLE_NEVER_LAND_0,
+    BATTLE_HOLLOW_BASTION_0,
+    BATTLE_DESTINY_ISLANDS_0,
+    BATTLE_TRAVERSE_TOWN_0,
+    BATTLE_TWILIGHT_TOWN_0,
+    BATTLE_CASTLE_OBLIVION_0,
+    BATTLE_AGRABAH_0,
 };
 
 u8 gRikuWorldBattleBase[14] = {
-    40,
-    40,
-    50,
-    30,
-    20,
-    80,
-    60,
-    70,
-    134,
-    0,
-    10,
-    90,
-    110,
-    40,
+    BATTLE_AGRABAH_0,
+    BATTLE_AGRABAH_0,
+    BATTLE_ATLANTICA_0,
+    BATTLE_OLYMPUS_COLISEUM_0,
+    BATTLE_WONDERLAND_0,
+    BATTLE_MONSTRO_0,
+    BATTLE_HALLOWEEN_TOWN_0,
+    BATTLE_NEVER_LAND_0,
+    BATTLE_RIKU_HOLLOW_BASTION_0,
+    BATTLE_DESTINY_ISLANDS_0,
+    BATTLE_TRAVERSE_TOWN_0,
+    BATTLE_TWILIGHT_TOWN_0,
+    BATTLE_CASTLE_OBLIVION_0,
+    BATTLE_AGRABAH_0,
 };
 
 u8 (*gMapGmkSpotFuncs[14])(FldPos*) = {

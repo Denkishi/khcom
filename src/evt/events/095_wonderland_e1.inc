@@ -170,7 +170,7 @@ const EventSequenceDef gEvent095 = {
     0,
     0,
     0,
-    120,
+    BATTLE_CARD_SOLDIERS,
     65535,
     0,
     { 0, 0 },

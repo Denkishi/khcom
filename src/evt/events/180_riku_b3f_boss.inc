@@ -45,7 +45,7 @@ const EventSequenceDef gEvent180 = {
     0,
     0,
     0,
-    154,
+    BATTLE_DARKSIDE,
     65535,
     0,
     { 0, 0 },

@@ -14,6 +14,7 @@
 #include "types.h"
 #include "event_backgrounds.h"
 #include <stddef.h>
+#include "battle_ids.h"
 
 static u8 sBtlMapShakeActive;
 static u16 sBtlMapShakeStep;
@@ -28,8 +29,8 @@ void task_btl_map_0(BtlMapWork* work) {
 
     if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
         switch (gBtlWork->battleId) {
-        case 0xB2:
-        case 0xB3:
+        case BATTLE_TUTORIAL_0:
+        case BATTLE_TUTORIAL_1:
             LoadBgTiles(gBtlWork->mapBg, gBtlBgTraverseTownTiles, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gBtlBgTraverseTownPalette, 0xC0);
 #ifdef VERSION_EU
@@ -39,7 +40,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 5;
             break;
-        case 0xB1:
+        case BATTLE_ANSEM_2:
 #ifdef VERSION_EU
             LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgAnsem2Tiles);
 #else
@@ -53,7 +54,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 5;
             break;
-        case 0xA0:
+        case BATTLE_HADES:
 #ifdef VERSION_EU
             LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgHadesTiles);
 #else
@@ -67,7 +68,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 0x9E:
+        case BATTLE_HOOK:
 #ifdef VERSION_EU
             LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgHookTiles);
 #else
@@ -81,7 +82,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 9;
             break;
-        case 0x9F:
+        case BATTLE_CLOUD:
             LoadBgTiles(gBtlWork->mapBg, gBtlBgOlympusColiseumTiles, 0x4000);
             LoadBgPalette(gBtlWork->mapBg, gBtlBgOlympusColiseumPalette, 0xE0);
 #ifdef VERSION_EU
@@ -91,8 +92,8 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 0xAC:
-        case 0xAF:
+        case BATTLE_RIKU_6:
+        case BATTLE_VEXEN_2:
 #ifdef VERSION_EU
             LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgMansionTiles);
 #else
@@ -106,7 +107,7 @@ void task_btl_map_0(BtlMapWork* work) {
 #endif
             gBtlWork->fadeAmount = 10;
             break;
-        case 0xA5:
+        case BATTLE_MARLUXIA:
 #ifdef VERSION_EU
             LoadBgTilesLz77(gBtlWork->mapBg, gBtlBgMarluxiaTiles);
 #else
@@ -135,7 +136,7 @@ void task_btl_map_0(BtlMapWork* work) {
             gBtlWork->fadeAmount = 20;
             break;
         }
-    } else if (gBtlWork->battleId == 0x78) {
+    } else if (gBtlWork->battleId == BATTLE_CARD_SOLDIERS) {
         LoadBgTiles(gBtlWork->mapBg, gBtlBgGardenTiles, 0x4000);
         LoadBgPalette(gBtlWork->mapBg, gBtlBgGardenPalette, 0x140);
 #ifdef VERSION_EU

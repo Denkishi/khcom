@@ -271,7 +271,7 @@ const EventSequenceDef gEvent059 = {
     0,
     0,
     0,
-    174,
+    BATTLE_LARXENE_2,
     65535,
     0,
     { 0, 0 },

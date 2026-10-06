@@ -31,6 +31,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "msg_api.h"
+#include "battle_ids.h"
 #include "event_ids.h"
 
 static TaskPool sEventTaskPool;
@@ -245,15 +246,15 @@ void EventUpdate() {
     }
 
     if (seqDef->startsBattle) {
-        if (seqDef->battleId == 122) {
+        if (seqDef->battleId == BATTLE_EVENT_HALLOWEEN_TOWN) {
             gGameState.battleStage = BATTLE_STAGE_HALLOWEEN_TOWN;
-        } else if (seqDef->battleId == 120) {
+        } else if (seqDef->battleId == BATTLE_CARD_SOLDIERS) {
             gGameState.battleStage = BATTLE_STAGE_WONDERLAND;
-        } else if (seqDef->battleId == 121) {
+        } else if (seqDef->battleId == BATTLE_SHADOW_100) {
             gGameState.battleStage = BATTLE_STAGE_MONSTRO;
-        } else if (seqDef->battleId == 123) {
+        } else if (seqDef->battleId == BATTLE_EVENT_AGRABAH_1) {
             gGameState.battleStage = BATTLE_STAGE_AGRABAH;
-        } else if (seqDef->battleId == 124) {
+        } else if (seqDef->battleId == BATTLE_EVENT_AGRABAH_2) {
             gGameState.battleStage = BATTLE_STAGE_AGRABAH;
         }
 

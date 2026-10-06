@@ -42,6 +42,7 @@
 #include "key_state.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 static const AnimDef sBtlRikuAnimDefs[35] = {
     { gRikuBt00Frames, gRikuBt00Anims, gRikuBt00Tiles, 0 },
@@ -664,23 +665,23 @@ void task_btl_riku_0(BtlRikuWork* work, BtlTaskArg* arg) {
 
     if (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE)) {
         switch (gBtlWork->battleId) {
-        case 149:
-        case 151:
-        case 153:
-        case 154:
-        case 156:
-        case 157:
+        case BATTLE_JAFAR:
+        case BATTLE_URSULA:
+        case BATTLE_DRAGON_MALEFICENT:
+        case BATTLE_DARKSIDE:
+        case BATTLE_MARLUXIA_2:
+        case BATTLE_LEON:
             work->groundSongs = sBtlRikuGroundSongs[0];
             break;
-        case 148:
-        case 150:
-        case 155:
+        case BATTLE_GUARD_ARMOR:
+        case BATTLE_TRICKMASTER:
+        case BATTLE_OOGIE_BOOGIE:
             work->groundSongs = sBtlRikuGroundSongs[1];
             break;
-        case 152:
+        case BATTLE_PARASITE_CAGE:
             work->groundSongs = sBtlRikuGroundSongs[2];
             break;
-        case 158:
+        case BATTLE_HOOK:
             work->groundSongs = sBtlRikuGroundSongs[3];
             break;
         default:

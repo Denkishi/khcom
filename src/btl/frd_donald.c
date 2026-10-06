@@ -27,6 +27,7 @@
 #include "types.h"
 #include <stddef.h>
 #include "sprite_palettes.h"
+#include "battle_ids.h"
 
 static const AnimDef sFrdDonaldAnimDefs[6] = {
     { gDonaBtLl00Frames, gDonaBtLl00Anims, gDonaBtLl00Tiles, 0 },
@@ -89,7 +90,7 @@ void UpdateDonaldFlame(BtlObj* body, u8 attacking, s16 dx, s16 dz) {
     BgFxSetScale(scaleX, scaleY);
 
     if (attacking) {
-        if (gBtlWork->battleId == 0x98) {
+        if (gBtlWork->battleId == BATTLE_PARASITE_CAGE) {
             halfX = 0x20;
             halfY = 0x20;
             halfZ = 0x30;

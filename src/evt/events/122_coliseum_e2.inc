@@ -151,7 +151,7 @@ const EventSequenceDef gEvent122 = {
     0,
     0,
     0,
-    159,
+    BATTLE_CLOUD,
     65535,
     0,
     { 0, 0 },

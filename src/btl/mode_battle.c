@@ -24,6 +24,7 @@
 #include "task_descriptors.h"
 #include "taskpool.h"
 #include "types.h"
+#include "battle_ids.h"
 
 void mode_battle_0(u32 mode) {
     BtlWork** dest;
@@ -36,12 +37,12 @@ void mode_battle_0(u32 mode) {
     gGameState.flags &= ~GAME_FLAG_BATTLE_NOT_WON;
 
     switch (mode) {
-    case 0x94 ... 0x9C:
+    case BATTLE_GUARD_ARMOR ... BATTLE_MARLUXIA_2:
         gBtlWork->flags |= BTL_FLAG_BOSS_BATTLE;
         break;
-    case 0xB2 ... 0xB8:
+    case BATTLE_TUTORIAL_0 ... BATTLE_TUTORIAL_6:
         gBtlWork->flags |= BTL_FLAG_TUTORIAL;
-    case 0x9D ... 0xB1:
+    case BATTLE_LEON ... BATTLE_ANSEM_2:
         gBtlWork->flags |= BTL_FLAG_HUM_BATTLE;
         dest = &gRikuBtlWork;
         *dest = EwramAlloc(sizeof(BtlWork));
@@ -53,19 +54,19 @@ void mode_battle_0(u32 mode) {
         SetBgMode1();
 
         switch (mode) {
-        case 0x9C:
+        case BATTLE_MARLUXIA_2:
             m4aSongNumStart(SONG_BGM_LASTBOSS2);
             break;
-        case 0x95:
-        case 0x97:
-        case 0x99:
-        case 0x9B:
+        case BATTLE_JAFAR:
+        case BATTLE_URSULA:
+        case BATTLE_DRAGON_MALEFICENT:
+        case BATTLE_OOGIE_BOOGIE:
             m4aSongNumStart(SONG_BGM_BOSSWORLD);
             break;
-        case 0x94:
-        case 0x96:
-        case 0x98:
-        case 0x9A:
+        case BATTLE_GUARD_ARMOR:
+        case BATTLE_TRICKMASTER:
+        case BATTLE_PARASITE_CAGE:
+        case BATTLE_DARKSIDE:
         default:
             m4aSongNumStart(SONG_BGM_BOSS1_WORLD);
             break;
@@ -74,8 +75,8 @@ void mode_battle_0(u32 mode) {
         gBtlWork->bg = 2;
 
         switch (mode) {
-        case 0x98:
-        case 0x9C:
+        case BATTLE_PARASITE_CAGE:
+        case BATTLE_MARLUXIA_2:
             SetupBg(0, 0, 22, 0);
             SetupBg(1, 0, 24, 0);
             SetupBg(2, 2, 28, 10);
@@ -85,13 +86,13 @@ void mode_battle_0(u32 mode) {
             SetBgOverflow(2, 0);
             SetBgSize(1, 0x4000);
             break;
-        case 0x94:
-        case 0x95:
-        case 0x96:
-        case 0x97:
-        case 0x99:
-        case 0x9A:
-        case 0x9B:
+        case BATTLE_GUARD_ARMOR:
+        case BATTLE_JAFAR:
+        case BATTLE_TRICKMASTER:
+        case BATTLE_URSULA:
+        case BATTLE_DRAGON_MALEFICENT:
+        case BATTLE_DARKSIDE:
+        case BATTLE_OOGIE_BOOGIE:
         default:
             SetupBg(0, 0, 24, 0);
             SetupBg(1, 0, 26, 0);
@@ -118,22 +119,22 @@ void mode_battle_0(u32 mode) {
         gBtlWork->mapBg = 3;
 
         switch (mode) {
-        case 0xA1:
-        case 0xA8 ... 0xAC:
+        case BATTLE_RIKU_1:
+        case BATTLE_RIKU_2 ... BATTLE_RIKU_6:
             m4aSongNumStart(SONG_BGM_NISERIKU);
             break;
-        case 0x9D:
-        case 0x9F:
+        case BATTLE_LEON:
+        case BATTLE_CLOUD:
             m4aSongNumStart(SONG_BGM_EVENT2);
             break;
-        case 0xA5:
+        case BATTLE_MARLUXIA:
             m4aSongNumStart(SONG_BGM_LASTBOSS1);
             break;
-        case 0x9E:
-        case 0xA0:
+        case BATTLE_HOOK:
+        case BATTLE_HADES:
             m4aSongNumStart(SONG_BGM_BOSSWORLD);
             break;
-        case 0xB1:
+        case BATTLE_ANSEM_2:
             m4aSongNumStart(SONG_BGM_RIKU_ANSEM);
             break;
         default:
@@ -164,7 +165,7 @@ void mode_battle_0(u32 mode) {
             m4aSongNumStart(SONG_BGM_MARMAID_BATTLE);
             break;
         case BATTLE_STAGE_MONSTRO:
-            if (mode == 0x79) {
+            if (mode == BATTLE_SHADOW_100) {
                 m4aSongNumStart(SONG_BGM_EVENT2);
             } else {
                 m4aSongNumStart(SONG_BGM_PINOCCHIO_BTL);
@@ -222,17 +223,17 @@ void mode_battle_0(u32 mode) {
         gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
 
         switch (mode) {
-        case 0x9A:
+        case BATTLE_DARKSIDE:
             SetBattleBounds(0, 0x100, 0x148, 0x1A8);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosDsd, NULL);
             gBtlWork->fadeAmount = 10;
             break;
-        case 0x94:
+        case BATTLE_GUARD_ARMOR:
             SetBattleBounds(-32, 0x120, 0x120, 0x180);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosGa, NULL);
             gBtlWork->fadeAmount = 5;
             break;
-        case 0x99:
+        case BATTLE_DRAGON_MALEFICENT:
 #ifdef VERSION_EU
             SetBattleBounds(0, 0xE0, 0x130, 0x180);
 #else
@@ -241,28 +242,28 @@ void mode_battle_0(u32 mode) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosMd, NULL);
             gBtlWork->fadeAmount = 5;
             break;
-        case 0x96:
+        case BATTLE_TRICKMASTER:
             SetBattleBounds(0x80, 0x180, 0x140, 0x180);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosTm, NULL);
             gBtlWork->fadeAmount = 12;
             break;
-        case 0x97:
+        case BATTLE_URSULA:
             SetBattleBounds(0, 0x200, 0, 0x200);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosUrsula, NULL);
             gBtlWork->fadeAmount = 5;
             break;
-        case 0x98:
+        case BATTLE_PARASITE_CAGE:
             SetBattleBounds(0x80, 0x1A8, 0x126, 0x180);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosPc, NULL);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescPcAcddmg, gBtlWork->actor);
             gBtlWork->fadeAmount = 12;
             break;
-        case 0x9C:
+        case BATTLE_MARLUXIA_2:
             SetBattleBounds(0x80, 0x170, 0x1E0, 0x200);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosLst, NULL);
             gBtlWork->fadeAmount = 10;
             break;
-        case 0x9B:
+        case BATTLE_OOGIE_BOOGIE:
             SetBattleBounds(0x80, 0x170, 0x228, 0x278);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBosBoogie, NULL);
             gBtlWork->boundsCallback = &ClampBosBoogieBounds;
@@ -278,7 +279,7 @@ void mode_battle_0(u32 mode) {
     } else if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
         SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
 
-        if (mode == 0xB2) {
+        if (mode == BATTLE_TUTORIAL_0) {
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumRobe, NULL);
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescTutorial, NULL);
         } else {
@@ -292,48 +293,48 @@ void mode_battle_0(u32 mode) {
         gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
 
         switch (mode) {
-        case 0x9E:
+        case BATTLE_HOOK:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHook, NULL);
             SetBattleBounds(0x68, 0x198, 0x160, 0x1A2);
             break;
-        case 0xA6:
-        case 0xB1:
+        case BATTLE_ANSEM_1:
+        case BATTLE_ANSEM_2:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAnsem, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0x9F:
+        case BATTLE_CLOUD:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumCloud, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA0:
+        case BATTLE_HADES:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumHades, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA5:
+        case BATTLE_MARLUXIA:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumMahluxia, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA3:
-        case 0xAE:
+        case BATTLE_LARXENE_1:
+        case BATTLE_LARXENE_2:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLaxene, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA2:
-        case 0xAD:
+        case BATTLE_AXEL_1:
+        case BATTLE_AXEL_2:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumAxcel, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA4:
-        case 0xAF:
-        case 0xB0:
+        case BATTLE_VEXEN_1:
+        case BATTLE_VEXEN_2:
+        case BATTLE_VEXEN_3:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumVixen, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0xA7:
+        case BATTLE_LEXAEUS:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLexceus, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
-        case 0x9D:
+        case BATTLE_LEON:
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescHumLeon, NULL);
             SetBattleBounds(0x50, 0x1B0, 0x160, 0x1A2);
             break;
@@ -355,7 +356,7 @@ void mode_battle_0(u32 mode) {
 
         TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlMap, NULL);
 
-        if (mode == 0x79) {
+        if (mode == BATTLE_SHADOW_100) {
             gBtlWork->flags |= BTL_FLAG_NO_ENEMY_DROPS;
             gGameState.flags |= GAME_FLAG_MONSGAGE_BATTLE;
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescMonsgage, NULL);

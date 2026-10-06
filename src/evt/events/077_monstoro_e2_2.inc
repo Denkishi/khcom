@@ -51,7 +51,7 @@ const EventSequenceDef gEvent077 = {
     0,
     0,
     0,
-    152,
+    BATTLE_PARASITE_CAGE,
     65535,
     0,
     { 0, 0 },

@@ -86,7 +86,7 @@ const EventSequenceDef gEvent163 = {
     0,
     0,
     0,
-    171,
+    BATTLE_RIKU_5,
     65535,
     0,
     { 0, 0 },

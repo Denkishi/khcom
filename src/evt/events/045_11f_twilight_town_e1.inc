@@ -147,7 +147,7 @@ const EventSequenceDef gEvent045 = {
     0,
     0,
     0,
-    175,
+    BATTLE_VEXEN_2,
     65535,
     0,
     { 0, 0 },

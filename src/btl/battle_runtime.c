@@ -45,6 +45,7 @@
 #include <stddef.h>
 #include "hum_common.h"
 #include "card_deckmenu2.h"
+#include "battle_ids.h"
 #include "enemy_ids.h"
 #include "event_ids.h"
 #include "songs.h"
@@ -779,14 +780,14 @@ void UpdateBattleState() {
             gBtlWork->phaseStep = BTL_END_STEP_CLOSE_CARDS;
 
             switch (gBtlWork->battleId) {
-            case 120:
-            case 124:
+            case BATTLE_CARD_SOLDIERS:
+            case BATTLE_EVENT_AGRABAH_2:
                 pos.x = 0x10000;
                 pos.y = (gBtlWork->yMin + gBtlWork->yMax) * 128;
                 pos.z = -0x4600;
                 CreateBossPrizeCardTask(gBtlWork->taskPools, &pos);
                 break;
-            case 121:
+            case BATTLE_SHADOW_100:
                 if (gBtlWork->flags & 0x100000) {
                     pos.x = 0x10000;
                     pos.y = (gBtlWork->yMin + gBtlWork->yMax) * 128;
@@ -841,17 +842,17 @@ void UpdateBattleState() {
 
             if (!(gBtlWork->flags & BTL_FLAG_BOSS_BATTLE) && !(gBtlWork->flags & BTL_FLAG_HUM_BATTLE)) {
                 switch (gBtlWork->battleId) {
-                case 120:
-                case 122:
-                case 123:
-                case 124:
-                case 178:
-                case 179:
-                case 180:
-                case 181:
-                case 182:
-                case 183:
-                case 184:
+                case BATTLE_CARD_SOLDIERS:
+                case BATTLE_EVENT_HALLOWEEN_TOWN:
+                case BATTLE_EVENT_AGRABAH_1:
+                case BATTLE_EVENT_AGRABAH_2:
+                case BATTLE_TUTORIAL_0:
+                case BATTLE_TUTORIAL_1:
+                case BATTLE_TUTORIAL_2:
+                case BATTLE_TUTORIAL_3:
+                case BATTLE_TUTORIAL_4:
+                case BATTLE_TUTORIAL_5:
+                case BATTLE_TUTORIAL_6:
                     break;
                 default:
                     if (gDebugFlags & DEBUG_FLAG_CHKBTL) {
@@ -867,7 +868,7 @@ void UpdateBattleState() {
             TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleSora, NULL);
 
             if (gBtlWork->flags & BTL_FLAG_TUTORIAL) {
-                if (gBtlWork->battleId == 179) {
+                if (gBtlWork->battleId == BATTLE_TUTORIAL_1) {
                     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescCardBattleRiku, NULL);
                 }
             } else if (gBtlWork->flags & BTL_FLAG_HUM_BATTLE) {
@@ -1006,14 +1007,14 @@ void UpdateBattleState() {
                 state->flags |= GAME_FLAG_BATTLE_NOT_WON;
 
                 switch (gBtlWork->battleId) {
-                case 166:
+                case BATTLE_ANSEM_1:
                     state->progression.friendFlags = 0;
                     break;
-                case 174:
+                case BATTLE_LARXENE_2:
                     state->progression.friendFlags &= ~(FRIEND_FLAG_GOOFY | FRIEND_FLAG_DONALD_DUCK);
                     break;
 #ifdef VERSION_EU
-                case 158:
+                case BATTLE_HOOK:
                     state->progression.friendFlags &= ~FRIEND_FLAG_PETER_PAN;
                     break;
 #endif
@@ -1515,82 +1516,82 @@ void InitEnemyBtlObj(BtlObj* obj, const EmyKind* kind, s32 x, s32 y, s32 z) {
         case EMY_ID_52:
         case EMY_ID_53:
             switch (gBtlWork->battleId) {
-            case 161:
+            case BATTLE_RIKU_1:
                 obj->maxHp = 1120;
                 obj->attack = 5;
                 obj->exp = 2775;
                 break;
-            case 168:
+            case BATTLE_RIKU_2:
                 obj->maxHp = 1120;
                 obj->attack = 5;
                 obj->exp = 3225;
                 break;
-            case 169:
+            case BATTLE_RIKU_3:
                 obj->maxHp = 1120;
                 obj->attack = 8;
                 obj->exp = 5700;
                 break;
-            case 170:
+            case BATTLE_RIKU_4:
                 obj->maxHp = 1680;
                 obj->attack = 10;
                 obj->exp = 6825;
                 break;
-            case 171:
+            case BATTLE_RIKU_5:
                 obj->maxHp = 1120;
                 obj->attack = 5;
                 obj->exp = 1875;
                 break;
-            case 172:
+            case BATTLE_RIKU_6:
                 obj->maxHp = 1680;
                 obj->attack = 10;
                 obj->exp = 5700;
                 break;
-            case 162:
+            case BATTLE_AXEL_1:
                 obj->maxHp = 320;
                 obj->attack = 2;
                 obj->exp = 75;
                 break;
-            case 173:
+            case BATTLE_AXEL_2:
                 obj->maxHp = 1680;
                 obj->attack = 15;
                 obj->exp = 6825;
                 break;
-            case 163:
+            case BATTLE_LARXENE_1:
                 obj->maxHp = 1120;
                 obj->attack = 5;
                 obj->exp = 2325;
                 break;
-            case 174:
+            case BATTLE_LARXENE_2:
                 obj->maxHp = 1680;
                 obj->attack = 15;
                 obj->exp = 6263;
                 break;
-            case 164:
+            case BATTLE_VEXEN_1:
                 obj->maxHp = 1120;
                 obj->attack = 15;
                 obj->exp = 4125;
                 break;
-            case 175:
+            case BATTLE_VEXEN_2:
                 obj->maxHp = 1120;
                 obj->attack = 20;
                 obj->exp = 5700;
                 break;
-            case 176:
+            case BATTLE_VEXEN_3:
                 obj->maxHp = 1120;
                 obj->attack = 3;
                 obj->exp = 975;
                 break;
-            case 166:
+            case BATTLE_ANSEM_1:
                 obj->maxHp = 400;
                 obj->attack = 3;
                 obj->exp = 133;
                 break;
-            case 177:
+            case BATTLE_ANSEM_2:
                 obj->maxHp = 2240;
                 obj->attack = 25;
                 obj->exp = 0;
                 break;
-            case 167:
+            case BATTLE_LEXAEUS:
                 obj->maxHp = 1680;
                 obj->attack = 15;
                 obj->exp = 6517;
@@ -1861,7 +1862,7 @@ void DropEnemyPrizes(BtlObj* obj) {
             enemyCard = 0;
         }
 
-        if (gBtlWork->battleId != 120 && gBtlWork->battleId != 124) {
+        if (gBtlWork->battleId != BATTLE_CARD_SOLDIERS && gBtlWork->battleId != BATTLE_EVENT_AGRABAH_2) {
             if (enemyCard) {
                 CreateHeartlessCardTask(&gBtlWork->taskPools[0], obj->x >> 8, obj->y >> 8, obj->z >> 8, obj->kind);
             } else {
@@ -2276,25 +2277,25 @@ void ExitBattle() {
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gBtlWork->battleId) {
-        case 166:
+        case BATTLE_ANSEM_1:
             RequestEventMode(EVENT_156_RIKU_B12F_GOAL_2);
             return;
-        case 176:
+        case BATTLE_VEXEN_3:
             RequestEventMode(EVENT_161_RIKU_B10F_GOAL_2);
             return;
-        case 171:
+        case BATTLE_RIKU_5:
             RequestEventMode(EVENT_164_RIKU_B8F_GOAL_2);
             return;
-        case 167:
+        case BATTLE_LEXAEUS:
             RequestEventMode(EVENT_172_RIKU_B4F_GOAL_2);
             return;
-        case 154:
+        case BATTLE_DARKSIDE:
             RequestEventMode(EVENT_181_RIKU_B3F_E2_2);
             return;
-        case 172:
+        case BATTLE_RIKU_6:
             RequestEventMode(EVENT_188_RIKU_B2F_E1_2);
             return;
-        case 177:
+        case BATTLE_ANSEM_2:
             gGameState.flags |= GAME_FLAG_RIKU_CLEAR;
             SaveWriteHeader(-1);
             RequestEventMode(EVENT_194_RIKU_B1F_LAST2);
@@ -2314,10 +2315,10 @@ void ExitBattle() {
         }
     } else {
         switch (gBtlWork->battleId) {
-        case 120:
+        case BATTLE_CARD_SOLDIERS:
             RequestEventMode(EVENT_096_WONDERLAND_E1_2);
             return;
-        case 121:
+        case BATTLE_SHADOW_100:
             if (gBtlWork->flags & BTL_FLAG_ESCAPED) {
                 RequestEventMode(EVENT_084_MONSTORO_E3_FAILURE_2);
             } else if (gBtlWork->flags & 0x100000) {
@@ -2327,93 +2328,93 @@ void ExitBattle() {
             }
 
             return;
-        case 122:
+        case BATTLE_EVENT_HALLOWEEN_TOWN:
             RequestEventMode(EVENT_088_HALLOWEEN_TOWN_E0_2);
             return;
-        case 123:
+        case BATTLE_EVENT_AGRABAH_1:
             RequestEventMode(EVENT_108_AGRABAH_E0_2);
             return;
-        case 124:
+        case BATTLE_EVENT_AGRABAH_2:
             RequestEventMode(EVENT_111_AGRABAH_E2_2);
             return;
-        case 148:
+        case BATTLE_GUARD_ARMOR:
             RequestEventMode(EVENT_009_1F_TRAVERSE_TOWN_E4);
             return;
-        case 149:
+        case BATTLE_JAFAR:
             RequestEventMode(EVENT_114_AGRABAH_END);
             return;
-        case 150:
+        case BATTLE_TRICKMASTER:
             RequestEventMode(EVENT_100_WONDERLAND_END);
             return;
-        case 151:
+        case BATTLE_URSULA:
             RequestEventMode(EVENT_106_ATLANTICA_END);
             return;
-        case 152:
+        case BATTLE_PARASITE_CAGE:
             RequestEventMode(EVENT_078_MONSTORO_E2_3);
             return;
-        case 153:
+        case BATTLE_DRAGON_MALEFICENT:
             RequestEventMode(EVENT_133_HOLLOWBASTION_END);
             return;
-        case 154:
+        case BATTLE_DARKSIDE:
             RequestEventMode(EVENT_056_12F_DESTINY_ISLAND_E2_2);
             return;
-        case 155:
+        case BATTLE_OOGIE_BOOGIE:
             RequestEventMode(EVENT_093_HALLOWEEN_TOWN_END);
             return;
-        case 156:
+        case BATTLE_MARLUXIA_2:
             gGameState.flags |= GAME_FLAG_SORA_CLEAR;
             SaveWriteHeader(-1);
             RequestEventMode(EVENT_071_13F_CASTLE_OBLIVION_LAST6);
             return;
-        case 157:
+        case BATTLE_LEON:
             RequestEventMode(EVENT_006_1F_TRAVERSE_TOWN_E2);
             return;
-        case 158:
+        case BATTLE_HOOK:
             RequestEventMode(EVENT_119_NEVERLAND_END);
             return;
-        case 159:
+        case BATTLE_CLOUD:
             RequestEventMode(EVENT_123_COLISEUM_E2_2);
             return;
-        case 160:
+        case BATTLE_HADES:
             RequestEventMode(EVENT_126_COLISEUM_END);
             return;
-        case 161:
+        case BATTLE_RIKU_1:
             RequestEventMode(EVENT_031_7F_GOAL_2);
             return;
-        case 162:
+        case BATTLE_AXEL_1:
             RequestEventMode(EVENT_011_1F_GOAL_2);
             return;
-        case 163:
+        case BATTLE_LARXENE_1:
             RequestEventMode(EVENT_027_6F_GOAL_3);
             return;
-        case 164:
+        case BATTLE_VEXEN_1:
             RequestEventMode(EVENT_041_10F_GOAL_2);
             return;
-        case 165:
+        case BATTLE_MARLUXIA:
             RequestEventMode(EVENT_067_13F_CASTLE_OBLIVION_LAST2);
             return;
-        case 168:
+        case BATTLE_RIKU_2:
             RequestEventMode(EVENT_034_8F_GOAL_2);
             return;
-        case 169:
+        case BATTLE_RIKU_3:
             RequestEventMode(EVENT_049_11F_GOAL_2);
             return;
-        case 173:
+        case BATTLE_AXEL_2:
             RequestEventMode(EVENT_065_13F_CASTLE_OBLIVION_E1_3);
             return;
-        case 174:
+        case BATTLE_LARXENE_2:
             RequestEventMode(EVENT_060_12F_GOAL_3);
             return;
-        case 175:
+        case BATTLE_VEXEN_2:
             RequestEventMode(EVENT_046_11F_TWILIGHT_TOWN_E1_2);
             return;
-        case 178:
+        case BATTLE_TUTORIAL_0:
             RequestEventMode(EVENT_003_1F_TRAVERSE_TOWN_E0_2);
             return;
-        case 179:
+        case BATTLE_TUTORIAL_1:
             RequestEventMode(EVENT_005_1F_TRAVERSE_TOWN_E1_2);
             return;
-        case 170:
+        case BATTLE_RIKU_4:
             AdvanceFloorStory();
             RequestMapMode();
             return;

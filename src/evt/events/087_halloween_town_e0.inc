@@ -260,7 +260,7 @@ const EventSequenceDef gEvent087 = {
     0,
     0,
     0,
-    122,
+    BATTLE_EVENT_HALLOWEEN_TOWN,
     65535,
     0,
     { 0, 0 },

@@ -7570,14 +7570,14 @@ u8 FindEventCameraTarget(EventCameraWork* work) {
     return 0xFF;
 }
 
-u8 FindEventCharaTrack(EventCameraWork* work, u8 v) {
+u8 FindEventCharaTrack(EventCameraWork* work, u8 chara) {
     const EventSequenceDef* t = gEventSequenceDefs[work->eventId];
     u8 n = t->charaCount;
     const EventCharaTrack* q = t->charaTracks;
     u8 i;
 
     for (i = 0; i < n; i++) {
-        if (v == q[i].chara) {
+        if (chara == q[i].chara) {
             return i;
         }
     }

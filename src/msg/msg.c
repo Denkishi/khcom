@@ -74,7 +74,7 @@ void InitSpriteTextLines() {
     }
 }
 
-void AddSpriteTextLine(s32 x, s32 y, u8* s) {
+void AddSpriteTextLine(s32 x, s32 y, u8* str) {
     u8 i;
     u8 len;
     u8 idx;
@@ -92,7 +92,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
     sSpriteTextLines[sTextEntryCount].x = x;
     sSpriteTextLines[sTextEntryCount].y = y;
     sSpriteTextLines[sTextEntryCount].font = 0;
-    len = GetStringLength(s);
+    len = GetStringLength(str);
 
     if (len > 15) {
         len = 16;
@@ -104,7 +104,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
         s16 c;
 
         sSpriteTextLines[sTextEntryCount].glyphTiles[i] = AllocSpriteFrameTiles(32);
-        c = s[i];
+        c = str[i];
 
         if ((u8)(c - 48) <= 9) {
             idx = c - 48;
@@ -146,7 +146,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
             idx = 43;
         }
 
-        if (s[i] == 37) {
+        if (str[i] == 37) {
             idx = 44;
         }
 
@@ -158,7 +158,7 @@ void AddSpriteTextLine(s32 x, s32 y, u8* s) {
 }
 
 #ifndef VERSION_EU
-void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
+void AddSpriteTextLineFont1(s32 x, s32 y, u8* str) {
     u8 i;
     u8 len;
     u8 k;
@@ -176,7 +176,7 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
     sSpriteTextLines[sTextEntryCount].x = x;
     sSpriteTextLines[sTextEntryCount].y = y;
     sSpriteTextLines[sTextEntryCount].font = 1;
-    len = GetStringLength(s);
+    len = GetStringLength(str);
 
     if (len > 15) {
         len = 16;
@@ -185,7 +185,7 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
     sSpriteTextLines[sTextEntryCount].length = len;
 
     for (i = 0, k = 0; i < len; i++) {
-        s32 c = s[i];
+        s32 c = str[i];
 
         if ((u8)(c - 48) <= 9) {
             idx = c - 48;
@@ -205,19 +205,19 @@ void AddSpriteTextLineFont1(s32 x, s32 y, u8* s) {
 }
 #endif
 
-void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
+void AddSpriteTextNumber(s32 x, s32 y, s32 value) {
     u8 buf[20];
     u8 i;
 
-    if (n >= 0) {
-        buf[0] = n / 10000000;
-        buf[1] = n / 1000000 - buf[0] * 10;
-        buf[2] = n / 100000 - buf[0] * 100 - buf[1] * 10;
-        buf[3] = n / 10000 - buf[0] * 1000 - buf[1] * 100 - buf[2] * 10;
-        buf[4] = n / 1000 - buf[0] * 10000 - buf[1] * 1000 - buf[2] * 100 - buf[3] * 10;
-        buf[5] = n / 100 - buf[0] * 100000 - buf[1] * 10000 - buf[2] * 1000 - buf[3] * 100 - buf[4] * 10;
-        buf[6] = n / 10 - buf[0] * 1000000 - buf[1] * 100000 - buf[2] * 10000 - buf[3] * 1000 - buf[4] * 100 - buf[5] * 10;
-        buf[7] = n - (buf[0] * 10000000 + buf[1] * 1000000 + buf[2] * 100000 + buf[3] * 10000 + buf[4] * 1000 + buf[5] * 100 + buf[6] * 10);
+    if (value >= 0) {
+        buf[0] = value / 10000000;
+        buf[1] = value / 1000000 - buf[0] * 10;
+        buf[2] = value / 100000 - buf[0] * 100 - buf[1] * 10;
+        buf[3] = value / 10000 - buf[0] * 1000 - buf[1] * 100 - buf[2] * 10;
+        buf[4] = value / 1000 - buf[0] * 10000 - buf[1] * 1000 - buf[2] * 100 - buf[3] * 10;
+        buf[5] = value / 100 - buf[0] * 100000 - buf[1] * 10000 - buf[2] * 1000 - buf[3] * 100 - buf[4] * 10;
+        buf[6] = value / 10 - buf[0] * 1000000 - buf[1] * 100000 - buf[2] * 10000 - buf[3] * 1000 - buf[4] * 100 - buf[5] * 10;
+        buf[7] = value - (buf[0] * 10000000 + buf[1] * 1000000 + buf[2] * 100000 + buf[3] * 10000 + buf[4] * 1000 + buf[5] * 100 + buf[6] * 10);
         buf[0] += 0x30;
         buf[1] += 0x30;
         buf[2] += 0x30;
@@ -236,15 +236,15 @@ void AddSpriteTextNumber(s32 x, s32 y, s32 n) {
 
         AddSpriteTextLine(x, y, &buf[i]);
     } else {
-        n = -n;
-        buf[1] = n / 10000000;
-        buf[2] = n / 1000000 - buf[1] * 10;
-        buf[3] = n / 100000 - buf[1] * 100 - buf[2] * 10;
-        buf[4] = n / 10000 - buf[1] * 1000 - buf[2] * 100 - buf[3] * 10;
-        buf[5] = n / 1000 - buf[1] * 10000 - buf[2] * 1000 - buf[3] * 100 - buf[4] * 10;
-        buf[6] = n / 100 - buf[1] * 100000 - buf[2] * 10000 - buf[3] * 1000 - buf[4] * 100 - buf[5] * 10;
-        buf[7] = n / 10 - buf[1] * 1000000 - buf[2] * 100000 - buf[3] * 10000 - buf[4] * 1000 - buf[5] * 100 - buf[6] * 10;
-        buf[8] = n - (buf[1] * 10000000 + buf[2] * 1000000 + buf[3] * 100000 + buf[4] * 10000 + buf[5] * 1000 + buf[6] * 100 + buf[7] * 10);
+        value = -value;
+        buf[1] = value / 10000000;
+        buf[2] = value / 1000000 - buf[1] * 10;
+        buf[3] = value / 100000 - buf[1] * 100 - buf[2] * 10;
+        buf[4] = value / 10000 - buf[1] * 1000 - buf[2] * 100 - buf[3] * 10;
+        buf[5] = value / 1000 - buf[1] * 10000 - buf[2] * 1000 - buf[3] * 100 - buf[4] * 10;
+        buf[6] = value / 100 - buf[1] * 100000 - buf[2] * 10000 - buf[3] * 1000 - buf[4] * 100 - buf[5] * 10;
+        buf[7] = value / 10 - buf[1] * 1000000 - buf[2] * 100000 - buf[3] * 10000 - buf[4] * 1000 - buf[5] * 100 - buf[6] * 10;
+        buf[8] = value - (buf[1] * 10000000 + buf[2] * 1000000 + buf[3] * 100000 + buf[4] * 10000 + buf[5] * 1000 + buf[6] * 100 + buf[7] * 10);
         buf[0] = 0x2D;
         buf[1] += 0x30;
         buf[2] += 0x30;
@@ -364,7 +364,7 @@ void* InitSpriteTextSlots(s32 mode) {
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 useAlternatePalette) {
+void SetSpriteTextSlot(s32 x, s32 y, TextChar* text, u8 slot, u8 useAlternatePalette) {
     u16 g;
     u16 lo;
     u8 kind;
@@ -389,11 +389,11 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 useAlternatePalett
     sSpriteTextLines[slot].unk_53 = i;
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
 
-    while (*s != 0) {
+    while (*text != 0) {
         u16 v;
-        v = *(u16*)s;
+        v = *(u16*)text;
         v = (v >> 8) | (v << 8);
-        s += 2;
+        text += 2;
 
         switch (v & 0xFF00) {
         case 0x8100:
@@ -796,11 +796,11 @@ void SetSpriteTextSlot(s32 x, s32 y, TextChar* s, u8 slot, u8 useAlternatePalett
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlotXDigits(s32 x, s32 y, u8 v, u8 slot, u8 useAlternatePalette) {
+void SetSpriteTextSlotXDigits(s32 x, s32 y, u8 value, u8 slot, u8 useAlternatePalette) {
     u8 buf[4];
     buf[0] = 0x78;
-    buf[1] = v / 10;
-    buf[2] = v - buf[1] * 10;
+    buf[1] = value / 10;
+    buf[2] = value - buf[1] * 10;
     buf[3] = 0;
     buf[1] += 0x30;
     buf[2] += 0x30;
@@ -809,7 +809,7 @@ void SetSpriteTextSlotXDigits(s32 x, s32 y, u8 v, u8 slot, u8 useAlternatePalett
 #endif
 
 #ifndef VERSION_EU
-void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 useAlternatePalette) {
+void SetSpriteTextSlotAscii(s32 x, s32 y, u8* str, u8 slot, u8 useAlternatePalette) {
     u8 i;
     u8 len;
     u8 j;
@@ -830,7 +830,7 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 useAlternatePalette
     sSpriteTextLines[slot].font = 2;
     sSpriteTextLines[slot].visible = 1;
     sSpriteTextLines[slot].useAlternatePalette = useAlternatePalette;
-    len = GetStringLength(s);
+    len = GetStringLength(str);
 
     if (len > 15) {
         len = 16;
@@ -841,16 +841,16 @@ void SetSpriteTextSlotAscii(s32 x, s32 y, u8* s, u8 slot, u8 useAlternatePalette
     count = len;
 
     for (; i < len; i++) {
-        if ((u8)(s[i] - 48) <= 9) {
-            idx = (u8)(s[i] + 209);
+        if ((u8)(str[i] - 48) <= 9) {
+            idx = (u8)(str[i] + 209);
         }
 
-        if ((u8)(s[i] - 65) <= 25) {
-            idx = (u8)(s[i] + 202);
+        if ((u8)(str[i] - 65) <= 25) {
+            idx = (u8)(str[i] + 202);
         }
 
-        if ((u8)(s[i] - 97) <= 25) {
-            idx = (u8)(s[i] + 196);
+        if ((u8)(str[i] - 97) <= 25) {
+            idx = (u8)(str[i] + 196);
         }
 
         if (sSpriteTextLines[slot].glyphTiles[j] != NULL) {
@@ -990,7 +990,7 @@ void SetBgTextLineNumber(u8 x, u8 y, u8 glyphHeight, u8 value, u8 slot, u8 palet
 #endif
 
 #ifndef VERSION_EU
-void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* s, u8 slot, u8 paletteIndex) {
+void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* text, u8 slot, u8 paletteIndex) {
     u32 off = 0x7DAB;
     u16 glyph;
     u8 i;
@@ -1016,10 +1016,10 @@ void SetBgTextLine(u8 x, u8 y, u8 glyphHeight, u8* s, u8 slot, u8 paletteIndex) 
     sBgTextLines[slot].dirty = 1;
     sBgTextLines[slot].paletteIndex = paletteIndex;
 
-    while (*s != 0) {
-        w = *(u16*)s;
+    while (*text != 0) {
+        w = *(u16*)text;
         w = (w >> 8) | (w << 8);
-        s += 2;
+        text += 2;
 
         if (glyphHeight > 8) {
             switch (w & 0xFF00) {
@@ -1513,7 +1513,7 @@ s32 GetMsgTextWidth(const TextChar* text) {
 #else
 #define MSG_LATIN_CODE(wide, byte) (wide)
 #endif
-u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
+u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -1528,36 +1528,36 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
 
     sTextEntryCount = 0;
 
-    while (*s != 0) {
+    while (*text != 0) {
         s32 v = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*s == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
             f = 1;
-            s++;
+            text++;
         }
 
-        if (*s == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
             f = 0;
-            s++;
+            text++;
         }
 
         sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
 
-        if (*s == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *s;
+            v = *text;
 #else
-            if ((u16)(*s - 32) <= 223) {
-                v = *s;
+            if ((u16)(*text - 32) <= 223) {
+                v = *text;
             } else {
-                switch (*s) {
+                switch (*text) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -1627,10 +1627,10 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
             }
         }
 
-        s++;
+        text++;
 
         if (cy > 0x1800) {
-            *nextText = s;
+            *nextText = text;
             return sTextEntryCount;
         }
     }
@@ -1639,7 +1639,7 @@ u8 LayoutMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
     return sTextEntryCount;
 }
 
-u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s) {
+u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* text) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -1654,36 +1654,36 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s) {
 
     sTextEntryCount = 0;
 
-    while (*s != 0) {
+    while (*text != 0) {
         s32 v = 0;
 
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*s == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
             f = 1;
-            s++;
+            text++;
         }
 
-        if (*s == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
             f = 0;
-            s++;
+            text++;
         }
 
         sMsgGlyphSprites[sTextEntryCount].useAlternatePalette = f;
 
-        if (*s == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *s;
+            v = *text;
 #else
-            if ((u16)(*s - 32) <= 223) {
-                v = *s;
+            if ((u16)(*text - 32) <= 223) {
+                v = *text;
             } else {
-                switch (*s) {
+                switch (*text) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -1753,14 +1753,14 @@ u8 LayoutMsgGlyphs(s32 x, s32 y, const MsgLatinChar* s) {
             }
         }
 
-        s++;
+        text++;
     }
 
     return sTextEntryCount;
 }
 
 #ifndef VERSION_EU
-u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
+u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* text) {
     u16 w;
     u8 t;
     s32 cx;
@@ -1778,7 +1778,7 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
 
     sTextEntryCount = 0;
 
-    while (*s != 0) {
+    while (*text != 0) {
         u16 v;
         w = 0;
         sMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -1786,14 +1786,14 @@ u8 LayoutMsgGlyphsSjis(s32 x, s32 y, const u8* s) {
 
         sMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*(u16*)s == 0x6E6E) {
+        if (*(u16*)text == 0x6E6E) {
             cx = 0;
             cy += 0xC00;
-            s += 2;
+            text += 2;
         } else {
-            v = *(u16*)s;
+            v = *(u16*)text;
             v = (v / 256) | (v << 8);
-            s += 2;
+            text += 2;
 
             if ((v & 0xFF00) == 0x8100) {
                 switch (v & 0xFF) {
@@ -2035,21 +2035,21 @@ void HideMsgGlyphs() {
 }
 
 #ifndef VERSION_EU
-u16 LoadTwoDigitTextTileArray(u8 v, void** out) {
+u16 LoadTwoDigitTextTileArray(u8 value, void** out) {
     u8 buf[8];
     u8 q;
-    q = v / 10;
+    q = value / 10;
 
     if (q != 0) {
-        buf[1] = v / 10;
-        buf[3] = v - buf[1] * 10;
+        buf[1] = value / 10;
+        buf[3] = value - buf[1] * 10;
         buf[0] = 0x82;
         buf[1] += 0x4F;
         buf[2] = 0x82;
         buf[3] += 0x4F;
         buf[4] = 0;
     } else {
-        buf[1] = v + 0x4F;
+        buf[1] = value + 0x4F;
         buf[0] = 0x82;
         buf[2] = 0;
     }
@@ -2079,23 +2079,23 @@ void FreeTextTileArray(void** tiles, u8 n) {
     }
 }
 
-u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
+u16 LoadTwoDigitTextSlots(u8 value, TextSlot* out) {
 #ifdef VERSION_JP
     u8 buf[8];
     s32 q;
 
-    q = v / 10;
+    q = value / 10;
 
     if ((u8)q != 0) {
-        buf[1] = v / 10;
-        buf[3] = v - buf[1] * 10;
+        buf[1] = value / 10;
+        buf[3] = value - buf[1] * 10;
         buf[0] = 0x82;
         buf[1] += 0x4F;
         buf[2] = 0x82;
         buf[3] += 0x4F;
         buf[4] = 0;
     } else {
-        buf[1] = v + 0x4F;
+        buf[1] = value + 0x4F;
         buf[0] = 0x82;
         buf[2] = 0;
     }
@@ -2105,15 +2105,15 @@ u16 LoadTwoDigitTextSlots(u8 v, TextSlot* out) {
     TextChar c;
     TextChar end;
 
-    if (v > 9) {
+    if (value > 9) {
         p = buf;
-        c = v / 10 + '0';
+        c = value / 10 + '0';
         end = 0;
         p[0] = c;
-        buf[1] = v - (u8)(v / 10) * 10 + '0';
+        buf[1] = value - (u8)(value / 10) * 10 + '0';
         buf[2] = end;
     } else {
-        buf[0] = v + '0';
+        buf[0] = value + '0';
         buf[1] = 0;
     }
 #endif
@@ -2202,16 +2202,16 @@ s16 GetTextSlotsMaxLineWidth(TextSlot* slots, u8 n) {
 #define MSG_CHAR(p) (*(p))
 #endif
 
-s32 GetTextLength(const void* s) {
+s32 GetTextLength(const void* text) {
 #ifdef VERSION_JP
-    const u16* p = s;
+    const u16* p = text;
     u16 n = 0;
 #elif defined(VERSION_EU)
     u16 n = 0;
-    const u8* p = s;
+    const u8* p = text;
 #else
     u16 n = 0;
-    const u16* p = s;
+    const u16* p = text;
 #endif
 
     while (MSG_CHAR(p) != 0) {
@@ -2924,7 +2924,7 @@ void FreeSmallFontResources(void* tiles, void* palette) {
     ReleaseObjPalette(palette);
 }
 
-u16 EncodeSmallFontString(const u8* s, u16* out) {
+u16 EncodeSmallFontString(const u8* str, u16* out) {
     u16 g = 0;
     u8 n;
     u8 i;
@@ -2933,54 +2933,54 @@ u16 EncodeSmallFontString(const u8* s, u16* out) {
         return 0;
     }
 
-    n = GetStringLength(s);
+    n = GetStringLength(str);
 
     for (i = 0; i < n; i++) {
-        if ((u8)(s[i] - '0') <= 9) {
-            g = s[i] - '0';
+        if ((u8)(str[i] - '0') <= 9) {
+            g = str[i] - '0';
         }
 
-        if ((u8)(s[i] - 'A') <= 25) {
-            g = s[i] - 0x37;
+        if ((u8)(str[i] - 'A') <= 25) {
+            g = str[i] - 0x37;
         }
 
-        if ((u8)(s[i] - 'a') <= 25) {
-            g = s[i] - 0x57;
+        if ((u8)(str[i] - 'a') <= 25) {
+            g = str[i] - 0x57;
         }
 
-        if (s[i] == '/') {
+        if (str[i] == '/') {
             g = 0x24;
         }
 
-        if (s[i] == '-') {
+        if (str[i] == '-') {
             g = 0x25;
         }
 
-        if (s[i] == '_') {
+        if (str[i] == '_') {
             g = 0x26;
         }
 
-        if (s[i] == '.') {
+        if (str[i] == '.') {
             g = 0x27;
         }
 
-        if (s[i] == '+') {
+        if (str[i] == '+') {
             g = 0x28;
         }
 
-        if (s[i] == '!') {
+        if (str[i] == '!') {
             g = 0x29;
         }
 
-        if (s[i] == '?') {
+        if (str[i] == '?') {
             g = 0x2A;
         }
 
-        if (s[i] == '#') {
+        if (str[i] == '#') {
             g = 0x2B;
         }
 
-        if (s[i] == '%') {
+        if (str[i] == '%') {
             g = 0x2C;
         }
 
@@ -2990,7 +2990,7 @@ u16 EncodeSmallFontString(const u8* s, u16* out) {
     return n;
 }
 
-u16 FormatSmallFontDecimal(s32 v, u16* out) {
+u16 FormatSmallFontDecimal(s32 value, u16* out) {
     s32 t[11];
     u8 s[12];
     s32 acc;
@@ -2999,11 +2999,11 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
 
     acc = 0;
 
-    if (v >= 0) {
+    if (value >= 0) {
         d = 1000000000;
 
         for (i = 0; i <= 9; i++) {
-            t[i] = v / d - acc;
+            t[i] = value / d - acc;
             acc = (acc + t[i]) * 10;
             d /= 10;
         }
@@ -3026,7 +3026,7 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
     d = -1000000000;
 
     for (i = 1; i <= 10; i++) {
-        t[i] = v / d - acc;
+        t[i] = value / d - acc;
         acc = (acc + t[i]) * 10;
         d /= 10;
     }
@@ -3049,21 +3049,21 @@ u16 FormatSmallFontDecimal(s32 v, u16* out) {
     return EncodeSmallFontString(&s[i - 1], out);
 }
 
-u16 FormatSmallFontHex(s32 v, u16* out) {
+u16 FormatSmallFontHex(s32 value, u16* out) {
     u8 buf[11];
     u8* p;
     s32 i;
 
     buf[0] = '0';
     buf[1] = 'x';
-    buf[2] = (v & 0xF0000000) >> 28;
-    buf[3] = (v & 0x0F000000) >> 24;
-    buf[4] = (v & 0x00F00000) >> 20;
-    buf[5] = (v & 0x000F0000) >> 16;
-    buf[6] = (v & 0x0000F000) >> 12;
-    buf[7] = (v & 0x00000F00) >> 8;
-    buf[8] = (v & 0x000000F0) >> 4;
-    buf[9] = v & 0xF;
+    buf[2] = (value & 0xF0000000) >> 28;
+    buf[3] = (value & 0x0F000000) >> 24;
+    buf[4] = (value & 0x00F00000) >> 20;
+    buf[5] = (value & 0x000F0000) >> 16;
+    buf[6] = (value & 0x0000F000) >> 12;
+    buf[7] = (value & 0x00000F00) >> 8;
+    buf[8] = (value & 0x000000F0) >> 4;
+    buf[9] = value & 0xF;
     buf[10] = 0;
     p = &buf[2];
 
@@ -3080,7 +3080,7 @@ u16 FormatSmallFontHex(s32 v, u16* out) {
     return EncodeSmallFontString(buf, out);
 }
 
-u16 FormatSmallFontBinary(u32 v, u16* out, u8 mode) {
+u16 FormatSmallFontBinary(u32 value, u16* out, u8 mode) {
     u8 a[2];
     u8 b[9];
     u8 c[17];
@@ -3088,83 +3088,83 @@ u16 FormatSmallFontBinary(u32 v, u16* out, u8 mode) {
 
     switch (mode) {
     case 0:
-        a[0] = v;
+        a[0] = value;
         a[0] += '0';
         a[1] = 0;
         return EncodeSmallFontString(a, out);
     case 1:
-        b[0] = (v >> 7) + '0';
-        b[1] = ((v >> 6) & 1) + '0';
-        b[2] = ((v >> 5) & 1) + '0';
-        b[3] = ((v >> 4) & 1) + '0';
-        b[4] = ((v >> 3) & 1) + '0';
-        b[5] = ((v >> 2) & 1) + '0';
-        b[6] = ((v >> 1) & 1) + '0';
-        b[7] = (v & 1) + '0';
+        b[0] = (value >> 7) + '0';
+        b[1] = ((value >> 6) & 1) + '0';
+        b[2] = ((value >> 5) & 1) + '0';
+        b[3] = ((value >> 4) & 1) + '0';
+        b[4] = ((value >> 3) & 1) + '0';
+        b[5] = ((value >> 2) & 1) + '0';
+        b[6] = ((value >> 1) & 1) + '0';
+        b[7] = (value & 1) + '0';
         b[8] = 0;
         return EncodeSmallFontString(b, out);
     case 2:
-        c[0] = (v >> 15) + '0';
-        c[1] = ((v >> 14) & 1) + '0';
-        c[2] = ((v >> 13) & 1) + '0';
-        c[3] = ((v >> 12) & 1) + '0';
-        c[4] = ((v >> 11) & 1) + '0';
-        c[5] = ((v >> 10) & 1) + '0';
-        c[6] = ((v >> 9) & 1) + '0';
-        c[7] = ((v >> 8) & 1) + '0';
-        c[8] = ((v >> 7) & 1) + '0';
-        c[9] = ((v >> 6) & 1) + '0';
-        c[10] = ((v >> 5) & 1) + '0';
-        c[11] = ((v >> 4) & 1) + '0';
-        c[12] = ((v >> 3) & 1) + '0';
-        c[13] = ((v >> 2) & 1) + '0';
-        c[14] = ((v >> 1) & 1) + '0';
-        c[15] = (v & 1) + '0';
+        c[0] = (value >> 15) + '0';
+        c[1] = ((value >> 14) & 1) + '0';
+        c[2] = ((value >> 13) & 1) + '0';
+        c[3] = ((value >> 12) & 1) + '0';
+        c[4] = ((value >> 11) & 1) + '0';
+        c[5] = ((value >> 10) & 1) + '0';
+        c[6] = ((value >> 9) & 1) + '0';
+        c[7] = ((value >> 8) & 1) + '0';
+        c[8] = ((value >> 7) & 1) + '0';
+        c[9] = ((value >> 6) & 1) + '0';
+        c[10] = ((value >> 5) & 1) + '0';
+        c[11] = ((value >> 4) & 1) + '0';
+        c[12] = ((value >> 3) & 1) + '0';
+        c[13] = ((value >> 2) & 1) + '0';
+        c[14] = ((value >> 1) & 1) + '0';
+        c[15] = (value & 1) + '0';
         c[16] = 0;
         return EncodeSmallFontString(c, out);
     case 3:
-        d[0] = (v >> 31) + '0';
-        d[1] = ((v >> 30) & 1) + '0';
-        d[2] = ((v >> 29) & 1) + '0';
-        d[3] = ((v >> 28) & 1) + '0';
-        d[4] = ((v >> 27) & 1) + '0';
-        d[5] = ((v >> 26) & 1) + '0';
-        d[6] = ((v >> 25) & 1) + '0';
-        d[7] = ((v >> 24) & 1) + '0';
-        d[8] = ((v >> 23) & 1) + '0';
-        d[9] = ((v >> 22) & 1) + '0';
-        d[10] = ((v >> 21) & 1) + '0';
-        d[11] = ((v >> 20) & 1) + '0';
-        d[12] = ((v >> 19) & 1) + '0';
-        d[13] = ((v >> 18) & 1) + '0';
-        d[14] = ((v >> 17) & 1) + '0';
-        d[15] = ((v >> 16) & 1) + '0';
-        d[16] = ((v >> 15) & 1) + '0';
-        d[17] = ((v >> 14) & 1) + '0';
-        d[18] = ((v >> 13) & 1) + '0';
-        d[19] = ((v >> 12) & 1) + '0';
-        d[20] = ((v >> 11) & 1) + '0';
-        d[21] = ((v >> 10) & 1) + '0';
-        d[22] = ((v >> 9) & 1) + '0';
-        d[23] = ((v >> 8) & 1) + '0';
-        d[24] = ((v >> 7) & 1) + '0';
-        d[25] = ((v >> 6) & 1) + '0';
-        d[26] = ((v >> 5) & 1) + '0';
-        d[27] = ((v >> 4) & 1) + '0';
-        d[28] = ((v >> 3) & 1) + '0';
-        d[29] = ((v >> 2) & 1) + '0';
-        d[30] = ((v >> 1) & 1) + '0';
-        d[31] = (v & 1) + '0';
+        d[0] = (value >> 31) + '0';
+        d[1] = ((value >> 30) & 1) + '0';
+        d[2] = ((value >> 29) & 1) + '0';
+        d[3] = ((value >> 28) & 1) + '0';
+        d[4] = ((value >> 27) & 1) + '0';
+        d[5] = ((value >> 26) & 1) + '0';
+        d[6] = ((value >> 25) & 1) + '0';
+        d[7] = ((value >> 24) & 1) + '0';
+        d[8] = ((value >> 23) & 1) + '0';
+        d[9] = ((value >> 22) & 1) + '0';
+        d[10] = ((value >> 21) & 1) + '0';
+        d[11] = ((value >> 20) & 1) + '0';
+        d[12] = ((value >> 19) & 1) + '0';
+        d[13] = ((value >> 18) & 1) + '0';
+        d[14] = ((value >> 17) & 1) + '0';
+        d[15] = ((value >> 16) & 1) + '0';
+        d[16] = ((value >> 15) & 1) + '0';
+        d[17] = ((value >> 14) & 1) + '0';
+        d[18] = ((value >> 13) & 1) + '0';
+        d[19] = ((value >> 12) & 1) + '0';
+        d[20] = ((value >> 11) & 1) + '0';
+        d[21] = ((value >> 10) & 1) + '0';
+        d[22] = ((value >> 9) & 1) + '0';
+        d[23] = ((value >> 8) & 1) + '0';
+        d[24] = ((value >> 7) & 1) + '0';
+        d[25] = ((value >> 6) & 1) + '0';
+        d[26] = ((value >> 5) & 1) + '0';
+        d[27] = ((value >> 4) & 1) + '0';
+        d[28] = ((value >> 3) & 1) + '0';
+        d[29] = ((value >> 2) & 1) + '0';
+        d[30] = ((value >> 1) & 1) + '0';
+        d[31] = (value & 1) + '0';
         return EncodeSmallFontString(d, out);
     }
 }
 
-s32 DrawSmallFontString(s16 x, s16 y, u16* s, void* tiles, void* palette, u16 priority, u8 n) {
+s32 DrawSmallFontString(s16 x, s16 y, u16* str, void* tiles, void* palette, u16 priority, u8 n) {
     u8 i;
 
     for (i = 0; i < n; i++) {
-        DrawSprite(x + i * 8, y, gSmallFontFrames[*s], tiles, palette, NULL, 0, priority);
-        s++;
+        DrawSprite(x + i * 8, y, gSmallFontFrames[*str], tiles, palette, NULL, 0, priority);
+        str++;
     }
 }
 
@@ -6232,17 +6232,17 @@ void GetSjisGlyph(u16 code, u16* glyph, u8* bank) {
     }
 }
 
-void SplitFourDigits(s16 v, u8* out) {
+void SplitFourDigits(s16 value, u8* out) {
     s16 acc = 0;
     s16 div;
     s16 i;
 
-    if (v >= 0) {
+    if (value >= 0) {
         div = 1000;
 
         for (i = 0; i < 4; i++) {
             u8* q = &out[i];
-            *q = v / div - acc;
+            *q = value / div - acc;
             acc = (acc + *q) * 10;
             div /= 10;
         }
@@ -6288,7 +6288,7 @@ u16 InitCardMsgGlyphSprites(s32 mode, s32 flag) {
     return sCardMsgGlyphSprites[0].palette->index;
 }
 
-u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextText) {
+u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* text, MsgLatinChar** nextText) {
     s32 cx;
     s32 cy;
     s32 f;
@@ -6303,34 +6303,34 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextTex
 
     sTextEntryCount = 0;
 
-    while (*s != 0) {
+    while (*text != 0) {
         s32 v;
 
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
         sCardMsgGlyphSprites[sTextEntryCount].y = y + cy;
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
 
-        if (*s == MSG_LATIN_CODE(0x4079, 29)) {
+        if (*text == MSG_LATIN_CODE(0x4079, 29)) {
             f = 1;
-            s++;
+            text++;
         }
 
-        if (*s == MSG_LATIN_CODE(0x4000, 30)) {
+        if (*text == MSG_LATIN_CODE(0x4000, 30)) {
             f = 0;
-            s++;
+            text++;
         }
 
-        if (*s == MSG_LATIN_CODE(10, 31)) {
+        if (*text == MSG_LATIN_CODE(10, 31)) {
             cx = 0;
             cy += 0xC00;
         } else {
 #ifdef VERSION_EU
-            v = *s;
+            v = *text;
 #else
-            if ((u16)(*s - 32) <= 223) {
-                v = *s;
+            if ((u16)(*text - 32) <= 223) {
+                v = *text;
             } else {
-                switch (*s) {
+                switch (*text) {
                 case 0xE000:
                     v = 25;
                     break;
@@ -6405,10 +6405,10 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextTex
             }
         }
 
-        s++;
+        text++;
 
         if (cy > 0x1800) {
-            *nextText = s;
+            *nextText = text;
             return sTextEntryCount;
         }
     }
@@ -6418,7 +6418,7 @@ u8 LayoutCardMsgGlyphsPage(s32 x, s32 y, MsgLatinChar* s, MsgLatinChar** nextTex
 }
 
 #ifndef VERSION_EU
-u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText) {
+u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* text, u8** nextText) {
     u16 w;
     u8 t;
     s32 cx;
@@ -6436,7 +6436,7 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText) {
 
     sTextEntryCount = 0;
 
-    while (*s != 0) {
+    while (*text != 0) {
         u16 v;
         w = 0;
         sCardMsgGlyphSprites[sTextEntryCount].x = x + cx;
@@ -6444,14 +6444,14 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText) {
         sCardMsgGlyphSprites[sTextEntryCount].visible = 1;
         sCardMsgGlyphSprites[sTextEntryCount].useAlternatePalette = 0;
 
-        if (*(u16*)s == 0x6E6E) {
+        if (*(u16*)text == 0x6E6E) {
             cx = 0;
             cy += 0xC00;
-            s += 2;
+            text += 2;
         } else {
-            v = *(u16*)s;
+            v = *(u16*)text;
             v = (v / 256) | (v << 8);
-            s += 2;
+            text += 2;
 
             if ((v & 0xFF00) == 0x8100) {
                 switch (v & 0xFF) {
@@ -6625,13 +6625,13 @@ u8 LayoutCardMsgGlyphsPageSjis(s32 x, s32 y, u8* s, u8** nextText) {
         }
 
         if (cy > 0x1800) {
-            if (*s != 0) {
-                v = *(u16*)s;
+            if (*text != 0) {
+                v = *(u16*)text;
 
                 if ((u16)((v / 256) | (v << 8)) == 0x8142) {
                     *nextText = NULL;
                 } else {
-                    *nextText = s;
+                    *nextText = text;
                     return sTextEntryCount;
                 }
             } else {
@@ -6708,15 +6708,15 @@ void DrawMsgGlyphsWithPalette(u8 n, void* palette) {
     }
 }
 
-u16 FormatSmallFontHex16(s16 v, u16* out) {
+u16 FormatSmallFontHex16(s16 value, u16* out) {
     u8 buf[8];
     u8* p;
     s32 i;
 
-    buf[0] = (v & 0xF000) >> 12;
-    buf[1] = (v & 0x0F00) >> 8;
-    buf[2] = (v & 0x00F0) >> 4;
-    buf[3] = v & 0xF;
+    buf[0] = (value & 0xF000) >> 12;
+    buf[1] = (value & 0x0F00) >> 8;
+    buf[2] = (value & 0x00F0) >> 4;
+    buf[3] = value & 0xF;
     buf[4] = 0;
     p = buf;
 

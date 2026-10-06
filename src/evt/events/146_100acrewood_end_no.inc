@@ -1,6 +1,6 @@
 static const MessageScriptEntry sEvent146Script[2] = {
-    { 36, 2, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent145Text00), 0, 400 },
-    { 0, 4, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent145Text01), MSG_SCRIPT_FLAG_END, 430 },
+    { PORTRAIT_WINNIE_THE_POOH, 2, 3, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent145Text00), 0, 400 },
+    { PORTRAIT_SORA, 4, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent145Text01), MSG_SCRIPT_FLAG_END, 430 },
 };
 
 static const EvSoundCue sEvent146SoundCues[4] = {

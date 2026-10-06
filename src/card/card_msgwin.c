@@ -190,7 +190,7 @@ u8 UpdateCardMsgwinLoadFace(CardMsgWinWork* work, void* task) {
     work->textVisible = 1;
     messageDef = work->messageDef;
 
-    if (messageDef->portraitId != 62) {
+    if (messageDef->portraitId != PORTRAIT_NONE) {
         faceAnims = gMsgFaceAnims[messageDef->portraitId];
         work->tiles3 = AllocObjTiles(0xD80, NULL);
         work->palette = LoadObjPalette(faceAnims[work->messageDef->expressionId].palette, 32);
@@ -525,7 +525,7 @@ void CreateCardMessageTask(void* pool, u32 bg, u16 message) {
     args.messageId = message;
     args.mode = CARD_MESSAGE_MODE_BG_WINDOW;
 
-    if (gCardMessageDefs[message].portraitId == 62) {
+    if (gCardMessageDefs[message].portraitId == PORTRAIT_NONE) {
         if (gCardMessageDefs[message].flags & CARD_MSG_FLAG_CHOICE_WINDOW) {
             TaskCreate(pool, &gTaskDescSysmsgwinChoice, &args);
         } else {
@@ -571,7 +571,7 @@ void ShowPersistentCardMessage(void* pool, u32 bg, u16 message) {
         if (!(u8)ReplaceCardMsgwinMessage(&args)) {
             ReplaceSysmsgwinMessage(&args);
         }
-    } else if (gCardMessageDefs[message].portraitId == 62) {
+    } else if (gCardMessageDefs[message].portraitId == PORTRAIT_NONE) {
         TaskCreate(pool, &gTaskDescSysmsgwin, &args);
     } else {
         TaskCreate(pool, &gTaskDescCardMsgwin, &args);
@@ -602,272 +602,272 @@ u8 CloseMessageWindow() {
 
 CardMessageDef gCardMessageDefs[] = {
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText00),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText01),
         0,
     },
     {
-        1, 3, 4, 3,
+        PORTRAIT_DONALD, 3, 4, 3,
         LOCALIZED(gDonaldTalkText02),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText03),
         0,
     },
     {
-        1, 3, 3, 3,
+        PORTRAIT_DONALD, 3, 3, 3,
         LOCALIZED(gDonaldTalkText04),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText05),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText06),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText07),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText08),
         0,
     },
     {
-        1, 3, 3, 3,
+        PORTRAIT_DONALD, 3, 3, 3,
         LOCALIZED(gDonaldTalkText09),
         0,
     },
     {
-        1, 3, 3, 3,
+        PORTRAIT_DONALD, 3, 3, 3,
         LOCALIZED(gDonaldTalkText10),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText11),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText12),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText13),
         0,
     },
     {
-        1, 3, 3, 3,
+        PORTRAIT_DONALD, 3, 3, 3,
         LOCALIZED(gDonaldTalkText14),
         0,
     },
     {
-        1, 3, 4, 3,
+        PORTRAIT_DONALD, 3, 4, 3,
         LOCALIZED(gDonaldTalkText15),
         0,
     },
     {
-        1, 3, 2, 3,
+        PORTRAIT_DONALD, 3, 2, 3,
         LOCALIZED(gDonaldTalkText16),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText17),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText18),
         0,
     },
     {
-        1, 3, 0, 3,
+        PORTRAIT_DONALD, 3, 0, 3,
         LOCALIZED(gDonaldTalkText19),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText20),
         0,
     },
     {
-        1, 3, 2, 3,
+        PORTRAIT_DONALD, 3, 2, 3,
         LOCALIZED(gDonaldTalkText21),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText22),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldTalkText23),
         0,
     },
     {
-        1, 3, 1, 3,
+        PORTRAIT_DONALD, 3, 1, 3,
         LOCALIZED(gDonaldExitHallTalkText),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText00),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText01),
         0,
     },
     {
-        2, 3, 3, 3,
+        PORTRAIT_GOOFY, 3, 3, 3,
         LOCALIZED(gGoofyTalkText02),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText03),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText04),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText05),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText06),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText07),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText08),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText09),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText10),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText11),
         0,
     },
     {
-        2, 3, 4, 3,
+        PORTRAIT_GOOFY, 3, 4, 3,
         LOCALIZED(gGoofyTalkText12),
         0,
     },
     {
-        2, 3, 3, 3,
+        PORTRAIT_GOOFY, 3, 3, 3,
         LOCALIZED(gGoofyTalkText13),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText14),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText15),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText16),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText17),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText18),
         0,
     },
     {
-        2, 3, 4, 3,
+        PORTRAIT_GOOFY, 3, 4, 3,
         LOCALIZED(gGoofyTalkText19),
         0,
     },
     {
-        2, 3, 3, 3,
+        PORTRAIT_GOOFY, 3, 3, 3,
         LOCALIZED(gGoofyTalkText20),
         0,
     },
     {
-        2, 3, 2, 3,
+        PORTRAIT_GOOFY, 3, 2, 3,
         LOCALIZED(gGoofyTalkText21),
         0,
     },
     {
-        2, 3, 1, 3,
+        PORTRAIT_GOOFY, 3, 1, 3,
         LOCALIZED(gGoofyTalkText22),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyTalkText23),
         0,
     },
     {
-        2, 3, 0, 3,
+        PORTRAIT_GOOFY, 3, 0, 3,
         LOCALIZED(gGoofyExitHallTalkText),
         0,
     },
     {
-        60, 3, 4, 3,
+        PORTRAIT_NAMINE, 3, 4, 3,
         LOCALIZED(gNamineTalkText0),
         0,
     },
     {
-        60, 3, 1, 3,
+        PORTRAIT_NAMINE, 3, 1, 3,
         LOCALIZED(gNamineTalkText1),
         0,
     },
     {
-        27, 3, 0, 3,
+        PORTRAIT_RIKU_REPLICA, 3, 0, 3,
         LOCALIZED(gRikuReplicaTalkText),
         0,
     },
     {
-        36, 3, 1, 3,
+        PORTRAIT_WINNIE_THE_POOH, 3, 1, 3,
 #if defined(VERSION_EU)
         &gPoohTalkTextByLanguage,
 #elif defined(VERSION_JP)
@@ -878,72 +878,72 @@ CardMessageDef gCardMessageDefs[] = {
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
     {
-        47, 3, 1, 3,
+        PORTRAIT_PIGLET, 3, 1, 3,
         LOCALIZED(gPigletTalkText),
         0,
     },
     {
-        48, 3, 1, 3,
+        PORTRAIT_OWL, 3, 1, 3,
         LOCALIZED(gOwlTalkText),
         0,
     },
     {
-        50, 3, 0, 3,
+        PORTRAIT_EEYORE, 3, 0, 3,
         LOCALIZED(gEeyoreTalkText0),
         0,
     },
     {
-        50, 3, 0, 3,
+        PORTRAIT_EEYORE, 3, 0, 3,
         LOCALIZED(gEeyoreTalkText1),
         0,
     },
     {
-        51, 3, 0, 3,
+        PORTRAIT_ROO, 3, 0, 3,
         LOCALIZED(gRooTalkText),
         0,
     },
     {
-        49, 3, 0, 3,
+        PORTRAIT_RABBIT, 3, 0, 3,
         LOCALIZED(gRabbitTalkText0),
         0,
     },
     {
-        49, 3, 1, 3,
+        PORTRAIT_RABBIT, 3, 1, 3,
         LOCALIZED(gRabbitTalkText1),
         0,
     },
     {
-        61, 3, 4, 3,
+        PORTRAIT_MICKEY, 3, 4, 3,
         LOCALIZED(gMickeyTalkText0),
         0,
     },
     {
-        61, 3, 1, 3,
+        PORTRAIT_MICKEY, 3, 1, 3,
         LOCALIZED(gMickeyTalkText1),
         0,
     },
     {
-        61, 3, 0, 3,
+        PORTRAIT_MICKEY, 3, 0, 3,
         LOCALIZED(gMickeyTalkText2),
         0,
     },
     {
-        7, 3, 0, 3,
+        PORTRAIT_MOOGLE, 3, 0, 3,
         LOCALIZED(gMsTopShopOptionText),
         0,
     },
     {
-        7, 3, 0, 3,
+        PORTRAIT_MOOGLE, 3, 0, 3,
         LOCALIZED(gMsTopChargeOptionText),
         0,
     },
     {
-        7, 3, 0, 3,
+        PORTRAIT_MOOGLE, 3, 0, 3,
         LOCALIZED(gMsTopFreePackText),
         0,
     },
     {
-        7, 3, 0, 3,
+        PORTRAIT_MOOGLE, 3, 0, 3,
 #if defined(VERSION_EU)
         &gMsTopChargeOptionTextByLanguage,
 #elif defined(VERSION_JP)
@@ -954,7 +954,7 @@ CardMessageDef gCardMessageDefs[] = {
         0,
     },
     {
-        7, 3, 0, 3,
+        PORTRAIT_MOOGLE, 3, 0, 3,
 #if defined(VERSION_EU)
         &gMsTopChargeOptionTextByLanguage,
 #elif defined(VERSION_JP)
@@ -965,17 +965,17 @@ CardMessageDef gCardMessageDefs[] = {
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gPoohLeaveWorldText),
         CARD_MSG_FLAG_CHOICE_AT_END | CARD_MSG_FLAG_CHOICE_WINDOW,
     },
     {
-        3, 3, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 3, 0, 3,
         LOCALIZED(gWorldselectTutorialText0),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gWorldselectTutorialText1),
 #ifdef VERSION_JP
         0,
@@ -984,17 +984,17 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText00),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText01),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText02),
 #ifdef VERSION_JP
         0,
@@ -1003,12 +1003,12 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText03),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText04),
 #ifdef VERSION_JP
         0,
@@ -1017,17 +1017,17 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText05),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText06),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText07),
 #ifdef VERSION_JP
         0,
@@ -1036,12 +1036,12 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText08),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
 #if defined(VERSION_EU)
         &gRobeTutorialText09ByLanguage,
 #elif defined(VERSION_JP)
@@ -1056,32 +1056,32 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText10),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText11),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText12),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText13),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText14),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText15),
 #ifdef VERSION_JP
         0,
@@ -1090,17 +1090,17 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText16),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText17),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText18),
 #ifdef VERSION_JP
         0,
@@ -1109,17 +1109,17 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText19),
         0,
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText20),
         0,
     },
     {
-        62, 0, 0, 3,
+        PORTRAIT_NONE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText21),
 #ifdef VERSION_JP
         0,
@@ -1128,12 +1128,12 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        3, 0, 0, 3,
+        PORTRAIT_ROBED_FIGURE, 0, 0, 3,
         LOCALIZED(gRobeTutorialText22),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectTutorialText0),
 #ifdef VERSION_JP
         0,
@@ -1142,7 +1142,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectTutorialText1),
 #ifdef VERSION_JP
         0,
@@ -1151,7 +1151,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectTutorialText2),
 #ifdef VERSION_JP
         0,
@@ -1160,7 +1160,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectTutorialText3),
 #ifdef VERSION_JP
         0,
@@ -1169,7 +1169,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectValueTutorialText0),
 #ifdef VERSION_JP
         0,
@@ -1178,7 +1178,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectValueTutorialText1),
 #ifdef VERSION_JP
         0,
@@ -1187,7 +1187,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectValueTutorialText2),
 #ifdef VERSION_JP
         0,
@@ -1196,7 +1196,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectValueTutorialText3),
 #ifdef VERSION_JP
         0,
@@ -1205,7 +1205,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gSavePointTutorialText),
 #ifdef VERSION_JP
         0,
@@ -1214,7 +1214,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
 #if defined(VERSION_EU)
         &gSavePointTutorialTextByLanguage,
 #elif defined(VERSION_JP)
@@ -1229,7 +1229,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gQuickSaveTutorialText),
 #ifdef VERSION_JP
         0,
@@ -1238,97 +1238,97 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapTutorialText0),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapTutorialText1),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapTutorialText2),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectEventDoorTutorialText0),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectEventDoorTutorialText1),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectEventDoorTutorialText2),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectEventDoorTutorialText3),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapSelectEventDoorTutorialText4),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText00),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText01),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText02),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText03),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText04),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText05),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText06),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText07),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText08),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText09),
         0,
     },
     {
-        62, 1, 0, 3,
+        PORTRAIT_NONE, 1, 0, 3,
         LOCALIZED(gLeonTutorialText10),
 #ifdef VERSION_JP
         0,
@@ -1337,12 +1337,12 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        31, 1, 0, 3,
+        PORTRAIT_LEON, 1, 0, 3,
         LOCALIZED(gLeonTutorialText11),
         0,
     },
     {
-        62, 1, 0, 3,
+        PORTRAIT_NONE, 1, 0, 3,
         LOCALIZED(gLeonTutorialText12),
 #ifdef VERSION_JP
         0,
@@ -1351,17 +1351,17 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        31, 1, 0, 3,
+        PORTRAIT_LEON, 1, 0, 3,
         LOCALIZED(gLeonTutorialText13),
         0,
     },
     {
-        31, 0, 0, 3,
+        PORTRAIT_LEON, 0, 0, 3,
         LOCALIZED(gLeonTutorialText14),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMsTopIntroText0),
 #ifdef VERSION_JP
         0,
@@ -1370,7 +1370,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMsTopIntroText1),
 #ifdef VERSION_JP
         0,
@@ -1379,7 +1379,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMsTopIntroText2),
 #ifdef VERSION_JP
         0,
@@ -1388,7 +1388,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gWarpPointTutorialText),
 #ifdef VERSION_JP
         0,
@@ -1397,212 +1397,212 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedWarpinatorText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedTerrorText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedSynchroText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedBindText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedIdyllRompText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedTrinityLimitText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedConfuseText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedThunderRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedGiftedMiracleText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedGravityRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedFireRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedAquaSplashText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedBlizzardRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedStopRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedShockImpactText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedHomingBlizzaraText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedQuakeText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedBlazingDonaldText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedHomingFiraText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedTeleportText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedTornadoText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedCrossSlashPlusText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedReflectRaidText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedFiragaBreakText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedWarpText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gLearnedJudgmentText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedElixirText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedSpellbinderText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedGenieText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedCloudText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedOathkeeperText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedOblivionText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedBambiText),
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gEventSaveConfirmText),
         CARD_MSG_FLAG_CHOICE_AT_END,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gMapStairTutorialText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedKeyOfBeginningsText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedKeyOfGuidanceText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedKeyToTruthText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedKeyToRewardsText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedTinkerBellText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedWorldCardText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
 #if defined(VERSION_EU)
         &gObtainedWorldCardsTextByLanguage,
 #elif defined(VERSION_JP)
@@ -1613,17 +1613,17 @@ CardMessageDef gCardMessageDefs[] = {
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gObtainedSimbaText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gSaveDataLostText),
         0,
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
         LOCALIZED(gRikuDeckTutorialText),
 #ifdef VERSION_JP
         0,
@@ -1632,7 +1632,7 @@ CardMessageDef gCardMessageDefs[] = {
 #endif
     },
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
 #ifdef VERSION_EU
         &gQuickSaveCompleteTextByLanguage,
 #else
@@ -1642,7 +1642,7 @@ CardMessageDef gCardMessageDefs[] = {
     },
 #ifndef VERSION_EU
     {
-        62, 3, 0, 3,
+        PORTRAIT_NONE, 3, 0, 3,
 #ifndef VERSION_EU
         gQuickSaveCompleteText,
 #endif

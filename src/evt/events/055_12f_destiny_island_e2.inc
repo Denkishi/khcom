@@ -3,7 +3,7 @@
 #endif
 
 static const MessageScriptEntry sEvent055Script[1] = {
-    { 0, 3, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent055Text00), MSG_SCRIPT_FLAG_END, 115 },
+    { PORTRAIT_SORA, 3, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent055Text00), MSG_SCRIPT_FLAG_END, 115 },
 };
 
 #ifdef VERSION_JP

@@ -1,20 +1,20 @@
 #ifdef VERSION_US
 #include "event_135_text.inc"
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, gEventTextUs_0900868C, MSG_SCRIPT_FLAG_END, 300 },
+    { PORTRAIT_WINNIE_THE_POOH, 1, 1, 1, gEventTextUs_0900868C, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 3, gEvent135Text00, MSG_SCRIPT_FLAG_END, 300 },
+    { PORTRAIT_WINNIE_THE_POOH, 1, 1, 3, gEvent135Text00, MSG_SCRIPT_FLAG_END, 300 },
 };
 
 #include "event_135_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent135Script[1] = {
-    { 36, 1, 1, 1, &gPoohTalkTextByLanguage, MSG_SCRIPT_FLAG_END, 300 },
+    { PORTRAIT_WINNIE_THE_POOH, 1, 1, 1, &gPoohTalkTextByLanguage, MSG_SCRIPT_FLAG_END, 300 },
 };
 #endif
 

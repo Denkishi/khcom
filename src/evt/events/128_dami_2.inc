@@ -1,20 +1,20 @@
 #ifndef VERSION_EU
 #ifdef VERSION_US
 static const MessageScriptEntry sEvent128Script[4] = {
-    { 32, 0, 1, 1, gEvent128Text00, 0, 150 },
-    { 0, 0, 3, 1, gEvent128Text01, 0, 180 },
-    { 32, 0, 1, 1, gEvent128Text02, 0, 210 },
-    { 32, 0, 4, 1, gEvent128Text03, MSG_SCRIPT_FLAG_END, 240 },
+    { PORTRAIT_AERITH, 0, 1, 1, gEvent128Text00, 0, 150 },
+    { PORTRAIT_SORA, 0, 3, 1, gEvent128Text01, 0, 180 },
+    { PORTRAIT_AERITH, 0, 1, 1, gEvent128Text02, 0, 210 },
+    { PORTRAIT_AERITH, 0, 4, 1, gEvent128Text03, MSG_SCRIPT_FLAG_END, 240 },
 };
 
 #include "event_128_text.inc"
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent128Script[4] = {
-    { 32, 0, 1, 3, gEvent128Text00, 0, 150 },
-    { 0, 0, 3, 3, gEvent128Text01, 0, 180 },
-    { 32, 0, 1, 3, gEvent128Text02, 0, 210 },
-    { 32, 0, 4, 3, gEvent128Text03, MSG_SCRIPT_FLAG_END, 240 },
+    { PORTRAIT_AERITH, 0, 1, 3, gEvent128Text00, 0, 150 },
+    { PORTRAIT_SORA, 0, 3, 3, gEvent128Text01, 0, 180 },
+    { PORTRAIT_AERITH, 0, 1, 3, gEvent128Text02, 0, 210 },
+    { PORTRAIT_AERITH, 0, 4, 3, gEvent128Text03, MSG_SCRIPT_FLAG_END, 240 },
 };
 
 #include "event_128_text.inc"

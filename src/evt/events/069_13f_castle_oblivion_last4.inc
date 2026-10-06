@@ -1,20 +1,20 @@
 #ifdef VERSION_US
 static const MessageScriptEntry sEvent069Script[1] = {
-    { 1, 1, 3, 1, gEvent069Text00, MSG_SCRIPT_FLAG_END, 9999 },
+    { PORTRAIT_DONALD, 1, 3, 1, gEvent069Text00, MSG_SCRIPT_FLAG_END, 9999 },
 };
 
 #include "event_069_text.inc"
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent069Script[1] = {
-    { 1, 1, 3, 3, gEvent069Text00, MSG_SCRIPT_FLAG_END, 9999 },
+    { PORTRAIT_DONALD, 1, 3, 3, gEvent069Text00, MSG_SCRIPT_FLAG_END, 9999 },
 };
 
 #include "event_069_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent069Script[1] = {
-    { 1, 1, 3, 1, NULL, MSG_SCRIPT_FLAG_END, 9999 },
+    { PORTRAIT_DONALD, 1, 3, 1, NULL, MSG_SCRIPT_FLAG_END, 9999 },
 };
 #endif
 

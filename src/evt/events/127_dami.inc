@@ -1,26 +1,26 @@
 #ifndef VERSION_EU
 #ifdef VERSION_US
 static const MessageScriptEntry sEvent127Script[7] = {
-    { 0, 3, 3, 1, gEvent127Text00, 0, 150 },
-    { 31, 0, 1, 1, gEvent127Text01, 0, 180 },
-    { 31, 0, 4, 1, gEvent127Text02, 0, 185 },
-    { 31, 0, 1, 1, gEvent127Text03, 0, 300 },
-    { 0, 3, 3, 1, gEvent127Text04, 0, 330 },
-    { 31, 0, 1, 1, gEvent127Text05, 0, 360 },
-    { 31, 0, 4, 1, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
+    { PORTRAIT_SORA, 3, 3, 1, gEvent127Text00, 0, 150 },
+    { PORTRAIT_LEON, 0, 1, 1, gEvent127Text01, 0, 180 },
+    { PORTRAIT_LEON, 0, 4, 1, gEvent127Text02, 0, 185 },
+    { PORTRAIT_LEON, 0, 1, 1, gEvent127Text03, 0, 300 },
+    { PORTRAIT_SORA, 3, 3, 1, gEvent127Text04, 0, 330 },
+    { PORTRAIT_LEON, 0, 1, 1, gEvent127Text05, 0, 360 },
+    { PORTRAIT_LEON, 0, 4, 1, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
 };
 
 #include "event_127_text.inc"
 #endif
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent127Script[7] = {
-    { 0, 3, 3, 3, gEvent127Text00, 0, 150 },
-    { 31, 0, 1, 3, gEvent127Text01, 0, 180 },
-    { 31, 0, 4, 3, gEvent127Text02, 0, 185 },
-    { 31, 0, 1, 3, gEvent127Text03, 0, 300 },
-    { 0, 3, 3, 3, gEvent127Text04, 0, 330 },
-    { 31, 0, 1, 3, gEvent127Text05, 0, 360 },
-    { 31, 0, 4, 3, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
+    { PORTRAIT_SORA, 3, 3, 3, gEvent127Text00, 0, 150 },
+    { PORTRAIT_LEON, 0, 1, 3, gEvent127Text01, 0, 180 },
+    { PORTRAIT_LEON, 0, 4, 3, gEvent127Text02, 0, 185 },
+    { PORTRAIT_LEON, 0, 1, 3, gEvent127Text03, 0, 300 },
+    { PORTRAIT_SORA, 3, 3, 3, gEvent127Text04, 0, 330 },
+    { PORTRAIT_LEON, 0, 1, 3, gEvent127Text05, 0, 360 },
+    { PORTRAIT_LEON, 0, 4, 3, gEvent127Text06, MSG_SCRIPT_FLAG_END, 360 },
 };
 
 #include "event_127_text.inc"

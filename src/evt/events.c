@@ -14,6 +14,7 @@
 #include "types.h"
 #include "battle_ids.h"
 #include "event_ids.h"
+#include "msg_portrait_data.h"
 #include "world_types.h"
 
 #include "events/074_monstoro_e0.inc"

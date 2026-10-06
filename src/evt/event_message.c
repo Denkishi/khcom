@@ -6198,7 +6198,7 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
             } else {
                 entry = &work->script[work->scriptIndex];
 
-                if (entry->portraitId == 62) {
+                if (entry->portraitId == PORTRAIT_NONE) {
                     void* palette;
 
                     palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
@@ -6254,7 +6254,7 @@ static u8 msgwin_1(MsgWinWork* work, void* task) {
         } else {
         entry = &work->script[work->scriptIndex];
 
-        if (entry->portraitId == 62) {
+        if (entry->portraitId == PORTRAIT_NONE) {
             void* palette;
 
             palette = (void*)(BG_PLTT + 15 * PLTT_SIZE_4BPP);
@@ -6363,7 +6363,7 @@ u8 MsgwinContinueUpdate(MsgWinWork* work, void* task) {
 static void msgwin_2(MsgWinWork* work) {
     const MessageScriptEntry* entry = &work->script[work->scriptIndex];
 
-    if (entry->portraitId != 62) {
+    if (entry->portraitId != PORTRAIT_NONE) {
         DrawMsgGlyphs(work->shownChars);
     } else {
         DrawMsgGlyphsWithPalette(work->shownChars, work->palette);
@@ -6386,7 +6386,7 @@ u8 MsgwinOpenUpdate(MsgWinWork* work, void* task) {
 
     ApproachValue(&work->scrollX, gMsgwinOpenScrollX[work->position], work->steps);
 
-    if (entry->portraitId != 62) {
+    if (entry->portraitId != PORTRAIT_NONE) {
         ScrollBgMapTo(work->bg, work->scrollX, 0);
     }
 
@@ -6411,7 +6411,7 @@ u8 MsgwinTypeUpdate(MsgWinWork* work, void* task) {
 
     MsgwinTypeStep(work);
 
-    if (entry->portraitId == 62) {
+    if (entry->portraitId == PORTRAIT_NONE) {
         work->shownChars = work->charCount;
     } else if (GetKeysPressed() & A_BUTTON) {
         if (work->shownChars < work->charCount) {
@@ -6468,7 +6468,7 @@ u8 MsgwinCloseUpdate(MsgWinWork* work, void* task) {
 
     ApproachValue(&work->scrollX, gMsgwinClosedScrollX[work->position], work->steps);
 
-    if (entry->portraitId != 62) {
+    if (entry->portraitId != PORTRAIT_NONE) {
         ScrollBgMapTo(work->bg, work->scrollX, 0);
     } else {
         DisableBg(work->bg);
@@ -6517,13 +6517,13 @@ void MsgwinLoadEntry(MsgWinWork* work) {
     SetMsgfacePortrait(&work->face, entry->portraitId, entry->expressionId, work->position);
 
 #ifdef VERSION_JP
-    if (entry->portraitId == 62) {
+    if (entry->portraitId == PORTRAIT_NONE) {
         work->charCount = LayoutMsgGlyphsSjis(0x2E00, gMsgwinTextY[work->position], (u8*)entry->text);
     } else {
         work->charCount = LayoutMsgGlyphsSjis(gMsgwinTextX[work->position], gMsgwinTextY[work->position], (u8*)entry->text);
     }
 #else
-    if (entry->portraitId == 62) {
+    if (entry->portraitId == PORTRAIT_NONE) {
         if (work->nextText != NULL) {
             work->charCount = LayoutMsgGlyphsPage(0x2E00, gMsgwinTextY[work->position] - 0x200, work->nextText, &work->nextText);
         } else {
@@ -6624,7 +6624,7 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
     work->talking = 0;
     work->visible = 1;
 
-    if (work->face->portraitId != 62) {
+    if (work->face->portraitId != PORTRAIT_NONE) {
         anim = gMsgFaceAnims[work->face->portraitId];
     } else {
         anim = gMsgFaceAnims[0];
@@ -6636,7 +6636,7 @@ void msgface_0(MsgFaceWork* work, MsgFaceControl* ctl) {
         work->flipX = 0;
     }
 
-    if (work->face->portraitId != 62) {
+    if (work->face->portraitId != PORTRAIT_NONE) {
         SetObjTileSource(work->tiles, anim[work->face->expressionId].tiles);
         UpdateAllocatedObjPalette(work->palette, anim[work->face->expressionId].palette);
         AnimInit(&work->anim, anim[work->face->expressionId].anims, anim[work->face->expressionId].gfxTable);
@@ -6655,7 +6655,7 @@ u8 msgface_1(MsgFaceWork* work, void* task) {
     const MsgFaceAnim* anim = NULL;
     u32 position;
 
-    if (work->face->portraitId != 62) {
+    if (work->face->portraitId != PORTRAIT_NONE) {
         anim = gMsgFaceAnims[work->face->portraitId];
         work->visible = 1;
     } else {
@@ -6788,7 +6788,7 @@ u8 MsgfaceChangeUpdate(MsgFaceWork* work, void* task) {
 
     anims = NULL;
 
-    if (work->face->portraitId != 62) {
+    if (work->face->portraitId != PORTRAIT_NONE) {
         anims = gMsgFaceAnims[work->face->portraitId];
         work->visible = 1;
     } else {
@@ -6834,7 +6834,7 @@ u8 MsgfaceFlipOutUpdate(MsgFaceWork* work, void* task) {
     if (work->steps == 0) {
         anims = NULL;
 
-        if (work->face->portraitId != 62) {
+        if (work->face->portraitId != PORTRAIT_NONE) {
             anims = gMsgFaceAnims[work->face->portraitId];
         }
 

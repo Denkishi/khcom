@@ -1,19 +1,19 @@
 #ifdef VERSION_US
 static const MessageScriptEntry sEvent138Script[1] = {
-    { 48, 1, 1, 1, gOwlTalkText, MSG_SCRIPT_FLAG_END, 150 },
+    { PORTRAIT_OWL, 1, 1, 1, gOwlTalkText, MSG_SCRIPT_FLAG_END, 150 },
 };
 #endif
 
 #ifdef VERSION_JP
 static const MessageScriptEntry sEvent138Script[1] = {
-    { 48, 1, 1, 3, gEvent138Text00, MSG_SCRIPT_FLAG_END, 150 },
+    { PORTRAIT_OWL, 1, 1, 3, gEvent138Text00, MSG_SCRIPT_FLAG_END, 150 },
 };
 
 #include "event_138_text.inc"
 #endif
 #ifdef VERSION_EU
 static const MessageScriptEntry sEvent138Script[1] = {
-    { 48, 1, 1, 1, &gOwlTalkTextByLanguage, MSG_SCRIPT_FLAG_END, 150 },
+    { PORTRAIT_OWL, 1, 1, 1, &gOwlTalkTextByLanguage, MSG_SCRIPT_FLAG_END, 150 },
 };
 #endif
 

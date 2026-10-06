@@ -1,5 +1,5 @@
 static const MessageScriptEntry sEvent008Script[1] = {
-    { 33, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent007Text00), MSG_SCRIPT_FLAG_END, 9999 },
+    { PORTRAIT_CID, 1, 1, EVENT_TEXT_DELAY, EVENT_TEXT(gEvent007Text00), MSG_SCRIPT_FLAG_END, 9999 },
 };
 
 static const EventCameraKeyframe sEvent008Camera[9] = {

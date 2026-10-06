@@ -1357,7 +1357,7 @@ static u8 cardbattle_1(CardBattleWork* work, void* task) {
         } else {
             if (work->stockCount == 3) {
                 cards = sRikuEmptyKeys;
-                memset(output, 0, 6);
+                memset(output, 0, sizeof(output));
                 done = FALSE;
 
                 for (i = 0; i < work->stockCount; i++) {

@@ -97,7 +97,7 @@ s32 ResolveActiveCardsMove(s32* out) {
 
     stockKeys = gTutorialEmptyKeys;
     flag = 0;
-    memset(found, 0, 6);
+    memset(found, 0, sizeof(found));
 
 #ifdef VERSION_EU
     soraStockActive = FALSE;
@@ -254,7 +254,7 @@ s32 ResolveLinkActiveCardsMove(s32* out, s32 side) {
 
     memset(&stockKeys, 0, sizeof(stockKeys));
     flag = 0;
-    memset(found, 0, 6);
+    memset(found, 0, sizeof(found));
 
 #ifdef VERSION_EU
     stockActive = FALSE;
@@ -744,7 +744,7 @@ s32 LookupStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* stoc
     u8 matchCount;
     u8 i;
 
-    memset(catalogNumbers, 0, 12);
+    memset(catalogNumbers, 0, sizeof(catalogNumbers));
     matchCount = 0;
 
     for (i = 0; i < count; i++) {
@@ -1117,7 +1117,7 @@ s32 LookupLinkStockName(CardDisplayWork** cards, u8 count, u8 value, StockKeys* 
     u8 matchCount;
     u8 i;
 
-    memset(catalogNumbers, 0, 12);
+    memset(catalogNumbers, 0, sizeof(catalogNumbers));
     matchCount = 0;
 
     for (i = 0; i < count; i++) {

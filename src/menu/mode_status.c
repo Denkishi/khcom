@@ -96,16 +96,16 @@ void mode_status_0() {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gStatusBgFrenchTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgFrenchTiles, (u8*)GetBgCharBase(3) + 0x1800, sizeof(gStatusBgFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
         RequestDma3Copy(gStatusBgGermanTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gStatusBgItalianTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgItalianTiles, (u8*)GetBgCharBase(3) + 0x1800, sizeof(gStatusBgItalianTiles));
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gStatusBgSpanishTiles, (u8*)GetBgCharBase(3) + 0x1800, 0xC00);
+        RequestDma3Copy(gStatusBgSpanishTiles, (u8*)GetBgCharBase(3) + 0x1800, sizeof(gStatusBgSpanishTiles));
         break;
     case LANGUAGE_ENGLISH:
     default:

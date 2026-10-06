@@ -578,7 +578,7 @@ u8 BosJfGetGroundZ(s32* px, s32* py, s32* pz, s32* out) {
 }
 
 void task_bos_jf_map_0(JfMapWork* work, JfMapArg* arg) {
-    RequestDma3Copy(gBosJfBgMap2, gBosJfMapBuffer, 0x800);
+    RequestDma3Copy(gBosJfBgMap2, gBosJfMapBuffer, sizeof(gBosJfBgMap2));
     gBosJfMapBlocks = arg->maps;
     BosJfDrawPillars();
     LoadBgTiles(0, arg->tiles, arg->tilesSize);

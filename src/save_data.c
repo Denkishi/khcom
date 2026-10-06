@@ -70,7 +70,7 @@ void MakeSaveHeaderData(SaveHeaderData* data, s16 file) {
 void MakeSaveSystem(SaveFileLarge* save) {
     save->common.flags = gGameState.flags;
     save->common.hp = gGameState.hp;
-    memcpy(save->common.progression, &gGameState.progression.maxHp, 0x88);
+    memcpy(save->common.progression, &gGameState.progression.maxHp, sizeof(save->common.progression));
     save->common.availableWorlds = gGameState.availableWorlds;
     save->common.floor = gGameState.floor;
     save->common.world = gGameState.world;
@@ -85,7 +85,7 @@ void MakeSaveSystem(SaveFileLarge* save) {
 void MakeSaveFileLarge(SaveFileLarge* save) {
     save->common.flags = gGameState.flags;
     save->common.hp = gGameState.hp;
-    memcpy(save->common.progression, &gGameState.progression.maxHp, 0x88);
+    memcpy(save->common.progression, &gGameState.progression.maxHp, sizeof(save->common.progression));
     save->common.availableWorlds = gGameState.availableWorlds;
     save->common.floor = gGameState.floor;
     save->common.world = gGameState.world;
@@ -112,7 +112,7 @@ void MakeSaveFileLarge(SaveFileLarge* save) {
 void MakeSaveFileSmall(SaveFileSmall* save) {
     save->common.flags = gGameState.flags;
     save->common.hp = gGameState.hp;
-    memcpy(save->common.progression, &gGameState.progression.maxHp, 0x88);
+    memcpy(save->common.progression, &gGameState.progression.maxHp, sizeof(save->common.progression));
     save->common.availableWorlds = gGameState.availableWorlds;
     save->common.floor = gGameState.floor;
     save->common.world = gGameState.world;
@@ -208,7 +208,7 @@ void ApplySaveSystem(SaveFileLarge* save) {
     save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
-    memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
+    memcpy(&gGameState.progression.maxHp, save->common.progression, sizeof(save->common.progression));
     gGameState.availableWorlds = save->common.availableWorlds;
     gGameState.floor = save->common.floor;
     gGameState.world = save->common.world;
@@ -227,7 +227,7 @@ void ApplySaveFileLarge(SaveFileLarge* save) {
     save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
-    memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
+    memcpy(&gGameState.progression.maxHp, save->common.progression, sizeof(save->common.progression));
     gGameState.availableWorlds = save->common.availableWorlds;
     gGameState.floor = save->common.floor;
     gGameState.world = save->common.world;
@@ -247,7 +247,7 @@ void ApplySaveFileSmall(SaveFileSmall* save) {
     save->common.flags &= ~GAME_FLAGS_HEADER;
     gGameState.flags = save->common.flags | headerFlags;
     gGameState.hp = save->common.hp;
-    memcpy(&gGameState.progression.maxHp, save->common.progression, 0x88);
+    memcpy(&gGameState.progression.maxHp, save->common.progression, sizeof(save->common.progression));
     gGameState.availableWorlds = save->common.availableWorlds;
     gGameState.floor = save->common.floor;
     gGameState.world = save->common.world;

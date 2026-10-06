@@ -1550,13 +1550,13 @@ void mode_jiminy_0() {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gJiminyBgTitleTilesFrench, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesFrench, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gJiminyBgTitleTilesFrench));
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gJiminyBgTitleTilesSpanish, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesSpanish, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gJiminyBgTitleTilesSpanish));
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gJiminyBgTitleTilesItalian, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);
+        RequestDma3Copy(gJiminyBgTitleTilesItalian, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gJiminyBgTitleTilesItalian));
         break;
     case LANGUAGE_GERMAN:
         RequestDma3Copy(gJiminyBgTitleTilesGerman, (u8*)GetBgCharBase(1) + 0x2000, 0x1000);

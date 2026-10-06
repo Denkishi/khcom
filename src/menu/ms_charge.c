@@ -516,7 +516,7 @@ void MsChargeRemoveCard(MsCard* card) {
 
     category = gCardDefs[card->cardId].category;
     DmaCopy16(3, card + 1, card, (285 - GetMsChargeSelectedIndex()) * 52);
-    DmaFill16(3, 0, &sMsCards[285], 0x34);
+    DmaFill16(3, 0, &sMsCards[285], sizeof(MsCard));
     sMsCards[285].kind = 0x8F;
 
     for (j = category + 1; j <= 3; j++) {

@@ -4209,7 +4209,7 @@ u8 EventCharaToggleAnim(EventCharaWork* work, void* task) {
 u8 EventCharaToggleAnimUpdate(EventCharaWork* work, void* task) {
     u16 anims[2];
 
-    memcpy(anims, sEventCharaToggleAnims, 4);
+    memcpy(anims, sEventCharaToggleAnims, sizeof(anims));
     EvtObjSetAnim(&work->obj, anims[work->effectLevel]);
     work->effectTimer++;
 

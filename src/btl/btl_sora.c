@@ -2818,7 +2818,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         hit = 0;
         FocusBtlSoraCameraOnTarget(work);
-        memcpy(hitFrames, sBtlSoraSwingHitFrames, 5);
+        memcpy(hitFrames, sBtlSoraSwingHitFrames, sizeof(hitFrames));
 
         if (act->btl->hcEffect == HC_EFFECT_COMBO_PLUS) {
             if ((work->flags & BTL_SORA_FLAG_COMBO_EXTENDED) == 0) {

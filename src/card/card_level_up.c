@@ -299,7 +299,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                 case LANGUAGE_ENGLISH:
                     break;
                 case LANGUAGE_FRENCH:
-                    RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerFrenchTiles));
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_GERMAN:
@@ -307,11 +307,11 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_ITALIAN:
-                    RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerItalianTiles));
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 case LANGUAGE_SPANISH:
-                    RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                    RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerSpanishTiles));
                     RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                     break;
                 }
@@ -336,7 +336,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(0) + 0x2400, sizeof(gLevelUpBannerFrenchTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
@@ -344,11 +344,11 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(0) + 0x2400, sizeof(gLevelUpBannerItalianTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(0) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(0) + 0x2400, sizeof(gLevelUpBannerSpanishTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(0) + 0x800, 0xC00);
                         break;
                     }
@@ -371,7 +371,7 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                     case LANGUAGE_ENGLISH:
                         break;
                     case LANGUAGE_FRENCH:
-                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerFrenchTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerFrenchTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_GERMAN:
@@ -379,11 +379,11 @@ u8 Level_Up_1(LevelUpWork* work, void* task) {
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_ITALIAN:
-                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerItalianTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerItalianTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     case LANGUAGE_SPANISH:
-                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, 0x800);
+                        RequestDma3Copy(gLevelUpBannerSpanishTiles, GetBgCharBase(1) + 0x2400, sizeof(gLevelUpBannerSpanishTiles));
                         RequestDma3Copy(gLevelUpBgTilesByLanguage[gLanguage], GetBgCharBase(1) + 0x800, 0xC00);
                         break;
                     }

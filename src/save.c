@@ -699,10 +699,10 @@ void ShowSramErrorScreen() {
     dispcnt = (vu16*)REG_ADDR_DISPCNT;
     *dispcnt = (DISPCNT_BG0_ON | DISPCNT_OBJ_ON);
     VBlankIntrWait();
-    DmaCopy16(3, gSramErrorTiles, BG_CHAR_ADDR(2), 0x4000);
+    DmaCopy16(3, gSramErrorTiles, BG_CHAR_ADDR(2), sizeof(gSramErrorTiles));
     DmaCopy16(3, gSramErrorPalette, BG_PLTT, BG_PLTT_SIZE);
-    DmaCopy16(3, gSramErrorTilemap, sSramErrorTilemapBuf, 0x500);
-    DmaCopy16(3, sSramErrorTilemapBuf, VRAM, 0x800);
+    DmaCopy16(3, gSramErrorTilemap, sSramErrorTilemapBuf, sizeof(gSramErrorTilemap));
+    DmaCopy16(3, sSramErrorTilemapBuf, VRAM, sizeof(sSramErrorTilemapBuf));
     WaitSramErrorInput();
     *ime = 0;
     *ie &= ~INTR_FLAG_VBLANK;
@@ -748,7 +748,7 @@ void WaitSramErrorInput() {
 
             i++;
             VBlankIntrWait();
-            DmaCopy32(3, sSramErrorTilemapBuf, VRAM, 0x800);
+            DmaCopy32(3, sSramErrorTilemapBuf, VRAM, sizeof(sSramErrorTilemapBuf));
         } while (i <= 19);
     }
 

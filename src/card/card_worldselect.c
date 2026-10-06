@@ -249,19 +249,19 @@ u8 MapSelect_1(MapSelectWork* work, void* task) {
         break;
     case LANGUAGE_FRENCH:
         work->tiles3 = LoadObjTiles(gMapSelectTitleFrenchTiles, sizeof(gMapSelectTitleFrenchTiles));
-        RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
         work->tiles3 = LoadObjTiles(gMapSelectTitleGermanTiles, sizeof(gMapSelectTitleGermanTiles));
-        RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoGermanTiles));
         break;
     case LANGUAGE_ITALIAN:
         work->tiles3 = LoadObjTiles(gMapSelectTitleItalianTiles, sizeof(gMapSelectTitleItalianTiles));
-        RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoItalianTiles));
         break;
     case LANGUAGE_SPANISH:
         work->tiles3 = LoadObjTiles(gMapSelectTitleSpanishTiles, sizeof(gMapSelectTitleSpanishTiles));
-        RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+        RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoSpanishTiles));
         break;
     }
 #else
@@ -377,16 +377,16 @@ u8 UpdateMapSelectEnterValues(MapSelectWork* work, void* task) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1EA0, sizeof(gMapSelectCardInfoFrenchTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1EA0, sizeof(gMapSelectCardInfoGermanTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1EA0, sizeof(gMapSelectCardInfoItalianTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1EA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1EA0, sizeof(gMapSelectCardInfoSpanishTiles));
             break;
         }
 #endif
@@ -462,16 +462,16 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoFrenchTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoGermanTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoItalianTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoSpanishTiles));
             break;
         }
 #endif
@@ -524,16 +524,16 @@ u8 UpdateMapSelectValueInput(MapSelectWork* work, void* task) {
                         case LANGUAGE_ENGLISH:
                             break;
                         case LANGUAGE_FRENCH:
-                            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoFrenchTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoFrenchTiles));
                             break;
                         case LANGUAGE_GERMAN:
-                            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoGermanTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoGermanTiles));
                             break;
                         case LANGUAGE_ITALIAN:
-                            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoItalianTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoItalianTiles));
                             break;
                         case LANGUAGE_SPANISH:
-                            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, 0x100);
+                            RequestDma3Copy(gMapSelectCardInfoSpanishTiles, (u8*)GetBgCharBase(1) + 0x1AA0, sizeof(gMapSelectCardInfoSpanishTiles));
                             break;
                         }
 #endif

@@ -479,13 +479,13 @@ void mode_worldwarp_0() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gWorldWarpRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldWarpRikuFloorNumberFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gWorldWarpRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldWarpRikuFloorNumberSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gWorldWarpRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldWarpRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldWarpRikuFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
             RequestDma3Copy(gWorldWarpRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
@@ -494,23 +494,23 @@ void mode_worldwarp_0() {
     } else {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gWorldWarpFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldWarpFloorNumberFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gWorldWarpFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldWarpFloorNumberSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gWorldWarpFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldWarpFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gWorldWarpFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldWarpFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldWarpFloorNumberGermanTiles));
             break;
         }
     }
 #endif
 
     LoadBgMap(0, gWorldWarpBgMap, sizeof(gWorldWarpBgMap));
-    DmaCopy16(3, gWorldWarpFloorMap, sWorldWarpTilemap, 0x500);
+    DmaCopy16(3, gWorldWarpFloorMap, sWorldWarpTilemap, sizeof(gWorldWarpFloorMap));
 
     for (i = 0; i <= 12; i++) {
         if (sWorldWarpFloorWorlds[i] >= 0) {

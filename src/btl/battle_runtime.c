@@ -1006,7 +1006,7 @@ void UpdateBattleState() {
                 ModeRequest(&gModeChkbtl, 0);
             } else {
                 GameState* state = &gGameState;
-                memcpy(&state->progression.maxHp, gBtlWork->savedProgression, 0x88);
+                memcpy(&state->progression.maxHp, gBtlWork->savedProgression, sizeof(gBtlWork->savedProgression));
                 state->flags |= GAME_FLAG_BATTLE_NOT_WON;
 
                 switch (gBtlWork->battleId) {

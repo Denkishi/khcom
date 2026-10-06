@@ -131,7 +131,7 @@ u8 task_wlogo_mons_1(WlogoMonsWork* work) {
                     LoadPaletteWithEffect(&gWlogoMonsPalettes[(15 - work->paletteStep) * 16], (void*)(BG_PLTT + 14 * PLTT_SIZE_4BPP), 0x20);
                 } else if (work->paletteStep == 20) {
                     work->visible = FALSE;
-                    RequestDma3Copy(gWlogoMonsMap, GetBgScreenBase(0), 0x800);
+                    RequestDma3Copy(gWlogoMonsMap, GetBgScreenBase(0), sizeof(gWlogoMonsMap));
                     work->state++;
                 }
             }

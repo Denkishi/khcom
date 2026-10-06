@@ -482,8 +482,8 @@ void task_bos_lst_fld_0(LstFldWork* work, LstFldArg* arg) {
     gBtlWork->rotation = 0;
     BtlMapResetShake();
     BosLstFldResetShake();
-    DmaCopy16(3, sBosLstFldVofsTable, work->vofsTable, 0x680);
-    DmaCopy16(3, sBosLstFldHofsTable, work->hofsTable, 0x940);
+    DmaCopy16(3, sBosLstFldVofsTable, work->vofsTable, sizeof(sBosLstFldVofsTable));
+    DmaCopy16(3, sBosLstFldHofsTable, work->hofsTable, sizeof(sBosLstFldHofsTable));
 
     for (i = 0; i < 0x1A0; i++) {
         work->vofsTable[i] = (SIN(i + 64) >> 1) & 0x1FF;

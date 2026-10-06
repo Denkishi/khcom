@@ -2785,7 +2785,7 @@ void task_bos_lst_2(BosLstWork* work) {
 
         DmaCopy16(3, sLstAnimDefs[anim].bgMap, work->bgMap, 0x800);
         src = sBosLstBgFrames[bgFrame][1];
-        DmaCopy16(3, src, work->bgMap, 0x280);
+        DmaCopy16(3, src, work->bgMap, sizeof(work->bgMap));
 
         if (work->facing > 0) {
             DmaCopy16(3, src + 160, work->bgMapRow10, 0x1C);

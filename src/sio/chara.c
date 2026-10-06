@@ -195,13 +195,13 @@ u8 task_chara_mask_fade_1(MaskFadeWork* work) {
         work->timer = 0;
 
         for (i = 0; i < work->tileCount; i++) {
-            CpuFastCopy(work->tiles + i * 32, work->tileBuffer, 32);
+            CpuFastCopy(work->tiles + i * 32, work->tileBuffer, sizeof(work->tileBuffer));
 
             for (j = 0; j <= 31; j++) {
                 work->maskedTile[j] = work->tileBuffer[j] & sMaskFadeTileMasks[j + work->step * 32 + work->patterns[i] * 288];
             }
 
-            CpuFastCopy(work->maskedTile, work->tiles + i * 32, 32);
+            CpuFastCopy(work->maskedTile, work->tiles + i * 32, sizeof(work->maskedTile));
         }
 
         work->step++;

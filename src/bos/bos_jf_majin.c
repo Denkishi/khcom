@@ -48,12 +48,12 @@ void BosJfMajinCopyBgMap(u8 frame, JfMajinWork* work) {
     s16 n;
 
     if (work->jf->body.z < -0x8000) {
-        RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, 0x800);
+        RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, sizeof(gBosJfMajinMapBuffer));
     } else {
         n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->extraClipRows;
 
         if (n > 0x20) {
-            RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
+            RequestDma3Clear(gBosJfMajinMapBuffer, sizeof(gBosJfMajinMapBuffer));
         } else {
             RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, (0x20 - n) * 64);
             RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
@@ -68,7 +68,7 @@ void BosJfMajinUpdateBgClip(u8 frame, JfMajinWork* work) {
         n = ((work->jf->body.z >> 8) + 0x88) / 8 + work->extraClipRows;
 
         if (n > 0x20) {
-            RequestDma3Clear(gBosJfMajinMapBuffer, 0x800);
+            RequestDma3Clear(gBosJfMajinMapBuffer, sizeof(gBosJfMajinMapBuffer));
         } else {
             RequestDma3Copy(gBosJfMajinFrameMaps[frame], gBosJfMajinMapBuffer, (0x20 - n) * 64);
             RequestDma3Clear(gBosJfMajinMapBuffer + (0x20 - n) * 64, n * 64);
@@ -115,7 +115,7 @@ void task_bos_jf_majin_0(JfMajinWork* work, void* jf) {
     gBosJfMajinMapBlockTable[1] = gDefaultBgMap;
     gBosJfMajinMapBlockTable[2] = gDefaultBgMap;
     gBosJfMajinMapBlockTable[3] = gBosJfMajinMapBuffer;
-    RequestDma3Copy(gBosJfMajinFrame8Map, gBosJfMajinMapBuffer, 0x800);
+    RequestDma3Copy(gBosJfMajinFrame8Map, gBosJfMajinMapBuffer, sizeof(gBosJfMajinFrame8Map));
     gBosJfMajinMapBlocks = gBosJfMajinMapBlockTable;
     LoadBgPalette(1, gBosJfMajinPalette, sizeof(gBosJfMajinPalette));
     LoadBgTiles(1, gBosJfMajinFrame8Tiles, sizeof(gBosJfMajinFrame8Tiles));

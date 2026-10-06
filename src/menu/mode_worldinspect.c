@@ -731,13 +731,13 @@ void mode_worldinspect_0() {
     if (gGameState.flags & GAME_FLAG_RIKU) {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gWorldInspectRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldInspectRikuFloorNumberFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gWorldInspectRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldInspectRikuFloorNumberSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gWorldInspectRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
+            RequestDma3Copy(gWorldInspectRikuFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x6400, sizeof(gWorldInspectRikuFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
             RequestDma3Copy(gWorldInspectRikuFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x6400, 0x800);
@@ -746,23 +746,23 @@ void mode_worldinspect_0() {
     } else {
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gWorldInspectFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldInspectFloorNumberFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gWorldInspectFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldInspectFloorNumberSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gWorldInspectFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberItalianTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldInspectFloorNumberItalianTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gWorldInspectFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy(gWorldInspectFloorNumberGermanTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gWorldInspectFloorNumberGermanTiles));
             break;
         }
     }
 #endif
 
     LoadBgMap(0, gWorldInspectBgMap, sizeof(gWorldInspectBgMap));
-    DmaCopy16(3, gWorldInspectFloorMap, sWorldInspectTilemap, 0x500);
+    DmaCopy16(3, gWorldInspectFloorMap, sWorldInspectTilemap, sizeof(gWorldInspectFloorMap));
 
     for (i = 0; i <= 11; i++) {
         if (sWorldInspectWorlds[i] != 0) {
@@ -840,8 +840,6 @@ void mode_worldinspect_0() {
         sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarGermanTiles, sizeof(gWorldInspectBarGermanTiles));
         break;
     }
-#elif defined(VERSION_JP)
-    sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, sizeof(gWorldInspectBarTiles));
 #else
     sWorldInspectBarTiles = LoadObjTiles(gWorldInspectBarTiles, sizeof(gWorldInspectBarTiles));
 #endif

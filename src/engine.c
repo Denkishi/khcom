@@ -3054,7 +3054,7 @@ void FadeUpdate() {
                 *dst++ = b * 1024 | g * 32 | r;
             }
 
-            RequestDma3Copy(slot->buffer, slot->dst, 32);
+            RequestDma3Copy(slot->buffer, slot->dst, sizeof(slot->buffer));
         }
     }
 

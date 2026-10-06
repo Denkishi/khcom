@@ -2464,7 +2464,7 @@ void CopyMapProgress(MapProgress* progress) {
 
     progress->world = gGameState.world;
     progress->floor = gGameState.floor;
-    memcpy(progress->floorState, &gMapFloorState, 0x21C);
+    memcpy(progress->floorState, &gMapFloorState, sizeof(progress->floorState));
     src = (u32*)gGameState.floors;
     dst = (u32*)progress->floors;
 
@@ -2480,7 +2480,7 @@ void RestoreMapProgress(MapProgress* progress) {
 
     gGameState.world = progress->world;
     gGameState.floor = progress->floor;
-    memcpy(&gMapFloorState, progress->floorState, 0x21C);
+    memcpy(&gMapFloorState, progress->floorState, sizeof(MapFloorState));
     src = (u32*)progress->floors;
     dst = (u32*)gGameState.floors;
 
@@ -3870,16 +3870,16 @@ void Mode_MenuNew_0() {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsItalianTiles));
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+        RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsGermanTiles));
         break;
     }
 
@@ -4483,13 +4483,13 @@ void Mode_MenuLoad_0(s32 arg) {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gMenuLoadLabelsFrenchTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy(gMenuLoadLabelsFrenchTiles, (u8*)GetBgCharBase(1) + 0xC00, sizeof(gMenuLoadLabelsFrenchTiles));
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy((void*)gMenuLoadLabelsSpanishTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy((void*)gMenuLoadLabelsSpanishTiles, (u8*)GetBgCharBase(1) + 0xC00, sizeof(gMenuLoadLabelsSpanishTiles));
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy((void*)gMenuLoadLabelsItalianTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
+        RequestDma3Copy((void*)gMenuLoadLabelsItalianTiles, (u8*)GetBgCharBase(1) + 0xC00, sizeof(gMenuLoadLabelsItalianTiles));
         break;
     case LANGUAGE_GERMAN:
         RequestDma3Copy((void*)gMenuLoadLabelsGermanTiles, (u8*)GetBgCharBase(1) + 0xC00, 0x800);
@@ -6209,16 +6209,16 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
 #ifdef VERSION_EU
         switch (gLanguage) {
         case LANGUAGE_FRENCH:
-            RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsFrenchTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsFrenchTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsSpanishTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsSpanishTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsItalianTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsItalianTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, 0x800);
+            RequestDma3Copy((void*)gSaveSlotLabelsGermanTiles, (u8*)GetBgCharBase(0) + 0x800, sizeof(gSaveSlotLabelsGermanTiles));
             break;
         }
 #endif

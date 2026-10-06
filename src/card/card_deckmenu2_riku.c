@@ -186,16 +186,16 @@ u8 UpdateRikuDeckMenuLoadBgs(RikuDeckMenuWork* work, void* task) {
 
     switch (gLanguage) {
     case LANGUAGE_FRENCH:
-        RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextFrenchTiles));
         break;
     case LANGUAGE_GERMAN:
-        RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextGermanTiles));
         break;
     case LANGUAGE_ITALIAN:
-        RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextItalianTiles));
         break;
     case LANGUAGE_SPANISH:
-        RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+        RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextSpanishTiles));
         break;
     }
 

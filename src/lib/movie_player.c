@@ -48,7 +48,7 @@ void MovieSetupVideoCodec(MoviePlayer* p, void* a, void* b, void* c, s32 w, s32 
     memcpy(p->videoCodecCode, MovieVideoCodecStart, size1);
     *(void**)a = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecKeyFrame);
     *(void**)b = (u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecPostProcess);
-    memcpy((u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecConstants), sMovieVideoCodecConstantsSrc, 96);
+    memcpy((u8*)p->videoCodecCode - (MovieVideoCodecStart - MovieVideoCodecConstants), sMovieVideoCodecConstantsSrc, sizeof(sMovieVideoCodecConstantsSrc));
     p->deltaCodecCode = gMovieHeap.iwramAlloc(size2);
     memcpy(p->deltaCodecCode, MovieDeltaCodecStart, size2);
     *(void**)c = (u8*)p->deltaCodecCode - (MovieDeltaCodecStart - MovieDeltaCodecDecode);

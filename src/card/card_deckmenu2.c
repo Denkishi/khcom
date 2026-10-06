@@ -1444,16 +1444,16 @@ u8 UpdateDeckMenuLoadBgs(DeckMenuWork* work, void* task) {
             RequestDma3Copy(gDeckMenuTextTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextFrenchTiles));
             break;
         case LANGUAGE_GERMAN:
-            RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextGermanTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextGermanTiles));
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextItalianTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextItalianTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, 0x1C00);
+            RequestDma3Copy(gDeckMenuTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x3800, sizeof(gDeckMenuTextSpanishTiles));
             break;
         }
 #else
@@ -4762,8 +4762,8 @@ void DrawDeckCategoryCount(u8 count, u8 category) {
 
     if (count == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360), 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360) + 32, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360), sizeof(gDeckCategoryZeroTiles));
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 64 + 0x360) + 32, sizeof(gDeckCategoryZeroTiles));
     } else {
         digits[0] = count / 10;
         digits[1] = count - (u8)(count / 10) * 10;
@@ -4779,9 +4779,9 @@ void DrawCollectionCategoryCount(u16 count, u8 category) {
 
     if (count == 0) {
         base = GetBgCharBase(3);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120), 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 32, 32);
-        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 64, 32);
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120), sizeof(gDeckCategoryZeroTiles));
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 32, sizeof(gDeckCategoryZeroTiles));
+        RequestDma3Copy(gDeckCategoryZeroTiles, base + (category * 96 + 0x120) + 64, sizeof(gDeckCategoryZeroTiles));
     } else {
         digits[0] = count / 100;
         digits[1] = count / 10 - digits[0] * 10;
@@ -6890,38 +6890,36 @@ u8 UpdateDeckMenuOpenKeyboard(DeckMenuWork* work, void* task) {
         break;
     case 2:
 #ifdef VERSION_JP
-        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0x2000);
+        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x2000, sizeof(gDeckKeyboard1Tiles));
 #else
-        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x1000, 0x1000);
+        RequestDma3Copy(gDeckKeyboard1Tiles, (u8*)GetBgCharBase(3) + 0x1000, sizeof(gDeckKeyboard1Tiles));
 #endif
         break;
     case 3:
 #ifdef VERSION_JP
-        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x4000, 0x2000);
-#elif defined(VERSION_EU)
-        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0x2E40);
+        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x4000, sizeof(gDeckKeyboard2Tiles));
 #else
-        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x2000, 0xFE0);
+        RequestDma3Copy(gDeckKeyboard2Tiles, (u8*)GetBgCharBase(3) + 0x2000, sizeof(gDeckKeyboard2Tiles));
 #endif
         break;
     case 4:
 #ifdef VERSION_JP
-        RequestDma3Copy(gDeckKeyboard3Tiles, (u8*)GetBgCharBase(3) + 0x6000, 0x1000);
+        RequestDma3Copy(gDeckKeyboard3Tiles, (u8*)GetBgCharBase(3) + 0x6000, sizeof(gDeckKeyboard3Tiles));
 #elif defined(VERSION_EU)
         switch (gLanguage) {
         case LANGUAGE_ENGLISH:
             break;
         case LANGUAGE_FRENCH:
-            RequestDma3Copy(gDeckKeyboardTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextFrenchTiles, (u8*)GetBgCharBase(3) + 0x4800, sizeof(gDeckKeyboardTextFrenchTiles));
             break;
         case LANGUAGE_GERMAN:
             RequestDma3Copy(gDeckKeyboardTextGermanTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
             break;
         case LANGUAGE_ITALIAN:
-            RequestDma3Copy(gDeckKeyboardTextItalianTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextItalianTiles, (u8*)GetBgCharBase(3) + 0x4800, sizeof(gDeckKeyboardTextItalianTiles));
             break;
         case LANGUAGE_SPANISH:
-            RequestDma3Copy(gDeckKeyboardTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x4800, 0x800);
+            RequestDma3Copy(gDeckKeyboardTextSpanishTiles, (u8*)GetBgCharBase(3) + 0x4800, sizeof(gDeckKeyboardTextSpanishTiles));
             break;
         }
 #endif

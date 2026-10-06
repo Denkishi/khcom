@@ -742,7 +742,7 @@ void mode_sio_btl_option_0(s32 arg) {
     SetBgPriority(2, 2);
     SetBgOverflow(2, TRUE);
     SetBgSize(2, BGCNT_AFF512x512);
-    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(0), 0x2000);
+    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(0), sizeof(gSioBtlBgTiles));
 #ifdef VERSION_EU
     InitTextSlots(sSioBtlOptionWork->textSlots, 40);
     InitTextSlots(sSioBtlOptionWork->textSlots2, 20);
@@ -815,7 +815,7 @@ void SioBtlOptionInitObjs() {
     s32 i;
 
 #ifdef VERSION_EU
-    RequestDma3Copy(gSioBtlOptionExtraTiles, (u8*)GetBgCharBase(0) + 0x49E0, 0x1620);
+    RequestDma3Copy(gSioBtlOptionExtraTiles, (u8*)GetBgCharBase(0) + 0x49E0, sizeof(gSioBtlOptionExtraTiles));
 #endif
 
     if (sSioBtlOptionWork->modeArg == 1) {
@@ -2376,19 +2376,19 @@ void mode_sio_btl_cardget_0(s32 arg) {
     SetBgPriority(1, 1);
     SetupBg(2, 0, 24, 0);
     SetBgPriority(2, 2);
-    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(1), 0x2000);
+    RequestDma3Copy(gSioBtlBgTiles, GetBgCharBase(1), sizeof(gSioBtlBgTiles));
     sSioBtlCardgetWork->state = SIO_BTL_CARDGET_STATE_LOAD_BG_TILES;
 }
 
 void SioBtlCardgetLoadBgTiles() {
-    RequestDma3Copy(gSioBtlVsTiles, (u8*)GetBgCharBase(1) + 0x2000, 0x2000);
+    RequestDma3Copy(gSioBtlVsTiles, (u8*)GetBgCharBase(1) + 0x2000, sizeof(gSioBtlVsTiles));
 }
 
 void SioBtlCardgetLoadBg() {
 #ifdef VERSION_EU
     RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, 0x2000);
 #else
-    RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, 0x9E0);
+    RequestDma3Copy(gSioBtlCardgetBgTiles, (u8*)GetBgCharBase(1) + 0x4000, sizeof(gSioBtlCardgetBgTiles));
 #endif
     LoadBgPalette(1, gSioBtlCardgetBgPalettes, 0x200);
 
@@ -2899,7 +2899,7 @@ void mode_sio_chg_card_0(s32 arg) {
     SetBgPriority(2, 2);
     SetBgOverflow(2, TRUE);
     SetBgSize(2, BGCNT_TXT256x256);
-    RequestDma3Copy(gSioChgCardBgTiles, GetBgCharBase(0), 0x2000);
+    RequestDma3Copy(gSioChgCardBgTiles, GetBgCharBase(0), sizeof(gSioChgCardBgTiles));
     DisableBg(0);
     DisableBg(1);
     DisableBg(2);
@@ -2916,7 +2916,7 @@ void mode_sio_chg_card_0(s32 arg) {
 
 #ifndef VERSION_EU
 void SioChgCardLoadBg() {
-    RequestDma3Copy(gSioChgCardTitleTiles, (u8*)GetBgCharBase(0) + 0x2000, 0x11C0);
+    RequestDma3Copy(gSioChgCardTitleTiles, (u8*)GetBgCharBase(0) + 0x2000, sizeof(gSioChgCardTitleTiles));
     LoadBgPalette(0, gSioChgCardBgPalettes, sizeof(gSioChgCardBgPalettes));
     LoadBgMap(0, gSioChgCardBg0Map, sizeof(gSioChgCardBg0Map));
     DisableBg(0);

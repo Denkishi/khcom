@@ -34,6 +34,8 @@
 #include "enemy_ids.h"
 #include "macros.h"
 
+#define BOS_MD_VIEW_X_MAX_EXTRA 96
+
 static const EmyKind sBosMdEmyKind = { ENEMY_DRAGON_MALEFICENT, 1000, 16, 16, 0, 60, EMY_KIND_FLAG_NO_COLLIDER };
 
 static const MdMapData sMdMapData = {
@@ -1263,16 +1265,16 @@ s32 task_bos_md_map_1(MdMapWork* work) {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->viewX - 30720 < gBtlWork->xMin * 256) {
-        gBtlWork->viewX = (gBtlWork->xMin + 120) * 256;
-    } else if (gBtlWork->viewX + 30720 > (gBtlWork->xMax + 96) * 256) {
-        gBtlWork->viewX = (gBtlWork->xMax - 24) * 256;
+    if (gBtlWork->viewX - (DISPLAY_WIDTH / 2) * 256 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) * 256;
+    } else if (gBtlWork->viewX + (DISPLAY_WIDTH / 2) * 256 > (gBtlWork->xMax + BOS_MD_VIEW_X_MAX_EXTRA) * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax + BOS_MD_VIEW_X_MAX_EXTRA - DISPLAY_WIDTH / 2) * 256;
     }
 
-    if (gBtlWork->viewY + 20480 < gBtlWork->yMin * 256) {
-        gBtlWork->viewY = (gBtlWork->yMin - 80) * 256;
-    } else if (gBtlWork->viewY + 20480 > gBtlWork->yMax * 256) {
-        gBtlWork->viewY = (gBtlWork->yMax - 80) * 256;
+    if (gBtlWork->viewY + (DISPLAY_HEIGHT / 2) * 256 < gBtlWork->yMin * 256) {
+        gBtlWork->viewY = (gBtlWork->yMin - DISPLAY_HEIGHT / 2) * 256;
+    } else if (gBtlWork->viewY + (DISPLAY_HEIGHT / 2) * 256 > gBtlWork->yMax * 256) {
+        gBtlWork->viewY = (gBtlWork->yMax - DISPLAY_HEIGHT / 2) * 256;
     }
 
     gBtlWork->viewY += BtlMapGetShake();

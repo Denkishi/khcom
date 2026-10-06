@@ -580,14 +580,14 @@ u8 task_bos_lst_fld_1(LstFldWork* work) {
     gBtlWork->viewY = gBtlWork->y;
     BosLstFldUpdateShake();
 
-    if (gBtlWork->viewX < (gBtlWork->xMin + 120) << 8) {
-        gBtlWork->viewX = (gBtlWork->xMin + 120) << 8;
-    } else if (gBtlWork->viewX > (gBtlWork->xMax - 120) << 8) {
-        gBtlWork->viewX = (gBtlWork->xMax - 120) << 8;
+    if (gBtlWork->viewX < (gBtlWork->xMin + DISPLAY_WIDTH / 2) << 8) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) << 8;
+    } else if (gBtlWork->viewX > (gBtlWork->xMax - DISPLAY_WIDTH / 2) << 8) {
+        gBtlWork->viewX = (gBtlWork->xMax - DISPLAY_WIDTH / 2) << 8;
     }
 
-    if (gBtlWork->viewY + 0x5000 > gBtlWork->yMax << 8) {
-        gBtlWork->viewY = (gBtlWork->yMax - 80) << 8;
+    if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) > gBtlWork->yMax << 8) {
+        gBtlWork->viewY = (gBtlWork->yMax - DISPLAY_HEIGHT / 2) << 8;
     }
 
     work->frameCount++;

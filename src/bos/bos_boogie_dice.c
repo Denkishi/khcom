@@ -34,6 +34,10 @@
 #include "bos_boogie_dice.h"
 #include "sprite_palettes.h"
 #include "enemy_ids.h"
+#include "gba/defines.h"
+
+#define BOS_BOOGIE_VIEW_Y_MIN 396
+#define BOS_BOOGIE_VIEW_Y_MAX 632
 
 u16 gBosBoogieSakuOpenTime EWRAM_COMMON(4);
 u8 gBosBoogieDiceFace EWRAM_COMMON(4);
@@ -862,16 +866,16 @@ u8 task_bos_boogie_map_1() {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
-        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
-    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
-        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
+    if (gBtlWork->viewX - ((DISPLAY_WIDTH / 2) << 8) < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) << 8;
+    } else if (gBtlWork->viewX + ((DISPLAY_WIDTH / 2) << 8) > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - DISPLAY_WIDTH / 2) << 8;
     }
 
-    if (gBtlWork->viewY - 0x5000 < 0x18C00) {
-        gBtlWork->viewY = 0x1DC00;
-    } else if (gBtlWork->viewY + 0x5000 > 0x27800) {
-        gBtlWork->viewY = 0x22800;
+    if (gBtlWork->viewY - ((DISPLAY_HEIGHT / 2) << 8) < (BOS_BOOGIE_VIEW_Y_MIN << 8)) {
+        gBtlWork->viewY = (BOS_BOOGIE_VIEW_Y_MIN + DISPLAY_HEIGHT / 2) << 8;
+    } else if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) > (BOS_BOOGIE_VIEW_Y_MAX << 8)) {
+        gBtlWork->viewY = (BOS_BOOGIE_VIEW_Y_MAX - DISPLAY_HEIGHT / 2) << 8;
     }
 
     gBtlWork->viewY += BtlMapGetShake();

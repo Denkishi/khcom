@@ -21,6 +21,8 @@
 #include "engine_math.h"
 #include "gba/defines.h"
 
+#define BOS_PC_FLD_VIEW_TOP_MARGIN 48
+
 static u8 sBosPcFldShakeActive;
 static s16 sBosPcFldShakePattern;
 static s16 sBosPcFldShakeStep;
@@ -199,7 +201,7 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     BtlMapUpdateShake();
     BosPcFldUpdateShake();
     actor = gBtlWork->actor;
-    viewLeft = gBtlWork->viewX - 0x7800;
+    viewLeft = gBtlWork->viewX - (DISPLAY_WIDTH / 2) * 256;
     screenX = actor->x - viewLeft;
 
     if (screenX < 0) {
@@ -221,16 +223,16 @@ u8 task_bos_pc_fld_1(PcFldWork* work) {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
-        gBtlWork->viewX = (gBtlWork->xMin + 120) * 256;
-    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
-        gBtlWork->viewX = (gBtlWork->xMax - 120) * 256;
+    if (gBtlWork->viewX - (DISPLAY_WIDTH / 2) * 256 < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) * 256;
+    } else if (gBtlWork->viewX + (DISPLAY_WIDTH / 2) * 256 > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - DISPLAY_WIDTH / 2) * 256;
     }
 
-    if (gBtlWork->viewY + 0x3000 < gBtlWork->yMin * 256) {
-        gBtlWork->viewY = (gBtlWork->yMin - 48) * 256;
-    } else if (gBtlWork->viewY + 0x5000 > gBtlWork->yMax * 256) {
-        gBtlWork->viewY = (gBtlWork->yMax - 80) * 256;
+    if (gBtlWork->viewY + BOS_PC_FLD_VIEW_TOP_MARGIN * 256 < gBtlWork->yMin * 256) {
+        gBtlWork->viewY = (gBtlWork->yMin - BOS_PC_FLD_VIEW_TOP_MARGIN) * 256;
+    } else if (gBtlWork->viewY + (DISPLAY_HEIGHT / 2) * 256 > gBtlWork->yMax * 256) {
+        gBtlWork->viewY = (gBtlWork->yMax - DISPLAY_HEIGHT / 2) * 256;
     }
 
     gBtlWork->viewY += BtlMapGetShake();

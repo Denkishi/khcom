@@ -37,6 +37,10 @@
 #include "gba/defines.h"
 #include "macros.h"
 
+#define BOS_URSULA_VIEW_Y_MIN 136
+#define BOS_URSULA_VIEW_Y_MAX 480
+#define BOS_URSULA_VIEW_Y_MAX_GIMMICK 544
+
 static const EmyKind sBosUrsulaEmyKind = { ENEMY_URSULA, 0, 32, 24, 0, 0, 0 };
 
 static const BattleBackgroundDef sBosUrsulaBattleBackgroundDef = {
@@ -761,8 +765,8 @@ void task_bos_ursula_map_0(UrsulaMapWork* work, BattleBackgroundDef* arg) {
     gWin0V = WIN_RANGE(80, DISPLAY_HEIGHT);
     gWinIn = (WININ_WIN0_BG1 | WININ_WIN0_BG2 | WININ_WIN0_BG3 | WININ_WIN0_OBJ | WININ_WIN0_CLR);
     gWinOut = (WINOUT_WIN01_BG0 | WINOUT_WIN01_BG1 | WINOUT_WIN01_BG2 | WINOUT_WIN01_BG3 | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR);
-    work->viewYMax = 0x1E000;
-    work->viewYMaxTarget = 0x1E000;
+    work->viewYMax = BOS_URSULA_VIEW_Y_MAX << 8;
+    work->viewYMaxTarget = BOS_URSULA_VIEW_Y_MAX << 8;
     work->viewYMaxSteps = 0;
 }
 
@@ -796,17 +800,17 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->viewX - 0x7800 < gBtlWork->xMin * 256) {
-        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
-    } else if (gBtlWork->viewX + 0x7800 > gBtlWork->xMax * 256) {
-        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
+    if (gBtlWork->viewX - ((DISPLAY_WIDTH / 2) << 8) < gBtlWork->xMin * 256) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) << 8;
+    } else if (gBtlWork->viewX + ((DISPLAY_WIDTH / 2) << 8) > gBtlWork->xMax * 256) {
+        gBtlWork->viewX = (gBtlWork->xMax - DISPLAY_WIDTH / 2) << 8;
     }
 
-    if (BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == 0x1E000) {
-        work->viewYMaxTarget = 0x22000;
+    if (BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == (BOS_URSULA_VIEW_Y_MAX << 8)) {
+        work->viewYMaxTarget = BOS_URSULA_VIEW_Y_MAX_GIMMICK << 8;
         work->viewYMaxSteps = 20;
-    } else if (!BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == 0x22000) {
-        work->viewYMaxTarget = 0x1E000;
+    } else if (!BosUrsulaIsGimmickInProgress() && work->viewYMaxTarget == (BOS_URSULA_VIEW_Y_MAX_GIMMICK << 8)) {
+        work->viewYMaxTarget = BOS_URSULA_VIEW_Y_MAX << 8;
         work->viewYMaxSteps = 20;
     }
 
@@ -815,10 +819,10 @@ u8 task_bos_ursula_map_1(UrsulaMapWork* work) {
         work->viewYMaxSteps--;
     }
 
-    if (gBtlWork->viewY - 0x5000 < 0x8800) {
-        gBtlWork->viewY = 0xD800;
-    } else if (gBtlWork->viewY + 0x5000 > work->viewYMax) {
-        gBtlWork->viewY = work->viewYMax - 0x5000;
+    if (gBtlWork->viewY - ((DISPLAY_HEIGHT / 2) << 8) < (BOS_URSULA_VIEW_Y_MIN << 8)) {
+        gBtlWork->viewY = (BOS_URSULA_VIEW_Y_MIN + DISPLAY_HEIGHT / 2) << 8;
+    } else if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) > work->viewYMax) {
+        gBtlWork->viewY = work->viewYMax - ((DISPLAY_HEIGHT / 2) << 8);
     }
 
     gBtlWork->viewY += BtlMapGetShake();

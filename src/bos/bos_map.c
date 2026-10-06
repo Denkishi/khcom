@@ -19,6 +19,7 @@
 #include "types.h"
 #include "sprite_palettes.h"
 #include "engine_math.h"
+#include "gba/defines.h"
 
 void task_bos_map_0(BosMapWork* work, BosMapConfig* cfg) {
     LoadBgTiles(0, cfg->tiles, cfg->tilesSize);
@@ -63,16 +64,16 @@ s32 task_bos_map_1() {
     gBtlWork->viewX = gBtlWork->x;
     gBtlWork->viewY = gBtlWork->y;
 
-    if (gBtlWork->viewX - 0x7800 < (gBtlWork->xMin << 8)) {
-        gBtlWork->viewX = (gBtlWork->xMin + 0x78) << 8;
-    } else if (gBtlWork->viewX + 0x7800 > (gBtlWork->xMax << 8)) {
-        gBtlWork->viewX = (gBtlWork->xMax - 0x78) << 8;
+    if (gBtlWork->viewX - ((DISPLAY_WIDTH / 2) << 8) < (gBtlWork->xMin << 8)) {
+        gBtlWork->viewX = (gBtlWork->xMin + DISPLAY_WIDTH / 2) << 8;
+    } else if (gBtlWork->viewX + ((DISPLAY_WIDTH / 2) << 8) > (gBtlWork->xMax << 8)) {
+        gBtlWork->viewX = (gBtlWork->xMax - DISPLAY_WIDTH / 2) << 8;
     }
 
-    if (gBtlWork->viewY + 0x5000 < (gBtlWork->yMin << 8)) {
-        gBtlWork->viewY = (gBtlWork->yMin - 0x50) << 8;
-    } else if (gBtlWork->viewY + 0x5000 > (gBtlWork->yMax << 8)) {
-        gBtlWork->viewY = (gBtlWork->yMax - 0x50) << 8;
+    if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) < (gBtlWork->yMin << 8)) {
+        gBtlWork->viewY = (gBtlWork->yMin - DISPLAY_HEIGHT / 2) << 8;
+    } else if (gBtlWork->viewY + ((DISPLAY_HEIGHT / 2) << 8) > (gBtlWork->yMax << 8)) {
+        gBtlWork->viewY = (gBtlWork->yMax - DISPLAY_HEIGHT / 2) << 8;
     }
 
     y = gBtlWork->viewY + BtlMapGetShake();

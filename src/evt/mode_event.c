@@ -33,6 +33,7 @@
 #include "msg_api.h"
 #include "battle_ids.h"
 #include "event_ids.h"
+#include "mode_movie.h"
 
 static TaskPool sEventTaskPool;
 static u8 sEventPaused;
@@ -288,20 +289,20 @@ void EventUpdate() {
             ModeRequest(&gModeBattle, 179);
             break;
         case 12:
-            ModeRequestHeapReset(&gModeMovie, 4);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_ENDING);
             break;
         case 1:
             gGameState.availableWorlds = 512;
             ModeRequest(&gModeWorldselect, 0);
             break;
         case 10:
-            ModeRequestHeapReset(&gModeMovie, 2);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_6F_GOAL);
             break;
         case 11:
-            ModeRequestHeapReset(&gModeMovie, 3);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_12F_E2);
             break;
         case 13:
-            ModeRequestHeapReset(&gModeMovie, 5);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_RIKU_ENDING);
             break;
         case 3:
         case 5:

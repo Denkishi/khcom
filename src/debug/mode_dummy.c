@@ -20,6 +20,7 @@
 #include "types.h"
 #include "debug_text.h"
 #include "event_ids.h"
+#include "mode_movie.h"
 
 static u16 sDummyEntryIndex;
 
@@ -77,7 +78,7 @@ void DummyUpdateExit() {
 
         switch (entry->action) {
         case 0:
-            ModeRequestHeapReset(&gModeMovie, 1);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_OPENING);
             break;
         case 1:
             gGameState.availableWorlds = 0x200;

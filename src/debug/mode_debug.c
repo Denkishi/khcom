@@ -29,6 +29,7 @@
 #include <stddef.h>
 #include "types.h"
 #include "debug_text.h"
+#include "mode_movie.h"
 
 static DebugWork* sDebugWork;
 
@@ -289,31 +290,31 @@ void mode_debug_1() {
 #else
     case 13:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            ModeRequestHeapReset(&gModeMovie, 1);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_OPENING);
         }
 
         break;
     case 14:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            ModeRequestHeapReset(&gModeMovie, 2);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_6F_GOAL);
         }
 
         break;
     case 15:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            ModeRequestHeapReset(&gModeMovie, 3);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_12F_E2);
         }
 
         break;
     case 16:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            ModeRequestHeapReset(&gModeMovie, 4);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_ENDING);
         }
 
         break;
     case 17:
         if (GetKeysPressed() & (A_BUTTON | START_BUTTON)) {
-            ModeRequestHeapReset(&gModeMovie, 5);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_RIKU_ENDING);
         }
 
         break;

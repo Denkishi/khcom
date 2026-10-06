@@ -69,6 +69,7 @@
 #include "battle_ids.h"
 #include "card_ids.h"
 #include "event_ids.h"
+#include "mode_movie.h"
 
 extern u8 gSoraWorldBattleBase[];
 extern u8 gRikuWorldBattleBase[];
@@ -3838,7 +3839,7 @@ void NewGameSlotMenuExit(NewGameSlotMenuWork* work) {
             RequestEventMode(EVENT_149_RIKU_B12F_OPNING);
         } else {
             SetupSoraNewGame();
-            ModeRequestHeapReset(&gModeMovie, 1);
+            ModeRequestHeapReset(&gModeMovie, MOVIE_OPENING);
         }
     } else {
         ModeRequest(&gModeTitle, 0);

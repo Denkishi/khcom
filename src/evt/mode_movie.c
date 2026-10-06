@@ -716,7 +716,7 @@ void mode_movie_1() {
         MovieSetCallbacks(IwramAlloc, EwramAlloc, IwramFree, EwramFree);
 
         switch (sMovieId) {
-        case 1:
+        case MOVIE_OPENING:
             movie = gMovieOpening;
 
 #ifdef VERSION_EU
@@ -748,17 +748,17 @@ void mode_movie_1() {
             sMovieSubCount = 3;
 #endif
             break;
-        case 2:
+        case MOVIE_6F_GOAL:
             movie = gMovieEvent026;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
-        case 3:
+        case MOVIE_12F_E2:
             movie = gMovieEvent057;
             sMovieSubs = NULL;
             sMovieSubCount = 0;
             break;
-        case 4:
+        case MOVIE_ENDING:
             movie = gMovieEnding;
 
 #ifdef VERSION_EU
@@ -797,7 +797,7 @@ void mode_movie_1() {
 #ifdef VERSION_EU
         default:
 #endif
-        case 5:
+        case MOVIE_RIKU_ENDING:
             movie = gMovieRikuEnding;
 
 #ifdef VERSION_EU
@@ -883,19 +883,19 @@ void mode_movie_1() {
 #endif
         } else {
             switch (sMovieId) {
-            case 1:
+            case MOVIE_OPENING:
                 RequestEventMode(EVENT_000_1F_ENTRANCE_PART1);
                 break;
-            case 2:
+            case MOVIE_6F_GOAL:
                 RequestEventMode(EVENT_026_6F_GOAL_2);
                 break;
-            case 3:
+            case MOVIE_12F_E2:
                 RequestEventMode(EVENT_057_12F_DESTINY_ISLAND_E3);
                 break;
-            case 4:
+            case MOVIE_ENDING:
                 ModeRequest(&gModeStaffRoll, 0);
                 break;
-            case 5:
+            case MOVIE_RIKU_ENDING:
                 ModeRequest(&gModeStaffRoll, 0);
                 break;
             default:

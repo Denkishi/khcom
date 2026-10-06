@@ -14,6 +14,7 @@
 #include "mode.h"
 #include <stddef.h>
 #include "types.h"
+#include "mode_movie.h"
 
 #ifdef VERSION_EU
 
@@ -75,11 +76,11 @@ void mode_chkmov_2() {
 }
 
 const MovieDebugEntry gMovieDebugEntriesEu[5] = {
-    {1, "OPENING"},
-    {2, "6F_GOAL"},
-    {3, "12F_E2"},
-    {4, "ENDING"},
-    {5, "RIKU_ENDING"},
+    {MOVIE_OPENING, "OPENING"},
+    {MOVIE_6F_GOAL, "6F_GOAL"},
+    {MOVIE_12F_E2, "12F_E2"},
+    {MOVIE_ENDING, "ENDING"},
+    {MOVIE_RIKU_ENDING, "RIKU_ENDING"},
 };
 
 const char gMovieDebugTextEu_0812F6D4[] = "                              ";

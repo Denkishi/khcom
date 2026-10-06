@@ -111,7 +111,7 @@ void CreateBtlPopTask(BtlObj* obj, s16 kind) {
     BtlPrizeSrc src;
     s16* cooldown;
 
-    if (kind != 9) {
+    if (kind != BTL_POP_CARD_BREAK) {
         if (obj->parent != NULL) {
             cooldown = &obj->parent->popCooldown;
         } else {
@@ -130,7 +130,7 @@ void CreateBtlPopTask(BtlObj* obj, s16 kind) {
     src.z = obj->z - ((obj->height / 2) << 8);
 
     if (gGameState.flags & GAME_FLAG_RIKU) {
-        if (kind == 9) {
+        if (kind == BTL_POP_CARD_BREAK) {
             src.kind = abs(gBtlWork->breakDifference);
             TaskCreate(&gBtlWork->taskPools[0], &gTaskDescBtlPopCb, &src);
             return;
@@ -143,7 +143,7 @@ void CreateBtlPopTask(BtlObj* obj, s16 kind) {
 
     src.kind = kind;
 
-    if (kind == 9) {
+    if (kind == BTL_POP_CARD_BREAK) {
         if (obj->flags & BTLOBJ_FLAG_NO_BREAK_POP) {
             return;
         }
@@ -1338,7 +1338,7 @@ s32 UpdateBtlObjReaction(BtlObj* obj) {
         obj->flags &= ~(BTLOBJ_FLAG_CARD_ACTION_PENDING | BTLOBJ_FLAG_DAMAGE_PENDING | BTLOBJ_FLAG_CARD_BREAK_PENDING);
         ClearBtlObjActionFlags(obj);
         obj->flags |= BTLOBJ_FLAG_CARD_USE_BLOCKED;
-        CreateBtlPopTask(obj, 9);
+        CreateBtlPopTask(obj, BTL_POP_CARD_BREAK);
         gBtlWork->hitStop = 12;
         return BTL_REACTION_CARD_BROKEN;
     }

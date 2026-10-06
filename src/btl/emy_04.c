@@ -71,7 +71,7 @@ u8 task_emy_04_1(Emy04Work* work) {
         work->base.vz = 0;
 
         if (work->healCount > 2) {
-            CreateBtlPopTask(act, 2);
+            CreateBtlPopTask(act, BTL_POP_MISS);
             EmyReturnToIdle(&work->base);
             break;
         }
@@ -95,7 +95,7 @@ u8 task_emy_04_1(Emy04Work* work) {
             }
 
             if (best->hp == best->maxHp) {
-                CreateBtlPopTask(act, 2);
+                CreateBtlPopTask(act, BTL_POP_MISS);
                 EmyReturnToIdle(&work->base);
                 break;
             }

@@ -2013,7 +2013,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             act->btl->flags &= ~BTL_FLAG_PLAYER_OFFSCREEN;
 #endif
             act->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
-            CreateBtlPopTask(act, 9);
+            CreateBtlPopTask(act, BTL_POP_CARD_BREAK);
             break;
         case BTL_SORA_STATE_AQUA_SPLASH_SPRAY:
             m4aSongNumStop(SONG_EF_DAMBO_SPLOOP);
@@ -2665,7 +2665,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 act->hp = act->maxHp;
             }
 
-            CreateBtlPopTask(act, 10);
+            CreateBtlPopTask(act, BTL_POP_RECOVER);
             SetBtlSoraState(work, BTL_SORA_STATE_IDLE);
             break;
         }
@@ -2904,7 +2904,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     if (GetRandom() % 3 != 0) {
                         attack = 164;
                     } else {
-                        CreateBtlPopTask(act, 2);
+                        CreateBtlPopTask(act, BTL_POP_MISS);
                         attack = swing->attackIds[work->keyblade];
                     }
                 } else {
@@ -3058,7 +3058,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             m4aSongNumStart(SONG_EF_XMAS);
         } else if ((s16)work->stateTimer > 30 && !BgFxIsActive()) {
             obj = gBtlWork->actor;
-            CreateBtlPopTask(obj, 10);
+            CreateBtlPopTask(obj, BTL_POP_RECOVER);
             obj->hp += 50;
 
             if (obj->hp > obj->maxHp) {
@@ -3069,7 +3069,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 obj = gRikuBtlWork->actor;
 
                 if (obj->badStatus != BAD_STATUS_STOP) {
-                    CreateBtlPopTask(obj, 10);
+                    CreateBtlPopTask(obj, BTL_POP_RECOVER);
                     obj->hp += 50;
 
                     if (obj->hp > obj->maxHp) {
@@ -3081,7 +3081,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
                 while (obj != NULL) {
                     if (obj->badStatus != BAD_STATUS_STOP && obj->parent == NULL) {
-                        CreateBtlPopTask(obj, 10);
+                        CreateBtlPopTask(obj, BTL_POP_RECOVER);
                         obj->hp += 50;
 
                         if (obj->hp > obj->maxHp) {
@@ -3124,7 +3124,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
         if ((s16)work->stateTimer == 40) {
             if ((GetRandom() & 1) || (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE))) {
-                CreateBtlPopTask(act, 2);
+                CreateBtlPopTask(act, BTL_POP_MISS);
             } else {
                 s32 minDist;
                 BtlObj* nearest;
@@ -3154,14 +3154,14 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                     FadeFromAmount(FADE_MODE_BLUE, 15, 32);
 
                     if (nearest->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
-                        CreateBtlPopTask(nearest, 0);
+                        CreateBtlPopTask(nearest, BTL_POP_GUARD);
                     } else {
                         nearest->flags |= BTLOBJ_FLAG_WARP_PENDING;
                         nearest->hitFlags = 0;
                         m4aSongNumStart(SONG_EF_TELEP);
                     }
                 } else {
-                    CreateBtlPopTask(act, 2);
+                    CreateBtlPopTask(act, BTL_POP_MISS);
                 }
             }
         }
@@ -3402,7 +3402,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             gBtlWork->hitStop = 8;
         } else if ((s16)work->stateTimer == 41) {
             if (gBtlWork->flags & (BTL_FLAG_BOSS_BATTLE | BTL_FLAG_HUM_BATTLE | BTL_FLAG_VS_BATTLE)) {
-                CreateBtlPopTask(act, 2);
+                CreateBtlPopTask(act, BTL_POP_MISS);
             } else {
                 ApplyAttackBox(98, act->x, act->y, act->z, 256, 256, 256);
             }
@@ -4031,7 +4031,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
                 && work->summonDesc != &gTaskDescSmnBambi
                 && work->summonDesc != &gTaskDescSmnTink
                 && work->summonDesc != &gTaskDescSmnMushu) {
-                CreateBtlPopTask(act, 10);
+                CreateBtlPopTask(act, BTL_POP_RECOVER);
                 maxHp = (u16)act->maxHp;
                 act->hp = ((s16)maxHp >> 2) + act->hp;
 
@@ -4361,7 +4361,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
             act->hp = act->maxHp / 4;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(act);
-            CreateBtlPopTask(act, 10);
+            CreateBtlPopTask(act, BTL_POP_RECOVER);
 
             if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
                 work->state = BTL_SORA_STATE_IDLE;
@@ -5693,7 +5693,7 @@ s32 task_btl_sora_1(BtlSoraWork* work) {
 
             if (act->groundZ != 0 || act->x != 0x10000 || act->y != centerY) {
                 gBtlWork->flags |= BTL_FLAG_STOP_BGFX;
-                CreateBtlPopTask(act, 2);
+                CreateBtlPopTask(act, BTL_POP_MISS);
                 ClearBtlObjActionFlags(act);
                 work->state = BTL_SORA_STATE_IDLE;
                 work->steps = 0;

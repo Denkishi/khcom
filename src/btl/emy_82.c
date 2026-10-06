@@ -309,7 +309,7 @@ u8 task_emy_82_1(Emy82Work* work) {
                             best->flags |= BTLOBJ_FLAG_HEAL_PENDING;
                             best->damage = 0xFFEC;
                         } else {
-                            CreateBtlPopTask(act, 2);
+                            CreateBtlPopTask(act, BTL_POP_MISS);
                         }
                     }
 
@@ -368,10 +368,10 @@ u8 task_emy_82_1(Emy82Work* work) {
                             gBtlWork->pendingEnemies++;
                             w->spawnCount++;
                         } else {
-                            CreateBtlPopTask(act, 2);
+                            CreateBtlPopTask(act, BTL_POP_MISS);
                         }
                     } else {
-                        CreateBtlPopTask(act, 2);
+                        CreateBtlPopTask(act, BTL_POP_MISS);
                     }
 
                     break;

@@ -454,7 +454,7 @@ u8 task_hum_vixen_1(VixenWork* work) {
             act->hp = act->maxHp / 4;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(act);
-            CreateBtlPopTask(act, 10);
+            CreateBtlPopTask(act, BTL_POP_RECOVER);
             w->base.state = zero;
             w->base.stateTimer = zero;
         } else {

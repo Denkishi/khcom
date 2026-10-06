@@ -618,7 +618,7 @@ u8 task_frd_donald_1(FrdDonaldWork* work) {
 
                     if (ally->hp > ally->maxHp) ally->hp=ally->maxHp;
 
-                    CreateBtlPopTask(ally,10);
+                    CreateBtlPopTask(ally,BTL_POP_RECOVER);
                     work->state=FRD_DONALD_STATE_ATTACK_END;
                     SetBattleZoom(15,Q_8_8(1),gBtlWork->x2,gBtlWork->y2);
                     work->stateTimer=0;

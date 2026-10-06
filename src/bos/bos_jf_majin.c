@@ -1066,7 +1066,7 @@ void BosJfMajinUpdateBreak(JfMajinWork* work) {
         work->spriteVisible = TRUE;
         work->extraClipRows = 0;
         jf->body.flags &= ~BTLOBJ_FLAG_UNHITTABLE;
-        CreateBtlPopTask(&jf->body, 9);
+        CreateBtlPopTask(&jf->body, BTL_POP_CARD_BREAK);
         work->jf->stateStep++;
     } else if (jf->stateStep > 60) {
         ClearBtlObjActionFlags(sub);

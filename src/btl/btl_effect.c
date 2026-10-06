@@ -2925,9 +2925,9 @@ void BgFxApplySyncHp(s16 hp) {
     if (gBtlWork->flags & BTL_FLAG_VS_BATTLE) {
         if (GetRandom() % 5) {
             if (gBtlWork->flags & BTL_FLAG_PLAYER_CARD_ACTION) {
-                CreateBtlPopTask(gBtlWork->actor, 2);
+                CreateBtlPopTask(gBtlWork->actor, BTL_POP_MISS);
             } else {
-                CreateBtlPopTask(gRikuBtlWork->actor, 2);
+                CreateBtlPopTask(gRikuBtlWork->actor, BTL_POP_MISS);
             }
         } else {
             obj = gRikuBtlWork->actor;
@@ -2949,7 +2949,7 @@ void BgFxApplySyncHp(s16 hp) {
 
         while (obj != NULL) {
             if (obj->flags & BTLOBJ_FLAG_BOSS) {
-                CreateBtlPopTask(obj, 0);
+                CreateBtlPopTask(obj, BTL_POP_GUARD);
             } else {
                 obj->hp = hp;
 

@@ -683,7 +683,7 @@ s32 EmyUpdateCommonStates(EmyWork* work) {
         work->vz = 0;
 
         if (work->stateTimer == 40) {
-            CreateBtlPopTask(actor, 10);
+            CreateBtlPopTask(actor, BTL_POP_RECOVER);
             actor->hp -= actor->damage;
 
             if (actor->hp > actor->maxHp) {

@@ -426,7 +426,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
     if (attack->flags & ATTACK_FLAG_WARP_AWAY) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_WARP) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -480,7 +480,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
                 if (source->hp > source->maxHp) source->hp = source->maxHp;
 
-                CreateBtlPopTask(source, 10);
+                CreateBtlPopTask(source, BTL_POP_RECOVER);
                 target->exp -= target->exp >> 2;
             }
 
@@ -546,7 +546,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         switch (target->btl->hcEffect) {
         case HC_EFFECT_PROTECT:
             if (attack->flags & ATTACK_FLAG_ELEMENT_PHYSICAL) {
-                CreateBtlPopTask(hit, 0);
+                CreateBtlPopTask(hit, BTL_POP_GUARD);
                 scale = scale != 0 ? (scale * Q_8_8(0.5)) >> 8 : Q_8_8(0.5);
             }
 
@@ -580,7 +580,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             }
 
             hit->invincibleTimer = 30;
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_PHYSICAL) {
@@ -606,7 +606,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
             }
 
             hit->invincibleTimer = 30;
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             BgFxStartGuard(gBtlWork->x3, gBtlWork->y3, hit->z - hit->centerHeight * 256);
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_NEUTRAL) {
@@ -625,7 +625,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_FIRE) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_FIRE) {
@@ -644,7 +644,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BLIZZARD) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_BLIZZARD) {
@@ -663,7 +663,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         }
 
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_THUNDER) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         } else if (hit->flags & BTLOBJ_FLAG_RESIST_THUNDER) {
@@ -677,7 +677,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         }
     } else if (attack->flags & ATTACK_FLAG_INFLICT_STOP) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_STOP) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -693,7 +693,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
     }
 
     if (hit->flags & BTLOBJ_FLAG_INVULNERABLE) {
-        CreateBtlPopTask(hit, 0);
+        CreateBtlPopTask(hit, BTL_POP_GUARD);
         hit->invincibleTimer = 30;
         gBtlWork->hitStop = (u8)attack->hitStop;
         return 1;
@@ -703,7 +703,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         target->flags |= BTLOBJ_FLAG_STUN_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_TERROR) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_TERROR) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -711,7 +711,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         target->flags |= BTLOBJ_FLAG_TERROR_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_CONFUSE) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_CONFUSE) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -719,7 +719,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         target->flags |= BTLOBJ_FLAG_CONFUSE_PENDING;
     } else if (attack->flags & ATTACK_FLAG_INFLICT_BIND) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_BIND) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -729,7 +729,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
 
     if (attack->flags & ATTACK_FLAG_INFLICT_GRAVITY) {
         if (hit->flags & BTLOBJ_FLAG_IMMUNE_GRAVITY) {
-            CreateBtlPopTask(hit, 0);
+            CreateBtlPopTask(hit, BTL_POP_GUARD);
             hit->invincibleTimer = 30;
             return 2;
         }
@@ -758,7 +758,7 @@ s32 ResolveAttackHit(BtlObj* hit, s32 index) {
         if (target->hp > 1 && target->hp - target->damage <= 0) {
             target->damage = target->hp - 1;
             target->invincibleTimer = 60;
-            CreateBtlPopTask(target, 0);
+            CreateBtlPopTask(target, BTL_POP_GUARD);
             target->btl->hcEffectCount--;
         }
     }

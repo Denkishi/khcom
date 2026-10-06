@@ -175,7 +175,7 @@ u8 task_smn_king_1(SmnKingWork* work) {
                 break;
             }
 
-            CreateBtlPopTask(gBtlWork->actor, 10);
+            CreateBtlPopTask(gBtlWork->actor, BTL_POP_RECOVER);
 
             if (gBtlWork->actor->hp > gBtlWork->actor->maxHp) {
                 gBtlWork->actor->hp = gBtlWork->actor->maxHp;

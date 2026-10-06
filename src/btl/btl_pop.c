@@ -21,19 +21,19 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     switch (gLanguage) {
     case LANGUAGE_ENGLISH:
         switch (src->kind) {
-        case 0:
+        case BTL_POP_GUARD:
             work->tiles = LoadObjTiles(gBtlPopGuardTiles, sizeof(gBtlPopGuardTiles));
             AnimInit(&work->anim, gBtlPopGuardAnims, gBtlPopGuardFrames);
             break;
-        case 2:
+        case BTL_POP_MISS:
             work->tiles = LoadObjTiles(gBtlPopMissTiles, sizeof(gBtlPopMissTiles));
             AnimInit(&work->anim, gBtlPopMissAnims, gBtlPopMissFrames);
             break;
-        case 9:
+        case BTL_POP_CARD_BREAK:
             work->tiles = LoadObjTiles(gBtlPopCardBreakTiles, sizeof(gBtlPopCardBreakTiles));
             AnimInit(&work->anim, gBtlPopCardBreakAnims, gBtlPopCardBreakFrames);
             break;
-        case 10:
+        case BTL_POP_RECOVER:
             work->tiles = LoadObjTiles(gBtlPopRecoverTiles, sizeof(gBtlPopRecoverTiles));
             AnimInit(&work->anim, gBtlPopRecoverAnims, gBtlPopRecoverFrames);
             break;
@@ -46,19 +46,19 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         break;
     case LANGUAGE_FRENCH:
         switch (src->kind) {
-        case 0:
+        case BTL_POP_GUARD:
             work->tiles = LoadObjTiles(gBtlPopGuardFrenchTiles, sizeof(gBtlPopGuardFrenchTiles));
             AnimInit(&work->anim, gBtlPopGuardFrenchAnims, gBtlPopGuardFrenchFrames);
             break;
-        case 2:
+        case BTL_POP_MISS:
             work->tiles = LoadObjTiles(gBtlPopMissFrenchTiles, sizeof(gBtlPopMissFrenchTiles));
             AnimInit(&work->anim, gBtlPopMissFrenchAnims, gBtlPopMissFrenchFrames);
             break;
-        case 9:
+        case BTL_POP_CARD_BREAK:
             work->tiles = LoadObjTiles(gBtlPopCardBreakTiles, sizeof(gBtlPopCardBreakTiles));
             AnimInit(&work->anim, gBtlPopCardBreakAnims, gBtlPopCardBreakFrames);
             break;
-        case 10:
+        case BTL_POP_RECOVER:
             work->tiles = LoadObjTiles(gBtlPopRecoverFrenchTiles, sizeof(gBtlPopRecoverFrenchTiles));
             AnimInit(&work->anim, gBtlPopRecoverFrenchAnims, gBtlPopRecoverFrenchFrames);
             break;
@@ -71,19 +71,19 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         break;
     case LANGUAGE_GERMAN:
         switch (src->kind) {
-        case 0:
+        case BTL_POP_GUARD:
             work->tiles = LoadObjTiles(gBtlPopGuardGermanTiles, sizeof(gBtlPopGuardGermanTiles));
             AnimInit(&work->anim, gBtlPopGuardGermanAnims, gBtlPopGuardGermanFrames);
             break;
-        case 2:
+        case BTL_POP_MISS:
             work->tiles = LoadObjTiles(gBtlPopMissGermanTiles, sizeof(gBtlPopMissGermanTiles));
             AnimInit(&work->anim, gBtlPopMissGermanAnims, gBtlPopMissGermanFrames);
             break;
-        case 9:
+        case BTL_POP_CARD_BREAK:
             work->tiles = LoadObjTiles(gBtlPopCardBreakGermanTiles, sizeof(gBtlPopCardBreakGermanTiles));
             AnimInit(&work->anim, gBtlPopCardBreakGermanAnims, gBtlPopCardBreakGermanFrames);
             break;
-        case 10:
+        case BTL_POP_RECOVER:
             work->tiles = LoadObjTiles(gBtlPopRecoverGermanTiles, sizeof(gBtlPopRecoverGermanTiles));
             AnimInit(&work->anim, gBtlPopRecoverGermanAnims, gBtlPopRecoverGermanFrames);
             break;
@@ -96,19 +96,19 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
         break;
     case LANGUAGE_ITALIAN:
         switch (src->kind) {
-        case 0:
+        case BTL_POP_GUARD:
             work->tiles = LoadObjTiles(gBtlPopGuardItalianTiles, sizeof(gBtlPopGuardItalianTiles));
             AnimInit(&work->anim, gBtlPopGuardItalianAnims, gBtlPopGuardItalianFrames);
             break;
-        case 2:
+        case BTL_POP_MISS:
             work->tiles = LoadObjTiles(gBtlPopMissItalianTiles, sizeof(gBtlPopMissItalianTiles));
             AnimInit(&work->anim, gBtlPopMissItalianAnims, gBtlPopMissItalianFrames);
             break;
-        case 9:
+        case BTL_POP_CARD_BREAK:
             work->tiles = LoadObjTiles(gBtlPopCardBreakItalianTiles, sizeof(gBtlPopCardBreakItalianTiles));
             AnimInit(&work->anim, gBtlPopCardBreakItalianAnims, gBtlPopCardBreakItalianFrames);
             break;
-        case 10:
+        case BTL_POP_RECOVER:
             work->tiles = LoadObjTiles(gBtlPopRecoverItalianTiles, sizeof(gBtlPopRecoverItalianTiles));
             AnimInit(&work->anim, gBtlPopRecoverItalianAnims, gBtlPopRecoverItalianFrames);
             break;
@@ -122,19 +122,19 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     case LANGUAGE_SPANISH:
     default:
         switch (src->kind) {
-        case 0:
+        case BTL_POP_GUARD:
             work->tiles = LoadObjTiles(gBtlPopGuardSpanishTiles, sizeof(gBtlPopGuardSpanishTiles));
             AnimInit(&work->anim, gBtlPopGuardSpanishAnims, gBtlPopGuardSpanishFrames);
             break;
-        case 2:
+        case BTL_POP_MISS:
             work->tiles = LoadObjTiles(gBtlPopMissSpanishTiles, sizeof(gBtlPopMissSpanishTiles));
             AnimInit(&work->anim, gBtlPopMissSpanishAnims, gBtlPopMissSpanishFrames);
             break;
-        case 9:
+        case BTL_POP_CARD_BREAK:
             work->tiles = LoadObjTiles(gBtlPopCardBreakSpanishTiles, sizeof(gBtlPopCardBreakSpanishTiles));
             AnimInit(&work->anim, gBtlPopCardBreakSpanishAnims, gBtlPopCardBreakSpanishFrames);
             break;
-        case 10:
+        case BTL_POP_RECOVER:
             work->tiles = LoadObjTiles(gBtlPopRecoverSpanishTiles, sizeof(gBtlPopRecoverSpanishTiles));
             AnimInit(&work->anim, gBtlPopRecoverSpanishAnims, gBtlPopRecoverSpanishFrames);
             break;
@@ -150,57 +150,57 @@ void task_btl_pop_0(BtlPopWork* work, BtlPremireSrc* src) {
     AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
 #else
     switch (src->kind) {
-    case 0:
+    case BTL_POP_GUARD:
         work->tiles = LoadObjTiles(gBtlPopGuardTiles, sizeof(gBtlPopGuardTiles));
         AnimInit(&work->anim, gBtlPopGuardAnims, gBtlPopGuardFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 1:
+    case BTL_POP_COUNTER:
         work->tiles = LoadObjTiles(gBtlPopCounterTiles, sizeof(gBtlPopCounterTiles));
         AnimInit(&work->anim, gBtlPopCounterAnims, gBtlPopCounterFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 2:
+    case BTL_POP_MISS:
         work->tiles = LoadObjTiles(gBtlPopMissTiles, sizeof(gBtlPopMissTiles));
         AnimInit(&work->anim, gBtlPopMissAnims, gBtlPopMissFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 3:
+    case BTL_POP_OVERWRITE:
         work->tiles = LoadObjTiles(gBtlPopOverWriteTiles, sizeof(gBtlPopOverWriteTiles));
         AnimInit(&work->anim, gBtlPopOverWriteAnims, gBtlPopOverWriteFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 5:
+    case BTL_POP_25_PERCENT_UP:
         work->tiles = LoadObjTiles(gBtlPopPercentTiles, sizeof(gBtlPopPercentTiles));
         AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 6:
+    case BTL_POP_50_PERCENT_UP:
         work->tiles = LoadObjTiles(gBtlPopPercentTiles, sizeof(gBtlPopPercentTiles));
         AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 2, ANIM_FLAG_LOOP);
         break;
-    case 7:
+    case BTL_POP_25_PERCENT_DOWN:
         work->tiles = LoadObjTiles(gBtlPopPercentTiles, sizeof(gBtlPopPercentTiles));
         AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 1, ANIM_FLAG_LOOP);
         break;
-    case 8:
+    case BTL_POP_50_PERCENT_DOWN:
         work->tiles = LoadObjTiles(gBtlPopPercentTiles, sizeof(gBtlPopPercentTiles));
         AnimInit(&work->anim, gBtlPopPercentAnims, gBtlPopPercentFrames);
         AnimStart(&work->anim, 3, ANIM_FLAG_LOOP);
         break;
-    case 9:
+    case BTL_POP_CARD_BREAK:
         work->tiles = LoadObjTiles(gBtlPopCardBreakTiles, sizeof(gBtlPopCardBreakTiles));
         AnimInit(&work->anim, gBtlPopCardBreakAnims, gBtlPopCardBreakFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 10:
+    case BTL_POP_RECOVER:
         work->tiles = LoadObjTiles(gBtlPopRecoverTiles, sizeof(gBtlPopRecoverTiles));
         AnimInit(&work->anim, gBtlPopRecoverAnims, gBtlPopRecoverFrames);
         AnimStart(&work->anim, 0, ANIM_FLAG_LOOP);
         break;
-    case 4:
+    case BTL_POP_TIME_BREAK:
     default:
         work->tiles = LoadObjTiles(gBtlPopTimeBreakTiles, sizeof(gBtlPopTimeBreakTiles));
         AnimInit(&work->anim, gBtlPopTimeBreakAnims, gBtlPopTimeBreakFrames);

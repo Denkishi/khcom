@@ -16,6 +16,20 @@ struct AnimDef;
 void SetBattleZoom(u16 steps, s32 scale, s32 x, s32 y);
 void AnimChangeWithDef(const struct AnimDef* defs, void* anim, u16 index, u16 flags, void* tiles);
 void WorldToScreen(s16* outX, s16* outY, s32 px, s32 py, s32 pz);
+enum BtlPopKind {
+    BTL_POP_GUARD,
+    BTL_POP_COUNTER,
+    BTL_POP_MISS,
+    BTL_POP_OVERWRITE,
+    BTL_POP_TIME_BREAK,
+    BTL_POP_25_PERCENT_UP,
+    BTL_POP_50_PERCENT_UP,
+    BTL_POP_25_PERCENT_DOWN,
+    BTL_POP_50_PERCENT_DOWN,
+    BTL_POP_CARD_BREAK,
+    BTL_POP_RECOVER
+};
+
 void CreateBtlPopTask(BtlObj* obj, s16 kind);
 void MakeOpponentsHittable();
 void UpdateBattleState();

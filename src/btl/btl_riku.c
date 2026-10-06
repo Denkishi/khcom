@@ -971,7 +971,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
 
 #ifndef VERSION_EU
             act->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
-            CreateBtlPopTask(act, 9);
+            CreateBtlPopTask(act, BTL_POP_CARD_BREAK);
 #endif
 
             if (work->flags & BTL_RIKU_FLAG_HIDDEN) {
@@ -1401,7 +1401,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                 act->z = act->originZ;
 #ifdef VERSION_EU
                 act->flags &= ~BTLOBJ_FLAG_NO_BREAK_POP;
-                CreateBtlPopTask(act, 9);
+                CreateBtlPopTask(act, BTL_POP_CARD_BREAK);
 #endif
                 break;
             }
@@ -3800,7 +3800,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
                     if (GetRandom() % 2 != 0) {
                         attack = 164;
                     } else {
-                        CreateBtlPopTask(act, 2);
+                        CreateBtlPopTask(act, BTL_POP_MISS);
                         attack = swing->attackIds[0];
                     }
                 } else {
@@ -4313,7 +4313,7 @@ s32 task_btl_riku_1(BtlRikuWork* work) {
             act->hp = act->maxHp / 4;
             act->flags &= ~BTLOBJ_FLAG_INTANGIBLE;
             ClearBtlObjActionFlags(act);
-            CreateBtlPopTask(act, 10);
+            CreateBtlPopTask(act, BTL_POP_RECOVER);
 
             if (gBtlWork->enemyCount == 0 && gBtlWork->pendingEnemies <= 0) {
                 work->state = BTL_RIKU_STATE_END_BATTLE;

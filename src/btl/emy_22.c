@@ -173,7 +173,7 @@ u8 task_emy_22_1(Emy22Work* work) {
                 act->hp = act->maxHp;
             }
 
-            CreateBtlPopTask(act, 10);
+            CreateBtlPopTask(act, BTL_POP_RECOVER);
         }
 
         break;

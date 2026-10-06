@@ -2113,7 +2113,7 @@ u8 BosLstUpdateBreak(BosLstWork* work) {
     arg.x = work->x + work->offsetX;
     arg.y = work->y + work->offsetY;
     arg.z = (work->z + work->offsetZ) - ((obj->height >> 1) << 8);
-    arg.kind = 9;
+    arg.kind = BTL_POP_CARD_BREAK;
     TaskCreate(&gBtlWork->taskPools[1], &gTaskDescBtlPop, &arg);
     return 1;
 }

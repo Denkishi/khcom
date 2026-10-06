@@ -1479,7 +1479,7 @@ u8 task_bos_boogie_kaihuku_1(BoogieKaihukuWork* work) {
             break;
         }
 
-        CreateBtlPopTask(boogieActor, 10);
+        CreateBtlPopTask(boogieActor, BTL_POP_RECOVER);
         boogie = work->boogie;
         boogie->actor.hp += boogie->actor.maxHp / 16;
         boogie = work->boogie;

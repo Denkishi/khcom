@@ -5134,6 +5134,22 @@ void Task_MapDoor_3(MapDoorWork* work) {
     TaskPoolDestroy(&work->tasks);
 }
 
+enum MapMenuItem {
+    MAP_MENU_ITEM_DECK,
+    MAP_MENU_ITEM_MAP,
+    MAP_MENU_ITEM_MAP_CARDS,
+    MAP_MENU_ITEM_WORLDS,
+    MAP_MENU_ITEM_STATUS,
+    MAP_MENU_ITEM_JOURNAL,
+    MAP_MENU_ITEM_QUICK_SAVE
+};
+
+enum MapConfirmCursor {
+    MAP_CONFIRM_CURSOR_NONE,
+    MAP_CONFIRM_CURSOR_YES,
+    MAP_CONFIRM_CURSOR_NO
+};
+
 void MapMenuSetPanelPalettesExcluded(MapMenuWork* work, u8 excluded) {
     s32 i;
 
@@ -5249,7 +5265,7 @@ s32 MapMenuOpen(MapMenuWork* work) {
     work->x8 = work->playerStartX;
     work->y4 = work->playerStartY;
     work->cursor = gGameState.mapMenuCursor;
-    work->confirmCursor = 0;
+    work->confirmCursor = MAP_CONFIRM_CURSOR_NONE;
     work->cursorVisible = FALSE;
     work->panelsVisible = FALSE;
     work->steps = work->reopened ? 1 : 16;
@@ -5461,16 +5477,16 @@ s32 MapMenuSoraInput(MapMenuWork* work) {
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
         switch (work->cursor) {
-        case 0:
-        case 2:
-        case 3:
-        case 4:
-        case 5:
+        case MAP_MENU_ITEM_DECK:
+        case MAP_MENU_ITEM_MAP_CARDS:
+        case MAP_MENU_ITEM_WORLDS:
+        case MAP_MENU_ITEM_STATUS:
+        case MAP_MENU_ITEM_JOURNAL:
             RequestFieldResume();
             work->update = MapMenuOpenSubMode;
             m4aSongNumStart(SONG_SYS_KETTEI);
             break;
-        case 1:
+        case MAP_MENU_ITEM_MAP:
             if ((u8)(gMapFloorState.room + 4) > 2) {
                 RequestFieldResume();
                 work->update = MapMenuOpenSubMode;
@@ -5480,10 +5496,10 @@ s32 MapMenuSoraInput(MapMenuWork* work) {
             }
 
             break;
-        case 6:
+        case MAP_MENU_ITEM_QUICK_SAVE:
             m4aSongNumStart(SONG_SYS_KETTEI);
             MapMenuInitConfirm(work);
-            work->confirmCursor = 2;
+            work->confirmCursor = MAP_CONFIRM_CURSOR_NO;
             work->x7 = 0x8800;
             work->update = MapMenuConfirmInput;
             break;
@@ -5511,20 +5527,20 @@ s32 MapMenuRikuInput(MapMenuWork* work) {
         m4aSongNumStart(SONG_SYS_CLOSE);
     } else if (GetKeysPressed() & A_BUTTON) {
         switch (work->cursor) {
-        case 0:
-        case 2:
-        case 3:
-        case 4:
+        case MAP_MENU_ITEM_DECK:
+        case MAP_MENU_ITEM_MAP_CARDS:
+        case MAP_MENU_ITEM_WORLDS:
+        case MAP_MENU_ITEM_STATUS:
             m4aSongNumStart(SONG_SYS_KETTEI);
             RequestFieldResume();
             work->update = MapMenuOpenSubMode;
             break;
-        case 5:
+        case MAP_MENU_ITEM_JOURNAL:
             m4aSongNumStart(SONG_SYS_KETTEI);
             RequestFieldResume();
             work->update = MapMenuOpenSubMode;
             break;
-        case 1:
+        case MAP_MENU_ITEM_MAP:
             if ((u8)(gMapFloorState.room + 4) > 2) {
                 m4aSongNumStart(SONG_SYS_KETTEI);
                 RequestFieldResume();
@@ -5534,10 +5550,10 @@ s32 MapMenuRikuInput(MapMenuWork* work) {
             }
 
             break;
-        case 6:
+        case MAP_MENU_ITEM_QUICK_SAVE:
             m4aSongNumStart(SONG_SYS_KETTEI);
             MapMenuInitConfirm(work);
-            work->confirmCursor = 2;
+            work->confirmCursor = MAP_CONFIRM_CURSOR_NO;
             work->x7 = 0x8800;
             work->update = MapMenuConfirmInput;
             break;
@@ -5551,7 +5567,7 @@ s32 MapMenuOpenSubMode(MapMenuWork* work) {
     gGameState.mapMenuCursor = work->cursor;
 
     switch (work->cursor) {
-    case 0:
+    case MAP_MENU_ITEM_DECK:
         if (gGameState.flags & GAME_FLAG_RIKU) {
             if (gGameState.progression.tutorialFlags & 0x800) {
                 ModeRequest(&gModeDeck, 0);
@@ -5563,22 +5579,22 @@ s32 MapMenuOpenSubMode(MapMenuWork* work) {
         }
 
         break;
-    case 1:
+    case MAP_MENU_ITEM_MAP:
         ModeRequest(&gModeAllmap, 0);
         break;
-    case 4:
+    case MAP_MENU_ITEM_STATUS:
         ModeRequest(&gModeStatus, 0);
         break;
-    case 2:
+    case MAP_MENU_ITEM_MAP_CARDS:
         ModeRequest(&gModeMapinspect, 0);
         break;
-    case 3:
+    case MAP_MENU_ITEM_WORLDS:
         ModeRequest(&gModeWorldinspect, 0);
         break;
-    case 5:
+    case MAP_MENU_ITEM_JOURNAL:
         ModeRequest(&gModeJiminy, 0);
         break;
-    case 6:
+    case MAP_MENU_ITEM_QUICK_SAVE:
         ModeRequest(&gModeMenuMsg, 1);
         break;
     }
@@ -5624,21 +5640,21 @@ s32 MapMenuSlideOutY(MapMenuWork* work) {
 
 s32 MapMenuConfirmInput(MapMenuWork* work) {
     if (GetKeysPressed() & DPAD_LEFT) {
-        if (work->confirmCursor != 1) {
-            work->confirmCursor = 1;
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_YES) {
+            work->confirmCursor = MAP_CONFIRM_CURSOR_YES;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
     if (GetKeysPressed() & DPAD_RIGHT) {
-        if (work->confirmCursor != 2) {
-            work->confirmCursor = 2;
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_NO) {
+            work->confirmCursor = MAP_CONFIRM_CURSOR_NO;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
-    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && work->confirmCursor == 2)) {
-        work->confirmCursor = 0;
+    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && work->confirmCursor == MAP_CONFIRM_CURSOR_NO)) {
+        work->confirmCursor = MAP_CONFIRM_CURSOR_NONE;
         MapMenuFreeConfirm(work);
         work->y3 = (work->cursor * 19 + 16) << 8;
         work->update = (gGameState.flags & GAME_FLAG_RIKU) ? MapMenuRikuInput : MapMenuSoraInput;
@@ -5677,7 +5693,7 @@ void Task_MapMenu_0(MapMenuWork* work) {
     if (cursor != -1) {
         work->reopened = TRUE;
     } else {
-        gGameState.mapMenuCursor = 0;
+        gGameState.mapMenuCursor = MAP_MENU_ITEM_DECK;
         work->reopened = FALSE;
         m4aSongNumStart(SONG_SYS_CANSEL);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, 0xFF, 0x80);
@@ -5711,7 +5727,7 @@ void Task_MapMenu_2(MapMenuWork* work) {
 
     if (
 #ifdef VERSION_EU
-        work->confirmCursor == 0 &&
+        work->confirmCursor == MAP_CONFIRM_CURSOR_NONE &&
 #endif
         (gMapRoomState->flags & ROOM_FLAG_HIDE_PLAYER)) {
         if (gGameState.flags & GAME_FLAG_RIKU) {
@@ -5956,17 +5972,17 @@ void Task_MapMenu_2(MapMenuWork* work) {
 
         if (work->cursorVisible) {
             switch (work->confirmCursor) {
-            case 1:
+            case MAP_CONFIRM_CURSOR_YES:
                 ApproachValueHalf(&work->x7, 0x4800);
                 DrawSprite(work->x7 >> 8, 80, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL,
                     SPRITE_FLAG_HFLIP, 60);
                 break;
-            case 2:
+            case MAP_CONFIRM_CURSOR_NO:
                 ApproachValueHalf(&work->x7, 0x8800);
                 DrawSprite(work->x7 >> 8, 80, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL,
                     SPRITE_FLAG_HFLIP, 60);
                 break;
-            case 0:
+            case MAP_CONFIRM_CURSOR_NONE:
             default:
                 ApproachValueHalf(&work->y3, (work->cursor * 19 + 16) << 8);
                 DrawSprite(24, work->y3 >> 8, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL,
@@ -5975,7 +5991,7 @@ void Task_MapMenu_2(MapMenuWork* work) {
             }
         }
 
-        if (work->confirmCursor != 0) {
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_NONE) {
             DrawTextSlots(
 #ifdef VERSION_EU
                 120 - (GetTextSlotsWidth(work->textSlots2, work->textSlotCount2) >> 1),
@@ -6272,7 +6288,7 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
         work->textSlotCount4 = LoadTextSlots(LOCALIZED_STRING(gNoChoiceText), noSlots);
         MapSaveSetPanelPalettesExcluded(work, TRUE);
         work->dialogVisible = TRUE;
-        work->confirmCursor = 2;
+        work->confirmCursor = MAP_CONFIRM_CURSOR_NO;
         work->x2 = 0xB000;
         work->update = MapSaveInput;
     }
@@ -6282,22 +6298,22 @@ s32 MapSaveSlideInX(MapSaveWork* work) {
 
 s32 MapSaveInput(MapSaveWork* work) {
     if (GetKeysRepeat() & DPAD_LEFT) {
-        if (work->confirmCursor != 1) {
-            work->confirmCursor = 1;
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_YES) {
+            work->confirmCursor = MAP_CONFIRM_CURSOR_YES;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
     if (GetKeysRepeat() & DPAD_RIGHT) {
-        if (work->confirmCursor != 2) {
-            work->confirmCursor = 2;
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_NO) {
+            work->confirmCursor = MAP_CONFIRM_CURSOR_NO;
             m4aSongNumStart(SONG_SYS_CLICK);
         }
     }
 
-    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && work->confirmCursor != 1)) {
+    if ((GetKeysPressed() & B_BUTTON) || ((GetKeysPressed() & A_BUTTON) && work->confirmCursor != MAP_CONFIRM_CURSOR_YES)) {
         m4aSongNumStart(SONG_SYS_CLOSE);
-        work->confirmCursor = 0;
+        work->confirmCursor = MAP_CONFIRM_CURSOR_NONE;
         work->dialogVisible = FALSE;
         work->steps = 16;
         work->update = MapSaveSlideOutX;
@@ -6326,7 +6342,7 @@ s32 MapSaveInput(MapSaveWork* work) {
         work->textSlotCount2 = LoadTextSlots(LOCALIZED_STRING(gMapSaveCompleteText), work->textSlots2);
         work->textSlotCount3 = 0;
         work->textSlotCount4 = 0;
-        work->confirmCursor = 0;
+        work->confirmCursor = MAP_CONFIRM_CURSOR_NONE;
         work->update = MapSaveWaitClose;
     }
 
@@ -6422,7 +6438,7 @@ void Task_MapSave_0(MapSaveWork* work) {
     work->playerStartY = gFieldState->actor.fieldPosition.y + gFieldState->actor.fieldPosition.z - gFieldState->y;
     work->x3 = work->playerStartX;
     work->y3 = work->playerStartY;
-    work->confirmCursor = 0;
+    work->confirmCursor = MAP_CONFIRM_CURSOR_NONE;
     work->dialogVisible = FALSE;
     work->steps = 16;
     work->update = MapSaveSlideInY;
@@ -6435,7 +6451,7 @@ void Task_MapSave_0(MapSaveWork* work) {
 s32 Task_MapSave_1(MapSaveWork* work) {
     TaskPoolUpdate(&work->tasks);
 
-    if (work->confirmCursor != 0) {
+    if (work->confirmCursor != MAP_CONFIRM_CURSOR_NONE) {
         AnimUpdate(&work->anim);
     }
 
@@ -6505,7 +6521,7 @@ void Task_MapSave_2(MapSaveWork* work) {
         DrawSprite(0, 16, gSaveSlotCharaWinFrame0, work->tiles3, work->palette3, NULL, SPRITE_PRIORITY(1), 90);
         DrawTextSlots(100, 59, work->textSlots, work->palette4, 50, work->textSlotCount);
 
-        if (work->confirmCursor != 0) {
+        if (work->confirmCursor != MAP_CONFIRM_CURSOR_NONE) {
 #ifdef VERSION_EU
             DrawTextSlots(166 - (GetTextSlotsWidth(work->textSlots2, work->textSlotCount2) >> 1), 92, work->textSlots2, work->palette8, 50, work->textSlotCount2);
 #elif defined(VERSION_JP)
@@ -6526,12 +6542,12 @@ void Task_MapSave_2(MapSaveWork* work) {
         }
 
         switch (work->confirmCursor) {
-        case 1:
+        case MAP_CONFIRM_CURSOR_YES:
             ApproachValueHalf(&work->x2, 0x7800);
             DrawSprite(work->x2 >> 8, 110, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_FLAG_HFLIP,
                 40);
             break;
-        case 2:
+        case MAP_CONFIRM_CURSOR_NO:
             ApproachValueHalf(&work->x2, 0xB000);
             DrawSprite(work->x2 >> 8, 110, AnimGetGfx(&work->anim), work->tiles, work->palette, NULL, SPRITE_FLAG_HFLIP,
                 40);

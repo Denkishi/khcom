@@ -261,6 +261,12 @@ void MapEnmSetupArgs(MapEnmArgs* arg, const MapEnmDef* def) {
     arg->update = NULL;
 }
 
+enum MapEnmPlace {
+    MAP_ENM_PLACE_ROOM,
+    MAP_ENM_PLACE_STAIRS = 2,
+    MAP_ENM_PLACE_CHEST
+};
+
 void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
     const u8* shape;
     MapFloorRoom* floorRoom;
@@ -281,13 +287,13 @@ void MapEnmSpawnFixed(MapEnmArgs* arg, u8 kind, u8 place) {
     def = gMapEnmDefs[kind];
 
     switch (place) {
-    case 2:
+    case MAP_ENM_PLACE_STAIRS:
         ok = MapEnmPlaceAtStairs(arg);
         break;
-    case 3:
+    case MAP_ENM_PLACE_CHEST:
         ok = MapEnmPlaceAboveGmk01(arg);
         break;
-    case 0:
+    case MAP_ENM_PLACE_ROOM:
     default:
         ok = MapEnmPlaceInRoom(arg);
         arg->angle = GetAngle(arg->pos.x, arg->pos.y, gFieldState->actor.fieldPosition.x, gFieldState->actor.fieldPosition.y);
@@ -472,17 +478,17 @@ void MapEnmSpawnRoomSet() {
 
     switch (gMapRoomState->roomType) {
     case ROOM_TYPE_GUARDED_TROVE:
-        MapEnmSpawnFixed(&args, 3, 3);
-        MapEnmSpawnFixed(&args, 2, 2);
+        MapEnmSpawnFixed(&args, 3, MAP_ENM_PLACE_CHEST);
+        MapEnmSpawnFixed(&args, 2, MAP_ENM_PLACE_STAIRS);
         break;
     case ROOM_TYPE_SLEEPING_DARKNESS:
         for (i = 0; i < 3; i++) {
             if (gMapFloorState.world == WORLD_ATLANTICA) {
-                MapEnmSpawnFixed(&args, 4, 0);
+                MapEnmSpawnFixed(&args, 4, MAP_ENM_PLACE_ROOM);
             } else if (GetRandom() % 2) {
-                MapEnmSpawnFixed(&args, 0, 0);
+                MapEnmSpawnFixed(&args, 0, MAP_ENM_PLACE_ROOM);
             } else {
-                MapEnmSpawnFixed(&args, 1, 0);
+                MapEnmSpawnFixed(&args, 1, MAP_ENM_PLACE_ROOM);
             }
         }
 
